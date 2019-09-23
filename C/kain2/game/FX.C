@@ -3,15 +3,8 @@
 
 // short @0x800CEB78, len = 0x00000002
 current_rain_fade = 0x0;
-// long[6] @0x800CEBAC, len = 0x00000018
-FX_ColorArray =
-    {
-        0x1010c8,
-        0x10c810,
-        0xc81010,
-        0x1800a0,
-        0x93e4,
-        0xa01010};
+// long @0x800CEBAC, len = 0x00000004
+FX_ColorArray = 0x1010c8;
 // _Instance * @0x800CEB70, len = 0x00000004
 FX_ConstrictInstance = 00000000;
 // _Position @0x800D1594, len = 0x00000006
@@ -43,393 +36,13 @@ FX_TimeCount = null;
 rain_amount = 0x0;
 // short @0x800CEB74, len = 0x00000002
 snow_amount = 0x0;
-// DVECTOR[64] @0x800D15B4, len = 0x00000100
+// DVECTOR @0x800D15B4, len = 0x00000004
 Spiral_Array =
     {
-        // DVECTOR @0x800D15B4, len = 0x00000004
-        {
-            // short @0x800D15B4, len = 0x00000002
-            .vx = null,
-            // short @0x800D15B6, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D15B8, len = 0x00000004
-        {
-            // short @0x800D15B8, len = 0x00000002
-            .vx = null,
-            // short @0x800D15BA, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D15BC, len = 0x00000004
-        {
-            // short @0x800D15BC, len = 0x00000002
-            .vx = null,
-            // short @0x800D15BE, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D15C0, len = 0x00000004
-        {
-            // short @0x800D15C0, len = 0x00000002
-            .vx = null,
-            // short @0x800D15C2, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D15C4, len = 0x00000004
-        {
-            // short @0x800D15C4, len = 0x00000002
-            .vx = null,
-            // short @0x800D15C6, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D15C8, len = 0x00000004
-        {
-            // short @0x800D15C8, len = 0x00000002
-            .vx = null,
-            // short @0x800D15CA, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D15CC, len = 0x00000004
-        {
-            // short @0x800D15CC, len = 0x00000002
-            .vx = null,
-            // short @0x800D15CE, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D15D0, len = 0x00000004
-        {
-            // short @0x800D15D0, len = 0x00000002
-            .vx = null,
-            // short @0x800D15D2, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D15D4, len = 0x00000004
-        {
-            // short @0x800D15D4, len = 0x00000002
-            .vx = null,
-            // short @0x800D15D6, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D15D8, len = 0x00000004
-        {
-            // short @0x800D15D8, len = 0x00000002
-            .vx = null,
-            // short @0x800D15DA, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D15DC, len = 0x00000004
-        {
-            // short @0x800D15DC, len = 0x00000002
-            .vx = null,
-            // short @0x800D15DE, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D15E0, len = 0x00000004
-        {
-            // short @0x800D15E0, len = 0x00000002
-            .vx = null,
-            // short @0x800D15E2, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D15E4, len = 0x00000004
-        {
-            // short @0x800D15E4, len = 0x00000002
-            .vx = null,
-            // short @0x800D15E6, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D15E8, len = 0x00000004
-        {
-            // short @0x800D15E8, len = 0x00000002
-            .vx = null,
-            // short @0x800D15EA, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D15EC, len = 0x00000004
-        {
-            // short @0x800D15EC, len = 0x00000002
-            .vx = null,
-            // short @0x800D15EE, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D15F0, len = 0x00000004
-        {
-            // short @0x800D15F0, len = 0x00000002
-            .vx = null,
-            // short @0x800D15F2, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D15F4, len = 0x00000004
-        {
-            // short @0x800D15F4, len = 0x00000002
-            .vx = null,
-            // short @0x800D15F6, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D15F8, len = 0x00000004
-        {
-            // short @0x800D15F8, len = 0x00000002
-            .vx = null,
-            // short @0x800D15FA, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D15FC, len = 0x00000004
-        {
-            // short @0x800D15FC, len = 0x00000002
-            .vx = null,
-            // short @0x800D15FE, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1600, len = 0x00000004
-        {
-            // short @0x800D1600, len = 0x00000002
-            .vx = null,
-            // short @0x800D1602, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1604, len = 0x00000004
-        {
-            // short @0x800D1604, len = 0x00000002
-            .vx = null,
-            // short @0x800D1606, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1608, len = 0x00000004
-        {
-            // short @0x800D1608, len = 0x00000002
-            .vx = null,
-            // short @0x800D160A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D160C, len = 0x00000004
-        {
-            // short @0x800D160C, len = 0x00000002
-            .vx = null,
-            // short @0x800D160E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1610, len = 0x00000004
-        {
-            // short @0x800D1610, len = 0x00000002
-            .vx = null,
-            // short @0x800D1612, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1614, len = 0x00000004
-        {
-            // short @0x800D1614, len = 0x00000002
-            .vx = null,
-            // short @0x800D1616, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1618, len = 0x00000004
-        {
-            // short @0x800D1618, len = 0x00000002
-            .vx = null,
-            // short @0x800D161A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D161C, len = 0x00000004
-        {
-            // short @0x800D161C, len = 0x00000002
-            .vx = null,
-            // short @0x800D161E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1620, len = 0x00000004
-        {
-            // short @0x800D1620, len = 0x00000002
-            .vx = null,
-            // short @0x800D1622, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1624, len = 0x00000004
-        {
-            // short @0x800D1624, len = 0x00000002
-            .vx = null,
-            // short @0x800D1626, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1628, len = 0x00000004
-        {
-            // short @0x800D1628, len = 0x00000002
-            .vx = null,
-            // short @0x800D162A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D162C, len = 0x00000004
-        {
-            // short @0x800D162C, len = 0x00000002
-            .vx = null,
-            // short @0x800D162E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1630, len = 0x00000004
-        {
-            // short @0x800D1630, len = 0x00000002
-            .vx = null,
-            // short @0x800D1632, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1634, len = 0x00000004
-        {
-            // short @0x800D1634, len = 0x00000002
-            .vx = null,
-            // short @0x800D1636, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1638, len = 0x00000004
-        {
-            // short @0x800D1638, len = 0x00000002
-            .vx = null,
-            // short @0x800D163A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D163C, len = 0x00000004
-        {
-            // short @0x800D163C, len = 0x00000002
-            .vx = null,
-            // short @0x800D163E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1640, len = 0x00000004
-        {
-            // short @0x800D1640, len = 0x00000002
-            .vx = null,
-            // short @0x800D1642, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1644, len = 0x00000004
-        {
-            // short @0x800D1644, len = 0x00000002
-            .vx = null,
-            // short @0x800D1646, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1648, len = 0x00000004
-        {
-            // short @0x800D1648, len = 0x00000002
-            .vx = null,
-            // short @0x800D164A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D164C, len = 0x00000004
-        {
-            // short @0x800D164C, len = 0x00000002
-            .vx = null,
-            // short @0x800D164E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1650, len = 0x00000004
-        {
-            // short @0x800D1650, len = 0x00000002
-            .vx = null,
-            // short @0x800D1652, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1654, len = 0x00000004
-        {
-            // short @0x800D1654, len = 0x00000002
-            .vx = null,
-            // short @0x800D1656, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1658, len = 0x00000004
-        {
-            // short @0x800D1658, len = 0x00000002
-            .vx = null,
-            // short @0x800D165A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D165C, len = 0x00000004
-        {
-            // short @0x800D165C, len = 0x00000002
-            .vx = null,
-            // short @0x800D165E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1660, len = 0x00000004
-        {
-            // short @0x800D1660, len = 0x00000002
-            .vx = null,
-            // short @0x800D1662, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1664, len = 0x00000004
-        {
-            // short @0x800D1664, len = 0x00000002
-            .vx = null,
-            // short @0x800D1666, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1668, len = 0x00000004
-        {
-            // short @0x800D1668, len = 0x00000002
-            .vx = null,
-            // short @0x800D166A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D166C, len = 0x00000004
-        {
-            // short @0x800D166C, len = 0x00000002
-            .vx = null,
-            // short @0x800D166E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1670, len = 0x00000004
-        {
-            // short @0x800D1670, len = 0x00000002
-            .vx = null,
-            // short @0x800D1672, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1674, len = 0x00000004
-        {
-            // short @0x800D1674, len = 0x00000002
-            .vx = null,
-            // short @0x800D1676, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1678, len = 0x00000004
-        {
-            // short @0x800D1678, len = 0x00000002
-            .vx = null,
-            // short @0x800D167A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D167C, len = 0x00000004
-        {
-            // short @0x800D167C, len = 0x00000002
-            .vx = null,
-            // short @0x800D167E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1680, len = 0x00000004
-        {
-            // short @0x800D1680, len = 0x00000002
-            .vx = null,
-            // short @0x800D1682, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1684, len = 0x00000004
-        {
-            // short @0x800D1684, len = 0x00000002
-            .vx = null,
-            // short @0x800D1686, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1688, len = 0x00000004
-        {
-            // short @0x800D1688, len = 0x00000002
-            .vx = null,
-            // short @0x800D168A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D168C, len = 0x00000004
-        {
-            // short @0x800D168C, len = 0x00000002
-            .vx = null,
-            // short @0x800D168E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1690, len = 0x00000004
-        {
-            // short @0x800D1690, len = 0x00000002
-            .vx = null,
-            // short @0x800D1692, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1694, len = 0x00000004
-        {
-            // short @0x800D1694, len = 0x00000002
-            .vx = null,
-            // short @0x800D1696, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1698, len = 0x00000004
-        {
-            // short @0x800D1698, len = 0x00000002
-            .vx = null,
-            // short @0x800D169A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D169C, len = 0x00000004
-        {
-            // short @0x800D169C, len = 0x00000002
-            .vx = null,
-            // short @0x800D169E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D16A0, len = 0x00000004
-        {
-            // short @0x800D16A0, len = 0x00000002
-            .vx = null,
-            // short @0x800D16A2, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D16A4, len = 0x00000004
-        {
-            // short @0x800D16A4, len = 0x00000002
-            .vx = null,
-            // short @0x800D16A6, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D16A8, len = 0x00000004
-        {
-            // short @0x800D16A8, len = 0x00000002
-            .vx = null,
-            // short @0x800D16AA, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D16AC, len = 0x00000004
-        {
-            // short @0x800D16AC, len = 0x00000002
-            .vx = null,
-            // short @0x800D16AE, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D16B0, len = 0x00000004
-        {
-            // short @0x800D16B0, len = 0x00000002
-            .vx = null,
-            // short @0x800D16B2, len = 0x00000002
-            .vy = null}};
+        // short @0x800D15B4, len = 0x00000002
+        .vx = null,
+        // short @0x800D15B6, len = 0x00000002
+        .vy = null};
 // long @0x800CEBC8, len = 0x00000004
 Spiral_Current = 0x0;
 // short @0x800CEBC6, len = 0x00000002
@@ -446,780 +59,20 @@ Spiral_Max = 0x186a0;
 Spiral_Mod = null;
 // short @0x800CEBC4, len = 0x00000002
 Spiral_Number = -0x1;
-// DVECTOR[64] @0x800D17C4, len = 0x00000100
+// DVECTOR @0x800D17C4, len = 0x00000004
 Spiral_OffsetM =
     {
-        // DVECTOR @0x800D17C4, len = 0x00000004
-        {
-            // short @0x800D17C4, len = 0x00000002
-            .vx = null,
-            // short @0x800D17C6, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D17C8, len = 0x00000004
-        {
-            // short @0x800D17C8, len = 0x00000002
-            .vx = null,
-            // short @0x800D17CA, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D17CC, len = 0x00000004
-        {
-            // short @0x800D17CC, len = 0x00000002
-            .vx = null,
-            // short @0x800D17CE, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D17D0, len = 0x00000004
-        {
-            // short @0x800D17D0, len = 0x00000002
-            .vx = null,
-            // short @0x800D17D2, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D17D4, len = 0x00000004
-        {
-            // short @0x800D17D4, len = 0x00000002
-            .vx = null,
-            // short @0x800D17D6, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D17D8, len = 0x00000004
-        {
-            // short @0x800D17D8, len = 0x00000002
-            .vx = null,
-            // short @0x800D17DA, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D17DC, len = 0x00000004
-        {
-            // short @0x800D17DC, len = 0x00000002
-            .vx = null,
-            // short @0x800D17DE, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D17E0, len = 0x00000004
-        {
-            // short @0x800D17E0, len = 0x00000002
-            .vx = null,
-            // short @0x800D17E2, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D17E4, len = 0x00000004
-        {
-            // short @0x800D17E4, len = 0x00000002
-            .vx = null,
-            // short @0x800D17E6, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D17E8, len = 0x00000004
-        {
-            // short @0x800D17E8, len = 0x00000002
-            .vx = null,
-            // short @0x800D17EA, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D17EC, len = 0x00000004
-        {
-            // short @0x800D17EC, len = 0x00000002
-            .vx = null,
-            // short @0x800D17EE, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D17F0, len = 0x00000004
-        {
-            // short @0x800D17F0, len = 0x00000002
-            .vx = null,
-            // short @0x800D17F2, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D17F4, len = 0x00000004
-        {
-            // short @0x800D17F4, len = 0x00000002
-            .vx = null,
-            // short @0x800D17F6, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D17F8, len = 0x00000004
-        {
-            // short @0x800D17F8, len = 0x00000002
-            .vx = null,
-            // short @0x800D17FA, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D17FC, len = 0x00000004
-        {
-            // short @0x800D17FC, len = 0x00000002
-            .vx = null,
-            // short @0x800D17FE, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1800, len = 0x00000004
-        {
-            // short @0x800D1800, len = 0x00000002
-            .vx = null,
-            // short @0x800D1802, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1804, len = 0x00000004
-        {
-            // short @0x800D1804, len = 0x00000002
-            .vx = null,
-            // short @0x800D1806, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1808, len = 0x00000004
-        {
-            // short @0x800D1808, len = 0x00000002
-            .vx = null,
-            // short @0x800D180A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D180C, len = 0x00000004
-        {
-            // short @0x800D180C, len = 0x00000002
-            .vx = null,
-            // short @0x800D180E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1810, len = 0x00000004
-        {
-            // short @0x800D1810, len = 0x00000002
-            .vx = null,
-            // short @0x800D1812, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1814, len = 0x00000004
-        {
-            // short @0x800D1814, len = 0x00000002
-            .vx = null,
-            // short @0x800D1816, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1818, len = 0x00000004
-        {
-            // short @0x800D1818, len = 0x00000002
-            .vx = null,
-            // short @0x800D181A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D181C, len = 0x00000004
-        {
-            // short @0x800D181C, len = 0x00000002
-            .vx = null,
-            // short @0x800D181E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1820, len = 0x00000004
-        {
-            // short @0x800D1820, len = 0x00000002
-            .vx = null,
-            // short @0x800D1822, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1824, len = 0x00000004
-        {
-            // short @0x800D1824, len = 0x00000002
-            .vx = null,
-            // short @0x800D1826, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1828, len = 0x00000004
-        {
-            // short @0x800D1828, len = 0x00000002
-            .vx = null,
-            // short @0x800D182A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D182C, len = 0x00000004
-        {
-            // short @0x800D182C, len = 0x00000002
-            .vx = null,
-            // short @0x800D182E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1830, len = 0x00000004
-        {
-            // short @0x800D1830, len = 0x00000002
-            .vx = null,
-            // short @0x800D1832, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1834, len = 0x00000004
-        {
-            // short @0x800D1834, len = 0x00000002
-            .vx = null,
-            // short @0x800D1836, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1838, len = 0x00000004
-        {
-            // short @0x800D1838, len = 0x00000002
-            .vx = null,
-            // short @0x800D183A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D183C, len = 0x00000004
-        {
-            // short @0x800D183C, len = 0x00000002
-            .vx = null,
-            // short @0x800D183E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1840, len = 0x00000004
-        {
-            // short @0x800D1840, len = 0x00000002
-            .vx = null,
-            // short @0x800D1842, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1844, len = 0x00000004
-        {
-            // short @0x800D1844, len = 0x00000002
-            .vx = null,
-            // short @0x800D1846, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1848, len = 0x00000004
-        {
-            // short @0x800D1848, len = 0x00000002
-            .vx = null,
-            // short @0x800D184A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D184C, len = 0x00000004
-        {
-            // short @0x800D184C, len = 0x00000002
-            .vx = null,
-            // short @0x800D184E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1850, len = 0x00000004
-        {
-            // short @0x800D1850, len = 0x00000002
-            .vx = null,
-            // short @0x800D1852, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1854, len = 0x00000004
-        {
-            // short @0x800D1854, len = 0x00000002
-            .vx = null,
-            // short @0x800D1856, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1858, len = 0x00000004
-        {
-            // short @0x800D1858, len = 0x00000002
-            .vx = null,
-            // short @0x800D185A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D185C, len = 0x00000004
-        {
-            // short @0x800D185C, len = 0x00000002
-            .vx = null,
-            // short @0x800D185E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1860, len = 0x00000004
-        {
-            // short @0x800D1860, len = 0x00000002
-            .vx = null,
-            // short @0x800D1862, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1864, len = 0x00000004
-        {
-            // short @0x800D1864, len = 0x00000002
-            .vx = null,
-            // short @0x800D1866, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1868, len = 0x00000004
-        {
-            // short @0x800D1868, len = 0x00000002
-            .vx = null,
-            // short @0x800D186A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D186C, len = 0x00000004
-        {
-            // short @0x800D186C, len = 0x00000002
-            .vx = null,
-            // short @0x800D186E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1870, len = 0x00000004
-        {
-            // short @0x800D1870, len = 0x00000002
-            .vx = null,
-            // short @0x800D1872, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1874, len = 0x00000004
-        {
-            // short @0x800D1874, len = 0x00000002
-            .vx = null,
-            // short @0x800D1876, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1878, len = 0x00000004
-        {
-            // short @0x800D1878, len = 0x00000002
-            .vx = null,
-            // short @0x800D187A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D187C, len = 0x00000004
-        {
-            // short @0x800D187C, len = 0x00000002
-            .vx = null,
-            // short @0x800D187E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1880, len = 0x00000004
-        {
-            // short @0x800D1880, len = 0x00000002
-            .vx = null,
-            // short @0x800D1882, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1884, len = 0x00000004
-        {
-            // short @0x800D1884, len = 0x00000002
-            .vx = null,
-            // short @0x800D1886, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1888, len = 0x00000004
-        {
-            // short @0x800D1888, len = 0x00000002
-            .vx = null,
-            // short @0x800D188A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D188C, len = 0x00000004
-        {
-            // short @0x800D188C, len = 0x00000002
-            .vx = null,
-            // short @0x800D188E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1890, len = 0x00000004
-        {
-            // short @0x800D1890, len = 0x00000002
-            .vx = null,
-            // short @0x800D1892, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1894, len = 0x00000004
-        {
-            // short @0x800D1894, len = 0x00000002
-            .vx = null,
-            // short @0x800D1896, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1898, len = 0x00000004
-        {
-            // short @0x800D1898, len = 0x00000002
-            .vx = null,
-            // short @0x800D189A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D189C, len = 0x00000004
-        {
-            // short @0x800D189C, len = 0x00000002
-            .vx = null,
-            // short @0x800D189E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D18A0, len = 0x00000004
-        {
-            // short @0x800D18A0, len = 0x00000002
-            .vx = null,
-            // short @0x800D18A2, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D18A4, len = 0x00000004
-        {
-            // short @0x800D18A4, len = 0x00000002
-            .vx = null,
-            // short @0x800D18A6, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D18A8, len = 0x00000004
-        {
-            // short @0x800D18A8, len = 0x00000002
-            .vx = null,
-            // short @0x800D18AA, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D18AC, len = 0x00000004
-        {
-            // short @0x800D18AC, len = 0x00000002
-            .vx = null,
-            // short @0x800D18AE, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D18B0, len = 0x00000004
-        {
-            // short @0x800D18B0, len = 0x00000002
-            .vx = null,
-            // short @0x800D18B2, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D18B4, len = 0x00000004
-        {
-            // short @0x800D18B4, len = 0x00000002
-            .vx = null,
-            // short @0x800D18B6, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D18B8, len = 0x00000004
-        {
-            // short @0x800D18B8, len = 0x00000002
-            .vx = null,
-            // short @0x800D18BA, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D18BC, len = 0x00000004
-        {
-            // short @0x800D18BC, len = 0x00000002
-            .vx = null,
-            // short @0x800D18BE, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D18C0, len = 0x00000004
-        {
-            // short @0x800D18C0, len = 0x00000002
-            .vx = null,
-            // short @0x800D18C2, len = 0x00000002
-            .vy = null}};
-// DVECTOR[64] @0x800D16C4, len = 0x00000100
+        // short @0x800D17C4, len = 0x00000002
+        .vx = null,
+        // short @0x800D17C6, len = 0x00000002
+        .vy = null};
+// DVECTOR @0x800D16C4, len = 0x00000004
 Spiral_OffsetP =
     {
-        // DVECTOR @0x800D16C4, len = 0x00000004
-        {
-            // short @0x800D16C4, len = 0x00000002
-            .vx = null,
-            // short @0x800D16C6, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D16C8, len = 0x00000004
-        {
-            // short @0x800D16C8, len = 0x00000002
-            .vx = null,
-            // short @0x800D16CA, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D16CC, len = 0x00000004
-        {
-            // short @0x800D16CC, len = 0x00000002
-            .vx = null,
-            // short @0x800D16CE, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D16D0, len = 0x00000004
-        {
-            // short @0x800D16D0, len = 0x00000002
-            .vx = null,
-            // short @0x800D16D2, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D16D4, len = 0x00000004
-        {
-            // short @0x800D16D4, len = 0x00000002
-            .vx = null,
-            // short @0x800D16D6, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D16D8, len = 0x00000004
-        {
-            // short @0x800D16D8, len = 0x00000002
-            .vx = null,
-            // short @0x800D16DA, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D16DC, len = 0x00000004
-        {
-            // short @0x800D16DC, len = 0x00000002
-            .vx = null,
-            // short @0x800D16DE, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D16E0, len = 0x00000004
-        {
-            // short @0x800D16E0, len = 0x00000002
-            .vx = null,
-            // short @0x800D16E2, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D16E4, len = 0x00000004
-        {
-            // short @0x800D16E4, len = 0x00000002
-            .vx = null,
-            // short @0x800D16E6, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D16E8, len = 0x00000004
-        {
-            // short @0x800D16E8, len = 0x00000002
-            .vx = null,
-            // short @0x800D16EA, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D16EC, len = 0x00000004
-        {
-            // short @0x800D16EC, len = 0x00000002
-            .vx = null,
-            // short @0x800D16EE, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D16F0, len = 0x00000004
-        {
-            // short @0x800D16F0, len = 0x00000002
-            .vx = null,
-            // short @0x800D16F2, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D16F4, len = 0x00000004
-        {
-            // short @0x800D16F4, len = 0x00000002
-            .vx = null,
-            // short @0x800D16F6, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D16F8, len = 0x00000004
-        {
-            // short @0x800D16F8, len = 0x00000002
-            .vx = null,
-            // short @0x800D16FA, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D16FC, len = 0x00000004
-        {
-            // short @0x800D16FC, len = 0x00000002
-            .vx = null,
-            // short @0x800D16FE, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1700, len = 0x00000004
-        {
-            // short @0x800D1700, len = 0x00000002
-            .vx = null,
-            // short @0x800D1702, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1704, len = 0x00000004
-        {
-            // short @0x800D1704, len = 0x00000002
-            .vx = null,
-            // short @0x800D1706, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1708, len = 0x00000004
-        {
-            // short @0x800D1708, len = 0x00000002
-            .vx = null,
-            // short @0x800D170A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D170C, len = 0x00000004
-        {
-            // short @0x800D170C, len = 0x00000002
-            .vx = null,
-            // short @0x800D170E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1710, len = 0x00000004
-        {
-            // short @0x800D1710, len = 0x00000002
-            .vx = null,
-            // short @0x800D1712, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1714, len = 0x00000004
-        {
-            // short @0x800D1714, len = 0x00000002
-            .vx = null,
-            // short @0x800D1716, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1718, len = 0x00000004
-        {
-            // short @0x800D1718, len = 0x00000002
-            .vx = null,
-            // short @0x800D171A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D171C, len = 0x00000004
-        {
-            // short @0x800D171C, len = 0x00000002
-            .vx = null,
-            // short @0x800D171E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1720, len = 0x00000004
-        {
-            // short @0x800D1720, len = 0x00000002
-            .vx = null,
-            // short @0x800D1722, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1724, len = 0x00000004
-        {
-            // short @0x800D1724, len = 0x00000002
-            .vx = null,
-            // short @0x800D1726, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1728, len = 0x00000004
-        {
-            // short @0x800D1728, len = 0x00000002
-            .vx = null,
-            // short @0x800D172A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D172C, len = 0x00000004
-        {
-            // short @0x800D172C, len = 0x00000002
-            .vx = null,
-            // short @0x800D172E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1730, len = 0x00000004
-        {
-            // short @0x800D1730, len = 0x00000002
-            .vx = null,
-            // short @0x800D1732, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1734, len = 0x00000004
-        {
-            // short @0x800D1734, len = 0x00000002
-            .vx = null,
-            // short @0x800D1736, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1738, len = 0x00000004
-        {
-            // short @0x800D1738, len = 0x00000002
-            .vx = null,
-            // short @0x800D173A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D173C, len = 0x00000004
-        {
-            // short @0x800D173C, len = 0x00000002
-            .vx = null,
-            // short @0x800D173E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1740, len = 0x00000004
-        {
-            // short @0x800D1740, len = 0x00000002
-            .vx = null,
-            // short @0x800D1742, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1744, len = 0x00000004
-        {
-            // short @0x800D1744, len = 0x00000002
-            .vx = null,
-            // short @0x800D1746, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1748, len = 0x00000004
-        {
-            // short @0x800D1748, len = 0x00000002
-            .vx = null,
-            // short @0x800D174A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D174C, len = 0x00000004
-        {
-            // short @0x800D174C, len = 0x00000002
-            .vx = null,
-            // short @0x800D174E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1750, len = 0x00000004
-        {
-            // short @0x800D1750, len = 0x00000002
-            .vx = null,
-            // short @0x800D1752, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1754, len = 0x00000004
-        {
-            // short @0x800D1754, len = 0x00000002
-            .vx = null,
-            // short @0x800D1756, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1758, len = 0x00000004
-        {
-            // short @0x800D1758, len = 0x00000002
-            .vx = null,
-            // short @0x800D175A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D175C, len = 0x00000004
-        {
-            // short @0x800D175C, len = 0x00000002
-            .vx = null,
-            // short @0x800D175E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1760, len = 0x00000004
-        {
-            // short @0x800D1760, len = 0x00000002
-            .vx = null,
-            // short @0x800D1762, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1764, len = 0x00000004
-        {
-            // short @0x800D1764, len = 0x00000002
-            .vx = null,
-            // short @0x800D1766, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1768, len = 0x00000004
-        {
-            // short @0x800D1768, len = 0x00000002
-            .vx = null,
-            // short @0x800D176A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D176C, len = 0x00000004
-        {
-            // short @0x800D176C, len = 0x00000002
-            .vx = null,
-            // short @0x800D176E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1770, len = 0x00000004
-        {
-            // short @0x800D1770, len = 0x00000002
-            .vx = null,
-            // short @0x800D1772, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1774, len = 0x00000004
-        {
-            // short @0x800D1774, len = 0x00000002
-            .vx = null,
-            // short @0x800D1776, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1778, len = 0x00000004
-        {
-            // short @0x800D1778, len = 0x00000002
-            .vx = null,
-            // short @0x800D177A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D177C, len = 0x00000004
-        {
-            // short @0x800D177C, len = 0x00000002
-            .vx = null,
-            // short @0x800D177E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1780, len = 0x00000004
-        {
-            // short @0x800D1780, len = 0x00000002
-            .vx = null,
-            // short @0x800D1782, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1784, len = 0x00000004
-        {
-            // short @0x800D1784, len = 0x00000002
-            .vx = null,
-            // short @0x800D1786, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1788, len = 0x00000004
-        {
-            // short @0x800D1788, len = 0x00000002
-            .vx = null,
-            // short @0x800D178A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D178C, len = 0x00000004
-        {
-            // short @0x800D178C, len = 0x00000002
-            .vx = null,
-            // short @0x800D178E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1790, len = 0x00000004
-        {
-            // short @0x800D1790, len = 0x00000002
-            .vx = null,
-            // short @0x800D1792, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1794, len = 0x00000004
-        {
-            // short @0x800D1794, len = 0x00000002
-            .vx = null,
-            // short @0x800D1796, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D1798, len = 0x00000004
-        {
-            // short @0x800D1798, len = 0x00000002
-            .vx = null,
-            // short @0x800D179A, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D179C, len = 0x00000004
-        {
-            // short @0x800D179C, len = 0x00000002
-            .vx = null,
-            // short @0x800D179E, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D17A0, len = 0x00000004
-        {
-            // short @0x800D17A0, len = 0x00000002
-            .vx = null,
-            // short @0x800D17A2, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D17A4, len = 0x00000004
-        {
-            // short @0x800D17A4, len = 0x00000002
-            .vx = null,
-            // short @0x800D17A6, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D17A8, len = 0x00000004
-        {
-            // short @0x800D17A8, len = 0x00000002
-            .vx = null,
-            // short @0x800D17AA, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D17AC, len = 0x00000004
-        {
-            // short @0x800D17AC, len = 0x00000002
-            .vx = null,
-            // short @0x800D17AE, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D17B0, len = 0x00000004
-        {
-            // short @0x800D17B0, len = 0x00000002
-            .vx = null,
-            // short @0x800D17B2, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D17B4, len = 0x00000004
-        {
-            // short @0x800D17B4, len = 0x00000002
-            .vx = null,
-            // short @0x800D17B6, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D17B8, len = 0x00000004
-        {
-            // short @0x800D17B8, len = 0x00000002
-            .vx = null,
-            // short @0x800D17BA, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D17BC, len = 0x00000004
-        {
-            // short @0x800D17BC, len = 0x00000002
-            .vx = null,
-            // short @0x800D17BE, len = 0x00000002
-            .vy = null},
-        // DVECTOR @0x800D17C0, len = 0x00000004
-        {
-            // short @0x800D17C0, len = 0x00000002
-            .vx = null,
-            // short @0x800D17C2, len = 0x00000002
-            .vy = null}};
+        // short @0x800D16C4, len = 0x00000002
+        .vx = null,
+        // short @0x800D16C6, len = 0x00000002
+        .vy = null};
 // short @0x800CEBA8, len = 0x00000002
 wind_deg = 0x400;
 // short @0x800CEBAA, len = 0x00000002
@@ -1846,8 +699,8 @@ long _FX_DoLighting(_MFace *mface)
   {
     if ((bVar1 & 8) == 0)
     {
-      setCopReg(2, in_zero, *(undefined4 *)(gNormalList + (uint)mface->normal));
-      setCopReg(2, in_at, *(undefined4 *)&gNormalList[(uint)mface->normal].z);
+      setCopReg(2, in_zero, *(undefined4 *)(&gNormalList + (uint)mface->normal));
+      setCopReg(2, in_at, *(undefined4 *)&(&gNormalList)[(uint)mface->normal].z);
       setCopReg(2, 0, mface->color);
       setCopReg(2, 0x4000, 0);
       copFunction(2, 0xe80413);
@@ -1865,8 +718,8 @@ long _FX_DoLighting(_MFace *mface)
     iVar4 = mface->color;
     if ((bVar1 & 8) == 0)
     {
-      setCopReg(2, in_zero, *(undefined4 *)(gNormalList + (uint)mface->normal));
-      setCopReg(2, in_at, *(undefined4 *)&gNormalList[(uint)mface->normal].z);
+      setCopReg(2, in_zero, *(undefined4 *)(&gNormalList + (uint)mface->normal));
+      setCopReg(2, in_at, *(undefined4 *)&(&gNormalList)[(uint)mface->normal].z);
       setCopReg(2, 0, *(undefined4 *)(iVar4 + 0xc));
       setCopReg(2, 0x4000, 0);
       copFunction(2, 0xe80413);
@@ -4596,9 +3449,9 @@ void FX_WaterBubbleProcess(_FX_PRIM *fxPrim, _FXTracker *fxTracker)
     {
       return;
     }
-    if ((ObjectAccess_ARRAY_800c878c[1].object != (void *)0x0) && ((int)(fxPrim->v1).y < iVar5))
+    if ((ObjectAccess_800c8794.object != (void *)0x0) && ((int)(fxPrim->v1).y < iVar5))
     {
-      iVar5 = **(int **)((int)ObjectAccess_ARRAY_800c878c[1].object + 0xc);
+      iVar5 = **(int **)((int)ObjectAccess_800c8794.object + 0xc);
       node = FX_GetPrim(gFXT);
       if (node != (_FX_PRIM *)0x0)
       {
@@ -4729,8 +3582,8 @@ void FX_MakeWaterBubble(_SVector *position, _SVector *vel, _SVector *accl, long 
   TextureMT3 *pTVar3;
   uint uVar4;
 
-  object = ObjectAccess_ARRAY_800c878c[1].object;
-  if ((ObjectAccess_ARRAY_800c878c[1].object != (void *)0x0) &&
+  object = ObjectAccess_800c8794.object;
+  if ((ObjectAccess_800c8794.object != (void *)0x0) &&
       (fxPrim = FX_GetPrim(gFXT), fxPrim != (_FX_PRIM *)0x0))
   {
     FX_DFacadeParticleSetup(fxPrim, (SVECTOR *)position, 0xc, 0xc, 0x2c000000, (SVECTOR *)vel, (SVECTOR *)accl, gFXT,
@@ -4903,7 +3756,7 @@ void FX_MakeWarpArrow(int x, int y, int xsize, int ysize, int fade)
   POLY_GT4 *pPVar1;
   uint color0;
 
-  if (ObjectAccess_ARRAY_800c878c[8].object != (void *)0x0)
+  if (ObjectAccess_800c87cc.object != (void *)0x0)
   {
     color0 = fade >> 5;
     if (fade < 0)
@@ -4911,7 +3764,7 @@ void FX_MakeWarpArrow(int x, int y, int xsize, int ysize, int fade)
       color0 = 0;
     }
     color0 = color0 | color0 << 8 | color0 << 0x10;
-    texture = FX_GetTextureObject((Object *)ObjectAccess_ARRAY_800c878c[8].object, 0, 9);
+    texture = FX_GetTextureObject((Object *)ObjectAccess_800c87cc.object, 0, 9);
     pPVar1 = FX_SetupPolyGT4(x + xsize, y, x, y + ysize, 3, texture, color0, color0, color0, color0);
     if (pPVar1 != (POLY_GT4 *)0x0)
     {
@@ -4955,18 +3808,18 @@ void FX_MakeMannaIcon(int x, int y, int xsize, int ysize)
   uint uVar2;
   undefined **ppuVar3;
 
-  if (ObjectAccess_ARRAY_800c878c[18].object != (void *)0x0)
+  if (ObjectAccess_800c881c.object != (void *)0x0)
   {
-    texture = FX_GetTextureObject((Object *)ObjectAccess_ARRAY_800c878c[18].object, 0, 7);
+    texture = FX_GetTextureObject((Object *)ObjectAccess_800c881c.object, 0, 7);
     pPVar1 = FX_SetupPolyGT4(x, y, x + xsize, y + ysize, 3, texture, 0x2962828, 0x2962828, 0x2962828,
                              0x2962828);
     if (pPVar1 != (POLY_GT4 *)0x0)
     {
       pPVar1->tpage = pPVar1->tpage | 0x20;
     }
-    if (ObjectAccess_ARRAY_800c878c[8].object != (void *)0x0)
+    if (ObjectAccess_800c87cc.object != (void *)0x0)
     {
-      texture = FX_GetTextureObject((Object *)ObjectAccess_ARRAY_800c878c[8].object, 0, 2);
+      texture = FX_GetTextureObject((Object *)ObjectAccess_800c87cc.object, 0, 2);
       uVar2 = 0;
       ppuVar3 = PTR_ARRAY_800102e8;
       do
@@ -5042,11 +3895,11 @@ void FX_MakeGlyphIcon(_Position *position, Object *glyphObject, int size, int gl
   {
     if (glyphnum == 7)
     {
-      if (ObjectAccess_ARRAY_800c878c[8].object == (void *)0x0)
+      if (ObjectAccess_800c87cc.object == (void *)0x0)
       {
         return;
       }
-      texture = FX_GetTextureObject((Object *)ObjectAccess_ARRAY_800c878c[8].object, 0, 0);
+      texture = FX_GetTextureObject((Object *)ObjectAccess_800c87cc.object, 0, 0);
       size = (int)(size + ((uint)size >> 0x1f)) >> 1;
     }
     else
@@ -5210,8 +4063,8 @@ void FX_MakeSoulDust(_Instance *instance, short segment)
   SVECTOR local_20;
 
   uVar2 = rand();
-  object = ObjectAccess_ARRAY_800c878c[8].object;
-  if ((((uVar2 & 0xff) < 0x41) && (ObjectAccess_ARRAY_800c878c[8].object != (void *)0x0)) &&
+  object = ObjectAccess_800c87cc.object;
+  if ((((uVar2 & 0xff) < 0x41) && (ObjectAccess_800c87cc.object != (void *)0x0)) &&
       (fxPrim = FX_GetPrim(gFXT), fxPrim != (_FX_PRIM *)0x0))
   {
     local_20.vx = 0;
@@ -5370,11 +4223,11 @@ void FX_MakeWaterTrail(_Instance *instance, int depth)
     local_30.vy = *(short *)(instance->matrix[1].t + 1);
     local_30.vz = (instance->splitPoint).z;
     iVar5 = instance->matrix[1].t[2] - instance->oldMatrix[1].t[2];
-    if (ObjectAccess_ARRAY_800c878c[1].object != (void *)0x0)
+    if (ObjectAccess_800c8794.object != (void *)0x0)
     {
-      piVar1 = (int *)((int)ObjectAccess_ARRAY_800c878c[1].object + 0xc);
-      *(uint *)((int)ObjectAccess_ARRAY_800c878c[1].object + 0x2c) =
-          *(uint *)((int)ObjectAccess_ARRAY_800c878c[1].object + 0x2c) | 0x20000000;
+      piVar1 = (int *)((int)ObjectAccess_800c8794.object + 0xc);
+      *(uint *)((int)ObjectAccess_800c8794.object + 0x2c) =
+          *(uint *)((int)ObjectAccess_800c8794.object + 0x2c) | 0x20000000;
       model = *(_Model **)(*piVar1 + 4);
       FX_BuildSingleFaceWithModel(model, model->faceList, &local_30, (SVECTOR *)0x0, (SVECTOR *)0x0, gFXT,
                                   FX_SimpleQuadSetup, FX_WaterTrailProcess, 8);
@@ -6766,8 +5619,8 @@ _FXParticle *FX_BloodCone(_Instance *instance, short startSegment, long time)
   _FXParticle *ptr;
   TextureMT3 *pTVar1;
 
-  object = ObjectAccess_ARRAY_800c878c[8].object;
-  if (ObjectAccess_ARRAY_800c878c[8].object == (void *)0x0)
+  object = ObjectAccess_800c87cc.object;
+  if (ObjectAccess_800c87cc.object == (void *)0x0)
   {
     ptr = (_FXParticle *)0x0;
   }
@@ -6875,9 +5728,9 @@ _FXParticle *FX_TorchFlame(_Instance *instance, short startSegment)
   _FXParticle *ptr;
   TextureMT3 *pTVar2;
 
-  object = ObjectAccess_ARRAY_800c878c[8].object;
+  object = ObjectAccess_800c87cc.object;
   ptr = (_FXParticle *)0x0;
-  if (ObjectAccess_ARRAY_800c878c[8].object != (void *)0x0)
+  if (ObjectAccess_800c87cc.object != (void *)0x0)
   {
     ptr = FX_GetTorchParticle(instance, startSegment, 0, 0x10, -5);
     if (ptr != (_FXParticle *)0x0)
@@ -7510,8 +6363,8 @@ void FX_MakeSpark(_Instance *instance, _Model *model, int segment)
   _FXParticle *ptr;
   TextureMT3 *pTVar1;
 
-  object = ObjectAccess_ARRAY_800c878c[8].object;
-  if ((ObjectAccess_ARRAY_800c878c[8].object != (void *)0x0) &&
+  object = ObjectAccess_800c87cc.object;
+  if ((ObjectAccess_800c87cc.object != (void *)0x0) &&
       (ptr = FX_GetParticle(instance, (short)segment), ptr != (_FXParticle *)0x0))
   {
     ptr->size = 0x30;
@@ -7984,8 +6837,7 @@ void FX_MakeParticleTexFX(_FX_PRIM *fxPrim, _SVector *position, Object *object, 
   uint uVar2;
 
   if (((object != (Object *)0x0) ||
-       (object = (Object *)ObjectAccess_ARRAY_800c878c[8].object,
-        ObjectAccess_ARRAY_800c878c[8].object != (void *)0x0)) &&
+       (object = (Object *)ObjectAccess_800c87cc.object, ObjectAccess_800c87cc.object != (void *)0x0)) &&
       (fxPrim != (_FX_PRIM *)0x0))
   {
     FX_DFacadeParticleSetup(fxPrim, (SVECTOR *)position, (short)size, (short)size, color, (SVECTOR *)vel,
@@ -8160,14 +7012,14 @@ void FX_SoulReaverBlade(_Instance *instance, ulong **drawot)
   int local_30;
   int local_2c;
 
-  object = ObjectAccess_ARRAY_800c878c[8].object;
+  object = ObjectAccess_800c87cc.object;
   pvVar9 = instance->extraData;
   puVar13 = (gameTrackerX.primPool)->nextPrim;
   if ((*(short *)((int)pvVar9 + 2) != 0) && (puVar13 + 400 < (gameTrackerX.primPool)->lastPrim))
   {
     uVar14 = *(uint *)((int)pvVar9 + 0x10);
     sVar1 = *(short *)((int)pvVar9 + 6);
-    if (((ObjectAccess_ARRAY_800c878c[8].object != (void *)0x0) &&
+    if (((ObjectAccess_800c87cc.object != (void *)0x0) &&
          ((((instance->flags & 0x200U) != 0 && ((instance->flags & 0x800U) == 0)) &&
            (instance->matrix != (MATRIX *)0x0)))) &&
         (instance->oldMatrix != (MATRIX *)0x0))
@@ -9909,8 +8761,9 @@ FX_StartGenericParticle(_Instance *instance, int num, int segOverride, int lifeO
   Object *object;
 
   object = (Object *)0x0;
-  if ((ObjectAccess_ARRAY_800c878c[8].object == (void *)0x0) ||
-      ((psVar5 = (short *)(**(int **)((int)ObjectAccess_ARRAY_800c878c[8].object + 0x1c) + num * 0x30), InitFlag != 0 && (*(char *)(psVar5 + 1) == '\0'))))
+  if ((ObjectAccess_800c87cc.object == (void *)0x0) ||
+      ((psVar5 = (short *)(**(int **)((int)ObjectAccess_800c87cc.object + 0x1c) + num * 0x30),
+        InitFlag != 0 && (*(char *)(psVar5 + 1) == '\0'))))
   {
     ptr = (_FXParticle *)0x0;
   }
@@ -9923,7 +8776,7 @@ FX_StartGenericParticle(_Instance *instance, int num, int segOverride, int lifeO
     }
     if (*(char *)((int)psVar5 + 0x1b) != -1)
     {
-      object = (Object *)ObjectAccess_ARRAY_800c878c[8].object;
+      object = (Object *)ObjectAccess_800c87cc.object;
       if (*(char *)((int)psVar5 + 0x13) != '\0')
       {
         object = instance->object;
@@ -10041,9 +8894,8 @@ void FX_StartGenericRibbon(_Instance *instance, int num, int segOverride, int en
 {
   int iVar1;
 
-  if (((ObjectAccess_ARRAY_800c878c[8].object != (void *)0x0) &&
-       ((iVar1 = *(int *)(*(int *)((int)ObjectAccess_ARRAY_800c878c[8].object + 0x1c) + 4) +
-                 num * 0x14,
+  if (((ObjectAccess_800c87cc.object != (void *)0x0) &&
+       ((iVar1 = *(int *)(*(int *)((int)ObjectAccess_800c87cc.object + 0x1c) + 4) + num * 0x14,
          *(char *)(iVar1 + 5) == '\0' ||
              (instance = instance->LinkChild, instance != (_Instance *)0x0)))) &&
       ((InitFlag == 0 || (*(char *)(iVar1 + 1) != '\0'))))
@@ -10113,15 +8965,15 @@ void FX_StartGenericGlow(_Instance *instance, int num, int segOverride, int seg2
   int iVar1;
   char *pcVar2;
 
-  if (ObjectAccess_ARRAY_800c878c[8].object != (void *)0x0)
+  if (ObjectAccess_800c87cc.object != (void *)0x0)
   {
-    pcVar2 = (char *)(*(int *)(*(int *)((int)ObjectAccess_ARRAY_800c878c[8].object + 0x1c) + 8) +
-                      num * 0x18);
+    pcVar2 = (char *)(*(int *)(*(int *)((int)ObjectAccess_800c87cc.object + 0x1c) + 8) + num * 0x18);
     if (((InitFlag == 0) || (*pcVar2 != '\0')) &&
         ((pcVar2[5] == '\0' || (instance = instance->LinkChild, instance != (_Instance *)0x0))))
     {
       iVar1 = (int)pcVar2[3];
-      color = (long *)(*(int *)(*(int *)((int)ObjectAccess_ARRAY_800c878c[8].object + 0x1c) + 0x18) + (uint)(byte)pcVar2[4] * 4);
+      color = (long *)(*(int *)(*(int *)((int)ObjectAccess_800c87cc.object + 0x1c) + 0x18) +
+                       (uint)(byte)pcVar2[4] * 4);
       if (iVar1 < 2)
       {
         if (segOverride == 0)
@@ -10335,9 +9187,9 @@ FX_StartGenericLightning(_Instance *instance, int num, int segOverride, int endS
   char *pcVar3;
 
   zap = (_FXLightning *)0x0;
-  if (ObjectAccess_ARRAY_800c878c[8].object != (void *)0x0)
+  if (ObjectAccess_800c87cc.object != (void *)0x0)
   {
-    pcVar3 = (char *)(*(int *)(*(int *)((int)ObjectAccess_ARRAY_800c878c[8].object + 0x1c) + 0xc) +
+    pcVar3 = (char *)(*(int *)(*(int *)((int)ObjectAccess_800c87cc.object + 0x1c) + 0xc) +
                       num * 0x28);
     if ((*(short *)(pcVar3 + 2) == 0) ||
         ((pcVar3[1] != '\0' && (instance = instance->LinkChild, instance == (_Instance *)0x0))))
@@ -10419,10 +9271,9 @@ FX_StartGenericBlastring(_Instance *instance, int num, int segOverride, int matr
   MATRIX MStack56;
 
   p_Var1 = (_FXBlastringEffect *)0x0;
-  if (ObjectAccess_ARRAY_800c878c[8].object != (void *)0x0)
+  if (ObjectAccess_800c87cc.object != (void *)0x0)
   {
-    iVar3 = *(int *)(*(int *)((int)ObjectAccess_ARRAY_800c878c[8].object + 0x1c) + 0x10) +
-            num * 0x30;
+    iVar3 = *(int *)(*(int *)((int)ObjectAccess_800c87cc.object + 0x1c) + 0x10) + num * 0x30;
     if ((*(char *)(iVar3 + 1) == '\0') ||
         (instance = instance->LinkChild, instance != (_Instance *)0x0))
     {
@@ -10504,13 +9355,13 @@ _FXFlash *FX_StartGenericFlash(_Instance *instance, int num)
   int iVar2;
   int iVar3;
 
-  if (ObjectAccess_ARRAY_800c878c[8].object == (void *)0x0)
+  if (ObjectAccess_800c87cc.object == (void *)0x0)
   {
     ptr = (_FXFlash *)0x0;
   }
   else
   {
-    iVar3 = *(int *)(*(int *)((int)ObjectAccess_ARRAY_800c878c[8].object + 0x1c) + 0x14) + num * 0xc;
+    iVar3 = *(int *)(*(int *)((int)ObjectAccess_800c87cc.object + 0x1c) + 0x14) + num * 0xc;
     ptr = (_FXFlash *)MEMPACK_Malloc(0x24, '\r');
     if (ptr != (_FXFlash *)0x0)
     {
@@ -10656,10 +9507,9 @@ void FX_StartLightbeam(_Instance *instance, int startSeg, int endSeg, int color_
   char *ptr;
   undefined4 uVar1;
 
-  if (ObjectAccess_ARRAY_800c878c[8].object != (void *)0x0)
+  if (ObjectAccess_800c87cc.object != (void *)0x0)
   {
-    uVar1 = *(undefined4 *)(color_num * 4 +
-                            *(int *)(*(int *)((int)ObjectAccess_ARRAY_800c878c[8].object + 0x1c) + 0x18));
+    uVar1 = *(undefined4 *)(color_num * 4 + *(int *)(*(int *)((int)ObjectAccess_800c87cc.object + 0x1c) + 0x18));
     ptr = MEMPACK_Malloc(0x18, '\r');
     if (ptr != (char *)0x0)
     {
@@ -10770,7 +9620,7 @@ void FX_StartInstanceEffect(_Instance *instance, ObjectEffect *effect, int InitF
   case '\x02':
     if ((uint)effect->modifierList[1] - 1 < 5)
     {
-      local_20[0] = (undefined *)FX_ColorArray[(uint)effect->modifierList[1]];
+      local_20[0] = (undefined *)(&FX_ColorArray)[(uint)effect->modifierList[1]];
     }
     FX_DoInstanceOneSegmentGlow(instance, (uint)effect->modifierList[0], (long *)local_20, 1, 0x400, 0x32, 100);
     break;
@@ -10782,7 +9632,7 @@ void FX_StartInstanceEffect(_Instance *instance, ObjectEffect *effect, int InitF
     }
     if ((uint)effect->modifierList[2] - 1 < 5)
     {
-      local_20[0] = (undefined *)FX_ColorArray[(uint)effect->modifierList[2]];
+      local_20[0] = (undefined *)(&FX_ColorArray)[(uint)effect->modifierList[2]];
     }
     FX_DoInstanceManySegmentGlow(instance, (uint)effect->modifierList[0], motor1_speed, (long *)local_20, 1, 0x400, 0x41);
     break;
@@ -11177,8 +10027,8 @@ void FX_CalcSpiral(int degchange)
       FX_GetSpiralPoint((int)(&UNK_00002040 + next_deg), deg, &local_40, &local_3c);
       FX_GetSpiralPoint(next_deg + -0x17c0, deg, &local_38, &local_34);
     }
-    Spiral_Array[iVar1].vx = (short)local_48;
-    Spiral_Array[iVar1].vy = (short)local_44;
+    (&Spiral_Array)[iVar1].vx = (short)local_48;
+    (&Spiral_Array)[iVar1].vy = (short)local_44;
     if (iVar1 == 0x3f)
     {
       local_40 = local_48;
@@ -11186,8 +10036,8 @@ void FX_CalcSpiral(int degchange)
       local_38 = local_48;
       local_34 = local_44;
     }
-    Spiral_OffsetP[iVar1].vx = (short)local_40;
-    Spiral_OffsetP[iVar1].vy = (short)local_3c;
+    (&Spiral_OffsetP)[iVar1].vx = (short)local_40;
+    (&Spiral_OffsetP)[iVar1].vy = (short)local_3c;
     if (local_40 < iVar4)
     {
       iVar4 = local_40;
@@ -11205,8 +10055,8 @@ void FX_CalcSpiral(int degchange)
       iVar5 = local_3c;
     }
     next_radius = iVar1 + 1;
-    Spiral_OffsetM[iVar1].vx = (short)local_38;
-    Spiral_OffsetM[iVar1].vy = (short)local_34;
+    (&Spiral_OffsetM)[iVar1].vx = (short)local_38;
+    (&Spiral_OffsetM)[iVar1].vy = (short)local_34;
     next_deg = radius;
     iVar1 = next_radius;
   } while (next_radius < 0x40);
@@ -11423,9 +10273,9 @@ void FX_Spiral(_PrimPool *primPool, ulong **ot)
       pDVar7[-2] = DVar12;
       pDVar7[-9] = local_50;
       pDVar7[-5] = local_50;
-      DVar11 = Spiral_Array[iVar8];
-      DVar14 = Spiral_OffsetP[iVar8];
-      DVar12 = Spiral_OffsetM[iVar8];
+      DVar11 = (&Spiral_Array)[iVar8];
+      DVar14 = (&Spiral_OffsetP)[iVar8];
+      DVar12 = (&Spiral_OffsetM)[iVar8];
       iVar8 = iVar8 + 1;
       pDVar7[-4] = DVar11;
       pDVar7[-8] = DVar11;

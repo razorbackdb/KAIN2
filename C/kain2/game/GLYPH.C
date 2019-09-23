@@ -2155,8 +2155,7 @@ LAB_8007c66c:
           }
         }
       }
-      FX_DrawModel((Object *)ObjectAccess_ARRAY_800c878c[19].object, 0, &local_20, &HUD_Cap_Pos,
-                   &local_40, 0);
+      FX_DrawModel((Object *)ObjectAccess_800c8824.object, 0, &local_20, &HUD_Cap_Pos, &local_40, 0);
     }
     local_50.x = 0x400;
     local_48.y = 0x260;
@@ -2181,8 +2180,8 @@ LAB_8007c66c:
         }
         ppuVar8 = (code **)ppuVar8 + 1;
         local_50.z = local_50.z - HUD_Rotation & 0xfff;
-        FX_DrawModel((Object *)ObjectAccess_ARRAY_800c878c[22].object, 0, &local_50, &local_48,
-                     &local_40, (uint)((int)uVar7 < (int)HUD_Count) ^ 1);
+        FX_DrawModel((Object *)ObjectAccess_800c883c.object, 0, &local_50, &local_48, &local_40,
+                     (uint)((int)uVar7 < (int)HUD_Count) ^ 1);
         uVar7 = uVar7 + 1;
         bVar1 = uVar7 < 5;
       } while ((int)uVar7 < 5);

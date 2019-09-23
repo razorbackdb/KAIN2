@@ -604,7 +604,7 @@ void load(memcard_t *memcard)
 	memcard->table = (mcmenu_table_t *)loadAddr->relocModule;
 	RELMOD_InitModulePointers((int)loadAddr->relocModule, (int *)loadAddr->relocList);
 	memcard->object = loadAddr;
-	if (memcard->table->versionID != monVersion)
+	if (memcard->table->versionID != &monVersion)
 	{
 		if ((gameTrackerX.gameFlags & 0x8000000U) == 0)
 		{

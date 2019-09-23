@@ -17,89 +17,21 @@ SOUL_FunctionTable =
         // _MonsterStateChoice * @0x800CF6E8, len = 0x00000004
         .stateFuncs = &SOUL_StateChoiceTable,
         // char * @0x800CF6EC, len = 0x00000004
-        .versionID = "Jun 30 1999" /* collapsed from &monVersion */,
+        .versionID = &monVersion,
         // char * @0x800CF6F0, len = 0x00000004
         .localVersionID = 00000000};
-// _MonsterStateChoice[7] @0x800CAB48, len = 0x00000054
+// _MonsterStateChoice @0x800CAB48, len = 0x0000000C
 SOUL_StateChoiceTable =
     {
-        // _MonsterStateChoice @0x800CAB48, len = 0x0000000C
-        {
-            // int @0x800CAB48, len = 0x00000004
-            .state = 0x0,
-            // _MonsterState @0x800CAB4C, len = 0x00000008
-            .functions =
-                {
-                    // _func_88 * @0x800CAB4C, len = 0x00000004
-                    .entryFunction = &SOUL_BirthEntry,
-                    // _func_89 * @0x800CAB50, len = 0x00000004
-                    .stateFunction = &SOUL_Birth}},
-        // _MonsterStateChoice @0x800CAB54, len = 0x0000000C
-        {
-            // int @0x800CAB54, len = 0x00000004
-            .state = 0x13,
-            // _MonsterState @0x800CAB58, len = 0x00000008
-            .functions =
-                {
-                    // _func_88 * @0x800CAB58, len = 0x00000004
-                    .entryFunction = &SOUL_FleeEntry,
-                    // _func_89 * @0x800CAB5C, len = 0x00000004
-                    .stateFunction = &SOUL_Flee}},
-        // _MonsterStateChoice @0x800CAB60, len = 0x0000000C
-        {
-            // int @0x800CAB60, len = 0x00000004
-            .state = 0x2,
-            // _MonsterState @0x800CAB64, len = 0x00000008
-            .functions =
-                {
-                    // _func_88 * @0x800CAB64, len = 0x00000004
-                    .entryFunction = &SOUL_IdleEntry,
-                    // _func_89 * @0x800CAB68, len = 0x00000004
-                    .stateFunction = &SOUL_Idle}},
-        // _MonsterStateChoice @0x800CAB6C, len = 0x0000000C
-        {
-            // int @0x800CAB6C, len = 0x00000004
-            .state = 0x5,
-            // _MonsterState @0x800CAB70, len = 0x00000008
-            .functions =
-                {
-                    // _func_88 * @0x800CAB70, len = 0x00000004
-                    .entryFunction = &SOUL_WanderEntry,
-                    // _func_89 * @0x800CAB74, len = 0x00000004
-                    .stateFunction = &SOUL_Wander}},
-        // _MonsterStateChoice @0x800CAB78, len = 0x0000000C
-        {
-            // int @0x800CAB78, len = 0x00000004
-            .state = 0xa,
-            // _MonsterState @0x800CAB7C, len = 0x00000008
-            .functions =
-                {
-                    // _func_88 * @0x800CAB7C, len = 0x00000004
-                    .entryFunction = &SOUL_SoulSuckEntry,
-                    // _func_89 * @0x800CAB80, len = 0x00000004
-                    .stateFunction = &SOUL_SoulSuck}},
-        // _MonsterStateChoice @0x800CAB84, len = 0x0000000C
-        {
-            // int @0x800CAB84, len = 0x00000004
-            .state = 0x17,
-            // _MonsterState @0x800CAB88, len = 0x00000008
-            .functions =
-                {
-                    // _func_88 * @0x800CAB88, len = 0x00000004
-                    .entryFunction = &SOUL_ReanimateEntry,
-                    // _func_89 * @0x800CAB8C, len = 0x00000004
-                    .stateFunction = &SOUL_Reanimate}},
-        // _MonsterStateChoice @0x800CAB90, len = 0x0000000C
-        {
-            // int @0x800CAB90, len = 0x00000004
-            .state = -0x1,
-            // _MonsterState @0x800CAB94, len = 0x00000008
-            .functions =
-                {
-                    // _func_88 * @0x800CAB94, len = 0x00000004
-                    .entryFunction = 00000000,
-                    // _func_89 * @0x800CAB98, len = 0x00000004
-                    .stateFunction = 00000000}}};
+        // int @0x800CAB48, len = 0x00000004
+        .state = 0x0,
+        // _MonsterState @0x800CAB4C, len = 0x00000008
+        .functions =
+            {
+                // _func_88 * @0x800CAB4C, len = 0x00000004
+                .entryFunction = &SOUL_BirthEntry,
+                // _func_89 * @0x800CAB50, len = 0x00000004
+                .stateFunction = &SOUL_Birth}};
 // decompiled code
 // original method signature:
 // void /*$ra*/ SOUL_QueueHandler(struct _Instance *instance /*$s0*/)

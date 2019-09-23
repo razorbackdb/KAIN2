@@ -1114,7 +1114,7 @@ void MonsterTranslateAnim(Object *object)
     else
     {
       if ((object->relocModule == (void *)0x0) ||
-          (*(char **)((int)object->relocModule + 0x18) != monVersion))
+          (*(char **)((int)object->relocModule + 0x18) != &monVersion))
       {
         object->data = (void *)0x0;
         return;

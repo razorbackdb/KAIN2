@@ -1103,31 +1103,31 @@ long PIPE3D_TransformAnimatedSplitInstanceVertices(_MVertex *vertexList, _PVerte
               {
                 if (modelFadeValue == 0)
                 {
-                  setCopReg(2, in_zero, *(undefined4 *)(gNormalList + uVar4));
-                  setCopReg(2, in_at, *(undefined4 *)&gNormalList[uVar4].z);
+                  setCopReg(2, in_zero, *(undefined4 *)(&gNormalList + uVar4));
+                  setCopReg(2, in_at, *(undefined4 *)&(&gNormalList)[uVar4].z);
                   setCopReg(2, local_38, *pCVar10);
                   copFunction(2, 0x108041b);
-                  setCopReg(2, in_zero, *(undefined4 *)(gNormalList + uVar6));
-                  setCopReg(2, in_at, *(undefined4 *)&gNormalList[uVar6].z);
+                  setCopReg(2, in_zero, *(undefined4 *)(&gNormalList + uVar6));
+                  setCopReg(2, in_at, *(undefined4 *)&(&gNormalList)[uVar6].z);
                   setCopReg(2, local_38, *pCVar13);
                   copFunction(2, 0x108041b);
-                  setCopReg(2, in_zero, *(undefined4 *)(gNormalList + uVar5));
-                  setCopReg(2, in_at, *(undefined4 *)&gNormalList[uVar5].z);
+                  setCopReg(2, in_zero, *(undefined4 *)(&gNormalList + uVar5));
+                  setCopReg(2, in_at, *(undefined4 *)&(&gNormalList)[uVar5].z);
                   setCopReg(2, local_38, *pCVar12);
                   copFunction(2, 0x108041b);
                 }
                 else
                 {
-                  setCopReg(2, in_zero, *(undefined4 *)(gNormalList + uVar4));
-                  setCopReg(2, in_at, *(undefined4 *)&gNormalList[uVar4].z);
+                  setCopReg(2, in_zero, *(undefined4 *)(&gNormalList + uVar4));
+                  setCopReg(2, in_at, *(undefined4 *)&(&gNormalList)[uVar4].z);
                   setCopReg(2, local_38, *pCVar10);
                   copFunction(2, 0xe80413);
-                  setCopReg(2, in_zero, *(undefined4 *)(gNormalList + uVar6));
-                  setCopReg(2, in_at, *(undefined4 *)&gNormalList[uVar6].z);
+                  setCopReg(2, in_zero, *(undefined4 *)(&gNormalList + uVar6));
+                  setCopReg(2, in_at, *(undefined4 *)&(&gNormalList)[uVar6].z);
                   setCopReg(2, local_38, *pCVar13);
                   copFunction(2, 0xe80413);
-                  setCopReg(2, in_zero, *(undefined4 *)(gNormalList + uVar5));
-                  setCopReg(2, in_at, *(undefined4 *)&gNormalList[uVar5].z);
+                  setCopReg(2, in_zero, *(undefined4 *)(&gNormalList + uVar5));
+                  setCopReg(2, in_at, *(undefined4 *)&(&gNormalList)[uVar5].z);
                   setCopReg(2, local_38, *pCVar12);
                   copFunction(2, 0xe80413);
                 }
@@ -1193,8 +1193,8 @@ long PIPE3D_TransformAnimatedSplitInstanceVertices(_MVertex *vertexList, _PVerte
               if (((uint)*pCVar10 & 0x40000000) == 0)
               {
                 setCopReg(2, local_38, *pCVar10);
-                setCopReg(2, in_zero, *(undefined4 *)(gNormalList + (uint)uVar1));
-                setCopReg(2, in_at, *(undefined4 *)&gNormalList[(uint)uVar1].z);
+                setCopReg(2, in_zero, *(undefined4 *)(&gNormalList + (uint)uVar1));
+                setCopReg(2, in_at, *(undefined4 *)&(&gNormalList)[(uint)uVar1].z);
                 copFunction(2, 0xe80413);
                 CVar3 = (CVECTOR)getCopReg(2, 0x16);
                 *vertexColor = CVar3;

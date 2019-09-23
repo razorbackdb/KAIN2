@@ -7,21 +7,8 @@ ACE_amount = 0x0;
 Camera_lookDist = 0x0;
 // short @0x800CFE8C, len = 0x00000002
 Camera_lookHeight = 0x0;
-// long[12] @0x800CDF38, len = 0x00000030
-camera_modeToIndex =
-    {
-        0x0,
-        0x0,
-        0x0,
-        0x0,
-        0x0,
-        0x0,
-        0x0,
-        0x0,
-        0x0,
-        0x0,
-        0x0,
-        0x0};
+// long @0x800CDF38, len = 0x00000004
+camera_modeToIndex = 0x0;
 // _SVector @0x800CFE64, len = 0x00000008
 camera_plane =
     {
@@ -33,169 +20,17 @@ camera_plane =
         .z = 0x0,
         // short @0x800CFE6A, len = 0x00000002
         .pad = 0x0};
-// _SVector[16] @0x800CFDE4, len = 0x00000080
+// _SVector @0x800CFDE4, len = 0x00000008
 camera_shakeOffset =
     {
-        // _SVector @0x800CFDE4, len = 0x00000008
-        {
-            // short @0x800CFDE4, len = 0x00000002
-            .x = 0x0,
-            // short @0x800CFDE6, len = 0x00000002
-            .y = 0x0,
-            // short @0x800CFDE8, len = 0x00000002
-            .z = 0x0,
-            // short @0x800CFDEA, len = 0x00000002
-            .pad = 0x0},
-        // _SVector @0x800CFDEC, len = 0x00000008
-        {
-            // short @0x800CFDEC, len = 0x00000002
-            .x = 0x0,
-            // short @0x800CFDEE, len = 0x00000002
-            .y = 0x0,
-            // short @0x800CFDF0, len = 0x00000002
-            .z = 0x0,
-            // short @0x800CFDF2, len = 0x00000002
-            .pad = 0x0},
-        // _SVector @0x800CFDF4, len = 0x00000008
-        {
-            // short @0x800CFDF4, len = 0x00000002
-            .x = 0x0,
-            // short @0x800CFDF6, len = 0x00000002
-            .y = 0x0,
-            // short @0x800CFDF8, len = 0x00000002
-            .z = 0x0,
-            // short @0x800CFDFA, len = 0x00000002
-            .pad = 0x0},
-        // _SVector @0x800CFDFC, len = 0x00000008
-        {
-            // short @0x800CFDFC, len = 0x00000002
-            .x = 0x0,
-            // short @0x800CFDFE, len = 0x00000002
-            .y = 0x0,
-            // short @0x800CFE00, len = 0x00000002
-            .z = 0x0,
-            // short @0x800CFE02, len = 0x00000002
-            .pad = 0x0},
-        // _SVector @0x800CFE04, len = 0x00000008
-        {
-            // short @0x800CFE04, len = 0x00000002
-            .x = 0x0,
-            // short @0x800CFE06, len = 0x00000002
-            .y = 0x0,
-            // short @0x800CFE08, len = 0x00000002
-            .z = 0x0,
-            // short @0x800CFE0A, len = 0x00000002
-            .pad = 0x0},
-        // _SVector @0x800CFE0C, len = 0x00000008
-        {
-            // short @0x800CFE0C, len = 0x00000002
-            .x = 0x0,
-            // short @0x800CFE0E, len = 0x00000002
-            .y = 0x0,
-            // short @0x800CFE10, len = 0x00000002
-            .z = 0x0,
-            // short @0x800CFE12, len = 0x00000002
-            .pad = 0x0},
-        // _SVector @0x800CFE14, len = 0x00000008
-        {
-            // short @0x800CFE14, len = 0x00000002
-            .x = 0x0,
-            // short @0x800CFE16, len = 0x00000002
-            .y = 0x0,
-            // short @0x800CFE18, len = 0x00000002
-            .z = 0x0,
-            // short @0x800CFE1A, len = 0x00000002
-            .pad = 0x0},
-        // _SVector @0x800CFE1C, len = 0x00000008
-        {
-            // short @0x800CFE1C, len = 0x00000002
-            .x = 0x0,
-            // short @0x800CFE1E, len = 0x00000002
-            .y = 0x0,
-            // short @0x800CFE20, len = 0x00000002
-            .z = 0x0,
-            // short @0x800CFE22, len = 0x00000002
-            .pad = 0x0},
-        // _SVector @0x800CFE24, len = 0x00000008
-        {
-            // short @0x800CFE24, len = 0x00000002
-            .x = 0x0,
-            // short @0x800CFE26, len = 0x00000002
-            .y = 0x0,
-            // short @0x800CFE28, len = 0x00000002
-            .z = 0x0,
-            // short @0x800CFE2A, len = 0x00000002
-            .pad = 0x0},
-        // _SVector @0x800CFE2C, len = 0x00000008
-        {
-            // short @0x800CFE2C, len = 0x00000002
-            .x = 0x0,
-            // short @0x800CFE2E, len = 0x00000002
-            .y = 0x0,
-            // short @0x800CFE30, len = 0x00000002
-            .z = 0x0,
-            // short @0x800CFE32, len = 0x00000002
-            .pad = 0x0},
-        // _SVector @0x800CFE34, len = 0x00000008
-        {
-            // short @0x800CFE34, len = 0x00000002
-            .x = 0x0,
-            // short @0x800CFE36, len = 0x00000002
-            .y = 0x0,
-            // short @0x800CFE38, len = 0x00000002
-            .z = 0x0,
-            // short @0x800CFE3A, len = 0x00000002
-            .pad = 0x0},
-        // _SVector @0x800CFE3C, len = 0x00000008
-        {
-            // short @0x800CFE3C, len = 0x00000002
-            .x = 0x0,
-            // short @0x800CFE3E, len = 0x00000002
-            .y = 0x0,
-            // short @0x800CFE40, len = 0x00000002
-            .z = 0x0,
-            // short @0x800CFE42, len = 0x00000002
-            .pad = 0x0},
-        // _SVector @0x800CFE44, len = 0x00000008
-        {
-            // short @0x800CFE44, len = 0x00000002
-            .x = 0x0,
-            // short @0x800CFE46, len = 0x00000002
-            .y = 0x0,
-            // short @0x800CFE48, len = 0x00000002
-            .z = 0x0,
-            // short @0x800CFE4A, len = 0x00000002
-            .pad = 0x0},
-        // _SVector @0x800CFE4C, len = 0x00000008
-        {
-            // short @0x800CFE4C, len = 0x00000002
-            .x = 0x0,
-            // short @0x800CFE4E, len = 0x00000002
-            .y = 0x0,
-            // short @0x800CFE50, len = 0x00000002
-            .z = 0x0,
-            // short @0x800CFE52, len = 0x00000002
-            .pad = 0x0},
-        // _SVector @0x800CFE54, len = 0x00000008
-        {
-            // short @0x800CFE54, len = 0x00000002
-            .x = 0x0,
-            // short @0x800CFE56, len = 0x00000002
-            .y = 0x0,
-            // short @0x800CFE58, len = 0x00000002
-            .z = 0x0,
-            // short @0x800CFE5A, len = 0x00000002
-            .pad = 0x0},
-        // _SVector @0x800CFE5C, len = 0x00000008
-        {
-            // short @0x800CFE5C, len = 0x00000002
-            .x = 0x0,
-            // short @0x800CFE5E, len = 0x00000002
-            .y = 0x0,
-            // short @0x800CFE60, len = 0x00000002
-            .z = 0x0,
-            // short @0x800CFE62, len = 0x00000002
-            .pad = 0x0}};
+        // short @0x800CFDE4, len = 0x00000002
+        .x = 0x0,
+        // short @0x800CFDE6, len = 0x00000002
+        .y = 0x0,
+        // short @0x800CFDE8, len = 0x00000002
+        .z = 0x0,
+        // short @0x800CFDEA, len = 0x00000002
+        .pad = 0x0};
 // short @0x800CDF78, len = 0x00000002
 camera_still = 0x0;
 // short @0x800CDF96, len = 0x00000002
@@ -2116,7 +1951,7 @@ void CAMERA_RestoreMode(Camera *camera)
       cameraMode = iVar7;
       camera->mode = sVar6;
       sVar6 = *(short *)(camera->focusDistanceList +
-                         *(int *)((int)camera_modeToIndex + ((iVar7 << 0x10) >> 0xe)) * 3 +
+                         *(int *)((int)&camera_modeToIndex + ((iVar7 << 0x10) >> 0xe)) * 3 +
                          (int)camera->presetIndex);
       (camera->data).Follow.stopTimer = -0x1a5e0000;
       (camera->focusRotVel).z = 0;
@@ -2640,7 +2475,7 @@ void CAMERA_SetMode(Camera *camera, long mode)
       cameraMode = mode;
       camera->mode = (short)mode;
       sVar3 = *(short *)(camera->focusDistanceList +
-                         *(int *)((int)camera_modeToIndex + ((mode << 0x10) >> 0xe)) * 3 +
+                         *(int *)((int)&camera_modeToIndex + ((mode << 0x10) >> 0xe)) * 3 +
                          (int)camera->presetIndex);
       camera->smooth = 8;
       (camera->data).Follow.stopTimer = -0x1a5e0000;
@@ -2697,21 +2532,21 @@ void CAMERA_Initialize(Camera *camera)
     {
       iVar2._1_2_ = (short)((uint)(iVar2 + 0xff) >> 8);
     }
-    camera_shakeOffset[iVar4].x = (short)iVar2 + iVar2._1_2_ * -0x100 + -0x80;
+    (&camera_shakeOffset)[iVar4].x = (short)iVar2 + iVar2._1_2_ * -0x100 + -0x80;
     iVar2 = rand();
     iVar2._1_2_ = (short)((uint)iVar2 >> 8);
     if (iVar2 < 0)
     {
       iVar2._1_2_ = (short)((uint)(iVar2 + 0xff) >> 8);
     }
-    camera_shakeOffset[iVar4].y = (short)iVar2 + iVar2._1_2_ * -0x100 + -0x80;
+    (&camera_shakeOffset)[iVar4].y = (short)iVar2 + iVar2._1_2_ * -0x100 + -0x80;
     iVar2 = rand();
     iVar2._1_2_ = (short)((uint)iVar2 >> 8);
     if (iVar2 < 0)
     {
       iVar2._1_2_ = (short)((uint)(iVar2 + 0xff) >> 8);
     }
-    camera_shakeOffset[iVar4].z = (short)iVar2 + iVar2._1_2_ * -0x100 + -0x80;
+    (&camera_shakeOffset)[iVar4].z = (short)iVar2 + iVar2._1_2_ * -0x100 + -0x80;
     iVar4 = iVar4 + 1;
   } while (iVar4 < 0x10);
   (camera->core).rotation.x = 0xfc7;
@@ -8366,16 +8201,16 @@ void CAMERA_ShakeCamera(Camera *camera)
     uVar1 = camera->shakeFrame;
     (camera->core).position.x =
         (camera->core).position.x +
-        (short)((int)camera_shakeOffset[(uint)(ushort)camera->shakeFrame & 0xf].x *
+        (short)((int)(&camera_shakeOffset)[(uint)(ushort)camera->shakeFrame & 0xf].x *
                     (int)camera->shakeScale >>
                 0xc);
     uVar2 = camera->shakeFrame;
     (camera->core).position.y =
         (camera->core).position.y +
-        (short)((int)camera_shakeOffset[(uint)uVar1 & 0xf].y * (int)camera->shakeScale >> 0xc);
+        (short)((int)(&camera_shakeOffset)[(uint)uVar1 & 0xf].y * (int)camera->shakeScale >> 0xc);
     (camera->core).position.z =
         (camera->core).position.z +
-        (short)((int)camera_shakeOffset[(uint)uVar2 & 0xf].z * (int)camera->shakeScale >> 0xc);
+        (short)((int)(&camera_shakeOffset)[(uint)uVar2 & 0xf].z * (int)camera->shakeScale >> 0xc);
     iVar3 = camera->shake - gameTrackerX.timeMult;
     camera->shake = iVar3;
     if (iVar3 < 0)

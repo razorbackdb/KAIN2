@@ -3,53 +3,14 @@
 
 // ulong @0x800D18E8, len = 0x00000004
 __hblankEvent = null;
-// ushort[4] @0x800CECC0, len = 0x00000008
-aadHblanksPerUpdate =
-    {
-        // ushort @0x800CECC0, len = 0x00000002
-        0x106,
-        // ushort @0x800CECC2, len = 0x00000002
-        0x83,
-        // ushort @0x800CECC4, len = 0x00000002
-        0x138,
-        // ushort @0x800CECC6, len = 0x00000002
-        0x9c};
+// ushort @0x800CECC0, len = 0x00000002
+aadHblanksPerUpdate = 0x106;
 // AadMemoryStruct * @0x800CECD8, len = 0x00000004
 aadMem = 00000000;
-// ulong[10] @0x800CED5C, len = 0x00000028
-aadReverbModeSize =
-    {
-        // ulong @0x800CED5C, len = 0x00000004
-        0x0,
-        // ulong @0x800CED60, len = 0x00000004
-        0x26c0,
-        // ulong @0x800CED64, len = 0x00000004
-        0x1f40,
-        // ulong @0x800CED68, len = 0x00000004
-        0x4840,
-        // ulong @0x800CED6C, len = 0x00000004
-        0x6fe0,
-        // ulong @0x800CED70, len = 0x00000004
-        0xade0,
-        // ulong @0x800CED74, len = 0x00000004
-        0xf6c0,
-        // ulong @0x800CED78, len = 0x00000004
-        0x18040,
-        // ulong @0x800CED7C, len = 0x00000004
-        0x18040,
-        // ulong @0x800CED80, len = 0x00000004
-        0x3c00};
-// ulong[4] @0x800CECC8, len = 0x00000010
-aadUpdateRate =
-    {
-        // ulong @0x800CECC8, len = 0x00000004
-        0x411aaaab,
-        // ulong @0x800CECCC, len = 0x00000004
-        0x208d5555,
-        // ulong @0x800CECD0, len = 0x00000004
-        0x4e200000,
-        // ulong @0x800CECD4, len = 0x00000004
-        0x27100000};
+// ulong @0x800CED5C, len = 0x00000004
+aadReverbModeSize = 0x0;
+// ulong @0x800CECC8, len = 0x00000004
+aadUpdateRate = 0x411aaaab;
 // int @0x800CECDC, len = 0x00000004
 gDefragRequest = 0x0;
 // ulong @0x800D18F0, len = 0x00000004
@@ -217,7 +178,7 @@ int aadInit(AadInitAttr *attributes, uchar *memoryPtr)
         pAVar2->voiceReverbRequest = 0;
         if (iVar9 < 4)
         {
-          aadInstallUpdateFunc(aadSlotUpdateWrapper, (uint)aadHblanksPerUpdate[iVar9]);
+          aadInstallUpdateFunc(aadSlotUpdateWrapper, (uint)(&aadHblanksPerUpdate)[iVar9]);
         }
         aadMem->flags = 0;
         ExitCriticalSection();
@@ -3172,7 +3133,7 @@ ulong aadGetReverbSize(void)
   int iVar1;
 
   iVar1 = aadGetReverbMode();
-  return aadReverbModeSize[iVar1] + 0x40;
+  return (&aadReverbModeSize)[iVar1] + 0x40;
 }
 
 // decompiled code
@@ -3371,8 +3332,8 @@ void aadSetSlotTempo(int slotNumber, AadTempo *tempo)
   uVar2 = (tempo->quarterNoteTime / uVar2) * 0x10000 +
           (tempo->quarterNoteTime % uVar2 << 0x10) / uVar2;
   *(uint *)(p_Var3 + 8) = uVar2;
-  *(short *)(p_Var3 + 0x10) = (short)(aadUpdateRate[pAVar1->updateMode & 3] / uVar2);
-  *(uint *)(p_Var3 + 0xc) = aadUpdateRate[pAVar1->updateMode & 3] % *(uint *)(p_Var3 + 8);
+  *(short *)(p_Var3 + 0x10) = (short)((&aadUpdateRate)[pAVar1->updateMode & 3] / uVar2);
+  *(uint *)(p_Var3 + 0xc) = (&aadUpdateRate)[pAVar1->updateMode & 3] % *(uint *)(p_Var3 + 8);
   *(ulong *)(p_Var3 + 0x14) = tempo->quarterNoteTime;
   *(undefined2 *)(p_Var3 + 0x12) = *(undefined2 *)&tempo->ppqn;
   return;

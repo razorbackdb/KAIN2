@@ -1,8 +1,8 @@
 #include "THISDUST.H"
 #include "LOAD3D.H"
 
-// string @0x800CE4D0, len = 0xFFFFFFFFFFFFFFFF
-HashExtensions = "drm";
+// char @0x800CE4D0, len = 0x00000001
+HashExtensions = 0x64;
 // _LoadStatus @0x800D0D84, len = 0x00000098
 loadStatus =
     {
@@ -979,7 +979,7 @@ long LOAD_HashName(char *string)
   if (pcVar2 != (char *)0x0)
   {
     uVar4 = 0;
-    s2 = HashExtensions;
+    s2 = &HashExtensions;
     do
     {
       iVar3 = strcmpi(pcVar2 + 1, s2);

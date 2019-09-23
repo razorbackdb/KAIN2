@@ -3,70 +3,35 @@
 
 // _MonsterFunctionTable @0x800CF6AC, len = 0x00000020
 SLUAGH_FunctionTable =
-	{
-		// _func_96 * @0x800CF6AC, len = 0x00000004
-		.initFunc = &SLUAGH_Init,
-		// _func_97 * @0x800CF6B0, len = 0x00000004
-		.cleanUpFunc = 00000000,
-		// _func_98 * @0x800CF6B4, len = 0x00000004
-		.damageEffectFunc = &SLUAGH_DamageEffect,
-		// _func_99 * @0x800CF6B8, len = 0x00000004
-		.queryFunc = &SLUAGH_Query,
-		// _func_100 * @0x800CF6BC, len = 0x00000004
-		.messageFunc = 00000000,
-		// _MonsterStateChoice * @0x800CF6C0, len = 0x00000004
-		.stateFuncs = &SLUAGH_StateChoiceTable,
-		// char * @0x800CF6C4, len = 0x00000004
-		.versionID = "Jun 30 1999" /* collapsed from &monVersion */,
-		// char * @0x800CF6C8, len = 0x00000004
-		.localVersionID = 00000000};
-// _MonsterStateChoice[4] @0x800CAB18, len = 0x00000030
+    {
+        // _func_96 * @0x800CF6AC, len = 0x00000004
+        .initFunc = &SLUAGH_Init,
+        // _func_97 * @0x800CF6B0, len = 0x00000004
+        .cleanUpFunc = 00000000,
+        // _func_98 * @0x800CF6B4, len = 0x00000004
+        .damageEffectFunc = &SLUAGH_DamageEffect,
+        // _func_99 * @0x800CF6B8, len = 0x00000004
+        .queryFunc = &SLUAGH_Query,
+        // _func_100 * @0x800CF6BC, len = 0x00000004
+        .messageFunc = 00000000,
+        // _MonsterStateChoice * @0x800CF6C0, len = 0x00000004
+        .stateFuncs = &SLUAGH_StateChoiceTable,
+        // char * @0x800CF6C4, len = 0x00000004
+        .versionID = &monVersion,
+        // char * @0x800CF6C8, len = 0x00000004
+        .localVersionID = 00000000};
+// _MonsterStateChoice @0x800CAB18, len = 0x0000000C
 SLUAGH_StateChoiceTable =
-	{
-		// _MonsterStateChoice @0x800CAB18, len = 0x0000000C
-		{
-			// int @0x800CAB18, len = 0x00000004
-			.state = 0x6,
-			// _MonsterState @0x800CAB1C, len = 0x00000008
-			.functions =
-				{
-					// _func_88 * @0x800CAB1C, len = 0x00000004
-					.entryFunction = &SLUAGH_AttackEntry,
-					// _func_89 * @0x800CAB20, len = 0x00000004
-					.stateFunction = &SLUAGH_Attack}},
-		// _MonsterStateChoice @0x800CAB24, len = 0x0000000C
-		{
-			// int @0x800CAB24, len = 0x00000004
-			.state = 0x10,
-			// _MonsterState @0x800CAB28, len = 0x00000008
-			.functions =
-				{
-					// _func_88 * @0x800CAB28, len = 0x00000004
-					.entryFunction = &SLUAGH_DeathEntry,
-					// _func_89 * @0x800CAB2C, len = 0x00000004
-					.stateFunction = &SLUAGH_Death}},
-		// _MonsterStateChoice @0x800CAB30, len = 0x0000000C
-		{
-			// int @0x800CAB30, len = 0x00000004
-			.state = 0xa,
-			// _MonsterState @0x800CAB34, len = 0x00000008
-			.functions =
-				{
-					// _func_88 * @0x800CAB34, len = 0x00000004
-					.entryFunction = &SOUL_SoulSuckEntry,
-					// _func_89 * @0x800CAB38, len = 0x00000004
-					.stateFunction = &SOUL_SoulSuck}},
-		// _MonsterStateChoice @0x800CAB3C, len = 0x0000000C
-		{
-			// int @0x800CAB3C, len = 0x00000004
-			.state = -0x1,
-			// _MonsterState @0x800CAB40, len = 0x00000008
-			.functions =
-				{
-					// _func_88 * @0x800CAB40, len = 0x00000004
-					.entryFunction = 00000000,
-					// _func_89 * @0x800CAB44, len = 0x00000004
-					.stateFunction = 00000000}}};
+    {
+        // int @0x800CAB18, len = 0x00000004
+        .state = 0x6,
+        // _MonsterState @0x800CAB1C, len = 0x00000008
+        .functions =
+            {
+                // _func_88 * @0x800CAB1C, len = 0x00000004
+                .entryFunction = &SLUAGH_AttackEntry,
+                // _func_89 * @0x800CAB20, len = 0x00000004
+                .stateFunction = &SLUAGH_Attack}};
 // decompiled code
 // original method signature:
 // unsigned long /*$ra*/ SLUAGH_Query(struct _Instance *instance /*$a0*/, unsigned long query /*$a1*/)
@@ -90,40 +55,40 @@ SLUAGH_StateChoiceTable =
 ulong SLUAGH_Query(_Instance *instance, ulong query)
 
 {
-	ulong uVar1;
-	void *pvVar2;
+  ulong uVar1;
+  void *pvVar2;
 
-	pvVar2 = instance->extraData;
-	if (query == 0)
-	{
-		if ((*(uint *)((int)pvVar2 + 4) & 1) == 0)
-		{
-			uVar1 = ((uint) * (byte *)((int)pvVar2 + 1) & 1) << 0x1d;
-		}
-		else
-		{
-			uVar1 = 0x4000000;
-		}
-	}
-	else
-	{
-		if (query == 1)
-		{
-			if ((*(uint *)((int)pvVar2 + 4) & 1) == 0)
-			{
-				uVar1 = *(ulong *)((int)instance->data + 0x10);
-			}
-			else
-			{
-				uVar1 = *(uint *)((int)instance->data + 0x10) | 4;
-			}
-		}
-		else
-		{
-			uVar1 = MonsterQuery(instance, query);
-		}
-	}
-	return uVar1;
+  pvVar2 = instance->extraData;
+  if (query == 0)
+  {
+    if ((*(uint *)((int)pvVar2 + 4) & 1) == 0)
+    {
+      uVar1 = ((uint) * (byte *)((int)pvVar2 + 1) & 1) << 0x1d;
+    }
+    else
+    {
+      uVar1 = 0x4000000;
+    }
+  }
+  else
+  {
+    if (query == 1)
+    {
+      if ((*(uint *)((int)pvVar2 + 4) & 1) == 0)
+      {
+        uVar1 = *(ulong *)((int)instance->data + 0x10);
+      }
+      else
+      {
+        uVar1 = *(uint *)((int)instance->data + 0x10) | 4;
+      }
+    }
+    else
+    {
+      uVar1 = MonsterQuery(instance, query);
+    }
+  }
+  return uVar1;
 }
 
 // decompiled code
@@ -186,76 +151,76 @@ ulong SLUAGH_Query(_Instance *instance, ulong query)
 void SLUAGH_DamageEffect(_Instance *instance, evFXHitData *data)
 
 {
-	byte bVar1;
-	char cVar2;
-	int iVar3;
-	uint *puVar4;
-	uint uVar5;
-	undefined4 local_28;
-	undefined *local_24;
-	undefined4 local_20;
-	uint local_18;
+  byte bVar1;
+  char cVar2;
+  int iVar3;
+  uint *puVar4;
+  uint uVar5;
+  undefined4 local_28;
+  undefined *local_24;
+  undefined4 local_20;
+  uint local_18;
 
-	puVar4 = (uint *)instance->extraData;
-	if (data == (evFXHitData *)0x0)
-	{
-		uVar5 = puVar4[0x37];
-		if (uVar5 != 0)
-		{
-			iVar3 = (int)*(short *)(puVar4 + 0x4c);
-			if (iVar3 < 0)
-			{
-				iVar3 = iVar3 + 0xfff;
-			}
-			local_18 = FX_GetHealthColor(iVar3 >> 0xc);
-			if (*(uint *)(uVar5 + 0x18) != local_18)
-			{
-				local_28 = *(uint *)(uVar5 + 0x18);
-				bVar1 = (char)local_28 - 4;
-				if (((local_18 & 0xff) < (local_28 & 0xff)) ||
-					(bVar1 = (char)local_28 + 4, (local_28 & 0xff) < (local_18 & 0xff)))
-				{
-					local_28 = local_28 & 0xffffff00 | (uint)bVar1;
-				}
-				local_20._1_1_ = (byte)(local_18 >> 8);
-				cVar2 = local_28._1_1_ - 4;
-				if ((local_20._1_1_ < local_28._1_1_) ||
-					(cVar2 = local_28._1_1_ + 4, local_28._1_1_ < local_20._1_1_))
-				{
-					local_28._0_2_ = CONCAT11(cVar2, (char)local_28);
-					local_28 = local_28 & 0xffff0000 | (uint)(ushort)local_28;
-				}
-				local_20._2_1_ = (byte)(local_18 >> 0x10);
-				cVar2 = local_28._2_1_ - 4;
-				if ((local_20._2_1_ < local_28._2_1_) ||
-					(cVar2 = local_28._2_1_ + 4, local_28._2_1_ < local_20._2_1_))
-				{
-					local_28._0_3_ = CONCAT12(cVar2, (ushort)local_28);
-					local_28 = local_28 & 0xff000000 | (uint)(uint3)local_28;
-				}
-				*(uint *)(uVar5 + 0x18) = local_28;
-				local_20 = local_18;
-			}
-		}
-		if (((puVar4[1] & 1) != 0) && (*(short *)(puVar4 + 0x4c) != 0))
-		{
-			*puVar4 = *puVar4 & 0xffdfffff;
-			*(undefined *)((int)puVar4 + 0x146) = *(undefined *)(puVar4 + 0x52);
-			puVar4[1] = puVar4[1] & 0xfffffffe;
-			MON_StartSpecialFade(instance, 0, 0x14);
-		}
-	}
-	else
-	{
-		if ((puVar4[1] & 1) == 0)
-		{
-			local_28 = DAT_800cf6cc;
-			local_24 = PTR_DAT_800cf6d0;
-			FX_Blood((_SVector *)data, &data->velocity, (_SVector *)&local_28, (int)data->amount, 0x308000, 8);
-			FX_MakeHitFX((_SVector *)data);
-		}
-	}
-	return;
+  puVar4 = (uint *)instance->extraData;
+  if (data == (evFXHitData *)0x0)
+  {
+    uVar5 = puVar4[0x37];
+    if (uVar5 != 0)
+    {
+      iVar3 = (int)*(short *)(puVar4 + 0x4c);
+      if (iVar3 < 0)
+      {
+        iVar3 = iVar3 + 0xfff;
+      }
+      local_18 = FX_GetHealthColor(iVar3 >> 0xc);
+      if (*(uint *)(uVar5 + 0x18) != local_18)
+      {
+        local_28 = *(uint *)(uVar5 + 0x18);
+        bVar1 = (char)local_28 - 4;
+        if (((local_18 & 0xff) < (local_28 & 0xff)) ||
+            (bVar1 = (char)local_28 + 4, (local_28 & 0xff) < (local_18 & 0xff)))
+        {
+          local_28 = local_28 & 0xffffff00 | (uint)bVar1;
+        }
+        local_20._1_1_ = (byte)(local_18 >> 8);
+        cVar2 = local_28._1_1_ - 4;
+        if ((local_20._1_1_ < local_28._1_1_) ||
+            (cVar2 = local_28._1_1_ + 4, local_28._1_1_ < local_20._1_1_))
+        {
+          local_28._0_2_ = CONCAT11(cVar2, (char)local_28);
+          local_28 = local_28 & 0xffff0000 | (uint)(ushort)local_28;
+        }
+        local_20._2_1_ = (byte)(local_18 >> 0x10);
+        cVar2 = local_28._2_1_ - 4;
+        if ((local_20._2_1_ < local_28._2_1_) ||
+            (cVar2 = local_28._2_1_ + 4, local_28._2_1_ < local_20._2_1_))
+        {
+          local_28._0_3_ = CONCAT12(cVar2, (ushort)local_28);
+          local_28 = local_28 & 0xff000000 | (uint)(uint3)local_28;
+        }
+        *(uint *)(uVar5 + 0x18) = local_28;
+        local_20 = local_18;
+      }
+    }
+    if (((puVar4[1] & 1) != 0) && (*(short *)(puVar4 + 0x4c) != 0))
+    {
+      *puVar4 = *puVar4 & 0xffdfffff;
+      *(undefined *)((int)puVar4 + 0x146) = *(undefined *)(puVar4 + 0x52);
+      puVar4[1] = puVar4[1] & 0xfffffffe;
+      MON_StartSpecialFade(instance, 0, 0x14);
+    }
+  }
+  else
+  {
+    if ((puVar4[1] & 1) == 0)
+    {
+      local_28 = DAT_800cf6cc;
+      local_24 = PTR_DAT_800cf6d0;
+      FX_Blood((_SVector *)data, &data->velocity, (_SVector *)&local_28, (int)data->amount, 0x308000, 8);
+      FX_MakeHitFX((_SVector *)data);
+    }
+  }
+  return;
 }
 
 // decompiled code
@@ -281,27 +246,27 @@ void SLUAGH_DamageEffect(_Instance *instance, evFXHitData *data)
 void SLUAGH_Init(_Instance *instance)
 
 {
-	_FXGlowEffect *p_Var1;
-	int iVar2;
-	uint *puVar3;
-	void *pvVar4;
-	long local_18[2];
+  _FXGlowEffect *p_Var1;
+  int iVar2;
+  uint *puVar3;
+  void *pvVar4;
+  long local_18[2];
 
-	puVar3 = (uint *)instance->extraData;
-	iVar2 = (int)*(short *)(puVar3 + 0x4c);
-	pvVar4 = instance->data;
-	if (iVar2 < 0)
-	{
-		iVar2 = iVar2 + 0xfff;
-	}
-	local_18[0] = FX_GetHealthColor(iVar2 >> 0xc);
-	p_Var1 = FX_DoInstanceOneSegmentGlow(instance, (uint) * (byte *)((int)pvVar4 + 0x19), local_18, 1, 0x4b0, 0x68, 0x70);
-	*(_FXGlowEffect **)(puVar3 + 0x37) = p_Var1;
-	MON_DefaultInit(instance);
-	*(undefined2 *)(puVar3 + 0x4d) = 0x2000;
-	puVar3[1] = puVar3[1] & 0xfffffffe;
-	*puVar3 = *puVar3 | 0x2002000;
-	return;
+  puVar3 = (uint *)instance->extraData;
+  iVar2 = (int)*(short *)(puVar3 + 0x4c);
+  pvVar4 = instance->data;
+  if (iVar2 < 0)
+  {
+    iVar2 = iVar2 + 0xfff;
+  }
+  local_18[0] = FX_GetHealthColor(iVar2 >> 0xc);
+  p_Var1 = FX_DoInstanceOneSegmentGlow(instance, (uint) * (byte *)((int)pvVar4 + 0x19), local_18, 1, 0x4b0, 0x68, 0x70);
+  *(_FXGlowEffect **)(puVar3 + 0x37) = p_Var1;
+  MON_DefaultInit(instance);
+  *(undefined2 *)(puVar3 + 0x4d) = 0x2000;
+  puVar3[1] = puVar3[1] & 0xfffffffe;
+  *puVar3 = *puVar3 | 0x2002000;
+  return;
 }
 
 // decompiled code
@@ -325,32 +290,32 @@ void SLUAGH_Init(_Instance *instance)
 void SLUAGH_DeathEntry(_Instance *instance)
 
 {
-	int iVar1;
-	undefined4 local_10;
-	uint *puVar2;
-	undefined4 local_c;
-	undefined4 local_8;
-	undefined4 in_stack_fffffffc;
+  int iVar1;
+  undefined4 local_10;
+  uint *puVar2;
+  undefined4 local_c;
+  undefined4 local_8;
+  undefined4 in_stack_fffffffc;
 
-	puVar2 = (uint *)instance->extraData;
-	FX_StopGlowEffect((_FXGlowEffect *)puVar2[0x37], 0);
-	puVar2[0x37] = 0;
-	if (puVar2[0x31] != 0)
-	{
-		iVar1 = MON_SetUpKnockBack(instance, *(_Instance **)(puVar2[0x31] + 4),
-								   (evMonsterHitData *)puVar2[0x30]);
-		MON_PlayAnim(instance, (MonsterAnim)CONCAT412(in_stack_fffffffc, CONCAT48(local_8, CONCAT44(local_c, local_10))),
-					 (uint)(iVar1 == 0));
-	}
-	*(undefined *)((int)puVar2 + 0x146) = 9;
-	if ((puVar2[1] & 1) == 0)
-	{
-		MON_BirthMana(instance);
-		puVar2[1] = puVar2[1] | 1;
-	}
-	*puVar2 = *puVar2 | 0x200000;
-	MON_StartSpecialFade(instance, 0x800, 0x14);
-	return;
+  puVar2 = (uint *)instance->extraData;
+  FX_StopGlowEffect((_FXGlowEffect *)puVar2[0x37], 0);
+  puVar2[0x37] = 0;
+  if (puVar2[0x31] != 0)
+  {
+    iVar1 = MON_SetUpKnockBack(instance, *(_Instance **)(puVar2[0x31] + 4),
+                               (evMonsterHitData *)puVar2[0x30]);
+    MON_PlayAnim(instance, (MonsterAnim)CONCAT412(in_stack_fffffffc, CONCAT48(local_8, CONCAT44(local_c, local_10))),
+                 (uint)(iVar1 == 0));
+  }
+  *(undefined *)((int)puVar2 + 0x146) = 9;
+  if ((puVar2[1] & 1) == 0)
+  {
+    MON_BirthMana(instance);
+    puVar2[1] = puVar2[1] | 1;
+  }
+  *puVar2 = *puVar2 | 0x200000;
+  MON_StartSpecialFade(instance, 0x800, 0x14);
+  return;
 }
 
 // decompiled code
@@ -383,20 +348,20 @@ void SLUAGH_DeathEntry(_Instance *instance)
 void SLUAGH_Death(_Instance *instance)
 
 {
-	undefined4 local_8;
-	undefined4 local_4;
-	undefined8 uStackX0;
+  undefined4 local_8;
+  undefined4 local_4;
+  undefined8 uStackX0;
 
-	if ((instance->flags2 & 0x10U) != 0)
-	{
-		MON_PlayAnim(instance, (MonsterAnim)CONCAT88(uStackX0, CONCAT44(local_4, local_8)), 0x18);
-	}
-	if ((instance->flags2 & 2U) != 0)
-	{
-		MON_SwitchState(instance, (MonsterState)CONCAT44(local_4, local_8));
-	}
-	MON_DefaultQueueHandler(instance);
-	return;
+  if ((instance->flags2 & 0x10U) != 0)
+  {
+    MON_PlayAnim(instance, (MonsterAnim)CONCAT88(uStackX0, CONCAT44(local_4, local_8)), 0x18);
+  }
+  if ((instance->flags2 & 2U) != 0)
+  {
+    MON_SwitchState(instance, (MonsterState)CONCAT44(local_4, local_8));
+  }
+  MON_DefaultQueueHandler(instance);
+  return;
 }
 
 // decompiled code
@@ -422,22 +387,22 @@ void SLUAGH_Death(_Instance *instance)
 void SLUAGH_AttackEntry(_Instance *instance)
 
 {
-	undefined4 unaff_s0;
-	void *pvVar1;
-	undefined4 unaff_retaddr;
-	undefined8 uStackX0;
+  undefined4 unaff_s0;
+  void *pvVar1;
+  undefined4 unaff_retaddr;
+  undefined8 uStackX0;
 
-	pvVar1 = instance->extraData;
-	if ((*(ushort *)(*(int *)((int)pvVar1 + 0xc4) + 0x16) & 8) == 0)
-	{
-		MON_AttackEntry(instance);
-	}
-	else
-	{
-		MON_PlayAnim(instance, (MonsterAnim)CONCAT88(uStackX0, CONCAT44(unaff_retaddr, unaff_s0)), 0x1e);
-		*(uint *)((int)pvVar1 + 4) = *(uint *)((int)pvVar1 + 4) | 4;
-	}
-	return;
+  pvVar1 = instance->extraData;
+  if ((*(ushort *)(*(int *)((int)pvVar1 + 0xc4) + 0x16) & 8) == 0)
+  {
+    MON_AttackEntry(instance);
+  }
+  else
+  {
+    MON_PlayAnim(instance, (MonsterAnim)CONCAT88(uStackX0, CONCAT44(unaff_retaddr, unaff_s0)), 0x1e);
+    *(uint *)((int)pvVar1 + 4) = *(uint *)((int)pvVar1 + 4) | 4;
+  }
+  return;
 }
 
 // decompiled code
@@ -482,62 +447,62 @@ void SLUAGH_AttackEntry(_Instance *instance)
 void SLUAGH_Attack(_Instance *instance)
 
 {
-	__Event *message;
-	_FXGlowEffect *p_Var1;
-	int Data;
-	void *pvVar2;
-	void *pvVar3;
-	undefined4 local_28;
-	undefined4 local_24;
-	long local_18[2];
+  __Event *message;
+  _FXGlowEffect *p_Var1;
+  int Data;
+  void *pvVar2;
+  void *pvVar3;
+  undefined4 local_28;
+  undefined4 local_24;
+  long local_18[2];
 
-	pvVar3 = instance->extraData;
-	if ((*(uint *)((int)pvVar3 + 4) & 4) == 0)
-	{
-		MON_Attack(instance);
-		return;
-	}
-	if ((instance->flags2 & 0x10U) == 0)
-		goto LAB_8008d590;
-	do
-	{
-		MON_SwitchState(instance, (MonsterState)CONCAT44(local_24, local_28));
-	LAB_8008d590:
-		do
-		{
-			while (true)
-			{
-				message = DeMessageQueue((__MessageQueue *)((int)pvVar3 + 8));
-				if (message == (__Event *)0x0)
-				{
-					if ((instance->currentMainState == 6) && (*(int *)((int)pvVar3 + 0xc4) != 0))
-					{
-						Data = SetMonsterSoulSuckData(instance, (int)(instance->position).x, (int)(instance->position).y,
-													  (int)(instance->position).z);
-						INSTANCE_Post(*(_Instance **)(*(int *)((int)pvVar3 + 0xc4) + 4), 0x1000009, Data);
-						return;
-					}
-					*(uint *)((int)pvVar3 + 4) = *(uint *)((int)pvVar3 + 4) & 0xfffffffb;
-					return;
-				}
-				if (message->ID == 0x1000009)
-					break;
-				MON_DefaultMessageHandler(instance, message);
-			}
-		} while (*(_Instance **)&((_Instance *)message->Data)->node == gameTrackerX.playerInstance);
-		if (*(int *)((int)pvVar3 + 0xdc) == 0)
-		{
-			Data = (int)*(short *)((int)pvVar3 + 0x130);
-			pvVar2 = instance->data;
-			if (Data < 0)
-			{
-				Data = Data + 0xfff;
-			}
-			local_18[0] = FX_GetHealthColor(Data >> 0xc);
-			local_28 = 0x4b0;
-			local_24 = 0x68;
-			p_Var1 = FX_DoInstanceOneSegmentGlow(instance, (uint) * (byte *)((int)pvVar2 + 0x19), local_18, 1, 0x4b0, 0x68, 0x70);
-			*(_FXGlowEffect **)((int)pvVar3 + 0xdc) = p_Var1;
-		}
-	} while (true);
+  pvVar3 = instance->extraData;
+  if ((*(uint *)((int)pvVar3 + 4) & 4) == 0)
+  {
+    MON_Attack(instance);
+    return;
+  }
+  if ((instance->flags2 & 0x10U) == 0)
+    goto LAB_8008d590;
+  do
+  {
+    MON_SwitchState(instance, (MonsterState)CONCAT44(local_24, local_28));
+  LAB_8008d590:
+    do
+    {
+      while (true)
+      {
+        message = DeMessageQueue((__MessageQueue *)((int)pvVar3 + 8));
+        if (message == (__Event *)0x0)
+        {
+          if ((instance->currentMainState == 6) && (*(int *)((int)pvVar3 + 0xc4) != 0))
+          {
+            Data = SetMonsterSoulSuckData(instance, (int)(instance->position).x, (int)(instance->position).y,
+                                          (int)(instance->position).z);
+            INSTANCE_Post(*(_Instance **)(*(int *)((int)pvVar3 + 0xc4) + 4), 0x1000009, Data);
+            return;
+          }
+          *(uint *)((int)pvVar3 + 4) = *(uint *)((int)pvVar3 + 4) & 0xfffffffb;
+          return;
+        }
+        if (message->ID == 0x1000009)
+          break;
+        MON_DefaultMessageHandler(instance, message);
+      }
+    } while (*(_Instance **)&((_Instance *)message->Data)->node == gameTrackerX.playerInstance);
+    if (*(int *)((int)pvVar3 + 0xdc) == 0)
+    {
+      Data = (int)*(short *)((int)pvVar3 + 0x130);
+      pvVar2 = instance->data;
+      if (Data < 0)
+      {
+        Data = Data + 0xfff;
+      }
+      local_18[0] = FX_GetHealthColor(Data >> 0xc);
+      local_28 = 0x4b0;
+      local_24 = 0x68;
+      p_Var1 = FX_DoInstanceOneSegmentGlow(instance, (uint) * (byte *)((int)pvVar2 + 0x19), local_18, 1, 0x4b0, 0x68, 0x70);
+      *(_FXGlowEffect **)((int)pvVar3 + 0xdc) = p_Var1;
+    }
+  } while (true);
 }

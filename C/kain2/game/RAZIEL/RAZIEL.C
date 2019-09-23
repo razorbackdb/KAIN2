@@ -5,276 +5,32 @@
 AlgoControlFlag = 0x0;
 // int @0x800CF880, len = 0x00000004
 BlockCount = 0x0;
-// __CannedSound[4] @0x800CF808, len = 0x00000050
+// __CannedSound @0x800CF808, len = 0x00000014
 cannedSound =
     {
-        // __CannedSound @0x800CF808, len = 0x00000014
-        {
-            // short @0x800CF808, len = 0x00000002
-            .bank = 0x0,
-            // short @0x800CF80A, len = 0x00000002
-            .sound = 0x33,
-            // short @0x800CF80C, len = 0x00000002
-            .startPitch = -0x64,
-            // short @0x800CF80E, len = 0x00000002
-            .endPitch = -0x64,
-            // short @0x800CF810, len = 0x00000002
-            .startVolume = 0x78,
-            // short @0x800CF812, len = 0x00000002
-            .endVolume = 0x0,
-            // long @0x800CF814, len = 0x00000004
-            .time = 0x5a000,
-            // long @0x800CF818, len = 0x00000004
-            .distance = 0xdac},
-        // __CannedSound @0x800CF81C, len = 0x00000014
-        {
-            // short @0x800CF81C, len = 0x00000002
-            .bank = 0x0,
-            // short @0x800CF81E, len = 0x00000002
-            .sound = 0x161,
-            // short @0x800CF820, len = 0x00000002
-            .startPitch = 0x0,
-            // short @0x800CF822, len = 0x00000002
-            .endPitch = 0x0,
-            // short @0x800CF824, len = 0x00000002
-            .startVolume = 0x50,
-            // short @0x800CF826, len = 0x00000002
-            .endVolume = 0x0,
-            // long @0x800CF828, len = 0x00000004
-            .time = 0x5a000,
-            // long @0x800CF82C, len = 0x00000004
-            .distance = 0xdac},
-        // __CannedSound @0x800CF830, len = 0x00000014
-        {
-            // short @0x800CF830, len = 0x00000002
-            .bank = 0x0,
-            // short @0x800CF832, len = 0x00000002
-            .sound = 0x8,
-            // short @0x800CF834, len = 0x00000002
-            .startPitch = -0x104,
-            // short @0x800CF836, len = 0x00000002
-            .endPitch = -0x104,
-            // short @0x800CF838, len = 0x00000002
-            .startVolume = 0x5a,
-            // short @0x800CF83A, len = 0x00000002
-            .endVolume = 0x5a,
-            // long @0x800CF83C, len = 0x00000004
-            .time = 0x0,
-            // long @0x800CF840, len = 0x00000004
-            .distance = 0xdac},
-        // __CannedSound @0x800CF844, len = 0x00000014
-        {
-            // short @0x800CF844, len = 0x00000002
-            .bank = 0x0,
-            // short @0x800CF846, len = 0x00000002
-            .sound = 0x1a2,
-            // short @0x800CF848, len = 0x00000002
-            .startPitch = -0xc8,
-            // short @0x800CF84A, len = 0x00000002
-            .endPitch = -0xc8,
-            // short @0x800CF84C, len = 0x00000002
-            .startVolume = 0x5f,
-            // short @0x800CF84E, len = 0x00000002
-            .endVolume = 0x5f,
-            // long @0x800CF850, len = 0x00000004
-            .time = 0x0,
-            // long @0x800CF854, len = 0x00000004
-            .distance = 0xdac}};
-// __FitPoint[32] @0x800D5804, len = 0x00000080
+        // short @0x800CF808, len = 0x00000002
+        .bank = 0x0,
+        // short @0x800CF80A, len = 0x00000002
+        .sound = 0x33,
+        // short @0x800CF80C, len = 0x00000002
+        .startPitch = -0x64,
+        // short @0x800CF80E, len = 0x00000002
+        .endPitch = -0x64,
+        // short @0x800CF810, len = 0x00000002
+        .startVolume = 0x78,
+        // short @0x800CF812, len = 0x00000002
+        .endVolume = 0x0,
+        // long @0x800CF814, len = 0x00000004
+        .time = 0x5a000,
+        // long @0x800CF818, len = 0x00000004
+        .distance = 0xdac};
+// __FitPoint @0x800D5804, len = 0x00000004
 constrictData =
     {
-        // __FitPoint @0x800D5804, len = 0x00000004
-        {
-            // short @0x800D5804, len = 0x00000002
-            .x = null,
-            // short @0x800D5806, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D5808, len = 0x00000004
-        {
-            // short @0x800D5808, len = 0x00000002
-            .x = null,
-            // short @0x800D580A, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D580C, len = 0x00000004
-        {
-            // short @0x800D580C, len = 0x00000002
-            .x = null,
-            // short @0x800D580E, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D5810, len = 0x00000004
-        {
-            // short @0x800D5810, len = 0x00000002
-            .x = null,
-            // short @0x800D5812, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D5814, len = 0x00000004
-        {
-            // short @0x800D5814, len = 0x00000002
-            .x = null,
-            // short @0x800D5816, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D5818, len = 0x00000004
-        {
-            // short @0x800D5818, len = 0x00000002
-            .x = null,
-            // short @0x800D581A, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D581C, len = 0x00000004
-        {
-            // short @0x800D581C, len = 0x00000002
-            .x = null,
-            // short @0x800D581E, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D5820, len = 0x00000004
-        {
-            // short @0x800D5820, len = 0x00000002
-            .x = null,
-            // short @0x800D5822, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D5824, len = 0x00000004
-        {
-            // short @0x800D5824, len = 0x00000002
-            .x = null,
-            // short @0x800D5826, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D5828, len = 0x00000004
-        {
-            // short @0x800D5828, len = 0x00000002
-            .x = null,
-            // short @0x800D582A, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D582C, len = 0x00000004
-        {
-            // short @0x800D582C, len = 0x00000002
-            .x = null,
-            // short @0x800D582E, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D5830, len = 0x00000004
-        {
-            // short @0x800D5830, len = 0x00000002
-            .x = null,
-            // short @0x800D5832, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D5834, len = 0x00000004
-        {
-            // short @0x800D5834, len = 0x00000002
-            .x = null,
-            // short @0x800D5836, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D5838, len = 0x00000004
-        {
-            // short @0x800D5838, len = 0x00000002
-            .x = null,
-            // short @0x800D583A, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D583C, len = 0x00000004
-        {
-            // short @0x800D583C, len = 0x00000002
-            .x = null,
-            // short @0x800D583E, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D5840, len = 0x00000004
-        {
-            // short @0x800D5840, len = 0x00000002
-            .x = null,
-            // short @0x800D5842, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D5844, len = 0x00000004
-        {
-            // short @0x800D5844, len = 0x00000002
-            .x = null,
-            // short @0x800D5846, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D5848, len = 0x00000004
-        {
-            // short @0x800D5848, len = 0x00000002
-            .x = null,
-            // short @0x800D584A, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D584C, len = 0x00000004
-        {
-            // short @0x800D584C, len = 0x00000002
-            .x = null,
-            // short @0x800D584E, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D5850, len = 0x00000004
-        {
-            // short @0x800D5850, len = 0x00000002
-            .x = null,
-            // short @0x800D5852, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D5854, len = 0x00000004
-        {
-            // short @0x800D5854, len = 0x00000002
-            .x = null,
-            // short @0x800D5856, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D5858, len = 0x00000004
-        {
-            // short @0x800D5858, len = 0x00000002
-            .x = null,
-            // short @0x800D585A, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D585C, len = 0x00000004
-        {
-            // short @0x800D585C, len = 0x00000002
-            .x = null,
-            // short @0x800D585E, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D5860, len = 0x00000004
-        {
-            // short @0x800D5860, len = 0x00000002
-            .x = null,
-            // short @0x800D5862, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D5864, len = 0x00000004
-        {
-            // short @0x800D5864, len = 0x00000002
-            .x = null,
-            // short @0x800D5866, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D5868, len = 0x00000004
-        {
-            // short @0x800D5868, len = 0x00000002
-            .x = null,
-            // short @0x800D586A, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D586C, len = 0x00000004
-        {
-            // short @0x800D586C, len = 0x00000002
-            .x = null,
-            // short @0x800D586E, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D5870, len = 0x00000004
-        {
-            // short @0x800D5870, len = 0x00000002
-            .x = null,
-            // short @0x800D5872, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D5874, len = 0x00000004
-        {
-            // short @0x800D5874, len = 0x00000002
-            .x = null,
-            // short @0x800D5876, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D5878, len = 0x00000004
-        {
-            // short @0x800D5878, len = 0x00000002
-            .x = null,
-            // short @0x800D587A, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D587C, len = 0x00000004
-        {
-            // short @0x800D587C, len = 0x00000002
-            .x = null,
-            // short @0x800D587E, len = 0x00000002
-            .y = null},
-        // __FitPoint @0x800D5880, len = 0x00000004
-        {
-            // short @0x800D5880, len = 0x00000002
-            .x = null,
-            // short @0x800D5882, len = 0x00000002
-            .y = null}};
+        // short @0x800D5804, len = 0x00000002
+        .x = null,
+        // short @0x800D5806, len = 0x00000002
+        .y = null};
 // __razController @0x800CF7A8, len = 0x00000004
 controllerList =
     {
@@ -282,142 +38,17 @@ controllerList =
         .segment = 0x0,
         // ushort @0x800CF7AA, len = 0x00000002
         .type = 0x26};
-// ushort[19] @0x800CF780, len = 0x00000026
-cowlList =
-    {
-        // ushort @0x800CF780, len = 0x00000002
-        0x153,
-        // ushort @0x800CF782, len = 0x00000002
-        0x154,
-        // ushort @0x800CF784, len = 0x00000002
-        0x155,
-        // ushort @0x800CF786, len = 0x00000002
-        0x3a,
-        // ushort @0x800CF788, len = 0x00000002
-        0x3b,
-        // ushort @0x800CF78A, len = 0x00000002
-        0x3c,
-        // ushort @0x800CF78C, len = 0x00000002
-        0x3d,
-        // ushort @0x800CF78E, len = 0x00000002
-        0x55,
-        // ushort @0x800CF790, len = 0x00000002
-        0x56,
-        // ushort @0x800CF792, len = 0x00000002
-        0x57,
-        // ushort @0x800CF794, len = 0x00000002
-        0x58,
-        // ushort @0x800CF796, len = 0x00000002
-        0xeb,
-        // ushort @0x800CF798, len = 0x00000002
-        0xec,
-        // ushort @0x800CF79A, len = 0x00000002
-        0xed,
-        // ushort @0x800CF79C, len = 0x00000002
-        0xee,
-        // ushort @0x800CF79E, len = 0x00000002
-        0x1c6,
-        // ushort @0x800CF7A0, len = 0x00000002
-        0x1c7,
-        // ushort @0x800CF7A2, len = 0x00000002
-        0x1c8,
-        // ushort @0x800CF7A4, len = 0x00000002
-        0x1c9};
+// ushort @0x800CF780, len = 0x00000002
+cowlList = 0x153;
 // __Idle * * @0x800CF874, len = 0x00000004
 currentIdleList = 00000000;
-// __EngagedInstance[15] @0x800D5924, len = 0x00000078
+// __EngagedInstance @0x800D5924, len = 0x00000008
 EngagedList =
     {
-        // __EngagedInstance @0x800D5924, len = 0x00000008
-        {
-            // _Instance * @0x800D5924, len = 0x00000004
-            .instance = null,
-            // ulong @0x800D5928, len = 0x00000004
-            .distance = null},
-        // __EngagedInstance @0x800D592C, len = 0x00000008
-        {
-            // _Instance * @0x800D592C, len = 0x00000004
-            .instance = null,
-            // ulong @0x800D5930, len = 0x00000004
-            .distance = null},
-        // __EngagedInstance @0x800D5934, len = 0x00000008
-        {
-            // _Instance * @0x800D5934, len = 0x00000004
-            .instance = null,
-            // ulong @0x800D5938, len = 0x00000004
-            .distance = null},
-        // __EngagedInstance @0x800D593C, len = 0x00000008
-        {
-            // _Instance * @0x800D593C, len = 0x00000004
-            .instance = null,
-            // ulong @0x800D5940, len = 0x00000004
-            .distance = null},
-        // __EngagedInstance @0x800D5944, len = 0x00000008
-        {
-            // _Instance * @0x800D5944, len = 0x00000004
-            .instance = null,
-            // ulong @0x800D5948, len = 0x00000004
-            .distance = null},
-        // __EngagedInstance @0x800D594C, len = 0x00000008
-        {
-            // _Instance * @0x800D594C, len = 0x00000004
-            .instance = null,
-            // ulong @0x800D5950, len = 0x00000004
-            .distance = null},
-        // __EngagedInstance @0x800D5954, len = 0x00000008
-        {
-            // _Instance * @0x800D5954, len = 0x00000004
-            .instance = null,
-            // ulong @0x800D5958, len = 0x00000004
-            .distance = null},
-        // __EngagedInstance @0x800D595C, len = 0x00000008
-        {
-            // _Instance * @0x800D595C, len = 0x00000004
-            .instance = null,
-            // ulong @0x800D5960, len = 0x00000004
-            .distance = null},
-        // __EngagedInstance @0x800D5964, len = 0x00000008
-        {
-            // _Instance * @0x800D5964, len = 0x00000004
-            .instance = null,
-            // ulong @0x800D5968, len = 0x00000004
-            .distance = null},
-        // __EngagedInstance @0x800D596C, len = 0x00000008
-        {
-            // _Instance * @0x800D596C, len = 0x00000004
-            .instance = null,
-            // ulong @0x800D5970, len = 0x00000004
-            .distance = null},
-        // __EngagedInstance @0x800D5974, len = 0x00000008
-        {
-            // _Instance * @0x800D5974, len = 0x00000004
-            .instance = null,
-            // ulong @0x800D5978, len = 0x00000004
-            .distance = null},
-        // __EngagedInstance @0x800D597C, len = 0x00000008
-        {
-            // _Instance * @0x800D597C, len = 0x00000004
-            .instance = null,
-            // ulong @0x800D5980, len = 0x00000004
-            .distance = null},
-        // __EngagedInstance @0x800D5984, len = 0x00000008
-        {
-            // _Instance * @0x800D5984, len = 0x00000004
-            .instance = null,
-            // ulong @0x800D5988, len = 0x00000004
-            .distance = null},
-        // __EngagedInstance @0x800D598C, len = 0x00000008
-        {
-            // _Instance * @0x800D598C, len = 0x00000004
-            .instance = null,
-            // ulong @0x800D5990, len = 0x00000004
-            .distance = null},
-        // __EngagedInstance @0x800D5994, len = 0x00000008
-        {
-            // _Instance * @0x800D5994, len = 0x00000004
-            .instance = null,
-            // ulong @0x800D5998, len = 0x00000004
-            .distance = null}};
+        // _Instance * @0x800D5924, len = 0x00000004
+        .instance = null,
+        // ulong @0x800D5928, len = 0x00000004
+        .distance = null};
 // __Force @0x800D58C4, len = 0x00000014
 ExternalForces =
     {
@@ -466,17 +97,8 @@ Norm =
 PadData = null;
 // int @0x800D5914, len = 0x00000004
 PhysicsMode = null;
-// uchar[4] @0x800CF77C, len = 0x00000004
-PickupList =
-    {
-        // uchar @0x800CF77C, len = 0x00000001
-        0x00,
-        // uchar @0x800CF77D, len = 0x00000001
-        0x0B,
-        // uchar @0x800CF77E, len = 0x00000001
-        0x0B,
-        // uchar @0x800CF77F, len = 0x00000001
-        0x61};
+// uchar @0x800CF77C, len = 0x00000001
+PickupList = 0x00;
 // RazielData * @0x800D57D0, len = 0x00000004
 PlayerData = null;
 // __Player @0x800D5214, len = 0x000005BC
@@ -1734,8 +1356,8 @@ void InitStates(_Instance *PlayerInstance)
   Raziel.blankPad = 0;
   (PlayerInstance->rotation).y = 0;
   (PlayerInstance->rotation).x = 0;
-  Raziel.Senses.EngagedList = EngagedList;
-  Raziel.constrictData = constrictData;
+  Raziel.Senses.EngagedList = &EngagedList;
+  Raziel.constrictData = &constrictData;
   Raziel.dropOffHeight = 0x100;
   Raziel.Senses.EngagedMask = 0;
   Raziel.idleInstance = (_Instance *)0x0;
@@ -2255,7 +1877,7 @@ void StateHandlerIdle(__CharacterState *In, int CurrentSection, int Data)
               {
                 if (puVar5 != (undefined *)0x10000000)
                   goto LAB_800a8e04;
-                if ((*PadData & LONG_ARRAY_800cf57c[0]) != 0)
+                if ((*PadData & LONG_800cf57c) != 0)
                 {
                 LAB_800a8b10:
                   StateSwitchStateData(In, CurrentSection, StateHandlerMove, 3);
@@ -3292,7 +2914,7 @@ void StateInitStartMove(__CharacterState *In, int CurrentSection, int Frame)
 {
   int iVar1;
 
-  if ((*PadData & LONG_ARRAY_800cf57c[0]) != 0)
+  if ((*PadData & LONG_800cf57c) != 0)
   {
     StateSwitchStateData(In, CurrentSection, StateHandlerMove, 3);
   }
@@ -3596,7 +3218,7 @@ void StateInitMove(__CharacterState *In, int CurrentSection, int Frames)
   uint uVar1;
   int iVar2;
 
-  if ((*PadData & LONG_ARRAY_800cf57c[0]) == 0)
+  if ((*PadData & LONG_800cf57c) == 0)
   {
     if ((*PadData & LONG_800cf578) == 0)
     {
@@ -3799,7 +3421,7 @@ void StateHandlerMove(__CharacterState *In, int CurrentSection, int Data)
           {
             if (puVar5 == (undefined *)0x80000000)
             {
-              if ((*PadData & LONG_ARRAY_800cf57c[0]) == 0)
+              if ((*PadData & LONG_800cf57c) == 0)
               {
                 if (pp_Var2[0x48] == (_Instance *)0x44)
                 {
@@ -4213,7 +3835,7 @@ void StateHandlerCompression(__CharacterState *In, int CurrentSection, int Data)
             if (CurrentSection == 0)
             {
               ControlFlag = 0x111;
-              SetExternalForce(__Force_ARRAY_800d58ec, 0, 0, 0, 1, 0);
+              SetExternalForce(&__Force_800d58ec, 0, 0, 0, 1, 0);
               In->SectionList[0].Data1 = 0;
               PhysicsMode = 3;
               Raziel.movementMinRate = 0;
@@ -7092,7 +6714,7 @@ void StateHandlerAutoFace(__CharacterState *In, int CurrentSection, int Data)
                 if (puVar3 != &DAT_00100001)
                   goto LAB_800af7f0;
                 ControlFlag = (int)&DAT_0001210b;
-                if ((*PadData & LONG_ARRAY_800cf57c[0]) == 0)
+                if ((*PadData & LONG_800cf57c) == 0)
                 {
                   uVar4 = 0x2000001;
                 }
@@ -8488,20 +8110,20 @@ long RazielAnimCallback(_G2Anim_Type *anim, int sectionID, _G2AnimCallbackMsg_En
       {
         iVar4 = (int)*(short *)(messageDataB + 2);
         razSetupSoundRamp(gameTrackerX.playerInstance,
-                          (_SoundRamp *)(&Raziel.soundHandle + (int)cannedSound[iVar4].bank * 6),
-                          (int)cannedSound[iVar4].sound, (int)cannedSound[iVar4].startPitch,
-                          (int)cannedSound[iVar4].endPitch,
-                          (int)cannedSound[(int)*(short *)(messageDataB + 2)].startVolume,
-                          (int)cannedSound[(int)*(short *)(messageDataB + 2)].endVolume,
-                          cannedSound[(int)*(short *)(messageDataB + 2)].time,
-                          cannedSound[(int)*(short *)(messageDataB + 2)].distance);
+                          (_SoundRamp *)(&Raziel.soundHandle + (int)(&cannedSound)[iVar4].bank * 6),
+                          (int)(&cannedSound)[iVar4].sound, (int)(&cannedSound)[iVar4].startPitch,
+                          (int)(&cannedSound)[iVar4].endPitch,
+                          (int)(&cannedSound)[(int)*(short *)(messageDataB + 2)].startVolume,
+                          (int)(&cannedSound)[(int)*(short *)(messageDataB + 2)].endVolume,
+                          (&cannedSound)[(int)*(short *)(messageDataB + 2)].time,
+                          (&cannedSound)[(int)*(short *)(messageDataB + 2)].distance);
         iVar4 = (int)*(short *)(messageDataB + 2);
-        if (cannedSound[iVar4].bank == 0)
+        if ((&cannedSound)[iVar4].bank == 0)
         {
           Raziel.effectsFlags = Raziel.effectsFlags | 4;
           iVar4 = (int)*(short *)(messageDataB + 2);
         }
-        if (cannedSound[iVar4].bank == 1)
+        if ((&cannedSound)[iVar4].bank == 1)
         {
           Raziel.effectsFlags = Raziel.effectsFlags | 8;
         }
@@ -8734,7 +8356,7 @@ ulong RazielQuery(_Instance *instance, ulong Query)
     break;
   case 0x22:
     p_Var3 = Raziel.Senses.LastAutoFace;
-    if (((*PadData & LONG_ARRAY_800cf57c[0]) != 0) &&
+    if (((*PadData & LONG_800cf57c) != 0) &&
         (p_Var3 = (_Instance *)0x0, (Raziel.Senses.EngagedMask & 0x40) != 0))
     {
       p_Var3 = Raziel.Senses.EngagedList[6].instance;
@@ -9497,7 +9119,7 @@ int SetStates(_Instance *instance, GameTracker *GT, long *controlCommand, int An
     PhysicsMode = 3;
   }
   ProcessPhysics(&Raziel, &Raziel.State, 0, PhysicsMode);
-  if ((*PadData & LONG_ARRAY_800cf57c[0]) == 0)
+  if ((*PadData & LONG_800cf57c) == 0)
   {
     Raziel.nothingCounter = Raziel.nothingCounter + 1;
     if (Raziel.nothingCounter < 6)
@@ -10387,9 +10009,9 @@ void ProcessSpecialAbilities(_Instance *instance)
     }
     if (Raziel.soulReaver == (_Instance *)0x0)
     {
-      if (ObjectAccess_ARRAY_800c878c[20].object != (void *)0x0)
+      if (ObjectAccess_800c882c.object != (void *)0x0)
       {
-        soulReaver = INSTANCE_BirthObject(instance, (Object *)ObjectAccess_ARRAY_800c878c[20].object, 0);
+        soulReaver = INSTANCE_BirthObject(instance, (Object *)ObjectAccess_800c882c.object, 0);
         razReaverPickup(instance, soulReaver);
         RAZIEL_DebugHealthFillUp();
       }
@@ -10489,9 +10111,9 @@ int GetControllerMessages(long *controlCommand)
   LAB_800b3650:
     EnMessageQueueData(&Raziel.padCommands, ID, 0);
   }
-  if ((controlCommand[1] & LONG_ARRAY_800cf57c[0]) == 0)
+  if ((controlCommand[1] & LONG_800cf57c) == 0)
   {
-    if ((controlCommand[2] & LONG_ARRAY_800cf57c[0]) != 0)
+    if ((controlCommand[2] & LONG_800cf57c) != 0)
     {
       ID_00 = (undefined *)0x20000004;
       goto LAB_800b3698;
@@ -11039,8 +10661,8 @@ void InitGlyphSystem(_Instance *instance)
 {
   _Instance *p_Var1;
 
-  if ((ObjectAccess_ARRAY_800c878c[18].object != (void *)0x0) &&
-      (p_Var1 = INSTANCE_BirthObject(instance, (Object *)ObjectAccess_ARRAY_800c878c[18].object, 0),
+  if ((ObjectAccess_800c881c.object != (void *)0x0) &&
+      (p_Var1 = INSTANCE_BirthObject(instance, (Object *)ObjectAccess_800c881c.object, 0),
        p_Var1 != (_Instance *)0x0))
   {
     Raziel.GlyphSystem = p_Var1;

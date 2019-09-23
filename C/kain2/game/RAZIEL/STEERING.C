@@ -415,7 +415,7 @@ int ProcessMovement(_Instance *instance, long *controlCommand, GameTracker *GT)
       rc = SteerAutoFace(instance, controlCommand);
       return rc;
     }
-    if ((*PadData & LONG_ARRAY_800cf57c[0]) == 0)
+    if ((*PadData & LONG_800cf57c) == 0)
     {
       return 0;
     }
@@ -481,7 +481,7 @@ int ProcessMovement(_Instance *instance, long *controlCommand, GameTracker *GT)
     }
     break;
   case 0xe:
-    if (((*PadData & LONG_ARRAY_800cf57c[0]) != 0) && ((Raziel.Senses.EngagedMask & 0x40) != 0))
+    if (((*PadData & LONG_800cf57c) != 0) && ((Raziel.Senses.EngagedMask & 0x40) != 0))
     {
       destination = MATH3D_AngleFromPosToPos(&instance->position,
                                              &(Raziel.Senses.EngagedList[6].instance)->position);

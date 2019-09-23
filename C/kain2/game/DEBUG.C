@@ -60,46 +60,17 @@ cem_x_base = 0x28;
 cem_y_base = 0x14;
 // long @0x800CDB44, len = 0x00000004
 cheatCodeLastCommand = 0x0;
-// long[2] @0x800CDB48, len = 0x00000008
-CheatKeyMap =
-	{
-		0x4,
-		0x8};
+// long @0x800CDB48, len = 0x00000004
+CheatKeyMap = 0x4;
 // DebugMenuLine * @0x800CDB3C, len = 0x00000004
 currentMenu = &standardMenu;
-// debug_dispatch_t[5] @0x800C84D8, len = 0x00000028
+// debug_dispatch_t @0x800C84D8, len = 0x00000008
 debug_dispatch_table =
 	{
-		// debug_dispatch_t @0x800C84D8, len = 0x00000008
-		{
-			// DEBUG_LINE_TYPE @0x800C84D8, len = 0x00000004
-			.type = 0x0,
-			// _func_18 * @0x800C84DC, len = 0x00000004
-			.fn = &handle_line_type_bit},
-		// debug_dispatch_t @0x800C84E0, len = 0x00000008
-		{
-			// DEBUG_LINE_TYPE @0x800C84E0, len = 0x00000004
-			.type = 0x1,
-			// _func_18 * @0x800C84E4, len = 0x00000004
-			.fn = &handle_line_type_long},
-		// debug_dispatch_t @0x800C84E8, len = 0x00000008
-		{
-			// DEBUG_LINE_TYPE @0x800C84E8, len = 0x00000004
-			.type = 0x2,
-			// _func_18 * @0x800C84EC, len = 0x00000004
-			.fn = &handle_line_type_action},
-		// debug_dispatch_t @0x800C84F0, len = 0x00000008
-		{
-			// DEBUG_LINE_TYPE @0x800C84F0, len = 0x00000004
-			.type = 0x3,
-			// _func_18 * @0x800C84F4, len = 0x00000004
-			.fn = &handle_line_type_action_with_line},
-		// debug_dispatch_t @0x800C84F8, len = 0x00000008
-		{
-			// DEBUG_LINE_TYPE @0x800C84F8, len = 0x00000004
-			.type = 0x4,
-			// _func_18 * @0x800C84FC, len = 0x00000004
-			.fn = &handle_line_type_menu}};
+		// DEBUG_LINE_TYPE @0x800C84D8, len = 0x00000004
+		.type = 0x0,
+		// _func_18 * @0x800C84DC, len = 0x00000004
+		.fn = &handle_line_type_bit};
 // DebugMenuLine @0x800CFBF4, len = 0x00000018
 debugForgedAbilitiesMenu =
 	{
@@ -237,768 +208,40 @@ fogMenu =
 		.var_address = 00000000,
 		// long @0x800CFC6C, len = 0x00000004
 		.bit_mask = 0x0};
-// GameCheat[23] @0x800CDB70, len = 0x00000170
+// GameCheat @0x800CDB70, len = 0x00000010
 GameCheats =
 	{
-		// GameCheat @0x800CDB70, len = 0x00000010
-		{
-			// uchar[12] @0x800CDB70, len = 0x0000000C
-			.cheatKeys =
-				{
-					// uchar @0x800CDB70, len = 0x00000001
-					0x02,
-					// uchar @0x800CDB71, len = 0x00000001
-					0x04,
-					// uchar @0x800CDB72, len = 0x00000001
-					0x07,
-					// uchar @0x800CDB73, len = 0x00000001
-					0x01,
-					// uchar @0x800CDB74, len = 0x00000001
-					0x01,
-					// uchar @0x800CDB75, len = 0x00000001
-					0x02,
-					// uchar @0x800CDB76, len = 0x00000001
-					0x02,
-					// uchar @0x800CDB77, len = 0x00000001
-					0x00,
-					// uchar @0x800CDB78, len = 0x00000001
-					0x04,
-					// uchar @0x800CDB79, len = 0x00000001
-					0x02,
-					// uchar @0x800CDB7A, len = 0x00000001
-					0x01,
-					// uchar @0x800CDB7B, len = 0x00000001
-					0x00},
-			// short @0x800CDB7C, len = 0x00000002
-			.cheatLen = 0xb,
-			// short @0x800CDB7E, len = 0x00000002
-			.cheatStage = 0x0},
-		// GameCheat @0x800CDB80, len = 0x00000010
-		{
-			// uchar[12] @0x800CDB80, len = 0x0000000C
-			.cheatKeys =
-				{
-					// uchar @0x800CDB80, len = 0x00000001
-					0x03,
-					// uchar @0x800CDB81, len = 0x00000001
-					0x03,
-					// uchar @0x800CDB82, len = 0x00000001
-					0x02,
-					// uchar @0x800CDB83, len = 0x00000001
-					0x01,
-					// uchar @0x800CDB84, len = 0x00000001
-					0x01,
-					// uchar @0x800CDB85, len = 0x00000001
-					0x00,
-					// uchar @0x800CDB86, len = 0x00000001
-					0x05,
-					// uchar @0x800CDB87, len = 0x00000001
-					0x01,
-					// uchar @0x800CDB88, len = 0x00000001
-					0x00,
-					// uchar @0x800CDB89, len = 0x00000001
-					0x02,
-					// uchar @0x800CDB8A, len = 0x00000001
-					0x00,
-					// uchar @0x800CDB8B, len = 0x00000001
-					0x00},
-			// short @0x800CDB8C, len = 0x00000002
-			.cheatLen = 0xa,
-			// short @0x800CDB8E, len = 0x00000002
-			.cheatStage = 0x0},
-		// GameCheat @0x800CDB90, len = 0x00000010
-		{
-			// uchar[12] @0x800CDB90, len = 0x0000000C
-			.cheatKeys =
-				{
-					// uchar @0x800CDB90, len = 0x00000001
-					0x02,
-					// uchar @0x800CDB91, len = 0x00000001
-					0x03,
-					// uchar @0x800CDB92, len = 0x00000001
-					0x01,
-					// uchar @0x800CDB93, len = 0x00000001
-					0x03,
-					// uchar @0x800CDB94, len = 0x00000001
-					0x02,
-					// uchar @0x800CDB95, len = 0x00000001
-					0x00,
-					// uchar @0x800CDB96, len = 0x00000001
-					0x05,
-					// uchar @0x800CDB97, len = 0x00000001
-					0x01,
-					// uchar @0x800CDB98, len = 0x00000001
-					0x02,
-					// uchar @0x800CDB99, len = 0x00000001
-					0x00,
-					// uchar @0x800CDB9A, len = 0x00000001
-					0x00,
-					// uchar @0x800CDB9B, len = 0x00000001
-					0x00},
-			// short @0x800CDB9C, len = 0x00000002
-			.cheatLen = 0x9,
-			// short @0x800CDB9E, len = 0x00000002
-			.cheatStage = 0x0},
-		// GameCheat @0x800CDBA0, len = 0x00000010
-		{
-			// uchar[12] @0x800CDBA0, len = 0x0000000C
-			.cheatKeys =
-				{
-					// uchar @0x800CDBA0, len = 0x00000001
-					0x06,
-					// uchar @0x800CDBA1, len = 0x00000001
-					0x01,
-					// uchar @0x800CDBA2, len = 0x00000001
-					0x03,
-					// uchar @0x800CDBA3, len = 0x00000001
-					0x03,
-					// uchar @0x800CDBA4, len = 0x00000001
-					0x04,
-					// uchar @0x800CDBA5, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBA6, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBA7, len = 0x00000001
-					0x01,
-					// uchar @0x800CDBA8, len = 0x00000001
-					0x03,
-					// uchar @0x800CDBA9, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBAA, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBAB, len = 0x00000001
-					0x00},
-			// short @0x800CDBAC, len = 0x00000002
-			.cheatLen = 0x9,
-			// short @0x800CDBAE, len = 0x00000002
-			.cheatStage = 0x0},
-		// GameCheat @0x800CDBB0, len = 0x00000010
-		{
-			// uchar[12] @0x800CDBB0, len = 0x0000000C
-			.cheatKeys =
-				{
-					// uchar @0x800CDBB0, len = 0x00000001
-					0x02,
-					// uchar @0x800CDBB1, len = 0x00000001
-					0x03,
-					// uchar @0x800CDBB2, len = 0x00000001
-					0x01,
-					// uchar @0x800CDBB3, len = 0x00000001
-					0x01,
-					// uchar @0x800CDBB4, len = 0x00000001
-					0x05,
-					// uchar @0x800CDBB5, len = 0x00000001
-					0x03,
-					// uchar @0x800CDBB6, len = 0x00000001
-					0x03,
-					// uchar @0x800CDBB7, len = 0x00000001
-					0x02,
-					// uchar @0x800CDBB8, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBB9, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBBA, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBBB, len = 0x00000001
-					0x00},
-			// short @0x800CDBBC, len = 0x00000002
-			.cheatLen = 0x8,
-			// short @0x800CDBBE, len = 0x00000002
-			.cheatStage = 0x0},
-		// GameCheat @0x800CDBC0, len = 0x00000010
-		{
-			// uchar[12] @0x800CDBC0, len = 0x0000000C
-			.cheatKeys =
-				{
-					// uchar @0x800CDBC0, len = 0x00000001
-					0x06,
-					// uchar @0x800CDBC1, len = 0x00000001
-					0x05,
-					// uchar @0x800CDBC2, len = 0x00000001
-					0x01,
-					// uchar @0x800CDBC3, len = 0x00000001
-					0x04,
-					// uchar @0x800CDBC4, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBC5, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBC6, len = 0x00000001
-					0x01,
-					// uchar @0x800CDBC7, len = 0x00000001
-					0x03,
-					// uchar @0x800CDBC8, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBC9, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBCA, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBCB, len = 0x00000001
-					0x00},
-			// short @0x800CDBCC, len = 0x00000002
-			.cheatLen = 0x8,
-			// short @0x800CDBCE, len = 0x00000002
-			.cheatStage = 0x0},
-		// GameCheat @0x800CDBD0, len = 0x00000010
-		{
-			// uchar[12] @0x800CDBD0, len = 0x0000000C
-			.cheatKeys =
-				{
-					// uchar @0x800CDBD0, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBD1, len = 0x00000001
-					0x05,
-					// uchar @0x800CDBD2, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBD3, len = 0x00000001
-					0x01,
-					// uchar @0x800CDBD4, len = 0x00000001
-					0x01,
-					// uchar @0x800CDBD5, len = 0x00000001
-					0x03,
-					// uchar @0x800CDBD6, len = 0x00000001
-					0x03,
-					// uchar @0x800CDBD7, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBD8, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBD9, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBDA, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBDB, len = 0x00000001
-					0x00},
-			// short @0x800CDBDC, len = 0x00000002
-			.cheatLen = 0x8,
-			// short @0x800CDBDE, len = 0x00000002
-			.cheatStage = 0x0},
-		// GameCheat @0x800CDBE0, len = 0x00000010
-		{
-			// uchar[12] @0x800CDBE0, len = 0x0000000C
-			.cheatKeys =
-				{
-					// uchar @0x800CDBE0, len = 0x00000001
-					0x04,
-					// uchar @0x800CDBE1, len = 0x00000001
-					0x01,
-					// uchar @0x800CDBE2, len = 0x00000001
-					0x02,
-					// uchar @0x800CDBE3, len = 0x00000001
-					0x01,
-					// uchar @0x800CDBE4, len = 0x00000001
-					0x03,
-					// uchar @0x800CDBE5, len = 0x00000001
-					0x04,
-					// uchar @0x800CDBE6, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBE7, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBE8, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBE9, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBEA, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBEB, len = 0x00000001
-					0x00},
-			// short @0x800CDBEC, len = 0x00000002
-			.cheatLen = 0x7,
-			// short @0x800CDBEE, len = 0x00000002
-			.cheatStage = 0x0},
-		// GameCheat @0x800CDBF0, len = 0x00000010
-		{
-			// uchar[12] @0x800CDBF0, len = 0x0000000C
-			.cheatKeys =
-				{
-					// uchar @0x800CDBF0, len = 0x00000001
-					0x02,
-					// uchar @0x800CDBF1, len = 0x00000001
-					0x05,
-					// uchar @0x800CDBF2, len = 0x00000001
-					0x05,
-					// uchar @0x800CDBF3, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBF4, len = 0x00000001
-					0x01,
-					// uchar @0x800CDBF5, len = 0x00000001
-					0x04,
-					// uchar @0x800CDBF6, len = 0x00000001
-					0x03,
-					// uchar @0x800CDBF7, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBF8, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBF9, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBFA, len = 0x00000001
-					0x00,
-					// uchar @0x800CDBFB, len = 0x00000001
-					0x00},
-			// short @0x800CDBFC, len = 0x00000002
-			.cheatLen = 0x7,
-			// short @0x800CDBFE, len = 0x00000002
-			.cheatStage = 0x0},
-		// GameCheat @0x800CDC00, len = 0x00000010
-		{
-			// uchar[12] @0x800CDC00, len = 0x0000000C
-			.cheatKeys =
-				{
-					// uchar @0x800CDC00, len = 0x00000001
-					0x03,
-					// uchar @0x800CDC01, len = 0x00000001
-					0x05,
-					// uchar @0x800CDC02, len = 0x00000001
-					0x02,
-					// uchar @0x800CDC03, len = 0x00000001
-					0x01,
-					// uchar @0x800CDC04, len = 0x00000001
-					0x05,
-					// uchar @0x800CDC05, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC06, len = 0x00000001
-					0x03,
-					// uchar @0x800CDC07, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC08, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC09, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC0A, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC0B, len = 0x00000001
-					0x00},
-			// short @0x800CDC0C, len = 0x00000002
-			.cheatLen = 0x7,
-			// short @0x800CDC0E, len = 0x00000002
-			.cheatStage = 0x0},
-		// GameCheat @0x800CDC10, len = 0x00000010
-		{
-			// uchar[12] @0x800CDC10, len = 0x0000000C
-			.cheatKeys =
-				{
-					// uchar @0x800CDC10, len = 0x00000001
-					0x02,
-					// uchar @0x800CDC11, len = 0x00000001
-					0x05,
-					// uchar @0x800CDC12, len = 0x00000001
-					0x03,
-					// uchar @0x800CDC13, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC14, len = 0x00000001
-					0x02,
-					// uchar @0x800CDC15, len = 0x00000001
-					0x01,
-					// uchar @0x800CDC16, len = 0x00000001
-					0x01,
-					// uchar @0x800CDC17, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC18, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC19, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC1A, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC1B, len = 0x00000001
-					0x00},
-			// short @0x800CDC1C, len = 0x00000002
-			.cheatLen = 0x7,
-			// short @0x800CDC1E, len = 0x00000002
-			.cheatStage = 0x0},
-		// GameCheat @0x800CDC20, len = 0x00000010
-		{
-			// uchar[12] @0x800CDC20, len = 0x0000000C
-			.cheatKeys =
-				{
-					// uchar @0x800CDC20, len = 0x00000001
-					0x01,
-					// uchar @0x800CDC21, len = 0x00000001
-					0x01,
-					// uchar @0x800CDC22, len = 0x00000001
-					0x02,
-					// uchar @0x800CDC23, len = 0x00000001
-					0x05,
-					// uchar @0x800CDC24, len = 0x00000001
-					0x03,
-					// uchar @0x800CDC25, len = 0x00000001
-					0x03,
-					// uchar @0x800CDC26, len = 0x00000001
-					0x02,
-					// uchar @0x800CDC27, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC28, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC29, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC2A, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC2B, len = 0x00000001
-					0x00},
-			// short @0x800CDC2C, len = 0x00000002
-			.cheatLen = 0x7,
-			// short @0x800CDC2E, len = 0x00000002
-			.cheatStage = 0x0},
-		// GameCheat @0x800CDC30, len = 0x00000010
-		{
-			// uchar[12] @0x800CDC30, len = 0x0000000C
-			.cheatKeys =
-				{
-					// uchar @0x800CDC30, len = 0x00000001
-					0x03,
-					// uchar @0x800CDC31, len = 0x00000001
-					0x03,
-					// uchar @0x800CDC32, len = 0x00000001
-					0x01,
-					// uchar @0x800CDC33, len = 0x00000001
-					0x03,
-					// uchar @0x800CDC34, len = 0x00000001
-					0x04,
-					// uchar @0x800CDC35, len = 0x00000001
-					0x07,
-					// uchar @0x800CDC36, len = 0x00000001
-					0x01,
-					// uchar @0x800CDC37, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC38, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC39, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC3A, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC3B, len = 0x00000001
-					0x00},
-			// short @0x800CDC3C, len = 0x00000002
-			.cheatLen = 0x7,
-			// short @0x800CDC3E, len = 0x00000002
-			.cheatStage = 0x0},
-		// GameCheat @0x800CDC40, len = 0x00000010
-		{
-			// uchar[12] @0x800CDC40, len = 0x0000000C
-			.cheatKeys =
-				{
-					// uchar @0x800CDC40, len = 0x00000001
-					0x02,
-					// uchar @0x800CDC41, len = 0x00000001
-					0x05,
-					// uchar @0x800CDC42, len = 0x00000001
-					0x03,
-					// uchar @0x800CDC43, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC44, len = 0x00000001
-					0x03,
-					// uchar @0x800CDC45, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC46, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC47, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC48, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC49, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC4A, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC4B, len = 0x00000001
-					0x00},
-			// short @0x800CDC4C, len = 0x00000002
-			.cheatLen = 0x6,
-			// short @0x800CDC4E, len = 0x00000002
-			.cheatStage = 0x0},
-		// GameCheat @0x800CDC50, len = 0x00000010
-		{
-			// uchar[12] @0x800CDC50, len = 0x0000000C
-			.cheatKeys =
-				{
-					// uchar @0x800CDC50, len = 0x00000001
-					0x01,
-					// uchar @0x800CDC51, len = 0x00000001
-					0x06,
-					// uchar @0x800CDC52, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC53, len = 0x00000001
-					0x04,
-					// uchar @0x800CDC54, len = 0x00000001
-					0x03,
-					// uchar @0x800CDC55, len = 0x00000001
-					0x02,
-					// uchar @0x800CDC56, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC57, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC58, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC59, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC5A, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC5B, len = 0x00000001
-					0x00},
-			// short @0x800CDC5C, len = 0x00000002
-			.cheatLen = 0x6,
-			// short @0x800CDC5E, len = 0x00000002
-			.cheatStage = 0x0},
-		// GameCheat @0x800CDC60, len = 0x00000010
-		{
-			// uchar[12] @0x800CDC60, len = 0x0000000C
-			.cheatKeys =
-				{
-					// uchar @0x800CDC60, len = 0x00000001
-					0x01,
-					// uchar @0x800CDC61, len = 0x00000001
-					0x05,
-					// uchar @0x800CDC62, len = 0x00000001
-					0x02,
-					// uchar @0x800CDC63, len = 0x00000001
-					0x03,
-					// uchar @0x800CDC64, len = 0x00000001
-					0x02,
-					// uchar @0x800CDC65, len = 0x00000001
-					0x03,
-					// uchar @0x800CDC66, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC67, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC68, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC69, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC6A, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC6B, len = 0x00000001
-					0x00},
-			// short @0x800CDC6C, len = 0x00000002
-			.cheatLen = 0x6,
-			// short @0x800CDC6E, len = 0x00000002
-			.cheatStage = 0x0},
-		// GameCheat @0x800CDC70, len = 0x00000010
-		{
-			// uchar[12] @0x800CDC70, len = 0x0000000C
-			.cheatKeys =
-				{
-					// uchar @0x800CDC70, len = 0x00000001
-					0x01,
-					// uchar @0x800CDC71, len = 0x00000001
-					0x01,
-					// uchar @0x800CDC72, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC73, len = 0x00000001
-					0x04,
-					// uchar @0x800CDC74, len = 0x00000001
-					0x01,
-					// uchar @0x800CDC75, len = 0x00000001
-					0x02,
-					// uchar @0x800CDC76, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC77, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC78, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC79, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC7A, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC7B, len = 0x00000001
-					0x00},
-			// short @0x800CDC7C, len = 0x00000002
-			.cheatLen = 0x6,
-			// short @0x800CDC7E, len = 0x00000002
-			.cheatStage = 0x0},
-		// GameCheat @0x800CDC80, len = 0x00000010
-		{
-			// uchar[12] @0x800CDC80, len = 0x0000000C
-			.cheatKeys =
-				{
-					// uchar @0x800CDC80, len = 0x00000001
-					0x04,
-					// uchar @0x800CDC81, len = 0x00000001
-					0x02,
-					// uchar @0x800CDC82, len = 0x00000001
-					0x07,
-					// uchar @0x800CDC83, len = 0x00000001
-					0x01,
-					// uchar @0x800CDC84, len = 0x00000001
-					0x03,
-					// uchar @0x800CDC85, len = 0x00000001
-					0x02,
-					// uchar @0x800CDC86, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC87, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC88, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC89, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC8A, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC8B, len = 0x00000001
-					0x00},
-			// short @0x800CDC8C, len = 0x00000002
-			.cheatLen = 0x6,
-			// short @0x800CDC8E, len = 0x00000002
-			.cheatStage = 0x0},
-		// GameCheat @0x800CDC90, len = 0x00000010
-		{
-			// uchar[12] @0x800CDC90, len = 0x0000000C
-			.cheatKeys =
-				{
-					// uchar @0x800CDC90, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC91, len = 0x00000001
-					0x01,
-					// uchar @0x800CDC92, len = 0x00000001
-					0x05,
-					// uchar @0x800CDC93, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC94, len = 0x00000001
-					0x01,
-					// uchar @0x800CDC95, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC96, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC97, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC98, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC99, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC9A, len = 0x00000001
-					0x00,
-					// uchar @0x800CDC9B, len = 0x00000001
-					0x00},
-			// short @0x800CDC9C, len = 0x00000002
-			.cheatLen = 0x6,
-			// short @0x800CDC9E, len = 0x00000002
-			.cheatStage = 0x0},
-		// GameCheat @0x800CDCA0, len = 0x00000010
-		{
-			// uchar[12] @0x800CDCA0, len = 0x0000000C
-			.cheatKeys =
-				{
-					// uchar @0x800CDCA0, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCA1, len = 0x00000001
-					0x05,
-					// uchar @0x800CDCA2, len = 0x00000001
-					0x03,
-					// uchar @0x800CDCA3, len = 0x00000001
-					0x03,
-					// uchar @0x800CDCA4, len = 0x00000001
-					0x02,
-					// uchar @0x800CDCA5, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCA6, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCA7, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCA8, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCA9, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCAA, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCAB, len = 0x00000001
-					0x00},
-			// short @0x800CDCAC, len = 0x00000002
-			.cheatLen = 0x5,
-			// short @0x800CDCAE, len = 0x00000002
-			.cheatStage = 0x0},
-		// GameCheat @0x800CDCB0, len = 0x00000010
-		{
-			// uchar[12] @0x800CDCB0, len = 0x0000000C
-			.cheatKeys =
-				{
-					// uchar @0x800CDCB0, len = 0x00000001
-					0x04,
-					// uchar @0x800CDCB1, len = 0x00000001
-					0x01,
-					// uchar @0x800CDCB2, len = 0x00000001
-					0x02,
-					// uchar @0x800CDCB3, len = 0x00000001
-					0x05,
-					// uchar @0x800CDCB4, len = 0x00000001
-					0x03,
-					// uchar @0x800CDCB5, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCB6, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCB7, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCB8, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCB9, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCBA, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCBB, len = 0x00000001
-					0x00},
-			// short @0x800CDCBC, len = 0x00000002
-			.cheatLen = 0x5,
-			// short @0x800CDCBE, len = 0x00000002
-			.cheatStage = 0x0},
-		// GameCheat @0x800CDCC0, len = 0x00000010
-		{
-			// uchar[12] @0x800CDCC0, len = 0x0000000C
-			.cheatKeys =
-				{
-					// uchar @0x800CDCC0, len = 0x00000001
-					0x02,
-					// uchar @0x800CDCC1, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCC2, len = 0x00000001
-					0x04,
-					// uchar @0x800CDCC3, len = 0x00000001
-					0x02,
-					// uchar @0x800CDCC4, len = 0x00000001
-					0x03,
-					// uchar @0x800CDCC5, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCC6, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCC7, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCC8, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCC9, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCCA, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCCB, len = 0x00000001
-					0x00},
-			// short @0x800CDCCC, len = 0x00000002
-			.cheatLen = 0x5,
-			// short @0x800CDCCE, len = 0x00000002
-			.cheatStage = 0x0},
-		// GameCheat @0x800CDCD0, len = 0x00000010
-		{
-			// uchar[12] @0x800CDCD0, len = 0x0000000C
-			.cheatKeys =
-				{
-					// uchar @0x800CDCD0, len = 0x00000001
-					0x02,
-					// uchar @0x800CDCD1, len = 0x00000001
-					0x05,
-					// uchar @0x800CDCD2, len = 0x00000001
-					0x03,
-					// uchar @0x800CDCD3, len = 0x00000001
-					0x02,
-					// uchar @0x800CDCD4, len = 0x00000001
-					0x01,
-					// uchar @0x800CDCD5, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCD6, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCD7, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCD8, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCD9, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCDA, len = 0x00000001
-					0x00,
-					// uchar @0x800CDCDB, len = 0x00000001
-					0x00},
-			// short @0x800CDCDC, len = 0x00000002
-			.cheatLen = 0x5,
-			// short @0x800CDCDE, len = 0x00000002
-			.cheatStage = 0x0}};
+		// uchar[12] @0x800CDB70, len = 0x0000000C
+		.cheatKeys =
+			{
+				// uchar @0x800CDB70, len = 0x00000001
+				0x02,
+				// uchar @0x800CDB71, len = 0x00000001
+				0x04,
+				// uchar @0x800CDB72, len = 0x00000001
+				0x07,
+				// uchar @0x800CDB73, len = 0x00000001
+				0x01,
+				// uchar @0x800CDB74, len = 0x00000001
+				0x01,
+				// uchar @0x800CDB75, len = 0x00000001
+				0x02,
+				// uchar @0x800CDB76, len = 0x00000001
+				0x02,
+				// uchar @0x800CDB77, len = 0x00000001
+				0x00,
+				// uchar @0x800CDB78, len = 0x00000001
+				0x04,
+				// uchar @0x800CDB79, len = 0x00000001
+				0x02,
+				// uchar @0x800CDB7A, len = 0x00000001
+				0x01,
+				// uchar @0x800CDB7B, len = 0x00000001
+				0x00},
+		// short @0x800CDB7C, len = 0x00000002
+		.cheatLen = 0xb,
+		// short @0x800CDB7E, len = 0x00000002
+		.cheatStage = 0x0};
 // DebugMenuLine @0x800CFBDC, len = 0x00000018
 goodiesMenu =
 	{
@@ -1044,123 +287,23 @@ levelSelectMenu =
 		.var_address = 00000000,
 		// long @0x800CFD0C, len = 0x00000004
 		.bit_mask = 0x0};
-// string @0x800CDACC, len = 0xFFFFFFFFFFFFFFFF
-mainFormatString = "-abs 160 40 -center";
-// DebugMenuLine[8] @0x800C8418, len = 0x000000C0
+// char @0x800CDACC, len = 0x00000001
+mainFormatString = 0x2D;
+// DebugMenuLine @0x800C8418, len = 0x00000018
 mainMenu =
 	{
-		// DebugMenuLine @0x800C8418, len = 0x00000018
-		{
-			// DEBUG_LINE_TYPE @0x800C8418, len = 0x00000004
-			.type = 0x6,
-			// long @0x800C841C, len = 0x00000004
-			.lower = 0x0,
-			// long @0x800C8420, len = 0x00000004
-			.upper = 0x0,
-			// char * @0x800C8424, len = 0x00000004
-			.text = "-abs 160 40 -center" /* collapsed from &mainFormatString */,
-			// long * @0x800C8428, len = 0x00000004
-			.var_address = 00000000,
-			// long @0x800C842C, len = 0x00000004
-			.bit_mask = 0x0},
-		// DebugMenuLine @0x800C8430, len = 0x00000018
-		{
-			// DEBUG_LINE_TYPE @0x800C8430, len = 0x00000004
-			.type = 0x5,
-			// long @0x800C8434, len = 0x00000004
-			.lower = 0x0,
-			// long @0x800C8438, len = 0x00000004
-			.upper = 0x0,
-			// char * @0x800C843C, len = 0x00000004
-			.text = &DAT_800cdb14,
-			// long * @0x800C8440, len = 0x00000004
-			.var_address = &gameTrackerX_debugFlags,
-			// long @0x800C8444, len = 0x00000004
-			.bit_mask = 0x0},
-		// DebugMenuLine @0x800C8448, len = 0x00000018
-		{
-			// DEBUG_LINE_TYPE @0x800C8448, len = 0x00000004
-			.type = 0x5,
-			// long @0x800C844C, len = 0x00000004
-			.lower = 0x0,
-			// long @0x800C8450, len = 0x00000004
-			.upper = 0x0,
-			// char * @0x800C8454, len = 0x00000004
-			.text = &DAT_800cdb14,
-			// long * @0x800C8458, len = 0x00000004
-			.var_address = &gameTrackerX_debugFlags,
-			// long @0x800C845C, len = 0x00000004
-			.bit_mask = 0x0},
-		// DebugMenuLine @0x800C8460, len = 0x00000018
-		{
-			// DEBUG_LINE_TYPE @0x800C8460, len = 0x00000004
-			.type = 0x5,
-			// long @0x800C8464, len = 0x00000004
-			.lower = 0x0,
-			// long @0x800C8468, len = 0x00000004
-			.upper = 0x0,
-			// char * @0x800C846C, len = 0x00000004
-			.text = &DAT_800cdb14,
-			// long * @0x800C8470, len = 0x00000004
-			.var_address = &gameTrackerX_debugFlags,
-			// long @0x800C8474, len = 0x00000004
-			.bit_mask = 0x0},
-		// DebugMenuLine @0x800C8478, len = 0x00000018
-		{
-			// DEBUG_LINE_TYPE @0x800C8478, len = 0x00000004
-			.type = 0x5,
-			// long @0x800C847C, len = 0x00000004
-			.lower = 0x0,
-			// long @0x800C8480, len = 0x00000004
-			.upper = 0x0,
-			// char * @0x800C8484, len = 0x00000004
-			.text = &DAT_800cdb14,
-			// long * @0x800C8488, len = 0x00000004
-			.var_address = &gameTrackerX_debugFlags,
-			// long @0x800C848C, len = 0x00000004
-			.bit_mask = 0x0},
-		// DebugMenuLine @0x800C8490, len = 0x00000018
-		{
-			// DEBUG_LINE_TYPE @0x800C8490, len = 0x00000004
-			.type = 0x5,
-			// long @0x800C8494, len = 0x00000004
-			.lower = 0x0,
-			// long @0x800C8498, len = 0x00000004
-			.upper = 0x0,
-			// char * @0x800C849C, len = 0x00000004
-			.text = &DAT_800cdb14,
-			// long * @0x800C84A0, len = 0x00000004
-			.var_address = &gameTrackerX_debugFlags,
-			// long @0x800C84A4, len = 0x00000004
-			.bit_mask = 0x0},
-		// DebugMenuLine @0x800C84A8, len = 0x00000018
-		{
-			// DEBUG_LINE_TYPE @0x800C84A8, len = 0x00000004
-			.type = 0x5,
-			// long @0x800C84AC, len = 0x00000004
-			.lower = 0x0,
-			// long @0x800C84B0, len = 0x00000004
-			.upper = 0x0,
-			// char * @0x800C84B4, len = 0x00000004
-			.text = &DAT_800cdb14,
-			// long * @0x800C84B8, len = 0x00000004
-			.var_address = &gameTrackerX_debugFlags,
-			// long @0x800C84BC, len = 0x00000004
-			.bit_mask = 0x0},
-		// DebugMenuLine @0x800C84C0, len = 0x00000018
-		{
-			// DEBUG_LINE_TYPE @0x800C84C0, len = 0x00000004
-			.type = 0x5,
-			// long @0x800C84C4, len = 0x00000004
-			.lower = 0x0,
-			// long @0x800C84C8, len = 0x00000004
-			.upper = 0x0,
-			// char * @0x800C84CC, len = 0x00000004
-			.text = &DAT_800cdb14,
-			// long * @0x800C84D0, len = 0x00000004
-			.var_address = &gameTrackerX_debugFlags,
-			// long @0x800C84D4, len = 0x00000004
-			.bit_mask = 0x0}};
+		// DEBUG_LINE_TYPE @0x800C8418, len = 0x00000004
+		.type = 0x6,
+		// long @0x800C841C, len = 0x00000004
+		.lower = 0x0,
+		// long @0x800C8420, len = 0x00000004
+		.upper = 0x0,
+		// char * @0x800C8424, len = 0x00000004
+		.text = &mainFormatString,
+		// long * @0x800C8428, len = 0x00000004
+		.var_address = 00000000,
+		// long @0x800C842C, len = 0x00000004
+		.bit_mask = 0x0};
 // DebugMenuLine @0x800CFC24, len = 0x00000018
 mcardMenu =
 	{
@@ -1176,8 +319,8 @@ mcardMenu =
 		.var_address = 00000000,
 		// long @0x800CFC38, len = 0x00000004
 		.bit_mask = 0x0};
-// string @0x800CDAB8, len = 0xFFFFFFFFFFFFFFFF
-pauseFormatString = "-abs 256 40 -center";
+// char @0x800CDAB8, len = 0x00000001
+pauseFormatString = 0x2D;
 // DebugMenuLine @0x800CFCC8, len = 0x00000018
 pauseMenu =
 	{
@@ -1239,7 +382,7 @@ statsMenu =
 		// long @0x800CFCAC, len = 0x00000004
 		.bit_mask = 0x0};
 // char * @0x800CDAE0, len = 0x00000004
-the_format_string = "-abs 160 40 -center" /* collapsed from &mainFormatString */;
+the_format_string = &mainFormatString;
 // DebugMenuLine * @0x800CDCE0, len = 0x00000004
 the_previous_menu = 00000000;
 // decompiled code
@@ -1391,25 +534,24 @@ void process_cheat_codes(GameTracker *gt, long *ctrl)
 	iVar5 = 0;
 	iVar3 = 0;
 LAB_80012f88:
-	if (((uVar7 & CheatKeyMap
-					  [(uint)GameCheats[0].cheatKeys
-						   [(int)*(short *)((int)&GameCheats[0].cheatStage + iVar3) + iVar3]]) == 0) ||
+	if (((uVar7 & (&CheatKeyMap)
+					  [(uint)GameCheats.cheatKeys
+						   [(int)*(short *)((int)&GameCheats.cheatStage + iVar3) + iVar3]]) == 0) ||
 		((uVar6 & 0xfffffcff &
-		  ~CheatKeyMap
-			  [(uint)GameCheats[0].cheatKeys
-				   [(int)*(short *)((int)&GameCheats[0].cheatStage + iVar3) + iVar3]]) != 0))
+		  ~(&CheatKeyMap)
+			  [(uint)GameCheats.cheatKeys[(int)*(short *)((int)&GameCheats.cheatStage + iVar3) + iVar3]]) != 0))
 	{
-		*(undefined2 *)((int)&GameCheats[0].cheatStage + iVar3) = 0;
+		*(undefined2 *)((int)&GameCheats.cheatStage + iVar3) = 0;
 	}
 	else
 	{
-		*(short *)((int)&GameCheats[0].cheatStage + iVar3) =
-			*(short *)((int)&GameCheats[0].cheatStage + iVar3) + 1;
+		*(short *)((int)&GameCheats.cheatStage + iVar3) =
+			*(short *)((int)&GameCheats.cheatStage + iVar3) + 1;
 	}
-	if (*(short *)((int)&GameCheats[0].cheatStage + iVar3) !=
-		*(short *)((int)&GameCheats[0].cheatLen + iVar3))
+	if (*(short *)((int)&GameCheats.cheatStage + iVar3) !=
+		*(short *)((int)&GameCheats.cheatLen + iVar3))
 		goto switchD_80013008_caseD_17;
-	*(undefined2 *)((int)&GameCheats[0].cheatStage + iVar3) = 0;
+	*(undefined2 *)((int)&GameCheats.cheatStage + iVar3) = 0;
 	bVar2 = true;
 	switch (iVar5)
 	{
@@ -2111,9 +1253,9 @@ void process_menu_line(GameTracker *gt, DebugMenuLine *menu)
 
 {
 	if ((menu[debugMenuChoice].type < DEBUG_LINE_TYPE_ENDLIST) &&
-		(debug_dispatch_table[menu[debugMenuChoice].type].fn != (_func_18 *)0x0))
+		((&debug_dispatch_table)[menu[debugMenuChoice].type].fn != (_func_18 *)0x0))
 	{
-		(*debug_dispatch_table[menu[debugMenuChoice].type].fn)();
+		(*(&debug_dispatch_table)[menu[debugMenuChoice].type].fn)();
 	}
 	return;
 }
@@ -2605,7 +1747,7 @@ void DEBUG_Menu(GameTracker *gt)
 
 	lVar1 = debugMenuChoice;
 	menu = currentMenu;
-	if ((currentMenu == mainMenu) || (currentMenu == &pauseMenu))
+	if ((currentMenu == &mainMenu) || (currentMenu == &pauseMenu))
 	{
 		menu_process(gt->menu);
 	}

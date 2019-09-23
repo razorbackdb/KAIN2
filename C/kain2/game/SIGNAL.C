@@ -1,279 +1,17 @@
 #include "THISDUST.H"
 #include "SIGNAL.H"
 
-// SignalInfo[27] @0x800CDFC0, len = 0x00000144
+// SignalInfo @0x800CDFC0, len = 0x0000000C
 signalInfoList =
 	{
-		// SignalInfo @0x800CDFC0, len = 0x0000000C
-		{
-			// _func_20 * @0x800CDFC0, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleLightGroup,
-			// short @0x800CDFC4, len = 0x00000002
-			.length = 0x1,
-			// short @0x800CDFC6, len = 0x00000002
-			.onlyPlayer = 0x0,
-			// _func_21 * @0x800CDFC8, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CDFCC, len = 0x0000000C
-		{
-			// _func_20 * @0x800CDFCC, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleCameraAdjust,
-			// short @0x800CDFD0, len = 0x00000002
-			.length = 0x1,
-			// short @0x800CDFD2, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CDFD4, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CDFD8, len = 0x0000000C
-		{
-			// _func_20 * @0x800CDFD8, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleCameraMode,
-			// short @0x800CDFDC, len = 0x00000002
-			.length = 0x1,
-			// short @0x800CDFDE, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CDFE0, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CDFE4, len = 0x0000000C
-		{
-			// _func_20 * @0x800CDFE4, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleCamera,
-			// short @0x800CDFE8, len = 0x00000002
-			.length = 0x1,
-			// short @0x800CDFEA, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CDFEC, len = 0x00000004
-			.signalRelocateFunc = &SIGNAL_RelocateCamera},
-		// SignalInfo @0x800CDFF0, len = 0x0000000C
-		{
-			// _func_20 * @0x800CDFF0, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleCameraTimer,
-			// short @0x800CDFF4, len = 0x00000002
-			.length = 0x1,
-			// short @0x800CDFF6, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CDFF8, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CDFFC, len = 0x0000000C
-		{
-			// _func_20 * @0x800CDFFC, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleCameraSmooth,
-			// short @0x800CE000, len = 0x00000002
-			.length = 0x1,
-			// short @0x800CE002, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CE004, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CE008, len = 0x0000000C
-		{
-			// _func_20 * @0x800CE008, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleCameraValue,
-			// short @0x800CE00C, len = 0x00000002
-			.length = 0x2,
-			// short @0x800CE00E, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CE010, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CE014, len = 0x0000000C
-		{
-			// _func_20 * @0x800CE014, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleCameraLock,
-			// short @0x800CE018, len = 0x00000002
-			.length = 0x1,
-			// short @0x800CE01A, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CE01C, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CE020, len = 0x0000000C
-		{
-			// _func_20 * @0x800CE020, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleCameraUnlock,
-			// short @0x800CE024, len = 0x00000002
-			.length = 0x1,
-			// short @0x800CE026, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CE028, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CE02C, len = 0x0000000C
-		{
-			// _func_20 * @0x800CE02C, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleCameraSave,
-			// short @0x800CE030, len = 0x00000002
-			.length = 0x1,
-			// short @0x800CE032, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CE034, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CE038, len = 0x0000000C
-		{
-			// _func_20 * @0x800CE038, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleCameraRestore,
-			// short @0x800CE03C, len = 0x00000002
-			.length = 0x1,
-			// short @0x800CE03E, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CE040, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CE044, len = 0x0000000C
-		{
-			// _func_20 * @0x800CE044, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleFogNear,
-			// short @0x800CE048, len = 0x00000002
-			.length = 0x1,
-			// short @0x800CE04A, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CE04C, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CE050, len = 0x0000000C
-		{
-			// _func_20 * @0x800CE050, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleFogFar,
-			// short @0x800CE054, len = 0x00000002
-			.length = 0x1,
-			// short @0x800CE056, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CE058, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CE05C, len = 0x0000000C
-		{
-			// _func_20 * @0x800CE05C, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleCameraShake,
-			// short @0x800CE060, len = 0x00000002
-			.length = 0x2,
-			// short @0x800CE062, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CE064, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CE068, len = 0x0000000C
-		{
-			// _func_20 * @0x800CE068, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleCallSignal,
-			// short @0x800CE06C, len = 0x00000002
-			.length = 0x1,
-			// short @0x800CE06E, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CE070, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CE074, len = 0x0000000C
-		{
-			// _func_20 * @0x800CE074, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleEnd,
-			// short @0x800CE078, len = 0x00000002
-			.length = 0x0,
-			// short @0x800CE07A, len = 0x00000002
-			.onlyPlayer = 0x0,
-			// _func_21 * @0x800CE07C, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CE080, len = 0x0000000C
-		{
-			// _func_20 * @0x800CE080, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleStopPlayerControl,
-			// short @0x800CE084, len = 0x00000002
-			.length = 0x0,
-			// short @0x800CE086, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CE088, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CE08C, len = 0x0000000C
-		{
-			// _func_20 * @0x800CE08C, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleStartPlayerControl,
-			// short @0x800CE090, len = 0x00000002
-			.length = 0x0,
-			// short @0x800CE092, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CE094, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CE098, len = 0x0000000C
-		{
-			// _func_20 * @0x800CE098, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleStreamLevel,
-			// short @0x800CE09C, len = 0x00000002
-			.length = 0x6,
-			// short @0x800CE09E, len = 0x00000002
-			.onlyPlayer = 0x0,
-			// _func_21 * @0x800CE0A0, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CE0A4, len = 0x0000000C
-		{
-			// _func_20 * @0x800CE0A4, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleCameraSpline,
-			// short @0x800CE0A8, len = 0x00000002
-			.length = 0x2,
-			// short @0x800CE0AA, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CE0AC, len = 0x00000004
-			.signalRelocateFunc = &SIGNAL_RelocateCameraSpline},
-		// SignalInfo @0x800CE0B0, len = 0x0000000C
-		{
-			// _func_20 * @0x800CE0B0, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleScreenWipe,
-			// short @0x800CE0B4, len = 0x00000002
-			.length = 0x1,
-			// short @0x800CE0B6, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CE0B8, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CE0BC, len = 0x0000000C
-		{
-			// _func_20 * @0x800CE0BC, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleBlendStart,
-			// short @0x800CE0C0, len = 0x00000002
-			.length = 0x1,
-			// short @0x800CE0C2, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CE0C4, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CE0C8, len = 0x0000000C
-		{
-			// _func_20 * @0x800CE0C8, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleScreenWipeColor,
-			// short @0x800CE0CC, len = 0x00000002
-			.length = 0x1,
-			// short @0x800CE0CE, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CE0D0, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CE0D4, len = 0x0000000C
-		{
-			// _func_20 * @0x800CE0D4, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleSetSlideAngle,
-			// short @0x800CE0D8, len = 0x00000002
-			.length = 0x1,
-			// short @0x800CE0DA, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CE0DC, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CE0E0, len = 0x0000000C
-		{
-			// _func_20 * @0x800CE0E0, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleResetSlideAngle,
-			// short @0x800CE0E4, len = 0x00000002
-			.length = 0x0,
-			// short @0x800CE0E6, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CE0E8, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CE0EC, len = 0x0000000C
-		{
-			// _func_20 * @0x800CE0EC, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleSetCameraTilt,
-			// short @0x800CE0F0, len = 0x00000002
-			.length = 0x1,
-			// short @0x800CE0F2, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CE0F4, len = 0x00000004
-			.signalRelocateFunc = 00000000},
-		// SignalInfo @0x800CE0F8, len = 0x0000000C
-		{
-			// _func_20 * @0x800CE0F8, len = 0x00000004
-			.signalHandleFunc = &SIGNAL_HandleSetCameraDistance,
-			// short @0x800CE0FC, len = 0x00000002
-			.length = 0x1,
-			// short @0x800CE0FE, len = 0x00000002
-			.onlyPlayer = 0x1,
-			// _func_21 * @0x800CE100, len = 0x00000004
-			.signalRelocateFunc = 00000000}};
+		// _func_20 * @0x800CDFC0, len = 0x00000004
+		.signalHandleFunc = &SIGNAL_HandleLightGroup,
+		// short @0x800CDFC4, len = 0x00000002
+		.length = 0x1,
+		// short @0x800CDFC6, len = 0x00000002
+		.onlyPlayer = 0x0,
+		// _func_21 * @0x800CDFC8, len = 0x00000004
+		.signalRelocateFunc = 00000000};
 // decompiled code
 // original method signature:
 // long /*$ra*/ SIGNAL_HandleLightGroup(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
@@ -1071,12 +809,11 @@ void COLLIDE_HandleSignal(_Instance *instance, Signal *signal, long numSignals, 
 		while (true)
 		{
 			uVar2 = signal->id & 0x7fffffff;
-			if ((((signalInfoList[uVar2].onlyPlayer == 0) || (instance == gameTrackerX.playerInstance)) &&
-				 (((gameTrackerX.gameFlags & 0x40U) == 0 || (-1 < signal->id)))) &&
+			if (((((&signalInfoList)[uVar2].onlyPlayer == 0) || (instance == gameTrackerX.playerInstance)) && (((gameTrackerX.gameFlags & 0x40U) == 0 || (-1 < signal->id)))) &&
 				((0x1a < uVar2 ||
-				  (lVar1 = (*signalInfoList[uVar2].signalHandleFunc)(instance, signal), lVar1 == 0))))
+				  (lVar1 = (*(&signalInfoList)[uVar2].signalHandleFunc)(instance, signal), lVar1 == 0))))
 				break;
-			signal = (Signal *)(&signal->id + (int)signalInfoList[signal->id & 0x7fffffff].length + 1);
+			signal = (Signal *)(&signal->id + (int)(&signalInfoList)[signal->id & 0x7fffffff].length + 1);
 		}
 	}
 	return;
@@ -1172,7 +909,7 @@ long SIGNAL_IsStreamSignal(Signal *signal, long *isWarpGate)
 		}
 		if (bVar1)
 			break;
-		signal = (Signal *)(&signal->id + (int)signalInfoList[uVar3].length + 1);
+		signal = (Signal *)(&signal->id + (int)(&signalInfoList)[uVar3].length + 1);
 	}
 	return lVar4;
 }
@@ -1224,12 +961,12 @@ _MultiSignal *SIGNAL_RelocateSignal(_MultiSignal *multiSignal, long offset)
 	{
 		do
 		{
-			if (signalInfoList[pSVar1->id & 0x7fffffff].signalRelocateFunc != (_func_21 *)0x0)
+			if ((&signalInfoList)[pSVar1->id & 0x7fffffff].signalRelocateFunc != (_func_21 *)0x0)
 			{
-				(*signalInfoList[pSVar1->id & 0x7fffffff].signalRelocateFunc)(pSVar1, offset);
+				(*(&signalInfoList)[pSVar1->id & 0x7fffffff].signalRelocateFunc)(pSVar1, offset);
 			}
 			iVar2 = iVar2 + 1;
-			pSVar1 = (Signal *)(&pSVar1->id + (int)signalInfoList[pSVar1->id & 0x7fffffff].length + 1);
+			pSVar1 = (Signal *)(&pSVar1->id + (int)(&signalInfoList)[pSVar1->id & 0x7fffffff].length + 1);
 		} while (iVar2 < multiSignal->numSignals);
 	}
 	return (_MultiSignal *)pSVar1->data;
@@ -1287,7 +1024,7 @@ _MultiSignal *SIGNAL_FindSignal(Level *level, long id)
 				do
 				{
 					iVar2 = iVar2 + 1;
-					pSVar3 = (Signal *)(&pSVar3->id + (int)signalInfoList[pSVar3->id & 0x7fffffff].length + 1);
+					pSVar3 = (Signal *)(&pSVar3->id + (int)(&signalInfoList)[pSVar3->id & 0x7fffffff].length + 1);
 				} while (iVar2 < p_Var1->numSignals);
 			}
 			p_Var1 = (_MultiSignal *)pSVar3->data;

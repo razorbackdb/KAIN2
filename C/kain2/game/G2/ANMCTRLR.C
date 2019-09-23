@@ -27,25 +27,8 @@ _controllerPool =
         .stack = null,
         // _G2AnimController_Type * @0x800D5168, len = 0x00000004
         .blockPool = null};
-// int[16] @0x800CAC2C, len = 0x00000040
-_indexTable =
-    {
-        -0x1,
-        -0x2,
-        -0x1,
-        -0x1,
-        0x1,
-        0x2,
-        0x4,
-        0x7,
-        -0x1,
-        -0x2,
-        -0x1,
-        -0x1,
-        0x1,
-        0x2,
-        0x4,
-        0x7};
+// int @0x800CAC2C, len = 0x00000004
+_indexTable = -0x1;
 // _G2AnimInterpStateBlockPool_Type @0x800D516C, len = 0x00000010
 _interpStateBlockPool =
     {
@@ -107,72 +90,8 @@ _segValues =
                 .z = null},
         // ushort @0x800D49F2, len = 0x00000002
         .bIsQuat = null};
-// int[63] @0x800CAC6C, len = 0x000000FC
-_stepSizeTable =
-    {
-        0x7,
-        0x8,
-        0x9,
-        0xa,
-        0xb,
-        0xc,
-        0xd,
-        0xe,
-        0x10,
-        0x12,
-        0x14,
-        0x16,
-        0x18,
-        0x1a,
-        0x1d,
-        0x20,
-        0x23,
-        0x26,
-        0x29,
-        0x2d,
-        0x31,
-        0x35,
-        0x39,
-        0x3e,
-        0x43,
-        0x48,
-        0x4f,
-        0x55,
-        0x5b,
-        0x61,
-        0x68,
-        0x6f,
-        0x76,
-        0x7e,
-        0x6b,
-        0x73,
-        0x7c,
-        0x85,
-        0x8e,
-        0x98,
-        0xa2,
-        0xad,
-        0xb8,
-        0xc4,
-        0xd0,
-        0xdd,
-        0xea,
-        0xf8,
-        0x106,
-        0x115,
-        0x125,
-        0x135,
-        0x146,
-        0x157,
-        0x169,
-        0x17c,
-        0x190,
-        0x1a5,
-        0x1bb,
-        0x1d2,
-        0x1eb,
-        0x206,
-        0x223};
+// int @0x800CAC6C, len = 0x00000004
+_stepSizeTable = 0x7;
 // decompiled code
 // original method signature:
 // void /*$ra*/ G2Anim_AttachControllerToSeg(struct _G2Anim_Type *anim /*$s0*/, int segNumber /*$a1*/, int type /*$a2*/)

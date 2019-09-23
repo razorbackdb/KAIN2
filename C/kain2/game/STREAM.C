@@ -8781,8 +8781,8 @@ void WARPGATE_HideAllCloudCovers(void)
   void *pvVar2;
   _Instance *p_Var3;
 
-  pvVar2 = ObjectAccess_ARRAY_800c878c[21].object;
-  if (ObjectAccess_ARRAY_800c878c[21].object != (void *)0x0)
+  pvVar2 = ObjectAccess_800c8834.object;
+  if (ObjectAccess_800c8834.object != (void *)0x0)
   {
     p_Var3 = (gameTrackerX.instanceList)->first;
     while (p_Var1 = p_Var3, p_Var1 != (_Instance *)0x0)
@@ -8844,7 +8844,7 @@ _Instance *WARPGATE_UnHideCloudCoverInUnit(long streamUnitID)
   _Instance *p_Var2;
 
   p_Var2 = (_Instance *)0x0;
-  if (ObjectAccess_ARRAY_800c878c[21].object != (void *)0x0)
+  if (ObjectAccess_800c8834.object != (void *)0x0)
   {
     p_Var1 = (gameTrackerX.instanceList)->first;
     do
@@ -8855,7 +8855,7 @@ _Instance *WARPGATE_UnHideCloudCoverInUnit(long streamUnitID)
         return (_Instance *)0x0;
       }
       p_Var1 = p_Var2->next;
-    } while ((p_Var2->object != (Object *)ObjectAccess_ARRAY_800c878c[21].object) ||
+    } while ((p_Var2->object != (Object *)ObjectAccess_800c8834.object) ||
              (p_Var1 = p_Var2->next, p_Var2->currentStreamUnitID != streamUnitID));
     p_Var2->flags = p_Var2->flags & 0xfffff7ff;
   }

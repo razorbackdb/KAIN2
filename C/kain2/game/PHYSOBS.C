@@ -1866,10 +1866,10 @@ _Instance *PHYSOB_BirthCollectible(_Instance *parent, int x, int y, int z, int t
   _Instance *p_Var1;
 
   p_Var1 = (_Instance *)0x0;
-  object = (Object *)ObjectAccess_ARRAY_800c878c[23].object;
+  object = (Object *)ObjectAccess_800c8844.object;
   if (type != 0)
   {
-    object = (Object *)ObjectAccess_ARRAY_800c878c[24].object;
+    object = (Object *)ObjectAccess_800c884c.object;
   }
   if ((object != (Object *)0x0) &&
       (p_Var1 = INSTANCE_BirthObject(parent, object, 0), p_Var1 != (_Instance *)0x0))
@@ -1975,8 +1975,8 @@ _Instance *BirthProjectilePhysOb(_Instance *instance, int grabJoint, int type)
   _Position local_20;
 
   instance_00 = (_Instance *)0x0;
-  if ((ObjectAccess_ARRAY_800c878c[17].object != (void *)0x0) &&
-      (instance_00 = INSTANCE_BirthObject(instance, (Object *)ObjectAccess_ARRAY_800c878c[17].object, 0),
+  if ((ObjectAccess_800c8814.object != (void *)0x0) &&
+      (instance_00 = INSTANCE_BirthObject(instance, (Object *)ObjectAccess_800c8814.object, 0),
        instance_00 != (_Instance *)0x0))
   {
     pvVar2 = instance_00->data;

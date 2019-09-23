@@ -4218,12 +4218,12 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
               setCopReg(2,0x2000,uVar16);
               setCopReg(2,0x2800,uVar1);
               copFunction(2,0x280030);
-              uVar12 = *(undefined4 *)(gNormalList + (uVar7 >> 0x10));
-              uVar16 = *(undefined4 *)&gNormalList[uVar7 >> 0x10].z;
-              uVar13 = *(undefined4 *)(gNormalList + (uVar11 >> 0x10));
-              uVar17 = *(undefined4 *)&gNormalList[uVar11 >> 0x10].z;
-              uVar3 = *(undefined4 *)(gNormalList + (uVar1 >> 0x10));
-              uVar19 = *(undefined4 *)&gNormalList[uVar1 >> 0x10].z;
+              uVar12 = *(undefined4 *)(&gNormalList + (uVar7 >> 0x10));
+              uVar16 = *(undefined4 *)&(&gNormalList)[uVar7 >> 0x10].z;
+              uVar13 = *(undefined4 *)(&gNormalList + (uVar11 >> 0x10));
+              uVar17 = *(undefined4 *)&(&gNormalList)[uVar11 >> 0x10].z;
+              uVar3 = *(undefined4 *)(&gNormalList + (uVar1 >> 0x10));
+              uVar19 = *(undefined4 *)&(&gNormalList)[uVar1 >> 0x10].z;
               uVar8 = getCopReg(2,0xc);
               *puVar5 = uVar8;
               uVar8 = getCopReg(2,0x11);
@@ -4279,8 +4279,8 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
               setCopReg(2,0,uVar8);
               setCopReg(2,0x800,uVar7);
               copFunction(2,0x180001);
-              uVar16 = *(undefined4 *)(gNormalList + (uVar7 >> 0x10));
-              uVar3 = *(undefined4 *)&gNormalList[uVar7 >> 0x10].z;
+              uVar16 = *(undefined4 *)(&gNormalList + (uVar7 >> 0x10));
+              uVar3 = *(undefined4 *)&(&gNormalList)[uVar7 >> 0x10].z;
               uVar8 = getCopReg(2,0xe);
               *puVar5 = uVar8;
               uVar8 = getCopReg(2,0x13);
@@ -4309,8 +4309,8 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
                 setCopReg(2,0,uVar12);
                 setCopReg(2,0x800,uVar11);
                 copFunction(2,0x180001);
-                uVar12 = *(undefined4 *)(gNormalList + (uVar11 >> 0x10));
-                uVar16 = *(undefined4 *)&gNormalList[uVar11 >> 0x10].z;
+                uVar12 = *(undefined4 *)(&gNormalList + (uVar11 >> 0x10));
+                uVar16 = *(undefined4 *)&(&gNormalList)[uVar11 >> 0x10].z;
                 uVar8 = getCopReg(2,0xe);
                 *param_2 = uVar8;
                 uVar8 = getCopReg(2,0x13);
@@ -4460,8 +4460,8 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
               setCopReg(2,0x2000,uVar16);
               setCopReg(2,0x2800,uVar1);
               copFunction(2,0x280030);
-              uVar12 = *(undefined4 *)(gNormalList + (uVar7 >> 0x10));
-              uVar16 = *(undefined4 *)&gNormalList[uVar7 >> 0x10].z;
+              uVar12 = *(undefined4 *)(&gNormalList + (uVar7 >> 0x10));
+              uVar16 = *(undefined4 *)&(&gNormalList)[uVar7 >> 0x10].z;
               uVar14 = *puVar21;
               uVar8 = getCopReg(2,0xc);
               *puVar5 = uVar8;
@@ -4497,8 +4497,8 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
               *puVar20 = uVar14;
               uVar7 = puVar21[1];
               if ((uVar7 & 0x40000000) == 0) {
-                setCopReg(2,0,*(undefined4 *)(gNormalList + (uVar11 >> 0x10)));
-                setCopReg(2,0x800,*(undefined4 *)&gNormalList[uVar11 >> 0x10].z);
+                setCopReg(2,0,*(undefined4 *)(&gNormalList + (uVar11 >> 0x10)));
+                setCopReg(2,0x800,*(undefined4 *)&(&gNormalList)[uVar11 >> 0x10].z);
                 setCopReg(2,0x3000,uVar7);
                 if (iVar2 == 0) {
                   copFunction(2,0x108041b);
@@ -4511,8 +4511,8 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
               puVar20[1] = uVar7;
               uVar7 = puVar21[2];
               if ((uVar7 & 0x40000000) == 0) {
-                setCopReg(2,0,*(undefined4 *)(gNormalList + (uVar1 >> 0x10)));
-                setCopReg(2,0x800,*(undefined4 *)&gNormalList[uVar1 >> 0x10].z);
+                setCopReg(2,0,*(undefined4 *)(&gNormalList + (uVar1 >> 0x10)));
+                setCopReg(2,0x800,*(undefined4 *)&(&gNormalList)[uVar1 >> 0x10].z);
                 setCopReg(2,0x3000,uVar7);
                 if (iVar2 == 0) {
                   copFunction(2,0x108041b);
@@ -4543,8 +4543,8 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
               setCopReg(2,0,uVar8);
               setCopReg(2,0x800,uVar7);
               copFunction(2,0x180001);
-              uVar16 = *(undefined4 *)(gNormalList + (uVar7 >> 0x10));
-              uVar3 = *(undefined4 *)&gNormalList[uVar7 >> 0x10].z;
+              uVar16 = *(undefined4 *)(&gNormalList + (uVar7 >> 0x10));
+              uVar3 = *(undefined4 *)&(&gNormalList)[uVar7 >> 0x10].z;
               uVar1 = *puVar21;
               uVar8 = getCopReg(2,0xe);
               *puVar5 = uVar8;
@@ -4578,8 +4578,8 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
                 setCopReg(2,0,uVar12);
                 setCopReg(2,0x800,uVar11);
                 copFunction(2,0x180001);
-                uVar12 = *(undefined4 *)(gNormalList + (uVar11 >> 0x10));
-                uVar16 = *(undefined4 *)&gNormalList[uVar11 >> 0x10].z;
+                uVar12 = *(undefined4 *)(&gNormalList + (uVar11 >> 0x10));
+                uVar16 = *(undefined4 *)&(&gNormalList)[uVar11 >> 0x10].z;
                 uVar11 = *param_8;
                 uVar8 = getCopReg(2,0xe);
                 *param_2 = uVar8;
@@ -6479,7 +6479,7 @@ uint DRAW_SplitModel_S(int param_1,undefined4 param_2,int param_3,undefined4 *pa
       uVar1 = (**(code **)((((uint)(0 < *(short *)(param_3 + (uint)puVar2[2] * 8 + 4)) << 1 |
                             (uint)(0 < *(short *)(param_3 + (uint)puVar2[1] * 8 + 4))) << 1 |
                            (uint)(0 < *(short *)(param_3 + (uint)*puVar2 * 8 + 4))) * 4 + 0x1f800000
-                          ))(gNormalList,*(undefined4 *)(param_1 + 4));
+                          ))(&gNormalList,*(undefined4 *)(param_1 + 4));
       return uVar1;
     }
     puVar2 = puVar2 + 6;

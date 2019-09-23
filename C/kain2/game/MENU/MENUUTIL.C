@@ -1,45 +1,13 @@
 #include "THISDUST.H"
 #include "MENUUTIL.H"
 
-// menu_sound_entry_t[6] @0x800CAD98, len = 0x00000030
+// menu_sound_entry_t @0x800CAD98, len = 0x00000008
 the_menu_sounds =
 	{
-		// menu_sound_entry_t @0x800CAD98, len = 0x00000008
-		{
-			// menu_sound_t @0x800CAD98, len = 0x00000004
-			.sound = 0x0,
-			// int @0x800CAD9C, len = 0x00000004
-			.sfx = 0x5},
-		// menu_sound_entry_t @0x800CADA0, len = 0x00000008
-		{
-			// menu_sound_t @0x800CADA0, len = 0x00000004
-			.sound = 0x1,
-			// int @0x800CADA4, len = 0x00000004
-			.sfx = 0x5},
-		// menu_sound_entry_t @0x800CADA8, len = 0x00000008
-		{
-			// menu_sound_t @0x800CADA8, len = 0x00000004
-			.sound = 0x2,
-			// int @0x800CADAC, len = 0x00000004
-			.sfx = 0x5},
-		// menu_sound_entry_t @0x800CADB0, len = 0x00000008
-		{
-			// menu_sound_t @0x800CADB0, len = 0x00000004
-			.sound = 0x3,
-			// int @0x800CADB4, len = 0x00000004
-			.sfx = 0x5},
-		// menu_sound_entry_t @0x800CADB8, len = 0x00000008
-		{
-			// menu_sound_t @0x800CADB8, len = 0x00000004
-			.sound = 0x4,
-			// int @0x800CADBC, len = 0x00000004
-			.sfx = 0x5},
-		// menu_sound_entry_t @0x800CADC0, len = 0x00000008
-		{
-			// menu_sound_t @0x800CADC0, len = 0x00000004
-			.sound = 0x5,
-			// int @0x800CADC4, len = 0x00000004
-			.sfx = 0x5}};
+		// menu_sound_t @0x800CAD98, len = 0x00000004
+		.sound = 0x0,
+		// int @0x800CAD9C, len = 0x00000004
+		.sfx = 0x5};
 // decompiled code
 // original method signature:
 // enum menu_ctrl_t /*$ra*/ menu_get_ctrl(void *gt /*$a0*/)
@@ -160,6 +128,6 @@ int menu_text_width(char *text)
 void menu_sound(menu_sound_t sound)
 
 {
-	SndPlay(the_menu_sounds[sound].sfx);
+	SndPlay((&the_menu_sounds)[sound].sfx);
 	return;
 }

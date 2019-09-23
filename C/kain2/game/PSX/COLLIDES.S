@@ -562,23 +562,23 @@ void RotMatrixZYX(ushort *param_1,uint *param_2)
   uVar1 = param_1[1];
   uVar2 = *param_1;
   uVar4 = (int)(short)param_1[2] & 0x7ff;
-  iVar12 = (int)ecostable[uVar4];
-  uVar4 = SEXT24(SHORT_ARRAY_800c9910[uVar4]);
+  iVar12 = (int)(&ecostable)[uVar4];
+  uVar4 = SEXT24((&SHORT_800c9910)[uVar4]);
   if (((int)(short)param_1[2] & 0x800U) != 0) {
     iVar12 = -iVar12;
     uVar4 = -uVar4;
   }
   if ((uVar1 | uVar2) != 0) {
     uVar5 = (int)(short)uVar1 & 0x7ff;
-    iVar11 = (int)ecostable[uVar5];
-    iVar8 = (int)SHORT_ARRAY_800c9910[uVar5];
+    iVar11 = (int)(&ecostable)[uVar5];
+    iVar8 = (int)(&SHORT_800c9910)[uVar5];
     if (((int)(short)uVar1 & 0x800U) != 0) {
       iVar8 = -iVar8;
       iVar11 = -iVar11;
     }
     uVar5 = (int)(short)uVar2 & 0x7ff;
-    iVar10 = (int)ecostable[uVar5];
-    iVar6 = (int)SHORT_ARRAY_800c9910[uVar5];
+    iVar10 = (int)(&ecostable)[uVar5];
+    iVar6 = (int)(&SHORT_800c9910)[uVar5];
     if (((int)(short)uVar2 & 0x800U) != 0) {
       iVar10 = -iVar10;
       iVar6 = -iVar6;
@@ -756,23 +756,23 @@ void RotMatrix(ushort *param_1,uint *param_2)
   uVar1 = param_1[1];
   uVar2 = *param_1;
   uVar4 = (int)(short)param_1[2] & 0x7ff;
-  iVar12 = (int)ecostable[uVar4];
-  uVar4 = SEXT24(SHORT_ARRAY_800c9910[uVar4]);
+  iVar12 = (int)(&ecostable)[uVar4];
+  uVar4 = SEXT24((&SHORT_800c9910)[uVar4]);
   if (((int)(short)param_1[2] & 0x800U) != 0) {
     iVar12 = -iVar12;
     uVar4 = -uVar4;
   }
   if ((uVar1 | uVar2) != 0) {
     uVar5 = (int)(short)uVar1 & 0x7ff;
-    iVar11 = (int)ecostable[uVar5];
-    iVar8 = (int)SHORT_ARRAY_800c9910[uVar5];
+    iVar11 = (int)(&ecostable)[uVar5];
+    iVar8 = (int)(&SHORT_800c9910)[uVar5];
     if (((int)(short)uVar1 & 0x800U) != 0) {
       iVar8 = -iVar8;
       iVar11 = -iVar11;
     }
     uVar5 = (int)(short)uVar2 & 0x7ff;
-    iVar10 = (int)ecostable[uVar5];
-    iVar6 = (int)SHORT_ARRAY_800c9910[uVar5];
+    iVar10 = (int)(&ecostable)[uVar5];
+    iVar6 = (int)(&SHORT_800c9910)[uVar5];
     if (((int)(short)uVar2 & 0x800U) != 0) {
       iVar10 = -iVar10;
       iVar6 = -iVar6;
@@ -927,8 +927,8 @@ undefined8 RotMatrixX(uint param_1,int param_2)
   int iVar12;
   int iVar13;
   
-  iVar2 = (int)SHORT_ARRAY_800c9910[param_1 & 0x7ff];
-  iVar3 = (int)ecostable[param_1 & 0x7ff];
+  iVar2 = (int)(&SHORT_800c9910)[param_1 & 0x7ff];
+  iVar3 = (int)(&ecostable)[param_1 & 0x7ff];
   if ((param_1 & 0x800) != 0) {
     iVar2 = -iVar2;
     iVar3 = -iVar3;
@@ -1031,8 +1031,8 @@ undefined8 RotMatrixY(uint param_1,uint *param_2)
   int iVar12;
   undefined4 uVar13;
   
-  iVar2 = (int)SHORT_ARRAY_800c9910[param_1 & 0x7ff];
-  iVar3 = (int)ecostable[param_1 & 0x7ff];
+  iVar2 = (int)(&SHORT_800c9910)[param_1 & 0x7ff];
+  iVar3 = (int)(&ecostable)[param_1 & 0x7ff];
   if ((param_1 & 0x800) != 0) {
     iVar2 = -iVar2;
     iVar3 = -iVar3;
@@ -1131,8 +1131,8 @@ undefined8 RotMatrixZ(uint param_1,uint *param_2)
   int iVar13;
   int iVar14;
   
-  iVar2 = (int)SHORT_ARRAY_800c9910[param_1 & 0x7ff];
-  iVar3 = (int)ecostable[param_1 & 0x7ff];
+  iVar2 = (int)(&SHORT_800c9910)[param_1 & 0x7ff];
+  iVar3 = (int)(&ecostable)[param_1 & 0x7ff];
   if ((param_1 & 0x800) != 0) {
     iVar2 = -iVar2;
     iVar3 = -iVar3;
@@ -1339,7 +1339,7 @@ int rsin(uint param_1)
 {
   int iVar1;
   
-  iVar1 = (int)ecostable[param_1 & 0x7ff];
+  iVar1 = (int)(&ecostable)[param_1 & 0x7ff];
   if ((param_1 & 0x800) != 0) {
     iVar1 = -iVar1;
   }
@@ -1380,7 +1380,7 @@ int rcos(uint param_1)
 {
   int iVar1;
   
-  iVar1 = (int)SHORT_ARRAY_800c9910[param_1 & 0x7ff];
+  iVar1 = (int)(&SHORT_800c9910)[param_1 & 0x7ff];
   if ((param_1 & 0x800) != 0) {
     iVar1 = -iVar1;
   }
@@ -1452,9 +1452,9 @@ int MATH3D_racos_S(int param_1)
     iVar2 = 0x100;
   }
   do {
-    if ((int)SHORT_ARRAY_800c9910[iVar1] == iVar4) break;
+    if ((int)(&SHORT_800c9910)[iVar1] == iVar4) break;
     iVar3 = iVar2 >> 1;
-    if ((int)SHORT_ARRAY_800c9910[iVar1] - iVar4 < 0) {
+    if ((int)(&SHORT_800c9910)[iVar1] - iVar4 < 0) {
       iVar2 = -iVar2;
     }
     iVar1 = iVar1 + iVar2;
@@ -2542,22 +2542,22 @@ void G2Quat_FromEuler_S(int param_1,short *param_2)
     iVar10 = -iVar10;
   }
   uVar7 = iVar11 >> 1 & 0x7ff;
-  iVar4 = (int)ecostable[uVar7];
-  iVar8 = (int)SHORT_ARRAY_800c9910[uVar7];
+  iVar4 = (int)(&ecostable)[uVar7];
+  iVar8 = (int)(&SHORT_800c9910)[uVar7];
   if ((iVar11 >> 1 & 0x800U) != 0) {
     iVar4 = -iVar4;
     iVar8 = -iVar8;
   }
   uVar7 = iVar10 >> 1 & 0x7ff;
-  iVar11 = (int)ecostable[uVar7];
-  iVar12 = (int)SHORT_ARRAY_800c9910[uVar7];
+  iVar11 = (int)(&ecostable)[uVar7];
+  iVar12 = (int)(&SHORT_800c9910)[uVar7];
   if ((iVar10 >> 1 & 0x800U) != 0) {
     iVar11 = -iVar11;
     iVar12 = -iVar12;
   }
   uVar7 = iVar18 >> 1 & 0x7ff;
-  iVar10 = (int)ecostable[uVar7];
-  iVar17 = (int)SHORT_ARRAY_800c9910[uVar7];
+  iVar10 = (int)(&ecostable)[uVar7];
+  iVar17 = (int)(&SHORT_800c9910)[uVar7];
   if ((iVar18 >> 1 & 0x800U) != 0) {
     iVar10 = -iVar10;
     iVar17 = -iVar17;

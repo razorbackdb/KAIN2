@@ -7,19 +7,8 @@ bufferSavedIntroArray64 = null;
 GlobalSave = 00000000;
 // long @0x800CF8AC, len = 0x00000004
 numbufferedIntros = 0x0;
-// long[10] @0x800CF8B4, len = 0x00000028
-SaveArraySize =
-    {
-        0x0,
-        0x28,
-        0x10,
-        0x8,
-        0x342,
-        0x4,
-        0x78,
-        0x20,
-        0xc,
-        0xa};
+// long @0x800CF8B4, len = 0x00000004
+SaveArraySize = 0x0;
 // SavedInfoTracker @0x800D59C0, len = 0x00000010
 savedInfoTracker =
     {
@@ -193,7 +182,7 @@ void *SAVE_GetSavedBlock(long saveType, long extraSize)
   {
     DEBUG_FatalError(s_illegal_save_type__d_800cf8dc);
   }
-  iVar4 = (SaveArraySize[saveType] + extraSize + 3 >> 2) * 4;
+  iVar4 = ((&SaveArraySize)[saveType] + extraSize + 3 >> 2) * 4;
   bVar1 = false;
   if (0x3fc < iVar4)
   {

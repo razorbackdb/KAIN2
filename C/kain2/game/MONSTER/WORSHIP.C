@@ -17,67 +17,21 @@ WORSHIP_FunctionTable =
 		// _MonsterStateChoice * @0x800CF728, len = 0x00000004
 		.stateFuncs = &WORSHIP_StateChoiceTable,
 		// char * @0x800CF72C, len = 0x00000004
-		.versionID = "Jun 30 1999" /* collapsed from &monVersion */,
+		.versionID = &monVersion,
 		// char * @0x800CF730, len = 0x00000004
 		.localVersionID = 00000000};
-// _MonsterStateChoice[5] @0x800CABF0, len = 0x0000003C
+// _MonsterStateChoice @0x800CABF0, len = 0x0000000C
 WORSHIP_StateChoiceTable =
 	{
-		// _MonsterStateChoice @0x800CABF0, len = 0x0000000C
-		{
-			// int @0x800CABF0, len = 0x00000004
-			.state = 0x9,
-			// _MonsterState @0x800CABF4, len = 0x00000008
-			.functions =
-				{
-					// _func_88 * @0x800CABF4, len = 0x00000004
-					.entryFunction = &HUMAN_StunnedEntry,
-					// _func_89 * @0x800CABF8, len = 0x00000004
-					.stateFunction = &HUMAN_Stunned}},
-		// _MonsterStateChoice @0x800CABFC, len = 0x0000000C
-		{
-			// int @0x800CABFC, len = 0x00000004
-			.state = 0x17,
-			// _MonsterState @0x800CAC00, len = 0x00000008
-			.functions =
-				{
-					// _func_88 * @0x800CAC00, len = 0x00000004
-					.entryFunction = &HUMAN_DeadEntry,
-					// _func_89 * @0x800CAC04, len = 0x00000004
-					.stateFunction = &HUMAN_Dead}},
-		// _MonsterStateChoice @0x800CAC08, len = 0x0000000C
-		{
-			// int @0x800CAC08, len = 0x00000004
-			.state = 0x1b,
-			// _MonsterState @0x800CAC0C, len = 0x00000008
-			.functions =
-				{
-					// _func_88 * @0x800CAC0C, len = 0x00000004
-					.entryFunction = &HUMAN_EmbraceEntry,
-					// _func_89 * @0x800CAC10, len = 0x00000004
-					.stateFunction = &HUMAN_Embrace}},
-		// _MonsterStateChoice @0x800CAC14, len = 0x0000000C
-		{
-			// int @0x800CAC14, len = 0x00000004
-			.state = 0xd,
-			// _MonsterState @0x800CAC18, len = 0x00000008
-			.functions =
-				{
-					// _func_88 * @0x800CAC18, len = 0x00000004
-					.entryFunction = &WORSHIP_CombatEntry,
-					// _func_89 * @0x800CAC1C, len = 0x00000004
-					.stateFunction = &MON_Combat}},
-		// _MonsterStateChoice @0x800CAC20, len = 0x0000000C
-		{
-			// int @0x800CAC20, len = 0x00000004
-			.state = -0x1,
-			// _MonsterState @0x800CAC24, len = 0x00000008
-			.functions =
-				{
-					// _func_88 * @0x800CAC24, len = 0x00000004
-					.entryFunction = 00000000,
-					// _func_89 * @0x800CAC28, len = 0x00000004
-					.stateFunction = 00000000}}};
+		// int @0x800CABF0, len = 0x00000004
+		.state = 0x9,
+		// _MonsterState @0x800CABF4, len = 0x00000008
+		.functions =
+			{
+				// _func_88 * @0x800CABF4, len = 0x00000004
+				.entryFunction = &HUMAN_StunnedEntry,
+				// _func_89 * @0x800CABF8, len = 0x00000004
+				.stateFunction = &HUMAN_Stunned}};
 // decompiled code
 // original method signature:
 // void /*$ra*/ WORSHIP_Init(struct _Instance *instance /*$s2*/)

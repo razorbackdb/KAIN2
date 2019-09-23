@@ -17,198 +17,16 @@ DefaultFunctionTable =
 		// _MonsterStateChoice * @0x800CF6A0, len = 0x00000004
 		.stateFuncs = 00000000,
 		// char * @0x800CF6A4, len = 0x00000004
-		.versionID = "Jun 30 1999" /* collapsed from &monVersion */,
+		.versionID = &monVersion,
 		// char * @0x800CF6A8, len = 0x00000004
 		.localVersionID = 00000000};
-// _MonsterState[31] @0x800CAA20, len = 0x000000F8
+// _MonsterState @0x800CAA20, len = 0x00000008
 DefaultStateTable =
 	{
-		// _MonsterState @0x800CAA20, len = 0x00000008
-		{
-			// _func_88 * @0x800CAA20, len = 0x00000004
-			.entryFunction = &MON_BirthEntry,
-			// _func_89 * @0x800CAA24, len = 0x00000004
-			.stateFunction = &MON_Birth},
-		// _MonsterState @0x800CAA28, len = 0x00000008
-		{
-			// _func_88 * @0x800CAA28, len = 0x00000004
-			.entryFunction = &MON_PursueEntry,
-			// _func_89 * @0x800CAA2C, len = 0x00000004
-			.stateFunction = &MON_Pursue},
-		// _MonsterState @0x800CAA30, len = 0x00000008
-		{
-			// _func_88 * @0x800CAA30, len = 0x00000004
-			.entryFunction = &MON_IdleEntry,
-			// _func_89 * @0x800CAA34, len = 0x00000004
-			.stateFunction = &MON_Idle},
-		// _MonsterState @0x800CAA38, len = 0x00000008
-		{
-			// _func_88 * @0x800CAA38, len = 0x00000004
-			.entryFunction = &MON_MissileHitEntry,
-			// _func_89 * @0x800CAA3C, len = 0x00000004
-			.stateFunction = &MON_MissileHit},
-		// _MonsterState @0x800CAA40, len = 0x00000008
-		{
-			// _func_88 * @0x800CAA40, len = 0x00000004
-			.entryFunction = &MON_FallEntry,
-			// _func_89 * @0x800CAA44, len = 0x00000004
-			.stateFunction = &MON_Fall},
-		// _MonsterState @0x800CAA48, len = 0x00000008
-		{
-			// _func_88 * @0x800CAA48, len = 0x00000004
-			.entryFunction = &MON_WanderEntry,
-			// _func_89 * @0x800CAA4C, len = 0x00000004
-			.stateFunction = &MON_Wander},
-		// _MonsterState @0x800CAA50, len = 0x00000008
-		{
-			// _func_88 * @0x800CAA50, len = 0x00000004
-			.entryFunction = &MON_AttackEntry,
-			// _func_89 * @0x800CAA54, len = 0x00000004
-			.stateFunction = &MON_Attack},
-		// _MonsterState @0x800CAA58, len = 0x00000008
-		{
-			// _func_88 * @0x800CAA58, len = 0x00000004
-			.entryFunction = &MON_ImpaleDeathEntry,
-			// _func_89 * @0x800CAA5C, len = 0x00000004
-			.stateFunction = &MON_ImpaleDeath},
-		// _MonsterState @0x800CAA60, len = 0x00000008
-		{
-			// _func_88 * @0x800CAA60, len = 0x00000004
-			.entryFunction = &MON_HitEntry,
-			// _func_89 * @0x800CAA64, len = 0x00000004
-			.stateFunction = &MON_Hit},
-		// _MonsterState @0x800CAA68, len = 0x00000008
-		{
-			// _func_88 * @0x800CAA68, len = 0x00000004
-			.entryFunction = &MON_StunnedEntry,
-			// _func_89 * @0x800CAA6C, len = 0x00000004
-			.stateFunction = &MON_Stunned},
-		// _MonsterState @0x800CAA70, len = 0x00000008
-		{
-			// _func_88 * @0x800CAA70, len = 0x00000004
-			.entryFunction = &MON_GrabbedEntry,
-			// _func_89 * @0x800CAA74, len = 0x00000004
-			.stateFunction = &MON_Grabbed},
-		// _MonsterState @0x800CAA78, len = 0x00000008
-		{
-			// _func_88 * @0x800CAA78, len = 0x00000004
-			.entryFunction = &MON_ThrownEntry,
-			// _func_89 * @0x800CAA7C, len = 0x00000004
-			.stateFunction = &MON_Thrown},
-		// _MonsterState @0x800CAA80, len = 0x00000008
-		{
-			// _func_88 * @0x800CAA80, len = 0x00000004
-			.entryFunction = &MON_ImpactEntry,
-			// _func_89 * @0x800CAA84, len = 0x00000004
-			.stateFunction = &MON_Impact},
-		// _MonsterState @0x800CAA88, len = 0x00000008
-		{
-			// _func_88 * @0x800CAA88, len = 0x00000004
-			.entryFunction = &MON_CombatEntry,
-			// _func_89 * @0x800CAA8C, len = 0x00000004
-			.stateFunction = &MON_Combat},
-		// _MonsterState @0x800CAA90, len = 0x00000008
-		{
-			// _func_88 * @0x800CAA90, len = 0x00000004
-			.entryFunction = &MON_BreakHoldEntry,
-			// _func_89 * @0x800CAA94, len = 0x00000004
-			.stateFunction = &MON_BreakHold},
-		// _MonsterState @0x800CAA98, len = 0x00000008
-		{
-			// _func_88 * @0x800CAA98, len = 0x00000004
-			.entryFunction = &MON_LandOnFeetEntry,
-			// _func_89 * @0x800CAA9C, len = 0x00000004
-			.stateFunction = &MON_LandOnFeet},
-		// _MonsterState @0x800CAAA0, len = 0x00000008
-		{
-			// _func_88 * @0x800CAAA0, len = 0x00000004
-			.entryFunction = &MON_GeneralDeathEntry,
-			// _func_89 * @0x800CAAA4, len = 0x00000004
-			.stateFunction = &MON_GeneralDeath},
-		// _MonsterState @0x800CAAA8, len = 0x00000008
-		{
-			// _func_88 * @0x800CAAA8, len = 0x00000004
-			.entryFunction = &MON_EnvironmentDamageEntry,
-			// _func_89 * @0x800CAAAC, len = 0x00000004
-			.stateFunction = &MON_EnvironmentDamage},
-		// _MonsterState @0x800CAAB0, len = 0x00000008
-		{
-			// _func_88 * @0x800CAAB0, len = 0x00000004
-			.entryFunction = &MON_LandInWaterEntry,
-			// _func_89 * @0x800CAAB4, len = 0x00000004
-			.stateFunction = &MON_LandInWater},
-		// _MonsterState @0x800CAAB8, len = 0x00000008
-		{
-			// _func_88 * @0x800CAAB8, len = 0x00000004
-			.entryFunction = &MON_FleeEntry,
-			// _func_89 * @0x800CAABC, len = 0x00000004
-			.stateFunction = &MON_Flee},
-		// _MonsterState @0x800CAAC0, len = 0x00000008
-		{
-			// _func_88 * @0x800CAAC0, len = 0x00000004
-			.entryFunction = &MON_HideEntry,
-			// _func_89 * @0x800CAAC4, len = 0x00000004
-			.stateFunction = &MON_Hide},
-		// _MonsterState @0x800CAAC8, len = 0x00000008
-		{
-			// _func_88 * @0x800CAAC8, len = 0x00000004
-			.entryFunction = &MON_SurpriseAttackEntry,
-			// _func_89 * @0x800CAACC, len = 0x00000004
-			.stateFunction = &MON_SurpriseAttack},
-		// _MonsterState @0x800CAAD0, len = 0x00000008
-		{
-			// _func_88 * @0x800CAAD0, len = 0x00000004
-			.entryFunction = &MON_ParryEntry,
-			// _func_89 * @0x800CAAD4, len = 0x00000004
-			.stateFunction = &MON_Parry},
-		// _MonsterState @0x800CAAD8, len = 0x00000008
-		{
-			// _func_88 * @0x800CAAD8, len = 0x00000004
-			.entryFunction = &MON_DeadEntry,
-			// _func_89 * @0x800CAADC, len = 0x00000004
-			.stateFunction = &MON_Dead},
-		// _MonsterState @0x800CAAE0, len = 0x00000008
-		{
-			// _func_88 * @0x800CAAE0, len = 0x00000004
-			.entryFunction = &MON_SurprisedEntry,
-			// _func_89 * @0x800CAAE4, len = 0x00000004
-			.stateFunction = &MON_Surprised},
-		// _MonsterState @0x800CAAE8, len = 0x00000008
-		{
-			// _func_88 * @0x800CAAE8, len = 0x00000004
-			.entryFunction = &MON_NoticeEntry,
-			// _func_89 * @0x800CAAEC, len = 0x00000004
-			.stateFunction = &MON_Notice},
-		// _MonsterState @0x800CAAF0, len = 0x00000008
-		{
-			// _func_88 * @0x800CAAF0, len = 0x00000004
-			.entryFunction = &MON_PupateEntry,
-			// _func_89 * @0x800CAAF4, len = 0x00000004
-			.stateFunction = &MON_Pupate},
-		// _MonsterState @0x800CAAF8, len = 0x00000008
-		{
-			// _func_88 * @0x800CAAF8, len = 0x00000004
-			.entryFunction = &MON_EmbraceEntry,
-			// _func_89 * @0x800CAAFC, len = 0x00000004
-			.stateFunction = &MON_Embrace},
-		// _MonsterState @0x800CAB00, len = 0x00000008
-		{
-			// _func_88 * @0x800CAB00, len = 0x00000004
-			.entryFunction = &MON_ProjectileEntry,
-			// _func_89 * @0x800CAB04, len = 0x00000004
-			.stateFunction = &MON_Projectile},
-		// _MonsterState @0x800CAB08, len = 0x00000008
-		{
-			// _func_88 * @0x800CAB08, len = 0x00000004
-			.entryFunction = &MON_TerrainImpaleDeathEntry,
-			// _func_89 * @0x800CAB0C, len = 0x00000004
-			.stateFunction = &MON_TerrainImpaleDeath},
-		// _MonsterState @0x800CAB10, len = 0x00000008
-		{
-			// _func_88 * @0x800CAB10, len = 0x00000004
-			.entryFunction = &MON_PetrifiedEntry,
-			// _func_89 * @0x800CAB14, len = 0x00000004
-			.stateFunction = &MON_Petrified}};
+		// _func_88 * @0x800CAA20, len = 0x00000004
+		.entryFunction = &MON_BirthEntry,
+		// _func_89 * @0x800CAA24, len = 0x00000004
+		.stateFunction = &MON_Birth};
 // MONTABLE_207fake @0x800CA9F0, len = 0x00000008
 functionChoiceTable =
 	{
@@ -323,7 +141,7 @@ _MonsterState *MONTABLE_GetStateFuncs(_Instance *instance, int state)
 			iVar2 = *piVar3;
 		}
 	}
-	return DefaultStateTable + state;
+	return &DefaultStateTable + state;
 }
 
 // decompiled code

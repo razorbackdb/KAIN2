@@ -2702,8 +2702,8 @@ void MON_BirthSoul(_Instance *instance, int link)
     introUniqueID = *(int *)((int)pvVar2 + 0xd8);
     if ((introUniqueID == 0) || (0x1fff < introUniqueID))
     {
-      if ((ObjectAccess_ARRAY_800c878c[7].object != (void *)0x0) &&
-          (instance_00 = INSTANCE_BirthObject(instance, (Object *)ObjectAccess_ARRAY_800c878c[7].object, 0),
+      if ((ObjectAccess_800c87c4.object != (void *)0x0) &&
+          (instance_00 = INSTANCE_BirthObject(instance, (Object *)ObjectAccess_800c87c4.object, 0),
            instance_00 != (_Instance *)0x0))
       {
         if (0x1fff < *(int *)((int)pvVar2 + 0xd8))

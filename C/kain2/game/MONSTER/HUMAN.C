@@ -17,78 +17,21 @@ HUMAN_FunctionTable =
         // _MonsterStateChoice * @0x800CF5F4, len = 0x00000004
         .stateFuncs = &HUMAN_StateChoiceTable,
         // char * @0x800CF5F8, len = 0x00000004
-        .versionID = "Jun 30 1999" /* collapsed from &monVersion */,
+        .versionID = &monVersion,
         // char * @0x800CF5FC, len = 0x00000004
         .localVersionID = 00000000};
-// _MonsterStateChoice[6] @0x800CA978, len = 0x00000048
+// _MonsterStateChoice @0x800CA978, len = 0x0000000C
 HUMAN_StateChoiceTable =
     {
-        // _MonsterStateChoice @0x800CA978, len = 0x0000000C
-        {
-            // int @0x800CA978, len = 0x00000004
-            .state = 0x9,
-            // _MonsterState @0x800CA97C, len = 0x00000008
-            .functions =
-                {
-                    // _func_88 * @0x800CA97C, len = 0x00000004
-                    .entryFunction = &HUMAN_StunnedEntry,
-                    // _func_89 * @0x800CA980, len = 0x00000004
-                    .stateFunction = &HUMAN_Stunned}},
-        // _MonsterStateChoice @0x800CA984, len = 0x0000000C
-        {
-            // int @0x800CA984, len = 0x00000004
-            .state = 0x17,
-            // _MonsterState @0x800CA988, len = 0x00000008
-            .functions =
-                {
-                    // _func_88 * @0x800CA988, len = 0x00000004
-                    .entryFunction = &HUMAN_DeadEntry,
-                    // _func_89 * @0x800CA98C, len = 0x00000004
-                    .stateFunction = &HUMAN_Dead}},
-        // _MonsterStateChoice @0x800CA990, len = 0x0000000C
-        {
-            // int @0x800CA990, len = 0x00000004
-            .state = 0x1b,
-            // _MonsterState @0x800CA994, len = 0x00000008
-            .functions =
-                {
-                    // _func_88 * @0x800CA994, len = 0x00000004
-                    .entryFunction = &HUMAN_EmbraceEntry,
-                    // _func_89 * @0x800CA998, len = 0x00000004
-                    .stateFunction = &HUMAN_Embrace}},
-        // _MonsterStateChoice @0x800CA99C, len = 0x0000000C
-        {
-            // int @0x800CA99C, len = 0x00000004
-            .state = 0x2,
-            // _MonsterState @0x800CA9A0, len = 0x00000008
-            .functions =
-                {
-                    // _func_88 * @0x800CA9A0, len = 0x00000004
-                    .entryFunction = &HUMAN_IdleEntry,
-                    // _func_89 * @0x800CA9A4, len = 0x00000004
-                    .stateFunction = &HUMAN_Idle}},
-        // _MonsterStateChoice @0x800CA9A8, len = 0x0000000C
-        {
-            // int @0x800CA9A8, len = 0x00000004
-            .state = 0x13,
-            // _MonsterState @0x800CA9AC, len = 0x00000008
-            .functions =
-                {
-                    // _func_88 * @0x800CA9AC, len = 0x00000004
-                    .entryFunction = &MON_FleeEntry,
-                    // _func_89 * @0x800CA9B0, len = 0x00000004
-                    .stateFunction = &HUMAN_Flee}},
-        // _MonsterStateChoice @0x800CA9B4, len = 0x0000000C
-        {
-            // int @0x800CA9B4, len = 0x00000004
-            .state = -0x1,
-            // _MonsterState @0x800CA9B8, len = 0x00000008
-            .functions =
-                {
-                    // _func_88 * @0x800CA9B8, len = 0x00000004
-                    .entryFunction = 00000000,
-                    // _func_89 * @0x800CA9BC, len = 0x00000004
-                    .stateFunction = 00000000}}};
+        // int @0x800CA978, len = 0x00000004
+        .state = 0x9,
+        // _MonsterState @0x800CA97C, len = 0x00000008
+        .functions =
+            {
+                // _func_88 * @0x800CA97C, len = 0x00000004
+                .entryFunction = &HUMAN_StunnedEntry,
+                // _func_89 * @0x800CA980, len = 0x00000004
+                .stateFunction = &HUMAN_Stunned}};
 // decompiled code
 // original method signature:
 // void /*$ra*/ HUMAN_WaitForWeapon(struct _Instance *instance /*$s0*/, struct GameTracker *gameTracker /*$a1*/)

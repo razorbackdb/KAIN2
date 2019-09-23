@@ -1312,7 +1312,7 @@ void StateHandlerSwim(__CharacterState *In, int CurrentSection, int Data)
                       if (CurrentSection == 0)
                       {
                         Raziel.Mode = 0x10;
-                        SetExternalForce(__Force_ARRAY_800d58ec, 0, 0, -0x10, 1, 0x1000);
+                        SetExternalForce(&__Force_800d58ec, 0, 0, -0x10, 1, 0x1000);
                         In->CharacterInstance->xVel = (int)Raziel.iVelocity.x;
                         In->CharacterInstance->yVel = (int)Raziel.iVelocity.y;
                         In->CharacterInstance->zVel = (int)Raziel.iVelocity.z;

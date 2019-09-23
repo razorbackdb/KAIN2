@@ -1,29 +1,29 @@
 #include "THISDUST.H"
 #include "DRAW.H"
 
-// undefined *32 @0x800CE1B8, len = 0x00000004
+// UVTYPE * @0x800CE1B8, len = 0x00000004
 face_uv0 = &DAT_1f800058;
-// undefined *32 @0x800CE1C4, len = 0x00000004
+// UVTYPE * @0x800CE1C4, len = 0x00000004
 face_uv01 = &DAT_1f800064;
-// undefined *32 @0x800CE1BC, len = 0x00000004
+// UVTYPE * @0x800CE1BC, len = 0x00000004
 face_uv1 = &DAT_1f80005c;
-// undefined *32 @0x800CE1C8, len = 0x00000004
+// UVTYPE * @0x800CE1C8, len = 0x00000004
 face_uv12 = &DAT_1f800068;
-// undefined *32 @0x800CE1C0, len = 0x00000004
+// UVTYPE * @0x800CE1C0, len = 0x00000004
 face_uv2 = &DAT_1f800060;
-// undefined *32 @0x800CE1CC, len = 0x00000004
+// UVTYPE * @0x800CE1CC, len = 0x00000004
 face_uv20 = &DAT_1f80006c;
-// undefined *32 @0x800CE1A0, len = 0x00000004
+// SVECTOR * @0x800CE1A0, len = 0x00000004
 face_v0 = &DAT_1f800028;
-// undefined *32 @0x800CE1AC, len = 0x00000004
+// SVECTOR * @0x800CE1AC, len = 0x00000004
 face_v01 = &DAT_1f800040;
-// undefined *32 @0x800CE1A4, len = 0x00000004
+// SVECTOR * @0x800CE1A4, len = 0x00000004
 face_v1 = &DAT_1f800030;
-// undefined *32 @0x800CE1B0, len = 0x00000004
+// SVECTOR * @0x800CE1B0, len = 0x00000004
 face_v12 = &DAT_1f800048;
-// undefined *32 @0x800CE1A8, len = 0x00000004
+// SVECTOR * @0x800CE1A8, len = 0x00000004
 face_v2 = &DAT_1f800038;
-// undefined *32 @0x800CE1B4, len = 0x00000004
+// SVECTOR * @0x800CE1B4, len = 0x00000004
 face_v20 = &DAT_1f800050;
 // SVECTOR @0x800D038C, len = 0x00000008
 shadow_vertices =

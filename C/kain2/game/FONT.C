@@ -5,729 +5,17 @@
 charMap = 0x00;
 // _BlockVramEntry * @0x800D05E4, len = 0x00000004
 FONT_vramBlock = null;
-// FontPos[72] @0x800C8500, len = 0x00000120
+// FontPos @0x800C8500, len = 0x00000004
 fontPos =
 	{
-		// FontPos @0x800C8500, len = 0x00000004
-		{
-			// char @0x800C8500, len = 0x00000001
-			.x = 0x00,
-			// char @0x800C8501, len = 0x00000001
-			.y = 0x00,
-			// char @0x800C8502, len = 0x00000001
-			.w = 0x0B,
-			// char @0x800C8503, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C8504, len = 0x00000004
-		{
-			// char @0x800C8504, len = 0x00000001
-			.x = 0x0B,
-			// char @0x800C8505, len = 0x00000001
-			.y = 0x00,
-			// char @0x800C8506, len = 0x00000001
-			.w = 0x08,
-			// char @0x800C8507, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C8508, len = 0x00000004
-		{
-			// char @0x800C8508, len = 0x00000001
-			.x = 0x14,
-			// char @0x800C8509, len = 0x00000001
-			.y = 0x00,
-			// char @0x800C850A, len = 0x00000001
-			.w = 0x08,
-			// char @0x800C850B, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C850C, len = 0x00000004
-		{
-			// char @0x800C850C, len = 0x00000001
-			.x = 0x1C,
-			// char @0x800C850D, len = 0x00000001
-			.y = 0x00,
-			// char @0x800C850E, len = 0x00000001
-			.w = 0x09,
-			// char @0x800C850F, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C8510, len = 0x00000004
-		{
-			// char @0x800C8510, len = 0x00000001
-			.x = 0x25,
-			// char @0x800C8511, len = 0x00000001
-			.y = 0x00,
-			// char @0x800C8512, len = 0x00000001
-			.w = 0x08,
-			// char @0x800C8513, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C8514, len = 0x00000004
-		{
-			// char @0x800C8514, len = 0x00000001
-			.x = 0x2D,
-			// char @0x800C8515, len = 0x00000001
-			.y = 0x00,
-			// char @0x800C8516, len = 0x00000001
-			.w = 0x08,
-			// char @0x800C8517, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C8518, len = 0x00000004
-		{
-			// char @0x800C8518, len = 0x00000001
-			.x = 0x35,
-			// char @0x800C8519, len = 0x00000001
-			.y = 0x00,
-			// char @0x800C851A, len = 0x00000001
-			.w = 0x0A,
-			// char @0x800C851B, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C851C, len = 0x00000004
-		{
-			// char @0x800C851C, len = 0x00000001
-			.x = 0x00,
-			// char @0x800C851D, len = 0x00000001
-			.y = 0x0C,
-			// char @0x800C851E, len = 0x00000001
-			.w = 0x09,
-			// char @0x800C851F, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C8520, len = 0x00000004
-		{
-			// char @0x800C8520, len = 0x00000001
-			.x = 0x09,
-			// char @0x800C8521, len = 0x00000001
-			.y = 0x0C,
-			// char @0x800C8522, len = 0x00000001
-			.w = 0x03,
-			// char @0x800C8523, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C8524, len = 0x00000004
-		{
-			// char @0x800C8524, len = 0x00000001
-			.x = 0x2A,
-			// char @0x800C8525, len = 0x00000001
-			.y = 0x0C,
-			// char @0x800C8526, len = 0x00000001
-			.w = 0x05,
-			// char @0x800C8527, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C8528, len = 0x00000004
-		{
-			// char @0x800C8528, len = 0x00000001
-			.x = 0x2F,
-			// char @0x800C8529, len = 0x00000001
-			.y = 0x0D,
-			// char @0x800C852A, len = 0x00000001
-			.w = 0x08,
-			// char @0x800C852B, len = 0x00000001
-			.h = 0x0B},
-		// FontPos @0x800C852C, len = 0x00000004
-		{
-			// char @0x800C852C, len = 0x00000001
-			.x = 0x01,
-			// char @0x800C852D, len = 0x00000001
-			.y = 0x6F,
-			// char @0x800C852E, len = 0x00000001
-			.w = 0x07,
-			// char @0x800C852F, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C8530, len = 0x00000004
-		{
-			// char @0x800C8530, len = 0x00000001
-			.x = 0x00,
-			// char @0x800C8531, len = 0x00000001
-			.y = 0x1A,
-			// char @0x800C8532, len = 0x00000001
-			.w = 0x0A,
-			// char @0x800C8533, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C8534, len = 0x00000004
-		{
-			// char @0x800C8534, len = 0x00000001
-			.x = 0x0B,
-			// char @0x800C8535, len = 0x00000001
-			.y = 0x1A,
-			// char @0x800C8536, len = 0x00000001
-			.w = 0x08,
-			// char @0x800C8537, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C8538, len = 0x00000004
-		{
-			// char @0x800C8538, len = 0x00000001
-			.x = 0x13,
-			// char @0x800C8539, len = 0x00000001
-			.y = 0x1A,
-			// char @0x800C853A, len = 0x00000001
-			.w = 0x0A,
-			// char @0x800C853B, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C853C, len = 0x00000004
-		{
-			// char @0x800C853C, len = 0x00000001
-			.x = 0x1D,
-			// char @0x800C853D, len = 0x00000001
-			.y = 0x1A,
-			// char @0x800C853E, len = 0x00000001
-			.w = 0x07,
-			// char @0x800C853F, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C8540, len = 0x00000004
-		{
-			// char @0x800C8540, len = 0x00000001
-			.x = 0x2E,
-			// char @0x800C8541, len = 0x00000001
-			.y = 0x1A,
-			// char @0x800C8542, len = 0x00000001
-			.w = 0x08,
-			// char @0x800C8543, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C8544, len = 0x00000004
-		{
-			// char @0x800C8544, len = 0x00000001
-			.x = 0x00,
-			// char @0x800C8545, len = 0x00000001
-			.y = 0x27,
-			// char @0x800C8546, len = 0x00000001
-			.w = 0x09,
-			// char @0x800C8547, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C8548, len = 0x00000004
-		{
-			// char @0x800C8548, len = 0x00000001
-			.x = 0x0A,
-			// char @0x800C8549, len = 0x00000001
-			.y = 0x27,
-			// char @0x800C854A, len = 0x00000001
-			.w = 0x09,
-			// char @0x800C854B, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C854C, len = 0x00000004
-		{
-			// char @0x800C854C, len = 0x00000001
-			.x = 0x13,
-			// char @0x800C854D, len = 0x00000001
-			.y = 0x27,
-			// char @0x800C854E, len = 0x00000001
-			.w = 0x08,
-			// char @0x800C854F, len = 0x00000001
-			.h = 0x0B},
-		// FontPos @0x800C8550, len = 0x00000004
-		{
-			// char @0x800C8550, len = 0x00000001
-			.x = 0x1B,
-			// char @0x800C8551, len = 0x00000001
-			.y = 0x27,
-			// char @0x800C8552, len = 0x00000001
-			.w = 0x09,
-			// char @0x800C8553, len = 0x00000001
-			.h = 0x0B},
-		// FontPos @0x800C8554, len = 0x00000004
-		{
-			// char @0x800C8554, len = 0x00000001
-			.x = 0x25,
-			// char @0x800C8555, len = 0x00000001
-			.y = 0x27,
-			// char @0x800C8556, len = 0x00000001
-			.w = 0x0A,
-			// char @0x800C8557, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C8558, len = 0x00000004
-		{
-			// char @0x800C8558, len = 0x00000001
-			.x = 0x2F,
-			// char @0x800C8559, len = 0x00000001
-			.y = 0x27,
-			// char @0x800C855A, len = 0x00000001
-			.w = 0x08,
-			// char @0x800C855B, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C855C, len = 0x00000004
-		{
-			// char @0x800C855C, len = 0x00000001
-			.x = 0x01,
-			// char @0x800C855D, len = 0x00000001
-			.y = 0x33,
-			// char @0x800C855E, len = 0x00000001
-			.w = 0x09,
-			// char @0x800C855F, len = 0x00000001
-			.h = 0x0D},
-		// FontPos @0x800C8560, len = 0x00000004
-		{
-			// char @0x800C8560, len = 0x00000001
-			.x = 0x0A,
-			// char @0x800C8561, len = 0x00000001
-			.y = 0x33,
-			// char @0x800C8562, len = 0x00000001
-			.w = 0x08,
-			// char @0x800C8563, len = 0x00000001
-			.h = 0x0D},
-		// FontPos @0x800C8564, len = 0x00000004
-		{
-			// char @0x800C8564, len = 0x00000001
-			.x = 0x12,
-			// char @0x800C8565, len = 0x00000001
-			.y = 0x33,
-			// char @0x800C8566, len = 0x00000001
-			.w = 0x08,
-			// char @0x800C8567, len = 0x00000001
-			.h = 0x0D},
-		// FontPos @0x800C8568, len = 0x00000004
-		{
-			// char @0x800C8568, len = 0x00000001
-			.x = 0x1B,
-			// char @0x800C8569, len = 0x00000001
-			.y = 0x33,
-			// char @0x800C856A, len = 0x00000001
-			.w = 0x07,
-			// char @0x800C856B, len = 0x00000001
-			.h = 0x0D},
-		// FontPos @0x800C856C, len = 0x00000004
-		{
-			// char @0x800C856C, len = 0x00000001
-			.x = 0x23,
-			// char @0x800C856D, len = 0x00000001
-			.y = 0x33,
-			// char @0x800C856E, len = 0x00000001
-			.w = 0x08,
-			// char @0x800C856F, len = 0x00000001
-			.h = 0x0D},
-		// FontPos @0x800C8570, len = 0x00000004
-		{
-			// char @0x800C8570, len = 0x00000001
-			.x = 0x2C,
-			// char @0x800C8571, len = 0x00000001
-			.y = 0x33,
-			// char @0x800C8572, len = 0x00000001
-			.w = 0x07,
-			// char @0x800C8573, len = 0x00000001
-			.h = 0x0D},
-		// FontPos @0x800C8574, len = 0x00000004
-		{
-			// char @0x800C8574, len = 0x00000001
-			.x = 0x34,
-			// char @0x800C8575, len = 0x00000001
-			.y = 0x33,
-			// char @0x800C8576, len = 0x00000001
-			.w = 0x07,
-			// char @0x800C8577, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C8578, len = 0x00000004
-		{
-			// char @0x800C8578, len = 0x00000001
-			.x = 0x0C,
-			// char @0x800C8579, len = 0x00000001
-			.y = 0x0C,
-			// char @0x800C857A, len = 0x00000001
-			.w = 0x08,
-			// char @0x800C857B, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C857C, len = 0x00000004
-		{
-			// char @0x800C857C, len = 0x00000001
-			.x = 0x14,
-			// char @0x800C857D, len = 0x00000001
-			.y = 0x0C,
-			// char @0x800C857E, len = 0x00000001
-			.w = 0x07,
-			// char @0x800C857F, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C8580, len = 0x00000004
-		{
-			// char @0x800C8580, len = 0x00000001
-			.x = 0x21,
-			// char @0x800C8581, len = 0x00000001
-			.y = 0x0C,
-			// char @0x800C8582, len = 0x00000001
-			.w = 0x07,
-			// char @0x800C8583, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C8584, len = 0x00000004
-		{
-			// char @0x800C8584, len = 0x00000001
-			.x = 0x3D,
-			// char @0x800C8585, len = 0x00000001
-			.y = 0x20,
-			// char @0x800C8586, len = 0x00000001
-			.w = 0x03,
-			// char @0x800C8587, len = 0x00000001
-			.h = 0x03},
-		// FontPos @0x800C8588, len = 0x00000004
-		{
-			// char @0x800C8588, len = 0x00000001
-			.x = 0x3D,
-			// char @0x800C8589, len = 0x00000001
-			.y = 0x33,
-			// char @0x800C858A, len = 0x00000001
-			.w = 0x02,
-			// char @0x800C858B, len = 0x00000001
-			.h = 0x0D},
-		// FontPos @0x800C858C, len = 0x00000004
-		{
-			// char @0x800C858C, len = 0x00000001
-			.x = 0x36,
-			// char @0x800C858D, len = 0x00000001
-			.y = 0x19,
-			// char @0x800C858E, len = 0x00000001
-			.w = 0x07,
-			// char @0x800C858F, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C8590, len = 0x00000004
-		{
-			// char @0x800C8590, len = 0x00000001
-			.x = 0x30,
-			// char @0x800C8591, len = 0x00000001
-			.y = 0x05,
-			// char @0x800C8592, len = 0x00000001
-			.w = 0x05,
-			// char @0x800C8593, len = 0x00000001
-			.h = 0x07},
-		// FontPos @0x800C8594, len = 0x00000004
-		{
-			// char @0x800C8594, len = 0x00000001
-			.x = 0x1B,
-			// char @0x800C8595, len = 0x00000001
-			.y = 0x0C,
-			// char @0x800C8596, len = 0x00000001
-			.w = 0x05,
-			// char @0x800C8597, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C8598, len = 0x00000004
-		{
-			// char @0x800C8598, len = 0x00000001
-			.x = 0x39,
-			// char @0x800C8599, len = 0x00000001
-			.y = 0x27,
-			// char @0x800C859A, len = 0x00000001
-			.w = 0x06,
-			// char @0x800C859B, len = 0x00000001
-			.h = 0x0B},
-		// FontPos @0x800C859C, len = 0x00000004
-		{
-			// char @0x800C859C, len = 0x00000001
-			.x = 0x3D,
-			// char @0x800C859D, len = 0x00000001
-			.y = 0x1A,
-			// char @0x800C859E, len = 0x00000001
-			.w = 0x03,
-			// char @0x800C859F, len = 0x00000001
-			.h = 0x0A},
-		// FontPos @0x800C85A0, len = 0x00000004
-		{
-			// char @0x800C85A0, len = 0x00000001
-			.x = 0x13,
-			// char @0x800C85A1, len = 0x00000001
-			.y = 0x1A,
-			// char @0x800C85A2, len = 0x00000001
-			.w = 0x05,
-			// char @0x800C85A3, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C85A4, len = 0x00000004
-		{
-			// char @0x800C85A4, len = 0x00000001
-			.x = 0x18,
-			// char @0x800C85A5, len = 0x00000001
-			.y = 0x1A,
-			// char @0x800C85A6, len = 0x00000001
-			.w = 0x05,
-			// char @0x800C85A7, len = 0x00000001
-			.h = 0x0B},
-		// FontPos @0x800C85A8, len = 0x00000004
-		{
-			// char @0x800C85A8, len = 0x00000001
-			.x = 0x10,
-			// char @0x800C85A9, len = 0x00000001
-			.y = 0x64,
-			// char @0x800C85AA, len = 0x00000001
-			.w = 0x07,
-			// char @0x800C85AB, len = 0x00000001
-			.h = 0x0A},
-		// FontPos @0x800C85AC, len = 0x00000004
-		{
-			// char @0x800C85AC, len = 0x00000001
-			.x = 0x31,
-			// char @0x800C85AD, len = 0x00000001
-			.y = 0x66,
-			// char @0x800C85AE, len = 0x00000001
-			.w = 0x08,
-			// char @0x800C85AF, len = 0x00000001
-			.h = 0x07},
-		// FontPos @0x800C85B0, len = 0x00000004
-		{
-			// char @0x800C85B0, len = 0x00000001
-			.x = 0x31,
-			// char @0x800C85B1, len = 0x00000001
-			.y = 0x25,
-			// char @0x800C85B2, len = 0x00000001
-			.w = 0x05,
-			// char @0x800C85B3, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C85B4, len = 0x00000004
-		{
-			// char @0x800C85B4, len = 0x00000001
-			.x = 0x20,
-			// char @0x800C85B5, len = 0x00000001
-			.y = 0x40,
-			// char @0x800C85B6, len = 0x00000001
-			.w = 0x07,
-			// char @0x800C85B7, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C85B8, len = 0x00000004
-		{
-			// char @0x800C85B8, len = 0x00000001
-			.x = 0x24,
-			// char @0x800C85B9, len = 0x00000001
-			.y = 0x19,
-			// char @0x800C85BA, len = 0x00000001
-			.w = 0x09,
-			// char @0x800C85BB, len = 0x00000001
-			.h = 0x05},
-		// FontPos @0x800C85BC, len = 0x00000004
-		{
-			// char @0x800C85BC, len = 0x00000001
-			.x = 0x14,
-			// char @0x800C85BD, len = 0x00000001
-			.y = 0x46,
-			// char @0x800C85BE, len = 0x00000001
-			.w = 0x05,
-			// char @0x800C85BF, len = 0x00000001
-			.h = 0x04},
-		// FontPos @0x800C85C0, len = 0x00000004
-		{
-			// char @0x800C85C0, len = 0x00000001
-			.x = 0x00,
-			// char @0x800C85C1, len = 0x00000001
-			.y = 0x40,
-			// char @0x800C85C2, len = 0x00000001
-			.w = 0x08,
-			// char @0x800C85C3, len = 0x00000001
-			.h = 0x0A},
-		// FontPos @0x800C85C4, len = 0x00000004
-		{
-			// char @0x800C85C4, len = 0x00000001
-			.x = 0x28,
-			// char @0x800C85C5, len = 0x00000001
-			.y = 0x40,
-			// char @0x800C85C6, len = 0x00000001
-			.w = 0x07,
-			// char @0x800C85C7, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C85C8, len = 0x00000004
-		{
-			// char @0x800C85C8, len = 0x00000001
-			.x = 0x3D,
-			// char @0x800C85C9, len = 0x00000001
-			.y = 0x33,
-			// char @0x800C85CA, len = 0x00000001
-			.w = 0x02,
-			// char @0x800C85CB, len = 0x00000001
-			.h = 0xF3},
-		// FontPos @0x800C85CC, len = 0x00000004
-		{
-			// char @0x800C85CC, len = 0x00000001
-			.x = 0x25,
-			// char @0x800C85CD, len = 0x00000001
-			.y = 0x1E,
-			// char @0x800C85CE, len = 0x00000001
-			.w = 0x08,
-			// char @0x800C85CF, len = 0x00000001
-			.h = 0x02},
-		// FontPos @0x800C85D0, len = 0x00000004
-		{
-			// char @0x800C85D0, len = 0x00000001
-			.x = 0x12,
-			// char @0x800C85D1, len = 0x00000001
-			.y = 0x40,
-			// char @0x800C85D2, len = 0x00000001
-			.w = 0x07,
-			// char @0x800C85D3, len = 0x00000001
-			.h = 0x04},
-		// FontPos @0x800C85D4, len = 0x00000004
-		{
-			// char @0x800C85D4, len = 0x00000001
-			.x = 0x0A,
-			// char @0x800C85D5, len = 0x00000001
-			.y = 0x40,
-			// char @0x800C85D6, len = 0x00000001
-			.w = 0x06,
-			// char @0x800C85D7, len = 0x00000001
-			.h = 0x05},
-		// FontPos @0x800C85D8, len = 0x00000004
-		{
-			// char @0x800C85D8, len = 0x00000001
-			.x = 0x0A,
-			// char @0x800C85D9, len = 0x00000001
-			.y = 0x46,
-			// char @0x800C85DA, len = 0x00000001
-			.w = 0x06,
-			// char @0x800C85DB, len = 0x00000001
-			.h = 0x05},
-		// FontPos @0x800C85DC, len = 0x00000004
-		{
-			// char @0x800C85DC, len = 0x00000001
-			.x = 0x24,
-			// char @0x800C85DD, len = 0x00000001
-			.y = 0x19,
-			// char @0x800C85DE, len = 0x00000001
-			.w = 0x08,
-			// char @0x800C85DF, len = 0x00000001
-			.h = 0x04},
-		// FontPos @0x800C85E0, len = 0x00000004
-		{
-			// char @0x800C85E0, len = 0x00000001
-			.x = 0x1B,
-			// char @0x800C85E1, len = 0x00000001
-			.y = 0x47,
-			// char @0x800C85E2, len = 0x00000001
-			.w = 0x05,
-			// char @0x800C85E3, len = 0x00000001
-			.h = 0x04},
-		// FontPos @0x800C85E4, len = 0x00000004
-		{
-			// char @0x800C85E4, len = 0x00000001
-			.x = 0x2F,
-			// char @0x800C85E5, len = 0x00000001
-			.y = 0x40,
-			// char @0x800C85E6, len = 0x00000001
-			.w = 0x0B,
-			// char @0x800C85E7, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C85E8, len = 0x00000004
-		{
-			// char @0x800C85E8, len = 0x00000001
-			.x = 0x00,
-			// char @0x800C85E9, len = 0x00000001
-			.y = 0x4D,
-			// char @0x800C85EA, len = 0x00000001
-			.w = 0x0C,
-			// char @0x800C85EB, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C85EC, len = 0x00000004
-		{
-			// char @0x800C85EC, len = 0x00000001
-			.x = 0x0C,
-			// char @0x800C85ED, len = 0x00000001
-			.y = 0x4D,
-			// char @0x800C85EE, len = 0x00000001
-			.w = 0x0C,
-			// char @0x800C85EF, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C85F0, len = 0x00000004
-		{
-			// char @0x800C85F0, len = 0x00000001
-			.x = 0x18,
-			// char @0x800C85F1, len = 0x00000001
-			.y = 0x4D,
-			// char @0x800C85F2, len = 0x00000001
-			.w = 0x0C,
-			// char @0x800C85F3, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C85F4, len = 0x00000004
-		{
-			// char @0x800C85F4, len = 0x00000001
-			.x = 0x24,
-			// char @0x800C85F5, len = 0x00000001
-			.y = 0x4D,
-			// char @0x800C85F6, len = 0x00000001
-			.w = 0x0C,
-			// char @0x800C85F7, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C85F8, len = 0x00000004
-		{
-			// char @0x800C85F8, len = 0x00000001
-			.x = 0x30,
-			// char @0x800C85F9, len = 0x00000001
-			.y = 0x4D,
-			// char @0x800C85FA, len = 0x00000001
-			.w = 0x0A,
-			// char @0x800C85FB, len = 0x00000001
-			.h = 0x0C},
-		// FontPos @0x800C85FC, len = 0x00000004
-		{
-			// char @0x800C85FC, len = 0x00000001
-			.x = 0x30,
-			// char @0x800C85FD, len = 0x00000001
-			.y = 0x4B,
-			// char @0x800C85FE, len = 0x00000001
-			.w = 0x0A,
-			// char @0x800C85FF, len = 0x00000001
-			.h = 0xF4},
-		// FontPos @0x800C8600, len = 0x00000004
-		{
-			// char @0x800C8600, len = 0x00000001
-			.x = 0x00,
-			// char @0x800C8601, len = 0x00000001
-			.y = 0x59,
-			// char @0x800C8602, len = 0x00000001
-			.w = 0x0C,
-			// char @0x800C8603, len = 0x00000001
-			.h = 0x0B},
-		// FontPos @0x800C8604, len = 0x00000004
-		{
-			// char @0x800C8604, len = 0x00000001
-			.x = 0x00,
-			// char @0x800C8605, len = 0x00000001
-			.y = 0x59,
-			// char @0x800C8606, len = 0x00000001
-			.w = 0xF4,
-			// char @0x800C8607, len = 0x00000001
-			.h = 0x0B},
-		// FontPos @0x800C8608, len = 0x00000004
-		{
-			// char @0x800C8608, len = 0x00000001
-			.x = 0x0D,
-			// char @0x800C8609, len = 0x00000001
-			.y = 0x59,
-			// char @0x800C860A, len = 0x00000001
-			.w = 0x0E,
-			// char @0x800C860B, len = 0x00000001
-			.h = 0x0B},
-		// FontPos @0x800C860C, len = 0x00000004
-		{
-			// char @0x800C860C, len = 0x00000001
-			.x = 0x1C,
-			// char @0x800C860D, len = 0x00000001
-			.y = 0x59,
-			// char @0x800C860E, len = 0x00000001
-			.w = 0x0E,
-			// char @0x800C860F, len = 0x00000001
-			.h = 0x0B},
-		// FontPos @0x800C8610, len = 0x00000004
-		{
-			// char @0x800C8610, len = 0x00000001
-			.x = 0x2B,
-			// char @0x800C8611, len = 0x00000001
-			.y = 0x59,
-			// char @0x800C8612, len = 0x00000001
-			.w = 0x0E,
-			// char @0x800C8613, len = 0x00000001
-			.h = 0x0B},
-		// FontPos @0x800C8614, len = 0x00000004
-		{
-			// char @0x800C8614, len = 0x00000001
-			.x = 0x01,
-			// char @0x800C8615, len = 0x00000001
-			.y = 0x64,
-			// char @0x800C8616, len = 0x00000001
-			.w = 0x0E,
-			// char @0x800C8617, len = 0x00000001
-			.h = 0x0B},
-		// FontPos @0x800C8618, len = 0x00000004
-		{
-			// char @0x800C8618, len = 0x00000001
-			.x = 0x1A,
-			// char @0x800C8619, len = 0x00000001
-			.y = 0x64,
-			// char @0x800C861A, len = 0x00000001
-			.w = 0x09,
-			// char @0x800C861B, len = 0x00000001
-			.h = 0x0B},
-		// FontPos @0x800C861C, len = 0x00000004
-		{
-			// char @0x800C861C, len = 0x00000001
-			.x = 0x24,
-			// char @0x800C861D, len = 0x00000001
-			.y = 0x64,
-			// char @0x800C861E, len = 0x00000001
-			.w = 0x0C,
-			// char @0x800C861F, len = 0x00000001
-			.h = 0x0B}};
+		// char @0x800C8500, len = 0x00000001
+		.x = 0x00,
+		// char @0x800C8501, len = 0x00000001
+		.y = 0x00,
+		// char @0x800C8502, len = 0x00000001
+		.w = 0x0B,
+		// char @0x800C8503, len = 0x00000001
+		.h = 0x0C};
 // FontTracker @0x800D05EC, len = 0x00000620
 fontTracker =
 	{
@@ -3320,310 +2608,19 @@ fontTracker =
 		.color_global = 0x00,
 		// char @0x800D0C09, len = 0x00000001
 		.color_local = 0x00};
-// uchar[128] @0x800CE224, len = 0x00000080
-fontTransTable =
-	{
-		// uchar @0x800CE224, len = 0x00000001
-		0x24,
-		// uchar @0x800CE225, len = 0x00000001
-		0x24,
-		// uchar @0x800CE226, len = 0x00000001
-		0x24,
-		// uchar @0x800CE227, len = 0x00000001
-		0x24,
-		// uchar @0x800CE228, len = 0x00000001
-		0x24,
-		// uchar @0x800CE229, len = 0x00000001
-		0x24,
-		// uchar @0x800CE22A, len = 0x00000001
-		0x24,
-		// uchar @0x800CE22B, len = 0x00000001
-		0x24,
-		// uchar @0x800CE22C, len = 0x00000001
-		0x24,
-		// uchar @0x800CE22D, len = 0x00000001
-		0x24,
-		// uchar @0x800CE22E, len = 0x00000001
-		0x24,
-		// uchar @0x800CE22F, len = 0x00000001
-		0x24,
-		// uchar @0x800CE230, len = 0x00000001
-		0x24,
-		// uchar @0x800CE231, len = 0x00000001
-		0x24,
-		// uchar @0x800CE232, len = 0x00000001
-		0x24,
-		// uchar @0x800CE233, len = 0x00000001
-		0x24,
-		// uchar @0x800CE234, len = 0x00000001
-		0x24,
-		// uchar @0x800CE235, len = 0x00000001
-		0x56,
-		// uchar @0x800CE236, len = 0x00000001
-		0x57,
-		// uchar @0x800CE237, len = 0x00000001
-		0x58,
-		// uchar @0x800CE238, len = 0x00000001
-		0x59,
-		// uchar @0x800CE239, len = 0x00000001
-		0x5A,
-		// uchar @0x800CE23A, len = 0x00000001
-		0x5B,
-		// uchar @0x800CE23B, len = 0x00000001
-		0x24,
-		// uchar @0x800CE23C, len = 0x00000001
-		0x24,
-		// uchar @0x800CE23D, len = 0x00000001
-		0x24,
-		// uchar @0x800CE23E, len = 0x00000001
-		0x24,
-		// uchar @0x800CE23F, len = 0x00000001
-		0x24,
-		// uchar @0x800CE240, len = 0x00000001
-		0x24,
-		// uchar @0x800CE241, len = 0x00000001
-		0x24,
-		// uchar @0x800CE242, len = 0x00000001
-		0x24,
-		// uchar @0x800CE243, len = 0x00000001
-		0x24,
-		// uchar @0x800CE244, len = 0x00000001
-		0x24,
-		// uchar @0x800CE245, len = 0x00000001
-		0x25,
-		// uchar @0x800CE246, len = 0x00000001
-		0x28,
-		// uchar @0x800CE247, len = 0x00000001
-		0x24,
-		// uchar @0x800CE248, len = 0x00000001
-		0x24,
-		// uchar @0x800CE249, len = 0x00000001
-		0x29,
-		// uchar @0x800CE24A, len = 0x00000001
-		0x24,
-		// uchar @0x800CE24B, len = 0x00000001
-		0x33,
-		// uchar @0x800CE24C, len = 0x00000001
-		0x2B,
-		// uchar @0x800CE24D, len = 0x00000001
-		0x2C,
-		// uchar @0x800CE24E, len = 0x00000001
-		0x2F,
-		// uchar @0x800CE24F, len = 0x00000001
-		0x2D,
-		// uchar @0x800CE250, len = 0x00000001
-		0x32,
-		// uchar @0x800CE251, len = 0x00000001
-		0x27,
-		// uchar @0x800CE252, len = 0x00000001
-		0x24,
-		// uchar @0x800CE253, len = 0x00000001
-		0x26,
-		// uchar @0x800CE254, len = 0x00000001
-		0x1A,
-		// uchar @0x800CE255, len = 0x00000001
-		0x1B,
-		// uchar @0x800CE256, len = 0x00000001
-		0x1C,
-		// uchar @0x800CE257, len = 0x00000001
-		0x1D,
-		// uchar @0x800CE258, len = 0x00000001
-		0x1E,
-		// uchar @0x800CE259, len = 0x00000001
-		0x1F,
-		// uchar @0x800CE25A, len = 0x00000001
-		0x20,
-		// uchar @0x800CE25B, len = 0x00000001
-		0x21,
-		// uchar @0x800CE25C, len = 0x00000001
-		0x22,
-		// uchar @0x800CE25D, len = 0x00000001
-		0x23,
-		// uchar @0x800CE25E, len = 0x00000001
-		0x2A,
-		// uchar @0x800CE25F, len = 0x00000001
-		0x24,
-		// uchar @0x800CE260, len = 0x00000001
-		0x55,
-		// uchar @0x800CE261, len = 0x00000001
-		0x2E,
-		// uchar @0x800CE262, len = 0x00000001
-		0x54,
-		// uchar @0x800CE263, len = 0x00000001
-		0x30,
-		// uchar @0x800CE264, len = 0x00000001
-		0x24,
-		// uchar @0x800CE265, len = 0x00000001
-		0x34,
-		// uchar @0x800CE266, len = 0x00000001
-		0x35,
-		// uchar @0x800CE267, len = 0x00000001
-		0x36,
-		// uchar @0x800CE268, len = 0x00000001
-		0x37,
-		// uchar @0x800CE269, len = 0x00000001
-		0x38,
-		// uchar @0x800CE26A, len = 0x00000001
-		0x39,
-		// uchar @0x800CE26B, len = 0x00000001
-		0x3A,
-		// uchar @0x800CE26C, len = 0x00000001
-		0x3B,
-		// uchar @0x800CE26D, len = 0x00000001
-		0x3C,
-		// uchar @0x800CE26E, len = 0x00000001
-		0x3D,
-		// uchar @0x800CE26F, len = 0x00000001
-		0x3E,
-		// uchar @0x800CE270, len = 0x00000001
-		0x3F,
-		// uchar @0x800CE271, len = 0x00000001
-		0x40,
-		// uchar @0x800CE272, len = 0x00000001
-		0x41,
-		// uchar @0x800CE273, len = 0x00000001
-		0x42,
-		// uchar @0x800CE274, len = 0x00000001
-		0x43,
-		// uchar @0x800CE275, len = 0x00000001
-		0x44,
-		// uchar @0x800CE276, len = 0x00000001
-		0x45,
-		// uchar @0x800CE277, len = 0x00000001
-		0x46,
-		// uchar @0x800CE278, len = 0x00000001
-		0x47,
-		// uchar @0x800CE279, len = 0x00000001
-		0x48,
-		// uchar @0x800CE27A, len = 0x00000001
-		0x49,
-		// uchar @0x800CE27B, len = 0x00000001
-		0x4A,
-		// uchar @0x800CE27C, len = 0x00000001
-		0x4B,
-		// uchar @0x800CE27D, len = 0x00000001
-		0x4C,
-		// uchar @0x800CE27E, len = 0x00000001
-		0x4D,
-		// uchar @0x800CE27F, len = 0x00000001
-		0x4E,
-		// uchar @0x800CE280, len = 0x00000001
-		0x24,
-		// uchar @0x800CE281, len = 0x00000001
-		0x4F,
-		// uchar @0x800CE282, len = 0x00000001
-		0x52,
-		// uchar @0x800CE283, len = 0x00000001
-		0x24,
-		// uchar @0x800CE284, len = 0x00000001
-		0x24,
-		// uchar @0x800CE285, len = 0x00000001
-		0x00,
-		// uchar @0x800CE286, len = 0x00000001
-		0x01,
-		// uchar @0x800CE287, len = 0x00000001
-		0x02,
-		// uchar @0x800CE288, len = 0x00000001
-		0x03,
-		// uchar @0x800CE289, len = 0x00000001
-		0x04,
-		// uchar @0x800CE28A, len = 0x00000001
-		0x05,
-		// uchar @0x800CE28B, len = 0x00000001
-		0x06,
-		// uchar @0x800CE28C, len = 0x00000001
-		0x07,
-		// uchar @0x800CE28D, len = 0x00000001
-		0x08,
-		// uchar @0x800CE28E, len = 0x00000001
-		0x09,
-		// uchar @0x800CE28F, len = 0x00000001
-		0x0A,
-		// uchar @0x800CE290, len = 0x00000001
-		0x0B,
-		// uchar @0x800CE291, len = 0x00000001
-		0x0C,
-		// uchar @0x800CE292, len = 0x00000001
-		0x0D,
-		// uchar @0x800CE293, len = 0x00000001
-		0x0E,
-		// uchar @0x800CE294, len = 0x00000001
-		0x0F,
-		// uchar @0x800CE295, len = 0x00000001
-		0x10,
-		// uchar @0x800CE296, len = 0x00000001
-		0x11,
-		// uchar @0x800CE297, len = 0x00000001
-		0x12,
-		// uchar @0x800CE298, len = 0x00000001
-		0x13,
-		// uchar @0x800CE299, len = 0x00000001
-		0x14,
-		// uchar @0x800CE29A, len = 0x00000001
-		0x15,
-		// uchar @0x800CE29B, len = 0x00000001
-		0x16,
-		// uchar @0x800CE29C, len = 0x00000001
-		0x17,
-		// uchar @0x800CE29D, len = 0x00000001
-		0x18,
-		// uchar @0x800CE29E, len = 0x00000001
-		0x19,
-		// uchar @0x800CE29F, len = 0x00000001
-		0x50,
-		// uchar @0x800CE2A0, len = 0x00000001
-		0x53,
-		// uchar @0x800CE2A1, len = 0x00000001
-		0x51,
-		// uchar @0x800CE2A2, len = 0x00000001
-		0x31,
-		// uchar @0x800CE2A3, len = 0x00000001
-		0x24};
+// uchar @0x800CE224, len = 0x00000001
+fontTransTable = 0x24;
 // char @0x800D03E4, len = 0x00000001
 fp_str = 0x00;
-// font_color_t[5] @0x800CE1D0, len = 0x0000003C
+// font_color_t @0x800CE1D0, len = 0x0000000C
 the_font_color_table =
 	{
-		// font_color_t @0x800CE1D0, len = 0x0000000C
-		{
-			// int @0x800CE1D0, len = 0x00000004
-			.r = 0x0,
-			// int @0x800CE1D4, len = 0x00000004
-			.g = 0x0,
-			// int @0x800CE1D8, len = 0x00000004
-			.b = 0x0},
-		// font_color_t @0x800CE1DC, len = 0x0000000C
-		{
-			// int @0x800CE1DC, len = 0x00000004
-			.r = 0x40,
-			// int @0x800CE1E0, len = 0x00000004
-			.g = 0x40,
-			// int @0x800CE1E4, len = 0x00000004
-			.b = 0x40},
-		// font_color_t @0x800CE1E8, len = 0x0000000C
-		{
-			// int @0x800CE1E8, len = 0x00000004
-			.r = 0x40,
-			// int @0x800CE1EC, len = 0x00000004
-			.g = 0x40,
-			// int @0x800CE1F0, len = 0x00000004
-			.b = 0xff},
-		// font_color_t @0x800CE1F4, len = 0x0000000C
-		{
-			// int @0x800CE1F4, len = 0x00000004
-			.r = 0x58,
-			// int @0x800CE1F8, len = 0x00000004
-			.g = 0x58,
-			// int @0x800CE1FC, len = 0x00000004
-			.b = 0x68},
-		// font_color_t @0x800CE200, len = 0x0000000C
-		{
-			// int @0x800CE200, len = 0x00000004
-			.r = 0xdc,
-			// int @0x800CE204, len = 0x00000004
-			.g = 0xdc,
-			// int @0x800CE208, len = 0x00000004
-			.b = 0x40}};
+		// int @0x800CE1D0, len = 0x00000004
+		.r = 0x0,
+		// int @0x800CE1D4, len = 0x00000004
+		.g = 0x0,
+		// int @0x800CE1D8, len = 0x00000004
+		.b = 0x0};
 // decompiled code
 // original method signature:
 // void /*$ra*/ FONT_MakeSpecialFogClut(int x /*$a3*/, int y /*$a1*/)
@@ -3810,7 +2807,7 @@ void FONT_DrawChar(FontChar *fontChar)
 long FONT_Get2DImageIndex(uchar c)
 
 {
-	return (uint)fontTransTable[(uint)c];
+	return (uint)(&fontTransTable)[(uint)c];
 }
 
 // decompiled code
@@ -3893,19 +2890,19 @@ void drawChar2DPoly(long fpi, long x, long y)
 	short sVar14;
 
 	ppuVar4 = gameTrackerX.drawOT;
-	cVar12 = fontPos[fpi].x;
+	cVar12 = (&fontPos)[fpi].x;
 	if (cVar12 < '\0')
 	{
 		cVar12 = -cVar12;
 	}
-	cVar11 = fontPos[fpi].y;
+	cVar11 = (&fontPos)[fpi].y;
 	if (cVar11 < '\0')
 	{
 		cVar11 = -cVar11;
 	}
-	cVar1 = fontPos[fpi].w;
+	cVar1 = (&fontPos)[fpi].w;
 	sVar14 = (short)cVar1;
-	cVar2 = fontPos[fpi].h;
+	cVar2 = (&fontPos)[fpi].h;
 	sVar6 = (short)cVar2;
 	cVar12 = cVar12 + (char)fontTracker.font_vramU;
 	cVar11 = cVar11 + (char)fontTracker.font_vramV;
@@ -3945,9 +2942,9 @@ void drawChar2DPoly(long fpi, long x, long y)
 	{
 		uVar5 = (uint)(byte)fontTracker.color_local;
 		*(undefined *)((int)puVar8 + 7) = 0x2c;
-		*(undefined *)(puVar8 + 1) = *(undefined *)&the_font_color_table[uVar5].r;
-		*(undefined *)((int)puVar8 + 5) = *(undefined *)&the_font_color_table[uVar5].g;
-		*(undefined *)((int)puVar8 + 6) = *(undefined *)&the_font_color_table[uVar5].b;
+		*(undefined *)(puVar8 + 1) = *(undefined *)&(&the_font_color_table)[uVar5].r;
+		*(undefined *)((int)puVar8 + 5) = *(undefined *)&(&the_font_color_table)[uVar5].g;
+		*(undefined *)((int)puVar8 + 6) = *(undefined *)&(&the_font_color_table)[uVar5].b;
 	}
 	*(char *)(puVar8 + 3) = cVar11;
 	*(char *)((int)puVar8 + 0xd) = cVar10;
@@ -4025,26 +3022,26 @@ void FONT_DrawChar2D(uchar c, long x, long y)
 		fpi_01 = y_00 * 3;
 		fpi = (int)(&charMap)[fpi_01];
 		fpi_00 = (int)(&CHAR_FFh_800c8621)[fpi_01];
-		fpi_01 = (int)s__9_800c8622[fpi_01];
+		fpi_01 = (int)(&CHAR_FFh_800c8622)[fpi_01];
 		if (fpi < 0)
 		{
 			iVar1 = 8;
 		}
 		else
 		{
-			iVar1 = (int)fontPos[fpi].w;
+			iVar1 = (int)(&fontPos)[fpi].w;
 			if (iVar1 < 0)
 			{
 				iVar1 = -iVar1;
 			}
 		}
 		iVar2 = iVar1;
-		if ((-1 < fpi_00) && (iVar2 = (int)fontPos[fpi_00].w, iVar2 < 0))
+		if ((-1 < fpi_00) && (iVar2 = (int)(&fontPos)[fpi_00].w, iVar2 < 0))
 		{
 			iVar2 = -iVar2;
 		}
 		iVar3 = iVar1;
-		if ((-1 < fpi_01) && (iVar3 = (int)fontPos[fpi_01].w, iVar3 < 0))
+		if ((-1 < fpi_01) && (iVar3 = (int)(&fontPos)[fpi_01].w, iVar3 < 0))
 		{
 			iVar3 = -iVar3;
 		}
@@ -4070,7 +3067,7 @@ void FONT_DrawChar2D(uchar c, long x, long y)
 		}
 		else
 		{
-			iVar4 = (int)fontPos[fpi].h;
+			iVar4 = (int)(&fontPos)[fpi].h;
 			if (iVar4 < 0)
 			{
 				iVar4 = -iVar4;
@@ -4151,21 +3148,21 @@ long FONT_CharSpacing(char c, long fontXSize)
 	{
 		iVar1 = lVar2 * 3;
 		iVar3 = (int)(&charMap)[iVar1];
-		iVar5 = (int)fontPos[iVar3].w;
+		iVar5 = (int)(&fontPos)[iVar3].w;
 		if (iVar5 < 0)
 		{
 			iVar5 = -iVar5;
 		}
-		if (fontPos[iVar3].x < '\0')
+		if ((&fontPos)[iVar3].x < '\0')
 		{
-			iVar5 = (int)fontPos[iVar3].h;
+			iVar5 = (int)(&fontPos)[iVar3].h;
 		}
 		iVar3 = 8;
 		if (-1 < (int)((uint)(byte)(&charMap)[iVar1] << 0x18))
 		{
 			iVar3 = iVar5;
 		}
-		iVar5 = (int)fontPos[(int)(&CHAR_FFh_800c8621)[iVar1]].w;
+		iVar5 = (int)(&fontPos)[(int)(&CHAR_FFh_800c8621)[iVar1]].w;
 		if (iVar5 < 0)
 		{
 			iVar5 = -iVar5;
@@ -4175,13 +3172,13 @@ long FONT_CharSpacing(char c, long fontXSize)
 		{
 			iVar6 = iVar5;
 		}
-		iVar5 = (int)fontPos[(int)s__9_800c8622[iVar1]].w;
+		iVar5 = (int)(&fontPos)[(int)(&CHAR_FFh_800c8622)[iVar1]].w;
 		if (iVar5 < 0)
 		{
 			iVar5 = -iVar5;
 		}
 		iVar4 = iVar3;
-		if (-1 < (int)s__9_800c8622[iVar1])
+		if (-1 < (int)(&CHAR_FFh_800c8622)[iVar1])
 		{
 			iVar4 = iVar5;
 		}
@@ -4597,8 +3594,8 @@ void FONT_SetColorIndex(int color)
 void FONT_SetColorIndexCol(int color, int r, int g, int b)
 
 {
-	the_font_color_table[color].r = r;
-	the_font_color_table[color].g = g;
-	the_font_color_table[color].b = b;
+	(&the_font_color_table)[color].r = r;
+	(&the_font_color_table)[color].g = g;
+	(&the_font_color_table)[color].b = b;
 	return;
 }

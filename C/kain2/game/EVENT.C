@@ -17,72 +17,10 @@ EventAbortLine = 0x0;
 EventCurrentEventIndex = -0x1;
 // short @0x800CF536, len = 0x00000002
 EventJustRecievedTimer = 0x0;
-// _Instance *[20] @0x800D2B0C, len = 0x00000050
-eventListArray2010 =
-    {
-        // _Instance * @0x800D2B0C, len = 0x00000004
-        null,
-        // _Instance * @0x800D2B10, len = 0x00000004
-        null,
-        // _Instance * @0x800D2B14, len = 0x00000004
-        null,
-        // _Instance * @0x800D2B18, len = 0x00000004
-        null,
-        // _Instance * @0x800D2B1C, len = 0x00000004
-        null,
-        // _Instance * @0x800D2B20, len = 0x00000004
-        null,
-        // _Instance * @0x800D2B24, len = 0x00000004
-        null,
-        // _Instance * @0x800D2B28, len = 0x00000004
-        null,
-        // _Instance * @0x800D2B2C, len = 0x00000004
-        null,
-        // _Instance * @0x800D2B30, len = 0x00000004
-        null,
-        // _Instance * @0x800D2B34, len = 0x00000004
-        null,
-        // _Instance * @0x800D2B38, len = 0x00000004
-        null,
-        // _Instance * @0x800D2B3C, len = 0x00000004
-        null,
-        // _Instance * @0x800D2B40, len = 0x00000004
-        null,
-        // _Instance * @0x800D2B44, len = 0x00000004
-        null,
-        // _Instance * @0x800D2B48, len = 0x00000004
-        null,
-        // _Instance * @0x800D2B4C, len = 0x00000004
-        null,
-        // _Instance * @0x800D2B50, len = 0x00000004
-        null,
-        // _Instance * @0x800D2B54, len = 0x00000004
-        null,
-        // _Instance * @0x800D2B58, len = 0x00000004
-        null};
-// long[20] @0x800D2A1C, len = 0x00000050
-eventListNumInstances =
-    {
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null};
+// _Instance * @0x800D2B0C, len = 0x00000004
+eventListArray2010 = null;
+// long @0x800D2A1C, len = 0x00000004
+eventListNumInstances = null;
 // EventTimer @0x800D27D4, len = 0x00000018
 eventTimerArray =
     {
@@ -123,105 +61,13 @@ gHintSystem =
 MoveCodeStreamExtra = 0x0;
 // long @0x800D2A14, len = 0x00000004
 numActiveEventTimers = null;
-// SignalResetStruct[16] @0x800D2A74, len = 0x00000080
+// SignalResetStruct @0x800D2A74, len = 0x00000008
 ResetSignalArray =
     {
-        // SignalResetStruct @0x800D2A74, len = 0x00000008
-        {
-            // _MultiSignal * @0x800D2A74, len = 0x00000004
-            .mSignal = null,
-            // long @0x800D2A78, len = 0x00000004
-            .timeLeft = null},
-        // SignalResetStruct @0x800D2A7C, len = 0x00000008
-        {
-            // _MultiSignal * @0x800D2A7C, len = 0x00000004
-            .mSignal = null,
-            // long @0x800D2A80, len = 0x00000004
-            .timeLeft = null},
-        // SignalResetStruct @0x800D2A84, len = 0x00000008
-        {
-            // _MultiSignal * @0x800D2A84, len = 0x00000004
-            .mSignal = null,
-            // long @0x800D2A88, len = 0x00000004
-            .timeLeft = null},
-        // SignalResetStruct @0x800D2A8C, len = 0x00000008
-        {
-            // _MultiSignal * @0x800D2A8C, len = 0x00000004
-            .mSignal = null,
-            // long @0x800D2A90, len = 0x00000004
-            .timeLeft = null},
-        // SignalResetStruct @0x800D2A94, len = 0x00000008
-        {
-            // _MultiSignal * @0x800D2A94, len = 0x00000004
-            .mSignal = null,
-            // long @0x800D2A98, len = 0x00000004
-            .timeLeft = null},
-        // SignalResetStruct @0x800D2A9C, len = 0x00000008
-        {
-            // _MultiSignal * @0x800D2A9C, len = 0x00000004
-            .mSignal = null,
-            // long @0x800D2AA0, len = 0x00000004
-            .timeLeft = null},
-        // SignalResetStruct @0x800D2AA4, len = 0x00000008
-        {
-            // _MultiSignal * @0x800D2AA4, len = 0x00000004
-            .mSignal = null,
-            // long @0x800D2AA8, len = 0x00000004
-            .timeLeft = null},
-        // SignalResetStruct @0x800D2AAC, len = 0x00000008
-        {
-            // _MultiSignal * @0x800D2AAC, len = 0x00000004
-            .mSignal = null,
-            // long @0x800D2AB0, len = 0x00000004
-            .timeLeft = null},
-        // SignalResetStruct @0x800D2AB4, len = 0x00000008
-        {
-            // _MultiSignal * @0x800D2AB4, len = 0x00000004
-            .mSignal = null,
-            // long @0x800D2AB8, len = 0x00000004
-            .timeLeft = null},
-        // SignalResetStruct @0x800D2ABC, len = 0x00000008
-        {
-            // _MultiSignal * @0x800D2ABC, len = 0x00000004
-            .mSignal = null,
-            // long @0x800D2AC0, len = 0x00000004
-            .timeLeft = null},
-        // SignalResetStruct @0x800D2AC4, len = 0x00000008
-        {
-            // _MultiSignal * @0x800D2AC4, len = 0x00000004
-            .mSignal = null,
-            // long @0x800D2AC8, len = 0x00000004
-            .timeLeft = null},
-        // SignalResetStruct @0x800D2ACC, len = 0x00000008
-        {
-            // _MultiSignal * @0x800D2ACC, len = 0x00000004
-            .mSignal = null,
-            // long @0x800D2AD0, len = 0x00000004
-            .timeLeft = null},
-        // SignalResetStruct @0x800D2AD4, len = 0x00000008
-        {
-            // _MultiSignal * @0x800D2AD4, len = 0x00000004
-            .mSignal = null,
-            // long @0x800D2AD8, len = 0x00000004
-            .timeLeft = null},
-        // SignalResetStruct @0x800D2ADC, len = 0x00000008
-        {
-            // _MultiSignal * @0x800D2ADC, len = 0x00000004
-            .mSignal = null,
-            // long @0x800D2AE0, len = 0x00000004
-            .timeLeft = null},
-        // SignalResetStruct @0x800D2AE4, len = 0x00000008
-        {
-            // _MultiSignal * @0x800D2AE4, len = 0x00000004
-            .mSignal = null,
-            // long @0x800D2AE8, len = 0x00000004
-            .timeLeft = null},
-        // SignalResetStruct @0x800D2AEC, len = 0x00000008
-        {
-            // _MultiSignal * @0x800D2AEC, len = 0x00000004
-            .mSignal = null,
-            // long @0x800D2AF0, len = 0x00000004
-            .timeLeft = null}};
+        // _MultiSignal * @0x800D2A74, len = 0x00000004
+        .mSignal = null,
+        // long @0x800D2A78, len = 0x00000004
+        .timeLeft = null};
 // WaterLevelProcess @0x800D2744, len = 0x0000001C
 WaterLevelArray =
     {
@@ -291,7 +137,7 @@ void EVENT_UpdateResetSignalArrayAndWaterMovement(Level *oldLevel, Level *newLev
   if (NumSignalsToReset != 0)
   {
     iVar7 = 0;
-    pSVar5 = ResetSignalArray;
+    pSVar5 = &ResetSignalArray;
     do
     {
       if (0 < pSVar5->timeLeft)
@@ -380,7 +226,7 @@ void EVENT_ResetAllOneTimeVariables(void)
   iVar3 = 0;
   if (NumSignalsToReset != 0)
   {
-    pSVar2 = ResetSignalArray;
+    pSVar2 = &ResetSignalArray;
     do
     {
       iVar1 = pSVar2->timeLeft + -1;
@@ -434,7 +280,7 @@ void EVENT_AddSignalToReset(_MultiSignal *mSignal)
   iVar2 = 0;
   if (NumSignalsToReset < 0x10)
   {
-    pSVar1 = ResetSignalArray;
+    pSVar1 = &ResetSignalArray;
     while (iVar2 = iVar2 + 1, pSVar1->timeLeft != 0)
     {
       pSVar1 = pSVar1 + 1;
@@ -2360,15 +2206,15 @@ long EVENT_AddSubListObjectToStack(_PCodeStack *stack, long listNumber)
   {
     pSVar1 = stack->stack + stack->topOfStack;
     pSVar1->id = 0x16;
-    if (eventListNumInstances[listNumber] < 1)
+    if ((&eventListNumInstances)[listNumber] < 1)
     {
       *(undefined4 *)pSVar1->data = 0;
     }
     else
     {
-      *(_Instance **)pSVar1->data = (_Instance *)(eventListArray2010 + listNumber * 10);
+      *(_Instance **)pSVar1->data = (_Instance *)(&eventListArray2010 + listNumber * 10);
     }
-    *(long *)(pSVar1->data + 4) = eventListNumInstances[listNumber];
+    *(long *)(pSVar1->data + 4) = (&eventListNumInstances)[listNumber];
     *(undefined4 *)(pSVar1->data + 8) = 0;
     stack->topOfStack = stack->topOfStack + 1;
   }
@@ -7214,7 +7060,7 @@ long EVENT_CompareListWithOperation(_PCodeStack *stack, ListObject *listObject, 
   lVar6 = 0;
   if (CurrentEventLine < 0x14)
   {
-    eventListNumInstances[CurrentEventLine] = 0;
+    (&eventListNumInstances)[CurrentEventLine] = 0;
   }
   strcpy(acStack56, listObject->eventInstance->objectName);
   pcVar1 = strchr(acStack56, 0x3f);
@@ -7254,11 +7100,11 @@ long EVENT_CompareListWithOperation(_PCodeStack *stack, ListObject *listObject, 
     {
       if (operation == 0xb)
       {
-        if (9 < eventListNumInstances[CurrentEventLine])
+        if (9 < (&eventListNumInstances)[CurrentEventLine])
         {
           return 0;
         }
-        eventListNumInstances[CurrentEventLine] = 0;
+        (&eventListNumInstances)[CurrentEventLine] = 0;
         return 0;
       }
     }
@@ -7266,11 +7112,11 @@ long EVENT_CompareListWithOperation(_PCodeStack *stack, ListObject *listObject, 
     {
       if (CurrentEventLine < 0x14)
       {
-        plVar3 = eventListNumInstances + CurrentEventLine;
+        plVar3 = &eventListNumInstances + CurrentEventLine;
         iVar4 = *plVar3;
         if (iVar4 < 10)
         {
-          eventListArray2010[CurrentEventLine * 10 + iVar4] = startInstance;
+          (&eventListArray2010)[CurrentEventLine * 10 + iVar4] = startInstance;
           *plVar3 = iVar4 + 1;
         }
       }
@@ -7323,7 +7169,7 @@ long EVENT_CompareSubListWithOperation(_PCodeStack *stack, SubListObject *subLis
   lVar7 = 0;
   if (CurrentEventLine < 0x14)
   {
-    eventListNumInstances[CurrentEventLine] = 0;
+    (&eventListNumInstances)[CurrentEventLine] = 0;
   }
   iVar6 = 0;
   if (0 < subListObject->numberOfInstances)
@@ -7350,11 +7196,11 @@ long EVENT_CompareSubListWithOperation(_PCodeStack *stack, SubListObject *subLis
       {
         if (CurrentEventLine < 0x14)
         {
-          plVar2 = eventListNumInstances + CurrentEventLine;
+          plVar2 = &eventListNumInstances + CurrentEventLine;
           iVar3 = *plVar2;
           if (iVar3 < 10)
           {
-            eventListArray2010[CurrentEventLine * 10 + iVar3] =
+            (&eventListArray2010)[CurrentEventLine * 10 + iVar3] =
                 *(_Instance **)(iVar5 + (int)subListObject->instanceList);
             *plVar2 = iVar3 + 1;
           }

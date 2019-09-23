@@ -338,14 +338,13 @@ void aadPlayTone(AadToneAtr *toneAtr, ulong waveStartAddr, AadProgramAtr *progAt
   midiNote = midiNote - ((uint)toneAtr->centerNote - 0x3c);
   if ((toneAtr->centerFine & 0x80U) == 0)
   {
-    sVar5 = aadPitchTable[midiNote] +
-            (ushort)(aadStepsPerCent[midiNote] * 100 * (uint)(byte)toneAtr->centerFine >> 0x17);
+    sVar5 = (&aadPitchTable)[midiNote] +
+            (ushort)((&aadStepsPerCent)[midiNote] * 100 * (uint)(byte)toneAtr->centerFine >> 0x17);
   }
   else
   {
-    sVar5 = aadPitchTable[midiNote] -
-            (ushort)(aadStepsPerCent[midiNote] * 100 * (0x100 - (uint)(byte)toneAtr->centerFine) >>
-                     0x17);
+    sVar5 = (&aadPitchTable)[midiNote] -
+            (ushort)((&aadStepsPerCent)[midiNote] * 100 * (0x100 - (uint)(byte)toneAtr->centerFine) >> 0x17);
   }
   SpuSetVoicePitch((uint)voice->voiceNum, sVar5 + (short)pitchOffset);
   SpuSetVoiceStartAddr((uint)voice->voiceNum, waveStartAddr);
@@ -534,17 +533,17 @@ void aadPlayTonePitchBend(AadToneAtr *toneAtr, ulong waveStartAddr, AadProgramAt
   iVar2 = (midiNote - ((uint)toneAtr->centerNote - 0x3c)) + (pitchWheelPos + -0x2000) / iVar3;
   if ((toneAtr->centerFine & 0x80U) == 0)
   {
-    sVar5 = aadPitchTable[iVar2] +
-            (ushort)(aadStepsPerCent[iVar2] * 100 * (uint)(byte)toneAtr->centerFine >> 0x17);
+    sVar5 = (&aadPitchTable)[iVar2] +
+            (ushort)((&aadStepsPerCent)[iVar2] * 100 * (uint)(byte)toneAtr->centerFine >> 0x17);
   }
   else
   {
-    sVar5 = aadPitchTable[iVar2] -
-            (ushort)(aadStepsPerCent[iVar2] * 100 * (0x100 - (uint)(byte)toneAtr->centerFine) >>
+    sVar5 = (&aadPitchTable)[iVar2] -
+            (ushort)((&aadStepsPerCent)[iVar2] * 100 * (0x100 - (uint)(byte)toneAtr->centerFine) >>
                      0x17);
   }
   SpuSetVoicePitch((uint)voice->voiceNum,
-                   sVar5 + (short)(((int)aadStepsPerSemitone[iVar2] *
+                   sVar5 + (short)(((int)(&aadStepsPerSemitone)[iVar2] *
                                     ((pitchWheelPos + -0x2000) % iVar3)) /
                                    iVar3));
   SpuSetVoiceStartAddr((uint)voice->voiceNum, waveStartAddr);

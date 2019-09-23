@@ -634,9 +634,9 @@ void GAMELOOP_LevelLoadAndInit(char *baseAreaName, GameTracker *gameTracker)
   do
   {
     iVar3 = STREAM_PollLoadQueue();
-    pvVar1 = ObjectAccess_ARRAY_800c878c[0].object;
+    pvVar1 = ObjectAccess_800c878c.object;
   } while (iVar3 != 0);
-  gameTracker->introFX = ObjectAccess_ARRAY_800c878c[4].object;
+  gameTracker->introFX = ObjectAccess_800c87ac.object;
   pLVar7 = p_Var2->level;
   RENDER_currentStreamUnitID = *(short *)&gameTracker->StreamUnitID;
   fontsObject = (Object *)pvVar1;
@@ -665,17 +665,17 @@ void GAMELOOP_LevelLoadAndInit(char *baseAreaName, GameTracker *gameTracker)
   theCamera.core.position.z = (p_Var5->position).z;
   SetFogNearFar((uint)p_Var2->level->fogNear, (uint)p_Var2->level->fogFar, 0x140);
   SetFarColor(0, 0, 0);
-  clearRect[0].r0 = p_Var2->level->backColorR;
+  clearRect.r0 = p_Var2->level->backColorR;
   /* WARNING: Read-only address (ram,0x800d0f8c) is written */
-  clearRect[0].g0 = p_Var2->level->backColorG;
+  clearRect.g0 = p_Var2->level->backColorG;
   /* WARNING: Read-only address (ram,0x800d0f8d) is written */
-  clearRect[0].b0 = p_Var2->level->backColorB;
+  clearRect.b0 = p_Var2->level->backColorB;
   /* WARNING: Read-only address (ram,0x800d0f8e) is written */
-  clearRect[1].r0 = p_Var2->level->backColorR;
+  BLK_FILL_800d0f98.r0 = p_Var2->level->backColorR;
   /* WARNING: Read-only address (ram,0x800d0f9c) is written */
-  clearRect[1].g0 = p_Var2->level->backColorG;
+  BLK_FILL_800d0f98.g0 = p_Var2->level->backColorG;
   /* WARNING: Read-only address (ram,0x800d0f9d) is written */
-  clearRect[1].b0 = p_Var2->level->backColorB;
+  BLK_FILL_800d0f98.b0 = p_Var2->level->backColorB;
   /* WARNING: Read-only address (ram,0x800d0f9e) is written */
   gameTracker->wipeType = 10;
   gameTracker->hideBG = 0;
@@ -1136,17 +1136,17 @@ void MainRenderLevel(_StreamUnit *currentUnit, ulong **drawot)
   currentUnit->FrameCount = gameTrackerX.displayFrameCount;
   SetFogNearFar((uint)level->fogNear, (uint)level->fogFar, 0x140);
   SetFarColor(0, 0, 0);
-  clearRect[0].r0 = level->backColorR;
+  clearRect.r0 = level->backColorR;
   /* WARNING: Read-only address (ram,0x800d0f8c) is written */
-  clearRect[0].g0 = level->backColorG;
+  clearRect.g0 = level->backColorG;
   /* WARNING: Read-only address (ram,0x800d0f8d) is written */
-  clearRect[0].b0 = level->backColorB;
+  clearRect.b0 = level->backColorB;
   /* WARNING: Read-only address (ram,0x800d0f8e) is written */
-  clearRect[1].r0 = level->backColorR;
+  BLK_FILL_800d0f98.r0 = level->backColorR;
   /* WARNING: Read-only address (ram,0x800d0f9c) is written */
-  clearRect[1].g0 = level->backColorG;
+  BLK_FILL_800d0f98.g0 = level->backColorG;
   /* WARNING: Read-only address (ram,0x800d0f9d) is written */
-  clearRect[1].b0 = level->backColorB;
+  BLK_FILL_800d0f98.b0 = level->backColorB;
   /* WARNING: Read-only address (ram,0x800d0f9e) is written */
   if ((int)gameTrackerX.gameData.asmData.MorphTime == 1000)
   {
@@ -1186,17 +1186,17 @@ void MainRenderLevel(_StreamUnit *currentUnit, ulong **drawot)
     depthQBlendStart = depthQFogStart;
   }
   /* WARNING: Read-only address (ram,0x800d0f8c) is written */
-  clearRect[0].r0 = (uchar)depthQBackColor;
+  clearRect.r0 = (uchar)depthQBackColor;
   /* WARNING: Read-only address (ram,0x800d0f8d) is written */
-  clearRect[0].g0 = depthQBackColor._1_1_;
+  clearRect.g0 = depthQBackColor._1_1_;
   /* WARNING: Read-only address (ram,0x800d0f8e) is written */
-  clearRect[0].b0 = depthQBackColor._2_1_;
+  clearRect.b0 = depthQBackColor._2_1_;
   /* WARNING: Read-only address (ram,0x800d0f9c) is written */
-  clearRect[1].r0 = (uchar)depthQBackColor;
+  BLK_FILL_800d0f98.r0 = (uchar)depthQBackColor;
   /* WARNING: Read-only address (ram,0x800d0f9d) is written */
-  clearRect[1].g0 = depthQBackColor._1_1_;
+  BLK_FILL_800d0f98.g0 = depthQBackColor._1_1_;
   /* WARNING: Read-only address (ram,0x800d0f9e) is written */
-  clearRect[1].b0 = depthQBackColor._2_1_;
+  BLK_FILL_800d0f98.b0 = depthQBackColor._2_1_;
   PIPE3D_AnimateTerrainTextures(terrain->aniList, gameTrackerX.frameCount, gameTrackerX.primPool, drawot);
   PIPE3D_AnimateTerrainTextures(level->bgAniList, gameTrackerX.frameCount, gameTrackerX.primPool, drawot);
   gLightInfo->numSavedColors = 0;
@@ -1540,14 +1540,14 @@ void GAMELOOP_AddClearPrim(ulong **drawot, int override)
   if (((gameTrackerX.gameFlags & 0x8000000U) != 0) && (override == 0))
   {
     *(ushort *)((int)&gameTrackerX.savedOTStart[1].field_0x0 + 2) =
-        clearRect[gameTrackerX.drawPage].y0;
+        (&clearRect)[gameTrackerX.drawPage].y0;
     return;
   }
   puVar1 = (gameTrackerX.primPool)->nextPrim;
-  uVar2 = *(ulong *)&clearRect[gameTrackerX.drawPage].r0;
-  uVar3 = *(ulong *)&clearRect[gameTrackerX.drawPage].x0;
-  uVar4 = *(ulong *)&clearRect[gameTrackerX.drawPage].w;
-  *puVar1 = clearRect[gameTrackerX.drawPage].tag;
+  uVar2 = *(ulong *)&(&clearRect)[gameTrackerX.drawPage].r0;
+  uVar3 = *(ulong *)&(&clearRect)[gameTrackerX.drawPage].x0;
+  uVar4 = *(ulong *)&(&clearRect)[gameTrackerX.drawPage].w;
+  *puVar1 = (&clearRect)[gameTrackerX.drawPage].tag;
   puVar1[1] = uVar2;
   puVar1[2] = uVar3;
   puVar1[3] = uVar4;

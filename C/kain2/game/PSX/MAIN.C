@@ -1,125 +1,57 @@
 #include "THISDUST.H"
 #include "MAIN.H"
 
-// _ButtonTexture[2] @0x800D0E20, len = 0x00000020
+// _ButtonTexture @0x800D0E20, len = 0x00000010
 BexitLine =
 	{
-		// _ButtonTexture @0x800D0E20, len = 0x00000010
-		{
-			// short @0x800D0E20, len = 0x00000002
-			.tpage = null,
-			// short @0x800D0E22, len = 0x00000002
-			.clut = null,
-			// short @0x800D0E24, len = 0x00000002
-			.textureW = null,
-			// short @0x800D0E26, len = 0x00000002
-			.textureH = null,
-			// _BlockVramEntry * @0x800D0E28, len = 0x00000004
-			.vramBlock = null,
-			// long @0x800D0E2C, len = 0x00000004
-			.xshift = null},
-		// _ButtonTexture @0x800D0E30, len = 0x00000010
-		{
-			// short @0x800D0E30, len = 0x00000002
-			.tpage = null,
-			// short @0x800D0E32, len = 0x00000002
-			.clut = null,
-			// short @0x800D0E34, len = 0x00000002
-			.textureW = null,
-			// short @0x800D0E36, len = 0x00000002
-			.textureH = null,
-			// _BlockVramEntry * @0x800D0E38, len = 0x00000004
-			.vramBlock = null,
-			// long @0x800D0E3C, len = 0x00000004
-			.xshift = null}};
-// _ButtonTexture[3] @0x800D0F24, len = 0x00000030
+		// short @0x800D0E20, len = 0x00000002
+		.tpage = null,
+		// short @0x800D0E22, len = 0x00000002
+		.clut = null,
+		// short @0x800D0E24, len = 0x00000002
+		.textureW = null,
+		// short @0x800D0E26, len = 0x00000002
+		.textureH = null,
+		// _BlockVramEntry * @0x800D0E28, len = 0x00000004
+		.vramBlock = null,
+		// long @0x800D0E2C, len = 0x00000004
+		.xshift = null};
+// _ButtonTexture @0x800D0F24, len = 0x00000010
 BmenuLines =
 	{
-		// _ButtonTexture @0x800D0F24, len = 0x00000010
-		{
-			// short @0x800D0F24, len = 0x00000002
-			.tpage = null,
-			// short @0x800D0F26, len = 0x00000002
-			.clut = null,
-			// short @0x800D0F28, len = 0x00000002
-			.textureW = null,
-			// short @0x800D0F2A, len = 0x00000002
-			.textureH = null,
-			// _BlockVramEntry * @0x800D0F2C, len = 0x00000004
-			.vramBlock = null,
-			// long @0x800D0F30, len = 0x00000004
-			.xshift = null},
-		// _ButtonTexture @0x800D0F34, len = 0x00000010
-		{
-			// short @0x800D0F34, len = 0x00000002
-			.tpage = null,
-			// short @0x800D0F36, len = 0x00000002
-			.clut = null,
-			// short @0x800D0F38, len = 0x00000002
-			.textureW = null,
-			// short @0x800D0F3A, len = 0x00000002
-			.textureH = null,
-			// _BlockVramEntry * @0x800D0F3C, len = 0x00000004
-			.vramBlock = null,
-			// long @0x800D0F40, len = 0x00000004
-			.xshift = null},
-		// _ButtonTexture @0x800D0F44, len = 0x00000010
-		{
-			// short @0x800D0F44, len = 0x00000002
-			.tpage = null,
-			// short @0x800D0F46, len = 0x00000002
-			.clut = null,
-			// short @0x800D0F48, len = 0x00000002
-			.textureW = null,
-			// short @0x800D0F4A, len = 0x00000002
-			.textureH = null,
-			// _BlockVramEntry * @0x800D0F4C, len = 0x00000004
-			.vramBlock = null,
-			// long @0x800D0F50, len = 0x00000004
-			.xshift = null}};
-// BLK_FILL[2] @0x800D0F88, len = 0x00000020
+		// short @0x800D0F24, len = 0x00000002
+		.tpage = null,
+		// short @0x800D0F26, len = 0x00000002
+		.clut = null,
+		// short @0x800D0F28, len = 0x00000002
+		.textureW = null,
+		// short @0x800D0F2A, len = 0x00000002
+		.textureH = null,
+		// _BlockVramEntry * @0x800D0F2C, len = 0x00000004
+		.vramBlock = null,
+		// long @0x800D0F30, len = 0x00000004
+		.xshift = null};
+// BLK_FILL @0x800D0F88, len = 0x00000010
 clearRect =
 	{
-		// BLK_FILL @0x800D0F88, len = 0x00000010
-		{
-			// ulong @0x800D0F88, len = 0x00000004
-			.tag = null,
-			// uchar @0x800D0F8C, len = 0x00000001
-			.r0 = 0x00,
-			// uchar @0x800D0F8D, len = 0x00000001
-			.g0 = 0x00,
-			// uchar @0x800D0F8E, len = 0x00000001
-			.b0 = 0x00,
-			// uchar @0x800D0F8F, len = 0x00000001
-			.code = 0x00,
-			// ushort @0x800D0F90, len = 0x00000002
-			.x0 = null,
-			// ushort @0x800D0F92, len = 0x00000002
-			.y0 = null,
-			// ushort @0x800D0F94, len = 0x00000002
-			.w = null,
-			// ushort @0x800D0F96, len = 0x00000002
-			.h = null},
-		// BLK_FILL @0x800D0F98, len = 0x00000010
-		{
-			// ulong @0x800D0F98, len = 0x00000004
-			.tag = null,
-			// uchar @0x800D0F9C, len = 0x00000001
-			.r0 = 0x00,
-			// uchar @0x800D0F9D, len = 0x00000001
-			.g0 = 0x00,
-			// uchar @0x800D0F9E, len = 0x00000001
-			.b0 = 0x00,
-			// uchar @0x800D0F9F, len = 0x00000001
-			.code = 0x00,
-			// ushort @0x800D0FA0, len = 0x00000002
-			.x0 = null,
-			// ushort @0x800D0FA2, len = 0x00000002
-			.y0 = null,
-			// ushort @0x800D0FA4, len = 0x00000002
-			.w = null,
-			// ushort @0x800D0FA6, len = 0x00000002
-			.h = null}};
+		// ulong @0x800D0F88, len = 0x00000004
+		.tag = null,
+		// uchar @0x800D0F8C, len = 0x00000001
+		.r0 = 0x00,
+		// uchar @0x800D0F8D, len = 0x00000001
+		.g0 = 0x00,
+		// uchar @0x800D0F8E, len = 0x00000001
+		.b0 = 0x00,
+		// uchar @0x800D0F8F, len = 0x00000001
+		.code = 0x00,
+		// ushort @0x800D0F90, len = 0x00000002
+		.x0 = null,
+		// ushort @0x800D0F92, len = 0x00000002
+		.y0 = null,
+		// ushort @0x800D0F94, len = 0x00000002
+		.w = null,
+		// ushort @0x800D0F96, len = 0x00000002
+		.h = null};
 // DISPENV @0x800D0E40, len = 0x00000014
 disp =
 	{
@@ -658,129 +590,67 @@ gameTrackerX =
 		.monster_collide_override = 0x00,
 		// char @0x800D121B, len = 0x00000001
 		.pad = 0x00};
-// InterfaceItem[2] @0x800CE570, len = 0x00000070
+// InterfaceItem @0x800CE570, len = 0x00000038
 InterfaceItems =
 	{
-		// InterfaceItem @0x800CE570, len = 0x00000038
-		{
-			// char[48] @0x800CE570, len = 0x00000030
-			.name =
-				{
-			'\', 'P',
-					'U',
-					'B',
-					'L',
-					'O',
-					'G',
-					'O',
-					'.',
-					'S',
-					'T',
-					'R',
-					';',
-					'1',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00'},
-			// ushort @0x800CE5A0, len = 0x00000002
-			.timeout = 0x0,
-			// ushort @0x800CE5A2, len = 0x00000002
-			.buttonTimeout = 0x0,
-			// short @0x800CE5A4, len = 0x00000002
-			.itemType = 0x0,
-			// short @0x800CE5A6, len = 0x00000002
-			.nextItem = 0x1},
-		// InterfaceItem @0x800CE5A8, len = 0x00000038
-		{
-			// char[48] @0x800CE5A8, len = 0x00000030
-			.name =
-				{
-			'\', 'C',
-					'R',
-					'Y',
-					'L',
-					'O',
-					'G',
-					'O',
-					'.',
-					'S',
-					'T',
-					'R',
-					';',
-					'1',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00',
-					'\x00'},
-			// ushort @0x800CE5D8, len = 0x00000002
-			.timeout = 0x0,
-			// ushort @0x800CE5DA, len = 0x00000002
-			.buttonTimeout = 0x0,
-			// short @0x800CE5DC, len = 0x00000002
-			.itemType = 0x0,
-			// short @0x800CE5DE, len = 0x00000002
-			.nextItem = 0x5}};
+		// char[48] @0x800CE570, len = 0x00000030
+		.name =
+			{
+		'\', 'P',
+				'U',
+				'B',
+				'L',
+				'O',
+				'G',
+				'O',
+				'.',
+				'S',
+				'T',
+				'R',
+				';',
+				'1',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00',
+				'\x00'},
+		// ushort @0x800CE5A0, len = 0x00000002
+		.timeout = 0x0,
+		// ushort @0x800CE5A2, len = 0x00000002
+		.buttonTimeout = 0x0,
+		// short @0x800CE5A4, len = 0x00000002
+		.itemType = 0x0,
+		// short @0x800CE5A6, len = 0x00000002
+		.nextItem = 0x1};
 // int @0x800D0E1C, len = 0x00000004
 mainMenuSfx = null;
 // MainTracker @0x800D121C, len = 0x00000010
@@ -794,65 +664,21 @@ mainTrackerX =
 		.movieNum = null,
 		// long @0x800D1228, len = 0x00000004
 		.done = null};
-// _ButtonTexture[4] @0x800D122C, len = 0x00000040
+// _ButtonTexture @0x800D122C, len = 0x00000010
 PauseButtons =
 	{
-		// _ButtonTexture @0x800D122C, len = 0x00000010
-		{
-			// short @0x800D122C, len = 0x00000002
-			.tpage = null,
-			// short @0x800D122E, len = 0x00000002
-			.clut = null,
-			// short @0x800D1230, len = 0x00000002
-			.textureW = null,
-			// short @0x800D1232, len = 0x00000002
-			.textureH = null,
-			// _BlockVramEntry * @0x800D1234, len = 0x00000004
-			.vramBlock = null,
-			// long @0x800D1238, len = 0x00000004
-			.xshift = null},
-		// _ButtonTexture @0x800D123C, len = 0x00000010
-		{
-			// short @0x800D123C, len = 0x00000002
-			.tpage = null,
-			// short @0x800D123E, len = 0x00000002
-			.clut = null,
-			// short @0x800D1240, len = 0x00000002
-			.textureW = null,
-			// short @0x800D1242, len = 0x00000002
-			.textureH = null,
-			// _BlockVramEntry * @0x800D1244, len = 0x00000004
-			.vramBlock = null,
-			// long @0x800D1248, len = 0x00000004
-			.xshift = null},
-		// _ButtonTexture @0x800D124C, len = 0x00000010
-		{
-			// short @0x800D124C, len = 0x00000002
-			.tpage = null,
-			// short @0x800D124E, len = 0x00000002
-			.clut = null,
-			// short @0x800D1250, len = 0x00000002
-			.textureW = null,
-			// short @0x800D1252, len = 0x00000002
-			.textureH = null,
-			// _BlockVramEntry * @0x800D1254, len = 0x00000004
-			.vramBlock = null,
-			// long @0x800D1258, len = 0x00000004
-			.xshift = null},
-		// _ButtonTexture @0x800D125C, len = 0x00000010
-		{
-			// short @0x800D125C, len = 0x00000002
-			.tpage = null,
-			// short @0x800D125E, len = 0x00000002
-			.clut = null,
-			// short @0x800D1260, len = 0x00000002
-			.textureW = null,
-			// short @0x800D1262, len = 0x00000002
-			.textureH = null,
-			// _BlockVramEntry * @0x800D1264, len = 0x00000004
-			.vramBlock = null,
-			// long @0x800D1268, len = 0x00000004
-			.xshift = null}};
+		// short @0x800D122C, len = 0x00000002
+		.tpage = null,
+		// short @0x800D122E, len = 0x00000002
+		.clut = null,
+		// short @0x800D1230, len = 0x00000002
+		.textureW = null,
+		// short @0x800D1232, len = 0x00000002
+		.textureH = null,
+		// _BlockVramEntry * @0x800D1234, len = 0x00000004
+		.vramBlock = null,
+		// long @0x800D1238, len = 0x00000004
+		.xshift = null};
 // decompiled code
 // original method signature:
 // void /*$ra*/ ClearDisplay()
@@ -873,10 +699,10 @@ void ClearDisplay(void)
 
 {
 	PutDrawEnv((undefined4 *)(&draw + gameTrackerX.gameData.asmData.dispPage));
-	clearRect[gameTrackerX.gameData.asmData.dispPage].r0 = '\0';
-	clearRect[gameTrackerX.gameData.asmData.dispPage].g0 = '\0';
-	clearRect[gameTrackerX.gameData.asmData.dispPage].b0 = '\0';
-	DrawPrim((int)(clearRect + gameTrackerX.gameData.asmData.dispPage));
+	(&clearRect)[gameTrackerX.gameData.asmData.dispPage].r0 = '\0';
+	(&clearRect)[gameTrackerX.gameData.asmData.dispPage].g0 = '\0';
+	(&clearRect)[gameTrackerX.gameData.asmData.dispPage].b0 = '\0';
+	DrawPrim((int)(&clearRect + gameTrackerX.gameData.asmData.dispPage));
 	DrawSync(0);
 	PutDispEnv((ushort *)(&disp + gameTrackerX.gameData.asmData.dispPage));
 	SetDispMask(1);
@@ -1146,14 +972,14 @@ void ProcessArgs(char *baseAreaName, GameTracker *gameTracker)
 	char acStack56[32];
 
 	levelName = LOAD_ReadFile(s__kain2_game_psx_kain2_arg_800ce6d4, '\n');
-	cVar2 = DAT_800ce765;
-	cVar1 = DAT_800ce764;
+	cVar2 = s_under1_800ce760[5];
+	cVar1 = s_under1_800ce760[4];
 	if (levelName == (long *)0x0)
 	{
-		*(undefined4 *)baseAreaName = DAT_800ce760;
+		*(undefined4 *)baseAreaName = s_under1_800ce760._0_4_;
 		baseAreaName[4] = cVar1;
 		baseAreaName[5] = cVar2;
-		baseAreaName[6] = DAT_800ce766;
+		baseAreaName[6] = s_under1_800ce760[6];
 	}
 	else
 	{
@@ -1250,7 +1076,7 @@ void InitDisplay(void)
 	SetDefDrawEnv((undefined2 *)&DRAWENV_800d0ec8, 0, 0x100, 0x200, 0xf0);
 	SetDefDispEnv((undefined2 *)&DISPENV_800d0e54, 0, 0x100, 0x200, 0xf0);
 	iVar2 = 0;
-	pBVar1 = clearRect;
+	pBVar1 = &clearRect;
 	/* WARNING: Read-only address (ram,0x800d0ede) is written */
 	DRAWENV_800d0ec8.dtd = '\x01';
 	/* WARNING: Read-only address (ram,0x800d0e82) is written */
@@ -1737,18 +1563,18 @@ void MAIN_MainMenuInit(void)
 	mainMenuMode = 0;
 	mainMenuTimeOut = 0;
 	/* WARNING: Read-only address (ram,0x800d0f8c) is written */
-	clearRect[0].r0 = '\0';
+	clearRect.r0 = '\0';
 	/* WARNING: Read-only address (ram,0x800d0f8d) is written */
-	clearRect[0].g0 = '\0';
+	clearRect.g0 = '\0';
 	/* WARNING: Read-only address (ram,0x800d0f8e) is written */
-	clearRect[0].b0 = '\0';
+	clearRect.b0 = '\0';
 	/* WARNING: Read-only address (ram,0x800d0f9c) is written */
-	clearRect[1].r0 = '\0';
+	BLK_FILL_800d0f98.r0 = '\0';
 	/* WARNING: Read-only address (ram,0x800d0f9d) is written */
-	clearRect[1].g0 = '\0';
+	BLK_FILL_800d0f98.g0 = '\0';
 	/* WARNING: Read-only address (ram,0x800d0f9e) is written */
-	clearRect[1].b0 = '\0';
-	puVar1 = &DAT_800ce7d0;
+	BLK_FILL_800d0f98.b0 = '\0';
+	puVar1 = (undefined4 *)s__kain2_sfx_object_mainmenu_mainm_800ce7d0;
 	puVar2 = local_48;
 	do
 	{
@@ -1763,9 +1589,9 @@ void MAIN_MainMenuInit(void)
 		puVar6[3] = uVar9;
 		puVar1 = puVar5 + 4;
 		puVar2 = puVar6 + 4;
-	} while (puVar5 + 4 != (undefined4 *)(s_ainmenu_snf_800ce7ec + 4));
+	} while (puVar5 + 4 != (undefined4 *)(s__kain2_sfx_object_mainmenu_mainm_800ce7d0 + 0x20));
 	uVar7 = puVar5[5];
-	puVar6[4] = s_ainmenu_snf_800ce7ec._4_4_;
+	puVar6[4] = s__kain2_sfx_object_mainmenu_mainm_800ce7d0._32_4_;
 	puVar6[5] = uVar7;
 	memset(auStack32, 0, 0x18);
 	mainMenuSfx = 0;
@@ -1781,7 +1607,7 @@ void MAIN_MainMenuInit(void)
 	mainMenuScreen = MAIN_LoadTim(s__kain2_game_psx_frontend_title1__800ce804);
 	VRAM_EnableTerrainArea();
 	menuface_initialize();
-	currentMenu = mainMenu;
+	currentMenu = &mainMenu;
 	gameTrackerX.gameMode = 4;
 	menu_set(gameTrackerX.menu, menudefs_main_menu);
 	return;
@@ -1880,7 +1706,7 @@ long MAIN_DoMainMenu(GameTracker *gameTracker, MainTracker *mainTracker, long me
 
 	gameTrackerX.timeMult = 0x1000;
 	drawot = gameTracker->drawOT;
-	DrawPrim((int)(clearRect + gameTracker->drawPage));
+	DrawPrim((int)(&clearRect + gameTracker->drawPage));
 	GAMEPAD_Process(gameTracker);
 	DEBUG_Process(gameTracker);
 	if (mainMenuScreen != (long *)0x0)
@@ -2029,7 +1855,7 @@ int MainG2(void *appData)
 			case 2:
 				if ((gameTrackerX.streamFlags & 0x1000000U) != 0)
 				{
-					play_movie((char *)InterfaceItem_ARRAY_800ce5e0);
+					play_movie((char *)&InterfaceItem_800ce5e0);
 					gameTrackerX.streamFlags = gameTrackerX.streamFlags & 0xfeffffff;
 				}
 				if ((gameTrackerX.streamFlags & 0x200000U) != 0)
@@ -2062,24 +1888,24 @@ int MainG2(void *appData)
 					if (5 < (uint)mainTrackerX.movieNum)
 						goto LAB_800390f0;
 					gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xfffffffe;
-					show_screen((char *)(InterfaceItems + mainTrackerX.movieNum));
+					show_screen((char *)(&InterfaceItems + mainTrackerX.movieNum));
 					iVar4 = 1;
-					if (InterfaceItems[lVar2].timeout != 0)
+					if ((&InterfaceItems)[lVar2].timeout != 0)
 					{
 						do
 						{
 							GAMEPAD_Process(&gameTrackerX);
-							if (((int)(uint)InterfaceItems[lVar2].buttonTimeout < iVar4) &&
+							if (((int)(uint)(&InterfaceItems)[lVar2].buttonTimeout < iVar4) &&
 								((gameTrackerX.controlCommand[0][1] & 0x80U) != 0))
 								break;
 							VSync(0);
-							bVar1 = iVar4 < (int)(uint)InterfaceItems[lVar2].timeout;
+							bVar1 = iVar4 < (int)(uint)(&InterfaceItems)[lVar2].timeout;
 							iVar4 = iVar4 + 1;
 						} while (bVar1);
 					}
-					mainTrackerX.movieNum = (long)InterfaceItems[lVar2].nextItem;
+					mainTrackerX.movieNum = (long)(&InterfaceItems)[lVar2].nextItem;
 				} while ((mainTrackerX.movieNum < 0) ||
-						 (InterfaceItems[mainTrackerX.movieNum].itemType == 1));
+						 ((&InterfaceItems)[mainTrackerX.movieNum].itemType == 1));
 				mainTrackerX.mainState = 6;
 			LAB_800390f0:
 				FONT_ReloadFont();
@@ -2102,11 +1928,11 @@ int MainG2(void *appData)
 					iVar4 = CINE_Loaded();
 					if (iVar4 != 0)
 					{
-						CINE_Play((char *)(InterfaceItems + mainTrackerX.movieNum), 0xffff, 2);
+						CINE_Play((char *)(&InterfaceItems + mainTrackerX.movieNum), 0xffff, 2);
 						ClearDisplay();
 					}
-					mainTrackerX.movieNum = (long)InterfaceItems[mainTrackerX.movieNum].nextItem;
-				} while (InterfaceItems[mainTrackerX.movieNum].itemType == 0);
+					mainTrackerX.movieNum = (long)(&InterfaceItems)[mainTrackerX.movieNum].nextItem;
+				} while ((&InterfaceItems)[mainTrackerX.movieNum].itemType == 0);
 				mainTrackerX.mainState = 4;
 			LAB_80038fd0:
 				CINE_Unload();

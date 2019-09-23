@@ -1,19 +1,8 @@
 #include "THISDUST.H"
 #include "SCRIPT.H"
 
-// undefined *32[5] @0x800C8768, len = 0x00000014
-selectMenuText5 =
-    {
-        // undefined *32 @0x800C8768, len = 0x00000004
-        "update save" /* collapsed from &s_update_save_800ce8c8 */,
-        // undefined *32 @0x800C876C, len = 0x00000004
-        "save game" /* collapsed from &s_save_game_800ce8bc */,
-        // undefined *32 @0x800C8770, len = 0x00000004
-        "resume play" /* collapsed from &s_resume_play_800ce8b0 */,
-        // undefined *32 @0x800C8774, len = 0x00000004
-        "see password" /* collapsed from &s_see_password_800ce8a0 */,
-        // undefined *32 @0x800C8778, len = 0x00000004
-        &DAT_800ce898};
+// char * @0x800C8768, len = 0x00000004
+selectMenuText5 = "update save" /* collapsed from &s_update_save_800ce8c8 */;
 // decompiled code
 // original method signature:
 // void /*$ra*/ SCRIPT_CombineEulerAngles(struct _Rotation *combinedRotation /*$s1*/, struct _Rotation *inputRotation1 /*$a1*/, struct _Rotation *inputRotation2 /*$s0*/)
@@ -1356,6 +1345,6 @@ void ScriptKillInstance(_Instance *instance, int effect)
   }
   /* WARNING: Could not recover jumptable at 0x8003d69c. Too many branches */
   /* WARNING: Treating indirect jump as call */
-  (*(code *)(&PTR_LAB_800101b0)[effect])();
+  (*(code *)PTR_ARRAY_800101b0[effect])();
   return;
 }

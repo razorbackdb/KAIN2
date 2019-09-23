@@ -5473,9 +5473,9 @@ void MON_DamageEffect(_Instance *instance, evFXHitData *data)
     }
     if ((*puVar5 & 0x400000) != 0)
     {
-      if (ObjectAccess_ARRAY_800c878c[8].object != (void *)0x0)
+      if (ObjectAccess_800c87cc.object != (void *)0x0)
       {
-        model = (_Model *)(*(_Model **)((int)ObjectAccess_ARRAY_800c878c[8].object + 0xc))->numVertices;
+        model = (_Model *)(*(_Model **)((int)ObjectAccess_800c87cc.object + 0xc))->numVertices;
         FX_MakeSpark(instance, model, (uint) * (byte *)((int)pvVar4 + 0x1b));
         FX_MakeSpark(instance, model, (uint) * (byte *)((int)pvVar4 + 0x1c));
         FX_MakeSpark(instance, model, (uint) * (byte *)((int)pvVar4 + 0x1d));

@@ -67,7 +67,8 @@ void GenericInit(_Instance *instance, GameTracker *gameTracker)
                                                      0x10));
     G2EmulationInstanceSetAnimation(instance, 0, 0, 0, 0);
     G2EmulationInstanceSetMode(instance, 0, 0);
-    if ((*(int *)pOVar3->name == DAT_800cea7c) && (*(int *)(pOVar3->name + 1) == DAT_800cea80))
+    if ((*(int *)pOVar3->name == s_ariel____800cea7c._0_4_) &&
+        (*(int *)(pOVar3->name + 1) == s_ariel____800cea7c._4_4_))
     {
       G2AnimSection_SetInterpInfo((instance->anim).section, (_G2AnimInterpInfo_Type *)&crap_24);
     }

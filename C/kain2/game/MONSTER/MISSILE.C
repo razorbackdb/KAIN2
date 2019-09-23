@@ -1,33 +1,13 @@
 #include "THISDUST.H"
 #include "MISSILE.H"
 
-// MissileGraphics[4] @0x800CA9C0, len = 0x00000008
+// MissileGraphics @0x800CA9C0, len = 0x00000002
 MISSILE_objectTable =
 	{
-		// MissileGraphics @0x800CA9C0, len = 0x00000002
-		{
-			// uchar @0x800CA9C0, len = 0x00000001
-			.object = 0x0D,
-			// uchar @0x800CA9C1, len = 0x00000001
-			.model = 0x01},
-		// MissileGraphics @0x800CA9C2, len = 0x00000002
-		{
-			// uchar @0x800CA9C2, len = 0x00000001
-			.object = 0x13,
-			// uchar @0x800CA9C3, len = 0x00000001
-			.model = 0x00},
-		// MissileGraphics @0x800CA9C4, len = 0x00000002
-		{
-			// uchar @0x800CA9C4, len = 0x00000001
-			.object = 0x0B,
-			// uchar @0x800CA9C5, len = 0x00000001
-			.model = 0x00},
-		// MissileGraphics @0x800CA9C6, len = 0x00000002
-		{
-			// uchar @0x800CA9C6, len = 0x00000001
-			.object = 0x13,
-			// uchar @0x800CA9C7, len = 0x00000001
-			.model = 0x00}};
+		// uchar @0x800CA9C0, len = 0x00000001
+		.object = 0x0D,
+		// uchar @0x800CA9C1, len = 0x00000001
+		.model = 0x01};
 // decompiled code
 // original method signature:
 // void /*$ra*/ MISSILE_Process(struct _Instance *instance /*$s0*/, struct GameTracker *gameTracker /*$a1*/)
@@ -112,7 +92,7 @@ _Instance *MISSILE_Find(_Instance *instance, _MonsterMissile *missiledef)
 		{
 			if ((p_Var1->ParentLinkNode == (uint)missiledef->segment) &&
 				(p_Var1->object ==
-				 (Object *)(&objectAccess)[(uint)MISSILE_objectTable[(uint)missiledef->graphic].object].object))
+				 (Object *)(&objectAccess)[(uint)(&MISSILE_objectTable)[(uint)missiledef->graphic].object].object))
 			{
 				return p_Var1;
 			}

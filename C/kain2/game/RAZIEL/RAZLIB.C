@@ -599,7 +599,7 @@ int razPickupAndGrab(__CharacterState *In, int CurrentSection)
           iVar1 = 0;
           if ((Raziel.Mode & 0x40000U) == 0)
           {
-            G2EmulationSwitchAnimation(In, 1, (uint)PickupList[uVar2], 0, 3, 1);
+            G2EmulationSwitchAnimation(In, 1, (uint)(&PickupList)[uVar2], 0, 3, 1);
             Raziel.returnState = (_func_130 *)In->SectionList[1].Process;
             StateSwitchStateData(In, 1, StateHandlerPickupObject, 0);
             iVar1 = 0;
@@ -2585,7 +2585,7 @@ void razSetCowlNoDraw(int mode)
   _MFace *p_Var2;
   ushort *puVar3;
 
-  puVar3 = cowlList;
+  puVar3 = &cowlList;
   do
   {
     if (mode == 0)

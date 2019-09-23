@@ -50,8 +50,8 @@ void _G2Anim_DecompressChannel_AdaptiveDelta(_G2AnimDecompressChannelInfo_Type *
 	{
 		uVar9 = uVar9 + 1;
 		uVar5 = (int)(uint)(puVar3 + 2)[(int)uVar9 >> 2] >> ((uVar9 & 3) << 2);
-		uVar2 = *(ushort *)(_stepSizeTable + iVar7);
-		iVar8 = iVar7 + _indexTable[uVar5 & 0xf];
+		uVar2 = *(ushort *)(&_stepSizeTable + iVar7);
+		iVar8 = iVar7 + (&_indexTable)[uVar5 & 0xf];
 		iVar7 = iVar8;
 		if (iVar8 < 0)
 		{

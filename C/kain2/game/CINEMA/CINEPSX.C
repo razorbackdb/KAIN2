@@ -94,7 +94,7 @@ void CINE_Play(char *strfile, ushort mask, int buffers)
 {
 	if (the_cine_table != (cinema_fn_table_t *)0x0)
 	{
-		if (the_cine_table->versionID == monVersion)
+		if (the_cine_table->versionID == &monVersion)
 		{
 			(*the_cine_table->play)(strfile, (uint)mask);
 			LOAD_InitCdStreamMode();

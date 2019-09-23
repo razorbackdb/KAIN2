@@ -990,14 +990,14 @@ void sfxCmdSetToneVolPanPitch(AadSfxCommand *sfxCmd)
   if ((pAVar8->centerFine & 0x80U) == 0)
   {
     uVar6 = uVar6 & 0xffff;
-    sVar7 = aadPitchTable[uVar6] +
-            (ushort)(aadStepsPerCent[uVar6] * 100 * (uint)(byte)pAVar8->centerFine >> 0x17);
+    sVar7 = (&aadPitchTable)[uVar6] +
+            (ushort)((&aadStepsPerCent)[uVar6] * 100 * (uint)(byte)pAVar8->centerFine >> 0x17);
   }
   else
   {
     uVar6 = uVar6 & 0xffff;
-    sVar7 = aadPitchTable[uVar6] -
-            (ushort)(aadStepsPerCent[uVar6] * 100 *
+    sVar7 = (&aadPitchTable)[uVar6] -
+            (ushort)((&aadStepsPerCent)[uVar6] * 100 *
                          (0x100 - (uint)(byte)pAVar8->centerFine & 0xffff) >>
                      0x17);
   }

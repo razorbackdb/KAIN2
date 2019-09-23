@@ -25,18 +25,8 @@ PAUSE_XPOS = 0x100;
 PAUSE_YPOS = 0x3c;
 // int @0x800CFA6C, len = 0x00000004
 StartGameFading = 0x0;
-// undefined *32[4] @0x800CADC8, len = 0x00000010
-the_attract_movies4 =
-    {
-        // undefined *32 @0x800CADC8, len = 0x00000004
-        "\KAINDEM1.STR;1" /* collapsed from &s_KAINDEM1_STR1_800cfa38 */,
-        // undefined *32 @0x800CADCC, len = 0x00000004
-        "\KAINDEM2.STR;1" /* collapsed from &s_KAINDEM2_STR1_800cfa28 */,
-        // undefined *32 @0x800CADD0, len = 0x00000004
-        "\KAINDEM3.STR;1" /* collapsed from &s_KAINDEM3_STR1_800cfa18 */,
-        // undefined *32 @0x800CADD4, len = 0x00000004
-        "\KAINDEM4.STR;1" /* collapsed from &s_KAINDEM4_STR1_800cfa08 */
-};
+// char * @0x800CADC8, len = 0x00000004
+the_attract_movies4 = "\KAINDEM1.STR;1" /* collapsed from &s_KAINDEM1_STR1_800cfa38 */;
 // decompiled code
 // original method signature:
 // void /*$ra*/ do_check_controller(void *gt /*$a0*/)
@@ -289,7 +279,7 @@ void check_hack_attract(void)
   if ((0 < hack_attract) && (hack_attract + 2000U < gameTrackerX.vblCount))
   {
     hack_attract = 1;
-    play_movie(the_attract_movies4[hack_attract_movie]);
+    play_movie((&the_attract_movies4)[hack_attract_movie]);
     hack_attract_movie = hack_attract_movie + 1U & 3;
     hack_attract = gameTrackerX.vblCount;
   }
