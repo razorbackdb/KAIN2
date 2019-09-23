@@ -2,28 +2,29 @@
 //#include "THISDUST.H"
 #include "MAIN.H"
 #include "MAING2.H"
-#include "MEMPACK.H"
-#include "LOAD3D.H"
-#include "STRMLOAD.H"
-#include "LOCALSTR.H"
-#include "GAMELOOP.H"
-#include "SOUND.H"
-#include "VOICEXA.H"
-#include "AADSFX.H"
-#include "STREAM.H"
-#include "AADLIB.H"
-#include "SAVEINFO.H"
-#include "FONT.H"
-#include "GAMEPAD.H"
-#include "CINEPSX.H"
-#include "DEBUG.H"
-#include "MENUFACE.H"
-#include "VRAM.H"
-#include "DRAW.H"
-#include "DRAWS.H"
-#include "MENU.H"
-#include "TIMER.H"
-#include "RAZLIB.H"
+#include "MAINVM.H"
+//#include "MEMPACK.H"
+//#include "LOAD3D.H"
+//#include "STRMLOAD.H"
+//#include "LOCALSTR.H"
+//#include "GAMELOOP.H"
+//#include "SOUND.H"
+//#include "VOICEXA.H"
+//#include "AADSFX.H"
+//#include "STREAM.H"
+//#include "AADLIB.H"
+//#include "SAVEINFO.H"
+//#include "FONT.H"
+//#include "GAMEPAD.H"
+//#include "CINEPSX.H"
+//#include "DEBUG.H"
+//#include "MENUFACE.H"
+//#include "VRAM.H"
+//#include "DRAW.H"
+//#include "DRAWS.H"
+//#include "MENU.H"
+//#include "TIMER.H"
+//#include "RAZLIB.H"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -730,10 +731,10 @@ PauseButtons =
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void ClearDisplay(void)
+/* void ClearDisplay(void)
 
 {
-/* 	PutDrawEnv((size_t *)(&draw + gameTrackerX.gameData.asmData.dispPage));
+	PutDrawEnv((size_t *)(&draw + gameTrackerX.gameData.asmData.dispPage));
 	(&clearRect)[gameTrackerX.gameData.asmData.dispPage].r0 = '\0';
 	(&clearRect)[gameTrackerX.gameData.asmData.dispPage].g0 = '\0';
 	(&clearRect)[gameTrackerX.gameData.asmData.dispPage].b0 = '\0';
@@ -741,8 +742,8 @@ void ClearDisplay(void)
 	DrawSync(0);
 	PutDispEnv((ushort *)(&disp + gameTrackerX.gameData.asmData.dispPage));
 	SetDispMask(1);
-	return; */
-}
+	return;
+} */
 
 // decompiled code
 // original method signature:
@@ -753,12 +754,12 @@ void ClearDisplay(void)
 /* end block 1 */
 // End Line: 303
 
-void screen_to_vram(long *screen, int buffer)
+/* void screen_to_vram(long *screen, int buffer)
 
 {
 	LOAD_LoadTIM2(screen, 0, buffer << 8, 0x200, 0x100);
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -778,7 +779,7 @@ void screen_to_vram(long *screen, int buffer)
 /* end block 2 */
 // End Line: 325
 
-void show_screen(char *name)
+/* void show_screen(char *name)
 
 {
 	long *screen;
@@ -790,7 +791,7 @@ void show_screen(char *name)
 		MEMPACK_Free((char *)screen);
 	}
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -801,7 +802,7 @@ void show_screen(char *name)
 /* end block 1 */
 // End Line: 436
 
-void play_movie(char *name)
+/* void play_movie(char *name)
 
 {
 	int iVar1;
@@ -814,7 +815,7 @@ void play_movie(char *name)
 		CINE_Unload();
 	}
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -830,14 +831,14 @@ void play_movie(char *name)
 /* end block 2 */
 // End Line: 481
 
-void InitMainTracker(MainTracker *mainTracker)
+/* void InitMainTracker(MainTracker *mainTracker)
 
 {
 	mainTracker->mainState = 0;
 	mainTracker->previousState = 0;
 	mainTracker->done = 0;
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -867,7 +868,7 @@ void InitMainTracker(MainTracker *mainTracker)
 /* end block 4 */
 // End Line: 497
 
-char *FindTextInLine(char *search_match, char *search_str)
+/* char *FindTextInLine(char *search_match, char *search_str)
 
 {
 	byte bVar1;
@@ -902,7 +903,7 @@ char *FindTextInLine(char *search_match, char *search_str)
 		}
 	}
 	return (char *)0x0;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -918,7 +919,7 @@ char *FindTextInLine(char *search_match, char *search_str)
 /* end block 2 */
 // End Line: 531
 
-void ExtractWorldName(char *worldName, char *levelName)
+/* void ExtractWorldName(char *worldName, char *levelName)
 
 {
 	byte bVar1;
@@ -933,7 +934,7 @@ void ExtractWorldName(char *worldName, char *levelName)
 	}
 	*worldName = 0;
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -949,7 +950,7 @@ void ExtractWorldName(char *worldName, char *levelName)
 /* end block 2 */
 // End Line: 549
 
-void ExtractLevelNum(char *levelNum, char *levelName)
+/* void ExtractLevelNum(char *levelNum, char *levelName)
 
 {
 	byte bVar1;
@@ -974,7 +975,7 @@ void ExtractLevelNum(char *levelNum, char *levelName)
 	}
 	*levelNum = 0;
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -996,7 +997,7 @@ void ExtractLevelNum(char *levelNum, char *levelName)
 /* end block 2 */
 // End Line: 737
 
-void ProcessArgs(char *baseAreaName, GameTracker *gameTracker)
+/* void ProcessArgs(char *baseAreaName, GameTracker *gameTracker)
 
 {
 	char cVar1;
@@ -1073,7 +1074,7 @@ void ProcessArgs(char *baseAreaName, GameTracker *gameTracker)
 		MEMPACK_Free((char *)levelName);
 	}
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1096,7 +1097,7 @@ void ProcessArgs(char *baseAreaName, GameTracker *gameTracker)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void InitDisplay(void)
+/* void InitDisplay(void)
 
 {
 	BLK_FILL *pBVar1;
@@ -1138,7 +1139,7 @@ void InitDisplay(void)
 	//DRAWENV_800d0ec8.g0 = '\0';
 	/* WARNING: Read-only address (ram,0x800d0ee3) is written */
 	//DRAWENV_800d0ec8.b0 = '\0';
-	do
+/* 	do
 	{
 		*(size_t *)((int)&pBVar1->tag + 3) = 3;
 		pBVar1->code = '\x02';
@@ -1156,8 +1157,8 @@ void InitDisplay(void)
 	//ClearOTagR(gameTrackerX.drawOT, 0xc00);
 	//ClearOTagR(gameTrackerX.dispOT, 0xc00);
 	//ClearImage((short *)&local_10, 0, 0xff, 0);
-	return;
-}
+	return; */
+//}
 
 // decompiled code
 // original method signature:
@@ -1170,18 +1171,18 @@ void InitDisplay(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void StartTimer(void)
+/* void StartTimer(void)
 
 {
-/* 	EnterCriticalSection();
+	EnterCriticalSection();
 	__timerEvent = OpenEvent();
 	EnableEvent();
 	SetRCnt(0xf2000000, 0xffff, (uint)&DAT_00001001);
 	StartRCnt(0xf2000000);
 	ExitCriticalSection();
-	gTimerEnabled = 1; */
+	gTimerEnabled = 1;
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1199,7 +1200,7 @@ void StartTimer(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void VblTick(void)
+/* void VblTick(void)
 
 {
 	int devstation; //stub
@@ -1217,7 +1218,7 @@ void VblTick(void)
 		gameTrackerX.vblFrames = 0;
 	}
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1235,7 +1236,7 @@ void VblTick(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void DrawCallback(void)
+/* void DrawCallback(void)
 
 {
 	ulong uVar1;
@@ -1249,7 +1250,7 @@ void DrawCallback(void)
 			(void *)((int)gameTrackerX.disp + gameTrackerX.gameData.asmData.dispPage * 0x14);
 	}
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1271,7 +1272,7 @@ void DrawCallback(void)
 /* end block 2 */
 // End Line: 1545
 
-void FadeOutSayingLoading(GameTracker *gameTracker)
+/* void FadeOutSayingLoading(GameTracker *gameTracker)
 
 {
 	bool bVar1;
@@ -1315,7 +1316,7 @@ void FadeOutSayingLoading(GameTracker *gameTracker)
 		iVar4 = iVar4 + 0x10;
 	} while (bVar1);
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1343,9 +1344,9 @@ void FadeOutSayingLoading(GameTracker *gameTracker)
 void CheckForDevStation(void)
 
 {
-	devstation = 1;
-	DAT_80180000 = 0;
-	_DAT_80380000 = 0x12345678;
+	//devstation = 1;
+	//DAT_80180000 = 0;
+	//_DAT_80380000 = 0x12345678;
 	return;
 }
 
@@ -1380,7 +1381,7 @@ void CheckForDevStation(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void MAIN_ShowLoadingScreen(void)
+/* void MAIN_ShowLoadingScreen(void)
 
 {
 	language_t lVar1;
@@ -1406,7 +1407,7 @@ void MAIN_ShowLoadingScreen(void)
 		MEMPACK_Free((char *)screen);
 	}
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1424,14 +1425,14 @@ void MAIN_ShowLoadingScreen(void)
 /* end block 2 */
 // End Line: 1805
 
-long *MAIN_LoadTim(char *name)
+/* long *MAIN_LoadTim(char *name)
 
 {
 	long *plVar1;
 
 	plVar1 = LOAD_ReadFile(name, '\v');
 	return plVar1;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1451,7 +1452,7 @@ long *MAIN_LoadTim(char *name)
 /* end block 2 */
 // End Line: 1827
 
-void init_menus(GameTracker *gt)
+/* void init_menus(GameTracker *gt)
 
 {
 	ulong allocSize;
@@ -1462,7 +1463,7 @@ void init_menus(GameTracker *gt)
 	menu_initialize(menu, gt);
 	gt->menu = menu;
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1475,7 +1476,7 @@ void init_menus(GameTracker *gt)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void MAIN_DoMainInit(void)
+/* void MAIN_DoMainInit(void)
 
 {
 	InitDisplay();
@@ -1511,7 +1512,7 @@ void MAIN_DoMainInit(void)
 	SAVE_Init(&gameTrackerX);
 	srand(0);
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1524,7 +1525,7 @@ void MAIN_DoMainInit(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void MAIN_InitVolume(void)
+/* void MAIN_InitVolume(void)
 
 {
 	aadInitVolume();
@@ -1533,7 +1534,7 @@ void MAIN_InitVolume(void)
 	gameTrackerX.sound.soundsLoaded = '\x01';
 	aadSetNoUpdateMode(0);
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1546,14 +1547,14 @@ void MAIN_InitVolume(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void MAIN_ResetGame(void)
+/* void MAIN_ResetGame(void)
 
 {
 	GAMELOOP_SetScreenWipe(0, 0, -1);
 	gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xffffff6e;
 	RAZIEL_StartNewGame();
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1585,7 +1586,7 @@ void MAIN_ResetGame(void)
 /* WARNING: Removing unreachable block (ram,0x80038b68) */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void MAIN_MainMenuInit(void)
+/* void MAIN_MainMenuInit(void)
 
 {
 	size_t *puVar1;
@@ -1615,7 +1616,7 @@ void MAIN_MainMenuInit(void)
 	//BLK_FILL_800d0f98.g0 = '\0';
 	/* WARNING: Read-only address (ram,0x800d0f9e) is written */
 	//BLK_FILL_800d0f98.b0 = '\0';
-	puVar1 = (size_t *)"\\kain2\\sfx\\object\\mainmenu\\mainmenu.snf";
+/* 	puVar1 = (size_t *)"\\kain2\\sfx\\object\\mainmenu\\mainmenu.snf";
 	puVar2 = local_48;
 	do
 	{
@@ -1652,7 +1653,7 @@ void MAIN_MainMenuInit(void)
 	gameTrackerX.gameMode = 4;
 	//menu_set(gameTrackerX.menu, menudefs_main_menu);
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1665,7 +1666,7 @@ void MAIN_MainMenuInit(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void MAIN_FreeMainMenuStuff(void)
+/* void MAIN_FreeMainMenuStuff(void)
 
 {
 	int iVar1;
@@ -1684,7 +1685,7 @@ void MAIN_FreeMainMenuStuff(void)
 		aadProcessLoadQueue();
 	}
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1702,7 +1703,7 @@ void MAIN_FreeMainMenuStuff(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void MAIN_StartGame(void)
+/* void MAIN_StartGame(void)
 
 {
 	if (mainMenuFading == 0)
@@ -1721,7 +1722,7 @@ void MAIN_StartGame(void)
 		currentMenu = standardMenu;
 	}
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1741,7 +1742,7 @@ void MAIN_StartGame(void)
 /* end block 2 */
 // End Line: 2221
 
-long MAIN_DoMainMenu(GameTracker *gameTracker, MainTracker *mainTracker, long menuPos)
+/* long MAIN_DoMainMenu(GameTracker *gameTracker, MainTracker *mainTracker, long menuPos)
 
 {
 	ulong **drawot;
@@ -1766,7 +1767,7 @@ long MAIN_DoMainMenu(GameTracker *gameTracker, MainTracker *mainTracker, long me
 		MAIN_StartGame();
 	}
 	return 0;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1820,7 +1821,7 @@ int MainG2(void *appData)
 	CheckForDevStation();
 	char mainOptionsInit = '\0';
 	_Var3 = MainG2_InitEngine(appData, 0x200, 0xf0, (char *)0x0);
-	if (_Var3 != G2FALSE)
+	/* if (_Var3 != G2FALSE)
 	{
 		MEMPACK_Init();
 		LOAD_InitCd();
@@ -2024,6 +2025,6 @@ int MainG2(void *appData)
 		//PadStopCom();
 		//ResetGraph(3);
 	}
-	MainG2_ShutDownEngine(appData);
+	MainG2_ShutDownEngine(appData); */
 	return 0;
 }

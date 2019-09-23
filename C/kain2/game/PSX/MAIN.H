@@ -2,6 +2,7 @@
 #define MAIN_H
 
 #include "PLAYER.H"
+#include "MAING2.H"
 
 extern struct _ButtonTexture BexitLine[2]; // offset 0x800D0E20
 

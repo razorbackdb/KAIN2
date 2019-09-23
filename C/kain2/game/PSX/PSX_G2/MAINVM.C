@@ -21,7 +21,8 @@
 
 void __main(void)
 
-{
+{	
+	int __initialised = 0; //stub
 	if (__initialised == 0)
 	{
 		__initialised = 1;
@@ -49,6 +50,6 @@ int main(void)
 
 	__main();
 	ClearBss();
-	//iVar1 = MainG2(&_appDataVM);
+	iVar1 = MainG2(&_appDataVM);
 	return iVar1;
 }

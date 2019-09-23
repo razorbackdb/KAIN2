@@ -273,13 +273,6 @@ enum _G2Bool_Enum // Hashcode: 0xFDD7E4E7 (dec: -36182809)
 	G2FALSE = 0,
 };
 
-struct _G2SVector3_Type // hashcode: 0x60FF7CCD (dec: 1627356365)
-{
-	short x; // size=0, offset=0 //  hashcode: 0x5877A7D1 (dec: 1484236753), parent name: '_G2SVector3_Type', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short y; // size=0, offset=2 //  hashcode: 0xE07F7772 (dec: -528517262), parent name: '_G2SVector3_Type', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short z; // size=0, offset=4 //  hashcode: 0x04E69F44 (dec: 82222916), parent name: '_G2SVector3_Type', parent hashcode: 0xFFFFFFFF (dec: -1)
-};
-
 struct _G2LVector3_Type // hashcode: 0xD8D79EE7 (dec: -656957721)
 {
 	long x; // size=0, offset=0 //  hashcode: 0xA568D983 (dec: -1519855229), parent name: '_G2LVector3_Type', parent hashcode: 0xFFFFFFFF (dec: -1)
@@ -300,6 +293,13 @@ struct _G2Quat_Type // hashcode: 0xC71F9EB1 (dec: -954229071)
 	short y; // size=0, offset=2 //  hashcode: 0xE76648C7 (dec: -412727097), parent name: '_G2Quat_Type', parent hashcode: 0xFFFFFFFF (dec: -1)
 	short z; // size=0, offset=4 //  hashcode: 0x40B7587D (dec: 1085757565), parent name: '_G2Quat_Type', parent hashcode: 0xFFFFFFFF (dec: -1)
 	short w; // size=0, offset=6 //  hashcode: 0x8A8835F1 (dec: -1970784783), parent name: '_G2Quat_Type', parent hashcode: 0xFFFFFFFF (dec: -1)
+};
+
+struct _G2SVector3_Type // hashcode: 0x60FF7CCD (dec: 1627356365)
+{
+	short x; // size=0, offset=0 //  hashcode: 0x5877A7D1 (dec: 1484236753), parent name: '_G2SVector3_Type', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short y; // size=0, offset=2 //  hashcode: 0xE07F7772 (dec: -528517262), parent name: '_G2SVector3_Type', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short z; // size=0, offset=4 //  hashcode: 0x04E69F44 (dec: 82222916), parent name: '_G2SVector3_Type', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
 
 struct _G2AnimQuatInfo_Type // hashcode: 0x5A520473 (dec: 1515324531)
@@ -2459,21 +2459,11 @@ typedef unsigned long ino_t;
 
 typedef long swblk_t;
 
-typedef unsigned int size_t;
-
 typedef long time_t;
-
-typedef short dev_t;
 
 typedef long off_t;
 
-typedef unsigned short uid_t;
-
-typedef unsigned short gid_t;
-
 typedef void (*CdlCB)();
-
-typedef void *va_list;
 
 typedef unsigned char uchar;
 

@@ -15,6 +15,6 @@ extern int main(); // 0x800962C0
 
 extern void __main();
 
-int __initialised;
+extern int __initialised;
 
 #endif

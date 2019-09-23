@@ -1,6 +1,8 @@
 #ifndef MAING2_H
 #define MAING2_H
 
+#include "PLAYER.H"
+
 struct MAING2_68fake // hashcode: 0x185E0D79 (dec: 408817017)
 {
 	unsigned long (*function)(); // size=0, offset=0 //  hashcode: 0xE3D729C8 (dec: -472438328), parent name: 'MAING2_68fake', parent hashcode: 0xFFFFFFFF (dec: -1)
@@ -120,8 +122,8 @@ struct MAING2_86fake // hashcode: 0x270BADD7 (dec: 655076823)
 {
 	short index;					// size=0, offset=0 //  hashcode: 0x575D00FB (dec: 1465712891), parent name: 'MAING2_86fake', parent hashcode: 0xFFFFFFFF (dec: -1)
 	short z;						// size=0, offset=2 //  hashcode: 0x30AED12F (dec: 816763183), parent name: 'MAING2_86fake', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MultiSignal *upSignal;   // size=0, offset=4 //  hashcode: 0xB8270FD0 (dec: -1205399600), parent name: 'MAING2_86fake', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MultiSignal *downSignal; // size=0, offset=8 //  hashcode: 0x1B7ED911 (dec: 461297937), parent name: 'MAING2_86fake', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _MultiSignal *upSignal;   // size=0, offset=4 //  hashcode: 0xB8270FD0 (dec: -1205399600), parent name: 'MAING2_86fake', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _MultiSignal *downSignal; // size=0, offset=8 //  hashcode: 0x1B7ED911 (dec: 461297937), parent name: 'MAING2_86fake', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
 
 struct MAING2_87fake // hashcode: 0xEB3FCB13 (dec: -348140781)
