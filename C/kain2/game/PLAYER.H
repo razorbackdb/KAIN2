@@ -152,100 +152,24 @@ struct LightInstance // hashcode: 0xB8D5E61F (dec: -1193941473)
 	unsigned char flags;			 // size=0, offset=19 //  hashcode: 0xA2BEECD4 (dec: -1564545836), parent name: 'LightInstance', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
 
-struct _Instance // hashcode: 0x699A5B3D (dec: 1771723581)
+struct NodeType // hashcode: 0x5BF613D7 (dec: 1542853591)
 {
-	struct NodeType node;						 // size=8, offset=0 //  hashcode: 0x99208B91 (dec: -1725920367), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _Instance *next;						 // size=616, offset=8 //  hashcode: 0xB3A164B8 (dec: -1281268552), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _Instance *prev;						 // size=616, offset=12 //  hashcode: 0x42C61B4A (dec: 1120279370), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long instanceID;							 // size=0, offset=16 //  hashcode: 0xA6884804 (dec: -1501018108), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long flags;									 // size=0, offset=20 //  hashcode: 0xD1775B28 (dec: -780707032), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long flags2;								 // size=0, offset=24 //  hashcode: 0x21861BFC (dec: 562437116), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct Object *object;						 // size=76, offset=28 //  hashcode: 0x1F65FB30 (dec: 526777136), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct Intro *intro;						 // size=0, offset=32 //  hashcode: 0x0F03F6CB (dec: 251918027), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	void *data;									 // size=0, offset=36 //  hashcode: 0x19CC04EB (dec: 432801003), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	void *introData;							 // size=0, offset=40 //  hashcode: 0xA50D07DB (dec: -1525872677), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _Instance *parent;					 // size=616, offset=44 //  hashcode: 0x1BBBD8B7 (dec: 465295543), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long introNum;								 // size=0, offset=48 //  hashcode: 0x8279A896 (dec: -2105956202), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long birthStreamUnitID;						 // size=0, offset=52 //  hashcode: 0xED885CFD (dec: -309830403), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long currentStreamUnitID;					 // size=0, offset=56 //  hashcode: 0x72D30C56 (dec: 1926433878), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long introUniqueID;							 // size=0, offset=60 //  hashcode: 0x2BFA69A1 (dec: 737831329), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MATRIX *matrix;						 // size=32, offset=64 //  hashcode: 0xE317A8AB (dec: -484988757), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MATRIX *oldMatrix;					 // size=32, offset=68 //  hashcode: 0x32B1418F (dec: 850477455), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct SoundInstance soundInstanceTbl[4];	// size=12, offset=72 //  hashcode: 0x6758AC4D (dec: 1733864525), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	unsigned long maxCheckDistance;				 // size=0, offset=84 //  hashcode: 0x0E842D43 (dec: 243543363), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	unsigned long checkMask;					 // size=0, offset=88 //  hashcode: 0xEC138633 (dec: -334264781), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _Position position;					 // size=6, offset=92 //  hashcode: 0xD4957DF0 (dec: -728400400), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	unsigned char lightGroup;					 // size=0, offset=98 //  hashcode: 0x8CAE4B99 (dec: -1934734439), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _Position oldPos;					 // size=6, offset=100 //  hashcode: 0x1063D144 (dec: 274977092), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	unsigned char spectralLightGroup;			 // size=0, offset=106 //  hashcode: 0x8584656E (dec: -2054920850), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short currentTextureAnimFrame;				 // size=0, offset=108 //  hashcode: 0x960093A5 (dec: -1778347099), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _Position initialPos;				 // size=6, offset=110 //  hashcode: 0x386B385F (dec: 946550879), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _Rotation rotation;					 // size=8, offset=116 //  hashcode: 0x74BE2D34 (dec: 1958620468), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _Rotation oldRotation;				 // size=8, offset=124 //  hashcode: 0xA1D5C67F (dec: -1579825537), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _SVector scale;						 // size=8, offset=132 //  hashcode: 0xDA9E0E9F (dec: -627175777), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long attachedID;							 // size=0, offset=140 //  hashcode: 0x9BCBC65C (dec: -1681144228), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long attachedSegment;						 // size=0, offset=144 //  hashcode: 0xC10D1191 (dec: -1056108143), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MATRIX relativeMatrix;				 // size=32, offset=148 //  hashcode: 0xE3835060 (dec: -477933472), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _TFace *tface;						 // size=12, offset=180 //  hashcode: 0x88C4C8FF (dec: -2000369409), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _TFace *oldTFace;					 // size=12, offset=184 //  hashcode: 0xF2256D72 (dec: -232428174), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	void *tfaceLevel;							 // size=0, offset=188 //  hashcode: 0x11BB7061 (dec: 297496673), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	void *collideInfo;							 // size=0, offset=192 //  hashcode: 0x66F9A20E (dec: 1727635982), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long bspTree;								 // size=0, offset=196 //  hashcode: 0x9EF645B5 (dec: -1628027467), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short cachedTFace;							 // size=0, offset=200 //  hashcode: 0xFAF15585 (dec: -84847227), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short cachedBSPTree;						 // size=0, offset=202 //  hashcode: 0xF04425B4 (dec: -263969356), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	void *cachedTFaceLevel;						 // size=0, offset=204 //  hashcode: 0xF192C521 (dec: -242039519), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _Normal oldWNormal;					 // size=8, offset=208 //  hashcode: 0x5B7F4794 (dec: 1535068052), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _Normal wNormal;						 // size=8, offset=216 //  hashcode: 0xB9F91D63 (dec: -1174856349), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _SVector offset;						 // size=8, offset=224 //  hashcode: 0xE2B8BD56 (dec: -491209386), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _HModel *hModelList;					 // size=8, offset=232 //  hashcode: 0xC12D7847 (dec: -1053984697), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short fadeValue;							 // size=0, offset=236 //  hashcode: 0x564EF969 (dec: 1448016233), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short lightMatrix;							 // size=0, offset=238 //  hashcode: 0x3BCAE250 (dec: 1003151952), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	void (*processFunc)();						 // size=0, offset=240 //  hashcode: 0x509F6C31 (dec: 1352625201), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	void (*collideFunc)();						 // size=0, offset=244 //  hashcode: 0x590F8C01 (dec: 1494191105), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	void (*additionalCollideFunc)();			 // size=0, offset=248 //  hashcode: 0xBD63CD14 (dec: -1117532908), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	unsigned long (*queryFunc)();				 // size=0, offset=252 //  hashcode: 0x7F7E6E8A (dec: 2138992266), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	void (*messageFunc)();						 // size=0, offset=256 //  hashcode: 0xFCD61AC7 (dec: -53077305), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _Position shadowPosition;			 // size=6, offset=260 //  hashcode: 0xD0781A43 (dec: -797435325), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short currentModel;							 // size=0, offset=266 //  hashcode: 0x57010A87 (dec: 1459686023), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _TFace *waterFace;					 // size=12, offset=268 //  hashcode: 0x0AC072B0 (dec: 180384432), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _TFace *oldWaterFace;				 // size=12, offset=272 //  hashcode: 0x2FE681B5 (dec: 803635637), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _Terrain *waterFaceTerrain;			 // size=0, offset=276 //  hashcode: 0xF61F0A62 (dec: -165737886), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _PlaneConstants halvePlane;			 // size=12, offset=280 //  hashcode: 0x3436D438 (dec: 876008504), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _SVector splitPoint;					 // size=8, offset=292 //  hashcode: 0xEAB4289D (dec: -357291875), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _Instance *LinkParent;				 // size=616, offset=300 //  hashcode: 0xA2F719D6 (dec: -1560864298), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _Instance *LinkChild;				 // size=616, offset=304 //  hashcode: 0x5DB1CE79 (dec: 1571933817), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _Instance *LinkSibling;				 // size=616, offset=308 //  hashcode: 0x92292860 (dec: -1842796448), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long ParentLinkNode;						 // size=0, offset=312 //  hashcode: 0xA312388F (dec: -1559086961), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	void *InstanceState;						 // size=0, offset=316 //  hashcode: 0x79B2FE86 (dec: 2041773702), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	char introName[12];							 // size=12, offset=320 //  hashcode: 0xBDFED102 (dec: -1107373822), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	void *extraData;							 // size=0, offset=332 //  hashcode: 0x694711D8 (dec: 1766265304), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short constrictAngle;						 // size=0, offset=336 //  hashcode: 0xB6F7367A (dec: -1225312646), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short petrifyValue;							 // size=0, offset=338 //  hashcode: 0x9B0240A1 (dec: -1694351199), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long xVel;									 // size=0, offset=340 //  hashcode: 0x42ACBBB9 (dec: 1118616505), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long yVel;									 // size=0, offset=344 //  hashcode: 0xD6EEAB82 (dec: -689001598), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long zVel;									 // size=0, offset=348 //  hashcode: 0xA21ED791 (dec: -1575037039), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long xAccl;									 // size=0, offset=352 //  hashcode: 0xF0501CF6 (dec: -263185162), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long yAccl;									 // size=0, offset=356 //  hashcode: 0xC49C9B60 (dec: -996369568), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long zAccl;									 // size=0, offset=360 //  hashcode: 0x588735F2 (dec: 1485256178), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long maxXVel;								 // size=0, offset=364 //  hashcode: 0x699F6B15 (dec: 1772055317), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long maxYVel;								 // size=0, offset=368 //  hashcode: 0xB840A661 (dec: -1203722655), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long maxZVel;								 // size=0, offset=372 //  hashcode: 0x237D351E (dec: 595408158), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long currentMainState;						 // size=0, offset=376 //  hashcode: 0x67C6BFB0 (dec: 1741078448), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long work0;									 // size=0, offset=380 //  hashcode: 0xDE8C79D1 (dec: -561219119), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long work1;									 // size=0, offset=384 //  hashcode: 0x1281F305 (dec: 310506245), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long work2;									 // size=0, offset=388 //  hashcode: 0xD1CF0CA9 (dec: -774959959), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long work3;									 // size=0, offset=392 //  hashcode: 0x27BB560D (dec: 666588685), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long work4;									 // size=0, offset=396 //  hashcode: 0xDFE8F832 (dec: -538380238), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long work5;									 // size=0, offset=400 //  hashcode: 0x8C138638 (dec: -1944877512), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _G2Anim_Type anim;					 // size=180, offset=404 //  hashcode: 0xC5CB720A (dec: -976522742), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	enum _G2Bool_Enum (*rebuildCallback)();		 // size=4, offset=584 //  hashcode: 0xFE6A12C9 (dec: -26602807), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short splineFlags;							 // size=0, offset=588 //  hashcode: 0x38C7970D (dec: 952604429), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short targetFrame;							 // size=0, offset=590 //  hashcode: 0xACE5BB38 (dec: -1394230472), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short clipBeg;								 // size=0, offset=592 //  hashcode: 0xA006AD90 (dec: -1610175088), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short clipEnd;								 // size=0, offset=594 //  hashcode: 0x834CD393 (dec: -2092117101), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct EventAliasCommandStruct aliasCommand; // size=12, offset=596 //  hashcode: 0x6CD7E213 (dec: 1826087443), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long light_color;							 // size=0, offset=608 //  hashcode: 0xF86FC59E (dec: -126892642), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct CVECTOR *perVertexColor;				 // size=4, offset=612 //  hashcode: 0x6B4D42DF (dec: 1800225503), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct NodeType *prev; // size=8, offset=0 //  hashcode: 0x8B4DA622 (dec: -1957845470), parent name: 'NodeType', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct NodeType *next; // size=8, offset=4 //  hashcode: 0xDB8CB0B1 (dec: -611536719), parent name: 'NodeType', parent hashcode: 0xFFFFFFFF (dec: -1)
+};
+
+struct SoundInstance // hashcode: 0xFF235679 (dec: -14461319)
+{
+	unsigned char channel; // size=0, offset=0 //  hashcode: 0x61316CDF (dec: 1630629087), parent name: 'SoundInstance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	unsigned char state;   // size=0, offset=1 //  hashcode: 0xB9825B15 (dec: -1182639339), parent name: 'SoundInstance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	unsigned char delay;   // size=0, offset=2 //  hashcode: 0x184E0534 (dec: 407766324), parent name: 'SoundInstance', parent hashcode: 0xFFFFFFFF (dec: -1)
+};
+
+struct _Position // hashcode: 0x2523C22F (dec: 623100463)
+{
+	short x; // size=0, offset=0 //  hashcode: 0x583D5468 (dec: 1480414312), parent name: '_Position', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short y; // size=0, offset=2 //  hashcode: 0x66ACC135 (dec: 1722597685), parent name: '_Position', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short z; // size=0, offset=4 //  hashcode: 0xE498BAB5 (dec: -459752779), parent name: '_Position', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
 
 struct _GameTrackerASMData_Type // hashcode: 0x28F0BFB9 (dec: 686866361)
@@ -260,12 +184,6 @@ struct _GameTrackerASMData_Type // hashcode: 0x28F0BFB9 (dec: 686866361)
 struct _GameData_Type // hashcode: 0xE05EBAD0 (dec: -530662704)
 {
 	struct _GameTrackerASMData_Type asmData; // size=32, offset=0 //  hashcode: 0xC31E75FB (dec: -1021413893), parent name: '_GameData_Type', parent hashcode: 0xFFFFFFFF (dec: -1)
-};
-
-struct NodeType // hashcode: 0x5BF613D7 (dec: 1542853591)
-{
-	struct NodeType *prev; // size=8, offset=0 //  hashcode: 0x8B4DA622 (dec: -1957845470), parent name: 'NodeType', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct NodeType *next; // size=8, offset=4 //  hashcode: 0xDB8CB0B1 (dec: -611536719), parent name: 'NodeType', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
 
 struct TextureFT3 // hashcode: 0x2D2801D6 (dec: 757596630)
@@ -543,14 +461,6 @@ struct _SVectorNoPad // hashcode: 0xA6EDBBC6 (dec: -1494369338)
 	short y; // size=0, offset=2 //  hashcode: 0xD04029C5 (dec: -801101371), parent name: '_SVectorNoPad', parent hashcode: 0xFFFFFFFF (dec: -1)
 	short z; // size=0, offset=4 //  hashcode: 0x685B61F9 (dec: 1750819321), parent name: '_SVectorNoPad', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
-
-struct _Position // hashcode: 0x2523C22F (dec: 623100463)
-{
-	short x; // size=0, offset=0 //  hashcode: 0x583D5468 (dec: 1480414312), parent name: '_Position', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short y; // size=0, offset=2 //  hashcode: 0x66ACC135 (dec: 1722597685), parent name: '_Position', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short z; // size=0, offset=4 //  hashcode: 0xE498BAB5 (dec: -459752779), parent name: '_Position', parent hashcode: 0xFFFFFFFF (dec: -1)
-};
-
 struct _Rotation // hashcode: 0x5A40CBB0 (dec: 1514195888)
 {
 	short x;   // size=0, offset=0 //  hashcode: 0x33B21012 (dec: 867307538), parent name: '_Rotation', parent hashcode: 0xFFFFFFFF (dec: -1)
@@ -668,34 +578,6 @@ struct _CameraKey // hashcode: 0xB9E6B724 (dec: -1176062172)
 	short pad;   // size=0, offset=22 //  hashcode: 0x0A6047E7 (dec: 174082023), parent name: '_CameraKey', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
 
-struct Object // hashcode: 0xEC12E9AC (dec: -334304852)
-{
-	long oflags;						   // size=0, offset=0 //  hashcode: 0xDA3627CB (dec: -633985077), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short id;							   // size=0, offset=4 //  hashcode: 0x59373C64 (dec: 1496792164), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short sfxFileHandle;				   // size=0, offset=6 //  hashcode: 0x6C480C2C (dec: 1816661036), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short numModels;					   // size=0, offset=8 //  hashcode: 0x9527F657 (dec: -1792543145), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short numAnims;						   // size=0, offset=10 //  hashcode: 0x1D8EBDF4 (dec: 495894004), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _Model **modelList;			   // size=56, offset=12 //  hashcode: 0x70631414 (dec: 1885541396), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct _G2AnimKeylist_Type **animList; // size=20, offset=16 //  hashcode: 0xA2158DDF (dec: -1575645729), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short introDist;					   // size=0, offset=20 //  hashcode: 0xB4B4CF74 (dec: -1263218828), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short vvIntroDist;					   // size=0, offset=22 //  hashcode: 0x7778B825 (dec: 2004400165), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short removeDist;					   // size=0, offset=24 //  hashcode: 0xCCB7623F (dec: -860396993), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short vvRemoveDist;					   // size=0, offset=26 //  hashcode: 0x17315AEB (dec: 389110507), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-	void *data;							   // size=0, offset=28 //  hashcode: 0x4026883B (dec: 1076267067), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-	char *script;						   // size=0, offset=32 //  hashcode: 0x543F7EE6 (dec: 1413447398), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-	char *name;							   // size=0, offset=36 //  hashcode: 0xA37E2F44 (dec: -1552011452), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-	unsigned char *soundData;			   // size=0, offset=40 //  hashcode: 0xE70F395C (dec: -418432676), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long oflags2;						   // size=0, offset=44 //  hashcode: 0x6283252E (dec: 1652761902), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short sectionA;						   // size=0, offset=48 //  hashcode: 0x7B140262 (dec: 2064908898), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short sectionB;						   // size=0, offset=50 //  hashcode: 0x96BC3E8B (dec: -1766048117), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short sectionC;						   // size=0, offset=52 //  hashcode: 0xFD846DDC (dec: -41652772), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short numberOfEffects;				   // size=0, offset=54 //  hashcode: 0x2E3D8DBC (dec: 775785916), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct ObjectEffect *effectList;	   // size=4, offset=56 //  hashcode: 0xDFF64033 (dec: -537509837), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-	unsigned long *relocList;			   // size=0, offset=60 //  hashcode: 0x58294F36 (dec: 1479102262), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-	void *relocModule;					   // size=0, offset=64 //  hashcode: 0xC026F20D (dec: -1071189491), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct VramSize vramSize;			   // size=8, offset=68 //  hashcode: 0x31E46F0D (dec: 837054221), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
-};
-
 struct _BVertex // hashcode: 0xADD3BD2F (dec: -1378632401)
 {
 	short x;   // size=0, offset=0 //  hashcode: 0xB6040E5B (dec: -1241248165), parent name: '_BVertex', parent hashcode: 0xFFFFFFFF (dec: -1)
@@ -804,24 +686,31 @@ struct PLAYER_89fake // hashcode: 0xB104F157 (dec: -1325076137)
 	struct Signal *gotoLabel; // size=0, offset=4 //  hashcode: 0x17414AA4 (dec: 390154916), parent name: 'PLAYER_89fake', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
 
-struct Signal // hashcode: 0xA0225F88 (dec: -1608360056)
-{
-	long id;				   // size=0, offset=0 //  hashcode: 0x6B9BBF4A (dec: 1805369162), parent name: 'Signal', parent hashcode: 0xFFFFFFFF (dec: -1)
-	union PLAYER_102fake data; // size=24, offset=4 //  hashcode: 0xF501B407 (dec: -184437753), parent name: 'Signal', parent hashcode: 0xFFFFFFFF (dec: -1)
-};
-
 struct PLAYER_90fake // hashcode: 0x92CB9988 (dec: -1832150648)
 {
 	long timer;  // size=0, offset=0 //  hashcode: 0x6E3CE53B (dec: 1849484603), parent name: 'PLAYER_90fake', parent hashcode: 0xFFFFFFFF (dec: -1)
 	long action; // size=0, offset=4 //  hashcode: 0x8AB3A26F (dec: -1967938961), parent name: 'PLAYER_90fake', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
 
+struct Signal // hashcode: 0xA0225F88 (dec: -1608360056)
+{
+	long id;				   // size=0, offset=0 //  hashcode: 0x6B9BBF4A (dec: 1805369162), parent name: 'Signal', parent hashcode: 0xFFFFFFFF (dec: -1)
+};
+
+struct _MultiSignal // hashcode: 0x0620B768 (dec: 102807400)
+{
+	long numSignals;			  // size=0, offset=0 //  hashcode: 0xF4A14626 (dec: -190757338), parent name: '_MultiSignal', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short signalNum;			  // size=0, offset=4 //  hashcode: 0x5C48DC21 (dec: 1548278817), parent name: '_MultiSignal', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short flags;				  // size=0, offset=6 //  hashcode: 0xC0D461F2 (dec: -1059823118), parent name: '_MultiSignal', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct Signal signalList[32]; // size=896, offset=8 //  hashcode: 0x362EB6D1 (dec: 909031121), parent name: '_MultiSignal', parent hashcode: 0xFFFFFFFF (dec: -1)
+};
+
 struct PLAYER_91fake // hashcode: 0x5193A947 (dec: 1368631623)
 {
 	short index;					// size=0, offset=0 //  hashcode: 0x38873341 (dec: 948384577), parent name: 'PLAYER_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
 	short z;						// size=0, offset=2 //  hashcode: 0x2B7FED70 (dec: 729804144), parent name: 'PLAYER_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MultiSignal *upSignal;   // size=0, offset=4 //  hashcode: 0xA204EC43 (dec: -1576735677), parent name: 'PLAYER_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MultiSignal *downSignal; // size=0, offset=8 //  hashcode: 0x67D3CD09 (dec: 1741933833), parent name: 'PLAYER_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _MultiSignal *upSignal;   // size=0, offset=4 //  hashcode: 0xA204EC43 (dec: -1576735677), parent name: 'PLAYER_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _MultiSignal *downSignal; // size=0, offset=8 //  hashcode: 0x67D3CD09 (dec: 1741933833), parent name: 'PLAYER_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
 
 struct PLAYER_92fake // hashcode: 0xD1146EEE (dec: -787190034)
@@ -950,14 +839,6 @@ union PLAYER_102fake // Hashcode: 0xEF0F9FA5 (dec: -284188763)
 	long slideAngle;				   // size=0, offset=0
 };
 
-struct _MultiSignal // hashcode: 0x0620B768 (dec: 102807400)
-{
-	long numSignals;			  // size=0, offset=0 //  hashcode: 0xF4A14626 (dec: -190757338), parent name: '_MultiSignal', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short signalNum;			  // size=0, offset=4 //  hashcode: 0x5C48DC21 (dec: 1548278817), parent name: '_MultiSignal', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short flags;				  // size=0, offset=6 //  hashcode: 0xC0D461F2 (dec: -1059823118), parent name: '_MultiSignal', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct Signal signalList[32]; // size=896, offset=8 //  hashcode: 0x362EB6D1 (dec: 909031121), parent name: '_MultiSignal', parent hashcode: 0xFFFFFFFF (dec: -1)
-};
-
 struct _HFace // hashcode: 0x30CA5CA6 (dec: 818568358)
 {
 	short v0;			   // size=0, offset=0 //  hashcode: 0xFA36FB0F (dec: -97060081), parent name: '_HFace', parent hashcode: 0xFFFFFFFF (dec: -1)
@@ -1045,26 +926,6 @@ struct _Segment // hashcode: 0x2F06BF28 (dec: 788971304)
 	struct _HInfo *hInfo; // size=24, offset=20 //  hashcode: 0x83DD51B5 (dec: -2082647627), parent name: '_Segment', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
 
-struct MultiSpline // hashcode: 0x2823B2CF (dec: 673428175)
-{
-	struct Spline *positional;		// size=8, offset=0 //  hashcode: 0xD111C04C (dec: -787365812), parent name: 'MultiSpline', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct RSpline *rotational;		// size=8, offset=4 //  hashcode: 0xACBF6077 (dec: -1396744073), parent name: 'MultiSpline', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct Spline *scaling;			// size=8, offset=8 //  hashcode: 0xB162004A (dec: -1318977462), parent name: 'MultiSpline', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct Spline *color;			// size=8, offset=12 //  hashcode: 0x7E26D337 (dec: 2116473655), parent name: 'MultiSpline', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct SplineDef curPositional; // size=8, offset=16 //  hashcode: 0xDA32CD3C (dec: -634204868), parent name: 'MultiSpline', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct SplineDef curRotational; // size=8, offset=24 //  hashcode: 0x90E53563 (dec: -1864026781), parent name: 'MultiSpline', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct SplineDef curScaling;	// size=8, offset=32 //  hashcode: 0x5497DB32 (dec: 1419238194), parent name: 'MultiSpline', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct SplineDef curColor;		// size=8, offset=40 //  hashcode: 0xD84C232E (dec: -666098898), parent name: 'MultiSpline', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MATRIX curRotMatrix;		// size=32, offset=48 //  hashcode: 0x2DD49D2B (dec: 768908587), parent name: 'MultiSpline', parent hashcode: 0xFFFFFFFF (dec: -1)
-};
-
-struct SoundInstance // hashcode: 0xFF235679 (dec: -14461319)
-{
-	unsigned char channel; // size=0, offset=0 //  hashcode: 0x61316CDF (dec: 1630629087), parent name: 'SoundInstance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	unsigned char state;   // size=0, offset=1 //  hashcode: 0xB9825B15 (dec: -1182639339), parent name: 'SoundInstance', parent hashcode: 0xFFFFFFFF (dec: -1)
-	unsigned char delay;   // size=0, offset=2 //  hashcode: 0x184E0534 (dec: 407766324), parent name: 'SoundInstance', parent hashcode: 0xFFFFFFFF (dec: -1)
-};
-
 struct ObjectEffect // hashcode: 0x2892438D (dec: 680674189)
 {
 	unsigned char effectNumber;	// size=0, offset=0 //  hashcode: 0x3175E9DA (dec: 829811162), parent name: 'ObjectEffect', parent hashcode: 0xFFFFFFFF (dec: -1)
@@ -1098,6 +959,34 @@ struct _TVertex // hashcode: 0x0883ABD5 (dec: 142846933)
 	unsigned char code;	// size=0, offset=11 //  hashcode: 0x081CD78E (dec: 136107918), parent name: '_TVertex', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
 
+struct Object // hashcode: 0xEC12E9AC (dec: -334304852)
+{
+	long oflags;						   // size=0, offset=0 //  hashcode: 0xDA3627CB (dec: -633985077), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short id;							   // size=0, offset=4 //  hashcode: 0x59373C64 (dec: 1496792164), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short sfxFileHandle;				   // size=0, offset=6 //  hashcode: 0x6C480C2C (dec: 1816661036), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short numModels;					   // size=0, offset=8 //  hashcode: 0x9527F657 (dec: -1792543145), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short numAnims;						   // size=0, offset=10 //  hashcode: 0x1D8EBDF4 (dec: 495894004), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _Model **modelList;			   // size=56, offset=12 //  hashcode: 0x70631414 (dec: 1885541396), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _G2AnimKeylist_Type **animList; // size=20, offset=16 //  hashcode: 0xA2158DDF (dec: -1575645729), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short introDist;					   // size=0, offset=20 //  hashcode: 0xB4B4CF74 (dec: -1263218828), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short vvIntroDist;					   // size=0, offset=22 //  hashcode: 0x7778B825 (dec: 2004400165), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short removeDist;					   // size=0, offset=24 //  hashcode: 0xCCB7623F (dec: -860396993), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short vvRemoveDist;					   // size=0, offset=26 //  hashcode: 0x17315AEB (dec: 389110507), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+	void *data;							   // size=0, offset=28 //  hashcode: 0x4026883B (dec: 1076267067), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+	char *script;						   // size=0, offset=32 //  hashcode: 0x543F7EE6 (dec: 1413447398), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+	char *name;							   // size=0, offset=36 //  hashcode: 0xA37E2F44 (dec: -1552011452), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+	unsigned char *soundData;			   // size=0, offset=40 //  hashcode: 0xE70F395C (dec: -418432676), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long oflags2;						   // size=0, offset=44 //  hashcode: 0x6283252E (dec: 1652761902), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short sectionA;						   // size=0, offset=48 //  hashcode: 0x7B140262 (dec: 2064908898), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short sectionB;						   // size=0, offset=50 //  hashcode: 0x96BC3E8B (dec: -1766048117), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short sectionC;						   // size=0, offset=52 //  hashcode: 0xFD846DDC (dec: -41652772), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short numberOfEffects;				   // size=0, offset=54 //  hashcode: 0x2E3D8DBC (dec: 775785916), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct ObjectEffect *effectList;	   // size=4, offset=56 //  hashcode: 0xDFF64033 (dec: -537509837), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+	unsigned long *relocList;			   // size=0, offset=60 //  hashcode: 0x58294F36 (dec: 1479102262), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+	void *relocModule;					   // size=0, offset=64 //  hashcode: 0xC026F20D (dec: -1071189491), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct VramSize vramSize;			   // size=8, offset=68 //  hashcode: 0x31E46F0D (dec: 837054221), parent name: 'Object', parent hashcode: 0xFFFFFFFF (dec: -1)
+};
+
 struct EventAliasCommandStruct // hashcode: 0xB6EF2AF6 (dec: -1225839882)
 {
 	struct _Instance *hostInstance; // size=0, offset=0 //  hashcode: 0x95780CB0 (dec: -1787294544), parent name: 'EventAliasCommandStruct', parent hashcode: 0xFFFFFFFF (dec: -1)
@@ -1105,6 +994,122 @@ struct EventAliasCommandStruct // hashcode: 0xB6EF2AF6 (dec: -1225839882)
 	short newframe;					// size=0, offset=6 //  hashcode: 0x6E942D47 (dec: 1855204679), parent name: 'EventAliasCommandStruct', parent hashcode: 0xFFFFFFFF (dec: -1)
 	short interpframes;				// size=0, offset=8 //  hashcode: 0xD8B030B7 (dec: -659541833), parent name: 'EventAliasCommandStruct', parent hashcode: 0xFFFFFFFF (dec: -1)
 	short speed;					// size=0, offset=10 //  hashcode: 0x2EF91381 (dec: 788075393), parent name: 'EventAliasCommandStruct', parent hashcode: 0xFFFFFFFF (dec: -1)
+};
+
+struct _Instance // hashcode: 0x699A5B3D (dec: 1771723581)
+{
+	struct NodeType node;						 // size=8, offset=0 //  hashcode: 0x99208B91 (dec: -1725920367), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _Instance *next;						 // size=616, offset=8 //  hashcode: 0xB3A164B8 (dec: -1281268552), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _Instance *prev;						 // size=616, offset=12 //  hashcode: 0x42C61B4A (dec: 1120279370), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long instanceID;							 // size=0, offset=16 //  hashcode: 0xA6884804 (dec: -1501018108), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long flags;									 // size=0, offset=20 //  hashcode: 0xD1775B28 (dec: -780707032), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long flags2;								 // size=0, offset=24 //  hashcode: 0x21861BFC (dec: 562437116), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct Object *object;						 // size=76, offset=28 //  hashcode: 0x1F65FB30 (dec: 526777136), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct Intro *intro;						 // size=0, offset=32 //  hashcode: 0x0F03F6CB (dec: 251918027), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	void *data;									 // size=0, offset=36 //  hashcode: 0x19CC04EB (dec: 432801003), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	void *introData;							 // size=0, offset=40 //  hashcode: 0xA50D07DB (dec: -1525872677), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _Instance *parent;					 // size=616, offset=44 //  hashcode: 0x1BBBD8B7 (dec: 465295543), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long introNum;								 // size=0, offset=48 //  hashcode: 0x8279A896 (dec: -2105956202), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long birthStreamUnitID;						 // size=0, offset=52 //  hashcode: 0xED885CFD (dec: -309830403), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long currentStreamUnitID;					 // size=0, offset=56 //  hashcode: 0x72D30C56 (dec: 1926433878), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long introUniqueID;							 // size=0, offset=60 //  hashcode: 0x2BFA69A1 (dec: 737831329), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct MATRIX *matrix;						 // size=32, offset=64 //  hashcode: 0xE317A8AB (dec: -484988757), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct MATRIX *oldMatrix;					 // size=32, offset=68 //  hashcode: 0x32B1418F (dec: 850477455), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct SoundInstance soundInstanceTbl[4];	// size=12, offset=72 //  hashcode: 0x6758AC4D (dec: 1733864525), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	unsigned long maxCheckDistance;				 // size=0, offset=84 //  hashcode: 0x0E842D43 (dec: 243543363), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	unsigned long checkMask;					 // size=0, offset=88 //  hashcode: 0xEC138633 (dec: -334264781), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _Position position;					 // size=6, offset=92 //  hashcode: 0xD4957DF0 (dec: -728400400), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	unsigned char lightGroup;					 // size=0, offset=98 //  hashcode: 0x8CAE4B99 (dec: -1934734439), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _Position oldPos;					 // size=6, offset=100 //  hashcode: 0x1063D144 (dec: 274977092), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	unsigned char spectralLightGroup;			 // size=0, offset=106 //  hashcode: 0x8584656E (dec: -2054920850), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short currentTextureAnimFrame;				 // size=0, offset=108 //  hashcode: 0x960093A5 (dec: -1778347099), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _Position initialPos;				 // size=6, offset=110 //  hashcode: 0x386B385F (dec: 946550879), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _Rotation rotation;					 // size=8, offset=116 //  hashcode: 0x74BE2D34 (dec: 1958620468), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _Rotation oldRotation;				 // size=8, offset=124 //  hashcode: 0xA1D5C67F (dec: -1579825537), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _SVector scale;						 // size=8, offset=132 //  hashcode: 0xDA9E0E9F (dec: -627175777), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long attachedID;							 // size=0, offset=140 //  hashcode: 0x9BCBC65C (dec: -1681144228), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long attachedSegment;						 // size=0, offset=144 //  hashcode: 0xC10D1191 (dec: -1056108143), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct MATRIX relativeMatrix;				 // size=32, offset=148 //  hashcode: 0xE3835060 (dec: -477933472), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _TFace *tface;						 // size=12, offset=180 //  hashcode: 0x88C4C8FF (dec: -2000369409), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _TFace *oldTFace;					 // size=12, offset=184 //  hashcode: 0xF2256D72 (dec: -232428174), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	void *tfaceLevel;							 // size=0, offset=188 //  hashcode: 0x11BB7061 (dec: 297496673), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	void *collideInfo;							 // size=0, offset=192 //  hashcode: 0x66F9A20E (dec: 1727635982), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long bspTree;								 // size=0, offset=196 //  hashcode: 0x9EF645B5 (dec: -1628027467), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short cachedTFace;							 // size=0, offset=200 //  hashcode: 0xFAF15585 (dec: -84847227), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short cachedBSPTree;						 // size=0, offset=202 //  hashcode: 0xF04425B4 (dec: -263969356), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	void *cachedTFaceLevel;						 // size=0, offset=204 //  hashcode: 0xF192C521 (dec: -242039519), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _Normal oldWNormal;					 // size=8, offset=208 //  hashcode: 0x5B7F4794 (dec: 1535068052), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _Normal wNormal;						 // size=8, offset=216 //  hashcode: 0xB9F91D63 (dec: -1174856349), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _SVector offset;						 // size=8, offset=224 //  hashcode: 0xE2B8BD56 (dec: -491209386), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _HModel *hModelList;					 // size=8, offset=232 //  hashcode: 0xC12D7847 (dec: -1053984697), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short fadeValue;							 // size=0, offset=236 //  hashcode: 0x564EF969 (dec: 1448016233), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short lightMatrix;							 // size=0, offset=238 //  hashcode: 0x3BCAE250 (dec: 1003151952), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	void (*processFunc)();						 // size=0, offset=240 //  hashcode: 0x509F6C31 (dec: 1352625201), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	void (*collideFunc)();						 // size=0, offset=244 //  hashcode: 0x590F8C01 (dec: 1494191105), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	void (*additionalCollideFunc)();			 // size=0, offset=248 //  hashcode: 0xBD63CD14 (dec: -1117532908), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	unsigned long (*queryFunc)();				 // size=0, offset=252 //  hashcode: 0x7F7E6E8A (dec: 2138992266), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	void (*messageFunc)();						 // size=0, offset=256 //  hashcode: 0xFCD61AC7 (dec: -53077305), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _Position shadowPosition;			 // size=6, offset=260 //  hashcode: 0xD0781A43 (dec: -797435325), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short currentModel;							 // size=0, offset=266 //  hashcode: 0x57010A87 (dec: 1459686023), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _TFace *waterFace;					 // size=12, offset=268 //  hashcode: 0x0AC072B0 (dec: 180384432), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _TFace *oldWaterFace;				 // size=12, offset=272 //  hashcode: 0x2FE681B5 (dec: 803635637), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _Terrain *waterFaceTerrain;			 // size=0, offset=276 //  hashcode: 0xF61F0A62 (dec: -165737886), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _PlaneConstants halvePlane;			 // size=12, offset=280 //  hashcode: 0x3436D438 (dec: 876008504), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _SVector splitPoint;					 // size=8, offset=292 //  hashcode: 0xEAB4289D (dec: -357291875), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _Instance *LinkParent;				 // size=616, offset=300 //  hashcode: 0xA2F719D6 (dec: -1560864298), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _Instance *LinkChild;				 // size=616, offset=304 //  hashcode: 0x5DB1CE79 (dec: 1571933817), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _Instance *LinkSibling;				 // size=616, offset=308 //  hashcode: 0x92292860 (dec: -1842796448), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long ParentLinkNode;						 // size=0, offset=312 //  hashcode: 0xA312388F (dec: -1559086961), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	void *InstanceState;						 // size=0, offset=316 //  hashcode: 0x79B2FE86 (dec: 2041773702), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	char introName[12];							 // size=12, offset=320 //  hashcode: 0xBDFED102 (dec: -1107373822), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	void *extraData;							 // size=0, offset=332 //  hashcode: 0x694711D8 (dec: 1766265304), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short constrictAngle;						 // size=0, offset=336 //  hashcode: 0xB6F7367A (dec: -1225312646), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short petrifyValue;							 // size=0, offset=338 //  hashcode: 0x9B0240A1 (dec: -1694351199), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long xVel;									 // size=0, offset=340 //  hashcode: 0x42ACBBB9 (dec: 1118616505), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long yVel;									 // size=0, offset=344 //  hashcode: 0xD6EEAB82 (dec: -689001598), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long zVel;									 // size=0, offset=348 //  hashcode: 0xA21ED791 (dec: -1575037039), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long xAccl;									 // size=0, offset=352 //  hashcode: 0xF0501CF6 (dec: -263185162), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long yAccl;									 // size=0, offset=356 //  hashcode: 0xC49C9B60 (dec: -996369568), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long zAccl;									 // size=0, offset=360 //  hashcode: 0x588735F2 (dec: 1485256178), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long maxXVel;								 // size=0, offset=364 //  hashcode: 0x699F6B15 (dec: 1772055317), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long maxYVel;								 // size=0, offset=368 //  hashcode: 0xB840A661 (dec: -1203722655), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long maxZVel;								 // size=0, offset=372 //  hashcode: 0x237D351E (dec: 595408158), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long currentMainState;						 // size=0, offset=376 //  hashcode: 0x67C6BFB0 (dec: 1741078448), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long work0;									 // size=0, offset=380 //  hashcode: 0xDE8C79D1 (dec: -561219119), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long work1;									 // size=0, offset=384 //  hashcode: 0x1281F305 (dec: 310506245), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long work2;									 // size=0, offset=388 //  hashcode: 0xD1CF0CA9 (dec: -774959959), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long work3;									 // size=0, offset=392 //  hashcode: 0x27BB560D (dec: 666588685), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long work4;									 // size=0, offset=396 //  hashcode: 0xDFE8F832 (dec: -538380238), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long work5;									 // size=0, offset=400 //  hashcode: 0x8C138638 (dec: -1944877512), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _G2Anim_Type anim;					 // size=180, offset=404 //  hashcode: 0xC5CB720A (dec: -976522742), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	enum _G2Bool_Enum (*rebuildCallback)();		 // size=4, offset=584 //  hashcode: 0xFE6A12C9 (dec: -26602807), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short splineFlags;							 // size=0, offset=588 //  hashcode: 0x38C7970D (dec: 952604429), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short targetFrame;							 // size=0, offset=590 //  hashcode: 0xACE5BB38 (dec: -1394230472), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short clipBeg;								 // size=0, offset=592 //  hashcode: 0xA006AD90 (dec: -1610175088), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	short clipEnd;								 // size=0, offset=594 //  hashcode: 0x834CD393 (dec: -2092117101), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct EventAliasCommandStruct aliasCommand; // size=12, offset=596 //  hashcode: 0x6CD7E213 (dec: 1826087443), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long light_color;							 // size=0, offset=608 //  hashcode: 0xF86FC59E (dec: -126892642), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct CVECTOR *perVertexColor;				 // size=4, offset=612 //  hashcode: 0x6B4D42DF (dec: 1800225503), parent name: '_Instance', parent hashcode: 0xFFFFFFFF (dec: -1)
+};
+
+struct SplineDef // hashcode: 0x04DD5459 (dec: 81613913)
+{
+	short currkey;			  // size=0, offset=0 //  hashcode: 0x6FA7FC69 (dec: 1873280105), parent name: 'SplineDef', parent hashcode: 0xFFFFFFFF (dec: -1)
+	unsigned short denomFlag; // size=0, offset=2 //  hashcode: 0x260F27CE (dec: 638527438), parent name: 'SplineDef', parent hashcode: 0xFFFFFFFF (dec: -1)
+	long fracCurr;			  // size=0, offset=4 //  hashcode: 0x015C7A29 (dec: 22837801), parent name: 'SplineDef', parent hashcode: 0xFFFFFFFF (dec: -1)
+};
+
+struct MultiSpline // hashcode: 0x2823B2CF (dec: 673428175)
+{
+	struct Spline *positional;		// size=8, offset=0 //  hashcode: 0xD111C04C (dec: -787365812), parent name: 'MultiSpline', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct RSpline *rotational;		// size=8, offset=4 //  hashcode: 0xACBF6077 (dec: -1396744073), parent name: 'MultiSpline', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct Spline *scaling;			// size=8, offset=8 //  hashcode: 0xB162004A (dec: -1318977462), parent name: 'MultiSpline', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct Spline *color;			// size=8, offset=12 //  hashcode: 0x7E26D337 (dec: 2116473655), parent name: 'MultiSpline', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct SplineDef curPositional; // size=8, offset=16 //  hashcode: 0xDA32CD3C (dec: -634204868), parent name: 'MultiSpline', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct SplineDef curRotational; // size=8, offset=24 //  hashcode: 0x90E53563 (dec: -1864026781), parent name: 'MultiSpline', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct SplineDef curScaling;	// size=8, offset=32 //  hashcode: 0x5497DB32 (dec: 1419238194), parent name: 'MultiSpline', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct SplineDef curColor;		// size=8, offset=40 //  hashcode: 0xD84C232E (dec: -666098898), parent name: 'MultiSpline', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct MATRIX curRotMatrix;		// size=32, offset=48 //  hashcode: 0x2DD49D2B (dec: 768908587), parent name: 'MultiSpline', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
 
 struct Intro // hashcode: 0x796E766D (dec: 2037282413)
@@ -1242,6 +1247,13 @@ struct _MorphVertex // hashcode: 0xAAB8DABE (dec: -1430725954)
 struct _MorphColor // hashcode: 0xA6BA0326 (dec: -1497758938)
 {
 	short morphColor15; // size=0, offset=0 //  hashcode: 0x785DA197 (dec: 2019402135), parent name: '_MorphColor', parent hashcode: 0xFFFFFFFF (dec: -1)
+};
+
+
+struct TClassAttr // hashcode: 0x4DC02369 (dec: 1304437609)
+{
+	short flags;		  // size=0, offset=0 //  hashcode: 0x96D0AA12 (dec: -1764709870), parent name: 'TClassAttr', parent hashcode: 0xFFFFFFFF (dec: -1)
+	unsigned short sound; // size=0, offset=2 //  hashcode: 0xE1AEBF5E (dec: -508641442), parent name: 'TClassAttr', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
 
 struct Level // hashcode: 0x012B0198 (dec: 19595672)
@@ -1514,12 +1526,6 @@ struct _SFXMkr // hashcode: 0x74BB4848 (dec: 1958430792)
 	short pad;						// size=0, offset=26 //  hashcode: 0xADB9F7C6 (dec: -1380321338), parent name: '_SFXMkr', parent hashcode: 0xFFFFFFFF (dec: -1)
 	long livesInOnePlace;			// size=0, offset=28 //  hashcode: 0xFC53279B (dec: -61659237), parent name: '_SFXMkr', parent hashcode: 0xFFFFFFFF (dec: -1)
 	long inSpectral;				// size=0, offset=32 //  hashcode: 0x862E6B84 (dec: -2043778172), parent name: '_SFXMkr', parent hashcode: 0xFFFFFFFF (dec: -1)
-};
-
-struct TClassAttr // hashcode: 0x4DC02369 (dec: 1304437609)
-{
-	short flags;		  // size=0, offset=0 //  hashcode: 0x96D0AA12 (dec: -1764709870), parent name: 'TClassAttr', parent hashcode: 0xFFFFFFFF (dec: -1)
-	unsigned short sound; // size=0, offset=2 //  hashcode: 0xE1AEBF5E (dec: -508641442), parent name: 'TClassAttr', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
 
 struct _ColorType // hashcode: 0x440E837C (dec: 1141801852)
@@ -2071,13 +2077,6 @@ struct SplineKey // hashcode: 0x5D3D994D (dec: 1564318029)
 	struct vecL ds;	// size=12, offset=20 //  hashcode: 0x7B14706A (dec: 2064937066), parent name: 'SplineKey', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
 
-struct SplineDef // hashcode: 0x04DD5459 (dec: 81613913)
-{
-	short currkey;			  // size=0, offset=0 //  hashcode: 0x6FA7FC69 (dec: 1873280105), parent name: 'SplineDef', parent hashcode: 0xFFFFFFFF (dec: -1)
-	unsigned short denomFlag; // size=0, offset=2 //  hashcode: 0x260F27CE (dec: 638527438), parent name: 'SplineDef', parent hashcode: 0xFFFFFFFF (dec: -1)
-	long fracCurr;			  // size=0, offset=4 //  hashcode: 0x015C7A29 (dec: 22837801), parent name: 'SplineDef', parent hashcode: 0xFFFFFFFF (dec: -1)
-};
-
 struct _HVertex // hashcode: 0xC488A83D (dec: -997676995)
 {
 	short x;	  // size=0, offset=0 //  hashcode: 0xB9F1587A (dec: -1175365510), parent name: '_HVertex', parent hashcode: 0xFFFFFFFF (dec: -1)
@@ -2472,8 +2471,6 @@ typedef unsigned short uid_t;
 
 typedef unsigned short gid_t;
 
-typedef unsigned long wchar_t;
-
 typedef void (*CdlCB)();
 
 typedef void *va_list;
@@ -2509,8 +2506,6 @@ typedef unsigned char UBYTE;
 typedef unsigned long ULONG;
 
 typedef unsigned short USHORT;
-
-typedef unsigned long bool;
 
 typedef long ListOrderFunc();
 

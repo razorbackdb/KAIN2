@@ -1,80 +1,6 @@
 #ifndef DEBUG_H
 #define DEBUG_H
 
-extern struct DebugMenuLine AIMenu[1]; // offset 0x800CFB94
-
-extern struct DebugMenuLine BossAreasMenu[1]; // offset 0x800CFB7C
-
-extern struct DebugMenuLine cameraMenu[1]; // offset 0x800CFCE0
-
-static int cem_cursor_width; // offset 0x800CDCEC
-
-static int cem_item_leading; // offset 0x800CDCF8
-
-static int cem_line_leading; // offset 0x800CDCF4
-
-static int cem_line_width; // offset 0x800CDCF0
-
-static int cem_x_base; // offset 0x800CDCE4
-
-static int cem_y_base; // offset 0x800CDCE8
-
-static long cheatCodeLastCommand; // offset 0x800CDB44
-
-static long CheatKeyMap[10]; // offset 0x800CDB48
-
-extern struct DebugMenuLine *currentMenu; // offset 0x800CDB3C
-
-static struct debug_dispatch_t debug_dispatch_table[5]; // offset 0x800C84D8
-
-extern struct DebugMenuLine debugForgedAbilitiesMenu[1]; // offset 0x800CFBF4
-
-extern struct DebugMenuLine debugGlyphAbilitiesMenu[1]; // offset 0x800CFBC4
-
-extern struct DebugMenuLine debugHealthSystemMenu[1]; // offset 0x800CFC3C
-
-extern struct DebugMenuLine debugImbueSoulReaverMenu[1]; // offset 0x800CFD28
-
-static long debugMenuChoice; // offset 0x800CDB40
-
-extern struct DebugMenuLine debugRazielMenu[1]; // offset 0x800CFD4C
-
-extern struct DebugMenuLine debugSoundMenu[1]; // offset 0x800CFBAC
-
-extern struct DebugMenuLine debugSpecialAbilitiesMenu[1]; // offset 0x800CFC0C
-
-extern struct DebugMenuLine eventMenu[1]; // offset 0x800CFB64
-
-extern struct DebugMenuLine fogMenu[1]; // offset 0x800CFC58
-
-static struct GameCheat GameCheats[23]; // offset 0x800CDB70
-
-extern struct DebugMenuLine goodiesMenu[1]; // offset 0x800CFBDC
-
-extern struct DebugMenuLine level2SelectMenu[1]; // offset 0x800CFD10
-
-extern struct DebugMenuLine levelSelectMenu[1]; // offset 0x800CFCF8
-
-static char mainFormatString[20]; // offset 0x800CDACC
-
-extern struct DebugMenuLine mainMenu[8]; // offset 0x800C8418
-
-extern struct DebugMenuLine mcardMenu[1]; // offset 0x800CFC24
-
-static char pauseFormatString[20]; // offset 0x800CDAB8
-
-extern struct DebugMenuLine pauseMenu[1]; // offset 0x800CFCC8
-
-extern struct DebugMenuLine saveMenu[1]; // offset 0x800CFC70
-
-extern struct DebugMenuLine standardMenu[1]; // offset 0x800CFCB0
-
-extern struct DebugMenuLine statsMenu[1]; // offset 0x800CFC98
-
-static char *the_format_string; // offset 0x800CDAE0
-
-extern struct DebugMenuLine *the_previous_menu; // offset 0x800CDCE0
-
 struct POLY_F4 // hashcode: 0xE2AC295D (dec: -492033699)
 {
 	unsigned long tag;  // size=0, offset=0 //  hashcode: 0x3A1ED5A5 (dec: 975099301), parent name: 'POLY_F4', parent hashcode: 0xFFFFFFFF (dec: -1)
@@ -218,8 +144,8 @@ struct DEBUG_133fake // hashcode: 0xE0B97C3D (dec: -524714947)
 {
 	short index;					// size=0, offset=0 //  hashcode: 0x94258FFB (dec: -1809477637), parent name: 'DEBUG_133fake', parent hashcode: 0xFFFFFFFF (dec: -1)
 	short z;						// size=0, offset=2 //  hashcode: 0x0526ECAD (dec: 86437037), parent name: 'DEBUG_133fake', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MultiSignal *upSignal;   // size=0, offset=4 //  hashcode: 0x113A7A73 (dec: 289045107), parent name: 'DEBUG_133fake', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MultiSignal *downSignal; // size=0, offset=8 //  hashcode: 0x6060F382 (dec: 1616966530), parent name: 'DEBUG_133fake', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _MultiSignal *upSignal;   // size=0, offset=4 //  hashcode: 0x113A7A73 (dec: 289045107), parent name: 'DEBUG_133fake', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _MultiSignal *downSignal; // size=0, offset=8 //  hashcode: 0x6060F382 (dec: 1616966530), parent name: 'DEBUG_133fake', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
 
 struct DEBUG_134fake // hashcode: 0x4211C131 (dec: 1108459825)
@@ -550,6 +476,15 @@ struct _ButtonTexture // hashcode: 0x9E750D8C (dec: -1636495988)
 	struct _BlockVramEntry *vramBlock; // size=0, offset=8 //  hashcode: 0xA598F210 (dec: -1516703216), parent name: '_ButtonTexture', parent hashcode: 0xFFFFFFFF (dec: -1)
 	long xshift;					   // size=0, offset=12 //  hashcode: 0xE0D05F17 (dec: -523215081), parent name: '_ButtonTexture', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
+
+
+union DEBUG_256fake // Hashcode: 0xC4D985DA (dec: -992377382)
+{
+	struct _StreamUnit *streamUnit;		 // size=64, offset=0
+	struct _ObjectTracker *streamObject; // size=36, offset=0
+	struct _ButtonTexture *button;		 // size=16, offset=0
+};
+
 
 struct _BlockVramEntry // hashcode: 0x24B2FBC5 (dec: 615709637)
 {
@@ -951,13 +886,6 @@ struct _LoadQueueEntry // hashcode: 0xFEE70962 (dec: -18413214)
 	char relocateBinary;				 // size=0, offset=6 //  hashcode: 0xDCECAC2B (dec: -588469205), parent name: '_LoadQueueEntry', parent hashcode: 0xFFFFFFFF (dec: -1)
 	char mempackUsed;					 // size=0, offset=7 //  hashcode: 0x33E3363C (dec: 870528572), parent name: '_LoadQueueEntry', parent hashcode: 0xFFFFFFFF (dec: -1)
 	struct _NonBlockLoadEntry loadEntry; // size=56, offset=8 //  hashcode: 0x4314A741 (dec: 1125427009), parent name: '_LoadQueueEntry', parent hashcode: 0xFFFFFFFF (dec: -1)
-};
-
-union DEBUG_256fake // Hashcode: 0xC4D985DA (dec: -992377382)
-{
-	struct _StreamUnit *streamUnit;		 // size=64, offset=0
-	struct _ObjectTracker *streamObject; // size=36, offset=0
-	struct _ButtonTexture *button;		 // size=16, offset=0
 };
 
 struct SavedBasic // hashcode: 0x6198E1EF (dec: 1637409263)
@@ -1530,5 +1458,79 @@ extern void DEBUG_ProcessSecondController(struct GameTracker *gameTracker); // 0
 extern void DEBUG_ProcessCheat(struct GameTracker *gameTracker); // 0x8001454C
 
 extern void DEBUG_DoAreaProtection(); // 0x800146C0
+
+extern struct DebugMenuLine AIMenu[1]; // offset 0x800CFB94
+
+extern struct DebugMenuLine BossAreasMenu[1]; // offset 0x800CFB7C
+
+extern struct DebugMenuLine cameraMenu[1]; // offset 0x800CFCE0
+
+static int cem_cursor_width; // offset 0x800CDCEC
+
+static int cem_item_leading; // offset 0x800CDCF8
+
+static int cem_line_leading; // offset 0x800CDCF4
+
+static int cem_line_width; // offset 0x800CDCF0
+
+static int cem_x_base; // offset 0x800CDCE4
+
+static int cem_y_base; // offset 0x800CDCE8
+
+static long cheatCodeLastCommand; // offset 0x800CDB44
+
+static long CheatKeyMap[10]; // offset 0x800CDB48
+
+extern struct DebugMenuLine *currentMenu; // offset 0x800CDB3C
+
+static struct debug_dispatch_t debug_dispatch_table[5]; // offset 0x800C84D8
+
+extern struct DebugMenuLine debugForgedAbilitiesMenu[1]; // offset 0x800CFBF4
+
+extern struct DebugMenuLine debugGlyphAbilitiesMenu[1]; // offset 0x800CFBC4
+
+extern struct DebugMenuLine debugHealthSystemMenu[1]; // offset 0x800CFC3C
+
+extern struct DebugMenuLine debugImbueSoulReaverMenu[1]; // offset 0x800CFD28
+
+static long debugMenuChoice; // offset 0x800CDB40
+
+extern struct DebugMenuLine debugRazielMenu[1]; // offset 0x800CFD4C
+
+extern struct DebugMenuLine debugSoundMenu[1]; // offset 0x800CFBAC
+
+extern struct DebugMenuLine debugSpecialAbilitiesMenu[1]; // offset 0x800CFC0C
+
+extern struct DebugMenuLine eventMenu[1]; // offset 0x800CFB64
+
+extern struct DebugMenuLine fogMenu[1]; // offset 0x800CFC58
+
+static struct GameCheat GameCheats[23]; // offset 0x800CDB70
+
+extern struct DebugMenuLine goodiesMenu[1]; // offset 0x800CFBDC
+
+extern struct DebugMenuLine level2SelectMenu[1]; // offset 0x800CFD10
+
+extern struct DebugMenuLine levelSelectMenu[1]; // offset 0x800CFCF8
+
+static char mainFormatString[20]; // offset 0x800CDACC
+
+extern struct DebugMenuLine mainMenu[8]; // offset 0x800C8418
+
+extern struct DebugMenuLine mcardMenu[1]; // offset 0x800CFC24
+
+static char pauseFormatString[20]; // offset 0x800CDAB8
+
+extern struct DebugMenuLine pauseMenu[1]; // offset 0x800CFCC8
+
+extern struct DebugMenuLine saveMenu[1]; // offset 0x800CFC70
+
+extern struct DebugMenuLine standardMenu[1]; // offset 0x800CFCB0
+
+extern struct DebugMenuLine statsMenu[1]; // offset 0x800CFC98
+
+static char *the_format_string; // offset 0x800CDAE0
+
+extern struct DebugMenuLine *the_previous_menu; // offset 0x800CDCE0
 
 #endif

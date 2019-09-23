@@ -1,6 +1,8 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#include "PLAYER.H"
+
 extern struct _ButtonTexture BexitLine[2]; // offset 0x800D0E20
 
 extern struct _ButtonTexture BmenuLines[3][2]; // offset 0x800D0F24
@@ -178,8 +180,8 @@ struct MAIN_91fake // hashcode: 0xEE380467 (dec: -298318745)
 {
 	short index;					// size=0, offset=0 //  hashcode: 0xC2C6DA6D (dec: -1027155347), parent name: 'MAIN_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
 	short z;						// size=0, offset=2 //  hashcode: 0xE3AC8BF3 (dec: -475231245), parent name: 'MAIN_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MultiSignal *upSignal;   // size=0, offset=4 //  hashcode: 0xC1520890 (dec: -1051588464), parent name: 'MAIN_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MultiSignal *downSignal; // size=0, offset=8 //  hashcode: 0xF82C7E3B (dec: -131301829), parent name: 'MAIN_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _MultiSignal *upSignal;   // size=0, offset=4 //  hashcode: 0xC1520890 (dec: -1051588464), parent name: 'MAIN_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _MultiSignal *downSignal; // size=0, offset=8 //  hashcode: 0xF82C7E3B (dec: -131301829), parent name: 'MAIN_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
 
 struct MAIN_92fake // hashcode: 0x4C313A4C (dec: 1278294604)
