@@ -171,8 +171,8 @@ struct STREAM_91fake // hashcode: 0xAD3ACD5B (dec: -1388655269)
 {
 	short index;					// size=0, offset=0 //  hashcode: 0x68BD2E84 (dec: 1757228676), parent name: 'STREAM_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
 	short z;						// size=0, offset=2 //  hashcode: 0xB6E2D323 (dec: -1226648797), parent name: 'STREAM_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MultiSignal *upSignal;   // size=0, offset=4 //  hashcode: 0xE6FEF6A1 (dec: -419498335), parent name: 'STREAM_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MultiSignal *downSignal; // size=0, offset=8 //  hashcode: 0x54C463BA (dec: 1422156730), parent name: 'STREAM_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _MultiSignal *upSignal;   // size=0, offset=4 //  hashcode: 0xE6FEF6A1 (dec: -419498335), parent name: 'STREAM_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _MultiSignal *downSignal; // size=0, offset=8 //  hashcode: 0x54C463BA (dec: 1422156730), parent name: 'STREAM_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
 
 struct STREAM_92fake // hashcode: 0xE036938A (dec: -533294198)

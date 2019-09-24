@@ -21,17 +21,11 @@ extern struct _Instance(*eventListArray[20][10]); // offset 0x800D2B0C
 
 extern long eventListNumInstances[20]; // offset 0x800D2A1C
 
-static struct EventTimer eventTimerArray[24]; // offset 0x800D27D4
-
 extern struct HintSystemStruct gHintSystem; // offset 0x800D2AFC
 
 static long MoveCodeStreamExtra; // offset 0x800CF538
 
 static long numActiveEventTimers; // offset 0x800D2A14
-
-extern struct SignalResetStruct ResetSignalArray[16]; // offset 0x800D2A74
-
-static struct WaterLevelProcess WaterLevelArray[5]; // offset 0x800D2744
 
 struct EVENT_73fake // hashcode: 0xA70F7DDA (dec: -1492156966)
 {
@@ -152,8 +146,8 @@ struct EVENT_91fake // hashcode: 0xAC80892E (dec: -1400862418)
 {
 	short index;					// size=0, offset=0 //  hashcode: 0xF4CB905C (dec: -187985828), parent name: 'EVENT_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
 	short z;						// size=0, offset=2 //  hashcode: 0x43C5B635 (dec: 1137030709), parent name: 'EVENT_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MultiSignal *upSignal;   // size=0, offset=4 //  hashcode: 0x473FB3CC (dec: 1195357132), parent name: 'EVENT_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MultiSignal *downSignal; // size=0, offset=8 //  hashcode: 0x90019EEE (dec: -1878941970), parent name: 'EVENT_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _MultiSignal *upSignal;   // size=0, offset=4 //  hashcode: 0x473FB3CC (dec: 1195357132), parent name: 'EVENT_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _MultiSignal *downSignal; // size=0, offset=8 //  hashcode: 0x90019EEE (dec: -1878941970), parent name: 'EVENT_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
 
 struct EVENT_92fake // hashcode: 0x1AB120AB (dec: 447815851)
@@ -547,6 +541,12 @@ struct HintSystemStruct // hashcode: 0xAD521037 (dec: -1387130825)
 	long fadeTimer;		 // size=0, offset=8 //  hashcode: 0xF633EDDC (dec: -164368932), parent name: 'HintSystemStruct', parent hashcode: 0xFFFFFFFF (dec: -1)
 	long spawningUnitID; // size=0, offset=12 //  hashcode: 0x91F53A0D (dec: -1846199795), parent name: 'HintSystemStruct', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
+
+extern struct SignalResetStruct ResetSignalArray[16]; // offset 0x800D2A74
+
+static struct WaterLevelProcess WaterLevelArray[5]; // offset 0x800D2744
+
+static struct EventTimer eventTimerArray[24]; // offset 0x800D27D4
 
 typedef struct SavedEventSmallVars SavedEventSmallVars;
 

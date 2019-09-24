@@ -206,8 +206,8 @@ struct AADLIB_130fake // hashcode: 0x0A8E1848 (dec: 177084488)
 {
 	short index;					// size=0, offset=0 //  hashcode: 0x5F108E30 (dec: 1594920496), parent name: 'AADLIB_130fake', parent hashcode: 0xFFFFFFFF (dec: -1)
 	short z;						// size=0, offset=2 //  hashcode: 0x07D5B28E (dec: 131445390), parent name: 'AADLIB_130fake', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MultiSignal *upSignal;   // size=0, offset=4 //  hashcode: 0xCE9927C6 (dec: -828823610), parent name: 'AADLIB_130fake', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MultiSignal *downSignal; // size=0, offset=8 //  hashcode: 0xE33BC802 (dec: -482621438), parent name: 'AADLIB_130fake', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _MultiSignal *upSignal;   // size=0, offset=4 //  hashcode: 0xCE9927C6 (dec: -828823610), parent name: 'AADLIB_130fake', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _MultiSignal *downSignal; // size=0, offset=8 //  hashcode: 0xE33BC802 (dec: -482621438), parent name: 'AADLIB_130fake', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
 
 struct AADLIB_131fake // hashcode: 0x0E7E0B04 (dec: 243141380)
@@ -401,6 +401,18 @@ union AADLIB_190fake // Hashcode: 0x9F6EB891 (dec: -1620133743)
 	struct _Position throwVector; // size=6, offset=0
 };
 
+typedef long (*TDRFuncPtr_aadInstallUpdateFunc0updateFuncPtr)();
+
+typedef void (*TDRFuncPtr_aadInstallEndSequenceCallback)();
+
+typedef void (*TDRFuncPtr_aadInstallEndSequenceCallback0callbackProc)();
+
+typedef void (*TDRFuncPtr_aadLoadDynamicSoundBank4retProc)();
+
+typedef void (*TDRFuncPtr_aadStartMasterVolumeFade2fadeCompleteCallback)();
+
+typedef void (*TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback)();
+
 typedef struct AadMemoryStruct AadMemoryStruct;
 
 typedef struct AadSlotAttributes AadSlotAttributes;
@@ -408,8 +420,6 @@ typedef struct AadSlotAttributes AadSlotAttributes;
 extern unsigned long aadGetMemorySize(struct AadInitAttr *attributes); // 0x800514D4
 
 extern int aadInit(struct AadInitAttr *attributes, unsigned char *memoryPtr); // 0x800514F8
-
-extern void aadInstallUpdateFunc(TDRFuncPtr_aadInstallUpdateFunc0updateFuncPtr updateFuncPtr, int hblanksPerUpdate); // 0x800517A0
 
 extern void aadInitVolume(); // 0x8005181C
 
@@ -541,16 +551,6 @@ extern void aadCancelPauseSound(); // 0x80054840
 
 extern void aadResumeSound(); // 0x8005485C
 
-typedef long (*TDRFuncPtr_aadInstallUpdateFunc0updateFuncPtr)();
-
-typedef void (*TDRFuncPtr_aadInstallEndSequenceCallback)();
-
-typedef void (*TDRFuncPtr_aadInstallEndSequenceCallback0callbackProc)();
-
-typedef void (*TDRFuncPtr_aadLoadDynamicSoundBank4retProc)();
-
-typedef void (*TDRFuncPtr_aadStartMasterVolumeFade2fadeCompleteCallback)();
-
-typedef void (*TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback)();
+extern void aadInstallUpdateFunc(TDRFuncPtr_aadInstallUpdateFunc0updateFuncPtr updateFuncPtr, int hblanksPerUpdate); // 0x800517A0
 
 #endif

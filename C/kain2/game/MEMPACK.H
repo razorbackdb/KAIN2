@@ -1,7 +1,8 @@
 #ifndef MEMPACK_H
 #define MEMPACK_H
 
-static struct NewMemTracker newMemTracker; // offset 0x800D18D4
+#include "PLAYER.H"
+#include "DEBUG.H"
 
 struct NewMemTracker // hashcode: 0x5C68280F (dec: 1550329871)
 {
@@ -11,6 +12,8 @@ struct NewMemTracker // hashcode: 0x5C68280F (dec: 1550329871)
 	char *lastMemoryAddress;		 // size=0, offset=12 //  hashcode: 0x23345FE6 (dec: 590634982), parent name: 'NewMemTracker', parent hashcode: 0xFFFFFFFF (dec: -1)
 	long doingGarbageCollection;	 // size=0, offset=16 //  hashcode: 0x4C0110B4 (dec: 1275138228), parent name: 'NewMemTracker', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
+
+static struct NewMemTracker newMemTracker; // offset 0x800D18D4
 
 struct MEMPACK_68fake // hashcode: 0xE87C49A0 (dec: -394507872)
 {
@@ -131,8 +134,8 @@ struct MEMPACK_86fake // hashcode: 0x0CDC0712 (dec: 215746322)
 {
 	short index;					// size=0, offset=0 //  hashcode: 0xBA76B404 (dec: -1166625788), parent name: 'MEMPACK_86fake', parent hashcode: 0xFFFFFFFF (dec: -1)
 	short z;						// size=0, offset=2 //  hashcode: 0xE46BFBC2 (dec: -462685246), parent name: 'MEMPACK_86fake', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MultiSignal *upSignal;   // size=0, offset=4 //  hashcode: 0x45A91B21 (dec: 1168710433), parent name: 'MEMPACK_86fake', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MultiSignal *downSignal; // size=0, offset=8 //  hashcode: 0x7EBD08FF (dec: 2126317823), parent name: 'MEMPACK_86fake', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _MultiSignal *upSignal;   // size=0, offset=4 //  hashcode: 0x45A91B21 (dec: 1168710433), parent name: 'MEMPACK_86fake', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _MultiSignal *downSignal; // size=0, offset=8 //  hashcode: 0x7EBD08FF (dec: 2126317823), parent name: 'MEMPACK_86fake', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
 
 struct MEMPACK_87fake // hashcode: 0x29EE86AA (dec: 703497898)

@@ -1,8 +1,19 @@
-#include "THISDUST.H"
+//#include "THISDUST.H"
 #include "MEMPACK.H"
+#include "STREAM.H"
+#include "AADLIB.H"
+#include "LOAD3D.H"
+#include "EVENT.H"
+#include "SIGNAL.H"
+
+#include <stddef.h>
+#include <string.h>
+
+#define uint unsigned int
+typedef unsigned char byte;
 
 // NewMemTracker @0x800D18D4, len = 0x00000014
-newMemTracker =
+/* newMemTracker =
     {
         // MemHeader * @0x800D18D4, len = 0x00000004
         .rootNode = null,
@@ -13,7 +24,7 @@ newMemTracker =
         // char * @0x800D18E0, len = 0x00000004
         .lastMemoryAddress = null,
         // long @0x800D18E4, len = 0x00000004
-        .doingGarbageCollection = null};
+        .doingGarbageCollection = null}; */
 // decompiled code
 // original method signature:
 // void /*$ra*/ MEMPACK_Init()
@@ -33,9 +44,10 @@ newMemTracker =
 void MEMPACK_Init(void)
 
 {
-  newMemTracker.totalMemory = (ulong)(&DAT_801ff000 + -(int)overlayAddress);
+  int overlayAddress; //stub
+  newMemTracker.totalMemory = (ulong)(/*&DAT_801ff000*/ + -(int)overlayAddress);
   newMemTracker.rootNode = (MemHeader *)overlayAddress;
-  *(undefined2 *)overlayAddress = 0xbade;
+  *(int *)overlayAddress = 0xbade;
   (newMemTracker.rootNode)->memStatus = '\0';
   (newMemTracker.rootNode)->memType = '\0';
   (newMemTracker.rootNode)->memSize = newMemTracker.totalMemory;
@@ -203,7 +215,7 @@ char *MEMPACK_Malloc(ulong allocSize, uchar memType)
   if (pcVar1 == (char *)0x0)
   {
     MEMPACK_ReportMemory2();
-    DEBUG_FatalError(s_Trying_to_fit_memory_size__d_Typ_800cebdc);
+    //DEBUG_FatalError("Trying to fit memory size %d Type =");
   }
   return pcVar1;
 }
@@ -261,7 +273,7 @@ char *MEMPACK_MallocFailOk(ulong allocSize, uchar memType)
   MemHeader *pMVar2;
   ulong uVar3;
   MemHeader *pMVar4;
-  undefined2 *puVar5;
+  int *puVar5;
   uint allocSize_00;
 
   lVar1 = MEMPACK_RelocatableType((uint)memType);
@@ -299,7 +311,7 @@ char *MEMPACK_MallocFailOk(ulong allocSize, uchar memType)
       }
       else
       {
-        puVar5 = (undefined2 *)((int)&pMVar2->magicNumber + allocSize_00);
+        puVar5 = (int *)((int)&pMVar2->magicNumber + allocSize_00);
         if (lVar1 == 0)
         {
           pMVar4 = (MemHeader *)((int)pMVar2 + (uVar3 - allocSize_00));
@@ -315,8 +327,8 @@ char *MEMPACK_MallocFailOk(ulong allocSize, uchar memType)
           goto LAB_8004fe00;
         }
         *puVar5 = 0xbade;
-        *(undefined *)(puVar5 + 1) = 0;
-        *(undefined *)((int)puVar5 + 3) = 0;
+        *(char *)(puVar5 + 1) = 0;
+        *(char *)((int)puVar5 + 3) = 0;
         *(ulong *)(puVar5 + 2) = pMVar2->memSize - allocSize_00;
         pMVar2->magicNumber = 0xbade;
       }
@@ -806,7 +818,7 @@ char *MEMPACK_GarbageCollectMalloc(ulong *allocSize, uchar memType, ulong *freeS
     if (pMVar1 == (MemHeader *)0x0)
     {
       MEMPACK_ReportMemory();
-      DEBUG_FatalError(s_Trying_to_fit_memory_size__d_Typ_800cec2c);
+      //DEBUG_FatalError("Trying to fit memory size %d Type = %d\nAvali");
     }
   }
   if (pMVar1->memSize - *allocSize < 8)
@@ -867,14 +879,14 @@ char *MEMPACK_GarbageCollectMalloc(ulong *allocSize, uchar memType, ulong *freeS
 void MEMPACK_GarbageSplitMemoryNow(ulong allocSize, MemHeader *bestAddress, long memType, ulong freeSize)
 
 {
-  undefined2 *puVar1;
+  int *puVar1;
 
-  puVar1 = (undefined2 *)((int)&bestAddress->magicNumber + allocSize);
+  puVar1 = (int *)((int)&bestAddress->magicNumber + allocSize);
   if (freeSize != 0)
   {
     *puVar1 = 0xbade;
-    *(undefined *)(puVar1 + 1) = 0;
-    *(undefined *)((int)puVar1 + 3) = 0;
+    *(char *)(puVar1 + 1) = 0;
+    *(char *)((int)puVar1 + 3) = 0;
     *(ulong *)(puVar1 + 2) = freeSize;
   }
   return;
@@ -1812,11 +1824,11 @@ void MEMPACK_RelocateAreaType(MemHeader *newAddress, long offset, Level *oldLeve
 /* end block 3 */
 // End Line: 3036
 
-void MEMPACK_RelocateG2AnimKeylistType(_G2AnimKeylist_Type **pKeylist, int offset, char *start, char *end)
+/* void MEMPACK_RelocateG2AnimKeylistType(_G2AnimKeylist_Type **pKeylist, int offset, char *start, char *end)
 
 {
   _G2AnimKeylist_Type *p_Var1;
-  _func_7 **pp_Var2;
+  //_func_7 **pp_Var2;
   _G2AnimKeylist_Type *p_Var3;
   _G2AnimFxHeader_Type *p_Var4;
   int iVar5;
@@ -1851,13 +1863,13 @@ void MEMPACK_RelocateG2AnimKeylistType(_G2AnimKeylist_Type **pKeylist, int offse
           }
           p_Var3->sectionData = pp_Var2;
           iVar5 = iVar5 + 1;
-          p_Var3 = (_G2AnimKeylist_Type *)&p_Var3->keyCount;
+          p_Var3 = (_G2AnimKeylist_Type *)&p_Var3->keyCount; 
         } while (iVar5 < (int)(uint)p_Var1->sectionCount);
       }
     }
   }
   return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -2242,7 +2254,7 @@ void MEMPACK_RelocateObjectType(MemHeader *newAddress, long offset, Object *oldO
   }
   if (*(int *)(newAddress + 3) != 0)
   {
-    p_Var19 = (gameTrackerX.instanceList)->first;
+    //p_Var19 = (gameTrackerX.instanceList)->first;
     while (p_Var19 != (_Instance *)0x0)
     {
       if (p_Var19->object == oldObject)

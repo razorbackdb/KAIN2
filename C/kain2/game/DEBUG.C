@@ -1,8 +1,11 @@
-#include "THISDUST.H"
+//#include "THISDUST.H"
 #include "DEBUG.H"
+#include "HEALTH.H"
+
+#define uint unsigned int
 
 // DebugMenuLine @0x800CFB94, len = 0x00000018
-AIMenu =
+/* AIMenu =
 	{
 		// DEBUG_LINE_TYPE @0x800CFB94, len = 0x00000004
 		.type = 0x0,
@@ -387,7 +390,7 @@ the_format_string = &mainFormatString;
 the_previous_menu = 00000000;
 // decompiled code
 // original method signature:
-// void /*$ra*/ DEBUG_UpdateHealth(long *var /*$a0*/)
+// void /*$ra*/ //DEBUG_UpdateHealth(long *var /*$a0*/)
 // line 1261, offset 0x80012ec0
 /* begin block 1 */
 // Start line: 2482
@@ -402,9 +405,9 @@ the_previous_menu = 00000000;
 /* begin block 3 */
 // Start line: 2483
 /* end block 3 */
-// End Line: 2484
+// End Line: 2484 */
 
-void DEBUG_UpdateHealth(long *var)
+void DEBUG_UpdateHealth(long debugHealthLevel)
 
 {
 	RAZIEL_DebugHealthSetScale(debugHealthLevel);
@@ -425,7 +428,7 @@ void DEBUG_UpdateHealth(long *var)
 /* end block 2 */
 // End Line: 2495
 
-void DEBUG_UpdateMana(long *var)
+void DEBUG_UpdateMana(long debugManaLevel)
 
 {
 	RAZIEL_DebugManaSetMax(debugManaLevel);
@@ -502,7 +505,7 @@ void DEBUG_FillUpHealth(long *var)
 /* end block 2 */
 // End Line: 2949
 
-void process_cheat_codes(GameTracker *gt, long *ctrl)
+/* void process_cheat_codes(GameTracker *gt, long *ctrl)
 
 {
 	bool bVar1;
@@ -656,7 +659,7 @@ switchD_80013008_caseD_0:
 switchD_80013008_caseD_8:
 	debugRazielFlags1 = debugRazielFlags1 | 1;
 	goto switchD_80013008_caseD_17;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -678,7 +681,7 @@ switchD_80013008_caseD_8:
 /* end block 2 */
 // End Line: 3069
 
-void DEBUG_Process(GameTracker *gameTracker)
+/* void DEBUG_Process(GameTracker *gameTracker)
 
 {
 	short sVar1;
@@ -749,7 +752,7 @@ LAB_80013358:
 		DEBUG_CaptureScreen(gameTracker);
 	}
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -760,7 +763,7 @@ LAB_80013358:
 /* end block 1 */
 // End Line: 3353
 
-void DEBUG_Draw(GameTracker *gameTracker, ulong **ot)
+/* void DEBUG_Draw(GameTracker *gameTracker, ulong **ot)
 
 {
 	if (((gameTracker->gameMode == 0) || (gameTracker->cheatMode == '\x01')) ||
@@ -769,7 +772,7 @@ void DEBUG_Draw(GameTracker *gameTracker, ulong **ot)
 		DEBUG_DisplayStatus(gameTracker);
 	}
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -813,10 +816,10 @@ long DEBUG_MenuCountLength(DebugMenuLine *menu)
 		{
 			pDVar1 = &menu->type;
 			menu = menu + 1;
-			if (*pDVar1 == DEBUG_LINE_TYPE_ENDLIST)
+/* 			if (*pDVar1 == DEBUG_LINE_TYPE_ENDLIST)
 			{
 				return iVar2;
-			}
+			} */
 			iVar2 = iVar2 + 1;
 		} while (menu != (DebugMenuLine *)0x0);
 	}
@@ -846,7 +849,7 @@ long DEBUG_MenuCountLength(DebugMenuLine *menu)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void DEBUG_ExitMenus(void)
+/* void DEBUG_ExitMenus(void)
 
 {
 	long lVar1;
@@ -871,7 +874,7 @@ void DEBUG_ExitMenus(void)
 		SOUND_SfxOn();
 	}
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -887,7 +890,7 @@ void DEBUG_ExitMenus(void)
 /* end block 2 */
 // End Line: 3367
 
-DebugMenuLine *get_last_menu_line(DebugMenuLine *line)
+/* DebugMenuLine *get_last_menu_line(DebugMenuLine *line)
 
 {
 	DebugMenuLine *pDVar1;
@@ -902,7 +905,7 @@ DebugMenuLine *get_last_menu_line(DebugMenuLine *line)
 		} while (line->type != DEBUG_LINE_TYPE_ENDLIST);
 	}
 	return line;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -932,7 +935,7 @@ DebugMenuLine *get_last_menu_line(DebugMenuLine *line)
 /* end block 4 */
 // End Line: 3384
 
-int num_menu_items(DebugMenuLine *menu)
+/* int num_menu_items(DebugMenuLine *menu)
 
 {
 	DEBUG_LINE_TYPE DVar1;
@@ -947,7 +950,7 @@ int num_menu_items(DebugMenuLine *menu)
 		iVar2 = iVar2 + 1;
 	}
 	return iVar2;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -970,7 +973,7 @@ int num_menu_items(DebugMenuLine *menu)
 /* end block 2 */
 // End Line: 3400
 
-void maybe_change_menu_choice(GameTracker *gt, DebugMenuLine *menu)
+/* void maybe_change_menu_choice(GameTracker *gt, DebugMenuLine *menu)
 
 {
 	int iVar1;
@@ -1004,7 +1007,7 @@ void maybe_change_menu_choice(GameTracker *gt, DebugMenuLine *menu)
 		}
 	}
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1033,7 +1036,7 @@ void maybe_change_menu_choice(GameTracker *gt, DebugMenuLine *menu)
 /* end block 2 */
 // End Line: 3451
 
-void handle_line_type_long(GameTracker *gt, DebugMenuLine *line)
+/* void handle_line_type_long(GameTracker *gt, DebugMenuLine *line)
 
 {
 	uint uVar1;
@@ -1070,7 +1073,7 @@ void handle_line_type_long(GameTracker *gt, DebugMenuLine *line)
 		}
 	}
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1098,7 +1101,7 @@ void handle_line_type_long(GameTracker *gt, DebugMenuLine *line)
 /* end block 4 */
 // End Line: 3505
 
-void handle_line_type_bit(GameTracker *gt, DebugMenuLine *line)
+/* void handle_line_type_bit(GameTracker *gt, DebugMenuLine *line)
 
 {
 	if ((gt->controlCommand[1] & 4U) != 0)
@@ -1111,7 +1114,7 @@ void handle_line_type_bit(GameTracker *gt, DebugMenuLine *line)
 		*line->var_address = *line->var_address & ~line->bit_mask;
 	}
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1131,7 +1134,7 @@ void handle_line_type_bit(GameTracker *gt, DebugMenuLine *line)
 /* end block 2 */
 // End Line: 3524
 
-void handle_line_type_action(GameTracker *gt, DebugMenuLine *line)
+/* void handle_line_type_action(GameTracker *gt, DebugMenuLine *line)
 
 {
 	if ((gt->controlCommand[1] & 0x80U) != 0)
@@ -1139,7 +1142,7 @@ void handle_line_type_action(GameTracker *gt, DebugMenuLine *line)
 		(*(code *)line->var_address)();
 	}
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1159,7 +1162,7 @@ void handle_line_type_action(GameTracker *gt, DebugMenuLine *line)
 /* end block 2 */
 // End Line: 3548
 
-void handle_line_type_action_with_line(GameTracker *gt, DebugMenuLine *line)
+/* void handle_line_type_action_with_line(GameTracker *gt, DebugMenuLine *line)
 
 {
 	uint uVar1;
@@ -1176,7 +1179,7 @@ void handle_line_type_action_with_line(GameTracker *gt, DebugMenuLine *line)
 		(*(code *)line->var_address)();
 	}
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1196,7 +1199,7 @@ void handle_line_type_action_with_line(GameTracker *gt, DebugMenuLine *line)
 /* end block 2 */
 // End Line: 3580
 
-void handle_line_type_menu(GameTracker *gt, DebugMenuLine *line)
+/* void handle_line_type_menu(GameTracker *gt, DebugMenuLine *line)
 
 {
 	DebugMenuLine *pDVar1;
@@ -1215,7 +1218,7 @@ void handle_line_type_menu(GameTracker *gt, DebugMenuLine *line)
 		debugMenuChoice = pDVar1->lower;
 	}
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1249,7 +1252,7 @@ void handle_line_type_menu(GameTracker *gt, DebugMenuLine *line)
 /* end block 3 */
 // End Line: 3654
 
-void process_menu_line(GameTracker *gt, DebugMenuLine *menu)
+/* void process_menu_line(GameTracker *gt, DebugMenuLine *menu)
 
 {
 	if ((menu[debugMenuChoice].type < DEBUG_LINE_TYPE_ENDLIST) &&
@@ -1258,7 +1261,7 @@ void process_menu_line(GameTracker *gt, DebugMenuLine *menu)
 		(*(&debug_dispatch_table)[menu[debugMenuChoice].type].fn)();
 	}
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1274,7 +1277,7 @@ void process_menu_line(GameTracker *gt, DebugMenuLine *menu)
 /* end block 2 */
 // End Line: 3683
 
-int pre_process_functions(GameTracker *gt, DebugMenuLine *menu)
+/* int pre_process_functions(GameTracker *gt, DebugMenuLine *menu)
 
 {
 	_Instance *p_Var1;
@@ -1285,7 +1288,7 @@ int pre_process_functions(GameTracker *gt, DebugMenuLine *menu)
 		p_Var1->flags = p_Var1->flags | 0x100;
 	}
 	return 0;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1296,7 +1299,7 @@ int pre_process_functions(GameTracker *gt, DebugMenuLine *menu)
 /* end block 1 */
 // End Line: 3698
 
-void post_process_functions(GameTracker *gt, DebugMenuLine *menu)
+/* void post_process_functions(GameTracker *gt, DebugMenuLine *menu)
 
 {
 	if (menu == &debugSoundMenu)
@@ -1330,7 +1333,7 @@ void post_process_functions(GameTracker *gt, DebugMenuLine *menu)
 		}
 	}
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1397,7 +1400,7 @@ void set_user_leading(void)
 int isdigit(char c)
 
 {
-	return (uint)((byte)(c - 0x30U) < 10);
+	return (uint)((unsigned char)(c - 0x30U) < 10);
 }
 
 // decompiled code
@@ -1427,7 +1430,7 @@ int isdigit(char c)
 /* end block 2 */
 // End Line: 3870
 
-void adjust_format(char *ctrl, debug_format_t *fmt)
+/* void adjust_format(char *ctrl, debug_format_t *fmt)
 
 {
 	byte bVar1;
@@ -1495,7 +1498,7 @@ void adjust_format(char *ctrl, debug_format_t *fmt)
 		bVar1 = *pbVar4;
 		ctrl = (char *)pbVar4;
 	} while (true);
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1553,7 +1556,7 @@ char *find_eol(char *text)
 /* end block 2 */
 // End Line: 3973
 
-void draw_menu_item(GameTracker *gt, debug_format_t *fmt, char *text)
+/* void draw_menu_item(GameTracker *gt, debug_format_t *fmt, char *text)
 
 {
 	char cVar1;
@@ -1595,7 +1598,7 @@ void draw_menu_item(GameTracker *gt, debug_format_t *fmt, char *text)
 	}
 	fmt->ypos = fmt->ypos + cem_item_leading;
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1631,7 +1634,7 @@ void draw_menu_item(GameTracker *gt, debug_format_t *fmt, char *text)
 /* end block 3 */
 // End Line: 4057
 
-void draw_menu(GameTracker *gt, DebugMenuLine *menu)
+/* void draw_menu(GameTracker *gt, DebugMenuLine *menu)
 
 {
 	int iVar1;
@@ -1716,7 +1719,7 @@ void draw_menu(GameTracker *gt, DebugMenuLine *menu)
 		iVar3 = iVar3 + 1;
 	}
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1737,7 +1740,7 @@ void draw_menu(GameTracker *gt, DebugMenuLine *menu)
 /* end block 2 */
 // End Line: 4231
 
-void DEBUG_Menu(GameTracker *gt)
+/* void DEBUG_Menu(GameTracker *gt)
 
 {
 	DebugMenuLine *menu;
@@ -1771,7 +1774,7 @@ void DEBUG_Menu(GameTracker *gt)
 		}
 	}
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1807,7 +1810,7 @@ void DEBUG_Menu(GameTracker *gt)
 /* end block 2 */
 // End Line: 4318
 
-void DEBUG_DisplayStatus(GameTracker *gameTracker)
+/* void DEBUG_DisplayStatus(GameTracker *gameTracker)
 
 {
 	int iVar1;
@@ -1860,7 +1863,7 @@ void DEBUG_DisplayStatus(GameTracker *gameTracker)
 	}
 	return;
 }
-
+ */
 // decompiled code
 // original method signature:
 // void /*$ra*/ DEBUG_DrawShrinkCels(unsigned long **polyAddr /*$a0*/)
@@ -1875,11 +1878,11 @@ void DEBUG_DisplayStatus(GameTracker *gameTracker)
 /* end block 2 */
 // End Line: 6158
 
-void DEBUG_DrawShrinkCels(ulong **polyAddr)
+/* void DEBUG_DrawShrinkCels(ulong **polyAddr)
 
 {
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1897,12 +1900,12 @@ void DEBUG_DrawShrinkCels(ulong **polyAddr)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void DEBUG_ContinueGame(void)
+/* void DEBUG_ContinueGame(void)
 
 {
 	gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x40000000;
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1915,7 +1918,7 @@ void DEBUG_ContinueGame(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void DEBUG_ExitGame(void)
+/* void DEBUG_ExitGame(void)
 
 {
 	SOUND_StopAllSound();
@@ -1925,7 +1928,7 @@ void DEBUG_ExitGame(void)
 	gameTrackerX.gameMode = 0;
 	return;
 }
-
+ */
 // decompiled code
 // original method signature:
 // void /*$ra*/ DEBUG_EndViewVram(struct GameTracker *gameTracker /*$a0*/)
@@ -1935,13 +1938,13 @@ void DEBUG_ExitGame(void)
 /* end block 1 */
 // End Line: 7881
 
-void DEBUG_EndViewVram(GameTracker *gameTracker)
+/* void DEBUG_EndViewVram(GameTracker *gameTracker)
 
 {
 	SetDefDispEnv((undefined2 *)&disp, 0, 0, 0x200, 0xf0);
 	SetDefDispEnv((undefined2 *)&DISPENV_800d0e54, 0, 0x100, 0x200, 0xf0);
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -1963,7 +1966,7 @@ void DEBUG_EndViewVram(GameTracker *gameTracker)
 /* end block 2 */
 // End Line: 6578
 
-void DEBUG_ViewVram(GameTracker *gameTracker)
+/* void DEBUG_ViewVram(GameTracker *gameTracker)
 
 {
 	if (((gameTracker->controlCommand[1] & 1U) != 0) && (-1 < DAT_800cdf34))
@@ -1986,7 +1989,7 @@ void DEBUG_ViewVram(GameTracker *gameTracker)
 	SetDefDispEnv((undefined2 *)&DISPENV_800d0e54, (short)DAT_800cdf30, (short)DAT_800cdf34, 0x200, 0xf0);
 	gameTracker->playerInstance->flags = gameTracker->playerInstance->flags | 0x100;
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -2034,7 +2037,7 @@ void DEBUG_CaptureScreen(GameTracker *gameTracker)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void DEBUG_PageFlip(void)
+/* void DEBUG_PageFlip(void)
 
 {
 	ulong **ppuVar1;
@@ -2086,7 +2089,7 @@ void DEBUG_PageFlip(void)
 	DrawSync(0);
 	PutDispEnv((ushort *)gameTrackerX.disp);
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -2106,7 +2109,7 @@ void DEBUG_PageFlip(void)
 /* end block 2 */
 // End Line: 8181
 
-void DEBUG_FatalError(char *fmt)
+/* void DEBUG_FatalError(char *fmt)
 
 {
 	undefined local_res4[12];
@@ -2118,7 +2121,7 @@ void DEBUG_FatalError(char *fmt)
 	DEBUG_PageFlip();
 	trap(0x407);
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -2169,7 +2172,7 @@ void DEBUG_ProcessSecondController(GameTracker *gameTracker)
 /* end block 2 */
 // End Line: 7763
 
-void DEBUG_ProcessCheat(GameTracker *gameTracker)
+/* void DEBUG_ProcessCheat(GameTracker *gameTracker)
 
 {
 	uint uVar1;
@@ -2251,7 +2254,7 @@ void DEBUG_ProcessCheat(GameTracker *gameTracker)
 		(gameTracker->playerInstance->position).y = (gameTracker->playerInstance->position).y + local_44;
 	}
 	return;
-}
+} */
 
 // decompiled code
 // original method signature:
@@ -2271,7 +2274,7 @@ void DEBUG_ProcessCheat(GameTracker *gameTracker)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void DEBUG_DoAreaProtection(void)
+/* void DEBUG_DoAreaProtection(void)
 
 {
 	uint uVar1;
@@ -2281,4 +2284,4 @@ void DEBUG_DoAreaProtection(void)
 		uVar1 = checkagain();
 	} while (uVar1 != 0);
 	return;
-}
+} */

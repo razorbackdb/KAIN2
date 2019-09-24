@@ -122,8 +122,8 @@ struct SIGNAL_86fake // hashcode: 0x349CE32D (dec: 882697005)
 {
 	short index;					// size=0, offset=0 //  hashcode: 0x9E134E5F (dec: -1642901921), parent name: 'SIGNAL_86fake', parent hashcode: 0xFFFFFFFF (dec: -1)
 	short z;						// size=0, offset=2 //  hashcode: 0xAF025345 (dec: -1358802107), parent name: 'SIGNAL_86fake', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MultiSignal *upSignal;   // size=0, offset=4 //  hashcode: 0xC896ADF7 (dec: -929649161), parent name: 'SIGNAL_86fake', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MultiSignal *downSignal; // size=0, offset=8 //  hashcode: 0x4D8CBDF1 (dec: 1301069297), parent name: 'SIGNAL_86fake', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _MultiSignal *upSignal;   // size=0, offset=4 //  hashcode: 0xC896ADF7 (dec: -929649161), parent name: 'SIGNAL_86fake', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _MultiSignal *downSignal; // size=0, offset=8 //  hashcode: 0x4D8CBDF1 (dec: 1301069297), parent name: 'SIGNAL_86fake', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
 
 struct SIGNAL_87fake // hashcode: 0x711EF9C7 (dec: 1897855431)

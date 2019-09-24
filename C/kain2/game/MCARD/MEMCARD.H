@@ -1,6 +1,8 @@
 #ifndef MEMCARD_H
 #define MEMCARD_H
 
+#include "PLAYER.H"
+
 static struct MEMCARD_216fake gMcmenu; // offset 0x800D8FD4
 
 extern struct memcard_t gMemcard; // offset 0x800D91D4

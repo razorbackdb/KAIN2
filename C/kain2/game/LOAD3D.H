@@ -3,8 +3,6 @@
 
 extern char HashExtensions[7][4]; // offset 0x800CE4D0
 
-static struct _LoadStatus loadStatus; // offset 0x800D0D84
-
 struct CdlFILE // hashcode: 0x2EE126E0 (dec: 786507488)
 {
 	struct CdlLOC pos;  // size=4, offset=0 //  hashcode: 0xF29C5144 (dec: -224636604), parent name: 'CdlFILE', parent hashcode: 0xFFFFFFFF (dec: -1)
@@ -131,8 +129,8 @@ struct LOAD3D_91fake // hashcode: 0x95530E13 (dec: -1789719021)
 {
 	short index;					// size=0, offset=0 //  hashcode: 0x2D70C91D (dec: 762366237), parent name: 'LOAD3D_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
 	short z;						// size=0, offset=2 //  hashcode: 0xF76216AD (dec: -144566611), parent name: 'LOAD3D_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MultiSignal *upSignal;   // size=0, offset=4 //  hashcode: 0x0F5CF2D7 (dec: 257749719), parent name: 'LOAD3D_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
-	struct MultiSignal *downSignal; // size=0, offset=8 //  hashcode: 0xAE025A63 (dec: -1375577501), parent name: 'LOAD3D_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _MultiSignal *upSignal;   // size=0, offset=4 //  hashcode: 0x0F5CF2D7 (dec: 257749719), parent name: 'LOAD3D_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
+	struct _MultiSignal *downSignal; // size=0, offset=8 //  hashcode: 0xAE025A63 (dec: -1375577501), parent name: 'LOAD3D_91fake', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
 
 struct LOAD3D_92fake // hashcode: 0xEFA2D22D (dec: -274542035)
@@ -347,6 +345,8 @@ struct RedirectList // hashcode: 0x4C185B3B (dec: 1276664635)
 	long numPointers; // size=0, offset=0 //  hashcode: 0xCA632F37 (dec: -899469513), parent name: 'RedirectList', parent hashcode: 0xFFFFFFFF (dec: -1)
 	long *data;		  // size=0, offset=4 //  hashcode: 0x37905B9C (dec: 932207516), parent name: 'RedirectList', parent hashcode: 0xFFFFFFFF (dec: -1)
 };
+
+static struct _LoadStatus loadStatus; // offset 0x800D0D84
 
 typedef struct CdlFILE CdlFILE;
 

@@ -3,7 +3,7 @@
 #include "MAIN.H"
 #include "MAING2.H"
 #include "MAINVM.H"
-//#include "MEMPACK.H"
+#include "MEMPACK.H"
 //#include "LOAD3D.H"
 //#include "STRMLOAD.H"
 //#include "LOCALSTR.H"
@@ -1821,10 +1821,10 @@ int MainG2(void *appData)
 	CheckForDevStation();
 	char mainOptionsInit = '\0';
 	_Var3 = MainG2_InitEngine(appData, 0x200, 0xf0, (char *)0x0);
-	/* if (_Var3 != G2FALSE)
+	if (_Var3 != G2FALSE)
 	{
-		MEMPACK_Init();
-		LOAD_InitCd();
+		//MEMPACK_Init();
+/* 		LOAD_InitCd();
 		StartTimer();
 		STREAM_InitLoader("\\BIGFILE.DAT;1", "AUDIO");
 		localstr_set_language(language_english);
@@ -1836,8 +1836,8 @@ int MainG2(void *appData)
 		InitMainTracker(&mainTrackerX);
 		MAIN_DoMainInit();
 		mainTrackerX.mainState = 6;
-		mainTrackerX.movieNum = 0;
-		do
+		mainTrackerX.movieNum = 0; */
+		/* do
 		{
 			mainTrackerX.previousState = mainTrackerX.mainState;
 			switch (mainTrackerX.mainState)
@@ -2007,9 +2007,9 @@ int MainG2(void *appData)
 				menuPos = MAIN_DoMainMenu(&gameTrackerX, &mainTrackerX, menuPos);
 			}
 			STREAM_PollLoadQueue();
-		} while (mainTrackerX.done == 0);
-		SOUND_StopAllSound();
-		SOUND_Free();
+		} while (mainTrackerX.done == 0); */
+		//SOUND_StopAllSound();
+		//SOUND_Free();
 		//SetDispMask(0);
 		//DrawSync(0);
 		//VSync(0);
@@ -2025,6 +2025,6 @@ int MainG2(void *appData)
 		//PadStopCom();
 		//ResetGraph(3);
 	}
-	MainG2_ShutDownEngine(appData); */
+	MainG2_ShutDownEngine(appData);
 	return 0;
 }

@@ -1,7 +1,7 @@
 #include "THISDUST.H"
 #include "STREAM.H"
 
-// short @0x800D1914, len = 0x00000002
+/* // short @0x800D1914, len = 0x00000002
 MORPH_Component = null;
 // _TFace * @0x800D1D20, len = 0x00000004
 MORPH_SavedFace = null;
@@ -985,7 +985,7 @@ WarpRoomArray =
                 '\x00',
                 '\x00'},
         // _StreamUnit * @0x800CF210, len = 0x00000004
-        .streamUnit = 00000000};
+        .streamUnit = 00000000}; */
 // decompiled code
 // original method signature:
 // void /*$ra*/ STREAM_FillOutFileNames(char *baseAreaName /*$s0*/, char *dramName /*$s1*/, char *vramName /*$s2*/, char *sfxName /*$s3*/)
