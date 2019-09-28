@@ -1,6 +1,7 @@
 #ifndef MONAPI_H
 #define MONAPI_H
 
+
 extern void MonsterProcess(struct _Instance *instance, struct GameTracker *gameTracker); // 0x8007DA80
 
 extern void MonsterInit(struct _Instance *instance, struct GameTracker *gameTracker); // 0x8007DBB8
@@ -40,5 +41,6 @@ extern void MONAPI_ProcessGenerator(); // 0x8007F198
 extern void MONAPI_AddToGenerator(struct _Instance *instance); // 0x8007F2D8
 
 extern void MONAPI_CheckGenerator(struct _Instance *instance); // 0x8007F378
+
 
 #endif

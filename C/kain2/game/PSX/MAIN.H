@@ -1,6 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+
 extern void ClearDisplay(); // 0x80037EF8
 
 extern void screen_to_vram(long *screen, int buffer); // 0x80037FB4
@@ -11,7 +12,7 @@ extern void play_movie(char *name); // 0x80038028
 
 extern void InitMainTracker(struct MainTracker *mainTracker); // 0x80038070
 
-extern char *FindTextInLine(char *search_match, char *search_str); // 0x80038080
+extern char * FindTextInLine(char *search_match, char *search_str); // 0x80038080
 
 extern void ExtractWorldName(char *worldName, char *levelName); // 0x80038108
 
@@ -33,7 +34,7 @@ extern void CheckForDevStation(); // 0x800387D4
 
 extern void MAIN_ShowLoadingScreen(); // 0x80038834
 
-extern long *MAIN_LoadTim(char *name); // 0x800388E4
+extern long * MAIN_LoadTim(char *name); // 0x800388E4
 
 extern void init_menus(struct GameTracker *gt); // 0x80038904
 
@@ -52,5 +53,6 @@ extern void MAIN_StartGame(); // 0x80038CDC
 extern long MAIN_DoMainMenu(struct GameTracker *gameTracker, struct MainTracker *mainTracker, long menuPos); // 0x80038D48
 
 extern int MainG2(void *appData); // 0x80038E1C
+
 
 #endif

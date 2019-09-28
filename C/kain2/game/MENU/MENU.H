@@ -1,6 +1,7 @@
 #ifndef MENU_H
 #define MENU_H
 
+
 extern int menu_data_size(); // 0x800B7A40
 
 extern void menu_initialize(struct menu_t *menu, void *opaque); // 0x800B7A48
@@ -31,6 +32,7 @@ extern void menu_run(struct menu_t *menu); // 0x800B85D8
 
 extern void menu_process(struct menu_t *menu); // 0x800B87C8
 
+
 typedef int (*TDRFuncPtr_menu_item_flags1fn)();
 
 typedef int (*TDRFuncPtr_menu_item1fn)();
@@ -38,5 +40,8 @@ typedef int (*TDRFuncPtr_menu_item1fn)();
 typedef int (*TDRFuncPtr_menu_push1fn)();
 
 typedef int (*TDRFuncPtr_menu_set1fn)();
+
+
+
 
 #endif

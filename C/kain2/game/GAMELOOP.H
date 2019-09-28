@@ -1,6 +1,7 @@
 #ifndef GAMELOOP_H
 #define GAMELOOP_H
 
+
 extern void GAMELOOP_AllocStaticMemory(); // 0x8002D7C8
 
 extern void GAMELOOP_InitGameTracker(); // 0x8002D8B8
@@ -21,7 +22,7 @@ extern int GAMELOOP_GetTimeOfDayIdx(int timeOfDay); // 0x8002DBE4
 
 extern int GAMELOOP_WaitForLoad(); // 0x8002DC28
 
-extern struct _StreamUnit *LoadLevels(char *baseAreaName, struct GameTracker *gameTracker); // 0x8002DC60
+extern struct _StreamUnit * LoadLevels(char *baseAreaName, struct GameTracker *gameTracker); // 0x8002DC60
 
 extern void GAMELOOP_InitStandardObjects(); // 0x8002DEBC
 
@@ -53,7 +54,7 @@ extern void GAMELOOP_SwitchTheDrawBuffer(unsigned long **drawot); // 0x8002F2FC
 
 extern void GAMELOOP_SetupRenderFunction(struct GameTracker *gameTracker); // 0x8002F37C
 
-extern struct _StreamUnit *GAMELOOP_GetMainRenderUnit(); // 0x8002F398
+extern struct _StreamUnit * GAMELOOP_GetMainRenderUnit(); // 0x8002F398
 
 extern void GAMELOOP_DisplayFrame(struct GameTracker *gameTracker); // 0x8002F458
 
@@ -87,8 +88,9 @@ extern void GAMELOOP_RequestLevelChange(char *name, short number, struct GameTra
 
 extern void PSX_GameLoop(struct GameTracker *gameTracker); // 0x80030EFC
 
-extern struct MATRIX *GAMELOOP_GetMatrices(int numMatrices); // 0x80030F28
+extern struct MATRIX * GAMELOOP_GetMatrices(int numMatrices); // 0x80030F28
 
-extern struct GameTracker *GAMELOOP_GetGT(); // 0x80030F5C
+extern struct GameTracker * GAMELOOP_GetGT(); // 0x80030F5C
+
 
 #endif

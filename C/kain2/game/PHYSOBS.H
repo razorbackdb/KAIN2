@@ -1,11 +1,12 @@
 #ifndef PHYSOBS_H
 #define PHYSOBS_H
 
+
 extern void PHYSOB_PlayDropSound(struct _Instance *instance); // 0x80068700
 
-extern struct _Instance *PHYSOBS_IsAPushBlockAttached(struct _Instance *block); // 0x80068820
+extern struct _Instance * PHYSOBS_IsAPushBlockAttached(struct _Instance *block); // 0x80068820
 
-extern struct _Instance *PHYSOBS_IsAnythingAttached(struct _Instance *block); // 0x800688A8
+extern struct _Instance * PHYSOBS_IsAnythingAttached(struct _Instance *block); // 0x800688A8
 
 extern int CheckPhysOb(struct _Instance *instance); // 0x800688F0
 
@@ -41,11 +42,11 @@ extern int CanBePickedUp(struct _Instance *instance, struct _Instance *Force, in
 
 extern int PickUpPhysOb(struct _Instance *instance, short Steps, struct _Instance *Force, int LinkNode); // 0x8006A2B8
 
-extern struct _Instance *PHYSOB_BirthCollectible(struct _Instance *parent, int x, int y, int z, int type, int lifeTime); // 0x8006A3B8
+extern struct _Instance * PHYSOB_BirthCollectible(struct _Instance *parent, int x, int y, int z, int type, int lifeTime); // 0x8006A3B8
 
-extern struct evObjectBirthProjectileData *PHYSOB_BirthProjectile(struct _Instance *parent, int joint, int type); // 0x8006A468
+extern struct evObjectBirthProjectileData * PHYSOB_BirthProjectile(struct _Instance *parent, int joint, int type); // 0x8006A468
 
-extern struct _Instance *BirthProjectilePhysOb(struct _Instance *instance, int grabJoint, int type); // 0x8006A4C0
+extern struct _Instance * BirthProjectilePhysOb(struct _Instance *instance, int grabJoint, int type); // 0x8006A4C0
 
 extern void PHYSOB_SetLightTable(struct _PhysObLight *pLight, struct LightInstance *li, short burnAmplitude); // 0x8006A694
 
@@ -81,11 +82,11 @@ extern int GetObliqueDirection(struct _Instance *instance, struct _SVector *dir)
 
 extern void CollidePhysicalObject(struct _Instance *instance, struct GameTracker *gameTracker); // 0x8006D0B0
 
-extern struct PhysObWeaponAttributes *PhysObGetWeapon(struct _Instance *instance); // 0x8006D884
+extern struct PhysObWeaponAttributes * PhysObGetWeapon(struct _Instance *instance); // 0x8006D884
 
-extern struct _PhysObLight *PhysObGetLight(struct _Instance *instance); // 0x8006D928
+extern struct _PhysObLight * PhysObGetLight(struct _Instance *instance); // 0x8006D928
 
-extern struct PhysObSplinter *PhysObGetSplinter(struct _Instance *instance); // 0x8006D960
+extern struct PhysObSplinter * PhysObGetSplinter(struct _Instance *instance); // 0x8006D960
 
 extern void TurnOnCollisionPhysOb(struct _Instance *instance, int coll); // 0x8006D994
 
@@ -146,5 +147,6 @@ extern int PHYSOB_CheckDropOnSlope(struct _Instance *instance, int x, int y, str
 extern int PHYSOB_CheckSlideNormal(struct _Instance *instance, int x, int y, struct evPhysicsSlideData **data); // 0x800705DC
 
 extern void PHYSOB_NormalToAxis(short *x, short *y); // 0x80070630
+
 
 #endif

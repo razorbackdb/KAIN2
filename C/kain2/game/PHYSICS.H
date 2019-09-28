@@ -1,6 +1,7 @@
 #ifndef PHYSICS_H
 #define PHYSICS_H
 
+
 extern void SetNoPtCollideInFamily(struct _Instance *instance); // 0x80074628
 
 extern void ResetNoPtCollideInFamily(struct _Instance *instance); // 0x80074670
@@ -72,5 +73,6 @@ extern void PHYSICS_GenericLineCheckSetup(short x, short y, short z, struct SVEC
 extern void PHYSICS_GenericLineCheck(struct _Instance *instance, struct MATRIX *transMat, struct MATRIX *rotMat, struct _PCollideInfo *cInfo); // 0x80077DE8
 
 extern void PHYSICS_GenericLineCheckMask(struct _Instance *instance, struct MATRIX *transMat, struct MATRIX *rotMat, struct _PCollideInfo *cInfo); // 0x80077E0C
+
 
 #endif

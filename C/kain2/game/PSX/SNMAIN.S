@@ -219,7 +219,7 @@ void start(void)
   undefined4 unaff_s1;
   undefined *puVar3;
   undefined4 unaff_retaddr;
-  undefined4 uVar4;
+  code *pcVar4;
   
   pDVar2 = &eventMenu;
   do {
@@ -232,13 +232,13 @@ void start(void)
   _BlockVramEntry_800d5ab8.udata = unaff_retaddr;
                     /* WARNING: Read-only address (ram,0x800d5ad0) is written */
   InitHeap(*puVar3);
-  uVar4 = 0x800b6dd0;
+  pcVar4 = menu_draw;
   main(*puVar3);
   iVar1 = ___initialised;
   trap(1);
   *(undefined4 *)(puVar3 + -0xc) = unaff_s0;
   *(undefined4 *)(puVar3 + -8) = unaff_s1;
-  *(undefined4 *)(puVar3 + -4) = uVar4;
+  *(code **)(puVar3 + -4) = pcVar4;
   if (iVar1 == 0) {
     ___initialised = 1;
   }

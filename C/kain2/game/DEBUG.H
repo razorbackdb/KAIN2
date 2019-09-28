@@ -1,6 +1,7 @@
 #ifndef DEBUG_H
 #define DEBUG_H
 
+
 extern void DEBUG_UpdateHealth(long *var); // 0x80012EC0
 
 extern void DEBUG_UpdateMana(long *var); // 0x80012EE4
@@ -17,7 +18,7 @@ extern long DEBUG_MenuCountLength(struct DebugMenuLine *menu); // 0x800133EC
 
 extern void DEBUG_ExitMenus(); // 0x80013418
 
-extern struct DebugMenuLine *get_last_menu_line(struct DebugMenuLine *line); // 0x800134B0
+extern struct DebugMenuLine * get_last_menu_line(struct DebugMenuLine *line); // 0x800134B0
 
 extern int num_menu_items(struct DebugMenuLine *menu); // 0x800134E0
 
@@ -47,7 +48,7 @@ extern int isdigit(char c); // 0x8001399C
 
 extern void adjust_format(char *ctrl, struct debug_format_t *fmt); // 0x800139AC
 
-extern char *find_eol(char *text); // 0x80013B54
+extern char * find_eol(char *text); // 0x80013B54
 
 extern void draw_menu_item(struct GameTracker *gt, struct debug_format_t *fmt, char *text); // 0x80013B8C
 
@@ -78,5 +79,6 @@ extern void DEBUG_ProcessSecondController(struct GameTracker *gameTracker); // 0
 extern void DEBUG_ProcessCheat(struct GameTracker *gameTracker); // 0x8001454C
 
 extern void DEBUG_DoAreaProtection(); // 0x800146C0
+
 
 #endif

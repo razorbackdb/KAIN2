@@ -1,6 +1,7 @@
 #ifndef GLYPH_H
 #define GLYPH_H
 
+
 extern void GlyphInit(struct _Instance *instance, struct GameTracker *gameTracker); // 0x8007A8BC
 
 extern void GlyphCollide(struct _Instance *instance, struct GameTracker *gameTracker); // 0x8007A9D8
@@ -69,6 +70,10 @@ extern void HUD_Update(); // 0x8007C28C
 
 extern void HUD_Draw(); // 0x8007C4C0
 
+
 typedef void (*TDRFuncPtr__GlyphSwitchProcess1process)();
+
+
+
 
 #endif

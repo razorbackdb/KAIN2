@@ -1,6 +1,7 @@
 #ifndef ATTACK_H
 #define ATTACK_H
 
+
 extern int StateHandlerDecodeHold(int *Message, int *Data); // 0x8009BB00
 
 extern void StateHandlerAttack2(struct __CharacterState *In, int CurrentSection, int Data); // 0x8009BE68
@@ -20,5 +21,6 @@ extern void ThrowSetFocusPoint(struct _Instance *instance, struct _Rotation *rot
 extern void LimitRotation(struct _Rotation *rot); // 0x8009E5F0
 
 extern void StateHandlerGrab(struct __CharacterState *In, int CurrentSection, int Data); // 0x8009E764
+
 
 #endif

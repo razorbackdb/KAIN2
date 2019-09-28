@@ -1,6 +1,7 @@
 #ifndef RAZIEL_H
 #define RAZIEL_H
 
+
 extern void InitStates(struct _Instance *PlayerInstance); // 0x800A80C8
 
 extern void StateInitIdle(struct __CharacterState *In, int CurrentSection, int Ptr); // 0x800A83B0
@@ -120,5 +121,6 @@ extern void RAZIEL_ResetLookAround(struct _Instance *instance); // 0x800B470C
 extern long RAZIEL_OkToLookAround(struct _Instance *playerInstance); // 0x800B4788
 
 extern void TrailWaterFX(struct _Instance *instance, int Segment, int Bubbles, int Type); // 0x800B4810
+
 
 #endif

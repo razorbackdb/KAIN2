@@ -1,6 +1,7 @@
 #ifndef ENMYPLAN_H
 #define ENMYPLAN_H
 
+
 extern void ENMYPLAN_InitEnemyPlanPool(void *enemyPlanPool); // 0x800965A4
 
 extern int ENMYPLAN_GetNextAvailablePlanningSlot(); // 0x800965C4
@@ -26,5 +27,6 @@ extern int ENMYPLAN_GetNodeTypeOfNextWaypoint(int slotID); // 0x80096FE0
 extern int ENMYPLAN_GetPosOfNextWaypoint(int slotID, struct _Position *pos); // 0x8009704C
 
 extern void ENMYPLAN_RelocatePlanPositions(int slotID, struct _Position *offset); // 0x800970EC
+
 
 #endif

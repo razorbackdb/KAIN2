@@ -1,6 +1,7 @@
 #ifndef MBMISS_H
 #define MBMISS_H
 
+
 extern void WCBEGG_Message(struct _Instance *instance, unsigned long message, unsigned long data); // 0x8008EFA8
 
 extern int WCBEGG_ShouldIgniteEgg(struct _Instance *egg, struct _walbossAttributes *wa); // 0x8008F04C
@@ -24,5 +25,6 @@ extern long WALBOSC_AnimCallback(struct _G2Anim_Type *anim, int sectionID, enum 
 extern void WALBOSC_Collide(struct _Instance *instance, struct GameTracker *gameTracker); // 0x8008F904
 
 extern void WALBOSC_Message(struct _Instance *instance, unsigned long message, unsigned long data); // 0x8008F9C4
+
 
 #endif

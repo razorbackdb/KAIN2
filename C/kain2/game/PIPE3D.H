@@ -1,6 +1,7 @@
 #ifndef PIPE3D_H
 #define PIPE3D_H
 
+
 extern void PIPE3D_AspectAdjustMatrix(struct MATRIX *matrix); // 0x8003A1F0
 
 extern void PIPE3D_CalculateWCTransform(struct _CameraCore_Type *cameraCore); // 0x8003A278
@@ -38,5 +39,6 @@ extern void PIPE3D_HalvePlaneGetRingPoints(struct _Instance *instance, struct MA
 extern void PIPE3D_DoGlow(struct _Instance *instance, struct MATRIX *wcTransform, struct _VertexPool *vertexPool, struct _PrimPool *primPool, unsigned long **ot, struct _FXGlowEffect *glow); // 0x8003C218
 
 extern long PIPE3D_Segment2ScreenPt(struct _Instance *instance, struct MATRIX *wcTransform, int segIndex, struct _Position *pos); // 0x8003C5F4
+
 
 #endif

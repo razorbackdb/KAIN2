@@ -1,6 +1,7 @@
 #ifndef EVENT_H
 #define EVENT_H
 
+
 extern void EVENT_UpdateResetSignalArrayAndWaterMovement(struct Level *oldLevel, struct Level *newLevel, long sizeOfLevel); // 0x800605D0
 
 extern void EVENT_ResetAllOneTimeVariables(); // 0x800606AC
@@ -21,7 +22,7 @@ extern void EVENT_ProcessTimers(); // 0x800608B0
 
 extern void EVENT_ProcessHints(); // 0x800609CC
 
-extern struct EventTimer *EVENT_GetNextTimer(); // 0x80060B8C
+extern struct EventTimer * EVENT_GetNextTimer(); // 0x80060B8C
 
 extern void EVENT_RemoveTimer(struct EventTimer *timer); // 0x80060BF8
 
@@ -31,7 +32,7 @@ extern void EVENT_InitTerrainMovement(); // 0x80060C54
 
 extern void EVENT_Init(); // 0x80060CA4
 
-extern struct WaterLevelProcess *EVENT_GetNextTerrainMove(); // 0x80060CF0
+extern struct WaterLevelProcess * EVENT_GetNextTerrainMove(); // 0x80060CF0
 
 extern void EVENT_ProcessMovingWater(); // 0x80060D28
 
@@ -51,11 +52,11 @@ extern long EVENT_IsConditionTrue(struct Event *eventInstance, struct ScriptPCod
 
 extern long EVENT_WriteEventObject(struct StackType *stackEntry, long areaID, struct Event *event, long number); // 0x80061724
 
-extern struct _MultiSignal *EVENT_ResolveObjectSignal(struct _StreamUnit *stream, long signalNumber); // 0x800617D4
+extern struct _MultiSignal * EVENT_ResolveObjectSignal(struct _StreamUnit *stream, long signalNumber); // 0x800617D4
 
-extern struct Intro *EVENT_ResolveObjectIntro(struct EventInstanceObject *instanceObject); // 0x8006186C
+extern struct Intro * EVENT_ResolveObjectIntro(struct EventInstanceObject *instanceObject); // 0x8006186C
 
-extern struct _SFXMkr *EVENT_ResolveSFXMarker(struct _StreamUnit *stream, struct EventInstanceObject *instanceObject); // 0x80061898
+extern struct _SFXMkr * EVENT_ResolveSFXMarker(struct _StreamUnit *stream, struct EventInstanceObject *instanceObject); // 0x80061898
 
 extern void EVENT_AddGameObjectToStack(struct _PCodeStack *stack); // 0x800618F8
 
@@ -169,7 +170,7 @@ extern long EVENT_CompareOperandsWithOperation(struct _PCodeStack *stack, struct
 
 extern void EVENT_DoStackMathOperation(struct _PCodeStack *stack, long operation); // 0x8006664C
 
-extern short *EVENT_ParseOpcode(struct _PCodeStack *stack, short *codeStream, long *operateOnStack); // 0x80066834
+extern short * EVENT_ParseOpcode(struct _PCodeStack *stack, short *codeStream, long *operateOnStack); // 0x80066834
 
 extern long EVENT_GetIntroValue(struct IntroObject *introObject); // 0x80066AB0
 
@@ -193,7 +194,7 @@ extern void EVENT_SaveEventsFromLevel(long levelID, struct Level *level); // 0x8
 
 extern void EVENT_LoadEventsForLevel(long levelID, struct Level *level); // 0x800673C8
 
-extern struct SavedBasic *EVENT_CreateSaveEvent(long levelID, long eventNumber); // 0x80067504
+extern struct SavedBasic * EVENT_CreateSaveEvent(long levelID, long eventNumber); // 0x80067504
 
 extern void EVENT_RemoveInstanceFromInstanceList(struct _Instance *instance); // 0x80067570
 
@@ -201,7 +202,7 @@ extern void EVENT_UpdatePuzzleWithInstance(struct EventPointers *puzzle, struct 
 
 extern void EVENT_AddInstanceToInstanceList(struct _Instance *instance); // 0x800676FC
 
-extern struct _VMObject *EVENT_FindVMObject(struct _StreamUnit *stream, char *vmoName); // 0x800677E8
+extern struct _VMObject * EVENT_FindVMObject(struct _StreamUnit *stream, char *vmoName); // 0x800677E8
 
 extern void EVENT_FixPuzzlesForStream(struct _StreamUnit *stream); // 0x80067888
 
@@ -218,5 +219,6 @@ extern void EVENT_ExecuteActionCommand(struct StackType *operand1, struct StackT
 extern long EVENT_GetScalerValueFromOperand(struct StackType *operand, long *error, short *flags); // 0x800683E8
 
 extern long EVENT_TransformOperand(struct StackType *stackObject, struct _PCodeStack *stack, long item, short *codeStream); // 0x80068558
+
 
 #endif

@@ -1,6 +1,7 @@
 #ifndef AADSQCMD_H
 #define AADSQCMD_H
 
+
 extern void aadSubstituteVariables(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80055928
 
 extern void metaCmdSelectChannel(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800559E0
@@ -162,5 +163,6 @@ extern void metaCmdPlaySoundEffect(struct AadSeqEvent *event, struct _AadSequenc
 extern void metaCmdStopSoundEffect(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800569CC
 
 extern void metaCmdSetSoundEffectVolumePan(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800569D4
+
 
 #endif

@@ -1,6 +1,7 @@
 #ifndef VOICEXA_H
 #define VOICEXA_H
 
+
 extern void VOICEXA_Init(); // 0x800B6E14
 
 extern void putCdCommand(struct XAVoiceTracker *vt, unsigned char cdCommand, int numParams, unsigned char *params); // 0x800B6EE0
@@ -36,5 +37,6 @@ extern void VOICEXA_Tick(); // 0x800B75D0
 extern int VOICEXA_IsPlaying(); // 0x800B7728
 
 extern int VOICEXA_IsPlayingOrPaused(); // 0x800B7768
+
 
 #endif

@@ -1,6 +1,7 @@
 #ifndef MATH3D_H
 #define MATH3D_H
 
+
 extern void MATH3D_Sort3VectorCoords(long *a, long *b, long *c); // 0x80039478
 
 extern long MATH3D_LengthXYZ(long x, long y, long z); // 0x800394FC
@@ -44,5 +45,6 @@ extern int MATH3D_ConeDetect(struct _SVector *pos, int arc, int elevation); // 0
 extern void MATH3D_CrossProduct(struct _SVector *t, struct _SVector *r, struct _SVector *s); // 0x8003A118
 
 extern unsigned long MATH3D_SquareLength(long x, long y, long z); // 0x8003A1BC
+
 
 #endif

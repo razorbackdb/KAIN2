@@ -1,6 +1,7 @@
 #ifndef ANMCTRLR_H
 #define ANMCTRLR_H
 
+
 extern void G2Anim_AttachControllerToSeg(struct _G2Anim_Type *anim, int segNumber, int type); // 0x80090318
 
 extern void G2Anim_DetachControllerFromSeg(struct _G2Anim_Type *anim, int segNumber, int type); // 0x80090350
@@ -47,11 +48,11 @@ extern void _G2AnimController_GetMatrix(struct _G2AnimController_Type *controlle
 
 extern void _G2AnimController_GetVector(struct _G2AnimController_Type *controller, struct _G2SVector3_Type *vector); // 0x80091A60
 
-extern struct _G2AnimController_Type *_G2Anim_FindController(struct _G2Anim_Type *anim, int segNumber, int type); // 0x80091AE8
+extern struct _G2AnimController_Type * _G2Anim_FindController(struct _G2Anim_Type *anim, int segNumber, int type); // 0x80091AE8
 
-extern struct _G2AnimController_Type *_G2AnimController_Create(int segNumber, int type); // 0x80091B44
+extern struct _G2AnimController_Type * _G2AnimController_Create(int segNumber, int type); // 0x80091B44
 
-extern struct _G2AnimController_Type *_G2AnimController_Destroy(struct _G2AnimController_Type *controller); // 0x80091BAC
+extern struct _G2AnimController_Type * _G2AnimController_Destroy(struct _G2AnimController_Type *controller); // 0x80091BAC
 
 extern void _G2AnimController_InsertIntoList(struct _G2AnimController_Type *controller, unsigned short *listPtr); // 0x80091C10
 
@@ -59,10 +60,11 @@ extern void _G2AnimController_GetCurrentInterpQuat(struct _G2AnimController_Type
 
 extern void _G2AnimController_GetSimpleWorldRotQuat(struct _G2AnimController_Type *controller, struct _G2Anim_Type *anim, struct _G2Quat_Type *quat); // 0x80091E7C
 
-extern struct _G2AnimController_Type *_G2AnimControllerST_FindInList(int segNumber, int type, unsigned short *listPtr); // 0x80091EFC
+extern struct _G2AnimController_Type * _G2AnimControllerST_FindInList(int segNumber, int type, unsigned short *listPtr); // 0x80091EFC
 
-extern struct _G2AnimController_Type *_G2AnimControllerST_FindPtrInList(int segNumber, int type, unsigned short **listPtrPtr); // 0x80091F6C
+extern struct _G2AnimController_Type * _G2AnimControllerST_FindPtrInList(int segNumber, int type, unsigned short **listPtrPtr); // 0x80091F6C
 
-extern struct _G2AnimController_Type *_G2AnimControllerST_RemoveFromList(int segNumber, int type, unsigned short *listPtr); // 0x8009200C
+extern struct _G2AnimController_Type * _G2AnimControllerST_RemoveFromList(int segNumber, int type, unsigned short *listPtr); // 0x8009200C
+
 
 #endif

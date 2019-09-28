@@ -1,9 +1,10 @@
 #ifndef ANMG2ILF_H
 #define ANMG2ILF_H
 
+
 extern short G2Anim_GetElapsedTime(struct _G2Anim_Type *anim); // 0x8008FA10
 
-extern struct _G2AnimKeylist_Type *G2Anim_GetKeylist(struct _G2Anim_Type *anim); // 0x8008FA34
+extern struct _G2AnimKeylist_Type * G2Anim_GetKeylist(struct _G2Anim_Type *anim); // 0x8008FA34
 
 extern void G2Anim_GetRootMotionOverInterval(struct _G2Anim_Type *anim, short intervalStart, short intervalEnd, struct _G2SVector3_Type *motionVector); // 0x8008FA58
 
@@ -59,6 +60,10 @@ extern void G2AnimSection_SetUnpaused(struct _G2AnimSection_Type *section); // 0
 
 extern void G2AnimSection_SwitchToKeylist(struct _G2AnimSection_Type *section, struct _G2AnimKeylist_Type *keylist, int keylistID); // 0x800900D4
 
+
 typedef long (*TDRFuncPtr_G2Anim_SetCallback1callback)();
+
+
+
 
 #endif

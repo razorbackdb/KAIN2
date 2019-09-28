@@ -1,6 +1,7 @@
 #ifndef AADSEQEV_H
 #define AADSEQEV_H
 
+
 extern int aadQueueNextEvent(struct _AadSequenceSlot *slot, int track); // 0x800548E8
 
 extern void aadExecuteEvent(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80054ADC
@@ -36,5 +37,6 @@ extern void midiControlPan(struct AadSeqEvent *event, struct _AadSequenceSlot *s
 extern void midiControlCallback(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800558DC
 
 extern void midiControlDummy(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80055920
+
 
 #endif

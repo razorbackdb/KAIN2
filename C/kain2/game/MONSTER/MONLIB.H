@@ -1,6 +1,7 @@
 #ifndef MONLIB_H
 #define MONLIB_H
 
+
 extern void MON_TurnOffWeaponSpheres(struct _Instance *instance); // 0x8007F3E4
 
 extern void MON_TurnOnWeaponSpheres(struct _Instance *instance); // 0x8007F4DC
@@ -21,7 +22,7 @@ extern void MON_SwitchStateDoEntry(struct _Instance *instance, enum MonsterState
 
 extern int MON_TransNodeAnimation(struct _Instance *instance); // 0x8007F9B4
 
-extern struct _MonsterAnim *MON_GetAnim(struct _Instance *instance, char *animList, int index); // 0x8007F9DC
+extern struct _MonsterAnim * MON_GetAnim(struct _Instance *instance, char *animList, int index); // 0x8007F9DC
 
 extern void MON_PlayAnimID(struct _Instance *instance, int index, int mode); // 0x8007FA10
 
@@ -53,7 +54,7 @@ extern int MON_ShouldIAttackInstance(struct _Instance *instance, struct _Instanc
 
 extern int MON_ShouldIAttack(struct _Instance *instance, struct _MonsterIR *enemy, struct _MonsterAttackAttributes *attack); // 0x800801E0
 
-extern struct _MonsterAttackAttributes *MON_ChooseAttack(struct _Instance *instance, struct _MonsterIR *enemy); // 0x80080388
+extern struct _MonsterAttackAttributes * MON_ChooseAttack(struct _Instance *instance, struct _MonsterIR *enemy); // 0x80080388
 
 extern int MON_ShouldIEvade(struct _Instance *instance); // 0x800804E8
 
@@ -137,11 +138,11 @@ extern int MON_ValidPosition(struct _Instance *instance); // 0x8008335C
 
 extern void MON_SphereWorldPos(struct MATRIX *mat, struct _HSphere *sphere, struct _Position *ret); // 0x800833B4
 
-extern struct _HPrim *MON_FindSphereForTerrain(struct _Instance *instance); // 0x80083424
+extern struct _HPrim * MON_FindSphereForTerrain(struct _Instance *instance); // 0x80083424
 
-extern struct Intro *MON_FindNearestImpalingIntro(int unitID, struct _Position *position); // 0x800834B0
+extern struct Intro * MON_FindNearestImpalingIntro(int unitID, struct _Position *position); // 0x800834B0
 
-extern struct Intro *MON_TestForTerrainImpale(struct _Instance *instance, struct _Terrain *terrain); // 0x800835E0
+extern struct Intro * MON_TestForTerrainImpale(struct _Instance *instance, struct _Terrain *terrain); // 0x800835E0
 
 extern void MON_MoveInstanceToImpalePoint(struct _Instance *instance); // 0x800836DC
 
@@ -172,5 +173,6 @@ extern void MON_DoDrainEffects(struct _Instance *instance, struct _Instance *ei)
 extern void MON_SetFXHitData(struct _Instance *instance, struct evFXHitData *data, int type, int amount); // 0x80084698
 
 extern void MON_LaunchMonster(struct _Instance *instance, int zDirection, int power, int loft); // 0x80084724
+
 
 #endif

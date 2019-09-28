@@ -1,6 +1,7 @@
 #ifndef SIGNAL_H
 #define SIGNAL_H
 
+
 extern long SIGNAL_HandleLightGroup(struct _Instance *instance, struct Signal *signal); // 0x8001D840
 
 extern long SIGNAL_HandleCameraAdjust(struct _Instance *instance, struct Signal *signal); // 0x8001D85C
@@ -67,12 +68,13 @@ extern long SIGNAL_IsStreamSignal(struct Signal *signal, long *isWarpGate); // 0
 
 extern void SIGNAL_HandleSignal(struct _Instance *instance, struct Signal *signal, int dontForceDoSignal); // 0x8001E210
 
-extern struct _MultiSignal *SIGNAL_RelocateSignal(struct _MultiSignal *multiSignal, long offset); // 0x8001E234
+extern struct _MultiSignal * SIGNAL_RelocateSignal(struct _MultiSignal *multiSignal, long offset); // 0x8001E234
 
-extern struct _MultiSignal *SIGNAL_FindSignal(struct Level *level, long id); // 0x8001E310
+extern struct _MultiSignal * SIGNAL_FindSignal(struct Level *level, long id); // 0x8001E310
 
 extern void SIGNAL_OutOfWater(struct _Instance *instance); // 0x8001E3C0
 
 extern void SIGNAL_InWater(struct _Instance *instance); // 0x8001E410
+
 
 #endif

@@ -546,80 +546,81 @@ void RotMatrixZYX(ushort *param_1,uint *param_2)
   ushort uVar1;
   ushort uVar2;
   undefined4 uVar3;
-  int iVar4;
-  int iVar5;
-  undefined4 uVar6;
+  uint uVar4;
+  uint uVar5;
+  int iVar6;
   undefined4 uVar7;
-  uint uVar8;
-  int iVar9;
+  int iVar8;
+  undefined4 uVar9;
   int iVar10;
   int iVar11;
-  undefined4 uVar12;
+  int iVar12;
   undefined4 uVar13;
   undefined4 uVar14;
+  undefined4 uVar15;
   
   uVar1 = param_1[1];
   uVar2 = *param_1;
-  iVar4 = ((int)(short)param_1[2] & 0x7ffU) * 2;
-  iVar11 = (int)*(short *)((int)&ecostable.type + iVar4);
-  uVar8 = SEXT24(*(short *)((int)&AnteRoomsMenu.upper + iVar4));
+  uVar4 = (int)(short)param_1[2] & 0x7ff;
+  iVar12 = (int)(&_Normal_800c910c.z)[uVar4];
+  uVar4 = SEXT24((&SHORT_800c9910)[uVar4]);
   if (((int)(short)param_1[2] & 0x800U) != 0) {
-    iVar11 = -iVar11;
-    uVar8 = -uVar8;
+    iVar12 = -iVar12;
+    uVar4 = -uVar4;
   }
   if ((uVar1 | uVar2) != 0) {
-    iVar4 = ((int)(short)uVar1 & 0x7ffU) * 2;
-    iVar10 = (int)*(short *)((int)&ecostable.type + iVar4);
-    iVar4 = (int)*(short *)((int)&AnteRoomsMenu.upper + iVar4);
+    uVar5 = (int)(short)uVar1 & 0x7ff;
+    iVar11 = (int)(&_Normal_800c910c.z)[uVar5];
+    iVar8 = (int)(&SHORT_800c9910)[uVar5];
     if (((int)(short)uVar1 & 0x800U) != 0) {
-      iVar4 = -iVar4;
-      iVar10 = -iVar10;
+      iVar8 = -iVar8;
+      iVar11 = -iVar11;
     }
-    iVar5 = ((int)(short)uVar2 & 0x7ffU) * 2;
-    iVar9 = (int)*(short *)((int)&ecostable.type + iVar5);
-    iVar5 = (int)*(short *)((int)&AnteRoomsMenu.upper + iVar5);
+    uVar5 = (int)(short)uVar2 & 0x7ff;
+    iVar10 = (int)(&_Normal_800c910c.z)[uVar5];
+    iVar6 = (int)(&SHORT_800c9910)[uVar5];
     if (((int)(short)uVar2 & 0x800U) != 0) {
-      iVar9 = -iVar9;
-      iVar5 = -iVar5;
+      iVar10 = -iVar10;
+      iVar6 = -iVar6;
     }
-    setCopReg(2,0x4800,iVar4);
-    setCopReg(2,0x5000,uVar8);
-    setCopReg(2,0x5800,iVar11);
-    setCopReg(2,0x4000,iVar5);
+    setCopReg(2,0x4800,iVar8);
+    setCopReg(2,0x5000,uVar4);
+    setCopReg(2,0x5800,iVar12);
+    setCopReg(2,0x4000,iVar6);
     copFunction(2,0x198003d);
-    *(short *)(param_2 + 3) = -(short)iVar10;
-    uVar12 = getCopReg(2,0x5000);
+    *(short *)(param_2 + 3) = -(short)iVar11;
+    uVar13 = getCopReg(2,0x5000);
     uVar3 = getCopReg(2,0x4800);
-    uVar13 = getCopReg(2,0x5800);
+    uVar14 = getCopReg(2,0x5800);
     *(short *)(param_2 + 4) = (short)uVar3;
-    setCopReg(2,0x4800,iVar4);
-    setCopReg(2,0x5000,uVar8);
-    setCopReg(2,0x5800,iVar11);
-    setCopReg(2,0x4000,iVar9);
-    copFunction(2,0x198003d);
-    *(short *)param_2 = (short)((int)(iVar4 * uVar8) >> 0xc);
-    uVar3 = getCopReg(2,0x4800);
-    uVar14 = getCopReg(2,0x5000);
-    iVar9 = getCopReg(2,0x5800);
-    *(undefined2 *)((int)param_2 + 0xe) = (short)uVar3;
-    setCopReg(2,0x4800,uVar12);
-    setCopReg(2,0x5000,uVar13);
-    setCopReg(2,0x5800,uVar14);
+    setCopReg(2,0x4800,iVar8);
+    setCopReg(2,0x5000,uVar4);
+    setCopReg(2,0x5800,iVar12);
     setCopReg(2,0x4000,iVar10);
     copFunction(2,0x198003d);
-    *(undefined2 *)((int)param_2 + 6) = (short)(iVar4 * iVar11 >> 0xc);
+    *(short *)param_2 = (short)((int)(iVar8 * uVar4) >> 0xc);
     uVar3 = getCopReg(2,0x4800);
-    uVar6 = getCopReg(2,0x5000);
-    uVar7 = getCopReg(2,0x5800);
-    *(short *)((int)param_2 + 2) = (short)uVar7 - (short)uVar13;
-    *(short *)(param_2 + 1) = (short)uVar3 + (short)iVar9;
-    *(short *)(param_2 + 2) = (short)(iVar9 * iVar10 >> 0xc) + (short)uVar12;
-    *(short *)((int)param_2 + 10) = (short)uVar6 - (short)uVar14;
+    uVar15 = getCopReg(2,0x5000);
+    iVar10 = getCopReg(2,0x5800);
+    *(undefined2 *)((int)param_2 + 0xe) = (short)uVar3;
+    setCopReg(2,0x4800,uVar13);
+    setCopReg(2,0x5000,uVar14);
+    setCopReg(2,0x5800,uVar15);
+    setCopReg(2,0x4000,iVar11);
+    copFunction(2,0x198003d);
+    *(undefined2 *)((int)param_2 + 6) = (short)(iVar8 * iVar12 >> 0xc);
+    uVar3 = getCopReg(2,0x4800);
+    uVar7 = getCopReg(2,0x5000);
+    uVar9 = getCopReg(2,0x5800);
+    *(short *)((int)param_2 + 2) = (short)uVar9 - (short)uVar14;
+    *(short *)(param_2 + 1) = (short)uVar3 + (short)iVar10;
+    *(short *)(param_2 + 2) = (short)(iVar10 * iVar11 >> 0xc) + (short)uVar13;
+    *(short *)((int)param_2 + 10) = (short)uVar7 - (short)uVar15;
     return;
   }
-  *param_2 = iVar11 * -0x10000 | uVar8 & 0xffff;
-  param_2[1] = iVar11 * 0x10000;
-  param_2[2] = uVar8 & 0xffff;
+  *param_2 = iVar12 * -0x10000 | uVar4 & 0xffff;
+  param_2[1] = iVar12 * 0x10000;
+  param_2[2] = uVar4 & 0xffff;
   param_2[3] = 0;
   *(undefined2 *)(param_2 + 4) = 0x1000;
   return;
@@ -739,80 +740,81 @@ void RotMatrix(ushort *param_1,uint *param_2)
   ushort uVar1;
   ushort uVar2;
   undefined4 uVar3;
-  int iVar4;
-  int iVar5;
-  undefined4 uVar6;
+  uint uVar4;
+  uint uVar5;
+  int iVar6;
   undefined4 uVar7;
-  uint uVar8;
-  int iVar9;
+  int iVar8;
+  undefined4 uVar9;
   int iVar10;
   int iVar11;
-  undefined4 uVar12;
+  int iVar12;
   undefined4 uVar13;
   undefined4 uVar14;
+  undefined4 uVar15;
   
   uVar1 = param_1[1];
   uVar2 = *param_1;
-  iVar4 = ((int)(short)param_1[2] & 0x7ffU) * 2;
-  iVar11 = (int)*(short *)((int)&ecostable.type + iVar4);
-  uVar8 = SEXT24(*(short *)((int)&AnteRoomsMenu.upper + iVar4));
+  uVar4 = (int)(short)param_1[2] & 0x7ff;
+  iVar12 = (int)(&_Normal_800c910c.z)[uVar4];
+  uVar4 = SEXT24((&SHORT_800c9910)[uVar4]);
   if (((int)(short)param_1[2] & 0x800U) != 0) {
-    iVar11 = -iVar11;
-    uVar8 = -uVar8;
+    iVar12 = -iVar12;
+    uVar4 = -uVar4;
   }
   if ((uVar1 | uVar2) != 0) {
-    iVar4 = ((int)(short)uVar1 & 0x7ffU) * 2;
-    iVar10 = (int)*(short *)((int)&ecostable.type + iVar4);
-    iVar4 = (int)*(short *)((int)&AnteRoomsMenu.upper + iVar4);
+    uVar5 = (int)(short)uVar1 & 0x7ff;
+    iVar11 = (int)(&_Normal_800c910c.z)[uVar5];
+    iVar8 = (int)(&SHORT_800c9910)[uVar5];
     if (((int)(short)uVar1 & 0x800U) != 0) {
-      iVar4 = -iVar4;
-      iVar10 = -iVar10;
+      iVar8 = -iVar8;
+      iVar11 = -iVar11;
     }
-    iVar5 = ((int)(short)uVar2 & 0x7ffU) * 2;
-    iVar9 = (int)*(short *)((int)&ecostable.type + iVar5);
-    iVar5 = (int)*(short *)((int)&AnteRoomsMenu.upper + iVar5);
+    uVar5 = (int)(short)uVar2 & 0x7ff;
+    iVar10 = (int)(&_Normal_800c910c.z)[uVar5];
+    iVar6 = (int)(&SHORT_800c9910)[uVar5];
     if (((int)(short)uVar2 & 0x800U) != 0) {
-      iVar9 = -iVar9;
-      iVar5 = -iVar5;
+      iVar10 = -iVar10;
+      iVar6 = -iVar6;
     }
-    setCopReg(2,0x4800,iVar4);
-    setCopReg(2,0x5000,uVar8);
-    setCopReg(2,0x5800,iVar11);
-    setCopReg(2,0x4000,iVar5);
+    setCopReg(2,0x4800,iVar8);
+    setCopReg(2,0x5000,uVar4);
+    setCopReg(2,0x5800,iVar12);
+    setCopReg(2,0x4000,iVar6);
     copFunction(2,0x198003d);
-    *(short *)(param_2 + 1) = (short)iVar10;
-    uVar12 = getCopReg(2,0x5000);
+    *(short *)(param_2 + 1) = (short)iVar11;
+    uVar13 = getCopReg(2,0x5000);
     uVar3 = getCopReg(2,0x4800);
-    uVar13 = getCopReg(2,0x5800);
+    uVar14 = getCopReg(2,0x5800);
     *(short *)(param_2 + 4) = (short)uVar3;
-    setCopReg(2,0x4800,iVar4);
-    setCopReg(2,0x5000,uVar8);
-    setCopReg(2,0x5800,iVar11);
-    setCopReg(2,0x4000,iVar9);
-    copFunction(2,0x198003d);
-    *(short *)param_2 = (short)((int)(iVar4 * uVar8) >> 0xc);
-    uVar3 = getCopReg(2,0x4800);
-    uVar14 = getCopReg(2,0x5000);
-    iVar9 = getCopReg(2,0x5800);
-    *(short *)((int)param_2 + 10) = -(short)uVar3;
-    setCopReg(2,0x4800,uVar12);
-    setCopReg(2,0x5000,uVar13);
-    setCopReg(2,0x5800,uVar14);
+    setCopReg(2,0x4800,iVar8);
+    setCopReg(2,0x5000,uVar4);
+    setCopReg(2,0x5800,iVar12);
     setCopReg(2,0x4000,iVar10);
     copFunction(2,0x198003d);
-    *(short *)((int)param_2 + 2) = -(short)(iVar4 * iVar11 >> 0xc);
+    *(short *)param_2 = (short)((int)(iVar8 * uVar4) >> 0xc);
     uVar3 = getCopReg(2,0x4800);
-    uVar6 = getCopReg(2,0x5000);
-    uVar7 = getCopReg(2,0x5800);
-    *(short *)((int)param_2 + 6) = (short)uVar7 + (short)uVar13;
-    *(short *)(param_2 + 3) = (short)iVar9 - (short)uVar3;
-    *(short *)(param_2 + 2) = (short)uVar12 - (short)(iVar9 * iVar10 >> 0xc);
-    *(short *)((int)param_2 + 0xe) = (short)uVar6 + (short)uVar14;
+    uVar15 = getCopReg(2,0x5000);
+    iVar10 = getCopReg(2,0x5800);
+    *(short *)((int)param_2 + 10) = -(short)uVar3;
+    setCopReg(2,0x4800,uVar13);
+    setCopReg(2,0x5000,uVar14);
+    setCopReg(2,0x5800,uVar15);
+    setCopReg(2,0x4000,iVar11);
+    copFunction(2,0x198003d);
+    *(short *)((int)param_2 + 2) = -(short)(iVar8 * iVar12 >> 0xc);
+    uVar3 = getCopReg(2,0x4800);
+    uVar7 = getCopReg(2,0x5000);
+    uVar9 = getCopReg(2,0x5800);
+    *(short *)((int)param_2 + 6) = (short)uVar9 + (short)uVar14;
+    *(short *)(param_2 + 3) = (short)iVar10 - (short)uVar3;
+    *(short *)(param_2 + 2) = (short)uVar13 - (short)(iVar10 * iVar11 >> 0xc);
+    *(short *)((int)param_2 + 0xe) = (short)uVar7 + (short)uVar15;
     return;
   }
-  *param_2 = iVar11 * -0x10000 | uVar8 & 0xffff;
-  param_2[1] = iVar11 * 0x10000;
-  param_2[2] = uVar8 & 0xffff;
+  *param_2 = iVar12 * -0x10000 | uVar4 & 0xffff;
+  param_2[1] = iVar12 * 0x10000;
+  param_2[2] = uVar4 & 0xffff;
   param_2[3] = 0;
   *(undefined2 *)(param_2 + 4) = 0x1000;
   return;
@@ -925,14 +927,13 @@ undefined8 RotMatrixX(uint param_1,int param_2)
   int iVar12;
   int iVar13;
   
-  iVar2 = (param_1 & 0x7ff) * 2;
-  iVar3 = (int)*(short *)((int)&AnteRoomsMenu.upper + iVar2);
-  iVar2 = (int)*(short *)((int)&ecostable.type + iVar2);
+  iVar2 = (int)(&SHORT_800c9910)[param_1 & 0x7ff];
+  iVar3 = (int)(&_Normal_800c910c.z)[param_1 & 0x7ff];
   if ((param_1 & 0x800) != 0) {
-    iVar3 = -iVar3;
     iVar2 = -iVar2;
+    iVar3 = -iVar3;
   }
-  setCopReg(2,0x4000,iVar3);
+  setCopReg(2,0x4000,iVar2);
   setCopReg(2,0x4800,(int)*(short *)(param_2 + 6));
   iVar7 = *(int *)(param_2 + 8) >> 0x10;
   iVar6 = (int)(short)*(int *)(param_2 + 8);
@@ -944,7 +945,7 @@ undefined8 RotMatrixX(uint param_1,int param_2)
   uVar11 = getCopReg(2,0x4800);
   iVar12 = getCopReg(2,0x5000);
   iVar13 = getCopReg(2,0x5800);
-  setCopReg(2,0x4000,iVar2);
+  setCopReg(2,0x4000,iVar3);
   setCopReg(2,0x4800,iVar9);
   setCopReg(2,0x5000,iVar10);
   setCopReg(2,0x5800,(int)*(short *)(param_2 + 0x10));
@@ -959,7 +960,7 @@ undefined8 RotMatrixX(uint param_1,int param_2)
   iVar6 = getCopReg(2,0x4800);
   iVar7 = getCopReg(2,0x5000);
   uVar8 = getCopReg(2,0x5800);
-  setCopReg(2,0x4000,iVar3);
+  setCopReg(2,0x4000,iVar2);
   setCopReg(2,0x4800,iVar9);
   setCopReg(2,0x5000,iVar10);
   setCopReg(2,0x5800,(int)*(short *)(param_2 + 0x10));
@@ -971,7 +972,7 @@ undefined8 RotMatrixX(uint param_1,int param_2)
   uVar4 = getCopReg(2,0x5800);
   *(uint *)(param_2 + 0xc) = iVar6 + iVar1 & 0xffffU | (iVar7 + iVar5) * 0x10000;
   *(short *)(param_2 + 0x10) = (short)uVar8 + (short)uVar4;
-  return CONCAT44(iVar3,iVar2);
+  return CONCAT44(iVar2,iVar3);
 }
 
 
@@ -1030,14 +1031,13 @@ undefined8 RotMatrixY(uint param_1,uint *param_2)
   int iVar12;
   undefined4 uVar13;
   
-  iVar2 = (param_1 & 0x7ff) * 2;
-  iVar3 = (int)*(short *)((int)&AnteRoomsMenu.upper + iVar2);
-  iVar2 = (int)*(short *)((int)&ecostable.type + iVar2);
+  iVar2 = (int)(&SHORT_800c9910)[param_1 & 0x7ff];
+  iVar3 = (int)(&_Normal_800c910c.z)[param_1 & 0x7ff];
   if ((param_1 & 0x800) != 0) {
-    iVar3 = -iVar3;
     iVar2 = -iVar2;
+    iVar3 = -iVar3;
   }
-  setCopReg(2,0x4000,iVar3);
+  setCopReg(2,0x4000,iVar2);
   setCopReg(2,0x5800,(int)*(short *)(param_2 + 1));
   iVar7 = (int)*param_2 >> 0x10;
   iVar6 = (int)(short)*param_2;
@@ -1049,7 +1049,7 @@ undefined8 RotMatrixY(uint param_1,uint *param_2)
   iVar11 = getCopReg(2,0x4800);
   iVar12 = getCopReg(2,0x5000);
   uVar13 = getCopReg(2,0x5800);
-  setCopReg(2,0x4000,iVar2);
+  setCopReg(2,0x4000,iVar3);
   setCopReg(2,0x4800,iVar9);
   setCopReg(2,0x5000,iVar10);
   setCopReg(2,0x5800,(int)*(short *)(param_2 + 4));
@@ -1064,7 +1064,7 @@ undefined8 RotMatrixY(uint param_1,uint *param_2)
   iVar6 = getCopReg(2,0x4800);
   iVar7 = getCopReg(2,0x5000);
   uVar8 = getCopReg(2,0x5800);
-  setCopReg(2,0x4000,iVar3);
+  setCopReg(2,0x4000,iVar2);
   setCopReg(2,0x4800,iVar9);
   setCopReg(2,0x5000,iVar10);
   setCopReg(2,0x5800,(int)*(short *)(param_2 + 4));
@@ -1076,7 +1076,7 @@ undefined8 RotMatrixY(uint param_1,uint *param_2)
   uVar5 = getCopReg(2,0x5800);
   param_2[3] = iVar1 - iVar6 & 0xffffU | (iVar4 - iVar7) * 0x10000;
   *(short *)(param_2 + 4) = (short)uVar5 - (short)uVar8;
-  return CONCAT44(iVar3,iVar2);
+  return CONCAT44(iVar2,iVar3);
 }
 
 
@@ -1131,18 +1131,17 @@ undefined8 RotMatrixZ(uint param_1,uint *param_2)
   int iVar13;
   int iVar14;
   
-  iVar2 = (param_1 & 0x7ff) * 2;
-  iVar3 = (int)*(short *)((int)&AnteRoomsMenu.upper + iVar2);
-  iVar2 = (int)*(short *)((int)&ecostable.type + iVar2);
+  iVar2 = (int)(&SHORT_800c9910)[param_1 & 0x7ff];
+  iVar3 = (int)(&_Normal_800c910c.z)[param_1 & 0x7ff];
   if ((param_1 & 0x800) != 0) {
-    iVar3 = -iVar3;
     iVar2 = -iVar2;
+    iVar3 = -iVar3;
   }
   iVar7 = (int)*param_2 >> 0x10;
   iVar6 = (int)(short)*param_2;
   iVar9 = (int)param_2[1] >> 0x10;
   iVar8 = (int)(short)param_2[1];
-  setCopReg(2,0x4000,iVar3);
+  setCopReg(2,0x4000,iVar2);
   setCopReg(2,0x4800,iVar6);
   setCopReg(2,0x5000,iVar7);
   setCopReg(2,0x5800,iVar8);
@@ -1152,7 +1151,7 @@ undefined8 RotMatrixZ(uint param_1,uint *param_2)
   iVar12 = getCopReg(2,0x4800);
   iVar13 = getCopReg(2,0x5000);
   iVar14 = getCopReg(2,0x5800);
-  setCopReg(2,0x4000,iVar2);
+  setCopReg(2,0x4000,iVar3);
   setCopReg(2,0x4800,iVar9);
   setCopReg(2,0x5000,iVar10);
   setCopReg(2,0x5800,iVar11);
@@ -1167,7 +1166,7 @@ undefined8 RotMatrixZ(uint param_1,uint *param_2)
   iVar6 = getCopReg(2,0x4800);
   iVar7 = getCopReg(2,0x5000);
   iVar8 = getCopReg(2,0x5800);
-  setCopReg(2,0x4000,iVar3);
+  setCopReg(2,0x4000,iVar2);
   setCopReg(2,0x4800,iVar9);
   setCopReg(2,0x5000,iVar10);
   setCopReg(2,0x5800,iVar11);
@@ -1178,7 +1177,7 @@ undefined8 RotMatrixZ(uint param_1,uint *param_2)
   iVar9 = getCopReg(2,0x5800);
   param_2[1] = iVar14 - iVar5 & 0xffffU | (iVar6 + iVar1) * 0x10000;
   param_2[2] = iVar7 + iVar4 & 0xffffU | (iVar8 + iVar9) * 0x10000;
-  return CONCAT44(iVar3,iVar2);
+  return CONCAT44(iVar2,iVar3);
 }
 
 
@@ -1340,7 +1339,7 @@ int rsin(uint param_1)
 {
   int iVar1;
   
-  iVar1 = (int)*(short *)((int)&ecostable.type + (param_1 & 0x7ff) * 2);
+  iVar1 = (int)(&_Normal_800c910c.z)[param_1 & 0x7ff];
   if ((param_1 & 0x800) != 0) {
     iVar1 = -iVar1;
   }
@@ -1381,7 +1380,7 @@ int rcos(uint param_1)
 {
   int iVar1;
   
-  iVar1 = (int)*(short *)((int)&AnteRoomsMenu.upper + (param_1 & 0x7ff) * 2);
+  iVar1 = (int)(&SHORT_800c9910)[param_1 & 0x7ff];
   if ((param_1 & 0x800) != 0) {
     iVar1 = -iVar1;
   }
@@ -1444,24 +1443,22 @@ int MATH3D_racos_S(int param_1)
   int iVar2;
   int iVar3;
   int iVar4;
-  int iVar5;
   
   iVar1 = 0x200;
-  iVar3 = 0x100;
-  iVar5 = param_1;
+  iVar2 = 0x100;
+  iVar4 = param_1;
   if (param_1 < 0) {
-    iVar5 = -param_1;
+    iVar4 = -param_1;
   }
   do {
-    iVar2 = (int)*(short *)((int)&AnteRoomsMenu.upper + iVar1 * 2);
-    if (iVar2 == iVar5) break;
-    iVar4 = iVar3 >> 1;
-    if (iVar2 - iVar5 < 0) {
-      iVar3 = -iVar3;
+    if ((int)(&SHORT_800c9910)[iVar1] == iVar4) break;
+    iVar3 = iVar2 >> 1;
+    if ((int)(&SHORT_800c9910)[iVar1] - iVar4 < 0) {
+      iVar2 = -iVar2;
     }
-    iVar1 = iVar1 + iVar3;
-    iVar3 = iVar4;
-  } while (iVar4 != 0);
+    iVar1 = iVar1 + iVar2;
+    iVar2 = iVar3;
+  } while (iVar3 != 0);
   if (param_1 < 0) {
     iVar1 = 0x800 - iVar1;
   }
@@ -2090,7 +2087,8 @@ void BSP_MarkVisibleLeaves_S(int **param_1,undefined4 *param_2,int *param_3)
   _DAT_1f800078 = uVar8 & 0xffff | iVar15 << 0x10;
   _DAT_1f80007c = uVar5 & 0xffff | iVar4 << 0x10;
   iVar15 = 2;
-  if ((DAT_800d0fb4 == 1000) && (iVar15 = 0, DAT_800d0fb6 != 0)) {
+  if ((theCamera.core.vvNormalWorVecMat[0].m[2][2] == 1000) &&
+     (iVar15 = 0, theCamera.core.vvNormalWorVecMat[0]._18_2_ != 0)) {
     iVar15 = 1;
   }
   setCopControlWord(2,0,_DAT_1f800000);
@@ -2508,138 +2506,120 @@ void G2Quat_ToMatrix_S(short *param_1,short *param_2)
 	/* end block 9 */
 	// End Line: 4888
 
-void G2Quat_FromEuler_S(int param_1,short *param_2)
+void G2Quat_FromEuler_S(__ReaverData *param_1,short *param_2)
 
 {
   uint uVar1;
   int iVar2;
-  undefined2 uVar3;
+  int iVar3;
   int iVar4;
-  int iVar5;
-  short sVar6;
+  short sVar5;
+  uint uVar6;
   int iVar7;
   int iVar8;
   int iVar9;
   int iVar10;
   int iVar11;
   int iVar12;
-  undefined2 uVar13;
+  int iVar13;
   int iVar14;
-  undefined2 uVar15;
+  int iVar15;
   int iVar16;
-  int iVar17;
-  int iVar18;
   
   iVar9 = (int)param_2[1];
   uVar1 = SEXT24(param_2[3]);
   iVar10 = (int)*param_2;
-  iVar17 = (int)param_2[2];
+  iVar15 = (int)param_2[2];
   if ((uVar1 & 1) != 0) {
     iVar10 = (int)param_2[2];
-    iVar17 = (int)*param_2;
+    iVar15 = (int)*param_2;
   }
   if ((uVar1 & 4) != 0) {
     iVar9 = -iVar9;
   }
-  iVar7 = (iVar10 >> 1 & 0x7ffU) * 2;
-  iVar4 = (int)*(short *)((int)&ecostable.type + iVar7);
-  iVar7 = (int)*(short *)((int)&AnteRoomsMenu.upper + iVar7);
+  uVar6 = iVar10 >> 1 & 0x7ff;
+  iVar3 = (int)(&_Normal_800c910c.z)[uVar6];
+  iVar7 = (int)(&SHORT_800c9910)[uVar6];
   if ((iVar10 >> 1 & 0x800U) != 0) {
-    iVar4 = -iVar4;
+    iVar3 = -iVar3;
     iVar7 = -iVar7;
   }
-  iVar11 = (iVar9 >> 1 & 0x7ffU) * 2;
-  iVar10 = (int)*(short *)((int)&ecostable.type + iVar11);
-  iVar11 = (int)*(short *)((int)&AnteRoomsMenu.upper + iVar11);
+  uVar6 = iVar9 >> 1 & 0x7ff;
+  iVar10 = (int)(&_Normal_800c910c.z)[uVar6];
+  iVar11 = (int)(&SHORT_800c9910)[uVar6];
   if ((iVar9 >> 1 & 0x800U) != 0) {
     iVar10 = -iVar10;
     iVar11 = -iVar11;
   }
-  iVar16 = (iVar17 >> 1 & 0x7ffU) * 2;
-  iVar9 = (int)*(short *)((int)&ecostable.type + iVar16);
-  iVar16 = (int)*(short *)((int)&AnteRoomsMenu.upper + iVar16);
-  if ((iVar17 >> 1 & 0x800U) != 0) {
+  uVar6 = iVar15 >> 1 & 0x7ff;
+  iVar9 = (int)(&_Normal_800c910c.z)[uVar6];
+  iVar14 = (int)(&SHORT_800c9910)[uVar6];
+  if ((iVar15 >> 1 & 0x800U) != 0) {
     iVar9 = -iVar9;
-    iVar16 = -iVar16;
+    iVar14 = -iVar14;
   }
   setCopReg(2,0x4000,iVar7);
-  setCopReg(2,0x4800,iVar16);
+  setCopReg(2,0x4800,iVar14);
   setCopReg(2,0x5000,iVar9);
   copFunction(2,0x198003d);
-  iVar17 = getCopReg(2,0x4800);
+  iVar15 = getCopReg(2,0x4800);
   iVar7 = getCopReg(2,0x5000);
-  setCopReg(2,0x4000,iVar4);
-  setCopReg(2,0x4800,iVar16);
+  setCopReg(2,0x4000,iVar3);
+  setCopReg(2,0x4800,iVar14);
   setCopReg(2,0x5000,iVar9);
   copFunction(2,0x198003d);
   iVar9 = (int)(uVar1 & 0x18) >> 2;
-  iVar4 = getCopReg(2,0x4800);
-  iVar16 = getCopReg(2,0x5000);
+  iVar3 = getCopReg(2,0x4800);
+  iVar14 = getCopReg(2,0x5000);
   if ((uVar1 & 2) == 0) {
     setCopReg(2,0x4000,iVar11);
-    setCopReg(2,0x4800,iVar4);
-    setCopReg(2,0x5000,iVar16);
+    setCopReg(2,0x4800,iVar3);
+    setCopReg(2,0x5000,iVar14);
     setCopReg(2,0x5800,iVar7);
     copFunction(2,0x190003d);
     iVar2 = (int)(uVar1 & 4) >> 1;
-    iVar5 = getCopReg(2,0xc800);
+    iVar4 = getCopReg(2,0xc800);
     iVar8 = getCopReg(2,0xd000);
-    iVar14 = getCopReg(2,0xd800);
+    iVar13 = getCopReg(2,0xd800);
     setCopReg(2,0x4000,iVar10);
     setCopReg(2,0x4800,iVar7);
-    setCopReg(2,0x5000,iVar17);
-    setCopReg(2,0x5800,iVar4);
+    setCopReg(2,0x5000,iVar15);
+    setCopReg(2,0x5800,iVar3);
     copFunction(2,0x190003d);
     uVar1 = iVar9 + iVar2 + 2;
     if (4 < uVar1) {
       uVar1 = (iVar9 + iVar2) - 4;
     }
-    iVar4 = (iVar9 - iVar2) + 4;
-    iVar7 = getCopReg(2,0xc800);
-    if (4 < iVar4) {
-      iVar4 = (iVar9 - iVar2) + -2;
+    iVar7 = (iVar9 - iVar2) + 4;
+    iVar3 = getCopReg(2,0xc800);
+    if (4 < iVar7) {
+      iVar7 = (iVar9 - iVar2) + -2;
     }
     iVar12 = getCopReg(2,0xd000);
-    iVar18 = getCopReg(2,0xd800);
-    uVar3 = (undefined2)(iVar5 - iVar7 >> 0xc);
-    sVar6 = (short)(iVar8 + iVar12 >> 0xc);
-    uVar13 = (undefined2)(iVar14 - iVar18 >> 0xc);
-    uVar15 = (undefined2)(iVar11 * iVar17 + iVar10 * iVar16 >> 0xc);
-  }
-  else {
-    setCopReg(2,0x4000,iVar11);
-    setCopReg(2,0x4800,iVar7 + iVar4);
-    setCopReg(2,0x5000,iVar17 - iVar16);
-    copFunction(2,0x198003d);
-    iVar2 = (int)(uVar1 & 4) >> 1;
-    _uVar3 = getCopReg(2,0x4800);
-    uVar3 = (undefined2)_uVar3;
-    _uVar3 = getCopReg(2,0x5000);
-    uVar15 = (undefined2)_uVar3;
-    setCopReg(2,0x4000,iVar10);
-    setCopReg(2,0x4800,iVar17 + iVar16);
-    setCopReg(2,0x5000,iVar7 - iVar4);
-    copFunction(2,0x198003d);
-    uVar1 = iVar9 + iVar2 + 2;
-    if (4 < uVar1) {
-      uVar1 = (iVar9 + iVar2) - 4;
+    iVar16 = getCopReg(2,0xd800);
+    sVar5 = (short)(iVar8 + iVar12 >> 0xc);
+    if (iVar2 != 0) {
+      sVar5 = -sVar5;
     }
-    iVar4 = (iVar9 - iVar2) + 4;
-    _uVar3 = getCopReg(2,0x4800);
-    sVar6 = (short)_uVar3;
-    if (4 < iVar4) {
-      iVar4 = (iVar9 - iVar2) + -2;
-    }
-    _uVar3 = getCopReg(2,0x5000);
-    uVar13 = (undefined2)_uVar3;
+    *(short *)(&param_1->ReaverPickedUp + iVar9) = (short)(iVar4 - iVar3 >> 0xc);
+    *(short *)(&param_1->ReaverPickedUp + uVar1) = sVar5;
+    *(short *)(&param_1->ReaverPickedUp + iVar7) = (short)(iVar13 - iVar16 >> 0xc);
+    param_1->ReaverDeg = (short)(iVar11 * iVar15 + iVar10 * iVar14 >> 0xc);
+    return;
   }
-  if (iVar2 != 0) {
-    sVar6 = -sVar6;
-  }
-  *(undefined2 *)(iVar9 + param_1) = uVar3;
-  *(short *)(uVar1 + param_1) = sVar6;
-  *(undefined2 *)(iVar4 + param_1) = uVar13;
-  *(undefined2 *)(param_1 + 6) = uVar15;
+  setCopReg(2,0x4000,iVar11);
+  setCopReg(2,0x4800,iVar7 + iVar3);
+  setCopReg(2,0x5000,iVar15 - iVar14);
+  copFunction(2,0x198003d);
+  getCopReg(2,0x4800);
+  getCopReg(2,0x5000);
+  setCopReg(2,0x4000,iVar10);
+  setCopReg(2,0x4800,iVar15 + iVar14);
+  setCopReg(2,0x5000,iVar7 - iVar3);
+  copFunction(2,0x198003d);
+  getCopReg(2,0x4800);
+  getCopReg(2,0x5000);
+  StopSoulReaverCharge(param_1,(_Instance *)((int)(uVar1 & 4) >> 1));
   return;
 }
 

@@ -1,17 +1,18 @@
 #ifndef MEMPACK_H
 #define MEMPACK_H
 
+
 extern void MEMPACK_Init(); // 0x8004FAA4
 
-extern struct MemHeader *MEMPACK_GetSmallestBlockTopBottom(long allocSize); // 0x8004FB0C
+extern struct MemHeader * MEMPACK_GetSmallestBlockTopBottom(long allocSize); // 0x8004FB0C
 
-extern struct MemHeader *MEMPACK_GetSmallestBlockBottomTop(long allocSize); // 0x8004FB74
+extern struct MemHeader * MEMPACK_GetSmallestBlockBottomTop(long allocSize); // 0x8004FB74
 
 extern long MEMPACK_RelocatableType(long memType); // 0x8004FBE0
 
-extern char *MEMPACK_Malloc(unsigned long allocSize, unsigned char memType); // 0x8004FC18
+extern char * MEMPACK_Malloc(unsigned long allocSize, unsigned char memType); // 0x8004FC18
 
-extern char *MEMPACK_MallocFailOk(unsigned long allocSize, unsigned char memType); // 0x8004FC94
+extern char * MEMPACK_MallocFailOk(unsigned long allocSize, unsigned char memType); // 0x8004FC94
 
 extern void MEMORY_MergeAddresses(struct MemHeader *firstAddress, struct MemHeader *secondAddress); // 0x8004FE20
 
@@ -35,7 +36,7 @@ extern void MEMPACK_SetMemoryDoneStreamed(char *address); // 0x80050128
 
 extern long MEMPACK_MemoryValidFunc(char *address); // 0x80050134
 
-extern char *MEMPACK_GarbageCollectMalloc(unsigned long *allocSize, unsigned char memType, unsigned long *freeSize); // 0x80050168
+extern char * MEMPACK_GarbageCollectMalloc(unsigned long *allocSize, unsigned char memType, unsigned long *freeSize); // 0x80050168
 
 extern void MEMPACK_GarbageSplitMemoryNow(unsigned long allocSize, struct MemHeader *bestAddress, long memType, unsigned long freeSize); // 0x800502CC
 
@@ -50,5 +51,6 @@ extern void MEMPACK_RelocateG2AnimKeylistType(struct _G2AnimKeylist_Type **pKeyl
 extern void MEMPACK_RelocateObjectType(struct MemHeader *newAddress, long offset, struct Object *oldObject); // 0x80050F40
 
 extern void MEMPACK_RelocateCDMemory(struct MemHeader *newAddress, long offset, struct _BigFileDir *oldDir); // 0x800514B0
+
 
 #endif

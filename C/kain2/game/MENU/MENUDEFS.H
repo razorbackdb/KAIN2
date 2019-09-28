@@ -1,6 +1,7 @@
 #ifndef MENUDEFS_H
 #define MENUDEFS_H
 
+
 extern void do_check_controller(void *gt); // 0x800B8938
 
 extern int do_push_menu(void *gt, long menuparam, enum menu_ctrl_t ctrl); // 0x800B896C
@@ -37,12 +38,13 @@ extern int main_menu(void *gt, int index); // 0x800B8F48
 
 extern int do_main_menu(void *gt, long param, enum menu_ctrl_t ctrl); // 0x800B904C
 
-extern char *flashStart(); // 0x800B90A0
+extern char * flashStart(); // 0x800B90A0
 
 extern int menudefs_main_menu(void *gt, int index); // 0x800B92A4
 
 extern int menudefs_confirmexit_menu(void *gt, int index); // 0x800B934C
 
 extern int menudefs_pause_menu(void *gt, int index); // 0x800B93F4
+
 
 #endif

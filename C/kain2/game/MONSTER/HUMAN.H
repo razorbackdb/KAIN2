@@ -1,9 +1,10 @@
 #ifndef HUMAN_H
 #define HUMAN_H
 
+
 extern void HUMAN_WaitForWeapon(struct _Instance *instance, struct GameTracker *gameTracker); // 0x8007CB40
 
-extern struct _Instance *HUMAN_CreateWeapon(struct _Instance *instance, int weaponid, int segment); // 0x8007CBB0
+extern struct _Instance * HUMAN_CreateWeapon(struct _Instance *instance, int weaponid, int segment); // 0x8007CBB0
 
 extern void HUMAN_Init(struct _Instance *instance); // 0x8007CC84
 
@@ -32,5 +33,6 @@ extern void HUMAN_Flee(struct _Instance *instance); // 0x8007D530
 extern void HUMAN_GetAngry(); // 0x8007D688
 
 extern int HUMAN_TypeOfHuman(struct _Instance *instance); // 0x8007D750
+
 
 #endif

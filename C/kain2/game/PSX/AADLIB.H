@@ -1,6 +1,7 @@
 #ifndef AADLIB_H
 #define AADLIB_H
 
+
 extern unsigned long aadGetMemorySize(struct AadInitAttr *attributes); // 0x800514D4
 
 extern int aadInit(struct AadInitAttr *attributes, unsigned char *memoryPtr); // 0x800514F8
@@ -99,7 +100,7 @@ extern int aadGetNumDynamicSequences(int bank); // 0x80054090
 
 extern int aadAssignDynamicSequence(int bank, int sequenceNumber, int slotNumber); // 0x800540C0
 
-extern struct AadTempo *aadGetTempoFromDynamicSequence(int bank, int sequenceNumber, struct AadTempo *tempo); // 0x8005419C
+extern struct AadTempo * aadGetTempoFromDynamicSequence(int bank, int sequenceNumber, struct AadTempo *tempo); // 0x8005419C
 
 extern void aadSetSlotTempo(int slotNumber, struct AadTempo *tempo); // 0x800541EC
 
@@ -137,6 +138,7 @@ extern void aadCancelPauseSound(); // 0x80054840
 
 extern void aadResumeSound(); // 0x8005485C
 
+
 typedef long (*TDRFuncPtr_aadInstallUpdateFunc0updateFuncPtr)();
 
 typedef void (*TDRFuncPtr_aadInstallEndSequenceCallback)();
@@ -148,5 +150,8 @@ typedef void (*TDRFuncPtr_aadLoadDynamicSoundBank4retProc)();
 typedef void (*TDRFuncPtr_aadStartMasterVolumeFade2fadeCompleteCallback)();
 
 typedef void (*TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback)();
+
+
+
 
 #endif

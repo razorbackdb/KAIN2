@@ -1,6 +1,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
+
 extern void CAMERA_CalculateViewVolumeNormals(struct Camera *camera); // 0x800146E8
 
 extern void CAMERA_CalcVVClipInfo(struct Camera *camera); // 0x80014A24
@@ -19,7 +20,7 @@ extern void CAMERA_Save(struct Camera *camera, long save); // 0x80015498
 
 extern void CAMERA_Restore(struct Camera *camera, long restore); // 0x80015568
 
-extern struct _SVector *SplineGetNextPointDC(struct Spline *spline, struct SplineDef *def); // 0x80015624
+extern struct _SVector * SplineGetNextPointDC(struct Spline *spline, struct SplineDef *def); // 0x80015624
 
 extern void CAMERA_SetMode(struct Camera *camera, long mode); // 0x80015680
 
@@ -85,7 +86,7 @@ extern void CAMERA_CalcFSRotation(struct Camera *camera, struct _Rotation *rotat
 
 extern void CAMERA_Relocate(struct Camera *camera, struct _SVector *offset, int streamSignalFlag); // 0x8001789C
 
-extern struct _TFace *CAMERA_SphereToSphereWithLines(struct Camera *camera, struct CameraCollisionInfo *colInfo, int secondcheck_flag); // 0x800179E8
+extern struct _TFace * CAMERA_SphereToSphereWithLines(struct Camera *camera, struct CameraCollisionInfo *colInfo, int secondcheck_flag); // 0x800179E8
 
 extern long CAMERA_CalcTilt(struct _Normal *normal, short zRot); // 0x80018524
 
@@ -196,5 +197,6 @@ extern void CAMERA_Panic(struct Camera *camera, short min_dist); // 0x8001D01C
 extern long CAMERA_DoCameraCollision2(struct Camera *camera, struct _Position *targetCamPos, int simpleflag); // 0x8001D1CC
 
 extern int CAMERA_FocusInstanceMoved(struct Camera *camera); // 0x8001D7D0
+
 
 #endif

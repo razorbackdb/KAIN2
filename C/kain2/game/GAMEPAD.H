@@ -1,6 +1,7 @@
 #ifndef GAMEPAD_H
 #define GAMEPAD_H
 
+
 extern void GAMEPAD_Commands(long (*command)[5], long (*data)[5], long pad); // 0x80030F68
 
 extern int GAMEPAD_ControllerIsDualShock(); // 0x80031324
@@ -38,5 +39,6 @@ extern void GAMEPAD_Process(struct GameTracker *gameTracker); // 0x80031D28
 extern void GAMEPAD_SaveControllers(); // 0x80031D80
 
 extern void GAMEPAD_RestoreControllers(); // 0x80031E1C
+
 
 #endif

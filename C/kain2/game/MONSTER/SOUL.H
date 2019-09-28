@@ -1,6 +1,7 @@
 #ifndef SOUL_H
 #define SOUL_H
 
+
 extern void SOUL_QueueHandler(struct _Instance *instance); // 0x8008D6D4
 
 extern void SOUL_Physics(struct _Instance *instance, long time); // 0x8008D770
@@ -42,5 +43,6 @@ extern void SOUL_ReanimateEntry(struct _Instance *instance); // 0x8008E7CC
 extern void SOUL_Reanimate(struct _Instance *instance); // 0x8008E834
 
 extern void SOUL_Effect(struct _Instance *instance, struct evFXHitData *data); // 0x8008E8EC
+
 
 #endif

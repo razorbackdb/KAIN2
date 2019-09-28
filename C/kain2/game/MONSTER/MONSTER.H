@@ -1,6 +1,7 @@
 #ifndef MONSTER_H
 #define MONSTER_H
 
+
 extern void MON_DoCombatTimers(struct _Instance *instance); // 0x800871FC
 
 extern void MON_ChangeHumanOpinion(struct _Instance *instance); // 0x800873E4
@@ -157,6 +158,10 @@ extern void MON_DefaultInit(struct _Instance *instance); // 0x8008CB28
 
 extern void MON_CleanUp(struct _Instance *instance); // 0x8008CD74
 
+
 typedef void (*TDRFuncPtr_MONSTER_ProcessClosestVerts2processVert_cb)();
+
+
+
 
 #endif

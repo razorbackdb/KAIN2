@@ -1,11 +1,12 @@
 #ifndef SOUND_H
 #define SOUND_H
 
-extern struct SoundEffectChannel *SndOpenSfxChannel(unsigned char *channelNum); // 0x8003E64C
+
+extern struct SoundEffectChannel * SndOpenSfxChannel(unsigned char *channelNum); // 0x8003E64C
 
 extern void SndCloseSfxChannel(int channelNum); // 0x8003E694
 
-extern struct SoundEffectChannel *SndGetSfxChannel(int channelNum); // 0x8003E6BC
+extern struct SoundEffectChannel * SndGetSfxChannel(int channelNum); // 0x8003E6BC
 
 extern void SOUND_ProcessInstanceSounds(unsigned char *sfxFileData, struct SoundInstance *soundInstTbl, struct _Position *position, int livesInOnePlace, int inSpectral, int hidden, int burning, long *triggerFlags); // 0x8003E6E4
 
@@ -102,5 +103,6 @@ extern void SOUND_ShutdownMusic(); // 0x80040A18
 extern void SOUND_SetMusicModifier(long modifier); // 0x80040ACC
 
 extern void SOUND_ResetMusicModifier(long modifier); // 0x80040B8C
+
 
 #endif

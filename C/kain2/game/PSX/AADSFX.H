@@ -1,6 +1,7 @@
 #ifndef AADSFX_H
 #define AADSFX_H
 
+
 extern unsigned long aadPlaySfx(unsigned int toneID, int volume, int pan, int pitchOffset); // 0x800569DC
 
 extern unsigned long aadStopSfx(unsigned long handle); // 0x80056A40
@@ -40,5 +41,6 @@ extern void sfxCmdSetVoiceAttr(struct AadSfxCommand *sfxCmd); // 0x800579C0
 extern void sfxCmdSetVoiceKeyOn(struct AadSfxCommand *sfxCmd); // 0x80057A4C
 
 extern void sfxCmdSetVoiceKeyOff(struct AadSfxCommand *sfxCmd); // 0x80057A68
+
 
 #endif

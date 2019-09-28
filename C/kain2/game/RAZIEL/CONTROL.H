@@ -1,6 +1,7 @@
 #ifndef CONTROL_H
 #define CONTROL_H
 
+
 extern void SetPhysics(struct _Instance *instance, short gravity, long x, long y, long z); // 0x8009A1B0
 
 extern void ResetPhysics(struct _Instance *instance, short gravity); // 0x8009A224
@@ -20,5 +21,6 @@ extern void SetExternalTransitionForce(struct __Force *in, struct _Instance *ins
 extern void ProcessPhysics(struct __Player *player, struct __CharacterState *In, int CurrentSection, int Mode); // 0x8009A5D8
 
 extern void ApplyExternalLocalForces(struct __Player *player, struct _Instance *instance, struct __Force *Forces, int MaxForces, struct _Vector *Out); // 0x8009A7D0
+
 
 #endif

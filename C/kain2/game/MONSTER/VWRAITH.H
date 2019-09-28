@@ -1,6 +1,7 @@
 #ifndef VWRAITH_H
 #define VWRAITH_H
 
+
 extern void VWRAITH_MoveVertical(struct _Instance *instance, long targetZ, int velocity); // 0x8008E8F4
 
 extern void VWRAITH_Init(struct _Instance *instance); // 0x8008E94C
@@ -20,5 +21,6 @@ extern void VWRAITH_Combat(struct _Instance *instance); // 0x8008ED90
 extern void VWRAITH_EmbraceEntry(struct _Instance *instance); // 0x8008EDBC
 
 extern void VWRAITH_Embrace(struct _Instance *instance); // 0x8008EDDC
+
 
 #endif

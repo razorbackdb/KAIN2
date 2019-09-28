@@ -1,6 +1,7 @@
 #ifndef RAZLIB_H
 #define RAZLIB_H
 
+
 extern void razAlignYMoveRot(struct _Instance *dest, short distance, struct _Position *position, struct _Rotation *rotation, int extraZ); // 0x800A51B0
 
 extern void razAlignYRotMove(struct _Instance *dest, short distance, struct _Position *position, struct _Rotation *rotation, int extraZ); // 0x800A5274
@@ -31,9 +32,9 @@ extern int razAdjustSpeed(struct _Instance *instance, int minSpeed); // 0x800A5C
 
 extern void razLaunchForce(struct _Instance *instance); // 0x800A5D50
 
-extern struct _Instance *razGetHeldItem(); // 0x800A5DE0
+extern struct _Instance * razGetHeldItem(); // 0x800A5DE0
 
-extern struct _Instance *razGetHeldWeapon(); // 0x800A5E18
+extern struct _Instance * razGetHeldWeapon(); // 0x800A5E18
 
 extern void razReaverBladeOff(); // 0x800A5E78
 
@@ -105,7 +106,7 @@ extern void razSetPlayerEventHistory(unsigned long event); // 0x800A7C94
 
 extern int razSideMoveSpiderCheck(struct _Instance *instance, int x); // 0x800A7CAC
 
-extern struct _Instance *RAZIEL_QueryEngagedInstance(int index); // 0x800A7D78
+extern struct _Instance * RAZIEL_QueryEngagedInstance(int index); // 0x800A7D78
 
 extern int razUpdateSoundRamp(struct _Instance *instance, struct _SoundRamp *sound); // 0x800A7DB0
 
@@ -120,5 +121,6 @@ extern void RAZIEL_StartNewGame(); // 0x800A7FF4
 extern int razInBaseArea(char *name, int length); // 0x800A801C
 
 extern void razPrepGlyph(); // 0x800A8078
+
 
 #endif

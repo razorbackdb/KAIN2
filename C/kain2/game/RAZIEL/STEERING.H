@@ -1,6 +1,7 @@
 #ifndef STEERING_H
 #define STEERING_H
 
+
 extern int UpdateZoneDelta(int rc, int LastRC); // 0x800A213C
 
 extern int GetControllerInput(int *ZDirection, long *controlCommand); // 0x800A2178
@@ -26,5 +27,6 @@ extern void SteerSwitchMode(struct _Instance *instance, int mode); // 0x800A2F1C
 extern void razInitWallCrawlSteering(struct _Instance *instance); // 0x800A3178
 
 extern void razDeinitWallCrawlSteering(struct _Instance *instance); // 0x800A32B4
+
 
 #endif

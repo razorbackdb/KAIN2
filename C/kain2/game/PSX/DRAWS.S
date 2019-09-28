@@ -228,16 +228,14 @@ void forceDrawInFront()
 	/* end block 2 */
 	// End Line: 139
 
-void ClearBss(void)
+/* WARNING: Removing unreachable block (ram,0x80024e70) */
+
+void ClearBss(_Terrain *param_1,BSPTree *param_2,_SVector *param_3,_SVector *param_4,_TFace *param_5
+             ,long param_6,long param_7)
 
 {
-  DebugMenuLine *pDVar1;
-  
-  pDVar1 = &eventMenu;
-  do {
-    pDVar1->type = DEBUG_LINE_TYPE_BIT;
-    pDVar1 = (DebugMenuLine *)&pDVar1->lower;
-  } while (pDVar1 < (DebugMenuLine *)&DAT_800dd340);
+  eventMenu.type = DEBUG_LINE_TYPE_BIT;
+  COLLIDE_PointAndTfaceFunc(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
   return;
 }
 
@@ -263,13 +261,15 @@ int COLLIDE_PointAndTfaceFunc
 
 {
   undefined4 *in_v0;
+  int iVar1;
   undefined4 *in_v1;
   
-  do {
-    *in_v0 = 0;
-    in_v0 = in_v0 + 1;
-  } while (in_v0 < in_v1);
-  return (int)in_v0;
+  *in_v0 = 0;
+  if (in_v0 + 1 < in_v1) {
+    iVar1 = COLLIDE_PointAndTfaceFunc(terrain,bsp,orgNewPos,orgOldPos,tface,ignoreAttr,flags);
+    return iVar1;
+  }
+  return (int)(in_v0 + 1);
 }
 
 
@@ -2437,7 +2437,7 @@ do_poly:
         setCopReg(2,in_t0,*(undefined4 *)(iVar18 + 0xc4));
       }
       if ((uVar21 & 8) != 0) {
-no_subdiv:
+do_shade_57:
         *(undefined4 *)(iVar18 + 0xac) = 0;
         if ((uVar9 & 0x66000) != 0) goto subdiv_begin;
         *(undefined4 *)(iVar18 + 0xac) = 0;
@@ -2633,7 +2633,7 @@ no_subdiv:
         iVar24 = getCopReg(2,0xc000);
 code_r0x80026728:
         *(undefined **)(iVar18 + 0xac) = &DAT_00004e20 + iVar24;
-        if (-1 < (int)(&DAT_00004e20 + iVar24)) goto no_subdiv;
+        if (-1 < (int)(&DAT_00004e20 + iVar24)) goto do_shade_57;
       }
       else {
         iVar24 = getCopReg(2,0xc000);
@@ -3924,9 +3924,9 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
 {
   uint uVar1;
   int iVar2;
-  long *plVar3;
-  long lVar4;
-  long *plVar5;
+  long lVar3;
+  DEBUG_LINE_TYPE DVar4;
+  long lVar5;
   undefined4 uVar6;
   undefined4 *puVar7;
   undefined4 *puVar8;
@@ -3937,15 +3937,15 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
   int iVar13;
   uint uVar14;
   undefined4 uVar15;
-  long *plVar16;
+  long lVar16;
   uint uVar17;
   int iVar18;
   undefined4 uVar19;
-  long lVar20;
+  DEBUG_LINE_TYPE DVar20;
   undefined4 uVar21;
   undefined4 *puVar22;
   undefined4 unaff_s0;
-  long lVar23;
+  DEBUG_LINE_TYPE DVar23;
   undefined4 uVar24;
   undefined4 unaff_s1;
   uint *puVar25;
@@ -4220,12 +4220,12 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
               setCopReg(2,0x2000,uVar19);
               setCopReg(2,0x2800,uVar1);
               copFunction(2,0x280030);
-              plVar3 = (&debugImbueSoulReaverMenu.var_address)[(uVar10 >> 0x10) * 2];
-              lVar4 = (&debugImbueSoulReaverMenu.bit_mask)[(uVar10 >> 0x10) * 2];
-              plVar16 = (&debugImbueSoulReaverMenu.var_address)[(uVar14 >> 0x10) * 2];
-              lVar20 = (&debugImbueSoulReaverMenu.bit_mask)[(uVar14 >> 0x10) * 2];
-              plVar5 = (&debugImbueSoulReaverMenu.var_address)[(uVar1 >> 0x10) * 2];
-              lVar23 = (&debugImbueSoulReaverMenu.bit_mask)[(uVar1 >> 0x10) * 2];
+              lVar3 = (&DebugMenuLine_800c895c.bit_mask)[(uVar10 >> 0x10) * 2];
+              DVar4 = (&mcardMenu.type)[(uVar10 >> 0x10) * 2];
+              lVar16 = (&DebugMenuLine_800c895c.bit_mask)[(uVar14 >> 0x10) * 2];
+              DVar20 = (&mcardMenu.type)[(uVar14 >> 0x10) * 2];
+              lVar5 = (&DebugMenuLine_800c895c.bit_mask)[(uVar1 >> 0x10) * 2];
+              DVar23 = (&mcardMenu.type)[(uVar1 >> 0x10) * 2];
               uVar11 = getCopReg(2,0xc);
               *puVar8 = uVar11;
               uVar11 = getCopReg(2,0x11);
@@ -4245,12 +4245,12 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
                 setCopReg(2,0x4000,modelFadeValue);
                 iVar2 = modelFadeValue;
               }
-              setCopReg(2,0,plVar3);
-              setCopReg(2,0x800,lVar4);
-              setCopReg(2,0x1000,plVar16);
-              setCopReg(2,0x1800,lVar20);
-              setCopReg(2,0x2000,plVar5);
-              setCopReg(2,0x2800,lVar23);
+              setCopReg(2,0,lVar3);
+              setCopReg(2,0x800,DVar4);
+              setCopReg(2,0x1000,lVar16);
+              setCopReg(2,0x1800,DVar20);
+              setCopReg(2,0x2000,lVar5);
+              setCopReg(2,0x2800,DVar23);
               if (iVar2 == 0) {
                 copFunction(2,0xd80420);
               }
@@ -4281,8 +4281,8 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
               setCopReg(2,0,uVar11);
               setCopReg(2,0x800,uVar10);
               copFunction(2,0x180001);
-              plVar3 = (&debugImbueSoulReaverMenu.var_address)[(uVar10 >> 0x10) * 2];
-              lVar4 = (&debugImbueSoulReaverMenu.bit_mask)[(uVar10 >> 0x10) * 2];
+              lVar3 = (&DebugMenuLine_800c895c.bit_mask)[(uVar10 >> 0x10) * 2];
+              DVar4 = (&mcardMenu.type)[(uVar10 >> 0x10) * 2];
               uVar11 = getCopReg(2,0xe);
               *puVar8 = uVar11;
               uVar11 = getCopReg(2,0x13);
@@ -4293,8 +4293,8 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
                 setCopReg(2,0x4000,modelFadeValue);
                 iVar2 = modelFadeValue;
               }
-              setCopReg(2,0,plVar3);
-              setCopReg(2,0x800,lVar4);
+              setCopReg(2,0,lVar3);
+              setCopReg(2,0x800,DVar4);
               if (iVar2 == 0) {
                 copFunction(2,0xc8041e);
               }
@@ -4311,8 +4311,8 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
                 setCopReg(2,0,uVar15);
                 setCopReg(2,0x800,uVar14);
                 copFunction(2,0x180001);
-                plVar3 = (&debugImbueSoulReaverMenu.var_address)[(uVar14 >> 0x10) * 2];
-                lVar4 = (&debugImbueSoulReaverMenu.bit_mask)[(uVar14 >> 0x10) * 2];
+                lVar3 = (&DebugMenuLine_800c895c.bit_mask)[(uVar14 >> 0x10) * 2];
+                DVar4 = (&mcardMenu.type)[(uVar14 >> 0x10) * 2];
                 uVar11 = getCopReg(2,0xe);
                 *param_2 = uVar11;
                 uVar11 = getCopReg(2,0x13);
@@ -4323,8 +4323,8 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
                   setCopReg(2,0x4000,modelFadeValue);
                   iVar2 = modelFadeValue;
                 }
-                setCopReg(2,0,plVar3);
-                setCopReg(2,0x800,lVar4);
+                setCopReg(2,0,lVar3);
+                setCopReg(2,0x800,DVar4);
                 if (iVar2 == 0) {
                   copFunction(2,0xc8041e);
                 }
@@ -4455,8 +4455,8 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
               setCopReg(2,0x2000,uVar19);
               setCopReg(2,0x2800,uVar1);
               copFunction(2,0x280030);
-              plVar3 = (&debugImbueSoulReaverMenu.var_address)[(uVar10 >> 0x10) * 2];
-              lVar4 = (&debugImbueSoulReaverMenu.bit_mask)[(uVar10 >> 0x10) * 2];
+              lVar3 = (&DebugMenuLine_800c895c.bit_mask)[(uVar10 >> 0x10) * 2];
+              DVar4 = (&mcardMenu.type)[(uVar10 >> 0x10) * 2];
               uVar17 = *puVar26;
               uVar11 = getCopReg(2,0xc);
               *puVar8 = uVar11;
@@ -4478,8 +4478,8 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
                 iVar2 = modelFadeValue;
               }
               if ((uVar17 & 0x40000000) == 0) {
-                setCopReg(2,0,plVar3);
-                setCopReg(2,0x800,lVar4);
+                setCopReg(2,0,lVar3);
+                setCopReg(2,0x800,DVar4);
                 setCopReg(2,0x3000,uVar17);
                 if (iVar2 == 0) {
                   copFunction(2,0x108041b);
@@ -4492,8 +4492,8 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
               *puVar25 = uVar17;
               uVar10 = puVar26[1];
               if ((uVar10 & 0x40000000) == 0) {
-                setCopReg(2,0,(&debugImbueSoulReaverMenu.var_address)[(uVar14 >> 0x10) * 2]);
-                setCopReg(2,0x800,(&debugImbueSoulReaverMenu.bit_mask)[(uVar14 >> 0x10) * 2]);
+                setCopReg(2,0,(&DebugMenuLine_800c895c.bit_mask)[(uVar14 >> 0x10) * 2]);
+                setCopReg(2,0x800,(&mcardMenu.type)[(uVar14 >> 0x10) * 2]);
                 setCopReg(2,0x3000,uVar10);
                 if (iVar2 == 0) {
                   copFunction(2,0x108041b);
@@ -4506,8 +4506,8 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
               puVar25[1] = uVar10;
               uVar10 = puVar26[2];
               if ((uVar10 & 0x40000000) == 0) {
-                setCopReg(2,0,(&debugImbueSoulReaverMenu.var_address)[(uVar1 >> 0x10) * 2]);
-                setCopReg(2,0x800,(&debugImbueSoulReaverMenu.bit_mask)[(uVar1 >> 0x10) * 2]);
+                setCopReg(2,0,(&DebugMenuLine_800c895c.bit_mask)[(uVar1 >> 0x10) * 2]);
+                setCopReg(2,0x800,(&mcardMenu.type)[(uVar1 >> 0x10) * 2]);
                 setCopReg(2,0x3000,uVar10);
                 if (iVar2 == 0) {
                   copFunction(2,0x108041b);
@@ -4538,8 +4538,8 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
               setCopReg(2,0,uVar11);
               setCopReg(2,0x800,uVar10);
               copFunction(2,0x180001);
-              plVar3 = (&debugImbueSoulReaverMenu.var_address)[(uVar10 >> 0x10) * 2];
-              lVar4 = (&debugImbueSoulReaverMenu.bit_mask)[(uVar10 >> 0x10) * 2];
+              lVar3 = (&DebugMenuLine_800c895c.bit_mask)[(uVar10 >> 0x10) * 2];
+              DVar4 = (&mcardMenu.type)[(uVar10 >> 0x10) * 2];
               uVar1 = *puVar26;
               uVar11 = getCopReg(2,0xe);
               *puVar8 = uVar11;
@@ -4552,8 +4552,8 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
                 iVar2 = modelFadeValue;
               }
               if ((uVar1 & 0x40000000) == 0) {
-                setCopReg(2,0,plVar3);
-                setCopReg(2,0x800,lVar4);
+                setCopReg(2,0,lVar3);
+                setCopReg(2,0x800,DVar4);
                 setCopReg(2,0x3000,uVar1);
                 if (iVar2 == 0) {
                   copFunction(2,0x108041b);
@@ -4573,8 +4573,8 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
                 setCopReg(2,0,uVar15);
                 setCopReg(2,0x800,uVar14);
                 copFunction(2,0x180001);
-                plVar3 = (&debugImbueSoulReaverMenu.var_address)[(uVar14 >> 0x10) * 2];
-                lVar4 = (&debugImbueSoulReaverMenu.bit_mask)[(uVar14 >> 0x10) * 2];
+                lVar3 = (&DebugMenuLine_800c895c.bit_mask)[(uVar14 >> 0x10) * 2];
+                DVar4 = (&mcardMenu.type)[(uVar14 >> 0x10) * 2];
                 uVar14 = *param_8;
                 uVar11 = getCopReg(2,0xe);
                 *param_2 = uVar11;
@@ -4583,8 +4583,8 @@ uint PIPE3D_TransformAnimatedInstanceVertices_S
                 uVar10 = getCopControlWord(2,0xf800);
                 uVar1 = 0x40000000;
                 if ((uVar14 & 0x40000000) == 0) {
-                  setCopReg(2,0,plVar3);
-                  setCopReg(2,0x800,lVar4);
+                  setCopReg(2,0,lVar3);
+                  setCopReg(2,0x800,DVar4);
                   setCopReg(2,0x3000,uVar14);
                   if (iVar2 == 0) {
                     copFunction(2,0x108041b);
@@ -5601,17 +5601,17 @@ DRAW_MFace3_fog_backface:
   if (uVar10 < uVar8) {
     if (uVar10 <= uVar12) {
       uVar3 = uVar9 & 0xffc0;
-      goto DMF_faded_tpage_calc;
+      goto DRAW_MFace3_fog_ft3;
     }
   }
   else {
     if (uVar8 <= uVar12) {
       uVar3 = uVar3 & 0xffc0;
-      goto DMF_faded_tpage_calc;
+      goto DRAW_MFace3_fog_ft3;
     }
   }
   uVar3 = uVar11 & 0xffc0;
-DMF_faded_tpage_calc:
+DRAW_MFace3_fog_ft3:
   cVar1 = (char)uVar3;
   *(char *)(unaff_s0 + 0xd) = (char)uVar8 - cVar1;
   *(char *)(unaff_s0 + 0xf) = (char)uVar10 - cVar1;
@@ -6441,7 +6441,7 @@ uint DRAW_SplitModel_S(int param_1,undefined4 param_2,int param_3,undefined4 *pa
   if (modelFadeValue != 0) {
     _DAT_1f800084 = 2;
   }
-  DAT_1f800088 = (DAT_800d0fb0 ^ 1) << 4 | 0x100;
+  DAT_1f800088 = (theCamera.core.vvNormalWorVecMat[0].m[2]._0_4_ ^ 1) << 4 | 0x100;
   if (draw_belowSplit == 0) {
     _DAT_1f800000 = (undefined *)0x800285c8;
   }
@@ -6454,7 +6454,7 @@ uint DRAW_SplitModel_S(int param_1,undefined4 param_2,int param_3,undefined4 *pa
   _DAT_1f800010 = &DSM_Outcode4;
   _DAT_1f800014 = &DSM_Outcode5;
   DAT_1f800018 = &DSM_Outcode6;
-  DAT_1f80001c = &DSM_Outcode7;
+  DAT_1f80001c = &DSM_Outcode7_Draw;
   DAT_1f80002c = 0;
   DAT_1f800034 = 0;
   DAT_1f80003c._0_2_ = 0;
@@ -6485,7 +6485,7 @@ uint DRAW_SplitModel_S(int param_1,undefined4 param_2,int param_3,undefined4 *pa
   _DAT_1f800010 = &DSM_Outcode4;
   _DAT_1f800014 = &DSM_Outcode5;
   DAT_1f800018 = &DSM_Outcode6;
-  DAT_1f80001c = &DSM_Outcode7;
+  DAT_1f80001c = &DSM_Outcode7_Draw;
   DAT_1f80002c = 0;
   DAT_1f800034 = 0;
   DAT_1f80003c._0_2_ = 0;

@@ -1,15 +1,16 @@
 #ifndef FX_H
 #define FX_H
 
+
 extern void FX_Init(struct _FXTracker *fxTracker); // 0x80041F54
 
 extern void FX_Die(struct _FX_PRIM *fxPrim, struct _FXTracker *fxTracker); // 0x80042034
 
-extern struct _FX_MATRIX *FX_GetMatrix(struct _FXTracker *fxTracker); // 0x800420A4
+extern struct _FX_MATRIX * FX_GetMatrix(struct _FXTracker *fxTracker); // 0x800420A4
 
-extern struct _FX_PRIM *FX_GetPrim(struct _FXTracker *fxTracker); // 0x800420F4
+extern struct _FX_PRIM * FX_GetPrim(struct _FXTracker *fxTracker); // 0x800420F4
 
-extern struct _FXParticle *FX_GetParticle(struct _Instance *instance, short startSegment); // 0x80042164
+extern struct _FXParticle * FX_GetParticle(struct _Instance *instance, short startSegment); // 0x80042164
 
 extern void FX_AniTexSetup(struct _FX_PRIM *fxPrim, struct _MFace *mface, struct _Model *model, struct _FXTracker *fxTracker); // 0x80042200
 
@@ -19,9 +20,9 @@ extern void FX_ShatterProcess(struct _FX_PRIM *fxPrim, struct _FXTracker *fxTrac
 
 extern void FX_DFacadeProcess(struct _FX_PRIM *fxPrim, struct _FXTracker *fxTracker); // 0x80042544
 
-extern struct _FX_PRIM *_FX_BuildSingleFaceWithModel(struct _Model *model, struct _MFace *mface, struct SVECTOR *center, struct SVECTOR *vel, struct SVECTOR *accl, struct _FXTracker *fxTracker, TDRFuncPtr__FX_BuildSingleFaceWithModel6fxSetup fxSetup, TDRFuncPtr__FX_BuildSingleFaceWithModel7fxProcess fxProcess, struct _FX_MATRIX *fxMatrix, int timeToLive); // 0x80042718
+extern struct _FX_PRIM * _FX_BuildSingleFaceWithModel(struct _Model *model, struct _MFace *mface, struct SVECTOR *center, struct SVECTOR *vel, struct SVECTOR *accl, struct _FXTracker *fxTracker, TDRFuncPtr__FX_BuildSingleFaceWithModel6fxSetup fxSetup, TDRFuncPtr__FX_BuildSingleFaceWithModel7fxProcess fxProcess, struct _FX_MATRIX *fxMatrix, int timeToLive); // 0x80042718
 
-extern struct _FX_PRIM *FX_BuildSingleFaceWithModel(struct _Model *model, struct _MFace *mface, struct SVECTOR *center, struct SVECTOR *vel, struct SVECTOR *accl, struct _FXTracker *fxTracker, TDRFuncPtr_FX_BuildSingleFaceWithModel6fxSetup fxSetup, TDRFuncPtr_FX_BuildSingleFaceWithModel7fxProcess fxProcess, int timeToLive); // 0x80042814
+extern struct _FX_PRIM * FX_BuildSingleFaceWithModel(struct _Model *model, struct _MFace *mface, struct SVECTOR *center, struct SVECTOR *vel, struct SVECTOR *accl, struct _FXTracker *fxTracker, TDRFuncPtr_FX_BuildSingleFaceWithModel6fxSetup fxSetup, TDRFuncPtr_FX_BuildSingleFaceWithModel7fxProcess fxProcess, int timeToLive); // 0x80042814
 
 extern void _FX_SetupLighting(struct _Instance *instance); // 0x80042864
 
@@ -59,13 +60,13 @@ extern void FX_WaterBubbleProcess(struct _FX_PRIM *fxPrim, struct _FXTracker *fx
 
 extern void FX_Sprite_Insert(struct NodeType *list, struct _FX_PRIM *fxPrim); // 0x80046030
 
-extern struct TextureMT3 *FX_GetTextureObject(struct Object *object, int modelnum, int texnum); // 0x80046068
+extern struct TextureMT3 * FX_GetTextureObject(struct Object *object, int modelnum, int texnum); // 0x80046068
 
 extern void FX_MakeWaterBubble(struct _SVector *position, struct _SVector *vel, struct _SVector *accl, long splashZ, struct __BubbleParams *BP); // 0x800460A4
 
 extern void FX_DrawScreenPoly(int transtype, unsigned long color, int zdepth); // 0x80046254
 
-extern struct POLY_GT4 *FX_SetupPolyGT4(int x1, int y1, int x2, int y2, int otz, struct TextureMT3 *texture, long color0, long color1, long color2, long color3); // 0x80046300
+extern struct POLY_GT4 * FX_SetupPolyGT4(int x1, int y1, int x2, int y2, int otz, struct TextureMT3 *texture, long color0, long color1, long color2, long color3); // 0x80046300
 
 extern void FX_MakeWarpArrow(int x, int y, int xsize, int ysize, int fade); // 0x80046404
 
@@ -81,7 +82,7 @@ extern void FX_WaterTrailProcess(struct _FX_PRIM *fxPrim, struct _FXTracker *fxT
 
 extern void FX_MakeWaterTrail(struct _Instance *instance, int depth); // 0x80046D60
 
-extern struct _FXRibbon *FX_StartRibbon(struct _Instance *instance, short startSegment, short endSegment, short type, int ribbonLifeTime, int faceLifeTime, int startFadeValue, long startColor, long endColor); // 0x80046F94
+extern struct _FXRibbon * FX_StartRibbon(struct _Instance *instance, short startSegment, short endSegment, short type, int ribbonLifeTime, int faceLifeTime, int startFadeValue, long startColor, long endColor); // 0x80046F94
 
 extern void FX_RibbonProcess(struct _FX_PRIM *fxPrim, struct _FXTracker *fxTracker); // 0x80047264
 
@@ -103,7 +104,7 @@ extern void FX_FlamePrimProcess(struct _FX_PRIM *fxPrim, struct _FXTracker *fxTr
 
 extern void FX_DFacadeParticleSetup(struct _FX_PRIM *fxPrim, struct SVECTOR *center, short halveWidth, short halveHeight, long color, struct SVECTOR *vel, struct SVECTOR *accl, struct _FXTracker *fxTracker, int timeToLive); // 0x80048364
 
-extern struct _FX_PRIM *FX_Dot(struct _SVector *location, struct _SVector *vel, struct _SVector *accel, int scale_speed, long color, long size, int lifetime, int texture_num); // 0x8004844C
+extern struct _FX_PRIM * FX_Dot(struct _SVector *location, struct _SVector *vel, struct _SVector *accel, int scale_speed, long color, long size, int lifetime, int texture_num); // 0x8004844C
 
 extern void FX_Blood(struct _SVector *location, struct _SVector *input_vel, struct _SVector *accel, int amount, long color, long size); // 0x800485B8
 
@@ -111,11 +112,11 @@ extern void FX_Blood2(struct _SVector *location, struct _SVector *input_vel, str
 
 extern void FX_Blood_Impale(struct _Instance *locinst, short locseg, struct _Instance *instance, short segment); // 0x80048720
 
-extern struct _FXParticle *FX_BloodCone(struct _Instance *instance, short startSegment, long time); // 0x800488EC
+extern struct _FXParticle * FX_BloodCone(struct _Instance *instance, short startSegment, long time); // 0x800488EC
 
-extern struct _FXParticle *FX_GetTorchParticle(struct _Instance *instance, short startSegment, int tex, int birthRadius, int num); // 0x800489B8
+extern struct _FXParticle * FX_GetTorchParticle(struct _Instance *instance, short startSegment, int tex, int birthRadius, int num); // 0x800489B8
 
-extern struct _FXParticle *FX_TorchFlame(struct _Instance *instance, short startSegment); // 0x80048A9C
+extern struct _FXParticle * FX_TorchFlame(struct _Instance *instance, short startSegment); // 0x80048A9C
 
 extern int FX_GetMorphFadeVal(); // 0x80048BF8
 
@@ -169,15 +170,15 @@ extern void FX_InsertGeneralEffect(void *ptr); // 0x8004AE80
 
 extern void FX_DeleteGeneralEffect(struct _FXGeneralEffect *effect); // 0x8004AE90
 
-extern struct _FXGlowEffect *FX_DoInstanceOneSegmentGlow(struct _Instance *instance, long segment, long *color, long numColors, long atuColorCycleRate, long width, long height); // 0x8004AF2C
+extern struct _FXGlowEffect * FX_DoInstanceOneSegmentGlow(struct _Instance *instance, long segment, long *color, long numColors, long atuColorCycleRate, long width, long height); // 0x8004AF2C
 
 extern void FX_SetGlowFades(struct _FXGlowEffect *glowEffect, int fadein, int fadeout); // 0x8004B08C
 
-extern struct _FXGlowEffect *FX_DoInstanceTwoSegmentGlow(struct _Instance *instance, long segment, long segmentEnd, long *color, long numColors, long atuColorCycleRate, long height); // 0x8004B0A8
+extern struct _FXGlowEffect * FX_DoInstanceTwoSegmentGlow(struct _Instance *instance, long segment, long segmentEnd, long *color, long numColors, long atuColorCycleRate, long height); // 0x8004B0A8
 
-extern struct _FXGlowEffect *FX_DoInstanceManySegmentGlow(struct _Instance *instance, long segment, long numSegments, long *color, long numColors, long atuColorCycleRate, long height); // 0x8004B100
+extern struct _FXGlowEffect * FX_DoInstanceManySegmentGlow(struct _Instance *instance, long segment, long numSegments, long *color, long numColors, long atuColorCycleRate, long height); // 0x8004B100
 
-extern struct _FXGlowEffect *FX_DoInstanceOneSegmentGlowWithTime(struct _Instance *instance, long segment, long *color, long numColors, long atuColorCycleRate, long width, long height, long ATULifeTime); // 0x8004B148
+extern struct _FXGlowEffect * FX_DoInstanceOneSegmentGlowWithTime(struct _Instance *instance, long segment, long *color, long numColors, long atuColorCycleRate, long width, long height, long ATULifeTime); // 0x8004B148
 
 extern void FX_StopAllGlowEffects(struct _Instance *instance, int fadeout_time); // 0x8004B190
 
@@ -189,7 +190,7 @@ extern void FX_DrawAllGeneralEffects(struct MATRIX *wcTransform, struct _VertexP
 
 extern void FX_ContinueBlastRing(struct _FXBlastringEffect *blast, struct _FXTracker *fxTracker); // 0x8004B738
 
-extern struct _FXBlastringEffect *FX_DoBlastRing(struct _Instance *instance, struct _SVector *position, struct MATRIX *mat, int segment, int radius, int endRadius, int colorChangeRadius, int size1, int size2, int vel, int accl, int height1, int height2, int height3, long startColor, long endColor, int pred_offset, int lifeTime, int sortInWorld); // 0x8004B94C
+extern struct _FXBlastringEffect * FX_DoBlastRing(struct _Instance *instance, struct _SVector *position, struct MATRIX *mat, int segment, int radius, int endRadius, int colorChangeRadius, int size1, int size2, int vel, int accl, int height1, int height2, int height3, long startColor, long endColor, int pred_offset, int lifeTime, int sortInWorld); // 0x8004B94C
 
 extern void FX_DrawBlastring(struct MATRIX *wcTransform, struct _FXBlastringEffect *blast); // 0x8004BB20
 
@@ -199,21 +200,21 @@ extern void FX_DrawFlash(struct _FXFlash *flash); // 0x8004BD3C
 
 extern void FX_RelocateGeneric(struct Object *object, long offset); // 0x8004BE50
 
-extern struct _FXParticle *FX_StartGenericParticle(struct _Instance *instance, int num, int segOverride, int lifeOverride, int InitFlag); // 0x8004BEEC
+extern struct _FXParticle * FX_StartGenericParticle(struct _Instance *instance, int num, int segOverride, int lifeOverride, int InitFlag); // 0x8004BEEC
 
 extern void FX_StartGenericRibbon(struct _Instance *instance, int num, int segOverride, int endOverride, int InitFlag); // 0x8004C23C
 
 extern void FX_StartGenericGlow(struct _Instance *instance, int num, int segOverride, int seg2Override, int InitFlag); // 0x8004C2F8
 
-extern struct _FXLightning *FX_CreateLightning(struct _Instance *instance, int lifeTime, int deg, int deg_inc, int width, int small_width, int segs, int sine_size, int variation, unsigned long color, unsigned long glow_color); // 0x8004C4A0
+extern struct _FXLightning * FX_CreateLightning(struct _Instance *instance, int lifeTime, int deg, int deg_inc, int width, int small_width, int segs, int sine_size, int variation, unsigned long color, unsigned long glow_color); // 0x8004C4A0
 
 extern void FX_SetLightingPos(struct _FXLightning *zap, struct _Instance *startInstance, int startSeg, struct _Position *startOffset, struct _Instance *endInstance, int endSeg, struct _Position *endOffset, int matrixSeg); // 0x8004C5A8
 
-extern struct _FXLightning *FX_StartGenericLightning(struct _Instance *instance, int num, int segOverride, int endSegOverride); // 0x8004C658
+extern struct _FXLightning * FX_StartGenericLightning(struct _Instance *instance, int num, int segOverride, int endSegOverride); // 0x8004C658
 
-extern struct _FXBlastringEffect *FX_StartGenericBlastring(struct _Instance *instance, int num, int segOverride, int matrixSegOverride); // 0x8004C7FC
+extern struct _FXBlastringEffect * FX_StartGenericBlastring(struct _Instance *instance, int num, int segOverride, int matrixSegOverride); // 0x8004C7FC
 
-extern struct _FXFlash *FX_StartGenericFlash(struct _Instance *instance, int num); // 0x8004CA04
+extern struct _FXFlash * FX_StartGenericFlash(struct _Instance *instance, int num); // 0x8004CA04
 
 extern long FX_GetHealthColor(int currentHealth); // 0x8004CAE4
 
@@ -255,7 +256,7 @@ extern void FX_DrawRing2(struct MATRIX *wcTransform, struct _SVector *position, 
 
 extern void FX_DrawFField(struct MATRIX *wcTransform, struct _FXForceFieldEffect *field); // 0x8004E61C
 
-extern struct _FXForceFieldEffect *FX_StartFField(struct _Instance *instance, int size, struct _Position *offset, int size_diff, int size_change, int deg_change, long color); // 0x8004E810
+extern struct _FXForceFieldEffect * FX_StartFField(struct _Instance *instance, int size, struct _Position *offset, int size_diff, int size_change, int deg_change, long color); // 0x8004E810
 
 extern void FX_EndFField(struct _Instance *instance); // 0x8004E8E4
 
@@ -268,6 +269,7 @@ extern void FX_LightHouse(struct MATRIX *wcTransform, unsigned long **ot, struct
 extern void FX_StartPassthruFX(struct _Instance *instance, struct _SVector *normal, struct _SVector *point); // 0x8004F46C
 
 extern void FX_EndPassthruFX(struct _Instance *instance); // 0x8004F548
+
 
 typedef void (*TDRFuncPtr__FX_Build5fxSetup)();
 
@@ -298,5 +300,8 @@ typedef void (*TDRFuncPtr_FX_BuildSingleFaceWithModel6fxSetup)();
 typedef void (*TDRFuncPtr_FX_BuildSingleFaceWithModel7fxProcess)();
 
 typedef void (*TDRFuncPtr_FX_SimpleQuadSetup1fxProcess)();
+
+
+
 
 #endif

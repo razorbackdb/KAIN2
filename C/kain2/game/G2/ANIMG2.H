@@ -1,13 +1,14 @@
 #ifndef ANIMG2_H
 #define ANIMG2_H
 
+
 extern enum _G2Bool_Enum G2Anim_Install(); // 0x800929A4
 
 extern void G2Anim_ResetInternalState(); // 0x80092A0C
 
 extern void G2Anim_Init(struct _G2Anim_Type *anim, struct _Model *modelData); // 0x80092A64
 
-extern struct _G2AnimSection_Type *G2Anim_AddSection(struct _G2Anim_Type *anim, int firstSegID, int segCount); // 0x80092AF8
+extern struct _G2AnimSection_Type * G2Anim_AddSection(struct _G2Anim_Type *anim, int firstSegID, int segCount); // 0x80092AF8
 
 extern void G2Anim_Free(struct _G2Anim_Type *anim); // 0x80092B94
 
@@ -17,7 +18,7 @@ extern void G2Anim_BuildTransforms(struct _G2Anim_Type *anim); // 0x80092CD0
 
 extern void G2Anim_UpdateStoredFrame(struct _G2Anim_Type *anim); // 0x80092D9C
 
-extern struct _G2AnimSection_Type *G2Anim_GetSectionWithSeg(struct _G2Anim_Type *anim, int segNumber); // 0x80092F18
+extern struct _G2AnimSection_Type * G2Anim_GetSectionWithSeg(struct _G2Anim_Type *anim, int segNumber); // 0x80092F18
 
 extern enum _G2Bool_Enum G2Anim_SegmentHasActiveChannels(struct _G2Anim_Type *anim, int segNumber, unsigned short chanMask); // 0x80092F84
 
@@ -53,12 +54,13 @@ extern void FooBar(struct _G2AnimSection_Type *section, struct _G2Anim_Type *ani
 
 extern void _G2AnimSection_UpdateStoredFrameFromData(struct _G2AnimSection_Type *section, struct _G2Anim_Type *anim); // 0x80094AD0
 
-extern struct _G2Anim_Type *_G2AnimSection_GetAnim(struct _G2AnimSection_Type *section); // 0x80094BA0
+extern struct _G2Anim_Type * _G2AnimSection_GetAnim(struct _G2AnimSection_Type *section); // 0x80094BA0
 
 extern void _G2AnimSection_TriggerEffects(struct _G2AnimSection_Type *section, short startTime, short endTime); // 0x80094BC0
 
 extern void _G2Anim_FreeChanStatusBlockList(struct _G2AnimChanStatusBlock_Type *block); // 0x80094CEC
 
 extern long _G2AnimAlphaTable_GetValue(struct _G2AnimAlphaTable_Type *table, long trueAlpha); // 0x80094D2C
+
 
 #endif

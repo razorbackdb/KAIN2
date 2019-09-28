@@ -1,6 +1,7 @@
 #ifndef HEALTH_H
 #define HEALTH_H
 
+
 extern void InitHealthSystem(); // 0x800A45C8
 
 extern void GainHealth(int data); // 0x800A4668
@@ -32,5 +33,6 @@ extern void RAZIEL_DebugHealthFillUp(); // 0x800A5024
 extern void RAZIEL_DebugManaFillUp(); // 0x800A5084
 
 extern void razPlayUnderworldSounds(struct _Instance *instance); // 0x800A50A4
+
 
 #endif

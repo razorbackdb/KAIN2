@@ -1,6 +1,7 @@
 #ifndef FONT_H
 #define FONT_H
 
+
 extern void FONT_MakeSpecialFogClut(int x, int y); // 0x8002CB74
 
 extern void FONT_Init(); // 0x8002CBF8
@@ -36,5 +37,6 @@ extern void FONT_FontPrintCentered(char *text, long y); // 0x8002D740
 extern void FONT_SetColorIndex(int color); // 0x8002D798
 
 extern void FONT_SetColorIndexCol(int color, int r, int g, int b); // 0x8002D7A4
+
 
 #endif

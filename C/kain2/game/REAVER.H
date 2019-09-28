@@ -1,6 +1,7 @@
 #ifndef REAVER_H
 #define REAVER_H
 
+
 extern void SoulReaverInit(struct _Instance *instance, struct GameTracker *gameTracker); // 0x80079D48
 
 extern void SoulReaverCollide(struct _Instance *instance, struct GameTracker *gameTracker); // 0x80079DE8
@@ -24,5 +25,6 @@ extern unsigned long REAVER_GetGlowColor(struct _Instance *instance); // 0x8007A
 extern void _SoulReaverAnimate(struct _Instance *instance); // 0x8007A6F4
 
 extern int SoulReaverFire(); // 0x8007A8B0
+
 
 #endif

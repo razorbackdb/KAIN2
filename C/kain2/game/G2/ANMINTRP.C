@@ -1,40 +1,44 @@
 #include "THISDUST.H"
 #include "ANMINTRP.H"
 
+
 // decompiled code
-// original method signature:
+// original method signature: 
 // void /*$ra*/ G2AnimSection_InterpToKeylistAtTime(struct _G2AnimSection_Type *section /*$s1*/, struct _G2AnimKeylist_Type *keylist /*$s7*/, int keylistID /*$fp*/, short targetTime /*stack -48*/, int duration /*stack 16*/)
-// line 49, offset 0x800920dc
-/* begin block 1 */
-// Start line: 50
-// Start offset: 0x800920DC
-// Variables:
-// 		struct _G2Anim_Type *anim; // $s5
-// 		struct _G2AnimInterpInfo_Type *interpInfo; // $s3
-// 		struct _G2AnimInterpStateBlock_Type *stateBlockList; // $t0
-// 		struct _G2AnimQuatInfo_Type *quatInfo; // $a2
-// 		unsigned long alarmFlags; // $s0
-// 		short elapsedTime; // $s4
-// 		int quatInfoChunkCount; // $a3
-// 		int segCount; // $s2
-/* end block 1 */
-// End offset: 0x80092390
-// End Line: 183
+ // line 49, offset 0x800920dc
+	/* begin block 1 */
+		// Start line: 50
+		// Start offset: 0x800920DC
+		// Variables:
+	// 		struct _G2Anim_Type *anim; // $s5
+	// 		struct _G2AnimInterpInfo_Type *interpInfo; // $s3
+	// 		struct _G2AnimInterpStateBlock_Type *stateBlockList; // $t0
+	// 		struct _G2AnimQuatInfo_Type *quatInfo; // $a2
+	// 		unsigned long alarmFlags; // $s0
+	// 		short elapsedTime; // $s4
+	// 		int quatInfoChunkCount; // $a3
+	// 		int segCount; // $s2
+	/* end block 1 */
+	// End offset: 0x80092390
+	// End Line: 183
 
-/* begin block 2 */
-// Start line: 98
-/* end block 2 */
-// End Line: 99
+	/* begin block 2 */
+		// Start line: 98
+	/* end block 2 */
+	// End Line: 99
 
-void G2AnimSection_InterpToKeylistAtTime(_G2AnimSection_Type *section, _G2AnimKeylist_Type *keylist, int keylistID,
-                                         short targetTime, int duration)
+void G2AnimSection_InterpToKeylistAtTime
+               (_G2AnimSection_Type *section,_G2AnimKeylist_Type *keylist,int keylistID,
+               short targetTime,int duration)
 
 {
   byte bVar1;
   short sVar2;
   short sVar3;
+  ushort uVar4;
   _G2Anim_Type *anim;
-  _G2AnimQuatInfo_Type *p_Var4;
+  uint segNumber;
+  _G2AnimQuatInfo_Type *type;
   int iVar5;
   _G2AnimInterpStateBlock_Type *p_Var6;
   ulong uVar7;
@@ -42,101 +46,90 @@ void G2AnimSection_InterpToKeylistAtTime(_G2AnimSection_Type *section, _G2AnimKe
   _G2AnimInterpInfo_Type *p_Var9;
   short sVar10;
   short sVar11;
-
-  if ((duration & 0xffffU) == 0)
-  {
-  LAB_80092174:
-    G2AnimSection_SwitchToKeylistAtTime(section, keylist, keylistID, targetTime);
+  
+  if ((duration & 0xffffU) == 0) {
+LAB_80092174:
+    G2AnimSection_SwitchToKeylistAtTime(section,keylist,keylistID,targetTime);
   }
-  else
-  {
+  else {
     anim = _G2AnimSection_GetAnim(section);
     p_Var9 = section->interpInfo;
     bVar1 = section->segCount;
     uVar8 = (uint)bVar1;
-    if (p_Var9->stateBlockList == (_G2AnimInterpStateBlock_Type *)0x0)
-    {
+    if (p_Var9->stateBlockList == (_G2AnimInterpStateBlock_Type *)0x0) {
       p_Var6 = _G2Anim_AllocateInterpStateBlockList(section);
-      if (p_Var6 == (_G2AnimInterpStateBlock_Type *)0x0)
-        goto LAB_80092174;
+      if (p_Var6 == (_G2AnimInterpStateBlock_Type *)0x0) goto LAB_80092174;
       section->interpInfo = (_G2AnimInterpInfo_Type *)0x0;
-      _G2AnimSection_UpdateStoredFrameFromData(section, anim);
+      _G2AnimSection_UpdateStoredFrameFromData(section,anim);
       section->interpInfo = p_Var9;
-      _G2AnimSection_SegValueToQuat(section, 0);
+      _G2AnimSection_SegValueToQuat(section,0);
     }
-    else
-    {
+    else {
       _G2AnimSection_InterpStateToQuat(section);
     }
     sVar10 = section->elapsedTime;
     uVar7 = section->alarmFlags;
     section->interpInfo = (_G2AnimInterpInfo_Type *)0x0;
-    G2AnimSection_SwitchToKeylistAtTime(section, keylist, keylistID, targetTime);
-    _G2AnimSection_UpdateStoredFrameFromData(section, anim);
+    G2AnimSection_SwitchToKeylistAtTime(section,keylist,keylistID,targetTime);
+    _G2AnimSection_UpdateStoredFrameFromData(section,anim);
+    segNumber = 1;
     section->interpInfo = p_Var9;
     section->alarmFlags = uVar7;
     section->elapsedTime = sVar10;
-    _G2AnimSection_SegValueToQuat(section, 1);
+    _G2AnimSection_SegValueToQuat(section,1);
     p_Var6 = p_Var9->stateBlockList;
     iVar5 = 4;
-    p_Var4 = p_Var6->quatInfo;
+    type = p_Var6->quatInfo;
     if ((ushort)(p_Var6->quatInfo[0].destTrans.z |
-                 p_Var6->quatInfo[0].destTrans.x | p_Var6->quatInfo[0].destTrans.y) == 0)
-    {
+                p_Var6->quatInfo[0].destTrans.x | p_Var6->quatInfo[0].destTrans.y) == 0) {
       p_Var6->quatInfo[0].srcTrans.x = 0;
       p_Var6->quatInfo[0].srcTrans.y = 0;
       p_Var6->quatInfo[0].srcTrans.z = 0;
     }
-    if (bVar1 != 0)
-    {
-      do
-      {
+    if (bVar1 != 0) {
+      do {
         uVar8 = uVar8 - 1;
         iVar5 = iVar5 + -1;
-        sVar11 = (p_Var4->srcScale).y;
-        (p_Var4->destScale).x = (p_Var4->destScale).x - (p_Var4->srcScale).x;
-        sVar2 = (p_Var4->srcScale).z;
-        (p_Var4->destScale).y = (p_Var4->destScale).y - sVar11;
-        sVar11 = (p_Var4->destTrans).x;
-        sVar3 = (p_Var4->srcTrans).x;
-        (p_Var4->destScale).z = (p_Var4->destScale).z - sVar2;
-        sVar2 = (p_Var4->srcTrans).y;
-        (p_Var4->destTrans).x = sVar11 - sVar3;
-        sVar11 = (p_Var4->srcTrans).z;
-        (p_Var4->destTrans).y = (p_Var4->destTrans).y - sVar2;
-        (p_Var4->destTrans).z = (p_Var4->destTrans).z - sVar11;
-        p_Var4 = p_Var4 + 1;
-        if (iVar5 == 0)
-        {
+        sVar11 = (type->srcScale).y;
+        (type->destScale).x = (type->destScale).x - (type->srcScale).x;
+        sVar2 = (type->srcScale).z;
+        (type->destScale).y = (type->destScale).y - sVar11;
+        sVar11 = (type->destTrans).x;
+        sVar3 = (type->srcTrans).x;
+        (type->destScale).z = (type->destScale).z - sVar2;
+        sVar2 = (type->srcTrans).y;
+        (type->destTrans).x = sVar11 - sVar3;
+        uVar4 = (type->srcTrans).z;
+        segNumber = (uint)uVar4;
+        (type->destTrans).y = (type->destTrans).y - sVar2;
+        (type->destTrans).z = (type->destTrans).z - uVar4;
+        type = type + 1;
+        if (iVar5 == 0) {
           p_Var6 = p_Var6->next;
           iVar5 = 4;
-          p_Var4 = p_Var6->quatInfo;
+          type = p_Var6->quatInfo;
         }
       } while (0 < (int)uVar8);
     }
     p_Var9->targetTime = targetTime;
     sVar11 = (short)duration;
     p_Var9->duration = sVar11;
-    if (((section->flags & 2) == 0) && ((section->alarmFlags & 3) != 0))
-    {
+    if (((section->flags & 2) == 0) && ((section->alarmFlags & 3) != 0)) {
       iVar5 = (int)sVar10 % (uint)section->keylist->s0TailTime + 1;
       sVar10 = (short)iVar5;
-      if (sVar11 < iVar5)
-      {
+      if (sVar11 < iVar5) {
         sVar10 = sVar11;
       }
       section->elapsedTime = sVar10;
     }
-    else
-    {
+    else {
       section->elapsedTime = 0;
     }
     section->keylist = keylist;
     section->keylistID = (ushort)keylistID;
     section->storedTime = -keylist->timePerKey;
-    if ((section->flags & 2) != 0)
-    {
-      G2AnimSection_SetLoopRangeAll(section);
+    if ((section->flags & 2) != 0) {
+      G2Anim_IsControllerInterpolating((_G2Anim_Type *)section,segNumber,(int)type);
     }
     G2Anim_SetUnpaused((_G2Anim_Type *)section);
     section->flags = section->flags & 0x7f;
@@ -148,74 +141,76 @@ void G2AnimSection_InterpToKeylistAtTime(_G2AnimSection_Type *section, _G2AnimKe
   return;
 }
 
+
+
 // decompiled code
-// original method signature:
+// original method signature: 
 // void /*$ra*/ _G2AnimSection_UpdateStoredFrameFromQuat(struct _G2AnimSection_Type *section /*$s7*/)
-// line 193, offset 0x800923c0
-/* begin block 1 */
-// Start line: 194
-// Start offset: 0x800923C0
-// Variables:
-// 		struct _G2AnimSegValue_Type *segValue; // $s1
-// 		struct _G2AnimInterpInfo_Type *interpInfo; // $s0
-// 		struct _G2AnimInterpStateBlock_Type *stateBlockList; // $s3
-// 		struct _G2AnimQuatInfo_Type *quatInfo; // $s0
-// 		long alpha; // $s5
-// 		struct _G2Quat_Type newQuat; // stack offset -48
-// 		int quatInfoChunkCount; // $s4
-// 		int segCount; // $s6
+ // line 193, offset 0x800923c0
+	/* begin block 1 */
+		// Start line: 194
+		// Start offset: 0x800923C0
+		// Variables:
+	// 		struct _G2AnimSegValue_Type *segValue; // $s1
+	// 		struct _G2AnimInterpInfo_Type *interpInfo; // $s0
+	// 		struct _G2AnimInterpStateBlock_Type *stateBlockList; // $s3
+	// 		struct _G2AnimQuatInfo_Type *quatInfo; // $s0
+	// 		long alpha; // $s5
+	// 		struct _G2Quat_Type newQuat; // stack offset -48
+	// 		int quatInfoChunkCount; // $s4
+	// 		int segCount; // $s6
 
-/* begin block 1.1 */
-// Start line: 223
-// Start offset: 0x8009244C
-// Variables:
-// 		struct _G2Quat_Type *source; // $fp
-// 		struct _G2Quat_Type *dest; // $s1
+		/* begin block 1.1 */
+			// Start line: 223
+			// Start offset: 0x8009244C
+			// Variables:
+		// 		struct _G2Quat_Type *source; // $fp
+		// 		struct _G2Quat_Type *dest; // $s1
 
-/* begin block 1.1.1 */
-// Start line: 223
-// Start offset: 0x8009244C
-// Variables:
-// 		unsigned long zw; // $v1
-// 		unsigned long xy; // $v0
-/* end block 1.1.1 */
-// End offset: 0x8009244C
-// End Line: 223
-/* end block 1.1 */
-// End offset: 0x8009244C
-// End Line: 223
+			/* begin block 1.1.1 */
+				// Start line: 223
+				// Start offset: 0x8009244C
+				// Variables:
+			// 		unsigned long zw; // $v1
+			// 		unsigned long xy; // $v0
+			/* end block 1.1.1 */
+			// End offset: 0x8009244C
+			// End Line: 223
+		/* end block 1.1 */
+		// End offset: 0x8009244C
+		// End Line: 223
 
-/* begin block 1.2 */
-// Start line: 223
-// Start offset: 0x8009244C
-// Variables:
-// 		struct _G2SVector3_Type *dest; // $a0
-// 		struct _G2SVector3_Type *base; // $v0
-// 		struct _G2SVector3_Type *offset; // $v1
-// 		long alpha; // $s5
-/* end block 1.2 */
-// End offset: 0x8009244C
-// End Line: 223
+		/* begin block 1.2 */
+			// Start line: 223
+			// Start offset: 0x8009244C
+			// Variables:
+		// 		struct _G2SVector3_Type *dest; // $a0
+		// 		struct _G2SVector3_Type *base; // $v0
+		// 		struct _G2SVector3_Type *offset; // $v1
+		// 		long alpha; // $s5
+		/* end block 1.2 */
+		// End offset: 0x8009244C
+		// End Line: 223
 
-/* begin block 1.3 */
-// Start line: 223
-// Start offset: 0x8009244C
-// Variables:
-// 		struct _G2SVector3_Type *dest; // $a0
-// 		struct _G2SVector3_Type *base; // $v0
-// 		struct _G2SVector3_Type *offset; // $v1
-// 		long alpha; // $s5
-/* end block 1.3 */
-// End offset: 0x8009244C
-// End Line: 223
-/* end block 1 */
-// End offset: 0x8009256C
-// End Line: 252
+		/* begin block 1.3 */
+			// Start line: 223
+			// Start offset: 0x8009244C
+			// Variables:
+		// 		struct _G2SVector3_Type *dest; // $a0
+		// 		struct _G2SVector3_Type *base; // $v0
+		// 		struct _G2SVector3_Type *offset; // $v1
+		// 		long alpha; // $s5
+		/* end block 1.3 */
+		// End offset: 0x8009244C
+		// End Line: 223
+	/* end block 1 */
+	// End offset: 0x8009256C
+	// End Line: 252
 
-/* begin block 2 */
-// Start line: 434
-/* end block 2 */
-// End Line: 435
+	/* begin block 2 */
+		// Start line: 434
+	/* end block 2 */
+	// End Line: 435
 
 void _G2AnimSection_UpdateStoredFrameFromQuat(_G2AnimSection_Type *section)
 
@@ -235,57 +230,55 @@ void _G2AnimSection_UpdateStoredFrameFromQuat(_G2AnimSection_Type *section)
   uint uVar11;
   undefined4 local_30;
   undefined4 local_2c;
-
+  
   p_Var6 = section->interpInfo;
   iVar10 = 4;
   bVar1 = section->segCount;
   uVar11 = (uint)bVar1;
-  ratio = _G2AnimAlphaTable_GetValue(p_Var6->alphaTable, ((int)section->elapsedTime << 0xc) / (int)p_Var6->duration);
+  ratio = _G2AnimAlphaTable_GetValue
+                    (p_Var6->alphaTable,((int)section->elapsedTime << 0xc) / (int)p_Var6->duration);
   p_Var9 = p_Var6->stateBlockList;
   iVar2 = (uint)section->firstSeg * 0x18;
   puVar7 = (undefined4 *)(&_segValues + iVar2);
   quatA = p_Var9->quatInfo;
-  if (bVar1 != 0)
-  {
+  if (bVar1 != 0) {
     puVar8 = (undefined2 *)(&CHAR____800d49f2 + iVar2);
-    do
-    {
-      G2Quat_Slerp_VM(ratio, (_G2Quat_Type *)quatA, &quatA->destQuat, (_G2Quat_Type *)&local_30, 0);
+    do {
+      G2Quat_Slerp_VM(ratio,(_G2Quat_Type *)quatA,&quatA->destQuat,(_G2Quat_Type *)&local_30,0);
       *puVar7 = local_30;
       *(undefined4 *)(puVar8 + -9) = local_2c;
-      setCopReg(2, 0xc800, (uint)(ushort)(quatA->srcScale).x);
-      setCopReg(2, 0xd000, (uint)(ushort)(quatA->srcScale).y);
-      setCopReg(2, 0xd800, (uint)(ushort)(quatA->srcScale).z);
-      setCopReg(2, 0x4800, (uint)(ushort)(quatA->destScale).x);
-      setCopReg(2, 0x5000, (uint)(ushort)(quatA->destScale).y);
-      setCopReg(2, 0x5800, (uint)(ushort)(quatA->destScale).z);
-      setCopReg(2, 0x4000, ratio);
-      copFunction(2, 0x1a8003e);
-      uVar3 = getCopReg(2, 0xc800);
-      uVar4 = getCopReg(2, 0xd000);
-      uVar5 = getCopReg(2, 0xd800);
+      setCopReg(2,0xc800,(uint)(ushort)(quatA->srcScale).x);
+      setCopReg(2,0xd000,(uint)(ushort)(quatA->srcScale).y);
+      setCopReg(2,0xd800,(uint)(ushort)(quatA->srcScale).z);
+      setCopReg(2,0x4800,(uint)(ushort)(quatA->destScale).x);
+      setCopReg(2,0x5000,(uint)(ushort)(quatA->destScale).y);
+      setCopReg(2,0x5800,(uint)(ushort)(quatA->destScale).z);
+      setCopReg(2,0x4000,ratio);
+      copFunction(2,0x1a8003e);
+      uVar3 = getCopReg(2,0xc800);
+      uVar4 = getCopReg(2,0xd000);
+      uVar5 = getCopReg(2,0xd800);
       *(short *)(puVar7 + 2) = (short)uVar3;
       *(undefined2 *)((int)puVar7 + 10) = (short)uVar4;
       *(short *)(puVar7 + 3) = (short)uVar5;
-      setCopReg(2, 0xc800, (uint)(ushort)(quatA->srcTrans).x);
-      setCopReg(2, 0xd000, (uint)(ushort)(quatA->srcTrans).y);
-      setCopReg(2, 0xd800, (uint)(ushort)(quatA->srcTrans).z);
-      setCopReg(2, 0x4800, (uint)(ushort)(quatA->destTrans).x);
-      setCopReg(2, 0x5000, (uint)(ushort)(quatA->destTrans).y);
-      setCopReg(2, 0x5800, (uint)(ushort)(quatA->destTrans).z);
-      setCopReg(2, 0x4000, ratio);
-      copFunction(2, 0x1a8003e);
-      uVar3 = getCopReg(2, 0xc800);
-      uVar4 = getCopReg(2, 0xd000);
-      uVar5 = getCopReg(2, 0xd800);
+      setCopReg(2,0xc800,(uint)(ushort)(quatA->srcTrans).x);
+      setCopReg(2,0xd000,(uint)(ushort)(quatA->srcTrans).y);
+      setCopReg(2,0xd800,(uint)(ushort)(quatA->srcTrans).z);
+      setCopReg(2,0x4800,(uint)(ushort)(quatA->destTrans).x);
+      setCopReg(2,0x5000,(uint)(ushort)(quatA->destTrans).y);
+      setCopReg(2,0x5800,(uint)(ushort)(quatA->destTrans).z);
+      setCopReg(2,0x4000,ratio);
+      copFunction(2,0x1a8003e);
+      uVar3 = getCopReg(2,0xc800);
+      uVar4 = getCopReg(2,0xd000);
+      uVar5 = getCopReg(2,0xd800);
       *(short *)(puVar7 + 4) = (short)uVar3;
       *(undefined2 *)((int)puVar7 + 0x12) = (short)uVar4;
       *(short *)(puVar7 + 5) = (short)uVar5;
       uVar11 = uVar11 - 1;
       iVar10 = iVar10 + -1;
       quatA = quatA + 1;
-      if (iVar10 == 0)
-      {
+      if (iVar10 == 0) {
         p_Var9 = p_Var9->next;
         iVar10 = 4;
         quatA = p_Var9->quatInfo;
@@ -300,71 +293,73 @@ void _G2AnimSection_UpdateStoredFrameFromQuat(_G2AnimSection_Type *section)
   return;
 }
 
+
+
 // decompiled code
-// original method signature:
+// original method signature: 
 // void /*$ra*/ _G2AnimSection_InterpStateToQuat(struct _G2AnimSection_Type *section /*$a0*/)
-// line 258, offset 0x800925b0
-/* begin block 1 */
-// Start line: 259
-// Start offset: 0x800925B0
-// Variables:
-// 		struct _G2AnimInterpInfo_Type *interpInfo; // $s0
-// 		struct _G2AnimInterpStateBlock_Type *stateBlockList; // $s3
-// 		struct _G2AnimQuatInfo_Type *quatInfo; // $s0
-// 		long alpha; // $s1
-// 		struct _G2Quat_Type newQuat; // stack offset -40
-// 		int quatInfoChunkCount; // $s2
-// 		int segCount; // $s4
+ // line 258, offset 0x800925b0
+	/* begin block 1 */
+		// Start line: 259
+		// Start offset: 0x800925B0
+		// Variables:
+	// 		struct _G2AnimInterpInfo_Type *interpInfo; // $s0
+	// 		struct _G2AnimInterpStateBlock_Type *stateBlockList; // $s3
+	// 		struct _G2AnimQuatInfo_Type *quatInfo; // $s0
+	// 		long alpha; // $s1
+	// 		struct _G2Quat_Type newQuat; // stack offset -40
+	// 		int quatInfoChunkCount; // $s2
+	// 		int segCount; // $s4
 
-/* begin block 1.1 */
-// Start line: 288
-// Start offset: 0x80092610
-// Variables:
-// 		struct _G2Quat_Type *source; // $s5
-// 		struct _G2Quat_Type *dest; // $s0
+		/* begin block 1.1 */
+			// Start line: 288
+			// Start offset: 0x80092610
+			// Variables:
+		// 		struct _G2Quat_Type *source; // $s5
+		// 		struct _G2Quat_Type *dest; // $s0
 
-/* begin block 1.1.1 */
-// Start line: 288
-// Start offset: 0x80092610
-// Variables:
-// 		unsigned long zw; // $v1
-// 		unsigned long xy; // $v0
-/* end block 1.1.1 */
-// End offset: 0x80092610
-// End Line: 288
-/* end block 1.1 */
-// End offset: 0x80092610
-// End Line: 288
+			/* begin block 1.1.1 */
+				// Start line: 288
+				// Start offset: 0x80092610
+				// Variables:
+			// 		unsigned long zw; // $v1
+			// 		unsigned long xy; // $v0
+			/* end block 1.1.1 */
+			// End offset: 0x80092610
+			// End Line: 288
+		/* end block 1.1 */
+		// End offset: 0x80092610
+		// End Line: 288
 
-/* begin block 1.2 */
-// Start line: 288
-// Start offset: 0x80092610
-// Variables:
-// 		struct _G2SVector3_Type *dest; // $v1
-// 		struct _G2SVector3_Type *offset; // $v0
-// 		long alpha; // $s1
-/* end block 1.2 */
-// End offset: 0x80092610
-// End Line: 288
+		/* begin block 1.2 */
+			// Start line: 288
+			// Start offset: 0x80092610
+			// Variables:
+		// 		struct _G2SVector3_Type *dest; // $v1
+		// 		struct _G2SVector3_Type *offset; // $v0
+		// 		long alpha; // $s1
+		/* end block 1.2 */
+		// End offset: 0x80092610
+		// End Line: 288
 
-/* begin block 1.3 */
-// Start line: 288
-// Start offset: 0x80092610
-// Variables:
-// 		struct _G2SVector3_Type *dest; // $v1
-// 		struct _G2SVector3_Type *offset; // $v0
-// 		long alpha; // $s1
-/* end block 1.3 */
-// End offset: 0x80092610
-// End Line: 288
-/* end block 1 */
-// End offset: 0x8009271C
-// End Line: 313
+		/* begin block 1.3 */
+			// Start line: 288
+			// Start offset: 0x80092610
+			// Variables:
+		// 		struct _G2SVector3_Type *dest; // $v1
+		// 		struct _G2SVector3_Type *offset; // $v0
+		// 		long alpha; // $s1
+		/* end block 1.3 */
+		// End offset: 0x80092610
+		// End Line: 288
+	/* end block 1 */
+	// End offset: 0x8009271C
+	// End Line: 313
 
-/* begin block 2 */
-// Start line: 582
-/* end block 2 */
-// End Line: 583
+	/* begin block 2 */
+		// Start line: 582
+	/* end block 2 */
+	// End Line: 583
 
 void _G2AnimSection_InterpStateToQuat(_G2AnimSection_Type *section)
 
@@ -381,54 +376,52 @@ void _G2AnimSection_InterpStateToQuat(_G2AnimSection_Type *section)
   uint uVar8;
   undefined4 local_28;
   undefined4 local_24;
-
+  
   p_Var5 = section->interpInfo;
   iVar6 = 4;
   bVar1 = section->segCount;
   uVar8 = (uint)bVar1;
-  ratio = _G2AnimAlphaTable_GetValue(p_Var5->alphaTable, ((int)section->elapsedTime << 0xc) / (int)p_Var5->duration);
+  ratio = _G2AnimAlphaTable_GetValue
+                    (p_Var5->alphaTable,((int)section->elapsedTime << 0xc) / (int)p_Var5->duration);
   p_Var7 = p_Var5->stateBlockList;
   quatA = p_Var7->quatInfo;
-  if (bVar1 != 0)
-  {
-    do
-    {
-      G2Quat_Slerp_VM(ratio, (_G2Quat_Type *)quatA, &quatA->destQuat, (_G2Quat_Type *)&local_28, 0);
+  if (bVar1 != 0) {
+    do {
+      G2Quat_Slerp_VM(ratio,(_G2Quat_Type *)quatA,&quatA->destQuat,(_G2Quat_Type *)&local_28,0);
       *(undefined4 *)&(quatA->srcQuat).z = local_24;
       *(undefined4 *)&quatA->srcQuat = local_28;
-      setCopReg(2, 0xc800, (uint)(ushort)(quatA->srcScale).x);
-      setCopReg(2, 0xd000, (uint)(ushort)(quatA->srcScale).y);
-      setCopReg(2, 0xd800, (uint)(ushort)(quatA->srcScale).z);
-      setCopReg(2, 0x4800, (uint)(ushort)(quatA->destScale).x);
-      setCopReg(2, 0x5000, (uint)(ushort)(quatA->destScale).y);
-      setCopReg(2, 0x5800, (uint)(ushort)(quatA->destScale).z);
-      setCopReg(2, 0x4000, ratio);
-      copFunction(2, 0x1a8003e);
-      uVar2 = getCopReg(2, 0xc800);
-      uVar3 = getCopReg(2, 0xd000);
-      uVar4 = getCopReg(2, 0xd800);
+      setCopReg(2,0xc800,(uint)(ushort)(quatA->srcScale).x);
+      setCopReg(2,0xd000,(uint)(ushort)(quatA->srcScale).y);
+      setCopReg(2,0xd800,(uint)(ushort)(quatA->srcScale).z);
+      setCopReg(2,0x4800,(uint)(ushort)(quatA->destScale).x);
+      setCopReg(2,0x5000,(uint)(ushort)(quatA->destScale).y);
+      setCopReg(2,0x5800,(uint)(ushort)(quatA->destScale).z);
+      setCopReg(2,0x4000,ratio);
+      copFunction(2,0x1a8003e);
+      uVar2 = getCopReg(2,0xc800);
+      uVar3 = getCopReg(2,0xd000);
+      uVar4 = getCopReg(2,0xd800);
       (quatA->srcScale).x = (short)uVar2;
       (quatA->srcScale).y = (short)uVar3;
       (quatA->srcScale).z = (short)uVar4;
-      setCopReg(2, 0xc800, (uint)(ushort)(quatA->srcTrans).x);
-      setCopReg(2, 0xd000, (uint)(ushort)(quatA->srcTrans).y);
-      setCopReg(2, 0xd800, (uint)(ushort)(quatA->srcTrans).z);
-      setCopReg(2, 0x4800, (uint)(ushort)(quatA->destTrans).x);
-      setCopReg(2, 0x5000, (uint)(ushort)(quatA->destTrans).y);
-      setCopReg(2, 0x5800, (uint)(ushort)(quatA->destTrans).z);
-      setCopReg(2, 0x4000, ratio);
-      copFunction(2, 0x1a8003e);
-      uVar2 = getCopReg(2, 0xc800);
-      uVar3 = getCopReg(2, 0xd000);
-      uVar4 = getCopReg(2, 0xd800);
+      setCopReg(2,0xc800,(uint)(ushort)(quatA->srcTrans).x);
+      setCopReg(2,0xd000,(uint)(ushort)(quatA->srcTrans).y);
+      setCopReg(2,0xd800,(uint)(ushort)(quatA->srcTrans).z);
+      setCopReg(2,0x4800,(uint)(ushort)(quatA->destTrans).x);
+      setCopReg(2,0x5000,(uint)(ushort)(quatA->destTrans).y);
+      setCopReg(2,0x5800,(uint)(ushort)(quatA->destTrans).z);
+      setCopReg(2,0x4000,ratio);
+      copFunction(2,0x1a8003e);
+      uVar2 = getCopReg(2,0xc800);
+      uVar3 = getCopReg(2,0xd000);
+      uVar4 = getCopReg(2,0xd800);
       (quatA->srcTrans).x = (short)uVar2;
       (quatA->srcTrans).y = (short)uVar3;
       (quatA->srcTrans).z = (short)uVar4;
       uVar8 = uVar8 - 1;
       iVar6 = iVar6 + -1;
       quatA = quatA + 1;
-      if (iVar6 == 0)
-      {
+      if (iVar6 == 0) {
         p_Var7 = p_Var7->next;
         iVar6 = 4;
         quatA = p_Var7->quatInfo;
@@ -438,31 +431,33 @@ void _G2AnimSection_InterpStateToQuat(_G2AnimSection_Type *section)
   return;
 }
 
+
+
 // decompiled code
-// original method signature:
+// original method signature: 
 // void /*$ra*/ _G2AnimSection_SegValueToQuat(struct _G2AnimSection_Type *section /*$a0*/, int zeroOne /*$s6*/)
-// line 318, offset 0x80092740
-/* begin block 1 */
-// Start line: 319
-// Start offset: 0x80092740
-// Variables:
-// 		struct _G2AnimSegValue_Type *segValue; // $s2
-// 		struct _G2AnimInterpInfo_Type *interpInfo; // $v0
-// 		struct _G2AnimInterpStateBlock_Type *stateBlockList; // $s4
-// 		struct _G2AnimQuatInfo_Type *quatInfo; // $s0
-// 		struct _G2EulerAngles_Type preQuat; // stack offset -40
-// 		int quatInfoChunkCount; // $s3
-// 		int segCount; // $s5
-/* end block 1 */
-// End offset: 0x800928A4
-// End Line: 384
+ // line 318, offset 0x80092740
+	/* begin block 1 */
+		// Start line: 319
+		// Start offset: 0x80092740
+		// Variables:
+	// 		struct _G2AnimSegValue_Type *segValue; // $s2
+	// 		struct _G2AnimInterpInfo_Type *interpInfo; // $v0
+	// 		struct _G2AnimInterpStateBlock_Type *stateBlockList; // $s4
+	// 		struct _G2AnimQuatInfo_Type *quatInfo; // $s0
+	// 		struct _G2EulerAngles_Type preQuat; // stack offset -40
+	// 		int quatInfoChunkCount; // $s3
+	// 		int segCount; // $s5
+	/* end block 1 */
+	// End offset: 0x800928A4
+	// End Line: 384
 
-/* begin block 2 */
-// Start line: 716
-/* end block 2 */
-// End Line: 717
+	/* begin block 2 */
+		// Start line: 716
+	/* end block 2 */
+	// End Line: 717
 
-void _G2AnimSection_SegValueToQuat(_G2AnimSection_Type *section, int zeroOne)
+void _G2AnimSection_SegValueToQuat(_G2AnimSection_Type *section,int zeroOne)
 
 {
   int iVar1;
@@ -476,25 +471,22 @@ void _G2AnimSection_SegValueToQuat(_G2AnimSection_Type *section, int zeroOne)
   ushort local_26;
   ushort local_24;
   undefined2 local_22;
-
+  
   iVar5 = 4;
   uVar7 = (uint)section->segCount;
   p_Var6 = section->interpInfo->stateBlockList;
   iVar1 = (uint)section->firstSeg * 0x18;
   puVar4 = (ushort *)(&_segValues + iVar1);
   p_Var2 = p_Var6->quatInfo;
-  if (section->segCount != 0)
-  {
+  if (section->segCount != 0) {
     psVar3 = (short *)(&CHAR____800d49f0 + iVar1);
-    do
-    {
+    do {
       local_28 = *puVar4 & 0xfff;
       local_26 = psVar3[-9] & 0xfff;
       local_22 = 0;
       local_24 = psVar3[-8] & 0xfff;
-      if (zeroOne == 0)
-      {
-        G2Quat_FromEuler_S((int)p_Var2, (short *)&local_28);
+      if (zeroOne == 0) {
+        G2Quat_FromEuler_S((__ReaverData *)p_Var2,(short *)&local_28);
         (p_Var2->srcScale).x = psVar3[-6];
         (p_Var2->srcScale).y = psVar3[-5];
         (p_Var2->srcScale).z = psVar3[-4];
@@ -502,9 +494,8 @@ void _G2AnimSection_SegValueToQuat(_G2AnimSection_Type *section, int zeroOne)
         (p_Var2->srcTrans).y = psVar3[-1];
         (p_Var2->srcTrans).z = *psVar3;
       }
-      else
-      {
-        G2Quat_FromEuler_S((int)&p_Var2->destQuat, (short *)&local_28);
+      else {
+        G2Quat_FromEuler_S((__ReaverData *)&p_Var2->destQuat,(short *)&local_28);
         (p_Var2->destScale).x = psVar3[-6];
         (p_Var2->destScale).y = psVar3[-5];
         (p_Var2->destScale).z = psVar3[-4];
@@ -517,8 +508,7 @@ void _G2AnimSection_SegValueToQuat(_G2AnimSection_Type *section, int zeroOne)
       uVar7 = uVar7 - 1;
       iVar5 = iVar5 + -1;
       p_Var2 = p_Var2 + 1;
-      if (iVar5 == 0)
-      {
+      if (iVar5 == 0) {
         p_Var6 = p_Var6->next;
         iVar5 = 4;
         p_Var2 = p_Var6->quatInfo;
@@ -528,50 +518,48 @@ void _G2AnimSection_SegValueToQuat(_G2AnimSection_Type *section, int zeroOne)
   return;
 }
 
+
+
 // decompiled code
-// original method signature:
+// original method signature: 
 // struct _G2AnimInterpStateBlock_Type * /*$ra*/ _G2Anim_AllocateInterpStateBlockList(struct _G2AnimSection_Type *section /*$v0*/)
-// line 388, offset 0x800928cc
-/* begin block 1 */
-// Start line: 389
-// Start offset: 0x800928CC
-// Variables:
-// 		struct _G2AnimInterpInfo_Type *interpInfo; // $s2
-// 		struct _G2AnimInterpStateBlock_Type *newBlock; // $s1
-// 		int segCount; // $s0
-/* end block 1 */
-// End offset: 0x8009294C
-// End Line: 425
+ // line 388, offset 0x800928cc
+	/* begin block 1 */
+		// Start line: 389
+		// Start offset: 0x800928CC
+		// Variables:
+	// 		struct _G2AnimInterpInfo_Type *interpInfo; // $s2
+	// 		struct _G2AnimInterpStateBlock_Type *newBlock; // $s1
+	// 		int segCount; // $s0
+	/* end block 1 */
+	// End offset: 0x8009294C
+	// End Line: 425
 
-/* begin block 2 */
-// Start line: 891
-/* end block 2 */
-// End Line: 892
+	/* begin block 2 */
+		// Start line: 891
+	/* end block 2 */
+	// End Line: 892
 
-_G2AnimInterpStateBlock_Type *_G2Anim_AllocateInterpStateBlockList(_G2AnimSection_Type *section)
+_G2AnimInterpStateBlock_Type * _G2Anim_AllocateInterpStateBlockList(_G2AnimSection_Type *section)
 
 {
   _G2AnimInterpStateBlock_Type *p_Var1;
   _G2AnimInterpStateBlock_Type *p_Var2;
   uint uVar3;
   _G2AnimInterpInfo_Type *p_Var4;
-
+  
   uVar3 = (uint)section->segCount;
   p_Var4 = section->interpInfo;
   p_Var2 = (_G2AnimInterpStateBlock_Type *)G2PoolMem_Allocate(&_interpStateBlockPool);
   p_Var4->stateBlockList = p_Var2;
-  if (p_Var2 == (_G2AnimInterpStateBlock_Type *)0x0)
-  {
-  LAB_80092948:
+  if (p_Var2 == (_G2AnimInterpStateBlock_Type *)0x0) {
+LAB_80092948:
     p_Var2 = p_Var4->stateBlockList;
   }
-  else
-  {
-    do
-    {
+  else {
+    do {
       uVar3 = uVar3 - 4;
-      if ((int)uVar3 < 1)
-      {
+      if ((int)uVar3 < 1) {
         p_Var2->next = (_G2AnimInterpStateBlock_Type *)0x0;
         goto LAB_80092948;
       }
@@ -586,37 +574,42 @@ _G2AnimInterpStateBlock_Type *_G2Anim_AllocateInterpStateBlockList(_G2AnimSectio
   return p_Var2;
 }
 
-// decompiled code
-// original method signature:
-// void /*$ra*/ _G2Anim_FreeInterpStateBlockList(struct _G2AnimInterpStateBlock_Type *block /*$a1*/)
-// line 429, offset 0x80092964
-/* begin block 1 */
-// Start line: 430
-// Start offset: 0x80092964
-// Variables:
-// 		struct _G2AnimInterpStateBlock_Type *nextBlock; // $s0
-/* end block 1 */
-// End offset: 0x80092994
-// End Line: 441
 
-/* begin block 2 */
-// Start line: 985
-/* end block 2 */
-// End Line: 986
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ _G2Anim_FreeInterpStateBlockList(struct _G2AnimInterpStateBlock_Type *block /*$a1*/)
+ // line 429, offset 0x80092964
+	/* begin block 1 */
+		// Start line: 430
+		// Start offset: 0x80092964
+		// Variables:
+	// 		struct _G2AnimInterpStateBlock_Type *nextBlock; // $s0
+	/* end block 1 */
+	// End offset: 0x80092994
+	// End Line: 441
+
+	/* begin block 2 */
+		// Start line: 985
+	/* end block 2 */
+	// End Line: 986
 
 void _G2Anim_FreeInterpStateBlockList(_G2AnimInterpStateBlock_Type *block)
 
 {
   _G2AnimInterpStateBlock_Type *p_Var1;
-
-  if (block != (_G2AnimInterpStateBlock_Type *)0x0)
-  {
-    do
-    {
+  
+  if (block != (_G2AnimInterpStateBlock_Type *)0x0) {
+    do {
       p_Var1 = block->next;
-      G2PoolMem_Free(&_interpStateBlockPool, block);
+      G2PoolMem_Free(&_interpStateBlockPool,block);
       block = p_Var1;
     } while (p_Var1 != (_G2AnimInterpStateBlock_Type *)0x0);
   }
   return;
 }
+
+
+
+
+

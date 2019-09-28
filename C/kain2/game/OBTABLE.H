@@ -1,6 +1,7 @@
 #ifndef OBTABLE_H
 #define OBTABLE_H
 
+
 extern void OBTABLE_InstanceInit(struct _Instance *instance); // 0x8003D9AC
 
 extern void OBTABLE_GetInstanceCollideFunc(struct _Instance *instance); // 0x8003DA90
@@ -19,7 +20,7 @@ extern void OBTABLE_ClearObjectReferences(); // 0x8003DDC8
 
 extern void OBTABLE_RemoveObjectEntry(struct Object *object); // 0x8003DDFC
 
-extern struct Object *OBTABLE_FindObject(char *objectName); // 0x8003DE44
+extern struct Object * OBTABLE_FindObject(char *objectName); // 0x8003DE44
 
 extern void OBTABLE_ChangeObjectAccessPointers(struct Object *oldObject, struct Object *newObject); // 0x8003DEF0
 
@@ -28,5 +29,6 @@ extern void OBTABLE_RelocateObjectTune(struct Object *object, long offset); // 0
 extern void OBTABLE_RelocateInstanceObject(struct _Instance *instance, long offset); // 0x8003DF9C
 
 extern void OBTABLE_InitAnimPointers(struct _ObjectTracker *objectTracker); // 0x8003DFF8
+
 
 #endif

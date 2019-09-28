@@ -1,19 +1,20 @@
 #ifndef STATE_H
 #define STATE_H
 
+
 extern void InitMessageQueue(struct __MessageQueue *In); // 0x8007071C
 
-extern struct __Event *DeMessageQueue(struct __MessageQueue *In); // 0x80070728
+extern struct __Event * DeMessageQueue(struct __MessageQueue *In); // 0x80070728
 
 extern void PurgeMessageQueue(struct __MessageQueue *In); // 0x80070764
 
-extern struct __Event *PeekMessageQueue(struct __MessageQueue *In); // 0x80070770
+extern struct __Event * PeekMessageQueue(struct __MessageQueue *In); // 0x80070770
 
 extern void EnMessageQueue(struct __MessageQueue *In, struct __Event *Element); // 0x80070798
 
 extern void EnMessageQueueData(struct __MessageQueue *In, int ID, int Data); // 0x800707C4
 
-extern void *CIRC_Alloc(int size); // 0x80070840
+extern void * CIRC_Alloc(int size); // 0x80070840
 
 extern int SetCollideInfoData(struct _CollideInfo *srcCI); // 0x80070884
 
@@ -145,6 +146,7 @@ extern void StateSwitchStateCharacterData(struct __CharacterState *In, TDRFuncPt
 
 extern void StateGovernState(struct __CharacterState *In, int Frames); // 0x80072750
 
+
 typedef void (*TDRFuncPtr_StateSwitchStateCharacterData1NewProcess)();
 
 typedef void (*TDRFuncPtr_StateSwitchStateCharacterDataDefault1NewProcess)();
@@ -152,5 +154,8 @@ typedef void (*TDRFuncPtr_StateSwitchStateCharacterDataDefault1NewProcess)();
 typedef void (*TDRFuncPtr_StateSwitchStateData2NewProcess)();
 
 typedef void (*TDRFuncPtr_StateSwitchStateDataDefault2NewProcess)();
+
+
+
 
 #endif

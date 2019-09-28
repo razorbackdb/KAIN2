@@ -1,6 +1,7 @@
 #ifndef MEMCARD_H
 #define MEMCARD_H
 
+
 extern int MEMCARD_IsWrongVersion(struct memcard_t *memcard); // 0x800B9924
 
 extern void load(struct memcard_t *memcard); // 0x800B9938
@@ -19,7 +20,7 @@ extern int memcard_main_menu(void *gt, int index); // 0x800B9BD0
 
 extern int memcard_pause_menu(void *gt, int index); // 0x800B9C24
 
-extern void *gt2mcmenu(void *gt); // 0x800B9C78
+extern void * gt2mcmenu(void *gt); // 0x800B9C78
 
 extern void memcard_pop(void *opaque); // 0x800B9C8C
 
@@ -31,6 +32,10 @@ extern void memcard_save(void *opaque); // 0x800B9D58
 
 extern void memcard_item(void *opaque, TDRFuncPtr_memcard_item1fn fn, long parameter, long flags, char *text); // 0x800B9D78
 
+
 typedef int (*TDRFuncPtr_memcard_item1fn)();
+
+
+
 
 #endif

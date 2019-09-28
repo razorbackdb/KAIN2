@@ -1,6 +1,7 @@
 #ifndef STREAM_H
 #define STREAM_H
 
+
 extern void STREAM_FillOutFileNames(char *baseAreaName, char *dramName, char *vramName, char *sfxName); // 0x800584E4
 
 extern void STREAM_AbortAreaLoad(char *baseAreaName); // 0x800585A4
@@ -9,9 +10,9 @@ extern void STREAM_Init(); // 0x800585EC
 
 extern int FindObjectName(char *name); // 0x80058618
 
-extern struct _ObjectTracker *FindObjectInTracker(struct Object *object); // 0x80058684
+extern struct _ObjectTracker * FindObjectInTracker(struct Object *object); // 0x80058684
 
-extern struct _StreamUnit *FindStreamUnitFromLevel(struct Level *level); // 0x800586D4
+extern struct _StreamUnit * FindStreamUnitFromLevel(struct Level *level); // 0x800586D4
 
 extern void STREAM_LoadObjectReturn(void *loadData, void *data, void *data2); // 0x80058724
 
@@ -33,7 +34,7 @@ extern int STREAM_TryAndDumpANonResidentObject(); // 0x80058A2C
 
 extern int InsertGlobalObject(char *name, struct GameTracker *gameTracker); // 0x80058A7C
 
-extern struct _ObjectTracker *STREAM_GetObjectTracker(char *name); // 0x80058C18
+extern struct _ObjectTracker * STREAM_GetObjectTracker(char *name); // 0x80058C18
 
 extern void LoadLevelObjects(struct _StreamUnit *stream); // 0x80058C64
 
@@ -51,11 +52,11 @@ extern void STREAM_RemoveAllObjectsNotInUse(); // 0x80059000
 
 extern void RemoveAllObjects(struct GameTracker *gameTracker); // 0x800592C0
 
-extern struct Level *STREAM_GetLevelWithID(long id); // 0x80059318
+extern struct Level * STREAM_GetLevelWithID(long id); // 0x80059318
 
-extern struct _StreamUnit *STREAM_GetStreamUnitWithID(long id); // 0x80059370
+extern struct _StreamUnit * STREAM_GetStreamUnitWithID(long id); // 0x80059370
 
-extern struct _StreamUnit *STREAM_GetStreamUnitWithName(char *name); // 0x800593C0
+extern struct _StreamUnit * STREAM_GetStreamUnitWithName(char *name); // 0x800593C0
 
 extern void STREAM_CalculateWaterLevel(struct Level *level); // 0x80059450
 
@@ -81,7 +82,7 @@ extern void STREAM_StreamLoadLevelReturn(void *loadData, void *data, void *data2
 
 extern void STREAM_UpdateLevelPointer(struct Level *oldLevel, struct Level *newLevel, long sizeOfLevel); // 0x80059E18
 
-extern struct _StreamUnit *STREAM_WhichUnitPointerIsIn(void *pointer); // 0x8005A108
+extern struct _StreamUnit * STREAM_WhichUnitPointerIsIn(void *pointer); // 0x8005A108
 
 extern void STREAM_UpdateObjectPointer(struct Object *oldObject, struct Object *newObject, long sizeOfObject); // 0x8005A1B4
 
@@ -91,7 +92,7 @@ extern void STREAM_LoadMainVram(struct GameTracker *gameTracker, char *baseAreaN
 
 extern void STREAM_MoveIntoNewStreamUnit(); // 0x8005A540
 
-extern struct _StreamUnit *STREAM_LoadLevel(char *baseAreaName, struct StreamUnitPortal *streamPortal, int loadnext); // 0x8005A5D4
+extern struct _StreamUnit * STREAM_LoadLevel(char *baseAreaName, struct StreamUnitPortal *streamPortal, int loadnext); // 0x8005A5D4
 
 extern void RemoveIntroducedLights(struct Level *level); // 0x8005A7F8
 
@@ -235,7 +236,7 @@ extern void DrawFogRectangle(struct RECT *cliprect, struct _PrimPool *primPool, 
 
 extern void STREAM_RenderAdjacantUnit(unsigned long **curOT, struct StreamUnitPortal *curStreamPortal, struct _StreamUnit *toStreamUnit, struct _StreamUnit *mainStreamUnit, struct RECT *cliprect); // 0x8005EF0C
 
-extern struct BSPTree *STREAM_GetBspTree(struct _StreamUnit *streamUnit, long bspNumber); // 0x8005EFB8
+extern struct BSPTree * STREAM_GetBspTree(struct _StreamUnit *streamUnit, long bspNumber); // 0x8005EFB8
 
 extern void WARPGATE_BlockWarpGateEntrance(struct _StreamUnit *streamUnit, long collideOn); // 0x8005F018
 
@@ -243,7 +244,7 @@ extern void WARPGATE_DrawWarpGateRim(struct _StreamUnit *streamUnit, long drawOn
 
 extern void WARPGATE_HideAllCloudCovers(); // 0x8005F0E0
 
-extern struct _Instance *WARPGATE_UnHideCloudCoverInUnit(long streamUnitID); // 0x8005F140
+extern struct _Instance * WARPGATE_UnHideCloudCoverInUnit(long streamUnitID); // 0x8005F140
 
 extern void STREAM_RenderWarpGate(unsigned long **mainOT, struct StreamUnitPortal *curStreamPortal, struct _StreamUnit *mainStreamUnit, struct RECT *cliprect); // 0x8005F1B8
 
@@ -252,5 +253,6 @@ extern void WARPGATE_RenderWarpUnit(unsigned long **mainOT, struct StreamUnitPor
 extern void STREAM_DumpNonResidentObjects(); // 0x8005F8C8
 
 extern int STREAM_TryAndDumpNonResident(struct _ObjectTracker *otr); // 0x8005F978
+
 
 #endif
