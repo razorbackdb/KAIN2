@@ -1,110 +1,6 @@
 #include "THISDUST.H"
 #include "SOUND.H"
 
-// int @0x800CEA8C, len = 0x00000004
-gSramFullMsgCnt = 0x0;
-// MusicLoadInfo @0x800D1510, len = 0x0000004C
-musicInfo =
-    {
-        // int @0x800D1510, len = 0x00000004
-        .state = null,
-        // int @0x800D1514, len = 0x00000004
-        .nextState = null,
-        // int @0x800D1518, len = 0x00000004
-        .errorStatus = null,
-        // int @0x800D151C, len = 0x00000004
-        .bankLoaded = null,
-        // int @0x800D1520, len = 0x00000004
-        .checkMusicDelay = null,
-        // int @0x800D1524, len = 0x00000004
-        .currentMusicPlane = null,
-        // char[8] @0x800D1528, len = 0x00000008
-        .currentMusicName =
-            {
-                '\x00',
-                '\x00',
-                '\x00',
-                '\x00',
-                '\x00',
-                '\x00',
-                '\x00',
-                '\x00'},
-        // MusicLoadCmd[4] @0x800D1530, len = 0x00000020
-        .commandQueue =
-            {
-                // MusicLoadCmd @0x800D1530, len = 0x00000008
-                {
-                    // int @0x800D1530, len = 0x00000004
-                    .type = null,
-                    // int @0x800D1534, len = 0x00000004
-                    .data = null},
-                // MusicLoadCmd @0x800D1538, len = 0x00000008
-                {
-                    // int @0x800D1538, len = 0x00000004
-                    .type = null,
-                    // int @0x800D153C, len = 0x00000004
-                    .data = null},
-                // MusicLoadCmd @0x800D1540, len = 0x00000008
-                {
-                    // int @0x800D1540, len = 0x00000004
-                    .type = null,
-                    // int @0x800D1544, len = 0x00000004
-                    .data = null},
-                // MusicLoadCmd @0x800D1548, len = 0x00000008
-                {
-                    // int @0x800D1548, len = 0x00000004
-                    .type = null,
-                    // int @0x800D154C, len = 0x00000004
-                    .data = null}},
-        // int @0x800D1550, len = 0x00000004
-        .commandIn = null,
-        // int @0x800D1554, len = 0x00000004
-        .commandOut = null,
-        // int @0x800D1558, len = 0x00000004
-        .numCmdsInQueue = null};
-// long @0x800CEA90, len = 0x00000004
-objectOneShotTriggerTbl = 0x1000;
-// char @0x800D5C08, len = 0x00000001
-soundBuffer = 0x00;
-// SoundEffectChannel @0x800D12C0, len = 0x00000024
-soundEffectChannelTbl =
-    {
-        // uchar @0x800D12C0, len = 0x00000001
-        .inUse = 0x00,
-        // uchar @0x800D12C1, len = 0x00000001
-        .unused = 0x00,
-        // ushort @0x800D12C2, len = 0x00000002
-        .unused1 = null,
-        // ulong @0x800D12C4, len = 0x00000004
-        .handle = null,
-        // short @0x800D12C8, len = 0x00000002
-        .volume = null,
-        // short @0x800D12CA, len = 0x00000002
-        .volumeChangeTime = null,
-        // short @0x800D12CC, len = 0x00000002
-        .volumeChangeTimeSave = null,
-        // short @0x800D12CE, len = 0x00000002
-        .volumeChangePerUpdate = null,
-        // short @0x800D12D0, len = 0x00000002
-        .volumeChangeSign = null,
-        // short @0x800D12D2, len = 0x00000002
-        .volumeChangeErrPerUpdate = null,
-        // short @0x800D12D4, len = 0x00000002
-        .volumeChangeError = null,
-        // short @0x800D12D6, len = 0x00000002
-        .pitch = null,
-        // short @0x800D12D8, len = 0x00000002
-        .pitchChangeTime = null,
-        // short @0x800D12DA, len = 0x00000002
-        .pitchChangeTimeSave = null,
-        // short @0x800D12DC, len = 0x00000002
-        .pitchChangePerUpdate = null,
-        // short @0x800D12DE, len = 0x00000002
-        .pitchChangeSign = null,
-        // short @0x800D12E0, len = 0x00000002
-        .pitchChangeErrPerUpdate = null,
-        // short @0x800D12E2, len = 0x00000002
-        .pitchChangeError = null};
 // decompiled code
 // original method signature:
 // struct SoundEffectChannel * /*$ra*/ SndOpenSfxChannel(unsigned char *channelNum /*$a0*/)
@@ -240,7 +136,7 @@ void SOUND_ProcessInstanceSounds(uchar *sfxFileData, SoundInstance *soundInstTbl
   ObjectPeriodicSound *sound;
   int iVar4;
 
-  if ((((gameTrackerX.gameMode != 6) && (sfxFileData != (uchar *)0x0)) &&
+  if ((((DAT_800d111e != 6) && (sfxFileData != (uchar *)0x0)) &&
        (soundInstTbl != (SoundInstance *)0x0)) &&
       ((*sfxFileData == -0x42 && (sfxFileData[1] == -0x11))))
   {
@@ -337,11 +233,8 @@ void SOUND_EndInstanceSounds(uchar *sfxFileData, SoundInstance *soundInstTbl)
           pSVar3 = SndGetSfxChannel((uint)soundInstTbl->channel);
           if (pSVar3 != (SoundEffectChannel *)0x0)
           {
+            /* WARNING: Subroutine does not return */
             SndEndLoop(pSVar3->handle);
-          LAB_8003e990:
-            SndCloseSfxChannel((uint)soundInstTbl->channel);
-            soundInstTbl->channel = -1;
-            soundInstTbl->state = '\0';
           }
         }
         else
@@ -354,8 +247,8 @@ void SOUND_EndInstanceSounds(uchar *sfxFileData, SoundInstance *soundInstTbl)
               pSVar3 = SndGetSfxChannel((uint)soundInstTbl->channel);
               if (pSVar3 != (SoundEffectChannel *)0x0)
               {
+                /* WARNING: Subroutine does not return */
                 SndEndLoop(pSVar3->handle);
-                goto LAB_8003e990;
               }
             }
           }
@@ -366,7 +259,11 @@ void SOUND_EndInstanceSounds(uchar *sfxFileData, SoundInstance *soundInstTbl)
               pbVar4 = pbVar4 + (uint)pbVar4[1] * 2 + 0xe;
               pSVar3 = SndGetSfxChannel((uint)soundInstTbl->channel);
               if (pSVar3 != (SoundEffectChannel *)0x0)
-                goto LAB_8003e990;
+              {
+                SndCloseSfxChannel((uint)soundInstTbl->channel);
+                soundInstTbl->channel = -1;
+                soundInstTbl->state = '\0';
+              }
             }
           }
         }
@@ -473,18 +370,14 @@ LAB_8003ea7c:
 void setPeriodicSoundStateOff(SoundInstance *soundInst, ObjectPeriodicSound *sound)
 
 {
-  int iVar1;
-
   SndCloseSfxChannel((uint)soundInst->channel);
   soundInst->channel = -1;
   soundInst->state = '\x03';
   soundInst->delay = sound->offTime;
   if (sound->offTimeVariation != '\0')
   {
-    iVar1 = rand();
-    soundInst->delay =
-        soundInst->delay +
-        (sound->offTimeVariation - (char)(iVar1 % ((uint)sound->offTimeVariation << 1)));
+    /* WARNING: Subroutine does not return */
+    rand();
   }
   return;
 }
@@ -514,18 +407,17 @@ void processPeriodicSound(_Position *position, int livesInOnePlane, int inSpectr
                           SoundInstance *soundInst, ObjectPeriodicSound *sound)
 
 {
-  uchar uVar1;
-  SoundEffectChannel *pSVar2;
-  ulong uVar3;
-  int iVar4;
-  byte bVar5;
+  SoundEffectChannel *pSVar1;
+  ulong uVar2;
+  int iVar3;
+  byte bVar4;
   int spectralPlane;
 
-  spectralPlane = (int)gameTrackerX.gameData.asmData.MorphType;
-  bVar5 = soundInst->state & 0xf;
-  if (bVar5 == 1)
+  spectralPlane = (int)DAT_800d0fb6;
+  bVar4 = soundInst->state & 0xf;
+  if (bVar4 == 1)
   {
-  LAB_8003ec2c:
+  GenericRelocateTune:
     if (livesInOnePlane != 0)
     {
       if (inSpectral == 0)
@@ -544,175 +436,151 @@ void processPeriodicSound(_Position *position, int livesInOnePlane, int inSpectr
       }
     }
     spectralPlane = isOkayToPlaySound((uint)sound->flags, spectralPlane, hidden, burning);
-    if (spectralPlane == 0)
+    if (spectralPlane != 0)
     {
-      return;
-    }
-    if (soundInst->delay != '\0')
-    {
-      soundInst->delay = soundInst->delay + -1;
-      return;
-    }
-    pSVar2 = SndOpenSfxChannel((uchar *)soundInst);
-    if (pSVar2 == (SoundEffectChannel *)0x0)
-    {
-      return;
-    }
-    pSVar2->volume = (ushort)sound->maxVolume;
-    if (sound->maxVolVariation != '\0')
-    {
-      spectralPlane = rand();
-      pSVar2->volume =
-          pSVar2->volume +
-          ((ushort)sound->maxVolVariation -
-           (short)(spectralPlane % ((uint)sound->maxVolVariation << 1)));
-    }
-    pSVar2->pitch = sound->pitch;
-    if (sound->pitchVariation != 0)
-    {
-      spectralPlane = rand();
-      pSVar2->pitch =
-          pSVar2->pitch +
-          (sound->pitchVariation - (short)(spectralPlane % ((uint)sound->pitchVariation << 1)));
-    }
-    if (sound->numSfxIDs < 2)
-    {
-      spectralPlane = 0;
-    }
-    else
-    {
-      spectralPlane = rand();
-      spectralPlane = spectralPlane % (uint)sound->numSfxIDs << 1;
-    }
-    uVar3 = SOUND_Play3dSound(position, (uint) * (ushort *)(&sound[1].type + spectralPlane),
-                              (int)pSVar2->pitch, (int)pSVar2->volume, (uint)sound->minVolDistance);
-    pSVar2->handle = uVar3;
-    if (uVar3 == 0)
-    {
-      SndCloseSfxChannel((uint)soundInst->channel);
-      soundInst->channel = -1;
-      return;
-    }
-    soundInst->state = '\x02';
-    soundInst->delay = sound->onTime;
-    if (sound->onTimeVariation == '\0')
-    {
-      return;
-    }
-    spectralPlane = rand();
-    bVar5 = sound->onTimeVariation;
-    goto LAB_8003edc8;
-  }
-  if (1 < bVar5)
-  {
-    if (bVar5 == 2)
-    {
-      pSVar2 = SndGetSfxChannel((uint)soundInst->channel);
-      iVar4 = SndIsPlayingOrRequested(pSVar2->handle);
-      if (iVar4 == 0)
-        goto LAB_8003efd0;
-      iVar4 = SndIsPlaying(pSVar2->handle);
-      if (iVar4 == 0)
+      if (soundInst->delay == '\0')
       {
-        return;
-      }
-      if (livesInOnePlane == 0)
-      {
-      LAB_8003ee5c:
-        spectralPlane = isOkayToPlaySound((uint)sound->flags, spectralPlane, hidden, burning);
-        if (spectralPlane != 0)
+        pSVar1 = SndOpenSfxChannel((uchar *)soundInst);
+        if (pSVar1 != (SoundEffectChannel *)0x0)
         {
-          uVar1 = soundInst->delay + -1;
-          if (soundInst->delay == '\0')
+          pSVar1->volume = (ushort)sound->maxVolume;
+          if (sound->maxVolVariation != '\0')
           {
-            if (sound->offTime == '\0')
-            {
-              if (sound->maxVolVariation != '\0')
-              {
-                pSVar2->volume = (ushort)sound->maxVolume;
-                spectralPlane = rand();
-                pSVar2->volume =
-                    pSVar2->volume +
-                    ((ushort)sound->maxVolVariation -
-                     (short)(spectralPlane % ((uint)sound->maxVolVariation << 1)));
-              }
-              if (sound->pitchVariation != 0)
-              {
-                pSVar2->pitch = sound->pitch;
-                spectralPlane = rand();
-                pSVar2->pitch =
-                    pSVar2->pitch +
-                    (sound->pitchVariation -
-                     (short)(spectralPlane % ((uint)sound->pitchVariation << 1)));
-              }
-              soundInst->delay = sound->onTime;
-              if (sound->onTimeVariation != '\0')
-              {
-                spectralPlane = rand();
-                uVar1 = soundInst->delay +
-                        (sound->onTimeVariation -
-                         (char)(spectralPlane % ((uint)sound->onTimeVariation << 1)));
-                goto LAB_8003ef80;
-              }
-            }
-            else
-            {
-              SndEndLoop(pSVar2->handle);
-              setPeriodicSoundStateOff(soundInst, sound);
-            }
+            /* WARNING: Subroutine does not return */
+            rand();
+          }
+          pSVar1->pitch = sound->pitch;
+          if (sound->pitchVariation != 0)
+          {
+            /* WARNING: Subroutine does not return */
+            rand();
+          }
+          if (1 < sound->numSfxIDs)
+          {
+            /* WARNING: Subroutine does not return */
+            rand();
+          }
+          uVar2 = SOUND_Play3dSound(position, (uint) * (ushort *)(sound + 1), (int)pSVar1->pitch,
+                                    (int)pSVar1->volume, (uint)sound->minVolDistance);
+          pSVar1->handle = uVar2;
+          if (uVar2 == 0)
+          {
+            SndCloseSfxChannel((uint)soundInst->channel);
+            soundInst->channel = -1;
           }
           else
           {
-          LAB_8003ef80:
-            soundInst->delay = uVar1;
-          }
-          bVar5 = soundInst->state;
-          if ((bVar5 & 0x10) == 0)
-          {
-            soundInst->state = bVar5 | 0x10;
-            return;
-          }
-          soundInst->state = bVar5 & 0xef;
-          uVar3 = SOUND_Update3dSound(position, pSVar2->handle, (int)pSVar2->pitch, (int)pSVar2->volume, (uint)sound->minVolDistance);
-          if (uVar3 != 0)
-          {
-            return;
+            soundInst->state = '\x02';
+            soundInst->delay = sound->onTime;
+            if (sound->onTimeVariation != '\0')
+            {
+              /* WARNING: Subroutine does not return */
+              rand();
+            }
           }
         }
       }
       else
       {
-        if (inSpectral == 0)
-        {
-          if (spectralPlane == 0)
-            goto LAB_8003ee5c;
-        }
-        else
-        {
-          if (spectralPlane != 0)
-            goto LAB_8003ee5c;
-        }
+        soundInst->delay = soundInst->delay + -1;
       }
-      SndEndLoop(pSVar2->handle);
-    LAB_8003efd0:
-      setPeriodicSoundStateOff(soundInst, sound);
+    }
+    return;
+  }
+  if (bVar4 < 2)
+  {
+  LAB_8003ebf4:
+    soundInst->channel = -1;
+    soundInst->state = '\x01';
+    soundInst->delay = sound->initialDelay;
+    if (sound->initialDelayVariation == '\0')
+    {
       return;
     }
-    if (bVar5 == 3)
-      goto LAB_8003ec2c;
+    /* WARNING: Subroutine does not return */
+    rand();
   }
-  soundInst->channel = -1;
-  soundInst->state = '\x01';
-  soundInst->delay = sound->initialDelay;
-  if (sound->initialDelayVariation == '\0')
+  if (bVar4 != 2)
+  {
+    if (bVar4 == 3)
+      goto GenericRelocateTune;
+    goto LAB_8003ebf4;
+  }
+  pSVar1 = SndGetSfxChannel((uint)soundInst->channel);
+  iVar3 = SndIsPlayingOrRequested(pSVar1->handle);
+  if (iVar3 == 0)
+  {
+    setPeriodicSoundStateOff(soundInst, sound);
+    return;
+  }
+  iVar3 = SndIsPlaying(pSVar1->handle);
+  if (iVar3 == 0)
   {
     return;
   }
-  spectralPlane = rand();
-  bVar5 = sound->initialDelayVariation;
-LAB_8003edc8:
-  soundInst->delay = soundInst->delay + (bVar5 - (char)(spectralPlane % ((uint)bVar5 << 1)));
-  return;
+  if (livesInOnePlane != 0)
+  {
+    if (inSpectral == 0)
+    {
+      if (spectralPlane != 0)
+        goto LAB_8003efc0;
+    }
+    else
+    {
+      if (spectralPlane == 0)
+        goto LAB_8003efc0;
+    }
+  }
+  spectralPlane = isOkayToPlaySound((uint)sound->flags, spectralPlane, hidden, burning);
+  if (spectralPlane != 0)
+  {
+    if (soundInst->delay == '\0')
+    {
+      if (sound->offTime != '\0')
+      {
+        /* WARNING: Subroutine does not return */
+        SndEndLoop(pSVar1->handle);
+      }
+      if (sound->maxVolVariation != '\0')
+      {
+        /* WARNING: Subroutine does not return */
+        pSVar1->volume = (ushort)sound->maxVolume;
+        rand();
+      }
+      if (sound->pitchVariation != 0)
+      {
+        /* WARNING: Subroutine does not return */
+        pSVar1->pitch = sound->pitch;
+        rand();
+      }
+      soundInst->delay = sound->onTime;
+      if (sound->onTimeVariation != '\0')
+      {
+        /* WARNING: Subroutine does not return */
+        rand();
+      }
+    }
+    else
+    {
+      soundInst->delay = soundInst->delay + -1;
+    }
+    bVar4 = soundInst->state;
+    if ((bVar4 & 0x10) == 0)
+    {
+      soundInst->state = bVar4 | 0x10;
+      return;
+    }
+    soundInst->state = bVar4 & 0xef;
+    uVar2 = SOUND_Update3dSound(position, pSVar1->handle, (int)pSVar1->pitch, (int)pSVar1->volume,
+                                (uint)sound->minVolDistance);
+    if (uVar2 != 0)
+    {
+      return;
+    }
+  }
+LAB_8003efc0:
+  /* WARNING: Subroutine does not return */
+  SndEndLoop(pSVar1->handle);
 }
 
 // decompiled code
@@ -746,7 +614,7 @@ void processEventSound(_Position *position, SoundInstance *soundInst, ObjectEven
   byte bVar5;
   int spectralPlane;
 
-  spectralPlane = (int)gameTrackerX.gameData.asmData.MorphType;
+  spectralPlane = (int)DAT_800d0fb6;
   bVar5 = soundInst->state & 0xf;
   if (bVar5 != 1)
   {
@@ -762,47 +630,34 @@ void processEventSound(_Position *position, SoundInstance *soundInst, ObjectEven
       if (pSVar2 == (SoundEffectChannel *)0x0)
       {
         spectralPlane = isOkayToPlaySound((uint)sound->flags, spectralPlane, 0, 0);
-        if (spectralPlane == 0)
+        if ((spectralPlane != 0) &&
+            (pSVar2 = SndOpenSfxChannel((uchar *)soundInst), pSVar2 != (SoundEffectChannel *)0x0))
         {
-          return;
-        }
-        pSVar2 = SndOpenSfxChannel((uchar *)soundInst);
-        if (pSVar2 == (SoundEffectChannel *)0x0)
-        {
-          return;
-        }
-        pSVar2->volume = (ushort)sound->maxVolume;
-        if (sound->maxVolVariation != '\0')
-        {
-          spectralPlane = rand();
-          pSVar2->volume =
-              pSVar2->volume +
-              ((ushort)sound->maxVolVariation -
-               (short)(spectralPlane % ((uint)sound->maxVolVariation << 1)));
-        }
-        pSVar2->pitch = sound->pitch;
-        if (sound->pitchVariation != 0)
-        {
-          spectralPlane = rand();
-          pSVar2->pitch =
-              pSVar2->pitch +
-              (sound->pitchVariation - (short)(spectralPlane % ((uint)sound->pitchVariation << 1)));
-        }
-        if (sound->numSfxIDs < 2)
-        {
-          spectralPlane = 0;
-        }
-        else
-        {
-          spectralPlane = rand();
-          spectralPlane = spectralPlane % (uint)sound->numSfxIDs << 1;
-        }
-        uVar4 = SOUND_Play3dSound(position, (uint) * (ushort *)(&sound[1].type + spectralPlane),
-                                  (int)pSVar2->pitch, (int)pSVar2->volume, (uint)sound->minVolDistance);
-        pSVar2->handle = uVar4;
-        if (uVar4 != 0)
-        {
-          return;
+          pSVar2->volume = (ushort)sound->maxVolume;
+          if (sound->maxVolVariation != '\0')
+          {
+            /* WARNING: Subroutine does not return */
+            rand();
+          }
+          pSVar2->pitch = sound->pitch;
+          if (sound->pitchVariation != 0)
+          {
+            /* WARNING: Subroutine does not return */
+            rand();
+          }
+          if (1 < sound->numSfxIDs)
+          {
+            /* WARNING: Subroutine does not return */
+            rand();
+          }
+          uVar4 = SOUND_Play3dSound(position, (uint) * (ushort *)(sound + 1), (int)pSVar2->pitch,
+                                    (int)pSVar2->volume, (uint)sound->minVolDistance);
+          pSVar2->handle = uVar4;
+          if (uVar4 == 0)
+          {
+            SndCloseSfxChannel((uint)soundInst->channel);
+            soundInst->channel = -1;
+          }
         }
       }
       else
@@ -813,62 +668,61 @@ void processEventSound(_Position *position, SoundInstance *soundInst, ObjectEven
           SndCloseSfxChannel((uint)soundInst->channel);
           soundInst->channel = -1;
           soundInst->state = '\x01';
-          return;
-        }
-        iVar3 = SndIsPlaying(pSVar2->handle);
-        if (iVar3 == 0)
-        {
-          return;
-        }
-        if (pSVar2->pitchChangeTime != 0)
-        {
-          sVar1 = pSVar2->pitchChangeError + pSVar2->pitchChangeErrPerUpdate;
-          pSVar2->pitchChangeError = sVar1;
-          pSVar2->pitch = pSVar2->pitch + pSVar2->pitchChangePerUpdate;
-          if (pSVar2->pitchChangeTimeSave <= sVar1)
-          {
-            pSVar2->pitch = pSVar2->pitch + pSVar2->pitchChangeSign;
-            pSVar2->pitchChangeError = pSVar2->pitchChangeError - pSVar2->pitchChangeTimeSave;
-          }
-          pSVar2->pitchChangeTime = pSVar2->pitchChangeTime + -1;
-        }
-        if (pSVar2->volumeChangeTime != 0)
-        {
-          sVar1 = pSVar2->volumeChangeError + pSVar2->volumeChangeErrPerUpdate;
-          pSVar2->volumeChangeError = sVar1;
-          pSVar2->volume = pSVar2->volume + pSVar2->volumeChangePerUpdate;
-          if (pSVar2->volumeChangeTimeSave <= sVar1)
-          {
-            pSVar2->volume = pSVar2->volume + pSVar2->volumeChangeSign;
-            pSVar2->volumeChangeError = pSVar2->volumeChangeError - pSVar2->volumeChangeTimeSave;
-          }
-          pSVar2->volumeChangeTime = pSVar2->volumeChangeTime + -1;
-        }
-        bVar5 = soundInst->state;
-        if ((bVar5 & 0x10) == 0)
-        {
-          soundInst->state = bVar5 | 0x10;
         }
         else
         {
-          soundInst->state = bVar5 & 0xef;
-          uVar4 = SOUND_Update3dSound(position, pSVar2->handle, (int)pSVar2->pitch, (int)pSVar2->volume, (uint)sound->minVolDistance);
-          if (uVar4 == 0)
+          iVar3 = SndIsPlaying(pSVar2->handle);
+          if (iVar3 != 0)
           {
-            SndEndLoop(pSVar2->handle);
-            SndCloseSfxChannel((uint)soundInst->channel);
-            soundInst->channel = -1;
+            if (pSVar2->pitchChangeTime != 0)
+            {
+              sVar1 = pSVar2->pitchChangeError + pSVar2->pitchChangeErrPerUpdate;
+              pSVar2->pitchChangeError = sVar1;
+              pSVar2->pitch = pSVar2->pitch + pSVar2->pitchChangePerUpdate;
+              if (pSVar2->pitchChangeTimeSave <= sVar1)
+              {
+                pSVar2->pitch = pSVar2->pitch + pSVar2->pitchChangeSign;
+                pSVar2->pitchChangeError = pSVar2->pitchChangeError - pSVar2->pitchChangeTimeSave;
+              }
+              pSVar2->pitchChangeTime = pSVar2->pitchChangeTime + -1;
+            }
+            if (pSVar2->volumeChangeTime != 0)
+            {
+              sVar1 = pSVar2->volumeChangeError + pSVar2->volumeChangeErrPerUpdate;
+              pSVar2->volumeChangeError = sVar1;
+              pSVar2->volume = pSVar2->volume + pSVar2->volumeChangePerUpdate;
+              if (pSVar2->volumeChangeTimeSave <= sVar1)
+              {
+                pSVar2->volume = pSVar2->volume + pSVar2->volumeChangeSign;
+                pSVar2->volumeChangeError = pSVar2->volumeChangeError - pSVar2->volumeChangeTimeSave;
+              }
+              pSVar2->volumeChangeTime = pSVar2->volumeChangeTime + -1;
+            }
+            bVar5 = soundInst->state;
+            if ((bVar5 & 0x10) == 0)
+            {
+              soundInst->state = bVar5 | 0x10;
+            }
+            else
+            {
+              soundInst->state = bVar5 & 0xef;
+              uVar4 = SOUND_Update3dSound(position, pSVar2->handle, (int)pSVar2->pitch,
+                                          (int)pSVar2->volume, (uint)sound->minVolDistance);
+              if (uVar4 == 0)
+              {
+                /* WARNING: Subroutine does not return */
+                SndEndLoop(pSVar2->handle);
+              }
+            }
+            spectralPlane = isOkayToPlaySound((uint)sound->flags, spectralPlane, 0, 0);
+            if (spectralPlane == 0)
+            {
+              /* WARNING: Subroutine does not return */
+              SndEndLoop(pSVar2->handle);
+            }
           }
         }
-        spectralPlane = isOkayToPlaySound((uint)sound->flags, spectralPlane, 0, 0);
-        if (spectralPlane != 0)
-        {
-          return;
-        }
-        SndEndLoop(pSVar2->handle);
       }
-      SndCloseSfxChannel((uint)soundInst->channel);
-      soundInst->channel = -1;
     }
   }
   return;
@@ -924,9 +778,8 @@ void SOUND_StopInstanceSound(SoundInstance *soundInst)
   pSVar1 = SndGetSfxChannel((uint)soundInst->channel);
   if (pSVar1 != (SoundEffectChannel *)0x0)
   {
+    /* WARNING: Subroutine does not return */
     SndEndLoop(pSVar1->handle);
-    SndCloseSfxChannel((uint)soundInst->channel);
-    soundInst->channel = -1;
   }
   soundInst->state = '\x01';
   return;
@@ -1179,14 +1032,14 @@ void processOneShotSound(_Position *position, int hidden, int burning, long *tri
   uint uVar5;
 
   bVar4 = soundInst->state & 0xf;
-  uVar5 = (&objectOneShotTriggerTbl)[(uint)sound->type - 2];
+  uVar5 = objectOneShotTriggerTbl[(uint)sound->type - 2];
   if (bVar4 == 1)
   {
     if ((*triggerFlags & uVar5) == 0)
     {
       return;
     }
-    iVar2 = isOkayToPlaySound((uint)sound->flags, (int)gameTrackerX.gameData.asmData.MorphType, hidden, burning);
+    iVar2 = isOkayToPlaySound((uint)sound->flags, (int)DAT_800d0fb6, hidden, burning);
     if (iVar2 == 0)
     {
     LAB_8003f8dc:
@@ -1196,10 +1049,8 @@ void processOneShotSound(_Position *position, int hidden, int burning, long *tri
     soundInst->delay = sound->initialDelay;
     if (sound->initialDelayVariation != '\0')
     {
-      iVar2 = rand();
-      soundInst->delay =
-          soundInst->delay +
-          (sound->initialDelayVariation - (char)(iVar2 % ((uint)sound->initialDelayVariation << 1)));
+      /* WARNING: Subroutine does not return */
+      rand();
     }
     if (soundInst->delay != '\0')
     {
@@ -1235,40 +1086,30 @@ void processOneShotSound(_Position *position, int hidden, int burning, long *tri
           pSVar1->volume = (ushort)sound->maxVolume;
           if (sound->maxVolVariation != '\0')
           {
-            iVar2 = rand();
-            pSVar1->volume =
-                pSVar1->volume +
-                ((ushort)sound->maxVolVariation -
-                 (short)(iVar2 % ((uint)sound->maxVolVariation << 1)));
+            /* WARNING: Subroutine does not return */
+            rand();
           }
           pSVar1->pitch = sound->pitch;
           if (sound->pitchVariation != 0)
           {
-            iVar2 = rand();
-            pSVar1->pitch =
-                pSVar1->pitch +
-                (sound->pitchVariation - (short)(iVar2 % ((uint)sound->pitchVariation << 1)));
+            /* WARNING: Subroutine does not return */
+            rand();
           }
           if (sound->numSfxIDs < 2)
           {
-            iVar2 = 0;
-          }
-          else
-          {
-            iVar2 = rand();
-            iVar2 = iVar2 % (uint)sound->numSfxIDs << 1;
-          }
-          uVar3 = SOUND_Play3dSound(position, (uint) * (ushort *)(&sound[1].type + iVar2),
-                                    (int)pSVar1->pitch, (int)pSVar1->volume,
-                                    (uint)sound->minVolDistance);
-          pSVar1->handle = uVar3;
-          if (uVar3 != 0)
-          {
+            uVar3 = SOUND_Play3dSound(position, (uint) * (ushort *)(sound + 1), (int)pSVar1->pitch,
+                                      (int)pSVar1->volume, (uint)sound->minVolDistance);
+            pSVar1->handle = uVar3;
+            if (uVar3 != 0)
+            {
+              return;
+            }
+            SndCloseSfxChannel((uint)soundInst->channel);
+            soundInst->channel = -1;
             return;
           }
-          SndCloseSfxChannel((uint)soundInst->channel);
-          soundInst->channel = -1;
-          return;
+          /* WARNING: Subroutine does not return */
+          rand();
         }
         iVar2 = SndIsPlayingOrRequested(pSVar1->handle);
         if (iVar2 != 0)
@@ -1279,18 +1120,20 @@ void processOneShotSound(_Position *position, int hidden, int burning, long *tri
             return;
           }
           bVar4 = soundInst->state;
-          if ((bVar4 & 0x10) == 0)
+          if ((bVar4 & 0x10) != 0)
           {
-            soundInst->state = bVar4 | 0x10;
-            return;
+            soundInst->state = bVar4 & 0xef;
+            uVar3 = SOUND_Update3dSound(position, pSVar1->handle, (int)pSVar1->pitch,
+                                        (int)pSVar1->volume, (uint)sound->minVolDistance);
+            if (uVar3 != 0)
+            {
+              return;
+            }
+            /* WARNING: Subroutine does not return */
+            SndEndLoop(pSVar1->handle);
           }
-          soundInst->state = bVar4 & 0xef;
-          uVar3 = SOUND_Update3dSound(position, pSVar1->handle, (int)pSVar1->pitch, (int)pSVar1->volume, (uint)sound->minVolDistance);
-          if (uVar3 != 0)
-          {
-            return;
-          }
-          SndEndLoop(pSVar1->handle);
+          soundInst->state = bVar4 | 0x10;
+          return;
         }
         SndCloseSfxChannel((uint)soundInst->channel);
         soundInst->channel = -1;
@@ -1355,19 +1198,19 @@ ulong SOUND_Play3dSound(_Position *position, int sfxToneID, int pitch, int maxVo
     pan = 0x40;
     goto LAB_8003fc3c;
   }
-  if ((theCamera.mode == 5) && ((gameTrackerX.gameFlags & 0x10U) != 0))
+  if ((DAT_800cff80 == 5) && ((DAT_800d10ec & 0x10) != 0))
   {
     sVar1 = position->z;
-    uVar7 = (int)position->x - (int)theCamera.core.position.x;
-    uVar6 = (int)position->y - (int)theCamera.core.position.y;
-    sVar2 = theCamera.core.position.z;
+    uVar7 = (int)position->x - (int)theCamera;
+    uVar6 = (int)position->y - (int)DAT_800cfe92;
+    sVar2 = DAT_800cfe94;
   }
   else
   {
-    uVar7 = (int)position->x - (int)((theCamera.focusInstance)->position).x;
+    uVar7 = (int)position->x - (int)*(short *)(DAT_800cff98 + 0x5c);
     sVar1 = position->z;
-    sVar2 = ((theCamera.focusInstance)->position).z;
-    uVar6 = (int)position->y - (int)((theCamera.focusInstance)->position).y;
+    sVar2 = *(short *)(DAT_800cff98 + 0x60);
+    uVar6 = (int)position->y - (int)*(short *)(DAT_800cff98 + 0x5e);
   }
   lVar3 = MATH3D_FastSqrt0(uVar7 * uVar7 + uVar6 * uVar6 +
                            ((int)sVar1 - (int)sVar2) * ((int)sVar1 - (int)sVar2));
@@ -1378,7 +1221,7 @@ ulong SOUND_Play3dSound(_Position *position, int sfxToneID, int pitch, int maxVo
   iVar4 = ratan2(uVar6, uVar7);
   _vol = (minVolDist - lVar3) / (minVolDist / maxVolume);
   vol = (ushort)_vol;
-  uVar6 = (int)theCamera.core.rotation.z - (iVar4 + 0x400);
+  uVar6 = (int)DAT_800cff44 - (iVar4 + 0x400);
   uVar7 = (int)(uVar6 & 0xfff) >> 10;
   if (0x7f < _vol)
   {
@@ -1469,19 +1312,19 @@ ulong SOUND_Update3dSound(_Position *position, ulong handle, int pitch, int maxV
   {
     return handle;
   }
-  if ((theCamera.mode == 5) && ((gameTrackerX.gameFlags & 0x10U) != 0))
+  if ((DAT_800cff80 == 5) && ((DAT_800d10ec & 0x10) != 0))
   {
     sVar1 = position->z;
-    uVar7 = (int)position->x - (int)theCamera.core.position.x;
-    uVar6 = (int)position->y - (int)theCamera.core.position.y;
-    sVar2 = theCamera.core.position.z;
+    uVar7 = (int)position->x - (int)theCamera;
+    uVar6 = (int)position->y - (int)DAT_800cfe92;
+    sVar2 = DAT_800cfe94;
   }
   else
   {
-    uVar7 = (int)position->x - (int)((theCamera.focusInstance)->position).x;
+    uVar7 = (int)position->x - (int)*(short *)(DAT_800cff98 + 0x5c);
     sVar1 = position->z;
-    sVar2 = ((theCamera.focusInstance)->position).z;
-    uVar6 = (int)position->y - (int)((theCamera.focusInstance)->position).y;
+    sVar2 = *(short *)(DAT_800cff98 + 0x60);
+    uVar6 = (int)position->y - (int)*(short *)(DAT_800cff98 + 0x5e);
   }
   lVar3 = MATH3D_FastSqrt0(uVar7 * uVar7 + uVar6 * uVar6 +
                            ((int)sVar1 - (int)sVar2) * ((int)sVar1 - (int)sVar2));
@@ -1492,7 +1335,7 @@ ulong SOUND_Update3dSound(_Position *position, ulong handle, int pitch, int maxV
   iVar4 = ratan2(uVar6, uVar7);
   _vol = (minVolDist - lVar3) / (minVolDist / maxVolume);
   vol = (ushort)_vol;
-  uVar6 = (int)theCamera.core.rotation.z - (iVar4 + 0x400);
+  uVar6 = (int)DAT_800cff44 - (iVar4 + 0x400);
   uVar7 = (int)(uVar6 & 0xfff) >> 10;
   if (0x7f < _vol)
   {
@@ -1570,6 +1413,7 @@ void SOUND_HandleGlobalValueSignal(int name, long data)
 /* end block 2 */
 // End Line: 2340
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void SOUND_Init(void)
@@ -1585,14 +1429,14 @@ void SOUND_Init(void)
   local_20.memoryFreeProc = MEMPACK_Free;
   aadGetMemorySize(&local_20);
   aadInit(&local_20, (uchar *)&soundBuffer);
-  gameTrackerX.sound.gMasterVol = 0x3fff;
+  _USHORT_800d115c = 0x3fff;
   SOUND_SetMusicVolume(0x7f);
   SOUND_SetSfxVolume(0x7f);
   SOUND_SetVoiceVolume(0x50);
-  gameTrackerX.sound.gSfxOn = '\x01';
-  gameTrackerX.sound.gMusicOn = '\x01';
-  gameTrackerX.sound.gVoiceOn = '\x01';
-  gameTrackerX.sound.soundsLoaded = '\0';
+  ULONG_800d116c._0_1_ = 1;
+  ULONG_800d116c._1_1_ = 1;
+  ULONG_800d116c._2_1_ = 1;
+  ULONG_800d116c._3_1_ = 0;
   SOUND_MusicInit();
   aadInitReverb();
   return;
@@ -1612,7 +1456,7 @@ void SOUND_Init(void)
 void SOUND_Free(void)
 
 {
-  gameTrackerX.sound.soundsLoaded = '\0';
+  ULONG_800d116c._3_1_ = 0;
   aadShutdown();
   return;
 }
@@ -1647,9 +1491,9 @@ void SOUND_SetMusicVolume(int newVolume)
 {
   if (newVolume == -1)
   {
-    newVolume = gameTrackerX.sound.gMusicVol;
+    newVolume = aadUpdateRate;
   }
-  gameTrackerX.sound.gMusicVol = newVolume;
+  aadUpdateRate = newVolume;
   aadSetMusicMasterVolume(newVolume);
   return;
 }
@@ -1668,9 +1512,9 @@ void SOUND_SetSfxVolume(int newVolume)
 {
   if (newVolume == -1)
   {
-    newVolume = gameTrackerX.sound.gSfxVol;
+    newVolume = ULONG_800d1164;
   }
-  gameTrackerX.sound.gSfxVol = newVolume;
+  ULONG_800d1164 = newVolume;
   aadSetSfxMasterVolume(newVolume);
   return;
 }
@@ -1694,9 +1538,9 @@ void SOUND_SetVoiceVolume(int newVolume)
 {
   if (newVolume == -1)
   {
-    newVolume = gameTrackerX.sound.gVoiceVol;
+    newVolume = ULONG_800d1168;
   }
-  gameTrackerX.sound.gVoiceVol = newVolume;
+  ULONG_800d1168 = newVolume;
   return;
 }
 
@@ -1714,12 +1558,10 @@ void SOUND_SetVoiceVolume(int newVolume)
 /* end block 2 */
 // End Line: 2665
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
-
 void SOUND_PauseAllSound(void)
 
 {
-  if (gameTrackerX.sound.soundsLoaded != '\0')
+  if (cGpffffb6bb != '\0')
   {
     aadShutdownReverb();
     aadPauseSound();
@@ -1746,7 +1588,7 @@ void SOUND_PauseAllSound(void)
 void SOUND_ResumeAllSound(void)
 
 {
-  if (gameTrackerX.sound.soundsLoaded != '\0')
+  if (ULONG_800d116c._3_1_ != '\0')
   {
     aadInitReverb();
     aadResumeSound();
@@ -1773,7 +1615,7 @@ void SOUND_ResumeAllSound(void)
 void SOUND_StopAllSound(void)
 
 {
-  if (gameTrackerX.sound.soundsLoaded != '\0')
+  if (ULONG_800d116c._3_1_ != '\0')
   {
     aadStopAllSfx();
     aadStopAllSlots();
@@ -1802,7 +1644,7 @@ void SOUND_StopAllSound(void)
 void SOUND_ResetAllSound(void)
 
 {
-  if (gameTrackerX.sound.soundsLoaded != '\0')
+  if (ULONG_800d116c._3_1_ != '\0')
   {
     SOUND_StopAllSound();
     aadInitReverb();
@@ -1937,10 +1779,11 @@ void SOUND_SfxOn(void)
 int SndIsPlaying(ulong handle)
 
 {
-  int iVar1;
+  int in_v0;
+  _AadSequenceSlot *in_a1;
 
-  iVar1 = aadIsSfxPlaying(handle);
-  return iVar1;
+  metaCmdLoopEnd((AadSeqEvent *)handle, in_a1);
+  return in_v0;
 }
 
 // decompiled code
@@ -1998,7 +1841,7 @@ ulong SndPlay(uint sample)
 {
   ulong uVar1;
 
-  if (gameTrackerX.sound.gSfxOn == '\0')
+  if ((char)ULONG_800d116c == '\0')
   {
     uVar1 = 0;
   }
@@ -2056,7 +1899,7 @@ ulong SndPlayVolPan(uint sample, ushort vol, ushort pan, short pitch)
 {
   ulong uVar1;
 
-  if (gameTrackerX.sound.gSfxOn == '\0')
+  if ((char)ULONG_800d116c == '\0')
   {
     uVar1 = 0;
   }
@@ -2081,7 +1924,7 @@ ulong SndUpdateVolPanPitch(ulong handle, ushort vol, ushort pan, short pitch)
 {
   ulong uVar1;
 
-  if ((handle == 0) || (gameTrackerX.sound.gSfxOn == '\0'))
+  if ((handle == 0) || ((char)ULONG_800d116c == '\0'))
   {
     uVar1 = 0;
   }
@@ -2109,8 +1952,8 @@ ulong SndUpdateVolPanPitch(ulong handle, ushort vol, ushort pan, short pitch)
 void musicLoadReturnFunc(int dynamicBankIndex, int errorStatus)
 
 {
-  musicInfo.state = musicInfo.nextState;
-  musicInfo.errorStatus = errorStatus;
+  musicInfo = ULONG_800d1514;
+  ULONG_800d1518 = errorStatus;
   return;
 }
 
@@ -2133,7 +1976,7 @@ void musicLoadReturnFunc(int dynamicBankIndex, int errorStatus)
 void musicFadeoutReturnFunc(void)
 
 {
-  musicInfo.state = musicInfo.nextState;
+  musicInfo = ULONG_800d1514;
   return;
 }
 
@@ -2154,15 +1997,15 @@ void musicEndCallbackFunc(long userData, int slot, int loopFlag)
   if (slot == 0)
   {
     aadInstallEndSequenceCallback((TDRFuncPtr_aadInstallEndSequenceCallback0callbackProc)0x0, 0);
-    iVar1 = aadAssignDynamicSequence(musicInfo.bankLoaded, 0, 0);
+    iVar1 = aadAssignDynamicSequence(ULONG_800d151c, 0, 0);
     if (iVar1 == 0)
     {
       aadStartSlot(0);
-      musicInfo.state = musicInfo.nextState;
+      musicInfo = ULONG_800d1514;
     }
     else
     {
-      musicInfo.state = 0;
+      musicInfo = 0;
     }
   }
   return;
@@ -2194,15 +2037,15 @@ void musicEndCallbackFunc(long userData, int slot, int loopFlag)
 void SOUND_PutMusicCommand(int cmdType, int cmdData)
 
 {
-  int iVar1;
+  ulong uVar1;
 
-  iVar1 = musicInfo.commandIn;
-  musicInfo.commandQueue[musicInfo.commandIn].type = cmdType;
-  musicInfo.commandQueue[iVar1].data = cmdData;
-  if (musicInfo.numCmdsInQueue < 3)
+  uVar1 = ULONG_800d1550;
+  (&ULONG_800d1530)[ULONG_800d1550 * 2] = cmdType;
+  (&ULONG_800d1534)[uVar1 * 2] = cmdData;
+  if ((int)ULONG_800d1558 < 3)
   {
-    musicInfo.commandIn = musicInfo.commandIn + 1U & 3;
-    musicInfo.numCmdsInQueue = musicInfo.numCmdsInQueue + 1;
+    ULONG_800d1550 = ULONG_800d1550 + 1 & 3;
+    ULONG_800d1558 = ULONG_800d1558 + 1;
   }
   return;
 }
@@ -2226,14 +2069,14 @@ void SOUND_PutMusicCommand(int cmdType, int cmdData)
 void SOUND_MusicInit(void)
 
 {
-  musicInfo.state = 0;
-  musicInfo.errorStatus = 0;
-  musicInfo.checkMusicDelay = 0;
-  musicInfo.currentMusicPlane = -1;
-  musicInfo.currentMusicName[0] = '\0';
-  musicInfo.commandIn = 0;
-  musicInfo.commandOut = 0;
-  musicInfo.numCmdsInQueue = 0;
+  musicInfo = 0;
+  ULONG_800d1518 = 0;
+  ULONG_800d1520 = 0;
+  ULONG_800d1524 = 0xffffffff;
+  ULONG_800d1528._0_1_ = 0;
+  ULONG_800d1550 = 0;
+  ULONG_800d1554 = 0;
+  ULONG_800d1558 = 0;
   return;
 }
 
@@ -2259,7 +2102,7 @@ int SOUND_IsMusicLoading(void)
   int iVar1;
 
   iVar1 = 0;
-  if (((musicInfo.state == 1) || (musicInfo.state == 3)) || (musicInfo.state == 7))
+  if (((musicInfo == 1) || (musicInfo == 3)) || (musicInfo == 7))
   {
     iVar1 = 1;
   }
@@ -2314,207 +2157,108 @@ int SOUND_IsMusicLoading(void)
 void SOUND_ProcessMusicLoad(void)
 
 {
-  Level *pLVar1;
-  long lVar2;
-  int dynamicBankIndex;
-  int loadOption;
-  char local_58;
-  char local_57;
-  undefined local_56;
-  undefined local_55;
-  undefined local_54;
-  undefined4 local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
-  undefined2 local_38;
-  char local_36;
-  undefined4 local_30;
-  undefined4 local_2c;
-  undefined4 local_28;
-  undefined4 local_24;
-  undefined4 local_20;
-  undefined4 local_1c;
-  undefined2 local_18;
-  char local_16;
+  ulong dynamicBankIndex;
+  int in_a1;
+  int errorStatus;
+  int errorStatus_00;
+  char local_50[64];
 
-  switch (musicInfo.state)
+  dynamicBankIndex = ULONG_800d1520;
+  switch (musicInfo)
   {
   case 0:
-    if (musicInfo.numCmdsInQueue != 0)
+    if (ULONG_800d1558 == 0)
     {
-      if (musicInfo.commandQueue[musicInfo.commandOut].type == 0)
+      dynamicBankIndex = ULONG_800d1520 - 1;
+      if ((ULONG_800d1520 == 0) &&
+          (dynamicBankIndex = ULONG_800d1520, (aadMem->sramDefragInfo).status == 0))
       {
-        musicInfo.state = 0xb;
-        musicInfo.nextState = 0xd;
-        musicInfo.currentMusicPlane = musicInfo.commandQueue[musicInfo.commandOut].data;
+        ULONG_800d1520 = 0x1e;
+        /* WARNING: Subroutine does not return */
+        STREAM_GetLevelWithID(*(long *)(DAT_800d0fd8 + 0x38));
+      }
+    }
+    else
+    {
+      if ((&ULONG_800d1530)[ULONG_800d1554 * 2] == 0)
+      {
+        musicInfo = 0xb;
+        ULONG_800d1514 = 0xd;
+        ULONG_800d1524 = (&ULONG_800d1534)[ULONG_800d1554 * 2];
         aadStartMusicMasterVolFade(0, -3, musicFadeoutReturnFunc);
       }
-      musicInfo.commandOut = musicInfo.commandOut + 1U & 3;
-      musicInfo.numCmdsInQueue = musicInfo.numCmdsInQueue + -1;
-      return;
-    }
-    if (musicInfo.checkMusicDelay != 0)
-    {
-      musicInfo.checkMusicDelay = musicInfo.checkMusicDelay + -1;
-      return;
-    }
-    if ((aadMem->sramDefragInfo).status != 0)
-    {
-      return;
-    }
-    musicInfo.checkMusicDelay = 0x1e;
-    pLVar1 = STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID);
-    if (pLVar1 != (Level *)0x0)
-    {
-      if (pLVar1->dynamicMusicName == (char *)0x0)
-      {
-        if (musicInfo.currentMusicName[0] != '\0')
-        {
-          musicInfo.currentMusicName[0] = '\0';
-          musicInfo.state = 0xb;
-          musicInfo.nextState = 0xc;
-          aadStartMusicMasterVolFade(0, -1, musicFadeoutReturnFunc);
-          return;
-        }
-        return;
-      }
-      local_58 = *pLVar1->dynamicMusicName;
-      local_57 = pLVar1->dynamicMusicName[1];
-      if (musicInfo.currentMusicPlane == -1)
-      {
-        musicInfo.currentMusicPlane = (int)gameTrackerX.gameData.asmData.MorphType;
-      }
-      if (musicInfo.currentMusicPlane == 0)
-      {
-        local_56 = 0x6d;
-        local_55 = 0x61;
-      }
-      else
-      {
-        local_56 = 0x73;
-        local_55 = 0x70;
-      }
-      local_54 = 0;
-      dynamicBankIndex = strcmpi(&local_58, musicInfo.currentMusicName);
-      if (dynamicBankIndex != 0)
-      {
-        if (musicInfo.currentMusicName[0] == '\0')
-        {
-          sprintf((char *)&local_50, s__kain2_music__s__s_snd_800cea9c);
-          sprintf((char *)&local_30, s__kain2_music__s__s_smp_800ceaec);
-          lVar2 = LOAD_DoesFileExist((char *)&local_50);
-          if (lVar2 == 0)
-          {
-            return;
-          }
-          strcpy(musicInfo.currentMusicName, &local_58);
-          dynamicBankIndex = 0;
-          loadOption = 1;
-          musicInfo.state = 1;
-          musicInfo.nextState = 2;
-        }
-        else
-        {
-          sprintf((char *)&local_50, s__kain2_music__s__s_snd_800cea9c);
-          lVar2 = LOAD_DoesFileExist((char *)&local_50);
-          if (lVar2 == 0)
-          {
-            return;
-          }
-          strcpy(musicInfo.currentMusicName, &local_58);
-          dynamicBankIndex = 1;
-          loadOption = 0;
-          local_50 = s__kain2_music_uwtr_uwtr_snd_800ceab4._0_4_;
-          local_4c = s__kain2_music_uwtr_uwtr_snd_800ceab4._4_4_;
-          local_48 = s__kain2_music_uwtr_uwtr_snd_800ceab4._8_4_;
-          local_44 = s__kain2_music_uwtr_uwtr_snd_800ceab4._12_4_;
-          local_40 = s__kain2_music_uwtr_uwtr_snd_800ceab4._16_4_;
-          local_3c = s__kain2_music_uwtr_uwtr_snd_800ceab4._20_4_;
-          local_38 = s__kain2_music_uwtr_uwtr_snd_800ceab4._24_2_;
-          local_36 = s__kain2_music_uwtr_uwtr_snd_800ceab4[26];
-          local_30 = s__kain2_music_uwtr_uwtr_smp_800cead0._0_4_;
-          local_2c = s__kain2_music_uwtr_uwtr_smp_800cead0._4_4_;
-          local_28 = s__kain2_music_uwtr_uwtr_smp_800cead0._8_4_;
-          local_24 = s__kain2_music_uwtr_uwtr_smp_800cead0._12_4_;
-          local_20 = s__kain2_music_uwtr_uwtr_smp_800cead0._16_4_;
-          local_1c = s__kain2_music_uwtr_uwtr_smp_800cead0._20_4_;
-          local_18 = s__kain2_music_uwtr_uwtr_smp_800cead0._24_2_;
-          local_16 = s__kain2_music_uwtr_uwtr_smp_800cead0[26];
-          musicInfo.state = 3;
-          musicInfo.nextState = 4;
-        }
-        aadLoadDynamicSoundBank((char *)&local_50, (char *)&local_30, dynamicBankIndex, loadOption,
-                                musicLoadReturnFunc);
-        return;
-      }
-      return;
-    }
-    return;
-  default:
-    goto switchD_8004046c_caseD_1;
-  case 2:
-    dynamicBankIndex = aadAssignDynamicSequence(0, 0, 0);
-    if (dynamicBankIndex == 0)
-    {
-      aadStartSlot(0);
+      ULONG_800d1554 = ULONG_800d1554 + 1 & 3;
+      ULONG_800d1558 = ULONG_800d1558 - 1;
+      dynamicBankIndex = ULONG_800d1520;
     }
     break;
-  case 4:
-    if (musicInfo.errorStatus != 0)
+  case 2:
+    errorStatus = 0;
+    errorStatus_00 = aadAssignDynamicSequence(0, 0, 0);
+    if (errorStatus_00 == 0)
     {
-      musicInfo.state = 0;
+      errorStatus_00 = 0;
+      aadStartSlot(0);
+      musicLoadReturnFunc(errorStatus_00, errorStatus);
       return;
     }
-    musicInfo.state = 5;
-    musicInfo.nextState = 6;
-    musicInfo.bankLoaded = 1;
-    goto LAB_80040890;
+    goto code_r0x80040914;
+  case 4:
+    if (ULONG_800d1518 != 0)
+    {
+      musicInfo = 0;
+      return;
+    }
+    musicInfo = 5;
+    ULONG_800d1514 = 6;
+    ULONG_800d151c = 1;
+    goto SndPlayVolPan;
   case 6:
     if ((aadMem->sramDefragInfo).status == 0)
     {
-      sprintf((char *)&local_50, s__kain2_music__s__s_snd_800cea9c);
-      sprintf((char *)&local_30, s__kain2_music__s__s_smp_800ceaec);
-      aadLoadDynamicSoundBank((char *)&local_50, (char *)&local_30, 0, 1, musicLoadReturnFunc);
-      musicInfo.state = 7;
-      musicInfo.nextState = 8;
-      return;
+      /* WARNING: Subroutine does not return */
+      sprintf(local_50, s__kain2_music__s__s_snd_800cea9c);
     }
-    return;
+    break;
   case 8:
-    if (musicInfo.errorStatus != 0)
+    if (ULONG_800d1518 != 0)
     {
-      musicInfo.state = 0;
+      musicInfo = 0;
       return;
     }
-    musicInfo.state = 9;
-    musicInfo.nextState = 10;
-    musicInfo.bankLoaded = 0;
-  LAB_80040890:
+    musicInfo = 9;
+    ULONG_800d1514 = 10;
+    ULONG_800d151c = 0;
+  SndPlayVolPan:
     aadInstallEndSequenceCallback(musicEndCallbackFunc, 0);
     aadSetUserVariable(0x7f, 1);
-    return;
-  case 10:
-    aadFreeDynamicSoundBank(1);
+    dynamicBankIndex = ULONG_800d1520;
     break;
+  case 10:
+    errorStatus_00 = 1;
+    aadFreeDynamicSoundBank(1);
+    musicLoadReturnFunc(errorStatus_00, in_a1);
+    return;
   case 0xc:
     aadStopAllSlots();
     aadFreeDynamicSoundBank(0);
-    aadStartMusicMasterVolFade(gameTrackerX.sound.gMusicVol, 1,
-                               (TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback)0x0);
-    break;
+    errorStatus_00 = 1;
+    dynamicBankIndex = aadUpdateRate;
+    aadStartMusicMasterVolFade(aadUpdateRate, 1, (TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback)0x0);
+    musicLoadReturnFunc(dynamicBankIndex, errorStatus_00);
+    return;
   case 0xd:
     aadStopAllSlots();
     aadFreeDynamicSoundBank(0);
-    aadStartMusicMasterVolFade(gameTrackerX.sound.gMusicVol, 1,
-                               (TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback)0x0);
-    musicInfo.currentMusicName[0] = '\0';
-    musicInfo.checkMusicDelay = 0;
+    aadStartMusicMasterVolFade(aadUpdateRate, 1, (TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback)0x0);
+    ULONG_800d1528._0_1_ = 0;
+    ULONG_800d1520 = 0;
+  code_r0x80040914:
+    musicInfo = 0;
+    dynamicBankIndex = ULONG_800d1520;
   }
-  musicInfo.state = 0;
-switchD_8004046c_caseD_1:
+  /* WARNING: Read-only address (ram,0x800d0fd8) is written */
+  ULONG_800d1520 = dynamicBankIndex;
   return;
 }
 
@@ -2535,8 +2279,7 @@ void SOUND_UpdateSound(void)
   bool bVar1;
 
   aadProcessLoadQueue();
-  if (((gameTrackerX.debugFlags & 0x40000U) == 0) &&
-      ((gSramFullAlarm != 0 || (gSramFullMsgCnt != 0))))
+  if (((vmRealClock & 0x40000U) == 0) && ((gSramFullAlarm != 0 || (gSramFullMsgCnt != 0))))
   {
     bVar1 = gSramFullMsgCnt == 0;
     gSramFullMsgCnt = gSramFullMsgCnt + -1;
@@ -2546,7 +2289,7 @@ void SOUND_UpdateSound(void)
     }
     FONT_Print(s___sound_memory_full__u__d__d_f___800ceb04);
   }
-  if (gameTrackerX.sound.gMusicOn != '\0')
+  if (ULONG_800d116c._1_1_ != '\0')
   {
     SOUND_ProcessMusicLoad();
   }
@@ -2565,9 +2308,9 @@ void SOUND_UpdateSound(void)
 void SOUND_PlaneShift(int newPlane)
 
 {
-  if (gameTrackerX.sound.gMusicOn == '\0')
+  if (ULONG_800d116c._1_1_ == '\0')
   {
-    musicInfo.currentMusicPlane = -1;
+    ULONG_800d1524 = 0xffffffff;
   }
   else
   {
@@ -2598,27 +2341,8 @@ void SOUND_ShutdownMusic(void)
 
 {
   aadStopAllSlots();
+  /* WARNING: Subroutine does not return */
   EnterCriticalSection();
-  if (((musicInfo.state == 1) || (musicInfo.state == 3)) || (musicInfo.state == 7))
-  {
-    musicInfo.nextState = 0;
-    ExitCriticalSection();
-    while (musicInfo.state != 0)
-    {
-      STREAM_PollLoadQueue();
-    }
-  }
-  else
-  {
-    ExitCriticalSection();
-  }
-  musicInfo.currentMusicName[0] = '\0';
-  aadFreeDynamicSoundBank(0);
-  aadFreeDynamicSoundBank(1);
-  musicInfo.state = 0;
-  aadStartMusicMasterVolFade(gameTrackerX.sound.gMusicVol, 1,
-                             (TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback)0x0);
-  return;
 }
 
 // decompiled code

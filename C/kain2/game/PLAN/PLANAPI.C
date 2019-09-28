@@ -1,14 +1,6 @@
 #include "THISDUST.H"
 #include "PLANAPI.H"
 
-// undefined4 @0x800D51D0, len = 0x00000004
-poolManagementData = null;
-// undefined1 @0x800D5184, len = 0x00000001
-poolManagementDataStorage = null;
-// long @0x800D51A4, len = 0x00000004
-timerArray = null;
-// long @0x800D51CC, len = 0x00000004
-timerIndex = null;
 // decompiled code
 // original method signature:
 // void /*$ra*/ PLANAPI_ConvertPlanIntoEnmyPlanDataFormat(struct PlanningNode *goalNode /*$a0*/, struct EnemyPlanData *planData /*$s1*/, struct PlanningNode *planningPool /*$s2*/)
@@ -54,9 +46,9 @@ void PLANAPI_ConvertPlanIntoEnmyPlanDataFormat(PlanningNode *goalNode, EnemyPlan
         planData->nodeSkipArray[iVar4] = '\0';
         (planData->nodeSkipArray + iVar4)[8] = uVar1;
       }
-      puVar5 = puVar5 + 0x2e;
+      puVar5 = puVar5 + -6;
       iVar4 = iVar4 + -1;
-      goalNode = planningPool + (uint)goalNode->parent;
+      goalNode = planningPool + goalNode->parent;
     } while (-1 < iVar4);
   }
   return;
@@ -85,18 +77,17 @@ int PLANAPI_FindPathBetweenNodes(PlanningNode *startNode, PlanningNode *goalNode
                                  int validNodeTypes)
 
 {
-  void *planningPool;
+  PlanningNode *planningPool;
   PlanningNode *goalNode_00;
   int iVar1;
 
-  planningPool = gameTrackerX.planningPool;
+  planningPool = DAT_800d11bc;
   iVar1 = 0;
   if (((startNode != (PlanningNode *)0x0) && (goalNode != (PlanningNode *)0x0)) &&
-      (goalNode_00 = PLANSRCH_FindPathInGraph((PlanningNode *)gameTrackerX.planningPool, startNode, goalNode,
-                                              validNodeTypes),
+      (goalNode_00 = PLANSRCH_FindPathInGraph(DAT_800d11bc, startNode, goalNode, validNodeTypes),
        goalNode_00 != (PlanningNode *)0x0))
   {
-    PLANAPI_ConvertPlanIntoEnmyPlanDataFormat(goalNode_00, planData, (PlanningNode *)planningPool);
+    PLANAPI_ConvertPlanIntoEnmyPlanDataFormat(goalNode_00, planData, planningPool);
     iVar1 = 1;
     planData->goalUnitID = *(short *)&goalNode_00->streamUnitID;
   }
@@ -130,12 +121,14 @@ int PLANAPI_FindPathBetweenNodes(PlanningNode *startNode, PlanningNode *goalNode
 /* end block 2 */
 // End Line: 362
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void PLANAPI_DoTimingCalcsAndDrawing(long startTime, PlanningNode *planningPool)
 
 {
   ulong uVar1;
   int iVar2;
-  long *plVar3;
+  char *pcVar3;
   int iVar4;
   int iVar5;
   int iVar6;
@@ -144,11 +137,11 @@ void PLANAPI_DoTimingCalcsAndDrawing(long startTime, PlanningNode *planningPool)
   iVar5 = 0;
   uVar1 = TIMER_TimeDiff(startTime);
   iVar4 = 0;
-  plVar3 = &timerArray;
-  (&timerArray)[timerIndex] = uVar1;
+  pcVar3 = &timerArray;
+  *(ulong *)(&timerArray + _timerIndex * 4) = uVar1;
   do
   {
-    iVar2 = *plVar3;
+    iVar2 = *(int *)pcVar3;
     if (iVar2 < iVar6)
     {
       iVar6 = iVar2;
@@ -158,14 +151,14 @@ void PLANAPI_DoTimingCalcsAndDrawing(long startTime, PlanningNode *planningPool)
       iVar5 = iVar2;
     }
     iVar4 = iVar4 + 1;
-    plVar3 = plVar3 + 1;
+    pcVar3 = (char *)((int *)pcVar3 + 1);
   } while (iVar4 < 10);
-  timerIndex = timerIndex + 1;
-  if (9 < timerIndex)
+  _timerIndex = _timerIndex + 1;
+  if (9 < _timerIndex)
   {
-    timerIndex = 0;
+    _timerIndex = 0;
   }
-  if ((gameTrackerX.debugFlags2 & 0x10U) != 0)
+  if ((vmClock & 0x10U) != 0)
   {
     PLANPOOL_NumberOfNodesOfType(planningPool, '\x04');
     PLANPOOL_NumberOfNodesOfType(planningPool, '\f');
@@ -212,36 +205,36 @@ void PLANAPI_DoTimingCalcsAndDrawing(long startTime, PlanningNode *planningPool)
 /* end block 2 */
 // End Line: 553
 
-int PLANAPI_AddNodeOfTypeToPool(_Position *pos, int type)
+undefined4 PLANAPI_AddNodeOfTypeToPool(_Position *param_1, undefined4 param_2)
 
 {
-  void *planningPool;
+  PlanningNode *planningPool;
   int iVar1;
   ushort nodeType;
-  _PlanCollideInfo local_28;
-  ushort local_18[4];
+  _PlanCollideInfo _Stack40;
+  ushort auStack24[4];
 
-  planningPool = gameTrackerX.planningPool;
-  iVar1 = PLANCOLL_CheckUnderwaterPoint(pos);
+  planningPool = pPGpffffb708;
+  iVar1 = PLANCOLL_CheckUnderwaterPoint((short *)param_1);
   if (iVar1 == -1)
   {
-    local_28.collidePos.x = pos->x;
-    local_28.collidePos.y = pos->y;
-    local_28.collidePos.z = pos->z;
-    pos = &local_28.collidePos;
-    iVar1 = PLANCOLL_FindTerrainHitFinal(&local_28, (int *)local_18, 0x100, -0x280, 0, 5);
+    _Stack40.collidePos.x = param_1->x;
+    _Stack40.collidePos.y = param_1->y;
+    _Stack40.collidePos.z = param_1->z;
+    param_1 = &_Stack40.collidePos;
+    iVar1 = PLANCOLL_FindTerrainHitFinal(&_Stack40, (int *)auStack24, 0x100, -0x280, 0, 5);
     if (iVar1 == 0)
     {
       return 0;
     }
-    nodeType = (ushort)(((uint)local_18[0] & 3) << 3) | (ushort)type & 7;
+    nodeType = (ushort)(((uint)auStack24[0] & 3) << 3) | (ushort)param_2 & 7;
   }
   else
   {
-    nodeType = (ushort)type & 7 | 0x18;
-    local_28.StreamUnitID = iVar1;
+    nodeType = (ushort)param_2 & 7 | 0x18;
+    _Stack40.StreamUnitID = iVar1;
   }
-  PLANPOOL_AddNodeToPool(pos, (PlanningNode *)planningPool, nodeType, 0, local_28.StreamUnitID);
+  PLANPOOL_AddNodeToPool(param_1, planningPool, nodeType, 0, _Stack40.StreamUnitID);
   return 1;
 }
 
@@ -270,30 +263,32 @@ int PLANAPI_AddNodeOfTypeToPool(_Position *pos, int type)
 /* end block 3 */
 // End Line: 627
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void PLANAPI_DeleteNodesFromPoolByType(int nodeSource)
 
 {
-  void *planningPool;
+  PlanningNode *planningPool;
   PlanningNode *nodeToDelete;
   int iVar1;
 
-  planningPool = gameTrackerX.planningPool;
+  planningPool = DAT_800d11bc;
   iVar1 = 0;
-  nodeToDelete = (PlanningNode *)gameTrackerX.planningPool;
-  if (*(char *)(poolManagementData + 1) != '\0')
+  nodeToDelete = DAT_800d11bc;
+  if (*(char *)(_poolManagementData + 1) != '\0')
   {
     do
     {
       if (((uint)nodeToDelete->nodeType & 7) == nodeSource)
       {
-        PLANPOOL_DeleteNodeFromPool(nodeToDelete, (PlanningNode *)planningPool);
+        PLANPOOL_DeleteNodeFromPool(nodeToDelete, planningPool);
       }
       else
       {
         iVar1 = iVar1 + 1;
         nodeToDelete = nodeToDelete + 1;
       }
-    } while (iVar1 < (int)(uint) * (byte *)(poolManagementData + 1));
+    } while (iVar1 < (int)(uint) * (byte *)(_poolManagementData + 1));
   }
   return;
 }
@@ -323,30 +318,32 @@ void PLANAPI_DeleteNodesFromPoolByType(int nodeSource)
 /* end block 3 */
 // End Line: 689
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void PLANAPI_DeleteNodeFromPoolByUnit(long streamUnitID)
 
 {
-  void *planningPool;
+  PlanningNode *planningPool;
   PlanningNode *nodeToDelete;
   int iVar1;
 
-  planningPool = gameTrackerX.planningPool;
+  planningPool = DAT_800d11bc;
   iVar1 = 0;
-  nodeToDelete = (PlanningNode *)gameTrackerX.planningPool;
-  if (*(char *)(poolManagementData + 1) != '\0')
+  nodeToDelete = DAT_800d11bc;
+  if (*(char *)(_poolManagementData + 1) != '\0')
   {
     do
     {
       if (nodeToDelete->streamUnitID == streamUnitID)
       {
-        PLANPOOL_DeleteNodeFromPool(nodeToDelete, (PlanningNode *)planningPool);
+        PLANPOOL_DeleteNodeFromPool(nodeToDelete, planningPool);
       }
       else
       {
         iVar1 = iVar1 + 1;
         nodeToDelete = nodeToDelete + 1;
       }
-    } while (iVar1 < (int)(uint) * (byte *)(poolManagementData + 1));
+    } while (iVar1 < (int)(uint) * (byte *)(_poolManagementData + 1));
   }
   return;
 }
@@ -373,15 +370,14 @@ void PLANAPI_DeleteNodeFromPoolByUnit(long streamUnitID)
 int PLANAPI_FindPathInGraphToTarget(_Position *startPos, EnemyPlanData *planData, int validNodeTypes)
 
 {
-  void *planningPool;
   PlanningNode *startNode;
-  PlanningNode *goalNode;
+  PlanningNode *planningPool;
   int iVar1;
 
-  planningPool = gameTrackerX.planningPool;
-  startNode = PLANPOOL_GetNodeByPosition(startPos, (PlanningNode *)gameTrackerX.planningPool);
-  goalNode = PLANPOOL_GetFirstNodeOfSource((PlanningNode *)planningPool, '\x03');
-  iVar1 = PLANAPI_FindPathBetweenNodes(startNode, goalNode, planData, validNodeTypes);
+  planningPool = DAT_800d11bc;
+  startNode = PLANPOOL_GetNodeByPosition(startPos, DAT_800d11bc);
+  planningPool = PLANPOOL_GetFirstNodeOfSource(planningPool, '\x03');
+  iVar1 = PLANAPI_FindPathBetweenNodes(startNode, planningPool, planData, validNodeTypes);
   return iVar1;
 }
 
@@ -414,19 +410,21 @@ int PLANAPI_FindPathInGraphToTarget(_Position *startPos, EnemyPlanData *planData
 /* end block 4 */
 // End Line: 886
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void PLANAPI_InitPlanning(void *planningPool)
 
 {
   int iVar1;
-  long *plVar2;
+  char *pcVar2;
   int iVar3;
   int iVar4;
 
   iVar4 = 0;
-  DAT_800d5194 = (int)planningPool + 0x380;
-  poolManagementData = &poolManagementDataStorage;
-  poolManagementDataStorage = 0;
-  DAT_800d5185 = 0;
+  _CHAR____800d5194 = (int)planningPool + 0x380;
+  _poolManagementData = &poolManagementDataStorage;
+  poolManagementDataStorage = '\0';
+  CHAR____800d5185 = '\0';
   do
   {
     iVar3 = 0;
@@ -434,20 +432,20 @@ void PLANAPI_InitPlanning(void *planningPool)
     do
     {
       iVar3 = iVar3 + 1;
-      *(undefined2 *)(iVar1 + iVar4 * 0x40 + DAT_800d5194) = 0;
+      *(undefined2 *)(iVar1 + iVar4 * 0x40 + _CHAR____800d5194) = 0;
       iVar1 = iVar3 * 2;
     } while (iVar3 < 0x20);
     iVar4 = iVar4 + 1;
   } while (iVar4 < 0x20);
   iVar4 = 9;
-  plVar2 = &LONG_800d51c8;
+  pcVar2 = &CHAR____800d51c8;
   do
   {
-    *plVar2 = 0;
+    *(undefined4 *)pcVar2 = 0;
     iVar4 = iVar4 + -1;
-    plVar2 = plVar2 + -1;
+    pcVar2 = (char *)((undefined4 *)pcVar2 + -1);
   } while (-1 < iVar4);
-  timerIndex = 0;
+  _timerIndex = 0;
   return;
 }
 
@@ -480,23 +478,21 @@ void PLANAPI_InitPlanning(void *planningPool)
 /* end block 4 */
 // End Line: 970
 
-short PLANAPI_PairType(PlanningNode *node1, PlanningNode *node2)
+uint PLANAPI_PairType(int param_1, int param_2)
 
 {
   uint uVar1;
   uint uVar2;
-  ushort uVar3;
 
-  uVar2 = (uint)(node1->nodeType >> 3) & 3;
-  _uVar3 = (uint)(node2->nodeType >> 3) & 3;
-  uVar3 = (ushort)_uVar3;
-  if (_uVar3 < uVar2)
+  uVar1 = (uint)(*(ushort *)(param_1 + 0x14) >> 3) & 3;
+  uVar2 = (uint)(*(ushort *)(param_2 + 0x14) >> 3) & 3;
+  if (uVar2 < uVar1)
   {
-    uVar1 = _uVar3 ^ uVar2 ^ _uVar3;
-    uVar3 = (ushort)uVar1;
-    uVar2 = uVar2 ^ _uVar3 ^ uVar1;
+    uVar1 = uVar1 ^ uVar2;
+    uVar2 = uVar2 ^ uVar1;
+    uVar1 = uVar1 ^ uVar2;
   }
-  return (short)(uVar3 | (ushort)(uVar2 << 8));
+  return uVar2 | uVar1 << 8;
 }
 
 // decompiled code
@@ -535,7 +531,7 @@ int PLANAPI_PassThroughHit(PlanningNode *node1, PlanningNode *node2)
   uint uVar1;
   uint uVar2;
 
-  if (gameTrackerX.gameFlags < 0)
+  if (DAT_800d10ec < 0)
   {
     uVar2 = (uint)node1->nodeType & 7;
     uVar1 = (uint)node2->nodeType & 7;
@@ -577,14 +573,14 @@ int PLANAPI_PassThroughHit(PlanningNode *node1, PlanningNode *node2)
 int PLANAPI_CheckTargetToEnemyNode(PlanningNode **node1, PlanningNode **node2)
 
 {
-  void *planningPool;
+  PlanningNode *planningPool;
   PlanningNode *pPVar1;
   PlanningNode *pPVar2;
   int iVar3;
 
-  planningPool = gameTrackerX.planningPool;
-  pPVar1 = PLANPOOL_GetFirstNodeOfSource((PlanningNode *)gameTrackerX.planningPool, '\x02');
-  pPVar2 = PLANPOOL_GetFirstNodeOfSource((PlanningNode *)planningPool, '\x03');
+  planningPool = DAT_800d11bc;
+  pPVar1 = PLANPOOL_GetFirstNodeOfSource(DAT_800d11bc, '\x02');
+  pPVar2 = PLANPOOL_GetFirstNodeOfSource(planningPool, '\x03');
   if ((pPVar1 == (PlanningNode *)0x0) || (pPVar2 == (PlanningNode *)0x0))
   {
     iVar3 = 0;
@@ -635,17 +631,17 @@ int PLANAPI_CheckTargetToEnemyNode(PlanningNode **node1, PlanningNode **node2)
 /* end block 2 */
 // End Line: 1117
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void PLANAPI_UpdatePlanningDatabase(GameTracker *gameTracker, _Instance *player)
 
 {
-  byte *pbVar1;
+  ushort uVar1;
   byte bVar2;
-  ushort uVar3;
-  uint uVar4;
-  long lVar5;
+  uint uVar3;
   int passThroughHit;
   int passThroughHit_00;
-  uint uVar6;
+  uint uVar4;
   PlanningNode *startPos;
   PlanningNode *endPos;
   PlanningNode *planningPool;
@@ -654,10 +650,11 @@ void PLANAPI_UpdatePlanningDatabase(GameTracker *gameTracker, _Instance *player)
   PlanningNode *local_1c;
 
   planningPool = (PlanningNode *)gameTracker->planningPool;
-  uVar4 = GetRCnt(0xf2000000);
-  gameTrackerX.plan_collide_override = '\x01';
-  uVar6 = gameTimer << 0x10;
-  bVar2 = *poolManagementData;
+  uVar3 = GetRCnt(0xf2000000);
+  /* WARNING: Read-only address (ram,0x800d1172) is written */
+  aadMem._2_1_ = 1;
+  uVar4 = gameTimer << 0x10;
+  bVar2 = *_poolManagementData;
   if (bVar2 == 1)
   {
     PLAN_AddOrRemoveNodes(planningPool, player);
@@ -670,7 +667,7 @@ void PLANAPI_UpdatePlanningDatabase(GameTracker *gameTracker, _Instance *player)
       if (bVar2 == 0)
       {
         PLAN_AddInitialNodes(planningPool, player);
-        *poolManagementData = 1;
+        *_poolManagementData = 1;
         goto LAB_80098724;
       }
     }
@@ -684,95 +681,30 @@ void PLANAPI_UpdatePlanningDatabase(GameTracker *gameTracker, _Instance *player)
           local_20 = PLAN_FindNodeMostInNeedOfConnectivityExpansion(planningPool);
           local_1c = PLANPOOL_GetClosestUnexploredValidNeighbor(local_20, planningPool);
         }
-        *poolManagementData = 1;
-        if ((local_20 == (PlanningNode *)0x0) || (local_1c == (PlanningNode *)0x0))
-          goto LAB_80098724;
-        lVar5 = MATH3D_LengthXYZ((int)(local_20->pos).x - (int)(local_1c->pos).x,
-                                 (int)(local_20->pos).y - (int)(local_1c->pos).y,
-                                 (int)(local_20->pos).z - (int)(local_1c->pos).z);
-        if (5999 < lVar5)
+        *_poolManagementData = 1;
+        if ((local_20 != (PlanningNode *)0x0) && (local_1c != (PlanningNode *)0x0))
         {
-          PLANPOOL_MarkTwoNodesAsNotConnected(local_20, local_1c, planningPool);
-          PLANPOOL_MarkTwoNodesAsNotConnected(local_1c, local_20, planningPool);
-          goto LAB_80098724;
+          /* WARNING: Subroutine does not return */
+          MATH3D_LengthXYZ((int)(local_20->pos).x - (int)(local_1c->pos).x,
+                           (int)(local_20->pos).y - (int)(local_1c->pos).y,
+                           (int)(local_20->pos).z - (int)(local_1c->pos).z);
         }
-        uVar3 = PLANAPI_PairType(local_20, local_1c);
-        startPos = local_1c;
-        *(ushort *)(poolManagementData + 0x14) = uVar3;
-        if (uVar3 == 3)
-        {
-          if ((local_20->nodeType >> 3 & 3) == 3)
-          {
-            local_1c = local_20;
-            local_20 = startPos;
-          }
-          passThroughHit = PLANAPI_PassThroughHit(local_20, local_1c);
-          passThroughHit =
-              PLANCOLL_DoesWaterPathUpExist((_Position *)local_20, (_Position *)local_1c, 0,
-                                            (_Position *)(poolManagementData + 0x16), passThroughHit);
-          passThroughHit_00 = PLANAPI_PassThroughHit(local_20, local_1c);
-          local_28 = 0;
-          endPos = (PlanningNode *)(poolManagementData + 0x16);
-          startPos = local_1c;
-        LAB_80098508:
-          passThroughHit_00 =
-              PLANCOLL_DoesLOSExistFinal((_Position *)startPos, (_Position *)endPos, 0, passThroughHit_00, local_28);
-        }
-        else
-        {
-          if (uVar3 < 4)
-          {
-            if (uVar3 == 0)
-            {
-            LAB_80098430:
-              passThroughHit = PLANAPI_PassThroughHit(local_20, local_1c);
-              passThroughHit =
-                  PLANCOLL_DoesLOSExistFinal((_Position *)local_20, (_Position *)local_1c, 0, passThroughHit, 0x100);
-              passThroughHit_00 = PLANAPI_PassThroughHit(local_20, local_1c);
-              local_28 = -0x100;
-              startPos = local_20;
-              endPos = local_1c;
-              goto LAB_80098508;
-            }
-          }
-          else
-          {
-            if (uVar3 == 0x202)
-              goto LAB_80098430;
-          }
-          passThroughHit = PLANAPI_PassThroughHit(local_20, local_1c);
-          passThroughHit_00 =
-              PLANCOLL_DoesLOSExistFinal((_Position *)local_20, (_Position *)local_1c, 0, passThroughHit, 0);
-          passThroughHit = passThroughHit_00;
-        }
-        pbVar1 = poolManagementData;
-        *(PlanningNode **)(poolManagementData + 8) = local_20;
-        *(PlanningNode **)(pbVar1 + 0xc) = local_1c;
-        if ((passThroughHit == 0) || (passThroughHit_00 == 0))
-        {
-          PLANPOOL_MarkTwoNodesAsNotConnected(local_20, local_1c, planningPool);
-        }
-        else
-        {
-          PLANPOOL_MarkTwoNodesAsConnected(local_20, local_1c, planningPool);
-        }
-        bVar2 = 3;
-        goto LAB_8009871c;
+        goto LAB_80098724;
       }
       if (bVar2 == 3)
       {
-        local_20 = *(PlanningNode **)(poolManagementData + 8);
-        local_1c = *(PlanningNode **)(poolManagementData + 0xc);
-        uVar3 = *(ushort *)(poolManagementData + 0x14);
-        if ((uint)uVar3 == (uint)bVar2)
+        local_20 = *(PlanningNode **)(_poolManagementData + 8);
+        local_1c = *(PlanningNode **)(_poolManagementData + 0xc);
+        uVar1 = *(ushort *)(_poolManagementData + 0x14);
+        if ((uint)uVar1 == (uint)bVar2)
         {
           passThroughHit = PLANAPI_PassThroughHit(local_1c, local_20);
           passThroughHit =
               PLANCOLL_DoesWaterPathUpExist((_Position *)local_1c, (_Position *)local_20, 0,
-                                            (_Position *)(poolManagementData + 0x16), passThroughHit);
+                                            (_Position *)(_poolManagementData + 0x16), passThroughHit);
           passThroughHit_00 = PLANAPI_PassThroughHit(local_1c, local_20);
           local_28 = 0;
-          endPos = (PlanningNode *)(poolManagementData + 0x16);
+          endPos = (PlanningNode *)(_poolManagementData + 0x16);
           startPos = local_20;
         LAB_8009869c:
           passThroughHit_00 =
@@ -780,9 +712,9 @@ void PLANAPI_UpdatePlanningDatabase(GameTracker *gameTracker, _Instance *player)
         }
         else
         {
-          if (uVar3 < 4)
+          if (uVar1 < 4)
           {
-            if (uVar3 == 0)
+            if (uVar1 == 0)
             {
             LAB_800985f8:
               passThroughHit = PLANAPI_PassThroughHit(local_1c, local_20);
@@ -797,7 +729,7 @@ void PLANAPI_UpdatePlanningDatabase(GameTracker *gameTracker, _Instance *player)
           }
           else
           {
-            if (uVar3 == 0x202)
+            if (uVar1 == 0x202)
               goto LAB_800985f8;
           }
           passThroughHit = PLANAPI_PassThroughHit(local_1c, local_20);
@@ -817,11 +749,11 @@ void PLANAPI_UpdatePlanningDatabase(GameTracker *gameTracker, _Instance *player)
     }
     bVar2 = 1;
   }
-LAB_8009871c:
-  *poolManagementData = bVar2;
+  *_poolManagementData = bVar2;
 LAB_80098724:
-  PLANAPI_DoTimingCalcsAndDrawing(uVar4 & 0xffff | uVar6, planningPool);
-  gameTrackerX.plan_collide_override = '\0';
+  PLANAPI_DoTimingCalcsAndDrawing(uVar3 & 0xffff | uVar4, planningPool);
+  aadMem._2_1_ = 0;
+  /* WARNING: Read-only address (ram,0x800d1172) is written */
   return;
 }
 
@@ -839,10 +771,12 @@ LAB_80098724:
 /* end block 2 */
 // End Line: 1493
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 int PLANAPI_NumNodesInPool(void *planningPool)
 
 {
-  return (uint) * (byte *)(poolManagementData + 1);
+  return (uint) * (byte *)(_poolManagementData + 1);
 }
 
 // decompiled code
@@ -1156,21 +1090,29 @@ int PLANAPI_FindClosestNodePositionInUnit(_StreamUnit *streamUnit, _Position *ta
   iVar11 = 0;
   uVar3 = PLANAPI_GetFlags(type);
   p_Var8 = p_Var7;
-  while (0 < iVar6)
+  do
   {
+    if (iVar6 < 1)
+    {
+      if (iVar11 != 0)
+      {
+        sVar1 = (p_Var9->pos).y;
+        sVar2 = (p_Var9->pos).z;
+        pos->x = (p_Var9->pos).x;
+        pos->y = sVar1;
+        pos->z = sVar2;
+      }
+      return iVar11;
+    }
     if (((int)p_Var7->id & uVar3) != 0)
     {
-      if (distanceCheck == 0)
+      if (distanceCheck != 0)
       {
-        lVar4 = MATH3D_LengthXY((int)target->x - (int)(p_Var8->pos).x,
-                                (int)target->y - (int)(p_Var7->pos).y);
+        /* WARNING: Subroutine does not return */
+        MATH3D_LengthXYZ((int)target->x - (int)(p_Var8->pos).x, (int)target->y - (int)(p_Var7->pos).y, (int)target->z - (int)(p_Var7->pos).z);
       }
-      else
-      {
-        lVar4 = MATH3D_LengthXYZ((int)target->x - (int)(p_Var8->pos).x,
-                                 (int)target->y - (int)(p_Var7->pos).y,
-                                 (int)target->z - (int)(p_Var7->pos).z);
-      }
+      lVar4 = MATH3D_LengthXY((int)target->x - (int)(p_Var8->pos).x,
+                              (int)target->y - (int)(p_Var7->pos).y);
       if (lVar4 < max)
       {
         iVar5 = lVar4 - offset;
@@ -1189,14 +1131,5 @@ int PLANAPI_FindClosestNodePositionInUnit(_StreamUnit *streamUnit, _Position *ta
     iVar6 = iVar6 + -1;
     p_Var7 = p_Var7 + 1;
     p_Var8 = p_Var8 + 1;
-  }
-  if (iVar11 != 0)
-  {
-    sVar1 = (p_Var9->pos).y;
-    sVar2 = (p_Var9->pos).z;
-    pos->x = (p_Var9->pos).x;
-    pos->y = sVar1;
-    pos->z = sVar2;
-  }
-  return iVar11;
+  } while (true);
 }

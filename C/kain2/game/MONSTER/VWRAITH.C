@@ -1,37 +1,6 @@
 #include "THISDUST.H"
 #include "VWRAITH.H"
 
-// _MonsterFunctionTable @0x800CF6F4, len = 0x00000020
-VWRAITH_FunctionTable =
-    {
-        // _func_96 * @0x800CF6F4, len = 0x00000004
-        .initFunc = &VWRAITH_Init,
-        // _func_97 * @0x800CF6F8, len = 0x00000004
-        .cleanUpFunc = &SOUL_CleanUp,
-        // _func_98 * @0x800CF6FC, len = 0x00000004
-        .damageEffectFunc = &SLUAGH_DamageEffect,
-        // _func_99 * @0x800CF700, len = 0x00000004
-        .queryFunc = &SLUAGH_Query,
-        // _func_100 * @0x800CF704, len = 0x00000004
-        .messageFunc = 00000000,
-        // _MonsterStateChoice * @0x800CF708, len = 0x00000004
-        .stateFuncs = &VWRAITH_StateChoiceTable,
-        // char * @0x800CF70C, len = 0x00000004
-        .versionID = &monVersion,
-        // char * @0x800CF710, len = 0x00000004
-        .localVersionID = 00000000};
-// _MonsterStateChoice @0x800CAB9C, len = 0x0000000C
-VWRAITH_StateChoiceTable =
-    {
-        // int @0x800CAB9C, len = 0x00000004
-        .state = 0x6,
-        // _MonsterState @0x800CABA0, len = 0x00000008
-        .functions =
-            {
-                // _func_88 * @0x800CABA0, len = 0x00000004
-                .entryFunction = &SLUAGH_AttackEntry,
-                // _func_89 * @0x800CABA4, len = 0x00000004
-                .stateFunction = &SLUAGH_Attack}};
 // decompiled code
 // original method signature:
 // void /*$ra*/ VWRAITH_MoveVertical(struct _Instance *instance /*$a0*/, long targetZ /*$a1*/, int velocity /*$a2*/)
@@ -268,19 +237,17 @@ void VWRAITH_Pursue(_Instance *instance)
   if ((*(uint *)((int)pvVar4 + 4) & 2) == 0)
   {
     iVar2 = VWRAITH_ShouldISwoop(instance);
-    if (iVar2 == 0)
+    if (iVar2 != 0)
     {
-      if (*(int *)((int)pvVar4 + 0xc4) != 0)
-      {
-        VWRAITH_MoveVertical(instance, (int)*(short *)(*(int *)(*(int *)((int)pvVar4 + 0xc4) + 4) + 0x60),
-                             (int)*(short *)(*(int *)((int)pvVar5 + 4) + 6));
-      }
-      MON_Pursue(instance);
-    }
-    else
-    {
+      /* WARNING: Subroutine does not return */
       MON_SwitchState(instance, (MonsterState)CONCAT44(local_14, local_18));
     }
+    if (*(int *)((int)pvVar4 + 0xc4) != 0)
+    {
+      VWRAITH_MoveVertical(instance, (int)*(short *)(*(int *)(*(int *)((int)pvVar4 + 0xc4) + 4) + 0x60),
+                           (int)*(short *)(*(int *)((int)pvVar5 + 4) + 6));
+    }
+    MON_Pursue(instance);
   }
   else
   {
@@ -300,19 +267,17 @@ void VWRAITH_Pursue(_Instance *instance)
         *(int *)((int)pvVar4 + 0xb8) = iVar2 + (int)cVar1 * 0x20;
         *(undefined *)((int)pvVar4 + 0x14b) = 0;
         *(undefined2 *)((int)pvVar4 + 0x110) = 0;
+        /* WARNING: Subroutine does not return */
         *(uint *)((int)pvVar4 + 4) = *(uint *)((int)pvVar4 + 4) & 0xfffffffd;
         MON_SwitchState(instance, (MonsterState)CONCAT44(local_14, local_18));
       }
-      else
+      if ((instance->flags2 & 0x10U) != 0)
       {
-        if ((instance->flags2 & 0x10U) != 0)
-        {
-          p_Var3 = MON_GetAnim(instance, *(char **)((int)pvVar5 + 8),
-                               (int)*(char *)(*(int *)((int)pvVar5 + 4) + 0xf));
-          *(ushort *)((int)pvVar4 + 0x110) = p_Var3->velocity;
-          MON_PlayAnimFromList(instance, *(char **)((int)pvVar5 + 8),
-                               (int)*(char *)(*(int *)((int)pvVar5 + 4) + 0xf), 2);
-        }
+        p_Var3 = MON_GetAnim(instance, *(char **)((int)pvVar5 + 8),
+                             (int)*(char *)(*(int *)((int)pvVar5 + 4) + 0xf));
+        *(ushort *)((int)pvVar4 + 0x110) = p_Var3->velocity;
+        MON_PlayAnimFromList(instance, *(char **)((int)pvVar5 + 8),
+                             (int)*(char *)(*(int *)((int)pvVar5 + 4) + 0xf), 2);
       }
       VWRAITH_MoveVertical(instance, (int)*(short *)(*(int *)(*(int *)((int)pvVar4 + 0xc4) + 4) + 0x60) + (int)*(short *)(*(int *)((int)pvVar5 + 4) + 2),
                            (int)*(short *)(*(int *)((int)pvVar5 + 4) + 4));
@@ -368,6 +333,7 @@ void VWRAITH_VerticalMove(_Instance *instance)
     VWRAITH_MoveVertical(instance, targetZ, (int)*(short *)(*(int *)((int)instance->data + 4) + 8));
     if ((instance->currentMainState == 6) && ((int)(instance->position).z != targetZ))
     {
+      /* WARNING: Subroutine does not return */
       MON_SwitchState(instance, (MonsterState)CONCAT44(local_c, local_10));
     }
   }

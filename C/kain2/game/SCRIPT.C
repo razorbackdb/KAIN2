@@ -1,8 +1,6 @@
 #include "THISDUST.H"
 #include "SCRIPT.H"
 
-// char * @0x800C8768, len = 0x00000004
-selectMenuText5 = "update save" /* collapsed from &s_update_save_800ce8c8 */;
 // decompiled code
 // original method signature:
 // void /*$ra*/ SCRIPT_CombineEulerAngles(struct _Rotation *combinedRotation /*$s1*/, struct _Rotation *inputRotation1 /*$a1*/, struct _Rotation *inputRotation2 /*$s0*/)
@@ -506,11 +504,9 @@ MultiSpline *SCRIPT_GetMultiSpline(_Instance *instance, ulong *isParent, ulong *
   }
   if ((((instance != (_Instance *)0x0) && (instance->intro != (Intro *)0x0)) &&
        (pMVar1 = instance->intro->multiSpline, pMVar1 != (MultiSpline *)0x0)) &&
-      ((pMVar3 = pMVar1, (instance->flags & 0x100002U) == 2 &&
-                             (pMVar3 = pMVar1, isParent != (ulong *)0x0))))
+      ((pMVar3 = pMVar1, (instance->flags & 0x100002U) == 2 && (isParent != (ulong *)0x0))))
   {
     *isParent = 1;
-    pMVar3 = pMVar1;
   }
   if (((pMVar3 == (MultiSpline *)0x0) &&
        (p_Var2 = *instance->object->modelList, p_Var2 != (_Model *)0x0)) &&
@@ -764,14 +760,14 @@ void SCRIPT_RelativisticSpline(_Instance *instance, _SVector *point)
     sVar1 = (instance->initialPos).y;
     sVar2 = (instance->initialPos).z;
     (instance->position).x =
-        (short)(iVar7 * (int)local_38 >> 0xc) + (short)(iVar6 * (int)local_36 >> 0xc) +
-        (short)(iVar8 * (int)local_34 >> 0xc) + (instance->initialPos).x;
+        (short)(iVar7 * local_38 >> 0xc) + (short)(iVar6 * local_36 >> 0xc) +
+        (short)(iVar8 * local_34 >> 0xc) + (instance->initialPos).x;
     (instance->position).y =
-        (short)(iVar7 * (int)local_32 >> 0xc) + (short)(iVar6 * (int)local_30 >> 0xc) +
-        (short)(iVar8 * (int)local_2e >> 0xc) + sVar1;
+        (short)(iVar7 * local_32 >> 0xc) + (short)(iVar6 * local_30 >> 0xc) +
+        (short)(iVar8 * local_2e >> 0xc) + sVar1;
     (instance->position).z =
-        (short)(iVar7 * (int)local_2c >> 0xc) + (short)(iVar6 * (int)local_2a >> 0xc) +
-        (short)(iVar8 * (int)local_28 >> 0xc) + sVar2;
+        (short)(iVar7 * local_2c >> 0xc) + (short)(iVar6 * local_2a >> 0xc) +
+        (short)(iVar8 * local_28 >> 0xc) + sVar2;
   }
   return;
 }
@@ -1037,8 +1033,8 @@ long SCRIPT_SplineProcess(_Instance *instance, MultiSpline *multi, SplineDef *sp
                           SplineDef *ssplineDef, int direction, int isClass)
 
 {
+  long fracOffset;
   ulong uVar1;
-  ulong fracOffset;
   Spline *spline;
   Intro *pIVar2;
   Spline *spline_00;
@@ -1053,7 +1049,7 @@ long SCRIPT_SplineProcess(_Instance *instance, MultiSpline *multi, SplineDef *sp
   _SVector _Stack80;
   _Rotation local_48[4];
 
-  fracOffset = gameTrackerX.timeMult;
+  fracOffset = DAT_800d11ec;
   uVar4 = 0xffffffff;
   spline_01 = multi->positional;
   spline = multi->scaling;
@@ -1155,8 +1151,8 @@ LAB_8003d398:
       }
       else
       {
-        fracOffset = SplineGetData(spline_01, splineDef, &_Stack80);
-        if (fracOffset != 0)
+        uVar1 = SplineGetData(spline_01, splineDef, &_Stack80);
+        if (uVar1 != 0)
         {
           point = &_Stack80;
         }
@@ -1250,7 +1246,7 @@ void SCRIPT_FadeOutProcess(_Instance *instance)
 {
   int iVar1;
 
-  iVar1 = (uint)(ushort)instance->fadeValue + (gameTrackerX.timeMult >> 5);
+  iVar1 = (uint)(ushort)instance->fadeValue + (DAT_800d11ec >> 5);
   instance->fadeValue = (short)iVar1;
   if (0xfff < iVar1 * 0x10000 >> 0x10)
   {

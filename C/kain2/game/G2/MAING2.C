@@ -1,8 +1,5 @@
-//#include "THISDUST.H"
+#include "THISDUST.H"
 #include "MAING2.H"
-#include "PLAYER.H"
-
-#define uint unsigned int
 
 // decompiled code
 // original method signature:
@@ -18,10 +15,11 @@
 /* end block 2 */
 // End Line: 122
 
-enum _G2Bool_Enum MainG2_InitEngine(void *appData, uint screenWidth, uint screenHeight, char *filesystemName)
+_G2Bool_Enum
+MainG2_InitEngine(void *appData, uint screenWidth, uint screenHeight, char *filesystemName)
 
 {
-	return G2FALSE;
+	return 1;
 }
 
 // decompiled code

@@ -1,37 +1,6 @@
 #include "THISDUST.H"
 #include "SOUL.H"
 
-// _MonsterFunctionTable @0x800CF6D4, len = 0x00000020
-SOUL_FunctionTable =
-    {
-        // _func_96 * @0x800CF6D4, len = 0x00000004
-        .initFunc = &SOUL_Init,
-        // _func_97 * @0x800CF6D8, len = 0x00000004
-        .cleanUpFunc = &SOUL_CleanUp,
-        // _func_98 * @0x800CF6DC, len = 0x00000004
-        .damageEffectFunc = &SOUL_Effect,
-        // _func_99 * @0x800CF6E0, len = 0x00000004
-        .queryFunc = 00000000,
-        // _func_100 * @0x800CF6E4, len = 0x00000004
-        .messageFunc = 00000000,
-        // _MonsterStateChoice * @0x800CF6E8, len = 0x00000004
-        .stateFuncs = &SOUL_StateChoiceTable,
-        // char * @0x800CF6EC, len = 0x00000004
-        .versionID = &monVersion,
-        // char * @0x800CF6F0, len = 0x00000004
-        .localVersionID = 00000000};
-// _MonsterStateChoice @0x800CAB48, len = 0x0000000C
-SOUL_StateChoiceTable =
-    {
-        // int @0x800CAB48, len = 0x00000004
-        .state = 0x0,
-        // _MonsterState @0x800CAB4C, len = 0x00000008
-        .functions =
-            {
-                // _func_88 * @0x800CAB4C, len = 0x00000004
-                .entryFunction = &SOUL_BirthEntry,
-                // _func_89 * @0x800CAB50, len = 0x00000004
-                .stateFunction = &SOUL_Birth}};
 // decompiled code
 // original method signature:
 // void /*$ra*/ SOUL_QueueHandler(struct _Instance *instance /*$s0*/)
@@ -60,21 +29,22 @@ void SOUL_QueueHandler(_Instance *instance)
   void *pvVar1;
 
   pvVar1 = instance->extraData;
-  while (message = DeMessageQueue((__MessageQueue *)((int)pvVar1 + 8)), message != (__Event *)0x0)
+  do
   {
-    if (message->ID == 0x100000d)
+    while (true)
     {
-      if (instance->currentMainState != 0x17)
+      message = DeMessageQueue((__MessageQueue *)((int)pvVar1 + 8));
+      if (message == (__Event *)0x0)
       {
-        MON_SwitchState(instance, (MonsterState)CONCAT44(local_14, local_18));
+        return;
       }
-    }
-    else
-    {
+      if (message->ID == 0x100000d)
+        break;
       MON_DefaultMessageHandler(instance, message);
     }
-  }
-  return;
+  } while (instance->currentMainState == 0x17);
+  /* WARNING: Subroutine does not return */
+  MON_SwitchState(instance, (MonsterState)CONCAT44(local_14, local_18));
 }
 
 // decompiled code
@@ -136,35 +106,8 @@ void SOUL_Physics(_Instance *instance, long time)
 void SOUL_Fade(_Instance *instance)
 
 {
-  short sVar1;
-  ulong uVar2;
-  void *pvVar3;
-
-  pvVar3 = instance->extraData;
-  uVar2 = MON_GetTime(instance);
-  if ((gameTrackerX.gameFlags & 0x80U) == 0)
-  {
-    if (*(uint *)((int)pvVar3 + 0xf8) < uVar2)
-    {
-      sVar1 = instance->fadeValue;
-      if (sVar1 == 0)
-      {
-        MON_StartSpecialFade(instance, 0x1000, 100);
-        sVar1 = instance->fadeValue;
-      }
-      if (0xfff < sVar1)
-      {
-        instance->flags2 = instance->flags2 | 0x8000000;
-        MORPH_SetupInstanceFlags(instance);
-        instance->fadeValue = 0;
-      }
-    }
-  }
-  else
-  {
-    *(undefined **)((int)pvVar3 + 0xf8) = &DAT_00001964 + uVar2;
-  }
-  return;
+  /* WARNING: Subroutine does not return */
+  MON_GetTime(instance);
 }
 
 // decompiled code
@@ -351,31 +294,18 @@ void SOUL_MovePastWall(_Instance *instance, _Instance *sucker)
 void SOUL_Init(_Instance *instance)
 
 {
-  ulong uVar1;
-  undefined4 local_10;
-  undefined4 local_c;
-  uint *puVar2;
+  uint *puVar1;
 
-  puVar2 = (uint *)instance->extraData;
+  puVar1 = (uint *)instance->extraData;
   MON_DefaultInit(instance);
-  *puVar2 = *puVar2 | 0x200880;
+  *puVar1 = *puVar1 | 0x200880;
   instance->maxXVel = 600;
   instance->maxYVel = 600;
   instance->maxZVel = 600;
   instance->flags2 = instance->flags2 | 0x20000;
-  *(undefined2 *)(puVar2 + 0x44) = 0;
-  uVar1 = MON_GetTime(instance);
-  *(undefined **)(puVar2 + 0x3e) = &DAT_00001964 + uVar1;
-  if (instance->parent != (_Instance *)0x0)
-  {
-    puVar2[0x36] = instance->parent->introUniqueID;
-  }
-  if ((instance->flags & 2U) == 0)
-  {
-    instance->flags2 = instance->flags2 | 0x8000000;
-    MON_SwitchState(instance, (MonsterState)CONCAT44(local_c, local_10));
-  }
-  return;
+  /* WARNING: Subroutine does not return */
+  *(undefined2 *)(puVar1 + 0x44) = 0;
+  MON_GetTime(instance);
 }
 
 // decompiled code
@@ -416,20 +346,16 @@ void SOUL_BirthEntry(_Instance *instance)
 
 {
   short sVar1;
-  ulong uVar2;
-  void *pvVar3;
 
   sVar1 = (instance->position).z;
-  pvVar3 = instance->extraData;
   instance->maxXVel = 0xf;
   instance->maxYVel = 0xf;
   instance->maxZVel = 0x11;
   instance->zAccl = 0;
   instance->zVel = 0;
+  /* WARNING: Subroutine does not return */
   (instance->position).z = sVar1 + 0x78;
-  uVar2 = MON_GetTime(instance);
-  *(int *)((int)pvVar3 + 0x100) = uVar2 + 0x5dc;
-  return;
+  MON_GetTime(instance);
 }
 
 // decompiled code
@@ -453,21 +379,10 @@ void SOUL_BirthEntry(_Instance *instance)
 void SOUL_Birth(_Instance *instance)
 
 {
-  ulong uVar1;
-  undefined4 local_10;
-  void *pvVar2;
-  undefined4 local_c;
-
   instance->zAccl = 0;
-  pvVar2 = instance->extraData;
-  SOUL_Physics(instance, gameTrackerX.timeMult);
-  uVar1 = MON_GetTime(instance);
-  if (*(uint *)((int)pvVar2 + 0x100) < uVar1)
-  {
-    MON_SwitchState(instance, (MonsterState)CONCAT44(local_c, local_10));
-  }
-  SOUL_QueueHandler(instance);
-  return;
+  SOUL_Physics(instance, DAT_800d11ec);
+  /* WARNING: Subroutine does not return */
+  MON_GetTime(instance);
 }
 
 // decompiled code
@@ -647,16 +562,15 @@ void SOUL_SoulSuck(_Instance *instance)
   uint *puVar8;
   _Instance *sucker;
   int Data;
-  _Instance *instance_00;
-  undefined4 local_38;
-  undefined4 in_stack_ffffffcc;
+  _Instance *p_Var9;
+  MonsterState in_stack_ffffffc8;
   undefined2 local_30;
   short local_2e;
   short local_2c;
   undefined2 in_stack_ffffffd6;
 
   sucker = (_Instance *)0x0;
-  instance_00 = (_Instance *)0x0;
+  p_Var9 = (_Instance *)0x0;
   Data = 0;
   puVar8 = (uint *)instance->extraData;
   do
@@ -681,43 +595,26 @@ void SOUL_SoulSuck(_Instance *instance)
         }
         if ((*puVar8 & 0x800) == 0)
         {
-          PhysicsMove(instance, &instance->position, gameTrackerX.timeMult);
+          PhysicsMove(instance, &instance->position, DAT_800d11ec);
         }
         else
         {
-          SOUL_Physics(instance, gameTrackerX.timeMult);
+          SOUL_Physics(instance, DAT_800d11ec);
         }
-        if ((instance_00 == (_Instance *)0x0) || (instance_00 != sucker))
-        {
-          if (sucker == (_Instance *)0x0)
-          {
-            if ((instance->flags2 & 0x20000000U) != 0)
-            {
-              instance->flags2 = instance->flags2 & 0xdfffffff;
-            }
-            MON_SwitchState(instance, (MonsterState)CONCAT44(in_stack_ffffffcc, local_38));
-          }
-        }
-        else
+        if ((p_Var9 != (_Instance *)0x0) && (p_Var9 == sucker))
         {
           Data = SetMonsterSoulSuckData(instance, 0, 0, 0);
+          /* WARNING: Subroutine does not return */
           INSTANCE_Post(sucker, 0x1000009, Data);
-          INSTANCE_Post(sucker, 0x1000016, (int)*(short *)(puVar8 + 0x4d));
-          SOUND_Play3dSound(&instance->position, 8, -0x1c2, 0x50, 0xdac);
-          if (sucker == gameTrackerX.playerInstance)
+        }
+        if (sucker == (_Instance *)0x0)
+        {
+          if ((instance->flags2 & 0x20000000U) != 0)
           {
-            GAMEPAD_Shock1(0x80, (int)&DAT_00005000);
+            instance->flags2 = instance->flags2 & 0xdfffffff;
           }
-          if (puVar8[0x36] != 0)
-          {
-            instance_00 = INSTANCE_Find(puVar8[0x36]);
-            if (instance_00 != (_Instance *)0x0)
-            {
-              MON_SoulSucked(instance_00);
-            }
-            SAVE_DeleteInstance(instance);
-          }
-          MON_KillMonster(instance);
+          /* WARNING: Subroutine does not return */
+          MON_SwitchState(instance, in_stack_ffffffc8);
         }
         return;
       }
@@ -728,7 +625,7 @@ void SOUL_SoulSuck(_Instance *instance)
       p_Var4 = MON_GetAnim(instance, *(char **)puVar8[0x55], 0x2d);
       if ((p_Var4 == (_MonsterAnim *)0x0) || ((*puVar8 & 0x4000000) == 0))
       {
-        instance_00 = *(_Instance **)&((_Instance *)message->Data)->node;
+        p_Var9 = *(_Instance **)&((_Instance *)message->Data)->node;
       }
     LAB_8008e0d0:
       MON_DefaultMessageHandler(instance, message);
@@ -788,16 +685,14 @@ void SOUL_SoulSuck(_Instance *instance)
               iVar5 = MON_AnimPlaying(instance, (MonsterAnim)
                                                     CONCAT214(in_stack_ffffffd6,
                                                               CONCAT212(local_2c, CONCAT210(local_2e,
-                                                                                            CONCAT28(local_30, CONCAT44(in_stack_ffffffcc,
-                                                                                                                        local_38))))));
+                                                                                            CONCAT28(local_30, in_stack_ffffffc8)))));
               if ((iVar5 == 0) && (0x32 < magnitude))
               {
-                MON_PlayAnim(instance, (MonsterAnim)CONCAT214(in_stack_ffffffd6, CONCAT212(local_2c, CONCAT210(local_2e, CONCAT28(local_30, CONCAT44(in_stack_ffffffcc, local_38))))),
-                             0x2d);
-                instance->flags2 = instance->flags2 | 0x20000000;
+                /* WARNING: Subroutine does not return */
+                MON_PlayAnim(instance, (MonsterAnim)CONCAT214(in_stack_ffffffd6, CONCAT212(local_2c, CONCAT210(local_2e, CONCAT28(local_30, in_stack_ffffffc8)))), 0x2d);
               }
               p_Var4 = MON_GetAnim(instance, *(char **)puVar8[0x55], 0x2d);
-              sVar1 = G2AnimKeylist_GetDuration(instance->object->animList[(int)p_Var4->index[0]]);
+              sVar1 = G2AnimKeylist_GetDuration(instance->object->animList[p_Var4->index[0]]);
               sVar2 = G2Anim_GetElapsedTime(&instance->anim);
               iVar5 = ((int)sVar1 * 0x1e000) / 3000 - ((int)sVar2 * 0x1e000) / 3000;
               if (0 < iVar5)
@@ -813,7 +708,7 @@ void SOUL_SoulSuck(_Instance *instance)
               }
               if ((*puVar8 & 0x4000000) == 0)
               {
-                instance_00 = sucker;
+                p_Var9 = sucker;
               }
               instance->zAccl = 0;
               instance->yAccl = 0;
@@ -939,29 +834,26 @@ void SOUL_Wander(_Instance *instance)
                             (int)*(short *)(puVar2 + 0x45) - (int)(instance->position).y);
     if (lVar1 < 100)
     {
+      /* WARNING: Subroutine does not return */
       MON_SwitchState(instance, (MonsterState)CONCAT44(local_c, local_10));
-      instance->zAccl = 0;
     }
-    else
+    instance->xAccl =
+        ((int)*(short *)((int)puVar2 + 0x112) - (int)(instance->position).x) - instance->xVel;
+    instance->yAccl =
+        ((int)*(short *)(puVar2 + 0x45) - (int)(instance->position).y) - instance->yVel;
+    lVar1 = -2;
+    if ((instance->xAccl < -2) || (lVar1 = 2, 2 < instance->xAccl))
     {
-      instance->xAccl =
-          ((int)*(short *)((int)puVar2 + 0x112) - (int)(instance->position).x) - instance->xVel;
-      instance->yAccl =
-          ((int)*(short *)(puVar2 + 0x45) - (int)(instance->position).y) - instance->yVel;
-      lVar1 = -2;
-      if ((instance->xAccl < -2) || (lVar1 = 2, 2 < instance->xAccl))
-      {
-        instance->xAccl = lVar1;
-      }
-      lVar1 = -2;
-      if ((instance->yAccl < -2) || (lVar1 = 2, 2 < instance->yAccl))
-      {
-        instance->yAccl = lVar1;
-      }
-      instance->zAccl = 0;
+      instance->xAccl = lVar1;
     }
+    lVar1 = -2;
+    if ((instance->yAccl < -2) || (lVar1 = 2, 2 < instance->yAccl))
+    {
+      instance->yAccl = lVar1;
+    }
+    instance->zAccl = 0;
   }
-  SOUL_Physics(instance, gameTrackerX.timeMult);
+  SOUL_Physics(instance, DAT_800d11ec);
   if ((*puVar2 & 4) == 0)
   {
     if ((instance->flags2 & 0x8000000U) == 0)
@@ -970,6 +862,7 @@ void SOUL_Wander(_Instance *instance)
     }
     if (puVar2[0x31] != 0)
     {
+      /* WARNING: Subroutine does not return */
       MON_SwitchState(instance, (MonsterState)CONCAT44(local_c, local_10));
     }
   }
@@ -1030,53 +923,19 @@ void SOUL_Flee(_Instance *instance)
 {
   short angle;
   int iVar1;
-  int iVar2;
-  long lVar3;
   undefined4 unaff_s0;
   undefined4 unaff_s1;
 
   iVar1 = *(int *)((int)instance->extraData + 0xc4);
   if (iVar1 == 0)
   {
+    /* WARNING: Subroutine does not return */
     MON_SwitchState(instance, (MonsterState)CONCAT44(unaff_s1, unaff_s0));
   }
-  else
-  {
-    angle = MATH3D_AngleFromPosToPos((_Position *)(*(int *)(iVar1 + 4) + 0x5c), &instance->position);
-    angle = MONSENSE_GetClosestFreeDirection(instance, angle, 500);
-    iVar1 = rsin((int)angle);
-    iVar1 = iVar1 * 2000;
-    if (iVar1 < 0)
-    {
-      iVar1 = iVar1 + 0xfff;
-    }
-    iVar2 = rcos((int)angle);
-    iVar2 = iVar2 * -2000;
-    if (iVar2 < 0)
-    {
-      iVar2 = iVar2 + 0xfff;
-    }
-    instance->xAccl = (iVar1 >> 0xc) - instance->xVel;
-    instance->yAccl = (iVar2 >> 0xc) - instance->yVel;
-    lVar3 = -2;
-    if ((instance->xAccl < -2) || (lVar3 = 2, 2 < instance->xAccl))
-    {
-      instance->xAccl = lVar3;
-    }
-    lVar3 = -2;
-    if ((instance->yAccl < -2) || (lVar3 = 2, 2 < instance->yAccl))
-    {
-      instance->yAccl = lVar3;
-    }
-    instance->zAccl = 0;
-  }
-  SOUL_Physics(instance, gameTrackerX.timeMult);
-  SOUL_QueueHandler(instance);
-  if ((instance->flags2 & 0x8000000U) == 0)
-  {
-    SOUL_Fade(instance);
-  }
-  return;
+  angle = MATH3D_AngleFromPosToPos((_Position *)(*(int *)(iVar1 + 4) + 0x5c), &instance->position);
+  angle = MONSENSE_GetClosestFreeDirection(instance, angle, 500);
+  /* WARNING: Subroutine does not return */
+  rsin((int)angle);
 }
 
 // decompiled code
@@ -1100,19 +959,11 @@ void SOUL_Flee(_Instance *instance)
 void SOUL_IdleEntry(_Instance *instance)
 
 {
-  ulong uVar1;
-  int iVar2;
-  uint *puVar3;
-
-  puVar3 = (uint *)instance->extraData;
   instance->maxXVel = 0xf;
   instance->maxYVel = 0xf;
+  /* WARNING: Subroutine does not return */
   instance->maxZVel = 0x11;
-  uVar1 = MON_GetTime(instance);
-  iVar2 = rand();
-  *puVar3 = *puVar3 & 0xfffbffff;
-  puVar3[0x40] = uVar1 + iVar2 % 3000 + 3000;
-  return;
+  MON_GetTime(instance);
 }
 
 // decompiled code
@@ -1138,41 +989,39 @@ void SOUL_IdleEntry(_Instance *instance)
 void SOUL_Idle(_Instance *instance)
 
 {
-  ulong uVar1;
+  int iVar1;
   int iVar2;
   int iVar3;
-  int iVar4;
   undefined4 local_10;
   undefined4 local_c;
-  uint *puVar5;
+  uint *puVar4;
 
-  iVar2 = instance->xVel;
-  puVar5 = (uint *)instance->extraData;
-  iVar4 = 3;
-  if ((-4 < iVar2) && (iVar4 = -3, iVar2 < 4))
+  iVar1 = instance->xVel;
+  puVar4 = (uint *)instance->extraData;
+  iVar3 = 3;
+  if ((-4 < iVar1) && (iVar3 = -3, iVar1 < 4))
   {
-    iVar4 = -iVar2;
+    iVar3 = -iVar1;
   }
-  iVar3 = instance->yVel;
-  iVar2 = 3;
-  if ((-4 < iVar3) && (iVar2 = -3, iVar3 < 4))
+  iVar2 = instance->yVel;
+  iVar1 = 3;
+  if ((-4 < iVar2) && (iVar1 = -3, iVar2 < 4))
   {
-    iVar2 = -iVar3;
+    iVar1 = -iVar2;
   }
-  instance->xAccl = iVar4;
-  instance->yAccl = iVar2;
+  instance->xAccl = iVar3;
+  instance->yAccl = iVar1;
   instance->zAccl = 0;
-  SOUL_Physics(instance, gameTrackerX.timeMult);
-  if ((*puVar5 & 4) == 0)
+  SOUL_Physics(instance, DAT_800d11ec);
+  if ((*puVar4 & 4) == 0)
   {
-    if ((puVar5[0x31] != 0) || (uVar1 = MON_GetTime(instance), puVar5[0x40] < uVar1))
+    if (puVar4[0x31] != 0)
     {
+      /* WARNING: Subroutine does not return */
       MON_SwitchState(instance, (MonsterState)CONCAT44(local_c, local_10));
     }
-    if ((instance->flags2 & 0x8000000U) == 0)
-    {
-      SOUL_Fade(instance);
-    }
+    /* WARNING: Subroutine does not return */
+    MON_GetTime(instance);
   }
   SOUL_QueueHandler(instance);
   return;
@@ -1248,7 +1097,7 @@ void SOUL_Reanimate(_Instance *instance)
   void *pvVar3;
 
   pvVar3 = instance->extraData;
-  SOUL_MoveToDest(instance, 0x10, gameTrackerX.timeMult);
+  SOUL_MoveToDest(instance, 0x10, DAT_800d11ec);
   lVar1 = MATH3D_LengthXY((int)(instance->position).x - (int)*(short *)((int)pvVar3 + 0x112),
                           (int)(instance->position).y - (int)*(short *)((int)pvVar3 + 0x114));
   if (lVar1 < 0xfa)
@@ -1258,6 +1107,7 @@ void SOUL_Reanimate(_Instance *instance)
       Inst = INSTANCE_Find(*(int *)((int)pvVar3 + 0xd8));
       if (Inst != (_Instance *)0x0)
       {
+        /* WARNING: Subroutine does not return */
         INSTANCE_Post(Inst, 0x100000d, 0);
       }
       SAVE_DeleteInstance(instance);

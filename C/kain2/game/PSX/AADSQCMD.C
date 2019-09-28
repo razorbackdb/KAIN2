@@ -411,7 +411,7 @@ void metaCmdPauseSlot(AadSeqEvent *event, _AadSequenceSlot *slot)
 /* end block 1 */
 // End Line: 429
 
-void metaCmdResumeSlot(AadSeqEvent *event, _AadSequenceSlot *slot)
+void midiPolyphonicAftertouch(AadSeqEvent *event, _AadSequenceSlot *slot)
 
 {
 	aadResumeSlot((uint)slot->selectedSlotNum);
@@ -531,7 +531,7 @@ void metaCmdSetSlotPan(AadSeqEvent *event, _AadSequenceSlot *slot)
 void metaCmdSetChannelVolume(AadSeqEvent *event, _AadSequenceSlot *slot)
 
 {
-	slot->selectedSlotPtr->volume[(uint)slot->selectedChannel] = event->dataByte[0];
+	slot->selectedSlotPtr->volume[slot->selectedChannel] = event->dataByte[0];
 	aadUpdateChannelVolPan(slot->selectedSlotPtr, (uint)slot->selectedChannel);
 	return;
 }
@@ -557,7 +557,7 @@ void metaCmdSetChannelVolume(AadSeqEvent *event, _AadSequenceSlot *slot)
 void metaCmdSetChannelPan(AadSeqEvent *event, _AadSequenceSlot *slot)
 
 {
-	slot->selectedSlotPtr->panPosition[(uint)slot->selectedChannel] = event->dataByte[0];
+	slot->selectedSlotPtr->panPosition[slot->selectedChannel] = event->dataByte[0];
 	aadUpdateChannelVolPan(slot->selectedSlotPtr, (uint)slot->selectedChannel);
 	return;
 }
@@ -947,7 +947,7 @@ void metaCmdSlotPanFade(AadSeqEvent *event, _AadSequenceSlot *slot)
 void metaCmdSetChannelProgram(AadSeqEvent *event, _AadSequenceSlot *slot)
 
 {
-	slot->selectedSlotPtr->currentProgram[(uint)slot->selectedChannel] = event->dataByte[0];
+	slot->selectedSlotPtr->currentProgram[slot->selectedChannel] = event->dataByte[0];
 	return;
 }
 
@@ -965,7 +965,7 @@ void metaCmdSetChannelProgram(AadSeqEvent *event, _AadSequenceSlot *slot)
 /* end block 2 */
 // End Line: 949
 
-void metaCmdSetChannelBasePriority(AadSeqEvent *event, _AadSequenceSlot *slot)
+void metaCmdSetTempo(AadSeqEvent *event, _AadSequenceSlot *slot)
 
 {
 	return;
@@ -1003,7 +1003,7 @@ void metaCmdSetChannelBasePriority(AadSeqEvent *event, _AadSequenceSlot *slot)
 void metaCmdSetChannelTranspose(AadSeqEvent *event, _AadSequenceSlot *slot)
 
 {
-	slot->selectedSlotPtr->transpose[(uint)slot->selectedChannel] = event->dataByte[0];
+	slot->selectedSlotPtr->transpose[slot->selectedChannel] = event->dataByte[0];
 	return;
 }
 
@@ -1113,7 +1113,7 @@ void metaCmdSetChannelPitchMap(AadSeqEvent *event, _AadSequenceSlot *slot)
 /* end block 2 */
 // End Line: 1080
 
-void metaCmdIgnoreChannelPitchMap(AadSeqEvent *event, _AadSequenceSlot *slot)
+void metaCmdChangeTempo(AadSeqEvent *event, _AadSequenceSlot *slot)
 
 {
 	return;
@@ -1347,7 +1347,7 @@ void metaCmdGetChannelVolume(AadSeqEvent *event, _AadSequenceSlot *slot)
 	if ((byte)event->dataByte[0] < 0x80)
 	{
 		(&DAT_00001c08)[(int)&aadMem->updateCounter + (uint)(byte)event->dataByte[0]] =
-			slot->selectedSlotPtr->volume[(uint)slot->selectedChannel];
+			slot->selectedSlotPtr->volume[slot->selectedChannel];
 	}
 	return;
 }
@@ -1381,13 +1381,13 @@ void metaCmdGetChannelVolume(AadSeqEvent *event, _AadSequenceSlot *slot)
 /* end block 4 */
 // End Line: 1272
 
-void metaCmdGetChannelPan(AadSeqEvent *event, _AadSequenceSlot *slot)
+void metaCmdResumeSlot(AadSeqEvent *event, _AadSequenceSlot *slot)
 
 {
 	if ((byte)event->dataByte[0] < 0x80)
 	{
-		(&DAT_00001c08)[(int)&aadMem->updateCounter + (uint)(byte)event->dataByte[0]] =
-			slot->selectedSlotPtr->panPosition[(uint)slot->selectedChannel];
+		(&DAT_00001c08)[DAT_800d07bc + (uint)(byte)event->dataByte[0]] =
+			slot->selectedSlotPtr->panPosition[slot->selectedChannel];
 	}
 	return;
 }
@@ -1447,7 +1447,7 @@ void metaCmdGetChannelProgram(AadSeqEvent *event, _AadSequenceSlot *slot)
 	if ((byte)event->dataByte[0] < 0x80)
 	{
 		(&DAT_00001c08)[(int)&aadMem->updateCounter + (uint)(byte)event->dataByte[0]] =
-			slot->selectedSlotPtr->currentProgram[(uint)slot->selectedChannel];
+			slot->selectedSlotPtr->currentProgram[slot->selectedChannel];
 	}
 	return;
 }
@@ -1639,13 +1639,13 @@ void metaCmdSetVariable(AadSeqEvent *event, _AadSequenceSlot *slot)
 /* end block 4 */
 // End Line: 1487
 
-void metaCmdCopyVariable(AadSeqEvent *event, _AadSequenceSlot *slot)
+void metaCmdEnableSustainUpdate(AadSeqEvent *event, _AadSequenceSlot *slot)
 
 {
 	if (((byte)event->dataByte[0] < 0x80) && ((byte)event->dataByte[1] < 0x80))
 	{
-		(&DAT_00001c08)[(int)&aadMem->updateCounter + (uint)(byte)event->dataByte[1]] =
-			(&DAT_00001c08)[(int)&aadMem->updateCounter + (uint)(byte)event->dataByte[0]];
+		(&DAT_00001c08)[DAT_800d07bc + (uint)(byte)event->dataByte[1]] =
+			(&DAT_00001c08)[DAT_800d07bc + (uint)(byte)event->dataByte[0]];
 	}
 	return;
 }
@@ -1886,7 +1886,7 @@ void aadGotoSequenceLabel(_AadSequenceSlot *slot, int track, int labelNumber)
 	iVar1 = *(int *)((&aadMem->updateCounter + slot->sequenceAssignedDynamicBank)[0x13c] +
 					 (uint)slot->sequenceNumberAssigned * 4);
 	slot->sequencePosition[track] =
-		(_func_10 *)(iVar1 + *(int *)((&aadMem->updateCounter + slot->sequenceAssignedDynamicBank)[0x13e] + labelNumber * 4) + *(int *)(iVar1 + track * 4 + 0x10));
+		(_func_9 *)(iVar1 + *(int *)((&aadMem->updateCounter + slot->sequenceAssignedDynamicBank)[0x13e] + labelNumber * 4) + *(int *)(iVar1 + track * 4 + 0x10));
 	iVar1 = (int)&(slot->tempo).currentTick + track;
 	cVar2 = *(char *)(iVar1 + 0x338);
 	while (cVar2 != '\0')
@@ -1934,7 +1934,7 @@ void aadGotoSequenceLabel(_AadSequenceSlot *slot, int track, int labelNumber)
 /* end block 4 */
 // End Line: 1759
 
-void metaCmdLoopStart(AadSeqEvent *event, _AadSequenceSlot *slot)
+void metaCmdSetChannelBasePriority(AadSeqEvent *event, _AadSequenceSlot *slot)
 
 {
 	byte bVar1;
@@ -1946,7 +1946,7 @@ void metaCmdLoopStart(AadSeqEvent *event, _AadSequenceSlot *slot)
 	bVar1 = *(byte *)(iVar3 + 0x4e8);
 	if (bVar1 < 4)
 	{
-		*(_func_10 **)(slot->loopSequencePosition + (uint)bVar1 * 0x10 + uVar2) =
+		*(_func_9 **)(slot->loopSequencePosition + (uint)bVar1 * 0x10 + uVar2) =
 			slot->sequencePosition[uVar2];
 		slot->loopCounter[uVar2 + (uint)bVar1 * 0x10] = event->dataByte[0];
 		*(char *)(iVar3 + 0x4e8) = *(char *)(iVar3 + 0x4e8) + '\x01';
@@ -2060,11 +2060,11 @@ void metaCmdDefineLabel(AadSeqEvent *event, _AadSequenceSlot *slot)
 /* end block 2 */
 // End Line: 1891
 
-void metaCmdGotoLabel(AadSeqEvent *event, _AadSequenceSlot *slot)
+void metaCmdGetSlotStatus(AadSeqEvent *event, _AadSequenceSlot *slot)
 
 {
+	/* WARNING: Subroutine does not return */
 	aadGotoSequenceLabel(slot, (uint)event->track, (uint)(byte)event->dataByte[0]);
-	return;
 }
 
 // decompiled code
@@ -2083,11 +2083,11 @@ void metaCmdGotoLabel(AadSeqEvent *event, _AadSequenceSlot *slot)
 /* end block 2 */
 // End Line: 1915
 
-void metaCmdSetSequencePosition(AadSeqEvent *event, _AadSequenceSlot *slot)
+void metaCmdGetChannelMute(AadSeqEvent *event, _AadSequenceSlot *slot)
 
 {
+	/* WARNING: Subroutine does not return */
 	aadGotoSequenceLabel(slot->selectedSlotPtr, (uint)event->track, (uint)(byte)event->dataByte[0]);
-	return;
 }
 
 // decompiled code
@@ -2116,6 +2116,7 @@ void metaCmdBranchIfVarEqual(AadSeqEvent *event, _AadSequenceSlot *slot)
 	if ((&DAT_00001c08)[(int)&aadMem->updateCounter + (uint)(byte)event->dataByte[0]] ==
 		event->dataByte[1])
 	{
+		/* WARNING: Subroutine does not return */
 		aadGotoSequenceLabel(slot, (uint)event->track, (uint)(byte)event->dataByte[2]);
 	}
 	return;
@@ -2147,6 +2148,7 @@ void metaCmdBranchIfVarNotEqual(AadSeqEvent *event, _AadSequenceSlot *slot)
 	if ((&DAT_00001c08)[(int)&aadMem->updateCounter + (uint)(byte)event->dataByte[0]] !=
 		event->dataByte[1])
 	{
+		/* WARNING: Subroutine does not return */
 		aadGotoSequenceLabel(slot, (uint)event->track, (uint)(byte)event->dataByte[2]);
 	}
 	return;
@@ -2172,12 +2174,13 @@ void metaCmdBranchIfVarNotEqual(AadSeqEvent *event, _AadSequenceSlot *slot)
 /* end block 2 */
 // End Line: 2015
 
-void metaCmdBranchIfVarLess(AadSeqEvent *event, _AadSequenceSlot *slot)
+void metaCmdGetChannelProgram(AadSeqEvent *event, _AadSequenceSlot *slot)
 
 {
-	if ((byte)(&DAT_00001c08)[(int)&aadMem->updateCounter + (uint)(byte)event->dataByte[0]] <
+	if ((byte)(&DAT_00001c08)[DAT_800d07bc + (uint)(byte)event->dataByte[0]] <
 		(byte)event->dataByte[1])
 	{
+		/* WARNING: Subroutine does not return */
 		aadGotoSequenceLabel(slot, (uint)event->track, (uint)(byte)event->dataByte[2]);
 	}
 	return;
@@ -2209,6 +2212,7 @@ void metaCmdBranchIfVarGreater(AadSeqEvent *event, _AadSequenceSlot *slot)
 	if ((byte)event->dataByte[1] <
 		(byte)(&DAT_00001c08)[(int)&aadMem->updateCounter + (uint)(byte)event->dataByte[0]])
 	{
+		/* WARNING: Subroutine does not return */
 		aadGotoSequenceLabel(slot, (uint)event->track, (uint)(byte)event->dataByte[2]);
 	}
 	return;
@@ -2240,6 +2244,7 @@ void metaCmdBranchIfVarLessOrEqual(AadSeqEvent *event, _AadSequenceSlot *slot)
 	if ((byte)(&DAT_00001c08)[(int)&aadMem->updateCounter + (uint)(byte)event->dataByte[0]] <=
 		(byte)event->dataByte[1])
 	{
+		/* WARNING: Subroutine does not return */
 		aadGotoSequenceLabel(slot, (uint)event->track, (uint)(byte)event->dataByte[2]);
 	}
 	return;
@@ -2271,6 +2276,7 @@ void metaCmdBranchIfVarGreaterOrEqual(AadSeqEvent *event, _AadSequenceSlot *slot
 	if ((byte)event->dataByte[1] <=
 		(byte)(&DAT_00001c08)[(int)&aadMem->updateCounter + (uint)(byte)event->dataByte[0]])
 	{
+		/* WARNING: Subroutine does not return */
 		aadGotoSequenceLabel(slot, (uint)event->track, (uint)(byte)event->dataByte[2]);
 	}
 	return;
@@ -2302,6 +2308,7 @@ void metaCmdBranchIfVarBitsSet(AadSeqEvent *event, _AadSequenceSlot *slot)
 	if (((&DAT_00001c08)[(int)&aadMem->updateCounter + (uint)(byte)event->dataByte[0]] &
 		 event->dataByte[1]) != 0)
 	{
+		/* WARNING: Subroutine does not return */
 		aadGotoSequenceLabel(slot, (uint)event->track, (uint)(byte)event->dataByte[2]);
 	}
 	return;
@@ -2333,6 +2340,7 @@ void metaCmdBranchIfVarBitsClear(AadSeqEvent *event, _AadSequenceSlot *slot)
 	if (((&DAT_00001c08)[(int)&aadMem->updateCounter + (uint)(byte)event->dataByte[0]] &
 		 event->dataByte[1]) == 0)
 	{
+		/* WARNING: Subroutine does not return */
 		aadGotoSequenceLabel(slot, (uint)event->track, (uint)(byte)event->dataByte[2]);
 	}
 	return;
@@ -2423,8 +2431,8 @@ void metaCmdEndSequence(AadSeqEvent *event, _AadSequenceSlot *slot)
 
 {
 	aadInitSequenceSlot(slot);
-	aadAllNotesOff((uint)slot->thisSlotNumber);
-	if (aadMem->endSequenceCallback != (_func_78 *)0x0)
+	aadGetReverbSize();
+	if (aadMem->endSequenceCallback != (_func_49 *)0x0)
 	{
 		(*aadMem->endSequenceCallback)(aadMem->endSequenceCallbackData, (uint)slot->thisSlotNumber, 0);
 	}

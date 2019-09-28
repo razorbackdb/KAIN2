@@ -20,29 +20,28 @@
 /* end block 2 */
 // End Line: 259
 
-long PLAN_CalcMinDistFromExistingNodes(_Position *pos, PlanningNode *planningPool, int distanceType)
+long PLAN_CalcMinDistFromExistingNodes(_Position *param_1, PlanningNode *param_2, int param_3)
 
 {
-  PlanningNode *pPVar1;
-  long lVar2;
+	PlanningNode *pPVar1;
+	long lVar2;
 
-  pPVar1 = PLANPOOL_GetClosestNode(pos, planningPool, (char)distanceType);
-  if (pPVar1 == (PlanningNode *)0x0)
-  {
-    lVar2 = 0x7fffffff;
-  }
-  else
-  {
-    if (distanceType == 0)
-    {
-      lVar2 = MATH3D_LengthXY((int)pos->x - (int)(pPVar1->pos).x, (int)pos->y - (int)(pPVar1->pos).y);
-    }
-    else
-    {
-      lVar2 = MATH3D_LengthXYZ((int)pos->x - (int)(pPVar1->pos).x, (int)pos->y - (int)(pPVar1->pos).y, (int)pos->z - (int)(pPVar1->pos).z);
-    }
-  }
-  return lVar2;
+	pPVar1 = PLANPOOL_GetClosestNode(param_1, param_2, (char)param_3);
+	if (pPVar1 == (PlanningNode *)0x0)
+	{
+		lVar2 = 0x7fffffff;
+	}
+	else
+	{
+		if (param_3 != 0)
+		{
+			/* WARNING: Subroutine does not return */
+			MATH3D_LengthXYZ((int)param_1->x - (int)(pPVar1->pos).x, (int)param_1->y - (int)(pPVar1->pos).y, (int)param_1->z - (int)(pPVar1->pos).z);
+		}
+		lVar2 = MATH3D_LengthXY((int)param_1->x - (int)(pPVar1->pos).x,
+								(int)param_1->y - (int)(pPVar1->pos).y);
+	}
+	return lVar2;
 }
 
 // decompiled code
@@ -87,101 +86,101 @@ long PLAN_CalcMinDistFromExistingNodes(_Position *pos, PlanningNode *planningPoo
 /* end block 2 */
 // End Line: 317
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void PLAN_UpdatePlanMkrNodes(PlanningNode *planningPool, _Position *playerPos)
 
 {
-  ushort uVar1;
-  long suID;
-  long lVar2;
-  PlanningNode *nodeToDelete;
-  int type;
-  ushort *puVar3;
-  _PlanMkr *pos;
-  uint id;
-  int iVar4;
-  int iVar5;
-  Level **ppLVar6;
-  STracker *pSVar7;
-  int local_30;
+	ushort uVar1;
+	long suID;
+	long lVar2;
+	PlanningNode *nodeToDelete;
+	int type;
+	_Position *p_Var3;
+	_Position *pos;
+	uint id;
+	int iVar4;
+	int iVar5;
+	char **ppcVar6;
+	long *plVar7;
+	int local_30;
 
-  pSVar7 = &StreamTracker;
-  ppLVar6 = &StreamTracker.StreamList[0].level;
-  local_30 = 0;
-  do
-  {
-    if ((*(short *)(ppLVar6 + -1) == 2) &&
-        (suID = MEMPACK_MemoryValidFunc((char *)*ppLVar6), suID != 0))
-    {
-      suID = pSVar7->StreamList[0].StreamUnitID;
-      pos = (*ppLVar6)->PlanMarkerList;
-      iVar5 = (*ppLVar6)->NumberOfPlanMarkers;
-      if ((iVar5 != 0) && (iVar4 = 0, 0 < iVar5))
-      {
-        puVar3 = (ushort *)&pos->id;
-        do
-        {
-          /* WARNING: ptrarith problems */
-          lVar2 = MATH3D_LengthXY((int)(pos->pos).x - (int)playerPos->x,
-                                  (int)(short)puVar3[-2] - (int)playerPos->y);
-          type = (int)playerPos->z - (int)(short)puVar3[1];
-          if (type < 0)
-          {
-            type = -type;
-          }
-          if ((lVar2 < 8000) && (type < 4000))
-          {
-            uVar1 = *puVar3;
-            id = (int)(short)*puVar3 & 0xffff0fff;
-            if ((uVar1 & 0x1000) == 0)
-            {
-              type = 0xc;
-              if (((((int)(short)*puVar3 & 0x8000U) == 0) && (type = 0x1c, (uVar1 & 0x4000) == 0)) && (type = 4, (uVar1 & 0x2000) != 0))
-              {
-                type = 0x14;
-              }
-              nodeToDelete = PLANPOOL_GetNodeWithID(planningPool, type, id, suID);
-              if (nodeToDelete == (PlanningNode *)0x0)
-              {
-                PLANPOOL_AddNodeToPool((_Position *)pos, planningPool, (short)type, (short)id,
-                                       pSVar7->StreamList[0].StreamUnitID);
-              }
-            }
-          }
-          iVar4 = iVar4 + 1;
-          puVar3 = puVar3 + 4;
-          pos = pos + 1;
-        } while (iVar4 < iVar5);
-      }
-    }
-    ppLVar6 = ppLVar6 + 0x10;
-    pSVar7 = (STracker *)(pSVar7->StreamList + 1);
-    local_30 = local_30 + 1;
-  } while (local_30 < 0x10);
-  iVar5 = 0;
-  nodeToDelete = planningPool;
-  if (*(char *)(poolManagementData + 1) != '\0')
-  {
-    do
-    {
-      if ((nodeToDelete->nodeType & 7) == 4)
-      {
-        suID = MATH3D_LengthXY((int)(nodeToDelete->pos).x - (int)playerPos->x,
-                               (int)(nodeToDelete->pos).y - (int)playerPos->y);
-        iVar4 = (int)playerPos->z - (int)(nodeToDelete->pos).z;
-        if (iVar4 < 0)
-        {
-          iVar4 = -iVar4;
-        }
-        if ((10000 < suID) || (5000 < iVar4))
-        {
-          PLANPOOL_DeleteNodeFromPool(nodeToDelete, planningPool);
-        }
-      }
-      iVar5 = iVar5 + 1;
-      nodeToDelete = nodeToDelete + 1;
-    } while (iVar5 < (int)(uint) * (byte *)(poolManagementData + 1));
-  }
-  return;
+	plVar7 = &StreamTracker;
+	ppcVar6 = (char **)&DAT_800d1928;
+	local_30 = 0;
+	do
+	{
+		if ((*(short *)(ppcVar6 + -1) == 2) && (suID = MEMPACK_MemoryValidFunc(*ppcVar6), suID != 0))
+		{
+			suID = *plVar7;
+			pos = *(_Position **)(*ppcVar6 + 0xe4);
+			iVar5 = *(int *)(*ppcVar6 + 0xe0);
+			if ((iVar5 != 0) && (iVar4 = 0, 0 < iVar5))
+			{
+				p_Var3 = pos + 1;
+				do
+				{
+					lVar2 = MATH3D_LengthXY((int)pos->x - (int)playerPos->x,
+											(int)p_Var3[-1].y - (int)playerPos->y);
+					type = (int)playerPos->z - (int)p_Var3[-1].z;
+					if (type < 0)
+					{
+						type = -type;
+					}
+					if ((lVar2 < 8000) && (type < 4000))
+					{
+						uVar1 = p_Var3->x;
+						id = (int)p_Var3->x & 0xffff0fff;
+						if ((uVar1 & 0x1000) == 0)
+						{
+							type = 0xc;
+							if (((((int)p_Var3->x & 0x8000U) == 0) && (type = 0x1c, (uVar1 & 0x4000) == 0)) &&
+								(type = 4, (uVar1 & 0x2000) != 0))
+							{
+								type = 0x14;
+							}
+							nodeToDelete = PLANPOOL_GetNodeWithID(planningPool, type, id, suID);
+							if (nodeToDelete == (PlanningNode *)0x0)
+							{
+								PLANPOOL_AddNodeToPool(pos, planningPool, (short)type, (short)id, *plVar7);
+							}
+						}
+					}
+					iVar4 = iVar4 + 1;
+					p_Var3 = (_Position *)&p_Var3[1].y;
+					pos = (_Position *)&pos[1].y;
+				} while (iVar4 < iVar5);
+			}
+		}
+		ppcVar6 = ppcVar6 + 0x10;
+		plVar7 = plVar7 + 0x10;
+		local_30 = local_30 + 1;
+	} while (local_30 < 0x10);
+	iVar5 = 0;
+	nodeToDelete = planningPool;
+	if (*(char *)(_poolManagementData + 1) != '\0')
+	{
+		do
+		{
+			if ((nodeToDelete->nodeType & 7) == 4)
+			{
+				suID = MATH3D_LengthXY((int)(nodeToDelete->pos).x - (int)playerPos->x,
+									   (int)(nodeToDelete->pos).y - (int)playerPos->y);
+				iVar4 = (int)playerPos->z - (int)(nodeToDelete->pos).z;
+				if (iVar4 < 0)
+				{
+					iVar4 = -iVar4;
+				}
+				if ((10000 < suID) || (5000 < iVar4))
+				{
+					PLANPOOL_DeleteNodeFromPool(nodeToDelete, planningPool);
+				}
+			}
+			iVar5 = iVar5 + 1;
+			nodeToDelete = nodeToDelete + 1;
+		} while (iVar5 < (int)(uint) * (byte *)(_poolManagementData + 1));
+	}
+	return;
 }
 
 // decompiled code
@@ -217,52 +216,46 @@ void PLAN_UpdatePlanMkrNodes(PlanningNode *planningPool, _Position *playerPos)
 /* end block 2 */
 // End Line: 540
 
-void PLAN_UpdatePlayerNode(PlanningNode *planningPool, _Position *playerPos)
+void PLAN_UpdatePlayerNode(PlanningNode *param_1, undefined4 *param_2)
 
 {
-  PlanningNode *nodeToChange;
-  int iVar1;
-  long lVar2;
-  _PlanCollideInfo local_30;
-  ushort local_20[4];
+	PlanningNode *pPVar1;
+	int iVar2;
+	long local_30;
+	short local_28;
+	short local_26;
+	short local_24;
+	ushort local_20[4];
 
-  nodeToChange = PLANPOOL_GetFirstNodeOfSource(planningPool, '\x01');
-  if (nodeToChange != (PlanningNode *)0x0)
-  {
-    iVar1 = PLANCOLL_CheckUnderwaterPoint(playerPos);
-    if (iVar1 == -1)
-    {
-      local_30.collidePos.x = playerPos->x;
-      local_30.collidePos.y = playerPos->y;
-      local_30.collidePos.z = playerPos->z;
-      iVar1 = PLANCOLL_FindTerrainHitFinal(&local_30, (int *)local_20, 0x100, -0x280, 0, 5);
-      if (iVar1 == 0)
-      {
-        lVar2 = MATH3D_LengthXYZ((int)playerPos->x - (int)(nodeToChange->pos).x,
-                                 (int)playerPos->y - (int)(nodeToChange->pos).y,
-                                 (int)playerPos->z - (int)(nodeToChange->pos).z);
-        if (12000 < lVar2)
-        {
-          PLANPOOL_ChangeNodePosition(playerPos, nodeToChange, planningPool);
-          nodeToChange->nodeType = 1;
-          nodeToChange->streamUnitID = (gameTrackerX.playerInstance)->currentStreamUnitID;
-        }
-      }
-      else
-      {
-        PLANPOOL_ChangeNodePosition(&local_30.collidePos, nodeToChange, planningPool);
-        nodeToChange->nodeType = (ushort)(((uint)local_20[0] & 3) << 3) | 1;
-        nodeToChange->streamUnitID = local_30.StreamUnitID;
-      }
-    }
-    else
-    {
-      PLANPOOL_ChangeNodePosition(playerPos, nodeToChange, planningPool);
-      nodeToChange->nodeType = 0x19;
-      nodeToChange->streamUnitID = iVar1;
-    }
-  }
-  return;
+	pPVar1 = PLANPOOL_GetFirstNodeOfSource(param_1, '\x01');
+	if (pPVar1 != (PlanningNode *)0x0)
+	{
+		iVar2 = PLANCOLL_CheckUnderwaterPoint((short *)param_2);
+		if (iVar2 == -1)
+		{
+			local_28 = *(short *)param_2;
+			local_26 = *(short *)((int)param_2 + 2);
+			local_24 = *(short *)(param_2 + 1);
+			iVar2 = PLANCOLL_FindTerrainHitFinal((_PlanCollideInfo *)&local_30, (int *)local_20, 0x100, -0x280, 0, 5);
+			if (iVar2 == 0)
+			{
+				/* WARNING: Subroutine does not return */
+				MATH3D_LengthXYZ((int)*(short *)param_2 - (int)(pPVar1->pos).x,
+								 (int)*(short *)((int)param_2 + 2) - (int)(pPVar1->pos).y,
+								 (int)*(short *)(param_2 + 1) - (int)(pPVar1->pos).z);
+			}
+			PLANPOOL_ChangeNodePosition((undefined4 *)(&local_30 + 8), (undefined4 *)pPVar1, (int)param_1);
+			pPVar1->nodeType = (ushort)(((uint)local_20[0] & 3) << 3) | 1;
+			pPVar1->streamUnitID = local_30;
+		}
+		else
+		{
+			PLANPOOL_ChangeNodePosition(param_2, (undefined4 *)pPVar1, (int)param_1);
+			pPVar1->nodeType = 0x19;
+			pPVar1->streamUnitID = iVar2;
+		}
+	}
+	return;
 }
 
 // decompiled code
@@ -316,57 +309,8 @@ void PLAN_UpdatePlayerNode(PlanningNode *planningPool, _Position *playerPos)
 void PLAN_AddRandomNode(PlanningNode *planningPool, _Position *playerPos)
 
 {
-  bool bVar1;
-  int iVar2;
-  long lVar3;
-  Level *pLVar4;
-  int iVar5;
-  _PlanCollideInfo local_38;
-  _SVector _Stack40;
-
-  bVar1 = false;
-  iVar5 = 0;
-  while (true)
-  {
-    local_38.collidePos.x = playerPos->x;
-    local_38.collidePos.y = playerPos->y;
-    local_38.collidePos.z = playerPos->z;
-    iVar2 = rand();
-    local_38.collidePos.x =
-        local_38.collidePos.x + -12000 + (short)iVar2 + (short)(iVar2 / 24000) * -24000;
-    iVar2 = rand();
-    iVar2 = ((uint)local_38.collidePos.y - 12000) + iVar2 % 24000;
-    local_38.collidePos.y = (ushort)iVar2;
-    lVar3 = MATH3D_LengthXYZ((int)playerPos->x - (int)local_38.collidePos.x,
-                             (int)playerPos->y - (iVar2 * 0x10000 >> 0x10),
-                             (int)playerPos->z - (int)local_38.collidePos.z);
-    if ((lVar3 < 12000) &&
-        (lVar3 = PLAN_CalcMinDistFromExistingNodes(&local_38.collidePos, planningPool, 0), 1000 < lVar3))
-      break;
-    iVar5 = iVar5 + 1;
-    if (4 < iVar5)
-    {
-    LAB_80097710:
-      if (bVar1)
-      {
-        iVar5 = PLANCOLL_FindTerrainHitFinal(&local_38, (int *)0x0, 0x100, -2000, 0, 0);
-        if ((iVar5 == 0) &&
-            (iVar5 = PLANCOLL_FindTerrainHitFinal(&local_38, (int *)0x0, 2000, 0, 0, 0), iVar5 == 0))
-        {
-          return;
-        }
-        pLVar4 = STREAM_GetLevelWithID(local_38.StreamUnitID);
-        COLLIDE_GetNormal((local_38.tFace)->normal, (short *)pLVar4->terrain->normalList, &_Stack40);
-        if (0x800 < _Stack40.z)
-        {
-          PLANPOOL_AddNodeToPool(&local_38.collidePos, planningPool, 0, 0, local_38.StreamUnitID);
-        }
-      }
-      return;
-    }
-  }
-  bVar1 = true;
-  goto LAB_80097710;
+	/* WARNING: Subroutine does not return */
+	rand();
 }
 
 // decompiled code
@@ -388,11 +332,11 @@ void PLAN_AddRandomNode(PlanningNode *planningPool, _Position *playerPos)
 void PLAN_DeleteRandomNode(PlanningNode *planningPool)
 
 {
-  PlanningNode *nodeToDelete;
+	PlanningNode *nodeToDelete;
 
-  nodeToDelete = PLANPOOL_GetFirstNodeOfSource(planningPool, '\0');
-  PLANPOOL_DeleteNodeFromPool(nodeToDelete, planningPool);
-  return;
+	nodeToDelete = PLANPOOL_GetFirstNodeOfSource(planningPool, '\0');
+	PLANPOOL_DeleteNodeFromPool(nodeToDelete, planningPool);
+	return;
 }
 
 // decompiled code
@@ -418,33 +362,31 @@ void PLAN_DeleteRandomNode(PlanningNode *planningPool)
 /* end block 3 */
 // End Line: 800
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void PLAN_DeleteOutOfRangeNodesOfSource(PlanningNode *planningPool, _Position *playerPos, int nodeSourceToCheck,
-                                        long removeDist)
+										long removeDist)
 
 {
-  long lVar1;
-  PlanningNode *nodeToDelete;
-  int iVar2;
+	int iVar1;
 
-  iVar2 = 0;
-  nodeToDelete = planningPool;
-  if (*(char *)(poolManagementData + 1) != '\0')
-  {
-    do
-    {
-      if ((((uint)nodeToDelete->nodeType & 7) == nodeSourceToCheck) &&
-          (lVar1 = MATH3D_LengthXYZ((int)playerPos->x - (int)(nodeToDelete->pos).x,
-                                    (int)playerPos->y - (int)(nodeToDelete->pos).y,
-                                    (int)playerPos->z - (int)(nodeToDelete->pos).z),
-           removeDist < lVar1))
-      {
-        PLANPOOL_DeleteNodeFromPool(nodeToDelete, planningPool);
-      }
-      iVar2 = iVar2 + 1;
-      nodeToDelete = nodeToDelete + 1;
-    } while (iVar2 < (int)(uint) * (byte *)(poolManagementData + 1));
-  }
-  return;
+	iVar1 = 0;
+	if (*(char *)(_poolManagementData + 1) != '\0')
+	{
+		do
+		{
+			if (((uint)planningPool->nodeType & 7) == nodeSourceToCheck)
+			{
+				/* WARNING: Subroutine does not return */
+				MATH3D_LengthXYZ((int)playerPos->x - (int)(planningPool->pos).x,
+								 (int)playerPos->y - (int)(planningPool->pos).y,
+								 (int)playerPos->z - (int)(planningPool->pos).z);
+			}
+			iVar1 = iVar1 + 1;
+			planningPool = planningPool + 1;
+		} while (iVar1 < (int)(uint) * (byte *)(_poolManagementData + 1));
+	}
+	return;
 }
 
 // decompiled code
@@ -470,24 +412,26 @@ void PLAN_DeleteOutOfRangeNodesOfSource(PlanningNode *planningPool, _Position *p
 /* end block 3 */
 // End Line: 837
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void PLAN_AddOrRemoveRandomNodes(PlanningNode *planningPool, _Position *playerPos)
 
 {
-  int iVar1;
+	int iVar1;
 
-  iVar1 = (uint) * (byte *)(poolManagementData + 1) - 0x10;
-  if (iVar1 < 0)
-  {
-    PLAN_AddRandomNode(planningPool, playerPos);
-  }
-  else
-  {
-    if (0 < iVar1)
-    {
-      PLAN_DeleteRandomNode(planningPool);
-    }
-  }
-  return;
+	iVar1 = (uint) * (byte *)(_poolManagementData + 1) - 0x10;
+	if (iVar1 < 0)
+	{
+		PLAN_AddRandomNode(planningPool, playerPos);
+	}
+	else
+	{
+		if (0 < iVar1)
+		{
+			PLAN_DeleteRandomNode(planningPool);
+		}
+	}
+	return;
 }
 
 // decompiled code
@@ -521,24 +465,26 @@ void PLAN_AddOrRemoveRandomNodes(PlanningNode *planningPool, _Position *playerPo
 /* end block 2 */
 // End Line: 885
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void PLAN_AddInitialNodes(PlanningNode *planningPool, _Instance *player)
 
 {
-  short sVar1;
-  int iVar2;
-  _PlanCollideInfo _Stack40;
+	short sVar1;
+	int iVar2;
+	_PlanCollideInfo _Stack40;
 
-  _Stack40.collidePos.x = (player->position).x;
-  _Stack40.collidePos.y = (player->position).y;
-  _Stack40.collidePos.z = (player->position).z;
-  PLANCOLL_FindTerrainHitFinal(&_Stack40, (int *)0x0, 0x100, -0x400, 0, 0);
-  PLANPOOL_AddNodeToPool(&_Stack40.collidePos, planningPool, 1, 0, player->currentStreamUnitID);
-  PLAN_UpdatePlanMkrNodes(planningPool, &player->position);
-  iVar2 = poolManagementData;
-  sVar1 = (player->position).z;
-  *(undefined4 *)(poolManagementData + 2) = *(undefined4 *)&player->position;
-  *(short *)(iVar2 + 6) = sVar1;
-  return;
+	_Stack40.collidePos.x = (player->position).x;
+	_Stack40.collidePos.y = (player->position).y;
+	_Stack40.collidePos.z = (player->position).z;
+	PLANCOLL_FindTerrainHitFinal(&_Stack40, (int *)0x0, 0x100, -0x400, 0, 0);
+	PLANPOOL_AddNodeToPool(&_Stack40.collidePos, planningPool, 1, 0, player->currentStreamUnitID);
+	PLAN_UpdatePlanMkrNodes(planningPool, &player->position);
+	iVar2 = _poolManagementData;
+	sVar1 = (player->position).z;
+	*(undefined4 *)(_poolManagementData + 2) = *(undefined4 *)&player->position;
+	*(short *)(iVar2 + 6) = sVar1;
+	return;
 }
 
 // decompiled code
@@ -562,32 +508,15 @@ void PLAN_AddInitialNodes(PlanningNode *planningPool, _Instance *player)
 /* end block 3 */
 // End Line: 922
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void PLAN_AddOrRemoveNodes(PlanningNode *planningPool, _Instance *player)
 
 {
-  short sVar1;
-  int iVar2;
-  long lVar3;
-  _Position *playerPos;
-
-  lVar3 = MATH3D_LengthXYZ((int)(player->position).x - (int)*(short *)(poolManagementData + 2),
-                           (int)(player->position).y - (int)*(short *)(poolManagementData + 4),
-                           (int)(player->position).z - (int)*(short *)(poolManagementData + 6));
-  if (500 < lVar3)
-  {
-    playerPos = &player->position;
-    PLAN_UpdatePlayerNode(planningPool, playerPos);
-    PLAN_UpdatePlanMkrNodes(planningPool, playerPos);
-    PLAN_DeleteOutOfRangeNodesOfSource(planningPool, playerPos, 0, (long)&DAT_00002ee0);
-    PLAN_DeleteOutOfRangeNodesOfSource(planningPool, playerPos, 2, (long)&DAT_00002ee0);
-    PLAN_DeleteOutOfRangeNodesOfSource(planningPool, playerPos, 3, (long)&DAT_00002ee0);
-    iVar2 = poolManagementData;
-    sVar1 = (player->position).z;
-    *(undefined4 *)(poolManagementData + 2) = *(undefined4 *)&player->position;
-    *(short *)(iVar2 + 6) = sVar1;
-  }
-  PLAN_AddOrRemoveRandomNodes(planningPool, &player->position);
-  return;
+	/* WARNING: Subroutine does not return */
+	MATH3D_LengthXYZ((int)(player->position).x - (int)*(short *)(_poolManagementData + 2),
+					 (int)(player->position).y - (int)*(short *)(_poolManagementData + 4),
+					 (int)(player->position).z - (int)*(short *)(_poolManagementData + 6));
 }
 
 // decompiled code
@@ -616,33 +545,35 @@ void PLAN_AddOrRemoveNodes(PlanningNode *planningPool, _Instance *player)
 /* end block 3 */
 // End Line: 967
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 PlanningNode *PLAN_FindNodeMostInNeedOfConnectivityExpansion(PlanningNode *planningPool)
 
 {
-  int iVar1;
-  uint uVar2;
-  int iVar3;
-  PlanningNode *pPVar4;
-  int iVar5;
+	int iVar1;
+	uint uVar2;
+	int iVar3;
+	PlanningNode *pPVar4;
+	int iVar5;
 
-  iVar5 = 0xffff;
-  iVar3 = 0;
-  pPVar4 = (PlanningNode *)0x0;
-  if (*(char *)(poolManagementData + 1) != '\0')
-  {
-    do
-    {
-      iVar1 = PLANPOOL_NumConnectionsForNode(planningPool);
-      if ((iVar1 < iVar5) &&
-          (uVar2 = PLANPOOL_NumConnectionsExaminedForNode(planningPool),
-           uVar2 != (uint) * (byte *)(poolManagementData + 1)))
-      {
-        pPVar4 = planningPool;
-        iVar5 = iVar1;
-      }
-      iVar3 = iVar3 + 1;
-      planningPool = planningPool + 1;
-    } while (iVar3 < (int)(uint) * (byte *)(poolManagementData + 1));
-  }
-  return pPVar4;
+	iVar5 = 0xffff;
+	iVar3 = 0;
+	pPVar4 = (PlanningNode *)0x0;
+	if (*(char *)(_poolManagementData + 1) != '\0')
+	{
+		do
+		{
+			iVar1 = PLANPOOL_NumConnectionsForNode(planningPool);
+			if ((iVar1 < iVar5) &&
+				(uVar2 = PLANPOOL_NumConnectionsExaminedForNode(planningPool),
+				 uVar2 != (uint) * (byte *)(_poolManagementData + 1)))
+			{
+				pPVar4 = planningPool;
+				iVar5 = iVar1;
+			}
+			iVar3 = iVar3 + 1;
+			planningPool = planningPool + 1;
+		} while (iVar3 < (int)(uint) * (byte *)(_poolManagementData + 1));
+	}
+	return pPVar4;
 }

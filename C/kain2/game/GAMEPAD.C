@@ -1,340 +1,6 @@
 #include "THISDUST.H"
 #include "GAMEPAD.H"
 
-// short @0x800CE358, len = 0x00000002
-align_flag = 0x0;
-// uchar @0x800D0CC8, len = 0x00000001
-controllerType = 0x00;
-// int @0x800CE35C, len = 0x00000004
-dualShock = 0x0;
-// uchar @0x800C8760, len = 0x00000001
-dualshock_align = 0x00;
-// uchar @0x800C875C, len = 0x00000001
-dualshock_motors = 0x00;
-// short @0x800CE35A, len = 0x00000002
-dualshock_onflag = 0x0;
-// long @0x800D0C68, len = 0x00000004
-dualshock0_time = null;
-// long @0x800D0C6C, len = 0x00000004
-dualshock1_time = null;
-// long @0x800D0D60, len = 0x00000004
-gDummyCommand = null;
-// ControllerPacket @0x800D0CD0, len = 0x00000022
-gpbuffer1 =
-    {
-        // uchar @0x800D0CD0, len = 0x00000001
-        .transStatus = 0x00,
-        // uchar @0x800D0CD1, len = 0x00000001
-        .dataFormat = 0x00,
-        // GAMEPAD_219fake @0x800D0CD2, len = 0x00000020
-        .data =
-            {
-                // ushort @0x800D0CD2, len = 0x00000002
-                .pad = null,
-                // ushort[16] @0x800D0CD2, len = 0x00000020
-                .multitap =
-                    {
-                        // ushort @0x800D0CD2, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CD4, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CD6, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CD8, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CDA, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CDC, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CDE, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CE0, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CE2, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CE4, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CE6, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CE8, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CEA, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CEC, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CEE, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CF0, len = 0x00000002
-                        null},
-                // ushort[2] @0x800D0CD2, len = 0x00000004
-                .mouse =
-                    {
-                        // ushort @0x800D0CD2, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CD4, len = 0x00000002
-                        null},
-                // ushort[3] @0x800D0CD2, len = 0x00000006
-                .negcon =
-                    {
-                        // ushort @0x800D0CD2, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CD4, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CD6, len = 0x00000002
-                        null},
-                // AnalogueData @0x800D0CD2, len = 0x00000006
-                .analogue =
-                    {
-                        // ushort @0x800D0CD2, len = 0x00000002
-                        .pad = null,
-                        // uchar @0x800D0CD4, len = 0x00000001
-                        .xR = 0x00,
-                        // uchar @0x800D0CD5, len = 0x00000001
-                        .yR = 0x00,
-                        // uchar @0x800D0CD6, len = 0x00000001
-                        .xL = 0x00,
-                        // uchar @0x800D0CD7, len = 0x00000001
-                        .yL = 0x00}}};
-// ControllerPacket @0x800D0D18, len = 0x00000022
-gpbuffer2 =
-    {
-        // uchar @0x800D0D18, len = 0x00000001
-        .transStatus = 0x00,
-        // uchar @0x800D0D19, len = 0x00000001
-        .dataFormat = 0x00,
-        // GAMEPAD_219fake @0x800D0D1A, len = 0x00000020
-        .data =
-            {
-                // ushort @0x800D0D1A, len = 0x00000002
-                .pad = null,
-                // ushort[16] @0x800D0D1A, len = 0x00000020
-                .multitap =
-                    {
-                        // ushort @0x800D0D1A, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D1C, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D1E, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D20, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D22, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D24, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D26, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D28, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D2A, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D2C, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D2E, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D30, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D32, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D34, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D36, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D38, len = 0x00000002
-                        null},
-                // ushort[2] @0x800D0D1A, len = 0x00000004
-                .mouse =
-                    {
-                        // ushort @0x800D0D1A, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D1C, len = 0x00000002
-                        null},
-                // ushort[3] @0x800D0D1A, len = 0x00000006
-                .negcon =
-                    {
-                        // ushort @0x800D0D1A, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D1C, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D1E, len = 0x00000002
-                        null},
-                // AnalogueData @0x800D0D1A, len = 0x00000006
-                .analogue =
-                    {
-                        // ushort @0x800D0D1A, len = 0x00000002
-                        .pad = null,
-                        // uchar @0x800D0D1C, len = 0x00000001
-                        .xR = 0x00,
-                        // uchar @0x800D0D1D, len = 0x00000001
-                        .yR = 0x00,
-                        // uchar @0x800D0D1E, len = 0x00000001
-                        .xL = 0x00,
-                        // uchar @0x800D0D1F, len = 0x00000001
-                        .yL = 0x00}}};
-// int @0x800CE3A4, len = 0x00000004
-gpSaved = 0x0;
-// int @0x800D0C64, len = 0x00000004
-ignoreFind = null;
-// ushort @0x800CE3A0, len = 0x00000002
-lastData = 0x0;
-// long @0x800D0CA0, len = 0x00000004
-overrideCommand = null;
-// long @0x800D0C70, len = 0x00000004
-overrideData = null;
-// ushort @0x800D0CCC, len = 0x00000002
-psxData = null;
-// ControllerPacket @0x800D0CF4, len = 0x00000022
-readGPBuffer1 =
-    {
-        // uchar @0x800D0CF4, len = 0x00000001
-        .transStatus = 0x00,
-        // uchar @0x800D0CF5, len = 0x00000001
-        .dataFormat = 0x00,
-        // GAMEPAD_219fake @0x800D0CF6, len = 0x00000020
-        .data =
-            {
-                // ushort @0x800D0CF6, len = 0x00000002
-                .pad = null,
-                // ushort[16] @0x800D0CF6, len = 0x00000020
-                .multitap =
-                    {
-                        // ushort @0x800D0CF6, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CF8, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CFA, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CFC, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CFE, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D00, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D02, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D04, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D06, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D08, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D0A, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D0C, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D0E, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D10, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D12, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D14, len = 0x00000002
-                        null},
-                // ushort[2] @0x800D0CF6, len = 0x00000004
-                .mouse =
-                    {
-                        // ushort @0x800D0CF6, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CF8, len = 0x00000002
-                        null},
-                // ushort[3] @0x800D0CF6, len = 0x00000006
-                .negcon =
-                    {
-                        // ushort @0x800D0CF6, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CF8, len = 0x00000002
-                        null,
-                        // ushort @0x800D0CFA, len = 0x00000002
-                        null},
-                // AnalogueData @0x800D0CF6, len = 0x00000006
-                .analogue =
-                    {
-                        // ushort @0x800D0CF6, len = 0x00000002
-                        .pad = null,
-                        // uchar @0x800D0CF8, len = 0x00000001
-                        .xR = 0x00,
-                        // uchar @0x800D0CF9, len = 0x00000001
-                        .yR = 0x00,
-                        // uchar @0x800D0CFA, len = 0x00000001
-                        .xL = 0x00,
-                        // uchar @0x800D0CFB, len = 0x00000001
-                        .yL = 0x00}}};
-// ControllerPacket @0x800D0D3C, len = 0x00000022
-readGPBuffer2 =
-    {
-        // uchar @0x800D0D3C, len = 0x00000001
-        .transStatus = 0x00,
-        // uchar @0x800D0D3D, len = 0x00000001
-        .dataFormat = 0x00,
-        // GAMEPAD_219fake @0x800D0D3E, len = 0x00000020
-        .data =
-            {
-                // ushort @0x800D0D3E, len = 0x00000002
-                .pad = null,
-                // ushort[16] @0x800D0D3E, len = 0x00000020
-                .multitap =
-                    {
-                        // ushort @0x800D0D3E, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D40, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D42, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D44, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D46, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D48, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D4A, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D4C, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D4E, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D50, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D52, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D54, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D56, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D58, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D5A, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D5C, len = 0x00000002
-                        null},
-                // ushort[2] @0x800D0D3E, len = 0x00000004
-                .mouse =
-                    {
-                        // ushort @0x800D0D3E, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D40, len = 0x00000002
-                        null},
-                // ushort[3] @0x800D0D3E, len = 0x00000006
-                .negcon =
-                    {
-                        // ushort @0x800D0D3E, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D40, len = 0x00000002
-                        null,
-                        // ushort @0x800D0D42, len = 0x00000002
-                        null},
-                // AnalogueData @0x800D0D3E, len = 0x00000006
-                .analogue =
-                    {
-                        // ushort @0x800D0D3E, len = 0x00000002
-                        .pad = null,
-                        // uchar @0x800D0D40, len = 0x00000001
-                        .xR = 0x00,
-                        // uchar @0x800D0D41, len = 0x00000001
-                        .yR = 0x00,
-                        // uchar @0x800D0D42, len = 0x00000001
-                        .xL = 0x00,
-                        // uchar @0x800D0D43, len = 0x00000001
-                        .yL = 0x00}}};
 // decompiled code
 // original method signature:
 // void /*$ra*/ GAMEPAD_Commands(long (*command)[5] /*$t4*/, long (*data)[5] /*$t3*/, long pad /*$a2*/)
@@ -428,14 +94,13 @@ LAB_800310a4:
   puVar4 = (uint *)(*command + iVar2);
   puVar4[3] = uVar8;
   puVar4[4] = uVar6;
-  if ((gameTrackerX.gameFlags & 0x10U) == 0)
+  if ((DAT_800d10ec & 0x10) == 0)
   {
     iVar2 = 0;
-    if ((gameTrackerX.gameFlags & 1U) != 0)
+    if ((DAT_800d10ec & 1) != 0)
     {
-      memset(gameTrackerX.controlCommand, 0, 0x28);
-      memset(gameTrackerX.controlData, 0, 0x28);
-      return;
+      /* WARNING: Subroutine does not return */
+      memset(&DAT_800d0ff4, 0, 0x28);
     }
     puVar4[1] = ~*puVar4 & *puVar5;
     *puVar4 = *puVar5;
@@ -470,19 +135,18 @@ LAB_800310a4:
   }
   else
   {
-    puVar4[1] = ~*puVar4 & gameTrackerX.overrideData[iVar2];
-    *puVar4 = gameTrackerX.overrideData[iVar2];
-    puVar5[3] = gameTrackerX.overrideData[iVar2 + 3];
-    puVar5[4] = gameTrackerX.overrideData[iVar2 + 4];
+    puVar4[1] = ~*puVar4 & (&FX_ColorArray)[iVar2];
+    *puVar4 = (&FX_ColorArray)[iVar2];
+    puVar5[3] = (&LONG_800d1050)[iVar2];
+    puVar5[4] = (&LONG_800d1054)[iVar2];
     uVar6 = 0xffffff80;
-    if (((gameTrackerX.overrideData[iVar2] & 1U) != 0) ||
-        (uVar6 = 0x80, (gameTrackerX.overrideData[iVar2] & 2U) != 0))
+    if ((((&FX_ColorArray)[iVar2] & 1U) != 0) || (uVar6 = 0x80, ((&FX_ColorArray)[iVar2] & 2U) != 0))
     {
       puVar5[4] = uVar6;
     }
-    if ((gameTrackerX.overrideData[pad * 5] & 4U) == 0)
+    if (((&FX_ColorArray)[pad * 5] & 4U) == 0)
     {
-      if ((gameTrackerX.overrideData[pad * 5] & 8U) != 0)
+      if (((&FX_ColorArray)[pad * 5] & 8U) != 0)
       {
         (data + pad)[3] = 0x80;
       }
@@ -492,7 +156,8 @@ LAB_800310a4:
       (data + pad)[3] = -0x80;
     }
   }
-  if ((((gameTrackerX.debugFlags & 0x40000U) == 0) && ((gameTrackerX.debugFlags2 & 0x2000000U) != 0)) && (command = command + pad, ((data + pad)[0] & 0x300U) == 0x300))
+  if ((((vmRealClock & 0x40000U) == 0) && ((vmClock & 0x2000000U) != 0)) &&
+      (command = command + pad, ((data + pad)[0] & 0x300U) == 0x300))
   {
     uVar6 = (*command)[1];
     (*command)[0] = (*command)[0] & 0xfffff3ffU | 0x40000000;
@@ -564,11 +229,11 @@ void GAMEPAD_DisableDualShock(void)
 
 {
   dualshock_onflag = 0;
-  UCHAR_00h_800c875d = '\0';
-  dualshock_motors = '\0';
+  DebugMenuLine_800c8750.text._1_1_ = 0;
+  DebugMenuLine_800c8750.text._0_1_ = 0;
   dualshock1_time = 0;
   dualshock0_time = 0;
-  PadSetAct(0, &dualshock_motors, 2);
+  PadSetAct(0, 0x800c875c, 2);
   return;
 }
 
@@ -629,14 +294,14 @@ void GAMEPAD_HandleDualShock(void)
 
 {
   bool bVar1;
-  ulong uVar2;
-  uint uVar3;
+  uint uVar2;
+  int iVar3;
   int iVar4;
   int iVar5;
 
-  uVar2 = gameTrackerX.timeMult;
-  uVar3 = PadInfoMode(0, 2, 0);
-  if (uVar3 == 0)
+  iVar4 = DAT_800d11ec;
+  uVar2 = PadInfoMode(0, 2, 0);
+  if (uVar2 == 0)
   {
     align_flag = 0;
   }
@@ -645,29 +310,29 @@ void GAMEPAD_HandleDualShock(void)
     iVar5 = 0;
     if (align_flag == 0)
     {
-      PadSetAct(0, &dualshock_motors, 2);
+      PadSetAct(0, 0x800c875c, 2);
       do
       {
-        iVar4 = PadSetActAlign(0, &dualshock_align);
+        iVar3 = PadSetActAlign(0, 0x800c8760);
         bVar1 = iVar5 < 100000;
-        if (iVar4 != 0)
+        if (iVar3 != 0)
           break;
         iVar5 = iVar5 + 1;
       } while (bVar1);
       align_flag = 1;
     }
   }
-  iVar5 = dualshock0_time - uVar2;
+  iVar5 = dualshock0_time - iVar4;
   if ((0 < dualshock0_time) && (dualshock0_time = iVar5, iVar5 < 1))
   {
     dualshock0_time = 0;
-    dualshock_motors = '\0';
+    DebugMenuLine_800c8750.text._0_1_ = 0;
   }
-  iVar5 = dualshock1_time - uVar2;
-  if ((0 < dualshock1_time) && (dualshock1_time = iVar5, iVar5 < 1))
+  iVar4 = dualshock1_time - iVar4;
+  if ((0 < dualshock1_time) && (dualshock1_time = iVar4, iVar4 < 1))
   {
     dualshock1_time = 0;
-    UCHAR_00h_800c875d = '\0';
+    DebugMenuLine_800c8750.text._1_1_ = 0;
   }
   return;
 }
@@ -691,11 +356,11 @@ void GAMEPAD_Shock(int motor0_speed, int motor0_time, int motor1_speed, int moto
 {
   if (dualshock_onflag != 0)
   {
-    dualshock_motors = (uchar)motor0_speed;
-    UCHAR_00h_800c875d = (uchar)motor1_speed;
+    DebugMenuLine_800c8750.text._0_1_ = (undefined)motor0_speed;
+    DebugMenuLine_800c8750.text._1_1_ = (undefined)motor1_speed;
     dualshock0_time = motor0_time;
     dualshock1_time = motor1_time;
-    PadSetAct(0, &dualshock_motors, 2);
+    PadSetAct(0, 0x800c875c, 2);
   }
   return;
 }
@@ -719,9 +384,9 @@ void GAMEPAD_Shock0(int motor0_speed, int motor0_time)
 {
   if (dualshock_onflag != 0)
   {
-    dualshock_motors = (uchar)motor0_speed;
+    DebugMenuLine_800c8750.text._0_1_ = (undefined)motor0_speed;
     dualshock0_time = motor0_time;
-    PadSetAct(0, &dualshock_motors, 2);
+    PadSetAct(0, 0x800c875c, 2);
   }
   return;
 }
@@ -745,9 +410,9 @@ void GAMEPAD_Shock1(int motor1_speed, int motor1_time)
 {
   if (dualshock_onflag != 0)
   {
-    UCHAR_00h_800c875d = (uchar)motor1_speed;
+    DebugMenuLine_800c8750.text._1_1_ = (undefined)motor1_speed;
     dualshock1_time = motor1_time;
-    PadSetAct(0, &dualshock_motors, 2);
+    PadSetAct(0, 0x800c875c, 2);
   }
   return;
 }
@@ -846,21 +511,11 @@ LAB_800315f0:
 void GAMEPAD_Init(void)
 
 {
-  PadInitDirect(&readGPBuffer1, &readGPBuffer2);
+  PadInitDirect((_LoadQueueEntry *)&readGPBuffer1, &readGPBuffer2);
   PadStartCom();
   GAMEPAD_Detect();
-  memset(&gDummyCommand, 0, 0x10);
-  memset(&readGPBuffer1, 0, 0x22);
-  memset(&readGPBuffer2, 0, 0x22);
-  gpbuffer1.transStatus = '\0';
-  gpbuffer1.data._0_2_ = 0xffff;
-  readGPBuffer1.transStatus = '\0';
-  readGPBuffer1.data._0_2_ = 0xffff;
-  gpbuffer2.transStatus = '\0';
-  gpbuffer2.data._0_2_ = 0xffff;
-  readGPBuffer2.transStatus = '\0';
-  readGPBuffer2.data._0_2_ = 0xffff;
-  return;
+  /* WARNING: Subroutine does not return */
+  memset(&gTimerEnabled, 0, 0x10);
 }
 
 // decompiled code
@@ -908,10 +563,11 @@ void PSXPAD_TranslateData(long *data, ushort padData, ushort lastData)
   undefined *puVar7;
   undefined *puVar8;
   undefined *puVar9;
-  undefined4 local_40[16];
+  undefined4 local_40;
+  undefined *local_3c[15];
 
-  puVar4 = local_40;
-  puVar5 = local_40;
+  puVar4 = &local_40;
+  puVar5 = &local_40;
   ppuVar2 = &PTR_PTR_800ce360;
   do
   {
@@ -924,7 +580,7 @@ void PSXPAD_TranslateData(long *data, ushort padData, ushort lastData)
     *(undefined **)(puVar4 + 3) = puVar9;
     ppuVar2 = ppuVar2 + 4;
     puVar4 = puVar4 + 4;
-  } while (ppuVar2 != (undefined **)&lastData);
+  } while (ppuVar2 != (undefined **)lastData);
   iVar6 = 0;
   do
   {
@@ -1060,18 +716,20 @@ void GAMEPAD_DetectInit(void)
 /* WARNING: Removing unreachable block (ram,0x80031b20) */
 /* WARNING: Removing unreachable block (ram,0x80031b24) */
 /* WARNING: Removing unreachable block (ram,0x80031b70) */
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void GAMEPAD_GetData(long (*data)[5])
 
 {
   int iVar1;
-  ControllerPacket *pCVar2;
+  undefined4 *puVar2;
   uint uVar3;
   ControllerPacket *pCVar4;
-  uint uVar5;
-  undefined4 uVar6;
+  ControllerPacket *pCVar5;
+  uint uVar6;
   undefined4 uVar7;
   undefined4 uVar8;
+  undefined4 uVar9;
 
   iVar1 = ignoreFind;
   (*data)[2] = 0;
@@ -1100,34 +758,34 @@ void GAMEPAD_GetData(long (*data)[5])
       {
         GAMEPAD_HandleDualShock();
         pCVar4 = &gpbuffer1;
-        pCVar2 = &readGPBuffer1;
+        puVar2 = &readGPBuffer1;
         do
         {
-          uVar6 = *(undefined4 *)(pCVar2->data + 2);
-          uVar7 = *(undefined4 *)(pCVar2->data + 6);
-          uVar8 = *(undefined4 *)(pCVar2->data + 10);
-          *(undefined4 *)pCVar4 = *(undefined4 *)pCVar2;
-          *(undefined4 *)(pCVar4->data + 2) = uVar6;
-          *(undefined4 *)(pCVar4->data + 6) = uVar7;
-          *(undefined4 *)(pCVar4->data + 10) = uVar8;
-          pCVar2 = (ControllerPacket *)(pCVar2->data + 0xe);
+          uVar7 = puVar2[1];
+          uVar8 = puVar2[2];
+          uVar9 = puVar2[3];
+          *(undefined4 *)pCVar4 = *puVar2;
+          *(undefined4 *)(pCVar4->data + 2) = uVar7;
+          *(undefined4 *)(pCVar4->data + 6) = uVar8;
+          *(undefined4 *)(pCVar4->data + 10) = uVar9;
+          puVar2 = puVar2 + 4;
           pCVar4 = (ControllerPacket *)(pCVar4->data + 0xe);
-        } while (pCVar2 != (ControllerPacket *)(readGPBuffer1.data + 0x1e));
-        *(undefined2 *)pCVar4 = readGPBuffer1.data._30_2_;
-        pCVar4 = &gpbuffer2;
-        pCVar2 = &readGPBuffer2;
+        } while (puVar2 != (undefined4 *)&UNK_800d0d14);
+        *(undefined2 *)pCVar4 = _UNK_800d0d14;
+        pCVar5 = &gpbuffer2;
+        pCVar4 = &readGPBuffer2;
         do
         {
-          uVar6 = *(undefined4 *)(pCVar2->data + 2);
-          uVar7 = *(undefined4 *)(pCVar2->data + 6);
-          uVar8 = *(undefined4 *)(pCVar2->data + 10);
-          *(undefined4 *)pCVar4 = *(undefined4 *)pCVar2;
-          *(undefined4 *)(pCVar4->data + 2) = uVar6;
-          *(undefined4 *)(pCVar4->data + 6) = uVar7;
-          *(undefined4 *)(pCVar4->data + 10) = uVar8;
-          pCVar2 = (ControllerPacket *)(pCVar2->data + 0xe);
+          uVar7 = *(undefined4 *)(pCVar4->data + 2);
+          uVar8 = *(undefined4 *)(pCVar4->data + 6);
+          uVar9 = *(undefined4 *)(pCVar4->data + 10);
+          *(undefined4 *)pCVar5 = *(undefined4 *)pCVar4;
+          *(undefined4 *)(pCVar5->data + 2) = uVar7;
+          *(undefined4 *)(pCVar5->data + 6) = uVar8;
+          *(undefined4 *)(pCVar5->data + 10) = uVar9;
           pCVar4 = (ControllerPacket *)(pCVar4->data + 0xe);
-        } while (pCVar2 != (ControllerPacket *)(readGPBuffer2.data + 0x1e));
+          pCVar5 = (ControllerPacket *)(pCVar5->data + 0xe);
+        } while (pCVar4 != (ControllerPacket *)(readGPBuffer2.data + 0x1e));
         goto LAB_80031ba8;
       }
       if (uVar3 == 1)
@@ -1137,36 +795,36 @@ void GAMEPAD_GetData(long (*data)[5])
   else
   {
     pCVar4 = &gpbuffer1;
-    pCVar2 = &readGPBuffer1;
+    puVar2 = &readGPBuffer1;
     do
     {
-      uVar6 = *(undefined4 *)(pCVar2->data + 2);
-      uVar7 = *(undefined4 *)(pCVar2->data + 6);
-      uVar8 = *(undefined4 *)(pCVar2->data + 10);
-      *(undefined4 *)pCVar4 = *(undefined4 *)pCVar2;
-      *(undefined4 *)(pCVar4->data + 2) = uVar6;
-      *(undefined4 *)(pCVar4->data + 6) = uVar7;
-      *(undefined4 *)(pCVar4->data + 10) = uVar8;
-      pCVar2 = (ControllerPacket *)(pCVar2->data + 0xe);
+      uVar7 = puVar2[1];
+      uVar8 = puVar2[2];
+      uVar9 = puVar2[3];
+      *(undefined4 *)pCVar4 = *puVar2;
+      *(undefined4 *)(pCVar4->data + 2) = uVar7;
+      *(undefined4 *)(pCVar4->data + 6) = uVar8;
+      *(undefined4 *)(pCVar4->data + 10) = uVar9;
+      puVar2 = puVar2 + 4;
       pCVar4 = (ControllerPacket *)(pCVar4->data + 0xe);
-    } while (pCVar2 != (ControllerPacket *)(readGPBuffer1.data + 0x1e));
-    *(undefined2 *)pCVar4 = readGPBuffer1.data._30_2_;
-    pCVar4 = &gpbuffer2;
-    pCVar2 = &readGPBuffer2;
+    } while (puVar2 != (undefined4 *)&UNK_800d0d14);
+    *(undefined2 *)pCVar4 = _UNK_800d0d14;
+    pCVar5 = &gpbuffer2;
+    pCVar4 = &readGPBuffer2;
     do
     {
-      uVar6 = *(undefined4 *)(pCVar2->data + 2);
-      uVar7 = *(undefined4 *)(pCVar2->data + 6);
-      uVar8 = *(undefined4 *)(pCVar2->data + 10);
-      *(undefined4 *)pCVar4 = *(undefined4 *)pCVar2;
-      *(undefined4 *)(pCVar4->data + 2) = uVar6;
-      *(undefined4 *)(pCVar4->data + 6) = uVar7;
-      *(undefined4 *)(pCVar4->data + 10) = uVar8;
-      pCVar2 = (ControllerPacket *)(pCVar2->data + 0xe);
+      uVar7 = *(undefined4 *)(pCVar4->data + 2);
+      uVar8 = *(undefined4 *)(pCVar4->data + 6);
+      uVar9 = *(undefined4 *)(pCVar4->data + 10);
+      *(undefined4 *)pCVar5 = *(undefined4 *)pCVar4;
+      *(undefined4 *)(pCVar5->data + 2) = uVar7;
+      *(undefined4 *)(pCVar5->data + 6) = uVar8;
+      *(undefined4 *)(pCVar5->data + 10) = uVar9;
       pCVar4 = (ControllerPacket *)(pCVar4->data + 0xe);
-    } while (pCVar2 != (ControllerPacket *)(readGPBuffer2.data + 0x1e));
+      pCVar5 = (ControllerPacket *)(pCVar5->data + 0xe);
+    } while (pCVar4 != (ControllerPacket *)(readGPBuffer2.data + 0x1e));
   LAB_80031ba8:
-    *(undefined2 *)pCVar4 = *(undefined2 *)pCVar2;
+    *(undefined2 *)pCVar5 = *(undefined2 *)pCVar4;
   }
   if (gpbuffer1.transStatus == -1)
   {
@@ -1179,33 +837,32 @@ void GAMEPAD_GetData(long (*data)[5])
   }
   psxData = gpbuffer1.data._0_2_;
   gamePadControllerOut = 0;
-  if (controllerType == 'S')
+  if (controllerType[0] == 'S')
   {
     psxData = GAMEPAD_RemapAnalogueButtons(gpbuffer1.data._0_2_);
   }
-  PSXPAD_TranslateData((long *)data, psxData, lastData);
-  controllerType = gpbuffer1.dataFormat;
-  lastData = psxData;
+  PSXPAD_TranslateData((long *)data, psxData, lastData[0]);
+  controllerType[0] = gpbuffer1.dataFormat;
+  lastData[0] = psxData;
   if ((gpbuffer1.dataFormat != 's') && (gpbuffer1.dataFormat != 'S'))
   {
-    lastData = psxData;
-    controllerType = gpbuffer1.dataFormat;
     return;
   }
-  uVar5 = (uint)gpbuffer1.data[4];
+  uVar6 = (uint)gpbuffer1.data[4];
   uVar3 = (uint)gpbuffer1.data[5];
-  if (uVar5 - 0x4a < 0x6d)
+  if (uVar6 - 0x4a < 0x6d)
   {
-    iVar1 = uVar5 - 0x80;
-    if ((gpbuffer1.data[5] < 0x4a) || (iVar1 = uVar5 - 0x80, 0xb6 < gpbuffer1.data[5]))
+    iVar1 = uVar6 - 0x80;
+    if ((gpbuffer1.data[5] < 0x4a) || (iVar1 = uVar6 - 0x80, 0xb6 < gpbuffer1.data[5]))
       goto LAB_80031c94;
-    uVar5 = 0x80;
+    uVar6 = 0x80;
     uVar3 = 0x80;
   }
-  iVar1 = uVar5 - 0x80;
+  iVar1 = uVar6 - 0x80;
 LAB_80031c94:
   (*data)[3] = iVar1;
   (*data)[4] = uVar3 - 0x80;
+  /* WARNING: Read-only address (ram,0x800d0d14) is written */
   return;
 }
 
@@ -1283,58 +940,56 @@ void GAMEPAD_Process(GameTracker *gameTracker)
 /* end block 2 */
 // End Line: 1743
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
-
 void GAMEPAD_SaveControllers(void)
 
 {
-  long *plVar1;
-  long *plVar2;
-  long *plVar3;
-  long *plVar4;
-  long lVar5;
-  long lVar6;
-  long lVar7;
+  undefined4 *puVar1;
+  undefined4 *puVar2;
+  undefined4 *puVar3;
+  undefined4 *puVar4;
+  undefined4 uVar5;
+  undefined4 uVar6;
+  undefined4 uVar7;
 
-  gpSaved = 1;
-  plVar1 = gameTrackerX.controlCommand;
-  plVar2 = &overrideCommand;
+  puVar2 = (undefined4 *)&gp0xffffb540;
+  puVar1 = (undefined4 *)&gp0xffffb1ec;
   do
   {
-    plVar4 = plVar2;
-    plVar3 = plVar1;
-    lVar5 = plVar3[1];
-    lVar6 = plVar3[2];
-    lVar7 = plVar3[3];
-    *plVar4 = *plVar3;
-    plVar4[1] = lVar5;
-    plVar4[2] = lVar6;
-    plVar4[3] = lVar7;
-    plVar1 = plVar3 + 4;
-    plVar2 = plVar4 + 4;
-  } while (plVar3 + 4 != gameTrackerX.controlCommand + 8);
-  lVar5 = plVar3[5];
-  plVar4[4] = gameTrackerX.controlCommand[1][3];
-  plVar4[5] = lVar5;
-  plVar1 = gameTrackerX.controlData;
-  plVar2 = &overrideData;
+    puVar4 = puVar1;
+    puVar3 = puVar2;
+    uVar5 = puVar3[1];
+    uVar6 = puVar3[2];
+    uVar7 = puVar3[3];
+    *puVar4 = *puVar3;
+    puVar4[1] = uVar5;
+    puVar4[2] = uVar6;
+    puVar4[3] = uVar7;
+    puVar2 = puVar3 + 4;
+    puVar1 = puVar4 + 4;
+  } while (puVar2 != (undefined4 *)&gp0xffffb560);
+  uVar5 = puVar3[5];
+  puVar4[4] = *puVar2;
+  puVar4[5] = uVar5;
+  puVar2 = (undefined4 *)&gp0xffffb568;
+  puVar1 = (undefined4 *)&gp0xffffb1bc;
   do
   {
-    plVar4 = plVar2;
-    plVar3 = plVar1;
-    lVar5 = plVar3[1];
-    lVar6 = plVar3[2];
-    lVar7 = plVar3[3];
-    *plVar4 = *plVar3;
-    plVar4[1] = lVar5;
-    plVar4[2] = lVar6;
-    plVar4[3] = lVar7;
-    plVar1 = plVar3 + 4;
-    plVar2 = plVar4 + 4;
-  } while (plVar3 + 4 != gameTrackerX.controlData + 8);
-  lVar5 = plVar3[5];
-  plVar4[4] = gameTrackerX.controlData[1][3];
-  plVar4[5] = lVar5;
+    puVar4 = puVar1;
+    puVar3 = puVar2;
+    uVar5 = puVar3[1];
+    uVar6 = puVar3[2];
+    uVar7 = puVar3[3];
+    *puVar4 = *puVar3;
+    puVar4[1] = uVar5;
+    puVar4[2] = uVar6;
+    puVar4[3] = uVar7;
+    puVar2 = puVar3 + 4;
+    puVar1 = puVar4 + 4;
+  } while (puVar2 != (undefined4 *)&gp0xffffb588);
+  uVar5 = puVar3[5];
+  puVar4[4] = *puVar2;
+  puVar4[5] = uVar5;
+  uGpffff88f0 = 1;
   return;
 }
 
@@ -1370,7 +1025,7 @@ void GAMEPAD_RestoreControllers(void)
   {
     gpSaved = 0;
     plVar1 = &overrideData;
-    plVar2 = gameTrackerX.controlData;
+    plVar2 = &DAT_800d101c;
     do
     {
       plVar4 = plVar2;
@@ -1389,7 +1044,7 @@ void GAMEPAD_RestoreControllers(void)
     plVar4[4] = _UNK_800d0c90;
     plVar4[5] = lVar5;
     plVar1 = &overrideCommand;
-    plVar2 = gameTrackerX.controlCommand;
+    plVar2 = &DAT_800d0ff4;
     do
     {
       plVar4 = plVar2;
@@ -1407,7 +1062,7 @@ void GAMEPAD_RestoreControllers(void)
     lVar5 = plVar3[5];
     plVar4[4] = _UNK_800d0cc0;
     plVar4[5] = lVar5;
-    gameTrackerX.controlCommand[0][0] = gameTrackerX.controlCommand[0][0] | 0x80;
+    DAT_800d0ff4 = DAT_800d0ff4 | 0x80;
   }
   return;
 }

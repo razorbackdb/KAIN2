@@ -1,26 +1,6 @@
 #ifndef AADSQCMD_H
 #define AADSQCMD_H
 
-struct AadSequenceHdr // hashcode: 0x09B09BCF (dec: 162569167)
-{
-	unsigned long sequenceID;	  // size=0, offset=0 //  hashcode: 0xA12DD76F (dec: -1590831249), parent name: 'AadSequenceHdr', parent hashcode: 0xFFFFFFFF (dec: -1)
-	unsigned long quarterNoteTime; // size=0, offset=4 //  hashcode: 0x4176AE34 (dec: 1098296884), parent name: 'AadSequenceHdr', parent hashcode: 0xFFFFFFFF (dec: -1)
-	unsigned short ppqn;		   // size=0, offset=8 //  hashcode: 0x30D1816E (dec: 819036526), parent name: 'AadSequenceHdr', parent hashcode: 0xFFFFFFFF (dec: -1)
-	unsigned short version;		   // size=0, offset=10 //  hashcode: 0x462F68E0 (dec: 1177512160), parent name: 'AadSequenceHdr', parent hashcode: 0xFFFFFFFF (dec: -1)
-	unsigned short numTracks;	  // size=0, offset=12 //  hashcode: 0x8F81D091 (dec: -1887317871), parent name: 'AadSequenceHdr', parent hashcode: 0xFFFFFFFF (dec: -1)
-	unsigned short unused;		   // size=0, offset=14 //  hashcode: 0x0EAB544A (dec: 246109258), parent name: 'AadSequenceHdr', parent hashcode: 0xFFFFFFFF (dec: -1)
-};
-
-struct AadTempo // hashcode: 0x0AB3CE4B (dec: 179555915)
-{
-	unsigned long quarterNoteTime; // size=0, offset=0 //  hashcode: 0xA2F7341F (dec: -1560857569), parent name: 'AadTempo', parent hashcode: 0xFFFFFFFF (dec: -1)
-	int ppqn;					   // size=0, offset=4 //  hashcode: 0x2B21DB29 (dec: 723639081), parent name: 'AadTempo', parent hashcode: 0xFFFFFFFF (dec: -1)
-};
-
-typedef struct AadSequenceHdr AadSequenceHdr;
-
-typedef struct AadTempo AadTempo;
-
 extern void aadSubstituteVariables(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80055928
 
 extern void metaCmdSelectChannel(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800559E0

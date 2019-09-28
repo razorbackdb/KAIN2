@@ -1,37 +1,6 @@
 #include "THISDUST.H"
 #include "SLUAGH.H"
 
-// _MonsterFunctionTable @0x800CF6AC, len = 0x00000020
-SLUAGH_FunctionTable =
-    {
-        // _func_96 * @0x800CF6AC, len = 0x00000004
-        .initFunc = &SLUAGH_Init,
-        // _func_97 * @0x800CF6B0, len = 0x00000004
-        .cleanUpFunc = 00000000,
-        // _func_98 * @0x800CF6B4, len = 0x00000004
-        .damageEffectFunc = &SLUAGH_DamageEffect,
-        // _func_99 * @0x800CF6B8, len = 0x00000004
-        .queryFunc = &SLUAGH_Query,
-        // _func_100 * @0x800CF6BC, len = 0x00000004
-        .messageFunc = 00000000,
-        // _MonsterStateChoice * @0x800CF6C0, len = 0x00000004
-        .stateFuncs = &SLUAGH_StateChoiceTable,
-        // char * @0x800CF6C4, len = 0x00000004
-        .versionID = &monVersion,
-        // char * @0x800CF6C8, len = 0x00000004
-        .localVersionID = 00000000};
-// _MonsterStateChoice @0x800CAB18, len = 0x0000000C
-SLUAGH_StateChoiceTable =
-    {
-        // int @0x800CAB18, len = 0x00000004
-        .state = 0x6,
-        // _MonsterState @0x800CAB1C, len = 0x00000008
-        .functions =
-            {
-                // _func_88 * @0x800CAB1C, len = 0x00000004
-                .entryFunction = &SLUAGH_AttackEntry,
-                // _func_89 * @0x800CAB20, len = 0x00000004
-                .stateFunction = &SLUAGH_Attack}};
 // decompiled code
 // original method signature:
 // unsigned long /*$ra*/ SLUAGH_Query(struct _Instance *instance /*$a0*/, unsigned long query /*$a1*/)
@@ -304,6 +273,7 @@ void SLUAGH_DeathEntry(_Instance *instance)
   {
     iVar1 = MON_SetUpKnockBack(instance, *(_Instance **)(puVar2[0x31] + 4),
                                (evMonsterHitData *)puVar2[0x30]);
+    /* WARNING: Subroutine does not return */
     MON_PlayAnim(instance, (MonsterAnim)CONCAT412(in_stack_fffffffc, CONCAT48(local_8, CONCAT44(local_c, local_10))),
                  (uint)(iVar1 == 0));
   }
@@ -348,17 +318,19 @@ void SLUAGH_DeathEntry(_Instance *instance)
 void SLUAGH_Death(_Instance *instance)
 
 {
-  undefined4 local_8;
-  undefined4 local_4;
+  undefined4 unaff_s0;
+  undefined4 unaff_retaddr;
   undefined8 uStackX0;
 
   if ((instance->flags2 & 0x10U) != 0)
   {
-    MON_PlayAnim(instance, (MonsterAnim)CONCAT88(uStackX0, CONCAT44(local_4, local_8)), 0x18);
+    /* WARNING: Subroutine does not return */
+    MON_PlayAnim(instance, (MonsterAnim)CONCAT88(uStackX0, CONCAT44(unaff_retaddr, unaff_s0)), 0x18);
   }
   if ((instance->flags2 & 2U) != 0)
   {
-    MON_SwitchState(instance, (MonsterState)CONCAT44(local_4, local_8));
+    /* WARNING: Subroutine does not return */
+    MON_SwitchState(instance, (MonsterState)CONCAT44(unaff_retaddr, unaff_s0));
   }
   MON_DefaultQueueHandler(instance);
   return;
@@ -388,20 +360,15 @@ void SLUAGH_AttackEntry(_Instance *instance)
 
 {
   undefined4 unaff_s0;
-  void *pvVar1;
   undefined4 unaff_retaddr;
   undefined8 uStackX0;
 
-  pvVar1 = instance->extraData;
-  if ((*(ushort *)(*(int *)((int)pvVar1 + 0xc4) + 0x16) & 8) == 0)
+  if ((*(ushort *)(*(int *)((int)instance->extraData + 0xc4) + 0x16) & 8) != 0)
   {
-    MON_AttackEntry(instance);
-  }
-  else
-  {
+    /* WARNING: Subroutine does not return */
     MON_PlayAnim(instance, (MonsterAnim)CONCAT88(uStackX0, CONCAT44(unaff_retaddr, unaff_s0)), 0x1e);
-    *(uint *)((int)pvVar1 + 4) = *(uint *)((int)pvVar1 + 4) | 4;
   }
+  MON_AttackEntry(instance);
   return;
 }
 
@@ -442,8 +409,6 @@ void SLUAGH_AttackEntry(_Instance *instance)
 /* end block 2 */
 // End Line: 490
 
-/* WARNING: Type propagation algorithm not settling */
-
 void SLUAGH_Attack(_Instance *instance)
 
 {
@@ -460,14 +425,11 @@ void SLUAGH_Attack(_Instance *instance)
   if ((*(uint *)((int)pvVar3 + 4) & 4) == 0)
   {
     MON_Attack(instance);
+    /* WARNING: Read-only address (ram,0x800d0fd8) is written */
     return;
   }
   if ((instance->flags2 & 0x10U) == 0)
-    goto LAB_8008d590;
-  do
   {
-    MON_SwitchState(instance, (MonsterState)CONCAT44(local_24, local_28));
-  LAB_8008d590:
     do
     {
       while (true)
@@ -479,8 +441,8 @@ void SLUAGH_Attack(_Instance *instance)
           {
             Data = SetMonsterSoulSuckData(instance, (int)(instance->position).x, (int)(instance->position).y,
                                           (int)(instance->position).z);
+            /* WARNING: Subroutine does not return */
             INSTANCE_Post(*(_Instance **)(*(int *)((int)pvVar3 + 0xc4) + 4), 0x1000009, Data);
-            return;
           }
           *(uint *)((int)pvVar3 + 4) = *(uint *)((int)pvVar3 + 4) & 0xfffffffb;
           return;
@@ -489,7 +451,7 @@ void SLUAGH_Attack(_Instance *instance)
           break;
         MON_DefaultMessageHandler(instance, message);
       }
-    } while (*(_Instance **)&((_Instance *)message->Data)->node == gameTrackerX.playerInstance);
+    } while (*(int *)message->Data == DAT_800d0fd8);
     if (*(int *)((int)pvVar3 + 0xdc) == 0)
     {
       Data = (int)*(short *)((int)pvVar3 + 0x130);
@@ -504,5 +466,7 @@ void SLUAGH_Attack(_Instance *instance)
       p_Var1 = FX_DoInstanceOneSegmentGlow(instance, (uint) * (byte *)((int)pvVar2 + 0x19), local_18, 1, 0x4b0, 0x68, 0x70);
       *(_FXGlowEffect **)((int)pvVar3 + 0xdc) = p_Var1;
     }
-  } while (true);
+  }
+  /* WARNING: Subroutine does not return */
+  MON_SwitchState(instance, (MonsterState)CONCAT44(local_24, local_28));
 }

@@ -1,8 +1,6 @@
 #include "THISDUST.H"
 #include "REAVER.H"
 
-// short @0x800D48B8, len = 0x00000002
-FireReaverFlag = null;
 // decompiled code
 // original method signature:
 // void /*$ra*/ SoulReaverInit(struct _Instance *instance /*$s0*/, struct GameTracker *gameTracker /*$a1*/)
@@ -24,30 +22,13 @@ FireReaverFlag = null;
 void SoulReaverInit(_Instance *instance, GameTracker *gameTracker)
 
 {
-  char *pcVar1;
-
-  if ((instance->flags & 0x20000U) == 0)
-  {
-    pcVar1 = MEMPACK_Malloc(0x24, '\x1e');
-    *(char **)&instance->extraData = pcVar1;
-    *(undefined2 *)(pcVar1 + 4) = 2;
-    FireReaverFlag = 0;
-    pcVar1[1] = '\x01';
-    *(undefined4 *)(pcVar1 + 8) = 0;
-    *(undefined4 *)(pcVar1 + 0xc) = 0;
-    *pcVar1 = '\0';
-    *(undefined2 *)(pcVar1 + 2) = 0x1000;
-    *(undefined2 *)(pcVar1 + 6) = 0;
-    *(undefined2 *)(pcVar1 + 0x1c) = 0x1000;
-    *(undefined2 *)(pcVar1 + 0x1e) = 0x1000;
-    COLLIDE_SegmentCollisionOff(instance, 0);
-  }
-  else
-  {
-    MEMPACK_Free((char *)instance->extraData);
-  }
-  FX_ReaverBladeInit();
-  return;
+	if ((instance->flags & 0x20000U) != 0)
+	{
+		/* WARNING: Subroutine does not return */
+		MEMPACK_Free((char *)instance->extraData);
+	}
+	/* WARNING: Subroutine does not return */
+	MEMPACK_Malloc(0x24, '\x1e');
 }
 
 // decompiled code
@@ -92,53 +73,51 @@ void SoulReaverInit(_Instance *instance, GameTracker *gameTracker)
 void SoulReaverCollide(_Instance *instance, GameTracker *gameTracker)
 
 {
-  short sVar1;
-  int Data;
-  _CollideInfo *collideInfo;
-  int Power;
-  _Instance *lastHit;
+	short sVar1;
+	_CollideInfo *collideInfo;
+	int Power;
+	_Instance *lastHit;
 
-  collideInfo = (_CollideInfo *)instance->collideInfo;
-  if ((((*(uint *)&collideInfo->flags & 0xffff0000) == 0x1010000) &&
-       (*(char *)((int)collideInfo->prim0 + 4) == '\t')) &&
-      (*(char *)((int)collideInfo->prim1 + 4) == '\b'))
-  {
-    lastHit = (_Instance *)collideInfo->inst1;
-    COLLIDE_SegmentCollisionOff(instance, 0);
-    sVar1 = *(short *)((int)instance->extraData + 4);
-    Power = 0;
-    if (0 < sVar1)
-    {
-      if (sVar1 < 3)
-      {
-        Power = 0x1000;
-      }
-      else
-      {
-        if (sVar1 == 6)
-        {
-          Power = 0x20;
-        }
-      }
-    }
-    if (instance->LinkParent != (_Instance *)0x0)
-    {
-      COLLIDE_SegmentCollisionOff(instance, 0);
-      Data = SetMonsterHitData(instance->LinkParent, lastHit, Power, 0, 0);
-      INSTANCE_Post(gameTrackerX.playerInstance, 0x100001f, Data);
-      Power = SetFXHitData(instance, (uint)(byte)collideInfo->segment, 0x32, Power);
-      INSTANCE_Post(lastHit, 0x400000, Power);
-    }
-  }
-  if (collideInfo->type1 == '\x03')
-  {
-    COLLIDE_SetBSPTreeFlag(collideInfo, 0x800);
-  }
-  else
-  {
-    *(uint *)((int)collideInfo->inst1 + 0x14) = *(uint *)((int)collideInfo->inst1 + 0x14) | 4;
-  }
-  return;
+	collideInfo = (_CollideInfo *)instance->collideInfo;
+	if ((((*(uint *)&collideInfo->flags & 0xffff0000) == 0x1010000) &&
+		 (*(char *)((int)collideInfo->prim0 + 4) == '\t')) &&
+		(*(char *)((int)collideInfo->prim1 + 4) == '\b'))
+	{
+		lastHit = (_Instance *)collideInfo->inst1;
+		COLLIDE_SegmentCollisionOff(instance, 0);
+		sVar1 = *(short *)((int)instance->extraData + 4);
+		Power = 0;
+		if (0 < sVar1)
+		{
+			if (sVar1 < 3)
+			{
+				Power = 0x1000;
+			}
+			else
+			{
+				if (sVar1 == 6)
+				{
+					Power = 0x20;
+				}
+			}
+		}
+		if (instance->LinkParent != (_Instance *)0x0)
+		{
+			COLLIDE_SegmentCollisionOff(instance, 0);
+			Power = SetMonsterHitData(instance->LinkParent, lastHit, Power, 0, 0);
+			/* WARNING: Subroutine does not return */
+			INSTANCE_Post(DAT_800d0fd8, 0x100001f, Power);
+		}
+	}
+	if (collideInfo->type1 == '\x03')
+	{
+		COLLIDE_SetBSPTreeFlag(collideInfo, 0x800);
+	}
+	else
+	{
+		*(uint *)((int)collideInfo->inst1 + 0x14) = *(uint *)((int)collideInfo->inst1 + 0x14) | 4;
+	}
+	return;
 }
 
 // decompiled code
@@ -162,12 +141,12 @@ void SoulReaverCollide(_Instance *instance, GameTracker *gameTracker)
 void SoulReaverProcess(_Instance *instance, GameTracker *gameTracker)
 
 {
-  if (*(char *)instance->extraData != '\0')
-  {
-    instance->currentStreamUnitID = (gameTrackerX.playerInstance)->currentStreamUnitID;
-  }
-  _SoulReaverAnimate(instance);
-  return;
+	if (*(char *)instance->extraData != '\0')
+	{
+		instance->currentStreamUnitID = *(long *)(DAT_800d0fd8 + 0x38);
+	}
+	_SoulReaverAnimate(instance);
+	return;
 }
 
 // decompiled code
@@ -209,58 +188,52 @@ void SoulReaverProcess(_Instance *instance, GameTracker *gameTracker)
 /* end block 2 */
 // End Line: 588
 
-void CollideReaverProjectile(_Instance *instance, GameTracker *gameTracker)
+void CollideReaverProjectile(_Instance *param_1, GameTracker *param_2)
 
 {
-  Level *pLVar1;
-  int Data;
-  int Power;
-  _CollideInfo *collideInfo;
-  _Instance *Inst;
+	int Data;
+	int Power;
+	_CollideInfo *collideInfo;
+	_Instance *Inst;
 
-  collideInfo = (_CollideInfo *)instance->collideInfo;
-  Inst = (_Instance *)collideInfo->inst1;
-  Data = *(int *)((int)instance->extraData + 4) + -2;
-  Power = 0;
-  if ((*(uint *)&collideInfo->flags & 0xffff0000) == 0x1010000)
-  {
-    if (0 < Data)
-    {
-      if (Data < 3)
-      {
-        Power = 0x1000;
-      }
-      else
-      {
-        if (Data == 6)
-        {
-          Power = 0x20;
-          pLVar1 = STREAM_GetLevelWithID(instance->currentStreamUnitID);
-          if ((pLVar1 != (Level *)0x0) && ((int)(instance->position).z < pLVar1->waterZLevel))
-          {
-            return;
-          }
-        }
-      }
-    }
-    if (Power != 0)
-    {
-      Data = SetMonsterHitData(instance, (_Instance *)0x0, Power, 0, 0);
-      INSTANCE_Post(Inst, 0x1000021, Data);
-      Data = SetFXHitData(instance, 1, 0x32, Power);
-      INSTANCE_Post(Inst, 0x400000, Data);
-    }
-  }
-  if (collideInfo->type1 == '\x03')
-  {
-    COLLIDE_SetBSPTreeFlag(collideInfo, 0x800);
-  }
-  else
-  {
-    *(uint *)((int)collideInfo->inst1 + 0x14) = *(uint *)((int)collideInfo->inst1 + 0x14) | 4;
-  }
-  CollidePhysicalObject(instance, gameTracker);
-  return;
+	collideInfo = (_CollideInfo *)param_1->collideInfo;
+	Inst = (_Instance *)collideInfo->inst1;
+	Data = *(int *)((int)param_1->extraData + 4) + -2;
+	Power = 0;
+	if ((*(uint *)&collideInfo->flags & 0xffff0000) == 0x1010000)
+	{
+		if (0 < Data)
+		{
+			if (Data < 3)
+			{
+				Power = 0x1000;
+			}
+			else
+			{
+				if (Data == 6)
+				{
+					/* WARNING: Subroutine does not return */
+					STREAM_GetLevelWithID(param_1->currentStreamUnitID);
+				}
+			}
+		}
+		if (Power != 0)
+		{
+			Data = SetMonsterHitData(param_1, (_Instance *)0x0, Power, 0, 0);
+			/* WARNING: Subroutine does not return */
+			INSTANCE_Post(Inst, 0x1000021, Data);
+		}
+	}
+	if (collideInfo->type1 == '\x03')
+	{
+		COLLIDE_SetBSPTreeFlag(collideInfo, 0x800);
+	}
+	else
+	{
+		*(uint *)((int)collideInfo->inst1 + 0x14) = *(uint *)((int)collideInfo->inst1 + 0x14) | 4;
+	}
+	CollidePhysicalObject(param_1, param_2);
+	return;
 }
 
 // decompiled code
@@ -297,32 +270,32 @@ void CollideReaverProjectile(_Instance *instance, GameTracker *gameTracker)
 ulong SoulReaverQuery(_Instance *instance, ulong query)
 
 {
-  ulong uVar1;
+	ulong uVar1;
 
-  if (query == 4)
-  {
-    return 0x1000;
-  }
-  if (query < 5)
-  {
-    if (query == 1)
-    {
-      return 0x20000;
-    }
-  }
-  else
-  {
-    if ((query == 0x28) && (*(char *)((int)instance->extraData + 1) != '\0'))
-    {
-      uVar1 = 1;
-      if (*(short *)((int)instance->extraData + 0x1e) != 0)
-      {
-        uVar1 = 3;
-      }
-      return uVar1;
-    }
-  }
-  return 0;
+	if (query == 4)
+	{
+		return 0x1000;
+	}
+	if (query < 5)
+	{
+		if (query == 1)
+		{
+			return 0x20000;
+		}
+	}
+	else
+	{
+		if ((query == 0x28) && (*(char *)((int)instance->extraData + 1) != '\0'))
+		{
+			uVar1 = 1;
+			if (*(short *)((int)instance->extraData + 0x1e) != 0)
+			{
+				uVar1 = 3;
+			}
+			return uVar1;
+		}
+	}
+	return 0;
 }
 
 // decompiled code
@@ -347,9 +320,9 @@ ulong SoulReaverQuery(_Instance *instance, ulong query)
 void SoulReaverImbue(_Instance *instance, int number)
 
 {
-  FX_DoBlastRing(instance, (_SVector *)&instance->position, instance->matrix, 0, 0x140, 0, 0xf0, 0, 0,
-                 -0x10000, 0, 0, 0xa0, 0x140, *(long *)((int)instance->data + number * 4 + -4), 0, 0, 0x14, 1);
-  return;
+	FX_DoBlastRing(instance, (_SVector *)&instance->position, instance->matrix, 0, 0x140, 0, 0xf0, 0, 0,
+				   -0x10000, 0, 0, 0xa0, 0x140, *(long *)((int)instance->data + number * 4 + -4), 0, 0, 0x14, 1);
+	return;
 }
 
 // decompiled code
@@ -372,40 +345,39 @@ void SoulReaverImbue(_Instance *instance, int number)
 /* end block 2 */
 // End Line: 923
 
-void SoulReaverCharge(_Instance *instance, __ReaverData *data)
+void SoulReaverCharge(_Instance *param_1, int param_2)
 
 {
-  int motor1_speed;
-  void *pvVar1;
+	int motor1_speed;
+	void *pvVar1;
 
-  pvVar1 = instance->data;
-  if (data->ReaverChargeTime != 0)
-  {
-    data->ReaverChargeTime = data->ReaverChargeTime - gameTrackerX.timeMult;
-    if (data->ReaverShockAmount < 0x3c000)
-    {
-      motor1_speed = data->ReaverShockAmount + gameTrackerX.timeMult;
-      data->ReaverShockAmount = motor1_speed;
-      if (motor1_speed < 0)
-      {
-        motor1_speed = motor1_speed + 0xfff;
-      }
-      motor1_speed = (motor1_speed >> 0xc) + 0x32;
-    }
-    else
-    {
-      motor1_speed = 0x6e;
-    }
-    GAMEPAD_Shock1(motor1_speed, (int)&DAT_00005000);
-    if (data->ReaverChargeTime < 1)
-    {
-      data->ReaverChargeTime = data->ReaverChargeTime + 0xf000;
-      FX_DoBlastRing(instance, (_SVector *)&instance->position, instance->matrix, 0, 0x168, 0, 0, 0, 0,
-                     -0x10000, 0, 0x140, 0x110, 0xe0,
-                     *(long *)((int)pvVar1 + (int)data->CurrentReaver * 4 + -4), 0, 0, -1, 1);
-    }
-  }
-  return;
+	pvVar1 = param_1->data;
+	if (*(int *)(param_2 + 8) != 0)
+	{
+		*(int *)(param_2 + 8) = *(int *)(param_2 + 8) - iGpffffb738;
+		if (*(int *)(param_2 + 0xc) < 0x3c000)
+		{
+			motor1_speed = *(int *)(param_2 + 0xc) + iGpffffb738;
+			*(int *)(param_2 + 0xc) = motor1_speed;
+			if (motor1_speed < 0)
+			{
+				motor1_speed = motor1_speed + 0xfff;
+			}
+			motor1_speed = (motor1_speed >> 0xc) + 0x32;
+		}
+		else
+		{
+			motor1_speed = 0x6e;
+		}
+		GAMEPAD_Shock1(motor1_speed, (int)&DAT_00005000);
+		if (*(int *)(param_2 + 8) < 1)
+		{
+			*(int *)(param_2 + 8) = *(int *)(param_2 + 8) + 0xf000;
+			FX_DoBlastRing(param_1, (_SVector *)&param_1->position, param_1->matrix, 0, 0x168, 0, 0, 0, 0, -0x10000, 0, 0x140, 0x110, 0xe0,
+						   *(long *)((int)pvVar1 + (int)*(short *)(param_2 + 4) * 4 + -4), 0, 0, -1, 1);
+		}
+	}
+	return;
 }
 
 // decompiled code
@@ -420,11 +392,11 @@ void SoulReaverCharge(_Instance *instance, __ReaverData *data)
 void StopSoulReaverCharge(__ReaverData *data, _Instance *instance)
 
 {
-  data->ReaverChargeTime = 0;
-  data->ReaverShockAmount = 0;
-  GAMEPAD_Shock1(0, 0);
-  FX_EndInstanceEffects(instance);
-  return;
+	data->ReaverChargeTime = 0;
+	data->ReaverShockAmount = 0;
+	GAMEPAD_Shock1(0, 0);
+	FX_EndInstanceEffects(instance);
+	return;
 }
 
 // decompiled code
@@ -489,140 +461,120 @@ void StopSoulReaverCharge(__ReaverData *data, _Instance *instance)
 /* end block 2 */
 // End Line: 1060
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void SoulReaverPost(_Instance *instance, ulong message, ulong data)
 
 {
-  int Data;
-  evObjectBirthProjectileData *peVar1;
-  _Instance *p_Var2;
-  __ReaverData *data_00;
-  short sVar3;
-  undefined2 local_28;
-  undefined2 local_26;
-  undefined2 local_24;
-  short local_20;
-  short local_1e;
-  short local_1c;
+	int Data;
+	__ReaverData *data_00;
+	short sVar1;
+	undefined2 local_28;
+	undefined2 local_26;
+	undefined2 local_24;
+	undefined local_20[8];
 
-  data_00 = (__ReaverData *)instance->extraData;
-  if (message == 0x800101)
-  {
-    data_00->ReaverOn = '\0';
-    StopSoulReaverCharge(data_00, instance);
-    instance->flags = instance->flags | 0x800;
-    return;
-  }
-  if (message < 0x800102)
-  {
-    if (message == 0x800002)
-    {
-      if (instance->LinkParent == (_Instance *)0x0)
-      {
-        INSTANCE_LinkToParent(instance, (_Instance *)data, 0x29);
-      }
-      data_00->ReaverOn = '\x01';
-      data_00->ReaverPickedUp = '\x01';
-      goto LAB_8007a694;
-    }
-    if (message < 0x800003)
-    {
-      if (message == 0x200002)
-      {
-        COLLIDE_SegmentCollisionOn(instance, 0);
-        return;
-      }
-      if (message != 0x200003)
-      {
-        return;
-      }
-      COLLIDE_SegmentCollisionOff(instance, 0);
-      return;
-    }
-    if (message == 0x800010)
-    {
-      StopSoulReaverCharge(data_00, instance);
-      local_28 = 0;
-      local_26 = 0;
-      local_24 = 400;
-      ApplyMatrixSV(instance->matrix, &local_28, &local_20);
-      local_20 = local_20 + (instance->position).x;
-      local_1e = local_1e + (instance->position).y;
-      local_1c = local_1c + (instance->position).z;
-      peVar1 = PHYSOB_BirthProjectile(instance->LinkParent, 0, (int)*(short *)((int)instance->extraData + 4) + 2);
-      if (peVar1->birthInstance == (_Instance *)0x0)
-      {
-        return;
-      }
-      peVar1->birthInstance->collideFunc = CollideReaverProjectile;
-      p_Var2 = peVar1->birthInstance;
-      (p_Var2->position).x = local_20;
-      (p_Var2->position).y = local_1e;
-      (p_Var2->position).z = local_1c;
-      INSTANCE_Post(peVar1->birthInstance, 0x800010, data);
-      p_Var2 = peVar1->birthInstance;
-      (p_Var2->position).x = local_20;
-      (p_Var2->position).y = local_1e;
-      (p_Var2->position).z = local_1c;
-      return;
-    }
-    if (message != 0x800100)
-    {
-      return;
-    }
-    data_00->ReaverOn = '\x01';
-    if (data_00->ReaverTargetScale != 0)
-      goto LAB_8007a694;
-  }
-  else
-  {
-    if (message == 0x800105)
-    {
-      StopSoulReaverCharge(data_00, instance);
-      return;
-    }
-    sVar3 = (short)data;
-    if (message < 0x800106)
-    {
-      if (message == 0x800103)
-      {
-        data_00->CurrentReaver = sVar3;
-        FireReaverFlag = ZEXT12(sVar3 == 6);
-        SoulReaverImbue(instance, data);
-        return;
-      }
-      if (message != 0x800104)
-      {
-        return;
-      }
-      data_00->ReaverChargeTime = 0xf000;
-      Data = SetObjectAbsorbData(instance, 0, 0x3c);
-      INSTANCE_Broadcast(instance, 0x20, 0x800028, Data);
-      return;
-    }
-    if (message != 0x800108)
-    {
-      if (0x800108 < message)
-      {
-        if (message != 0x800109)
-        {
-          return;
-        }
-        StopSoulReaverCharge(data_00, instance);
-        data_00->ReaverTargetScale = 0;
-        return;
-      }
-      if (message != 0x800107)
-      {
-        return;
-      }
-      data_00->ReaverTargetScale = sVar3;
-      return;
-    }
-  }
-  data_00->ReaverTargetScale = 0x1000;
+	data_00 = (__ReaverData *)instance->extraData;
+	if (message == 0x800101)
+	{
+		data_00->ReaverOn = '\0';
+		StopSoulReaverCharge(data_00, instance);
+		instance->flags = instance->flags | 0x800;
+		return;
+	}
+	if (message < 0x800102)
+	{
+		if (message == 0x800002)
+		{
+			if (instance->LinkParent == (_Instance *)0x0)
+			{
+				INSTANCE_LinkToParent(instance, (_Instance *)data, 0x29);
+			}
+			data_00->ReaverOn = '\x01';
+			data_00->ReaverPickedUp = '\x01';
+			goto LAB_8007a694;
+		}
+		if (message < 0x800003)
+		{
+			if (message == 0x200002)
+			{
+				COLLIDE_SegmentCollisionOn(instance, 0);
+				return;
+			}
+			if (message != 0x200003)
+			{
+				return;
+			}
+			COLLIDE_SegmentCollisionOff(instance, 0);
+			return;
+		}
+		if (message == 0x800010)
+		{
+			StopSoulReaverCharge(data_00, instance);
+			local_28 = 0;
+			local_26 = 0;
+			local_24 = 400;
+			/* WARNING: Subroutine does not return */
+			ApplyMatrixSV(instance->matrix, &local_28, local_20);
+		}
+		if (message != 0x800100)
+		{
+			return;
+		}
+		data_00->ReaverOn = '\x01';
+		if (data_00->ReaverTargetScale != 0)
+			goto LAB_8007a694;
+	}
+	else
+	{
+		if (message == 0x800105)
+		{
+			StopSoulReaverCharge(data_00, instance);
+			return;
+		}
+		sVar1 = (short)data;
+		if (message < 0x800106)
+		{
+			if (message == 0x800103)
+			{
+				data_00->CurrentReaver = sVar1;
+				_FireReaverFlag = (ushort)(sVar1 == 6);
+				SoulReaverImbue(instance, data);
+				return;
+			}
+			if (message != 0x800104)
+			{
+				return;
+			}
+			data_00->ReaverChargeTime = 0xf000;
+			Data = SetObjectAbsorbData(instance, 0, 0x3c);
+			INSTANCE_Broadcast(instance, 0x20, 0x800028, Data);
+			return;
+		}
+		if (message != 0x800108)
+		{
+			if (0x800108 < message)
+			{
+				if (message != 0x800109)
+				{
+					return;
+				}
+				StopSoulReaverCharge(data_00, instance);
+				data_00->ReaverTargetScale = 0;
+				return;
+			}
+			if (message != 0x800107)
+			{
+				return;
+			}
+			data_00->ReaverTargetScale = sVar1;
+			return;
+		}
+	}
+	data_00->ReaverTargetScale = 0x1000;
 LAB_8007a694:
-  instance->flags = instance->flags & 0xfffff7ff;
-  return;
+	instance->flags = instance->flags & 0xfffff7ff;
+	return;
 }
 
 // decompiled code
@@ -654,10 +606,10 @@ LAB_8007a694:
 /* end block 4 */
 // End Line: 1363
 
-ulong REAVER_GetGlowColor(_Instance *instance)
+undefined4 REAVER_GetGlowColor(int param_1)
 
 {
-  return *(ulong *)((int)instance->data + (int)*(short *)((int)instance->extraData + 4) * 4 + -4);
+	return *(undefined4 *)((int)*(short *)(*(int *)(param_1 + 0x14c) + 4) * 4 + *(int *)(param_1 + 0x24) + -4);
 }
 
 // decompiled code
@@ -682,76 +634,9 @@ ulong REAVER_GetGlowColor(_Instance *instance)
 void _SoulReaverAnimate(_Instance *instance)
 
 {
-  int iVar1;
-  uint uVar2;
-  int iVar3;
-  __ReaverData *data;
-  void *pvVar4;
-
-  data = (__ReaverData *)instance->extraData;
-  pvVar4 = instance->data;
-  FX_SetReaverInstance(instance);
-  iVar1 = rand();
-  data->ReaverDeg = data->ReaverDeg + 0x100 + ((ushort)iVar1 & 0x1f) & 0xfff;
-  if (data->ReaverOn == '\x01')
-  {
-    if (data->ReaverSize < 0x1000)
-    {
-      data->ReaverSize = data->ReaverSize + 0x100;
-    }
-  }
-  else
-  {
-    if (0 < data->ReaverSize)
-    {
-      data->ReaverSize = data->ReaverSize + -0x100;
-    }
-  }
-  if (0 < (int)data->CurrentReaver)
-  {
-    data->ReaverBladeColor = *(long *)((int)pvVar4 + (int)data->CurrentReaver * 4 + 0x1c);
-    data->ReaverBladeGlowColor = *(long *)((int)pvVar4 + (int)data->CurrentReaver * 4 + 0x3c);
-    data->ReaverGlowColor = *(long *)((int)pvVar4 + (int)data->CurrentReaver * 4 + -4);
-  }
-  iVar3 = (int)data->ReaverScale;
-  iVar1 = (int)data->ReaverTargetScale - iVar3;
-  if (iVar1 < 0)
-  {
-    if (0x80 < iVar3 - (int)data->ReaverTargetScale)
-    {
-      iVar3 = (int)data->ReaverScale;
-      goto LAB_8007a814;
-    }
-  }
-  else
-  {
-    if (0x80 < iVar1)
-    {
-    LAB_8007a814:
-      if ((int)data->ReaverTargetScale < iVar3)
-      {
-        data->ReaverScale = data->ReaverScale + -0x80;
-      }
-      if (data->ReaverScale < data->ReaverTargetScale)
-      {
-        data->ReaverScale = data->ReaverScale + 0x80;
-      }
-      goto LAB_8007a850;
-    }
-  }
-  data->ReaverScale = data->ReaverTargetScale;
-LAB_8007a850:
-  if ((data->ReaverOn == '\x01') && (0 < data->ReaverScale))
-  {
-    uVar2 = instance->flags & 0xfffff7ff;
-  }
-  else
-  {
-    uVar2 = instance->flags | 0x800;
-  }
-  instance->flags = uVar2;
-  SoulReaverCharge(instance, data);
-  return;
+	FX_SetReaverInstance(instance);
+	/* WARNING: Subroutine does not return */
+	rand();
 }
 
 // decompiled code
@@ -768,10 +653,11 @@ LAB_8007a850:
 /* end block 2 */
 // End Line: 1516
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 int SoulReaverFire(void)
 
 {
-  return (int)FireReaverFlag;
+	return (int)_FireReaverFlag;
 }

@@ -28,13 +28,15 @@
 /* end block 2 */
 // End Line: 25
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void StateHandlerWallGrab(__CharacterState *In, int CurrentSection, int Data)
 
 {
   undefined *puVar1;
   __Event *p_Var2;
-  int Data_00;
   undefined *puVar3;
+  int in_a3;
   __MessageQueue *In_00;
 
   In_00 = &In->SectionList[CurrentSection].Event;
@@ -50,14 +52,15 @@ void StateHandlerWallGrab(__CharacterState *In, int CurrentSection, int Data)
     {
       if (CurrentSection == 0)
       {
-        Raziel.Mode = 0x4000000;
+        _CHAR____800d5574 = 0x4000000;
         SteerSwitchMode(In->CharacterInstance, 7);
-        ControlFlag = 0x80a1101;
+        _BlockVramEntry_800d59a0._12_4_ = 0x80a1101;
         In->CharacterInstance->tface = (_TFace *)0x0;
-        PhysicsMode = 3;
+        PhysicsMode.next = (_BlockVramEntry *)&DAT_00000003;
         ResetPhysics(In->CharacterInstance, -0x10);
         razReaverBladeOff();
       }
+      in_a3 = 0;
       G2EmulationSwitchAnimation(In, CurrentSection, 0x4b, 0, 3, 1);
       PurgeMessageQueue(In_00);
       In->CharacterInstance->flags2 = In->CharacterInstance->flags2 & 0xffffffbf;
@@ -100,17 +103,13 @@ void StateHandlerWallGrab(__CharacterState *In, int CurrentSection, int Data)
             {
               (In->CharacterInstance->rotation).x = 0;
               (In->CharacterInstance->rotation).y = 0;
+              /* WARNING: Subroutine does not return */
               (In->CharacterInstance->rotation).z = 0;
-              Data_00 = SetControlInitIdleData(0, 0, 3);
-              StateSwitchStateData(In, CurrentSection, StateHandlerIdle, Data_00);
-              In->CharacterInstance->flags2 = In->CharacterInstance->flags2 | 0x40;
+              SetPhysicsWallCrawlData(0, 0, 3, in_a3);
             }
-            else
+            if (CurrentSection == 0)
             {
-              if (CurrentSection == 0)
-              {
-                razSetWallCrawlNodes(In->CharacterInstance, (evPhysicsWallCrawlData *)p_Var2->Data);
-              }
+              razSetWallCrawlNodes(In->CharacterInstance, (evPhysicsWallCrawlData *)p_Var2->Data);
             }
           }
           else
@@ -196,6 +195,8 @@ void StateHandlerWallGrab(__CharacterState *In, int CurrentSection, int Data)
 /* end block 2 */
 // End Line: 210
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void StateHandlerWallIdle(__CharacterState *In, int CurrentSection, int Data)
 
 {
@@ -205,17 +206,63 @@ void StateHandlerWallIdle(__CharacterState *In, int CurrentSection, int Data)
   __Event *p_Var4;
   _Instance *instance;
   uint uVar5;
-  int Data_00;
   undefined *puVar6;
+  int Data_00;
   int NewAnim;
+  _G2SVector3_Type *in_a3;
   int local_3c;
-  SVECTOR SStack56;
-  SVECTOR SStack48;
+  SVECTOR aSStack56[2];
 
   bVar1 = true;
   iVar3 = G2EmulationQueryAnimation(In, CurrentSection);
-  while (p_Var4 = PeekMessageQueue(&In->SectionList[CurrentSection].Event), p_Var4 != (__Event *)0x0)
+  do
   {
+    p_Var4 = PeekMessageQueue(&In->SectionList[CurrentSection].Event);
+    if (p_Var4 == (__Event *)0x0)
+    {
+      if (bVar1)
+      {
+        if (((*gameTracker._4_4_ & 0x8000000f) == 0) && ((_CHAR____800d5720 & 1) != 0))
+        {
+          G2EmulationSwitchAnimationCharacter(In, 0x6a, 0, 3, 1);
+          _CHAR____800d5720 = 0;
+        }
+        if (CurrentSection == 0)
+        {
+          if (iVar3 == 0x91)
+          {
+            iVar3 = razSideMoveSpiderCheck(In->CharacterInstance, 0x80);
+          }
+          else
+          {
+            if (iVar3 < 0x92)
+            {
+              if (iVar3 != 0x68)
+              {
+                return;
+              }
+              /* WARNING: Subroutine does not return */
+              PHYSICS_GenericLineCheckSetup(0, 0, 0xa0, aSStack56);
+            }
+            if (iVar3 != 0x92)
+            {
+              if (iVar3 != 0x95)
+              {
+                return;
+              }
+              /* WARNING: Subroutine does not return */
+              PHYSICS_GenericLineCheckSetup(0, 0, 0, aSStack56);
+            }
+            iVar3 = razSideMoveSpiderCheck(In->CharacterInstance, -0x80);
+          }
+          if (iVar3 != 0)
+          {
+            G2EmulationSwitchAnimationCharacter(In, 0x6a, 0, 3, 1);
+          }
+        }
+      }
+      return;
+    }
     puVar6 = (undefined *)p_Var4->ID;
     if (puVar6 != &DAT_00100004)
     {
@@ -228,15 +275,16 @@ void StateHandlerWallIdle(__CharacterState *In, int CurrentSection, int Data)
             if (puVar6 == (undefined *)0x80000001)
             {
             LAB_800a1324:
-              Raziel.Mode = 8;
-              ControlFlag = ControlFlag | 0x10;
+              _CHAR____800d5574 = 8;
+              _BlockVramEntry_800d59a0._12_4_ = _BlockVramEntry_800d59a0._12_4_ | 0x10;
               SetPhysics(In->CharacterInstance, -0x10, 0, 0x28, 0x9a);
               G2EmulationSwitchAnimation(In, CurrentSection, 0x23, 0, 0, 1);
+              in_a3 = (_G2SVector3_Type *)0x0;
               StateSwitchStateData(In, CurrentSection, StateHandlerWallDismount, 0);
               In->CharacterInstance->yVel = In->CharacterInstance->yVel * -2;
               In->CharacterInstance->zVel = 0;
               (In->CharacterInstance->rotation).x = 0;
-              PhysicsMode = 0;
+              PhysicsMode.next = (_BlockVramEntry *)0x0;
               (In->CharacterInstance->rotation).y = 0;
             }
             else
@@ -252,11 +300,8 @@ void StateHandlerWallIdle(__CharacterState *In, int CurrentSection, int Data)
               bVar1 = false;
               if (CurrentSection == 0)
               {
-                Data_00 = SetControlInitIdleData(0, 0, 3);
-                StateSwitchStateCharacterData(In, StateHandlerIdle, Data_00);
-                In->CharacterInstance->flags2 = In->CharacterInstance->flags2 | 0x40;
-                razReaverBladeOn();
-                bVar1 = false;
+                /* WARNING: Subroutine does not return */
+                SetPhysicsWallCrawlData(0, 0, 3, (int)in_a3);
               }
             }
             else
@@ -282,16 +327,17 @@ void StateHandlerWallIdle(__CharacterState *In, int CurrentSection, int Data)
                   local_3c = 2;
                   Data_00 = CurrentSection;
                 }
+                in_a3 = (_G2SVector3_Type *)0x0;
                 G2EmulationSwitchAnimation(In, Data_00, NewAnim, 0, 3, local_3c);
-                p_Var2 = ExtraRot;
-                ExtraRot->x = 0;
+                p_Var2 = gameTracker._16_4_;
+                (gameTracker._16_4_)->x = 0;
                 p_Var2->y = 0;
                 p_Var2->z = 0;
                 instance = In->CharacterInstance;
                 instance->oldTFace = (_TFace *)0x0;
                 instance->tface = (_TFace *)0x0;
                 In->CharacterInstance->waterFace = (_TFace *)0x0;
-                ControlFlag = ControlFlag & 0xf7ffefff;
+                _BlockVramEntry_800d59a0._12_4_ = _BlockVramEntry_800d59a0._12_4_ & 0xf7ffefff;
                 In->CharacterInstance->flags2 = In->CharacterInstance->flags2 & 0xffffffbf;
               }
             }
@@ -307,27 +353,22 @@ void StateHandlerWallIdle(__CharacterState *In, int CurrentSection, int Data)
           {
             (In->CharacterInstance->rotation).x = 0;
             (In->CharacterInstance->rotation).y = 0;
+            /* WARNING: Subroutine does not return */
             (In->CharacterInstance->rotation).z = 0;
-            Data_00 = SetControlInitIdleData(0, 0, 3);
-            StateSwitchStateData(In, CurrentSection, StateHandlerIdle, Data_00);
-            In->CharacterInstance->flags2 = In->CharacterInstance->flags2 | 0x40;
-            razReaverBladeOn();
+            SetPhysicsWallCrawlData(0, 0, 3, (int)in_a3);
           }
-          else
+          if (CurrentSection == 0)
           {
-            if (CurrentSection == 0)
+            if ((uVar5 & 4) == 0)
             {
-              if ((uVar5 & 4) == 0)
-              {
-                razSetWallCrawlNodes(In->CharacterInstance, (evPhysicsWallCrawlData *)p_Var4->Data);
-              }
-              else
-              {
-                SteerSwitchMode(In->CharacterInstance, 0);
-                Data_00 = SetControlInitHangData((_Instance *)0x0, 0, 3);
-                StateSwitchStateCharacterData(In, StateHandlerHang, Data_00);
-                razReaverBladeOn();
-              }
+              razSetWallCrawlNodes(In->CharacterInstance, (evPhysicsWallCrawlData *)p_Var4->Data);
+            }
+            else
+            {
+              SteerSwitchMode(In->CharacterInstance, 0);
+              Data_00 = SetControlInitHangData((_Instance *)0x0, 0, 3);
+              StateSwitchStateCharacterData(In, StateHandlerHang, Data_00);
+              razReaverBladeOn();
             }
           }
         }
@@ -341,7 +382,7 @@ void StateHandlerWallIdle(__CharacterState *In, int CurrentSection, int Data)
               {
                 if (puVar6 == (undefined *)0x1000000)
                 {
-                  if ((CurrentSection == 0) && ((gameTrackerX.debugFlags2 & 0x800U) != 0))
+                  if ((CurrentSection == 0) && ((vmClock & 0x800U) != 0))
                   {
                     LoseHealth(*(int *)(p_Var4->Data + 0xc));
                   }
@@ -363,13 +404,8 @@ void StateHandlerWallIdle(__CharacterState *In, int CurrentSection, int Data)
             {
               if ((CurrentSection == 0) && (iVar3 == 0x68))
               {
-                PHYSICS_GenericLineCheckSetup(0, 0, 0x140, &SStack56);
-                PHYSICS_GenericLineCheckSetup(0, -0x140, 0x140, &SStack48);
-                uVar5 = PHYSICS_CheckForValidMove(In->CharacterInstance, &SStack56, &SStack48, 0);
-                if ((uVar5 & 1) == 0)
-                {
-                  G2EmulationSwitchAnimationCharacter(In, 0x6a, 0, 3, 1);
-                }
+                /* WARNING: Subroutine does not return */
+                PHYSICS_GenericLineCheckSetup(0, 0, 0x140, aSStack56);
               }
             }
             else
@@ -381,10 +417,12 @@ void StateHandlerWallIdle(__CharacterState *In, int CurrentSection, int Data)
                 if (CurrentSection == 2)
                 {
                   G2EmulationSwitchAnimation(In, 2, 0, 0, 3, 2);
-                  G2Anim_SetController_Vector(&In->CharacterInstance->anim, 0, 0xe, ExtraRot);
+                  in_a3 = gameTracker._16_4_;
+                  G2Anim_SetController_Vector(&In->CharacterInstance->anim, 0, 0xe, gameTracker._16_4_);
                 }
                 else
                 {
+                  in_a3 = (_G2SVector3_Type *)0x0;
                   G2EmulationSwitchAnimation(In, CurrentSection, 0x4c, 0, 3, 2);
                 }
               }
@@ -405,7 +443,9 @@ void StateHandlerWallIdle(__CharacterState *In, int CurrentSection, int Data)
                       if (Data_00 == 0)
                       {
                         instance = In->CharacterInstance;
-                        goto LAB_800a1714;
+                      LAB_800a1714:
+                        in_a3 = (_G2SVector3_Type *)0x0;
+                        razSwitchVAnimCharacterSingle(instance, local_3c, (int *)0x0, (int *)0x0);
                       }
                     }
                   }
@@ -415,15 +455,8 @@ void StateHandlerWallIdle(__CharacterState *In, int CurrentSection, int Data)
                     {
                       if ((Data_00 == 0x10000001) && (iVar3 != 0x68))
                       {
-                        PHYSICS_GenericLineCheckSetup(0, 0, 0xa0, &SStack56);
-                        PHYSICS_GenericLineCheckSetup(0, -0x140, 0xa0, &SStack48);
-                        uVar5 = PHYSICS_CheckForValidMove(In->CharacterInstance, &SStack56, &SStack48, 0);
-                        if (((uVar5 & 1) != 0) || (uVar5 == 0))
-                        {
-                          instance = In->CharacterInstance;
-                          local_3c = 0x19;
-                          goto LAB_800a1714;
-                        }
+                        /* WARNING: Subroutine does not return */
+                        PHYSICS_GenericLineCheckSetup(0, 0, 0xa0, aSStack56);
                       }
                     }
                     else
@@ -432,15 +465,8 @@ void StateHandlerWallIdle(__CharacterState *In, int CurrentSection, int Data)
                       {
                         if (iVar3 != 0x95)
                         {
-                          PHYSICS_GenericLineCheckSetup(0, 0, -0x140, &SStack56);
-                          PHYSICS_GenericLineCheckSetup(0, -0x140, -0x140, &SStack48);
-                          uVar5 = PHYSICS_CheckForValidMove(In->CharacterInstance, &SStack56, &SStack48, 0);
-                          if (((uVar5 & 1) != 0) || (uVar5 == 0))
-                          {
-                            instance = In->CharacterInstance;
-                            local_3c = 0x1a;
-                            goto LAB_800a1714;
-                          }
+                          /* WARNING: Subroutine does not return */
+                          PHYSICS_GenericLineCheckSetup(0, 0, -0x140, aSStack56);
                         }
                       }
                       else
@@ -452,8 +478,7 @@ void StateHandlerWallIdle(__CharacterState *In, int CurrentSection, int Data)
                           if (Data_00 == 0)
                           {
                             instance = In->CharacterInstance;
-                          LAB_800a1714:
-                            razSwitchVAnimCharacterSingle(instance, local_3c, (int *)0x0, (int *)0x0);
+                            goto LAB_800a1714;
                           }
                         }
                       }
@@ -468,75 +493,7 @@ void StateHandlerWallIdle(__CharacterState *In, int CurrentSection, int Data)
     }
   LAB_800a177c:
     DeMessageQueue(&In->SectionList[CurrentSection].Event);
-  }
-  if (!bVar1)
-  {
-    return;
-  }
-  if (((*PadData & 0x8000000fU) == 0) && ((Raziel.passedMask & 1) != 0))
-  {
-    G2EmulationSwitchAnimationCharacter(In, 0x6a, 0, 3, 1);
-    Raziel.passedMask = 0;
-  }
-  if (CurrentSection != 0)
-  {
-    return;
-  }
-  if (iVar3 == 0x91)
-  {
-    uVar5 = razSideMoveSpiderCheck(In->CharacterInstance, 0x80);
-  }
-  else
-  {
-    if (iVar3 < 0x92)
-    {
-      if (iVar3 != 0x68)
-      {
-        return;
-      }
-      PHYSICS_GenericLineCheckSetup(0, 0, 0xa0, &SStack56);
-      PHYSICS_GenericLineCheckSetup(0, -0x140, 0xa0, &SStack48);
-      uVar5 = PHYSICS_CheckForValidMove(In->CharacterInstance, &SStack56, &SStack48, 0);
-      if ((uVar5 & 1) != 0)
-      {
-        return;
-      }
-    }
-    else
-    {
-      if (iVar3 != 0x92)
-      {
-        if (iVar3 != 0x95)
-        {
-          return;
-        }
-        PHYSICS_GenericLineCheckSetup(0, 0, 0, &SStack56);
-        PHYSICS_GenericLineCheckSetup(0, 0, -0x140, &SStack48);
-        iVar3 = PHYSICS_CheckForValidMove(In->CharacterInstance, &SStack56, &SStack48, 0);
-        if ((iVar3 != 0) || (In->CharacterInstance->waterFace != (_TFace *)0x0))
-        {
-          EnMessageQueueData(&In->SectionList[0].Defer, 0x100000, 0);
-          return;
-        }
-        PHYSICS_GenericLineCheckSetup(0, 0, -0x140, &SStack56);
-        PHYSICS_GenericLineCheckSetup(0, -0x140, -0x140, &SStack48);
-        uVar5 = PHYSICS_CheckForValidMove(In->CharacterInstance, &SStack56, &SStack48, 0);
-        if ((uVar5 & 1) != 0)
-        {
-          return;
-        }
-        goto LAB_800a1970;
-      }
-      uVar5 = razSideMoveSpiderCheck(In->CharacterInstance, -0x80);
-    }
-  }
-  if (uVar5 == 0)
-  {
-    return;
-  }
-LAB_800a1970:
-  G2EmulationSwitchAnimationCharacter(In, 0x6a, 0, 3, 1);
-  return;
+  } while (true);
 }
 
 // decompiled code
@@ -590,9 +547,13 @@ void StateHandlerWallDismount(__CharacterState *In, int CurrentSection, int Data
           {
             if (puVar2 != (undefined *)0x80000000)
             {
-              if (puVar2 != (undefined *)0x80000001)
-                goto LAB_800a1be8;
-              EnMessageQueueData(&p_Var3->Defer, -0x7fffffff, 0);
+              if (puVar2 == (undefined *)0x80000001)
+              {
+                /* WARNING: Subroutine does not return */
+                EnMessageQueueData(&p_Var3->Defer, -0x7fffffff, 0);
+              }
+            LAB_800a1be8:
+              DefaultStateHandler(In, CurrentSection, Data);
             }
           }
           else
@@ -603,8 +564,8 @@ void StateHandlerWallDismount(__CharacterState *In, int CurrentSection, int Data
               {
                 if (CurrentSection == 0)
                 {
-                  ControlFlag = 8;
-                  PhysicsMode = 0;
+                  _BlockVramEntry_800d59a0._12_4_ = 8;
+                  PhysicsMode.next = (_BlockVramEntry *)0x0;
                   G2Anim_InterpDisableController(&In->CharacterInstance->anim, 1, 0x26, 300);
                   G2Anim_InterpDisableController(&In->CharacterInstance->anim, 0, 0xe, 300);
                   G2Anim_InterpDisableController(&In->CharacterInstance->anim, 0, 8, 300);
@@ -614,8 +575,7 @@ void StateHandlerWallDismount(__CharacterState *In, int CurrentSection, int Data
                 }
                 goto LAB_800a1b68;
               }
-            LAB_800a1be8:
-              DefaultStateHandler(In, CurrentSection, Data);
+              goto LAB_800a1be8;
             }
           }
         }

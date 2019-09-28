@@ -1,13 +1,6 @@
 #include "THISDUST.H"
 #include "MISSILE.H"
 
-// MissileGraphics @0x800CA9C0, len = 0x00000002
-MISSILE_objectTable =
-	{
-		// uchar @0x800CA9C0, len = 0x00000001
-		.object = 0x0D,
-		// uchar @0x800CA9C1, len = 0x00000001
-		.model = 0x01};
 // decompiled code
 // original method signature:
 // void /*$ra*/ MISSILE_Process(struct _Instance *instance /*$s0*/, struct GameTracker *gameTracker /*$a1*/)
@@ -20,13 +13,11 @@ MISSILE_objectTable =
 void MISSILE_Process(_Instance *instance, GameTracker *gameTracker)
 
 {
-	ulong uVar1;
-
 	ProcessPhysicalObject(instance, gameTracker);
-	if ((instance->LinkParent == (_Instance *)0x0) &&
-		(uVar1 = MON_GetTime(instance), (uint)instance->work2 < uVar1))
+	if (instance->LinkParent == (_Instance *)0x0)
 	{
-		INSTANCE_KillInstance(instance);
+		/* WARNING: Subroutine does not return */
+		MON_GetTime(instance);
 	}
 	return;
 }
@@ -92,7 +83,8 @@ _Instance *MISSILE_Find(_Instance *instance, _MonsterMissile *missiledef)
 		{
 			if ((p_Var1->ParentLinkNode == (uint)missiledef->segment) &&
 				(p_Var1->object ==
-				 (Object *)(&objectAccess)[(uint)(&MISSILE_objectTable)[(uint)missiledef->graphic].object].object))
+				 (Object *)(&DebugMenuLine_800c8780.type)
+					 [(uint) * (byte *)(&_Normal_800ca9bc.z + missiledef->graphic) * 2]))
 			{
 				return p_Var1;
 			}
@@ -151,7 +143,7 @@ _Instance *MISSILE_Birth(_Instance *instance, _MonsterMissile *missiledef)
 			p_Var1->processFunc = MISSILE_Process;
 			if (instance->matrix != (MATRIX *)0x0)
 			{
-				pMVar3 = instance->matrix + (uint)missiledef->segment;
+				pMVar3 = instance->matrix + missiledef->segment;
 				(p_Var1->position).x = *(short *)pMVar3->t;
 				(p_Var1->position).y = *(short *)(pMVar3->t + 1);
 				(p_Var1->position).z = *(short *)(pMVar3->t + 2);
@@ -194,7 +186,6 @@ _Instance *MISSILE_Fire(_Instance *instance, _MonsterMissile *missiledef, void *
 {
 	_Instance *Inst;
 	int Data;
-	ulong uVar1;
 	ushort spinType;
 	_SVector local_20;
 
@@ -210,11 +201,10 @@ _Instance *MISSILE_Fire(_Instance *instance, _MonsterMissile *missiledef, void *
 			local_20.z = 0;
 		}
 		Data = SetObjectThrowData(target, &local_20, (ushort)type, spinType, (uint)missiledef->speed, 0, 0, 0);
+		/* WARNING: Subroutine does not return */
 		INSTANCE_Post(Inst, 0x800010, Data);
-		uVar1 = MON_GetTime(Inst);
-		*(undefined **)&Inst->work2 = &DAT_00001388 + uVar1;
 	}
-	return Inst;
+	return (_Instance *)0x0;
 }
 
 // decompiled code

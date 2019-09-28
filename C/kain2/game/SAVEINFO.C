@@ -1,27 +1,6 @@
 #include "THISDUST.H"
 #include "SAVEINFO.H"
 
-// SavedBasic * @0x800D59D0, len = 0x00000004
-bufferSavedIntroArray64 = null;
-// _GlobalSaveTracker * @0x800CF8A8, len = 0x00000004
-GlobalSave = 00000000;
-// long @0x800CF8AC, len = 0x00000004
-numbufferedIntros = 0x0;
-// long @0x800CF8B4, len = 0x00000004
-SaveArraySize = 0x0;
-// SavedInfoTracker @0x800D59C0, len = 0x00000010
-savedInfoTracker =
-    {
-        // char * @0x800D59C0, len = 0x00000004
-        .MemoryCardBuffer = null,
-        // char * @0x800D59C4, len = 0x00000004
-        .InfoStart = null,
-        // char * @0x800D59C8, len = 0x00000004
-        .InfoEnd = null,
-        // char * @0x800D59CC, len = 0x00000004
-        .EndOfMemory = null};
-// int @0x800CF8B0, len = 0x00000004
-the_header_size = 0x0;
 // decompiled code
 // original method signature:
 // void /*$ra*/ SAVE_GetInstanceRotation(struct _Instance *instance /*$s0*/, struct _SmallRotation *vector /*$s1*/)
@@ -48,22 +27,8 @@ the_header_size = 0x0;
 void SAVE_GetInstanceRotation(_Instance *instance, _SmallRotation *vector)
 
 {
-  short *psVar1;
-
-  psVar1 = (short *)INSTANCE_Query(instance, 7);
-  if (psVar1 == (short *)0x0)
-  {
-    vector->x = (instance->rotation).x;
-    vector->y = (instance->rotation).y;
-    vector->z = (instance->rotation).z;
-  }
-  else
-  {
-    vector->x = *psVar1;
-    vector->y = psVar1[1];
-    vector->z = psVar1[2];
-  }
-  return;
+  /* WARNING: Subroutine does not return */
+  INSTANCE_Query(instance, 7);
 }
 
 // decompiled code
@@ -87,20 +52,11 @@ void SAVE_GetInstanceRotation(_Instance *instance, _SmallRotation *vector)
 void SAVE_ClearMemory(GameTracker *gameTracker)
 
 {
-  _GlobalSaveTracker *p_Var1;
-
-  savedInfoTracker.InfoStart = savedInfoTracker.MemoryCardBuffer + the_header_size;
-  savedInfoTracker.EndOfMemory = savedInfoTracker.MemoryCardBuffer + 0x6000;
-  savedInfoTracker.InfoEnd = savedInfoTracker.InfoStart;
-  memset(savedInfoTracker.InfoStart, 0, 0x6000 - the_header_size);
-  numbufferedIntros = 0;
-  memset(&bufferSavedIntroArray64, 0, 0x100);
-  p_Var1 = (_GlobalSaveTracker *)SAVE_GetSavedBlock(6, 0);
-  GlobalSave = p_Var1;
-  p_Var1->CurrentBirthID = 0x2000;
-  p_Var1->humanOpinionOfRaziel = 0;
-  SAVE_GetSavedBlock(4, 0);
-  return;
+  UW_angleInc._8_4_ = (void *)(UW_angleInc._4_4_ + the_header_size);
+  UW_angleInc._16_4_ = UW_angleInc._4_4_ + 0x6000;
+  /* WARNING: Subroutine does not return */
+  UW_angleInc._12_4_ = UW_angleInc._8_4_;
+  memset(UW_angleInc._8_4_, 0, 0x6000 - the_header_size);
 }
 
 // decompiled code
@@ -131,21 +87,8 @@ void SAVE_ClearMemory(GameTracker *gameTracker)
 void SAVE_Init(GameTracker *gt)
 
 {
-  char *buffer;
-
-  buffer = MEMPACK_Malloc(0x6000, '\x12');
-  if (DoMainMenu == 0)
-  {
-    gt->memcard = (memcard_t *)0x0;
-  }
-  else
-  {
-    gt->memcard = &gMemcard;
-    the_header_size = memcard_initialize(&gMemcard, gt, 3, buffer, 0x6000);
-  }
-  savedInfoTracker.MemoryCardBuffer = buffer;
-  SAVE_ClearMemory(gt);
-  return;
+  /* WARNING: Subroutine does not return */
+  MEMPACK_Malloc(0x6000, '\x12');
 }
 
 // decompiled code
@@ -172,44 +115,46 @@ void *SAVE_GetSavedBlock(long saveType, long extraSize)
 
 {
   bool bVar1;
-  char *pcVar2;
+  undefined *puVar2;
   long lVar3;
   int iVar4;
-  char *pcVar5;
+  undefined *puVar5;
 
-  pcVar5 = (char *)0x0;
+  puVar5 = (undefined *)0x0;
   if (9 < saveType)
   {
+    /* WARNING: Subroutine does not return */
     DEBUG_FatalError(s_illegal_save_type__d_800cf8dc);
   }
-  iVar4 = ((&SaveArraySize)[saveType] + extraSize + 3 >> 2) * 4;
+  iVar4 = (SaveArraySize[saveType] + extraSize + 3 >> 2) * 4;
   bVar1 = false;
   if (0x3fc < iVar4)
   {
+    /* WARNING: Subroutine does not return */
     DEBUG_FatalError(s_save__d_is_too_big___type__d__800cf8f4);
   }
   do
   {
-    pcVar2 = savedInfoTracker.InfoEnd;
-    if (savedInfoTracker.InfoEnd + iVar4 < savedInfoTracker.EndOfMemory)
+    puVar2 = UW_angleInc._12_4_;
+    if (UW_angleInc._12_4_ + iVar4 < UW_angleInc._16_4_)
     {
-      *savedInfoTracker.InfoEnd = (char)saveType;
-      pcVar2[1] = (char)(iVar4 >> 2);
-      savedInfoTracker.InfoEnd = savedInfoTracker.InfoEnd + iVar4;
+      *UW_angleInc._12_4_ = (char)saveType;
+      puVar2[1] = (char)(iVar4 >> 2);
+      UW_angleInc._12_4_ = UW_angleInc._12_4_ + iVar4;
       bVar1 = true;
-      pcVar5 = pcVar2;
+      puVar5 = puVar2;
     }
     else
     {
       lVar3 = SAVE_PurgeAMemoryBlock();
       if (lVar3 == 0)
       {
-        bVar1 = true;
+        /* WARNING: Subroutine does not return */
         DEBUG_FatalError(s_ran_out_of_saved_memory__needed___800cf914);
       }
     }
   } while (!bVar1);
-  return pcVar5;
+  return puVar5;
 }
 
 // decompiled code
@@ -238,8 +183,8 @@ long SAVE_PurgeAMemoryBlock(void)
 {
   SavedBasic *savedBlock;
 
-  savedBlock = (SavedBasic *)savedInfoTracker.InfoStart;
-  if (savedInfoTracker.InfoStart < savedInfoTracker.InfoEnd)
+  savedBlock = UW_angleInc._8_4_;
+  if (UW_angleInc._8_4_ < UW_angleInc._12_4_)
   {
     do
     {
@@ -250,7 +195,7 @@ long SAVE_PurgeAMemoryBlock(void)
         return 1;
       }
       savedBlock = savedBlock + (uint)savedBlock->shiftedSaveSize * 2;
-    } while (savedBlock < savedInfoTracker.InfoEnd);
+    } while (savedBlock < UW_angleInc._12_4_);
   }
   return 0;
 }
@@ -292,7 +237,7 @@ long SAVE_SaveableInstance(_Instance *instance)
   uVar2 = 0;
   if (((instance->flags2 & 0x20000U) == 0) && (pOVar1 = instance->object, pOVar1 != (Object *)0x0))
   {
-    if (((pOVar1->oflags2 & 0x80000U) == 0) && (instance != gameTrackerX.playerInstance))
+    if (((pOVar1->oflags2 & 0x80000U) == 0) && (instance != DAT_800d0fd8))
     {
       if ((pOVar1->oflags2 & 0x40000U) == 0)
       {
@@ -362,46 +307,46 @@ long SAVE_SaveableInstance(_Instance *instance)
 /* end block 2 */
 // End Line: 943
 
-_SavedIntro *
-SAVE_UpdateSavedIntro(_Instance *instance, Level *level, _SavedIntro *savedIntro, evControlSaveDataData *extraData)
+undefined *
+SAVE_UpdateSavedIntro(_Instance *param_1, int *param_2, undefined *param_3, size_t *param_4)
 
 {
   short sVar1;
   short sVar2;
   short sVar3;
   short sVar4;
-  BSPTree *pBVar5;
+  int iVar5;
   undefined4 uVar6;
 
-  pBVar5 = level->terrain->BSPTreeArray;
-  if (savedIntro != (_SavedIntro *)0x0)
+  iVar5 = *(int *)(*param_2 + 0x48);
+  if (param_3 != (undefined *)0x0)
   {
-    uVar6 = *(undefined4 *)(instance->introName + 4);
-    *(undefined4 *)savedIntro->name = *(undefined4 *)instance->introName;
-    *(undefined4 *)(savedIntro->name + 4) = uVar6;
-    savedIntro->savedID = '\x01';
-    savedIntro->introUniqueID = *(short *)&instance->introUniqueID;
-    savedIntro->streamUnitID = *(short *)&instance->currentStreamUnitID;
-    savedIntro->birthUnitID = *(short *)&instance->birthStreamUnitID;
-    sVar1 = (instance->position).y;
-    sVar2 = (instance->position).z;
-    sVar3 = (pBVar5->globalOffset).y;
-    sVar4 = (pBVar5->globalOffset).z;
-    (savedIntro->position).x = (instance->position).x - (pBVar5->globalOffset).x;
-    (savedIntro->position).y = sVar1 - sVar3;
-    (savedIntro->position).z = sVar2 - sVar4;
-    SAVE_GetInstanceRotation(instance, &savedIntro->smallRotation);
-    savedIntro->flags = instance->flags;
-    savedIntro->flags2 = instance->flags2;
-    savedIntro->specturalLightGroup = instance->spectralLightGroup;
-    savedIntro->lightGroup = instance->lightGroup;
-    savedIntro->attachedUniqueID = *(ushort *)&instance->attachedID;
-    if (extraData != (evControlSaveDataData *)0x0)
+    uVar6 = *(undefined4 *)(param_1->introName + 4);
+    *(undefined4 *)(param_3 + 4) = *(undefined4 *)param_1->introName;
+    *(undefined4 *)(param_3 + 8) = uVar6;
+    *param_3 = 1;
+    *(undefined2 *)(param_3 + 0xc) = *(undefined2 *)&param_1->introUniqueID;
+    *(undefined2 *)(param_3 + 0xe) = *(undefined2 *)&param_1->currentStreamUnitID;
+    *(undefined2 *)(param_3 + 0x10) = *(undefined2 *)&param_1->birthStreamUnitID;
+    sVar1 = (param_1->position).y;
+    sVar2 = (param_1->position).z;
+    sVar3 = *(short *)(iVar5 + 0xe);
+    sVar4 = *(short *)(iVar5 + 0x10);
+    *(short *)(param_3 + 0x1a) = (param_1->position).x - *(short *)(iVar5 + 0xc);
+    *(short *)(param_3 + 0x1c) = sVar1 - sVar3;
+    *(short *)(param_3 + 0x1e) = sVar2 - sVar4;
+    SAVE_GetInstanceRotation(param_1, (_SmallRotation *)(param_3 + 0x14));
+    *(long *)(param_3 + 0x20) = param_1->flags;
+    *(long *)(param_3 + 0x24) = param_1->flags2;
+    param_3[3] = param_1->spectralLightGroup;
+    param_3[2] = param_1->lightGroup;
+    *(undefined2 *)(param_3 + 0x12) = *(undefined2 *)&param_1->attachedID;
+    if (param_4 != (size_t *)0x0)
     {
-      memcpy(savedIntro + 1, extraData->data, extraData->length);
+      memcpy(param_3 + 0x28, (void *)param_4[1], *param_4);
     }
   }
-  return savedIntro;
+  return param_3;
 }
 
 // decompiled code
@@ -438,44 +383,42 @@ SAVE_UpdateSavedIntro(_Instance *instance, Level *level, _SavedIntro *savedIntro
 /* end block 2 */
 // End Line: 917
 
-_SavedIntroWithIntro *
-SAVE_UpdateSavedIntroWithIntro(_Instance *instance, Level *level, _SavedIntroWithIntro *savedIntro,
-                               evControlSaveDataData *extraData)
+undefined *
+SAVE_UpdateSavedIntroWithIntro(_Instance *param_1, int *param_2, undefined *param_3, size_t *param_4)
 
 {
   short sVar1;
   short sVar2;
   short sVar3;
   short sVar4;
-  BSPTree *pBVar5;
+  int iVar5;
 
-  pBVar5 = level->terrain->BSPTreeArray;
-  if ((savedIntro != (_SavedIntroWithIntro *)0x0) && (instance->intro != (Intro *)0x0))
+  iVar5 = *(int *)(*param_2 + 0x48);
+  if ((param_3 != (undefined *)0x0) && (param_1->intro != (Intro *)0x0))
   {
-    savedIntro->savedID = '\a';
-    savedIntro->introOffset =
-        (short)((int)((int)instance->intro - (int)level->introList) * 0x286bca1b >> 2);
-    savedIntro->introUniqueID = *(short *)&instance->introUniqueID;
-    savedIntro->birthUnitID = *(short *)&instance->birthStreamUnitID;
-    sVar1 = (instance->position).y;
-    sVar2 = (instance->position).z;
-    sVar3 = (pBVar5->globalOffset).y;
-    sVar4 = (pBVar5->globalOffset).z;
-    (savedIntro->position).x = (instance->position).x - (pBVar5->globalOffset).x;
-    (savedIntro->position).y = sVar1 - sVar3;
-    (savedIntro->position).z = sVar2 - sVar4;
-    SAVE_GetInstanceRotation(instance, &savedIntro->smallRotation);
-    savedIntro->flags = instance->flags;
-    savedIntro->flags2 = instance->flags2;
-    savedIntro->specturalLightGroup = instance->spectralLightGroup;
-    savedIntro->lightGroup = instance->lightGroup;
-    savedIntro->attachedUniqueID = *(ushort *)&instance->attachedID;
-    if (extraData != (evControlSaveDataData *)0x0)
+    *param_3 = 7;
+    *(short *)(param_3 + 4) = (short)((int)((int)param_1->intro - param_2[0x1f]) * 0x286bca1b >> 2);
+    *(undefined2 *)(param_3 + 8) = *(undefined2 *)&param_1->introUniqueID;
+    *(undefined2 *)(param_3 + 6) = *(undefined2 *)&param_1->birthStreamUnitID;
+    sVar1 = (param_1->position).y;
+    sVar2 = (param_1->position).z;
+    sVar3 = *(short *)(iVar5 + 0xe);
+    sVar4 = *(short *)(iVar5 + 0x10);
+    *(short *)(param_3 + 0x1a) = (param_1->position).x - *(short *)(iVar5 + 0xc);
+    *(short *)(param_3 + 0x1c) = sVar1 - sVar3;
+    *(short *)(param_3 + 0x1e) = sVar2 - sVar4;
+    SAVE_GetInstanceRotation(param_1, (_SmallRotation *)(param_3 + 0x14));
+    *(long *)(param_3 + 0xc) = param_1->flags;
+    *(long *)(param_3 + 0x10) = param_1->flags2;
+    param_3[0xb] = param_1->spectralLightGroup;
+    param_3[10] = param_1->lightGroup;
+    *(undefined2 *)(param_3 + 2) = *(undefined2 *)&param_1->attachedID;
+    if (param_4 != (size_t *)0x0)
     {
-      memcpy(savedIntro + 1, extraData->data, extraData->length);
+      memcpy(param_3 + 0x20, (void *)param_4[1], *param_4);
     }
   }
-  return savedIntro;
+  return param_3;
 }
 
 // decompiled code
@@ -512,8 +455,8 @@ SavedBasic *SAVE_GetSavedEvent(long areaID, long eventNumber)
   uchar uVar1;
   SavedBasic *pSVar2;
 
-  pSVar2 = (SavedBasic *)savedInfoTracker.InfoStart;
-  if (savedInfoTracker.InfoStart < savedInfoTracker.InfoEnd)
+  pSVar2 = UW_angleInc._8_4_;
+  if (UW_angleInc._8_4_ < UW_angleInc._12_4_)
   {
     do
     {
@@ -532,7 +475,7 @@ SavedBasic *SAVE_GetSavedEvent(long areaID, long eventNumber)
         return pSVar2;
       }
       pSVar2 = pSVar2 + (uint)pSVar2->shiftedSaveSize * 2;
-    } while (pSVar2 < savedInfoTracker.InfoEnd);
+    } while (pSVar2 < UW_angleInc._12_4_);
   }
   return (SavedBasic *)0x0;
 }
@@ -587,14 +530,14 @@ SavedBasic *SAVE_GetSavedNextEvent(long areaID, SavedBasic *curSave)
 {
   SavedBasic *pSVar1;
 
-  pSVar1 = (SavedBasic *)savedInfoTracker.InfoStart;
+  pSVar1 = UW_angleInc._8_4_;
   if (curSave != (SavedBasic *)0x0)
   {
     pSVar1 = curSave + (uint)curSave->shiftedSaveSize * 2;
   }
   while (true)
   {
-    if (savedInfoTracker.InfoEnd <= pSVar1)
+    if (UW_angleInc._12_4_ <= pSVar1)
     {
       return (SavedBasic *)0x0;
     }
@@ -634,38 +577,38 @@ SavedBasic *SAVE_GetSavedNextEvent(long areaID, SavedBasic *curSave)
 /* end block 4 */
 // End Line: 1152
 
-void SAVE_BufferIntro(SavedBasic *savedIntro)
+void SAVE_BufferIntro(int param_1)
 
 {
-  SavedBasic **ppSVar1;
+  int *piVar1;
   int iVar2;
   int iVar3;
 
   iVar2 = 0;
-  if (numbufferedIntros < 0x40)
+  if (iGpffff9df8 < 0x40)
   {
-    ppSVar1 = &bufferSavedIntroArray64;
+    piVar1 = (int *)&gp0xffffff1c;
     do
     {
-      if (*ppSVar1 == savedIntro)
+      if (*piVar1 == param_1)
         break;
       iVar2 = iVar2 + 1;
-      ppSVar1 = ppSVar1 + 1;
+      piVar1 = piVar1 + 1;
     } while (iVar2 < 0x40);
     iVar3 = 0;
     if (iVar2 == 0x40)
     {
-      ppSVar1 = &bufferSavedIntroArray64;
-      numbufferedIntros = numbufferedIntros + 1;
+      piVar1 = (int *)&gp0xffffff1c;
+      iGpffff9df8 = iGpffff9df8 + 1;
       do
       {
         iVar3 = iVar3 + 1;
-        if (*ppSVar1 == (SavedBasic *)0x0)
+        if (*piVar1 == 0)
         {
-          *ppSVar1 = savedIntro;
+          *piVar1 = param_1;
           return;
         }
-        ppSVar1 = ppSVar1 + 1;
+        piVar1 = piVar1 + 1;
       } while (iVar3 < 0x40);
     }
   }
@@ -739,7 +682,7 @@ void SAVE_IntroduceBufferIntros(void)
       {
         return;
       }
-      savedIntro = (_SavedIntro *)(&bufferSavedIntroArray64)[iVar2];
+      savedIntro = (_SavedIntro *)(&UW_angleInc.area)[iVar2];
       if (savedIntro != (_SavedIntro *)0x0)
       {
         if (savedIntro->savedID == '\x01')
@@ -762,7 +705,7 @@ void SAVE_IntroduceBufferIntros(void)
             goto LAB_800b5e80;
           }
         }
-        *(_SavedIntro **)(&bufferSavedIntroArray64 + iVar2) = (_SavedIntro *)0x0;
+        *(_SavedIntro **)(&UW_angleInc.area + iVar2) = (_SavedIntro *)0x0;
         numbufferedIntros = numbufferedIntros + -1;
       }
     LAB_800b5e98:
@@ -800,8 +743,8 @@ void SAVE_IntroForStreamID(_StreamUnit *streamUnit)
   int local_18[2];
 
   iVar1 = streamUnit->StreamUnitID;
-  savedIntro = (_SavedIntro *)savedInfoTracker.InfoStart;
-  if (savedInfoTracker.InfoStart < savedInfoTracker.InfoEnd)
+  savedIntro = UW_angleInc._8_4_;
+  if (UW_angleInc._8_4_ < UW_angleInc._12_4_)
   {
     do
     {
@@ -821,7 +764,7 @@ void SAVE_IntroForStreamID(_StreamUnit *streamUnit)
       {
         savedIntro = (_SavedIntro *)(&savedIntro->savedID + (uint)savedIntro->shiftedSaveSize * 4);
       }
-    } while (savedIntro < savedInfoTracker.InfoEnd);
+    } while (savedIntro < UW_angleInc._12_4_);
   }
   return;
 }
@@ -860,8 +803,8 @@ long SAVE_HasSavedIntro(Intro *intro, long currentStreamID)
 {
   char *pcVar1;
 
-  pcVar1 = savedInfoTracker.InfoStart;
-  if (savedInfoTracker.InfoStart < savedInfoTracker.InfoEnd)
+  pcVar1 = UW_angleInc._8_4_;
+  if (UW_angleInc._8_4_ < UW_angleInc._12_4_)
   {
     do
     {
@@ -871,7 +814,7 @@ long SAVE_HasSavedIntro(Intro *intro, long currentStreamID)
         return 1;
       }
       pcVar1 = pcVar1 + (uint)(byte)pcVar1[1] * 4;
-    } while (pcVar1 < savedInfoTracker.InfoEnd);
+    } while (pcVar1 < UW_angleInc._12_4_);
   }
   return 0;
 }
@@ -909,8 +852,8 @@ SavedLevel *SAVE_HasSavedLevel(long areaID)
 {
   SavedLevel *pSVar1;
 
-  pSVar1 = (SavedLevel *)savedInfoTracker.InfoStart;
-  if (savedInfoTracker.InfoStart < savedInfoTracker.InfoEnd)
+  pSVar1 = UW_angleInc._8_4_;
+  if (UW_angleInc._8_4_ < UW_angleInc._12_4_)
   {
     do
     {
@@ -919,7 +862,7 @@ SavedLevel *SAVE_HasSavedLevel(long areaID)
         return pSVar1;
       }
       pSVar1 = (SavedLevel *)(&pSVar1->savedID + (uint)pSVar1->shiftedSaveSize * 4);
-    } while (pSVar1 < savedInfoTracker.InfoEnd);
+    } while (pSVar1 < UW_angleInc._12_4_);
   }
   return (SavedLevel *)0x0;
 }
@@ -974,7 +917,7 @@ void SAVE_UpdateLevelWithSave(_StreamUnit *streamUnit)
       do
       {
         iVar11 = iVar11 + 1;
-        pBVar8 = p_Var12->BSPTreeArray + (uint) * (byte *)((int)&pSVar10[1].numberBSPTreesSaved + 1);
+        pBVar8 = p_Var12->BSPTreeArray + *(byte *)((int)&pSVar10[1].numberBSPTreesSaved + 1);
         sVar3 = pSVar10[1].waterZ;
         *(undefined4 *)&pBVar8->localOffset = *(undefined4 *)(pSVar10 + 1);
         (pBVar8->localOffset).z = sVar3;
@@ -988,9 +931,9 @@ void SAVE_UpdateLevelWithSave(_StreamUnit *streamUnit)
         (pBVar8->globalOffset).x = sVar3 + sVar4;
         (pBVar8->globalOffset).y = (pBVar8->globalOffset).y + sVar5;
         (pBVar8->globalOffset).z = (pBVar8->globalOffset).z + sVar6;
-        pBVar8->flags = uVar9 | (ushort)bVar1;
+        pBVar8->flags = uVar9 | bVar1;
         pSVar10 = pSVar10 + 1;
-      } while (iVar11 < (int)pSVar7->numberBSPTreesSaved);
+      } while (iVar11 < pSVar7->numberBSPTreesSaved);
     }
     iVar11 = (int)pSVar7->waterZ;
     if ((iVar11 == -0x7fff) || (iVar11 == 0x7fff))
@@ -999,7 +942,7 @@ void SAVE_UpdateLevelWithSave(_StreamUnit *streamUnit)
     }
     else
     {
-      streamUnit->level->waterZLevel = iVar11 + (int)sVar2;
+      streamUnit->level->waterZLevel = iVar11 + sVar2;
     }
     p_Var12->UnitChangeFlags = p_Var12->UnitChangeFlags | 3;
   }
@@ -1159,7 +1102,7 @@ void SAVE_DeleteBlock(SavedBasic *savedBlock)
   if (numbufferedIntros != 0)
   {
     iVar4 = 0;
-    ppSVar3 = &bufferSavedIntroArray64;
+    ppSVar3 = (SavedBasic **)&UW_angleInc.area;
     do
     {
       pSVar2 = *ppSVar3;
@@ -1178,9 +1121,8 @@ void SAVE_DeleteBlock(SavedBasic *savedBlock)
       ppSVar3 = ppSVar3 + 1;
     } while (iVar4 < 0x40);
   }
-  memmove(savedBlock, savedBlock + uVar1 * 2,
-          (size_t)(savedInfoTracker.InfoEnd + -(int)(savedBlock + uVar1 * 2)));
-  savedInfoTracker.InfoEnd = savedInfoTracker.InfoEnd + uVar1 * -4;
+  memmove(savedBlock, savedBlock + uVar1 * 2, UW_angleInc._12_4_ - (int)(savedBlock + uVar1 * 2));
+  UW_angleInc._12_4_ = UW_angleInc._12_4_ + uVar1 * -4;
   return;
 }
 
@@ -1252,93 +1194,56 @@ void SAVE_Instance(_Instance *instance, Level *level)
 
 {
   long lVar1;
-  size_t *psVar2;
-  void *pvVar3;
-  _SavedIntro *savedIntro;
-  evControlSaveDataData *extraData;
-  _SavedIntroWithIntro *savedIntro_00;
-  undefined *puVar4;
+  undefined *puVar2;
   MultiSpline *spline;
-  ushort uVar5;
-  long extraSize;
+  ushort uVar3;
 
-  extraSize = 0;
   lVar1 = SAVE_SaveableInstance(instance);
   if (lVar1 != 0)
   {
-    if ((instance->flags2 & 4U) == 0)
-    {
-      if (lVar1 == 1)
-      {
-        SAVE_DeleteInstance(instance);
-        extraData = (evControlSaveDataData *)INSTANCE_Query(instance, 0x18);
-        if (extraData != (evControlSaveDataData *)0x0)
-        {
-          extraSize = extraData->length;
-        }
-        savedIntro = (_SavedIntro *)SAVE_GetSavedBlock(1, extraSize);
-        if (savedIntro != (_SavedIntro *)0x0)
-        {
-          SAVE_UpdateSavedIntro(instance, level, savedIntro, extraData);
-        }
-      }
-      else
-      {
-        if (lVar1 == 2)
-        {
-          SAVE_DeleteInstance(instance);
-          extraData = (evControlSaveDataData *)INSTANCE_Query(instance, 0x18);
-          if (extraData != (evControlSaveDataData *)0x0)
-          {
-            extraSize = extraData->length;
-          }
-          savedIntro_00 = (_SavedIntroWithIntro *)SAVE_GetSavedBlock(7, extraSize);
-          if (savedIntro_00 != (_SavedIntroWithIntro *)0x0)
-          {
-            SAVE_UpdateSavedIntroWithIntro(instance, level, savedIntro_00, extraData);
-          }
-        }
-        else
-        {
-          if (lVar1 == 3)
-          {
-            SAVE_DeleteInstance(instance);
-            puVar4 = (undefined *)SAVE_GetSavedBlock(8, 0);
-            if ((puVar4 != (undefined *)0x0) &&
-                (spline = SCRIPT_GetMultiSpline(instance, (ulong *)0x0, (ulong *)0x0),
-                 spline != (MultiSpline *)0x0))
-            {
-              uVar5 = instance->splineFlags & 0xfe7f;
-              instance->splineFlags = uVar5;
-              if ((instance->flags & 0x1000000U) != 0)
-              {
-                instance->splineFlags = uVar5 | 0x80;
-              }
-              if ((instance->flags & 0x2000000U) != 0)
-              {
-                instance->splineFlags = instance->splineFlags | 0x100;
-              }
-              *puVar4 = 8;
-              *(undefined2 *)(puVar4 + 2) = *(undefined2 *)&instance->introUniqueID;
-              *(short *)(puVar4 + 4) = instance->splineFlags;
-              lVar1 = INSTANCE_GetSplineFrameNumber(instance, spline);
-              *(short *)(puVar4 + 6) = (short)lVar1;
-              *(short *)(puVar4 + 8) = instance->clipBeg;
-              *(short *)(puVar4 + 10) = instance->clipEnd;
-            }
-          }
-        }
-      }
-    }
-    else
+    if ((instance->flags2 & 4U) != 0)
     {
       SAVE_DeleteInstance(instance);
-      psVar2 = (size_t *)INSTANCE_Query(instance, 0x18);
-      if ((psVar2 != (size_t *)0x0) &&
-          (pvVar3 = SAVE_GetSavedBlock(5, *psVar2), pvVar3 != (void *)0x0))
+      /* WARNING: Subroutine does not return */
+      INSTANCE_Query(instance, 0x18);
+    }
+    if (lVar1 == 1)
+    {
+      SAVE_DeleteInstance(instance);
+      /* WARNING: Subroutine does not return */
+      INSTANCE_Query(instance, 0x18);
+    }
+    if (lVar1 == 2)
+    {
+      SAVE_DeleteInstance(instance);
+      /* WARNING: Subroutine does not return */
+      INSTANCE_Query(instance, 0x18);
+    }
+    if (lVar1 == 3)
+    {
+      SAVE_DeleteInstance(instance);
+      puVar2 = (undefined *)SAVE_GetSavedBlock(8, 0);
+      if ((puVar2 != (undefined *)0x0) &&
+          (spline = SCRIPT_GetMultiSpline(instance, (ulong *)0x0, (ulong *)0x0),
+           spline != (MultiSpline *)0x0))
       {
-        *(undefined2 *)((int)pvVar3 + 2) = *(undefined2 *)&instance->introUniqueID;
-        memcpy((void *)((int)pvVar3 + 4), (void *)psVar2[1], *psVar2);
+        uVar3 = instance->splineFlags & 0xfe7f;
+        instance->splineFlags = uVar3;
+        if ((instance->flags & 0x1000000U) != 0)
+        {
+          instance->splineFlags = uVar3 | 0x80;
+        }
+        if ((instance->flags & 0x2000000U) != 0)
+        {
+          instance->splineFlags = instance->splineFlags | 0x100;
+        }
+        *puVar2 = 8;
+        *(undefined2 *)(puVar2 + 2) = *(undefined2 *)&instance->introUniqueID;
+        *(short *)(puVar2 + 4) = instance->splineFlags;
+        lVar1 = INSTANCE_GetSplineFrameNumber(instance, spline);
+        *(short *)(puVar2 + 6) = (short)lVar1;
+        *(short *)(puVar2 + 8) = instance->clipBeg;
+        *(short *)(puVar2 + 10) = instance->clipEnd;
       }
     }
   }
@@ -1369,8 +1274,8 @@ void SAVE_DeleteInstance(_Instance *instance)
   uchar uVar1;
   SavedBasic *savedBlock;
 
-  savedBlock = (SavedBasic *)savedInfoTracker.InfoStart;
-  if (savedInfoTracker.InfoStart < savedInfoTracker.InfoEnd)
+  savedBlock = UW_angleInc._8_4_;
+  if (UW_angleInc._8_4_ < UW_angleInc._12_4_)
   {
     do
     {
@@ -1384,7 +1289,7 @@ void SAVE_DeleteInstance(_Instance *instance)
         return;
       }
       savedBlock = savedBlock + (uint)savedBlock->shiftedSaveSize * 2;
-    } while (savedBlock < savedInfoTracker.InfoEnd);
+    } while (savedBlock < UW_angleInc._12_4_);
   }
   return;
 }
@@ -1439,8 +1344,8 @@ void SAVE_SetDeadDeadBit(int uniqueID, long set)
   if (uniqueID < 0x2000)
   {
     pcVar3 = (char *)0x0;
-    pcVar4 = savedInfoTracker.InfoStart;
-    if (savedInfoTracker.InfoStart < savedInfoTracker.InfoEnd)
+    pcVar4 = UW_angleInc._8_4_;
+    if (UW_angleInc._8_4_ < UW_angleInc._12_4_)
     {
       do
       {
@@ -1449,7 +1354,7 @@ void SAVE_SetDeadDeadBit(int uniqueID, long set)
           break;
         pcVar4 = pcVar3 + (uint)(byte)pcVar3[1] * 4;
         pcVar3 = (char *)0x0;
-      } while (pcVar4 < savedInfoTracker.InfoEnd);
+      } while (pcVar4 < UW_angleInc._12_4_);
     }
     if (pcVar3 != (char *)0x0)
     {
@@ -1510,13 +1415,13 @@ void SAVE_RestoreGlobalSavePointer(void)
   _GlobalSaveTracker *p_Var1;
 
   GlobalSave = (_GlobalSaveTracker *)0x0;
-  p_Var1 = (_GlobalSaveTracker *)savedInfoTracker.InfoStart;
-  if (savedInfoTracker.InfoStart < savedInfoTracker.InfoEnd)
+  p_Var1 = UW_angleInc._8_4_;
+  if (UW_angleInc._8_4_ < UW_angleInc._12_4_)
   {
     while (GlobalSave = p_Var1, *(char *)&p_Var1->savedID != '\x06')
     {
       p_Var1 = (_GlobalSaveTracker *)(&p_Var1->savedID + (uint) * (byte *)((int)&p_Var1->savedID + 1) * 2);
-      if (savedInfoTracker.InfoEnd <= p_Var1)
+      if (UW_angleInc._12_4_ <= p_Var1)
       {
         GlobalSave = (_GlobalSaveTracker *)0x0;
         return;
@@ -1578,9 +1483,9 @@ long SAVE_IsUniqueIDDeadDead(long uniqueID)
   uVar5 = 0;
   if (uniqueID < 0x2000)
   {
-    pcVar2 = savedInfoTracker.InfoStart;
+    pcVar2 = UW_angleInc._8_4_;
     pcVar4 = (char *)0x0;
-    if (savedInfoTracker.InfoStart < savedInfoTracker.InfoEnd)
+    if (UW_angleInc._8_4_ < UW_angleInc._12_4_)
     {
       do
       {
@@ -1589,7 +1494,7 @@ long SAVE_IsUniqueIDDeadDead(long uniqueID)
           break;
         pcVar2 = pcVar2 + (uint)(byte)pcVar2[1] * 4;
         pcVar4 = (char *)0x0;
-      } while (pcVar2 < savedInfoTracker.InfoEnd);
+      } while (pcVar2 < UW_angleInc._12_4_);
     }
     if (pcVar4 != (char *)0x0)
     {
@@ -1601,7 +1506,7 @@ long SAVE_IsUniqueIDDeadDead(long uniqueID)
       uVar3 = 1 << (uniqueID & 7U);
       if (lVar1 >> 3 < 0x340)
       {
-        uVar5 = (uint)(((uint)(byte)pcVar4[(lVar1 >> 3) + 2] & uVar3) == uVar3);
+        uVar5 = (uint)(((byte)pcVar4[(lVar1 >> 3) + 2] & uVar3) == uVar3);
       }
     }
   }
@@ -1713,8 +1618,8 @@ SavedIntroSmall *SAVE_GetSavedSmallIntro(_Instance *instance)
 {
   SavedIntroSmall *pSVar1;
 
-  pSVar1 = (SavedIntroSmall *)savedInfoTracker.InfoStart;
-  if (savedInfoTracker.InfoStart < savedInfoTracker.InfoEnd)
+  pSVar1 = UW_angleInc._8_4_;
+  if (UW_angleInc._8_4_ < UW_angleInc._12_4_)
   {
     do
     {
@@ -1722,8 +1627,8 @@ SavedIntroSmall *SAVE_GetSavedSmallIntro(_Instance *instance)
       {
         return pSVar1;
       }
-      pSVar1 = pSVar1 + (uint)pSVar1->shiftedSaveSize;
-    } while (pSVar1 < savedInfoTracker.InfoEnd);
+      pSVar1 = pSVar1 + pSVar1->shiftedSaveSize;
+    } while (pSVar1 < UW_angleInc._12_4_);
   }
   return (SavedIntroSmall *)0x0;
 }
@@ -1756,28 +1661,25 @@ SavedIntroSmall *SAVE_GetSavedSmallIntro(_Instance *instance)
 /* end block 4 */
 // End Line: 2674
 
-SavedIntroSpline *SAVE_GetIntroSpline(_Instance *instance)
+long SAVE_SizeOfFreeSpace(void)
 
 {
-  byte *pbVar1;
-  uchar *puVar2;
-  SavedIntroSpline *pSVar3;
+  int in_a0;
+  char *pcVar1;
 
-  pSVar3 = (SavedIntroSpline *)savedInfoTracker.InfoStart;
-  if (savedInfoTracker.InfoStart < savedInfoTracker.InfoEnd)
+  pcVar1 = voiceTracker.cdCmdQueue[1]._0_4_;
+  if (voiceTracker.cdCmdQueue[1]._0_4_ < voiceTracker.cdCmdQueue[1].cdCmdParam)
   {
     do
     {
-      if ((pSVar3->savedID == '\b') && ((int)pSVar3->introUniqueID == instance->introUniqueID))
+      if ((*pcVar1 == '\b') && ((int)*(short *)(pcVar1 + 2) == *(int *)(in_a0 + 0x3c)))
       {
-        return pSVar3;
+        return (long)pcVar1;
       }
-      pbVar1 = &pSVar3->shiftedSaveSize;
-      puVar2 = &pSVar3->savedID;
-      pSVar3 = (SavedIntroSpline *)(puVar2 + (uint)*pbVar1 * 4);
-    } while ((SavedIntroSpline *)(puVar2 + (uint)*pbVar1 * 4) < savedInfoTracker.InfoEnd);
+      pcVar1 = pcVar1 + (uint)(byte)pcVar1[1] * 4;
+    } while (pcVar1 < voiceTracker.cdCmdQueue[1].cdCmdParam);
   }
-  return (SavedIntroSpline *)0x0;
+  return 0;
 }
 
 // decompiled code
@@ -1794,6 +1696,7 @@ SavedIntroSpline *SAVE_GetIntroSpline(_Instance *instance)
 /* end block 2 */
 // End Line: 2715
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void SAVE_UpdateGlobalSaveTracker(void)
@@ -1802,31 +1705,30 @@ void SAVE_UpdateGlobalSaveTracker(void)
   _GlobalSaveTracker *p_Var1;
   ulong uVar2;
   ulong uVar3;
-  undefined4 uVar4;
-  ushort uVar5;
-  int iVar6;
+  ushort uVar4;
+  int iVar5;
 
   p_Var1 = GlobalSave;
-  GlobalSave->currentTime = gameTrackerX.currentTime;
-  uVar3 = gameTrackerX.sound.gSfxVol;
-  uVar2 = gameTrackerX.sound.gMusicVol;
-  (p_Var1->sound).gMasterVol = gameTrackerX.sound.gMasterVol;
+  GlobalSave->currentTime = DAT_800d11d8;
+  uVar3 = ULONG_800d1164;
+  uVar2 = aadUpdateRate;
+  (p_Var1->sound).gMasterVol = _USHORT_800d115c;
   (p_Var1->sound).gMusicVol = uVar2;
   (p_Var1->sound).gSfxVol = uVar3;
-  uVar4 = gameTrackerX.sound._16_4_;
-  (p_Var1->sound).gVoiceVol = gameTrackerX.sound.gVoiceVol;
-  *(undefined4 *)&(p_Var1->sound).gSfxOn = uVar4;
+  uVar2 = ULONG_800d116c;
+  (p_Var1->sound).gVoiceVol = ULONG_800d1168;
+  *(ulong *)&(p_Var1->sound).gSfxOn = uVar2;
   GlobalSave->saveVersion = 0x5524;
-  iVar6 = GAMEPAD_DualShockEnabled();
-  if (iVar6 == 0)
+  iVar5 = GAMEPAD_DualShockEnabled();
+  if (iVar5 == 0)
   {
-    uVar5 = GlobalSave->flags & 0xfffd;
+    uVar4 = GlobalSave->flags & 0xfffd;
   }
   else
   {
-    uVar5 = GlobalSave->flags | 2;
+    uVar4 = GlobalSave->flags | 2;
   }
-  GlobalSave->flags = uVar5;
+  GlobalSave->flags = uVar4;
   return;
 }
 
@@ -1844,6 +1746,7 @@ void SAVE_UpdateGlobalSaveTracker(void)
 /* end block 2 */
 // End Line: 2743
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void SAVE_RestoreGlobalSaveTracker(void)
@@ -1851,15 +1754,15 @@ void SAVE_RestoreGlobalSaveTracker(void)
 {
   if (GlobalSave->saveVersion == 0x5524)
   {
-    gameTrackerX.currentTime = GlobalSave->currentTime;
-    gameTrackerX.sound.gMasterVol = (GlobalSave->sound).gMasterVol;
-    gameTrackerX.sound.gMusicVol = (GlobalSave->sound).gMusicVol;
-    gameTrackerX.sound.gSfxVol = (GlobalSave->sound).gSfxVol;
-    gameTrackerX.sound.gVoiceVol = (GlobalSave->sound).gVoiceVol;
-    gameTrackerX.sound._16_4_ = *(undefined4 *)&(GlobalSave->sound).gSfxOn;
-    SOUND_SetSfxVolume(gameTrackerX.sound.gSfxVol);
-    SOUND_SetMusicVolume(gameTrackerX.sound.gMusicVol);
-    SOUND_SetVoiceVolume(gameTrackerX.sound.gVoiceVol);
+    DAT_800d11d8 = GlobalSave->currentTime;
+    _USHORT_800d115c = (GlobalSave->sound).gMasterVol;
+    aadUpdateRate = (GlobalSave->sound).gMusicVol;
+    ULONG_800d1164 = (GlobalSave->sound).gSfxVol;
+    ULONG_800d1168 = (GlobalSave->sound).gVoiceVol;
+    ULONG_800d116c = *(ulong *)&(GlobalSave->sound).gSfxOn;
+    SOUND_SetSfxVolume(ULONG_800d1164);
+    SOUND_SetMusicVolume(aadUpdateRate);
+    SOUND_SetVoiceVolume(ULONG_800d1168);
     if ((GlobalSave->flags & 2U) == 0)
     {
       GAMEPAD_DisableDualShock();
@@ -1871,7 +1774,7 @@ void SAVE_RestoreGlobalSaveTracker(void)
   }
   else
   {
-    SAVE_ClearMemory(&gameTrackerX);
+    SAVE_ClearMemory((GameTracker *)&gameTrackerX);
   }
   return;
 }
@@ -1915,34 +1818,26 @@ void SAVE_RestoreGlobalSaveTracker(void)
 void SAVE_SaveEverythingInMemory(void)
 
 {
-  _Instance *instance;
-  Level *level;
-  STracker *pSVar1;
-  _Instance *p_Var2;
-  int iVar3;
+  long *plVar1;
+  int iVar2;
 
-  p_Var2 = (gameTrackerX.instanceList)->first;
-  while (instance = p_Var2, instance != (_Instance *)0x0)
+  iVar2 = 0;
+  if (*(int *)(DAT_800d0fe0 + 4) != 0)
   {
-    p_Var2 = instance->next;
-    level = STREAM_GetLevelWithID(instance->currentStreamUnitID);
-    if (level != (Level *)0x0)
-    {
-      SAVE_Instance(instance, level);
-    }
+    /* WARNING: Subroutine does not return */
+    STREAM_GetLevelWithID(*(long *)(*(int *)(DAT_800d0fe0 + 4) + 0x38));
   }
-  iVar3 = 0;
-  pSVar1 = &StreamTracker;
+  plVar1 = &StreamTracker;
   do
   {
-    if (pSVar1->StreamList[0].used == 2)
+    if (*(short *)(plVar1 + 1) == 2)
     {
-      EVENT_SaveEventsFromLevel(pSVar1->StreamList[0].StreamUnitID, pSVar1->StreamList[0].level);
-      SAVE_CreatedSavedLevel(pSVar1->StreamList[0].StreamUnitID, pSVar1->StreamList[0].level);
+      EVENT_SaveEventsFromLevel(*plVar1, (Level *)plVar1[2]);
+      SAVE_CreatedSavedLevel(*plVar1, (Level *)plVar1[2]);
     }
-    iVar3 = iVar3 + 1;
-    pSVar1 = (STracker *)(pSVar1->StreamList + 1);
-  } while (iVar3 < 0x10);
+    iVar2 = iVar2 + 1;
+    plVar1 = plVar1 + 0x10;
+  } while (iVar2 < 0x10);
   return;
 }
 
@@ -1968,7 +1863,7 @@ void SAVE_SaveGame(void)
   } while (iVar1 != 0);
   SAVE_SaveEverythingInMemory();
   SAVE_UpdateGlobalSaveTracker();
-  GlobalSave->sizeUsedInBlock = (short)savedInfoTracker.InfoEnd - (short)savedInfoTracker.InfoStart;
+  GlobalSave->sizeUsedInBlock = UW_angleInc.x - UW_angleInc.newX;
   return;
 }
 
@@ -1986,11 +1881,11 @@ void SAVE_SaveGame(void)
 void SAVE_RestoreGame(void)
 
 {
-  gameTrackerX.streamFlags = gameTrackerX.streamFlags | 0x200000;
+  DAT_800d10f0 = DAT_800d10f0 | 0x200000;
   SAVE_RestoreGlobalSavePointer();
   SAVE_RestoreGlobalSaveTracker();
-  savedInfoTracker.InfoEnd = savedInfoTracker.InfoStart + (int)GlobalSave->sizeUsedInBlock;
-  GAMELOOP_RequestLevelChange(s_under_800cf954, 1, &gameTrackerX);
+  UW_angleInc._12_4_ = UW_angleInc._8_4_ + GlobalSave->sizeUsedInBlock;
+  GAMELOOP_RequestLevelChange(s_under_800cf954, 1, (GameTracker *)&gameTrackerX);
   return;
 }
 
@@ -2013,5 +1908,5 @@ void SAVE_RestoreGame(void)
 long SAVE_SizeOfFreeSpace(void)
 
 {
-  return (long)(savedInfoTracker.EndOfMemory + -(int)savedInfoTracker.InfoEnd);
+  return UW_angleInc._16_4_ - UW_angleInc._12_4_;
 }

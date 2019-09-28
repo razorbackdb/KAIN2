@@ -1,10 +1,6 @@
 #include "THISDUST.H"
 #include "VM.H"
 
-// long @0x800CEBD8, len = 0x00000004
-vmClock = 0x0;
-// long @0x800CEBD4, len = 0x00000004
-vmRealClock = 0x0;
 // decompiled code
 // original method signature:
 // void /*$ra*/ VM_Tick(long time /*$a0*/)
@@ -117,15 +113,15 @@ void VM_UpdateMorph(Level *level, int initFlg)
   char cVar5;
   char cVar6;
   char cVar7;
-  int iVar8;
-  char cVar9;
+  char cVar8;
   _VMOffsetTable *address;
+  short *psVar9;
   short *psVar10;
-  short *psVar11;
-  char *pcVar12;
-  PLAYER_108fake *pPVar13;
-  char *pcVar14;
-  short sVar15;
+  char *pcVar11;
+  _union_368 *p_Var12;
+  char *pcVar13;
+  short sVar14;
+  int iVar15;
   int iVar16;
   _VMOffsetTable **pp_Var17;
   int iVar18;
@@ -139,27 +135,26 @@ void VM_UpdateMorph(Level *level, int initFlg)
     pp_Var17 = &p_Var19->curVMOffsetTable;
     do
     {
-      sVar15 = gameTrackerX.spectral_fadeValue;
       if ((*(short *)(pp_Var17 + -8) != *(short *)((int)pp_Var17 + -0x1e)) ||
           ((p_Var19->flags & 0x100) != 0))
       {
         address = *pp_Var17;
-        if (gameTrackerX.gameData.asmData.MorphTime == 1000)
+        if (DAT_800d0fb4 == 1000)
         {
-          if (address !=
-              (_VMOffsetTable *)(&pp_Var17[-1]->numVMOffsets)[(int)*(short *)(pp_Var17 + -7)])
+          if (address != (_VMOffsetTable *)(&pp_Var17[-1]->numVMOffsets)[*(short *)(pp_Var17 + -7)])
           {
+            /* WARNING: Subroutine does not return */
             MEMPACK_Free((char *)address);
           }
           if (initFlg == 0)
           {
-            if (gameTrackerX.gameData.asmData.MorphType == 0)
+            if (DAT_800d0fb6 == 0)
               goto LAB_8004f72c;
             *(undefined2 *)(pp_Var17 + -7) = *(undefined2 *)(pp_Var17 + -8);
           }
           else
           {
-            if (gameTrackerX.gameData.asmData.MorphType == 0)
+            if (DAT_800d0fb6 == 0)
             {
               *(undefined2 *)(pp_Var17 + -7) = *(undefined2 *)(pp_Var17 + -8);
             }
@@ -169,92 +164,88 @@ void VM_UpdateMorph(Level *level, int initFlg)
               *(undefined2 *)(pp_Var17 + -7) = *(undefined2 *)((int)pp_Var17 + -0x1e);
             }
           }
-          *pp_Var17 = (_VMOffsetTable *)(&pp_Var17[-1]->numVMOffsets)[(int)*(short *)(pp_Var17 + -7)];
+          *pp_Var17 = (_VMOffsetTable *)(&pp_Var17[-1]->numVMOffsets)[*(short *)(pp_Var17 + -7)];
         }
         else
         {
           iVar18 = address->numVMOffsets;
-          if (address ==
-              (_VMOffsetTable *)(&pp_Var17[-1]->numVMOffsets)[(int)*(short *)(pp_Var17 + -7)])
+          if (address == (_VMOffsetTable *)(&pp_Var17[-1]->numVMOffsets)[*(short *)(pp_Var17 + -7)])
           {
             if ((p_Var19->flags & 8) == 0)
             {
-              iVar8 = iVar18 * 3;
+              iVar18 = iVar18 * 3;
             }
             else
             {
-              iVar8 = iVar18 * 6;
+              iVar18 = iVar18 * 6;
             }
-            address = (_VMOffsetTable *)MEMPACK_Malloc(iVar8 + 4, '(');
-            *pp_Var17 = address;
-            address->numVMOffsets = iVar18;
+            /* WARNING: Subroutine does not return */
+            MEMPACK_Malloc(iVar18 + 4, '(');
           }
-          iVar8 = 0;
+          iVar16 = 0;
           if ((p_Var19->flags & 8) == 0)
           {
-            pcVar12 = (char *)((&pp_Var17[-1]->numVMOffsets)[(int)*(short *)(pp_Var17 + -8)] + 4);
-            pcVar14 = (char *)((&pp_Var17[-1]->numVMOffsets)[(int)*(short *)((int)pp_Var17 + -0x1e)] + 4);
-            pPVar13 = &(*pp_Var17)->offsets;
+            pcVar11 = (char *)((&pp_Var17[-1]->numVMOffsets)[*(short *)(pp_Var17 + -8)] + 4);
+            pcVar13 = (char *)((&pp_Var17[-1]->numVMOffsets)[*(short *)((int)pp_Var17 + -0x1e)] + 4);
+            p_Var12 = &(*pp_Var17)->offsets;
             if (0 < iVar18)
             {
-              iVar16 = (int)sVar15;
+              iVar15 = (int)DAT_800d11d0;
               do
               {
                 if ((p_Var19->flags & 0x100) == 0)
                 {
-                  cVar9 = pcVar14[1];
-                  sVar15 = (short)*pcVar14 - (short)*pcVar12;
-                  cVar5 = pcVar12[1];
-                  cVar6 = pcVar14[2];
+                  cVar8 = pcVar13[1];
+                  sVar14 = (short)*pcVar13 - (short)*pcVar11;
+                  cVar5 = pcVar11[1];
+                  cVar6 = pcVar13[2];
                 }
                 else
                 {
-                  cVar9 = pcVar14[1];
-                  sVar15 = (short)pcVar14[2] - (short)*pcVar12;
-                  cVar5 = pcVar12[1];
-                  cVar6 = *pcVar14;
+                  cVar8 = pcVar13[1];
+                  sVar14 = (short)pcVar13[2] - (short)*pcVar11;
+                  cVar5 = pcVar11[1];
+                  cVar6 = *pcVar13;
                 }
-                cVar7 = pcVar12[2];
-                pcVar14 = pcVar14 + 3;
-                iVar8 = iVar8 + 1;
-                *(char *)pPVar13 = *pcVar12 + (char)((int)sVar15 * iVar16 >> 0xc);
-                *(char *)((int)pPVar13 + 1) =
-                    pcVar12[1] +
-                    (char)((((int)cVar9 - (int)cVar5) * 0x10000 >> 0x10) * iVar16 >> 0xc);
-                pcVar4 = pcVar12 + 2;
-                pcVar12 = pcVar12 + 3;
-                *(char *)((int)pPVar13 + 2) =
-                    *pcVar4 + (char)((((int)cVar6 - (int)cVar7) * 0x10000 >> 0x10) * iVar16 >> 0xc);
-                pPVar13 = (PLAYER_108fake *)((int)pPVar13 + 3);
-              } while (iVar8 < iVar18);
+                cVar7 = pcVar11[2];
+                pcVar13 = pcVar13 + 3;
+                iVar16 = iVar16 + 1;
+                *(char *)p_Var12 = *pcVar11 + (char)(sVar14 * iVar15 >> 0xc);
+                *(char *)((int)p_Var12 + 1) =
+                    pcVar11[1] +
+                    (char)((((int)cVar8 - (int)cVar5) * 0x10000 >> 0x10) * iVar15 >> 0xc);
+                pcVar4 = pcVar11 + 2;
+                pcVar11 = pcVar11 + 3;
+                *(char *)((int)p_Var12 + 2) =
+                    *pcVar4 + (char)((((int)cVar6 - (int)cVar7) * 0x10000 >> 0x10) * iVar15 >> 0xc);
+                p_Var12 = (_union_368 *)((int)p_Var12 + 3);
+              } while (iVar16 < iVar18);
             }
           }
           else
           {
-            psVar11 = (short *)((&pp_Var17[-1]->numVMOffsets)[(int)*(short *)(pp_Var17 + -8)] + 4);
-            psVar10 = (short *)((&pp_Var17[-1]->numVMOffsets)
-                                    [(int)*(short *)((int)pp_Var17 + -0x1e)] +
-                                4);
-            pPVar13 = &(*pp_Var17)->offsets;
+            psVar10 = (short *)((&pp_Var17[-1]->numVMOffsets)[*(short *)(pp_Var17 + -8)] + 4);
+            psVar9 = (short *)((&pp_Var17[-1]->numVMOffsets)[*(short *)((int)pp_Var17 + -0x1e)] + 4);
+            p_Var12 = &(*pp_Var17)->offsets;
             if (0 < iVar18)
             {
-              iVar16 = (int)sVar15;
+              iVar15 = (int)DAT_800d11d0;
               do
               {
-                *(short *)pPVar13 =
-                    *psVar11 + (short)(((int)*psVar10 - (int)*psVar11) * iVar16 >> 0xc);
-                *(short *)((int)pPVar13 + 2) =
-                    psVar11[1] + (short)(((int)psVar10[1] - (int)psVar11[1]) * iVar16 >> 0xc);
-                psVar1 = psVar10 + 2;
-                psVar2 = psVar11 + 2;
-                iVar8 = iVar8 + 1;
+                *(short *)p_Var12 =
+                    *psVar10 + (short)(((int)*psVar9 - (int)*psVar10) * iVar15 >> 0xc);
+                *(short *)((int)p_Var12 + 2) =
+                    psVar10[1] + (short)(((int)psVar9[1] - (int)psVar10[1]) * iVar15 >> 0xc);
+                psVar1 = psVar9 + 2;
+                psVar2 = psVar10 + 2;
+                iVar16 = iVar16 + 1;
+                psVar9 = psVar9 + 3;
+                psVar3 = psVar10 + 2;
                 psVar10 = psVar10 + 3;
-                psVar3 = psVar11 + 2;
-                psVar11 = psVar11 + 3;
-                *(short *)((int)pPVar13 + 4) =
-                    *psVar3 + (short)(((int)*psVar1 - (int)*psVar2) * iVar16 >> 0xc);
-                pPVar13 = pPVar13 + 1;
-              } while (iVar8 < iVar18);
+                *(short *)((int)p_Var12 + 4) =
+                    *psVar3 + (short)(((int)*psVar1 - (int)*psVar2) * iVar15 >> 0xc);
+                p_Var12 = p_Var12 + 1;
+              } while (iVar16 < iVar18);
             }
           }
         }
@@ -288,8 +279,9 @@ void VM_UpdateMorph(Level *level, int initFlg)
 void VM_VMObjectSetTable(Level *level, _VMObject *vmobject, int table)
 
 {
-  if (vmobject->curVMOffsetTable != vmobject->vmoffsetTableList[(int)vmobject->currentIdx])
+  if (vmobject->curVMOffsetTable != vmobject->vmoffsetTableList[vmobject->currentIdx])
   {
+    /* WARNING: Subroutine does not return */
     MEMPACK_Free((char *)vmobject->curVMOffsetTable);
   }
   vmobject->currentIdx = (short)table;

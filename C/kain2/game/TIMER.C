@@ -25,14 +25,8 @@
 ulong TIMER_GetTimeMS(void)
 
 {
-  uint uVar1;
-  uint uVar2;
-
+  /* WARNING: Subroutine does not return */
   EnterCriticalSection();
-  uVar2 = GetRCnt(0xf2000000);
-  uVar1 = gameTimer;
-  ExitCriticalSection();
-  return (uVar1 >> 0x10) * 0x1ef63 + (uVar2 & 0xffff | uVar1 << 0x10) / 0x844d;
 }
 
 // decompiled code

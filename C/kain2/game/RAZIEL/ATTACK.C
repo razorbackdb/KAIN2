@@ -39,151 +39,87 @@
 /* end block 2 */
 // End Line: 33
 
+/* WARNING: Removing unreachable block (ram,0x8009bbcc) */
+/* WARNING: Removing unreachable block (ram,0x8009bbf0) */
+/* WARNING: Removing unreachable block (ram,0x8009bbe0) */
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 int StateHandlerDecodeHold(int *Message, int *Data)
 
 {
-  _Instance *Inst;
-  uint uVar1;
-  ulong uVar2;
-  int iVar3;
+  _Instance *p_Var1;
+  int iVar2;
 
-  iVar3 = 1;
-  Inst = razGetHeldWeapon();
-  if (Raziel.CurrentPlane == 2)
+  iVar2 = 1;
+  p_Var1 = razGetHeldWeapon();
+  if (_CHAR____800d564c == 2)
   {
     *Data = 1;
     *Message = -0x80000000;
-    if ((Raziel.Senses.EngagedMask & 0x200) != 0)
+    if ((_CHAR____800d55f0 & 0x200) != 0)
     {
       return 1;
     }
-    if (Raziel.Senses.heldClass != 0x1000)
+    if (_CHAR____800d5600 != 0x1000)
     {
       return 0;
     }
-    if ((Raziel.Abilities & 4U) == 0)
+    if ((_CHAR____800d561c & 4) == 0)
     {
       return 0;
     }
     *Message = 0x800010;
     return 1;
   }
-  uVar1 = 0;
-  if ((Raziel.Senses.EngagedMask & 0x200) != 0)
+  if ((_CHAR____800d55f0 & 0x200) != 0)
   {
-    uVar2 = INSTANCE_Query(Raziel.Senses.EngagedList[9].instance, 1);
-    uVar1 = uVar2 & 8;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(*(_Instance **)(_CHAR____800d55ec + 0x48), 1);
   }
-  if (uVar1 != 0)
+  if (((((_CHAR____800d55f0 & 0x200) != 0) && (p_Var1 != (_Instance *)0x0)) &&
+       (_CHAR____800d5600 != 3)) &&
+      (_CHAR____800d5600 != 8))
   {
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(*(_Instance **)(_CHAR____800d55ec + 0x48), 0);
+  }
+  if (((_CHAR____800d55f0 & 0x100) != 0) && (p_Var1 == (_Instance *)0x0))
+  {
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(*(_Instance **)(_CHAR____800d55ec + 0x40), 0);
+  }
+  if (((_CHAR____800d55f0 & 0x200) != 0) && (_CHAR____800d5600 == 3))
+  {
+    *Message = -0x80000000;
     *Data = 1;
-    if (Raziel.Senses.heldClass == 0x1000)
-    {
-      *Message = 0x1000023;
-    }
-    else
-    {
-      *Message = -0x80000000;
-    }
-    goto LAB_8009be1c;
+    return 1;
   }
-  if (((((Raziel.Senses.EngagedMask & 0x200) == 0) || (Inst == (_Instance *)0x0)) ||
-       (Raziel.Senses.heldClass == 3)) ||
-      (Raziel.Senses.heldClass == 8))
+  p_Var1 = razGetHeldWeapon();
+  if (p_Var1 == (_Instance *)0x0)
   {
-    if (((Raziel.Senses.EngagedMask & 0x100) != 0) && (Inst == (_Instance *)0x0))
+    if ((_CHAR____800d561c & 4) != 0)
     {
-      uVar2 = INSTANCE_Query(Raziel.Senses.EngagedList[8].instance, 0);
-      if ((int)uVar2 < 0)
-      {
-        *Data = 1;
-        *Message = 0x1000002;
-      }
-      else
-      {
-        *Data = 0;
-        *Message = 0x1000002;
-      }
+      *Message = 0x80000;
       goto LAB_8009be1c;
-    }
-    if (((Raziel.Senses.EngagedMask & 0x200) != 0) && (Raziel.Senses.heldClass == 3))
-    {
-      *Message = -0x80000000;
-      *Data = 1;
-      return 1;
-    }
-    Inst = razGetHeldWeapon();
-    if (Inst == (_Instance *)0x0)
-    {
-      if ((Raziel.Abilities & 4U) != 0)
-      {
-        *Message = 0x80000;
-        goto LAB_8009be1c;
-      }
-    }
-    else
-    {
-      if ((Inst != Raziel.soulReaver) || ((Raziel.Abilities & 4U) != 0))
-      {
-        *Message = 0x800010;
-        goto LAB_8009be1c;
-      }
     }
   }
   else
   {
-    uVar2 = INSTANCE_Query(Raziel.Senses.EngagedList[9].instance, 0);
-    if ((uVar2 & 0x2000000) == 0)
+    if ((p_Var1 != _CHAR____800d5644) || ((_CHAR____800d561c & 4) != 0))
     {
-      if ((uVar2 & 0x10000000) == 0)
-      {
-        *Data = 0;
-      }
-      else
-      {
-        *Data = 1;
-      }
-      *Message = 0x100000a;
-      if (Inst == Raziel.soulReaver)
-      {
-        *Message = 0x1000023;
-        if ((uVar2 & 0x21000000) == 0)
-        {
-          *Data = 0;
-          goto LAB_8009be1c;
-        }
-      }
-      else
-      {
-        uVar2 = INSTANCE_Query(Inst, 2);
-        if (((uVar2 & 0x20) == 0) || (*Message = 0x1000018, *Data == 0))
-          goto LAB_8009be1c;
-        uVar2 = INSTANCE_Query(Inst, 3);
-        if ((uVar2 & 0x10000) == 0)
-        {
-          *Data = 0;
-          goto LAB_8009be1c;
-        }
-      }
-      *Data = 1;
-      goto LAB_8009be1c;
-    }
-    if (Inst == Raziel.soulReaver)
-    {
-      *Message = 0x1000023;
-      *Data = 1;
+      *Message = 0x800010;
       goto LAB_8009be1c;
     }
   }
-  iVar3 = 0;
+  iVar2 = 0;
 LAB_8009be1c:
-  if (Raziel.Senses.heldClass != 3)
+  if (_CHAR____800d5600 != 3)
   {
-    return iVar3;
+    return iVar2;
   }
   if (*Message == 0x800010)
   {
-    return iVar3;
+    return iVar2;
   }
   return 0;
 }
@@ -294,25 +230,26 @@ LAB_8009be1c:
 // End Line: 322
 
 /* WARNING: Type propagation algorithm not settling */
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void StateHandlerAttack2(__CharacterState *In, int CurrentSection, int Data)
 
 {
   byte bVar1;
   byte bVar2;
-  RazielData *pRVar3;
-  __Event *p_Var4;
-  ulong uVar5;
-  undefined *puVar6;
-  uint uVar7;
+  __Event *p_Var3;
+  _Instance *p_Var4;
+  undefined *puVar5;
+  uint uVar6;
   _Instance *instance;
   __MessageQueue *In_00;
   int mode;
   int NewAnim;
   code *NewProcess;
-  ulong endColor;
-  ulong startColor;
-  _Instance **pp_Var8;
+  int in_a3;
+  long endColor;
+  long startColor;
+  _Instance **pp_Var7;
   int local_58;
   int local_54;
   int local_40;
@@ -328,12 +265,12 @@ void StateHandlerAttack2(__CharacterState *In, int CurrentSection, int Data)
   local_2c = (_Instance *)0x0;
   if (CurrentSection != 0)
     goto LAB_8009bf34;
-  if ((ControlFlag & 0x20U) == 0)
+  if ((_BlockVramEntry_800d59a0._12_4_ & 0x20) == 0)
   {
-    if (((ControlFlag & 0x10000000U) == 0) || ((Raziel.Mode & 2U) != 0))
+    if (((_BlockVramEntry_800d59a0._12_4_ & 0x10000000) == 0) || ((_CHAR____800d5574 & 2) != 0))
       goto LAB_8009bf34;
     mode = 2;
-    if ((*PadData & 0x8000000fU) == 0)
+    if ((*gameTracker._4_4_ & 0x8000000f) == 0)
       goto LAB_8009bf20;
     instance = In->CharacterInstance;
   }
@@ -345,137 +282,121 @@ void StateHandlerAttack2(__CharacterState *In, int CurrentSection, int Data)
   }
   SteerSwitchMode(instance, mode);
 LAB_8009bf34:
-  pp_Var8 = &In->CharacterInstance + CurrentSection * 0x47;
+  pp_Var7 = &In->CharacterInstance + CurrentSection * 0x47;
   do
   {
     In_00 = &In->SectionList[CurrentSection].Event;
-    p_Var4 = PeekMessageQueue(In_00);
-    pRVar3 = PlayerData;
-    if (p_Var4 == (__Event *)0x0)
+    p_Var3 = PeekMessageQueue(In_00);
+    mode = _PlayerData;
+    if (p_Var3 == (__Event *)0x0)
     {
-      if (((Raziel.attackFlags & 4U) != 0) &&
-          ((int)((uint)(Raziel.attack)->switchDelay * 100) <=
+      if (((_CHAR____800d5660 & 4) != 0) &&
+          ((int)((uint)_CHAR____800d565c[4] * 100) <=
            (int)(In->CharacterInstance->anim).section[CurrentSection & 0xff].elapsedTime))
       {
+        /* WARNING: Subroutine does not return */
         EnMessageQueueData(&In->SectionList[CurrentSection].Event, 0x100000, 0);
       }
       if ((local_30 != 0) && (local_2c != (_Instance *)0x0))
       {
+        /* WARNING: Subroutine does not return */
         INSTANCE_Post(local_2c, 0x1000024, 0);
       }
       return;
     }
-    puVar6 = (undefined *)p_Var4->ID;
-    if (puVar6 == (undefined *)0x1000002)
+    puVar5 = (undefined *)p_Var3->ID;
+    uVar6 = _BlockVramEntry_800d59a0._12_4_;
+    if (puVar5 == (undefined *)0x1000002)
     {
-      uVar7 = ControlFlag;
-      if (Raziel.CurrentPlane == 1)
+      if (_CHAR____800d564c == 1)
       {
+        in_a3 = local_3c;
         StateSwitchStateData(In, CurrentSection, StateHandlerGrab, local_3c);
-        uVar7 = ControlFlag;
+        uVar6 = _BlockVramEntry_800d59a0._12_4_;
       }
     }
     else
     {
-      if ((int)puVar6 < 0x1000003)
+      if ((int)puVar5 < 0x1000003)
       {
-        if (puVar6 == &DAT_00100001)
+        if (puVar5 == &DAT_00100001)
         {
-          Raziel.currentAttack = p_Var4->Data;
-          pp_Var8[0x48] = (_Instance *)0x0;
+          _CHAR____800d5664 = p_Var3->Data;
+          pp_Var7[0x48] = (_Instance *)0x0;
           instance = razGetHeldWeapon();
           if (instance != (_Instance *)0x0)
           {
-            if (Raziel.Senses.heldClass == 2)
+            if (_CHAR____800d5600 == 2)
             {
-              Raziel.currentAttack = p_Var4->Data + 2;
+              _CHAR____800d5664 = p_Var3->Data + 2;
             }
             else
             {
-              if (Raziel.Senses.heldClass < 3)
+              if (_CHAR____800d5600 < 3)
               {
-                if (Raziel.Senses.heldClass == 1)
+                if (_CHAR____800d5600 == 1)
                 {
-                  Raziel.currentAttack = p_Var4->Data + 1;
+                  _CHAR____800d5664 = p_Var3->Data + 1;
                 }
               }
               else
               {
-                if (Raziel.Senses.heldClass == 3)
+                if (_CHAR____800d5600 == 3)
                 {
-                  Raziel.currentAttack = p_Var4->Data + 4;
+                  _CHAR____800d5664 = p_Var3->Data + 4;
                 }
                 else
                 {
-                  if (Raziel.Senses.heldClass == 0x1000)
+                  if (_CHAR____800d5600 == 0x1000)
                   {
-                    Raziel.currentAttack = p_Var4->Data + 3;
+                    _CHAR____800d5664 = p_Var3->Data + 3;
                   }
                 }
               }
             }
           }
-          Raziel.attack =
-              *(__AttackItem **)(&((__AttackItem *)PlayerData->attackList[Raziel.currentAttack])->anim +
-                                 (int)pp_Var8[0x48] * 4);
-          if (p_Var4->Data < 10)
+          _CHAR____800d565c =
+              *(byte **)((int)pp_Var7[0x48] * 4 +
+                         *(int *)(_CHAR____800d5664 * 4 + *(int *)(_PlayerData + 0x10)));
+          if (p_Var3->Data < 10)
           {
-            bVar1 = (Raziel.attack)->anim;
-            bVar2 = (Raziel.attack)->framesIn;
+            bVar1 = *_CHAR____800d565c;
+            bVar2 = _CHAR____800d565c[1];
             local_54 = 1;
             mode = CurrentSection;
           LAB_8009c1f8:
-            G2EmulationSwitchAnimationAlpha(In, mode, (uint)bVar1, 0, (uint)bVar2, local_54, (uint)(Raziel.attack)->alphaIn);
+            in_a3 = 0;
+            G2EmulationSwitchAnimationAlpha(In, mode, (uint)bVar1, 0, (uint)bVar2, local_54, (uint)_CHAR____800d565c[2]);
             if (CurrentSection == 1)
             {
-              startColor = (Raziel.attack)->ribbonStartColor;
-              endColor = (Raziel.attack)->ribbonEndColor;
+              startColor = *(long *)(_CHAR____800d565c + 0x14);
+              endColor = *(long *)(_CHAR____800d565c + 0x18);
               instance = razGetHeldWeapon();
-              if (instance == (_Instance *)0x0)
-              {
-                instance = In->CharacterInstance;
-              }
-              else
+              if (instance != (_Instance *)0x0)
               {
                 instance = razGetHeldWeapon();
-                uVar5 = INSTANCE_Query(instance, 2);
-                if ((uVar5 & 0x20) == 0)
-                {
-                  if (Raziel.Senses.heldClass == 0x1000)
-                  {
-                    startColor = REAVER_GetGlowColor(instance);
-                    endColor = 0;
-                  }
-                }
-                else
-                {
-                  uVar5 = INSTANCE_Query(instance, 3);
-                  if ((uVar5 & 0x10000) != 0)
-                  {
-                    startColor = PlayerData->nonBurningRibbonStartColor;
-                    endColor = PlayerData->nonBurningRibbonEndColor;
-                  }
-                }
+                /* WARNING: Subroutine does not return */
+                INSTANCE_Query(instance, 2);
               }
-              FX_StartRibbon(instance, (ushort)(Raziel.attack)->ribbonStartSegment,
-                             (ushort)(Raziel.attack)->ribbonEndSegment, 0,
-                             (uint)(Raziel.attack)->ribbonLifeTime,
-                             (uint)(Raziel.attack)->ribbonFaceLifeTime,
-                             (int)(short)(Raziel.attack)->ribbonStartOpacity, startColor, endColor);
-              if (p_Var4->Data < 10)
+              in_a3 = 0;
+              FX_StartRibbon(In->CharacterInstance, (ushort)_CHAR____800d565c[0xb],
+                             (ushort)_CHAR____800d565c[0xc], 0, (uint)_CHAR____800d565c[0xd],
+                             (uint)_CHAR____800d565c[0xe], (int)*(short *)(_CHAR____800d565c + 0x12),
+                             startColor, endColor);
+              if (p_Var3->Data < 10)
               {
                 SteerSwitchMode(In->CharacterInstance, 9);
               }
               else
               {
-                if ((Raziel.Senses.EngagedMask & 0x40) != 0)
+                if ((_CHAR____800d55f0 & 0x40) != 0)
                 {
                   SteerSwitchMode(In->CharacterInstance, 0xf);
                   SetTimer(4);
                 }
               }
-              ControlFlag = ControlFlag | 0x2000;
-              if (p_Var4->Data == 5)
+              _BlockVramEntry_800d59a0._12_4_ = _BlockVramEntry_800d59a0._12_4_ | 0x2000;
+              if (p_Var3->Data == 5)
               {
                 SetTimer(1);
               }
@@ -485,200 +406,175 @@ LAB_8009bf34:
           {
             if (CurrentSection == 1)
             {
-              bVar1 = (Raziel.attack)->anim;
-              bVar2 = (Raziel.attack)->framesIn;
+              bVar1 = *_CHAR____800d565c;
+              bVar2 = _CHAR____800d565c[1];
               mode = 1;
               local_54 = CurrentSection;
               goto LAB_8009c1f8;
             }
           }
-          Raziel.attackLastHit = (_Instance *)0x0;
-          Raziel.attackCurrentHit = (_Instance *)0x0;
-          Raziel.glowEffect = (_FXGlowEffect *)0x0;
-          Raziel.Mode = Raziel.Mode | 0x200000;
-          uVar7 = ControlFlag;
+          _CHAR____800d566c = (_Instance *)0x0;
+          _CHAR____800d5668 = (_Instance *)0x0;
+          _CHAR____800d5670 = (_FXGlowEffect *)0x0;
+          _CHAR____800d5574 = _CHAR____800d5574 | 0x200000;
+          uVar6 = _BlockVramEntry_800d59a0._12_4_;
         }
         else
         {
-          if ((int)puVar6 < 0x100002)
+          if ((int)puVar5 < 0x100002)
           {
-            if (puVar6 == &DAT_80000020)
+            if (puVar5 == &DAT_80000020)
             {
               mode = StateHandlerDecodeHold(&local_40, &local_3c);
-              uVar7 = ControlFlag;
+              uVar6 = _BlockVramEntry_800d59a0._12_4_;
               if (mode != 0)
               {
+                /* WARNING: Subroutine does not return */
                 EnMessageQueueData(In_00, local_40, local_3c);
-                uVar7 = ControlFlag | 0x800000;
               }
             }
             else
             {
-              if ((int)puVar6 < -0x7fffffdf)
+              if ((int)puVar5 < -0x7fffffdf)
               {
-                if (puVar6 == (undefined *)0x80000000)
+                if (puVar5 == (undefined *)0x80000000)
                   goto LAB_8009c41c;
-                if (puVar6 == (undefined *)0x80000001)
+                if (puVar5 != (undefined *)0x80000001)
+                  goto LAB_8009ce40;
+                if (CurrentSection == 0)
                 {
-                  uVar7 = ControlFlag;
-                  if (CurrentSection == 0)
+                  if ((_BlockVramEntry_800d59a0._12_4_ & 0x10000000) == 0)
                   {
-                    if ((ControlFlag & 0x10000000U) == 0)
-                    {
-                      In_00 = &In->SectionList[0].Defer;
-                      mode = -0x7fffffff;
-                      goto LAB_8009cdcc;
-                    }
-                    Raziel.Mode = 8;
-                    mode = razSwitchVAnimCharacterGroup(In->CharacterInstance, 0, (int *)0x0, (int *)0x0);
-                    if (mode != 0)
-                    {
-                      G2EmulationSwitchAnimationCharacter(In, 0x1a, 0, 0, 1);
-                    }
-                    StateSwitchStateCharacterData(In, StateHandlerCompression, 0);
-                    uVar7 = 0xffffdfff;
-                    goto LAB_8009cdb0;
+                    In_00 = &In->SectionList[0].Defer;
+                    mode = -0x7fffffff;
+                    goto LAB_8009cdcc;
                   }
-                }
-                else
-                {
-                LAB_8009ce40:
-                  DefaultStateHandler(In, CurrentSection, Data);
-                  uVar7 = ControlFlag;
+                  _CHAR____800d5574 = 8;
+                  in_a3 = 0;
+                  mode = razSwitchVAnimCharacterGroup(In->CharacterInstance, 0, (int *)0x0, (int *)0x0);
+                  if (mode != 0)
+                  {
+                    in_a3 = 0;
+                    G2EmulationSwitchAnimationCharacter(In, 0x1a, 0, 0, 1);
+                  }
+                  StateSwitchStateCharacterData(In, StateHandlerCompression, 0);
+                  uVar6 = 0xffffdfff;
+                  goto LAB_8009cdb0;
                 }
               }
               else
               {
-                if (puVar6 == (undefined *)0x80000)
+                if (puVar5 == (undefined *)0x80000)
                 {
-                  Raziel.playerEvent = Raziel.playerEvent | 0x400;
+                  _CHAR____800d57c4 = _CHAR____800d57c4 | 0x400;
                   razSetPlayerEventHistory(0x400);
+                  in_a3 = 0;
                   StateSwitchStateData(In, CurrentSection, StateHandlerThrow2, 0);
-                  uVar7 = ControlFlag;
+                  uVar6 = _BlockVramEntry_800d59a0._12_4_;
                   if (CurrentSection == 1)
                   {
                     razLaunchForce(In->CharacterInstance);
-                    uVar7 = ControlFlag;
+                    uVar6 = _BlockVramEntry_800d59a0._12_4_;
                   }
                 }
                 else
                 {
-                  if (puVar6 != (undefined *)0x100000)
-                    goto LAB_8009ce40;
-                  instance = (_Instance *)((int)&(pp_Var8[0x48]->node).prev + 1);
-                  pp_Var8[0x48] = instance;
-                  if (*(int *)(&((__AttackItem *)pRVar3->attackList[Raziel.currentAttack])->anim +
-                               (int)instance * 4) == 0)
+                  if (puVar5 == (undefined *)0x100000)
                   {
-                    pp_Var8[0x48] = (_Instance *)0x1;
-                  }
-                  Raziel.attack =
-                      *(__AttackItem **)(&((__AttackItem *)PlayerData->attackList[Raziel.currentAttack])->anim +
-                                         (int)pp_Var8[0x48] * 4);
-                  G2EmulationSwitchAnimationAlpha(In, CurrentSection, (uint)(Raziel.attack)->anim, 0,
-                                                  (uint)(Raziel.attack)->framesIn, 1, (uint)(Raziel.attack)->alphaIn);
-                  if (CurrentSection == 1)
-                  {
-                    startColor = (Raziel.attack)->ribbonStartColor;
-                    endColor = (Raziel.attack)->ribbonEndColor;
-                    instance = razGetHeldWeapon();
-                    if (instance == (_Instance *)0x0)
+                    instance = (_Instance *)((int)&(pp_Var7[0x48]->node).prev + 1);
+                    pp_Var7[0x48] = instance;
+                    if (*(int *)((int)instance * 4 +
+                                 *(int *)(_CHAR____800d5664 * 4 + *(int *)(mode + 0x10))) == 0)
                     {
-                      instance = In->CharacterInstance;
+                      pp_Var7[0x48] = (_Instance *)0x1;
                     }
-                    else
+                    _CHAR____800d565c =
+                        *(byte **)((int)pp_Var7[0x48] * 4 +
+                                   *(int *)(_CHAR____800d5664 * 4 + *(int *)(_PlayerData + 0x10)));
+                    G2EmulationSwitchAnimationAlpha(In, CurrentSection, (uint)*_CHAR____800d565c, 0,
+                                                    (uint)_CHAR____800d565c[1], 1, (uint)_CHAR____800d565c[2]);
+                    if (CurrentSection == 1)
                     {
-                      instance = razGetHeldWeapon();
-                      uVar5 = INSTANCE_Query(instance, 2);
-                      if ((uVar5 & 0x20) == 0)
+                      startColor = *(long *)(_CHAR____800d565c + 0x14);
+                      endColor = *(long *)(_CHAR____800d565c + 0x18);
+                      p_Var4 = razGetHeldWeapon();
+                      instance = _CHAR____800d5668;
+                      if (p_Var4 != (_Instance *)0x0)
                       {
-                        if (Raziel.Senses.heldClass == 0x1000)
-                        {
-                          startColor = REAVER_GetGlowColor(instance);
-                          endColor = 0;
-                        }
+                        instance = razGetHeldWeapon();
+                        /* WARNING: Subroutine does not return */
+                        INSTANCE_Query(instance, 2);
                       }
-                      else
-                      {
-                        uVar5 = INSTANCE_Query(instance, 3);
-                        if ((uVar5 & 0x10000) != 0)
-                        {
-                          startColor = PlayerData->nonBurningRibbonStartColor;
-                          endColor = PlayerData->nonBurningRibbonEndColor;
-                        }
-                      }
+                      _CHAR____800d5668 = (_Instance *)0x0;
+                      _CHAR____800d566c = instance;
+                      FX_StartRibbon(In->CharacterInstance, (ushort)_CHAR____800d565c[0xb],
+                                     (ushort)_CHAR____800d565c[0xc], 0, (uint)_CHAR____800d565c[0xd],
+                                     (uint)_CHAR____800d565c[0xe],
+                                     (int)*(short *)(_CHAR____800d565c + 0x12), startColor, endColor);
                     }
-                    Raziel.attackLastHit = Raziel.attackCurrentHit;
-                    Raziel.attackCurrentHit = (_Instance *)0x0;
-                    FX_StartRibbon(instance, (ushort)(Raziel.attack)->ribbonStartSegment,
-                                   (ushort)(Raziel.attack)->ribbonEndSegment, 0,
-                                   (uint)(Raziel.attack)->ribbonLifeTime,
-                                   (uint)(Raziel.attack)->ribbonFaceLifeTime,
-                                   (int)(short)(Raziel.attack)->ribbonStartOpacity, startColor,
-                                   endColor);
+                    /* WARNING: Subroutine does not return */
+                    EnMessageQueueData(&In->SectionList[CurrentSection].Defer, (int)&DAT_00100002, 0);
                   }
-                  EnMessageQueueData(&In->SectionList[CurrentSection].Defer, (int)&DAT_00100002, 0);
-                  PurgeMessageQueue(&In->SectionList[CurrentSection].Event);
-                  uVar7 = ControlFlag;
+                LAB_8009ce40:
+                  DefaultStateHandler(In, CurrentSection, Data);
+                  uVar6 = _BlockVramEntry_800d59a0._12_4_;
                 }
               }
             }
           }
           else
           {
-            if (puVar6 == &DAT_00100015)
+            if (puVar5 == &DAT_00100015)
             {
-              if ((Raziel.steeringMode == 0xf) && ((*PadData & 0x8000000fU) != 0))
+              if ((_CHAR____800d559c == 0xf) && ((*gameTracker._4_4_ & 0x8000000f) != 0))
               {
                 SteerSwitchMode(In->CharacterInstance, 2);
-                uVar7 = ControlFlag;
+                uVar6 = _BlockVramEntry_800d59a0._12_4_;
               }
               else
               {
                 SteerSwitchMode(In->CharacterInstance, 0);
-                uVar7 = ControlFlag;
+                uVar6 = _BlockVramEntry_800d59a0._12_4_;
               }
             }
             else
             {
-              if ((int)puVar6 < 0x100016)
+              if ((int)puVar5 < 0x100016)
               {
-                if (puVar6 == &DAT_00100002)
+                if (puVar5 == &DAT_00100002)
                 {
-                  Raziel.attackFlags = 0;
-                  uVar7 = ControlFlag;
+                  _CHAR____800d5660 = 0;
                 }
                 else
                 {
-                  if (puVar6 != &DAT_00100004)
+                  if (puVar5 != &DAT_00100004)
                     goto LAB_8009ce40;
                   if (CurrentSection == 1)
                   {
                     DisableWristCollision(In->CharacterInstance, 2);
                     DisableWristCollision(In->CharacterInstance, 1);
-                    Raziel.dropOffHeight = 0x100;
-                    Raziel.fallZVelocity = -0x60;
+                    _CHAR____800d5608 = 0x100;
+                    _CHAR____800d560a = 0xffa0;
                     instance = razGetHeldWeapon();
                     if (instance != (_Instance *)0x0)
                     {
+                      /* WARNING: Subroutine does not return */
                       INSTANCE_Post(instance, 0x200005, 0);
-                      INSTANCE_Post(instance, 0x200003, 7);
                     }
                   }
-                  uVar7 = 0xff7fffff;
+                  uVar6 = 0xff7fffff;
                 LAB_8009cdb0:
-                  uVar7 = ControlFlag & uVar7;
+                  uVar6 = _BlockVramEntry_800d59a0._12_4_ & uVar6;
                 }
               }
               else
               {
-                if (puVar6 == (undefined *)0x800010)
+                if (puVar5 == (undefined *)0x800010)
                 {
                   NewProcess = StateHandlerThrow2;
                   goto LAB_8009cbf0;
                 }
-                uVar7 = ControlFlag;
-                if (puVar6 != (undefined *)0x1000001)
+                if (puVar5 != (undefined *)0x1000001)
                   goto LAB_8009ce40;
               }
             }
@@ -687,75 +583,70 @@ LAB_8009bf34:
       }
       else
       {
-        if (puVar6 == (undefined *)0x2000000)
+        if (puVar5 == (undefined *)0x2000000)
         {
         LAB_8009c41c:
-          Raziel.attack =
-              *(__AttackItem **)(&((__AttackItem *)PlayerData->attackList[Raziel.currentAttack])->anim +
-                                 (int)pp_Var8[0x48] * 4);
-          if ((local_34 == (uint)(Raziel.attack)->anim) &&
-              ((int)(uint)(Raziel.attack)->ignoreDelay <= local_38))
+          _CHAR____800d565c =
+              *(byte **)((int)pp_Var7[0x48] * 4 +
+                         *(int *)(_CHAR____800d5664 * 4 + *(int *)(_PlayerData + 0x10)));
+          if ((local_34 == (uint)*_CHAR____800d565c) &&
+              ((int)(uint)_CHAR____800d565c[5] <= local_38))
           {
-            Raziel.attackFlags = Raziel.attackFlags | 4;
+            _CHAR____800d5660 = _CHAR____800d5660 | 4;
           }
-          uVar7 = ControlFlag;
-          if ((CurrentSection == 1) &&
-              (uVar7 = ControlFlag, Raziel.glowEffect != (_FXGlowEffect *)0x0))
+          if ((CurrentSection == 1) && (_CHAR____800d5670 != (_FXGlowEffect *)0x0))
           {
-            FX_StopGlowEffect(Raziel.glowEffect, 0);
-            Raziel.glowEffect = (_FXGlowEffect *)0x0;
-            uVar7 = ControlFlag;
+            FX_StopGlowEffect(_CHAR____800d5670, 0);
+            _CHAR____800d5670 = (_FXGlowEffect *)0x0;
+            uVar6 = _BlockVramEntry_800d59a0._12_4_;
           }
         }
         else
         {
-          if ((int)puVar6 < 0x2000001)
+          if ((int)puVar5 < 0x2000001)
           {
-            if (puVar6 == (undefined *)0x100001f)
+            if (puVar5 == (undefined *)0x100001f)
             {
-              uVar7 = ControlFlag;
               if ((CurrentSection == 1) &&
-                  (instance = (_Instance *)p_Var4->Data, uVar7 = ControlFlag,
+                  (instance = (_Instance *)p_Var3->Data,
                    *(_Instance **)((int)&instance->node + 4) != (_Instance *)0x0))
               {
                 mode = SetMonsterHitData(*(_Instance **)&instance->node, (_Instance *)0x0,
                                          (int)instance->prev,
-                                         (uint)(Raziel.attack)->knockBackDistance,
-                                         (uint)(Raziel.attack)->knockBackFrames);
+                                         (uint) * (ushort *)(_CHAR____800d565c + 0x20),
+                                         (uint)_CHAR____800d565c[0xf]);
+                /* WARNING: Subroutine does not return */
                 INSTANCE_Post(*(_Instance **)((int)&instance->node + 4), 0x100001f, mode);
-                uVar7 = ControlFlag;
               }
             }
             else
             {
-              if ((int)puVar6 < 0x1000020)
+              if ((int)puVar5 < 0x1000020)
               {
-                if (puVar6 == (undefined *)0x100000a)
+                if (puVar5 == (undefined *)0x100000a)
                 {
-                  if (p_Var4->Data == 0)
+                  if (p_Var3->Data == 0)
                   {
-                    uVar7 = ControlFlag | 0x20;
+                    uVar6 = _BlockVramEntry_800d59a0._12_4_ | 0x20;
                     if (CurrentSection == 1)
                     {
                       mode = 0x48;
                     LAB_8009caf4:
-                      ControlFlag = ControlFlag | 0x20;
+                      _BlockVramEntry_800d59a0._12_4_ = _BlockVramEntry_800d59a0._12_4_ | 0x20;
+                      in_a3 = 3;
                       G2EmulationSwitchAnimationCharacter(In, mode, 0, 3, CurrentSection);
-                      uVar7 = ControlFlag;
-                      if ((Raziel.Senses.EngagedMask & 0x200) != 0)
+                      uVar6 = _BlockVramEntry_800d59a0._12_4_;
+                      if ((_CHAR____800d55f0 & 0x200) != 0)
                       {
-                        mode = 0x100000a;
-                        instance = Raziel.Senses.EngagedList[9].instance;
-                      LAB_8009cb24:
-                        INSTANCE_Post(instance, mode, 0);
-                        uVar7 = ControlFlag;
+                        /* WARNING: Subroutine does not return */
+                        INSTANCE_Post(*(_Instance **)(_CHAR____800d55ec + 0x48), 0x100000a, 0);
                       }
                     }
                   }
                   else
                   {
                     razSetPlayerEventHistory(0x80);
-                    ControlFlag = ControlFlag | 0x40000;
+                    _BlockVramEntry_800d59a0._12_4_ = _BlockVramEntry_800d59a0._12_4_ | 0x40000;
                     if (CurrentSection == 2)
                     {
                       NewAnim = 0;
@@ -769,24 +660,25 @@ LAB_8009bf34:
                       mode = CurrentSection;
                     }
                     G2EmulationSwitchAnimation(In, mode, NewAnim, 0, 3, local_54);
+                    in_a3 = 0;
                     StateSwitchStateData(In, CurrentSection, StateHandlerCannedReaction, 0);
-                    uVar7 = ControlFlag;
-                    if ((CurrentSection == 0) &&
-                        (uVar7 = ControlFlag, (Raziel.Senses.EngagedMask & 0x200) != 0))
+                    uVar6 = _BlockVramEntry_800d59a0._12_4_;
+                    if ((CurrentSection == 0) && ((_CHAR____800d55f0 & 0x200) != 0))
                     {
-                      razAlignYRotMoveInterp(In->CharacterInstance, Raziel.Senses.EngagedList[9].instance, 0x208,
-                                             '\0', 3, 0);
-                      uVar7 = ControlFlag;
+                      in_a3 = 0;
+                      razAlignYRotMoveInterp(In->CharacterInstance, *(_Instance **)(_CHAR____800d55ec + 0x48),
+                                             0x208, '\0', 3, 0);
+                      uVar6 = _BlockVramEntry_800d59a0._12_4_;
                     }
                   }
                 }
                 else
                 {
-                  if (puVar6 != (undefined *)0x1000018)
+                  if (puVar5 != (undefined *)0x1000018)
                     goto LAB_8009ce40;
-                  if (p_Var4->Data == 0)
+                  if (p_Var3->Data == 0)
                   {
-                    uVar7 = ControlFlag | 0x20;
+                    uVar6 = _BlockVramEntry_800d59a0._12_4_ | 0x20;
                     if (CurrentSection == 1)
                     {
                       mode = 0x8a;
@@ -796,7 +688,7 @@ LAB_8009bf34:
                   else
                   {
                     razSetPlayerEventHistory(0x100);
-                    ControlFlag = ControlFlag | 0x40000;
+                    _BlockVramEntry_800d59a0._12_4_ = _BlockVramEntry_800d59a0._12_4_ | 0x40000;
                     if (CurrentSection == 2)
                     {
                       NewAnim = 0;
@@ -811,196 +703,161 @@ LAB_8009bf34:
                       local_54 = 1;
                       mode = CurrentSection;
                     }
+                    in_a3 = 0;
                     G2EmulationSwitchAnimation(In, mode, NewAnim, 0, local_58, local_54);
-                    uVar7 = ControlFlag;
-                    if ((CurrentSection == 1) &&
-                        (uVar7 = ControlFlag, (Raziel.Senses.EngagedMask & 0x200) != 0))
+                    uVar6 = _BlockVramEntry_800d59a0._12_4_;
+                    if ((CurrentSection == 1) && ((_CHAR____800d55f0 & 0x200) != 0))
                     {
-                      Raziel.alarmTable = 900;
-                      razAlignYRotMoveInterp(In->CharacterInstance, Raziel.Senses.EngagedList[9].instance, 0x1e6,
-                                             '\0', 0x14, 0);
+                      _CHAR____800d5774 = 900;
+                      in_a3 = 0;
+                      razAlignYRotMoveInterp(In->CharacterInstance, *(_Instance **)(_CHAR____800d55ec + 0x48),
+                                             0x1e6, '\0', 0x14, 0);
                       (In->CharacterInstance->anim).section[1].swAlarmTable = (short *)0x800d5774;
-                      uVar7 = ControlFlag;
+                      uVar6 = _BlockVramEntry_800d59a0._12_4_;
                     }
                   }
                 }
               }
               else
               {
-                if (puVar6 == (undefined *)0x1000023)
+                if (puVar5 == (undefined *)0x1000023)
                 {
-                  if (p_Var4->Data == 0)
+                  if (p_Var3->Data == 0)
                   {
-                    ControlFlag = ControlFlag | 0x20;
+                    _BlockVramEntry_800d59a0._12_4_ = _BlockVramEntry_800d59a0._12_4_ | 0x20;
                   }
-                  uVar7 = ControlFlag;
-                  if ((CurrentSection == 0) &&
-                      (razSwitchVAnimCharacterSingle(In->CharacterInstance, 0x18, (int *)0x0, (int *)0x0),
-                       uVar7 = ControlFlag, (Raziel.Senses.EngagedMask & 0x200) != 0))
+                  uVar6 = _BlockVramEntry_800d59a0._12_4_;
+                  if (CurrentSection == 0)
                   {
-                    INSTANCE_Post(Raziel.Senses.EngagedList[9].instance, 0x1000023, p_Var4->Data);
-                    razAlignYRotMoveInterp(In->CharacterInstance, Raziel.Senses.EngagedList[9].instance, 0x1e6,
-                                           '\0', 0x14, 0);
-                    uVar7 = ControlFlag;
-                    if (p_Var4->Data != 0)
+                    in_a3 = 0;
+                    razSwitchVAnimCharacterSingle(In->CharacterInstance, 0x18, (int *)0x0, (int *)0x0);
+                    uVar6 = _BlockVramEntry_800d59a0._12_4_;
+                    if ((_CHAR____800d55f0 & 0x200) != 0)
                     {
-                      Raziel.alarmTable = 0xdac;
-                      (In->CharacterInstance->anim).section[0].swAlarmTable = (short *)0x800d5774;
-                      uVar7 = ControlFlag;
+                      /* WARNING: Subroutine does not return */
+                      INSTANCE_Post(*(_Instance **)(_CHAR____800d55ec + 0x48), 0x1000023, p_Var3->Data);
                     }
                   }
                 }
                 else
                 {
-                  if (puVar6 != (undefined *)0x1000024)
+                  if (puVar5 != (undefined *)0x1000024)
                     goto LAB_8009ce40;
                   local_30 = 1;
-                  uVar7 = ControlFlag;
                 }
               }
             }
           }
           else
           {
-            uVar7 = ControlFlag;
-            if (puVar6 != (undefined *)0x4020000)
+            if (puVar5 != (undefined *)0x4020000)
             {
-              if ((int)puVar6 < 0x4020001)
+              if ((int)puVar5 < 0x4020001)
               {
-                if (puVar6 == (undefined *)0x2000002)
+                if (puVar5 == (undefined *)0x2000002)
                 {
-                  uVar7 = ControlFlag;
                   if (CurrentSection == 1)
                   {
-                    instance = (_Instance *)p_Var4->Data;
-                    mode = (int)instance->prev * (uint)(Raziel.attack)->hitPowerScale;
+                    instance = (_Instance *)p_Var3->Data;
+                    mode = (int)instance->prev * (uint) * (ushort *)(_CHAR____800d565c + 0x22);
                     local_2c = *(_Instance **)&instance->node;
                     if (mode < 0)
                     {
                       mode = mode + 0xfff;
                     }
-                    mode = SetMonsterHitData(In->CharacterInstance, Raziel.attackLastHit, mode >> 0xc,
-                                             (uint)(Raziel.attack)->knockBackDistance,
-                                             (uint)(Raziel.attack)->knockBackFrames);
+                    mode = SetMonsterHitData(In->CharacterInstance, _CHAR____800d566c, mode >> 0xc,
+                                             (uint) * (ushort *)(_CHAR____800d565c + 0x20),
+                                             (uint)_CHAR____800d565c[0xf]);
+                    /* WARNING: Subroutine does not return */
                     INSTANCE_Post(*(_Instance **)&instance->node, 0x1000000, mode);
-                    if (((Raziel.attack)->handsToCollide & 2) != 0)
-                    {
-                      mode = SetFXHitData(In->CharacterInstance, 0x29, 0x20, 0x100);
-                      INSTANCE_Post(*(_Instance **)&instance->node, 0x400000, mode);
-                    }
-                    if (((Raziel.attack)->handsToCollide & 1) != 0)
-                    {
-                      mode = SetFXHitData(In->CharacterInstance, 0x1f, 0x20, 0x100);
-                      INSTANCE_Post(*(_Instance **)&instance->node, 0x400000, mode);
-                    }
-                    Raziel.attackCurrentHit = *(_Instance **)&instance->node;
-                    uVar7 = ControlFlag;
                   }
                 }
                 else
                 {
-                  if (puVar6 != (undefined *)0x4010080)
+                  if (puVar5 != (undefined *)0x4010080)
                     goto LAB_8009ce40;
-                  uVar7 = ControlFlag;
                   if (CurrentSection == 0)
                   {
-                    if (p_Var4->Data == 0)
+                    if (p_Var3->Data == 0)
                     {
                       razSetPauseTranslation(In->CharacterInstance);
-                      uVar7 = ControlFlag;
+                      uVar6 = _BlockVramEntry_800d59a0._12_4_;
                     }
                     else
                     {
                       razResetPauseTranslation(In->CharacterInstance);
-                      uVar7 = ControlFlag;
+                      uVar6 = _BlockVramEntry_800d59a0._12_4_;
                     }
                   }
                 }
               }
               else
               {
-                if (puVar6 == (undefined *)0x8000000)
+                if (puVar5 == (undefined *)0x8000000)
                 {
-                  if (((Raziel.attackFlags & 4U) == 0) ||
-                      (*(int *)(&((__AttackItem *)PlayerData->attackList[Raziel.currentAttack])->switchDelay + (int)pp_Var8[0x48] * 4) == 0))
+                  if (((_CHAR____800d5660 & 4) == 0) ||
+                      (*(int *)((int)pp_Var7[0x48] * 4 +
+                                *(int *)(_CHAR____800d5664 * 4 + *(int *)(_PlayerData + 0x10)) + 4) == 0))
                   {
-                    if (Raziel.currentAttack < 10)
+                    if (_CHAR____800d5664 < 10)
                     {
-                      if ((Raziel.nothingCounter < 7) && ((Raziel.Senses.EngagedMask & 0x40) != 0))
+                      if ((6 < _CHAR____800d5758) || ((_CHAR____800d55f0 & 0x40) == 0))
                       {
-                        NewProcess = StateHandlerAutoFace;
-                        goto LAB_8009cbf0;
+                        /* WARNING: Subroutine does not return */
+                        SetPhysicsWallCrawlData(1, 0, (uint)_CHAR____800d565c[3], in_a3);
                       }
-                      mode = SetControlInitIdleData(1, 0, (uint)(Raziel.attack)->framesOut);
-                      StateSwitchStateData(In, CurrentSection, StateHandlerIdle, mode);
-                      uVar7 = ControlFlag;
+                      NewProcess = StateHandlerAutoFace;
                     }
                     else
                     {
-                      if ((*PadData & 0x8000000fU) == 0)
+                      if ((*gameTracker._4_4_ & 0x8000000f) == 0)
                       {
                         StateSwitchStateCharacterData(In, StateHandlerStopMove, 0x3c);
-                        uVar7 = ControlFlag;
+                        uVar6 = _BlockVramEntry_800d59a0._12_4_;
+                        goto LAB_8009ce50;
                       }
-                      else
-                      {
-                        NewProcess = StateHandlerMove;
-                      LAB_8009cbf0:
-                        StateSwitchStateData(In, CurrentSection, NewProcess, 0);
-                        uVar7 = ControlFlag;
-                      }
+                      NewProcess = StateHandlerMove;
                     }
+                  LAB_8009cbf0:
+                    in_a3 = 0;
+                    StateSwitchStateData(In, CurrentSection, NewProcess, 0);
+                    uVar6 = _BlockVramEntry_800d59a0._12_4_;
                   }
                   else
                   {
-                    if (Raziel.currentAttack < 10)
+                    if (_CHAR____800d5664 < 10)
                     {
                       mode = 0x100000;
+                    LAB_8009cdcc:
+                      /* WARNING: Subroutine does not return */
+                      EnMessageQueueData(In_00, mode, 0);
                     }
-                    else
+                    if ((*gameTracker._4_4_ & 0x8000000f) != 0)
                     {
-                      uVar7 = ControlFlag;
-                      if ((*PadData & 0x8000000fU) == 0)
-                        goto LAB_8009ce50;
                       mode = 0x100000;
+                      goto LAB_8009cdcc;
                     }
-                  LAB_8009cdcc:
-                    EnMessageQueueData(In_00, mode, 0);
-                    uVar7 = ControlFlag;
                   }
                 }
                 else
                 {
-                  if (puVar6 != (undefined *)0x8000004)
+                  if (puVar5 != (undefined *)0x8000004)
                     goto LAB_8009ce40;
-                  uVar7 = ControlFlag;
-                  if ((Raziel.Senses.EngagedMask & 0x200) != 0)
+                  if ((_CHAR____800d55f0 & 0x200) != 0)
                   {
-                    instance = Raziel.Senses.EngagedList[9].instance;
-                    if (Raziel.Senses.heldClass == 0x1000)
+                    instance = *(_Instance **)(_CHAR____800d55ec + 0x48);
+                    if (_CHAR____800d5600 != 0x1000)
                     {
-                      if (Raziel.currentSoulReaver == 6)
-                      {
-                        INSTANCE_Post(instance, 0x100000c, 0x20);
-                        uVar7 = ControlFlag;
-                      }
-                      else
-                      {
-                        INSTANCE_Post(instance, 0x1000023, 0x1000);
-                        uVar7 = ControlFlag;
-                      }
-                    }
-                    else
-                    {
+                      /* WARNING: Subroutine does not return */
                       INSTANCE_Post(instance, 0x100000c, 0x20);
-                      instance = razGetHeldWeapon();
-                      uVar7 = ControlFlag;
-                      if (instance != (_Instance *)0x0)
-                      {
-                        mode = 0x800029;
-                        goto LAB_8009cb24;
-                      }
                     }
+                    if (_CHAR____800d5648 != 6)
+                    {
+                      /* WARNING: Subroutine does not return */
+                      INSTANCE_Post(instance, 0x1000023, 0x1000);
+                    }
+                    /* WARNING: Subroutine does not return */
+                    INSTANCE_Post(instance, 0x100000c, 0x20);
                   }
                 }
               }
@@ -1010,7 +867,7 @@ LAB_8009bf34:
       }
     }
   LAB_8009ce50:
-    ControlFlag = uVar7;
+    _BlockVramEntry_800d59a0._12_4_ = uVar6;
     DeMessageQueue((__MessageQueue *)(&In->CharacterInstance + CurrentSection * 0x47 + 3));
   } while (true);
 }
@@ -1051,13 +908,16 @@ LAB_8009bf34:
 /* end block 2 */
 // End Line: 1342
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void StateHandlerCannedReaction(__CharacterState *In, int CurrentSection, int Data)
 
 {
   __Event *p_Var1;
-  _Instance *Inst;
+  _Instance *weapon;
   int Data_00;
   undefined *puVar2;
+  int in_a3;
 
   do
   {
@@ -1070,82 +930,74 @@ void StateHandlerCannedReaction(__CharacterState *In, int CurrentSection, int Da
     if (puVar2 == &DAT_00100014)
     {
     LAB_8009d0b8:
-      Data_00 = SetControlInitIdleData(0, 0, 3);
-      StateSwitchStateData(In, CurrentSection, StateHandlerIdle, Data_00);
-      Raziel.Mode = 1;
+      /* WARNING: Subroutine does not return */
+      SetPhysicsWallCrawlData(0, 0, 3, in_a3);
     }
-    else
+    if ((int)puVar2 < 0x100015)
     {
-      if ((int)puVar2 < 0x100015)
+      if (puVar2 != &DAT_80000020)
       {
-        if (puVar2 != &DAT_80000020)
+        if ((int)puVar2 < -0x7fffffdf)
         {
-          if ((int)puVar2 < -0x7fffffdf)
+          if ((puVar2 != (undefined *)0x80000000) && (puVar2 != &DAT_80000008))
+            goto LAB_8009d190;
+        }
+        else
+        {
+          if (puVar2 == &DAT_00100001)
           {
-            if ((puVar2 != (undefined *)0x80000000) && (puVar2 != &DAT_80000008))
-              goto LAB_8009d190;
+            if (CurrentSection == 0)
+            {
+              _CHAR____800d5774 = 0x1194;
+              _CHAR____800d5574 = 0x10000;
+              _BlockVramEntry_800d59a0._12_4_ = 0x1041009;
+              PhysicsMode.next = (_BlockVramEntry *)&DAT_00000003;
+              SteerSwitchMode(In->CharacterInstance, 0);
+              (In->CharacterInstance->anim).section[0].swAlarmTable = (short *)0x800d5774;
+            }
           }
           else
           {
-            if (puVar2 == &DAT_00100001)
+            if (puVar2 != &DAT_00100004)
+              goto LAB_8009d190;
+            if (CurrentSection == 1)
             {
-              if (CurrentSection == 0)
-              {
-                Raziel.alarmTable = 0x1194;
-                Raziel.Mode = 0x10000;
-                ControlFlag = 0x1041009;
-                PhysicsMode = 3;
-                SteerSwitchMode(In->CharacterInstance, 0);
-                (In->CharacterInstance->anim).section[0].swAlarmTable = (short *)0x800d5774;
-              }
-            }
-            else
-            {
-              if (puVar2 != &DAT_00100004)
-                goto LAB_8009d190;
-              if (CurrentSection == 1)
-              {
-                G2EmulationSwitchAnimationSync(In, 2, 1, 4);
-              }
+              in_a3 = 4;
+              G2EmulationSwitchAnimationSync(In, 2, 1, 4);
             }
           }
         }
       }
-      else
+      goto LAB_8009d198;
+    }
+    if (puVar2 == (undefined *)0x8000000)
+      goto LAB_8009d0b8;
+    if ((int)puVar2 < 0x8000001)
+    {
+      if ((0x1000001 < (int)puVar2) || ((int)puVar2 < 0x1000000))
       {
-        if (puVar2 == (undefined *)0x8000000)
-          goto LAB_8009d0b8;
-        if ((int)puVar2 < 0x8000001)
+      LAB_8009d190:
+        DefaultStateHandler(In, CurrentSection, Data);
+      }
+    }
+    else
+    {
+      if (puVar2 != (undefined *)0x8000003)
+      {
+        if (puVar2 == (undefined *)0x8000004)
         {
-          if ((0x1000001 < (int)puVar2) || ((int)puVar2 < 0x1000000))
-          {
-          LAB_8009d190:
-            DefaultStateHandler(In, CurrentSection, Data);
-          }
+          weapon = razGetHeldItem();
+          /* WARNING: Subroutine does not return */
+          INSTANCE_Post(weapon, 0x800008, 2);
         }
-        else
-        {
-          if (puVar2 == (undefined *)0x8000003)
-          {
-            if (CurrentSection != 0)
-              goto LAB_8009d198;
-            Inst = razGetHeldItem();
-          }
-          else
-          {
-            if (puVar2 != (undefined *)0x8000004)
-              goto LAB_8009d190;
-            Inst = razGetHeldItem();
-            INSTANCE_Post(Inst, 0x800008, 2);
-            razReaverOn();
-          }
-          if ((Raziel.Senses.EngagedMask & 0x200) != 0)
-          {
-            Data_00 = SetMonsterImpaleData(Inst, &In->CharacterInstance->rotation,
-                                           &In->CharacterInstance->position, 0x208);
-            INSTANCE_Post(Raziel.Senses.EngagedList[9].instance, 0x100000a, Data_00);
-          }
-        }
+        goto LAB_8009d190;
+      }
+      if ((CurrentSection == 0) && (weapon = razGetHeldItem(), (_CHAR____800d55f0 & 0x200) != 0))
+      {
+        Data_00 = SetMonsterImpaleData(weapon, &In->CharacterInstance->rotation,
+                                       &In->CharacterInstance->position, 0x208);
+        /* WARNING: Subroutine does not return */
+        INSTANCE_Post(*(_Instance **)(_CHAR____800d55ec + 0x48), 0x100000a, Data_00);
       }
     }
   LAB_8009d198:
@@ -1190,15 +1042,17 @@ void StateHandlerCannedReaction(__CharacterState *In, int CurrentSection, int Da
 // End Line: 1610
 
 /* WARNING: Type propagation algorithm not settling */
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void StateHandlerStumble(__CharacterState *In, int CurrentSection, int Data)
 
 {
   __Event *p_Var1;
-  int ticks;
   _Instance *p_Var2;
+  int ticks;
   _Instance **pp_Var3;
   undefined *ID;
+  _Instance *in_a3;
 
   do
   {
@@ -1212,9 +1066,9 @@ void StateHandlerStumble(__CharacterState *In, int CurrentSection, int Data)
     {
       if (CurrentSection == 0)
       {
-        ControlFlag = 8;
+        _BlockVramEntry_800d59a0._12_4_ = 8;
         SetPhysics(In->CharacterInstance, -0x10, 0, 0, 0);
-        PhysicsMode = 0;
+        PhysicsMode.next = (_BlockVramEntry *)0x0;
         SteerSwitchMode(In->CharacterInstance, 0);
         razResetMotion(In->CharacterInstance);
         if (p_Var1->Data == 0)
@@ -1233,6 +1087,7 @@ void StateHandlerStumble(__CharacterState *In, int CurrentSection, int Data)
         SetTimer(ticks);
       }
       G2Anim_SetSpeedAdjustment(&In->CharacterInstance->anim, 0x800);
+      in_a3 = (_Instance *)0x0;
       G2EmulationSwitchAnimation(In, CurrentSection, 0x80, 0, 3, 2);
     }
     else
@@ -1252,10 +1107,7 @@ void StateHandlerStumble(__CharacterState *In, int CurrentSection, int Data)
               if ((int)ID < -0x7ffffff7)
               {
                 if (ID != (undefined *)0x80000000)
-                {
-                LAB_8009d5a8:
-                  DefaultStateHandler(In, CurrentSection, Data);
-                }
+                  goto LAB_8009d5a8;
               }
               else
               {
@@ -1270,33 +1122,36 @@ void StateHandlerStumble(__CharacterState *In, int CurrentSection, int Data)
             {
               if ((int)ID < 0x40006)
               {
-                if (ID != &DAT_00040003)
-                  goto LAB_8009d5a8;
-                if (CurrentSection == 0)
+                if (ID == &DAT_00040003)
                 {
-                  p_Var2 = (_Instance *)p_Var1->Data;
-                  G2EmulationInstanceToInstanceSwitchAnimationCharacter(*(_Instance **)&p_Var2->node, *(_Instance **)((int)&p_Var2->node + 4),
-                                                                        (int)p_Var2->next, (int)p_Var2->prev, (int)p_Var2->instanceID,
-                                                                        (int)p_Var2->flags);
+                  if (CurrentSection == 0)
+                  {
+                    p_Var2 = (_Instance *)p_Var1->Data;
+                    in_a3 = p_Var2->prev;
+                    G2EmulationInstanceToInstanceSwitchAnimationCharacter(*(_Instance **)&p_Var2->node, *(_Instance **)((int)&p_Var2->node + 4),
+                                                                          (int)p_Var2->next, (int)in_a3, (int)p_Var2->instanceID,
+                                                                          (int)p_Var2->flags);
+                  }
+                  goto LAB_8009d5b0;
                 }
               }
               else
               {
-                if (ID != (undefined *)0x100000)
-                  goto LAB_8009d5a8;
-                if (((*PadData & LONG_800cf574) == 0) || ((*PadData & LONG_800cf570) == 0))
+                if (ID == (undefined *)0x100000)
                 {
-                  ticks = SetControlInitIdleData(0, 0, 0xc);
-                  StateSwitchStateCharacterData(In, StateHandlerIdle, ticks);
-                }
-                else
-                {
-                  Raziel.returnState = StateHandlerIdle;
-                  ticks = SetControlInitIdleData(0, 0, 0xc);
-                  StateSwitchStateCharacterData(In, StateHandlerIdle, ticks);
-                  StateSwitchStateCharacterData(In, StateHandlerLookAround, 0);
+                  if (((*gameTracker._4_4_ & LONG_800cf574) != 0) &&
+                      ((*gameTracker._4_4_ & LONG_800cf570) != 0))
+                  {
+                    _CHAR____800d571c = StateHandlerIdle;
+                    /* WARNING: Subroutine does not return */
+                    SetPhysicsWallCrawlData(0, 0, 0xc, (int)in_a3);
+                  }
+                  /* WARNING: Subroutine does not return */
+                  SetPhysicsWallCrawlData(0, 0, 0xc, (int)in_a3);
                 }
               }
+            LAB_8009d5a8:
+              DefaultStateHandler(In, CurrentSection, Data);
             }
           }
         }
@@ -1305,7 +1160,7 @@ void StateHandlerStumble(__CharacterState *In, int CurrentSection, int Data)
       {
         if (ID == (undefined *)0x1000000)
         {
-          if ((gameTrackerX.debugFlags2 & 0x800U) != 0)
+          if ((vmClock & 0x800U) != 0)
           {
             LoseHealth(*(int *)(p_Var1->Data + 0xc));
           }
@@ -1318,22 +1173,28 @@ void StateHandlerStumble(__CharacterState *In, int CurrentSection, int Data)
             {
               if ((int)ID < 0x10000a)
               {
-                if (ID != &DAT_00100004)
-                  goto LAB_8009d5a8;
-                G2Anim_SetSpeedAdjustment(&In->CharacterInstance->anim, 0x1000);
+                if (ID == &DAT_00100004)
+                {
+                  G2Anim_SetSpeedAdjustment(&In->CharacterInstance->anim, 0x1000);
+                  goto LAB_8009d5b0;
+                }
               }
               else
               {
-                if (ID != &DAT_00100015)
-                  goto LAB_8009d5a8;
-                ticks = STREAM_IsMorphInProgress();
-                ID = (undefined *)0x100000;
-                if (ticks != 0)
+                if (ID == &DAT_00100015)
                 {
-                  ID = &DAT_00100015;
+                  ticks = STREAM_IsMorphInProgress();
+                  ID = (undefined *)0x100000;
+                  if (ticks != 0)
+                  {
+                    ID = &DAT_00100015;
+                  }
+                  /* WARNING: Subroutine does not return */
+                  EnMessageQueueData((__MessageQueue *)(&CHAR____800d52ac + CurrentSection * 0x11c),
+                                     (int)ID, 0);
                 }
-                EnMessageQueueData(&Raziel.State.SectionList[CurrentSection].Defer, (int)ID, 0);
               }
+              goto LAB_8009d5a8;
             }
           }
           else
@@ -1355,7 +1216,7 @@ void StateHandlerStumble(__CharacterState *In, int CurrentSection, int Data)
                   if (pp_Var3[0x48] == (_Instance *)0x1)
                   {
                     pp_Var3[0x48] = (_Instance *)0x0;
-                    pp_Var3[0x47] = (_Instance *)&pp_Var3[0x47][-1].anim.rootTrans.z;
+                    pp_Var3[0x47] = (_Instance *)&pp_Var3[0x47][-1].oldPos.z;
                   }
                 }
               }
@@ -1364,6 +1225,7 @@ void StateHandlerStumble(__CharacterState *In, int CurrentSection, int Data)
         }
       }
     }
+  LAB_8009d5b0:
     DeMessageQueue(&In->SectionList[CurrentSection].Event);
   } while (true);
 }
@@ -1404,17 +1266,18 @@ void StateHandlerStumble(__CharacterState *In, int CurrentSection, int Data)
 /* end block 2 */
 // End Line: 1785
 
-/* WARNING: Type propagation algorithm not settling */
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void StateHandlerHitReaction(__CharacterState *In, int CurrentSection, int Data)
 
 {
   __Event *p_Var1;
   _Instance *instance;
-  int NewAnim;
   undefined *puVar2;
   code *NewProcess;
-  _Instance *p_Var3;
+  int NewAnim;
+  int in_a3;
+  undefined4 *puVar3;
 
   do
   {
@@ -1426,26 +1289,26 @@ void StateHandlerHitReaction(__CharacterState *In, int CurrentSection, int Data)
     puVar2 = (undefined *)p_Var1->ID;
     if (puVar2 == &DAT_00100001)
     {
-      p_Var3 = (_Instance *)p_Var1->Data;
+      puVar3 = (undefined4 *)p_Var1->Data;
       if (CurrentSection == 0)
       {
-        Raziel.attackedBy = *(_Instance **)&p_Var3->node;
+        _CHAR____800d5674 = *puVar3;
         instance = razGetHeldWeapon();
         if (instance != (_Instance *)0x0)
         {
           TurnOffCollisionPhysOb(instance, 7);
         }
-        if ((gameTrackerX.debugFlags2 & 0x800U) != 0)
+        if ((vmClock & 0x800U) != 0)
         {
-          LoseHealth((int)p_Var3->prev);
+          LoseHealth(puVar3[3]);
         }
-        PhysicsMode = 0;
-        Raziel.Mode = Raziel.Mode | 0x208000;
-        ControlFlag = ControlFlag & 0xf7ffffffU | 0x1008;
+        PhysicsMode.next = (_BlockVramEntry *)0x0;
+        _CHAR____800d5574 = _CHAR____800d5574 | 0x208000;
+        _BlockVramEntry_800d59a0._12_4_ = _BlockVramEntry_800d59a0._12_4_ & 0xf7ffffff | 0x1008;
         ResetPhysics(In->CharacterInstance, -0x10);
         SteerSwitchMode(In->CharacterInstance, 10);
       }
-      if ((int)p_Var3->prev < 0x1001)
+      if ((int)puVar3[3] < 0x1001)
       {
         NewAnim = 0x7d;
       }
@@ -1453,6 +1316,7 @@ void StateHandlerHitReaction(__CharacterState *In, int CurrentSection, int Data)
       {
         NewAnim = 0x38;
       }
+      in_a3 = 0;
       G2EmulationSwitchAnimation(In, CurrentSection, NewAnim, 0, 2, 1);
     }
     else
@@ -1480,13 +1344,12 @@ void StateHandlerHitReaction(__CharacterState *In, int CurrentSection, int Data)
               goto LAB_8009d830;
             if (CurrentSection == 0)
             {
-              if ((ControlFlag & 0x100000U) == 0)
+              if ((_BlockVramEntry_800d59a0._12_4_ & 0x100000) == 0)
               {
-                if ((Raziel.Mode & 0x40000U) == 0)
+                if ((_CHAR____800d5574 & 0x40000) == 0)
                 {
-                  NewAnim = SetControlInitIdleData(0, 0, 3);
-                  StateSwitchStateCharacterData(In, StateHandlerIdle, NewAnim);
-                  goto LAB_8009d838;
+                  /* WARNING: Subroutine does not return */
+                  SetPhysicsWallCrawlData(0, 0, 3, in_a3);
                 }
                 NewProcess = StateHandlerSwim;
               }
@@ -1500,7 +1363,6 @@ void StateHandlerHitReaction(__CharacterState *In, int CurrentSection, int Data)
         }
       }
     }
-  LAB_8009d838:
     DeMessageQueue(&In->SectionList[CurrentSection].Event);
   } while (true);
 }
@@ -1573,430 +1435,444 @@ void StateHandlerHitReaction(__CharacterState *In, int CurrentSection, int Data)
 /* end block 2 */
 // End Line: 2099
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void StateHandlerThrow2(__CharacterState *In, int CurrentSection, int Data)
 
 {
   byte bVar1;
   byte bVar2;
   byte bVar3;
+  short source;
   ushort uVar4;
-  RazielData *pRVar5;
-  uint uVar6;
-  __Event *p_Var7;
-  _Instance *Inst;
-  ulong uVar8;
-  undefined *puVar9;
+  uint uVar5;
+  __Event *Target;
+  _Instance *instance;
+  undefined *puVar6;
   __MessageQueue *In_00;
-  _Position *target;
-  int CurrentSection_00;
-  int local_54;
+  char *target;
+  int Data_00;
+  _Position *Target_00;
   ushort type;
-  int NewAnim;
+  _Rotation *Rot1;
   code *NewProcess;
-  ushort spinType;
-  _Instance **pp_Var10;
-  __State *p_Var11;
-  int local_58;
-  _Position local_40;
-  _Rotation _Stack56;
-  _Rotation _Stack48;
+  int in_a3;
+  _Instance **pp_Var7;
+  __State *p_Var8;
+  uint local_58;
+  int local_54;
 
-  uVar6 = G2EmulationQueryAnimation(In, CurrentSection);
-  p_Var11 = In->SectionList + CurrentSection;
-  pp_Var10 = &In->CharacterInstance + CurrentSection * 0x47;
+  Rot1 = (_Rotation *)Data;
+  uVar5 = G2EmulationQueryAnimation(In, CurrentSection);
+  p_Var8 = In->SectionList + CurrentSection;
+  pp_Var7 = &In->CharacterInstance + CurrentSection * 0x47;
   do
   {
-    p_Var7 = PeekMessageQueue(&p_Var11->Event);
-    if (p_Var7 == (__Event *)0x0)
+    Target = PeekMessageQueue(&p_Var8->Event);
+    if (Target == (__Event *)0x0)
     {
-      if ((CurrentSection == 1) && ((Raziel.Senses.EngagedMask & 0x80) != 0))
+      if ((CurrentSection == 1) && ((_CHAR____800d55f0 & 0x80) != 0))
       {
-        uVar8 = INSTANCE_Query(Raziel.Senses.EngagedList[7].instance, 0xc);
-        local_40.x = *(short *)(uVar8 + 0x14);
-        local_40.y = *(short *)(uVar8 + 0x18);
-        local_40.z = *(short *)(uVar8 + 0x1c);
-        PointAt(In->CharacterInstance, &local_40, &_Stack48);
+        /* WARNING: Subroutine does not return */
+        INSTANCE_Query(*(_Instance **)(_CHAR____800d55ec + 0x38), 0xc);
       }
       return;
     }
-    puVar9 = (undefined *)p_Var7->ID;
-    if (puVar9 == (undefined *)0x1000000)
+    puVar6 = (undefined *)Target->ID;
+    if (puVar6 == (undefined *)0x1000000)
     {
       if (CurrentSection == 0)
       {
-        if ((Raziel.Mode & 0x40000U) == 0)
+        if ((_CHAR____800d5574 & 0x40000) == 0)
         {
-          if (((ControlFlag & 0x4000U) == 0) && (Raziel.invincibleTimer == 0))
+          if (((_BlockVramEntry_800d59a0._12_4_ & 0x4000) == 0) && (_CHAR____800d5618 == 0))
           {
-            StateSwitchStateCharacterDataDefault(In, StateHandlerHitReaction, p_Var7->Data);
-            razSetFadeEffect(In->CharacterInstance->fadeValue, 0, -PlayerData->throwFadeOutRate);
-            CAMERA_ForceEndLookaroundMode(&theCamera);
+            StateSwitchStateCharacterDataDefault(In, StateHandlerHitReaction, Target->Data);
+            Target_00 = (_Position *)0x0;
+            Rot1 = (_Rotation *)-*(int *)(_PlayerData + 0x28);
+            razSetFadeEffect(In->CharacterInstance->fadeValue, 0, (int)Rot1);
+            instance = (_Instance *)&theCamera;
+            CAMERA_ForceEndLookaroundMode((Camera *)&theCamera);
+            PointAt(instance, Target_00, Rot1);
+            return;
           }
         }
         else
         {
-          if ((gameTrackerX.debugFlags2 & 0x800U) != 0)
+          if ((vmClock & 0x800U) != 0)
           {
-            LoseHealth(*(int *)(p_Var7->Data + 0xc));
+            instance = *(_Instance **)(Target->Data + 0xc);
+            LoseHealth((int)instance);
+            PointAt(instance, (_Position *)Target, Rot1);
+            return;
           }
         }
       }
     }
     else
     {
-      if ((int)puVar9 < 0x1000001)
+      if ((int)puVar6 < 0x1000001)
       {
-        if (puVar9 == (undefined *)0x100000)
+        if (puVar6 == (undefined *)0x100000)
         {
-          if ((Raziel.Mode & 0x40000U) == 0)
+          if ((_CHAR____800d5574 & 0x40000) == 0)
           {
-            local_54 = SetControlInitIdleData(0, 0, (uint)(Raziel.throwData)->framesOut);
-            StateSwitchStateData(In, CurrentSection, StateHandlerIdle, local_54);
-            if (((*PadData & LONG_800cf574) == 0) || ((*PadData & LONG_800cf570) == 0))
-              goto LAB_8009e2f0;
-            NewProcess = StateHandlerLookAround;
-            Raziel.returnState = StateHandlerIdle;
+            /* WARNING: Subroutine does not return */
+            SetPhysicsWallCrawlData(0, 0, (uint)_CHAR____800d5678[9], in_a3);
+          }
+          NewProcess = StateHandlerSwim;
+        LAB_8009e22c:
+          StateSwitchStateData(In, CurrentSection, NewProcess, 0);
+          PointAt((_Instance *)In, (_Position *)CurrentSection, (_Rotation *)NewProcess);
+          return;
+        }
+        if ((int)puVar6 < 0x100001)
+        {
+          if (puVar6 == &DAT_80000008)
+          {
+            if (_CHAR____800d5688 != (_Instance *)0x0)
+            {
+              Data_00 = 0x100000;
+              In_00 = &p_Var8->Event;
+            LAB_8009e06c:
+              /* WARNING: Subroutine does not return */
+              EnMessageQueueData(In_00, Data_00, 0);
+            }
           }
           else
           {
-            NewProcess = StateHandlerSwim;
+            if ((int)puVar6 < -0x7ffffff7)
+            {
+              if (puVar6 != (undefined *)0x80000000)
+                goto LAB_8009e2e8;
+            }
+            else
+            {
+              if (puVar6 != &DAT_80000020)
+                goto LAB_8009e2e8;
+            }
           }
-        LAB_8009e22c:
-          StateSwitchStateData(In, CurrentSection, NewProcess, 0);
         }
         else
         {
-          if ((int)puVar9 < 0x100001)
+          if (puVar6 == &DAT_00100004)
           {
-            if (puVar9 == &DAT_80000008)
+            Rot1 = (_Rotation *)&DAT_0000000e;
+            in_a3 = 300;
+            G2Anim_InterpDisableController(&In->CharacterInstance->anim, 0xe, 0xe, 300);
+            if ((_CHAR____800d5730 & 2) != 0)
             {
-              if (Raziel.throwInstance != (_Instance *)0x0)
-              {
-                local_54 = 0x100000;
-                In_00 = &p_Var11->Event;
-              LAB_8009e06c:
-                EnMessageQueueData(In_00, local_54, 0);
-              }
+              Rot1 = (_Rotation *)-*(int *)(_PlayerData + 0x28);
+              razSetFadeEffect(In->CharacterInstance->fadeValue, 0, (int)Rot1);
             }
-            else
+            if ((CurrentSection == 0) && (_CHAR____800d577c != 0))
             {
-              if ((int)puVar9 < -0x7ffffff7)
-              {
-                if (puVar9 != (undefined *)0x80000000)
-                {
-                LAB_8009e2e8:
-                  DefaultStateHandler(In, CurrentSection, Data);
-                }
-              }
-              else
-              {
-                if (puVar9 != &DAT_80000020)
-                  goto LAB_8009e2e8;
-              }
+              /* WARNING: Subroutine does not return */
+              SndEndLoop(_CHAR____800d577c);
+            }
+            if (_CHAR____800d5600 == 8)
+            {
+              instance = razGetHeldItem();
+              INSTANCE_PlainDeath(instance);
+            }
+            if (_CHAR____800d5600 == 0x1000)
+            {
+              Data_00 = 0x800105;
+              instance = _CHAR____800d5644;
+              goto LAB_8009df88;
             }
           }
           else
           {
-            if (puVar9 == &DAT_00100004)
+            if ((int)puVar6 < 0x100005)
             {
-              G2Anim_InterpDisableController(&In->CharacterInstance->anim, 0xe, 0xe, 300);
-              if ((Raziel.effectsFlags & 2U) != 0)
+              if (puVar6 == &DAT_00100001)
               {
-                razSetFadeEffect(In->CharacterInstance->fadeValue, 0, -PlayerData->throwFadeOutRate);
-              }
-              if ((CurrentSection == 0) && (Raziel.soundHandle != 0))
-              {
-                SndEndLoop(Raziel.soundHandle);
-                Raziel.soundHandle = 0;
-              }
-              if (Raziel.Senses.heldClass == 8)
-              {
-                Inst = razGetHeldItem();
-                INSTANCE_PlainDeath(Inst);
-              }
-              if (Raziel.Senses.heldClass == 0x1000)
-              {
-                local_54 = 0x800105;
-                Inst = Raziel.soulReaver;
-                goto LAB_8009df88;
-              }
-            }
-            else
-            {
-              if ((int)puVar9 < 0x100005)
-              {
-                if (puVar9 != &DAT_00100001)
-                  goto LAB_8009e2e8;
                 if (CurrentSection == 0)
                 {
-                  ControlFlag = 0x41001;
-                  if ((Raziel.Mode & 0x40000U) == 0)
+                  _BlockVramEntry_800d59a0._12_4_ = 0x41001;
+                  if ((_CHAR____800d5574 & 0x40000) == 0)
                   {
+                    Target = (__Event *)0x0;
                     SteerSwitchMode(In->CharacterInstance, 0);
-                    ControlFlag = ControlFlag | 8;
+                    _BlockVramEntry_800d59a0._12_4_ = _BlockVramEntry_800d59a0._12_4_ | 8;
                   }
                   else
                   {
+                    Target = (__Event *)((int)&DAT_0000000a + 1);
                     SteerSwitchMode(In->CharacterInstance, 0xb);
                   }
-                  PhysicsMode = 3;
-                  Raziel.Mode = Raziel.Mode | 0x20000;
-                  pp_Var10[0x47] = (_Instance *)0x0;
-                  Inst = razGetHeldWeapon();
-                  if (Inst != (_Instance *)0x0)
+                  PhysicsMode.next = (_BlockVramEntry *)&DAT_00000003;
+                  _CHAR____800d5574 = _CHAR____800d5574 | 0x20000;
+                  pp_Var7[0x47] = (_Instance *)0x0;
+                  instance = razGetHeldWeapon();
+                  if (instance != (_Instance *)0x0)
                   {
-                    Raziel.throwInstance = razGetHeldItem();
-                    pRVar5 = PlayerData;
-                    if (Raziel.Senses.heldClass == 3)
+                    _CHAR____800d5688 = razGetHeldItem();
+                    Data_00 = _PlayerData;
+                    if (_CHAR____800d5600 == 3)
                     {
-                      Raziel.throwData = PlayerData->throwList[2];
+                      _CHAR____800d5678 = *(byte **)(*(int *)(_PlayerData + 0x14) + 8);
                     }
                     else
                     {
-                      if (Raziel.Senses.heldClass < 4)
+                      if (_CHAR____800d5600 < 4)
                       {
-                        if (Raziel.Senses.heldClass == 1)
+                        if (_CHAR____800d5600 == 1)
                         {
-                          Raziel.throwData = *(__ThrowItem **)PlayerData->throwList;
+                          _CHAR____800d5678 = **(byte ***)(_PlayerData + 0x14);
                         }
                         else
                         {
-                          if (Raziel.Senses.heldClass == 2)
+                          if (_CHAR____800d5600 == 2)
                           {
-                            Raziel.throwData = PlayerData->throwList[1];
+                            _CHAR____800d5678 = *(byte **)(*(int *)(_PlayerData + 0x14) + 4);
                           }
                         }
                       }
                       else
                       {
-                        if (Raziel.Senses.heldClass == 8)
+                        if (_CHAR____800d5600 == 8)
                         {
-                          pp_Var10[0x47] = (_Instance *)0x1;
-                          Raziel.throwData = pRVar5->throwList[4];
-                          Raziel.throwInstance = (_Instance *)0x0;
+                          pp_Var7[0x47] = (_Instance *)0x1;
+                          _CHAR____800d5678 = *(byte **)(*(int *)(Data_00 + 0x14) + 0x10);
+                          _CHAR____800d5688 = (_Instance *)0x0;
                         }
                         else
                         {
-                          if (Raziel.Senses.heldClass == 0x1000)
+                          Target = (__Event *)0x800000;
+                          if (_CHAR____800d5600 == 0x1000)
                           {
-                            Raziel.throwInstance = (_Instance *)0x0;
-                            Raziel.throwData = PlayerData->throwList[5];
-                            INSTANCE_Post(Raziel.soulReaver, 0x800104, 0);
-                            Raziel.effectsFlags = Raziel.effectsFlags | 4;
-                            razSetupSoundRamp(In->CharacterInstance,
-                                              (_SoundRamp *)&Raziel.soundHandle, 0xc, -100, 0, 0x32, 0x55, 0x2d000, (int)&DAT_00002710);
-                            Raziel.soundTimerNext = 0;
-                            Raziel.soundTimerData = 0;
+                            _CHAR____800d5688 = (_Instance *)0x0;
+                            _CHAR____800d5678 = *(byte **)(*(int *)(_PlayerData + 0x14) + 0x14);
+                            /* WARNING: Subroutine does not return */
+                            INSTANCE_Post(_CHAR____800d5644, 0x800104, 0);
                           }
                         }
                       }
                     }
                   }
-                  Raziel.throwMode = 0;
+                  _CHAR____800d567c = 0;
                 }
                 if (CurrentSection == 2)
                 {
-                  CurrentSection_00 = 2;
-                  if ((Raziel.Mode & 0x40000U) == 0)
+                  Target = (__Event *)&UNK_00000002;
+                  if ((_CHAR____800d5574 & 0x40000) == 0)
                   {
-                    CurrentSection_00 = 2;
-                    NewAnim = 0;
-                    local_58 = 3;
-                    local_54 = CurrentSection;
+                    Target = (__Event *)&UNK_00000002;
+                    Rot1 = (_Rotation *)0x0;
+                    Data_00 = 3;
                   }
                   else
                   {
-                    NewAnim = 0x3d;
-                    local_58 = 3;
-                    local_54 = CurrentSection;
+                    Rot1 = (_Rotation *)((int)&the_mcmenu_table.main + 1);
+                    Data_00 = 3;
                   }
-                LAB_8009dce4:
-                  G2EmulationSwitchAnimation(In, CurrentSection_00, NewAnim, 0, local_58, local_54);
                 }
                 else
                 {
-                  if (((Raziel.Mode & 0x40000U) == 0) || (CurrentSection != 0))
+                  if (((_CHAR____800d5574 & 0x40000) == 0) || (CurrentSection != 0))
                   {
-                    bVar1 = (Raziel.throwData)->prepAnim;
+                    bVar1 = *_CHAR____800d5678;
                     if (bVar1 == 0)
                     {
-                      bVar1 = (Raziel.throwData)->coilAnim;
-                      bVar2 = (Raziel.throwData)->coilAnimFramesIn;
-                      bVar3 = (Raziel.throwData)->coilAnimAlphaIn;
+                      bVar1 = _CHAR____800d5678[3];
+                      bVar2 = _CHAR____800d5678[4];
+                      bVar3 = _CHAR____800d5678[5];
                     }
                     else
                     {
-                      bVar2 = (Raziel.throwData)->prepAnimFramesIn;
-                      bVar3 = (Raziel.throwData)->prepAnimAlphaIn;
+                      bVar2 = _CHAR____800d5678[1];
+                      bVar3 = _CHAR____800d5678[2];
                     }
-                    G2EmulationSwitchAnimationAlpha(In, CurrentSection, (uint)bVar1, 0, (uint)bVar2, 1, (uint)bVar3);
+                    Rot1 = (_Rotation *)(uint)bVar1;
+                    G2EmulationSwitchAnimationAlpha(In, CurrentSection, (int)Rot1, 0, (uint)bVar2, 1, (uint)bVar3);
+                    Target = (__Event *)CurrentSection;
+                    goto LAB_8009dcf0;
                   }
-                  else
-                  {
-                    if (uVar6 != 0x3f)
-                    {
-                      CurrentSection_00 = 0;
-                      NewAnim = 0x3f;
-                      local_58 = 0x10;
-                      local_54 = 2;
-                      goto LAB_8009dce4;
-                    }
-                  }
+                  if (uVar5 == 0x3f)
+                    goto LAB_8009dcf0;
+                  Target = (__Event *)0x0;
+                  Rot1 = (_Rotation *)((int)&the_mcmenu_table.main + 3);
+                  Data_00 = 0x10;
+                  CurrentSection = 2;
                 }
-                pp_Var10[0x48] = (_Instance *)0x1;
-              }
-              else
-              {
-                if (puVar9 != &DAT_00100009)
-                  goto LAB_8009e2e8;
-                if (CurrentSection == 1)
-                {
-                  if (p_Var7->Data == 1)
-                  {
-                    if ((Raziel.Senses.heldClass != 0x1000) && (Raziel.Senses.heldClass != 8))
-                    {
-                      razSetFadeEffect(In->CharacterInstance->fadeValue, PlayerData->throwFadeValue,
-                                       (int)PlayerData->throwFadeInRate);
-                    }
-                    Raziel.throwMode = 2;
-                    Raziel.returnState = StateHandlerIdle;
-                  }
-                  else
-                  {
-                    razSetFadeEffect(In->CharacterInstance->fadeValue, 0,
-                                     -(int)PlayerData->throwFadeInRate);
-                    G2Anim_InterpDisableController(&In->CharacterInstance->anim, 0xe, 0xe, 600);
-                    Raziel.throwMode = 0;
-                  }
-                }
+                G2EmulationSwitchAnimation(In, (int)Target, (int)Rot1, 0, Data_00, CurrentSection);
+              LAB_8009dcf0:
+                pp_Var7[0x48] = (_Instance *)0x1;
+                PointAt((_Instance *)In, (_Position *)Target, Rot1);
+                return;
               }
             }
+            else
+            {
+              if (puVar6 == &DAT_00100009)
+              {
+                if (CurrentSection == 1)
+                {
+                  if (Target->Data == 1)
+                  {
+                    if ((_CHAR____800d5600 != 0x1000) && (_CHAR____800d5600 != 8))
+                    {
+                      source = In->CharacterInstance->fadeValue;
+                      In = (__CharacterState *)(int)source;
+                      Target = (__Event *)(int)*(short *)(_PlayerData + 0x24);
+                      Rot1 = (_Rotation *)(int)*(short *)(_PlayerData + 0x26);
+                      razSetFadeEffect(source, *(short *)(_PlayerData + 0x24), (int)Rot1);
+                    }
+                    _CHAR____800d571c = StateHandlerIdle;
+                    _CHAR____800d567c = 2;
+                    PointAt((_Instance *)In, (_Position *)Target, Rot1);
+                    return;
+                  }
+                  razSetFadeEffect(In->CharacterInstance->fadeValue, 0,
+                                   -(int)*(short *)(_PlayerData + 0x26));
+                  Target_00 = (_Position *)&DAT_0000000e;
+                  Rot1 = (_Rotation *)&DAT_0000000e;
+                  instance = (_Instance *)&In->CharacterInstance->anim;
+                  G2Anim_InterpDisableController((_G2Anim_Type *)instance, 0xe, 0xe, 600);
+                  _CHAR____800d567c = 0;
+                  PointAt(instance, Target_00, Rot1);
+                  return;
+                }
+                goto code_r0x8009e2f0;
+              }
+            }
+          LAB_8009e2e8:
+            Rot1 = (_Rotation *)Data;
+            DefaultStateHandler(In, CurrentSection, Data);
           }
         }
       }
       else
       {
-        if (puVar9 == (undefined *)0x8000000)
+        if (puVar6 == (undefined *)0x8000000)
         {
-          Raziel.throwMode = Raziel.throwMode & 0xfffffffb;
-          if (uVar6 == (uint)(Raziel.throwData)->prepAnim)
+          _CHAR____800d567c = _CHAR____800d567c & 0xfffffffb;
+          if (uVar5 == (uint)*_CHAR____800d5678)
           {
-            if (((Raziel.Mode & 0x40000U) == 0) || (CurrentSection != 0))
+            if (((_CHAR____800d5574 & 0x40000) == 0) || (CurrentSection != 0))
             {
-              G2EmulationSwitchAnimationAlpha(In, CurrentSection, (uint)(Raziel.throwData)->coilAnim, 0,
-                                              (uint)(Raziel.throwData)->coilAnimFramesIn, 1,
-                                              (uint)(Raziel.throwData)->coilAnimAlphaIn);
+              Rot1 = (_Rotation *)(uint)_CHAR____800d5678[3];
+              G2EmulationSwitchAnimationAlpha(In, CurrentSection, (int)Rot1, 0, (uint)_CHAR____800d5678[4], 1,
+                                              (uint)_CHAR____800d5678[5]);
+              PointAt((_Instance *)In, (_Position *)CurrentSection, Rot1);
+              return;
             }
           }
           else
           {
-            if ((uVar6 == (uint)(Raziel.throwData)->throwAnim) &&
-                (local_54 = 0x100000, CurrentSection == 1))
+            if ((uVar5 == (uint)_CHAR____800d5678[6]) && (Data_00 = 0x100000, CurrentSection == 1))
             {
-              Inst = In->CharacterInstance;
+              instance = In->CharacterInstance;
             LAB_8009df88:
-              INSTANCE_Post(Inst, local_54, 0);
+              /* WARNING: Subroutine does not return */
+              INSTANCE_Post(instance, Data_00, 0);
             }
           }
         }
         else
         {
-          if ((int)puVar9 < 0x8000001)
+          if ((int)puVar6 < 0x8000001)
           {
-            if (puVar9 == (undefined *)0x4000001)
+            if (puVar6 == (undefined *)0x4000001)
             {
               if (CurrentSection == 0)
               {
-                SetDropPhysics(In->CharacterInstance, &Raziel);
+                SetExternalForce((__Force *)In->CharacterInstance, 0x5214, (short)Rot1, (short)in_a3,
+                                 local_58, local_54);
               }
               G2EmulationSwitchAnimation(In, CurrentSection, 0x24, 0, 4, 1);
               NewProcess = StateHandlerFall;
               goto LAB_8009e22c;
             }
-            if ((int)puVar9 < 0x4000002)
+            if ((int)puVar6 < 0x4000002)
             {
-              if (puVar9 != (undefined *)0x1000001)
+              if (puVar6 != (undefined *)0x1000001)
                 goto LAB_8009e2e8;
             }
             else
             {
-              if (puVar9 != (undefined *)0x4020000)
+              if (puVar6 != (undefined *)0x4020000)
                 goto LAB_8009e2e8;
             }
           }
           else
           {
-            if (puVar9 != (undefined *)0x20000002)
+            if (puVar6 != (undefined *)0x20000002)
             {
-              if ((int)puVar9 < 0x20000003)
+              if ((int)puVar6 < 0x20000003)
               {
-                if (puVar9 != (undefined *)0x8000004)
+                if (puVar6 != (undefined *)0x8000004)
                   goto LAB_8009e2e8;
-                Inst = razGetHeldWeapon();
-                if (Inst == (_Instance *)0x0)
-                  goto LAB_8009e2f0;
-                spinType = (ushort)((Raziel.throwData)->selfAdjustingFlag != 0);
-                if ((Raziel.throwMode & 2U) == 0)
+                instance = razGetHeldWeapon();
+                if (instance != (_Instance *)0x0)
                 {
-                  if ((Raziel.Senses.EngagedMask & 0x80) == 0)
+                  if ((_CHAR____800d567c & 2) == 0)
                   {
-                    target = (_Position *)0x0;
-                    uVar4 = (Raziel.throwData)->velocity;
+                    if ((_CHAR____800d55f0 & 0x80) != 0)
+                    {
+                      Data_00 = SetObjectThrowData(*(void **)(_CHAR____800d55ec + 0x38),
+                                                   (_SVector *)0x0, 1,
+                                                   (ushort)(*(short *)(_CHAR____800d5678 + 0x1e) !=
+                                                            0),
+                                                   (uint) * (ushort *)(_CHAR____800d5678 + 0x18),
+                                                   (int)*(short *)(_CHAR____800d5678 + 0x1a), 0, 0);
+                      /* WARNING: Subroutine does not return */
+                      INSTANCE_Post(instance, 0x800010, Data_00);
+                    }
+                    target = (char *)0x0;
+                    uVar4 = *(ushort *)(_CHAR____800d5678 + 0x18);
                     type = 0;
-                    local_54 = 0;
-                    goto LAB_8009e198;
+                    Data_00 = 0;
                   }
-                  local_54 = SetObjectThrowData(Raziel.Senses.EngagedList[7].instance,
-                                                (_SVector *)0x0, 1, spinType,
-                                                (uint)(ushort)(Raziel.throwData)->velocity,
-                                                (int)(Raziel.throwData)->gravity, 0, 0);
-                  INSTANCE_Post(Inst, 0x800010, local_54);
-                  uVar8 = INSTANCE_Query(Raziel.Senses.EngagedList[7].instance, 0xc);
-                  local_40.x = *(short *)(uVar8 + 0x14);
-                  local_40.y = *(short *)(uVar8 + 0x18);
-                  local_40.z = *(short *)(uVar8 + 0x1c);
-                  PointAt(In->CharacterInstance, &local_40, &_Stack56);
+                  else
+                  {
+                    target = &CHAR____800d5680;
+                    uVar4 = *(ushort *)(_CHAR____800d5678 + 0x18);
+                    Data_00 = (int)*(short *)(_CHAR____800d5678 + 0x1a);
+                    type = 4;
+                  }
+                  Data_00 = SetObjectThrowData(target, (_SVector *)0x0, type,
+                                               (ushort)(*(short *)(_CHAR____800d5678 + 0x1e) != 0),
+                                               (uint)uVar4, Data_00, 0, 0);
+                  /* WARNING: Subroutine does not return */
+                  INSTANCE_Post(instance, 0x800010, Data_00);
                 }
-                else
-                {
-                  target = &Raziel.throwTarget;
-                  uVar4 = (Raziel.throwData)->velocity;
-                  local_54 = (int)(Raziel.throwData)->gravity;
-                  type = 4;
-                LAB_8009e198:
-                  local_54 = SetObjectThrowData(target, (_SVector *)0x0, type, spinType, (uint)uVar4,
-                                                local_54, 0, 0);
-                  INSTANCE_Post(Inst, 0x800010, local_54);
-                }
-                razSetFadeEffect(In->CharacterInstance->fadeValue, 0, -PlayerData->throwFadeOutRate);
-                razReaverOn();
               }
               else
               {
-                if (puVar9 != (undefined *)0x20000020)
+                if (puVar6 != (undefined *)0x20000020)
                   goto LAB_8009e2e8;
-                if (pp_Var10[0x48] != (_Instance *)0x0)
+                if (pp_Var7[0x48] != (_Instance *)0x0)
                 {
-                  In_00 = &p_Var11->Defer;
-                  if (uVar6 != (uint)(Raziel.throwData)->coilAnim)
+                  In_00 = &p_Var8->Defer;
+                  if (uVar5 != (uint)_CHAR____800d5678[3])
                   {
-                    local_54 = 0x20000020;
+                    Data_00 = 0x20000020;
                     goto LAB_8009e06c;
                   }
-                  if (((Raziel.Mode & 0x40000U) == 0) || (CurrentSection != 0))
+                  if (((_CHAR____800d5574 & 0x40000) == 0) || (CurrentSection != 0))
                   {
-                    G2EmulationSwitchAnimation(In, CurrentSection, (uint)(Raziel.throwData)->throwAnim, 0,
-                                               (uint)(Raziel.throwData)->throwAnimFramesInFactor, 1);
+                    in_a3 = 0;
+                    Rot1 = (_Rotation *)(uint)_CHAR____800d5678[6];
+                    local_58 = (uint)_CHAR____800d5678[7];
+                    local_54 = 1;
+                    Target = (__Event *)CurrentSection;
+                    G2EmulationSwitchAnimation(In, CurrentSection, (int)Rot1, 0, local_58, 1);
                   }
                   if (CurrentSection == 1)
                   {
-                    Raziel.alarmTable = (ushort)(Raziel.throwData)->throwFrameToLaunch * 100;
+                    _CHAR____800d5774 = (ushort)_CHAR____800d5678[8] * 100;
                     (In->CharacterInstance->anim).section[1].swAlarmTable = (short *)0x800d5774;
                   }
-                  pp_Var10[0x48] = (_Instance *)0x0;
-                  if ((Raziel.playerEvent & 0x200) != 0)
+                  pp_Var7[0x48] = (_Instance *)0x0;
+                  if ((_CHAR____800d57c4 & 0x200) != 0)
                   {
+                    instance = (_Instance *)&UNK_00000200;
                     razSetPlayerEventHistory(0x200);
+                    PointAt(instance, (_Position *)Target, Rot1);
+                    return;
                   }
                 }
               }
@@ -2005,8 +1881,8 @@ void StateHandlerThrow2(__CharacterState *In, int CurrentSection, int Data)
         }
       }
     }
-  LAB_8009e2f0:
-    DeMessageQueue(&p_Var11->Event);
+  code_r0x8009e2f0:
+    DeMessageQueue(&p_Var8->Event);
   } while (true);
 }
 
@@ -2036,46 +1912,19 @@ void StateHandlerThrow2(__CharacterState *In, int CurrentSection, int Data)
 /* end block 3 */
 // End Line: 2831
 
-/* WARNING: Could not reconcile some variable overlaps */
-
-void PointAt(_Instance *instance, _Position *Target, _Rotation *Rot1)
+void PointAt(int param_1)
 
 {
-  short sVar1;
-  _G2Bool_Enum _Var2;
-  _G2Anim_Type *anim;
-  _Position local_30;
-  short local_28;
-  short local_26;
-  short local_24;
-  int local_20;
-  int local_1c;
-  int local_18;
+  undefined2 local_28;
+  undefined2 local_26;
+  undefined2 uStack36;
+  undefined auStack32[16];
 
-  local_28 = (Raziel.throwData)->launchPointX;
-  local_26 = (Raziel.throwData)->launchPointY;
-  local_24 = (Raziel.throwData)->launchPointZ;
-  ApplyMatrix(instance->matrix, &local_28, &local_20);
-  local_20 = local_20 + (int)(instance->position).x;
-  local_1c = local_1c + (int)(instance->position).y;
-  local_18 = local_18 + (int)(instance->position).z;
-  local_30.x = (short)local_20;
-  local_30.y = (short)local_1c;
-  local_30.z = (short)local_18;
-  MATH3D_RotationFromPosToPos(&local_30, Target, Rot1);
-  sVar1 = (instance->rotation).z;
-  Rot1->y = 0;
-  Rot1->z = Rot1->z - sVar1;
-  LimitRotation(Rot1);
-  anim = &instance->anim;
-  _Var2 = G2Anim_IsControllerActive(anim, 0xe, 0xe);
-  if (_Var2 == G2FALSE)
-  {
-    G2Anim_EnableController(anim, 0xe, 0xe);
-  }
-  MATH3D_ZYXtoXYZ(Rot1);
-  G2Anim_SetController_Vector(anim, 0xe, 0xe, (_G2SVector3_Type *)Rot1);
-  return;
+  local_28 = *(undefined2 *)(iGpfffffbc4 + 10);
+  local_26 = *(undefined2 *)(iGpfffffbc4 + 0xc);
+  uStack36 = *(undefined2 *)(iGpfffffbc4 + 0xe);
+  /* WARNING: Subroutine does not return */
+  ApplyMatrix(*(undefined4 *)(param_1 + 0x40), &local_28, auStack32);
 }
 
 // decompiled code
@@ -2099,46 +1948,28 @@ void PointAt(_Instance *instance, _Position *Target, _Rotation *Rot1)
 /* end block 2 */
 // End Line: 2934
 
-/* WARNING: Could not reconcile some variable overlaps */
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void ThrowSetFocusPoint(_Instance *instance, _Rotation *rot)
 
 {
-  MATRIX *pMVar1;
+  undefined4 uVar1;
   _Instance *p_Var2;
-  _G2Bool_Enum _Var3;
-  _G2Anim_Type *anim;
   undefined2 local_30;
   undefined2 local_2e;
-  short local_2c;
-  long local_28;
-  long local_24;
-  long local_20;
+  undefined2 local_2c;
+  undefined local_28[16];
 
   rot->x = -rot->x;
-  pMVar1 = theCamera.core.cwTransform2;
+  uVar1 = DAT_800cff04;
   p_Var2 = razGetHeldWeapon();
   if ((p_Var2 != (_Instance *)0x0) && (p_Var2->matrix != (MATRIX *)0x0))
   {
     local_30 = 0;
     local_2e = 0;
-    local_2c = (Raziel.throwData)->velocity;
-    ApplyMatrix(pMVar1, &local_30, (VECTOR *)&local_28);
-    anim = &instance->anim;
-    Raziel.throwTarget.x = (short)local_28;
-    Raziel.throwTarget.y = (short)local_24;
-    Raziel.throwTarget.z = (short)local_20;
-    _Var3 = G2Anim_IsControllerActive(anim, 0xe, 0xe);
-    if (_Var3 == G2FALSE)
-    {
-      G2Anim_EnableController(anim, 0xe, 0xe);
-    }
-    MATH3D_ZYXtoXYZ(rot);
-    G2Anim_SetController_Vector(anim, 0xe, 0xe, (_G2SVector3_Type *)rot);
-    local_28 = p_Var2->matrix[1].t[0];
-    local_24 = p_Var2->matrix[1].t[1];
-    local_20 = p_Var2->matrix[1].t[2];
-    CAMERA_SetLookFocusAndDistance(&theCamera, (VECTOR *)&local_28, PlayerData->throwManualDistance);
+    local_2c = *(undefined2 *)(_CHAR____800d5678 + 0x18);
+    /* WARNING: Subroutine does not return */
+    ApplyMatrix(uVar1, &local_30, local_28);
   }
   return;
 }
@@ -2151,6 +1982,8 @@ void ThrowSetFocusPoint(_Instance *instance, _Rotation *rot)
 // Start line: 3047
 /* end block 1 */
 // End Line: 3048
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void LimitRotation(_Rotation *rot)
 
@@ -2176,20 +2009,20 @@ void LimitRotation(_Rotation *rot)
   if (sVar1 < 1)
   {
     rot->z = sVar3;
-    bVar2 = sVar3 < (Raziel.throwData)->minZRotation;
-    sVar3 = (Raziel.throwData)->minZRotation;
+    bVar2 = sVar3 < *(short *)(_CHAR____800d5678 + 0x16);
+    sVar3 = *(short *)(_CHAR____800d5678 + 0x16);
   }
   else
   {
     if (sVar1 < 0x800)
     {
-      sVar3 = (Raziel.throwData)->maxZRotation;
-      bVar2 = (Raziel.throwData)->maxZRotation < sVar1;
+      sVar3 = *(short *)(_CHAR____800d5678 + 0x14);
+      bVar2 = *(short *)(_CHAR____800d5678 + 0x14) < sVar1;
     }
     else
     {
-      sVar3 = (Raziel.throwData)->minZRotation;
-      bVar2 = sVar1 < (Raziel.throwData)->minZRotation;
+      sVar3 = *(short *)(_CHAR____800d5678 + 0x16);
+      bVar2 = sVar1 < *(short *)(_CHAR____800d5678 + 0x16);
     }
   }
   if (bVar2)
@@ -2209,20 +2042,20 @@ void LimitRotation(_Rotation *rot)
   if (sVar1 < 1)
   {
     rot->x = sVar3;
-    bVar2 = sVar3 < (Raziel.throwData)->minXRotation;
-    sVar3 = (Raziel.throwData)->minXRotation;
+    bVar2 = sVar3 < *(short *)(_CHAR____800d5678 + 0x12);
+    sVar3 = *(short *)(_CHAR____800d5678 + 0x12);
   }
   else
   {
     if (sVar1 < 0x800)
     {
-      sVar3 = (Raziel.throwData)->maxXRotation;
-      bVar2 = (Raziel.throwData)->maxXRotation < sVar1;
+      sVar3 = *(short *)(_CHAR____800d5678 + 0x10);
+      bVar2 = *(short *)(_CHAR____800d5678 + 0x10) < sVar1;
     }
     else
     {
-      sVar3 = (Raziel.throwData)->minXRotation;
-      bVar2 = sVar1 < (Raziel.throwData)->minXRotation;
+      sVar3 = *(short *)(_CHAR____800d5678 + 0x12);
+      bVar2 = sVar1 < *(short *)(_CHAR____800d5678 + 0x12);
     }
   }
   if (bVar2)
@@ -2296,15 +2129,18 @@ void LimitRotation(_Rotation *rot)
 /* end block 2 */
 // End Line: 3172
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void StateHandlerGrab(__CharacterState *In, int CurrentSection, int Data)
 
 {
   uint uVar1;
   __Event *p_Var2;
-  _Instance *Inst;
+  _Instance *instance;
   int Data_00;
   undefined *puVar3;
   uint NewAnim;
+  uint in_a3;
   uint local_30;
   int local_2c;
 
@@ -2321,31 +2157,25 @@ void StateHandlerGrab(__CharacterState *In, int CurrentSection, int Data)
     {
       if (CurrentSection == 0)
       {
-        if (uVar1 == (uint)(Raziel.throwData)->prepAnim)
+        if (uVar1 == (uint)*_CHAR____800d5678)
         {
-          if ((Raziel.Senses.EngagedMask & 0x100) != 0)
+          if ((_CHAR____800d55f0 & 0x100) != 0)
           {
-            INSTANCE_Post(Raziel.Senses.EngagedList[8].instance, 0x1000002, (int)In->CharacterInstance);
-            razReaverOff();
-            In->SectionList[0].Data1 = 1;
-            In->SectionList[1].Data1 = 1;
-            In->SectionList[2].Data1 = 1;
+            /* WARNING: Subroutine does not return */
+            INSTANCE_Post(*(_Instance **)(_CHAR____800d55ec + 0x40), 0x1000002,
+                          (int)In->CharacterInstance);
           }
         }
         else
         {
-          Inst = razGetHeldItem();
-          if (Inst != (_Instance *)0x0)
+          instance = razGetHeldItem();
+          if (instance != (_Instance *)0x0)
           {
           LAB_8009ecd4:
-            gameTrackerX.streamFlags = gameTrackerX.streamFlags | 4;
+            DAT_800d10f0 = DAT_800d10f0 | 4;
             Data_00 = SetMonsterThrownData(In->CharacterInstance, &In->CharacterInstance->rotation, 100);
-            INSTANCE_Post(Inst, 0x1000003, Data_00);
-            Inst = razGetHeldItem();
-            if (Inst != (_Instance *)0x0)
-            {
-              INSTANCE_UnlinkFromParent(Inst);
-            }
+            /* WARNING: Subroutine does not return */
+            INSTANCE_Post(instance, 0x1000003, Data_00);
           }
           razReaverOn();
         }
@@ -2357,13 +2187,13 @@ void StateHandlerGrab(__CharacterState *In, int CurrentSection, int Data)
       {
         if (puVar3 == (undefined *)0x0)
         {
-          if ((((CurrentSection == 0) && (uVar1 != (uint)(Raziel.throwData)->prepAnim)) &&
-               (uVar1 != 0x47)) &&
-              ((uVar1 != (uint)(Raziel.throwData)->throwAnim &&
+          if ((((CurrentSection == 0) && (uVar1 != (uint)*_CHAR____800d5678)) && (uVar1 != 0x47)) &&
+              ((uVar1 != (uint)_CHAR____800d5678[6] &&
                 (SteerSwitchMode(In->CharacterInstance, 0), uVar1 == 1))))
           {
             Data_00 = 0x37;
           LAB_8009eb40:
+            in_a3 = 0;
             G2EmulationSwitchAnimation(In, 0, Data_00, 0, 3, 2);
           }
         }
@@ -2389,89 +2219,94 @@ void StateHandlerGrab(__CharacterState *In, int CurrentSection, int Data)
           {
             if (puVar3 == &DAT_00100004)
             {
-              Inst = razGetHeldItem();
-              if (Inst != (_Instance *)0x0)
+              instance = razGetHeldItem();
+              if (instance != (_Instance *)0x0)
                 goto LAB_8009ecd4;
             }
             else
             {
               if ((int)puVar3 < 0x100005)
               {
-                if (puVar3 != &DAT_00100001)
-                  goto LAB_8009eeb8;
-                if (CurrentSection == 0)
+                if (puVar3 == &DAT_00100001)
                 {
-                  Raziel.throwData = PlayerData->throwList[6];
-                  ControlFlag = 0x1043009;
-                  PhysicsMode = 3;
-                  SteerSwitchMode(In->CharacterInstance, 0);
-                }
-                if (p_Var2->Data == 0)
-                {
-                  Inst = (_Instance *)0xd;
                   if (CurrentSection == 0)
                   {
-                    G2EmulationSwitchAnimationCharacter(In, 0x47, 0, (uint)(Raziel.throwData)->prepAnimFramesIn, 1);
-                    if ((Raziel.Senses.EngagedMask & 0x100) != 0)
-                    {
-                      INSTANCE_Post(Raziel.Senses.EngagedList[8].instance, 0x1000002, 0);
-                    }
-                    Inst = (_Instance *)0xd;
+                    _CHAR____800d5678 = *(byte **)(*(int *)(_PlayerData + 0x14) + 0x18);
+                    _BlockVramEntry_800d59a0._12_4_ = 0x1043009;
+                    PhysicsMode.next = (_BlockVramEntry *)&DAT_00000003;
+                    SteerSwitchMode(In->CharacterInstance, 0);
                   }
-                }
-                else
-                {
-                  razSetPlayerEventHistory(0x40);
-                  if (CurrentSection == 2)
+                  if (p_Var2->Data == 0)
                   {
-                    NewAnim = 0;
-                    local_30 = 3;
-                    Data_00 = 2;
-                    local_2c = CurrentSection;
+                    instance = (_Instance *)0xd;
+                    if (CurrentSection == 0)
+                    {
+                      in_a3 = (uint)_CHAR____800d5678[1];
+                      G2EmulationSwitchAnimationCharacter(In, 0x47, 0, in_a3, 1);
+                      if ((_CHAR____800d55f0 & 0x100) != 0)
+                      {
+                        /* WARNING: Subroutine does not return */
+                        INSTANCE_Post(*(_Instance **)(_CHAR____800d55ec + 0x40), 0x1000002, 0);
+                      }
+                      instance = (_Instance *)0xd;
+                    }
                   }
                   else
                   {
-                    NewAnim = (uint)(Raziel.throwData)->prepAnim;
-                    local_30 = (uint)(Raziel.throwData)->prepAnimFramesIn;
-                    local_2c = 1;
-                    Data_00 = CurrentSection;
-                  }
-                  G2EmulationSwitchAnimation(In, Data_00, NewAnim, 0, local_30, local_2c);
-                  if (CurrentSection == 0)
-                  {
-                    if ((Raziel.Senses.EngagedMask & 0x100) != 0)
+                    razSetPlayerEventHistory(0x40);
+                    if (CurrentSection == 2)
                     {
-                      razAlignYRotMoveInterp(In->CharacterInstance, Raziel.Senses.EngagedList[8].instance, 200,
-                                             '\0', (uint)(Raziel.throwData)->prepAnimFramesIn, 0);
+                      NewAnim = 0;
+                      local_30 = 3;
+                      Data_00 = 2;
+                      local_2c = CurrentSection;
                     }
-                    SetTimer((uint)(Raziel.throwData)->coilAnimFramesIn +
-                             (uint)(Raziel.throwData)->prepAnimFramesIn);
+                    else
+                    {
+                      NewAnim = (uint)*_CHAR____800d5678;
+                      local_30 = (uint)_CHAR____800d5678[1];
+                      local_2c = 1;
+                      Data_00 = CurrentSection;
+                    }
+                    in_a3 = 0;
+                    G2EmulationSwitchAnimation(In, Data_00, NewAnim, 0, local_30, local_2c);
+                    if (CurrentSection == 0)
+                    {
+                      if ((_CHAR____800d55f0 & 0x100) != 0)
+                      {
+                        in_a3 = 0;
+                        razAlignYRotMoveInterp(In->CharacterInstance, *(_Instance **)(_CHAR____800d55ec + 0x40),
+                                               200, '\0', (uint)_CHAR____800d5678[1], 0);
+                      }
+                      SetTimer((uint)_CHAR____800d5678[4] + (uint)_CHAR____800d5678[1]);
+                    }
+                    _CHAR____800d5574 = 0x20000000;
+                    instance = (_Instance *)0xb;
                   }
-                  Raziel.Mode = 0x20000000;
-                  Inst = (_Instance *)0xb;
+                  (&In->CharacterInstance + CurrentSection * 0x47)[0x48] = instance;
+                  (&In->CharacterInstance + CurrentSection * 0x47)[0x47] = (_Instance *)0x0;
+                  goto LAB_8009eec0;
                 }
-                (&In->CharacterInstance + CurrentSection * 0x47)[0x48] = Inst;
-                (&In->CharacterInstance + CurrentSection * 0x47)[0x47] = (_Instance *)0x0;
               }
               else
               {
-                if (puVar3 != &DAT_00100014)
-                  goto LAB_8009eeb8;
-                if ((CurrentSection == 0) && (Inst = razGetHeldItem(), Inst != (_Instance *)0x0))
+                if (puVar3 == &DAT_00100014)
                 {
-                  gameTrackerX.streamFlags = gameTrackerX.streamFlags | 4;
-                  Data_00 = SetMonsterThrownData(In->CharacterInstance, &In->CharacterInstance->rotation, 10);
-                  INSTANCE_Post(Inst, 0x1000003, Data_00);
-                  Inst = razGetHeldItem();
-                  if (Inst != (_Instance *)0x0)
+                  if ((CurrentSection == 0) &&
+                      (instance = razGetHeldItem(), instance != (_Instance *)0x0))
                   {
-                    INSTANCE_UnlinkFromParent(Inst);
+                    DAT_800d10f0 = DAT_800d10f0 | 4;
+                    Data_00 = SetMonsterThrownData(In->CharacterInstance, &In->CharacterInstance->rotation, 10);
+                    /* WARNING: Subroutine does not return */
+                    INSTANCE_Post(instance, 0x1000003, Data_00);
                   }
+                LAB_8009ed9c:
+                  /* WARNING: Subroutine does not return */
+                  SetPhysicsWallCrawlData(0, 0, (uint)_CHAR____800d5678[9], in_a3);
                 }
-              LAB_8009ed9c:
-                Data_00 = SetControlInitIdleData(0, 0, (uint)(Raziel.throwData)->framesOut);
-                StateSwitchStateData(In, CurrentSection, StateHandlerIdle, Data_00);
               }
+            LAB_8009eeb8:
+              DefaultStateHandler(In, CurrentSection, Data);
             }
           }
         }
@@ -2501,20 +2336,21 @@ void StateHandlerGrab(__CharacterState *In, int CurrentSection, int Data)
             {
               if (puVar3 == (undefined *)0x1000000)
               {
-                if (((CurrentSection == 0) && ((ControlFlag & 0x4000U) == 0)) &&
-                    (Raziel.invincibleTimer == 0))
+                if (((CurrentSection == 0) && ((_BlockVramEntry_800d59a0._12_4_ & 0x4000) == 0)) &&
+                    (_CHAR____800d5618 == 0))
                 {
-                  Inst = razGetHeldItem();
-                  if (Inst != (_Instance *)0x0)
+                  instance = razGetHeldItem();
+                  if (instance != (_Instance *)0x0)
                   {
-                    gameTrackerX.streamFlags = gameTrackerX.streamFlags | 4;
+                    DAT_800d10f0 = DAT_800d10f0 | 4;
                     Data_00 = SetMonsterThrownData(In->CharacterInstance, &In->CharacterInstance->rotation, 10);
-                    INSTANCE_Post(Inst, 0x1000003, Data_00);
+                    /* WARNING: Subroutine does not return */
+                    INSTANCE_Post(instance, 0x1000003, Data_00);
                   }
-                  Inst = razGetHeldItem();
-                  if (Inst != (_Instance *)0x0)
+                  instance = razGetHeldItem();
+                  if (instance != (_Instance *)0x0)
                   {
-                    INSTANCE_UnlinkFromParent(Inst);
+                    INSTANCE_UnlinkFromParent(instance);
                   }
                   StateSwitchStateCharacterData(In, StateHandlerHitReaction, p_Var2->Data);
                 }
@@ -2526,8 +2362,7 @@ void StateHandlerGrab(__CharacterState *In, int CurrentSection, int Data)
               if (puVar3 == (undefined *)0x1000006)
                 goto LAB_8009ed9c;
             }
-          LAB_8009eeb8:
-            DefaultStateHandler(In, CurrentSection, Data);
+            goto LAB_8009eeb8;
           }
         }
         else
@@ -2536,16 +2371,14 @@ void StateHandlerGrab(__CharacterState *In, int CurrentSection, int Data)
           {
             if (CurrentSection == 0)
             {
-              if (In->SectionList[0].Data2 == 0xb)
+              if (In->SectionList[0].Data2 != 0xb)
               {
-                G2EmulationSwitchAnimation(In, 0, 0x37, 0, 3, 2);
-                In->SectionList[0].Data2 = 0xe;
+                /* WARNING: Subroutine does not return */
+                SetPhysicsWallCrawlData(0, 0, 3, in_a3);
               }
-              else
-              {
-                Data_00 = SetControlInitIdleData(0, 0, 3);
-                StateSwitchStateCharacterData(In, StateHandlerIdle, Data_00);
-              }
+              in_a3 = 0;
+              G2EmulationSwitchAnimation(In, 0, 0x37, 0, 3, 2);
+              In->SectionList[0].Data2 = 0xe;
             }
           }
           else
@@ -2559,9 +2392,9 @@ void StateHandlerGrab(__CharacterState *In, int CurrentSection, int Data)
             {
               if (puVar3 == (undefined *)0x10000000)
               {
-                if ((((CurrentSection == 0) && (uVar1 != (uint)(Raziel.throwData)->prepAnim)) &&
+                if ((((CurrentSection == 0) && (uVar1 != (uint)*_CHAR____800d5678)) &&
                      (uVar1 != 0x47)) &&
-                    ((uVar1 != (uint)(Raziel.throwData)->throwAnim &&
+                    ((uVar1 != (uint)_CHAR____800d5678[6] &&
                       (SteerSwitchMode(In->CharacterInstance, 0x12), uVar1 == 0x37))))
                 {
                   Data_00 = 1;
@@ -2576,20 +2409,17 @@ void StateHandlerGrab(__CharacterState *In, int CurrentSection, int Data)
                 {
                   if (In->SectionList[0].Data1 == 0)
                   {
+                    /* WARNING: Subroutine does not return */
                     EnMessageQueueData(&In->SectionList[0].Defer, 0x20000020, 0);
                   }
-                  else
+                  if (In->SectionList[0].Data2 != 0xc)
                   {
-                    if (In->SectionList[0].Data2 != 0xc)
-                    {
-                      G2EmulationSwitchAnimationCharacter(In, (uint)(Raziel.throwData)->throwAnim, 0,
-                                                          (uint)(Raziel.throwData)->throwAnimFramesInFactor, 1);
-                      PurgeMessageQueue(&In->SectionList[0].Event);
-                      Raziel.Mode = 0x20000;
-                      SetTimer((uint)(Raziel.throwData)->throwFrameToLaunch +
-                               (uint)(Raziel.throwData)->throwAnimFramesInFactor);
-                      In->SectionList[0].Data2 = 0xc;
-                    }
+                    in_a3 = (uint)_CHAR____800d5678[7];
+                    G2EmulationSwitchAnimationCharacter(In, (uint)_CHAR____800d5678[6], 0, in_a3, 1);
+                    PurgeMessageQueue(&In->SectionList[0].Event);
+                    _CHAR____800d5574 = 0x20000;
+                    SetTimer((uint)_CHAR____800d5678[8] + (uint)_CHAR____800d5678[7]);
+                    In->SectionList[0].Data2 = 0xc;
                   }
                 }
               }

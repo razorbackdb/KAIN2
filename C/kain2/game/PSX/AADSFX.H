@@ -1,8 +1,6 @@
 #ifndef AADSFX_H
 #define AADSFX_H
 
-static struct AadProgramAtr aadDummySfxProgram; // offset 0x800CEF48
-
 extern unsigned long aadPlaySfx(unsigned int toneID, int volume, int pan, int pitchOffset); // 0x800569DC
 
 extern unsigned long aadStopSfx(unsigned long handle); // 0x80056A40

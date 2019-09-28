@@ -1,10 +1,6 @@
 #include "THISDUST.H"
 #include "CINEPSX.H"
 
-// cinema_fn_table_t * @0x800CAD90, len = 0x00000004
-the_cine_table = 00000000;
-// _ObjectTracker * @0x800CAD94, len = 0x00000004
-the_cine_tracker = 00000000;
 // decompiled code
 // original method signature:
 // int /*$ra*/ CINE_CDIntrQuery()
@@ -19,14 +15,15 @@ the_cine_tracker = 00000000;
 /* end block 2 */
 // End Line: 82
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 int CINE_CDIntrQuery(void)
 
 {
-	if (StCdIntrFlag != 0)
+	if (_StCdIntrFlag != 0)
 	{
-		StCdIntrFlag = 0;
+		_StCdIntrFlag = 0;
 		return 1;
 	}
 	return 0;
@@ -51,7 +48,7 @@ ushort CINE_Pad(int pad)
 {
 	if (pad == 0)
 	{
-		return readGPBuffer1.data._0_2_;
+		return readGPBuffer1._2_2_;
 	}
 	return readGPBuffer2.data._0_2_;
 }
@@ -89,14 +86,16 @@ ushort CINE_Pad(int pad)
 /* end block 4 */
 // End Line: 129
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void CINE_Play(char *strfile, ushort mask, int buffers)
 
 {
-	if (the_cine_table != (cinema_fn_table_t *)0x0)
+	if (_the_cine_table != (code **)0x0)
 	{
-		if (the_cine_table->versionID == &monVersion)
+		if (_the_cine_table[1] == (code *)monVersion)
 		{
-			(*the_cine_table->play)(strfile, (uint)mask);
+			(**_the_cine_table)(strfile, (uint)mask);
 			LOAD_InitCdStreamMode();
 		}
 		else
@@ -133,6 +132,7 @@ void CINE_Play(char *strfile, ushort mask, int buffers)
 /* end block 2 */
 // End Line: 163
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 int CINE_Load(void)
@@ -160,8 +160,8 @@ int CINE_Load(void)
 	}
 	else
 	{
-		the_cine_table = (cinema_fn_table_t *)p_Var2->object->relocModule;
-		the_cine_tracker = p_Var2;
+		_the_cine_table = p_Var2->object->relocModule;
+		_the_cine_tracker = p_Var2;
 	}
 	return (uint)bVar1;
 }
@@ -180,12 +180,13 @@ int CINE_Load(void)
 /* end block 2 */
 // End Line: 240
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 int CINE_Loaded(void)
 
 {
-	return (uint)(the_cine_tracker != (_ObjectTracker *)0x0);
+	return (uint)(_the_cine_tracker != 0);
 }
 
 // decompiled code
@@ -197,17 +198,18 @@ int CINE_Loaded(void)
 /* end block 1 */
 // End Line: 249
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void CINE_Unload(void)
 
 {
 	VSyncCallback(VblTick);
-	the_cine_table = (cinema_fn_table_t *)0x0;
-	if (the_cine_tracker != (_ObjectTracker *)0x0)
+	_the_cine_table = 0;
+	if (_the_cine_tracker != (_ObjectTracker *)0x0)
 	{
-		STREAM_DumpObject(the_cine_tracker);
-		the_cine_tracker = (_ObjectTracker *)0x0;
+		STREAM_DumpObject(_the_cine_tracker);
+		_the_cine_tracker = (_ObjectTracker *)0x0;
 	}
 	return;
 }
@@ -233,15 +235,8 @@ void CINE_Unload(void)
 void CINE_PlayIngame(int number)
 
 {
-	int iVar1;
 	char acStack32[24];
 
+	/* WARNING: Subroutine does not return */
 	sprintf(acStack32, s__CHRONO_d_STR_1_80012484);
-	iVar1 = CINE_Load();
-	if (iVar1 != 0)
-	{
-		CINE_Play(acStack32, 0, 2);
-		CINE_Unload();
-	}
-	return;
 }

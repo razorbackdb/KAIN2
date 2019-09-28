@@ -57,45 +57,36 @@ int PLANSRCH_ValidNode(PlanningNode *node, int validNodeTypes)
 /* end block 3 */
 // End Line: 191
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 PlanningNode *
 PLANSRCH_FindNodeToExpand(PlanningNode *planningPool, PlanningNode *goalNode, int validNodeTypes)
 
 {
   int iVar1;
-  long lVar2;
-  uint uVar3;
   PlanningNode *node;
-  int iVar4;
-  PlanningNode *pPVar5;
-  uint uVar6;
+  int iVar2;
 
-  uVar6 = 0xffffffff;
-  iVar4 = 0;
-  pPVar5 = (PlanningNode *)0x0;
+  iVar2 = 0;
   node = planningPool;
-  if (*(char *)(poolManagementData + 1) != '\0')
+  if (*(char *)(_poolManagementData + 1) != '\0')
   {
     do
     {
       iVar1 = PLANSRCH_ValidNode(node, validNodeTypes);
       if (((iVar1 != 0) && ((planningPool->flags & 1) != 0)) && ((planningPool->flags & 2) == 0))
       {
-        lVar2 = MATH3D_LengthXYZ((int)(node->pos).x - (int)(goalNode->pos).x,
-                                 (int)(planningPool->pos).y - (int)(goalNode->pos).y,
-                                 (int)(planningPool->pos).z - (int)(goalNode->pos).z);
-        uVar3 = (uint)planningPool->cost + lVar2;
-        if (uVar3 <= uVar6)
-        {
-          pPVar5 = planningPool;
-          uVar6 = uVar3;
-        }
+        /* WARNING: Subroutine does not return */
+        MATH3D_LengthXYZ((int)(node->pos).x - (int)(goalNode->pos).x,
+                         (int)(planningPool->pos).y - (int)(goalNode->pos).y,
+                         (int)(planningPool->pos).z - (int)(goalNode->pos).z);
       }
       planningPool = planningPool + 1;
-      iVar4 = iVar4 + 1;
+      iVar2 = iVar2 + 1;
       node = node + 1;
-    } while (iVar4 < (int)(uint) * (byte *)(poolManagementData + 1));
+    } while (iVar2 < (int)(uint) * (byte *)(_poolManagementData + 1));
   }
-  return pPVar5;
+  return (PlanningNode *)0x0;
 }
 
 // decompiled code
@@ -128,6 +119,8 @@ PLANSRCH_FindNodeToExpand(PlanningNode *planningPool, PlanningNode *goalNode, in
 /* end block 2 */
 // End Line: 280
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void PLANSRCH_ExpandNode(PlanningNode *planningPool, PlanningNode *nodeToExpand)
 
 {
@@ -138,7 +131,7 @@ void PLANSRCH_ExpandNode(PlanningNode *planningPool, PlanningNode *nodeToExpand)
   uint uVar5;
   int iVar6;
 
-  iVar2 = poolManagementData;
+  iVar2 = _poolManagementData;
   iVar3 = 0;
   uVar5 = nodeToExpand->connectionStatus;
   uVar4 = nodeToExpand->connections;
@@ -170,8 +163,8 @@ void PLANSRCH_ExpandNode(PlanningNode *planningPool, PlanningNode *nodeToExpand)
       uVar4 = (int)uVar4 >> 1;
       iVar3 = iVar3 + 1;
       planningPool = planningPool + 1;
-      iVar2 = poolManagementData;
-    } while (iVar3 < (int)(uint) * (byte *)(poolManagementData + 1));
+      iVar2 = _poolManagementData;
+    } while (iVar3 < (int)(uint) * (byte *)(_poolManagementData + 1));
   }
   return;
 }
@@ -204,15 +197,17 @@ void PLANSRCH_ExpandNode(PlanningNode *planningPool, PlanningNode *nodeToExpand)
 /* end block 4 */
 // End Line: 401
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void PLANSRCH_InitNodesForSearch(PlanningNode *planningPool)
 
 {
   int iVar1;
   int iVar2;
 
-  iVar1 = poolManagementData;
+  iVar1 = _poolManagementData;
   iVar2 = 0;
-  if (*(char *)(poolManagementData + 1) != '\0')
+  if (*(char *)(_poolManagementData + 1) != '\0')
   {
     do
     {

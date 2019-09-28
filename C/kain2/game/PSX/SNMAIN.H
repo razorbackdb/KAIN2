@@ -5,7 +5,7 @@ extern void __SN_ENTRY_POINT(); // 0x800B6D2C
 
 extern void __main(); // 0x800B6DD4
 
-extern int __initialised; // 0x800CAD6C
+extern void __initialised(); // 0x800CAD6C
 
 extern void __heapbase(); // 0x800CAD70
 

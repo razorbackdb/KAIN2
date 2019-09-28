@@ -1,32 +1,6 @@
 #include "THISDUST.H"
 #include "MENUDEFS.H"
 
-// int @0x800CFA70, len = 0x00000004
-hack_attract = 0x0;
-// int @0x800CFA74, len = 0x00000004
-hack_attract_movie = 0x0;
-// int @0x800CFA68, len = 0x00000004
-hack_reset_attract = 0x1;
-// int @0x800CFA64, len = 0x00000004
-ITEMSKIP = 0x2;
-// int @0x800CFA60, len = 0x00000004
-LINESKIP = 0xe;
-// int @0x800CFA54, len = 0x00000004
-MAIN_WIDTH = 0xac;
-// int @0x800CFA50, len = 0x00000004
-MAIN_XPOS = 0x87;
-// int @0x800CFA48, len = 0x00000004
-MAIN_YPOS = 0x1e;
-// int @0x800CFA5C, len = 0x00000004
-PAUSE_WIDTH = 0x100;
-// int @0x800CFA58, len = 0x00000004
-PAUSE_XPOS = 0x100;
-// int @0x800CFA4C, len = 0x00000004
-PAUSE_YPOS = 0x3c;
-// int @0x800CFA6C, len = 0x00000004
-StartGameFading = 0x0;
-// char * @0x800CADC8, len = 0x00000004
-the_attract_movies4 = "\KAINDEM1.STR;1" /* collapsed from &s_KAINDEM1_STR1_800cfa38 */;
 // decompiled code
 // original method signature:
 // void /*$ra*/ do_check_controller(void *gt /*$a0*/)
@@ -109,14 +83,14 @@ int do_pop_menu(void *gt, long param, menu_ctrl_t ctrl)
 /* end block 2 */
 // End Line: 427
 
-int do_function(void *gt, long fnparam, menu_ctrl_t ctrl)
+uint do_function(undefined4 param_1, undefined *param_2, int param_3)
 
 {
-  if (ctrl == menu_ctrl_engage)
+  if (param_3 == 5)
   {
-    (*(code *)fnparam)();
+    (*(code *)param_2)();
   }
-  return (uint)(ctrl == menu_ctrl_engage);
+  return (uint)(param_3 == 5);
 }
 
 // decompiled code
@@ -168,14 +142,14 @@ int do_start_game(void *gt, long parameter, menu_ctrl_t ctrl)
 /* end block 1 */
 // End Line: 516
 
-int do_save_menu(void *gt, long parameter, menu_ctrl_t ctrl)
+uint do_save_menu(int param_1, undefined4 param_2, int param_3)
 
 {
-  if (ctrl == menu_ctrl_engage)
+  if (param_3 == 5)
   {
-    menu_push(*(menu_t **)((int)gt + 0x20), memcard_pause_menu);
+    menu_push(*(menu_t **)(param_1 + 0x20), memcard_pause_menu);
   }
-  return (uint)(ctrl == menu_ctrl_engage);
+  return (uint)(param_3 == 5);
 }
 
 // decompiled code
@@ -192,12 +166,11 @@ int do_save_menu(void *gt, long parameter, menu_ctrl_t ctrl)
 /* end block 2 */
 // End Line: 574
 
-void womp_background(char *tim_path)
+void womp_background(void)
 
 {
-  MEMPACK_Free((char *)mainMenuScreen);
-  mainMenuScreen = MAIN_LoadTim(tim_path);
-  return;
+  /* WARNING: Subroutine does not return */
+  MEMPACK_Free(pcGpffff8c14);
 }
 
 // decompiled code
@@ -216,7 +189,7 @@ void womp_background(char *tim_path)
 /* end block 2 */
 // End Line: 609
 
-void play_movie(char *name)
+void play_movie(char *param_1)
 
 {
   int iVar1;
@@ -224,7 +197,7 @@ void play_movie(char *name)
   iVar1 = CINE_Load();
   if (iVar1 != 0)
   {
-    CINE_Play(name, 0xffff, 2);
+    CINE_Play(param_1, 0xffff, 2);
     CINE_Unload();
     MAIN_InitVolume();
   }
@@ -252,7 +225,7 @@ void menudefs_reset_hack_attract_mode(void)
 {
   if (0 < hack_attract)
   {
-    hack_attract = gameTrackerX.vblCount;
+    hack_attract = DAT_800d10e4;
   }
   return;
 }
@@ -271,17 +244,15 @@ void menudefs_reset_hack_attract_mode(void)
 /* end block 2 */
 // End Line: 701
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
-
 void check_hack_attract(void)
 
 {
-  if ((0 < hack_attract) && (hack_attract + 2000U < gameTrackerX.vblCount))
+  if ((0 < (int)uGpffff9fbc) && (uGpffff9fbc + 2000 < uGpffffb630))
   {
-    hack_attract = 1;
-    play_movie((&the_attract_movies4)[hack_attract_movie]);
-    hack_attract_movie = hack_attract_movie + 1U & 3;
-    hack_attract = gameTrackerX.vblCount;
+    uGpffff9fbc = 1;
+    play_movie(*(char **)(&the_attract_movies4 + uGpffff9fc0 * 4));
+    uGpffff9fc0 = uGpffff9fc0 + 1 & 3;
+    uGpffff9fbc = uGpffffb630;
   }
   return;
 }
@@ -412,16 +383,17 @@ void set_volume(sfx_t sfx, int cooked)
 int do_sound_adjust(void *gt, long sfxparam, menu_ctrl_t ctrl)
 
 {
-  int cooked;
+  int iVar1;
+  char *pcVar2;
 
-  cooked = get_volume(gt, sfxparam);
+  iVar1 = get_volume(gt, sfxparam);
   if (ctrl == menu_ctrl_left)
   {
-    if (cooked < 1)
+    if (0 < iVar1)
     {
-      return 1;
+      pcVar2 = flashStart();
+      return (int)pcVar2;
     }
-    cooked = cooked + -1;
   }
   else
   {
@@ -429,13 +401,11 @@ int do_sound_adjust(void *gt, long sfxparam, menu_ctrl_t ctrl)
     {
       return 0;
     }
-    if (9 < cooked)
+    if (iVar1 < 10)
     {
-      return 1;
+      set_volume(sfxparam, iVar1 + 1);
     }
-    cooked = cooked + 1;
   }
-  set_volume(sfxparam, cooked);
   return 1;
 }
 
@@ -551,15 +521,16 @@ int options_menu(void *gt, int index)
   }
   format = localstr_get(LOCALSTR_done);
   menu_item(*(menu_t **)((int)gt + 0x20), do_pop_menu, 0, format);
-  if ((iVar1 != wasDualShock_54) && (3 < index))
+  if ((iVar1 != _BlockVramEntry_800d5bec.area) && (3 < index))
   {
     index = iVar1 + 4;
   }
+  /* WARNING: Read-only address (ram,0x800d5c00) is written */
   if (index < 0)
   {
     index = 1;
   }
-  wasDualShock_54 = iVar1;
+  _BlockVramEntry_800d5bec.area = iVar1;
   return index;
 }
 
@@ -572,7 +543,7 @@ int options_menu(void *gt, int index)
 /* end block 1 */
 // End Line: 2322
 
-int main_menu(void *gt, int index)
+int main_menu(void *param_1, int param_2)
 
 {
   language_t lVar1;
@@ -580,57 +551,46 @@ int main_menu(void *gt, int index)
   menu_t *menu;
   int ypos;
 
-  hack_attract = 0;
+  uGpffff9fbc = 0;
   lVar1 = localstr_get_language();
   if (lVar1 == language_spanish)
   {
-    menu = *(menu_t **)((int)gt + 0x20);
-    ypos = MAIN_YPOS + -2;
+    menu = *(menu_t **)((int)param_1 + 0x20);
+    ypos = iGpffff9f94 + -2;
   }
   else
   {
-    menu = *(menu_t **)((int)gt + 0x20);
-    ypos = MAIN_YPOS;
+    menu = *(menu_t **)((int)param_1 + 0x20);
+    ypos = iGpffff9f94;
   }
-  menu_format(menu, 1, MAIN_XPOS, ypos, MAIN_WIDTH, LINESKIP, ITEMSKIP, 0);
-  MENUFACE_ChangeStateRandomly(index);
-  do_check_controller(gt);
+  menu_format(menu, 1, iGpffff9f9c, ypos, iGpffff9fa0, iGpffff9fac, iGpffff9fb0, 0);
+  MENUFACE_ChangeStateRandomly(param_2);
+  do_check_controller(param_1);
   format = localstr_get(LOCALSTR_start_game);
-  menu_item(*(menu_t **)((int)gt + 0x20), do_start_game, 0, format);
+  menu_item(*(menu_t **)((int)param_1 + 0x20), do_start_game, 0, format);
   format = localstr_get(LOCALSTR_options);
-  menu_item(*(menu_t **)((int)gt + 0x20), do_push_menu, (long)options_menu, format);
-  if (index < 0)
+  menu_item(*(menu_t **)((int)param_1 + 0x20), do_push_menu, (long)options_menu, format);
+  if (param_2 < 0)
   {
-    index = 0;
+    param_2 = 0;
   }
-  return index;
+  return param_2;
 }
 
-// decompiled code
-// original method signature:
+// autogenerated function stub:
 // int /*$ra*/ do_main_menu(void *gt /*$a0*/, long param /*$a1*/, enum menu_ctrl_t ctrl /*$a2*/)
-// line 1180, offset 0x800b904c
-/* begin block 1 */
-// Start line: 2391
-/* end block 1 */
-// End Line: 2392
+int do_main_menu(void *gt, long param, enum menu_ctrl_t ctrl)
+{ // line 1180, offset 0x800b904c
+  /* begin block 1 */
+  // Start line: 2391
+  /* end block 1 */
+  // End Line: 2392
 
-/* begin block 2 */
-// Start line: 2392
-/* end block 2 */
-// End Line: 2393
+  /* begin block 2 */
+  // Start line: 2392
+  /* end block 2 */
+  // End Line: 2393
 
-int do_main_menu(void *gt, long param, menu_ctrl_t ctrl)
-
-{
-  if ((StartGameFading == 0) && ((ctrl == menu_ctrl_start || (ctrl == menu_ctrl_engage))))
-  {
-    *(undefined2 *)((int)gt + 0xd0) = 10;
-    *(undefined2 *)((int)gt + 0xcc) = 0xffec;
-    *(undefined2 *)((int)gt + 0xce) = 0x14;
-    StartGameFading = 1;
-    return 1;
-  }
   return 0;
 }
 
@@ -664,8 +624,6 @@ int do_main_menu(void *gt, long param, menu_ctrl_t ctrl)
 /* end block 2 */
 // End Line: 2428
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
-
 char *flashStart(void)
 
 {
@@ -677,42 +635,42 @@ char *flashStart(void)
   int iVar6;
   int iVar7;
 
-  gameTrackerX.gameFramePassed = 1;
-  if (StartGameFading == 1)
+  uGpffffb758 = 1;
+  if (iGpffff9fb8 == 1)
   {
-    hack_reset_attract = StartGameFading;
-    if (gameTrackerX.wipeTime == -1)
+    iGpffff9fb4 = iGpffff9fb8;
+    if (sGpffffb5c4 == -1)
     {
-      womp_background(s__kain2_game_psx_bkgdmenu_tim_800cfa80);
-      gameTrackerX.wipeType = 10;
-      gameTrackerX.wipeTime = 0x14;
-      gameTrackerX.maxWipeTime = 0x14;
-      StartGameFading = 0;
-      menu_pop(gameTrackerX.menu);
-      menu_push(gameTrackerX.menu, main_menu);
+      womp_background();
+      uGpffffb5c8 = 10;
+      sGpffffb5c4 = 0x14;
+      uGpffffb5c6 = 0x14;
+      iGpffff9fb8 = 0;
+      menu_pop(pmGpffffb518);
+      menu_push(pmGpffffb518, main_menu);
       return (char *)0x0;
     }
     goto LAB_800b9284;
   }
-  DAT_800cfaa0 = (DAT_800cfaa0 + 1) % 0x3c;
-  if (DAT_800cfaa0 < 10)
+  iGpffff9fec = (iGpffff9fec + 1) % 0x3c;
+  if (iGpffff9fec < 10)
   {
     iVar3 = 0;
   }
   else
   {
-    if (DAT_800cfaa0 < 0x1e)
+    if (iGpffff9fec < 0x1e)
     {
-      iVar3 = DAT_800cfaa0 + -10;
+      iVar3 = iGpffff9fec + -10;
     }
     else
     {
-      if (DAT_800cfaa0 < 0x28)
+      if (iGpffff9fec < 0x28)
       {
         iVar3 = 0x1000;
         goto LAB_800b91ec;
       }
-      iVar3 = 0x3c - DAT_800cfaa0;
+      iVar3 = 0x3c - iGpffff9fec;
     }
     iVar3 = (iVar3 << 0xc) / 0x14;
   }
@@ -745,25 +703,25 @@ LAB_800b9284:
 /* end block 2 */
 // End Line: 2556
 
-int menudefs_main_menu(void *gt, int index)
+int menudefs_main_menu(int param_1, int param_2)
 
 {
   char *format;
 
-  if (hack_reset_attract != 0)
+  if (iGpffff9fb4 != 0)
   {
-    hack_reset_attract = 0;
-    hack_attract = gameTrackerX.vblCount;
+    iGpffff9fb4 = 0;
+    uGpffff9fbc = uGpffffb630;
   }
   check_hack_attract();
-  menu_format(*(menu_t **)((int)gt + 0x20), 1, 0x16e, 0x90, 100, LINESKIP, ITEMSKIP, 0);
+  menu_format(*(menu_t **)(param_1 + 0x20), 1, 0x16e, 0x90, 100, iGpffff9fac, iGpffff9fb0, 0);
   format = flashStart();
-  menu_item(*(menu_t **)((int)gt + 0x20), do_main_menu, 0, format);
-  if (index < 0)
+  menu_item(*(menu_t **)(param_1 + 0x20), (TDRFuncPtr_menu_item1fn)&do_main_menu, 0, format);
+  if (param_2 < 0)
   {
-    index = 0;
+    param_2 = 0;
   }
-  return index;
+  return param_2;
 }
 
 // decompiled code
@@ -775,24 +733,24 @@ int menudefs_main_menu(void *gt, int index)
 /* end block 1 */
 // End Line: 2620
 
-int menudefs_confirmexit_menu(void *gt, int index)
+int menudefs_confirmexit_menu(void *param_1, int param_2)
 
 {
   char *format;
 
-  hack_attract = 0;
-  do_check_controller(gt);
+  uGpffff9fbc = 0;
+  do_check_controller(param_1);
   format = localstr_get(LOCALSTR_query_quit);
-  menu_item_flags(*(menu_t **)((int)gt + 0x20), (TDRFuncPtr_menu_item_flags1fn)0x0, 0, 4, format);
+  menu_item_flags(*(menu_t **)((int)param_1 + 0x20), (TDRFuncPtr_menu_item_flags1fn)0x0, 0, 4, format);
   format = localstr_get(LOCALSTR_no);
-  menu_item(*(menu_t **)((int)gt + 0x20), do_pop_menu, 0, format);
+  menu_item(*(menu_t **)((int)param_1 + 0x20), do_pop_menu, 0, format);
   format = localstr_get(LOCALSTR_yes);
-  menu_item(*(menu_t **)((int)gt + 0x20), do_function, (long)DEBUG_ExitGame, format);
-  if (index < 0)
+  menu_item(*(menu_t **)((int)param_1 + 0x20), do_function, (long)DEBUG_ExitGame, format);
+  if (param_2 < 0)
   {
-    index = 1;
+    param_2 = 1;
   }
-  return index;
+  return param_2;
 }
 
 // decompiled code
@@ -804,30 +762,31 @@ int menudefs_confirmexit_menu(void *gt, int index)
 /* end block 1 */
 // End Line: 2642
 
-int menudefs_pause_menu(void *gt, int index)
+int menudefs_pause_menu(void *param_1, int param_2)
 
 {
   char *format;
 
-  do_check_controller(gt);
-  hack_attract = 0;
-  menu_format(*(menu_t **)((int)gt + 0x20), 1, PAUSE_XPOS, PAUSE_YPOS, PAUSE_WIDTH, LINESKIP, ITEMSKIP, 1);
+  do_check_controller(param_1);
+  uGpffff9fbc = 0;
+  menu_format(*(menu_t **)((int)param_1 + 0x20), 1, iGpffff9fa4, iGpffff9f98, iGpffff9fa8, iGpffff9fac,
+              iGpffff9fb0, 1);
   format = localstr_get(LOCALSTR_paused);
-  menu_item_flags(*(menu_t **)((int)gt + 0x20), (TDRFuncPtr_menu_item_flags1fn)0x0, 0, 4, format);
+  menu_item_flags(*(menu_t **)((int)param_1 + 0x20), (TDRFuncPtr_menu_item_flags1fn)0x0, 0, 4, format);
   format = localstr_get(LOCALSTR_resume_game);
-  menu_item(*(menu_t **)((int)gt + 0x20), do_function, (long)DEBUG_ContinueGame, format);
-  if ((gameTrackerX.streamFlags & 4U) == 0)
+  menu_item(*(menu_t **)((int)param_1 + 0x20), do_function, (long)&DEBUG_ContinueGame, format);
+  if ((uGpffffb63c & 4) == 0)
   {
     format = localstr_get(LOCALSTR_save_game);
-    menu_item(*(menu_t **)((int)gt + 0x20), do_save_menu, 0, format);
+    menu_item(*(menu_t **)((int)param_1 + 0x20), do_save_menu, 0, format);
     format = localstr_get(LOCALSTR_options);
-    menu_item(*(menu_t **)((int)gt + 0x20), do_push_menu, (long)options_menu, format);
+    menu_item(*(menu_t **)((int)param_1 + 0x20), do_push_menu, (long)options_menu, format);
     format = localstr_get(LOCALSTR_quit_game);
-    menu_item(*(menu_t **)((int)gt + 0x20), do_push_menu, (long)menudefs_confirmexit_menu, format);
+    menu_item(*(menu_t **)((int)param_1 + 0x20), do_push_menu, (long)menudefs_confirmexit_menu, format);
   }
-  if (index < 0)
+  if (param_2 < 0)
   {
-    index = 1;
+    param_2 = 1;
   }
-  return index;
+  return param_2;
 }

@@ -13,18 +13,8 @@
 void PLAYER_TurnHead(_Instance *instance, short *rotx, short *rotz, GameTracker *gameTracker)
 
 {
-  ulong uVar1;
-
-  uVar1 = INSTANCE_Query(instance, 1);
-  if ((uVar1 & 1) == 0)
-  {
-    MONAPI_TurnHead(instance, rotx, rotz, gameTracker);
-  }
-  else
-  {
-    RAZIEL_TurnHead(instance, rotx, rotz, gameTracker);
-  }
-  return;
+	/* WARNING: Subroutine does not return */
+	INSTANCE_Query(instance, 1);
 }
 
 // decompiled code
@@ -39,19 +29,8 @@ void PLAYER_TurnHead(_Instance *instance, short *rotx, short *rotz, GameTracker 
 long PLAYER_OkToLookAround(_Instance *instance)
 
 {
-  ulong uVar1;
-  long lVar2;
-
-  uVar1 = INSTANCE_Query(instance, 1);
-  if ((uVar1 & 1) == 0)
-  {
-    lVar2 = MONAPI_OkToLookAround(instance);
-  }
-  else
-  {
-    lVar2 = RAZIEL_OkToLookAround(instance);
-  }
-  return lVar2;
+	/* WARNING: Subroutine does not return */
+	INSTANCE_Query(instance, 1);
 }
 
 // decompiled code
@@ -71,18 +50,8 @@ long PLAYER_OkToLookAround(_Instance *instance)
 void PLAYER_SetLookAround(_Instance *instance)
 
 {
-  ulong uVar1;
-
-  uVar1 = INSTANCE_Query(instance, 1);
-  if ((uVar1 & 1) == 0)
-  {
-    MONAPI_SetLookAround(instance);
-  }
-  else
-  {
-    RAZIEL_SetLookAround(instance);
-  }
-  return;
+	/* WARNING: Subroutine does not return */
+	INSTANCE_Query(instance, 1);
 }
 
 // decompiled code
@@ -97,16 +66,6 @@ void PLAYER_SetLookAround(_Instance *instance)
 void PLAYER_ReSetLookAround(_Instance *instance)
 
 {
-  ulong uVar1;
-
-  uVar1 = INSTANCE_Query(instance, 1);
-  if ((uVar1 & 1) == 0)
-  {
-    MONAPI_ResetLookAround(instance);
-  }
-  else
-  {
-    RAZIEL_ResetLookAround(instance);
-  }
-  return;
+	/* WARNING: Subroutine does not return */
+	INSTANCE_Query(instance, 1);
 }

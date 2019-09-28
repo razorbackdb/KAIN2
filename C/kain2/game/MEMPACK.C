@@ -1,30 +1,6 @@
-//#include "THISDUST.H"
+#include "THISDUST.H"
 #include "MEMPACK.H"
-#include "STREAM.H"
-#include "AADLIB.H"
-#include "LOAD3D.H"
-#include "EVENT.H"
-#include "SIGNAL.H"
 
-#include <stddef.h>
-#include <string.h>
-
-#define uint unsigned int
-typedef unsigned char byte;
-
-// NewMemTracker @0x800D18D4, len = 0x00000014
-/* newMemTracker =
-    {
-        // MemHeader * @0x800D18D4, len = 0x00000004
-        .rootNode = null,
-        // ulong @0x800D18D8, len = 0x00000004
-        .totalMemory = null,
-        // ulong @0x800D18DC, len = 0x00000004
-        .currentMemoryUsed = null,
-        // char * @0x800D18E0, len = 0x00000004
-        .lastMemoryAddress = null,
-        // long @0x800D18E4, len = 0x00000004
-        .doingGarbageCollection = null}; */
 // decompiled code
 // original method signature:
 // void /*$ra*/ MEMPACK_Init()
@@ -44,10 +20,9 @@ typedef unsigned char byte;
 void MEMPACK_Init(void)
 
 {
-  int overlayAddress; //stub
-  newMemTracker.totalMemory = (ulong)(/*&DAT_801ff000*/ + -(int)overlayAddress);
+  newMemTracker.totalMemory = (ulong)(&DAT_801ff000 + -(int)overlayAddress);
   newMemTracker.rootNode = (MemHeader *)overlayAddress;
-  *(int *)overlayAddress = 0xbade;
+  *(undefined2 *)overlayAddress = 0xbade;
   (newMemTracker.rootNode)->memStatus = '\0';
   (newMemTracker.rootNode)->memType = '\0';
   (newMemTracker.rootNode)->memSize = newMemTracker.totalMemory;
@@ -215,7 +190,8 @@ char *MEMPACK_Malloc(ulong allocSize, uchar memType)
   if (pcVar1 == (char *)0x0)
   {
     MEMPACK_ReportMemory2();
-    //DEBUG_FatalError("Trying to fit memory size %d Type =");
+    /* WARNING: Subroutine does not return */
+    DEBUG_FatalError(s_Trying_to_fit_memory_size__d_Typ_800cebdc);
   }
   return pcVar1;
 }
@@ -273,7 +249,7 @@ char *MEMPACK_MallocFailOk(ulong allocSize, uchar memType)
   MemHeader *pMVar2;
   ulong uVar3;
   MemHeader *pMVar4;
-  int *puVar5;
+  undefined2 *puVar5;
   uint allocSize_00;
 
   lVar1 = MEMPACK_RelocatableType((uint)memType);
@@ -311,7 +287,7 @@ char *MEMPACK_MallocFailOk(ulong allocSize, uchar memType)
       }
       else
       {
-        puVar5 = (int *)((int)&pMVar2->magicNumber + allocSize_00);
+        puVar5 = (undefined2 *)((int)&pMVar2->magicNumber + allocSize_00);
         if (lVar1 == 0)
         {
           pMVar4 = (MemHeader *)((int)pMVar2 + (uVar3 - allocSize_00));
@@ -327,8 +303,8 @@ char *MEMPACK_MallocFailOk(ulong allocSize, uchar memType)
           goto LAB_8004fe00;
         }
         *puVar5 = 0xbade;
-        *(char *)(puVar5 + 1) = 0;
-        *(char *)((int)puVar5 + 3) = 0;
+        *(undefined *)(puVar5 + 1) = 0;
+        *(undefined *)((int)puVar5 + 3) = 0;
         *(ulong *)(puVar5 + 2) = pMVar2->memSize - allocSize_00;
         pMVar2->magicNumber = 0xbade;
       }
@@ -490,28 +466,22 @@ void MEMPACK_Free(char *address)
 void MEMPACK_FreeByType(uchar memType)
 
 {
-  bool bVar1;
-  MemHeader *pMVar2;
+  MemHeader *pMVar1;
 
-  do
+  pMVar1 = newMemTracker.rootNode;
+  if (newMemTracker.rootNode != (MemHeader *)newMemTracker.lastMemoryAddress)
   {
-    bVar1 = false;
-    pMVar2 = newMemTracker.rootNode;
-    while (pMVar2 != (MemHeader *)newMemTracker.lastMemoryAddress)
+    do
     {
-      if ((pMVar2->memStatus == '\x01') && (pMVar2->memType == memType))
+      if ((pMVar1->memStatus == '\x01') && (pMVar1->memType == memType))
       {
-        bVar1 = true;
-        MEMPACK_Free((char *)(pMVar2 + 1));
-        break;
+        /* WARNING: Subroutine does not return */
+        MEMPACK_Free((char *)(pMVar1 + 1));
       }
-      pMVar2 = (MemHeader *)((int)&pMVar2->magicNumber + pMVar2->memSize);
-    }
-    if (!bVar1)
-    {
-      return;
-    }
-  } while (true);
+      pMVar1 = (MemHeader *)((int)&pMVar1->magicNumber + pMVar1->memSize);
+    } while (pMVar1 != (MemHeader *)newMemTracker.lastMemoryAddress);
+  }
+  return;
 }
 
 // decompiled code
@@ -818,7 +788,8 @@ char *MEMPACK_GarbageCollectMalloc(ulong *allocSize, uchar memType, ulong *freeS
     if (pMVar1 == (MemHeader *)0x0)
     {
       MEMPACK_ReportMemory();
-      //DEBUG_FatalError("Trying to fit memory size %d Type = %d\nAvali");
+      /* WARNING: Subroutine does not return */
+      DEBUG_FatalError(s_Trying_to_fit_memory_size__d_Typ_800cec2c);
     }
   }
   if (pMVar1->memSize - *allocSize < 8)
@@ -879,14 +850,14 @@ char *MEMPACK_GarbageCollectMalloc(ulong *allocSize, uchar memType, ulong *freeS
 void MEMPACK_GarbageSplitMemoryNow(ulong allocSize, MemHeader *bestAddress, long memType, ulong freeSize)
 
 {
-  int *puVar1;
+  undefined2 *puVar1;
 
-  puVar1 = (int *)((int)&bestAddress->magicNumber + allocSize);
+  puVar1 = (undefined2 *)((int)&bestAddress->magicNumber + allocSize);
   if (freeSize != 0)
   {
     *puVar1 = 0xbade;
-    *(char *)(puVar1 + 1) = 0;
-    *(char *)((int)puVar1 + 3) = 0;
+    *(undefined *)(puVar1 + 1) = 0;
+    *(undefined *)((int)puVar1 + 3) = 0;
     *(ulong *)(puVar1 + 2) = freeSize;
   }
   return;
@@ -1824,11 +1795,11 @@ void MEMPACK_RelocateAreaType(MemHeader *newAddress, long offset, Level *oldLeve
 /* end block 3 */
 // End Line: 3036
 
-/* void MEMPACK_RelocateG2AnimKeylistType(_G2AnimKeylist_Type **pKeylist, int offset, char *start, char *end)
+void MEMPACK_RelocateG2AnimKeylistType(_G2AnimKeylist_Type **pKeylist, int offset, char *start, char *end)
 
 {
   _G2AnimKeylist_Type *p_Var1;
-  //_func_7 **pp_Var2;
+  _func_7 **pp_Var2;
   _G2AnimKeylist_Type *p_Var3;
   _G2AnimFxHeader_Type *p_Var4;
   int iVar5;
@@ -1863,13 +1834,13 @@ void MEMPACK_RelocateAreaType(MemHeader *newAddress, long offset, Level *oldLeve
           }
           p_Var3->sectionData = pp_Var2;
           iVar5 = iVar5 + 1;
-          p_Var3 = (_G2AnimKeylist_Type *)&p_Var3->keyCount; 
+          p_Var3 = (_G2AnimKeylist_Type *)&p_Var3->keyCount;
         } while (iVar5 < (int)(uint)p_Var1->sectionCount);
       }
     }
   }
   return;
-} */
+}
 
 // decompiled code
 // original method signature:
@@ -1949,228 +1920,223 @@ void MEMPACK_RelocateObjectType(MemHeader *newAddress, long offset, Object *oldO
   int iVar4;
   int *piVar5;
   int **ppiVar6;
-  _Model *p_Var7;
-  _G2AnimKeylist_Type *p_Var8;
+  int iVar7;
+  ulong uVar8;
   int iVar9;
-  ulong uVar10;
+  Object *pOVar10;
   int iVar11;
-  _Model *p_Var12;
-  Object *pOVar13;
-  int iVar14;
+  int iVar12;
+  ulong uVar13;
+  int *piVar14;
   int iVar15;
-  _Instance *p_Var16;
-  ulong uVar17;
-  int *piVar18;
-  _Instance *p_Var19;
-  int iVar20;
 
-  uVar17 = 0;
+  uVar13 = 0;
   uVar1 = newAddress->memSize;
   if (newAddress[2].memSize != 0)
   {
-    uVar17 = newAddress[2].memSize + offset;
+    uVar13 = newAddress[2].memSize + offset;
   }
   iVar2 = *(int *)(newAddress + 3);
-  iVar9 = 0;
-  newAddress[2].memSize = uVar17;
+  iVar7 = 0;
+  newAddress[2].memSize = uVar13;
   if (iVar2 != 0)
   {
-    iVar9 = iVar2 + offset;
+    iVar7 = iVar2 + offset;
   }
   iVar2 = 0;
-  *(int *)(newAddress + 3) = iVar9;
+  *(int *)(newAddress + 3) = iVar7;
   if (*(int *)(newAddress + 6) != 0)
   {
     iVar2 = *(int *)(newAddress + 6) + offset;
   }
-  uVar17 = newAddress[4].memSize;
-  uVar10 = 0;
+  uVar13 = newAddress[4].memSize;
+  uVar8 = 0;
   *(int *)(newAddress + 6) = iVar2;
-  if (uVar17 != 0)
+  if (uVar13 != 0)
   {
-    uVar10 = uVar17 + offset;
+    uVar8 = uVar13 + offset;
   }
   iVar2 = *(int *)(newAddress + 5);
-  iVar9 = 0;
-  newAddress[4].memSize = uVar10;
+  iVar7 = 0;
+  newAddress[4].memSize = uVar8;
   if (iVar2 != 0)
   {
-    iVar9 = iVar2 + offset;
+    iVar7 = iVar2 + offset;
   }
-  uVar17 = newAddress[5].memSize;
-  uVar10 = 0;
-  *(int *)(newAddress + 5) = iVar9;
-  if (uVar17 != 0)
+  uVar13 = newAddress[5].memSize;
+  uVar8 = 0;
+  *(int *)(newAddress + 5) = iVar7;
+  if (uVar13 != 0)
   {
-    uVar10 = uVar17 + offset;
+    uVar8 = uVar13 + offset;
   }
-  iVar9 = *(int *)(newAddress + 8);
+  iVar7 = *(int *)(newAddress + 8);
   iVar2 = 0;
-  newAddress[5].memSize = uVar10;
-  if (iVar9 != 0)
+  newAddress[5].memSize = uVar8;
+  if (iVar7 != 0)
   {
-    iVar2 = iVar9 + offset;
+    iVar2 = iVar7 + offset;
   }
   *(int *)(newAddress + 8) = iVar2;
   if ((*(uint *)(newAddress + 1) & 0x8000000) != 0)
   {
-    uVar17 = 0;
+    uVar13 = 0;
     if (newAddress[8].memSize != 0)
     {
-      uVar17 = newAddress[8].memSize + offset;
+      uVar13 = newAddress[8].memSize + offset;
     }
-    iVar9 = *(int *)(newAddress + 9);
+    iVar7 = *(int *)(newAddress + 9);
     iVar2 = 0;
-    newAddress[8].memSize = uVar17;
-    if (iVar9 != 0)
+    newAddress[8].memSize = uVar13;
+    if (iVar7 != 0)
     {
-      iVar2 = iVar9 + offset;
+      iVar2 = iVar7 + offset;
     }
     *(int *)(newAddress + 9) = iVar2;
   }
   iVar2 = 0;
   if (0 < (short)newAddress[2].magicNumber)
   {
-    iVar9 = 0;
+    iVar7 = 0;
     do
     {
-      piVar5 = (int *)(iVar9 + newAddress[2].memSize);
-      iVar11 = *piVar5;
+      piVar5 = (int *)(iVar7 + newAddress[2].memSize);
+      iVar9 = *piVar5;
       iVar3 = 0;
-      if (iVar11 != 0)
+      if (iVar9 != 0)
       {
-        iVar3 = iVar11 + offset;
+        iVar3 = iVar9 + offset;
       }
       *piVar5 = iVar3;
-      iVar11 = *(int *)(iVar9 + newAddress[2].memSize);
+      iVar9 = *(int *)(iVar7 + newAddress[2].memSize);
       iVar3 = 0;
-      if (*(int *)(iVar11 + 4) != 0)
+      if (*(int *)(iVar9 + 4) != 0)
       {
-        iVar3 = *(int *)(iVar11 + 4) + offset;
+        iVar3 = *(int *)(iVar9 + 4) + offset;
       }
-      iVar14 = 0;
-      *(int *)(iVar11 + 4) = iVar3;
-      if (*(int *)(iVar11 + 0xc) != 0)
+      iVar11 = 0;
+      *(int *)(iVar9 + 4) = iVar3;
+      if (*(int *)(iVar9 + 0xc) != 0)
       {
-        iVar14 = *(int *)(iVar11 + 0xc) + offset;
-      }
-      iVar3 = 0;
-      *(int *)(iVar11 + 0xc) = iVar14;
-      if (*(int *)(iVar11 + 0x14) != 0)
-      {
-        iVar3 = *(int *)(iVar11 + 0x14) + offset;
-      }
-      iVar14 = 0;
-      *(int *)(iVar11 + 0x14) = iVar3;
-      if (*(int *)(iVar11 + 0x1c) != 0)
-      {
-        iVar14 = *(int *)(iVar11 + 0x1c) + offset;
+        iVar11 = *(int *)(iVar9 + 0xc) + offset;
       }
       iVar3 = 0;
-      *(int *)(iVar11 + 0x1c) = iVar14;
-      if (*(int *)(iVar11 + 0x20) != 0)
+      *(int *)(iVar9 + 0xc) = iVar11;
+      if (*(int *)(iVar9 + 0x14) != 0)
       {
-        iVar3 = *(int *)(iVar11 + 0x20) + offset;
+        iVar3 = *(int *)(iVar9 + 0x14) + offset;
       }
-      iVar14 = 0;
-      *(int *)(iVar11 + 0x20) = iVar3;
-      if (*(int *)(iVar11 + 0x2c) != 0)
+      iVar11 = 0;
+      *(int *)(iVar9 + 0x14) = iVar3;
+      if (*(int *)(iVar9 + 0x1c) != 0)
       {
-        iVar14 = *(int *)(iVar11 + 0x2c) + offset;
-      }
-      iVar3 = 0;
-      *(int *)(iVar11 + 0x2c) = iVar14;
-      if (*(int *)(iVar11 + 0x30) != 0)
-      {
-        iVar3 = *(int *)(iVar11 + 0x30) + offset;
-      }
-      iVar14 = 0;
-      *(int *)(iVar11 + 0x30) = iVar3;
-      if (*(int *)(iVar11 + 0x34) != 0)
-      {
-        iVar14 = *(int *)(iVar11 + 0x34) + offset;
+        iVar11 = *(int *)(iVar9 + 0x1c) + offset;
       }
       iVar3 = 0;
-      *(int *)(iVar11 + 0x34) = iVar14;
-      if (0 < *(int *)(iVar11 + 0x10))
+      *(int *)(iVar9 + 0x1c) = iVar11;
+      if (*(int *)(iVar9 + 0x20) != 0)
       {
-        iVar14 = 0;
+        iVar3 = *(int *)(iVar9 + 0x20) + offset;
+      }
+      iVar11 = 0;
+      *(int *)(iVar9 + 0x20) = iVar3;
+      if (*(int *)(iVar9 + 0x2c) != 0)
+      {
+        iVar11 = *(int *)(iVar9 + 0x2c) + offset;
+      }
+      iVar3 = 0;
+      *(int *)(iVar9 + 0x2c) = iVar11;
+      if (*(int *)(iVar9 + 0x30) != 0)
+      {
+        iVar3 = *(int *)(iVar9 + 0x30) + offset;
+      }
+      iVar11 = 0;
+      *(int *)(iVar9 + 0x30) = iVar3;
+      if (*(int *)(iVar9 + 0x34) != 0)
+      {
+        iVar11 = *(int *)(iVar9 + 0x34) + offset;
+      }
+      iVar3 = 0;
+      *(int *)(iVar9 + 0x34) = iVar11;
+      if (0 < *(int *)(iVar9 + 0x10))
+      {
+        iVar11 = 0;
         do
         {
-          iVar15 = *(int *)(iVar11 + 0x14) + iVar14;
-          if ((*(byte *)(iVar15 + 7) & 2) != 0)
+          iVar12 = *(int *)(iVar9 + 0x14) + iVar11;
+          if ((*(byte *)(iVar12 + 7) & 2) != 0)
           {
             iVar4 = 0;
-            if (*(int *)(iVar15 + 8) != 0)
+            if (*(int *)(iVar12 + 8) != 0)
             {
-              iVar4 = *(int *)(iVar15 + 8) + offset;
+              iVar4 = *(int *)(iVar12 + 8) + offset;
             }
-            *(int *)(iVar15 + 8) = iVar4;
+            *(int *)(iVar12 + 8) = iVar4;
           }
           iVar3 = iVar3 + 1;
-          iVar14 = iVar14 + 0xc;
-        } while (iVar3 < *(int *)(iVar11 + 0x10));
+          iVar11 = iVar11 + 0xc;
+        } while (iVar3 < *(int *)(iVar9 + 0x10));
       }
       iVar3 = 0;
-      if (0 < *(int *)(iVar11 + 0x18))
+      if (0 < *(int *)(iVar9 + 0x18))
       {
-        iVar14 = 0;
+        iVar11 = 0;
         do
         {
-          iVar15 = *(int *)(iVar11 + 0x1c) + iVar14;
-          iVar4 = *(int *)(iVar15 + 0x14);
-          iVar20 = 0;
+          iVar12 = *(int *)(iVar9 + 0x1c) + iVar11;
+          iVar4 = *(int *)(iVar12 + 0x14);
+          iVar15 = 0;
           if (iVar4 != 0)
           {
-            iVar20 = iVar4 + offset;
+            iVar15 = iVar4 + offset;
           }
-          *(int *)(iVar15 + 0x14) = iVar20;
-          if (iVar20 != 0)
+          *(int *)(iVar12 + 0x14) = iVar15;
+          if (iVar15 != 0)
           {
-            iVar15 = 0;
-            if (*(int *)(iVar20 + 4) != 0)
+            iVar12 = 0;
+            if (*(int *)(iVar15 + 4) != 0)
             {
-              iVar15 = *(int *)(iVar20 + 4) + offset;
+              iVar12 = *(int *)(iVar15 + 4) + offset;
             }
             iVar4 = 0;
-            *(int *)(iVar20 + 4) = iVar15;
-            if (*(int *)(iVar20 + 0xc) != 0)
+            *(int *)(iVar15 + 4) = iVar12;
+            if (*(int *)(iVar15 + 0xc) != 0)
             {
-              iVar4 = *(int *)(iVar20 + 0xc) + offset;
+              iVar4 = *(int *)(iVar15 + 0xc) + offset;
             }
-            iVar15 = 0;
-            *(int *)(iVar20 + 0xc) = iVar4;
-            if (*(int *)(iVar20 + 0x14) != 0)
+            iVar12 = 0;
+            *(int *)(iVar15 + 0xc) = iVar4;
+            if (*(int *)(iVar15 + 0x14) != 0)
             {
-              iVar15 = *(int *)(iVar20 + 0x14) + offset;
+              iVar12 = *(int *)(iVar15 + 0x14) + offset;
             }
-            *(int *)(iVar20 + 0x14) = iVar15;
+            *(int *)(iVar15 + 0x14) = iVar12;
           }
           iVar3 = iVar3 + 1;
-          iVar14 = iVar14 + 0x18;
-        } while (iVar3 < *(int *)(iVar11 + 0x18));
+          iVar11 = iVar11 + 0x18;
+        } while (iVar3 < *(int *)(iVar9 + 0x18));
       }
-      piVar5 = *(int **)(iVar11 + 0x20);
+      piVar5 = *(int **)(iVar9 + 0x20);
       if (piVar5 != (int *)0x0)
       {
-        piVar18 = piVar5 + 1;
+        piVar14 = piVar5 + 1;
         iVar3 = 0;
         if (0 < *piVar5)
         {
           do
           {
-            iVar14 = 0;
-            if (*piVar18 != 0)
+            iVar11 = 0;
+            if (*piVar14 != 0)
             {
-              iVar14 = *piVar18 + offset;
+              iVar11 = *piVar14 + offset;
             }
-            *piVar18 = iVar14;
+            *piVar14 = iVar11;
             iVar3 = iVar3 + 1;
-            piVar18 = piVar18 + 3;
-          } while (iVar3 < **(int **)(iVar11 + 0x20));
+            piVar14 = piVar14 + 3;
+          } while (iVar3 < **(int **)(iVar9 + 0x20));
         }
       }
-      ppiVar6 = *(int ***)(iVar11 + 0x2c);
+      ppiVar6 = *(int ***)(iVar9 + 0x2c);
       if (ppiVar6 != (int **)0x0)
       {
         piVar5 = (int *)0x0;
@@ -2178,26 +2144,26 @@ void MEMPACK_RelocateObjectType(MemHeader *newAddress, long offset, Object *oldO
         {
           piVar5 = (int *)((int)*ppiVar6 + offset);
         }
-        piVar18 = (int *)0x0;
+        piVar14 = (int *)0x0;
         *ppiVar6 = piVar5;
         if (ppiVar6[1] != (int *)0x0)
         {
-          piVar18 = (int *)((int)ppiVar6[1] + offset);
+          piVar14 = (int *)((int)ppiVar6[1] + offset);
         }
         piVar5 = (int *)0x0;
-        ppiVar6[1] = piVar18;
+        ppiVar6[1] = piVar14;
         if (ppiVar6[2] != (int *)0x0)
         {
           piVar5 = (int *)((int)ppiVar6[2] + offset);
         }
-        piVar18 = (int *)0x0;
+        piVar14 = (int *)0x0;
         ppiVar6[2] = piVar5;
         if (ppiVar6[3] != (int *)0x0)
         {
-          piVar18 = (int *)((int)ppiVar6[3] + offset);
+          piVar14 = (int *)((int)ppiVar6[3] + offset);
         }
         piVar5 = *ppiVar6;
-        ppiVar6[3] = piVar18;
+        ppiVar6[3] = piVar14;
         if (piVar5 != (int *)0x0)
         {
           iVar3 = 0;
@@ -2239,8 +2205,8 @@ void MEMPACK_RelocateObjectType(MemHeader *newAddress, long offset, Object *oldO
         }
       }
       iVar2 = iVar2 + 1;
-      iVar9 = iVar9 + 4;
-    } while (iVar2 < (int)(short)newAddress[2].magicNumber);
+      iVar7 = iVar7 + 4;
+    } while (iVar2 < (short)newAddress[2].magicNumber);
   }
   iVar2 = 0;
   if (0 < *(short *)&newAddress[2].memStatus)
@@ -2248,46 +2214,46 @@ void MEMPACK_RelocateObjectType(MemHeader *newAddress, long offset, Object *oldO
     do
     {
       MEMPACK_RelocateG2AnimKeylistType((_G2AnimKeylist_Type **)(*(int *)(newAddress + 3) + iVar2 * 4), offset,
-                                        (char *)oldObject, (char *)((int)&oldObject->name + uVar1));
+                                        (char *)oldObject, (char *)((int)&oldObject[-1].vramSize.x + uVar1));
       iVar2 = iVar2 + 1;
-    } while (iVar2 < (int)*(short *)&newAddress[2].memStatus);
+    } while (iVar2 < *(short *)&newAddress[2].memStatus);
   }
   if (*(int *)(newAddress + 3) != 0)
   {
-    //p_Var19 = (gameTrackerX.instanceList)->first;
-    while (p_Var19 != (_Instance *)0x0)
+    iVar2 = *(int *)(DAT_800d0fe0 + 4);
+    while (iVar2 != 0)
     {
-      if (p_Var19->object == oldObject)
+      if (*(Object **)(iVar2 + 0x1c) == oldObject)
       {
-        p_Var12 = (p_Var19->anim).modelData;
-        p_Var7 = (_Model *)0x0;
-        if (p_Var12 != (_Model *)0x0)
+        iVar7 = 0;
+        if (*(int *)(iVar2 + 0x1a4) != 0)
         {
-          p_Var7 = (_Model *)((int)&p_Var12->numVertices + offset);
+          iVar7 = *(int *)(iVar2 + 0x1a4) + offset;
         }
-        (p_Var19->anim).modelData = p_Var7;
+        *(int *)(iVar2 + 0x1a4) = iVar7;
       }
-      iVar2 = 0;
-      p_Var16 = p_Var19;
-      if ((p_Var19->anim).sectionCount != '\0')
+      iVar3 = 0;
+      iVar7 = iVar2;
+      if (*(char *)(iVar2 + 0x194) != '\0')
       {
         do
         {
-          pOVar13 = (Object *)(p_Var16->anim).section[0].keylist;
-          if ((oldObject <= pOVar13) && (pOVar13 <= (Object *)((int)&oldObject->name + uVar1)))
+          pOVar10 = *(Object **)(iVar7 + 0x1dc);
+          if ((oldObject <= pOVar10) &&
+              (pOVar10 <= (Object *)((int)&oldObject[-1].vramSize.x + uVar1)))
           {
-            p_Var8 = (_G2AnimKeylist_Type *)0x0;
-            if (pOVar13 != (Object *)0x0)
+            iVar9 = 0;
+            if (pOVar10 != (Object *)0x0)
             {
-              p_Var8 = (_G2AnimKeylist_Type *)((int)&pOVar13->oflags + offset);
+              iVar9 = (int)&pOVar10->oflags + offset;
             }
-            (p_Var16->anim).section[0].keylist = p_Var8;
+            *(int *)(iVar7 + 0x1dc) = iVar9;
           }
-          iVar2 = iVar2 + 1;
-          p_Var16 = (_Instance *)&p_Var16->introNum;
-        } while (iVar2 < (int)(uint)(p_Var19->anim).sectionCount);
+          iVar3 = iVar3 + 1;
+          iVar7 = iVar7 + 0x30;
+        } while (iVar3 < (int)(uint) * (byte *)(iVar2 + 0x194));
       }
-      p_Var19 = p_Var19->next;
+      iVar2 = *(int *)(iVar2 + 8);
     }
   }
   STREAM_UpdateObjectPointer(oldObject, (Object *)(newAddress + 1), uVar1 - 8);

@@ -1,1488 +1,6 @@
 #include "THISDUST.H"
 #include "CAMERA.H"
 
-// long @0x800CFE80, len = 0x00000004
-ACE_amount = 0x0;
-// short @0x800CFE8E, len = 0x00000002
-Camera_lookDist = 0x0;
-// short @0x800CFE8C, len = 0x00000002
-Camera_lookHeight = 0x0;
-// long @0x800CDF38, len = 0x00000004
-camera_modeToIndex = 0x0;
-// _SVector @0x800CFE64, len = 0x00000008
-camera_plane =
-    {
-        // short @0x800CFE64, len = 0x00000002
-        .x = 0x0,
-        // short @0x800CFE66, len = 0x00000002
-        .y = 0x0,
-        // short @0x800CFE68, len = 0x00000002
-        .z = 0x0,
-        // short @0x800CFE6A, len = 0x00000002
-        .pad = 0x0};
-// _SVector @0x800CFDE4, len = 0x00000008
-camera_shakeOffset =
-    {
-        // short @0x800CFDE4, len = 0x00000002
-        .x = 0x0,
-        // short @0x800CFDE6, len = 0x00000002
-        .y = 0x0,
-        // short @0x800CFDE8, len = 0x00000002
-        .z = 0x0,
-        // short @0x800CFDEA, len = 0x00000002
-        .pad = 0x0};
-// short @0x800CDF78, len = 0x00000002
-camera_still = 0x0;
-// short @0x800CDF96, len = 0x00000002
-CameraLookStickyFlag = 0x0;
-// short @0x800CFDDC, len = 0x00000002
-CenterFlag = 0x0;
-// short @0x800CFDD6, len = 0x00000002
-combat_cam_angle = 0x0;
-// short @0x800CFDDA, len = 0x00000002
-combat_cam_debounce = 0x0;
-// short @0x800CFDD4, len = 0x00000002
-combat_cam_distance = 0x0;
-// short @0x800CFDD8, len = 0x00000002
-combat_cam_weight = 0x0;
-// long @0x800CDF80, len = 0x00000004
-current_roll_amount = 0x0;
-// MATRIX @0x800CFDB4, len = 0x00000020
-cwTransform2X =
-    {
-        // short[3][3] @0x800CFDB4, len = 0x00000012
-        .m =
-            {
-                // short[3] @0x800CFDB4, len = 0x00000006
-                {
-                    0x0,
-                    0x0,
-                    0x0},
-                // short[3] @0x800CFDBA, len = 0x00000006
-                {
-                    0x0,
-                    0x0,
-                    0x0},
-                // short[3] @0x800CFDC0, len = 0x00000006
-                {
-                    0x0,
-                    0x0,
-                    0x0}},
-        // long[3] @0x800CFDC8, len = 0x0000000C
-        .t =
-            {
-                0x0,
-                0x0,
-                0x0}};
-// short @0x800CFE7C, len = 0x00000002
-hitline_rot = 0x0;
-// _SVector @0x800CFE6C, len = 0x00000008
-left_point =
-    {
-        // short @0x800CFE6C, len = 0x00000002
-        .x = 0x0,
-        // short @0x800CFE6E, len = 0x00000002
-        .y = 0x0,
-        // short @0x800CFE70, len = 0x00000002
-        .z = 0x0,
-        // short @0x800CFE72, len = 0x00000002
-        .pad = 0x0};
-// short @0x800CDF9A, len = 0x00000002
-panic_count = 0x0;
-// _SVector @0x800CFE74, len = 0x00000008
-right_point =
-    {
-        // short @0x800CFE74, len = 0x00000002
-        .x = 0x0,
-        // short @0x800CFE76, len = 0x00000002
-        .y = 0x0,
-        // short @0x800CFE78, len = 0x00000002
-        .z = 0x0,
-        // short @0x800CFE7A, len = 0x00000002
-        .pad = 0x0};
-// int @0x800CDF84, len = 0x00000004
-roll_inc = 0x0;
-// long @0x800CDF7C, len = 0x00000004
-roll_target = 0x0;
-// short @0x800CDF74, len = 0x00000002
-shorten_count = 0x0;
-// short @0x800CDF76, len = 0x00000002
-shorten_flag = 0x0;
-// _Rotation @0x800CFE84, len = 0x00000008
-splinecam_helprot =
-    {
-        // short @0x800CFE84, len = 0x00000002
-        .x = 0x0,
-        // short @0x800CFE86, len = 0x00000002
-        .y = 0x0,
-        // short @0x800CFE88, len = 0x00000002
-        .z = 0x0,
-        // short @0x800CFE8A, len = 0x00000002
-        .pad = 0x0};
-// Camera @0x800CFE90, len = 0x000004C4
-theCamera =
-    {
-        // _CameraCore_Type @0x800CFE90, len = 0x000000E0
-        .core =
-            {
-                // _Position @0x800CFE90, len = 0x00000006
-                .position =
-                    {
-                        // short @0x800CFE90, len = 0x00000002
-                        .x = 0x0,
-                        // short @0x800CFE92, len = 0x00000002
-                        .y = 0x0,
-                        // short @0x800CFE94, len = 0x00000002
-                        .z = 0x0},
-                // short @0x800CFE96, len = 0x00000002
-                .pad1 = 0x0,
-                // MATRIX[2] @0x800CFE98, len = 0x00000040
-                .vvNormalWorVecMat =
-                    {
-                        // MATRIX @0x800CFE98, len = 0x00000020
-                        {
-                            // short[3][3] @0x800CFE98, len = 0x00000012
-                            .m =
-                                {
-                                    // short[3] @0x800CFE98, len = 0x00000006
-                                    {
-                                        0x0,
-                                        0x0,
-                                        0x0},
-                                    // short[3] @0x800CFE9E, len = 0x00000006
-                                    {
-                                        0x0,
-                                        0x0,
-                                        0x0},
-                                    // short[3] @0x800CFEA4, len = 0x00000006
-                                    {
-                                        0x0,
-                                        0x0,
-                                        0x0}},
-                            // long[3] @0x800CFEAC, len = 0x0000000C
-                            .t =
-                                {
-                                    0x0,
-                                    0x0,
-                                    0x0}},
-                        // MATRIX @0x800CFEB8, len = 0x00000020
-                        {
-                            // short[3][3] @0x800CFEB8, len = 0x00000012
-                            .m =
-                                {
-                                    // short[3] @0x800CFEB8, len = 0x00000006
-                                    {
-                                        0x0,
-                                        0x0,
-                                        0x0},
-                                    // short[3] @0x800CFEBE, len = 0x00000006
-                                    {
-                                        0x0,
-                                        0x0,
-                                        0x0},
-                                    // short[3] @0x800CFEC4, len = 0x00000006
-                                    {
-                                        0x0,
-                                        0x0,
-                                        0x0}},
-                            // long[3] @0x800CFECC, len = 0x0000000C
-                            .t =
-                                {
-                                    0x0,
-                                    0x0,
-                                    0x0}}},
-                // long[6] @0x800CFED8, len = 0x00000018
-                .vvPlaneConsts =
-                    {
-                        0x0,
-                        0x0,
-                        0x0,
-                        0x0,
-                        0x0,
-                        0x0},
-                // MATRIX * @0x800CFEF0, len = 0x00000004
-                .wcTransform = 00000000,
-                // long @0x800CFEF4, len = 0x00000004
-                .farPlane = 0x0,
-                // long @0x800CFEF8, len = 0x00000004
-                .projDistance = 0x0,
-                // long @0x800CFEFC, len = 0x00000004
-                .nearPlane = 0x0,
-                // MATRIX * @0x800CFF00, len = 0x00000004
-                .wcTransform2 = 00000000,
-                // MATRIX * @0x800CFF04, len = 0x00000004
-                .cwTransform2 = 00000000,
-                // _Normal[5] @0x800CFF08, len = 0x00000028
-                .viewVolumeNormal =
-                    {
-                        // _Normal @0x800CFF08, len = 0x00000008
-                        {
-                            // short @0x800CFF08, len = 0x00000002
-                            .x = 0x0,
-                            // short @0x800CFF0A, len = 0x00000002
-                            .y = 0x0,
-                            // short @0x800CFF0C, len = 0x00000002
-                            .z = 0x0,
-                            // short @0x800CFF0E, len = 0x00000002
-                            .pad = 0x0},
-                        // _Normal @0x800CFF10, len = 0x00000008
-                        {
-                            // short @0x800CFF10, len = 0x00000002
-                            .x = 0x0,
-                            // short @0x800CFF12, len = 0x00000002
-                            .y = 0x0,
-                            // short @0x800CFF14, len = 0x00000002
-                            .z = 0x0,
-                            // short @0x800CFF16, len = 0x00000002
-                            .pad = 0x0},
-                        // _Normal @0x800CFF18, len = 0x00000008
-                        {
-                            // short @0x800CFF18, len = 0x00000002
-                            .x = 0x0,
-                            // short @0x800CFF1A, len = 0x00000002
-                            .y = 0x0,
-                            // short @0x800CFF1C, len = 0x00000002
-                            .z = 0x0,
-                            // short @0x800CFF1E, len = 0x00000002
-                            .pad = 0x0},
-                        // _Normal @0x800CFF20, len = 0x00000008
-                        {
-                            // short @0x800CFF20, len = 0x00000002
-                            .x = 0x0,
-                            // short @0x800CFF22, len = 0x00000002
-                            .y = 0x0,
-                            // short @0x800CFF24, len = 0x00000002
-                            .z = 0x0,
-                            // short @0x800CFF26, len = 0x00000002
-                            .pad = 0x0},
-                        // _Normal @0x800CFF28, len = 0x00000008
-                        {
-                            // short @0x800CFF28, len = 0x00000002
-                            .x = 0x0,
-                            // short @0x800CFF2A, len = 0x00000002
-                            .y = 0x0,
-                            // short @0x800CFF2C, len = 0x00000002
-                            .z = 0x0,
-                            // short @0x800CFF2E, len = 0x00000002
-                            .pad = 0x0}},
-                // int @0x800CFF30, len = 0x00000004
-                .leftX = 0x0,
-                // int @0x800CFF34, len = 0x00000004
-                .rightX = 0x0,
-                // int @0x800CFF38, len = 0x00000004
-                .topY = 0x0,
-                // int @0x800CFF3C, len = 0x00000004
-                .bottomY = 0x0,
-                // _Rotation @0x800CFF40, len = 0x00000008
-                .rotation =
-                    {
-                        // short @0x800CFF40, len = 0x00000002
-                        .x = 0x0,
-                        // short @0x800CFF42, len = 0x00000002
-                        .y = 0x0,
-                        // short @0x800CFF44, len = 0x00000002
-                        .z = 0x0,
-                        // short @0x800CFF46, len = 0x00000002
-                        .pad = 0x0},
-                // short @0x800CFF48, len = 0x00000002
-                .pad2 = 0x0,
-                // _SVector @0x800CFF4A, len = 0x00000008
-                .screenScale =
-                    {
-                        // short @0x800CFF4A, len = 0x00000002
-                        .x = 0x0,
-                        // short @0x800CFF4C, len = 0x00000002
-                        .y = 0x0,
-                        // short @0x800CFF4E, len = 0x00000002
-                        .z = 0x0,
-                        // short @0x800CFF50, len = 0x00000002
-                        .pad = 0x0},
-                // short @0x800CFF52, len = 0x00000002
-                .pad3 = 0x0,
-                // _Position @0x800CFF54, len = 0x00000006
-                .debugPos =
-                    {
-                        // short @0x800CFF54, len = 0x00000002
-                        .x = 0x0,
-                        // short @0x800CFF56, len = 0x00000002
-                        .y = 0x0,
-                        // short @0x800CFF58, len = 0x00000002
-                        .z = 0x0},
-                // short @0x800CFF5A, len = 0x00000002
-                .pad4 = 0x0,
-                // _Rotation @0x800CFF5C, len = 0x00000008
-                .debugRot =
-                    {
-                        // short @0x800CFF5C, len = 0x00000002
-                        .x = 0x0,
-                        // short @0x800CFF5E, len = 0x00000002
-                        .y = 0x0,
-                        // short @0x800CFF60, len = 0x00000002
-                        .z = 0x0,
-                        // short @0x800CFF62, len = 0x00000002
-                        .pad = 0x0},
-                // short @0x800CFF64, len = 0x00000002
-                .pad5 = 0x0,
-                // _Position @0x800CFF66, len = 0x00000006
-                .nondebugPos =
-                    {
-                        // short @0x800CFF66, len = 0x00000002
-                        .x = 0x0,
-                        // short @0x800CFF68, len = 0x00000002
-                        .y = 0x0,
-                        // short @0x800CFF6A, len = 0x00000002
-                        .z = 0x0},
-                // short @0x800CFF6C, len = 0x00000002
-                .pad6 = 0x0},
-        // long @0x800CFF70, len = 0x00000004
-        .shake = 0x0,
-        // short @0x800CFF74, len = 0x00000002
-        .shakeFrame = 0x0,
-        // short @0x800CFF76, len = 0x00000002
-        .shakeScale = 0x0,
-        // long @0x800CFF78, len = 0x00000004
-        .flags = 0x0,
-        // long @0x800CFF7C, len = 0x00000004
-        .lock = 0x0,
-        // short @0x800CFF80, len = 0x00000002
-        .mode = 0x0,
-        // short @0x800CFF82, len = 0x00000002
-        .state = 0x0,
-        // short @0x800CFF84, len = 0x00000002
-        .posState = 0x0,
-        // short @0x800CFF86, len = 0x00000002
-        .rotState = 0x0,
-        // short @0x800CFF88, len = 0x00000002
-        .tiltState = 0x0,
-        // short @0x800CFF8A, len = 0x00000002
-        .distanceState = 0x0,
-        // short @0x800CFF8C, len = 0x00000002
-        .lagZ = 0x0,
-        // short @0x800CFF8E, len = 0x00000002
-        .tilt = 0x0,
-        // _Position @0x800CFF90, len = 0x00000006
-        .focusPoint =
-            {
-                // short @0x800CFF90, len = 0x00000002
-                .x = 0x0,
-                // short @0x800CFF92, len = 0x00000002
-                .y = 0x0,
-                // short @0x800CFF94, len = 0x00000002
-                .z = 0x0},
-        // short @0x800CFF96, len = 0x00000002
-        .focusDistance = 0x0,
-        // _Instance * @0x800CFF98, len = 0x00000004
-        .focusInstance = 00000000,
-        // _Position @0x800CFF9C, len = 0x00000006
-        .oldFocusInstancePos =
-            {
-                // short @0x800CFF9C, len = 0x00000002
-                .x = 0x0,
-                // short @0x800CFF9E, len = 0x00000002
-                .y = 0x0,
-                // short @0x800CFFA0, len = 0x00000002
-                .z = 0x0},
-        // _Position @0x800CFFA2, len = 0x00000006
-        .newFocusInstancePos =
-            {
-                // short @0x800CFFA2, len = 0x00000002
-                .x = 0x0,
-                // short @0x800CFFA4, len = 0x00000002
-                .y = 0x0,
-                // short @0x800CFFA6, len = 0x00000002
-                .z = 0x0},
-        // _Rotation @0x800CFFA8, len = 0x00000008
-        .oldFocusInstanceRot =
-            {
-                // short @0x800CFFA8, len = 0x00000002
-                .x = 0x0,
-                // short @0x800CFFAA, len = 0x00000002
-                .y = 0x0,
-                // short @0x800CFFAC, len = 0x00000002
-                .z = 0x0,
-                // short @0x800CFFAE, len = 0x00000002
-                .pad = 0x0},
-        // _Rotation @0x800CFFB0, len = 0x00000008
-        .newFocusInstanceRot =
-            {
-                // short @0x800CFFB0, len = 0x00000002
-                .x = 0x0,
-                // short @0x800CFFB2, len = 0x00000002
-                .y = 0x0,
-                // short @0x800CFFB4, len = 0x00000002
-                .z = 0x0,
-                // short @0x800CFFB6, len = 0x00000002
-                .pad = 0x0},
-        // _SVector @0x800CFFB8, len = 0x00000008
-        .focusInstanceVelVec =
-            {
-                // short @0x800CFFB8, len = 0x00000002
-                .x = 0x0,
-                // short @0x800CFFBA, len = 0x00000002
-                .y = 0x0,
-                // short @0x800CFFBC, len = 0x00000002
-                .z = 0x0,
-                // short @0x800CFFBE, len = 0x00000002
-                .pad = 0x0},
-        // _Position @0x800CFFC0, len = 0x00000006
-        .focusLeadPivot =
-            {
-                // short @0x800CFFC0, len = 0x00000002
-                .x = 0x0,
-                // short @0x800CFFC2, len = 0x00000002
-                .y = 0x0,
-                // short @0x800CFFC4, len = 0x00000002
-                .z = 0x0},
-        // _Position @0x800CFFC6, len = 0x00000006
-        .focusOffset =
-            {
-                // short @0x800CFFC6, len = 0x00000002
-                .x = 0x0,
-                // short @0x800CFFC8, len = 0x00000002
-                .y = 0x0,
-                // short @0x800CFFCA, len = 0x00000002
-                .z = 0x0},
-        // _Rotation @0x800CFFCC, len = 0x00000008
-        .focusRotation =
-            {
-                // short @0x800CFFCC, len = 0x00000002
-                .x = 0x0,
-                // short @0x800CFFCE, len = 0x00000002
-                .y = 0x0,
-                // short @0x800CFFD0, len = 0x00000002
-                .z = 0x0,
-                // short @0x800CFFD2, len = 0x00000002
-                .pad = 0x0},
-        // short @0x800CFFD4, len = 0x00000002
-        .tiltVel = 0x0,
-        // short @0x800CFFD6, len = 0x00000002
-        .tiltAccl = 0x0,
-        // _SVector @0x800CFFD8, len = 0x00000008
-        .positionVel =
-            {
-                // short @0x800CFFD8, len = 0x00000002
-                .x = 0x0,
-                // short @0x800CFFDA, len = 0x00000002
-                .y = 0x0,
-                // short @0x800CFFDC, len = 0x00000002
-                .z = 0x0,
-                // short @0x800CFFDE, len = 0x00000002
-                .pad = 0x0},
-        // _SVector @0x800CFFE0, len = 0x00000008
-        .positionAccl =
-            {
-                // short @0x800CFFE0, len = 0x00000002
-                .x = 0x0,
-                // short @0x800CFFE2, len = 0x00000002
-                .y = 0x0,
-                // short @0x800CFFE4, len = 0x00000002
-                .z = 0x0,
-                // short @0x800CFFE6, len = 0x00000002
-                .pad = 0x0},
-        // _SVector @0x800CFFE8, len = 0x00000008
-        .focusPointVel =
-            {
-                // short @0x800CFFE8, len = 0x00000002
-                .x = 0x0,
-                // short @0x800CFFEA, len = 0x00000002
-                .y = 0x0,
-                // short @0x800CFFEC, len = 0x00000002
-                .z = 0x0,
-                // short @0x800CFFEE, len = 0x00000002
-                .pad = 0x0},
-        // _SVector @0x800CFFF0, len = 0x00000008
-        .focusPointAccl =
-            {
-                // short @0x800CFFF0, len = 0x00000002
-                .x = 0x0,
-                // short @0x800CFFF2, len = 0x00000002
-                .y = 0x0,
-                // short @0x800CFFF4, len = 0x00000002
-                .z = 0x0,
-                // short @0x800CFFF6, len = 0x00000002
-                .pad = 0x0},
-        // short @0x800CFFF8, len = 0x00000002
-        .focusDistanceVel = 0x0,
-        // short @0x800CFFFA, len = 0x00000002
-        .focusDistanceAccl = 0x0,
-        // _SVector @0x800CFFFC, len = 0x00000008
-        .focusRotVel =
-            {
-                // short @0x800CFFFC, len = 0x00000002
-                .x = 0x0,
-                // short @0x800CFFFE, len = 0x00000002
-                .y = 0x0,
-                // short @0x800D0000, len = 0x00000002
-                .z = null,
-                // short @0x800D0002, len = 0x00000002
-                .pad = null},
-        // _SVector @0x800D0004, len = 0x00000008
-        .focusRotAccl =
-            {
-                // short @0x800D0004, len = 0x00000002
-                .x = null,
-                // short @0x800D0006, len = 0x00000002
-                .y = null,
-                // short @0x800D0008, len = 0x00000002
-                .z = null,
-                // short @0x800D000A, len = 0x00000002
-                .pad = null},
-        // _SVector @0x800D000C, len = 0x00000008
-        .maxFocusVel =
-            {
-                // short @0x800D000C, len = 0x00000002
-                .x = null,
-                // short @0x800D000E, len = 0x00000002
-                .y = null,
-                // short @0x800D0010, len = 0x00000002
-                .z = null,
-                // short @0x800D0012, len = 0x00000002
-                .pad = null},
-        // _SVector @0x800D0014, len = 0x00000008
-        .rotationVel =
-            {
-                // short @0x800D0014, len = 0x00000002
-                .x = null,
-                // short @0x800D0016, len = 0x00000002
-                .y = null,
-                // short @0x800D0018, len = 0x00000002
-                .z = null,
-                // short @0x800D001A, len = 0x00000002
-                .pad = null},
-        // _SVector @0x800D001C, len = 0x00000008
-        .rotationAccl =
-            {
-                // short @0x800D001C, len = 0x00000002
-                .x = null,
-                // short @0x800D001E, len = 0x00000002
-                .y = null,
-                // short @0x800D0020, len = 0x00000002
-                .z = null,
-                // short @0x800D0022, len = 0x00000002
-                .pad = null},
-        // short @0x800D0024, len = 0x00000002
-        .maxVel = null,
-        // short @0x800D0026, len = 0x00000002
-        .maxRot = null,
-        // _Position @0x800D0028, len = 0x00000006
-        .targetPos =
-            {
-                // short @0x800D0028, len = 0x00000002
-                .x = null,
-                // short @0x800D002A, len = 0x00000002
-                .y = null,
-                // short @0x800D002C, len = 0x00000002
-                .z = null},
-        // short @0x800D002E, len = 0x00000002
-        .targetTilt = null,
-        // _Rotation @0x800D0030, len = 0x00000008
-        .targetRotation =
-            {
-                // short @0x800D0030, len = 0x00000002
-                .x = null,
-                // short @0x800D0032, len = 0x00000002
-                .y = null,
-                // short @0x800D0034, len = 0x00000002
-                .z = null,
-                // short @0x800D0036, len = 0x00000002
-                .pad = null},
-        // short @0x800D0038, len = 0x00000002
-        .targetFocusDistance = null,
-        // _Position @0x800D003A, len = 0x00000006
-        .targetFocusPoint =
-            {
-                // short @0x800D003A, len = 0x00000002
-                .x = null,
-                // short @0x800D003C, len = 0x00000002
-                .y = null,
-                // short @0x800D003E, len = 0x00000002
-                .z = null},
-        // short @0x800D0040, len = 0x00000002
-        .collisionTargetFocusDistance = null,
-        // _Rotation @0x800D0042, len = 0x00000008
-        .targetFocusRotation =
-            {
-                // short @0x800D0042, len = 0x00000002
-                .x = null,
-                // short @0x800D0044, len = 0x00000002
-                .y = null,
-                // short @0x800D0046, len = 0x00000002
-                .z = null,
-                // short @0x800D0048, len = 0x00000002
-                .pad = null},
-        // short @0x800D004A, len = 0x00000002
-        .tfaceTilt = null,
-        // _Rotation @0x800D004C, len = 0x00000008
-        .collisionTargetFocusRotation =
-            {
-                // short @0x800D004C, len = 0x00000002
-                .x = null,
-                // short @0x800D004E, len = 0x00000002
-                .y = null,
-                // short @0x800D0050, len = 0x00000002
-                .z = null,
-                // short @0x800D0052, len = 0x00000002
-                .pad = null},
-        // short @0x800D0054, len = 0x00000002
-        .smooth = null,
-        // _CameraKey * @0x800D0058, len = 0x00000004
-        .cameraKey = null,
-        // _Sphere @0x800D005C, len = 0x0000000C
-        .focusSphere =
-            {
-                // _Position @0x800D005C, len = 0x00000006
-                .position =
-                    {
-                        // short @0x800D005C, len = 0x00000002
-                        .x = null,
-                        // short @0x800D005E, len = 0x00000002
-                        .y = null,
-                        // short @0x800D0060, len = 0x00000002
-                        .z = null},
-                // ushort @0x800D0062, len = 0x00000002
-                .radius = null,
-                // ulong @0x800D0064, len = 0x00000004
-                .radiusSquared = null},
-        // _Sphere @0x800D0068, len = 0x0000000C
-        .smallBaseSphere =
-            {
-                // _Position @0x800D0068, len = 0x00000006
-                .position =
-                    {
-                        // short @0x800D0068, len = 0x00000002
-                        .x = null,
-                        // short @0x800D006A, len = 0x00000002
-                        .y = null,
-                        // short @0x800D006C, len = 0x00000002
-                        .z = null},
-                // ushort @0x800D006E, len = 0x00000002
-                .radius = null,
-                // ulong @0x800D0070, len = 0x00000004
-                .radiusSquared = null},
-        // _Sphere @0x800D0074, len = 0x0000000C
-        .posSphere =
-            {
-                // _Position @0x800D0074, len = 0x00000006
-                .position =
-                    {
-                        // short @0x800D0074, len = 0x00000002
-                        .x = null,
-                        // short @0x800D0076, len = 0x00000002
-                        .y = null,
-                        // short @0x800D0078, len = 0x00000002
-                        .z = null},
-                // ushort @0x800D007A, len = 0x00000002
-                .radius = null,
-                // ulong @0x800D007C, len = 0x00000004
-                .radiusSquared = null},
-        // short @0x800D0080, len = 0x00000002
-        .lookTimer = null,
-        // short @0x800D0082, len = 0x00000002
-        .lookSavedMode = null,
-        // short @0x800D0084, len = 0x00000002
-        .presetIndex = null,
-        // short[3] @0x800D0086, len = 0x00000006
-        .presetFocusDistance =
-            {
-                null,
-                null,
-                null},
-        // long @0x800D008C, len = 0x00000004
-        .minFocusDistance = null,
-        // long @0x800D0090, len = 0x00000004
-        .maxFocusDistance = null,
-        // long @0x800D0094, len = 0x00000004
-        .minTilt = null,
-        // long @0x800D0098, len = 0x00000004
-        .maxTilt = null,
-        // long[3] @0x800D009C, len = 0x0000000C
-        .pad =
-            {
-                null,
-                null,
-                null},
-        // long @0x800D00A8, len = 0x00000004
-        .minXYDist = null,
-        // long @0x800D00AC, len = 0x00000004
-        .maxXYDist = null,
-        // long @0x800D00B0, len = 0x00000004
-        .oppositeError = null,
-        // long @0x800D00B4, len = 0x00000004
-        .tempsplinePointAhead = null,
-        // long @0x800D00B8, len = 0x00000004
-        .noTeleport = null,
-        // long[3][3] @0x800D00BC, len = 0x00000024
-        .focusDistanceList =
-            {
-                // long[3] @0x800D00BC, len = 0x0000000C
-                {
-                    null,
-                    null,
-                    null},
-                // long[3] @0x800D00C8, len = 0x0000000C
-                {
-                    null,
-                    null,
-                    null},
-                // long[3] @0x800D00D4, len = 0x0000000C
-                {
-                    null,
-                    null,
-                    null}},
-        // long[3][3] @0x800D00E0, len = 0x00000024
-        .tiltList =
-            {
-                // long[3] @0x800D00E0, len = 0x0000000C
-                {
-                    null,
-                    null,
-                    null},
-                // long[3] @0x800D00EC, len = 0x0000000C
-                {
-                    null,
-                    null,
-                    null},
-                // long[3] @0x800D00F8, len = 0x0000000C
-                {
-                    null,
-                    null,
-                    null}},
-        // long @0x800D0104, len = 0x00000004
-        .cineControl = null,
-        // short @0x800D0108, len = 0x00000002
-        .stack = null,
-        // short @0x800D010A, len = 0x00000002
-        .targetStack = null,
-        // long[3] @0x800D010C, len = 0x0000000C
-        .savedMode =
-            {
-                null,
-                null,
-                null},
-        // long[3] @0x800D0118, len = 0x0000000C
-        .savedTargetFocusDistance =
-            {
-                null,
-                null,
-                null},
-        // _Rotation @0x800D0124, len = 0x00000008
-        .savedFocusRotation =
-            {
-                // short @0x800D0124, len = 0x00000002
-                .x = null,
-                // short @0x800D0126, len = 0x00000002
-                .y = null,
-                // short @0x800D0128, len = 0x00000002
-                .z = null,
-                // short @0x800D012A, len = 0x00000002
-                .pad = null},
-        // short @0x800D012C, len = 0x00000002
-        .savedFocusDistance = null,
-        // short @0x800D012E, len = 0x00000002
-        .signalFocusDistance = null,
-        // _SavedCinematic[3] @0x800D0130, len = 0x00000150
-        .savedCinematic =
-            {
-                // _SavedCinematic @0x800D0130, len = 0x00000070
-                {
-                    // _Position @0x800D0130, len = 0x00000006
-                    .position =
-                        {
-                            // short @0x800D0130, len = 0x00000002
-                            .x = null,
-                            // short @0x800D0132, len = 0x00000002
-                            .y = null,
-                            // short @0x800D0134, len = 0x00000002
-                            .z = null},
-                    // _Position @0x800D0136, len = 0x00000006
-                    .focusPoint =
-                        {
-                            // short @0x800D0136, len = 0x00000002
-                            .x = null,
-                            // short @0x800D0138, len = 0x00000002
-                            .y = null,
-                            // short @0x800D013A, len = 0x00000002
-                            .z = null},
-                    // _Position @0x800D013C, len = 0x00000006
-                    .base =
-                        {
-                            // short @0x800D013C, len = 0x00000002
-                            .x = null,
-                            // short @0x800D013E, len = 0x00000002
-                            .y = null,
-                            // short @0x800D0140, len = 0x00000002
-                            .z = null},
-                    // _Position @0x800D0142, len = 0x00000006
-                    .targetPos =
-                        {
-                            // short @0x800D0142, len = 0x00000002
-                            .x = null,
-                            // short @0x800D0144, len = 0x00000002
-                            .y = null,
-                            // short @0x800D0146, len = 0x00000002
-                            .z = null},
-                    // _Position @0x800D0148, len = 0x00000006
-                    .targetFocusPoint =
-                        {
-                            // short @0x800D0148, len = 0x00000002
-                            .x = null,
-                            // short @0x800D014A, len = 0x00000002
-                            .y = null,
-                            // short @0x800D014C, len = 0x00000002
-                            .z = null},
-                    // _Position @0x800D014E, len = 0x00000006
-                    .targetBase =
-                        {
-                            // short @0x800D014E, len = 0x00000002
-                            .x = null,
-                            // short @0x800D0150, len = 0x00000002
-                            .y = null,
-                            // short @0x800D0152, len = 0x00000002
-                            .z = null},
-                    // _Rotation @0x800D0154, len = 0x00000008
-                    .baseRot =
-                        {
-                            // short @0x800D0154, len = 0x00000002
-                            .x = null,
-                            // short @0x800D0156, len = 0x00000002
-                            .y = null,
-                            // short @0x800D0158, len = 0x00000002
-                            .z = null,
-                            // short @0x800D015A, len = 0x00000002
-                            .pad = null},
-                    // _Rotation @0x800D015C, len = 0x00000008
-                    .focusRotation =
-                        {
-                            // short @0x800D015C, len = 0x00000002
-                            .x = null,
-                            // short @0x800D015E, len = 0x00000002
-                            .y = null,
-                            // short @0x800D0160, len = 0x00000002
-                            .z = null,
-                            // short @0x800D0162, len = 0x00000002
-                            .pad = null},
-                    // _Rotation @0x800D0164, len = 0x00000008
-                    .targetFocusRotation =
-                        {
-                            // short @0x800D0164, len = 0x00000002
-                            .x = null,
-                            // short @0x800D0166, len = 0x00000002
-                            .y = null,
-                            // short @0x800D0168, len = 0x00000002
-                            .z = null,
-                            // short @0x800D016A, len = 0x00000002
-                            .pad = null},
-                    // short @0x800D016C, len = 0x00000002
-                    .focusDistance = null,
-                    // short @0x800D016E, len = 0x00000002
-                    .targetFocusDistance = null,
-                    // _SVector @0x800D0170, len = 0x00000008
-                    .focusPointVel =
-                        {
-                            // short @0x800D0170, len = 0x00000002
-                            .x = null,
-                            // short @0x800D0172, len = 0x00000002
-                            .y = null,
-                            // short @0x800D0174, len = 0x00000002
-                            .z = null,
-                            // short @0x800D0176, len = 0x00000002
-                            .pad = null},
-                    // _SVector @0x800D0178, len = 0x00000008
-                    .focusPointAccl =
-                        {
-                            // short @0x800D0178, len = 0x00000002
-                            .x = null,
-                            // short @0x800D017A, len = 0x00000002
-                            .y = null,
-                            // short @0x800D017C, len = 0x00000002
-                            .z = null,
-                            // short @0x800D017E, len = 0x00000002
-                            .pad = null},
-                    // _SVector @0x800D0180, len = 0x00000008
-                    .baseVel =
-                        {
-                            // short @0x800D0180, len = 0x00000002
-                            .x = null,
-                            // short @0x800D0182, len = 0x00000002
-                            .y = null,
-                            // short @0x800D0184, len = 0x00000002
-                            .z = null,
-                            // short @0x800D0186, len = 0x00000002
-                            .pad = null},
-                    // _SVector @0x800D0188, len = 0x00000008
-                    .baseAccl =
-                        {
-                            // short @0x800D0188, len = 0x00000002
-                            .x = null,
-                            // short @0x800D018A, len = 0x00000002
-                            .y = null,
-                            // short @0x800D018C, len = 0x00000002
-                            .z = null,
-                            // short @0x800D018E, len = 0x00000002
-                            .pad = null},
-                    // long @0x800D0190, len = 0x00000004
-                    .maxVel = null,
-                    // MultiSpline * @0x800D0194, len = 0x00000004
-                    .posSpline = null,
-                    // MultiSpline * @0x800D0198, len = 0x00000004
-                    .targetSpline = null,
-                    // Level * @0x800D019C, len = 0x00000004
-                    .level = null},
-                // _SavedCinematic @0x800D01A0, len = 0x00000070
-                {
-                    // _Position @0x800D01A0, len = 0x00000006
-                    .position =
-                        {
-                            // short @0x800D01A0, len = 0x00000002
-                            .x = null,
-                            // short @0x800D01A2, len = 0x00000002
-                            .y = null,
-                            // short @0x800D01A4, len = 0x00000002
-                            .z = null},
-                    // _Position @0x800D01A6, len = 0x00000006
-                    .focusPoint =
-                        {
-                            // short @0x800D01A6, len = 0x00000002
-                            .x = null,
-                            // short @0x800D01A8, len = 0x00000002
-                            .y = null,
-                            // short @0x800D01AA, len = 0x00000002
-                            .z = null},
-                    // _Position @0x800D01AC, len = 0x00000006
-                    .base =
-                        {
-                            // short @0x800D01AC, len = 0x00000002
-                            .x = null,
-                            // short @0x800D01AE, len = 0x00000002
-                            .y = null,
-                            // short @0x800D01B0, len = 0x00000002
-                            .z = null},
-                    // _Position @0x800D01B2, len = 0x00000006
-                    .targetPos =
-                        {
-                            // short @0x800D01B2, len = 0x00000002
-                            .x = null,
-                            // short @0x800D01B4, len = 0x00000002
-                            .y = null,
-                            // short @0x800D01B6, len = 0x00000002
-                            .z = null},
-                    // _Position @0x800D01B8, len = 0x00000006
-                    .targetFocusPoint =
-                        {
-                            // short @0x800D01B8, len = 0x00000002
-                            .x = null,
-                            // short @0x800D01BA, len = 0x00000002
-                            .y = null,
-                            // short @0x800D01BC, len = 0x00000002
-                            .z = null},
-                    // _Position @0x800D01BE, len = 0x00000006
-                    .targetBase =
-                        {
-                            // short @0x800D01BE, len = 0x00000002
-                            .x = null,
-                            // short @0x800D01C0, len = 0x00000002
-                            .y = null,
-                            // short @0x800D01C2, len = 0x00000002
-                            .z = null},
-                    // _Rotation @0x800D01C4, len = 0x00000008
-                    .baseRot =
-                        {
-                            // short @0x800D01C4, len = 0x00000002
-                            .x = null,
-                            // short @0x800D01C6, len = 0x00000002
-                            .y = null,
-                            // short @0x800D01C8, len = 0x00000002
-                            .z = null,
-                            // short @0x800D01CA, len = 0x00000002
-                            .pad = null},
-                    // _Rotation @0x800D01CC, len = 0x00000008
-                    .focusRotation =
-                        {
-                            // short @0x800D01CC, len = 0x00000002
-                            .x = null,
-                            // short @0x800D01CE, len = 0x00000002
-                            .y = null,
-                            // short @0x800D01D0, len = 0x00000002
-                            .z = null,
-                            // short @0x800D01D2, len = 0x00000002
-                            .pad = null},
-                    // _Rotation @0x800D01D4, len = 0x00000008
-                    .targetFocusRotation =
-                        {
-                            // short @0x800D01D4, len = 0x00000002
-                            .x = null,
-                            // short @0x800D01D6, len = 0x00000002
-                            .y = null,
-                            // short @0x800D01D8, len = 0x00000002
-                            .z = null,
-                            // short @0x800D01DA, len = 0x00000002
-                            .pad = null},
-                    // short @0x800D01DC, len = 0x00000002
-                    .focusDistance = null,
-                    // short @0x800D01DE, len = 0x00000002
-                    .targetFocusDistance = null,
-                    // _SVector @0x800D01E0, len = 0x00000008
-                    .focusPointVel =
-                        {
-                            // short @0x800D01E0, len = 0x00000002
-                            .x = null,
-                            // short @0x800D01E2, len = 0x00000002
-                            .y = null,
-                            // short @0x800D01E4, len = 0x00000002
-                            .z = null,
-                            // short @0x800D01E6, len = 0x00000002
-                            .pad = null},
-                    // _SVector @0x800D01E8, len = 0x00000008
-                    .focusPointAccl =
-                        {
-                            // short @0x800D01E8, len = 0x00000002
-                            .x = null,
-                            // short @0x800D01EA, len = 0x00000002
-                            .y = null,
-                            // short @0x800D01EC, len = 0x00000002
-                            .z = null,
-                            // short @0x800D01EE, len = 0x00000002
-                            .pad = null},
-                    // _SVector @0x800D01F0, len = 0x00000008
-                    .baseVel =
-                        {
-                            // short @0x800D01F0, len = 0x00000002
-                            .x = null,
-                            // short @0x800D01F2, len = 0x00000002
-                            .y = null,
-                            // short @0x800D01F4, len = 0x00000002
-                            .z = null,
-                            // short @0x800D01F6, len = 0x00000002
-                            .pad = null},
-                    // _SVector @0x800D01F8, len = 0x00000008
-                    .baseAccl =
-                        {
-                            // short @0x800D01F8, len = 0x00000002
-                            .x = null,
-                            // short @0x800D01FA, len = 0x00000002
-                            .y = null,
-                            // short @0x800D01FC, len = 0x00000002
-                            .z = null,
-                            // short @0x800D01FE, len = 0x00000002
-                            .pad = null},
-                    // long @0x800D0200, len = 0x00000004
-                    .maxVel = null,
-                    // MultiSpline * @0x800D0204, len = 0x00000004
-                    .posSpline = null,
-                    // MultiSpline * @0x800D0208, len = 0x00000004
-                    .targetSpline = null,
-                    // Level * @0x800D020C, len = 0x00000004
-                    .level = null},
-                // _SavedCinematic @0x800D0210, len = 0x00000070
-                {
-                    // _Position @0x800D0210, len = 0x00000006
-                    .position =
-                        {
-                            // short @0x800D0210, len = 0x00000002
-                            .x = null,
-                            // short @0x800D0212, len = 0x00000002
-                            .y = null,
-                            // short @0x800D0214, len = 0x00000002
-                            .z = null},
-                    // _Position @0x800D0216, len = 0x00000006
-                    .focusPoint =
-                        {
-                            // short @0x800D0216, len = 0x00000002
-                            .x = null,
-                            // short @0x800D0218, len = 0x00000002
-                            .y = null,
-                            // short @0x800D021A, len = 0x00000002
-                            .z = null},
-                    // _Position @0x800D021C, len = 0x00000006
-                    .base =
-                        {
-                            // short @0x800D021C, len = 0x00000002
-                            .x = null,
-                            // short @0x800D021E, len = 0x00000002
-                            .y = null,
-                            // short @0x800D0220, len = 0x00000002
-                            .z = null},
-                    // _Position @0x800D0222, len = 0x00000006
-                    .targetPos =
-                        {
-                            // short @0x800D0222, len = 0x00000002
-                            .x = null,
-                            // short @0x800D0224, len = 0x00000002
-                            .y = null,
-                            // short @0x800D0226, len = 0x00000002
-                            .z = null},
-                    // _Position @0x800D0228, len = 0x00000006
-                    .targetFocusPoint =
-                        {
-                            // short @0x800D0228, len = 0x00000002
-                            .x = null,
-                            // short @0x800D022A, len = 0x00000002
-                            .y = null,
-                            // short @0x800D022C, len = 0x00000002
-                            .z = null},
-                    // _Position @0x800D022E, len = 0x00000006
-                    .targetBase =
-                        {
-                            // short @0x800D022E, len = 0x00000002
-                            .x = null,
-                            // short @0x800D0230, len = 0x00000002
-                            .y = null,
-                            // short @0x800D0232, len = 0x00000002
-                            .z = null},
-                    // _Rotation @0x800D0234, len = 0x00000008
-                    .baseRot =
-                        {
-                            // short @0x800D0234, len = 0x00000002
-                            .x = null,
-                            // short @0x800D0236, len = 0x00000002
-                            .y = null,
-                            // short @0x800D0238, len = 0x00000002
-                            .z = null,
-                            // short @0x800D023A, len = 0x00000002
-                            .pad = null},
-                    // _Rotation @0x800D023C, len = 0x00000008
-                    .focusRotation =
-                        {
-                            // short @0x800D023C, len = 0x00000002
-                            .x = null,
-                            // short @0x800D023E, len = 0x00000002
-                            .y = null,
-                            // short @0x800D0240, len = 0x00000002
-                            .z = null,
-                            // short @0x800D0242, len = 0x00000002
-                            .pad = null},
-                    // _Rotation @0x800D0244, len = 0x00000008
-                    .targetFocusRotation =
-                        {
-                            // short @0x800D0244, len = 0x00000002
-                            .x = null,
-                            // short @0x800D0246, len = 0x00000002
-                            .y = null,
-                            // short @0x800D0248, len = 0x00000002
-                            .z = null,
-                            // short @0x800D024A, len = 0x00000002
-                            .pad = null},
-                    // short @0x800D024C, len = 0x00000002
-                    .focusDistance = null,
-                    // short @0x800D024E, len = 0x00000002
-                    .targetFocusDistance = null,
-                    // _SVector @0x800D0250, len = 0x00000008
-                    .focusPointVel =
-                        {
-                            // short @0x800D0250, len = 0x00000002
-                            .x = null,
-                            // short @0x800D0252, len = 0x00000002
-                            .y = null,
-                            // short @0x800D0254, len = 0x00000002
-                            .z = null,
-                            // short @0x800D0256, len = 0x00000002
-                            .pad = null},
-                    // _SVector @0x800D0258, len = 0x00000008
-                    .focusPointAccl =
-                        {
-                            // short @0x800D0258, len = 0x00000002
-                            .x = null,
-                            // short @0x800D025A, len = 0x00000002
-                            .y = null,
-                            // short @0x800D025C, len = 0x00000002
-                            .z = null,
-                            // short @0x800D025E, len = 0x00000002
-                            .pad = null},
-                    // _SVector @0x800D0260, len = 0x00000008
-                    .baseVel =
-                        {
-                            // short @0x800D0260, len = 0x00000002
-                            .x = null,
-                            // short @0x800D0262, len = 0x00000002
-                            .y = null,
-                            // short @0x800D0264, len = 0x00000002
-                            .z = null,
-                            // short @0x800D0266, len = 0x00000002
-                            .pad = null},
-                    // _SVector @0x800D0268, len = 0x00000008
-                    .baseAccl =
-                        {
-                            // short @0x800D0268, len = 0x00000002
-                            .x = null,
-                            // short @0x800D026A, len = 0x00000002
-                            .y = null,
-                            // short @0x800D026C, len = 0x00000002
-                            .z = null,
-                            // short @0x800D026E, len = 0x00000002
-                            .pad = null},
-                    // long @0x800D0270, len = 0x00000004
-                    .maxVel = null,
-                    // MultiSpline * @0x800D0274, len = 0x00000004
-                    .posSpline = null,
-                    // MultiSpline * @0x800D0278, len = 0x00000004
-                    .targetSpline = null,
-                    // Level * @0x800D027C, len = 0x00000004
-                    .level = null}},
-        // _Rotation @0x800D0280, len = 0x00000008
-        .savedfocusRotation =
-            {
-                // short @0x800D0280, len = 0x00000002
-                .x = null,
-                // short @0x800D0282, len = 0x00000002
-                .y = null,
-                // short @0x800D0284, len = 0x00000002
-                .z = null,
-                // short @0x800D0286, len = 0x00000002
-                .pad = null},
-        // _Position @0x800D0288, len = 0x00000006
-        .signalPos =
-            {
-                // short @0x800D0288, len = 0x00000002
-                .x = null,
-                // short @0x800D028A, len = 0x00000002
-                .y = null,
-                // short @0x800D028C, len = 0x00000002
-                .z = null},
-        // short @0x800D028E, len = 0x00000002
-        .pad11 = null,
-        // _Rotation @0x800D0290, len = 0x00000008
-        .signalRot =
-            {
-                // short @0x800D0290, len = 0x00000002
-                .x = null,
-                // short @0x800D0292, len = 0x00000002
-                .y = null,
-                // short @0x800D0294, len = 0x00000002
-                .z = null,
-                // short @0x800D0296, len = 0x00000002
-                .pad = null},
-        // short @0x800D0298, len = 0x00000002
-        .forced_movement = null,
-        // short @0x800D029A, len = 0x00000002
-        .last_forced_movement = null,
-        // short @0x800D029C, len = 0x00000002
-        .rotDirection = null,
-        // ulong @0x800D02A0, len = 0x00000004
-        .lastModTime = null,
-        // _Rotation @0x800D02A4, len = 0x00000008
-        .lookRot =
-            {
-                // short @0x800D02A4, len = 0x00000002
-                .x = null,
-                // short @0x800D02A6, len = 0x00000002
-                .y = null,
-                // short @0x800D02A8, len = 0x00000002
-                .z = null,
-                // short @0x800D02AA, len = 0x00000002
-                .pad = null},
-        // MultiSpline * @0x800D02AC, len = 0x00000004
-        .Spline00 = null,
-        // MultiSpline * @0x800D02B0, len = 0x00000004
-        .Spline01 = null,
-        // DEBUG_156fake @0x800D02B4, len = 0x00000060
-        .data =
-            {
-                // DEBUG_152fake @0x800D02B4, len = 0x0000001C
-                .Cinematic =
-                    {
-                        // MultiSpline * @0x800D02B4, len = 0x00000004
-                        .posSpline = null,
-                        // MultiSpline * @0x800D02B8, len = 0x00000004
-                        .targetSpline = null,
-                        // _SVector @0x800D02BC, len = 0x00000008
-                        .lastSplinePos =
-                            {
-                                // short @0x800D02BC, len = 0x00000002
-                                .x = null,
-                                // short @0x800D02BE, len = 0x00000002
-                                .y = null,
-                                // short @0x800D02C0, len = 0x00000002
-                                .z = null,
-                                // short @0x800D02C2, len = 0x00000002
-                                .pad = null},
-                        // short @0x800D02C4, len = 0x00000002
-                        .splinePointAhead = null,
-                        // short @0x800D02C6, len = 0x00000002
-                        .cinema_done = null,
-                        // int @0x800D02C8, len = 0x00000004
-                        .splinecam_currkey = null,
-                        // int @0x800D02CC, len = 0x00000004
-                        .splinecam_helpkey = null},
-                // DEBUG_153fake @0x800D02D0, len = 0x00000014
-                .Idle =
-                    {
-                        // _Position @0x800D02D0, len = 0x00000006
-                        .offset =
-                            {
-                                // short @0x800D02D0, len = 0x00000002
-                                .x = null,
-                                // short @0x800D02D2, len = 0x00000002
-                                .y = null,
-                                // short @0x800D02D4, len = 0x00000002
-                                .z = null},
-                        // _Rotation @0x800D02D6, len = 0x00000008
-                        .rotation =
-                            {
-                                // short @0x800D02D6, len = 0x00000002
-                                .x = null,
-                                // short @0x800D02D8, len = 0x00000002
-                                .y = null,
-                                // short @0x800D02DA, len = 0x00000002
-                                .z = null,
-                                // short @0x800D02DC, len = 0x00000002
-                                .pad = null},
-                        // long @0x800D02E0, len = 0x00000004
-                        .focusDistance = null},
-                // DEBUG_154fake @0x800D02E4, len = 0x0000001C
-                .Behind =
-                    {
-                        // _TFace * @0x800D02E4, len = 0x00000004
-                        .tface = null,
-                        // _TFace * @0x800D02E8, len = 0x00000004
-                        .oldTFace = null,
-                        // _SVector @0x800D02EC, len = 0x00000008
-                        .oldTargetRot =
-                            {
-                                // short @0x800D02EC, len = 0x00000002
-                                .x = null,
-                                // short @0x800D02EE, len = 0x00000002
-                                .y = null,
-                                // short @0x800D02F0, len = 0x00000002
-                                .z = null,
-                                // short @0x800D02F2, len = 0x00000002
-                                .pad = null},
-                        // long @0x800D02F4, len = 0x00000004
-                        .timer = null,
-                        // _SVector @0x800D02F8, len = 0x00000008
-                        .oldFocusInstancePos =
-                            {
-                                // short @0x800D02F8, len = 0x00000002
-                                .x = null,
-                                // short @0x800D02FA, len = 0x00000002
-                                .y = null,
-                                // short @0x800D02FC, len = 0x00000002
-                                .z = null,
-                                // short @0x800D02FE, len = 0x00000002
-                                .pad = null}},
-                // DEBUG_155fake @0x800D0300, len = 0x00000014
-                .Follow =
-                    {
-                        // long @0x800D0300, len = 0x00000004
-                        .stopTimer = null,
-                        // long @0x800D0304, len = 0x00000004
-                        .stopHit = null,
-                        // _TFace * @0x800D0308, len = 0x00000004
-                        .tface = null,
-                        // _TFace * @0x800D030C, len = 0x00000004
-                        .oldTFace = null,
-                        // long @0x800D0310, len = 0x00000004
-                        .hit = null}},
-        // long @0x800D0314, len = 0x00000004
-        .cuckooTimer = null,
-        // short @0x800D0318, len = 0x00000002
-        .teleportZRot = null,
-        // short @0x800D031A, len = 0x00000002
-        .extraZRot = null,
-        // short @0x800D031C, len = 0x00000002
-        .extraXRot = null,
-        // short @0x800D031E, len = 0x00000002
-        .leftTimer = null,
-        // short @0x800D0320, len = 0x00000002
-        .rightTimer = null,
-        // short @0x800D0322, len = 0x00000002
-        .collideRotControl = null,
-        // short @0x800D0324, len = 0x00000002
-        .collision_lastPush = null,
-        // short @0x800D0326, len = 0x00000002
-        .collision_timer = null,
-        // ulong @0x800D0328, len = 0x00000004
-        .prev_instance_mode = null,
-        // ulong @0x800D032C, len = 0x00000004
-        .instance_mode = null,
-        // long @0x800D0330, len = 0x00000004
-        .instance_xyvel = null,
-        // long @0x800D0334, len = 0x00000004
-        .instance_prev_xyvel = null,
-        // _Position @0x800D0338, len = 0x00000006
-        .real_focuspoint =
-            {
-                // short @0x800D0338, len = 0x00000002
-                .x = null,
-                // short @0x800D033A, len = 0x00000002
-                .y = null,
-                // short @0x800D033C, len = 0x00000002
-                .z = null},
-        // short @0x800D033E, len = 0x00000002
-        .always_rotate_flag = null,
-        // short @0x800D0340, len = 0x00000002
-        .follow_flag = null,
-        // short @0x800D0342, len = 0x00000002
-        .actual_x_rot = null,
-        // short @0x800D0344, len = 0x00000002
-        .actual_vel_x = null,
-        // short @0x800D0346, len = 0x00000002
-        .actual_acc_x = null,
-        // short @0x800D0348, len = 0x00000002
-        .x_rot_change = null,
-        // short @0x800D034A, len = 0x00000002
-        .focuspoint_fallz = null,
-        // short @0x800D034C, len = 0x00000002
-        .lead_angle = null,
-        // short @0x800D034E, len = 0x00000002
-        .lead_vel = null,
-        // short @0x800D0350, len = 0x00000002
-        .lead_accl = null,
-        // short @0x800D0352, len = 0x00000002
-        .lead_timer = null};
-// MATRIX @0x800CFD94, len = 0x00000020
-wcTransform2X =
-    {
-        // short[3][3] @0x800CFD94, len = 0x00000012
-        .m =
-            {
-                // short[3] @0x800CFD94, len = 0x00000006
-                {
-                    0x0,
-                    0x0,
-                    0x0},
-                // short[3] @0x800CFD9A, len = 0x00000006
-                {
-                    0x0,
-                    0x0,
-                    0x0},
-                // short[3] @0x800CFDA0, len = 0x00000006
-                {
-                    0x0,
-                    0x0,
-                    0x0}},
-        // long[3] @0x800CFDA8, len = 0x0000000C
-        .t =
-            {
-                0x0,
-                0x0,
-                0x0}};
-// MATRIX @0x800CFD74, len = 0x00000020
-wcTransformX =
-    {
-        // short[3][3] @0x800CFD74, len = 0x00000012
-        .m =
-            {
-                // short[3] @0x800CFD74, len = 0x00000006
-                {
-                    0x0,
-                    0x0,
-                    0x0},
-                // short[3] @0x800CFD7A, len = 0x00000006
-                {
-                    0x0,
-                    0x0,
-                    0x0},
-                // short[3] @0x800CFD80, len = 0x00000006
-                {
-                    0x0,
-                    0x0,
-                    0x0}},
-        // long[3] @0x800CFD88, len = 0x0000000C
-        .t =
-            {
-                0x0,
-                0x0,
-                0x0}};
 // decompiled code
 // original method signature:
 // void /*$ra*/ CAMERA_CalculateViewVolumeNormals(struct Camera *camera /*$s0*/)
@@ -1516,12 +34,10 @@ void CAMERA_CalculateViewVolumeNormals(Camera *camera)
   short sVar2;
   short sVar3;
   short sVar4;
-  short sVar5;
 
   sVar3 = ((short)(camera->core).leftX + -0xa0) * 0x10;
   sVar2 = ((short)(camera->core).topY + -0x78) * 0x10;
-  sVar5 = ((short)(camera->core).rightX + -0xa0) * 0x10;
-  sVar4 = ((short)(camera->core).bottomY + -0x78) * 0x10;
+  sVar4 = ((short)(camera->core).rightX + -0xa0) * 0x10;
   sVar1 = (short)((int)((uint) * (ushort *)&(camera->core).projDistance << 0x10) >> 0xc);
   (camera->core).viewVolumeNormal[0].x = 0;
   (camera->core).viewVolumeNormal[0].y = 0;
@@ -1529,32 +45,11 @@ void CAMERA_CalculateViewVolumeNormals(Camera *camera)
   (camera->core).viewVolumeNormal[1].x =
       (short)((int)sVar2 * (int)sVar1 - (int)sVar1 * (int)sVar2 >> 0xc);
   (camera->core).viewVolumeNormal[1].y =
-      -(short)((int)sVar3 * (int)sVar1 - (int)sVar1 * (int)sVar5 >> 0xc);
+      -(short)((int)sVar3 * (int)sVar1 - (int)sVar1 * (int)sVar4 >> 0xc);
+  /* WARNING: Subroutine does not return */
   (camera->core).viewVolumeNormal[1].z =
-      (short)((int)sVar3 * (int)sVar2 - (int)sVar2 * (int)sVar5 >> 0xc);
+      (short)((int)sVar3 * (int)sVar2 - (int)sVar2 * (int)sVar4 >> 0xc);
   CAMERA_Normalize((_SVector *)((camera->core).viewVolumeNormal + 1));
-  (camera->core).viewVolumeNormal[2].x =
-      (short)((int)sVar4 * (int)sVar1 - (int)sVar1 * (int)sVar2 >> 0xc);
-  (camera->core).viewVolumeNormal[2].y =
-      -(short)((int)sVar3 * (int)sVar1 - (int)sVar1 * (int)sVar3 >> 0xc);
-  (camera->core).viewVolumeNormal[2].z =
-      (short)((int)sVar3 * (int)sVar2 - (int)sVar4 * (int)sVar3 >> 0xc);
-  CAMERA_Normalize((_SVector *)((camera->core).viewVolumeNormal + 2));
-  (camera->core).viewVolumeNormal[3].x =
-      (short)((int)sVar2 * (int)sVar1 - (int)sVar1 * (int)sVar4 >> 0xc);
-  (camera->core).viewVolumeNormal[3].y =
-      -(short)((int)sVar5 * (int)sVar1 - (int)sVar1 * (int)sVar5 >> 0xc);
-  (camera->core).viewVolumeNormal[3].z =
-      (short)((int)sVar5 * (int)sVar4 - (int)sVar2 * (int)sVar5 >> 0xc);
-  CAMERA_Normalize((_SVector *)((camera->core).viewVolumeNormal + 3));
-  (camera->core).viewVolumeNormal[4].x =
-      (short)((int)sVar4 * (int)sVar1 - (int)sVar1 * (int)sVar4 >> 0xc);
-  (camera->core).viewVolumeNormal[4].y =
-      -(short)((int)sVar5 * (int)sVar1 - (int)sVar1 * (int)sVar3 >> 0xc);
-  (camera->core).viewVolumeNormal[4].z =
-      (short)((int)sVar5 * (int)sVar4 - (int)sVar4 * (int)sVar3 >> 0xc);
-  CAMERA_Normalize((_SVector *)((camera->core).viewVolumeNormal + 4));
-  return;
 }
 
 // decompiled code
@@ -1569,51 +64,9 @@ void CAMERA_CalculateViewVolumeNormals(Camera *camera)
 void CAMERA_CalcVVClipInfo(Camera *camera)
 
 {
-  long lVar1;
-  undefined4 in_zero;
-  undefined4 in_at;
-  MATRIX *pMVar2;
-  MATRIX *pMVar3;
-
-  pMVar3 = (camera->core).vvNormalWorVecMat;
-  ApplyMatrixSV((camera->core).cwTransform2, (camera->core).viewVolumeNormal, pMVar3);
-  ApplyMatrixSV((camera->core).cwTransform2, (camera->core).viewVolumeNormal + 1,
-                (camera->core).vvNormalWorVecMat[0].m + 3);
-  ApplyMatrixSV((camera->core).cwTransform2, (camera->core).viewVolumeNormal + 2,
-                (camera->core).vvNormalWorVecMat[0].m + 6);
-  pMVar2 = (camera->core).vvNormalWorVecMat + 1;
-  ApplyMatrixSV((camera->core).cwTransform2, (camera->core).viewVolumeNormal + 3, pMVar2);
-  ApplyMatrixSV((camera->core).cwTransform2, (camera->core).viewVolumeNormal + 4,
-                (camera->core).vvNormalWorVecMat[1].m + 3);
-  setCopControlWord(2, 0, *(undefined4 *)pMVar3->m);
-  setCopControlWord(2, 0x800, *(undefined4 *)((camera->core).vvNormalWorVecMat[0].m + 2));
-  setCopControlWord(2, 0x1000, *(undefined4 *)((camera->core).vvNormalWorVecMat[0].m + 4));
-  setCopControlWord(2, 0x1800, *(undefined4 *)((camera->core).vvNormalWorVecMat[0].m + 6));
-  setCopControlWord(2, 0x2000, *(undefined4 *)((camera->core).vvNormalWorVecMat[0].m + 8));
-  setCopReg(2, in_zero, *(undefined4 *)&(camera->core).position);
-  setCopReg(2, in_at, *(undefined4 *)&(camera->core).position.z);
-  copFunction(2, 0x486012);
-  lVar1 = getCopReg(2, 0x19);
-  (camera->core).vvPlaneConsts[0] = lVar1;
-  lVar1 = getCopReg(2, 0x1a);
-  (camera->core).vvPlaneConsts[1] = lVar1;
-  lVar1 = getCopReg(2, 0x1b);
-  (camera->core).vvPlaneConsts[2] = lVar1;
-  setCopControlWord(2, 0, *(undefined4 *)pMVar2->m);
-  setCopControlWord(2, 0x800, *(undefined4 *)((camera->core).vvNormalWorVecMat[1].m + 2));
-  setCopControlWord(2, 0x1000, *(undefined4 *)((camera->core).vvNormalWorVecMat[1].m + 4));
-  setCopControlWord(2, 0x1800, *(undefined4 *)((camera->core).vvNormalWorVecMat[1].m + 6));
-  setCopControlWord(2, 0x2000, *(undefined4 *)((camera->core).vvNormalWorVecMat[1].m + 8));
-  setCopReg(2, in_zero, *(undefined4 *)&(camera->core).position);
-  setCopReg(2, in_at, *(undefined4 *)&(camera->core).position.z);
-  copFunction(2, 0x486012);
-  lVar1 = getCopReg(2, 0x19);
-  (camera->core).vvPlaneConsts[3] = lVar1;
-  lVar1 = getCopReg(2, 0x1a);
-  (camera->core).vvPlaneConsts[4] = lVar1;
-  lVar1 = getCopReg(2, 0x1b);
-  (camera->core).vvPlaneConsts[5] = lVar1;
-  return;
+  /* WARNING: Subroutine does not return */
+  ApplyMatrixSV((camera->core).cwTransform2, (camera->core).viewVolumeNormal,
+                (camera->core).vvNormalWorVecMat);
 }
 
 // decompiled code
@@ -1656,24 +109,24 @@ void CAMERA_SetProjDistance(Camera *camera, long distance)
 
 {
   Level *level;
-  STracker *pSVar1;
+  undefined4 *puVar1;
   int iVar2;
 
   SetGeomScreen(distance);
   (camera->core).projDistance = distance;
   CAMERA_CalculateViewVolumeNormals(camera);
   iVar2 = 0;
-  pSVar1 = &StreamTracker;
+  puVar1 = &StreamTracker;
   do
   {
-    if (pSVar1->StreamList[0].used == 2)
+    if (*(short *)(puVar1 + 1) == 2)
     {
-      level = pSVar1->StreamList[0].level;
+      level = (Level *)puVar1[2];
       SetFogNearFar((uint)level->fogNear, (uint)level->fogFar, (camera->core).projDistance);
       LIGHT_CalcDQPTable(level);
     }
     iVar2 = iVar2 + 1;
-    pSVar1 = (STracker *)(pSVar1->StreamList + 1);
+    puVar1 = puVar1 + 0x10;
   } while (iVar2 < 0x10);
   return;
 }
@@ -1827,7 +280,7 @@ void CAMERA_SaveMode(Camera *camera, long mode)
       pCVar6 = (Camera *)&(pCVar6->core).position.z;
     } while (iVar10 < 2);
   }
-  camera->savedMode[(int)camera->stack] = mode;
+  camera->savedMode[camera->stack] = mode;
   if (((mode == 2) || (mode == 5)) || (mode == 4))
   {
     p_Var3 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
@@ -1862,12 +315,12 @@ void CAMERA_SaveMode(Camera *camera, long mode)
     uVar11 = *(undefined4 *)&(camera->focusPointAccl).z;
     *(undefined4 *)(p_Var3 + 0x7c) = *(undefined4 *)&camera->focusPointAccl;
     *(undefined4 *)&p_Var3[0x7c].z = uVar11;
-    camera->savedCinematic[(int)camera->stack].maxVel = (int)camera->maxVel;
-    camera->savedCinematic[(int)camera->stack].focusDistance = camera->focusDistance;
-    camera->savedCinematic[(int)camera->stack].targetFocusDistance = camera->targetFocusDistance;
-    camera->savedCinematic[(int)camera->stack].posSpline = (camera->data).Cinematic.posSpline;
-    camera->savedCinematic[(int)camera->stack].targetSpline = (camera->data).Cinematic.targetSpline;
-    camera->savedCinematic[(int)camera->stack].level = gameTrackerX.level;
+    camera->savedCinematic[camera->stack].maxVel = (int)camera->maxVel;
+    camera->savedCinematic[camera->stack].focusDistance = camera->focusDistance;
+    camera->savedCinematic[camera->stack].targetFocusDistance = camera->targetFocusDistance;
+    camera->savedCinematic[camera->stack].posSpline = (camera->data).Cinematic.posSpline;
+    camera->savedCinematic[camera->stack].targetSpline = (camera->data).Cinematic.targetSpline;
+    *(long *)&camera->savedCinematic[camera->stack].level = FRAC_BITS;
   }
   return;
 }
@@ -1903,15 +356,14 @@ void CAMERA_RestoreMode(Camera *camera)
   short sVar1;
   _Position *p_Var2;
   MultiSpline *pMVar3;
-  ulong uVar4;
   _Instance *Inst;
-  undefined4 uVar5;
-  short sVar6;
-  int iVar7;
+  undefined4 uVar4;
+  short sVar5;
+  int iVar6;
 
   if (-1 < (int)camera->stack)
   {
-    iVar7 = camera->savedMode[(int)camera->stack];
+    iVar6 = camera->savedMode[(int)camera->stack];
     if (camera->mode == 5)
     {
       if (camera->smooth == 0)
@@ -1923,15 +375,15 @@ void CAMERA_RestoreMode(Camera *camera)
         camera->smooth = 8;
       }
     }
-    sVar6 = (short)iVar7;
-    switch (iVar7)
+    sVar5 = (short)iVar6;
+    switch (iVar6)
     {
     case 0:
     case 0xc:
     case 0xd:
     case 0x10:
       CAMERA_SetProjDistance(camera, 0x140);
-      Inst = gameTrackerX.playerInstance;
+      Inst = DAT_800d0fd8;
       if (camera->mode == 5)
       {
         (camera->focusOffset).x = 0;
@@ -1940,23 +392,23 @@ void CAMERA_RestoreMode(Camera *camera)
         camera->focusInstance = Inst;
         CAMERA_Restore(camera, 7);
       }
-      if (iVar7 == 0xc)
+      if (iVar6 == 0xc)
       {
-        gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xffffffbf;
+        DAT_800d10ec = DAT_800d10ec & 0xffffffbf;
       }
       else
       {
-        gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x40;
+        DAT_800d10ec = DAT_800d10ec | 0x40;
       }
-      cameraMode = iVar7;
-      camera->mode = sVar6;
-      sVar6 = *(short *)(camera->focusDistanceList +
-                         *(int *)((int)&camera_modeToIndex + ((iVar7 << 0x10) >> 0xe)) * 3 +
+      cameraMode = iVar6;
+      camera->mode = sVar5;
+      sVar5 = *(short *)(camera->focusDistanceList +
+                         *(int *)((int)camera_modeToIndex + ((iVar6 << 0x10) >> 0xe)) * 3 +
                          (int)camera->presetIndex);
       (camera->data).Follow.stopTimer = -0x1a5e0000;
       (camera->focusRotVel).z = 0;
-      camera->targetFocusDistance = sVar6;
-      if (iVar7 == 0x10)
+      camera->targetFocusDistance = sVar5;
+      if (iVar6 == 0x10)
       {
         camera->flags = camera->flags | 0x2000;
       }
@@ -1966,7 +418,7 @@ void CAMERA_RestoreMode(Camera *camera)
       }
       break;
     default:
-      camera->mode = sVar6;
+      camera->mode = sVar5;
       break;
     case 2:
     case 4:
@@ -1990,46 +442,42 @@ void CAMERA_RestoreMode(Camera *camera)
       (camera->targetFocusPoint).z = sVar1;
       camera->targetFocusDistance = camera->savedCinematic[(int)camera->stack].targetFocusDistance;
       p_Var2 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
-      uVar5 = *(undefined4 *)&p_Var2[0x79].y;
+      uVar4 = *(undefined4 *)&p_Var2[0x79].y;
       *(undefined4 *)&camera->targetFocusRotation = *(undefined4 *)&p_Var2[0x78].z;
-      *(undefined4 *)&(camera->targetFocusRotation).z = uVar5;
+      *(undefined4 *)&(camera->targetFocusRotation).z = uVar4;
       if ((camera->smooth == 0) && (camera->mode != 6))
       {
         camera->focusDistance = camera->savedCinematic[(int)camera->stack].focusDistance;
         p_Var2 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
-        uVar5 = *(undefined4 *)(p_Var2 + 0x78);
+        uVar4 = *(undefined4 *)(p_Var2 + 0x78);
         *(undefined4 *)&camera->focusRotation = *(undefined4 *)&p_Var2[0x77].y;
-        *(undefined4 *)&(camera->focusRotation).z = uVar5;
+        *(undefined4 *)&(camera->focusRotation).z = uVar4;
       }
       else
       {
         camera->always_rotate_flag = 1;
       }
       p_Var2 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
-      uVar5 = *(undefined4 *)&p_Var2[0x7b].y;
+      uVar4 = *(undefined4 *)&p_Var2[0x7b].y;
       *(undefined4 *)&camera->focusPointVel = *(undefined4 *)&p_Var2[0x7a].z;
-      *(undefined4 *)&(camera->focusPointVel).z = uVar5;
+      *(undefined4 *)&(camera->focusPointVel).z = uVar4;
       p_Var2 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
-      uVar5 = *(undefined4 *)&p_Var2[0x7c].z;
+      uVar4 = *(undefined4 *)&p_Var2[0x7c].z;
       *(undefined4 *)&camera->focusPointAccl = *(undefined4 *)(p_Var2 + 0x7c);
-      *(undefined4 *)&(camera->focusPointAccl).z = uVar5;
-      iVar7 = (int)camera->stack;
+      *(undefined4 *)&(camera->focusPointAccl).z = uVar4;
+      iVar6 = (int)camera->stack;
       Inst = camera->focusInstance;
-      camera->maxVel = *(short *)&camera->savedCinematic[iVar7].maxVel;
-      (camera->data).Cinematic.posSpline = camera->savedCinematic[iVar7].posSpline;
-      pMVar3 = camera->savedCinematic[iVar7].targetSpline;
-      camera->mode = sVar6;
+      camera->maxVel = *(short *)&camera->savedCinematic[iVar6].maxVel;
+      (camera->data).Cinematic.posSpline = camera->savedCinematic[iVar6].posSpline;
+      pMVar3 = camera->savedCinematic[iVar6].targetSpline;
+      camera->mode = sVar5;
+      /* WARNING: Subroutine does not return */
       (camera->data).Cinematic.targetSpline = pMVar3;
-      uVar4 = INSTANCE_Query(Inst, 9);
-      if ((uVar4 & 0x50) != 0)
-      {
-        CAMERA_ChangeToUnderWater(camera, camera->focusInstance);
-      }
-      break;
+      INSTANCE_Query(Inst, 9);
     case 6:
       if (((uint)(ushort)camera->mode - 4 < 2) || (camera->mode == 2))
       {
-        sVar1 = *(short *)(camera->savedTargetFocusDistance + (int)camera->targetStack);
+        sVar1 = *(short *)(camera->savedTargetFocusDistance + camera->targetStack);
         camera->focusDistance = sVar1;
         camera->targetFocusDistance = sVar1;
         if (-1 < camera->targetStack)
@@ -2039,7 +487,7 @@ void CAMERA_RestoreMode(Camera *camera)
         camera->flags = camera->flags | 0x800;
       }
       camera->lookTimer = 4;
-      camera->mode = sVar6;
+      camera->mode = sVar5;
       camera->targetFocusDistance = 2000;
     }
     camera->stack = camera->stack + -1;
@@ -2096,7 +544,7 @@ void CAMERA_Save(Camera *camera, long save)
         iVar2 = iVar3 * 4;
       } while (iVar3 < 2);
     }
-    camera->savedTargetFocusDistance[(int)camera->targetStack] = (int)camera->targetFocusDistance;
+    camera->savedTargetFocusDistance[camera->targetStack] = (int)camera->targetFocusDistance;
   }
   if ((save & 2U) != 0)
   {
@@ -2185,7 +633,7 @@ _SVector *SplineGetNextPointDC(Spline *spline, SplineDef *def)
 {
   ulong uVar1;
 
-  uVar1 = SplineGetOffsetNext(spline, def, gameTrackerX.timeMult);
+  uVar1 = SplineGetOffsetNext(spline, def, DAT_800d11ec);
   if ((uVar1 != 0) && (uVar1 = SplineGetData(spline, def, &point_42), uVar1 != 0))
   {
     return (_SVector *)&point_42;
@@ -2471,11 +919,11 @@ void CAMERA_SetMode(Camera *camera, long mode)
         uVar7 = camera->flags & 0xffffdfff;
       }
       camera->flags = uVar7;
-      gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xffffffbf;
+      DAT_800d10ec = DAT_800d10ec & 0xffffffbf;
       cameraMode = mode;
       camera->mode = (short)mode;
       sVar3 = *(short *)(camera->focusDistanceList +
-                         *(int *)((int)&camera_modeToIndex + ((mode << 0x10) >> 0xe)) * 3 +
+                         *(int *)((int)camera_modeToIndex + ((mode << 0x10) >> 0xe)) * 3 +
                          (int)camera->presetIndex);
       camera->smooth = 8;
       (camera->data).Follow.stopTimer = -0x1a5e0000;
@@ -2516,137 +964,8 @@ void CAMERA_SetMode(Camera *camera, long mode)
 void CAMERA_Initialize(Camera *camera)
 
 {
-  _CameraCore_Type *p_Var1;
-  long mode;
-  int iVar2;
-  uint uVar3;
-  int iVar4;
-
+  /* WARNING: Subroutine does not return */
   memset(camera, 0, 0x4c4);
-  iVar4 = 0;
-  do
-  {
-    iVar2 = rand();
-    iVar2._1_2_ = (short)((uint)iVar2 >> 8);
-    if (iVar2 < 0)
-    {
-      iVar2._1_2_ = (short)((uint)(iVar2 + 0xff) >> 8);
-    }
-    (&camera_shakeOffset)[iVar4].x = (short)iVar2 + iVar2._1_2_ * -0x100 + -0x80;
-    iVar2 = rand();
-    iVar2._1_2_ = (short)((uint)iVar2 >> 8);
-    if (iVar2 < 0)
-    {
-      iVar2._1_2_ = (short)((uint)(iVar2 + 0xff) >> 8);
-    }
-    (&camera_shakeOffset)[iVar4].y = (short)iVar2 + iVar2._1_2_ * -0x100 + -0x80;
-    iVar2 = rand();
-    iVar2._1_2_ = (short)((uint)iVar2 >> 8);
-    if (iVar2 < 0)
-    {
-      iVar2._1_2_ = (short)((uint)(iVar2 + 0xff) >> 8);
-    }
-    (&camera_shakeOffset)[iVar4].z = (short)iVar2 + iVar2._1_2_ * -0x100 + -0x80;
-    iVar4 = iVar4 + 1;
-  } while (iVar4 < 0x10);
-  (camera->core).rotation.x = 0xfc7;
-  (camera->targetRotation).x = 0xfc7;
-  (camera->focusRotation).x = 0xfc7;
-  (camera->targetFocusRotation).x = 0xfc7;
-  camera->focusDistanceList[0] = 0x5dc;
-  camera->focusDistanceList[3] = 0x5dc;
-  camera->focusDistanceList[1] = 0x8ca;
-  camera->focusDistanceList[4] = 2000;
-  camera->focusDistanceList[8] = 2000;
-  iVar2._1_2_ = *(short *)(camera->focusDistanceList + 1);
-  camera->focusDistanceList[2] = 0xc80;
-  camera->focusDistanceList[5] = 0xa28;
-  camera->focusDistanceList[6] = 0x4b0;
-  camera->focusDistanceList[7] = 0x640;
-  camera->tiltList[0] = 0xfc7;
-  camera->tiltList[1] = 0xfc7;
-  camera->tiltList[2] = 0xfc7;
-  camera->tiltList[3] = 0xfc7;
-  camera->tiltList[4] = 0xfc7;
-  camera->tiltList[5] = 0xfc7;
-  camera->tiltList[6] = 0xfc7;
-  camera->tiltList[7] = 0xfc7;
-  camera->tiltList[8] = 0xfc7;
-  (camera->smallBaseSphere).radiusSquared = 0x13240;
-  (camera->focusSphere).radiusSquared = 0x13240;
-  (camera->posSphere).radiusSquared = 0x13240;
-  (camera->smallBaseSphere).radius = 0x118;
-  (camera->focusSphere).radius = 0x118;
-  (camera->posSphere).radius = 0x118;
-  (camera->core).nearPlane = 0x32;
-  (camera->core).projDistance = 0x140;
-  camera->targetFocusDistance = iVar2._1_2_;
-  camera->focusDistance = iVar2._1_2_;
-  (camera->core).farPlane = 12000;
-  (camera->core).bottomY = 0xf0;
-  (camera->core).wcTransform = &wcTransformX;
-  (camera->core).wcTransform2 = &wcTransform2X;
-  (camera->core).cwTransform2 = &cwTransform2X;
-  camera->smooth = 0x10;
-  (camera->core).leftX = 0;
-  (camera->core).rightX = 0x140;
-  (camera->core).topY = 0;
-  camera->maxVel = 200;
-  camera->always_rotate_flag = 0;
-  camera->follow_flag = 0;
-  iVar2._1_2_ = (camera->focusPoint).z;
-  *(undefined4 *)&camera->real_focuspoint = *(undefined4 *)&camera->focusPoint;
-  (camera->real_focuspoint).z = iVar2._1_2_;
-  iVar2._1_2_ = (camera->focusPoint).z;
-  camera->minFocusDistance = 0x200;
-  camera->Spline01 = (MultiSpline *)0x0;
-  camera->Spline00 = (MultiSpline *)0x0;
-  shorten_count = 0;
-  shorten_flag = 0;
-  camera->maxFocusDistance = 0x1000;
-  camera->focuspoint_fallz = iVar2._1_2_;
-  camera->flags = camera->flags | 0x800;
-  if (camera->focusInstance != (_Instance *)0x0)
-  {
-    CAMERA_EndLook(camera);
-  }
-  mode = playerCameraMode;
-  iVar4 = 2;
-  camera->presetIndex = 1;
-  camera->mode = 0;
-  CAMERA_SetMode(camera, mode);
-  p_Var1 = &camera->core;
-  camera->maxXYDist = 3000;
-  uVar3 = camera->flags;
-  camera->minXYDist = 0;
-  camera->rotDirection = 1;
-  (camera->core).screenScale.z = 0x1000;
-  (camera->core).screenScale.y = 0x1000;
-  (camera->core).screenScale.x = 0x1000;
-  camera->stack = -1;
-  camera->targetStack = -1;
-  camera->flags = uVar3 | 0x8000;
-  do
-  {
-    p_Var1->vvNormalWorVecMat[0x13].t[2] = 0;
-    iVar4 = iVar4 + -1;
-    p_Var1 = (_CameraCore_Type *)p_Var1->vvNormalWorVecMat[-1].t;
-  } while (-1 < iVar4);
-  (camera->core).projDistance = 0x140;
-  CAMERA_SetProjDistance(camera, 0x140);
-  (camera->data).Cinematic.cinema_done = 0;
-  roll_target = 0;
-  current_roll_amount = 0;
-  roll_inc = 0;
-  combat_cam_distance = 3000;
-  combat_cam_angle = 0;
-  combat_cam_weight = 0x1000;
-  combat_cam_debounce = 0;
-  CenterFlag = -1;
-  Camera_lookHeight = 0x200;
-  Camera_lookDist = 0x28a;
-  CameraCenterDelay = 10;
-  return;
 }
 
 // decompiled code
@@ -2676,7 +995,7 @@ void CAMERA_SetInstanceFocus(Camera *camera, _Instance *instance)
   if (instance->object != (Object *)0x0)
   {
     sVar1 = 0x200;
-    if (instance == gameTrackerX.playerInstance)
+    if (instance == DAT_800d0fd8)
     {
       sVar1 = 0x160;
     }
@@ -2781,11 +1100,11 @@ void CAMERA_SetValue(Camera *camera, long index, long value)
   iVar5 = 0x1000;
   if (camera->cineControl == 0)
   {
-    gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xffffff7f;
+    DAT_800d10ec = DAT_800d10ec & 0xffffff7f;
   }
   else
   {
-    gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x80;
+    DAT_800d10ec = DAT_800d10ec | 0x80;
   }
   sVar1 = camera->mode;
   if (sVar1 == 0xc)
@@ -3094,10 +1413,8 @@ short CAMERA_AngleDifference(short angle0, short angle1)
 short CAMERA_SignedAngleDifference(short angle0, short angle1)
 
 {
-  short sVar1;
-
-  sVar1 = AngleDiff(angle1, angle0);
-  return sVar1;
+  /* WARNING: Subroutine does not return */
+  AngleDiff(angle1, angle0);
 }
 
 // decompiled code
@@ -3121,35 +1438,8 @@ short CAMERA_SignedAngleDifference(short angle0, short angle1)
 ulong CAMERA_QueryMode(Camera *camera)
 
 {
-  ulong uVar1;
-  int iVar2;
-
-  uVar1 = INSTANCE_Query(camera->focusInstance, 10);
-  if (camera->focusInstance == gameTrackerX.playerInstance)
-  {
-    if ((uVar1 & 0x2000000) == 0)
-    {
-      if (0 < combat_cam_debounce)
-      {
-        uVar1 = uVar1 | 0x2000000;
-        combat_cam_debounce = combat_cam_debounce + -1;
-      }
-    }
-    else
-    {
-      combat_cam_debounce = 1;
-    }
-  }
-  else
-  {
-    uVar1 = uVar1 & 0xfdffffff;
-  }
-  iVar2 = WARPGATE_IsWarpgateActive();
-  if (iVar2 != 0)
-  {
-    uVar1 = uVar1 | 0x80000000;
-  }
-  return uVar1;
+  /* WARNING: Subroutine does not return */
+  INSTANCE_Query(camera->focusInstance, 10);
 }
 
 // decompiled code
@@ -3194,32 +1484,29 @@ ulong CAMERA_QueryMode(Camera *camera)
 void CAMERA_SetMaxVel(Camera *camera)
 
 {
-  int iVar1;
-  long lVar2;
-  ushort uVar3;
-  int iVar4;
+  long lVar1;
+  ushort uVar2;
+  int iVar3;
   _SVector local_18;
 
   local_18.x = (camera->focusPoint).x - (camera->targetFocusPoint).x;
   local_18.y = (camera->focusPoint).y - (camera->targetFocusPoint).y;
   local_18.z = (camera->focusPoint).z - (camera->targetFocusPoint).z;
-  iVar4 = (uint)(ushort)camera->focusDistance << 0x10;
-  iVar1 = iVar4 >> 0x10;
-  iVar1 = ((iVar1 / 100 + (iVar1 >> 0x1f)) - (iVar4 >> 0x1f)) * 0x10000 >> 0x10;
-  if (iVar1 < 0x14)
+  iVar3 = ((int)camera->focusDistance / 100) * 0x10000 >> 0x10;
+  if (iVar3 < 0x14)
   {
-    iVar1 = 0x14;
+    iVar3 = 0x14;
   }
   if (camera->forced_movement != 0)
   {
-    iVar1 = iVar1 * 5;
+    iVar3 = iVar3 * 5;
   }
-  lVar2 = CAMERA_LengthSVector(&local_18);
-  maxVelAccl_63 = (((int)(short)lVar2 + iVar1) - (int)camera->maxVel >> 2) - maxVelVel_64;
+  lVar1 = CAMERA_LengthSVector(&local_18);
+  maxVelAccl_63 = (((short)lVar1 + iVar3) - (int)camera->maxVel >> 2) - maxVelVel_64;
   maxVelVel_64 = maxVelVel_64 + maxVelAccl_63;
-  uVar3 = camera->maxVel + (short)maxVelVel_64;
-  camera->maxVel = uVar3;
-  if ((int)((uint)uVar3 << 0x10) < 1)
+  uVar2 = camera->maxVel + (short)maxVelVel_64;
+  camera->maxVel = uVar2;
+  if ((int)((uint)uVar2 << 0x10) < 1)
   {
     camera->maxVel = 1;
   }
@@ -3487,69 +1774,34 @@ void CAMERA_SetFocus(Camera *camera, _Position *targetfocusPoint)
 {
   short sVar1;
   short sVar2;
-  short sVar3;
-  _Segment *p_Var4;
-  ulong uVar5;
+  _Segment *p_Var3;
   _Instance *Inst;
   short local_40;
   short local_3e;
   short local_3c;
   _SVector local_38;
-  undefined auStack48[16];
-  short local_20;
-  short local_1e;
-  short local_1c;
+  undefined auStack48[24];
 
   Inst = camera->focusInstance;
   if (((camera->flags & 0x10000U) != 0) || ((camera->instance_mode & 0x4000000) != 0))
   {
-    p_Var4 = Inst->object->modelList[(int)Inst->currentModel]->segmentList;
-    local_40 = p_Var4[1].px;
-    local_3e = p_Var4[1].py;
-    local_3c = p_Var4[1].pz;
+    p_Var3 = Inst->object->modelList[Inst->currentModel]->segmentList;
+    local_40 = p_Var3[1].px;
+    local_3e = p_Var3[1].py;
+    local_3c = p_Var3[1].pz;
+    /* WARNING: Subroutine does not return */
     ApplyMatrix(Inst->matrix + 1, &local_40, auStack48);
-    sVar1 = (Inst->position).x;
-    sVar2 = (Inst->position).y;
-    sVar3 = (Inst->position).z;
-    targetfocusPoint->x = sVar1;
-    targetfocusPoint->y = sVar2;
-    targetfocusPoint->z = sVar3;
-    if ((camera->flags & 0x10000U) != 0)
-    {
-      targetfocusPoint->x = sVar1 + local_40;
-      targetfocusPoint->y = targetfocusPoint->y + local_3e;
-      targetfocusPoint->z = sVar3 + local_3c;
-      uVar5 = INSTANCE_Query(Inst, 9);
-      if ((uVar5 & 0x40) != 0)
-      {
-        targetfocusPoint->z = targetfocusPoint->z + 0xc0;
-      }
-    }
-    sVar1 = targetfocusPoint->z;
-    *(undefined4 *)&camera->real_focuspoint = *(undefined4 *)targetfocusPoint;
-    (camera->real_focuspoint).z = sVar1;
-    goto LAB_80016978;
   }
-  if (((camera->instance_mode & 0x2000000) == 0) || (1 < (uint)(ushort)camera->mode - 0xc))
+  if (((camera->instance_mode & 0x2000000) != 0) && ((uint)(ushort)camera->mode - 0xc < 2))
   {
-  LAB_800168d8:
-    sVar1 = (Inst->position).y;
-    sVar2 = (Inst->position).z;
-    targetfocusPoint->x = (Inst->position).x;
-    targetfocusPoint->y = sVar1;
-    targetfocusPoint->z = sVar2;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(Inst, 0x22);
   }
-  else
-  {
-    uVar5 = INSTANCE_Query(Inst, 0x22);
-    if (uVar5 == 0)
-      goto LAB_800168d8;
-    LoadAverageShort12((uint *)(uVar5 + 0x5c), (uint *)&Inst->position,
-                       0x1000 - (int)combat_cam_weight, (int)combat_cam_weight, (uint *)&local_20);
-    targetfocusPoint->x = local_20;
-    targetfocusPoint->y = local_1e;
-    targetfocusPoint->z = local_1c;
-  }
+  sVar1 = (Inst->position).y;
+  sVar2 = (Inst->position).z;
+  targetfocusPoint->x = (Inst->position).x;
+  targetfocusPoint->y = sVar1;
+  targetfocusPoint->z = sVar2;
   CAMERA_CalcFocusOffset(&local_38, camera);
   targetfocusPoint->x = targetfocusPoint->x + local_38.x;
   targetfocusPoint->y = targetfocusPoint->y + local_38.y;
@@ -3557,19 +1809,11 @@ void CAMERA_SetFocus(Camera *camera, _Position *targetfocusPoint)
   sVar1 = targetfocusPoint->z;
   *(undefined4 *)&camera->real_focuspoint = *(undefined4 *)targetfocusPoint;
   (camera->real_focuspoint).z = sVar1;
-  if ((camera->instance_mode & 0x2038) != 0)
+  if (((camera->instance_mode & 0x2038) == 0) ||
+      (((camera->instance_mode & 0x2000) != 0 && (0x46 < (camera->focusInstanceVelVec).z))))
   {
-    if ((camera->instance_mode & 0x2000) == 0)
-    {
-      return;
-    }
-    if ((camera->focusInstanceVelVec).z < 0x47)
-    {
-      return;
-    }
+    camera->focuspoint_fallz = targetfocusPoint->z;
   }
-LAB_80016978:
-  camera->focuspoint_fallz = targetfocusPoint->z;
   return;
 }
 
@@ -3770,7 +2014,7 @@ void CAMERA_Adjust_rotation(Camera *camera, long rotation)
       camera->teleportZRot = uVar3;
       (camera->collisionTargetFocusRotation).z = uVar3;
     }
-    uVar1 = gameTrackerX.frameCount;
+    uVar1 = DAT_800d10d8;
     camera->always_rotate_flag = 1;
     camera->lastModTime = uVar1;
   }
@@ -3953,7 +2197,7 @@ void CAMERA_SetShake(Camera *camera, long shake, long scale)
     }
     camera->shake = motor1_speed;
     sVar1 = camera->shakeScale;
-    if ((int)camera->shakeScale < scale)
+    if (camera->shakeScale < scale)
     {
       sVar1 = (short)scale;
     }
@@ -3982,14 +2226,16 @@ void CAMERA_SetShake(Camera *camera, long shake, long scale)
 /* end block 1 */
 // End Line: 3772
 
-void Decouple_AngleMoveToward(short *current_ptr, short destination, short step)
+void CAMERA_Unlock(Camera *camera, long unlock)
 
 {
-  if (gameTrackerX.timeMult != 0x1000)
+  short in_a2;
+
+  if (fontTracker.font_buffer._844_4_ != 0x1000)
   {
-    step = (short)((int)step * gameTrackerX.timeMult >> 0xc);
+    in_a2 = (short)((uint)(in_a2 * fontTracker.font_buffer._844_4_) >> 0xc);
   }
-  AngleMoveToward(current_ptr, destination, step);
+  AngleMoveToward((short *)camera, (short)unlock, in_a2);
   return;
 }
 
@@ -4019,68 +2265,58 @@ void CriticalDampValue(long dampMode, short *sourceVal, short targetVal, short *
   ushort uVar1;
   ushort uVar2;
   short sVar3;
-  short sVar4;
+  int iVar4;
   int iVar5;
-  int iVar6;
 
-  iVar5 = (int)(short)smooth;
-  if (iVar5 == 0)
+  iVar4 = (int)(short)smooth;
+  if (iVar4 == 0)
   {
     *sourceVal = targetVal;
     return;
   }
-  if (iVar5 < 0)
+  if (iVar4 < 0)
   {
-    smooth._0_2_ = (short)(-0x1000 / iVar5);
+    smooth._0_2_ = (short)(-0x1000 / iVar4);
   }
   if (dampMode == 1)
   {
   LAB_80016e6c:
-    iVar5 = (uint)(ushort)targetVal - (uint)(ushort)*sourceVal;
     if (dampMode == 5)
     {
-      sVar4 = *vel;
-      sVar3 = (short)(iVar5 * 0x10000 >> 0x11);
+      CAMERA_Adjust_rotation((Camera *)((int)&mainMenuScreen + 1), (long)sourceVal);
+      return;
     }
-    else
+    if (dampMode == 6)
     {
-      sVar3 = (short)((uint)(iVar5 * 0x10000) >> 0x10);
-      if (dampMode == 6)
-      {
-        sVar4 = *vel;
-        sVar3 = sVar3 >> 3;
-      }
-      else
-      {
-        sVar4 = *vel;
-        sVar3 = sVar3 >> 2;
-      }
+      CAMERA_Adjust_rotation((Camera *)((int)&mainMenuScreen + 2), (long)sourceVal);
+      return;
     }
-    *accl = sVar3 - sVar4;
+    *accl = (short)((int)(((uint)(ushort)targetVal - (uint)(ushort)*sourceVal) * 0x10000) >> 0x12) -
+            *vel;
     uVar1 = *vel;
     uVar2 = *accl;
     sVar3 = (short)((uint)uVar1 + (uint)uVar2);
     *vel = sVar3;
-    iVar5 = (int)(((uint)uVar1 + (uint)uVar2) * 0x10000) >> 0x10;
-    iVar6 = (int)(short)smooth;
-    if (iVar6 < iVar5)
+    iVar4 = (int)(((uint)uVar1 + (uint)uVar2) * 0x10000) >> 0x10;
+    iVar5 = (int)(short)smooth;
+    if (iVar5 < iVar4)
     {
       *vel = (short)smooth;
       sVar3 = (short)smooth;
-      if (gameTrackerX.timeMult != 0x1000)
+      if (DAT_800d11ec != 0x1000)
       {
-        sVar3 = (short)(iVar6 * gameTrackerX.timeMult >> 0xc);
+        sVar3 = (short)((uint)(iVar5 * DAT_800d11ec) >> 0xc);
       }
     }
     else
     {
-      if (iVar5 < -iVar6)
+      if (iVar4 < -iVar5)
       {
         *vel = -(short)smooth;
         sVar3 = -(short)smooth;
-        if (gameTrackerX.timeMult != 0x1000)
+        if (DAT_800d11ec != 0x1000)
         {
-          sVar3 = (short)(-(iVar6 * gameTrackerX.timeMult) >> 0xc);
+          sVar3 = (short)((uint) - (iVar5 * DAT_800d11ec) >> 0xc);
         }
       }
     }
@@ -4304,15 +2540,15 @@ void CriticalDampPosition(long dampMode, _Position *position, _Position *targetP
     iVar7 = (int)(short)smooth;
     if (lVar3 <= iVar7)
       break;
-    vel->x = (short)(((int)vel->x * iVar7) / lVar3);
-    vel->y = (short)(((int)vel->y * iVar7) / lVar3);
-    vel->z = (short)(((int)vel->z * iVar7) / lVar3);
-    if (gameTrackerX.timeMult == 0x1000)
+    vel->x = (short)((vel->x * iVar7) / lVar3);
+    vel->y = (short)((vel->y * iVar7) / lVar3);
+    vel->z = (short)((vel->z * iVar7) / lVar3);
+    if (DAT_800d11ec == 0x1000)
       break;
-    position->x = position->x + (short)((int)vel->x * gameTrackerX.timeMult >> 0xc);
-    position->y = position->y + (short)((int)vel->y * gameTrackerX.timeMult >> 0xc);
+    position->x = position->x + (short)((uint)(vel->x * DAT_800d11ec) >> 0xc);
+    position->y = position->y + (short)((uint)(vel->y * DAT_800d11ec) >> 0xc);
     sVar6 = position->z;
-    sVar5 = (short)((int)vel->z * gameTrackerX.timeMult >> 0xc);
+    sVar5 = (short)((uint)(vel->z * DAT_800d11ec) >> 0xc);
     goto code_r0x800175f8;
   default:
     goto switchD_80016fec_caseD_2;
@@ -4324,9 +2560,9 @@ void CriticalDampPosition(long dampMode, _Position *position, _Position *targetP
     iVar7 = (int)(short)smooth;
     if (iVar7 <= lVar3)
     {
-      position->x = position->x + (short)(((int)local_20.x * iVar7) / lVar3);
-      position->z = position->z + (short)(((int)local_20.z * iVar7) / lVar3);
-      position->y = position->y + (short)(((int)local_20.y * iVar7) / lVar3);
+      position->x = position->x + (short)((local_20.x * iVar7) / lVar3);
+      position->z = position->z + (short)((local_20.z * iVar7) / lVar3);
+      position->y = position->y + (short)((local_20.y * iVar7) / lVar3);
       return;
     }
     goto LAB_80017604;
@@ -4399,15 +2635,15 @@ void CriticalDampPosition(long dampMode, _Position *position, _Position *targetP
     iVar7 = (int)(short)smooth;
     if (iVar7 <= lVar3)
     {
-      vel->x = (short)(((int)vel->x * iVar7) / lVar3);
-      vel->y = (short)(((int)vel->y * iVar7) / lVar3);
-      vel->z = (short)(((int)vel->z * iVar7) / lVar3);
-      if (gameTrackerX.timeMult != 0x1000)
+      vel->x = (short)((vel->x * iVar7) / lVar3);
+      vel->y = (short)((vel->y * iVar7) / lVar3);
+      vel->z = (short)((vel->z * iVar7) / lVar3);
+      if (DAT_800d11ec != 0x1000)
       {
-        position->x = position->x + (short)((int)vel->x * gameTrackerX.timeMult >> 0xc);
-        position->y = position->y + (short)((int)vel->y * gameTrackerX.timeMult >> 0xc);
+        position->x = position->x + (short)((uint)(vel->x * DAT_800d11ec) >> 0xc);
+        position->y = position->y + (short)((uint)(vel->y * DAT_800d11ec) >> 0xc);
         sVar6 = position->z;
-        sVar5 = (short)((int)vel->z * gameTrackerX.timeMult >> 0xc);
+        sVar5 = (short)((uint)(vel->z * DAT_800d11ec) >> 0xc);
         goto code_r0x800175f8;
       }
     }
@@ -4626,7 +2862,7 @@ void CAMERA_CalcRotation(_Rotation *rotation, _Position *target, _Position *posi
 /* end block 2 */
 // End Line: 4431
 
-void CAMERA_CalcFSRotation(Camera *camera, _Rotation *rotation, _Position *target, _Position *position)
+void CAMERA_CalcFSRotation(undefined4 param_1, short *param_2, short *param_3, short *param_4)
 
 {
   uint uVar1;
@@ -4636,18 +2872,18 @@ void CAMERA_CalcFSRotation(Camera *camera, _Rotation *rotation, _Position *targe
   short local_e;
   short local_c;
 
-  local_18.x = position->x - target->x;
-  local_18.y = position->y - target->y;
-  local_c = position->z - target->z;
+  local_18.x = *param_4 - *param_3;
+  local_18.y = param_4[1] - param_3[1];
+  local_c = param_4[2] - param_3[2];
   local_18.z = 0;
   local_10 = local_18.x;
   local_e = local_18.y;
   uVar1 = CAMERA_LengthSVector(&local_18);
   iVar2 = ratan2((int)local_c, uVar1);
-  rotation->x = -(short)iVar2;
-  rotation->y = 0;
+  *param_2 = -(short)iVar2;
+  param_2[1] = 0;
   iVar2 = ratan2((int)local_e, (int)local_10);
-  rotation->z = (short)iVar2 + 0x400;
+  param_2[2] = (short)iVar2 + 0x400;
   return;
 }
 
@@ -4971,395 +3207,8 @@ void CAMERA_Relocate(Camera *camera, _SVector *offset, int streamSignalFlag)
 _TFace *CAMERA_SphereToSphereWithLines(Camera *camera, CameraCollisionInfo *colInfo, int secondcheck_flag)
 
 {
-  short sVar1;
-  ushort uVar2;
-  long lVar3;
-  _StreamUnit *p_Var4;
-  _TFace *p_Var5;
-  short sVar6;
-  _Sphere *p_Var7;
-  _Position *target;
-  _Position *position;
-  ushort *puVar8;
-  Level *address;
-  int iVar9;
-  CameraCollisionInfo *pCVar10;
-  SVECTOR *pSVar11;
-  SVECTOR *pSVar12;
-  CameraCollisionInfo *pCVar13;
-  uint Flags;
-  undefined2 local_158;
-  short local_156;
-  short local_154;
-  SVECTOR local_150;
-  _Position local_148;
-  _Position local_140;
-  short local_138;
-  short local_136;
-  short local_134;
-  short local_130;
-  short local_12e;
-  short local_12c;
-  SVECTOR local_128;
-  _Position local_120;
-  _Position local_118;
-  short local_110;
-  short local_10e;
-  short local_10c;
-  short local_108;
-  short local_106;
-  short local_104;
-  undefined2 local_100;
-  short local_fe;
-  undefined2 local_fc;
-  short local_f8[2];
-  short local_f4;
-  short local_f0;
-  undefined2 local_e8;
-  short local_e6;
-  undefined2 local_e4;
-  short local_e0[2];
-  short local_dc;
-  short local_d8;
-  int local_d0;
-  int local_cc;
-  int local_c8;
-  _Rotation local_c0;
-  MATRIX MStack184;
-  int local_98;
-  int local_94;
-  int local_90;
-  undefined auStack136[8];
-  short local_80;
-  _PCollideInfo _Stack120;
-  short local_48[2];
-  int local_44;
-  _TFace *local_40;
-  uint local_3c;
-  int local_38;
-  Level *local_34;
-  uint local_30;
-  undefined2 *local_2c;
-
-  local_44 = 0;
-  local_40 = (_TFace *)0x0;
-  local_38 = 1;
-  iVar9 = 0;
-  local_34 = STREAM_GetLevelWithID(camera->focusInstance->currentStreamUnitID);
-  if (local_34 == (Level *)0x0)
-  {
-    return local_40;
-  }
-  lVar3 = MEMPACK_MemoryValidFunc((char *)local_34);
-  if (lVar3 == 0)
-  {
-    return local_40;
-  }
-  colInfo->line = -1;
-  colInfo->flags = 0;
-  colInfo->numCollided = 0;
-  local_100 = 0;
-  local_fc = 0;
-  local_e8 = 0;
-  local_e4 = 0;
-  CAMERA_CalcFSRotation(camera, &local_c0, (_Position *)colInfo->end, (_Position *)colInfo->start);
-  if ((camera->flags & 0x10000U) != 0)
-  {
-    p_Var7 = colInfo->start;
-    (p_Var7->position).x =
-        (p_Var7->position).x +
-        (short)((int)(colInfo->end->position).x - (int)(p_Var7->position).x >> 5);
-    p_Var7 = colInfo->start;
-    (p_Var7->position).y =
-        (p_Var7->position).y +
-        (short)((int)(colInfo->end->position).y - (int)(p_Var7->position).y >> 5);
-    p_Var7 = colInfo->start;
-    (p_Var7->position).z =
-        (p_Var7->position).z +
-        (short)((int)(colInfo->end->position).z - (int)(p_Var7->position).z >> 5);
-  }
-  MATH3D_SetUnityMatrix(&MStack184);
-  RotMatrixZ((int)local_c0.z + 0x400, (uint *)&MStack184);
-  if ((((camera->flags & 0x10000U) == 0) && ((camera->instance_mode & 0x4000000) == 0)) &&
-      (camera->mode != 6))
-  {
-    local_fe = 0x1000;
-    ApplyMatrix(&MStack184, &local_100, &local_98);
-    ACE_amount = local_98 * (int)(camera->focusInstanceVelVec).x +
-                     local_94 * (int)(camera->focusInstanceVelVec).y +
-                     local_90 * (int)(camera->focusInstanceVelVec).z >>
-                 0xc;
-    if ((camera->always_rotate_flag != 0) || (camera->forced_movement != 0))
-    {
-      if (camera->forced_movement == 0)
-      {
-        iVar9 = -0x48;
-        uVar2 = CAMERA_SignedAngleDifference((camera->focusRotation).z, (camera->targetFocusRotation).z);
-        if ((int)((uint)uVar2 << 0x10) < 0)
-          goto LAB_80017c38;
-      }
-      else
-      {
-        if (camera->rotDirection < 1)
-        {
-          if (camera->rotDirection < 0)
-          {
-            iVar9 = -0x48;
-          }
-        }
-        else
-        {
-        LAB_80017c38:
-          iVar9 = 0x48;
-        }
-      }
-      if (ACE_amount < 1)
-      {
-        if ((iVar9 < 0) && (iVar9 = iVar9 - ACE_amount, 0 < iVar9))
-        {
-          iVar9 = 0;
-        }
-      }
-      else
-      {
-        if ((0 < iVar9) && (iVar9 = iVar9 - ACE_amount, iVar9 < 0))
-        {
-          iVar9 = 0;
-        }
-      }
-    }
-  }
-  else
-  {
-    ACE_amount = 0;
-  }
-  local_e6 = 0x122;
-  local_fe = (short)ACE_amount;
-  if (ACE_amount < 1)
-  {
-    local_fe = local_fe * -2;
-  }
-  else
-  {
-    local_e6 = local_fe * 5 + (short)((int)(ACE_amount + ((uint)ACE_amount >> 0x1f)) >> 1) + 0x122;
-  }
-  local_fe = local_fe + 0x20;
-  if (0 < iVar9)
-  {
-    local_e6 = local_e6 + (short)iVar9 * 5;
-  }
-  ApplyMatrix(&MStack184, &local_100, local_f8);
-  ApplyMatrix(&MStack184, &local_e8, local_e0);
-  p_Var7 = colInfo->start;
-  local_148.x = (p_Var7->position).x + local_f8[0];
-  local_148.y = (p_Var7->position).y + local_f4;
-  local_148.z = (p_Var7->position).z + local_f0;
-  p_Var7 = colInfo->end;
-  local_120.x = (p_Var7->position).x + local_e0[0];
-  local_120.y = (p_Var7->position).y + local_dc;
-  local_120.z = (p_Var7->position).z + local_d8;
-  local_e6 = 0x122;
-  local_fe = (short)ACE_amount;
-  if (ACE_amount < 0)
-  {
-    local_e6 = 0x122 - (local_fe * 5 + (short)((int)(ACE_amount + ((uint)ACE_amount >> 0x1f)) >> 1));
-    local_fe = -local_fe;
-  }
-  else
-  {
-    local_fe = local_fe * 2;
-  }
-  local_fe = local_fe + 0x20;
-  if (iVar9 < 0)
-  {
-    local_e6 = local_e6 + (short)iVar9 * -5;
-  }
-  ApplyMatrix(&MStack184, &local_100, local_f8);
-  ApplyMatrix(&MStack184, &local_e8, local_e0);
-  p_Var7 = colInfo->start;
-  local_140.x = (p_Var7->position).x - local_f8[0];
-  local_140.y = (p_Var7->position).y - local_f4;
-  local_140.z = (p_Var7->position).z - local_f0;
-  p_Var7 = colInfo->end;
-  local_118.x = (p_Var7->position).x - local_e0[0];
-  local_118.y = (p_Var7->position).y - local_dc;
-  local_118.z = (p_Var7->position).z - local_d8;
-  local_e6 = 0xb4;
-  local_fe = 0x20;
-  MATH3D_SetUnityMatrix(&MStack184);
-  RotMatrixX((int)local_c0.x + 0x400, (int)&MStack184);
-  RotMatrixZ((int)local_c0.z, (uint *)&MStack184);
-  ApplyMatrix(&MStack184, &local_100, local_f8);
-  ApplyMatrix(&MStack184, &local_e8, local_e0);
-  p_Var7 = colInfo->start;
-  local_138 = local_f8[0] + (p_Var7->position).x;
-  local_136 = local_f4 + (p_Var7->position).y;
-  local_134 = local_f0 + (p_Var7->position).z;
-  p_Var7 = colInfo->end;
-  local_110 = local_e0[0] + (p_Var7->position).x;
-  local_10e = local_dc + (p_Var7->position).y;
-  local_10c = local_d8 + (p_Var7->position).z;
-  p_Var7 = colInfo->start;
-  local_130 = (p_Var7->position).x - local_f8[0];
-  local_12e = (p_Var7->position).y - local_f4;
-  local_12c = (p_Var7->position).z - local_f0;
-  p_Var7 = colInfo->end;
-  local_108 = (p_Var7->position).x - local_e0[0];
-  local_106 = (p_Var7->position).y - local_dc;
-  local_104 = (p_Var7->position).z - local_d8;
-  right_point.x = local_148.x + (camera->focusInstanceVelVec).x;
-  right_point.y = local_148.y + (camera->focusInstanceVelVec).y;
-  right_point.z = local_148.z + (camera->focusInstanceVelVec).z;
-  local_fe = 0x1000;
-  left_point.x = local_140.x + (camera->focusInstanceVelVec).x;
-  left_point.y = local_140.y + (camera->focusInstanceVelVec).y;
-  left_point.z = local_140.z + (camera->focusInstanceVelVec).z;
-  ApplyMatrix(&MStack184, &local_100, local_f8);
-  local_fe = 0;
-  local_fc = 0x1000;
-  camera_plane.x = local_f8[0];
-  camera_plane.y = local_f4;
-  camera_plane.z = local_f0;
-  ApplyMatrix(&MStack184, &local_100, &local_d0);
-  p_Var7 = colInfo->start;
-  local_150.vx = (p_Var7->position).x;
-  local_150.vy = (p_Var7->position).y;
-  local_150.vz = (p_Var7->position).z;
-  pSVar11 = &local_150;
-  local_3c = 0;
-  p_Var7 = colInfo->end;
-  local_2c = &local_158;
-  local_128.vx = (p_Var7->position).x;
-  local_128.vy = (p_Var7->position).y;
-  local_128.vz = (p_Var7->position).z;
-  pSVar12 = &local_128;
-  colInfo->lenCenterToExtend = (int)camera->targetFocusDistance;
-  p_Var4 = STREAM_GetStreamUnitWithID(local_34->streamUnitID);
-  local_30 = (uint)(ushort)p_Var4->flags & 1;
-  pCVar10 = colInfo;
-  pCVar13 = colInfo;
-  do
-  {
-    if ((colInfo->cldLines & 1 << (local_3c & 0x1f)) != 0)
-    {
-      Flags = (uint)(local_3c - 1 < 2);
-      local_48[0] = 0;
-      _Stack120.instance = (_Instance *)0x0;
-      _Stack120.collideType = 1;
-      _Stack120.newPoint = pSVar12;
-      _Stack120.oldPoint = pSVar11;
-      p_Var5 = COLLIDE_PointAndTerrainFunc(local_34->terrain, &_Stack120, Flags, local_48, 0xd0, 0x20,
-                                           (_LCollideInfo *)auStack136);
-      *(_TFace **)pCVar13->tfaceList = p_Var5;
-      *(_Terrain **)pCVar13->tfaceTerrain = local_34->terrain;
-      if (pCVar13->tfaceList[0] == (_func_26 *)0x0)
-      {
-        iVar9 = 0;
-        puVar8 = (ushort *)&StreamTracker.StreamList[0].flags;
-        do
-        {
-          address = *(Level **)(puVar8 + 1);
-          if ((((puVar8[-1] == 2) && (address != local_34)) &&
-               (lVar3 = MEMPACK_MemoryValidFunc((char *)address), lVar3 != 0)) &&
-              ((local_30 == 0 || ((*puVar8 & 1) == 0))))
-          {
-            p_Var5 = COLLIDE_PointAndTerrainFunc(address->terrain, &_Stack120, Flags, local_48, 0xd0, 0x20,
-                                                 (_LCollideInfo *)auStack136);
-            *(_TFace **)pCVar13->tfaceList = p_Var5;
-            if (p_Var5 != (_TFace *)0x0)
-            {
-              *(_Terrain **)pCVar13->tfaceTerrain = address->terrain;
-              break;
-            }
-          }
-          iVar9 = iVar9 + 1;
-          puVar8 = puVar8 + 0x20;
-        } while (iVar9 < 0x10);
-      }
-      pCVar10->bspTree[0] = local_80;
-      if ((_TFace *)pCVar13->tfaceList[0] == (_TFace *)0x0)
-      {
-        sVar6 = pSVar11->vz;
-        sVar1 = pSVar12->vz;
-        iVar9 = (uint)(ushort)pSVar11->vx - (uint)(ushort)pSVar12->vx;
-        local_158 = (undefined2)iVar9;
-        local_2c[1] = pSVar11->vy - pSVar12->vy;
-        local_2c[2] = sVar6 - sVar1;
-        pCVar10->lengthList[0] =
-            (short)((iVar9 * 0x10000 >> 0x10) * local_d0 + (int)local_156 * local_cc +
-                        (int)local_154 * local_c8 >>
-                    0xc);
-      }
-      else
-      {
-        if (secondcheck_flag != 0)
-        {
-          return (_TFace *)pCVar13->tfaceList[0];
-        }
-        colInfo->numCollided = colInfo->numCollided + 1;
-        sVar6 = pSVar11->vz;
-        sVar1 = pSVar12->vz;
-        iVar9 = (uint)(ushort)pSVar11->vx - (uint)(ushort)pSVar12->vx;
-        local_158 = (undefined2)iVar9;
-        local_2c[1] = pSVar11->vy - pSVar12->vy;
-        local_2c[2] = sVar6 - sVar1;
-        iVar9 = (iVar9 * 0x10000 >> 0x10) * local_d0 + (int)local_156 * local_cc +
-                    (int)local_154 * local_c8 >>
-                0xc;
-        sVar6 = (short)iVar9;
-        pCVar10->lengthList[0] = sVar6;
-        if ((local_48[0] == 0) || (99 < sVar6))
-        {
-          iVar9 = iVar9 + -100;
-          pCVar10->lengthList[0] = (short)iVar9;
-          if (iVar9 * 0x10000 >> 0x10 < 0xdc)
-          {
-            pCVar10->lengthList[0] = 0xdc;
-          }
-          if ((local_38 != 0) || ((int)pCVar10->lengthList[0] < local_44))
-          {
-            colInfo->line = local_3c;
-            local_44 = (int)pCVar10->lengthList[0];
-            local_38 = 0;
-            colInfo->lenCenterToExtend = local_44;
-            local_40 = (_TFace *)pCVar13->tfaceList[0];
-          }
-          colInfo->flags = colInfo->flags | 1 << (local_3c & 0x1f);
-        }
-      }
-    }
-    pSVar12 = pSVar12 + 1;
-    pSVar11 = pSVar11 + 1;
-    pCVar13 = (CameraCollisionInfo *)(pCVar13->tfaceList + 1);
-    pCVar10 = (CameraCollisionInfo *)((int)pCVar10->tfaceList + 2);
-    local_3c = local_3c + 1;
-  } while ((int)local_3c < 5);
-  if (colInfo->line == 2)
-  {
-    target = &local_140;
-    position = &local_118;
-  }
-  else
-  {
-    if (colInfo->line != 1)
-    {
-      target = &local_140;
-      if ((colInfo->flags & 4U) != 0)
-      {
-        position = &local_118;
-        goto LAB_800184e4;
-      }
-      if ((colInfo->flags & 2U) == 0)
-      {
-        return local_40;
-      }
-    }
-    target = &local_148;
-    position = &local_120;
-  }
-LAB_800184e4:
-  hitline_rot = CAMERA_CalcZRotation(target, position);
-  return local_40;
+  /* WARNING: Subroutine does not return */
+  STREAM_GetLevelWithID(camera->focusInstance->currentStreamUnitID);
 }
 
 // decompiled code
@@ -5384,17 +3233,13 @@ LAB_800184e4:
 long CAMERA_CalcTilt(_Normal *normal, short zRot)
 
 {
-  int iVar1;
   MATRIX MStack64;
-  undefined auStack32[4];
-  uint local_1c;
-  uint local_18;
+  undefined auStack32[16];
 
   MATH3D_SetUnityMatrix(&MStack64);
   RotMatrixZ(-(int)zRot, (uint *)&MStack64);
+  /* WARNING: Subroutine does not return */
   ApplyMatrix(&MStack64, normal, auStack32);
-  iVar1 = ratan2(local_1c, local_18);
-  return -(int)(short)iVar1;
 }
 
 // decompiled code
@@ -5848,9 +3693,7 @@ void CAMERA_CalcFocusOffset(_SVector *offset, Camera *camera)
 void CAMERA_CalcFocusOffsetForSwim(_SVector *offset, Camera *camera)
 
 {
-  short local_20[2];
-  short local_1c;
-  short local_18;
+  undefined local_20[16];
   short local_10;
   short local_e;
   short local_c;
@@ -5858,11 +3701,8 @@ void CAMERA_CalcFocusOffsetForSwim(_SVector *offset, Camera *camera)
   local_10 = (camera->focusOffset).x;
   local_e = (camera->focusOffset).y;
   local_c = (camera->focusOffset).z;
+  /* WARNING: Subroutine does not return */
   ApplyMatrix(camera->focusInstance->matrix + 1, &local_10, local_20);
-  offset->x = local_20[0];
-  offset->y = local_1c;
-  offset->z = local_18;
-  return;
 }
 
 // decompiled code
@@ -6049,9 +3889,8 @@ long CAMERA_ACForcedMovement(Camera *camera, CameraCollisionInfo *colInfo)
   local_18.x = (p_Var1->position).x - (p_Var2->position).x;
   local_18.y = (p_Var1->position).y - (p_Var2->position).y;
   local_18.z = (p_Var1->position).z - (p_Var2->position).z;
+  /* WARNING: Subroutine does not return */
   CAMERA_Normalize(&local_18);
-  camera->collisionTargetFocusDistance = *(short *)&colInfo->lenCenterToExtend;
-  return 0;
 }
 
 // decompiled code
@@ -6170,7 +4009,7 @@ long CAMERA_ACNoForcedMovement(Camera *camera, CameraCollisionInfo *colInfo)
 
 {
   bool bVar1;
-  _func_26 **pp_Var2;
+  _func_21 **pp_Var2;
   short dist;
   ushort uVar3;
   int iVar4;
@@ -6234,7 +4073,7 @@ long CAMERA_ACNoForcedMovement(Camera *camera, CameraCollisionInfo *colInfo)
         }
       }
       iVar7 = iVar7 + 1;
-      pp_Var2 = (_func_26 **)((int)pp_Var2 + 2);
+      pp_Var2 = (_func_21 **)((int)pp_Var2 + 2);
     } while (iVar7 < 5);
     if (bVar1)
     {
@@ -6398,7 +4237,7 @@ long CAMERA_AbsoluteCollision(Camera *camera, CameraCollisionInfo *colInfo)
   long lVar2;
   uint uVar3;
 
-  if ((gameTrackerX.debugFlags & 0x10000U) != 0)
+  if ((vmRealClock & 0x10000U) != 0)
   {
     return 0;
   }
@@ -6511,11 +4350,11 @@ short CAMERA_update_z_damped(Camera *camera, short current, short target)
   iVar3 = (int)current;
   if ((camera->instance_mode & 0x100) == 0)
   {
-    iVar4 = iVar3 - (int)target;
+    iVar4 = iVar3 - target;
     sVar2 = (short)((uint)iVar4 >> 0x10);
     if (iVar4 < 0)
     {
-      iVar3 = (int)target - iVar3;
+      iVar3 = target - iVar3;
       sVar2 = (short)((uint)iVar3 >> 0x10);
       sVar5 = (short)(iVar3 / 6) + (sVar2 >> 0xf);
     }
@@ -6529,11 +4368,11 @@ short CAMERA_update_z_damped(Camera *camera, short current, short target)
   }
   else
   {
-    iVar4 = iVar3 - (int)target;
+    iVar4 = iVar3 - target;
     sVar2 = (short)((uint)iVar4 >> 0x10);
     if (iVar4 < 0)
     {
-      iVar3 = (int)target - iVar3;
+      iVar3 = target - iVar3;
       sVar2 = (short)((uint)iVar3 >> 0x10);
       DAT_800cdf92 = (short)(iVar3 / 6) + (sVar2 >> 0xf);
     }
@@ -6551,8 +4390,7 @@ short CAMERA_update_z_damped(Camera *camera, short current, short target)
   {
     iVar3 = (int)target - (int)current;
   }
-  if ((iVar3 < (int)DAT_800cdf92) &&
-      (DAT_800cdf92 = current - target, (int)current - (int)target < 0))
+  if ((iVar3 < DAT_800cdf92) && (DAT_800cdf92 = current - target, (int)current - (int)target < 0))
   {
     DAT_800cdf92 = target - current;
   }
@@ -6587,114 +4425,8 @@ LAB_80019894:
 void CAMERA_CombatCamDist(Camera *camera)
 
 {
-  undefined4 uVar1;
-  uint uVar2;
-  undefined4 in_zero;
-  undefined4 in_at;
-  short sVar3;
-  ulong uVar4;
-  int iVar5;
-  int iVar6;
-  short local_30;
-  short sStack46;
-  short local_28;
-  short sStack38;
-  undefined4 local_20;
-  uint local_1c;
-
-  uVar4 = INSTANCE_Query(camera->focusInstance, 0x22);
-  if (uVar4 == 0)
-  {
-    combat_cam_distance = camera->targetFocusDistance;
-    combat_cam_weight = 0x1000;
-    return;
-  }
-  SetRotMatrix((undefined4 *)(camera->core).wcTransform);
-  SetTransMatrix((int)(camera->core).wcTransform);
-  local_20 = CONCAT22((camera->focusInstance->position).y, (camera->focusInstance->position).x);
-  uVar2 = local_1c & 0xffff0000;
-  local_1c = uVar2 | (uint)(ushort)(camera->focusInstance->position).z;
-  setCopReg(2, in_zero, local_20);
-  setCopReg(2, in_at, local_1c);
-  copFunction(2, 0x180001);
-  uVar1 = getCopReg(2, 0xe);
-  iVar6 = getCopReg(2, 0x13);
-  local_30 = (short)uVar1;
-  iVar5 = (int)local_30 + -0x100;
-  if ((int)local_30 < 0x100)
-  {
-    iVar5 = iVar5 * iVar6;
-    if (iVar5 < 0)
-    {
-      iVar5 = iVar5 + 0x7f;
-    }
-    combat_cam_distance = -(short)(iVar5 >> 7);
-  }
-  else
-  {
-    iVar5 = iVar5 * iVar6;
-    if (iVar5 < 0)
-    {
-      iVar5 = iVar5 + 0x7f;
-    }
-    combat_cam_distance = (short)(iVar5 >> 7);
-  }
-  if (3000 < combat_cam_distance)
-  {
-    combat_cam_distance = 3000;
-  }
-  if (combat_cam_distance < camera->targetFocusDistance)
-  {
-    combat_cam_distance = camera->targetFocusDistance;
-  }
-  sStack46 = (short)((uint)uVar1 >> 0x10);
-  if (sStack46 < 0xf1)
-  {
-    if (0xd1 < sStack46)
-      goto LAB_80019aa8;
-    combat_cam_weight = combat_cam_weight + -0x30;
-    sVar3 = 0x800;
-    if (0x7ff < combat_cam_weight)
-      goto LAB_80019aa8;
-  }
-  else
-  {
-    combat_cam_weight = combat_cam_weight + 0x30;
-    sVar3 = 0x1000;
-    if (combat_cam_weight < 0x1001)
-      goto LAB_80019aa8;
-  }
-  combat_cam_weight = sVar3;
-LAB_80019aa8:
-  local_1c = uVar2 | (uint) * (ushort *)(uVar4 + 0x60);
-  setCopReg(2, in_zero, *(undefined4 *)(uVar4 + 0x5c));
-  setCopReg(2, in_at, local_1c);
-  copFunction(2, 0x180001);
-  uVar1 = getCopReg(2, 0xe);
-  sStack38 = (short)((uint)uVar1 >> 0x10);
-  local_28 = (short)uVar1;
-  iVar6 = ratan2((int)sStack38 - (int)sStack46, (int)local_28 - (int)local_30);
-  if (iVar6 < 0)
-  {
-    iVar6 = ratan2((int)sStack38 - (int)sStack46, (int)local_28 - (int)local_30);
-    combat_cam_angle = -(short)iVar6;
-  }
-  else
-  {
-    iVar6 = ratan2((int)sStack38 - (int)sStack46, (int)local_28 - (int)local_30);
-    combat_cam_angle = (short)iVar6;
-  }
-  if (0x400 < combat_cam_angle)
-  {
-    combat_cam_angle = 0x800 - combat_cam_angle;
-  }
-  iVar6 = (int)combat_cam_angle;
-  if (iVar6 < 0)
-  {
-    iVar6 = iVar6 + 7;
-  }
-  combat_cam_angle = -0xaa - (short)(iVar6 >> 3);
-  return;
+  /* WARNING: Subroutine does not return */
+  INSTANCE_Query(camera->focusInstance, 0x22);
 }
 
 // decompiled code
@@ -6807,7 +4539,7 @@ void CAMERA_GenericCameraProcess(Camera *camera)
     if (((((camera->mode == 0xd) && (0 < camera->instance_xyvel)) &&
           ((camera->instance_mode & 0x82000400) == 0)) &&
          ((camera->always_rotate_flag == 0 && (camera->rotState != 3)))) &&
-        (((camera->instance_mode & 0x2000) == 0 && (gameTrackerX.cheatMode != '\x01'))))
+        (((camera->instance_mode & 0x2000) == 0 && (aadMem._3_1_ != '\x01'))))
     {
       CAMERA_CalcRotation((_Rotation *)&local_18, &camera->targetFocusPoint, (_Position *)camera);
       sVar2 = CAMERA_SignedAngleDifference(local_14, (camera->focusRotation).z);
@@ -7317,7 +5049,6 @@ int CAMERA_GetDistSq(_SVector *point1, _SVector *point2)
 void CAMERA_NearestPointOnLineVec(_SVector *linePoint, _SVector *start, _SVector *line, _Position *point)
 
 {
-  int iVar1;
   short local_40;
   short local_3e;
   short local_3c;
@@ -7327,9 +5058,7 @@ void CAMERA_NearestPointOnLineVec(_SVector *linePoint, _SVector *start, _SVector
   short local_34;
   short local_32;
   short local_30;
-  int local_20;
-  int local_1c;
-  int local_18;
+  undefined local_20[16];
 
   local_40 = line->x;
   local_3e = line->y;
@@ -7340,16 +5069,8 @@ void CAMERA_NearestPointOnLineVec(_SVector *linePoint, _SVector *start, _SVector
   local_34 = point->x;
   local_32 = point->y;
   local_30 = point->z;
-  ApplyMatrix(&local_40, line, &local_20);
-  iVar1 = (local_1c - local_18) * 0x1000;
-  if (local_20 != 0)
-  {
-    iVar1 = ((local_1c - local_18) * -0x1000) / local_20;
-  }
-  linePoint->x = start->x + (short)((int)line->x * iVar1 >> 0xc);
-  linePoint->y = start->y + (short)((int)line->y * iVar1 >> 0xc);
-  linePoint->z = start->z + (short)((int)line->z * iVar1 >> 0xc);
-  return;
+  /* WARNING: Subroutine does not return */
+  ApplyMatrix(&local_40, line, local_20);
 }
 
 // decompiled code
@@ -7477,62 +5198,21 @@ int CAMERA_FindLinePoint(_Position *point, _SVector *linept1, _SVector *linept2,
 
 {
   int iVar1;
-  int iVar2;
-  long lVar3;
-  int iVar4;
-  int iVar5;
   _SVector local_38;
-  _SVector local_30;
-  _SVector local_28;
+  _SVector local_30[2];
 
-  local_30.x = linept2->x - linept1->x;
-  local_30.y = linept2->y - linept1->y;
-  local_30.z = linept2->z - linept1->z;
-  CAMERA_NearestPointOnLineVec(&local_38, linept1, &local_30, point);
+  local_30[0].x = linept2->x - linept1->x;
+  local_30[0].y = linept2->y - linept1->y;
+  local_30[0].z = linept2->z - linept1->z;
+  CAMERA_NearestPointOnLineVec(&local_38, linept1, local_30, point);
   iVar1 = CAMERA_GetDistSq(&local_38, (_SVector *)point);
-  iVar2 = 0;
   if (0 < target_dist_sq - iVar1)
   {
-    lVar3 = MATH3D_FastSqrt0(target_dist_sq - iVar1);
-    CAMERA_Normalize(&local_30);
-    iVar1 = 0;
-    iVar2 = 0;
-    do
-    {
-      iVar4 = (int)local_30.x * lVar3;
-      if (iVar4 < 0)
-      {
-        iVar4 = iVar4 + 0xfff;
-      }
-      iVar5 = (int)local_30.y * lVar3;
-      local_28.x = local_38.x + (short)(iVar4 >> 0xc);
-      if (iVar5 < 0)
-      {
-        iVar5 = iVar5 + 0xfff;
-      }
-      iVar4 = (int)local_30.z * lVar3;
-      local_28.y = local_38.y + (short)(iVar5 >> 0xc);
-      if (iVar4 < 0)
-      {
-        iVar4 = iVar4 + 0xfff;
-      }
-      local_28.z = local_38.z + (short)(iVar4 >> 0xc);
-      iVar4 = CAMERA_CheckIfPointOnLine(&local_28, linept1, linept2);
-      if (iVar4 != 0)
-      {
-        iVar2 = iVar2 + 1;
-        results->x = local_28.x;
-        results->y = local_28.y;
-        results->z = local_28.z;
-        results = results + 1;
-      }
-      iVar1 = iVar1 + 1;
-      local_30.x = -local_30.x;
-      local_30.z = -local_30.z;
-      local_30.y = -local_30.y;
-    } while (iVar1 < 2);
+    MATH3D_FastSqrt0(target_dist_sq - iVar1);
+    /* WARNING: Subroutine does not return */
+    CAMERA_Normalize(local_30);
   }
-  return iVar2;
+  return 0;
 }
 
 // decompiled code
@@ -8201,17 +5881,17 @@ void CAMERA_ShakeCamera(Camera *camera)
     uVar1 = camera->shakeFrame;
     (camera->core).position.x =
         (camera->core).position.x +
-        (short)((int)(&camera_shakeOffset)[(uint)(ushort)camera->shakeFrame & 0xf].x *
+        (short)((int)camera_shakeOffset[(uint)(ushort)camera->shakeFrame & 0xf].x *
                     (int)camera->shakeScale >>
                 0xc);
     uVar2 = camera->shakeFrame;
     (camera->core).position.y =
         (camera->core).position.y +
-        (short)((int)(&camera_shakeOffset)[(uint)uVar1 & 0xf].y * (int)camera->shakeScale >> 0xc);
+        (short)((int)camera_shakeOffset[(uint)uVar1 & 0xf].y * (int)camera->shakeScale >> 0xc);
     (camera->core).position.z =
         (camera->core).position.z +
-        (short)((int)(&camera_shakeOffset)[(uint)uVar2 & 0xf].z * (int)camera->shakeScale >> 0xc);
-    iVar3 = camera->shake - gameTrackerX.timeMult;
+        (short)((int)camera_shakeOffset[(uint)uVar2 & 0xf].z * (int)camera->shakeScale >> 0xc);
+    iVar3 = camera->shake - DAT_800d11ec;
     camera->shake = iVar3;
     if (iVar3 < 0)
     {
@@ -8541,12 +6221,12 @@ void CAMERA_Control(Camera *camera, _Instance *playerInstance)
   _Instance *instance;
 
   instance = camera->focusInstance;
-  if ((gameTrackerX.streamFlags & 0x100000U) == 0)
+  if ((DAT_800d10f0 & 0x100000) == 0)
   {
     bVar1 = true;
     if (CameraLookStickyFlag == 0)
     {
-      bVar1 = (gameTrackerX.controlCommand[0][0] & 0xc00U) == 0xc00;
+      bVar1 = (DAT_800d0ff4 & 0xc00) == 0xc00;
     }
     camera->last_forced_movement = camera->forced_movement;
     if (((camera->instance_xyvel != 0) || (camera->forced_movement != 1)) ||
@@ -8559,13 +6239,13 @@ void CAMERA_Control(Camera *camera, _Instance *playerInstance)
     {
       if (CenterFlag == -1)
       {
-        if ((gameTrackerX.cheatMode != '\x01') || ((gameTrackerX.controlCommand[0][0] & 0xfU) == 0))
+        if ((aadMem._3_1_ != '\x01') || ((DAT_800d0ff4 & 0xf) == 0))
         {
           if ((((camera->lock & 4U) == 0) && ((camera->flags & 0x10000U) == 0)) &&
               (((((sVar3 == 0 || (sVar3 == 0xc)) || (sVar3 == 4)) || (sVar3 == 0xd)) &&
                 ((playerInstance->flags & 0x100U) == 0))))
           {
-            if (((gameTrackerX.controlCommand[0][0] & 0x400U) == 0) || (bVar1))
+            if (((DAT_800d0ff4 & 0x400) == 0) || (bVar1))
             {
               if (((uint)(ushort)camera->leftTimer - 1 < 3) && (!bVar1))
               {
@@ -8580,10 +6260,10 @@ void CAMERA_Control(Camera *camera, _Instance *playerInstance)
               if (2 < sVar3)
               {
                 camera->rotDirection = -1;
-                uVar5 = (camera->focusRotation).z - (short)((gameTrackerX.timeMult << 5) >> 0xc) &
+                uVar5 = (camera->focusRotation).z - (short)((uint)(DAT_800d11ec << 5) >> 0xc) &
                         0xfff;
                 (camera->focusRotation).z = uVar5;
-                uVar2 = gameTrackerX.frameCount;
+                uVar2 = DAT_800d10d8;
                 camera->forced_movement = 1;
                 (camera->data).Follow.stopTimer = -0x1a5e0000;
                 (camera->focusRotation).z = uVar5;
@@ -8592,7 +6272,7 @@ void CAMERA_Control(Camera *camera, _Instance *playerInstance)
                 camera->lastModTime = uVar2;
               }
             }
-            if (((gameTrackerX.controlCommand[0][0] & 0x800U) == 0) || (bVar1))
+            if (((DAT_800d0ff4 & 0x800) == 0) || (bVar1))
             {
               if (((uint)(ushort)camera->rightTimer - 1 < 3) && (!bVar1))
               {
@@ -8608,10 +6288,10 @@ void CAMERA_Control(Camera *camera, _Instance *playerInstance)
               {
                 camera->rotDirection = 1;
                 camera->forced_movement = 1;
-                uVar5 = (camera->focusRotation).z + (short)((gameTrackerX.timeMult << 5) >> 0xc) &
+                uVar5 = (camera->focusRotation).z + (short)((uint)(DAT_800d11ec << 5) >> 0xc) &
                         0xfff;
                 (camera->focusRotation).z = uVar5;
-                uVar2 = gameTrackerX.frameCount;
+                uVar2 = DAT_800d10d8;
                 (camera->data).Follow.stopTimer = -0x1a5e0000;
                 (camera->focusRotation).z = uVar5;
                 (camera->collisionTargetFocusRotation).z = uVar5;
@@ -8625,17 +6305,17 @@ void CAMERA_Control(Camera *camera, _Instance *playerInstance)
             camera->rightTimer = 0;
             camera->leftTimer = 0;
           }
-          if ((gameTrackerX.debugFlags2 & 0x2000000U) != 0)
+          if ((vmClock & 0x2000000U) != 0)
           {
             if ((camera->lock & 1U) == 0)
             {
-              if (((gameTrackerX.controlCommand[0][0] & 0x40000008U) == 0x40000008) &&
+              if (((DAT_800d0ff4 & 0x40000008) == 0x40000008) &&
                   (sVar3 = camera->targetFocusDistance + -0x14, camera->targetFocusDistance = sVar3,
                    sVar3 < 200))
               {
                 camera->targetFocusDistance = 200;
               }
-              if (((gameTrackerX.controlCommand[0][0] & 0x40000004U) == 0x40000004) &&
+              if (((DAT_800d0ff4 & 0x40000004) == 0x40000004) &&
                   (sVar3 = camera->targetFocusDistance + 0x14, camera->targetFocusDistance = sVar3,
                    0x1000 < sVar3))
               {
@@ -8644,11 +6324,11 @@ void CAMERA_Control(Camera *camera, _Instance *playerInstance)
             }
             if ((camera->lock & 2U) == 0)
             {
-              if ((gameTrackerX.controlCommand[0][0] & 0x40000002U) == 0x40000002)
+              if ((DAT_800d0ff4 & 0x40000002) == 0x40000002)
               {
                 camera->extraXRot = camera->extraXRot + 0x10;
               }
-              if ((gameTrackerX.controlCommand[0][0] & 0x40000001U) == 0x40000001)
+              if ((DAT_800d0ff4 & 0x40000001) == 0x40000001)
               {
                 camera->extraXRot = camera->extraXRot + -0x10;
               }
@@ -8677,7 +6357,7 @@ void CAMERA_Control(Camera *camera, _Instance *playerInstance)
                 if ((2 < sVar3) && (camera->mode == 6))
                 {
                   PLAYER_TurnHead(instance, (short *)&camera->lookRot, &(camera->lookRot).z,
-                                  &gameTrackerX);
+                                  (GameTracker *)&gameTrackerX);
                   camera->collideRotControl = 0;
                   return;
                 }
@@ -8712,6 +6392,7 @@ void CAMERA_Control(Camera *camera, _Instance *playerInstance)
       }
     }
   }
+  /* WARNING: Read-only address (ram,0x800d1173) is written */
   return;
 }
 
@@ -8975,14 +6656,13 @@ void CAMERA_UpdateFocusRoll(Camera *camera)
   if (roll_inc != 0)
   {
     iVar2 = roll_inc;
-    if (gameTrackerX.timeMult != 0x1000)
+    if (DAT_800d11ec != 0x1000)
     {
-      iVar2 = roll_inc;
       if (roll_inc < 0)
       {
         iVar2 = roll_inc + 0x1f;
       }
-      iVar6 = (iVar2 >> 5) * gameTrackerX.timeMult;
+      iVar6 = (iVar2 >> 5) * DAT_800d11ec;
       iVar2 = iVar6 >> 7;
       if (iVar6 < 0)
       {
@@ -9010,7 +6690,7 @@ void CAMERA_UpdateFocusRoll(Camera *camera)
     {
       iVar6 = -iVar6;
     }
-    if (iVar6 < (int)sVar1)
+    if (iVar6 < sVar1)
     {
       uVar4 = current_roll_amount + iVar2;
     }
@@ -9192,7 +6872,7 @@ void CAMERA_UpdateFocusRotationX(Camera *camera, _Instance *focusInstance)
       smooth = 0xb60 - (int)sVar1;
       if (smooth < 0x200)
       {
-        smooth = (int)camera->targetTilt * smooth;
+        smooth = camera->targetTilt * smooth;
         if (smooth < 0)
         {
           smooth = smooth + 0x1ff;
@@ -9301,88 +6981,8 @@ LAB_8001c640:
 void CAMERA_FollowPlayerTilt(Camera *camera, _Instance *focusInstance)
 
 {
-  short sVar1;
-  ushort uVar2;
-  short current;
-  ulong uVar3;
-  long lVar4;
-  int iVar5;
-  Level *pLVar6;
-  uint uVar7;
-  uint uVar8;
-  long dampMode;
-  _SVector local_28;
-  _Normal local_20;
-
-  uVar3 = INSTANCE_Query(focusInstance, 9);
-  dampMode = 1;
-  if ((camera->flags & 0x10000U) != 0)
-  {
-    dampMode = 5;
-  }
-  current = 0x20;
-  if ((camera->instance_mode & 0x4000000) == 0)
-  {
-    if ((uVar3 & 0x40) != 0)
-    {
-      camera->targetTilt = -0xab;
-      current = 0x20;
-      goto LAB_8001c860;
-    }
-    CAMERA_CalcFocusOffsetForSwim(&local_28, camera);
-    local_20.z = local_28.z;
-    local_20.x = local_28.x;
-    local_20.y = local_28.y;
-    lVar4 = CAMERA_CalcTilt(&local_20, (camera->targetFocusRotation).z);
-    camera->targetTilt = (short)lVar4 + 0x400;
-    current = camera->targetTilt + -0x80;
-    camera->targetTilt = current;
-    uVar2 = AngleDiff(current, camera->tilt);
-    if ((int)((uint)uVar2 << 0x10) < 0)
-    {
-      current = AngleDiff(camera->targetTilt, camera->tilt);
-      iVar5 = -(int)current;
-    }
-    else
-    {
-      current = AngleDiff(camera->targetTilt, camera->tilt);
-      iVar5 = (int)current;
-    }
-    if (iVar5 < 0)
-    {
-      iVar5 = iVar5 + 0xf;
-    }
-    current = (short)(iVar5 >> 4);
-    if (0x20 < iVar5 >> 4)
-    {
-      current = 0x20;
-    }
-    pLVar6 = STREAM_GetLevelWithID(camera->focusInstance->currentStreamUnitID);
-    iVar5 = (int)camera->focusDistance;
-    uVar8 = (int)(camera->focusPoint).z - (pLVar6->waterZLevel + -0xa0);
-    uVar7 = uVar8;
-    if ((int)uVar8 < 0)
-    {
-      uVar7 = -uVar8;
-    }
-    if (iVar5 <= (int)uVar7)
-      goto LAB_8001c860;
-    uVar7 = MATH3D_FastSqrt0(iVar5 * iVar5 - uVar8 * uVar8);
-    iVar5 = ratan2(uVar8, uVar7);
-    sVar1 = (short)iVar5;
-    if (iVar5 <= (int)camera->targetTilt)
-      goto LAB_8001c860;
-  }
-  else
-  {
-    sVar1 = -(camera->focusInstance->rotation).x;
-  }
-  camera->targetTilt = sVar1;
-LAB_8001c860:
-  CriticalDampAngle(dampMode, &camera->tilt, camera->targetTilt, &camera->tiltVel, &camera->tiltAccl,
-                    (int)current);
-  camera->tfaceTilt = camera->tilt & 0xfff;
-  return;
+  /* WARNING: Subroutine does not return */
+  INSTANCE_Query(focusInstance, 9);
 }
 
 // decompiled code
@@ -9417,9 +7017,9 @@ void CAMERA_FollowGoBehindPlayerWithTimer(Camera *camera)
   iVar1 = CAMERA_FocusInstanceMoved(camera);
   if (iVar1 == 0)
   {
-    if ((gameTrackerX.streamFlags & 0x100000U) != 0)
+    if ((DAT_800d10f0 & 0x100000) != 0)
       goto LAB_8001c928;
-    iVar1 = (camera->data).Follow.stopTimer + gameTrackerX.timeMult;
+    iVar1 = (camera->data).Follow.stopTimer + DAT_800d11ec;
   }
   else
   {
@@ -9429,10 +7029,10 @@ void CAMERA_FollowGoBehindPlayerWithTimer(Camera *camera)
 LAB_8001c928:
   if (0 < (camera->data).Follow.stopTimer)
   {
-    Decouple_AngleMoveToward(&(camera->targetFocusRotation).z,
-                             (short)(((uint)(ushort)(p_Var2->rotation).z + 0x800) * 0x10000 >> 0x10), 0x20);
-    Decouple_AngleMoveToward(&(camera->collisionTargetFocusRotation).z,
-                             (short)(((uint)(ushort)(p_Var2->rotation).z + 0x800) * 0x10000 >> 0x10), 0x20);
+    CAMERA_Unlock((Camera *)&(camera->targetFocusRotation).z,
+                  (int)(((uint)(ushort)(p_Var2->rotation).z + 0x800) * 0x10000) >> 0x10);
+    CAMERA_Unlock((Camera *)&(camera->collisionTargetFocusRotation).z,
+                  (int)(((uint)(ushort)(p_Var2->rotation).z + 0x800) * 0x10000) >> 0x10);
     CriticalDampAngle(1, &(camera->focusRotation).z, (camera->collisionTargetFocusRotation).z,
                       &(camera->focusRotVel).z, &(camera->focusRotAccl).z, 0x20);
     camera->forced_movement = 1;
@@ -9461,9 +7061,8 @@ LAB_8001c928:
 void CAMERA_FollowGoBehindPlayer(Camera *camera)
 
 {
-  Decouple_AngleMoveToward(&(camera->targetFocusRotation).z,
-                           (short)(((uint)(ushort)(camera->focusInstance->rotation).z + 0x800) * 0x10000 >> 0x10),
-                           (camera->rotationVel).z);
+  CAMERA_Unlock((Camera *)&(camera->targetFocusRotation).z,
+                (int)(((uint)(ushort)(camera->focusInstance->rotation).z + 0x800) * 0x10000) >> 0x10);
   return;
 }
 
@@ -9714,11 +7313,11 @@ void CAMERA_CalcFollowPosition(Camera *camera, _Rotation *rotation)
       iVar5 = (int)(camera->real_focuspoint).z + iVar5 * 2;
       if (iVar5 < iVar6)
       {
-        uVar7 = iVar6 - (int)(camera->targetPos).z;
+        uVar7 = iVar6 - (camera->targetPos).z;
       }
       else
       {
-        uVar7 = iVar5 - (int)(camera->targetPos).z;
+        uVar7 = iVar5 - (camera->targetPos).z;
       }
       iVar5 = ratan2(uVar7, uVar4);
       angle0 = (short)iVar5;
@@ -10080,47 +7679,55 @@ long CAMERA_DoCameraCollision2(Camera *camera, _Position *targetCamPos, int simp
 
 {
   bool bVar1;
-  short sVar2;
-  ushort uVar3;
-  short step;
+  ushort uVar2;
+  short sVar3;
   int iVar4;
   _TFace *p_Var5;
-  int iVar6;
-  int secondcheck_flag;
-  long lVar7;
-  undefined auStack120[52];
-  undefined auStack68[12];
+  uint uVar6;
+  int iVar7;
+  int iVar8;
+  Camera *camera_00;
+  CameraCollisionInfo *colInfo;
+  _Rotation *rotation;
+  short *in_a3;
+  _Rotation *secondcheck_flag;
+  long lVar9;
+  short *in_stack_ffffff88;
+  ushort auStack68[6];
   uint local_38;
   int local_34;
   int local_30;
   int local_2c;
 
-  lVar7 = 0;
-  CAMERA_SetupColInfo(camera, (CameraCollisionInfo *)auStack120, targetCamPos);
-  secondcheck_flag = 0;
+  lVar9 = 0;
+  CAMERA_SetupColInfo(camera, (CameraCollisionInfo *)&stack0xffffff88, targetCamPos);
+  secondcheck_flag = (_Rotation *)0x0;
   if ((camera->flags & 0x10000U) == 0)
   {
-    iVar6 = (int)(camera->real_focuspoint).z;
-    secondcheck_flag = (int)(camera->targetFocusPoint).z;
-    iVar4 = iVar6 - secondcheck_flag;
+    iVar8 = (int)(camera->real_focuspoint).z;
+    iVar7 = (int)(camera->targetFocusPoint).z;
+    iVar4 = iVar8 - iVar7;
     if (iVar4 < 0)
     {
-      iVar4 = secondcheck_flag - iVar6;
+      iVar4 = iVar7 - iVar8;
     }
-    secondcheck_flag = 0;
+    secondcheck_flag = (_Rotation *)0x0;
     if (4 < iVar4)
     {
-      secondcheck_flag = 1;
+      secondcheck_flag = (_Rotation *)&UNK_00000001;
     }
   }
-  p_Var5 = CAMERA_SphereToSphereWithLines(camera, (CameraCollisionInfo *)auStack120, secondcheck_flag);
+  colInfo = (CameraCollisionInfo *)&stack0xffffff88;
+  camera_00 = camera;
+  rotation = secondcheck_flag;
+  p_Var5 = CAMERA_SphereToSphereWithLines(camera, colInfo, (int)secondcheck_flag);
   (camera->data).Follow.tface = p_Var5;
   if (((((camera->instance_mode & 0x2000000) != 0) && (0 < local_30)) && (local_2c < 600)) &&
       (((CenterFlag = -1, local_30 != 1 || ((local_38 & 6) == 0)) &&
-        (step = combat_cam_weight + 0x90, combat_cam_weight < 0x1000))))
+        (sVar3 = combat_cam_weight + 0x90, combat_cam_weight < 0x1000))))
   {
-    combat_cam_weight = step;
-    if (0xfff < step)
+    combat_cam_weight = sVar3;
+    if (0xfff < sVar3)
     {
       combat_cam_weight = 0x1000;
     }
@@ -10131,13 +7738,13 @@ long CAMERA_DoCameraCollision2(Camera *camera, _Position *targetCamPos, int simp
     }
   }
   if ((((camera->flags & 0x12000U) == 0) && (camera->instance_xyvel == 0)) &&
-      ((((secondcheck_flag == 0 &&
+      ((((secondcheck_flag == (_Rotation *)0x0 &&
           (((camera->always_rotate_flag == 0 && (camera->forced_movement == 0)) && (0 < local_30)))) &&
          ((local_30 == 4 || (camera_still != 0)))) &&
         (local_2c < 400))))
   {
     panic_count = panic_count + 1;
-    if ((gameTrackerX.controlCommand[0][0] & 1U) == 0)
+    if ((DAT_800d0ff4 & 1) == 0)
     {
       if (panic_count < 2)
         goto LAB_8001d3f4;
@@ -10147,6 +7754,8 @@ long CAMERA_DoCameraCollision2(Camera *camera, _Position *targetCamPos, int simp
       if (panic_count < 0xb)
         goto LAB_8001d3f4;
     }
+    colInfo = (CameraCollisionInfo *)(int)(short)local_2c;
+    camera_00 = camera;
     CAMERA_Panic(camera, (short)local_2c);
   }
   else
@@ -10154,14 +7763,18 @@ long CAMERA_DoCameraCollision2(Camera *camera, _Position *targetCamPos, int simp
     panic_count = 0;
   }
 LAB_8001d3f4:
-  if (((camera->data).Follow.tface != (_TFace *)0x0) && (secondcheck_flag != 0))
+  if (((camera->data).Follow.tface != (_TFace *)0x0) &&
+      (camera_00 = camera, secondcheck_flag != (_Rotation *)0x0))
   {
-    step = (camera->targetFocusPoint).y;
-    sVar2 = (camera->targetFocusPoint).z;
+    colInfo = (CameraCollisionInfo *)&stack0xffffff88;
+    rotation = (_Rotation *)0x0;
+    uVar2 = (camera->targetFocusPoint).y;
+    in_a3 = (short *)(uint)uVar2;
+    sVar3 = (camera->targetFocusPoint).z;
     (camera->focusSphere).position.x = (camera->targetFocusPoint).x;
-    (camera->focusSphere).position.y = step;
-    (camera->focusSphere).position.z = sVar2;
-    p_Var5 = CAMERA_SphereToSphereWithLines(camera, (CameraCollisionInfo *)auStack120, 0);
+    (camera->focusSphere).position.y = uVar2;
+    (camera->focusSphere).position.z = sVar3;
+    p_Var5 = CAMERA_SphereToSphereWithLines(camera, colInfo, 0);
     (camera->data).Follow.tface = p_Var5;
   }
   if (simpleflag == 0)
@@ -10182,16 +7795,16 @@ LAB_8001d3f4:
       {
         if ((camera->data).Follow.tface != (_TFace *)0x0)
         {
-          lVar7 = CAMERA_AbsoluteCollision(camera, (CameraCollisionInfo *)auStack120);
+          lVar9 = CAMERA_AbsoluteCollision(camera, (CameraCollisionInfo *)&stack0xffffff88);
           DAT_800cdf9c = 0x1e;
           (camera->targetFocusRotation).z = (camera->collisionTargetFocusRotation).z;
-          return lVar7;
+          return lVar9;
         }
         CAMERA_dampgetline(0);
         if ((camera->mode == 0xd) && (0 < camera->instance_xyvel))
         {
-          step = CAMERA_AngleDifference((camera->collisionTargetFocusRotation).z, (camera->focusRotation).z);
-          if (step < 5)
+          sVar3 = CAMERA_AngleDifference((camera->collisionTargetFocusRotation).z, (camera->focusRotation).z);
+          if (sVar3 < 5)
           {
             bVar1 = DAT_800cdf9c == 0;
             (camera->collisionTargetFocusRotation).z = (camera->targetFocusRotation).z;
@@ -10202,21 +7815,21 @@ LAB_8001d3f4:
           }
           else
           {
-            step = CAMERA_SignedAngleDifference((camera->collisionTargetFocusRotation).z, (camera->focusRotation).z);
-            iVar4 = (int)step;
-            step = CAMERA_SignedAngleDifference((camera->targetFocusRotation).z, (camera->focusRotation).z);
-            secondcheck_flag = (int)step;
-            if (((iVar4 < 0) && (secondcheck_flag < 0)) || ((0 < iVar4 && (0 < secondcheck_flag))))
+            sVar3 = CAMERA_SignedAngleDifference((camera->collisionTargetFocusRotation).z, (camera->focusRotation).z);
+            iVar7 = (int)sVar3;
+            sVar3 = CAMERA_SignedAngleDifference((camera->targetFocusRotation).z, (camera->focusRotation).z);
+            iVar4 = (int)sVar3;
+            if (((iVar7 < 0) && (iVar4 < 0)) || ((0 < iVar7 && (0 < iVar4))))
             {
-              if (secondcheck_flag < 0)
-              {
-                secondcheck_flag = -secondcheck_flag;
-              }
               if (iVar4 < 0)
               {
                 iVar4 = -iVar4;
               }
-              if (iVar4 < secondcheck_flag)
+              if (iVar7 < 0)
+              {
+                iVar7 = -iVar7;
+              }
+              if (iVar7 < iVar4)
               {
                 (camera->collisionTargetFocusRotation).z = (camera->targetFocusRotation).z;
               }
@@ -10227,18 +7840,18 @@ LAB_8001d3f4:
         {
           if (DAT_800cdf9c == 0)
           {
-            Decouple_AngleMoveToward(&(camera->collisionTargetFocusRotation).z, (camera->targetFocusRotation).z,
-                                     0x40);
+            CAMERA_Unlock((Camera *)&(camera->collisionTargetFocusRotation).z,
+                          (int)(camera->targetFocusRotation).z);
             camera->collision_lastPush = 0;
           }
         }
-        if ((camera->instance_mode & 0x2000000) == 0)
+        if ((camera->instance_mode & 0x2000000) != 0)
         {
-          camera->collisionTargetFocusDistance = camera->targetFocusDistance;
+          DAT_800cdf9c = 0;
+          camera->collisionTargetFocusDistance = combat_cam_distance;
           return 0;
         }
-        DAT_800cdf9c = 0;
-        camera->collisionTargetFocusDistance = combat_cam_distance;
+        camera->collisionTargetFocusDistance = camera->targetFocusDistance;
         return 0;
       }
     }
@@ -10248,64 +7861,36 @@ LAB_8001d3f4:
     }
     else
     {
-      lVar7 = CAMERA_AbsoluteCollision(camera, (CameraCollisionInfo *)auStack120);
+      lVar9 = CAMERA_AbsoluteCollision(camera, (CameraCollisionInfo *)&stack0xffffff88);
       DAT_800cdf9c = 0x1e;
     }
-    if ((camera->flags & 0x10000U) == 0)
+    if ((camera->flags & 0x10000U) != 0)
     {
-      Decouple_AngleMoveToward(&(camera->collisionTargetFocusRotation).z, (camera->targetFocusRotation).z, 0x40);
-      return lVar7;
+      /* WARNING: Subroutine does not return */
+      AngleDiff((camera->collisionTargetFocusRotation).z, (camera->targetFocusRotation).z);
     }
-    uVar3 = AngleDiff((camera->collisionTargetFocusRotation).z, (camera->targetFocusRotation).z);
-    if ((int)((uint)uVar3 << 0x10) < 0)
+    CAMERA_Unlock((Camera *)&(camera->collisionTargetFocusRotation).z,
+                  (int)(camera->targetFocusRotation).z);
+  }
+  else
+  {
+    if ((camera->data).Follow.tface == (_TFace *)0x0)
     {
-      step = AngleDiff((camera->collisionTargetFocusRotation).z, (camera->targetFocusRotation).z);
-      secondcheck_flag = -(int)step;
+      lVar9 = 0;
     }
     else
     {
-      step = AngleDiff((camera->collisionTargetFocusRotation).z, (camera->targetFocusRotation).z);
-      secondcheck_flag = (int)step;
-    }
-    if ((local_38 & 6) == 0)
-    {
-      CAMERA_dampgetline(0);
-    }
-    if ((secondcheck_flag < 0x400) || ((local_38 & 6) != 0))
-    {
-      if (secondcheck_flag < 0)
+      sVar3 = camera->mode;
+      if (((sVar3 == 4) || (sVar3 == 2)) || (lVar9 = 1, sVar3 == 6))
       {
-        secondcheck_flag = secondcheck_flag + 0xf;
-      }
-      secondcheck_flag = secondcheck_flag >> 4;
-      step = (short)secondcheck_flag;
-      if (secondcheck_flag < 8)
-      {
-        step = 8;
-      }
-      if (0x20 < secondcheck_flag)
-      {
-        step = 0x20;
+        uVar6 = (uint)auStack68[local_34];
+        camera->collisionTargetFocusDistance = auStack68[local_34];
+        CAMERA_DoPanicCheck(camera_00, colInfo, rotation, in_a3, in_stack_ffffff88);
+        return uVar6;
       }
     }
-    else
-    {
-      step = 0x40;
-    }
-    Decouple_AngleMoveToward(&(camera->collisionTargetFocusRotation).z, (camera->targetFocusRotation).z, step);
-    return lVar7;
   }
-  if ((camera->data).Follow.tface == (_TFace *)0x0)
-  {
-    return 0;
-  }
-  step = camera->mode;
-  if (((step != 4) && (step != 2)) && (step != 6))
-  {
-    return 1;
-  }
-  camera->collisionTargetFocusDistance = *(short *)(auStack120 + local_34 * 2 + 0x34);
-  return 1;
+  return lVar9;
 }
 
 // decompiled code

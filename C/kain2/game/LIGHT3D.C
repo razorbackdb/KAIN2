@@ -1,67 +1,6 @@
 #include "THISDUST.H"
 #include "LIGHT3D.H"
 
-// LightGroup @0x800CE460, len = 0x00000040
-default_lightgroup =
-    {
-        // MATRIX @0x800CE460, len = 0x00000020
-        .lightMatrix =
-            {
-                // short[3][3] @0x800CE460, len = 0x00000012
-                .m =
-                    {
-                        // short[3] @0x800CE460, len = 0x00000006
-                        {
-                            -0x81b,
-                            -0x528,
-                            0xcca},
-                        // short[3] @0x800CE466, len = 0x00000006
-                        {
-                            0xd23,
-                            -0x5c7,
-                            0x711},
-                        // short[3] @0x800CE46C, len = 0x00000006
-                        {
-                            0xa13,
-                            0xa7b,
-                            0x6ad}},
-                // long[3] @0x800CE474, len = 0x0000000C
-                .t =
-                    {
-                        0x0,
-                        0x0,
-                        0x0}},
-        // MATRIX @0x800CE480, len = 0x00000020
-        .colorMatrix =
-            {
-                // short[3][3] @0x800CE480, len = 0x00000012
-                .m =
-                    {
-                        // short[3] @0x800CE480, len = 0x00000006
-                        {
-                            0x808,
-                            0x808,
-                            0x808},
-                        // short[3] @0x800CE486, len = 0x00000006
-                        {
-                            0x808,
-                            0x808,
-                            0x808},
-                        // short[3] @0x800CE48C, len = 0x00000006
-                        {
-                            0x808,
-                            0x808,
-                            0x808}},
-                // long[3] @0x800CE494, len = 0x0000000C
-                .t =
-                    {
-                        0x0,
-                        0x0,
-                        0x0}}};
-// LightInfo * @0x800D0D80, len = 0x00000004
-light_lightInfo = null;
-// _Terrain * @0x800D0D7C, len = 0x00000004
-light_terrain = null;
 // decompiled code
 // original method signature:
 // void /*$ra*/ LIGHT_GetLightMatrix(struct _Instance *instance /*$a0*/, struct Level *level /*$a1*/, struct MATRIX *lightM /*$a2*/, struct MATRIX *colorM /*$a3*/)
@@ -108,143 +47,143 @@ light_terrain = null;
 /* end block 4 */
 // End Line: 146
 
-void LIGHT_GetLightMatrix(_Instance *instance, Level *level, MATRIX *lightM, MATRIX *colorM)
+void LIGHT_GetLightMatrix(_Instance *param_1, int param_2, undefined2 *param_3, undefined2 *param_4)
 
 {
-  ushort uVar1;
-  LightGroup *pLVar2;
-  LightGroup *pLVar3;
-  int iVar4;
-  ushort *puVar5;
-  LightList *in_v1;
-  short *psVar6;
+  int iVar1;
+  int iVar2;
+  undefined2 *puVar3;
+  undefined *puVar4;
+  int in_v1;
+  short *psVar5;
+  int iVar6;
   int iVar7;
   int iVar8;
-  int iVar9;
-  uint uVar10;
-  int iVar11;
-  LightList *in_t3;
+  uint uVar9;
+  int iVar10;
+  int in_t3;
 
-  uVar10 = (uint)instance->lightGroup;
-  if (gameTrackerX.gameData.asmData.MorphType == 0)
+  uVar9 = (uint)param_1->lightGroup;
+  if (sGpffffb502 == 0)
   {
-    if ((instance != gameTrackerX.playerInstance) ||
-        (pLVar2 = level->razielLightGroup, pLVar2 == (LightGroup *)0x0))
+    if ((param_1 != p_Gpffffb524) ||
+        (puVar3 = *(undefined2 **)(param_2 + 0x180), puVar3 == (undefined2 *)0x0))
     {
     LAB_800358a8:
-      in_v1 = level->lightList;
-      pLVar2 = (LightGroup *)0x0;
+      in_v1 = *(int *)(param_2 + 4);
+      puVar3 = (undefined2 *)0x0;
     }
   }
   else
   {
-    if ((instance != gameTrackerX.playerInstance) ||
-        (pLVar2 = level->razielSpectralLightGroup, pLVar2 == (LightGroup *)0x0))
+    if ((param_1 != p_Gpffffb524) ||
+        (puVar3 = *(undefined2 **)(param_2 + 0x184), puVar3 == (undefined2 *)0x0))
     {
-      in_v1 = level->spectrallightList;
-      if ((in_v1 == (LightList *)0x0) || (in_v1->numLightGroups == 0))
+      in_v1 = *(int *)(param_2 + 0x54);
+      if ((in_v1 == 0) || (*(int *)(in_v1 + 4) == 0))
         goto LAB_800358a8;
-      uVar10 = (uint)instance->spectralLightGroup;
-      pLVar2 = (LightGroup *)0x0;
+      uVar9 = (uint)param_1->spectralLightGroup;
+      puVar3 = (undefined2 *)0x0;
     }
   }
-  if (pLVar2 == (LightGroup *)0x0)
+  if (puVar3 == (undefined2 *)0x0)
   {
-    if ((in_v1->numLightGroups == 0) || (in_v1->numLightGroups <= (int)uVar10))
+    if ((*(int *)(in_v1 + 4) == 0) || (*(int *)(in_v1 + 4) <= (int)uVar9))
     {
-      pLVar2 = &default_lightgroup;
+      INSTANCE_GetFadeValue(param_1);
+      return;
     }
-    else
-    {
-      pLVar2 = in_v1->lightGroupList + uVar10;
-    }
+    puVar3 = (undefined2 *)(*(int *)(in_v1 + 8) + uVar9 * 0x40);
   }
-  if (gameTrackerX.gameData.asmData.MorphTime == 1000)
+  if (sGpffffb500 == 1000)
   {
-    lightM->m[0] = (pLVar2->lightMatrix).m[0];
-    lightM->m[1] = (pLVar2->lightMatrix).m[1];
-    lightM->m[2] = (pLVar2->lightMatrix).m[2];
-    lightM->m[3] = (pLVar2->lightMatrix).m[3];
-    lightM->m[4] = (pLVar2->lightMatrix).m[4];
-    lightM->m[5] = (pLVar2->lightMatrix).m[5];
-    lightM->m[6] = (pLVar2->lightMatrix).m[6];
-    lightM->m[7] = (pLVar2->lightMatrix).m[7];
-    lightM->m[8] = (pLVar2->lightMatrix).m[8];
-    colorM->m[0] = (pLVar2->colorMatrix).m[0];
-    colorM->m[1] = (pLVar2->colorMatrix).m[1];
-    colorM->m[2] = (pLVar2->colorMatrix).m[2];
-    colorM->m[3] = (pLVar2->colorMatrix).m[3];
-    colorM->m[4] = (pLVar2->colorMatrix).m[4];
-    colorM->m[5] = (pLVar2->colorMatrix).m[5];
-    colorM->m[6] = (pLVar2->colorMatrix).m[6];
-    colorM->m[7] = (pLVar2->colorMatrix).m[7];
-    colorM->m[8] = (pLVar2->colorMatrix).m[8];
+    *param_3 = *puVar3;
+    param_3[1] = puVar3[1];
+    param_3[2] = puVar3[2];
+    param_3[3] = puVar3[3];
+    param_3[4] = puVar3[4];
+    param_3[5] = puVar3[5];
+    param_3[6] = puVar3[6];
+    param_3[7] = puVar3[7];
+    param_3[8] = puVar3[8];
+    *param_4 = puVar3[0x10];
+    param_4[1] = puVar3[0x11];
+    param_4[2] = puVar3[0x12];
+    param_4[3] = puVar3[0x13];
+    param_4[4] = puVar3[0x14];
+    param_4[5] = puVar3[0x15];
+    param_4[6] = puVar3[0x16];
+    param_4[7] = puVar3[0x17];
+    param_4[8] = puVar3[0x18];
     return;
   }
-  uVar10 = (uint)instance->lightGroup;
-  if (gameTrackerX.gameData.asmData.MorphType == 0)
+  uVar9 = (uint)param_1->lightGroup;
+  if (sGpffffb502 == 0)
   {
-    if ((instance == gameTrackerX.playerInstance) &&
-        (pLVar3 = level->razielSpectralLightGroup, pLVar3 != (LightGroup *)0x0))
+    if ((param_1 == p_Gpffffb524) &&
+        (puVar4 = *(undefined **)(param_2 + 0x184), puVar4 != (undefined *)0x0))
       goto LAB_8003597c;
-    in_t3 = level->spectrallightList;
-    if ((in_t3 != (LightList *)0x0) && (in_t3->numLightGroups != 0))
+    in_t3 = *(int *)(param_2 + 0x54);
+    if ((in_t3 != 0) && (*(int *)(in_t3 + 4) != 0))
     {
-      uVar10 = (uint)instance->spectralLightGroup;
-      pLVar3 = (LightGroup *)0x0;
+      uVar9 = (uint)param_1->spectralLightGroup;
+      puVar4 = (undefined *)0x0;
       goto LAB_8003597c;
     }
   }
   else
   {
-    if ((instance == gameTrackerX.playerInstance) &&
-        (pLVar3 = level->razielLightGroup, pLVar3 != (LightGroup *)0x0))
+    if ((param_1 == p_Gpffffb524) &&
+        (puVar4 = *(undefined **)(param_2 + 0x180), puVar4 != (undefined *)0x0))
       goto LAB_8003597c;
   }
-  in_t3 = level->lightList;
-  pLVar3 = (LightGroup *)0x0;
+  in_t3 = *(int *)(param_2 + 4);
+  puVar4 = (undefined *)0x0;
 LAB_8003597c:
-  if (pLVar3 == (LightGroup *)0x0)
+  if (puVar4 == (undefined *)0x0)
   {
-    if ((in_t3->numLightGroups == 0) || (in_t3->numLightGroups <= (int)uVar10))
+    if ((*(int *)(in_t3 + 4) == 0) || (*(int *)(in_t3 + 4) <= (int)uVar9))
     {
-      pLVar3 = &default_lightgroup;
+      puVar4 = &gp0xffff89ac;
     }
     else
     {
-      pLVar3 = in_t3->lightGroupList + uVar10;
+      puVar4 = (undefined *)(*(int *)(in_t3 + 8) + uVar9 * 0x40);
     }
   }
-  lightM->m[0] = (pLVar2->lightMatrix).m[0];
-  lightM->m[1] = (pLVar2->lightMatrix).m[1];
-  lightM->m[2] = (pLVar2->lightMatrix).m[2];
-  lightM->m[3] = (pLVar2->lightMatrix).m[3];
-  lightM->m[4] = (pLVar2->lightMatrix).m[4];
-  lightM->m[5] = (pLVar2->lightMatrix).m[5];
-  lightM->m[6] = (pLVar2->lightMatrix).m[6];
-  lightM->m[7] = (pLVar2->lightMatrix).m[7];
-  lightM->m[8] = (pLVar2->lightMatrix).m[8];
-  iVar4 = (int)gameTrackerX.gameData.asmData.MorphTime;
-  iVar11 = 0;
-  iVar9 = 0;
+  *param_3 = *puVar3;
+  param_3[1] = puVar3[1];
+  param_3[2] = puVar3[2];
+  param_3[3] = puVar3[3];
+  param_3[4] = puVar3[4];
+  param_3[5] = puVar3[5];
+  param_3[6] = puVar3[6];
+  param_3[7] = puVar3[7];
+  param_3[8] = puVar3[8];
+  iVar10 = 0;
+  iVar8 = 0;
   do
   {
-    iVar8 = 0;
-    iVar7 = iVar9;
+    iVar7 = 0;
+    iVar6 = iVar8;
     do
     {
-      puVar5 = (ushort *)((int)(pLVar2->colorMatrix).m + iVar7);
-      uVar1 = *(ushort *)((int)(pLVar3->colorMatrix).m + iVar7);
-      psVar6 = (short *)((int)colorM->m + iVar7);
-      iVar7 = iVar7 + 2;
-      iVar8 = iVar8 + 1;
-      *psVar6 = uVar1 + (short)(((int)(((uint)*puVar5 - (uint)uVar1) * 0x10000) >> 0x10) *
-                                    (0x1000 - (iVar4 << 0xc) / 1000) >>
-                                0xc);
-    } while (iVar8 < 3);
-    iVar11 = iVar11 + 1;
-    iVar9 = iVar9 + 6;
-  } while (iVar11 < 3);
+      iVar2 = iVar6 + 0x20;
+      iVar1 = iVar6 + 0x20;
+      psVar5 = (short *)((int)param_4 + iVar6);
+      iVar6 = iVar6 + 2;
+      iVar7 = iVar7 + 1;
+      *psVar5 = *(ushort *)(puVar4 + iVar1) +
+                (short)(((int)(((uint) * (ushort *)((int)puVar3 + iVar2) -
+                                (uint) * (ushort *)(puVar4 + iVar1)) *
+                               0x10000) >>
+                         0x10) *
+                            (0x1000 - ((int)sGpffffb500 << 0xc) / 1000) >>
+                        0xc);
+    } while (iVar7 < 3);
+    iVar10 = iVar10 + 1;
+    iVar8 = iVar8 + 6;
+  } while (iVar10 < 3);
   return;
 }
 
@@ -291,78 +230,8 @@ LAB_8003597c:
 void LIGHT_PresetInstanceLight(_Instance *instance, short attenuate, MATRIX *lm)
 
 {
-  short sVar1;
-  Level *level;
-  undefined4 *puVar2;
-  int iVar3;
-  short sVar4;
-  int iVar5;
-  short *psVar6;
-  int iVar7;
-  int iVar8;
-  int *piVar9;
-  int iVar10;
-  int iVar11;
-  MATRIX local_50;
-  int local_30;
-  int local_2c;
-  int local_28;
-  undefined4 local_20;
-  undefined2 local_1c;
-
-  local_20 = DAT_800ce4a0;
-  local_1c = PTR_DAT_800ce4a4._0_2_;
-  level = STREAM_GetLevelWithID(instance->currentStreamUnitID);
-  LIGHT_GetLightMatrix(instance, level, lm, &local_50);
-  local_30 = 0x1000;
-  puVar2 = &local_20;
-  if ((instance->flags & 0x200000U) != 0)
-  {
-    local_30 = 0x800;
-  }
-  if ((int)attenuate != 0x1000)
-  {
-    local_30 = local_30 * (int)attenuate >> 0xc;
-  }
-  if (level != (Level *)0x0)
-  {
-    puVar2 = (undefined4 *)&level->TODRedScale;
-  }
-  iVar11 = 0;
-  iVar10 = 0;
-  piVar9 = &local_30;
-  do
-  {
-    sVar1 = *(short *)puVar2;
-    iVar3 = *piVar9;
-    iVar8 = 0;
-    iVar7 = iVar10;
-    do
-    {
-      psVar6 = (short *)((int)local_50.m + iVar7);
-      iVar5 = (int)*psVar6 * (iVar3 * (int)sVar1 * 0x10 >> 0x10) >> 0xc;
-      sVar4 = (short)iVar5;
-      if (iVar5 < -0x8000)
-      {
-        sVar4 = -0x8000;
-      }
-      if (0x7fff < iVar5)
-      {
-        sVar4 = 0x7fff;
-      }
-      *psVar6 = sVar4;
-      iVar8 = iVar8 + 1;
-      iVar7 = iVar7 + 2;
-    } while (iVar8 < 3);
-    iVar10 = iVar10 + 6;
-    piVar9 = piVar9 + 1;
-    iVar11 = iVar11 + 1;
-    puVar2 = (undefined4 *)((int)puVar2 + 2);
-  } while (iVar11 < 3);
-  local_2c = local_30;
-  local_28 = local_30;
-  SetColorMatrix((undefined4 *)&local_50);
-  return;
+  /* WARNING: Subroutine does not return */
+  STREAM_GetLevelWithID(instance->currentStreamUnitID);
 }
 
 // decompiled code
@@ -517,8 +386,8 @@ void LIGHT_CalcLightValue(_TFace *tface, _Instance *instance, _Terrain *terrain)
   uint uVar11;
   _TVertex *p_Var12;
   int iVar13;
-  LightInstance *pLVar14;
-  LightInstance *pLVar15;
+  _Instance **pp_Var14;
+  _Instance **pp_Var15;
   int iVar16;
   _TVertex *p_Var17;
   _TVertex *p_Var18;
@@ -540,11 +409,11 @@ void LIGHT_CalcLightValue(_TFace *tface, _Instance *instance, _Terrain *terrain)
   p_Var12 = terrain->vertexList;
   pBVar8 = terrain->BSPTreeArray + instance->bspTree;
   local_40[0] = (instance->position).x - (pBVar8->globalOffset).x;
-  p_Var18 = p_Var12 + (uint)(tface->face).v0;
-  p_Var17 = p_Var12 + (uint)(tface->face).v1;
+  p_Var18 = p_Var12 + (tface->face).v0;
+  p_Var17 = p_Var12 + (tface->face).v1;
   local_40[1] = (instance->position).y - (pBVar8->globalOffset).y;
   local_40[2] = (instance->shadowPosition).z - (pBVar8->globalOffset).z;
-  p_Var12 = p_Var12 + (uint)(tface->face).v2;
+  p_Var12 = p_Var12 + (tface->face).v2;
   lVar4 = COLLIDE_GetNormal(tface->normal, (short *)terrain->normalList, &_Stack56);
   iVar19 = lVar4 + 1;
   iVar13 = lVar4 + 2;
@@ -630,12 +499,12 @@ void LIGHT_CalcLightValue(_TFace *tface, _Instance *instance, _Terrain *terrain)
   }
   iVar6 = (int)(&(p_Var17->vertex).x)[iVar13];
   iVar5 = (int)(&(p_Var18->vertex).x)[iVar13];
-  local_30 = local_40;
   if (iVar6 == iVar5)
   {
     return;
   }
-  iVar7 = (iVar5 - (int)local_30[iVar13]) * 0x1000;
+  local_30 = local_40;
+  iVar7 = (iVar5 - local_40[iVar13]) * 0x1000;
   iVar6 = iVar7 / (iVar6 - iVar5);
   if (iVar6 < 0)
   {
@@ -672,12 +541,12 @@ void LIGHT_CalcLightValue(_TFace *tface, _Instance *instance, _Terrain *terrain)
   LoadAverageCol(&p_Var18->r0, &p_Var17->r0, 0x1000 - iVar16, iVar16, abStack80);
   LoadAverageCol(&p_Var18->r0, &p_Var12->r0, 0x1000 - iVar13, iVar13, abStack72);
   iVar5 = (int)(&(p_Var18->vertex).x)[iVar19];
-  iVar16 = ((int)(&(p_Var17->vertex).x)[iVar19] - iVar5) * iVar16;
+  iVar16 = ((&(p_Var17->vertex).x)[iVar19] - iVar5) * iVar16;
   if (iVar16 < 0)
   {
     iVar16 = iVar16 + 0xfff;
   }
-  iVar13 = ((int)(&(p_Var12->vertex).x)[iVar19] - iVar5) * iVar13;
+  iVar13 = ((&(p_Var12->vertex).x)[iVar19] - iVar5) * iVar13;
   iVar6 = iVar5 + (iVar16 >> 0xc);
   if (iVar13 < 0)
   {
@@ -687,7 +556,7 @@ void LIGHT_CalcLightValue(_TFace *tface, _Instance *instance, _Terrain *terrain)
   iVar13 = 0;
   if (iVar6 != iVar5)
   {
-    iVar19 = ((iVar6 - (int)local_30[iVar19]) * 0x1000) / (iVar6 - iVar5);
+    iVar19 = ((iVar6 - local_30[iVar19]) * 0x1000) / (iVar6 - iVar5);
     if (iVar19 < 0)
     {
       iVar19 = -iVar19;
@@ -712,21 +581,21 @@ void LIGHT_CalcLightValue(_TFace *tface, _Instance *instance, _Terrain *terrain)
   local_58[0].b = local_58[0].r;
   if (0x44 < uVar11)
   {
-    local_58[0].r = (char)((int)((uVar11 - 0x44) + (uVar11 - 0x44 >> 0x1f)) >> 1) + 0x44;
+    local_58[0].r = (char)((int)(uVar11 - 0x44) / 2) + 0x44;
     local_58[0].g = local_58[0].r;
     local_58[0].b = local_58[0].r;
   }
 LAB_80036264:
-  pLVar15 = (LightInstance *)0x0;
+  pp_Var15 = (_Instance **)0x0;
   iVar19 = 0x7fff;
-  pLVar14 = gameTrackerX.gameData.asmData.lightInstances;
+  pp_Var14 = (_Instance **)&DAT_800d0fb8;
   iVar5 = 0;
   do
   {
-    p_Var9 = pLVar14->lightInstance;
+    p_Var9 = *pp_Var14;
     if (((p_Var9 != (_Instance *)0x0) && (p_Var9 != instance)) && (p_Var9->matrix != (MATRIX *)0x0))
     {
-      pMVar10 = p_Var9->matrix + (uint)pLVar14->segment;
+      pMVar10 = p_Var9->matrix + *(byte *)((int)pp_Var14 + 0x12);
       iVar6 = (int)(((uint) * (ushort *)pMVar10->t - (uint)(ushort)(instance->position).x) * 0x10000) >> 0x10;
       if (iVar6 < 0)
       {
@@ -759,19 +628,19 @@ LAB_80036264:
         sVar1 = local_40[0];
       }
       iVar6 = (int)sVar1;
-      if ((iVar6 < (int)pLVar14->radius) && (iVar6 < iVar19))
+      if ((iVar6 < *(short *)(pp_Var14 + 4)) && (iVar6 < iVar19))
       {
         iVar19 = iVar6;
-        pLVar15 = pLVar14;
+        pp_Var15 = pp_Var14;
       }
     }
     iVar5 = iVar5 + 1;
-    pLVar14 = pLVar14 + 1;
+    pp_Var14 = pp_Var14 + 5;
   } while (iVar5 < 1);
-  if (pLVar15 != (LightInstance *)0x0)
+  if (pp_Var15 != (_Instance **)0x0)
   {
-    iVar19 = (int)pLVar15->radius - iVar19;
-    iVar5 = (uint)local_58[0].r + (iVar19 * pLVar15->r >> 0xc);
+    iVar19 = *(short *)(pp_Var15 + 4) - iVar19;
+    iVar5 = (uint)local_58[0].r + (iVar19 * (int)pp_Var15[1] >> 0xc);
     local_58[0].r = (byte)iVar5;
     if (iVar5 < 0)
     {
@@ -781,7 +650,7 @@ LAB_80036264:
     {
       local_58[0].r = 0xff;
     }
-    iVar5 = (uint)local_58[0].g + (iVar19 * pLVar15->g >> 0xc);
+    iVar5 = (uint)local_58[0].g + (iVar19 * (int)pp_Var15[2] >> 0xc);
     local_58[0].g = (byte)iVar5;
     if (iVar5 < 0)
     {
@@ -791,7 +660,7 @@ LAB_80036264:
     {
       local_58[0].g = 0xff;
     }
-    iVar19 = (uint)local_58[0].b + (iVar19 * pLVar15->b >> 0xc);
+    iVar19 = (uint)local_58[0].b + (iVar19 * (int)pp_Var15[3] >> 0xc);
     local_58[0].b = (byte)iVar19;
     if (iVar19 < 0)
     {
@@ -860,8 +729,7 @@ void LIGHT_SetMatrixForLightGroupInstance(_Instance *instance, Level *level)
 
   if (instance->matrix != (MATRIX *)0x0)
   {
-    if (((gameTrackerX.gameData.asmData.MorphType == 0) ||
-         (level->spectrallightList == (LightList *)0x0)) ||
+    if (((DAT_800d0fb6 == 0) || (level->spectrallightList == (LightList *)0x0)) ||
         (iVar1 = level->spectrallightList->numLightGroups, iVar1 == 0))
     {
       if ((level->lightList != (LightList *)0x0) &&
@@ -915,10 +783,9 @@ void LIGHT_DrawShadow(MATRIX *wcTransform, _Instance *instance, _PrimPool *primP
   short sVar1;
   int iVar2;
   long x;
-  ulong *puVar3;
+  undefined4 uVar3;
   undefined4 uVar4;
   undefined4 uVar5;
-  undefined4 uVar6;
   ushort local_70;
   short local_6e;
   short local_6c;
@@ -971,32 +838,32 @@ void LIGHT_DrawShadow(MATRIX *wcTransform, _Instance *instance, _PrimPool *primP
     setCopReg(2, 0x5000, (uint)local_62);
     setCopReg(2, 0x5800, (uint)local_5c);
     copFunction(2, 0x49e012);
-    uVar4 = getCopReg(2, 0x4800);
-    uVar5 = getCopReg(2, 0x5000);
-    uVar6 = getCopReg(2, 0x5800);
-    local_48 = (undefined2)uVar4;
-    local_42 = (undefined2)uVar5;
-    local_3c = (undefined2)uVar6;
+    uVar3 = getCopReg(2, 0x4800);
+    uVar4 = getCopReg(2, 0x5000);
+    uVar5 = getCopReg(2, 0x5800);
+    local_48 = (undefined2)uVar3;
+    local_42 = (undefined2)uVar4;
+    local_3c = (undefined2)uVar5;
     setCopReg(2, 0x4800, (uint)local_66);
     setCopReg(2, 0x5000, (uint)local_60);
     setCopReg(2, 0x5800, (uint)local_5a);
     copFunction(2, 0x49e012);
-    uVar4 = getCopReg(2, 0x4800);
-    uVar5 = getCopReg(2, 0x5000);
-    uVar6 = getCopReg(2, 0x5800);
-    local_46 = (undefined2)uVar4;
-    local_40 = (undefined2)uVar5;
-    local_3a = (undefined2)uVar6;
+    uVar3 = getCopReg(2, 0x4800);
+    uVar4 = getCopReg(2, 0x5000);
+    uVar5 = getCopReg(2, 0x5800);
+    local_46 = (undefined2)uVar3;
+    local_40 = (undefined2)uVar4;
+    local_3a = (undefined2)uVar5;
     setCopReg(2, 0x4800, (uint)local_64);
     setCopReg(2, 0x5000, (uint)local_5e);
     setCopReg(2, 0x5800, (uint)local_58);
     copFunction(2, 0x49e012);
-    uVar4 = getCopReg(2, 0x4800);
-    uVar5 = getCopReg(2, 0x5000);
-    uVar6 = getCopReg(2, 0x5800);
-    local_44 = (undefined2)uVar4;
-    local_3e = (undefined2)uVar5;
-    local_38 = (undefined2)uVar6;
+    uVar3 = getCopReg(2, 0x4800);
+    uVar4 = getCopReg(2, 0x5000);
+    uVar5 = getCopReg(2, 0x5800);
+    local_44 = (undefined2)uVar3;
+    local_3e = (undefined2)uVar4;
+    local_38 = (undefined2)uVar5;
     setCopControlWord(2, 0x2800, wcTransform->t[0]);
     setCopControlWord(2, 0x3000, wcTransform->t[1]);
     setCopControlWord(2, 0x3800, wcTransform->t[2]);
@@ -1006,17 +873,16 @@ void LIGHT_DrawShadow(MATRIX *wcTransform, _Instance *instance, _PrimPool *primP
     local_34 = getCopReg(2, 0x19);
     local_30 = getCopReg(2, 0x1a);
     local_2c = getCopReg(2, 0x1b);
-    local_28 = (((int)instance->object->modelList[(int)instance->currentModel]->maxRad * 0x1000) /
-                0x1e0) *
-                   (0x1000 - (((int)(instance->position).z - (int)(instance->shadowPosition).z) * 0x1000) / 0x500) >>
+    local_28 = (((int)instance->object->modelList[instance->currentModel]->maxRad * 0x1000) / 0x1e0) * (0x1000 - (((int)(instance->position).z - (int)(instance->shadowPosition).z) *
+                                                                                                                  0x1000) /
+                                                                                                                     0x500) >>
                0xc;
     local_24 = local_28;
     local_20 = local_28;
     ScaleMatrix((int *)&local_48, &local_28);
     SetRotMatrix((undefined4 *)&local_48);
+    /* WARNING: Subroutine does not return */
     SetTransMatrix((int)&local_48);
-    puVar3 = DRAW_DrawShadow(primPool, (_Model *)0x0, ot, (int)instance->fadeValue);
-    primPool->nextPrim = puVar3;
   }
   return;
 }
@@ -1047,18 +913,9 @@ void LIGHT_DrawShadow(MATRIX *wcTransform, _Instance *instance, _PrimPool *primP
 void LIGHT_CalcShadowPositions(GameTracker *gameTracker)
 
 {
-  undefined2 uVar1;
-  undefined2 uVar2;
-  Level *level;
-  uint uVar3;
   _TFace *tface;
   _Terrain *terrain;
   _Instance *instance;
-  _PCollideInfo local_48;
-  undefined4 local_18;
-  short local_14;
-  undefined4 local_10;
-  short local_c;
 
   instance = gameTracker->instanceList->first;
   do
@@ -1080,101 +937,22 @@ void LIGHT_CalcShadowPositions(GameTracker *gameTracker)
     }
     else
     {
-      uVar3 = instance->flags;
-      if (((uVar3 & 0xa00) == 0x200) && ((instance->flags2 & 0x4000000U) == 0))
+      if (((instance->flags & 0xa00U) == 0x200) && ((instance->flags2 & 0x4000000U) == 0))
       {
-        if ((uVar3 & 0x18000000) == 0x8000000)
+        if ((instance->flags & 0x18000000U) != 0x8000000)
         {
-          tface = instance->waterFace;
-          if (tface == (_TFace *)0x0)
-            goto LAB_80036bd4;
-          terrain = instance->waterFaceTerrain;
-          goto LAB_80036bec;
+          /* WARNING: Subroutine does not return */
+          instance->flags = instance->flags | 0x40;
+          STREAM_GetLevelWithID(instance->currentStreamUnitID);
         }
-        if ((uVar3 & 0x10000000) == 0)
-        {
-          local_18 = *(undefined4 *)&instance->position;
-          local_14 = (instance->position).z;
-          local_10 = *(undefined4 *)&instance->position;
-          local_c = (instance->position).z;
-        }
-        else
-        {
-          uVar1 = *(undefined2 *)instance->matrix[1].t;
-          uVar2 = *(undefined2 *)(instance->matrix[1].t + 1);
-          local_18 = CONCAT22(uVar2, uVar1);
-          local_10 = CONCAT22(uVar2, uVar1);
-          local_14 = *(short *)(instance->matrix[1].t + 2);
-          local_c = local_14;
-        }
-        local_48.collideType = 0x37;
-        local_48.newPoint = (SVECTOR *)&local_18;
-        local_48.oldPoint = (SVECTOR *)&local_10;
-        local_14 = local_14 + -0x500;
-        local_c = local_c + 0x100;
-        instance->flags = instance->flags | 0x40;
-        local_48.instance = instance;
-        level = STREAM_GetLevelWithID(instance->currentStreamUnitID);
-        if (level == (Level *)0x0)
-        {
-          local_48.type = 0;
-        }
-        else
-        {
-          COLLIDE_PointAndWorld(&local_48, level);
-        }
-        instance->flags = instance->flags & 0xffffffbf;
-        if (local_48.type == 3)
-        {
-          terrain = (_Terrain *)((local_48.inst)->node).prev;
-          tface = local_48.prim;
-        LAB_80036ac0:
-          LIGHT_CalcLightValue(tface, instance, terrain);
-        }
-        else
-        {
-          tface = (_TFace *)0x0;
-          if (local_48.type != 5)
-          {
-            terrain = (_Terrain *)0x0;
-            goto LAB_80036ac0;
-          }
-        }
-        if (local_48.type != 0)
-        {
-          if (local_48.type == 1)
-          {
-            (instance->wNormal).x = 0;
-            (instance->wNormal).y = 0;
-            (instance->wNormal).z = 0x1000;
-          }
-          else
-          {
-            if (((local_48.type == 3) && ((local_48.prim)->textoff != 0xffff)) &&
-                ((*(ushort *)((int)&((local_48.inst)->node).prev[6].next[1].prev +
-                              (uint)(local_48.prim)->textoff + 2) &
-                  0x4000) != 0))
-            {
-              uVar3 = instance->flags | 0x200000;
-            }
-            else
-            {
-              uVar3 = instance->flags & 0xffdfffff;
-            }
-            instance->flags = uVar3;
-            (instance->wNormal).x = local_48.wNormal.vx;
-            (instance->wNormal).y = local_48.wNormal.vy;
-            (instance->wNormal).z = local_48.wNormal.vz;
-          }
-        }
-        *(undefined4 *)&instance->shadowPosition = local_18;
-        (instance->shadowPosition).z = local_14;
-      }
-      else
-      {
-        if ((instance->flags2 & 0x40U) == 0)
+        tface = instance->waterFace;
+        if (tface == (_TFace *)0x0)
           goto LAB_80036bd4;
+        terrain = instance->waterFaceTerrain;
+        goto LAB_80036bec;
       }
+      if ((instance->flags2 & 0x40U) == 0)
+        goto LAB_80036bd4;
     }
     instance->flags = instance->flags & 0xf7ffffff;
     instance = instance->next;

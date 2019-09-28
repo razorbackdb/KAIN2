@@ -1,94 +1,6 @@
 #include "THISDUST.H"
 #include "EVENT.H"
 
-// ScriptPCode * @0x800D2738, len = 0x00000004
-currentActionScript = null;
-// Event * @0x800D2734, len = 0x00000004
-currentEventInstance = null;
-// long @0x800CF53C, len = 0x00000004
-CurrentEventLine = 0x0;
-// Level * @0x800D27D0, len = 0x00000004
-CurrentPuzzleLevel = null;
-// short * @0x800D273C, len = 0x00000004
-EventAbortedPosition = null;
-// short @0x800CF534, len = 0x00000002
-EventAbortLine = 0x0;
-// long @0x800CF540, len = 0x00000004
-EventCurrentEventIndex = -0x1;
-// short @0x800CF536, len = 0x00000002
-EventJustRecievedTimer = 0x0;
-// _Instance * @0x800D2B0C, len = 0x00000004
-eventListArray2010 = null;
-// long @0x800D2A1C, len = 0x00000004
-eventListNumInstances = null;
-// EventTimer @0x800D27D4, len = 0x00000018
-eventTimerArray =
-    {
-        // anon__struct_3204_bitfield_1 @0x800D27D4, len = 0x00000004
-        .field_0x0 =
-            {
-              // long @0x800D27D4, len = 0x00000004
-              .flags : 1 = null,
-              // long @0x800D27D4, len = 0x00000004
-              .time : 31 = null
-            },
-        // Event * @0x800D27D8, len = 0x00000004
-        .event = null,
-        // ScriptPCode * @0x800D27DC, len = 0x00000004
-        .actionScript = null,
-        // short * @0x800D27E0, len = 0x00000004
-        .scriptPos = null,
-        // Level * @0x800D27E4, len = 0x00000004
-        .level = null,
-        // long @0x800D27E8, len = 0x00000004
-        .nextEventIndex = null};
-// HintSystemStruct @0x800D2AFC, len = 0x00000010
-gHintSystem =
-    {
-        // short @0x800D2AFC, len = 0x00000002
-        .flags = null,
-        // short @0x800D2AFE, len = 0x00000002
-        .hintNumber = null,
-        // short @0x800D2B00, len = 0x00000002
-        .stringNumber = null,
-        // short @0x800D2B02, len = 0x00000002
-        .pad = null,
-        // long @0x800D2B04, len = 0x00000004
-        .fadeTimer = null,
-        // long @0x800D2B08, len = 0x00000004
-        .spawningUnitID = null};
-// long @0x800CF538, len = 0x00000004
-MoveCodeStreamExtra = 0x0;
-// long @0x800D2A14, len = 0x00000004
-numActiveEventTimers = null;
-// SignalResetStruct @0x800D2A74, len = 0x00000008
-ResetSignalArray =
-    {
-        // _MultiSignal * @0x800D2A74, len = 0x00000004
-        .mSignal = null,
-        // long @0x800D2A78, len = 0x00000004
-        .timeLeft = null};
-// WaterLevelProcess @0x800D2744, len = 0x0000001C
-WaterLevelArray =
-    {
-        // long @0x800D2744, len = 0x00000004
-        .flags = null,
-        // BSPTree * @0x800D2748, len = 0x00000004
-        .bspTree = null,
-        // _StreamUnit * @0x800D274C, len = 0x00000004
-        .streamUnit = null,
-        // short @0x800D2750, len = 0x00000002
-        .oldWaterZ = null,
-        // short @0x800D2752, len = 0x00000002
-        .oldGlobalOffset = null,
-        // short @0x800D2754, len = 0x00000002
-        .zValueFrom = null,
-        // short @0x800D2756, len = 0x00000002
-        .zValueTo = null,
-        // long @0x800D2758, len = 0x00000004
-        .maxSteps = null,
-        // long @0x800D275C, len = 0x00000004
-        .curStep = null};
 // decompiled code
 // original method signature:
 // void /*$ra*/ EVENT_UpdateResetSignalArrayAndWaterMovement(struct Level *oldLevel /*$a0*/, struct Level *newLevel /*$a1*/, long sizeOfLevel /*$a2*/)
@@ -125,63 +37,61 @@ WaterLevelArray =
 void EVENT_UpdateResetSignalArrayAndWaterMovement(Level *oldLevel, Level *newLevel, long sizeOfLevel)
 
 {
-  _MultiSignal *p_Var1;
+  int iVar1;
   Level *pLVar2;
-  _MultiSignal *p_Var3;
-  Level *pLVar4;
-  SignalResetStruct *pSVar5;
-  Level **ppLVar6;
-  int iVar7;
-  WaterLevelProcess *pWVar8;
+  Level *pLVar3;
+  FontChar *pFVar4;
+  Level **ppLVar5;
+  int iVar6;
+  SVECTOR *pSVar7;
 
   if (NumSignalsToReset != 0)
   {
-    iVar7 = 0;
-    pSVar5 = &ResetSignalArray;
+    iVar6 = 0;
+    pFVar4 = fontTracker.font_buffer + 0x28;
     do
     {
-      if (0 < pSVar5->timeLeft)
+      if (0 < *(int *)&pFVar4->c)
       {
-        p_Var3 = pSVar5->mSignal;
-        if ((oldLevel <= p_Var3) &&
-            (p_Var3 <= (_MultiSignal *)((int)&oldLevel->terrain + sizeOfLevel)))
+        pLVar3 = *(Level **)pFVar4;
+        if ((oldLevel <= pLVar3) && (pLVar3 <= (Level *)((int)&oldLevel->terrain + sizeOfLevel)))
         {
-          p_Var1 = (_MultiSignal *)0x0;
-          if (p_Var3 != (_MultiSignal *)0x0)
+          iVar1 = 0;
+          if (pLVar3 != (Level *)0x0)
           {
-            p_Var1 = (_MultiSignal *)((int)p_Var3 + (int)(Level *)((int)newLevel - (int)oldLevel));
+            iVar1 = (int)pLVar3 + (int)(Level *)((int)newLevel - (int)oldLevel);
           }
-          pSVar5->mSignal = p_Var1;
+          *(int *)pFVar4 = iVar1;
         }
       }
-      iVar7 = iVar7 + 1;
-      pSVar5 = pSVar5 + 1;
-    } while (iVar7 < 0x10);
+      iVar6 = iVar6 + 1;
+      pFVar4 = (FontChar *)&pFVar4[1].y;
+    } while (iVar6 < 0x10);
   }
-  iVar7 = 5;
+  iVar6 = 5;
   if (WaterInUse != 0)
   {
-    pWVar8 = &WaterLevelArray;
-    ppLVar6 = (Level **)&WaterLevelArray.bspTree;
+    pSVar7 = &WaterLevelArray;
+    ppLVar5 = (Level **)&WaterLevelArray.vz;
     do
     {
-      if ((pWVar8->flags & 1U) != 0)
+      if ((*(uint *)pSVar7 & 1) != 0)
       {
-        pLVar4 = *ppLVar6;
-        if ((oldLevel <= pLVar4) && (pLVar4 <= (Level *)((int)&oldLevel->terrain + sizeOfLevel)))
+        pLVar3 = *ppLVar5;
+        if ((oldLevel <= pLVar3) && (pLVar3 <= (Level *)((int)&oldLevel->terrain + sizeOfLevel)))
         {
           pLVar2 = (Level *)0x0;
-          if (pLVar4 != (Level *)0x0)
+          if (pLVar3 != (Level *)0x0)
           {
-            pLVar2 = (Level *)((int)pLVar4 + (int)(Level *)((int)newLevel - (int)oldLevel));
+            pLVar2 = (Level *)((int)pLVar3 + (int)(Level *)((int)newLevel - (int)oldLevel));
           }
-          *ppLVar6 = pLVar2;
+          *ppLVar5 = pLVar2;
         }
       }
-      iVar7 = iVar7 + -1;
-      ppLVar6 = ppLVar6 + 7;
-      pWVar8 = pWVar8 + 1;
-    } while (0 < iVar7);
+      iVar6 = iVar6 + -1;
+      ppLVar5 = ppLVar5 + 7;
+      pSVar7 = (SVECTOR *)&pSVar7[3].vz;
+    } while (0 < iVar6);
   }
   return;
 }
@@ -220,24 +130,24 @@ void EVENT_ResetAllOneTimeVariables(void)
 
 {
   int iVar1;
-  SignalResetStruct *pSVar2;
+  FontChar *pFVar2;
   int iVar3;
 
   iVar3 = 0;
   if (NumSignalsToReset != 0)
   {
-    pSVar2 = &ResetSignalArray;
+    pFVar2 = fontTracker.font_buffer + 0x28;
     do
     {
-      iVar1 = pSVar2->timeLeft + -1;
-      if ((0 < pSVar2->timeLeft) && (pSVar2->timeLeft = iVar1, iVar1 == 0))
+      iVar1 = *(int *)&pFVar2->c + -1;
+      if ((0 < *(int *)&pFVar2->c) && (*(int *)&pFVar2->c = iVar1, iVar1 == 0))
       {
         NumSignalsToReset = NumSignalsToReset + -1;
-        pSVar2->mSignal->flags = pSVar2->mSignal->flags & 0xfffe;
-        pSVar2->timeLeft = 0;
+        *(ushort *)(*(int *)pFVar2 + 6) = *(ushort *)(*(int *)pFVar2 + 6) & 0xfffe;
+        *(undefined4 *)&pFVar2->c = 0;
       }
       iVar3 = iVar3 + 1;
-      pSVar2 = pSVar2 + 1;
+      pFVar2 = (FontChar *)&pFVar2[1].y;
     } while (iVar3 < 0x10);
   }
   return;
@@ -274,23 +184,23 @@ void EVENT_ResetAllOneTimeVariables(void)
 void EVENT_AddSignalToReset(_MultiSignal *mSignal)
 
 {
-  SignalResetStruct *pSVar1;
+  FontChar *pFVar1;
   int iVar2;
 
   iVar2 = 0;
   if (NumSignalsToReset < 0x10)
   {
-    pSVar1 = &ResetSignalArray;
-    while (iVar2 = iVar2 + 1, pSVar1->timeLeft != 0)
+    pFVar1 = fontTracker.font_buffer + 0x28;
+    while (iVar2 = iVar2 + 1, *(int *)&pFVar1->c != 0)
     {
-      pSVar1 = pSVar1 + 1;
+      pFVar1 = (FontChar *)&pFVar1[1].y;
       if (0xf < iVar2)
       {
         return;
       }
     }
-    *(undefined **)&pSVar1->timeLeft = &UNK_00000001;
-    pSVar1->mSignal = mSignal;
+    *(undefined **)&pFVar1->c = &UNK_00000001;
+    *(_MultiSignal **)pFVar1 = mSignal;
     NumSignalsToReset = NumSignalsToReset + 1;
   }
   return;
@@ -310,8 +220,8 @@ void EVENT_AddSignalToReset(_MultiSignal *mSignal)
 void HINT_ResetHint(void)
 
 {
-  memset(&gHintSystem, 0, 0x10);
-  return;
+  /* WARNING: Subroutine does not return */
+  memset(&fontTracker.font_buffer[0x3e].c, 0, 0x10);
 }
 
 // decompiled code
@@ -347,15 +257,20 @@ void HINT_StartHint(short hintNumber)
 {
   if ((GlobalSave->flags & 1U) == 0)
   {
-    gHintSystem.stringNumber = hintNumber + 0x37;
-    gHintSystem.flags = 3;
+    fontTracker.font_buffer[63].y = hintNumber + 0x37;
+    /* WARNING: Read-only address (ram,0x800d2afc) is written */
+    fontTracker.font_buffer[62]._4_2_ = 3;
+    /* WARNING: Read-only address (ram,0x800d2afe) is written */
     if (0x35 < (ushort)hintNumber)
     {
-      gHintSystem.stringNumber = 0x6c;
+      fontTracker.font_buffer[63].y = 0x6c;
     }
-    gHintSystem.fadeTimer = 0xf000;
-    gHintSystem.spawningUnitID = (gameTrackerX.playerInstance)->currentStreamUnitID;
-    gHintSystem.hintNumber = hintNumber;
+    /* WARNING: Read-only address (ram,0x800d2b00) is written */
+    /* WARNING: Read-only address (ram,0x800d2b04) is written */
+    fontTracker.font_buffer[64]._0_4_ = 0xf000;
+    fontTracker.font_buffer._388_4_ = *(undefined4 *)(DAT_800d0fd8 + 0x38);
+    /* WARNING: Read-only address (ram,0x800d2b08) is written */
+    fontTracker.font_buffer[63].x = hintNumber;
   }
   return;
 }
@@ -381,21 +296,26 @@ void HINT_StopHint(void)
 {
   uint uVar1;
 
-  uVar1 = gHintSystem._0_4_;
-  if ((gHintSystem._0_4_ & 1) == 0)
+  uVar1 = fontTracker.font_buffer._376_4_;
+  if ((fontTracker.font_buffer._376_4_ & 1) == 0)
   {
+    /* WARNING: Read-only address (ram,0x800d2afc) is written */
+    /* WARNING: Read-only address (ram,0x800d2b04) is written */
     return;
   }
-  if ((gHintSystem._0_4_ & 6) == 0)
+  if ((fontTracker.font_buffer._376_4_ & 6) == 0)
   {
-    gHintSystem._0_4_ = gHintSystem._0_4_ | 4;
+    /* WARNING: Read-only address (ram,0x800d2afc) is written */
+    fontTracker.font_buffer._376_4_ = fontTracker.font_buffer._376_4_ | 4;
     if ((uVar1 & 2) == 0)
     {
-      gHintSystem.fadeTimer = 0xf000;
+      fontTracker.font_buffer[64]._0_4_ = 0xf000;
       return;
     }
-    gHintSystem._0_4_ = uVar1 & 0xfffffffd | 4;
-    gHintSystem.fadeTimer = 0xf000 - gHintSystem.fadeTimer;
+    /* WARNING: Read-only address (ram,0x800d2afc) is written */
+    fontTracker.font_buffer._376_4_ = uVar1 & 0xfffffffd | 4;
+    fontTracker.font_buffer[64]._0_4_ = 0xf000 - fontTracker.font_buffer[64]._0_4_;
+    /* WARNING: Read-only address (ram,0x800d2b04) is written */
   }
   return;
 }
@@ -412,7 +332,7 @@ void HINT_StopHint(void)
 void HINT_KillSpecificHint(short hintNumber)
 
 {
-  if (gHintSystem.hintNumber == hintNumber)
+  if (fontTracker.font_buffer[63].x == hintNumber)
   {
     HINT_StopHint();
   }
@@ -441,9 +361,9 @@ long HINT_GetCurrentHint(void)
   long lVar1;
 
   lVar1 = -1;
-  if ((gHintSystem.flags & 1U) != 0)
+  if ((fontTracker.font_buffer[62]._4_2_ & 1) != 0)
   {
-    lVar1 = (long)gHintSystem.hintNumber;
+    lVar1 = (long)fontTracker.font_buffer[63].x;
   }
   return lVar1;
 }
@@ -472,9 +392,7 @@ long HINT_GetCurrentHint(void)
 /* end block 3 */
 // End Line: 747
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
-
-void EVENT_ProcessTimers(void)
+void LOAD_PlayXA(int number)
 
 {
   long lVar1;
@@ -484,40 +402,42 @@ void EVENT_ProcessTimers(void)
   int iVar4;
   int iVar5;
 
-  if (numActiveEventTimers != 0)
+  if (PTR_800d44f8 != (_Instance *)0x0)
   {
     iVar5 = 0;
     iVar4 = 0;
     do
     {
-      timer = (EventTimer *)((int)&eventTimerArray.field_0x0 + iVar4);
-      uVar2 = timer->field_0x0;
+      timer = (EventTimer *)((int)&EventTimer_800d42a0.nextEventIndex + iVar4);
+      uVar2 = timer->flags;
       if ((uVar2 & 1) != 0)
       {
-        if ((uint)((int)uVar2 >> 1) < gameTrackerX.timeMult)
+        if ((uint)((int)uVar2 >> 1) < fontTracker.font_buffer._844_4_)
         {
-          timer->field_0x0 = uVar2 & 1;
+          timer->flags = uVar2 & 1;
         }
         else
         {
-          timer->field_0x0 = uVar2 & 1 | (((int)uVar2 >> 1) - gameTrackerX.timeMult) * 2;
+          timer->flags = uVar2 & 1 | (((int)uVar2 >> 1) - fontTracker.font_buffer._844_4_) * 2;
         }
-        if ((int)timer->field_0x0 >> 1 < 1)
+        if (timer->flags >> 1 < 1)
         {
-          iVar3 = *(int *)((int)&eventTimerArray.actionScript + iVar4);
-          currentEventInstance = *(Event **)((int)&eventTimerArray.event + iVar4);
-          timer->field_0x0 = timer->field_0x0 & 1;
+          iVar3 = *(int *)((int)&EventTimer_800d42bc.time + iVar4);
+          EventTimer_800d4214.time = *(long *)((int)&EventTimer_800d42bc.flags + iVar4);
+          timer->flags = timer->flags & 1;
+          /* WARNING: Read-only address (ram,0x800d4218) is written */
           *(ushort *)(iVar3 + 2) = *(ushort *)(iVar3 + 2) & 0xfffe;
           EVENT_RemoveTimer(timer);
-          CurrentPuzzleLevel = *(Level **)((int)&eventTimerArray.level + iVar4);
-          EventCurrentEventIndex = *(long *)((int)&eventTimerArray.nextEventIndex + iVar4);
-          EventAbortLine = 0;
-          lVar1 = EVENT_DoAction(*(Event **)((int)&eventTimerArray.event + iVar4),
-                                 *(ScriptPCode **)((int)&eventTimerArray.actionScript + iVar4),
-                                 *(short **)((int)&eventTimerArray.scriptPos + iVar4));
-          if ((lVar1 != 0) && (EventCurrentEventIndex != -1))
+          EventTimer_800d42a0.level = *(Level **)((int)&EventTimer_800d42bc.actionScript + iVar4);
+          DAT_800d1024 = *(int *)((int)&EventTimer_800d42bc.scriptPos + iVar4);
+          DAT_800d1018 = 0;
+          /* WARNING: Read-only address (ram,0x800d42b4) is written */
+          lVar1 = EVENT_DoAction(*(Event **)((int)&EventTimer_800d42bc.flags + iVar4),
+                                 *(ScriptPCode **)((int)&EventTimer_800d42bc.time + iVar4),
+                                 *(short **)((int)&EventTimer_800d42bc.event + iVar4));
+          if ((lVar1 != 0) && (DAT_800d1024 != -1))
           {
-            EVENT_Process(*(Event **)((int)&eventTimerArray.event + iVar4), EventCurrentEventIndex);
+            EVENT_Process(*(Event **)((int)&EventTimer_800d42bc.flags + iVar4), DAT_800d1024);
           }
         }
       }
@@ -564,58 +484,13 @@ void EVENT_ProcessTimers(void)
 void EVENT_ProcessHints(void)
 
 {
-  bool bVar1;
-  int len;
-  long y;
   char acStack136[128];
 
-  if ((gHintSystem.flags & 1U) != 0)
+  if ((fontTracker.font_buffer[62]._4_2_ & 1) != 0)
   {
-    localstr_get((int)gHintSystem.stringNumber);
+    localstr_get((int)fontTracker.font_buffer[63].y);
+    /* WARNING: Subroutine does not return */
     sprintf(acStack136, (char *)&PTR_LAB_000a7324_1_800cf54c);
-    if ((gHintSystem.flags & 2U) == 0)
-    {
-      y = 200;
-      if ((gHintSystem.flags & 4U) != 0)
-      {
-        y = 0xfc - (gHintSystem.fadeTimer * 0x34) / 0xf000;
-      }
-    }
-    else
-    {
-      y = (gHintSystem.fadeTimer * 0x34) / 0xf000 + 200;
-    }
-    FONT_FontPrintCentered(acStack136, y);
-    FONT_FontPrintCentered(&DAT_800cf550, y);
-    len = FONT_GetStringWidth(acStack136);
-    DisplayHintBox(len, y);
-    if ((gHintSystem.fadeTimer != 0) &&
-        (bVar1 = (uint)gHintSystem.fadeTimer <= gameTrackerX.timeMult,
-         gHintSystem.fadeTimer = gHintSystem.fadeTimer - gameTrackerX.timeMult, bVar1))
-    {
-      gHintSystem.fadeTimer = 0;
-      if ((gHintSystem.flags & 2U) == 0)
-      {
-        if ((gHintSystem.flags & 4U) != 0)
-        {
-          gHintSystem.flags = 0;
-          gHintSystem.hintNumber = -1;
-          gHintSystem.stringNumber = -1;
-        }
-      }
-      else
-      {
-        gHintSystem.flags = gHintSystem.flags & 0xfffd;
-      }
-    }
-    if (gHintSystem.spawningUnitID != (gameTrackerX.playerInstance)->currentStreamUnitID)
-    {
-      HINT_StopHint();
-    }
-    if ((gameTrackerX.gameFlags & 0x10U) != 0)
-    {
-      HINT_StopHint();
-    }
   }
   return;
 }
@@ -652,31 +527,29 @@ void EVENT_ProcessHints(void)
 /* end block 3 */
 // End Line: 1060
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
-
-EventTimer *EVENT_GetNextTimer(void)
+void EVENT_UpdateResetSignalArrayAndWaterMovement(Level *oldLevel, Level *newLevel, long sizeOfLevel)
 
 {
-  EventTimer *pEVar1;
+  uint *puVar1;
   int iVar2;
 
-  if (numActiveEventTimers < 0x18)
+  if ((int)PTR_800d44f8 < 0x18)
   {
-    pEVar1 = &eventTimerArray;
+    puVar1 = (uint *)&EventTimer_800d42a0.nextEventIndex;
     iVar2 = 0x18;
     do
     {
       iVar2 = iVar2 + -1;
-      if ((pEVar1->field_0x0 & 1) == 0)
+      if ((*puVar1 & 1) == 0)
       {
-        numActiveEventTimers = numActiveEventTimers + 1;
-        pEVar1->field_0x0 = pEVar1->field_0x0 & 0xfffffffe | 1;
-        return pEVar1;
+        PTR_800d44f8 = (_Instance *)((int)&(PTR_800d44f8->node).prev + 1);
+        *puVar1 = *puVar1 & 0xfffffffe | 1;
+        return;
       }
-      pEVar1 = pEVar1 + 1;
+      puVar1 = puVar1 + 6;
     } while (0 < iVar2);
   }
-  return (EventTimer *)0x0;
+  return;
 }
 
 // decompiled code
@@ -698,8 +571,9 @@ void EVENT_RemoveTimer(EventTimer *timer)
 {
   if (timer != (EventTimer *)0x0)
   {
-    numActiveEventTimers = numActiveEventTimers + -1;
-    timer->field_0x0 = timer->field_0x0 & 0xfffffffe;
+    fontTracker.font_buffer[24]._0_4_ = fontTracker.font_buffer[24]._0_4_ + -1;
+    /* WARNING: Read-only address (ram,0x800d2a14) is written */
+    timer->flags = timer->flags & 0xfffffffe;
   }
   return;
 }
@@ -718,9 +592,10 @@ void EVENT_RemoveTimer(EventTimer *timer)
 void EVENT_InitTimers(void)
 
 {
-  numActiveEventTimers = 0;
+  /* WARNING: Read-only address (ram,0x800d2a14) is written */
+  fontTracker.font_buffer[24]._0_4_ = 0;
+  /* WARNING: Subroutine does not return */
   memset(&eventTimerArray, 0, 0x240);
-  return;
 }
 
 // decompiled code
@@ -746,19 +621,8 @@ void EVENT_InitTimers(void)
 void EVENT_InitTerrainMovement(void)
 
 {
-  WaterLevelProcess *__s;
-  int iVar1;
-
-  iVar1 = 0;
-  __s = &WaterLevelArray;
-  do
-  {
-    memset(__s, 0x1c, 0);
-    iVar1 = iVar1 + 1;
-    __s = __s + 1;
-  } while (iVar1 < 5);
-  WaterInUse = 0;
-  return;
+  /* WARNING: Subroutine does not return */
+  memset(&WaterLevelArray, 0x1c, 0);
 }
 
 // decompiled code
@@ -778,11 +642,16 @@ void EVENT_Init(void)
   EVENT_InitTerrainMovement();
   EVENT_InitTimers();
   HINT_ResetHint();
-  WaitingToLoadSound = 0x96000;
-  MoviePlayed = 0;
-  MovieToPlay = -1;
-  WaitingToLoadSFX = 0x96000;
-  WaitingForVoiceNumber = -1;
+  fontTracker.font_buffer._148_4_ = 0x96000;
+  fontTracker.font_buffer[38]._4_2_ = 0;
+  fontTracker.font_buffer[39].y = -1;
+  fontTracker.font_buffer[61]._2_4_ = 0x96000;
+  fontTracker.font_buffer[62]._0_4_ = 0xffffffff;
+  /* WARNING: Read-only address (ram,0x800d2af8) is written */
+  /* WARNING: Read-only address (ram,0x800d2a18) is written */
+  /* WARNING: Read-only address (ram,0x800d2af4) is written */
+  /* WARNING: Read-only address (ram,0x800d2a6c) is written */
+  /* WARNING: Read-only address (ram,0x800d2a70) is written */
   return;
 }
 
@@ -819,19 +688,19 @@ void EVENT_Init(void)
 WaterLevelProcess *EVENT_GetNextTerrainMove(void)
 
 {
-  WaterLevelProcess *pWVar1;
+  SVECTOR *pSVar1;
   int iVar2;
 
   iVar2 = 0;
-  pWVar1 = &WaterLevelArray;
+  pSVar1 = &WaterLevelArray;
   do
   {
     iVar2 = iVar2 + 1;
-    if ((pWVar1->flags & 1U) == 0)
+    if ((((WaterLevelProcess *)pSVar1)->flags & 1U) == 0)
     {
-      return pWVar1;
+      return (WaterLevelProcess *)pSVar1;
     }
-    pWVar1 = pWVar1 + 1;
+    pSVar1 = (SVECTOR *)((WaterLevelProcess *)pSVar1 + 1);
   } while (iVar2 < 5);
   return (WaterLevelProcess *)0x0;
 }
@@ -882,46 +751,46 @@ void EVENT_ProcessMovingWater(void)
   short sVar1;
   bool bVar2;
   int iVar3;
-  long *plVar4;
-  WaterLevelProcess *pWVar5;
+  int *piVar4;
+  SVECTOR *pSVar5;
   int iVar6;
 
   bVar2 = false;
   if (WaterInUse != 0)
   {
-    pWVar5 = &WaterLevelArray;
+    pSVar5 = &WaterLevelArray;
     iVar6 = 5;
-    plVar4 = &WaterLevelArray.maxSteps;
+    piVar4 = (int *)&SVECTOR_800d2754.vz;
     do
     {
-      if ((pWVar5->flags & 1U) != 0)
+      if ((*(uint *)pSVar5 & 1) != 0)
       {
-        iVar3 = plVar4[1] + gameTrackerX.timeMult;
-        plVar4[1] = iVar3;
+        iVar3 = piVar4[1] + DAT_800d11ec;
+        piVar4[1] = iVar3;
         bVar2 = true;
-        if (*plVar4 < iVar3)
+        if (*piVar4 < iVar3)
         {
-          plVar4[1] = *plVar4;
+          piVar4[1] = *piVar4;
         }
-        iVar3 = (((int)*(short *)((int)plVar4 + -2) - (int)*(short *)(plVar4 + -1)) *
-                 (plVar4[1] >> 0xc)) /
-                (*plVar4 >> 0xc);
+        iVar3 = (((int)*(short *)((int)piVar4 + -2) - (int)*(short *)(piVar4 + -1)) *
+                 (piVar4[1] >> 0xc)) /
+                (*piVar4 >> 0xc);
         sVar1 = (short)iVar3;
-        *(short *)(plVar4[-4] + 0x10) = *(short *)((int)plVar4 + -6) + sVar1;
-        *(short *)(plVar4[-4] + 0x18) = *(short *)(plVar4 + -1) + sVar1;
-        if ((pWVar5->flags & 2U) != 0)
+        *(short *)(piVar4[-4] + 0x10) = *(short *)((int)piVar4 + -6) + sVar1;
+        *(short *)(piVar4[-4] + 0x18) = *(short *)(piVar4 + -1) + sVar1;
+        if ((*(uint *)pSVar5 & 2) != 0)
         {
-          *(int *)(*(int *)(plVar4[-3] + 8) + 0x38) = (int)*(short *)(plVar4 + -2) + iVar3;
-          ***(ushort ***)(plVar4[-3] + 8) = ***(ushort ***)(plVar4[-3] + 8) | 1;
+          *(int *)(*(int *)(piVar4[-3] + 8) + 0x38) = *(short *)(piVar4 + -2) + iVar3;
+          ***(ushort ***)(piVar4[-3] + 8) = ***(ushort ***)(piVar4[-3] + 8) | 1;
         }
-        if (plVar4[1] == *plVar4)
+        if (piVar4[1] == *piVar4)
         {
-          pWVar5->flags = 0;
+          *(uint *)pSVar5 = 0;
         }
       }
       iVar6 = iVar6 + -1;
-      plVar4 = plVar4 + 7;
-      pWVar5 = pWVar5 + 1;
+      piVar4 = piVar4 + 7;
+      pSVar5 = (SVECTOR *)&pSVar5[3].vz;
     } while (0 < iVar6);
   }
   if (!bVar2)
@@ -945,8 +814,10 @@ void EVENT_ProcessMovingWater(void)
 void EVENT_DoProcess(void)
 
 {
+  int in_a0;
+
   EVENT_ProcessMovingWater();
-  EVENT_ProcessTimers();
+  LOAD_PlayXA(in_a0);
   return;
 }
 
@@ -1061,7 +932,7 @@ void EVENT_BSPProcess(_StreamUnit *streamUnit)
           *(short *)(iVar4 + 0x16) = *(short *)(iVar4 + 0x16) + sVar7;
           *(short *)(iVar4 + 0x18) = *(short *)(iVar4 + 0x18) + sVar6;
           p_Var10->UnitChangeFlags = p_Var10->UnitChangeFlags | 2;
-          instance = (gameTrackerX.instanceList)->first;
+          instance = *(_Instance **)(DAT_800d0fe0 + 4);
           local_30.vx = sVar8;
           local_30.vy = sVar7;
           local_30.vz = sVar6;
@@ -1114,7 +985,7 @@ void EVENT_Process(Event *eventInstance, long startIndex)
   int iVar3;
 
   iVar3 = startIndex << 2;
-  currentEventInstance = eventInstance;
+  currentEventInstance._0_4_ = eventInstance;
   if (startIndex < (int)(uint)eventInstance->numActions)
   {
     do
@@ -1200,7 +1071,7 @@ void EVENT_ProcessPuppetShow(Event *eventInstance, long startIndex)
   if ((eventInstance->actionList[startIndex]->conditionBits & 2) != 0)
   {
     EventJustRecievedTimer = 0;
-    currentEventInstance = eventInstance;
+    currentEventInstance._0_4_ = eventInstance;
     return;
   }
   EventCurrentEventIndex = startIndex + 1;
@@ -1208,19 +1079,17 @@ void EVENT_ProcessPuppetShow(Event *eventInstance, long startIndex)
   {
     EventCurrentEventIndex = -1;
   }
+  currentEventInstance._0_4_ = eventInstance;
   if (eventInstance->conditionalList[startIndex] == (ScriptPCode *)0x0)
   {
-    currentEventInstance = eventInstance;
     if ((eventInstance->actionList[startIndex]->conditionBits & 2) != 0)
       goto LAB_80061390;
     actionScript = eventInstance->actionList[startIndex];
-    currentEventInstance = eventInstance;
   }
   else
   {
     EventAbortLine = 0;
     CurrentEventLine = 0;
-    currentEventInstance = eventInstance;
     lVar2 = EVENT_IsConditionTrue(eventInstance, eventInstance->conditionalList[startIndex]);
     if (lVar2 == 0)
     {
@@ -1274,6 +1143,8 @@ LAB_80061390:
 /* end block 2 */
 // End Line: 2032
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void EVENT_ProcessEvents(EventPointers *eventPointers, Level *level)
 
 {
@@ -1283,7 +1154,7 @@ void EVENT_ProcessEvents(EventPointers *eventPointers, Level *level)
 
   iVar1 = 0;
   pEVar2 = eventPointers;
-  CurrentPuzzleLevel = level;
+  _CurrentPuzzleLevel = level;
   if (0 < eventPointers->numPuzzles)
   {
     do
@@ -1304,11 +1175,13 @@ void EVENT_ProcessEvents(EventPointers *eventPointers, Level *level)
       pEVar2 = (EventPointers *)pEVar2->eventInstances;
     } while (iVar1 < eventPointers->numPuzzles);
   }
-  if ((int)MovieToPlay != -1)
+  if ((int)fontTracker.font_buffer[39].y != -1)
   {
-    CINE_PlayIngame((int)MovieToPlay);
-    MovieToPlay = -1;
-    MoviePlayed = 1;
+    CINE_PlayIngame((int)fontTracker.font_buffer[39].y);
+    /* WARNING: Read-only address (ram,0x800d2a70) is written */
+    fontTracker.font_buffer[39].y = -1;
+    /* WARNING: Read-only address (ram,0x800d2a6c) is written */
+    fontTracker.font_buffer[38]._4_2_ = 1;
   }
   return;
 }
@@ -1342,14 +1215,19 @@ void EVENT_ProcessEvents(EventPointers *eventPointers, Level *level)
 /* end block 2 */
 // End Line: 2111
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 long EVENT_DoAction(Event *eventInstance, ScriptPCode *actionScript, short *scriptData)
 
 {
   long lVar1;
   short *psVar2;
-  Level *pLVar3;
-  EventTimer *pEVar4;
+  uint uVar3;
+  Level *codeStream;
+  uint *puVar4;
   int iVar5;
+  _PCodeStack *stack;
+  long *operateOnStack;
   long lVar6;
   _PCodeStack local_4a8;
   int local_20[2];
@@ -1357,41 +1235,39 @@ long EVENT_DoAction(Event *eventInstance, ScriptPCode *actionScript, short *scri
   local_4a8.topOfStack = 0;
   EventJustRecievedTimer = 0;
   lVar6 = 1;
-  currentActionScript = actionScript;
-  EventAbortedPosition = scriptData;
-  if ((((actionScript->conditionBits & 1) == 0) &&
-       (lVar6 = 1, currentActionScript = actionScript, EventAbortedPosition = scriptData,
-        scriptData != (short *)0x0)) &&
-      (lVar6 = 1, currentActionScript = actionScript, EventAbortedPosition = scriptData,
-       EventAbortLine == 0))
+  currentEventInstance._4_4_ = actionScript;
+  EventAbortedPosition._0_4_ = scriptData;
+  if ((((actionScript->conditionBits & 1) == 0) && (lVar6 = 1, scriptData != (short *)0x0)) &&
+      (lVar6 = 1, EventAbortLine == 0))
   {
     lVar6 = 1;
-    currentActionScript = actionScript;
-    EventAbortedPosition = scriptData;
     do
     {
-      scriptData = EVENT_ParseOpcode(&local_4a8, scriptData, local_20);
-      if (((EventAbortLine != 0) && (EventJustRecievedTimer == 0)) &&
-          (pEVar4 = EVENT_GetNextTimer(), psVar2 = EventAbortedPosition,
-           lVar1 = EventCurrentEventIndex, pEVar4 != (EventTimer *)0x0))
+      stack = &local_4a8;
+      operateOnStack = local_20;
+      codeStream = (Level *)EVENT_ParseOpcode(stack, scriptData, operateOnStack);
+      if (((EventAbortLine != 0) &&
+           (puVar4 = (uint *)(int)EventJustRecievedTimer, puVar4 == (uint *)0x0)) &&
+          (EVENT_UpdateResetSignalArrayAndWaterMovement((Level *)stack, (Level *)scriptData, (long)operateOnStack),
+           psVar2 = EventAbortedPosition._0_4_, lVar1 = EventCurrentEventIndex, puVar4 != (uint *)0x0))
       {
         lVar6 = 0;
-        pEVar4->event = eventInstance;
-        pEVar4->actionScript = actionScript;
-        pEVar4->field_0x0 = pEVar4->field_0x0 & 1;
-        pEVar4->scriptPos = psVar2;
-        pLVar3 = CurrentPuzzleLevel;
+        *(Event **)(puVar4 + 1) = eventInstance;
+        *(ScriptPCode **)(puVar4 + 2) = actionScript;
+        *puVar4 = *puVar4 & 1;
+        *(short **)(puVar4 + 3) = psVar2;
+        uVar3 = _CurrentPuzzleLevel;
         actionScript->conditionBits = actionScript->conditionBits | 1;
-        pEVar4->level = pLVar3;
-        pEVar4->nextEventIndex = lVar1;
+        puVar4[4] = uVar3;
+        puVar4[5] = lVar1;
       }
       if (((local_20[0] != 0) && (EventAbortLine == 0)) &&
           (iVar5 = local_4a8.topOfStack + -1, 0 < local_4a8.topOfStack))
       {
         local_4a8.topOfStack = iVar5;
-        EVENT_ExecuteActionCommand(local_4a8.stack + iVar5, (StackType *)0x0, &local_4a8, scriptData);
+        EVENT_ExecuteActionCommand(local_4a8.stack + iVar5, (StackType *)0x0, &local_4a8, (short *)codeStream);
       }
-    } while ((scriptData != (short *)0x0) && (EventAbortLine == 0));
+    } while ((codeStream != (Level *)0x0) && (scriptData = (short *)codeStream, EventAbortLine == 0));
   }
   return lVar6;
 }
@@ -1432,7 +1308,7 @@ long EVENT_IsConditionTrue(Event *eventInstance, ScriptPCode *conditionScript)
 
   local_4a8.topOfStack = 0;
   codeStream = conditionScript->data;
-  currentActionScript = (ScriptPCode *)0x0;
+  currentEventInstance._4_4_ = 0;
   lVar2 = 0;
   while (true)
   {
@@ -1732,16 +1608,16 @@ void EVENT_AddGameObjectToStack(_PCodeStack *stack)
 void EVENT_AddPlayerObjectToStack(_PCodeStack *stack)
 
 {
-  _Instance *p_Var1;
+  undefined4 uVar1;
   StackType *pSVar2;
 
   if (stack->topOfStack < 0x20)
   {
     pSVar2 = stack->stack + stack->topOfStack;
     pSVar2->id = 2;
-    p_Var1 = gameTrackerX.playerInstance;
+    uVar1 = DAT_800d0fd8;
     *(undefined4 *)(pSVar2->data + 4) = 0xffffffff;
-    *(_Instance **)pSVar2->data = p_Var1;
+    *(undefined4 *)pSVar2->data = uVar1;
     stack->topOfStack = stack->topOfStack + 1;
   }
   return;
@@ -1817,108 +1693,103 @@ void EVENT_AddPlayerObjectToStack(_PCodeStack *stack)
 /* end block 2 */
 // End Line: 2741
 
-void EVENT_AddObjectToStack(_PCodeStack *stack, long item)
+void EVENT_ProcessEvents(EventPointers *eventPointers, Level *level)
 
 {
-  long lVar1;
-  Level *pLVar2;
-  undefined4 uVar3;
-  EventBasicObject *pEVar4;
+  undefined4 uVar1;
+  ushort *puVar2;
   StackType *stackEntry;
-  long lVar5;
+  long lVar3;
 
-  lVar1 = CurrentEventLine;
-  lVar5 = stack->topOfStack;
-  if (0x1f < lVar5)
+  uVar1 = DAT_800d1020;
+  lVar3 = eventPointers->numPuzzles;
+  if (0x1f < lVar3)
     goto LAB_80061bb4;
-  pEVar4 = currentEventInstance->instanceList[item];
-  stackEntry = stack->stack + lVar5;
-  switch ((int)(((uint)(ushort)pEVar4->id - 1) * 0x10000) >> 0x10)
+  puVar2 = *(ushort **)((int)level * 4 + *(int *)(EventTimer_800d4214.time + 0x10));
+  stackEntry = (StackType *)((int)eventPointers + lVar3 * 0x24 + 4);
+  switch ((int)(((uint)*puVar2 - 1) * 0x10000) >> 0x10)
   {
   case 0:
-    if ((pEVar4[1].id & 1U) == 0)
+    if ((puVar2[1] & 1) == 0)
     {
-      if (*(int *)(pEVar4 + 6) == 0)
+      if (*(int *)(puVar2 + 6) == 0)
       {
-        if (*(int *)(pEVar4 + 8) == 0)
+        if (*(int *)(puVar2 + 8) == 0)
           goto LAB_80061b9c;
         stackEntry->id = 4;
-        uVar3 = *(undefined4 *)(pEVar4 + 8);
+        uVar1 = *(undefined4 *)(puVar2 + 8);
       }
       else
       {
         stackEntry->id = 2;
-        uVar3 = *(undefined4 *)(pEVar4 + 6);
+        uVar1 = *(undefined4 *)(puVar2 + 6);
       }
     LAB_80061b54:
       *(undefined4 *)(stackEntry->data + 4) = 0xffffffff;
-      *(undefined4 *)stackEntry->data = uVar3;
+      *(undefined4 *)stackEntry->data = uVar1;
     }
     else
     {
       stackEntry->id = 0x1b;
       *(undefined2 *)stackEntry->data = 1;
-      uVar3 = *(undefined4 *)(pEVar4 + 8);
+      uVar1 = *(undefined4 *)(puVar2 + 8);
       *(undefined2 *)(stackEntry->data + 2) = 0xffff;
       *(undefined4 *)(stackEntry->data + 4) = 0xffffffff;
       *(undefined4 *)(stackEntry->data + 8) = 0xffffffff;
       *(undefined4 *)(stackEntry->data + 0xc) = 0xffffffff;
-      *(undefined4 *)(stackEntry->data + 0x10) = uVar3;
+      *(undefined4 *)(stackEntry->data + 0x10) = uVar1;
     }
     break;
   case 1:
     stackEntry->id = 0x12;
-    *(EventBasicObject **)stackEntry->data = pEVar4;
+    *(ushort **)stackEntry->data = puVar2;
     *(undefined4 *)(stackEntry->data + 0x18) = 0;
-    *(long *)(stackEntry->data + 0x1c) = lVar1;
+    *(undefined4 *)(stackEntry->data + 0x1c) = uVar1;
     break;
   case 2:
-    EVENT_WriteEventObject(stackEntry, *(long *)(pEVar4 + 2), *(Event **)(pEVar4 + 4), (int)pEVar4[1].id);
-    lVar5 = lVar5 + 1;
+    EVENT_WriteEventObject(stackEntry, *(long *)(puVar2 + 2), *(Event **)(puVar2 + 4), (int)(short)puVar2[1]);
+    lVar3 = lVar3 + 1;
     goto LAB_80061bb4;
   case 3:
-    if (*(int *)(pEVar4 + 4) == 0)
+    if (*(int *)(puVar2 + 4) == 0)
       goto LAB_80061b9c;
     stackEntry->id = 0x17;
-    *(undefined4 *)stackEntry->data = *(undefined4 *)(pEVar4 + 4);
-    uVar3 = *(undefined4 *)(pEVar4 + 6);
+    *(undefined4 *)stackEntry->data = *(undefined4 *)(puVar2 + 4);
+    uVar1 = *(undefined4 *)(puVar2 + 6);
     *(undefined4 *)(stackEntry->data + 8) = 0xffffffff;
-    *(undefined4 *)(stackEntry->data + 4) = uVar3;
+    *(undefined4 *)(stackEntry->data + 4) = uVar1;
     break;
   case 4:
     stackEntry->id = 1;
-    uVar3 = *(undefined4 *)(pEVar4 + 4);
+    uVar1 = *(undefined4 *)(puVar2 + 4);
     *(undefined4 *)(stackEntry->data + 4) = 0xffffffff;
-    *(undefined4 *)stackEntry->data = uVar3;
-    *(undefined4 *)(stackEntry->data + 8) = *(undefined4 *)(pEVar4 + 2);
+    *(undefined4 *)stackEntry->data = uVar1;
+    *(undefined4 *)(stackEntry->data + 8) = *(undefined4 *)(puVar2 + 2);
     break;
   case 5:
-    if (*(int *)(pEVar4 + 4) != 0)
+    if (*(int *)(puVar2 + 4) != 0)
     {
       stackEntry->id = 0x11;
-      uVar3 = *(undefined4 *)(pEVar4 + 4);
+      uVar1 = *(undefined4 *)(puVar2 + 4);
       goto LAB_80061b54;
     }
     goto LAB_80061b9c;
   case 6:
-    if (*(int *)(pEVar4 + 10) != 0)
+    if (*(int *)(puVar2 + 10) != 0)
     {
       stackEntry->id = 0x1a;
-      *(undefined4 *)stackEntry->data = *(undefined4 *)(pEVar4 + 10);
-      lVar5 = lVar5 + 1;
-      pLVar2 = STREAM_GetLevelWithID(*(long *)(pEVar4 + 2));
-      *(Level **)(stackEntry->data + 4) = pLVar2;
-      *(undefined4 *)(stackEntry->data + 8) = 0xffffffff;
-      goto LAB_80061bb4;
+      *(undefined4 *)stackEntry->data = *(undefined4 *)(puVar2 + 10);
+      /* WARNING: Subroutine does not return */
+      STREAM_GetLevelWithID(*(long *)(puVar2 + 2));
     }
   LAB_80061b9c:
     stackEntry->id = 6;
-    *(long *)stackEntry->data = item;
+    *(Level **)stackEntry->data = level;
     *(undefined4 *)(stackEntry->data + 4) = 0xffffffff;
   }
-  lVar5 = lVar5 + 1;
+  lVar3 = lVar3 + 1;
 LAB_80061bb4:
-  stack->topOfStack = lVar5;
+  eventPointers->numPuzzles = lVar3;
   return;
 }
 
@@ -2097,18 +1968,20 @@ void EVENT_ChangeOperandToNumber(StackType *operand, long item, long flags)
 /* end block 2 */
 // End Line: 3273
 
-void EVENT_ChangeOperandVector3d(StackType *operand, short x, short y, short z, long streamUnitID)
+long EVENT_WriteEventObject(StackType *stackEntry, long areaID, Event *event, long number)
 
 {
-  operand->id = 9;
-  *(short *)operand->data = x;
-  *(short *)(operand->data + 2) = y;
-  *(short *)(operand->data + 4) = z;
-  *(undefined2 *)(operand->data + 8) = 0xa0;
-  *(undefined2 *)(operand->data + 10) = 0xa0;
-  *(undefined2 *)(operand->data + 0xc) = 0xa0;
-  *(long *)(operand->data + 0x10) = streamUnitID;
-  return;
+  undefined4 in_stack_00000010;
+
+  stackEntry->id = 9;
+  *(short *)stackEntry->data = (short)areaID;
+  *(short *)(stackEntry->data + 2) = (short)event;
+  *(short *)(stackEntry->data + 4) = (short)number;
+  *(undefined2 *)(stackEntry->data + 8) = 0xa0;
+  *(undefined2 *)(stackEntry->data + 10) = 0xa0;
+  *(undefined2 *)(stackEntry->data + 0xc) = 0xa0;
+  *(undefined4 *)(stackEntry->data + 0x10) = in_stack_00000010;
+  return 0xa0;
 }
 
 // decompiled code
@@ -2125,7 +1998,7 @@ void EVENT_Addvector3dToStack(_PCodeStack *stack, short x, short y, short z, lon
 {
   if (stack->topOfStack < 0x20)
   {
-    EVENT_ChangeOperandVector3d(stack->stack + stack->topOfStack, x, y, z, streamUnitID);
+    EVENT_WriteEventObject(stack->stack + stack->topOfStack, (int)x, (Event *)(int)y, (int)z);
     stack->topOfStack = stack->topOfStack + 1;
   }
   return;
@@ -2200,22 +2073,24 @@ void EVENT_ChangeOperandRotation3d(StackType *operand, Rotation3d *rotation)
 long EVENT_AddSubListObjectToStack(_PCodeStack *stack, long listNumber)
 
 {
-  StackType *pSVar1;
+  int *piVar1;
+  StackType *pSVar2;
 
   if (stack->topOfStack < 0x20)
   {
-    pSVar1 = stack->stack + stack->topOfStack;
-    pSVar1->id = 0x16;
-    if ((&eventListNumInstances)[listNumber] < 1)
+    pSVar2 = stack->stack + stack->topOfStack;
+    pSVar2->id = 0x16;
+    piVar1 = (int *)(&fontTracker.font_buffer[0x19].y + listNumber * 2);
+    if (*piVar1 < 1)
     {
-      *(undefined4 *)pSVar1->data = 0;
+      *(undefined4 *)pSVar2->data = 0;
     }
     else
     {
-      *(_Instance **)pSVar1->data = (_Instance *)(&eventListArray2010 + listNumber * 10);
+      *(long *)pSVar2->data = listNumber * 0x28 + -0x7ff2d4f4;
     }
-    *(long *)(pSVar1->data + 4) = (&eventListNumInstances)[listNumber];
-    *(undefined4 *)(pSVar1->data + 8) = 0;
+    *(int *)(pSVar2->data + 4) = *piVar1;
+    *(undefined4 *)(pSVar2->data + 8) = 0;
     stack->topOfStack = stack->topOfStack + 1;
   }
   return 0;
@@ -2383,8 +2258,8 @@ long EVENT_TransformConstrictAttribute(_PCodeStack *stack, StackType *stackObjec
     }
     item_00 = (uint)(*(short *)(*(int *)stackObject->data + 0x150) < 2) ^ 1;
   }
+  /* WARNING: Subroutine does not return */
   EVENT_ChangeOperandToNumber(stackObject, item_00, 0);
-  return 1;
 }
 
 // decompiled code
@@ -2584,24 +2459,18 @@ long EVENT_TransformInstanceAttribute(_PCodeStack *stack, StackType *stackObject
 
 {
   bool bVar1;
-  short *psVar2;
-  MultiSpline *pMVar3;
+  MultiSpline *pMVar2;
   int item_00;
-  ulong item_01;
-  _StreamUnit *p_Var4;
-  long lVar5;
-  AniTex *pAVar6;
-  uint uVar7;
-  long item_02;
+  _StreamUnit *p_Var3;
+  long lVar4;
+  AniTex *pAVar5;
+  uint uVar6;
+  long lVar7;
   _Terrain *p_Var8;
-  short x;
-  short y;
-  short z;
   _Instance *Inst;
-  Rotation3d local_28;
 
   Inst = *(_Instance **)stackObject->data;
-  item_02 = 0;
+  lVar7 = 0;
   switch (item)
   {
   case 4:
@@ -2652,66 +2521,31 @@ long EVENT_TransformInstanceAttribute(_PCodeStack *stack, StackType *stackObject
   case 0xa4:
   case 0xa5:
     *(long *)(stackObject->data + 4) = item;
-    item_02 = 1;
+    lVar7 = 1;
     break;
   case 5:
-    psVar2 = (short *)INSTANCE_Query(Inst, 6);
-    if (psVar2 == (short *)0x0)
-    {
-      x = (Inst->position).x;
-      y = (Inst->position).y;
-      z = (Inst->position).z;
-    }
-    else
-    {
-      x = *psVar2;
-      y = psVar2[1];
-      z = psVar2[2];
-    }
-    EVENT_ChangeOperandVector3d(stackObject, x, y, z, Inst->currentStreamUnitID);
-    item_02 = 1;
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(Inst, 6);
   case 9:
-    psVar2 = (short *)INSTANCE_Query(Inst, 7);
-    if (psVar2 == (short *)0x0)
-    {
-      local_28.vx = (Inst->rotation).x;
-      local_28.vy = (Inst->rotation).y;
-      local_28.vz = (Inst->rotation).z;
-    }
-    else
-    {
-      local_28.vx = *psVar2;
-      local_28.vy = psVar2[1];
-      local_28.vz = psVar2[2];
-    }
-    local_28.errorx = 0x200;
-    local_28.errorz = 0x200;
-    local_28.errory = 0x200;
-    EVENT_ChangeOperandRotation3d(stackObject, &local_28);
-    item_02 = 1;
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(Inst, 7);
   case 0xc:
     stackObject->id = 0xf;
     *(_Instance **)stackObject->data = Inst;
-    pMVar3 = SCRIPT_GetMultiSpline(Inst, (ulong *)(stackObject->data + 0xc), (ulong *)(stackObject->data + 0x10));
-    item_02 = 1;
-    *(MultiSpline **)(stackObject->data + 4) = pMVar3;
+    pMVar2 = SCRIPT_GetMultiSpline(Inst, (ulong *)(stackObject->data + 0xc), (ulong *)(stackObject->data + 0x10));
+    lVar7 = 1;
+    *(MultiSpline **)(stackObject->data + 4) = pMVar2;
     *(undefined4 *)(stackObject->data + 0x14) = 0;
     *(undefined4 *)(stackObject->data + 8) = 0xffffffff;
     break;
   case 0x12:
-    item_01 = INSTANCE_Query(Inst, 9);
-    EVENT_ChangeOperandToNumber(stackObject, item_01, 1);
-    item_02 = 1;
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(Inst, 9);
   case 0x13:
-    item_01 = INSTANCE_Query(Inst, 10);
-    EVENT_ChangeOperandToNumber(stackObject, item_01, 3);
-    item_02 = 1;
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(Inst, 10);
   case 0x1d:
-    lVar5 = 0x13;
+    lVar4 = 0x13;
     if (Inst->object->animList == (_G2AnimKeylist_Type **)0x0)
     {
       return 0;
@@ -2720,37 +2554,33 @@ long EVENT_TransformInstanceAttribute(_PCodeStack *stack, StackType *stackObject
   case 0x21:
     stackObject->id = 0x14;
     *(_Instance **)stackObject->data = Inst;
-    item_02 = 1;
-    pAVar6 = Inst->object->modelList[(int)Inst->currentModel]->aniTextures;
+    lVar7 = 1;
+    pAVar5 = Inst->object->modelList[Inst->currentModel]->aniTextures;
     *(undefined4 *)(stackObject->data + 8) = 0xffffffff;
-    *(AniTex **)(stackObject->data + 4) = pAVar6;
+    *(AniTex **)(stackObject->data + 4) = pAVar5;
     break;
   case 0x2b:
     item_00 = Inst->attachedID;
     if ((item_00 == 0) &&
-        (p_Var4 = STREAM_GetStreamUnitWithID(Inst->currentStreamUnitID), item_00 = 0,
-         p_Var4 != (_StreamUnit *)0x0))
+        (p_Var3 = STREAM_GetStreamUnitWithID(Inst->currentStreamUnitID), item_00 = 0,
+         p_Var3 != (_StreamUnit *)0x0))
     {
-      p_Var8 = p_Var4->level->terrain;
-      item_00 = 0;
+      p_Var8 = p_Var3->level->terrain;
       if (Inst->bspTree < p_Var8->numBSPTrees)
       {
         item_00 = -(Inst->currentStreamUnitID * 0x100 + (int)p_Var8->BSPTreeArray[Inst->bspTree].ID);
       }
     }
+    /* WARNING: Subroutine does not return */
     EVENT_ChangeOperandToNumber(stackObject, item_00, 0);
-    item_02 = 1;
-    break;
   case 0x38:
-    item_01 = INSTANCE_Query(Inst, 0x1e);
-    EVENT_ChangeOperandToNumber(stackObject, item_01, 0);
-    item_02 = 1;
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(Inst, 0x1e);
   case 0x39:
-    lVar5 = 0x18;
+    lVar4 = 0x18;
   LAB_800624d4:
-    item_02 = 1;
-    stackObject->id = lVar5;
+    lVar7 = 1;
+    stackObject->id = lVar4;
     *(_Instance **)stackObject->data = Inst;
     *(undefined4 *)(stackObject->data + 4) = 0xffffffff;
     break;
@@ -2760,49 +2590,43 @@ long EVENT_TransformInstanceAttribute(_PCodeStack *stack, StackType *stackObject
     {
       Inst->flags = Inst->flags & 0xfffffffb;
     }
+    /* WARNING: Subroutine does not return */
     EVENT_ChangeOperandToNumber(stackObject, (uint)bVar1, 0);
-    item_02 = 1;
-    break;
   case 0x3f:
+    /* WARNING: Subroutine does not return */
     EVENT_ChangeOperandToNumber(stackObject, 1, 0);
-    item_02 = 1;
-    break;
   case 0x6a:
-    uVar7 = Inst->flags;
-    if ((int)uVar7 < 0)
+    uVar6 = Inst->flags;
+    if ((int)uVar6 < 0)
     {
-      Inst->flags = uVar7 & 0x7fffffff;
+      Inst->flags = uVar6 & 0x7fffffff;
     }
-    EVENT_ChangeOperandToNumber(stackObject, (uint)((int)uVar7 < 0), 0);
-    item_02 = 1;
-    break;
+    /* WARNING: Subroutine does not return */
+    EVENT_ChangeOperandToNumber(stackObject, (uint)((int)uVar6 < 0), 0);
   case 0x79:
     bVar1 = (Inst->flags & 8U) != 0;
     if (bVar1)
     {
       Inst->flags = Inst->flags & 0xfffffff7;
     }
+    /* WARNING: Subroutine does not return */
     EVENT_ChangeOperandToNumber(stackObject, (uint)bVar1, 0);
-    item_02 = 1;
-    break;
   case 0x7a:
     bVar1 = (Inst->flags & 0x10U) != 0;
     if (bVar1)
     {
       Inst->flags = Inst->flags & 0xffffffef;
     }
+    /* WARNING: Subroutine does not return */
     EVENT_ChangeOperandToNumber(stackObject, (uint)bVar1, 0);
-    item_02 = 1;
-    break;
   case 0x7d:
     bVar1 = (Inst->flags2 & 0x10000U) != 0;
     if (bVar1)
     {
       Inst->flags2 = Inst->flags2 & 0xfffeffff;
     }
+    /* WARNING: Subroutine does not return */
     EVENT_ChangeOperandToNumber(stackObject, (uint)bVar1, 0);
-    item_02 = 1;
-    break;
   case 0x7e:
     stackObject->id = 0x1b;
     *(_Instance **)(stackObject->data + 0x10) = Inst;
@@ -2815,10 +2639,11 @@ long EVENT_TransformInstanceAttribute(_PCodeStack *stack, StackType *stackObject
     item_00 = SOUND_IsInstanceSoundLoaded(Inst->object->soundData, *(long *)(stackObject->data + 4));
     if (item_00 == 0)
     {
-      if (0 < (int)(WaitingToLoadSound - gameTrackerX.timeMult))
+      /* WARNING: Read-only address (ram,0x800d2a18) is written */
+      if (0 < fontTracker.font_buffer._148_4_ - DAT_800d11ec)
       {
         EventAbortLine = 1;
-        WaitingToLoadSound = WaitingToLoadSound - gameTrackerX.timeMult;
+        fontTracker.font_buffer._148_4_ = fontTracker.font_buffer._148_4_ - DAT_800d11ec;
         return 1;
       }
     }
@@ -2829,81 +2654,47 @@ long EVENT_TransformInstanceAttribute(_PCodeStack *stack, StackType *stackObject
         return 1;
       }
     }
-    WaitingToLoadSound = 0x96000;
-    item_02 = 1;
+    /* WARNING: Read-only address (ram,0x800d2a18) is written */
+    fontTracker.font_buffer._148_4_ = 0x96000;
+    lVar7 = 1;
     break;
   case 0x89:
-    item_01 = INSTANCE_Query(Inst, 0x24);
-    EVENT_ChangeOperandToNumber(stackObject, item_01, 3);
-    item_02 = 1;
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(Inst, 0x24);
   case 0x8b:
   case 0xa6:
-    item_01 = INSTANCE_Query(Inst, 0);
-    EVENT_ChangeOperandToNumber(stackObject, item_01 >> 0x1e & 1, 0);
-    item_02 = 1;
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(Inst, 0);
   case 0x92:
+    /* WARNING: Subroutine does not return */
     EVENT_ChangeOperandToNumber(stackObject, 0, 0);
-    item_02 = 1;
-    break;
   case 0x97:
+    /* WARNING: Subroutine does not return */
     EVENT_ChangeOperandToNumber(stackObject, Inst->currentStreamUnitID, 0);
-    item_02 = 1;
-    break;
   case 0x99:
+    /* WARNING: Subroutine does not return */
     EVENT_ChangeOperandToNumber(stackObject, (uint)(Inst->tface != (_TFace *)0x0), 0);
-    item_02 = 1;
-    break;
   case 0x9f:
-    item_01 = INSTANCE_Query(Inst, 0x2b);
-    EVENT_ChangeOperandToNumber(stackObject, item_01, 0);
-    item_02 = 1;
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(Inst, 0x2b);
   case 0xa0:
-    item_01 = INSTANCE_Query(Inst, 1);
-    EVENT_ChangeOperandToNumber(stackObject, (uint)((item_01 & 4) != 0), 0);
-    item_02 = 1;
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(Inst, 1);
   case 0xa1:
-    Inst = (_Instance *)INSTANCE_Query(Inst, 0x2c);
-    if (Inst == (_Instance *)0x0)
-    {
-      item_02 = 0;
-    }
-    else
-    {
-      item_01 = INSTANCE_Query(Inst, 1);
-      if ((item_01 & 0x20) != 0)
-      {
-        item_01 = INSTANCE_Query(Inst, 4);
-        if ((item_01 & 3) != 0)
-        {
-          return 1;
-        }
-        return 2;
-      }
-      item_02 = 3;
-    }
-    EVENT_ChangeOperandToNumber(stackObject, item_02, 0);
-    item_02 = 1;
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(Inst, 0x2c);
   case 0xa7:
-    item_01 = INSTANCE_Query(Inst, 0);
-    EVENT_ChangeOperandToNumber(stackObject, item_01 >> 0x1a & 1, 0);
-    item_02 = 1;
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(Inst, 0);
   case 0xa9:
-    item_01 = INSTANCE_Query(Inst, 0x1f);
-    EVENT_ChangeOperandToNumber(stackObject, item_01, 0);
-    item_02 = 1;
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(Inst, 0x1f);
   case 0xaa:
-    item_01 = INSTANCE_Query(Inst, 0x20);
-    EVENT_ChangeOperandToNumber(stackObject, item_01, 0);
-    item_02 = 1;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(Inst, 0x20);
   }
-  return item_02;
+  /* WARNING: Read-only address (ram,0x800d2a18) is written */
+  return lVar7;
 }
 
 // decompiled code
@@ -2950,10 +2741,11 @@ long EVENT_TransformSoundObjectAttribute(_PCodeStack *stack, SoundObject *soundO
     iVar1 = SOUND_IsInstanceSoundLoaded(*(uchar **)soundObject->data, soundObject->soundNumber);
     if (iVar1 == 0)
     {
-      if (0 < (int)(WaitingToLoadSFX - gameTrackerX.timeMult))
+      /* WARNING: Read-only address (ram,0x800d2af4) is written */
+      if (0 < fontTracker.font_buffer[61]._2_4_ - DAT_800d11ec)
       {
         EventAbortLine = 1;
-        WaitingToLoadSFX = WaitingToLoadSFX - gameTrackerX.timeMult;
+        fontTracker.font_buffer[61]._2_4_ = fontTracker.font_buffer[61]._2_4_ - DAT_800d11ec;
         return 1;
       }
     }
@@ -2964,7 +2756,8 @@ long EVENT_TransformSoundObjectAttribute(_PCodeStack *stack, SoundObject *soundO
         return 1;
       }
     }
-    WaitingToLoadSFX = 0x96000;
+    /* WARNING: Read-only address (ram,0x800d2af4) is written */
+    fontTracker.font_buffer[61]._2_4_ = 0x96000;
     lVar2 = 1;
   }
   else
@@ -2992,6 +2785,7 @@ long EVENT_TransformSoundObjectAttribute(_PCodeStack *stack, SoundObject *soundO
       }
     }
   }
+  /* WARNING: Read-only address (ram,0x800d2af4) is written */
   return lVar2;
 }
 
@@ -3140,6 +2934,8 @@ long EVENT_GetGameValue(GameObject *gameObject)
 /* end block 2 */
 // End Line: 4983
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 long EVENT_TransformGameAttribute(_PCodeStack *stack, StackType *stackObject, long item, short *codeStream)
 
 {
@@ -3148,22 +2944,20 @@ long EVENT_TransformGameAttribute(_PCodeStack *stack, StackType *stackObject, lo
   short sVar3;
   short sVar4;
   ushort uVar5;
-  Event *pEVar6;
-  ScriptPCode *pSVar7;
-  Level *pLVar8;
-  EventTimer *pEVar9;
-  ulong item_00;
+  uint uVar6;
+  uint uVar7;
+  uint *puVar8;
   int Data;
-  long item_01;
-  uint item_02;
+  long item_00;
+  uint item_01;
 
-  item_01 = 0;
+  item_00 = 0;
+  puVar8 = (uint *)switchdataD_80010738[item + -1];
   switch (item)
   {
   case 1:
-    EVENT_ChangeOperandToNumber(stackObject, (gameTrackerX.currentTime * 0x1e) / 1000, 0);
-    item_01 = 1;
-    break;
+    /* WARNING: Subroutine does not return */
+    EVENT_ChangeOperandToNumber(stackObject, (uint)(DAT_800d11d8 * 0x1e) / 1000, 0);
   case 2:
   case 0x58:
   case 0x59:
@@ -3182,44 +2976,29 @@ long EVENT_TransformGameAttribute(_PCodeStack *stack, StackType *stackObject, lo
   case 0x96:
   case 0x9c:
     *(long *)stackObject->data = item;
-    goto LAB_80062c60;
+    break;
+  default:
+    goto switchD_80062848_caseD_3;
   case 0x14:
-    item_00 = INSTANCE_Query(gameTrackerX.playerInstance, 0xb);
-    item_02 = item_00 >> 1 & 1;
-    Data = STREAM_IsMorphInProgress();
-    if (Data != 0)
-    {
-      item_02 = 0;
-    }
-    EVENT_ChangeOperandToNumber(stackObject, item_02, 0);
-    item_01 = 1;
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(DAT_800d0fd8, 0xb);
   case 0x15:
-    item_00 = INSTANCE_Query(gameTrackerX.playerInstance, 0xb);
-    item_02 = item_00 & 1;
-    Data = STREAM_IsMorphInProgress();
-    if (Data != 0)
-    {
-      item_02 = 0;
-    }
-    EVENT_ChangeOperandToNumber(stackObject, item_02, 0);
-    item_01 = 1;
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(DAT_800d0fd8, 0xb);
   case 0x1b:
-    item_02 = gameTrackerX.controlCommand[0][0];
-    if ((gameTrackerX.controlCommand[0][0] & 0x90U) == 0x90)
+    item_01 = DAT_800d0ff4;
+    if ((DAT_800d0ff4 & 0x90) == 0x90)
     {
-      item_02 = gameTrackerX.controlCommand[0][0] & 0xffffff6f;
+      item_01 = DAT_800d0ff4 & 0xffffff6f;
     }
-    EVENT_ChangeOperandToNumber(stackObject, item_02, 1);
-    item_01 = 1;
-    break;
+    /* WARNING: Subroutine does not return */
+    EVENT_ChangeOperandToNumber(stackObject, item_01, 1);
   case 0x31:
-    pEVar9 = EVENT_GetNextTimer();
-    pLVar8 = CurrentPuzzleLevel;
-    pSVar7 = currentActionScript;
-    pEVar6 = currentEventInstance;
-    if (pEVar9 == (EventTimer *)0x0)
+    EVENT_UpdateResetSignalArrayAndWaterMovement((Level *)0x0, (Level *)stackObject, item);
+    uVar7 = _CurrentPuzzleLevel;
+    uVar6 = currentEventInstance._4_4_;
+    item_01 = currentEventInstance._0_4_;
+    if (puVar8 == (uint *)0x0)
     {
       return 1;
     }
@@ -3231,106 +3010,91 @@ long EVENT_TransformGameAttribute(_PCodeStack *stack, StackType *stackObject, lo
     uVar5 = codeStream[1];
     EventAbortLine = 1;
     EventJustRecievedTimer = 1;
-    pEVar9->scriptPos = codeStream + 2;
-    pEVar9->field_0x0 = pEVar9->field_0x0 & 1 | (int)((uint)uVar5 << 0x10) >> 3;
-    pEVar9->actionScript = pSVar7;
-    pEVar9->event = pEVar6;
-    item_01 = EventCurrentEventIndex;
-    pSVar7->conditionBits = pSVar7->conditionBits | 1;
-    pEVar9->level = pLVar8;
-    pEVar9->nextEventIndex = item_01;
-    goto LAB_80062c60;
-  case 0x3d:
-    EVENT_ChangeOperandToNumber(stackObject, (int)gameTrackerX.timeOfDay, 0);
-    item_01 = 1;
+    *(short **)(puVar8 + 3) = codeStream + 2;
+    *puVar8 = *puVar8 & 1 | (int)((uint)uVar5 << 0x10) >> 3;
+    puVar8[2] = uVar6;
+    puVar8[1] = item_01;
+    item_00 = EventCurrentEventIndex;
+    *(ushort *)(uVar6 + 2) = *(ushort *)(uVar6 + 2) | 1;
+    puVar8[4] = uVar7;
+    puVar8[5] = item_00;
     break;
+  case 0x3d:
+    /* WARNING: Subroutine does not return */
+    EVENT_ChangeOperandToNumber(stackObject, (int)DAT_800d11c6, 0);
   case 0x42:
-    item_01 = 1;
     stackObject->id = 0x19;
     *(undefined4 *)stackObject->data = 0x800cfe90;
     *(undefined4 *)(stackObject->data + 8) = 0xffffffff;
-    break;
+    return 1;
   case 0x4a:
     if (codeStream != (short *)0x0)
     {
       MoveCodeStreamExtra = 2;
-      gameTrackerX.wipeTime = codeStream[2];
-      gameTrackerX.wipeType = codeStream[1];
-      gameTrackerX.maxWipeTime = gameTrackerX.wipeTime;
-      if (gameTrackerX.wipeTime < 0)
+      DAT_800d1078 = codeStream[2];
+      DAT_800d107c = codeStream[1];
+      DAT_800d107a = DAT_800d1078;
+      if (DAT_800d1078 < 0)
       {
-        gameTrackerX.maxWipeTime = -gameTrackerX.wipeTime;
+        DAT_800d107a = -DAT_800d1078;
       }
-      if (gameTrackerX.wipeType == 0xb)
+      if (DAT_800d107c == 0xb)
       {
-        if (gameTrackerX.wipeTime < 0)
+        if (DAT_800d1078 < 0)
         {
-          gameTrackerX.streamFlags = gameTrackerX.streamFlags | 0x2000000;
+          DAT_800d10f0 = DAT_800d10f0 | 0x2000000;
         }
         else
         {
-          gameTrackerX.streamFlags = gameTrackerX.streamFlags & 0xfdffffff;
+          DAT_800d10f0 = DAT_800d10f0 & 0xfdffffff;
         }
       }
       stack->topOfStack = stack->topOfStack + -1;
     }
-    goto LAB_80062c60;
+    break;
   case 0x51:
-    item_01 = 10;
+    item_00 = 10;
     Data = 0;
     goto LAB_80062b28;
   case 0x52:
-    item_01 = 0x2a;
+    item_00 = 0x2a;
     Data = 1;
   LAB_80062b28:
-    INSTANCE_Broadcast((_Instance *)0x0, item_01, (int)&DAT_0004000e, Data);
-    item_01 = 1;
+    INSTANCE_Broadcast((_Instance *)0x0, item_00, (int)&LAB_0004000c_2, Data);
     stack->topOfStack = stack->topOfStack + -1;
-    break;
+    return 1;
   case 0x5a:
     if (codeStream != (short *)0x0)
     {
       MoveCodeStreamExtra = 2;
-      sVar1 = codeStream[1];
-      sVar2 = codeStream[2];
-      Data = rand();
-      EVENT_ChangeOperandToNumber(stackObject, Data % ((int)sVar2 - (int)sVar1) + (int)sVar1, 0);
-      return 1;
+      /* WARNING: Subroutine does not return */
+      rand();
     }
-    goto LAB_80062c60;
+    break;
   case 0x78:
     Data = LOAD_IsXAInQueue();
+    /* WARNING: Subroutine does not return */
     EVENT_ChangeOperandToNumber(stackObject, (uint)(Data == 0), 0);
-    item_01 = 1;
-    break;
   case 0x86:
-    EVENT_ChangeOperandToNumber(stackObject, (uint)gameTrackerX.streamFlags >> 0x17 & 1, 0);
-    item_01 = 1;
-    break;
+    /* WARNING: Subroutine does not return */
+    EVENT_ChangeOperandToNumber(stackObject, DAT_800d10f0 >> 0x17 & 1, 0);
   case 0x91:
     stack->topOfStack = stack->topOfStack + -1;
     EVENT_AddShortPointerToStack(stack, &gEndGameNow);
-    item_01 = 1;
-    break;
+    return 1;
   case 0x9a:
-    item_00 = INSTANCE_Query(gameTrackerX.playerInstance, 0x29);
-    EVENT_ChangeOperandToNumber(stackObject, item_00, 3);
-    item_01 = 1;
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(DAT_800d0fd8, 0x29);
   case 0x9b:
-    item_00 = INSTANCE_Query(gameTrackerX.playerInstance, 0x2a);
-    EVENT_ChangeOperandToNumber(stackObject, item_00, 3);
-    item_01 = 1;
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(DAT_800d0fd8, 0x2a);
   case 0x9d:
-    item_01 = HINT_GetCurrentHint();
-    EVENT_ChangeOperandToNumber(stackObject, item_01, 0);
-    item_01 = 1;
-    break;
+    item_00 = HINT_GetCurrentHint();
+    /* WARNING: Subroutine does not return */
+    EVENT_ChangeOperandToNumber(stackObject, item_00, 0);
   case 0x9e:
-    EVENT_ChangeOperandToNumber(stackObject, gameTrackerX.streamFlags & 0x100000, 0);
-    item_01 = 1;
-    break;
+    /* WARNING: Subroutine does not return */
+    EVENT_ChangeOperandToNumber(stackObject, DAT_800d10f0 & 0x100000, 0);
   case 0xa2:
     if (codeStream != (short *)0x0)
     {
@@ -3343,10 +3107,10 @@ long EVENT_TransformGameAttribute(_PCodeStack *stack, StackType *stackObject, lo
       GAMEPAD_Shock((int)sVar1, (int)sVar2 << 0xc, (int)sVar4, (int)sVar3 << 0xc);
       return 1;
     }
-    goto LAB_80062c60;
+    break;
   case 0xa8:
     stack->topOfStack = stack->topOfStack + -1;
-    if ((gameTrackerX.debugFlags & 0x80000U) == 0)
+    if ((vmRealClock & 0x80000U) == 0)
     {
       return 1;
     }
@@ -3354,12 +3118,14 @@ long EVENT_TransformGameAttribute(_PCodeStack *stack, StackType *stackObject, lo
     if (Data != 0)
     {
       EventAbortLine = 1;
-      return 1;
+      item_00 = 1;
+      goto switchD_80062848_caseD_3;
     }
-  LAB_80062c60:
-    item_01 = 1;
   }
-  return item_01;
+  item_00 = 1;
+switchD_80062848_caseD_3:
+  /* WARNING: Read-only address (ram,0x800d0fd8) is written */
+  return item_00;
 }
 
 // decompiled code
@@ -3533,23 +3299,20 @@ long EVENT_TransformSavedEventAttribute(_PCodeStack *stack, StackType *stackObje
       pcVar3 = *(char **)stackObject->data;
       if (pcVar3 == (char *)0x0)
       {
+        /* WARNING: Subroutine does not return */
         EVENT_ChangeOperandToNumber(stackObject, 0, 0);
+      }
+      if (*pcVar3 == '\x02')
+      {
+        stack->topOfStack = stack->topOfStack + -1;
+        EVENT_AddShortPointerToStack(stack, (short *)(pcVar3 + uVar2 * 2 + 6));
         lVar1 = 1;
       }
       else
       {
-        if (*pcVar3 == '\x02')
-        {
-          stack->topOfStack = stack->topOfStack + -1;
-          EVENT_AddShortPointerToStack(stack, (short *)(pcVar3 + uVar2 * 2 + 6));
-          lVar1 = 1;
-        }
-        else
-        {
-          stack->topOfStack = stack->topOfStack + -1;
-          EVENT_AddCharPointerToStack(stack, pcVar3 + uVar2 + 5);
-          lVar1 = 1;
-        }
+        stack->topOfStack = stack->topOfStack + -1;
+        EVENT_AddCharPointerToStack(stack, pcVar3 + uVar2 + 5);
+        lVar1 = 1;
       }
     }
   }
@@ -3709,9 +3472,9 @@ long EVENT_TransformCameraObjectAttribute(_PCodeStack *stack, StackType *stackOb
       {
         if (item == 0x75)
         {
+          /* WARNING: Subroutine does not return */
           EVENT_ChangeOperandToNumber(stackObject,
                                       (uint)(((*(Camera **)stackObject->data)->data).Cinematic.cinema_done != 0), 0);
-          return 1;
         }
         return 0;
       }
@@ -3855,10 +3618,9 @@ long EVENT_TransformSplineAttribute(_PCodeStack *stack, StackType *stackObject, 
 long EVENT_TransformIntroAttribute(_PCodeStack *stack, StackType *stackObject, long item)
 
 {
-  short x;
-  short y;
-  short z;
-  _StreamUnit *p_Var1;
+  short sVar1;
+  short sVar2;
+  short sVar3;
   void *pointer;
   Rotation3d local_30;
 
@@ -3876,11 +3638,11 @@ long EVENT_TransformIntroAttribute(_PCodeStack *stack, StackType *stackObject, l
   case 5:
     if ((*(uint *)((int)pointer + 0x2c) & 0x4000) != 0)
     {
-      x = *(short *)((int)pointer + 0x20);
-      y = *(short *)((int)pointer + 0x22);
-      z = *(short *)((int)pointer + 0x24);
-      p_Var1 = STREAM_WhichUnitPointerIsIn(pointer);
-      EVENT_ChangeOperandVector3d(stackObject, x, y, z, p_Var1->StreamUnitID);
+      sVar1 = *(short *)((int)pointer + 0x20);
+      sVar2 = *(short *)((int)pointer + 0x22);
+      sVar3 = *(short *)((int)pointer + 0x24);
+      STREAM_WhichUnitPointerIsIn(pointer);
+      EVENT_WriteEventObject(stackObject, (int)sVar1, (Event *)(int)sVar2, (int)sVar3);
       return 1;
     }
   default:
@@ -3896,6 +3658,7 @@ long EVENT_TransformIntroAttribute(_PCodeStack *stack, StackType *stackObject, l
     EVENT_ChangeOperandRotation3d(stackObject, &local_30);
     break;
   case 0x3f:
+    /* WARNING: Subroutine does not return */
     EVENT_ChangeOperandToNumber(stackObject, 0, 0);
   }
   return 1;
@@ -3968,10 +3731,10 @@ long EVENT_ParseOperand2(StackType *operand2, long *error, long *trueValue)
 long EVENT_DoVMObjectAction(EventVmObject *vmobject, StackType *operand2)
 
 {
-  ushort uVar1;
   long table;
-  int iVar2;
-  _VMObject *p_Var3;
+  int iVar1;
+  StackType *stackObject;
+  short *in_a3;
   long local_18;
   uint local_14;
 
@@ -3981,17 +3744,18 @@ long EVENT_DoVMObjectAction(EventVmObject *vmobject, StackType *operand2)
   {
     return 0;
   }
-  table = EVENT_ParseOperand2(operand2, &local_18, (long *)&local_14);
-  iVar2 = vmobject->attribute;
-  if (iVar2 == 0xe)
+  stackObject = (StackType *)&local_18;
+  table = EVENT_ParseOperand2(operand2, (long *)stackObject, (long *)&local_14);
+  iVar1 = vmobject->attribute;
+  if (iVar1 == 0xe)
   {
     local_14 = (uint)(local_14 == 0);
   }
   else
   {
-    if (0xe < iVar2)
+    if (0xe < iVar1)
     {
-      if (iVar2 == 99)
+      if (iVar1 == 99)
       {
         if (table == -1)
         {
@@ -4017,7 +3781,7 @@ long EVENT_DoVMObjectAction(EventVmObject *vmobject, StackType *operand2)
         }
         return 0;
       }
-      if (iVar2 != 100)
+      if (iVar1 != 100)
       {
         return 0;
       }
@@ -4037,23 +3801,18 @@ long EVENT_DoVMObjectAction(EventVmObject *vmobject, StackType *operand2)
       }
       return 1;
     }
-    if (iVar2 != 0xd)
+    if (iVar1 != 0xd)
     {
       return 0;
     }
   }
   if (local_14 == 0)
   {
-    p_Var3 = vmobject->vmObjectPtr;
-    uVar1 = p_Var3->flags | 2;
+    vmobject->vmObjectPtr->flags = vmobject->vmObjectPtr->flags | 2;
+    return 1;
   }
-  else
-  {
-    p_Var3 = vmobject->vmObjectPtr;
-    uVar1 = p_Var3->flags & 0xfffd;
-  }
-  p_Var3->flags = uVar1;
-  return 1;
+  table = EVENT_TransformSavedEventAttribute((_PCodeStack *)operand2, stackObject, table, in_a3);
+  return table;
 }
 
 // decompiled code
@@ -4148,6 +3907,9 @@ long EVENT_DoGameAction(GameObject *gameObject, StackType *operand2)
   long modifier;
   short hintNumber;
   int iVar1;
+  long *error;
+  long *trueValue;
+  int in_a3;
   int local_20;
   long local_1c;
 
@@ -4155,7 +3917,9 @@ long EVENT_DoGameAction(GameObject *gameObject, StackType *operand2)
   local_1c = 1;
   if (gameObject->attribute != -1)
   {
-    modifier = EVENT_ParseOperand2(operand2, &local_20, &local_1c);
+    error = &local_20;
+    trueValue = &local_1c;
+    modifier = EVENT_ParseOperand2(operand2, error, trueValue);
     iVar1 = gameObject->attribute;
     if (iVar1 == 0x87)
     {
@@ -4193,7 +3957,7 @@ long EVENT_DoGameAction(GameObject *gameObject, StackType *operand2)
           }
           if (modifier == 2)
           {
-            GAMELOOP_SetGameTime(700);
+            FONT_SetColorIndexCol(700, (int)error, (int)trueValue, in_a3);
             return 1;
           }
           if (modifier < 3)
@@ -4202,19 +3966,19 @@ long EVENT_DoGameAction(GameObject *gameObject, StackType *operand2)
             {
               return 1;
             }
-            GAMELOOP_SetGameTime(600);
+            FONT_SetColorIndexCol(600, (int)error, (int)trueValue, in_a3);
             return 1;
           }
           if (modifier == 3)
           {
-            GAMELOOP_SetGameTime(0x708);
+            FONT_SetColorIndexCol(0x708, (int)error, (int)trueValue, in_a3);
             return 1;
           }
           if (modifier != 4)
           {
             return 1;
           }
-          GAMELOOP_SetGameTime(0x76c);
+          FONT_SetColorIndexCol(0x76c, (int)error, (int)trueValue, in_a3);
           return 1;
         }
         if (iVar1 != 0x76)
@@ -4234,16 +3998,16 @@ long EVENT_DoGameAction(GameObject *gameObject, StackType *operand2)
         {
           return 1;
         }
-        if ((gameTrackerX.debugFlags & 0x80000U) == 0)
+        if ((vmRealClock & 0x80000U) == 0)
         {
           return 1;
         }
-        if (WaitingForVoiceNumber == modifier)
+        if (fontTracker.font_buffer[62]._0_4_ == modifier)
         {
           iVar1 = VOICEXA_IsPlaying();
           if (iVar1 == 2)
           {
-            WaitingForVoiceNumber = -1;
+            fontTracker.font_buffer[62]._0_4_ = 0xffffffff;
             return 1;
           }
         }
@@ -4254,8 +4018,9 @@ long EVENT_DoGameAction(GameObject *gameObject, StackType *operand2)
           {
             LOAD_PlayXA(modifier);
             EventAbortLine = 1;
-            WaitingForVoiceNumber = modifier;
+            fontTracker.font_buffer[62]._0_4_ = modifier;
             return 1;
+            /* WARNING: Read-only address (ram,0x800d2af8) is written */
           }
         }
       }
@@ -4290,17 +4055,20 @@ long EVENT_DoGameAction(GameObject *gameObject, StackType *operand2)
           HINT_KillSpecificHint(hintNumber);
           return 1;
         }
-        MovieToPlay = hintNumber;
-        if (MoviePlayed != 0)
+        fontTracker.font_buffer[39].y = hintNumber;
+        if (fontTracker.font_buffer[38]._4_2_ != 0)
         {
-          MoviePlayed = 0;
-          MovieToPlay = -1;
+          fontTracker.font_buffer[38]._4_2_ = 0;
+          fontTracker.font_buffer[39].y = -1;
           return 1;
         }
       }
       EventAbortLine = 1;
     }
   }
+  /* WARNING: Read-only address (ram,0x800d2a6c) is written */
+  /* WARNING: Read-only address (ram,0x800d2a70) is written */
+  /* WARNING: Read-only address (ram,0x800d2af8) is written */
   return 1;
 }
 
@@ -4335,8 +4103,7 @@ long EVENT_DoSignalAction(SignalObject *signalObject, StackType *operand2)
        (EVENT_ParseOperand2(operand2, &lStack16, &local_c), signalObject->attribute == 0x1a)) &&
       (local_c != 0))
   {
-    COLLIDE_HandleSignal(gameTrackerX.playerInstance, signalObject->msignal->signalList,
-                         signalObject->msignal->numSignals, 0);
+    COLLIDE_HandleSignal(DAT_800d0fd8, signalObject->msignal->signalList, signalObject->msignal->numSignals, 0);
   }
   return 0;
 }
@@ -4363,19 +4130,23 @@ long EVENT_DoSignalAction(SignalObject *signalObject, StackType *operand2)
 long EVENT_TransformSignalAttribute(_PCodeStack *stack, StackType *stackObject, long item)
 
 {
+  long lVar1;
+
+  lVar1 = 0;
   if (item == 0x1a)
   {
     *(undefined4 *)(stackObject->data + 4) = 0x1a;
+    lVar1 = 1;
   }
   else
   {
-    if (item != 0x32)
+    if (item == 0x32)
     {
-      return 0;
+      /* WARNING: Subroutine does not return */
+      EVENT_ChangeOperandToNumber(stackObject, (uint) * (ushort *)(*(int *)stackObject->data + 6) & 1, 0);
     }
-    EVENT_ChangeOperandToNumber(stackObject, (uint) * (ushort *)(*(int *)stackObject->data + 6) & 1, 0);
   }
-  return 1;
+  return lVar1;
 }
 
 // decompiled code
@@ -4452,9 +4223,8 @@ long EVENT_TransformVector3dAttribute(_PCodeStack *stack, StackType *stackObject
   case 8:
     item_00 = (long)*(short *)(stackObject->data + 4);
   LAB_80063990:
+    /* WARNING: Subroutine does not return */
     EVENT_ChangeOperandToNumber(stackObject, item_00, 0);
-    item_00 = 1;
-    break;
   default:
     item_00 = 0;
     break;
@@ -4548,15 +4318,14 @@ long EVENT_DoInstanceAnimateTextureAction(InstanceAnimateTexture *instanceAniTex
       local_14 = local_14 ^ 1;
     case 0xd:
     case 0x29:
+      lVar2 = 1;
       if (local_14 == 0)
       {
         instanceAniTexture->instance->flags = instanceAniTexture->instance->flags | 0x80;
-        lVar2 = 1;
       }
       else
       {
         instanceAniTexture->instance->flags = instanceAniTexture->instance->flags & 0xffffff7f;
-        lVar2 = 1;
       }
       break;
     case 0xf:
@@ -4939,31 +4708,63 @@ long EVENT_DoAnimateAction(InstanceAnimate *instanceAnimate, StackType *operand2
 
   lVar3 = 0;
   local_1c = 1;
-  if (instanceAnimate->attribute == -1)
+  if (instanceAnimate->attribute != -1)
   {
-    return 0;
-  }
-  instance = instanceAnimate->instance;
-  lVar1 = EVENT_ParseOperand2(operand2, &lStack32, (long *)&local_1c);
-  sVar2 = (short)lVar1;
-  switch (instanceAnimate->attribute)
-  {
-  case 0xe:
-    local_1c = local_1c ^ 1;
-  case 0xd:
-  case 0x29:
-    if (local_1c == 0)
+    instance = instanceAnimate->instance;
+    lVar1 = EVENT_ParseOperand2(operand2, &lStack32, (long *)&local_1c);
+    sVar2 = (short)lVar1;
+    switch (instanceAnimate->attribute)
     {
-      Message = (undefined *)0x8000010;
-      Data = 0;
-    }
-    else
-    {
+    case 0xe:
+      local_1c = local_1c ^ 1;
+    case 0xd:
+    case 0x29:
+      if (local_1c == 0)
+      {
+        Message = (undefined *)0x8000010;
+        Data = 0;
+      }
+      else
+      {
+        if ((instance->aliasCommand).hostInstance == (_Instance *)0x0)
+        {
+          Data = SetAnimationInstanceSwitchData(instance, (int)(instance->aliasCommand).newanim,
+                                                (int)(instance->aliasCommand).newframe,
+                                                (int)(instance->aliasCommand).interpframes, 1);
+          Message = (undefined *)0x8000008;
+        }
+        else
+        {
+          Data = SetActionPlayHostAnimationData(instance, (instance->aliasCommand).hostInstance,
+                                                (int)(instance->aliasCommand).newanim,
+                                                (int)(instance->aliasCommand).newframe,
+                                                (int)(instance->aliasCommand).interpframes, 1);
+          Message = &DAT_00040003;
+        }
+      }
+      /* WARNING: Subroutine does not return */
+      INSTANCE_Post(instance, (int)Message, Data);
+    case 0xf:
+    case 0x28:
+      lVar3 = 0;
+      if (lVar1 != -1)
+      {
+        (instance->aliasCommand).newframe = sVar2;
+      }
+      break;
+    case 0x1e:
+      lVar3 = 1;
+      if (lVar1 != -1)
+      {
+        (instance->aliasCommand).newanim = sVar2;
+      }
+      break;
+    case 0x2a:
       if ((instance->aliasCommand).hostInstance == (_Instance *)0x0)
       {
         Data = SetAnimationInstanceSwitchData(instance, (int)(instance->aliasCommand).newanim,
                                               (int)(instance->aliasCommand).newframe,
-                                              (int)(instance->aliasCommand).interpframes, 1);
+                                              (int)(instance->aliasCommand).interpframes, 2);
         Message = (undefined *)0x8000008;
       }
       else
@@ -4971,94 +4772,53 @@ long EVENT_DoAnimateAction(InstanceAnimate *instanceAnimate, StackType *operand2
         Data = SetActionPlayHostAnimationData(instance, (instance->aliasCommand).hostInstance,
                                               (int)(instance->aliasCommand).newanim,
                                               (int)(instance->aliasCommand).newframe,
-                                              (int)(instance->aliasCommand).interpframes, 1);
+                                              (int)(instance->aliasCommand).interpframes, 2);
         Message = &DAT_00040003;
       }
-    }
-    INSTANCE_Post(instance, (int)Message, Data);
-    memset(&instance->aliasCommand, 0, 0xc);
-    lVar3 = 1;
-    break;
-  case 0xf:
-  case 0x28:
-    lVar3 = 0;
-    if (lVar1 != -1)
-    {
-      (instance->aliasCommand).newframe = sVar2;
-    }
-    break;
-  case 0x1e:
-    lVar3 = 1;
-    if (lVar1 != -1)
-    {
-      (instance->aliasCommand).newanim = sVar2;
-    }
-    break;
-  case 0x2a:
-    if ((instance->aliasCommand).hostInstance == (_Instance *)0x0)
-    {
-      Data = SetAnimationInstanceSwitchData(instance, (int)(instance->aliasCommand).newanim,
-                                            (int)(instance->aliasCommand).newframe,
-                                            (int)(instance->aliasCommand).interpframes, 2);
-      Message = (undefined *)0x8000008;
-    }
-    else
-    {
-      Data = SetActionPlayHostAnimationData(instance, (instance->aliasCommand).hostInstance,
-                                            (int)(instance->aliasCommand).newanim, (int)(instance->aliasCommand).newframe, (int)(instance->aliasCommand).interpframes, 2);
-      Message = &DAT_00040003;
-    }
-  LAB_800642e4:
-    INSTANCE_Post(instance, (int)Message, Data);
-    goto LAB_800642ec;
-  case 0x65:
-    if (operand2 != (StackType *)0x0)
-    {
-      if (operand2->id == 2)
+      /* WARNING: Subroutine does not return */
+      INSTANCE_Post(instance, (int)Message, Data);
+    case 0x65:
+      if (operand2 != (StackType *)0x0)
       {
-        (instance->aliasCommand).hostInstance = *(_Instance **)operand2->data;
+        if (operand2->id == 2)
+        {
+          (instance->aliasCommand).hostInstance = *(_Instance **)operand2->data;
+        }
+        else
+        {
+          EventAbortLine = 1;
+          lVar3 = 0;
+        }
+      }
+      break;
+    case 0x66:
+      lVar3 = 0;
+      if (lVar1 != -1)
+      {
+        (instance->aliasCommand).interpframes = sVar2;
+      }
+      break;
+    case 0x6b:
+      if ((instance->aliasCommand).hostInstance == (_Instance *)0x0)
+      {
+        Data = SetAnimationInstanceSwitchData(instance, (int)(instance->aliasCommand).newanim,
+                                              (int)(instance->aliasCommand).newframe,
+                                              (int)(instance->aliasCommand).interpframes, 0);
+        Message = (undefined *)0x8000008;
       }
       else
       {
-        EventAbortLine = 1;
-        lVar3 = 0;
+        Data = SetActionPlayHostAnimationData(instance, (instance->aliasCommand).hostInstance,
+                                              (int)(instance->aliasCommand).newanim,
+                                              (int)(instance->aliasCommand).newframe,
+                                              (int)(instance->aliasCommand).interpframes, 0);
+        Message = &DAT_00040003;
       }
+      /* WARNING: Subroutine does not return */
+      INSTANCE_Post(instance, (int)Message, Data);
+    case 0x84:
+      (instance->aliasCommand).speed = sVar2;
     }
-    break;
-  case 0x66:
-    lVar3 = 0;
-    if (lVar1 != -1)
-    {
-      (instance->aliasCommand).interpframes = sVar2;
-    }
-    break;
-  case 0x6b:
-    if ((instance->aliasCommand).hostInstance == (_Instance *)0x0)
-    {
-      Data = SetAnimationInstanceSwitchData(instance, (int)(instance->aliasCommand).newanim,
-                                            (int)(instance->aliasCommand).newframe,
-                                            (int)(instance->aliasCommand).interpframes, 0);
-      Message = (undefined *)0x8000008;
-    }
-    else
-    {
-      Data = SetActionPlayHostAnimationData(instance, (instance->aliasCommand).hostInstance,
-                                            (int)(instance->aliasCommand).newanim, (int)(instance->aliasCommand).newframe, (int)(instance->aliasCommand).interpframes, 0);
-      Message = &DAT_00040003;
-    }
-    INSTANCE_Post(instance, (int)Message, Data);
-    Data = (int)(instance->aliasCommand).speed;
-    if (0 < Data)
-    {
-      Message = (undefined *)0x40020;
-      goto LAB_800642e4;
-    }
-  LAB_800642ec:
-    memset(&instance->aliasCommand, 0, 0xc);
-    lVar3 = 1;
-    break;
-  case 0x84:
-    (instance->aliasCommand).speed = sVar2;
   }
   return lVar3;
 }
@@ -5184,21 +4944,15 @@ long EVENT_DoAnimateAction(InstanceAnimate *instanceAnimate, StackType *operand2
 long EVENT_DoInstanceAction(InstanceObject *instanceObject, StackType *operand2, short *codeStream)
 
 {
-  long lVar1;
-  Event *pEVar2;
-  ScriptPCode *pSVar3;
-  Level *pLVar4;
   uint type;
-  ulong uVar5;
-  EventTimer *pEVar6;
   int Data;
-  Intro *pIVar7;
+  Intro *pIVar1;
   code *Message;
   undefined *Message_00;
   uint Message_01;
   int y;
   _Instance *sender;
-  Object *pOVar8;
+  Object *pOVar2;
   long lStack40;
   uint local_24;
 
@@ -5214,19 +4968,19 @@ long EVENT_DoInstanceAction(InstanceObject *instanceObject, StackType *operand2,
   case 4:
     if (0xff < (int)type)
     {
-      INSTANCE_Post(sender, (int)&DAT_00040017, type - 0x100);
-      return 0;
+      /* WARNING: Subroutine does not return */
+      INSTANCE_Post(sender, (int)&LAB_00040014_3, type - 0x100);
     }
-    if (type - 1 < 7)
+    if (6 < type - 1)
     {
-      ScriptKillInstance(sender, type);
+      if (type == 0)
+      {
+        SAVE_UndestroyInstance(sender);
+        return 0;
+      }
       return 0;
     }
-    if (type != 0)
-    {
-      return 0;
-    }
-    SAVE_UndestroyInstance(sender);
+    ScriptKillInstance(sender, type);
     return 0;
   case 10:
     goto switchD_800643a4_caseD_a;
@@ -5239,52 +4993,40 @@ long EVENT_DoInstanceAction(InstanceObject *instanceObject, StackType *operand2,
       sender->flags2 = sender->flags2 & 0xdfffffff;
       sender->flags = type & 0xfffff7ff;
       sender->flags = type & 0xfffbf7ff;
-      if ((sender->object->oflags2 & 0x80000U) != 0)
-      {
-        type = sender->flags2 & 0xefffffff;
-        goto LAB_800645e8;
-      }
+      if ((sender->object->oflags2 & 0x80000U) == 0)
+        goto LAB_800645ec;
+      type = sender->flags2 & 0xefffffff;
     }
     else
     {
       sender->flags = sender->flags | 0x800;
       sender->flags2 = sender->flags2 | 0x20000000;
       sender->flags = sender->flags | 0x40000;
-      if ((sender->object->oflags2 & 0x80000U) != 0)
-      {
-        type = sender->flags2 | 0x10000000;
-      LAB_800645e8:
-        sender->flags2 = type;
-      }
+      if ((sender->object->oflags2 & 0x80000U) == 0)
+        goto LAB_800645ec;
+      type = sender->flags2 | 0x10000000;
     }
-    uVar5 = INSTANCE_Query(sender, 1);
-    if ((uVar5 & 0xe) == 0)
-    {
-      return 1;
-    }
-    Message_00 = &DAT_00040013;
-    type = local_24;
-  LAB_80064610:
-    INSTANCE_Post(sender, (int)Message_00, type);
-    return 1;
+    sender->flags2 = type;
+  LAB_800645ec:
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(sender, 1);
   case 0x14:
     local_24 = local_24 ^ 1;
   case 0x15:
     if (local_24 == 0)
     {
-      Message_00 = (undefined *)0x10002001;
-      type = 0;
+      Data = 0x10002001;
     }
     else
     {
-      Message_00 = (undefined *)0x10002002;
-      type = 0;
+      Data = 0x10002002;
     }
-    goto LAB_80064610;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Post(sender, Data, 0);
   case 0x20:
     if (type == 2)
     {
-      Message_00 = &DAT_00040012;
+      Message_00 = &LAB_00040010_2;
     }
     else
     {
@@ -5300,14 +5042,14 @@ long EVENT_DoInstanceAction(InstanceObject *instanceObject, StackType *operand2,
       {
         if (type != 3)
         {
-          if (type != 4)
+          if (type == 4)
           {
-            return 0;
+            /* WARNING: Subroutine does not return */
+            INSTANCE_Post(sender, (int)&DAT_00040005, (int)&DAT_0000a000);
           }
-          INSTANCE_Post(sender, (int)&DAT_00040005, (int)&DAT_0000a000);
           return 0;
         }
-        Message_00 = &DAT_00040014;
+        Message_00 = &LAB_00040014;
       }
     }
     goto LAB_80064d48;
@@ -5316,25 +5058,13 @@ long EVENT_DoInstanceAction(InstanceObject *instanceObject, StackType *operand2,
   case 0x25:
     local_24 = local_24 ^ 1;
   switchD_800643a4_caseD_24:
-    if (local_24 == 0)
+    if (local_24 != 0)
     {
-      uVar5 = INSTANCE_Query(instanceObject->instance, 5);
-      if ((uVar5 & 1) == 0)
-      {
-        return 0;
-      }
-      Message_00 = (undefined *)0x800020;
+      /* WARNING: Subroutine does not return */
+      INSTANCE_Query(instanceObject->instance, 5);
     }
-    else
-    {
-      uVar5 = INSTANCE_Query(instanceObject->instance, 5);
-      if ((uVar5 & 1) != 0)
-      {
-        return 0;
-      }
-      Message_00 = (undefined *)0x800020;
-    }
-    goto LAB_80064d48;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(instanceObject->instance, 5);
   case 0x26:
     local_24 = local_24 ^ 1;
   case 0x27:
@@ -5378,6 +5108,7 @@ long EVENT_DoInstanceAction(InstanceObject *instanceObject, StackType *operand2,
   LAB_800644b4:
     sender->flags = type;
     return 1;
+    /* WARNING: Read-only address (ram,0x800d0fd8) is written */
   case 0x36:
     Data = 0;
     if (type < 4)
@@ -5414,12 +5145,14 @@ long EVENT_DoInstanceAction(InstanceObject *instanceObject, StackType *operand2,
       }
       Data = SetObjectData(Data, y, 6, (_Instance *)0x0, 0);
       Message = (code *)0x800000;
-      goto LAB_80064c9c;
+    LAB_80064c9c:
+      /* WARNING: Subroutine does not return */
+      INSTANCE_Post(sender, (int)Message, Data);
     }
     break;
   case 0x37:
-    pOVar8 = sender->object;
-    Data = (int)pOVar8->numberOfEffects;
+    pOVar2 = sender->object;
+    Data = (int)pOVar2->numberOfEffects;
     if (Data != 0)
     {
       if (type == 0xffffffff)
@@ -5429,9 +5162,9 @@ long EVENT_DoInstanceAction(InstanceObject *instanceObject, StackType *operand2,
         {
           do
           {
-            FX_StartInstanceEffect(sender, pOVar8->effectList + y, 0);
+            FX_StartInstanceEffect(sender, pOVar2->effectList + y, 0);
             y = y + 1;
-          } while (y < (int)pOVar8->numberOfEffects);
+          } while (y < pOVar2->numberOfEffects);
           return 0;
         }
       }
@@ -5439,7 +5172,7 @@ long EVENT_DoInstanceAction(InstanceObject *instanceObject, StackType *operand2,
       {
         if ((int)type < Data)
         {
-          FX_StartInstanceEffect(sender, pOVar8->effectList + type, 0);
+          FX_StartInstanceEffect(sender, pOVar2->effectList + type, 0);
           return 0;
         }
       }
@@ -5461,21 +5194,21 @@ long EVENT_DoInstanceAction(InstanceObject *instanceObject, StackType *operand2,
       }
       Data = SetPositionData((int)*(short *)operand2->data, (int)*(short *)(operand2->data + 2),
                              (int)*(short *)(operand2->data + 4));
-      Message = (code *)&DAT_00040016;
+      Message = (code *)&LAB_00040014_2;
       goto LAB_80064c9c;
     }
     break;
   case 0x4c:
     if (operand2 != (StackType *)0x0)
     {
-      if (operand2->id != 9)
+      if (operand2->id == 9)
       {
-        return 0;
+        Data = SetPositionData((int)*(short *)operand2->data, (int)*(short *)(operand2->data + 2),
+                               (int)*(short *)(operand2->data + 4));
+        /* WARNING: Subroutine does not return */
+        INSTANCE_Post(sender, (int)&DAT_0004000a, Data);
       }
-      Data = SetPositionData((int)*(short *)operand2->data, (int)*(short *)(operand2->data + 2),
-                             (int)*(short *)(operand2->data + 4));
-      INSTANCE_Post(sender, (int)&DAT_0004000a, Data);
-      sender->currentStreamUnitID = *(long *)(operand2->data + 0x10);
+      return 0;
     }
     break;
   case 0x4d:
@@ -5496,36 +5229,13 @@ long EVENT_DoInstanceAction(InstanceObject *instanceObject, StackType *operand2,
   case 0x4f:
     local_24 = (uint)(local_24 == 0);
   switchD_800643a4_caseD_4e:
-    if (sender != gameTrackerX.playerInstance)
+    if (sender == DAT_800d0fd8)
     {
-      INSTANCE_Post(sender, (int)&DAT_0004000e, local_24);
-      return 0;
+      /* WARNING: Subroutine does not return */
+      INSTANCE_Post(sender, (int)&LAB_0004000c_2, local_24);
     }
-    INSTANCE_Post(sender, (int)&DAT_0004000e, local_24);
-    if (local_24 == 0)
-    {
-      gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xffffff6f;
-      return 0;
-    }
-    gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x90;
-    pEVar6 = EVENT_GetNextTimer();
-    pSVar3 = currentActionScript;
-    pEVar2 = currentEventInstance;
-    lVar1 = EventCurrentEventIndex;
-    if (pEVar6 != (EventTimer *)0x0)
-    {
-      EventAbortLine = 1;
-      EventJustRecievedTimer = 1;
-      pEVar6->scriptPos = codeStream;
-      pEVar6->field_0x0 = pEVar6->field_0x0 & 1 | 0x2000;
-      pEVar6->event = pEVar2;
-      pEVar6->actionScript = pSVar3;
-      pLVar4 = CurrentPuzzleLevel;
-      pSVar3->conditionBits = pSVar3->conditionBits | 1;
-      pEVar6->level = pLVar4;
-      pEVar6->nextEventIndex = lVar1;
-    }
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Post(sender, (int)&LAB_0004000c_2, local_24);
   case 0x50:
     if (operand2 != (StackType *)0x0)
     {
@@ -5535,7 +5245,7 @@ long EVENT_DoInstanceAction(InstanceObject *instanceObject, StackType *operand2,
       }
       Data = SetPositionData((int)*(short *)operand2->data, (int)*(short *)(operand2->data + 2),
                              (int)*(short *)(operand2->data + 4));
-      Message = (code *)&DAT_0004000d;
+      Message = (code *)&LAB_0004000c_1;
       goto LAB_80064c9c;
     }
     break;
@@ -5548,41 +5258,41 @@ long EVENT_DoInstanceAction(InstanceObject *instanceObject, StackType *operand2,
       }
       Data = SetPositionData((int)*(short *)operand2->data, (int)*(short *)(operand2->data + 2),
                              (int)*(short *)(operand2->data + 4));
-      Message = (code *)&DAT_0004000f;
+      Message = (code *)&LAB_0004000c_3;
       goto LAB_80064c9c;
     }
     break;
   case 0x54:
     if (local_24 != 0)
     {
-      Message_00 = &DAT_00040010;
+      Message_00 = &LAB_00040010;
       goto LAB_80064d48;
     }
     break;
   case 0x55:
+    /* WARNING: Subroutine does not return */
     INSTANCE_Post(sender, 0x800027, local_24);
-    return 0;
   case 0x5b:
-    if ((int)type < 0)
+    if (-1 < (int)type)
     {
+      sender->lightGroup = (uchar)type;
       return 0;
     }
-    sender->lightGroup = (uchar)type;
     return 0;
   case 0x5c:
-    if ((int)type < 0)
+    if (-1 < (int)type)
     {
+      sender->spectralLightGroup = (uchar)type;
       return 0;
     }
-    sender->spectralLightGroup = (uchar)type;
     return 0;
   case 0x5e:
     goto switchD_800643a4_caseD_5e;
   case 0x5f:
     local_24 = 0;
   switchD_800643a4_caseD_5e:
+    /* WARNING: Subroutine does not return */
     INSTANCE_Post(sender, 0x800029, local_24);
-    return 0;
   case 0x67:
     if (local_24 == 0)
     {
@@ -5599,22 +5309,19 @@ long EVENT_DoInstanceAction(InstanceObject *instanceObject, StackType *operand2,
     {
       Data = Data + 0x168;
     }
-    Data = rcos((Data * 0x1000) / 0x168);
-    Message = (code *)0x4000005;
-  LAB_80064c9c:
-    INSTANCE_Post(sender, (int)Message, Data);
-    return 0;
+    /* WARNING: Subroutine does not return */
+    rcos((Data * 0x1000) / 0x168);
   case 0x6d:
     Message_00 = (undefined *)0x4000006;
     goto LAB_80064d48;
   case 0x6e:
-    Message_00 = &DAT_00040011;
+    Message_00 = &LAB_00040010_1;
   LAB_80064d48:
+    /* WARNING: Subroutine does not return */
     INSTANCE_Post(sender, (int)Message_00, 0);
-    return 0;
   case 0x6f:
-    INSTANCE_Post(sender, (int)&DAT_00040015, 1 << (type & 0x1f));
-    return 0;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Post(sender, (int)&LAB_00040014_1, 1 << (type & 0x1f));
   case 0x72:
     if (operand2 != (StackType *)0x0)
     {
@@ -5624,13 +5331,13 @@ long EVENT_DoInstanceAction(InstanceObject *instanceObject, StackType *operand2,
       }
       Data = SetPositionData((int)*(short *)operand2->data, (int)*(short *)(operand2->data + 2),
                              (int)*(short *)(operand2->data + 4));
-      Message = (code *)&DAT_0004000c;
+      Message = (code *)&LAB_0004000c;
       goto LAB_80064c9c;
     }
     break;
   case 0x74:
+    /* WARNING: Subroutine does not return */
     INSTANCE_Post(sender, (int)&PTR_00040006, type << 0xc);
-    return 0;
   case 0x7b:
     if (operand2 != (StackType *)0x0)
     {
@@ -5645,31 +5352,24 @@ long EVENT_DoInstanceAction(InstanceObject *instanceObject, StackType *operand2,
     }
     break;
   case 0x7c:
-    type = type << 0xc;
-    INSTANCE_Post(sender, 0x40019, type);
-  case 0xa3:
-    Message_01 = 0x1000000;
-  LAB_80064d28:
-    Message_01 = Message_01 | 0x22;
-  LAB_80064d2c:
-    INSTANCE_Post(sender, Message_01, type);
-    return 0;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Post(sender, 0x40019, type << 0xc);
   case 0x85:
     Message_01 = 0x40021;
     goto LAB_80064d2c;
   case 0x8a:
-    pIVar7 = sender->intro;
-    if (pIVar7 == (Intro *)0x0)
+    pIVar1 = sender->intro;
+    if (pIVar1 == (Intro *)0x0)
     {
       return 0;
     }
     if (local_24 == 0)
     {
-      pIVar7->flags = pIVar7->flags & 0xfffffbff;
+      pIVar1->flags = pIVar1->flags & 0xfffffbff;
     }
     else
     {
-      pIVar7->flags = pIVar7->flags | 0x400;
+      pIVar1->flags = pIVar1->flags | 0x400;
     }
     break;
   case 0x8c:
@@ -5683,23 +5383,32 @@ long EVENT_DoInstanceAction(InstanceObject *instanceObject, StackType *operand2,
       return 0;
     }
     break;
+  case 0xa3:
+    Message_01 = 0x1000000;
+  LAB_80064d28:
+    Message_01 = Message_01 | 0x22;
+  LAB_80064d2c:
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Post(sender, Message_01, type);
   case 0xa4:
     type = 0x1000000;
     goto LAB_80064d44;
   case 0xa5:
-    if (sender != gameTrackerX.playerInstance)
+    if (sender != DAT_800d0fd8)
     {
       return 0;
     }
     if (local_24 == 0)
     {
-      gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xffffff6f;
+      DAT_800d10ec = DAT_800d10ec & 0xffffff6f;
     }
     else
     {
-      gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x90;
+      DAT_800d10ec = DAT_800d10ec | 0x90;
     }
   }
+  /* WARNING: Read-only address (ram,0x800d0fd8) is written */
+  /* WARNING: Read-only address (ram,0x800d0fd8) is written */
   return 0;
 }
 
@@ -6574,14 +6283,14 @@ long EVENT_DoIntroAction(IntroObject *introObject, StackType *operand2)
 {
   long lVar1;
   uint uVar2;
-  Level *pLVar3;
-  Intro *pIVar4;
-  _Instance *p_Var5;
+  Intro *pIVar3;
+  _Instance *p_Var4;
+  long lVar5;
   uint uVar6;
   int iVar7;
   int iVar8;
-  STracker *pSVar9;
-  long lVar10;
+  undefined4 *puVar9;
+  undefined4 uVar10;
   Intro *intro;
   long lVar11;
   long lStack24;
@@ -6589,13 +6298,12 @@ long EVENT_DoIntroAction(IntroObject *introObject, StackType *operand2)
 
   lVar11 = 0;
   local_14 = 1;
-  lVar10 = lVar11;
+  lVar5 = lVar11;
   if (introObject->attribute != -1)
   {
     intro = introObject->intro;
     lVar1 = EVENT_ParseOperand2(operand2, &lStack24, (long *)&local_14);
     iVar8 = introObject->attribute;
-    lVar10 = lVar11;
     if (iVar8 != 0x14)
     {
       if (iVar8 < 0x15)
@@ -6632,65 +6340,64 @@ long EVENT_DoIntroAction(IntroObject *introObject, StackType *operand2)
           uVar2 = intro->flags | 0x80;
         }
         intro->flags = uVar2 & uVar6;
-        lVar10 = 1;
+        lVar5 = 1;
       }
       else
       {
         if (iVar8 == 0x3e)
         {
-          lVar10 = 0;
+          uVar10 = 0;
           iVar8 = 0;
-          pSVar9 = &StreamTracker;
+          puVar9 = &StreamTracker;
           do
           {
-            if (pSVar9->StreamList[0].used == 2)
+            if (*(short *)(puVar9 + 1) == 2)
             {
-              pLVar3 = pSVar9->StreamList[0].level;
-              iVar7 = pLVar3->numIntros;
-              pIVar4 = pLVar3->introList;
+              iVar7 = *(int *)(puVar9[2] + 0x78);
+              pIVar3 = *(Intro **)(puVar9[2] + 0x7c);
               while (iVar7 != 0)
               {
-                if (pIVar4 == intro)
+                if (pIVar3 == intro)
                 {
-                  lVar10 = pSVar9->StreamList[0].StreamUnitID;
+                  uVar10 = *puVar9;
                   break;
                 }
                 iVar7 = iVar7 + -1;
-                pIVar4 = pIVar4 + 1;
+                pIVar3 = pIVar3 + 1;
               }
             }
-            pSVar9 = (STracker *)(pSVar9->StreamList + 1);
+            puVar9 = puVar9 + 0x10;
             iVar8 = iVar8 + 1;
           } while (iVar8 < 0x10);
-          p_Var5 = INSTANCE_IntroduceInstance(intro, (short)lVar10);
-          lVar10 = 0;
-          if (p_Var5 == (_Instance *)0x0)
+          p_Var4 = INSTANCE_IntroduceInstance(intro, (short)uVar10);
+          lVar5 = 0;
+          if (p_Var4 == (_Instance *)0x0)
           {
             EventAbortLine = 1;
-            lVar10 = lVar11;
+            lVar5 = lVar11;
           }
         }
         else
         {
-          lVar10 = 0;
-          if ((0x3e < iVar8) && (lVar10 = 0, iVar8 == 0x8a))
+          lVar5 = 0;
+          if ((0x3e < iVar8) && (lVar5 = 0, iVar8 == 0x8a))
           {
             if (local_14 == 0)
             {
               intro->flags = intro->flags & 0xfffffbff;
-              lVar10 = lVar11;
+              lVar5 = lVar11;
             }
             else
             {
               intro->flags = intro->flags | 0x400;
-              lVar10 = lVar11;
+              lVar5 = lVar11;
             }
           }
         }
       }
     }
   }
-  return lVar10;
+  return lVar5;
 }
 
 // decompiled code
@@ -6717,14 +6424,14 @@ void EVENT_DoStackOperationEquals(_PCodeStack *stack, short *codeStream)
 {
   int iVar1;
   long *plVar2;
-  StackType *pSVar3;
+  long *plVar3;
   long lVar4;
   long lVar5;
   long lVar6;
-  StackType local_58;
-  StackType local_30;
+  long local_58[10];
+  long local_30[10];
 
-  pSVar3 = &local_30;
+  plVar3 = (long *)local_30;
   iVar1 = stack->topOfStack + -1;
   plVar2 = &stack->topOfStack + iVar1 * 9 + 1;
   stack->topOfStack = iVar1;
@@ -6733,15 +6440,15 @@ void EVENT_DoStackOperationEquals(_PCodeStack *stack, short *codeStream)
     lVar4 = plVar2[1];
     lVar5 = plVar2[2];
     lVar6 = plVar2[3];
-    pSVar3->id = *plVar2;
-    *(long *)pSVar3->data = lVar4;
-    *(long *)(pSVar3->data + 4) = lVar5;
-    *(long *)(pSVar3->data + 8) = lVar6;
+    *plVar3 = *plVar2;
+    plVar3[1] = lVar4;
+    plVar3[2] = lVar5;
+    plVar3[3] = lVar6;
     plVar2 = plVar2 + 4;
-    pSVar3 = (StackType *)(pSVar3->data + 0xc);
+    plVar3 = plVar3 + 4;
   } while (plVar2 != &stack->topOfStack + iVar1 * 9 + 9);
-  pSVar3->id = *plVar2;
-  pSVar3 = &local_58;
+  *plVar3 = *plVar2;
+  plVar3 = (long *)local_58;
   iVar1 = stack->topOfStack + -1;
   plVar2 = &stack->topOfStack + iVar1 * 9 + 1;
   stack->topOfStack = iVar1;
@@ -6750,15 +6457,15 @@ void EVENT_DoStackOperationEquals(_PCodeStack *stack, short *codeStream)
     lVar4 = plVar2[1];
     lVar5 = plVar2[2];
     lVar6 = plVar2[3];
-    pSVar3->id = *plVar2;
-    *(long *)pSVar3->data = lVar4;
-    *(long *)(pSVar3->data + 4) = lVar5;
-    *(long *)(pSVar3->data + 8) = lVar6;
+    *plVar3 = *plVar2;
+    plVar3[1] = lVar4;
+    plVar3[2] = lVar5;
+    plVar3[3] = lVar6;
     plVar2 = plVar2 + 4;
-    pSVar3 = (StackType *)(pSVar3->data + 0xc);
+    plVar3 = plVar3 + 4;
   } while (plVar2 != &stack->topOfStack + iVar1 * 9 + 9);
-  pSVar3->id = *plVar2;
-  EVENT_ExecuteActionCommand(&local_58, &local_30, stack, codeStream);
+  *plVar3 = *plVar2;
+  EVENT_ExecuteActionCommand((StackType *)local_58, (StackType *)local_30, stack, codeStream);
   return;
 }
 
@@ -6834,15 +6541,15 @@ long EVENT_CompareVector3d(Vector3d *vector1, Vector3d *vector2)
       {
         return 0;
       }
-      if ((int)vector2->vy < (int)vector1->vy - iVar4)
+      if ((int)vector2->vy < vector1->vy - iVar4)
       {
         return 0;
       }
-      if ((int)vector2->vy <= (int)vector1->vy + iVar4)
+      if ((int)vector2->vy <= vector1->vy + iVar4)
       {
-        if ((int)vector1->vz - iVar3 <= (int)vector2->vz)
+        if (vector1->vz - iVar3 <= (int)vector2->vz)
         {
-          return (uint)((int)vector1->vz + iVar3 < (int)vector2->vz) ^ 1;
+          return (uint)(vector1->vz + iVar3 < (int)vector2->vz) ^ 1;
         }
         return 0;
       }
@@ -6995,7 +6702,7 @@ LAB_80065f00:
     if (bVar1)
     {
       uVar4 = trueValue;
-      if ((0x100 < iVar3 - 0xf80U) && (uVar4 = trueValue, &UNK_00000100 < &DAT_00001080 + iVar3))
+      if ((0x100 < iVar3 - 0xf80U) && (&UNK_00000100 < &DAT_00001080 + iVar3))
       {
         uVar4 = (uint)(trueValue == 0);
       }
@@ -7044,86 +6751,14 @@ LAB_80065f00:
 long EVENT_CompareListWithOperation(_PCodeStack *stack, ListObject *listObject, StackType *operand2, long operation)
 
 {
-  char *pcVar1;
-  long lVar2;
-  long *plVar3;
-  int iVar4;
-  ListObject *pLVar5;
-  _Instance *startInstance;
-  long lVar6;
-  long areaID;
-  long local_60;
-  _Instance *local_5c;
-  undefined4 local_58;
   char acStack56[16];
 
-  lVar6 = 0;
   if (CurrentEventLine < 0x14)
   {
-    (&eventListNumInstances)[CurrentEventLine] = 0;
+    *(undefined4 *)(&fontTracker.font_buffer[0x19].y + CurrentEventLine * 2) = 0;
   }
+  /* WARNING: Subroutine does not return */
   strcpy(acStack56, listObject->eventInstance->objectName);
-  pcVar1 = strchr(acStack56, 0x3f);
-  if (pcVar1 != (char *)0x0)
-  {
-    *pcVar1 = '\0';
-  }
-  areaID = listObject->eventInstance->unitID;
-  startInstance = (_Instance *)0x0;
-  if (areaID == 0x3f)
-  {
-    areaID = 0;
-  }
-  do
-  {
-    startInstance = INSTANCE_FindWithName(areaID, acStack56, startInstance);
-    if (startInstance == (_Instance *)0x0)
-    {
-      return lVar6;
-    }
-    local_60 = 2;
-    local_58 = 0xffffffff;
-    iVar4 = 0;
-    pLVar5 = listObject;
-    local_5c = startInstance;
-    if (0 < listObject->numberOfAttributes)
-    {
-      do
-      {
-        EVENT_TransformOperand((StackType *)&local_60, stack, pLVar5->attribute[0], (short *)0x0);
-        iVar4 = iVar4 + 1;
-        pLVar5 = (ListObject *)pLVar5->attribute;
-      } while (iVar4 < listObject->numberOfAttributes);
-    }
-    lVar2 = EVENT_CompareOperandsWithOperation(stack, (StackType *)&local_60, operand2, operation);
-    if (lVar2 == 0)
-    {
-      if (operation == 0xb)
-      {
-        if (9 < (&eventListNumInstances)[CurrentEventLine])
-        {
-          return 0;
-        }
-        (&eventListNumInstances)[CurrentEventLine] = 0;
-        return 0;
-      }
-    }
-    else
-    {
-      if (CurrentEventLine < 0x14)
-      {
-        plVar3 = &eventListNumInstances + CurrentEventLine;
-        iVar4 = *plVar3;
-        if (iVar4 < 10)
-        {
-          (&eventListArray2010)[CurrentEventLine * 10 + iVar4] = startInstance;
-          *plVar3 = iVar4 + 1;
-        }
-      }
-      lVar6 = 1;
-    }
-  } while (startInstance != (_Instance *)0x0);
-  return lVar6;
 }
 
 // decompiled code
@@ -7156,7 +6791,7 @@ long EVENT_CompareSubListWithOperation(_PCodeStack *stack, SubListObject *subLis
 
 {
   long lVar1;
-  long *plVar2;
+  int *piVar2;
   int iVar3;
   SubListObject *pSVar4;
   int iVar5;
@@ -7169,7 +6804,7 @@ long EVENT_CompareSubListWithOperation(_PCodeStack *stack, SubListObject *subLis
   lVar7 = 0;
   if (CurrentEventLine < 0x14)
   {
-    (&eventListNumInstances)[CurrentEventLine] = 0;
+    *(undefined4 *)(&fontTracker.font_buffer[0x19].y + CurrentEventLine * 2) = 0;
   }
   iVar6 = 0;
   if (0 < subListObject->numberOfInstances)
@@ -7196,13 +6831,13 @@ long EVENT_CompareSubListWithOperation(_PCodeStack *stack, SubListObject *subLis
       {
         if (CurrentEventLine < 0x14)
         {
-          plVar2 = &eventListNumInstances + CurrentEventLine;
-          iVar3 = *plVar2;
+          piVar2 = (int *)(&fontTracker.font_buffer[0x19].y + CurrentEventLine * 2);
+          iVar3 = *piVar2;
           if (iVar3 < 10)
           {
-            (&eventListArray2010)[CurrentEventLine * 10 + iVar3] =
-                *(_Instance **)(iVar5 + (int)subListObject->instanceList);
-            *plVar2 = iVar3 + 1;
+            *(undefined4 *)((int)fontTracker.font_buffer + iVar3 * 4 + CurrentEventLine * 0x28 + 0x188) =
+                *(undefined4 *)(iVar5 + (int)subListObject->instanceList);
+            *piVar2 = iVar3 + 1;
           }
         }
         lVar7 = 1;
@@ -7443,10 +7078,11 @@ void EVENT_DoStackMathOperation(_PCodeStack *stack, long operation)
   undefined4 uVar8;
   long lVar9;
   undefined4 uVar10;
-  undefined local_80[32];
-  undefined auStack96[8];
+  long local_80[8];
+  undefined4 auStack96[2];
   int local_58;
-  undefined auStack56[8];
+  long local_54[7];
+  undefined4 auStack56[2];
   undefined4 local_30[8];
   undefined4 auStack16[2];
 
@@ -7499,7 +7135,7 @@ void EVENT_DoStackMathOperation(_PCodeStack *stack, long operation)
       puVar3[3] = uVar10;
       puVar1 = puVar1 + 4;
       puVar3 = puVar3 + 4;
-    } while (puVar1 != (undefined4 *)(local_80 + 0x20));
+    } while (puVar1 != auStack96);
     *puVar3 = *puVar1;
     puVar3 = (undefined4 *)local_80;
     puVar1 = (undefined4 *)&local_58;
@@ -7514,7 +7150,7 @@ void EVENT_DoStackMathOperation(_PCodeStack *stack, long operation)
       puVar3[3] = uVar10;
       puVar1 = puVar1 + 4;
       puVar3 = puVar3 + 4;
-    } while (puVar1 != (undefined4 *)(&local_58 + 0x20));
+    } while (puVar1 != auStack56);
     *puVar3 = *puVar1;
     puVar3 = (undefined4 *)&local_58;
     puVar1 = local_30;
@@ -7569,7 +7205,7 @@ short *EVENT_ParseOpcode(_PCodeStack *stack, short *codeStream, long *operateOnS
   switch ((int)(((uint)uVar1 - 1) * 0x10000) >> 0x10)
   {
   case 0:
-    EVENT_AddObjectToStack(stack, (int)*codeStream_00);
+    EVENT_ProcessEvents((EventPointers *)stack, (Level *)(int)*codeStream_00);
     codeStream_00 = codeStream + 2;
     break;
   case 1:
@@ -7582,7 +7218,7 @@ short *EVENT_ParseOpcode(_PCodeStack *stack, short *codeStream, long *operateOnS
     EVENT_DoStackMathOperation(stack, 10);
     break;
   case 4:
-    EventAbortedPosition = codeStream_00;
+    EventAbortedPosition._0_4_ = codeStream_00;
     *operateOnStack = 1;
     break;
   case 6:
@@ -7649,9 +7285,9 @@ short *EVENT_ParseOpcode(_PCodeStack *stack, short *codeStream, long *operateOnS
     codeStream_00 = codeStream + 2;
     break;
   case 0x1e:
-    if (currentActionScript != (ScriptPCode *)0x0)
+    if (currentEventInstance._4_4_ != 0)
     {
-      currentActionScript->conditionBits = currentActionScript->conditionBits | 2;
+      *(ushort *)(currentEventInstance._4_4_ + 2) = *(ushort *)(currentEventInstance._4_4_ + 2) | 2;
     }
     break;
   case 0x1f:
@@ -7817,13 +7453,12 @@ void EVENT_DoSubListAction(SubListObject *subListObject, StackType *operand2, _P
 long EVENT_GetInstanceValue(InstanceObject *instanceObject)
 
 {
-  uint uVar1;
   _Instance *Inst;
   int Query;
-  ulong uVar2;
+  uint uVar1;
 
   Inst = instanceObject->instance;
-  uVar2 = 0;
+  uVar1 = 0;
   switch (instanceObject->attribute)
   {
   case 5:
@@ -7835,72 +7470,60 @@ long EVENT_GetInstanceValue(InstanceObject *instanceObject)
   case 0x5e:
   case 0x5f:
   case 0x7e:
-    goto switchD_80066c78_caseD_5;
+    uVar1 = 0;
+    break;
   case 10:
   case 0x34:
-    uVar2 = (ulong)((Inst->flags & 0x800U) != 0);
+    uVar1 = (uint)((Inst->flags & 0x800U) != 0);
     break;
   case 0xb:
-    uVar2 = (ulong)((Inst->flags & 0x800U) == 0);
+    uVar1 = (uint)((Inst->flags & 0x800U) == 0);
     break;
   case 0x10:
     Query = 10;
     goto LAB_80066d68;
   case 0x14:
-    uVar2 = INSTANCE_Query(Inst, 0xb);
-    uVar1 = uVar2 >> 1;
-    goto LAB_80066cac;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(Inst, 0xb);
   case 0x15:
-    uVar1 = INSTANCE_Query(Inst, 0xb);
-  LAB_80066cac:
-    uVar2 = uVar1 & 1;
-    Query = STREAM_IsMorphInProgress();
-    if (Query != 0)
-    {
-    switchD_80066c78_caseD_5:
-      uVar2 = 0;
-    }
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(Inst, 0xb);
   case 0x24:
-    uVar2 = INSTANCE_Query(Inst, 5);
-    uVar2 = (ulong)((uVar2 & 5) == 1);
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(Inst, 5);
   case 0x25:
-    uVar2 = INSTANCE_Query(Inst, 5);
-    uVar2 = (ulong)((uVar2 & 9) == 0);
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(Inst, 5);
   case 0x26:
     Query = 0x1b;
     goto LAB_80066d68;
   case 0x27:
     Query = 0x1a;
   LAB_80066d68:
-    uVar2 = INSTANCE_Query(Inst, Query);
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(Inst, Query);
   case 0x35:
-    uVar2 = (ulong)((Inst->flags2 & 0x20000000U) != 0);
+    uVar1 = (uint)((Inst->flags2 & 0x20000000U) != 0);
     break;
   case 0x5b:
-    uVar2 = (ulong)Inst->lightGroup;
+    uVar1 = (uint)Inst->lightGroup;
     break;
   case 0x5c:
-    uVar2 = (ulong)Inst->spectralLightGroup;
+    uVar1 = (uint)Inst->spectralLightGroup;
     break;
   case 0x67:
-    uVar2 = (ulong)((Inst->flags & 0x400000U) == 0);
+    uVar1 = (uint)((Inst->flags & 0x400000U) == 0);
     break;
   case 0x8f:
-    uVar2 = INSTANCE_Query(Inst, 5);
-    uVar2 = uVar2 >> 2 & 1;
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(Inst, 5);
   case 0x90:
-    uVar2 = INSTANCE_Query(Inst, 5);
-    uVar2 = uVar2 >> 3 & 1;
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(Inst, 5);
   case -1:
-    uVar2 = Inst->introUniqueID;
+    uVar1 = Inst->introUniqueID;
   }
-  return uVar2;
+  return uVar1;
 }
 
 // decompiled code
@@ -8111,15 +7734,15 @@ long EVENT_GetAnimateTextureValue(InstanceAnimateTexture *instanceAniTexture)
 long EVENT_GetAnimateValue(InstanceAnimate *instanceAnimate)
 
 {
-  ulong uVar1;
+  long lVar1;
   int Query;
 
-  uVar1 = 0;
+  lVar1 = 0;
   switch (instanceAnimate->attribute)
   {
   case 0xd:
   case 0x29:
-    uVar1 = 0;
+    lVar1 = 0;
     break;
   case 0xf:
   case 0x28:
@@ -8128,13 +7751,13 @@ long EVENT_GetAnimateValue(InstanceAnimate *instanceAnimate)
   case 0x1e:
     Query = 0x11;
   LAB_80067000:
-    uVar1 = INSTANCE_Query(instanceAnimate->instance, Query);
-    break;
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Query(instanceAnimate->instance, Query);
   case -1:
   case 0xe:
-    uVar1 = 1;
+    lVar1 = 1;
   }
-  return uVar1;
+  return lVar1;
 }
 
 // decompiled code
@@ -8163,7 +7786,7 @@ long EVENT_TransformObjectOnStack(_PCodeStack *stack, long item, short *codeStre
   lVar1 = 0;
   if (stack->topOfStack != 0)
   {
-    lVar1 = EVENT_TransformOperand((StackType *)(stack->stack[stack->topOfStack + 0x13].data + 8), stack, item,
+    lVar1 = EVENT_TransformOperand((StackType *)stack[-1].stack[stack->topOfStack + 0x1f].data, stack, item,
                                    codeStream);
   }
   return lVar1;
@@ -8202,7 +7825,7 @@ long EVENT_TransformObjectOnStack(_PCodeStack *stack, long item, short *codeStre
 void EVENT_UpdatePuzzlePointers(EventPointers *events, long offset)
 
 {
-  _func_17 *p_Var1;
+  _func_15 *p_Var1;
   int iVar2;
   int iVar3;
   int iVar4;
@@ -8215,8 +7838,8 @@ void EVENT_UpdatePuzzlePointers(EventPointers *events, long offset)
   {
     do
     {
-      p_Var1 = (_func_17 *)0x0;
-      if (pEVar7->eventInstances[0] != (_func_17 *)0x0)
+      p_Var1 = (_func_15 *)0x0;
+      if (pEVar7->eventInstances[0] != (_func_15 *)0x0)
       {
         p_Var1 = pEVar7->eventInstances[0] + offset;
       }
@@ -8264,10 +7887,10 @@ void EVENT_UpdatePuzzlePointers(EventPointers *events, long offset)
           }
           iVar5 = iVar5 + 1;
           iVar3 = iVar3 + 4;
-        } while (iVar5 < (int)*(short *)(p_Var1 + 2));
+        } while (iVar5 < *(short *)(p_Var1 + 2));
       }
       iVar3 = 0;
-      if (p_Var1[4] != (_func_17)0x0)
+      if (p_Var1[4] != (_func_15)0x0)
       {
         iVar5 = 0;
         do
@@ -8625,9 +8248,8 @@ void EVENT_RemoveInstanceFromInstanceList(_Instance *instance)
   iVar2 = 0;
   do
   {
-    if (((*(short *)((int)&StreamTracker.StreamList[0].used + iVar2) == 2) &&
-         (piVar6 = *(int **)(*(int *)((int)&StreamTracker.StreamList[0].level + iVar2) + 0xdc),
-          piVar6 != (int *)0x0)) &&
+    if (((*(short *)((int)&DAT_800d1924 + iVar2) == 2) &&
+         (piVar6 = *(int **)(*(int *)((int)&DAT_800d1928 + iVar2) + 0xdc), piVar6 != (int *)0x0)) &&
         (iVar2 = 0, piVar5 = piVar6, 0 < *piVar6))
     {
       do
@@ -8646,7 +8268,7 @@ void EVENT_RemoveInstanceFromInstanceList(_Instance *instance)
             }
             iVar4 = iVar4 + 1;
             ppsVar1 = ppsVar1 + 1;
-          } while (iVar4 < (int)*(short *)(piVar5[1] + 2));
+          } while (iVar4 < *(short *)(piVar5[1] + 2));
         }
         iVar2 = iVar2 + 1;
         piVar5 = piVar5 + 1;
@@ -8720,7 +8342,7 @@ void EVENT_UpdatePuzzleWithInstance(EventPointers *puzzle, _Instance *instance)
           }
           iVar3 = iVar3 + 1;
           ppsVar1 = ppsVar1 + 1;
-        } while (iVar3 < (int)*(short *)(pEVar4->eventInstances[0] + 2));
+        } while (iVar3 < *(short *)(pEVar4->eventInstances[0] + 2));
       }
       iVar5 = iVar5 + 1;
       pEVar4 = (EventPointers *)pEVar4->eventInstances;
@@ -8762,43 +8384,42 @@ void EVENT_UpdatePuzzleWithInstance(EventPointers *puzzle, _Instance *instance)
 void EVENT_AddInstanceToInstanceList(_Instance *instance)
 
 {
-  _Terrain *p_Var1;
+  int iVar1;
   int iVar2;
   int iVar3;
-  int iVar4;
-  Level *pLVar5;
-  int iVar6;
+  int *piVar4;
+  int iVar5;
 
-  iVar6 = 0;
+  iVar5 = 0;
   do
   {
-    if (StreamTracker.StreamList[iVar6].used == 2)
+    if ((&DAT_800d1924)[iVar5 * 0x20] == 2)
     {
-      pLVar5 = StreamTracker.StreamList[iVar6].level;
-      if (pLVar5->PuzzleInstances != (EventPointers *)0x0)
+      piVar4 = (int *)(&DAT_800d1928)[iVar5 * 0x10];
+      if ((EventPointers *)piVar4[0x37] != (EventPointers *)0x0)
       {
-        EVENT_UpdatePuzzleWithInstance(pLVar5->PuzzleInstances, instance);
+        EVENT_UpdatePuzzleWithInstance((EventPointers *)piVar4[0x37], instance);
       }
-      p_Var1 = pLVar5->terrain;
-      iVar3 = 0;
-      if (0 < p_Var1->numBSPTrees)
+      iVar1 = *piVar4;
+      iVar2 = 0;
+      if (0 < *(int *)(iVar1 + 0x44))
       {
-        iVar4 = 0;
+        iVar3 = 0;
         do
         {
-          iVar2 = (int)&p_Var1->BSPTreeArray->bspRoot + iVar4;
-          if ((-1 < *(short *)(iVar2 + 0x1a)) && (*(int *)(iVar2 + 0x1c) == instance->introUniqueID))
+          iVar1 = *(int *)(iVar1 + 0x48) + iVar3;
+          if ((-1 < *(short *)(iVar1 + 0x1a)) && (*(int *)(iVar1 + 0x1c) == instance->introUniqueID))
           {
-            *(_Instance **)(iVar2 + 0x20) = instance;
+            *(_Instance **)(iVar1 + 0x20) = instance;
           }
-          p_Var1 = pLVar5->terrain;
-          iVar3 = iVar3 + 1;
-          iVar4 = iVar4 + 0x24;
-        } while (iVar3 < p_Var1->numBSPTrees);
+          iVar1 = *piVar4;
+          iVar2 = iVar2 + 1;
+          iVar3 = iVar3 + 0x24;
+        } while (iVar2 < *(int *)(iVar1 + 0x44));
       }
     }
-    iVar6 = iVar6 + 1;
-  } while (iVar6 < 0x10);
+    iVar5 = iVar5 + 1;
+  } while (iVar5 < 0x10);
   return;
 }
 
@@ -8825,26 +8446,10 @@ void EVENT_AddInstanceToInstanceList(_Instance *instance)
 _VMObject *EVENT_FindVMObject(_StreamUnit *stream, char *vmoName)
 
 {
-  int iVar1;
-  int iVar2;
-  Level *pLVar3;
-  int iVar4;
-
-  pLVar3 = stream->level;
-  iVar4 = 0;
-  if (0 < pLVar3->numVMObjects)
+  if (0 < stream->level->numVMObjects)
   {
-    iVar2 = 0;
-    do
-    {
-      iVar1 = strcmpi(*(char **)((int)&pLVar3->vmobjectList->name + iVar2), vmoName);
-      iVar4 = iVar4 + 1;
-      if (iVar1 == 0)
-      {
-        return (_VMObject *)((int)&pLVar3->vmobjectList->flags + iVar2);
-      }
-      iVar2 = iVar2 + 0x3c;
-    } while (iVar4 < pLVar3->numVMObjects);
+    /* WARNING: Subroutine does not return */
+    strcmpi(stream->level->vmobjectList->name, vmoName);
   }
   return (_VMObject *)0x0;
 }
@@ -8981,7 +8586,7 @@ void EVENT_FixPuzzlesForStream(_StreamUnit *stream)
   int iVar16;
 
   puzzle = stream->level->PuzzleInstances;
-  instance = (gameTrackerX.instanceList)->first;
+  instance = *(_Instance **)(DAT_800d0fe0 + 4);
   if (puzzle != (EventPointers *)0x0)
   {
     while (instance != (_Instance *)0x0)
@@ -9030,7 +8635,7 @@ void EVENT_FixPuzzlesForStream(_StreamUnit *stream)
                       iVar3 = iVar3 + 1;
                       if (*(short *)pEVar9->eventInstances[0] == instanceObject->flags)
                       {
-                        *(_func_17 **)&instanceObject->introUniqueID = pEVar9->eventInstances[0];
+                        *(_func_15 **)&instanceObject->introUniqueID = pEVar9->eventInstances[0];
                         break;
                       }
                       pEVar9 = (EventPointers *)pEVar9->eventInstances;
@@ -9113,7 +8718,7 @@ void EVENT_FixPuzzlesForStream(_StreamUnit *stream)
             }
             iVar13 = iVar13 + 1;
             iVar3 = iVar13 * 4;
-          } while (iVar13 < (int)*(short *)(pEVar14->eventInstances[0] + 2));
+          } while (iVar13 < *(short *)(pEVar14->eventInstances[0] + 2));
         }
         iVar15 = iVar15 + 1;
         pEVar14 = (EventPointers *)pEVar14->eventInstances;
@@ -9215,9 +8820,8 @@ void EVENT_AddStreamToInstanceList(_StreamUnit *stream)
   iVar9 = 0;
   do
   {
-    if (((*(short *)((int)&StreamTracker.StreamList[0].used + iVar9) == 2) &&
-         (piVar15 = *(int **)(*(int *)((int)&StreamTracker.StreamList[0].level + iVar9) + 0xdc),
-          piVar15 != (int *)0x0)) &&
+    if (((*(short *)((int)&DAT_800d1924 + iVar9) == 2) &&
+         (piVar15 = *(int **)(*(int *)((int)&DAT_800d1928 + iVar9) + 0xdc), piVar15 != (int *)0x0)) &&
         (iVar9 = 0, piVar14 = piVar15, 0 < *piVar15))
     {
       do
@@ -9254,7 +8858,7 @@ void EVENT_AddStreamToInstanceList(_StreamUnit *stream)
                       iVar3 = iVar3 + 1;
                       if (*(short *)pEVar10->eventInstances[0] == instanceObject->flags)
                       {
-                        *(_func_17 **)&instanceObject->introUniqueID = pEVar10->eventInstances[0];
+                        *(_func_15 **)&instanceObject->introUniqueID = pEVar10->eventInstances[0];
                         break;
                       }
                       pEVar10 = (EventPointers *)pEVar10->eventInstances;
@@ -9331,7 +8935,7 @@ void EVENT_AddStreamToInstanceList(_StreamUnit *stream)
             }
             iVar13 = iVar13 + 1;
             iVar3 = iVar13 * 4;
-          } while (iVar13 < (int)*(short *)(piVar14[1] + 2));
+          } while (iVar13 < *(short *)(piVar14[1] + 2));
         }
         iVar9 = iVar9 + 1;
         piVar14 = piVar14 + 1;
@@ -9394,16 +8998,15 @@ void EVENT_RemoveStreamToInstanceList(_StreamUnit *stream)
   int *piVar6;
   int *piVar7;
   int iVar8;
-  EventTimer *timer;
+  char *timer;
 
   iVar8 = 0;
   iVar3 = 0;
   do
   {
-    if ((((*(short *)((int)&StreamTracker.StreamList[0].used + iVar3) == 2) &&
-          ((_StreamUnit *)((int)&StreamTracker.StreamList[0].StreamUnitID + iVar3) != stream)) &&
-         (piVar7 = *(int **)(*(int *)((int)&StreamTracker.StreamList[0].level + iVar3) + 0xdc),
-          piVar7 != (int *)0x0)) &&
+    if ((((*(short *)((int)&DAT_800d1924 + iVar3) == 2) &&
+          ((_StreamUnit *)((int)&StreamTracker + iVar3) != stream)) &&
+         (piVar7 = *(int **)(*(int *)((int)&DAT_800d1928 + iVar3) + 0xdc), piVar7 != (int *)0x0)) &&
         (iVar3 = 0, piVar6 = piVar7, 0 < *piVar7))
     {
       do
@@ -9446,7 +9049,7 @@ void EVENT_RemoveStreamToInstanceList(_StreamUnit *stream)
             }
             iVar5 = iVar5 + 1;
             ppsVar2 = ppsVar2 + 1;
-          } while (iVar5 < (int)*(short *)(piVar6[1] + 2));
+          } while (iVar5 < *(short *)(piVar6[1] + 2));
         }
         iVar3 = iVar3 + 1;
         piVar6 = piVar6 + 1;
@@ -9460,12 +9063,13 @@ void EVENT_RemoveStreamToInstanceList(_StreamUnit *stream)
       timer = &eventTimerArray;
       do
       {
-        if (((timer->field_0x0 & 1) != 0) && (timer->level == stream->level))
+        if (((((EventTimer *)timer)->flags & 1U) != 0) &&
+            ((Level *)((EventTimer *)timer)->scriptPos == stream->level))
         {
-          EVENT_RemoveTimer(timer);
+          EVENT_RemoveTimer((EventTimer *)timer);
         }
         iVar3 = iVar3 + 1;
-        timer = timer + 1;
+        timer = (char *)&((EventTimer *)timer)->nextEventIndex;
       } while (iVar3 < 0x18);
       return;
     }
@@ -9548,11 +9152,11 @@ void EVENT_RelocateInstanceList(Level *oldLevel, Level *newLevel, long sizeOfLev
   int iVar3;
   int iVar4;
   Level *pLVar5;
-  EventTimer *pEVar6;
+  char *pcVar6;
   short *psVar7;
-  Event *pEVar8;
+  uint uVar8;
   int iVar9;
-  ScriptPCode *pSVar10;
+  uint uVar10;
   Level *pLVar11;
   Level *pLVar12;
   int *piVar13;
@@ -9565,9 +9169,8 @@ void EVENT_RelocateInstanceList(Level *oldLevel, Level *newLevel, long sizeOfLev
   iVar4 = 0;
   do
   {
-    if (((*(short *)((int)&StreamTracker.StreamList[0].used + iVar4) == 2) &&
-         (piVar14 = *(int **)(*(int *)((int)&StreamTracker.StreamList[0].level + iVar4) + 0xdc),
-          piVar14 != (int *)0x0)) &&
+    if (((*(short *)((int)&DAT_800d1924 + iVar4) == 2) &&
+         (piVar14 = *(int **)(*(int *)((int)&DAT_800d1928 + iVar4) + 0xdc), piVar14 != (int *)0x0)) &&
         (iVar4 = 0, piVar13 = piVar14, 0 < *piVar14))
     {
       do
@@ -9627,7 +9230,7 @@ void EVENT_RelocateInstanceList(Level *oldLevel, Level *newLevel, long sizeOfLev
             }
             iVar9 = iVar9 + 1;
             ppsVar2 = ppsVar2 + 1;
-          } while (iVar9 < (int)*(short *)(piVar13[1] + 2));
+          } while (iVar9 < *(short *)(piVar13[1] + 2));
         }
         iVar4 = iVar4 + 1;
         piVar13 = piVar13 + 1;
@@ -9636,33 +9239,33 @@ void EVENT_RelocateInstanceList(Level *oldLevel, Level *newLevel, long sizeOfLev
     iVar15 = iVar15 + 1;
     iVar4 = iVar15 * 0x40;
   } while (iVar15 < 0x10);
-  pEVar6 = &eventTimerArray;
+  pcVar6 = &eventTimerArray;
   do
   {
-    if (((pEVar6->field_0x0 & 1) != 0) && (pEVar6->level == oldLevel))
+    if (((*(uint *)pcVar6 & 1) != 0) && ((Level *)((uint *)pcVar6)[4] == oldLevel))
     {
-      pEVar8 = (Event *)0x0;
-      if (pEVar6->event != (Event *)0x0)
+      uVar8 = 0;
+      if (((uint *)pcVar6)[1] != 0)
       {
-        pEVar8 = (Event *)((int)&pLVar11->terrain + (int)pEVar6->event);
+        uVar8 = (int)&pLVar11->terrain + ((uint *)pcVar6)[1];
       }
-      pSVar10 = (ScriptPCode *)0x0;
-      pEVar6->event = pEVar8;
-      if (pEVar6->actionScript != (ScriptPCode *)0x0)
+      uVar10 = 0;
+      ((uint *)pcVar6)[1] = uVar8;
+      if (((uint *)pcVar6)[2] != 0)
       {
-        pSVar10 = (ScriptPCode *)((int)&pLVar11->terrain + (int)pEVar6->actionScript);
+        uVar10 = (int)&pLVar11->terrain + ((uint *)pcVar6)[2];
       }
-      psVar7 = (short *)0x0;
-      pEVar6->actionScript = pSVar10;
-      if (pEVar6->scriptPos != (short *)0x0)
+      uVar8 = 0;
+      ((uint *)pcVar6)[2] = uVar10;
+      if (((uint *)pcVar6)[3] != 0)
       {
-        psVar7 = (short *)((int)&pLVar11->terrain + (int)pEVar6->scriptPos);
+        uVar8 = (int)&pLVar11->terrain + ((uint *)pcVar6)[3];
       }
-      pEVar6->scriptPos = psVar7;
-      pEVar6->level = newLevel;
+      ((uint *)pcVar6)[3] = uVar8;
+      *(Level **)((uint *)pcVar6 + 4) = newLevel;
     }
-    pEVar6 = pEVar6 + 1;
-  } while ((int)pEVar6 < -0x7ff2d5ec);
+    pcVar6 = (char *)((uint *)pcVar6 + 6);
+  } while ((int)pcVar6 < -0x7ff2d5ec);
   return;
 }
 
@@ -9679,8 +9282,6 @@ void EVENT_RelocateInstanceList(Level *oldLevel, Level *newLevel, long sizeOfLev
 // Start line: 16069
 /* end block 2 */
 // End Line: 16070
-
-/* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void EVENT_PrintVars(void)
 

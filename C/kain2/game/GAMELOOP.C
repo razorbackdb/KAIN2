@@ -1,36 +1,6 @@
 #include "THISDUST.H"
 #include "GAMELOOP.H"
 
-// void * @0x800D0C30, len = 0x00000004
-enemyPlanPool = null;
-// Object * @0x800CE2AC, len = 0x00000004
-fontsObject = 00000000;
-// _FXTracker * @0x800D0C58, len = 0x00000004
-fxTracker = null;
-// _FXTracker * @0x800D0C44, len = 0x00000004
-gFXT = null;
-// LightInfo * @0x800D0C2C, len = 0x00000004
-gLightInfo = null;
-// _ObjectTracker * @0x800D0C38, len = 0x00000004
-GlobalObjects = null;
-// ulong * * @0x800D0C0C, len = 0x00000004
-gOt2 = null;
-// _PolytopeList * @0x800D0C1C, len = 0x00000004
-gPolytopeList = null;
-// _VertexPool * @0x800D0C28, len = 0x00000004
-gVertexPool = null;
-// _InstanceList * @0x800D0C20, len = 0x00000004
-instanceList = null;
-// _InstancePool * @0x800D0C24, len = 0x00000004
-instancePool = null;
-// short @0x800D0C3C, len = 0x00000002
-pause_redraw_flag = null;
-// void * @0x800D0C40, len = 0x00000004
-pause_redraw_prim = null;
-// void * @0x800D0C34, len = 0x00000004
-planningPool = null;
-// _PrimPool * @0x800D0C14, len = 0x00000004
-primPool2 = null;
 // decompiled code
 // original method signature:
 // void /*$ra*/ GAMELOOP_AllocStaticMemory()
@@ -45,24 +15,8 @@ primPool2 = null;
 void GAMELOOP_AllocStaticMemory(void)
 
 {
-  instanceList = (_InstanceList *)MEMPACK_Malloc(0x10c, '\x06');
-  instancePool = (_InstancePool *)MEMPACK_Malloc((ulong)&DAT_0000953c, '\x06');
-  gOt2 = (ulong **)MEMPACK_Malloc((ulong)&LAB_00034e18, '\x06');
-  PTR_800d0c10 = gOt2 + 0xc00;
-  primPool2 = (_PrimPool *)(gOt2 + 0x1800);
-  PTR_800d0c18 = (_PrimPool *)(gOt2 + 0x75c3);
-  primBase = (char *)gOt2;
-  gLightInfo = (LightInfo *)MEMPACK_Malloc(0x47c, '\x06');
-  memset(gLightInfo, 0, 0x47c);
-  gPolytopeList = (_PolytopeList *)MEMPACK_Malloc((ulong)&DAT_000018c0, '\x06');
-  gVertexPool = (_VertexPool *)gPolytopeList;
-  gFXT = (_FXTracker *)MEMPACK_Malloc((ulong)&DAT_00006da8, '\x06');
-  fxTracker = gFXT;
-  planningPool = MEMPACK_Malloc(3000, '\x06');
-  enemyPlanPool = MEMPACK_Malloc(1000, '\x06');
-  GlobalObjects = (_ObjectTracker *)MEMPACK_Malloc(0x6c0, '\x06');
-  G2Anim_Install();
-  return;
+  /* WARNING: Subroutine does not return */
+  MEMPACK_Malloc(0x10c, '\x06');
 }
 
 // decompiled code
@@ -98,35 +52,35 @@ void GAMELOOP_InitGameTracker(void)
   int iVar1;
   int iVar2;
 
-  gameTrackerX.GlobalObjects = GlobalObjects;
-  gameTrackerX.planningPool = planningPool;
-  gameTrackerX.enemyPlanPool = enemyPlanPool;
-  gameTrackerX.vertexPool = gVertexPool;
+  DAT_800d0ff0 = GlobalObjects;
+  DAT_800d11bc = planningPool;
+  DAT_800d11c0 = enemyPlanPool;
+  DAT_800d0fe8 = gVertexPool;
   primPool2->lastPrim = primPool2->prim + 0x5db4;
-  gameTrackerX.instanceList = instanceList;
+  DAT_800d0fe0 = instanceList;
   PTR_800d0c18->lastPrim = PTR_800d0c18->prim + 0x5db4;
-  gameTrackerX.lightInfo = gLightInfo;
+  DAT_800d10c0 = gLightInfo;
   primPool2->nextPrim = primPool2->prim;
-  gameTrackerX.instancePool = instancePool;
+  DAT_800d0fe4 = instancePool;
   PTR_800d0c18->nextPrim = PTR_800d0c18->prim;
   iVar2 = 0;
   iVar1 = 0;
-  gameTrackerX.multGameTime = 10;
-  gameTrackerX.material_fadeValue = 0x1000;
-  gameTrackerX.spectral_fadeValue = 0;
-  gameTrackerX.decoupleGame = 1;
-  gameTrackerX.frameRateLock = 1;
-  gameTrackerX.primPool = primPool2;
-  gameTrackerX.drawOT = gOt2;
-  gameTrackerX.dispOT = PTR_800d0c10;
-  gameTrackerX.frameRate24fps = 1;
+  DAT_800d11cc = 10;
+  DAT_800d11d2 = 0x1000;
+  DAT_800d11d0 = 0;
+  DAT_800d11c8 = 1;
+  ULONG_800d1214 = 1;
+  DAT_800d0fec = primPool2;
+  DAT_800d1180 = gOt2;
+  DAT_800d1184 = PTR_800d0c10;
+  ULONG_800d1218._0_2_ = 1;
   do
   {
     iVar2 = iVar2 + 1;
-    *(undefined2 *)((int)&(gameTrackerX.GlobalObjects)->objectStatus + iVar1) = 0;
+    *(undefined2 *)((int)&DAT_800d0ff0->objectStatus + iVar1) = 0;
     iVar1 = iVar1 + 0x24;
   } while (iVar2 < 0x30);
-  gameTrackerX.gameData.asmData.MorphTime = 1000;
+  DAT_800d0fb4 = 1000;
   OBTABLE_ClearObjectReferences();
   EVENT_Init();
   return;
@@ -189,16 +143,16 @@ void GAMELOOP_ClearGameTracker(void)
 {
   pause_redraw_flag = 0;
   pause_redraw_prim = (void *)0x0;
-  gameTrackerX.gameData.asmData.drawBackFaces = 0;
-  gameTrackerX.gameData.asmData.MorphTime = 1000;
-  gameTrackerX.debugFlags = gameTrackerX.debugFlags | 0x40000;
-  gameTrackerX.frameCount = 0;
-  gameTrackerX.fps30Count = 0;
-  gameTrackerX.gameFlags = 0;
-  gameTrackerX.currentHotSpot = 0;
-  gameTrackerX.SwitchToNewStreamUnit = 0;
-  gameTrackerX.currentTime = 0;
-  gameTrackerX.currentTicks = 0;
+  gameTrackerX = 0;
+  DAT_800d0fb4 = 1000;
+  vmRealClock = vmRealClock | 0x40000;
+  DAT_800d10d8 = 0;
+  DAT_800d10dc = 0;
+  DAT_800d10ec = 0;
+  DAT_800d1120 = 0;
+  DAT_800d1128 = 0;
+  DAT_800d11d8 = 0;
+  ULONG_800d11fc = 0;
   return;
 }
 
@@ -243,11 +197,11 @@ void GAMELOOP_CalcGameTime(void)
   int iVar1;
   int iVar2;
 
-  iVar2 = (gameTrackerX.currentTimeOfDayTime * gameTrackerX.multGameTime) / 60000 + 0x2d0;
+  iVar2 = (uint)(DAT_800d11e4 * DAT_800d11cc) / 60000 + 0x2d0;
   iVar1 = iVar2 / 0x3c;
-  gameTrackerX.timeOfDay =
-      (short)iVar1 * 0x28 +
-      ((short)(iVar1 / 6 + (iVar1 >> 0x1f) >> 2) - (short)(iVar1 >> 0x1f)) * -0x960 + (short)iVar2;
+  DAT_800d11c6 = (short)iVar1 * 0x28 +
+                 ((short)(iVar1 / 6 + (iVar1 >> 0x1f) >> 2) - (short)(iVar1 >> 0x1f)) * -0x960 +
+                 (short)iVar2;
   return;
 }
 
@@ -269,21 +223,24 @@ void GAMELOOP_CalcGameTime(void)
 /* end block 2 */
 // End Line: 943
 
-void GAMELOOP_SetGameTime(long timeOfDay)
+void FONT_SetColorIndexCol(int color, int r, int g, int b)
 
 {
   int iVar1;
   int iVar2;
 
-  iVar1 = timeOfDay + (timeOfDay / 100) * -0x28;
+  iVar1 = color + (color / 100) * -0x28;
   iVar2 = iVar1 + -0x2d0;
   if (iVar2 < 0)
   {
     iVar2 = iVar1 + 0x2d0;
   }
-  gameTrackerX.currentMaterialTime = (iVar2 * 60000) / gameTrackerX.multGameTime;
-  gameTrackerX.timeOfDay = (short)timeOfDay;
-  gameTrackerX.currentTimeOfDayTime = gameTrackerX.currentMaterialTime;
+  fontTracker.font_buffer[138]._0_4_ = (iVar2 * 60000) / fontTracker.font_buffer[135]._2_4_;
+  /* WARNING: Read-only address (ram,0x800d2caa) is written */
+  fontTracker.font_buffer[134].y = (short)color;
+  fontTracker.font_buffer[139]._2_4_ = fontTracker.font_buffer[138]._0_4_;
+  /* WARNING: Read-only address (ram,0x800d2cc8) is written */
+  /* WARNING: Read-only address (ram,0x800d2cc0) is written */
   return;
 }
 
@@ -323,7 +280,7 @@ int GAMELOOP_GetTimeOfDay(void)
   int iVar1;
   int iVar2;
 
-  iVar2 = (int)gameTrackerX.timeOfDay;
+  iVar2 = (int)DAT_800d11c6;
   if (iVar2 - 0x259U < 99)
   {
     return 600;
@@ -388,7 +345,7 @@ int GAMELOOP_WaitForLoad(void)
 {
   int iVar1;
 
-  if ((gameTrackerX.debugFlags & 0x80000U) != 0)
+  if ((vmRealClock & 0x80000U) != 0)
   {
     VOICEXA_Tick();
   }
@@ -452,82 +409,12 @@ int GAMELOOP_WaitForLoad(void)
 _StreamUnit *LoadLevels(char *baseAreaName, GameTracker *gameTracker)
 
 {
-  bool bVar1;
-  short sVar2;
-  _StreamUnit *streamUnit;
-  int iVar3;
-  int iVar4;
-  Level *pLVar5;
-  _BSPNode *p_Var6;
-  _MultiSignal *p_Var7;
-  BSPTree *pBVar8;
-  _SVector local_20;
-
   if (DAT_800ce2b0 != '\0')
   {
     STREAM_AbortAreaLoad(&DAT_800ce2b0);
   }
+  /* WARNING: Subroutine does not return */
   strcpy(&DAT_800ce2b0, baseAreaName);
-  streamUnit = STREAM_GetStreamUnitWithName(baseAreaName);
-  bVar1 = streamUnit == (_StreamUnit *)0x0;
-  if (bVar1)
-  {
-    LOAD_ChangeDirectory(baseAreaName);
-    streamUnit = STREAM_LoadLevel(baseAreaName, (StreamUnitPortal *)0x0, 0);
-  }
-  if (streamUnit->used == 1)
-  {
-    DRAW_LoadingMessage();
-    sVar2 = streamUnit->used;
-    while (sVar2 == 1)
-    {
-      GAMELOOP_WaitForLoad();
-      sVar2 = streamUnit->used;
-    }
-    if (!bVar1)
-    {
-      LOAD_ChangeDirectory(baseAreaName);
-      streamUnit = STREAM_LoadLevel(baseAreaName, (StreamUnitPortal *)0x0, 0);
-      STREAM_DumpLoadingObjects();
-    }
-    STREAM_NextLoadFromHead();
-    STREAM_LoadMainVram(gameTracker, baseAreaName, streamUnit);
-    STREAM_NextLoadAsNormal();
-    iVar3 = GAMELOOP_WaitForLoad();
-    do
-    {
-      iVar4 = GAMELOOP_WaitForLoad();
-      if (iVar4 == 0)
-        break;
-    } while (iVar3 + -1 <= iVar4);
-  }
-  else
-  {
-    LOAD_ChangeDirectory(baseAreaName);
-    streamUnit = STREAM_LoadLevel(baseAreaName, (StreamUnitPortal *)0x0, 0);
-    STREAM_DumpLoadingObjects();
-    STREAM_LoadMainVram(gameTracker, baseAreaName, streamUnit);
-  }
-  pLVar5 = streamUnit->level;
-  p_Var7 = pLVar5->startUnitMainSignal;
-  if (p_Var7 != (_MultiSignal *)0x0)
-  {
-    if (gameTracker->playerInstance != (_Instance *)0x0)
-    {
-      p_Var7->flags = p_Var7->flags | 1;
-      SIGNAL_HandleSignal(gameTracker->playerInstance,
-                          streamUnit->level->startUnitMainSignal->signalList, 0);
-      EVENT_AddSignalToReset(streamUnit->level->startUnitMainSignal);
-    }
-    pLVar5 = streamUnit->level;
-  }
-  pBVar8 = pLVar5->terrain->BSPTreeArray;
-  p_Var6 = pBVar8->bspRoot;
-  local_20.x = -((p_Var6->sphere).position.x + (pBVar8->globalOffset).x);
-  local_20.y = -((p_Var6->sphere).position.y + (pBVar8->globalOffset).y);
-  local_20.z = -((p_Var6->sphere).position.z + (pBVar8->globalOffset).z);
-  PreloadAllConnectedUnits(streamUnit, &local_20);
-  return streamUnit;
 }
 
 // decompiled code
@@ -555,18 +442,18 @@ void GAMELOOP_InitStandardObjects(void)
 
 {
   char *name;
-  undefined **ppuVar1;
+  char **ppcVar1;
   uint uVar2;
 
   LOAD_DumpCurrentDir();
   uVar2 = 0;
-  ppuVar1 = &PTR_s_raziel_800c8734;
+  ppcVar1 = (char **)&DebugMenuLine_800c8720.bit_mask;
   do
   {
-    name = *ppuVar1;
-    ppuVar1 = ppuVar1 + 1;
+    name = *ppcVar1;
+    ppcVar1 = ppcVar1 + 1;
     uVar2 = uVar2 + 1;
-    InsertGlobalObject(name, &gameTrackerX);
+    InsertGlobalObject(name, (GameTracker *)&gameTrackerX);
   } while (uVar2 < 10);
   return;
 }
@@ -606,24 +493,21 @@ void GAMELOOP_InitStandardObjects(void)
 void GAMELOOP_LevelLoadAndInit(char *baseAreaName, GameTracker *gameTracker)
 
 {
-  void *pvVar1;
+  long *plVar1;
   _InstanceList *list;
   _InstancePool *pool;
   _StreamUnit *p_Var2;
   int iVar3;
-  int iVar4;
-  _Instance *p_Var5;
-  _MultiSignal *p_Var6;
-  Level *pLVar7;
-  int iVar8;
+  _Instance *p_Var4;
+  _MultiSignal *p_Var5;
 
-  G2Anim_ResetInternalState();
+  _G2Anim_AllocateInterpStateBlockList((_G2AnimSection_Type *)baseAreaName);
   pool = instancePool;
   list = instanceList;
   gameTracker->playerInstance = (_Instance *)0x0;
   INSTANCE_InitInstanceList(list, pool);
   GAMELOOP_ClearGameTracker();
-  CAMERA_Initialize(&theCamera);
+  CAMERA_Initialize((Camera *)&theCamera);
   PLANAPI_InitPlanning(planningPool);
   ENMYPLAN_InitEnemyPlanPool(enemyPlanPool);
   FX_Init(fxTracker);
@@ -634,65 +518,52 @@ void GAMELOOP_LevelLoadAndInit(char *baseAreaName, GameTracker *gameTracker)
   do
   {
     iVar3 = STREAM_PollLoadQueue();
-    pvVar1 = ObjectAccess_800c878c.object;
+    plVar1 = DebugMenuLine_800c8780.var_address;
   } while (iVar3 != 0);
-  gameTracker->introFX = ObjectAccess_800c87ac.object;
-  pLVar7 = p_Var2->level;
+  *(DEBUG_LINE_TYPE *)&gameTracker->introFX = debugForgedAbilitiesMenu.type;
   RENDER_currentStreamUnitID = *(short *)&gameTracker->StreamUnitID;
-  fontsObject = (Object *)pvVar1;
-  iVar3 = 0;
-  if (0 < pLVar7->numIntros)
+  fontsObject = (Object *)plVar1;
+  if (0 < p_Var2->level->numIntros)
   {
-    iVar8 = 0;
-    do
-    {
-      iVar4 = strcmpi(pLVar7->introList->name + iVar8, s_raziel_800ce310);
-      if (iVar4 == 0)
-      {
-        INSTANCE_IntroduceInstance((Intro *)(p_Var2->level->introList->name + iVar8), *(short *)&p_Var2->StreamUnitID);
-        break;
-      }
-      pLVar7 = p_Var2->level;
-      iVar3 = iVar3 + 1;
-      iVar8 = iVar8 + 0x4c;
-    } while (iVar3 < pLVar7->numIntros);
+    /* WARNING: Subroutine does not return */
+    strcmpi((char *)p_Var2->level->introList, s_raziel_800ce310);
   }
   gameTracker->playerInstance->data = gameTracker->playerInstance->object->data;
-  CAMERA_SetInstanceFocus(&theCamera, gameTracker->playerInstance);
-  p_Var5 = gameTracker->playerInstance;
-  theCamera.core.position.x = (p_Var5->position).x;
-  theCamera.core.position.y = (p_Var5->position).y;
-  theCamera.core.position.z = (p_Var5->position).z;
+  CAMERA_SetInstanceFocus((Camera *)&theCamera, gameTracker->playerInstance);
+  p_Var4 = gameTracker->playerInstance;
+  theCamera = (p_Var4->position).x;
+  DAT_800cfe92 = (p_Var4->position).y;
+  DAT_800cfe94 = (p_Var4->position).z;
   SetFogNearFar((uint)p_Var2->level->fogNear, (uint)p_Var2->level->fogFar, 0x140);
   SetFarColor(0, 0, 0);
-  clearRect.r0 = p_Var2->level->backColorR;
+  clearRect[0].r0 = p_Var2->level->backColorR;
   /* WARNING: Read-only address (ram,0x800d0f8c) is written */
-  clearRect.g0 = p_Var2->level->backColorG;
+  clearRect[0].g0 = p_Var2->level->backColorG;
   /* WARNING: Read-only address (ram,0x800d0f8d) is written */
-  clearRect.b0 = p_Var2->level->backColorB;
+  clearRect[0].b0 = p_Var2->level->backColorB;
   /* WARNING: Read-only address (ram,0x800d0f8e) is written */
-  BLK_FILL_800d0f98.r0 = p_Var2->level->backColorR;
+  clearRect[1].r0 = p_Var2->level->backColorR;
   /* WARNING: Read-only address (ram,0x800d0f9c) is written */
-  BLK_FILL_800d0f98.g0 = p_Var2->level->backColorG;
+  clearRect[1].g0 = p_Var2->level->backColorG;
   /* WARNING: Read-only address (ram,0x800d0f9d) is written */
-  BLK_FILL_800d0f98.b0 = p_Var2->level->backColorB;
+  clearRect[1].b0 = p_Var2->level->backColorB;
   /* WARNING: Read-only address (ram,0x800d0f9e) is written */
   gameTracker->wipeType = 10;
   gameTracker->hideBG = 0;
   gameTracker->wipeTime = 0x1e;
   gameTracker->maxWipeTime = 0x1e;
-  p_Var6 = p_Var2->level->startSignal;
-  if (p_Var6 != (_MultiSignal *)0x0)
+  p_Var5 = p_Var2->level->startSignal;
+  if (p_Var5 != (_MultiSignal *)0x0)
   {
-    p_Var6->flags = p_Var6->flags | 1;
+    p_Var5->flags = p_Var5->flags | 1;
     SIGNAL_HandleSignal(gameTracker->playerInstance, p_Var2->level->startSignal->signalList, 0);
     EVENT_AddSignalToReset(p_Var2->level->startSignal);
   }
   gameTracker->vblFrames = 0;
-  p_Var6 = p_Var2->level->startUnitMainSignal;
-  if ((p_Var6 != (_MultiSignal *)0x0) && (gameTracker->playerInstance != (_Instance *)0x0))
+  p_Var5 = p_Var2->level->startUnitMainSignal;
+  if ((p_Var5 != (_MultiSignal *)0x0) && (gameTracker->playerInstance != (_Instance *)0x0))
   {
-    p_Var6->flags = p_Var6->flags | 1;
+    p_Var5->flags = p_Var5->flags | 1;
     SIGNAL_HandleSignal(gameTracker->playerInstance, p_Var2->level->startUnitMainSignal->signalList, 0);
     EVENT_AddSignalToReset(p_Var2->level->startUnitMainSignal);
   }
@@ -715,10 +586,10 @@ void GAMELOOP_LevelLoadAndInit(char *baseAreaName, GameTracker *gameTracker)
 /* end block 2 */
 // End Line: 2614
 
-void GAMELOOP_StreamLevelLoadAndInit(char *baseAreaName, GameTracker *gameTracker, int toSignalNum, int fromSignalNum)
+void GAMELOOP_StreamLevelLoadAndInit(char *param_1, GameTracker *param_2)
 
 {
-  LoadLevels(baseAreaName, gameTracker);
+  LoadLevels(param_1, param_2);
   return;
 }
 
@@ -739,9 +610,9 @@ void GAMELOOP_StreamLevelLoadAndInit(char *baseAreaName, GameTracker *gameTracke
 void GAMELOOP_SetScreenWipe(int time, int maxTime, int type)
 
 {
-  gameTrackerX.wipeTime = (short)time;
-  gameTrackerX.maxWipeTime = (short)maxTime;
-  gameTrackerX.wipeType = (short)type;
+  DAT_800d1078 = (short)time;
+  DAT_800d107a = (short)maxTime;
+  DAT_800d107c = (short)type;
   return;
 }
 
@@ -775,83 +646,81 @@ void GAMELOOP_HandleScreenWipes(ulong **drawot)
   _PrimPool *primPool;
   int r;
 
-  primPool = gameTrackerX.primPool;
+  primPool = DAT_800d0fec;
   if ((GlobalSave->flags & 1U) != 0)
   {
-    DRAW_FlatQuad(&gameTrackerX.wipeColor, 0, 0, 0x200, 0, 0, 0x1e, 0x200, 0x1e, gameTrackerX.primPool, drawot);
-    DRAW_FlatQuad(&gameTrackerX.wipeColor, 0, 0xd2, 0x200, 0xd2, 0, 0xf0, 0x200, 0xf0, primPool, drawot);
+    DRAW_FlatQuad((CVECTOR *)&DAT_800d1074, 0, 0, 0x200, 0, 0, 0x1e, 0x200, 0x1e, DAT_800d0fec, drawot);
+    DRAW_FlatQuad((CVECTOR *)&DAT_800d1074, 0, 0xd2, 0x200, 0xd2, 0, 0xf0, 0x200, 0xf0, primPool, drawot);
   }
-  r = (int)gameTrackerX.wipeTime;
+  r = (int)DAT_800d1078;
   if (r < 1)
   {
     if (r < -1)
     {
-      if (gameTrackerX.wipeType == 10)
+      if (DAT_800d107c == 10)
       {
-        r = (int)(short)((((int)gameTrackerX.maxWipeTime + r + 2) * 0xff) /
-                         (int)gameTrackerX.maxWipeTime);
+        r = (int)(short)((((int)DAT_800d107a + r + 2) * 0xff) / (int)DAT_800d107a);
         DRAW_TranslucentQuad(0, 0, 0x200, 0, 0, 0xf0, 0x200, 0xf0, r, r, r, 2, primPool, drawot);
       }
       else
       {
-        if (gameTrackerX.wipeType == 0xb)
+        if (DAT_800d107c == 0xb)
         {
-          r = (int)(short)((((int)gameTrackerX.maxWipeTime + r) * 0xff) /
-                           (int)gameTrackerX.maxWipeTime);
+          r = (int)(short)((((int)DAT_800d107a + r) * 0xff) / (int)DAT_800d107a);
           DRAW_TranslucentQuad(0, 0, 0x200, 0, 0, 0x1e, 0x200, 0x1e, r, r, r, 2, primPool, drawot);
           DRAW_TranslucentQuad(0, 0xd2, 0x200, 0xd2, 0, 0xf0, 0x200, 0xf0, r, r, r, 2, primPool, drawot);
-          if (gameTrackerX.wipeTime == -2)
+          if (DAT_800d1078 == -2)
           {
             GlobalSave->flags = GlobalSave->flags | 1;
           }
         }
       }
-      if (gameTrackerX.gameFramePassed != 0)
+      if (ULONG_800d120c != 0)
       {
-        gameTrackerX.wipeTime = gameTrackerX.wipeTime + 1;
+        DAT_800d1078 = DAT_800d1078 + 1;
       }
     }
     else
     {
       if (r == -1)
       {
-        if (gameTrackerX.wipeType == 0xb)
+        if (DAT_800d107c == 0xb)
         {
           GlobalSave->flags = GlobalSave->flags | 1;
         }
         else
         {
-          DRAW_FlatQuad(&gameTrackerX.wipeColor, 0, 0, 0x200, 0, 0, 0xf0, 0x200, 0xf0, primPool, drawot);
+          DRAW_FlatQuad((CVECTOR *)&DAT_800d1074, 0, 0, 0x200, 0, 0, 0xf0, 0x200, 0xf0, primPool, drawot);
         }
       }
       else
       {
-        theCamera.core.screenScale.z = 0x1000;
-        theCamera.core.screenScale.y = 0x1000;
-        theCamera.core.screenScale.x = 0x1000;
+        DAT_800cff4e = 0x1000;
+        DAT_800cff4c = 0x1000;
+        DAT_800cff4a = 0x1000;
       }
     }
   }
   else
   {
-    if (gameTrackerX.wipeType == 10)
+    if (DAT_800d107c == 10)
     {
-      r = (int)(short)((r * 0xff) / (int)gameTrackerX.maxWipeTime);
+      r = (int)(short)((r * 0xff) / (int)DAT_800d107a);
       DRAW_TranslucentQuad(0, 0, 0x200, 0, 0, 0xf0, 0x200, 0xf0, r, r, r, 2, primPool, drawot);
     }
     else
     {
-      if (gameTrackerX.wipeType == 0xb)
+      if (DAT_800d107c == 0xb)
       {
-        r = (int)(short)((r * 0xff) / (int)gameTrackerX.maxWipeTime);
+        r = (int)(short)((r * 0xff) / (int)DAT_800d107a);
         DRAW_TranslucentQuad(0, 0, 0x200, 0, 0, 0x1e, 0x200, 0x1e, r, r, r, 2, primPool, drawot);
         DRAW_TranslucentQuad(0, 0xd2, 0x200, 0xd2, 0, 0xf0, 0x200, 0xf0, r, r, r, 2, primPool, drawot);
         GlobalSave->flags = GlobalSave->flags & 0xfffe;
       }
     }
-    if (gameTrackerX.gameFramePassed != 0)
+    if (ULONG_800d120c != 0)
     {
-      gameTrackerX.wipeTime = gameTrackerX.wipeTime + -1;
+      DAT_800d1078 = DAT_800d1078 + -1;
     }
   }
   return;
@@ -1098,23 +967,20 @@ LAB_8002e900:
 
 /* WARNING: This function may have set the stack pointer */
 /* WARNING: Could not reconcile some variable overlaps */
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void MainRenderLevel(_StreamUnit *currentUnit, ulong **drawot)
 
 {
   MATRIX *pMVar1;
   LightInfo *lightInfo;
-  _Instance *p_Var2;
-  ulong *puVar3;
-  ushort uVar4;
+  ushort uVar2;
   int unitID;
-  uint uVar5;
+  uint uVar3;
   Level *level;
-  int **ppiVar6;
-  _Instance *p_Var7;
-  int iVar8;
+  int iVar4;
+  int iVar5;
   _Terrain *terrain;
-  int **local_64;
   undefined4 local_60;
   short local_5c;
   undefined4 local_58;
@@ -1133,24 +999,24 @@ void MainRenderLevel(_StreamUnit *currentUnit, ulong **drawot)
   level = currentUnit->level;
   terrain = level->terrain;
   UpdateFogSettings(currentUnit, level);
-  currentUnit->FrameCount = gameTrackerX.displayFrameCount;
+  currentUnit->FrameCount = DAT_800d10d4;
   SetFogNearFar((uint)level->fogNear, (uint)level->fogFar, 0x140);
   SetFarColor(0, 0, 0);
-  clearRect.r0 = level->backColorR;
+  clearRect[0].r0 = level->backColorR;
   /* WARNING: Read-only address (ram,0x800d0f8c) is written */
-  clearRect.g0 = level->backColorG;
+  clearRect[0].g0 = level->backColorG;
   /* WARNING: Read-only address (ram,0x800d0f8d) is written */
-  clearRect.b0 = level->backColorB;
+  clearRect[0].b0 = level->backColorB;
   /* WARNING: Read-only address (ram,0x800d0f8e) is written */
-  BLK_FILL_800d0f98.r0 = level->backColorR;
+  clearRect[1].r0 = level->backColorR;
   /* WARNING: Read-only address (ram,0x800d0f9c) is written */
-  BLK_FILL_800d0f98.g0 = level->backColorG;
+  clearRect[1].g0 = level->backColorG;
   /* WARNING: Read-only address (ram,0x800d0f9d) is written */
-  BLK_FILL_800d0f98.b0 = level->backColorB;
+  clearRect[1].b0 = level->backColorB;
   /* WARNING: Read-only address (ram,0x800d0f9e) is written */
-  if ((int)gameTrackerX.gameData.asmData.MorphTime == 1000)
+  if ((int)DAT_800d0fb4 == 1000)
   {
-    if (gameTrackerX.gameData.asmData.MorphType == 1)
+    if (DAT_800d0fb6 == 1)
     {
       local_30[0] = *(_ColorType *)&level->specturalColorR;
     }
@@ -1161,8 +1027,8 @@ void MainRenderLevel(_StreamUnit *currentUnit, ulong **drawot)
   }
   else
   {
-    unitID = ((int)gameTrackerX.gameData.asmData.MorphTime << 0xc) / 1000;
-    if (gameTrackerX.gameData.asmData.MorphType == 1)
+    unitID = ((int)DAT_800d0fb4 << 0xc) / 1000;
+    if (DAT_800d0fb6 == 1)
     {
       unitID = 0x1000 - unitID;
     }
@@ -1173,7 +1039,7 @@ void MainRenderLevel(_StreamUnit *currentUnit, ulong **drawot)
   depthQBackColor = currentUnit->FogColor;
   unitID = GAMELOOP_GetTimeOfDay();
   if ((((unitID != 600) && (unitID != 0x708)) || ((level->unitFlags & 2U) == 0)) &&
-      (gameTrackerX.gameData.asmData.MorphTime == 1000))
+      (DAT_800d0fb4 == 1000))
   {
     depthQBackColor = depthQBackColor & 0xfff8f8f8 | 0x40404;
   }
@@ -1186,74 +1052,63 @@ void MainRenderLevel(_StreamUnit *currentUnit, ulong **drawot)
     depthQBlendStart = depthQFogStart;
   }
   /* WARNING: Read-only address (ram,0x800d0f8c) is written */
-  clearRect.r0 = (uchar)depthQBackColor;
+  clearRect[0].r0 = (uchar)depthQBackColor;
   /* WARNING: Read-only address (ram,0x800d0f8d) is written */
-  clearRect.g0 = depthQBackColor._1_1_;
+  clearRect[0].g0 = depthQBackColor._1_1_;
   /* WARNING: Read-only address (ram,0x800d0f8e) is written */
-  clearRect.b0 = depthQBackColor._2_1_;
+  clearRect[0].b0 = depthQBackColor._2_1_;
   /* WARNING: Read-only address (ram,0x800d0f9c) is written */
-  BLK_FILL_800d0f98.r0 = (uchar)depthQBackColor;
+  clearRect[1].r0 = (uchar)depthQBackColor;
   /* WARNING: Read-only address (ram,0x800d0f9d) is written */
-  BLK_FILL_800d0f98.g0 = depthQBackColor._1_1_;
+  clearRect[1].g0 = depthQBackColor._1_1_;
   /* WARNING: Read-only address (ram,0x800d0f9e) is written */
-  BLK_FILL_800d0f98.b0 = depthQBackColor._2_1_;
-  PIPE3D_AnimateTerrainTextures(terrain->aniList, gameTrackerX.frameCount, gameTrackerX.primPool, drawot);
-  PIPE3D_AnimateTerrainTextures(level->bgAniList, gameTrackerX.frameCount, gameTrackerX.primPool, drawot);
+  clearRect[1].b0 = depthQBackColor._2_1_;
+  PIPE3D_AnimateTerrainTextures(terrain->aniList, DAT_800d10d8, DAT_800d0fec, drawot);
+  PIPE3D_AnimateTerrainTextures(level->bgAniList, DAT_800d10d8, DAT_800d0fec, drawot);
   gLightInfo->numSavedColors = 0;
-  PIPE3D_InstanceListTransformAndDraw(currentUnit, &gameTrackerX, drawot, (_CameraCore_Type *)&theCamera);
-  local_60 = theCamera.core.position._0_4_;
-  local_5c = theCamera.core.position.z;
-  local_58 = *(undefined4 *)(theCamera.core.wcTransform)->m;
-  local_54 = *(undefined4 *)((theCamera.core.wcTransform)->m + 2);
-  local_50 = *(undefined4 *)((theCamera.core.wcTransform)->m + 4);
-  local_4c = *(undefined4 *)((theCamera.core.wcTransform)->m + 6);
-  local_48 = *(undefined4 *)((theCamera.core.wcTransform)->m + 8);
-  local_44 = (theCamera.core.wcTransform)->t[0];
-  local_40 = (theCamera.core.wcTransform)->t[1];
-  local_3c = (theCamera.core.wcTransform)->t[2];
+  PIPE3D_InstanceListTransformAndDraw(currentUnit, (GameTracker *)&gameTrackerX, drawot, (_CameraCore_Type *)&theCamera);
+  lightInfo = gLightInfo;
+  pMVar1 = DAT_800cfef0;
+  local_60 = _theCamera;
+  local_5c = DAT_800cfe94;
+  local_58 = *(undefined4 *)DAT_800cfef0->m;
+  local_54 = *(undefined4 *)(DAT_800cfef0->m + 2);
+  local_50 = *(undefined4 *)(DAT_800cfef0->m + 4);
+  local_4c = *(undefined4 *)(DAT_800cfef0->m + 6);
+  local_48 = *(undefined4 *)(DAT_800cfef0->m + 8);
+  local_44 = DAT_800cfef0->t[0];
+  local_40 = DAT_800cfef0->t[1];
+  local_3c = DAT_800cfef0->t[2];
   unitID = 0;
   if (0 < terrain->numBSPTrees)
   {
-    iVar8 = 0;
+    iVar5 = 0;
     do
     {
-      p_Var2 = gameTrackerX.gameData.asmData.lightInstances[0].lightInstance;
-      ppiVar6 = (int **)((int)&terrain->BSPTreeArray->bspRoot + iVar8);
-      if ((-1 < *(short *)((int)ppiVar6 + 0x1a)) && ((*(ushort *)((int)ppiVar6 + 0x12) & 1) == 0))
+      iVar4 = (int)&terrain->BSPTreeArray->bspRoot + iVar5;
+      if ((-1 < *(short *)(iVar4 + 0x1a)) && ((*(ushort *)(iVar4 + 0x12) & 1) == 0))
       {
-        p_Var7 = (_Instance *)0x0;
-        if ((*(ushort *)((int)ppiVar6 + 0x12) & 0x40) != 0)
+        if ((*(ushort *)(iVar4 + 0x12) & 0x40) != 0)
         {
-          gameTrackerX.gameData.asmData.lightInstances[0].lightInstance = (_Instance *)0x0;
-          p_Var7 = p_Var2;
+          DAT_800d0fb8 = 0;
         }
-        uVar5 = (local_60 & 0xffff) - (uint) * (ushort *)(ppiVar6 + 3);
-        local_38 = -(short)uVar5;
-        uVar4 = local_60._2_2_ - *(short *)((int)ppiVar6 + 0xe);
-        theCamera.core.position._0_4_ = uVar5 & 0xffff | (uint)uVar4 << 0x10;
-        local_36 = -uVar4;
-        theCamera.core.position.z = local_5c - *(short *)(ppiVar6 + 4);
-        local_34 = -theCamera.core.position.z;
-        ApplyMatrix(&local_58, &local_38, (theCamera.core.wcTransform)->t);
-        BSP_MarkVisibleLeaves_S(ppiVar6, (undefined4 *)&theCamera, (int *)gPolytopeList);
-        local_64 = ppiVar6 + 3;
-        puVar3 = (ulong *)(*(code *)gameTrackerX.drawDisplayPolytopeListFunc)(gPolytopeList, terrain, &theCamera, gameTrackerX.primPool);
-        (gameTrackerX.primPool)->nextPrim = puVar3;
-        if ((*(ushort *)((int)ppiVar6 + 0x12) & 0x40) != 0)
-        {
-          gameTrackerX.gameData.asmData.lightInstances[0].lightInstance = p_Var7;
-        }
+        local_60._2_2_ = (short)(_theCamera >> 0x10);
+        uVar3 = (_theCamera & 0xffff) - (uint) * (ushort *)(iVar4 + 0xc);
+        local_38 = -(short)uVar3;
+        uVar2 = local_60._2_2_ - *(short *)(iVar4 + 0xe);
+        _theCamera = uVar3 & 0xffff | (uint)uVar2 << 0x10;
+        local_36 = -uVar2;
+        DAT_800cfe94 = DAT_800cfe94 - *(short *)(iVar4 + 0x10);
+        local_34 = -DAT_800cfe94;
+        /* WARNING: Subroutine does not return */
+        ApplyMatrix(&local_58, &local_38, DAT_800cfef0->t);
       }
       unitID = unitID + 1;
-      iVar8 = iVar8 + 0x24;
+      iVar5 = iVar5 + 0x24;
     } while (unitID < terrain->numBSPTrees);
   }
-  lightInfo = gLightInfo;
-  pMVar1 = theCamera.core.wcTransform;
   unitID = (int)RENDER_currentStreamUnitID;
-  theCamera.core.position._0_4_ = local_60;
-  theCamera.core.position.z = local_5c;
-  *(undefined4 *)(theCamera.core.wcTransform)->m = local_58;
+  *(undefined4 *)DAT_800cfef0->m = local_58;
   *(undefined4 *)(pMVar1->m + 2) = local_54;
   *(undefined4 *)(pMVar1->m + 4) = local_50;
   *(undefined4 *)(pMVar1->m + 6) = local_4c;
@@ -1263,10 +1118,10 @@ void MainRenderLevel(_StreamUnit *currentUnit, ulong **drawot)
   pMVar1->t[2] = local_3c;
   SBSP_IntroduceInstancesAndLights(terrain, (_CameraCore_Type *)&theCamera, lightInfo, unitID);
   StackSave = (ulong)&stack0xffffff88;
-  FX_DrawList(fxTracker, &gameTrackerX, gameTrackerX.drawOT, theCamera.core.wcTransform);
-  if ((gameTrackerX.playerInstance)->currentStreamUnitID == currentUnit->StreamUnitID)
+  FX_DrawList(fxTracker, (GameTracker *)&gameTrackerX, DAT_800d1180, DAT_800cfef0);
+  if (*(int *)(DAT_800d0fd8 + 0x38) == currentUnit->StreamUnitID)
   {
-    FX_DrawReaver(gameTrackerX.primPool, gameTrackerX.drawOT, theCamera.core.wcTransform);
+    FX_DrawReaver(DAT_800d0fec, DAT_800d1180, DAT_800cfef0);
   }
   return;
 }
@@ -1340,24 +1195,22 @@ void StreamIntroInstancesForUnit(_StreamUnit *currentUnit)
 
 /* WARNING: This function may have set the stack pointer */
 /* WARNING: Could not reconcile some variable overlaps */
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 long StreamRenderLevel(_StreamUnit *currentUnit, Level *mainLevel, ulong **drawot, long portalFogColor)
 
 {
   MATRIX *pMVar1;
-  long lVar2;
+  undefined4 uVar2;
   LightInfo *lightInfo;
   int unitID;
-  ulong *puVar3;
-  ushort uVar4;
-  uint uVar5;
-  int **ppiVar6;
+  ushort uVar3;
+  uint uVar4;
+  int iVar5;
   Level *level;
   _Terrain *terrain;
-  int iVar7;
-  undefined auStack112[16];
-  ulong **local_60;
-  int **local_5c;
+  int iVar6;
+  undefined auStack112[24];
   undefined4 local_58;
   short local_54;
   undefined4 local_50;
@@ -1372,7 +1225,7 @@ long StreamRenderLevel(_StreamUnit *currentUnit, Level *mainLevel, ulong **drawo
   short local_2e;
   short local_2c;
 
-  lVar2 = theCamera.core.farPlane;
+  uVar2 = DAT_800cfef4;
   level = currentUnit->level;
   terrain = level->terrain;
   SetFarColor(0, 0, 0);
@@ -1381,7 +1234,7 @@ long StreamRenderLevel(_StreamUnit *currentUnit, Level *mainLevel, ulong **drawo
   depthQFogStart = (uint)level->fogNear;
   depthQBackColor = portalFogColor;
   currentUnit->FogColor = portalFogColor;
-  theCamera.core.farPlane = depthQFogFar;
+  DAT_800cfef4 = depthQFogFar;
   unitID = CheckForNoBlend((_ColorType *)&depthQBackColor);
   depthQBlendStart = 0xffff;
   if (unitID == 0)
@@ -1389,53 +1242,48 @@ long StreamRenderLevel(_StreamUnit *currentUnit, Level *mainLevel, ulong **drawo
     depthQBlendStart = depthQFogStart;
   }
   SetFogNearFar(depthQFogStart, depthQFogFar, 0x140);
-  PIPE3D_AnimateTerrainTextures(terrain->aniList, gameTrackerX.frameCount, gameTrackerX.primPool, drawot);
-  PIPE3D_AnimateTerrainTextures(level->bgAniList, gameTrackerX.frameCount, gameTrackerX.primPool, drawot);
-  PIPE3D_InstanceListTransformAndDraw(currentUnit, &gameTrackerX, drawot, (_CameraCore_Type *)&theCamera);
-  local_58 = theCamera.core.position._0_4_;
-  local_54 = theCamera.core.position.z;
-  local_50 = *(undefined4 *)(theCamera.core.wcTransform)->m;
-  local_4c = *(undefined4 *)((theCamera.core.wcTransform)->m + 2);
-  local_48 = *(undefined4 *)((theCamera.core.wcTransform)->m + 4);
-  local_44 = *(undefined4 *)((theCamera.core.wcTransform)->m + 6);
-  local_40 = *(undefined4 *)((theCamera.core.wcTransform)->m + 8);
-  local_3c = (theCamera.core.wcTransform)->t[0];
-  local_38 = (theCamera.core.wcTransform)->t[1];
-  local_34 = (theCamera.core.wcTransform)->t[2];
+  PIPE3D_AnimateTerrainTextures(terrain->aniList, DAT_800d10d8, DAT_800d0fec, drawot);
+  PIPE3D_AnimateTerrainTextures(level->bgAniList, DAT_800d10d8, DAT_800d0fec, drawot);
+  PIPE3D_InstanceListTransformAndDraw(currentUnit, (GameTracker *)&gameTrackerX, drawot, (_CameraCore_Type *)&theCamera);
+  lightInfo = gLightInfo;
+  pMVar1 = DAT_800cfef0;
+  local_58 = _theCamera;
+  local_54 = DAT_800cfe94;
+  local_50 = *(undefined4 *)DAT_800cfef0->m;
+  local_4c = *(undefined4 *)(DAT_800cfef0->m + 2);
+  local_48 = *(undefined4 *)(DAT_800cfef0->m + 4);
+  local_44 = *(undefined4 *)(DAT_800cfef0->m + 6);
+  local_40 = *(undefined4 *)(DAT_800cfef0->m + 8);
+  local_3c = DAT_800cfef0->t[0];
+  local_38 = DAT_800cfef0->t[1];
+  local_34 = DAT_800cfef0->t[2];
   unitID = 0;
   if (0 < terrain->numBSPTrees)
   {
-    iVar7 = 0;
+    iVar6 = 0;
     do
     {
-      ppiVar6 = (int **)((int)&terrain->BSPTreeArray->bspRoot + iVar7);
-      if ((-1 < *(short *)((int)ppiVar6 + 0x1a)) && ((*(ushort *)((int)ppiVar6 + 0x12) & 1) == 0))
+      iVar5 = (int)&terrain->BSPTreeArray->bspRoot + iVar6;
+      if ((-1 < *(short *)(iVar5 + 0x1a)) && ((*(ushort *)(iVar5 + 0x12) & 1) == 0))
       {
-        uVar5 = (local_58 & 0xffff) - (uint) * (ushort *)(ppiVar6 + 3);
-        local_30 = -(short)uVar5;
-        uVar4 = local_58._2_2_ - *(short *)((int)ppiVar6 + 0xe);
-        theCamera.core.position._0_4_ = uVar5 & 0xffff | (uint)uVar4 << 0x10;
-        local_2e = -uVar4;
-        theCamera.core.position.z = local_54 - *(short *)(ppiVar6 + 4);
-        local_2c = -theCamera.core.position.z;
-        ApplyMatrix(&local_50, &local_30, (theCamera.core.wcTransform)->t);
-        BSP_MarkVisibleLeaves_S(ppiVar6, (undefined4 *)&theCamera, (int *)gPolytopeList);
-        local_5c = ppiVar6 + 3;
-        local_60 = drawot;
-        puVar3 = (ulong *)(*(code *)gameTrackerX.drawDisplayPolytopeListFunc)(gPolytopeList, terrain, &theCamera, gameTrackerX.primPool);
-        (gameTrackerX.primPool)->nextPrim = puVar3;
+        local_58._2_2_ = (short)(_theCamera >> 0x10);
+        uVar4 = (_theCamera & 0xffff) - (uint) * (ushort *)(iVar5 + 0xc);
+        local_30 = -(short)uVar4;
+        uVar3 = local_58._2_2_ - *(short *)(iVar5 + 0xe);
+        _theCamera = uVar4 & 0xffff | (uint)uVar3 << 0x10;
+        local_2e = -uVar3;
+        DAT_800cfe94 = DAT_800cfe94 - *(short *)(iVar5 + 0x10);
+        local_2c = -DAT_800cfe94;
+        /* WARNING: Subroutine does not return */
+        ApplyMatrix(&local_50, &local_30, DAT_800cfef0->t);
       }
       unitID = unitID + 1;
-      iVar7 = iVar7 + 0x24;
+      iVar6 = iVar6 + 0x24;
     } while (unitID < terrain->numBSPTrees);
   }
-  lightInfo = gLightInfo;
-  pMVar1 = theCamera.core.wcTransform;
   unitID = (int)RENDER_currentStreamUnitID;
-  theCamera.core.position._0_4_ = local_58;
-  theCamera.core.position.z = local_54;
   InStreamUnit = 1;
-  *(undefined4 *)(theCamera.core.wcTransform)->m = local_50;
+  *(undefined4 *)DAT_800cfef0->m = local_50;
   *(undefined4 *)(pMVar1->m + 2) = local_4c;
   *(undefined4 *)(pMVar1->m + 4) = local_48;
   *(undefined4 *)(pMVar1->m + 6) = local_44;
@@ -1445,13 +1293,12 @@ long StreamRenderLevel(_StreamUnit *currentUnit, Level *mainLevel, ulong **drawo
   pMVar1->t[2] = local_34;
   SBSP_IntroduceInstancesAndLights(terrain, (_CameraCore_Type *)&theCamera, lightInfo, unitID);
   InStreamUnit = 0;
-  theCamera.core.farPlane = lVar2;
-  if ((gameTrackerX.playerInstance)->currentStreamUnitID == currentUnit->StreamUnitID)
+  DAT_800cfef4 = uVar2;
+  if (*(int *)(DAT_800d0fd8 + 0x38) == currentUnit->StreamUnitID)
   {
-    theCamera.core.farPlane = lVar2;
     hackOT = drawot;
     StackSave = (ulong)auStack112;
-    FX_DrawReaver(gameTrackerX.primPool, drawot, theCamera.core.wcTransform);
+    FX_DrawReaver(DAT_800d0fec, drawot, DAT_800cfef0);
   }
   return 0;
 }
@@ -1537,21 +1384,20 @@ void GAMELOOP_AddClearPrim(ulong **drawot, int override)
   ulong uVar3;
   ulong uVar4;
 
-  if (((gameTrackerX.gameFlags & 0x8000000U) != 0) && (override == 0))
+  if (((DAT_800d10ec & 0x8000000) != 0) && (override == 0))
   {
-    *(ushort *)((int)&gameTrackerX.savedOTStart[1].field_0x0 + 2) =
-        (&clearRect)[gameTrackerX.drawPage].y0;
+    *(ushort *)(DAT_800d1188 + 10) = clearRect[DAT_800d0fdc].y0;
     return;
   }
-  puVar1 = (gameTrackerX.primPool)->nextPrim;
-  uVar2 = *(ulong *)&(&clearRect)[gameTrackerX.drawPage].r0;
-  uVar3 = *(ulong *)&(&clearRect)[gameTrackerX.drawPage].x0;
-  uVar4 = *(ulong *)&(&clearRect)[gameTrackerX.drawPage].w;
-  *puVar1 = (&clearRect)[gameTrackerX.drawPage].tag;
+  puVar1 = *(ulong **)(DAT_800d0fec + 4);
+  uVar2 = *(ulong *)&clearRect[DAT_800d0fdc].r0;
+  uVar3 = *(ulong *)&clearRect[DAT_800d0fdc].x0;
+  uVar4 = *(ulong *)&clearRect[DAT_800d0fdc].w;
+  *puVar1 = clearRect[DAT_800d0fdc].tag;
   puVar1[1] = uVar2;
   puVar1[2] = uVar3;
   puVar1[3] = uVar4;
-  (gameTrackerX.primPool)->nextPrim = puVar1 + 4;
+  *(ulong **)(DAT_800d0fec + 4) = puVar1 + 4;
   *puVar1 = (uint)drawot[0xbff] & 0xffffff | 0x3000000;
   drawot[0xbff] = (ulong *)((uint)puVar1 & 0xffffff);
   return;
@@ -1571,13 +1417,12 @@ void GAMELOOP_SwitchTheDrawBuffer(ulong **drawot)
 {
   GAMELOOP_AddClearPrim(drawot, 0);
   DrawSync(0);
-  if (gameTrackerX.drawTimerReturn != (long *)0x0)
+  if (DAT_800d10c8 != 0)
   {
-    gameTrackerX.drawTimerReturn = (long *)0x0;
-    gameTrackerX.reqDisp =
-        (void *)((int)gameTrackerX.disp + gameTrackerX.gameData.asmData.dispPage * 0x14);
+    DAT_800d10c8 = 0;
+    DAT_800d10c4 = DAT_800d10d0 + DAT_800d0fb0 * 0x14;
   }
-  PutDrawEnv((undefined4 *)(&draw + gameTrackerX.drawPage));
+  PutDrawEnv((undefined4 *)(&draw + DAT_800d0fdc));
   return;
 }
 
@@ -1644,37 +1489,38 @@ void GAMELOOP_SetupRenderFunction(GameTracker *gameTracker)
 _StreamUnit *GAMELOOP_GetMainRenderUnit(void)
 
 {
-  _Instance *p_Var1;
+  int iVar1;
   _StreamUnit *p_Var2;
   _StreamUnit *p_Var3;
 
-  p_Var1 = theCamera.focusInstance;
-  if (theCamera.mode == 5)
+  iVar1 = DAT_800cff98;
+  if (DAT_800cff80 == 5)
   {
-    p_Var2 = STREAM_WhichUnitPointerIsIn(theCamera.data.Cinematic.posSpline);
+    p_Var2 = STREAM_WhichUnitPointerIsIn(DAT_800d02b4);
   }
   else
   {
-    if ((theCamera.focusInstance == gameTrackerX.playerInstance) &&
-        (gameTrackerX.SwitchToNewStreamUnit != 0))
+    if ((DAT_800cff98 == DAT_800d0fd8) && (DAT_800d1128 != 0))
     {
-      p_Var2 = STREAM_GetStreamUnitWithID(gameTrackerX.moveRazielToStreamID);
+      p_Var2 = STREAM_GetStreamUnitWithID(DAT_800d114c);
       if (p_Var2 == (_StreamUnit *)0x0)
       {
-        p_Var2 = STREAM_GetStreamUnitWithID(p_Var1->currentStreamUnitID);
+        p_Var2 = STREAM_GetStreamUnitWithID(*(long *)(iVar1 + 0x38));
         return p_Var2;
       }
     }
     else
     {
-      p_Var2 = STREAM_GetStreamUnitWithID((theCamera.focusInstance)->currentStreamUnitID);
+      p_Var2 = STREAM_GetStreamUnitWithID(*(long *)(DAT_800cff98 + 0x38));
     }
-    p_Var3 = COLLIDE_CameraWithStreamSignals(&theCamera);
+    p_Var3 = COLLIDE_CameraWithStreamSignals((Camera *)&theCamera);
     if (p_Var3 != (_StreamUnit *)0x0)
     {
       p_Var2 = p_Var3;
     }
   }
+  /* WARNING: Read-only address (ram,0x800d0fd8) is written */
+  /* WARNING: Read-only address (ram,0x800d114c) is written */
   return p_Var2;
 }
 
@@ -1732,58 +1578,55 @@ void GAMELOOP_DisplayFrame(GameTracker *gameTracker)
   bool bVar1;
   _StreamUnit *currentUnit;
   long lVar2;
-  int *piVar3;
-  void *pvVar4;
-  int iVar5;
-  uint uVar6;
-  ulong uVar7;
-  STracker *currentUnit_00;
+  void *pvVar3;
+  int iVar4;
+  uint uVar5;
+  ulong uVar6;
   ulong **polyAddr;
-  int **ppiVar8;
-  _StreamUnit *currentUnit_01;
+  int *piVar7;
   StreamUnitPortal *portal;
+  int iVar8;
   int iVar9;
   int iVar10;
-  ushort *puVar11;
   RECT local_48;
   ulong **local_40;
   Level *local_3c;
-  StreamUnitPortal *local_38;
+  int *local_38;
   int local_34;
   ulong *local_30;
-  int *local_2c;
+  int local_2c;
 
   local_40 = gameTracker->drawOT;
-  if (((gameTrackerX.gameFlags & 0x8000000U) == 0) || (pause_redraw_flag != 0))
+  if (((DAT_800d10ec & 0x8000000) == 0) || (pause_redraw_flag != 0))
   {
     if (pause_redraw_flag == 0)
     {
-      pause_redraw_prim = (gameTrackerX.primPool)->nextPrim;
+      pause_redraw_prim = DAT_800d0fec->nextPrim;
     }
     else
     {
-      local_30 = (gameTrackerX.primPool)->nextPrim;
+      local_30 = DAT_800d0fec->nextPrim;
       DrawSync(0);
       Switch_For_Redraw();
       local_40 = gameTracker->drawOT;
-      ClearOTagR(gameTrackerX.drawOT, 0xc00);
+      ClearOTagR(DAT_800d1180, 0xc00);
       if (pause_redraw_prim == (void *)0x0)
       {
-        (gameTrackerX.primPool)->nextPrim = (gameTrackerX.primPool)->prim;
+        DAT_800d0fec->nextPrim = DAT_800d0fec->prim;
       }
       else
       {
-        (gameTrackerX.primPool)->nextPrim = pause_redraw_prim;
+        DAT_800d0fec->nextPrim = pause_redraw_prim;
       }
     }
-    gameTrackerX.visibleInstances = 0;
-    gameTrackerX.displayFrameCount = gameTrackerX.displayFrameCount + 1;
-    GAMELOOP_SetupRenderFunction(&gameTrackerX);
+    ULONG_800d1208 = 0;
+    DAT_800d10d4 = DAT_800d10d4 + 1;
+    GAMELOOP_SetupRenderFunction((GameTracker *)&gameTrackerX);
     if (((GlobalSave->flags & 1U) == 0) &&
         (((gameTracker->wipeType != 0xb || (gameTracker->wipeTime == 0)) &&
           ((gameTracker->debugFlags2 & 0x800U) != 0))))
     {
-      FX_Spiral(gameTrackerX.primPool, local_40);
+      FX_Spiral(DAT_800d0fec, local_40);
     }
     if (pause_redraw_flag == 0)
     {
@@ -1796,73 +1639,63 @@ void GAMELOOP_DisplayFrame(GameTracker *gameTracker)
       FONT_Print(s_Cameraunit___s_800ce318);
     }
     RENDER_currentStreamUnitID = *(short *)&currentUnit->StreamUnitID;
-    theCamera.core.rightX = 0x140;
-    theCamera.core.leftX = 0;
-    theCamera.core.topY = 0;
-    theCamera.core.bottomY = 0xf0;
-    CAMERA_SetViewVolume(&theCamera);
+    DAT_800cff34 = 0x140;
+    DAT_800cff30 = 0;
+    DAT_800cff38 = 0;
+    DAT_800cff3c = 0xf0;
+    CAMERA_SetViewVolume((Camera *)&theCamera);
     lVar2 = MEMPACK_MemoryValidFunc((char *)local_3c);
     if (lVar2 != 0)
     {
-      if ((uint)local_3c->fogFar != theCamera.core.farPlane)
+      if ((uint)local_3c->fogFar != DAT_800cfef4)
       {
-        theCamera.core.farPlane = (uint)local_3c->fogFar;
+        DAT_800cfef4 = (uint)local_3c->fogFar;
       }
       if ((gameTracker->debugFlags & 0x8000U) == 0)
       {
         MainRenderLevel(currentUnit, local_40);
       }
     }
-    piVar3 = (int *)local_3c->terrain->StreamUnits;
-    local_34 = *piVar3;
-    local_38 = (StreamUnitPortal *)(piVar3 + 1);
-    iVar10 = 0;
+    piVar7 = (int *)local_3c->terrain->StreamUnits;
+    local_34 = *piVar7;
+    local_38 = piVar7 + 1;
+    iVar9 = 0;
     if (0 < local_34)
     {
-      puVar11 = (ushort *)((int)piVar3 + 0x22);
+      iVar10 = (int)piVar7 + 0x22;
       do
       {
-        local_2c = *(int **)(puVar11 + -5);
-        currentUnit_01 = *(_StreamUnit **)(puVar11 + 5);
-        if ((currentUnit_01 == (_StreamUnit *)0x0) ||
-            (currentUnit_01->FrameCount != gameTrackerX.displayFrameCount))
+        local_2c = *(int *)(iVar10 + -10);
+        currentUnit = *(_StreamUnit **)(iVar10 + 10);
+        if ((currentUnit == (_StreamUnit *)0x0) || (currentUnit->FrameCount != DAT_800d10d4))
         {
           local_48.x = 0x200;
           local_48.y = 0xf0;
           local_48.w = -0x200;
           local_48.h = -0xf0;
-          theCamera.core.rightX = 0x140;
-          theCamera.core.leftX = 0;
-          theCamera.core.topY = 0;
-          theCamera.core.bottomY = 0xf0;
-          CAMERA_SetViewVolume(&theCamera);
-          iVar9 = 0;
+          DAT_800cff34 = 0x140;
+          DAT_800cff30 = 0;
+          DAT_800cff38 = 0;
+          DAT_800cff3c = 0xf0;
+          CAMERA_SetViewVolume((Camera *)&theCamera);
+          iVar8 = 0;
           bVar1 = false;
-          pvVar4 = local_3c->terrain->StreamUnits;
-          portal = (StreamUnitPortal *)((int)pvVar4 + 4);
+          pvVar3 = local_3c->terrain->StreamUnits;
+          portal = (StreamUnitPortal *)((int)pvVar3 + 4);
           if (0 < local_34)
           {
-            ppiVar8 = (int **)((int)pvVar4 + 0x2c);
+            piVar7 = (int *)((int)pvVar3 + 0x2c);
             do
             {
-              if (ppiVar8[-5] == local_2c)
+              if (piVar7[-5] == local_2c)
               {
-                iVar5 = STREAM_GetClipRect(portal, &local_48);
-                if (iVar5 == 0)
+                iVar4 = STREAM_GetClipRect(portal, &local_48);
+                if (iVar4 == 0)
                 {
-                  if (((theCamera.instance_mode & 0x2000000) != 0) && (*ppiVar8 != (int *)0x0))
+                  if (((DAT_800d032c & 0x2000000) != 0) && (*piVar7 != 0))
                   {
-                    iVar5 = **ppiVar8;
-                    uVar7 = INSTANCE_Query(gameTrackerX.playerInstance, 0x22);
-                    if ((iVar5 == (gameTrackerX.playerInstance)->currentStreamUnitID) ||
-                        ((uVar7 != 0 && (iVar5 == *(int *)(uVar7 + 0x38)))))
-                    {
-                      bVar1 = true;
-                      local_48.w = 0x200;
-                      local_48.x = 0;
-                      local_48.y = 0;
-                      local_48.h = 0xf0;
-                    }
+                    /* WARNING: Subroutine does not return */
+                    INSTANCE_Query(DAT_800d0fd8, 0x22);
                   }
                 }
                 else
@@ -1870,111 +1703,80 @@ void GAMELOOP_DisplayFrame(GameTracker *gameTracker)
                   bVar1 = true;
                 }
               }
-              iVar9 = iVar9 + 1;
-              ppiVar8 = ppiVar8 + 0x17;
+              iVar8 = iVar8 + 1;
+              piVar7 = piVar7 + 0x17;
               portal = portal + 1;
-            } while (iVar9 < local_34);
+            } while (iVar8 < local_34);
           }
           if (bVar1)
           {
-            theCamera.core.leftX = (int)local_48.x * 0x140;
-            if (theCamera.core.leftX < 0)
+            DAT_800cff30 = (int)local_48.x * 0x140;
+            if (DAT_800cff30 < 0)
             {
-              theCamera.core.leftX = theCamera.core.leftX + 0x1ff;
+              DAT_800cff30 = DAT_800cff30 + 0x1ff;
             }
-            theCamera.core.topY = (int)local_48.y;
-            theCamera.core.leftX = theCamera.core.leftX >> 9;
-            theCamera.core.rightX = ((int)local_48.x + (int)local_48.w) * 0x140;
-            if (theCamera.core.rightX < 0)
+            DAT_800cff38 = (int)local_48.y;
+            DAT_800cff30 = DAT_800cff30 >> 9;
+            DAT_800cff34 = ((int)local_48.x + (int)local_48.w) * 0x140;
+            if (DAT_800cff34 < 0)
             {
-              theCamera.core.rightX = theCamera.core.rightX + 0x1ff;
+              DAT_800cff34 = DAT_800cff34 + 0x1ff;
             }
-            theCamera.core.rightX = theCamera.core.rightX >> 9;
-            theCamera.core.bottomY = theCamera.core.topY + (int)local_48.h;
-            CAMERA_SetViewVolume(&theCamera);
-            SetRotMatrix((undefined4 *)theCamera.core.wcTransform);
-            SetTransMatrix((int)theCamera.core.wcTransform);
-            if ((*puVar11 & 1) == 0)
-            {
-              if ((currentUnit_01 != (_StreamUnit *)0x0) &&
-                  (currentUnit_01->FrameCount != gameTrackerX.displayFrameCount))
-              {
-                currentUnit_01->FrameCount = gameTrackerX.displayFrameCount;
-                STREAM_RenderAdjacantUnit(local_40, local_38, currentUnit_01, currentUnit, &local_48);
-              }
-            }
-            else
-            {
-              if ((currentUnit->flags & 8U) == 0)
-              {
-                WARPGATE_IsItActive(currentUnit);
-              }
-              else
-              {
-                if (currentUnit_01 != (_StreamUnit *)0x0)
-                {
-                  if (currentUnit_01->FrameCount == gameTrackerX.displayFrameCount)
-                    goto LAB_8002f994;
-                  currentUnit_01->FrameCount = gameTrackerX.displayFrameCount;
-                }
-                STREAM_RenderWarpGate(local_40, local_38, currentUnit, &local_48);
-              }
-            }
+            DAT_800cff34 = DAT_800cff34 >> 9;
+            DAT_800cff3c = DAT_800cff38 + local_48.h;
+            CAMERA_SetViewVolume((Camera *)&theCamera);
+            SetRotMatrix(DAT_800cfef0);
+            /* WARNING: Subroutine does not return */
+            SetTransMatrix((int)DAT_800cfef0);
           }
-          else
+          if ((currentUnit != (_StreamUnit *)0x0) && (currentUnit->FrameCount != DAT_800d10d4))
           {
-            if ((currentUnit_01 != (_StreamUnit *)0x0) &&
-                (currentUnit_01->FrameCount != gameTrackerX.displayFrameCount))
-            {
-              currentUnit_01->FrameCount = gameTrackerX.displayFrameCount;
-              StreamIntroInstancesForUnit(currentUnit_01);
-            }
+            currentUnit->FrameCount = DAT_800d10d4;
+            StreamIntroInstancesForUnit(currentUnit);
           }
         }
-      LAB_8002f994:
-        iVar10 = iVar10 + 1;
-        local_38 = local_38 + 1;
-        puVar11 = puVar11 + 0x2e;
-      } while (iVar10 < local_34);
+        iVar9 = iVar9 + 1;
+        local_38 = local_38 + 0x17;
+        iVar10 = iVar10 + 0x5c;
+      } while (iVar9 < local_34);
     }
-    iVar10 = 0;
-    currentUnit_00 = &StreamTracker;
+    iVar9 = 0;
+    currentUnit = (_StreamUnit *)&StreamTracker;
     do
     {
-      if ((*(short *)currentUnit_00->StreamList == 2) &&
-          (*(ulong *)currentUnit_00->StreamList != gameTrackerX.displayFrameCount))
+      if ((currentUnit->used == 2) && (currentUnit->FrameCount != DAT_800d10d4))
       {
-        *(ulong *)currentUnit_00->StreamList = gameTrackerX.displayFrameCount;
-        StreamIntroInstancesForUnit((_StreamUnit *)currentUnit_00);
+        currentUnit->FrameCount = DAT_800d10d4;
+        StreamIntroInstancesForUnit(currentUnit);
       }
-      iVar10 = iVar10 + 1;
-      currentUnit_00 = (STracker *)(currentUnit_00->StreamList + 1);
-    } while (iVar10 < 0x10);
-    theCamera.core.rightX = 0x140;
-    theCamera.core.leftX = 0;
-    theCamera.core.topY = 0;
-    theCamera.core.bottomY = 0xf0;
-    CAMERA_SetViewVolume(&theCamera);
+      iVar9 = iVar9 + 1;
+      currentUnit = currentUnit + 1;
+    } while (iVar9 < 0x10);
+    DAT_800cff34 = 0x140;
+    DAT_800cff30 = 0;
+    DAT_800cff38 = 0;
+    DAT_800cff3c = 0xf0;
+    CAMERA_SetViewVolume((Camera *)&theCamera);
     if (pause_redraw_flag != 0)
     {
       GAMELOOP_AddClearPrim(local_40, 1);
       SaveOT();
-      ClearOTagR(gameTrackerX.drawOT, 0xc00);
+      ClearOTagR(DAT_800d1180, 0xc00);
       Switch_For_Redraw();
       local_40 = gameTracker->drawOT;
       pause_redraw_flag = 0;
-      (gameTrackerX.primPool)->nextPrim = local_30;
+      DAT_800d0fec->nextPrim = local_30;
     }
   }
-  if ((gameTrackerX.gameFlags & 0x8000000U) != 0)
+  if ((DAT_800d10ec & 0x8000000) != 0)
   {
     HUD_Draw();
   }
   DEBUG_Draw(gameTracker, local_40);
   FONT_Flush();
   GAMELOOP_SwitchTheDrawBuffer(local_40);
-  uVar6 = GetRCnt(0xf2000000);
-  gameTracker->idleTime = uVar6 & 0xffff | gameTimer << 0x10;
+  uVar5 = GetRCnt(0xf2000000);
+  gameTracker->idleTime = uVar5 & 0xffff | gameTimer << 0x10;
   if ((uint)gameTracker->frameRateLock < gameTracker->vblFrames)
   {
     if ((ushort *)gameTracker->reqDisp != (ushort *)0x0)
@@ -1988,20 +1790,20 @@ void GAMELOOP_DisplayFrame(GameTracker *gameTracker)
   {
     do
     {
-      iVar10 = CheckVolatile(gameTracker->reqDisp);
-    } while (iVar10 != 0);
+      iVar9 = CheckVolatile(gameTracker->reqDisp);
+    } while (iVar9 != 0);
   }
-  uVar7 = TIMER_TimeDiff(gameTracker->idleTime);
+  uVar6 = TIMER_TimeDiff(gameTracker->idleTime);
   polyAddr = local_40 + 0xbff;
-  iVar10 = (gameTracker->gameData).asmData.dispPage;
-  gameTracker->idleTime = uVar7;
-  (gameTracker->gameData).asmData.dispPage = 1 - iVar10;
+  iVar9 = (gameTracker->gameData).asmData.dispPage;
+  gameTracker->idleTime = uVar6;
+  (gameTracker->gameData).asmData.dispPage = 1 - iVar9;
   DEBUG_DrawShrinkCels(polyAddr);
   GAMELOOP_HandleScreenWipes(local_40);
-  uVar6 = GetRCnt(0xf2000000);
+  uVar5 = GetRCnt(0xf2000000);
   *(ulong **)&gameTracker->drawTimerReturn = &gameTracker->drawTime;
-  gameTracker->usecsStartDraw = uVar6 & 0xffff | gameTimer << 0x10;
-  if ((gameTrackerX.gameFlags & 0x8000000U) == 0)
+  gameTracker->usecsStartDraw = uVar5 & 0xffff | gameTimer << 0x10;
+  if ((DAT_800d10ec & 0x8000000) == 0)
   {
     DrawOTag(polyAddr);
   }
@@ -2064,27 +1866,27 @@ void GAMELOOP_DrawSavedOT(ulong **newOT)
   uint uVar3;
   byte bVar4;
   uint uVar5;
-  P_TAG *pPVar6;
+  uint *puVar6;
 
-  sVar1 = (&draw)[gameTrackerX.drawPage].ofs[1];
-  pPVar6 = gameTrackerX.savedOTStart;
-  if (gameTrackerX.savedOTStart != gameTrackerX.savedOTEnd)
+  sVar1 = (&draw)[DAT_800d0fdc].ofs[1];
+  puVar6 = DAT_800d1188;
+  if (DAT_800d1188 != DAT_800d118c)
   {
     do
     {
-      bVar4 = pPVar6->code & 0xfc;
+      bVar4 = *(byte *)((int)puVar6 + 7) & 0xfc;
       if (bVar4 == 0x34)
       {
-        uVar2 = *(ushort *)((int)&pPVar6[3].field_0x0 + 2);
+        uVar2 = *(ushort *)((int)puVar6 + 0x1a);
         if ((uVar2 & 0xf) < 8)
         {
           if (sVar1 == 0)
           {
-            *(ushort *)((int)&pPVar6[3].field_0x0 + 2) = uVar2 & 0xffef;
+            *(ushort *)((int)puVar6 + 0x1a) = uVar2 & 0xffef;
           }
           else
           {
-            *(ushort *)((int)&pPVar6[3].field_0x0 + 2) = uVar2 | 0x10;
+            *(ushort *)((int)puVar6 + 0x1a) = uVar2 | 0x10;
           }
         }
       }
@@ -2092,44 +1894,43 @@ void GAMELOOP_DrawSavedOT(ulong **newOT)
       {
         if (bVar4 == 0x24)
         {
-          uVar2 = *(ushort *)&pPVar6[2].b0;
+          uVar2 = *(ushort *)((int)puVar6 + 0x16);
           if ((uVar2 & 0xf) < 8)
           {
             if (sVar1 == 0)
             {
-              *(ushort *)&pPVar6[2].b0 = uVar2 & 0xffef;
+              *(ushort *)((int)puVar6 + 0x16) = uVar2 & 0xffef;
             }
             else
             {
-              *(ushort *)&pPVar6[2].b0 = uVar2 | 0x10;
+              *(ushort *)((int)puVar6 + 0x16) = uVar2 | 0x10;
             }
           }
         }
         else
         {
-          if (pPVar6->code == 0xe3)
+          if (*(byte *)((int)puVar6 + 7) == 0xe3)
           {
             if (sVar1 == 0)
             {
-              uVar3 = *(uint *)&pPVar6->r0 & 0xfffbffff;
-              uVar5 = pPVar6[1].field_0x0 & 0xfffbffff;
+              uVar3 = puVar6[1] & 0xfffbffff;
+              uVar5 = puVar6[2] & 0xfffbffff;
             }
             else
             {
-              uVar3 = *(uint *)&pPVar6->r0 | 0x40000;
-              uVar5 = pPVar6[1].field_0x0 | 0x40000;
+              uVar3 = puVar6[1] | 0x40000;
+              uVar5 = puVar6[2] | 0x40000;
             }
-            *(uint *)&pPVar6->r0 = uVar3;
-            pPVar6[1].field_0x0 = uVar5;
+            puVar6[1] = uVar3;
+            puVar6[2] = uVar5;
           }
         }
       }
-      pPVar6 = (P_TAG *)(pPVar6->field_0x0 & 0xffffff | 0x80000000);
-    } while (pPVar6 != gameTrackerX.savedOTEnd);
+      puVar6 = (uint *)(*puVar6 & 0xffffff | 0x80000000);
+    } while (puVar6 != DAT_800d118c);
   }
-  (gameTrackerX.savedOTEnd)->field_0x0 =
-      (gameTrackerX.savedOTEnd)->field_0x0 & 0xff000000 | (uint)(newOT + 0xbff) & 0xffffff;
-  DrawOTag(gameTrackerX.savedOTStart);
+  *DAT_800d118c = *DAT_800d118c & 0xff000000 | (uint)(newOT + 0xbff) & 0xffffff;
+  DrawOTag(DAT_800d1188);
   return;
 }
 
@@ -2150,21 +1951,21 @@ void ResetPrimPool(void)
   undefined **ppuVar1;
 
   ResetDrawPage();
-  if ((gameTrackerX.gameFlags & 0x8000000U) == 0)
+  if ((DAT_800d10ec & 0x8000000) == 0)
   {
-    if (gameTrackerX.primPool == primPool2)
+    if (DAT_800d0fec == primPool2)
     {
-      gameTrackerX.primPool = PTR_800d0c18;
+      DAT_800d0fec = PTR_800d0c18;
     }
     else
     {
-      gameTrackerX.primPool = primPool2;
+      DAT_800d0fec = primPool2;
     }
-    (gameTrackerX.primPool)->nextPrim = (gameTrackerX.primPool)->prim;
+    DAT_800d0fec->nextPrim = DAT_800d0fec->prim;
   }
   else
   {
-    if (gameTrackerX.drawPage == 0)
+    if (DAT_800d0fdc == 0)
     {
       ppuVar1 = (undefined **)&DAT_00008cac;
     }
@@ -2172,10 +1973,9 @@ void ResetPrimPool(void)
     {
       ppuVar1 = &PTR_000101dc;
     }
-    (gameTrackerX.primPool)->nextPrim =
-        (ulong *)((int)&(gameTrackerX.primPool)->numPrims + (int)ppuVar1);
+    DAT_800d0fec->nextPrim = (ulong *)((int)&DAT_800d0fec->numPrims + (int)ppuVar1);
   }
-  (gameTrackerX.primPool)->numPrims = 0;
+  DAT_800d0fec->numPrims = 0;
   return;
 }
 
@@ -2213,24 +2013,24 @@ void Switch_For_Redraw(void)
 
 {
   bool bVar1;
-  ulong **ppuVar2;
+  undefined4 uVar2;
 
-  ppuVar2 = gameTrackerX.drawOT;
-  gameTrackerX.drawOT = gameTrackerX.dispOT;
-  gameTrackerX.dispOT = ppuVar2;
-  bVar1 = gameTrackerX.drawPage == 0;
-  gameTrackerX.drawPage = ZEXT14(bVar1);
-  gameTrackerX.gameData.asmData.dispPage = ZEXT14(!bVar1);
-  if (gameTrackerX.primPool == primPool2)
+  uVar2 = DAT_800d1180;
+  DAT_800d1180 = DAT_800d1184;
+  DAT_800d1184 = uVar2;
+  bVar1 = DAT_800d0fdc == 0;
+  DAT_800d0fdc = (uint)bVar1;
+  DAT_800d0fb0 = (uint)!bVar1;
+  if (DAT_800d0fec == primPool2)
   {
-    gameTrackerX.primPool = PTR_800d0c18;
+    DAT_800d0fec = PTR_800d0c18;
   }
   else
   {
-    gameTrackerX.primPool = primPool2;
+    DAT_800d0fec = primPool2;
   }
-  (gameTrackerX.primPool)->nextPrim = (gameTrackerX.primPool)->prim;
-  (gameTrackerX.primPool)->numPrims = 0;
+  DAT_800d0fec->nextPrim = DAT_800d0fec->prim;
+  DAT_800d0fec->numPrims = 0;
   return;
 }
 
@@ -2283,72 +2083,71 @@ void SaveOT(void)
 
 {
   char cVar1;
-  P_TAG *pPVar2;
-  P_TAG *pPVar3;
+  uint *puVar2;
+  uint *puVar3;
   uint uVar4;
-  P_TAG *pPVar5;
-  P_TAG *pPVar6;
-  P_TAG *pPVar7;
+  uint *puVar5;
+  uint *puVar6;
+  uint *puVar7;
 
   DrawSync(0);
-  pPVar5 = (P_TAG *)(gameTrackerX.drawOT + 0xbff);
-  cVar1 = *(char *)((int)gameTrackerX.drawOT + 0x2fff);
-  pPVar7 = (P_TAG *)0x0;
+  puVar5 = (uint *)(&DAT_00002ffc + DAT_800d1180);
+  cVar1 = (&DAT_00002fff)[DAT_800d1180];
+  puVar7 = (uint *)0x0;
   while (cVar1 == '\0')
   {
-    uVar4 = pPVar5->field_0x0 & 0xffffff;
-    pPVar5 = (P_TAG *)(uVar4 | 0x80000000);
-    if (uVar4 == 0xffffff)
+    uVar4 = *puVar5;
+    puVar5 = (uint *)(uVar4 & 0xffffff | 0x80000000);
+    if ((uVar4 & 0xffffff) == 0xffffff)
       goto LAB_8002ff4c;
-    cVar1 = *(char *)((int)&pPVar5->field_0x0 + 3);
+    cVar1 = *(char *)((int)puVar5 + 3);
   }
-  if ((pPVar5->field_0x0 & 0xffffff) == 0xffffff)
+  if ((*puVar5 & 0xffffff) == 0xffffff)
   {
   LAB_8002ff4c:
-    gameTrackerX.savedOTStart = (P_TAG *)0x0;
+    DAT_800d1188 = (uint *)0x0;
   }
   else
   {
-    pPVar2 = pPVar5;
-    pPVar3 = (P_TAG *)0x0;
-    gameTrackerX.savedOTStart = pPVar5;
-    if ((pPVar5->field_0x0 & 0xffffff) != 0xffffff)
+    puVar2 = puVar5;
+    puVar3 = (uint *)0x0;
+    DAT_800d1188 = puVar5;
+    if ((*puVar5 & 0xffffff) != 0xffffff)
     {
       do
       {
-        while (pPVar6 = pPVar3, pPVar5 = pPVar2, *(char *)((int)&pPVar5->field_0x0 + 3) != '\0')
+        while (puVar6 = puVar3, puVar5 = puVar2, *(char *)((int)puVar5 + 3) != '\0')
         {
-          uVar4 = pPVar5->field_0x0 & 0xffffff;
-          if (uVar4 == 0xffffff)
+          if ((*puVar5 & 0xffffff) == 0xffffff)
             goto LAB_80030038;
-          pPVar2 = (P_TAG *)(uVar4 | 0x80000000);
-          pPVar3 = pPVar5;
-          pPVar7 = pPVar6;
+          puVar2 = (uint *)(*puVar5 & 0xffffff | 0x80000000);
+          puVar3 = puVar5;
+          puVar7 = puVar6;
         }
-        if ((pPVar5->field_0x0 & 0xffffff) == 0xffffff)
+        if ((*puVar5 & 0xffffff) == 0xffffff)
           goto LAB_80030038;
-        cVar1 = *(char *)((int)&pPVar5->field_0x0 + 3);
-        while ((cVar1 == '\0' && (uVar4 = pPVar5->field_0x0 & 0xffffff, uVar4 != 0xffffff)))
+        cVar1 = *(char *)((int)puVar5 + 3);
+        while ((cVar1 == '\0' && ((*puVar5 & 0xffffff) != 0xffffff)))
         {
-          pPVar5 = (P_TAG *)(uVar4 | 0x80000000);
-          cVar1 = *(char *)((int)&pPVar5->field_0x0 + 3);
+          puVar5 = (uint *)(*puVar5 & 0xffffff | 0x80000000);
+          cVar1 = *(char *)((int)puVar5 + 3);
         }
-        pPVar6->field_0x0 = pPVar6->field_0x0 & 0xff000000 | (uint)pPVar5 & 0xffffff;
-        pPVar2 = pPVar5;
-        pPVar3 = pPVar6;
-      } while ((pPVar5->field_0x0 & 0xffffff) != 0xffffff);
-      if ((pPVar5->field_0x0 & 0xffffff) != 0xffffff)
+        *puVar6 = *puVar6 & 0xff000000 | (uint)puVar5 & 0xffffff;
+        puVar2 = puVar5;
+        puVar3 = puVar6;
+      } while ((*puVar5 & 0xffffff) != 0xffffff);
+      if ((*puVar5 & 0xffffff) != 0xffffff)
       {
-        gameTrackerX.savedOTEnd = pPVar5;
+        DAT_800d118c = puVar5;
         return;
       }
     }
   LAB_80030038:
-    gameTrackerX.savedOTEnd = pPVar5;
-    if (pPVar7 != (P_TAG *)0x0)
+    DAT_800d118c = puVar5;
+    if (puVar7 != (uint *)0x0)
     {
-      gameTrackerX.savedOTEnd = pPVar7;
-      pPVar7->field_0x0 = pPVar7->field_0x0 | 0xffffff;
+      DAT_800d118c = puVar7;
+      *puVar7 = *puVar7 | 0xffffff;
     }
   }
   return;
@@ -2384,13 +2183,13 @@ void SaveOT(void)
 void ResetDrawPage(void)
 
 {
-  ulong **ppuVar1;
+  undefined4 *puVar1;
 
-  ppuVar1 = gameTrackerX.dispOT;
-  gameTrackerX.dispOT = gameTrackerX.drawOT;
-  gameTrackerX.drawPage = 1 - gameTrackerX.drawPage;
-  gameTrackerX.drawOT = ppuVar1;
-  ClearOTagR(ppuVar1, 0xc00);
+  puVar1 = DAT_800d1184;
+  DAT_800d1184 = DAT_800d1180;
+  DAT_800d0fdc = 1 - DAT_800d0fdc;
+  DAT_800d1180 = puVar1;
+  ClearOTagR(puVar1, 0xc00);
   return;
 }
 
@@ -2408,12 +2207,10 @@ void ResetDrawPage(void)
 /* end block 2 */
 // End Line: 6891
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
-
 void GAMELOOP_Set24FPS(void)
 
 {
-  gameTrackerX.frameRate24fps = 1;
+  uGpffffb764 = 1;
   return;
 }
 
@@ -2436,7 +2233,7 @@ void GAMELOOP_Set24FPS(void)
 void GAMELOOP_Reset24FPS(void)
 
 {
-  gameTrackerX.frameRate24fps = 0;
+  ULONG_800d1218._0_2_ = 0;
   return;
 }
 
@@ -2479,78 +2276,74 @@ void GAMELOOP_DoTimeProcess(void)
   uint uVar4;
 
   uVar2 = TIMER_GetTimeMS();
-  if ((gameTrackerX.gameFlags & 0x10000000U) == 0)
+  if ((DAT_800d10ec & 0x10000000) == 0)
   {
-    gameTrackerX.totalTime = TIMER_TimeDiff(gameTrackerX.currentTicks);
+    ULONG_800d1200 = TIMER_TimeDiff(ULONG_800d11fc);
     uVar3 = GetRCnt(0xf2000000);
-    gameTrackerX.currentTicks = uVar3 & 0xffff | gameTimer << 0x10;
-    if (gameTrackerX.frameRateLock < 1)
+    ULONG_800d11fc = uVar3 & 0xffff | gameTimer << 0x10;
+    if ((int)ULONG_800d1214 < 1)
     {
-      gameTrackerX.frameRateLock = 1;
+      ULONG_800d1214 = 1;
     }
-    if (2 < gameTrackerX.frameRateLock)
+    if (2 < (int)ULONG_800d1214)
     {
-      gameTrackerX.frameRateLock = 2;
+      ULONG_800d1214 = 2;
     }
-    if ((gameTrackerX.decoupleGame == 0) || ((gameTrackerX.gameFlags & 0x10000000U) != 0))
+    if ((DAT_800d11c8 == 0) || ((DAT_800d10ec & 0x10000000) != 0))
     {
-      if (gameTrackerX.frameRateLock == 1)
+      if (ULONG_800d1214 == 1)
       {
-        gameTrackerX.lastLoopTime = 0x21;
+        DAT_800d11e8 = 0x21;
       }
       else
       {
-        if (gameTrackerX.frameRateLock == 2)
+        if (ULONG_800d1214 == 2)
         {
-          gameTrackerX.lastLoopTime = 0x32;
+          DAT_800d11e8 = 0x32;
         }
       }
-      uVar3 = (uint)((ulonglong)(gameTrackerX.lastLoopTime << 0xc) * 0x3e0f83e1 >> 0x20);
+      DAT_800d11ec = (uint)((ulonglong)(DAT_800d11e8 << 0xc) * 0x3e0f83e1 >> 0x20);
     }
     else
     {
-      uVar4 = 0x21;
-      if ((gameTrackerX.frameRateLock != 1) && (gameTrackerX.frameRateLock == 2))
+      uVar3 = 0x21;
+      if ((ULONG_800d1214 != 1) && (ULONG_800d1214 == 2))
       {
-        uVar4 = 0x32;
+        uVar3 = 0x32;
       }
-      uVar3 = uVar4;
-      if (gameTrackerX.lastLoopTime != 0xffffffff)
+      uVar4 = uVar3;
+      if (DAT_800d11e8 != 0xffffffff)
       {
-        uVar3 = uVar2 - gameTrackerX.currentTime;
+        uVar4 = uVar2 - DAT_800d11d8;
       }
-      bVar1 = uVar3 < uVar4;
-      if ((gameTrackerX.frameRateLock == 1) &&
-          (bVar1 = uVar3 < uVar4, gameTrackerX.frameRate24fps != 0))
+      bVar1 = uVar4 < uVar3;
+      if ((ULONG_800d1214 == 1) && (bVar1 = uVar4 < uVar3, (short)ULONG_800d1218 != 0))
       {
-        uVar3 = uVar3 - 9;
-        bVar1 = uVar3 < uVar4;
+        uVar4 = uVar4 - 9;
+        bVar1 = uVar4 < uVar3;
       }
-      if (((!bVar1) && (gameTrackerX.gameData.asmData.MorphTime == 1000)) &&
-          (uVar4 = uVar3, 0x42 < uVar3))
+      if (((!bVar1) && (DAT_800d0fb4 == 1000)) && (uVar3 = uVar4, 0x42 < uVar4))
       {
-        uVar4 = 0x42;
+        uVar3 = 0x42;
       }
-      uVar3 = (uint)((ulonglong)(uVar4 << 0xc) * 0x3e0f83e1 >> 0x20);
-      gameTrackerX.lastLoopTime = uVar4;
+      DAT_800d11ec = (uint)((ulonglong)(uVar3 << 0xc) * 0x3e0f83e1 >> 0x20);
+      DAT_800d11e8 = uVar3;
     }
-    gameTrackerX.timeMult = uVar3 >> 3;
-    gameTrackerX.gameFramePassed = 0;
-    gameTrackerX.timeSinceLastGameFrame =
-        gameTrackerX.timeSinceLastGameFrame + gameTrackerX.timeMult;
-    while (gameTrackerX.globalTimeMult = gameTrackerX.timeMult,
-           0x1000 < gameTrackerX.timeSinceLastGameFrame)
+    DAT_800d11ec = DAT_800d11ec >> 3;
+    ULONG_800d120c = 0;
+    ULONG_800d1210 = ULONG_800d1210 + DAT_800d11ec;
+    while (DAT_800d11f0 = DAT_800d11ec, 0x1000 < ULONG_800d1210)
     {
-      gameTrackerX.gameFramePassed = 1;
-      gameTrackerX.timeSinceLastGameFrame = gameTrackerX.timeSinceLastGameFrame - 0x1000;
-      gameTrackerX.fps30Count = gameTrackerX.fps30Count + 1;
+      ULONG_800d120c = 1;
+      ULONG_800d1210 = ULONG_800d1210 - 0x1000;
+      DAT_800d10dc = DAT_800d10dc + 1;
     }
   }
   else
   {
-    gameTrackerX.lastLoopTime = 0xffffffff;
+    DAT_800d11e8 = 0xffffffff;
   }
-  gameTrackerX.currentTime = uVar2;
+  DAT_800d11d8 = uVar2;
   return;
 }
 
@@ -2613,218 +2406,46 @@ void GAMELOOP_DoTimeProcess(void)
 /* end block 3 */
 // End Line: 7130
 
-/* WARNING: This function may have set the stack pointer */
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void GAMELOOP_Process(GameTracker *gameTracker)
 
 {
-  bool bVar1;
-  Level *pLVar2;
-  int iVar3;
-  uchar **ppuVar4;
-  int iVar5;
-  STracker *streamUnit;
-  int iVar6;
-  int iVar7;
-  undefined *puVar8;
+  GameTracker *offset;
 
-  if (gEndGameNow == 0)
-  {
-    GAMELOOP_DoTimeProcess();
-    if ((gameTrackerX.gameMode != 6) && ((gameTrackerX.streamFlags & 0x100000U) == 0))
-    {
-      MORPH_UpdateTimeMult();
-      GAMELOOP_CalcGameTime();
-      if ((gameTracker->gameData).asmData.MorphType == 0)
-      {
-        bVar1 = true;
-        if ((gameTrackerX.playerInstance != (_Instance *)0x0) &&
-            (pLVar2 = STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID),
-             pLVar2 != (Level *)0x0))
-        {
-          bVar1 = (pLVar2->unitFlags & 0x2000U) == 0;
-        }
-        if (bVar1)
-        {
-          gameTracker->currentTimeOfDayTime =
-              gameTracker->currentTimeOfDayTime + gameTracker->lastLoopTime;
-        }
-        gameTracker->currentMaterialTime =
-            gameTracker->currentMaterialTime + gameTracker->lastLoopTime;
-      }
-      else
-      {
-        gameTracker->currentSpectralTime =
-            gameTracker->currentSpectralTime + gameTracker->lastLoopTime;
-      }
-    }
-    gameTracker->numGSignals = 0;
-    GAMELOOP_ChangeMode();
-    ResetPrimPool();
-    memset(gameTracker->overrideData, 0, 0x28);
-    if (gameTrackerX.gameMode == 6)
-    {
-      _DAT_1f800000 = theCamera.core.position._0_4_;
-      _DAT_1f800004 = theCamera.core._4_4_;
-      StackSave = (ulong)&stack0xffffffc0;
-      G2Instance_BuildTransformsForList(gameTracker->instanceList->first);
-      puVar8 = (undefined *)StackSave;
-      DEBUG_Process(gameTracker, *(undefined *)StackSave);
-    }
-    else
-    {
-      if (gameTrackerX.SwitchToNewStreamUnit == 1)
-      {
-        INSTANCE_Post(gameTrackerX.playerInstance, 0x4000006, 0);
-        STREAM_MoveIntoNewStreamUnit();
-      }
-      if ((gameTrackerX.streamFlags & 0x100000U) == 0)
-      {
-        if ((VRAM_NeedToUpdateMorph != 0) && (iVar3 = STREAM_IsCdBusy((long *)0x0), iVar3 == 0))
-        {
-          VRAM_UpdateMorphPalettes();
-          VRAM_NeedToUpdateMorph = 0;
-        }
-        if ((gameTracker->gameData).asmData.MorphTime < 1000)
-        {
-          MORPH_Continue();
-        }
-        if ((gameTracker->streamFlags & 0x80000U) != 0)
-        {
-          gameTracker->streamFlags = gameTracker->streamFlags & 0xfff7ffff;
-          UNDERWORLD_StartProcess();
-        }
-        EVENT_DoProcess();
-        streamUnit = &StreamTracker;
-        do
-        {
-          if (*(short *)streamUnit->StreamList == 2)
-          {
-            if ((*(Level **)streamUnit->StreamList)->PuzzleInstances != (EventPointers *)0x0)
-            {
-              if ((gameTrackerX.debugFlags2 & 0x100U) != 0)
-              {
-                FONT_Print(s_Processing_unit__s_800ce328);
-              }
-              EVENT_ProcessEvents((*(Level **)streamUnit->StreamList)->PuzzleInstances,
-                                  *(Level **)streamUnit->StreamList);
-            }
-            EVENT_BSPProcess((_StreamUnit *)streamUnit);
-          }
-          streamUnit = (STracker *)(streamUnit->StreamList + 1);
-        } while ((int)streamUnit < -0x7ff2e2e0);
-        EVENT_ResetAllOneTimeVariables();
-      }
-      iVar3 = 0;
-      if ((GlobalSave->flags & 1U) == 0)
-      {
-        EVENT_ProcessHints();
-      }
-      iVar7 = 0;
-      streamUnit = &StreamTracker;
-      do
-      {
-        if ((streamUnit->StreamList[0].used == 2) &&
-            (iVar5 = 0, 0 < (streamUnit->StreamList[0].level)->NumberOfSFXMarkers))
-        {
-          iVar6 = 0;
-          do
-          {
-            ppuVar4 = (uchar **)(*(int *)(*(int *)((int)&StreamTracker.StreamList[0].level + iVar7) + 0xec) +
-                                 iVar6);
-            if ((ppuVar4 != (uchar **)0x0) && (*ppuVar4 != (uchar *)0x0))
-            {
-              SOUND_ProcessInstanceSounds(*ppuVar4, (SoundInstance *)(ppuVar4 + 2), (_Position *)(ppuVar4 + 5),
-                                          (int)ppuVar4[7], (int)ppuVar4[8], 0, 0, (long *)0x0);
-            }
-            iVar5 = iVar5 + 1;
-            iVar6 = iVar6 + 0x24;
-          } while (iVar5 < (StreamTracker.StreamList[iVar3].level)->NumberOfSFXMarkers);
-        }
-        iVar7 = iVar7 + 0x40;
-        iVar3 = iVar3 + 1;
-        streamUnit = (STracker *)(streamUnit->StreamList + 1);
-      } while (iVar3 < 0x10);
-      if ((gameTrackerX.streamFlags & 0x100000U) == 0)
-      {
-        INSTANCE_SpatialRelationships(instanceList);
-      }
-      INSTANCE_ProcessFunctions(gameTracker->instanceList);
-      INSTANCE_CleanUpInstanceList(gameTracker->instanceList, 0);
-      INSTANCE_DeactivateFarInstances(gameTracker);
-      MONAPI_ProcessGenerator();
-      _DAT_1f800000 = theCamera.core.position._0_4_;
-      _DAT_1f800004 = theCamera.core._4_4_;
-      StackSave = (ulong)&stack0xffffffc0;
-      G2Instance_BuildTransformsForList(gameTracker->instanceList->first);
-      puVar8 = (undefined *)StackSave;
-      if ((gameTrackerX.streamFlags & 0x100000U) == 0)
-      {
-        FX_ProcessList(fxTracker);
-        puVar8 = (undefined *)StackSave;
-        if ((gameTrackerX.streamFlags & 0x100000U) == 0)
-        {
-          VM_Tick(0x100, *(undefined *)StackSave);
-          if ((gameTracker->debugFlags2 & 0x10000U) != 0)
-          {
-            FONT_Print(s_Military_Time__04d_800ce33c, *puVar8);
-          }
-          iVar3 = 0;
-          streamUnit = &StreamTracker;
-          do
-          {
-            if (streamUnit->StreamList[0].used == 2)
-            {
-              VM_ProcessVMObjectList_S(streamUnit->StreamList[0].level, *puVar8);
-            }
-            iVar3 = iVar3 + 1;
-            streamUnit = (STracker *)(streamUnit->StreamList + 1);
-          } while (iVar3 < 0x10);
-          if ((gameTrackerX.streamFlags & 0x100000U) == 0)
-          {
-            PLANAPI_UpdatePlanningDatabase(gameTracker, gameTrackerX.playerInstance, *puVar8);
-          }
-        }
-      }
-      DEBUG_Process(gameTracker, *puVar8);
-      COLLIDE_InstanceList(gameTracker->instanceList, *puVar8);
-      COLLIDE_InstanceListTerrain(gameTracker->instanceList, *puVar8);
-      INSTANCE_AdditionalCollideFunctions(instanceList, *puVar8);
-      COLLIDE_InstanceListWithSignals(instanceList, *puVar8);
-      if ((gameTrackerX.streamFlags & 0x100000U) == 0)
-      {
-        LIGHT_CalcShadowPositions(gameTracker, *puVar8);
-        INSTANCE_CleanUpInstanceList(gameTracker->instanceList, 0x10, *puVar8);
-      }
-      CAMERA_Process(&theCamera, *puVar8);
-      PIPE3D_CalculateWCTransform(&theCamera, *puVar8);
-      *(undefined2 *)&(theCamera.core.wcTransform2)->field_0x12 = 0;
-      PIPE3D_InvertTransform(theCamera.core.cwTransform2, theCamera.core.wcTransform2, *puVar8);
-      CAMERA_CalcVVClipInfo(&theCamera, *puVar8);
-      if (gameTracker->levelChange != 0)
-      {
-        gameTracker->levelChange = 0;
-      }
-      SAVE_IntroduceBufferIntros(*puVar8);
-    }
-    if (gameTracker->levelDone == 0)
-    {
-      GAMELOOP_DisplayFrame(gameTracker, *puVar8);
-    }
-    else
-    {
-      ResetDrawPage(*puVar8);
-    }
-    gameTracker->frameCount = gameTracker->frameCount + 1;
-    gameTracker->debugFlags = gameTracker->debugFlags & 0xf7ffffff;
-  }
-  else
+  if (gEndGameNow != 0)
   {
     DEBUG_ExitGame();
     gameTracker->levelDone = 3;
+    return;
   }
-  return;
+  offset = gameTracker;
+  GAMELOOP_DoTimeProcess();
+  if ((DAT_800d111e != 6) && ((DAT_800d10f0 & 0x100000) == 0))
+  {
+    RelocateInstances((_SVector *)offset);
+    GAMELOOP_CalcGameTime();
+    if ((gameTracker->gameData).asmData.MorphType == 0)
+    {
+      if (DAT_800d0fd8 != 0)
+      {
+        /* WARNING: Subroutine does not return */
+        STREAM_GetLevelWithID(*(long *)(DAT_800d0fd8 + 0x38));
+      }
+      gameTracker->currentTimeOfDayTime =
+          gameTracker->currentTimeOfDayTime + gameTracker->lastLoopTime;
+      gameTracker->currentMaterialTime =
+          gameTracker->currentMaterialTime + gameTracker->lastLoopTime;
+    }
+    else
+    {
+      gameTracker->currentSpectralTime =
+          gameTracker->currentSpectralTime + gameTracker->lastLoopTime;
+    }
+  }
+  gameTracker->numGSignals = 0;
+  GAMELOOP_ChangeMode();
+  ResetPrimPool();
+  /* WARNING: Subroutine does not return */
+  memset(gameTracker->overrideData, 0, 0x28);
 }
 
 // decompiled code
@@ -2841,25 +2462,24 @@ void GAMELOOP_Process(GameTracker *gameTracker)
 void GAMELOOP_ModeStartRunning(void)
 
 {
-  if (((gameTrackerX.gameMode == 4) || (gameTrackerX.gameMode == 6)) &&
-      (DEBUG_ExitMenus(), gameTrackerX.gameMode == 6))
+  if (((DAT_800d111e == 4) || (DAT_800d111e == 6)) && (DEBUG_ExitMenus(), DAT_800d111e == 6))
   {
     currentMenu = &standardMenu;
     SOUND_ResumeAllSound();
     VOICEXA_Resume();
   }
-  if ((gameTrackerX.gameFlags & 0x8000000U) != 0)
+  if ((DAT_800d10ec & 0x8000000) != 0)
   {
-    gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xf7ffffff;
-    gameTrackerX.savedOTStart = (P_TAG *)0x0;
+    DAT_800d10ec = DAT_800d10ec & 0xf7ffffff;
+    DAT_800d1188 = 0;
     DrawSync(0);
   }
-  gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xefffffff;
-  (gameTrackerX.playerInstance)->flags = (gameTrackerX.playerInstance)->flags & 0xfffffeff;
-  gameTrackerX.gameMode = 0;
+  DAT_800d10ec = DAT_800d10ec & 0xefffffff;
+  DAT_800d0fd8->flags = DAT_800d0fd8->flags & 0xfffffeff;
+  DAT_800d111e = 0;
   GAMEPAD_RestoreControllers();
-  INSTANCE_Post(gameTrackerX.playerInstance, (int)&DAT_0010000a, 0);
-  return;
+  /* WARNING: Subroutine does not return */
+  INSTANCE_Post(DAT_800d0fd8, (int)&DAT_0010000a, 0);
 }
 
 // decompiled code
@@ -2876,29 +2496,9 @@ void GAMELOOP_ModeStartRunning(void)
 void GAMELOOP_ModeStartPause(void)
 
 {
-  gameTrackerX.gameMode = 6;
-  INSTANCE_Post(gameTrackerX.playerInstance, (int)&DAT_0010000a, 1);
-  currentMenu = &pauseMenu;
-  menu_set(gameTrackerX.menu, menudefs_pause_menu);
-  SOUND_PauseAllSound();
-  VOICEXA_Pause();
-  SndPlay(5);
-  gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x10000000;
-  GAMEPAD_SaveControllers();
-  gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x8000000;
-  if (gameTrackerX.primPool == primPool2)
-  {
-    gameTrackerX.primPool = PTR_800d0c18;
-  }
-  else
-  {
-    gameTrackerX.primPool = primPool2;
-  }
-  (gameTrackerX.primPool)->nextPrim = (gameTrackerX.primPool)->prim;
-  (gameTrackerX.primPool)->numPrims = 0;
-  SaveOT();
-  pause_redraw_flag = 1;
-  return;
+  DAT_800d111e = 6;
+  /* WARNING: Subroutine does not return */
+  INSTANCE_Post(DAT_800d0fd8, (int)&DAT_0010000a, 1);
 }
 
 // decompiled code
@@ -2926,81 +2526,77 @@ void GAMELOOP_ChangeMode(void)
 {
   uint uVar1;
 
-  if ((gameTrackerX.debugFlags & 0x40000U) == 0)
+  if ((vmRealClock & 0x40000U) == 0)
   {
-    if ((gameTrackerX.debugFlags & 0x200000U) == 0)
+    if ((vmRealClock & 0x200000U) == 0)
     {
-      if ((gameTrackerX.controlCommand[0][0] & 0xa01U) == 0xa01)
+      if ((DAT_800d0ff4 & 0xa01) == 0xa01)
       {
-        theCamera.forced_movement = 1;
-        ((gameTrackerX.playerInstance)->position).z =
-            ((gameTrackerX.playerInstance)->position).z + 100;
-        (gameTrackerX.playerInstance)->zVel = 0;
-        gameTrackerX.cheatMode = '\x01';
-        INSTANCE_Post(gameTrackerX.playerInstance, (int)&DAT_00100010, 1);
-        (gameTrackerX.playerInstance)->flags = (gameTrackerX.playerInstance)->flags & 0xfffff7ff;
+        DAT_800d0298 = 1;
+        (DAT_800d0fd8->position).z = (DAT_800d0fd8->position).z + 100;
+        DAT_800d0fd8->zVel = 0;
+        /* WARNING: Read-only address (ram,0x800d1173) is written */
+        aadMem._3_1_ = 1;
+        /* WARNING: Subroutine does not return */
+        INSTANCE_Post(DAT_800d0fd8, (int)&DAT_00100010, 1);
       }
-      else
+      if ((DAT_800d0ff4 & 0xa02) == 0xa02)
       {
-        if ((gameTrackerX.controlCommand[0][0] & 0xa02U) == 0xa02)
-        {
-          theCamera.forced_movement = 1;
-          ((gameTrackerX.playerInstance)->position).z =
-              ((gameTrackerX.playerInstance)->position).z + -100;
-          (gameTrackerX.playerInstance)->zVel = 0;
-          gameTrackerX.cheatMode = '\0';
-          INSTANCE_Post(gameTrackerX.playerInstance, (int)&DAT_00100010, 0);
-          gameTrackerX.gameMode = 0;
-        }
+        DAT_800d0298 = 1;
+        (DAT_800d0fd8->position).z = (DAT_800d0fd8->position).z + -100;
+        DAT_800d0fd8->zVel = 0;
+        /* WARNING: Read-only address (ram,0x800d1173) is written */
+        aadMem._3_1_ = 0;
+        /* WARNING: Subroutine does not return */
+        INSTANCE_Post(DAT_800d0fd8, (int)&DAT_00100010, 0);
       }
     }
-    if ((gameTrackerX.debugFlags & 0x40000U) != 0)
+    if ((vmRealClock & 0x40000U) != 0)
       goto LAB_80030bc0;
   }
   else
   {
   LAB_80030bc0:
-    if ((gameTrackerX.playerCheatFlags & 2U) == 0)
+    if ((DAT_800d11b0 & 2) == 0)
       goto LAB_80030ce0;
   }
-  if (((gameTrackerX.controlCommand[0][1] & 0x60U) == 0x60) &&
-      ((gameTrackerX.controlCommand[0][0] & 0xfU) == 0))
+  if (((DAT_800d0ff8 & 0x60) == 0x60) && ((DAT_800d0ff4 & 0xf) == 0))
   {
-    if (gameTrackerX.gameMode == 0)
+    if (DAT_800d111e == 0)
     {
-      gameTrackerX.gameMode = 4;
+      DAT_800d111e = 4;
       currentMenu = &standardMenu;
-      if (gameTrackerX.sound.gVoiceOn == '\0')
+      if (ULONG_800d116c._2_1_ == '\0')
       {
-        gameTrackerX.debugFlags = gameTrackerX.debugFlags & 0xfff7ffff;
+        vmRealClock = vmRealClock & 0xfff7ffff;
       }
       else
       {
-        gameTrackerX.debugFlags = gameTrackerX.debugFlags | 0x80000;
+        vmRealClock = vmRealClock | 0x80000;
       }
-      if (gameTrackerX.sound.gMusicOn == '\0')
+      if (ULONG_800d116c._1_1_ == '\0')
       {
-        uVar1 = gameTrackerX.debugFlags2 & 0xffffefff;
-      }
-      else
-      {
-        uVar1 = gameTrackerX.debugFlags2 | 0x1000;
-      }
-      if (gameTrackerX.sound.gSfxOn == '\0')
-      {
-        gameTrackerX.debugFlags2 = uVar1 & 0xffffdfff;
+        uVar1 = vmClock & 0xffffefff;
       }
       else
       {
-        gameTrackerX.debugFlags2 = uVar1 | 0x2000;
+        uVar1 = vmClock | 0x1000;
+      }
+      if ((char)ULONG_800d116c == '\0')
+      {
+        vmClock = uVar1 & 0xffffdfff;
+      }
+      else
+      {
+        vmClock = uVar1 | 0x2000;
       }
     }
     else
     {
-      if (gameTrackerX.gameMode == 7)
+      if (DAT_800d111e == 7)
       {
-        DEBUG_EndViewVram(&gameTrackerX);
-        gameTrackerX.gameMode = 0;
+        DEBUG_EndViewVram((GameTracker *)&gameTrackerX);
+        DAT_800d111e = 0;
       }
       else
       {
@@ -3009,24 +2605,19 @@ void GAMELOOP_ChangeMode(void)
     }
   }
 LAB_80030ce0:
-  if ((((((gameTrackerX.controlCommand[0][1] & 0x4000U) == 0) && (gamePadControllerOut < 6)) ||
-        (gameTrackerX.gameMode != 0)) ||
-       ((gameTrackerX.gameFlags & 0x80U) != 0)) ||
-      ((gameTrackerX.wipeTime != 0 &&
-        ((gameTrackerX.wipeType == 0xb || (gameTrackerX.wipeTime != -1))))))
+  if ((((((DAT_800d0ff8 & 0x4000) == 0) && (gamePadControllerOut < 6)) || (DAT_800d111e != 0)) ||
+       ((DAT_800d10ec & 0x80) != 0)) ||
+      ((DAT_800d1078 != 0 && ((DAT_800d107c == 0xb || (DAT_800d1078 != -1))))))
   {
-    if (((((gameTrackerX.controlCommand[0][1] & 0x4000U) != 0) ||
-          ((gameTrackerX.gameFlags & 0x40000000U) != 0)) &&
-         ((gameTrackerX.gameMode != 0 && ((gameTrackerX.gameFlags & 0x20000000U) == 0)))) &&
-        ((gameTrackerX.wipeTime == 0 ||
-          ((gameTrackerX.wipeType != 0xb && (gameTrackerX.wipeTime == -1))))))
+    if (((((DAT_800d0ff8 & 0x4000) != 0) || ((DAT_800d10ec & 0x40000000) != 0)) &&
+         ((DAT_800d111e != 0 && ((DAT_800d10ec & 0x20000000) == 0)))) &&
+        ((DAT_800d1078 == 0 || ((DAT_800d107c != 0xb && (DAT_800d1078 == -1))))))
     {
-      if (((gameTrackerX.controlCommand[0][1] & 0x4000U) != 0) &&
-          ((gameTrackerX.gameFlags & 0x40000000U) == 0))
+      if (((DAT_800d0ff8 & 0x4000) != 0) && ((DAT_800d10ec & 0x40000000) == 0))
       {
         SndPlay(5);
       }
-      gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xbfffffff;
+      DAT_800d10ec = DAT_800d10ec & 0xbfffffff;
       GAMELOOP_ModeStartRunning();
     }
   }
@@ -3034,16 +2625,16 @@ LAB_80030ce0:
   {
     GAMELOOP_ModeStartPause();
   }
-  if ((gameTrackerX.controlCommand[0][0] & 0x40000000U) == 0)
+  if ((DAT_800d0ff4 & 0x40000000) == 0)
   {
-    if ((gameTrackerX.controlCommand[0][2] & 0x40000000U) != 0)
+    if (((uint)FX_GeneralEffectTracker & 0x40000000) != 0)
     {
-      (gameTrackerX.playerInstance)->flags = (gameTrackerX.playerInstance)->flags & 0xfffffeff;
+      DAT_800d0fd8->flags = DAT_800d0fd8->flags & 0xfffffeff;
     }
   }
   else
   {
-    (gameTrackerX.playerInstance)->flags = (gameTrackerX.playerInstance)->flags | 0x100;
+    DAT_800d0fd8->flags = DAT_800d0fd8->flags | 0x100;
   }
   return;
 }
@@ -3064,9 +2655,8 @@ void GAMELOOP_RequestLevelChange(char *name, short number, GameTracker *gameTrac
   {
     gameTracker->gameFlags = gameTracker->gameFlags | 1;
     SOUND_ResetAllSound();
+    /* WARNING: Subroutine does not return */
     sprintf(gameTracker->baseAreaName, &DAT_800ce350);
-    gameTracker->levelChange = 1;
-    gameTracker->levelDone = 1;
   }
   return;
 }
@@ -3123,11 +2713,11 @@ MATRIX *GAMELOOP_GetMatrices(int numMatrices)
   MATRIX *pMVar1;
   MATRIX *pMVar2;
 
-  pMVar2 = (MATRIX *)(gameTrackerX.primPool)->nextPrim;
+  pMVar2 = *(MATRIX **)(DAT_800d0fec + 4);
   pMVar1 = pMVar2 + numMatrices;
-  if (pMVar1 < (MATRIX *)(gameTrackerX.primPool)->lastPrim)
+  if (pMVar1 < *(MATRIX **)(DAT_800d0fec + 8))
   {
-    *(MATRIX **)&(gameTrackerX.primPool)->nextPrim = pMVar1;
+    *(MATRIX **)(DAT_800d0fec + 4) = pMVar1;
     return pMVar2;
   }
   return (MATRIX *)0x0;
@@ -3152,5 +2742,5 @@ MATRIX *GAMELOOP_GetMatrices(int numMatrices)
 GameTracker *GAMELOOP_GetGT(void)
 
 {
-  return &gameTrackerX;
+  return (GameTracker *)&gameTrackerX;
 }

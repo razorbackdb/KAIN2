@@ -1,31 +1,6 @@
 #include "THISDUST.H"
 #include "MENUFACE.H"
 
-// _ButtonTexture * @0x800D5C04, len = 0x00000004
-FaceButtons = null;
-// int @0x800CFB3C, len = 0x00000004
-hack_initialized = 0x0;
-// menuface_t @0x800CFABC, len = 0x00000010
-MenuFaces =
-    {
-        // short @0x800CFABC, len = 0x00000002
-        .x = 0xec,
-        // short @0x800CFABE, len = 0x00000002
-        .y = 0x31,
-        // char @0x800CFAC0, len = 0x00000001
-        .w = 0x30,
-        // char @0x800CFAC1, len = 0x00000001
-        .h = 0x30,
-        // char @0x800CFAC2, len = 0x00000001
-        .frames = 0x02,
-        // short @0x800CFAC4, len = 0x00000002
-        .curFrame = -0x1,
-        // short @0x800CFAC6, len = 0x00000002
-        .transitionDir = 0x0,
-        // ushort @0x800CFAC8, len = 0x00000002
-        .delay = 0x0,
-        // ushort @0x800CFACA, len = 0x00000002
-        .loaded = 0x0};
 // decompiled code
 // original method signature:
 // char * /*$ra*/ NextTimAddr(char *addr /*$a0*/, int w /*$a1*/, int h /*$a2*/, enum bdepth bpp /*$a3*/)
@@ -54,27 +29,27 @@ MenuFaces =
 /* end block 4 */
 // End Line: 53
 
-char *NextTimAddr(char *addr, int w, int h, bdepth bpp)
+int NextTimAddr(int param_1, int param_2, int param_3, int param_4)
 
 {
-  int iVar1;
+	int iVar1;
 
-  if (bpp == TIM_4BIT)
-  {
-    iVar1 = (w * h >> 1) + 0x2c;
-  }
-  else
-  {
-    if (bpp == TIM_8BIT)
-    {
-      iVar1 = w * h + 0x20c;
-    }
-    else
-    {
-      iVar1 = w * h * 2;
-    }
-  }
-  return addr + iVar1 + 0x14;
+	if (param_4 == 0)
+	{
+		iVar1 = (param_2 * param_3 >> 1) + 0x2c;
+	}
+	else
+	{
+		if (param_4 == 1)
+		{
+			iVar1 = param_2 * param_3 + 0x20c;
+		}
+		else
+		{
+			iVar1 = param_2 * param_3 * 2;
+		}
+	}
+	return param_1 + iVar1 + 0x14;
 }
 
 // decompiled code
@@ -110,59 +85,19 @@ char *NextTimAddr(char *addr, int w, int h, bdepth bpp)
 /* end block 3 */
 // End Line: 162
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
-
 void menuface_initialize(void)
 
 {
-  uint uVar1;
-  long *address;
-  menuface_t *pmVar2;
-  uint uVar3;
-  long *addr;
-  int iVar4;
-  int iVar5;
+	long *plVar1;
 
-  if ((hack_initialized == 0) &&
-      (address = LOAD_ReadFile(s__kain2_game_psx_frontend_faces_t_800cfb40, '\v'),
-       address != (long *)0x0))
-  {
-    FaceButtons = (_ButtonTexture *)MEMPACK_Malloc(0x380, '-');
-    iVar5 = 0;
-    if (FaceButtons == (_ButtonTexture *)0x0)
-    {
-      MEMPACK_Free((char *)address);
-    }
-    else
-    {
-      pmVar2 = &MenuFaces;
-      iVar4 = 0;
-      addr = address;
-      do
-      {
-        uVar3 = 0;
-        pmVar2->curFrame = -1;
-        pmVar2->transitionDir = 0;
-        pmVar2->loaded = 0;
-        pmVar2->delay = 0;
-        do
-        {
-          DRAW_LoadButton(addr, FaceButtons + iVar4 + uVar3);
-          addr = (long *)NextTimAddr((char *)addr, (uint)(byte)pmVar2->w, (uint)(byte)pmVar2->h,
-                                     TIM_4BIT);
-          uVar1 = uVar3 & 0x1f;
-          uVar3 = uVar3 + 1;
-          pmVar2->loaded = pmVar2->loaded | (ushort)(1 << uVar1);
-        } while ((int)uVar3 < 7);
-        pmVar2 = pmVar2 + 1;
-        iVar5 = iVar5 + 1;
-        iVar4 = iVar4 + 7;
-      } while (iVar5 < 8);
-      MEMPACK_Free((char *)address);
-      hack_initialized = 1;
-    }
-  }
-  return;
+	if ((iGpffffa088 == 0) &&
+		(plVar1 = LOAD_ReadFile(s__kain2_game_psx_frontend_faces_t_800cfb40, '\v'),
+		 plVar1 != (long *)0x0))
+	{
+		/* WARNING: Subroutine does not return */
+		MEMPACK_Malloc(0x380, '-');
+	}
+	return;
 }
 
 // decompiled code
@@ -194,35 +129,35 @@ void menuface_initialize(void)
 void menuface_terminate(void)
 
 {
-  uint uVar1;
-  menuface_t *pmVar2;
-  int iVar3;
-  int iVar4;
+	uint uVar1;
+	menuface_t *pmVar2;
+	int iVar3;
+	int iVar4;
 
-  if (hack_initialized != 0)
-  {
-    iVar4 = 0;
-    iVar3 = 0;
-    pmVar2 = &MenuFaces;
-    do
-    {
-      uVar1 = 0;
-      do
-      {
-        if (((int)(uint)pmVar2->loaded >> (uVar1 & 0x1f) & 1U) != 0)
-        {
-          DRAW_FreeButton(FaceButtons + iVar3 + uVar1);
-        }
-        uVar1 = uVar1 + 1;
-      } while ((int)uVar1 < 7);
-      iVar3 = iVar3 + 7;
-      iVar4 = iVar4 + 1;
-      pmVar2 = pmVar2 + 1;
-    } while (iVar4 < 8);
-    MEMPACK_Free((char *)FaceButtons);
-    hack_initialized = 0;
-  }
-  return;
+	if (hack_initialized != 0)
+	{
+		iVar4 = 0;
+		iVar3 = 0;
+		pmVar2 = MenuFaces;
+		do
+		{
+			uVar1 = 0;
+			do
+			{
+				if (((int)(uint)pmVar2->loaded >> (uVar1 & 0x1f) & 1U) != 0)
+				{
+					DRAW_FreeButton((_ButtonTexture *)(_BlockVramEntry_800d5bec.udata + (iVar3 + uVar1) * 0x10));
+				}
+				uVar1 = uVar1 + 1;
+			} while ((int)uVar1 < 7);
+			iVar3 = iVar3 + 7;
+			iVar4 = iVar4 + 1;
+			pmVar2 = pmVar2 + 1;
+		} while (iVar4 < 8);
+		/* WARNING: Subroutine does not return */
+		MEMPACK_Free(_BlockVramEntry_800d5bec.udata);
+	}
+	return;
 }
 
 // decompiled code
@@ -259,59 +194,45 @@ void menuface_terminate(void)
 void MENUFACE_ChangeStateRandomly(int index)
 
 {
-  ushort uVar1;
-  ushort uVar2;
-  int iVar3;
-  ushort *puVar4;
-  menuface_t *pmVar5;
+	ushort uVar1;
+	ushort uVar2;
+	ushort *puVar3;
+	menuface_t *pmVar4;
 
-  if (hack_initialized != 0)
-  {
-    pmVar5 = &MenuFaces;
-    puVar4 = &MenuFaces.delay;
-    do
-    {
-      uVar1 = *puVar4 - 1;
-      if (*puVar4 == 0)
-      {
-        if (puVar4[-1] == 0)
-        {
-          iVar3 = rand();
-          if (iVar3 == (iVar3 / 500) * 500)
-          {
-            if (puVar4[-2] == 0xffff)
-            {
-              puVar4[-1] = 1;
-            }
-            else
-            {
-              puVar4[-1] = 0xffff;
-            }
-          }
-        }
-        else
-        {
-          uVar2 = puVar4[-2] + puVar4[-1];
-          puVar4[-2] = uVar2;
-          uVar1 = 200;
-          if (((int)(short)uVar2 == (uint) * (byte *)(puVar4 + -3) * 7 + -1) ||
-              ((int)(short)uVar2 == -1))
-          {
-            puVar4[-1] = 0;
-            goto LAB_800b984c;
-          }
-        }
-      }
-      else
-      {
-      LAB_800b984c:
-        *puVar4 = uVar1;
-      }
-      pmVar5 = pmVar5 + 1;
-      puVar4 = puVar4 + 8;
-    } while (pmVar5 < &hack_initialized);
-  }
-  return;
+	if (hack_initialized != 0)
+	{
+		pmVar4 = MenuFaces;
+		puVar3 = &MenuFaces[0].delay;
+		do
+		{
+			uVar1 = *puVar3 - 1;
+			if (*puVar3 == 0)
+			{
+				if (puVar3[-1] == 0)
+				{
+					/* WARNING: Subroutine does not return */
+					rand();
+				}
+				uVar2 = puVar3[-2] + puVar3[-1];
+				puVar3[-2] = uVar2;
+				uVar1 = 200;
+				if (((int)(short)uVar2 == (uint) * (byte *)(puVar3 + -3) * 7 + -1) ||
+					((int)(short)uVar2 == -1))
+				{
+					puVar3[-1] = 0;
+					goto LAB_800b984c;
+				}
+			}
+			else
+			{
+			LAB_800b984c:
+				*puVar3 = uVar1;
+			}
+			pmVar4 = pmVar4 + 1;
+			puVar3 = puVar3 + 8;
+		} while (pmVar4 < &hack_initialized);
+	}
+	return;
 }
 
 // decompiled code
@@ -343,29 +264,30 @@ void MENUFACE_ChangeStateRandomly(int index)
 void MENUFACE_RefreshFaces(void)
 
 {
-  short *psVar1;
-  int iVar2;
-  menuface_t *pmVar3;
-  int iVar4;
+	short *psVar1;
+	int iVar2;
+	menuface_t *pmVar3;
+	int iVar4;
 
-  if (hack_initialized != 0)
-  {
-    iVar4 = 0;
-    pmVar3 = &MenuFaces;
-    psVar1 = &MenuFaces.y;
-    iVar2 = 0;
-    do
-    {
-      if ((int)(uint) * (byte *)(psVar1 + 2) <= (int)psVar1[3])
-      {
-        DRAW_DrawButton(FaceButtons + iVar2 + (int)psVar1[3] / (int)(uint) * (byte *)(psVar1 + 2),
-                        pmVar3->x, *psVar1, gameTrackerX.drawOT + 1);
-      }
-      iVar2 = iVar2 + 7;
-      iVar4 = iVar4 + 1;
-      psVar1 = psVar1 + 8;
-      pmVar3 = pmVar3 + 1;
-    } while (iVar4 < 8);
-  }
-  return;
+	if (hack_initialized != 0)
+	{
+		iVar4 = 0;
+		pmVar3 = MenuFaces;
+		psVar1 = &MenuFaces[0].y;
+		iVar2 = 0;
+		do
+		{
+			if ((int)(uint) * (byte *)(psVar1 + 2) <= (int)psVar1[3])
+			{
+				DRAW_DrawButton((_ButtonTexture *)(_BlockVramEntry_800d5bec.udata +
+												   (iVar2 + (int)psVar1[3] / (int)(uint) * (byte *)(psVar1 + 2)) * 0x10),
+								pmVar3->x, *psVar1, (ulong **)(DAT_800d1180 + 4));
+			}
+			iVar2 = iVar2 + 7;
+			iVar4 = iVar4 + 1;
+			psVar1 = psVar1 + 8;
+			pmVar3 = pmVar3 + 1;
+		} while (iVar4 < 8);
+	}
+	return;
 }

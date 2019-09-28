@@ -1,17 +1,6 @@
 #include "THISDUST.H"
 #include "SIGNAL.H"
 
-// SignalInfo @0x800CDFC0, len = 0x0000000C
-signalInfoList =
-	{
-		// _func_20 * @0x800CDFC0, len = 0x00000004
-		.signalHandleFunc = &SIGNAL_HandleLightGroup,
-		// short @0x800CDFC4, len = 0x00000002
-		.length = 0x1,
-		// short @0x800CDFC6, len = 0x00000002
-		.onlyPlayer = 0x0,
-		// _func_21 * @0x800CDFC8, len = 0x00000004
-		.signalRelocateFunc = 00000000};
 // decompiled code
 // original method signature:
 // long /*$ra*/ SIGNAL_HandleLightGroup(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
@@ -48,7 +37,7 @@ long SIGNAL_HandleLightGroup(_Instance *instance, Signal *signal)
 long SIGNAL_HandleCameraAdjust(_Instance *instance, Signal *signal)
 
 {
-	CAMERA_Adjust(&theCamera, *(long *)signal->data);
+	CAMERA_Adjust((Camera *)&theCamera, *(long *)signal->data);
 	return 1;
 }
 
@@ -64,7 +53,7 @@ long SIGNAL_HandleCameraAdjust(_Instance *instance, Signal *signal)
 long SIGNAL_HandleCamera(_Instance *instance, Signal *signal)
 
 {
-	CAMERA_ChangeTo(&theCamera, *(_CameraKey **)signal->data);
+	CAMERA_ChangeTo((Camera *)&theCamera, *(_CameraKey **)signal->data);
 	return 1;
 }
 
@@ -108,7 +97,7 @@ void SIGNAL_RelocateCamera(Signal *signal, long offset)
 long SIGNAL_HandleCameraMode(_Instance *instance, Signal *signal)
 
 {
-	CAMERA_SetMode(&theCamera, *(long *)signal->data);
+	CAMERA_SetMode((Camera *)&theCamera, *(long *)signal->data);
 	return 1;
 }
 
@@ -124,7 +113,7 @@ long SIGNAL_HandleCameraMode(_Instance *instance, Signal *signal)
 long SIGNAL_HandleCameraLock(_Instance *instance, Signal *signal)
 
 {
-	CAMERA_Lock(&theCamera, *(long *)signal->data);
+	CAMERA_Lock((Camera *)&theCamera, *(long *)signal->data);
 	return 1;
 }
 
@@ -140,7 +129,7 @@ long SIGNAL_HandleCameraLock(_Instance *instance, Signal *signal)
 long SIGNAL_HandleCameraUnlock(_Instance *instance, Signal *signal)
 
 {
-	CAMERA_Unlock(&theCamera, *(long *)signal->data);
+	CAMERA_Unlock((Camera *)&theCamera, *(long *)signal->data);
 	return 1;
 }
 
@@ -156,7 +145,7 @@ long SIGNAL_HandleCameraUnlock(_Instance *instance, Signal *signal)
 long SIGNAL_HandleCameraSmooth(_Instance *instance, Signal *signal)
 
 {
-	CAMERA_SetSmoothValue(&theCamera, *(long *)signal->data);
+	CAMERA_SetSmoothValue((Camera *)&theCamera, *(long *)signal->data);
 	return 1;
 }
 
@@ -172,7 +161,7 @@ long SIGNAL_HandleCameraSmooth(_Instance *instance, Signal *signal)
 long SIGNAL_HandleCameraTimer(_Instance *instance, Signal *signal)
 
 {
-	CAMERA_SetTimer(&theCamera, *(long *)signal->data);
+	CAMERA_SetTimer((Camera *)&theCamera, *(long *)signal->data);
 	return 1;
 }
 
@@ -188,7 +177,7 @@ long SIGNAL_HandleCameraTimer(_Instance *instance, Signal *signal)
 long SIGNAL_HandleCameraSave(_Instance *instance, Signal *signal)
 
 {
-	CAMERA_Save(&theCamera, *(long *)signal->data);
+	CAMERA_Save((Camera *)&theCamera, *(long *)signal->data);
 	return 1;
 }
 
@@ -204,7 +193,7 @@ long SIGNAL_HandleCameraSave(_Instance *instance, Signal *signal)
 long SIGNAL_HandleCameraRestore(_Instance *instance, Signal *signal)
 
 {
-	CAMERA_Restore(&theCamera, *(long *)signal->data);
+	CAMERA_Restore((Camera *)&theCamera, *(long *)signal->data);
 	return 1;
 }
 
@@ -220,7 +209,7 @@ long SIGNAL_HandleCameraRestore(_Instance *instance, Signal *signal)
 long SIGNAL_HandleCameraValue(_Instance *instance, Signal *signal)
 
 {
-	CAMERA_SetValue(&theCamera, *(long *)signal->data, *(long *)(signal->data + 4));
+	CAMERA_SetValue((Camera *)&theCamera, *(long *)signal->data, *(long *)(signal->data + 4));
 	return 1;
 }
 
@@ -266,103 +255,10 @@ long SIGNAL_HandleCameraValue(_Instance *instance, Signal *signal)
 long SIGNAL_HandleStreamLevel(_Instance *instance, Signal *signal)
 
 {
-	bool bVar1;
-	char *pcVar2;
-	int id;
-	_StreamUnit *p_Var3;
-	long lVar4;
-	Level *level;
-	short sVar5;
 	char acStack48[16];
 
-	sVar5 = -1;
-	bVar1 = false;
+	/* WARNING: Subroutine does not return */
 	strcpy(acStack48, (char *)(signal->data + 8));
-	pcVar2 = strchr(acStack48, 0x2c);
-	if (pcVar2 != (char *)0x0)
-	{
-		id = atoi(pcVar2 + 1);
-		sVar5 = (short)id;
-		*pcVar2 = '\0';
-	}
-	id = strcmpi(acStack48, s_warpgate_800cdfa8);
-	if (id == 0)
-	{
-		p_Var3 = STREAM_GetStreamUnitWithID(instance->currentStreamUnitID);
-		if (gameTrackerX.currentTime - DAT_800cdfa4 < 0x65)
-		{
-			return 1;
-		}
-		if ((p_Var3->flags & 8U) == 0)
-		{
-			return 1;
-		}
-		id = ((&WarpRoomArray)[CurrentWarpNumber].streamUnit)->StreamUnitID;
-		strcpy(acStack48, (char *)(&WarpRoomArray + CurrentWarpNumber));
-		bVar1 = true;
-		if ((&WarpRoomArray)[CurrentWarpNumber].streamUnit == (_StreamUnit *)0x0)
-		{
-			return 1;
-		}
-		if ((((&WarpRoomArray)[CurrentWarpNumber].streamUnit)->flags & 8U) == 0)
-		{
-			return 1;
-		}
-	}
-	else
-	{
-		id = *(int *)(signal->data + 4);
-	}
-	if (instance->currentStreamUnitID != id)
-	{
-		if (instance == gameTrackerX.playerInstance)
-		{
-			gameTrackerX.SwitchToNewStreamUnit = 1;
-			DAT_800cdfa4 = gameTrackerX.currentTime;
-			strcpy(gameTrackerX.S_baseAreaName, acStack48);
-			gameTrackerX.fromSignal = *(short *)signal->data;
-			if (bVar1)
-			{
-				gameTrackerX.toSignal = sVar5;
-				gameTrackerX.moveRazielToStreamID = id;
-				if ((gameTrackerX.gameData.asmData.MorphType == 0) &&
-					(gameTrackerX.toSignal = sVar5, gameTrackerX.moveRazielToStreamID = id,
-					 id = strcmpi(acStack48, s_under3_800cdfb4), id == 0))
-				{
-					INSTANCE_Post(gameTrackerX.playerInstance, 0x10002001, 0);
-				}
-				lVar4 = WARPGATE_GetWarpRoomIndex(gameTrackerX.baseAreaName);
-				gameTrackerX.SwitchToNewWarpIndex = (short)lVar4;
-			}
-			else
-			{
-				gameTrackerX.SwitchToNewWarpIndex = -1;
-				gameTrackerX.toSignal = sVar5;
-				gameTrackerX.moveRazielToStreamID = id;
-			}
-		}
-		else
-		{
-			if (instance->LinkParent == (_Instance *)0x0)
-			{
-				level = STREAM_GetLevelWithID(id);
-				if (level == (Level *)0x0)
-				{
-					level = STREAM_GetLevelWithID(instance->currentStreamUnitID);
-					SAVE_Instance(instance, level);
-					instance->flags = instance->flags | 0x20;
-				}
-				else
-				{
-					instance->cachedTFace = -1;
-					instance->cachedTFaceLevel = (void *)0x0;
-					instance->currentStreamUnitID = id;
-					INSTANCE_UpdateFamilyStreamUnitID(instance);
-				}
-			}
-		}
-	}
-	return 1;
 }
 
 // decompiled code
@@ -391,15 +287,8 @@ long SIGNAL_HandleStreamLevel(_Instance *instance, Signal *signal)
 long SIGNAL_HandleFogNear(_Instance *instance, Signal *signal)
 
 {
-	ushort uVar1;
-	Level *level;
-
-	level = STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID);
-	uVar1 = *(ushort *)signal->data;
-	level->fogNear = uVar1;
-	SetFogNearFar((uint)uVar1, (uint)level->fogFar, theCamera.core.projDistance);
-	LIGHT_CalcDQPTable(level);
-	return 1;
+	/* WARNING: Subroutine does not return */
+	STREAM_GetLevelWithID(*(long *)(DAT_800d0fd8 + 0x38));
 }
 
 // decompiled code
@@ -428,15 +317,8 @@ long SIGNAL_HandleFogNear(_Instance *instance, Signal *signal)
 long SIGNAL_HandleFogFar(_Instance *instance, Signal *signal)
 
 {
-	ushort uVar1;
-	Level *level;
-
-	level = STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID);
-	uVar1 = *(ushort *)signal->data;
-	level->fogFar = uVar1;
-	SetFogNearFar((uint)level->fogNear, (uint)uVar1, theCamera.core.projDistance);
-	LIGHT_CalcDQPTable(level);
-	return 1;
+	/* WARNING: Subroutine does not return */
+	STREAM_GetLevelWithID(*(long *)(DAT_800d0fd8 + 0x38));
 }
 
 // decompiled code
@@ -451,7 +333,7 @@ long SIGNAL_HandleFogFar(_Instance *instance, Signal *signal)
 long SIGNAL_HandleCameraShake(_Instance *instance, Signal *signal)
 
 {
-	CAMERA_SetShake(&theCamera, *(long *)signal->data, *(long *)(signal->data + 4));
+	CAMERA_SetShake((Camera *)&theCamera, *(long *)signal->data, *(long *)(signal->data + 4));
 	return 1;
 }
 
@@ -488,7 +370,7 @@ long SIGNAL_HandleCallSignal(_Instance *instance, Signal *signal)
 long SIGNAL_HandleStopPlayerControl(_Instance *instance, Signal *signal)
 
 {
-	gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x90;
+	DAT_800d10ec = DAT_800d10ec | 0x90;
 	return 1;
 }
 
@@ -509,7 +391,7 @@ long SIGNAL_HandleStopPlayerControl(_Instance *instance, Signal *signal)
 long SIGNAL_HandleStartPlayerControl(_Instance *instance, Signal *signal)
 
 {
-	gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xffffff6f;
+	DAT_800d10ec = DAT_800d10ec & 0xffffff6f;
 	return 1;
 }
 
@@ -555,27 +437,27 @@ void SIGNAL_RelocateCameraSpline(Signal *signal, long offset)
 /* end block 2 */
 // End Line: 895
 
-long SIGNAL_HandleCameraSpline(_Instance *instance, Signal *signal)
+long SIGNAL_HandleStreamLevel(_Instance *instance, Signal *signal)
 
 {
 	if (*(int *)signal->data == 0)
 	{
 		if (*(int *)(signal->data + 4) == 0)
 		{
-			theCamera.Spline00 = (MultiSpline *)0x0;
+			DAT_800d1d90 = 0;
 			return 1;
 		}
-		theCamera.Spline00 = *(MultiSpline **)(*(int *)(signal->data + 4) + 0x38);
+		DAT_800d1d90 = *(undefined4 *)(*(int *)(signal->data + 4) + 0x38);
 		return 1;
 	}
 	if (*(int *)signal->data == 1)
 	{
 		if (*(int *)(signal->data + 4) != 0)
 		{
-			theCamera.Spline01 = *(MultiSpline **)(*(int *)(signal->data + 4) + 0x38);
+			DAT_800d1d94 = *(undefined4 *)(*(int *)(signal->data + 4) + 0x38);
 			return 1;
 		}
-		theCamera.Spline01 = (MultiSpline *)0x0;
+		DAT_800d1d94 = 0;
 	}
 	return 1;
 }
@@ -597,13 +479,13 @@ long SIGNAL_HandleCameraSpline(_Instance *instance, Signal *signal)
 long SIGNAL_HandleScreenWipe(_Instance *instance, Signal *signal)
 
 {
-	gameTrackerX.maxWipeTime = *(short *)(signal->data + 2);
-	if (gameTrackerX.maxWipeTime < 0)
+	DAT_800d107a = *(short *)(signal->data + 2);
+	if (DAT_800d107a < 0)
 	{
-		gameTrackerX.maxWipeTime = -gameTrackerX.maxWipeTime;
+		DAT_800d107a = -DAT_800d107a;
 	}
-	gameTrackerX.wipeTime = *(short *)(signal->data + 2);
-	gameTrackerX.wipeType = *(short *)signal->data;
+	DAT_800d1078 = *(undefined2 *)(signal->data + 2);
+	DAT_800d107c = *(undefined2 *)signal->data;
 	return 1;
 }
 
@@ -644,9 +526,9 @@ long SIGNAL_HandleBlendStart(_Instance *instance, Signal *signal)
 long SIGNAL_HandleScreenWipeColor(_Instance *instance, Signal *signal)
 
 {
-	gameTrackerX.wipeColor.r = signal->data[0];
-	gameTrackerX.wipeColor.g = signal->data[1];
-	gameTrackerX.wipeColor.b = signal->data[2];
+	DAT_800d1074 = signal->data[0];
+	DAT_800d1075 = signal->data[1];
+	DAT_800d1076 = signal->data[2];
 	return 1;
 }
 
@@ -673,6 +555,7 @@ long SIGNAL_HandleSetSlideAngle(_Instance *instance, Signal *signal)
 {
 	if (instance != (_Instance *)0x0)
 	{
+		/* WARNING: Subroutine does not return */
 		INSTANCE_Post(instance, 0x4000005, *(int *)signal->data);
 	}
 	return 1;
@@ -692,6 +575,7 @@ long SIGNAL_HandleResetSlideAngle(_Instance *instance, Signal *signal)
 {
 	if (instance != (_Instance *)0x0)
 	{
+		/* WARNING: Subroutine does not return */
 		INSTANCE_Post(instance, 0x4000006, 0);
 	}
 	return 1;
@@ -727,7 +611,7 @@ long SIGNAL_HandleSetCameraTilt(_Instance *instance, Signal *signal)
 		{
 			iVar1 = iVar1 + 0x168;
 		}
-		CAMERA_Adjust_tilt(&theCamera, (iVar1 * 0x1000) / 0x168);
+		CAMERA_Adjust_tilt((Camera *)&theCamera, (iVar1 * 0x1000) / 0x168);
 	}
 	return 1;
 }
@@ -755,7 +639,7 @@ long SIGNAL_HandleSetCameraDistance(_Instance *instance, Signal *signal)
 {
 	if (instance != (_Instance *)0x0)
 	{
-		CAMERA_Adjust_distance(&theCamera, *(long *)signal->data);
+		CAMERA_Adjust_distance((Camera *)&theCamera, *(long *)signal->data);
 	}
 	return 1;
 }
@@ -809,11 +693,12 @@ void COLLIDE_HandleSignal(_Instance *instance, Signal *signal, long numSignals, 
 		while (true)
 		{
 			uVar2 = signal->id & 0x7fffffff;
-			if (((((&signalInfoList)[uVar2].onlyPlayer == 0) || (instance == gameTrackerX.playerInstance)) && (((gameTrackerX.gameFlags & 0x40U) == 0 || (-1 < signal->id)))) &&
+			if ((((signalInfoList[uVar2].onlyPlayer == 0) || (instance == DAT_800d0fd8)) &&
+				 (((DAT_800d10ec & 0x40) == 0 || (-1 < signal->id)))) &&
 				((0x1a < uVar2 ||
-				  (lVar1 = (*(&signalInfoList)[uVar2].signalHandleFunc)(instance, signal), lVar1 == 0))))
+				  (lVar1 = (*signalInfoList[uVar2].signalHandleFunc)(instance, signal), lVar1 == 0))))
 				break;
-			signal = (Signal *)(&signal->id + (int)(&signalInfoList)[signal->id & 0x7fffffff].length + 1);
+			signal = (Signal *)(&signal->id + (int)signalInfoList[signal->id & 0x7fffffff].length + 1);
 		}
 	}
 	return;
@@ -842,18 +727,10 @@ void COLLIDE_HandleSignal(_Instance *instance, Signal *signal, long numSignals, 
 long SIGNAL_IsThisStreamAWarpGate(Signal *signal)
 
 {
-	char *pcVar1;
-	int iVar2;
 	char acStack40[32];
 
+	/* WARNING: Subroutine does not return */
 	strcpy(acStack40, (char *)(signal->data + 8));
-	pcVar1 = strchr(acStack40, 0x2c);
-	if (pcVar1 != (char *)0x0)
-	{
-		*pcVar1 = '\0';
-	}
-	iVar2 = strcmpi(acStack40, s_warpgate_800cdfa8);
-	return (uint)(iVar2 == 0);
 }
 
 // decompiled code
@@ -876,20 +753,20 @@ long SIGNAL_IsThisStreamAWarpGate(Signal *signal)
 /* end block 2 */
 // End Line: 1733
 
-long SIGNAL_IsStreamSignal(Signal *signal, long *isWarpGate)
+undefined4 SIGNAL_IsStreamSignal(Signal *param_1, undefined4 *param_2)
 
 {
 	bool bVar1;
 	long lVar2;
 	uint uVar3;
-	long lVar4;
+	undefined4 uVar4;
 
-	lVar4 = 0;
+	uVar4 = 0;
 	bVar1 = false;
-	*isWarpGate = 0;
+	*param_2 = 0;
 	while (true)
 	{
-		uVar3 = signal->id & 0x7fffffff;
+		uVar3 = param_1->id & 0x7fffffff;
 		if (uVar3 == 0xf)
 		{
 			bVar1 = true;
@@ -899,19 +776,19 @@ long SIGNAL_IsStreamSignal(Signal *signal, long *isWarpGate)
 			if (uVar3 == 0x12)
 			{
 				bVar1 = true;
-				lVar4 = 1;
-				lVar2 = SIGNAL_IsThisStreamAWarpGate(signal);
+				uVar4 = 1;
+				lVar2 = SIGNAL_IsThisStreamAWarpGate(param_1);
 				if (lVar2 != 0)
 				{
-					*isWarpGate = 1;
+					*param_2 = 1;
 				}
 			}
 		}
 		if (bVar1)
 			break;
-		signal = (Signal *)(&signal->id + (int)(&signalInfoList)[uVar3].length + 1);
+		param_1 = (Signal *)(&param_1->id + (int)*(short *)(&gp0xffff8510 + uVar3 * 0xc) + 1);
 	}
-	return lVar4;
+	return uVar4;
 }
 
 // decompiled code
@@ -961,12 +838,12 @@ _MultiSignal *SIGNAL_RelocateSignal(_MultiSignal *multiSignal, long offset)
 	{
 		do
 		{
-			if ((&signalInfoList)[pSVar1->id & 0x7fffffff].signalRelocateFunc != (_func_21 *)0x0)
+			if (signalInfoList[pSVar1->id & 0x7fffffff].signalRelocateFunc != (_func_18 *)0x0)
 			{
-				(*(&signalInfoList)[pSVar1->id & 0x7fffffff].signalRelocateFunc)(pSVar1, offset);
+				(*signalInfoList[pSVar1->id & 0x7fffffff].signalRelocateFunc)(pSVar1, offset);
 			}
 			iVar2 = iVar2 + 1;
-			pSVar1 = (Signal *)(&pSVar1->id + (int)(&signalInfoList)[pSVar1->id & 0x7fffffff].length + 1);
+			pSVar1 = (Signal *)(&pSVar1->id + (int)signalInfoList[pSVar1->id & 0x7fffffff].length + 1);
 		} while (iVar2 < multiSignal->numSignals);
 	}
 	return (_MultiSignal *)pSVar1->data;
@@ -1024,7 +901,7 @@ _MultiSignal *SIGNAL_FindSignal(Level *level, long id)
 				do
 				{
 					iVar2 = iVar2 + 1;
-					pSVar3 = (Signal *)(&pSVar3->id + (int)(&signalInfoList)[pSVar3->id & 0x7fffffff].length + 1);
+					pSVar3 = (Signal *)(&pSVar3->id + (int)signalInfoList[pSVar3->id & 0x7fffffff].length + 1);
 				} while (iVar2 < p_Var1->numSignals);
 			}
 			p_Var1 = (_MultiSignal *)pSVar3->data;
@@ -1058,14 +935,8 @@ _MultiSignal *SIGNAL_FindSignal(Level *level, long id)
 void SIGNAL_OutOfWater(_Instance *instance)
 
 {
-	Level *pLVar1;
-
-	pLVar1 = STREAM_GetLevelWithID(instance->currentStreamUnitID);
-	if ((pLVar1 != (Level *)0x0) && (pLVar1->startGoingOutOfWaterSignal != (_MultiSignal *)0x0))
-	{
-		SIGNAL_HandleSignal(instance, pLVar1->startGoingOutOfWaterSignal->signalList, 0);
-	}
-	return;
+	/* WARNING: Subroutine does not return */
+	STREAM_GetLevelWithID(instance->currentStreamUnitID);
 }
 
 // decompiled code
@@ -1089,12 +960,6 @@ void SIGNAL_OutOfWater(_Instance *instance)
 void SIGNAL_InWater(_Instance *instance)
 
 {
-	Level *pLVar1;
-
-	pLVar1 = STREAM_GetLevelWithID(instance->currentStreamUnitID);
-	if ((pLVar1 != (Level *)0x0) && (pLVar1->startGoingIntoWaterSignal != (_MultiSignal *)0x0))
-	{
-		SIGNAL_HandleSignal(instance, pLVar1->startGoingIntoWaterSignal->signalList, 0);
-	}
-	return;
+	/* WARNING: Subroutine does not return */
+	STREAM_GetLevelWithID(instance->currentStreamUnitID);
 }

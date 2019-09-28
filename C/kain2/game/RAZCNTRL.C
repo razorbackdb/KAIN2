@@ -1,14 +1,6 @@
 #include "THISDUST.H"
 #include "RAZCNTRL.H"
 
-// int @0x800CF590, len = 0x00000004
-Down = 0x0;
-// int @0x800CF588, len = 0x00000004
-Pending = 0x0;
-// long @0x800CF560, len = 0x00000004
-RazielCommands = 0x8000;
-// int @0x800CF58C, len = 0x00000004
-Up = 0x0;
 // decompiled code
 // original method signature:
 // void /*$ra*/ ProcessRazControl(long *command /*$a0*/)

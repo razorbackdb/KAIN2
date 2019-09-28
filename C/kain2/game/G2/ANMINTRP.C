@@ -121,7 +121,7 @@ void G2AnimSection_InterpToKeylistAtTime(_G2AnimSection_Type *section, _G2AnimKe
     {
       iVar5 = (int)sVar10 % (uint)section->keylist->s0TailTime + 1;
       sVar10 = (short)iVar5;
-      if ((int)sVar11 < iVar5)
+      if (sVar11 < iVar5)
       {
         sVar10 = sVar11;
       }
@@ -138,7 +138,7 @@ void G2AnimSection_InterpToKeylistAtTime(_G2AnimSection_Type *section, _G2AnimKe
     {
       G2AnimSection_SetLoopRangeAll(section);
     }
-    G2AnimSection_ClearAlarm(section, 3);
+    G2Anim_SetUnpaused((_G2Anim_Type *)section);
     section->flags = section->flags & 0x7f;
     G2AnimSection_SetUnpaused(section);
     section->swAlarmTable = (short *)0x0;
@@ -222,35 +222,37 @@ void _G2AnimSection_UpdateStoredFrameFromQuat(_G2AnimSection_Type *section)
 {
   byte bVar1;
   long ratio;
-  undefined4 uVar2;
+  int iVar2;
   undefined4 uVar3;
   undefined4 uVar4;
-  _G2AnimInterpInfo_Type *p_Var5;
+  undefined4 uVar5;
+  _G2AnimInterpInfo_Type *p_Var6;
   _G2AnimQuatInfo_Type *quatA;
-  _G2AnimSegValue_Type *p_Var6;
-  ushort *puVar7;
-  _G2AnimInterpStateBlock_Type *p_Var8;
-  int iVar9;
-  uint uVar10;
+  undefined4 *puVar7;
+  undefined2 *puVar8;
+  _G2AnimInterpStateBlock_Type *p_Var9;
+  int iVar10;
+  uint uVar11;
   undefined4 local_30;
   undefined4 local_2c;
 
-  p_Var5 = section->interpInfo;
-  iVar9 = 4;
+  p_Var6 = section->interpInfo;
+  iVar10 = 4;
   bVar1 = section->segCount;
-  uVar10 = (uint)bVar1;
-  ratio = _G2AnimAlphaTable_GetValue(p_Var5->alphaTable, ((int)section->elapsedTime << 0xc) / (int)p_Var5->duration);
-  p_Var8 = p_Var5->stateBlockList;
-  p_Var6 = &_segValues + (uint)section->firstSeg;
-  quatA = p_Var8->quatInfo;
+  uVar11 = (uint)bVar1;
+  ratio = _G2AnimAlphaTable_GetValue(p_Var6->alphaTable, ((int)section->elapsedTime << 0xc) / (int)p_Var6->duration);
+  p_Var9 = p_Var6->stateBlockList;
+  iVar2 = (uint)section->firstSeg * 0x18;
+  puVar7 = (undefined4 *)(&_segValues + iVar2);
+  quatA = p_Var9->quatInfo;
   if (bVar1 != 0)
   {
-    puVar7 = &(&_segValues)[(uint)section->firstSeg].bIsQuat;
+    puVar8 = (undefined2 *)(&CHAR____800d49f2 + iVar2);
     do
     {
       G2Quat_Slerp_VM(ratio, (_G2Quat_Type *)quatA, &quatA->destQuat, (_G2Quat_Type *)&local_30, 0);
-      *(undefined4 *)&p_Var6->rotQuat = local_30;
-      *(undefined4 *)(puVar7 + -9) = local_2c;
+      *puVar7 = local_30;
+      *(undefined4 *)(puVar8 + -9) = local_2c;
       setCopReg(2, 0xc800, (uint)(ushort)(quatA->srcScale).x);
       setCopReg(2, 0xd000, (uint)(ushort)(quatA->srcScale).y);
       setCopReg(2, 0xd800, (uint)(ushort)(quatA->srcScale).z);
@@ -259,12 +261,12 @@ void _G2AnimSection_UpdateStoredFrameFromQuat(_G2AnimSection_Type *section)
       setCopReg(2, 0x5800, (uint)(ushort)(quatA->destScale).z);
       setCopReg(2, 0x4000, ratio);
       copFunction(2, 0x1a8003e);
-      uVar2 = getCopReg(2, 0xc800);
-      uVar3 = getCopReg(2, 0xd000);
-      uVar4 = getCopReg(2, 0xd800);
-      (p_Var6->scale).x = (short)uVar2;
-      (p_Var6->scale).y = (short)uVar3;
-      (p_Var6->scale).z = (short)uVar4;
+      uVar3 = getCopReg(2, 0xc800);
+      uVar4 = getCopReg(2, 0xd000);
+      uVar5 = getCopReg(2, 0xd800);
+      *(short *)(puVar7 + 2) = (short)uVar3;
+      *(undefined2 *)((int)puVar7 + 10) = (short)uVar4;
+      *(short *)(puVar7 + 3) = (short)uVar5;
       setCopReg(2, 0xc800, (uint)(ushort)(quatA->srcTrans).x);
       setCopReg(2, 0xd000, (uint)(ushort)(quatA->srcTrans).y);
       setCopReg(2, 0xd800, (uint)(ushort)(quatA->srcTrans).z);
@@ -273,25 +275,25 @@ void _G2AnimSection_UpdateStoredFrameFromQuat(_G2AnimSection_Type *section)
       setCopReg(2, 0x5800, (uint)(ushort)(quatA->destTrans).z);
       setCopReg(2, 0x4000, ratio);
       copFunction(2, 0x1a8003e);
-      uVar2 = getCopReg(2, 0xc800);
-      uVar3 = getCopReg(2, 0xd000);
-      uVar4 = getCopReg(2, 0xd800);
-      (p_Var6->trans).x = (short)uVar2;
-      (p_Var6->trans).y = (short)uVar3;
-      (p_Var6->trans).z = (short)uVar4;
-      uVar10 = uVar10 - 1;
-      iVar9 = iVar9 + -1;
+      uVar3 = getCopReg(2, 0xc800);
+      uVar4 = getCopReg(2, 0xd000);
+      uVar5 = getCopReg(2, 0xd800);
+      *(short *)(puVar7 + 4) = (short)uVar3;
+      *(undefined2 *)((int)puVar7 + 0x12) = (short)uVar4;
+      *(short *)(puVar7 + 5) = (short)uVar5;
+      uVar11 = uVar11 - 1;
+      iVar10 = iVar10 + -1;
       quatA = quatA + 1;
-      if (iVar9 == 0)
+      if (iVar10 == 0)
       {
-        p_Var8 = p_Var8->next;
-        iVar9 = 4;
-        quatA = p_Var8->quatInfo;
+        p_Var9 = p_Var9->next;
+        iVar10 = 4;
+        quatA = p_Var9->quatInfo;
       }
-      *puVar7 = 1;
-      puVar7 = puVar7 + 0xc;
-      p_Var6 = p_Var6 + 1;
-    } while (0 < (int)uVar10);
+      *puVar8 = 1;
+      puVar8 = puVar8 + 0xc;
+      puVar7 = puVar7 + 6;
+    } while (0 < (int)uVar11);
   }
   section->storedTime = section->elapsedTime;
   section->flags = section->flags | 0x80;
@@ -463,63 +465,65 @@ void _G2AnimSection_InterpStateToQuat(_G2AnimSection_Type *section)
 void _G2AnimSection_SegValueToQuat(_G2AnimSection_Type *section, int zeroOne)
 
 {
-  _G2AnimQuatInfo_Type *p_Var1;
-  short *psVar2;
-  _G2AnimSegValue_Type *p_Var3;
-  int iVar4;
-  _G2AnimInterpStateBlock_Type *p_Var5;
-  uint uVar6;
+  int iVar1;
+  _G2AnimQuatInfo_Type *p_Var2;
+  short *psVar3;
+  ushort *puVar4;
+  int iVar5;
+  _G2AnimInterpStateBlock_Type *p_Var6;
+  uint uVar7;
   ushort local_28;
   ushort local_26;
   ushort local_24;
   undefined2 local_22;
 
-  iVar4 = 4;
-  uVar6 = (uint)section->segCount;
-  p_Var5 = section->interpInfo->stateBlockList;
-  p_Var3 = &_segValues + (uint)section->firstSeg;
-  p_Var1 = p_Var5->quatInfo;
+  iVar5 = 4;
+  uVar7 = (uint)section->segCount;
+  p_Var6 = section->interpInfo->stateBlockList;
+  iVar1 = (uint)section->firstSeg * 0x18;
+  puVar4 = (ushort *)(&_segValues + iVar1);
+  p_Var2 = p_Var6->quatInfo;
   if (section->segCount != 0)
   {
-    psVar2 = &(&_segValues)[(uint)section->firstSeg].trans.z;
+    psVar3 = (short *)(&CHAR____800d49f0 + iVar1);
     do
     {
-      local_28 = *(ushort *)&p_Var3->rotQuat & 0xfff;
-      local_26 = psVar2[-9] & 0xfff;
+      local_28 = *puVar4 & 0xfff;
+      local_26 = psVar3[-9] & 0xfff;
       local_22 = 0;
-      local_24 = psVar2[-8] & 0xfff;
+      local_24 = psVar3[-8] & 0xfff;
       if (zeroOne == 0)
       {
-        G2Quat_FromEuler_S((int)p_Var1, (short *)&local_28);
-        (p_Var1->srcScale).x = psVar2[-6];
-        (p_Var1->srcScale).y = psVar2[-5];
-        (p_Var1->srcScale).z = psVar2[-4];
-        (p_Var1->srcTrans).x = psVar2[-2];
-        (p_Var1->srcTrans).y = psVar2[-1];
-        (p_Var1->srcTrans).z = *psVar2;
+        G2Quat_FromEuler_S((int)p_Var2, (short *)&local_28);
+        (p_Var2->srcScale).x = psVar3[-6];
+        (p_Var2->srcScale).y = psVar3[-5];
+        (p_Var2->srcScale).z = psVar3[-4];
+        (p_Var2->srcTrans).x = psVar3[-2];
+        (p_Var2->srcTrans).y = psVar3[-1];
+        (p_Var2->srcTrans).z = *psVar3;
       }
       else
       {
-        G2Quat_FromEuler_S((int)&p_Var1->destQuat, (short *)&local_28);
-        (p_Var1->destScale).x = psVar2[-6];
-        (p_Var1->destScale).y = psVar2[-5];
-        (p_Var1->destScale).z = psVar2[-4];
-        (p_Var1->destTrans).x = psVar2[-2];
-        (p_Var1->destTrans).y = psVar2[-1];
-        (p_Var1->destTrans).z = *psVar2;
+        G2Quat_FromEuler_S((int)&p_Var2->destQuat, (short *)&local_28);
+        (p_Var2->destScale).x = psVar3[-6];
+        (p_Var2->destScale).y = psVar3[-5];
+        (p_Var2->destScale).z = psVar3[-4];
+        (p_Var2->destTrans).x = psVar3[-2];
+        (p_Var2->destTrans).y = psVar3[-1];
+        (p_Var2->destTrans).z = *psVar3;
       }
-      psVar2 = psVar2 + 0xc;
-      p_Var3 = p_Var3 + 1;
-      uVar6 = uVar6 - 1;
-      iVar4 = iVar4 + -1;
-      p_Var1 = p_Var1 + 1;
-      if (iVar4 == 0)
+      psVar3 = psVar3 + 0xc;
+      puVar4 = puVar4 + 0xc;
+      uVar7 = uVar7 - 1;
+      iVar5 = iVar5 + -1;
+      p_Var2 = p_Var2 + 1;
+      if (iVar5 == 0)
       {
-        p_Var5 = p_Var5->next;
-        iVar4 = 4;
-        p_Var1 = p_Var5->quatInfo;
+        p_Var6 = p_Var6->next;
+        iVar5 = 4;
+        p_Var2 = p_Var6->quatInfo;
       }
-    } while (0 < (int)uVar6);
+    } while (0 < (int)uVar7);
   }
   return;
 }

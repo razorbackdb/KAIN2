@@ -1,8 +1,6 @@
 #include "THISDUST.H"
 #include "BSP.H"
 
-// LightInfo * @0x800D12AC, len = 0x00000004
-sbsp_lightInfo = null;
 // decompiled code
 // original method signature:
 // void /*$ra*/ SBSP_IntroduceInstances(struct _Terrain *terrain /*$a0*/, int unitID /*$a1*/)

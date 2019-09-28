@@ -37,7 +37,7 @@
 short G2Anim_GetElapsedTime(_G2Anim_Type *anim)
 
 {
-	return anim->section[(uint)anim->masterSection].elapsedTime;
+	return anim->section[anim->masterSection].elapsedTime;
 }
 
 // decompiled code
@@ -71,7 +71,7 @@ short G2Anim_GetElapsedTime(_G2Anim_Type *anim)
 _G2AnimKeylist_Type *G2Anim_GetKeylist(_G2Anim_Type *anim)
 
 {
-	return anim->section[(uint)anim->masterSection].keylist;
+	return anim->section[anim->masterSection].keylist;
 }
 
 // decompiled code
@@ -161,19 +161,10 @@ void G2Anim_InterpToKeylistFrame(_G2Anim_Type *anim, _G2AnimKeylist_Type *keylis
 void G2Anim_SetAlphaTable(_G2Anim_Type *anim, _G2AnimAlphaTable_Type *table)
 
 {
-	int iVar1;
-	int iVar2;
-
-	iVar1 = 0;
 	if (anim->sectionCount != '\0')
 	{
-		iVar2 = 0x24;
-		do
-		{
-			G2AnimSection_SetAlphaTable((_G2AnimSection_Type *)(&anim->sectionCount + iVar2), table);
-			iVar1 = iVar1 + 1;
-			iVar2 = iVar2 + 0x30;
-		} while (iVar1 < (int)(uint)anim->sectionCount);
+		/* WARNING: Subroutine does not return */
+		G2AnimSection_SetAlphaTable(anim->section, table);
 	}
 	return;
 }
@@ -287,19 +278,10 @@ void G2Anim_SetLooping(_G2Anim_Type *anim)
 void G2Anim_SetNoLooping(_G2Anim_Type *anim)
 
 {
-	int iVar1;
-	int iVar2;
-
-	iVar1 = 0;
 	if (anim->sectionCount != '\0')
 	{
-		iVar2 = 0x24;
-		do
-		{
-			G2AnimSection_SetNoLooping((_G2AnimSection_Type *)(&anim->sectionCount + iVar2));
-			iVar1 = iVar1 + 1;
-			iVar2 = iVar2 + 0x30;
-		} while (iVar1 < (int)(uint)anim->sectionCount);
+		/* WARNING: Subroutine does not return */
+		G2AnimSection_SetNoLooping(anim->section);
 	}
 	return;
 }
@@ -334,7 +316,7 @@ void G2Anim_SetPaused(_G2Anim_Type *anim)
 		iVar2 = 0x24;
 		do
 		{
-			G2AnimSection_SetPaused((_G2AnimSection_Type *)(&anim->sectionCount + iVar2));
+			G2AnimSection_NextKeyframe((_G2AnimSection_Type *)(&anim->sectionCount + iVar2));
 			iVar1 = iVar1 + 1;
 			iVar2 = iVar2 + 0x30;
 		} while (iVar1 < (int)(uint)anim->sectionCount);
@@ -525,10 +507,12 @@ int G2AnimKeylist_GetKeyframeCount(_G2AnimKeylist_Type *keylist)
 /* end block 2 */
 // End Line: 1050
 
-void G2AnimSection_ClearAlarm(_G2AnimSection_Type *section, ulong flag)
+void G2Anim_SetUnpaused(_G2Anim_Type *anim)
 
 {
-	section->alarmFlags = section->alarmFlags & ~flag;
+	uint in_a1;
+
+	anim->disabledBits[0] = anim->disabledBits[0] & ~in_a1;
 	return;
 }
 
@@ -714,6 +698,7 @@ void G2AnimSection_SetInterpInfo(_G2AnimSection_Type *section, _G2AnimInterpInfo
 	section->interpInfo = newInfoPtr;
 	if (newInfoPtr != (_G2AnimInterpInfo_Type *)0x0)
 	{
+		/* WARNING: Subroutine does not return */
 		memset(newInfoPtr, 0, 0xc);
 	}
 	return;
@@ -731,7 +716,7 @@ void G2AnimSection_SetInterpInfo(_G2AnimSection_Type *section, _G2AnimInterpInfo
 void G2AnimSection_SetLooping(_G2AnimSection_Type *section)
 
 {
-	G2AnimSection_ClearAlarm(section, 3);
+	G2Anim_SetUnpaused((_G2Anim_Type *)section);
 	G2AnimSection_SetLoopRangeAll(section);
 	section->flags = section->flags | 2;
 	return;
@@ -813,11 +798,14 @@ void G2AnimSection_SetNotRewinding(_G2AnimSection_Type *section)
 /* end block 2 */
 // End Line: 1781
 
-void G2AnimSection_SetPaused(_G2AnimSection_Type *section)
+short G2AnimSection_NextKeyframe(_G2AnimSection_Type *section)
 
 {
-	section->flags = section->flags | 1;
-	return;
+	uint uVar1;
+
+	uVar1 = (uint)section->flags | 1;
+	section->flags = (uchar)uVar1;
+	return (short)uVar1;
 }
 
 // decompiled code

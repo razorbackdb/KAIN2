@@ -1,16 +1,6 @@
 #ifndef AADSEQEV_H
 #define AADSEQEV_H
 
-static char midiDataByteCount[8]; // offset 0x800CED84
-
-struct AadVolume // hashcode: 0xDE43B1D6 (dec: -565988906)
-{
-	short left;  // size=0, offset=0 //  hashcode: 0x606F3189 (dec: 1617899913), parent name: 'AadVolume', parent hashcode: 0xFFFFFFFF (dec: -1)
-	short right; // size=0, offset=2 //  hashcode: 0x6938EFFF (dec: 1765339135), parent name: 'AadVolume', parent hashcode: 0xFFFFFFFF (dec: -1)
-};
-
-typedef struct AadVolume AadVolume;
-
 extern int aadQueueNextEvent(struct _AadSequenceSlot *slot, int track); // 0x800548E8
 
 extern void aadExecuteEvent(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80054ADC

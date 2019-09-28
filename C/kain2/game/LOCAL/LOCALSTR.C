@@ -1,14 +1,6 @@
 #include "THISDUST.H"
 #include "LOCALSTR.H"
 
-// LocalizationHeader * @0x800CF994, len = 0x00000004
-LocalizationTable = 00000000;
-// char * * @0x800CF998, len = 0x00000004
-LocalStrings = 00000000;
-// language_t @0x800D5BFC, len = 0x00000004
-the_language = null;
-// XAVoiceListEntry * @0x800CF99C, len = 0x00000004
-voiceList = 00000000;
 // decompiled code
 // original method signature:
 // enum language_t /*$ra*/ localstr_get_language()
@@ -28,7 +20,7 @@ voiceList = 00000000;
 language_t localstr_get_language(void)
 
 {
-	return the_language;
+	return _BlockVramEntry_800d5bec._16_4_;
 }
 
 // decompiled code
@@ -63,7 +55,6 @@ void localstr_set_language(language_t lang)
 	{
 		voiceList = (XAVoiceListEntry *)((int)&pLVar1->language + pLVar1->XATableOffset);
 		iVar3 = 0;
-		LocalizationTable = pLVar1;
 		LocalStrings = (char **)pLVar2;
 		if (0 < pLVar1->numStrings)
 		{
@@ -74,7 +65,8 @@ void localstr_set_language(language_t lang)
 				pLVar2 = (LocalizationHeader *)&pLVar2->numXAfiles;
 			} while (iVar3 < pLVar1->numStrings);
 		}
-		the_language = LocalizationTable->language;
+		_BlockVramEntry_800d5bec._16_4_ = LocalizationTable->language;
+		/* WARNING: Read-only address (ram,0x800d5bfc) is written */
 	}
 	return;
 }

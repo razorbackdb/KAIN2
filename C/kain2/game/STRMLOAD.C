@@ -1,62 +1,6 @@
 #include "THISDUST.H"
 #include "STRMLOAD.H"
 
-// int @0x800CF4E8, len = 0x00000004
-gCurDir = 0x0;
-// int @0x800CF4E4, len = 0x00000004
-loadCanFail = 0x0;
-// _LoadQueueEntry * @0x800D2724, len = 0x00000004
-loadFree = null;
-// int @0x800CF4E0, len = 0x00000004
-loadFromHead = 0x0;
-// _LoadQueueEntry * @0x800D2728, len = 0x00000004
-loadHead = null;
-// _LoadQueueEntry @0x800D1D24, len = 0x00000040
-LoadQueue =
-    {
-        // _LoadQueueEntry * @0x800D1D24, len = 0x00000004
-        .next = null,
-        // short @0x800D1D28, len = 0x00000002
-        .status = null,
-        // char @0x800D1D2A, len = 0x00000001
-        .relocateBinary = 0x00,
-        // char @0x800D1D2B, len = 0x00000001
-        .mempackUsed = 0x00,
-        // _NonBlockLoadEntry @0x800D1D2C, len = 0x00000038
-        .loadEntry =
-            {
-                // long @0x800D1D2C, len = 0x00000004
-                .fileHash = null,
-                // long @0x800D1D30, len = 0x00000004
-                .dirHash = null,
-                // long @0x800D1D34, len = 0x00000004
-                .filePos = null,
-                // long * @0x800D1D38, len = 0x00000004
-                .loadAddr = null,
-                // long @0x800D1D3C, len = 0x00000004
-                .loadSize = null,
-                // long @0x800D1D40, len = 0x00000004
-                .checksum = null,
-                // long @0x800D1D44, len = 0x00000004
-                .checksumType = null,
-                // long @0x800D1D48, len = 0x00000004
-                .memType = null,
-                // long @0x800D1D4C, len = 0x00000004
-                .posInFile = null,
-                // long @0x800D1D50, len = 0x00000004
-                .mallocFailOk = null,
-                // void * @0x800D1D54, len = 0x00000004
-                .retFunc = null,
-                // void * @0x800D1D58, len = 0x00000004
-                .retData = null,
-                // void * @0x800D1D5C, len = 0x00000004
-                .retData2 = null,
-                // void * * @0x800D1D60, len = 0x00000004
-                .retPointer = null}};
-// _LoadQueueEntry * @0x800D272C, len = 0x00000004
-loadTail = null;
-// int @0x800D2730, len = 0x00000004
-numLoads = null;
 // decompiled code
 // original method signature:
 // void /*$ra*/ STREAM_NextLoadFromHead()
@@ -94,12 +38,10 @@ void STREAM_NextLoadFromHead(void)
 /* end block 2 */
 // End Line: 86
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
-
 void STREAM_NextLoadCanFail(void)
 
 {
-  loadCanFail = 1;
+  uGpffff9a30 = 1;
   return;
 }
 
@@ -148,26 +90,27 @@ void STREAM_NextLoadAsNormal(void)
 void STREAM_InitLoader(char *bigFileName, char *voiceFileName)
 
 {
-  _LoadQueueEntry *p_Var1;
-  _LoadQueueEntry *p_Var2;
+  _TFace *p_Var1;
+  _TFace **pp_Var2;
   int iVar3;
 
   LOAD_InitCdLoader(bigFileName, voiceFileName);
   iVar3 = 0x26;
-  p_Var2 = &_LoadQueueEntry_800d26a4;
-  p_Var1 = &_LoadQueueEntry_800d26e4;
-  loadFree = &LoadQueue;
-  loadHead = (_LoadQueueEntry *)0x0;
-  loadTail = (_LoadQueueEntry *)0x0;
-  numLoads = 0;
+  pp_Var2 = &theCamera.data.Follow.oldTFace;
+  p_Var1 = (_TFace *)0x800d26e4;
+  shadow_vertices._0_4_ = &LoadQueue;
+  shadow_vertices._4_4_ = 0;
+  loadTail._0_4_ = 0;
+  loadTail._4_4_ = 0;
   do
   {
-    p_Var2->next = p_Var1;
-    p_Var2 = p_Var2 + -1;
+    *pp_Var2 = p_Var1;
+    pp_Var2 = pp_Var2 + -0x10;
     iVar3 = iVar3 + -1;
-    p_Var1 = p_Var1 + -1;
+    p_Var1 = (_TFace *)&p_Var1[-6].normal;
   } while (-1 < iVar3);
-  _LoadQueueEntry_800d26e4.next = (_LoadQueueEntry *)0x0;
+  theCamera._1212_4_ = 0;
+  /* WARNING: Read-only address (ram,0x800d26e4) is written */
   return;
 }
 
@@ -204,19 +147,19 @@ void STREAM_InitLoader(char *bigFileName, char *voiceFileName)
 void STREAM_RemoveQueueHead(void)
 
 {
-  _LoadQueueEntry **pp_Var1;
-  _LoadQueueEntry *p_Var2;
+  int iVar1;
+  int iVar2;
 
-  p_Var2 = loadFree;
-  if (loadHead->next == (_LoadQueueEntry *)0x0)
+  iVar1 = (int)shadow_vertices._0_4_;
+  if (*shadow_vertices._4_4_ == 0)
   {
-    loadTail = (_LoadQueueEntry *)0x0;
+    loadTail._0_4_ = 0;
   }
-  loadFree = loadHead;
-  pp_Var1 = &loadHead->next;
-  loadHead = loadHead->next;
-  *pp_Var1 = p_Var2;
-  numLoads = numLoads + -1;
+  shadow_vertices._0_4_ = shadow_vertices._4_4_;
+  iVar2 = *shadow_vertices._4_4_;
+  *shadow_vertices._4_4_ = iVar1;
+  shadow_vertices._4_4_ = (int *)iVar2;
+  loadTail._4_4_ = loadTail._4_4_ + -1;
   return;
 }
 
@@ -239,22 +182,22 @@ void STREAM_RemoveQueueEntry(_LoadQueueEntry *entry, _LoadQueueEntry *prev)
 {
   _LoadQueueEntry *p_Var1;
 
-  if (loadTail == entry)
+  if (loadTail._0_4_ == entry)
   {
-    loadTail = prev;
+    loadTail._0_4_ = prev;
   }
   if (prev == (_LoadQueueEntry *)0x0)
   {
-    loadHead = entry->next;
+    shadow_vertices._4_4_ = entry->next;
   }
   else
   {
     prev->next = entry->next;
   }
   p_Var1 = entry;
-  entry->next = loadFree;
-  loadFree = p_Var1;
-  numLoads = numLoads + -1;
+  entry->next = shadow_vertices._0_4_;
+  shadow_vertices._0_4_ = p_Var1;
+  loadTail._4_4_ = loadTail._4_4_ + -1;
   return;
 }
 
@@ -282,24 +225,28 @@ _LoadQueueEntry *STREAM_AddQueueEntryToTail(void)
 
 {
   _LoadQueueEntry *p_Var1;
+  _LoadQueueEntry *p_Var2;
 
-  p_Var1 = loadFree;
-  if (loadFree == (_LoadQueueEntry *)0x0)
+  p_Var1 = shadow_vertices._0_4_;
+  if (shadow_vertices._0_4_ == (_LoadQueueEntry *)0x0)
   {
-    DEBUG_FatalError(s_CD_ERROR__too_many_queue_entries_800cf4ec);
+    /* WARNING: Subroutine does not return */
+    DEBUG_FatalError(_spu_AllocBlockNum);
   }
-  loadFree = p_Var1->next;
-  p_Var1->next = (_LoadQueueEntry *)0x0;
-  if (loadTail == (_LoadQueueEntry *)0x0)
+  p_Var2 = (shadow_vertices._0_4_)->next;
+  (shadow_vertices._0_4_)->next = (_LoadQueueEntry *)0x0;
+  if (loadTail._0_4_ == (_LoadQueueEntry *)0x0)
   {
-    loadHead = p_Var1;
+    shadow_vertices._4_4_ = shadow_vertices._0_4_;
+    shadow_vertices._0_4_ = p_Var2;
   }
   else
   {
-    loadTail->next = p_Var1;
+    *(_LoadQueueEntry **)loadTail._0_4_ = shadow_vertices._0_4_;
+    shadow_vertices._0_4_ = p_Var2;
   }
-  loadTail = p_Var1;
-  numLoads = numLoads + 1;
+  loadTail._0_4_ = p_Var1;
+  loadTail._4_4_ = loadTail._4_4_ + 1;
   return p_Var1;
 }
 
@@ -327,34 +274,40 @@ _LoadQueueEntry *STREAM_AddQueueEntryToHead(void)
 
 {
   short sVar1;
-  _LoadQueueEntry *p_Var2;
+  _LoadQueueEntry **pp_Var2;
   _LoadQueueEntry *p_Var3;
+  _LoadQueueEntry *p_Var4;
 
-  p_Var2 = loadFree;
-  if (loadFree == (_LoadQueueEntry *)0x0)
+  p_Var4 = shadow_vertices._4_4_;
+  p_Var3 = shadow_vertices._0_4_;
+  if (shadow_vertices._0_4_ == (_LoadQueueEntry *)0x0)
   {
-    DEBUG_FatalError(s_CD_ERROR__too_many_queue_entries_800cf4ec);
+    /* WARNING: Subroutine does not return */
+    DEBUG_FatalError(_spu_AllocBlockNum);
   }
-  p_Var3 = loadHead;
-  loadFree = p_Var2->next;
-  if ((((loadHead == (_LoadQueueEntry *)0x0) || (sVar1 = loadHead->status, sVar1 == 1)) ||
+  if ((((shadow_vertices._4_4_ == (_LoadQueueEntry *)0x0) ||
+        (sVar1 = (shadow_vertices._4_4_)->status, sVar1 == 1)) ||
        (sVar1 == 5)) ||
       ((sVar1 == 10 || (sVar1 == 8))))
   {
-    loadHead = p_Var2;
-    p_Var2->next = p_Var3;
+    shadow_vertices._4_4_ = shadow_vertices._0_4_;
+    pp_Var2 = &(shadow_vertices._0_4_)->next;
+    shadow_vertices._0_4_ = (shadow_vertices._0_4_)->next;
+    *pp_Var2 = p_Var4;
   }
   else
   {
-    p_Var2->next = loadHead->next;
-    p_Var3->next = p_Var2;
+    pp_Var2 = &(shadow_vertices._0_4_)->next;
+    shadow_vertices._0_4_ = (shadow_vertices._0_4_)->next;
+    *pp_Var2 = (shadow_vertices._4_4_)->next;
+    p_Var4->next = p_Var3;
   }
-  if (loadTail == (_LoadQueueEntry *)0x0)
+  if (loadTail._0_4_ == (_LoadQueueEntry *)0x0)
   {
-    loadTail = p_Var2;
+    loadTail._0_4_ = p_Var3;
   }
-  numLoads = numLoads + 1;
-  return p_Var2;
+  loadTail._4_4_ = loadTail._4_4_ + 1;
+  return p_Var3;
 }
 
 // decompiled code
@@ -376,9 +329,9 @@ int STREAM_IsCdBusy(long *numberInQueue)
 {
   if (numberInQueue != (long *)0x0)
   {
-    *numberInQueue = numLoads;
+    *numberInQueue = loadTail._4_4_;
   }
-  return numLoads;
+  return loadTail._4_4_;
 }
 
 // decompiled code
@@ -438,185 +391,182 @@ int STREAM_IsCdBusy(long *numberInQueue)
 int STREAM_PollLoadQueue(void)
 
 {
-  short sVar1;
-  _LoadQueueEntry *p_Var2;
-  _LoadQueueEntry *p_Var3;
-  int voiceIndex;
-  long **pplVar4;
+  int *piVar1;
+  short sVar2;
+  void *pvVar3;
+  _LoadQueueEntry *p_Var4;
+  int iVar5;
+  int iVar6;
   long takeBackSize;
-  long *data;
 
   LOAD_ProcessReadQueue();
-  p_Var2 = loadHead;
-  if (loadHead == (_LoadQueueEntry *)0x0)
+  iVar6 = shadow_vertices._4_4_;
+  if (shadow_vertices._4_4_ == 0)
   {
-    return numLoads;
+    return loadTail._4_4_;
   }
-  if ((gameTrackerX.gameFlags & 0x800U) != 0)
+  if ((DAT_800d10ec & 0x800) != 0)
   {
-    sVar1 = loadHead->status;
-    if (sVar1 == 1)
+    sVar2 = *(short *)(shadow_vertices._4_4_ + 4);
+    if (sVar2 == 1)
     {
-      return numLoads;
+      return loadTail._4_4_;
     }
-    if (sVar1 == 5)
+    if (sVar2 == 5)
     {
-      return numLoads;
+      return loadTail._4_4_;
     }
-    if (sVar1 == 8)
+    if (sVar2 == 8)
     {
-      return numLoads;
+      return loadTail._4_4_;
     }
-    if (sVar1 == 10)
+    if (sVar2 == 10)
     {
-      return numLoads;
+      return loadTail._4_4_;
     }
   }
-  switch ((int)(((uint)(ushort)loadHead->status - 1) * 0x10000) >> 0x10)
+  switch ((int)(((uint) * (ushort *)(shadow_vertices._4_4_ + 4) - 1) * 0x10000) >> 0x10)
   {
   case 0:
-    LOAD_NonBlockingReadFile(&loadHead->loadEntry);
-    voiceIndex = LOAD_ChangeDirectoryFlag();
-    if (voiceIndex == 0)
+    LOAD_NonBlockingReadFile((_NonBlockLoadEntry *)(shadow_vertices._4_4_ + 8));
+    iVar5 = LOAD_ChangeDirectoryFlag();
+    if (iVar5 == 0)
     {
-      data = (p_Var2->loadEntry).loadAddr;
-      p_Var2->status = 2;
-      if (data != (long *)0x0)
+      *(undefined2 *)(iVar6 + 4) = 2;
+      if (*(char **)(iVar6 + 0x14) != (char *)0x0)
       {
-        if (p_Var2->mempackUsed != '\0')
+        if (*(char *)(iVar6 + 7) != '\0')
         {
-          MEMPACK_SetMemoryBeingStreamed((char *)data);
+          MEMPACK_SetMemoryBeingStreamed(*(char **)(iVar6 + 0x14));
         }
-        pplVar4 = (long **)(p_Var2->loadEntry).retPointer;
-        if (pplVar4 != (long **)0x0)
+        if (*(undefined4 **)(iVar6 + 0x3c) != (undefined4 *)0x0)
         {
-          *pplVar4 = (p_Var2->loadEntry).loadAddr;
+          **(undefined4 **)(iVar6 + 0x3c) = *(undefined4 *)(iVar6 + 0x14);
         }
       }
     }
     else
     {
-      p_Var3 = STREAM_AddQueueEntryToHead();
-      takeBackSize = (p_Var2->loadEntry).dirHash;
-      (p_Var3->loadEntry).fileHash = 0;
-      p_Var3->status = 10;
-      (p_Var3->loadEntry).dirHash = takeBackSize;
+      p_Var4 = STREAM_AddQueueEntryToHead();
+      takeBackSize = *(long *)(iVar6 + 0xc);
+      (p_Var4->loadEntry).fileHash = 0;
+      p_Var4->status = 10;
+      (p_Var4->loadEntry).dirHash = takeBackSize;
     }
     break;
   case 1:
-    voiceIndex = LOAD_IsFileLoading();
-    if (voiceIndex != 0)
+    iVar5 = LOAD_IsFileLoading();
+    if (iVar5 != 0)
     {
-      return numLoads;
+      return loadTail._4_4_;
     }
-    if ((p_Var2->relocateBinary != '\0') &&
-        (data = (p_Var2->loadEntry).loadAddr, data != (long *)0x0))
+    if ((*(char *)(iVar6 + 6) != '\0') && (*(long **)(iVar6 + 0x14) != (long *)0x0))
     {
-      takeBackSize = LOAD_RelocBinaryData(data, (p_Var2->loadEntry).loadSize);
-      if (p_Var2->mempackUsed != '\0')
+      takeBackSize = LOAD_RelocBinaryData(*(long **)(iVar6 + 0x14), *(long *)(iVar6 + 0x18));
+      if (*(char *)(iVar6 + 7) != '\0')
       {
-        MEMPACK_Return((char *)(p_Var2->loadEntry).loadAddr, takeBackSize);
+        MEMPACK_Return(*(char **)(iVar6 + 0x14), takeBackSize);
       }
-      p_Var2->relocateBinary = '\0';
+      *(undefined *)(iVar6 + 6) = 0;
     }
-    if ((p_Var2->loadEntry).retFunc != (void *)0x0)
+    if (*(int *)(iVar6 + 0x30) != 0)
     {
-      p_Var2->status = 7;
-      return numLoads;
+      *(undefined2 *)(iVar6 + 4) = 7;
+      return loadTail._4_4_;
     }
-    p_Var2->status = 4;
-    if ((p_Var2->mempackUsed != '\0') && (data = (p_Var2->loadEntry).loadAddr, data != (long *)0x0))
+    *(undefined2 *)(iVar6 + 4) = 4;
+    if ((*(char *)(iVar6 + 7) != '\0') && (*(char **)(iVar6 + 0x14) != (char *)0x0))
     {
-      MEMPACK_SetMemoryDoneStreamed((char *)data);
+      MEMPACK_SetMemoryDoneStreamed(*(char **)(iVar6 + 0x14));
     }
     goto LAB_800600ac;
   case 4:
-    data = (long *)LOAD_InitBuffers();
-    (p_Var2->loadEntry).loadAddr = data;
-    if (data == (long *)0x0)
+    pvVar3 = LOAD_InitBuffers();
+    *(void **)(iVar6 + 0x14) = pvVar3;
+    if (pvVar3 == (void *)0x0)
     {
-      p_Var2->status = 6;
+      *(undefined2 *)(iVar6 + 4) = 6;
     }
     else
     {
-      LOAD_CD_ReadPartOfFile(&p_Var2->loadEntry);
-      voiceIndex = LOAD_ChangeDirectoryFlag();
-      if (voiceIndex == 0)
+      LOAD_CD_ReadPartOfFile((_NonBlockLoadEntry *)(iVar6 + 8));
+      iVar5 = LOAD_ChangeDirectoryFlag();
+      if (iVar5 == 0)
       {
-        p_Var2->status = 6;
-        (p_Var2->loadEntry).posInFile = 0;
+        *(undefined2 *)(iVar6 + 4) = 6;
+        *(undefined4 *)(iVar6 + 0x28) = 0;
       }
       else
       {
-        p_Var3 = STREAM_AddQueueEntryToHead();
-        takeBackSize = (p_Var2->loadEntry).dirHash;
-        (p_Var3->loadEntry).fileHash = 0;
-        p_Var3->status = 10;
-        (p_Var3->loadEntry).dirHash = takeBackSize;
+        p_Var4 = STREAM_AddQueueEntryToHead();
+        takeBackSize = *(long *)(iVar6 + 0xc);
+        (p_Var4->loadEntry).fileHash = 0;
+        p_Var4->status = 10;
+        (p_Var4->loadEntry).dirHash = takeBackSize;
         LOAD_CleanUpBuffers();
       }
     }
     break;
   case 5:
-    voiceIndex = LOAD_IsFileLoading();
-    if (voiceIndex == 0)
+    iVar5 = LOAD_IsFileLoading();
+    if (iVar5 == 0)
     {
-      p_Var2->status = 4;
+      *(undefined2 *)(iVar6 + 4) = 4;
       STREAM_RemoveQueueHead();
       LOAD_CleanUpBuffers();
-      if ((code *)(p_Var2->loadEntry).retFunc == VRAM_TransferBufferToVram)
+      if (*(code **)(iVar6 + 0x30) == VRAM_TransferBufferToVram)
       {
-        VRAM_LoadReturn((p_Var2->loadEntry).loadAddr, (p_Var2->loadEntry).retData,
-                        (p_Var2->loadEntry).retData2);
+        VRAM_LoadReturn(*(void **)(iVar6 + 0x14), *(void **)(iVar6 + 0x34), *(void **)(iVar6 + 0x38));
       }
     }
     break;
   case 6:
-    loadHead->status = 4;
+    *(undefined2 *)(shadow_vertices._4_4_ + 4) = 4;
     STREAM_RemoveQueueHead();
-    if ((p_Var2->mempackUsed != '\0') && (data = (p_Var2->loadEntry).loadAddr, data != (long *)0x0))
+    if ((*(char *)(iVar6 + 7) != '\0') && (*(char **)(iVar6 + 0x14) != (char *)0x0))
     {
-      MEMPACK_SetMemoryDoneStreamed((char *)data);
+      MEMPACK_SetMemoryDoneStreamed(*(char **)(iVar6 + 0x14));
     }
-    if ((p_Var2->loadEntry).retFunc != (void *)0x0)
+    if (*(int *)(iVar6 + 0x30) != 0)
     {
       STREAM_NextLoadFromHead();
-      (*(code *)(p_Var2->loadEntry).retFunc)((p_Var2->loadEntry).loadAddr, (p_Var2->loadEntry).retData,
-                                             (p_Var2->loadEntry).retData2);
+      (**(code **)(iVar6 + 0x30))(*(undefined4 *)(iVar6 + 0x14), *(undefined4 *)(iVar6 + 0x34),
+                                  *(undefined4 *)(iVar6 + 0x38));
       STREAM_NextLoadAsNormal();
     }
     break;
   case 7:
-    voiceIndex = (loadHead->loadEntry).fileHash;
-    loadHead->status = 9;
-    VOICEXA_Play(voiceIndex, 0);
+    piVar1 = (int *)(shadow_vertices._4_4_ + 8);
+    *(undefined2 *)(shadow_vertices._4_4_ + 4) = 9;
+    VOICEXA_Play(*piVar1, 0);
     break;
   case 8:
-    voiceIndex = VOICEXA_IsPlayingOrPaused();
-    if (voiceIndex != 0)
+    iVar6 = VOICEXA_IsPlayingOrPaused();
+    if (iVar6 != 0)
     {
-      return numLoads;
+      return loadTail._4_4_;
     }
     LOAD_InitCdStreamMode();
     goto LAB_800600ac;
   case 9:
-    voiceIndex = LOAD_ChangeDirectoryByID((loadHead->loadEntry).dirHash);
-    if (voiceIndex == 0)
+    iVar5 = LOAD_ChangeDirectoryByID(*(int *)(shadow_vertices._4_4_ + 0xc));
+    if (iVar5 == 0)
     {
+      /* WARNING: Subroutine does not return */
       DEBUG_FatalError(s_Could_not_read_directory_hash__d_800cf510);
     }
-    p_Var2->status = 0xb;
+    *(undefined2 *)(iVar6 + 4) = 0xb;
     break;
   case 10:
-    voiceIndex = LOAD_IsFileLoading();
-    if (voiceIndex != 0)
+    iVar6 = LOAD_IsFileLoading();
+    if (iVar6 != 0)
     {
-      return numLoads;
+      return loadTail._4_4_;
     }
   LAB_800600ac:
     STREAM_RemoveQueueHead();
   }
-  return numLoads;
+  return loadTail._4_4_;
 }
 
 // decompiled code
@@ -657,18 +607,15 @@ STREAM_SetUpQueueEntry(char *fileName, void *retFunc, void *retData, void *retDa
   (p_Var1->loadEntry).posInFile = 0;
   (p_Var1->loadEntry).checksumType = 1;
   lVar2 = LOAD_GetSearchDirectory();
-  if (lVar2 == 0)
-  {
-    (p_Var1->loadEntry).dirHash = gCurDir;
-    (p_Var1->loadEntry).retFunc = retFunc;
-  }
-  else
+  if (lVar2 != 0)
   {
     lVar2 = LOAD_GetSearchDirectory();
     (p_Var1->loadEntry).dirHash = lVar2;
+    /* WARNING: Subroutine does not return */
     LOAD_SetSearchDirectory(0);
-    (p_Var1->loadEntry).retFunc = retFunc;
   }
+  (p_Var1->loadEntry).dirHash = gCurDir;
+  (p_Var1->loadEntry).retFunc = retFunc;
   (p_Var1->loadEntry).retData = retData;
   (p_Var1->loadEntry).retData2 = retData2;
   (p_Var1->loadEntry).retPointer = retPointer;
@@ -698,34 +645,41 @@ STREAM_SetUpQueueEntry(char *fileName, void *retFunc, void *retData, void *retDa
 /* end block 2 */
 // End Line: 944
 
-void STREAM_QueueNonblockingLoads(char *fileName, uchar memType, void *retFunc, void *retData, void *retData2,
-                                  void **retPointer, long relocateBinary)
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int STREAM_IsCdBusy(long *numberInQueue)
 
 {
-  int fromhead;
-  short sVar1;
+  long lVar1;
   _LoadQueueEntry *p_Var2;
+  int fromhead;
+  uint in_a1;
+  void *in_a2;
+  void *in_a3;
+  void *in_stack_00000010;
+  void **in_stack_00000014;
+  char in_stack_00000018;
 
-  fromhead = loadFromHead;
-  loadFromHead = 0;
-  p_Var2 = STREAM_SetUpQueueEntry(fileName, retFunc, retData, retData2, retPointer, fromhead);
+  fromhead = DAT_800d0fc4;
+  DAT_800d0fc4 = 0;
+  p_Var2 = STREAM_SetUpQueueEntry((char *)numberInQueue, in_a2, in_a3, in_stack_00000010, in_stack_00000014, fromhead);
   p_Var2->mempackUsed = '\x01';
-  fromhead = loadCanFail;
+  lVar1 = _DAT_800d0fc8;
   (p_Var2->loadEntry).loadAddr = (long *)0x0;
-  (p_Var2->loadEntry).memType = (uint)memType;
-  loadCanFail = 0;
-  p_Var2->relocateBinary = (char)relocateBinary;
-  (p_Var2->loadEntry).mallocFailOk = fromhead;
-  if (memType == '\0')
+  (p_Var2->loadEntry).memType = in_a1 & 0xff;
+  _DAT_800d0fc8 = 0;
+  p_Var2->relocateBinary = in_stack_00000018;
+  (p_Var2->loadEntry).mallocFailOk = lVar1;
+  if ((in_a1 & 0xff) == 0)
   {
-    sVar1 = 5;
+    fromhead = 5;
   }
   else
   {
-    sVar1 = 1;
+    fromhead = 1;
   }
-  p_Var2->status = sVar1;
-  return;
+  p_Var2->status = (short)fromhead;
+  return fromhead;
 }
 
 // decompiled code
@@ -773,11 +727,10 @@ void LOAD_LoadToAddress(char *fileName, void *loadAddr, long relocateBinary)
 /* end block 1 */
 // End Line: 1061
 
-void LOAD_NonBlockingBinaryLoad(char *fileName, void *retFunc, void *retData, void *retData2, void **retPointer,
-                                int memType)
+void LOAD_NonBlockingBinaryLoad(long *param_1)
 
 {
-  STREAM_QueueNonblockingLoads(fileName, (uchar)memType, retFunc, retData, retData2, retPointer, 1);
+  STREAM_IsCdBusy(param_1);
   return;
 }
 
@@ -794,7 +747,7 @@ void LOAD_NonBlockingFileLoad(char *fileName, void *retFunc, void *retData, void
                               int memType)
 
 {
-  STREAM_QueueNonblockingLoads(fileName, (uchar)memType, retFunc, retData, retData2, retPointer, 0);
+  STREAM_IsCdBusy((long *)fileName);
   return;
 }
 
@@ -810,7 +763,7 @@ void LOAD_NonBlockingFileLoad(char *fileName, void *retFunc, void *retData, void
 void LOAD_NonBlockingBufferedLoad(char *fileName, void *retFunc, void *retData, void *retData2)
 
 {
-  STREAM_QueueNonblockingLoads(fileName, '\0', retFunc, retData, retData2, (void **)0x0, 0);
+  STREAM_IsCdBusy((long *)fileName);
   return;
 }
 
@@ -847,19 +800,19 @@ void LOAD_NonBlockingBufferedLoad(char *fileName, void *retFunc, void *retData, 
 int LOAD_IsXAInQueue(void)
 
 {
-  _LoadQueueEntry *p_Var1;
+  int *piVar1;
 
-  p_Var1 = loadHead;
-  if (loadHead != (_LoadQueueEntry *)0x0)
+  piVar1 = shadow_vertices._4_4_;
+  if (shadow_vertices._4_4_ != (int *)0x0)
   {
     do
     {
-      if ((uint)(ushort)p_Var1->status - 8 < 2)
+      if ((uint) * (ushort *)(piVar1 + 1) - 8 < 2)
       {
         return 1;
       }
-      p_Var1 = p_Var1->next;
-    } while (p_Var1 != (_LoadQueueEntry *)0x0);
+      piVar1 = (int *)*piVar1;
+    } while (piVar1 != (int *)0x0);
   }
   return 0;
 }
@@ -915,14 +868,14 @@ long *LOAD_ReadFile(char *fileName, uchar memType)
 
 {
   int iVar1;
-  long *local_10[2];
+  long *local_10;
 
-  STREAM_QueueNonblockingLoads(fileName, memType, (void *)0x0, (void *)0x0, (void *)0x0, local_10, 0);
+  STREAM_IsCdBusy((long *)fileName);
   do
   {
     iVar1 = STREAM_PollLoadQueue();
   } while (iVar1 != 0);
-  return local_10[0];
+  return local_10;
 }
 
 // decompiled code
@@ -996,11 +949,11 @@ void LOAD_AbortDirectoryChange(char *name)
   _LoadQueueEntry *p_Var1;
   long lVar2;
 
-  if (loadHead != (_LoadQueueEntry *)0x0)
+  if (shadow_vertices._4_4_ != (_LoadQueueEntry *)0x0)
   {
     lVar2 = LOAD_HashUnit(name);
-    p_Var1 = loadHead->next;
-    prev = loadHead;
+    p_Var1 = (shadow_vertices._4_4_)->next;
+    prev = shadow_vertices._4_4_;
     while (entry = p_Var1, entry != (_LoadQueueEntry *)0x0)
     {
       if ((entry->status == 10) && ((entry->loadEntry).dirHash == lVar2))
@@ -1054,11 +1007,11 @@ void LOAD_AbortFileLoad(char *fileName, void *retFunc)
   _LoadQueueEntry *entry;
   long lVar1;
 
-  if (loadHead != (_LoadQueueEntry *)0x0)
+  if (shadow_vertices._4_4_ != (_LoadQueueEntry *)0x0)
   {
     lVar1 = LOAD_HashName(fileName);
     prev = (_LoadQueueEntry *)0x0;
-    entry = loadHead;
+    entry = shadow_vertices._4_4_;
     while (entry != (_LoadQueueEntry *)0x0)
     {
       if ((entry->loadEntry).fileHash == lVar1)

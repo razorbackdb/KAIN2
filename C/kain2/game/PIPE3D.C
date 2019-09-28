@@ -91,7 +91,7 @@ void PIPE3D_CalculateWCTransform(_CameraCore_Type *cameraCore)
   matrix = cameraCore->wcTransform;
   local_30 = CONCAT22(-(cameraCore->position).y, -(cameraCore->position).x);
   local_2c = local_2c & 0xffff0000 | (uint)(ushort) - (cameraCore->position).z;
-  if ((gameTrackerX.debugFlags & 8U) == 0)
+  if ((vmRealClock & 8U) == 0)
   {
     MATH3D_SetUnityMatrix(&MStack112);
     RotMatrixZ(-(int)(cameraCore->rotation).z, (uint *)&MStack112);
@@ -192,24 +192,15 @@ void PIPE3D_CalculateWCTransform(_CameraCore_Type *cameraCore)
 void PIPE3D_InvertTransform(MATRIX *target, MATRIX *source)
 
 {
-  MATRIX *pMVar1;
-  uint local_40;
-  int local_3c;
-  int local_38;
   MATRIX MStack48;
 
-  pMVar1 = source;
   if (*(short *)&source->field_0x12 == 1)
   {
     PIPE3D_NormalizeMatrix(&MStack48, source);
-    pMVar1 = &MStack48;
+    source = &MStack48;
   }
-  TransposeMatrix((undefined4 *)pMVar1, (undefined4 *)target);
-  local_40 = -source->t[0];
-  local_3c = -source->t[1];
-  local_38 = -source->t[2];
-  ApplyMatrixLV((undefined4 *)target, &local_40, target->t);
-  return;
+  /* WARNING: Subroutine does not return */
+  TransposeMatrix((undefined4 *)source, (undefined4 *)target);
 }
 
 // decompiled code
@@ -358,125 +349,75 @@ void PIPE3D_NormalizeMatrix(MATRIX *target, MATRIX *source)
 /* end block 2 */
 // End Line: 1507
 
-/* WARNING: Could not reconcile some variable overlaps */
-
 void PIPE3D_TransformVerticesToWorld(_Instance *instance, _SVector *poolVertex, long *vtxSegment, _Vector *Average)
 
 {
-  undefined4 in_zero;
-  undefined4 in_at;
-  _Segment *p_Var1;
-  ushort *puVar2;
-  short *psVar3;
-  _MVertex *p_Var4;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  _MVertex *p_Var8;
-  MATRIX *pMVar9;
-  _SVector *p_Var10;
-  int iVar11;
-  _MVertex *p_Var12;
-  _Model *p_Var13;
-  undefined4 local_40;
-  undefined *local_3c;
-  undefined4 local_38;
-  undefined *local_34;
+  undefined4 uVar1;
+  undefined *puVar2;
+  undefined *puVar3;
+  undefined *puVar4;
+  _Segment *p_Var5;
+  short *psVar6;
+  MATRIX *pMVar7;
+  int iVar8;
+  _Model *p_Var9;
+  short local_40;
+  short sStack62;
+  short local_3c;
+  short local_38;
+  short sStack54;
+  short local_34;
 
-  p_Var13 = instance->object->modelList[(int)instance->currentModel];
-  p_Var4 = p_Var13->vertexList;
-  p_Var1 = p_Var13->segmentList;
-  local_40 = DAT_800ce888;
-  local_3c = PTR_DAT_800ce88c;
-  local_3c._0_2_ = (short)PTR_DAT_800ce88c;
-  local_38 = PTR_LAB_80018000_1_800ce890;
-  local_34 = PTR_DAT_800ce894;
-  local_34._0_2_ = (short)PTR_DAT_800ce894;
+  puVar4 = PTR_DAT_800ce894;
+  puVar3 = PTR_LAB_80018000_1_800ce890;
+  puVar2 = PTR_DAT_800ce88c;
+  uVar1 = DAT_800ce888;
+  p_Var9 = instance->object->modelList[instance->currentModel];
+  p_Var5 = p_Var9->segmentList;
   Average->x = 0;
   Average->y = 0;
   Average->z = 0;
-  iVar11 = 0;
-  if (0 < p_Var13->numSegments)
+  iVar8 = 0;
+  if (0 < p_Var9->numSegments)
   {
-    psVar3 = &p_Var1->firstVertex;
-    p_Var10 = poolVertex;
+    psVar6 = &p_Var5->firstVertex;
     do
     {
-      if ((int)psVar3[1] != -1)
+      if (psVar6[1] != -1)
       {
-        pMVar9 = instance->matrix;
-        p_Var8 = p_Var4 + (int)*psVar3;
-        p_Var12 = p_Var4 + (int)psVar3[1];
-        SetRotMatrix((undefined4 *)(pMVar9 + iVar11));
-        SetTransMatrix((int)(pMVar9 + iVar11));
-        if (p_Var8 <= p_Var12)
-        {
-          puVar2 = (ushort *)&p_Var10->z;
-          do
-          {
-            setCopReg(2, in_zero, *(undefined4 *)&p_Var8->vertex);
-            setCopReg(2, in_at, *(undefined4 *)&(p_Var8->vertex).z);
-            copFunction(2, 0x480012);
-            *vtxSegment = iVar11;
-            vtxSegment = vtxSegment + 1;
-            p_Var8 = p_Var8 + 1;
-            uVar5 = getCopReg(2, 0x4800);
-            uVar6 = getCopReg(2, 0x5000);
-            uVar7 = getCopReg(2, 0x5800);
-            p_Var10->x = (short)uVar5;
-            p_Var10->y = (short)uVar6;
-            p_Var10->z = (short)uVar7;
-            if ((short)local_38 < p_Var10->x)
-            {
-              local_38 = (undefined *)((uint)local_38 & 0xffff0000 | (uint)(ushort)p_Var10->x);
-            }
-            if (p_Var10->x < (short)local_40)
-            {
-              local_40 = local_40 & 0xffff0000 | (uint)(ushort)p_Var10->x;
-            }
-            if (local_38._2_2_ < (short)puVar2[-1])
-            {
-              local_38 = (undefined *)((uint)local_38 & 0xffff | (uint)puVar2[-1] << 0x10);
-            }
-            if ((short)puVar2[-1] < local_40._2_2_)
-            {
-              local_40 = local_40 & 0xffff | (uint)puVar2[-1] << 0x10;
-            }
-            if ((short)local_34 < (short)*puVar2)
-            {
-              local_34 = (undefined *)(uint)*puVar2;
-            }
-            if ((short)*puVar2 < (short)local_3c)
-            {
-              local_3c = (undefined *)(uint)*puVar2;
-            }
-            puVar2 = puVar2 + 4;
-            p_Var10 = p_Var10 + 1;
-          } while (p_Var8 <= p_Var12);
-        }
+        pMVar7 = instance->matrix;
+        SetRotMatrix((undefined4 *)(pMVar7 + iVar8));
+        /* WARNING: Subroutine does not return */
+        SetTransMatrix((int)(pMVar7 + iVar8));
       }
-      iVar11 = iVar11 + 1;
-      psVar3 = psVar3 + 0xc;
-    } while (iVar11 < p_Var13->numSegments);
+      iVar8 = iVar8 + 1;
+      psVar6 = psVar6 + 0xc;
+    } while (iVar8 < p_Var9->numSegments);
   }
-  if (p_Var13->numVertices != 0)
+  if (p_Var9->numVertices != 0)
   {
-    Average->x = (int)(short)local_38 + (int)(short)local_40 >> 1;
-    Average->y = (int)local_38._2_2_ + (int)local_40._2_2_ >> 1;
-    Average->z = (int)(short)local_34 + (int)(short)local_3c >> 1;
-    iVar11 = 0;
-    if (0 < p_Var13->numVertices)
+    local_38 = (short)puVar3;
+    local_40 = (short)uVar1;
+    Average->x = (int)local_38 + (int)local_40 >> 1;
+    sStack54 = (short)((uint)puVar3 >> 0x10);
+    sStack62 = (short)((uint)uVar1 >> 0x10);
+    Average->y = (int)sStack54 + (int)sStack62 >> 1;
+    local_34 = (short)puVar4;
+    local_3c = (short)puVar2;
+    Average->z = (int)local_34 + (int)local_3c >> 1;
+    iVar8 = 0;
+    if (0 < p_Var9->numVertices)
     {
-      psVar3 = &poolVertex->z;
+      psVar6 = &poolVertex->z;
       do
       {
         poolVertex->x = poolVertex->x - *(short *)&Average->x;
-        iVar11 = iVar11 + 1;
-        psVar3[-1] = psVar3[-1] - *(short *)&Average->y;
+        iVar8 = iVar8 + 1;
+        psVar6[-1] = psVar6[-1] - *(short *)&Average->y;
         poolVertex = poolVertex + 1;
-        *psVar3 = *psVar3 - *(short *)&Average->z;
-        psVar3 = psVar3 + 4;
-      } while (iVar11 < p_Var13->numVertices);
+        *psVar6 = *psVar6 - *(short *)&Average->z;
+        psVar6 = psVar6 + 4;
+      } while (iVar8 < p_Var9->numVertices);
     }
   }
   return;
@@ -535,8 +476,6 @@ void PIPE3D_InstanceTransformAndDraw(_Instance *instance, _CameraCore_Type *came
 {
   undefined4 uVar1;
   undefined4 uVar2;
-  undefined4 in_zero;
-  undefined4 in_at;
   uint uVar3;
   ulong *puVar4;
   int iVar5;
@@ -552,7 +491,7 @@ void PIPE3D_InstanceTransformAndDraw(_Instance *instance, _CameraCore_Type *came
   undefined4 local_2c;
 
   pMVar10 = instance->matrix;
-  p_Var11 = instance->object->modelList[(int)instance->currentModel];
+  p_Var11 = instance->object->modelList[instance->currentModel];
   if (pMVar10 != (MATRIX *)0x0)
   {
     LIGHT_PresetInstanceLight(instance, 0x800, &MStack80);
@@ -572,13 +511,14 @@ void PIPE3D_InstanceTransformAndDraw(_Instance *instance, _CameraCore_Type *came
       pCVar12 = (CVECTOR *)(iVar5 * 4 + 0x1f800000);
     }
     modelFadeValue = INSTANCE_GetFadeValue(instance);
-    uVar3 = PIPE3D_TransformAnimatedInstanceVertices_S((int)p_Var8, (undefined4 *)vertexPool, (int)p_Var11,
+    uVar3 = PIPE3D_TransformAnimatedInstanceVertices_S((int)p_Var8, (undefined4 *)vertexPool, (uint)p_Var11,
                                                        (undefined4 *)cameraCore->wcTransform, (ushort *)pMVar10,
                                                        (undefined4 *)&MStack80, (uint *)pCVar12, (uint *)instance->perVertexColor);
     LIGHT_PresetInstanceLight(instance, 0x1000, &MStack80);
-    MulMatrix0((undefined4 *)&MStack80, (ushort *)(pMVar10 + (int)instance->lightMatrix),
-               (uint *)&MStack80);
+    MulMatrix0((undefined4 *)&MStack80, (ushort *)(pMVar10 + instance->lightMatrix), (uint *)&MStack80);
     SetLightMatrix((undefined4 *)&MStack80);
+    uVar2 = depthQBackColor;
+    uVar1 = depthQBlendStart;
     if ((uVar3 & 0x8000) != 0)
     {
       uVar3 = uVar3 & 0x7fff6fff;
@@ -589,14 +529,10 @@ void PIPE3D_InstanceTransformAndDraw(_Instance *instance, _CameraCore_Type *came
       local_2c = 0;
       if ((instance->object->oflags2 & 0x1000U) == 0)
       {
-        SetRotMatrix((undefined4 *)theCamera.core.wcTransform);
-        SetTransMatrix((int)theCamera.core.wcTransform);
-        setCopReg(2, in_zero, *(undefined4 *)&instance->position);
-        setCopReg(2, in_at, *(undefined4 *)&(instance->position).z);
-        copFunction(2, 0x180001);
+        SetRotMatrix(DAT_800cfef0);
+        /* WARNING: Subroutine does not return */
+        SetTransMatrix((int)DAT_800cfef0);
       }
-      uVar2 = depthQBackColor;
-      uVar1 = depthQBlendStart;
       local_30 = getCopReg(2, 8);
       uVar9 = 0;
       if (instance->petrifyValue != 0)
@@ -606,21 +542,20 @@ void PIPE3D_InstanceTransformAndDraw(_Instance *instance, _CameraCore_Type *came
         depthQBlendStart = depthQFogStart;
         LoadAverageCol((byte *)&local_2c, (byte *)&depthQBackColor, local_30, 0x1000 - local_30,
                        (undefined *)&depthQBackColor);
-        if ((int)instance->petrifyValue < local_30)
+        uVar9 = uVar1;
+        if (instance->petrifyValue < local_30)
         {
           setCopReg(2, 0x4000, local_30);
-          uVar9 = uVar1;
         }
         else
         {
           setCopReg(2, 0x4000, (uint)(ushort)instance->petrifyValue);
-          uVar9 = uVar1;
         }
       }
       if ((modelFadeValue < 0xffe) &&
           (((instance->object->oflags2 & 0x1000U) != 0 || (local_30 < 0xffa))))
       {
-        puVar4 = (ulong *)(*(code *)gameTrackerX.drawAnimatedModelFunc)(p_Var11, vertexPool, primPool, ot, pCVar12);
+        puVar4 = (ulong *)(*DAT_800d10f8)(p_Var11, vertexPool, primPool, ot, pCVar12);
         primPool->nextPrim = puVar4;
       }
       if (instance->petrifyValue != 0)
@@ -673,16 +608,16 @@ void PIPE3D_InstanceListTransformAndDrawFunc(_StreamUnit *unit, ulong **ot, _Cam
   Level *level;
   uint local_24;
 
-  primPool = gameTrackerX.primPool;
-  vertexPool = gameTrackerX.vertexPool;
+  primPool = DAT_800d0fec;
+  vertexPool = DAT_800d0fe8;
   level = unit->level;
   uVar4 = *(undefined4 *)&instance->position;
   local_24 = local_24 & 0xffff0000 | (uint)(ushort)(instance->position).z;
   if ((((unit == (_StreamUnit *)0x0) || ((unit->flags & 1U) == 0)) ||
-       (unit->StreamUnitID == gameTrackerX.StreamUnitID)) ||
+       (unit->StreamUnitID == DAT_800d1124)) ||
       (iVar5 = WARPGATE_IsObjectOnWarpSide(instance), iVar5 != 0))
   {
-    iVar7 = (int)instance->object->modelList[(int)instance->currentModel]->maxRad;
+    iVar7 = (int)instance->object->modelList[instance->currentModel]->maxRad;
     setCopControlWord(2, 0, *(undefined4 *)cameraCore->vvNormalWorVecMat[0].m);
     setCopControlWord(2, 0x800, *(undefined4 *)(cameraCore->vvNormalWorVecMat[0].m + 2));
     setCopControlWord(2, 0x1000, *(undefined4 *)(cameraCore->vvNormalWorVecMat[0].m + 4));
@@ -716,13 +651,12 @@ void PIPE3D_InstanceListTransformAndDrawFunc(_StreamUnit *unit, ulong **ot, _Cam
       {
         if ((instance->flags & 0x80U) == 0)
         {
-          PIPE3D_AnimateTextures(instance->object->modelList[(int)instance->currentModel]->aniTextures,
-                                 gameTrackerX.frameCount);
+          PIPE3D_AnimateTextures(instance->object->modelList[instance->currentModel]->aniTextures, DAT_800d10d8);
           instance->currentTextureAnimFrame = instance->currentTextureAnimFrame + 1;
         }
         else
         {
-          PIPE3D_AnimateTextures(instance->object->modelList[(int)instance->currentModel]->aniTextures,
+          PIPE3D_AnimateTextures(instance->object->modelList[instance->currentModel]->aniTextures,
                                  (int)instance->currentTextureAnimFrame);
         }
         LIGHT_SetMatrixForLightGroupInstance(instance, level);
@@ -738,7 +672,7 @@ void PIPE3D_InstanceListTransformAndDrawFunc(_StreamUnit *unit, ulong **ot, _Cam
         {
           LIGHT_DrawShadow(cameraCore->wcTransform, instance, primPool, ot);
         }
-        gameTrackerX.visibleInstances = gameTrackerX.visibleInstances + 1;
+        ULONG_800d1208 = ULONG_800d1208 + 1;
         uVar6 = instance->flags | 0x200;
         goto LAB_8003b0f8;
       }
@@ -976,244 +910,49 @@ void PIPE3D_CalcWorldToSplitPlaneTransform(MATRIX *wpTransform, _SVector *normal
 /* end block 2 */
 // End Line: 3377
 
-long PIPE3D_TransformAnimatedSplitInstanceVertices(_MVertex *vertexList, _PVertex *poolVertex, _Model *model, MATRIX *wcTransform,
-                                                   MATRIX *matrixPool, _Mirror *mirror, MATRIX *lm, CVECTOR *vertexColor,
-                                                   CVECTOR *vertexSrcCol)
+undefined4
+PIPE3D_TransformAnimatedSplitInstanceVertices(undefined4 param_1, undefined4 param_2, int param_3, undefined4 *param_4, int param_5,
+                                              undefined4 param_6, undefined4 *param_7, int param_8)
 
 {
-  ushort uVar1;
-  undefined4 uVar2;
-  CVECTOR CVar3;
-  undefined4 in_zero;
-  undefined4 in_at;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  long *plVar7;
-  CVECTOR *pCVar8;
-  _MVertex *p_Var9;
-  CVECTOR *pCVar10;
-  MATRIX *pMVar11;
-  CVECTOR *pCVar12;
-  CVECTOR *pCVar13;
-  _MVertex *p_Var14;
-  CVECTOR local_48[2];
+  ushort *puVar1;
   int local_40;
-  _Segment *local_3c;
-  _MVertex *local_38;
-  uint local_34;
-  undefined4 *local_30;
+  int local_3c;
 
-  local_3c = model->segmentList;
-  if (vertexColor != (CVECTOR *)0x0)
+  local_3c = *(int *)(param_3 + 0x1c);
+  if (param_8 != 0)
   {
-    setCopReg(2, model, DAT_800ce884);
+    setCopReg(2, param_3, DAT_800ce884);
   }
-  if (modelFadeValue == 0)
+  if (iGpffff86d8 == 0)
   {
     setCopReg(2, 0x4000, 0);
   }
   else
   {
-    setCopReg(2, 0x4000, modelFadeValue);
+    setCopReg(2, 0x4000, iGpffff86d8);
   }
   local_40 = 0;
-  if (0 < model->numSegments)
+  if (0 < *(int *)(param_3 + 0x18))
   {
-    local_30 = &DAT_1f800060;
     do
     {
-      if ((int)local_3c->lastVertex != -1)
+      if (*(short *)(local_3c + 10) != -1)
       {
-        pCVar10 = local_48;
-        local_34 = 0;
-        p_Var14 = vertexList + (int)local_3c->lastVertex;
-        local_48[0] = DAT_800ce884;
-        local_38 = vertexList + (int)local_3c->firstVertex;
-        pMVar11 = matrixPool + local_40;
-        if (vertexColor != (CVECTOR *)0x0)
+        puVar1 = (ushort *)(param_5 + local_40 * 0x20);
+        if (param_8 != 0)
         {
-          MulMatrix0((undefined4 *)lm, (ushort *)pMVar11, &DAT_1f800040);
+          MulMatrix0(param_7, puVar1, &DAT_1f800040);
           SetLightMatrix(&DAT_1f800040);
         }
-        CompMatrix((undefined4 *)wcTransform, (ushort *)pMVar11, (uint *)&DAT_1f800000);
-        SetRotMatrix((undefined4 *)&DAT_1f800000);
-        SetTransMatrix(0x1f800000);
-        if (local_38 <= p_Var14 + -2)
-        {
-          p_Var9 = local_38 + 2;
-          pCVar8 = vertexColor + 2;
-          plVar7 = &poolVertex->otz;
-          pCVar12 = pCVar10;
-          pCVar13 = pCVar10;
-          do
-          {
-            setCopReg(2, in_zero, *(undefined4 *)&local_38->vertex);
-            setCopReg(2, in_at, *(undefined4 *)&(local_38->vertex).z);
-            copFunction(2, 0x480012);
-            uVar4 = (uint)p_Var9[-2].normal;
-            uVar6 = (uint)p_Var9[-1].normal;
-            uVar5 = (uint)p_Var9->normal;
-            uVar2 = getCopReg(2, 0x19);
-            *local_30 = uVar2;
-            uVar2 = getCopReg(2, 0x1a);
-            local_30[1] = uVar2;
-            uVar2 = getCopReg(2, 0x1b);
-            local_30[2] = uVar2;
-            poolVertex->x = (short)DAT_1f800060;
-            *(undefined2 *)((int)plVar7 + -2) = DAT_1f800064;
-            *(undefined2 *)plVar7 = DAT_1f800068;
-            setCopReg(2, in_zero, *(undefined4 *)&local_38[1].vertex);
-            setCopReg(2, in_at, *(undefined4 *)&local_38[1].vertex.z);
-            copFunction(2, 0x480012);
-            uVar2 = getCopReg(2, 0x19);
-            *local_30 = uVar2;
-            uVar2 = getCopReg(2, 0x1a);
-            local_30[1] = uVar2;
-            uVar2 = getCopReg(2, 0x1b);
-            local_30[2] = uVar2;
-            poolVertex[1].x = (short)DAT_1f800060;
-            *(undefined2 *)((int)plVar7 + 6) = DAT_1f800064;
-            *(undefined2 *)(plVar7 + 2) = DAT_1f800068;
-            setCopReg(2, in_zero, *(undefined4 *)&p_Var9->vertex);
-            setCopReg(2, in_at, *(undefined4 *)&(p_Var9->vertex).z);
-            copFunction(2, 0x480012);
-            uVar2 = getCopReg(2, 0x19);
-            *local_30 = uVar2;
-            uVar2 = getCopReg(2, 0x1a);
-            local_30[1] = uVar2;
-            uVar2 = getCopReg(2, 0x1b);
-            local_30[2] = uVar2;
-            poolVertex[2].x = (short)DAT_1f800060;
-            *(undefined2 *)((int)plVar7 + 0xe) = DAT_1f800064;
-            poolVertex = poolVertex + 3;
-            *(undefined2 *)(plVar7 + 4) = DAT_1f800068;
-            plVar7 = plVar7 + 6;
-            if (vertexColor != (CVECTOR *)0x0)
-            {
-              if (vertexSrcCol != (CVECTOR *)0x0)
-              {
-                pCVar13 = vertexSrcCol + 1;
-                pCVar12 = vertexSrcCol + 2;
-                local_34 = (uint)*vertexSrcCol & (uint)vertexSrcCol[1] & (uint)vertexSrcCol[2];
-                pCVar10 = vertexSrcCol;
-                vertexSrcCol = vertexSrcCol + 3;
-              }
-              if ((local_34 & 0x40000000) == 0)
-              {
-                if (modelFadeValue == 0)
-                {
-                  setCopReg(2, in_zero, *(undefined4 *)(&gNormalList + uVar4));
-                  setCopReg(2, in_at, *(undefined4 *)&(&gNormalList)[uVar4].z);
-                  setCopReg(2, local_38, *pCVar10);
-                  copFunction(2, 0x108041b);
-                  setCopReg(2, in_zero, *(undefined4 *)(&gNormalList + uVar6));
-                  setCopReg(2, in_at, *(undefined4 *)&(&gNormalList)[uVar6].z);
-                  setCopReg(2, local_38, *pCVar13);
-                  copFunction(2, 0x108041b);
-                  setCopReg(2, in_zero, *(undefined4 *)(&gNormalList + uVar5));
-                  setCopReg(2, in_at, *(undefined4 *)&(&gNormalList)[uVar5].z);
-                  setCopReg(2, local_38, *pCVar12);
-                  copFunction(2, 0x108041b);
-                }
-                else
-                {
-                  setCopReg(2, in_zero, *(undefined4 *)(&gNormalList + uVar4));
-                  setCopReg(2, in_at, *(undefined4 *)&(&gNormalList)[uVar4].z);
-                  setCopReg(2, local_38, *pCVar10);
-                  copFunction(2, 0xe80413);
-                  setCopReg(2, in_zero, *(undefined4 *)(&gNormalList + uVar6));
-                  setCopReg(2, in_at, *(undefined4 *)&(&gNormalList)[uVar6].z);
-                  setCopReg(2, local_38, *pCVar13);
-                  copFunction(2, 0xe80413);
-                  setCopReg(2, in_zero, *(undefined4 *)(&gNormalList + uVar5));
-                  setCopReg(2, in_at, *(undefined4 *)&(&gNormalList)[uVar5].z);
-                  setCopReg(2, local_38, *pCVar12);
-                  copFunction(2, 0xe80413);
-                }
-                CVar3 = (CVECTOR)getCopReg(2, 0x14);
-                *vertexColor = CVar3;
-                CVar3 = (CVECTOR)getCopReg(2, 0x15);
-                vertexColor[1] = CVar3;
-                CVar3 = (CVECTOR)getCopReg(2, 0x16);
-                *pCVar8 = CVar3;
-                if (((uint)*pCVar10 & 0x40000000) != 0)
-                {
-                  *vertexColor = *pCVar10;
-                }
-                if (((uint)*pCVar13 & 0x40000000) != 0)
-                {
-                  pCVar8[-1] = *pCVar13;
-                }
-                if (((uint)*pCVar12 & 0x40000000) != 0)
-                {
-                  *pCVar8 = *pCVar12;
-                }
-              }
-              else
-              {
-                *vertexColor = *pCVar10;
-                pCVar8[-1] = *pCVar13;
-                *pCVar8 = *pCVar12;
-              }
-              pCVar8 = pCVar8 + 3;
-              vertexColor = vertexColor + 3;
-            }
-            local_38 = local_38 + 3;
-            p_Var9 = p_Var9 + 3;
-          } while (local_38 <= p_Var14 + -2);
-        }
-        if (local_38 <= p_Var14)
-        {
-          plVar7 = &poolVertex->otz;
-          do
-          {
-            setCopReg(2, in_zero, *(undefined4 *)&local_38->vertex);
-            setCopReg(2, in_at, *(undefined4 *)&(local_38->vertex).z);
-            copFunction(2, 0x480012);
-            uVar1 = local_38->normal;
-            uVar2 = getCopReg(2, 0x19);
-            *local_30 = uVar2;
-            uVar2 = getCopReg(2, 0x1a);
-            local_30[1] = uVar2;
-            uVar2 = getCopReg(2, 0x1b);
-            local_30[2] = uVar2;
-            poolVertex->x = (short)DAT_1f800060;
-            *(undefined2 *)((int)plVar7 + -2) = DAT_1f800064;
-            poolVertex = poolVertex + 1;
-            *(undefined2 *)plVar7 = DAT_1f800068;
-            plVar7 = plVar7 + 2;
-            if (vertexColor != (CVECTOR *)0x0)
-            {
-              if (vertexSrcCol != (CVECTOR *)0x0)
-              {
-                pCVar10 = vertexSrcCol;
-                vertexSrcCol = vertexSrcCol + 1;
-              }
-              if (((uint)*pCVar10 & 0x40000000) == 0)
-              {
-                setCopReg(2, local_38, *pCVar10);
-                setCopReg(2, in_zero, *(undefined4 *)(&gNormalList + (uint)uVar1));
-                setCopReg(2, in_at, *(undefined4 *)&(&gNormalList)[(uint)uVar1].z);
-                copFunction(2, 0xe80413);
-                CVar3 = (CVECTOR)getCopReg(2, 0x16);
-                *vertexColor = CVar3;
-              }
-              else
-              {
-                *vertexColor = *pCVar10;
-              }
-              vertexColor = vertexColor + 1;
-            }
-            local_38 = local_38 + 1;
-          } while (local_38 <= p_Var14);
-        }
+        /* WARNING: Subroutine does not return */
+        CompMatrix(param_4, puVar1, (uint *)&DAT_1f800000);
       }
-      local_3c = local_3c + 1;
+      local_3c = local_3c + 0x18;
       local_40 = local_40 + 1;
-    } while (local_40 < model->numSegments);
+    } while (local_40 < *(int *)(param_3 + 0x18));
   }
-  modelDQP = getCopReg(2, 8);
+  uGpffffa8d4 = getCopReg(2, 8);
   return 0;
 }
 
@@ -1253,54 +992,24 @@ void PIPE3D_TransformSplitInstanceVertices(_MVertex *vertexList, _PVertex *pvert
                                            MATRIX *matrixPool, _Mirror *mirror)
 
 {
-  short sVar1;
-  undefined4 in_zero;
-  undefined4 in_at;
-  long *plVar2;
-  _MVertex *p_Var3;
-  short *psVar4;
-  int iVar5;
-  int iVar6;
+  int iVar1;
+  int iVar2;
 
-  iVar5 = 0;
+  iVar1 = 0;
   if (0 < model->numSegments)
   {
-    iVar6 = 0;
-    psVar4 = &model->segmentList->lastVertex;
+    iVar2 = 0;
     do
     {
-      if (*(short *)((int)&model->segmentList->lastVertex + iVar6) != -1)
+      if (*(short *)((int)&model->segmentList->lastVertex + iVar2) != -1)
       {
-        sVar1 = *psVar4;
-        p_Var3 = vertexList + (int)psVar4[-1];
+        /* WARNING: Subroutine does not return */
         CompMatrix((undefined4 *)wpTransform, (ushort *)matrixPool, (uint *)&DAT_1f800000);
-        SetRotMatrix((undefined4 *)&DAT_1f800000);
-        SetTransMatrix(0x1f800000);
-        if (p_Var3 <= vertexList + (int)sVar1)
-        {
-          plVar2 = &pvertex->otz;
-          do
-          {
-            setCopReg(2, in_zero, *(undefined4 *)&p_Var3->vertex);
-            setCopReg(2, in_at, *(undefined4 *)&(p_Var3->vertex).z);
-            copFunction(2, 0x480012);
-            DAT_1f800020 = getCopReg(2, 0x19);
-            DAT_1f800024 = getCopReg(2, 0x1a);
-            DAT_1f800028 = getCopReg(2, 0x1b);
-            pvertex->x = (short)DAT_1f800020;
-            p_Var3 = p_Var3 + 1;
-            *(undefined2 *)((int)plVar2 + -2) = (undefined2)DAT_1f800024;
-            pvertex = pvertex + 1;
-            *(undefined2 *)plVar2 = (undefined2)DAT_1f800028;
-            plVar2 = plVar2 + 2;
-          } while (p_Var3 <= vertexList + (int)sVar1);
-        }
       }
-      psVar4 = psVar4 + 0xc;
       matrixPool = matrixPool + 1;
-      iVar5 = iVar5 + 1;
-      iVar6 = iVar6 + 0x18;
-    } while (iVar5 < model->numSegments);
+      iVar1 = iVar1 + 1;
+      iVar2 = iVar2 + 0x18;
+    } while (iVar1 < model->numSegments);
   }
   return;
 }
@@ -1474,21 +1183,13 @@ void PIPE3D_HalvePlaneInstanceTransformAndDraw(_Instance *instance, MATRIX *wcTr
                                                ulong **ot, _Mirror *mirror)
 
 {
-  ulong *puVar1;
-  _Model *model;
-  MATRIX *matrixPool;
-  _MVertex *vertexList;
   MATRIX MStack184;
   MATRIX MStack152;
-  uint auStack120[8];
-  MATRIX MStack88;
+  uint auStack120[16];
   _SVector local_38;
   _SVector local_30;
 
-  matrixPool = instance->matrix;
-  model = instance->object->modelList[(int)instance->currentModel];
   local_38.x = (instance->halvePlane).a;
-  vertexList = model->vertexList;
   local_38.y = (instance->halvePlane).b;
   local_38.z = (instance->halvePlane).c;
   local_30.x = -(short)((int)local_38.x * (instance->halvePlane).d >> 0xc);
@@ -1496,22 +1197,8 @@ void PIPE3D_HalvePlaneInstanceTransformAndDraw(_Instance *instance, MATRIX *wcTr
   local_30.z = -(short)((int)local_38.z * (instance->halvePlane).d >> 0xc);
   PIPE3D_CalcWorldToSplitPlaneTransform(&MStack184, &local_38, &local_30);
   PIPE3D_InvertTransform(&MStack152, &MStack184);
+  /* WARNING: Subroutine does not return */
   CompMatrix((undefined4 *)wcTransform, (ushort *)&MStack152, auStack120);
-  if (matrixPool != (MATRIX *)0x0)
-  {
-    LIGHT_PresetInstanceLight(instance, 0x800, &MStack88);
-    modelFadeValue = INSTANCE_GetFadeValue(instance);
-    PIPE3D_TransformAnimatedSplitInstanceVertices(vertexList, (_PVertex *)vertexPool, model, &MStack184, matrixPool, mirror, &MStack88,
-                                                  vertexPool->color, instance->perVertexColor);
-    if (primPool->nextPrim + model->numFaces * 0xc < primPool->lastPrim)
-    {
-      draw_belowSplit = ZEXT14(((instance->halvePlane).flags & 2U) != 0);
-      puVar1 = (ulong *)DRAW_SplitModel_S((int)model, instance, (int)vertexPool, auStack120,
-                                          (int)primPool);
-      primPool->nextPrim = puVar1;
-    }
-  }
-  return;
 }
 
 // decompiled code
@@ -1559,7 +1246,7 @@ void PIPE3D_HalvePlaneGetRingPoints(_Instance *instance, MATRIX *wcTransform, _V
   _SVector local_30;
 
   matrixPool = instance->matrix;
-  model = instance->object->modelList[(int)instance->currentModel];
+  model = instance->object->modelList[instance->currentModel];
   vertexList = model->vertexList;
   if (ring->type == '\0')
   {
@@ -1580,20 +1267,18 @@ void PIPE3D_HalvePlaneGetRingPoints(_Instance *instance, MATRIX *wcTransform, _V
   if (ring->type == '\x02')
   {
     PIPE3D_InvertTransform(&MStack88, &MStack152);
+    if (matrixPool != (MATRIX *)0x0)
+    {
+      PIPE3D_TransformSplitInstanceVertices(vertexList, (_PVertex *)vertexPool, model, &MStack152, matrixPool, (_Mirror *)0x0);
+      draw_belowSplit = 0;
+      puVar1 = DRAW_DrawRingPoints(model, vertexPool, &MStack88, primPool, ot, ring->currentColor,
+                                   (uint)ring->type);
+      primPool->nextPrim = puVar1;
+    }
+    return;
   }
-  else
-  {
-    CompMatrix((undefined4 *)wcTransform, (ushort *)&MStack120, (uint *)&MStack88);
-  }
-  if (matrixPool != (MATRIX *)0x0)
-  {
-    PIPE3D_TransformSplitInstanceVertices(vertexList, (_PVertex *)vertexPool, model, &MStack152, matrixPool, (_Mirror *)0x0);
-    draw_belowSplit = 0;
-    puVar1 = DRAW_DrawRingPoints(model, vertexPool, &MStack88, primPool, ot, ring->currentColor,
-                                 (uint)ring->type);
-    primPool->nextPrim = puVar1;
-  }
-  return;
+  /* WARNING: Subroutine does not return */
+  CompMatrix((undefined4 *)wcTransform, (ushort *)&MStack120, (uint *)&MStack88);
 }
 
 // decompiled code
@@ -1658,7 +1343,7 @@ void PIPE3D_DoGlow(_Instance *instance, MATRIX *wcTransform, _VertexPool *vertex
   if ((instance->flags & 0x200U) != 0)
   {
     uVar6 = SEXT24(glow->numColors);
-    uVar5 = (glow->diffTime + gameTrackerX.lastLoopTime) % 32000;
+    uVar5 = (glow->diffTime + DAT_800d11e8) % 32000;
     glow->diffTime = uVar5;
     if (1 < (int)uVar6)
     {
@@ -1701,7 +1386,7 @@ void PIPE3D_DoGlow(_Instance *instance, MATRIX *wcTransform, _VertexPool *vertex
     if ((instance->matrix != (MATRIX *)0x0) && (instance->oldMatrix != (MATRIX *)0x0))
     {
       bVar1 = false;
-      if (((int)instance->fadeValue == 0) && (gameTrackerX.gameData.asmData.MorphTime == 1000))
+      if (((int)instance->fadeValue == 0) && (DAT_800d0fb4 == 1000))
       {
         iVar3 = (int)glow->lifeTime;
         if (-1 < iVar3)
@@ -1724,7 +1409,7 @@ void PIPE3D_DoGlow(_Instance *instance, MATRIX *wcTransform, _VertexPool *vertex
       else
       {
         bVar1 = true;
-        if (gameTrackerX.gameData.asmData.MorphTime == 1000)
+        if (DAT_800d0fb4 == 1000)
         {
           uVar7 = 0x1000 - (int)instance->fadeValue;
         }
@@ -1798,27 +1483,11 @@ void PIPE3D_DoGlow(_Instance *instance, MATRIX *wcTransform, _VertexPool *vertex
 /* end block 2 */
 // End Line: 4817
 
-/* WARNING: Could not reconcile some variable overlaps */
-
 long PIPE3D_Segment2ScreenPt(_Instance *instance, MATRIX *wcTransform, int segIndex, _Position *pos)
 
 {
-  undefined4 uVar1;
-  int iVar2;
-  undefined4 in_zero;
-  undefined4 in_at;
-  uint auStack56[9];
-  undefined4 local_14;
+  uint auStack56[12];
 
+  /* WARNING: Subroutine does not return */
   CompMatrix((undefined4 *)wcTransform, (ushort *)(instance->matrix + segIndex), auStack56);
-  SetRotMatrix(auStack56);
-  SetTransMatrix((int)auStack56);
-  local_14 = (uint)local_14._2_2_ << 0x10;
-  setCopReg(2, in_zero, 0);
-  setCopReg(2, in_at, local_14);
-  copFunction(2, 0x180001);
-  uVar1 = getCopReg(2, 0xe);
-  *(undefined4 *)pos = uVar1;
-  iVar2 = getCopReg(2, 0x13);
-  return (iVar2 >> 2) + -0x14;
 }

@@ -62,9 +62,7 @@ void GenericInit(_Instance *instance, GameTracker *gameTracker)
   {
     G2EmulationInstanceSetTotalSections(instance, 1);
     G2EmulationInstanceSetStartAndEndSegment(instance, 0, 0,
-                                             (short)(((uint) * (ushort *)&pOVar3->modelList[(int)instance->currentModel]->numSegments - 1) *
-                                                         0x10000 >>
-                                                     0x10));
+                                             (short)(((uint) * (ushort *)&pOVar3->modelList[instance->currentModel]->numSegments - 1) * 0x10000 >> 0x10));
     G2EmulationInstanceSetAnimation(instance, 0, 0, 0, 0);
     G2EmulationInstanceSetMode(instance, 0, 0);
     if ((*(int *)pOVar3->name == s_ariel____800cea7c._0_4_) &&
@@ -170,28 +168,26 @@ ulong GenericQuery(_Instance *instance, ulong query)
   short sVar1;
   short sVar2;
   short sVar3;
-  long *plVar4;
-  MATRIX *pMVar5;
-  uint uVar6;
-  long lVar7;
+  MATRIX *pMVar4;
+  uint uVar5;
 
-  pMVar5 = (MATRIX *)0x0;
+  pMVar4 = (MATRIX *)0x0;
   switch (query)
   {
   case 1:
-    uVar6 = instance->object->oflags2;
-    if ((uVar6 & 0x4000000) == 0)
+    uVar5 = instance->object->oflags2;
+    if ((uVar5 & 0x4000000) == 0)
     {
-      pMVar5 = (MATRIX *)&DAT_00100000;
+      pMVar4 = (MATRIX *)&DAT_00100000;
       if (((instance->object->oflags & 0x100000U) == 0) &&
-          (pMVar5 = (MATRIX *)&DAT_80000000, (uVar6 & 0x20) != 0))
+          (pMVar4 = (MATRIX *)&DAT_80000000, (uVar5 & 0x20) != 0))
       {
-        pMVar5 = (MATRIX *)0x200000;
+        pMVar4 = (MATRIX *)0x200000;
       }
     }
     else
     {
-      pMVar5 = (MATRIX *)&DAT_00040000;
+      pMVar4 = (MATRIX *)&DAT_00040000;
     }
     break;
   case 2:
@@ -210,7 +206,7 @@ ulong GenericQuery(_Instance *instance, ulong query)
   case 0x15:
   case 0x16:
   case 0x17:
-    pMVar5 = (MATRIX *)0x0;
+    pMVar4 = (MATRIX *)0x0;
     break;
   case 6:
     sVar1 = (instance->position).x;
@@ -222,39 +218,35 @@ ulong GenericQuery(_Instance *instance, ulong query)
     sVar2 = (instance->rotation).y;
     sVar3 = (instance->rotation).z;
   LAB_8003e38c:
-    pMVar5 = (MATRIX *)SetPositionData((int)sVar1, (int)sVar2, (int)sVar3);
+    pMVar4 = (MATRIX *)SetPositionData((int)sVar1, (int)sVar2, (int)sVar3);
     break;
   case 0xb:
-    pMVar5 = (MATRIX *)&UNK_00000001;
+    pMVar4 = (MATRIX *)&UNK_00000001;
     if ((instance->flags2 & 0x8000000U) != 0)
     {
-      pMVar5 = (MATRIX *)&UNK_00000002;
+      pMVar4 = (MATRIX *)&UNK_00000002;
     }
     break;
   case 0xc:
-    pMVar5 = instance->matrix;
+    pMVar4 = instance->matrix;
     break;
   case 0x11:
-    pMVar5 = (MATRIX *)G2EmulationInstanceQueryAnimation(instance, 0);
+    pMVar4 = (MATRIX *)G2EmulationInstanceQueryAnimation(instance, 0);
     break;
   case 0x12:
-    pMVar5 = (MATRIX *)G2EmulationInstanceQueryFrame(instance, 0);
+    pMVar4 = (MATRIX *)G2EmulationInstanceQueryFrame(instance, 0);
     break;
   case 0x18:
     if ((instance->flags2 & 4U) != 0)
     {
-      pMVar5 = (MATRIX *)CIRC_Alloc(0xc);
-      plVar4 = *(long **)(pMVar5->m + 2);
-      *(undefined4 *)pMVar5->m = 8;
-      lVar7 = instance->flags2;
-      *plVar4 = instance->flags;
-      plVar4[1] = lVar7;
+      /* WARNING: Subroutine does not return */
+      CIRC_Alloc(0xc);
     }
     break;
   default:
     return 0;
   }
-  return (ulong)pMVar5;
+  return (ulong)pMVar4;
 }
 
 // decompiled code

@@ -1,13 +1,6 @@
 #include "THISDUST.H"
 #include "OBTABLE.H"
 
-// ObjectAccess @0x800C877C, len = 0x00000008
-objectAccess =
-	{
-		// char * @0x800C877C, len = 0x00000004
-		.objectName = "hud_____" /* collapsed from &s_hud______800cea10 */,
-		// void * @0x800C8780, len = 0x00000004
-		.object = 00000000};
 // decompiled code
 // original method signature:
 // void /*$ra*/ OBTABLE_InstanceInit(struct _Instance *instance /*$s0*/)
@@ -29,18 +22,20 @@ objectAccess =
 void OBTABLE_InstanceInit(_Instance *instance)
 
 {
-	int iVar1;
+	code *pcVar1;
+	int iVar2;
 
-	iVar1 = (int)instance->object->id;
-	if (iVar1 < 0)
+	iVar2 = (int)instance->object->id;
+	if (iVar2 < 0)
 	{
-		GenericInit(instance, &gameTrackerX);
+		GenericInit(instance, (GameTracker *)&gameTrackerX);
 	}
 	else
 	{
-		if ((&objectFunc)[iVar1].initFunc != (_func_45 *)0x0)
+		pcVar1 = *(code **)((int)&debugGlyphAbilitiesMenu + iVar2 * 0x24 + 8);
+		if (pcVar1 != (code *)0x0)
 		{
-			(*(&objectFunc)[iVar1].initFunc)(instance, &gameTrackerX);
+			(*pcVar1)(instance, &gameTrackerX);
 		}
 	}
 	instance->flags2 = instance->flags2 | 0x200000;
@@ -86,7 +81,7 @@ void OBTABLE_GetInstanceCollideFunc(_Instance *instance)
 	iVar1 = (int)instance->object->id;
 	if (-1 < iVar1)
 	{
-		*(_func_47 **)&instance->collideFunc = (&objectFunc)[iVar1].collideFunc;
+		instance->collideFunc = *(_func_2 **)((int)&debugGlyphAbilitiesMenu + iVar1 * 0x24 + 0x10);
 		return;
 	}
 	instance->collideFunc = GenericCollide;
@@ -124,7 +119,7 @@ void OBTABLE_GetInstanceAdditionalCollideFunc(_Instance *instance)
 	iVar1 = (int)instance->object->id;
 	if (-1 < iVar1)
 	{
-		*(_func_50 **)&instance->additionalCollideFunc = (&objectFunc)[iVar1].additionalCollideFunc;
+		instance->additionalCollideFunc = *(_func_3 **)((int)&DebugMenuLine_800c8870 + iVar1 * 0x24 + 4);
 		return;
 	}
 	instance->additionalCollideFunc = (_func_3 *)0x0;
@@ -162,7 +157,7 @@ void OBTABLE_GetInstanceProcessFunc(_Instance *instance)
 	iVar1 = (int)instance->object->id;
 	if (-1 < iVar1)
 	{
-		*(_func_46 **)&instance->processFunc = (&objectFunc)[iVar1].processFunc;
+		instance->processFunc = *(_func_1 **)((int)&debugGlyphAbilitiesMenu + iVar1 * 0x24 + 0xc);
 		return;
 	}
 	instance->processFunc = GenericProcess;
@@ -200,7 +195,7 @@ void OBTABLE_GetInstanceQueryFunc(_Instance *instance)
 	iVar1 = (int)instance->object->id;
 	if (-1 < iVar1)
 	{
-		*(_func_48 **)&instance->queryFunc = (&objectFunc)[iVar1].queryFunc;
+		instance->queryFunc = *(_func_4 **)((int)&debugGlyphAbilitiesMenu + iVar1 * 0x24 + 0x14);
 		return;
 	}
 	instance->queryFunc = GenericQuery;
@@ -238,7 +233,8 @@ void OBTABLE_GetInstanceMessageFunc(_Instance *instance)
 	iVar1 = (int)instance->object->id;
 	if (-1 < iVar1)
 	{
-		*(_func_49 **)&instance->messageFunc = (&objectFunc)[iVar1].messageFunc;
+		instance->messageFunc =
+			(_func_5 *)((DebugMenuLine *)((int)&DebugMenuLine_800c8870 + iVar1 * 0x24))->type;
 		return;
 	}
 	instance->messageFunc = GenericMessage;
@@ -272,38 +268,38 @@ void OBTABLE_GetInstanceMessageFunc(_Instance *instance)
 /* end block 2 */
 // End Line: 568
 
-void OBTABLE_InitObjectWithID(Object *object)
+void OBTABLE_InitObjectWithID(int *param_1)
 
 {
 	int iVar1;
-	ObjectAccess *pOVar2;
-	ObjectFunc *pOVar3;
+	int **ppiVar2;
+	char **ppcVar3;
 	int iVar4;
 
-	if (object == (Object *)0x0)
+	if (param_1 == (int *)0x0)
 	{
 		return;
 	}
-	if ((object->oflags2 & 0x40000U) == 0)
+	if ((param_1[0xb] & 0x40000U) == 0)
 	{
-		if ((object->oflags2 & 0x80000U) == 0)
+		if ((param_1[0xb] & 0x80000U) == 0)
 		{
 			iVar4 = 0;
-			if (objectFunc.scriptName != (char *)0x0)
+			if (debugGlyphAbilitiesMenu.lower != 0)
 			{
-				pOVar3 = &objectFunc;
+				ppcVar3 = (char **)&debugGlyphAbilitiesMenu.lower;
 				do
 				{
-					iVar1 = strcmp(pOVar3->scriptName, object->script);
+					iVar1 = strcmp(*ppcVar3, (char *)param_1[8]);
 					if (iVar1 == 0)
 						break;
-					pOVar3 = pOVar3 + 1;
+					ppcVar3 = ppcVar3 + 9;
 					iVar4 = iVar4 + 1;
-				} while (pOVar3->scriptName != (char *)0x0);
+				} while (*ppcVar3 != (char *)0x0);
 			LAB_8003dd10:
-				if ((&objectFunc)[iVar4].scriptName != (char *)0x0)
+				if (*(int *)((int)&debugGlyphAbilitiesMenu + iVar4 * 0x24 + 4) != 0)
 				{
-					object->id = (short)iVar4;
+					*(short *)(param_1 + 1) = (short)iVar4;
 					goto LAB_8003dd4c;
 				}
 			}
@@ -311,51 +307,50 @@ void OBTABLE_InitObjectWithID(Object *object)
 		else
 		{
 			iVar4 = 0;
-			if (objectFunc.scriptName != (char *)0x0)
+			if (debugGlyphAbilitiesMenu.lower != 0)
 			{
-				pOVar3 = &objectFunc;
+				ppcVar3 = (char **)&debugGlyphAbilitiesMenu.lower;
 				do
 				{
-					iVar1 = strcmp(pOVar3->scriptName, s_monster__800cea28);
+					iVar1 = strcmp(*ppcVar3, CD_intstr);
 					if (iVar1 == 0)
 						goto LAB_8003dd10;
-					pOVar3 = pOVar3 + 1;
+					ppcVar3 = ppcVar3 + 9;
 					iVar4 = iVar4 + 1;
-				} while (pOVar3->scriptName != (char *)0x0);
+				} while (*ppcVar3 != (char *)0x0);
 			}
 		}
 	}
 	else
 	{
 		iVar4 = 0;
-		if (objectFunc.scriptName != (char *)0x0)
+		if (debugGlyphAbilitiesMenu.lower != 0)
 		{
-			pOVar3 = &objectFunc;
+			ppcVar3 = (char **)&debugGlyphAbilitiesMenu.lower;
 			do
 			{
-				iVar1 = strcmp(pOVar3->scriptName, s_physical_800cea1c);
+				iVar1 = strcmp(*ppcVar3, s_physical_800cea1c);
 				if (iVar1 == 0)
 					goto LAB_8003dd10;
-				pOVar3 = pOVar3 + 1;
+				ppcVar3 = ppcVar3 + 9;
 				iVar4 = iVar4 + 1;
-			} while (pOVar3->scriptName != (char *)0x0);
+			} while (*ppcVar3 != (char *)0x0);
 		}
 	}
-	object->id = -1;
+	*(undefined2 *)(param_1 + 1) = 0xffff;
 LAB_8003dd4c:
-	pOVar2 = &objectAccess;
-	if (objectAccess.objectName != (char *)0x0)
+	ppiVar2 = (int **)&selectMenuText5.bit_mask;
+	if (selectMenuText5.bit_mask != 0)
 	{
 		do
 		{
-			if ((*(int *)pOVar2->objectName == *(int *)object->name) &&
-				(*(int *)(pOVar2->objectName + 1) == *(int *)(object->name + 1)))
+			if ((**ppiVar2 == *(int *)param_1[9]) && ((*ppiVar2)[1] == ((int *)param_1[9])[1]))
 			{
-				*(Object **)&pOVar2->object = object;
+				ppiVar2[1] = param_1;
 				return;
 			}
-			pOVar2 = pOVar2 + 1;
-		} while (pOVar2->objectName != (char *)0x0);
+			ppiVar2 = ppiVar2 + 2;
+		} while (*ppiVar2 != (int *)0x0);
 	}
 	return;
 }
@@ -393,16 +388,16 @@ LAB_8003dd4c:
 void OBTABLE_ClearObjectReferences(void)
 
 {
-	ObjectAccess *pOVar1;
+	long *plVar1;
 
-	pOVar1 = &objectAccess;
-	if (objectAccess.objectName != (char *)0x0)
+	plVar1 = &selectMenuText5.bit_mask;
+	if (selectMenuText5.bit_mask != 0)
 	{
 		do
 		{
-			pOVar1->object = (void *)0x0;
-			pOVar1 = pOVar1 + 1;
-		} while (pOVar1->objectName != (char *)0x0);
+			plVar1[1] = 0;
+			plVar1 = plVar1 + 2;
+		} while (*plVar1 != 0);
 	}
 	return;
 }
@@ -438,23 +433,23 @@ void OBTABLE_ClearObjectReferences(void)
 void OBTABLE_RemoveObjectEntry(Object *object)
 
 {
-	Object **ppOVar1;
-	ObjectAccess *pOVar2;
+	DebugMenuLine *pDVar1;
+	long *plVar2;
 
-	pOVar2 = &objectAccess;
-	if (objectAccess.objectName != (char *)0x0)
+	plVar2 = &selectMenuText5.bit_mask;
+	if (selectMenuText5.bit_mask != 0)
 	{
-		ppOVar1 = (Object **)&objectAccess.object;
+		pDVar1 = &DebugMenuLine_800c8780;
 		do
 		{
-			pOVar2 = pOVar2 + 1;
-			if (*ppOVar1 == object)
+			plVar2 = plVar2 + 2;
+			if ((Object *)pDVar1->type == object)
 			{
-				*ppOVar1 = (Object *)0x0;
+				pDVar1->type = DEBUG_LINE_TYPE_BIT;
 				return;
 			}
-			ppOVar1 = ppOVar1 + 2;
-		} while (pOVar2->objectName != (char *)0x0);
+			pDVar1 = (DebugMenuLine *)&pDVar1->upper;
+		} while (*plVar2 != 0);
 	}
 	return;
 }
@@ -493,7 +488,7 @@ Object *OBTABLE_FindObject(char *objectName)
 	int iVar3;
 
 	iVar3 = 0x30;
-	ppOVar2 = &(gameTrackerX.GlobalObjects)->object;
+	ppOVar2 = (Object **)(DAT_800d0ff0 + 0x10);
 	do
 	{
 		if (*(short *)(ppOVar2 + 1) != 0)
@@ -546,23 +541,23 @@ Object *OBTABLE_FindObject(char *objectName)
 void OBTABLE_ChangeObjectAccessPointers(Object *oldObject, Object *newObject)
 
 {
-	Object **ppOVar1;
-	ObjectAccess *pOVar2;
+	DebugMenuLine *pDVar1;
+	long *plVar2;
 
-	pOVar2 = &objectAccess;
-	if (objectAccess.objectName != (char *)0x0)
+	plVar2 = &selectMenuText5.bit_mask;
+	if (selectMenuText5.bit_mask != 0)
 	{
-		ppOVar1 = (Object **)&objectAccess.object;
+		pDVar1 = &DebugMenuLine_800c8780;
 		do
 		{
-			pOVar2 = pOVar2 + 1;
-			if (*ppOVar1 == oldObject)
+			plVar2 = plVar2 + 2;
+			if ((Object *)pDVar1->type == oldObject)
 			{
-				*ppOVar1 = newObject;
+				*(Object **)&pDVar1->type = newObject;
 				return;
 			}
-			ppOVar1 = ppOVar1 + 2;
-		} while (pOVar2->objectName != (char *)0x0);
+			pDVar1 = (DebugMenuLine *)&pDVar1->upper;
+		} while (*plVar2 != 0);
 	}
 	return;
 }
@@ -595,15 +590,18 @@ void OBTABLE_ChangeObjectAccessPointers(Object *oldObject, Object *newObject)
 void OBTABLE_RelocateObjectTune(Object *object, long offset)
 
 {
+	code *pcVar1;
+
 	if ((int)object->id < 0)
 	{
 		GenericRelocateTune(object, offset);
 	}
 	else
 	{
-		if ((&objectFunc)[(int)object->id].relocateTuneFunc != (_func_51 *)0x0)
+		pcVar1 = *(code **)((int)&DebugMenuLine_800c8870 + (int)object->id * 0x24 + 8);
+		if (pcVar1 != (code *)0x0)
 		{
-			(*(&objectFunc)[(int)object->id].relocateTuneFunc)();
+			(*pcVar1)();
 		}
 	}
 	return;
@@ -630,12 +628,14 @@ void OBTABLE_RelocateObjectTune(Object *object, long offset)
 void OBTABLE_RelocateInstanceObject(_Instance *instance, long offset)
 
 {
-	int iVar1;
+	code *pcVar1;
+	int iVar2;
 
-	iVar1 = (int)instance->object->id;
-	if ((-1 < iVar1) && ((&objectFunc)[iVar1].relocateInstObFunc != (_func_52 *)0x0))
+	iVar2 = (int)instance->object->id;
+	if ((-1 < iVar2) &&
+		(pcVar1 = *(code **)((int)&DebugMenuLine_800c8870 + iVar2 * 0x24 + 0xc), pcVar1 != (code *)0x0))
 	{
-		(*(&objectFunc)[iVar1].relocateInstObFunc)();
+		(*pcVar1)();
 	}
 	return;
 }
@@ -718,7 +718,7 @@ void OBTABLE_InitAnimPointers(_ObjectTracker *objectTracker)
 				(p_Var1 = STREAM_GetObjectTracker((char *)&p_Var7->timePerKey),
 				 p_Var1 != (_ObjectTracker *)0x0))
 			{
-				iVar4 = (int)((int)objectTracker - (int)gameTrackerX.GlobalObjects) * 0x38e38e39 >> 2;
+				iVar4 = (int)((int)objectTracker - DAT_800d0ff0) * 0x38e38e39 >> 2;
 				iVar2 = (int)p_Var1->numObjectsUsing;
 				pOVar6 = p_Var1->object;
 				iVar5 = 0;
@@ -741,7 +741,7 @@ void OBTABLE_InitAnimPointers(_ObjectTracker *objectTracker)
 				}
 				if (p_Var1->objectStatus == 2)
 				{
-					*(_G2AnimKeylist_Type **)p_Var8 = pOVar6->animList[(int)(short)p_Var7->keyCount];
+					*(_G2AnimKeylist_Type **)p_Var8 = pOVar6->animList[(short)p_Var7->keyCount];
 				}
 				else
 				{

@@ -1,8 +1,6 @@
 #include "THISDUST.H"
 #include "MATH3D.H"
 
-// short @0x800CE870, len = 0x00000002
-identityMatrix = 0x1000;
 // decompiled code
 // original method signature:
 // void /*$ra*/ MATH3D_Sort3VectorCoords(long *a /*$a0*/, long *b /*$a1*/, long *c /*$a2*/)
@@ -139,7 +137,6 @@ long MATH3D_LengthXYZ(long x, long y, long z)
   iVar4 = iVar1;
   if ((y <= z) && (iVar2 = y, iVar3 = iVar1, iVar4 = z, z < iVar1))
   {
-    iVar2 = y;
     iVar3 = z;
     iVar4 = iVar1;
   }
@@ -214,16 +211,8 @@ long MATH3D_LengthXY(long x, long y)
 void MATH3D_Normalize(_Normal *normal)
 
 {
-  long lVar1;
-
-  lVar1 = MATH3D_LengthXYZ((int)normal->x << 2, (int)normal->y << 2, (int)normal->z << 2);
-  if (lVar1 != 0)
-  {
-    normal->x = (short)(((int)normal->x << 0xe) / lVar1);
-    normal->y = (short)(((int)normal->y << 0xe) / lVar1);
-    normal->z = (short)(((int)normal->z << 0xe) / lVar1);
-  }
-  return;
+  /* WARNING: Subroutine does not return */
+  MATH3D_LengthXYZ((int)normal->x << 2, (int)normal->y << 2, (int)normal->z << 2);
 }
 
 // decompiled code
@@ -623,7 +612,7 @@ void MATH3D_RotMatAboutVec(_SVector *vec, MATRIX *mat, short angle)
   uint auStack88[8];
   undefined4 auStack56[8];
 
-  if ((int)angle != 0)
+  if (angle != 0)
   {
     uVar1 = MATH3D_SquareLength(0, (int)vec->y, (int)vec->z);
     uVar2 = MATH3D_FastSqrt0(uVar1 + 0x800);
@@ -633,10 +622,8 @@ void MATH3D_RotMatAboutVec(_SVector *vec, MATRIX *mat, short angle)
     local_5e = (undefined2)iVar3;
     local_5c = 0;
     RotMatrix(&local_60, auStack88);
+    /* WARNING: Subroutine does not return */
     TransposeMatrix(auStack88, auStack56);
-    MulMatrix2(auStack56, (uint *)mat);
-    RotMatrixZ((int)angle, (uint *)mat);
-    MulMatrix2(auStack88, (uint *)mat);
   }
   return;
 }
@@ -688,37 +675,8 @@ void MATH3D_SetUnityMatrix(MATRIX *mat)
 void AngleMoveToward(short *current_ptr, short destination, short step)
 
 {
-  ushort current;
-  short sVar1;
-  int iVar2;
-  int iVar3;
-
-  current = *current_ptr;
-  sVar1 = AngleDiff(current, destination);
-  iVar3 = (int)sVar1;
-  if (iVar3 == 0)
-  {
-  LAB_80039bd0:
-    *current_ptr = destination;
-    return;
-  }
-  iVar2 = iVar3;
-  if (iVar3 < 0)
-  {
-    iVar2 = -iVar3;
-  }
-  if (iVar2 < (int)step)
-    goto LAB_80039bd0;
-  if (iVar3 < 1)
-  {
-    if (-1 < iVar3)
-      goto LAB_80039bf8;
-    step = -step;
-  }
-  current = current + step;
-LAB_80039bf8:
-  *current_ptr = current & 0xfff;
-  return;
+  /* WARNING: Subroutine does not return */
+  AngleDiff(*current_ptr, destination);
 }
 
 // decompiled code
@@ -945,74 +903,55 @@ void MATH3D_RotateAxisToVector(MATRIX *dest, MATRIX *src, _SVector *vec, MATH3D_
   short *psVar1;
   int iVar2;
   int iVar3;
-  ulong square;
   int iVar4;
   int iVar5;
-  long lVar6;
-  uint uVar7;
-  ushort auStack64[16];
-  short local_20;
-  short local_1e;
-  short local_1c;
-  undefined2 local_1a;
+  ulong square;
+  int iVar6;
+  int iVar7;
 
   if (axis < AXIS_NEG_X)
   {
     psVar1 = src->m + axis;
-    iVar3 = (int)*psVar1;
-    iVar4 = (int)psVar1[3];
-    iVar5 = (int)psVar1[6];
+    iVar5 = (int)*psVar1;
+    iVar6 = (int)psVar1[3];
+    iVar7 = (int)psVar1[6];
   }
   else
   {
     psVar1 = src->m + axis + ~AXIS_Z;
-    iVar3 = -(int)*psVar1;
-    iVar4 = -(int)psVar1[3];
-    iVar5 = -(int)psVar1[6];
+    iVar5 = -(int)*psVar1;
+    iVar6 = -(int)psVar1[3];
+    iVar7 = -(int)psVar1[6];
   }
-  iVar2 = iVar4 * (int)vec->z - iVar5 * (int)vec->y;
+  iVar2 = iVar6 * vec->z - iVar7 * vec->y;
   if (iVar2 < 0)
   {
     iVar2 = iVar2 + 0xfff;
   }
-  local_20 = (short)(iVar2 >> 0xc);
-  iVar2 = iVar5 * (int)vec->x - iVar3 * (int)vec->z;
-  if (iVar2 < 0)
-  {
-    iVar2 = iVar2 + 0xfff;
-  }
-  local_1e = (short)(iVar2 >> 0xc);
-  iVar2 = iVar3 * (int)vec->y - iVar4 * (int)vec->x;
-  if (iVar2 < 0)
-  {
-    iVar2 = iVar2 + 0xfff;
-  }
-  local_1c = (short)(iVar2 >> 0xc);
-  iVar3 = iVar3 * (int)vec->x + iVar4 * (int)vec->y + iVar5 * (int)vec->z;
+  iVar3 = iVar7 * vec->x - iVar5 * vec->z;
   if (iVar3 < 0)
   {
     iVar3 = iVar3 + 0xfff;
   }
-  iVar3 = MATH3D_racos_S(iVar3 >> 0xc);
-  uVar7 = (int)(((iVar3 << 0x10) >> 0x10) + ((uint)(iVar3 << 0x10) >> 0x1f)) >> 1;
-  square = MATH3D_SquareLength((int)local_20, (int)local_1e, (int)local_1c);
-  if ((int)square < 1)
+  iVar4 = iVar5 * vec->y - iVar6 * vec->x;
+  if (iVar4 < 0)
   {
-    lVar6 = 0x1000;
+    iVar4 = iVar4 + 0xfff;
   }
-  else
+  iVar5 = iVar5 * vec->x + iVar6 * vec->y + iVar7 * vec->z;
+  if (iVar5 < 0)
   {
-    lVar6 = MATH3D_FastSqrt0(square);
+    iVar5 = iVar5 + 0xfff;
   }
-  iVar3 = rsin(uVar7);
-  local_20 = (short)(((int)local_20 * iVar3) / lVar6);
-  local_1e = (short)(((int)local_1e * iVar3) / lVar6);
-  local_1c = (short)(((int)local_1c * iVar3) / lVar6);
-  iVar3 = rcos(uVar7);
-  local_1a = (undefined2)iVar3;
-  G2Quat_ToMatrix_S(&local_20, (short *)auStack64);
-  MulMatrix0((undefined4 *)src, auStack64, (uint *)dest);
-  return;
+  iVar5 = MATH3D_racos_S(iVar5 >> 0xc);
+  square = MATH3D_SquareLength((int)(short)(iVar2 >> 0xc), (int)(short)(iVar3 >> 0xc),
+                               (int)(short)(iVar4 >> 0xc));
+  if (0 < (int)square)
+  {
+    MATH3D_FastSqrt0(square);
+  }
+  /* WARNING: Subroutine does not return */
+  rsin(((iVar5 << 0x10) >> 0x10) - ((iVar5 << 0x10) >> 0x1f) >> 1);
 }
 
 // decompiled code
@@ -1041,7 +980,7 @@ void MATH3D_RotateAxisToVector(MATRIX *dest, MATRIX *src, _SVector *vec, MATH3D_
 /* end block 2 */
 // End Line: 1719
 
-int MATH3D_ConeDetect(_SVector *pos, int arc, int elevation)
+void MATH3D_RotMatAboutVec(_SVector *vec, MATRIX *mat, short angle)
 
 {
   short sVar1;
@@ -1050,29 +989,25 @@ int MATH3D_ConeDetect(_SVector *pos, int arc, int elevation)
   int y;
   int x_00;
 
-  x_00 = (int)pos->x;
-  sVar2 = pos->y;
+  x_00 = (int)vec->x;
+  sVar1 = vec->y;
   y = x_00;
   if (x_00 < 0)
   {
     y = -x_00;
   }
-  sVar1 = MATH3D_FastAtan2(y, -(int)sVar2);
-  if ((int)sVar1 < arc)
+  sVar2 = MATH3D_FastAtan2(y, -(int)sVar1);
+  if ((int)sVar2 < (int)mat)
   {
-    x = MATH3D_LengthXY(x_00, -(int)sVar2);
-    y = (int)pos->z;
+    x = MATH3D_LengthXY(x_00, -(int)sVar1);
+    y = (int)vec->z;
     if (y < 0)
     {
       y = -y;
     }
-    sVar2 = MATH3D_FastAtan2(y, x);
-    if ((int)sVar2 < elevation)
-    {
-      return 1;
-    }
+    MATH3D_FastAtan2(y, x);
   }
-  return 0;
+  return;
 }
 
 // decompiled code

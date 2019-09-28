@@ -1,39 +1,6 @@
 #include "THISDUST.H"
 #include "MONTABLE.H"
 
-// _MonsterFunctionTable @0x800CF68C, len = 0x00000020
-DefaultFunctionTable =
-	{
-		// _func_96 * @0x800CF68C, len = 0x00000004
-		.initFunc = &MON_DefaultInit,
-		// _func_97 * @0x800CF690, len = 0x00000004
-		.cleanUpFunc = &MON_CleanUp,
-		// _func_98 * @0x800CF694, len = 0x00000004
-		.damageEffectFunc = &MON_DamageEffect,
-		// _func_99 * @0x800CF698, len = 0x00000004
-		.queryFunc = &MonsterQuery,
-		// _func_100 * @0x800CF69C, len = 0x00000004
-		.messageFunc = &MonsterMessage,
-		// _MonsterStateChoice * @0x800CF6A0, len = 0x00000004
-		.stateFuncs = 00000000,
-		// char * @0x800CF6A4, len = 0x00000004
-		.versionID = &monVersion,
-		// char * @0x800CF6A8, len = 0x00000004
-		.localVersionID = 00000000};
-// _MonsterState @0x800CAA20, len = 0x00000008
-DefaultStateTable =
-	{
-		// _func_88 * @0x800CAA20, len = 0x00000004
-		.entryFunction = &MON_BirthEntry,
-		// _func_89 * @0x800CAA24, len = 0x00000004
-		.stateFunction = &MON_Birth};
-// MONTABLE_207fake @0x800CA9F0, len = 0x00000008
-functionChoiceTable =
-	{
-		// long @0x800CA9F0, len = 0x00000004
-		.whatAmI = 0x4,
-		// _MonsterFunctionTable * @0x800CA9F4, len = 0x00000004
-		.table = &SOUL_FunctionTable};
 // decompiled code
 // original method signature:
 // void /*$ra*/ MONTABLE_SetupTablePointer(struct Object *object /*$a0*/)
@@ -66,23 +33,23 @@ void MONTABLE_SetupTablePointer(Object *object)
 
 {
 	int iVar1;
-	MONTABLE_207fake *pMVar2;
+	int *piVar2;
 	int iVar3;
 
 	iVar3 = *(int *)((int)object->data + 0x10);
-	pMVar2 = &functionChoiceTable;
-	iVar1 = functionChoiceTable.whatAmI;
-	if (functionChoiceTable.whatAmI != 0)
+	piVar2 = (int *)&_Normal_800ca9ec.z;
+	iVar1 = _Normal_800ca9ec._4_4_;
+	if (_Normal_800ca9ec._4_4_ != 0)
 	{
 		do
 		{
 			if (iVar3 == iVar1)
 			{
-				*(_MonsterFunctionTable **)&object->relocModule = pMVar2->table;
+				object->relocModule = (void *)piVar2[1];
 			}
-			pMVar2 = pMVar2 + 1;
-			iVar1 = pMVar2->whatAmI;
-		} while (pMVar2->whatAmI != 0);
+			piVar2 = piVar2 + 2;
+			iVar1 = *piVar2;
+		} while (*piVar2 != 0);
 	}
 	return;
 }
@@ -141,7 +108,7 @@ _MonsterState *MONTABLE_GetStateFuncs(_Instance *instance, int state)
 			iVar2 = *piVar3;
 		}
 	}
-	return &DefaultStateTable + state;
+	return (_MonsterState *)&(&_Normal_800caa1c)[state].z;
 }
 
 // decompiled code

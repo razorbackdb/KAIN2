@@ -1,37 +1,6 @@
 #include "THISDUST.H"
 #include "WORSHIP.H"
 
-// _MonsterFunctionTable @0x800CF714, len = 0x00000020
-WORSHIP_FunctionTable =
-	{
-		// _func_96 * @0x800CF714, len = 0x00000004
-		.initFunc = &WORSHIP_Init,
-		// _func_97 * @0x800CF718, len = 0x00000004
-		.cleanUpFunc = &HUMAN_CleanUp,
-		// _func_98 * @0x800CF71C, len = 0x00000004
-		.damageEffectFunc = 00000000,
-		// _func_99 * @0x800CF720, len = 0x00000004
-		.queryFunc = &HUMAN_Query,
-		// _func_100 * @0x800CF724, len = 0x00000004
-		.messageFunc = 00000000,
-		// _MonsterStateChoice * @0x800CF728, len = 0x00000004
-		.stateFuncs = &WORSHIP_StateChoiceTable,
-		// char * @0x800CF72C, len = 0x00000004
-		.versionID = &monVersion,
-		// char * @0x800CF730, len = 0x00000004
-		.localVersionID = 00000000};
-// _MonsterStateChoice @0x800CABF0, len = 0x0000000C
-WORSHIP_StateChoiceTable =
-	{
-		// int @0x800CABF0, len = 0x00000004
-		.state = 0x9,
-		// _MonsterState @0x800CABF4, len = 0x00000008
-		.functions =
-			{
-				// _func_88 * @0x800CABF4, len = 0x00000004
-				.entryFunction = &HUMAN_StunnedEntry,
-				// _func_89 * @0x800CABF8, len = 0x00000004
-				.stateFunction = &HUMAN_Stunned}};
 // decompiled code
 // original method signature:
 // void /*$ra*/ WORSHIP_Init(struct _Instance *instance /*$s2*/)
@@ -55,38 +24,38 @@ WORSHIP_StateChoiceTable =
 void WORSHIP_Init(_Instance *instance)
 
 {
-	byte bVar1;
-	undefined2 uVar2;
-	_Instance *p_Var3;
-	int weaponid;
-	void *pvVar4;
-	void *pvVar5;
+  byte bVar1;
+  undefined2 uVar2;
+  _Instance *p_Var3;
+  int weaponid;
+  void *pvVar4;
+  void *pvVar5;
 
-	pvVar5 = instance->extraData;
-	pvVar4 = instance->data;
-	weaponid = 0xc;
-	if (*(char *)((int)pvVar5 + 0x14a) == '\0')
-	{
-		bVar1 = *(byte *)((int)pvVar4 + 0x24);
-	}
-	else
-	{
-		HUMAN_CreateWeapon(instance, 0xb, (uint) * (byte *)((int)pvVar4 + 0x23));
-		bVar1 = *(byte *)((int)pvVar4 + 0x24);
-		weaponid = 0xb;
-	}
-	p_Var3 = HUMAN_CreateWeapon(instance, weaponid, (uint)bVar1);
-	if (p_Var3 != (_Instance *)0x0)
-	{
-		HUMAN_Init(instance);
-	}
-	uVar2 = 0x6000;
-	if (*(char *)((int)pvVar5 + 0x14a) == '\0')
-	{
-		uVar2 = 0x5000;
-	}
-	*(undefined2 *)((int)pvVar5 + 0x134) = uVar2;
-	return;
+  pvVar5 = instance->extraData;
+  pvVar4 = instance->data;
+  weaponid = 0xc;
+  if (*(char *)((int)pvVar5 + 0x14a) == '\0')
+  {
+    bVar1 = *(byte *)((int)pvVar4 + 0x24);
+  }
+  else
+  {
+    HUMAN_CreateWeapon(instance, 0xb, (uint) * (byte *)((int)pvVar4 + 0x23));
+    bVar1 = *(byte *)((int)pvVar4 + 0x24);
+    weaponid = 0xb;
+  }
+  p_Var3 = HUMAN_CreateWeapon(instance, weaponid, (uint)bVar1);
+  if (p_Var3 != (_Instance *)0x0)
+  {
+    HUMAN_Init(instance);
+  }
+  uVar2 = 0x6000;
+  if (*(char *)((int)pvVar5 + 0x14a) == '\0')
+  {
+    uVar2 = 0x5000;
+  }
+  *(undefined2 *)((int)pvVar5 + 0x134) = uVar2;
+  return;
 }
 
 // decompiled code
@@ -126,32 +95,32 @@ void WORSHIP_Init(_Instance *instance)
 void WORSHIP_CombatEntry(_Instance *instance)
 
 {
-	_Instance *instance_00;
-	uint *puVar1;
-	void *pvVar2;
+  _Instance *instance_00;
+  uint *puVar1;
+  void *pvVar2;
 
-	puVar1 = (uint *)instance->extraData;
-	if (((puVar1[0x31] != 0) &&
-		 (*(short *)(puVar1[0x31] + 0x14) < *(short *)(*(int *)(puVar1[0x55] + 8) + 10))) &&
-		(*(char *)((int)puVar1 + 0x14a) == '\x01'))
-	{
-		instance_00 = instance->LinkChild;
-		pvVar2 = instance->data;
-		if (instance_00 == (_Instance *)0x0)
-		{
-			HUMAN_CreateWeapon(instance, 0xb, (uint) * (byte *)((int)pvVar2 + 0x23));
-		}
-		else
-		{
-			if ((instance_00->LinkSibling != (_Instance *)0x0) ||
-				(instance_00->ParentLinkNode != (uint) * (byte *)((int)pvVar2 + 0x24)))
-				goto LAB_8008ef84;
-			INSTANCE_UnlinkFromParent(instance_00);
-			INSTANCE_LinkToParent(instance_00, instance, (uint) * (byte *)((int)pvVar2 + 0x23));
-		}
-		*puVar1 = *puVar1 | 0x20;
-	}
+  puVar1 = (uint *)instance->extraData;
+  if (((puVar1[0x31] != 0) &&
+       (*(short *)(puVar1[0x31] + 0x14) < *(short *)(*(int *)(puVar1[0x55] + 8) + 10))) &&
+      (*(char *)((int)puVar1 + 0x14a) == '\x01'))
+  {
+    instance_00 = instance->LinkChild;
+    pvVar2 = instance->data;
+    if (instance_00 == (_Instance *)0x0)
+    {
+      HUMAN_CreateWeapon(instance, 0xb, (uint) * (byte *)((int)pvVar2 + 0x23));
+    }
+    else
+    {
+      if ((instance_00->LinkSibling != (_Instance *)0x0) ||
+          (instance_00->ParentLinkNode != (uint) * (byte *)((int)pvVar2 + 0x24)))
+        goto LAB_8008ef84;
+      INSTANCE_UnlinkFromParent(instance_00);
+      INSTANCE_LinkToParent(instance_00, instance, (uint) * (byte *)((int)pvVar2 + 0x23));
+    }
+    *puVar1 = *puVar1 | 0x20;
+  }
 LAB_8008ef84:
-	MON_CombatEntry(instance);
-	return;
+  MON_CombatEntry(instance);
+  return;
 }

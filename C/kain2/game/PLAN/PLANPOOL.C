@@ -38,9 +38,9 @@ int PLANPOOL_NumNodesInPlan(PlanningNode *goalNode, PlanningNode *planningPool)
 
   uVar1 = goalNode->parent;
   iVar2 = 0;
-  while (goalNode != planningPool + (uint)uVar1)
+  while (goalNode != planningPool + uVar1)
   {
-    goalNode = planningPool + (uint)goalNode->parent;
+    goalNode = planningPool + goalNode->parent;
     uVar1 = goalNode->parent;
     iVar2 = iVar2 + 1;
   }
@@ -151,13 +151,15 @@ int PLANPOOL_NumConnectionsForNode(PlanningNode *node)
 /* end block 3 */
 // End Line: 343
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 PlanningNode *PLANPOOL_GetFirstNodeOfSource(PlanningNode *planningPool, char nodeSource)
 
 {
   int iVar1;
 
   iVar1 = 0;
-  if (*(byte *)(poolManagementData + 1) != 0)
+  if (*(byte *)(_poolManagementData + 1) != 0)
   {
     do
     {
@@ -167,7 +169,7 @@ PlanningNode *PLANPOOL_GetFirstNodeOfSource(PlanningNode *planningPool, char nod
         return planningPool;
       }
       planningPool = planningPool + 1;
-    } while (iVar1 < (int)(uint) * (byte *)(poolManagementData + 1));
+    } while (iVar1 < (int)(uint) * (byte *)(_poolManagementData + 1));
   }
   return (PlanningNode *)0x0;
 }
@@ -196,6 +198,8 @@ PlanningNode *PLANPOOL_GetFirstNodeOfSource(PlanningNode *planningPool, char nod
 /* end block 3 */
 // End Line: 368
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 int PLANPOOL_NumberOfNodesOfType(PlanningNode *planningPool, char nodeType)
 
 {
@@ -204,7 +208,7 @@ int PLANPOOL_NumberOfNodesOfType(PlanningNode *planningPool, char nodeType)
 
   iVar2 = 0;
   iVar1 = 0;
-  if (*(byte *)(poolManagementData + 1) != 0)
+  if (*(byte *)(_poolManagementData + 1) != 0)
   {
     do
     {
@@ -214,7 +218,7 @@ int PLANPOOL_NumberOfNodesOfType(PlanningNode *planningPool, char nodeType)
       }
       iVar2 = iVar2 + 1;
       planningPool = planningPool + 1;
-    } while (iVar2 < (int)(uint) * (byte *)(poolManagementData + 1));
+    } while (iVar2 < (int)(uint) * (byte *)(_poolManagementData + 1));
   }
   return iVar1;
 }
@@ -243,6 +247,8 @@ int PLANPOOL_NumberOfNodesOfType(PlanningNode *planningPool, char nodeType)
 /* end block 3 */
 // End Line: 393
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 int PLANPOOL_NumberOfNodesOfSource(PlanningNode *planningPool, char nodeSource)
 
 {
@@ -251,7 +257,7 @@ int PLANPOOL_NumberOfNodesOfSource(PlanningNode *planningPool, char nodeSource)
 
   iVar2 = 0;
   iVar1 = 0;
-  if (*(byte *)(poolManagementData + 1) != 0)
+  if (*(byte *)(_poolManagementData + 1) != 0)
   {
     do
     {
@@ -261,7 +267,7 @@ int PLANPOOL_NumberOfNodesOfSource(PlanningNode *planningPool, char nodeSource)
       }
       iVar2 = iVar2 + 1;
       planningPool = planningPool + 1;
-    } while (iVar2 < (int)(uint) * (byte *)(poolManagementData + 1));
+    } while (iVar2 < (int)(uint) * (byte *)(_poolManagementData + 1));
   }
   return iVar1;
 }
@@ -294,13 +300,15 @@ int PLANPOOL_NumberOfNodesOfSource(PlanningNode *planningPool, char nodeSource)
 /* end block 4 */
 // End Line: 418
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 PlanningNode *PLANPOOL_GetNodeWithID(PlanningNode *planningPool, int type, int id, long suID)
 
 {
   int iVar1;
 
   iVar1 = 0;
-  if (*(byte *)(poolManagementData + 1) != 0)
+  if (*(byte *)(_poolManagementData + 1) != 0)
   {
     do
     {
@@ -311,7 +319,7 @@ PlanningNode *PLANPOOL_GetNodeWithID(PlanningNode *planningPool, int type, int i
       }
       iVar1 = iVar1 + 1;
       planningPool = planningPool + 1;
-    } while (iVar1 < (int)(uint) * (byte *)(poolManagementData + 1));
+    } while (iVar1 < (int)(uint) * (byte *)(_poolManagementData + 1));
   }
   return (PlanningNode *)0x0;
 }
@@ -342,6 +350,8 @@ PlanningNode *PLANPOOL_GetNodeWithID(PlanningNode *planningPool, int type, int i
 /* end block 3 */
 // End Line: 457
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 PlanningNode *PLANPOOL_GetNodeByPosition(_Position *currentPos, PlanningNode *planningPool)
 
 {
@@ -352,7 +362,7 @@ PlanningNode *PLANPOOL_GetNodeByPosition(_Position *currentPos, PlanningNode *pl
 
   iVar3 = 0;
   pPVar4 = (PlanningNode *)0x0;
-  if (*(char *)(poolManagementData + 1) != '\0')
+  if (*(char *)(_poolManagementData + 1) != '\0')
   {
     do
     {
@@ -372,7 +382,7 @@ PlanningNode *PLANPOOL_GetNodeByPosition(_Position *currentPos, PlanningNode *pl
       }
       iVar3 = iVar3 + 1;
       planningPool = planningPool + 1;
-    } while (iVar3 < (int)(uint) * (byte *)(poolManagementData + 1));
+    } while (iVar3 < (int)(uint) * (byte *)(_poolManagementData + 1));
   }
   return pPVar4;
 }
@@ -398,6 +408,8 @@ PlanningNode *PLANPOOL_GetNodeByPosition(_Position *currentPos, PlanningNode *pl
 /* end block 2 */
 // End Line: 515
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 PlanningNode *PLANPOOL_GetClosestNode(_Position *pos, PlanningNode *planningPool, char distanceType)
 
 {
@@ -409,21 +421,19 @@ PlanningNode *PLANPOOL_GetClosestNode(_Position *pos, PlanningNode *planningPool
   iVar4 = 0x7fffffff;
   iVar2 = 0;
   pPVar3 = (PlanningNode *)0x0;
-  if (*(char *)(poolManagementData + 1) != '\0')
+  if (*(char *)(_poolManagementData + 1) != '\0')
   {
     do
     {
-      if (distanceType == '\0')
+      if (distanceType != '\0')
       {
-        lVar1 = MATH3D_LengthXY((int)pos->x - (int)(planningPool->pos).x,
-                                (int)pos->y - (int)(planningPool->pos).y);
+        /* WARNING: Subroutine does not return */
+        MATH3D_LengthXYZ((int)pos->x - (int)(planningPool->pos).x,
+                         (int)pos->y - (int)(planningPool->pos).y,
+                         (int)pos->z - (int)(planningPool->pos).z);
       }
-      else
-      {
-        lVar1 = MATH3D_LengthXYZ((int)pos->x - (int)(planningPool->pos).x,
-                                 (int)pos->y - (int)(planningPool->pos).y,
-                                 (int)pos->z - (int)(planningPool->pos).z);
-      }
+      lVar1 = MATH3D_LengthXY((int)pos->x - (int)(planningPool->pos).x,
+                              (int)pos->y - (int)(planningPool->pos).y);
       if (lVar1 < iVar4)
       {
         pPVar3 = planningPool;
@@ -431,7 +441,7 @@ PlanningNode *PLANPOOL_GetClosestNode(_Position *pos, PlanningNode *planningPool
       }
       iVar2 = iVar2 + 1;
       planningPool = planningPool + 1;
-    } while (iVar2 < (int)(uint) * (byte *)(poolManagementData + 1));
+    } while (iVar2 < (int)(uint) * (byte *)(_poolManagementData + 1));
   }
   return pPVar3;
 }
@@ -602,6 +612,8 @@ int PLANPOOL_AreTwoNodesConnected(PlanningNode *node1, PlanningNode *node2, Plan
 /* end block 2 */
 // End Line: 774
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void PLANPOOL_MarkTwoNodesAsConnected(PlanningNode *node1, PlanningNode *node2, PlanningNode *planningPool)
 
 {
@@ -624,7 +636,7 @@ void PLANPOOL_MarkTwoNodesAsConnected(PlanningNode *node1, PlanningNode *node2, 
   uVar2 = 1 << (uVar4 & 0x1f);
   *(undefined2 *)(uVar4 * 2 +
                   ((int)((int)node1 - (int)planningPool) * -0x49249249 >> 2) * 0x40 +
-                  *(int *)(poolManagementData + 0x10)) = uVar3;
+                  *(int *)(_poolManagementData + 0x10)) = uVar3;
   node1->connectionStatus = node1->connectionStatus | uVar2;
   node1->connections = node1->connections | uVar2;
   return;
@@ -689,55 +701,45 @@ void PLANPOOL_MarkTwoNodesAsNotConnected(PlanningNode *node1, PlanningNode *node
 /* end block 2 */
 // End Line: 909
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 PlanningNode *
 PLANPOOL_GetClosestUnexploredValidNeighbor(PlanningNode *startNode, PlanningNode *planningPool)
 
 {
   int iVar1;
-  uint uVar2;
   PlanningNode *node2;
-  uint uVar3;
-  int iVar4;
-  PlanningNode *pPVar5;
-  uint uVar6;
+  uint uVar2;
+  int iVar3;
 
-  uVar6 = 0xffffffff;
-  pPVar5 = (PlanningNode *)0x0;
   if (startNode != (PlanningNode *)0x0)
   {
-    uVar3 = startNode->connectionStatus;
-    iVar4 = 0;
+    uVar2 = startNode->connectionStatus;
+    iVar3 = 0;
     node2 = planningPool;
-    if (*(char *)(poolManagementData + 1) != '\0')
+    if (*(char *)(_poolManagementData + 1) != '\0')
     {
       do
       {
-        if ((uVar3 & 1) == 0)
+        if ((uVar2 & 1) == 0)
         {
           iVar1 = PLANPOOL_AppropriatePair(startNode, node2);
-          if (iVar1 == 0)
+          if (iVar1 != 0)
           {
-            PLANPOOL_MarkTwoNodesAsNotConnected(startNode, node2, planningPool);
+            /* WARNING: Subroutine does not return */
+            MATH3D_LengthXYZ((int)(startNode->pos).x - (int)(node2->pos).x,
+                             (int)(startNode->pos).y - (int)(node2->pos).y,
+                             (int)(startNode->pos).z - (int)(node2->pos).z);
           }
-          else
-          {
-            uVar2 = MATH3D_LengthXYZ((int)(startNode->pos).x - (int)(node2->pos).x,
-                                     (int)(startNode->pos).y - (int)(node2->pos).y,
-                                     (int)(startNode->pos).z - (int)(node2->pos).z);
-            if (uVar2 < uVar6)
-            {
-              pPVar5 = node2;
-              uVar6 = uVar2;
-            }
-          }
+          PLANPOOL_MarkTwoNodesAsNotConnected(startNode, node2, planningPool);
         }
-        uVar3 = uVar3 >> 1;
-        iVar4 = iVar4 + 1;
+        uVar2 = uVar2 >> 1;
+        iVar3 = iVar3 + 1;
         node2 = node2 + 1;
-      } while (iVar4 < (int)(uint) * (byte *)(poolManagementData + 1));
+      } while (iVar3 < (int)(uint) * (byte *)(_poolManagementData + 1));
     }
   }
-  return pPVar5;
+  return (PlanningNode *)0x0;
 }
 
 // decompiled code
@@ -759,34 +761,31 @@ PLANPOOL_GetClosestUnexploredValidNeighbor(PlanningNode *startNode, PlanningNode
 /* end block 2 */
 // End Line: 1003
 
-void PLANPOOL_ChangeNodePosition(_Position *newPos, PlanningNode *nodeToChange, PlanningNode *planningPool)
+void PLANPOOL_ChangeNodePosition(undefined4 *param_1, undefined4 *param_2, int param_3)
 
 {
-  short sVar1;
+  undefined2 uVar1;
   int iVar2;
-  int iVar3;
-  uint uVar4;
+  uint uVar3;
 
-  iVar2 = poolManagementData;
-  if (nodeToChange != (PlanningNode *)0x0)
+  if (param_2 != (undefined4 *)0x0)
   {
-    sVar1 = newPos->z;
-    *(undefined4 *)&nodeToChange->pos = *(undefined4 *)newPos;
-    (nodeToChange->pos).z = sVar1;
-    nodeToChange->connectionStatus = 0;
-    nodeToChange->connections = 0;
-    iVar3 = 0;
-    if (*(char *)(iVar2 + 1) != '\0')
+    uVar1 = *(undefined2 *)(param_1 + 1);
+    *param_2 = *param_1;
+    *(undefined2 *)(param_2 + 1) = uVar1;
+    param_2[2] = 0;
+    param_2[3] = 0;
+    iVar2 = 0;
+    if (*(char *)(iGpfffff71c + 1) != '\0')
     {
-      uVar4 = ~(1 << ((int)((int)nodeToChange - (int)planningPool) * -0x49249249 >> 2 & 0x1fU) &
-                0xffU);
+      uVar3 = ~(1 << ((int)((int)param_2 - param_3) * -0x49249249 >> 2 & 0x1fU) & 0xffU);
       do
       {
-        iVar3 = iVar3 + 1;
-        planningPool->connectionStatus = planningPool->connectionStatus & uVar4;
-        planningPool->connections = planningPool->connections & uVar4;
-        planningPool = planningPool + 1;
-      } while (iVar3 < (int)(uint) * (byte *)(iVar2 + 1));
+        iVar2 = iVar2 + 1;
+        *(uint *)(param_3 + 8) = *(uint *)(param_3 + 8) & uVar3;
+        *(uint *)(param_3 + 0xc) = *(uint *)(param_3 + 0xc) & uVar3;
+        param_3 = param_3 + 0x1c;
+      } while (iVar2 < (int)(uint) * (byte *)(iGpfffff71c + 1));
     }
   }
   return;
@@ -822,6 +821,8 @@ void PLANPOOL_ChangeNodePosition(_Position *newPos, PlanningNode *nodeToChange, 
 /* end block 2 */
 // End Line: 1055
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 PlanningNode *
 PLANPOOL_AddNodeToPool(_Position *pos, PlanningNode *planningPool, short nodeType, short nodeID, long streamUnitID)
 
@@ -834,13 +835,13 @@ PLANPOOL_AddNodeToPool(_Position *pos, PlanningNode *planningPool, short nodeTyp
   int iVar6;
   PlanningNode *pPVar7;
 
-  iVar4 = poolManagementData;
+  iVar4 = _poolManagementData;
   pPVar7 = (PlanningNode *)0x0;
-  if (*(byte *)(poolManagementData + 1) < 0x20)
+  if (*(byte *)(_poolManagementData + 1) < 0x20)
   {
     sVar2 = pos->z;
     sVar3 = pos->x;
-    pPVar7 = planningPool + (uint) * (byte *)(poolManagementData + 1);
+    pPVar7 = planningPool + *(byte *)(_poolManagementData + 1);
     (pPVar7->pos).y = pos->y;
     (pPVar7->pos).z = sVar2;
     (pPVar7->pos).x = sVar3;
@@ -852,9 +853,9 @@ PLANPOOL_AddNodeToPool(_Position *pos, PlanningNode *planningPool, short nodeTyp
     pPVar7->streamUnitID = streamUnitID;
     pPVar7->connectionStatus = 1 << ((uint)bVar1 & 0x1f);
     *(char *)(iVar4 + 1) = *(char *)(iVar4 + 1) + '\x01';
-    iVar4 = poolManagementData;
+    iVar4 = _poolManagementData;
     iVar6 = 0;
-    if (*(char *)(poolManagementData + 1) != '\0')
+    if (*(char *)(_poolManagementData + 1) != '\0')
     {
       iVar5 = 0;
       do
@@ -902,6 +903,8 @@ PLANPOOL_AddNodeToPool(_Position *pos, PlanningNode *planningPool, short nodeTyp
 /* end block 4 */
 // End Line: 1153
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void PLANPOOL_DeleteNodeFromPool(PlanningNode *nodeToDelete, PlanningNode *planningPool)
 
 {
@@ -923,7 +926,7 @@ void PLANPOOL_DeleteNodeFromPool(PlanningNode *nodeToDelete, PlanningNode *plann
   iVar6 = 0;
   if (nodeToDelete != (PlanningNode *)0x0)
   {
-    uVar9 = (uint) * (byte *)(poolManagementData + 1) - 1;
+    uVar9 = (uint) * (byte *)(_poolManagementData + 1) - 1;
     pPVar1 = planningPool + uVar9;
     uVar11 = *(undefined4 *)&(pPVar1->pos).z;
     uVar12 = pPVar1->connectionStatus;
@@ -937,11 +940,11 @@ void PLANPOOL_DeleteNodeFromPool(PlanningNode *nodeToDelete, PlanningNode *plann
     *(undefined4 *)&nodeToDelete->cost = *(undefined4 *)&pPVar1->cost;
     *(undefined4 *)&nodeToDelete->nodeType = uVar11;
     nodeToDelete->streamUnitID = lVar13;
-    iVar7 = poolManagementData;
+    iVar7 = _poolManagementData;
     uVar10 = (int)((int)nodeToDelete - (int)planningPool) * -0x49249249 >> 2;
     uVar8 = 1 << (uVar10 & 0x1f);
     uVar4 = 1 << (uVar9 & 0x1f);
-    if (0 < (int)((uint) * (byte *)(poolManagementData + 1) - 1))
+    if (0 < (int)((uint) * (byte *)(_poolManagementData + 1) - 1))
     {
       do
       {
@@ -965,9 +968,9 @@ void PLANPOOL_DeleteNodeFromPool(PlanningNode *nodeToDelete, PlanningNode *plann
         planningPool = planningPool + 1;
       } while (iVar6 < (int)((uint) * (byte *)(iVar7 + 1) - 1));
     }
-    iVar6 = poolManagementData;
+    iVar6 = _poolManagementData;
     iVar7 = 0;
-    if (0 < (int)((uint) * (byte *)(poolManagementData + 1) - 1))
+    if (0 < (int)((uint) * (byte *)(_poolManagementData + 1) - 1))
     {
       do
       {
@@ -978,7 +981,7 @@ void PLANPOOL_DeleteNodeFromPool(PlanningNode *nodeToDelete, PlanningNode *plann
         iVar7 = iVar7 + 1;
       } while (iVar7 < (int)((uint) * (byte *)(iVar6 + 1) - 1));
     }
-    *(char *)(poolManagementData + 1) = *(char *)(poolManagementData + 1) + -1;
+    *(char *)(_poolManagementData + 1) = *(char *)(_poolManagementData + 1) + -1;
   }
   return;
 }

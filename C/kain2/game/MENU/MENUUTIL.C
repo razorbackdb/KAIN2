@@ -1,13 +1,6 @@
 #include "THISDUST.H"
 #include "MENUUTIL.H"
 
-// menu_sound_entry_t @0x800CAD98, len = 0x00000008
-the_menu_sounds =
-	{
-		// menu_sound_t @0x800CAD98, len = 0x00000004
-		.sound = 0x0,
-		// int @0x800CAD9C, len = 0x00000004
-		.sfx = 0x5};
 // decompiled code
 // original method signature:
 // enum menu_ctrl_t /*$ra*/ menu_get_ctrl(void *gt /*$a0*/)
@@ -73,20 +66,24 @@ menu_ctrl_t menu_get_ctrl(void *gt)
 /* end block 1 */
 // End Line: 83
 
-void menu_print(int xpos, int ypos, char *text, int color)
+int get_volume(void *gt, sfx_t sfx)
 
 {
-	FONT_SetCursor((short)xpos, (short)ypos);
-	if (color != 0)
+	int in_v0;
+	char *in_a2;
+	int in_a3;
+
+	FONT_SetCursor((short)gt, (short)sfx);
+	if (in_a3 != 0)
 	{
-		FONT_SetColorIndex(color);
+		FONT_SetColorIndex(in_a3);
 	}
-	FONT_Print2(text);
-	if (color != 0)
+	FONT_Print2(in_a2);
+	if (in_a3 != 0)
 	{
 		FONT_SetColorIndex(0);
 	}
-	return;
+	return in_v0;
 }
 
 // decompiled code
@@ -128,6 +125,6 @@ int menu_text_width(char *text)
 void menu_sound(menu_sound_t sound)
 
 {
-	SndPlay((&the_menu_sounds)[sound].sfx);
+	SndPlay(*(uint *)(&SHORT_800cad9c + sound * 4));
 	return;
 }

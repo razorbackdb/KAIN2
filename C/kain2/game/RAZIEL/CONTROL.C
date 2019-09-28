@@ -1,35 +1,6 @@
 #include "THISDUST.H"
 #include "CONTROL.H"
 
-// __Force * @0x800D51D4, len = 0x00000004
-ExternalForces = null;
-// MATRIX @0x800D51E4, len = 0x00000020
-TempMat =
-    {
-        // short[3][3] @0x800D51E4, len = 0x00000012
-        .m =
-            {
-                // short[3] @0x800D51E4, len = 0x00000006
-                {
-                    null,
-                    null,
-                    null},
-                // short[3] @0x800D51EA, len = 0x00000006
-                {
-                    null,
-                    null,
-                    null},
-                // short[3] @0x800D51F0, len = 0x00000006
-                {
-                    null,
-                    null,
-                    null}},
-        // long[3] @0x800D51F8, len = 0x0000000C
-        .t =
-            {
-                null,
-                null,
-                null}};
 // decompiled code
 // original method signature:
 // void /*$ra*/ SetPhysics(struct _Instance *instance /*$s0*/, short gravity /*$a1*/, long x /*$s1*/, long y /*$s2*/, long z /*stack 16*/)
@@ -39,10 +10,12 @@ TempMat =
 /* end block 1 */
 // End Line: 55
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void SetPhysics(_Instance *instance, short gravity, long x, long y, long z)
 
 {
-  SetExternalForce(ExternalForces, 0, 0, gravity, 0, 0x1000);
+  SetExternalForce(_ExternalForces, 0, 0, gravity, 0, 0x1000);
   instance->xVel = x;
   instance->yVel = y;
   instance->zVel = z;
@@ -67,6 +40,8 @@ void SetPhysics(_Instance *instance, short gravity, long x, long y, long z)
 /* end block 2 */
 // End Line: 76
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void ResetPhysics(_Instance *instance, short gravity)
 
 {
@@ -75,11 +50,11 @@ void ResetPhysics(_Instance *instance, short gravity)
 
   iVar2 = 1;
   iVar1 = 0x14;
-  SetExternalForce(ExternalForces, 0, 0, gravity, 0, 0x1000);
+  SetExternalForce(_ExternalForces, 0, 0, gravity, 0, 0x1000);
   do
   {
     iVar2 = iVar2 + 1;
-    SetExternalForce((__Force *)((int)&ExternalForces->Type + iVar1), 0, 0, 0, 0, 0);
+    SetExternalForce((__Force *)((int)&_ExternalForces->Type + iVar1), 0, 0, 0, 0, 0);
     iVar1 = iVar1 + 0x14;
   } while (iVar2 < 4);
   instance->xVel = 0;
@@ -99,6 +74,8 @@ void ResetPhysics(_Instance *instance, short gravity)
 // Start line: 134
 /* end block 1 */
 // End Line: 135
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void SetDampingPhysics(_Instance *instance, int damping)
 
@@ -124,7 +101,7 @@ void SetDampingPhysics(_Instance *instance, int damping)
     damping = damping + 0xfff;
   }
   instance->zAccl = -(damping >> 0xc);
-  SetExternalForce(ExternalForces, *(short *)&instance->xAccl, *(short *)&instance->yAccl,
+  SetExternalForce(_ExternalForces, *(short *)&instance->xAccl, *(short *)&instance->yAccl,
                    *(short *)&instance->zAccl, 0, 0x1000);
   return;
 }
@@ -160,7 +137,7 @@ void SetDampingPhysics(_Instance *instance, int damping)
 /* end block 3 */
 // End Line: 164
 
-void SetImpulsePhysics(_Instance *instance, __Player *player)
+void SetImpulsePhysics(int param_1, int param_2)
 
 {
   int iVar1;
@@ -168,24 +145,25 @@ void SetImpulsePhysics(_Instance *instance, __Player *player)
   int iVar3;
   int iVar4;
 
-  if ((player->Mode & 0x40000U) == 0)
+  if ((*(uint *)(param_2 + 0x360) & 0x40000) == 0)
   {
-    iVar4 = (int)(player->iVelocity).x;
-    iVar2 = (int)(player->iVelocity).y;
-    iVar1 = (int)(player->iVelocity).z;
+    iVar4 = (int)*(short *)(param_2 + 0x36c);
+    iVar2 = (int)*(short *)(param_2 + 0x36e);
+    iVar1 = (int)*(short *)(param_2 + 0x370);
     iVar3 = iVar4 * iVar4 + iVar2 * iVar2 + iVar1 * iVar1;
-    iVar1 = -(int)(instance->offset).x * iVar4 + -(int)(instance->offset).y * iVar2 +
-            -(int)(instance->offset).z * iVar1;
+    iVar1 = -(int)*(short *)(param_1 + 0xe0) * iVar4 + -(int)*(short *)(param_1 + 0xe2) * iVar2 +
+            -(int)*(short *)(param_1 + 0xe4) * iVar1;
     if (iVar3 != 0)
     {
-      (instance->position).x =
-          (instance->position).x + (instance->offset).x + (short)((iVar1 * iVar4) / iVar3);
-      (instance->position).y =
-          (instance->position).y +
-          (instance->offset).y + (short)((iVar1 * (int)(player->iVelocity).y) / iVar3);
-      (instance->position).z =
-          (instance->position).z +
-          (instance->offset).z + (short)((iVar1 * (int)(player->iVelocity).z) / iVar3);
+      *(short *)(param_1 + 0x5c) =
+          *(short *)(param_1 + 0x5c) +
+          *(short *)(param_1 + 0xe0) + (short)((iVar1 * iVar4) / iVar3);
+      *(short *)(param_1 + 0x5e) =
+          *(short *)(param_1 + 0x5e) +
+          *(short *)(param_1 + 0xe2) + (short)((iVar1 * *(short *)(param_2 + 0x36e)) / iVar3);
+      *(short *)(param_1 + 0x60) =
+          *(short *)(param_1 + 0x60) +
+          *(short *)(param_1 + 0xe4) + (short)((iVar1 * *(short *)(param_2 + 0x370)) / iVar3);
     }
   }
   return;
@@ -200,10 +178,10 @@ void SetImpulsePhysics(_Instance *instance, __Player *player)
 /* end block 1 */
 // End Line: 258
 
-void SetDropPhysics(_Instance *instance, __Player *player)
+void SetExternalForce(__Force *In, short x, short y, short z, int Space, int Friction)
 
 {
-  SetExternalForce(ExternalForces, 0, 4, -0x10, 0, 0x1000);
+  SetExternalForce(DAT_800d6cb8, 0, 4, -0x10, 0, 0x1000);
   return;
 }
 
@@ -235,6 +213,8 @@ void SetDropPhysics(_Instance *instance, __Player *player)
 /* end block 4 */
 // End Line: 306
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void InitExternalForces(__Force *Forces, int MaxForces)
 
 {
@@ -251,10 +231,10 @@ void InitExternalForces(__Force *Forces, int MaxForces)
       (p_Var1->LinearForce).y = 0;
       (p_Var1->LinearForce).z = 0;
       MaxForces = MaxForces + -1;
-      p_Var1 = (__Force *)&p_Var1[-1].Friction;
+      p_Var1 = p_Var1 + -1;
     } while (MaxForces != 0);
   }
-  ExternalForces = Forces;
+  _ExternalForces = Forces;
   return;
 }
 
@@ -348,27 +328,31 @@ void SetExternalTransitionForce(__Force *in, _Instance *instance, int time, int 
 /* end block 3 */
 // End Line: 404
 
+/* WARNING: Type propagation algorithm not settling */
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void ProcessPhysics(__Player *player, __CharacterState *In, int CurrentSection, int Mode)
 
 {
-  long segment;
-  long clamp;
-  _Instance *instance;
-  uint time;
+  _Instance *p_Var1;
+  __Player *player_00;
+  __Force *Forces;
+  _Vector *local_20;
 
-  instance = In->CharacterInstance;
-  if (instance->matrix != (MATRIX *)0x0)
+  player_00 = (__Player *)In->CharacterInstance;
+  if ((player_00->State).SectionList[0].Event.Queue[5].ID != 0)
   {
-    time = (instance->anim).section[0].speedAdjustment * gameTrackerX.timeMult >> 0xc;
+    Forces = (__Force *)((uint)((player_00->State).SectionList[1].Defer.Queue[1].Data * DAT_800d11ec) >> 0xc);
     if (Mode == 4)
     {
-      ApplyExternalLocalForces(player, In->CharacterInstance, ExternalForces, 4, (_Vector *)&instance->xAccl);
-      PhysicsMoveLocalZClamp(In->CharacterInstance, player->RotationSegment, time, 0);
+      ApplyExternalLocalForces(player, In->CharacterInstance, _ExternalForces, 4,
+                               (_Vector *)&(player_00->State).SectionList[1].Event.Queue[5].Data);
+      PhysicsMoveLocalZClamp(In->CharacterInstance, player->RotationSegment, (long)Forces, 0);
       PHYSICS_StopIfCloseToTarget(In->CharacterInstance, 0, 0, 0);
-      instance = In->CharacterInstance;
-      if (((instance->xAccl == 0) && (instance->yAccl == 0)) && (instance->zAccl == 0))
+      p_Var1 = In->CharacterInstance;
+      if (((p_Var1->xAccl == 0) && (p_Var1->yAccl == 0)) && (p_Var1->zAccl == 0))
       {
-        SetExternalForce(ExternalForces, 0, 0, 0, 0, 0);
+        SetExternalForce(_ExternalForces, 0, 0, 0, 0, 0);
       }
     }
     else
@@ -377,31 +361,29 @@ void ProcessPhysics(__Player *player, __CharacterState *In, int CurrentSection, 
       {
         if (Mode == 0)
         {
-          ApplyExternalLocalForces(player, In->CharacterInstance, ExternalForces, 4, (_Vector *)&instance->xAccl);
-          PhysicsMoveLocalZClamp(In->CharacterInstance, player->RotationSegment, time, 0);
+          ApplyExternalLocalForces(player, In->CharacterInstance, _ExternalForces, 4,
+                                   (_Vector *)&(player_00->State).SectionList[1].Event.Queue[5].Data);
+          PhysicsMoveLocalZClamp(In->CharacterInstance, player->RotationSegment, (long)Forces, 0);
         }
       }
       else
       {
         if (Mode == 5)
         {
-          segment = player->RotationSegment;
-          clamp = 0;
+          ApplyExternalLocalForces(player_00, (_Instance *)player->RotationSegment, Forces, 0, local_20);
+          return;
         }
-        else
+        if (Mode == 6)
         {
-          if (Mode != 6)
+          PhysicsMoveLocalZClamp((_Instance *)player_00, player->RotationSegment, (long)Forces, 1);
+          PHYSICS_StopIfCloseToTarget((_Instance *)player_00, 0, 0, (int)player->swimTargetSpeed);
+          if ((((player_00->State).SectionList[1].Event.Queue[5].Data == 0) &&
+               ((player_00->State).SectionList[1].Event.Queue[6].ID == 0)) &&
+              ((player_00->State).SectionList[1].Event.Queue[6].Data == 0))
           {
-            return;
+            /* WARNING: Subroutine does not return */
+            INSTANCE_Post((_Instance *)player_00, (int)&DAT_00100011, (int)player->swimTargetSpeed);
           }
-          segment = player->RotationSegment;
-          clamp = 1;
-        }
-        PhysicsMoveLocalZClamp(instance, segment, time, clamp);
-        PHYSICS_StopIfCloseToTarget(instance, 0, 0, (int)player->swimTargetSpeed);
-        if (((instance->xAccl == 0) && (instance->yAccl == 0)) && (instance->zAccl == 0))
-        {
-          INSTANCE_Post(instance, (int)&DAT_00100011, (int)player->swimTargetSpeed);
         }
       }
     }

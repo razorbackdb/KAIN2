@@ -1,41 +1,6 @@
 #include "THISDUST.H"
 #include "DRAW.H"
 
-// UVTYPE * @0x800CE1B8, len = 0x00000004
-face_uv0 = &DAT_1f800058;
-// UVTYPE * @0x800CE1C4, len = 0x00000004
-face_uv01 = &DAT_1f800064;
-// UVTYPE * @0x800CE1BC, len = 0x00000004
-face_uv1 = &DAT_1f80005c;
-// UVTYPE * @0x800CE1C8, len = 0x00000004
-face_uv12 = &DAT_1f800068;
-// UVTYPE * @0x800CE1C0, len = 0x00000004
-face_uv2 = &DAT_1f800060;
-// UVTYPE * @0x800CE1CC, len = 0x00000004
-face_uv20 = &DAT_1f80006c;
-// SVECTOR * @0x800CE1A0, len = 0x00000004
-face_v0 = &DAT_1f800028;
-// SVECTOR * @0x800CE1AC, len = 0x00000004
-face_v01 = &DAT_1f800040;
-// SVECTOR * @0x800CE1A4, len = 0x00000004
-face_v1 = &DAT_1f800030;
-// SVECTOR * @0x800CE1B0, len = 0x00000004
-face_v12 = &DAT_1f800048;
-// SVECTOR * @0x800CE1A8, len = 0x00000004
-face_v2 = &DAT_1f800038;
-// SVECTOR * @0x800CE1B4, len = 0x00000004
-face_v20 = &DAT_1f800050;
-// SVECTOR @0x800D038C, len = 0x00000008
-shadow_vertices =
-    {
-        // short @0x800D038C, len = 0x00000002
-        .vx = null,
-        // short @0x800D038E, len = 0x00000002
-        .vy = null,
-        // short @0x800D0390, len = 0x00000002
-        .vz = null,
-        // short @0x800D0392, len = 0x00000002
-        .pad = null};
 // decompiled code
 // original method signature:
 // void /*$ra*/ fDRAW_SPLIT_INTPL_XYZ(struct _SVector *newVertex /*$a0*/, struct _SVector *pvb /*$a1*/, struct _SVector *pvc /*$a2*/)
@@ -97,48 +62,14 @@ void fDRAW_SPLIT_INTPL_XYZ(_SVector *newVertex, _SVector *pvb, _SVector *pvc)
 /* end block 3 */
 // End Line: 910
 
+/* WARNING: Removing unreachable block (ram,0x8002a664) */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void DRAW_InitShadow(void)
 
 {
-  int iVar1;
-  undefined *puVar2;
-  SVECTOR *pSVar3;
-  undefined *puVar4;
-  int iVar5;
-
-  puVar4 = (undefined *)0x0;
-  iVar5 = 0;
-  pSVar3 = &shadow_vertices;
-  do
-  {
-    puVar2 = puVar4;
-    if ((int)puVar4 < 0)
-    {
-      puVar2 = puVar4 + 0xfff;
-    }
-    iVar1 = rcos((int)puVar2 >> 0xc);
-    if (iVar1 < 0)
-    {
-      iVar1 = iVar1 + 0x1f;
-    }
-    pSVar3->vx = (short)(iVar1 >> 5);
-    iVar1 = rsin((int)puVar2 >> 0xc);
-    if (iVar1 < 0)
-    {
-      iVar1 = iVar1 + 0x1f;
-    }
-    puVar4 = &UNK_00199999 + (int)puVar4;
-    pSVar3->vy = (short)(iVar1 >> 5);
-    pSVar3->vz = 0;
-    iVar5 = iVar5 + 1;
-    pSVar3 = pSVar3 + 1;
-  } while (iVar5 < 10);
-  SVECTOR_800d03dc.vx = shadow_vertices.vx;
-  SVECTOR_800d03dc.vy = shadow_vertices.vy;
-  SVECTOR_800d03dc.vz = shadow_vertices.vz;
-  return;
+  /* WARNING: Subroutine does not return */
+  rcos(0);
 }
 
 // decompiled code
@@ -165,88 +96,87 @@ void DRAW_InitShadow(void)
 /* end block 2 */
 // End Line: 984
 
-ulong *DRAW_DrawShadow(_PrimPool *primPool, _Model *model, ulong **ot, long fadeValue)
+uint *DRAW_DrawShadow(uint *param_1, undefined4 param_2, int param_3, int param_4)
 
 {
   uint uVar1;
-  int iVar2;
-  long lVar3;
-  ulong uVar4;
   undefined4 in_zero;
   undefined4 in_at;
-  uint uVar5;
-  _PrimPool *p_Var6;
-  ulong *puVar7;
-  ulong *puVar8;
-  int iVar9;
-  SVECTOR *pSVar10;
+  uint uVar2;
+  int iVar3;
+  uint *puVar4;
+  uint *puVar5;
+  uint *puVar6;
+  int iVar7;
+  undefined4 *puVar8;
   uint local_14;
-  long local_10;
+  int local_10;
 
-  puVar7 = primPool->nextPrim;
+  puVar5 = (uint *)param_1[1];
   local_14 = local_14 & 0xffff0000;
   setCopReg(2, in_zero, 0);
   setCopReg(2, in_at, local_14);
   copFunction(2, 0x180001);
-  iVar9 = getCopReg(2, 8);
-  local_10 = iVar9;
-  if ((fadeValue <= iVar9) || (local_10 = fadeValue, fadeValue < 0x1001))
+  iVar7 = getCopReg(2, 8);
+  local_10 = iVar7;
+  if ((param_4 <= iVar7) || (local_10 = param_4, param_4 < 0x1001))
   {
-    iVar9 = local_10;
+    iVar7 = local_10;
   }
-  local_10 = iVar9;
-  setCopReg(2, ot, 0x606060);
+  local_10 = iVar7;
+  setCopReg(2, param_3, 0x606060);
   setCopReg(2, 0x4000, local_10);
   copFunction(2, 0x780010);
   uVar1 = getCopReg(2, 0x16);
-  iVar9 = 0;
-  pSVar10 = &shadow_vertices;
-  puVar8 = puVar7 + 1;
-  uVar5 = uVar1 | 0x32000000;
-  p_Var6 = primPool;
+  iVar7 = 0;
+  puVar8 = (undefined4 *)&gp0xffffa8d8;
+  puVar6 = puVar5 + 1;
+  uVar2 = uVar1 | 0x32000000;
+  puVar4 = param_1;
   do
   {
-    setCopReg(2, uVar5, *(undefined4 *)pSVar10);
-    setCopReg(2, iVar9 * 8, *(undefined4 *)&pSVar10->vz);
-    setCopReg(2, p_Var6, *(undefined4 *)(&SVECTOR_800d0394 + iVar9));
-    setCopReg(2, puVar7, *(undefined4 *)&(&SVECTOR_800d0394)[iVar9].vz);
+    iVar3 = iVar7 * 8;
+    setCopReg(2, uVar2, *puVar8);
+    setCopReg(2, iVar3, puVar8[1]);
+    setCopReg(2, puVar4, *(undefined4 *)(&gp0xffffa8e0 + iVar3));
+    setCopReg(2, puVar5, *(undefined4 *)(&gp0xffffa8e4 + iVar3));
     copFunction(2, 0x280030);
-    if (primPool->lastPrim + -0xc < puVar7)
+    if ((uint *)(param_1[2] - 0x30) < puVar5)
     {
-      return puVar7;
+      return puVar5;
     }
     copFunction(2, 0x1400006);
-    iVar2 = getCopReg(2, 0x18);
-    if (iVar2 < 0)
+    iVar3 = getCopReg(2, 0x18);
+    if (iVar3 < 0)
     {
       copFunction(2, 0x158002d);
-      iVar2 = getCopReg(2, 7);
-      p_Var6 = (_PrimPool *)(puVar7 + 3);
-      if (iVar2 - 0x40U < 0xbc0)
+      iVar3 = getCopReg(2, 7);
+      puVar4 = puVar5 + 3;
+      if (iVar3 - 0x40U < 0xbc0)
       {
-        lVar3 = getCopReg(2, 0xc);
-        p_Var6->numPrims = lVar3;
-        uVar4 = getCopReg(2, 0xd);
-        puVar7[5] = uVar4;
-        uVar4 = getCopReg(2, 0xe);
-        puVar7[7] = uVar4;
-        puVar8[3] = 0;
-        puVar8[5] = 0;
-        puVar8[1] = uVar1 | 0x32000000;
-        *puVar8 = 0xe1000640;
-        puVar8 = puVar8 + 8;
-        p_Var6 = (_PrimPool *)(ot + iVar2);
-        *puVar7 = p_Var6->numPrims & 0xffffffU | 0x7000000;
-        p_Var6->numPrims = (uint)puVar7 & 0xffffff;
-        puVar7 = puVar7 + 8;
-        primPool->numPrims = primPool->numPrims + 1;
+        uVar2 = getCopReg(2, 0xc);
+        *puVar4 = uVar2;
+        uVar2 = getCopReg(2, 0xd);
+        puVar5[5] = uVar2;
+        uVar2 = getCopReg(2, 0xe);
+        puVar5[7] = uVar2;
+        puVar6[3] = 0;
+        puVar6[5] = 0;
+        puVar6[1] = uVar1 | 0x32000000;
+        *puVar6 = 0xe1000640;
+        puVar6 = puVar6 + 8;
+        puVar4 = (uint *)(iVar3 * 4 + param_3);
+        *puVar5 = *puVar4 & 0xffffff | 0x7000000;
+        *puVar4 = (uint)puVar5 & 0xffffff;
+        puVar5 = puVar5 + 8;
+        *param_1 = *param_1 + 1;
       }
     }
-    iVar9 = iVar9 + 1;
-    uVar5 = (uint)(iVar9 < 10);
-    pSVar10 = pSVar10 + 1;
-  } while (iVar9 < 10);
-  return puVar7;
+    iVar7 = iVar7 + 1;
+    uVar2 = (uint)(iVar7 < 10);
+    puVar8 = puVar8 + 2;
+  } while (iVar7 < 10);
+  return puVar5;
 }
 
 // decompiled code
@@ -374,18 +304,18 @@ void DRAW_DrawButton(_ButtonTexture *button, short x, short y, ulong **ot)
   ushort uVar2;
   short sVar3;
   char cVar4;
-  _PrimPool *p_Var5;
+  int *piVar5;
   short sVar6;
   uint uVar7;
   short sVar8;
   char cVar9;
   int iVar10;
   char cVar11;
-  ulong *puVar12;
+  uint *puVar12;
 
-  p_Var5 = gameTrackerX.primPool;
-  puVar12 = (gameTrackerX.primPool)->nextPrim;
-  if (puVar12 <= (gameTrackerX.primPool)->lastPrim + -0xc)
+  piVar5 = DAT_800d0fec;
+  puVar12 = (uint *)DAT_800d0fec[1];
+  if (puVar12 <= (uint *)(DAT_800d0fec[2] - 0x30U))
   {
     uVar7 = button->xshift;
     sVar1 = button->textureH;
@@ -420,8 +350,8 @@ void DRAW_DrawButton(_ButtonTexture *button, short x, short y, ulong **ot)
     *(short *)((int)puVar12 + 0xe) = sVar3;
     *puVar12 = (uint)*ot & 0xffffff | 0x9000000;
     *ot = (ulong *)((uint)puVar12 & 0xffffff);
-    p_Var5->nextPrim = puVar12 + 10;
-    p_Var5->numPrims = p_Var5->numPrims + 1;
+    *(uint **)(piVar5 + 1) = puVar12 + 10;
+    *piVar5 = *piVar5 + 1;
   }
   return;
 }
@@ -447,58 +377,55 @@ void DRAW_DrawButton(_ButtonTexture *button, short x, short y, ulong **ot)
 /* end block 2 */
 // End Line: 4473
 
-void DRAW_LoadButton(long *addr, _ButtonTexture *button)
+void DRAW_LoadButton(int param_1, ushort *param_2)
 
 {
   bool bVar1;
   _BlockVramEntry *p_Var2;
   int iVar3;
-  long *plVar4;
-  short sVar5;
-  long *plVar6;
-  ushort local_20;
-  ushort local_1e;
-  short local_1c;
-  ushort local_1a;
+  ushort uVar4;
+  int iVar5;
+  ushort uStack32;
+  ushort uStack30;
+  ushort uStack28;
+  ushort uStack26;
 
-  plVar4 = addr + 2;
-  plVar6 = (long *)0x0;
-  sVar5 = 0;
-  button->xshift = 0;
-  bVar1 = addr[1] == 8;
+  iVar3 = param_1 + 8;
+  iVar5 = 0;
+  uVar4 = 0;
+  *(undefined4 *)(param_2 + 6) = 0;
+  bVar1 = *(int *)(param_1 + 4) == 8;
   if (bVar1)
   {
-    button->xshift = 2;
-    sVar5 = 0x10;
-    plVar6 = addr + 5;
-    plVar4 = addr + 0xd;
+    *(undefined4 *)(param_2 + 6) = 2;
+    uVar4 = 0x10;
+    iVar5 = param_1 + 0x14;
+    iVar3 = param_1 + 0x34;
   }
-  button->textureW = *(short *)(plVar4 + 2);
-  button->textureH = *(short *)((int)plVar4 + 10);
-  local_1c = sVar5;
-  if (sVar5 < button->textureW)
+  param_2[2] = *(ushort *)(iVar3 + 8);
+  param_2[3] = *(ushort *)(iVar3 + 10);
+  uStack28 = uVar4;
+  if ((short)uVar4 < (short)param_2[2])
   {
-    local_1c = button->textureW;
+    uStack28 = param_2[2];
   }
-  iVar3 = (uint)(ushort)button->textureH + (uint)bVar1;
-  local_1a = (ushort)iVar3;
-  p_Var2 = VRAM_CheckVramSlot((short *)&local_20, (short *)&local_1e, local_1c,
-                              (short)((uint)(iVar3 * 0x10000) >> 0x10), 4, 0);
-  button->vramBlock = p_Var2;
-  button->tpage =
-      (ushort)((2 - (uint) * (ushort *)&button->xshift & 3) << 7) | (short)(local_1e & 0x100) >> 4 |
-      (ushort)(((uint)local_20 & 0x3ff) >> 6) | (ushort)(((uint)local_1e & 0x200) << 2);
-  *(_ButtonTexture **)&button->vramBlock->udata = button;
-  local_1c = button->textureW;
-  local_1a = button->textureH;
-  LoadImage((short *)&local_20, plVar4 + 3);
-  if (plVar6 != (long *)0x0)
+  uStack26 = (ushort)((uint)param_2[3] + (uint)bVar1);
+  p_Var2 = VRAM_CheckVramSlot((short *)&uStack32, (short *)&uStack30, uStack28,
+                              (short)(((uint)param_2[3] + (uint)bVar1) * 0x10000 >> 0x10), 4, 0);
+  *(_BlockVramEntry **)(param_2 + 4) = p_Var2;
+  *param_2 = (ushort)((2 - (uint)param_2[6] & 3) << 7) | (short)(uStack30 & 0x100) >> 4 |
+             (ushort)(((uint)uStack32 & 0x3ff) >> 6) | (ushort)(((uint)uStack30 & 0x200) << 2);
+  *(ushort **)(*(int *)(param_2 + 4) + 0x18) = param_2;
+  uStack28 = param_2[2];
+  uStack26 = param_2[3];
+  LoadImage((short *)&uStack32, iVar3 + 0xc);
+  if (iVar5 != 0)
   {
-    local_1a = (ushort)bVar1;
-    local_1e = local_1e + button->textureH;
-    local_1c = sVar5;
-    LoadImage((short *)&local_20, plVar6);
-    button->clut = local_1e << 6 | local_20 >> 4 & 0x3f;
+    uStack26 = (ushort)bVar1;
+    uStack30 = uStack30 + param_2[3];
+    uStack28 = uVar4;
+    LoadImage((short *)&uStack32, iVar5);
+    param_2[1] = uStack30 << 6 | uStack32 >> 4 & 0x3f;
   }
   DrawSync(0);
   return;
@@ -620,37 +547,8 @@ void DRAW_RingLine(_PrimPool *primPool, ulong **ot, long color)
 void DRAW_RingPoint(_PrimPool *primPool, ulong **ot, long color, _SVector *vel, _SVector *acc)
 
 {
-  uint uVar1;
-  int iVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  _SVector local_18;
-
-  uVar1 = rand();
-  if (0x17 < (uVar1 & 0x3f))
-  {
-    iVar2 = rand();
-    vel->x = ((ushort)iVar2 & 0x1f) - 0xf;
-    iVar2 = rand();
-    vel->y = ((ushort)iVar2 & 0x1f) - 0xf;
-    iVar2 = rand();
-    vel->z = (ushort)iVar2 & 0xf;
-    uVar3 = getCopReg(2, 0x4800);
-    uVar4 = getCopReg(2, 0x5000);
-    uVar5 = getCopReg(2, 0x5800);
-    local_18.x = (short)uVar3;
-    local_18.y = (short)uVar4;
-    local_18.z = (short)uVar5;
-    iVar2 = rand();
-    local_18.x = local_18.x + -1 + ((ushort)iVar2 & 3);
-    iVar2 = rand();
-    local_18.y = local_18.y + -1 + ((ushort)iVar2 & 3);
-    iVar2 = rand();
-    local_18.z = local_18.z + -1 + ((ushort)iVar2 & 3);
-    FX_Dot(&local_18, vel, acc, 0, color, 10, 7, 1);
-  }
-  return;
+  /* WARNING: Subroutine does not return */
+  rand();
 }
 
 // decompiled code
@@ -684,126 +582,9 @@ ulong *DRAW_DrawRingPoints(_Model *model, _VertexPool *vertexPool, MATRIX *pcTra
                            _PrimPool *primPool, ulong **ot, long color, int ring_type)
 
 {
-  undefined4 in_zero;
-  undefined4 in_at;
-  int iVar1;
-  uint uVar2;
-  int iVar3;
-  _SVector *pvc;
-  _SVector *pvb;
-  _SVector *pvb_00;
-  ushort *puVar4;
-  _MFace *p_Var5;
-  _MFace *p_Var6;
-  undefined8 uStack80;
-  _SVector local_48;
-  _SVector local_40;
-  _SVector local_38;
-  _SVector local_30;
-
-  p_Var5 = model->faceList;
-  p_Var6 = p_Var5 + model->numFaces;
-  if (ring_type == 2)
-  {
-    local_38.z = 0;
-    local_38.y = 0;
-    local_38.x = 0;
-    local_30.y = 0;
-    local_30.x = 0;
-    local_30.z = -1;
-  }
   SetRotMatrix((undefined4 *)pcTransform);
+  /* WARNING: Subroutine does not return */
   SetTransMatrix((int)pcTransform);
-  if (p_Var5 < p_Var6)
-  {
-    puVar4 = &(p_Var5->face).v2;
-    do
-    {
-      if ((*(byte *)((int)puVar4 + 3) & 0x10) != 0)
-        goto switchD_8002b0ec_caseD_6;
-      pvc = (_SVector *)(vertexPool->vertex + (uint)(p_Var5->face).v0);
-      pvb_00 = (_SVector *)(vertexPool->vertex + (uint)puVar4[-1]);
-      pvb = (_SVector *)(vertexPool->vertex + (uint)*puVar4);
-      uVar2 = (uint) ~(int)(&pvc->x)[2] >> 0x1f;
-      if (-1 < (&pvb_00->x)[2])
-      {
-        uVar2 = uVar2 | 2;
-      }
-      if (-1 < (&pvb->x)[2])
-      {
-        uVar2 = uVar2 | 4;
-      }
-      switch (uVar2)
-      {
-      case 1:
-        fDRAW_SPLIT_INTPL_XYZ(&local_48, pvc, pvb_00);
-        fDRAW_SPLIT_INTPL_XYZ(&local_40, pvc, pvb);
-        iVar1 = 1;
-        iVar3 = 2;
-        break;
-      case 2:
-        fDRAW_SPLIT_INTPL_XYZ((_SVector *)&uStack80, pvb_00, pvc);
-        fDRAW_SPLIT_INTPL_XYZ(&local_40, pvb_00, pvb);
-        iVar1 = 2;
-        iVar3 = 0;
-        pvc = pvb_00;
-        break;
-      case 3:
-        fDRAW_SPLIT_INTPL_XYZ(&local_48, pvb_00, pvb);
-        fDRAW_SPLIT_INTPL_XYZ((_SVector *)&uStack80, pvc, pvb);
-        iVar1 = 1;
-        iVar3 = 0;
-        break;
-      case 4:
-        fDRAW_SPLIT_INTPL_XYZ((_SVector *)&uStack80, pvb, pvc);
-        fDRAW_SPLIT_INTPL_XYZ(&local_48, pvb, pvb_00);
-        iVar1 = 0;
-        goto LAB_8002b1f0;
-      case 5:
-        fDRAW_SPLIT_INTPL_XYZ((_SVector *)&uStack80, pvc, pvb_00);
-        fDRAW_SPLIT_INTPL_XYZ(&local_40, pvb, pvb_00);
-        iVar1 = 0;
-        iVar3 = 2;
-        pvc = pvb;
-        break;
-      case 6:
-        fDRAW_SPLIT_INTPL_XYZ(&local_40, pvb, pvc);
-        fDRAW_SPLIT_INTPL_XYZ(&local_48, pvb_00, pvc);
-        iVar1 = 2;
-        pvb = pvb_00;
-      LAB_8002b1f0:
-        iVar3 = 1;
-        pvc = pvb;
-        break;
-      default:
-        goto switchD_8002b0ec_caseD_6;
-      }
-      if (ring_type == 2)
-      {
-        setCopReg(2, in_zero, *(undefined4 *)((_SVector *)&uStack80 + iVar1));
-        setCopReg(2, in_at, *(undefined4 *)((int)&uStack80 + iVar1 * 8 + 4));
-        copFunction(2, 0x480012);
-        DRAW_RingPoint(primPool, ot, color, &local_38, &local_30);
-      }
-      else
-      {
-        pvb_00 = (_SVector *)&uStack80 + iVar1;
-        pvb = (_SVector *)&uStack80 + iVar3;
-        setCopReg(2, in_zero, *(undefined4 *)pvb_00);
-        setCopReg(2, in_at, *(undefined4 *)((int)&uStack80 + iVar1 * 8 + 4));
-        setCopReg(2, pvb, *(undefined4 *)pvb);
-        setCopReg(2, pvb_00, *(undefined4 *)((int)&uStack80 + iVar3 * 8 + 4));
-        setCopReg(2, iVar3, *(undefined4 *)pvb_00);
-        setCopReg(2, pvc, *(undefined4 *)((int)&uStack80 + iVar1 * 8 + 4));
-        copFunction(2, 0x280030);
-        DRAW_RingLine(primPool, ot, color);
-      }
-    switchD_8002b0ec_caseD_6:
-      puVar4 = puVar4 + 6;
-      p_Var5 = p_Var5 + 1;
-    } while (p_Var5 < p_Var6);
-  }
-  return primPool->nextPrim;
 }
 
 // decompiled code
@@ -1128,99 +909,15 @@ void DRAW_GlowQuad(_PrimPool *primPool, ulong **ot, long otz, long color, _Vecto
 /* end block 2 */
 // End Line: 5210
 
-/* WARNING: Restarted to delay deadcode elimination for space: stack */
-
 void DRAW_CreateAGlowingCircle(_Vector *f1, long z, _PrimPool *primPool, ulong **ot, long otz, long color, long w, long h,
                                long angle)
 
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int local_d8;
-  int local_d4;
-  int local_d0;
-  int local_c8;
-  int local_c4;
-  int local_c0;
-  int local_b8;
-  int local_b4;
-  int local_b0;
-  _Vector local_a8;
-  _Vector local_9c;
-  _Vector local_90;
-  _Vector local_84;
-  _Vector local_78;
-  _Vector local_6c;
-  _Vector local_60;
-  _Vector local_54;
-  _Vector local_48;
-  _Vector *local_34;
-  int *local_30;
-
   f1->z = 0;
   if ((0 < z) && (otz < 0xc00))
   {
-    local_d8 = 0;
-    local_d0 = 0;
-    local_d4 = -((h * 0x140) / z);
-    iVar1 = rcos(angle);
-    iVar2 = rsin(angle);
-    iVar1 = iVar1 * local_d8;
-    iVar2 = iVar2 * local_d4;
-    iVar3 = rsin(angle);
-    iVar4 = rcos(angle);
-    iVar5 = -iVar3 * local_d8;
-    iVar3 = -((w * 0x140) / z);
-    local_d8 = ((iVar1 + iVar2 >> 0xc) * 0x200) / 0xf0;
-    local_d4 = iVar5 + iVar4 * local_d4 >> 0xc;
-    iVar1 = rcos(angle);
-    rsin(angle);
-    iVar2 = rsin(angle);
+    /* WARNING: Subroutine does not return */
     rcos(angle);
-    local_30 = &local_d8;
-    local_6c.x = ((iVar1 * iVar3 >> 0xc) * 0x200) / 0xf0;
-    local_6c.y = -iVar2 * iVar3 >> 0xc;
-    local_c0 = (f1->z + local_d0) - f1->z;
-    local_c8 = ((f1->x + local_d8 + local_6c.x) - f1->x) * 0xc00 >> 0xc;
-    local_c4 = ((f1->y + local_d4 + local_6c.y) - f1->y) * 0xc00 >> 0xc;
-    local_b0 = (f1->z + local_d0) - f1->z;
-    local_b8 = (((f1->x + local_d8) - local_6c.x) - f1->x) * 0xc00 >> 0xc;
-    local_34 = &local_90;
-    local_b4 = (((f1->y + local_d4) - local_6c.y) - f1->y) * 0xc00 >> 0xc;
-    local_a8.x = f1->x + local_c8;
-    local_a8.y = f1->y + local_c4;
-    local_9c.x = f1->x + local_d8;
-    local_9c.y = f1->y + local_d4;
-    local_90.x = f1->x + local_b8;
-    local_90.y = f1->y + local_b4;
-    local_84.x = f1->x + local_6c.x;
-    local_84.y = f1->y + local_6c.y;
-    local_78.x = f1->x;
-    local_78.y = f1->y;
-    local_6c.x = f1->x - local_6c.x;
-    local_6c.y = f1->y - local_6c.y;
-    local_60.x = f1->x - local_b8;
-    local_60.y = f1->y - local_b4;
-    local_54.x = f1->x - local_d8;
-    local_54.y = f1->y - local_d4;
-    local_48.x = f1->x - local_c8;
-    local_48.y = f1->y - local_c4;
-    local_a8.z = 0x1000;
-    local_9c.z = 0x1000;
-    local_90.z = 0x1000;
-    local_84.z = 0x1000;
-    local_78.z = 0;
-    local_6c.z = 0x1000;
-    local_60.z = 0x1000;
-    local_54.z = 0x1000;
-    local_48.z = 0x1000;
-    DRAW_GlowQuad(primPool, ot, otz, color, &local_84, &local_a8, &local_78, &local_9c);
-    DRAW_GlowQuad(primPool, ot, otz, color, &local_84, &local_78, &local_60, &local_54);
-    DRAW_GlowQuad(primPool, ot, otz, color, &local_9c, local_34, &local_78, &local_6c);
-    DRAW_GlowQuad(primPool, ot, otz, color, &local_54, &local_78, &local_48, &local_6c);
   }
   return;
 }
@@ -1269,8 +966,8 @@ ulong *DRAW_DrawGlowPoints2(_Instance *instance, long seg1, long seg2, _PrimPool
   int local_34;
   _Vector local_28;
 
-  lVar1 = PIPE3D_Segment2ScreenPt(instance, theCamera.core.wcTransform, seg1, &local_58);
-  lVar2 = PIPE3D_Segment2ScreenPt(instance, theCamera.core.wcTransform, seg2, &local_50);
+  lVar1 = PIPE3D_Segment2ScreenPt(instance, DAT_800cfef0, seg1, &local_58);
+  lVar2 = PIPE3D_Segment2ScreenPt(instance, DAT_800cfef0, seg2, &local_50);
   iVar5 = lVar2 + 0x14;
   iVar6 = lVar1 + 0x14;
   if (lVar1 + 0x14 < iVar5)
@@ -1288,12 +985,12 @@ ulong *DRAW_DrawGlowPoints2(_Instance *instance, long seg1, long seg2, _PrimPool
     iVar3 = MATH3D_veclen2(local_28.x, local_28.y);
     uVar4 = ratan2(local_28.y, -local_28.x);
     local_28.z = 0;
-    local_28.x = (int)(local_38 + local_48 + ((uint)(local_38 + local_48) >> 0x1f)) >> 1;
-    local_28.y = (int)(local_34 + local_44 + ((uint)(local_34 + local_44) >> 0x1f)) >> 1;
+    local_28.x = (local_38 + local_48) / 2;
+    local_28.y = (local_34 + local_44) / 2;
     if (iVar6 + 10 < 0xc00)
     {
-      DRAW_CreateAGlowingCircle(&local_28, ((int)(iVar6 + iVar5 + ((uint)(iVar6 + iVar5) >> 0x1f)) >> 1) << 2,
-                                primPool, ot, iVar6 + 10, color, iVar3 + height, height, uVar4 & 0xfff);
+      DRAW_CreateAGlowingCircle(&local_28, (iVar6 + iVar5) / 2 << 2, primPool, ot, iVar6 + 10, color, iVar3 + height,
+                                height, uVar4 & 0xfff);
     }
   }
   return primPool->nextPrim;
@@ -1331,8 +1028,8 @@ ulong *DRAW_DrawGlowPoint(_Instance *instance, long seg1, _PrimPool *primPool, u
   _Position local_30;
   _Vector local_28;
 
-  uVar1 = gameTrackerX.currentTime & 0x7ff;
-  lVar2 = PIPE3D_Segment2ScreenPt(instance, theCamera.core.wcTransform, seg1, &local_30);
+  uVar1 = DAT_800d11d8 & 0x7ff;
+  lVar2 = PIPE3D_Segment2ScreenPt(instance, DAT_800cfef0, seg1, &local_30);
   z = (lVar2 + 0x14) * 4;
   if (0 < z)
   {
@@ -1468,8 +1165,8 @@ int DRAW_DisplayTFace_zclipped_C(SVECTOR *vertex0, SVECTOR *vertex1, SVECTOR *ve
   undefined4 *puVar11;
   ulong uVar12;
   uint uVar13;
-  undefined4 *puVar14;
-  undefined4 uVar15;
+  undefined4 uVar14;
+  undefined4 *puVar15;
   short *psVar16;
   undefined4 uVar17;
   undefined4 uVar18;
@@ -1485,7 +1182,7 @@ int DRAW_DisplayTFace_zclipped_C(SVECTOR *vertex0, SVECTOR *vertex1, SVECTOR *ve
   int iVar27;
   int iVar28;
 
-  puVar14 = &DAT_1f800200;
+  puVar15 = &DAT_1f800200;
   setCopReg(2, in_zero, *(undefined4 *)vertex0);
   setCopReg(2, in_at, *(undefined4 *)&vertex0->vz);
   copFunction(2, 0x480012);
@@ -1524,8 +1221,8 @@ int DRAW_DisplayTFace_zclipped_C(SVECTOR *vertex0, SVECTOR *vertex1, SVECTOR *ve
   DAT_1f8002b0 = color2;
   pSVar3 = vertex0;
   pSVar10 = vertex2;
-  puVar11 = puVar14;
-  puVar23 = puVar14;
+  puVar11 = puVar15;
+  puVar23 = puVar15;
   do
   {
     iVar19 = iVar21 + 1;
@@ -1538,7 +1235,7 @@ int DRAW_DisplayTFace_zclipped_C(SVECTOR *vertex0, SVECTOR *vertex1, SVECTOR *ve
     if (uVar13 != 0)
     {
       pSVar3 = vertex1;
-      if (((iVar21 != 1) && (pSVar3 = vertex0, 1 < iVar21)) && (pSVar3 = vertex0, iVar21 == 2))
+      if (((iVar21 != 1) && (pSVar3 = vertex0, 1 < iVar21)) && (iVar21 == 2))
       {
         pSVar3 = vertex2;
       }
@@ -1692,7 +1389,7 @@ int DRAW_DisplayTFace_zclipped_C(SVECTOR *vertex0, SVECTOR *vertex1, SVECTOR *ve
             iVar24 = 0;
             iVar19 = 0;
           }
-          pSVar3 = (SVECTOR *)(int)*(short *)(puVar14 + 0x31);
+          pSVar3 = (SVECTOR *)(int)*(short *)(puVar15 + 0x31);
           uVar6 = SEXT24(*(short *)((int)&DAT_1f8002c4 + iVar19));
           pSVar4 = (SVECTOR *)((int)pSVar3 - uVar6);
           if ((int)pSVar4 < 0)
@@ -1706,7 +1403,7 @@ int DRAW_DisplayTFace_zclipped_C(SVECTOR *vertex0, SVECTOR *vertex1, SVECTOR *ve
             bVar1 = true;
             break;
           }
-          pSVar3 = (SVECTOR *)(int)*(short *)((int)puVar14 + 0xc6);
+          pSVar3 = (SVECTOR *)(int)*(short *)((int)puVar15 + 0xc6);
           uVar6 = SEXT24(*(short *)((int)&DAT_1f8002c4 + uVar22 + 2));
           pSVar4 = (SVECTOR *)((int)pSVar3 - uVar6);
           if ((int)pSVar4 < 0)
@@ -1716,7 +1413,7 @@ int DRAW_DisplayTFace_zclipped_C(SVECTOR *vertex0, SVECTOR *vertex1, SVECTOR *ve
           uVar22 = (uint)((int)pSVar4 < 0x200);
           if ((int)pSVar4 >= 0x200)
             goto LAB_8002c298;
-          puVar14 = puVar14 + 1;
+          puVar15 = puVar15 + 1;
           iVar19 = iVar21 + 1;
           uVar22 = (uint)(iVar19 < iVar9);
           iVar24 = iVar21 + 2;
@@ -1799,7 +1496,7 @@ int DRAW_DisplayTFace_zclipped_C(SVECTOR *vertex0, SVECTOR *vertex1, SVECTOR *ve
         goto LAB_8002c498;
       uVar12 = *(ulong *)&texture->r2;
       uVar20 = *(undefined4 *)&texture->x2;
-      uVar15 = *(undefined4 *)&texture->u2;
+      uVar14 = *(undefined4 *)&texture->u2;
       uVar7 = texture[1].tag;
       uVar17 = *(undefined4 *)&texture[1].r0;
       uVar18 = *(undefined4 *)&texture[1].x0;
@@ -1809,7 +1506,7 @@ int DRAW_DisplayTFace_zclipped_C(SVECTOR *vertex0, SVECTOR *vertex1, SVECTOR *ve
       *(undefined4 *)&texture->u2 = uVar18;
       texture[1].tag = uVar12;
       *(undefined4 *)&texture[1].r0 = uVar20;
-      *(undefined4 *)&texture[1].x0 = uVar15;
+      *(undefined4 *)&texture[1].x0 = uVar14;
       texture->tag = (uint)ot[iVar25] & 0xffffff | 0xc000000;
       ot[iVar25] = (ulong *)((uint)texture & 0xffffff);
       iVar9 = primPool->numPrims;
@@ -1888,8 +1585,8 @@ long *DRAW_Zclip_subdiv(POLY_GT3 *texture, ulong **ot, int ndiv)
   puVar7[4] = uVar1;
   uVar1 = getCopReg(2, 5);
   puVar7[5] = uVar1;
-  primPool = gameTrackerX.primPool;
-  *(POLY_GT3 **)&(gameTrackerX.primPool)->nextPrim = texture;
+  primPool = DAT_800d0fec;
+  *(POLY_GT3 **)&DAT_800d0fec->nextPrim = texture;
   puVar7[8] = puVar7[2];
   puVar7[7] = puVar7[1];
   puVar7[9] = puVar7[3];
@@ -1897,35 +1594,23 @@ long *DRAW_Zclip_subdiv(POLY_GT3 *texture, ulong **ot, int ndiv)
   puVar7[0xb] = puVar7[5];
   puVar7[6] = *puVar7;
   *(short *)(puVar7 + 0xc) =
-      (short)((int)((int)*(short *)(puVar7 + 6) + (int)*(short *)(puVar7 + 8) +
-                    ((uint)((int)*(short *)(puVar7 + 6) + (int)*(short *)(puVar7 + 8)) >> 0x1f)) >>
-              1);
-  uVar2 = (int)*(short *)((int)puVar7 + 0x1a) + (int)*(short *)((int)puVar7 + 0x22);
-  *(undefined2 *)((int)puVar7 + 0x32) = (short)((int)(uVar2 + (uVar2 >> 0x1f)) >> 1);
+      (short)(((int)*(short *)(puVar7 + 6) + (int)*(short *)(puVar7 + 8)) / 2);
+  *(undefined2 *)((int)puVar7 + 0x32) =
+      (short)(((int)*(short *)((int)puVar7 + 0x1a) + (int)*(short *)((int)puVar7 + 0x22)) / 2);
   *(short *)(puVar7 + 0xd) =
-      (short)((int)((int)*(short *)(puVar7 + 7) + (int)*(short *)(puVar7 + 9) +
-                    ((uint)((int)*(short *)(puVar7 + 7) + (int)*(short *)(puVar7 + 9)) >> 0x1f)) >>
-              1);
+      (short)(((int)*(short *)(puVar7 + 7) + (int)*(short *)(puVar7 + 9)) / 2);
   *(short *)(puVar7 + 0xe) =
-      (short)((int)((int)*(short *)(puVar7 + 8) + (int)*(short *)(puVar7 + 10) +
-                    ((uint)((int)*(short *)(puVar7 + 8) + (int)*(short *)(puVar7 + 10)) >> 0x1f)) >>
-              1);
-  uVar2 = (int)*(short *)((int)puVar7 + 0x22) + (int)*(short *)((int)puVar7 + 0x2a);
-  *(undefined2 *)((int)puVar7 + 0x3a) = (short)((int)(uVar2 + (uVar2 >> 0x1f)) >> 1);
+      (short)(((int)*(short *)(puVar7 + 8) + (int)*(short *)(puVar7 + 10)) / 2);
+  *(undefined2 *)((int)puVar7 + 0x3a) =
+      (short)(((int)*(short *)((int)puVar7 + 0x22) + (int)*(short *)((int)puVar7 + 0x2a)) / 2);
   *(short *)(puVar7 + 0xf) =
-      (short)((int)((int)*(short *)(puVar7 + 9) + (int)*(short *)(puVar7 + 0xb) +
-                    ((uint)((int)*(short *)(puVar7 + 9) + (int)*(short *)(puVar7 + 0xb)) >> 0x1f)) >>
-              1);
+      (short)(((int)*(short *)(puVar7 + 9) + (int)*(short *)(puVar7 + 0xb)) / 2);
   *(short *)(puVar7 + 0x10) =
-      (short)((int)((int)*(short *)(puVar7 + 10) + (int)*(short *)(puVar7 + 6) +
-                    ((uint)((int)*(short *)(puVar7 + 10) + (int)*(short *)(puVar7 + 6)) >> 0x1f)) >>
-              1);
-  uVar2 = (int)*(short *)((int)puVar7 + 0x2a) + (int)*(short *)((int)puVar7 + 0x1a);
-  *(undefined2 *)((int)puVar7 + 0x42) = (short)((int)(uVar2 + (uVar2 >> 0x1f)) >> 1);
+      (short)(((int)*(short *)(puVar7 + 10) + (int)*(short *)(puVar7 + 6)) / 2);
+  *(undefined2 *)((int)puVar7 + 0x42) =
+      (short)(((int)*(short *)((int)puVar7 + 0x2a) + (int)*(short *)((int)puVar7 + 0x1a)) / 2);
   *(short *)(puVar7 + 0x11) =
-      (short)((int)((int)*(short *)(puVar7 + 0xb) + (int)*(short *)(puVar7 + 7) +
-                    ((uint)((int)*(short *)(puVar7 + 0xb) + (int)*(short *)(puVar7 + 7)) >> 0x1f)) >>
-              1);
+      (short)(((int)*(short *)(puVar7 + 0xb) + (int)*(short *)(puVar7 + 7)) / 2);
   uv1_00 = (UVTYPE *)(puVar7 + 0x15);
   puVar7[0x12] = *(undefined4 *)&texture->u0;
   uv2 = (UVTYPE *)(puVar7 + 0x17);
@@ -2007,37 +1692,35 @@ long *DRAW_Zclip_subdiv(POLY_GT3 *texture, ulong **ot, int ndiv)
 /* end block 2 */
 // End Line: 7029
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
-
 void DRAW_LoadingMessage(void)
 
 {
-  ulong **ppuVar1;
+  undefined4 *puVar1;
   int len;
   char *text;
 
   do
   {
-    len = CheckVolatile(gameTrackerX.drawTimerReturn);
+    len = CheckVolatile(uGpffffb614);
   } while (len != 0);
   do
   {
-    len = CheckVolatile(gameTrackerX.reqDisp);
+    len = CheckVolatile(uGpffffb610);
   } while (len != 0);
   DrawSyncCallback(0);
   VSyncCallback(0);
-  ppuVar1 = gameTrackerX.drawOT;
-  PutDrawEnv((undefined4 *)(&draw + (gameTrackerX.drawPage ^ 1)));
+  puVar1 = puGpffffb6cc;
+  PutDrawEnv((undefined4 *)(&gp0xffffb3b8 + (uGpffffb528 ^ 1) * 0x5c));
   text = localstr_get(LOCALSTR_Hint52);
   FONT_FontPrintCentered(text, 0x96);
   text = localstr_get(LOCALSTR_Hint52);
   len = FONT_GetStringWidth(text);
   DisplayHintBox(len, 0x96);
   FONT_Flush();
-  DrawOTag(ppuVar1[0xbff]);
+  DrawOTag(puVar1[0xbff]);
   DrawSync(0);
-  ClearOTagR(ppuVar1, 0xc00);
-  PutDrawEnv((undefined4 *)(&draw + gameTrackerX.drawPage));
+  ClearOTagR(puVar1, 0xc00);
+  PutDrawEnv((undefined4 *)(&gp0xffffb3b8 + uGpffffb528 * 0x5c));
   VSyncCallback(VblTick);
   DrawSyncCallback(DrawCallback);
   return;

@@ -29,22 +29,19 @@
 void WCBEGG_Message(_Instance *instance, ulong message, ulong data)
 
 {
-  ulong uVar1;
-  void *pvVar2;
-
-  if (message == 0x800002)
-  {
-    if (instance->processFunc != WCBEGG_Process)
-    {
-      return;
-    }
-    pvVar2 = instance->extraData;
-    uVar1 = MON_GetTime(instance);
-    *(ulong *)((int)pvVar2 + 0x28) = uVar1;
-    G2EmulationInstanceSwitchAnimationAlpha(instance, 0, 1, 0, 0, 2, 0);
-  }
-  PhysicalObjectPost(instance, message, data);
-  return;
+	if (message == 0x800002)
+	{
+		if (instance->processFunc == WCBEGG_Process)
+		{
+			/* WARNING: Subroutine does not return */
+			MON_GetTime(instance);
+		}
+	}
+	else
+	{
+		PhysicalObjectPost(instance, message, data);
+	}
+	return;
 }
 
 // decompiled code
@@ -69,41 +66,8 @@ void WCBEGG_Message(_Instance *instance, ulong message, ulong data)
 int WCBEGG_ShouldIgniteEgg(_Instance *egg, _walbossAttributes *wa)
 
 {
-  _InstanceList *p_Var1;
-  ulong uVar2;
-  long lVar3;
-  int iVar4;
-  _Instance *Inst;
-
-  p_Var1 = gameTrackerX.instanceList;
-  uVar2 = INSTANCE_Query(egg, 3);
-  if ((uVar2 & 0x10000) == 0)
-  {
-    Inst = p_Var1->first;
-    while (Inst != (_Instance *)0x0)
-    {
-      uVar2 = INSTANCE_Query(Inst, 1);
-      if (((uVar2 & 0x20) != 0) &&
-          (lVar3 = MATH3D_LengthXYZ((int)(Inst->position).x - (int)(egg->position).x,
-                                    (int)(Inst->position).y - (int)(egg->position).y,
-                                    (int)(Inst->position).z - (int)(egg->position).z),
-           lVar3 < (int)wa->eggIgniteDist))
-      {
-        uVar2 = INSTANCE_Query(Inst, 3);
-        if ((uVar2 & 0x10000) != 0)
-        {
-          return 1;
-        }
-        iVar4 = strcmpi(Inst->object->name, s_walfire__800cf734);
-        if (iVar4 == 0)
-        {
-          return 1;
-        }
-      }
-      Inst = Inst->next;
-    }
-  }
-  return 0;
+	/* WARNING: Subroutine does not return */
+	INSTANCE_Query(egg, 3);
 }
 
 // decompiled code
@@ -133,62 +97,8 @@ int WCBEGG_ShouldIgniteEgg(_Instance *egg, _walbossAttributes *wa)
 void WCBEGG_Process(_Instance *instance, GameTracker *gameTracker)
 
 {
-  ulong uVar1;
-  Object *pOVar2;
-  code *pcVar3;
-  int iVar4;
-  _walbossAttributes *wa;
-  int iVar5;
-  void *pvVar6;
-
-  pvVar6 = instance->extraData;
-  uVar1 = MON_GetTime(instance);
-  iVar5 = uVar1 - gameTrackerX.lastLoopTime;
-  if ((instance->collideFunc == WCBEGG_Collide) &&
-      (instance->LinkParent == gameTrackerX.playerInstance))
-  {
-    instance->collideFunc = WCBEGG_ExplodeCollide;
-  }
-  pOVar2 = OBTABLE_FindObject(s_walboss__800cf740);
-  if (pOVar2 == (Object *)0x0)
-  {
-    INSTANCE_UnlinkFromParent(instance);
-    INSTANCE_KillInstance(instance);
-  }
-  else
-  {
-    wa = *(_walbossAttributes **)((int)pOVar2->data + 4);
-    iVar4 = *(int *)((int)pvVar6 + 0x28) + (int)wa->timeToEggThrob * 0x21;
-    if ((iVar5 < iVar4) && (iVar4 <= (int)uVar1))
-    {
-      G2EmulationInstanceSwitchAnimationAlpha(instance, 0, 2, 0, 0, 2, 0);
-    }
-    iVar4 = iVar4 + (int)wa->timeToEggExplode * 0x21;
-    if ((iVar5 < iVar4) && (iVar4 <= (int)uVar1))
-    {
-      uVar1 = INSTANCE_Query(instance, 3);
-      if ((uVar1 & 0x10000) == 0)
-      {
-        G2EmulationInstanceSwitchAnimationAlpha(instance, 0, 3, 0, 0, 1, 0);
-        pcVar3 = WCBEGG_SplitProcess;
-      }
-      else
-      {
-        G2EmulationInstanceSwitchAnimationAlpha(instance, 0, 4, 0, 0, 1, 0);
-        pcVar3 = WCBEGG_ExplodeProcess;
-      }
-      instance->processFunc = pcVar3;
-      uVar1 = MON_GetTime(instance);
-      *(ulong *)((int)pvVar6 + 0x28) = uVar1;
-    }
-    iVar5 = WCBEGG_ShouldIgniteEgg(instance, wa);
-    if (iVar5 != 0)
-    {
-      INSTANCE_Post(instance, 0x800029, 1);
-    }
-    ProcessPhysicalObject(instance, gameTracker);
-  }
-  return;
+	/* WARNING: Subroutine does not return */
+	MON_GetTime(instance);
 }
 
 // decompiled code
@@ -216,46 +126,8 @@ void WCBEGG_Process(_Instance *instance, GameTracker *gameTracker)
 void WCBEGG_ExplodeProcess(_Instance *instance, GameTracker *gameTracker)
 
 {
-  ulong uVar1;
-  Object *pOVar2;
-  code *pcVar3;
-  uint *puVar4;
-
-  puVar4 = (uint *)instance->extraData;
-  uVar1 = MON_GetTime(instance);
-  if ((instance->collideFunc == WCBEGG_Collide) &&
-      (instance->LinkParent == gameTrackerX.playerInstance))
-  {
-    instance->collideFunc = WCBEGG_ExplodeCollide;
-  }
-  pOVar2 = OBTABLE_FindObject(s_walboss__800cf740);
-  if (pOVar2 == (Object *)0x0)
-  {
-    INSTANCE_UnlinkFromParent(instance);
-    INSTANCE_KillInstance(instance);
-  }
-  else
-  {
-    if ((int)(puVar4[10] + 0x14a) <= (int)uVar1)
-    {
-      if (gameTrackerX.playerInstance == instance->LinkParent)
-      {
-        INSTANCE_Post(gameTrackerX.playerInstance, (int)&DAT_00040005,
-                      (int)*(short *)(*(int *)((int)pOVar2->data + 4) + 0x12) * 0x21);
-        INSTANCE_UnlinkFromParent(instance);
-        *puVar4 = *puVar4 & 0xffffbfff | 0x1001;
-        pcVar3 = WCBEGG_CommonPostProcess;
-      }
-      else
-      {
-        pcVar3 = WCBEGG_CommonPostProcess2;
-      }
-      instance->processFunc = pcVar3;
-      INSTANCE_Post(instance, 0x800029, 0);
-    }
-    ProcessPhysicalObject(instance, gameTracker);
-  }
-  return;
+	/* WARNING: Subroutine does not return */
+	MON_GetTime(instance);
 }
 
 // decompiled code
@@ -280,43 +152,11 @@ void WCBEGG_ExplodeProcess(_Instance *instance, GameTracker *gameTracker)
 /* end block 2 */
 // End Line: 611
 
-void WCBEGG_SplitProcess(_Instance *instance, GameTracker *gameTracker)
+void WCBEGG_ExplodeProcess(_Instance *instance, GameTracker *gameTracker)
 
 {
-  ulong uVar1;
-  Object *pOVar2;
-  code *pcVar3;
-  uint *puVar4;
-
-  puVar4 = (uint *)instance->extraData;
-  uVar1 = MON_GetTime(instance);
-  pOVar2 = OBTABLE_FindObject(s_walboss__800cf740);
-  if (pOVar2 == (Object *)0x0)
-  {
-    INSTANCE_UnlinkFromParent(instance);
-    INSTANCE_KillInstance(instance);
-  }
-  else
-  {
-    if ((int)(puVar4[10] + 0xc6) <= (int)uVar1)
-    {
-      if (gameTrackerX.playerInstance == instance->LinkParent)
-      {
-        INSTANCE_Post(gameTrackerX.playerInstance, (int)&DAT_00040005,
-                      (int)*(short *)(*(int *)((int)pOVar2->data + 4) + 0x12) * 0x21);
-        INSTANCE_UnlinkFromParent(instance);
-        *puVar4 = *puVar4 & 0xffffbfff | 0x1001;
-        pcVar3 = WCBEGG_CommonPostProcess;
-      }
-      else
-      {
-        pcVar3 = WCBEGG_CommonPostProcess2;
-      }
-      instance->processFunc = pcVar3;
-    }
-    ProcessPhysicalObject(instance, gameTracker);
-  }
-  return;
+	/* WARNING: Subroutine does not return */
+	MON_GetTime(instance);
 }
 
 // decompiled code
@@ -337,21 +177,14 @@ void WCBEGG_SplitProcess(_Instance *instance, GameTracker *gameTracker)
 /* end block 2 */
 // End Line: 703
 
-void WCBEGG_CommonPostProcess(_Instance *instance, GameTracker *gameTracker)
+void WCBEGG_CommonPostProcess(_Instance *param_1)
 
 {
-  int Data;
-  ulong uVar1;
-  void *pvVar2;
+	int Data;
 
-  pvVar2 = instance->extraData;
-  Data = SetActionPlayHostAnimationData(gameTrackerX.playerInstance, instance, 6, 0, 0, 2);
-  INSTANCE_Post(gameTrackerX.playerInstance, (int)&DAT_00040003, Data);
-  instance->processFunc = WCBEGG_CommonPostProcess2;
-  uVar1 = MON_GetTime(instance);
-  *(ulong *)((int)pvVar2 + 0x28) = uVar1;
-  ProcessPhysicalObject(instance, gameTracker);
-  return;
+	Data = SetActionPlayHostAnimationData(p_Gpffffb524, param_1, 6, 0, 0, 2);
+	/* WARNING: Subroutine does not return */
+	INSTANCE_Post(p_Gpffffb524, (int)&DAT_00040003, Data);
 }
 
 // decompiled code
@@ -373,24 +206,11 @@ void WCBEGG_CommonPostProcess(_Instance *instance, GameTracker *gameTracker)
 /* end block 2 */
 // End Line: 733
 
-void WCBEGG_CommonPostProcess2(_Instance *instance, GameTracker *gameTracker)
+void WCBEGG_CommonPostProcess2(_Instance *param_1)
 
 {
-  ulong uVar1;
-  void *pvVar2;
-
-  pvVar2 = instance->extraData;
-  uVar1 = MON_GetTime(instance);
-  if ((int)uVar1 < *(int *)((int)pvVar2 + 0x28) + 0xf78)
-  {
-    ProcessPhysicalObject(instance, gameTracker);
-  }
-  else
-  {
-    INSTANCE_UnlinkFromParent(instance);
-    INSTANCE_KillInstance(instance);
-  }
-  return;
+	/* WARNING: Subroutine does not return */
+	MON_GetTime(param_1);
 }
 
 // decompiled code
@@ -417,53 +237,24 @@ void WCBEGG_CommonPostProcess2(_Instance *instance, GameTracker *gameTracker)
 void WCBEGG_ExplodeCollide(_Instance *instance, GameTracker *gameTracker)
 
 {
-  byte bVar1;
-  undefined *puVar2;
-  code *pcVar3;
-  ulong uVar4;
-  void *pvVar5;
-  _Instance *Inst;
-  uint *puVar6;
+	void *pvVar1;
+	void *pvVar2;
 
-  pvVar5 = instance->collideInfo;
-  puVar6 = (uint *)instance->extraData;
-  bVar1 = *(byte *)((int)pvVar5 + 7);
-  if ((((bVar1 == 1) && (*(char *)(*(int *)((int)pvVar5 + 0xc) + 4) == '\b')) &&
-       (Inst = *(_Instance **)((int)pvVar5 + 0x14), Inst != (_Instance *)0x0)) &&
-      (puVar2 = (undefined *)INSTANCE_Query(Inst, 1), puVar2 == &UNK_00010102))
-  {
-    if (instance->LinkParent == (_Instance *)0x0)
-    {
-      if ((*puVar6 & 0x10000) == 0)
-      {
-        G2EmulationInstanceSwitchAnimationAlpha(instance, 0, 3, 0, 0, (uint)bVar1, 0);
-        pcVar3 = WCBEGG_SplitProcess;
-      }
-      else
-      {
-        INSTANCE_Post(Inst, 0x1000017, 2);
-        G2EmulationInstanceSwitchAnimationAlpha(instance, 0, 4, 0, 0, (uint)bVar1, 0);
-        pcVar3 = WCBEGG_ExplodeProcess;
-      }
-      instance->processFunc = pcVar3;
-      *puVar6 = *puVar6 & 0xffffbfff | 0x1001;
-      instance->zVel = 0;
-      instance->yVel = 0;
-      instance->xVel = 0;
-      uVar4 = MON_GetTime(instance);
-      puVar6[10] = uVar4;
-    }
-    TurnOffCollisionPhysOb(instance, 7);
-  }
-  else
-  {
-    CollidePhysicalObject(instance, gameTracker);
-    *(undefined2 *)((int)puVar6 + 0x3e) = 0;
-    *(undefined2 *)(puVar6 + 0xf) = 0;
-    *(undefined2 *)((int)puVar6 + 0x3a) = 0;
-    *(ushort *)((int)puVar6 + 0x36) = *(ushort *)((int)puVar6 + 0x36) & 0xfffe;
-  }
-  return;
+	pvVar1 = instance->collideInfo;
+	pvVar2 = instance->extraData;
+	if (((*(char *)((int)pvVar1 + 7) == '\x01') &&
+		 (*(char *)(*(int *)((int)pvVar1 + 0xc) + 4) == '\b')) &&
+		(*(_Instance **)((int)pvVar1 + 0x14) != (_Instance *)0x0))
+	{
+		/* WARNING: Subroutine does not return */
+		INSTANCE_Query(*(_Instance **)((int)pvVar1 + 0x14), 1);
+	}
+	CollidePhysicalObject(instance, gameTracker);
+	*(undefined2 *)((int)pvVar2 + 0x3e) = 0;
+	*(undefined2 *)((int)pvVar2 + 0x3c) = 0;
+	*(undefined2 *)((int)pvVar2 + 0x3a) = 0;
+	*(ushort *)((int)pvVar2 + 0x36) = *(ushort *)((int)pvVar2 + 0x36) & 0xfffe;
+	return;
 }
 
 // decompiled code
@@ -496,16 +287,16 @@ void WCBEGG_ExplodeCollide(_Instance *instance, GameTracker *gameTracker)
 void WCBEGG_Collide(_Instance *instance, GameTracker *gameTracker)
 
 {
-  int iVar1;
-
-  if ((*(char *)((int)instance->collideInfo + 7) != '\x01') ||
-      (iVar1 = strcmpi(*(char **)(*(int *)(*(int *)((int)instance->collideInfo + 0x14) + 0x1c) + 0x24), s_walboss__800cf740), iVar1 != 0))
-  {
-    TurnOffCollisionPhysOb(instance, 7);
-    instance->collideFunc = WCBEGG_ExplodeCollide;
-  }
-  CollidePhysicalObject(instance, gameTracker);
-  return;
+	if (*(char *)((int)instance->collideInfo + 7) == '\x01')
+	{
+		/* WARNING: Subroutine does not return */
+		strcmpi(*(char **)(*(int *)(*(int *)((int)instance->collideInfo + 0x14) + 0x1c) + 0x24),
+				s_walboss__800cf740);
+	}
+	TurnOffCollisionPhysOb(instance, 7);
+	instance->collideFunc = WCBEGG_ExplodeCollide;
+	CollidePhysicalObject(instance, gameTracker);
+	return;
 }
 
 // decompiled code
@@ -518,24 +309,24 @@ void WCBEGG_Collide(_Instance *instance, GameTracker *gameTracker)
 // End Line: 956
 
 long WALBOSC_AnimCallback(_G2Anim_Type *anim, int sectionID, _G2AnimCallbackMsg_Enum message, long messageDataA,
-                          long messageDataB, _Instance *instance)
+						  long messageDataB, _Instance *instance)
 
 {
-  uint uVar1;
+	uint uVar1;
 
-  if (message == G2ANIM_MSG_DONE)
-  {
-    COLLIDE_SegmentCollisionOff(instance, 1);
-    instance->flags = instance->flags | 0x800;
-    uVar1 = instance->flags2;
-    (instance->halvePlane).flags = 0;
-    instance->flags2 = uVar1 | 0x20000000;
-  }
-  else
-  {
-    INSTANCE_DefaultAnimCallback(anim, sectionID, message, messageDataA, messageDataB, instance);
-  }
-  return messageDataA;
+	if (message == G2ANIM_MSG_DONE)
+	{
+		COLLIDE_SegmentCollisionOff(instance, 1);
+		instance->flags = instance->flags | 0x800;
+		uVar1 = instance->flags2;
+		(instance->halvePlane).flags = 0;
+		instance->flags2 = uVar1 | 0x20000000;
+	}
+	else
+	{
+		INSTANCE_DefaultAnimCallback(anim, sectionID, message, messageDataA, messageDataB, instance);
+	}
+	return messageDataA;
 }
 
 // decompiled code
@@ -570,29 +361,27 @@ long WALBOSC_AnimCallback(_G2Anim_Type *anim, int sectionID, _G2AnimCallbackMsg_
 void WALBOSC_Collide(_Instance *instance, GameTracker *gameTracker)
 
 {
-  int Data;
-  void *pvVar1;
-  void *pvVar2;
-  _Instance *Inst;
+	int Data;
+	void *pvVar1;
+	void *pvVar2;
+	_Instance *Inst;
 
-  pvVar1 = instance->collideInfo;
-  Inst = *(_Instance **)((int)pvVar1 + 0x14);
-  if (*(char *)(*(int *)((int)pvVar1 + 0xc) + 4) == '\b')
-  {
-    pvVar2 = instance->data;
-    COLLIDE_SegmentCollisionOff(instance, 1);
-    Data = *(int *)((int)pvVar2 + 8);
-    if (Data < 0)
-    {
-      Data = Data + 0x7f;
-    }
-    Data = SetFXHitData(instance, (uint) * (byte *)((int)pvVar1 + 5), Data >> 7, 0x100);
-    INSTANCE_Post(Inst, 0x400000, Data);
-    Data = SetMonsterHitData(instance, (_Instance *)0x0, *(int *)((int)pvVar2 + 8),
-                             (int)*(short *)((int)pvVar2 + 0x10), (int)*(char *)((int)pvVar2 + 0x12));
-    INSTANCE_Post(Inst, 0x1000000, Data);
-  }
-  return;
+	pvVar1 = instance->collideInfo;
+	Inst = *(_Instance **)((int)pvVar1 + 0x14);
+	if (*(char *)(*(int *)((int)pvVar1 + 0xc) + 4) == '\b')
+	{
+		pvVar2 = instance->data;
+		COLLIDE_SegmentCollisionOff(instance, 1);
+		Data = *(int *)((int)pvVar2 + 8);
+		if (Data < 0)
+		{
+			Data = Data + 0x7f;
+		}
+		Data = SetFXHitData(instance, (uint) * (byte *)((int)pvVar1 + 5), Data >> 7, 0x100);
+		/* WARNING: Subroutine does not return */
+		INSTANCE_Post(Inst, 0x400000, Data);
+	}
+	return;
 }
 
 // decompiled code
@@ -604,13 +393,18 @@ void WALBOSC_Collide(_Instance *instance, GameTracker *gameTracker)
 /* end block 1 */
 // End Line: 1057
 
-void WALBOSC_Message(_Instance *instance, ulong message, ulong data)
+long WALBOSC_AnimCallback(_G2Anim_Type *anim, int sectionID, _G2AnimCallbackMsg_Enum message, long messageDataA,
+						  long messageDataB, _Instance *instance)
 
 {
-  if ((message == 0x1000017) && (data == 0))
-  {
-    COLLIDE_SegmentCollisionOff(instance, 1);
-    instance->flags2 = instance->flags2 | 0x20000000;
-  }
-  return;
+	uint uVar1;
+
+	uVar1 = 0x1000017;
+	if ((sectionID == 0x1000017) && (message == 0))
+	{
+		COLLIDE_SegmentCollisionOff((_Instance *)anim, 1);
+		uVar1 = anim->disabledBits[0] | 0x20000000;
+		anim->disabledBits[0] = uVar1;
+	}
+	return uVar1;
 }

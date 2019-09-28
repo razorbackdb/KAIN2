@@ -1,493 +1,6 @@
 #include "THISDUST.H"
 #include "VOICEXA.H"
 
-// XAVoiceTracker @0x800D5AD4, len = 0x00000128
-voiceTracker =
-	{
-		// CdlLOC @0x800D5AD4, len = 0x00000004
-		.currentPos =
-			{
-				// uchar @0x800D5AD4, len = 0x00000001
-				.minute = 0x00,
-				// uchar @0x800D5AD5, len = 0x00000001
-				.second = 0x00,
-				// uchar @0x800D5AD6, len = 0x00000001
-				.sector = 0x00,
-				// uchar @0x800D5AD7, len = 0x00000001
-				.track = 0x00},
-		// int @0x800D5AD8, len = 0x00000004
-		.currentSector = null,
-		// int @0x800D5ADC, len = 0x00000004
-		.endSector = null,
-		// _func_134 * @0x800D5AE0, len = 0x00000004
-		.prevCallback = null,
-		// uchar[8] @0x800D5AE4, len = 0x00000008
-		.cdResult =
-			{
-				// uchar @0x800D5AE4, len = 0x00000001
-				'\x00',
-				// uchar @0x800D5AE5, len = 0x00000001
-				'\x00',
-				// uchar @0x800D5AE6, len = 0x00000001
-				'\x00',
-				// uchar @0x800D5AE7, len = 0x00000001
-				'\x00',
-				// uchar @0x800D5AE8, len = 0x00000001
-				'\x00',
-				// uchar @0x800D5AE9, len = 0x00000001
-				'\x00',
-				// uchar @0x800D5AEA, len = 0x00000001
-				'\x00',
-				// uchar @0x800D5AEB, len = 0x00000001
-				'\x00'},
-		// CdCommand[8] @0x800D5AEC, len = 0x00000040
-		.cdCmdQueue =
-			{
-				// CdCommand @0x800D5AEC, len = 0x00000008
-				{
-					// ushort @0x800D5AEC, len = 0x00000002
-					.flags = null,
-					// uchar @0x800D5AEE, len = 0x00000001
-					.unused = 0x00,
-					// uchar @0x800D5AEF, len = 0x00000001
-					.cdCommand = 0x00,
-					// uchar[4] @0x800D5AF0, len = 0x00000004
-					.cdCmdParam =
-						{
-							// uchar @0x800D5AF0, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5AF1, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5AF2, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5AF3, len = 0x00000001
-							'\x00'}},
-				// CdCommand @0x800D5AF4, len = 0x00000008
-				{
-					// ushort @0x800D5AF4, len = 0x00000002
-					.flags = null,
-					// uchar @0x800D5AF6, len = 0x00000001
-					.unused = 0x00,
-					// uchar @0x800D5AF7, len = 0x00000001
-					.cdCommand = 0x00,
-					// uchar[4] @0x800D5AF8, len = 0x00000004
-					.cdCmdParam =
-						{
-							// uchar @0x800D5AF8, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5AF9, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5AFA, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5AFB, len = 0x00000001
-							'\x00'}},
-				// CdCommand @0x800D5AFC, len = 0x00000008
-				{
-					// ushort @0x800D5AFC, len = 0x00000002
-					.flags = null,
-					// uchar @0x800D5AFE, len = 0x00000001
-					.unused = 0x00,
-					// uchar @0x800D5AFF, len = 0x00000001
-					.cdCommand = 0x00,
-					// uchar[4] @0x800D5B00, len = 0x00000004
-					.cdCmdParam =
-						{
-							// uchar @0x800D5B00, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5B01, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5B02, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5B03, len = 0x00000001
-							'\x00'}},
-				// CdCommand @0x800D5B04, len = 0x00000008
-				{
-					// ushort @0x800D5B04, len = 0x00000002
-					.flags = null,
-					// uchar @0x800D5B06, len = 0x00000001
-					.unused = 0x00,
-					// uchar @0x800D5B07, len = 0x00000001
-					.cdCommand = 0x00,
-					// uchar[4] @0x800D5B08, len = 0x00000004
-					.cdCmdParam =
-						{
-							// uchar @0x800D5B08, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5B09, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5B0A, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5B0B, len = 0x00000001
-							'\x00'}},
-				// CdCommand @0x800D5B0C, len = 0x00000008
-				{
-					// ushort @0x800D5B0C, len = 0x00000002
-					.flags = null,
-					// uchar @0x800D5B0E, len = 0x00000001
-					.unused = 0x00,
-					// uchar @0x800D5B0F, len = 0x00000001
-					.cdCommand = 0x00,
-					// uchar[4] @0x800D5B10, len = 0x00000004
-					.cdCmdParam =
-						{
-							// uchar @0x800D5B10, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5B11, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5B12, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5B13, len = 0x00000001
-							'\x00'}},
-				// CdCommand @0x800D5B14, len = 0x00000008
-				{
-					// ushort @0x800D5B14, len = 0x00000002
-					.flags = null,
-					// uchar @0x800D5B16, len = 0x00000001
-					.unused = 0x00,
-					// uchar @0x800D5B17, len = 0x00000001
-					.cdCommand = 0x00,
-					// uchar[4] @0x800D5B18, len = 0x00000004
-					.cdCmdParam =
-						{
-							// uchar @0x800D5B18, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5B19, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5B1A, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5B1B, len = 0x00000001
-							'\x00'}},
-				// CdCommand @0x800D5B1C, len = 0x00000008
-				{
-					// ushort @0x800D5B1C, len = 0x00000002
-					.flags = null,
-					// uchar @0x800D5B1E, len = 0x00000001
-					.unused = 0x00,
-					// uchar @0x800D5B1F, len = 0x00000001
-					.cdCommand = 0x00,
-					// uchar[4] @0x800D5B20, len = 0x00000004
-					.cdCmdParam =
-						{
-							// uchar @0x800D5B20, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5B21, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5B22, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5B23, len = 0x00000001
-							'\x00'}},
-				// CdCommand @0x800D5B24, len = 0x00000008
-				{
-					// ushort @0x800D5B24, len = 0x00000002
-					.flags = null,
-					// uchar @0x800D5B26, len = 0x00000001
-					.unused = 0x00,
-					// uchar @0x800D5B27, len = 0x00000001
-					.cdCommand = 0x00,
-					// uchar[4] @0x800D5B28, len = 0x00000004
-					.cdCmdParam =
-						{
-							// uchar @0x800D5B28, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5B29, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5B2A, len = 0x00000001
-							'\x00',
-							// uchar @0x800D5B2B, len = 0x00000001
-							'\x00'}}},
-		// ushort[4] @0x800D5B2C, len = 0x00000008
-		.requestQueue =
-			{
-				// ushort @0x800D5B2C, len = 0x00000002
-				null,
-				// ushort @0x800D5B2E, len = 0x00000002
-				null,
-				// ushort @0x800D5B30, len = 0x00000002
-				null,
-				// ushort @0x800D5B32, len = 0x00000002
-				null},
-		// VoiceCommand[16] @0x800D5B34, len = 0x00000040
-		.voiceCmdQueue =
-			{
-				// VoiceCommand @0x800D5B34, len = 0x00000004
-				{
-					// uchar @0x800D5B34, len = 0x00000001
-					.voiceCmd = 0x00,
-					// uchar @0x800D5B35, len = 0x00000001
-					.nextVoiceStatus = 0x00,
-					// ushort @0x800D5B36, len = 0x00000002
-					.voiceCmdParam = null},
-				// VoiceCommand @0x800D5B38, len = 0x00000004
-				{
-					// uchar @0x800D5B38, len = 0x00000001
-					.voiceCmd = 0x00,
-					// uchar @0x800D5B39, len = 0x00000001
-					.nextVoiceStatus = 0x00,
-					// ushort @0x800D5B3A, len = 0x00000002
-					.voiceCmdParam = null},
-				// VoiceCommand @0x800D5B3C, len = 0x00000004
-				{
-					// uchar @0x800D5B3C, len = 0x00000001
-					.voiceCmd = 0x00,
-					// uchar @0x800D5B3D, len = 0x00000001
-					.nextVoiceStatus = 0x00,
-					// ushort @0x800D5B3E, len = 0x00000002
-					.voiceCmdParam = null},
-				// VoiceCommand @0x800D5B40, len = 0x00000004
-				{
-					// uchar @0x800D5B40, len = 0x00000001
-					.voiceCmd = 0x00,
-					// uchar @0x800D5B41, len = 0x00000001
-					.nextVoiceStatus = 0x00,
-					// ushort @0x800D5B42, len = 0x00000002
-					.voiceCmdParam = null},
-				// VoiceCommand @0x800D5B44, len = 0x00000004
-				{
-					// uchar @0x800D5B44, len = 0x00000001
-					.voiceCmd = 0x00,
-					// uchar @0x800D5B45, len = 0x00000001
-					.nextVoiceStatus = 0x00,
-					// ushort @0x800D5B46, len = 0x00000002
-					.voiceCmdParam = null},
-				// VoiceCommand @0x800D5B48, len = 0x00000004
-				{
-					// uchar @0x800D5B48, len = 0x00000001
-					.voiceCmd = 0x00,
-					// uchar @0x800D5B49, len = 0x00000001
-					.nextVoiceStatus = 0x00,
-					// ushort @0x800D5B4A, len = 0x00000002
-					.voiceCmdParam = null},
-				// VoiceCommand @0x800D5B4C, len = 0x00000004
-				{
-					// uchar @0x800D5B4C, len = 0x00000001
-					.voiceCmd = 0x00,
-					// uchar @0x800D5B4D, len = 0x00000001
-					.nextVoiceStatus = 0x00,
-					// ushort @0x800D5B4E, len = 0x00000002
-					.voiceCmdParam = null},
-				// VoiceCommand @0x800D5B50, len = 0x00000004
-				{
-					// uchar @0x800D5B50, len = 0x00000001
-					.voiceCmd = 0x00,
-					// uchar @0x800D5B51, len = 0x00000001
-					.nextVoiceStatus = 0x00,
-					// ushort @0x800D5B52, len = 0x00000002
-					.voiceCmdParam = null},
-				// VoiceCommand @0x800D5B54, len = 0x00000004
-				{
-					// uchar @0x800D5B54, len = 0x00000001
-					.voiceCmd = 0x00,
-					// uchar @0x800D5B55, len = 0x00000001
-					.nextVoiceStatus = 0x00,
-					// ushort @0x800D5B56, len = 0x00000002
-					.voiceCmdParam = null},
-				// VoiceCommand @0x800D5B58, len = 0x00000004
-				{
-					// uchar @0x800D5B58, len = 0x00000001
-					.voiceCmd = 0x00,
-					// uchar @0x800D5B59, len = 0x00000001
-					.nextVoiceStatus = 0x00,
-					// ushort @0x800D5B5A, len = 0x00000002
-					.voiceCmdParam = null},
-				// VoiceCommand @0x800D5B5C, len = 0x00000004
-				{
-					// uchar @0x800D5B5C, len = 0x00000001
-					.voiceCmd = 0x00,
-					// uchar @0x800D5B5D, len = 0x00000001
-					.nextVoiceStatus = 0x00,
-					// ushort @0x800D5B5E, len = 0x00000002
-					.voiceCmdParam = null},
-				// VoiceCommand @0x800D5B60, len = 0x00000004
-				{
-					// uchar @0x800D5B60, len = 0x00000001
-					.voiceCmd = 0x00,
-					// uchar @0x800D5B61, len = 0x00000001
-					.nextVoiceStatus = 0x00,
-					// ushort @0x800D5B62, len = 0x00000002
-					.voiceCmdParam = null},
-				// VoiceCommand @0x800D5B64, len = 0x00000004
-				{
-					// uchar @0x800D5B64, len = 0x00000001
-					.voiceCmd = 0x00,
-					// uchar @0x800D5B65, len = 0x00000001
-					.nextVoiceStatus = 0x00,
-					// ushort @0x800D5B66, len = 0x00000002
-					.voiceCmdParam = null},
-				// VoiceCommand @0x800D5B68, len = 0x00000004
-				{
-					// uchar @0x800D5B68, len = 0x00000001
-					.voiceCmd = 0x00,
-					// uchar @0x800D5B69, len = 0x00000001
-					.nextVoiceStatus = 0x00,
-					// ushort @0x800D5B6A, len = 0x00000002
-					.voiceCmdParam = null},
-				// VoiceCommand @0x800D5B6C, len = 0x00000004
-				{
-					// uchar @0x800D5B6C, len = 0x00000001
-					.voiceCmd = 0x00,
-					// uchar @0x800D5B6D, len = 0x00000001
-					.nextVoiceStatus = 0x00,
-					// ushort @0x800D5B6E, len = 0x00000002
-					.voiceCmdParam = null},
-				// VoiceCommand @0x800D5B70, len = 0x00000004
-				{
-					// uchar @0x800D5B70, len = 0x00000001
-					.voiceCmd = 0x00,
-					// uchar @0x800D5B71, len = 0x00000001
-					.nextVoiceStatus = 0x00,
-					// ushort @0x800D5B72, len = 0x00000002
-					.voiceCmdParam = null}},
-		// uchar @0x800D5B74, len = 0x00000001
-		.cdCmdIn = 0x00,
-		// uchar @0x800D5B75, len = 0x00000001
-		.cdCmdOut = 0x00,
-		// uchar @0x800D5B76, len = 0x00000001
-		.cdCmdsQueued = 0x00,
-		// uchar @0x800D5B77, len = 0x00000001
-		.reqIn = 0x00,
-		// uchar @0x800D5B78, len = 0x00000001
-		.reqOut = 0x00,
-		// uchar @0x800D5B79, len = 0x00000001
-		.reqsQueued = 0x00,
-		// uchar @0x800D5B7A, len = 0x00000001
-		.voiceCmdIn = 0x00,
-		// uchar @0x800D5B7B, len = 0x00000001
-		.voiceCmdOut = 0x00,
-		// uchar @0x800D5B7C, len = 0x00000001
-		.voiceCmdsQueued = 0x00,
-		// uchar @0x800D5B7D, len = 0x00000001
-		.unused1 = 0x00,
-		// uchar @0x800D5B7E, len = 0x00000001
-		.voiceStatus = 0x00,
-		// uchar @0x800D5B7F, len = 0x00000001
-		.cdStatus = 0x00,
-		// short @0x800D5B80, len = 0x00000002
-		.fileNum = null,
-		// short @0x800D5B82, len = 0x00000002
-		.unused2 = null,
-		// XAFileInfo[30] @0x800D5B84, len = 0x00000078
-		.xaFileInfo =
-			{
-				// XAFileInfo @0x800D5B84, len = 0x00000004
-				{
-					// int @0x800D5B84, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5B88, len = 0x00000004
-				{
-					// int @0x800D5B88, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5B8C, len = 0x00000004
-				{
-					// int @0x800D5B8C, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5B90, len = 0x00000004
-				{
-					// int @0x800D5B90, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5B94, len = 0x00000004
-				{
-					// int @0x800D5B94, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5B98, len = 0x00000004
-				{
-					// int @0x800D5B98, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5B9C, len = 0x00000004
-				{
-					// int @0x800D5B9C, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5BA0, len = 0x00000004
-				{
-					// int @0x800D5BA0, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5BA4, len = 0x00000004
-				{
-					// int @0x800D5BA4, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5BA8, len = 0x00000004
-				{
-					// int @0x800D5BA8, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5BAC, len = 0x00000004
-				{
-					// int @0x800D5BAC, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5BB0, len = 0x00000004
-				{
-					// int @0x800D5BB0, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5BB4, len = 0x00000004
-				{
-					// int @0x800D5BB4, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5BB8, len = 0x00000004
-				{
-					// int @0x800D5BB8, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5BBC, len = 0x00000004
-				{
-					// int @0x800D5BBC, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5BC0, len = 0x00000004
-				{
-					// int @0x800D5BC0, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5BC4, len = 0x00000004
-				{
-					// int @0x800D5BC4, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5BC8, len = 0x00000004
-				{
-					// int @0x800D5BC8, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5BCC, len = 0x00000004
-				{
-					// int @0x800D5BCC, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5BD0, len = 0x00000004
-				{
-					// int @0x800D5BD0, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5BD4, len = 0x00000004
-				{
-					// int @0x800D5BD4, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5BD8, len = 0x00000004
-				{
-					// int @0x800D5BD8, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5BDC, len = 0x00000004
-				{
-					// int @0x800D5BDC, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5BE0, len = 0x00000004
-				{
-					// int @0x800D5BE0, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5BE4, len = 0x00000004
-				{
-					// int @0x800D5BE4, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5BE8, len = 0x00000004
-				{
-					// int @0x800D5BE8, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5BEC, len = 0x00000004
-				{
-					// int @0x800D5BEC, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5BF0, len = 0x00000004
-				{
-					// int @0x800D5BF0, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5BF4, len = 0x00000004
-				{
-					// int @0x800D5BF4, len = 0x00000004
-					.startPos = null},
-				// XAFileInfo @0x800D5BF8, len = 0x00000004
-				{
-					// int @0x800D5BF8, len = 0x00000004
-					.startPos = null}}};
 // decompiled code
 // original method signature:
 // void /*$ra*/ VOICEXA_Init()
@@ -514,46 +27,33 @@ voiceTracker =
 void VOICEXA_Init(void)
 
 {
-	undefined4 *puVar1;
-	int iVar2;
-	XAVoiceTracker *pXVar3;
-	int iVar4;
-	undefined4 auStack80[6];
-	char acStack56[32];
+  char acStack56[32];
 
-	pXVar3 = &voiceTracker;
-	if ((gameTrackerX.debugFlags & 0x80000U) != 0)
-	{
-		iVar4 = 0;
-		voiceTracker.voiceStatus = '\0';
-		voiceTracker.cdStatus = '\0';
-		voiceTracker.reqIn = '\0';
-		voiceTracker.reqOut = '\0';
-		voiceTracker.reqsQueued = '\0';
-		voiceTracker.cdCmdIn = '\0';
-		voiceTracker.cdCmdOut = '\0';
-		voiceTracker.cdCmdsQueued = '\0';
-		voiceTracker.voiceCmdIn = '\0';
-		voiceTracker.voiceCmdOut = '\0';
-		voiceTracker.voiceCmdsQueued = '\0';
-		do
-		{
-			sprintf(acStack56, s__VOICE_VOICE_02d_XA_1_800cf968);
-			puVar1 = CdSearchFile(auStack80, acStack56);
-			if (puVar1 == (undefined4 *)0x0)
-			{
-				pXVar3->xaFileInfo[0].startPos = 0;
-			}
-			else
-			{
-				iVar2 = CdPosToInt((byte *)auStack80);
-				pXVar3->xaFileInfo[0].startPos = iVar2;
-			}
-			iVar4 = iVar4 + 1;
-			pXVar3 = (XAVoiceTracker *)&pXVar3->currentSector;
-		} while (iVar4 < 0x1e);
-	}
-	return;
+  if ((vmRealClock & 0x80000U) != 0)
+  {
+    _BlockVramEntry_800d5b7c.next._2_1_ = 0;
+    _BlockVramEntry_800d5b7c.next._3_1_ = 0;
+    /* WARNING: Read-only address (ram,0x800d5b77) is written */
+    _BlockVramEntry_800d5b60.area._3_1_ = 0;
+    /* WARNING: Read-only address (ram,0x800d5b78) is written */
+    _BlockVramEntry_800d5b60.udata._0_1_ = 0;
+    /* WARNING: Read-only address (ram,0x800d5b79) is written */
+    _BlockVramEntry_800d5b60.udata._1_1_ = 0;
+    /* WARNING: Read-only address (ram,0x800d5b74) is written */
+    _BlockVramEntry_800d5b60.area._0_1_ = 0;
+    /* WARNING: Read-only address (ram,0x800d5b75) is written */
+    _BlockVramEntry_800d5b60.area._1_1_ = 0;
+    /* WARNING: Read-only address (ram,0x800d5b76) is written */
+    _BlockVramEntry_800d5b60.area._2_1_ = 0;
+    /* WARNING: Read-only address (ram,0x800d5b7a) is written */
+    _BlockVramEntry_800d5b60.udata._2_1_ = 0;
+    /* WARNING: Read-only address (ram,0x800d5b7b) is written */
+    _BlockVramEntry_800d5b60.udata._3_1_ = 0;
+    _BlockVramEntry_800d5b7c.next._0_1_ = 0;
+    /* WARNING: Subroutine does not return */
+    sprintf(acStack56, s__VOICE_VOICE_02d_XA_1_800cf968);
+  }
+  return;
 }
 
 // decompiled code
@@ -582,35 +82,35 @@ void VOICEXA_Init(void)
 void putCdCommand(XAVoiceTracker *vt, uchar cdCommand, int numParams, uchar *params)
 
 {
-	uchar uVar1;
-	uchar *puVar2;
-	int iVar3;
-	int iVar4;
+  uchar uVar1;
+  uchar *puVar2;
+  int iVar3;
+  int iVar4;
 
-	iVar3 = 0;
-	vt->cdCmdQueue[(uint)vt->cdCmdIn].cdCommand = cdCommand;
-	puVar2 = params;
-	if (0 < numParams)
-	{
-		do
-		{
-			iVar4 = iVar3 + 1;
-			vt->cdCmdQueue[(uint)vt->cdCmdIn].cdCmdParam[iVar3] = *puVar2;
-			puVar2 = params + iVar4;
-			iVar3 = iVar4;
-		} while (iVar4 < numParams);
-	}
-	if (vt->cdCmdsQueued < 7)
-	{
-		vt->cdCmdsQueued = vt->cdCmdsQueued + 1;
-		uVar1 = vt->cdCmdIn + '\x01';
-		vt->cdCmdIn = uVar1;
-		if (uVar1 == '\b')
-		{
-			vt->cdCmdIn = '\0';
-		}
-	}
-	return;
+  iVar3 = 0;
+  vt->cdCmdQueue[vt->cdCmdIn].cdCommand = cdCommand;
+  puVar2 = params;
+  if (0 < numParams)
+  {
+    do
+    {
+      iVar4 = iVar3 + 1;
+      vt->cdCmdQueue[vt->cdCmdIn].cdCmdParam[iVar3] = *puVar2;
+      puVar2 = params + iVar4;
+      iVar3 = iVar4;
+    } while (iVar4 < numParams);
+  }
+  if (vt->cdCmdsQueued < 7)
+  {
+    vt->cdCmdsQueued = vt->cdCmdsQueued + 1;
+    uVar1 = vt->cdCmdIn + '\x01';
+    vt->cdCmdIn = uVar1;
+    if (uVar1 == '\b')
+    {
+      vt->cdCmdIn = '\0';
+    }
+  }
+  return;
 }
 
 // decompiled code
@@ -634,22 +134,25 @@ void putCdCommand(XAVoiceTracker *vt, uchar cdCommand, int numParams, uchar *par
 void VOICEXA_CdSyncCallback(uchar status, uchar *result)
 
 {
-	if (status == '\x02')
-	{
-		voiceTracker.cdStatus = '\0';
-		voiceTracker.cdCmdOut = voiceTracker.cdCmdOut + '\x01';
-		if (voiceTracker.cdCmdOut == '\b')
-		{
-			voiceTracker.cdCmdOut = '\0';
-		}
-		voiceTracker.cdCmdsQueued = voiceTracker.cdCmdsQueued + -1;
-		CdSyncCallback(voiceTracker.prevCallback);
-	}
-	else
-	{
-		voiceTracker.cdStatus = '\x02';
-	}
-	return;
+  if (status == '\x02')
+  {
+    _BlockVramEntry_800d5b7c.next._3_1_ = 0;
+    _BlockVramEntry_800d5b60.area._1_1_ = _BlockVramEntry_800d5b60.area._1_1_ + '\x01';
+    /* WARNING: Read-only address (ram,0x800d5b75) is written */
+    if (_BlockVramEntry_800d5b60.area._1_1_ == '\b')
+    {
+      /* WARNING: Read-only address (ram,0x800d5b75) is written */
+      _BlockVramEntry_800d5b60.area._1_1_ = '\0';
+    }
+    _BlockVramEntry_800d5b60.area._2_1_ = _BlockVramEntry_800d5b60.area._2_1_ + -1;
+    /* WARNING: Read-only address (ram,0x800d5b76) is written */
+    CdSyncCallback(voiceTracker._12_4_);
+  }
+  else
+  {
+    _BlockVramEntry_800d5b7c.next._3_1_ = 2;
+  }
+  return;
 }
 
 // decompiled code
@@ -673,34 +176,34 @@ void VOICEXA_CdSyncCallback(uchar status, uchar *result)
 void processCdCommands(XAVoiceTracker *vt)
 
 {
-	_func_134 *p_Var1;
-	byte bVar2;
-	CdCommand *pCVar3;
+  _func_61 *p_Var1;
+  byte bVar2;
+  CdCommand *pCVar3;
 
-	if (vt->cdStatus == '\x02')
-	{
-		vt->cdStatus = '\x01';
-		pCVar3 = vt->cdCmdQueue + (uint)vt->cdCmdOut;
-		bVar2 = pCVar3->cdCommand;
-	}
-	else
-	{
-		if (vt->cdCmdsQueued == '\0')
-		{
-			return;
-		}
-		if (vt->cdStatus == '\x01')
-		{
-			return;
-		}
-		vt->cdStatus = '\x01';
-		pCVar3 = vt->cdCmdQueue + (uint)vt->cdCmdOut;
-		p_Var1 = (_func_134 *)CdSyncCallback(VOICEXA_CdSyncCallback);
-		vt->prevCallback = p_Var1;
-		bVar2 = pCVar3->cdCommand;
-	}
-	CdControl(bVar2, pCVar3->cdCmdParam, vt->cdResult);
-	return;
+  if (vt->cdStatus == '\x02')
+  {
+    vt->cdStatus = '\x01';
+    pCVar3 = vt->cdCmdQueue + vt->cdCmdOut;
+    bVar2 = pCVar3->cdCommand;
+  }
+  else
+  {
+    if (vt->cdCmdsQueued == '\0')
+    {
+      return;
+    }
+    if (vt->cdStatus == '\x01')
+    {
+      return;
+    }
+    vt->cdStatus = '\x01';
+    pCVar3 = vt->cdCmdQueue + vt->cdCmdOut;
+    p_Var1 = (_func_61 *)CdSyncCallback(VOICEXA_CdSyncCallback);
+    vt->prevCallback = p_Var1;
+    bVar2 = pCVar3->cdCommand;
+  }
+  CdControl(bVar2, pCVar3->cdCmdParam, vt->cdResult);
+  return;
 }
 
 // decompiled code
@@ -717,25 +220,27 @@ void processCdCommands(XAVoiceTracker *vt)
 /* end block 2 */
 // End Line: 416
 
-void putVoiceCommand(XAVoiceTracker *vt, uchar voiceCmd, uchar nextVoiceStatus, int voiceCmdParam)
+void voiceCmdResume(XAVoiceTracker *vt, short cmdParam)
 
 {
-	uchar uVar1;
+  uchar uVar1;
+  uchar in_a2;
+  ushort in_a3;
 
-	vt->voiceCmdQueue[(uint)vt->voiceCmdIn].voiceCmd = voiceCmd;
-	vt->voiceCmdQueue[(uint)vt->voiceCmdIn].nextVoiceStatus = nextVoiceStatus;
-	vt->voiceCmdQueue[(uint)vt->voiceCmdIn].voiceCmdParam = (ushort)voiceCmdParam;
-	if (vt->voiceCmdsQueued < 0xf)
-	{
-		vt->voiceCmdsQueued = vt->voiceCmdsQueued + 1;
-		uVar1 = vt->voiceCmdIn + '\x01';
-		vt->voiceCmdIn = uVar1;
-		if (uVar1 == '\x10')
-		{
-			vt->voiceCmdIn = '\0';
-		}
-	}
-	return;
+  vt->voiceCmdQueue[vt->voiceCmdIn].voiceCmd = (uchar)cmdParam;
+  vt->voiceCmdQueue[vt->voiceCmdIn].nextVoiceStatus = in_a2;
+  vt->voiceCmdQueue[vt->voiceCmdIn].voiceCmdParam = in_a3;
+  if (vt->voiceCmdsQueued < 0xf)
+  {
+    vt->voiceCmdsQueued = vt->voiceCmdsQueued + 1;
+    uVar1 = vt->voiceCmdIn + '\x01';
+    vt->voiceCmdIn = uVar1;
+    if (uVar1 == '\x10')
+    {
+      vt->voiceCmdIn = '\0';
+    }
+  }
+  return;
 }
 
 // decompiled code
@@ -759,26 +264,26 @@ void putVoiceCommand(XAVoiceTracker *vt, uchar voiceCmd, uchar nextVoiceStatus, 
 void processVoiceCommands(XAVoiceTracker *vt)
 
 {
-	uint uVar1;
-	VoiceCommand *pVVar2;
+  uint uVar1;
+  VoiceCommand *pVVar2;
 
-	if (vt->voiceCmdsQueued != '\0')
-	{
-		vt->voiceCmdsQueued = vt->voiceCmdsQueued + -1;
-		uVar1 = (uint)vt->voiceCmdOut + 1;
-		pVVar2 = vt->voiceCmdQueue + (uint)vt->voiceCmdOut;
-		vt->voiceCmdOut = (uchar)uVar1;
-		if ((uVar1 & 0xff) == 0x10)
-		{
-			vt->voiceCmdOut = '\0';
-		}
-		if (pVVar2->voiceCmd < 5)
-		{
-			(*(code *)voiceCmdTbl[(uint)pVVar2->voiceCmd])(vt, (int)(short)pVVar2->voiceCmdParam);
-			vt->voiceStatus = pVVar2->nextVoiceStatus;
-		}
-	}
-	return;
+  if (vt->voiceCmdsQueued != '\0')
+  {
+    vt->voiceCmdsQueued = vt->voiceCmdsQueued + -1;
+    uVar1 = (uint)vt->voiceCmdOut + 1;
+    pVVar2 = vt->voiceCmdQueue + (uint)vt->voiceCmdOut;
+    vt->voiceCmdOut = (uchar)uVar1;
+    if ((uVar1 & 0xff) == 0x10)
+    {
+      vt->voiceCmdOut = '\0';
+    }
+    if (pVVar2->voiceCmd < 5)
+    {
+      (*(code *)voiceCmdTbl[pVVar2->voiceCmd])(vt, (int)(short)pVVar2->voiceCmdParam);
+      vt->voiceStatus = pVVar2->nextVoiceStatus;
+    }
+  }
+  return;
 }
 
 // decompiled code
@@ -812,63 +317,63 @@ void processVoiceCommands(XAVoiceTracker *vt)
 void voiceCmdPlay(XAVoiceTracker *vt, short voiceIndex)
 
 {
-	ushort *puVar1;
-	XAFileInfo *pXVar2;
-	uchar local_58;
-	byte local_57;
-	uchar auStack80[8];
-	undefined *local_48;
-	undefined2 local_44;
-	undefined2 local_42;
-	undefined2 local_40;
-	undefined2 local_3e;
-	short local_38;
-	short local_36;
-	undefined4 local_34;
-	undefined4 local_30;
-	undefined2 local_2c;
-	undefined2 local_2a;
-	undefined4 local_28;
-	undefined4 local_24;
-	uchar local_20[8];
+  ushort *puVar1;
+  XAFileInfo *pXVar2;
+  uchar local_58;
+  byte local_57;
+  uchar auStack80[8];
+  undefined *local_48;
+  undefined2 local_44;
+  undefined2 local_42;
+  undefined2 local_40;
+  undefined2 local_3e;
+  short local_38;
+  short local_36;
+  undefined4 local_34;
+  undefined4 local_30;
+  undefined2 local_2c;
+  undefined2 local_2a;
+  undefined4 local_28;
+  undefined4 local_24;
+  uchar local_20[8];
 
-	if (voiceList != (XAVoiceListEntry *)0x0)
-	{
-		puVar1 = &voiceList->length;
-		vt->fileNum = voiceIndex >> 4;
-		pXVar2 = vt->xaFileInfo + ((int)((uint)(ushort)voiceIndex << 0x10) >> 0x14);
-		putCdCommand(vt, '\t', 0, (uchar *)0x0);
-		local_58 = '\x01';
-		local_57 = (byte)voiceIndex & 0xf;
-		putCdCommand(vt, '\r', 4, &local_58);
-		local_20[0] = -0x38;
-		putCdCommand(vt, '\x0e', 1, local_20);
-		CdIntToPos(pXVar2->startPos, (char *)vt);
-		vt->endSector =
-			pXVar2->startPos +
-			((uint) * (ushort *)((int)puVar1 + ((int)((uint)(ushort)voiceIndex << 0x10) >> 0xf)) - 0x96);
-		CdIntToPos(pXVar2->startPos, (char *)auStack80);
-		putCdCommand(vt, '\x1b', 4, auStack80);
-		local_48 = &DAT_00003fcf;
-		local_44 = 0x3fff;
-		local_42 = 0x3fff;
-		local_40 = 0;
-		local_3e = 0;
-		local_34 = 0;
-		local_30 = 1;
-		local_2c = 0x7fff;
-		local_2a = 0x7fff;
-		local_28 = 0;
-		local_24 = 1;
-		local_38 = (short)gameTrackerX.sound.gVoiceVol << 8;
-		local_36 = local_38;
-		SpuSetCommonAttr((uint *)&local_48);
-		if (0x3c < gameTrackerX.sound.gMusicVol)
-		{
-			aadStartMusicMasterVolFade(0x3c, -1, (TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback)0x0);
-		}
-	}
-	return;
+  if (voiceList != (XAVoiceListEntry *)0x0)
+  {
+    puVar1 = &voiceList->length;
+    vt->fileNum = voiceIndex >> 4;
+    pXVar2 = vt->xaFileInfo + ((int)((uint)(ushort)voiceIndex << 0x10) >> 0x14);
+    putCdCommand(vt, '\t', 0, (uchar *)0x0);
+    local_58 = '\x01';
+    local_57 = (byte)voiceIndex & 0xf;
+    putCdCommand(vt, '\r', 4, &local_58);
+    local_20[0] = -0x38;
+    putCdCommand(vt, '\x0e', 1, local_20);
+    CdIntToPos(pXVar2->startPos, (char *)vt);
+    vt->endSector =
+        pXVar2->startPos +
+        ((uint) * (ushort *)((int)puVar1 + ((int)((uint)(ushort)voiceIndex << 0x10) >> 0xf)) - 0x96);
+    CdIntToPos(pXVar2->startPos, (char *)auStack80);
+    putCdCommand(vt, '\x1b', 4, auStack80);
+    local_48 = &DAT_00003fcf;
+    local_44 = 0x3fff;
+    local_42 = 0x3fff;
+    local_40 = 0;
+    local_3e = 0;
+    local_34 = 0;
+    local_30 = 1;
+    local_2c = 0x7fff;
+    local_2a = 0x7fff;
+    local_28 = 0;
+    local_24 = 1;
+    local_38 = (short)ULONG_800d1168 << 8;
+    local_36 = local_38;
+    SpuSetCommonAttr((uint *)&local_48);
+    if (0x3c < aadUpdateRate)
+    {
+      aadStartMusicMasterVolFade(0x3c, -1, (TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback)0x0);
+    }
+  }
+  return;
 }
 
 // decompiled code
@@ -892,21 +397,20 @@ void voiceCmdPlay(XAVoiceTracker *vt, short voiceIndex)
 void voiceCmdStop(XAVoiceTracker *vt, short cmdParam)
 
 {
-	undefined *local_30[6];
-	undefined4 local_18;
-	undefined4 local_c;
+  undefined *local_30[6];
+  undefined4 local_18;
+  undefined4 local_c;
 
-	if (vt->voiceStatus != '\0')
-	{
-		putCdCommand(vt, '\t', 0, (uchar *)0x0);
-		local_30[0] = &DAT_00002200;
-		local_18 = 0;
-		local_c = 0;
-		SpuSetCommonAttr((uint *)local_30);
-		aadStartMusicMasterVolFade(gameTrackerX.sound.gMusicVol, 1,
-								   (TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback)0x0);
-	}
-	return;
+  if (vt->voiceStatus != '\0')
+  {
+    putCdCommand(vt, '\t', 0, (uchar *)0x0);
+    local_30[0] = &DAT_00002200;
+    local_18 = 0;
+    local_c = 0;
+    SpuSetCommonAttr((uint *)local_30);
+    aadStartMusicMasterVolFade(aadUpdateRate, 1, (TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback)0x0);
+  }
+  return;
 }
 
 // decompiled code
@@ -921,11 +425,11 @@ void voiceCmdStop(XAVoiceTracker *vt, short cmdParam)
 void voiceCmdPause(XAVoiceTracker *vt, short cmdParam)
 
 {
-	if ((uint)vt->voiceStatus - 1 < 2)
-	{
-		putCdCommand(vt, '\t', 0, (uchar *)0x0);
-	}
-	return;
+  if ((uint)vt->voiceStatus - 1 < 2)
+  {
+    putCdCommand(vt, '\t', 0, (uchar *)0x0);
+  }
+  return;
 }
 
 // decompiled code
@@ -940,11 +444,11 @@ void voiceCmdPause(XAVoiceTracker *vt, short cmdParam)
 void voiceCmdResume(XAVoiceTracker *vt, short cmdParam)
 
 {
-	if (vt->voiceStatus == '\x03')
-	{
-		putCdCommand(vt, '\x1b', 4, (uchar *)vt);
-	}
-	return;
+  if (vt->voiceStatus == '\x03')
+  {
+    putCdCommand(vt, '\x1b', 4, (uchar *)vt);
+  }
+  return;
 }
 
 // decompiled code
@@ -964,7 +468,7 @@ void voiceCmdResume(XAVoiceTracker *vt, short cmdParam)
 void voiceCmdNull(XAVoiceTracker *vt, short cmdParam)
 
 {
-	return;
+  return;
 }
 
 // decompiled code
@@ -989,33 +493,36 @@ void voiceCmdNull(XAVoiceTracker *vt, short cmdParam)
 void VOICEXA_Play(int voiceIndex, int queueRequests)
 
 {
-	uchar uVar1;
+  byte bVar1;
 
-	if ((((gameTrackerX.debugFlags & 0x80000U) != 0) &&
-		 (voiceTracker.xaFileInfo[voiceIndex >> 4].startPos != 0)) &&
-		(gameTrackerX.sound.gVoiceOn != '\0'))
-	{
-		if (queueRequests == 0)
-		{
-			putVoiceCommand(&voiceTracker, '\0', '\x01', voiceIndex);
-		}
-		else
-		{
-			voiceTracker.requestQueue[(uint)voiceTracker.reqIn] = (ushort)voiceIndex;
-			uVar1 = voiceTracker.reqsQueued + '\x01';
-			if (voiceTracker.reqsQueued < 3)
-			{
-				voiceTracker.reqIn = voiceTracker.reqIn + '\x01';
-				voiceTracker.reqsQueued = uVar1;
-				if (voiceTracker.reqIn == '\x04')
-				{
-					voiceTracker.reqIn = '\0';
-					voiceTracker.reqsQueued = uVar1;
-				}
-			}
-		}
-	}
-	return;
+  if ((((vmRealClock & 0x80000U) != 0) &&
+       (*(int *)(&_BlockVramEntry_800d5b7c.newX + (voiceIndex >> 4) * 2) != 0)) &&
+      (ULONG_800d116c._2_1_ != '\0'))
+  {
+    if (queueRequests == 0)
+    {
+      voiceCmdResume((XAVoiceTracker *)&voiceTracker, 0);
+    }
+    else
+    {
+      *(short *)(&_BlockVramEntry_800d5b28.type + (uint)_BlockVramEntry_800d5b60.area._3_1_ * 2) =
+          (short)voiceIndex;
+      bVar1 = _BlockVramEntry_800d5b60.udata._1_1_ + 1;
+      if (_BlockVramEntry_800d5b60.udata._1_1_ < 3)
+      {
+        /* WARNING: Read-only address (ram,0x800d5b79) is written */
+        _BlockVramEntry_800d5b60.area._3_1_ = _BlockVramEntry_800d5b60.area._3_1_ + 1;
+        /* WARNING: Read-only address (ram,0x800d5b77) is written */
+        _BlockVramEntry_800d5b60.udata._1_1_ = bVar1;
+        if (_BlockVramEntry_800d5b60.area._3_1_ == 4)
+        {
+          /* WARNING: Read-only address (ram,0x800d5b77) is written */
+          _BlockVramEntry_800d5b60.area._3_1_ = 0;
+        }
+      }
+    }
+  }
+  return;
 }
 
 // decompiled code
@@ -1049,18 +556,18 @@ void VOICEXA_Play(int voiceIndex, int queueRequests)
 int VOICEXA_FinalStatus(XAVoiceTracker *vt)
 
 {
-	int iVar1;
+  int iVar1;
 
-	if (vt->voiceCmdsQueued == '\0')
-	{
-		return (uint)vt->voiceStatus;
-	}
-	iVar1 = (uint)vt->voiceCmdIn - 1;
-	if (vt->voiceCmdIn == 0)
-	{
-		iVar1 = 0xf;
-	}
-	return (uint)vt->voiceCmdQueue[iVar1].nextVoiceStatus;
+  if (vt->voiceCmdsQueued == '\0')
+  {
+    return (uint)vt->voiceStatus;
+  }
+  iVar1 = (uint)vt->voiceCmdIn - 1;
+  if (vt->voiceCmdIn == 0)
+  {
+    iVar1 = 0xf;
+  }
+  return (uint)vt->voiceCmdQueue[iVar1].nextVoiceStatus;
 }
 
 // decompiled code
@@ -1082,35 +589,27 @@ int VOICEXA_FinalStatus(XAVoiceTracker *vt)
 /* end block 2 */
 // End Line: 910
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
-
 void VOICEXA_Pause(void)
 
 {
-	int iVar1;
-	uchar voiceCmd;
-	uchar nextVoiceStatus;
+  int iVar1;
+  short cmdParam;
 
-	iVar1 = VOICEXA_FinalStatus(&voiceTracker);
-	if ((gameTrackerX.debugFlags & 0x80000U) != 0)
-	{
-		voiceCmd = '\x02';
-		if (iVar1 - 1U < 2)
-		{
-			nextVoiceStatus = '\x03';
-		}
-		else
-		{
-			if (iVar1 != 0)
-			{
-				return;
-			}
-			voiceCmd = '\x04';
-			nextVoiceStatus = '\x04';
-		}
-		putVoiceCommand(&voiceTracker, voiceCmd, nextVoiceStatus, 0);
-	}
-	return;
+  iVar1 = VOICEXA_FinalStatus((XAVoiceTracker *)&gp0x00000020);
+  if ((uGpffffb5b8 & 0x80000) != 0)
+  {
+    cmdParam = 2;
+    if (1 < iVar1 - 1U)
+    {
+      if (iVar1 != 0)
+      {
+        return;
+      }
+      cmdParam = 4;
+    }
+    voiceCmdResume((XAVoiceTracker *)&gp0x00000020, cmdParam);
+  }
+  return;
 }
 
 // decompiled code
@@ -1137,30 +636,24 @@ void VOICEXA_Pause(void)
 void VOICEXA_Resume(void)
 
 {
-	int iVar1;
-	uchar voiceCmd;
-	uchar nextVoiceStatus;
+  int iVar1;
+  short cmdParam;
 
-	iVar1 = VOICEXA_FinalStatus(&voiceTracker);
-	if ((gameTrackerX.debugFlags & 0x80000U) != 0)
-	{
-		voiceCmd = '\x03';
-		if (iVar1 == 3)
-		{
-			nextVoiceStatus = '\x01';
-		}
-		else
-		{
-			if (iVar1 != 4)
-			{
-				return;
-			}
-			voiceCmd = '\x04';
-			nextVoiceStatus = '\0';
-		}
-		putVoiceCommand(&voiceTracker, voiceCmd, nextVoiceStatus, 0);
-	}
-	return;
+  iVar1 = VOICEXA_FinalStatus((XAVoiceTracker *)&voiceTracker);
+  if ((vmRealClock & 0x80000U) != 0)
+  {
+    cmdParam = 3;
+    if (iVar1 != 3)
+    {
+      if (iVar1 != 4)
+      {
+        return;
+      }
+      cmdParam = 4;
+    }
+    voiceCmdResume((XAVoiceTracker *)&voiceTracker, cmdParam);
+  }
+  return;
 }
 
 // decompiled code
@@ -1186,48 +679,51 @@ void VOICEXA_Resume(void)
 void VOICEXA_Tick(void)
 
 {
-	if ((gameTrackerX.debugFlags & 0x80000U) != 0)
-	{
-		processVoiceCommands(&voiceTracker);
-		processCdCommands(&voiceTracker);
-		if (((voiceTracker.cdCmdsQueued == '\0') && (voiceTracker.voiceCmdsQueued == '\0')) &&
-			(voiceTracker.voiceStatus < 3))
-		{
-			if (voiceTracker.voiceStatus == '\0')
-			{
-				if (voiceTracker.reqsQueued != '\0')
-				{
-					putVoiceCommand(&voiceTracker, '\0', '\x01',
-									(uint)voiceTracker.requestQueue[(uint)voiceTracker.reqOut]);
-					voiceTracker.reqsQueued = voiceTracker.reqsQueued + -1;
-					voiceTracker.reqOut = voiceTracker.reqOut + '\x01';
-					if (voiceTracker.reqOut == '\x04')
-					{
-						voiceTracker.reqOut = '\0';
-					}
-				}
-			}
-			else
-			{
-				CdControlB(0x10, (undefined *)0x0, voiceTracker.cdResult);
-				if ((voiceTracker.cdResult[3] & 2) != 0)
-				{
-					voiceTracker.voiceStatus = '\x02';
-					voiceTracker.currentPos.track = '\0';
-					voiceTracker.currentPos.minute = voiceTracker.cdResult[0];
-					voiceTracker.currentPos.second = voiceTracker.cdResult[1];
-					voiceTracker.currentPos.sector = voiceTracker.cdResult[2];
-					voiceTracker.currentSector = CdPosToInt((byte *)&voiceTracker);
-					voiceTracker.currentSector = voiceTracker.currentSector + -0x96;
-					if (voiceTracker.endSector + -8 <= voiceTracker.currentSector)
-					{
-						putVoiceCommand(&voiceTracker, '\x01', '\0', 0);
-					}
-				}
-			}
-		}
-	}
-	return;
+  if ((vmRealClock & 0x80000U) != 0)
+  {
+    processVoiceCommands((XAVoiceTracker *)&voiceTracker);
+    processCdCommands((XAVoiceTracker *)&voiceTracker);
+    if (((_BlockVramEntry_800d5b60.area._2_1_ == '\0') &&
+         ((char)_BlockVramEntry_800d5b7c.next == '\0')) &&
+        (_BlockVramEntry_800d5b7c.next._2_1_ < 3))
+    {
+      if (_BlockVramEntry_800d5b7c.next._2_1_ == 0)
+      {
+        if (_BlockVramEntry_800d5b60.udata._1_1_ != '\0')
+        {
+          voiceCmdResume((XAVoiceTracker *)&voiceTracker, 0);
+          _BlockVramEntry_800d5b60.udata._1_1_ = _BlockVramEntry_800d5b60.udata._1_1_ + -1;
+          _BlockVramEntry_800d5b60.udata._0_1_ = (char)_BlockVramEntry_800d5b60.udata + '\x01';
+          /* WARNING: Read-only address (ram,0x800d5b78) is written */
+          /* WARNING: Read-only address (ram,0x800d5b79) is written */
+          if ((char)_BlockVramEntry_800d5b60.udata == '\x04')
+          {
+            /* WARNING: Read-only address (ram,0x800d5b78) is written */
+            _BlockVramEntry_800d5b60.udata._0_1_ = '\0';
+          }
+        }
+      }
+      else
+      {
+        CdControlB(0x10, (undefined *)0x0, (undefined *)&voiceTracker.w);
+        if ((voiceTracker.h._1_1_ & 2) != 0)
+        {
+          _BlockVramEntry_800d5b7c.next._2_1_ = 2;
+          voiceTracker.next._3_1_ = 0;
+          voiceTracker.next._0_1_ = (undefined)voiceTracker.w;
+          voiceTracker.next._1_1_ = voiceTracker.w._1_1_;
+          voiceTracker.next._2_1_ = (undefined)voiceTracker.h;
+          voiceTracker._4_4_ = CdPosToInt((byte *)&voiceTracker);
+          voiceTracker._4_4_ = voiceTracker._4_4_ + -0x96;
+          if (voiceTracker._8_4_ + -8 <= voiceTracker._4_4_)
+          {
+            voiceCmdResume((XAVoiceTracker *)&voiceTracker, 1);
+          }
+        }
+      }
+    }
+  }
+  return;
 }
 
 // decompiled code
@@ -1258,15 +754,16 @@ void VOICEXA_Tick(void)
 int VOICEXA_IsPlaying(void)
 
 {
-	int iVar1;
+  int iVar1;
 
-	iVar1 = 2;
-	if ((voiceTracker.voiceStatus != '\x02') &&
-		((voiceTracker.voiceStatus == '\x01' || (iVar1 = 0, voiceTracker.cdStatus != '\0'))))
-	{
-		return 1;
-	}
-	return iVar1;
+  iVar1 = 2;
+  if ((_BlockVramEntry_800d5b7c.next._2_1_ != '\x02') &&
+      ((_BlockVramEntry_800d5b7c.next._2_1_ == '\x01' ||
+        (iVar1 = 0, _BlockVramEntry_800d5b7c.next._3_1_ != '\0'))))
+  {
+    return 1;
+  }
+  return iVar1;
 }
 
 // decompiled code
@@ -1300,5 +797,5 @@ int VOICEXA_IsPlaying(void)
 int VOICEXA_IsPlayingOrPaused(void)
 
 {
-	return (uint)((voiceTracker._168_4_ & 0xffff0000) != 0);
+  return (uint)(((uint)_BlockVramEntry_800d5b7c.next & 0xffff0000) != 0);
 }

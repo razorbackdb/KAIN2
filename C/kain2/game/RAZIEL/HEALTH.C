@@ -10,6 +10,7 @@
 /* end block 1 */
 // End Line: 9
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void InitHealthSystem(void)
@@ -17,20 +18,20 @@ void InitHealthSystem(void)
 {
   int iVar1;
 
-  Raziel.DamageFrequency = 0;
-  Raziel.HealthScale = 1;
-  Raziel.HealthBalls = 0;
-  Raziel.GlyphManaBalls = 0;
-  if (gameTrackerX.gameData.asmData.MorphType == 0)
+  _CHAR____800d5614 = 0;
+  _CHAR____800d560c = 1;
+  _CHAR____800d560e = 0;
+  _CHAR____800d5624 = 0;
+  if (DAT_800d0fb6 == 0)
   {
-    Raziel.CurrentPlane = 2;
-    Raziel.HitPoints = (int)&LAB_000186a0;
+    _CHAR____800d564c = 2;
+    _CHAR____800d5610 = 100000;
     razMaterialShift();
   }
   else
   {
-    Raziel.CurrentPlane = 1;
-    Raziel.HitPoints = GetMaxHealth();
+    _CHAR____800d564c = 1;
+    _CHAR____800d5610 = GetMaxHealth();
     razSpectralShift();
   }
   iVar1 = razInBaseArea(s_under_800cf860, 5);
@@ -40,7 +41,7 @@ void InitHealthSystem(void)
   }
   else
   {
-    Raziel.HitPoints = 100;
+    _CHAR____800d5610 = 100;
   }
   return;
 }
@@ -54,6 +55,8 @@ void InitHealthSystem(void)
 /* end block 1 */
 // End Line: 72
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void GainHealth(int data)
 
 {
@@ -64,11 +67,11 @@ void GainHealth(int data)
   {
     data = data + 0xfff;
   }
-  Raziel.HitPoints = Raziel.HitPoints + (data >> 0xc);
+  _CHAR____800d5610 = _CHAR____800d5610 + (data >> 0xc);
   iVar1 = GetMaxHealth();
-  if ((iVar1 <= Raziel.HitPoints) && (Raziel.CurrentPlane == 1))
+  if ((iVar1 <= _CHAR____800d5610) && (_CHAR____800d564c == 1))
   {
-    Raziel.HitPoints = GetMaxHealth();
+    _CHAR____800d5610 = GetMaxHealth();
     razReaverOn();
   }
   return;
@@ -83,30 +86,32 @@ void GainHealth(int data)
 /* end block 1 */
 // End Line: 102
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void LoseHealth(int amount)
 
 {
-  if ((((ControlFlag & 0x1000000U) == 0) && (Raziel.invincibleTimer == 0)) &&
-      (0x20d < Raziel.HitPoints))
+  if ((((_BlockVramEntry_800d59a0._12_4_ & 0x1000000) == 0) && (_CHAR____800d5618 == 0)) &&
+      (0x20d < _CHAR____800d5610))
   {
     amount = amount * 20000;
     if (amount < 0)
     {
       amount = amount + 0xfff;
     }
-    Raziel.HitPoints = Raziel.HitPoints - (amount >> 0xc);
-    Raziel.DamageFrequency = Raziel.DamageFrequency - (amount >> 0xc);
-    Raziel.invincibleTimer = (int)PlayerData->healthInvinciblePostHit * 0x1e000;
-    if (Raziel.CurrentPlane == 1)
+    _CHAR____800d5610 = _CHAR____800d5610 - (amount >> 0xc);
+    _CHAR____800d5614 = _CHAR____800d5614 - (amount >> 0xc);
+    _CHAR____800d5618 = (int)*(short *)(_PlayerData + 0x34) * 0x1e000;
+    if (_CHAR____800d564c == 1)
     {
       razReaverOff();
-      if (Raziel.soulReaver != (_Instance *)0x0)
+      if (_CHAR____800d5644 != (_Instance *)0x0)
       {
-        INSTANCE_Post(Raziel.soulReaver, 0x800101, 0);
-        razReaverImbue(2);
+        /* WARNING: Subroutine does not return */
+        INSTANCE_Post(_CHAR____800d5644, 0x800101, 0);
       }
     }
-    if ((gameTrackerX.gameFlags & 0x80U) == 0)
+    if ((DAT_800d10ec & 0x80) == 0)
     {
       GAMEPAD_Shock0(1, (int)&DAT_00002328);
     }
@@ -123,41 +128,43 @@ void LoseHealth(int amount)
 /* end block 1 */
 // End Line: 154
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void DrainHealth(int amount)
 
 {
   int iVar1;
 
-  if ((ControlFlag & 0x1000000U) == 0)
+  if ((_BlockVramEntry_800d59a0._12_4_ & 0x1000000) == 0)
   {
     if (amount < 0)
     {
       amount = amount + 0xfff;
     }
-    if (Raziel.CurrentPlane == 1)
+    if (_CHAR____800d564c == 1)
     {
-      iVar1 = (int)PlayerData->healthMaterialRate * (amount >> 0xc) * gameTrackerX.timeMult;
+      iVar1 = (int)*(short *)(_PlayerData + 0x30) * (amount >> 0xc) * DAT_800d11ec;
       if (iVar1 < 0)
       {
         iVar1 = iVar1 + 0xfff;
       }
-      Raziel.HitPoints = Raziel.HitPoints + (iVar1 >> 0xc);
-      if (Raziel.soulReaver != (_Instance *)0x0)
+      _CHAR____800d5610 = _CHAR____800d5610 + (iVar1 >> 0xc);
+      if (_CHAR____800d5644 != (_Instance *)0x0)
       {
-        INSTANCE_Post(Raziel.soulReaver, 0x800101, 0);
-        razReaverImbue(2);
+        /* WARNING: Subroutine does not return */
+        INSTANCE_Post(_CHAR____800d5644, 0x800101, 0);
       }
     }
     else
     {
-      if ((Raziel.invincibleTimer == 0) && (0x20d < Raziel.HitPoints))
+      if ((_CHAR____800d5618 == 0) && (0x20d < _CHAR____800d5610))
       {
-        iVar1 = -(int)PlayerData->healthSpectralRate * (amount >> 0xc) * gameTrackerX.timeMult;
+        iVar1 = -(int)*(short *)(_PlayerData + 0x32) * (amount >> 0xc) * DAT_800d11ec;
         if (iVar1 < 0)
         {
           iVar1 = iVar1 + 0xfff;
         }
-        Raziel.HitPoints = Raziel.HitPoints + (iVar1 >> 0xc);
+        _CHAR____800d5610 = _CHAR____800d5610 + (iVar1 >> 0xc);
       }
     }
   }
@@ -178,17 +185,18 @@ void DrainHealth(int amount)
 /* end block 2 */
 // End Line: 216
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void BumpUpHealth(void)
 
 {
-  Raziel.HealthScale = Raziel.HealthScale + 1;
-  if (4 < Raziel.HealthScale)
+  _CHAR____800d560c = _CHAR____800d560c + 1;
+  if (4 < _CHAR____800d560c)
   {
-    Raziel.HealthScale = 4;
+    _CHAR____800d560c = 4;
   }
-  Raziel.HitPoints = GetMaxHealth();
+  _CHAR____800d5610 = GetMaxHealth();
   return;
 }
 
@@ -206,16 +214,17 @@ void BumpUpHealth(void)
 /* end block 2 */
 // End Line: 253
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 int GetMaxHealth(void)
 
 {
-  if (Raziel.CurrentPlane != 2)
+  if (_CHAR____800d564c != 2)
   {
-    return ((int)Raziel.HealthScale + 1) * 100000;
+    return ((int)_CHAR____800d560c + 1) * 100000;
   }
-  return (int)&LAB_000186a0;
+  return 100000;
 }
 
 // decompiled code
@@ -246,17 +255,20 @@ int GetMaxHealth(void)
 /* end block 3 */
 // End Line: 320
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void ProcessHealth(_Instance *instance)
 
 {
-  int Data;
   int number;
-  undefined *max_health;
+  undefined *current_health;
+  int max_health;
+  int in_a3;
 
-  if ((Raziel.invincibleTimer == 0) && ((Raziel.playerEventHistory & 0x1000) != 0))
+  if ((_CHAR____800d5618 == 0) && ((_CHAR____800d57c8 & 0x1000) != 0))
   {
-    Data = GetMaxHealth();
-    if ((Raziel.HitPoints == Data) || (Raziel.CurrentPlane == 2))
+    current_health = (undefined *)GetMaxHealth();
+    if ((_CHAR____800d5610 == current_health) || (_CHAR____800d564c == 2))
     {
       razReaverOn();
     }
@@ -264,128 +276,126 @@ void ProcessHealth(_Instance *instance)
     {
       razReaverOff();
     }
-    if (Raziel.CurrentPlane == 1)
+    if (_CHAR____800d564c == 1)
     {
-      if ((instance->waterFace != (_TFace *)0x0) && ((Raziel.Abilities & 0x10U) == 0))
+      if ((instance->waterFace != (_TFace *)0x0) && ((_CHAR____800d561c & 0x10) == 0))
       {
         DrainHealth((int)&DAT_0000a000);
       }
-      if ((Raziel.soulReaver == (_Instance *)0x0) ||
-          (Data = GetMaxHealth(), Raziel.HitPoints != Data))
+      if ((_CHAR____800d5644 == (_Instance *)0x0) ||
+          (current_health = (undefined *)GetMaxHealth(), _CHAR____800d5610 != current_health))
       {
-        Data = (int)PlayerData->healthMaterialRate * gameTrackerX.timeMult;
-        if (Data < 0)
+        number = *(short *)(_PlayerData + 0x30) * DAT_800d11ec;
+        if (number < 0)
         {
-          Data = Data + 0xfff;
+          number = number + 0xfff;
         }
-        Raziel.HitPoints = Raziel.HitPoints + (Data >> 0xc);
+        _CHAR____800d5610 = _CHAR____800d5610 + (number >> 0xc);
       }
-      if (Raziel.HitPoints < 100000)
+      if ((int)_CHAR____800d5610 < 100000)
       {
         razPlaneShift(instance);
-        Raziel.invincibleTimer = (int)PlayerData->healthInvinciblePostShunt * 0x1e000;
-        if ((Raziel.Mode & 0x40000U) != 0)
+        _CHAR____800d5618 = (int)*(short *)(_PlayerData + 0x36) * 0x1e000;
+        if ((_CHAR____800d5574 & 0x40000) != 0)
         {
-          CAMERA_ChangeToOutOfWater(&theCamera, instance);
+          CAMERA_ChangeToOutOfWater((Camera *)&theCamera, instance);
         }
       }
       else
       {
-        if (Raziel.HitPoints < 150000)
+        if ((int)_CHAR____800d5610 < 150000)
         {
-          Data = gameTrackerX.timeMult * 1000;
-          if (Data < 0)
+          number = DAT_800d11ec * 1000;
+          if (number < 0)
           {
-            Data = Data + 0xfff;
+            number = number + 0xfff;
           }
-          Raziel.DamageFrequency = Raziel.DamageFrequency - (Data >> 0xc);
-          if (Raziel.DamageFrequency < 0)
+          _CHAR____800d5614 = _CHAR____800d5614 + -(number >> 0xc);
+          if ((int)_CHAR____800d5614 < 0)
           {
-            Raziel.DamageFrequency = Raziel.HitPoints + -100000;
-            if (Raziel.DamageFrequency < 0x493e)
+            _CHAR____800d5614 = _CHAR____800d5610 + -100000;
+            if ((int)_CHAR____800d5614 < 0x493e)
             {
-              Raziel.DamageFrequency = (int)&DAT_0000493e;
+              _CHAR____800d5614 = &DAT_0000493e;
             }
-            FX_DoInstancePowerRing(instance, 0x2ee - ((int)(&DAT_0000c350 + -Raziel.DamageFrequency) * 300) / 0x7a12, (long *)0x0, 0, 0);
-            if ((gameTrackerX.gameFlags & 0x80U) == 0)
+            FX_DoInstancePowerRing(instance, 0x2ee - ((int)(&DAT_0000c350 + -(int)_CHAR____800d5614) * 300) / 0x7a12, (long *)0x0, 0, 0);
+            if ((DAT_800d10ec & 0x80) == 0)
             {
               GAMEPAD_Shock1(0x80, (int)&DAT_00005000);
             }
           }
         }
       }
-      number = (int)Raziel.HealthScale;
-      Data = Raziel.HitPoints + -100000;
-      max_health = (undefined *)(number * 100000);
+      number = (int)_CHAR____800d560c;
+      current_health = _CHAR____800d5610 + -100000;
+      max_health = number * 100000;
       goto LAB_800a4e34;
     }
-    if (Raziel.HitPoints < 0x20e)
+    if ((int)_CHAR____800d5610 < 0x20e)
     {
-      Data = (int)PlayerData->healthSpectralRate * gameTrackerX.timeMult;
-      if (Data < 0)
+      number = *(short *)(_PlayerData + 0x32) * DAT_800d11ec;
+      if (number < 0)
       {
-        Data = Data + 0xfff;
+        number = number + 0xfff;
       }
-      Raziel.HitPoints = Raziel.HitPoints - (Data >> 0xc);
+      _CHAR____800d5610 = _CHAR____800d5610 + -(number >> 0xc);
     }
     else
     {
-      if (Raziel.HitPoints < 100000)
+      if ((int)_CHAR____800d5610 < 100000)
       {
-        Data = (int)PlayerData->healthSpectralRate * gameTrackerX.timeMult;
-        if (Data < 0)
+        number = *(short *)(_PlayerData + 0x32) * DAT_800d11ec;
+        if (number < 0)
         {
-          Data = Data + 0xfff;
+          number = number + 0xfff;
         }
-        Raziel.HitPoints = Raziel.HitPoints + (Data >> 0xc);
+        _CHAR____800d5610 = _CHAR____800d5610 + (number >> 0xc);
       }
       else
       {
-        Raziel.HitPoints = (int)&LAB_000186a0;
+        _CHAR____800d5610 = (undefined *)0x186a0;
       }
     }
-    if (((ControlFlag & 0x800000U) == 0) && (Raziel.HitPoints < 0x20d))
+    if (((_BlockVramEntry_800d59a0._12_4_ & 0x800000) == 0) && ((int)_CHAR____800d5610 < 0x20d))
     {
-      Data = SetControlInitIdleData(0, 0, 3);
-      StateSwitchStateCharacterData(&Raziel.State, StateHandlerIdle, Data);
-      G2EmulationSwitchAnimationCharacter(&Raziel.State, 0xd6, 0, 3, 1);
-      Raziel.HitPoints = 0x20d;
-      ControlFlag = ControlFlag | 0x804000;
+      /* WARNING: Subroutine does not return */
+      SetPhysicsWallCrawlData(0, 0, 3, in_a3);
     }
-    if (Raziel.HitPoints < 0)
+    if ((int)_CHAR____800d5610 < 0)
     {
-      gameTracker->streamFlags = gameTracker->streamFlags | 0x80000;
-      if (Raziel.soulReaver != (_Instance *)0x0)
+      *(uint *)&gameTracker.next[0xb].w = *(uint *)&gameTracker.next[0xb].w | 0x80000;
+      if (_CHAR____800d5644 != (_Instance *)0x0)
       {
-        INSTANCE_Post(Raziel.soulReaver, 0x800105, 0);
+        /* WARNING: Subroutine does not return */
+        INSTANCE_Post(_CHAR____800d5644, 0x800105, 0);
       }
       razSetPlayerEventHistory(0x8000);
-      Raziel.HitPoints = (int)&DAT_0000c350;
-      gameTrackerX.gameData.asmData.MorphType = 1;
-      Raziel.playerEvent = Raziel.playerEvent | 0x8000;
-      razPlayUnderworldSounds(gameTrackerX.playerInstance);
+      _CHAR____800d5610 = &DAT_0000c350;
+      DAT_800d0fb6 = 1;
+      _CHAR____800d57c4 = _CHAR____800d57c4 | 0x8000;
+      razPlayUnderworldSounds(DAT_800d0fd8);
     }
   }
   else
   {
-    Raziel.invincibleTimer = Raziel.invincibleTimer - gameTrackerX.timeMult;
-    if (Raziel.invincibleTimer < 0)
+    _CHAR____800d5618 = _CHAR____800d5618 - DAT_800d11ec;
+    if (_CHAR____800d5618 < 0)
     {
-      Raziel.invincibleTimer = 0;
+      _CHAR____800d5618 = 0;
     }
-    if (Raziel.CurrentPlane == 1)
+    if (_CHAR____800d564c == 1)
     {
-      number = (int)Raziel.HealthScale;
-      max_health = (undefined *)(number * 100000);
-      Data = Raziel.HitPoints + -100000;
+      number = (int)_CHAR____800d560c;
+      max_health = number * 100000;
+      current_health = _CHAR____800d5610 + -100000;
       goto LAB_800a4e34;
     }
   }
   number = 0;
-  max_health = &LAB_000186a0;
-  Data = Raziel.HitPoints;
+  max_health = 100000;
+  current_health = _CHAR____800d5610;
 LAB_800a4e34:
-  FX_Health_Spiral(number, Data, (int)max_health);
+  FX_Health_Spiral(number, (int)current_health, max_health);
   return;
 }
 
@@ -398,6 +408,7 @@ LAB_800a4e34:
 /* end block 1 */
 // End Line: 650
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 int HealthCheckForLowHealth(void)
@@ -410,10 +421,10 @@ int HealthCheckForLowHealth(void)
   iVar2 = 1;
   if (iVar1 == 0)
   {
-    if (Raziel.CurrentPlane == 1)
+    if (_CHAR____800d564c == 1)
     {
       iVar2 = 0;
-      if (Raziel.HitPoints < 0x18704)
+      if (_CHAR____800d5610 < 0x18704)
       {
         iVar2 = 1;
       }
@@ -421,7 +432,7 @@ int HealthCheckForLowHealth(void)
     else
     {
       iVar2 = 1;
-      if (99 < Raziel.HitPoints)
+      if (99 < _CHAR____800d5610)
       {
         iVar2 = 0;
       }
@@ -444,20 +455,22 @@ int HealthCheckForLowHealth(void)
 /* end block 2 */
 // End Line: 695
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void DrainMana(int amount)
 
 {
   uint uVar1;
 
-  uVar1 = (uint)Raziel.GlyphManaBalls;
-  Raziel.GlyphManaBalls = (ushort)(uVar1 - amount);
+  uVar1 = (uint)_CHAR____800d5624;
+  _CHAR____800d5624 = (ushort)(uVar1 - amount);
   if ((uVar1 - amount & 0xffff) == 0)
   {
-    Raziel.GlyphManaBalls = 0;
+    _CHAR____800d5624 = 0;
   }
-  if (Raziel.GlyphManaMax < Raziel.GlyphManaBalls)
+  if (_CHAR____800d5626 < _CHAR____800d5624)
   {
-    Raziel.GlyphManaBalls = Raziel.GlyphManaMax;
+    _CHAR____800d5624 = _CHAR____800d5626;
   }
   return;
 }
@@ -476,15 +489,17 @@ void DrainMana(int amount)
 /* end block 2 */
 // End Line: 715
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void SetMana(int amount)
 
 {
   if (amount < 1)
   {
-    Raziel.GlyphManaBalls = 0;
+    _CHAR____800d5624 = 0;
     return;
   }
-  Raziel.GlyphManaBalls = Raziel.GlyphManaMax;
+  _CHAR____800d5624 = _CHAR____800d5626;
   return;
 }
 
@@ -497,20 +512,23 @@ void SetMana(int amount)
 /* end block 1 */
 // End Line: 732
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void HealthInstantDeath(_Instance *instance)
 
 {
-  gameTrackerX.gameData.asmData.MorphType = 1;
+  DAT_800d0fb6 = 1;
   razSpectralShift();
-  Raziel.HitPoints = (int)&DAT_0000c350;
-  gameTracker->streamFlags = gameTracker->streamFlags | 0x80000;
-  if (Raziel.soulReaver != (_Instance *)0x0)
+  _CHAR____800d5610 = &DAT_0000c350;
+  *(uint *)&gameTracker.next[0xb].w = *(uint *)&gameTracker.next[0xb].w | 0x80000;
+  if (_CHAR____800d5644 != (_Instance *)0x0)
   {
-    INSTANCE_Post(Raziel.soulReaver, 0x800105, 0);
+    /* WARNING: Subroutine does not return */
+    INSTANCE_Post(_CHAR____800d5644, 0x800105, 0);
   }
   razSetPlayerEventHistory(0x8000);
-  Raziel.playerEvent = Raziel.playerEvent | 0x8000;
-  razPlayUnderworldSounds(gameTrackerX.playerInstance);
+  _CHAR____800d57c4 = _CHAR____800d57c4 | 0x8000;
+  razPlayUnderworldSounds(DAT_800d0fd8);
   return;
 }
 
@@ -528,12 +546,14 @@ void HealthInstantDeath(_Instance *instance)
 /* end block 2 */
 // End Line: 779
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void RAZIEL_DebugHealthSetScale(long healthScale)
 
 {
-  Raziel.HealthScale = (short)healthScale;
-  Raziel.HealthBalls = (Raziel.HealthScale + -1) * 5;
-  Raziel.HitPoints = (int)(&LAB_000186a0 + (int)Raziel.HealthScale * 100000);
+  _CHAR____800d560c = (short)healthScale;
+  _CHAR____800d560e = (_CHAR____800d560c + -1) * 5;
+  _CHAR____800d5610 = (int)_CHAR____800d560c * 100000 + 100000;
   return;
 }
 
@@ -551,14 +571,16 @@ void RAZIEL_DebugHealthSetScale(long healthScale)
 /* end block 2 */
 // End Line: 803
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void RAZIEL_DebugManaSetMax(long manaScale)
 
 {
-  Raziel.GlyphManaBalls = (ushort)(manaScale << 2);
-  Raziel.GlyphManaMax = Raziel.GlyphManaBalls;
+  _CHAR____800d5624 = (undefined2)(manaScale << 2);
+  _CHAR____800d5626 = _CHAR____800d5624;
   if (0x34 < (manaScale << 2 & 0xfffcU))
   {
-    Raziel.GlyphManaMax = 0x34;
+    _CHAR____800d5626 = 0x34;
   }
   return;
 }
@@ -577,17 +599,18 @@ void RAZIEL_DebugManaSetMax(long manaScale)
 /* end block 2 */
 // End Line: 826
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void RAZIEL_DebugHealthFillUp(void)
 
 {
-  if (Raziel.CurrentPlane == 1)
+  if (_CHAR____800d564c == 1)
   {
-    Raziel.HitPoints = (int)(&LAB_000186a0 + (int)Raziel.HealthScale * 100000);
+    _CHAR____800d5610 = (int)_CHAR____800d560c * 100000 + 100000;
     return;
   }
-  Raziel.HitPoints = (int)&LAB_000186a0;
+  _CHAR____800d5610 = 100000;
   return;
 }
 
@@ -618,17 +641,19 @@ void RAZIEL_DebugManaFillUp(void)
 /* end block 1 */
 // End Line: 865
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void razPlayUnderworldSounds(_Instance *instance)
 
 {
-  if (Raziel.soundHandle != 0)
+  if (_CHAR____800d577c != 0)
   {
-    SndEndLoop(Raziel.soundHandle);
-    Raziel.soundHandle = 0;
+    /* WARNING: Subroutine does not return */
+    SndEndLoop(_CHAR____800d577c);
   }
-  razSetupSoundRamp(instance, (_SoundRamp *)&Raziel.soundHandle, 0x1a, -0xfa, -0xfa, 0x78, 0x78, 0, 0xdac);
-  razSetupSoundRamp(instance, (_SoundRamp *)&Raziel.soundHandle, 0x1a, -300, -300, 0x78, 0x78, 0, 0xdac);
-  razSetupSoundRamp(instance, (_SoundRamp *)&Raziel.soundHandle, 0x12, -0xdc, -0xdc, 0x78, 0x78, 0, 0xdac);
-  razSetupSoundRamp(instance, (_SoundRamp *)&Raziel.soundHandle, 0x1a, -0xfa, -0xfa, 0x78, 0x78, 0, 0xdac);
+  razSetupSoundRamp(instance, (_SoundRamp *)&CHAR____800d577c, 0x1a, -0xfa, -0xfa, 0x78, 0x78, 0, 0xdac);
+  razSetupSoundRamp(instance, (_SoundRamp *)&CHAR____800d577c, 0x1a, -300, -300, 0x78, 0x78, 0, 0xdac);
+  razSetupSoundRamp(instance, (_SoundRamp *)&CHAR____800d577c, 0x12, -0xdc, -0xdc, 0x78, 0x78, 0, 0xdac);
+  razSetupSoundRamp(instance, (_SoundRamp *)&CHAR____800d577c, 0x1a, -0xfa, -0xfa, 0x78, 0x78, 0, 0xdac);
   return;
 }

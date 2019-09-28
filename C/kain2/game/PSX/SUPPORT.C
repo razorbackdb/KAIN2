@@ -94,75 +94,70 @@ int sprintf(char *string, char *fmt)
 int vsprintf(char *str, char *fmtstr, void *argptr)
 
 {
-  byte bVar1;
+  char cVar1;
   byte bVar2;
   byte bVar3;
-  size_t sVar4;
-  char *__dest;
+  byte bVar4;
+  size_t sVar5;
+  ulong value;
   int radix;
-  int iVar5;
+  int iVar6;
   char *__s;
-  byte *pbVar6;
   byte *pbVar7;
-  int iVar8;
+  byte *pbVar8;
+  int iVar9;
   int __c;
   char local_38;
   undefined local_37;
 
-  bVar1 = *fmtstr;
-  iVar8 = 0;
+  cVar1 = *fmtstr;
+  iVar9 = 0;
   do
   {
-    if (bVar1 == 0)
+    if (cVar1 == '\0')
     {
-      str[iVar8] = '\0';
-      return iVar8;
+      str[iVar9] = '\0';
+      return iVar9;
     }
-    if (bVar1 == 0x25)
+    if (cVar1 == '%')
     {
-      pbVar6 = (byte *)fmtstr + 1;
-      bVar1 = *pbVar6;
-      if (bVar1 == 0x25)
+      pbVar7 = (byte *)(fmtstr + 1);
+      bVar2 = *pbVar7;
+      if (bVar2 != 0x25)
       {
-        str[iVar8] = '%';
-        iVar8 = iVar8 + 1;
-        fmtstr = (char *)((byte *)fmtstr + 2);
-      }
-      else
-      {
-        if (bVar1 == 0x2d)
+        if (bVar2 == 0x2d)
         {
-          pbVar6 = (byte *)fmtstr + 2;
+          pbVar7 = (byte *)(fmtstr + 2);
         }
         __c = 0x20;
-        if (*pbVar6 == 0x30)
+        if (*pbVar7 == 0x30)
         {
           __c = 0x30;
-          pbVar6 = pbVar6 + 1;
+          pbVar7 = pbVar7 + 1;
         }
-        bVar2 = *pbVar6;
-        iVar5 = 0;
-        while ((uint)bVar2 - 0x30 < 10)
+        bVar3 = *pbVar7;
+        iVar6 = 0;
+        while ((uint)bVar3 - 0x30 < 10)
         {
-          bVar3 = *pbVar6;
-          pbVar6 = pbVar6 + 1;
-          bVar2 = *pbVar6;
-          iVar5 = iVar5 * 10 + (uint)bVar3 + -0x30;
+          bVar4 = *pbVar7;
+          pbVar7 = pbVar7 + 1;
+          bVar3 = *pbVar7;
+          iVar6 = iVar6 * 10 + (uint)bVar4 + -0x30;
         }
         do
         {
           do
           {
-            pbVar7 = pbVar6;
-            bVar2 = *pbVar7;
-            pbVar6 = pbVar7 + 1;
-          } while (bVar2 == 0x4e);
-          pbVar6 = pbVar7 + 1;
-        } while ((((bVar2 == 0x46) || (pbVar6 = pbVar7 + 1, bVar2 == 0x68)) ||
-                  (pbVar6 = pbVar7 + 1, bVar2 == 0x6c)) ||
-                 (pbVar6 = pbVar7 + 1, bVar2 == 0x4c));
-        bVar2 = *pbVar7;
-        if (bVar2 == 99)
+            pbVar8 = pbVar7;
+            bVar3 = *pbVar8;
+            pbVar7 = pbVar8 + 1;
+          } while (bVar3 == 0x4e);
+          pbVar7 = pbVar8 + 1;
+        } while ((((bVar3 == 0x46) || (pbVar7 = pbVar8 + 1, bVar3 == 0x68)) ||
+                  (pbVar7 = pbVar8 + 1, bVar3 == 0x6c)) ||
+                 (pbVar7 = pbVar8 + 1, bVar3 == 0x4c));
+        bVar3 = *pbVar8;
+        if (bVar3 == 99)
         {
           local_38 = *(char *)argptr;
           __s = &local_38;
@@ -170,62 +165,49 @@ int vsprintf(char *str, char *fmtstr, void *argptr)
         }
         else
         {
-          if (bVar2 == 0x73)
+          if (bVar3 == 0x73)
           {
             __s = *(char **)argptr;
           }
           else
           {
-            if ((bVar2 == 0x78) || (bVar2 == 0x58))
+            if ((bVar3 == 0x78) || (bVar3 == 0x58))
             {
-              __s = *(char **)argptr;
+              value = *(ulong *)argptr;
               radix = 0x10;
             }
             else
             {
-              __s = *(char **)argptr;
+              value = *(ulong *)argptr;
               radix = 10;
             }
-            __s = my_itoa((ulong)__s, &local_38, radix);
+            __s = my_itoa(value, &local_38, radix);
           }
         }
-        argptr = (char **)argptr + 1;
-        fmtstr = (char *)(pbVar7 + 1);
-        sVar4 = strlen(__s);
-        if (iVar5 == 0)
+        sVar5 = strlen(__s);
+        if ((iVar6 != 0) && ((int)sVar5 < iVar6))
         {
-        LAB_80074410:
-          __dest = str + iVar8;
-        }
-        else
-        {
-          __dest = str + iVar8;
-          if ((int)sVar4 < iVar5)
+          if (bVar2 == 0x2d)
           {
-            if (bVar1 == 0x2d)
-            {
-              strcpy(__dest, __s);
-              memset(str + iVar8 + sVar4, __c, iVar5 - sVar4);
-              iVar8 = iVar8 + sVar4 + (iVar5 - sVar4);
-              goto LAB_80074420;
-            }
-            memset(__dest, __c, iVar5 - sVar4);
-            iVar8 = iVar8 + (iVar5 - sVar4);
-            goto LAB_80074410;
+            /* WARNING: Subroutine does not return */
+            strcpy(str + iVar9, __s);
           }
+          /* WARNING: Subroutine does not return */
+          memset(str + iVar9, __c, iVar6 - sVar5);
         }
-        strcpy(__dest, __s);
-        iVar8 = iVar8 + sVar4;
+        /* WARNING: Subroutine does not return */
+        strcpy(str + iVar9, __s);
       }
+      str[iVar9] = '%';
+      fmtstr = fmtstr + 2;
     }
     else
     {
-      str[iVar8] = bVar1;
-      fmtstr = (char *)((byte *)fmtstr + 1);
-      iVar8 = iVar8 + 1;
+      str[iVar9] = cVar1;
+      fmtstr = fmtstr + 1;
     }
-  LAB_80074420:
-    bVar1 = *fmtstr;
+    iVar9 = iVar9 + 1;
+    cVar1 = *fmtstr;
   } while (true);
 }
 
@@ -257,10 +239,10 @@ char *my_itoa(ulong value, char *str, int radix)
   char *pcVar3;
   byte local_20[32];
 
-  cVar1 = DAT_800cf5b9;
+  cVar1 = CHAR_00h_800cf5b9;
   if (value == 0)
   {
-    *str = DAT_800cf5b8;
+    *str = CHAR_0_800cf5b8;
     str[1] = cVar1;
   }
   else
@@ -271,7 +253,7 @@ char *my_itoa(ulong value, char *str, int radix)
     }
     pbVar2 = local_20;
     pcVar3 = str;
-    if ((radix == 10) && (pbVar2 = local_20, pcVar3 = str, (int)value < 0))
+    if ((radix == 10) && (pbVar2 = local_20, (int)value < 0))
     {
       *str = '-';
       pcVar3 = str + 1;
@@ -323,7 +305,7 @@ char *my_itoa(ulong value, char *str, int radix)
 /* end block 2 */
 // End Line: 591
 
-int atoi(char *str)
+int atoi(char *__nptr)
 
 {
   char cVar1;
@@ -332,17 +314,17 @@ int atoi(char *str)
   int iVar4;
 
   iVar4 = 0;
-  cVar1 = *str;
+  cVar1 = *__nptr;
   if (cVar1 == '-')
   {
-    str = str + 1;
+    __nptr = __nptr + 1;
   }
-  bVar2 = *str;
+  bVar2 = *__nptr;
   while (bVar2 != 0)
   {
-    bVar3 = *str;
-    str = (char *)((byte *)str + 1);
-    bVar2 = *str;
+    bVar3 = *__nptr;
+    __nptr = (char *)((byte *)__nptr + 1);
+    bVar2 = *__nptr;
     iVar4 = iVar4 * 10 + -0x30 + (uint)bVar3;
   }
   if (cVar1 != '-')

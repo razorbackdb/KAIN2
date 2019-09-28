@@ -37,13 +37,13 @@ short G2Timer_GetFrameTime(void)
 	short sVar1;
 	uint uVar2;
 
-	if (gameTrackerX.timeMult == 0)
+	if (DAT_800d11ec == 0)
 	{
 		uVar2 = 100;
 	}
 	else
 	{
-		uVar2 = gameTrackerX.timeMult * 0x19 >> 10;
+		uVar2 = (uint)(DAT_800d11ec * 0x19) >> 10;
 	}
 	sVar1 = (short)uVar2;
 	if ((int)(uVar2 << 0x10) < 1)
