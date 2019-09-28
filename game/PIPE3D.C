@@ -1,0 +1,1301 @@
+#include "THISDUST.H"
+#include "PIPE3D.H"
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ PIPE3D_AspectAdjustMatrix(struct MATRIX *matrix /*$a0*/)
+ // line 68, offset 0x8003a1f0
+	/* begin block 1 */
+		// Start line: 136
+	/* end block 1 */
+	// End Line: 137
+
+	/* begin block 2 */
+		// Start line: 139
+	/* end block 2 */
+	// End Line: 140
+
+void PIPE3D_AspectAdjustMatrix(MATRIX *matrix)
+
+{
+  short sVar1;
+  short sVar2;
+  short sVar3;
+  
+  sVar1 = matrix->m[0];
+  sVar2 = matrix->m[1];
+  sVar3 = matrix->m[2];
+  matrix->m[3] = matrix->m[3];
+  matrix->m[4] = matrix->m[4];
+  matrix->m[5] = matrix->m[5];
+  matrix->m[0] = (short)(((int)sVar1 << 9) / 0x140);
+  matrix->m[1] = (short)(((int)sVar2 << 9) / 0x140);
+  matrix->m[2] = (short)(((int)sVar3 << 9) / 0x140);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ PIPE3D_CalculateWCTransform(struct _CameraCore_Type *cameraCore /*$s2*/)
+ // line 88, offset 0x8003a278
+	/* begin block 1 */
+		// Start line: 89
+		// Start offset: 0x8003A278
+		// Variables:
+	// 		struct MATRIX user_rotation; // stack offset -112
+	// 		struct MATRIX first; // stack offset -80
+	// 		struct MATRIX *cam_wcTrans; // $s3
+	// 		struct SVECTOR v0; // stack offset -48
+	// 		struct VECTOR v1; // stack offset -40
+	/* end block 1 */
+	// End offset: 0x8003A3CC
+	// End Line: 133
+
+	/* begin block 2 */
+		// Start line: 195
+	/* end block 2 */
+	// End Line: 196
+
+	/* begin block 3 */
+		// Start line: 201
+	/* end block 3 */
+	// End Line: 202
+
+void PIPE3D_CalculateWCTransform(_CameraCore_Type *cameraCore)
+
+{
+  _Position *in_a1;
+  _Rotation *in_a2;
+  MATRIX aMStack112 [2];
+  short local_30;
+  short sStack46;
+  short local_2c;
+  
+  local_30 = -(cameraCore->position).x;
+  sStack46 = -(cameraCore->position).y;
+  local_2c = -(cameraCore->position).z;
+  if ((theCamera.core.debugRot._4_4_ & 8) != 0) {
+    MATH3D_RotationFromPosToPos((_Position *)cameraCore,in_a1,in_a2);
+    return;
+  }
+  MATH3D_SetUnityMatrix(aMStack112);
+  RotMatrixZ(-(int)(cameraCore->rotation).z,(uint *)aMStack112);
+                    /* WARNING: Subroutine does not return */
+  RotMatrixX(-(int)(cameraCore->rotation).x,(int)aMStack112);
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ PIPE3D_InvertTransform(struct MATRIX *target /*$s2*/, struct MATRIX *source /*$s1*/)
+ // line 154, offset 0x8003a5f4
+	/* begin block 1 */
+		// Start line: 155
+		// Start offset: 0x8003A5F4
+		// Variables:
+	// 		struct VECTOR sourceTrans; // stack offset -64
+	// 		struct MATRIX normMat; // stack offset -48
+	/* end block 1 */
+	// End offset: 0x8003A63C
+	// End Line: 168
+
+	/* begin block 2 */
+		// Start line: 359
+	/* end block 2 */
+	// End Line: 360
+
+void PIPE3D_InvertTransform(MATRIX *target,MATRIX *source)
+
+{
+  MATRIX MStack48;
+  
+  if (*(short *)&source->field_0x12 == 1) {
+    PIPE3D_NormalizeMatrix(&MStack48,source);
+    source = &MStack48;
+  }
+                    /* WARNING: Subroutine does not return */
+  TransposeMatrix((undefined4 *)source,(undefined4 *)target);
+}
+
+
+
+// decompiled code
+// original method signature: 
+// long /*$ra*/ PIPE3D_MatrixColumnLength(struct MATRIX *transform /*$a0*/, long column /*$a1*/)
+ // line 174, offset 0x8003a688
+	/* begin block 1 */
+		// Start line: 175
+		// Start offset: 0x8003A688
+	/* end block 1 */
+	// End offset: 0x8003A688
+	// End Line: 175
+
+	/* begin block 2 */
+		// Start line: 405
+	/* end block 2 */
+	// End Line: 406
+
+long PIPE3D_MatrixColumnLength(MATRIX *transform,long column)
+
+{
+  short *psVar1;
+  ulong square;
+  long lVar2;
+  
+  psVar1 = transform->m + column;
+  square = MATH3D_SquareLength((int)*psVar1,(int)psVar1[3],(int)psVar1[6]);
+  lVar2 = MATH3D_FastSqrt0(square);
+  return lVar2;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ PIPE3D_NormalizeMatrix(struct MATRIX *target /*$s1*/, struct MATRIX *source /*$s0*/)
+ // line 183, offset 0x8003a6c4
+	/* begin block 1 */
+		// Start line: 184
+		// Start offset: 0x8003A6C4
+		// Variables:
+	// 		struct VECTOR scalevec; // stack offset -32
+	// 		long scale; // $v1
+
+		/* begin block 1.1 */
+			// Start line: 196
+			// Start offset: 0x8003A74C
+			// TypeDefs:
+		// 		struct PIPE3D_239fake tmm
+		/* end block 1.1 */
+		// End offset: 0x8003A74C
+		// End Line: 196
+
+		/* begin block 1.2 */
+			// Start line: 196
+			// Start offset: 0x8003A74C
+			// TypeDefs:
+		// 		struct PIPE3D_240fake cmm
+		/* end block 1.2 */
+		// End offset: 0x8003A74C
+		// End Line: 196
+	/* end block 1 */
+	// End offset: 0x8003A74C
+	// End Line: 200
+
+	/* begin block 2 */
+		// Start line: 426
+	/* end block 2 */
+	// End Line: 427
+
+void PIPE3D_NormalizeMatrix(MATRIX *target,MATRIX *source)
+
+{
+  long lVar1;
+  undefined4 uVar2;
+  long lVar3;
+  undefined4 uVar4;
+  undefined4 uVar5;
+  long local_20;
+  long local_1c;
+  long local_18;
+  
+  local_20 = PIPE3D_MatrixColumnLength(source,0);
+  if (local_20 != 0) {
+    local_20 = 0x1000000 / local_20;
+  }
+  local_1c = PIPE3D_MatrixColumnLength(source,1);
+  if (local_1c != 0) {
+    local_1c = 0x1000000 / local_1c;
+  }
+  local_18 = PIPE3D_MatrixColumnLength(source,2);
+  if (local_18 != 0) {
+    local_18 = 0x1000000 / local_18;
+  }
+  lVar1 = source->t[1];
+  lVar3 = source->t[2];
+  target->t[0] = source->t[0];
+  target->t[1] = lVar1;
+  target->t[2] = lVar3;
+  uVar2 = *(undefined4 *)(source->m + 2);
+  uVar4 = *(undefined4 *)(source->m + 4);
+  uVar5 = *(undefined4 *)(source->m + 6);
+  *(undefined4 *)target->m = *(undefined4 *)source->m;
+  *(undefined4 *)(target->m + 2) = uVar2;
+  *(undefined4 *)(target->m + 4) = uVar4;
+  *(undefined4 *)(target->m + 6) = uVar5;
+  *(undefined4 *)(target->m + 8) = *(undefined4 *)(source->m + 8);
+  ScaleMatrix((int *)target,&local_20);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ PIPE3D_TransformVerticesToWorld(struct _Instance *instance /*stack 0*/, struct _SVector *poolVertex /*$s2*/, long *vtxSegment /*$s5*/, struct _Vector *Average /*$fp*/)
+ // line 753, offset 0x8003a7b0
+	/* begin block 1 */
+		// Start line: 754
+		// Start offset: 0x8003A7B0
+		// Variables:
+	// 		struct MATRIX *segMatrix; // $s1
+	// 		struct _Model *model; // $s7
+	// 		struct _MVertex *vertexList; // stack offset -48
+	// 		long i; // $s3
+	// 		struct _Segment *segment; // $v1
+	// 		struct _SVector *orgPoolVertex; // stack offset -44
+	// 		struct _SVector minV; // stack offset -64
+	// 		struct _SVector maxV; // stack offset -56
+
+		/* begin block 1.1 */
+			// Start line: 773
+			// Start offset: 0x8003A890
+			// Variables:
+		// 		struct _MVertex *firstVertex; // $s0
+		// 		struct _MVertex *lastVertex; // $s6
+		// 		struct _MVertex *modelVertex; // $s0
+		/* end block 1.1 */
+		// End offset: 0x8003A9DC
+		// End Line: 815
+	/* end block 1 */
+	// End offset: 0x8003AAAC
+	// End Line: 840
+
+	/* begin block 2 */
+		// Start line: 1506
+	/* end block 2 */
+	// End Line: 1507
+
+void PIPE3D_TransformVerticesToWorld
+               (_Instance *instance,_SVector *poolVertex,long *vtxSegment,_Vector *Average)
+
+{
+  undefined4 uVar1;
+  undefined *puVar2;
+  undefined *puVar3;
+  undefined *puVar4;
+  _Segment *p_Var5;
+  short *psVar6;
+  MATRIX *pMVar7;
+  int iVar8;
+  _Model *p_Var9;
+  short local_40;
+  short sStack62;
+  short local_3c;
+  short local_38;
+  short sStack54;
+  short local_34;
+  
+  puVar4 = PTR_DAT_800ce894;
+  puVar3 = PTR_LAB_80018000_1_800ce890;
+  puVar2 = PTR_DAT_800ce88c;
+  uVar1 = DAT_800ce888;
+  p_Var9 = instance->object->modelList[instance->currentModel];
+  p_Var5 = p_Var9->segmentList;
+  Average->x = 0;
+  Average->y = 0;
+  Average->z = 0;
+  iVar8 = 0;
+  if (0 < p_Var9->numSegments) {
+    psVar6 = &p_Var5->firstVertex;
+    do {
+      if (psVar6[1] != -1) {
+        pMVar7 = instance->matrix;
+        SetRotMatrix((undefined4 *)(pMVar7 + iVar8));
+                    /* WARNING: Subroutine does not return */
+        SetTransMatrix((int)(pMVar7 + iVar8));
+      }
+      iVar8 = iVar8 + 1;
+      psVar6 = psVar6 + 0xc;
+    } while (iVar8 < p_Var9->numSegments);
+  }
+  if (p_Var9->numVertices != 0) {
+    local_38 = (short)puVar3;
+    local_40 = (short)uVar1;
+    Average->x = (int)local_38 + (int)local_40 >> 1;
+    sStack54 = (short)((uint)puVar3 >> 0x10);
+    sStack62 = (short)((uint)uVar1 >> 0x10);
+    Average->y = (int)sStack54 + (int)sStack62 >> 1;
+    local_34 = (short)puVar4;
+    local_3c = (short)puVar2;
+    Average->z = (int)local_34 + (int)local_3c >> 1;
+    iVar8 = 0;
+    if (0 < p_Var9->numVertices) {
+      psVar6 = &poolVertex->z;
+      do {
+        poolVertex->x = poolVertex->x - *(short *)&Average->x;
+        iVar8 = iVar8 + 1;
+        psVar6[-1] = psVar6[-1] - *(short *)&Average->y;
+        poolVertex = poolVertex + 1;
+        *psVar6 = *psVar6 - *(short *)&Average->z;
+        psVar6 = psVar6 + 4;
+      } while (iVar8 < p_Var9->numVertices);
+    }
+  }
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ PIPE3D_InstanceTransformAndDraw(struct _Instance *instance /*$s2*/, struct _CameraCore_Type *cameraCore /*$s1*/, struct _VertexPool *vertexPool /*$s0*/, struct _PrimPool *primPool /*$s7*/, unsigned long **ot /*stack 16*/, struct _Mirror *mirror /*stack 20*/)
+ // line 856, offset 0x8003aadc
+	/* begin block 1 */
+		// Start line: 857
+		// Start offset: 0x8003AADC
+		// Variables:
+	// 		struct Object *object; // $v0
+	// 		struct _Model *model; // $s4
+	// 		struct MATRIX *matrixPool; // $s3
+	// 		struct MATRIX lm; // stack offset -80
+	// 		long flags; // $s1
+
+		/* begin block 1.1 */
+			// Start line: 893
+			// Start offset: 0x8003AB34
+			// Variables:
+		// 		struct _MVertex *vertexList; // $s0
+		// 		struct _PVertex *poolVertex; // $s5
+		// 		struct CVECTOR *vertexColor; // $s6
+		// 		long spadOffset; // $v1
+		// 		long spadFree; // $a1
+		// 		long allocSize; // $a0
+
+			/* begin block 1.1.1 */
+				// Start line: 1036
+				// Start offset: 0x8003AC5C
+				// Variables:
+			// 		long BackColorSave; // stack offset -44
+			// 		long BlendStartSave; // $s0
+			// 		int pval; // stack offset -48
+			/* end block 1.1.1 */
+			// End offset: 0x8003ADA4
+			// End Line: 1076
+		/* end block 1.1 */
+		// End offset: 0x8003ADA4
+		// End Line: 1081
+	/* end block 1 */
+	// End offset: 0x8003ADA4
+	// End Line: 1082
+
+	/* begin block 2 */
+		// Start line: 1344
+	/* end block 2 */
+	// End Line: 1345
+
+void PIPE3D_InstanceTransformAndDraw
+               (_Instance *instance,_CameraCore_Type *cameraCore,_VertexPool *vertexPool,
+               _PrimPool *primPool,ulong **ot,_Mirror *mirror)
+
+{
+  MATRIX MStack80;
+  
+  if (instance->matrix != (MATRIX *)0x0) {
+                    /* WARNING: Subroutine does not return */
+    LIGHT_PresetInstanceLight(instance,0x800,&MStack80);
+  }
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ PIPE3D_InstanceListTransformAndDrawFunc(struct _StreamUnit *unit /*$a0*/, unsigned long **ot /*$s3*/, struct _CameraCore_Type *cameraCore /*$s1*/, struct _Instance *instance /*$s0*/)
+ // line 1452, offset 0x8003add0
+	/* begin block 1 */
+		// Start line: 1453
+		// Start offset: 0x8003ADD0
+		// Variables:
+	// 		struct _VertexPool *vertexPool; // $s4
+	// 		struct _PrimPool *primPool; // $s2
+	// 		struct VECTOR dpv[2]; // stack offset -72
+	// 		long maxRad; // $a1
+	// 		struct Level *level; // $s5
+	// 		struct SVECTOR bsPos; // stack offset -40
+	/* end block 1 */
+	// End offset: 0x8003B0FC
+	// End Line: 1586
+
+	/* begin block 2 */
+		// Start line: 2904
+	/* end block 2 */
+	// End Line: 2905
+
+void PIPE3D_InstanceListTransformAndDrawFunc
+               (_StreamUnit *unit,ulong **ot,_CameraCore_Type *cameraCore,_Instance *instance)
+
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  undefined4 uVar4;
+  long vertexPool;
+  long primPool;
+  undefined4 in_zero;
+  undefined4 in_at;
+  int iVar5;
+  uint uVar6;
+  int iVar7;
+  Level *level;
+  uint local_24;
+  
+  primPool = theCamera.core.vvPlaneConsts[2];
+  vertexPool = theCamera.core.vvPlaneConsts[1];
+  level = unit->level;
+  uVar4 = *(undefined4 *)&instance->position;
+  local_24 = local_24 & 0xffff0000 | (uint)(ushort)(instance->position).z;
+  if ((((unit == (_StreamUnit *)0x0) || ((unit->flags & 1U) == 0)) ||
+      (unit->StreamUnitID == theCamera.rotationVel._4_4_)) ||
+     (iVar5 = WARPGATE_IsObjectOnWarpSide(instance), iVar5 != 0)) {
+    iVar7 = (int)instance->object->modelList[instance->currentModel]->maxRad;
+    setCopControlWord(2,0,*(undefined4 *)cameraCore->vvNormalWorVecMat[0].m);
+    setCopControlWord(2,0x800,*(undefined4 *)(cameraCore->vvNormalWorVecMat[0].m + 2));
+    setCopControlWord(2,0x1000,*(undefined4 *)(cameraCore->vvNormalWorVecMat[0].m + 4));
+    setCopControlWord(2,0x1800,*(undefined4 *)(cameraCore->vvNormalWorVecMat[0].m + 6));
+    setCopControlWord(2,0x2000,*(undefined4 *)(cameraCore->vvNormalWorVecMat[0].m + 8));
+    setCopReg(2,in_zero,uVar4);
+    setCopReg(2,in_at,local_24);
+    copFunction(2,0x486012);
+    iVar5 = getCopReg(2,0x19);
+    iVar1 = getCopReg(2,0x1a);
+    iVar2 = getCopReg(2,0x1b);
+    iVar5 = iVar5 - cameraCore->vvPlaneConsts[0];
+    iVar3 = -iVar7;
+    if (((iVar3 < iVar5) && (iVar5 < cameraCore->farPlane + iVar7)) &&
+       ((iVar3 < iVar1 - cameraCore->vvPlaneConsts[1] &&
+        (iVar3 < iVar2 - cameraCore->vvPlaneConsts[2])))) {
+      setCopControlWord(2,0,*(undefined4 *)cameraCore->vvNormalWorVecMat[1].m);
+      setCopControlWord(2,0x800,*(undefined4 *)(cameraCore->vvNormalWorVecMat[1].m + 2));
+      setCopControlWord(2,0x1000,*(undefined4 *)(cameraCore->vvNormalWorVecMat[1].m + 4));
+      setCopControlWord(2,0x1800,*(undefined4 *)(cameraCore->vvNormalWorVecMat[1].m + 6));
+      setCopControlWord(2,0x2000,*(undefined4 *)(cameraCore->vvNormalWorVecMat[1].m + 8));
+      setCopReg(2,in_zero,uVar4);
+      setCopReg(2,in_at,local_24);
+      copFunction(2,0x486012);
+      iVar5 = getCopReg(2,0x19);
+      iVar1 = getCopReg(2,0x1a);
+      getCopReg(2,0x1b);
+      if ((iVar3 < iVar5 - cameraCore->vvPlaneConsts[3]) &&
+         (iVar3 < iVar1 - cameraCore->vvPlaneConsts[4])) {
+        if ((instance->flags & 0x80U) == 0) {
+          PIPE3D_AnimateTextures
+                    (instance->object->modelList[instance->currentModel]->aniTextures,
+                     theCamera.focusRotation._0_4_);
+          instance->currentTextureAnimFrame = instance->currentTextureAnimFrame + 1;
+        }
+        else {
+          PIPE3D_AnimateTextures
+                    (instance->object->modelList[instance->currentModel]->aniTextures,
+                     (int)instance->currentTextureAnimFrame);
+        }
+        LIGHT_SetMatrixForLightGroupInstance(instance,level);
+        if ((((instance->halvePlane).flags & 0xbU) == 0) || ((instance->flags2 & 0x800000U) != 0)) {
+          PIPE3D_InstanceTransformAndDraw
+                    (instance,cameraCore,(_VertexPool *)vertexPool,(_PrimPool *)primPool,ot,
+                     (_Mirror *)0x0);
+        }
+        else {
+          PIPE3D_HalvePlaneInstanceTransformAndDraw
+                    (instance,cameraCore->wcTransform,(_VertexPool *)vertexPool,
+                     (_PrimPool *)primPool,ot,(_Mirror *)0x0);
+        }
+        if ((instance->flags2 & 0x40U) != 0) {
+          LIGHT_DrawShadow(cameraCore->wcTransform,instance,(_PrimPool *)primPool,ot);
+        }
+        theCamera.tiltList[2][1] = theCamera.tiltList[2][1] + 1;
+        uVar6 = instance->flags | 0x200;
+        goto LAB_8003b0f8;
+      }
+    }
+  }
+  uVar6 = instance->flags & 0xfffffdff;
+LAB_8003b0f8:
+  instance->flags = uVar6;
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ PIPE3D_InstanceListTransformAndDraw(struct _StreamUnit *unit /*$s3*/, struct GameTracker *gameTracker /*$a1*/, unsigned long **ot /*$s4*/, struct _CameraCore_Type *cameraCore /*$s5*/)
+ // line 1588, offset 0x8003b120
+	/* begin block 1 */
+		// Start line: 1589
+		// Start offset: 0x8003B120
+		// Variables:
+	// 		struct _Instance *instance; // $s0
+	// 		int id; // $s2
+	// 		struct _Instance *player; // $s1
+	/* end block 1 */
+	// End offset: 0x8003B1F0
+	// End Line: 1603
+
+	/* begin block 2 */
+		// Start line: 2547
+	/* end block 2 */
+	// End Line: 2548
+
+void PIPE3D_InstanceListTransformAndDraw
+               (_StreamUnit *unit,GameTracker *gameTracker,ulong **ot,_CameraCore_Type *cameraCore)
+
+{
+  _Instance *instance;
+  _Instance *instance_00;
+  int iVar1;
+  
+  instance_00 = gameTracker->playerInstance;
+  iVar1 = unit->StreamUnitID;
+  instance = gameTracker->instanceList->first;
+  if ((instance_00->currentStreamUnitID == iVar1) && ((instance_00->flags & 0x800U) == 0)) {
+    PIPE3D_InstanceListTransformAndDrawFunc(unit,ot,cameraCore,instance_00);
+  }
+  while (instance != (_Instance *)0x0) {
+    if (((((instance->flags & 0x800U) == 0) && ((instance->flags2 & 0x4000000U) == 0)) &&
+        (instance->currentStreamUnitID == iVar1)) && (instance != instance_00)) {
+      PIPE3D_InstanceListTransformAndDrawFunc(unit,ot,cameraCore,instance);
+    }
+    instance = instance->next;
+  }
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ PIPE3D_TransformFromZAxis(struct MATRIX *transform /*$s0*/, struct _SVector *normal /*$s1*/)
+ // line 1606, offset 0x8003b218
+	/* begin block 1 */
+		// Start line: 1607
+		// Start offset: 0x8003B218
+		// Variables:
+	// 		struct _G2EulerAngles_Type ea1; // stack offset -40
+	// 		struct _SVector xprod; // stack offset -32
+	// 		struct _SVector yprod; // stack offset -24
+	/* end block 1 */
+	// End offset: 0x8003B3F4
+	// End Line: 1645
+
+	/* begin block 2 */
+		// Start line: 2588
+	/* end block 2 */
+	// End Line: 2589
+
+void PIPE3D_TransformFromZAxis(MATRIX *transform,_SVector *normal)
+
+{
+  int iVar1;
+  _Normal local_20 [2];
+  
+  iVar1 = (int)normal->x;
+  if (iVar1 < 0) {
+    iVar1 = -iVar1;
+  }
+  if (iVar1 < 5) {
+    iVar1 = (int)normal->y;
+    if (iVar1 < 0) {
+      iVar1 = -iVar1;
+    }
+    if (iVar1 < 5) {
+      if (normal->z < 0) {
+        transform->m[0] = 0x1000;
+        transform->m[1] = 0;
+        transform->m[2] = 0;
+        transform->m[3] = 0;
+        transform->m[4] = -0x1000;
+        transform->m[5] = 0;
+        transform->m[6] = 0;
+        transform->m[7] = 0;
+        transform->m[8] = -0x1000;
+      }
+      else {
+        MATH3D_SetUnityMatrix(transform);
+      }
+      return;
+    }
+  }
+  local_20[0].x = -normal->y;
+  local_20[0].y = normal->x;
+  local_20[0].z = 0;
+                    /* WARNING: Subroutine does not return */
+  MATH3D_Normalize(local_20);
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ PIPE3D_CalcWorldToSplitPlaneTransform(struct MATRIX *wpTransform /*$s1*/, struct _SVector *normal /*$a1*/, struct _SVector *translation /*$s0*/)
+ // line 1649, offset 0x8003b408
+	/* begin block 1 */
+		// Start line: 1650
+		// Start offset: 0x8003B408
+		// Variables:
+	// 		struct _SVector svector; // stack offset -40
+	// 		struct _Vector vector; // stack offset -32
+	/* end block 1 */
+	// End offset: 0x8003B408
+	// End Line: 1650
+
+	/* begin block 2 */
+		// Start line: 2683
+	/* end block 2 */
+	// End Line: 2684
+
+void PIPE3D_CalcWorldToSplitPlaneTransform
+               (MATRIX *wpTransform,_SVector *normal,_SVector *translation)
+
+{
+  long lVar1;
+  long lVar2;
+  long lVar3;
+  undefined4 in_zero;
+  undefined4 in_at;
+  undefined4 local_28;
+  uint local_24;
+  
+  PIPE3D_TransformFromZAxis(wpTransform,normal);
+  local_28 = CONCAT22(-translation->y,-translation->x);
+  local_24 = local_24 & 0xffff0000 | (uint)(ushort)-translation->z;
+  setCopControlWord(2,0,*(undefined4 *)wpTransform->m);
+  setCopControlWord(2,0x800,*(undefined4 *)(wpTransform->m + 2));
+  setCopControlWord(2,0x1000,*(undefined4 *)(wpTransform->m + 4));
+  setCopControlWord(2,0x1800,*(undefined4 *)(wpTransform->m + 6));
+  setCopControlWord(2,0x2000,*(undefined4 *)(wpTransform->m + 8));
+  setCopReg(2,in_zero,local_28);
+  setCopReg(2,in_at,local_24);
+  copFunction(2,0x486012);
+  lVar1 = getCopReg(2,0x19);
+  lVar2 = getCopReg(2,0x1a);
+  lVar3 = getCopReg(2,0x1b);
+  wpTransform->t[0] = lVar1;
+  wpTransform->t[1] = lVar2;
+  wpTransform->t[2] = lVar3;
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// long /*$ra*/ PIPE3D_TransformAnimatedSplitInstanceVertices(struct _MVertex *vertexList /*stack 0*/, struct _PVertex *poolVertex /*$s4*/, struct _Model *model /*stack 8*/, struct MATRIX *wcTransform /*stack 12*/, struct MATRIX *matrixPool /*stack 16*/, struct _Mirror *mirror /*stack 20*/, struct MATRIX *lm /*stack 24*/, struct CVECTOR *vertexColor /*stack 28*/, struct CVECTOR *vertexSrcCol /*stack 32*/)
+ // line 1688, offset 0x8003b4dc
+	/* begin block 1 */
+		// Start line: 1689
+		// Start offset: 0x8003B4DC
+		// Variables:
+	// 		struct TransformAnimatedInstanceVerticesWork_t *w; // $s7
+	// 		struct MATRIX *segMatrix; // $s2
+	// 		long i; // stack offset -64
+	// 		struct _Segment *segment; // stack offset -60
+	// 		struct CVECTOR defaultRGBCD; // stack offset -80
+
+		/* begin block 1.1 */
+			// Start line: 1710
+			// Start offset: 0x8003B56C
+		/* end block 1.1 */
+		// End offset: 0x8003B570
+		// End Line: 1712
+
+		/* begin block 1.2 */
+			// Start line: 1719
+			// Start offset: 0x8003B5A8
+			// Variables:
+		// 		struct _MVertex *firstVertex; // stack offset -56
+		// 		struct _MVertex *lastVertex; // $fp
+		// 		struct _MVertex *modelVertex; // $a2
+		// 		struct _Normal *n0; // $t1
+		// 		struct _Normal *n1; // $t2
+		// 		struct _Normal *n2; // $t3
+		// 		struct CVECTOR white; // stack offset -72
+		// 		struct CVECTOR *c0; // $s1
+		// 		struct CVECTOR *c1; // $s6
+		// 		struct CVECTOR *c2; // $s5
+		// 		long vtxcolflgs; // stack offset -52
+		/* end block 1.2 */
+		// End offset: 0x8003BA44
+		// End Line: 1879
+	/* end block 1 */
+	// End offset: 0x8003BA6C
+	// End Line: 1883
+
+	/* begin block 2 */
+		// Start line: 3376
+	/* end block 2 */
+	// End Line: 3377
+
+undefined4
+PIPE3D_TransformAnimatedSplitInstanceVertices
+          (undefined4 param_1,undefined4 param_2,int param_3,undefined4 *param_4,int param_5,
+          undefined4 param_6,undefined4 *param_7,int param_8)
+
+{
+  ushort *puVar1;
+  int iStack64;
+  int local_3c;
+  
+  local_3c = *(int *)(param_3 + 0x1c);
+  if (param_8 != 0) {
+    setCopReg(2,param_3,DAT_800ce884);
+  }
+  if (iGpffff86d8 == 0) {
+    setCopReg(2,0x4000,0);
+  }
+  else {
+    setCopReg(2,0x4000,iGpffff86d8);
+  }
+  iStack64 = 0;
+  if (0 < *(int *)(param_3 + 0x18)) {
+    do {
+      if (*(short *)(local_3c + 10) != -1) {
+        puVar1 = (ushort *)(param_5 + iStack64 * 0x20);
+        if (param_8 != 0) {
+          MulMatrix0(param_7,puVar1,&DAT_1f800040);
+          SetLightMatrix(&DAT_1f800040);
+        }
+                    /* WARNING: Subroutine does not return */
+        CompMatrix(param_4,puVar1,(uint *)&DAT_1f800000);
+      }
+      local_3c = local_3c + 0x18;
+      iStack64 = iStack64 + 1;
+    } while (iStack64 < *(int *)(param_3 + 0x18));
+  }
+  uGpffffa8d4 = getCopReg(2,8);
+  return 0;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ PIPE3D_TransformSplitInstanceVertices(struct _MVertex *vertexList /*stack 0*/, struct _PVertex *pvertex /*$s2*/, struct _Model *model /*stack 8*/, struct MATRIX *wpTransform /*stack 12*/, struct MATRIX *matrixPool /*stack 16*/, struct _Mirror *mirror /*stack 20*/)
+ // line 1891, offset 0x8003baa8
+	/* begin block 1 */
+		// Start line: 1892
+		// Start offset: 0x8003BAA8
+		// Variables:
+	// 		struct MATRIX *spTransform; // $fp
+	// 		struct _Vector *vector; // $s1
+	// 		long i; // $s5
+	// 		struct _Segment *segment; // $v1
+
+		/* begin block 1.1 */
+			// Start line: 1904
+			// Start offset: 0x8003BB30
+			// Variables:
+		// 		struct _MVertex *firstVertex; // $s0
+		// 		struct _MVertex *lastVertex; // $s4
+		// 		struct _MVertex *modelVertex; // $s0
+		/* end block 1.1 */
+		// End offset: 0x8003BBC8
+		// End Line: 1922
+	/* end block 1 */
+	// End offset: 0x8003BBEC
+	// End Line: 1925
+
+	/* begin block 2 */
+		// Start line: 3663
+	/* end block 2 */
+	// End Line: 3664
+
+void PIPE3D_TransformSplitInstanceVertices
+               (_MVertex *vertexList,_PVertex *pvertex,_Model *model,MATRIX *wpTransform,
+               MATRIX *matrixPool,_Mirror *mirror)
+
+{
+  int iVar1;
+  int iVar2;
+  
+  iVar1 = 0;
+  if (0 < model->numSegments) {
+    iVar2 = 0;
+    do {
+      if (*(short *)((int)&model->segmentList->lastVertex + iVar2) != -1) {
+                    /* WARNING: Subroutine does not return */
+        CompMatrix((undefined4 *)wpTransform,(ushort *)matrixPool,(uint *)&DAT_1f800000);
+      }
+      matrixPool = matrixPool + 1;
+      iVar1 = iVar1 + 1;
+      iVar2 = iVar2 + 0x18;
+    } while (iVar1 < model->numSegments);
+  }
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ PIPE3D_AnimateTextures(struct AniTex *aniTextures /*$t1*/, long req_frame /*$a1*/)
+ // line 1927, offset 0x8003bc1c
+	/* begin block 1 */
+		// Start line: 1928
+		// Start offset: 0x8003BC1C
+		// Variables:
+	// 		struct AniTexInfo *ani_tex_info; // $t0
+	// 		struct TextureMT3 *dest; // $a0
+	// 		struct TextureMT3 *src; // $v1
+	// 		long i; // $a3
+	/* end block 1 */
+	// End offset: 0x8003BCB4
+	// End Line: 1947
+
+	/* begin block 2 */
+		// Start line: 3795
+	/* end block 2 */
+	// End Line: 3796
+
+void PIPE3D_AnimateTextures(AniTex *aniTextures,long req_frame)
+
+{
+  TextureMT3 *pTVar1;
+  TextureMT3 *pTVar2;
+  uint *puVar3;
+  int iVar4;
+  AniTexInfo *pAVar5;
+  
+  if (((aniTextures != (AniTex *)0x0) && (pAVar5 = &aniTextures->aniTexInfo, req_frame != -1)) &&
+     (iVar4 = 0, 0 < aniTextures->numAniTextues)) {
+    puVar3 = (uint *)&(aniTextures->aniTexInfo).numFrames;
+    do {
+      pTVar2 = pAVar5->texture;
+      pTVar1 = pTVar2 + ((uint)req_frame / puVar3[1]) % *puVar3;
+      *(undefined4 *)pTVar2 = *(undefined4 *)(pTVar1 + 1);
+      *(undefined4 *)&pTVar2->u1 = *(undefined4 *)&pTVar1[1].u1;
+      pAVar5 = pAVar5 + 1;
+      *(undefined4 *)&pTVar2->u2 = *(undefined4 *)&pTVar1[1].u2;
+      iVar4 = iVar4 + 1;
+      pTVar2->color = pTVar1[1].color;
+      puVar3 = puVar3 + 3;
+    } while (iVar4 < aniTextures->numAniTextues);
+  }
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ PIPE3D_AnimateTerrainTextures(struct DrMoveAniTex *aniTextures /*$a0*/, long req_frame /*$a1*/, struct _PrimPool *primPool /*$a2*/, unsigned long **drawot /*$a3*/)
+ // line 2020, offset 0x8003bcbc
+	/* begin block 1 */
+		// Start line: 2022
+		// Start offset: 0x8003BCBC
+		// Variables:
+	// 		unsigned long *prim; // $t3
+	// 		struct DrMoveAniTexDestInfo *dest; // $t1
+	// 		struct DrMoveAniTexSrcInfo *src; // $t2
+	// 		long i; // $t5
+	// 		unsigned long **otl; // $a3
+	/* end block 1 */
+	// End offset: 0x8003BE4C
+	// End Line: 2076
+
+	/* begin block 2 */
+		// Start line: 3999
+	/* end block 2 */
+	// End Line: 4000
+
+	/* begin block 3 */
+		// Start line: 4000
+	/* end block 3 */
+	// End Line: 4001
+
+void PIPE3D_AnimateTerrainTextures
+               (DrMoveAniTex *aniTextures,long req_frame,_PrimPool *primPool,ulong **drawot)
+
+{
+  uint *puVar1;
+  DrMoveAniTexDestInfo *pDVar2;
+  DrMoveAniTexSrcInfo *pDVar3;
+  uint *puVar4;
+  int iVar5;
+  DrMoveAniTex *pDVar6;
+  
+  puVar4 = primPool->nextPrim;
+  drawot = drawot + 0xbff;
+  if (aniTextures != (DrMoveAniTex *)0x0) {
+    if ((puVar4 < primPool->lastPrim + aniTextures->numAniTextues * 0x3fffffe8) &&
+       (iVar5 = 0, 0 < aniTextures->numAniTextues)) {
+      puVar1 = puVar4 + 5;
+      pDVar6 = aniTextures;
+      do {
+        pDVar2 = pDVar6->aniTexInfo;
+        pDVar3 = &pDVar2->frame + ((uint)req_frame / (uint)pDVar2->speed) % pDVar2->numFrames;
+        if (*(uint *)pDVar3 != *(uint *)&pDVar2->pixCurrentX) {
+          puVar1[-4] = 0x1000000;
+          puVar1[-3] = 0x80000000;
+          puVar1[-2] = *(uint *)pDVar3;
+          puVar1[-1] = *(uint *)pDVar2;
+          *puVar1 = *(uint *)&pDVar2->pixW;
+          *puVar4 = (uint)*drawot & 0xffffff | 0x5000000;
+          *drawot = (ulong *)((uint)puVar4 & 0xffffff);
+          puVar1 = puVar1 + 6;
+          *(uint *)&pDVar2->pixCurrentX = *(uint *)pDVar3;
+          puVar4 = puVar4 + 6;
+          primPool->numPrims = primPool->numPrims + 1;
+        }
+        if (*(int *)&pDVar3->clutSrcX != *(int *)&pDVar2->clutCurrentX) {
+          puVar1[-4] = 0x1000000;
+          puVar1[-3] = 0x80000000;
+          puVar1[-2] = *(uint *)&pDVar3->clutSrcX;
+          puVar1[-1] = *(uint *)&pDVar2->clutDstX;
+          *puVar1 = *(uint *)&pDVar2->clutW;
+          *puVar4 = (uint)*drawot & 0xffffff | 0x5000000;
+          *drawot = (ulong *)((uint)puVar4 & 0xffffff);
+          puVar1 = puVar1 + 6;
+          *(undefined4 *)&pDVar2->clutCurrentX = *(undefined4 *)&pDVar3->clutSrcX;
+          puVar4 = puVar4 + 6;
+          primPool->numPrims = primPool->numPrims + 1;
+        }
+        iVar5 = iVar5 + 1;
+        pDVar6 = (DrMoveAniTex *)&pDVar6->aniTexInfo;
+      } while (iVar5 < aniTextures->numAniTextues);
+    }
+    primPool->nextPrim = puVar4;
+  }
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ PIPE3D_HalvePlaneInstanceTransformAndDraw(struct _Instance *instance /*$s2*/, struct MATRIX *wcTransform /*$s1*/, struct _VertexPool *vertexPool /*$s6*/, struct _PrimPool *primPool /*$s5*/, unsigned long **ot /*stack 16*/, struct _Mirror *mirror /*stack 20*/)
+ // line 2103, offset 0x8003be54
+	/* begin block 1 */
+		// Start line: 2104
+		// Start offset: 0x8003BE54
+		// Variables:
+	// 		struct Object *object; // $v1
+	// 		struct _Model *model; // $s3
+	// 		struct MATRIX *matrixPool; // $s4
+	// 		struct MATRIX wpTransform; // stack offset -184
+	// 		struct MATRIX pwTransform; // stack offset -152
+	// 		struct MATRIX pcTransform; // stack offset -120
+	// 		struct MATRIX lm; // stack offset -88
+	// 		struct _MVertex *vertexList; // $s7
+	// 		struct _SVector normalX; // stack offset -56
+	// 		struct _SVector *normal; // $a1
+	// 		struct _SVector translation; // stack offset -48
+	/* end block 1 */
+	// End offset: 0x8003C01C
+	// End Line: 2172
+
+	/* begin block 2 */
+		// Start line: 4210
+	/* end block 2 */
+	// End Line: 4211
+
+void PIPE3D_HalvePlaneInstanceTransformAndDraw
+               (_Instance *instance,MATRIX *wcTransform,_VertexPool *vertexPool,_PrimPool *primPool,
+               ulong **ot,_Mirror *mirror)
+
+{
+  MATRIX MStack184;
+  MATRIX MStack152;
+  uint auStack120 [16];
+  _SVector local_38;
+  _SVector local_30;
+  
+  local_38.x = (instance->halvePlane).a;
+  local_38.y = (instance->halvePlane).b;
+  local_38.z = (instance->halvePlane).c;
+  local_30.x = -(short)((int)local_38.x * (instance->halvePlane).d >> 0xc);
+  local_30.y = -(short)((int)local_38.y * (instance->halvePlane).d >> 0xc);
+  local_30.z = -(short)((int)local_38.z * (instance->halvePlane).d >> 0xc);
+  PIPE3D_CalcWorldToSplitPlaneTransform(&MStack184,&local_38,&local_30);
+  PIPE3D_InvertTransform(&MStack152,&MStack184);
+                    /* WARNING: Subroutine does not return */
+  CompMatrix((undefined4 *)wcTransform,(ushort *)&MStack152,auStack120);
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ PIPE3D_HalvePlaneGetRingPoints(struct _Instance *instance /*$a0*/, struct MATRIX *wcTransform /*$fp*/, struct _VertexPool *vertexPool /*$s6*/, struct _PrimPool *primPool /*$s7*/, unsigned long **ot /*stack 16*/, struct _FXHalvePlane *ring /*stack 20*/)
+ // line 2220, offset 0x8003c048
+	/* begin block 1 */
+		// Start line: 2221
+		// Start offset: 0x8003C048
+		// Variables:
+	// 		struct Object *object; // $v1
+	// 		struct _Model *model; // $s1
+	// 		struct MATRIX *matrixPool; // $s3
+	// 		struct MATRIX wpTransform; // stack offset -152
+	// 		struct MATRIX pwTransform; // stack offset -120
+	// 		struct MATRIX pcTransform; // stack offset -88
+	// 		struct _MVertex *vertexList; // $s4
+	// 		struct _PVertex *poolVertex; // $s5
+	// 		struct _SVector normalX; // stack offset -56
+	// 		struct _SVector *normal; // $a1
+	// 		struct _SVector translation; // stack offset -48
+	// 		struct _PlaneConstants *halvePlane; // $a0
+	/* end block 1 */
+	// End offset: 0x8003C1E8
+	// End Line: 2278
+
+	/* begin block 2 */
+		// Start line: 4440
+	/* end block 2 */
+	// End Line: 4441
+
+void PIPE3D_HalvePlaneGetRingPoints
+               (_Instance *instance,MATRIX *wcTransform,_VertexPool *vertexPool,_PrimPool *primPool,
+               ulong **ot,_FXHalvePlane *ring)
+
+{
+  ulong *puVar1;
+  _PlaneConstants *p_Var2;
+  _Model *model;
+  MATRIX *matrixPool;
+  _MVertex *vertexList;
+  MATRIX MStack152;
+  MATRIX MStack120;
+  MATRIX MStack88;
+  _SVector local_38;
+  _SVector local_30;
+  
+  matrixPool = instance->matrix;
+  model = instance->object->modelList[instance->currentModel];
+  vertexList = model->vertexList;
+  if (ring->type == '\0') {
+    p_Var2 = &ring->ringPlane;
+  }
+  else {
+    p_Var2 = &instance->halvePlane;
+  }
+  local_38.x = p_Var2->a;
+  local_38.y = p_Var2->b;
+  local_38.z = p_Var2->c;
+  local_30.x = -(short)((int)local_38.x * p_Var2->d >> 0xc);
+  local_30.y = -(short)((int)local_38.y * p_Var2->d >> 0xc);
+  local_30.z = -(short)((int)local_38.z * p_Var2->d >> 0xc);
+  PIPE3D_CalcWorldToSplitPlaneTransform(&MStack152,&local_38,&local_30);
+  PIPE3D_InvertTransform(&MStack120,&MStack152);
+  if (ring->type == '\x02') {
+    PIPE3D_InvertTransform(&MStack88,&MStack152);
+    if (matrixPool != (MATRIX *)0x0) {
+      PIPE3D_TransformSplitInstanceVertices
+                (vertexList,(_PVertex *)vertexPool,model,&MStack152,matrixPool,(_Mirror *)0x0);
+      draw_belowSplit = 0;
+      puVar1 = DRAW_DrawRingPoints(model,vertexPool,&MStack88,primPool,ot,ring->currentColor,
+                                   (uint)ring->type);
+      primPool->nextPrim = puVar1;
+    }
+    return;
+  }
+                    /* WARNING: Subroutine does not return */
+  CompMatrix((undefined4 *)wcTransform,(ushort *)&MStack120,(uint *)&MStack88);
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ PIPE3D_DoGlow(struct _Instance *instance /*$s2*/, struct MATRIX *wcTransform /*$a1*/, struct _VertexPool *vertexPool /*$a2*/, struct _PrimPool *primPool /*$s3*/, unsigned long **ot /*stack 16*/, struct _FXGlowEffect *glow /*stack 20*/)
+ // line 2294, offset 0x8003c218
+	/* begin block 1 */
+		// Start line: 2295
+		// Start offset: 0x8003C218
+		// Variables:
+	// 		long currentColorID; // $a2
+	// 		long previousColorID; // $a1
+	// 		long value; // $a0
+	// 		long fade; // $a3
+	// 		long fadeflag; // $s0
+
+		/* begin block 1.1 */
+			// Start line: 2325
+			// Start offset: 0x8003C400
+			// Variables:
+		// 		long color; // stack offset -32
+
+			/* begin block 1.1.1 */
+				// Start line: 2370
+				// Start offset: 0x8003C578
+				// Variables:
+			// 		long i; // $s0
+			/* end block 1.1.1 */
+			// End offset: 0x8003C5D4
+			// End Line: 2380
+		/* end block 1.1 */
+		// End offset: 0x8003C5D4
+		// End Line: 2381
+	/* end block 1 */
+	// End offset: 0x8003C5D4
+	// End Line: 2382
+
+	/* begin block 2 */
+		// Start line: 4588
+	/* end block 2 */
+	// End Line: 4589
+
+void PIPE3D_DoGlow(_Instance *instance,MATRIX *wcTransform,_VertexPool *vertexPool,
+                  _PrimPool *primPool,ulong **ot,_FXGlowEffect *glow)
+
+{
+  bool bVar1;
+  long *plVar2;
+  int iVar3;
+  ulong *puVar4;
+  uint uVar5;
+  uint uVar6;
+  uint uVar7;
+  undefined4 uVar8;
+  undefined4 uVar9;
+  undefined4 uVar10;
+  int seg1;
+  uint uVar11;
+  uint local_20;
+  
+  uVar7 = 0;
+  if ((instance->flags & 0x200U) != 0) {
+    uVar6 = SEXT24(glow->numColors);
+    uVar5 = (glow->diffTime + theCamera.focusDistanceList[2][2]) % 32000;
+    glow->diffTime = uVar5;
+    if (1 < (int)uVar6) {
+      uVar5 = uVar5 % ((int)glow->colorBlendCycle * uVar6);
+      uVar11 = (uVar5 / (uint)(int)glow->colorBlendCycle) % uVar6;
+      glow->diffTime = uVar5;
+      uVar5 = uVar11;
+      if (uVar11 == 0) {
+        uVar5 = uVar6;
+      }
+      uVar6 = (glow->diffTime % ((int)glow->colorBlendCycle + 1U) << 0xc) /
+              (uint)(int)glow->colorBlendCycle;
+      if (0xfff < (int)uVar6) {
+        uVar6 = 0;
+      }
+      setCopReg(2,0x4000,0x1000 - uVar6);
+      plVar2 = glow->colorArray + (uVar5 - 1);
+      setCopReg(2,0x4800,(uint)*(byte *)plVar2);
+      setCopReg(2,0x5000,(uint)*(byte *)((int)plVar2 + 1));
+      setCopReg(2,0x5800,(uint)*(byte *)((int)plVar2 + 2));
+      copFunction(2,0x198003d);
+      setCopReg(2,0x4000,uVar6);
+      plVar2 = glow->colorArray + uVar11;
+      setCopReg(2,0x4800,(uint)*(byte *)plVar2);
+      setCopReg(2,0x5000,(uint)*(byte *)((int)plVar2 + 1));
+      setCopReg(2,0x5800,(uint)*(byte *)((int)plVar2 + 2));
+      copFunction(2,0x1a8003e);
+      uVar8 = getCopReg(2,0x4800);
+      uVar9 = getCopReg(2,0x5000);
+      uVar10 = getCopReg(2,0x5800);
+      *(char *)&glow->currentColor = (char)uVar8;
+      *(undefined *)((int)&glow->currentColor + 1) = (char)uVar9;
+      *(undefined *)((int)&glow->currentColor + 2) = (char)uVar10;
+      uVar6 = glow->currentColor & 0xffffff;
+      glow->currentColor = uVar6;
+      glow->currentColor = uVar6 | glow->colorArray[uVar5 - 1] & 0xff000000U;
+    }
+    if ((instance->matrix != (MATRIX *)0x0) && (instance->oldMatrix != (MATRIX *)0x0)) {
+      bVar1 = false;
+      if (((int)instance->fadeValue == 0) && (theCamera.core.vvNormalWorVecMat[0].m[2][2] == 1000))
+      {
+        iVar3 = (int)glow->lifeTime;
+        if (-1 < iVar3) {
+          if (glow->diffTime < (uint)(int)glow->fadein_time) {
+            uVar7 = (glow->diffTime << 0xc) / (uint)(int)glow->fadein_time;
+            bVar1 = true;
+          }
+          else {
+            if (iVar3 < (int)glow->fadeout_time) {
+              bVar1 = true;
+              uVar7 = (iVar3 << 0xc) / (int)glow->fadeout_time;
+            }
+          }
+        }
+      }
+      else {
+        bVar1 = true;
+        if (theCamera.core.vvNormalWorVecMat[0].m[2][2] == 1000) {
+          uVar7 = 0x1000 - (int)instance->fadeValue;
+        }
+        else {
+          iVar3 = INSTANCE_GetFadeValue(instance);
+          uVar7 = 0x1000 - iVar3;
+        }
+      }
+      if (bVar1) {
+        setCopReg(2,0x4000,uVar7);
+        setCopReg(2,0x4800,(uint)*(byte *)&glow->currentColor);
+        setCopReg(2,0x5000,(uint)*(byte *)((int)&glow->currentColor + 1));
+        setCopReg(2,0x5800,(uint)*(byte *)((int)&glow->currentColor + 2));
+        copFunction(2,0x198003d);
+        uVar8 = getCopReg(2,0x4800);
+        uVar9 = getCopReg(2,0x5000);
+        uVar10 = getCopReg(2,0x5800);
+        local_20 = (uint)CONCAT12((char)uVar10,CONCAT11((char)uVar9,(char)uVar8));
+        if ((glow->currentColor & 0x1000000U) != 0) {
+          local_20 = local_20 | 0x1000000;
+        }
+      }
+      else {
+        local_20 = glow->currentColor;
+      }
+      if (glow->numSegments == '\x01') {
+        puVar4 = DRAW_DrawGlowPoint(instance,(int)glow->segment,primPool,ot,local_20,
+                                    (int)glow->width,(int)glow->height);
+        primPool->nextPrim = puVar4;
+      }
+      else {
+        seg1 = (int)glow->segment;
+        iVar3 = seg1 + (uint)glow->numSegments;
+        while (seg1 < iVar3 + -1) {
+          puVar4 = DRAW_DrawGlowPoints2
+                             (instance,seg1,seg1 + (uint)glow->SegmentInc,primPool,ot,local_20,
+                              (int)glow->height);
+          primPool->nextPrim = puVar4;
+          seg1 = seg1 + 1;
+          iVar3 = (int)glow->segment + (uint)glow->numSegments;
+        }
+      }
+    }
+  }
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// long /*$ra*/ PIPE3D_Segment2ScreenPt(struct _Instance *instance /*$a0*/, struct MATRIX *wcTransform /*$a1*/, int segIndex /*$a2*/, struct _Position *pos /*$s0*/)
+ // line 2388, offset 0x8003c5f4
+	/* begin block 1 */
+		// Start line: 2389
+		// Start offset: 0x8003C5F4
+		// Variables:
+	// 		struct MATRIX scTransform; // stack offset -56
+	// 		struct _Position vOrigin; // stack offset -24
+	// 		long face_z; // stack offset -16
+	/* end block 1 */
+	// End offset: 0x8003C5F4
+	// End Line: 2389
+
+	/* begin block 2 */
+		// Start line: 4816
+	/* end block 2 */
+	// End Line: 4817
+
+long PIPE3D_Segment2ScreenPt(_Instance *instance,MATRIX *wcTransform,int segIndex,_Position *pos)
+
+{
+  uint auStack56 [12];
+  
+                    /* WARNING: Subroutine does not return */
+  CompMatrix((undefined4 *)wcTransform,(ushort *)(instance->matrix + segIndex),auStack56);
+}
+
+
+
+
+
