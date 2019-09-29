@@ -4,6 +4,8 @@
 #include "../G2/MAING2.H"
 #include "../STRMLOAD.H"
 #include "../GAMELOOP.H"
+#include "../LOCAL/LOCALSTR.H"
+//#include "AADLIB.H"
 
 struct _G2AppDataVM_Type // hashcode: 0xC1BF7B11 (dec: -1044415727)
 {
@@ -14,8 +16,6 @@ struct _G2AppDataVM_Type // hashcode: 0xC1BF7B11 (dec: -1044415727)
 typedef struct _G2AppDataVM_Type G2AppDataVM;
 
 static struct _G2AppDataVM_Type _appDataVM; 
-
-typedef unsigned int uint;
 
 struct _Position // hashcode: 0x2523C22F (dec: 623100463)
 {
@@ -1569,9 +1569,49 @@ struct GameTracker // hashcode: 0x4EB3EFC5 (dec: 1320415173)
 	char pad; // size=0, offset=623
 };
 
+struct FontChar // hashcode: 0x5A2F9F5B (dec: 1513070427)
+{
+	short x; // size=0, offset=0
+	short y; // size=0, offset=2
+	char c; // size=0, offset=4
+	char color; // size=0, offset=5
+};
+
+struct FontTracker // hashcode: 0xE32D3F0A (dec: -483574006)
+{
+	struct FontChar font_buffer[256]; // size=1536, offset=0
+	long font_xpos; // size=0, offset=1536
+	long font_ypos; // size=0, offset=1540
+	long font_buffIndex; // size=0, offset=1544
+	short font_tpage; // size=0, offset=1548
+	short font_clut; // size=0, offset=1550
+	short font_vramU; // size=0, offset=1552
+	short font_vramV; // size=0, offset=1554
+	short font_width; // size=0, offset=1556
+	short sprite_sort_push; // size=0, offset=1558
+	short font_vramX; // size=0, offset=1560
+	short font_vramY; // size=0, offset=1562
+	char color_global; // size=0, offset=1564
+	char color_local; // size=0, offset=1565
+};
+
+struct MainTracker // hashcode: 0x7F315B98 (dec: 2133941144)
+{
+	long mainState; // size=0, offset=0
+	long previousState; // size=0, offset=4
+	long movieNum; // size=0, offset=8
+	long done; // size=0, offset=12
+};
+
 typedef struct GameTracker GameTracker;
 
 typedef struct Camera Camera;
+
+typedef struct MainTracker MainTracker;
+
+extern unsigned char debugOrgFogRed;
+
+extern struct FontTracker fontTracker;
 
 extern void ClearDisplay(); // 0x80037EF8
 
@@ -1621,7 +1661,7 @@ extern void MAIN_FreeMainMenuStuff(); // 0x80038C6C
 
 extern void MAIN_StartGame(); // 0x80038CDC
 
-extern long MAIN_DoMainMenu(struct GameTracker *gameTracker, struct MainTracker *mainTracker, long menuPos); // 0x80038D48
+//extern long MAIN_DoMainMenu(struct GameTracker *gameTracker, struct MainTracker *mainTracker, long menuPos); // 0x80038D48
 
 extern int MainG2(void *appData); // 0x80038E1C
 
@@ -1630,6 +1670,10 @@ extern void ProcessArgs(char *baseAreaName, GameTracker *gameTracker);
 extern void StartTimer(void);
 
 extern void InitMainTracker(MainTracker *mainTracker);
+
+extern void LOAD_InitCd(void);
+
+extern void EnterCriticalSection(void);
 
 Camera theCamera;
 

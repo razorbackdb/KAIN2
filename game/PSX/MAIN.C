@@ -338,6 +338,18 @@
 /* } */
 
 // decompiled code
+// original method signature: 
+// void EnterCriticalSection(void);
+ // line -1, offset 0x800bf50c
+// function 'EnterCriticalSection' @0x800BF50C was found in the decompiled code exported from Ghidra, but not the original debug symbol data.
+void EnterCriticalSection(void)
+
+{
+  //syscall(0);
+  return;
+}
+
+// decompiled code
 // original method signature:
 // void /*$ra*/ StartTimer()
 // line 666, offset 0x80038554
@@ -348,12 +360,11 @@
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-/* void StartTimer(void)
-
+void StartTimer(void)
 {
 	/* WARNING: Subroutine does not return */
-	/* EnterCriticalSection(); */
-/* } */
+	EnterCriticalSection();
+}
 
 // decompiled code
 // original method signature:
@@ -935,8 +946,8 @@ int MainG2(void *appData)
 	//MEMPACK_Init();
 	//LOAD_InitCd();
 	StartTimer();
-	//STREAM_InitLoader("\\BIGFILE.DAT;1", "\\VOICE;1");
-	//localstr_set_language(~language_english);
+/* 	STREAM_InitLoader("\\BIGFILE.DAT;1", "\\VOICE;1");
+	localstr_set_language(language_english);
 	GAMELOOP_SystemInit((GameTracker *)(theCamera.core.vvNormalWorVecMat[0].m + 4));
 	theCamera.smallBaseSphere.position.x = 0xff;
 	theCamera.smallBaseSphere.position.x = 0xff;
@@ -947,7 +958,7 @@ int MainG2(void *appData)
 	InitMainTracker((MainTracker *)(theCamera.savedMode + 1));
 	MAIN_DoMainInit();
 	theCamera.savedMode[1] = 6;
-	theCamera.savedTargetFocusDistance[0] = 0;
+	theCamera.savedTargetFocusDistance[0] = 0; */
 /* 	do
 	{
 		theCamera.savedMode[2] = theCamera.savedMode[1];

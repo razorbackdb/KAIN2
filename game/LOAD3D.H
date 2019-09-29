@@ -1,7 +1,6 @@
 #ifndef LOAD3D_H
 #define LOAD3D_H
 
-
 extern void LOAD_InitCd(); // 0x80036D44
 
 extern void LOAD_CdSeekCallback(unsigned char intr, unsigned char *result); // 0x80036D74

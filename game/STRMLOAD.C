@@ -94,14 +94,14 @@ void STREAM_NextLoadAsNormal(void)
 	/* end block 2 */
 	// End Line: 107
 
-void STREAM_InitLoader(char *bigFileName,char *voiceFileName)
+void STREAM_InitLoader(char *bigFileName, char *voiceFileName)
 
 {
   DVECTOR *pDVar1;
   DVECTOR *pDVar2;
   int iVar3;
   
-/*   LOAD_InitCdLoader(bigFileName,voiceFileName);
+  LOAD_InitCdLoader(bigFileName, voiceFileName);
   iVar3 = 0x26;
   pDVar2 = &DVECTOR_800d26a4;
   pDVar1 = &DVECTOR_800d26e4;

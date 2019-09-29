@@ -2,6 +2,62 @@
 #define AADLIB_H
 
 
+struct MemHeader // hashcode: 0xDAEE4890 (dec: -621918064)
+{
+	unsigned short magicNumber; // size=0, offset=0
+	unsigned char memStatus; // size=0, offset=2
+	unsigned char memType; // size=0, offset=3
+	unsigned long memSize; // size=0, offset=4
+};
+
+struct AadInitAttr // hashcode: 0x0549E29A (dec: 88728218)
+{
+	int updateMode; // size=0, offset=0
+	int numSlots; // size=0, offset=4
+	void (*nonBlockLoadProc)(); // size=0, offset=8
+	void (*nonBlockBufferedLoadProc)(); // size=0, offset=12
+	void (**memoryMallocProc)(); // size=0, offset=16
+	void (*memoryFreeProc)(); // size=0, offset=20
+};
+
+struct _AadDynSfxFileHdr // hashcode: 0xB9609773 (dec: -1184852109)
+{
+	unsigned long snfID; // size=0, offset=0
+	unsigned short snfVersion; // size=0, offset=4
+	unsigned short uniqueID; // size=0, offset=6
+	unsigned short handle; // size=0, offset=8
+	unsigned short numSfxInFile; // size=0, offset=10
+	struct _AadDynSfxFileHdr *prevDynSfxFile; // size=20, offset=12
+	struct _AadDynSfxFileHdr *nextDynSfxFile; // size=20, offset=16
+};
+
+struct AadDynSfxAttr // hashcode: 0x20751E4B (dec: 544546379)
+{
+	unsigned short sfxID; // size=0, offset=0
+	unsigned short waveID; // size=0, offset=2
+	struct AadToneAtr toneAttr; // size=16, offset=4
+	unsigned long waveSize; // size=0, offset=20
+};
+
+struct AadDynamicSfxLoadInfo // hashcode: 0xEDD41D4C (dec: -304865972)
+{
+	char snfFileName[40]; // size=40, offset=0
+	char smfFileName[40]; // size=40, offset=40
+	int fileHandle; // size=0, offset=80
+	long directoryID; // size=0, offset=84
+	long loadFlags; // size=0, offset=88
+	long flags; // size=0, offset=92
+	int smfLoadingState; // size=0, offset=96
+	unsigned long bytesToLoad; // size=0, offset=100
+	int numSfxToLoad; // size=0, offset=104
+	int error; // size=0, offset=108
+	unsigned long waveTransferAddr; // size=0, offset=112
+	unsigned long totalSramUsed; // size=0, offset=116
+	struct _AadDynSfxFileHdr *snfFile; // size=20, offset=120
+	struct AadDynSfxAttr attr; // size=24, offset=124
+};
+
+
 extern unsigned long aadGetMemorySize(struct AadInitAttr *attributes); // 0x800514D4
 
 extern int aadInit(struct AadInitAttr *attributes, unsigned char *memoryPtr); // 0x800514F8

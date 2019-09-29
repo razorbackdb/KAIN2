@@ -1,6 +1,8 @@
 #ifndef STRMLOAD_H
 #define STRMLOAD_H
 
+#include "LOAD3D.H"
+
 struct DVECTOR // hashcode: 0x5BF12E56 (dec: 1542532694)
 {
 	short vx; // size=0, offset=0

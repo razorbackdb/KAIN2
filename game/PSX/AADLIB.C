@@ -1,4 +1,4 @@
-#include "THISDUST.H"
+//#include "THISDUST.H"
 #include "AADLIB.H"
 
 
@@ -16,10 +16,10 @@
 	/* end block 2 */
 	// End Line: 82
 
-ulong aadGetMemorySize(AadInitAttr *attributes)
+unsigned long aadGetMemorySize(AadInitAttr *attributes)
 
 {
-  return (ulong)(&DAT_00001c88 + attributes->numSlots * 0x5d0);
+  return (unsigned long)("&DAT_00001c88" + attributes->numSlots * 0x5d0);
 }
 
 
@@ -47,7 +47,7 @@ ulong aadGetMemorySize(AadInitAttr *attributes)
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-int aadInit(AadInitAttr *attributes,uchar *memoryPtr)
+int aadInit(AadInitAttr *attributes, unsigned char *memoryPtr)
 
 {
   _aadGp = GetGp();
