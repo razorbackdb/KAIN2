@@ -5,15 +5,15 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLANAPI_ConvertPlanIntoEnmyPlanDataFormat(struct PlanningNode *goalNode /*$a0*/, struct EnemyPlanData *planData /*$s1*/, struct PlanningNode *planningPool /*$s2*/)
- // line 131, offset 0x80097b8c
+ // line 131, offset 0x800974ec
 	/* begin block 1 */
 		// Start line: 132
-		// Start offset: 0x80097B8C
+		// Start offset: 0x800974EC
 		// Variables:
 	// 		struct PlanningNode *currentNode; // $s0
 	// 		int i; // $a0
 	/* end block 1 */
-	// End offset: 0x80097C28
+	// End offset: 0x80097588
 	// End Line: 151
 
 	/* begin block 2 */
@@ -58,15 +58,15 @@ void PLANAPI_ConvertPlanIntoEnmyPlanDataFormat
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANAPI_FindPathBetweenNodes(struct PlanningNode *startNode /*$v0*/, struct PlanningNode *goalNode /*$v1*/, struct EnemyPlanData *planData /*$s3*/, int validNodeTypes /*$a3*/)
- // line 157, offset 0x80097c40
+ // line 157, offset 0x800975a0
 	/* begin block 1 */
 		// Start line: 158
-		// Start offset: 0x80097C40
+		// Start offset: 0x800975A0
 		// Variables:
 	// 		struct PlanningNode *planningPool; // $s1
 	// 		int successFlag; // $s2
 	/* end block 1 */
-	// End offset: 0x80097CA8
+	// End offset: 0x80097608
 	// End Line: 172
 
 	/* begin block 2 */
@@ -79,15 +79,15 @@ int PLANAPI_FindPathBetweenNodes
               int validNodeTypes)
 
 {
-  long planningPool;
+  void *planningPool;
   PlanningNode *goalNode_00;
   int iVar1;
   
-  planningPool = theCamera.oppositeError;
+  planningPool = gameTrackerX.planningPool;
   iVar1 = 0;
   if (((startNode != (PlanningNode *)0x0) && (goalNode != (PlanningNode *)0x0)) &&
      (goalNode_00 = PLANSRCH_FindPathInGraph
-                              ((PlanningNode *)theCamera.oppositeError,startNode,goalNode,
+                              ((PlanningNode *)gameTrackerX.planningPool,startNode,goalNode,
                                validNodeTypes), goalNode_00 != (PlanningNode *)0x0)) {
     PLANAPI_ConvertPlanIntoEnmyPlanDataFormat(goalNode_00,planData,(PlanningNode *)planningPool);
     iVar1 = 1;
@@ -101,10 +101,10 @@ int PLANAPI_FindPathBetweenNodes
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLANAPI_DoTimingCalcsAndDrawing(long startTime /*$a0*/, struct PlanningNode *planningPool /*$s2*/)
- // line 177, offset 0x80097cc8
+ // line 177, offset 0x80097628
 	/* begin block 1 */
 		// Start line: 178
-		// Start offset: 0x80097CC8
+		// Start offset: 0x80097628
 		// Variables:
 	// 		int i; // $a1
 	// 		long minTime; // $s1
@@ -112,12 +112,12 @@ int PLANAPI_FindPathBetweenNodes
 
 		/* begin block 1.1 */
 			// Start line: 199
-			// Start offset: 0x80097D70
+			// Start offset: 0x800976D4
 		/* end block 1.1 */
-		// End offset: 0x80097DCC
+		// End offset: 0x80097730
 		// End Line: 221
 	/* end block 1 */
-	// End offset: 0x80097DCC
+	// End offset: 0x80097730
 	// End Line: 222
 
 	/* begin block 2 */
@@ -125,14 +125,12 @@ int PLANAPI_FindPathBetweenNodes
 	/* end block 2 */
 	// End Line: 362
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void PLANAPI_DoTimingCalcsAndDrawing(long startTime,PlanningNode *planningPool)
 
 {
   ulong uVar1;
   int iVar2;
-  char *pcVar3;
+  long *plVar3;
   int iVar4;
   int iVar5;
   int iVar6;
@@ -141,10 +139,10 @@ void PLANAPI_DoTimingCalcsAndDrawing(long startTime,PlanningNode *planningPool)
   iVar5 = 0;
   uVar1 = TIMER_TimeDiff(startTime);
   iVar4 = 0;
-  pcVar3 = &timerArray;
-  *(ulong *)(&timerArray + _timerIndex * 4) = uVar1;
+  plVar3 = &timerArray;
+  (&timerArray)[timerIndex] = uVar1;
   do {
-    iVar2 = *(int *)pcVar3;
+    iVar2 = *plVar3;
     if (iVar2 < iVar6) {
       iVar6 = iVar2;
     }
@@ -152,13 +150,13 @@ void PLANAPI_DoTimingCalcsAndDrawing(long startTime,PlanningNode *planningPool)
       iVar5 = iVar2;
     }
     iVar4 = iVar4 + 1;
-    pcVar3 = (char *)((int *)pcVar3 + 1);
+    plVar3 = plVar3 + 1;
   } while (iVar4 < 10);
-  _timerIndex = _timerIndex + 1;
-  if (9 < _timerIndex) {
-    _timerIndex = 0;
+  timerIndex = timerIndex + 1;
+  if (9 < timerIndex) {
+    timerIndex = 0;
   }
-  if ((theCamera.core._212_4_ & 0x10) != 0) {
+  if ((gameTrackerX.debugFlags2 & 0x10U) != 0) {
     PLANPOOL_NumberOfNodesOfType(planningPool,'\x04');
     PLANPOOL_NumberOfNodesOfType(planningPool,'\f');
     PLANPOOL_NumberOfNodesOfType(planningPool,'\x14');
@@ -176,10 +174,10 @@ void PLANAPI_DoTimingCalcsAndDrawing(long startTime,PlanningNode *planningPool)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANAPI_AddNodeOfTypeToPool(struct _Position *pos /*$s0*/, int type /*$s2*/)
- // line 269, offset 0x80097de4
+ // line 269, offset 0x80097748
 	/* begin block 1 */
 		// Start line: 270
-		// Start offset: 0x80097DE4
+		// Start offset: 0x80097748
 		// Variables:
 	// 		struct PlanningNode *planningPool; // $s1
 	// 		int foundHit; // $v1
@@ -188,17 +186,17 @@ void PLANAPI_DoTimingCalcsAndDrawing(long startTime,PlanningNode *planningPool)
 
 		/* begin block 1.1 */
 			// Start line: 284
-			// Start offset: 0x80097E30
+			// Start offset: 0x80097794
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $t0
 		// 		struct _Position *_v0; // $s0
 		/* end block 1.1 */
-		// End offset: 0x80097E30
+		// End offset: 0x80097794
 		// End Line: 284
 	/* end block 1 */
-	// End offset: 0x80097EAC
+	// End offset: 0x80097810
 	// End Line: 294
 
 	/* begin block 2 */
@@ -206,33 +204,34 @@ void PLANAPI_DoTimingCalcsAndDrawing(long startTime,PlanningNode *planningPool)
 	/* end block 2 */
 	// End Line: 553
 
-undefined4 PLANAPI_AddNodeOfTypeToPool(_Position *param_1,undefined4 param_2)
+int PLANAPI_AddNodeOfTypeToPool(_Position *pos,int type)
 
 {
-  PlanningNode *planningPool;
+  void *planningPool;
   int iVar1;
   ushort nodeType;
-  _PlanCollideInfo _Stack40;
-  ushort auStack24 [4];
+  _PlanCollideInfo local_28;
+  ushort local_18 [4];
   
-  planningPool = pPGpffffb708;
-  iVar1 = PLANCOLL_CheckUnderwaterPoint((short *)param_1);
+  planningPool = gameTrackerX.planningPool;
+  iVar1 = PLANCOLL_CheckUnderwaterPoint(pos);
   if (iVar1 == -1) {
-    _Stack40.collidePos.x = param_1->x;
-    _Stack40.collidePos.y = param_1->y;
-    _Stack40.collidePos.z = param_1->z;
-    param_1 = &_Stack40.collidePos;
-    iVar1 = PLANCOLL_FindTerrainHitFinal(&_Stack40,(int *)auStack24,0x100,-0x280,0,5);
+    local_28.collidePos.x = pos->x;
+    local_28.collidePos.y = pos->y;
+    local_28.collidePos.z = pos->z;
+    pos = &local_28.collidePos;
+    iVar1 = PLANCOLL_FindTerrainHitFinal(&local_28,(int *)local_18,0x100,-0x280,0,5);
     if (iVar1 == 0) {
-      return 0;
+      iVar1 = PLANAPI_NumNodesInPool(pos);
+      return iVar1;
     }
-    nodeType = (ushort)(((uint)auStack24[0] & 3) << 3) | (ushort)param_2 & 7;
+    nodeType = (ushort)(((uint)local_18[0] & 3) << 3) | (ushort)type & 7;
   }
   else {
-    nodeType = (ushort)param_2 & 7 | 0x18;
-    _Stack40.StreamUnitID = iVar1;
+    nodeType = (ushort)type & 7 | 0x18;
+    local_28.StreamUnitID = iVar1;
   }
-  PLANPOOL_AddNodeToPool(param_1,planningPool,nodeType,0,_Stack40.StreamUnitID);
+  PLANPOOL_AddNodeToPool(pos,(PlanningNode *)planningPool,nodeType,0,local_28.StreamUnitID);
   return 1;
 }
 
@@ -241,41 +240,39 @@ undefined4 PLANAPI_AddNodeOfTypeToPool(_Position *param_1,undefined4 param_2)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLANAPI_DeleteNodesFromPoolByType(int nodeSource /*$s3*/)
- // line 306, offset 0x80097ec4
+ // line 306, offset 0x80097828
 	/* begin block 1 */
 		// Start line: 307
-		// Start offset: 0x80097EC4
+		// Start offset: 0x80097828
 		// Variables:
 	// 		struct PlanningNode *planningPool; // $s2
 	// 		struct PlanningNode *nodeToDelete; // $s0
 	// 		int i; // $s1
 	/* end block 1 */
-	// End offset: 0x80097F44
+	// End offset: 0x800978A8
 	// End Line: 324
 
 	/* begin block 2 */
-		// Start line: 612
+		// Start line: 609
 	/* end block 2 */
-	// End Line: 613
+	// End Line: 610
 
 	/* begin block 3 */
 		// Start line: 626
 	/* end block 3 */
 	// End Line: 627
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void PLANAPI_DeleteNodesFromPoolByType(int nodeSource)
 
 {
-  long planningPool;
+  void *planningPool;
   PlanningNode *nodeToDelete;
   int iVar1;
   
-  planningPool = theCamera.oppositeError;
+  planningPool = gameTrackerX.planningPool;
   iVar1 = 0;
-  nodeToDelete = (PlanningNode *)theCamera.oppositeError;
-  if (*(char *)(_poolManagementData + 1) != '\0') {
+  nodeToDelete = (PlanningNode *)gameTrackerX.planningPool;
+  if (*(char *)(poolManagementData + 1) != '\0') {
     do {
       if (((uint)nodeToDelete->nodeType & 7) == nodeSource) {
         PLANPOOL_DeleteNodeFromPool(nodeToDelete,(PlanningNode *)planningPool);
@@ -284,7 +281,7 @@ void PLANAPI_DeleteNodesFromPoolByType(int nodeSource)
         iVar1 = iVar1 + 1;
         nodeToDelete = nodeToDelete + 1;
       }
-    } while (iVar1 < (int)(uint)*(byte *)(_poolManagementData + 1));
+    } while (iVar1 < (int)(uint)*(byte *)(poolManagementData + 1));
   }
   return;
 }
@@ -294,16 +291,16 @@ void PLANAPI_DeleteNodesFromPoolByType(int nodeSource)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLANAPI_DeleteNodeFromPoolByUnit(long streamUnitID /*$s3*/)
- // line 327, offset 0x80097f60
+ // line 327, offset 0x800978c4
 	/* begin block 1 */
 		// Start line: 328
-		// Start offset: 0x80097F60
+		// Start offset: 0x800978C4
 		// Variables:
 	// 		struct PlanningNode *planningPool; // $s2
 	// 		struct PlanningNode *nodeToDelete; // $s0
 	// 		int i; // $s1
 	/* end block 1 */
-	// End offset: 0x80097FDC
+	// End offset: 0x80097940
 	// End Line: 347
 
 	/* begin block 2 */
@@ -316,31 +313,28 @@ void PLANAPI_DeleteNodesFromPoolByType(int nodeSource)
 	/* end block 3 */
 	// End Line: 689
 
-int PLANAPI_GetFlags(int type)
+void PLANAPI_DeleteNodeFromPoolByUnit(long streamUnitID)
 
 {
-  bool bVar1;
-  PlanningNode *planningPool;
+  void *planningPool;
   PlanningNode *nodeToDelete;
-  int iVar2;
+  int iVar1;
   
-  planningPool = fontTracker.font_buffer[119]._2_4_;
-  iVar2 = 0;
-  bVar1 = *(bool *)((int)&(_BlockVramEntry_800d59d8.next)->next + 1);
-  nodeToDelete = fontTracker.font_buffer[119]._2_4_;
-  if (bVar1 != false) {
+  planningPool = gameTrackerX.planningPool;
+  iVar1 = 0;
+  nodeToDelete = (PlanningNode *)gameTrackerX.planningPool;
+  if (*(char *)(poolManagementData + 1) != '\0') {
     do {
-      if (nodeToDelete->streamUnitID == type) {
-        PLANPOOL_DeleteNodeFromPool(nodeToDelete,planningPool);
+      if (nodeToDelete->streamUnitID == streamUnitID) {
+        PLANPOOL_DeleteNodeFromPool(nodeToDelete,(PlanningNode *)planningPool);
       }
       else {
-        iVar2 = iVar2 + 1;
+        iVar1 = iVar1 + 1;
         nodeToDelete = nodeToDelete + 1;
       }
-      bVar1 = iVar2 < (int)(uint)*(byte *)((int)&(_BlockVramEntry_800d59d8.next)->next + 1);
-    } while (bVar1);
+    } while (iVar1 < (int)(uint)*(byte *)(poolManagementData + 1));
   }
-  return (uint)bVar1;
+  return;
 }
 
 
@@ -348,15 +342,15 @@ int PLANAPI_GetFlags(int type)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANAPI_FindPathInGraphToTarget(struct _Position *startPos /*$a0*/, struct EnemyPlanData *planData /*$s1*/, int validNodeTypes /*$s2*/)
- // line 388, offset 0x80097ff8
+ // line 388, offset 0x8009795c
 	/* begin block 1 */
 		// Start line: 389
-		// Start offset: 0x80097FF8
+		// Start offset: 0x8009795C
 		// Variables:
 	// 		struct PlanningNode *planningPool; // $s0
 	// 		struct PlanningNode *startNode; // $s0
 	/* end block 1 */
-	// End offset: 0x80097FF8
+	// End offset: 0x8009795C
 	// End Line: 389
 
 	/* begin block 2 */
@@ -367,13 +361,13 @@ int PLANAPI_GetFlags(int type)
 int PLANAPI_FindPathInGraphToTarget(_Position *startPos,EnemyPlanData *planData,int validNodeTypes)
 
 {
-  long planningPool;
+  void *planningPool;
   PlanningNode *startNode;
   PlanningNode *goalNode;
   int iVar1;
   
-  planningPool = theCamera.oppositeError;
-  startNode = PLANPOOL_GetNodeByPosition(startPos,(PlanningNode *)theCamera.oppositeError);
+  planningPool = gameTrackerX.planningPool;
+  startNode = PLANPOOL_GetNodeByPosition(startPos,(PlanningNode *)gameTrackerX.planningPool);
   goalNode = PLANPOOL_GetFirstNodeOfSource((PlanningNode *)planningPool,'\x03');
   iVar1 = PLANAPI_FindPathBetweenNodes(startNode,goalNode,planData,validNodeTypes);
   return iVar1;
@@ -384,15 +378,15 @@ int PLANAPI_FindPathInGraphToTarget(_Position *startPos,EnemyPlanData *planData,
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLANAPI_InitPlanning(void *planningPool /*$a0*/)
- // line 405, offset 0x8009805c
+ // line 405, offset 0x800979c0
 	/* begin block 1 */
 		// Start line: 407
-		// Start offset: 0x8009805C
+		// Start offset: 0x800979C0
 		// Variables:
 	// 		int i; // $a1
 	// 		int j; // $a0
 	/* end block 1 */
-	// End offset: 0x800980D0
+	// End offset: 0x80097A3C
 	// End Line: 439
 
 	/* begin block 2 */
@@ -410,39 +404,37 @@ int PLANAPI_FindPathInGraphToTarget(_Position *startPos,EnemyPlanData *planData,
 	/* end block 4 */
 	// End Line: 886
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void PLANAPI_InitPlanning(void *planningPool)
 
 {
   int iVar1;
-  char *pcVar2;
+  long *plVar2;
   int iVar3;
   int iVar4;
   
   iVar4 = 0;
-  _CHAR____800d5194 = (int)planningPool + 0x380;
-  _poolManagementData = &poolManagementDataStorage;
-  poolManagementDataStorage = '\0';
-  CHAR____800d5185 = '\0';
+  DAT_800d56c4 = (int)planningPool + 0x380;
+  poolManagementData = &poolManagementDataStorage;
+  poolManagementDataStorage = 0;
+  DAT_800d56b5 = 0;
   do {
     iVar3 = 0;
     iVar1 = 0;
     do {
       iVar3 = iVar3 + 1;
-      *(undefined2 *)(iVar1 + iVar4 * 0x40 + _CHAR____800d5194) = 0;
+      *(undefined2 *)(iVar1 + iVar4 * 0x40 + DAT_800d56c4) = 0;
       iVar1 = iVar3 * 2;
     } while (iVar3 < 0x20);
     iVar4 = iVar4 + 1;
   } while (iVar4 < 0x20);
   iVar4 = 9;
-  pcVar2 = &CHAR____800d51c8;
+  plVar2 = &constrictData;
   do {
-    *(undefined4 *)pcVar2 = 0;
+    *plVar2 = 0;
     iVar4 = iVar4 + -1;
-    pcVar2 = (char *)((undefined4 *)pcVar2 + -1);
+    plVar2 = plVar2 + -1;
   } while (-1 < iVar4);
-  _timerIndex = 0;
+  timerIndex = 0;
   return;
 }
 
@@ -451,15 +443,15 @@ void PLANAPI_InitPlanning(void *planningPool)
 // decompiled code
 // original method signature: 
 // short /*$ra*/ PLANAPI_PairType(struct PlanningNode *node1 /*$a0*/, struct PlanningNode *node2 /*$a1*/)
- // line 446, offset 0x800980dc
+ // line 446, offset 0x80097a48
 	/* begin block 1 */
 		// Start line: 448
-		// Start offset: 0x800980DC
+		// Start offset: 0x80097A48
 		// Variables:
 	// 		short placement1; // $a2
 	// 		short placement2; // $a1
 	/* end block 1 */
-	// End offset: 0x80098118
+	// End offset: 0x80097A84
 	// End Line: 457
 
 	/* begin block 2 */
@@ -477,20 +469,22 @@ void PLANAPI_InitPlanning(void *planningPool)
 	/* end block 4 */
 	// End Line: 970
 
-uint PLANAPI_PairType(int param_1,int param_2)
+short PLANAPI_PairType(PlanningNode *node1,PlanningNode *node2)
 
 {
   uint uVar1;
   uint uVar2;
+  ushort uVar3;
   
-  uVar1 = (uint)(*(ushort *)(param_1 + 0x14) >> 3) & 3;
-  uVar2 = (uint)(*(ushort *)(param_2 + 0x14) >> 3) & 3;
-  if (uVar2 < uVar1) {
-    uVar1 = uVar1 ^ uVar2;
-    uVar2 = uVar2 ^ uVar1;
-    uVar1 = uVar1 ^ uVar2;
+  uVar2 = (uint)(node1->nodeType >> 3) & 3;
+  _uVar3 = (uint)(node2->nodeType >> 3) & 3;
+  uVar3 = (ushort)_uVar3;
+  if (_uVar3 < uVar2) {
+    uVar1 = _uVar3 ^ uVar2 ^ _uVar3;
+    uVar3 = (ushort)uVar1;
+    uVar2 = uVar2 ^ _uVar3 ^ uVar1;
   }
-  return uVar2 | uVar1 << 8;
+  return (short)(uVar3 | (ushort)(uVar2 << 8));
 }
 
 
@@ -498,16 +492,16 @@ uint PLANAPI_PairType(int param_1,int param_2)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANAPI_PassThroughHit(struct PlanningNode *node1 /*$a0*/, struct PlanningNode *node2 /*$a1*/)
- // line 462, offset 0x80098124
+ // line 462, offset 0x80097a90
 	/* begin block 1 */
 		// Start line: 464
-		// Start offset: 0x80098124
+		// Start offset: 0x80097A90
 		// Variables:
 	// 		int src1; // $a0
 	// 		int src2; // $v1
 	// 		int res; // $v1
 	/* end block 1 */
-	// End offset: 0x80098188
+	// End offset: 0x80097AF4
 	// End Line: 485
 
 	/* begin block 2 */
@@ -531,7 +525,7 @@ int PLANAPI_PassThroughHit(PlanningNode *node1,PlanningNode *node2)
   uint uVar1;
   uint uVar2;
   
-  if (theCamera.positionAccl._0_4_ < 0) {
+  if (gameTrackerX.gameFlags < 0) {
     uVar2 = (uint)node1->nodeType & 7;
     uVar1 = (uint)node2->nodeType & 7;
     if (uVar1 < uVar2) {
@@ -551,193 +545,41 @@ int PLANAPI_PassThroughHit(PlanningNode *node1,PlanningNode *node2)
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ PLANAPI_CheckTargetToEnemyNode(struct PlanningNode **node1 /*$s2*/, struct PlanningNode **node2 /*$s3*/)
- // line 487, offset 0x80098190
+// void /*$ra*/ PLANAPI_UpdatePlanningDatabase(struct GameTracker *gameTracker /*$a0*/, struct _Instance *player /*$s0*/)
+ // line 491, offset 0x80097afc
 	/* begin block 1 */
-		// Start line: 488
-		// Start offset: 0x80098190
+		// Start line: 492
+		// Start offset: 0x80097AFC
 		// Variables:
-	// 		struct PlanningNode *planningPool; // $s0
-	// 		struct PlanningNode *temp1; // $s1
-	// 		struct PlanningNode *temp2; // $a1
-	/* end block 1 */
-	// End offset: 0x80098284
-	// End Line: 511
-
-	/* begin block 2 */
-		// Start line: 1048
-	/* end block 2 */
-	// End Line: 1049
-
-int PLANAPI_CheckTargetToEnemyNode(PlanningNode **node1,PlanningNode **node2)
-
-{
-  long planningPool;
-  PlanningNode *pPVar1;
-  PlanningNode *pPVar2;
-  int iVar3;
-  
-  planningPool = theCamera.oppositeError;
-  pPVar1 = PLANPOOL_GetFirstNodeOfSource((PlanningNode *)theCamera.oppositeError,'\x02');
-  pPVar2 = PLANPOOL_GetFirstNodeOfSource((PlanningNode *)planningPool,'\x03');
-  if ((pPVar1 == (PlanningNode *)0x0) || (pPVar2 == (PlanningNode *)0x0)) {
-    iVar3 = 0;
-  }
-  else {
-    if (((pPVar1->connectionStatus &
-         1 << ((int)((int)pPVar2 - planningPool) * -0x49249249 >> 2 & 0x1fU)) == 0) ||
-       (iVar3 = 0,
-       (pPVar2->connectionStatus &
-       1 << ((int)((int)pPVar1 - planningPool) * -0x49249249 >> 2 & 0x1fU)) == 0)) {
-      iVar3 = 1;
-      *node1 = pPVar1;
-      *node2 = pPVar2;
-    }
-  }
-  return iVar3;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// void /*$ra*/ PLANAPI_UpdatePlanningDatabase(struct GameTracker *gameTracker /*$a0*/, struct _Instance *player /*$s2*/)
- // line 517, offset 0x800982a0
-	/* begin block 1 */
-		// Start line: 518
-		// Start offset: 0x800982A0
-		// Variables:
-	// 		struct PlanningNode *planningPool; // $s1
-	// 		struct PlanningNode *node1; // stack offset -32
-	// 		struct PlanningNode *node2; // stack offset -28
-	// 		long startTime; // $s3
-	// 		int pathExistsAbove; // $s0
-	// 		int pathExistsBelow; // $v1
+	// 		struct PlanningNode *planningPool; // $s3
+	// 		struct PlanningNode *node1; // $s0
+	// 		struct PlanningNode *node2; // $s1
+	// 		long startTime; // $s4
+	// 		int pathExistsAbove; // $v0
+	// 		int pathExistsBelow; // $v0
 
 		/* begin block 1.1 */
-			// Start line: 566
-			// Start offset: 0x800984A8
+			// Start line: 534
+			// Start offset: 0x80097C8C
+			// Variables:
+		// 		struct PlanningNode *temp; // $v0
 		/* end block 1.1 */
-		// End offset: 0x800984B4
-		// End Line: 570
+		// End offset: 0x80097C98
+		// End Line: 538
 	/* end block 1 */
-	// End offset: 0x80098720
-	// End Line: 681
+	// End offset: 0x80097DF8
+	// End Line: 636
 
 	/* begin block 2 */
-		// Start line: 1116
+		// Start line: 1056
 	/* end block 2 */
-	// End Line: 1117
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 1057
 
 void PLANAPI_UpdatePlanningDatabase(GameTracker *gameTracker,_Instance *player)
 
 {
-  ushort uVar1;
-  byte bVar2;
-  uint uVar3;
-  int passThroughHit;
-  int passThroughHit_00;
-  uint uVar4;
-  PlanningNode *startPos;
-  PlanningNode *endPos;
-  PlanningNode *planningPool;
-  int local_28;
-  PlanningNode *local_20;
-  PlanningNode *local_1c;
-  
-  planningPool = (PlanningNode *)gameTracker->planningPool;
-  uVar3 = GetRCnt(0xf2000000);
-  theCamera.focusSphere.radiusSquared._2_1_ = 1;
-  uVar4 = gameTimer << 0x10;
-  bVar2 = *_poolManagementData;
-  if (bVar2 == 1) {
-    PLAN_AddOrRemoveNodes(planningPool,player);
-    bVar2 = 2;
-  }
-  else {
-    if (bVar2 < 2) {
-      if (bVar2 == 0) {
-        PLAN_AddInitialNodes(planningPool,player);
-        *_poolManagementData = 1;
-        goto LAB_80098724;
-      }
-    }
-    else {
-      if (bVar2 == 2) {
-        passThroughHit = PLANAPI_CheckTargetToEnemyNode(&local_20,&local_1c);
-        if (passThroughHit == 0) {
-          local_20 = PLAN_FindNodeMostInNeedOfConnectivityExpansion(planningPool);
-          local_1c = PLANPOOL_GetClosestUnexploredValidNeighbor(local_20,planningPool);
-        }
-        *_poolManagementData = 1;
-        if ((local_20 != (PlanningNode *)0x0) && (local_1c != (PlanningNode *)0x0)) {
                     /* WARNING: Subroutine does not return */
-          MATH3D_LengthXYZ((int)(local_20->pos).x - (int)(local_1c->pos).x,
-                           (int)(local_20->pos).y - (int)(local_1c->pos).y,
-                           (int)(local_20->pos).z - (int)(local_1c->pos).z);
-        }
-        goto LAB_80098724;
-      }
-      if (bVar2 == 3) {
-        local_20 = *(PlanningNode **)(_poolManagementData + 8);
-        local_1c = *(PlanningNode **)(_poolManagementData + 0xc);
-        uVar1 = *(ushort *)(_poolManagementData + 0x14);
-        if ((uint)uVar1 == (uint)bVar2) {
-          passThroughHit = PLANAPI_PassThroughHit(local_1c,local_20);
-          passThroughHit =
-               PLANCOLL_DoesWaterPathUpExist
-                         ((_Position *)local_1c,(_Position *)local_20,0,
-                          (_Position *)(_poolManagementData + 0x16),passThroughHit);
-          passThroughHit_00 = PLANAPI_PassThroughHit(local_1c,local_20);
-          local_28 = 0;
-          endPos = (PlanningNode *)(_poolManagementData + 0x16);
-          startPos = local_20;
-LAB_8009869c:
-          passThroughHit_00 =
-               PLANCOLL_DoesLOSExistFinal
-                         ((_Position *)startPos,(_Position *)endPos,0,passThroughHit_00,local_28);
-        }
-        else {
-          if (uVar1 < 4) {
-            if (uVar1 == 0) {
-LAB_800985f8:
-              passThroughHit = PLANAPI_PassThroughHit(local_1c,local_20);
-              passThroughHit =
-                   PLANCOLL_DoesLOSExistFinal
-                             ((_Position *)local_1c,(_Position *)local_20,0,passThroughHit,0x100);
-              passThroughHit_00 = PLANAPI_PassThroughHit(local_1c,local_20);
-              local_28 = -0x100;
-              startPos = local_1c;
-              endPos = local_20;
-              goto LAB_8009869c;
-            }
-          }
-          else {
-            if (uVar1 == 0x202) goto LAB_800985f8;
-          }
-          passThroughHit = PLANAPI_PassThroughHit(local_1c,local_20);
-          passThroughHit_00 =
-               PLANCOLL_DoesLOSExistFinal
-                         ((_Position *)local_1c,(_Position *)local_20,0,passThroughHit,0);
-          passThroughHit = passThroughHit_00;
-        }
-        if ((passThroughHit == 0) || (passThroughHit_00 == 0)) {
-          PLANPOOL_MarkTwoNodesAsNotConnected(local_1c,local_20,planningPool);
-        }
-        else {
-          PLANPOOL_MarkTwoNodesAsConnected(local_1c,local_20,planningPool);
-        }
-      }
-    }
-    bVar2 = 1;
-  }
-  *_poolManagementData = bVar2;
-LAB_80098724:
-  PLANAPI_DoTimingCalcsAndDrawing(uVar3 & 0xffff | uVar4,planningPool);
-  theCamera.focusSphere.radiusSquared._2_1_ = 0;
-  return;
+  GetRCnt(0xf2000000);
 }
 
 
@@ -745,23 +587,21 @@ LAB_80098724:
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANAPI_NumNodesInPool(void *planningPool /*$a0*/)
- // line 689, offset 0x8009874c
+ // line 644, offset 0x80097e28
 	/* begin block 1 */
-		// Start line: 1491
+		// Start line: 1391
 	/* end block 1 */
-	// End Line: 1492
+	// End Line: 1392
 
 	/* begin block 2 */
-		// Start line: 1492
+		// Start line: 1392
 	/* end block 2 */
-	// End Line: 1493
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 1393
 
 int PLANAPI_NumNodesInPool(void *planningPool)
 
 {
-  return (uint)*(byte *)(_poolManagementData + 1);
+  return (uint)*(byte *)(poolManagementData + 1);
 }
 
 
@@ -769,10 +609,10 @@ int PLANAPI_NumNodesInPool(void *planningPool)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLANAPI_InitPlanMkrList(struct _StreamUnit *streamUnit /*$a0*/)
- // line 697, offset 0x80098760
+ // line 652, offset 0x80097e3c
 	/* begin block 1 */
-		// Start line: 698
-		// Start offset: 0x80098760
+		// Start line: 653
+		// Start offset: 0x80097E3C
 		// Variables:
 	// 		int i; // $s2
 	// 		int terrainFoundFlag; // $v0
@@ -781,44 +621,44 @@ int PLANAPI_NumNodesInPool(void *planningPool)
 	// 		struct _PlanMkr *planMkrList; // $v1
 
 		/* begin block 1.1 */
-			// Start line: 712
-			// Start offset: 0x800987A0
+			// Start line: 667
+			// Start offset: 0x80097E7C
 			// Variables:
 		// 		struct _PlanCollideInfo pci; // stack offset -40
 
 			/* begin block 1.1.1 */
-				// Start line: 713
-				// Start offset: 0x800987A0
+				// Start line: 668
+				// Start offset: 0x80097E7C
 				// Variables:
 			// 		short _x1; // $v0
 			// 		short _y1; // $v1
 			// 		short _z1; // $a0
 			// 		struct _Position *_v0; // $s1
 			/* end block 1.1.1 */
-			// End offset: 0x800987A0
-			// End Line: 713
+			// End offset: 0x80097E7C
+			// End Line: 668
 
 			/* begin block 1.1.2 */
-				// Start line: 738
-				// Start offset: 0x8009883C
+				// Start line: 693
+				// Start offset: 0x80097F18
 				// Variables:
 			// 		short _x1; // $v0
 			// 		short _y1; // $v1
 			// 		short _z1; // $a0
 			/* end block 1.1.2 */
-			// End offset: 0x80098854
-			// End Line: 738
+			// End offset: 0x80097F30
+			// End Line: 693
 		/* end block 1.1 */
-		// End offset: 0x80098854
-		// End Line: 741
+		// End offset: 0x80097F30
+		// End Line: 696
 	/* end block 1 */
-	// End offset: 0x80098868
-	// End Line: 742
+	// End offset: 0x80097F44
+	// End Line: 697
 
 	/* begin block 2 */
-		// Start line: 1507
+		// Start line: 1407
 	/* end block 2 */
-	// End Line: 1508
+	// End Line: 1408
 
 void PLANAPI_InitPlanMkrList(_StreamUnit *streamUnit)
 
@@ -829,8 +669,8 @@ void PLANAPI_InitPlanMkrList(_StreamUnit *streamUnit)
   int distBefore;
   int distAfter;
   int iVar4;
-  int local_30;
-  int local_2c;
+  int start;
+  int end;
   _PlanCollideInfo _Stack40;
   
   p_Var3 = streamUnit->level->PlanMarkerList;
@@ -846,24 +686,24 @@ void PLANAPI_InitPlanMkrList(_StreamUnit *streamUnit)
           if ((uVar2 & 0x2000) == 0) {
             distBefore = 0x80;
             distAfter = -0x400;
-            local_30 = 0;
-            local_2c = 0;
+            start = 0;
+            end = 0;
           }
           else {
             distBefore = -0x100;
             distAfter = 0x280;
-            local_30 = 5;
-            local_2c = 5;
+            start = 5;
+            end = 5;
           }
         }
         else {
           distBefore = -0x100;
           distAfter = 0x280;
-          local_30 = 1;
-          local_2c = 4;
+          start = 1;
+          end = 4;
         }
         distBefore = PLANCOLL_FindTerrainHitFinal
-                               (&_Stack40,(int *)0x0,distBefore,distAfter,local_30,local_2c);
+                               (&_Stack40,(int *)0x0,distBefore,distAfter,start,end);
         if (distBefore != 0) {
           (p_Var3->pos).x = _Stack40.collidePos.x;
           (p_Var3->pos).y = _Stack40.collidePos.y;
@@ -882,30 +722,30 @@ void PLANAPI_InitPlanMkrList(_StreamUnit *streamUnit)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANAPI_GetFlags(int type /*$a0*/)
- // line 755, offset 0x80098884
+ // line 710, offset 0x80097f60
 	/* begin block 1 */
-		// Start line: 757
-		// Start offset: 0x80098884
+		// Start line: 712
+		// Start offset: 0x80097F60
 		// Variables:
 	// 		int chk; // $v0
 	/* end block 1 */
-	// End offset: 0x800988E4
-	// End Line: 779
+	// End offset: 0x80097FC0
+	// End Line: 734
 
 	/* begin block 2 */
-		// Start line: 1510
+		// Start line: 1417
 	/* end block 2 */
-	// End Line: 1511
+	// End Line: 1418
 
 	/* begin block 3 */
-		// Start line: 1641
+		// Start line: 1541
 	/* end block 3 */
-	// End Line: 1642
+	// End Line: 1542
 
 	/* begin block 4 */
-		// Start line: 1643
+		// Start line: 1543
 	/* end block 4 */
-	// End Line: 1644
+	// End Line: 1544
 
 int PLANAPI_GetFlags(int type)
 
@@ -934,14 +774,14 @@ int PLANAPI_GetFlags(int type)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANAPI_FindNodePositionInUnit(struct _StreamUnit *streamUnit /*$a0*/, struct _Position *pos /*$s3*/, int id /*$s2*/, int type /*$a3*/)
- // line 781, offset 0x800988ec
+ // line 736, offset 0x80097fc8
 	/* begin block 1 */
-		// Start line: 782
-		// Start offset: 0x800988EC
+		// Start line: 737
+		// Start offset: 0x80097FC8
 
 		/* begin block 1.1 */
-			// Start line: 785
-			// Start offset: 0x80098910
+			// Start line: 740
+			// Start offset: 0x80097FEC
 			// Variables:
 		// 		struct Level *level; // $v0
 		// 		int numPlanMkrs; // $s0
@@ -949,26 +789,26 @@ int PLANAPI_GetFlags(int type)
 		// 		int i; // $s0
 
 			/* begin block 1.1.1 */
-				// Start line: 795
-				// Start offset: 0x80098944
+				// Start line: 750
+				// Start offset: 0x80098020
 				// Variables:
 			// 		short _x1; // $v1
 			// 		short _y1; // $a0
 			// 		short _z1; // $a1
 			/* end block 1.1.1 */
-			// End offset: 0x80098944
-			// End Line: 795
+			// End offset: 0x80098020
+			// End Line: 750
 		/* end block 1.1 */
-		// End offset: 0x80098970
-		// End Line: 799
+		// End offset: 0x8009804C
+		// End Line: 754
 	/* end block 1 */
-	// End offset: 0x80098974
-	// End Line: 801
+	// End offset: 0x80098050
+	// End Line: 756
 
 	/* begin block 2 */
-		// Start line: 1692
+		// Start line: 1592
 	/* end block 2 */
-	// End Line: 1693
+	// End Line: 1593
 
 int PLANAPI_FindNodePositionInUnit(_StreamUnit *streamUnit,_Position *pos,int id,int type)
 
@@ -1009,10 +849,10 @@ int PLANAPI_FindNodePositionInUnit(_StreamUnit *streamUnit,_Position *pos,int id
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANAPI_FindClosestNodePositionInUnit(struct _StreamUnit *streamUnit /*$a0*/, struct _Position *target /*$s3*/, struct _Position *pos /*$fp*/, int offset /*stack 12*/, int max /*stack 16*/, int type /*stack 20*/, int distanceCheck /*stack 24*/)
- // line 806, offset 0x80098990
+ // line 761, offset 0x8009806c
 	/* begin block 1 */
-		// Start line: 807
-		// Start offset: 0x80098990
+		// Start line: 762
+		// Start offset: 0x8009806C
 		// Variables:
 	// 		struct Level *level; // $v0
 	// 		int numPlanMkrs; // $s0
@@ -1025,81 +865,56 @@ int PLANAPI_FindNodePositionInUnit(_StreamUnit *streamUnit,_Position *pos,int id
 	// 		int i; // $s2
 
 		/* begin block 1.1 */
-			// Start line: 846
-			// Start offset: 0x80098AC8
+			// Start line: 801
+			// Start offset: 0x800981A4
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a0
 		/* end block 1.1 */
-		// End offset: 0x80098AE0
-		// End Line: 846
+		// End offset: 0x800981BC
+		// End Line: 801
 	/* end block 1 */
-	// End offset: 0x80098AE0
-	// End Line: 849
+	// End offset: 0x800981BC
+	// End Line: 804
 
 	/* begin block 2 */
-		// Start line: 1749
+		// Start line: 1649
 	/* end block 2 */
-	// End Line: 1750
+	// End Line: 1650
+
+/* WARNING: Removing unreachable block (ram,0x800981a4) */
 
 int PLANAPI_FindClosestNodePositionInUnit
               (_StreamUnit *streamUnit,_Position *target,_Position *pos,int offset,int max,int type,
               int distanceCheck)
 
 {
-  short sVar1;
-  short sVar2;
-  uint uVar3;
-  long lVar4;
-  char nodeType;
-  int y;
-  int iVar5;
-  _PlanMkr *p_Var6;
-  _PlanMkr *p_Var7;
-  int iVar8;
+  uint uVar1;
+  int iVar2;
+  _PlanMkr *p_Var3;
+  _PlanMkr *p_Var4;
   
-  nodeType = (char)target;
-  p_Var7 = (_PlanMkr *)0x0;
-  p_Var6 = streamUnit->level->PlanMarkerList;
-  iVar5 = streamUnit->level->NumberOfPlanMarkers;
-  iVar8 = 0;
-  uVar3 = PLANAPI_GetFlags(type);
-  if (0 < iVar5) {
-    if (((int)p_Var6->id & uVar3) != 0) {
-      if (distanceCheck != 0) {
+  p_Var3 = streamUnit->level->PlanMarkerList;
+  iVar2 = streamUnit->level->NumberOfPlanMarkers;
+  uVar1 = PLANAPI_GetFlags(type);
+  p_Var4 = p_Var3;
+  while( true ) {
+    if (iVar2 < 1) {
+      return 0;
+    }
+    if (((int)p_Var3->id & uVar1) != 0) break;
+    iVar2 = iVar2 + -1;
+    p_Var3 = p_Var3 + 1;
+    p_Var4 = p_Var4 + 1;
+  }
+  if (distanceCheck != 0) {
                     /* WARNING: Subroutine does not return */
-        MATH3D_LengthXYZ((int)target->x - (int)(p_Var6->pos).x,(int)target->y - (int)(p_Var6->pos).y
-                         ,(int)target->z - (int)(p_Var6->pos).z);
-      }
-      type = (int)target->x - (int)(p_Var6->pos).x;
-      y = (int)target->y - (int)(p_Var6->pos).y;
-      nodeType = (char)y;
-      lVar4 = MATH3D_LengthXY(type,y);
-      if (lVar4 < max) {
-        offset = lVar4 - offset;
-        if (offset < 0) {
-          offset = -offset;
-        }
-        if (offset < 0x7fff) {
-          iVar8 = 1;
-          p_Var7 = p_Var6;
-        }
-      }
-    }
-    if (0 < iVar5 + -1) {
-      iVar5 = PLANPOOL_NumberOfNodesOfType((PlanningNode *)type,nodeType);
-      return iVar5;
-    }
+    MATH3D_LengthXYZ((int)target->x - (int)(p_Var4->pos).x,(int)target->y - (int)(p_Var3->pos).y,
+                     (int)target->z - (int)(p_Var3->pos).z);
   }
-  if (iVar8 != 0) {
-    sVar1 = (p_Var7->pos).y;
-    sVar2 = (p_Var7->pos).z;
-    pos->x = (p_Var7->pos).x;
-    pos->y = sVar1;
-    pos->z = sVar2;
-  }
-  return iVar8;
+                    /* WARNING: Subroutine does not return */
+  MATH3D_LengthXY((int)target->x - (int)(p_Var4->pos).x,(int)target->y - (int)(p_Var3->pos).y);
 }
 
 

@@ -5,16 +5,16 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MATH3D_Sort3VectorCoords(long *a /*$a0*/, long *b /*$a1*/, long *c /*$a2*/)
- // line 220, offset 0x80039478
+ // line 220, offset 0x800399c8
 	/* begin block 1 */
 		// Start line: 222
-		// Start offset: 0x80039478
+		// Start offset: 0x800399C8
 		// Variables:
 	// 		long a1; // $t0
 	// 		long b1; // $v1
 	// 		long c1; // $a3
 	/* end block 1 */
-	// End offset: 0x800394F4
+	// End offset: 0x80039A44
 	// End Line: 256
 
 	/* begin block 2 */
@@ -23,9 +23,9 @@
 	// End Line: 372
 
 	/* begin block 3 */
-		// Start line: 440
+		// Start line: 437
 	/* end block 3 */
-	// End Line: 441
+	// End Line: 438
 
 	/* begin block 4 */
 		// Start line: 372
@@ -78,14 +78,14 @@ void MATH3D_Sort3VectorCoords(long *a,long *b,long *c)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ MATH3D_LengthXYZ(long x /*$a0*/, long y /*$a1*/, long z /*$a2*/)
- // line 258, offset 0x800394fc
+ // line 258, offset 0x80039a4c
 	/* begin block 1 */
 		// Start line: 260
-		// Start offset: 0x800394FC
+		// Start offset: 0x80039A4C
 		// Variables:
 	// 		long t; // $v0
 	/* end block 1 */
-	// End offset: 0x800395C4
+	// End offset: 0x80039B14
 	// End Line: 309
 
 	/* begin block 2 */
@@ -106,10 +106,12 @@ void MATH3D_Sort3VectorCoords(long *a,long *b,long *c)
 long MATH3D_LengthXYZ(long x,long y,long z)
 
 {
-  int iVar1;
-  int iVar2;
+  short sVar1;
+  long lVar2;
+  undefined2 extraout_var;
   int iVar3;
   int iVar4;
+  int iVar5;
   
   if (x < 0) {
     x = -x;
@@ -120,23 +122,32 @@ long MATH3D_LengthXYZ(long x,long y,long z)
   if (z < 0) {
     z = -z;
   }
-  iVar1 = x;
-  if (x < y) {
-    iVar1 = y;
-    y = x;
-  }
-  iVar2 = z;
   iVar3 = y;
-  iVar4 = iVar1;
-  if ((y <= z) && (iVar2 = y, iVar3 = iVar1, iVar4 = z, z < iVar1)) {
-    iVar3 = z;
-    iVar4 = iVar1;
+  if (x < y) {
+    if (z < x) {
+      lVar2 = MATH3D_LengthXYZ(z,y,y);
+      return lVar2;
+    }
+    iVar4 = x;
+    iVar5 = z;
+    if (z < y) {
+      sVar1 = MATH3D_FastAtan2(x,z);
+      return CONCAT22(extraout_var,sVar1);
+    }
   }
-  iVar1 = iVar4 * 0x1e + iVar3 * 0xc + iVar2 * 9;
-  if (iVar1 < 0) {
-    iVar1 = iVar1 + 0x1f;
+  else {
+    iVar4 = z;
+    iVar5 = x;
+    if ((y <= z) && (iVar4 = y, iVar3 = x, iVar5 = z, z < x)) {
+      iVar3 = z;
+      iVar5 = x;
+    }
   }
-  return iVar1 >> 5;
+  iVar3 = iVar5 * 0x1e + iVar3 * 0xc + iVar4 * 9;
+  if (iVar3 < 0) {
+    iVar3 = iVar3 + 0x1f;
+  }
+  return iVar3 >> 5;
 }
 
 
@@ -144,7 +155,7 @@ long MATH3D_LengthXYZ(long x,long y,long z)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ MATH3D_LengthXY(long x /*$a0*/, long y /*$a1*/)
- // line 312, offset 0x800395cc
+ // line 312, offset 0x80039b1c
 	/* begin block 1 */
 		// Start line: 555
 	/* end block 1 */
@@ -184,20 +195,20 @@ long MATH3D_LengthXY(long x,long y)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MATH3D_Normalize(struct _Normal *normal /*$s0*/)
- // line 328, offset 0x8003962c
+ // line 328, offset 0x80039b7c
 	/* begin block 1 */
 		// Start line: 329
-		// Start offset: 0x8003962C
+		// Start offset: 0x80039B7C
 		// Variables:
 	// 		long length; // $a1
 	/* end block 1 */
-	// End offset: 0x800396AC
+	// End offset: 0x80039BFC
 	// End Line: 345
 
 	/* begin block 2 */
-		// Start line: 656
+		// Start line: 653
 	/* end block 2 */
-	// End Line: 657
+	// End Line: 654
 
 void MATH3D_Normalize(_Normal *normal)
 
@@ -211,15 +222,15 @@ void MATH3D_Normalize(_Normal *normal)
 // decompiled code
 // original method signature: 
 // short /*$ra*/ MATH3D_FastAtan2(long y /*$a0*/, long x /*$a1*/)
- // line 349, offset 0x800396bc
+ // line 349, offset 0x80039c0c
 	/* begin block 1 */
 		// Start line: 351
-		// Start offset: 0x800396BC
+		// Start offset: 0x80039C0C
 		// Variables:
 	// 		long ax; // $a3
 	// 		long ay; // $a2
 	/* end block 1 */
-	// End offset: 0x800397D0
+	// End offset: 0x80039D20
 	// End Line: 401
 
 	/* begin block 2 */
@@ -299,14 +310,14 @@ short MATH3D_FastAtan2(long y,long x)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ MATH3D_FastSqrt(long square /*$a0*/)
- // line 456, offset 0x800397d8
+ // line 456, offset 0x80039d28
 	/* begin block 1 */
 		// Start line: 458
-		// Start offset: 0x800397D8
+		// Start offset: 0x80039D28
 
 		/* begin block 1.1 */
 			// Start line: 458
-			// Start offset: 0x800397E0
+			// Start offset: 0x80039D30
 			// Variables:
 		// 		unsigned long result; // $t0
 		// 		long remainder; // $v0
@@ -315,10 +326,10 @@ short MATH3D_FastAtan2(long y,long x)
 		// 		long mask_squared; // $a3
 		// 		long result_shift; // $v1
 		/* end block 1.1 */
-		// End offset: 0x800398B0
+		// End offset: 0x80039E00
 		// End Line: 504
 	/* end block 1 */
-	// End offset: 0x800398B0
+	// End offset: 0x80039E00
 	// End Line: 506
 
 	/* begin block 2 */
@@ -334,58 +345,63 @@ short MATH3D_FastAtan2(long y,long x)
 long MATH3D_FastSqrt(long square)
 
 {
-  int iVar1;
+  short sVar1;
   int iVar2;
-  uint uVar3;
-  int iVar4;
-  uint uVar5;
-  int iVar6;
-  uint uVar7;
+  undefined2 extraout_var;
+  int iVar3;
+  uint uVar4;
+  int iVar5;
+  uint uVar6;
+  int iVar7;
+  uint uVar8;
   
-  iVar4 = 0x1f;
+  iVar5 = 0x1f;
   if (square == 0) {
     return 0;
   }
-  uVar3 = 0x80000000;
+  uVar4 = 0x80000000;
   if (-1 < square) {
     do {
-      uVar3 = (int)uVar3 >> 1;
-      iVar4 = iVar4 + -1;
-    } while ((uVar3 & square) == 0);
+      uVar4 = (int)uVar4 >> 1;
+      iVar5 = iVar5 + -1;
+    } while ((uVar4 & square) == 0);
   }
-  uVar5 = iVar4 >> 1;
-  uVar3 = 1 << (uVar5 + 6 & 0x1f);
-  iVar4 = 1 << ((uVar5 & 0xf) << 1);
-  uVar7 = uVar3;
-  iVar6 = iVar4;
-  iVar2 = square - iVar4;
-  while (uVar5 = uVar5 - 1, uVar5 != 0xffffffff) {
-    iVar6 = iVar6 >> 2;
-    iVar1 = iVar2 - (iVar4 + iVar6);
-    uVar3 = (int)uVar3 >> 1;
-    iVar4 = iVar4 >> 1;
-    if (-1 < iVar1) {
-      iVar4 = iVar4 + iVar6;
-      uVar7 = uVar7 | uVar3;
-      iVar2 = iVar1;
-    }
-  }
-  iVar4 = iVar4 << 0xc;
-  iVar1 = 0x1000;
-  iVar6 = iVar2 << 0xc;
+  uVar6 = iVar5 >> 1;
+  uVar4 = 1 << (uVar6 + 6 & 0x1f);
+  iVar5 = 1 << ((uVar6 & 0xf) << 1);
+  uVar8 = uVar4;
+  iVar7 = iVar5;
+  iVar3 = square - iVar5;
   while( true ) {
-    uVar3 = (int)uVar3 >> 1;
-    iVar1 = iVar1 >> 2;
-    if (uVar3 == 0) break;
-    iVar2 = iVar6 - (iVar4 + iVar1);
-    iVar4 = iVar4 >> 1;
-    if (-1 < iVar2) {
-      iVar4 = iVar4 + iVar1;
-      uVar7 = uVar7 | uVar3;
-      iVar6 = iVar2;
+    uVar6 = uVar6 - 1;
+    if (uVar6 == 0xffffffff) {
+      iVar5 = iVar5 << 0xc;
+      iVar2 = 0x1000;
+      iVar7 = iVar3 << 0xc;
+      while( true ) {
+        uVar4 = (int)uVar4 >> 1;
+        iVar2 = iVar2 >> 2;
+        if (uVar4 == 0) break;
+        iVar3 = iVar7 - (iVar5 + iVar2);
+        iVar5 = iVar5 >> 1;
+        if (-1 < iVar3) {
+          iVar5 = iVar5 + iVar2;
+          uVar8 = uVar8 | uVar4;
+          iVar7 = iVar3;
+        }
+      }
+      return uVar8;
     }
+    iVar7 = iVar7 >> 2;
+    iVar2 = iVar3 - (iVar5 + iVar7);
+    uVar4 = (int)uVar4 >> 1;
+    if (iVar2 < 0) break;
+    iVar5 = (iVar5 >> 1) + iVar7;
+    uVar8 = uVar8 | uVar4;
+    iVar3 = iVar2;
   }
-  return uVar7;
+  sVar1 = MATH3D_AngleBetweenVectors((char)iVar3,(char)uVar4);
+  return CONCAT22(extraout_var,sVar1);
 }
 
 
@@ -393,14 +409,14 @@ long MATH3D_FastSqrt(long square)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ MATH3D_FastSqrt0(long square /*$a0*/)
- // line 511, offset 0x800398b8
+ // line 511, offset 0x80039e08
 	/* begin block 1 */
 		// Start line: 513
-		// Start offset: 0x800398B8
+		// Start offset: 0x80039E08
 
 		/* begin block 1.1 */
 			// Start line: 513
-			// Start offset: 0x800398C0
+			// Start offset: 0x80039E10
 			// Variables:
 		// 		unsigned long result; // $t0
 		// 		long remainder; // $v0
@@ -409,10 +425,10 @@ long MATH3D_FastSqrt(long square)
 		// 		long mask_squared; // $a3
 		// 		long result_shift; // $v1
 		/* end block 1.1 */
-		// End offset: 0x80039940
+		// End offset: 0x80039E90
 		// End Line: 546
 	/* end block 1 */
-	// End offset: 0x80039940
+	// End offset: 0x80039E90
 	// End Line: 548
 
 	/* begin block 2 */
@@ -472,29 +488,28 @@ long MATH3D_FastSqrt0(long square)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ MATH3D_DistanceBetweenPositions(struct _Position *pos1 /*$v0*/, struct _Position *pos2 /*$a1*/)
- // line 607, offset 0x80039948
+ // line 607, offset 0x80039e98
 	/* begin block 1 */
 		// Start line: 608
-		// Start offset: 0x80039948
+		// Start offset: 0x80039E98
 	/* end block 1 */
-	// End offset: 0x80039948
+	// End offset: 0x80039E98
 	// End Line: 608
 
 	/* begin block 2 */
-		// Start line: 1214
+		// Start line: 1208
 	/* end block 2 */
-	// End Line: 1215
+	// End Line: 1209
 
 long MATH3D_DistanceBetweenPositions(_Position *pos1,_Position *pos2)
 
 {
   ulong square;
-  long lVar1;
   
   square = MATH3D_SquareLength((int)pos2->x - (int)pos1->x,(int)pos2->y - (int)pos1->y,
                                (int)pos2->z - (int)pos1->z);
-  lVar1 = MATH3D_FastSqrt0(square);
-  return lVar1;
+                    /* WARNING: Subroutine does not return */
+  MATH3D_FastSqrt0(square);
 }
 
 
@@ -502,14 +517,14 @@ long MATH3D_DistanceBetweenPositions(_Position *pos1,_Position *pos2)
 // decompiled code
 // original method signature: 
 // short /*$ra*/ MATH3D_AngleBetweenVectors(struct _SVector *vector1 /*$a0*/, struct _SVector *vector2 /*$a1*/)
- // line 616, offset 0x80039994
+ // line 616, offset 0x80039ee4
 	/* begin block 1 */
 		// Start line: 617
-		// Start offset: 0x80039994
+		// Start offset: 0x80039EE4
 		// Variables:
 	// 		long projection_length; // $s0
 	/* end block 1 */
-	// End offset: 0x80039A70
+	// End offset: 0x80039FC0
 	// End Line: 636
 
 	/* begin block 2 */
@@ -520,34 +535,30 @@ long MATH3D_DistanceBetweenPositions(_Position *pos1,_Position *pos2)
 short MATH3D_AngleBetweenVectors(_SVector *vector1,_SVector *vector2)
 
 {
-  long lVar1;
-  uint uVar2;
-  uint uVar3;
-  int iVar4;
-  int z;
+  int iVar1;
+  int iVar2;
   
-  iVar4 = (int)vector1->x * (int)vector2->x;
+  iVar2 = (int)vector1->x * (int)vector2->x;
   if ((int)vector1->x == (int)vector2->x) {
     if ((vector1->y == vector2->y) && (vector1->z == vector2->z)) {
       return 0;
     }
-    iVar4 = (int)vector1->x * (int)vector2->x;
+    iVar2 = (int)vector1->x * (int)vector2->x;
   }
-  z = (int)vector1->y * (int)vector2->y;
-  iVar4 = iVar4 + z + (int)vector1->z * (int)vector2->z + 0x800 >> 0xc;
-  if (iVar4 < 0x1001) {
-    if (-0x1001 < iVar4) {
-      lVar1 = MATH3D_LengthXYZ((long)vector1,(long)vector2,z);
-      return (short)lVar1;
-    }
-    uVar3 = 0xfffff000;
+  iVar2 = iVar2 + (int)vector1->y * (int)vector2->y + (int)vector1->z * (int)vector2->z + 0x800 >>
+          0xc;
+  if (iVar2 < 0x1001) {
+    iVar1 = iVar2 * iVar2;
+    if (-0x1001 < iVar2) goto LAB_80039f9c;
+    iVar1 = -0x1000;
   }
   else {
-    uVar3 = 0x1000;
+    iVar1 = 0x1000;
   }
-  uVar2 = MATH3D_FastSqrt0(0x1000000 - uVar3 * uVar3);
+  iVar1 = iVar1 * iVar1;
+LAB_80039f9c:
                     /* WARNING: Subroutine does not return */
-  ratan2(uVar2,uVar3);
+  MATH3D_FastSqrt0(0x1000000 - iVar1);
 }
 
 
@@ -555,17 +566,17 @@ short MATH3D_AngleBetweenVectors(_SVector *vector1,_SVector *vector2)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MATH3D_RotMatAboutVec(struct _SVector *vec /*$s1*/, struct MATRIX *mat /*$s2*/, short angle /*$a2*/)
- // line 638, offset 0x80039a80
+ // line 638, offset 0x80039fd0
 	/* begin block 1 */
 		// Start line: 639
-		// Start offset: 0x80039A80
+		// Start offset: 0x80039FD0
 		// Variables:
 	// 		long length; // $s0
 	// 		struct SVECTOR rot_angs; // stack offset -96
 	// 		struct MATRIX mat1; // stack offset -88
 	// 		struct MATRIX mat2; // stack offset -56
 	/* end block 1 */
-	// End offset: 0x80039B34
+	// End offset: 0x8003A084
 	// End Line: 657
 
 	/* begin block 2 */
@@ -580,9 +591,8 @@ void MATH3D_RotMatAboutVec(_SVector *vec,MATRIX *mat,short angle)
   
   if (angle != 0) {
     uVar1 = MATH3D_SquareLength(0,(int)vec->y,(int)vec->z);
-    MATH3D_FastSqrt0(uVar1 + 0x800);
                     /* WARNING: Subroutine does not return */
-    ratan2((int)vec->y,(int)vec->z);
+    MATH3D_FastSqrt0(uVar1 + 0x800);
   }
   return;
 }
@@ -592,7 +602,7 @@ void MATH3D_RotMatAboutVec(_SVector *vec,MATRIX *mat,short angle)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MATH3D_SetUnityMatrix(struct MATRIX *mat /*$a0*/)
- // line 659, offset 0x80039b50
+ // line 659, offset 0x8003a0a0
 	/* begin block 1 */
 		// Start line: 1198
 	/* end block 1 */
@@ -619,15 +629,15 @@ void MATH3D_SetUnityMatrix(MATRIX *mat)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ AngleMoveToward(short *current_ptr /*$s3*/, short destination /*$a1*/, short step /*$a2*/)
- // line 675, offset 0x80039b6c
+ // line 675, offset 0x8003a0bc
 	/* begin block 1 */
 		// Start line: 676
-		// Start offset: 0x80039B6C
+		// Start offset: 0x8003A0BC
 		// Variables:
 	// 		long diff; // $a0
 	// 		short current; // $s0
 	/* end block 1 */
-	// End offset: 0x80039BFC
+	// End offset: 0x8003A14C
 	// End Line: 695
 
 	/* begin block 2 */
@@ -647,12 +657,12 @@ void AngleMoveToward(short *current_ptr,short destination,short step)
 // decompiled code
 // original method signature: 
 // short /*$ra*/ AngleDiff(short current /*$a0*/, short destination /*$a1*/)
- // line 700, offset 0x80039c18
+ // line 700, offset 0x8003a168
 	/* begin block 1 */
 		// Start line: 702
-		// Start offset: 0x80039C18
+		// Start offset: 0x8003A168
 	/* end block 1 */
-	// End offset: 0x80039C30
+	// End offset: 0x8003A180
 	// End Line: 706
 
 	/* begin block 2 */
@@ -687,12 +697,12 @@ short AngleDiff(short current,short destination)
 // decompiled code
 // original method signature: 
 // short /*$ra*/ MATH3D_AngleFromPosToPos(struct _Position *from /*$a0*/, struct _Position *to /*$a1*/)
- // line 712, offset 0x80039c3c
+ // line 712, offset 0x8003a18c
 	/* begin block 1 */
 		// Start line: 713
-		// Start offset: 0x80039C3C
+		// Start offset: 0x8003A18C
 	/* end block 1 */
-	// End offset: 0x80039C3C
+	// End offset: 0x8003A18C
 	// End Line: 713
 
 	/* begin block 2 */
@@ -712,15 +722,15 @@ short MATH3D_AngleFromPosToPos(_Position *from,_Position *to)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MATH3D_ZYXtoXYZ(struct _Rotation *rot /*$s0*/)
- // line 723, offset 0x80039c74
+ // line 723, offset 0x8003a1c4
 	/* begin block 1 */
 		// Start line: 724
-		// Start offset: 0x80039C74
+		// Start offset: 0x8003A1C4
 		// Variables:
 	// 		struct MATRIX tempMat; // stack offset -48
 	// 		struct _G2EulerAngles_Type ea; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x80039C74
+	// End offset: 0x8003A1C4
 	// End Line: 724
 
 	/* begin block 2 */
@@ -735,11 +745,8 @@ void MATH3D_ZYXtoXYZ(_Rotation *rot)
   _G2EulerAngles_Type local_10;
   
   RotMatrixZYX((ushort *)rot,(uint *)&_Stack48);
+                    /* WARNING: Subroutine does not return */
   G2EulerAngles_FromMatrix(&local_10,&_Stack48,0x15);
-  rot->x = local_10.x;
-  rot->y = local_10.y;
-  rot->z = local_10.z;
-  return;
 }
 
 
@@ -747,12 +754,12 @@ void MATH3D_ZYXtoXYZ(_Rotation *rot)
 // decompiled code
 // original method signature: 
 // short /*$ra*/ MATH3D_ElevationFromPosToPos(struct _Position *from /*$s1*/, struct _Position *to /*$s0*/)
- // line 738, offset 0x80039cd0
+ // line 738, offset 0x8003a220
 	/* begin block 1 */
 		// Start line: 739
-		// Start offset: 0x80039CD0
+		// Start offset: 0x8003A220
 	/* end block 1 */
-	// End offset: 0x80039CD0
+	// End offset: 0x8003A220
 	// End Line: 739
 
 	/* begin block 2 */
@@ -765,13 +772,11 @@ short MATH3D_ElevationFromPosToPos(_Position *from,_Position *to)
 {
   int iVar1;
   int iVar2;
-  long lVar3;
   
   iVar1 = (int)from->x - (int)to->x;
   iVar2 = (int)from->y - (int)to->y;
-  lVar3 = MATH3D_FastSqrt0(iVar1 * iVar1 + iVar2 * iVar2);
                     /* WARNING: Subroutine does not return */
-  ratan2((int)to->z - (int)from->z,(int)(short)lVar3);
+  MATH3D_FastSqrt0(iVar1 * iVar1 + iVar2 * iVar2);
 }
 
 
@@ -779,7 +784,7 @@ short MATH3D_ElevationFromPosToPos(_Position *from,_Position *to)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MATH3D_RotationFromPosToPos(struct _Position *from /*$s0*/, struct _Position *to /*$s2*/, struct _Rotation *rot /*$s1*/)
- // line 754, offset 0x80039d54
+ // line 754, offset 0x8003a2a4
 	/* begin block 1 */
 		// Start line: 1394
 	/* end block 1 */
@@ -792,10 +797,9 @@ void MATH3D_RotationFromPosToPos(_Position *from,_Position *to,_Rotation *rot)
   
   sVar1 = MATH3D_ElevationFromPosToPos(from,to);
   rot->x = sVar1;
+                    /* WARNING: Subroutine does not return */
   rot->y = 0;
-  sVar1 = MATH3D_AngleFromPosToPos(from,to);
-  rot->z = sVar1;
-  return;
+  MATH3D_AngleFromPosToPos(from,to);
 }
 
 
@@ -803,14 +807,14 @@ void MATH3D_RotationFromPosToPos(_Position *from,_Position *to,_Rotation *rot)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MATH3D_veclen2(int ix /*$v1*/, int iy /*$a1*/)
- // line 762, offset 0x80039da8
+ // line 762, offset 0x8003a2f8
 	/* begin block 1 */
 		// Start line: 763
-		// Start offset: 0x80039DA8
+		// Start offset: 0x8003A2F8
 		// Variables:
 	// 		int t; // $a0
 	/* end block 1 */
-	// End offset: 0x80039DDC
+	// End offset: 0x8003A32C
 	// End Line: 776
 
 	/* begin block 2 */
@@ -822,26 +826,23 @@ int MATH3D_veclen2(int ix,int iy)
 
 {
   bool bVar1;
-  long lVar2;
-  uint uVar3;
+  uint uVar2;
   
-  if (-1 < ix) {
-    lVar2 = MATH3D_FastSqrt(ix);
-    return lVar2;
+  if (ix < 0) {
+    ix = -ix;
   }
-  uVar3 = -ix;
-  bVar1 = (int)uVar3 < iy;
+  bVar1 = ix < iy;
   if (iy < 0) {
     iy = -iy;
-    bVar1 = (int)uVar3 < iy;
+    bVar1 = ix < iy;
   }
   if (bVar1) {
-    uVar3 = uVar3 ^ iy;
-    iy = iy ^ uVar3;
-    uVar3 = uVar3 ^ iy;
+    uVar2 = ix ^ iy;
+    iy = iy ^ uVar2;
+    ix = uVar2 ^ iy;
   }
   iy = iy + (iy >> 1);
-  return ((uVar3 - ((int)uVar3 >> 5)) - ((int)uVar3 >> 7)) + (iy >> 2) + (iy >> 6);
+  return ((ix - (ix >> 5)) - (ix >> 7)) + (iy >> 2) + (iy >> 6);
 }
 
 
@@ -849,10 +850,10 @@ int MATH3D_veclen2(int ix,int iy)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MATH3D_RotateAxisToVector(struct MATRIX *dest /*$s3*/, struct MATRIX *src /*$s2*/, struct _SVector *vec /*$a2*/, enum MATH3D_AXIS axis /*$a3*/)
- // line 784, offset 0x80039e08
+ // line 784, offset 0x8003a358
 	/* begin block 1 */
 		// Start line: 785
-		// Start offset: 0x80039E08
+		// Start offset: 0x8003A358
 		// Variables:
 	// 		struct MATRIX xform; // stack offset -64
 	// 		struct _G2Quat_Type rot; // stack offset -32
@@ -863,7 +864,7 @@ int MATH3D_veclen2(int ix,int iy)
 	// 		int py; // $v1
 	// 		int pz; // $a1
 	/* end block 1 */
-	// End offset: 0x80039FA8
+	// End offset: 0x8003A4F8
 	// End Line: 820
 
 	/* begin block 2 */
@@ -871,7 +872,7 @@ int MATH3D_veclen2(int ix,int iy)
 	/* end block 2 */
 	// End Line: 1457
 
-long MATH3D_FastSqrt0(long square)
+void MATH3D_RotateAxisToVector(MATRIX *dest,MATRIX *src,_SVector *vec,MATH3D_AXIS axis)
 
 {
   short *psVar1;
@@ -879,49 +880,47 @@ long MATH3D_FastSqrt0(long square)
   int iVar3;
   int iVar4;
   int iVar5;
-  ulong square_00;
+  ulong square;
   int iVar6;
-  int in_a1;
   int iVar7;
-  short *in_a2;
-  uint in_a3;
   
-  if (in_a3 < 3) {
-    psVar1 = (short *)(in_a1 + in_a3 * 2);
+  if (axis < AXIS_NEG_X) {
+    psVar1 = src->m + axis;
     iVar5 = (int)*psVar1;
     iVar6 = (int)psVar1[3];
     iVar7 = (int)psVar1[6];
   }
   else {
-    psVar1 = (short *)(in_a1 + (in_a3 - 3) * 2);
+    psVar1 = src->m + axis + ~AXIS_Z;
     iVar5 = -(int)*psVar1;
     iVar6 = -(int)psVar1[3];
     iVar7 = -(int)psVar1[6];
   }
-  iVar2 = iVar6 * in_a2[2] - iVar7 * in_a2[1];
+  iVar2 = iVar6 * vec->z - iVar7 * vec->y;
   if (iVar2 < 0) {
     iVar2 = iVar2 + 0xfff;
   }
-  iVar3 = iVar7 * *in_a2 - iVar5 * in_a2[2];
+  iVar3 = iVar7 * vec->x - iVar5 * vec->z;
   if (iVar3 < 0) {
     iVar3 = iVar3 + 0xfff;
   }
-  iVar4 = iVar5 * in_a2[1] - iVar6 * *in_a2;
+  iVar4 = iVar5 * vec->y - iVar6 * vec->x;
   if (iVar4 < 0) {
     iVar4 = iVar4 + 0xfff;
   }
-  iVar5 = iVar5 * *in_a2 + iVar6 * in_a2[1] + iVar7 * in_a2[2];
+  iVar5 = iVar5 * vec->x + iVar6 * vec->y + iVar7 * vec->z;
   if (iVar5 < 0) {
     iVar5 = iVar5 + 0xfff;
   }
   iVar5 = MATH3D_racos_S(iVar5 >> 0xc);
-  square_00 = MATH3D_SquareLength((int)(short)(iVar2 >> 0xc),(int)(short)(iVar3 >> 0xc),
-                                  (int)(short)(iVar4 >> 0xc));
-  if (0 < (int)square_00) {
-    MATH3D_FastSqrt0(square_00);
+  square = MATH3D_SquareLength((int)(short)(iVar2 >> 0xc),(int)(short)(iVar3 >> 0xc),
+                               (int)(short)(iVar4 >> 0xc));
+  if ((int)square < 1) {
+                    /* WARNING: Subroutine does not return */
+    rsin(((iVar5 << 0x10) >> 0x10) - ((iVar5 << 0x10) >> 0x1f) >> 1);
   }
                     /* WARNING: Subroutine does not return */
-  rsin(((iVar5 << 0x10) >> 0x10) - ((iVar5 << 0x10) >> 0x1f) >> 1);
+  MATH3D_FastSqrt0(square);
 }
 
 
@@ -929,54 +928,40 @@ long MATH3D_FastSqrt0(long square)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MATH3D_ConeDetect(struct _SVector *pos /*$s2*/, int arc /*$s0*/, int elevation /*$s4*/)
- // line 859, offset 0x8003a060
+ // line 859, offset 0x8003a5b0
 	/* begin block 1 */
 		// Start line: 860
-		// Start offset: 0x8003A060
+		// Start offset: 0x8003A5B0
 		// Variables:
 	// 		long y; // $s1
 	// 		long x; // $s3
 
 		/* begin block 1.1 */
 			// Start line: 866
-			// Start offset: 0x8003A0BC
+			// Start offset: 0x8003A60C
 		/* end block 1.1 */
-		// End offset: 0x8003A0F4
+		// End offset: 0x8003A644
 		// End Line: 872
 	/* end block 1 */
-	// End offset: 0x8003A0F8
+	// End offset: 0x8003A648
 	// End Line: 874
 
 	/* begin block 2 */
-		// Start line: 1718
+		// Start line: 1709
 	/* end block 2 */
-	// End Line: 1719
+	// End Line: 1710
 
-void MATH3D_RotMatAboutVec(_SVector *vec,MATRIX *mat,short angle)
+int MATH3D_ConeDetect(_SVector *pos,int arc,int elevation)
 
 {
-  short sVar1;
-  short sVar2;
-  long x;
   int y;
-  int x_00;
   
-  x_00 = (int)vec->x;
-  sVar1 = vec->y;
-  y = x_00;
-  if (x_00 < 0) {
-    y = -x_00;
+  y = (int)pos->x;
+  if (y < 0) {
+    y = -y;
   }
-  sVar2 = MATH3D_FastAtan2(y,-(int)sVar1);
-  if ((int)sVar2 < (int)mat) {
-    x = MATH3D_LengthXY(x_00,-(int)sVar1);
-    y = (int)vec->z;
-    if (y < 0) {
-      y = -y;
-    }
-    MATH3D_FastAtan2(y,x);
-  }
-  return;
+                    /* WARNING: Subroutine does not return */
+  MATH3D_FastAtan2(y,-(int)pos->y);
 }
 
 
@@ -984,23 +969,23 @@ void MATH3D_RotMatAboutVec(_SVector *vec,MATRIX *mat,short angle)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MATH3D_CrossProduct(struct _SVector *t /*$a0*/, struct _SVector *r /*$a1*/, struct _SVector *s /*$a2*/)
- // line 976, offset 0x8003a118
+ // line 976, offset 0x8003a668
 	/* begin block 1 */
-		// Start line: 1952
+		// Start line: 1950
 	/* end block 1 */
-	// End Line: 1953
+	// End Line: 1951
 
 	/* begin block 2 */
 		// Start line: 1728
 	/* end block 2 */
 	// End Line: 1729
 
-void MATH3D_CrossProduct(undefined2 *param_1,short *param_2,short *param_3)
+void MATH3D_CrossProduct(_SVector *t,_SVector *r,_SVector *s)
 
 {
-  *param_1 = (short)((int)param_2[1] * (int)param_3[2] - (int)param_2[2] * (int)param_3[1] >> 0xc);
-  param_1[1] = -(short)((int)*param_2 * (int)param_3[2] - (int)param_2[2] * (int)*param_3 >> 0xc);
-  param_1[2] = (short)((int)*param_2 * (int)param_3[1] - (int)param_2[1] * (int)*param_3 >> 0xc);
+  t->x = (short)((int)r->y * (int)s->z - (int)r->z * (int)s->y >> 0xc);
+  t->y = -(short)((int)r->x * (int)s->z - (int)r->z * (int)s->x >> 0xc);
+  t->z = (short)((int)r->x * (int)s->y - (int)r->y * (int)s->x >> 0xc);
   return;
 }
 
@@ -1009,7 +994,7 @@ void MATH3D_CrossProduct(undefined2 *param_1,short *param_2,short *param_3)
 // decompiled code
 // original method signature: 
 // unsigned long /*$ra*/ MATH3D_SquareLength(long x /*$v0*/, long y /*$a1*/, long z /*$a2*/)
- // line 989, offset 0x8003a1bc
+ // line 989, offset 0x8003a70c
 	/* begin block 1 */
 		// Start line: 1748
 	/* end block 1 */

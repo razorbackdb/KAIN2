@@ -5,14 +5,14 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Quat_ToEuler(struct _G2Quat_Type *quat /*$a0*/, struct _G2EulerAngles_Type *euler /*$s0*/, int order /*$s1*/)
- // line 74, offset 0x80095ed8
+ // line 74, offset 0x80095918
 	/* begin block 1 */
 		// Start line: 75
-		// Start offset: 0x80095ED8
+		// Start offset: 0x80095918
 		// Variables:
 	// 		struct _G2Matrix_Type tempMatrix; // stack offset -48
 	/* end block 1 */
-	// End offset: 0x80095ED8
+	// End offset: 0x80095918
 	// End Line: 75
 
 	/* begin block 2 */
@@ -26,8 +26,8 @@ void G2Quat_ToEuler(_G2Quat_Type *quat,_G2EulerAngles_Type *euler,int order)
   _G2Matrix_Type _Stack48;
   
   G2Quat_ToMatrix_S((short *)quat,(short *)&_Stack48);
+                    /* WARNING: Subroutine does not return */
   G2EulerAngles_FromMatrix(euler,&_Stack48,order);
-  return;
 }
 
 
@@ -35,10 +35,10 @@ void G2Quat_ToEuler(_G2Quat_Type *quat,_G2EulerAngles_Type *euler,int order)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EulerAngles_FromMatrix(struct _G2EulerAngles_Type *euler /*$s3*/, struct _G2Matrix_Type *matrix /*$s4*/, long order /*stack 8*/)
- // line 328, offset 0x80095f1c
+ // line 328, offset 0x8009595c
 	/* begin block 1 */
 		// Start line: 329
-		// Start offset: 0x80095F1C
+		// Start offset: 0x8009595C
 		// Variables:
 	// 		long i; // $a2
 	// 		long j; // $s5
@@ -49,82 +49,70 @@ void G2Quat_ToEuler(_G2Quat_Type *quat,_G2EulerAngles_Type *euler,int order)
 
 		/* begin block 1.1 */
 			// Start line: 329
-			// Start offset: 0x80095F1C
+			// Start offset: 0x8009595C
 			// Variables:
 		// 		unsigned int o; // $v1
 		/* end block 1.1 */
-		// End offset: 0x80095F1C
+		// End offset: 0x8009595C
 		// End Line: 329
 
 		/* begin block 1.2 */
 			// Start line: 336
-			// Start offset: 0x80095FBC
+			// Start offset: 0x800959FC
 			// Variables:
 		// 		long sy; // $s0
 		/* end block 1.2 */
-		// End offset: 0x8009608C
+		// End offset: 0x80095ACC
 		// End Line: 349
 
 		/* begin block 1.3 */
 			// Start line: 356
-			// Start offset: 0x800960C8
+			// Start offset: 0x80095B08
 			// Variables:
 		// 		long cy; // $s5
 		/* end block 1.3 */
-		// End offset: 0x800961F0
+		// End offset: 0x80095C30
 		// End Line: 375
 
 		/* begin block 1.4 */
 			// Start line: 384
-			// Start offset: 0x80096234
+			// Start offset: 0x80095C74
 			// Variables:
 		// 		short t; // $v1
 		/* end block 1.4 */
-		// End offset: 0x80096244
+		// End offset: 0x80095C84
 		// End Line: 387
 	/* end block 1 */
-	// End offset: 0x80096244
+	// End offset: 0x80095C84
 	// End Line: 389
 
 	/* begin block 2 */
-		// Start line: 656
+		// Start line: 646
 	/* end block 2 */
-	// End Line: 657
+	// End Line: 647
 
 void G2EulerAngles_FromMatrix(_G2EulerAngles_Type *euler,_G2Matrix_Type *matrix,long order)
 
 {
-  int iVar1;
-  int iVar2;
-  long lVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
+  uint uVar1;
+  uint uVar2;
   
-  uVar4 = (uint)order >> 2 & 1;
-  uVar5 = (uint)*(byte *)((int)&PTR_LAB_800cf74c + ((uint)order >> 3 & 3));
-  uVar6 = (uint)(byte)(&DAT_800cf754)[uVar5 + uVar4];
-  uVar4 = (uint)(byte)(&DAT_800cf754)[uVar5 - (uVar4 - 1)];
-  if (((uint)order >> 1 & 1) != 1) {
-    lVar3 = MATH3D_FastSqrt((int)matrix->rotScale[uVar5 * 4] * (int)matrix->rotScale[uVar5 * 4] +
-                            (int)matrix->rotScale[uVar6 * 3 + uVar5] *
-                            (int)matrix->rotScale[uVar6 * 3 + uVar5] >> 0xc);
-    if (0x10 < lVar3) {
+  uVar1 = (uint)order >> 2 & 1;
+  uVar2 = (uint)*(byte *)((int)&PTR_LAB_800d09cc + ((uint)order >> 3 & 3));
+  if (((uint)order >> 1 & 1) == 1) {
                     /* WARNING: Subroutine does not return */
-      ratan2((int)matrix->rotScale[uVar4 * 3 + uVar6],(int)matrix->rotScale[uVar4 * 4]);
-    }
-                    /* WARNING: Subroutine does not return */
-    ratan2(-(int)matrix->rotScale[uVar6 * 3 + uVar4],(int)matrix->rotScale[uVar6 * 4]);
-  }
-  iVar1 = (int)matrix->rotScale[uVar5 * 3 + uVar6];
-  iVar2 = (int)matrix->rotScale[uVar5 * 3 + uVar4];
-  lVar3 = MATH3D_FastSqrt(iVar1 * iVar1 + iVar2 * iVar2 >> 0xc);
-  if (0x10 < lVar3) {
-                    /* WARNING: Subroutine does not return */
-    ratan2((int)matrix->rotScale[uVar5 * 3 + uVar6],(int)matrix->rotScale[uVar5 * 3 + uVar4]);
+    MATH3D_FastSqrt((int)matrix->rotScale[uVar2 * 3 + (uint)(byte)(&DAT_800d09d4)[uVar2 + uVar1]] *
+                    (int)matrix->rotScale[uVar2 * 3 + (uint)(byte)(&DAT_800d09d4)[uVar2 + uVar1]] +
+                    (int)matrix->rotScale
+                         [uVar2 * 3 + (uint)(byte)(&DAT_800d09d4)[uVar2 - (uVar1 - 1)]] *
+                    (int)matrix->rotScale
+                         [uVar2 * 3 + (uint)(byte)(&DAT_800d09d4)[uVar2 - (uVar1 - 1)]] >> 0xc);
   }
                     /* WARNING: Subroutine does not return */
-  ratan2(-(int)matrix->rotScale[uVar6 * 3 + uVar4],(int)matrix->rotScale[uVar6 * 4]);
+  MATH3D_FastSqrt((int)matrix->rotScale[uVar2 * 4] * (int)matrix->rotScale[uVar2 * 4] +
+                  (int)matrix->rotScale[(uint)(byte)(&DAT_800d09d4)[uVar2 + uVar1] * 3 + uVar2] *
+                  (int)matrix->rotScale[(uint)(byte)(&DAT_800d09d4)[uVar2 + uVar1] * 3 + uVar2] >>
+                  0xc);
 }
 
 

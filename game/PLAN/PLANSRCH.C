@@ -4,42 +4,11 @@
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ PLANSRCH_ValidNode(struct PlanningNode *node /*$a0*/, int validNodeTypes /*$a1*/)
- // line 78, offset 0x80099dac
-	/* begin block 1 */
-		// Start line: 80
-		// Start offset: 0x80099DAC
-		// Variables:
-	// 		int nodeTypeFlag; // $v1
-	/* end block 1 */
-	// End offset: 0x80099DAC
-	// End Line: 80
-
-	/* begin block 2 */
-		// Start line: 156
-	/* end block 2 */
-	// End Line: 157
-
-	/* begin block 3 */
-		// Start line: 157
-	/* end block 3 */
-	// End Line: 158
-
-int PLANSRCH_ValidNode(PlanningNode *node,int validNodeTypes)
-
-{
-  return (uint)((validNodeTypes & 1 << ((uint)node->nodeType & 0x1f)) != 0);
-}
-
-
-
-// decompiled code
-// original method signature: 
 // struct PlanningNode * /*$ra*/ PLANSRCH_FindNodeToExpand(struct PlanningNode *planningPool /*$a0*/, struct PlanningNode *goalNode /*$s5*/, int validNodeTypes /*$s6*/)
- // line 92, offset 0x80099dc4
+ // line 78, offset 0x80099534
 	/* begin block 1 */
-		// Start line: 93
-		// Start offset: 0x80099DC4
+		// Start line: 79
+		// Start offset: 0x80099534
 		// Variables:
 	// 		int i; // $s2
 	// 		struct PlanningNode *nodeToExpand; // $s3
@@ -47,44 +16,41 @@ int PLANSRCH_ValidNode(PlanningNode *node,int validNodeTypes)
 	// 		unsigned long valueForCurrentNode; // $v1
 	// 		struct PlanningNode *currentNode; // $s1
 	/* end block 1 */
-	// End offset: 0x80099EAC
-	// End Line: 116
+	// End offset: 0x80099620
+	// End Line: 102
 
 	/* begin block 2 */
-		// Start line: 184
+		// Start line: 156
 	/* end block 2 */
-	// End Line: 185
+	// End Line: 157
 
 	/* begin block 3 */
-		// Start line: 190
+		// Start line: 162
 	/* end block 3 */
-	// End Line: 191
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 163
 
 PlanningNode *
 PLANSRCH_FindNodeToExpand(PlanningNode *planningPool,PlanningNode *goalNode,int validNodeTypes)
 
 {
-  int iVar1;
-  PlanningNode *node;
+  PlanningNode *pPVar1;
   int iVar2;
   
   iVar2 = 0;
-  node = planningPool;
-  if (*(char *)(_poolManagementData + 1) != '\0') {
+  pPVar1 = planningPool;
+  if (*(char *)(poolManagementData + 1) != '\0') {
     do {
-      iVar1 = PLANSRCH_ValidNode(node,validNodeTypes);
-      if (((iVar1 != 0) && ((planningPool->flags & 1) != 0)) && ((planningPool->flags & 2) == 0)) {
+      if ((((validNodeTypes >> ((uint)planningPool->nodeType & 0x1f) & 1U) != 0) &&
+          ((planningPool->flags & 1) != 0)) && ((planningPool->flags & 2) == 0)) {
                     /* WARNING: Subroutine does not return */
-        MATH3D_LengthXYZ((int)(node->pos).x - (int)(goalNode->pos).x,
+        MATH3D_LengthXYZ((int)(pPVar1->pos).x - (int)(goalNode->pos).x,
                          (int)(planningPool->pos).y - (int)(goalNode->pos).y,
                          (int)(planningPool->pos).z - (int)(goalNode->pos).z);
       }
       planningPool = planningPool + 1;
       iVar2 = iVar2 + 1;
-      node = node + 1;
-    } while (iVar2 < (int)(uint)*(byte *)(_poolManagementData + 1));
+      pPVar1 = pPVar1 + 1;
+    } while (iVar2 < (int)(uint)*(byte *)(poolManagementData + 1));
   }
   return (PlanningNode *)0x0;
 }
@@ -94,34 +60,31 @@ PLANSRCH_FindNodeToExpand(PlanningNode *planningPool,PlanningNode *goalNode,int 
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLANSRCH_ExpandNode(struct PlanningNode *planningPool /*$a2*/, struct PlanningNode *nodeToExpand /*$a1*/)
- // line 123, offset 0x80099ed8
+ // line 109, offset 0x8009964c
 	/* begin block 1 */
-		// Start line: 124
-		// Start offset: 0x80099ED8
+		// Start line: 110
+		// Start offset: 0x8009964C
 		// Variables:
 	// 		int i; // $t0
-	// 		int connectionStatus; // $t2
-	// 		int connections; // $t1
-	// 		int nodeToExpandIndex; // $t3
+	// 		int nodeToExpandIndex; // $t2
+	// 		long nodeToExpandMask; // $t1
 
 		/* begin block 1.1 */
-			// Start line: 138
-			// Start offset: 0x80099F58
+			// Start line: 125
+			// Start offset: 0x800996E0
 			// Variables:
 		// 		long newCost; // $a0
 		/* end block 1.1 */
-		// End offset: 0x80099FD0
-		// End Line: 153
+		// End offset: 0x80099758
+		// End Line: 140
 	/* end block 1 */
-	// End offset: 0x80099FF4
-	// End Line: 159
+	// End offset: 0x80099774
+	// End Line: 144
 
 	/* begin block 2 */
-		// Start line: 279
+		// Start line: 251
 	/* end block 2 */
-	// End Line: 280
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 252
 
 void PLANSRCH_ExpandNode(PlanningNode *planningPool,PlanningNode *nodeToExpand)
 
@@ -131,21 +94,20 @@ void PLANSRCH_ExpandNode(PlanningNode *planningPool,PlanningNode *nodeToExpand)
   int iVar3;
   uint uVar4;
   uint uVar5;
-  int iVar6;
   
-  iVar2 = _poolManagementData;
+  iVar2 = poolManagementData;
   iVar3 = 0;
-  uVar5 = nodeToExpand->connectionStatus;
-  uVar4 = nodeToExpand->connections;
   nodeToExpand->flags = nodeToExpand->flags | 2;
-  iVar6 = (int)((int)nodeToExpand - (int)planningPool) * -0x49249249 >> 2;
+  uVar5 = (int)((int)nodeToExpand - (int)planningPool) * -0x49249249 >> 2;
+  uVar4 = 1 << (uVar5 & 0x1f);
   if (*(char *)(iVar2 + 1) != '\0') {
     do {
-      if (((((uVar5 & 1) != 0) && ((uVar4 & 1) != 0)) && (planningPool != nodeToExpand)) &&
+      if (((((planningPool->connectionStatus & uVar4) != 0) &&
+           ((planningPool->connections & uVar4) != 0)) && (planningPool != nodeToExpand)) &&
          ((iVar2 = (uint)nodeToExpand->cost +
-                   (int)*(short *)(iVar3 * 2 + iVar6 * 0x40 + *(int *)(iVar2 + 0x10)),
+                   (int)*(short *)(iVar3 * 2 + uVar5 * 0x40 + *(int *)(iVar2 + 0x10)),
           (planningPool->flags & 1) == 0 || (iVar2 < (int)(uint)planningPool->cost)))) {
-        planningPool->parent = (ushort)iVar6;
+        planningPool->parent = (ushort)uVar5;
         if (iVar2 < -0x7fff) {
           iVar2 = -0x7fff;
         }
@@ -156,12 +118,10 @@ void PLANSRCH_ExpandNode(PlanningNode *planningPool,PlanningNode *nodeToExpand)
         planningPool->cost = uVar1;
         planningPool->flags = planningPool->flags | 1;
       }
-      uVar5 = (int)uVar5 >> 1;
-      uVar4 = (int)uVar4 >> 1;
       iVar3 = iVar3 + 1;
       planningPool = planningPool + 1;
-      iVar2 = _poolManagementData;
-    } while (iVar3 < (int)(uint)*(byte *)(_poolManagementData + 1));
+      iVar2 = poolManagementData;
+    } while (iVar3 < (int)(uint)*(byte *)(poolManagementData + 1));
   }
   return;
 }
@@ -171,32 +131,30 @@ void PLANSRCH_ExpandNode(PlanningNode *planningPool,PlanningNode *nodeToExpand)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLANSRCH_InitNodesForSearch(struct PlanningNode *planningPool /*$a0*/)
- // line 163, offset 0x80099ffc
+ // line 148, offset 0x8009977c
 	/* begin block 1 */
-		// Start line: 165
-		// Start offset: 0x80099FFC
+		// Start line: 150
+		// Start offset: 0x8009977C
 		// Variables:
 	// 		int i; // $v1
 	/* end block 1 */
-	// End offset: 0x8009A040
-	// End Line: 173
+	// End offset: 0x800997C0
+	// End Line: 158
 
 	/* begin block 2 */
-		// Start line: 397
+		// Start line: 368
 	/* end block 2 */
-	// End Line: 398
+	// End Line: 369
 
 	/* begin block 3 */
-		// Start line: 398
+		// Start line: 369
 	/* end block 3 */
-	// End Line: 399
+	// End Line: 370
 
 	/* begin block 4 */
-		// Start line: 400
+		// Start line: 371
 	/* end block 4 */
-	// End Line: 401
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 372
 
 void PLANSRCH_InitNodesForSearch(PlanningNode *planningPool)
 
@@ -204,9 +162,9 @@ void PLANSRCH_InitNodesForSearch(PlanningNode *planningPool)
   int iVar1;
   int iVar2;
   
-  iVar1 = _poolManagementData;
+  iVar1 = poolManagementData;
   iVar2 = 0;
-  if (*(char *)(_poolManagementData + 1) != '\0') {
+  if (*(char *)(poolManagementData + 1) != '\0') {
     do {
       iVar2 = iVar2 + 1;
       planningPool->cost = 0;
@@ -222,21 +180,21 @@ void PLANSRCH_InitNodesForSearch(PlanningNode *planningPool)
 
 // decompiled code
 // original method signature: 
-// struct PlanningNode * /*$ra*/ PLANSRCH_FindPathInGraph(struct PlanningNode *planningPool /*$s2*/, struct PlanningNode *startNode /*$s0*/, struct PlanningNode *goalNode /*$s1*/, int validNodeTypes /*$s4*/)
- // line 184, offset 0x8009a048
+// struct PlanningNode * /*$ra*/ PLANSRCH_FindPathInGraph(struct PlanningNode *planningPool /*$s2*/, struct PlanningNode *startNode /*$s0*/, struct PlanningNode *goalNode /*$s1*/, int validNodeTypes /*$s3*/)
+ // line 169, offset 0x800997c8
 	/* begin block 1 */
-		// Start line: 185
-		// Start offset: 0x8009A048
+		// Start line: 170
+		// Start offset: 0x800997C8
 		// Variables:
 	// 		struct PlanningNode *nodeToExpand; // $v0
 	/* end block 1 */
-	// End offset: 0x8009A190
-	// End Line: 220
+	// End offset: 0x800998E4
+	// End Line: 203
 
 	/* begin block 2 */
-		// Start line: 444
+		// Start line: 415
 	/* end block 2 */
-	// End Line: 445
+	// End Line: 416
 
 PlanningNode *
 PLANSRCH_FindPathInGraph
@@ -256,8 +214,7 @@ PLANSRCH_FindPathInGraph
     startNode->cost = 0;
     startNode->flags = startNode->flags | 1;
     iVar1 = PLANPOOL_AreTwoNodesConnected(startNode,goalNode,planningPool);
-    if (((iVar1 != 0) && (iVar1 = PLANSRCH_ValidNode(startNode,validNodeTypes), iVar1 != 0)) &&
-       (iVar1 = PLANSRCH_ValidNode(goalNode,validNodeTypes), iVar1 != 0)) {
+    if (iVar1 != 0) {
       goalNode->parent = uVar2;
       return goalNode;
     }

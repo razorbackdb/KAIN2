@@ -5,31 +5,31 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GenericInit(struct _Instance *instance /*$s0*/, struct GameTracker *gameTracker /*$a1*/)
- // line 28, offset 0x8003e194
+ // line 28, offset 0x8003ed00
 	/* begin block 1 */
 		// Start line: 29
-		// Start offset: 0x8003E194
+		// Start offset: 0x8003ED00
 		// Variables:
 	// 		struct Spline *spline; // $v1
 	// 		struct Object *object; // $s1
 
 		/* begin block 1.1 */
 			// Start line: 56
-			// Start offset: 0x8003E218
+			// Start offset: 0x8003ED84
 
 			/* begin block 1.1.1 */
 				// Start line: 66
-				// Start offset: 0x8003E2B0
+				// Start offset: 0x8003EE1C
 				// Variables:
 			// 		static struct _G2AnimInterpInfo_Type crap; // offset 0x0
 			/* end block 1.1.1 */
-			// End offset: 0x8003E2BC
+			// End offset: 0x8003EE2C
 			// End Line: 68
 		/* end block 1.1 */
-		// End offset: 0x8003E2BC
+		// End offset: 0x8003EE2C
 		// End Line: 69
 	/* end block 1 */
-	// End offset: 0x8003E2BC
+	// End offset: 0x8003EE2C
 	// End Line: 72
 
 	/* begin block 2 */
@@ -63,9 +63,8 @@ void GenericInit(_Instance *instance,GameTracker *gameTracker)
               (instance,0,0,
                (short)(((uint)*(ushort *)&pOVar3->modelList[instance->currentModel]->numSegments - 1
                        ) * 0x10000 >> 0x10));
-    G2EmulationInstanceSetAnimation(instance,0,0,0,0);
                     /* WARNING: Subroutine does not return */
-    G2EmulationInstanceSetMode(instance,0,0);
+    G2EmulationInstanceSetAnimation(instance,0,0,0,0);
   }
   return;
 }
@@ -75,7 +74,7 @@ void GenericInit(_Instance *instance,GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GenericCollide(struct _Instance *instance /*$a0*/, struct GameTracker *gameTracker /*$a1*/)
- // line 74, offset 0x8003e2d0
+ // line 74, offset 0x8003ee40
 	/* begin block 1 */
 		// Start line: 151
 	/* end block 1 */
@@ -97,14 +96,14 @@ void GenericCollide(_Instance *instance,GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GenericProcess(struct _Instance *instance /*$a0*/, struct GameTracker *gameTracker /*$a1*/)
- // line 134, offset 0x8003e2d8
+ // line 134, offset 0x8003ee48
 	/* begin block 1 */
 		// Start line: 135
-		// Start offset: 0x8003E2D8
+		// Start offset: 0x8003EE48
 		// Variables:
 	// 		struct Object *object; // $v1
 	/* end block 1 */
-	// End offset: 0x8003E31C
+	// End offset: 0x8003EE8C
 	// End Line: 144
 
 	/* begin block 2 */
@@ -130,33 +129,33 @@ void GenericProcess(_Instance *instance,GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // unsigned long /*$ra*/ GenericQuery(struct _Instance *instance /*$s0*/, unsigned long query /*$a1*/)
- // line 149, offset 0x8003e32c
+ // line 149, offset 0x8003ee9c
 	/* begin block 1 */
 		// Start line: 150
-		// Start offset: 0x8003E32C
+		// Start offset: 0x8003EE9C
 		// Variables:
-	// 		long ret; // $a0
+	// 		long ret; // $a2
 
 		/* begin block 1.1 */
 			// Start line: 181
-			// Start offset: 0x8003E400
+			// Start offset: 0x8003EF70
 			// Variables:
 		// 		struct evControlSaveDataData *pdata; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8003E440
+		// End offset: 0x8003EFB0
 		// End Line: 191
 
 		/* begin block 1.2 */
 			// Start line: 195
-			// Start offset: 0x8003E440
+			// Start offset: 0x8003EFB0
 			// Variables:
 		// 		struct Object *object; // $a0
 		/* end block 1.2 */
-		// End offset: 0x8003E484
+		// End offset: 0x8003EFF8
 		// End Line: 203
 	/* end block 1 */
-	// End offset: 0x8003E490
-	// End Line: 216
+	// End offset: 0x8003F004
+	// End Line: 212
 
 	/* begin block 2 */
 		// Start line: 301
@@ -169,24 +168,25 @@ ulong GenericQuery(_Instance *instance,ulong query)
   short sVar1;
   short sVar2;
   short sVar3;
-  MATRIX *pMVar4;
-  uint uVar5;
-  int in_a3;
-  int unaff_s0;
+  uint uVar4;
+  MATRIX *pMVar5;
   
-  pMVar4 = (MATRIX *)0x0;
+  pMVar5 = (MATRIX *)0x0;
   switch(query) {
   case 1:
-    uVar5 = instance->object->oflags2;
-    if ((uVar5 & 0x4000000) == 0) {
-      pMVar4 = (MATRIX *)&DAT_00100000;
-      if (((instance->object->oflags & 0x100000U) == 0) &&
-         (pMVar4 = (MATRIX *)&DAT_80000000, (uVar5 & 0x20) != 0)) {
-        pMVar4 = (MATRIX *)0x200000;
+    uVar4 = instance->object->oflags2;
+    if ((uVar4 & 0x4000000) == 0) {
+      if ((instance->object->oflags & 0x100000U) == 0) {
+        if ((uVar4 & 0x20) != 0) {
+          pMVar5 = (MATRIX *)0x200000;
+        }
+      }
+      else {
+        pMVar5 = (MATRIX *)&DAT_00100000;
       }
     }
     else {
-      pMVar4 = (MATRIX *)&DAT_00040000;
+      pMVar5 = (MATRIX *)0x40000;
     }
     break;
   case 2:
@@ -205,34 +205,34 @@ ulong GenericQuery(_Instance *instance,ulong query)
   case 0x15:
   case 0x16:
   case 0x17:
-    pMVar4 = (MATRIX *)0x0;
+    pMVar5 = (MATRIX *)0x0;
     break;
   case 6:
     sVar1 = (instance->position).x;
     sVar2 = (instance->position).y;
     sVar3 = (instance->position).z;
-    goto LAB_8003e38c;
+    goto LAB_8003eefc;
   case 7:
     sVar1 = (instance->rotation).x;
     sVar2 = (instance->rotation).y;
     sVar3 = (instance->rotation).z;
-LAB_8003e38c:
-    pMVar4 = (MATRIX *)SetPhysicsDropOffData((int)sVar1,(int)sVar2,(int)sVar3,in_a3,unaff_s0);
+LAB_8003eefc:
+    pMVar5 = (MATRIX *)SetPositionData((int)sVar1,(int)sVar2,(int)sVar3);
     break;
   case 0xb:
-    pMVar4 = (MATRIX *)&UNK_00000001;
+    pMVar5 = (MATRIX *)&UNK_00000001;
     if ((instance->flags2 & 0x8000000U) != 0) {
-      pMVar4 = (MATRIX *)&DAT_00000002;
+      pMVar5 = (MATRIX *)&UNK_00000002;
     }
     break;
   case 0xc:
-    pMVar4 = instance->matrix;
+    pMVar5 = instance->matrix;
     break;
   case 0x11:
-    pMVar4 = (MATRIX *)G2EmulationInstanceQueryAnimation(instance,0);
+    pMVar5 = (MATRIX *)G2EmulationInstanceQueryAnimation(instance,0);
     break;
   case 0x12:
-    pMVar4 = (MATRIX *)G2EmulationInstanceQueryFrame(instance,0);
+    pMVar5 = (MATRIX *)G2EmulationInstanceQueryFrame(instance,0);
     break;
   case 0x18:
     if ((instance->flags2 & 4U) != 0) {
@@ -243,7 +243,7 @@ LAB_8003e38c:
   default:
     return 0;
   }
-  return (ulong)pMVar4;
+  return (ulong)pMVar5;
 }
 
 
@@ -251,54 +251,64 @@ LAB_8003e38c:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GenericMessage(struct _Instance *instance /*$s0*/, unsigned long message /*$a1*/, unsigned long data /*$v1*/)
- // line 222, offset 0x8003e4a4
+ // line 218, offset 0x8003f018
 	/* begin block 1 */
-		// Start line: 223
-		// Start offset: 0x8003E4A4
+		// Start line: 219
+		// Start offset: 0x8003F018
 
 		/* begin block 1.1 */
-			// Start line: 228
-			// Start offset: 0x8003E538
+			// Start line: 224
+			// Start offset: 0x8003F0AC
 			// Variables:
 		// 		struct evAnimationInstanceSwitchData *Ptr; // $s1
 		/* end block 1.1 */
-		// End offset: 0x8003E588
-		// End Line: 239
+		// End offset: 0x8003F0FC
+		// End Line: 235
 
 		/* begin block 1.2 */
-			// Start line: 245
-			// Start offset: 0x8003E598
+			// Start line: 241
+			// Start offset: 0x8003F114
 		/* end block 1.2 */
-		// End offset: 0x8003E598
-		// End Line: 246
+		// End offset: 0x8003F114
+		// End Line: 242
 
 		/* begin block 1.3 */
-			// Start line: 260
-			// Start offset: 0x8003E5E4
+			// Start line: 256
+			// Start offset: 0x8003F160
 		/* end block 1.3 */
-		// End offset: 0x8003E60C
-		// End Line: 268
+		// End offset: 0x8003F188
+		// End Line: 264
 	/* end block 1 */
-	// End offset: 0x8003E60C
-	// End Line: 275
+	// End offset: 0x8003F188
+	// End Line: 271
 
 	/* begin block 2 */
-		// Start line: 453
+		// Start line: 445
 	/* end block 2 */
-	// End Line: 454
+	// End Line: 446
 
 void GenericMessage(_Instance *instance,ulong message,ulong data)
 
 {
   int local_18;
   
-  if ((undefined *)message == &DAT_0004000b) {
+  if (message == 0x4000b) {
     (instance->rotation).x = *(short *)data;
     (instance->rotation).y = *(short *)(data + 2);
     (instance->rotation).z = *(short *)(data + 4);
   }
   else {
-    if (&DAT_0004000b < message) {
+    if (message < 0x4000c) {
+      if (message == 0x40002) {
+        ScriptKillInstance(instance,data);
+      }
+      else {
+        if (message == 0x4000a) {
+          STREAM_SetInstancePosition(&gameTrackerX,instance,(evPositionData *)data);
+        }
+      }
+    }
+    else {
       if (message == 0x8000008) {
         if ((instance->anim).section[0].interpInfo == (_G2AnimInterpInfo_Type *)0x0) {
           local_18 = 0;
@@ -306,9 +316,8 @@ void GenericMessage(_Instance *instance,ulong message,ulong data)
         else {
           local_18 = *(int *)(data + 0xc);
         }
-        G2EmulationInstanceSetAnimation(instance,0,*(int *)(data + 4),*(int *)(data + 8),local_18);
                     /* WARNING: Subroutine does not return */
-        G2EmulationInstanceSetMode(instance,0,*(int *)(data + 0x10));
+        G2EmulationInstanceSetAnimation(instance,0,*(int *)(data + 4),*(int *)(data + 8),local_18);
       }
       if (message < 0x8000009) {
         if ((undefined *)message == &DAT_00100007) {
@@ -318,18 +327,7 @@ void GenericMessage(_Instance *instance,ulong message,ulong data)
       }
       else {
         if (message == 0x8000010) {
-                    /* WARNING: Subroutine does not return */
           G2EmulationInstanceSetMode(instance,0,data);
-        }
-      }
-    }
-    else {
-      if ((undefined *)message == &DAT_00040002) {
-        ScriptKillInstance(instance,data);
-      }
-      else {
-        if ((undefined *)message == &DAT_0004000a) {
-          RelocateTerrain((_Terrain *)instance,(_SVector *)data);
         }
       }
     }
@@ -342,25 +340,25 @@ void GenericMessage(_Instance *instance,ulong message,ulong data)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GenericRelocateTune(struct Object *object /*$a0*/, long offset /*$a1*/)
- // line 277, offset 0x8003e620
+ // line 273, offset 0x8003f19c
 	/* begin block 1 */
-		// Start line: 279
-		// Start offset: 0x8003E620
+		// Start line: 275
+		// Start offset: 0x8003F19C
 		// Variables:
 	// 		struct GenericTune *tune; // $v1
 	/* end block 1 */
-	// End offset: 0x8003E644
-	// End Line: 285
+	// End offset: 0x8003F1C0
+	// End Line: 281
 
 	/* begin block 2 */
-		// Start line: 565
+		// Start line: 557
 	/* end block 2 */
-	// End Line: 566
+	// End Line: 558
 
 	/* begin block 3 */
-		// Start line: 566
+		// Start line: 558
 	/* end block 3 */
-	// End Line: 567
+	// End Line: 559
 
 void GenericRelocateTune(Object *object,long offset)
 
@@ -368,15 +366,9 @@ void GenericRelocateTune(Object *object,long offset)
   void *pvVar1;
   
   pvVar1 = object->data;
-  if (pvVar1 == (void *)0x0) {
-    OBTABLE_GetInstanceAdditionalCollideFunc((_Instance *)object);
-    return;
+  if ((pvVar1 != (void *)0x0) && (*(int *)((int)pvVar1 + 4) != 0)) {
+    *(int *)((int)pvVar1 + 4) = *(int *)((int)pvVar1 + 4) + offset;
   }
-  if (*(int *)((int)pvVar1 + 4) == 0) {
-    OBTABLE_GetInstanceAdditionalCollideFunc((_Instance *)object);
-    return;
-  }
-  *(int *)((int)pvVar1 + 4) = *(int *)((int)pvVar1 + 4) + offset;
   return;
 }
 

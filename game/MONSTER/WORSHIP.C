@@ -5,16 +5,16 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ WORSHIP_Init(struct _Instance *instance /*$s2*/)
- // line 47, offset 0x8008ee08
+ // line 47, offset 0x8008ea5c
 	/* begin block 1 */
 		// Start line: 48
-		// Start offset: 0x8008EE08
+		// Start offset: 0x8008EA5C
 		// Variables:
 	// 		struct _MonsterAttributes *ma; // $s0
 	// 		struct _MonsterVars *mv; // $s1
 	// 		struct _Instance *weapon; // $v0
 	/* end block 1 */
-	// End offset: 0x8008EE90
+	// End offset: 0x8008EAE4
 	// End Line: 68
 
 	/* begin block 2 */
@@ -35,7 +35,7 @@ void WORSHIP_Init(_Instance *instance)
   pvVar5 = instance->extraData;
   pvVar4 = instance->data;
   weaponid = 0xc;
-  if (*(char *)((int)pvVar5 + 0x14a) == '\0') {
+  if (*(char *)((int)pvVar5 + 0x15a) == '\0') {
     bVar1 = *(byte *)((int)pvVar4 + 0x24);
   }
   else {
@@ -48,10 +48,10 @@ void WORSHIP_Init(_Instance *instance)
     HUMAN_Init(instance);
   }
   uVar2 = 0x6000;
-  if (*(char *)((int)pvVar5 + 0x14a) == '\0') {
+  if (*(char *)((int)pvVar5 + 0x15a) == '\0') {
     uVar2 = 0x5000;
   }
-  *(undefined2 *)((int)pvVar5 + 0x134) = uVar2;
+  *(undefined2 *)((int)pvVar5 + 0x144) = uVar2;
   return;
 }
 
@@ -60,30 +60,30 @@ void WORSHIP_Init(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ WORSHIP_CombatEntry(struct _Instance *instance /*$s3*/)
- // line 73, offset 0x8008eea8
+ // line 73, offset 0x8008eafc
 	/* begin block 1 */
 		// Start line: 74
-		// Start offset: 0x8008EEA8
+		// Start offset: 0x8008EAFC
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s1
 
 		/* begin block 1.1 */
 			// Start line: 79
-			// Start offset: 0x8008EF10
+			// Start offset: 0x8008EB64
 			// Variables:
 		// 		struct _MonsterAttributes *ma; // $s2
 
 			/* begin block 1.1.1 */
 				// Start line: 83
-				// Start offset: 0x8008EF20
+				// Start offset: 0x8008EB74
 			/* end block 1.1.1 */
-			// End offset: 0x8008EF44
+			// End offset: 0x8008EB98
 			// End Line: 89
 		/* end block 1.1 */
-		// End offset: 0x8008EF84
+		// End offset: 0x8008EBD8
 		// End Line: 100
 	/* end block 1 */
-	// End offset: 0x8008EF84
+	// End offset: 0x8008EBD8
 	// End Line: 102
 
 	/* begin block 2 */
@@ -99,8 +99,8 @@ void WORSHIP_CombatEntry(_Instance *instance)
   
   puVar1 = (uint *)instance->extraData;
   if (((puVar1[0x31] != 0) &&
-      (*(short *)(puVar1[0x31] + 0x14) < *(short *)(*(int *)(puVar1[0x55] + 8) + 10))) &&
-     (*(char *)((int)puVar1 + 0x14a) == '\x01')) {
+      (*(short *)(puVar1[0x31] + 0x14) < *(short *)(*(int *)(puVar1[0x59] + 8) + 10))) &&
+     (*(char *)((int)puVar1 + 0x15a) == '\x01')) {
     instance_00 = instance->LinkChild;
     if (instance_00 == (_Instance *)0x0) {
       HUMAN_CreateWeapon(instance,0xb,(uint)*(byte *)((int)instance->data + 0x23));

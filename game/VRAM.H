@@ -2,53 +2,55 @@
 #define VRAM_H
 
 
-extern void VRAM_InitVramBlockCache(); // 0x800728D0
+extern void VRAM_PrintVramBlock(struct _BlockVramEntry *vblock); // 0x800726D4
 
-extern void VRAM_EnableTerrainArea(); // 0x80072930
+extern void VRAM_PrintInfo(); // 0x800726DC
 
-extern void VRAM_DisableTerrainArea(); // 0x80072960
+extern void VRAM_InitVramBlockCache(); // 0x80072724
 
-extern int VRAM_ConcatanateMemory(struct _BlockVramEntry *curBlock); // 0x8007298C
+extern void VRAM_EnableTerrainArea(); // 0x80072788
 
-extern void VRAM_GarbageCollect(); // 0x80072B74
+extern void VRAM_DisableTerrainArea(); // 0x800727B8
 
-extern int VRAM_InsertFreeBlock(struct _BlockVramEntry *block); // 0x80072BA8
+extern int VRAM_ConcatanateMemory(struct _BlockVramEntry *curBlock); // 0x800727E4
 
-extern void VRAM_DeleteFreeBlock(struct _BlockVramEntry *block); // 0x80072C38
+extern void VRAM_GarbageCollect(); // 0x800729CC
 
-extern void VRAM_InsertUsedBlock(struct _BlockVramEntry *block); // 0x80072CA0
+extern int VRAM_InsertFreeBlock(struct _BlockVramEntry *block); // 0x80072A00
 
-extern void VRAM_DeleteUsedBlock(struct _BlockVramEntry *block); // 0x80072CD4
+extern void VRAM_DeleteFreeBlock(struct _BlockVramEntry *block); // 0x80072A90
 
-extern struct _BlockVramEntry * VRAM_GetOpenBlock(); // 0x80072D38
+extern void VRAM_InsertUsedBlock(struct _BlockVramEntry *block); // 0x80072AF8
 
-extern int VRAM_DeleteFreeVram(short x, short y, short w, short h); // 0x80072D6C
+extern void VRAM_DeleteUsedBlock(struct _BlockVramEntry *block); // 0x80072B2C
 
-extern int VRAM_InsertFreeVram(short x, short y, short w, short h, int flags); // 0x80072E9C
+extern struct _BlockVramEntry * VRAM_GetOpenBlock(); // 0x80072B90
 
-extern struct _BlockVramEntry * VRAM_CheckVramSlot(short *x, short *y, short w, short h, int type, int startY); // 0x80073030
+extern int VRAM_DeleteFreeVram(short x, short y, short w, short h); // 0x80072BC8
 
-extern void VRAM_ClearVramBlock(struct _BlockVramEntry *block); // 0x8007342C
+extern int VRAM_InsertFreeVram(short x, short y, short w, short h, int flags); // 0x80072CF8
 
-extern void AdjustVramCoordsObject(int oldx, int oldy, int newx, int newy, struct Object *object); // 0x80073460
+extern struct _BlockVramEntry * VRAM_CheckVramSlot(short *x, short *y, short w, short h, int type, int startY); // 0x80072E98
 
-extern struct _BlockVramEntry * VRAM_InsertionSort(struct _BlockVramEntry *rootNode, struct _BlockVramEntry *newBlock, int pack_type); // 0x8007364C
+extern void VRAM_ClearVramBlock(struct _BlockVramEntry *block); // 0x800732D4
 
-extern void VRAM_ClearVram(); // 0x80073704
+extern void AdjustVramCoordsObject(int oldx, int oldy, int newx, int newy, struct Object *object); // 0x80073308
 
-extern struct _BlockVramEntry * VRAM_RearrangeVramsLayer(long whichLayer, short *AddX, short *AddY, short AddW, int AddH, int AddType, int AddStartY); // 0x80073740
+extern struct _BlockVramEntry * VRAM_InsertionSort(struct _BlockVramEntry *rootNode, struct _BlockVramEntry *newBlock); // 0x800734F4
 
-extern void VRAM_TransferBufferToVram(void *dataPtr, long dataSize, short status, void *data1, void *data2); // 0x80073DC8
+extern void VRAM_RearrangeVramsLayer(long whichLayer); // 0x80073550
 
-extern void VRAM_LoadReturn(void *dataPtr, void *data1, void *data2); // 0x80074040
+extern void VRAM_TransferBufferToVram(void *dataPtr, long dataSize, short status, void *data1, void *data2); // 0x800738E8
 
-extern long VRAM_GetObjectVramSpace(struct VramSize *vramSize, struct _ObjectTracker *objectTracker); // 0x80074060
+extern void VRAM_LoadReturn(void *dataPtr, void *data1, void *data2); // 0x80073B18
 
-extern void VRAM_InitMorphPalettes(); // 0x80074158
+extern long VRAM_GetObjectVramSpace(struct VramSize *vramSize, struct _ObjectTracker *objectTracker); // 0x80073B38
 
-extern void VRAM_UpdateMorphPalettes(); // 0x80074160
+extern void VRAM_InitMorphPalettes(); // 0x80073C30
 
-extern void MORPH_ChangeAreaPalettes(long time); // 0x80074168
+extern void VRAM_UpdateMorphPalettes(); // 0x80073C38
+
+extern void MORPH_ChangeAreaPalettes(long time); // 0x80073C40
 
 
 #endif

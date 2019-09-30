@@ -5,12 +5,12 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2PoolMem_InitPool(void *voidPool /*$s1*/, int blockCount /*$s0*/, int blockSize /*$s2*/)
- // line 9, offset 0x80095d9c
+ // line 9, offset 0x800957dc
 	/* begin block 1 */
 		// Start line: 10
-		// Start offset: 0x80095D9C
+		// Start offset: 0x800957DC
 	/* end block 1 */
-	// End offset: 0x80095D9C
+	// End offset: 0x800957DC
 	// End Line: 10
 
 	/* begin block 2 */
@@ -18,11 +18,11 @@
 	/* end block 2 */
 	// End Line: 19
 
-void G2PoolMem_InitPool(undefined4 param_1,int param_2,int param_3)
+void G2PoolMem_InitPool(void *voidPool,int blockCount,int blockSize)
 
 {
                     /* WARNING: Subroutine does not return */
-  MEMPACK_Malloc(param_2 * param_3,'\x19');
+  MEMPACK_Malloc(blockCount * blockSize,'\x19');
 }
 
 
@@ -30,15 +30,15 @@ void G2PoolMem_InitPool(undefined4 param_1,int param_2,int param_3)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2PoolMem_ResetPool(void *voidPool /*$a0*/)
- // line 32, offset 0x80095e08
+ // line 32, offset 0x80095848
 	/* begin block 1 */
 		// Start line: 35
-		// Start offset: 0x80095E08
+		// Start offset: 0x80095848
 		// Variables:
 	// 		struct _G2PoolMemPool_Type *pool; // $a0
 	// 		int blockIndex; // $a1
 	/* end block 1 */
-	// End offset: 0x80095E3C
+	// End offset: 0x8009587C
 	// End Line: 48
 
 	/* begin block 2 */
@@ -77,20 +77,20 @@ void G2PoolMem_ResetPool(void *voidPool)
 // decompiled code
 // original method signature: 
 // void * /*$ra*/ G2PoolMem_Allocate(void *voidPool /*$a1*/)
- // line 64, offset 0x80095e44
+ // line 64, offset 0x80095884
 	/* begin block 1 */
 		// Start line: 65
-		// Start offset: 0x80095E44
+		// Start offset: 0x80095884
 		// Variables:
 	// 		int blockIndex; // $a0
 	/* end block 1 */
-	// End offset: 0x80095E98
+	// End offset: 0x800958D8
 	// End Line: 86
 
 	/* begin block 2 */
-		// Start line: 128
+		// Start line: 126
 	/* end block 2 */
-	// End Line: 129
+	// End Line: 127
 
 void * G2PoolMem_Allocate(void *voidPool)
 
@@ -110,14 +110,14 @@ void * G2PoolMem_Allocate(void *voidPool)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2PoolMem_Free(void *voidPool /*$a0*/, void *block /*$a1*/)
- // line 87, offset 0x80095ea0
+ // line 87, offset 0x800958e0
 	/* begin block 1 */
 		// Start line: 90
-		// Start offset: 0x80095EA0
+		// Start offset: 0x800958E0
 		// Variables:
 	// 		int blockIndex; // $a1
 	/* end block 1 */
-	// End offset: 0x80095EA0
+	// End offset: 0x800958E0
 	// End Line: 96
 
 	/* begin block 2 */

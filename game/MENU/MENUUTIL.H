@@ -2,13 +2,13 @@
 #define MENUUTIL_H
 
 
-extern enum menu_ctrl_t menu_get_ctrl(void *gt); // 0x800B87FC
+extern enum menu_ctrl_t menu_get_ctrl(void *gt); // 0x800B713C
 
-extern void menu_print(int xpos, int ypos, char *text, int color); // 0x800B887C
+extern void menu_print(int xpos, int ypos, char *text, int color); // 0x800B71B8
 
-extern int menu_text_width(char *text); // 0x800B88E4
+extern int menu_text_width(char *text); // 0x800B7220
 
-extern void menu_sound(enum menu_sound_t sound); // 0x800B8904
+extern void menu_sound(enum menu_sound_t sound); // 0x800B7240
 
 
 #endif

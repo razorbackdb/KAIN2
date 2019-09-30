@@ -5,7 +5,7 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VM_Tick(long time /*$a0*/)
- // line 105, offset 0x8004f638
+ // line 105, offset 0x8004fe84
 	/* begin block 1 */
 		// Start line: 210
 	/* end block 1 */
@@ -29,30 +29,30 @@ void VM_Tick(long time)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VM_UpdateMorph(struct Level *level /*$a0*/, int initFlg /*$s5*/)
- // line 295, offset 0x8004f658
+ // line 295, offset 0x8004fea4
 	/* begin block 1 */
 		// Start line: 296
-		// Start offset: 0x8004F658
+		// Start offset: 0x8004FEA4
 		// Variables:
 	// 		struct _VMObject *vmobject; // $s3
 	// 		int i; // $s4
 
 		/* begin block 1.1 */
 			// Start line: 305
-			// Start offset: 0x8004F6B4
+			// Start offset: 0x8004FF00
 			// Variables:
 		// 		struct _VMOffsetTable *curTable; // $a0
 
 			/* begin block 1.1.1 */
 				// Start line: 308
-				// Start offset: 0x8004F6C4
+				// Start offset: 0x8004FF10
 			/* end block 1.1.1 */
-			// End offset: 0x8004F738
+			// End offset: 0x8004FF84
 			// End Line: 337
 
 			/* begin block 1.1.2 */
 				// Start line: 341
-				// Start offset: 0x8004F754
+				// Start offset: 0x8004FFA0
 				// Variables:
 			// 		short ratio; // $s2
 			// 		int j; // $t1
@@ -60,27 +60,27 @@ void VM_Tick(long time)
 
 				/* begin block 1.1.2.1 */
 					// Start line: 353
-					// Start offset: 0x8004F778
+					// Start offset: 0x8004FFC4
 					// Variables:
 				// 		long len; // $a0
 				/* end block 1.1.2.1 */
-				// End offset: 0x8004F7B0
+				// End offset: 0x8004FFFC
 				// End Line: 360
 
 				/* begin block 1.1.2.2 */
 					// Start line: 362
-					// Start offset: 0x8004F7C4
+					// Start offset: 0x80050010
 					// Variables:
 				// 		struct _VMOffset *material; // $a1
 				// 		struct _VMOffset *spectral; // $a0
 				// 		struct _VMOffset *offset; // $v1
 				/* end block 1.1.2.2 */
-				// End offset: 0x8004F898
+				// End offset: 0x800500E4
 				// End Line: 374
 
 				/* begin block 1.1.2.3 */
 					// Start line: 374
-					// Start offset: 0x8004F8A0
+					// Start offset: 0x800500EC
 					// Variables:
 				// 		short dr; // $a3
 				// 		short dg; // $a0
@@ -89,22 +89,22 @@ void VM_Tick(long time)
 				// 		struct _VMColorOffset *spectral; // $a0
 				// 		struct _VMColorOffset *offset; // $v1
 				/* end block 1.1.2.3 */
-				// End offset: 0x8004F9FC
+				// End offset: 0x80050248
 				// End Line: 403
 			/* end block 1.1.2 */
-			// End offset: 0x8004F9FC
+			// End offset: 0x80050248
 			// End Line: 405
 		/* end block 1.1 */
-		// End offset: 0x8004F9FC
+		// End offset: 0x80050248
 		// End Line: 406
 	/* end block 1 */
-	// End offset: 0x8004FA0C
+	// End offset: 0x80050258
 	// End Line: 408
 
 	/* begin block 2 */
-		// Start line: 590
+		// Start line: 585
 	/* end block 2 */
-	// End Line: 591
+	// End Line: 586
 
 void VM_UpdateMorph(Level *level,int initFlg)
 
@@ -121,7 +121,7 @@ void VM_UpdateMorph(Level *level,int initFlg)
   short *psVar9;
   short *psVar10;
   char *pcVar11;
-  _union_368 *p_Var12;
+  _union_369 *p_Var12;
   char *pcVar13;
   short sVar14;
   int iVar15;
@@ -139,22 +139,23 @@ void VM_UpdateMorph(Level *level,int initFlg)
       if ((*(short *)(pp_Var17 + -8) != *(short *)((int)pp_Var17 + -0x1e)) ||
          ((p_Var19->flags & 0x100) != 0)) {
         address = *pp_Var17;
-        if (theCamera.core.vvNormalWorVecMat[0].m[2][2] == 1000) {
+        if (gameTrackerX.gameData.asmData.MorphTime == 1000) {
           if (address != (_VMOffsetTable *)(&pp_Var17[-1]->numVMOffsets)[*(short *)(pp_Var17 + -7)])
           {
                     /* WARNING: Subroutine does not return */
             MEMPACK_Free((char *)address);
           }
           if (initFlg == 0) {
-            if (theCamera.core.vvNormalWorVecMat[0]._18_2_ == 0) goto LAB_8004f72c;
+            if (gameTrackerX.gameData.asmData.MorphType == 0)
+            goto MEMPACK_GetSmallestBlockTopBottom;
             *(undefined2 *)(pp_Var17 + -7) = *(undefined2 *)(pp_Var17 + -8);
           }
           else {
-            if (theCamera.core.vvNormalWorVecMat[0]._18_2_ == 0) {
+            if (gameTrackerX.gameData.asmData.MorphType == 0) {
               *(undefined2 *)(pp_Var17 + -7) = *(undefined2 *)(pp_Var17 + -8);
             }
             else {
-LAB_8004f72c:
+MEMPACK_GetSmallestBlockTopBottom:
               *(undefined2 *)(pp_Var17 + -7) = *(undefined2 *)((int)pp_Var17 + -0x1e);
             }
           }
@@ -173,14 +174,14 @@ LAB_8004f72c:
                     /* WARNING: Subroutine does not return */
             MEMPACK_Malloc(iVar18 + 4,'(');
           }
-          iVar16 = 0;
+          iVar15 = 0;
           if ((p_Var19->flags & 8) == 0) {
             pcVar11 = (char *)((&pp_Var17[-1]->numVMOffsets)[*(short *)(pp_Var17 + -8)] + 4);
             pcVar13 = (char *)((&pp_Var17[-1]->numVMOffsets)[*(short *)((int)pp_Var17 + -0x1e)] + 4)
             ;
             p_Var12 = &(*pp_Var17)->offsets;
             if (0 < iVar18) {
-              iVar15 = (int)(short)theCamera.focusDistanceList[0][2];
+              iVar16 = (int)gameTrackerX.spectral_fadeValue;
               do {
                 if ((p_Var19->flags & 0x100) == 0) {
                   cVar8 = pcVar13[1];
@@ -196,18 +197,18 @@ LAB_8004f72c:
                 }
                 cVar7 = pcVar11[2];
                 pcVar13 = pcVar13 + 3;
-                iVar16 = iVar16 + 1;
-                *(char *)p_Var12 = *pcVar11 + (char)(sVar14 * iVar15 >> 0xc);
+                iVar15 = iVar15 + 1;
+                *(char *)p_Var12 = *pcVar11 + (char)(sVar14 * iVar16 >> 0xc);
                 *(char *)((int)p_Var12 + 1) =
                      pcVar11[1] +
-                     (char)((((int)cVar8 - (int)cVar5) * 0x10000 >> 0x10) * iVar15 >> 0xc);
+                     (char)((((int)cVar8 - (int)cVar5) * 0x10000 >> 0x10) * iVar16 >> 0xc);
                 pcVar4 = pcVar11 + 2;
                 pcVar11 = pcVar11 + 3;
                 *(char *)((int)p_Var12 + 2) =
-                     *pcVar4 + (char)((((int)cVar6 - (int)cVar7) * 0x10000 >> 0x10) * iVar15 >> 0xc)
+                     *pcVar4 + (char)((((int)cVar6 - (int)cVar7) * 0x10000 >> 0x10) * iVar16 >> 0xc)
                 ;
-                p_Var12 = (_union_368 *)((int)p_Var12 + 3);
-              } while (iVar16 < iVar18);
+                p_Var12 = (_union_369 *)((int)p_Var12 + 3);
+              } while (iVar15 < iVar18);
             }
           }
           else {
@@ -216,22 +217,24 @@ LAB_8004f72c:
             ;
             p_Var12 = &(*pp_Var17)->offsets;
             if (0 < iVar18) {
-              iVar15 = (int)(short)theCamera.focusDistanceList[0][2];
+              iVar20 = (int)gameTrackerX.spectral_fadeValue;
               do {
                 *(short *)p_Var12 =
-                     *psVar10 + (short)(((int)*psVar9 - (int)*psVar10) * iVar15 >> 0xc);
+                     *psVar10 + (short)(((int)*psVar9 - (int)*psVar10) * iVar20 >> 0xc);
                 *(short *)((int)p_Var12 + 2) =
-                     psVar10[1] + (short)(((int)psVar9[1] - (int)psVar10[1]) * iVar15 >> 0xc);
+                     psVar10[1] + (short)(((int)psVar9[1] - (int)psVar10[1]) * iVar20 >> 0xc);
                 psVar1 = psVar9 + 2;
                 psVar2 = psVar10 + 2;
-                iVar16 = iVar16 + 1;
+                iVar15 = iVar15 + 1;
                 psVar9 = psVar9 + 3;
                 psVar3 = psVar10 + 2;
                 psVar10 = psVar10 + 3;
                 *(short *)((int)p_Var12 + 4) =
-                     *psVar3 + (short)(((int)*psVar1 - (int)*psVar2) * iVar15 >> 0xc);
+                     *psVar3 + (short)(((int)*psVar1 - (int)*psVar2) * iVar20 >> 0xc);
                 p_Var12 = p_Var12 + 1;
-              } while (iVar16 < iVar18);
+              } while (iVar15 < iVar18);
+              MEMORY_MergeAddresses((char)psVar9,(char)psVar10);
+              return;
             }
           }
         }
@@ -249,14 +252,14 @@ LAB_8004f72c:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VM_VMObjectSetTable(struct Level *level /*$a0*/, struct _VMObject *vmobject /*$s0*/, int table /*$s1*/)
- // line 521, offset 0x8004fa30
+ // line 521, offset 0x8005027c
 	/* begin block 1 */
 		// Start line: 522
-		// Start offset: 0x8004FA30
+		// Start offset: 0x8005027C
 		// Variables:
 	// 		struct _VMOffsetTable *curTable; // $a0
 	/* end block 1 */
-	// End offset: 0x8004FA70
+	// End offset: 0x800502BC
 	// End Line: 530
 
 	/* begin block 2 */

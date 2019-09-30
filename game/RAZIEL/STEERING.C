@@ -5,7 +5,7 @@
 // decompiled code
 // original method signature: 
 // int /*$ra*/ UpdateZoneDelta(int rc /*$a0*/, int LastRC /*$a1*/)
- // line 20, offset 0x800a213c
+ // line 20, offset 0x800a141c
 	/* begin block 1 */
 		// Start line: 40
 	/* end block 1 */
@@ -21,16 +21,16 @@ int UpdateZoneDelta(int rc,int LastRC)
 {
   int iVar1;
   
-  iVar1 = InterfaceItem_800cf854.name._8_4_;
+  iVar1 = ZoneDelta;
   if ((LastRC != 0) && (iVar1 = 0x100, LastRC == rc)) {
-    InterfaceItem_800cf854.name._8_4_ = InterfaceItem_800cf854.name._8_4_ + -4;
+    ZoneDelta = ZoneDelta + -4;
     iVar1 = 0x10;
-    if (0xf < InterfaceItem_800cf854.name._8_4_) {
-      return InterfaceItem_800cf854.name._8_4_;
+    if (0xf < ZoneDelta) {
+      return ZoneDelta;
     }
   }
-  InterfaceItem_800cf854.name._8_4_ = iVar1;
-  return InterfaceItem_800cf854.name._8_4_;
+  ZoneDelta = iVar1;
+  return ZoneDelta;
 }
 
 
@@ -38,14 +38,14 @@ int UpdateZoneDelta(int rc,int LastRC)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ GetControllerInput(int *ZDirection /*$a2*/, long *controlCommand /*$a1*/)
- // line 34, offset 0x800a2178
+ // line 34, offset 0x800a1458
 	/* begin block 1 */
 		// Start line: 35
-		// Start offset: 0x800A2178
+		// Start offset: 0x800A1458
 		// Variables:
 	// 		int rc; // $s0
 	/* end block 1 */
-	// End offset: 0x800A2348
+	// End offset: 0x800A1628
 	// End Line: 114
 
 	/* begin block 2 */
@@ -58,40 +58,40 @@ int UpdateZoneDelta(int rc,int LastRC)
 	/* end block 3 */
 	// End Line: 72
 
-int GetControllerInput(undefined4 *param_1,uint *param_2)
+int GetControllerInput(int *ZDirection,long *controlCommand)
 
 {
   int iVar1;
   uint uVar2;
   
-  if ((*(uint *)(iGpffffb524 + 0x14) & 0x100) == 0) {
-    uVar2 = *param_2;
+  if (((gameTrackerX.playerInstance)->flags & 0x100U) == 0) {
+    uVar2 = *controlCommand;
     if ((uVar2 & 5) == 5) {
       iVar1 = 0x10000010;
-      *param_1 = 0xa00;
-      UpdateZoneDelta(0x10000010,iGpfffffef0);
-      iGpfffffef0 = iVar1;
+      *ZDirection = 0xa00;
+      UpdateZoneDelta(0x10000010,LastRC);
+      LastRC = iVar1;
     }
     else {
       if ((uVar2 & 9) == 9) {
         iVar1 = 0x10000020;
-        *param_1 = 0x600;
-        UpdateZoneDelta(0x10000020,iGpfffffef0);
-        iGpfffffef0 = iVar1;
+        *ZDirection = 0x600;
+        UpdateZoneDelta(0x10000020,LastRC);
+        LastRC = iVar1;
       }
       else {
         if ((uVar2 & 6) == 6) {
           iVar1 = 0x10000040;
-          *param_1 = 0xe00;
-          UpdateZoneDelta(0x10000040,iGpfffffef0);
-          iGpfffffef0 = iVar1;
+          *ZDirection = 0xe00;
+          UpdateZoneDelta(0x10000040,LastRC);
+          LastRC = iVar1;
         }
         else {
           if ((uVar2 & 10) == 10) {
             iVar1 = 0x10000030;
-            *param_1 = 0x200;
-            UpdateZoneDelta(0x10000030,iGpfffffef0);
-            iGpfffffef0 = iVar1;
+            *ZDirection = 0x200;
+            UpdateZoneDelta(0x10000030,LastRC);
+            LastRC = iVar1;
           }
           else {
             if ((uVar2 & 1) == 0) {
@@ -101,34 +101,34 @@ int GetControllerInput(undefined4 *param_1,uint *param_2)
                   iVar1 = 0x10000004;
                   if ((uVar2 & 4) == 0) {
                     iVar1 = 0;
-                    uGpffff9da8 = 0x10;
-                    *param_1 = 0;
-                    iGpfffffef0 = iVar1;
+                    ZoneDelta = 0x10;
+                    *ZDirection = 0;
+                    LastRC = iVar1;
                   }
                   else {
-                    *param_1 = 0xc00;
-                    UpdateZoneDelta(0x10000004,iGpfffffef0);
-                    iGpfffffef0 = iVar1;
+                    *ZDirection = 0xc00;
+                    UpdateZoneDelta(0x10000004,LastRC);
+                    LastRC = iVar1;
                   }
                 }
                 else {
                   iVar1 = 0x10000002;
-                  *param_1 = 0x400;
-                  UpdateZoneDelta(0x10000002,iGpfffffef0);
-                  iGpfffffef0 = iVar1;
+                  *ZDirection = 0x400;
+                  UpdateZoneDelta(0x10000002,LastRC);
+                  LastRC = iVar1;
                 }
               }
               else {
-                *param_1 = 0x1000;
-                UpdateZoneDelta(0x10000003,iGpfffffef0);
-                iGpfffffef0 = iVar1;
+                *ZDirection = 0x1000;
+                UpdateZoneDelta(0x10000003,LastRC);
+                LastRC = iVar1;
               }
             }
             else {
               iVar1 = 0x10000001;
-              *param_1 = 0x800;
-              UpdateZoneDelta(0x10000001,iGpfffffef0);
-              iGpfffffef0 = iVar1;
+              *ZDirection = 0x800;
+              UpdateZoneDelta(0x10000001,LastRC);
+              LastRC = iVar1;
             }
           }
         }
@@ -146,14 +146,14 @@ int GetControllerInput(undefined4 *param_1,uint *param_2)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ DecodeDirection(int Source /*$a0*/, int Destination /*$a1*/, short *Difference /*$s0*/, short *Zone /*$s2*/)
- // line 117, offset 0x800a2358
+ // line 117, offset 0x800a1638
 	/* begin block 1 */
 		// Start line: 118
-		// Start offset: 0x800A2358
+		// Start offset: 0x800A1638
 		// Variables:
 	// 		int rc; // $s1
 	/* end block 1 */
-	// End offset: 0x800A242C
+	// End offset: 0x800A170C
 	// End Line: 142
 
 	/* begin block 2 */
@@ -173,137 +173,135 @@ int DecodeDirection(int Source,int Destination,short *Difference,short *Zone)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ ProcessMovement(struct _Instance *instance /*$s1*/, long *controlCommand /*$s0*/, struct GameTracker *GT /*$a2*/)
- // line 188, offset 0x800a2448
+ // line 188, offset 0x800a1728
 	/* begin block 1 */
 		// Start line: 189
-		// Start offset: 0x800A2448
+		// Start offset: 0x800A1728
 		// Variables:
 	// 		int ZDirection; // stack offset -32
 	// 		int rc; // $s2
 	// 		int lag; // $v1
 
 		/* begin block 1.1 */
-			// Start line: 267
-			// Start offset: 0x800A2630
+			// Start line: 266
+			// Start offset: 0x800A1904
 			// Variables:
 		// 		short diff; // stack offset -28
 		// 		short zone; // stack offset -26
 		/* end block 1.1 */
-		// End offset: 0x800A2630
-		// End Line: 268
+		// End offset: 0x800A1904
+		// End Line: 267
 
 		/* begin block 1.2 */
-			// Start line: 317
-			// Start offset: 0x800A2680
+			// Start line: 316
+			// Start offset: 0x800A1954
 			// Variables:
 		// 		struct _G2SVector3_Type rot; // stack offset -40
 		/* end block 1.2 */
-		// End offset: 0x800A26D4
-		// End Line: 337
+		// End offset: 0x800A19A8
+		// End Line: 336
 
 		/* begin block 1.3 */
-			// Start line: 339
-			// Start offset: 0x800A26D4
+			// Start line: 338
+			// Start offset: 0x800A19A8
 		/* end block 1.3 */
-		// End offset: 0x800A2720
-		// End Line: 356
+		// End offset: 0x800A19F4
+		// End Line: 355
 
 		/* begin block 1.4 */
-			// Start line: 365
-			// Start offset: 0x800A2728
+			// Start line: 364
+			// Start offset: 0x800A19FC
 			// Variables:
 		// 		short angle; // $s0
 		/* end block 1.4 */
-		// End offset: 0x800A2784
-		// End Line: 376
+		// End offset: 0x800A1A58
+		// End Line: 375
 
 		/* begin block 1.5 */
-			// Start line: 391
-			// Start offset: 0x800A27BC
+			// Start line: 390
+			// Start offset: 0x800A1A90
 		/* end block 1.5 */
-		// End offset: 0x800A27EC
-		// End Line: 395
+		// End offset: 0x800A1AC0
+		// End Line: 394
 
 		/* begin block 1.6 */
-			// Start line: 426
-			// Start offset: 0x800A28A4
+			// Start line: 423
+			// Start offset: 0x800A1B68
 			// Variables:
 		// 		short diff; // stack offset -24
 		// 		short zone; // stack offset -22
 		/* end block 1.6 */
-		// End offset: 0x800A28A4
-		// End Line: 427
+		// End offset: 0x800A1B68
+		// End Line: 424
 
 		/* begin block 1.7 */
-			// Start line: 431
-			// Start offset: 0x800A28C0
+			// Start line: 428
+			// Start offset: 0x800A1B84
 		/* end block 1.7 */
-		// End offset: 0x800A28FC
-		// End Line: 441
+		// End offset: 0x800A1BC0
+		// End Line: 438
 
 		/* begin block 1.8 */
-			// Start line: 443
-			// Start offset: 0x800A28FC
+			// Start line: 440
+			// Start offset: 0x800A1BC0
 		/* end block 1.8 */
-		// End offset: 0x800A2928
-		// End Line: 454
+		// End offset: 0x800A1BF0
+		// End Line: 451
 
 		/* begin block 1.9 */
-			// Start line: 456
-			// Start offset: 0x800A2928
+			// Start line: 453
+			// Start offset: 0x800A1BF0
 			// Variables:
 		// 		short angle; // $s0
 		/* end block 1.9 */
-		// End offset: 0x800A2970
-		// End Line: 467
+		// End offset: 0x800A1C38
+		// End Line: 464
 	/* end block 1 */
-	// End offset: 0x800A2970
-	// End Line: 482
+	// End offset: 0x800A1C38
+	// End Line: 479
 
 	/* begin block 2 */
-		// Start line: 376
+		// Start line: 375
 	/* end block 2 */
-	// End Line: 377
+	// End Line: 376
 
-void ProcessMovement(undefined4 param_1,uint *param_2)
+int ProcessMovement(_Instance *instance,long *controlCommand,GameTracker *GT)
 
 {
+  int ix;
+  int iy;
   int iVar1;
-  int iVar2;
-  uint ix;
-  uint iy;
-  int iVar3;
-  undefined4 auStack32 [4];
+  int aiStack32 [4];
   
-  if (((iGpfffffae8 == 9) || (iGpfffffae8 == 0xe)) || (iGpfffffae8 == 0xf)) {
-    iVar3 = 0;
-  }
-  else {
-    iVar3 = GetControllerInput(auStack32,param_2);
-  }
-  razZeroAxis((long *)(param_2 + 3),(long *)(param_2 + 4),0x400);
-  ix = param_2[3];
-  if (((ix == 0x80) || (ix == 0xffffff80)) || ((iy = param_2[4], iy == 0x80 || (iy == 0xffffff80))))
+  if (((Raziel.steeringMode == 9) || (Raziel.steeringMode == 0xe)) || (Raziel.steeringMode == 0xf))
   {
-    iVar2 = 0x1000;
+    iVar1 = 0;
   }
   else {
-    iGpfffffad4 = MATH3D_veclen2(ix,iy);
-    iGpfffffad4 = iGpfffffad4 << 5;
-    if (0x1000 < iGpfffffad4) {
-      iGpfffffad4 = 0x1000;
-    }
-    if ((iGpfffffad4 == 0) || (iVar2 = 0x400, 0x3ff < iGpfffffad4)) goto LAB_800a251c;
+    iVar1 = GetControllerInput(aiStack32,controlCommand);
   }
-  iGpfffffad4 = iVar2;
-LAB_800a251c:
-  uGpfffffadc = iGpfffffad8;
-  iVar2 = (int)(param_2[4] << 0xc) >> 0x1f;
-  iVar1 = (int)(param_2[3] << 0xc) >> 0x1f;
+  razZeroAxis(controlCommand + 3,controlCommand + 4,0x400);
+  ix = controlCommand[3];
+  if (((ix == 0x80) || (ix == -0x80)) || ((iy = controlCommand[4], iy == 0x80 || (iy == -0x80)))) {
+    ix = 0x1000;
+  }
+  else {
+    Raziel.Magnitude = MATH3D_veclen2(ix,iy);
+    Raziel.Magnitude = Raziel.Magnitude << 5;
+    if (0x1000 < Raziel.Magnitude) {
+      Raziel.Magnitude = 0x1000;
+    }
+    if ((Raziel.Magnitude == 0) || (ix = 0x400, 0x3ff < Raziel.Magnitude)) goto LAB_800a17fc;
+  }
+  Raziel.Magnitude = ix;
+LAB_800a17fc:
+  Raziel.lastInput = Raziel.input;
+  ix = (controlCommand[4] << 0xc) >> 0x1f;
+  iy = (controlCommand[3] << 0xc) >> 0x1f;
                     /* WARNING: Subroutine does not return */
-  iGpfffffad8 = iVar3;
-  ratan2(((int)(param_2[4] << 0xc) / 6 + iVar2 >> 4) - iVar2,
-         ((int)(param_2[3] << 0xc) / 6 + iVar1 >> 4) - iVar1);
+  Raziel.input = iVar1;
+  ratan2(((controlCommand[4] << 0xc) / 6 + ix >> 4) - ix,
+         ((controlCommand[3] << 0xc) / 6 + iy >> 4) - iy);
 }
 
 
@@ -311,49 +309,46 @@ LAB_800a251c:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SteerTurn(struct _Instance *instance /*$a0*/, int rc /*$a1*/)
- // line 487, offset 0x800a298c
+ // line 484, offset 0x800a1c54
 	/* begin block 1 */
-		// Start line: 488
-		// Start offset: 0x800A298C
+		// Start line: 485
+		// Start offset: 0x800A1C54
 
 		/* begin block 1.1 */
-			// Start line: 494
-			// Start offset: 0x800A29B8
+			// Start line: 491
+			// Start offset: 0x800A1C80
 			// Variables:
 		// 		int rot; // $v0
 		/* end block 1.1 */
-		// End offset: 0x800A29DC
-		// End Line: 506
+		// End offset: 0x800A1CA4
+		// End Line: 503
 	/* end block 1 */
-	// End offset: 0x800A2A10
-	// End Line: 511
+	// End offset: 0x800A1CD8
+	// End Line: 508
 
 	/* begin block 2 */
-		// Start line: 974
+		// Start line: 968
 	/* end block 2 */
-	// End Line: 975
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 969
 
 void SteerTurn(_Instance *instance,int rc)
 
 {
   short sVar1;
   
-  if ((rc == 0) && (_CHAR____800d5598 == 0)) {
-    _CHAR____800d55a0 = 0;
+  if ((rc == 0) && (Raziel.Bearing == 0)) {
+    Raziel.steeringVelocity = 0;
+    return;
   }
-  else {
-    sVar1 = _CHAR____800d559a;
-    if ((_CHAR____800d5598 == 0x800) &&
-       (sVar1 = _CHAR____800d559a + 1, (int)(instance->rotation).z - (int)_CHAR____800d559a < 1)) {
-      sVar1 = _CHAR____800d559a + -1;
-    }
-    _CHAR____800d559a = sVar1;
-    AngleMoveToward(&(instance->rotation).z,_CHAR____800d559a,
-                    (short)((uint)(_CHAR____800d55a0 * theCamera.tiltList[0][0] * 0x10) >> 0x10));
+  sVar1 = Raziel.LastBearing;
+  if ((Raziel.Bearing == 0x800) &&
+     (sVar1 = Raziel.LastBearing + 1, (int)(instance->rotation).z - (int)Raziel.LastBearing < 1)) {
+    sVar1 = Raziel.LastBearing + -1;
   }
-  return;
+  Raziel.LastBearing = sVar1;
+                    /* WARNING: Subroutine does not return */
+  AngleMoveToward(&(instance->rotation).z,Raziel.LastBearing,
+                  (short)((int)Raziel.steeringVelocity * gameTrackerX.timeMult * 0x10 >> 0x10));
 }
 
 
@@ -361,39 +356,36 @@ void SteerTurn(_Instance *instance,int rc)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SteerMove(struct _Instance *instance /*$a0*/, int rc /*$a1*/)
- // line 550, offset 0x800a2a20
+ // line 547, offset 0x800a1ce8
 	/* begin block 1 */
-		// Start line: 1100
+		// Start line: 1088
 	/* end block 1 */
-	// End Line: 1101
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 1089
 
 void SteerMove(_Instance *instance,int rc)
 
 {
   int iVar1;
   
-  if ((rc == 0) && (_CHAR____800d5598 == 0)) {
-    _CHAR____800d55a0 = 0;
+  if ((rc == 0) && (Raziel.Bearing == 0)) {
+    Raziel.steeringVelocity = 0;
+    return;
   }
-  else {
-    _CHAR____800d55a0 = -_CHAR____800d5598;
-    if (-1 < _CHAR____800d5598) {
-      _CHAR____800d55a0 = _CHAR____800d5598;
-    }
-    iVar1 = (int)_CHAR____800d55a0;
-    _CHAR____800d55a0 = 0x70;
-    if (0x300 < iVar1) {
-      if (iVar1 < 0) {
-        iVar1 = iVar1 + 3;
-      }
-      _CHAR____800d55a0 = (short)(iVar1 >> 2) + 0x70;
-    }
-    AngleMoveToward(&(instance->rotation).z,_CHAR____800d559a,
-                    (short)((uint)(_CHAR____800d55a0 * theCamera.tiltList[0][0] * 0x10) >> 0x10));
+  Raziel.steeringVelocity = -Raziel.Bearing;
+  if (-1 < Raziel.Bearing) {
+    Raziel.steeringVelocity = Raziel.Bearing;
   }
-  return;
+  iVar1 = (int)Raziel.steeringVelocity;
+  Raziel.steeringVelocity = 0x70;
+  if (0x300 < iVar1) {
+    if (iVar1 < 0) {
+      iVar1 = iVar1 + 3;
+    }
+    Raziel.steeringVelocity = (short)(iVar1 >> 2) + 0x70;
+  }
+                    /* WARNING: Subroutine does not return */
+  AngleMoveToward(&(instance->rotation).z,Raziel.LastBearing,
+                  (short)((int)Raziel.steeringVelocity * gameTrackerX.timeMult * 0x10 >> 0x10));
 }
 
 
@@ -401,10 +393,10 @@ void SteerMove(_Instance *instance,int rc)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SteerAutoFace(struct _Instance *instance /*$s3*/, long *controlCommand /*$a1*/)
- // line 589, offset 0x800a2ad0
+ // line 586, offset 0x800a1d98
 	/* begin block 1 */
-		// Start line: 590
-		// Start offset: 0x800A2AD0
+		// Start line: 587
+		// Start offset: 0x800A1D98
 		// Variables:
 	// 		short angle; // $s0
 	// 		int rc; // $s2
@@ -413,33 +405,24 @@ void SteerMove(_Instance *instance,int rc)
 	// 		int diff; // $s1
 	// 		int predict; // $s2
 	/* end block 1 */
-	// End offset: 0x800A2D44
-	// End Line: 675
+	// End offset: 0x800A200C
+	// End Line: 672
 
 	/* begin block 2 */
-		// Start line: 1138
+		// Start line: 1132
 	/* end block 2 */
-	// End Line: 1139
+	// End Line: 1133
 
 	/* begin block 3 */
-		// Start line: 1148
+		// Start line: 1142
 	/* end block 3 */
-	// End Line: 1149
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 1143
 
 int SteerAutoFace(_Instance *instance,long *controlCommand)
 
 {
-  short current;
-  
-  current = MATH3D_AngleFromPosToPos
-                      (&instance->position,(_Position *)(*(int *)(_CHAR____800d55ec + 0x30) + 0x5c))
-  ;
-  _CHAR____800d574c = (int)current;
-  _CHAR____800d5754 = _CHAR____800d5750;
                     /* WARNING: Subroutine does not return */
-  AngleDiff(current,_CHAR____800d559a);
+  MATH3D_AngleFromPosToPos(&instance->position,&(Raziel.Senses.EngagedList[6].instance)->position);
 }
 
 
@@ -447,29 +430,27 @@ int SteerAutoFace(_Instance *instance,long *controlCommand)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SteerSwim(struct _Instance *instance /*$s0*/)
- // line 681, offset 0x800a2d64
+ // line 678, offset 0x800a202c
 	/* begin block 1 */
-		// Start line: 682
-		// Start offset: 0x800A2D64
+		// Start line: 679
+		// Start offset: 0x800A202C
 		// Variables:
 	// 		int step; // $a0
 	// 		int velocity; // $a1
 	/* end block 1 */
-	// End offset: 0x800A2E3C
-	// End Line: 731
+	// End offset: 0x800A2104
+	// End Line: 728
 
 	/* begin block 2 */
-		// Start line: 1371
+		// Start line: 1365
 	/* end block 2 */
-	// End Line: 1372
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 1366
 
 void SteerSwim(_Instance *instance)
 
 {
                     /* WARNING: Subroutine does not return */
-  rsin(_CHAR____800d5594);
+  rsin(Raziel.ZDirection);
 }
 
 
@@ -477,25 +458,23 @@ void SteerSwim(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SteerWallcrawling(struct _Instance *instance /*$a0*/)
- // line 735, offset 0x800a2e54
+ // line 732, offset 0x800a211c
 	/* begin block 1 */
-		// Start line: 1517
+		// Start line: 1511
 	/* end block 1 */
-	// End Line: 1518
+	// End Line: 1512
 
 	/* begin block 2 */
-		// Start line: 1523
+		// Start line: 1517
 	/* end block 2 */
-	// End Line: 1524
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 1518
 
 void SteerWallcrawling(_Instance *instance)
 
 {
                     /* WARNING: Subroutine does not return */
-  AngleDiff((short)(((uint)*(ushort *)(gameTracker._16_4_ + 2) - 0x800) * 0x10000 >> 0x10),
-            _CHAR____800d5594);
+  AngleDiff((short)(((uint)(ushort)ExtraRot->y - 0x800) * 0x10000 >> 0x10),(short)Raziel.ZDirection)
+  ;
 }
 
 
@@ -503,13 +482,11 @@ void SteerWallcrawling(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SteerDisableAutoFace(struct _Instance *instance /*$s1*/)
- // line 748, offset 0x800a2e88
+ // line 745, offset 0x800a2150
 	/* begin block 1 */
-		// Start line: 1549
+		// Start line: 1543
 	/* end block 1 */
-	// End Line: 1550
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 1544
 
 void SteerDisableAutoFace(_Instance *instance)
 
@@ -528,9 +505,9 @@ void SteerDisableAutoFace(_Instance *instance)
                     /* WARNING: Subroutine does not return */
     G2Anim_DisableController(anim,0xe,0xe);
   }
-  (instance->rotation).z = (instance->rotation).z + _CHAR____800d5748;
-  _CHAR____800d5748 = 0;
-  _CHAR____800d5750 = 0xffffffff;
+  (instance->rotation).z = (instance->rotation).z + (short)Raziel.autoFaceRootAngle;
+  Raziel.autoFaceRootAngle = 0;
+  Raziel.autoFaceAnim = -1;
   return;
 }
 
@@ -539,51 +516,31 @@ void SteerDisableAutoFace(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SteerSwitchMode(struct _Instance *instance /*$s1*/, int mode /*$s2*/)
- // line 776, offset 0x800a2f1c
+ // line 773, offset 0x800a21e4
 	/* begin block 1 */
-		// Start line: 777
-		// Start offset: 0x800A2F1C
-
-		/* begin block 1.1 */
-			// Start line: 846
-			// Start offset: 0x800A30A8
-			// Variables:
-		// 		int rotx; // $v1
-		/* end block 1.1 */
-		// End offset: 0x800A3110
-		// End Line: 856
+		// Start line: 1601
 	/* end block 1 */
-	// End offset: 0x800A315C
-	// End Line: 883
+	// End Line: 1602
 
 	/* begin block 2 */
-		// Start line: 1607
+		// Start line: 1605
 	/* end block 2 */
-	// End Line: 1608
-
-	/* begin block 3 */
-		// Start line: 1611
-	/* end block 3 */
-	// End Line: 1612
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 1606
 
 void SteerSwitchMode(_Instance *instance,int mode)
 
 {
-  short sVar1;
-  _G2Bool_Enum _Var2;
-  uint uVar3;
+  _G2Bool_Enum _Var1;
   
-  switch(_CHAR____800d559c) {
+  switch(Raziel.steeringMode) {
   case 0:
   case 1:
   case 2:
   case 4:
   case 8:
   case 0x12:
-    _Var2 = G2Anim_IsControllerActive(&instance->anim,1,0xe);
-    if (_Var2 != G2FALSE) {
+    _Var1 = G2Anim_IsControllerActive(&instance->anim,1,0xe);
+    if (_Var1 != G2FALSE) {
                     /* WARNING: Subroutine does not return */
       G2Anim_DisableController(&instance->anim,1,0xe);
     }
@@ -596,31 +553,29 @@ void SteerSwitchMode(_Instance *instance,int mode)
   case 6:
   case 0x11:
     if ((((mode != 6) && (mode != 0xb)) && (mode != 0x10)) && (mode != 0x11)) {
-      _Var2 = G2Anim_IsControllerActive(&instance->anim,1,0xe);
-      if (_Var2 != G2FALSE) {
+      _Var1 = G2Anim_IsControllerActive(&instance->anim,1,0xe);
+      if (_Var1 != G2FALSE) {
         G2Anim_InterpDisableController(&instance->anim,1,0xe,600);
       }
-      _CHAR____800d5724 = 0;
+      Raziel.extraRot.x = 0;
     }
     break;
   case 7:
-    if (mode != _CHAR____800d559c) {
+    if (mode != Raziel.steeringMode) {
       razDeinitWallCrawlSteering(instance);
     }
     break;
   case 10:
-    _CHAR____800d5674 = 0;
+    Raziel.attackedBy = (_Instance *)0x0;
     break;
   case 0xb:
-    CAMERA_EndSwimThrowMode((Camera *)&theCamera);
-    CAMERA_SetLookRot((Camera *)&theCamera,0,0);
-    _CHAR____800d5724 = _CHAR____800d5690;
+    CAMERA_EndSwimThrowMode(&theCamera);
+    CAMERA_SetLookRot(&theCamera,0,0);
+    Raziel.extraRot.x = (short)Raziel.throwReturnRot;
   }
-  _CHAR____800d557c = 0;
+  Raziel.RotationSegment = 0;
   switch(mode) {
   case 0:
-    _CHAR____800d5728 = 0;
-    _CHAR____800d5724 = 0;
   case 1:
   case 2:
   case 4:
@@ -630,38 +585,28 @@ void SteerSwitchMode(_Instance *instance,int mode)
   case 10:
   case 0xf:
   case 0x12:
-    _CHAR____800d557c = 0;
+    Raziel.RotationSegment = 0;
     break;
   case 7:
-    if (mode != _CHAR____800d559c) {
+    if (mode != Raziel.steeringMode) {
       razInitWallCrawlSteering(instance);
     }
     break;
   case 0xb:
-    _CHAR____800d5690 = (int)_CHAR____800d5724;
-    uVar3 = 0x1000U - (int)DAT_800cff40 & 0xfff;
-    _CHAR____800d5724 = (short)uVar3;
-    if (uVar3 - 0x401 < 0x3ff) {
-      _CHAR____800d5724 = 0x400;
-    }
-    else {
-      if (uVar3 - 0x801 < 0x3ff) {
-        _CHAR____800d5724 = 0xc00;
-      }
-    }
-    CAMERA_StartSwimThrowMode((Camera *)&theCamera);
-    CAMERA_SetLookRot((Camera *)&theCamera,0x1000 - (int)_CHAR____800d5724,0);
+    Raziel.throwReturnRot = (int)Raziel.extraRot.x;
+    Raziel.extraRot.x = 0x1000 - theCamera.core.rotation.x;
+    CAMERA_StartSwimThrowMode(&theCamera);
+    CAMERA_SetLookRot(&theCamera,0x1000 - (int)Raziel.extraRot.x,0);
   case 6:
   case 0x11:
-    _CHAR____800d557c = 1;
+    Raziel.RotationSegment = 1;
     break;
   case 0xe:
-    sVar1 = MATH3D_AngleFromPosToPos
-                      (&instance->position,(_Position *)(*(int *)(_CHAR____800d55ec + 0x30) + 0x5c))
+                    /* WARNING: Subroutine does not return */
+    MATH3D_AngleFromPosToPos(&instance->position,&(Raziel.Senses.EngagedList[6].instance)->position)
     ;
-    (instance->rotation).z = sVar1;
   }
-  _CHAR____800d559c = mode;
+  Raziel.steeringMode = mode;
   return;
 }
 
@@ -670,20 +615,20 @@ void SteerSwitchMode(_Instance *instance,int mode)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ razInitWallCrawlSteering(struct _Instance *instance /*$s0*/)
- // line 888, offset 0x800a3178
+ // line 879, offset 0x800a2418
 	/* begin block 1 */
-		// Start line: 889
-		// Start offset: 0x800A3178
+		// Start line: 880
+		// Start offset: 0x800A2418
 		// Variables:
 	// 		struct _G2SVector3_Type vec; // stack offset -24
 	/* end block 1 */
-	// End offset: 0x800A3178
-	// End Line: 889
+	// End offset: 0x800A2418
+	// End Line: 880
 
 	/* begin block 2 */
-		// Start line: 1840
+		// Start line: 1819
 	/* end block 2 */
-	// End Line: 1841
+	// End Line: 1820
 
 void razInitWallCrawlSteering(_Instance *instance)
 
@@ -697,11 +642,11 @@ void razInitWallCrawlSteering(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ razDeinitWallCrawlSteering(struct _Instance *instance /*$s0*/)
- // line 922, offset 0x800a32b4
+ // line 913, offset 0x800a2558
 	/* begin block 1 */
-		// Start line: 1931
+		// Start line: 1910
 	/* end block 1 */
-	// End Line: 1932
+	// End Line: 1911
 
 void razDeinitWallCrawlSteering(_Instance *instance)
 

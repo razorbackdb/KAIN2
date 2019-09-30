@@ -5,20 +5,20 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GlyphInit(struct _Instance *instance /*$s2*/, struct GameTracker *gameTracker /*$a1*/)
- // line 126, offset 0x8007a8bc
+ // line 121, offset 0x8007a22c
 	/* begin block 1 */
-		// Start line: 127
-		// Start offset: 0x8007A8BC
+		// Start line: 122
+		// Start offset: 0x8007A22C
 		// Variables:
 	// 		struct __GlyphData *data; // $s1
 	/* end block 1 */
-	// End offset: 0x8007A9A8
-	// End Line: 170
+	// End offset: 0x8007A318
+	// End Line: 165
 
 	/* begin block 2 */
-		// Start line: 252
+		// Start line: 242
 	/* end block 2 */
-	// End Line: 253
+	// End Line: 243
 
 void GlyphInit(_Instance *instance,GameTracker *gameTracker)
 
@@ -36,16 +36,16 @@ void GlyphInit(_Instance *instance,GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GlyphCollide(struct _Instance *instance /*$a0*/, struct GameTracker *gameTracker /*$a1*/)
- // line 179, offset 0x8007a9d8
+ // line 174, offset 0x8007a348
 	/* begin block 1 */
-		// Start line: 398
+		// Start line: 388
 	/* end block 1 */
-	// End Line: 399
+	// End Line: 389
 
 	/* begin block 2 */
-		// Start line: 400
+		// Start line: 390
 	/* end block 2 */
-	// End Line: 401
+	// End Line: 391
 
 void GlyphCollide(_Instance *instance,GameTracker *gameTracker)
 
@@ -58,20 +58,20 @@ void GlyphCollide(_Instance *instance,GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GlyphProcess(struct _Instance *instance /*$s0*/, struct GameTracker *gameTracker /*$a1*/)
- // line 186, offset 0x8007a9e0
+ // line 181, offset 0x8007a350
 	/* begin block 1 */
-		// Start line: 187
-		// Start offset: 0x8007A9E0
+		// Start line: 182
+		// Start offset: 0x8007A350
 		// Variables:
 	// 		struct __GlyphData *data; // $v0
 	/* end block 1 */
-	// End offset: 0x8007A9E0
-	// End Line: 187
+	// End offset: 0x8007A350
+	// End Line: 182
 
 	/* begin block 2 */
-		// Start line: 412
+		// Start line: 402
 	/* end block 2 */
-	// End Line: 413
+	// End Line: 403
 
 void GlyphProcess(_Instance *instance,GameTracker *gameTracker)
 
@@ -97,16 +97,16 @@ void GlyphProcess(_Instance *instance,GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // unsigned long /*$ra*/ GlyphQuery(struct _Instance *instance /*$a0*/, unsigned long query /*$a1*/)
- // line 216, offset 0x8007aa68
+ // line 211, offset 0x8007a3d8
 	/* begin block 1 */
-		// Start line: 475
+		// Start line: 465
 	/* end block 1 */
-	// End Line: 476
+	// End Line: 466
 
 	/* begin block 2 */
-		// Start line: 476
+		// Start line: 466
 	/* end block 2 */
-	// End Line: 477
+	// End Line: 467
 
 ulong GlyphQuery(_Instance *instance,ulong query)
 
@@ -119,20 +119,20 @@ ulong GlyphQuery(_Instance *instance,ulong query)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GlyphPost(struct _Instance *instance /*$a0*/, unsigned long message /*$a1*/, unsigned long messageData /*$a2*/)
- // line 233, offset 0x8007aa88
+ // line 228, offset 0x8007a3f8
 	/* begin block 1 */
-		// Start line: 234
-		// Start offset: 0x8007AA88
+		// Start line: 229
+		// Start offset: 0x8007A3F8
 		// Variables:
 	// 		struct __GlyphData *data; // $a0
 	/* end block 1 */
-	// End offset: 0x8007AAAC
-	// End Line: 251
+	// End offset: 0x8007A41C
+	// End Line: 246
 
 	/* begin block 2 */
-		// Start line: 509
+		// Start line: 499
 	/* end block 2 */
-	// End Line: 510
+	// End Line: 500
 
 void GlyphPost(_Instance *instance,ulong message,ulong messageData)
 
@@ -149,26 +149,30 @@ void GlyphPost(_Instance *instance,ulong message,ulong messageData)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _GlyphSwitchProcess(struct _Instance *instance /*$s1*/, TDRFuncPtr__GlyphSwitchProcess1process process /*$s3*/)
- // line 261, offset 0x8007aabc
+ // line 256, offset 0x8007a42c
 	/* begin block 1 */
-		// Start line: 262
-		// Start offset: 0x8007AABC
+		// Start line: 257
+		// Start offset: 0x8007A42C
 		// Variables:
 	// 		struct __GlyphData *data; // $s2
 	/* end block 1 */
-	// End offset: 0x8007AABC
-	// End Line: 262
+	// End offset: 0x8007A42C
+	// End Line: 257
 
 	/* begin block 2 */
-		// Start line: 574
+		// Start line: 564
 	/* end block 2 */
-	// End Line: 575
+	// End Line: 565
 
 void _GlyphSwitchProcess(_Instance *instance,TDRFuncPtr__GlyphSwitchProcess1process process)
 
 {
+  __MessageQueue *In;
+  
+  In = (__MessageQueue *)((int)instance->extraData + 4);
+  PurgeMessageQueue(In);
                     /* WARNING: Subroutine does not return */
-  PurgeMessageQueue((__MessageQueue *)((int)instance->extraData + 4));
+  EnMessageQueueData(In,(int)&DAT_00100004,0);
 }
 
 
@@ -176,30 +180,30 @@ void _GlyphSwitchProcess(_Instance *instance,TDRFuncPtr__GlyphSwitchProcess1proc
 // decompiled code
 // original method signature: 
 // int /*$ra*/ GlyphIsGlyphOpen(struct _Instance *instance /*$a0*/)
- // line 282, offset 0x8007ab5c
+ // line 277, offset 0x8007a4cc
 	/* begin block 1 */
-		// Start line: 284
-		// Start offset: 0x8007AB5C
+		// Start line: 279
+		// Start offset: 0x8007A4CC
 		// Variables:
 	// 		struct __GlyphData *data; // $v0
 	/* end block 1 */
-	// End offset: 0x8007AB5C
-	// End Line: 287
+	// End offset: 0x8007A4CC
+	// End Line: 282
 
 	/* begin block 2 */
-		// Start line: 620
+		// Start line: 610
 	/* end block 2 */
-	// End Line: 621
+	// End Line: 611
 
 	/* begin block 3 */
-		// Start line: 621
+		// Start line: 611
 	/* end block 3 */
-	// End Line: 622
+	// End Line: 612
 
 	/* begin block 4 */
-		// Start line: 624
+		// Start line: 614
 	/* end block 4 */
-	// End Line: 625
+	// End Line: 615
 
 int GlyphIsGlyphOpen(_Instance *instance)
 
@@ -212,26 +216,17 @@ int GlyphIsGlyphOpen(_Instance *instance)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ _GlyphIsGlyphSet(int glyph /*$s0*/)
- // line 295, offset 0x8007ab70
+ // line 290, offset 0x8007a4e0
 	/* begin block 1 */
-		// Start line: 296
-		// Start offset: 0x8007AB70
-		// Variables:
-	// 		unsigned long abilities; // $v1
+		// Start line: 636
 	/* end block 1 */
-	// End offset: 0x8007AB70
-	// End Line: 296
-
-	/* begin block 2 */
-		// Start line: 646
-	/* end block 2 */
-	// End Line: 647
+	// End Line: 637
 
 int _GlyphIsGlyphSet(int glyph)
 
 {
                     /* WARNING: Subroutine does not return */
-  INSTANCE_Query((_Instance *)theCamera.core.vvNormalWorVecMat[1].t[0],0x24);
+  INSTANCE_Query(gameTrackerX.playerInstance,0x24);
 }
 
 
@@ -239,17 +234,17 @@ int _GlyphIsGlyphSet(int glyph)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ _GlyphIsGlyphUsable(int glyph /*$s0*/)
- // line 304, offset 0x8007abb4
+ // line 294, offset 0x8007a51c
 	/* begin block 1 */
-		// Start line: 673
+		// Start line: 645
 	/* end block 1 */
-	// End Line: 674
+	// End Line: 646
 
-void _GlyphIsGlyphUsable(void)
+int _GlyphIsGlyphUsable(int glyph)
 
 {
                     /* WARNING: Subroutine does not return */
-  INSTANCE_Query(p_Gpffffb524,0x13);
+  INSTANCE_Query(gameTrackerX.playerInstance,0x13);
 }
 
 
@@ -257,20 +252,11 @@ void _GlyphIsGlyphUsable(void)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ _GlyphIsAnyGlyphSet()
- // line 308, offset 0x8007abf0
+ // line 298, offset 0x8007a558
 	/* begin block 1 */
-		// Start line: 309
-		// Start offset: 0x8007ABF0
-		// Variables:
-	// 		unsigned long abilities; // $v0
+		// Start line: 654
 	/* end block 1 */
-	// End offset: 0x8007ABF0
-	// End Line: 309
-
-	/* begin block 2 */
-		// Start line: 682
-	/* end block 2 */
-	// End Line: 683
+	// End Line: 655
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
@@ -278,7 +264,7 @@ int _GlyphIsAnyGlyphSet(void)
 
 {
                     /* WARNING: Subroutine does not return */
-  INSTANCE_Query((_Instance *)theCamera.core.vvNormalWorVecMat[1].t[0],0x24);
+  INSTANCE_Query(gameTrackerX.playerInstance,0x24);
 }
 
 
@@ -286,16 +272,16 @@ int _GlyphIsAnyGlyphSet(void)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ _GlyphCost(struct _GlyphTuneData *glyphtunedata /*$a0*/, int glyphNum /*$a1*/)
- // line 318, offset 0x8007ac20
+ // line 303, offset 0x8007a580
 	/* begin block 1 */
-		// Start line: 708
+		// Start line: 665
 	/* end block 1 */
-	// End Line: 709
+	// End Line: 666
 
 	/* begin block 2 */
-		// Start line: 709
+		// Start line: 666
 	/* end block 2 */
-	// End Line: 710
+	// End Line: 667
 
 int _GlyphCost(_GlyphTuneData *glyphtunedata,int glyphNum)
 
@@ -307,63 +293,41 @@ int _GlyphCost(_GlyphTuneData *glyphtunedata,int glyphNum)
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ GlyphIsPuppetShowModeOn()
- // line 324, offset 0x8007ac30
-	/* begin block 1 */
-		// Start line: 720
-	/* end block 1 */
-	// End Line: 721
-
-/* WARNING: Unknown calling convention yet parameter storage is locked */
-
-int GlyphIsPuppetShowModeOn(void)
-
-{
-                    /* WARNING: Subroutine does not return */
-  INSTANCE_Query((_Instance *)theCamera.core.vvNormalWorVecMat[1].t[0],0x30);
-}
-
-
-
-// decompiled code
-// original method signature: 
 // void /*$ra*/ _GlyphDefaultProcess(struct _Instance *instance /*$s1*/, int data1 /*$a1*/, int data2 /*$a2*/)
- // line 336, offset 0x8007ac54
+ // line 316, offset 0x8007a590
 	/* begin block 1 */
-		// Start line: 337
-		// Start offset: 0x8007AC54
+		// Start line: 317
+		// Start offset: 0x8007A590
 		// Variables:
 	// 		struct __Event *Ptr; // $v0
-	// 		struct __GlyphData *data; // $s0
+	// 		struct __GlyphData *data; // $v0
 	/* end block 1 */
-	// End offset: 0x8007ACE0
-	// End Line: 360
+	// End offset: 0x8007A60C
+	// End Line: 337
 
 	/* begin block 2 */
-		// Start line: 745
+		// Start line: 691
 	/* end block 2 */
-	// End Line: 746
+	// End Line: 692
 
 void _GlyphDefaultProcess(_Instance *instance,int data1,int data2)
 
 {
   __Event *p_Var1;
-  int iVar2;
-  void *pvVar3;
+  __MessageQueue *In;
   
-  pvVar3 = instance->extraData;
-  p_Var1 = PeekMessageQueue((__MessageQueue *)((int)pvVar3 + 4));
-  if (p_Var1 != (__Event *)0x0) {
-    if (((undefined *)p_Var1->ID == &DAT_80000010) &&
-       (iVar2 = GlyphIsPuppetShowModeOn(), iVar2 == 0)) {
-      _GlyphSwitchProcess(instance,_GlyphSelectProcess);
-      SndPlayVolPan(0x11,0x7f,0x40,0);
-      *(undefined2 *)((int)pvVar3 + 0x8e) = 1;
-    }
-                    /* WARNING: Subroutine does not return */
-    DeMessageQueue((__MessageQueue *)((int)pvVar3 + 4));
+  In = (__MessageQueue *)((int)instance->extraData + 4);
+  p_Var1 = PeekMessageQueue(In);
+  if (p_Var1 == (__Event *)0x0) {
+    return;
   }
-  return;
+  if ((undefined *)p_Var1->ID == &DAT_80000010) {
+    _GlyphSwitchProcess(instance,_GlyphSelectProcess);
+                    /* WARNING: Subroutine does not return */
+    SndPlayVolPan(0x11,0x7f,0x40,0);
+  }
+                    /* WARNING: Subroutine does not return */
+  DeMessageQueue(In);
 }
 
 
@@ -371,28 +335,27 @@ void _GlyphDefaultProcess(_Instance *instance,int data1,int data2)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HUD_GetPlayerScreenPt(struct DVECTOR *center /*$s0*/)
- // line 362, offset 0x8007acf8
+ // line 339, offset 0x8007a628
 	/* begin block 1 */
-		// Start line: 363
-		// Start offset: 0x8007ACF8
+		// Start line: 340
+		// Start offset: 0x8007A628
 		// Variables:
 	// 		struct _Position position; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x8007ACF8
-	// End Line: 363
+	// End offset: 0x8007A628
+	// End Line: 340
 
 	/* begin block 2 */
-		// Start line: 805
+		// Start line: 745
 	/* end block 2 */
-	// End Line: 806
+	// End Line: 746
 
 void HUD_GetPlayerScreenPt(DVECTOR *center)
 
 {
   PushMatrix();
-  SetRotMatrix(DAT_800cfef0);
                     /* WARNING: Subroutine does not return */
-  SetTransMatrix((int)DAT_800cfef0);
+  SetRotMatrix((undefined4 *)theCamera.core.wcTransform);
 }
 
 
@@ -400,10 +363,10 @@ void HUD_GetPlayerScreenPt(DVECTOR *center)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GlyphDrawMenu(struct _Instance *instance /*stack 0*/)
- // line 380, offset 0x8007ad88
+ // line 357, offset 0x8007a6b8
 	/* begin block 1 */
-		// Start line: 381
-		// Start offset: 0x8007AD88
+		// Start line: 358
+		// Start offset: 0x8007A6B8
 		// Variables:
 	// 		struct _Position place; // stack offset -72
 	// 		struct DVECTOR center; // stack offset -64
@@ -416,59 +379,59 @@ void HUD_GetPlayerScreenPt(DVECTOR *center)
 	// 		struct _GlyphTuneData *glyphtunedata; // $s7
 
 		/* begin block 1.1 */
-			// Start line: 403
-			// Start offset: 0x8007ADF4
+			// Start line: 380
+			// Start offset: 0x8007A724
 			// Variables:
 		// 		int diff; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8007AE58
-		// End Line: 419
+		// End offset: 0x8007A788
+		// End Line: 396
 
 		/* begin block 1.2 */
-			// Start line: 430
-			// Start offset: 0x8007AE88
+			// Start line: 407
+			// Start offset: 0x8007A7B8
 			// Variables:
 		// 		int enabled; // $v1
 		// 		int scale_modify; // $s2
 		// 		int num; // $s1
 		/* end block 1.2 */
-		// End offset: 0x8007AFC8
-		// End Line: 472
+		// End offset: 0x8007A8F8
+		// End Line: 449
 
 		/* begin block 1.3 */
-			// Start line: 481
-			// Start offset: 0x8007B030
+			// Start line: 458
+			// Start offset: 0x8007A960
 			// Variables:
 		// 		struct _Vector f1; // stack offset -56
 		/* end block 1.3 */
-		// End offset: 0x8007B08C
-		// End Line: 497
+		// End offset: 0x8007A9BC
+		// End Line: 474
 
 		/* begin block 1.4 */
-			// Start line: 502
-			// Start offset: 0x8007B08C
+			// Start line: 479
+			// Start offset: 0x8007A9BC
 		/* end block 1.4 */
-		// End offset: 0x8007B08C
-		// End Line: 504
+		// End offset: 0x8007A9BC
+		// End Line: 481
 	/* end block 1 */
-	// End offset: 0x8007B08C
-	// End Line: 504
+	// End offset: 0x8007A9BC
+	// End Line: 481
 
 	/* begin block 2 */
-		// Start line: 841
+		// Start line: 781
 	/* end block 2 */
-	// End Line: 842
+	// End Line: 782
 
 	/* begin block 3 */
-		// Start line: 857
+		// Start line: 797
 	/* end block 3 */
-	// End Line: 858
+	// End Line: 798
 
 void GlyphDrawMenu(_Instance *instance)
 
 {
                     /* WARNING: Subroutine does not return */
-  INSTANCE_Query((_Instance *)theCamera.core.vvNormalWorVecMat[1].t[0],0x20);
+  INSTANCE_Query(gameTrackerX.playerInstance,0x20);
 }
 
 
@@ -476,16 +439,16 @@ void GlyphDrawMenu(_Instance *instance)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ GlyphTime(int time /*$a0*/)
- // line 510, offset 0x8007b0ec
+ // line 487, offset 0x8007aa1c
 	/* begin block 1 */
-		// Start line: 1238
+		// Start line: 1178
 	/* end block 1 */
-	// End Line: 1239
+	// End Line: 1179
 
 	/* begin block 2 */
-		// Start line: 1239
+		// Start line: 1179
 	/* end block 2 */
-	// End Line: 1240
+	// End Line: 1180
 
 long GlyphTime(int time)
 
@@ -502,24 +465,22 @@ long GlyphTime(int time)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ ShrinkGlyphMenu(struct _Instance *instance /*$s1*/)
- // line 517, offset 0x8007b108
+ // line 494, offset 0x8007aa38
 	/* begin block 1 */
-		// Start line: 518
-		// Start offset: 0x8007B108
+		// Start line: 495
+		// Start offset: 0x8007AA38
 		// Variables:
 	// 		struct __GlyphData *data; // $s0
 	// 		int time; // $a0
 	// 		short accl; // stack offset -24
 	/* end block 1 */
-	// End offset: 0x8007B214
-	// End Line: 556
+	// End offset: 0x8007AB4C
+	// End Line: 533
 
 	/* begin block 2 */
-		// Start line: 1252
+		// Start line: 1192
 	/* end block 2 */
-	// End Line: 1253
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 1193
 
 void ShrinkGlyphMenu(_Instance *instance)
 
@@ -530,17 +491,17 @@ void ShrinkGlyphMenu(_Instance *instance)
   short asStack24 [4];
   
   pvVar3 = instance->extraData;
-  theCamera.positionAccl._4_4_ = theCamera.positionAccl._4_4_ & 0xffefffff;
+  gameTrackerX.streamFlags = gameTrackerX.streamFlags & 0xffefffff;
   if (*(short *)((int)pvVar3 + 0x90) < 1) {
-    _glyph_cost = 0xffff;
+    glyph_cost = -1;
   }
   else {
-    iVar1 = (uint)*(ushort *)((int)pvVar3 + 0x90) - ((uint)(theCamera.tiltList[0][0] << 9) >> 0xc);
+    iVar1 = (uint)*(ushort *)((int)pvVar3 + 0x90) - ((gameTrackerX.timeMult << 9) >> 0xc);
     *(undefined2 *)((int)pvVar3 + 0x90) = (short)iVar1;
     if (iVar1 * 0x10000 < 0) {
       *(undefined2 *)((int)pvVar3 + 0x90) = 0;
     }
-    _glyph_time = *(undefined2 *)((int)pvVar3 + 0x90);
+    glyph_time = *(short *)((int)pvVar3 + 0x90);
     lVar2 = GlyphTime((int)*(short *)((int)pvVar3 + 0x90));
     iVar1 = lVar2 * 0x96;
     if (iVar1 < 0) {
@@ -552,12 +513,12 @@ void ShrinkGlyphMenu(_Instance *instance)
       GlyphDrawMenu(instance);
     }
   }
-  if (_MANNA_Pickup_Time < 1) {
-    CriticalDampValue(5,(short *)&MANNA_Position,-0x40,(short *)&MANNA_Pos_vel,asStack24,0xc);
+  if (MANNA_Pickup_Time < 1) {
+    CriticalDampValue(5,&MANNA_Position,-0x40,&MANNA_Pos_vel,asStack24,0xc);
     *(undefined2 *)((int)pvVar3 + 0x8e) = 0;
   }
   else {
-    _MANNA_Pickup_Time = _MANNA_Pickup_Time - theCamera.tiltList[0][0];
+    MANNA_Pickup_Time = MANNA_Pickup_Time - gameTrackerX.timeMult;
     *(undefined2 *)((int)pvVar3 + 0x8e) = 0;
   }
   return;
@@ -568,24 +529,22 @@ void ShrinkGlyphMenu(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EnlargeGlyphMenu(struct _Instance *instance /*$s1*/)
- // line 559, offset 0x8007b22c
+ // line 536, offset 0x8007ab64
 	/* begin block 1 */
-		// Start line: 560
-		// Start offset: 0x8007B22C
+		// Start line: 537
+		// Start offset: 0x8007AB64
 		// Variables:
 	// 		struct __GlyphData *data; // $s0
 	// 		int time; // $a1
 	// 		short accl; // stack offset -24
 	/* end block 1 */
-	// End offset: 0x8007B2D4
-	// End Line: 583
+	// End offset: 0x8007AC0C
+	// End Line: 560
 
 	/* begin block 2 */
-		// Start line: 1351
+		// Start line: 1291
 	/* end block 2 */
-	// End Line: 1352
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 1292
 
 void EnlargeGlyphMenu(_Instance *instance)
 
@@ -596,14 +555,14 @@ void EnlargeGlyphMenu(_Instance *instance)
   short asStack24 [4];
   
   pvVar3 = instance->extraData;
-  theCamera.positionAccl._4_4_ = theCamera.positionAccl._4_4_ | 0x100000;
+  gameTrackerX.streamFlags = gameTrackerX.streamFlags | 0x100000;
   if (*(short *)((int)pvVar3 + 0x90) < 0x1000) {
-    iVar1 = (uint)*(ushort *)((int)pvVar3 + 0x90) + ((uint)(theCamera.tiltList[0][0] << 9) >> 0xc);
+    iVar1 = (uint)*(ushort *)((int)pvVar3 + 0x90) + ((gameTrackerX.timeMult << 9) >> 0xc);
     *(undefined2 *)((int)pvVar3 + 0x90) = (short)iVar1;
     if (0x1000 < iVar1 * 0x10000 >> 0x10) {
       *(undefined2 *)((int)pvVar3 + 0x90) = 0x1000;
     }
-    _glyph_time = *(undefined2 *)((int)pvVar3 + 0x90);
+    glyph_time = *(short *)((int)pvVar3 + 0x90);
   }
   lVar2 = GlyphTime((int)*(short *)((int)pvVar3 + 0x90));
   iVar1 = lVar2 * 0x96;
@@ -613,8 +572,8 @@ void EnlargeGlyphMenu(_Instance *instance)
   *(undefined2 *)((int)pvVar3 + 0x92) = (short)(iVar1 >> 0xc);
   *(undefined2 *)((int)pvVar3 + 0x94) = (short)lVar2;
   GlyphDrawMenu(instance);
-  _MANNA_Pickup_Time = 0;
-  CriticalDampValue(5,(short *)&MANNA_Position,0x18,(short *)&MANNA_Pos_vel,asStack24,0xc);
+  MANNA_Pickup_Time = 0;
+  CriticalDampValue(5,&MANNA_Position,0x24,&MANNA_Pos_vel,asStack24,0xc);
   *(undefined2 *)((int)pvVar3 + 0x8e) = 1;
   return;
 }
@@ -623,67 +582,54 @@ void EnlargeGlyphMenu(_Instance *instance)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ _GlyphOffProcess(struct _Instance *instance /*$s1*/, int data1 /*$s4*/, int data2 /*$s5*/)
- // line 596, offset 0x8007b328
+// void /*$ra*/ _GlyphOffProcess(struct _Instance *instance /*$s0*/, int data1 /*$s3*/, int data2 /*$s4*/)
+ // line 573, offset 0x8007ac68
 	/* begin block 1 */
-		// Start line: 597
-		// Start offset: 0x8007B328
+		// Start line: 574
+		// Start offset: 0x8007AC68
 		// Variables:
 	// 		struct __Event *Ptr; // $v0
-	// 		struct __GlyphData *data; // $s0
+	// 		struct __GlyphData *data; // $s2
 	/* end block 1 */
-	// End offset: 0x8007B444
-	// End Line: 634
+	// End offset: 0x8007AD38
+	// End Line: 601
 
 	/* begin block 2 */
-		// Start line: 1438
+		// Start line: 1378
 	/* end block 2 */
-	// End Line: 1439
+	// End Line: 1379
 
 void _GlyphOffProcess(_Instance *instance,int data1,int data2)
 
 {
   __Event *p_Var1;
-  int iVar2;
-  undefined *puVar3;
-  code **ppcVar4;
+  undefined *puVar2;
+  void *pvVar3;
   
-  ppcVar4 = (code **)instance->extraData;
+  pvVar3 = instance->extraData;
   ShrinkGlyphMenu(instance);
-  p_Var1 = PeekMessageQueue((__MessageQueue *)(ppcVar4 + 1));
+  p_Var1 = PeekMessageQueue((__MessageQueue *)((int)pvVar3 + 4));
   if (p_Var1 == (__Event *)0x0) {
-    if (*ppcVar4 == _GlyphSelectProcess) {
-      SndPlayVolPan(0x11,0x7f,0x40,0);
-    }
     Glyph_DoFX(instance);
     return;
   }
-  puVar3 = (undefined *)p_Var1->ID;
-  if (puVar3 != &DAT_00100001) {
-    if ((int)puVar3 < 0x100002) {
-      if (puVar3 == &DAT_80000010) {
-        if (*ppcVar4 == _GlyphSelectProcess) {
-          _GlyphSwitchProcess(instance,_GlyphOffProcess);
-          *(undefined2 *)((int)ppcVar4 + 0x8e) = 0;
-        }
-        else {
-          iVar2 = GlyphIsPuppetShowModeOn();
-          if (iVar2 == 0) {
-            _GlyphSwitchProcess(instance,_GlyphSelectProcess);
-            *(undefined2 *)((int)ppcVar4 + 0x8e) = 1;
-          }
-        }
-        goto LAB_8007b410;
+  puVar2 = (undefined *)p_Var1->ID;
+  if (puVar2 != &DAT_00100001) {
+    if ((int)puVar2 < 0x100002) {
+      if (puVar2 == &DAT_80000010) {
+        _GlyphSwitchProcess(instance,_GlyphSelectProcess);
+                    /* WARNING: Subroutine does not return */
+        SndPlayVolPan(0x11,0x7f,0x40,0);
       }
     }
     else {
-      if (puVar3 == &DAT_00100004) goto LAB_8007b410;
+      if (puVar2 == &DAT_00100004) goto LAB_8007ad28;
     }
     _GlyphDefaultProcess(instance,data1,data2);
   }
-LAB_8007b410:
+LAB_8007ad28:
                     /* WARNING: Subroutine does not return */
-  DeMessageQueue((__MessageQueue *)(ppcVar4 + 1));
+  DeMessageQueue((__MessageQueue *)((int)pvVar3 + 4));
 }
 
 
@@ -691,10 +637,10 @@ LAB_8007b410:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _GlyphSelectProcess(struct _Instance *instance /*$s3*/, int data1 /*$s6*/, int data2 /*$s7*/)
- // line 639, offset 0x8007b470
+ // line 606, offset 0x8007ad60
 	/* begin block 1 */
-		// Start line: 640
-		// Start offset: 0x8007B470
+		// Start line: 607
+		// Start offset: 0x8007AD60
 		// Variables:
 	// 		struct __Event *Ptr; // $v0
 	// 		struct __GlyphData *data; // $s1
@@ -702,107 +648,97 @@ LAB_8007b410:
 	// 		int dontdraw_flag; // $s2
 
 		/* begin block 1.1 */
-			// Start line: 712
-			// Start offset: 0x8007B85C
+			// Start line: 678
+			// Start offset: 0x8007B148
 			// Variables:
 		// 		int MANNA_Count; // $s0
 		/* end block 1.1 */
-		// End offset: 0x8007B8B0
-		// End Line: 721
+		// End offset: 0x8007B19C
+		// End Line: 687
 	/* end block 1 */
-	// End offset: 0x8007B93C
-	// End Line: 751
+	// End offset: 0x8007B1F4
+	// End Line: 710
 
 	/* begin block 2 */
-		// Start line: 1524
+		// Start line: 1444
 	/* end block 2 */
-	// End Line: 1525
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 1445
 
 void _GlyphSelectProcess(_Instance *instance,int data1,int data2)
 
 {
-  bool bVar1;
-  __Event *p_Var2;
-  int data1_00;
+  __Event *p_Var1;
+  int iVar2;
   undefined *puVar3;
   uint sample;
   ushort vol;
-  int data2_00;
   void *pvVar4;
   _GlyphTuneData *glyphtunedata;
   
-  bVar1 = false;
   pvVar4 = instance->extraData;
   glyphtunedata = (_GlyphTuneData *)instance->object->data;
-  data1_00 = data1;
-  data2_00 = data2;
-  p_Var2 = PeekMessageQueue((__MessageQueue *)((int)pvVar4 + 4));
-  if (p_Var2 == (__Event *)0x0) {
-    data1_00 = GlyphIsPuppetShowModeOn();
-    if ((data1_00 != 0) && (*(short *)((int)pvVar4 + 0x8e) == 1)) {
-      bVar1 = true;
-      *(undefined2 *)((int)pvVar4 + 0x8e) = 0;
-      _GlyphSwitchProcess(instance,_GlyphOffProcess);
-    }
-    if (!bVar1) {
-      data1_00 = _GlyphCost(glyphtunedata,(int)*(short *)((int)pvVar4 + 0x8c));
-      _glyph_cost = (undefined2)data1_00;
-      EnlargeGlyphMenu(instance);
-    }
+  p_Var1 = PeekMessageQueue((__MessageQueue *)((int)pvVar4 + 4));
+  if (p_Var1 == (__Event *)0x0) {
+    iVar2 = _GlyphCost(glyphtunedata,(int)*(short *)((int)pvVar4 + 0x8c));
+    glyph_cost = (short)iVar2;
+    EnlargeGlyphMenu(instance);
     Glyph_DoFX(instance);
     return;
   }
-  puVar3 = (undefined *)p_Var2->ID;
+  puVar3 = (undefined *)p_Var1->ID;
   if (puVar3 == &DAT_00100001) {
     *(undefined2 *)((int)pvVar4 + 0x8c) = 7;
     *(undefined2 *)((int)pvVar4 + 0x98) = 0xdb6;
     *(short *)((int)pvVar4 + 0x96) = (*(short *)((int)pvVar4 + 0x8c) + -1) * 0x249;
     *(undefined2 *)((int)pvVar4 + 0x96) = *(undefined2 *)((int)pvVar4 + 0x98);
-    goto LAB_8007b8d8;
-  }
-  if ((int)puVar3 < 0x100002) {
-    if (puVar3 == (undefined *)0x80000000) {
-      if (((short)debug_cameraMode == 0) &&
-         (data1_00 = _GlyphIsGlyphSet((int)*(short *)((int)pvVar4 + 0x8c)), data1_00 != 0)) {
-                    /* WARNING: Subroutine does not return */
-        INSTANCE_Query((_Instance *)theCamera.core.vvNormalWorVecMat[1].t[0],0x20);
-      }
-      sample = 0x10;
-      vol = 100;
-    }
-    else {
-      if (puVar3 != &DAT_80000010) goto LAB_8007b8d0;
-      _GlyphSwitchProcess(instance,_GlyphOffProcess);
-      *(undefined2 *)((int)pvVar4 + 0x8e) = 0;
-      sample = 0xf;
-      vol = 0x7f;
-    }
-    SndPlayVolPan(sample,vol,0x40,0);
   }
   else {
-    if (puVar3 == (undefined *)0x10000002) {
-      data1_00 = _GlyphIsAnyGlyphSet();
-      if (data1_00 != 0) {
+    if ((int)puVar3 < 0x100002) {
+      if (puVar3 == (undefined *)0x80000000) {
+        if ((fx_going == 0) &&
+           (iVar2 = _GlyphIsGlyphSet((int)*(short *)((int)pvVar4 + 0x8c)), iVar2 != 0)) {
                     /* WARNING: Subroutine does not return */
-        AngleDiff(*(short *)((int)pvVar4 + 0x96),*(short *)((int)pvVar4 + 0x98));
+          INSTANCE_Query(gameTrackerX.playerInstance,0x20);
+        }
+        sample = 0x10;
+        vol = 100;
+LAB_8007b1a4:
+                    /* WARNING: Subroutine does not return */
+        SndPlayVolPan(sample,vol,0x40,0);
       }
-      goto LAB_8007b8d8;
-    }
-    if ((int)puVar3 < 0x10000003) {
-      if (puVar3 == &DAT_00100004) goto LAB_8007b8d8;
+      if (puVar3 == &DAT_80000010) {
+        _GlyphSwitchProcess(instance,_GlyphOffProcess);
+        sample = 0xf;
+        vol = 0x7f;
+        goto LAB_8007b1a4;
+      }
     }
     else {
-      if (puVar3 == (undefined *)0x10000004) {
-        _GlyphOffProcess(instance,data1_00,data2_00);
-        return;
+      if (puVar3 == (undefined *)0x10000002) {
+        iVar2 = _GlyphIsAnyGlyphSet();
+        if (iVar2 != 0) {
+                    /* WARNING: Subroutine does not return */
+          AngleDiff(*(short *)((int)pvVar4 + 0x96),*(short *)((int)pvVar4 + 0x98));
+        }
+        goto LAB_8007b1c4;
+      }
+      if ((int)puVar3 < 0x10000003) {
+        if (puVar3 == &DAT_00100004) goto LAB_8007b1c4;
+      }
+      else {
+        if (puVar3 == (undefined *)0x10000004) {
+          iVar2 = _GlyphIsAnyGlyphSet();
+          if (iVar2 != 0) {
+                    /* WARNING: Subroutine does not return */
+            AngleDiff(*(short *)((int)pvVar4 + 0x96),*(short *)((int)pvVar4 + 0x98));
+          }
+          goto LAB_8007b1c4;
+        }
       }
     }
-LAB_8007b8d0:
     _GlyphDefaultProcess(instance,data1,data2);
   }
-LAB_8007b8d8:
+LAB_8007b1c4:
                     /* WARNING: Subroutine does not return */
   DeMessageQueue((__MessageQueue *)((int)pvVar4 + 4));
 }
@@ -812,28 +748,28 @@ LAB_8007b8d8:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ Glyph_StartSpell(struct _Instance *instance /*$a0*/, int glyphnum /*$a1*/)
- // line 757, offset 0x8007b970
+ // line 716, offset 0x8007b228
 	/* begin block 1 */
-		// Start line: 758
-		// Start offset: 0x8007B970
+		// Start line: 717
+		// Start offset: 0x8007B228
 		// Variables:
 	// 		int message; // $a2
 	/* end block 1 */
-	// End offset: 0x8007B9F8
-	// End Line: 791
+	// End offset: 0x8007B2B0
+	// End Line: 750
 
 	/* begin block 2 */
-		// Start line: 1791
+		// Start line: 1695
 	/* end block 2 */
-	// End Line: 1792
+	// End Line: 1696
 
-void Glyph_StartSpell(undefined4 param_1,undefined4 param_2)
+void Glyph_StartSpell(_Instance *instance,int glyphnum)
 
 {
   int Message;
   
   Message = 0;
-  switch(param_2) {
+  switch(glyphnum) {
   case 1:
     Message = 0x80001;
     break;
@@ -856,83 +792,68 @@ void Glyph_StartSpell(undefined4 param_1,undefined4 param_2)
     Message = 0x80007;
   }
                     /* WARNING: Subroutine does not return */
-  INSTANCE_Post(p_Gpffffb524,Message,0);
+  INSTANCE_Post(gameTrackerX.playerInstance,Message,0);
 }
 
 
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ Glyph_Broadcast(struct _Instance *sender /*$s6*/, int glyphnum /*$a1*/)
- // line 794, offset 0x8007ba18
+// void /*$ra*/ Glyph_Broadcast(struct _Instance *sender /*$s5*/, int glyphnum /*$a1*/)
+ // line 753, offset 0x8007b2d0
 	/* begin block 1 */
-		// Start line: 795
-		// Start offset: 0x8007BA18
+		// Start line: 754
+		// Start offset: 0x8007B2D0
 		// Variables:
-	// 		struct _Instance *instance; // $s2
-	// 		int plane; // $s7
-	// 		long whatAmIMask; // $s4
-	// 		int Message; // $s3
-	// 		int radius; // stack offset -48
-	// 		int radius_old; // $fp
-	// 		int range; // $s5
+	// 		struct _Instance *instance; // $s0
+	// 		int plane; // $s6
+	// 		long whatAmIMask; // $s3
+	// 		int Message; // $s2
+	// 		int Data; // $s7
+	// 		int dist; // $v1
+	// 		int fx_radius; // $s4
 
 		/* begin block 1.1 */
-			// Start line: 847
-			// Start offset: 0x8007BB28
+			// Start line: 804
+			// Start offset: 0x8007B3B4
 			// Variables:
-		// 		int dist; // $s0
-		// 		int old_dist; // $v0
-		// 		int old_x; // $s0
-		// 		int old_y; // $s1
-		// 		int new_x; // $v0
-		// 		int new_y; // $v1
-		// 		long whatAmI; // $s0
+		// 		long whatAmI; // $s1
 		/* end block 1.1 */
-		// End offset: 0x8007BC30
-		// End Line: 878
+		// End offset: 0x8007B468
+		// End Line: 822
 	/* end block 1 */
-	// End offset: 0x8007BC40
-	// End Line: 879
+	// End offset: 0x8007B478
+	// End Line: 823
 
 	/* begin block 2 */
-		// Start line: 1865
+		// Start line: 1769
 	/* end block 2 */
-	// End Line: 1866
-
-	/* begin block 3 */
-		// Start line: 1875
-	/* end block 3 */
-	// End Line: 1876
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 1770
 
 void Glyph_Broadcast(_Instance *sender,int glyphnum)
 
 {
-  if (glyphnum - 1U < 7) {
-    switch(glyphnum) {
-    case 1:
-      break;
-    case 2:
-      break;
-    case 3:
-      break;
-    case 4:
-      break;
-    case 5:
-      break;
-    case 6:
-      break;
-    case 7:
-      goto switchD_8007baac_caseD_7;
-    }
+  switch(glyphnum) {
+  case 1:
+    break;
+  case 2:
+    break;
+  case 3:
+    break;
+  case 4:
+    break;
+  case 5:
+    break;
+  case 6:
+    break;
+  case 7:
+    goto switchD_8007b338_caseD_7;
   }
-  if (*(_Instance **)(theCamera.core.vvNormalWorVecMat[1].t[2] + 4) != (_Instance *)0x0) {
+  if ((gameTrackerX.instanceList)->first != (_Instance *)0x0) {
                     /* WARNING: Subroutine does not return */
-    INSTANCE_Query(*(_Instance **)(theCamera.core.vvNormalWorVecMat[1].t[2] + 4),1);
+    INSTANCE_Query((gameTrackerX.instanceList)->first,1);
   }
-switchD_8007baac_caseD_7:
+switchD_8007b338_caseD_7:
   return;
 }
 
@@ -941,10 +862,10 @@ switchD_8007baac_caseD_7:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ Glyph_DoSpell(struct _Instance *instance /*stack 0*/, int glyphnum /*$s1*/)
- // line 881, offset 0x8007bc70
+ // line 825, offset 0x8007b4a4
 	/* begin block 1 */
-		// Start line: 882
-		// Start offset: 0x8007BC70
+		// Start line: 826
+		// Start offset: 0x8007B4A4
 		// Variables:
 	// 		int fx_radius; // $fp
 	// 		int fx_accl; // $v0
@@ -960,20 +881,21 @@ switchD_8007baac_caseD_7:
 	// 		struct MATRIX mat; // stack offset -80
 	// 		struct _GlyphTuneData *glyphtunedata; // $s0
 	/* end block 1 */
-	// End offset: 0x8007BED8
-	// End Line: 981
+	// End offset: 0x8007B710
+	// End Line: 925
 
 	/* begin block 2 */
-		// Start line: 2104
+		// Start line: 1962
 	/* end block 2 */
-	// End Line: 2105
+	// End Line: 1963
 
-void Glyph_DoSpell(int param_1,int param_2)
+void Glyph_DoSpell(_Instance *instance,int glyphnum)
 
 {
-  long startColor;
-  int pred_offset;
   int colorChangeRadius;
+  long startColor;
+  void *pvVar1;
+  int pred_offset;
   int size2;
   int size1;
   int height3;
@@ -982,7 +904,7 @@ void Glyph_DoSpell(int param_1,int param_2)
   int height1;
   int radius;
   MATRIX MStack80;
-  long local_30;
+  long lStack48;
   
   radius = 0;
   vel = (undefined *)0x0;
@@ -991,20 +913,20 @@ void Glyph_DoSpell(int param_1,int param_2)
   height3 = 0;
   size1 = 0;
   size2 = 0;
-  pred_offset = *(int *)(*(int *)(param_1 + 0x1c) + 0x1c);
-  sGpffff9b18 = 0;
-  local_30 = 0;
+  pvVar1 = instance->object->data;
+  fx_going = 0;
+  lStack48 = 0;
   MATH3D_SetUnityMatrix(&MStack80);
-  uGpffffee1c = 0;
-  iGpffffee18 = (int)*(short *)(pred_offset + (param_2 + -1) * 2 + 0xc);
+  fx_radius_old = 0;
+  blast_range = (int)*(short *)((int)pvVar1 + (glyphnum + -1) * 2 + 0xc);
   pred_offset = 0;
-  if (-1 < iGpffffee18) {
-    HUD_Draw();
-    return;
+  colorChangeRadius = blast_range;
+  if (blast_range < 0) {
+    colorChangeRadius = blast_range + 3;
   }
-  colorChangeRadius = iGpffffee18 - (iGpffffee18 + 3 >> 2);
-  startColor = local_30;
-  switch(param_2) {
+  colorChangeRadius = blast_range - (colorChangeRadius >> 2);
+  startColor = lStack48;
+  switch(glyphnum) {
   case 1:
     radius = 1;
     startColor = 0xc0c0c0;
@@ -1013,11 +935,11 @@ void Glyph_DoSpell(int param_1,int param_2)
     height3 = 0x300;
     vel = (undefined *)0x200000;
     size1 = -0x280;
-    sGpffff9b18 = 1;
+    fx_going = 1;
     size2 = 0;
     break;
   case 2:
-    CAMERA_SetShake((Camera *)&gp0xffffa3dc,0x3c,0x800);
+    CAMERA_SetShake(&theCamera,0x3c,0x800);
     radius = 0x280;
     vel = &UNK_00140000;
     startColor = 0xa0a0a0;
@@ -1025,7 +947,7 @@ void Glyph_DoSpell(int param_1,int param_2)
     height2 = 0;
     height1 = 0;
     size1 = 0x280;
-    sGpffff9b18 = 2;
+    fx_going = 2;
     size2 = 0x340;
     break;
   case 3:
@@ -1037,7 +959,7 @@ void Glyph_DoSpell(int param_1,int param_2)
     vel = (undefined *)0x100000;
     size1 = 0x280;
     size2 = 0x340;
-    sGpffff9b18 = 3;
+    fx_going = 3;
     pred_offset = 5;
     break;
   case 4:
@@ -1048,7 +970,7 @@ void Glyph_DoSpell(int param_1,int param_2)
     height3 = 0x200;
     vel = (undefined *)0x100000;
     size1 = 0x280;
-    sGpffff9b18 = 4;
+    fx_going = 4;
     size2 = 0x340;
     break;
   case 5:
@@ -1059,7 +981,7 @@ void Glyph_DoSpell(int param_1,int param_2)
     height2 = 0;
     height3 = 0x200;
     size1 = 0x280;
-    sGpffff9b18 = 5;
+    fx_going = 5;
     size2 = 0x340;
     break;
   case 6:
@@ -1070,17 +992,17 @@ void Glyph_DoSpell(int param_1,int param_2)
     height3 = 0x200;
     vel = (undefined *)0x100000;
     size1 = 0x280;
-    sGpffff9b18 = 6;
+    fx_going = 6;
     size2 = 0x340;
   }
-  if ((sGpffff9b18 != 0) &&
-     (p_Gpffff9b1c = FX_DoBlastRing((_Instance *)0x0,(_SVector *)(param_1 + 0x5c),&MStack80,-1,
-                                    radius,iGpffffee18,colorChangeRadius,size1,size2,(int)vel,-0x800
+  if ((fx_going != 0) &&
+     (fx_blastring = FX_DoBlastRing((_Instance *)0x0,(_SVector *)&instance->position,&MStack80,-1,
+                                    radius,blast_range,colorChangeRadius,size1,size2,(int)vel,-0x800
                                     ,height1,height2,height3,startColor,0,pred_offset,-99,0),
-     p_Gpffff9b1c == (_FXBlastringEffect *)0x0)) {
-    sGpffff9b18 = 0;
+     fx_blastring == (_FXBlastringEffect *)0x0)) {
+    fx_going = 0;
   }
-  iGpffffee18 = iGpffffee18 << 0xc;
+  blast_range = blast_range << 0xc;
   return;
 }
 
@@ -1089,28 +1011,28 @@ void Glyph_DoSpell(int param_1,int param_2)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ Glyph_EndFX()
- // line 984, offset 0x8007bf14
+ // line 928, offset 0x8007b74c
 	/* begin block 1 */
-		// Start line: 2346
+		// Start line: 2204
 	/* end block 1 */
-	// End Line: 2347
+	// End Line: 2205
 
 	/* begin block 2 */
-		// Start line: 2347
+		// Start line: 2205
 	/* end block 2 */
-	// End Line: 2348
+	// End Line: 2206
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void Glyph_EndFX(void)
 
 {
-  long lVar1;
+  _FXBlastringEffect *p_Var1;
   
-  lVar1 = debugVoiceIndex;
-  debug_cameraMode._0_2_ = 0;
-  debugVoiceIndex = 0;
-  *(undefined2 *)(lVar1 + 0xe) = 0;
+  p_Var1 = fx_blastring;
+  fx_going = 0;
+  fx_blastring = (_FXBlastringEffect *)0x0;
+  p_Var1->lifeTime = 0;
   return;
 }
 
@@ -1119,37 +1041,35 @@ void Glyph_EndFX(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ Glyph_DoFX(struct _Instance *instance /*$a0*/)
- // line 991, offset 0x8007bf28
+ // line 935, offset 0x8007b760
 	/* begin block 1 */
-		// Start line: 2358
+		// Start line: 2216
 	/* end block 1 */
-	// End Line: 2359
+	// End Line: 2217
 
 	/* begin block 2 */
-		// Start line: 2362
+		// Start line: 2220
 	/* end block 2 */
-	// End Line: 2363
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 2221
 
 void Glyph_DoFX(_Instance *instance)
 
 {
   int *piVar1;
-  long lVar2;
+  _FXBlastringEffect *p_Var2;
   
-  if (((theCamera.maxFocusVel.pad != 6) && ((theCamera.positionAccl._4_4_ & 0x100000) == 0)) &&
-     ((int)(short)debug_cameraMode != 0)) {
-    Glyph_Broadcast(instance,(int)(short)debug_cameraMode);
-    _fx_radius_old = *(int *)(debugVoiceIndex + 0x3c);
-    if (_blast_range < _fx_radius_old) {
+  if (((gameTrackerX.gameMode != 6) && ((gameTrackerX.streamFlags & 0x100000U) == 0)) &&
+     ((int)fx_going != 0)) {
+    Glyph_Broadcast(instance,(int)fx_going);
+    fx_radius_old = fx_blastring->radius;
+    if (blast_range < fx_radius_old) {
       Glyph_EndFX();
     }
-    lVar2 = debugVoiceIndex;
-    if ((short)debug_cameraMode == 5) {
-      piVar1 = (int *)(debugVoiceIndex + 100);
-      *(int *)(debugVoiceIndex + 0x5c) = *(int *)(debugVoiceIndex + 0x5c) + -0x3c;
-      *(int *)(lVar2 + 100) = *piVar1 + 0x3c;
+    p_Var2 = fx_blastring;
+    if (fx_going == 5) {
+      piVar1 = &fx_blastring->height3;
+      fx_blastring->height1 = fx_blastring->height1 + -0x3c;
+      p_Var2->height3 = *piVar1 + 0x3c;
     }
   }
   return;
@@ -1160,32 +1080,32 @@ void Glyph_DoFX(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _GlyphGenericProcess(struct _Instance *instance /*$s2*/, int data1 /*$s3*/, int data2 /*$s4*/)
- // line 1024, offset 0x8007bfd8
+ // line 968, offset 0x8007b810
 	/* begin block 1 */
-		// Start line: 1025
-		// Start offset: 0x8007BFD8
+		// Start line: 969
+		// Start offset: 0x8007B810
 		// Variables:
 	// 		struct __Event *Ptr; // $v0
 	// 		struct __GlyphData *data; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 1056
-			// Start offset: 0x8007C0B0
+			// Start line: 998
+			// Start offset: 0x8007B8E8
 			// Variables:
 		// 		struct _GlyphTuneData *glyphtunedata; // $s0
 		/* end block 1.1 */
-		// End offset: 0x8007C0E8
-		// End Line: 1062
+		// End offset: 0x8007B920
+		// End Line: 1004
 	/* end block 1 */
-	// End offset: 0x8007C0E8
-	// End Line: 1064
+	// End offset: 0x8007B920
+	// End Line: 1006
 
 	/* begin block 2 */
-		// Start line: 2432
+		// Start line: 2290
 	/* end block 2 */
-	// End Line: 2433
+	// End Line: 2291
 
-void _GlyphGenericProcess(_Instance *param_1,int param_2,int param_3)
+void _GlyphGenericProcess(_Instance *instance,int data1,int data2)
 
 {
   __Event *p_Var1;
@@ -1194,39 +1114,38 @@ void _GlyphGenericProcess(_Instance *param_1,int param_2,int param_3)
   _GlyphTuneData *glyphtunedata;
   void *pvVar3;
   
-  pvVar3 = param_1->extraData;
-  ShrinkGlyphMenu(param_1);
+  pvVar3 = instance->extraData;
+  ShrinkGlyphMenu(instance);
   p_Var1 = PeekMessageQueue((__MessageQueue *)((int)pvVar3 + 4));
   if (p_Var1 == (__Event *)0x0) {
-    if (sGpffffee0e == 0) {
-      Glyph_DoFX(param_1);
+    if (glyph_trigger == 0) {
+      Glyph_DoFX(instance);
       return;
     }
-    glyphtunedata = (_GlyphTuneData *)param_1->object->data;
-    Glyph_DoSpell((int)param_1,(int)*(short *)((int)pvVar3 + 0x8c));
-    sGpffffee0e = 0;
+    glyphtunedata = (_GlyphTuneData *)instance->object->data;
+    Glyph_DoSpell(instance,(int)*(short *)((int)pvVar3 + 0x8c));
+    glyph_trigger = 0;
     Data = _GlyphCost(glyphtunedata,(int)*(short *)((int)pvVar3 + 0x8c));
                     /* WARNING: Subroutine does not return */
-    INSTANCE_Post(p_Gpffffb524,0x40008,Data);
+    INSTANCE_Post(gameTrackerX.playerInstance,0x40008,Data);
   }
   puVar2 = (undefined *)p_Var1->ID;
   if (puVar2 == &DAT_00100001) {
-    Glyph_StartSpell(param_1,(int)*(short *)((int)pvVar3 + 0x8c));
+    Glyph_StartSpell(instance,(int)*(short *)((int)pvVar3 + 0x8c));
   }
   else {
     if ((int)puVar2 < 0x100002) {
       if (puVar2 == (undefined *)0x80000000) {
-        _GlyphSwitchProcess(param_1,_GlyphOffProcess);
-        *(undefined2 *)((int)pvVar3 + 0x8e) = 0;
-        goto LAB_8007c090;
+        _GlyphSwitchProcess(instance,_GlyphOffProcess);
+        goto LAB_8007b8c8;
       }
     }
     else {
-      if (puVar2 == &DAT_00100004) goto LAB_8007c090;
+      if (puVar2 == &DAT_00100004) goto LAB_8007b8c8;
     }
-    _GlyphDefaultProcess(param_1,param_2,param_3);
+    _GlyphDefaultProcess(instance,data1,data2);
   }
-LAB_8007c090:
+LAB_8007b8c8:
                     /* WARNING: Subroutine does not return */
   DeMessageQueue((__MessageQueue *)((int)pvVar3 + 4));
 }
@@ -1236,25 +1155,24 @@ LAB_8007c090:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GlyphTrigger()
- // line 1067, offset 0x8007c110
+ // line 1009, offset 0x8007b948
 	/* begin block 1 */
-		// Start line: 2520
+		// Start line: 2374
 	/* end block 1 */
-	// End Line: 2521
+	// End Line: 2375
 
 	/* begin block 2 */
-		// Start line: 2521
+		// Start line: 2375
 	/* end block 2 */
-	// End Line: 2522
+	// End Line: 2376
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void GlyphTrigger(void)
 
 {
-  if ((short)debug_cameraMode == 0) {
-    _glyph_trigger = 1;
+  if (fx_going == 0) {
+    glyph_trigger = 1;
   }
   return;
 }
@@ -1264,25 +1182,24 @@ void GlyphTrigger(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MANNA_Pickup()
- // line 1084, offset 0x8007c12c
+ // line 1026, offset 0x8007b964
 	/* begin block 1 */
-		// Start line: 2554
+		// Start line: 2408
 	/* end block 1 */
-	// End Line: 2555
+	// End Line: 2409
 
 	/* begin block 2 */
-		// Start line: 2555
+		// Start line: 2409
 	/* end block 2 */
-	// End Line: 2556
+	// End Line: 2410
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void MANNA_Pickup(void)
 
 {
-  _MANNA_Position = 0x18;
-  _MANNA_Pickup_Time = 0x1e000;
+  MANNA_Position = 0x24;
+  MANNA_Pickup_Time = 0x1e000;
   return;
 }
 
@@ -1291,17 +1208,17 @@ void MANNA_Pickup(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HEALTHU_Pickup(struct _Instance *instance /*$s0*/)
- // line 1090, offset 0x8007c148
+ // line 1032, offset 0x8007b980
 	/* begin block 1 */
-		// Start line: 2566
+		// Start line: 2420
 	/* end block 1 */
-	// End Line: 2567
+	// End Line: 2421
 
 void HEALTHU_Pickup(_Instance *instance)
 
 {
                     /* WARNING: Subroutine does not return */
-  ApplyMatrixSV(DAT_800cff00,&instance->position,&HUD_Cap_Pos);
+  ApplyMatrixSV(theCamera.core.wcTransform2,&instance->position,&HUD_Cap_Pos);
 }
 
 
@@ -1309,20 +1226,20 @@ void HEALTHU_Pickup(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HUD_Damp(short *val /*$v1*/, short target /*$a1*/, short *vel /*$a3*/, short max /*$a3*/)
- // line 1106, offset 0x8007c1d4
+ // line 1048, offset 0x8007ba10
 	/* begin block 1 */
-		// Start line: 1107
-		// Start offset: 0x8007C1D4
+		// Start line: 1049
+		// Start offset: 0x8007BA10
 		// Variables:
 	// 		short accl; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x8007C1D4
-	// End Line: 1107
+	// End offset: 0x8007BA10
+	// End Line: 1049
 
 	/* begin block 2 */
-		// Start line: 2601
+		// Start line: 2455
 	/* end block 2 */
-	// End Line: 2602
+	// End Line: 2456
 
 void HUD_Damp(short *val,short target,short *vel,short max)
 
@@ -1338,34 +1255,32 @@ void HUD_Damp(short *val,short target,short *vel,short max)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HUD_Init()
- // line 1113, offset 0x8007c21c
+ // line 1055, offset 0x8007ba58
 	/* begin block 1 */
-		// Start line: 2621
+		// Start line: 2475
 	/* end block 1 */
-	// End Line: 2622
+	// End Line: 2476
 
 	/* begin block 2 */
-		// Start line: 2627
+		// Start line: 2481
 	/* end block 2 */
-	// End Line: 2628
+	// End Line: 2482
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void HUD_Init(void)
 
 {
-  _HUD_Count = 0;
-  _HUD_Count_Overall = 0;
-  _HUD_Rotation = 0;
-  _HUD_Rot_vel = 0;
-  _HUD_Position = 0xfc18;
-  _HUD_Pos_vel = 0;
-  _HUD_State = 0;
-  _HUD_Wait = 0;
-  _warpDraw = 0;
-  _glowdeg = 0;
-  _hud_warp_arrow_flash = 0;
+  HUD_Count = 0;
+  HUD_Rotation = 0;
+  HUD_Rot_vel = 0;
+  HUD_Position = -1000;
+  HUD_Pos_vel = 0;
+  HUD_State = 0;
+  HUD_Wait = 0;
+  warpDraw = 0;
+  glowdeg = 0;
+  hud_warp_arrow_flash = 0;
   return;
 }
 
@@ -1374,24 +1289,21 @@ void HUD_Init(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HUD_Setup_Chit_Count(int chits /*$a0*/)
- // line 1128, offset 0x8007c254
+ // line 1069, offset 0x8007ba8c
 	/* begin block 1 */
-		// Start line: 2656
+		// Start line: 2508
 	/* end block 1 */
-	// End Line: 2657
+	// End Line: 2509
 
 	/* begin block 2 */
-		// Start line: 2658
+		// Start line: 2509
 	/* end block 2 */
-	// End Line: 2659
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 2510
 
 void HUD_Setup_Chit_Count(int chits)
 
 {
-  _HUD_Count = (short)chits + (short)(chits / 5) * -5;
-  _HUD_Count_Overall = (short)chits;
+  HUD_Count = chits % 5;
   return;
 }
 
@@ -1400,22 +1312,21 @@ void HUD_Setup_Chit_Count(int chits)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HUD_Update()
- // line 1134, offset 0x8007c28c
+ // line 1074, offset 0x8007bac0
 	/* begin block 1 */
-		// Start line: 1135
-		// Start offset: 0x8007C28C
+		// Start line: 1075
+		// Start offset: 0x8007BAC0
 		// Variables:
 	// 		short accl; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x8007C4B0
-	// End Line: 1220
+	// End offset: 0x8007BCF8
+	// End Line: 1159
 
 	/* begin block 2 */
-		// Start line: 2669
+		// Start line: 2518
 	/* end block 2 */
-	// End Line: 2670
+	// End Line: 2519
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void HUD_Update(void)
@@ -1425,58 +1336,59 @@ void HUD_Update(void)
   short sVar2;
   short asStack16 [4];
   
-  if ((theCamera.maxFocusVel.pad == 6) && (_HUD_State == 0)) {
-    _HUD_State = 10;
+  if ((gameTrackerX.gameMode == 6) && (HUD_State == 0)) {
+    HUD_State = 10;
   }
   else {
-    if (theCamera.maxFocusVel.pad == 6) {
-      if ((1 < (short)_HUD_State) && ((short)_HUD_State < 7)) {
+    if (gameTrackerX.gameMode == 6) {
+      if ((1 < HUD_State) && (HUD_State < 7)) {
+        HUD_Captured = 0;
         return;
       }
     }
     else {
-      if ((uint)_HUD_State - 10 < 2) {
-        _HUD_State = 0xc;
+      if ((uint)(ushort)HUD_State - 10 < 2) {
+        HUD_State = 0xc;
       }
     }
   }
-  sVar2 = _HUD_Wait + -1;
-  if (_HUD_Wait < 1) {
-    sVar2 = _HUD_Wait;
-    switch(_HUD_State) {
+  sVar2 = HUD_Wait + -1;
+  if (HUD_Wait < 1) {
+    sVar2 = HUD_Wait;
+    switch(HUD_State) {
     default:
-      _HUD_Position = -1000;
-      _HUD_Rotation = 0;
-      _HUD_Rot_vel = 0;
-      _HUD_Pos_vel = 0;
-      if (_HUD_Count == 5) {
-        _HUD_Count = 0;
+      HUD_Position = -1000;
+      HUD_Rotation = 0;
+      HUD_Rot_vel = 0;
+      HUD_Pos_vel = 0;
+      if (HUD_Count == 5) {
+        HUD_Count = 0;
       }
       break;
     case 1:
     case 10:
-      HUD_Damp((short *)&HUD_Position,0,(short *)&HUD_Pos_vel,0x60);
-      if (-1 < _HUD_Position) {
-        _HUD_Position = 0;
-        bVar1 = _HUD_State != 10;
-        _HUD_State = 0xb;
-        if ((bVar1) && (_HUD_State = 2, _HUD_Count < 1)) {
-          _HUD_State = 3;
+      HUD_Damp(&HUD_Position,0,&HUD_Pos_vel,0x60);
+      if (-1 < HUD_Position) {
+        HUD_Position = 0;
+        bVar1 = HUD_State != 10;
+        HUD_State = 0xb;
+        if ((bVar1) && (HUD_State = 2, HUD_Count < 1)) {
+          HUD_State = 3;
         }
       }
-      sVar2 = _HUD_Wait;
-      if (_HUD_State == 10) {
-        _MANNA_Pickup_Time = 0;
-        CriticalDampValue(5,(short *)&MANNA_Position,0x18,(short *)&MANNA_Pos_vel,asStack16,0xc);
-        sVar2 = _HUD_Wait;
+      sVar2 = HUD_Wait;
+      if (HUD_State == 10) {
+        MANNA_Pickup_Time = 0;
+        CriticalDampValue(5,&MANNA_Position,0x24,&MANNA_Pos_vel,asStack16,0xc);
+        sVar2 = HUD_Wait;
       }
       break;
     case 2:
-      HUD_Damp((short *)&HUD_Rotation,0x333,(short *)&HUD_Rot_vel,0x50);
-      sVar2 = _HUD_Wait;
-      if (0x332 < _HUD_Rotation) {
-        _HUD_Rotation = 0x333;
-        _HUD_State = 3;
+      HUD_Damp(&HUD_Rotation,0x333,&HUD_Rot_vel,0x50);
+      sVar2 = HUD_Wait;
+      if (0x332 < HUD_Rotation) {
+        HUD_Rotation = 0x333;
+        HUD_State = 3;
       }
       break;
     case 3:
@@ -1484,24 +1396,25 @@ void HUD_Update(void)
     case 0xb:
       break;
     case 5:
-      _HUD_State = 6;
-      _HUD_Wait = 10;
-      _HUD_Rotation = 0;
-      debugTimeMult._0_2_ = 0;
-      _HUD_Count = _HUD_Count + 1;
-      _HUD_Count_Overall = _HUD_Count_Overall + 1;
-      sVar2 = _HUD_Wait;
+      HUD_State = 6;
+      HUD_Rotation = 0;
+      HUD_Wait = 10;
+                    /* WARNING: Read-only address (ram,0x800d081c) is written */
+      HUD_Captured = 0;
+      HUD_Count = HUD_Count + 1;
+      sVar2 = HUD_Wait;
       break;
     case 6:
     case 0xc:
-      HUD_Damp((short *)&HUD_Position,-1000,(short *)&HUD_Pos_vel,0x60);
-      sVar2 = _HUD_Wait;
-      if (_HUD_Position < -999) {
-        _HUD_State = 0;
+      HUD_Damp(&HUD_Position,-1000,&HUD_Pos_vel,0x60);
+      sVar2 = HUD_Wait;
+      if (HUD_Position < -999) {
+        HUD_State = 0;
       }
     }
   }
-  _HUD_Wait = sVar2;
+                    /* WARNING: Read-only address (ram,0x800d081c) is written */
+  HUD_Wait = sVar2;
   return;
 }
 
@@ -1510,10 +1423,10 @@ void HUD_Update(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HUD_Draw()
- // line 1231, offset 0x8007c4c0
+ // line 1170, offset 0x8007bd08
 	/* begin block 1 */
-		// Start line: 1232
-		// Start offset: 0x8007C4C0
+		// Start line: 1171
+		// Start offset: 0x8007BD08
 		// Variables:
 	// 		struct _SVector Rotation; // stack offset -80
 	// 		struct _SVector Pos; // stack offset -72
@@ -1521,130 +1434,139 @@ void HUD_Update(void)
 	// 		int n; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 1238
-			// Start offset: 0x8007C4F8
+			// Start line: 1177
+			// Start offset: 0x8007BD40
 			// Variables:
 		// 		struct DVECTOR center; // stack offset -56
 		// 		int glow; // $a1
 		// 		int left; // $t0
 		// 		int right; // $s0
 		/* end block 1.1 */
-		// End offset: 0x8007C66C
-		// End Line: 1276
+		// End offset: 0x8007BEB4
+		// End Line: 1215
 
 		/* begin block 1.2 */
-			// Start line: 1284
-			// Start offset: 0x8007C690
+			// Start line: 1223
+			// Start offset: 0x8007BED8
 			// Variables:
 		// 		int oldx; // $s2
 		// 		int oldy; // $s3
 		// 		int MANNA_Count; // $s1
 		// 		int MANNA_Max; // $s0
 		/* end block 1.2 */
-		// End offset: 0x8007C750
-		// End Line: 1307
+		// End offset: 0x8007BF98
+		// End Line: 1246
 
 		/* begin block 1.3 */
-			// Start line: 1313
-			// Start offset: 0x8007C784
+			// Start line: 1252
+			// Start offset: 0x8007BFCC
 			// Variables:
 		// 		struct _SVector targetPos; // stack offset -48
 		// 		struct _SVector accl; // stack offset -40
 		// 		struct _SVector HUD_Cap_Rot; // stack offset -32
 		/* end block 1.3 */
-		// End offset: 0x8007C85C
-		// End Line: 1334
+		// End offset: 0x8007C0B0
+		// End Line: 1273
 
 		/* begin block 1.4 */
-			// Start line: 1345
-			// Start offset: 0x8007C8C0
+			// Start line: 1281
+			// Start offset: 0x8007C0F8
 		/* end block 1.4 */
-		// End offset: 0x8007C904
-		// End Line: 1355
+		// End offset: 0x8007C13C
+		// End Line: 1291
 	/* end block 1 */
-	// End offset: 0x8007C958
-	// End Line: 1364
+	// End offset: 0x8007C190
+	// End Line: 1300
 
 	/* begin block 2 */
-		// Start line: 2880
+		// Start line: 2723
 	/* end block 2 */
-	// End Line: 2881
+	// End Line: 2724
 
-/* WARNING: Removing unreachable block (ram,0x8007c8c4) */
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* WARNING: Removing unreachable block (ram,0x8007bfbc) */
+/* WARNING: Removing unreachable block (ram,0x8007bfcc) */
+/* WARNING: Removing unreachable block (ram,0x8007bffc) */
+/* WARNING: Removing unreachable block (ram,0x8007bff4) */
+/* WARNING: Removing unreachable block (ram,0x8007c000) */
+/* WARNING: Removing unreachable block (ram,0x8007c040) */
+/* WARNING: Removing unreachable block (ram,0x8007c050) */
+/* WARNING: Removing unreachable block (ram,0x8007c060) */
+/* WARNING: Removing unreachable block (ram,0x8007c078) */
+/* WARNING: Removing unreachable block (ram,0x8007c080) */
+/* WARNING: Removing unreachable block (ram,0x8007c070) */
+/* WARNING: Removing unreachable block (ram,0x8007c084) */
+/* WARNING: Removing unreachable block (ram,0x8007c08c) */
+/* WARNING: Removing unreachable block (ram,0x8007c090) */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void HUD_Draw(void)
 
 {
+  bool bVar1;
+  uint uVar2;
+  undefined **ppuVar3;
+  _SVector local_50;
+  _SVector local_48;
   _SVector local_40;
-  DVECTOR local_38 [2];
-  _Position local_30;
-  _SVector _Stack40;
-  _SVector local_20;
+  DVECTOR local_38 [8];
   
-  if ((ULONG_800d032c & 0x80000000) == 0) {
-    if (_warpDraw == 0) {
+  if ((theCamera.instance_mode & 0x80000000) == 0) {
+    if (warpDraw == 0) {
       HUD_Update();
       local_40.x = 0;
       local_40.y = 0;
       local_40.z = 0x87;
-      if (-0x40 < _MANNA_Position) {
+      if (-0x40 < MANNA_Position) {
                     /* WARNING: Subroutine does not return */
-        INSTANCE_Query((_Instance *)theCamera.core.vvNormalWorVecMat[1].t[0],0x20);
+        INSTANCE_Query(gameTrackerX.playerInstance,0x20);
       }
-      if (-1000 < _HUD_Position) {
-        if (((short)debugTimeMult != 0) && (theCamera.maxFocusVel.pad != 6)) {
-          local_20.x = 0x400;
-          local_30.x = -0x600;
-          local_20.y = 0;
-          local_20.z = 0;
-          local_30.z = 0xa00;
-          if (_HUD_State < 4) {
-            local_30.y = 0x120;
-          }
-          else {
-            local_30.y = 0x260;
-          }
-          CriticalDampPosition
-                    (1,(_Position *)&HUD_Cap_Pos,&local_30,(_SVector *)&HUD_Cap_Vel,&_Stack40,0x80);
-          if (((_HUD_Cap_Vel == 0) && (_CHAR____800d48ee == 0)) && (_CHAR____800d48f0 == 0)) {
-            if (_HUD_State == 3) {
-              _HUD_State = 4;
-            }
-            else {
-              if (_HUD_State == 4) {
-                _HUD_State = 5;
-              }
-            }
-          }
-          FX_DrawModel((Object *)DebugMenuLine_800c8824.lower,0,&local_20,(_SVector *)&HUD_Cap_Pos,
-                       &local_40,0);
-        }
+      if (-1000 < HUD_Position) {
+        local_40.y = 0;
+        local_40.x = 0;
+                    /* WARNING: Read-only address (ram,0x800d4e1c) is written */
+                    /* WARNING: Read-only address (ram,0x800d4e1e) is written */
+                    /* WARNING: Read-only address (ram,0x800d4e20) is written */
+        uVar2 = 0;
+        ppuVar3 = &PTR_LAB_80011d6c;
+        local_50.x = 0x400;
+        local_48.y = 0x260;
+        local_50.y = 0;
+        local_48.z = 0xa00;
         local_40.z = 0;
-        if ((_HUD_Count != 0) || (_HUD_Count_Overall < 0xf)) {
-                    /* WARNING: Could not recover jumptable at 0x8007c8d4. Too many branches */
+        local_48.x = HUD_Position + -0x600;
+        local_50.z = HUD_Rotation;
+        bVar1 = true;
+        do {
+          if (bVar1) {
+                    /* WARNING: Could not recover jumptable at 0x8007c10c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-          (*(code *)PTR_ARRAY_80011e70[0])();
-          return;
-        }
+            (*(code *)*ppuVar3)();
+            return;
+          }
+          ppuVar3 = (code **)ppuVar3 + 1;
+          local_50.z = local_50.z - HUD_Rotation & 0xfff;
+          FX_DrawModel((Object *)(void *)0x0,0,&local_50,&local_48,&local_40,
+                       (uint)((int)uVar2 < HUD_Count) ^ 1);
+          uVar2 = uVar2 + 1;
+          bVar1 = uVar2 < 5;
+        } while ((int)uVar2 < 5);
       }
       return;
     }
-    _warpDraw = _warpDraw - ((uint)theCamera.tiltList[0][0] >> 4);
-    if (_warpDraw < 0) {
-      _warpDraw = 0;
+    warpDraw = warpDraw - (gameTrackerX.timeMult >> 4);
+    if (warpDraw < 0) {
+      warpDraw = 0;
     }
   }
   else {
-    _warpDraw = _warpDraw + ((uint)theCamera.tiltList[0][0] >> 4);
-    if (0x1000 < _warpDraw) {
-      _warpDraw = 0x1000;
+    warpDraw = warpDraw + (gameTrackerX.timeMult >> 4);
+    if (0x1000 < warpDraw) {
+      warpDraw = 0x1000;
     }
   }
   HUD_GetPlayerScreenPt(local_38);
                     /* WARNING: Subroutine does not return */
-  rcos(_glowdeg);
+  rcos(glowdeg);
 }
 
 

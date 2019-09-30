@@ -5,11 +5,11 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HUMAN_WaitForWeapon(struct _Instance *instance /*$s0*/, struct GameTracker *gameTracker /*$a1*/)
- // line 92, offset 0x8007cb40
+ // line 87, offset 0x8007c378
 	/* begin block 1 */
-		// Start line: 184
+		// Start line: 174
 	/* end block 1 */
-	// End Line: 185
+	// End Line: 175
 
 void HUMAN_WaitForWeapon(_Instance *instance,GameTracker *gameTracker)
 
@@ -19,7 +19,7 @@ void HUMAN_WaitForWeapon(_Instance *instance,GameTracker *gameTracker)
   pTVar1 = MONTABLE_GetInitFunc(instance);
   (*pTVar1)(instance);
   if (instance->LinkChild != (_Instance *)0x0) {
-    instance->processFunc = MISSILE_Find;
+    instance->processFunc = MonsterProcess;
     instance->flags = instance->flags & 0xfffff7ff;
     instance->flags2 = instance->flags2 & 0xdfffff7f;
   }
@@ -31,29 +31,29 @@ void HUMAN_WaitForWeapon(_Instance *instance,GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // struct _Instance * /*$ra*/ HUMAN_CreateWeapon(struct _Instance *instance /*$s1*/, int weaponid /*$a1*/, int segment /*$s2*/)
- // line 110, offset 0x8007cbb0
+ // line 105, offset 0x8007c3e8
 	/* begin block 1 */
-		// Start line: 111
-		// Start offset: 0x8007CBB0
+		// Start line: 106
+		// Start offset: 0x8007C3E8
 		// Variables:
 	// 		struct Object *weapon; // $a1
 
 		/* begin block 1.1 */
-			// Start line: 116
-			// Start offset: 0x8007CBE8
+			// Start line: 111
+			// Start offset: 0x8007C420
 			// Variables:
 		// 		struct _Instance *iweapon; // $s0
 		/* end block 1.1 */
-		// End offset: 0x8007CC3C
-		// End Line: 141
+		// End offset: 0x8007C474
+		// End Line: 136
 	/* end block 1 */
-	// End offset: 0x8007CC6C
-	// End Line: 150
+	// End offset: 0x8007C4A4
+	// End Line: 145
 
 	/* begin block 2 */
-		// Start line: 228
+		// Start line: 218
 	/* end block 2 */
-	// End Line: 229
+	// End Line: 219
 
 _Instance * HUMAN_CreateWeapon(_Instance *instance,int weaponid,int segment)
 
@@ -61,10 +61,10 @@ _Instance * HUMAN_CreateWeapon(_Instance *instance,int weaponid,int segment)
   _Instance *Inst;
   int Data;
   
-  if (((Object *)(&objectAccess.lower)[weaponid * 2] != (Object *)0x0) &&
-     (Inst = INSTANCE_BirthObject(instance,(Object *)(&objectAccess.lower)[weaponid * 2],0),
+  if (((Object *)(&objectAccess)[weaponid].object != (Object *)0x0) &&
+     (Inst = INSTANCE_BirthObject(instance,(Object *)(&objectAccess)[weaponid].object,0),
      Inst != (_Instance *)0x0)) {
-    Data = SetPhysicsSwimData(0,(_SVector *)0x0,0,(int)instance,segment);
+    Data = SetObjectData(0,0,0,instance,segment);
                     /* WARNING: Subroutine does not return */
     INSTANCE_Post(Inst,0x800002,Data);
   }
@@ -78,53 +78,70 @@ _Instance * HUMAN_CreateWeapon(_Instance *instance,int weaponid,int segment)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ HUMAN_Init(struct _Instance *instance /*$s1*/)
- // line 155, offset 0x8007cc84
+// void /*$ra*/ HUMAN_Init(struct _Instance *instance /*$s2*/)
+ // line 150, offset 0x8007c4bc
 	/* begin block 1 */
-		// Start line: 156
-		// Start offset: 0x8007CC84
+		// Start line: 151
+		// Start offset: 0x8007C4BC
 		// Variables:
-	// 		struct _MonsterVars *mv; // $s0
-	// 		struct _MonsterAttributes *ma; // $v0
+	// 		struct _MonsterVars *mv; // $s1
+	// 		struct _MonsterAttributes *ma; // $a3
 
 		/* begin block 1.1 */
-			// Start line: 162
-			// Start offset: 0x8007CCB4
+			// Start line: 157
+			// Start offset: 0x8007C4F0
 			// Variables:
-		// 		int opinion; // $v0
+		// 		int opinion; // $a2
 		// 		struct _MonsterAllegiances *allegiances; // $a1
 		/* end block 1.1 */
-		// End offset: 0x8007CD20
-		// End Line: 180
+		// End offset: 0x8007C5EC
+		// End Line: 191
 	/* end block 1 */
-	// End offset: 0x8007CD4C
-	// End Line: 188
+	// End offset: 0x8007C5EC
+	// End Line: 193
 
 	/* begin block 2 */
-		// Start line: 330
+		// Start line: 320
 	/* end block 2 */
-	// End Line: 331
+	// End Line: 321
 
 void HUMAN_Init(_Instance *instance)
 
 {
-  uint *puVar1;
+  short sVar1;
+  uint *puVar2;
+  void *pvVar3;
+  void *pvVar4;
   
-  if ((*(uint *)((int)instance->data + 0x10) & 0x2000) == 0) {
-    puVar1 = *(uint **)(*(int *)((int)instance->extraData + 0x154) + 0xc);
-    if (GlobalSave->humanOpinionOfRaziel < 1) {
-      puVar1[3] = puVar1[3] & 0xfffffffe;
-      *puVar1 = *puVar1 | 1;
-      puVar1[1] = puVar1[1] & 0xfffffffe;
+  pvVar3 = instance->data;
+  pvVar4 = instance->extraData;
+  if ((*(uint *)((int)pvVar3 + 0x10) & 0x2000) == 0) {
+    sVar1 = GlobalSave->humanOpinionOfRaziel;
+    puVar2 = *(uint **)(*(int *)((int)pvVar4 + 0x164) + 0xc);
+    if (sVar1 < 1) {
+      puVar2[3] = puVar2[3] & 0xfffffffe;
+      puVar2[1] = puVar2[1] & 0xfffffffe;
+      if (sVar1 < 0) {
+        *puVar2 = *puVar2 | 1;
+      }
     }
     else {
-      *puVar1 = *puVar1 & 0xfffffffe;
-      puVar1[3] = puVar1[3] | 1;
-      puVar1[1] = puVar1[1] | 1;
+      *puVar2 = *puVar2 & 0xfffffffe;
+      puVar2[3] = puVar2[3] | 1;
+      puVar2[1] = puVar2[1] | 1;
+    }
+    if ((*(uint *)((int)pvVar3 + 0x10) & 0x8000) != 0) {
+      if (((*(char *)((int)pvVar4 + 0x15a) == '\x01') && (instance->object->oflags == DAT_800d0848))
+         && (*(int *)&instance->object->id == DAT_800d084c)) {
+        G2Anim_DisableSegment(&instance->anim,4);
+        G2Anim_DisableSegment(&instance->anim,9);
+      }
+      G2Anim_DisableSegment(&instance->anim,0x1d);
+      G2Anim_DisableSegment(&instance->anim,0x17);
     }
   }
                     /* WARNING: Subroutine does not return */
-  strcmpi(instance->object->name,s_vlgrb____800cf600);
+  MON_DefaultInit(instance);
 }
 
 
@@ -132,11 +149,11 @@ void HUMAN_Init(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HUMAN_CleanUp(struct _Instance *instance /*$a0*/)
- // line 199, offset 0x8007cd7c
+ // line 204, offset 0x8007c620
 	/* begin block 1 */
-		// Start line: 431
+		// Start line: 438
 	/* end block 1 */
-	// End Line: 432
+	// End Line: 439
 
 void HUMAN_CleanUp(_Instance *instance)
 
@@ -150,22 +167,22 @@ void HUMAN_CleanUp(_Instance *instance)
 // decompiled code
 // original method signature: 
 // unsigned long /*$ra*/ HUMAN_Query(struct _Instance *instance /*$a0*/, unsigned long query /*$a1*/)
- // line 207, offset 0x8007cd9c
+ // line 212, offset 0x8007c640
 	/* begin block 1 */
-		// Start line: 208
-		// Start offset: 0x8007CD9C
+		// Start line: 213
+		// Start offset: 0x8007C640
 		// Variables:
 	// 		struct _MonsterVars *mv; // $a3
 	// 		struct _MonsterAttributes *ma; // $v1
 	// 		unsigned long ret; // $a1
 	/* end block 1 */
-	// End offset: 0x8007CE7C
-	// End Line: 261
+	// End offset: 0x8007C720
+	// End Line: 266
 
 	/* begin block 2 */
-		// Start line: 447
+		// Start line: 454
 	/* end block 2 */
-	// End Line: 448
+	// End Line: 455
 
 ulong HUMAN_Query(_Instance *instance,ulong query)
 
@@ -182,7 +199,7 @@ ulong HUMAN_Query(_Instance *instance,ulong query)
       uVar1 = 0x40000000;
       if (((((uVar2 & 0x200) == 0) && (uVar1 = 0x12000000, instance->currentMainState != 0x1e)) &&
           (uVar1 = (uint)((uVar2 & 0x100) != 0) << 0x1d, (uVar2 & 0x200000) == 0)) &&
-         ((*(short *)(puVar3 + 0x4c) < 0x1001 || ((puVar3[1] & 3) != 0)))) {
+         ((*(short *)(puVar3 + 0x50) < 0x1001 || ((puVar3[1] & 3) != 0)))) {
         uVar1 = uVar1 | 0x8000000;
       }
     }
@@ -190,7 +207,7 @@ ulong HUMAN_Query(_Instance *instance,ulong query)
       if (query == 0x25) {
         uVar1 = 0;
         if ((*(uint *)((int)instance->data + 0x10) & 0x8000) == 0) {
-          uVar1 = **(uint **)(puVar3[0x55] + 0xc) & 1;
+          uVar1 = **(uint **)(puVar3[0x59] + 0xc) & 1;
         }
       }
       else {
@@ -206,20 +223,20 @@ ulong HUMAN_Query(_Instance *instance,ulong query)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HUMAN_DeadEntry(struct _Instance *instance /*$s1*/)
- // line 266, offset 0x8007ce8c
+ // line 271, offset 0x8007c730
 	/* begin block 1 */
-		// Start line: 267
-		// Start offset: 0x8007CE8C
+		// Start line: 272
+		// Start offset: 0x8007C730
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	/* end block 1 */
-	// End offset: 0x8007CED4
-	// End Line: 274
+	// End offset: 0x8007C778
+	// End Line: 279
 
 	/* begin block 2 */
-		// Start line: 566
+		// Start line: 573
 	/* end block 2 */
-	// End Line: 567
+	// End Line: 574
 
 void HUMAN_DeadEntry(_Instance *instance)
 
@@ -228,13 +245,13 @@ void HUMAN_DeadEntry(_Instance *instance)
   void *pvVar2;
   
   pvVar2 = instance->extraData;
-  iVar1 = (int)*(short *)((int)pvVar2 + 0x134);
+  iVar1 = (int)*(short *)((int)pvVar2 + 0x144);
   if (iVar1 < 0) {
     iVar1 = iVar1 + 3;
   }
-  *(undefined2 *)((int)pvVar2 + 0x134) = (short)(iVar1 >> 2);
+  *(undefined2 *)((int)pvVar2 + 0x144) = (short)(iVar1 >> 2);
   if (0x1000 < iVar1 >> 2) {
-    *(undefined2 *)((int)pvVar2 + 0x134) = 0x1000;
+    *(undefined2 *)((int)pvVar2 + 0x144) = 0x1000;
   }
   MON_DeadEntry(instance);
                     /* WARNING: Subroutine does not return */
@@ -246,20 +263,20 @@ void HUMAN_DeadEntry(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HUMAN_Dead(struct _Instance *instance /*$s1*/)
- // line 287, offset 0x8007cf04
+ // line 292, offset 0x8007c7a8
 	/* begin block 1 */
-		// Start line: 288
-		// Start offset: 0x8007CF04
+		// Start line: 293
+		// Start offset: 0x8007C7A8
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	/* end block 1 */
-	// End offset: 0x8007CFD8
-	// End Line: 316
+	// End offset: 0x8007C87C
+	// End Line: 321
 
 	/* begin block 2 */
-		// Start line: 608
+		// Start line: 615
 	/* end block 2 */
-	// End Line: 609
+	// End Line: 616
 
 void HUMAN_Dead(_Instance *instance)
 
@@ -273,20 +290,20 @@ void HUMAN_Dead(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HUMAN_StunnedEntry(struct _Instance *instance /*$s0*/)
- // line 321, offset 0x8007cfec
+ // line 326, offset 0x8007c890
 	/* begin block 1 */
-		// Start line: 322
-		// Start offset: 0x8007CFEC
+		// Start line: 327
+		// Start offset: 0x8007C890
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s1
 	/* end block 1 */
-	// End offset: 0x8007D050
-	// End Line: 333
+	// End offset: 0x8007C8F4
+	// End Line: 338
 
 	/* begin block 2 */
-		// Start line: 676
+		// Start line: 683
 	/* end block 2 */
-	// End Line: 677
+	// End Line: 684
 
 void HUMAN_StunnedEntry(_Instance *instance)
 
@@ -304,20 +321,20 @@ void HUMAN_StunnedEntry(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HUMAN_Stunned(struct _Instance *instance /*$s1*/)
- // line 335, offset 0x8007d064
+ // line 340, offset 0x8007c908
 	/* begin block 1 */
-		// Start line: 336
-		// Start offset: 0x8007D064
+		// Start line: 341
+		// Start offset: 0x8007C908
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	/* end block 1 */
-	// End offset: 0x8007D0F8
-	// End Line: 354
+	// End offset: 0x8007C99C
+	// End Line: 359
 
 	/* begin block 2 */
-		// Start line: 704
+		// Start line: 711
 	/* end block 2 */
-	// End Line: 705
+	// End Line: 712
 
 void HUMAN_Stunned(_Instance *instance)
 
@@ -346,20 +363,20 @@ void HUMAN_Stunned(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HUMAN_EmbraceEntry(struct _Instance *instance /*$s0*/)
- // line 359, offset 0x8007d10c
+ // line 364, offset 0x8007c9b0
 	/* begin block 1 */
-		// Start line: 360
-		// Start offset: 0x8007D10C
+		// Start line: 365
+		// Start offset: 0x8007C9B0
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s1
 	/* end block 1 */
-	// End offset: 0x8007D14C
-	// End Line: 367
+	// End offset: 0x8007C9F0
+	// End Line: 372
 
 	/* begin block 2 */
-		// Start line: 752
+		// Start line: 759
 	/* end block 2 */
-	// End Line: 753
+	// End Line: 760
 
 void HUMAN_EmbraceEntry(_Instance *instance)
 
@@ -380,30 +397,29 @@ void HUMAN_EmbraceEntry(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HUMAN_Embrace(struct _Instance *instance /*$s2*/)
- // line 370, offset 0x8007d168
+ // line 375, offset 0x8007ca0c
 	/* begin block 1 */
-		// Start line: 371
-		// Start offset: 0x8007D168
+		// Start line: 376
+		// Start offset: 0x8007CA0C
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s1
 	// 		struct __Event *message; // $a1
 	// 		int letgo; // $s3
 	// 		int juice; // $s0
 	/* end block 1 */
-	// End offset: 0x8007D314
-	// End Line: 426
+	// End offset: 0x8007CBB8
+	// End Line: 431
 
 	/* begin block 2 */
-		// Start line: 777
+		// Start line: 784
 	/* end block 2 */
-	// End Line: 778
+	// End Line: 785
 
 void HUMAN_Embrace(_Instance *instance)
 
 {
                     /* WARNING: Subroutine does not return */
-  MON_TurnToPosition(instance,(_Position *)(theCamera.core.vvNormalWorVecMat[1].t[0] + 0x5c),0x1000)
-  ;
+  MON_TurnToPosition(instance,&(gameTrackerX.playerInstance)->position,0x1000);
 }
 
 
@@ -411,20 +427,20 @@ void HUMAN_Embrace(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HUMAN_IdleEntry(struct _Instance *instance /*$a0*/)
- // line 431, offset 0x8007d330
+ // line 436, offset 0x8007cbd4
 	/* begin block 1 */
-		// Start line: 432
-		// Start offset: 0x8007D330
+		// Start line: 437
+		// Start offset: 0x8007CBD4
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	/* end block 1 */
-	// End offset: 0x8007D330
-	// End Line: 432
+	// End offset: 0x8007CBD4
+	// End Line: 437
 
 	/* begin block 2 */
-		// Start line: 917
+		// Start line: 924
 	/* end block 2 */
-	// End Line: 918
+	// End Line: 925
 
 void HUMAN_IdleEntry(_Instance *instance)
 
@@ -442,74 +458,75 @@ void HUMAN_IdleEntry(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HUMAN_Idle(struct _Instance *instance /*$s1*/)
- // line 440, offset 0x8007d378
+ // line 445, offset 0x8007cc1c
 	/* begin block 1 */
-		// Start line: 441
-		// Start offset: 0x8007D378
+		// Start line: 446
+		// Start offset: 0x8007CC1C
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	// 		struct _MonsterAttributes *ma; // $a3
 	// 		struct _MonsterIR *ally; // $v1
-	// 		struct _MonsterIR *enemy; // $a0
 	/* end block 1 */
-	// End offset: 0x8007D51C
-	// End Line: 491
+	// End offset: 0x8007CD78
+	// End Line: 495
 
 	/* begin block 2 */
-		// Start line: 935
+		// Start line: 942
 	/* end block 2 */
-	// End Line: 936
+	// End Line: 943
 
 void HUMAN_Idle(_Instance *instance)
 
 {
   uint uVar1;
   uint uVar2;
-  uint uVar3;
-  void *pvVar4;
-  uint *puVar5;
+  char *animList;
+  int animtype;
+  void *pvVar3;
+  int mode;
+  uint *puVar4;
   
-  puVar5 = (uint *)instance->extraData;
-  pvVar4 = instance->data;
-  uVar1 = puVar5[0x33];
-  uVar2 = puVar5[0x31];
-  if ((((*puVar5 & 4) == 0) && (uVar1 != 0)) && ((*(ushort *)(uVar1 + 0x16) & 4) != 0)) {
-    uVar3 = puVar5[1];
-    if ((uVar3 & 2) != 0) {
+  puVar4 = (uint *)instance->extraData;
+  pvVar3 = instance->data;
+  uVar1 = puVar4[0x33];
+  if ((((*puVar4 & 4) != 0) || (uVar1 == 0)) || ((*(ushort *)(uVar1 + 0x16) & 4) == 0)) {
+HUMAN_WaitForWeapon:
+    MON_Idle(instance);
+    return;
+  }
+  uVar2 = puVar4[1];
+  if ((uVar2 & 2) != 0) {
                     /* WARNING: Subroutine does not return */
-      MON_TurnToPosition(instance,(_Position *)(*(int *)(uVar1 + 4) + 0x5c),
-                         *(short *)(puVar5[0x55] + 0x1c));
-    }
-    if ((uVar3 & 1) == 0) {
-      if ((uVar3 & 4) == 0) {
-        if ((*(short *)(uVar1 + 0x14) < 2000) && ((uVar2 == 0 || (1999 < *(short *)(uVar2 + 0x14))))
-           ) {
-          puVar5[1] = uVar3 | 2;
-                    /* WARNING: Subroutine does not return */
-          MON_PlayAnimFromList(instance,*(char **)((int)pvVar4 + 8),0,2);
-        }
-        goto LAB_8007d514;
-      }
+    MON_TurnToPosition(instance,(_Position *)(*(int *)(uVar1 + 4) + 0x5c),
+                       *(short *)(puVar4[0x59] + 0x1c));
+  }
+  if ((uVar2 & 1) == 0) {
+    if ((uVar2 & 4) != 0) {
       if ((instance->flags2 & 0x10U) != 0) {
-        puVar5[1] = uVar3 & 0xfffffffb;
+        puVar4[1] = uVar2 & 0xfffffffb;
         MON_PlayRandomIdle(instance,2);
       }
+      goto LAB_8007cd60;
     }
-    else {
-      if ((1999 < *(short *)(uVar1 + 0x14)) || ((uVar2 != 0 && (*(short *)(uVar2 + 0x14) < 2000))))
-      {
-        puVar5[1] = uVar3 & 0xfffffffe | 4;
-        HUNTER_Projectile(instance);
-        return;
-      }
-    }
-    MON_DefaultQueueHandler(instance);
+    if (1999 < *(short *)(uVar1 + 0x14)) goto HUMAN_WaitForWeapon;
+    animtype = 0;
+    puVar4[1] = uVar2 | 2;
+    animList = *(char **)((int)pvVar3 + 8);
+    mode = 2;
   }
   else {
-LAB_8007d514:
-    MON_Idle(instance);
+    if (*(short *)(uVar1 + 0x14) < 2000) {
+LAB_8007cd60:
+                    /* WARNING: Subroutine does not return */
+      MON_DefaultQueueHandler(instance);
+    }
+    animtype = 1;
+    puVar4[1] = uVar2 & 0xfffffffe | 4;
+    animList = *(char **)((int)pvVar3 + 8);
+    mode = 1;
   }
-  return;
+                    /* WARNING: Subroutine does not return */
+  MON_PlayAnimFromList(instance,animList,animtype,mode);
 }
 
 
@@ -517,37 +534,38 @@ LAB_8007d514:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HUMAN_Flee(struct _Instance *instance /*$s1*/)
- // line 496, offset 0x8007d530
+ // line 500, offset 0x8007cd8c
 	/* begin block 1 */
-		// Start line: 497
-		// Start offset: 0x8007D530
+		// Start line: 501
+		// Start offset: 0x8007CD8C
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	// 		struct _MonsterIR *enemy; // $s2
 
 		/* begin block 1.1 */
-			// Start line: 505
-			// Start offset: 0x8007D588
+			// Start line: 509
+			// Start offset: 0x8007CDE4
 			// Variables:
 		// 		struct _MonsterAttributes *ma; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8007D5EC
-		// End Line: 517
+		// End offset: 0x8007CE08
+		// End Line: 512
 	/* end block 1 */
-	// End offset: 0x8007D670
-	// End Line: 535
+	// End offset: 0x8007CE8C
+	// End Line: 530
 
 	/* begin block 2 */
-		// Start line: 1053
+		// Start line: 1057
 	/* end block 2 */
-	// End Line: 1054
+	// End Line: 1058
 
 void HUMAN_Flee(_Instance *instance)
 
 {
+  undefined4 unaff_s0;
   uint *puVar1;
+  undefined4 unaff_s1;
   uint uVar2;
-  MonsterState in_stack_ffffffe8;
   
   puVar1 = (uint *)instance->extraData;
   uVar2 = puVar1[0x31];
@@ -558,11 +576,11 @@ void HUMAN_Flee(_Instance *instance)
     }
                     /* WARNING: Subroutine does not return */
     MON_TurnToPosition(instance,(_Position *)(*(int *)(uVar2 + 4) + 0x5c),
-                       *(short *)(puVar1[0x55] + 0x1c));
+                       *(short *)(puVar1[0x59] + 0x1c));
   }
   if ((puVar1[1] & 8) != 0) {
                     /* WARNING: Subroutine does not return */
-    MON_SwitchState(instance,in_stack_ffffffe8);
+    MON_SwitchState(instance,(MonsterState)CONCAT44(unaff_s1,unaff_s0));
   }
   MON_Flee(instance);
   if (((puVar1[1] & 8) != 0) && ((*puVar1 & 1) != 0)) {
@@ -576,73 +594,45 @@ void HUMAN_Flee(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HUMAN_GetAngry()
- // line 540, offset 0x8007d688
+ // line 535, offset 0x8007cea4
 	/* begin block 1 */
-		// Start line: 541
-		// Start offset: 0x8007D688
+		// Start line: 536
+		// Start offset: 0x8007CEA4
 		// Variables:
 	// 		struct _Instance *instance; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 548
-			// Start offset: 0x8007D6C4
+			// Start line: 543
+			// Start offset: 0x8007CEE0
 			// Variables:
 		// 		struct _MonsterVars *mv; // $v0
 		// 		struct _MonsterAllegiances *allegiances; // $a0
 		// 		struct _MonsterIR *mir; // $v1
 		/* end block 1.1 */
-		// End offset: 0x8007D72C
-		// End Line: 563
+		// End offset: 0x8007CF48
+		// End Line: 558
 	/* end block 1 */
-	// End offset: 0x8007D73C
-	// End Line: 565
+	// End offset: 0x8007CF58
+	// End Line: 560
 
 	/* begin block 2 */
-		// Start line: 1141
+		// Start line: 1127
 	/* end block 2 */
-	// End Line: 1142
+	// End Line: 1128
 
 	/* begin block 3 */
-		// Start line: 1144
+		// Start line: 1130
 	/* end block 3 */
-	// End Line: 1145
+	// End Line: 1131
 
 void HUMAN_GetAngry(void)
 
 {
-  if (*(_Instance **)(iGpffffb52c + 4) != (_Instance *)0x0) {
+  if ((gameTrackerX.instanceList)->first != (_Instance *)0x0) {
                     /* WARNING: Subroutine does not return */
-    INSTANCE_Query(*(_Instance **)(iGpffffb52c + 4),1);
+    INSTANCE_Query((gameTrackerX.instanceList)->first,1);
   }
   return;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// int /*$ra*/ HUMAN_TypeOfHuman(struct _Instance *instance /*$s0*/)
- // line 567, offset 0x8007d750
-	/* begin block 1 */
-		// Start line: 568
-		// Start offset: 0x8007D750
-		// Variables:
-	// 		int type; // $v1
-	// 		struct _MonsterVars *mv; // $a0
-	/* end block 1 */
-	// End offset: 0x8007D7AC
-	// End Line: 580
-
-	/* begin block 2 */
-		// Start line: 1219
-	/* end block 2 */
-	// End Line: 1220
-
-int HUMAN_TypeOfHuman(_Instance *instance)
-
-{
-                    /* WARNING: Subroutine does not return */
-  INSTANCE_Query(instance,1);
 }
 
 

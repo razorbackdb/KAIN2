@@ -1,18 +1,10 @@
 #ifndef MAING2_H
 #define MAING2_H
 
-typedef unsigned int uint;
 
-enum _G2Bool_Enum // Hashcode: 0xFDD7E4E7 (dec: -36182809)
-{
-	G2FALSE = 0,
-};
+extern enum _G2Bool_Enum MainG2_InitEngine(void *appData, unsigned int screenWidth, unsigned int screenHeight, char *filesystemName); // 0x800957CC
 
-typedef enum _G2Bool_Enum G2Bool;
-
-extern enum _G2Bool_Enum MainG2_InitEngine(void *appData, unsigned int screenWidth, unsigned int screenHeight, char *filesystemName); // 0x80095D8C
-
-extern void MainG2_ShutDownEngine(void *appData); // 0x80095D94
+extern void MainG2_ShutDownEngine(void *appData); // 0x800957D4
 
 
 #endif

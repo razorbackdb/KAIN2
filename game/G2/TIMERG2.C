@@ -5,14 +5,14 @@
 // decompiled code
 // original method signature: 
 // short /*$ra*/ G2Timer_GetFrameTime()
- // line 10, offset 0x80096280
+ // line 10, offset 0x80095cc0
 	/* begin block 1 */
 		// Start line: 12
-		// Start offset: 0x80096280
+		// Start offset: 0x80095CC0
 		// Variables:
 	// 		short atime; // $v1
 	/* end block 1 */
-	// End offset: 0x800962B4
+	// End offset: 0x80095CF4
 	// End Line: 20
 
 	/* begin block 2 */
@@ -38,11 +38,11 @@ short G2Timer_GetFrameTime(void)
   short sVar1;
   uint uVar2;
   
-  if (theCamera.tiltList[0][0] == 0) {
+  if (gameTrackerX.timeMult == 0) {
     uVar2 = 100;
   }
   else {
-    uVar2 = (uint)(theCamera.tiltList[0][0] * 0x19) >> 10;
+    uVar2 = gameTrackerX.timeMult * 0x19 >> 10;
   }
   sVar1 = (short)uVar2;
   if ((int)(uVar2 << 0x10) < 1) {

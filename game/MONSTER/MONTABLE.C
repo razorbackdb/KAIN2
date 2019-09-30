@@ -5,14 +5,14 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MONTABLE_SetupTablePointer(struct Object *object /*$a0*/)
- // line 376, offset 0x8008ce88
+ // line 376, offset 0x8008c530
 	/* begin block 1 */
 		// Start line: 378
-		// Start offset: 0x8008CE88
+		// Start offset: 0x8008C530
 		// Variables:
 	// 		long whatAmI; // $a1
 	/* end block 1 */
-	// End offset: 0x8008CED0
+	// End offset: 0x8008C578
 	// End Line: 390
 
 	/* begin block 2 */
@@ -30,27 +30,23 @@
 	/* end block 4 */
 	// End Line: 759
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void MONTABLE_SetupTablePointer(Object *object)
 
 {
   int iVar1;
-  short *psVar2;
+  MONTABLE_202fake *pMVar2;
   int iVar3;
   
   iVar3 = *(int *)((int)object->data + 0x10);
-  psVar2 = &functionChoiceTable;
-  iVar1 = _functionChoiceTable;
-  if (_functionChoiceTable != 0) {
-    do {
-      if (iVar3 == iVar1) {
-        object->relocModule = (void *)((int *)psVar2)[1];
-      }
-      psVar2 = (short *)((int *)psVar2 + 2);
-      iVar1 = *(int *)psVar2;
-    } while (*(int *)psVar2 != 0);
-  }
+  pMVar2 = &functionChoiceTable;
+  iVar1 = 0x42;
+  do {
+    if (iVar3 == iVar1) {
+      *(_MonsterFunctionTable **)&object->relocModule = pMVar2->table;
+    }
+    pMVar2 = pMVar2 + 1;
+    iVar1 = pMVar2->whatAmI;
+  } while (iVar1 != 0);
   return;
 }
 
@@ -59,23 +55,23 @@ void MONTABLE_SetupTablePointer(Object *object)
 // decompiled code
 // original method signature: 
 // struct _MonsterState * /*$ra*/ MONTABLE_GetStateFuncs(struct _Instance *instance /*$a0*/, int state /*$a1*/)
- // line 392, offset 0x8008ced8
+ // line 392, offset 0x8008c580
 	/* begin block 1 */
 		// Start line: 394
-		// Start offset: 0x8008CED8
+		// Start offset: 0x8008C580
 		// Variables:
 	// 		struct _MonsterFunctionTable *ft; // $v0
 
 		/* begin block 1.1 */
 			// Start line: 398
-			// Start offset: 0x8008CEF0
+			// Start offset: 0x8008C598
 			// Variables:
 		// 		struct _MonsterStateChoice *choice; // $a0
 		/* end block 1.1 */
-		// End offset: 0x8008CF2C
+		// End offset: 0x8008C5D4
 		// End Line: 403
 	/* end block 1 */
-	// End offset: 0x8008CF38
+	// End offset: 0x8008C5E0
 	// End Line: 406
 
 	/* begin block 2 */
@@ -91,26 +87,23 @@ void MONTABLE_SetupTablePointer(Object *object)
 _MonsterState * MONTABLE_GetStateFuncs(_Instance *instance,int state)
 
 {
-  _MonsterState *p_Var1;
+  void *pvVar1;
   int iVar2;
   int *piVar3;
   
-  p_Var1 = (_MonsterState *)instance->object->relocModule;
-  if (p_Var1 == (_MonsterState *)0x0) {
-    MON_CleanUp(instance);
-    return p_Var1;
-  }
-  piVar3 = (int *)p_Var1[2].stateFunction;
-  iVar2 = *piVar3;
-  while( true ) {
-    if (iVar2 == -1) {
-      return (_MonsterState *)(&DefaultStateTable + state * 4);
-    }
-    if (state == *piVar3) break;
-    piVar3 = piVar3 + 3;
+  pvVar1 = instance->object->relocModule;
+  if (pvVar1 != (void *)0x0) {
+    piVar3 = *(int **)((int)pvVar1 + 0x14);
     iVar2 = *piVar3;
+    while (iVar2 != -1) {
+      if (state == *piVar3) {
+        return (_MonsterState *)(piVar3 + 1);
+      }
+      piVar3 = piVar3 + 3;
+      iVar2 = *piVar3;
+    }
   }
-  return (_MonsterState *)(piVar3 + 1);
+  return &DefaultStateTable + state;
 }
 
 
@@ -118,14 +111,14 @@ _MonsterState * MONTABLE_GetStateFuncs(_Instance *instance,int state)
 // decompiled code
 // original method signature: 
 // TDRFuncPtr_MONTABLE_GetDamageEffectFunc /*$ra*/ MONTABLE_GetDamageEffectFunc(struct _Instance *instance /*$a0*/)
- // line 408, offset 0x8008cf48
+ // line 408, offset 0x8008c5f0
 	/* begin block 1 */
 		// Start line: 410
-		// Start offset: 0x8008CF48
+		// Start offset: 0x8008C5F0
 		// Variables:
 	// 		struct _MonsterFunctionTable *ft; // $v0
 	/* end block 1 */
-	// End offset: 0x8008CF74
+	// End offset: 0x8008C61C
 	// End Line: 416
 
 	/* begin block 2 */
@@ -142,17 +135,15 @@ TDRFuncPtr_MONTABLE_GetDamageEffectFunc MONTABLE_GetDamageEffectFunc(_Instance *
 
 {
   void *pvVar1;
-  TDRFuncPtr_MONTABLE_GetDamageEffectFunc pTVar2;
-  evFXHitData *in_a1;
+  code *pcVar2;
   
   pvVar1 = instance->object->relocModule;
-  if ((pvVar1 != (void *)0x0) &&
-     (pTVar2 = *(TDRFuncPtr_MONTABLE_GetDamageEffectFunc *)((int)pvVar1 + 8),
-     pTVar2 != (TDRFuncPtr_MONTABLE_GetDamageEffectFunc)0x0)) {
-    SLUAGH_DamageEffect(instance,in_a1);
-    return pTVar2;
+  if ((pvVar1 == (void *)0x0) ||
+     (pcVar2 = *(TDRFuncPtr_MONTABLE_GetDamageEffectFunc *)((int)pvVar1 + 8),
+     pcVar2 == (TDRFuncPtr_MONTABLE_GetDamageEffectFunc)0x0)) {
+    pcVar2 = MON_DamageEffect;
   }
-  return (TDRFuncPtr_MONTABLE_GetDamageEffectFunc)DefaultFunctionTable.damageEffectFunc;
+  return pcVar2;
 }
 
 
@@ -160,14 +151,14 @@ TDRFuncPtr_MONTABLE_GetDamageEffectFunc MONTABLE_GetDamageEffectFunc(_Instance *
 // decompiled code
 // original method signature: 
 // TDRFuncPtr_MONTABLE_GetInitFunc /*$ra*/ MONTABLE_GetInitFunc(struct _Instance *instance /*$a0*/)
- // line 418, offset 0x8008cf7c
+ // line 418, offset 0x8008c624
 	/* begin block 1 */
 		// Start line: 420
-		// Start offset: 0x8008CF7C
+		// Start offset: 0x8008C624
 		// Variables:
 	// 		struct _MonsterFunctionTable *ft; // $v0
 	/* end block 1 */
-	// End offset: 0x8008CFA8
+	// End offset: 0x8008C650
 	// End Line: 426
 
 	/* begin block 2 */
@@ -184,14 +175,14 @@ TDRFuncPtr_MONTABLE_GetInitFunc MONTABLE_GetInitFunc(_Instance *instance)
 
 {
   TDRFuncPtr_MONTABLE_GetInitFunc *ppTVar1;
-  TDRFuncPtr_MONTABLE_GetInitFunc pTVar2;
+  code *pcVar2;
   
   ppTVar1 = (TDRFuncPtr_MONTABLE_GetInitFunc *)instance->object->relocModule;
   if ((ppTVar1 == (TDRFuncPtr_MONTABLE_GetInitFunc *)0x0) ||
-     (pTVar2 = *ppTVar1, pTVar2 == (TDRFuncPtr_MONTABLE_GetInitFunc)0x0)) {
-    pTVar2 = (TDRFuncPtr_MONTABLE_GetInitFunc)DefaultFunctionTable.initFunc;
+     (pcVar2 = *ppTVar1, pcVar2 == (TDRFuncPtr_MONTABLE_GetInitFunc)0x0)) {
+    pcVar2 = MON_DefaultInit;
   }
-  return pTVar2;
+  return pcVar2;
 }
 
 
@@ -199,14 +190,14 @@ TDRFuncPtr_MONTABLE_GetInitFunc MONTABLE_GetInitFunc(_Instance *instance)
 // decompiled code
 // original method signature: 
 // TDRFuncPtr_MONTABLE_GetCleanUpFunc /*$ra*/ MONTABLE_GetCleanUpFunc(struct _Instance *instance /*$a0*/)
- // line 428, offset 0x8008cfb0
+ // line 428, offset 0x8008c658
 	/* begin block 1 */
 		// Start line: 430
-		// Start offset: 0x8008CFB0
+		// Start offset: 0x8008C658
 		// Variables:
 	// 		struct _MonsterFunctionTable *ft; // $v0
 	/* end block 1 */
-	// End offset: 0x8008CFDC
+	// End offset: 0x8008C684
 	// End Line: 436
 
 	/* begin block 2 */
@@ -223,15 +214,15 @@ TDRFuncPtr_MONTABLE_GetCleanUpFunc MONTABLE_GetCleanUpFunc(_Instance *instance)
 
 {
   void *pvVar1;
-  TDRFuncPtr_MONTABLE_GetCleanUpFunc pTVar2;
+  code *pcVar2;
   
   pvVar1 = instance->object->relocModule;
   if ((pvVar1 == (void *)0x0) ||
-     (pTVar2 = *(TDRFuncPtr_MONTABLE_GetCleanUpFunc *)((int)pvVar1 + 4),
-     pTVar2 == (TDRFuncPtr_MONTABLE_GetCleanUpFunc)0x0)) {
-    pTVar2 = (TDRFuncPtr_MONTABLE_GetCleanUpFunc)DefaultFunctionTable.cleanUpFunc;
+     (pcVar2 = *(TDRFuncPtr_MONTABLE_GetCleanUpFunc *)((int)pvVar1 + 4),
+     pcVar2 == (TDRFuncPtr_MONTABLE_GetCleanUpFunc)0x0)) {
+    pcVar2 = MON_CleanUp;
   }
-  return pTVar2;
+  return pcVar2;
 }
 
 
@@ -239,14 +230,14 @@ TDRFuncPtr_MONTABLE_GetCleanUpFunc MONTABLE_GetCleanUpFunc(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MONTABLE_SetQueryFunc(struct _Instance *instance /*$a0*/)
- // line 438, offset 0x8008cfe4
+ // line 438, offset 0x8008c68c
 	/* begin block 1 */
 		// Start line: 440
-		// Start offset: 0x8008CFE4
+		// Start offset: 0x8008C68C
 		// Variables:
 	// 		struct _MonsterFunctionTable *ft; // $v0
 	/* end block 1 */
-	// End offset: 0x8008D010
+	// End offset: 0x8008C6B8
 	// End Line: 444
 
 	/* begin block 2 */
@@ -278,14 +269,14 @@ void MONTABLE_SetQueryFunc(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MONTABLE_SetMessageFunc(struct _Instance *instance /*$a0*/)
- // line 446, offset 0x8008d018
+ // line 446, offset 0x8008c6c0
 	/* begin block 1 */
 		// Start line: 448
-		// Start offset: 0x8008D018
+		// Start offset: 0x8008C6C0
 		// Variables:
 	// 		struct _MonsterFunctionTable *ft; // $v0
 	/* end block 1 */
-	// End offset: 0x8008D044
+	// End offset: 0x8008C6EC
 	// End Line: 452
 
 	/* begin block 2 */
@@ -305,16 +296,10 @@ void MONTABLE_SetMessageFunc(_Instance *instance)
   _func_5 *p_Var2;
   
   pvVar1 = instance->object->relocModule;
-  if (pvVar1 == (void *)0x0) {
-    MONTABLE_SetupTablePointer((Object *)instance);
-    return;
+  if ((pvVar1 != (void *)0x0) &&
+     (p_Var2 = *(_func_5 **)((int)pvVar1 + 0x10), p_Var2 != (_func_5 *)0x0)) {
+    instance->messageFunc = p_Var2;
   }
-  p_Var2 = *(_func_5 **)((int)pvVar1 + 0x10);
-  if (p_Var2 == (_func_5 *)0x0) {
-    MONTABLE_SetupTablePointer((Object *)instance);
-    return;
-  }
-  instance->messageFunc = p_Var2;
   return;
 }
 

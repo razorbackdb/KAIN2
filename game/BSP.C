@@ -1,19 +1,19 @@
-//#include "THISDUST.H"
+#include "THISDUST.H"
 #include "BSP.H"
 
 
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SBSP_IntroduceInstances(struct _Terrain *terrain /*$a0*/, int unitID /*$a1*/)
- // line 527, offset 0x8003d928
+ // line 527, offset 0x8003e48c
 	/* begin block 1 */
 		// Start line: 528
-		// Start offset: 0x8003D928
+		// Start offset: 0x8003E48C
 		// Variables:
 	// 		int i; // $s1
 	// 		struct Intro *intro; // $s0
 	/* end block 1 */
-	// End offset: 0x8003D974
+	// End offset: 0x8003E4D8
 	// End Line: 561
 
 	/* begin block 2 */
@@ -22,9 +22,9 @@
 	// End Line: 581
 
 	/* begin block 3 */
-		// Start line: 1054
+		// Start line: 1049
 	/* end block 3 */
-	// End Line: 1055
+	// End Line: 1050
 
 void SBSP_IntroduceInstances(_Terrain *terrain,int unitID)
 
@@ -49,7 +49,7 @@ void SBSP_IntroduceInstances(_Terrain *terrain,int unitID)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SBSP_IntroduceInstancesAndLights(struct _Terrain *terrain /*$a0*/, struct _CameraCore_Type *cameraCore /*$a1*/, struct LightInfo *lightInfo /*$a2*/, int unitID /*$a3*/)
- // line 563, offset 0x8003d98c
+ // line 563, offset 0x8003e4f0
 	/* begin block 1 */
 		// Start line: 657
 	/* end block 1 */

@@ -5,10 +5,10 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SCRIPT_CombineEulerAngles(struct _Rotation *combinedRotation /*$s1*/, struct _Rotation *inputRotation1 /*$a1*/, struct _Rotation *inputRotation2 /*$s0*/)
- // line 51, offset 0x8003c6b0
+ // line 51, offset 0x8003d214
 	/* begin block 1 */
 		// Start line: 52
-		// Start offset: 0x8003C6B0
+		// Start offset: 0x8003D214
 		// Variables:
 	// 		struct MATRIX rotMatrix1; // stack offset -88
 	// 		struct MATRIX rotMatrix2; // stack offset -56
@@ -16,16 +16,16 @@
 
 		/* begin block 1.1 */
 			// Start line: 52
-			// Start offset: 0x8003C6B0
+			// Start offset: 0x8003D214
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a0
 		/* end block 1.1 */
-		// End offset: 0x8003C6B0
+		// End offset: 0x8003D214
 		// End Line: 52
 	/* end block 1 */
-	// End offset: 0x8003C6B0
+	// End offset: 0x8003D214
 	// End Line: 52
 
 	/* begin block 2 */
@@ -48,10 +48,10 @@ void SCRIPT_CombineEulerAngles
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SCRIPT_InstanceSplineInit(struct _Instance *instance /*$s2*/)
- // line 163, offset 0x8003c730
+ // line 163, offset 0x8003d294
 	/* begin block 1 */
 		// Start line: 164
-		// Start offset: 0x8003C730
+		// Start offset: 0x8003D294
 		// Variables:
 	// 		struct Spline *spline; // $s3
 	// 		struct RSpline *rspline; // $a0
@@ -65,52 +65,52 @@ void SCRIPT_CombineEulerAngles
 
 		/* begin block 1.1 */
 			// Start line: 187
-			// Start offset: 0x8003C7C4
+			// Start offset: 0x8003D328
 			// Variables:
 		// 		struct _G2Quat_Type *q; // $a0
 		// 		struct _G2EulerAngles_Type ea; // stack offset -80
 
 			/* begin block 1.1.1 */
 				// Start line: 195
-				// Start offset: 0x8003C7EC
+				// Start offset: 0x8003D350
 				// Variables:
 			// 		struct MATRIX introTransform; // stack offset -72
 			/* end block 1.1.1 */
-			// End offset: 0x8003C824
+			// End offset: 0x8003D388
 			// End Line: 204
 
 			/* begin block 1.1.2 */
 				// Start line: 209
-				// Start offset: 0x8003C838
+				// Start offset: 0x8003D39C
 				// Variables:
 			// 		struct _Rotation combinedRotation; // stack offset -72
 
 				/* begin block 1.1.2.1 */
 					// Start line: 209
-					// Start offset: 0x8003C838
+					// Start offset: 0x8003D39C
 					// Variables:
 				// 		short _x1; // $v0
 				// 		short _y1; // $v1
 				// 		short _z1; // $a0
 				/* end block 1.1.2.1 */
-				// End offset: 0x8003C890
+				// End offset: 0x8003D3F4
 				// End Line: 220
 			/* end block 1.1.2 */
-			// End offset: 0x8003C890
+			// End offset: 0x8003D3F4
 			// End Line: 221
 		/* end block 1.1 */
-		// End offset: 0x8003C890
+		// End offset: 0x8003D3F4
 		// End Line: 223
 
 		/* begin block 1.2 */
 			// Start line: 227
-			// Start offset: 0x8003C898
+			// Start offset: 0x8003D3FC
 			// Variables:
 		// 		struct _SVector *start_point; // $a3
 
 			/* begin block 1.2.1 */
 				// Start line: 235
-				// Start offset: 0x8003C8BC
+				// Start offset: 0x8003D420
 				// Variables:
 			// 		short _x0; // $v0
 			// 		short _y0; // $a0
@@ -121,28 +121,28 @@ void SCRIPT_CombineEulerAngles
 			// 		struct _Position *_v; // $v0
 			// 		struct _Position *_v0; // $v1
 			/* end block 1.2.1 */
-			// End offset: 0x8003C8BC
+			// End offset: 0x8003D420
 			// End Line: 235
 		/* end block 1.2 */
-		// End offset: 0x8003C918
+		// End offset: 0x8003D47C
 		// End Line: 244
 
 		/* begin block 1.3 */
 			// Start line: 248
-			// Start offset: 0x8003C920
+			// Start offset: 0x8003D484
 			// Variables:
 		// 		struct _SVector *start_point; // $v1
 		/* end block 1.3 */
-		// End offset: 0x8003C958
+		// End offset: 0x8003D4BC
 		// End Line: 258
 	/* end block 1 */
-	// End offset: 0x8003C958
+	// End offset: 0x8003D4BC
 	// End Line: 259
 
 	/* begin block 2 */
-		// Start line: 326
+		// Start line: 303
 	/* end block 2 */
-	// End Line: 327
+	// End Line: 304
 
 void SCRIPT_InstanceSplineInit(_Instance *instance)
 
@@ -150,82 +150,72 @@ void SCRIPT_InstanceSplineInit(_Instance *instance)
   short sVar1;
   short sVar2;
   short sVar3;
+  short sVar4;
   MultiSpline *multi;
   SplineDef *def;
   SplineDef *def_00;
   SplineDef *def_01;
   _G2Quat_Type *quat;
-  _SVector *p_Var4;
-  _Instance *instance_00;
-  MATRIX *wcTransform;
-  _VertexPool *vertexPool;
-  Intro *pIVar5;
-  _PrimPool *primPool;
+  _SVector *p_Var5;
+  Intro *pIVar6;
   Spline *spline;
   Spline *spline_00;
-  ulong **in_stack_ffffffb0;
-  short local_4c;
-  _FXGlowEffect *in_stack_ffffffb4;
+  _G2EulerAngles_Type local_50;
   _Rotation local_48 [4];
-  _VertexPool *local_28;
-  _PrimPool *local_24;
+  ulong local_28;
+  ulong local_24;
   
-  multi = SCRIPT_GetMultiSpline(instance,(ulong *)&local_28,(ulong *)&local_24);
+  multi = SCRIPT_GetMultiSpline(instance,&local_28,&local_24);
   if (multi != (MultiSpline *)0x0) {
-    def = SCRIPT_GetPosSplineDef(instance,multi,(ulong)local_28,(ulong)local_24);
-    def_00 = SCRIPT_GetRotSplineDef(instance,multi,(ulong)local_28,(ulong)local_24);
-    vertexPool = local_28;
-    primPool = local_24;
-    def_01 = SCRIPT_GetScaleSplineDef(instance,multi,(ulong)local_28,(ulong)local_24);
+    def = SCRIPT_GetPosSplineDef(instance,multi,local_28,local_24);
+    def_00 = SCRIPT_GetRotSplineDef(instance,multi,local_28,local_24);
+    def_01 = SCRIPT_GetScaleSplineDef(instance,multi,local_28,local_24);
     spline = multi->positional;
     spline_00 = multi->scaling;
     if (multi->rotational != (RSpline *)0x0) {
       quat = SplineGetFirstRot(multi->rotational,def_00);
-      local_4c = (short)in_stack_ffffffb4;
-      if ((local_28 == (_VertexPool *)0x0) && (local_24 == (_PrimPool *)0x0)) {
-        wcTransform = &multi->curRotMatrix;
-        G2Quat_ToMatrix_S((short *)quat,(short *)wcTransform);
-        instance_00 = (_Instance *)&instance->intro->rotation;
+      if ((local_28 == 0) && (local_24 == 0)) {
+        G2Quat_ToMatrix_S((short *)quat,(short *)&multi->curRotMatrix);
         if (instance->intro != (Intro *)0x0) {
                     /* WARNING: Subroutine does not return */
-          RotMatrix((ushort *)instance_00,(uint *)local_48);
+          RotMatrix((ushort *)&instance->intro->rotation,(uint *)local_48);
         }
-        PIPE3D_DoGlow(instance_00,wcTransform,vertexPool,primPool,in_stack_ffffffb0,
-                      in_stack_ffffffb4);
-        return;
-      }
-      G2Quat_ToEuler(quat,(_G2EulerAngles_Type *)&stack0xffffffb0,0);
-      pIVar5 = instance->intro;
-      (instance->rotation).x = (short)in_stack_ffffffb0;
-      (instance->rotation).y = (short)((uint)in_stack_ffffffb0 >> 0x10);
-      (instance->rotation).z = local_4c;
-      SCRIPT_CombineEulerAngles(local_48,&instance->rotation,&pIVar5->rotation);
-      (instance->rotation).x = local_48[0].x;
-      (instance->rotation).y = local_48[0].y;
-      (instance->rotation).z = local_48[0].z;
-    }
-    if ((spline != (Spline *)0x0) &&
-       (p_Var4 = SplineGetFirstPoint(spline,def), p_Var4 != (_SVector *)0x0)) {
-      if (local_24 == (_PrimPool *)0x0) {
-        (instance->position).x = p_Var4->x;
-        (instance->position).y = p_Var4->y;
-        (instance->position).z = p_Var4->z;
+        instance->flags = instance->flags | 1;
       }
       else {
-        local_4c = (instance->initialPos).y;
-        sVar1 = (instance->initialPos).z;
-        sVar2 = p_Var4->y;
-        sVar3 = p_Var4->z;
-        (instance->position).x = (instance->initialPos).x + p_Var4->x;
-        (instance->position).y = local_4c + sVar2;
-        (instance->position).z = sVar1 + sVar3;
+        G2Quat_ToEuler(quat,&local_50,0);
+        pIVar6 = instance->intro;
+        (instance->rotation).x = local_50.x;
+        (instance->rotation).y = local_50.y;
+        (instance->rotation).z = local_50.z;
+        SCRIPT_CombineEulerAngles(local_48,&instance->rotation,&pIVar6->rotation);
+        (instance->rotation).x = local_48[0].x;
+        (instance->rotation).y = local_48[0].y;
+        (instance->rotation).z = local_48[0].z;
+      }
+    }
+    if ((spline != (Spline *)0x0) &&
+       (p_Var5 = SplineGetFirstPoint(spline,def), p_Var5 != (_SVector *)0x0)) {
+      if (local_24 == 0) {
+        (instance->position).x = p_Var5->x;
+        (instance->position).y = p_Var5->y;
+        (instance->position).z = p_Var5->z;
+      }
+      else {
+        sVar1 = (instance->initialPos).y;
+        sVar2 = (instance->initialPos).z;
+        sVar3 = p_Var5->y;
+        sVar4 = p_Var5->z;
+        (instance->position).x = (instance->initialPos).x + p_Var5->x;
+        (instance->position).y = sVar1 + sVar3;
+        (instance->position).z = sVar2 + sVar4;
       }
     }
     if ((spline_00 != (Spline *)0x0) &&
-       (p_Var4 = SplineGetFirstPoint(spline_00,def_01), p_Var4 != (_SVector *)0x0)) {
-      (instance->scale).x = p_Var4->x;
-      (instance->scale).y = p_Var4->y;
-      (instance->scale).z = p_Var4->z;
+       (p_Var5 = SplineGetFirstPoint(spline_00,def_01), p_Var5 != (_SVector *)0x0)) {
+      (instance->scale).x = p_Var5->x;
+      (instance->scale).y = p_Var5->y;
+      (instance->scale).z = p_Var5->z;
     }
   }
   return;
@@ -236,10 +226,10 @@ void SCRIPT_InstanceSplineInit(_Instance *instance)
 // decompiled code
 // original method signature: 
 // short /*$ra*/ SCRIPTCountFramesInSpline(struct _Instance *instance /*$s4*/)
- // line 266, offset 0x8003c980
+ // line 266, offset 0x8003d4e4
 	/* begin block 1 */
 		// Start line: 267
-		// Start offset: 0x8003C980
+		// Start offset: 0x8003D4E4
 		// Variables:
 	// 		short kf; // $s3
 	// 		short frames; // $s2
@@ -249,23 +239,23 @@ void SCRIPT_InstanceSplineInit(_Instance *instance)
 
 		/* begin block 1.1 */
 			// Start line: 282
-			// Start offset: 0x8003CA0C
+			// Start offset: 0x8003D570
 			// Variables:
 		// 		struct SplineRotKey *rkey; // $a0
 		/* end block 1.1 */
-		// End offset: 0x8003CA48
+		// End offset: 0x8003D5AC
 		// End Line: 288
 
 		/* begin block 1.2 */
 			// Start line: 291
-			// Start offset: 0x8003CA50
+			// Start offset: 0x8003D5B4
 			// Variables:
 		// 		struct MultiSpline *multi; // $v0
 		/* end block 1.2 */
-		// End offset: 0x8003CAA8
+		// End offset: 0x8003D60C
 		// End Line: 300
 	/* end block 1 */
-	// End offset: 0x8003CAA8
+	// End offset: 0x8003D60C
 	// End Line: 302
 
 	/* begin block 2 */
@@ -344,14 +334,14 @@ short SCRIPTCountFramesInSpline(_Instance *instance)
 // decompiled code
 // original method signature: 
 // struct Spline * /*$ra*/ ScriptGetPosSpline(struct _Instance *instance /*$a0*/)
- // line 317, offset 0x8003cad0
+ // line 317, offset 0x8003d634
 	/* begin block 1 */
 		// Start line: 318
-		// Start offset: 0x8003CAD0
+		// Start offset: 0x8003D634
 		// Variables:
 	// 		struct MultiSpline *multi; // $v0
 	/* end block 1 */
-	// End offset: 0x8003CAF8
+	// End offset: 0x8003D65C
 	// End Line: 325
 
 	/* begin block 2 */
@@ -380,14 +370,14 @@ Spline * ScriptGetPosSpline(_Instance *instance)
 // decompiled code
 // original method signature: 
 // struct RSpline * /*$ra*/ ScriptGetRotSpline(struct _Instance *instance /*$a0*/)
- // line 326, offset 0x8003cb08
+ // line 326, offset 0x8003d66c
 	/* begin block 1 */
 		// Start line: 327
-		// Start offset: 0x8003CB08
+		// Start offset: 0x8003D66C
 		// Variables:
 	// 		struct MultiSpline *multi; // $v0
 	/* end block 1 */
-	// End offset: 0x8003CB30
+	// End offset: 0x8003D694
 	// End Line: 334
 
 	/* begin block 2 */
@@ -416,7 +406,7 @@ RSpline * ScriptGetRotSpline(_Instance *instance)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SCRIPT_GetSplineFrameNumber(struct _Instance *instance /*$s0*/, struct SplineDef *splineDef /*$s1*/)
- // line 338, offset 0x8003cb40
+ // line 338, offset 0x8003d6a4
 	/* begin block 1 */
 		// Start line: 623
 	/* end block 1 */
@@ -444,14 +434,14 @@ int SCRIPT_GetSplineFrameNumber(_Instance *instance,SplineDef *splineDef)
 // decompiled code
 // original method signature: 
 // struct MultiSpline * /*$ra*/ SCRIPT_GetMultiSpline(struct _Instance *instance /*$a0*/, unsigned long *isParent /*$a1*/, unsigned long *isClass /*$a2*/)
- // line 346, offset 0x8003cba0
+ // line 346, offset 0x8003d704
 	/* begin block 1 */
 		// Start line: 348
-		// Start offset: 0x8003CBA0
+		// Start offset: 0x8003D704
 		// Variables:
 	// 		struct MultiSpline *multi; // $a3
 	/* end block 1 */
-	// End offset: 0x8003CC44
+	// End offset: 0x8003D7A8
 	// End Line: 373
 
 	/* begin block 2 */
@@ -506,14 +496,14 @@ MultiSpline * SCRIPT_GetMultiSpline(_Instance *instance,ulong *isParent,ulong *i
 // decompiled code
 // original method signature: 
 // struct SplineDef * /*$ra*/ SCRIPT_GetPosSplineDef(struct _Instance *instance /*$a0*/, struct MultiSpline *multi /*$a1*/, unsigned long isParent /*$a2*/, unsigned long isClass /*$a3*/)
- // line 376, offset 0x8003cc4c
+ // line 376, offset 0x8003d7b0
 	/* begin block 1 */
 		// Start line: 377
-		// Start offset: 0x8003CC4C
+		// Start offset: 0x8003D7B0
 		// Variables:
 	// 		struct SplineDef *splineDef; // $v0
 	/* end block 1 */
-	// End offset: 0x8003CC70
+	// End offset: 0x8003D7D4
 	// End Line: 386
 
 	/* begin block 2 */
@@ -547,14 +537,14 @@ SCRIPT_GetPosSplineDef(_Instance *instance,MultiSpline *multi,ulong isParent,ulo
 // decompiled code
 // original method signature: 
 // struct SplineDef * /*$ra*/ SCRIPT_GetRotSplineDef(struct _Instance *instance /*$a0*/, struct MultiSpline *multi /*$a1*/, unsigned long isParent /*$a2*/, unsigned long isClass /*$a3*/)
- // line 388, offset 0x8003cc78
+ // line 388, offset 0x8003d7dc
 	/* begin block 1 */
 		// Start line: 389
-		// Start offset: 0x8003CC78
+		// Start offset: 0x8003D7DC
 		// Variables:
 	// 		struct SplineDef *splineDef; // $v0
 	/* end block 1 */
-	// End offset: 0x8003CC9C
+	// End offset: 0x8003D800
 	// End Line: 398
 
 	/* begin block 2 */
@@ -588,14 +578,14 @@ SCRIPT_GetRotSplineDef(_Instance *instance,MultiSpline *multi,ulong isParent,ulo
 // decompiled code
 // original method signature: 
 // struct SplineDef * /*$ra*/ SCRIPT_GetScaleSplineDef(struct _Instance *instance /*$a0*/, struct MultiSpline *multi /*$a1*/, unsigned long isParent /*$a2*/, unsigned long isClass /*$a3*/)
- // line 400, offset 0x8003cca4
+ // line 400, offset 0x8003d808
 	/* begin block 1 */
 		// Start line: 401
-		// Start offset: 0x8003CCA4
+		// Start offset: 0x8003D808
 		// Variables:
 	// 		struct SplineDef *splineDef; // $v0
 	/* end block 1 */
-	// End offset: 0x8003CCC8
+	// End offset: 0x8003D82C
 	// End Line: 410
 
 	/* begin block 2 */
@@ -612,11 +602,14 @@ SplineDef *
 SCRIPT_GetScaleSplineDef(_Instance *instance,MultiSpline *multi,ulong isParent,ulong isClass)
 
 {
-  SplineDef *in_v0;
+  SplineDef *pSVar1;
   
   if ((isParent == 0) && (isClass == 0)) {
-    SCRIPT_CombineEulerAngles((_Rotation *)instance,(_Rotation *)multi,(_Rotation *)0x0);
-    return in_v0;
+    pSVar1 = (SplineDef *)0x0;
+    if (multi != (MultiSpline *)0x0) {
+      pSVar1 = &multi->curScaling;
+    }
+    return pSVar1;
   }
   return (SplineDef *)&instance->work4;
 }
@@ -626,16 +619,16 @@ SCRIPT_GetScaleSplineDef(_Instance *instance,MultiSpline *multi,ulong isParent,u
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SCRIPT_RelativisticSpline(struct _Instance *instance /*$s0*/, struct _SVector *point /*$a3*/)
- // line 412, offset 0x8003ccd0
+ // line 412, offset 0x8003d834
 	/* begin block 1 */
 		// Start line: 413
-		// Start offset: 0x8003CCD0
+		// Start offset: 0x8003D834
 		// Variables:
 	// 		struct _SVector pt; // stack offset -64
 
 		/* begin block 1.1 */
 			// Start line: 423
-			// Start offset: 0x8003CD10
+			// Start offset: 0x8003D874
 			// Variables:
 		// 		struct MATRIX segMatrix; // stack offset -56
 		// 		struct _Position newPt; // stack offset -24
@@ -643,19 +636,19 @@ SCRIPT_GetScaleSplineDef(_Instance *instance,MultiSpline *multi,ulong isParent,u
 
 			/* begin block 1.1.1 */
 				// Start line: 426
-				// Start offset: 0x8003CD10
+				// Start offset: 0x8003D874
 				// Variables:
 			// 		short _x1; // $a1
 			// 		short _y1; // $v1
 			// 		short _z1; // $a0
 			// 		struct _SVector *_v0; // $v0
 			/* end block 1.1.1 */
-			// End offset: 0x8003CD10
+			// End offset: 0x8003D874
 			// End Line: 426
 
 			/* begin block 1.1.2 */
 				// Start line: 426
-				// Start offset: 0x8003CD10
+				// Start offset: 0x8003D874
 				// Variables:
 			// 		short _y0; // $v1
 			// 		short _z0; // $v0
@@ -666,15 +659,15 @@ SCRIPT_GetScaleSplineDef(_Instance *instance,MultiSpline *multi,ulong isParent,u
 			// 		struct _Position *_v0; // $v0
 			// 		struct _Position *_v1; // $a2
 			/* end block 1.1.2 */
-			// End offset: 0x8003CD10
+			// End offset: 0x8003D874
 			// End Line: 426
 		/* end block 1.1 */
-		// End offset: 0x8003CD10
+		// End offset: 0x8003D874
 		// End Line: 426
 
 		/* begin block 1.2 */
 			// Start line: 440
-			// Start offset: 0x8003CE78
+			// Start offset: 0x8003D9DC
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $a0
@@ -685,10 +678,10 @@ SCRIPT_GetScaleSplineDef(_Instance *instance,MultiSpline *multi,ulong isParent,u
 		// 		struct _Position *_v; // $v0
 		// 		struct _Position *_v0; // $v1
 		/* end block 1.2 */
-		// End offset: 0x8003CEB0
+		// End offset: 0x8003DA14
 		// End Line: 440
 	/* end block 1 */
-	// End offset: 0x8003CEB0
+	// End offset: 0x8003DA14
 	// End Line: 442
 
 	/* begin block 2 */
@@ -733,10 +726,10 @@ void SCRIPT_RelativisticSpline(_Instance *instance,_SVector *point)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SCRIPT_InstanceSplineSet(struct _Instance *instance /*$s2*/, short frameNum /*$fp*/, struct SplineDef *splineDef /*$s4*/, struct SplineDef *rsplineDef /*$s5*/, struct SplineDef *ssplineDef /*stack 16*/)
- // line 444, offset 0x8003cec0
+ // line 444, offset 0x8003da24
 	/* begin block 1 */
 		// Start line: 445
-		// Start offset: 0x8003CEC0
+		// Start offset: 0x8003DA24
 		// Variables:
 	// 		struct Spline *spline; // $s0
 	// 		struct RSpline *rspline; // $s3
@@ -748,61 +741,61 @@ void SCRIPT_RelativisticSpline(_Instance *instance,_SVector *point)
 
 		/* begin block 1.1 */
 			// Start line: 506
-			// Start offset: 0x8003D064
+			// Start offset: 0x8003DBC8
 			// Variables:
 		// 		struct _G2Quat_Type q; // stack offset -88
 
 			/* begin block 1.1.1 */
 				// Start line: 509
-				// Start offset: 0x8003D07C
+				// Start offset: 0x8003DBE0
 				// Variables:
 			// 		struct MATRIX introTransform; // stack offset -80
 			/* end block 1.1.1 */
-			// End offset: 0x8003D098
+			// End offset: 0x8003DBFC
 			// End Line: 515
 		/* end block 1.1 */
-		// End offset: 0x8003D098
+		// End offset: 0x8003DBFC
 		// End Line: 515
 
 		/* begin block 1.2 */
 			// Start line: 523
-			// Start offset: 0x8003D0BC
+			// Start offset: 0x8003DC20
 			// Variables:
 		// 		struct _Rotation rot; // stack offset -88
 
 			/* begin block 1.2.1 */
 				// Start line: 527
-				// Start offset: 0x8003D0D0
+				// Start offset: 0x8003DC34
 				// Variables:
 			// 		struct _Rotation combinedRotation; // stack offset -80
 
 				/* begin block 1.2.1.1 */
 					// Start line: 527
-					// Start offset: 0x8003D0D0
+					// Start offset: 0x8003DC34
 					// Variables:
 				// 		short _x1; // $v0
 				// 		short _y1; // $v1
 				// 		short _z1; // $a0
 				/* end block 1.2.1.1 */
-				// End offset: 0x8003D118
+				// End offset: 0x8003DC7C
 				// End Line: 537
 			/* end block 1.2.1 */
-			// End offset: 0x8003D118
+			// End offset: 0x8003DC7C
 			// End Line: 538
 		/* end block 1.2 */
-		// End offset: 0x8003D118
+		// End offset: 0x8003DC7C
 		// End Line: 540
 
 		/* begin block 1.3 */
 			// Start line: 544
-			// Start offset: 0x8003D128
+			// Start offset: 0x8003DC8C
 			// Variables:
 		// 		struct _SVector scale; // stack offset -88
 		/* end block 1.3 */
-		// End offset: 0x8003D168
+		// End offset: 0x8003DCCC
 		// End Line: 552
 	/* end block 1 */
-	// End offset: 0x8003D168
+	// End offset: 0x8003DCCC
 	// End Line: 554
 
 	/* begin block 2 */
@@ -875,10 +868,10 @@ void SCRIPT_InstanceSplineSet
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SCRIPT_SplineProcess(struct _Instance *instance /*$s4*/, struct MultiSpline *multi /*$fp*/, struct SplineDef *splineDef /*stack 8*/, struct SplineDef *rsplineDef /*$s7*/, struct SplineDef *ssplineDef /*stack 16*/, int direction /*stack 20*/, int isClass /*stack 24*/)
- // line 556, offset 0x8003d198
+ // line 556, offset 0x8003dcfc
 	/* begin block 1 */
 		// Start line: 557
-		// Start offset: 0x8003D198
+		// Start offset: 0x8003DCFC
 		// Variables:
 	// 		long retVal; // $s3
 	// 		struct Spline *spline; // $s5
@@ -890,61 +883,61 @@ void SCRIPT_InstanceSplineSet
 
 		/* begin block 1.1 */
 			// Start line: 574
-			// Start offset: 0x8003D1F4
+			// Start offset: 0x8003DD58
 			// Variables:
 		// 		struct _SVector pt; // stack offset -88
 		/* end block 1.1 */
-		// End offset: 0x8003D270
+		// End offset: 0x8003DDD4
 		// End Line: 594
 
 		/* begin block 1.2 */
 			// Start line: 617
-			// Start offset: 0x8003D2DC
+			// Start offset: 0x8003DE40
 			// Variables:
 		// 		struct _G2Quat_Type q; // stack offset -80
 
 			/* begin block 1.2.1 */
 				// Start line: 620
-				// Start offset: 0x8003D2F4
+				// Start offset: 0x8003DE58
 				// Variables:
 			// 		struct MATRIX introTransform; // stack offset -72
 			/* end block 1.2.1 */
-			// End offset: 0x8003D310
+			// End offset: 0x8003DE74
 			// End Line: 626
 		/* end block 1.2 */
-		// End offset: 0x8003D334
+		// End offset: 0x8003DE98
 		// End Line: 632
 
 		/* begin block 1.3 */
 			// Start line: 638
-			// Start offset: 0x8003D348
+			// Start offset: 0x8003DEAC
 			// Variables:
 		// 		struct _Rotation combinedRotation; // stack offset -72
 
 			/* begin block 1.3.1 */
 				// Start line: 638
-				// Start offset: 0x8003D348
+				// Start offset: 0x8003DEAC
 				// Variables:
 			// 		short _x1; // $v0
 			// 		short _y1; // $v1
 			// 		short _z1; // $a0
 			/* end block 1.3.1 */
-			// End offset: 0x8003D348
+			// End offset: 0x8003DEAC
 			// End Line: 638
 		/* end block 1.3 */
-		// End offset: 0x8003D348
+		// End offset: 0x8003DEAC
 		// End Line: 638
 
 		/* begin block 1.4 */
 			// Start line: 662
-			// Start offset: 0x8003D3A0
+			// Start offset: 0x8003DF04
 			// Variables:
 		// 		struct _SVector pt; // stack offset -80
 		/* end block 1.4 */
-		// End offset: 0x8003D44C
+		// End offset: 0x8003DFB0
 		// End Line: 687
 	/* end block 1 */
-	// End offset: 0x8003D44C
+	// End offset: 0x8003DFB0
 	// End Line: 688
 
 	/* begin block 2 */
@@ -957,29 +950,34 @@ long SCRIPT_SplineProcess
                SplineDef *ssplineDef,int direction,int isClass)
 
 {
-  long fracOffset;
-  long in_v0;
+  ulong fracOffset;
   _SVector *point;
   ulong uVar1;
   Spline *spline;
   Spline *spline_00;
   uint uVar2;
   Spline *spline_01;
-  undefined local_60 [16];
+  undefined local_60 [8];
+  undefined auStack88 [8];
   short asStack80 [4];
   uint local_48 [8];
   
-  fracOffset = theCamera.tiltList[0][0];
+  fracOffset = gameTrackerX.timeMult;
   uVar2 = 0xffffffff;
   spline_01 = multi->positional;
   spline = multi->scaling;
   spline_00 = (Spline *)multi->rotational;
   if (spline != (Spline *)0x0) {
     if (direction < 1) {
-      SCRIPT_CombineEulerAngles((_Rotation *)spline,(_Rotation *)ssplineDef,(_Rotation *)splineDef);
-      return in_v0;
+      if (-1 < direction) {
+                    /* WARNING: Subroutine does not return */
+        SplineGetData(spline,ssplineDef,auStack88);
+      }
+      point = SplineGetPreviousPoint(spline,ssplineDef);
     }
-    point = SplineGetNextPoint(spline,ssplineDef);
+    else {
+      point = SplineGetNextPoint(spline,ssplineDef);
+    }
     uVar2 = 0;
     if (point == (_SVector *)0x0) {
       uVar2 = 1;
@@ -1053,16 +1051,16 @@ long SCRIPT_SplineProcess
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SCRIPT_InstanceSplineProcess(struct _Instance *instance /*$s4*/, struct SplineDef *splineDef /*$s3*/, struct SplineDef *rsplineDef /*$s2*/, struct SplineDef *ssplineDef /*$s0*/, int direction /*stack 16*/)
- // line 716, offset 0x8003d480
+ // line 716, offset 0x8003dfe4
 	/* begin block 1 */
 		// Start line: 717
-		// Start offset: 0x8003D480
+		// Start offset: 0x8003DFE4
 		// Variables:
 	// 		struct MultiSpline *multi; // $s1
 	// 		unsigned long isClass; // stack offset -28
 	// 		unsigned long isParent; // stack offset -32
 	/* end block 1 */
-	// End offset: 0x8003D568
+	// End offset: 0x8003E0CC
 	// End Line: 747
 
 	/* begin block 2 */
@@ -1100,11 +1098,11 @@ long SCRIPT_InstanceSplineProcess
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SCRIPT_FadeOutProcess(struct _Instance *instance /*$a0*/)
- // line 1038, offset 0x8003d588
+ // line 1038, offset 0x8003e0ec
 	/* begin block 1 */
-		// Start line: 2076
+		// Start line: 2071
 	/* end block 1 */
-	// End Line: 2077
+	// End Line: 2072
 
 	/* begin block 2 */
 		// Start line: 1832
@@ -1116,10 +1114,9 @@ void SCRIPT_FadeOutProcess(_Instance *instance)
 {
   int iVar1;
   
-  iVar1 = (uint)(ushort)instance->fadeValue + ((uint)theCamera.tiltList[0][0] >> 5);
+  iVar1 = (uint)(ushort)instance->fadeValue + (gameTrackerX.timeMult >> 5);
   instance->fadeValue = (short)iVar1;
   if (0xfff < iVar1 * 0x10000 >> 0x10) {
-                    /* WARNING: Subroutine does not return */
     INSTANCE_PlainDeath(instance);
   }
   return;
@@ -1130,34 +1127,34 @@ void SCRIPT_FadeOutProcess(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ ScriptKillInstance(struct _Instance *instance /*$s2*/, int effect /*$s0*/)
- // line 1046, offset 0x8003d5d0
+ // line 1046, offset 0x8003e134
 	/* begin block 1 */
 		// Start line: 1047
-		// Start offset: 0x8003D5D0
+		// Start offset: 0x8003E134
 		// Variables:
 	// 		struct Object *object; // $s1
 
 		/* begin block 1.1 */
 			// Start line: 1069
-			// Start offset: 0x8003D65C
+			// Start offset: 0x8003E1C0
 			// Variables:
 		// 		struct Object *object; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8003D67C
+		// End offset: 0x8003E1E0
 		// End Line: 1074
 
 		/* begin block 1.2 */
 			// Start line: 1080
-			// Start offset: 0x8003D6A4
+			// Start offset: 0x8003E208
 			// Variables:
 		// 		struct SVECTOR v; // stack offset -24
 		/* end block 1.2 */
-		// End offset: 0x8003D6E0
+		// End offset: 0x8003E244
 		// End Line: 1087
 
 		/* begin block 1.3 */
 			// Start line: 1093
-			// Start offset: 0x8003D6E0
+			// Start offset: 0x8003E244
 			// Variables:
 		// 		struct FXSplinter *splinterData; // $a0
 		// 		int facadeFlg; // $a1
@@ -1165,17 +1162,17 @@ void SCRIPT_FadeOutProcess(_Instance *instance)
 
 			/* begin block 1.3.1 */
 				// Start line: 1100
-				// Start offset: 0x8003D704
+				// Start offset: 0x8003E268
 				// Variables:
 			// 		struct GenericTune *tune; // $v1
 			/* end block 1.3.1 */
-			// End offset: 0x8003D730
+			// End offset: 0x8003E294
 			// End Line: 1108
 		/* end block 1.3 */
-		// End offset: 0x8003D780
+		// End offset: 0x8003E2E4
 		// End Line: 1114
 	/* end block 1 */
-	// End offset: 0x8003D798
+	// End offset: 0x8003E2FC
 	// End Line: 1127
 
 	/* begin block 2 */
@@ -1196,6 +1193,7 @@ void ScriptKillInstance(_Instance *instance,int effect)
   }
   if ((((pOVar3->oflags & 0x40000000U) != 0) && ((int *)instance->introData != (int *)0x0)) &&
      (iVar2 = *(int *)instance->introData, iVar2 != 0)) {
+                    /* WARNING: Subroutine does not return */
     SIGNAL_HandleSignal(instance,(Signal *)(iVar2 + 8),0);
   }
   bVar1 = (uint)effect < 8;
@@ -1204,12 +1202,12 @@ void ScriptKillInstance(_Instance *instance,int effect)
     bVar1 = true;
   }
   if (!bVar1) {
-                    /* WARNING: Subroutine does not return */
     INSTANCE_PlainDeath(instance);
+    return;
   }
-                    /* WARNING: Could not recover jumptable at 0x8003d69c. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x8003e200. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (*(code *)PTR_ARRAY_800101b0[effect])();
+  (*(code *)(&PTR_LAB_8001015c)[effect])();
   return;
 }
 

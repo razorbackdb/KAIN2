@@ -4,27 +4,22 @@
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ DEBUG_UpdateHealth(long *var /*$a0*/)
- // line 1261, offset 0x80012ec0
+// void /*$ra*/ DEBUG_SetGameTime(long *var /*$a0*/)
+ // line 1211, offset 0x80012d90
 	/* begin block 1 */
-		// Start line: 2482
+		// Start line: 2203
 	/* end block 1 */
-	// End Line: 2483
+	// End Line: 2204
 
 	/* begin block 2 */
-		// Start line: 2522
+		// Start line: 2419
 	/* end block 2 */
-	// End Line: 2523
+	// End Line: 2420
 
-	/* begin block 3 */
-		// Start line: 2483
-	/* end block 3 */
-	// End Line: 2484
-
-void DEBUG_UpdateHealth(long *var)
+void DEBUG_SetGameTime(long *var)
 
 {
-  RAZIEL_DebugHealthSetScale(debugHealthLevel);
+  GAMELOOP_SetGameTime(*var);
   return;
 }
 
@@ -32,22 +27,111 @@ void DEBUG_UpdateHealth(long *var)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ DEBUG_UpdateMana(long *var /*$a0*/)
- // line 1266, offset 0x80012ee4
+// void /*$ra*/ DEBUG_KeepGameTime(long *var /*$a0*/)
+ // line 1216, offset 0x80012db4
 	/* begin block 1 */
-		// Start line: 2493
+		// Start line: 1217
+		// Start offset: 0x80012DB4
+		// Variables:
+	// 		long curTOD; // stack offset -16
 	/* end block 1 */
-	// End Line: 2494
+	// End offset: 0x80012DB4
+	// End Line: 1217
 
 	/* begin block 2 */
-		// Start line: 2494
+		// Start line: 2213
 	/* end block 2 */
-	// End Line: 2495
+	// End Line: 2214
 
-void DEBUG_UpdateMana(long *var)
+void DEBUG_KeepGameTime(long *var)
 
 {
-  RAZIEL_DebugManaSetMax(debugManaLevel);
+  int local_10 [2];
+  
+  local_10[0] = (int)gameTrackerX.timeOfDay;
+  DEBUG_SetGameTime(local_10);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ DEBUG_UpdateFog(long *var /*$a0*/)
+ // line 1222, offset 0x80012ddc
+	/* begin block 1 */
+		// Start line: 1223
+		// Start offset: 0x80012DDC
+		// Variables:
+	// 		struct _StreamUnit *currentUnit; // $v0
+	/* end block 1 */
+	// End offset: 0x80012DDC
+	// End Line: 1223
+
+	/* begin block 2 */
+		// Start line: 2227
+	/* end block 2 */
+	// End Line: 2228
+
+	/* begin block 3 */
+		// Start line: 2228
+	/* end block 3 */
+	// End Line: 2229
+
+void DEBUG_UpdateFog(long *var)
+
+{
+  ushort uVar1;
+  Level *pLVar2;
+  _StreamUnit *p_Var3;
+  uint uVar4;
+  
+  p_Var3 = FindStreamUnitFromLevel(gameTrackerX.level);
+  pLVar2 = gameTrackerX.level;
+  uVar1 = (ushort)debugFogFar;
+  (gameTrackerX.level)->fogFar = (ushort)debugFogFar;
+  p_Var3->TargetFogFar = uVar1;
+  pLVar2->holdFogFar = uVar1;
+  pLVar2 = gameTrackerX.level;
+  uVar1 = (ushort)debugFogNear;
+  (gameTrackerX.level)->fogNear = (ushort)debugFogNear;
+  p_Var3->TargetFogNear = uVar1;
+  pLVar2->holdFogNear = uVar1;
+  pLVar2 = gameTrackerX.level;
+  uVar4 = debugFogBlu << 0x10 | debugFogGrn << 8 | debugFogRed;
+  p_Var3->FogColor = uVar4;
+  *(uint *)&pLVar2->backColorR = uVar4;
+                    /* WARNING: Subroutine does not return */
+  LIGHT_CalcDQPTable(gameTrackerX.level);
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ DEBUG_UpdateHealth(long *var /*$a0*/)
+ // line 1237, offset 0x80012e64
+	/* begin block 1 */
+		// Start line: 1238
+		// Start offset: 0x80012E64
+	/* end block 1 */
+	// End offset: 0x80012E64
+	// End Line: 1238
+
+	/* begin block 2 */
+		// Start line: 2258
+	/* end block 2 */
+	// End Line: 2259
+
+	/* begin block 3 */
+		// Start line: 2259
+	/* end block 3 */
+	// End Line: 2260
+
+void DEBUG_UpdateHealth(long *var)
+
+{
+  RAZIEL_DebugHealthSetScale(1);
   return;
 }
 
@@ -56,18 +140,18 @@ void DEBUG_UpdateMana(long *var)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_FillUpHealth(long *var /*$a0*/)
- // line 1275, offset 0x80012f08
+ // line 1245, offset 0x80012e88
 	/* begin block 1 */
-		// Start line: 1276
-		// Start offset: 0x80012F08
+		// Start line: 1246
+		// Start offset: 0x80012E88
 	/* end block 1 */
-	// End offset: 0x80012F08
-	// End Line: 1276
+	// End offset: 0x80012E88
+	// End Line: 1246
 
 	/* begin block 2 */
-		// Start line: 2512
+		// Start line: 2275
 	/* end block 2 */
-	// End Line: 2513
+	// End Line: 2276
 
 void DEBUG_FillUpHealth(long *var)
 
@@ -81,198 +165,155 @@ void DEBUG_FillUpHealth(long *var)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ process_cheat_codes(struct GameTracker *gt /*$a0*/, long *ctrl /*$a1*/)
- // line 1474, offset 0x80012f30
+// void /*$ra*/ DEBUG_FogLoad()
+ // line 1251, offset 0x80012eb0
 	/* begin block 1 */
-		// Start line: 1475
-		// Start offset: 0x80012F30
+		// Start line: 1252
+		// Start offset: 0x80012EB0
 		// Variables:
-	// 		int i; // $s0
-	// 		struct GameCheat *cheat; // $a0
-	// 		unsigned long padPress; // $s2
-	// 		unsigned long padOn; // $s1
-
-		/* begin block 1.1 */
-			// Start line: 1487
-			// Start offset: 0x80012F70
-			// Variables:
-		// 		int cheatTriggered; // $s3
-
-			/* begin block 1.1.1 */
-				// Start line: 1490
-				// Start offset: 0x80012F84
-				// Variables:
-			// 		unsigned long keyMask; // $v1
-
-				/* begin block 1.1.1.1 */
-					// Start line: 1510
-					// Start offset: 0x80013010
-				/* end block 1.1.1.1 */
-				// End offset: 0x800131AC
-				// End Line: 1584
-			/* end block 1.1.1 */
-			// End offset: 0x800131AC
-			// End Line: 1586
-		/* end block 1.1 */
-		// End offset: 0x800131D4
-		// End Line: 1592
+	// 		struct _StreamUnit *currentUnit; // $v0
 	/* end block 1 */
-	// End offset: 0x800131D4
-	// End Line: 1594
+	// End offset: 0x80012EB0
+	// End Line: 1252
 
 	/* begin block 2 */
-		// Start line: 2948
+		// Start line: 2287
 	/* end block 2 */
-	// End Line: 2949
+	// End Line: 2288
+
+	/* begin block 3 */
+		// Start line: 2288
+	/* end block 3 */
+	// End Line: 2289
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
+void DEBUG_FogLoad(void)
+
+{
+  _StreamUnit *p_Var1;
+  
+  p_Var1 = FindStreamUnitFromLevel(gameTrackerX.level);
+  debugOrgFogBlu = *(byte *)((int)&p_Var1->FogColor + 2);
+  debugOrgFogGrn = *(byte *)((int)&p_Var1->FogColor + 1);
+  debugFogFar = (int)p_Var1->TargetFogFar;
+  debugFogNear = (int)p_Var1->TargetFogNear;
+  debugFogRed = (uint)*(byte *)&p_Var1->FogColor;
+  debugFogGrn = (uint)debugOrgFogGrn;
+  debugFogBlu = (uint)debugOrgFogBlu;
+  debugOrgFogNear = p_Var1->TargetFogNear;
+  debugOrgFogRed = *(byte *)&p_Var1->FogColor;
+  debugOrgFogFar = p_Var1->TargetFogFar;
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ DEBUG_FogRestore()
+ // line 1264, offset 0x80012f18
+	/* begin block 1 */
+		// Start line: 2321
+	/* end block 1 */
+	// End Line: 2322
+
+	/* begin block 2 */
+		// Start line: 2322
+	/* end block 2 */
+	// End Line: 2323
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
+void DEBUG_FogRestore(void)
+
+{
+  debugFogFar = (long)debugOrgFogFar;
+  debugFogNear = (long)debugOrgFogNear;
+  debugFogRed = ZEXT14(debugOrgFogRed);
+  debugFogGrn = ZEXT14(debugOrgFogGrn);
+  debugFogBlu = ZEXT14(debugOrgFogBlu);
+  DEBUG_UpdateFog((long *)0x0);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ DEBUG_SendCinematicSwitch()
+ // line 1279, offset 0x80012f60
+	/* begin block 1 */
+		// Start line: 2554
+	/* end block 1 */
+	// End Line: 2555
+
+	/* begin block 2 */
+		// Start line: 2350
+	/* end block 2 */
+	// End Line: 2351
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
+void DEBUG_SendCinematicSwitch(void)
+
+{
+  gameTrackerX.debugFlags2 = gameTrackerX.debugFlags2 ^ 0x200;
+  INSTANCE_Broadcast((_Instance *)0x0,0xe,0x4000e,(uint)((gameTrackerX.debugFlags2 & 0x200U) != 0));
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ DEBUG_SendMoveTo()
+ // line 1293, offset 0x80012fbc
+	/* begin block 1 */
+		// Start line: 2378
+	/* end block 1 */
+	// End Line: 2379
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
+void DEBUG_SendMoveTo(void)
+
+{
+                    /* WARNING: Subroutine does not return */
+  rand();
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ process_cheat_codes(struct GameTracker *gt /*$a0*/, long *ctrl /*$a1*/)
+ // line 1376, offset 0x80013030
+	/* begin block 1 */
+		// Start line: 2706
+	/* end block 1 */
+	// End Line: 2707
+
+	/* begin block 2 */
+		// Start line: 2463
+	/* end block 2 */
+	// End Line: 2464
 
 void process_cheat_codes(GameTracker *gt,long *ctrl)
 
 {
-  bool bVar1;
-  bool bVar2;
-  int iVar3;
-  uint uVar4;
-  long *var;
-  int iVar5;
-  uint uVar6;
-  uint uVar7;
-  
-  uVar6 = *ctrl;
-  uVar7 = ctrl[1];
-  if (cheatCodeLastCommand != 0) {
-    cheatCodeLastCommand = uVar7;
-    return;
-  }
-  if (uVar7 == 0) {
-    cheatCodeLastCommand = uVar7;
-    return;
-  }
-  bVar2 = false;
-  if ((uVar6 & 0x300) == 0) {
-    cheatCodeLastCommand = uVar7;
-    return;
-  }
-  iVar5 = 0;
-  iVar3 = 0;
-LAB_80012f88:
-  var = (long *)(GameCheats[0].cheatKeys + iVar3);
-  if ((uVar7 & CheatKeyMap
-               [*(byte *)((int)var + (int)*(short *)((int)&GameCheats[0].cheatStage + iVar3))]) == 0
-     ) {
-    DEBUG_FillUpHealth(var);
-    return;
-  }
-  if ((uVar6 & 0xfffffcff &
-      ~CheatKeyMap[*(byte *)((int)var + (int)*(short *)((int)&GameCheats[0].cheatStage + iVar3))])
-      != 0) {
-    DEBUG_FillUpHealth(var);
-    return;
-  }
-  *(short *)((int)&GameCheats[0].cheatStage + iVar3) =
-       *(short *)((int)&GameCheats[0].cheatStage + iVar3) + 1;
-  if (*(short *)((int)&GameCheats[0].cheatStage + iVar3) !=
-      *(short *)((int)&GameCheats[0].cheatLen + iVar3)) goto switchD_80013008_caseD_17;
-  *(undefined2 *)((int)&GameCheats[0].cheatStage + iVar3) = 0;
-  bVar2 = true;
-  switch(iVar5) {
-  case 0:
-    goto switchD_80013008_caseD_0;
-  case 1:
-    debugRazielFlags1 = debugRazielFlags1 | 0x5f;
-    break;
-  case 2:
-    debugRazielFlags1 = debugRazielFlags1 | 0x8000;
-    break;
-  case 3:
-    debugRazielFlags2 = debugRazielFlags2 | 0x1000;
-    break;
-  case 4:
-    debugRazielFlags1 = debugRazielFlags1 | 0x20;
-  case 9:
-    debugRazielFlags1 = debugRazielFlags1 | 0x10;
-    goto switchD_80013008_caseD_12;
-  case 5:
-    debugRazielFlags2 = debugRazielFlags2 | 0x10000;
-    break;
-  case 6:
-    uVar4 = 0x800000;
-    goto LAB_8001318c;
-  case 7:
-    debugManaLevel = 0xd;
-    DEBUG_UpdateMana(&debugManaLevel);
-    bVar1 = iVar5 + 1 < 0x17;
-    goto LAB_800131b4;
-  case 8:
-    goto switchD_80013008_caseD_8;
-  case 10:
-    uVar4 = 0x80000;
-    goto LAB_8001318c;
-  case 0xb:
-    uVar4 = 0x100000;
-    goto LAB_8001318c;
-  case 0xc:
-    uVar4 = 0x400000;
-    goto LAB_8001318c;
-  case 0xd:
-    DEBUG_FillUpHealth(&debugHealthLevel);
-    bVar1 = iVar5 + 1 < 0x17;
-    goto LAB_800131b4;
-  case 0xe:
-    debugHealthLevel = debugHealthLevel + 1;
-    if (4 < debugHealthLevel) goto switchD_80013008_caseD_f;
-    goto LAB_80013048;
-  case 0xf:
-switchD_80013008_caseD_f:
-    debugHealthLevel = 4;
-LAB_80013048:
-    DEBUG_UpdateHealth(&debugHealthLevel);
-    bVar1 = iVar5 + 1 < 0x17;
-    goto LAB_800131b4;
-  case 0x10:
-    RAZIEL_DebugManaFillUp();
-    bVar1 = iVar5 + 1 < 0x17;
-    goto LAB_800131b4;
-  case 0x11:
-    goto switchD_80013008_caseD_11;
-  case 0x12:
-    goto switchD_80013008_caseD_12;
-  case 0x13:
-    RAZIEL_DebugHurtRaziel();
-    bVar1 = iVar5 + 1 < 0x17;
-    goto LAB_800131b4;
-  case 0x14:
-    debugRazielFlags2 = debugRazielFlags2 | 0x8000;
-    break;
-  case 0x15:
-    uVar4 = 0x40000;
-    goto LAB_8001318c;
-  case 0x16:
-    uVar4 = 0x200000;
-LAB_8001318c:
-    debugRazielFlags3 = debugRazielFlags3 | uVar4;
-  }
-switchD_80013008_caseD_17:
-  bVar1 = iVar5 + 1 < 0x17;
-LAB_800131b4:
-  iVar5 = iVar5 + 1;
-  iVar3 = iVar5 * 0x10;
-  if (!bVar1) {
-    if (bVar2) {
-      SndPlayVolPan(0x15,0x50,0x40,0x32);
+  if ((cheatCodeLastCommand == 0) && (ctrl[1] != 0)) {
+    if (((ctrl[1] & (&cheatCombo)[cheatCodeStage]) == 0) ||
+       (cheatCodeStage = cheatCodeStage + 1, (*ctrl & 0x300U) == 0)) {
+      cheatCodeStage = 0;
     }
-    cheatCodeLastCommand = uVar7;
-    return;
+    if (cheatCodeStage == 4) {
+      cheatCodeStage = 0;
+      gt->debugFlags = gt->debugFlags ^ 0x40000;
+    }
   }
-  goto LAB_80012f88;
-switchD_80013008_caseD_12:
-  debugRazielFlags1 = debugRazielFlags1 | 4;
-switchD_80013008_caseD_11:
-  debugRazielFlags1 = debugRazielFlags1 | 2;
-switchD_80013008_caseD_0:
-  debugRazielFlags1 = debugRazielFlags1 | 8;
-switchD_80013008_caseD_8:
-  debugRazielFlags1 = debugRazielFlags1 | 1;
-  goto switchD_80013008_caseD_17;
+  cheatCodeLastCommand = ctrl[1];
+  return;
 }
 
 
@@ -280,44 +321,41 @@ switchD_80013008_caseD_8:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_Process(struct GameTracker *gameTracker /*$s0*/)
- // line 1601, offset 0x800131f8
+ // line 1410, offset 0x800130d0
 	/* begin block 1 */
-		// Start line: 1602
-		// Start offset: 0x800131F8
+		// Start line: 1411
+		// Start offset: 0x800130D0
 		// Variables:
 	// 		long *controlCommand; // $s3
 	// 		long oldFlags; // $s2
 	// 		long oldFlags2; // $s1
 	/* end block 1 */
-	// End offset: 0x80013388
-	// End Line: 1666
+	// End offset: 0x80013260
+	// End Line: 1473
 
 	/* begin block 2 */
-		// Start line: 3068
+		// Start line: 2531
 	/* end block 2 */
-	// End Line: 3069
+	// End Line: 2532
 
 void DEBUG_Process(GameTracker *gameTracker)
 
 {
   short sVar1;
-  GameTracker *line;
   uint uVar2;
   uint uVar3;
   
   uVar3 = gameTracker->debugFlags;
   sVar1 = gameTracker->gameMode;
   uVar2 = gameTracker->debugFlags2;
-  line = gameTracker;
   if (sVar1 == 0) {
     if ((uVar3 & 8) != 0) {
       DEBUG_ProcessSecondController(gameTracker);
     }
     if (gameTracker->cheatMode == '\x01') {
-      line = gameTracker;
       DEBUG_ProcessCheat(gameTracker);
     }
-    goto LAB_80013358;
+    goto LAB_80013230;
   }
   if (sVar1 != 4) {
     if (sVar1 == 6) {
@@ -329,11 +367,11 @@ void DEBUG_Process(GameTracker *gameTracker)
         DEBUG_ViewVram(gameTracker);
       }
     }
-    goto LAB_80013358;
+    goto LAB_80013230;
   }
   DEBUG_Menu(gameTracker);
   if ((gameTracker->debugFlags2 & 0x40000U) == 0) {
-LAB_800132b0:
+LAB_80013188:
     if ((uVar2 & 0x40000) != 0) {
       gameTracker->debugFlags = gameTracker->debugFlags & 0xfffffff7;
     }
@@ -342,27 +380,21 @@ LAB_800132b0:
     if ((uVar2 & 0x40000) == 0) {
       gameTracker->debugFlags = gameTracker->debugFlags | 8;
     }
-    if ((gameTracker->debugFlags2 & 0x40000U) == 0) goto LAB_800132b0;
+    if ((gameTracker->debugFlags2 & 0x40000U) == 0) goto LAB_80013188;
   }
   if (((gameTracker->debugFlags & 8U) != 0) && ((uVar3 & 8) == 0)) {
-    DAT_800cff54 = theCamera;
-    DAT_800cff56 = DAT_800cfe92;
-    DAT_800cff58 = DAT_800cfe94;
-    DAT_800cff5c = DAT_800cff40;
-    DAT_800cff5e = DAT_800cff42;
-    DAT_800cff60 = DAT_800cff44;
-    line = (GameTracker *)(uint)DAT_800cfe94;
+    theCamera.core.debugPos.x = theCamera.core.position.x;
+    theCamera.core.debugPos.y = theCamera.core.position.y;
+    theCamera.core.debugPos.z = theCamera.core.position.z;
+    theCamera.core.debugRot.x = theCamera.core.rotation.x;
+    theCamera.core.debugRot.y = theCamera.core.rotation.y;
+    theCamera.core.debugRot.z = theCamera.core.rotation.z;
   }
-LAB_80013358:
-  if ((gameTracker->debugFlags & 0x4000U) == 0) {
-    get_last_menu_line((DebugMenuLine *)line);
-    return;
+LAB_80013230:
+  if (((gameTracker->debugFlags & 0x4000U) != 0) && ((gameTracker->controlCommand[1] & 0x400U) != 0)
+     ) {
+    DEBUG_CaptureScreen(gameTracker);
   }
-  if ((gameTracker->controlCommand[1] & 0x400U) == 0) {
-    get_last_menu_line((DebugMenuLine *)line);
-    return;
-  }
-  DEBUG_CaptureScreen(gameTracker);
   return;
 }
 
@@ -371,11 +403,11 @@ LAB_80013358:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_Draw(struct GameTracker *gameTracker /*$a0*/, unsigned long **ot /*$a1*/)
- // line 1676, offset 0x800133a4
+ // line 1483, offset 0x8001327c
 	/* begin block 1 */
-		// Start line: 3352
+		// Start line: 2960
 	/* end block 1 */
-	// End Line: 3353
+	// End Line: 2961
 
 void DEBUG_Draw(GameTracker *gameTracker,ulong **ot)
 
@@ -392,31 +424,31 @@ void DEBUG_Draw(GameTracker *gameTracker,ulong **ot)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ DEBUG_MenuCountLength(struct DebugMenuLine *menu /*$a0*/)
- // line 1699, offset 0x800133ec
+ // line 1506, offset 0x800132c4
 	/* begin block 1 */
-		// Start line: 1701
-		// Start offset: 0x800133EC
+		// Start line: 1508
+		// Start offset: 0x800132C4
 		// Variables:
 	// 		int length; // $v1
 	// 		struct DebugMenuLine *curLine; // $a0
 	/* end block 1 */
-	// End offset: 0x80013410
-	// End Line: 1710
+	// End offset: 0x800132E8
+	// End Line: 1517
 
 	/* begin block 2 */
-		// Start line: 3260
+		// Start line: 2719
 	/* end block 2 */
-	// End Line: 3261
+	// End Line: 2720
 
 	/* begin block 3 */
-		// Start line: 3261
+		// Start line: 2720
 	/* end block 3 */
-	// End Line: 3262
+	// End Line: 2721
 
 	/* begin block 4 */
-		// Start line: 3263
+		// Start line: 2722
 	/* end block 4 */
-	// End Line: 3264
+	// End Line: 2723
 
 long DEBUG_MenuCountLength(DebugMenuLine *menu)
 
@@ -443,23 +475,23 @@ long DEBUG_MenuCountLength(DebugMenuLine *menu)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_ExitMenus()
- // line 1713, offset 0x80013418
+ // line 1520, offset 0x800132f0
 	/* begin block 1 */
-		// Start line: 1714
-		// Start offset: 0x80013418
+		// Start line: 1521
+		// Start offset: 0x800132F0
 	/* end block 1 */
-	// End offset: 0x800134A0
-	// End Line: 1743
+	// End offset: 0x80013378
+	// End Line: 1550
 
 	/* begin block 2 */
-		// Start line: 3288
+		// Start line: 2747
 	/* end block 2 */
-	// End Line: 3289
+	// End Line: 2748
 
 	/* begin block 3 */
-		// Start line: 3293
+		// Start line: 2752
 	/* end block 3 */
-	// End Line: 3294
+	// End Line: 2753
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
@@ -470,14 +502,14 @@ void DEBUG_ExitMenus(void)
   
   lVar1 = DEBUG_MenuCountLength(currentMenu);
   currentMenu[lVar1].lower = debugMenuChoice;
-  if (theCamera.focusSphere.position.z._1_1_ == '\0') {
+  if (gameTrackerX.sound.gMusicOn == '\0') {
     SOUND_MusicOff();
-    SOUND_ShutdownMusic();
+    SOUND_FreeDynamicMusic();
   }
   else {
     SOUND_MusicOn();
   }
-  if ((char)theCamera.focusSphere.position.z == '\0') {
+  if (gameTrackerX.sound.gSfxOn == '\0') {
     SOUND_SfxOff();
   }
   else {
@@ -491,31 +523,30 @@ void DEBUG_ExitMenus(void)
 // decompiled code
 // original method signature: 
 // struct DebugMenuLine * /*$ra*/ get_last_menu_line(struct DebugMenuLine *line /*$a0*/)
- // line 1749, offset 0x800134b0
+ // line 1556, offset 0x80013388
 	/* begin block 1 */
-		// Start line: 3365
+		// Start line: 2824
 	/* end block 1 */
-	// End Line: 3366
+	// End Line: 2825
 
 	/* begin block 2 */
-		// Start line: 3366
+		// Start line: 2825
 	/* end block 2 */
-	// End Line: 3367
+	// End Line: 2826
 
-void handle_line_type_long(GameTracker *gt,DebugMenuLine *line)
+DebugMenuLine * get_last_menu_line(DebugMenuLine *line)
 
 {
-  int iVar1;
-  int *piVar2;
+  DebugMenuLine *pDVar1;
   
-  if ((gt->gameData).asmData.drawBackFaces != 5) {
-    piVar2 = &(gt->gameData).asmData.lightInstances[0].b;
+  if (line->type != DEBUG_LINE_TYPE_ENDLIST) {
+    pDVar1 = line + 1;
     do {
-      iVar1 = *piVar2;
-      piVar2 = piVar2 + 6;
-    } while (iVar1 != 5);
+      line = pDVar1;
+      pDVar1 = line + 1;
+    } while (line->type != DEBUG_LINE_TYPE_ENDLIST);
   }
-  return;
+  return line;
 }
 
 
@@ -523,30 +554,30 @@ void handle_line_type_long(GameTracker *gt,DebugMenuLine *line)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ num_menu_items(struct DebugMenuLine *menu /*$a0*/)
- // line 1757, offset 0x800134e0
+ // line 1564, offset 0x800133b8
 	/* begin block 1 */
-		// Start line: 1759
-		// Start offset: 0x800134E0
+		// Start line: 1566
+		// Start offset: 0x800133B8
 		// Variables:
 	// 		int nitems; // $a1
 	/* end block 1 */
-	// End offset: 0x80013508
-	// End Line: 1763
+	// End offset: 0x800133E0
+	// End Line: 1570
 
 	/* begin block 2 */
-		// Start line: 3381
+		// Start line: 2840
 	/* end block 2 */
-	// End Line: 3382
+	// End Line: 2841
 
 	/* begin block 3 */
-		// Start line: 3382
+		// Start line: 2841
 	/* end block 3 */
-	// End Line: 3383
+	// End Line: 2842
 
 	/* begin block 4 */
-		// Start line: 3383
+		// Start line: 2842
 	/* end block 4 */
-	// End Line: 3384
+	// End Line: 2843
 
 int num_menu_items(DebugMenuLine *menu)
 
@@ -569,23 +600,23 @@ int num_menu_items(DebugMenuLine *menu)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ maybe_change_menu_choice(struct GameTracker *gt /*$a0*/, struct DebugMenuLine *menu /*$s2*/)
- // line 1766, offset 0x80013510
+ // line 1573, offset 0x800133e8
 	/* begin block 1 */
-		// Start line: 1767
-		// Start offset: 0x80013510
+		// Start line: 1574
+		// Start offset: 0x800133E8
 		// Variables:
 	// 		long *command; // $s0
 	// 		int choice; // $s1
 	// 		int nitems; // $a0
 	// 		int incr; // $v1
 	/* end block 1 */
-	// End offset: 0x800135C0
-	// End Line: 1785
+	// End offset: 0x80013498
+	// End Line: 1592
 
 	/* begin block 2 */
-		// Start line: 3399
+		// Start line: 2858
 	/* end block 2 */
-	// End Line: 3400
+	// End Line: 2859
 
 void maybe_change_menu_choice(GameTracker *gt,DebugMenuLine *menu)
 
@@ -610,8 +641,8 @@ void maybe_change_menu_choice(GameTracker *gt,DebugMenuLine *menu)
       }
     } while (DEBUG_LINE_TYPE_ENDLIST < menu[iVar3].type);
     if (iVar3 != debugMenuChoice) {
+                    /* WARNING: Subroutine does not return */
       SndPlay(5);
-      debugMenuChoice = iVar3;
     }
   }
   return;
@@ -622,29 +653,29 @@ void maybe_change_menu_choice(GameTracker *gt,DebugMenuLine *menu)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ handle_line_type_long(struct GameTracker *gt /*$a0*/, struct DebugMenuLine *line /*$a1*/)
- // line 1789, offset 0x800135d8
+ // line 1596, offset 0x800134b0
 	/* begin block 1 */
-		// Start line: 1790
-		// Start offset: 0x800135D8
+		// Start line: 1597
+		// Start offset: 0x800134B0
 		// Variables:
 	// 		long *command; // $v1
 
 		/* begin block 1.1 */
-			// Start line: 1794
-			// Start offset: 0x800135F8
+			// Start line: 1601
+			// Start offset: 0x800134D0
 			// Variables:
 		// 		int incr; // $a2
 		/* end block 1.1 */
-		// End offset: 0x800136B4
-		// End Line: 1811
+		// End offset: 0x8001358C
+		// End Line: 1618
 	/* end block 1 */
-	// End offset: 0x800136B4
-	// End Line: 1812
+	// End offset: 0x8001358C
+	// End Line: 1619
 
 	/* begin block 2 */
-		// Start line: 3450
+		// Start line: 2909
 	/* end block 2 */
-	// End Line: 3451
+	// End Line: 2910
 
 void handle_line_type_long(GameTracker *gt,DebugMenuLine *line)
 
@@ -684,28 +715,28 @@ void handle_line_type_long(GameTracker *gt,DebugMenuLine *line)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ handle_line_type_bit(struct GameTracker *gt /*$a0*/, struct DebugMenuLine *line /*$a1*/)
- // line 1814, offset 0x800136c4
+ // line 1621, offset 0x8001359c
 	/* begin block 1 */
-		// Start line: 1816
-		// Start offset: 0x800136C4
+		// Start line: 1623
+		// Start offset: 0x8001359C
 	/* end block 1 */
-	// End offset: 0x80013714
-	// End Line: 1823
+	// End offset: 0x800135EC
+	// End Line: 1630
 
 	/* begin block 2 */
-		// Start line: 3501
+		// Start line: 2960
 	/* end block 2 */
-	// End Line: 3502
+	// End Line: 2961
 
 	/* begin block 3 */
-		// Start line: 3502
+		// Start line: 2961
 	/* end block 3 */
-	// End Line: 3503
+	// End Line: 2962
 
 	/* begin block 4 */
-		// Start line: 3504
+		// Start line: 2963
 	/* end block 4 */
-	// End Line: 3505
+	// End Line: 2964
 
 void handle_line_type_bit(GameTracker *gt,DebugMenuLine *line)
 
@@ -714,11 +745,9 @@ void handle_line_type_bit(GameTracker *gt,DebugMenuLine *line)
     *line->var_address = *line->var_address | line->bit_mask;
     return;
   }
-  if ((gt->controlCommand[1] & 8U) == 0) {
-    process_menu_line(gt,line);
-    return;
+  if ((gt->controlCommand[1] & 8U) != 0) {
+    *line->var_address = *line->var_address & ~line->bit_mask;
   }
-  *line->var_address = *line->var_address & ~line->bit_mask;
   return;
 }
 
@@ -727,20 +756,20 @@ void handle_line_type_bit(GameTracker *gt,DebugMenuLine *line)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ handle_line_type_action(struct GameTracker *gt /*$a0*/, struct DebugMenuLine *line /*$a1*/)
- // line 1825, offset 0x8001371c
+ // line 1632, offset 0x800135f4
 	/* begin block 1 */
-		// Start line: 1826
-		// Start offset: 0x8001371C
+		// Start line: 1633
+		// Start offset: 0x800135F4
 		// Variables:
 	// 		int ok; // $v0
 	/* end block 1 */
-	// End offset: 0x80013748
-	// End Line: 1835
+	// End offset: 0x80013620
+	// End Line: 1642
 
 	/* begin block 2 */
-		// Start line: 3523
+		// Start line: 2982
 	/* end block 2 */
-	// End Line: 3524
+	// End Line: 2983
 
 void handle_line_type_action(GameTracker *gt,DebugMenuLine *line)
 
@@ -756,20 +785,20 @@ void handle_line_type_action(GameTracker *gt,DebugMenuLine *line)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ handle_line_type_action_with_line(struct GameTracker *gt /*$a0*/, struct DebugMenuLine *line /*$a1*/)
- // line 1837, offset 0x80013758
+ // line 1644, offset 0x80013630
 	/* begin block 1 */
-		// Start line: 1838
-		// Start offset: 0x80013758
+		// Start line: 1645
+		// Start offset: 0x80013630
 		// Variables:
 	// 		enum option_ctrl_t ctrl; // $a2
 	/* end block 1 */
-	// End offset: 0x800137AC
-	// End Line: 1849
+	// End offset: 0x80013684
+	// End Line: 1656
 
 	/* begin block 2 */
-		// Start line: 3547
+		// Start line: 3006
 	/* end block 2 */
-	// End Line: 3548
+	// End Line: 3007
 
 void handle_line_type_action_with_line(GameTracker *gt,DebugMenuLine *line)
 
@@ -793,41 +822,36 @@ void handle_line_type_action_with_line(GameTracker *gt,DebugMenuLine *line)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ handle_line_type_menu(struct GameTracker *gt /*$a0*/, struct DebugMenuLine *line /*$s0*/)
- // line 1853, offset 0x800137bc
+ // line 1660, offset 0x80013694
 	/* begin block 1 */
-		// Start line: 1854
-		// Start offset: 0x800137BC
+		// Start line: 1661
+		// Start offset: 0x80013694
 		// Variables:
 	// 		int ok; // $v0
 	/* end block 1 */
-	// End offset: 0x8001382C
-	// End Line: 1870
+	// End offset: 0x80013704
+	// End Line: 1677
 
 	/* begin block 2 */
-		// Start line: 3579
+		// Start line: 3038
 	/* end block 2 */
-	// End Line: 3580
+	// End Line: 3039
 
 void handle_line_type_menu(GameTracker *gt,DebugMenuLine *line)
 
 {
-  code *pcVar1;
-  DebugMenuLine *pDVar2;
-  DebugMenuLine *line_00;
+  DebugMenuLine *pDVar1;
   
   if ((gt->controlCommand[1] & 0x80U) != 0) {
-    pcVar1 = (code *)line->bit_mask;
-    line_00 = line;
-    if (pcVar1 != (code *)0x0) {
-      pcVar1 = (code *)(*pcVar1)();
+    if ((code *)line->bit_mask != (code *)0x0) {
+      (*(code *)line->bit_mask)();
     }
-    handle_line_type_long((GameTracker *)line,line_00);
-    *(long *)(pcVar1 + 4) = debugMenuChoice;
+    pDVar1 = get_last_menu_line(line);
+    pDVar1->lower = debugMenuChoice;
     the_previous_menu = currentMenu;
-    pDVar2 = currentMenu;
-    currentMenu = (DebugMenuLine *)(GameTracker *)line->var_address;
-    handle_line_type_long((GameTracker *)line->var_address,line_00);
-    debugMenuChoice = pDVar2->lower;
+    currentMenu = (DebugMenuLine *)line->var_address;
+    pDVar1 = get_last_menu_line((DebugMenuLine *)line->var_address);
+    debugMenuChoice = pDVar1->lower;
   }
   return;
 }
@@ -837,41 +861,41 @@ void handle_line_type_menu(GameTracker *gt,DebugMenuLine *line)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ process_menu_line(struct GameTracker *gt /*$a0*/, struct DebugMenuLine *menu /*$a1*/)
- // line 1889, offset 0x8001383c
+ // line 1696, offset 0x80013714
 	/* begin block 1 */
-		// Start line: 1890
-		// Start offset: 0x8001383C
+		// Start line: 1697
+		// Start offset: 0x80013714
 		// Variables:
 	// 		struct DebugMenuLine *line; // $a1
 
 		/* begin block 1.1 */
-			// Start line: 1893
-			// Start offset: 0x8001386C
+			// Start line: 1700
+			// Start offset: 0x80013744
 			// Variables:
 		// 		struct debug_dispatch_t *dispatch; // $v1
 		/* end block 1.1 */
-		// End offset: 0x80013890
-		// End Line: 1898
+		// End offset: 0x80013768
+		// End Line: 1705
 	/* end block 1 */
-	// End offset: 0x80013890
-	// End Line: 1899
+	// End offset: 0x80013768
+	// End Line: 1706
 
 	/* begin block 2 */
-		// Start line: 3652
+		// Start line: 3111
 	/* end block 2 */
-	// End Line: 3653
+	// End Line: 3112
 
 	/* begin block 3 */
-		// Start line: 3653
+		// Start line: 3112
 	/* end block 3 */
-	// End Line: 3654
+	// End Line: 3113
 
 void process_menu_line(GameTracker *gt,DebugMenuLine *menu)
 
 {
   if ((menu[debugMenuChoice].type < DEBUG_LINE_TYPE_ENDLIST) &&
-     ((code *)(&DebugMenuLine_800c84dc.type)[menu[debugMenuChoice].type * 2] != (code *)0x0)) {
-    (*(code *)(&DebugMenuLine_800c84dc.type)[menu[debugMenuChoice].type * 2])();
+     ((&debug_dispatch_table)[menu[debugMenuChoice].type].fn != (_func_16 *)0x0)) {
+    (*(&debug_dispatch_table)[menu[debugMenuChoice].type].fn)();
   }
   return;
 }
@@ -881,16 +905,16 @@ void process_menu_line(GameTracker *gt,DebugMenuLine *menu)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ pre_process_functions(struct GameTracker *gt /*$a0*/, struct DebugMenuLine *menu /*$a1*/)
- // line 1903, offset 0x800138a0
+ // line 1710, offset 0x80013778
 	/* begin block 1 */
-		// Start line: 3681
+		// Start line: 3140
 	/* end block 1 */
-	// End Line: 3682
+	// End Line: 3141
 
 	/* begin block 2 */
-		// Start line: 3682
+		// Start line: 3141
 	/* end block 2 */
-	// End Line: 3683
+	// End Line: 3142
 
 int pre_process_functions(GameTracker *gt,DebugMenuLine *menu)
 
@@ -909,11 +933,11 @@ int pre_process_functions(GameTracker *gt,DebugMenuLine *menu)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ post_process_functions(struct GameTracker *gt /*$s0*/, struct DebugMenuLine *menu /*$a1*/)
- // line 1911, offset 0x800138c8
+ // line 1718, offset 0x800137a0
 	/* begin block 1 */
-		// Start line: 3697
+		// Start line: 3156
 	/* end block 1 */
-	// End Line: 3698
+	// End Line: 3157
 
 void post_process_functions(GameTracker *gt,DebugMenuLine *menu)
 
@@ -949,16 +973,16 @@ void post_process_functions(GameTracker *gt,DebugMenuLine *menu)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ set_debug_leading()
- // line 1966, offset 0x8001396c
+ // line 1771, offset 0x80013844
 	/* begin block 1 */
-		// Start line: 3807
+		// Start line: 3262
 	/* end block 1 */
-	// End Line: 3808
+	// End Line: 3263
 
 	/* begin block 2 */
-		// Start line: 3808
+		// Start line: 3263
 	/* end block 2 */
-	// End Line: 3809
+	// End Line: 3264
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
@@ -975,16 +999,16 @@ void set_debug_leading(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ set_user_leading()
- // line 1972, offset 0x80013984
+ // line 1777, offset 0x8001385c
 	/* begin block 1 */
-		// Start line: 3819
+		// Start line: 3274
 	/* end block 1 */
-	// End Line: 3820
+	// End Line: 3275
 
 	/* begin block 2 */
-		// Start line: 3821
+		// Start line: 3276
 	/* end block 2 */
-	// End Line: 3822
+	// End Line: 3277
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
@@ -1001,16 +1025,16 @@ void set_user_leading(void)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ isdigit(char c /*$a0*/)
- // line 1992, offset 0x8001399c
+ // line 1797, offset 0x80013874
 	/* begin block 1 */
-		// Start line: 3859
+		// Start line: 3314
 	/* end block 1 */
-	// End Line: 3860
+	// End Line: 3315
 
 	/* begin block 2 */
-		// Start line: 3860
+		// Start line: 3315
 	/* end block 2 */
-	// End Line: 3861
+	// End Line: 3316
 
 int isdigit(char c)
 
@@ -1023,29 +1047,29 @@ int isdigit(char c)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ adjust_format(char *ctrl /*$s1*/, struct debug_format_t *fmt /*$s4*/)
- // line 1997, offset 0x800139ac
+ // line 1802, offset 0x80013884
 	/* begin block 1 */
-		// Start line: 1998
-		// Start offset: 0x800139AC
+		// Start line: 1803
+		// Start offset: 0x80013884
 
 		/* begin block 1.1 */
-			// Start line: 2002
-			// Start offset: 0x80013A14
+			// Start line: 1807
+			// Start offset: 0x800138EC
 			// Variables:
 		// 		char *p; // $s0
 		// 		int x; // $s2
 		// 		int y; // $s3
 		/* end block 1.1 */
-		// End offset: 0x80013AE0
-		// End Line: 2016
+		// End offset: 0x800139B8
+		// End Line: 1821
 	/* end block 1 */
-	// End offset: 0x80013B30
-	// End Line: 2025
+	// End offset: 0x80013A08
+	// End Line: 1830
 
 	/* begin block 2 */
-		// Start line: 3869
+		// Start line: 3324
 	/* end block 2 */
-	// End Line: 3870
+	// End Line: 3325
 
 void adjust_format(char *ctrl,debug_format_t *fmt)
 
@@ -1061,8 +1085,8 @@ void adjust_format(char *ctrl,debug_format_t *fmt)
     if (bVar1 == 0) {
       return;
     }
-    iVar2 = strncmp(ctrl,s__abs_800cdcfc,5);
-    if ((iVar2 == 0) || (iVar2 = strncmp(ctrl,s__rel_800cdd04,5), iVar2 == 0)) {
+    iVar2 = strncmp(ctrl,"-abs ",5);
+    if ((iVar2 == 0) || (iVar2 = strncmp(ctrl,"-rel ",5), iVar2 == 0)) {
       pbVar4 = (byte *)ctrl + 5;
       iVar2 = 0;
       iVar5 = 0;
@@ -1082,7 +1106,7 @@ void adjust_format(char *ctrl,debug_format_t *fmt)
       if (*pbVar4 != 0) {
         pbVar4 = pbVar4 + 1;
       }
-      iVar3 = strncmp(ctrl,s__abs_800cdcfc,5);
+      iVar3 = strncmp(ctrl,"-abs ",5);
       if (iVar3 == 0) {
         fmt->xpos = iVar2;
         fmt->ypos = iVar5;
@@ -1093,10 +1117,10 @@ void adjust_format(char *ctrl,debug_format_t *fmt)
       }
     }
     else {
-      iVar2 = strncmp(ctrl,s__center_800cdd0c,7);
+      iVar2 = strncmp(ctrl,s__center_800ceee4,7);
       if (iVar2 != 0) {
-        printf(s_unknown_format_control___s_800cdd14);
-        return;
+                    /* WARNING: Subroutine does not return */
+        printf("unknown format control: %s\n");
       }
       fmt->is_centered = 1;
       pbVar4 = (byte *)ctrl + 7;
@@ -1111,11 +1135,11 @@ void adjust_format(char *ctrl,debug_format_t *fmt)
 // decompiled code
 // original method signature: 
 // char * /*$ra*/ find_eol(char *text /*$v0*/)
- // line 2027, offset 0x80013b54
+ // line 1832, offset 0x80013a2c
 	/* begin block 1 */
-		// Start line: 3956
+		// Start line: 3411
 	/* end block 1 */
-	// End Line: 3957
+	// End Line: 3412
 
 char * find_eol(char *text)
 
@@ -1135,59 +1159,51 @@ char * find_eol(char *text)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ draw_menu_item(struct GameTracker *gt /*$a0*/, struct debug_format_t *fmt /*$s2*/, char *text /*$s0*/)
- // line 2035, offset 0x80013b8c
+ // line 1840, offset 0x80013a64
 	/* begin block 1 */
-		// Start line: 2037
-		// Start offset: 0x80013BAC
+		// Start line: 1842
+		// Start offset: 0x80013A84
 
 		/* begin block 1.1 */
-			// Start line: 2038
-			// Start offset: 0x80013BAC
+			// Start line: 1843
+			// Start offset: 0x80013A84
 			// Variables:
 		// 		char *eol; // $s1
 		// 		char c; // $s3
 
 			/* begin block 1.1.1 */
-				// Start line: 2042
-				// Start offset: 0x80013BD0
+				// Start line: 1847
+				// Start offset: 0x80013AA8
 			/* end block 1.1.1 */
-			// End offset: 0x80013BD0
-			// End Line: 2042
+			// End offset: 0x80013AA8
+			// End Line: 1847
 		/* end block 1.1 */
-		// End offset: 0x80013C40
-		// End Line: 2058
+		// End offset: 0x80013B18
+		// End Line: 1863
 	/* end block 1 */
-	// End offset: 0x80013C5C
-	// End Line: 2062
+	// End offset: 0x80013B34
+	// End Line: 1867
 
 	/* begin block 2 */
-		// Start line: 3972
+		// Start line: 3427
 	/* end block 2 */
-	// End Line: 3973
+	// End Line: 3428
 
 void draw_menu_item(GameTracker *gt,debug_format_t *fmt,char *text)
 
 {
   char cVar1;
   char *pcVar2;
-  int iVar3;
-  short x;
-  short y;
   
   while( true ) {
     pcVar2 = find_eol(text);
     cVar1 = *pcVar2;
     *pcVar2 = '\0';
-    if (fmt->is_centered == 0) {
-      x = *(short *)&fmt->xpos;
-      y = *(short *)&fmt->ypos;
+    if (fmt->is_centered != 0) {
+                    /* WARNING: Subroutine does not return */
+      FONT_GetStringWidth(text);
     }
-    else {
-      iVar3 = FONT_GetStringWidth(text);
-      y = *(short *)&fmt->ypos;
-      x = (short)(((uint)*(ushort *)&fmt->xpos - (iVar3 >> 1)) * 0x10000 >> 0x10);
-    }
-    FONT_SetCursor(x,y);
+    FONT_SetCursor(*(short *)&fmt->xpos,*(short *)&fmt->ypos);
     if (currentMenu->type != DEBUG_LINE_TYPE_FORMAT) break;
     FONT_Print2(text);
     text = pcVar2 + 1;
@@ -1207,67 +1223,67 @@ void draw_menu_item(GameTracker *gt,debug_format_t *fmt,char *text)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ draw_menu(struct GameTracker *gt /*$s4*/, struct DebugMenuLine *menu /*$s0*/)
- // line 2065, offset 0x80013c8c
+ // line 1870, offset 0x80013b64
 	/* begin block 1 */
-		// Start line: 2066
-		// Start offset: 0x80013C8C
+		// Start line: 1871
+		// Start offset: 0x80013B64
 		// Variables:
 	// 		struct debug_format_t fmt; // stack offset -56
 	// 		int i; // $s3
 
 		/* begin block 1.1 */
-			// Start line: 2079
-			// Start offset: 0x80013D0C
+			// Start line: 1884
+			// Start offset: 0x80013BE4
 			// Variables:
 		// 		int xpos; // $s2
 		// 		int ypos; // $s1
 		/* end block 1.1 */
-		// End offset: 0x80013E60
-		// End Line: 2123
+		// End offset: 0x80013D38
+		// End Line: 1928
 	/* end block 1 */
-	// End offset: 0x80013E78
-	// End Line: 2124
+	// End offset: 0x80013D50
+	// End Line: 1929
 
 	/* begin block 2 */
-		// Start line: 4055
+		// Start line: 3510
 	/* end block 2 */
-	// End Line: 4056
+	// End Line: 3511
 
 	/* begin block 3 */
-		// Start line: 4056
+		// Start line: 3511
 	/* end block 3 */
-	// End Line: 4057
+	// End Line: 3512
 
 void draw_menu(GameTracker *gt,DebugMenuLine *menu)
 
 {
-  int iVar1;
-  short x;
-  short y;
-  char *text;
+  short sVar1;
   int iVar2;
+  int iVar3;
+  short y;
+  int iVar4;
   debug_format_t local_38;
   int local_28;
   int local_24;
   undefined4 local_20;
   
   local_20 = 0;
-  local_28 = cem_x_base;
-  local_24 = cem_y_base;
-  local_38.xpos = cem_x_base;
-  local_38.ypos = cem_y_base;
+  local_28 = 0x28;
+  local_24 = 0x14;
+  local_38.xpos = 0x28;
+  local_38.ypos = 0x14;
   local_38.is_centered = 0;
   if (menu->type == DEBUG_LINE_TYPE_FORMAT) {
-    menu->text = the_format_string;
+    menu->text = "-abs 160 40 -center";
     set_user_leading();
-    iVar2 = 0;
+    iVar4 = 0;
   }
   else {
     set_debug_leading();
-    iVar2 = 0;
+    iVar4 = 0;
   }
   do {
-    iVar1 = local_38.xpos;
+    iVar2 = local_38.xpos;
     if (menu->type == DEBUG_LINE_TYPE_ENDLIST) {
       return;
     }
@@ -1276,39 +1292,38 @@ void draw_menu(GameTracker *gt,DebugMenuLine *menu)
     }
     else {
       y = (short)local_38.ypos;
-      if (debugMenuChoice == iVar2) {
-        if (local_38.is_centered == 0) {
-          x = (short)local_38.xpos - (short)cem_cursor_width;
+      if (debugMenuChoice == iVar4) {
+        sVar1 = (short)local_38.xpos;
+        if (local_38.is_centered != 0) {
+          sVar1 = sVar1 + -0x78;
         }
-        else {
-          x = ((short)local_38.xpos - (short)(cem_line_width >> 1)) - (short)cem_cursor_width;
-        }
-        FONT_SetCursor(x,y);
+        FONT_SetCursor(sVar1 + -0x14,y);
                     /* WARNING: Subroutine does not return */
-        FONT_Print(&DAT_800cdd30);
+        FONT_Print(">");
       }
-      text = menu->text;
-      draw_menu_item(gt,&local_38,text);
-      if (local_38.is_centered != 0) {
-        draw_menu_item((GameTracker *)(cem_line_width >> 1),(debug_format_t *)(int)y,text);
-        return;
+      draw_menu_item(gt,&local_38,menu->text);
+      if (local_38.is_centered == 0) {
+        iVar3 = 0xf0;
       }
-      FONT_SetCursor((short)(((cem_line_width & 0xffffU) + iVar1) * 0x10000 >> 0x10),y);
+      else {
+        iVar3 = 0x78;
+      }
+      FONT_SetCursor((short)((uint)((iVar3 + iVar2) * 0x10000) >> 0x10),y);
       if (menu->type == DEBUG_LINE_TYPE_BIT) {
         if ((*menu->var_address & menu->bit_mask) != menu->bit_mask) {
                     /* WARNING: Subroutine does not return */
-          FONT_Print((char *)&PTR_DAT_800cdd38);
+          FONT_Print((char *)&depthQFogFar);
         }
                     /* WARNING: Subroutine does not return */
-        FONT_Print(&DAT_800cdd34);
+        FONT_Print("YES");
       }
       if (menu->type == DEBUG_LINE_TYPE_LONG) {
                     /* WARNING: Subroutine does not return */
-        FONT_Print((char *)&PTR_DAT_800cdd3c);
+        FONT_Print((char *)&depthQBackColor);
       }
     }
     menu = menu + 1;
-    iVar2 = iVar2 + 1;
+    iVar4 = iVar4 + 1;
   } while( true );
 }
 
@@ -1317,21 +1332,21 @@ void draw_menu(GameTracker *gt,DebugMenuLine *menu)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_Menu(struct GameTracker *gt /*$s1*/)
- // line 2126, offset 0x80013e98
+ // line 1931, offset 0x80013d70
 	/* begin block 1 */
-		// Start line: 2127
-		// Start offset: 0x80013E98
+		// Start line: 1932
+		// Start offset: 0x80013D70
 		// Variables:
 	// 		struct DebugMenuLine *menu; // $s0
 	// 		int choice; // $s2
 	/* end block 1 */
-	// End offset: 0x80013F94
-	// End Line: 2150
+	// End offset: 0x80013E6C
+	// End Line: 1955
 
 	/* begin block 2 */
-		// Start line: 4230
+		// Start line: 3685
 	/* end block 2 */
-	// End Line: 4231
+	// End Line: 3686
 
 void DEBUG_Menu(GameTracker *gt)
 
@@ -1343,7 +1358,7 @@ void DEBUG_Menu(GameTracker *gt)
   
   lVar1 = debugMenuChoice;
   menu = currentMenu;
-  if ((currentMenu == (DebugMenuLine *)&mainMenu) || (currentMenu == (DebugMenuLine *)&pauseMenu)) {
+  if ((currentMenu == &mainMenu) || (currentMenu == &pauseMenu)) {
     menu_process(gt->menu);
   }
   else {
@@ -1369,36 +1384,36 @@ void DEBUG_Menu(GameTracker *gt)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_DisplayStatus(struct GameTracker *gameTracker /*$s1*/)
- // line 2165, offset 0x80013fac
+ // line 1970, offset 0x80013e84
 	/* begin block 1 */
-		// Start line: 2166
-		// Start offset: 0x80013FAC
+		// Start line: 1971
+		// Start offset: 0x80013E84
 
 		/* begin block 1.1 */
-			// Start line: 2425
-			// Start offset: 0x8001414C
+			// Start line: 2224
+			// Start offset: 0x80014024
 			// Variables:
 		// 		int deg; // $a0
 		/* end block 1.1 */
-		// End offset: 0x800141D0
-		// End Line: 2438
+		// End offset: 0x800140A8
+		// End Line: 2237
 
 		/* begin block 1.2 */
-			// Start line: 2444
-			// Start offset: 0x800141E0
+			// Start line: 2243
+			// Start offset: 0x800140B8
 			// Variables:
 		// 		long numberInQueue; // stack offset -24
 		/* end block 1.2 */
-		// End offset: 0x80014200
-		// End Line: 2451
+		// End offset: 0x800140D8
+		// End Line: 2250
 	/* end block 1 */
-	// End offset: 0x80014200
-	// End Line: 2488
+	// End offset: 0x800140D8
+	// End Line: 2287
 
 	/* begin block 2 */
-		// Start line: 4317
+		// Start line: 3772
 	/* end block 2 */
-	// End Line: 4318
+	// End Line: 3773
 
 void DEBUG_DisplayStatus(GameTracker *gameTracker)
 
@@ -1412,16 +1427,16 @@ void DEBUG_DisplayStatus(GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_DrawShrinkCels(unsigned long **polyAddr /*$a0*/)
- // line 3564, offset 0x80014214
+ // line 3363, offset 0x800140ec
 	/* begin block 1 */
-		// Start line: 7128
+		// Start line: 6539
 	/* end block 1 */
-	// End Line: 7129
+	// End Line: 6540
 
 	/* begin block 2 */
-		// Start line: 6157
+		// Start line: 5600
 	/* end block 2 */
-	// End Line: 6158
+	// End Line: 5601
 
 void DEBUG_DrawShrinkCels(ulong **polyAddr)
 
@@ -1431,31 +1446,39 @@ void DEBUG_DrawShrinkCels(ulong **polyAddr)
 
 
 
-// autogenerated function stub: 
+// decompiled code
+// original method signature: 
 // void /*$ra*/ DEBUG_ContinueGame()
-void DEBUG_ContinueGame()
-{ // line 3736, offset 0x8001421c
+ // line 3535, offset 0x800140f4
 	/* begin block 1 */
-		// Start line: 7472
+		// Start line: 7067
 	/* end block 1 */
-	// End Line: 7473
+	// End Line: 7068
 
 	/* begin block 2 */
-		// Start line: 6331
+		// Start line: 5774
 	/* end block 2 */
-	// End Line: 6332
+	// End Line: 5775
 
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
+void DEBUG_ContinueGame(void)
+
+{
+  gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x40000000;
+  return;
 }
+
 
 
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_ExitGame()
- // line 3757, offset 0x80014234
+ // line 3556, offset 0x8001410c
 	/* begin block 1 */
-		// Start line: 6371
+		// Start line: 5814
 	/* end block 1 */
-	// End Line: 6372
+	// End Line: 5815
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
@@ -1463,10 +1486,137 @@ void DEBUG_ExitGame(void)
 
 {
   SOUND_StopAllSound();
-  theCamera.positionAccl._0_4_ = theCamera.positionAccl._0_4_ | 1;
-  theCamera.maxFocusVel.x = 2;
-  theCamera.maxFocusVel.y = 1;
-  theCamera.maxFocusVel.pad = 0;
+  gameTrackerX.gameFlags = gameTrackerX.gameFlags | 1;
+  gameTrackerX.levelDone = 2;
+  gameTrackerX.levelChange = 1;
+  gameTrackerX.gameMode = 0;
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ DEBUG_ReloadCurrentLevel()
+ // line 3567, offset 0x80014148
+	/* begin block 1 */
+		// Start line: 5839
+	/* end block 1 */
+	// End Line: 5840
+
+	/* begin block 2 */
+		// Start line: 5840
+	/* end block 2 */
+	// End Line: 5841
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
+void DEBUG_ReloadCurrentLevel(void)
+
+{
+  if (gameTrackerX.levelChange == 0) {
+    if ((gameTrackerX.streamFlags & 0x200000U) != 0) {
+      SAVE_SaveGame();
+    }
+    gameTrackerX.gameFlags = gameTrackerX.gameFlags | 1;
+    SOUND_ResetAllSound();
+    gameTrackerX.levelChange = 1;
+    gameTrackerX.levelDone = 4;
+  }
+  gameTrackerX.gameMode = 0;
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ DEBUG_LevelSelectNew()
+ // line 3587, offset 0x800141ac
+	/* begin block 1 */
+		// Start line: 3588
+		// Start offset: 0x800141AC
+		// Variables:
+	// 		char *name; // $s3
+	// 		short number; // $s2
+	// 		char *p; // $s0
+	// 		char saveChar; // $s1
+	/* end block 1 */
+	// End offset: 0x8001428C
+	// End Line: 3622
+
+	/* begin block 2 */
+		// Start line: 5880
+	/* end block 2 */
+	// End Line: 5881
+
+	/* begin block 3 */
+		// Start line: 5887
+	/* end block 3 */
+	// End Line: 5888
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
+void DEBUG_LevelSelectNew(void)
+
+{
+  char cVar1;
+  short number;
+  char *name;
+  char *pcVar2;
+  char cVar3;
+  
+  cVar3 = '\0';
+  name = currentMenu[debugMenuChoice].text;
+  number = *(short *)&currentMenu[debugMenuChoice].lower;
+  cVar1 = *name;
+  pcVar2 = name;
+  do {
+    if (cVar1 == '\0') {
+LAB_80014240:
+      if ((gameTrackerX.streamFlags & 0x200000U) != 0) {
+        SAVE_SaveGame();
+      }
+      GAMELOOP_RequestLevelChange(name,number,&gameTrackerX);
+      gameTrackerX.levelDone = 4;
+      if (cVar3 != '\0') {
+        *pcVar2 = cVar3;
+      }
+      gameTrackerX.gameMode = 0;
+      return;
+    }
+    if (((cVar1 == ' ') || (cVar1 == '\t')) || (cVar1 == '\n')) {
+      cVar3 = *pcVar2;
+      *pcVar2 = '\0';
+      goto LAB_80014240;
+    }
+    pcVar2 = pcVar2 + 1;
+    cVar1 = *pcVar2;
+  } while( true );
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ DEBUG_SetViewVram()
+ // line 3739, offset 0x800142ac
+	/* begin block 1 */
+		// Start line: 7473
+	/* end block 1 */
+	// End Line: 7474
+
+	/* begin block 2 */
+		// Start line: 6088
+	/* end block 2 */
+	// End Line: 6089
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
+void DEBUG_SetViewVram(void)
+
+{
+  gameTrackerX.gameMode = 7;
   return;
 }
 
@@ -1475,17 +1625,17 @@ void DEBUG_ExitGame(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_EndViewVram(struct GameTracker *gameTracker /*$a0*/)
- // line 3940, offset 0x80014270
+ // line 3744, offset 0x800142bc
 	/* begin block 1 */
-		// Start line: 7880
+		// Start line: 6097
 	/* end block 1 */
-	// End Line: 7881
+	// End Line: 6098
 
 void DEBUG_EndViewVram(GameTracker *gameTracker)
 
 {
                     /* WARNING: Subroutine does not return */
-  SetDefDispEnv((undefined2 *)&debugOrgFogRed,0,0,0x200,0xf0);
+  SetDefDispEnv((undefined2 *)&disp,0,0,0x200,0xf0);
 }
 
 
@@ -1493,40 +1643,40 @@ void DEBUG_EndViewVram(GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_ViewVram(struct GameTracker *gameTracker /*$s1*/)
- // line 3946, offset 0x800142c0
+ // line 3750, offset 0x80014314
 	/* begin block 1 */
-		// Start line: 3947
-		// Start offset: 0x800142C0
+		// Start line: 3751
+		// Start offset: 0x80014314
 		// Variables:
 	// 		long *controlCommand; // $a0
-	// 		static int xPos; // offset 0x478
-	// 		static int yPos; // offset 0x47c
+	// 		static int xPos; // offset 0xe48
+	// 		static int yPos; // offset 0xe4c
 	/* end block 1 */
-	// End offset: 0x80014380
-	// End Line: 3973
+	// End offset: 0x800143D4
+	// End Line: 3777
 
 	/* begin block 2 */
-		// Start line: 6577
+		// Start line: 6111
 	/* end block 2 */
-	// End Line: 6578
+	// End Line: 6112
 
 void DEBUG_ViewVram(GameTracker *gameTracker)
 
 {
-  if (((gameTracker->controlCommand[1] & 1U) != 0) && (-1 < DAT_800cdf34)) {
-    DAT_800cdf34 = DAT_800cdf34 + -0x20;
+  if (((gameTracker->controlCommand[1] & 1U) != 0) && (-1 < DAT_800cf10c)) {
+    DAT_800cf10c = DAT_800cf10c + -0x20;
   }
-  if (((gameTracker->controlCommand[1] & 2U) != 0) && (DAT_800cdf34 < 0x110)) {
-    DAT_800cdf34 = DAT_800cdf34 + 0x20;
+  if (((gameTracker->controlCommand[1] & 2U) != 0) && (DAT_800cf10c < 0x110)) {
+    DAT_800cf10c = DAT_800cf10c + 0x20;
   }
-  if (((gameTracker->controlCommand[1] & 4U) != 0) && (-1 < _spu_rev_param)) {
-    _spu_rev_param = _spu_rev_param + -0x20;
+  if (((gameTracker->controlCommand[1] & 4U) != 0) && (-1 < DAT_800cf108)) {
+    DAT_800cf108 = DAT_800cf108 + -0x20;
   }
-  if (((gameTracker->controlCommand[1] & 8U) != 0) && (_spu_rev_param < 0x200)) {
-    _spu_rev_param = _spu_rev_param + 0x20;
+  if (((gameTracker->controlCommand[1] & 8U) != 0) && (DAT_800cf108 < 0x200)) {
+    DAT_800cf108 = DAT_800cf108 + 0x20;
   }
                     /* WARNING: Subroutine does not return */
-  SetDefDispEnv((undefined2 *)&debugOrgFogRed,(short)_spu_rev_param,(short)DAT_800cdf34,0x200,0xf0);
+  SetDefDispEnv((undefined2 *)&disp,(short)DAT_800cf108,(short)DAT_800cf10c,0x200,0xf0);
 }
 
 
@@ -1534,16 +1684,16 @@ void DEBUG_ViewVram(GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_CaptureScreen(struct GameTracker *gameTracker /*$a0*/)
- // line 3984, offset 0x800143e0
+ // line 3787, offset 0x8001443c
 	/* begin block 1 */
-		// Start line: 6656
+		// Start line: 6188
 	/* end block 1 */
-	// End Line: 6657
+	// End Line: 6189
 
 	/* begin block 2 */
-		// Start line: 6705
+		// Start line: 6232
 	/* end block 2 */
-	// End Line: 6706
+	// End Line: 6233
 
 void DEBUG_CaptureScreen(GameTracker *gameTracker)
 
@@ -1556,30 +1706,38 @@ void DEBUG_CaptureScreen(GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_PageFlip()
- // line 4046, offset 0x800143e8
+ // line 3844, offset 0x80014444
 	/* begin block 1 */
-		// Start line: 4047
-		// Start offset: 0x800143E8
+		// Start line: 3846
+		// Start offset: 0x80014450
 		// Variables:
 	// 		struct POLY_F4 poly; // stack offset -32
 	// 		unsigned long **drawot; // $s0
 	/* end block 1 */
-	// End offset: 0x800143E8
-	// End Line: 4047
+	// End offset: 0x80014478
+	// End Line: 3854
 
 	/* begin block 2 */
-		// Start line: 8086
+		// Start line: 7681
 	/* end block 2 */
-	// End Line: 8087
+	// End Line: 7682
 
 	/* begin block 3 */
-		// Start line: 6773
+		// Start line: 6295
 	/* end block 3 */
-	// End Line: 6774
+	// End Line: 6296
 
 void DEBUG_PageFlip(void)
 
 {
+  int iVar1;
+  
+  do {
+    iVar1 = CheckVolatile(gameTrackerX.drawTimerReturn);
+  } while (iVar1 != 0);
+  do {
+    iVar1 = CheckVolatile(gameTrackerX.reqDisp);
+  } while (iVar1 != 0);
                     /* WARNING: Subroutine does not return */
   DrawSync(0);
 }
@@ -1589,20 +1747,20 @@ void DEBUG_PageFlip(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_FatalError(char *fmt /*stack 0*/)
- // line 4090, offset 0x800144f0
+ // line 3883, offset 0x80014550
 	/* begin block 1 */
-		// Start line: 4091
-		// Start offset: 0x800144F0
+		// Start line: 3884
+		// Start offset: 0x80014550
 		// Variables:
 	// 		char msg[256]; // stack offset -264
 	/* end block 1 */
-	// End offset: 0x800144F0
-	// End Line: 4091
+	// End offset: 0x80014550
+	// End Line: 3884
 
 	/* begin block 2 */
-		// Start line: 8180
+		// Start line: 7762
 	/* end block 2 */
-	// End Line: 8181
+	// End Line: 7763
 
 void DEBUG_FatalError(char *fmt)
 
@@ -1611,9 +1769,8 @@ void DEBUG_FatalError(char *fmt)
   char acStack264 [256];
   
   FONT_Flush();
-  vsprintf(acStack264,fmt,local_res4);
                     /* WARNING: Subroutine does not return */
-  FONT_Print(acStack264);
+  vsprintf(acStack264,fmt,local_res4);
 }
 
 
@@ -1621,16 +1778,16 @@ void DEBUG_FatalError(char *fmt)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_ProcessSecondController(struct GameTracker *gameTracker /*$a0*/)
- // line 4447, offset 0x80014544
+ // line 4240, offset 0x800145a4
 	/* begin block 1 */
-		// Start line: 7580
+		// Start line: 7083
 	/* end block 1 */
-	// End Line: 7581
+	// End Line: 7084
 
 	/* begin block 2 */
-		// Start line: 7666
+		// Start line: 7169
 	/* end block 2 */
-	// End Line: 7667
+	// End Line: 7170
 
 void DEBUG_ProcessSecondController(GameTracker *gameTracker)
 
@@ -1643,31 +1800,31 @@ void DEBUG_ProcessSecondController(GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_ProcessCheat(struct GameTracker *gameTracker /*$s3*/)
- // line 4538, offset 0x8001454c
+ // line 4331, offset 0x800145ac
 	/* begin block 1 */
-		// Start line: 4539
-		// Start offset: 0x8001454C
+		// Start line: 4332
+		// Start offset: 0x800145AC
 		// Variables:
 	// 		long angleRelCamera; // $s2
 
 		/* begin block 1.1 */
-			// Start line: 4565
-			// Start offset: 0x80014620
+			// Start line: 4358
+			// Start offset: 0x80014680
 			// Variables:
 		// 		struct SVECTOR v; // stack offset -80
 		// 		struct VECTOR dv; // stack offset -72
 		// 		struct MATRIX rotate_mat; // stack offset -56
 		/* end block 1.1 */
-		// End offset: 0x800146A4
-		// End Line: 4575
+		// End offset: 0x80014704
+		// End Line: 4368
 	/* end block 1 */
-	// End offset: 0x800146A4
-	// End Line: 4576
+	// End offset: 0x80014704
+	// End Line: 4369
 
 	/* begin block 2 */
-		// Start line: 7762
+		// Start line: 7265
 	/* end block 2 */
-	// End Line: 7763
+	// End Line: 7266
 
 void DEBUG_ProcessCheat(GameTracker *gameTracker)
 
@@ -1722,37 +1879,6 @@ void DEBUG_ProcessCheat(GameTracker *gameTracker)
                     /* WARNING: Subroutine does not return */
     memset(auStack80,0,8);
   }
-  return;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// void /*$ra*/ DEBUG_DoAreaProtection()
- // line 4593, offset 0x800146c0
-	/* begin block 1 */
-		// Start line: 4596
-		// Start offset: 0x800146C8
-	/* end block 1 */
-	// End offset: 0x800146D8
-	// End Line: 4603
-
-	/* begin block 2 */
-		// Start line: 7873
-	/* end block 2 */
-	// End Line: 7874
-
-/* WARNING: Unknown calling convention yet parameter storage is locked */
-
-void DEBUG_DoAreaProtection(void)
-
-{
-  uint uVar1;
-  
-  do {
-    uVar1 = checkagain();
-  } while (uVar1 != 0);
   return;
 }
 

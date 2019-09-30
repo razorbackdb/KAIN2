@@ -5,7 +5,7 @@
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleLightGroup(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 76, offset 0x8001d840
+ // line 76, offset 0x8001d824
 	/* begin block 1 */
 		// Start line: 152
 	/* end block 1 */
@@ -16,7 +16,7 @@
 	/* end block 2 */
 	// End Line: 154
 
-long SIGNAL_HandleCameraAdjust(_Instance *instance,Signal *signal)
+long SIGNAL_HandleLightGroup(_Instance *instance,Signal *signal)
 
 {
   if (instance != (_Instance *)0x0) {
@@ -30,7 +30,7 @@ long SIGNAL_HandleCameraAdjust(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCameraAdjust(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 85, offset 0x8001d85c
+ // line 85, offset 0x8001d840
 	/* begin block 1 */
 		// Start line: 170
 	/* end block 1 */
@@ -39,7 +39,7 @@ long SIGNAL_HandleCameraAdjust(_Instance *instance,Signal *signal)
 long SIGNAL_HandleCameraAdjust(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_Adjust((Camera *)&theCamera,*(long *)signal->data);
+  CAMERA_Adjust(&theCamera,*(long *)signal->data);
   return 1;
 }
 
@@ -48,7 +48,7 @@ long SIGNAL_HandleCameraAdjust(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCamera(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 91, offset 0x8001d884
+ // line 91, offset 0x8001d86c
 	/* begin block 1 */
 		// Start line: 182
 	/* end block 1 */
@@ -57,7 +57,7 @@ long SIGNAL_HandleCameraAdjust(_Instance *instance,Signal *signal)
 long SIGNAL_HandleCamera(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_ChangeTo((Camera *)&theCamera,*(_CameraKey **)signal->data);
+  CAMERA_ChangeTo(&theCamera,*(_CameraKey **)signal->data);
   return 1;
 }
 
@@ -66,7 +66,7 @@ long SIGNAL_HandleCamera(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SIGNAL_RelocateCamera(struct Signal *signal /*$a0*/, long offset /*$a1*/)
- // line 97, offset 0x8001d8ac
+ // line 97, offset 0x8001d898
 	/* begin block 1 */
 		// Start line: 194
 	/* end block 1 */
@@ -95,7 +95,7 @@ void SIGNAL_RelocateCamera(Signal *signal,long offset)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCameraMode(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 102, offset 0x8001d8c8
+ // line 102, offset 0x8001d8b4
 	/* begin block 1 */
 		// Start line: 204
 	/* end block 1 */
@@ -104,7 +104,7 @@ void SIGNAL_RelocateCamera(Signal *signal,long offset)
 long SIGNAL_HandleCameraMode(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_SetMode((Camera *)&theCamera,*(long *)signal->data);
+  CAMERA_SetMode(&theCamera,*(long *)signal->data);
   return 1;
 }
 
@@ -113,7 +113,7 @@ long SIGNAL_HandleCameraMode(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCameraLock(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 110, offset 0x8001d8f0
+ // line 110, offset 0x8001d8e0
 	/* begin block 1 */
 		// Start line: 220
 	/* end block 1 */
@@ -122,7 +122,7 @@ long SIGNAL_HandleCameraMode(_Instance *instance,Signal *signal)
 long SIGNAL_HandleCameraLock(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_Lock((Camera *)&theCamera,*(long *)signal->data);
+  CAMERA_Lock(&theCamera,*(long *)signal->data);
   return 1;
 }
 
@@ -131,7 +131,7 @@ long SIGNAL_HandleCameraLock(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCameraUnlock(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 116, offset 0x8001d918
+ // line 116, offset 0x8001d90c
 	/* begin block 1 */
 		// Start line: 232
 	/* end block 1 */
@@ -140,7 +140,7 @@ long SIGNAL_HandleCameraLock(_Instance *instance,Signal *signal)
 long SIGNAL_HandleCameraUnlock(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_Unlock((Camera *)&theCamera,*(long *)signal->data);
+  CAMERA_Unlock(&theCamera,*(long *)signal->data);
   return 1;
 }
 
@@ -149,7 +149,7 @@ long SIGNAL_HandleCameraUnlock(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCameraSmooth(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 122, offset 0x8001d940
+ // line 122, offset 0x8001d938
 	/* begin block 1 */
 		// Start line: 244
 	/* end block 1 */
@@ -158,7 +158,7 @@ long SIGNAL_HandleCameraUnlock(_Instance *instance,Signal *signal)
 long SIGNAL_HandleCameraSmooth(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_SetSmoothValue((Camera *)&theCamera,*(long *)signal->data);
+  CAMERA_SetSmoothValue(&theCamera,*(long *)signal->data);
   return 1;
 }
 
@@ -167,7 +167,7 @@ long SIGNAL_HandleCameraSmooth(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCameraTimer(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 128, offset 0x8001d968
+ // line 128, offset 0x8001d964
 	/* begin block 1 */
 		// Start line: 256
 	/* end block 1 */
@@ -176,7 +176,7 @@ long SIGNAL_HandleCameraSmooth(_Instance *instance,Signal *signal)
 long SIGNAL_HandleCameraTimer(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_SetTimer((Camera *)&theCamera,*(long *)signal->data);
+  CAMERA_SetTimer(&theCamera,*(long *)signal->data);
   return 1;
 }
 
@@ -194,7 +194,7 @@ long SIGNAL_HandleCameraTimer(_Instance *instance,Signal *signal)
 long SIGNAL_HandleCameraSave(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_Save((Camera *)&UCHAR____800d0698,*(long *)signal->data);
+  CAMERA_Save(&theCamera,*(long *)signal->data);
   return 1;
 }
 
@@ -203,7 +203,7 @@ long SIGNAL_HandleCameraSave(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCameraRestore(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 140, offset 0x8001d9b8
+ // line 140, offset 0x8001d9bc
 	/* begin block 1 */
 		// Start line: 280
 	/* end block 1 */
@@ -212,7 +212,7 @@ long SIGNAL_HandleCameraSave(_Instance *instance,Signal *signal)
 long SIGNAL_HandleCameraRestore(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_Restore((Camera *)&theCamera,*(long *)signal->data);
+  CAMERA_Restore(&theCamera,*(long *)signal->data);
   return 1;
 }
 
@@ -221,7 +221,7 @@ long SIGNAL_HandleCameraRestore(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCameraValue(struct _Instance *instance /*$a0*/, struct Signal *signal /*$v0*/)
- // line 146, offset 0x8001d9e0
+ // line 146, offset 0x8001d9e8
 	/* begin block 1 */
 		// Start line: 292
 	/* end block 1 */
@@ -230,7 +230,7 @@ long SIGNAL_HandleCameraRestore(_Instance *instance,Signal *signal)
 long SIGNAL_HandleCameraValue(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_SetValue((Camera *)&theCamera,*(long *)signal->data,*(long *)(signal->data + 4));
+  CAMERA_SetValue(&theCamera,*(long *)signal->data,*(long *)(signal->data + 4));
   return 1;
 }
 
@@ -239,10 +239,10 @@ long SIGNAL_HandleCameraValue(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleStreamLevel(struct _Instance *instance /*$s2*/, struct Signal *signal /*$s4*/)
- // line 157, offset 0x8001da10
+ // line 157, offset 0x8001da1c
 	/* begin block 1 */
 		// Start line: 158
-		// Start offset: 0x8001DA10
+		// Start offset: 0x8001DA1C
 		// Variables:
 	// 		char areaName[16]; // stack offset -48
 	// 		int signalnum; // $s5
@@ -253,22 +253,22 @@ long SIGNAL_HandleCameraValue(_Instance *instance,Signal *signal)
 
 		/* begin block 1.1 */
 			// Start line: 177
-			// Start offset: 0x8001DA8C
+			// Start offset: 0x8001DA98
 			// Variables:
 		// 		struct _StreamUnit *curStreamUnit; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8001DB38
+		// End offset: 0x8001DB48
 		// End Line: 199
 
 		/* begin block 1.2 */
 			// Start line: 246
-			// Start offset: 0x8001DBF4
+			// Start offset: 0x8001DC0C
 		/* end block 1.2 */
-		// End offset: 0x8001DC44
-		// End Line: 261
+		// End offset: 0x8001DC54
+		// End Line: 259
 	/* end block 1 */
-	// End offset: 0x8001DC48
-	// End Line: 264
+	// End offset: 0x8001DC58
+	// End Line: 262
 
 	/* begin block 2 */
 		// Start line: 314
@@ -289,31 +289,31 @@ long SIGNAL_HandleStreamLevel(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleFogNear(struct _Instance *instance /*$a0*/, struct Signal *signal /*$s0*/)
- // line 267, offset 0x8001dc6c
+ // line 265, offset 0x8001dc7c
 	/* begin block 1 */
-		// Start line: 268
-		// Start offset: 0x8001DC6C
+		// Start line: 266
+		// Start offset: 0x8001DC7C
 		// Variables:
 	// 		struct Level *level; // $s0
 	/* end block 1 */
-	// End offset: 0x8001DC6C
-	// End Line: 268
+	// End offset: 0x8001DC7C
+	// End Line: 266
 
 	/* begin block 2 */
-		// Start line: 557
+		// Start line: 553
 	/* end block 2 */
-	// End Line: 558
+	// End Line: 554
 
 	/* begin block 3 */
-		// Start line: 562
+		// Start line: 558
 	/* end block 3 */
-	// End Line: 563
+	// End Line: 559
 
 long SIGNAL_HandleFogNear(_Instance *instance,Signal *signal)
 
 {
                     /* WARNING: Subroutine does not return */
-  STREAM_GetLevelWithID(*(long *)(theCamera.core.vvNormalWorVecMat[1].t[0] + 0x38));
+  STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID);
 }
 
 
@@ -321,31 +321,31 @@ long SIGNAL_HandleFogNear(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleFogFar(struct _Instance *instance /*$a0*/, struct Signal *signal /*$s1*/)
- // line 289, offset 0x8001dcc0
+ // line 287, offset 0x8001dcd0
 	/* begin block 1 */
-		// Start line: 290
-		// Start offset: 0x8001DCC0
+		// Start line: 288
+		// Start offset: 0x8001DCD0
 		// Variables:
 	// 		struct Level *level; // $s0
 	/* end block 1 */
-	// End offset: 0x8001DCC0
-	// End Line: 290
+	// End offset: 0x8001DCD0
+	// End Line: 288
 
 	/* begin block 2 */
-		// Start line: 617
+		// Start line: 613
 	/* end block 2 */
-	// End Line: 618
+	// End Line: 614
 
 	/* begin block 3 */
-		// Start line: 622
+		// Start line: 618
 	/* end block 3 */
-	// End Line: 623
+	// End Line: 619
 
 long SIGNAL_HandleFogFar(_Instance *instance,Signal *signal)
 
 {
                     /* WARNING: Subroutine does not return */
-  STREAM_GetLevelWithID(*(long *)(theCamera.core.vvNormalWorVecMat[1].t[0] + 0x38));
+  STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID);
 }
 
 
@@ -353,16 +353,16 @@ long SIGNAL_HandleFogFar(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCameraShake(struct _Instance *instance /*$a0*/, struct Signal *signal /*$v0*/)
- // line 316, offset 0x8001dd1c
+ // line 314, offset 0x8001dd2c
 	/* begin block 1 */
-		// Start line: 632
+		// Start line: 623
 	/* end block 1 */
-	// End Line: 633
+	// End Line: 624
 
 long SIGNAL_HandleCameraShake(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_SetShake((Camera *)&theCamera,*(long *)signal->data,*(long *)(signal->data + 4));
+  CAMERA_SetShake(&theCamera,*(long *)signal->data,*(long *)(signal->data + 4));
   return 1;
 }
 
@@ -371,17 +371,17 @@ long SIGNAL_HandleCameraShake(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCallSignal(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 322, offset 0x8001dd4c
+ // line 320, offset 0x8001dd60
 	/* begin block 1 */
-		// Start line: 687
+		// Start line: 683
 	/* end block 1 */
-	// End Line: 688
+	// End Line: 684
 
 long SIGNAL_HandleCallSignal(_Instance *instance,Signal *signal)
 
 {
+                    /* WARNING: Subroutine does not return */
   SIGNAL_HandleSignal(instance,(Signal *)(*(int *)signal->data + 8),0);
-  return 1;
 }
 
 
@@ -389,21 +389,21 @@ long SIGNAL_HandleCallSignal(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleStopPlayerControl(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 328, offset 0x8001dd74
+ // line 326, offset 0x8001dd88
 	/* begin block 1 */
-		// Start line: 699
+		// Start line: 695
 	/* end block 1 */
-	// End Line: 700
+	// End Line: 696
 
 	/* begin block 2 */
-		// Start line: 700
+		// Start line: 696
 	/* end block 2 */
-	// End Line: 701
+	// End Line: 697
 
 long SIGNAL_HandleStopPlayerControl(_Instance *instance,Signal *signal)
 
 {
-  theCamera.positionAccl._0_4_ = theCamera.positionAccl._0_4_ | 0x90;
+  gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x90;
   return 1;
 }
 
@@ -412,21 +412,21 @@ long SIGNAL_HandleStopPlayerControl(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleStartPlayerControl(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 335, offset 0x8001dd8c
+ // line 333, offset 0x8001dda0
 	/* begin block 1 */
-		// Start line: 713
+		// Start line: 709
 	/* end block 1 */
-	// End Line: 714
+	// End Line: 710
 
 	/* begin block 2 */
-		// Start line: 714
+		// Start line: 710
 	/* end block 2 */
-	// End Line: 715
+	// End Line: 711
 
 long SIGNAL_HandleStartPlayerControl(_Instance *instance,Signal *signal)
 
 {
-  theCamera.positionAccl._0_4_ = theCamera.positionAccl._0_4_ & 0xffffff6f;
+  gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xffffff6f;
   return 1;
 }
 
@@ -435,25 +435,27 @@ long SIGNAL_HandleStartPlayerControl(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SIGNAL_RelocateCameraSpline(struct Signal *signal /*$a0*/, long offset /*$a1*/)
- // line 502, offset 0x8001ddac
+ // line 500, offset 0x8001ddc0
 	/* begin block 1 */
-		// Start line: 1004
+		// Start line: 996
 	/* end block 1 */
-	// End Line: 1005
+	// End Line: 997
 
 	/* begin block 2 */
-		// Start line: 884
+		// Start line: 880
 	/* end block 2 */
-	// End Line: 885
+	// End Line: 881
 
 void SIGNAL_RelocateCameraSpline(Signal *signal,long offset)
 
 {
-  if (*(int *)(signal->data + 4) == 0) {
-    SIGNAL_RelocateCameraSpline(signal,offset);
-    return;
+  int iVar1;
+  
+  iVar1 = 0;
+  if (*(int *)(signal->data + 4) != 0) {
+    iVar1 = *(int *)(signal->data + 4) + offset;
   }
-  *(int *)(signal->data + 4) = *(int *)(signal->data + 4) + offset;
+  *(int *)(signal->data + 4) = iVar1;
   return;
 }
 
@@ -462,39 +464,39 @@ void SIGNAL_RelocateCameraSpline(Signal *signal,long offset)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCameraSpline(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 507, offset 0x8001ddc8
+ // line 505, offset 0x8001dddc
 	/* begin block 1 */
-		// Start line: 893
+		// Start line: 889
 	/* end block 1 */
-	// End Line: 894
+	// End Line: 890
 
 	/* begin block 2 */
-		// Start line: 894
+		// Start line: 890
 	/* end block 2 */
-	// End Line: 895
+	// End Line: 891
 
-long SIGNAL_HandleStreamLevel(_Instance *instance,Signal *signal)
+long SIGNAL_HandleCameraSpline(_Instance *instance,Signal *signal)
 
 {
   long lVar1;
   
   if (*(int *)signal->data == 0) {
     if (*(int *)(signal->data + 4) != 0) {
-      DAT_800d1d90 = *(undefined4 *)(*(int *)(signal->data + 4) + 0x38);
+      theCamera.Spline00 = *(MultiSpline **)(*(int *)(signal->data + 4) + 0x38);
       return 1;
     }
-    DAT_800d1d90 = 0;
+    theCamera.Spline00 = (MultiSpline *)0x0;
     return 1;
   }
   if (*(int *)signal->data != 1) {
-    lVar1 = FUN_8001de40(instance,signal);
+    lVar1 = SIGNAL_HandleCameraSpline((char)instance,(char)signal);
     return lVar1;
   }
   if (*(int *)(signal->data + 4) != 0) {
-    DAT_800d1d94 = *(undefined4 *)(*(int *)(signal->data + 4) + 0x38);
+    theCamera.Spline01 = *(MultiSpline **)(*(int *)(signal->data + 4) + 0x38);
     return 1;
   }
-  DAT_800d1d94 = 0;
+  theCamera.Spline01 = (MultiSpline *)0x0;
   return 1;
 }
 
@@ -503,26 +505,26 @@ long SIGNAL_HandleStreamLevel(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleScreenWipe(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 539, offset 0x8001de48
+ // line 537, offset 0x8001de5c
 	/* begin block 1 */
-		// Start line: 957
+		// Start line: 953
 	/* end block 1 */
-	// End Line: 958
+	// End Line: 954
 
 	/* begin block 2 */
-		// Start line: 958
+		// Start line: 954
 	/* end block 2 */
-	// End Line: 959
+	// End Line: 955
 
 long SIGNAL_HandleScreenWipe(_Instance *instance,Signal *signal)
 
 {
-  theCamera.core._222_2_ = *(short *)(signal->data + 2);
-  if (theCamera.core._222_2_ < 0) {
-    theCamera.core._222_2_ = -theCamera.core._222_2_;
+  gameTrackerX.maxWipeTime = *(short *)(signal->data + 2);
+  if (gameTrackerX.maxWipeTime < 0) {
+    gameTrackerX.maxWipeTime = -gameTrackerX.maxWipeTime;
   }
-  theCamera.core.pad6 = *(short *)(signal->data + 2);
-  theCamera.shake._0_2_ = *(undefined2 *)signal->data;
+  gameTrackerX.wipeTime = *(short *)(signal->data + 2);
+  gameTrackerX.wipeType = *(short *)signal->data;
   return 1;
 }
 
@@ -531,16 +533,16 @@ long SIGNAL_HandleScreenWipe(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleBlendStart(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 547, offset 0x8001de80
+ // line 545, offset 0x8001de94
 	/* begin block 1 */
-		// Start line: 973
+		// Start line: 969
 	/* end block 1 */
-	// End Line: 974
+	// End Line: 970
 
 	/* begin block 2 */
-		// Start line: 983
+		// Start line: 979
 	/* end block 2 */
-	// End Line: 984
+	// End Line: 980
 
 long SIGNAL_HandleBlendStart(_Instance *instance,Signal *signal)
 
@@ -553,23 +555,23 @@ long SIGNAL_HandleBlendStart(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleScreenWipeColor(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 561, offset 0x8001de88
+ // line 559, offset 0x8001de9c
 	/* begin block 1 */
-		// Start line: 1001
+		// Start line: 997
 	/* end block 1 */
-	// End Line: 1002
+	// End Line: 998
 
 	/* begin block 2 */
-		// Start line: 1002
+		// Start line: 998
 	/* end block 2 */
-	// End Line: 1003
+	// End Line: 999
 
 long SIGNAL_HandleScreenWipeColor(_Instance *instance,Signal *signal)
 
 {
-  theCamera.core.nondebugPos.y._0_1_ = signal->data[0];
-  theCamera.core.nondebugPos.y._1_1_ = signal->data[1];
-  theCamera.core.nondebugPos.z._0_1_ = signal->data[2];
+  gameTrackerX.wipeColor.r = signal->data[0];
+  gameTrackerX.wipeColor.g = signal->data[1];
+  gameTrackerX.wipeColor.b = signal->data[2];
   return 1;
 }
 
@@ -578,20 +580,20 @@ long SIGNAL_HandleScreenWipeColor(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleSetSlideAngle(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 569, offset 0x8001deb4
+ // line 567, offset 0x8001dec8
 	/* begin block 1 */
-		// Start line: 570
-		// Start offset: 0x8001DEB4
+		// Start line: 568
+		// Start offset: 0x8001DEC8
 		// Variables:
 	// 		long slideAngle; // $a2
 	/* end block 1 */
-	// End offset: 0x8001DED4
-	// End Line: 580
+	// End offset: 0x8001DEE8
+	// End Line: 578
 
 	/* begin block 2 */
-		// Start line: 1017
+		// Start line: 1013
 	/* end block 2 */
-	// End Line: 1018
+	// End Line: 1014
 
 long SIGNAL_HandleSetSlideAngle(_Instance *instance,Signal *signal)
 
@@ -608,11 +610,11 @@ long SIGNAL_HandleSetSlideAngle(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleResetSlideAngle(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 583, offset 0x8001dee4
+ // line 581, offset 0x8001def8
 	/* begin block 1 */
-		// Start line: 1046
+		// Start line: 1042
 	/* end block 1 */
-	// End Line: 1047
+	// End Line: 1043
 
 long SIGNAL_HandleResetSlideAngle(_Instance *instance,Signal *signal)
 
@@ -629,20 +631,20 @@ long SIGNAL_HandleResetSlideAngle(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleSetCameraTilt(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 595, offset 0x8001df10
+ // line 593, offset 0x8001df24
 	/* begin block 1 */
-		// Start line: 596
-		// Start offset: 0x8001DF10
+		// Start line: 594
+		// Start offset: 0x8001DF24
 		// Variables:
 	// 		long tilt; // $v0
 	/* end block 1 */
-	// End offset: 0x8001DF8C
-	// End Line: 610
+	// End offset: 0x8001DFA4
+	// End Line: 608
 
 	/* begin block 2 */
-		// Start line: 1070
+		// Start line: 1066
 	/* end block 2 */
-	// End Line: 1071
+	// End Line: 1067
 
 long SIGNAL_HandleSetCameraTilt(_Instance *instance,Signal *signal)
 
@@ -654,7 +656,7 @@ long SIGNAL_HandleSetCameraTilt(_Instance *instance,Signal *signal)
     if (iVar1 < 0) {
       iVar1 = iVar1 + 0x168;
     }
-    CAMERA_SetTimer((Camera *)&theCamera,(iVar1 * 0x1000) / 0x168);
+    CAMERA_Adjust_tilt(&theCamera,(iVar1 * 0x1000) / 0x168);
   }
   return 1;
 }
@@ -664,26 +666,26 @@ long SIGNAL_HandleSetCameraTilt(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleSetCameraDistance(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 613, offset 0x8001df9c
+ // line 611, offset 0x8001dfb4
 	/* begin block 1 */
-		// Start line: 614
-		// Start offset: 0x8001DF9C
+		// Start line: 612
+		// Start offset: 0x8001DFB4
 		// Variables:
 	// 		long distance; // $a1
 	/* end block 1 */
-	// End offset: 0x8001DFBC
-	// End Line: 624
+	// End offset: 0x8001DFD8
+	// End Line: 622
 
 	/* begin block 2 */
-		// Start line: 1107
+		// Start line: 1103
 	/* end block 2 */
-	// End Line: 1108
+	// End Line: 1104
 
 long SIGNAL_HandleSetCameraDistance(_Instance *instance,Signal *signal)
 
 {
   if (instance != (_Instance *)0x0) {
-    CAMERA_Adjust_distance((Camera *)&theCamera,*(long *)signal->data);
+    CAMERA_Adjust_distance(&theCamera,*(long *)signal->data);
   }
   return 1;
 }
@@ -693,16 +695,16 @@ long SIGNAL_HandleSetCameraDistance(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleEnd(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 744, offset 0x8001dfcc
+ // line 742, offset 0x8001dfe8
 	/* begin block 1 */
-		// Start line: 1370
+		// Start line: 1366
 	/* end block 1 */
-	// End Line: 1371
+	// End Line: 1367
 
 	/* begin block 2 */
-		// Start line: 1371
+		// Start line: 1367
 	/* end block 2 */
-	// End Line: 1372
+	// End Line: 1368
 
 long SIGNAL_HandleEnd(_Instance *instance,Signal *signal)
 
@@ -715,20 +717,20 @@ long SIGNAL_HandleEnd(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ COLLIDE_HandleSignal(struct _Instance *instance /*$s3*/, struct Signal *signal /*$s0*/, long numSignals /*$a2*/, int dontForceDoSignal /*$a3*/)
- // line 844, offset 0x8001dfd4
+ // line 842, offset 0x8001dff0
 	/* begin block 1 */
-		// Start line: 845
-		// Start offset: 0x8001DFD4
+		// Start line: 843
+		// Start offset: 0x8001DFF0
 		// Variables:
 	// 		long signalNumber; // $v1
 	/* end block 1 */
-	// End offset: 0x8001E0BC
-	// End Line: 900
+	// End offset: 0x8001E0DC
+	// End Line: 898
 
 	/* begin block 2 */
-		// Start line: 1570
+		// Start line: 1566
 	/* end block 2 */
-	// End Line: 1571
+	// End Line: 1567
 
 void COLLIDE_HandleSignal(_Instance *instance,Signal *signal,long numSignals,int dontForceDoSignal)
 
@@ -739,12 +741,12 @@ void COLLIDE_HandleSignal(_Instance *instance,Signal *signal,long numSignals,int
   if (numSignals != 0) {
     while( true ) {
       uVar2 = signal->id & 0x7fffffff;
-      if ((((signalInfoList[uVar2].onlyPlayer == 0) ||
-           (instance == (_Instance *)theCamera.core.vvNormalWorVecMat[1].t[0])) &&
-          (((theCamera.positionAccl._0_4_ & 0x40) == 0 || (-1 < signal->id)))) &&
+      if (((((&signalInfoList)[uVar2].onlyPlayer == 0) || (instance == gameTrackerX.playerInstance))
+          && (((gameTrackerX.gameFlags & 0x40U) == 0 || (-1 < signal->id)))) &&
          ((0x1a < uVar2 ||
-          (lVar1 = (*signalInfoList[uVar2].signalHandleFunc)(instance,signal), lVar1 == 0)))) break;
-      signal = (Signal *)(&signal->id + (int)signalInfoList[signal->id & 0x7fffffff].length + 1);
+          (lVar1 = (*(&signalInfoList)[uVar2].signalHandleFunc)(instance,signal), lVar1 == 0))))
+      break;
+      signal = (Signal *)(&signal->id + (int)(&signalInfoList)[signal->id & 0x7fffffff].length + 1);
     }
   }
   return;
@@ -755,22 +757,22 @@ void COLLIDE_HandleSignal(_Instance *instance,Signal *signal,long numSignals,int
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_IsThisStreamAWarpGate(struct Signal *signal /*$a0*/)
- // line 902, offset 0x8001e0d8
+ // line 900, offset 0x8001e0f8
 	/* begin block 1 */
-		// Start line: 903
-		// Start offset: 0x8001E0D8
+		// Start line: 901
+		// Start offset: 0x8001E0F8
 		// Variables:
 	// 		long result; // $s0
 	// 		char areaName[32]; // stack offset -40
 	// 		char *commapos; // $v0
 	/* end block 1 */
-	// End offset: 0x8001E124
-	// End Line: 920
+	// End offset: 0x8001E144
+	// End Line: 918
 
 	/* begin block 2 */
-		// Start line: 1686
+		// Start line: 1682
 	/* end block 2 */
-	// End Line: 1687
+	// End Line: 1683
 
 long SIGNAL_IsThisStreamAWarpGate(Signal *signal)
 
@@ -786,53 +788,53 @@ long SIGNAL_IsThisStreamAWarpGate(Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_IsStreamSignal(struct Signal *signal /*$s1*/, long *isWarpGate /*$s4*/)
- // line 923, offset 0x8001e138
+ // line 921, offset 0x8001e158
 	/* begin block 1 */
-		// Start line: 924
-		// Start offset: 0x8001E138
+		// Start line: 922
+		// Start offset: 0x8001E158
 		// Variables:
 	// 		long result; // $s3
 	// 		long done; // $s2
 	// 		long signalNumber; // $s0
 	/* end block 1 */
-	// End offset: 0x8001E1EC
-	// End Line: 966
+	// End offset: 0x8001E210
+	// End Line: 964
 
 	/* begin block 2 */
-		// Start line: 1732
+		// Start line: 1728
 	/* end block 2 */
-	// End Line: 1733
+	// End Line: 1729
 
-undefined4 SIGNAL_IsStreamSignal(Signal *param_1,undefined4 *param_2)
+long SIGNAL_IsStreamSignal(Signal *signal,long *isWarpGate)
 
 {
   bool bVar1;
   long lVar2;
   uint uVar3;
-  undefined4 uVar4;
+  long lVar4;
   
-  uVar4 = 0;
+  lVar4 = 0;
   bVar1 = false;
-  *param_2 = 0;
+  *isWarpGate = 0;
   while( true ) {
-    uVar3 = param_1->id & 0x7fffffff;
+    uVar3 = signal->id & 0x7fffffff;
     if (uVar3 == 0xf) {
       bVar1 = true;
     }
     else {
       if (uVar3 == 0x12) {
         bVar1 = true;
-        uVar4 = 1;
-        lVar2 = SIGNAL_IsThisStreamAWarpGate(param_1);
+        lVar4 = 1;
+        lVar2 = SIGNAL_IsThisStreamAWarpGate(signal);
         if (lVar2 != 0) {
-          *param_2 = 1;
+          *isWarpGate = 1;
         }
       }
     }
     if (bVar1) break;
-    param_1 = (Signal *)(&param_1->id + (int)*(short *)(&gp0xffff8510 + uVar3 * 0xc) + 1);
+    signal = (Signal *)(&signal->id + (int)(&signalInfoList)[uVar3].length + 1);
   }
-  return uVar4;
+  return lVar4;
 }
 
 
@@ -840,11 +842,11 @@ undefined4 SIGNAL_IsStreamSignal(Signal *param_1,undefined4 *param_2)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SIGNAL_HandleSignal(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/, int dontForceDoSignal /*$a3*/)
- // line 969, offset 0x8001e210
+ // line 967, offset 0x8001e234
 	/* begin block 1 */
-		// Start line: 1831
+		// Start line: 1827
 	/* end block 1 */
-	// End Line: 1832
+	// End Line: 1828
 
 void SIGNAL_HandleSignal(_Instance *instance,Signal *signal,int dontForceDoSignal)
 
@@ -858,43 +860,40 @@ void SIGNAL_HandleSignal(_Instance *instance,Signal *signal,int dontForceDoSigna
 // decompiled code
 // original method signature: 
 // struct _MultiSignal * /*$ra*/ SIGNAL_RelocateSignal(struct _MultiSignal *multiSignal /*$s4*/, long offset /*$s5*/)
- // line 976, offset 0x8001e234
+ // line 974, offset 0x8001e258
 	/* begin block 1 */
-		// Start line: 977
-		// Start offset: 0x8001E234
+		// Start line: 975
+		// Start offset: 0x8001E258
 		// Variables:
 	// 		int i; // $s1
 	// 		struct Signal *signal; // $s0
 	/* end block 1 */
-	// End offset: 0x8001E2E8
-	// End Line: 999
+	// End offset: 0x8001E310
+	// End Line: 997
 
 	/* begin block 2 */
-		// Start line: 1845
+		// Start line: 1841
 	/* end block 2 */
-	// End Line: 1846
+	// End Line: 1842
 
-void SIGNAL_HandleSignal(_Instance *instance,Signal *signal,int dontForceDoSignal)
+_MultiSignal * SIGNAL_RelocateSignal(_MultiSignal *multiSignal,long offset)
 
 {
-  _Instance **pp_Var1;
+  Signal *pSVar1;
   int iVar2;
   
-  pp_Var1 = &instance->next;
+  pSVar1 = multiSignal->signalList;
   iVar2 = 0;
-  if (0 < (int)(instance->node).prev) {
+  if (0 < multiSignal->numSignals) {
     do {
-      if (*(code **)(s__kain2_sfx_object_mainmenu_mainm_800ce7d0 +
-                    ((uint)*pp_Var1 & 0x7fffffff) * 0xc) != (code *)0x0) {
-        (**(code **)(s__kain2_sfx_object_mainmenu_mainm_800ce7d0 +
-                    ((uint)*pp_Var1 & 0x7fffffff) * 0xc))(pp_Var1,signal);
+      if ((&signalInfoList)[pSVar1->id & 0x7fffffff].signalRelocateFunc != (_func_21 *)0x0) {
+        (*(&signalInfoList)[pSVar1->id & 0x7fffffff].signalRelocateFunc)(pSVar1,offset);
       }
       iVar2 = iVar2 + 1;
-      pp_Var1 = pp_Var1 + (int)*(short *)(s__kain2_game_psx_warning_tim_800ce7b4 +
-                                         ((uint)*pp_Var1 & 0x7fffffff) * 0xc + 0x18) + 1;
-    } while (iVar2 < (int)(instance->node).prev);
+      pSVar1 = (Signal *)(&pSVar1->id + (int)(&signalInfoList)[pSVar1->id & 0x7fffffff].length + 1);
+    } while (iVar2 < multiSignal->numSignals);
   }
-  return;
+  return (_MultiSignal *)pSVar1->data;
 }
 
 
@@ -902,52 +901,55 @@ void SIGNAL_HandleSignal(_Instance *instance,Signal *signal,int dontForceDoSigna
 // decompiled code
 // original method signature: 
 // struct _MultiSignal * /*$ra*/ SIGNAL_FindSignal(struct Level *level /*$a0*/, long id /*$a1*/)
- // line 1002, offset 0x8001e310
+ // line 1000, offset 0x8001e338
 	/* begin block 1 */
-		// Start line: 1004
-		// Start offset: 0x8001E310
+		// Start line: 1002
+		// Start offset: 0x8001E338
 		// Variables:
 	// 		int i; // $a2
 	// 		struct Signal *signal; // $a3
 	// 		struct _MultiSignal *msignal; // $v1
 	// 		long signalNumber; // $v1
 	/* end block 1 */
-	// End offset: 0x8001E3B8
-	// End Line: 1045
+	// End offset: 0x8001E3E4
+	// End Line: 1043
 
 	/* begin block 2 */
-		// Start line: 1922
+		// Start line: 1918
 	/* end block 2 */
-	// End Line: 1923
+	// End Line: 1919
 
 	/* begin block 3 */
-		// Start line: 1923
+		// Start line: 1919
 	/* end block 3 */
-	// End Line: 1924
+	// End Line: 1920
 
 	/* begin block 4 */
-		// Start line: 1929
+		// Start line: 1925
 	/* end block 4 */
-	// End Line: 1930
+	// End Line: 1926
 
 _MultiSignal * SIGNAL_FindSignal(Level *level,long id)
 
 {
   _MultiSignal *p_Var1;
-  Signal *pSVar2;
+  int iVar2;
+  Signal *pSVar3;
   
   p_Var1 = level->SignalListStart;
   if (p_Var1 < level->SignalListEnd) {
     do {
-      pSVar2 = p_Var1->signalList;
+      pSVar3 = p_Var1->signalList;
       if (id == (int)p_Var1->signalNum) break;
-      if ((0 < p_Var1->numSignals) &&
-         (pSVar2 = (Signal *)(&pSVar2->id + (int)signalInfoList[pSVar2->id & 0x7fffffff].length + 1)
-         , 1 < p_Var1->numSignals)) {
-        p_Var1 = (_MultiSignal *)SIGNAL_HandleSetCameraDistance((_Instance *)level,(Signal *)id);
-        return p_Var1;
+      iVar2 = 0;
+      if (0 < p_Var1->numSignals) {
+        do {
+          iVar2 = iVar2 + 1;
+          pSVar3 = (Signal *)
+                   (&pSVar3->id + (int)(&signalInfoList)[pSVar3->id & 0x7fffffff].length + 1);
+        } while (iVar2 < p_Var1->numSignals);
       }
-      p_Var1 = (_MultiSignal *)pSVar2->data;
+      p_Var1 = (_MultiSignal *)pSVar3->data;
     } while (p_Var1 < level->SignalListEnd);
   }
   if (p_Var1 == level->SignalListEnd) {
@@ -961,20 +963,20 @@ _MultiSignal * SIGNAL_FindSignal(Level *level,long id)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SIGNAL_OutOfWater(struct _Instance *instance /*$s0*/)
- // line 1049, offset 0x8001e3c0
+ // line 1047, offset 0x8001e3ec
 	/* begin block 1 */
-		// Start line: 1050
-		// Start offset: 0x8001E3C0
+		// Start line: 1048
+		// Start offset: 0x8001E3EC
 		// Variables:
 	// 		struct Level *level; // $v0
 	/* end block 1 */
-	// End offset: 0x8001E400
-	// End Line: 1060
+	// End offset: 0x8001E42C
+	// End Line: 1058
 
 	/* begin block 2 */
-		// Start line: 2042
+		// Start line: 2038
 	/* end block 2 */
-	// End Line: 2043
+	// End Line: 2039
 
 void SIGNAL_OutOfWater(_Instance *instance)
 
@@ -988,20 +990,20 @@ void SIGNAL_OutOfWater(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SIGNAL_InWater(struct _Instance *instance /*$s0*/)
- // line 1062, offset 0x8001e410
+ // line 1060, offset 0x8001e43c
 	/* begin block 1 */
-		// Start line: 1063
-		// Start offset: 0x8001E410
+		// Start line: 1061
+		// Start offset: 0x8001E43C
 		// Variables:
 	// 		struct Level *level; // $v0
 	/* end block 1 */
-	// End offset: 0x8001E450
-	// End Line: 1072
+	// End offset: 0x8001E47C
+	// End Line: 1070
 
 	/* begin block 2 */
-		// Start line: 2068
+		// Start line: 2064
 	/* end block 2 */
-	// End Line: 2069
+	// End Line: 2065
 
 void SIGNAL_InWater(_Instance *instance)
 

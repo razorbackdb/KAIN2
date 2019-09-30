@@ -5,25 +5,25 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SAVE_GetInstanceRotation(struct _Instance *instance /*$s0*/, struct _SmallRotation *vector /*$s1*/)
- // line 103, offset 0x800b5560
+ // line 104, offset 0x800b3ea8
 	/* begin block 1 */
-		// Start line: 104
-		// Start offset: 0x800B5560
+		// Start line: 105
+		// Start offset: 0x800B3EA8
 		// Variables:
 	// 		struct evPositionData *rotation; // $v1
 	/* end block 1 */
-	// End offset: 0x800B55D4
-	// End Line: 121
+	// End offset: 0x800B3F1C
+	// End Line: 122
 
 	/* begin block 2 */
-		// Start line: 191
+		// Start line: 192
 	/* end block 2 */
-	// End Line: 192
+	// End Line: 193
 
 	/* begin block 3 */
-		// Start line: 206
+		// Start line: 193
 	/* end block 3 */
-	// End Line: 207
+	// End Line: 194
 
 void SAVE_GetInstanceRotation(_Instance *instance,_SmallRotation *vector)
 
@@ -37,29 +37,29 @@ void SAVE_GetInstanceRotation(_Instance *instance,_SmallRotation *vector)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SAVE_ClearMemory(struct GameTracker *gameTracker /*$a0*/)
- // line 124, offset 0x800b55e8
+ // line 125, offset 0x800b3f30
 	/* begin block 1 */
-		// Start line: 125
-		// Start offset: 0x800B55E8
+		// Start line: 126
+		// Start offset: 0x800B3F30
 		// Variables:
 	// 		char *buffer; // $v0
 	/* end block 1 */
-	// End offset: 0x800B55E8
-	// End Line: 125
+	// End offset: 0x800B3F30
+	// End Line: 126
 
 	/* begin block 2 */
-		// Start line: 233
+		// Start line: 234
 	/* end block 2 */
-	// End Line: 234
+	// End Line: 235
 
 void SAVE_ClearMemory(GameTracker *gameTracker)
 
 {
-  UW_angleInc._8_4_ = (void *)(UW_angleInc._4_4_ + the_header_size);
-  UW_angleInc._16_4_ = UW_angleInc._4_4_ + 0x6000;
+  savedInfoTracker.InfoStart = savedInfoTracker.MemoryCardBuffer + the_header_size;
+  savedInfoTracker.EndOfMemory = savedInfoTracker.MemoryCardBuffer + 0x6000;
                     /* WARNING: Subroutine does not return */
-  UW_angleInc._12_4_ = UW_angleInc._8_4_;
-  memset(UW_angleInc._8_4_,0,0x6000 - the_header_size);
+  savedInfoTracker.InfoEnd = savedInfoTracker.InfoStart;
+  memset(savedInfoTracker.InfoStart,0,0x6000 - the_header_size);
 }
 
 
@@ -67,27 +67,27 @@ void SAVE_ClearMemory(GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SAVE_Init(struct GameTracker *gt /*$s0*/)
- // line 148, offset 0x800b5668
+ // line 149, offset 0x800b3fb8
 	/* begin block 1 */
-		// Start line: 149
-		// Start offset: 0x800B5668
+		// Start line: 150
+		// Start offset: 0x800B3FB8
 		// Variables:
 	// 		void *buffer; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 158
-			// Start offset: 0x800B5698
+			// Start line: 159
+			// Start offset: 0x800B3FE8
 		/* end block 1.1 */
-		// End offset: 0x800B5698
-		// End Line: 160
+		// End offset: 0x800B3FE8
+		// End Line: 161
 	/* end block 1 */
-	// End offset: 0x800B56CC
-	// End Line: 169
+	// End offset: 0x800B401C
+	// End Line: 170
 
 	/* begin block 2 */
-		// Start line: 302
+		// Start line: 304
 	/* end block 2 */
-	// End Line: 303
+	// End Line: 305
 
 void SAVE_Init(GameTracker *gt)
 
@@ -100,62 +100,54 @@ void SAVE_Init(GameTracker *gt)
 
 // decompiled code
 // original method signature: 
-// void * /*$ra*/ SAVE_GetSavedBlock(long saveType /*$s3*/, long extraSize /*$s0*/)
- // line 189, offset 0x800b56ec
+// void * /*$ra*/ SAVE_GetSavedBlock(long saveType /*$s4*/, long extraSize /*$a1*/)
+ // line 190, offset 0x800b403c
 	/* begin block 1 */
-		// Start line: 190
-		// Start offset: 0x800B56EC
+		// Start line: 191
+		// Start offset: 0x800B403C
 		// Variables:
-	// 		struct SavedBasic *savedInfo; // $s2
+	// 		struct SavedBasic *savedInfo; // $s1
 	// 		long sizeOfSave; // $s0
-	// 		long done; // $s1
+	// 		long done; // $s2
 	/* end block 1 */
-	// End offset: 0x800B57E8
-	// End Line: 232
+	// End offset: 0x800B4100
+	// End Line: 231
 
 	/* begin block 2 */
-		// Start line: 386
+		// Start line: 388
 	/* end block 2 */
-	// End Line: 387
+	// End Line: 389
 
 void * SAVE_GetSavedBlock(long saveType,long extraSize)
 
 {
   bool bVar1;
-  undefined *puVar2;
+  char *pcVar2;
   long lVar3;
   int iVar4;
-  undefined *puVar5;
+  char *pcVar5;
   
-  puVar5 = (undefined *)0x0;
-  if (9 < saveType) {
-                    /* WARNING: Subroutine does not return */
-    DEBUG_FatalError(s_illegal_save_type__d_800cf8dc);
-  }
-  iVar4 = (SaveArraySize[saveType] + extraSize + 3 >> 2) * 4;
+  pcVar5 = (char *)0x0;
   bVar1 = false;
-  if (0x3fc < iVar4) {
-                    /* WARNING: Subroutine does not return */
-    DEBUG_FatalError(s_save__d_is_too_big___type__d__800cf8f4);
-  }
+  iVar4 = ((&SaveArraySize)[saveType] + extraSize + 3 >> 2) * 4;
   do {
-    puVar2 = UW_angleInc._12_4_;
-    if (UW_angleInc._12_4_ + iVar4 < UW_angleInc._16_4_) {
-      *UW_angleInc._12_4_ = (char)saveType;
-      puVar2[1] = (char)(iVar4 >> 2);
-      UW_angleInc._12_4_ = UW_angleInc._12_4_ + iVar4;
+    pcVar2 = savedInfoTracker.InfoEnd;
+    if (savedInfoTracker.InfoEnd + iVar4 < savedInfoTracker.EndOfMemory) {
+      *savedInfoTracker.InfoEnd = (char)saveType;
+      pcVar2[1] = (char)(iVar4 >> 2);
+      savedInfoTracker.InfoEnd = savedInfoTracker.InfoEnd + iVar4;
       bVar1 = true;
-      puVar5 = puVar2;
+      pcVar5 = pcVar2;
     }
     else {
       lVar3 = SAVE_PurgeAMemoryBlock();
       if (lVar3 == 0) {
                     /* WARNING: Subroutine does not return */
-        DEBUG_FatalError(s_ran_out_of_saved_memory__needed___800cf914);
+        FONT_Print("Ran out of saved memory. Needed %d, used %d.\nIncrease from %d\n");
       }
     }
   } while (!bVar1);
-  return puVar5;
+  return pcVar5;
 }
 
 
@@ -163,43 +155,39 @@ void * SAVE_GetSavedBlock(long saveType,long extraSize)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SAVE_PurgeAMemoryBlock()
- // line 237, offset 0x800b5808
+ // line 236, offset 0x800b4120
 	/* begin block 1 */
-		// Start line: 238
-		// Start offset: 0x800B5808
+		// Start line: 237
+		// Start offset: 0x800B4120
 		// Variables:
 	// 		struct SavedBasic *curSave; // $a0
 	// 		long result; // $a1
 	/* end block 1 */
-	// End offset: 0x800B5898
-	// End Line: 259
+	// End offset: 0x800B41B0
+	// End Line: 258
 
 	/* begin block 2 */
-		// Start line: 488
+		// Start line: 491
 	/* end block 2 */
-	// End Line: 489
+	// End Line: 492
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 long SAVE_PurgeAMemoryBlock(void)
 
 {
-  int *piVar1;
-  int *piVar2;
-  menu_t *menu;
+  SavedBasic *savedBlock;
   
-  menu = UW_angleInc._8_4_;
-  if (UW_angleInc._8_4_ < UW_angleInc._12_4_) {
+  savedBlock = (SavedBasic *)savedInfoTracker.InfoStart;
+  if (savedInfoTracker.InfoStart < savedInfoTracker.InfoEnd) {
     do {
-      if (((*(char *)&menu->nmenus == '\x01') && ((menu->stack[0].format.width & 0x100U) != 0)) ||
-         ((*(char *)&menu->nmenus == '\a' && ((menu->stack[0].index & 0x100U) != 0)))) {
-        menu_initialize(menu,(void *)0x0);
+      if (((savedBlock->savedID == '\x01') && ((*(uint *)(savedBlock + 0x12) & 0x100) != 0)) ||
+         ((savedBlock->savedID == '\a' && ((*(uint *)(savedBlock + 8) & 0x100) != 0)))) {
+        SAVE_DeleteBlock(savedBlock);
         return 1;
       }
-      piVar1 = &menu->nmenus;
-      piVar2 = &menu->nmenus;
-      menu = (menu_t *)(piVar2 + *(byte *)((int)piVar1 + 1));
-    } while ((menu_t *)(piVar2 + *(byte *)((int)piVar1 + 1)) < UW_angleInc._12_4_);
+      savedBlock = savedBlock + (uint)savedBlock->shiftedSaveSize * 2;
+    } while (savedBlock < savedInfoTracker.InfoEnd);
   }
   return 0;
 }
@@ -209,35 +197,65 @@ long SAVE_PurgeAMemoryBlock(void)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SAVE_SaveableInstance(struct _Instance *instance /*$a0*/)
- // line 265, offset 0x800b58a8
+ // line 264, offset 0x800b41c0
 	/* begin block 1 */
-		// Start line: 267
-		// Start offset: 0x800B58A8
+		// Start line: 266
+		// Start offset: 0x800B41C0
 		// Variables:
 	// 		long result; // $a1
 	/* end block 1 */
-	// End offset: 0x800B599C
-	// End Line: 320
+	// End offset: 0x800B42A4
+	// End Line: 318
 
 	/* begin block 2 */
-		// Start line: 551
-	/* end block 2 */
-	// End Line: 552
-
-	/* begin block 3 */
-		// Start line: 552
-	/* end block 3 */
-	// End Line: 553
-
-	/* begin block 4 */
 		// Start line: 554
-	/* end block 4 */
+	/* end block 2 */
 	// End Line: 555
 
-void VOICEXA_CdSyncCallback(uchar status,uchar *result)
+	/* begin block 3 */
+		// Start line: 555
+	/* end block 3 */
+	// End Line: 556
+
+	/* begin block 4 */
+		// Start line: 557
+	/* end block 4 */
+	// End Line: 558
+
+long SAVE_SaveableInstance(_Instance *instance)
 
 {
-  return;
+  Object *pOVar1;
+  long lVar2;
+  
+  lVar2 = 0;
+  if (((instance->flags2 & 0x20000U) == 0) && (pOVar1 = instance->object, pOVar1 != (Object *)0x0))
+  {
+    if (((pOVar1->oflags2 & 0x80000U) != 0) || (instance == gameTrackerX.playerInstance)) {
+      lVar2 = SAVE_PurgeAMemoryBlock();
+      return lVar2;
+    }
+    if ((pOVar1->oflags2 & 0x40000U) == 0) {
+      if ((instance->flags & 0x100000U) == 0) {
+        lVar2 = 3;
+      }
+    }
+    else {
+      lVar2 = 1;
+      if ((pOVar1->oflags & 1U) != 0) {
+        lVar2 = SAVE_PurgeAMemoryBlock();
+        return lVar2;
+      }
+    }
+  }
+  if ((instance->object->oflags2 & 0x100000U) != 0) {
+    lVar2 = 0;
+  }
+  if (((lVar2 == 1) && (instance->currentStreamUnitID == instance->birthStreamUnitID)) &&
+     (instance->introUniqueID < 0x2000)) {
+    lVar2 = 2;
+  }
+  return lVar2;
 }
 
 
@@ -245,16 +263,16 @@ void VOICEXA_CdSyncCallback(uchar status,uchar *result)
 // decompiled code
 // original method signature: 
 // struct _SavedIntro * /*$ra*/ SAVE_UpdateSavedIntro(struct _Instance *instance /*$s1*/, struct Level *level /*$a1*/, struct _SavedIntro *savedIntro /*$s0*/, struct evControlSaveDataData *extraData /*$s2*/)
- // line 471, offset 0x800b59a4
+ // line 464, offset 0x800b42ac
 	/* begin block 1 */
-		// Start line: 472
-		// Start offset: 0x800B59A4
+		// Start line: 465
+		// Start offset: 0x800B42AC
 		// Variables:
 	// 		struct _Position *levelOffset; // $t1
 
 		/* begin block 1.1 */
-			// Start line: 483
-			// Start offset: 0x800B59D4
+			// Start line: 476
+			// Start offset: 0x800B42DC
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $a2
@@ -265,55 +283,57 @@ void VOICEXA_CdSyncCallback(uchar status,uchar *result)
 		// 		struct _Position *_v; // $v0
 		// 		struct _Position *_v0; // $v1
 		/* end block 1.1 */
-		// End offset: 0x800B59D4
-		// End Line: 483
+		// End offset: 0x800B42DC
+		// End Line: 476
 	/* end block 1 */
-	// End offset: 0x800B5A94
-	// End Line: 510
+	// End offset: 0x800B439C
+	// End Line: 503
 
 	/* begin block 2 */
-		// Start line: 942
+		// Start line: 924
 	/* end block 2 */
-	// End Line: 943
+	// End Line: 925
 
-undefined *
-SAVE_UpdateSavedIntro(_Instance *param_1,int *param_2,undefined *param_3,size_t *param_4)
+_SavedIntro *
+SAVE_UpdateSavedIntro
+          (_Instance *instance,Level *level,_SavedIntro *savedIntro,evControlSaveDataData *extraData
+          )
 
 {
   short sVar1;
   short sVar2;
   short sVar3;
   short sVar4;
-  int iVar5;
+  BSPTree *pBVar5;
   undefined4 uVar6;
   
-  iVar5 = *(int *)(*param_2 + 0x48);
-  if (param_3 != (undefined *)0x0) {
-    uVar6 = *(undefined4 *)(param_1->introName + 4);
-    *(undefined4 *)(param_3 + 4) = *(undefined4 *)param_1->introName;
-    *(undefined4 *)(param_3 + 8) = uVar6;
-    *param_3 = 1;
-    *(undefined2 *)(param_3 + 0xc) = *(undefined2 *)&param_1->introUniqueID;
-    *(undefined2 *)(param_3 + 0xe) = *(undefined2 *)&param_1->currentStreamUnitID;
-    *(undefined2 *)(param_3 + 0x10) = *(undefined2 *)&param_1->birthStreamUnitID;
-    sVar1 = (param_1->position).y;
-    sVar2 = (param_1->position).z;
-    sVar3 = *(short *)(iVar5 + 0xe);
-    sVar4 = *(short *)(iVar5 + 0x10);
-    *(short *)(param_3 + 0x1a) = (param_1->position).x - *(short *)(iVar5 + 0xc);
-    *(short *)(param_3 + 0x1c) = sVar1 - sVar3;
-    *(short *)(param_3 + 0x1e) = sVar2 - sVar4;
-    SAVE_GetInstanceRotation(param_1,(_SmallRotation *)(param_3 + 0x14));
-    *(long *)(param_3 + 0x20) = param_1->flags;
-    *(long *)(param_3 + 0x24) = param_1->flags2;
-    param_3[3] = param_1->spectralLightGroup;
-    param_3[2] = param_1->lightGroup;
-    *(undefined2 *)(param_3 + 0x12) = *(undefined2 *)&param_1->attachedID;
-    if (param_4 != (size_t *)0x0) {
-      memcpy(param_3 + 0x28,(void *)param_4[1],*param_4);
+  pBVar5 = level->terrain->BSPTreeArray;
+  if (savedIntro != (_SavedIntro *)0x0) {
+    uVar6 = *(undefined4 *)(instance->introName + 4);
+    *(undefined4 *)savedIntro->name = *(undefined4 *)instance->introName;
+    *(undefined4 *)(savedIntro->name + 4) = uVar6;
+    savedIntro->savedID = '\x01';
+    savedIntro->introUniqueID = *(short *)&instance->introUniqueID;
+    savedIntro->streamUnitID = *(short *)&instance->currentStreamUnitID;
+    savedIntro->birthUnitID = *(short *)&instance->birthStreamUnitID;
+    sVar1 = (instance->position).y;
+    sVar2 = (instance->position).z;
+    sVar3 = (pBVar5->globalOffset).y;
+    sVar4 = (pBVar5->globalOffset).z;
+    (savedIntro->position).x = (instance->position).x - (pBVar5->globalOffset).x;
+    (savedIntro->position).y = sVar1 - sVar3;
+    (savedIntro->position).z = sVar2 - sVar4;
+    SAVE_GetInstanceRotation(instance,&savedIntro->smallRotation);
+    savedIntro->flags = instance->flags;
+    savedIntro->flags2 = instance->flags2;
+    savedIntro->specturalLightGroup = instance->spectralLightGroup;
+    savedIntro->lightGroup = instance->lightGroup;
+    savedIntro->attachedUniqueID = *(ushort *)&instance->attachedID;
+    if (extraData != (evControlSaveDataData *)0x0) {
+      memcpy(savedIntro + 1,extraData->data,extraData->length);
     }
   }
-  return param_3;
+  return savedIntro;
 }
 
 
@@ -321,16 +341,16 @@ SAVE_UpdateSavedIntro(_Instance *param_1,int *param_2,undefined *param_3,size_t 
 // decompiled code
 // original method signature: 
 // struct _SavedIntroWithIntro * /*$ra*/ SAVE_UpdateSavedIntroWithIntro(struct _Instance *instance /*$s1*/, struct Level *level /*$a1*/, struct _SavedIntroWithIntro *savedIntro /*$s0*/, struct evControlSaveDataData *extraData /*$s2*/)
- // line 513, offset 0x800b5ab0
+ // line 506, offset 0x800b43b8
 	/* begin block 1 */
-		// Start line: 514
-		// Start offset: 0x800B5AB0
+		// Start line: 507
+		// Start offset: 0x800B43B8
 		// Variables:
 	// 		struct _Position *levelOffset; // $t1
 
 		/* begin block 1.1 */
-			// Start line: 525
-			// Start offset: 0x800B5AF0
+			// Start line: 518
+			// Start offset: 0x800B43F8
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $a2
@@ -341,51 +361,54 @@ SAVE_UpdateSavedIntro(_Instance *param_1,int *param_2,undefined *param_3,size_t 
 		// 		struct _Position *_v; // $v0
 		// 		struct _Position *_v0; // $v1
 		/* end block 1.1 */
-		// End offset: 0x800B5AF0
-		// End Line: 525
+		// End offset: 0x800B43F8
+		// End Line: 518
 	/* end block 1 */
-	// End offset: 0x800B5BCC
-	// End Line: 553
+	// End offset: 0x800B44D4
+	// End Line: 546
 
 	/* begin block 2 */
-		// Start line: 916
+		// Start line: 912
 	/* end block 2 */
-	// End Line: 917
+	// End Line: 913
 
-undefined *
-SAVE_UpdateSavedIntroWithIntro(_Instance *param_1,int *param_2,undefined *param_3,size_t *param_4)
+_SavedIntroWithIntro *
+SAVE_UpdateSavedIntroWithIntro
+          (_Instance *instance,Level *level,_SavedIntroWithIntro *savedIntro,
+          evControlSaveDataData *extraData)
 
 {
   short sVar1;
   short sVar2;
   short sVar3;
   short sVar4;
-  int iVar5;
+  BSPTree *pBVar5;
   
-  iVar5 = *(int *)(*param_2 + 0x48);
-  if ((param_3 != (undefined *)0x0) && (param_1->intro != (Intro *)0x0)) {
-    *param_3 = 7;
-    *(short *)(param_3 + 4) = (short)((int)((int)param_1->intro - param_2[0x1f]) * 0x286bca1b >> 2);
-    *(undefined2 *)(param_3 + 8) = *(undefined2 *)&param_1->introUniqueID;
-    *(undefined2 *)(param_3 + 6) = *(undefined2 *)&param_1->birthStreamUnitID;
-    sVar1 = (param_1->position).y;
-    sVar2 = (param_1->position).z;
-    sVar3 = *(short *)(iVar5 + 0xe);
-    sVar4 = *(short *)(iVar5 + 0x10);
-    *(short *)(param_3 + 0x1a) = (param_1->position).x - *(short *)(iVar5 + 0xc);
-    *(short *)(param_3 + 0x1c) = sVar1 - sVar3;
-    *(short *)(param_3 + 0x1e) = sVar2 - sVar4;
-    SAVE_GetInstanceRotation(param_1,(_SmallRotation *)(param_3 + 0x14));
-    *(long *)(param_3 + 0xc) = param_1->flags;
-    *(long *)(param_3 + 0x10) = param_1->flags2;
-    param_3[0xb] = param_1->spectralLightGroup;
-    param_3[10] = param_1->lightGroup;
-    *(undefined2 *)(param_3 + 2) = *(undefined2 *)&param_1->attachedID;
-    if (param_4 != (size_t *)0x0) {
-      memcpy(param_3 + 0x20,(void *)param_4[1],*param_4);
+  pBVar5 = level->terrain->BSPTreeArray;
+  if ((savedIntro != (_SavedIntroWithIntro *)0x0) && (instance->intro != (Intro *)0x0)) {
+    savedIntro->savedID = '\a';
+    savedIntro->introOffset =
+         (short)((int)((int)instance->intro - (int)level->introList) * 0x286bca1b >> 2);
+    savedIntro->introUniqueID = *(short *)&instance->introUniqueID;
+    savedIntro->birthUnitID = *(short *)&instance->birthStreamUnitID;
+    sVar1 = (instance->position).y;
+    sVar2 = (instance->position).z;
+    sVar3 = (pBVar5->globalOffset).y;
+    sVar4 = (pBVar5->globalOffset).z;
+    (savedIntro->position).x = (instance->position).x - (pBVar5->globalOffset).x;
+    (savedIntro->position).y = sVar1 - sVar3;
+    (savedIntro->position).z = sVar2 - sVar4;
+    SAVE_GetInstanceRotation(instance,&savedIntro->smallRotation);
+    savedIntro->flags = instance->flags;
+    savedIntro->flags2 = instance->flags2;
+    savedIntro->specturalLightGroup = instance->spectralLightGroup;
+    savedIntro->lightGroup = instance->lightGroup;
+    savedIntro->attachedUniqueID = *(ushort *)&instance->attachedID;
+    if (extraData != (evControlSaveDataData *)0x0) {
+      memcpy(savedIntro + 1,extraData->data,extraData->length);
     }
   }
-  return param_3;
+  return savedIntro;
 }
 
 
@@ -393,30 +416,30 @@ SAVE_UpdateSavedIntroWithIntro(_Instance *param_1,int *param_2,undefined *param_
 // decompiled code
 // original method signature: 
 // struct SavedBasic * /*$ra*/ SAVE_GetSavedEvent(long areaID /*$a0*/, long eventNumber /*$a1*/)
- // line 556, offset 0x800b5be8
+ // line 549, offset 0x800b44f0
 	/* begin block 1 */
-		// Start line: 558
-		// Start offset: 0x800B5BE8
+		// Start line: 551
+		// Start offset: 0x800B44F0
 		// Variables:
 	// 		struct SavedBasic *curSave; // $v1
 	/* end block 1 */
-	// End offset: 0x800B5C88
-	// End Line: 577
+	// End offset: 0x800B4590
+	// End Line: 570
 
 	/* begin block 2 */
-		// Start line: 1022
+		// Start line: 1018
 	/* end block 2 */
-	// End Line: 1023
+	// End Line: 1019
 
 	/* begin block 3 */
-		// Start line: 1023
+		// Start line: 1019
 	/* end block 3 */
-	// End Line: 1024
+	// End Line: 1020
 
 	/* begin block 4 */
-		// Start line: 1025
+		// Start line: 1021
 	/* end block 4 */
-	// End Line: 1026
+	// End Line: 1022
 
 SavedBasic * SAVE_GetSavedEvent(long areaID,long eventNumber)
 
@@ -424,8 +447,8 @@ SavedBasic * SAVE_GetSavedEvent(long areaID,long eventNumber)
   uchar uVar1;
   SavedBasic *pSVar2;
   
-  pSVar2 = UW_angleInc._8_4_;
-  if (UW_angleInc._8_4_ < UW_angleInc._12_4_) {
+  pSVar2 = (SavedBasic *)savedInfoTracker.InfoStart;
+  if (savedInfoTracker.InfoStart < savedInfoTracker.InfoEnd) {
     do {
       uVar1 = pSVar2->savedID;
       if (uVar1 == '\x02') {
@@ -439,7 +462,7 @@ SavedBasic * SAVE_GetSavedEvent(long areaID,long eventNumber)
         return pSVar2;
       }
       pSVar2 = pSVar2 + (uint)pSVar2->shiftedSaveSize * 2;
-    } while (pSVar2 < UW_angleInc._12_4_);
+    } while (pSVar2 < savedInfoTracker.InfoEnd);
   }
   return (SavedBasic *)0x0;
 }
@@ -449,29 +472,29 @@ SavedBasic * SAVE_GetSavedEvent(long areaID,long eventNumber)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SAVE_DeleteSavedEvent(long areaID /*$a0*/, long eventNumber /*$a1*/)
- // line 579, offset 0x800b5c90
+ // line 572, offset 0x800b4598
 	/* begin block 1 */
-		// Start line: 580
-		// Start offset: 0x800B5C90
+		// Start line: 573
+		// Start offset: 0x800B4598
 		// Variables:
 	// 		struct SavedBasic *savedEvent; // $v0
 	/* end block 1 */
-	// End offset: 0x800B5CB0
-	// End Line: 589
+	// End offset: 0x800B45B8
+	// End Line: 582
 
 	/* begin block 2 */
-		// Start line: 1068
+		// Start line: 1064
 	/* end block 2 */
-	// End Line: 1069
+	// End Line: 1065
 
 void SAVE_DeleteSavedEvent(long areaID,long eventNumber)
 
 {
-  menu_t *menu;
+  SavedBasic *savedBlock;
   
-  menu = (menu_t *)SAVE_GetSavedEvent(areaID,eventNumber);
-  if (menu != (menu_t *)0x0) {
-    menu_initialize(menu,(void *)eventNumber);
+  savedBlock = SAVE_GetSavedEvent(areaID,eventNumber);
+  if (savedBlock != (SavedBasic *)0x0) {
+    SAVE_DeleteBlock(savedBlock);
   }
   return;
 }
@@ -481,28 +504,28 @@ void SAVE_DeleteSavedEvent(long areaID,long eventNumber)
 // decompiled code
 // original method signature: 
 // struct SavedBasic * /*$ra*/ SAVE_GetSavedNextEvent(long areaID /*$a0*/, struct SavedBasic *curSave /*$a1*/)
- // line 591, offset 0x800b5cc0
+ // line 584, offset 0x800b45c8
 	/* begin block 1 */
-		// Start line: 1092
+		// Start line: 1088
 	/* end block 1 */
-	// End Line: 1093
+	// End Line: 1089
 
 	/* begin block 2 */
-		// Start line: 1093
+		// Start line: 1089
 	/* end block 2 */
-	// End Line: 1094
+	// End Line: 1090
 
 SavedBasic * SAVE_GetSavedNextEvent(long areaID,SavedBasic *curSave)
 
 {
   SavedBasic *pSVar1;
   
-  pSVar1 = UW_angleInc._8_4_;
+  pSVar1 = (SavedBasic *)savedInfoTracker.InfoStart;
   if (curSave != (SavedBasic *)0x0) {
     pSVar1 = curSave + (uint)curSave->shiftedSaveSize * 2;
   }
   while( true ) {
-    if (UW_angleInc._12_4_ <= pSVar1) {
+    if (savedInfoTracker.InfoEnd <= pSVar1) {
       return (SavedBasic *)0x0;
     }
     if (((pSVar1->savedID == '\x02') && ((int)(short)pSVar1[1] == areaID)) ||
@@ -517,57 +540,57 @@ SavedBasic * SAVE_GetSavedNextEvent(long areaID,SavedBasic *curSave)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SAVE_BufferIntro(struct SavedBasic *savedIntro /*$a0*/)
- // line 619, offset 0x800b5d64
+ // line 612, offset 0x800b466c
 	/* begin block 1 */
-		// Start line: 621
-		// Start offset: 0x800B5D64
+		// Start line: 614
+		// Start offset: 0x800B466C
 		// Variables:
 	// 		long i; // $a1
 	/* end block 1 */
-	// End offset: 0x800B5DDC
-	// End Line: 655
+	// End offset: 0x800B46EC
+	// End Line: 647
 
 	/* begin block 2 */
-		// Start line: 1148
+		// Start line: 1144
 	/* end block 2 */
-	// End Line: 1149
+	// End Line: 1145
 
 	/* begin block 3 */
-		// Start line: 1149
+		// Start line: 1145
 	/* end block 3 */
-	// End Line: 1150
+	// End Line: 1146
 
 	/* begin block 4 */
-		// Start line: 1151
+		// Start line: 1147
 	/* end block 4 */
-	// End Line: 1152
+	// End Line: 1148
 
-void SAVE_BufferIntro(int param_1)
+void SAVE_BufferIntro(SavedBasic *savedIntro)
 
 {
-  int *piVar1;
+  SavedBasic **ppSVar1;
   int iVar2;
   int iVar3;
   
   iVar2 = 0;
-  if (iGpffff9df8 < 0x40) {
-    piVar1 = (int *)&gp0xffffff1c;
+  if (numbufferedIntros < 0x40) {
+    ppSVar1 = &bufferSavedIntroArray64;
     do {
-      if (*piVar1 == param_1) break;
+      if (*ppSVar1 == savedIntro) break;
       iVar2 = iVar2 + 1;
-      piVar1 = piVar1 + 1;
+      ppSVar1 = ppSVar1 + 1;
     } while (iVar2 < 0x40);
     iVar3 = 0;
     if (iVar2 == 0x40) {
-      piVar1 = (int *)&gp0xffffff1c;
-      iGpffff9df8 = iGpffff9df8 + 1;
+      ppSVar1 = &bufferSavedIntroArray64;
+      numbufferedIntros = numbufferedIntros + 1;
       do {
         iVar3 = iVar3 + 1;
-        if (*piVar1 == 0) {
-          *piVar1 = param_1;
+        if (*ppSVar1 == (SavedBasic *)0x0) {
+          *ppSVar1 = savedIntro;
           return;
         }
-        piVar1 = piVar1 + 1;
+        ppSVar1 = ppSVar1 + 1;
       } while (iVar3 < 0x40);
     }
   }
@@ -579,91 +602,66 @@ void SAVE_BufferIntro(int param_1)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SAVE_IntroduceBufferIntros()
- // line 657, offset 0x800b5de4
+ // line 649, offset 0x800b46f4
 	/* begin block 1 */
-		// Start line: 658
-		// Start offset: 0x800B5DE4
+		// Start line: 650
+		// Start offset: 0x800B46F4
 		// Variables:
 	// 		long i; // $s2
 	// 		struct _StreamUnit *streamUnit; // $v0
 
 		/* begin block 1.1 */
-			// Start line: 664
-			// Start offset: 0x800B5E10
-			// Variables:
-		// 		int deleted; // stack offset -24
-
-			/* begin block 1.1.1 */
-				// Start line: 670
-				// Start offset: 0x800B5E38
-			/* end block 1.1.1 */
-			// End offset: 0x800B5E60
-			// End Line: 686
-
-			/* begin block 1.1.2 */
-				// Start line: 692
-				// Start offset: 0x800B5E60
-			/* end block 1.1.2 */
-			// End offset: 0x800B5E98
-			// End Line: 711
+			// Start line: 663
+			// Start offset: 0x800B4748
 		/* end block 1.1 */
-		// End offset: 0x800B5E98
-		// End Line: 713
+		// End offset: 0x800B476C
+		// End Line: 679
+
+		/* begin block 1.2 */
+			// Start line: 685
+			// Start offset: 0x800B476C
+		/* end block 1.2 */
+		// End offset: 0x800B47A0
+		// End Line: 704
 	/* end block 1 */
-	// End offset: 0x800B5EA8
-	// End Line: 714
+	// End offset: 0x800B47B0
+	// End Line: 709
 
 	/* begin block 2 */
-		// Start line: 1232
+		// Start line: 1226
 	/* end block 2 */
-	// End Line: 1233
+	// End Line: 1227
 
 	/* begin block 3 */
-		// Start line: 1236
+		// Start line: 1230
 	/* end block 3 */
-	// End Line: 1237
+	// End Line: 1231
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void SAVE_IntroduceBufferIntros(void)
 
 {
-  _StreamUnit *streamUnit;
-  _Instance *p_Var1;
-  _SavedIntro *savedIntro;
-  int iVar2;
-  int aiStack24 [2];
+  int iVar1;
+  char *pcVar2;
+  int iVar3;
   
-  iVar2 = 0;
-  if (numbufferedIntros != 0) {
+  if (numbufferedIntros < 0x40) {
+    iVar3 = 0;
+    iVar1 = 0;
     do {
-      if (0x3f < iVar2) {
-        return;
-      }
-      savedIntro = (_SavedIntro *)(&UW_angleInc.area)[iVar2];
-      if (savedIntro != (_SavedIntro *)0x0) {
-        if (savedIntro->savedID == '\x01') {
-          streamUnit = STREAM_GetStreamUnitWithID((int)savedIntro->streamUnitID);
-          if (streamUnit != (_StreamUnit *)0x0) {
-            p_Var1 = INSTANCE_IntroduceSavedInstance(savedIntro,streamUnit,aiStack24);
-LAB_800b5e80:
-            if (p_Var1 == (_Instance *)0x0) goto LAB_800b5e98;
-          }
+      pcVar2 = *(char **)((int)&bufferSavedIntroArray64 + iVar1);
+      if (pcVar2 != (char *)0x0) {
+        if (*pcVar2 == '\x01') {
+                    /* WARNING: Subroutine does not return */
+          STREAM_GetStreamUnitWithID((int)*(short *)(pcVar2 + 0xe));
         }
-        else {
-          streamUnit = STREAM_GetStreamUnitWithID((int)*(short *)(savedIntro->name + 2));
-          if (streamUnit != (_StreamUnit *)0x0) {
-            p_Var1 = INSTANCE_IntroduceSavedInstanceWithIntro
-                               ((_SavedIntroWithIntro *)savedIntro,streamUnit,aiStack24);
-            goto LAB_800b5e80;
-          }
-        }
-        *(_SavedIntro **)(&UW_angleInc.area + iVar2) = (_SavedIntro *)0x0;
-        numbufferedIntros = numbufferedIntros + -1;
+                    /* WARNING: Subroutine does not return */
+        STREAM_GetStreamUnitWithID((int)*(short *)(pcVar2 + 6));
       }
-LAB_800b5e98:
-      iVar2 = iVar2 + 1;
-    } while (numbufferedIntros != 0);
+      iVar3 = iVar3 + 1;
+      iVar1 = iVar3 * 4;
+    } while (iVar3 < 0x40);
   }
   return;
 }
@@ -673,48 +671,42 @@ LAB_800b5e98:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SAVE_IntroForStreamID(struct _StreamUnit *streamUnit /*$s2*/)
- // line 716, offset 0x800b5ec0
+ // line 711, offset 0x800b47c8
 	/* begin block 1 */
-		// Start line: 717
-		// Start offset: 0x800B5EC0
+		// Start line: 712
+		// Start offset: 0x800B47C8
 		// Variables:
 	// 		struct SavedBasic *saveIntro; // $s0
 	// 		long streamID; // $s1
-	// 		int deleted; // stack offset -24
 	/* end block 1 */
-	// End offset: 0x800B5F84
-	// End Line: 741
+	// End offset: 0x800B4870
+	// End Line: 739
 
 	/* begin block 2 */
-		// Start line: 1410
+		// Start line: 1402
 	/* end block 2 */
-	// End Line: 1411
+	// End Line: 1403
 
 void SAVE_IntroForStreamID(_StreamUnit *streamUnit)
 
 {
   _SavedIntro *savedIntro;
   int iVar1;
-  int local_18 [2];
   
   iVar1 = streamUnit->StreamUnitID;
-  savedIntro = UW_angleInc._8_4_;
-  if (UW_angleInc._8_4_ < UW_angleInc._12_4_) {
+  savedIntro = (_SavedIntro *)savedInfoTracker.InfoStart;
+  if (savedInfoTracker.InfoStart < savedInfoTracker.InfoEnd) {
     do {
-      local_18[0] = 0;
       if ((savedIntro->savedID == '\x01') && ((int)savedIntro->streamUnitID == iVar1)) {
-        INSTANCE_IntroduceSavedInstance(savedIntro,streamUnit,local_18);
+        INSTANCE_IntroduceSavedInstance(savedIntro,streamUnit);
       }
       else {
         if ((savedIntro->savedID == '\a') && ((int)*(short *)(savedIntro->name + 2) == iVar1)) {
-          INSTANCE_IntroduceSavedInstanceWithIntro
-                    ((_SavedIntroWithIntro *)savedIntro,streamUnit,local_18);
+          INSTANCE_IntroduceSavedInstanceWithIntro((_SavedIntroWithIntro *)savedIntro,streamUnit);
         }
       }
-      if (local_18[0] == 0) {
-        savedIntro = (_SavedIntro *)(&savedIntro->savedID + (uint)savedIntro->shiftedSaveSize * 4);
-      }
-    } while (savedIntro < UW_angleInc._12_4_);
+      savedIntro = (_SavedIntro *)(&savedIntro->savedID + (uint)savedIntro->shiftedSaveSize * 4);
+    } while (savedIntro < savedInfoTracker.InfoEnd);
   }
   return;
 }
@@ -724,46 +716,46 @@ void SAVE_IntroForStreamID(_StreamUnit *streamUnit)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SAVE_HasSavedIntro(struct Intro *intro /*$a0*/, long currentStreamID /*$a1*/)
- // line 743, offset 0x800b5f9c
+ // line 741, offset 0x800b488c
 	/* begin block 1 */
-		// Start line: 745
-		// Start offset: 0x800B5F9C
+		// Start line: 743
+		// Start offset: 0x800B488C
 		// Variables:
 	// 		long result; // $a3
 	// 		struct _SavedIntro *saveIntro; // $a1
 	/* end block 1 */
-	// End offset: 0x800B6024
-	// End Line: 767
+	// End offset: 0x800B4914
+	// End Line: 765
 
 	/* begin block 2 */
-		// Start line: 1472
+		// Start line: 1471
 	/* end block 2 */
-	// End Line: 1473
+	// End Line: 1472
 
 	/* begin block 3 */
-		// Start line: 1473
+		// Start line: 1472
 	/* end block 3 */
-	// End Line: 1474
+	// End Line: 1473
 
 	/* begin block 4 */
-		// Start line: 1476
+		// Start line: 1475
 	/* end block 4 */
-	// End Line: 1477
+	// End Line: 1476
 
 long SAVE_HasSavedIntro(Intro *intro,long currentStreamID)
 
 {
   char *pcVar1;
   
-  pcVar1 = UW_angleInc._8_4_;
-  if (UW_angleInc._8_4_ < UW_angleInc._12_4_) {
+  pcVar1 = savedInfoTracker.InfoStart;
+  if (savedInfoTracker.InfoStart < savedInfoTracker.InfoEnd) {
     do {
       if (((*pcVar1 == '\x01') && ((int)*(short *)(pcVar1 + 0xc) == intro->UniqueID)) ||
          ((*pcVar1 == '\a' && ((int)*(short *)(pcVar1 + 8) == intro->UniqueID)))) {
         return 1;
       }
       pcVar1 = pcVar1 + (uint)(byte)pcVar1[1] * 4;
-    } while (pcVar1 < UW_angleInc._12_4_);
+    } while (pcVar1 < savedInfoTracker.InfoEnd);
   }
   return 0;
 }
@@ -773,44 +765,44 @@ long SAVE_HasSavedIntro(Intro *intro,long currentStreamID)
 // decompiled code
 // original method signature: 
 // struct SavedLevel * /*$ra*/ SAVE_HasSavedLevel(long areaID /*$a0*/)
- // line 795, offset 0x800b602c
+ // line 793, offset 0x800b491c
 	/* begin block 1 */
-		// Start line: 797
-		// Start offset: 0x800B602C
+		// Start line: 795
+		// Start offset: 0x800B491C
 		// Variables:
 	// 		struct SavedLevel *savedLevel; // $v1
 	/* end block 1 */
-	// End offset: 0x800B6080
-	// End Line: 812
+	// End offset: 0x800B4970
+	// End Line: 810
 
 	/* begin block 2 */
-		// Start line: 1581
+		// Start line: 1580
 	/* end block 2 */
-	// End Line: 1582
+	// End Line: 1581
 
 	/* begin block 3 */
-		// Start line: 1582
+		// Start line: 1581
 	/* end block 3 */
-	// End Line: 1583
+	// End Line: 1582
 
 	/* begin block 4 */
-		// Start line: 1584
+		// Start line: 1583
 	/* end block 4 */
-	// End Line: 1585
+	// End Line: 1584
 
 SavedLevel * SAVE_HasSavedLevel(long areaID)
 
 {
   SavedLevel *pSVar1;
   
-  pSVar1 = UW_angleInc._8_4_;
-  if (UW_angleInc._8_4_ < UW_angleInc._12_4_) {
+  pSVar1 = (SavedLevel *)savedInfoTracker.InfoStart;
+  if (savedInfoTracker.InfoStart < savedInfoTracker.InfoEnd) {
     do {
       if ((pSVar1->savedID == '\x03') && ((int)pSVar1->areaID == areaID)) {
         return pSVar1;
       }
       pSVar1 = (SavedLevel *)(&pSVar1->savedID + (uint)pSVar1->shiftedSaveSize * 4);
-    } while (pSVar1 < UW_angleInc._12_4_);
+    } while (pSVar1 < savedInfoTracker.InfoEnd);
   }
   return (SavedLevel *)0x0;
 }
@@ -820,10 +812,10 @@ SavedLevel * SAVE_HasSavedLevel(long areaID)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SAVE_UpdateLevelWithSave(struct _StreamUnit *streamUnit /*$s0*/)
- // line 814, offset 0x800b6090
+ // line 812, offset 0x800b4980
 	/* begin block 1 */
-		// Start line: 815
-		// Start offset: 0x800B6090
+		// Start line: 813
+		// Start offset: 0x800B4980
 		// Variables:
 	// 		long i; // $t2
 	// 		struct ActualSavedLevel *savedLevel; // $t3
@@ -831,13 +823,13 @@ SavedLevel * SAVE_HasSavedLevel(long areaID)
 	// 		struct BSPTree *bspTree; // $v1
 	// 		long Zoffset; // $s1
 	/* end block 1 */
-	// End offset: 0x800B61C8
-	// End Line: 858
+	// End offset: 0x800B4AB8
+	// End Line: 856
 
 	/* begin block 2 */
-		// Start line: 1619
+		// Start line: 1618
 	/* end block 2 */
-	// End Line: 1620
+	// End Line: 1619
 
 void SAVE_UpdateLevelWithSave(_StreamUnit *streamUnit)
 
@@ -899,10 +891,10 @@ void SAVE_UpdateLevelWithSave(_StreamUnit *streamUnit)
 // decompiled code
 // original method signature: 
 // struct SavedLevel * /*$ra*/ SAVE_CreatedSavedLevel(long areaID /*$s3*/, struct Level *level /*$s2*/)
- // line 860, offset 0x800b61dc
+ // line 858, offset 0x800b4acc
 	/* begin block 1 */
-		// Start line: 861
-		// Start offset: 0x800B61DC
+		// Start line: 859
+		// Start offset: 0x800B4ACC
 		// Variables:
 	// 		struct SavedLevel *savedLevel; // $s0
 	// 		struct ActualSavedLevel *slevel; // $a0
@@ -912,28 +904,28 @@ void SAVE_UpdateLevelWithSave(_StreamUnit *streamUnit)
 	// 		long Zoffset; // $s4
 
 		/* begin block 1.1 */
-			// Start line: 881
-			// Start offset: 0x800B623C
+			// Start line: 879
+			// Start offset: 0x800B4B2C
 			// Variables:
 		// 		long numBSPTrees; // $s1
 
 			/* begin block 1.1.1 */
-				// Start line: 886
-				// Start offset: 0x800B6258
+				// Start line: 884
+				// Start offset: 0x800B4B48
 			/* end block 1.1.1 */
-			// End offset: 0x800B6350
-			// End Line: 931
+			// End offset: 0x800B4C40
+			// End Line: 929
 		/* end block 1.1 */
-		// End offset: 0x800B6350
-		// End Line: 932
+		// End offset: 0x800B4C40
+		// End Line: 930
 	/* end block 1 */
-	// End offset: 0x800B6374
-	// End Line: 943
+	// End offset: 0x800B4C64
+	// End Line: 941
 
 	/* begin block 2 */
-		// Start line: 1738
+		// Start line: 1737
 	/* end block 2 */
-	// End Line: 1739
+	// End Line: 1738
 
 SavedLevel * SAVE_CreatedSavedLevel(long areaID,Level *level)
 
@@ -941,63 +933,65 @@ SavedLevel * SAVE_CreatedSavedLevel(long areaID,Level *level)
   short sVar1;
   ushort uVar2;
   bool bVar3;
-  menu_t *menu;
-  BSPTree *pBVar4;
-  SavedLevel *pSVar5;
-  menu_t *instance;
-  undefined *opaque;
-  int iVar6;
+  SavedLevel *savedBlock;
+  _Terrain *p_Var4;
+  int iVar5;
+  SavedLevel *pSVar6;
+  int iVar7;
+  int iVar8;
   
   uVar2 = level->terrain->UnitChangeFlags;
   sVar1 = (level->terrain->BSPTreeArray->globalOffset).z;
-  opaque = (undefined *)0x0;
+  bVar3 = false;
   if (((uVar2 & 1) != 0) || ((uVar2 & 2) != 0)) {
-    opaque = &UNK_00000001;
+    bVar3 = true;
   }
-  if (opaque == (undefined *)0x0) {
-    menu = (menu_t *)SAVE_HasSavedLevel(areaID);
-    if (menu != (menu_t *)0x0) {
-      menu_initialize(menu,opaque);
+  if (bVar3) {
+    iVar8 = level->terrain->numBSPTrees + -2;
+    savedBlock = (SavedLevel *)0x0;
+    if (0 < iVar8) {
+      savedBlock = SAVE_HasSavedLevel(areaID);
+      if (savedBlock == (SavedLevel *)0x0) {
+                    /* WARNING: Subroutine does not return */
+        SAVE_GetSavedBlock(3,iVar8 * 8);
+      }
+      savedBlock->areaID = (short)areaID;
+      if ((level->waterZLevel == -0x7fff) || (level->waterZLevel == 0x7fff)) {
+        savedBlock->waterZ = *(short *)&level->waterZLevel;
+      }
+      else {
+        savedBlock->waterZ = *(short *)&level->waterZLevel - sVar1;
+      }
+      savedBlock->numberBSPTreesSaved = (short)iVar8;
+      p_Var4 = level->terrain;
+      iVar8 = 0;
+      if (0 < p_Var4->numBSPTrees) {
+        iVar7 = 0;
+        pSVar6 = savedBlock;
+        do {
+          iVar5 = (int)&p_Var4->BSPTreeArray->bspRoot + iVar7;
+          if (1 < (ushort)(*(short *)(iVar5 + 0x1a) + 1U)) {
+            *(undefined *)((int)&pSVar6[1].numberBSPTreesSaved + 1) = (char)iVar8;
+            sVar1 = *(short *)(iVar5 + 0x18);
+            *(undefined4 *)(pSVar6 + 1) = *(undefined4 *)(iVar5 + 0x14);
+            pSVar6[1].waterZ = sVar1;
+            *(undefined *)&pSVar6[1].numberBSPTreesSaved = *(undefined *)(iVar5 + 0x12);
+            pSVar6 = pSVar6 + 1;
+          }
+          p_Var4 = level->terrain;
+          iVar8 = iVar8 + 1;
+          iVar7 = iVar7 + 0x24;
+        } while (iVar8 < p_Var4->numBSPTrees);
+      }
     }
   }
   else {
-    iVar6 = level->terrain->numBSPTrees + -2;
-    menu = (menu_t *)0x0;
-    if (0 < iVar6) {
-      menu = (menu_t *)SAVE_HasSavedLevel(areaID);
-      if (menu == (menu_t *)0x0) {
-                    /* WARNING: Subroutine does not return */
-        SAVE_GetSavedBlock(3,iVar6 * 8);
-      }
-      *(undefined2 *)((int)&menu->nmenus + 2) = (short)areaID;
-      if ((level->waterZLevel == -0x7fff) || (level->waterZLevel == 0x7fff)) {
-        *(short *)&menu->nitems = *(short *)&level->waterZLevel;
-      }
-      else {
-        *(short *)&menu->nitems = *(short *)&level->waterZLevel - sVar1;
-      }
-      *(short *)((int)&menu->nitems + 2) = (short)iVar6;
-      if (0 < level->terrain->numBSPTrees) {
-        pBVar4 = level->terrain->BSPTreeArray;
-        instance = menu;
-        if (1 < (ushort)(pBVar4->ID + 1U)) {
-          *(undefined *)((int)&menu->stack[0].fn + 3) = 0;
-          sVar1 = (pBVar4->localOffset).z;
-          menu->nbytes = *(int *)&pBVar4->localOffset;
-          *(short *)&menu->stack[0].fn = sVar1;
-          *(undefined *)((int)&menu->stack[0].fn + 2) = *(undefined *)&pBVar4->flags;
-          instance = (menu_t *)&menu->nbytes;
-        }
-        bVar3 = 1 < level->terrain->numBSPTrees;
-        pSVar5 = (SavedLevel *)(uint)bVar3;
-        if (bVar3) {
-          SAVE_DeleteInstance((_Instance *)instance);
-          return pSVar5;
-        }
-      }
+    savedBlock = SAVE_HasSavedLevel(areaID);
+    if (savedBlock != (SavedLevel *)0x0) {
+      SAVE_DeleteBlock((SavedBasic *)savedBlock);
     }
   }
-  return (SavedLevel *)menu;
+  return savedBlock;
 }
 
 
@@ -1005,61 +999,61 @@ SavedLevel * SAVE_CreatedSavedLevel(long areaID,Level *level)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SAVE_DeleteBlock(struct SavedBasic *savedBlock /*$a0*/)
- // line 947, offset 0x800b6398
+ // line 945, offset 0x800b4c88
 	/* begin block 1 */
-		// Start line: 948
-		// Start offset: 0x800B6398
+		// Start line: 946
+		// Start offset: 0x800B4C88
 		// Variables:
 	// 		long size; // $s0
 	// 		char *nextBlock; // $a1
 
 		/* begin block 1.1 */
-			// Start line: 960
-			// Start offset: 0x800B63C0
+			// Start line: 956
+			// Start offset: 0x800B4CB0
 			// Variables:
 		// 		int i; // $a3
 		/* end block 1.1 */
-		// End offset: 0x800B63FC
-		// End Line: 978
+		// End offset: 0x800B4CF8
+		// End Line: 976
 	/* end block 1 */
-	// End offset: 0x800B63FC
-	// End Line: 980
+	// End offset: 0x800B4CF8
+	// End Line: 978
 
 	/* begin block 2 */
-		// Start line: 1932
+		// Start line: 1931
 	/* end block 2 */
-	// End Line: 1933
+	// End Line: 1932
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void menu_initialize(menu_t *menu,void *opaque)
+void SAVE_DeleteBlock(SavedBasic *savedBlock)
 
 {
-  uint uVar1;
-  menu_t *pmVar2;
-  char *pcVar3;
-  int iVar4;
+  long lVar1;
+  uint uVar2;
+  SavedBasic *pSVar3;
+  SavedBasic **ppSVar4;
+  int iVar5;
   
-  uVar1 = (uint)*(byte *)((int)&menu->nmenus + 1);
-  if (GameCheat_800d00a8._12_4_ != 0) {
-    iVar4 = 0;
-    pcVar3 = &CHAR____800d61d8;
+  lVar1 = numbufferedIntros;
+  uVar2 = (uint)savedBlock->shiftedSaveSize;
+  if ((numbufferedIntros != 0) && (iVar5 = 0, 0 < numbufferedIntros)) {
+    ppSVar4 = &bufferSavedIntroArray64;
     do {
-      pmVar2 = *(menu_t **)pcVar3;
-      if (pmVar2 == menu) {
-        *(menu_t **)pcVar3 = (menu_t *)0x0;
+      pSVar3 = *ppSVar4;
+      if (pSVar3 == savedBlock) {
+        *ppSVar4 = (SavedBasic *)0x0;
       }
       else {
-        if (menu < pmVar2) {
-          *(menu_t **)pcVar3 = (menu_t *)((int)pmVar2 + uVar1 * -4);
+        if (savedBlock < pSVar3) {
+          *ppSVar4 = pSVar3 + uVar2 * 0x7ffffffe;
         }
       }
-      iVar4 = iVar4 + 1;
-      pcVar3 = (char *)((menu_t **)pcVar3 + 1);
-    } while (iVar4 < 0x40);
+      iVar5 = iVar5 + 1;
+      ppSVar4 = ppSVar4 + 1;
+    } while (iVar5 < lVar1);
   }
-  memmove(menu,&menu->nmenus + uVar1,_CHAR____800d61d0 - (int)(&menu->nmenus + uVar1));
-  _CHAR____800d61d0 = _CHAR____800d61d0 + uVar1 * -4;
+  memmove(savedBlock,savedBlock + uVar2 * 2,
+          (size_t)(savedInfoTracker.InfoEnd + -(int)(savedBlock + uVar2 * 2)));
+  savedInfoTracker.InfoEnd = savedInfoTracker.InfoEnd + uVar2 * -4;
   return;
 }
 
@@ -1068,10 +1062,10 @@ void menu_initialize(menu_t *menu,void *opaque)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SAVE_Instance(struct _Instance *instance /*$s1*/, struct Level *level /*$s3*/)
- // line 991, offset 0x800b6424
+ // line 989, offset 0x800b4d20
 	/* begin block 1 */
-		// Start line: 992
-		// Start offset: 0x800B6424
+		// Start line: 990
+		// Start offset: 0x800B4D20
 		// Variables:
 	// 		struct _SavedIntro *savedIntro; // $v0
 	// 		struct evControlSaveDataData *extraData; // $s0
@@ -1079,79 +1073,79 @@ void menu_initialize(menu_t *menu,void *opaque)
 	// 		long saveType; // $v1
 
 		/* begin block 1.1 */
-			// Start line: 1003
-			// Start offset: 0x800B646C
+			// Start line: 1001
+			// Start offset: 0x800B4D68
 			// Variables:
 		// 		struct SavedIntroSmall *savedSmallIntro; // $a0
 
 			/* begin block 1.1.1 */
-				// Start line: 1010
-				// Start offset: 0x800B648C
+				// Start line: 1008
+				// Start offset: 0x800B4D88
 			/* end block 1.1.1 */
-			// End offset: 0x800B64A4
-			// End Line: 1016
+			// End offset: 0x800B4DA0
+			// End Line: 1014
 		/* end block 1.1 */
-		// End offset: 0x800B64A4
-		// End Line: 1016
+		// End offset: 0x800B4DA0
+		// End Line: 1014
 
 		/* begin block 1.2 */
-			// Start line: 1048
-			// Start offset: 0x800B6524
+			// Start line: 1046
+			// Start offset: 0x800B4E20
 			// Variables:
 		// 		struct _SavedIntroWithIntro *savedIntroWithIntro; // $v0
 		/* end block 1.2 */
-		// End offset: 0x800B6558
-		// End Line: 1062
+		// End offset: 0x800B4E54
+		// End Line: 1060
 
 		/* begin block 1.3 */
-			// Start line: 1069
-			// Start offset: 0x800B6578
+			// Start line: 1067
+			// Start offset: 0x800B4E74
 			// Variables:
 		// 		struct SavedIntroSpline *savedIntroSpline; // $s0
 
 			/* begin block 1.3.1 */
-				// Start line: 1076
-				// Start offset: 0x800B6598
+				// Start line: 1074
+				// Start offset: 0x800B4E94
 				// Variables:
 			// 		struct MultiSpline *multi; // $a1
 			/* end block 1.3.1 */
-			// End offset: 0x800B663C
-			// End Line: 1096
+			// End offset: 0x800B4F38
+			// End Line: 1094
 		/* end block 1.3 */
-		// End offset: 0x800B663C
-		// End Line: 1097
+		// End offset: 0x800B4F38
+		// End Line: 1095
 	/* end block 1 */
-	// End offset: 0x800B663C
-	// End Line: 1102
+	// End offset: 0x800B4F38
+	// End Line: 1100
 
 	/* begin block 2 */
-		// Start line: 2041
+		// Start line: 2040
 	/* end block 2 */
-	// End Line: 2042
+	// End Line: 2041
 
 void SAVE_Instance(_Instance *instance,Level *level)
 
 {
-  int in_v0;
+  long lVar1;
   
-  VOICEXA_CdSyncCallback((uchar)instance,(uchar *)level);
-  if (in_v0 != 0) {
+  lVar1 = SAVE_SaveableInstance(instance);
+  if (lVar1 != 0) {
     if ((instance->flags2 & 4U) != 0) {
       SAVE_DeleteInstance(instance);
                     /* WARNING: Subroutine does not return */
       INSTANCE_Query(instance,0x18);
     }
-    if (in_v0 == 1) {
+    if (lVar1 == 1) {
       SAVE_DeleteInstance(instance);
                     /* WARNING: Subroutine does not return */
       INSTANCE_Query(instance,0x18);
     }
-    if (in_v0 == 2) {
+    if (lVar1 == 2) {
       SAVE_DeleteInstance(instance);
                     /* WARNING: Subroutine does not return */
       INSTANCE_Query(instance,0x18);
     }
-    if (in_v0 == 3) {
+    if (lVar1 == 3) {
       SAVE_DeleteInstance(instance);
                     /* WARNING: Subroutine does not return */
       SAVE_GetSavedBlock(8,0);
@@ -1165,40 +1159,40 @@ void SAVE_Instance(_Instance *instance,Level *level)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SAVE_DeleteInstance(struct _Instance *instance /*$a2*/)
- // line 1104, offset 0x800b6658
+ // line 1102, offset 0x800b4f54
 	/* begin block 1 */
-		// Start line: 1105
-		// Start offset: 0x800B6658
+		// Start line: 1103
+		// Start offset: 0x800B4F54
 		// Variables:
 	// 		struct SavedBasic *saveIntro; // $a0
 	/* end block 1 */
-	// End offset: 0x800B6718
-	// End Line: 1132
+	// End offset: 0x800B5014
+	// End Line: 1130
 
 	/* begin block 2 */
-		// Start line: 2270
+		// Start line: 2269
 	/* end block 2 */
-	// End Line: 2271
+	// End Line: 2270
 
 void SAVE_DeleteInstance(_Instance *instance)
 
 {
-  byte bVar1;
-  menu_t *menu;
+  uchar uVar1;
+  SavedBasic *savedBlock;
   
-  menu = UW_angleInc._8_4_;
-  if (UW_angleInc._8_4_ < UW_angleInc._12_4_) {
+  savedBlock = (SavedBasic *)savedInfoTracker.InfoStart;
+  if (savedInfoTracker.InfoStart < savedInfoTracker.InfoEnd) {
     do {
-      bVar1 = *(byte *)&menu->nmenus;
-      if (((((bVar1 == 1) && ((int)*(short *)&menu->stack[0].fn == instance->introUniqueID)) ||
-           ((bVar1 == 7 && ((int)*(short *)&menu->nbytes == instance->introUniqueID)))) ||
-          ((bVar1 == 5 && ((int)*(short *)((int)&menu->nmenus + 2) == instance->introUniqueID)))) ||
-         ((bVar1 == 8 && ((int)*(short *)((int)&menu->nmenus + 2) == instance->introUniqueID)))) {
-        menu_initialize(menu,(void *)(uint)bVar1);
+      uVar1 = savedBlock->savedID;
+      if (((((uVar1 == '\x01') && ((int)(short)savedBlock[6] == instance->introUniqueID)) ||
+           ((uVar1 == '\a' && ((int)(short)savedBlock[4] == instance->introUniqueID)))) ||
+          ((uVar1 == '\x05' && ((int)(short)savedBlock[1] == instance->introUniqueID)))) ||
+         ((uVar1 == '\b' && ((int)(short)savedBlock[1] == instance->introUniqueID)))) {
+        SAVE_DeleteBlock(savedBlock);
         return;
       }
-      menu = (menu_t *)(&menu->nmenus + *(byte *)((int)&menu->nmenus + 1));
-    } while (menu < UW_angleInc._12_4_);
+      savedBlock = savedBlock + (uint)savedBlock->shiftedSaveSize * 2;
+    } while (savedBlock < savedInfoTracker.InfoEnd);
   }
   return;
 }
@@ -1207,75 +1201,78 @@ void SAVE_DeleteInstance(_Instance *instance)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ SAVE_SetDeadDeadBit(int uniqueID /*$a0*/, long set /*$a1*/)
- // line 1134, offset 0x800b6728
+// void /*$ra*/ SAVE_SetDeadDeadBit(struct _Instance *instance /*$a0*/, long set /*$a1*/)
+ // line 1132, offset 0x800b5024
 	/* begin block 1 */
-		// Start line: 1136
-		// Start offset: 0x800B6728
+		// Start line: 1134
+		// Start offset: 0x800B5024
 		// Variables:
 	// 		struct _SavedIntro *saveIntro; // $a2
 	// 		struct SavedDeadDeadBits *deadDeadBits; // $v1
 
 		/* begin block 1.1 */
-			// Start line: 1155
-			// Start offset: 0x800B6784
+			// Start line: 1153
+			// Start offset: 0x800B5088
 			// Variables:
 		// 		int deadByte; // $a2
 		// 		int deadBit; // $a0
 		/* end block 1.1 */
-		// End offset: 0x800B67E4
-		// End Line: 1177
+		// End offset: 0x800B50F0
+		// End Line: 1175
 	/* end block 1 */
-	// End offset: 0x800B67E4
-	// End Line: 1180
+	// End offset: 0x800B50F0
+	// End Line: 1178
 
 	/* begin block 2 */
-		// Start line: 2336
+		// Start line: 2335
 	/* end block 2 */
-	// End Line: 2337
+	// End Line: 2336
 
 	/* begin block 3 */
-		// Start line: 2337
+		// Start line: 2336
 	/* end block 3 */
-	// End Line: 2338
+	// End Line: 2337
 
 	/* begin block 4 */
-		// Start line: 2340
+		// Start line: 2339
 	/* end block 4 */
-	// End Line: 2341
+	// End Line: 2340
 
-void SAVE_SetDeadDeadBit(int uniqueID,long set)
+void SAVE_SetDeadDeadBit(_Instance *instance,long set)
 
 {
   byte bVar1;
-  int iVar2;
+  uint uVar2;
   char *pcVar3;
-  char *pcVar4;
+  uint uVar4;
+  char *pcVar5;
+  int iVar6;
   
-  if (uniqueID < 0x2000) {
+  if (instance->introUniqueID < 0x2000) {
     pcVar3 = (char *)0x0;
-    pcVar4 = UW_angleInc._8_4_;
-    if (UW_angleInc._8_4_ < UW_angleInc._12_4_) {
+    pcVar5 = savedInfoTracker.InfoStart;
+    if (savedInfoTracker.InfoStart < savedInfoTracker.InfoEnd) {
       do {
-        pcVar3 = pcVar4;
+        pcVar3 = pcVar5;
         if (*pcVar3 == '\x04') break;
-        pcVar4 = pcVar3 + (uint)(byte)pcVar3[1] * 4;
+        pcVar5 = pcVar3 + (uint)(byte)pcVar3[1] * 4;
         pcVar3 = (char *)0x0;
-      } while (pcVar4 < UW_angleInc._12_4_);
+      } while (pcVar5 < savedInfoTracker.InfoEnd);
     }
     if (pcVar3 != (char *)0x0) {
-      iVar2 = uniqueID;
-      if (uniqueID < 0) {
-        iVar2 = uniqueID + 7;
+      uVar2 = instance->introUniqueID;
+      uVar4 = uVar2;
+      if ((int)uVar2 < 0) {
+        uVar4 = uVar2 + 7;
       }
-      iVar2 = iVar2 >> 3;
-      if (iVar2 < 0x340) {
-        bVar1 = (byte)(1 << (uniqueID & 7U));
+      iVar6 = (int)uVar4 >> 3;
+      if (iVar6 < 0x340) {
+        bVar1 = (byte)(1 << (uVar2 & 7));
         if (set == 1) {
-          (pcVar3 + iVar2)[2] = (pcVar3 + iVar2)[2] | bVar1;
+          (pcVar3 + iVar6)[2] = (pcVar3 + iVar6)[2] | bVar1;
           return;
         }
-        (pcVar3 + iVar2)[2] = (pcVar3 + iVar2)[2] & ~bVar1;
+        (pcVar3 + iVar6)[2] = (pcVar3 + iVar6)[2] & ~bVar1;
       }
     }
   }
@@ -1287,30 +1284,30 @@ void SAVE_SetDeadDeadBit(int uniqueID,long set)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SAVE_RestoreGlobalSavePointer()
- // line 1182, offset 0x800b67ec
+ // line 1180, offset 0x800b50f8
 	/* begin block 1 */
-		// Start line: 1184
-		// Start offset: 0x800B67EC
+		// Start line: 1182
+		// Start offset: 0x800B50F8
 		// Variables:
 	// 		struct _SavedIntro *saveIntro; // $v1
 	/* end block 1 */
-	// End offset: 0x800B683C
-	// End Line: 1199
+	// End offset: 0x800B5148
+	// End Line: 1197
 
 	/* begin block 2 */
-		// Start line: 2449
+		// Start line: 2448
 	/* end block 2 */
-	// End Line: 2450
+	// End Line: 2449
 
 	/* begin block 3 */
-		// Start line: 2450
+		// Start line: 2449
 	/* end block 3 */
-	// End Line: 2451
+	// End Line: 2450
 
 	/* begin block 4 */
-		// Start line: 2453
+		// Start line: 2452
 	/* end block 4 */
-	// End Line: 2454
+	// End Line: 2453
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
@@ -1320,12 +1317,12 @@ void SAVE_RestoreGlobalSavePointer(void)
   _GlobalSaveTracker *p_Var1;
   
   GlobalSave = (_GlobalSaveTracker *)0x0;
-  p_Var1 = UW_angleInc._8_4_;
-  if (UW_angleInc._8_4_ < UW_angleInc._12_4_) {
+  p_Var1 = (_GlobalSaveTracker *)savedInfoTracker.InfoStart;
+  if (savedInfoTracker.InfoStart < savedInfoTracker.InfoEnd) {
     while (GlobalSave = p_Var1, *(char *)&p_Var1->savedID != '\x06') {
       p_Var1 = (_GlobalSaveTracker *)
                (&p_Var1->savedID + (uint)*(byte *)((int)&p_Var1->savedID + 1) * 2);
-      if (UW_angleInc._12_4_ <= p_Var1) {
+      if (savedInfoTracker.InfoEnd <= p_Var1) {
         GlobalSave = (_GlobalSaveTracker *)0x0;
         return;
       }
@@ -1338,73 +1335,74 @@ void SAVE_RestoreGlobalSavePointer(void)
 
 // decompiled code
 // original method signature: 
-// long /*$ra*/ SAVE_IsUniqueIDDeadDead(long uniqueID /*$a0*/)
- // line 1201, offset 0x800b6844
+// long /*$ra*/ SAVE_IsIntroDeadDead(struct Intro *intro /*$a0*/)
+ // line 1199, offset 0x800b5150
 	/* begin block 1 */
-		// Start line: 1203
-		// Start offset: 0x800B6844
+		// Start line: 1201
+		// Start offset: 0x800B5150
 		// Variables:
 	// 		struct _SavedIntro *saveIntro; // $v1
 	// 		struct SavedDeadDeadBits *deadDeadBits; // $a2
 	// 		long result; // $a3
 
 		/* begin block 1.1 */
-			// Start line: 1224
-			// Start offset: 0x800B68AC
+			// Start line: 1222
+			// Start offset: 0x800B51C0
 			// Variables:
-		// 		int deadByte; // $a1
+		// 		int deadByte; // $a0
 		// 		int deadBit; // $v1
 		/* end block 1.1 */
-		// End offset: 0x800B68E8
-		// End Line: 1238
+		// End offset: 0x800B5204
+		// End Line: 1236
 	/* end block 1 */
-	// End offset: 0x800B68E8
-	// End Line: 1240
+	// End offset: 0x800B5204
+	// End Line: 1238
 
 	/* begin block 2 */
-		// Start line: 2489
+		// Start line: 2488
 	/* end block 2 */
-	// End Line: 2490
+	// End Line: 2489
 
 	/* begin block 3 */
-		// Start line: 2490
+		// Start line: 2489
 	/* end block 3 */
-	// End Line: 2491
+	// End Line: 2490
 
 	/* begin block 4 */
-		// Start line: 2491
+		// Start line: 2490
 	/* end block 4 */
-	// End Line: 2492
+	// End Line: 2491
 
-long SAVE_IsUniqueIDDeadDead(long uniqueID)
+long SAVE_IsIntroDeadDead(Intro *intro)
 
 {
-  long lVar1;
+  uint uVar1;
   char *pcVar2;
   uint uVar3;
   char *pcVar4;
   uint uVar5;
   
   uVar5 = 0;
-  if (uniqueID < 0x2000) {
-    pcVar2 = UW_angleInc._8_4_;
+  if (intro->UniqueID < 0x2000) {
+    pcVar2 = savedInfoTracker.InfoStart;
     pcVar4 = (char *)0x0;
-    if (UW_angleInc._8_4_ < UW_angleInc._12_4_) {
+    if (savedInfoTracker.InfoStart < savedInfoTracker.InfoEnd) {
       do {
         pcVar4 = pcVar2;
         if (*pcVar2 == '\x04') break;
         pcVar2 = pcVar2 + (uint)(byte)pcVar2[1] * 4;
         pcVar4 = (char *)0x0;
-      } while (pcVar2 < UW_angleInc._12_4_);
+      } while (pcVar2 < savedInfoTracker.InfoEnd);
     }
     if (pcVar4 != (char *)0x0) {
-      lVar1 = uniqueID;
-      if (uniqueID < 0) {
-        lVar1 = uniqueID + 7;
+      uVar1 = intro->UniqueID;
+      uVar3 = uVar1;
+      if ((int)uVar1 < 0) {
+        uVar3 = uVar1 + 7;
       }
-      uVar3 = 1 << (uniqueID & 7U);
-      if (lVar1 >> 3 < 0x340) {
-        uVar5 = (uint)(((byte)pcVar4[(lVar1 >> 3) + 2] & uVar3) == uVar3);
+      uVar1 = 1 << (uVar1 & 7);
+      if ((int)uVar3 >> 3 < 0x340) {
+        uVar5 = (uint)(((byte)pcVar4[((int)uVar3 >> 3) + 2] & uVar1) == uVar1);
       }
     }
   }
@@ -1415,38 +1413,18 @@ long SAVE_IsUniqueIDDeadDead(long uniqueID)
 
 // decompiled code
 // original method signature: 
-// long /*$ra*/ SAVE_IsIntroDeadDead(struct Intro *intro /*$a0*/)
- // line 1243, offset 0x800b68f0
-	/* begin block 1 */
-		// Start line: 2573
-	/* end block 1 */
-	// End Line: 2574
-
-long SAVE_IsIntroDeadDead(Intro *intro)
-
-{
-  long lVar1;
-  
-  lVar1 = SAVE_IsUniqueIDDeadDead(intro->UniqueID);
-  return lVar1;
-}
-
-
-
-// decompiled code
-// original method signature: 
 // void /*$ra*/ SAVE_DoInstanceDeadDead(struct _Instance *instance /*$s0*/)
- // line 1249, offset 0x800b6914
+ // line 1242, offset 0x800b520c
 	/* begin block 1 */
-		// Start line: 2585
+		// Start line: 2574
 	/* end block 1 */
-	// End Line: 2586
+	// End Line: 2575
 
 void SAVE_DoInstanceDeadDead(_Instance *instance)
 
 {
   SAVE_DeleteInstance(instance);
-  SAVE_SetDeadDeadBit(instance->introUniqueID,1);
+  SAVE_SetDeadDeadBit(instance,1);
   return;
 }
 
@@ -1455,16 +1433,16 @@ void SAVE_DoInstanceDeadDead(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SAVE_MarkDeadDead(struct _Instance *instance /*$a0*/)
- // line 1259, offset 0x800b6944
+ // line 1252, offset 0x800b523c
 	/* begin block 1 */
-		// Start line: 2605
+		// Start line: 2594
 	/* end block 1 */
-	// End Line: 2606
+	// End Line: 2595
 
 	/* begin block 2 */
-		// Start line: 2606
+		// Start line: 2595
 	/* end block 2 */
-	// End Line: 2607
+	// End Line: 2596
 
 void SAVE_MarkDeadDead(_Instance *instance)
 
@@ -1478,16 +1456,16 @@ void SAVE_MarkDeadDead(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SAVE_UndestroyInstance(struct _Instance *instance /*$a0*/)
- // line 1264, offset 0x800b6958
+ // line 1257, offset 0x800b5250
 	/* begin block 1 */
-		// Start line: 2615
+		// Start line: 2604
 	/* end block 1 */
-	// End Line: 2616
+	// End Line: 2605
 
 void SAVE_UndestroyInstance(_Instance *instance)
 
 {
-  SAVE_SetDeadDeadBit(instance->introUniqueID,0);
+  SAVE_SetDeadDeadBit(instance,0);
   return;
 }
 
@@ -1496,44 +1474,44 @@ void SAVE_UndestroyInstance(_Instance *instance)
 // decompiled code
 // original method signature: 
 // struct SavedIntroSmall * /*$ra*/ SAVE_GetSavedSmallIntro(struct _Instance *instance /*$a0*/)
- // line 1269, offset 0x800b697c
+ // line 1262, offset 0x800b5270
 	/* begin block 1 */
-		// Start line: 1271
-		// Start offset: 0x800B697C
+		// Start line: 1264
+		// Start offset: 0x800B5270
 		// Variables:
 	// 		struct SavedBasic *curSave; // $a1
 	/* end block 1 */
-	// End offset: 0x800B69D8
-	// End Line: 1289
+	// End offset: 0x800B52CC
+	// End Line: 1282
 
 	/* begin block 2 */
-		// Start line: 2625
+		// Start line: 2614
 	/* end block 2 */
-	// End Line: 2626
+	// End Line: 2615
 
 	/* begin block 3 */
-		// Start line: 2626
+		// Start line: 2615
 	/* end block 3 */
-	// End Line: 2627
+	// End Line: 2616
 
 	/* begin block 4 */
-		// Start line: 2630
+		// Start line: 2619
 	/* end block 4 */
-	// End Line: 2631
+	// End Line: 2620
 
 SavedIntroSmall * SAVE_GetSavedSmallIntro(_Instance *instance)
 
 {
   SavedIntroSmall *pSVar1;
   
-  pSVar1 = UW_angleInc._8_4_;
-  if (UW_angleInc._8_4_ < UW_angleInc._12_4_) {
+  pSVar1 = (SavedIntroSmall *)savedInfoTracker.InfoStart;
+  if (savedInfoTracker.InfoStart < savedInfoTracker.InfoEnd) {
     do {
       if ((pSVar1->savedID == '\x05') && ((int)pSVar1->introUniqueID == instance->introUniqueID)) {
         return pSVar1;
       }
       pSVar1 = pSVar1 + pSVar1->shiftedSaveSize;
-    } while (pSVar1 < UW_angleInc._12_4_);
+    } while (pSVar1 < savedInfoTracker.InfoEnd);
   }
   return (SavedIntroSmall *)0x0;
 }
@@ -1543,49 +1521,50 @@ SavedIntroSmall * SAVE_GetSavedSmallIntro(_Instance *instance)
 // decompiled code
 // original method signature: 
 // struct SavedIntroSpline * /*$ra*/ SAVE_GetIntroSpline(struct _Instance *instance /*$a0*/)
- // line 1291, offset 0x800b69e8
+ // line 1284, offset 0x800b52dc
 	/* begin block 1 */
-		// Start line: 1293
-		// Start offset: 0x800B69E8
+		// Start line: 1286
+		// Start offset: 0x800B52DC
 		// Variables:
 	// 		struct SavedBasic *curSave; // $a1
 	/* end block 1 */
-	// End offset: 0x800B6A44
-	// End Line: 1310
+	// End offset: 0x800B5338
+	// End Line: 1303
 
 	/* begin block 2 */
-		// Start line: 2669
+		// Start line: 2658
 	/* end block 2 */
-	// End Line: 2670
+	// End Line: 2659
 
 	/* begin block 3 */
-		// Start line: 2670
+		// Start line: 2659
 	/* end block 3 */
-	// End Line: 2671
+	// End Line: 2660
 
 	/* begin block 4 */
-		// Start line: 2673
+		// Start line: 2662
 	/* end block 4 */
-	// End Line: 2674
+	// End Line: 2663
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-long SAVE_SizeOfFreeSpace(void)
+SavedIntroSpline * SAVE_GetIntroSpline(_Instance *instance)
 
 {
-  int in_a0;
-  char *pcVar1;
+  byte *pbVar1;
+  uchar *puVar2;
+  SavedIntroSpline *pSVar3;
   
-  pcVar1 = _CHAR____800d74a8;
-  if (_CHAR____800d74a8 < _CHAR____800d74ac) {
+  pSVar3 = (SavedIntroSpline *)savedInfoTracker.InfoStart;
+  if (savedInfoTracker.InfoStart < savedInfoTracker.InfoEnd) {
     do {
-      if ((*pcVar1 == '\b') && ((int)*(short *)(pcVar1 + 2) == *(int *)(in_a0 + 0x3c))) {
-        return (long)pcVar1;
+      if ((pSVar3->savedID == '\b') && ((int)pSVar3->introUniqueID == instance->introUniqueID)) {
+        return pSVar3;
       }
-      pcVar1 = pcVar1 + (uint)(byte)pcVar1[1] * 4;
-    } while (pcVar1 < _CHAR____800d74ac);
+      pbVar1 = &pSVar3->shiftedSaveSize;
+      puVar2 = &pSVar3->savedID;
+      pSVar3 = (SavedIntroSpline *)(puVar2 + (uint)*pbVar1 * 4);
+    } while ((SavedIntroSpline *)(puVar2 + (uint)*pbVar1 * 4) < savedInfoTracker.InfoEnd);
   }
-  return 0;
+  return (SavedIntroSpline *)0x0;
 }
 
 
@@ -1593,16 +1572,16 @@ long SAVE_SizeOfFreeSpace(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SAVE_UpdateGlobalSaveTracker()
- // line 1313, offset 0x800b6a54
+ // line 1306, offset 0x800b5348
 	/* begin block 1 */
-		// Start line: 2713
+		// Start line: 2702
 	/* end block 1 */
-	// End Line: 2714
+	// End Line: 2703
 
 	/* begin block 2 */
-		// Start line: 2714
+		// Start line: 2703
 	/* end block 2 */
-	// End Line: 2715
+	// End Line: 2704
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
@@ -1611,22 +1590,22 @@ void SAVE_UpdateGlobalSaveTracker(void)
 {
   _GlobalSaveTracker *p_Var1;
   ulong uVar2;
-  _CameraKey *p_Var3;
+  ulong uVar3;
   undefined4 uVar4;
   ushort uVar5;
   int iVar6;
   
   p_Var1 = GlobalSave;
-  GlobalSave->currentTime = theCamera.focusDistanceList[1][1];
-  p_Var3 = theCamera.cameraKey;
-  uVar2 = theCamera._452_4_;
-  (p_Var1->sound).gMasterVol = theCamera.collisionTargetFocusRotation._4_4_;
+  GlobalSave->currentTime = gameTrackerX.currentTime;
+  uVar3 = gameTrackerX.sound.gSfxVol;
+  uVar2 = gameTrackerX.sound.gMusicVol;
+  (p_Var1->sound).gMasterVol = gameTrackerX.sound.gMasterVol;
   (p_Var1->sound).gMusicVol = uVar2;
-  *(_CameraKey **)&(p_Var1->sound).gSfxVol = p_Var3;
-  uVar4 = theCamera.focusSphere._4_4_;
-  (p_Var1->sound).gVoiceVol = theCamera.focusSphere.position._0_4_;
+  (p_Var1->sound).gSfxVol = uVar3;
+  uVar4 = gameTrackerX.sound._16_4_;
+  (p_Var1->sound).gVoiceVol = gameTrackerX.sound.gVoiceVol;
   *(undefined4 *)&(p_Var1->sound).gSfxOn = uVar4;
-  GlobalSave->saveVersion = 0x5524;
+  GlobalSave->saveVersion = 0x5514;
   iVar6 = GAMEPAD_DualShockEnabled();
   if (iVar6 == 0) {
     uVar5 = GlobalSave->flags & 0xfffd;
@@ -1643,32 +1622,32 @@ void SAVE_UpdateGlobalSaveTracker(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SAVE_RestoreGlobalSaveTracker()
- // line 1326, offset 0x800b6ae8
+ // line 1319, offset 0x800b53e0
 	/* begin block 1 */
-		// Start line: 2740
+		// Start line: 2729
 	/* end block 1 */
-	// End Line: 2741
+	// End Line: 2730
 
 	/* begin block 2 */
-		// Start line: 2742
+		// Start line: 2730
 	/* end block 2 */
-	// End Line: 2743
+	// End Line: 2731
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void SAVE_RestoreGlobalSaveTracker(void)
 
 {
-  if (GlobalSave->saveVersion == 0x5524) {
-    theCamera.focusDistanceList[1][1] = GlobalSave->currentTime;
-    theCamera.collisionTargetFocusRotation._4_4_ = (GlobalSave->sound).gMasterVol;
-    theCamera._452_4_ = (GlobalSave->sound).gMusicVol;
-    theCamera.cameraKey = (_CameraKey *)(GlobalSave->sound).gSfxVol;
-    theCamera.focusSphere.position._0_4_ = (GlobalSave->sound).gVoiceVol;
-    theCamera.focusSphere._4_4_ = *(undefined4 *)&(GlobalSave->sound).gSfxOn;
-    SOUND_SetSfxVolume((int)theCamera.cameraKey);
-    SOUND_SetMusicVolume(theCamera._452_4_);
-    SOUND_SetVoiceVolume(theCamera.focusSphere.position._0_4_);
+  if (GlobalSave->saveVersion == 0x5514) {
+    gameTrackerX.currentTime = GlobalSave->currentTime;
+    gameTrackerX.sound.gMasterVol = (GlobalSave->sound).gMasterVol;
+    gameTrackerX.sound.gMusicVol = (GlobalSave->sound).gMusicVol;
+    gameTrackerX.sound.gSfxVol = (GlobalSave->sound).gSfxVol;
+    gameTrackerX.sound.gVoiceVol = (GlobalSave->sound).gVoiceVol;
+    gameTrackerX.sound._16_4_ = *(undefined4 *)&(GlobalSave->sound).gSfxOn;
+    SOUND_SetSfxVolume(gameTrackerX.sound.gSfxVol);
+    SOUND_SetMusicVolume(gameTrackerX.sound.gMusicVol);
+    SOUND_SetVoiceVolume(gameTrackerX.sound.gVoiceVol);
     if ((GlobalSave->flags & 2U) == 0) {
       GAMEPAD_DisableDualShock();
     }
@@ -1677,7 +1656,7 @@ void SAVE_RestoreGlobalSaveTracker(void)
     }
   }
   else {
-    SAVE_ClearMemory((GameTracker *)(theCamera.core.vvNormalWorVecMat[0].m + 4));
+    SAVE_ClearMemory(&gameTrackerX);
   }
   return;
 }
@@ -1687,58 +1666,58 @@ void SAVE_RestoreGlobalSaveTracker(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SAVE_SaveEverythingInMemory()
- // line 1354, offset 0x800b6bb8
+ // line 1344, offset 0x800b54b8
 	/* begin block 1 */
-		// Start line: 1355
-		// Start offset: 0x800B6BB8
+		// Start line: 1345
+		// Start offset: 0x800B54B8
 		// Variables:
 	// 		struct _Instance *instance; // $s0
 	// 		long i; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 1363
-			// Start offset: 0x800B6BE0
+			// Start line: 1353
+			// Start offset: 0x800B54E0
 			// Variables:
 		// 		struct _Instance *next; // $s1
 		// 		struct Level *level; // $v0
 		/* end block 1.1 */
-		// End offset: 0x800B6C00
-		// End Line: 1372
+		// End offset: 0x800B5500
+		// End Line: 1362
 	/* end block 1 */
-	// End offset: 0x800B6C54
-	// End Line: 1388
+	// End offset: 0x800B5558
+	// End Line: 1378
 
 	/* begin block 2 */
-		// Start line: 2798
+		// Start line: 2780
 	/* end block 2 */
-	// End Line: 2799
+	// End Line: 2781
 
 	/* begin block 3 */
-		// Start line: 2804
+		// Start line: 2786
 	/* end block 3 */
-	// End Line: 2805
+	// End Line: 2787
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void SAVE_SaveEverythingInMemory(void)
 
 {
-  FontChar *pFVar1;
+  STracker *pSVar1;
   int iVar2;
   
   iVar2 = 0;
-  if (*(int *)(theCamera.core.vvNormalWorVecMat[1].t[2] + 4) != 0) {
+  if ((gameTrackerX.instanceList)->first != (_Instance *)0x0) {
                     /* WARNING: Subroutine does not return */
-    STREAM_GetLevelWithID(*(long *)(*(int *)(theCamera.core.vvNormalWorVecMat[1].t[2] + 4) + 0x38));
+    STREAM_GetLevelWithID((gameTrackerX.instanceList)->first->currentStreamUnitID);
   }
-  pFVar1 = fontTracker.font_buffer + 0x5c;
+  pSVar1 = &StreamTracker;
   do {
-    if (*(short *)&pFVar1->c == 2) {
-      EVENT_SaveEventsFromLevel(*(long *)pFVar1,*(Level **)&pFVar1[1].y);
-      SAVE_CreatedSavedLevel(*(long *)pFVar1,*(Level **)&pFVar1[1].y);
+    if (pSVar1->StreamList[0].used == 2) {
+      EVENT_SaveEventsFromLevel(pSVar1->StreamList[0].StreamUnitID,pSVar1->StreamList[0].level);
+      SAVE_CreatedSavedLevel(pSVar1->StreamList[0].StreamUnitID,pSVar1->StreamList[0].level);
     }
     iVar2 = iVar2 + 1;
-    pFVar1 = (FontChar *)&pFVar1[10].c;
+    pSVar1 = (STracker *)(pSVar1->StreamList + 1);
   } while (iVar2 < 0x10);
   return;
 }
@@ -1748,25 +1727,20 @@ void SAVE_SaveEverythingInMemory(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SAVE_SaveGame()
- // line 1391, offset 0x800b6c6c
+ // line 1381, offset 0x800b5570
 	/* begin block 1 */
-		// Start line: 2900
+		// Start line: 2882
 	/* end block 1 */
-	// End Line: 2901
+	// End Line: 2883
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void SAVE_SaveGame(void)
 
 {
-  int iVar1;
-  
-  do {
-    iVar1 = STREAM_PollLoadQueue();
-  } while (iVar1 != 0);
   SAVE_SaveEverythingInMemory();
   SAVE_UpdateGlobalSaveTracker();
-  GlobalSave->sizeUsedInBlock = UW_angleInc.x - UW_angleInc.newX;
+  GlobalSave->sizeUsedInBlock = (short)savedInfoTracker.InfoEnd - (short)savedInfoTracker.InfoStart;
   return;
 }
 
@@ -1775,23 +1749,68 @@ void SAVE_SaveGame(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SAVE_RestoreGame()
- // line 1406, offset 0x800b6cb8
+ // line 1389, offset 0x800b55ac
 	/* begin block 1 */
-		// Start line: 2930
+		// Start line: 2898
 	/* end block 1 */
-	// End Line: 2931
+	// End Line: 2899
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void SAVE_RestoreGame(void)
 
 {
-  theCamera.positionAccl._4_4_ = theCamera.positionAccl._4_4_ | 0x200000;
+  gameTrackerX.streamFlags = gameTrackerX.streamFlags | 0x200000;
   SAVE_RestoreGlobalSavePointer();
   SAVE_RestoreGlobalSaveTracker();
-  UW_angleInc._12_4_ = UW_angleInc._8_4_ + GlobalSave->sizeUsedInBlock;
-  GAMELOOP_RequestLevelChange
-            (s_under_800cf954,1,(GameTracker *)(theCamera.core.vvNormalWorVecMat[0].m + 4));
+  savedInfoTracker.InfoEnd = savedInfoTracker.InfoStart + GlobalSave->sizeUsedInBlock;
+  GAMELOOP_RequestLevelChange("under",1,&gameTrackerX);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ SAVE_DebugSaveGame()
+ // line 1405, offset 0x800b5614
+	/* begin block 1 */
+		// Start line: 2933
+	/* end block 1 */
+	// End Line: 2934
+
+	/* begin block 2 */
+		// Start line: 2961
+	/* end block 2 */
+	// End Line: 2962
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
+void SAVE_DebugSaveGame(void)
+
+{
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ SAVE_LoadSaveGame()
+ // line 1473, offset 0x800b561c
+	/* begin block 1 */
+		// Start line: 2941
+	/* end block 1 */
+	// End Line: 2942
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
+void SAVE_LoadSaveGame(void)
+
+{
+  gameTrackerX.streamFlags = gameTrackerX.streamFlags | 0x200000;
+  GAMELOOP_RequestLevelChange("under",1,&gameTrackerX);
+  gameTrackerX.gameMode = 0;
   return;
 }
 
@@ -1800,21 +1819,21 @@ void SAVE_RestoreGame(void)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SAVE_SizeOfFreeSpace()
- // line 1500, offset 0x800b6d1c
+ // line 1483, offset 0x800b565c
 	/* begin block 1 */
-		// Start line: 3000
+		// Start line: 3055
 	/* end block 1 */
-	// End Line: 3001
+	// End Line: 3056
 
 	/* begin block 2 */
-		// Start line: 3035
+		// Start line: 3056
 	/* end block 2 */
-	// End Line: 3036
+	// End Line: 3057
 
-int SAVE_SizeOfFreeSpace(void)
+long SAVE_SizeOfFreeSpace(void)
 
 {
-  return iGpffffff18 - iGpffffff14;
+  return (long)(savedInfoTracker.EndOfMemory + -(int)savedInfoTracker.InfoEnd);
 }
 
 

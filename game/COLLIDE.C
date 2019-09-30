@@ -5,10 +5,10 @@
 // decompiled code
 // original method signature: 
 // int /*$ra*/ COLLIDE_PointInTriangle(struct _SVector *v0 /*$a0*/, struct _SVector *v1 /*$a1*/, struct _SVector *v2 /*$a2*/, struct _SVector *point /*$a3*/, struct _SVector *normal /*stack 16*/)
- // line 243, offset 0x8001e460
+ // line 233, offset 0x8001e48c
 	/* begin block 1 */
-		// Start line: 244
-		// Start offset: 0x8001E460
+		// Start line: 234
+		// Start offset: 0x8001E48C
 		// Variables:
 	// 		struct _Triangle2D *triangle; // $t2
 	// 		int nx; // $t1
@@ -17,56 +17,56 @@
 	// 		short ty; // $a3
 
 		/* begin block 1.1 */
-			// Start line: 244
-			// Start offset: 0x8001E59C
+			// Start line: 234
+			// Start offset: 0x8001E5C8
 			// Variables:
 		// 		struct _Triangle2D *tri; // $t2
 		// 		short tx; // $t0
 		// 		short ty; // $a3
 
 			/* begin block 1.1.1 */
-				// Start line: 244
-				// Start offset: 0x8001E59C
+				// Start line: 234
+				// Start offset: 0x8001E5C8
 				// Variables:
-			// 		int inside_flag; // $t3
-			// 		int line_flag; // $t7
-			// 		struct DVECTOR *vert1; // $t2
-			// 		struct DVECTOR *vert0; // $t1
-			// 		int yflag1; // $t5
+			// 		int inside_flag; // $t2
+			// 		int line_flag; // $t6
+			// 		struct DVECTOR *vert1; // $t1
+			// 		struct DVECTOR *vert0; // $a2
+			// 		int yflag1; // $t4
 			// 		int yflag0; // $v1
-			// 		int j; // $t6
+			// 		int j; // $t5
 
 				/* begin block 1.1.1.1 */
-					// Start line: 244
-					// Start offset: 0x8001E614
+					// Start line: 234
+					// Start offset: 0x8001E644
 					// Variables:
 				// 		long ydist; // $v0
 				// 		long xdist; // $v0
 				// 		long xdiff; // $v1
-				// 		long ydiff; // $a1
-				// 		long ix; // $v1
+				// 		long ydiff; // $a0
+				// 		long ix; // $v0
 				/* end block 1.1.1.1 */
-				// End offset: 0x8001E67C
-				// End Line: 244
+				// End offset: 0x8001E690
+				// End Line: 234
 			/* end block 1.1.1 */
-			// End offset: 0x8001E6FC
-			// End Line: 244
+			// End offset: 0x8001E710
+			// End Line: 234
 		/* end block 1.1 */
-		// End offset: 0x8001E6FC
-		// End Line: 244
+		// End offset: 0x8001E710
+		// End Line: 234
 	/* end block 1 */
-	// End offset: 0x8001E6FC
-	// End Line: 288
+	// End offset: 0x8001E710
+	// End Line: 278
 
 	/* begin block 2 */
-		// Start line: 369
+		// Start line: 359
 	/* end block 2 */
-	// End Line: 370
+	// End Line: 360
 
 	/* begin block 3 */
-		// Start line: 486
+		// Start line: 361
 	/* end block 3 */
-	// End Line: 487
+	// End Line: 362
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
@@ -84,12 +84,11 @@ int COLLIDE_PointInTriangle(_SVector *v0,_SVector *v1,_SVector *v2,_SVector *poi
   int iVar9;
   int iVar10;
   int iVar11;
-  int iVar12;
+  short *psVar12;
   int iVar13;
   short *psVar14;
-  short *psVar15;
-  uint uVar16;
-  int iVar17;
+  uint uVar15;
+  int iVar16;
   
   iVar7 = (int)normal->x;
   iVar9 = (int)normal->y;
@@ -111,9 +110,9 @@ int COLLIDE_PointInTriangle(_SVector *v0,_SVector *v1,_SVector *v2,_SVector *poi
       _DAT_1f800004 = *(undefined4 *)&v1->y;
       uVar1 = v2->z;
       sVar4 = v2->y;
-      goto LAB_8001e594;
+      goto LAB_8001e5c0;
     }
-LAB_8001e558:
+LAB_8001e584:
     sVar2 = point->x;
     uVar3 = point->y;
     _DAT_1f800000 = *(undefined4 *)v0;
@@ -125,7 +124,7 @@ LAB_8001e558:
     if (iVar7 < 0) {
       iVar7 = -iVar7;
     }
-    if (iVar9 <= iVar7) goto LAB_8001e558;
+    if (iVar9 <= iVar7) goto LAB_8001e584;
     sVar2 = point->x;
     uVar3 = point->z;
     _DAT_1f800000 = CONCAT22(v0->z,v0->x);
@@ -133,32 +132,32 @@ LAB_8001e558:
     uVar1 = v2->z;
   }
   sVar4 = v2->x;
-LAB_8001e594:
+LAB_8001e5c0:
   _DAT_1f800008 = CONCAT22(uVar1,sVar4);
-  uVar16 = 0;
+  uVar15 = 0;
   bVar5 = false;
-  iVar17 = 3;
+  iVar16 = 3;
   iVar9 = (int)((uint)uVar3 << 0x10) >> 0x10;
   iVar7 = (int)sVar2;
-  psVar14 = &DAT_1f800008;
-  psVar15 = &DAT_1f800000;
+  psVar12 = &DAT_1f800008;
+  psVar14 = &DAT_1f800000;
   bVar8 = (int)((uint)uVar3 << 0x10) <= (int)((uint)uVar1 << 0x10);
   do {
-    iVar13 = (int)psVar15[1];
+    iVar13 = (int)psVar14[1];
     if (bVar8 == iVar9 <= iVar13) {
       bVar6 = bVar5;
-      if ((bVar8 != false) && (iVar9 == (int)psVar14[1])) {
+      if ((bVar8 != false) && (iVar9 == (int)psVar12[1])) {
         if (iVar9 == iVar13) {
-          iVar10 = (int)*psVar15;
-          if ((int)*psVar14 < iVar7 != iVar10 < iVar7) {
+          iVar10 = (int)*psVar14;
+          if ((int)*psVar12 < iVar7 != iVar10 < iVar7) {
             return 1;
           }
-          if (iVar7 == (int)*psVar14) {
+          if (iVar7 == (int)*psVar12) {
             return 1;
           }
         }
         else {
-          iVar10 = (int)*psVar14;
+          iVar10 = (int)*psVar12;
         }
         if (iVar7 == iVar10) {
           return 1;
@@ -166,41 +165,39 @@ LAB_8001e594:
       }
     }
     else {
-      iVar10 = (int)*psVar14;
-      iVar12 = (int)*psVar15;
-      if (iVar7 <= iVar10 == iVar7 <= iVar12) {
+      iVar10 = (int)*psVar12;
+      iVar11 = (int)*psVar14;
+      if (iVar7 <= iVar10 == iVar7 <= iVar11) {
         if (iVar7 <= iVar10) {
-          uVar16 = (uint)(uVar16 == 0);
+          uVar15 = (uint)(uVar15 == 0);
         }
       }
       else {
-        iVar11 = psVar14[1] - iVar13;
-        iVar10 = (iVar12 - iVar7) * iVar11 - (iVar13 - iVar9) * (iVar10 - iVar12);
-        if (iVar11 < 0) {
-          iVar11 = -iVar11;
+        iVar10 = (iVar11 - iVar7) * (psVar12[1] - iVar13) - (iVar13 - iVar9) * (iVar10 - iVar11);
+        if (psVar12[1] - iVar13 < 0) {
           iVar10 = -iVar10;
         }
-        if (iVar11 / 2 < iVar10) {
-          uVar16 = (uint)(uVar16 == 0);
-        }
-        else {
-          if (-(iVar11 / 2) <= iVar10) {
+        if (iVar10 < 1) {
+          if (iVar10 == 0) {
             return 1;
           }
+        }
+        else {
+          uVar15 = (uint)(uVar15 == 0);
         }
       }
       bVar6 = true;
       if (bVar5) {
-        return uVar16;
+        return uVar15;
       }
     }
     bVar5 = bVar6;
-    iVar17 = iVar17 + -1;
-    psVar14 = psVar15;
-    psVar15 = psVar15 + 2;
+    iVar16 = iVar16 + -1;
+    psVar12 = psVar14;
+    psVar14 = psVar14 + 2;
     bVar8 = iVar9 <= iVar13;
-    if (iVar17 == 0) {
-      return uVar16;
+    if (iVar16 == 0) {
+      return uVar15;
     }
   } while( true );
 }
@@ -210,32 +207,34 @@ LAB_8001e594:
 // decompiled code
 // original method signature: 
 // int /*$ra*/ COLLIDE_PointInTriangle2DPub(short *v0 /*$a0*/, short *v1 /*$a1*/, short *v2 /*$a2*/, short *point /*$a3*/)
- // line 296, offset 0x8001e704
+ // line 286, offset 0x8001e718
 	/* begin block 1 */
-		// Start line: 297
-		// Start offset: 0x8001E704
+		// Start line: 287
+		// Start offset: 0x8001E718
 		// Variables:
 	// 		struct _SVector normal; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x8001E704
-	// End Line: 297
+	// End offset: 0x8001E718
+	// End Line: 287
 
 	/* begin block 2 */
-		// Start line: 485
+		// Start line: 475
 	/* end block 2 */
-	// End Line: 486
+	// End Line: 476
 
-void COLLIDE_PointInTriangle2DPub
-               (_SVector *param_1,_SVector *param_2,_SVector *param_3,_SVector *param_4)
+int COLLIDE_PointInTriangle2DPub(short *v0,short *v1,short *v2,short *point)
 
 {
+  int iVar1;
   undefined4 local_10;
   undefined *local_c;
   
-  local_10 = DAT_800ce16c;
-  local_c = PTR_DAT_800ce170;
-  COLLIDE_PointInTriangle(param_1,param_2,param_3,param_4,(_SVector *)&local_10);
-  return;
+  local_10 = 0;
+  local_c = &DAT_00001000;
+  iVar1 = COLLIDE_PointInTriangle
+                    ((_SVector *)v0,(_SVector *)v1,(_SVector *)v2,(_SVector *)point,
+                     (_SVector *)&local_10);
+  return iVar1;
 }
 
 
@@ -243,31 +242,31 @@ void COLLIDE_PointInTriangle2DPub
 // decompiled code
 // original method signature: 
 // long /*$ra*/ COLLIDE_GetNormal(short nNum /*$a0*/, short *nrmlArray /*$a1*/, struct _SVector *nrml /*$a2*/)
- // line 312, offset 0x8001e750
+ // line 302, offset 0x8001e764
 	/* begin block 1 */
-		// Start line: 314
-		// Start offset: 0x8001E750
+		// Start line: 304
+		// Start offset: 0x8001E764
 		// Variables:
 	// 		short *sPtr; // $a1
 	// 		long bitMask; // $v1
 	/* end block 1 */
-	// End offset: 0x8001E7E0
-	// End Line: 339
+	// End offset: 0x8001E7F4
+	// End Line: 329
 
 	/* begin block 2 */
-		// Start line: 518
+		// Start line: 508
 	/* end block 2 */
-	// End Line: 519
+	// End Line: 509
 
 	/* begin block 3 */
-		// Start line: 519
+		// Start line: 509
 	/* end block 3 */
-	// End Line: 520
+	// End Line: 510
 
 	/* begin block 4 */
-		// Start line: 522
+		// Start line: 512
 	/* end block 4 */
-	// End Line: 523
+	// End Line: 513
 
 long COLLIDE_GetNormal(short nNum,short *nrmlArray,_SVector *nrml)
 
@@ -301,10 +300,10 @@ long COLLIDE_GetNormal(short nNum,short *nrmlArray,_SVector *nrml)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ COLLIDE_MakeNormal(struct _Terrain *terrain /*$a0*/, struct _TFace *tface /*$a1*/, struct _SVector *normal /*$t6*/)
- // line 368, offset 0x8001e7e8
+ // line 358, offset 0x8001e7fc
 	/* begin block 1 */
-		// Start line: 369
-		// Start offset: 0x8001E7E8
+		// Start line: 359
+		// Start offset: 0x8001E7FC
 		// Variables:
 	// 		struct _SVector *vertex0; // $v1
 	// 		struct _SVector *vertex1; // $v0
@@ -315,8 +314,8 @@ long COLLIDE_GetNormal(short nNum,short *nrmlArray,_SVector *nrml)
 	// 		struct _Vector *n; // $t0
 
 		/* begin block 1.1 */
-			// Start line: 369
-			// Start offset: 0x8001E7E8
+			// Start line: 359
+			// Start offset: 0x8001E7FC
 			// Variables:
 		// 		long _x0; // $t1
 		// 		long _y0; // $t2
@@ -325,12 +324,12 @@ long COLLIDE_GetNormal(short nNum,short *nrmlArray,_SVector *nrml)
 		// 		long _y1; // $v0
 		// 		long _z1; // $a0
 		/* end block 1.1 */
-		// End offset: 0x8001E7E8
-		// End Line: 369
+		// End offset: 0x8001E7FC
+		// End Line: 359
 
 		/* begin block 1.2 */
-			// Start line: 369
-			// Start offset: 0x8001E7E8
+			// Start line: 359
+			// Start offset: 0x8001E7FC
 			// Variables:
 		// 		long _x0; // $a0
 		// 		long _y0; // $a1
@@ -339,16 +338,16 @@ long COLLIDE_GetNormal(short nNum,short *nrmlArray,_SVector *nrml)
 		// 		long _y1; // $v0
 		// 		long _z1; // $v0
 		/* end block 1.2 */
-		// End offset: 0x8001E7E8
-		// End Line: 369
+		// End offset: 0x8001E7FC
+		// End Line: 359
 	/* end block 1 */
-	// End offset: 0x8001E9B8
-	// End Line: 399
+	// End offset: 0x8001E9CC
+	// End Line: 389
 
 	/* begin block 2 */
-		// Start line: 648
+		// Start line: 638
 	/* end block 2 */
-	// End Line: 649
+	// End Line: 639
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
@@ -406,16 +405,16 @@ void COLLIDE_MakeNormal(_Terrain *terrain,_TFace *tface,_SVector *normal)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ COLLIDE_UpdateAllTransforms(struct _Instance *instance /*$a0*/, struct SVECTOR *offset /*$a1*/)
- // line 415, offset 0x8001e9c0
+ // line 405, offset 0x8001e9d4
 	/* begin block 1 */
-		// Start line: 417
-		// Start offset: 0x8001E9C0
+		// Start line: 407
+		// Start offset: 0x8001E9D4
 		// Variables:
 	// 		struct MATRIX *swTransform; // $v1
 
 		/* begin block 1.1 */
-			// Start line: 421
-			// Start offset: 0x8001E9D0
+			// Start line: 411
+			// Start offset: 0x8001E9E4
 			// Variables:
 		// 		int i; // $a2
 		// 		long numMatrices; // $v0
@@ -423,26 +422,26 @@ void COLLIDE_MakeNormal(_Terrain *terrain,_TFace *tface,_SVector *normal)
 		// 		long oy; // $t0
 		// 		long oz; // $a1
 		/* end block 1.1 */
-		// End offset: 0x8001EA88
-		// End Line: 447
+		// End offset: 0x8001EA9C
+		// End Line: 437
 	/* end block 1 */
-	// End offset: 0x8001EA88
-	// End Line: 448
+	// End offset: 0x8001EA9C
+	// End Line: 438
 
 	/* begin block 2 */
-		// Start line: 801
+		// Start line: 791
 	/* end block 2 */
-	// End Line: 802
+	// End Line: 792
 
 	/* begin block 3 */
-		// Start line: 802
+		// Start line: 792
 	/* end block 3 */
-	// End Line: 803
+	// End Line: 793
 
 	/* begin block 4 */
-		// Start line: 804
+		// Start line: 794
 	/* end block 4 */
-	// End Line: 805
+	// End Line: 795
 
 void COLLIDE_UpdateAllTransforms(_Instance *instance,SVECTOR *offset)
 
@@ -486,16 +485,16 @@ void COLLIDE_UpdateAllTransforms(_Instance *instance,SVECTOR *offset)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ COLLIDE_MoveAllTransforms(struct _Instance *instance /*$a0*/, struct _Position *offset /*$a1*/)
- // line 450, offset 0x8001ea90
+ // line 440, offset 0x8001eaa4
 	/* begin block 1 */
-		// Start line: 452
-		// Start offset: 0x8001EA90
+		// Start line: 442
+		// Start offset: 0x8001EAA4
 		// Variables:
 	// 		struct MATRIX *swTransform; // $v1
 
 		/* begin block 1.1 */
-			// Start line: 456
-			// Start offset: 0x8001EAA0
+			// Start line: 446
+			// Start offset: 0x8001EAB4
 			// Variables:
 		// 		int i; // $a2
 		// 		long ox; // $t1
@@ -503,59 +502,59 @@ void COLLIDE_UpdateAllTransforms(_Instance *instance,SVECTOR *offset)
 		// 		long oz; // $a1
 		// 		long numMatrices; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8001EB58
-		// End Line: 480
+		// End offset: 0x8001EB6C
+		// End Line: 470
 	/* end block 1 */
-	// End offset: 0x8001EB58
-	// End Line: 481
+	// End offset: 0x8001EB6C
+	// End Line: 471
 
 	/* begin block 2 */
-		// Start line: 884
+		// Start line: 874
 	/* end block 2 */
-	// End Line: 885
+	// End Line: 875
 
 	/* begin block 3 */
-		// Start line: 885
+		// Start line: 875
 	/* end block 3 */
-	// End Line: 886
+	// End Line: 876
 
 	/* begin block 4 */
-		// Start line: 887
+		// Start line: 877
 	/* end block 4 */
-	// End Line: 888
+	// End Line: 878
 
-void COLLIDE_MoveAllTransforms(int param_1,short *param_2)
+void COLLIDE_MoveAllTransforms(_Instance *instance,_Position *offset)
 
 {
   short sVar1;
   short sVar2;
   short sVar3;
   int iVar4;
-  int *piVar5;
-  int iVar6;
+  MATRIX *pMVar5;
+  int *piVar6;
+  Object *pOVar7;
   
-  if (*(int *)(param_1 + 0x44) != 0) {
-    sVar1 = *param_2;
-    iVar6 = *(int *)(param_1 + 0x1c);
-    sVar2 = param_2[1];
-    sVar3 = param_2[2];
-    if ((*(int *)(iVar6 + 0x10) == 0) || ((*(uint *)(iVar6 + 0x2c) & 0x40000000) != 0)) {
-      iVar4 = *(int *)(param_1 + 0x44);
-      iVar6 = *(int *)(*(int *)((int)*(short *)(param_1 + 0x10a) * 4 +
-                               *(int *)(*(int *)(param_1 + 0x1c) + 0xc)) + 0x18);
+  if (instance->oldMatrix != (MATRIX *)0x0) {
+    sVar1 = offset->x;
+    pOVar7 = instance->object;
+    sVar2 = offset->y;
+    sVar3 = offset->z;
+    if ((pOVar7->animList == (_G2AnimKeylist_Type **)0x0) || ((pOVar7->oflags2 & 0x40000000U) != 0))
+    {
+      pMVar5 = instance->oldMatrix;
+      iVar4 = instance->object->modelList[instance->currentModel]->numSegments;
     }
     else {
-      iVar4 = *(int *)(param_1 + 0x44) + -0x20;
-      iVar6 = *(int *)(*(int *)((int)*(short *)(param_1 + 0x10a) * 4 + *(int *)(iVar6 + 0xc)) + 0x18
-                      ) + 1;
+      pMVar5 = instance->oldMatrix + -1;
+      iVar4 = pOVar7->modelList[instance->currentModel]->numSegments + 1;
     }
-    piVar5 = (int *)(iVar4 + 0x1c);
-    while (iVar6 != 0) {
-      iVar6 = iVar6 + -1;
-      piVar5[-2] = piVar5[-2] + (int)sVar1;
-      *piVar5 = *piVar5 + (int)sVar3;
-      piVar5[-1] = piVar5[-1] + (int)sVar2;
-      piVar5 = piVar5 + 8;
+    piVar6 = pMVar5->t + 2;
+    while (iVar4 != 0) {
+      iVar4 = iVar4 + -1;
+      piVar6[-2] = piVar6[-2] + (int)sVar1;
+      *piVar6 = *piVar6 + (int)sVar3;
+      piVar6[-1] = piVar6[-1] + (int)sVar2;
+      piVar6 = piVar6 + 8;
     }
   }
   return;
@@ -566,16 +565,16 @@ void COLLIDE_MoveAllTransforms(int param_1,short *param_2)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ COLLIDE_WithinYZBounds(struct _SVector *point /*$a0*/, struct _HBox *hbox /*$a1*/)
- // line 590, offset 0x8001eb60
+ // line 580, offset 0x8001eb74
 	/* begin block 1 */
-		// Start line: 1180
+		// Start line: 1094
 	/* end block 1 */
-	// End Line: 1181
+	// End Line: 1095
 
 	/* begin block 2 */
-		// Start line: 1070
+		// Start line: 1060
 	/* end block 2 */
-	// End Line: 1071
+	// End Line: 1061
 
 long COLLIDE_WithinYZBounds(_SVector *point,_HBox *hbox)
 
@@ -591,37 +590,47 @@ long COLLIDE_WithinYZBounds(_SVector *point,_HBox *hbox)
 
 
 
-// autogenerated function stub: 
+// decompiled code
+// original method signature: 
 // long /*$ra*/ COLLIDE_WithinXZBounds(struct _SVector *point /*$a0*/, struct _HBox *hbox /*$a1*/)
-long COLLIDE_WithinXZBounds(struct _SVector *point, struct _HBox *hbox)
-{ // line 596, offset 0x8001ebbc
+ // line 586, offset 0x8001ebd0
 	/* begin block 1 */
-		// Start line: 1081
+		// Start line: 1071
 	/* end block 1 */
-	// End Line: 1082
+	// End Line: 1072
 
 	/* begin block 2 */
-		// Start line: 1082
+		// Start line: 1072
 	/* end block 2 */
-	// End Line: 1083
+	// End Line: 1073
 
-	return 0;
+long COLLIDE_WithinXZBounds(_SVector *point,_HBox *hbox)
+
+{
+  uint uVar1;
+  
+  uVar1 = 0;
+  if (((hbox->minX <= point->x) && (point->x <= hbox->maxX)) && (hbox->minZ <= point->z)) {
+    uVar1 = (uint)(hbox->maxZ < point->z) ^ 1;
+  }
+  return uVar1;
 }
+
 
 
 // decompiled code
 // original method signature: 
 // long /*$ra*/ COLLIDE_WithinXYBounds(struct _SVector *point /*$a0*/, struct _HBox *hbox /*$a1*/)
- // line 602, offset 0x8001ec18
+ // line 592, offset 0x8001ec2c
 	/* begin block 1 */
-		// Start line: 1093
+		// Start line: 1083
 	/* end block 1 */
-	// End Line: 1094
+	// End Line: 1084
 
 	/* begin block 2 */
-		// Start line: 1094
+		// Start line: 1084
 	/* end block 2 */
-	// End Line: 1095
+	// End Line: 1085
 
 long COLLIDE_WithinXYBounds(_SVector *point,_HBox *hbox)
 
@@ -640,17 +649,17 @@ long COLLIDE_WithinXYBounds(_SVector *point,_HBox *hbox)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ COLLIDE_LineWithBoxFace(short startDist /*$a0*/, long lineDist /*$a1*/, short planeDist /*$a2*/, struct _SVector *start /*$a3*/, struct _Vector *line /*stack 16*/, struct _HBox *hbox /*stack 20*/, TDRFuncPtr_COLLIDE_LineWithBoxFace6collideBoundFunc collideBoundFunc /*stack 24*/, struct _SVector *normal /*stack 28*/)
- // line 611, offset 0x8001ec74
+ // line 601, offset 0x8001ec88
 	/* begin block 1 */
-		// Start line: 612
-		// Start offset: 0x8001EC74
+		// Start line: 602
+		// Start offset: 0x8001EC88
 		// Variables:
 	// 		struct _SVector point; // stack offset -24
 	// 		long t; // stack offset -16
 
 		/* begin block 1.1 */
-			// Start line: 612
-			// Start offset: 0x8001ED38
+			// Start line: 602
+			// Start offset: 0x8001ED4C
 			// Variables:
 		// 		struct _SVector *point; // $t1
 		// 		struct _SVector *normal; // $s0
@@ -660,90 +669,88 @@ long COLLIDE_WithinXYBounds(_SVector *point,_HBox *hbox)
 		// 		struct _SVector *normal1; // $t0
 
 			/* begin block 1.1.1 */
-				// Start line: 612
-				// Start offset: 0x8001ED38
+				// Start line: 602
+				// Start offset: 0x8001ED4C
 
 				/* begin block 1.1.1.1 */
-					// Start line: 612
-					// Start offset: 0x8001ED5C
+					// Start line: 602
+					// Start offset: 0x8001ED70
 					// Variables:
 				// 		short _z1; // $a0
 				// 		short _y1; // $v1
 				// 		short _x1; // $v0
 				/* end block 1.1.1.1 */
-				// End offset: 0x8001ED5C
-				// End Line: 612
+				// End offset: 0x8001ED70
+				// End Line: 602
 
 				/* begin block 1.1.1.2 */
-					// Start line: 612
-					// Start offset: 0x8001ED5C
+					// Start line: 602
+					// Start offset: 0x8001ED70
 					// Variables:
 				// 		short _z1; // $a0
 				// 		short _y1; // $v1
 				// 		short _x1; // $v0
 				/* end block 1.1.1.2 */
-				// End offset: 0x8001ED5C
-				// End Line: 612
+				// End offset: 0x8001ED70
+				// End Line: 602
 
 				/* begin block 1.1.1.3 */
-					// Start line: 612
-					// Start offset: 0x8001ED5C
+					// Start line: 602
+					// Start offset: 0x8001ED70
 					// Variables:
 				// 		short _z1; // $a0
 				// 		short _y1; // $v1
 				// 		short _x1; // $v0
 				/* end block 1.1.1.3 */
-				// End offset: 0x8001ED5C
-				// End Line: 612
+				// End offset: 0x8001ED70
+				// End Line: 602
 
 				/* begin block 1.1.1.4 */
-					// Start line: 612
-					// Start offset: 0x8001ED5C
+					// Start line: 602
+					// Start offset: 0x8001ED70
 					// Variables:
 				// 		short _z1; // $a0
 				// 		short _y1; // $v1
 				// 		short _x1; // $v0
 				/* end block 1.1.1.4 */
-				// End offset: 0x8001ED5C
-				// End Line: 612
+				// End offset: 0x8001ED70
+				// End Line: 602
 
 				/* begin block 1.1.1.5 */
-					// Start line: 612
-					// Start offset: 0x8001EDDC
+					// Start line: 602
+					// Start offset: 0x8001EDF0
 					// Variables:
 				// 		short _z1; // $a0
 				// 		short _y1; // $v1
 				// 		short _x1; // $v0
 				/* end block 1.1.1.5 */
-				// End offset: 0x8001EDDC
-				// End Line: 612
+				// End offset: 0x8001EDF0
+				// End Line: 602
 
 				/* begin block 1.1.1.6 */
-					// Start line: 612
-					// Start offset: 0x8001EDDC
+					// Start line: 602
+					// Start offset: 0x8001EDF0
 					// Variables:
 				// 		short _z1; // $a0
 				// 		short _y1; // $v1
 				// 		short _x1; // $v0
 				/* end block 1.1.1.6 */
-				// End offset: 0x8001EDDC
-				// End Line: 612
+				// End offset: 0x8001EDF0
+				// End Line: 602
 			/* end block 1.1.1 */
-			// End offset: 0x8001EE10
-			// End Line: 612
+			// End offset: 0x8001EE24
+			// End Line: 602
 		/* end block 1.1 */
-		// End offset: 0x8001EE10
-		// End Line: 612
+		// End offset: 0x8001EE24
+		// End Line: 602
 	/* end block 1 */
-	// End offset: 0x8001EE10
-	// End Line: 643
+	// End offset: 0x8001EE24
+	// End Line: 633
 
 	/* begin block 2 */
-		// Start line: 1111
+		// Start line: 1101
 	/* end block 2 */
-	// End Line: 1112
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 1102
 
 void COLLIDE_LineWithBoxFace
                (short startDist,long lineDist,short planeDist,_SVector *start,_Vector *line,
@@ -753,10 +760,10 @@ void COLLIDE_LineWithBoxFace
 {
   short sVar1;
   short sVar2;
-  short *psVar3;
-  short *psVar4;
-  short *psVar5;
-  short *psVar6;
+  _SVector *p_Var3;
+  _SVector *p_Var4;
+  _SVector *p_Var5;
+  _SVector *p_Var6;
   long lVar7;
   short local_18;
   short local_16;
@@ -770,44 +777,44 @@ void COLLIDE_LineWithBoxFace
       local_16 = start->y + (short)(line->y * (int)local_10 >> 0xc);
       local_14 = start->z + (short)(line->z * (int)local_10 >> 0xc);
       lVar7 = (*collideBoundFunc)(&local_18,hbox);
-      psVar6 = _collide_normal1;
-      psVar5 = _collide_normal0;
-      psVar4 = _collide_point1;
-      psVar3 = _aadStepsPerSemitone;
+      p_Var6 = collide_normal1;
+      p_Var5 = collide_normal0;
+      p_Var4 = collide_point1;
+      p_Var3 = collide_point0;
       if (lVar7 != 0) {
-        if ((int)local_10 < (int)_collide_t0) {
-          sVar1 = _aadStepsPerSemitone[1];
-          sVar2 = _aadStepsPerSemitone[2];
-          *_collide_point1 = *_aadStepsPerSemitone;
-          psVar4[1] = sVar1;
-          psVar4[2] = sVar2;
-          sVar1 = psVar5[1];
-          sVar2 = psVar5[2];
-          *psVar6 = *psVar5;
-          psVar6[1] = sVar1;
-          psVar6[2] = sVar2;
-          *psVar3 = local_18;
-          psVar3[1] = local_16;
-          psVar3[2] = local_14;
+        if ((int)local_10 < collide_t0) {
+          sVar1 = collide_point0->y;
+          sVar2 = collide_point0->z;
+          collide_point1->x = collide_point0->x;
+          p_Var4->y = sVar1;
+          p_Var4->z = sVar2;
+          sVar1 = p_Var5->y;
+          sVar2 = p_Var5->z;
+          p_Var6->x = p_Var5->x;
+          p_Var6->y = sVar1;
+          p_Var6->z = sVar2;
+          p_Var3->x = local_18;
+          p_Var3->y = local_16;
+          p_Var3->z = local_14;
           sVar1 = normal->y;
           sVar2 = normal->z;
-          _collide_t1 = _collide_t0;
-          _collide_t0 = local_10;
-          *psVar5 = normal->x;
-          psVar5[1] = sVar1;
-          psVar5[2] = sVar2;
+          collide_t1 = collide_t0;
+          collide_t0 = (long)local_10;
+          p_Var5->x = normal->x;
+          p_Var5->y = sVar1;
+          p_Var5->z = sVar2;
         }
         else {
-          if ((int)local_10 < (int)_collide_t1) {
-            *_collide_point1 = local_18;
-            psVar4[1] = local_16;
-            psVar4[2] = local_14;
+          if ((int)local_10 < collide_t1) {
+            collide_point1->x = local_18;
+            p_Var4->y = local_16;
+            p_Var4->z = local_14;
             sVar1 = normal->y;
             sVar2 = normal->z;
-            _collide_t1 = local_10;
-            *psVar6 = normal->x;
-            psVar6[1] = sVar1;
-            psVar6[2] = sVar2;
+            collide_t1 = (long)local_10;
+            p_Var6->x = normal->x;
+            p_Var6->y = sVar1;
+            p_Var6->z = sVar2;
           }
         }
       }
@@ -821,17 +828,17 @@ void COLLIDE_LineWithBoxFace
 // decompiled code
 // original method signature: 
 // long /*$ra*/ COLLIDE_IntersectLineAndBox(struct _SVector *point0 /*$a0*/, struct _SVector *normal0 /*$a1*/, struct _SVector *point1 /*$a2*/, struct _SVector *normal1 /*$a3*/, struct _SVector *end /*stack 16*/, struct _SVector *start /*stack 20*/, struct _HBox *hbox /*stack 24*/)
- // line 650, offset 0x8001ee20
+ // line 640, offset 0x8001ee34
 	/* begin block 1 */
-		// Start line: 651
-		// Start offset: 0x8001EE20
+		// Start line: 641
+		// Start offset: 0x8001EE34
 		// Variables:
 	// 		struct _SVector normal; // stack offset -64
 	// 		struct _Vector line; // stack offset -56
 
 		/* begin block 1.1 */
-			// Start line: 651
-			// Start offset: 0x8001EE20
+			// Start line: 641
+			// Start offset: 0x8001EE34
 			// Variables:
 		// 		long _x0; // $a1
 		// 		long _y0; // $a2
@@ -841,41 +848,41 @@ void COLLIDE_LineWithBoxFace
 		// 		long _z1; // $v1
 		// 		struct _Vector *_v; // $s3
 		/* end block 1.1 */
-		// End offset: 0x8001EE20
-		// End Line: 651
+		// End offset: 0x8001EE34
+		// End Line: 641
 	/* end block 1 */
-	// End offset: 0x8001F070
-	// End Line: 711
+	// End offset: 0x8001F084
+	// End Line: 701
 
 	/* begin block 2 */
-		// Start line: 1201
+		// Start line: 1191
 	/* end block 2 */
-	// End Line: 1202
+	// End Line: 1192
 
-void COLLIDE_IntersectLineAndBox
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               short *param_5,_SVector *param_6,_HBox *param_7)
+long COLLIDE_IntersectLineAndBox
+               (_SVector *point0,_SVector *normal0,_SVector *point1,_SVector *normal1,_SVector *end,
+               _SVector *start,_HBox *hbox)
 
 {
   _SVector _Stack64;
   _Vector _Stack56;
   
-  puGpffffa8b4 = &DAT_00001001;
-  puGpffffa8b8 = &DAT_00001001;
-  _Stack56.x = (int)*param_5 - (int)param_6->x;
-  _Stack56.z = (int)param_5[2] - (int)param_6->z;
-  _Stack56.y = (int)param_5[1] - (int)param_6->y;
+  collide_t0 = (long)&DAT_00001001;
+  collide_t1 = (long)&DAT_00001001;
+  _Stack56.x = (int)end->x - (int)start->x;
+  _Stack56.z = (int)end->z - (int)start->z;
+  _Stack56.y = (int)end->y - (int)start->y;
   _Stack64.x = -0x1000;
   _Stack64.y = 0;
   _Stack64.z = 0;
-  uGpffffa8ac = param_1;
-  uGpffffa8b0 = param_3;
-  uGpffffa8c8 = param_2;
-  uGpffffa8cc = param_4;
+  collide_point0 = point0;
+  collide_point1 = point1;
+  collide_normal0 = normal0;
+  collide_normal1 = normal1;
                     /* WARNING: Subroutine does not return */
   COLLIDE_LineWithBoxFace
-            (-param_6->x,-_Stack56.x,-param_7->minX,param_6,&_Stack56,param_7,COLLIDE_WithinYZBounds
-             ,&_Stack64);
+            (-start->x,-_Stack56.x,-hbox->minX,start,&_Stack56,hbox,COLLIDE_WithinYZBounds,&_Stack64
+            );
 }
 
 
@@ -883,11 +890,11 @@ void COLLIDE_IntersectLineAndBox
 // decompiled code
 // original method signature: 
 // struct _TFace * /*$ra*/ COLLIDE_PointAndTerrain(struct _Terrain *terrain /*$a0*/, struct _PCollideInfo *pcollideInfo /*$a1*/, struct _LCollideInfo *lcol /*$a2*/)
- // line 770, offset 0x8001f09c
+ // line 760, offset 0x8001f0b0
 	/* begin block 1 */
-		// Start line: 1519
+		// Start line: 1509
 	/* end block 1 */
-	// End Line: 1520
+	// End Line: 1510
 
 _TFace * COLLIDE_PointAndTerrain(_Terrain *terrain,_PCollideInfo *pcollideInfo,_LCollideInfo *lcol)
 
@@ -903,10 +910,10 @@ _TFace * COLLIDE_PointAndTerrain(_Terrain *terrain,_PCollideInfo *pcollideInfo,_
 // decompiled code
 // original method signature: 
 // struct _TFace * /*$ra*/ COLLIDE_PointAndTerrainFunc(struct _Terrain *terrain /*$t2*/, struct _PCollideInfo *pCollideInfo /*stack 4*/, int Flags /*$a2*/, short *Backface_Flag /*$a3*/, long ignoreAttr /*stack 16*/, long acceptAttr /*stack 20*/, struct _LCollideInfo *lcolinfo /*stack 24*/)
- // line 780, offset 0x8001f0cc
+ // line 770, offset 0x8001f0e0
 	/* begin block 1 */
-		// Start line: 781
-		// Start offset: 0x8001F0CC
+		// Start line: 771
+		// Start offset: 0x8001F0E0
 		// Variables:
 	// 		struct PandTScratch *CSpad; // $s0
 	// 		void **stack; // $s1
@@ -917,47 +924,47 @@ _TFace * COLLIDE_PointAndTerrain(_Terrain *terrain,_PCollideInfo *pcollideInfo,_
 	// 		struct _Instance *instance; // $s7
 
 		/* begin block 1.1 */
-			// Start line: 781
-			// Start offset: 0x8001F0CC
+			// Start line: 771
+			// Start offset: 0x8001F0E0
 			// Variables:
 		// 		short _x1; // $a3
 		// 		short _y1; // $t0
 		// 		short _z1; // $t1
 		// 		struct _SVector *_v0; // $v1
 		/* end block 1.1 */
-		// End offset: 0x8001F0CC
-		// End Line: 781
+		// End offset: 0x8001F0E0
+		// End Line: 771
 
 		/* begin block 1.2 */
-			// Start line: 781
-			// Start offset: 0x8001F0CC
+			// Start line: 771
+			// Start offset: 0x8001F0E0
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a0
 		// 		struct _SVector *_v0; // $a2
 		/* end block 1.2 */
-		// End offset: 0x8001F0CC
-		// End Line: 781
+		// End offset: 0x8001F0E0
+		// End Line: 771
 
 		/* begin block 1.3 */
-			// Start line: 781
-			// Start offset: 0x8001F0CC
+			// Start line: 771
+			// Start offset: 0x8001F0E0
 			// Variables:
 		// 		struct _SVector *_v; // $a1
 		/* end block 1.3 */
-		// End offset: 0x8001F0CC
-		// End Line: 781
+		// End offset: 0x8001F0E0
+		// End Line: 771
 
 		/* begin block 1.4 */
-			// Start line: 837
-			// Start offset: 0x8001F22C
+			// Start line: 827
+			// Start offset: 0x8001F240
 			// Variables:
 		// 		struct BSPTree *bsp; // $s4
 
 			/* begin block 1.4.1 */
-				// Start line: 865
-				// Start offset: 0x8001F328
+				// Start line: 854
+				// Start offset: 0x8001F324
 				// Variables:
 			// 		short _x0; // $v0
 			// 		short _y0; // $v1
@@ -968,12 +975,12 @@ _TFace * COLLIDE_PointAndTerrain(_Terrain *terrain,_PCollideInfo *pcollideInfo,_
 			// 		struct _SVector *_v; // $s6
 			// 		struct _Position *_v1; // $a3
 			/* end block 1.4.1 */
-			// End offset: 0x8001F328
-			// End Line: 865
+			// End offset: 0x8001F324
+			// End Line: 854
 
 			/* begin block 1.4.2 */
-				// Start line: 865
-				// Start offset: 0x8001F328
+				// Start line: 854
+				// Start offset: 0x8001F324
 				// Variables:
 			// 		short _x0; // $v0
 			// 		short _y0; // $v1
@@ -983,64 +990,64 @@ _TFace * COLLIDE_PointAndTerrain(_Terrain *terrain,_PCollideInfo *pcollideInfo,_
 			// 		short _z1; // $a3
 			// 		struct _SVector *_v; // $s5
 			/* end block 1.4.2 */
-			// End offset: 0x8001F328
-			// End Line: 865
+			// End offset: 0x8001F324
+			// End Line: 854
 
 			/* begin block 1.4.3 */
-				// Start line: 898
-				// Start offset: 0x8001F558
+				// Start line: 887
+				// Start offset: 0x8001F554
 				// Variables:
 			// 		struct _TFace *tface; // $s3
 
 				/* begin block 1.4.3.1 */
-					// Start line: 905
-					// Start offset: 0x8001F5A4
+					// Start line: 894
+					// Start offset: 0x8001F5A0
 					// Variables:
 				// 		struct _SVector *vertex0; // $a0
 
 					/* begin block 1.4.3.1.1 */
-						// Start line: 781
-						// Start offset: 0x8001F62C
+						// Start line: 771
+						// Start offset: 0x8001F628
 						// Variables:
 					// 		short *nrmlArray; // $a0
 					// 		struct _SVector *nrml; // $a1
 
 						/* begin block 1.4.3.1.1.1 */
-							// Start line: 781
-							// Start offset: 0x8001F62C
+							// Start line: 771
+							// Start offset: 0x8001F628
 							// Variables:
 						// 		short *sPtr; // $v1
 						/* end block 1.4.3.1.1.1 */
-						// End offset: 0x8001F6BC
-						// End Line: 781
+						// End offset: 0x8001F6B8
+						// End Line: 771
 					/* end block 1.4.3.1.1 */
-					// End offset: 0x8001F6BC
-					// End Line: 781
+					// End offset: 0x8001F6B8
+					// End Line: 771
 
 					/* begin block 1.4.3.1.2 */
-						// Start line: 781
-						// Start offset: 0x8001F768
+						// Start line: 771
+						// Start offset: 0x8001F764
 						// Variables:
 					// 		struct _SVector *point; // $t0
 					// 		struct _SVector *start; // $a3
 					// 		struct _SVector *line; // $a2
 
 						/* begin block 1.4.3.1.2.1 */
-							// Start line: 781
-							// Start offset: 0x8001F768
+							// Start line: 771
+							// Start offset: 0x8001F764
 							// Variables:
 						// 		long len; // $v1
 						// 		long t; // $a1
 						/* end block 1.4.3.1.2.1 */
-						// End offset: 0x8001F7A0
-						// End Line: 781
+						// End offset: 0x8001F79C
+						// End Line: 771
 					/* end block 1.4.3.1.2 */
-					// End offset: 0x8001F7A0
-					// End Line: 781
+					// End offset: 0x8001F79C
+					// End Line: 771
 
 					/* begin block 1.4.3.1.3 */
-						// Start line: 950
-						// Start offset: 0x8001F8CC
+						// Start line: 939
+						// Start offset: 0x8001F8C8
 						// Variables:
 					// 		short _x0; // $v0
 					// 		short _y0; // $v1
@@ -1050,12 +1057,12 @@ _TFace * COLLIDE_PointAndTerrain(_Terrain *terrain,_PCollideInfo *pcollideInfo,_
 					// 		short _z1; // $a2
 					// 		struct _Position *_v1; // $a2
 					/* end block 1.4.3.1.3 */
-					// End offset: 0x8001F8CC
-					// End Line: 950
+					// End offset: 0x8001F8C8
+					// End Line: 939
 
 					/* begin block 1.4.3.1.4 */
-						// Start line: 1015
-						// Start offset: 0x8001F970
+						// Start line: 1004
+						// Start offset: 0x8001F96C
 						// Variables:
 					// 		short _x0; // $v0
 					// 		short _y0; // $v1
@@ -1065,28 +1072,28 @@ _TFace * COLLIDE_PointAndTerrain(_Terrain *terrain,_PCollideInfo *pcollideInfo,_
 					// 		short _z1; // $a3
 					// 		struct _SVector *_v; // $fp
 					/* end block 1.4.3.1.4 */
-					// End offset: 0x8001F970
-					// End Line: 1015
+					// End offset: 0x8001F96C
+					// End Line: 1004
 				/* end block 1.4.3.1 */
-				// End offset: 0x8001F9F4
-				// End Line: 1036
+				// End offset: 0x8001F9F0
+				// End Line: 1025
 			/* end block 1.4.3 */
-			// End offset: 0x8001FA34
-			// End Line: 1049
+			// End offset: 0x8001FA30
+			// End Line: 1038
 
 			/* begin block 1.4.4 */
-				// Start line: 1053
-				// Start offset: 0x8001FA34
+				// Start line: 1042
+				// Start offset: 0x8001FA30
 				// Variables:
 			// 		int plane_front_error; // $v1
 			// 		int plane_back_error; // $a0
 			/* end block 1.4.4 */
-			// End offset: 0x8001FB84
-			// End Line: 1120
+			// End offset: 0x8001FB80
+			// End Line: 1109
 
 			/* begin block 1.4.5 */
-				// Start line: 1124
-				// Start offset: 0x8001FB94
+				// Start line: 1113
+				// Start offset: 0x8001FB90
 				// Variables:
 			// 		short _x0; // $v0
 			// 		short _y0; // $v1
@@ -1096,12 +1103,12 @@ _TFace * COLLIDE_PointAndTerrain(_Terrain *terrain,_PCollideInfo *pcollideInfo,_
 			// 		short _z1; // $t0
 			// 		struct _Position *_v1; // $a3
 			/* end block 1.4.5 */
-			// End offset: 0x8001FB94
-			// End Line: 1124
+			// End offset: 0x8001FB90
+			// End Line: 1113
 
 			/* begin block 1.4.6 */
-				// Start line: 1124
-				// Start offset: 0x8001FB94
+				// Start line: 1113
+				// Start offset: 0x8001FB90
 				// Variables:
 			// 		short _x0; // $v0
 			// 		short _y0; // $v1
@@ -1110,31 +1117,31 @@ _TFace * COLLIDE_PointAndTerrain(_Terrain *terrain,_PCollideInfo *pcollideInfo,_
 			// 		short _y1; // $a2
 			// 		short _z1; // $a3
 			/* end block 1.4.6 */
-			// End offset: 0x8001FBF8
-			// End Line: 1125
+			// End offset: 0x8001FBF4
+			// End Line: 1114
 		/* end block 1.4 */
-		// End offset: 0x8001FBF8
-		// End Line: 1126
+		// End offset: 0x8001FBF4
+		// End Line: 1115
 
 		/* begin block 1.5 */
-			// Start line: 1127
-			// Start offset: 0x8001FC10
+			// Start line: 1116
+			// Start offset: 0x8001FC0C
 			// Variables:
 		// 		short _x1; // $v1
 		// 		short _y1; // $a0
 		// 		short _z1; // $v0
 		// 		struct _SVector *_v1; // $v0
 		/* end block 1.5 */
-		// End offset: 0x8001FC10
-		// End Line: 1127
+		// End offset: 0x8001FC0C
+		// End Line: 1116
 	/* end block 1 */
-	// End offset: 0x8001FC10
-	// End Line: 1127
+	// End offset: 0x8001FC0C
+	// End Line: 1116
 
 	/* begin block 2 */
-		// Start line: 1540
+		// Start line: 1530
 	/* end block 2 */
-	// End Line: 1541
+	// End Line: 1531
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Restarted to delay deadcode elimination for space: ram */
@@ -1144,7 +1151,7 @@ _TFace * COLLIDE_PointAndTerrainFunc
                    long ignoreAttr,long acceptAttr,_LCollideInfo *lcolinfo)
 
 {
-  char cVar1;
+  uchar uVar1;
   short sVar2;
   short sVar3;
   uint uVar4;
@@ -1156,50 +1163,46 @@ _TFace * COLLIDE_PointAndTerrainFunc
   _Normal *p_Var8;
   ushort uVar9;
   SVECTOR *pSVar10;
-  _SVector *point0;
   _TVertex *v0;
   int iVar11;
-  _BSPNode *p_Var12;
+  SVECTOR *pSVar12;
   _BSPNode *p_Var13;
-  byte *pbVar14;
+  _BSPNode *p_Var14;
+  byte *pbVar15;
   _TFace *tface;
-  _Instance *p_Var15;
-  _SVector *local_58;
-  _SVector *in_stack_ffffffac;
-  _HBox *local_50;
+  _Instance *p_Var16;
   int local_30;
   
-  local_50 = (_HBox *)pCollideInfo->newPoint;
+  pSVar12 = pCollideInfo->newPoint;
   pSVar10 = pCollideInfo->oldPoint;
-  p_Var15 = pCollideInfo->instance;
+  p_Var16 = pCollideInfo->instance;
   DAT_1f800090 = 0;
   DAT_1f80006c = ignoreAttr;
   DAT_1f800070 = acceptAttr;
   DAT_1f800098 = terrain->normalList;
   DAT_1f80009c = terrain->vertexList;
   DAT_1f8000a0 = (_TFace *)0x0;
-  _DAT_1f800078 = *(undefined4 *)local_50;
-  _DAT_1f80007c = _DAT_1f80007c & 0xffff0000 | (uint)(ushort)local_50->minX;
+  _DAT_1f800078 = *(undefined4 *)pSVar12;
+  _DAT_1f80007c = _DAT_1f80007c & 0xffff0000 | (uint)(ushort)pSVar12->vz;
   DAT_1f800080 = pSVar10->vx;
   DAT_1f800082 = pSVar10->vy;
   DAT_1f800084 = pSVar10->vz;
-  DAT_1f8000a4 = DAT_1f800080 - local_50->flags;
-  DAT_1f8000a6 = DAT_1f800082 - *(short *)&local_50->id;
-  point0 = (_SVector *)((uint)DAT_1f800084 - (uint)(ushort)local_50->minX);
-  DAT_1f8000a8 = (short)point0;
-  p_Var13 = (_BSPNode *)&DAT_1f8000ac;
+  DAT_1f8000a4 = DAT_1f800080 - pSVar12->vx;
+  DAT_1f8000a6 = DAT_1f800082 - pSVar12->vy;
+  DAT_1f8000a8 = DAT_1f800084 - pSVar12->vz;
+  p_Var14 = (_BSPNode *)&DAT_1f8000ac;
+  if (gameTrackerX.gameData.asmData.MorphTime == 1000) {
+    DAT_1f800094 = (int)gameTrackerX.gameData.asmData.MorphType;
+    if (DAT_1f800094 != 1) {
+      DAT_1f800094 = 0;
+    }
+  }
+  else {
+    DAT_1f800094 = 2;
+    DAT_1f800090 = 0x800;
+  }
   DAT_1f800074 = Backface_Flag;
   DAT_1f800088 = Flags;
-  if (theCamera.core.vvNormalWorVecMat[0].m[2][2] == 1000) {
-    tface = (_TFace *)
-            COLLIDE_IntersectLineAndBox
-                      (point0,(_SVector *)&DAT_1f8000a4,(_SVector *)&DAT_1f800080,
-                       (_SVector *)(uint)(ushort)local_50->flags,local_58,in_stack_ffffffac,local_50
-                      );
-    return tface;
-  }
-  DAT_1f800094 = 2;
-  DAT_1f800090 = 0x800;
   if (Backface_Flag != (short *)0x0) {
     *Backface_Flag = 0;
   }
@@ -1207,18 +1210,17 @@ _TFace * COLLIDE_PointAndTerrainFunc
   if (0 < terrain->numBSPTrees) {
     do {
       pBVar5 = terrain->BSPTreeArray;
-      *(_BSPNode **)&(p_Var13->sphere).position = p_Var13;
+      *(_BSPNode **)&(p_Var14->sphere).position = p_Var14;
       pBVar5 = pBVar5 + local_30;
       if ((-1 < pBVar5->ID) &&
          (((uVar9 = pBVar5->flags, (uVar9 & 2) == 0 || ((pCollideInfo->collideType & 0x80U) != 0))
           || (((uVar9 & 0x40) != 0 && ((pCollideInfo->collideType & 0x100U) != 0)))))) {
-        cVar1 = theCamera.focusSphere.radiusSquared._2_1_;
+        uVar1 = gameTrackerX.plan_collide_override;
         if ((uVar9 & 0x4100) == 0x4100) {
-code_r0x8001f2e0:
-          if (cVar1 != '\0') {
-LAB_8001f2e8:
-            if ((((pBVar5->flags & 0x1000U) == 0) || ((DAT_1f80006c & 0x10) == 0)) &&
-               (((pBVar5->flags & 0x2000U) == 0 || (theCamera.savedMode[0]._2_1_ != '\0')))) {
+code_r0x8001f2f4:
+          if (uVar1 != '\0') {
+LAB_8001f2fc:
+            if (((pBVar5->flags & 0x1000U) == 0) || ((DAT_1f80006c & 0x10) == 0)) {
               DAT_1f800078 = DAT_1f800078 - (pBVar5->globalOffset).x;
               DAT_1f80007a = DAT_1f80007a - (pBVar5->globalOffset).y;
               uVar9 = DAT_1f80007c - (pBVar5->globalOffset).z;
@@ -1235,13 +1237,13 @@ LAB_8001f2e8:
               setCopControlWord(2,0x1800,DAT_1f80003c);
               setCopControlWord(2,0x2000,DAT_1f800040);
               p_Var6 = pBVar5->bspRoot;
-              p_Var13 = (_BSPNode *)&(p_Var13->sphere).position.z;
-              *(_BSPNode **)&(p_Var13->sphere).position = p_Var6;
-              p_Var12 = p_Var13;
-              if (p_Var6 != p_Var13) {
+              p_Var14 = (_BSPNode *)&(p_Var14->sphere).position.z;
+              *(_BSPNode **)&(p_Var14->sphere).position = p_Var6;
+              p_Var13 = p_Var14;
+              if (p_Var6 != p_Var14) {
                 do {
-                  iVar11 = *(int *)&(p_Var12->sphere).position;
-                  p_Var13 = (_BSPNode *)&p_Var12[-1].front_material_error;
+                  iVar11 = *(int *)&(p_Var13->sphere).position;
+                  p_Var14 = (_BSPNode *)&p_Var13[-1].front_material_error;
                   if ((*(ushort *)(iVar11 + 0xe) & 2) == 0) {
                     setCopReg(2,in_zero,*(undefined4 *)(iVar11 + 8));
                     setCopReg(2,in_at,*(undefined4 *)(iVar11 + 0xc));
@@ -1261,34 +1263,34 @@ LAB_8001f2e8:
                     }
                     if (DAT_1f80005c < (int)sVar2 + 5) {
                       if ((int)sVar3 + -5 < DAT_1f80005c) {
-                        if (DAT_1f800058 < DAT_1f80005c) goto LAB_8001fb54;
+                        if (DAT_1f800058 < DAT_1f80005c) goto LAB_8001fb50;
                         if (*(int *)(iVar11 + 0x14) != 0) {
-                          *(int *)&(p_Var12->sphere).position = *(int *)(iVar11 + 0x14);
-                          p_Var13 = p_Var12;
+                          *(int *)&(p_Var13->sphere).position = *(int *)(iVar11 + 0x14);
+                          p_Var14 = p_Var13;
                         }
                         iVar11 = *(int *)(iVar11 + 0x18);
                       }
                       else {
                         if (((int)sVar3 + -5 <= DAT_1f800058) && (*(int *)(iVar11 + 0x14) != 0)) {
-                          *(int *)&(p_Var12->sphere).position = *(int *)(iVar11 + 0x14);
-                          p_Var13 = p_Var12;
+                          *(int *)&(p_Var13->sphere).position = *(int *)(iVar11 + 0x14);
+                          p_Var14 = p_Var13;
                         }
                         iVar11 = *(int *)(iVar11 + 0x18);
                       }
                     }
                     else {
                       if (DAT_1f800058 <= (int)sVar2 + 5) {
-LAB_8001fb54:
+LAB_8001fb50:
                         if (*(int *)(iVar11 + 0x18) != 0) {
-                          *(int *)&(p_Var12->sphere).position = *(int *)(iVar11 + 0x18);
-                          p_Var13 = p_Var12;
+                          *(int *)&(p_Var13->sphere).position = *(int *)(iVar11 + 0x18);
+                          p_Var14 = p_Var13;
                         }
                       }
                       iVar11 = *(int *)(iVar11 + 0x14);
                     }
                     if (iVar11 != 0) {
-                      p_Var13 = (_BSPNode *)&(p_Var13->sphere).position.z;
-                      *(int *)&(p_Var13->sphere).position = iVar11;
+                      p_Var14 = (_BSPNode *)&(p_Var14->sphere).position.z;
+                      *(int *)&(p_Var14->sphere).position = iVar11;
                     }
                   }
                   else {
@@ -1307,19 +1309,19 @@ LAB_8001fb54:
                           DAT_1f80008c = (int)*(short *)(iVar11 + 0xc);
                           tface = *(_TFace **)(iVar11 + 8);
                           if (DAT_1f80008c != 0) {
-                            pbVar14 = &tface->attr;
+                            pbVar15 = &tface->attr;
                             do {
-                              if (((*pbVar14 & DAT_1f80006c) == 0) ||
-                                 ((*pbVar14 & DAT_1f800070) != 0)) {
+                              if (((*pbVar15 & DAT_1f80006c) == 0) ||
+                                 ((*pbVar15 & DAT_1f800070) != 0)) {
                                 if ((DAT_1f800094 == 2) &&
-                                   ((uint)*(ushort *)(pbVar14 + 2) !=
+                                   ((uint)*(ushort *)(pbVar15 + 2) !=
                                     (int)terrain->morphNormalIdx
                                          [(int)((int)tface - (int)terrain->faceList) * -0x55555555
                                           >> 2])) {
                                   COLLIDE_MakeNormal(terrain,tface,(_SVector *)&DAT_1f800050);
                                 }
                                 else {
-                                  iVar11 = (int)*(short *)(pbVar14 + 2);
+                                  iVar11 = (int)*(short *)(pbVar15 + 2);
                                   if (iVar11 < 0) {
                                     p_Var8 = (_Normal *)((int)DAT_1f800098 + iVar11 * -6);
                                     DAT_1f800050 = CONCAT22(-p_Var8->y,-(p_Var8->x & 0x1fffU));
@@ -1365,9 +1367,9 @@ LAB_8001fb54:
                                   iVar11 = COLLIDE_PointInTriangle
                                                      ((_SVector *)v0,
                                                       (_SVector *)
-                                                      (DAT_1f80009c + *(ushort *)(pbVar14 + -4)),
+                                                      (DAT_1f80009c + *(ushort *)(pbVar15 + -4)),
                                                       (_SVector *)
-                                                      (DAT_1f80009c + *(ushort *)(pbVar14 + -2)),
+                                                      (DAT_1f80009c + *(ushort *)(pbVar15 + -2)),
                                                       (_SVector *)&DAT_1f800064,
                                                       (_SVector *)&DAT_1f800050);
                                   if (iVar11 != 0) {
@@ -1376,12 +1378,12 @@ LAB_8001fb54:
                                        (DAT_1f80005c < 1)) {
                                       *DAT_1f800074 = 1;
                                     }
-                                    if ((*pbVar14 & 8) == 0) {
-                                      if (((*(ushort *)(pbVar14 + 4) == 0xffff) ||
+                                    if ((*pbVar15 & 8) == 0) {
+                                      if (((*(ushort *)(pbVar15 + 4) == 0xffff) ||
                                           ((*(ushort *)
                                              ((int)&terrain->StartTextureList->attr +
-                                             (uint)*(ushort *)(pbVar14 + 4)) & 0x2000) == 0)) ||
-                                         ((*pbVar14 & DAT_1f800070) != 0)) {
+                                             (uint)*(ushort *)(pbVar15 + 4)) & 0x2000) == 0)) ||
+                                         ((*pbVar15 & DAT_1f800070) != 0)) {
                                         _DAT_1f80007c = _DAT_1f800068;
                                         DAT_1f80007c = (short)_DAT_1f800068;
                                         _DAT_1f800078 = _DAT_1f800064;
@@ -1402,18 +1404,18 @@ LAB_8001fb54:
                                       }
                                     }
                                     else {
-                                      if ((theCamera.positionAccl._0_4_ & 0x8000) != 0) {
-                                        p_Var15->waterFace = tface;
-                                        p_Var15->waterFaceTerrain = terrain;
+                                      if ((gameTrackerX.gameFlags & 0x8000U) != 0) {
+                                        p_Var16->waterFace = tface;
+                                        p_Var16->waterFaceTerrain = terrain;
                                         uVar4 = _DAT_1f800068;
-                                        *(undefined4 *)&p_Var15->splitPoint = _DAT_1f800064;
-                                        *(uint *)&(p_Var15->splitPoint).z = uVar4;
+                                        *(undefined4 *)&p_Var16->splitPoint = _DAT_1f800064;
+                                        *(uint *)&(p_Var16->splitPoint).z = uVar4;
                                         sVar2 = (pBVar5->globalOffset).y;
                                         sVar3 = (pBVar5->globalOffset).z;
-                                        (p_Var15->splitPoint).x =
-                                             (p_Var15->splitPoint).x + (pBVar5->globalOffset).x;
-                                        (p_Var15->splitPoint).y = (p_Var15->splitPoint).y + sVar2;
-                                        (p_Var15->splitPoint).z = (p_Var15->splitPoint).z + sVar3;
+                                        (p_Var16->splitPoint).x =
+                                             (p_Var16->splitPoint).x + (pBVar5->globalOffset).x;
+                                        (p_Var16->splitPoint).y = (p_Var16->splitPoint).y + sVar2;
+                                        (p_Var16->splitPoint).z = (p_Var16->splitPoint).z + sVar3;
                                       }
                                     }
                                     setCopControlWord(2,0,_DAT_1f800030);
@@ -1421,20 +1423,20 @@ LAB_8001fb54:
                                   }
                                 }
                               }
-                              pbVar14 = pbVar14 + 0xc;
+                              pbVar15 = pbVar15 + 0xc;
                               tface = tface + 1;
                               DAT_1f80008c = DAT_1f80008c + -1;
                             } while (DAT_1f80008c != 0);
                           }
                           if ((DAT_1f8000a0 != (_TFace *)0x0) && (DAT_1f800094 == 0)) {
-                            *(_BSPNode **)&(p_Var13->sphere).position = p_Var13;
+                            *(_BSPNode **)&(p_Var14->sphere).position = p_Var14;
                           }
                         }
                       }
                     }
                   }
-                  p_Var12 = p_Var13;
-                } while (*(_BSPNode **)&(p_Var13->sphere).position != p_Var13);
+                  p_Var13 = p_Var14;
+                } while (*(_BSPNode **)&(p_Var14->sphere).position != p_Var14);
               }
               _DAT_1f800078 =
                    CONCAT22(DAT_1f80007a + (pBVar5->globalOffset).y,
@@ -1449,19 +1451,19 @@ LAB_8001fb54:
           }
         }
         else {
-          if (((uVar9 & 0x100) == 0) || ((char)theCamera.noTeleport != '\0')) {
-            cVar1 = theCamera.noTeleport._1_1_;
-            if ((uVar9 & 0x4000) != 0) goto code_r0x8001f2e0;
-            goto LAB_8001f2e8;
+          if (((uVar9 & 0x100) == 0) || (gameTrackerX.block_collide_override != '\0')) {
+            uVar1 = gameTrackerX.raziel_collide_override;
+            if ((uVar9 & 0x4000) != 0) goto code_r0x8001f2f4;
+            goto LAB_8001f2fc;
           }
         }
       }
       local_30 = local_30 + 1;
     } while (local_30 < terrain->numBSPTrees);
   }
-  local_50->flags = DAT_1f800078;
-  *(short *)&local_50->id = DAT_1f80007a;
-  local_50->minX = DAT_1f80007c;
+  pSVar12->vx = DAT_1f800078;
+  pSVar12->vy = DAT_1f80007a;
+  pSVar12->vz = DAT_1f80007c;
   return DAT_1f8000a0;
 }
 
@@ -1470,10 +1472,10 @@ LAB_8001fb54:
 // decompiled code
 // original method signature: 
 // int /*$ra*/ COLLIDE_PointAndHFace(struct _SVector *newPos /*$s4*/, struct _SVector *oldPos /*$s6*/, struct _HFace *hface /*$s5*/, struct _Model *model /*$s7*/, struct _SVector *hfNormal /*stack 16*/)
- // line 1330, offset 0x8001fc64
+ // line 1318, offset 0x8001fc60
 	/* begin block 1 */
-		// Start line: 1331
-		// Start offset: 0x8001FC64
+		// Start line: 1319
+		// Start offset: 0x8001FC60
 		// Variables:
 	// 		struct MATRIX *posMatrix; // $s1
 	// 		struct _SVector *normal; // $s3
@@ -1483,8 +1485,8 @@ LAB_8001fb54:
 	// 		struct _SVector *vertex1; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 1341
-			// Start offset: 0x8001FCD0
+			// Start line: 1329
+			// Start offset: 0x8001FCCC
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $v1
@@ -1493,12 +1495,12 @@ LAB_8001fb54:
 		// 		short _y1; // $a3
 		// 		short _z1; // $t0
 		/* end block 1.1 */
-		// End offset: 0x8001FCD0
-		// End Line: 1341
+		// End offset: 0x8001FCCC
+		// End Line: 1329
 
 		/* begin block 1.2 */
-			// Start line: 1341
-			// Start offset: 0x8001FCD0
+			// Start line: 1329
+			// Start offset: 0x8001FCCC
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $v1
@@ -1508,86 +1510,37 @@ LAB_8001fb54:
 		// 		short _z1; // $t0
 		// 		struct _SVector *_v; // $t1
 		/* end block 1.2 */
-		// End offset: 0x8001FCD0
-		// End Line: 1341
+		// End offset: 0x8001FCCC
+		// End Line: 1329
 
 		/* begin block 1.3 */
-			// Start line: 1341
-			// Start offset: 0x8001FCD0
+			// Start line: 1329
+			// Start offset: 0x8001FCCC
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a1
 		// 		struct _SVector *_v0; // $t3
 		/* end block 1.3 */
-		// End offset: 0x8001FCD0
-		// End Line: 1341
+		// End offset: 0x8001FCCC
+		// End Line: 1329
 	/* end block 1 */
-	// End offset: 0x8001FE7C
-	// End Line: 1378
+	// End offset: 0x8001FE78
+	// End Line: 1366
 
 	/* begin block 2 */
-		// Start line: 3219
+		// Start line: 3204
 	/* end block 2 */
-	// End Line: 3220
+	// End Line: 3205
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* WARNING: Removing unreachable block (ram,0x8001fe78) */
 
-undefined4
-COLLIDE_PointAndHFace
-          (undefined4 *param_1,short *param_2,short *param_3,int param_4,undefined2 *param_5)
+int COLLIDE_PointAndHFace
+              (_SVector *newPos,_SVector *oldPos,_HFace *hface,_Model *model,_SVector *hfNormal)
 
 {
-  short sVar1;
-  undefined4 in_zero;
-  undefined4 in_at;
-  undefined4 uVar2;
-  int iVar3;
-  _SVector *v0;
-  
-  COLLIDE_GetNormal(param_3[4],*(short **)(param_4 + 0xc),(_SVector *)&DAT_1f800074);
-  iVar3 = *(int *)(param_4 + 4);
-  sVar1 = param_3[1];
-  v0 = (_SVector *)(iVar3 + (int)*param_3 * 8);
-  DAT_1f800040._0_2_ = *(short *)param_1 - v0->x;
-  DAT_1f800040._2_2_ = *(short *)((int)param_1 + 2) - v0->y;
-  DAT_1f800044 = *(short *)(param_1 + 1) - v0->z;
-  DAT_1f800046 = *param_2 - v0->x;
-  DAT_1f800048 = param_2[1] - v0->y;
-  DAT_1f80004a = param_2[2] - v0->z;
-  DAT_1f80004c = v0->x;
-  DAT_1f80004e = v0->y;
-  DAT_1f800050._0_2_ = v0->z;
-  SetRotMatrix(&DAT_1f800040);
-  setCopReg(2,in_zero,DAT_1f800074);
-  setCopReg(2,in_at,_DAT_1f800078);
-  copFunction(2,0x486012);
-  _DAT_1f800080 = getCopReg(2,0x19);
-  _DAT_1f800084 = getCopReg(2,0x1a);
-  DAT_1f800088 = getCopReg(2,0x1b);
-  if (_DAT_1f800080 < 0) {
-    uVar2 = 0;
-    if ((_DAT_1f800080 < _DAT_1f800084) && (-1 < _DAT_1f800084)) {
-      COLLIDE_IntersectLineAndPlane_S(&DAT_1f800090,param_2,param_1,&DAT_1f800074,DAT_1f800088);
-      iVar3 = COLLIDE_PointInTriangle
-                        (v0,(_SVector *)(iVar3 + (int)sVar1 * 8),
-                         (_SVector *)(*(int *)(param_4 + 4) + (int)param_3[2] * 8),
-                         (_SVector *)&DAT_1f800090,(_SVector *)&DAT_1f800074);
-      uVar2 = 0;
-      if (iVar3 != 0) {
-        *param_1 = DAT_1f800090;
-        param_1[1] = DAT_1f800094;
-        *param_5 = (undefined2)DAT_1f800074;
-        param_5[1] = DAT_1f800074._2_2_;
-        uVar2 = 1;
-        param_5[2] = DAT_1f800078;
-      }
-    }
-  }
-  else {
-    uVar2 = 0;
-  }
-  return uVar2;
+                    /* WARNING: Subroutine does not return */
+  COLLIDE_GetNormal(hface->normal,(short *)model->normalList,(_SVector *)&DAT_1f800074);
 }
 
 
@@ -1595,10 +1548,10 @@ COLLIDE_PointAndHFace
 // decompiled code
 // original method signature: 
 // void /*$ra*/ COLLIDE_PointAndInstance(struct _PCollideInfo *pcollideInfo /*$s4*/, struct _Instance *instance /*stack 4*/)
- // line 1389, offset 0x8001feac
+ // line 1377, offset 0x8001fea8
 	/* begin block 1 */
-		// Start line: 1390
-		// Start offset: 0x8001FEAC
+		// Start line: 1378
+		// Start offset: 0x8001FEA8
 		// Variables:
 	// 		struct MATRIX *swTransform; // stack offset -92
 	// 		struct MATRIX *wsTransform; // stack offset -88
@@ -1619,54 +1572,54 @@ COLLIDE_PointAndHFace
 	// 		long collideType; // stack offset -48
 
 		/* begin block 1.1 */
-			// Start line: 1416
-			// Start offset: 0x8001FFCC
+			// Start line: 1404
+			// Start offset: 0x8001FFC8
 			// Variables:
 		// 		struct _HBox *hbox; // $s0
 		// 		struct _HFace *hface; // $s1
 		// 		struct _HSphere *hsphere; // $s0
 
 			/* begin block 1.1.1 */
-				// Start line: 1419
-				// Start offset: 0x8001FFCC
+				// Start line: 1407
+				// Start offset: 0x8001FFC8
 				// TypeDefs:
-			// 		struct COLLIDE_258fake tmm
+			// 		struct COLLIDE_253fake tmm
 			/* end block 1.1.1 */
-			// End offset: 0x8001FFCC
-			// End Line: 1419
+			// End offset: 0x8001FFC8
+			// End Line: 1407
 
 			/* begin block 1.1.2 */
-				// Start line: 1452
-				// Start offset: 0x80020184
+				// Start line: 1440
+				// Start offset: 0x80020180
 				// Variables:
 			// 		long len; // $t0
 
 				/* begin block 1.1.2.1 */
-					// Start line: 1453
-					// Start offset: 0x80020184
+					// Start line: 1441
+					// Start offset: 0x80020180
 					// Variables:
 				// 		long a; // stack offset -104
 				// 		long b; // stack offset -100
 				// 		long c; // stack offset -96
 				/* end block 1.1.2.1 */
-				// End offset: 0x80020184
-				// End Line: 1453
+				// End offset: 0x80020180
+				// End Line: 1441
 			/* end block 1.1.2 */
-			// End offset: 0x80020248
-			// End Line: 1459
+			// End offset: 0x80020244
+			// End Line: 1447
 
 			/* begin block 1.1.3 */
-				// Start line: 1488
-				// Start offset: 0x800203F0
+				// Start line: 1476
+				// Start offset: 0x800203EC
 				// Variables:
 			// 		struct _SVector hfNormal; // stack offset -136
 			/* end block 1.1.3 */
-			// End offset: 0x80020418
-			// End Line: 1494
+			// End offset: 0x80020414
+			// End Line: 1482
 
 			/* begin block 1.1.4 */
-				// Start line: 1509
-				// Start offset: 0x80020450
+				// Start line: 1497
+				// Start offset: 0x8002044C
 				// Variables:
 			// 		struct _SVector hbNormal; // stack offset -136
 			// 		struct _SVector point0; // stack offset -128
@@ -1674,29 +1627,29 @@ COLLIDE_PointAndHFace
 			// 		struct _SVector normal1; // stack offset -112
 
 				/* begin block 1.1.4.1 */
-					// Start line: 1551
-					// Start offset: 0x80020590
+					// Start line: 1539
+					// Start offset: 0x8002058C
 					// Variables:
 				// 		short _x1; // $v0
 				// 		short _y1; // $v1
 				// 		short _z1; // $a3
 				/* end block 1.1.4.1 */
-				// End offset: 0x80020590
-				// End Line: 1551
+				// End offset: 0x8002058C
+				// End Line: 1539
 			/* end block 1.1.4 */
-			// End offset: 0x800205D8
-			// End Line: 1561
+			// End offset: 0x800205D4
+			// End Line: 1549
 		/* end block 1.1 */
-		// End offset: 0x80020690
-		// End Line: 1580
+		// End offset: 0x8002068C
+		// End Line: 1568
 	/* end block 1 */
-	// End offset: 0x800206B0
-	// End Line: 1582
+	// End offset: 0x800206AC
+	// End Line: 1570
 
 	/* begin block 2 */
-		// Start line: 3368
+		// Start line: 3353
 	/* end block 2 */
-	// End Line: 3369
+	// End Line: 3354
 
 void COLLIDE_PointAndInstance(_PCollideInfo *pcollideInfo,_Instance *instance)
 
@@ -1707,7 +1660,7 @@ void COLLIDE_PointAndInstance(_PCollideInfo *pcollideInfo,_Instance *instance)
   undefined4 *local_58;
   undefined2 *local_54;
   undefined4 *local_50;
-  undefined4 *local_4c;
+  undefined2 *local_4c;
   undefined2 *local_48;
   undefined2 *local_44;
   undefined2 *local_40;
@@ -1754,17 +1707,17 @@ void COLLIDE_PointAndInstance(_PCollideInfo *pcollideInfo,_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ COLLIDE_PointAndInstanceTrivialReject(struct _PCollideInfo *pcollideInfo /*$s3*/, struct _Instance *instance /*$s1*/)
- // line 1584, offset 0x800206e0
+ // line 1572, offset 0x800206dc
 	/* begin block 1 */
-		// Start line: 1585
-		// Start offset: 0x800206E0
+		// Start line: 1573
+		// Start offset: 0x800206DC
 		// Variables:
 	// 		struct _Vector *dv; // $s2
 	// 		struct _SVector linePoint; // stack offset -32
 
 		/* begin block 1.1 */
-			// Start line: 1596
-			// Start offset: 0x80020768
+			// Start line: 1584
+			// Start offset: 0x80020764
 			// Variables:
 		// 		long _x0; // $a2
 		// 		long _y0; // $v1
@@ -1774,43 +1727,31 @@ void COLLIDE_PointAndInstance(_PCollideInfo *pcollideInfo,_Instance *instance)
 		// 		long _z1; // $a0
 		// 		struct _SVector *_v0; // $a0
 		/* end block 1.1 */
-		// End offset: 0x80020768
-		// End Line: 1596
+		// End offset: 0x80020764
+		// End Line: 1584
 	/* end block 1 */
-	// End offset: 0x80020848
-	// End Line: 1633
+	// End offset: 0x80020844
+	// End Line: 1621
 
 	/* begin block 2 */
-		// Start line: 4060
+		// Start line: 4045
 	/* end block 2 */
-	// End Line: 4061
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 4046
 
 void COLLIDE_PointAndInstanceTrivialReject(_PCollideInfo *pcollideInfo,_Instance *instance)
 
 {
   long lVar1;
-  short local_20;
-  short local_1e;
-  short local_1c;
+  uint local_20 [2];
   
   lVar1 = MEMPACK_MemoryValidFunc((char *)instance->object);
   if ((((lVar1 != 0) && ((instance->flags & 0x40U) == 0)) &&
       (instance->hModelList != (_HModel *)0x0)) &&
      (((pcollideInfo->collideType & 0x40U) == 0 || ((instance->object->oflags2 & 0x40U) == 0)))) {
+                    /* WARNING: Subroutine does not return */
     COLLIDE_NearestPointOnLine_S
-              ((uint *)&local_20,(uint *)pcollideInfo->oldPoint,(uint *)pcollideInfo->newPoint,
+              (local_20,(uint *)pcollideInfo->oldPoint,(uint *)pcollideInfo->newPoint,
                (uint *)&instance->position);
-    _DAT_1f800000 = (int)local_20 - (int)(instance->position).x >> 1;
-    _DAT_1f800004 = (int)local_1e - (int)(instance->position).y >> 1;
-    _DAT_1f800008 = (int)local_1c - (int)(instance->position).z >> 1;
-    if ((_DAT_1f800000 * _DAT_1f800000 + _DAT_1f800004 * _DAT_1f800004 +
-         _DAT_1f800008 * _DAT_1f800008 <
-         instance->object->modelList[instance->currentModel]->maxRadSq >> 2) &&
-       (instance->matrix != (MATRIX *)0x0)) {
-      COLLIDE_PointAndInstance(pcollideInfo,instance);
-    }
   }
   return;
 }
@@ -1820,10 +1761,10 @@ void COLLIDE_PointAndInstanceTrivialReject(_PCollideInfo *pcollideInfo,_Instance
 // decompiled code
 // original method signature: 
 // void /*$ra*/ COLLIDE_PointAndWorld(struct _PCollideInfo *pcollideInfo /*$s5*/, struct Level *level /*$s6*/)
- // line 1648, offset 0x80020864
+ // line 1636, offset 0x80020860
 	/* begin block 1 */
-		// Start line: 1649
-		// Start offset: 0x80020864
+		// Start line: 1637
+		// Start offset: 0x80020860
 		// Variables:
 	// 		struct _Instance *instance; // $s0
 	// 		struct _InstanceList *instanceList; // $s3
@@ -1832,64 +1773,64 @@ void COLLIDE_PointAndInstanceTrivialReject(_PCollideInfo *pcollideInfo,_Instance
 	// 		int in_warpRoom; // $s7
 
 		/* begin block 1.1 */
-			// Start line: 1660
-			// Start offset: 0x800208A8
+			// Start line: 1648
+			// Start offset: 0x800208A4
 			// Variables:
 		// 		struct _TFace *tface; // $s3
 		// 		struct _Terrain *terrain; // $s4
 
 			/* begin block 1.1.1 */
-				// Start line: 1690
-				// Start offset: 0x80020944
+				// Start line: 1678
+				// Start offset: 0x80020940
 			/* end block 1.1.1 */
-			// End offset: 0x80020968
-			// End Line: 1694
+			// End offset: 0x80020964
+			// End Line: 1682
 
 			/* begin block 1.1.2 */
-				// Start line: 1699
-				// Start offset: 0x80020970
+				// Start line: 1687
+				// Start offset: 0x8002096C
 
 				/* begin block 1.1.2.1 */
-					// Start line: 1704
+					// Start line: 1692
 					// Start offset: 0x80020974
 					// Variables:
 				// 		struct Level *thislevel; // $s0
 				/* end block 1.1.2.1 */
 				// End offset: 0x80020A18
-				// End Line: 1728
+				// End Line: 1716
 			/* end block 1.1.2 */
 			// End offset: 0x80020A48
-			// End Line: 1739
+			// End Line: 1727
 		/* end block 1.1 */
 		// End offset: 0x80020A48
-		// End Line: 1740
+		// End Line: 1728
 	/* end block 1 */
-	// End offset: 0x80020C20
-	// End Line: 1813
+	// End offset: 0x80020C2C
+	// End Line: 1801
 
 	/* begin block 2 */
-		// Start line: 4207
+		// Start line: 4192
 	/* end block 2 */
-	// End Line: 4208
+	// End Line: 4193
+
+/* WARNING: Removing unreachable block (ram,0x80020998) */
 
 void COLLIDE_PointAndWorld(_PCollideInfo *pcollideInfo,Level *level)
 
 {
-  bool bVar1;
+  _InstanceList *p_Var1;
   long lVar2;
-  _StreamUnit *p_Var3;
-  uint uVar4;
+  uint uVar3;
   _Instance *instance;
+  int iVar4;
   int iVar5;
-  FontChar *pFVar6;
-  int iVar7;
-  long *plVar8;
+  NodeType **ppNVar6;
+  long *plVar7;
   _TFace *tface;
   _Terrain *terrain;
   undefined auStack56 [8];
   short local_30;
   
-  bVar1 = false;
   pcollideInfo->type = 0;
   if ((pcollideInfo->collideType & 1U) != 0) {
     tface = (_TFace *)0x0;
@@ -1897,32 +1838,26 @@ void COLLIDE_PointAndWorld(_PCollideInfo *pcollideInfo,Level *level)
       terrain = level->terrain;
       tface = COLLIDE_PointAndTerrain(terrain,pcollideInfo,(_LCollideInfo *)auStack56);
       if (tface == (_TFace *)0x0) {
-        p_Var3 = STREAM_GetStreamUnitWithID(level->streamUnitID);
-        if ((p_Var3->flags & 1U) != 0) {
-          bVar1 = true;
-        }
+                    /* WARNING: Subroutine does not return */
+        STREAM_GetStreamUnitWithID(level->streamUnitID);
       }
-      else {
-        pcollideInfo->type = 3;
-        *(_TFace **)&pcollideInfo->prim = tface;
-        *(Level **)&pcollideInfo->inst = level;
-        pcollideInfo->segment = local_30;
-        if (theCamera.core.vvNormalWorVecMat[0].m[2][2] == 1000) {
-          COLLIDE_GetNormal(tface->normal,(short *)terrain->normalList,
-                            (_SVector *)&pcollideInfo->wNormal);
-        }
-        else {
-          COLLIDE_MakeNormal(terrain,tface,(_SVector *)&pcollideInfo->wNormal);
-        }
+      pcollideInfo->type = 3;
+      *(_TFace **)&pcollideInfo->prim = tface;
+      *(Level **)&pcollideInfo->inst = level;
+      pcollideInfo->segment = local_30;
+      if (gameTrackerX.gameData.asmData.MorphTime == 1000) {
+                    /* WARNING: Subroutine does not return */
+        COLLIDE_GetNormal(tface->normal,(short *)terrain->normalList,
+                          (_SVector *)&pcollideInfo->wNormal);
       }
+      COLLIDE_MakeNormal(terrain,tface,(_SVector *)&pcollideInfo->wNormal);
     }
-    iVar5 = 0;
+    iVar4 = 0;
     if (tface == (_TFace *)0x0) {
-      pFVar6 = fontTracker.font_buffer + 0x5d;
+      iVar5 = -0x7ff2d5ee;
       do {
-        instance = *(_Instance **)&pFVar6->y;
-        if ((((*(short *)&pFVar6[-1].c == 2) && (instance != (_Instance *)level)) &&
-            ((!bVar1 || ((pFVar6->x & 1U) == 0)))) &&
+        instance = *(_Instance **)(iVar5 + 2);
+        if (((*(short *)(iVar5 + -2) == 2) && (instance != (_Instance *)level)) &&
            (lVar2 = MEMPACK_MemoryValidFunc((char *)instance), lVar2 != 0)) {
           terrain = (_Terrain *)(instance->node).prev;
           tface = COLLIDE_PointAndTerrain(terrain,pcollideInfo,(_LCollideInfo *)auStack56);
@@ -1931,19 +1866,18 @@ void COLLIDE_PointAndWorld(_PCollideInfo *pcollideInfo,Level *level)
             *(_TFace **)&pcollideInfo->prim = tface;
             pcollideInfo->inst = instance;
             pcollideInfo->segment = local_30;
-            if (theCamera.core.vvNormalWorVecMat[0].m[2][2] == 1000) {
+            if (gameTrackerX.gameData.asmData.MorphTime == 1000) {
+                    /* WARNING: Subroutine does not return */
               COLLIDE_GetNormal(tface->normal,(short *)terrain->normalList,
                                 (_SVector *)&pcollideInfo->wNormal);
             }
-            else {
-              COLLIDE_MakeNormal(terrain,tface,(_SVector *)&pcollideInfo->wNormal);
-            }
+            COLLIDE_MakeNormal(terrain,tface,(_SVector *)&pcollideInfo->wNormal);
             break;
           }
         }
-        iVar5 = iVar5 + 1;
-        pFVar6 = (FontChar *)&pFVar6[10].c;
-      } while (iVar5 < 0x10);
+        iVar4 = iVar4 + 1;
+        iVar5 = iVar5 + 0x40;
+      } while (iVar4 < 0x10);
       if (tface == (_TFace *)0x0) {
         pcollideInfo->type = 0;
         pcollideInfo->prim = (void *)0x0;
@@ -1954,73 +1888,73 @@ void COLLIDE_PointAndWorld(_PCollideInfo *pcollideInfo,Level *level)
       }
     }
   }
-  lVar2 = theCamera.core.vvNormalWorVecMat[1].t[2];
-  uVar4 = pcollideInfo->collideType;
-  iVar5 = 0x10;
-  if ((uVar4 & 8) == 0) {
-    if ((uVar4 & 0x10) == 0) {
-      iVar5 = 0;
-      if ((uVar4 & 4) != 0) {
-        plVar8 = &dyna_cldstat;
+  p_Var1 = gameTrackerX.instanceList;
+  uVar3 = pcollideInfo->collideType;
+  iVar4 = 0x10;
+  if ((uVar3 & 8) == 0) {
+    if ((uVar3 & 0x10) == 0) {
+      iVar4 = 0;
+      if ((uVar3 & 4) != 0) {
+        plVar7 = &dyna_cldstat;
         do {
-          instance = *(_Instance **)(*plVar8 * 8 + lVar2 + 0x10);
+          instance = (_Instance *)p_Var1->group[*plVar7].next;
           while (instance != (_Instance *)0x0) {
             if ((instance->flags2 & 0x24000000U) == 0) {
               COLLIDE_PointAndInstanceTrivialReject(pcollideInfo,instance);
             }
             instance = (_Instance *)(instance->node).next;
           }
-          iVar5 = iVar5 + 1;
-          plVar8 = plVar8 + 1;
-        } while (iVar5 < 8);
+          iVar4 = iVar4 + 1;
+          plVar7 = plVar7 + 1;
+        } while (iVar4 < 8);
       }
     }
     else {
-      iVar5 = 0;
-      if ((uVar4 & 2) != 0) {
-        plVar8 = &stat_clddyna;
+      iVar4 = 0;
+      if ((uVar3 & 2) != 0) {
+        plVar7 = &stat_clddyna;
         do {
-          instance = *(_Instance **)(*plVar8 * 8 + lVar2 + 0x10);
+          instance = (_Instance *)p_Var1->group[*plVar7].next;
           while (instance != (_Instance *)0x0) {
             if ((instance->flags2 & 0x24000000U) == 0) {
               COLLIDE_PointAndInstanceTrivialReject(pcollideInfo,instance);
             }
             instance = (_Instance *)(instance->node).next;
           }
-          iVar5 = iVar5 + 1;
-          plVar8 = plVar8 + 1;
-        } while (iVar5 < 8);
+          iVar4 = iVar4 + 1;
+          plVar7 = plVar7 + 1;
+        } while (iVar4 < 8);
       }
-      iVar5 = 0;
+      iVar4 = 0;
       if ((pcollideInfo->collideType & 4U) != 0) {
-        plVar8 = &dyna_clddyna;
+        plVar7 = &dyna_clddyna;
         do {
-          instance = *(_Instance **)(*plVar8 * 8 + lVar2 + 0x10);
+          instance = (_Instance *)p_Var1->group[*plVar7].next;
           while (instance != (_Instance *)0x0) {
             if ((instance->flags2 & 0x24000000U) == 0) {
               COLLIDE_PointAndInstanceTrivialReject(pcollideInfo,instance);
             }
             instance = (_Instance *)(instance->node).next;
           }
-          iVar5 = iVar5 + 1;
-          plVar8 = plVar8 + 1;
-        } while (iVar5 < 8);
+          iVar4 = iVar4 + 1;
+          plVar7 = plVar7 + 1;
+        } while (iVar4 < 8);
       }
     }
   }
   else {
-    iVar7 = theCamera.core.vvNormalWorVecMat[1].t[2] + 0x80;
+    ppNVar6 = &(gameTrackerX.instanceList)->group[0xe].next;
     do {
-      instance = *(_Instance **)(iVar7 + 0x10);
+      instance = (_Instance *)ppNVar6[4];
       while (instance != (_Instance *)0x0) {
         if ((instance->flags2 & 0x24000000U) == 0) {
           COLLIDE_PointAndInstanceTrivialReject(pcollideInfo,instance);
         }
         instance = (_Instance *)(instance->node).next;
       }
-      iVar5 = iVar5 + 1;
-      iVar7 = iVar7 + 8;
-    } while (iVar5 < 0x20);
+      iVar4 = iVar4 + 1;
+      ppNVar6 = ppNVar6 + 2;
+    } while (iVar4 < 0x20);
   }
   return;
 }
@@ -2030,70 +1964,67 @@ void COLLIDE_PointAndWorld(_PCollideInfo *pcollideInfo,Level *level)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ COLLIDE_ClosestPointInBoxToPoint(struct _Position *boxPoint /*$a0*/, struct _HBox *hbox /*$a1*/, struct _SVector *point /*$a2*/)
- // line 1893, offset 0x80020c4c
+ // line 1881, offset 0x80020c58
 	/* begin block 1 */
-		// Start line: 1895
-		// Start offset: 0x80020C4C
+		// Start line: 1883
+		// Start offset: 0x80020C58
 		// Variables:
 	// 		long inside; // $a3
 	/* end block 1 */
-	// End offset: 0x80020D18
-	// End Line: 1941
+	// End offset: 0x80020D24
+	// End Line: 1929
 
 	/* begin block 2 */
-		// Start line: 4803
+		// Start line: 4788
 	/* end block 2 */
-	// End Line: 4804
+	// End Line: 4789
 
 	/* begin block 3 */
-		// Start line: 4804
+		// Start line: 4789
 	/* end block 3 */
-	// End Line: 4805
+	// End Line: 4790
 
 	/* begin block 4 */
-		// Start line: 4806
+		// Start line: 4791
 	/* end block 4 */
-	// End Line: 4807
+	// End Line: 4792
 
-undefined4 COLLIDE_ClosestPointInBoxToPoint(short *param_1,int param_2,short *param_3)
+long COLLIDE_ClosestPointInBoxToPoint(_Position *boxPoint,_HBox *hbox,_SVector *point)
 
 {
   short sVar1;
-  undefined4 uVar2;
+  long lVar2;
   
-  sVar1 = *(short *)(param_2 + 4);
-  uVar2 = 1;
-  if ((*param_3 < *(short *)(param_2 + 4)) ||
-     (sVar1 = *(short *)(param_2 + 10), *(short *)(param_2 + 10) < *param_3)) {
-    *param_1 = sVar1;
-    uVar2 = 0;
+  sVar1 = hbox->minX;
+  lVar2 = 1;
+  if ((point->x < hbox->minX) || (sVar1 = hbox->maxX, hbox->maxX < point->x)) {
+    boxPoint->x = sVar1;
+    lVar2 = 0;
   }
   else {
-    *param_1 = *param_3;
+    boxPoint->x = point->x;
   }
-  sVar1 = *(short *)(param_2 + 6);
-  if ((param_3[1] < *(short *)(param_2 + 6)) ||
-     (sVar1 = *(short *)(param_2 + 0xc), *(short *)(param_2 + 0xc) < param_3[1])) {
-    param_1[1] = sVar1;
-    uVar2 = 0;
-  }
-  else {
-    param_1[1] = param_3[1];
-  }
-  if (param_3[2] < *(short *)(param_2 + 8)) {
-    param_1[2] = *(short *)(param_2 + 8);
-    uVar2 = 0;
-  }
-  else {
-    if (*(short *)(param_2 + 0xe) < param_3[2]) {
-      param_1[2] = *(short *)(param_2 + 0xe);
-      uVar2 = 0;
+  sVar1 = hbox->minY;
+  if ((hbox->minY <= point->y) && (sVar1 = hbox->maxY, point->y <= hbox->maxY)) {
+    boxPoint->y = point->y;
+    if (point->z < hbox->minZ) {
+      boxPoint->z = hbox->minZ;
+      lVar2 = 0;
     }
     else {
-      param_1[2] = param_3[2];
+      if (hbox->maxZ < point->z) {
+        boxPoint->z = hbox->maxZ;
+        lVar2 = 0;
+      }
+      else {
+        boxPoint->z = point->z;
+      }
     }
+    return lVar2;
   }
-  return uVar2;
+  boxPoint->y = sVar1;
+  lVar2 = COLLIDE_ClosestPointInBoxToPoint((char)boxPoint,(char)hbox,(char)point);
+  return lVar2;
 }
 
 
@@ -2101,17 +2032,17 @@ undefined4 COLLIDE_ClosestPointInBoxToPoint(short *param_1,int param_2,short *pa
 // decompiled code
 // original method signature: 
 // long /*$ra*/ COLLIDE_SphereAndPoint(struct _Sphere *sphere /*$s1*/, struct _SVector *point /*$s2*/, struct _SVector *normal /*$s3*/)
- // line 1944, offset 0x80020d20
+ // line 1932, offset 0x80020d2c
 	/* begin block 1 */
-		// Start line: 1945
-		// Start offset: 0x80020D20
+		// Start line: 1933
+		// Start offset: 0x80020D2C
 		// Variables:
 	// 		long len; // $a2
 	// 		struct _Vector *line; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 1945
-			// Start offset: 0x80020D20
+			// Start line: 1933
+			// Start offset: 0x80020D2C
 			// Variables:
 		// 		long _x0; // $a2
 		// 		long _y0; // $a1
@@ -2120,76 +2051,76 @@ undefined4 COLLIDE_ClosestPointInBoxToPoint(short *param_1,int param_2,short *pa
 		// 		long _y1; // $v0
 		// 		long _z1; // $v0
 		/* end block 1.1 */
-		// End offset: 0x80020D20
-		// End Line: 1945
+		// End offset: 0x80020D2C
+		// End Line: 1933
 
 		/* begin block 1.2 */
-			// Start line: 1953
-			// Start offset: 0x80020DB4
+			// Start line: 1941
+			// Start offset: 0x80020DC0
 			// Variables:
 		// 		long a; // stack offset -40
 		// 		long b; // stack offset -36
 		// 		long c; // stack offset -32
 		/* end block 1.2 */
-		// End offset: 0x80020DB4
-		// End Line: 1953
+		// End offset: 0x80020DC0
+		// End Line: 1941
 	/* end block 1 */
-	// End offset: 0x80020F48
-	// End Line: 1970
+	// End offset: 0x80020F54
+	// End Line: 1958
 
 	/* begin block 2 */
-		// Start line: 4905
+		// Start line: 4890
 	/* end block 2 */
-	// End Line: 4906
+	// End Line: 4891
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined4 COLLIDE_SphereAndPoint(short *param_1,short *param_2,undefined2 *param_3)
+long COLLIDE_SphereAndPoint(_Sphere *sphere,_SVector *point,_SVector *normal)
 
 {
-  undefined4 uVar1;
+  long lVar1;
   int iVar2;
   int iVar3;
-  int local_28;
-  int local_24;
-  int local_20 [2];
+  int iStack40;
+  int iStack36;
+  int aiStack32 [2];
   
-  _DAT_1f800000 = (int)*param_1 - (int)*param_2;
-  _DAT_1f800004 = (int)param_1[1] - (int)param_2[1];
-  _DAT_1f800008 = (int)param_1[2] - (int)param_2[2];
-  uVar1 = 0;
+  _DAT_1f800000 = (int)(sphere->position).x - (int)point->x;
+  _DAT_1f800004 = (int)(sphere->position).y - (int)point->y;
+  _DAT_1f800008 = (int)(sphere->position).z - (int)point->z;
+  lVar1 = 0;
   if ((uint)(_DAT_1f800000 * _DAT_1f800000 + _DAT_1f800004 * _DAT_1f800004 +
-            _DAT_1f800008 * _DAT_1f800008) < *(uint *)(param_1 + 4)) {
-    local_28 = _DAT_1f800000;
+            _DAT_1f800008 * _DAT_1f800008) < sphere->radiusSquared) {
+    iStack40 = _DAT_1f800000;
     if (_DAT_1f800000 < 0) {
-      local_28 = -_DAT_1f800000;
+      iStack40 = -_DAT_1f800000;
     }
-    local_24 = _DAT_1f800004;
+    iStack36 = _DAT_1f800004;
     if (_DAT_1f800004 < 0) {
-      local_24 = -_DAT_1f800004;
+      iStack36 = -_DAT_1f800004;
     }
-    local_20[0] = _DAT_1f800008;
+    aiStack32[0] = _DAT_1f800008;
     if (_DAT_1f800008 < 0) {
-      local_20[0] = -_DAT_1f800008;
+      aiStack32[0] = -_DAT_1f800008;
     }
-    MATH3D_Sort3VectorCoords(&local_28,&local_24,local_20);
-    iVar3 = local_20[0] * 0x1e + local_24 * 0xc + local_28 * 9;
+    MATH3D_Sort3VectorCoords(&iStack40,&iStack36,aiStack32);
+    iVar3 = aiStack32[0] * 0x1e + iStack36 * 0xc + iStack40 * 9;
     iVar2 = iVar3 >> 5;
-    uVar1 = 0;
+    lVar1 = 0;
     if (iVar2 != 0) {
-      *param_3 = (short)((_DAT_1f800000 << 0xc) / iVar2);
-      param_3[1] = (short)((_DAT_1f800004 << 0xc) / iVar2);
-      param_3[2] = (short)((_DAT_1f800008 << 0xc) / iVar2);
-      _DAT_1f800000 = (int)(_DAT_1f800000 * (uint)(ushort)param_1[3] * 0x20) / iVar3;
-      _DAT_1f800004 = (int)(_DAT_1f800004 * (uint)(ushort)param_1[3] * 0x20) / iVar3;
-      _DAT_1f800008 = (int)(_DAT_1f800008 * (uint)(ushort)param_1[3] * 0x20) / iVar3;
-      *param_1 = *param_2 + DAT_1f800000;
-      param_1[1] = param_2[1] + DAT_1f800004;
-      uVar1 = 1;
-      param_1[2] = param_2[2] + DAT_1f800008;
+      normal->x = (short)((_DAT_1f800000 << 0xc) / iVar2);
+      normal->y = (short)((_DAT_1f800004 << 0xc) / iVar2);
+      normal->z = (short)((_DAT_1f800008 << 0xc) / iVar2);
+      _DAT_1f800000 = (int)(_DAT_1f800000 * (uint)sphere->radius * 0x20) / iVar3;
+      _DAT_1f800004 = (int)(_DAT_1f800004 * (uint)sphere->radius * 0x20) / iVar3;
+      _DAT_1f800008 = (int)(_DAT_1f800008 * (uint)sphere->radius * 0x20) / iVar3;
+      (sphere->position).x = point->x + DAT_1f800000;
+      (sphere->position).y = point->y + DAT_1f800004;
+      lVar1 = 1;
+      (sphere->position).z = point->z + DAT_1f800008;
     }
   }
-  return uVar1;
+  return lVar1;
 }
 
 
@@ -2197,10 +2128,10 @@ undefined4 COLLIDE_SphereAndPoint(short *param_1,short *param_2,undefined2 *para
 // decompiled code
 // original method signature: 
 // long /*$ra*/ COLLIDE_SphereAndHBox(struct _HBox *hbox /*$s4*/, struct _Sphere *sphere /*$s1*/, struct _Position *oldPos /*$s5*/, struct _SVector *normal /*$s3*/)
- // line 1975, offset 0x80020f64
+ // line 1963, offset 0x80020f70
 	/* begin block 1 */
-		// Start line: 1976
-		// Start offset: 0x80020F64
+		// Start line: 1964
+		// Start offset: 0x80020F70
 		// Variables:
 	// 		struct _SVector point; // stack offset -96
 	// 		struct _SVector point0; // stack offset -88
@@ -2212,37 +2143,37 @@ undefined4 COLLIDE_SphereAndPoint(short *param_1,short *param_2,undefined2 *para
 	// 		struct _SVector absdv; // stack offset -40
 
 		/* begin block 1.1 */
-			// Start line: 1989
-			// Start offset: 0x80020FAC
+			// Start line: 1977
+			// Start offset: 0x80020FB8
 			// Variables:
 		// 		long numIntersects; // $a2
 
 			/* begin block 1.1.1 */
-				// Start line: 1993
-				// Start offset: 0x80020FDC
+				// Start line: 1981
+				// Start offset: 0x80020FE8
 				// Variables:
 			// 		short _x1; // $v0
 			// 		short _y1; // $v1
 			// 		short _z1; // $a0
 			/* end block 1.1.1 */
-			// End offset: 0x80020FDC
-			// End Line: 1993
+			// End offset: 0x80020FE8
+			// End Line: 1981
 
 			/* begin block 1.1.2 */
-				// Start line: 1993
-				// Start offset: 0x80020FDC
+				// Start line: 1981
+				// Start offset: 0x80020FE8
 				// Variables:
 			// 		short _x1; // $a0
 			// 		short _y1; // $v1
 			// 		short _z1; // $a1
 			// 		struct _SVector *_v0; // $v0
 			/* end block 1.1.2 */
-			// End offset: 0x80020FDC
-			// End Line: 1993
+			// End offset: 0x80020FE8
+			// End Line: 1981
 
 			/* begin block 1.1.3 */
-				// Start line: 2000
-				// Start offset: 0x8002107C
+				// Start line: 1988
+				// Start offset: 0x8002108C
 				// Variables:
 			// 		short _y0; // $v0
 			// 		short _z0; // $v1
@@ -2252,19 +2183,19 @@ undefined4 COLLIDE_SphereAndPoint(short *param_1,short *param_2,undefined2 *para
 			// 		struct _SVector *_v; // $a1
 			// 		struct _SVector *_v0; // $v1
 			/* end block 1.1.3 */
-			// End offset: 0x8002107C
-			// End Line: 2000
+			// End offset: 0x8002108C
+			// End Line: 1988
 		/* end block 1.1 */
-		// End offset: 0x80021290
-		// End Line: 2076
+		// End offset: 0x800212A0
+		// End Line: 2064
 
 		/* begin block 1.2 */
-			// Start line: 2080
-			// Start offset: 0x80021290
+			// Start line: 2068
+			// Start offset: 0x800212A0
 
 			/* begin block 1.2.1 */
-				// Start line: 2087
-				// Start offset: 0x800212D4
+				// Start line: 2075
+				// Start offset: 0x800212E4
 				// Variables:
 			// 		short _x1; // $v0
 			// 		short _y1; // $v1
@@ -2272,184 +2203,186 @@ undefined4 COLLIDE_SphereAndPoint(short *param_1,short *param_2,undefined2 *para
 			// 		struct _SVector *_v0; // $v0
 			// 		struct _SVector *_v1; // $v0
 			/* end block 1.2.1 */
-			// End offset: 0x800212D4
-			// End Line: 2087
+			// End offset: 0x800212E4
+			// End Line: 2075
 
 			/* begin block 1.2.2 */
-				// Start line: 2087
-				// Start offset: 0x800212D4
+				// Start line: 2075
+				// Start offset: 0x800212E4
 				// Variables:
 			// 		short _x1; // $v1
 			// 		short _y1; // $a0
 			// 		short _z1; // $a1
 			/* end block 1.2.2 */
-			// End offset: 0x800212D4
-			// End Line: 2087
+			// End offset: 0x800212E4
+			// End Line: 2075
 
 			/* begin block 1.2.3 */
-				// Start line: 2096
-				// Start offset: 0x80021318
+				// Start line: 2084
+				// Start offset: 0x8002132C
 				// Variables:
 			// 		short _x1; // $v0
 			// 		short _y1; // $v1
 			// 		short _z1; // $a0
 			/* end block 1.2.3 */
-			// End offset: 0x80021318
-			// End Line: 2096
+			// End offset: 0x8002132C
+			// End Line: 2084
 
 			/* begin block 1.2.4 */
-				// Start line: 2096
-				// Start offset: 0x80021318
+				// Start line: 2084
+				// Start offset: 0x8002132C
 				// Variables:
 			// 		short _x1; // $a0
 			// 		short _y1; // $v1
 			// 		short _z1; // $a1
 			// 		struct _SVector *_v0; // $v0
 			/* end block 1.2.4 */
-			// End offset: 0x80021318
-			// End Line: 2096
+			// End offset: 0x8002132C
+			// End Line: 2084
 		/* end block 1.2 */
-		// End offset: 0x800213B8
-		// End Line: 2106
+		// End offset: 0x800213D0
+		// End Line: 2094
 	/* end block 1 */
-	// End offset: 0x800213B8
-	// End Line: 2108
+	// End offset: 0x800213D0
+	// End Line: 2096
 
 	/* begin block 2 */
-		// Start line: 4981
+		// Start line: 4966
 	/* end block 2 */
-	// End Line: 4982
+	// End Line: 4967
 
-int COLLIDE_SphereAndHBox(_HBox *param_1,ushort *param_2,_SVector *param_3,short *param_4)
+long COLLIDE_SphereAndHBox(_HBox *hbox,_Sphere *sphere,_Position *oldPos,_SVector *normal)
 
 {
   short sVar1;
-  int iVar2;
+  long lVar2;
   int iVar3;
-  short sVar4;
+  long lVar4;
   short sVar5;
   int iVar6;
-  short local_60;
-  short local_5e;
-  short local_5c;
-  short local_58;
-  short local_56;
-  short local_54;
-  undefined auStack80 [8];
-  short local_48;
-  short local_46;
-  short local_44;
-  undefined auStack64 [8];
-  short local_38;
-  short local_36;
-  short local_34;
+  short sVar7;
+  int iVar8;
+  _SVector local_60;
+  _SVector _Stack88;
+  _SVector _Stack80;
+  _SVector local_48;
+  _SVector _Stack64;
+  _SVector local_38 [3];
   
-  iVar2 = COLLIDE_ClosestPointInBoxToPoint(&local_60,(int)param_1,(short *)param_2);
-  if (iVar2 == 0) {
-    iVar2 = COLLIDE_IntersectLineAndBox
-                      (&local_58,&local_48,auStack80,auStack64,(short *)param_2,param_3,param_1);
-    if (iVar2 == 0) {
-      iVar6 = COLLIDE_SphereAndPoint((short *)param_2,&local_60,&local_38);
-      iVar2 = 0;
-      if (iVar6 != 0) {
-        sGpffffa8bc = local_60;
-        sGpffffa8be = local_5e;
-        sGpffffa8c0 = local_5c;
-        iVar2 = 1;
-        *param_4 = local_38;
-        param_4[1] = local_36;
-        param_4[2] = local_34;
+  lVar2 = COLLIDE_ClosestPointInBoxToPoint((_Position *)&local_60,hbox,(_SVector *)sphere);
+  if (lVar2 == 0) {
+    lVar2 = COLLIDE_IntersectLineAndBox
+                      (&_Stack88,&local_48,&_Stack80,&_Stack64,(_SVector *)sphere,(_SVector *)oldPos
+                       ,hbox);
+    if (lVar2 == 0) {
+      lVar4 = COLLIDE_SphereAndPoint(sphere,&local_60,local_38);
+      lVar2 = 0;
+      if (lVar4 != 0) {
+        collide_localPoint.x = local_60.x;
+        collide_localPoint.y = local_60.y;
+        collide_localPoint.z = local_60.z;
+        lVar2 = 1;
+        normal->x = local_38[0].x;
+        normal->y = local_38[0].y;
+        normal->z = local_38[0].z;
       }
     }
     else {
-      *param_4 = local_48;
-      param_4[1] = local_46;
-      param_4[2] = local_44;
-      sGpffffa8bc = local_58;
-      sGpffffa8be = local_56;
-      sGpffffa8c0 = local_54;
-      *param_2 = local_58 + (short)((int)((int)*param_4 * (uint)param_2[3]) >> 0xc);
-      param_2[1] = local_56 + (short)((int)((int)param_4[1] * (uint)param_2[3]) >> 0xc);
-      iVar2 = 1;
-      param_2[2] = local_54 + (short)((int)((int)param_4[2] * (uint)param_2[3]) >> 0xc);
+      normal->x = local_48.x;
+      normal->y = local_48.y;
+      normal->z = local_48.z;
+      collide_localPoint.x = _Stack88.x;
+      collide_localPoint.y = _Stack88.y;
+      collide_localPoint.z = _Stack88.z;
+      (sphere->position).x =
+           _Stack88.x + (short)((int)((int)normal->x * (uint)sphere->radius) >> 0xc);
+      (sphere->position).y =
+           _Stack88.y + (short)((int)((int)normal->y * (uint)sphere->radius) >> 0xc);
+      lVar2 = 1;
+      (sphere->position).z =
+           _Stack88.z + (short)((int)((int)normal->z * (uint)sphere->radius) >> 0xc);
     }
   }
   else {
-    iVar2 = COLLIDE_IntersectLineAndBox
-                      (&local_58,&local_48,auStack80,auStack64,(short *)param_2,param_3,param_1);
-    if (iVar2 == 0) {
-      sVar1 = (short)((int)param_1->minY + (int)param_1->maxY >> 1) - param_2[1];
-      sVar4 = (short)((int)param_1->minZ + (int)param_1->maxZ >> 1) - param_2[2];
-      iVar6 = (int)((((int)param_1->minX + (int)param_1->maxX >> 1) - (uint)*param_2) * 0x10000) >>
-              0x10;
-      iVar2 = iVar6;
-      if (iVar6 < 0) {
-        iVar2 = -iVar6;
+    lVar2 = COLLIDE_IntersectLineAndBox
+                      (&_Stack88,&local_48,&_Stack80,&_Stack64,(_SVector *)sphere,(_SVector *)oldPos
+                       ,hbox);
+    if (lVar2 == 0) {
+      sVar1 = (short)((int)hbox->minY + (int)hbox->maxY >> 1) - (sphere->position).y;
+      sVar5 = (short)((int)hbox->minZ + (int)hbox->maxZ >> 1) - (sphere->position).z;
+      iVar8 = (int)((((int)hbox->minX + (int)hbox->maxX >> 1) - (uint)(ushort)(sphere->position).x)
+                   * 0x10000) >> 0x10;
+      iVar6 = iVar8;
+      if (iVar8 < 0) {
+        iVar6 = -iVar8;
       }
       iVar3 = (int)sVar1;
       if (iVar3 < 0) {
         iVar3 = -iVar3;
       }
-      sVar5 = sVar4;
-      if (sVar4 < 0) {
-        sVar5 = -sVar4;
+      sVar7 = sVar5;
+      if (sVar5 < 0) {
+        sVar7 = -sVar5;
       }
-      if ((iVar2 * -0x10000 < iVar3 * -0x10000) || (iVar2 * -0x10000 >> 0x10 < (int)-sVar5)) {
-        if (((short)-(short)iVar3 < (short)-(short)iVar2) || ((short)-(short)iVar3 < -sVar5)) {
-          if (sVar4 < 0) {
-            param_2[2] = param_1->maxZ + param_2[3];
+      if ((iVar6 * -0x10000 < iVar3 * -0x10000) || (iVar6 * -0x10000 >> 0x10 < (int)-sVar7)) {
+        if (((short)-(short)iVar3 < (short)-(short)iVar6) || ((short)-(short)iVar3 < -sVar7)) {
+          if (sVar5 < 0) {
+            (sphere->position).z = hbox->maxZ + sphere->radius;
             sVar1 = 0x1000;
           }
           else {
-            param_2[2] = param_1->minZ - param_2[3];
+            (sphere->position).z = hbox->minZ - sphere->radius;
             sVar1 = -0x1000;
           }
-          *param_4 = 0;
-          param_4[1] = 0;
-          param_4[2] = sVar1;
+          normal->x = 0;
+          normal->y = 0;
+          normal->z = sVar1;
         }
         else {
           if (sVar1 < 0) {
-            param_2[1] = param_1->maxY + param_2[3];
+            (sphere->position).y = hbox->maxY + sphere->radius;
             sVar1 = 0x1000;
           }
           else {
-            param_2[1] = param_1->minY - param_2[3];
+            (sphere->position).y = hbox->minY - sphere->radius;
             sVar1 = -0x1000;
           }
-          *param_4 = 0;
-          param_4[1] = sVar1;
-          param_4[2] = 0;
+          normal->x = 0;
+          normal->y = sVar1;
+          normal->z = 0;
         }
       }
       else {
-        if (iVar6 < 0) {
-          *param_2 = param_1->maxX + param_2[3];
+        if (iVar8 < 0) {
+          (sphere->position).x = hbox->maxX + sphere->radius;
           sVar1 = 0x1000;
         }
         else {
-          *param_2 = param_1->minX - param_2[3];
+          (sphere->position).x = hbox->minX - sphere->radius;
           sVar1 = -0x1000;
         }
-        *param_4 = sVar1;
-        param_4[1] = 0;
-        param_4[2] = 0;
+        normal->x = sVar1;
+        normal->y = 0;
+        normal->z = 0;
       }
-      iVar2 = 1;
+      lVar2 = 1;
     }
     else {
-      *param_4 = local_48;
-      param_4[1] = local_46;
-      param_4[2] = local_44;
-      sGpffffa8bc = local_58;
-      sGpffffa8be = local_56;
-      sGpffffa8c0 = local_54;
-      *param_2 = local_58 + (short)((int)((int)*param_4 * (uint)param_2[3]) >> 0xc);
-      param_2[1] = local_56 + (short)((int)((int)param_4[1] * (uint)param_2[3]) >> 0xc);
-      param_2[2] = local_54 + (short)((int)((int)param_4[2] * (uint)param_2[3]) >> 0xc);
+      normal->x = local_48.x;
+      normal->y = local_48.y;
+      normal->z = local_48.z;
+      collide_localPoint.x = _Stack88.x;
+      collide_localPoint.y = _Stack88.y;
+      collide_localPoint.z = _Stack88.z;
+      (sphere->position).x =
+           _Stack88.x + (short)((int)((int)normal->x * (uint)sphere->radius) >> 0xc);
+      (sphere->position).y =
+           _Stack88.y + (short)((int)((int)normal->y * (uint)sphere->radius) >> 0xc);
+      (sphere->position).z =
+           _Stack88.z + (short)((int)((int)normal->z * (uint)sphere->radius) >> 0xc);
     }
   }
-  return iVar2;
+  return lVar2;
 }
 
 
@@ -2457,10 +2390,10 @@ int COLLIDE_SphereAndHBox(_HBox *param_1,ushort *param_2,_SVector *param_3,short
 // decompiled code
 // original method signature: 
 // void /*$ra*/ COLLIDE_Instance1SpheresToInstance2(struct _Instance *instance1 /*stack 0*/, struct _Instance *instance2 /*$fp*/, long sphereToSphere /*$a2*/)
- // line 2419, offset 0x800213dc
+ // line 2407, offset 0x800213f4
 	/* begin block 1 */
-		// Start line: 2420
-		// Start offset: 0x800213DC
+		// Start line: 2408
+		// Start offset: 0x800213F4
 		// Variables:
 	// 		struct MATRIX *wsTransform2; // stack offset -132
 	// 		struct MATRIX *oldWSTransform2; // stack offset -128
@@ -2496,82 +2429,82 @@ int COLLIDE_SphereAndHBox(_HBox *param_1,ushort *param_2,_SVector *param_3,short
 	// 		int i; // stack offset -56
 
 		/* begin block 1.1 */
-			// Start line: 2478
-			// Start offset: 0x80021578
+			// Start line: 2466
+			// Start offset: 0x80021590
 			// Variables:
 		// 		int i; // stack offset -52
 
 			/* begin block 1.1.1 */
-				// Start line: 2524
-				// Start offset: 0x800217F0
+				// Start line: 2512
+				// Start offset: 0x80021808
 				// Variables:
 			// 		long len; // $a3
 
 				/* begin block 1.1.1.1 */
-					// Start line: 2525
-					// Start offset: 0x800217F0
+					// Start line: 2513
+					// Start offset: 0x80021808
 					// Variables:
 				// 		long a; // stack offset -148
 				// 		long b; // stack offset -144
 				// 		long c; // stack offset -140
 				/* end block 1.1.1.1 */
-				// End offset: 0x800217F0
-				// End Line: 2525
+				// End offset: 0x80021808
+				// End Line: 2513
 
 				/* begin block 1.1.1.2 */
-					// Start line: 2531
-					// Start offset: 0x80021888
+					// Start line: 2519
+					// Start offset: 0x800218A0
 					// Variables:
 				// 		short _x1; // $v1
 				// 		short _y1; // $a0
 				// 		short _z1; // $v0
 				// 		struct _Position *_v1; // $v0
 				/* end block 1.1.1.2 */
-				// End offset: 0x80021888
-				// End Line: 2531
+				// End offset: 0x800218A0
+				// End Line: 2519
 
 				/* begin block 1.1.1.3 */
-					// Start line: 2536
-					// Start offset: 0x800218B0
+					// Start line: 2524
+					// Start offset: 0x800218C8
 					// Variables:
 				// 		short _x1; // $v0
 				// 		short _y1; // $v1
 				// 		short _z1; // $a0
 				/* end block 1.1.1.3 */
-				// End offset: 0x800218B0
-				// End Line: 2536
+				// End offset: 0x800218C8
+				// End Line: 2524
 			/* end block 1.1.1 */
-			// End offset: 0x800219E4
-			// End Line: 2561
+			// End offset: 0x80021A00
+			// End Line: 2549
 
 			/* begin block 1.1.2 */
-				// Start line: 2577
-				// Start offset: 0x80021A58
+				// Start line: 2565
+				// Start offset: 0x80021A78
 				// Variables:
 			// 		struct _Model *model2; // $s1
 
 				/* begin block 1.1.2.1 */
-					// Start line: 2676
-					// Start offset: 0x80021E58
+					// Start line: 2664
+					// Start offset: 0x80021E80
 					// Variables:
 				// 		struct _HBox *hbox; // $s4
 				/* end block 1.1.2.1 */
-				// End offset: 0x800220B4
-				// End Line: 2742
+				// End offset: 0x800220E4
+				// End Line: 2730
 			/* end block 1.1.2 */
-			// End offset: 0x800220B4
-			// End Line: 2743
+			// End offset: 0x800220E4
+			// End Line: 2731
 		/* end block 1.1 */
-		// End offset: 0x800220D4
-		// End Line: 2746
+		// End offset: 0x80022104
+		// End Line: 2734
 	/* end block 1 */
-	// End offset: 0x800220FC
-	// End Line: 2748
+	// End offset: 0x8002212C
+	// End Line: 2736
 
 	/* begin block 2 */
-		// Start line: 4838
+		// Start line: 4801
 	/* end block 2 */
-	// End Line: 4839
+	// End Line: 4802
 
 void COLLIDE_Instance1SpheresToInstance2
                (_Instance *instance1,_Instance *instance2,long sphereToSphere)
@@ -2584,14 +2517,14 @@ void COLLIDE_Instance1SpheresToInstance2
   undefined2 *local_7c;
   undefined4 *local_78;
   undefined2 *local_74;
-  undefined2 *local_70;
+  undefined4 *local_70;
   undefined2 *local_6c;
   undefined2 *local_68;
   undefined2 *local_64;
   undefined2 *local_60;
-  undefined2 *local_5c;
-  undefined2 *local_58;
-  undefined2 *local_54;
+  undefined4 *local_5c;
+  undefined4 *local_58;
+  undefined4 *local_54;
   undefined4 *local_50;
   MATRIX *local_4c;
   _HModel *local_44;
@@ -2623,11 +2556,11 @@ void COLLIDE_Instance1SpheresToInstance2
       local_30 = auStack152;
       local_2c = &local_40->segment;
       do {
-        if (((local_40->hpFlags & 1) != 0) && ((*(uint *)local_40 & 0xff0400) == 0x10400)) {
+        if (((local_40->hpFlags & 1) != 0) &&
+           ((undefined **)(*(uint *)local_40 & 0xff0400) == &PTR_00010400)) {
           local_4c = instance1->matrix + *local_2c;
-          SetRotMatrix((undefined4 *)local_4c);
                     /* WARNING: Subroutine does not return */
-          SetTransMatrix((int)local_4c);
+          SetRotMatrix((undefined4 *)local_4c);
         }
         local_38 = local_38 + -1;
         local_2c = local_2c + 8;
@@ -2643,10 +2576,10 @@ void COLLIDE_Instance1SpheresToInstance2
 // decompiled code
 // original method signature: 
 // void /*$ra*/ COLLIDE_Instances(struct _Instance *instance1 /*$s1*/, struct _Instance *instance2 /*$s0*/)
- // line 2761, offset 0x8002212c
+ // line 2749, offset 0x8002215c
 	/* begin block 1 */
-		// Start line: 2762
-		// Start offset: 0x8002212C
+		// Start line: 2750
+		// Start offset: 0x8002215C
 		// Variables:
 	// 		long lx; // $a1
 	// 		long ly; // $a3
@@ -2654,23 +2587,23 @@ void COLLIDE_Instance1SpheresToInstance2
 	// 		long mrmr; // $v0
 
 		/* begin block 1.1 */
-			// Start line: 2806
-			// Start offset: 0x80022158
+			// Start line: 2794
+			// Start offset: 0x80022188
 			// Variables:
 		// 		long x; // $a1
 		// 		long y; // $a3
 		// 		long z; // $a2
 		/* end block 1.1 */
-		// End offset: 0x80022158
-		// End Line: 2806
+		// End offset: 0x80022188
+		// End Line: 2794
 	/* end block 1 */
-	// End offset: 0x80022260
-	// End Line: 2828
+	// End offset: 0x80022290
+	// End Line: 2816
 
 	/* begin block 2 */
-		// Start line: 7060
+		// Start line: 7045
 	/* end block 2 */
-	// End Line: 7061
+	// End Line: 7046
 
 void COLLIDE_Instances(_Instance *instance1,_Instance *instance2)
 
@@ -2705,10 +2638,10 @@ void COLLIDE_Instances(_Instance *instance1,_Instance *instance2)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ COLLIDE_InstanceList(struct _InstanceList *instanceList /*$s7*/)
- // line 2839, offset 0x80022274
+ // line 2827, offset 0x800222a4
 	/* begin block 1 */
-		// Start line: 2840
-		// Start offset: 0x80022274
+		// Start line: 2828
+		// Start offset: 0x800222A4
 		// Variables:
 	// 		struct _Instance *instance; // $s1
 	// 		struct _Instance *instance2; // $s0
@@ -2716,40 +2649,39 @@ void COLLIDE_Instances(_Instance *instance1,_Instance *instance2)
 	// 		long i; // $s4
 	// 		long j; // $s2
 	/* end block 1 */
-	// End offset: 0x800224EC
-	// End Line: 2926
+	// End offset: 0x80022528
+	// End Line: 2914
 
 	/* begin block 2 */
-		// Start line: 7228
+		// Start line: 7213
 	/* end block 2 */
-	// End Line: 7229
+	// End Line: 7214
 
 	/* begin block 3 */
-		// Start line: 7236
+		// Start line: 7221
 	/* end block 3 */
-	// End Line: 7237
+	// End Line: 7222
 
 void COLLIDE_InstanceList(_InstanceList *instanceList)
 
 {
-  long instance2;
   NodeType **ppNVar1;
-  _Instance *instance2_00;
   _Instance *instance1;
+  _Instance *instance2;
   int iVar2;
   long *plVar3;
   int iVar4;
   long *plVar5;
   
-  instance2 = theCamera.core.vvNormalWorVecMat[1].t[0];
-  if (theCamera.focusSphere.radiusSquared._3_1_ != '\x01') {
+  instance2 = gameTrackerX.playerInstance;
+  if (gameTrackerX.cheatMode != '\x01') {
     iVar4 = 0x10;
     ppNVar1 = &instanceList->group[0xe].next;
     do {
       instance1 = (_Instance *)ppNVar1[4];
       while (instance1 != (_Instance *)0x0) {
         if ((instance1->flags2 & 0x24040000U) == 0) {
-          COLLIDE_Instances(instance1,(_Instance *)instance2);
+          COLLIDE_Instances(instance1,instance2);
         }
         instance1 = (_Instance *)(instance1->node).next;
       }
@@ -2760,57 +2692,57 @@ void COLLIDE_InstanceList(_InstanceList *instanceList)
   iVar4 = 0;
   plVar5 = &dyna_clddyna;
   do {
-    instance1 = (_Instance *)instanceList->group[*plVar5].next;
-    while (instance1 != (_Instance *)0x0) {
-      if ((instance1->flags2 & 0x24040000U) == 0) {
-        instance2_00 = (_Instance *)(instance1->node).next;
-        while (instance2_00 != (_Instance *)0x0) {
-          if ((instance2_00->flags2 & 0x24040000U) == 0) {
-            COLLIDE_Instances(instance1,instance2_00);
+    instance2 = (_Instance *)instanceList->group[*plVar5].next;
+    while (instance2 != (_Instance *)0x0) {
+      if ((instance2->flags2 & 0x24040000U) == 0) {
+        instance1 = (_Instance *)(instance2->node).next;
+        while (instance1 != (_Instance *)0x0) {
+          if ((instance1->flags2 & 0x24040000U) == 0) {
+            COLLIDE_Instances(instance2,instance1);
           }
-          instance2_00 = (_Instance *)(instance2_00->node).next;
+          instance1 = (_Instance *)(instance1->node).next;
         }
         iVar2 = iVar4 + 1;
         if (iVar2 < 8) {
           plVar3 = &dyna_clddyna + iVar2;
           do {
-            instance2_00 = (_Instance *)instanceList->group[*plVar3].next;
-            while (instance2_00 != (_Instance *)0x0) {
-              if ((instance2_00->flags2 & 0x24040000U) == 0) {
-                COLLIDE_Instances(instance1,instance2_00);
+            instance1 = (_Instance *)instanceList->group[*plVar3].next;
+            while (instance1 != (_Instance *)0x0) {
+              if ((instance1->flags2 & 0x24040000U) == 0) {
+                COLLIDE_Instances(instance2,instance1);
               }
-              instance2_00 = (_Instance *)(instance2_00->node).next;
+              instance1 = (_Instance *)(instance1->node).next;
             }
             iVar2 = iVar2 + 1;
             plVar3 = plVar3 + 1;
           } while (iVar2 < 8);
         }
       }
-      instance1 = (_Instance *)(instance1->node).next;
+      instance2 = (_Instance *)(instance2->node).next;
     }
     iVar4 = iVar4 + 1;
     plVar5 = plVar5 + 1;
   } while (iVar4 < 8);
   iVar4 = 0;
   do {
-    instance1 = (_Instance *)instanceList->group[(&dyna_cldstat)[iVar4]].next;
-    while (instance1 != (_Instance *)0x0) {
-      if ((instance1->flags2 & 0x24040000U) == 0) {
+    instance2 = (_Instance *)instanceList->group[(&dyna_cldstat)[iVar4]].next;
+    while (instance2 != (_Instance *)0x0) {
+      if ((instance2->flags2 & 0x24040000U) == 0) {
         iVar2 = 0;
         plVar5 = &stat_clddyna;
         do {
-          instance2_00 = (_Instance *)instanceList->group[*plVar5].next;
-          while (instance2_00 != (_Instance *)0x0) {
-            if ((instance2_00->flags2 & 0x24040000U) == 0) {
-              COLLIDE_Instances(instance1,instance2_00);
+          instance1 = (_Instance *)instanceList->group[*plVar5].next;
+          while (instance1 != (_Instance *)0x0) {
+            if ((instance1->flags2 & 0x24040000U) == 0) {
+              COLLIDE_Instances(instance2,instance1);
             }
-            instance2_00 = (_Instance *)(instance2_00->node).next;
+            instance1 = (_Instance *)(instance1->node).next;
           }
           iVar2 = iVar2 + 1;
           plVar5 = plVar5 + 1;
         } while (iVar2 < 8);
       }
-      instance1 = (_Instance *)(instance1->node).next;
+      instance2 = (_Instance *)(instance2->node).next;
     }
     iVar4 = iVar4 + 1;
   } while (iVar4 < 8);
@@ -2822,10 +2754,10 @@ void COLLIDE_InstanceList(_InstanceList *instanceList)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ COLLIDE_SphereAndHFace(struct _Sphere *sphere /*$s2*/, struct _Position *oldPos /*$a1*/, struct _HFaceInfo *hfaceInfo /*$s4*/, struct _SVector *intersect /*$s5*/, long *edge /*stack 16*/)
- // line 3061, offset 0x8002251c
+ // line 3049, offset 0x80022558
 	/* begin block 1 */
-		// Start line: 3062
-		// Start offset: 0x8002251C
+		// Start line: 3050
+		// Start offset: 0x80022558
 		// Variables:
 	// 		struct SandHFScratch *CSpad; // $s0
 	// 		struct _SVector *vertex0; // $a0
@@ -2834,75 +2766,75 @@ void COLLIDE_InstanceList(_InstanceList *instanceList)
 	// 		unsigned long d0sq; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 3126
-			// Start offset: 0x80022734
+			// Start line: 3114
+			// Start offset: 0x80022770
 			// Variables:
 		// 		struct _Vector dv; // stack offset -64
 
 			/* begin block 1.1.1 */
-				// Start line: 3128
-				// Start offset: 0x80022734
+				// Start line: 3116
+				// Start offset: 0x80022770
 				// Variables:
 			// 		short _x1; // $v0
 			// 		short _y1; // $v1
 			// 		short _z1; // $a0
 			// 		struct _SVector *_v0; // $v0
 			/* end block 1.1.1 */
-			// End offset: 0x80022734
-			// End Line: 3128
+			// End offset: 0x80022770
+			// End Line: 3116
 		/* end block 1.1 */
-		// End offset: 0x80022814
-		// End Line: 3141
+		// End offset: 0x80022850
+		// End Line: 3129
 
 		/* begin block 1.2 */
-			// Start line: 3143
-			// Start offset: 0x80022814
+			// Start line: 3131
+			// Start offset: 0x80022850
 			// Variables:
 		// 		long y; // $v1
 		// 		long z; // $v0
 		/* end block 1.2 */
-		// End offset: 0x80022814
-		// End Line: 3143
+		// End offset: 0x80022850
+		// End Line: 3131
 
 		/* begin block 1.3 */
-			// Start line: 3147
-			// Start offset: 0x80022884
+			// Start line: 3135
+			// Start offset: 0x800228C0
 			// Variables:
 		// 		unsigned long d1sq; // $a0
 
 			/* begin block 1.3.1 */
-				// Start line: 3149
-				// Start offset: 0x80022884
+				// Start line: 3137
+				// Start offset: 0x800228C0
 				// Variables:
 			// 		long y; // $v1
 			// 		long z; // $v0
 			/* end block 1.3.1 */
-			// End offset: 0x80022884
-			// End Line: 3149
+			// End offset: 0x800228C0
+			// End Line: 3137
 
 			/* begin block 1.3.2 */
-				// Start line: 3161
-				// Start offset: 0x80022928
+				// Start line: 3149
+				// Start offset: 0x80022964
 				// Variables:
 			// 		long y; // $v1
 			// 		long z; // $v0
 			/* end block 1.3.2 */
-			// End offset: 0x80022928
-			// End Line: 3161
+			// End offset: 0x80022964
+			// End Line: 3149
 		/* end block 1.3 */
-		// End offset: 0x800229B8
-		// End Line: 3170
+		// End offset: 0x800229F4
+		// End Line: 3158
 
 		/* begin block 1.4 */
-			// Start line: 3174
-			// Start offset: 0x800229CC
+			// Start line: 3162
+			// Start offset: 0x80022A08
 			// Variables:
 		// 		long len; // $a2
 		// 		struct _Vector dv; // stack offset -64
 
 			/* begin block 1.4.1 */
-				// Start line: 3176
-				// Start offset: 0x800229CC
+				// Start line: 3164
+				// Start offset: 0x80022A08
 				// Variables:
 			// 		long _x0; // $a3
 			// 		long _y0; // $t0
@@ -2913,30 +2845,30 @@ void COLLIDE_InstanceList(_InstanceList *instanceList)
 			// 		struct _Vector *_v; // $v0
 			// 		struct _SVector *_v1; // $t2
 			/* end block 1.4.1 */
-			// End offset: 0x800229CC
-			// End Line: 3176
+			// End offset: 0x80022A08
+			// End Line: 3164
 
 			/* begin block 1.4.2 */
-				// Start line: 3176
-				// Start offset: 0x800229CC
+				// Start line: 3164
+				// Start offset: 0x80022A08
 				// Variables:
 			// 		long a; // stack offset -48
 			// 		long b; // stack offset -44
 			// 		long c; // stack offset -40
 			/* end block 1.4.2 */
-			// End offset: 0x800229CC
-			// End Line: 3176
+			// End offset: 0x80022A08
+			// End Line: 3164
 		/* end block 1.4 */
-		// End offset: 0x80022BCC
-		// End Line: 3198
+		// End offset: 0x80022C08
+		// End Line: 3186
 	/* end block 1 */
-	// End offset: 0x80022BD0
-	// End Line: 3201
+	// End offset: 0x80022C0C
+	// End Line: 3189
 
 	/* begin block 2 */
-		// Start line: 6122
+		// Start line: 6086
 	/* end block 2 */
-	// End Line: 6123
+	// End Line: 6087
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
@@ -2950,29 +2882,19 @@ long COLLIDE_SphereAndHFace
   undefined4 in_zero;
   undefined4 in_at;
   int iVar3;
-  int iVar4;
-  _HVertex *p_Var5;
-  uint uVar6;
-  int iVar7;
-  uint uVar8;
-  int iVar9;
-  long lVar10;
-  short local_40;
-  short local_3c;
-  short local_38;
-  int local_30;
-  int local_2c;
-  int local_28 [2];
+  _HVertex *p_Var4;
+  short sStack64;
+  short sStack60;
+  short sStack56;
   
-  p_Var5 = hfaceInfo->vertex0;
-  lVar10 = 0;
+  p_Var4 = hfaceInfo->vertex0;
   if ((hfaceInfo->hface->attr & 0x40) == 0) {
     *edge = 1;
-    DAT_1f80005c = CONCAT22((sphere->position).y - p_Var5->y,(sphere->position).x - p_Var5->x);
-    DAT_1f800060 = CONCAT22(oldPos->x - p_Var5->x,(sphere->position).z - p_Var5->z);
-    _DAT_1f800064 = CONCAT22(oldPos->z - p_Var5->z,oldPos->y - p_Var5->y);
-    _DAT_1f800068 = *(undefined4 *)p_Var5;
-    DAT_1f80006c = CONCAT22(DAT_1f80006c._2_2_,p_Var5->z);
+    DAT_1f80005c = CONCAT22((sphere->position).y - p_Var4->y,(sphere->position).x - p_Var4->x);
+    DAT_1f800060 = CONCAT22(oldPos->x - p_Var4->x,(sphere->position).z - p_Var4->z);
+    _DAT_1f800064 = CONCAT22(oldPos->z - p_Var4->z,oldPos->y - p_Var4->y);
+    _DAT_1f800068 = *(undefined4 *)p_Var4;
+    DAT_1f80006c = CONCAT22(DAT_1f80006c._2_2_,p_Var4->z);
     DAT_1f800054 = *(undefined4 *)&hfaceInfo->normal;
     DAT_1f800058 = *(undefined4 *)&(hfaceInfo->normal).z;
     setCopControlWord(2,0,DAT_1f80005c);
@@ -2986,9 +2908,13 @@ long COLLIDE_SphereAndHFace
     _DAT_1f80007c = getCopReg(2,0x19);
     _DAT_1f800080 = getCopReg(2,0x1a);
     _DAT_1f800084 = getCopReg(2,0x1b);
-    lVar10 = 0;
-    if (((_DAT_1f80007c <= _DAT_1f800080) && (lVar10 = 0, _DAT_1f80007c < (int)(uint)sphere->radius)
-        ) && (lVar10 = 0, (int)-(uint)sphere->radius <= _DAT_1f800080)) {
+    if (_DAT_1f800080 < _DAT_1f80007c) {
+      return 0;
+    }
+    if (_DAT_1f80007c < (int)(uint)sphere->radius) {
+      if (_DAT_1f800080 < (int)-(uint)sphere->radius) {
+        return 0;
+      }
       if (_DAT_1f80007c < 0) {
         iVar3 = COLLIDE_IntersectLineAndPlane_S
                           (&DAT_1f800090,oldPos,sphere,&DAT_1f800054,_DAT_1f800084);
@@ -3004,112 +2930,31 @@ long COLLIDE_SphereAndHFace
                         ((_SVector *)hfaceInfo->vertex0,(_SVector *)hfaceInfo->vertex1,
                          (_SVector *)hfaceInfo->vertex2,(_SVector *)&DAT_1f800090,
                          (_SVector *)&DAT_1f800054);
-      if (iVar3 == 0) {
-        COLLIDE_NearestPointOnLine_S
-                  (&DAT_1f800088,(uint *)hfaceInfo->vertex0,(uint *)hfaceInfo->vertex1,
-                   (uint *)sphere);
-        setCopReg(2,0x4800,(int)(sphere->position).x - (int)(short)DAT_1f800088);
-        setCopReg(2,0x5000,(int)(sphere->position).y - (int)DAT_1f800088._2_2_);
-        setCopReg(2,0x5800,(int)(sphere->position).z - (int)(short)DAT_1f80008c);
-        copFunction(2,0xa00428);
-        iVar7 = getCopReg(2,0xc800);
-        iVar4 = getCopReg(2,0xd000);
-        iVar3 = getCopReg(2,0xd800);
-        uVar8 = iVar7 + iVar4 + iVar3;
-        if (sphere->radiusSquared <= uVar8) {
-          COLLIDE_NearestPointOnLine_S
-                    (&DAT_1f800090,(uint *)hfaceInfo->vertex1,(uint *)hfaceInfo->vertex2,
-                     (uint *)sphere);
-          setCopReg(2,0x4800,(int)(sphere->position).x - (int)(short)DAT_1f800090);
-          setCopReg(2,0x5000,(int)(sphere->position).y - (int)DAT_1f800090._2_2_);
-          setCopReg(2,0x5800,(int)(sphere->position).z - (int)(short)DAT_1f800094);
-          copFunction(2,0xa00428);
-          iVar7 = getCopReg(2,0xc800);
-          iVar4 = getCopReg(2,0xd000);
-          iVar3 = getCopReg(2,0xd800);
-          uVar6 = iVar7 + iVar4 + iVar3;
-          if (uVar6 < uVar8) {
-            DAT_1f800088 = DAT_1f800090;
-            DAT_1f80008c = DAT_1f800094;
-            uVar8 = uVar6;
-          }
-          if (sphere->radiusSquared <= uVar8) {
-            COLLIDE_NearestPointOnLine_S
-                      (&DAT_1f800090,(uint *)hfaceInfo->vertex2,(uint *)hfaceInfo->vertex0,
-                       (uint *)sphere);
-            setCopReg(2,0x4800,(int)(sphere->position).x - (int)(short)DAT_1f800090);
-            setCopReg(2,0x5000,(int)(sphere->position).y - (int)DAT_1f800090._2_2_);
-            setCopReg(2,0x5800,(int)(sphere->position).z - (int)(short)DAT_1f800094);
-            copFunction(2,0xa00428);
-            iVar7 = getCopReg(2,0xc800);
-            iVar4 = getCopReg(2,0xd000);
-            iVar3 = getCopReg(2,0xd800);
-            uVar6 = iVar7 + iVar4 + iVar3;
-            if (uVar6 < uVar8) {
-              DAT_1f800088 = DAT_1f800090;
-              DAT_1f80008c = DAT_1f800094;
-              uVar8 = uVar6;
-            }
-            if (sphere->radiusSquared <= uVar8) {
-              return 0;
-            }
-          }
-        }
-        iVar3 = (int)(sphere->position).x - (int)(short)DAT_1f800088;
-        iVar4 = (int)(sphere->position).y - (int)DAT_1f800088._2_2_;
-        iVar7 = (int)(sphere->position).z - (int)(short)DAT_1f80008c;
-        local_30 = iVar3;
-        if (iVar3 < 0) {
-          local_30 = -iVar3;
-        }
-        local_2c = iVar4;
-        if (iVar4 < 0) {
-          local_2c = -iVar4;
-        }
-        local_28[0] = iVar7;
-        if (iVar7 < 0) {
-          local_28[0] = -iVar7;
-        }
-        MATH3D_Sort3VectorCoords(&local_30,&local_2c,local_28);
-        intersect->x = (short)DAT_1f800088;
-        intersect->y = DAT_1f800088._2_2_;
-        intersect->z = (short)DAT_1f80008c;
-        iVar9 = local_28[0] * 0x1e + local_2c * 0xc + local_30 * 9;
-        if (iVar9 == 0) {
-          local_40 = (short)((int)((int)(short)DAT_1f800054 * (uint)sphere->radius) >> 0xc);
-          local_3c = (short)((int)((int)DAT_1f800054._2_2_ * (uint)sphere->radius) >> 0xc);
-          local_38 = (short)((int)((int)(short)DAT_1f800058 * (uint)sphere->radius) >> 0xc);
-        }
-        else {
-          local_3c = (short)((int)(iVar4 * (uint)sphere->radius * 0x20) / iVar9);
-          local_38 = (short)((int)(iVar7 * (uint)sphere->radius * 0x20) / iVar9);
-          local_40 = (short)((int)(iVar3 * (uint)sphere->radius * 0x20) / iVar9);
-        }
-        (sphere->position).x = local_40 + (short)DAT_1f800088;
-        (sphere->position).y = local_3c + DAT_1f800088._2_2_;
-        lVar10 = 1;
-        (sphere->position).z = local_38 + (short)DAT_1f80008c;
-      }
-      else {
-        DAT_1f800088 = DAT_1f800090;
-        DAT_1f80008c = DAT_1f80008c & 0xffff0000 | DAT_1f800094 & 0xffff;
+      if (iVar3 != 0) {
+        DAT_1f800088._0_2_ = (short)DAT_1f800090;
+        DAT_1f800088._2_2_ = DAT_1f800090._2_2_;
+        DAT_1f80008c._0_2_ = (short)DAT_1f800094;
         intersect->x = (short)DAT_1f800090;
         intersect->y = DAT_1f800088._2_2_;
         intersect->z = (short)DAT_1f80008c;
         uVar1 = sphere->radius;
         uVar2 = sphere->radius;
-        local_40 = (short)((int)((int)(short)DAT_1f800054 * (uint)sphere->radius) >> 0xc);
-        (sphere->position).x = local_40 + (short)DAT_1f800088;
-        local_3c = (short)((int)((int)DAT_1f800054._2_2_ * (uint)uVar1) >> 0xc);
-        (sphere->position).y = local_3c + DAT_1f800088._2_2_;
-        local_38 = (short)((int)((int)(short)DAT_1f800058 * (uint)uVar2) >> 0xc);
-        (sphere->position).z = local_38 + (short)DAT_1f80008c;
+        sStack64 = (short)((int)((int)(short)DAT_1f800054 * (uint)sphere->radius) >> 0xc);
+        (sphere->position).x = sStack64 + (short)DAT_1f800088;
+        sStack60 = (short)((int)((int)DAT_1f800054._2_2_ * (uint)uVar1) >> 0xc);
+        (sphere->position).y = sStack60 + DAT_1f800088._2_2_;
+        sStack56 = (short)((int)((int)(short)DAT_1f800058 * (uint)uVar2) >> 0xc);
+        (sphere->position).z = sStack56 + (short)DAT_1f80008c;
         *edge = 0;
-        lVar10 = -1;
+        return -1;
       }
+                    /* WARNING: Subroutine does not return */
+      COLLIDE_NearestPointOnLine_S
+                (&DAT_1f800088,(uint *)hfaceInfo->vertex0,(uint *)hfaceInfo->vertex1,(uint *)sphere)
+      ;
     }
   }
-  return lVar10;
+  return 0;
 }
 
 
@@ -3117,10 +2962,10 @@ long COLLIDE_SphereAndHFace
 // decompiled code
 // original method signature: 
 // long /*$ra*/ COLLIDE_SAndT(struct SCollideInfo *scollideInfo /*stack 0*/, struct Level *level /*stack 4*/)
- // line 3243, offset 0x80022bf8
+ // line 3231, offset 0x80022c34
 	/* begin block 1 */
-		// Start line: 3244
-		// Start offset: 0x80022BF8
+		// Start line: 3232
+		// Start offset: 0x80022C34
 		// Variables:
 	// 		struct SandTScratch *CSpad; // $s0
 	// 		void **stack; // $s1
@@ -3129,8 +2974,8 @@ long COLLIDE_SphereAndHFace
 	// 		long curTree; // stack offset -44
 
 		/* begin block 1.1 */
-			// Start line: 3280
-			// Start offset: 0x80022C74
+			// Start line: 3268
+			// Start offset: 0x80022CB0
 			// Variables:
 		// 		short _x1; // $v1
 		// 		short _y1; // $a0
@@ -3138,29 +2983,29 @@ long COLLIDE_SphereAndHFace
 		// 		struct _SVector *_v0; // $s2
 		// 		struct _SVector *_v1; // $v0
 		/* end block 1.1 */
-		// End offset: 0x80022C74
-		// End Line: 3280
+		// End offset: 0x80022CB0
+		// End Line: 3268
 
 		/* begin block 1.2 */
-			// Start line: 3280
-			// Start offset: 0x80022C74
+			// Start line: 3268
+			// Start offset: 0x80022CB0
 			// Variables:
 		// 		long a; // stack offset -56
 		// 		long b; // stack offset -52
 		// 		long c; // stack offset -48
 		/* end block 1.2 */
-		// End offset: 0x80022C74
-		// End Line: 3280
+		// End offset: 0x80022CB0
+		// End Line: 3268
 
 		/* begin block 1.3 */
-			// Start line: 3314
-			// Start offset: 0x80022E64
+			// Start line: 3302
+			// Start offset: 0x80022EA0
 			// Variables:
 		// 		struct BSPTree *bsp; // $s4
 
 			/* begin block 1.3.1 */
-				// Start line: 3329
-				// Start offset: 0x80022EF0
+				// Start line: 3316
+				// Start offset: 0x80022F14
 				// Variables:
 			// 		short _x0; // $v0
 			// 		short _y0; // $v1
@@ -3171,12 +3016,12 @@ long COLLIDE_SphereAndHFace
 			// 		struct _SVector *_v; // $fp
 			// 		struct _Position *_v1; // $t0
 			/* end block 1.3.1 */
-			// End offset: 0x80022EF0
-			// End Line: 3329
+			// End offset: 0x80022F14
+			// End Line: 3316
 
 			/* begin block 1.3.2 */
-				// Start line: 3329
-				// Start offset: 0x80022EF0
+				// Start line: 3316
+				// Start offset: 0x80022F14
 				// Variables:
 			// 		short _x0; // $v0
 			// 		short _y0; // $v1
@@ -3186,12 +3031,12 @@ long COLLIDE_SphereAndHFace
 			// 		short _z1; // $a3
 			// 		struct _SVector *_v; // $s7
 			/* end block 1.3.2 */
-			// End offset: 0x80022EF0
-			// End Line: 3329
+			// End offset: 0x80022F14
+			// End Line: 3316
 
 			/* begin block 1.3.3 */
-				// Start line: 3329
-				// Start offset: 0x80022EF0
+				// Start line: 3316
+				// Start offset: 0x80022F14
 				// Variables:
 			// 		short _x0; // $v0
 			// 		short _y0; // $v1
@@ -3201,76 +3046,76 @@ long COLLIDE_SphereAndHFace
 			// 		short _z1; // $a3
 			// 		struct _Position *_v; // $s6
 			/* end block 1.3.3 */
-			// End offset: 0x80022EF0
-			// End Line: 3329
+			// End offset: 0x80022F14
+			// End Line: 3316
 
 			/* begin block 1.3.4 */
-				// Start line: 3244
-				// Start offset: 0x80022FF4
+				// Start line: 3232
+				// Start offset: 0x80023018
 				// Variables:
 			// 		struct _SVector *point; // $t0
 			// 		struct _BoundingBox *box; // $a3
 			/* end block 1.3.4 */
-			// End offset: 0x8002308C
-			// End Line: 3244
+			// End offset: 0x800230B0
+			// End Line: 3232
 
 			/* begin block 1.3.5 */
-				// Start line: 3365
-				// Start offset: 0x80023094
+				// Start line: 3352
+				// Start offset: 0x800230B8
 				// Variables:
 			// 		struct _TFace *tface; // $s3
 
 				/* begin block 1.3.5.1 */
-					// Start line: 3385
-					// Start offset: 0x80023138
+					// Start line: 3372
+					// Start offset: 0x8002315C
 					// Variables:
 				// 		struct _SVector *vertex0; // $a3
 
 					/* begin block 1.3.5.1.1 */
-						// Start line: 3244
-						// Start offset: 0x800231B0
+						// Start line: 3232
+						// Start offset: 0x800231D4
 						// Variables:
 					// 		short *nrmlArray; // $a0
 					// 		struct _SVector *nrml; // $a1
 
 						/* begin block 1.3.5.1.1.1 */
-							// Start line: 3244
-							// Start offset: 0x800231B0
+							// Start line: 3232
+							// Start offset: 0x800231D4
 							// Variables:
 						// 		short *sPtr; // $v1
 						/* end block 1.3.5.1.1.1 */
-						// End offset: 0x80023240
-						// End Line: 3244
+						// End offset: 0x80023264
+						// End Line: 3232
 					/* end block 1.3.5.1.1 */
-					// End offset: 0x80023240
-					// End Line: 3244
+					// End offset: 0x80023264
+					// End Line: 3232
 
 					/* begin block 1.3.5.1.2 */
-						// Start line: 3417
-						// Start offset: 0x800232D4
+						// Start line: 3404
+						// Start offset: 0x800232F8
 					/* end block 1.3.5.1.2 */
-					// End offset: 0x80023434
-					// End Line: 3469
+					// End offset: 0x8002345C
+					// End Line: 3456
 				/* end block 1.3.5.1 */
-				// End offset: 0x80023434
-				// End Line: 3470
+				// End offset: 0x8002345C
+				// End Line: 3457
 			/* end block 1.3.5 */
-			// End offset: 0x80023454
-			// End Line: 3473
+			// End offset: 0x8002347C
+			// End Line: 3460
 
 			/* begin block 1.3.6 */
-				// Start line: 3484
-				// Start offset: 0x8002347C
+				// Start line: 3471
+				// Start offset: 0x800234A4
 				// Variables:
 			// 		int plane_front_error; // $v0
 			// 		int plane_back_error; // $a3
 			/* end block 1.3.6 */
-			// End offset: 0x800235CC
-			// End Line: 3547
+			// End offset: 0x800235F4
+			// End Line: 3534
 
 			/* begin block 1.3.7 */
-				// Start line: 3551
-				// Start offset: 0x800235DC
+				// Start line: 3538
+				// Start offset: 0x80023604
 				// Variables:
 			// 		short _x0; // $v0
 			// 		short _y0; // $v1
@@ -3280,12 +3125,12 @@ long COLLIDE_SphereAndHFace
 			// 		short _z1; // $a3
 			// 		struct _Position *_v1; // $t0
 			/* end block 1.3.7 */
-			// End offset: 0x800235DC
-			// End Line: 3551
+			// End offset: 0x80023604
+			// End Line: 3538
 
 			/* begin block 1.3.8 */
-				// Start line: 3551
-				// Start offset: 0x800235DC
+				// Start line: 3538
+				// Start offset: 0x80023604
 				// Variables:
 			// 		short _x0; // $v0
 			// 		short _y0; // $v1
@@ -3294,12 +3139,12 @@ long COLLIDE_SphereAndHFace
 			// 		short _y1; // $a2
 			// 		short _z1; // $a3
 			/* end block 1.3.8 */
-			// End offset: 0x800235DC
-			// End Line: 3551
+			// End offset: 0x80023604
+			// End Line: 3538
 
 			/* begin block 1.3.9 */
-				// Start line: 3551
-				// Start offset: 0x800235DC
+				// Start line: 3538
+				// Start offset: 0x80023604
 				// Variables:
 			// 		short _x0; // $v0
 			// 		short _y0; // $v1
@@ -3308,15 +3153,15 @@ long COLLIDE_SphereAndHFace
 			// 		short _y1; // $a2
 			// 		short _z1; // $a3
 			/* end block 1.3.9 */
-			// End offset: 0x80023670
-			// End Line: 3553
+			// End offset: 0x80023698
+			// End Line: 3540
 		/* end block 1.3 */
-		// End offset: 0x80023670
-		// End Line: 3554
+		// End offset: 0x80023698
+		// End Line: 3541
 
 		/* begin block 1.4 */
-			// Start line: 3555
-			// Start offset: 0x80023688
+			// Start line: 3542
+			// Start offset: 0x800236B0
 			// Variables:
 		// 		short _x1; // $a0
 		// 		short _y1; // $a1
@@ -3324,54 +3169,34 @@ long COLLIDE_SphereAndHFace
 		// 		struct _Position *_v0; // $v0
 		// 		struct _Position *_v1; // $v1
 		/* end block 1.4 */
-		// End offset: 0x80023688
-		// End Line: 3555
+		// End offset: 0x800236B0
+		// End Line: 3542
 	/* end block 1 */
-	// End offset: 0x800236B4
-	// End Line: 3557
+	// End offset: 0x800236DC
+	// End Line: 3544
 
 	/* begin block 2 */
-		// Start line: 8066
+		// Start line: 8051
 	/* end block 2 */
-	// End Line: 8067
+	// End Line: 8052
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-int COLLIDE_SAndT(int *param_1,_Terrain **param_2)
+long COLLIDE_SAndT(SCollideInfo *scollideInfo,Level *level)
 
 {
-  byte bVar1;
-  short sVar2;
-  bool bVar3;
-  uint uVar4;
-  undefined4 in_zero;
-  undefined4 in_at;
-  short sVar5;
-  undefined4 *puVar6;
-  short *psVar7;
-  int iVar8;
-  _BSPNode *p_Var9;
-  long lVar10;
-  undefined2 *puVar11;
-  _Normal *p_Var12;
-  ushort uVar13;
-  int iVar14;
-  _TVertex *p_Var15;
-  _BSPNode *p_Var16;
-  _BSPNode *p_Var17;
-  ushort *puVar18;
-  _TFace *tface;
-  BSPTree *pBVar19;
-  _Terrain *terrain;
+  ushort uVar1;
+  _Sphere *p_Var2;
+  SVECTOR *pSVar3;
+  long lVar4;
+  BSPTree *pBVar5;
+  _Terrain *p_Var6;
   int local_38;
   int local_34;
   int local_30;
   int local_2c;
   
-  terrain = *param_2;
-  p_Var17 = (_BSPNode *)&DAT_1f80029c;
-  if (sGpffffb500 == 1000) {
-    DAT_1f800264 = (int)sGpffffb502;
+  p_Var6 = level->terrain;
+  if (gameTrackerX.gameData.asmData.MorphTime == 1000) {
+    DAT_1f800264 = (int)gameTrackerX.gameData.asmData.MorphType;
     if (DAT_1f800264 != 1) {
       DAT_1f800264 = 0;
     }
@@ -3379,34 +3204,34 @@ int COLLIDE_SAndT(int *param_1,_Terrain **param_2)
   else {
     DAT_1f800264 = 2;
   }
-  DAT_1f8001f4 = terrain->normalList;
-  DAT_1f800298 = terrain->vertexList;
-  DAT_1f800258 = (code *)param_1[2];
-  DAT_1f80025c = (_Instance *)param_1[5];
-  DAT_1f800270 = param_1[6];
-  puVar6 = (undefined4 *)*param_1;
-  DAT_1f80027c = *puVar6;
-  DAT_1f800280 = puVar6[1];
-  DAT_1f800284 = puVar6[2];
+  DAT_1f8001f4 = p_Var6->normalList;
+  DAT_1f800298 = p_Var6->vertexList;
+  DAT_1f800258 = scollideInfo->collideFunc;
+  DAT_1f80025c = scollideInfo->instance;
+  DAT_1f800270 = scollideInfo->prim;
+  p_Var2 = scollideInfo->sphere;
+  DAT_1f80027c = *(undefined4 *)&p_Var2->position;
+  DAT_1f800280 = *(uint *)&(p_Var2->position).z;
+  DAT_1f800284 = p_Var2->radiusSquared;
   DAT_1f800288 = 0;
-  DAT_1f80028c = uGpffff86b0;
-  DAT_1f800290 = uGpffff86b4;
-  psVar7 = (short *)param_1[1];
-  DAT_1f800268 = *psVar7;
-  DAT_1f80026a = psVar7[1];
-  DAT_1f80026c = psVar7[2];
+  DAT_1f80028c = 0;
+  DAT_1f800290 = 0;
+  pSVar3 = scollideInfo->oldPos;
+  DAT_1f800268 = pSVar3->vx;
+  DAT_1f80026a = pSVar3->vy;
+  DAT_1f80026c = pSVar3->vz;
   DAT_1f80027c._2_2_ = (short)((uint)DAT_1f80027c >> 0x10);
   DAT_1f800250 = (short)DAT_1f80027c;
-  DAT_1f800248._0_2_ = (short)DAT_1f80027c - DAT_1f800268;
+  DAT_1f800248 = (short)DAT_1f80027c - DAT_1f800268;
   DAT_1f800252 = DAT_1f80027c._2_2_;
-  DAT_1f800254._0_2_ = (short)DAT_1f800280;
-  DAT_1f800248._2_2_ = DAT_1f80027c._2_2_ - DAT_1f80026a;
-  local_38 = (int)(short)DAT_1f800248;
+  DAT_1f800254 = (short)DAT_1f800280;
+  DAT_1f80024a = DAT_1f80027c._2_2_ - DAT_1f80026a;
+  local_38 = (int)DAT_1f800248;
   DAT_1f80024c = (short)DAT_1f800280 - DAT_1f80026c;
   if (local_38 < 0) {
     local_38 = -local_38;
   }
-  local_34 = (int)DAT_1f800248._2_2_;
+  local_34 = (int)DAT_1f80024a;
   local_30 = (int)DAT_1f80024c;
   if (local_34 < 0) {
     local_34 = -local_34;
@@ -3416,245 +3241,57 @@ int COLLIDE_SAndT(int *param_1,_Terrain **param_2)
   }
   MATH3D_Sort3VectorCoords(&local_38,&local_34,&local_30);
   DAT_1f800294 = local_30 * 0x1e + local_34 * 0xc + local_38 * 9;
-  iVar8 = 0;
+  lVar4 = 0;
   if (DAT_1f800294 != 0) {
-    DAT_1f800248._0_2_ = (short)((int)DAT_1f800250 + (int)DAT_1f800268 >> 1);
-    DAT_1f800248._2_2_ = (short)((int)DAT_1f800252 + (int)DAT_1f80026a >> 1);
-    DAT_1f80024c = (short)((int)(short)DAT_1f800254 + (int)DAT_1f80026c >> 1);
+    DAT_1f800248 = (short)((int)DAT_1f800250 + (int)DAT_1f800268 >> 1);
+    DAT_1f80024a = (short)((int)DAT_1f800252 + (int)DAT_1f80026a >> 1);
+    DAT_1f80024c = (short)((int)DAT_1f800254 + (int)DAT_1f80026c >> 1);
     DAT_1f800294 = DAT_1f800294 / 2 + (DAT_1f800280 >> 0x10);
     if (DAT_1f800264 == 2) {
       DAT_1f800294 = DAT_1f800294 + 0x800;
     }
     local_2c = 0;
-    if (0 < terrain->numBSPTrees) {
+    if (0 < p_Var6->numBSPTrees) {
       do {
-        pBVar19 = terrain->BSPTreeArray + local_2c;
-        if (((-1 < pBVar19->ID) &&
-            ((uVar13 = pBVar19->flags, (uVar13 & 0x4000) == 0 || (cGpffffb711 != '\0')))) &&
-           (((uVar13 & 0x2000) == 0 || (cGpffffb766 != '\0')))) {
-          if ((uVar13 & 0x102) == 0) {
-            DAT_1f800224._2_2_ = pBVar19->ID;
-            DAT_1f800268 = DAT_1f800268 - (pBVar19->globalOffset).x;
-            DAT_1f8001d0 = DAT_1f80026a - (pBVar19->globalOffset).y;
-            DAT_1f8001d2 = DAT_1f80026c - (pBVar19->globalOffset).z;
-            DAT_1f800248._0_2_ = (short)DAT_1f800248 - (pBVar19->globalOffset).x;
-            DAT_1f800248._2_2_ = DAT_1f800248._2_2_ - (pBVar19->globalOffset).y;
-            DAT_1f80024c = DAT_1f80024c - (pBVar19->globalOffset).z;
-            DAT_1f80027c._0_2_ = (short)DAT_1f80027c - (pBVar19->globalOffset).x;
-            DAT_1f80027c._2_2_ = DAT_1f80027c._2_2_ - (pBVar19->globalOffset).y;
-            uVar13 = (short)DAT_1f800280 - (pBVar19->globalOffset).z;
-            DAT_1f800280 = DAT_1f800280 & 0xffff0000 | (uint)uVar13;
-            _DAT_1f8001c8 = CONCAT22(DAT_1f80027c._2_2_,(short)DAT_1f80027c);
-            _DAT_1f8001cc = CONCAT22(DAT_1f800268,uVar13);
+        pBVar5 = p_Var6->BSPTreeArray + local_2c;
+        if ((-1 < pBVar5->ID) &&
+           ((uVar1 = pBVar5->flags, (uVar1 & 0x4000) == 0 ||
+            (gameTrackerX.raziel_collide_override != '\0')))) {
+          if ((uVar1 & 0x102) == 0) {
+            DAT_1f800226 = pBVar5->ID;
+            DAT_1f8001ce = DAT_1f800268 - (pBVar5->globalOffset).x;
+            DAT_1f8001d0 = DAT_1f80026a - (pBVar5->globalOffset).y;
+            DAT_1f8001d2 = DAT_1f80026c - (pBVar5->globalOffset).z;
+            DAT_1f800248 = DAT_1f800248 - (pBVar5->globalOffset).x;
+            DAT_1f80024a = DAT_1f80024a - (pBVar5->globalOffset).y;
+            DAT_1f80024c = DAT_1f80024c - (pBVar5->globalOffset).z;
+            DAT_1f8001c8 = (short)DAT_1f80027c - (pBVar5->globalOffset).x;
+            DAT_1f8001ca = DAT_1f80027c._2_2_ - (pBVar5->globalOffset).y;
+            DAT_1f8001cc = (short)DAT_1f800280 - (pBVar5->globalOffset).z;
+            DAT_1f80027c = CONCAT22(DAT_1f8001ca,DAT_1f8001c8);
+            DAT_1f800280 = DAT_1f800280 & 0xffff0000 | (uint)DAT_1f8001cc;
+                    /* WARNING: Subroutine does not return */
+            DAT_1f80029c = &DAT_1f80029c;
+            DAT_1f800268 = DAT_1f8001ce;
             DAT_1f80026a = DAT_1f8001d0;
             DAT_1f80026c = DAT_1f8001d2;
-            *(_BSPNode **)&(p_Var17->sphere).position = p_Var17;
             SetRotMatrix((undefined4 *)&DAT_1f8001c8);
-            p_Var9 = pBVar19->bspRoot;
-            p_Var17 = (_BSPNode *)&(p_Var17->sphere).position.z;
-            *(_BSPNode **)&(p_Var17->sphere).position = p_Var9;
-            p_Var16 = p_Var17;
-            if (p_Var9 != p_Var17) {
-              do {
-                iVar8 = *(int *)&(p_Var16->sphere).position;
-                p_Var17 = (_BSPNode *)&p_Var16[-1].front_material_error;
-                if ((*(ushort *)(iVar8 + 0xe) & 2) == 0) {
-                  setCopReg(2,in_zero,*(undefined4 *)(iVar8 + 8));
-                  setCopReg(2,in_at,*(undefined4 *)(iVar8 + 0xc));
-                  copFunction(2,0x486012);
-                  DAT_1f8001e8 = getCopReg(2,0x19);
-                  _DAT_1f8001ec = getCopReg(2,0x1a);
-                  _DAT_1f8001f0 = getCopReg(2,0x1b);
-                  DAT_1f8001e8 = DAT_1f8001e8 - *(int *)(iVar8 + 0x10);
-                  _DAT_1f8001ec = _DAT_1f8001ec - *(int *)(iVar8 + 0x10);
-                  if (DAT_1f800264 == 0) {
-                    sVar5 = *(short *)(iVar8 + 0x28);
-                    sVar2 = *(short *)(iVar8 + 0x2a);
-                  }
-                  else {
-                    sVar5 = *(short *)(iVar8 + 0x24);
-                    sVar2 = *(short *)(iVar8 + 0x26);
-                  }
-                  iVar14 = (DAT_1f800280 >> 0x10) + (int)sVar5;
-                  if (_DAT_1f8001ec < iVar14) {
-                    iVar14 = (int)sVar2 - (DAT_1f800280 >> 0x10);
-                    if (iVar14 < _DAT_1f8001ec) {
-                      if (DAT_1f8001e8 < _DAT_1f8001ec) goto LAB_8002359c;
-                      if (*(int *)(iVar8 + 0x14) != 0) {
-                        *(int *)&(p_Var16->sphere).position = *(int *)(iVar8 + 0x14);
-                        p_Var17 = p_Var16;
-                      }
-                      iVar8 = *(int *)(iVar8 + 0x18);
-                    }
-                    else {
-                      if ((iVar14 <= DAT_1f8001e8) && (*(int *)(iVar8 + 0x14) != 0)) {
-                        *(int *)&(p_Var16->sphere).position = *(int *)(iVar8 + 0x14);
-                        p_Var17 = p_Var16;
-                      }
-                      iVar8 = *(int *)(iVar8 + 0x18);
-                    }
-                  }
-                  else {
-                    if (DAT_1f8001e8 <= iVar14) {
-LAB_8002359c:
-                      if (*(int *)(iVar8 + 0x18) != 0) {
-                        *(int *)&(p_Var16->sphere).position = *(int *)(iVar8 + 0x18);
-                        p_Var17 = p_Var16;
-                      }
-                    }
-                    iVar8 = *(int *)(iVar8 + 0x14);
-                  }
-                  if (iVar8 != 0) {
-                    p_Var17 = (_BSPNode *)&(p_Var17->sphere).position.z;
-                    *(int *)&(p_Var17->sphere).position = iVar8;
-                  }
-                }
-                else {
-                  bVar3 = false;
-                  iVar14 = (int)(short)DAT_1f800294;
-                  if (((((short)DAT_1f800248 - iVar14 < (int)*(short *)(iVar8 + 0x16)) &&
-                       ((int)*(short *)(iVar8 + 0x10) < (short)DAT_1f800248 + iVar14)) &&
-                      (DAT_1f800248._2_2_ - iVar14 < (int)*(short *)(iVar8 + 0x18))) &&
-                     (((int)*(short *)(iVar8 + 0x12) < DAT_1f800248._2_2_ + iVar14 &&
-                      (DAT_1f80024c - iVar14 < (int)*(short *)(iVar8 + 0x1a))))) {
-                    bVar3 = (int)*(short *)(iVar8 + 0x14) < DAT_1f80024c + iVar14;
-                  }
-                  if (bVar3) {
-                    _DAT_1f8001c8 = DAT_1f80027c;
-                    uVar4 = _DAT_1f8001cc & 0xffff0000;
-                    _DAT_1f8001cc = uVar4 | DAT_1f800280 & 0xffff;
-                    DAT_1f8001ce = (ushort)(uVar4 >> 0x10);
-                    setCopControlWord(2,0,DAT_1f80027c);
-                    setCopControlWord(2,0x800,_DAT_1f8001cc);
-                    DAT_1f80028a = *(short *)(iVar8 + 0xc);
-                    tface = *(_TFace **)(iVar8 + 8);
-                    puVar18 = &(tface->face).v2;
-                    if (DAT_1f80028a != 0) {
-                      do {
-                        bVar1 = *(byte *)(puVar18 + 1);
-                        if (((((bVar1 & DAT_1f80028c) == 0) || ((bVar1 & DAT_1f800290) != 0)) &&
-                            ((puVar18[3] == 0xffff ||
-                             ((*(ushort *)((int)&terrain->StartTextureList->attr + (uint)puVar18[3])
-                              & 0x2000) == 0)))) && ((bVar1 & 8) == 0)) {
-                          if ((DAT_1f800264 == 2) &&
-                             ((uint)puVar18[2] !=
-                              (int)terrain->morphNormalIdx
-                                   [(int)((int)tface - (int)terrain->faceList) * -0x55555555 >> 2]))
-                          {
-                            COLLIDE_MakeNormal(terrain,tface,(_SVector *)&DAT_1f800274);
-                          }
-                          else {
-                            iVar8 = (int)(short)puVar18[2];
-                            if (iVar8 < 0) {
-                              p_Var12 = (_Normal *)((int)DAT_1f8001f4 + iVar8 * -6);
-                              DAT_1f800274 = CONCAT22(-p_Var12->y,-(p_Var12->x & 0x1fffU));
-                              DAT_1f800278 = DAT_1f800278 & 0xffff0000 | (uint)(ushort)-p_Var12->z;
-                            }
-                            else {
-                              DAT_1f800274 = *(uint *)(&DAT_1f8001f4->x + iVar8 * 3) & 0xffff1fff;
-                              DAT_1f800278 = DAT_1f800278 & 0xffff0000 |
-                                             (uint)(ushort)(&DAT_1f8001f4->x + iVar8 * 3)[1];
-                            }
-                          }
-                          p_Var15 = DAT_1f800298 + (tface->face).v0;
-                          setCopControlWord(2,0x1800,*(undefined4 *)&p_Var15->vertex);
-                          setCopControlWord(2,0x2000,*(undefined4 *)&(p_Var15->vertex).z);
-                          setCopReg(2,in_zero,DAT_1f800274);
-                          setCopReg(2,in_at,DAT_1f800278);
-                          copFunction(2,0x486012);
-                          DAT_1f8001e8 = getCopReg(2,0x19);
-                          _DAT_1f8001ec = getCopReg(2,0x1a);
-                          _DAT_1f8001f0 = getCopReg(2,0x1b);
-                          if (DAT_1f8001e8 <= _DAT_1f8001ec) {
-                            if ((DAT_1f8001e8 - _DAT_1f8001f0 < (int)(DAT_1f800280 >> 0x10)) &&
-                               ((int)-(DAT_1f800280 >> 0x10) <= _DAT_1f8001ec - _DAT_1f8001f0)) {
-                              DAT_1f800240 = DAT_1f800298 + (short)puVar18[-1];
-                              DAT_1f800244 = DAT_1f800298 + (short)*puVar18;
-                              DAT_1f800234 = DAT_1f800274;
-                              _DAT_1f800238 = DAT_1f800278;
-                              DAT_1f800230 = tface;
-                              _DAT_1f80023c = p_Var15;
-                              lVar10 = COLLIDE_SphereAndHFace
-                                                 ((_Sphere *)&DAT_1f80027c,
-                                                  (_Position *)&DAT_1f800268,
-                                                  (_HFaceInfo *)&DAT_1f800228,
-                                                  (_SVector *)&DAT_1f800218,&DAT_1f800260);
-                              if (lVar10 != 0) {
-                                if (DAT_1f800260 == 0) {
-                                  DAT_1f8001fc._0_1_ = 8;
-                                }
-                                else {
-                                  DAT_1f8001fc._0_1_ = 4;
-                                }
-                                DAT_1f8001fe = 1;
-                                DAT_1f8001ff = 3;
-                                _DAT_1f800208 = DAT_1f80025c;
-                                DAT_1f8001fc._1_1_ = *(undefined *)(param_1 + 4);
-                                DAT_1f800200 = DAT_1f800270;
-                                DAT_1f800220._2_2_ = DAT_1f80027c._2_2_ - DAT_1f8001ca;
-                                DAT_1f800220._0_2_ = (short)DAT_1f80027c - DAT_1f8001c8;
-                                DAT_1f800224._0_2_ = (short)DAT_1f800280 - DAT_1f8001cc;
-                                _DAT_1f8001f8 = param_2;
-                                _DAT_1f800204 = tface;
-                                DAT_1f80020c = pBVar19;
-                                if (DAT_1f80025c != (_Instance *)0x0) {
-                                  *(undefined2 **)&DAT_1f80025c->collideInfo = &DAT_1f8001f8;
-                                  if (DAT_1f800258 != (code *)0x0) {
-                                    (*DAT_1f800258)(DAT_1f80025c,&gp0xffffb4f8);
-                                  }
-                                }
-                                DAT_1f800288 = 1;
-                                _DAT_1f8001c8 = DAT_1f80027c;
-                                _DAT_1f8001cc = DAT_1f800280 & 0xffff | (uint)DAT_1f8001ce << 0x10;
-                              }
-                              SetRotMatrix((undefined4 *)&DAT_1f8001c8);
-                            }
-                          }
-                        }
-                        puVar18 = puVar18 + 6;
-                        sVar5 = DAT_1f80028a + -1;
-                        bVar3 = DAT_1f80028a != 1;
-                        tface = tface + 1;
-                        DAT_1f80028a = sVar5;
-                      } while (bVar3);
-                    }
-                    _DAT_1f8001c8 = DAT_1f80027c;
-                    _DAT_1f8001cc = DAT_1f800280 & 0xffff | (uint)DAT_1f8001ce << 0x10;
-                    setCopControlWord(2,0,DAT_1f80027c);
-                    setCopControlWord(2,0x800,_DAT_1f8001cc);
-                  }
-                }
-                p_Var16 = p_Var17;
-              } while (*(_BSPNode **)&(p_Var17->sphere).position != p_Var17);
-            }
-            DAT_1f800268 = DAT_1f800268 + (pBVar19->globalOffset).x;
-            DAT_1f80026a = DAT_1f80026a + (pBVar19->globalOffset).y;
-            DAT_1f80026c = DAT_1f80026c + (pBVar19->globalOffset).z;
-            DAT_1f800248._0_2_ = (short)DAT_1f800248 + (pBVar19->globalOffset).x;
-            DAT_1f800248._2_2_ = DAT_1f800248._2_2_ + (pBVar19->globalOffset).y;
-            DAT_1f80024c = DAT_1f80024c + (pBVar19->globalOffset).z;
-            DAT_1f80027c = CONCAT22(DAT_1f80027c._2_2_ + (pBVar19->globalOffset).y,
-                                    (short)DAT_1f80027c + (pBVar19->globalOffset).x);
-            DAT_1f800280 = DAT_1f800280 & 0xffff0000 |
-                           (uint)(ushort)((short)DAT_1f800280 + (pBVar19->globalOffset).z);
           }
-          else {
-            if ((uVar13 & 0xe0) != 0) {
+          if ((uVar1 & 0xe0) != 0) {
                     /* WARNING: Subroutine does not return */
-              INSTANCE_Query(DAT_1f80025c,1);
-            }
+            INSTANCE_Query(DAT_1f80025c,1);
           }
         }
         local_2c = local_2c + 1;
-      } while (local_2c < terrain->numBSPTrees);
+      } while (local_2c < p_Var6->numBSPTrees);
     }
-    puVar11 = (undefined2 *)*param_1;
-    *puVar11 = (short)DAT_1f80027c;
-    puVar11[1] = DAT_1f80027c._2_2_;
-    puVar11[2] = (short)DAT_1f800280;
-    iVar8 = (int)DAT_1f800288;
+    p_Var2 = scollideInfo->sphere;
+    (p_Var2->position).x = (short)DAT_1f80027c;
+    (p_Var2->position).y = DAT_1f80027c._2_2_;
+    (p_Var2->position).z = (short)DAT_1f800280;
+    lVar4 = (long)DAT_1f800288;
   }
-  return iVar8;
+  return lVar4;
 }
 
 
@@ -3662,60 +3299,38 @@ LAB_8002359c:
 // decompiled code
 // original method signature: 
 // long /*$ra*/ COLLIDE_SphereAndTerrain(struct SCollideInfo *scollideInfo /*$s5*/, struct Level *level /*$s4*/)
- // line 3770, offset 0x800236e4
+ // line 3756, offset 0x8002370c
 	/* begin block 1 */
-		// Start line: 3771
-		// Start offset: 0x800236E4
+		// Start line: 3757
+		// Start offset: 0x8002370C
 		// Variables:
 	// 		int result; // $s3
 	// 		int d; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 3771
-			// Start offset: 0x800236E4
+			// Start line: 3757
+			// Start offset: 0x8002370C
 			// Variables:
 		// 		int in_warpRoom; // $s2
 		// 		struct _StreamUnit *stream; // $v0
 		/* end block 1.1 */
-		// End offset: 0x800237A4
-		// End Line: 3800
+		// End offset: 0x800237D0
+		// End Line: 3786
 	/* end block 1 */
-	// End offset: 0x800237A4
-	// End Line: 3802
+	// End offset: 0x800237D0
+	// End Line: 3788
 
 	/* begin block 2 */
-		// Start line: 9618
+		// Start line: 9598
 	/* end block 2 */
-	// End Line: 9619
+	// End Line: 9599
 
-undefined4 COLLIDE_SphereAndTerrain(undefined4 param_1,char *param_2)
+long COLLIDE_SphereAndTerrain(SCollideInfo *scollideInfo,Level *level)
 
 {
-  undefined4 uVar1;
-  _StreamUnit *p_Var2;
-  long lVar3;
-  undefined *puVar4;
-  int iVar5;
-  ushort uVar6;
-  
-  uVar1 = COLLIDE_SAndT();
-  uVar6 = 0;
-  p_Var2 = STREAM_GetStreamUnitWithID(*(long *)(param_2 + 0xf8));
-  iVar5 = 0;
-  if (p_Var2 != (_StreamUnit *)0x0) {
-    uVar6 = p_Var2->flags & 1;
-  }
-  puVar4 = &gp0xffffbe6c;
-  do {
-    if ((((*(short *)(puVar4 + 4) == 2) && (*(char **)(puVar4 + 8) != param_2)) &&
-        ((uVar6 == 0 || ((*(ushort *)(puVar4 + 6) & 1) == 0)))) &&
-       (lVar3 = MEMPACK_MemoryValidFunc(*(char **)(puVar4 + 8)), lVar3 != 0)) {
-      uVar1 = COLLIDE_SAndT(param_1,*(undefined4 *)(puVar4 + 8));
-    }
-    iVar5 = iVar5 + 1;
-    puVar4 = puVar4 + 0x40;
-  } while (iVar5 < 0x10);
-  return uVar1;
+  COLLIDE_SAndT(scollideInfo,level);
+                    /* WARNING: Subroutine does not return */
+  STREAM_GetStreamUnitWithID(level->streamUnitID);
 }
 
 
@@ -3723,10 +3338,10 @@ undefined4 COLLIDE_SphereAndTerrain(undefined4 param_1,char *param_2)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ COLLIDE_InstanceTerrain(struct _Instance *instance /*stack 0*/, struct Level *level /*stack 4*/)
- // line 4238, offset 0x800237cc
+ // line 4222, offset 0x800237f8
 	/* begin block 1 */
-		// Start line: 4239
-		// Start offset: 0x800237CC
+		// Start line: 4223
+		// Start offset: 0x800237F8
 		// Variables:
 	// 		struct _Vector *newPosVec; // stack offset -60
 	// 		struct _Vector *oldPosVec; // stack offset -56
@@ -3741,66 +3356,57 @@ undefined4 COLLIDE_SphereAndTerrain(undefined4 param_1,char *param_2)
 	// 		long flags; // stack offset -64
 
 		/* begin block 1.1 */
-			// Start line: 4273
-			// Start offset: 0x80023898
+			// Start line: 4251
+			// Start offset: 0x8002388C
 			// Variables:
 		// 		int i; // $s7
 		// 		struct _HModel *hmodel; // $v0
 		// 		struct _HPrim *hprim; // $s6
 		/* end block 1.1 */
-		// End offset: 0x80023A04
-		// End Line: 4317
+		// End offset: 0x800239F0
+		// End Line: 4295
 	/* end block 1 */
-	// End offset: 0x80023A08
-	// End Line: 4321
+	// End offset: 0x800239F0
+	// End Line: 4296
 
 	/* begin block 2 */
-		// Start line: 10562
+		// Start line: 10538
 	/* end block 2 */
-	// End Line: 10563
+	// End Line: 10539
 
-void COLLIDE_InstanceTerrain(int param_1)
+void COLLIDE_InstanceTerrain(_Instance *instance,Level *level)
 
 {
-  byte **ppbVar1;
-  undefined4 *puVar2;
-  byte *pbVar3;
-  byte *pbVar4;
-  byte *pbVar5;
+  byte *pbVar1;
+  _HPrim *p_Var2;
+  int iVar3;
   undefined auStack64 [4];
   undefined4 *local_3c;
-  undefined4 *local_38;
-  int local_34;
-  undefined *local_30;
+  undefined4 *puStack56;
+  _func_2 *p_Stack52;
+  undefined *puStack48;
   
   local_3c = &DAT_1f800148;
-  local_38 = &DAT_1f800158;
-  if ((*(int *)(param_1 + 0x40) != 0) && (*(int *)(param_1 + 0x44) != 0)) {
-    if ((*(uint *)(*(int *)(param_1 + 0x1c) + 0x2c) & 0x80000) != 0) {
-      uGpffffb766 = 1;
-    }
-    local_34 = *(int *)(param_1 + 0xf4);
-    if (local_34 != 0) {
-      ppbVar1 = (byte **)(*(int *)(param_1 + 0xe8) + (int)*(short *)(param_1 + 0x10a) * 8);
-      pbVar5 = ppbVar1[1];
-      pbVar4 = *ppbVar1;
-      local_30 = auStack64;
-      if (pbVar5 != (byte *)0x0) {
-        pbVar3 = pbVar4 + 3;
+  puStack56 = &DAT_1f800158;
+  if ((instance->matrix != (MATRIX *)0x0) && (instance->oldMatrix != (MATRIX *)0x0)) {
+    p_Stack52 = instance->collideFunc;
+    if (p_Stack52 != (_func_2 *)0x0) {
+      iVar3 = instance->hModelList[instance->currentModel].numHPrims;
+      p_Var2 = instance->hModelList[instance->currentModel].hPrimList;
+      puStack48 = auStack64;
+      if (iVar3 != 0) {
+        pbVar1 = &p_Var2->segment;
         do {
-          if ((((*pbVar4 & 1) != 0) && ((pbVar3[-2] & 2) != 0)) && (pbVar3[-1] == 1)) {
-            puVar2 = (undefined4 *)(*(int *)(param_1 + 0x40) + (uint)*pbVar3 * 0x20);
-            SetRotMatrix(puVar2);
+          if ((((p_Var2->hpFlags & 1) != 0) && ((pbVar1[-2] & 2) != 0)) && (pbVar1[-1] == 1)) {
                     /* WARNING: Subroutine does not return */
-            SetTransMatrix((int)puVar2);
+            SetRotMatrix((undefined4 *)(instance->matrix + *pbVar1));
           }
-          pbVar5 = pbVar5 + -1;
-          pbVar3 = pbVar3 + 8;
-          pbVar4 = pbVar4 + 8;
-        } while (pbVar5 != (byte *)0x0);
+          iVar3 = iVar3 + -1;
+          pbVar1 = pbVar1 + 8;
+          p_Var2 = p_Var2 + 1;
+        } while (iVar3 != 0);
       }
     }
-    uGpffffb766 = 0;
   }
   return;
 }
@@ -3810,10 +3416,10 @@ void COLLIDE_InstanceTerrain(int param_1)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ COLLIDE_LineWithSignals(struct _SVector *startPoint /*$a0*/, struct _SVector *endPoint /*$a1*/, struct _MultiSignal **signalList /*stack 8*/, long maxSignals /*stack 12*/, struct Level *level /*stack 16*/)
- // line 4331, offset 0x80023a38
+ // line 4306, offset 0x80023a20
 	/* begin block 1 */
-		// Start line: 4332
-		// Start offset: 0x80023A38
+		// Start line: 4307
+		// Start offset: 0x80023A20
 		// Variables:
 	// 		struct IandTScratch *CSpad; // $s0
 	// 		void **stack; // $s2
@@ -3824,8 +3430,8 @@ void COLLIDE_InstanceTerrain(int param_1)
 	// 		long numSignalsCollidedWith; // $fp
 
 		/* begin block 1.1 */
-			// Start line: 4377
-			// Start offset: 0x80023B20
+			// Start line: 4352
+			// Start offset: 0x80023B08
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $v1
@@ -3837,12 +3443,12 @@ void COLLIDE_InstanceTerrain(int param_1)
 		// 		struct _SVector *_v0; // $t1
 		// 		struct _SVector *_v1; // $t0
 		/* end block 1.1 */
-		// End offset: 0x80023B20
-		// End Line: 4377
+		// End offset: 0x80023B08
+		// End Line: 4352
 
 		/* begin block 1.2 */
-			// Start line: 4390
-			// Start offset: 0x80023BB8
+			// Start line: 4365
+			// Start offset: 0x80023BA0
 			// Variables:
 		// 		short _x0; // $v1
 		// 		short _y0; // $a0
@@ -3853,12 +3459,12 @@ void COLLIDE_InstanceTerrain(int param_1)
 		// 		struct _SVector *_v; // $s7
 		// 		struct _Position *_v1; // $a2
 		/* end block 1.2 */
-		// End offset: 0x80023BB8
-		// End Line: 4390
+		// End offset: 0x80023BA0
+		// End Line: 4365
 
 		/* begin block 1.3 */
-			// Start line: 4390
-			// Start offset: 0x80023BB8
+			// Start line: 4365
+			// Start offset: 0x80023BA0
 			// Variables:
 		// 		short _x0; // $v1
 		// 		short _y0; // $a0
@@ -3869,87 +3475,87 @@ void COLLIDE_InstanceTerrain(int param_1)
 		// 		struct _SVector *_v; // $s6
 		// 		struct _Position *_v1; // $a2
 		/* end block 1.3 */
-		// End offset: 0x80023BB8
-		// End Line: 4390
+		// End offset: 0x80023BA0
+		// End Line: 4365
 
 		/* begin block 1.4 */
-			// Start line: 4431
-			// Start offset: 0x80023DEC
+			// Start line: 4406
+			// Start offset: 0x80023DD4
 			// Variables:
 		// 		struct _SVector *vertex0; // $a0
 
 			/* begin block 1.4.1 */
-				// Start line: 4332
-				// Start offset: 0x80023DEC
+				// Start line: 4307
+				// Start offset: 0x80023DD4
 				// Variables:
 			// 		short *nrmlArray; // $a0
 			// 		struct _SVector *nrml; // $a1
 
 				/* begin block 1.4.1.1 */
-					// Start line: 4332
-					// Start offset: 0x80023DEC
+					// Start line: 4307
+					// Start offset: 0x80023DD4
 					// Variables:
 				// 		short *sPtr; // $v1
 				/* end block 1.4.1.1 */
-				// End offset: 0x80023E7C
-				// End Line: 4332
+				// End offset: 0x80023E64
+				// End Line: 4307
 			/* end block 1.4.1 */
-			// End offset: 0x80023E7C
-			// End Line: 4332
+			// End offset: 0x80023E64
+			// End Line: 4307
 
 			/* begin block 1.4.2 */
-				// Start line: 4449
-				// Start offset: 0x80023EFC
+				// Start line: 4424
+				// Start offset: 0x80023EE4
 
 				/* begin block 1.4.2.1 */
-					// Start line: 4332
-					// Start offset: 0x80023EFC
+					// Start line: 4307
+					// Start offset: 0x80023EE4
 					// Variables:
 				// 		struct _SVector *point; // $t0
 				// 		struct _SVector *start; // $a3
 				// 		struct _SVector *line; // $a2
 
 					/* begin block 1.4.2.1.1 */
-						// Start line: 4332
-						// Start offset: 0x80023EFC
+						// Start line: 4307
+						// Start offset: 0x80023EE4
 						// Variables:
 					// 		long len; // $v1
 					// 		long t; // $a1
 					/* end block 1.4.2.1.1 */
-					// End offset: 0x80023F2C
-					// End Line: 4332
+					// End offset: 0x80023F14
+					// End Line: 4307
 				/* end block 1.4.2.1 */
-				// End offset: 0x80023F2C
-				// End Line: 4332
+				// End offset: 0x80023F14
+				// End Line: 4307
 
 				/* begin block 1.4.2.2 */
-					// Start line: 4459
-					// Start offset: 0x80023FE0
+					// Start line: 4434
+					// Start offset: 0x80023FC8
 					// Variables:
 				// 		struct _MultiSignal *msignal; // $v1
 				/* end block 1.4.2.2 */
-				// End offset: 0x80024010
-				// End Line: 4470
+				// End offset: 0x80023FF8
+				// End Line: 4445
 			/* end block 1.4.2 */
-			// End offset: 0x80024010
-			// End Line: 4471
+			// End offset: 0x80023FF8
+			// End Line: 4446
 		/* end block 1.4 */
-		// End offset: 0x80024010
-		// End Line: 4472
+		// End offset: 0x80023FF8
+		// End Line: 4447
 
 		/* begin block 1.5 */
-			// Start line: 4479
-			// Start offset: 0x80024030
+			// Start line: 4454
+			// Start offset: 0x80024018
 			// Variables:
 		// 		int plane_front_error; // $v1
 		// 		int plane_back_error; // $a0
 		/* end block 1.5 */
-		// End offset: 0x80024124
-		// End Line: 4524
+		// End offset: 0x8002410C
+		// End Line: 4499
 
 		/* begin block 1.6 */
-			// Start line: 4526
-			// Start offset: 0x80024134
+			// Start line: 4501
+			// Start offset: 0x8002411C
 			// Variables:
 		// 		short _x0; // $v1
 		// 		short _y0; // $a0
@@ -3959,12 +3565,12 @@ void COLLIDE_InstanceTerrain(int param_1)
 		// 		short _z1; // $a2
 		// 		struct _Position *_v1; // $a2
 		/* end block 1.6 */
-		// End offset: 0x80024134
-		// End Line: 4526
+		// End offset: 0x8002411C
+		// End Line: 4501
 
 		/* begin block 1.7 */
-			// Start line: 4526
-			// Start offset: 0x80024134
+			// Start line: 4501
+			// Start offset: 0x8002411C
 			// Variables:
 		// 		short _x0; // $v1
 		// 		short _y0; // $a0
@@ -3974,52 +3580,38 @@ void COLLIDE_InstanceTerrain(int param_1)
 		// 		short _z1; // $a2
 		// 		struct _Position *_v1; // $a2
 		/* end block 1.7 */
-		// End offset: 0x800241AC
-		// End Line: 4527
+		// End offset: 0x80024194
+		// End Line: 4502
 	/* end block 1 */
-	// End offset: 0x800241C8
-	// End Line: 4531
+	// End offset: 0x800241B0
+	// End Line: 4506
 
 	/* begin block 2 */
-		// Start line: 10815
+		// Start line: 10773
 	/* end block 2 */
-	// End Line: 10816
+	// End Line: 10774
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-/* WARNING: Restarted to delay deadcode elimination for space: ram */
 
-int COLLIDE_LineWithSignals
-              (undefined4 *param_1,undefined4 *param_2,int param_3,int param_4,int *param_5)
+long COLLIDE_LineWithSignals
+               (_SVector *startPoint,_SVector *endPoint,_MultiSignal **signalList,long maxSignals,
+               Level *level)
 
 {
-  short sVar1;
-  short sVar2;
-  undefined4 in_zero;
-  undefined4 in_at;
+  int iVar1;
+  _Terrain *p_Var2;
   int iVar3;
-  uint *puVar4;
-  ushort *puVar5;
-  _SVector *v0;
-  int *piVar6;
-  ushort *puVar7;
-  int **ppiVar8;
-  int **ppiVar9;
-  ushort *puVar10;
-  int iVar11;
-  int iVar12;
-  int iVar13;
-  int iStack56;
+  int local_38;
   
-  iVar11 = *param_5;
-  DAT_1f80009c = *(int *)(iVar11 + 0x24);
-  ppiVar9 = (int **)&DAT_1f8000a4;
-  DAT_1f8000a0 = *(int *)(iVar11 + 0x1c);
-  _DAT_1f800084 = *param_1;
-  DAT_1f800088 = param_1[1];
-  DAT_1f80008c = *param_2;
-  DAT_1f800090 = param_2[1];
-  if (sGpffffb500 == 1000) {
-    DAT_1f800098 = (int)sGpffffb502;
+  p_Var2 = level->terrain;
+  DAT_1f80009c = p_Var2->normalList;
+  DAT_1f8000a0 = p_Var2->vertexList;
+  _DAT_1f800084 = *(undefined4 *)startPoint;
+  DAT_1f800088 = *(uint *)&startPoint->z;
+  DAT_1f80008c = *(undefined4 *)endPoint;
+  DAT_1f800090 = *(uint *)&endPoint->z;
+  if (gameTrackerX.gameData.asmData.MorphTime == 1000) {
+    DAT_1f800098 = (int)gameTrackerX.gameData.asmData.MorphType;
     if (DAT_1f800098 != 1) {
       DAT_1f800098 = 0;
     }
@@ -4031,241 +3623,102 @@ int COLLIDE_LineWithSignals
   DAT_1f80008c._2_2_ = (short)((uint)DAT_1f80008c >> 0x10);
   DAT_1f800080 = (short)DAT_1f800088 - (short)DAT_1f800090;
   _DAT_1f80007c = CONCAT22(DAT_1f800086 - DAT_1f80008c._2_2_,DAT_1f800084 - (short)DAT_1f80008c);
-  if (((_DAT_1f80007c != 0) || (iVar13 = 0, DAT_1f800080 != 0)) &&
-     (iStack56 = 0, iVar13 = 0, 0 < *(int *)(iVar11 + 0x44))) {
-    iVar12 = 0;
+  if (((_DAT_1f80007c != 0) || (DAT_1f800080 != 0)) && (local_38 = 0, 0 < p_Var2->numBSPTrees)) {
+    iVar3 = 0;
     do {
-      if (*(short *)(iVar12 + *(int *)(iVar11 + 0x48) + 0x1a) == -1) {
-        *(int ***)ppiVar9 = ppiVar9;
-        iVar3 = *(int *)(iVar11 + 0x48) + iVar12;
-        DAT_1f80008c._0_2_ = (short)DAT_1f80008c - *(short *)(iVar3 + 0xc);
-        DAT_1f80008c._2_2_ = DAT_1f80008c._2_2_ - *(short *)(iVar3 + 0xe);
-        DAT_1f800090 = DAT_1f800090 & 0xffff0000 |
-                       (uint)(ushort)((short)DAT_1f800090 - *(short *)(iVar3 + 0x10));
-        iVar3 = *(int *)(iVar11 + 0x48) + iVar12;
-        DAT_1f800084 = DAT_1f800084 - *(short *)(iVar3 + 0xc);
-        DAT_1f800086 = DAT_1f800086 - *(short *)(iVar3 + 0xe);
-        DAT_1f800088 = DAT_1f800088 & 0xffff0000 |
-                       (uint)(ushort)((short)DAT_1f800088 - *(short *)(iVar3 + 0x10));
-        ppiVar9 = ppiVar9 + 1;
-        *ppiVar9 = *(int **)(iVar12 + *(int *)(iVar11 + 0x48));
-        DAT_1f800040._0_2_ = (short)DAT_1f80008c;
-        DAT_1f800040._2_2_ = DAT_1f80008c._2_2_;
-        DAT_1f800044 = (short)DAT_1f800090;
-        DAT_1f800046 = DAT_1f800084;
-        DAT_1f800048 = DAT_1f800086;
-        DAT_1f80004a = (short)DAT_1f800088;
+      if (*(short *)((int)&p_Var2->BSPTreeArray->ID + iVar3) == -1) {
+        _DAT_1f8000a4 = &DAT_1f8000a4;
+        iVar1 = (int)&p_Var2->BSPTreeArray->bspRoot + iVar3;
+        DAT_1f800040._0_2_ = (short)DAT_1f80008c - *(short *)(iVar1 + 0xc);
+        DAT_1f800040._2_2_ = DAT_1f80008c._2_2_ - *(short *)(iVar1 + 0xe);
+        DAT_1f800044 = (short)DAT_1f800090 - *(short *)(iVar1 + 0x10);
+        DAT_1f80008c = CONCAT22(DAT_1f800040._2_2_,(short)DAT_1f800040);
+        DAT_1f800090 = DAT_1f800090 & 0xffff0000 | (uint)DAT_1f800044;
+        iVar1 = (int)&p_Var2->BSPTreeArray->bspRoot + iVar3;
+        DAT_1f800046 = DAT_1f800084 - *(short *)(iVar1 + 0xc);
+        DAT_1f800048 = DAT_1f800086 - *(short *)(iVar1 + 0xe);
+        DAT_1f80004a = (short)DAT_1f800088 - *(short *)(iVar1 + 0x10);
+        _DAT_1f800084 = CONCAT22(DAT_1f800048,DAT_1f800046);
+        DAT_1f800088 = DAT_1f800088 & 0xffff0000 | (uint)DAT_1f80004a;
+        _DAT_1f8000a8 = *(undefined4 *)((int)&p_Var2->BSPTreeArray->bspRoot + iVar3);
+                    /* WARNING: Subroutine does not return */
         SetRotMatrix(&DAT_1f800040);
-        ppiVar8 = ppiVar9;
-        if ((int **)*ppiVar9 != ppiVar9) {
-          do {
-            piVar6 = *ppiVar8;
-            ppiVar9 = ppiVar8 + -1;
-            if ((*(ushort *)((int)piVar6 + 0xe) & 2) == 0) {
-              setCopReg(2,in_zero,piVar6[2]);
-              setCopReg(2,in_at,piVar6[3]);
-              copFunction(2,0x486012);
-              _DAT_1f800068 = getCopReg(2,0x19);
-              DAT_1f80006c = getCopReg(2,0x1a);
-              DAT_1f800070 = getCopReg(2,0x1b);
-              _DAT_1f800068 = _DAT_1f800068 - piVar6[4];
-              DAT_1f80006c = DAT_1f80006c - piVar6[4];
-              if (DAT_1f800098 == 0) {
-                sVar1 = *(short *)(piVar6 + 10);
-                sVar2 = *(short *)((int)piVar6 + 0x2a);
-              }
-              else {
-                sVar1 = *(short *)(piVar6 + 9);
-                sVar2 = *(short *)((int)piVar6 + 0x26);
-              }
-              if ((_DAT_1f800068 < sVar1) || (DAT_1f80006c < sVar1)) {
-                if (((sVar2 < _DAT_1f800068) || (sVar2 < DAT_1f80006c)) &&
-                   ((int *)piVar6[5] != (int *)0x0)) {
-                  *ppiVar8 = (int *)piVar6[5];
-                  ppiVar9 = ppiVar8;
-                }
-                piVar6 = (int *)piVar6[6];
-              }
-              else {
-                piVar6 = (int *)piVar6[5];
-              }
-              if (piVar6 != (int *)0x0) {
-                ppiVar9 = ppiVar9 + 1;
-                *ppiVar9 = piVar6;
-              }
-            }
-            else {
-              if (((((short)DAT_1f80008c <= *(short *)((int)piVar6 + 0x16)) ||
-                   (DAT_1f800084 <= *(short *)((int)piVar6 + 0x16))) &&
-                  ((*(short *)(piVar6 + 4) <= (short)DAT_1f80008c ||
-                   (*(short *)(piVar6 + 4) <= DAT_1f800084)))) &&
-                 (((DAT_1f80008c._2_2_ <= *(short *)(piVar6 + 6) ||
-                   (DAT_1f800086 <= *(short *)(piVar6 + 6))) &&
-                  ((*(short *)((int)piVar6 + 0x12) <= DAT_1f80008c._2_2_ ||
-                   (*(short *)((int)piVar6 + 0x12) <= DAT_1f800086)))))) {
-                if ((((short)DAT_1f800090 <= *(short *)((int)piVar6 + 0x1a)) ||
-                    ((short)DAT_1f800088 <= *(short *)((int)piVar6 + 0x1a))) &&
-                   ((*(short *)(piVar6 + 5) <= (short)DAT_1f800090 ||
-                    (*(short *)(piVar6 + 5) <= (short)DAT_1f800088)))) {
-                  DAT_1f800094 = (int)*(short *)(piVar6 + 3);
-                  puVar10 = (ushort *)piVar6[2];
-                  puVar7 = puVar10 + 5;
-                  while (DAT_1f800094 != 0) {
-                    if (((puVar7[-2] & 0xc0) != 0) && (*puVar7 != 0xffff)) {
-                      iVar3 = (int)(short)puVar7[-1];
-                      if (iVar3 < 0) {
-                        puVar5 = (ushort *)(DAT_1f80009c + iVar3 * -6);
-                        DAT_1f800060 = CONCAT22(-puVar5[1],-(*puVar5 & 0x1fff));
-                        _DAT_1f800064 = _DAT_1f800064 & 0xffff0000 | (uint)(ushort)-puVar5[2];
-                      }
-                      else {
-                        puVar4 = (uint *)(DAT_1f80009c + iVar3 * 6);
-                        DAT_1f800060 = *puVar4 & 0xffff1fff;
-                        _DAT_1f800064 = _DAT_1f800064 & 0xffff0000 | (uint)*(ushort *)(puVar4 + 1);
-                      }
-                      v0 = (_SVector *)(DAT_1f8000a0 + (uint)*puVar10 * 0xc);
-                      setCopControlWord(2,0x1800,*(undefined4 *)v0);
-                      setCopControlWord(2,0x2000,*(undefined4 *)&v0->z);
-                      setCopReg(2,in_zero,DAT_1f800060);
-                      setCopReg(2,in_at,_DAT_1f800064);
-                      copFunction(2,0x486012);
-                      _DAT_1f800068 = getCopReg(2,0x19);
-                      DAT_1f80006c = getCopReg(2,0x1a);
-                      DAT_1f800070 = getCopReg(2,0x1b);
-                      _DAT_1f800068 = _DAT_1f800068 - DAT_1f800070;
-                      DAT_1f80006c = DAT_1f80006c - DAT_1f800070;
-                      if ((_DAT_1f800068 < 0) && (-1 < DAT_1f80006c)) {
-                        if (_DAT_1f800068 - DAT_1f80006c == 0) {
-                          iVar3 = 0;
-                        }
-                        else {
-                          iVar3 = (DAT_1f80006c * 0x1000) / (_DAT_1f800068 - DAT_1f80006c);
-                        }
-                        DAT_1f800074._0_2_ = DAT_1f800084 + (short)(DAT_1f80007c * iVar3 >> 0xc);
-                        DAT_1f80007e = (short)((uint)_DAT_1f80007c >> 0x10);
-                        DAT_1f800074._2_2_ = DAT_1f800086 + (short)(DAT_1f80007e * iVar3 >> 0xc);
-                        DAT_1f800078 = (short)DAT_1f800088 + (short)(DAT_1f800080 * iVar3 >> 0xc);
-                        iVar3 = COLLIDE_PointInTriangle
-                                          (v0,(_SVector *)(DAT_1f8000a0 + (uint)puVar7[-4] * 0xc),
-                                           (_SVector *)(DAT_1f8000a0 + (uint)puVar7[-3] * 0xc),
-                                           (_SVector *)&DAT_1f800074,(_SVector *)&DAT_1f800060);
-                        if ((iVar3 != 0) && (iVar3 = iVar13 * 4, iVar13 < param_4)) {
-                          iVar13 = iVar13 + 1;
-                          *(int *)(iVar3 + param_3) = *(int *)(iVar11 + 0x50) + (uint)*puVar7;
-                        }
-                      }
-                    }
-                    puVar7 = puVar7 + 6;
-                    puVar10 = puVar10 + 6;
-                    DAT_1f800094 = DAT_1f800094 + -1;
-                  }
-                }
-              }
-            }
-            ppiVar8 = ppiVar9;
-          } while ((int **)*ppiVar9 != ppiVar9);
-        }
-        iVar3 = *(int *)(iVar11 + 0x48) + iVar12;
-        DAT_1f80008c = CONCAT22(DAT_1f80008c._2_2_ + *(short *)(iVar3 + 0xe),
-                                (short)DAT_1f80008c + *(short *)(iVar3 + 0xc));
-        DAT_1f800090 = DAT_1f800090 & 0xffff0000 |
-                       (uint)(ushort)((short)DAT_1f800090 + *(short *)(iVar3 + 0x10));
-        iVar3 = *(int *)(iVar11 + 0x48) + iVar12;
-        _DAT_1f800084 =
-             CONCAT22(DAT_1f800086 + *(short *)(iVar3 + 0xe),DAT_1f800084 + *(short *)(iVar3 + 0xc))
-        ;
-        DAT_1f800088 = DAT_1f800088 & 0xffff0000 |
-                       (uint)(ushort)((short)DAT_1f800088 + *(short *)(iVar3 + 0x10));
       }
-      iVar12 = iVar12 + 0x24;
-      iStack56 = iStack56 + 1;
-    } while (iStack56 < *(int *)(iVar11 + 0x44));
+      iVar3 = iVar3 + 0x24;
+      local_38 = local_38 + 1;
+    } while (local_38 < p_Var2->numBSPTrees);
   }
-  return iVar13;
+  return 0;
 }
 
 
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ COLLIDE_InstanceTerrainSignal(struct _Instance *instance /*$s3*/, struct Level *level /*$s1*/)
- // line 4548, offset 0x800241fc
+// void /*$ra*/ COLLIDE_InstanceTerrainSignal(struct _Instance *instance /*$s3*/, struct Level *level /*$a1*/)
+ // line 4523, offset 0x800241e4
 	/* begin block 1 */
-		// Start line: 4549
-		// Start offset: 0x800241FC
+		// Start line: 4524
+		// Start offset: 0x800241E4
 		// Variables:
 	// 		struct _SVector startPoint; // stack offset -72
 	// 		struct _SVector endPoint; // stack offset -64
-	// 		struct _Model *model; // $s0
+	// 		struct _Model *model; // $v0
 	// 		long numSignals; // $s4
 	// 		long d; // $s1
 	// 		struct _MultiSignal (*signalListArray[8]); // stack offset -56
 
 		/* begin block 1.1 */
-			// Start line: 4616
-			// Start offset: 0x800243DC
+			// Start line: 4583
+			// Start offset: 0x80024330
 			// Variables:
 		// 		struct _MultiSignal *msignal; // $s0
 		/* end block 1.1 */
-		// End offset: 0x800243FC
-		// End Line: 4625
+		// End offset: 0x80024350
+		// End Line: 4592
 	/* end block 1 */
-	// End offset: 0x80024424
-	// End Line: 4630
+	// End offset: 0x80024378
+	// End Line: 4597
 
 	/* begin block 2 */
-		// Start line: 11519
+		// Start line: 11477
 	/* end block 2 */
-	// End Line: 11520
+	// End Line: 11478
 
-void COLLIDE_InstanceTerrainSignal(_Instance *param_1,undefined4 param_2)
+void COLLIDE_InstanceTerrainSignal(_Instance *instance,Level *level)
 
 {
-  int iVar1;
-  _Model *p_Var2;
-  _MultiSignal *mSignal;
-  int iVar3;
-  _MultiSignal **pp_Var4;
+  _Model *p_Var1;
+  long lVar2;
   undefined4 local_48;
   uint local_44;
-  undefined4 local_40;
-  uint local_3c;
-  _MultiSignal *local_38 [8];
+  undefined4 uStack64;
+  uint uStack60;
+  _MultiSignal *ap_Stack56 [8];
   
-  p_Var2 = param_1->object->modelList[param_1->currentModel];
-  if ((param_1->matrix != (MATRIX *)0x0) && (param_1->oldMatrix != (MATRIX *)0x0)) {
-    if ((param_1->object->oflags2 & 0x80000U) != 0) {
-                    /* WARNING: Subroutine does not return */
-      INSTANCE_Query(param_1,1);
-    }
-    if ((p_Var2 == (_Model *)0x0) || (p_Var2->numSegments < 2)) {
-      local_48 = *(undefined4 *)&param_1->oldPos;
-      local_44 = *(uint *)&(param_1->oldPos).z;
-      local_40 = *(undefined4 *)&param_1->position;
-      local_3c = *(uint *)&(param_1->position).z;
+  p_Var1 = instance->object->modelList[instance->currentModel];
+  if ((instance->matrix != (MATRIX *)0x0) && (instance->oldMatrix != (MATRIX *)0x0)) {
+    if ((p_Var1 == (_Model *)0x0) || (p_Var1->numSegments < 2)) {
+      local_48 = *(undefined4 *)&instance->oldPos;
+      local_44 = *(uint *)&(instance->oldPos).z;
+      uStack64 = *(undefined4 *)&instance->position;
+      uStack60 = *(uint *)&(instance->position).z;
     }
     else {
-      local_48 = CONCAT22(*(undefined2 *)(param_1->oldMatrix[1].t + 1),
-                          *(undefined2 *)param_1->oldMatrix[1].t);
-      local_44 = local_44 & 0xffff0000 | (uint)*(ushort *)(param_1->oldMatrix[1].t + 2);
-      local_40 = CONCAT22(*(undefined2 *)(param_1->matrix[1].t + 1),
-                          *(undefined2 *)param_1->matrix[1].t);
-      local_3c = local_3c & 0xffff0000 | (uint)*(ushort *)(param_1->matrix[1].t + 2);
+      local_48 = CONCAT22(*(undefined2 *)(instance->oldMatrix[1].t + 1),
+                          *(undefined2 *)instance->oldMatrix[1].t);
+      local_44 = local_44 & 0xffff0000 | (uint)*(ushort *)(instance->oldMatrix[1].t + 2);
+      uStack64 = CONCAT22(*(undefined2 *)(instance->matrix[1].t + 1),
+                          *(undefined2 *)instance->matrix[1].t);
+      uStack60 = uStack60 & 0xffff0000 | (uint)*(ushort *)(instance->matrix[1].t + 2);
     }
-    pp_Var4 = local_38;
-    iVar1 = COLLIDE_LineWithSignals(&local_48,&local_40,pp_Var4,8,param_2);
-    iVar3 = 0;
-    if (0 < iVar1) {
-      do {
-        mSignal = *pp_Var4;
-        if (param_1 == p_Gpffffb524) {
-          mSignal->flags = mSignal->flags | 1;
-        }
-        SIGNAL_HandleSignal(param_1,mSignal->signalList,0);
-        EVENT_AddSignalToReset(mSignal);
-        iVar3 = iVar3 + 1;
-        pp_Var4 = pp_Var4 + 1;
-      } while (iVar3 < iVar1);
+    lVar2 = COLLIDE_LineWithSignals((_SVector *)&local_48,(_SVector *)&uStack64,ap_Stack56,8,level);
+    if (0 < lVar2) {
+      if (instance == gameTrackerX.playerInstance) {
+        ap_Stack56[0]->flags = ap_Stack56[0]->flags | 1;
+      }
+                    /* WARNING: Subroutine does not return */
+      SIGNAL_HandleSignal(instance,ap_Stack56[0]->signalList,0);
     }
   }
   return;
@@ -4276,10 +3729,10 @@ void COLLIDE_InstanceTerrainSignal(_Instance *param_1,undefined4 param_2)
 // decompiled code
 // original method signature: 
 // struct _StreamUnit * /*$ra*/ COLLIDE_CameraWithStreamSignals(struct Camera *camera /*$s1*/)
- // line 4634, offset 0x80024444
+ // line 4601, offset 0x80024398
 	/* begin block 1 */
-		// Start line: 4635
-		// Start offset: 0x80024444
+		// Start line: 4602
+		// Start offset: 0x80024398
 		// Variables:
 	// 		struct _SVector startPoint; // stack offset -112
 	// 		struct _SVector endPoint; // stack offset -104
@@ -4289,48 +3742,47 @@ void COLLIDE_InstanceTerrainSignal(_Instance *param_1,undefined4 param_2)
 	// 		long numStreamSignals; // $s2
 	// 		struct _MultiSignal (*signalListArray[8]); // stack offset -96
 	// 		struct _StreamUnit (*streamSignalUnits[8]); // stack offset -64
-	// 		struct _StreamUnit *playerStreamUnit; // $s2
+	// 		struct _StreamUnit *playerStreamUnit; // $a1
 	// 		struct Level *level; // $v0
 	// 		long playerStreamUnitID; // $s4
 	// 		struct _Instance *instance; // $s0
-	// 		struct _Instance *af_instance; // $v0
 
 		/* begin block 1.1 */
-			// Start line: 4725
-			// Start offset: 0x800245E0
+			// Start line: 4687
+			// Start offset: 0x800244DC
 			// Variables:
 		// 		struct _MultiSignal *msignal; // $v0
 		// 		long isWarpGateSignal; // stack offset -32
 
 			/* begin block 1.1.1 */
-				// Start line: 4733
-				// Start offset: 0x80024604
+				// Start line: 4695
+				// Start offset: 0x80024500
 				// Variables:
 			// 		struct _StreamUnit *cameraStreamUnit; // $v1
 			// 		long cameraStreamID; // $a0
 
 				/* begin block 1.1.1.1 */
-					// Start line: 4742
-					// Start offset: 0x80024624
+					// Start line: 4702
+					// Start offset: 0x80024510
 					// Variables:
 				// 		int number; // $v1
 				/* end block 1.1.1.1 */
-				// End offset: 0x80024638
-				// End Line: 4746
+				// End offset: 0x80024524
+				// End Line: 4706
 			/* end block 1.1.1 */
-			// End offset: 0x8002469C
-			// End Line: 4762
+			// End offset: 0x80024578
+			// End Line: 4716
 		/* end block 1.1 */
-		// End offset: 0x8002469C
-		// End Line: 4763
+		// End offset: 0x80024578
+		// End Line: 4717
 	/* end block 1 */
-	// End offset: 0x8002470C
-	// End Line: 4794
+	// End offset: 0x800245E8
+	// End Line: 4748
 
 	/* begin block 2 */
-		// Start line: 11707
+		// Start line: 11654
 	/* end block 2 */
-	// End Line: 11708
+	// End Line: 11655
 
 _StreamUnit * COLLIDE_CameraWithStreamSignals(Camera *camera)
 
@@ -4338,13 +3790,12 @@ _StreamUnit * COLLIDE_CameraWithStreamSignals(Camera *camera)
   long id;
   
   id = camera->focusInstance->currentStreamUnitID;
-  if ((camera->focusInstance == (_Instance *)theCamera.core.vvNormalWorVecMat[1].t[0]) &&
-     (theCamera.rotationAccl.x != 0)) {
-    id = theCamera._432_4_;
+  if ((camera->focusInstance == gameTrackerX.playerInstance) &&
+     (gameTrackerX.SwitchToNewStreamUnit != 0)) {
+    id = gameTrackerX.moveRazielToStreamID;
   }
-  STREAM_GetStreamUnitWithID(id);
                     /* WARNING: Subroutine does not return */
-  INSTANCE_Query(camera->focusInstance,10);
+  STREAM_GetStreamUnitWithID(id);
 }
 
 
@@ -4352,37 +3803,37 @@ _StreamUnit * COLLIDE_CameraWithStreamSignals(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ COLLIDE_InstanceListWithSignals(struct _InstanceList *instanceList /*$a0*/)
- // line 4797, offset 0x8002472c
+ // line 4751, offset 0x80024608
 	/* begin block 1 */
-		// Start line: 4798
-		// Start offset: 0x8002472C
+		// Start line: 4752
+		// Start offset: 0x80024608
 		// Variables:
 	// 		struct _Instance *instance; // $s0
 	// 		struct Level *level; // $v0
 	/* end block 1 */
-	// End offset: 0x8002478C
-	// End Line: 4814
+	// End offset: 0x80024668
+	// End Line: 4768
 
 	/* begin block 2 */
-		// Start line: 12100
+		// Start line: 12009
 	/* end block 2 */
-	// End Line: 12101
+	// End Line: 12010
 
-void COLLIDE_SegmentCollisionOn(_Instance *instance,int segment)
+void COLLIDE_InstanceListWithSignals(_InstanceList *instanceList)
 
 {
-  NodeType *pNVar1;
+  _Instance *p_Var1;
   
-  pNVar1 = (instance->node).next;
+  p_Var1 = instanceList->first;
   while( true ) {
-    if (pNVar1 == (NodeType *)0x0) {
+    if (p_Var1 == (_Instance *)0x0) {
       return;
     }
-    if (((uint)pNVar1[3].prev & 0x24000000) == 0) break;
-    pNVar1 = pNVar1[1].prev;
+    if ((p_Var1->flags2 & 0x24000000U) == 0) break;
+    p_Var1 = p_Var1->next;
   }
                     /* WARNING: Subroutine does not return */
-  STREAM_GetLevelWithID((long)pNVar1[7].prev);
+  STREAM_GetLevelWithID(p_Var1->currentStreamUnitID);
 }
 
 
@@ -4390,22 +3841,22 @@ void COLLIDE_SegmentCollisionOn(_Instance *instance,int segment)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ COLLIDE_InstanceListTerrain(struct _InstanceList *instanceList /*$a0*/)
- // line 4816, offset 0x800247a0
+ // line 4770, offset 0x8002467c
 	/* begin block 1 */
-		// Start line: 4817
-		// Start offset: 0x800247A0
+		// Start line: 4771
+		// Start offset: 0x8002467C
 		// Variables:
 	// 		long i; // $s2
 	// 		struct _Instance *instance; // $s0
 	// 		struct Level *level; // $v0
 	/* end block 1 */
-	// End offset: 0x80024834
-	// End Line: 4856
+	// End offset: 0x80024710
+	// End Line: 4810
 
 	/* begin block 2 */
-		// Start line: 12145
+		// Start line: 12054
 	/* end block 2 */
-	// End Line: 12146
+	// End Line: 12055
 
 void COLLIDE_InstanceListTerrain(_InstanceList *instanceList)
 
@@ -4419,7 +3870,7 @@ void COLLIDE_InstanceListTerrain(_InstanceList *instanceList)
   do {
     p_Var1 = pp_Var2[4];
     while (p_Var1 != (_InstancePool *)0x0) {
-      if ((*(int *)&p_Var1->instance[0].offset != 0) &&
+      if ((*(int *)&p_Var1->instance[0].extraLightDir != 0) &&
          ((p_Var1->instance[0].instanceID & 0x24040000U) == 0)) {
                     /* WARNING: Subroutine does not return */
         STREAM_GetLevelWithID(p_Var1->instance[0].introNum);
@@ -4439,34 +3890,34 @@ void COLLIDE_InstanceListTerrain(_InstanceList *instanceList)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ COLLIDE_SegmentCollisionOn(struct _Instance *instance /*$a0*/, int segment /*$a1*/)
- // line 4947, offset 0x80024850
+ // line 4901, offset 0x8002472c
 	/* begin block 1 */
-		// Start line: 4949
-		// Start offset: 0x80024850
+		// Start line: 4903
+		// Start offset: 0x8002472C
 
 		/* begin block 1.1 */
-			// Start line: 4951
-			// Start offset: 0x80024860
+			// Start line: 4905
+			// Start offset: 0x8002473C
 			// Variables:
 		// 		int i; // $a2
 		// 		struct _HModel *hmodel; // $v0
 		// 		struct _HPrim *hprim; // $v1
 		/* end block 1.1 */
-		// End offset: 0x800248C0
-		// End Line: 4962
+		// End offset: 0x8002479C
+		// End Line: 4916
 	/* end block 1 */
-	// End offset: 0x800248C0
-	// End Line: 4963
+	// End offset: 0x8002479C
+	// End Line: 4917
 
 	/* begin block 2 */
-		// Start line: 9894
+		// Start line: 9794
 	/* end block 2 */
-	// End Line: 9895
+	// End Line: 9795
 
 	/* begin block 3 */
-		// Start line: 12376
+		// Start line: 12285
 	/* end block 3 */
-	// End Line: 12377
+	// End Line: 12286
 
 void COLLIDE_SegmentCollisionOn(_Instance *instance,int segment)
 
@@ -4496,35 +3947,35 @@ void COLLIDE_SegmentCollisionOn(_Instance *instance,int segment)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ COLLIDE_SegmentCollisionOff(struct _Instance *instance /*$a0*/, int segment /*$a1*/)
- // line 4968, offset 0x800248c8
+ // line 4922, offset 0x800247a4
 	/* begin block 1 */
-		// Start line: 4970
-		// Start offset: 0x800248C8
+		// Start line: 4924
+		// Start offset: 0x800247A4
 
 		/* begin block 1.1 */
-			// Start line: 4972
-			// Start offset: 0x800248D8
+			// Start line: 4926
+			// Start offset: 0x800247B4
 			// Variables:
 		// 		int i; // $a2
 		// 		int enabled; // $a3
 		// 		struct _HModel *hmodel; // $v0
 		// 		struct _HPrim *hprim; // $v1
 		/* end block 1.1 */
-		// End offset: 0x8002495C
-		// End Line: 4987
+		// End offset: 0x80024838
+		// End Line: 4941
 	/* end block 1 */
-	// End offset: 0x8002495C
-	// End Line: 4988
+	// End offset: 0x80024838
+	// End Line: 4942
 
 	/* begin block 2 */
-		// Start line: 12420
+		// Start line: 12329
 	/* end block 2 */
-	// End Line: 12421
+	// End Line: 12330
 
 	/* begin block 3 */
-		// Start line: 12421
+		// Start line: 12330
 	/* end block 3 */
-	// End Line: 12422
+	// End Line: 12331
 
 void COLLIDE_SegmentCollisionOff(_Instance *instance,int segment)
 
@@ -4561,98 +4012,91 @@ void COLLIDE_SegmentCollisionOff(_Instance *instance,int segment)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ COLLIDE_FindCollisionFaceNormal(struct _CollideInfo *collideInfo /*$a0*/, struct _Normal *normal /*$s2*/)
- // line 5015, offset 0x80024964
+ // line 4969, offset 0x80024840
 	/* begin block 1 */
-		// Start line: 5016
-		// Start offset: 0x80024964
+		// Start line: 4970
+		// Start offset: 0x80024840
 		// Variables:
 	// 		long valid_normal; // $a2
 
 		/* begin block 1.1 */
-			// Start line: 5025
-			// Start offset: 0x80024998
+			// Start line: 4979
+			// Start offset: 0x80024874
 			// Variables:
 		// 		struct _TFace *tface; // $a1
 		/* end block 1.1 */
-		// End offset: 0x800249E0
-		// End Line: 5029
+		// End offset: 0x800248BC
+		// End Line: 4983
 
 		/* begin block 1.2 */
-			// Start line: 5036
-			// Start offset: 0x80024A18
+			// Start line: 4990
+			// Start offset: 0x800248F4
 
 			/* begin block 1.2.1 */
-				// Start line: 5040
-				// Start offset: 0x80024A18
+				// Start line: 4994
+				// Start offset: 0x800248F4
 				// Variables:
 			// 		struct SVECTOR *lNormal; // stack offset -24
 			// 		struct _Instance *inst1; // $s1
 			/* end block 1.2.1 */
-			// End offset: 0x80024A18
-			// End Line: 5041
+			// End offset: 0x800248F4
+			// End Line: 4995
 		/* end block 1.2 */
-		// End offset: 0x80024A18
-		// End Line: 5041
+		// End offset: 0x800248F4
+		// End Line: 4995
 
 		/* begin block 1.3 */
-			// Start line: 5054
-			// Start offset: 0x80024A6C
+			// Start line: 5008
+			// Start offset: 0x80024948
 			// Variables:
 		// 		struct _Instance *inst1; // $v0
 		/* end block 1.3 */
-		// End offset: 0x80024A84
-		// End Line: 5058
+		// End offset: 0x80024960
+		// End Line: 5012
 	/* end block 1 */
-	// End offset: 0x80024A84
-	// End Line: 5060
+	// End offset: 0x80024960
+	// End Line: 5014
 
 	/* begin block 2 */
-		// Start line: 10030
+		// Start line: 9935
 	/* end block 2 */
-	// End Line: 10031
+	// End Line: 9936
 
-undefined4 COLLIDE_FindCollisionFaceNormal(int **param_1,_SVector *param_2)
+long COLLIDE_FindCollisionFaceNormal(_CollideInfo *collideInfo,_Normal *normal)
 
 {
   char cVar1;
   ushort uVar2;
-  int iVar3;
-  _SVector *nrml;
-  undefined4 uVar4;
-  int *piVar5;
   _SVector _Stack24;
   
-  cVar1 = *(char *)((int)param_1 + 7);
-  uVar4 = 0;
+  cVar1 = collideInfo->type1;
   if (cVar1 != '\x01') {
-    if (cVar1 != '\x03') {
-      if (cVar1 == '\x02') {
-        nrml = &_Stack24;
-        piVar5 = param_1[5];
-        COLLIDE_GetNormal(*(short *)(param_1[3] + 2),
-                          *(short **)
-                           (*(int *)((int)*(short *)((int)piVar5 + 0x10a) * 4 +
-                                    *(int *)(piVar5[7] + 0xc)) + 0xc),nrml);
-        iVar3 = piVar5[0x10];
-      }
-      else {
-        nrml = (_SVector *)(param_1 + 6);
-        if (((uint)param_1[1] & 0xffff0000) != 0x5010000) {
-          return 0;
-        }
-        iVar3 = param_1[5][0x10];
-      }
+    if (cVar1 == '\x03') {
+      uVar2 = *(ushort *)((int)collideInfo->prim1 + 10);
+      if ((uVar2 == 0xffff) ||
+         ((*(ushort *)(*(int *)(*(int *)collideInfo->level + 0x34) + (uint)uVar2 + 10) & 0x2000) ==
+          0)) {
                     /* WARNING: Subroutine does not return */
-      ApplyMatrixSV(iVar3,nrml,param_2);
+        COLLIDE_GetNormal(*(short *)((int)collideInfo->prim1 + 8),
+                          *(short **)(*(int *)collideInfo->level + 0x24),(_SVector *)normal);
+      }
     }
-    uVar2 = *(ushort *)((int)param_1[3] + 10);
-    if ((uVar2 == 0xffff) ||
-       ((*(ushort *)(*(int *)(**param_1 + 0x34) + (uint)uVar2 + 10) & 0x2000) == 0)) {
-      COLLIDE_GetNormal(*(short *)(param_1[3] + 2),*(short **)(**param_1 + 0x24),param_2);
-      uVar4 = 1;
+    else {
+      if (cVar1 == '\x02') {
+                    /* WARNING: Subroutine does not return */
+        COLLIDE_GetNormal(*(short *)((int)collideInfo->prim1 + 8),
+                          *(short **)
+                           (*(int *)((int)*(short *)((int)collideInfo->inst1 + 0x122) * 4 +
+                                    *(int *)(*(int *)((int)collideInfo->inst1 + 0x1c) + 0xc)) + 0xc)
+                          ,&_Stack24);
+      }
+      if ((*(uint *)&collideInfo->flags & 0xffff0000) == 0x5010000) {
+                    /* WARNING: Subroutine does not return */
+        ApplyMatrixSV(*(undefined4 *)((int)collideInfo->inst1 + 0x40),&collideInfo->point0,normal);
+      }
     }
   }
-  return uVar4;
+  return 0;
 }
 
 
@@ -4660,32 +4104,32 @@ undefined4 COLLIDE_FindCollisionFaceNormal(int **param_1,_SVector *param_2)
 // decompiled code
 // original method signature: 
 // short * /*$ra*/ COLLIDE_GetBSPTreeFlag(struct _CollideInfo *collideInfo /*$a0*/)
- // line 5065, offset 0x80024aa0
+ // line 5019, offset 0x8002497c
 	/* begin block 1 */
-		// Start line: 5067
-		// Start offset: 0x80024AA0
+		// Start line: 5021
+		// Start offset: 0x8002497C
 		// Variables:
 	// 		struct Level *level; // $v0
 	// 		struct _Terrain *terrain; // $v0
 	// 		struct BSPTree *bspTree; // $v0
 	/* end block 1 */
-	// End offset: 0x80024AA0
-	// End Line: 5079
+	// End offset: 0x8002497C
+	// End Line: 5033
 
 	/* begin block 2 */
-		// Start line: 12592
+		// Start line: 12501
 	/* end block 2 */
-	// End Line: 12593
+	// End Line: 12502
 
 	/* begin block 3 */
-		// Start line: 12593
+		// Start line: 12502
 	/* end block 3 */
-	// End Line: 12594
+	// End Line: 12503
 
 	/* begin block 4 */
-		// Start line: 12605
+		// Start line: 12514
 	/* end block 4 */
-	// End Line: 12606
+	// End Line: 12515
 
 short * COLLIDE_GetBSPTreeFlag(_CollideInfo *collideInfo)
 
@@ -4699,20 +4143,20 @@ short * COLLIDE_GetBSPTreeFlag(_CollideInfo *collideInfo)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ COLLIDE_SetBSPTreeFlag(struct _CollideInfo *collideInfo /*$a0*/, short flag /*$a1*/)
- // line 5089, offset 0x80024ac8
+ // line 5043, offset 0x800249a4
 	/* begin block 1 */
-		// Start line: 5090
-		// Start offset: 0x80024AC8
+		// Start line: 5044
+		// Start offset: 0x800249A4
 		// Variables:
 	// 		short *bspTreeFlags; // $v0
 	/* end block 1 */
-	// End offset: 0x80024AC8
-	// End Line: 5090
+	// End offset: 0x800249A4
+	// End Line: 5044
 
 	/* begin block 2 */
-		// Start line: 12649
+		// Start line: 12558
 	/* end block 2 */
-	// End Line: 12650
+	// End Line: 12559
 
 void COLLIDE_SetBSPTreeFlag(_CollideInfo *collideInfo,short flag)
 
@@ -4728,25 +4172,25 @@ void COLLIDE_SetBSPTreeFlag(_CollideInfo *collideInfo,short flag)
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ COLLIDE_PointAndTfaceFunc(struct _Terrain *terrain /*$fp*/, struct BSPTree *bsp /*$s6*/, struct _SVector *orgNewPos /*$s7*/, struct _SVector *orgOldPos /*$t4*/, struct _TFace *tface /*stack 16*/, long ignoreAttr /*stack 20*/, long flags /*stack 24*/)
- // line 5121, offset 0x80024afc
+// int /*$ra*/ COLLIDE_PointAndTfaceFunc(struct _Terrain *terrain /*$fp*/, struct BSPTree *bsp /*$s7*/, struct _SVector *orgNewPos /*$s6*/, struct _SVector *orgOldPos /*$t4*/, struct _TFace *tface /*stack 16*/, long ignoreAttr /*stack 20*/, long flags /*stack 24*/)
+ // line 5075, offset 0x800249d8
 	/* begin block 1 */
-		// Start line: 5122
-		// Start offset: 0x80024AFC
+		// Start line: 5076
+		// Start offset: 0x800249D8
 		// Variables:
 	// 		struct PandTFScratch *CSpad; // $s0
 	// 		int result; // stack offset -48
 
 		/* begin block 1.1 */
-			// Start line: 5141
-			// Start offset: 0x80024B8C
+			// Start line: 5092
+			// Start offset: 0x80024A54
 			// Variables:
 		// 		struct _SVector *vertex0; // $s3
 		// 		struct _SVector *vertex1; // $s4
 
 			/* begin block 1.1.1 */
-				// Start line: 5144
-				// Start offset: 0x80024B8C
+				// Start line: 5095
+				// Start offset: 0x80024A54
 				// Variables:
 			// 		short _x0; // $v0
 			// 		short _y0; // $v1
@@ -4757,12 +4201,12 @@ void COLLIDE_SetBSPTreeFlag(_CollideInfo *collideInfo,short flag)
 			// 		struct _SVector *_v; // $t1
 			// 		struct _Position *_v1; // $a3
 			/* end block 1.1.1 */
-			// End offset: 0x80024B8C
-			// End Line: 5144
+			// End offset: 0x80024A54
+			// End Line: 5095
 
 			/* begin block 1.1.2 */
-				// Start line: 5144
-				// Start offset: 0x80024B8C
+				// Start line: 5095
+				// Start offset: 0x80024A54
 				// Variables:
 			// 		short _x0; // $v0
 			// 		short _y0; // $v1
@@ -4772,31 +4216,31 @@ void COLLIDE_SetBSPTreeFlag(_CollideInfo *collideInfo,short flag)
 			// 		short _z1; // $a3
 			// 		struct _SVector *_v; // $t3
 			/* end block 1.1.2 */
-			// End offset: 0x80024B8C
-			// End Line: 5144
+			// End offset: 0x80024A54
+			// End Line: 5095
 
 			/* begin block 1.1.3 */
-				// Start line: 5144
-				// Start offset: 0x80024B8C
+				// Start line: 5095
+				// Start offset: 0x80024A54
 				// Variables:
 			// 		short *nrmlArray; // $a1
 			// 		struct _SVector *nrml; // $a0
 
 				/* begin block 1.1.3.1 */
-					// Start line: 5144
-					// Start offset: 0x80024B8C
+					// Start line: 5095
+					// Start offset: 0x80024A54
 					// Variables:
 				// 		short *sPtr; // $v1
 				/* end block 1.1.3.1 */
-				// End offset: 0x80024CCC
-				// End Line: 5154
+				// End offset: 0x80024B94
+				// End Line: 5105
 			/* end block 1.1.3 */
-			// End offset: 0x80024CCC
-			// End Line: 5154
+			// End offset: 0x80024B94
+			// End Line: 5105
 
 			/* begin block 1.1.4 */
-				// Start line: 5185
-				// Start offset: 0x80024DE0
+				// Start line: 5136
+				// Start offset: 0x80024CA8
 				// Variables:
 			// 		short _x0; // $v0
 			// 		short _y0; // $v1
@@ -4806,102 +4250,42 @@ void COLLIDE_SetBSPTreeFlag(_CollideInfo *collideInfo,short flag)
 			// 		short _z1; // $a2
 			// 		struct _Position *_v1; // $a2
 			/* end block 1.1.4 */
-			// End offset: 0x80024DE0
-			// End Line: 5185
+			// End offset: 0x80024CA8
+			// End Line: 5136
 		/* end block 1.1 */
-		// End offset: 0x80024E18
-		// End Line: 5189
+		// End offset: 0x80024CE0
+		// End Line: 5140
 	/* end block 1 */
-	// End offset: 0x80024E1C
-	// End Line: 5192
+	// End offset: 0x80024CE4
+	// End Line: 5143
 
 	/* begin block 2 */
-		// Start line: 10242
+		// Start line: 10136
 	/* end block 2 */
-	// End Line: 10243
+	// End Line: 10137
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-undefined4
-COLLIDE_PointAndTfaceFunc
-          (int param_1,int param_2,short *param_3,short *param_4,ushort *param_5,uint param_6,
-          uint param_7)
+int COLLIDE_PointAndTfaceFunc
+              (_Terrain *terrain,BSPTree *bsp,_SVector *orgNewPos,_SVector *orgOldPos,_TFace *tface,
+              long ignoreAttr,long flags)
 
 {
-  ushort uVar1;
-  undefined4 in_zero;
-  undefined4 in_at;
-  int iVar2;
-  short sVar3;
-  int iVar4;
-  uint *puVar5;
-  ushort *puVar6;
-  short sVar7;
-  _SVector *v0;
-  undefined4 uStack48;
-  
-  uStack48 = 0;
-  if ((param_5 == (ushort *)0x0) || ((*(ushort *)(param_2 + 0x12) & 2) != 0)) {
-    uStack48 = 0;
+  if ((tface != (_TFace *)0x0) && ((1 << (tface->attr & 0x1f) & ignoreAttr) == 0)) {
+    DAT_1f800040._0_2_ = orgNewPos->x - (bsp->globalOffset).x;
+    DAT_1f800040._2_2_ = orgNewPos->y - (bsp->globalOffset).y;
+    DAT_1f800044 = orgNewPos->z - (bsp->globalOffset).z;
+    DAT_1f800046 = orgOldPos->x - (bsp->globalOffset).x;
+    DAT_1f800048 = orgOldPos->y - (bsp->globalOffset).y;
+    DAT_1f80004a = orgOldPos->z - (bsp->globalOffset).z;
+    DAT_1f800068 = (short)DAT_1f800040;
+    DAT_1f80006a = DAT_1f800040._2_2_;
+    DAT_1f80006c._0_2_ = DAT_1f800044;
+    DAT_1f800070._0_2_ = DAT_1f800046;
+    DAT_1f800070._2_2_ = DAT_1f800048;
+    DAT_1f800074._0_2_ = DAT_1f80004a;
+                    /* WARNING: Subroutine does not return */
+    SetRotMatrix(&DAT_1f800040);
   }
-  else {
-    if ((1 << (*(byte *)(param_5 + 3) & 0x1f) & param_6) == 0) {
-      DAT_1f800040._0_2_ = *param_3 - *(short *)(param_2 + 0xc);
-      DAT_1f800040._2_2_ = param_3[1] - *(short *)(param_2 + 0xe);
-      DAT_1f800044 = param_3[2] - *(short *)(param_2 + 0x10);
-      DAT_1f800046 = *param_4 - *(short *)(param_2 + 0xc);
-      DAT_1f800048 = param_4[1] - *(short *)(param_2 + 0xe);
-      DAT_1f80004a = param_4[2] - *(short *)(param_2 + 0x10);
-      DAT_1f800068 = (short)DAT_1f800040;
-      DAT_1f80006a = DAT_1f800040._2_2_;
-      DAT_1f80006c._0_2_ = DAT_1f800044;
-      DAT_1f800070._0_2_ = DAT_1f800046;
-      DAT_1f800070._2_2_ = DAT_1f800048;
-      DAT_1f800074._0_2_ = DAT_1f80004a;
-      SetRotMatrix(&DAT_1f800040);
-      iVar4 = (int)(short)param_5[4];
-      if (iVar4 < 0) {
-        puVar6 = (ushort *)(*(int *)(param_1 + 0x24) + iVar4 * -6);
-        _DAT_1f800078 = CONCAT22(-puVar6[1],-(*puVar6 & 0x1fff));
-        _DAT_1f80007c = _DAT_1f80007c & 0xffff0000 | (uint)(ushort)-puVar6[2];
-      }
-      else {
-        puVar5 = (uint *)(*(int *)(param_1 + 0x24) + iVar4 * 6);
-        _DAT_1f800078 = *puVar5 & 0xffff1fff;
-        _DAT_1f80007c = _DAT_1f80007c & 0xffff0000 | (uint)*(ushort *)(puVar5 + 1);
-      }
-      iVar4 = *(int *)(param_1 + 0x1c);
-      uVar1 = param_5[1];
-      v0 = (_SVector *)(iVar4 + (uint)*param_5 * 0xc);
-      setCopControlWord(2,0x1800,*(undefined4 *)v0);
-      setCopControlWord(2,0x2000,*(undefined4 *)&v0->z);
-      setCopReg(2,in_zero,_DAT_1f800078);
-      setCopReg(2,in_at,_DAT_1f80007c);
-      copFunction(2,0x486012);
-      _DAT_1f800080 = getCopReg(2,0x19);
-      _DAT_1f800084 = getCopReg(2,0x1a);
-      DAT_1f800088 = getCopReg(2,0x1b);
-      _DAT_1f800080 = _DAT_1f800080 - DAT_1f800088;
-      _DAT_1f800084 = _DAT_1f800084 - DAT_1f800088;
-      if ((((_DAT_1f800080 < 0) && (-1 < _DAT_1f800084)) ||
-          (((param_7 & 1) != 0 && ((0 < _DAT_1f800080 && (_DAT_1f800084 < 1)))))) &&
-         ((iVar2 = COLLIDE_IntersectLineAndPlane_S
-                             (&DAT_1f800060,&DAT_1f800070,&DAT_1f800068,&DAT_1f800078,DAT_1f800088),
-          iVar2 != 0 &&
-          (iVar4 = COLLIDE_PointInTriangle
-                             (v0,(_SVector *)(iVar4 + (uint)uVar1 * 0xc),
-                              (_SVector *)(*(int *)(param_1 + 0x1c) + (uint)param_5[2] * 0xc),
-                              (_SVector *)&DAT_1f800060,(_SVector *)&DAT_1f800078), iVar4 != 0)))) {
-        uStack48 = 1;
-        sVar3 = DAT_1f800060._2_2_ + *(short *)(param_2 + 0xe);
-        sVar7 = DAT_1f800064 + *(short *)(param_2 + 0x10);
-        *param_3 = (short)DAT_1f800060 + *(short *)(param_2 + 0xc);
-        param_3[1] = sVar3;
-        param_3[2] = sVar7;
-      }
-    }
-  }
-  return uStack48;
+  return 0;
 }
 
 

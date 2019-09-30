@@ -5,14 +5,14 @@
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MEMCARD_IsWrongVersion(struct memcard_t *memcard /*$a0*/)
- // line 58, offset 0x800b9924
+ // line 58, offset 0x800b81cc
 	/* begin block 1 */
 		// Start line: 60
-		// Start offset: 0x800B9924
+		// Start offset: 0x800B81CC
 		// Variables:
 	// 		int result; // $v0
 	/* end block 1 */
-	// End offset: 0x800B9930
+	// End offset: 0x800B81D8
 	// End Line: 68
 
 	/* begin block 2 */
@@ -47,15 +47,15 @@ int MEMCARD_IsWrongVersion(memcard_t *memcard)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ load(struct memcard_t *memcard /*$s1*/)
- // line 71, offset 0x800b9938
+ // line 71, offset 0x800b81e0
 	/* begin block 1 */
 		// Start line: 72
-		// Start offset: 0x800B9938
+		// Start offset: 0x800B81E0
 		// Variables:
 	// 		struct Object *object; // $s0
 	/* end block 1 */
-	// End offset: 0x800B99F0
-	// End Line: 115
+	// End offset: 0x800B8298
+	// End Line: 111
 
 	/* begin block 2 */
 		// Start line: 142
@@ -65,12 +65,27 @@ int MEMCARD_IsWrongVersion(memcard_t *memcard)
 void load(memcard_t *memcard)
 
 {
-  if ((theCamera.positionAccl._0_4_ & 0x8000000) != 0) {
-    memcard_load(theCamera.core.vvNormalWorVecMat[0].m + 4);
-    return;
-  }
+  _PrimPool *p_Var1;
+  Object *loadAddr;
+  
+  p_Var1 = gameTrackerX.primPool;
+  if ((gameTrackerX.gameFlags & 0x8000000U) == 0) {
                     /* WARNING: Subroutine does not return */
-  MEMPACK_Malloc((ulong)&DAT_00009c40,'+');
+    MEMPACK_Malloc((ulong)&DAT_00009c40,'+');
+  }
+  loadAddr = (Object *)(gameTrackerX.primPool)->prim;
+  LOAD_LoadToAddress("\\kain2\\object\\mcardx\\mcardx.drm",loadAddr,1);
+  memcard->table = (mcmenu_table_t *)p_Var1->prim[0x10];
+  RELMOD_InitModulePointers(p_Var1->prim[0x10],(int *)p_Var1->prim[0xf]);
+  memcard->object = loadAddr;
+  if (memcard->table->versionID != "May 25 1999") {
+    if ((gameTrackerX.gameFlags & 0x8000000U) == 0) {
+                    /* WARNING: Subroutine does not return */
+      MEMPACK_Free((char *)loadAddr);
+    }
+    memcard->table = (mcmenu_table_t *)0x0;
+  }
+  return;
 }
 
 
@@ -78,11 +93,11 @@ void load(memcard_t *memcard)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ unload(struct memcard_t *memcard /*$s0*/)
- // line 117, offset 0x800b9a04
+ // line 113, offset 0x800b82ac
 	/* begin block 1 */
-		// Start line: 253
+		// Start line: 242
 	/* end block 1 */
-	// End Line: 254
+	// End Line: 243
 
 void unload(memcard_t *memcard)
 
@@ -91,7 +106,7 @@ void unload(memcard_t *memcard)
   
   address = memcard->object;
   if (address != (Object *)0x0) {
-    if (address != (Object *)(theCamera.core.vvPlaneConsts[2] + 0xc)) {
+    if (address != (Object *)(gameTrackerX.primPool)->prim) {
                     /* WARNING: Subroutine does not return */
       MEMPACK_Free((char *)address);
     }
@@ -106,16 +121,16 @@ void unload(memcard_t *memcard)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ memcard_data_size()
- // line 133, offset 0x800b9a58
+ // line 129, offset 0x800b8300
 	/* begin block 1 */
-		// Start line: 285
+		// Start line: 274
 	/* end block 1 */
-	// End Line: 286
+	// End Line: 275
 
 	/* begin block 2 */
-		// Start line: 286
+		// Start line: 275
 	/* end block 2 */
-	// End Line: 287
+	// End Line: 276
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
@@ -130,26 +145,26 @@ int memcard_data_size(void)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ memcard_initialize(struct memcard_t *memcard /*$s0*/, void *gt /*$a1*/, int nblocks /*$s2*/, void *buffer /*$s3*/, int nbytes /*stack 16*/)
- // line 148, offset 0x800b9a60
+ // line 144, offset 0x800b8308
 	/* begin block 1 */
-		// Start line: 149
-		// Start offset: 0x800B9A60
+		// Start line: 145
+		// Start offset: 0x800B8308
 		// Variables:
 	// 		int header_size; // $s1
 	/* end block 1 */
-	// End offset: 0x800B9B00
-	// End Line: 177
+	// End offset: 0x800B83A8
+	// End Line: 173
 
 	/* begin block 2 */
-		// Start line: 315
+		// Start line: 304
 	/* end block 2 */
-	// End Line: 316
+	// End Line: 305
 
-void memcard_initialize(void *param_1)
+int memcard_initialize(memcard_t *memcard,void *gt,int nblocks,void *buffer,int nbytes)
 
 {
                     /* WARNING: Subroutine does not return */
-  memset(param_1,0,0x10);
+  memset(memcard,0,0x10);
 }
 
 
@@ -157,11 +172,11 @@ void memcard_initialize(void *param_1)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ memcard_end(struct memcard_t *memcard /*$s0*/)
- // line 182, offset 0x800b9b20
+ // line 178, offset 0x800b83c8
 	/* begin block 1 */
-		// Start line: 400
+		// Start line: 389
 	/* end block 1 */
-	// End Line: 401
+	// End Line: 390
 
 void memcard_end(memcard_t *memcard)
 
@@ -177,11 +192,11 @@ void memcard_end(memcard_t *memcard)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ maybe_start(struct memcard_t *memcard /*$s0*/)
- // line 190, offset 0x800b9b64
+ // line 186, offset 0x800b840c
 	/* begin block 1 */
-		// Start line: 416
+		// Start line: 405
 	/* end block 1 */
-	// End Line: 417
+	// End Line: 406
 
 int maybe_start(memcard_t *memcard)
 
@@ -201,20 +216,20 @@ int maybe_start(memcard_t *memcard)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ memcard_main_menu(void *gt /*$a0*/, int index /*$s1*/)
- // line 209, offset 0x800b9bd0
+ // line 205, offset 0x800b8478
 	/* begin block 1 */
-		// Start line: 210
-		// Start offset: 0x800B9BD0
+		// Start line: 206
+		// Start offset: 0x800B8478
 		// Variables:
 	// 		struct memcard_t *memcard; // $s0
 	/* end block 1 */
-	// End offset: 0x800B9C10
-	// End Line: 215
+	// End offset: 0x800B84B8
+	// End Line: 211
 
 	/* begin block 2 */
-		// Start line: 455
+		// Start line: 444
 	/* end block 2 */
-	// End Line: 456
+	// End Line: 445
 
 int memcard_main_menu(void *gt,int index)
 
@@ -237,33 +252,33 @@ int memcard_main_menu(void *gt,int index)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ memcard_pause_menu(void *gt /*$a0*/, int index /*$s1*/)
- // line 217, offset 0x800b9c24
+ // line 213, offset 0x800b84cc
 	/* begin block 1 */
-		// Start line: 218
-		// Start offset: 0x800B9C24
+		// Start line: 214
+		// Start offset: 0x800B84CC
 		// Variables:
 	// 		struct memcard_t *memcard; // $s0
 	/* end block 1 */
-	// End offset: 0x800B9C64
-	// End Line: 223
+	// End offset: 0x800B850C
+	// End Line: 219
 
 	/* begin block 2 */
-		// Start line: 472
+		// Start line: 461
 	/* end block 2 */
-	// End Line: 473
+	// End Line: 462
 
-int memcard_pause_menu(int param_1,undefined4 param_2)
+int memcard_pause_menu(void *gt,int index)
 
 {
   int iVar1;
   int iVar2;
   memcard_t *memcard;
   
-  memcard = *(memcard_t **)(param_1 + 0x24);
+  memcard = *(memcard_t **)((int)gt + 0x24);
   iVar1 = maybe_start(memcard);
   iVar2 = -1;
   if (iVar1 != 0) {
-    iVar2 = (*memcard->table->pause)(memcard->mcmenu,param_2);
+    iVar2 = (*memcard->table->pause)(memcard->mcmenu,index);
   }
   return iVar2;
 }
@@ -273,25 +288,25 @@ int memcard_pause_menu(int param_1,undefined4 param_2)
 // decompiled code
 // original method signature: 
 // void * /*$ra*/ gt2mcmenu(void *gt /*$a0*/)
- // line 229, offset 0x800b9c78
+ // line 225, offset 0x800b8520
 	/* begin block 1 */
-		// Start line: 231
-		// Start offset: 0x800B9C78
+		// Start line: 227
+		// Start offset: 0x800B8520
 		// Variables:
 	// 		struct memcard_t *memcard; // $v0
 	/* end block 1 */
-	// End offset: 0x800B9C78
-	// End Line: 231
+	// End offset: 0x800B8520
+	// End Line: 227
 
 	/* begin block 2 */
-		// Start line: 497
+		// Start line: 486
 	/* end block 2 */
-	// End Line: 498
+	// End Line: 487
 
 	/* begin block 3 */
-		// Start line: 498
+		// Start line: 487
 	/* end block 3 */
-	// End Line: 499
+	// End Line: 488
 
 void * gt2mcmenu(void *gt)
 
@@ -304,17 +319,17 @@ void * gt2mcmenu(void *gt)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ memcard_pop(void *opaque /*$a0*/)
- // line 235, offset 0x800b9c8c
+ // line 231, offset 0x800b8534
 	/* begin block 1 */
-		// Start line: 509
+		// Start line: 498
 	/* end block 1 */
-	// End Line: 510
+	// End Line: 499
 
 void memcard_pop(void *opaque)
 
 {
-  menu_pop(theCamera.core.vvNormalWorVecMat[1].m[1]._2_4_);
-  memcard_end(theCamera.core.vvNormalWorVecMat[1].m[2]._0_4_);
+  menu_pop(gameTrackerX.menu);
+  memcard_end(gameTrackerX.memcard);
   return;
 }
 
@@ -323,18 +338,18 @@ void memcard_pop(void *opaque)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ memcard_start(void *opaque /*$a0*/)
- // line 243, offset 0x800b9cc8
+ // line 239, offset 0x800b8570
 	/* begin block 1 */
-		// Start line: 528
+		// Start line: 517
 	/* end block 1 */
-	// End Line: 529
+	// End Line: 518
 
 void memcard_start(void *opaque)
 
 {
-  theCamera.positionAccl._4_4_ = theCamera.positionAccl._4_4_ | 0x1000000;
+  gameTrackerX.streamFlags = gameTrackerX.streamFlags | 0x1000000;
   MAIN_StartGame();
-  memcard_end(theCamera.core.vvNormalWorVecMat[1].m[2]._0_4_);
+  memcard_end(gameTrackerX.memcard);
   return;
 }
 
@@ -343,19 +358,19 @@ void memcard_start(void *opaque)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ memcard_load(void *opaque /*$a0*/)
- // line 252, offset 0x800b9d0c
+ // line 248, offset 0x800b85b4
 	/* begin block 1 */
-		// Start line: 549
+		// Start line: 538
 	/* end block 1 */
-	// End Line: 550
+	// End Line: 539
 
 void memcard_load(void *opaque)
 
 {
-  theCamera.positionAccl._4_4_ = theCamera.positionAccl._4_4_ | 0x200000;
+  gameTrackerX.streamFlags = gameTrackerX.streamFlags | 0x200000;
   SAVE_RestoreGame();
   MAIN_StartGame();
-  memcard_end(theCamera.core.vvNormalWorVecMat[1].m[2]._0_4_);
+  memcard_end(gameTrackerX.memcard);
   return;
 }
 
@@ -364,11 +379,11 @@ void memcard_load(void *opaque)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ memcard_save(void *opaque /*$a0*/)
- // line 261, offset 0x800b9d58
+ // line 257, offset 0x800b8600
 	/* begin block 1 */
-		// Start line: 569
+		// Start line: 558
 	/* end block 1 */
-	// End Line: 570
+	// End Line: 559
 
 void memcard_save(void *opaque)
 
@@ -382,22 +397,20 @@ void memcard_save(void *opaque)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ memcard_item(void *opaque /*$a0*/, TDRFuncPtr_memcard_item1fn fn /*$a1*/, long parameter /*$a2*/, long flags /*$a3*/, char *text /*stack 16*/)
- // line 266, offset 0x800b9d78
+ // line 262, offset 0x800b8620
 	/* begin block 1 */
-		// Start line: 579
+		// Start line: 568
 	/* end block 1 */
-	// End Line: 580
+	// End Line: 569
 
 void memcard_item(void *opaque,TDRFuncPtr_memcard_item1fn fn,long parameter,long flags,char *text)
 
 {
   if (flags == 0) {
-    menu_item(theCamera.core.vvNormalWorVecMat[1].m[1]._2_4_,(TDRFuncPtr_menu_item1fn)fn,parameter,
-              text);
+    menu_item(gameTrackerX.menu,(TDRFuncPtr_menu_item1fn)fn,parameter,text);
   }
   else {
-    menu_item_flags(theCamera.core.vvNormalWorVecMat[1].m[1]._2_4_,(TDRFuncPtr_menu_item_flags1fn)fn
-                    ,parameter,flags,text);
+    menu_item_flags(gameTrackerX.menu,(TDRFuncPtr_menu_item_flags1fn)fn,parameter,flags,text);
   }
   return;
 }

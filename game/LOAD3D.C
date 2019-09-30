@@ -1,28 +1,20 @@
-//#include "THISDUST.H"
+#include "THISDUST.H"
 #include "LOAD3D.H"
-
-#include <SYS/TYPES.H>
-#include <LIBCD.H>
-#include <LIBETC.H>
-#include <LIBGPU.H>
-#include <LIBSN.H>
-#include <STDLIB.H>
-#include <STDIO.H>
 
 
 // decompiled code
-// original method signature:
+// original method signature: 
 // void /*$ra*/ LOAD_InitCd()
-// line 231, offset 0x80036d44
-/* begin block 1 */
-// Start line: 279
-/* end block 1 */
-// End Line: 280
+ // line 226, offset 0x800371cc
+	/* begin block 1 */
+		// Start line: 269
+	/* end block 1 */
+	// End Line: 270
 
-/* begin block 2 */
-// Start line: 462
-/* end block 2 */
-// End Line: 463
+	/* begin block 2 */
+		// Start line: 391
+	/* end block 2 */
+	// End Line: 392
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
@@ -35,223 +27,202 @@ void LOAD_InitCd(void)
   return;
 }
 
+
+
 // decompiled code
-// original method signature:
+// original method signature: 
 // void /*$ra*/ LOAD_CdSeekCallback(unsigned char intr /*$a0*/, unsigned char *result /*$a1*/)
-// line 255, offset 0x80036d74
-/* begin block 1 */
-// Start line: 327
-/* end block 1 */
-// End Line: 328
+ // line 250, offset 0x800371fc
+	/* begin block 1 */
+		// Start line: 317
+	/* end block 1 */
+	// End Line: 318
 
-/* begin block 2 */
-// Start line: 328
-/* end block 2 */
-// End Line: 329
-
-void LOAD_CdSeekCallback(uchar intr, uchar *result)
+void LOAD_CdSeekCallback(uchar intr,uchar *result)
 
 {
-  if (loadStatus.state == 1)
-  {
+  if (loadStatus.state == 1) {
     loadStatus.state = 2;
+                    /* WARNING: Subroutine does not return */
+    GetRCnt(0xf2000000);
   }
   return;
 }
 
+
+
 // decompiled code
-// original method signature:
+// original method signature: 
 // void /*$ra*/ LOAD_CdDataReady()
-// line 267, offset 0x80036d90
-/* begin block 1 */
-// Start line: 268
-// Start offset: 0x80036D90
+ // line 262, offset 0x80037248
+	/* begin block 1 */
+		// Start line: 263
+		// Start offset: 0x80037248
 
-/* begin block 1.1 */
-// Start line: 275
-// Start offset: 0x80036DCC
-// Variables:
-// 		struct _ReadQueueEntry *currentQueueFile; // $s0
-// 		long actualReadSize; // $a1
+		/* begin block 1.1 */
+			// Start line: 270
+			// Start offset: 0x80037284
+			// Variables:
+		// 		struct _ReadQueueEntry *currentQueueFile; // $s0
+		// 		long actualReadSize; // $a1
 
-/* begin block 1.1.1 */
-// Start line: 292
-// Start offset: 0x80036E30
-// Variables:
-// 		int status; // $s1
-/* end block 1.1.1 */
-// End offset: 0x80036E9C
-// End Line: 324
-/* end block 1.1 */
-// End offset: 0x80036E9C
-// End Line: 325
-/* end block 1 */
-// End offset: 0x80036E9C
-// End Line: 330
+			/* begin block 1.1.1 */
+				// Start line: 287
+				// Start offset: 0x800372EC
+				// Variables:
+			// 		int status; // $s1
+			/* end block 1.1.1 */
+			// End offset: 0x80037358
+			// End Line: 319
+		/* end block 1.1 */
+		// End offset: 0x80037358
+		// End Line: 320
+	/* end block 1 */
+	// End offset: 0x80037358
+	// End Line: 325
 
-/* begin block 2 */
-// Start line: 351
-/* end block 2 */
-// End Line: 352
+	/* begin block 2 */
+		// Start line: 343
+	/* end block 2 */
+	// End Line: 344
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-/* void LIGHT_ClassifySources(_CameraCore_Type *cameraCore, Level *level, LightInfo *lightInfo)
+void LOAD_CdDataReady(void)
 
 {
   int iVar1;
-
-  if (_CHAR____800d15b8 == 3)
-  {
-    _CHAR____800d15b8 = 4;
-    LIGHT_SourcesAndInstances((LightInfo *)cameraCore, (_InstanceList *)level);
+  
+  if (loadStatus.state == 3) {
+    loadStatus.state = 4;
+    FUN_80037358();
     return;
   }
-  if (_CHAR____800d15b8 != 4)
-  {
-    LIGHT_SourcesAndInstances((LightInfo *)cameraCore, (_InstanceList *)level);
-    return;
-  }
-  _FX_ConstrictPosition =
-      (LightInfo *)((int)&_CHAR____800d15bc->numInstances + (int)_FX_ConstrictPosition);
-  if (_FX_LastUsedPrim != 3)
-  {
-    if (_FX_LastUsedPrim != 6)
-    {
-      LIGHT_SourcesAndInstances(_FX_ConstrictPosition, _CHAR____800d15bc);
-      return;
-    }
-    iVar1 = 2;
-    if (_FX_ConstrictPosition == _CHAR____800d1590)
-    {
-      iVar1 = 5;
-    }
-    if (_CHAR____800d15ac != (code *)0x0)
-    {
-      (*_CHAR____800d15ac)(_FX_ConstrictPositionPtr, _CHAR____800d15bc, (uint)(iVar1 == 5), _CHAR____800d15b0,
-                           _Spiral_Array);
-    }
-    if (_FX_ConstrictPositionPtr == _CHAR____800d160c)
-    {
-      _FX_ConstrictPositionPtr = _CHAR____800d1610;
-    }
-    else
-    {
-      _FX_ConstrictPositionPtr = _CHAR____800d160c;
-    }
-    _CHAR____800d15b8 = iVar1;
-    return;
-  }
-  _FX_ConstrictPositionPtr = (int)&_CHAR____800d15bc->numInstances + _FX_ConstrictPositionPtr;
-  if (_FX_ConstrictPosition == _CHAR____800d1590)
-  {
-    _CHAR____800d15b8 = 5;
-    LIGHT_SourcesAndInstances(_FX_ConstrictPosition, _CHAR____800d15bc);
-    return;
-  }
-  _CHAR____800d15b8 = 2;
-  LIGHT_SourcesAndInstances(_FX_ConstrictPosition, _CHAR____800d15bc);
-  return;
-} */
-
-// decompiled code
-// original method signature:
-// void /*$ra*/ LOAD_CdReadReady(unsigned char intr /*$a0*/, unsigned char *result /*$a1*/)
-// line 333, offset 0x80036eb0
-/* begin block 1 */
-// Start line: 334
-// Start offset: 0x80036EB0
-
-/* begin block 1.1 */
-// Start line: 344
-// Start offset: 0x80036EDC
-// Variables:
-// 		long crap[3]; // stack offset -40
-// 		int bytes; // $s0
-
-/* begin block 1.1.1 */
-// Start line: 367
-// Start offset: 0x80036F50
-// Variables:
-// 		struct CdlLOC loc; // stack offset -24
-/* end block 1.1.1 */
-// End offset: 0x80036F50
-// End Line: 370
-/* end block 1.1 */
-// End offset: 0x80036F50
-// End Line: 370
-/* end block 1 */
-// End offset: 0x80036F88
-// End Line: 396
-
-/* begin block 2 */
-// Start line: 488
-/* end block 2 */
-// End Line: 489
-
-void LOAD_CdReadReady(uchar intr, uchar *result)
-
-{
-  uint uVar1;
-  int iVar2;
-  _CameraCore_Type *cameraCore;
-  Level *level;
-  LightInfo *in_a2;
-  byte abStack40[16];
-  char acStack24[8];
-
-  if (loadStatus.state == 2)
-  {
-    if (intr == '\x01')
-    {
-      uVar1 = loadStatus.currentQueueFile.readSize - loadStatus.currentQueueFile.readCurSize;
-      if (0x7ff < (int)uVar1)
-      {
-        uVar1 = 0x800;
+  if (loadStatus.state == 4) {
+    loadStatus.currentQueueFile.readCurSize =
+         loadStatus.currentQueueFile.readCurSize + loadStatus.bytesTransferred;
+    if (loadStatus.currentQueueFile.readStatus == 3) {
+      loadStatus.currentQueueFile.readCurDest =
+           (void *)((int)loadStatus.currentQueueFile.readCurDest + loadStatus.bytesTransferred);
+      if (loadStatus.currentQueueFile.readCurSize == loadStatus.currentQueueFile.readSize) {
+        loadStatus.state = 5;
+        FUN_80037358();
+        return;
       }
-      loadStatus.state = 4;
-      loadStatus.bytesTransferred = uVar1;
-      CdGetSector(abStack40, 3);
-      iVar2 = CdPosToInt(abStack40);
-      if (loadStatus.currentSector == iVar2)
-      {
-        level = (Level *)(uVar1 >> 2);
-        cameraCore = (_CameraCore_Type *)loadStatus.currentQueueFile.readCurDest;
-        loadStatus.currentSector = loadStatus.currentSector + 1;
-        CdGetSector(loadStatus.currentQueueFile.readCurDest, (uint)level);
-        LIGHT_ClassifySources(cameraCore, level, in_a2);
-      }
-      else
-      {
-        loadStatus.state = (uint)intr;
-        CdIntToPos(loadStatus.currentSector, acStack24);
-        CdControl(6, acStack24, (undefined *)0x0);
-      }
+      loadStatus.state = 2;
     }
-    else
-    {
-      if (intr == '\x05')
-      {
-        loadStatus.state = 6;
+    else {
+      if (loadStatus.currentQueueFile.readStatus == 6) {
+        iVar1 = 2;
+        if (loadStatus.currentQueueFile.readCurSize == loadStatus.currentQueueFile.readSize) {
+          iVar1 = 5;
+        }
+        if (loadStatus.currentQueueFile.retFunc != (void *)0x0) {
+          (*(code *)loadStatus.currentQueueFile.retFunc)
+                    (loadStatus.currentQueueFile.readCurDest,loadStatus.bytesTransferred,
+                     (uint)(iVar1 == 5),loadStatus.currentQueueFile.retData,
+                     loadStatus.currentQueueFile.retData2);
+        }
+        loadStatus.state = iVar1;
+        if (loadStatus.currentQueueFile.readCurDest == loadStatus.buffer1) {
+          loadStatus.currentQueueFile.readCurDest = loadStatus.buffer2;
+        }
+        else {
+          loadStatus.currentQueueFile.readCurDest = loadStatus.buffer1;
+        }
       }
     }
   }
   return;
 }
 
-// decompiled code
-// original method signature:
-// void /*$ra*/ LOAD_UpdateCheckSum(long bytes /*$a1*/)
-// line 398, offset 0x80036f9c
-/* begin block 1 */
-// Start line: 632
-/* end block 1 */
-// End Line: 633
 
-/* begin block 2 */
-// Start line: 635
-/* end block 2 */
-// End Line: 636
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ LOAD_CdReadReady(unsigned char intr /*$a0*/, unsigned char *result /*$a1*/)
+ // line 328, offset 0x8003736c
+	/* begin block 1 */
+		// Start line: 329
+		// Start offset: 0x8003736C
+		// Variables:
+	// 		static int crap; // offset 0x0
+
+		/* begin block 1.1 */
+			// Start line: 339
+			// Start offset: 0x80037398
+			// Variables:
+		// 		long crap[3]; // stack offset -40
+		// 		int bytes; // $s0
+
+			/* begin block 1.1.1 */
+				// Start line: 361
+				// Start offset: 0x8003740C
+				// Variables:
+			// 		struct CdlLOC loc; // stack offset -24
+			/* end block 1.1.1 */
+			// End offset: 0x8003740C
+			// End Line: 364
+		/* end block 1.1 */
+		// End offset: 0x8003740C
+		// End Line: 364
+	/* end block 1 */
+	// End offset: 0x80037484
+	// End Line: 386
+
+	/* begin block 2 */
+		// Start line: 480
+	/* end block 2 */
+	// End Line: 481
+
+void LOAD_CdReadReady(uchar intr,uchar *result)
+
+{
+  byte abStack40 [24];
+  
+  if (loadStatus.state != 2) {
+    if (crap1 != 0) {
+      loadStatus.seekTime = TIMER_TimeDiff(crap1);
+      crap1 = 0;
+    }
+    loadStatus.sectorTime = TIMER_TimeDiff(crap_35);
+                    /* WARNING: Subroutine does not return */
+    GetRCnt(0xf2000000);
+  }
+  if (intr == '\x01') {
+    loadStatus.bytesTransferred =
+         loadStatus.currentQueueFile.readSize - loadStatus.currentQueueFile.readCurSize;
+    if (0x7ff < loadStatus.bytesTransferred) {
+      loadStatus.bytesTransferred = 0x800;
+    }
+    loadStatus.state = 4;
+    CdGetSector((dword)abStack40,3);
+                    /* WARNING: Subroutine does not return */
+    CdPosToInt(abStack40);
+  }
+  if (intr == '\x05') {
+    loadStatus.state = 6;
+    loadStatus.currentQueueFile.readStatus = 4;
+    LOAD_CdReadReady('\0',result);
+    return;
+  }
+                    /* WARNING: Subroutine does not return */
+  printf("something %x\n");
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ LOAD_UpdateCheckSum(long bytes /*$a1*/)
+ // line 391, offset 0x800374c8
+	/* begin block 1 */
+		// Start line: 623
+	/* end block 1 */
+	// End Line: 624
+
+	/* begin block 2 */
+		// Start line: 626
+	/* end block 2 */
+	// End Line: 627
 
 void LOAD_UpdateCheckSum(long bytes)
 
@@ -259,11 +230,9 @@ void LOAD_UpdateCheckSum(long bytes)
   bool bVar1;
   int iVar2;
   int iVar3;
-
-  if ((loadStatus.currentQueueFile.checksumType == 1) && (iVar3 = bytes + -4, bytes != 0))
-  {
-    do
-    {
+  
+  if ((loadStatus.currentQueueFile.checksumType == 1) && (iVar3 = bytes + -4, bytes != 0)) {
+    do {
       iVar2 = *loadStatus.checkAddr;
       loadStatus.checkAddr = loadStatus.checkAddr + 1;
       loadStatus.checksum = loadStatus.checksum + iVar2;
@@ -274,26 +243,27 @@ void LOAD_UpdateCheckSum(long bytes)
   return;
 }
 
-// decompiled code
-// original method signature:
-// void /*$ra*/ LOAD_DoCDReading()
-// line 413, offset 0x80036fe0
-/* begin block 1 */
-// Start line: 414
-// Start offset: 0x80036FE0
-// Variables:
-// 		long bytesLoaded; // $a0
-// 		long readSoFar; // $v0
-// 		long state; // $s0
-// 		long lastCheck; // $v1
-/* end block 1 */
-// End offset: 0x8003707C
-// End Line: 509
 
-/* begin block 2 */
-// Start line: 665
-/* end block 2 */
-// End Line: 666
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ LOAD_DoCDReading()
+ // line 406, offset 0x8003750c
+	/* begin block 1 */
+		// Start line: 407
+		// Start offset: 0x8003750C
+		// Variables:
+	// 		long bytesLoaded; // $a0
+	// 		long readSoFar; // $v0
+	// 		long state; // $s0
+	/* end block 1 */
+	// End offset: 0x800375A8
+	// End Line: 446
+
+	/* begin block 2 */
+		// Start line: 656
+	/* end block 2 */
+	// End Line: 657
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
@@ -302,97 +272,91 @@ void LOAD_DoCDReading(void)
 {
   long lVar1;
   int bytes;
-
+  
   lVar1 = loadStatus.state;
   bytes = loadStatus.currentQueueFile.readCurSize - loadStatus.lastCheckPos;
   loadStatus.lastCheckPos = loadStatus.currentQueueFile.readCurSize;
-  if ((bytes != 0) && (loadStatus.currentQueueFile.checksumType != 0))
-  {
+  if ((bytes != 0) && (loadStatus.currentQueueFile.checksumType != 0)) {
     LOAD_UpdateCheckSum(bytes);
   }
-  if (lVar1 == 5)
-  {
+  if (lVar1 == 5) {
     if ((loadStatus.currentQueueFile.checksumType == 0) ||
-        (loadStatus.checksum == loadStatus.currentQueueFile.checksum))
-    {
+       (loadStatus.checksum == loadStatus.currentQueueFile.checksum)) {
       loadStatus.currentQueueFile.readStatus = 0;
-      if (loadStatus.currentDirLoading != 0)
-      {
+      if (loadStatus.currentDirLoading != 0) {
         loadStatus.currentDirLoading = 0;
         MEMPACK_SetMemoryDoneStreamed((char *)loadStatus.bigFile.currentDir);
       }
     }
-    else
-    {
+    else {
       loadStatus.currentQueueFile.readStatus = 7;
     }
   }
   return;
 }
 
-// decompiled code
-// original method signature:
-// void /*$ra*/ LOAD_DoCDBufferedReading()
-// line 516, offset 0x8003708c
-/* begin block 1 */
-// Start line: 879
-/* end block 1 */
-// End Line: 880
 
-/* begin block 2 */
-// Start line: 881
-/* end block 2 */
-// End Line: 882
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ LOAD_DoCDBufferedReading()
+ // line 453, offset 0x800375b8
+	/* begin block 1 */
+		// Start line: 759
+	/* end block 1 */
+	// End Line: 760
+
+	/* begin block 2 */
+		// Start line: 761
+	/* end block 2 */
+	// End Line: 762
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void LOAD_DoCDBufferedReading(void)
 
 {
-  if (loadStatus.state == 5)
-  {
+  if (loadStatus.state == 5) {
     loadStatus.currentQueueFile.readStatus = 0;
   }
   return;
 }
 
+
+
 // decompiled code
-// original method signature:
+// original method signature: 
 // void /*$ra*/ LOAD_SetupFileToDoCDReading()
-// line 527, offset 0x800370a8
-/* begin block 1 */
-// Start line: 528
-// Start offset: 0x800370A8
+ // line 464, offset 0x800375d4
+	/* begin block 1 */
+		// Start line: 465
+		// Start offset: 0x800375D4
 
-/* begin block 1.1 */
-// Start line: 528
-// Start offset: 0x800370A8
-// Variables:
-// 		struct CdlLOC loc; // stack offset -16
-/* end block 1.1 */
-// End offset: 0x800370E4
-// End Line: 543
-/* end block 1 */
-// End offset: 0x800370E4
-// End Line: 544
+		/* begin block 1.1 */
+			// Start line: 465
+			// Start offset: 0x800375D4
+			// Variables:
+		// 		struct CdlLOC loc; // stack offset -16
+		/* end block 1.1 */
+		// End offset: 0x80037610
+		// End Line: 480
+	/* end block 1 */
+	// End offset: 0x80037610
+	// End Line: 481
 
-/* begin block 2 */
-// Start line: 901
-/* end block 2 */
-// End Line: 902
+	/* begin block 2 */
+		// Start line: 781
+	/* end block 2 */
+	// End Line: 782
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void LOAD_SetupFileToDoCDReading(void)
 
 {
-  _Instance *instance;
-  MultiSpline *multi;
   long lVar1;
-  ulong isParent;
-  ulong in_a3;
-  char acStack16[8];
-
+  byte abStack16 [8];
+  
   loadStatus.currentQueueFile.readStatus = 3;
   loadStatus.checksum = 0;
   loadStatus.lastCheckPos = 0;
@@ -400,247 +364,205 @@ void LOAD_SetupFileToDoCDReading(void)
   loadStatus.currentQueueFile.readCurDest = loadStatus.currentQueueFile.readStartDest;
   loadStatus.checkAddr = (long *)loadStatus.currentQueueFile.readStartDest;
   lVar1 = loadStatus.currentQueueFile.readStartPos;
-  if (loadStatus.currentQueueFile.readStartPos < 0)
-  {
+  if (loadStatus.currentQueueFile.readStartPos < 0) {
     lVar1 = loadStatus.currentQueueFile.readStartPos + 0x7ff;
   }
   loadStatus.currentSector = loadStatus.bigFile.bigfileBaseOffset + (lVar1 >> 0xb);
-  CdIntToPos(loadStatus.currentSector, acStack16);
-  instance = (_Instance *)((int)&mainMenuScreen + 2);
-  multi = (MultiSpline *)acStack16;
-  isParent = 0;
-  CdControl(6, (undefined *)multi, (undefined *)0x0);
-  loadStatus.cdWaitTime = (long)SCRIPT_GetPosSplineDef(instance, multi, isParent, in_a3);
-  return;
+  CdIntToPos(loadStatus.currentSector,(char *)abStack16);
+  CdControl(6,abStack16,(undefined *)0x0);
+                    /* WARNING: Subroutine does not return */
+  TIMER_GetTimeMS();
 }
 
+
+
 // decompiled code
-// original method signature:
+// original method signature: 
 // void /*$ra*/ LOAD_SetupFileToDoBufferedCDReading()
-// line 602, offset 0x80037124
-/* begin block 1 */
-// Start line: 603
-// Start offset: 0x80037124
+ // line 539, offset 0x80037650
+	/* begin block 1 */
+		// Start line: 540
+		// Start offset: 0x80037650
 
-/* begin block 1.1 */
-// Start line: 603
-// Start offset: 0x80037124
-// Variables:
-// 		struct CdlLOC loc; // stack offset -16
-/* end block 1.1 */
-// End offset: 0x80037158
-// End Line: 619
-/* end block 1 */
-// End offset: 0x80037158
-// End Line: 620
+		/* begin block 1.1 */
+			// Start line: 540
+			// Start offset: 0x80037650
+			// Variables:
+		// 		struct CdlLOC loc; // stack offset -16
+		/* end block 1.1 */
+		// End offset: 0x80037684
+		// End Line: 556
+	/* end block 1 */
+	// End offset: 0x80037684
+	// End Line: 557
 
-/* begin block 2 */
-// Start line: 1093
-/* end block 2 */
-// End Line: 1094
+	/* begin block 2 */
+		// Start line: 973
+	/* end block 2 */
+	// End Line: 974
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void LOAD_SetupFileToDoBufferedCDReading(void)
 
 {
-  _Instance *instance;
-  MultiSpline *multi;
   long lVar1;
-  ulong isParent;
-  ulong in_a3;
-  char acStack16[8];
-
+  byte abStack16 [8];
+  
   loadStatus.currentQueueFile.readStatus = 6;
   loadStatus.checksum = 0;
   loadStatus.state = 1;
   loadStatus.checkAddr = (long *)loadStatus.currentQueueFile.readStartDest;
   lVar1 = loadStatus.currentQueueFile.readStartPos;
-  if (loadStatus.currentQueueFile.readStartPos < 0)
-  {
+  if (loadStatus.currentQueueFile.readStartPos < 0) {
     lVar1 = loadStatus.currentQueueFile.readStartPos + 0x7ff;
   }
   loadStatus.currentSector = loadStatus.bigFile.bigfileBaseOffset + (lVar1 >> 0xb);
-  CdIntToPos(loadStatus.currentSector, acStack16);
-  instance = (_Instance *)((int)&mainMenuScreen + 2);
-  multi = (MultiSpline *)acStack16;
-  isParent = 0;
-  CdControl(6, (undefined *)multi, (undefined *)0x0);
-  loadStatus.cdWaitTime = (long)SCRIPT_GetPosSplineDef(instance, multi, isParent, in_a3);
-  return;
+  CdIntToPos(loadStatus.currentSector,(char *)abStack16);
+  CdControl(6,abStack16,(undefined *)0x0);
+                    /* WARNING: Subroutine does not return */
+  TIMER_GetTimeMS();
 }
 
+
+
 // decompiled code
-// original method signature:
+// original method signature: 
 // void /*$ra*/ LOAD_ProcessReadQueue()
-// line 627, offset 0x80037198
-/* begin block 1 */
-// Start line: 628
-// Start offset: 0x80037198
+ // line 564, offset 0x800376c4
+	/* begin block 1 */
+		// Start line: 565
+		// Start offset: 0x800376C4
 
-/* begin block 1.1 */
-// Start line: 668
-// Start offset: 0x80037248
-// Variables:
-// 		long cdWaitTimeDiff; // $v0
+		/* begin block 1.1 */
+			// Start line: 605
+			// Start offset: 0x800377AC
+			// Variables:
+		// 		long cdWaitTimeDiff; // $v0
 
-/* begin block 1.1.1 */
-// Start line: 674
-// Start offset: 0x80037298
-// Variables:
-// 		struct CdlLOC loc; // stack offset -16
-/* end block 1.1.1 */
-// End offset: 0x80037298
-// End Line: 675
-/* end block 1.1 */
-// End offset: 0x80037304
-// End Line: 699
-/* end block 1 */
-// End offset: 0x80037304
-// End Line: 701
+			/* begin block 1.1.1 */
+				// Start line: 611
+				// Start offset: 0x800377EC
+				// Variables:
+			// 		struct CdlLOC loc; // stack offset -16
+			/* end block 1.1.1 */
+			// End offset: 0x800377EC
+			// End Line: 612
+		/* end block 1.1 */
+		// End offset: 0x80037858
+		// End Line: 636
+	/* end block 1 */
+	// End offset: 0x80037858
+	// End Line: 638
 
-/* begin block 2 */
-// Start line: 1179
-/* end block 2 */
-// End Line: 1180
+	/* begin block 2 */
+		// Start line: 1059
+	/* end block 2 */
+	// End Line: 1060
+
+	/* begin block 3 */
+		// Start line: 1065
+	/* end block 3 */
+	// End Line: 1066
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void LOAD_ProcessReadQueue(void)
 
 {
-  SplineDef *pSVar1;
-  int iVar2;
-  _Instance *in_a0;
-  _Instance *instance;
-  MultiSpline *in_a1;
-  MultiSpline *multi;
-  ulong in_a2;
-  ulong isParent;
-  ulong in_a3;
-  char acStack16[8];
-
-  if (loadStatus.currentQueueFile.readStatus == 3)
-  {
+  if (gameTrackerX.debugFlags < 0) {
+                    /* WARNING: Subroutine does not return */
+    FONT_Print("CD St %d LS %d sk %d tm %d rd %d cs %d\n");
+  }
+  if (loadStatus.currentQueueFile.readStatus == 3) {
     LOAD_DoCDReading();
   }
-  else
-  {
-    if (loadStatus.currentQueueFile.readStatus < 4)
-    {
-      if (loadStatus.currentQueueFile.readStatus == 1)
-      {
+  else {
+    if (loadStatus.currentQueueFile.readStatus < 4) {
+      if (loadStatus.currentQueueFile.readStatus == 1) {
         LOAD_SetupFileToDoCDReading();
       }
     }
-    else
-    {
-      if (loadStatus.currentQueueFile.readStatus == 5)
-      {
+    else {
+      if (loadStatus.currentQueueFile.readStatus == 5) {
         LOAD_SetupFileToDoBufferedCDReading();
       }
-      else
-      {
-        if (loadStatus.currentQueueFile.readStatus == 6)
-        {
+      else {
+        if (loadStatus.currentQueueFile.readStatus == 6) {
           LOAD_DoCDBufferedReading();
         }
       }
     }
   }
-  if (loadStatus.currentQueueFile.readStatus == 7)
-  {
+  if (loadStatus.currentQueueFile.readStatus == 7) {
     loadStatus.currentQueueFile.readStatus = 1;
   }
-  else
-  {
-    if ((loadStatus.cdWaitTime != 0) &&
-        ((pSVar1 = SCRIPT_GetPosSplineDef(in_a0, in_a1, in_a2, in_a3),
-          0x41a0 < (int)((int)pSVar1 - loadStatus.cdWaitTime) || (loadStatus.state == 6))))
-    {
-      if ((loadStatus.currentQueueFile.readStatus == 3) ||
-          (loadStatus.currentQueueFile.readStatus == 6))
-      {
-        loadStatus.state = 0;
-        CdReset(0);
-        LOAD_InitCdStreamMode();
-        loadStatus.state = 1;
-        CdIntToPos(loadStatus.currentSector, acStack16);
-        instance = (_Instance *)((int)&mainMenuScreen + 2);
-        multi = (MultiSpline *)acStack16;
-        isParent = 0;
-        CdControl(6, (undefined *)multi, (undefined *)0x0);
-        loadStatus.cdWaitTime = (long)SCRIPT_GetPosSplineDef(instance, multi, isParent, in_a3);
-      }
-      else
-      {
-        iVar2 = VOICEXA_IsPlaying();
-        if (iVar2 == 0)
-        {
-          CdControlF(9, (undefined *)0x0);
-        }
-        loadStatus.cdWaitTime = 0;
-      }
+  else {
+    if (loadStatus.cdWaitTime != 0) {
+                    /* WARNING: Subroutine does not return */
+      TIMER_GetTimeMS();
     }
   }
   return;
 }
 
+
+
 // decompiled code
-// original method signature:
+// original method signature: 
 // char * /*$ra*/ LOAD_ReadFileFromCD(char *filename /*$s1*/, int memType /*$s2*/)
-// line 705, offset 0x80037314
-/* begin block 1 */
-// Start line: 706
-// Start offset: 0x80037314
-// Variables:
-// 		struct CdlFILE fp; // stack offset -40
-// 		int i; // $s0
-// 		char *readBuffer; // $s0
-/* end block 1 */
-// End offset: 0x800373DC
-// End Line: 750
+ // line 642, offset 0x80037868
+	/* begin block 1 */
+		// Start line: 643
+		// Start offset: 0x80037868
+		// Variables:
+	// 		struct CdlFILE fp; // stack offset -40
+	// 		int i; // $s0
+	// 		char *readBuffer; // $s0
+	/* end block 1 */
+	// End offset: 0x80037930
+	// End Line: 687
 
-/* begin block 2 */
-// Start line: 1336
-/* end block 2 */
-// End Line: 1337
+	/* begin block 2 */
+		// Start line: 1222
+	/* end block 2 */
+	// End Line: 1223
 
-char *LOAD_ReadFileFromCD(char *filename, int memType)
+char * LOAD_ReadFileFromCD(char *filename,int memType)
 
 {
-  void **ppvVar1;
+  undefined4 *puVar1;
   int iVar2;
-  void *pvStack40;
+  undefined4 uStack40;
   ulong local_24;
-
+  
   iVar2 = 0;
-  do
-  {
-    ppvVar1 = CdSearchFile(&pvStack40, filename);
-    if (ppvVar1 != (void **)0x0)
-      break;
+  do {
+    puVar1 = CdSearchFile(&uStack40,filename);
+    if (puVar1 != (undefined4 *)0x0) break;
     CdReset(0);
     iVar2 = iVar2 + 1;
   } while (iVar2 < 10);
-  if (iVar2 != 10)
-  {
-    /* WARNING: Subroutine does not return */
-    MEMPACK_Malloc(local_24, (uchar)memType);
+  if (iVar2 != 10) {
+                    /* WARNING: Subroutine does not return */
+    MEMPACK_Malloc(local_24,(uchar)memType);
   }
   return (char *)0x0;
 }
 
-// decompiled code
-// original method signature:
-// void /*$ra*/ LOAD_CdReadFromBigFile(long fileOffset /*$a0*/, unsigned long *loadAddr /*$a1*/, long bytes /*$a2*/, long chksumLevel /*$a3*/, long checksum /*stack 16*/)
-// line 752, offset 0x800373f4
-/* begin block 1 */
-// Start line: 1449
-/* end block 1 */
-// End Line: 1450
 
-void LOAD_CdReadFromBigFile(long fileOffset, ulong *loadAddr, long bytes, long chksumLevel, long checksum)
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ LOAD_CdReadFromBigFile(long fileOffset /*$a0*/, unsigned long *loadAddr /*$a1*/, long bytes /*$a2*/, long chksumLevel /*$a3*/, long checksum /*stack 16*/)
+ // line 689, offset 0x80037948
+	/* begin block 1 */
+		// Start line: 1335
+	/* end block 1 */
+	// End Line: 1336
+
+void LOAD_CdReadFromBigFile
+               (long fileOffset,ulong *loadAddr,long bytes,long chksumLevel,long checksum)
 
 {
   loadStatus.currentQueueFile.readStartPos = fileOffset;
@@ -653,137 +575,122 @@ void LOAD_CdReadFromBigFile(long fileOffset, ulong *loadAddr, long bytes, long c
   return;
 }
 
+
+
 // decompiled code
-// original method signature:
+// original method signature: 
 // struct _BigFileDir * /*$ra*/ LOAD_ReadDirectory(struct _BigFileDirEntry *dirEntry /*$s0*/)
-// line 765, offset 0x80037420
-/* begin block 1 */
-// Start line: 766
-// Start offset: 0x80037420
-// Variables:
-// 		struct _BigFileDir *dir; // $s2
-// 		long sizeOfDir; // $s1
-/* end block 1 */
-// End offset: 0x80037420
-// End Line: 766
+ // line 702, offset 0x80037974
+	/* begin block 1 */
+		// Start line: 703
+		// Start offset: 0x80037974
+		// Variables:
+	// 		struct _BigFileDir *dir; // $s2
+	// 		long sizeOfDir; // $s1
+	/* end block 1 */
+	// End offset: 0x80037974
+	// End Line: 703
 
-/* begin block 2 */
-// Start line: 1479
-/* end block 2 */
-// End Line: 1480
+	/* begin block 2 */
+		// Start line: 1365
+	/* end block 2 */
+	// End Line: 1366
 
-_BigFileDir *LOAD_ReadDirectory(_BigFileDirEntry *dirEntry)
+_BigFileDir * LOAD_ReadDirectory(_BigFileDirEntry *dirEntry)
 
 {
-  /* WARNING: Subroutine does not return */
-  MEMPACK_Malloc((int)dirEntry->numFiles * 0x10 + 4, ',');
+                    /* WARNING: Subroutine does not return */
+  MEMPACK_Malloc((int)dirEntry->numFiles * 0x10 + 4,',');
 }
 
+
+
 // decompiled code
-// original method signature:
+// original method signature: 
 // void /*$ra*/ LOAD_InitCdLoader(char *bigFileName /*$s0*/, char *voiceFileName /*$a1*/)
-// line 828, offset 0x80037488
-/* begin block 1 */
-// Start line: 829
-// Start offset: 0x80037488
-// Variables:
-// 		struct CdlFILE fp; // stack offset -40
-// 		long i; // $s1
+ // line 718, offset 0x800379dc
+	/* begin block 1 */
+		// Start line: 719
+		// Start offset: 0x800379DC
+		// Variables:
+	// 		struct CdlFILE fp; // stack offset -40
+	// 		long i; // $s1
 
-/* begin block 1.1 */
-// Start line: 896
-// Start offset: 0x80037538
-// Variables:
-// 		char *ptr; // $s0
-/* end block 1.1 */
-// End offset: 0x800375A0
-// End Line: 920
-/* end block 1 */
-// End offset: 0x800375C8
-// End Line: 932
+		/* begin block 1.1 */
+			// Start line: 786
+			// Start offset: 0x80037A90
+			// Variables:
+		// 		char *ptr; // $s0
+		/* end block 1.1 */
+		// End offset: 0x80037AF8
+		// End Line: 801
+	/* end block 1 */
+	// End offset: 0x80037B20
+	// End Line: 813
 
-/* begin block 2 */
-// Start line: 1607
-/* end block 2 */
-// End Line: 1608
+	/* begin block 2 */
+		// Start line: 1399
+	/* end block 2 */
+	// End Line: 1400
 
-void LOAD_InitCdLoader(char *bigFileName, char *voiceFileName)
+void LOAD_InitCdLoader(char *bigFileName,char *voiceFileName)
 
 {
-  void **ppvVar1;
+  undefined4 *puVar1;
   int iVar2;
-  void *apvStack40[6];
-
+  undefined4 auStack40 [6];
+  
   iVar2 = 0;
   loadStatus.state = 0;
-  do
-  {
-    ppvVar1 = CdSearchFile(apvStack40, bigFileName);
-    if (ppvVar1 != (void **)0x0)
-      break;
+  do {
+    puVar1 = CdSearchFile(auStack40,bigFileName);
+    if (puVar1 != (undefined4 *)0x0) break;
     CdReset(0);
     iVar2 = iVar2 + 1;
   } while (iVar2 < 10);
-  if (iVar2 != 10)
-  {
+  if (iVar2 != 10) {
     LOAD_InitCdStreamMode();
-    loadStatus.bigFile.bigfileBaseOffset = CdPosToInt((byte *)apvStack40);
-    loadStatus.cdWaitTime = 0;
-    loadStatus.currentQueueFile.readStatus = 0;
-    loadStatus.bigFile.currentDir = (_BigFileDir *)0x0;
-    loadStatus.bigFile.currentDirID = 0;
-    loadStatus.bigFile.cachedDir = (_BigFileDir *)0x0;
-    loadStatus.bigFile.cachedDirID = 0;
-    loadStatus.bigFile.searchDirID = 0;
-    LOAD_CdReadFromBigFile(0, (ulong *)&loadStatus.bigFile.numSubDirs, 4, 0, 0);
-    do
-    {
-      LOAD_ProcessReadQueue();
-      iVar2 = LOAD_IsFileLoading();
-    } while (iVar2 != 0);
-    CdControlF(9, (undefined *)0x0);
-    /* WARNING: Subroutine does not return */
-    MEMPACK_Malloc(loadStatus.bigFile.numSubDirs * 8 + 4, '\b');
+                    /* WARNING: Subroutine does not return */
+    CdPosToInt((byte *)auStack40);
   }
   return;
 }
 
-// decompiled code
-// original method signature:
-// int /*$ra*/ LOAD_SetupFileInfo(struct _NonBlockLoadEntry *loadEntry /*$s0*/)
-// line 934, offset 0x800375dc
-/* begin block 1 */
-// Start line: 935
-// Start offset: 0x800375DC
-// Variables:
-// 		struct _BigFileEntry *fileInfo; // $v1
-/* end block 1 */
-// End offset: 0x80037654
-// End Line: 958
 
-/* begin block 2 */
-// Start line: 1869
-/* end block 2 */
-// End Line: 1870
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ LOAD_SetupFileInfo(struct _NonBlockLoadEntry *loadEntry /*$s0*/)
+ // line 815, offset 0x80037b34
+	/* begin block 1 */
+		// Start line: 816
+		// Start offset: 0x80037B34
+		// Variables:
+	// 		struct _BigFileEntry *fileInfo; // $v1
+	/* end block 1 */
+	// End offset: 0x80037BAC
+	// End Line: 839
+
+	/* begin block 2 */
+		// Start line: 1643
+	/* end block 2 */
+	// End Line: 1644
 
 int LOAD_SetupFileInfo(_NonBlockLoadEntry *loadEntry)
 
 {
   _BigFileEntry *p_Var1;
   int iVar2;
-
+  
   p_Var1 = LOAD_GetBigFileEntryByHash(loadEntry->fileHash);
-  if (p_Var1 == (_BigFileEntry *)0x0)
-  {
+  if (p_Var1 == (_BigFileEntry *)0x0) {
     iVar2 = 0;
-    if (loadEntry->dirHash == loadStatus.bigFile.currentDirID)
-    {
-      /* WARNING: Subroutine does not return */
-      DEBUG_FatalError(s_CD_ERROR__File__x_does_not_exist_800ce4ac);
+    if (loadEntry->dirHash == loadStatus.bigFile.currentDirID) {
+      DEBUG_FatalError("CD ERROR: File %s does not exist\n");
+      iVar2 = 0;
     }
   }
-  else
-  {
+  else {
     loadEntry->filePos = p_Var1->filePos;
     loadEntry->loadSize = p_Var1->fileLen;
     iVar2 = 1;
@@ -792,32 +699,64 @@ int LOAD_SetupFileInfo(_NonBlockLoadEntry *loadEntry)
   return iVar2;
 }
 
-// decompiled code
-// original method signature:
-// void /*$ra*/ LOAD_CD_ReadPartOfFile(struct _NonBlockLoadEntry *loadEntry /*$s0*/)
-// line 963, offset 0x80037664
-/* begin block 1 */
-// Start line: 964
-// Start offset: 0x80037664
-// Variables:
-// 		struct _ReadQueueEntry *currentQueueReq; // $v1
-/* end block 1 */
-// End offset: 0x800376F4
-// End Line: 989
 
-/* begin block 2 */
-// Start line: 1928
-/* end block 2 */
-// End Line: 1929
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ LOAD_NonBlockingReadFile(struct _NonBlockLoadEntry *loadEntry /*$s0*/)
+ // line 842, offset 0x80037bbc
+	/* begin block 1 */
+		// Start line: 1698
+	/* end block 1 */
+	// End Line: 1699
+
+void LOAD_NonBlockingReadFile(_NonBlockLoadEntry *loadEntry)
+
+{
+  int iVar1;
+  
+  iVar1 = LOAD_SetupFileInfo(loadEntry);
+  if (iVar1 == 0) {
+    loadStatus.changeDir = 1;
+    return;
+  }
+  if (loadEntry->loadAddr == (long *)0x0) {
+                    /* WARNING: Subroutine does not return */
+    MEMPACK_Malloc(loadEntry->loadSize,*(uchar *)&loadEntry->memType);
+  }
+                    /* WARNING: Subroutine does not return */
+  LOAD_CdReadFromBigFile
+            (loadEntry->filePos,(ulong *)loadEntry->loadAddr,loadEntry->loadSize,
+             loadEntry->checksumType,loadEntry->checksum);
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ LOAD_CD_ReadPartOfFile(struct _NonBlockLoadEntry *loadEntry /*$s0*/)
+ // line 862, offset 0x80037c40
+	/* begin block 1 */
+		// Start line: 863
+		// Start offset: 0x80037C40
+		// Variables:
+	// 		struct _ReadQueueEntry *currentQueueReq; // $v1
+	/* end block 1 */
+	// End offset: 0x80037CD4
+	// End Line: 888
+
+	/* begin block 2 */
+		// Start line: 1738
+	/* end block 2 */
+	// End Line: 1739
 
 void LOAD_CD_ReadPartOfFile(_NonBlockLoadEntry *loadEntry)
 
 {
   int iVar1;
-
+  
   iVar1 = LOAD_SetupFileInfo(loadEntry);
-  if (iVar1 != 0)
-  {
+  if (iVar1 != 0) {
     loadStatus.currentQueueFile.readSize = loadEntry->loadSize;
     loadStatus.currentQueueFile.readCurSize = 0;
     loadStatus.currentQueueFile.readStartDest = loadEntry->loadAddr;
@@ -834,105 +773,75 @@ void LOAD_CD_ReadPartOfFile(_NonBlockLoadEntry *loadEntry)
   return;
 }
 
-// decompiled code
-// original method signature:
-// long /*$ra*/ LOAD_HashName(char *string /*stack 0*/)
-// line 1002, offset 0x80037704
-/* begin block 1 */
-// Start line: 1003
-// Start offset: 0x80037704
-// Variables:
-// 		long sum; // $s5
-// 		long xor; // $s6
-// 		long length; // $s4
-// 		long ext; // $s7
-// 		char c; // $v1
-// 		long strl; // $s2
-// 		long endPos; // $fp
-// 		long i; // $s0
-// 		char *pos; // $s3
-/* end block 1 */
-// End offset: 0x80037814
-// End Line: 1046
 
-/* begin block 2 */
-// Start line: 2014
-/* end block 2 */
-// End Line: 2015
+
+// decompiled code
+// original method signature: 
+// long /*$ra*/ LOAD_HashName(char *string /*stack 0*/)
+ // line 901, offset 0x80037ce4
+	/* begin block 1 */
+		// Start line: 902
+		// Start offset: 0x80037CE4
+		// Variables:
+	// 		long sum; // $s5
+	// 		long xor; // $s6
+	// 		long length; // $s4
+	// 		long ext; // $s7
+	// 		char c; // $v1
+	// 		long strl; // $s2
+	// 		long endPos; // $fp
+	// 		long i; // $s0
+	// 		char *pos; // $s3
+	/* end block 1 */
+	// End offset: 0x80037DF8
+	// End Line: 945
+
+	/* begin block 2 */
+		// Start line: 1824
+	/* end block 2 */
+	// End Line: 1825
 
 long LOAD_HashName(char *string)
 
 {
-  size_t sVar1;
-  char *pcVar2;
-  uint uVar3;
-  int iVar4;
-  uint uVar5;
-
-  uVar5 = 0;
-  iVar4 = 0;
-  sVar1 = strlen(string);
-  pcVar2 = strchr(string, 0x2e);
-  if (pcVar2 != (char *)0x0)
-  {
-    /* WARNING: Subroutine does not return */
-    strcmpi(pcVar2 + 1, HashExtensions);
-  }
-  uVar3 = 0;
-  if (-1 < (int)(sVar1 - 1))
-  {
-    uVar3 = (uint)(byte)string[sVar1 - 1];
-    if (string[sVar1 - 1] != 0x5c)
-    {
-      if (uVar3 - 0x61 < 0x1a)
-      {
-        uVar3 = uVar3 & 0xdf;
-      }
-      uVar5 = uVar3 - 0x1a & 0xff;
-      iVar4 = 1;
-    }
-    uVar3 = iVar4 << 0x1b;
-    if (-1 < (int)(sVar1 - 2))
-    {
-      LOAD_ProcessReadQueue();
-      return uVar3;
-    }
-  }
-  return uVar3 | uVar5 << 0xf;
+                    /* WARNING: Subroutine does not return */
+  strlen(string);
 }
 
+
+
 // decompiled code
-// original method signature:
+// original method signature: 
 // long /*$ra*/ LOAD_HashUnit(char *name /*$a0*/)
-// line 1049, offset 0x80037858
-/* begin block 1 */
-// Start line: 1051
-// Start offset: 0x80037858
-// Variables:
-// 		int val; // $v1
-// 		int last; // $t0
-// 		int hash; // $a2
-// 		int num; // $a3
-// 		int flag; // $t1
-// 		char *c; // $a0
-/* end block 1 */
-// End offset: 0x800378EC
-// End Line: 1085
+ // line 948, offset 0x80037e3c
+	/* begin block 1 */
+		// Start line: 950
+		// Start offset: 0x80037E3C
+		// Variables:
+	// 		int val; // $v1
+	// 		int last; // $t0
+	// 		int hash; // $a2
+	// 		int num; // $a3
+	// 		int flag; // $t1
+	// 		char *c; // $a0
+	/* end block 1 */
+	// End offset: 0x80037ED0
+	// End Line: 984
 
-/* begin block 2 */
-// Start line: 2121
-/* end block 2 */
-// End Line: 2122
+	/* begin block 2 */
+		// Start line: 1931
+	/* end block 2 */
+	// End Line: 1932
 
-/* begin block 3 */
-// Start line: 2122
-/* end block 3 */
-// End Line: 2123
+	/* begin block 3 */
+		// Start line: 1932
+	/* end block 3 */
+	// End Line: 1933
 
-/* begin block 4 */
-// Start line: 2123
-/* end block 4 */
-// End Line: 2124
+	/* begin block 4 */
+		// Start line: 1933
+	/* end block 4 */
+	// End Line: 1934
 
 long LOAD_HashUnit(char *name)
 
@@ -945,33 +854,27 @@ long LOAD_HashUnit(char *name)
   uint uVar6;
   int iVar7;
   int iVar8;
-
+  
   iVar7 = 0;
   iVar8 = 0;
   bVar1 = *name;
   bVar2 = false;
   uVar3 = 0;
-  while (bVar1 != 0)
-  {
+  while (bVar1 != 0) {
     uVar5 = (uint)(byte)*name;
-    if (uVar5 - 0x30 < 10)
-    {
+    if (uVar5 - 0x30 < 10) {
       iVar8 = iVar8 * 10 + -0x30 + uVar5;
       uVar6 = uVar3;
     }
-    else
-    {
+    else {
       uVar6 = uVar5 - 0x61;
-      if (uVar5 - 0x41 < 0x1a)
-      {
+      if (uVar5 - 0x41 < 0x1a) {
         uVar6 = uVar5 - 0x41;
       }
-      if (bVar2)
-      {
+      if (bVar2) {
         iVar4 = (uVar6 - uVar3) * 0x20;
       }
-      else
-      {
+      else {
         iVar4 = uVar6 - uVar3;
       }
       iVar7 = iVar7 * 4 + iVar4;
@@ -984,50 +887,50 @@ long LOAD_HashUnit(char *name)
   return (iVar7 + iVar8) * 0x10000 >> 0x10;
 }
 
+
+
 // decompiled code
-// original method signature:
+// original method signature: 
 // struct _BigFileEntry * /*$ra*/ LOAD_GetBigFileEntryByHash(long hash /*$a0*/)
-// line 1090, offset 0x800378fc
-/* begin block 1 */
-// Start line: 1092
-// Start offset: 0x800378FC
-// Variables:
-// 		int i; // $a1
-// 		struct _BigFileEntry *entry; // $v1
-/* end block 1 */
-// End offset: 0x8003797C
-// End Line: 1111
+ // line 989, offset 0x80037ee0
+	/* begin block 1 */
+		// Start line: 991
+		// Start offset: 0x80037EE0
+		// Variables:
+	// 		int i; // $a1
+	// 		struct _BigFileEntry *entry; // $v1
+	/* end block 1 */
+	// End offset: 0x80037F60
+	// End Line: 1010
 
-/* begin block 2 */
-// Start line: 2226
-/* end block 2 */
-// End Line: 2227
+	/* begin block 2 */
+		// Start line: 2036
+	/* end block 2 */
+	// End Line: 2037
 
-/* begin block 3 */
-// Start line: 2227
-/* end block 3 */
-// End Line: 2228
+	/* begin block 3 */
+		// Start line: 2037
+	/* end block 3 */
+	// End Line: 2038
 
-/* begin block 4 */
-// Start line: 2230
-/* end block 4 */
-// End Line: 2231
+	/* begin block 4 */
+		// Start line: 2040
+	/* end block 4 */
+	// End Line: 2041
 
-_BigFileEntry *LOAD_GetBigFileEntryByHash(long hash)
+_BigFileEntry * LOAD_GetBigFileEntryByHash(long hash)
 
 {
   _BigFileEntry *p_Var1;
   int iVar2;
-
+  
   if ((loadStatus.bigFile.currentDir != (_BigFileDir *)0x0) && (loadStatus.currentDirLoading == 0))
   {
     iVar2 = (loadStatus.bigFile.currentDir)->numFiles;
     p_Var1 = (_BigFileEntry *)(loadStatus.bigFile.currentDir + 1);
-    while (iVar2 != 0)
-    {
+    while (iVar2 != 0) {
       iVar2 = iVar2 + -1;
-      if (p_Var1->fileHash == hash)
-      {
+      if (p_Var1->fileHash == hash) {
         return p_Var1;
       }
       p_Var1 = p_Var1 + 1;
@@ -1035,254 +938,201 @@ _BigFileEntry *LOAD_GetBigFileEntryByHash(long hash)
   }
   iVar2 = (loadStatus.bigFile.rootDir)->numFiles;
   p_Var1 = (_BigFileEntry *)(loadStatus.bigFile.rootDir + 1);
-  while (true)
-  {
-    if (iVar2 == 0)
-    {
+  while( true ) {
+    if (iVar2 == 0) {
       return (_BigFileEntry *)0x0;
     }
     iVar2 = iVar2 + -1;
-    if (p_Var1->fileHash == hash)
-      break;
+    if (p_Var1->fileHash == hash) break;
     p_Var1 = p_Var1 + 1;
   }
   return p_Var1;
 }
 
+
+
 // decompiled code
-// original method signature:
+// original method signature: 
 // struct _BigFileEntry * /*$ra*/ LOAD_GetBigFileEntry(char *fileName /*$a0*/)
-// line 1113, offset 0x80037984
-/* begin block 1 */
-// Start line: 1114
-// Start offset: 0x80037984
-/* end block 1 */
-// End offset: 0x80037984
-// End Line: 1114
+ // line 1012, offset 0x80037f68
+	/* begin block 1 */
+		// Start line: 1013
+		// Start offset: 0x80037F68
+	/* end block 1 */
+	// End offset: 0x80037F68
+	// End Line: 1013
 
-/* begin block 2 */
-// Start line: 2277
-/* end block 2 */
-// End Line: 2278
+	/* begin block 2 */
+		// Start line: 2087
+	/* end block 2 */
+	// End Line: 2088
 
-_BigFileEntry *LOAD_GetBigFileEntry(char *fileName)
+_BigFileEntry * LOAD_GetBigFileEntry(char *fileName)
 
 {
   long hash;
   _BigFileEntry *p_Var1;
-
+  
   hash = LOAD_HashName(fileName);
   p_Var1 = LOAD_GetBigFileEntryByHash(hash);
   return p_Var1;
 }
 
-// decompiled code
-// original method signature:
-// long /*$ra*/ LOAD_DoesFileExist(char *fileName /*$a0*/)
-// line 1169, offset 0x800379ac
-/* begin block 1 */
-// Start line: 1170
-// Start offset: 0x800379AC
-// Variables:
-// 		struct _BigFileEntry *entry; // $v0
-/* end block 1 */
-// End offset: 0x800379D0
-// End Line: 1175
 
-/* begin block 2 */
-// Start line: 2338
-/* end block 2 */
-// End Line: 2339
+
+// decompiled code
+// original method signature: 
+// long /*$ra*/ LOAD_DoesFileExist(char *fileName /*$a0*/)
+ // line 1068, offset 0x80037f90
+	/* begin block 1 */
+		// Start line: 1069
+		// Start offset: 0x80037F90
+		// Variables:
+	// 		struct _BigFileEntry *entry; // $v0
+	/* end block 1 */
+	// End offset: 0x80037FB4
+	// End Line: 1074
+
+	/* begin block 2 */
+		// Start line: 2133
+	/* end block 2 */
+	// End Line: 2134
 
 long LOAD_DoesFileExist(char *fileName)
 
 {
   _BigFileEntry *p_Var1;
   uint uVar2;
-
+  
   p_Var1 = LOAD_GetBigFileEntry(fileName);
   uVar2 = 0;
-  if (p_Var1 != (_BigFileEntry *)0x0)
-  {
+  if (p_Var1 != (_BigFileEntry *)0x0) {
     uVar2 = (uint)(p_Var1->fileLen != 0);
   }
   return uVar2;
 }
 
-// decompiled code
-// original method signature:
-// void /*$ra*/ LOAD_NonBlockingReadFile(struct _NonBlockLoadEntry *loadEntry /*$s0*/)
-// line 1181, offset 0x800379e0
-/* begin block 1 */
-// Start line: 2363
-/* end block 1 */
-// End Line: 2364
 
-void LOAD_NonBlockingReadFile(_NonBlockLoadEntry *loadEntry)
-
-{
-  int iVar1;
-  long *plVar2;
-
-  iVar1 = LOAD_SetupFileInfo(loadEntry);
-  if (iVar1 == 0)
-  {
-    loadStatus.changeDir = 1;
-    return;
-  }
-  if (loadEntry->loadAddr == (long *)0x0)
-  {
-    if (loadEntry->mallocFailOk == 0)
-    {
-      /* WARNING: Subroutine does not return */
-      MEMPACK_Malloc(loadEntry->loadSize, *(uchar *)&loadEntry->memType);
-    }
-    plVar2 = (long *)MEMPACK_MallocFailOk(loadEntry->loadSize, *(uchar *)&loadEntry->memType);
-    loadEntry->loadAddr = plVar2;
-    if (loadEntry->loadAddr == (long *)0x0)
-    {
-      loadStatus.changeDir = 0;
-      return;
-    }
-  }
-  LOAD_CdReadFromBigFile(loadEntry->filePos, (ulong *)loadEntry->loadAddr, loadEntry->loadSize,
-                         loadEntry->checksumType, loadEntry->checksum);
-  loadStatus.changeDir = 0;
-  return;
-}
 
 // decompiled code
-// original method signature:
+// original method signature: 
 // void /*$ra*/ LOAD_LoadTIM(long *addr /*$a1*/, long x_pos /*$t0*/, long y_pos /*$a2*/, long clut_x /*$s1*/, long clut_y /*stack 16*/)
-// line 1226, offset 0x80037a9c
-/* begin block 1 */
-// Start line: 1227
-// Start offset: 0x80037A9C
-// Variables:
-// 		struct RECT rect; // stack offset -24
-// 		long *clutAddr; // $s0
-/* end block 1 */
-// End offset: 0x80037B28
-// End Line: 1256
+ // line 1079, offset 0x80037fc4
+	/* begin block 1 */
+		// Start line: 1080
+		// Start offset: 0x80037FC4
+		// Variables:
+	// 		struct RECT rect; // stack offset -24
+	// 		long *clutAddr; // $s0
+	/* end block 1 */
+	// End offset: 0x80038050
+	// End Line: 1109
 
-/* begin block 2 */
-// Start line: 2453
-/* end block 2 */
-// End Line: 2454
+	/* begin block 2 */
+		// Start line: 2171
+	/* end block 2 */
+	// End Line: 2172
 
-void LOAD_LoadTIM(long *addr, long x_pos, long y_pos, long clut_x, long clut_y)
+void LOAD_LoadTIM(long *addr,long x_pos,long y_pos,long clut_x,long clut_y)
 
 {
   long *plVar1;
-  long *plVar2;
-  short local_18;
-  undefined2 local_16;
-  undefined2 local_14;
-  undefined2 local_12;
-
+  undefined2 uStack24;
+  undefined2 uStack22;
+  undefined2 uStack20;
+  undefined2 uStack18;
+  
   plVar1 = addr + 2;
-  plVar2 = (long *)0x0;
-  if (addr[1] == 8)
-  {
-    plVar2 = addr + 5;
+  if (addr[1] == 8) {
     plVar1 = addr + 0xd;
   }
-  local_18 = (short)x_pos;
-  local_16 = (undefined2)y_pos;
-  local_14 = *(undefined2 *)(plVar1 + 2);
-  local_12 = *(undefined2 *)((int)plVar1 + 10);
-  LoadImage(&local_18, plVar1 + 3);
-  if (plVar2 != (long *)0x0)
-  {
-    local_18 = (short)clut_x;
-    local_16 = (undefined2)clut_y;
-    local_14 = 0x10;
-    /* WARNING: Subroutine does not return */
-    local_12 = 1;
-    DrawSync(0);
-  }
-  return;
+  uStack24 = (undefined2)x_pos;
+  uStack22 = (undefined2)y_pos;
+  uStack20 = *(undefined2 *)(plVar1 + 2);
+  uStack18 = *(undefined2 *)((int)plVar1 + 10);
+                    /* WARNING: Subroutine does not return */
+  LoadImage((undefined4 *)&uStack24,plVar1 + 3);
 }
 
+
+
 // decompiled code
-// original method signature:
+// original method signature: 
 // void /*$ra*/ LOAD_LoadTIM2(long *addr /*$a1*/, long x_pos /*$a1*/, long y_pos /*$a2*/, long width /*$a3*/, long height /*stack 16*/)
-// line 1258, offset 0x80037b3c
-/* begin block 1 */
-// Start line: 1259
-// Start offset: 0x80037B3C
-// Variables:
-// 		struct RECT rect; // stack offset -16
-/* end block 1 */
-// End offset: 0x80037B3C
-// End Line: 1259
+ // line 1111, offset 0x80038064
+	/* begin block 1 */
+		// Start line: 1112
+		// Start offset: 0x80038064
+		// Variables:
+	// 		struct RECT rect; // stack offset -16
+	/* end block 1 */
+	// End offset: 0x80038064
+	// End Line: 1112
 
-/* begin block 2 */
-// Start line: 2525
-/* end block 2 */
-// End Line: 2526
+	/* begin block 2 */
+		// Start line: 2243
+	/* end block 2 */
+	// End Line: 2244
 
-void LOAD_LoadTIM2(long *addr, long x_pos, long y_pos, long width, long height)
+void LOAD_LoadTIM2(long *addr,long x_pos,long y_pos,long width,long height)
 
 {
-  short local_10;
+  undefined2 local_10;
   undefined2 local_e;
   undefined2 local_c;
   undefined2 local_a;
-
-  local_10 = (short)x_pos;
+  
+  local_10 = (undefined2)x_pos;
   local_e = (undefined2)y_pos;
   local_c = *(undefined2 *)(addr + 4);
   local_a = *(undefined2 *)((int)addr + 0x12);
-  LoadImage(&local_10, addr + 5);
-  /* WARNING: Subroutine does not return */
-  DrawSync(0);
+                    /* WARNING: Subroutine does not return */
+  LoadImage((undefined4 *)&local_10,addr + 5);
 }
 
+
+
 // decompiled code
-// original method signature:
+// original method signature: 
 // long /*$ra*/ LOAD_RelocBinaryData(long *data /*$s0*/, long fileSize /*$s1*/)
-// line 1296, offset 0x80037b84
-/* begin block 1 */
-// Start line: 1297
-// Start offset: 0x80037B84
-// Variables:
-// 		long *lastMoveDest; // $v1
-// 		long tableSize; // $s3
-// 		struct RedirectList redirectListX; // stack offset -32
-// 		struct RedirectList *redirectList; // $a0
-/* end block 1 */
-// End offset: 0x80037C1C
-// End Line: 1317
+ // line 1149, offset 0x800380ac
+	/* begin block 1 */
+		// Start line: 1150
+		// Start offset: 0x800380AC
+		// Variables:
+	// 		long *lastMoveDest; // $v1
+	// 		long tableSize; // $s3
+	// 		struct RedirectList redirectListX; // stack offset -32
+	// 		struct RedirectList *redirectList; // $a0
+	/* end block 1 */
+	// End offset: 0x80038144
+	// End Line: 1170
 
-/* begin block 2 */
-// Start line: 2592
-/* end block 2 */
-// End Line: 2593
+	/* begin block 2 */
+		// Start line: 2277
+	/* end block 2 */
+	// End Line: 2278
 
-long LOAD_RelocBinaryData(long *data, long fileSize)
+long LOAD_RelocBinaryData(long *data,long fileSize)
 
 {
   int iVar1;
   long *plVar2;
   long *plVar3;
-  RedirectList local_20;
-
-  local_20.data = data + 1;
-  local_20.numPointers = *data;
-  iVar1 = local_20.numPointers + 0x200;
-  if (iVar1 < 0)
-  {
-    iVar1 = local_20.numPointers + 0x3ff;
+  RedirectList RStack32;
+  
+  RStack32.data = data + 1;
+  RStack32.numPointers = *data;
+  iVar1 = RStack32.numPointers + 0x200;
+  if (iVar1 < 0) {
+    iVar1 = RStack32.numPointers + 0x3ff;
   }
   iVar1 = iVar1 >> 9;
-  RESOLVE_Pointers(&local_20, data + iVar1 * 0x200, data);
+  RESOLVE_Pointers(&RStack32,data + iVar1 * 0x200,data);
   plVar3 = data + (fileSize + 3 >> 2) + iVar1 * -0x200;
-  if (data < plVar3)
-  {
+  if (data < plVar3) {
     plVar2 = data + iVar1 * 0x200;
-    do
-    {
+    do {
       *data = *plVar2;
       data = data + 1;
       plVar2 = data + iVar1 * 0x200;
@@ -1291,224 +1141,221 @@ long LOAD_RelocBinaryData(long *data, long fileSize)
   return iVar1 << 0xb;
 }
 
-// decompiled code
-// original method signature:
-// void /*$ra*/ LOAD_CleanUpBuffers()
-// line 1389, offset 0x80037c3c
-/* begin block 1 */
-// Start line: 2778
-/* end block 1 */
-// End Line: 2779
 
-/* begin block 2 */
-// Start line: 2711
-/* end block 2 */
-// End Line: 2712
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ LOAD_CleanUpBuffers()
+ // line 1242, offset 0x80038164
+	/* begin block 1 */
+		// Start line: 2481
+	/* end block 1 */
+	// End Line: 2482
+
+	/* begin block 2 */
+		// Start line: 2429
+	/* end block 2 */
+	// End Line: 2430
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void LOAD_CleanUpBuffers(void)
 
 {
-  if (loadStatus.buffer1 != (void *)0x0)
-  {
-    /* WARNING: Subroutine does not return */
+  if (loadStatus.buffer1 != (void *)0x0) {
+                    /* WARNING: Subroutine does not return */
     MEMPACK_Free((char *)loadStatus.buffer1);
   }
-  if (loadStatus.buffer2 != (void *)0x0)
-  {
-    /* WARNING: Subroutine does not return */
+  if (loadStatus.buffer2 != (void *)0x0) {
+                    /* WARNING: Subroutine does not return */
     MEMPACK_Free((char *)loadStatus.buffer2);
   }
   return;
 }
 
+
+
 // decompiled code
-// original method signature:
+// original method signature: 
 // void * /*$ra*/ LOAD_InitBuffers()
-// line 1403, offset 0x80037c84
-/* begin block 1 */
-// Start line: 2739
-/* end block 1 */
-// End Line: 2740
+ // line 1256, offset 0x800381ac
+	/* begin block 1 */
+		// Start line: 2457
+	/* end block 1 */
+	// End Line: 2458
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void *LOAD_InitBuffers(void)
+void * LOAD_InitBuffers(void)
 
 {
-  loadStatus.buffer1 = MEMPACK_MallocFailOk(0x800, '#');
-  if ((char *)loadStatus.buffer1 != (char *)0x0)
-  {
-    loadStatus.buffer2 = MEMPACK_MallocFailOk(0x800, '#');
-    if ((char *)loadStatus.buffer2 == (char *)0x0)
-    {
-      LOAD_CleanUpBuffers();
-    }
-  }
-  return loadStatus.buffer1;
+                    /* WARNING: Subroutine does not return */
+  MEMPACK_Malloc(0x800,'#');
 }
 
-// decompiled code
-// original method signature:
-// void /*$ra*/ LOAD_InitCdStreamMode()
-// line 1418, offset 0x80037cd4
-/* begin block 1 */
-// Start line: 1419
-// Start offset: 0x80037CD4
-// Variables:
-// 		unsigned char cdMode; // stack offset -16
-/* end block 1 */
-// End offset: 0x80037CD4
-// End Line: 1419
 
-/* begin block 2 */
-// Start line: 2772
-/* end block 2 */
-// End Line: 2773
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ LOAD_InitCdStreamMode()
+ // line 1266, offset 0x800381e8
+	/* begin block 1 */
+		// Start line: 1267
+		// Start offset: 0x800381E8
+		// Variables:
+	// 		unsigned char cdMode; // stack offset -16
+	/* end block 1 */
+	// End offset: 0x800381E8
+	// End Line: 1267
+
+	/* begin block 2 */
+		// Start line: 2481
+	/* end block 2 */
+	// End Line: 2482
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void LOAD_InitCdStreamMode(void)
 
 {
-  undefined local_10[8];
-
+  byte local_10 [8];
+  
   local_10[0] = 0xa0;
   CdReadyCallback(LOAD_CdReadReady);
   CdSyncCallback(LOAD_CdSeekCallback);
-  CdControl(0xe, local_10, (undefined *)0x0);
+  CdControl(0xe,local_10,(undefined *)0x0);
   return;
 }
 
-// decompiled code
-// original method signature:
-// void /*$ra*/ LOAD_DumpCurrentDir()
-// line 1428, offset 0x80037d1c
-/* begin block 1 */
-// Start line: 2795
-/* end block 1 */
-// End Line: 2796
 
-/* begin block 2 */
-// Start line: 2796
-/* end block 2 */
-// End Line: 2797
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ LOAD_DumpCurrentDir()
+ // line 1276, offset 0x80038230
+	/* begin block 1 */
+		// Start line: 2504
+	/* end block 1 */
+	// End Line: 2505
+
+	/* begin block 2 */
+		// Start line: 2505
+	/* end block 2 */
+	// End Line: 2506
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void LOAD_DumpCurrentDir(void)
 
 {
-  if (loadStatus.bigFile.currentDir != (_BigFileDir *)0x0)
-  {
-    /* WARNING: Subroutine does not return */
+  if (loadStatus.bigFile.currentDir != (_BigFileDir *)0x0) {
+                    /* WARNING: Subroutine does not return */
     MEMPACK_Free((char *)loadStatus.bigFile.currentDir);
   }
-  if (loadStatus.bigFile.cachedDir != (_BigFileDir *)0x0)
-  {
-    /* WARNING: Subroutine does not return */
+  if (loadStatus.bigFile.cachedDir != (_BigFileDir *)0x0) {
+                    /* WARNING: Subroutine does not return */
     MEMPACK_Free((char *)loadStatus.bigFile.cachedDir);
   }
   return;
 }
 
+
+
 // decompiled code
-// original method signature:
+// original method signature: 
 // int /*$ra*/ LOAD_ChangeDirectoryByID(int id /*$s1*/)
-// line 1444, offset 0x80037d6c
-/* begin block 1 */
-// Start line: 1445
-// Start offset: 0x80037D6C
+ // line 1292, offset 0x80038280
+	/* begin block 1 */
+		// Start line: 1293
+		// Start offset: 0x80038280
 
-/* begin block 1.1 */
-// Start line: 1449
-// Start offset: 0x80037D84
-// Variables:
-// 		int i; // $v1
+		/* begin block 1.1 */
+			// Start line: 1297
+			// Start offset: 0x80038298
+			// Variables:
+		// 		int i; // $v1
 
-/* begin block 1.1.1 */
-// Start line: 1456
-// Start offset: 0x80037DA4
-// Variables:
-// 		struct _BigFileDir *dir; // $a0
-/* end block 1.1.1 */
-// End offset: 0x80037DC4
-// End Line: 1462
-/* end block 1.1 */
-// End offset: 0x80037E5C
-// End Line: 1481
-/* end block 1 */
-// End offset: 0x80037E60
-// End Line: 1484
+			/* begin block 1.1.1 */
+				// Start line: 1304
+				// Start offset: 0x800382B8
+				// Variables:
+			// 		struct _BigFileDir *dir; // $a0
+			/* end block 1.1.1 */
+			// End offset: 0x800382D8
+			// End Line: 1310
+		/* end block 1.1 */
+		// End offset: 0x80038370
+		// End Line: 1329
+	/* end block 1 */
+	// End offset: 0x80038374
+	// End Line: 1332
 
-/* begin block 2 */
-// Start line: 2828
-/* end block 2 */
-// End Line: 2829
+	/* begin block 2 */
+		// Start line: 2537
+	/* end block 2 */
+	// End Line: 2538
 
 int LOAD_ChangeDirectoryByID(int id)
 
 {
   _BigFileDir *p_Var1;
   long lVar2;
-
+  int iVar3;
+  int iVar4;
+  
   lVar2 = loadStatus.bigFile.currentDirID;
   p_Var1 = loadStatus.bigFile.currentDir;
-  if (id != 0)
-  {
-    if (loadStatus.bigFile.currentDirID == id)
-    {
+  if (id != 0) {
+    if (loadStatus.bigFile.currentDirID == id) {
       return 1;
     }
-    if (loadStatus.bigFile.cachedDirID == id)
-    {
+    if (loadStatus.bigFile.cachedDirID == id) {
       loadStatus.bigFile.currentDir = loadStatus.bigFile.cachedDir;
       loadStatus.bigFile.cachedDir = p_Var1;
       loadStatus.bigFile.currentDirID = id;
       loadStatus.bigFile.cachedDirID = lVar2;
       return 1;
     }
-    if (0 < loadStatus.bigFile.numSubDirs)
-    {
-      if (id == (int)(loadStatus.bigFile.subDirList)->streamUnitID)
-      {
-        if (loadStatus.bigFile.cachedDir == (_BigFileDir *)0x0)
-        {
-          loadStatus.currentDirLoading = 1;
-          loadStatus.bigFile.cachedDirID = loadStatus.bigFile.currentDirID;
-          loadStatus.bigFile.cachedDir = loadStatus.bigFile.currentDir;
-          loadStatus.bigFile.currentDir = LOAD_ReadDirectory(loadStatus.bigFile.subDirList);
-          MEMPACK_SetMemoryBeingStreamed((char *)loadStatus.bigFile.currentDir);
-          loadStatus.bigFile.currentDirID = id;
-          return 1;
+    iVar3 = 0;
+    if (0 < loadStatus.bigFile.numSubDirs) {
+      do {
+        iVar4 = iVar3 + 1;
+        if (id == (int)loadStatus.bigFile.subDirList[iVar3].streamUnitID) {
+          if (loadStatus.bigFile.cachedDir == (_BigFileDir *)0x0) {
+            loadStatus.currentDirLoading = 1;
+            loadStatus.bigFile.cachedDirID = loadStatus.bigFile.currentDirID;
+            loadStatus.bigFile.cachedDir = loadStatus.bigFile.currentDir;
+            loadStatus.bigFile.currentDir =
+                 LOAD_ReadDirectory(loadStatus.bigFile.subDirList + iVar3);
+            MEMPACK_SetMemoryBeingStreamed((char *)loadStatus.bigFile.currentDir);
+            loadStatus.bigFile.currentDirID = id;
+            return 1;
+          }
+                    /* WARNING: Subroutine does not return */
+          MEMPACK_Free((char *)loadStatus.bigFile.cachedDir);
         }
-        /* WARNING: Subroutine does not return */
-        MEMPACK_Free((char *)loadStatus.bigFile.cachedDir);
-      }
-      if (1 < loadStatus.bigFile.numSubDirs)
-      {
-        lVar2 = LOAD_HashName((char *)id);
-        return lVar2;
-      }
+        iVar3 = iVar4;
+      } while (iVar4 < loadStatus.bigFile.numSubDirs);
     }
   }
   return 0;
 }
 
-// decompiled code
-// original method signature:
-// void /*$ra*/ LOAD_SetSearchDirectory(long id /*$a0*/)
-// line 1491, offset 0x80037e74
-/* begin block 1 */
-// Start line: 2982
-/* end block 1 */
-// End Line: 2983
 
-/* begin block 2 */
-// Start line: 2937
-/* end block 2 */
-// End Line: 2938
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ LOAD_SetSearchDirectory(long id /*$a0*/)
+ // line 1339, offset 0x80038388
+	/* begin block 1 */
+		// Start line: 2674
+	/* end block 1 */
+	// End Line: 2675
+
+	/* begin block 2 */
+		// Start line: 2646
+	/* end block 2 */
+	// End Line: 2647
 
 void LOAD_SetSearchDirectory(long id)
 
@@ -1517,19 +1364,21 @@ void LOAD_SetSearchDirectory(long id)
   return;
 }
 
-// decompiled code
-// original method signature:
-// long /*$ra*/ LOAD_GetSearchDirectory()
-// line 1496, offset 0x80037e80
-/* begin block 1 */
-// Start line: 2946
-/* end block 1 */
-// End Line: 2947
 
-/* begin block 2 */
-// Start line: 2947
-/* end block 2 */
-// End Line: 2948
+
+// decompiled code
+// original method signature: 
+// long /*$ra*/ LOAD_GetSearchDirectory()
+ // line 1344, offset 0x80038394
+	/* begin block 1 */
+		// Start line: 2655
+	/* end block 1 */
+	// End Line: 2656
+
+	/* begin block 2 */
+		// Start line: 2656
+	/* end block 2 */
+	// End Line: 2657
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
@@ -1539,19 +1388,21 @@ long LOAD_GetSearchDirectory(void)
   return loadStatus.bigFile.searchDirID;
 }
 
-// decompiled code
-// original method signature:
-// int /*$ra*/ LOAD_ChangeDirectoryFlag()
-// line 1501, offset 0x80037e8c
-/* begin block 1 */
-// Start line: 2956
-/* end block 1 */
-// End Line: 2957
 
-/* begin block 2 */
-// Start line: 2957
-/* end block 2 */
-// End Line: 2958
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ LOAD_ChangeDirectoryFlag()
+ // line 1349, offset 0x800383a0
+	/* begin block 1 */
+		// Start line: 2665
+	/* end block 1 */
+	// End Line: 2666
+
+	/* begin block 2 */
+		// Start line: 2666
+	/* end block 2 */
+	// End Line: 2667
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
@@ -1561,47 +1412,49 @@ int LOAD_ChangeDirectoryFlag(void)
   return loadStatus.changeDir;
 }
 
+
+
 // decompiled code
-// original method signature:
+// original method signature: 
 // void /*$ra*/ LOAD_UpdateBigFilePointers(struct _BigFileDir *oldDir /*$a0*/, struct _BigFileDir *newDir /*$a1*/)
-// line 1506, offset 0x80037e98
-/* begin block 1 */
-// Start line: 2966
-/* end block 1 */
-// End Line: 2967
+ // line 1354, offset 0x800383ac
+	/* begin block 1 */
+		// Start line: 2675
+	/* end block 1 */
+	// End Line: 2676
 
-/* begin block 2 */
-// Start line: 2967
-/* end block 2 */
-// End Line: 2968
+	/* begin block 2 */
+		// Start line: 2676
+	/* end block 2 */
+	// End Line: 2677
 
-void LOAD_UpdateBigFilePointers(_BigFileDir *oldDir, _BigFileDir *newDir)
+void LOAD_UpdateBigFilePointers(_BigFileDir *oldDir,_BigFileDir *newDir)
 
 {
-  if (loadStatus.bigFile.currentDir == oldDir)
-  {
+  if (loadStatus.bigFile.currentDir == oldDir) {
     loadStatus.bigFile.currentDir = newDir;
   }
-  if (loadStatus.bigFile.cachedDir == oldDir)
-  {
+  if (loadStatus.bigFile.cachedDir == oldDir) {
     loadStatus.bigFile.cachedDir = newDir;
   }
   return;
 }
 
-// decompiled code
-// original method signature:
-// int /*$ra*/ LOAD_IsFileLoading()
-// line 1521, offset 0x80037ec8
-/* begin block 1 */
-// Start line: 2996
-/* end block 1 */
-// End Line: 2997
 
-/* begin block 2 */
-// Start line: 3002
-/* end block 2 */
-// End Line: 3003
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ LOAD_IsFileLoading()
+ // line 1369, offset 0x800383dc
+	/* begin block 1 */
+		// Start line: 2705
+	/* end block 1 */
+	// End Line: 2706
+
+	/* begin block 2 */
+		// Start line: 2711
+	/* end block 2 */
+	// End Line: 2712
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
@@ -1611,30 +1464,36 @@ int LOAD_IsFileLoading(void)
   return (uint)(loadStatus.currentQueueFile.readStatus != 0);
 }
 
-// decompiled code
-// original method signature:
-// void /*$ra*/ LOAD_StopLoad()
-// line 1563, offset 0x80037ed4
-/* begin block 1 */
-// Start line: 3126
-/* end block 1 */
-// End Line: 3127
 
-/* begin block 2 */
-// Start line: 3048
-/* end block 2 */
-// End Line: 3049
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ LOAD_StopLoad()
+ // line 1411, offset 0x800383e8
+	/* begin block 1 */
+		// Start line: 2815
+	/* end block 1 */
+	// End Line: 2816
+
+	/* begin block 2 */
+		// Start line: 2757
+	/* end block 2 */
+	// End Line: 2758
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void LOAD_StopLoad(void)
 
 {
-  if (loadStatus.currentDirLoading != 0)
-  {
+  if (loadStatus.currentDirLoading != 0) {
     loadStatus.currentDirLoading = 0;
   }
   loadStatus.currentQueueFile.readStatus = 0;
   loadStatus.state = 5;
   return;
 }
+
+
+
+
+

@@ -5,10 +5,10 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Anim_DecompressChannel_AdaptiveDelta(struct _G2AnimDecompressChannelInfo_Type *dcInfo /*$a0*/, struct _G2AnimChanStatus_Type *status /*$a1*/)
- // line 135, offset 0x800900f4
+ // line 135, offset 0x8008faa8
 	/* begin block 1 */
 		// Start line: 136
-		// Start offset: 0x800900F4
+		// Start offset: 0x8008FAA8
 		// Variables:
 	// 		unsigned short *chanData; // $t7
 	// 		int index; // $t2
@@ -19,7 +19,7 @@
 	// 		int storedKey; // $t4
 	// 		int keyCount; // $t8
 	/* end block 1 */
-	// End offset: 0x800901FC
+	// End offset: 0x8008FBB0
 	// End Line: 189
 
 	/* begin block 2 */
@@ -38,28 +38,29 @@ void _G2Anim_DecompressChannel_AdaptiveDelta
   uint uVar5;
   short sVar6;
   int iVar7;
-  uint uVar8;
-  short sVar9;
+  int iVar8;
+  uint uVar9;
+  short sVar10;
   
-  uVar8 = dcInfo->storedKey;
-  sVar9 = status->keyData;
+  uVar9 = dcInfo->storedKey;
+  sVar10 = status->keyData;
   sVar6 = status->index;
   iVar7 = (int)sVar6;
   puVar3 = dcInfo->chanData;
   uVar1 = dcInfo->keylist->keyCount;
-  while( true ) {
-    if (dcInfo->targetKey <= (int)uVar8) {
-      status->index = sVar6;
-      status->keyData = sVar9;
-      dcInfo->chanData = puVar3 + 2 + ((int)((uint)uVar1 + 3) >> 2);
-      return;
+  while ((int)uVar9 < dcInfo->targetKey) {
+    uVar9 = uVar9 + 1;
+    uVar5 = (int)(uint)(puVar3 + 2)[(int)uVar9 >> 2] >> ((uVar9 & 3) << 2);
+    uVar2 = *(ushort *)(&_stepSizeTable + iVar7);
+    iVar8 = iVar7 + (&_indexTable)[uVar5 & 0xf];
+    iVar7 = iVar8;
+    if (iVar8 < 0) {
+      iVar7 = 0;
     }
-    uVar8 = uVar8 + 1;
-    uVar5 = (int)(uint)(puVar3 + 2)[(int)uVar8 >> 2] >> ((uVar8 & 3) << 2);
-    uVar2 = (&_stepSizeTable)[iVar7 * 2];
-    if (iVar7 + *(int *)(&_indexTable + (uVar5 & 0xf) * 2) < 0x40) break;
-    iVar7 = 0x3f;
-    sVar6 = 0x3f;
+    if (0x3f < iVar8) {
+      iVar7 = 0x3f;
+    }
+    sVar6 = (short)iVar7;
     uVar4 = uVar2 >> 3;
     if ((uVar5 & 4) != 0) {
       uVar4 = uVar2 + uVar4;
@@ -71,12 +72,13 @@ void _G2Anim_DecompressChannel_AdaptiveDelta
       uVar4 = uVar4 + (uVar2 >> 2) + (uVar2 & 1);
     }
     if ((uVar5 & 8) != 0) {
-      G2AnimSection_SetPaused((_G2AnimSection_Type *)dcInfo);
-      return;
+      uVar4 = -uVar4;
     }
-    sVar9 = sVar9 + uVar4;
+    sVar10 = sVar10 + uVar4;
   }
-  G2AnimSection_SetLoopRangeAll((_G2AnimSection_Type *)dcInfo);
+  status->index = sVar6;
+  status->keyData = sVar10;
+  dcInfo->chanData = puVar3 + 2 + ((int)((uint)uVar1 + 3) >> 2);
   return;
 }
 
@@ -85,10 +87,10 @@ void _G2Anim_DecompressChannel_AdaptiveDelta
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Anim_DecompressChannel_Linear(struct _G2AnimDecompressChannelInfo_Type *dcInfo /*$a0*/, struct _G2AnimChanStatus_Type *status /*$a1*/)
- // line 198, offset 0x80090220
+ // line 198, offset 0x8008fbd4
 	/* begin block 1 */
 		// Start line: 201
-		// Start offset: 0x80090220
+		// Start offset: 0x8008FBD4
 		// Variables:
 	// 		unsigned short *chanData; // $a2
 	// 		short rangeBase; // $t0
@@ -97,7 +99,7 @@ void _G2Anim_DecompressChannel_AdaptiveDelta
 	// 		int rangeOffset; // $a0
 	// 		int targetKey; // $a3
 	/* end block 1 */
-	// End offset: 0x80090288
+	// End offset: 0x8008FC3C
 	// End Line: 232
 
 	/* begin block 2 */
@@ -149,15 +151,15 @@ void _G2Anim_DecompressChannel_Linear
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Anim_InitializeChannel_AdaptiveDelta(struct _G2AnimDecompressChannelInfo_Type *dcInfo /*$a0*/, struct _G2AnimChanStatus_Type *status /*$a1*/)
- // line 271, offset 0x800902b4
+ // line 271, offset 0x8008fc68
 	/* begin block 1 */
 		// Start line: 274
-		// Start offset: 0x800902B4
+		// Start offset: 0x8008FC68
 		// Variables:
 	// 		unsigned short *chanData; // $v1
 	// 		int keyCount; // $v0
 	/* end block 1 */
-	// End offset: 0x800902B4
+	// End offset: 0x8008FC68
 	// End Line: 277
 
 	/* begin block 2 */
@@ -200,15 +202,15 @@ void _G2Anim_InitializeChannel_AdaptiveDelta
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Anim_InitializeChannel_Linear(struct _G2AnimDecompressChannelInfo_Type *dcInfo /*$a0*/, struct _G2AnimChanStatus_Type *status /*$a1*/)
- // line 289, offset 0x800902ec
+ // line 289, offset 0x8008fca0
 	/* begin block 1 */
 		// Start line: 292
-		// Start offset: 0x800902EC
+		// Start offset: 0x8008FCA0
 		// Variables:
 	// 		unsigned short *chanData; // $v1
 	// 		int chanLength; // $v0
 	/* end block 1 */
-	// End offset: 0x800902EC
+	// End offset: 0x8008FCA0
 	// End Line: 295
 
 	/* begin block 2 */

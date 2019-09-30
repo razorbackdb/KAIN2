@@ -5,35 +5,35 @@
 // decompiled code
 // original method signature: 
 // struct _MonsterIR * /*$ra*/ MONSENSE_FindIR(struct _MonsterVars *mv /*$a0*/, struct _Instance *instance /*$a1*/)
- // line 64, offset 0x80085aa4
+ // line 62, offset 0x800856cc
 	/* begin block 1 */
-		// Start line: 66
-		// Start offset: 0x80085AA4
+		// Start line: 64
+		// Start offset: 0x800856CC
 		// Variables:
 	// 		struct _MonsterIR *mir; // $v1
 	/* end block 1 */
-	// End offset: 0x80085AD4
-	// End Line: 72
+	// End offset: 0x800856FC
+	// End Line: 70
 
 	/* begin block 2 */
-		// Start line: 114
+		// Start line: 110
 	/* end block 2 */
-	// End Line: 115
+	// End Line: 111
 
 	/* begin block 3 */
-		// Start line: 128
+		// Start line: 118
 	/* end block 3 */
-	// End Line: 129
+	// End Line: 119
 
 	/* begin block 4 */
-		// Start line: 115
+		// Start line: 111
 	/* end block 4 */
-	// End Line: 116
+	// End Line: 112
 
 	/* begin block 5 */
-		// Start line: 117
+		// Start line: 113
 	/* end block 5 */
-	// End Line: 118
+	// End Line: 114
 
 _MonsterIR * MONSENSE_FindIR(_MonsterVars *mv,_Instance *instance)
 
@@ -52,45 +52,45 @@ _MonsterIR * MONSENSE_FindIR(_MonsterVars *mv,_Instance *instance)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MONSENSE_See(struct _Instance *instance /*$s2*/, struct evCollideInstanceStatsData *data /*$s1*/)
- // line 97, offset 0x80085adc
+ // line 95, offset 0x80085704
 	/* begin block 1 */
-		// Start line: 98
-		// Start offset: 0x80085ADC
+		// Start line: 96
+		// Start offset: 0x80085704
 		// Variables:
 	// 		struct _MonsterVars *mv; // $v0
 	// 		struct _MonsterSenses *senses; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 104
-			// Start offset: 0x80085B20
+			// Start line: 102
+			// Start offset: 0x80085748
 			// Variables:
 		// 		int arc; // $a1
 		// 		int elevation; // $a2
 
 			/* begin block 1.1.1 */
-				// Start line: 114
-				// Start offset: 0x80085B70
+				// Start line: 112
+				// Start offset: 0x80085798
 				// Variables:
 			// 		struct _Instance *target; // $s0
 
 				/* begin block 1.1.1.1 */
-					// Start line: 118
-					// Start offset: 0x80085B88
+					// Start line: 116
+					// Start offset: 0x800857B0
 					// Variables:
 				// 		struct evPhysicsLOSData losData; // stack offset -40
 
 					/* begin block 1.1.1.1.1 */
-						// Start line: 122
-						// Start offset: 0x80085B98
+						// Start line: 120
+						// Start offset: 0x800857C0
 						// Variables:
 					// 		struct MATRIX *mat; // $v0
 					/* end block 1.1.1.1.1 */
-					// End offset: 0x80085B98
-					// End Line: 122
+					// End offset: 0x800857C0
+					// End Line: 120
 
 					/* begin block 1.1.1.1.2 */
-						// Start line: 128
-						// Start offset: 0x80085BD4
+						// Start line: 126
+						// Start offset: 0x800857FC
 						// Variables:
 					// 		short _x1; // $v1
 					// 		short _y1; // $a0
@@ -98,21 +98,21 @@ _MonsterIR * MONSENSE_FindIR(_MonsterVars *mv,_Instance *instance)
 					// 		struct _Position *_v0; // $v0
 					// 		struct _Position *_v1; // $v0
 					/* end block 1.1.1.1.2 */
-					// End offset: 0x80085BF0
-					// End Line: 128
+					// End offset: 0x80085818
+					// End Line: 126
 
 					/* begin block 1.1.1.1.3 */
-						// Start line: 132
-						// Start offset: 0x80085C00
+						// Start line: 130
+						// Start offset: 0x80085828
 						// Variables:
 					// 		struct MATRIX *mat; // $v1
 					/* end block 1.1.1.1.3 */
-					// End offset: 0x80085C00
-					// End Line: 132
+					// End offset: 0x80085828
+					// End Line: 130
 
 					/* begin block 1.1.1.1.4 */
-						// Start line: 138
-						// Start offset: 0x80085C24
+						// Start line: 136
+						// Start offset: 0x8008584C
 						// Variables:
 					// 		short _x1; // $v1
 					// 		short _y1; // $a0
@@ -120,54 +120,33 @@ _MonsterIR * MONSENSE_FindIR(_MonsterVars *mv,_Instance *instance)
 					// 		struct _Position *_v0; // $v0
 					// 		struct _Position *_v1; // $v0
 					/* end block 1.1.1.1.4 */
-					// End offset: 0x80085C44
-					// End Line: 138
+					// End offset: 0x8008586C
+					// End Line: 136
 				/* end block 1.1.1.1 */
-				// End offset: 0x80085C5C
-				// End Line: 141
+				// End offset: 0x80085884
+				// End Line: 139
 			/* end block 1.1.1 */
-			// End offset: 0x80085C5C
-			// End Line: 144
+			// End offset: 0x80085884
+			// End Line: 142
 		/* end block 1.1 */
-		// End offset: 0x80085C5C
-		// End Line: 145
+		// End offset: 0x80085884
+		// End Line: 143
 	/* end block 1 */
-	// End offset: 0x80085C60
-	// End Line: 148
+	// End offset: 0x80085888
+	// End Line: 146
 
 	/* begin block 2 */
-		// Start line: 194
+		// Start line: 178
 	/* end block 2 */
-	// End Line: 195
+	// End Line: 179
 
-undefined4 MONSENSE_See(int param_1,_Instance **param_2)
+int MONSENSE_See(_Instance *instance,evCollideInstanceStatsData *data)
 
 {
-  bool bVar1;
-  short angle;
-  uint uVar2;
-  MATRIX *mat;
-  MATRIX *pMVar3;
-  short *psVar4;
-  
-  psVar4 = *(short **)(*(int *)(*(int *)(param_1 + 0x14c) + 0x154) + 4);
-  if (param_2[1] < (_Instance *)(int)psVar4[1]) {
-    angle = MATH3D_FastAtan2(500,(long)param_2[1]);
-    pMVar3 = (MATRIX *)(int)angle;
-    mat = pMVar3;
-    if ((int)pMVar3 < (int)(MATRIX *)(int)*psVar4) {
-      mat = (MATRIX *)(int)*psVar4;
-    }
-    bVar1 = (int)pMVar3 < (int)psVar4[2];
-    uVar2 = (uint)bVar1;
-    if (bVar1) {
-      angle = psVar4[2];
-    }
-    MATH3D_RotMatAboutVec((_SVector *)(param_2 + 2),mat,angle);
-    if (uVar2 != 0) {
+  if (data->distance <
+      (uint)(int)*(short *)(*(int *)(*(int *)((int)instance->extraData + 0x164) + 4) + 2)) {
                     /* WARNING: Subroutine does not return */
-      INSTANCE_Query(*param_2,1);
-    }
+    MATH3D_FastAtan2(500,data->distance);
   }
   return 0;
 }
@@ -177,28 +156,28 @@ undefined4 MONSENSE_See(int param_1,_Instance **param_2)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MONSENSE_Hear(struct _Instance *instance /*$a0*/, struct evCollideInstanceStatsData *data /*$s1*/)
- // line 153, offset 0x80085c78
+ // line 151, offset 0x800858a0
 	/* begin block 1 */
-		// Start line: 154
-		// Start offset: 0x80085C78
+		// Start line: 152
+		// Start offset: 0x800858A0
 		// Variables:
 	// 		struct _MonsterVars *mv; // $v0
 	// 		struct _MonsterSenses *senses; // $s0
 	// 		long mode; // $a0
 	/* end block 1 */
-	// End offset: 0x80085CF4
-	// End Line: 171
+	// End offset: 0x8008591C
+	// End Line: 169
 
 	/* begin block 2 */
-		// Start line: 270
+		// Start line: 266
 	/* end block 2 */
-	// End Line: 271
+	// End Line: 267
 
-void MONSENSE_Hear(undefined4 param_1,_Instance **param_2)
+int MONSENSE_Hear(_Instance *instance,evCollideInstanceStatsData *data)
 
 {
                     /* WARNING: Subroutine does not return */
-  INSTANCE_Query(*param_2,10);
+  INSTANCE_Query(data->instance,10);
 }
 
 
@@ -206,31 +185,58 @@ void MONSENSE_Hear(undefined4 param_1,_Instance **param_2)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MONSENSE_Smell(struct _Instance *instance /*$a0*/, struct evCollideInstanceStatsData *data /*$a1*/)
- // line 176, offset 0x80085d08
+ // line 174, offset 0x80085930
 	/* begin block 1 */
-		// Start line: 178
-		// Start offset: 0x80085D08
+		// Start line: 176
+		// Start offset: 0x80085930
 		// Variables:
 	// 		struct _MonsterVars *mv; // $v0
 	/* end block 1 */
-	// End offset: 0x80085D08
-	// End Line: 178
+	// End offset: 0x80085930
+	// End Line: 176
 
 	/* begin block 2 */
-		// Start line: 319
+		// Start line: 315
 	/* end block 2 */
-	// End Line: 320
+	// End Line: 316
 
 	/* begin block 3 */
-		// Start line: 320
+		// Start line: 316
 	/* end block 3 */
-	// End Line: 321
+	// End Line: 317
 
-uint MONSENSE_Smell(int param_1,int param_2)
+int MONSENSE_Smell(_Instance *instance,evCollideInstanceStatsData *data)
 
 {
-  return (uint)(*(uint *)(param_2 + 4) <
-               (uint)*(ushort *)(*(int *)(*(int *)(*(int *)(param_1 + 0x14c) + 0x154) + 4) + 0xc));
+  return (uint)(data->distance <
+               (uint)*(ushort *)(*(int *)(*(int *)((int)instance->extraData + 0x164) + 4) + 0xc));
+}
+
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ MONSENSE_DetectPlayer(struct _Instance *instance /*$a0*/)
+ // line 187, offset 0x80085958
+	/* begin block 1 */
+		// Start line: 188
+		// Start offset: 0x80085958
+	/* end block 1 */
+	// End offset: 0x80085958
+	// End Line: 188
+
+	/* begin block 2 */
+		// Start line: 341
+	/* end block 2 */
+	// End Line: 342
+
+int MONSENSE_DetectPlayer(_Instance *instance)
+
+{
+  _MonsterIR *p_Var1;
+  
+  p_Var1 = MONSENSE_FindIR((_MonsterVars *)instance->extraData,gameTrackerX.playerInstance);
+  return (uint)(p_Var1 != (_MonsterIR *)0x0);
 }
 
 
@@ -238,31 +244,31 @@ uint MONSENSE_Smell(int param_1,int param_2)
 // decompiled code
 // original method signature: 
 // struct _MonsterIR * /*$ra*/ MONSENSE_FirstSense(struct _Instance *instance /*$s2*/, struct _Instance *sensed /*$s4*/)
- // line 186, offset 0x80085d30
+ // line 197, offset 0x80085980
 	/* begin block 1 */
-		// Start line: 187
-		// Start offset: 0x80085D30
+		// Start line: 198
+		// Start offset: 0x80085980
 		// Variables:
 	// 		struct _MonsterIR *mir; // $s0
 	// 		struct _MonsterVars *mv; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 194
-			// Start offset: 0x80085D6C
+			// Start line: 205
+			// Start offset: 0x800859BC
 			// Variables:
 		// 		long whatAmI; // $s2
 		// 		struct _MonsterAllegiances *allegiances; // $s3
 		/* end block 1.1 */
-		// End offset: 0x80085EB0
-		// End Line: 224
+		// End offset: 0x80085AF4
+		// End Line: 235
 	/* end block 1 */
-	// End offset: 0x80085EB0
-	// End Line: 226
+	// End offset: 0x80085AF4
+	// End Line: 237
 
 	/* begin block 2 */
-		// Start line: 339
+		// Start line: 365
 	/* end block 2 */
-	// End Line: 340
+	// End Line: 366
 
 _MonsterIR * MONSENSE_FirstSense(_Instance *instance,_Instance *sensed)
 
@@ -281,24 +287,24 @@ _MonsterIR * MONSENSE_FirstSense(_Instance *instance,_Instance *sensed)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ MONSENSE_SetupMIR(struct _Instance *instance /*$s3*/, struct evCollideInstanceStatsData *data /*$s1*/, int flags /*$s2*/)
- // line 233, offset 0x80085ed4
+// void /*$ra*/ MONSENSE_SetupMIR(struct _Instance *instance /*$s4*/, struct evCollideInstanceStatsData *data /*$s1*/, int flags /*$s2*/)
+ // line 244, offset 0x80085b18
 	/* begin block 1 */
-		// Start line: 234
-		// Start offset: 0x80085ED4
+		// Start line: 245
+		// Start offset: 0x80085B18
 		// Variables:
 	// 		struct _MonsterIR *mir; // $s0
-	// 		struct _MonsterVars *mv; // $s4
+	// 		struct _MonsterVars *mv; // $s3
 
 		/* begin block 1.1 */
-			// Start line: 253
-			// Start offset: 0x80085F78
+			// Start line: 264
+			// Start offset: 0x80085BBC
 			// Variables:
 		// 		long mode; // $s1
 
 			/* begin block 1.1.1 */
-				// Start line: 256
-				// Start offset: 0x80085F78
+				// Start line: 267
+				// Start offset: 0x80085BBC
 				// Variables:
 			// 		short _x1; // $v1
 			// 		short _y1; // $a0
@@ -306,89 +312,70 @@ _MonsterIR * MONSENSE_FirstSense(_Instance *instance,_Instance *sensed)
 			// 		struct _SVector *_v0; // $v0
 			// 		struct _SVector *_v1; // $v0
 			/* end block 1.1.1 */
-			// End offset: 0x80085F78
-			// End Line: 256
+			// End offset: 0x80085BBC
+			// End Line: 267
 
 			/* begin block 1.1.2 */
-				// Start line: 301
-				// Start offset: 0x80086120
-				// Variables:
-			// 		int run; // $s2
-			// 		int distance; // $a0
-
-				/* begin block 1.1.2.1 */
-					// Start line: 312
-					// Start offset: 0x8008615C
-				/* end block 1.1.2.1 */
-				// End offset: 0x800861BC
-				// End Line: 319
+				// Start line: 317
+				// Start offset: 0x80085DA4
 			/* end block 1.1.2 */
-			// End offset: 0x800861BC
-			// End Line: 336
+			// End offset: 0x80085E00
+			// End Line: 324
 		/* end block 1.1 */
-		// End offset: 0x800862E0
-		// End Line: 367
+		// End offset: 0x80085F24
+		// End Line: 356
 	/* end block 1 */
-	// End offset: 0x800862E0
-	// End Line: 368
+	// End offset: 0x80085F24
+	// End Line: 357
 
 	/* begin block 2 */
-		// Start line: 447
+		// Start line: 473
 	/* end block 2 */
-	// End Line: 448
+	// End Line: 474
 
-int MONSENSE_Smell(_Instance *instance,evCollideInstanceStatsData *data)
+void MONSENSE_SetupMIR(_Instance *instance,evCollideInstanceStatsData *data,int flags)
 
 {
   short sVar1;
-  ushort uVar2;
-  short sVar3;
+  short sVar2;
+  ushort uVar3;
   _MonsterIR *p_Var4;
   _MonsterCombatAttributes *p_Var5;
-  int in_a2;
   _MonsterVars *mv;
   
   mv = (_MonsterVars *)instance->extraData;
   p_Var4 = MONSENSE_FindIR(mv,data->instance);
   if (p_Var4 == (_MonsterIR *)0x0) {
-    if (in_a2 != 0) {
+    if (flags != 0) {
       p_Var4 = MONSENSE_FirstSense(instance,data->instance);
     }
   }
   else {
-    if (in_a2 != 0) {
+    if (flags != 0) {
                     /* WARNING: Subroutine does not return */
       MON_GetTime(instance);
     }
   }
   if (p_Var4 != (_MonsterIR *)0x0) {
-    p_Var4->mirFlags = p_Var4->mirFlags | (ushort)in_a2;
+    p_Var4->mirFlags = p_Var4->mirFlags | (ushort)flags;
     p_Var4->distance = *(short *)&data->distance;
-    sVar3 = (data->relativePosition).y;
-    sVar1 = (data->relativePosition).z;
+    sVar1 = (data->relativePosition).y;
+    sVar2 = (data->relativePosition).z;
     (p_Var4->relativePosition).x = (data->relativePosition).x;
-    (p_Var4->relativePosition).y = sVar3;
-    (p_Var4->relativePosition).z = sVar1;
+    (p_Var4->relativePosition).y = sVar1;
+    (p_Var4->relativePosition).z = sVar2;
     p_Var5 = mv->subAttr->combatAttributes;
     if ((p_Var5 == (_MonsterCombatAttributes *)0x0) || (p_Var5->combatRange <= p_Var4->distance)) {
-      uVar2 = p_Var4->mirConditions & 0xfff7;
+      uVar3 = p_Var4->mirConditions & 0xfff7;
     }
     else {
-      uVar2 = p_Var4->mirConditions | 8;
+      uVar3 = p_Var4->mirConditions | 8;
     }
-    p_Var4->mirConditions = uVar2;
-    sVar3 = MATH3D_AngleFromPosToPos(&p_Var4->instance->position,&instance->position);
-    if (((sVar3 - (p_Var4->instance->rotation).z) + 0x400U & 0xfff) < 0x801) {
-      uVar2 = p_Var4->mirConditions & 0xfffd;
-    }
-    else {
-      uVar2 = p_Var4->mirConditions | 2;
-    }
-    p_Var4->mirConditions = uVar2;
+    p_Var4->mirConditions = uVar3;
                     /* WARNING: Subroutine does not return */
-    INSTANCE_Query(p_Var4->instance,10);
+    MATH3D_AngleFromPosToPos(&p_Var4->instance->position,&instance->position);
   }
-  return 0;
+  return;
 }
 
 
@@ -396,38 +383,38 @@ int MONSENSE_Smell(_Instance *instance,evCollideInstanceStatsData *data)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MONSENSE_SenseInstance(struct _Instance *instance /*$s3*/, struct evCollideInstanceStatsData *data /*$s2*/)
- // line 374, offset 0x80086300
+ // line 363, offset 0x80085f44
 	/* begin block 1 */
-		// Start line: 375
-		// Start offset: 0x80086300
+		// Start line: 364
+		// Start offset: 0x80085F44
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s1
 	// 		long flags; // $s0
 	// 		unsigned long whatAmI; // $s4
 
 		/* begin block 1.1 */
-			// Start line: 387
-			// Start offset: 0x80086358
+			// Start line: 376
+			// Start offset: 0x80085F9C
 			// Variables:
 		// 		struct PhysObProperties *prop; // $s0
 
 			/* begin block 1.1.1 */
-				// Start line: 390
-				// Start offset: 0x80086378
+				// Start line: 379
+				// Start offset: 0x80085FBC
 			/* end block 1.1.1 */
-			// End offset: 0x80086418
-			// End Line: 401
+			// End offset: 0x8008605C
+			// End Line: 390
 		/* end block 1.1 */
-		// End offset: 0x80086418
-		// End Line: 401
+		// End offset: 0x8008605C
+		// End Line: 390
 	/* end block 1 */
-	// End offset: 0x800864D4
-	// End Line: 419
+	// End offset: 0x80086118
+	// End Line: 408
 
 	/* begin block 2 */
-		// Start line: 735
+		// Start line: 716
 	/* end block 2 */
-	// End Line: 736
+	// End Line: 717
 
 void MONSENSE_SenseInstance(_Instance *instance,evCollideInstanceStatsData *data)
 
@@ -441,10 +428,10 @@ void MONSENSE_SenseInstance(_Instance *instance,evCollideInstanceStatsData *data
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MONSENSE_StartMonsterIRList(struct _Instance *instance /*$s5*/)
- // line 424, offset 0x800864f4
+ // line 413, offset 0x80086138
 	/* begin block 1 */
-		// Start line: 425
-		// Start offset: 0x800864F4
+		// Start line: 414
+		// Start offset: 0x80086138
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s1
 	// 		struct _MonsterIR *mir; // $s0
@@ -452,21 +439,21 @@ void MONSENSE_SenseInstance(_Instance *instance,evCollideInstanceStatsData *data
 	// 		int enemyOnList; // $s4
 
 		/* begin block 1.1 */
-			// Start line: 435
-			// Start offset: 0x80086540
+			// Start line: 424
+			// Start offset: 0x80086184
 			// Variables:
 		// 		struct _MonsterIR *next; // $s3
 		/* end block 1.1 */
-		// End offset: 0x800865C8
-		// End Line: 463
+		// End offset: 0x8008620C
+		// End Line: 452
 	/* end block 1 */
-	// End offset: 0x800865E4
-	// End Line: 471
+	// End offset: 0x80086228
+	// End Line: 460
 
 	/* begin block 2 */
-		// Start line: 839
+		// Start line: 820
 	/* end block 2 */
-	// End Line: 840
+	// End Line: 821
 
 void MONSENSE_StartMonsterIRList(_Instance *instance)
 
@@ -479,26 +466,26 @@ void MONSENSE_StartMonsterIRList(_Instance *instance)
   
   pvVar4 = instance->extraData;
   bVar1 = false;
-  if (*(char *)((int)pvVar4 + 0x14e) != '\0') {
-    puVar2 = (undefined4 *)0x0;
+  if (*(char *)((int)pvVar4 + 0x15e) != '\0') {
+    puVar2 = (undefined4 *)0;
     puVar5 = *(undefined4 **)((int)pvVar4 + 0x90);
     while (puVar3 = puVar5, puVar3 != (undefined4 *)0x0) {
       puVar5 = (undefined4 *)*puVar3;
-      if (puVar3[2] != *(int *)(puVar3[1] + 0x10)) {
-        *puVar3 = *(undefined4 *)((int)pvVar4 + 0x158);
-        *(undefined4 **)((int)pvVar4 + 0x158) = puVar3;
-        MONSENSE_SetupSenses(instance);
-        return;
-      }
-      if ((*(ushort *)((int)puVar3 + 0x16) & 0xe0) == 0) {
+      if (puVar3[2] == *(int *)(puVar3[1] + 0x10)) {
+        if ((*(ushort *)((int)puVar3 + 0x16) & 0xe0) == 0) {
                     /* WARNING: Subroutine does not return */
-        MON_GetTime(instance);
+          MON_GetTime(instance);
+        }
+        *(undefined4 **)puVar3 = puVar2;
+        *(ushort *)((int)puVar3 + 0x16) = *(ushort *)((int)puVar3 + 0x16) & 0xff1f;
+        puVar2 = puVar3;
+        if (*(undefined4 **)((int)pvVar4 + 0xc4) == puVar3) {
+          bVar1 = true;
+        }
       }
-      *(undefined4 **)puVar3 = puVar2;
-      *(ushort *)((int)puVar3 + 0x16) = *(ushort *)((int)puVar3 + 0x16) & 0xff1f;
-      puVar2 = puVar3;
-      if (*(undefined4 **)((int)pvVar4 + 0xc4) == puVar3) {
-        bVar1 = true;
+      else {
+        *puVar3 = *(undefined4 *)((int)pvVar4 + 0x168);
+        *(undefined4 **)((int)pvVar4 + 0x168) = puVar3;
       }
     }
     if (!bVar1) {
@@ -514,30 +501,30 @@ void MONSENSE_StartMonsterIRList(_Instance *instance)
 // decompiled code
 // original method signature: 
 // struct _MonsterIR * /*$ra*/ MONSENSE_GetMonsterIR(struct _MonsterVars *mv /*$a0*/)
- // line 476, offset 0x80086608
+ // line 465, offset 0x8008624c
 	/* begin block 1 */
-		// Start line: 478
-		// Start offset: 0x80086608
+		// Start line: 467
+		// Start offset: 0x8008624C
 		// Variables:
 	// 		struct _MonsterIR *mir; // $v1
 	/* end block 1 */
-	// End offset: 0x80086628
-	// End Line: 488
+	// End offset: 0x8008626C
+	// End Line: 477
 
 	/* begin block 2 */
-		// Start line: 975
+		// Start line: 956
 	/* end block 2 */
-	// End Line: 976
+	// End Line: 957
 
 	/* begin block 3 */
-		// Start line: 976
+		// Start line: 957
 	/* end block 3 */
-	// End Line: 977
+	// End Line: 958
 
 	/* begin block 4 */
-		// Start line: 978
+		// Start line: 959
 	/* end block 4 */
-	// End Line: 979
+	// End Line: 960
 
 _MonsterIR * MONSENSE_GetMonsterIR(_MonsterVars *mv)
 
@@ -559,30 +546,30 @@ _MonsterIR * MONSENSE_GetMonsterIR(_MonsterVars *mv)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MONSENSE_InitIRList(struct _MonsterVars *mv /*$a0*/, struct _MonsterIR *list /*$a1*/, int num /*$a2*/)
- // line 494, offset 0x80086630
+ // line 483, offset 0x80086274
 	/* begin block 1 */
-		// Start line: 496
-		// Start offset: 0x80086630
+		// Start line: 485
+		// Start offset: 0x80086274
 		// Variables:
 	// 		int i; // $a2
 	/* end block 1 */
-	// End offset: 0x80086650
-	// End Line: 505
+	// End offset: 0x80086294
+	// End Line: 494
 
 	/* begin block 2 */
-		// Start line: 1011
+		// Start line: 992
 	/* end block 2 */
-	// End Line: 1012
+	// End Line: 993
 
 	/* begin block 3 */
-		// Start line: 1012
+		// Start line: 993
 	/* end block 3 */
-	// End Line: 1013
+	// End Line: 994
 
 	/* begin block 4 */
-		// Start line: 1016
+		// Start line: 997
 	/* end block 4 */
-	// End Line: 1017
+	// End Line: 998
 
 void MONSENSE_InitIRList(_MonsterVars *mv,_MonsterIR *list,int num)
 
@@ -604,30 +591,30 @@ void MONSENSE_InitIRList(_MonsterVars *mv,_MonsterIR *list,int num)
 // decompiled code
 // original method signature: 
 // struct _MonsterIR * /*$ra*/ MONSENSE_SetEnemy(struct _Instance *instance /*$s1*/, struct _Instance *newenemy /*$s2*/)
- // line 512, offset 0x8008665c
+ // line 501, offset 0x800862a0
 	/* begin block 1 */
-		// Start line: 513
-		// Start offset: 0x8008665C
+		// Start line: 502
+		// Start offset: 0x800862A0
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	// 		struct _MonsterIR *mir; // $a2
 
 		/* begin block 1.1 */
-			// Start line: 532
-			// Start offset: 0x800866D0
+			// Start line: 521
+			// Start offset: 0x80086314
 			// Variables:
 		// 		long angle; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8008672C
-		// End Line: 538
+		// End offset: 0x80086370
+		// End Line: 527
 	/* end block 1 */
-	// End offset: 0x80086760
-	// End Line: 548
+	// End offset: 0x800863A4
+	// End Line: 537
 
 	/* begin block 2 */
-		// Start line: 1049
+		// Start line: 1030
 	/* end block 2 */
-	// End Line: 1050
+	// End Line: 1031
 
 _MonsterIR * MONSENSE_SetEnemy(_Instance *instance,_Instance *newenemy)
 
@@ -649,7 +636,7 @@ _MonsterIR * MONSENSE_SetEnemy(_Instance *instance,_Instance *newenemy)
       p_Var2->next = mv->freeIRs;
       mv->freeIRs = p_Var2;
       p_Var2 = MONSENSE_FirstSense(instance,newenemy);
-      if (p_Var2 == (_MonsterIR *)0x0) goto LAB_8008673c;
+      if (p_Var2 == (_MonsterIR *)0x0) goto LAB_80086380;
     }
     uVar5 = (uint)(ushort)(instance->rotation).z & 0xfff;
     if (0x800 < uVar5) {
@@ -670,9 +657,8 @@ _MonsterIR * MONSENSE_SetEnemy(_Instance *instance,_Instance *newenemy)
     (p_Var2->relativePosition).y = sVar1;
   }
   p_Var2->mirFlags = p_Var2->mirFlags | 1;
-LAB_8008673c:
-  if ((mv->enemy == (_MonsterIR *)0x0) ||
-     (newenemy == (_Instance *)theCamera.core.vvNormalWorVecMat[1].t[0])) {
+LAB_80086380:
+  if ((mv->enemy == (_MonsterIR *)0x0) || (newenemy == gameTrackerX.playerInstance)) {
     mv->enemy = p_Var2;
   }
   return p_Var2;
@@ -683,10 +669,10 @@ LAB_8008673c:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MONSENSE_ProcessIRList(struct _Instance *instance /*$s7*/)
- // line 554, offset 0x8008677c
+ // line 543, offset 0x800863c0
 	/* begin block 1 */
-		// Start line: 555
-		// Start offset: 0x8008677C
+		// Start line: 544
+		// Start offset: 0x800863C0
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s4
 	// 		struct _MonsterIR *mir; // $s0
@@ -696,34 +682,36 @@ LAB_8008673c:
 	// 		struct _MonsterIR *player; // $s6
 	// 		struct _MonsterCombatAttributes *combatAttr; // $s5
 	/* end block 1 */
-	// End offset: 0x80086968
-	// End Line: 612
+	// End offset: 0x80086594
+	// End Line: 601
 
 	/* begin block 2 */
-		// Start line: 1138
+		// Start line: 1119
 	/* end block 2 */
-	// End Line: 1139
+	// End Line: 1120
 
-/* WARNING: Removing unreachable block (ram,0x80086934) */
-/* WARNING: Removing unreachable block (ram,0x8008693c) */
-/* WARNING: Removing unreachable block (ram,0x8008694c) */
-/* WARNING: Removing unreachable block (ram,0x8008695c) */
+/* WARNING: Removing unreachable block (ram,0x80086560) */
+/* WARNING: Removing unreachable block (ram,0x80086568) */
+/* WARNING: Removing unreachable block (ram,0x80086578) */
+/* WARNING: Removing unreachable block (ram,0x80086588) */
 
 void MONSENSE_ProcessIRList(_Instance *instance)
 
 {
   int *piVar1;
   int *piVar2;
-  void *pvVar3;
+  int *piVar3;
+  void *pvVar4;
   
   piVar2 = (int *)0x0;
-  pvVar3 = instance->extraData;
-  piVar1 = *(int **)((int)pvVar3 + 0x90);
+  piVar3 = (int *)0x0;
+  pvVar4 = instance->extraData;
+  piVar1 = *(int **)((int)pvVar4 + 0x90);
   do {
     if (piVar1 == (int *)0x0) {
-      *(undefined4 *)((int)pvVar3 + 0xc4) = 0;
-      *(int **)((int)pvVar3 + 200) = piVar2;
-      *(undefined4 *)((int)pvVar3 + 0xcc) = 0;
+      *(undefined4 *)((int)pvVar4 + 0xc4) = 0;
+      *(int **)((int)pvVar4 + 200) = piVar2;
+      *(int **)((int)pvVar4 + 0xcc) = piVar3;
       return;
     }
     if (((_Instance *)piVar1[1])->instanceID == piVar1[2]) {
@@ -735,9 +723,9 @@ void MONSENSE_ProcessIRList(_Instance *instance)
          ((piVar2 == (int *)0x0 || (*(short *)(piVar1 + 5) < *(short *)((int)piVar2 + 0x14))))) {
         piVar2 = piVar1;
       }
-      if ((*(ushort *)((int)piVar1 + 0x16) & 2) != 0) {
-                    /* WARNING: Subroutine does not return */
-        INSTANCE_Query((_Instance *)piVar1[1],1);
+      if (((*(ushort *)((int)piVar1 + 0x16) & 2) != 0) &&
+         ((piVar3 == (int *)0x0 || (*(short *)(piVar1 + 5) < *(short *)((int)piVar3 + 0x14))))) {
+        piVar3 = piVar1;
       }
       *(ushort *)((int)piVar1 + 0x16) = *(ushort *)((int)piVar1 + 0x16) & 0xfeff;
     }
@@ -750,24 +738,21 @@ void MONSENSE_ProcessIRList(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MONSENSE_SetupSenses(struct _Instance *instance /*$s2*/)
- // line 630, offset 0x8008699c
+ // line 619, offset 0x800865c8
 	/* begin block 1 */
-		// Start line: 631
-		// Start offset: 0x8008699C
+		// Start line: 620
+		// Start offset: 0x800865C8
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s1
 	// 		struct _MonsterAllegiances *allegiances; // $s0
-	// 		int num; // $v0
 	/* end block 1 */
-	// End offset: 0x80086AF0
-	// End Line: 697
+	// End offset: 0x800866E8
+	// End Line: 675
 
 	/* begin block 2 */
-		// Start line: 1260
+		// Start line: 1235
 	/* end block 2 */
-	// End Line: 1261
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 1236
 
 void MONSENSE_SetupSenses(_Instance *instance)
 
@@ -784,28 +769,21 @@ void MONSENSE_SetupSenses(_Instance *instance)
     instance->checkMask = p_Var2->enemies | p_Var2->allies | p_Var2->food | p_Var2->gods;
   }
   instance->maxCheckDistance = 12000;
-  iVar1 = gNumMonsters * 4;
+  iVar1 = gNumMonsters;
   instance->checkMask = instance->checkMask | 0xb;
   mv->enemy = (_MonsterIR *)0x0;
   mv->leader = (_MonsterIR *)0x0;
-  *(_MonsterVars **)(&monsterSenseArray40 + iVar1) = mv;
+  (&monsterSenseArray40)[iVar1] = mv;
   mv->senseIndex = (char)gNumMonsters;
   if (gNumMonsters == 0) {
-    _lastSenseFrame = 0xffffffff;
+    lastSenseFrame = -1;
   }
   gNumMonsters = gNumMonsters + 1;
-  if ((*(uint *)((int)instance->data + 0x10) & 0x1804) == 0) {
-    iVar1 = gNumMaterialMonsters + 1;
-    gNumMaterialMonsters = iVar1;
-  }
-  else {
-    iVar1 = gNumSpectralMonsters + 1;
-    gNumSpectralMonsters = iVar1;
-  }
-  if (((6 < iVar1) && (instance->parent == (_Instance *)0x0)) &&
+  if (((6 < gNumMonsters) && (instance->parent == (_Instance *)0x0)) &&
      (instance->currentStreamUnitID != instance->birthStreamUnitID)) {
     instance->flags = instance->flags | 0x20;
     instance->flags2 = instance->flags2 | 0x20000;
+    SAVE_DeleteInstance(instance);
   }
   return;
 }
@@ -815,55 +793,47 @@ void MONSENSE_SetupSenses(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MONSENSE_RemoveSenses(struct _Instance *instance /*$a0*/)
- // line 702, offset 0x80086b08
+ // line 680, offset 0x80086700
 	/* begin block 1 */
-		// Start line: 704
-		// Start offset: 0x80086B08
+		// Start line: 682
+		// Start offset: 0x80086700
 		// Variables:
-	// 		struct _MonsterVars *mv; // $a0
+	// 		struct _MonsterVars *mv; // $v1
 	// 		int i; // $a1
 	/* end block 1 */
-	// End offset: 0x80086BA0
-	// End Line: 723
+	// End offset: 0x8008675C
+	// End Line: 693
 
 	/* begin block 2 */
-		// Start line: 1541
+		// Start line: 1498
 	/* end block 2 */
-	// End Line: 1542
+	// End Line: 1499
 
 	/* begin block 3 */
-		// Start line: 1542
+		// Start line: 1499
 	/* end block 3 */
-	// End Line: 1543
+	// End Line: 1500
 
 	/* begin block 4 */
-		// Start line: 1547
+		// Start line: 1503
 	/* end block 4 */
-	// End Line: 1548
+	// End Line: 1504
 
 void MONSENSE_RemoveSenses(_Instance *instance)
 
 {
   int iVar1;
   int iVar2;
-  int iVar3;
   
   gNumMonsters = gNumMonsters + -1;
-  if ((*(uint *)((int)instance->data + 0x10) & 0x1804) == 0) {
-    gNumMaterialMonsters = gNumMaterialMonsters + -1;
-  }
-  else {
-    gNumSpectralMonsters = gNumSpectralMonsters + -1;
-  }
-  iVar3 = (int)*(char *)((int)instance->extraData + 0x14f);
-  if (iVar3 < gNumMonsters) {
+  iVar2 = (int)*(char *)((int)instance->extraData + 0x15f);
+  if (iVar2 < gNumMonsters) {
     do {
-      iVar2 = iVar3 + 1;
-      iVar1 = *(int *)(&monsterSenseArray40 + iVar2 * 4);
-      *(int *)(&monsterSenseArray40 + iVar3 * 4) = iVar1;
-      *(undefined *)(iVar1 + 0x14f) = (char)iVar3;
-      iVar3 = iVar2;
-    } while (iVar2 < gNumMonsters);
+      iVar1 = iVar2 + 1;
+      (&monsterSenseArray40)[iVar2] = (&monsterSenseArray40)[iVar1];
+      (&monsterSenseArray40)[iVar1]->senseIndex = (char)iVar2;
+      iVar2 = iVar1;
+    } while (iVar1 < gNumMonsters);
   }
   return;
 }
@@ -873,10 +843,10 @@ void MONSENSE_RemoveSenses(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MONSENSE_Radar(struct _Instance *instance /*$s0*/)
- // line 847, offset 0x80086ba8
+ // line 817, offset 0x80086764
 	/* begin block 1 */
-		// Start line: 848
-		// Start offset: 0x80086BA8
+		// Start line: 818
+		// Start offset: 0x80086764
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s1
 	// 		struct SVECTOR newPos; // stack offset -96
@@ -884,33 +854,27 @@ void MONSENSE_RemoveSenses(_Instance *instance)
 	// 		struct _PCollideInfo pCollideInfo; // stack offset -80
 	// 		int index; // $s3
 	/* end block 1 */
-	// End offset: 0x80086DC0
-	// End Line: 919
+	// End offset: 0x80086980
+	// End Line: 889
 
 	/* begin block 2 */
-		// Start line: 1840
+		// Start line: 1779
 	/* end block 2 */
-	// End Line: 1841
+	// End Line: 1780
 
 void MONSENSE_Radar(_Instance *instance)
 
 {
-  undefined2 uVar1;
-  ushort uVar2;
-  int iVar3;
-  long lVar4;
-  void *pvVar5;
-  uint uVar6;
+  void *pvVar1;
+  uint uVar2;
   SVECTOR local_60;
   SVECTOR local_58;
   _PCollideInfo local_50;
   
-  pvVar5 = instance->extraData;
-  uVar6 = (uint)*(byte *)((int)default_lightgroup.colorMatrix.m +
-                         (uint)*(ushort *)((int)pvVar5 + 0xe2) + 8);
-  iVar3 = uVar6 * 6;
-  local_60.vx = (instance->position).x + *(short *)(&DAT_800cf63a + iVar3);
-  local_60.vy = (instance->position).y + *(short *)(&DAT_800cf63c + iVar3);
+  pvVar1 = instance->extraData;
+  uVar2 = (uint)""[*(int *)((int)pvVar1 + 0xe4)];
+  local_60.vx = (instance->position).x + (&radarDir)[uVar2].x;
+  local_60.vy = (instance->position).y + (&radarDir)[uVar2].y;
   local_60.vz = (instance->position).z + 100;
   local_58.vx = (instance->position).x;
   local_58.vy = (instance->position).y;
@@ -920,41 +884,30 @@ void MONSENSE_Radar(_Instance *instance)
   local_58.vz = (instance->position).z + 100;
   PHYSICS_CheckLineInWorldMask(instance,&local_50);
   if (local_50.type == 0) {
-    local_58.vx = (instance->position).x + *(short *)(&DAT_800cf63a + iVar3);
-    local_58.vy = (instance->position).y + *(short *)(&DAT_800cf63c + iVar3);
+    local_58.vx = (instance->position).x + (&radarDir)[uVar2].x;
+    local_58.vy = (instance->position).y + (&radarDir)[uVar2].y;
     local_58.vz = (instance->position).z + -0x100;
     local_60.vx = (instance->position).x;
     local_60.vy = (instance->position).y;
     local_60.vz = (instance->position).z + -0x100;
+                    /* WARNING: Subroutine does not return */
     PHYSICS_CheckLineInWorld(instance,&local_50);
-    if (local_50.type != 0) goto LAB_80086d10;
-    *(ushort *)((int)pvVar5 + 0xe0) =
-         *(ushort *)((int)pvVar5 + 0xe0) | (ushort)(1 << (uVar6 & 0x1f));
-    uVar1 = 0x500;
   }
-  else {
-LAB_80086d10:
-    *(ushort *)((int)pvVar5 + 0xe0) =
-         *(ushort *)((int)pvVar5 + 0xe0) & ~(ushort)(1 << (uVar6 & 0x1f));
-    if ((local_50.type == 3) &&
-       ((*(ushort *)
-          ((int)((local_50.inst)->node).prev[9].prev + (int)local_50.segment * 0x24 + 0x12) & 2) !=
-        0)) {
-      *(undefined2 *)((int)pvVar5 + uVar6 * 2 + 0xe4) = 0;
-      goto LAB_80086d9c;
+  *(uint *)((int)pvVar1 + 0xe0) = *(uint *)((int)pvVar1 + 0xe0) & ~(1 << (uVar2 & 0x1f));
+  if ((local_50.type == 3) &&
+     ((*(ushort *)((int)((local_50.inst)->node).prev[9].prev + (int)local_50.segment * 0x24 + 0x12)
+      & 2) != 0)) {
+    *(undefined2 *)((int)pvVar1 + uVar2 * 2 + 0xe8) = 0;
+    uVar2 = *(int *)((int)pvVar1 + 0xe4) + 1;
+    *(uint *)((int)pvVar1 + 0xe4) = uVar2;
+    if (7 < uVar2) {
+      *(undefined4 *)((int)pvVar1 + 0xe4) = 0;
     }
-    lVar4 = MATH3D_LengthXY((int)local_60.vx - (int)(instance->position).x,
-                            (int)local_60.vy - (int)(instance->position).y);
-    uVar1 = (undefined2)lVar4;
+    return;
   }
-  *(undefined2 *)((int)pvVar5 + uVar6 * 2 + 0xe4) = uVar1;
-LAB_80086d9c:
-  uVar2 = *(short *)((int)pvVar5 + 0xe2) + 1;
-  *(ushort *)((int)pvVar5 + 0xe2) = uVar2;
-  if (7 < uVar2) {
-    *(undefined2 *)((int)pvVar5 + 0xe2) = 0;
-  }
-  return;
+                    /* WARNING: Subroutine does not return */
+  MATH3D_LengthXY((int)local_60.vx - (int)(instance->position).x,
+                  (int)local_60.vy - (int)(instance->position).y);
 }
 
 
@@ -962,24 +915,24 @@ LAB_80086d9c:
 // decompiled code
 // original method signature: 
 // short /*$ra*/ MONSENSE_GetClosestFreeDirection(struct _Instance *instance /*$a0*/, short angle /*$t1*/, long range /*$a2*/)
- // line 924, offset 0x80086de4
+ // line 894, offset 0x800869a4
 	/* begin block 1 */
-		// Start line: 925
-		// Start offset: 0x80086DE4
+		// Start line: 895
+		// Start offset: 0x800869A4
 		// Variables:
 	// 		struct _MonsterVars *mv; // $t0
 	// 		int bit; // $a1
 	// 		int search; // $a0
 	/* end block 1 */
-	// End offset: 0x80086EE0
-	// End Line: 958
+	// End offset: 0x80086AA8
+	// End Line: 928
 
 	/* begin block 2 */
-		// Start line: 2013
+		// Start line: 1952
 	/* end block 2 */
-	// End Line: 2014
+	// End Line: 1953
 
-/* WARNING: Removing unreachable block (ram,0x80086e04) */
+/* WARNING: Removing unreachable block (ram,0x800869c4) */
 
 short MONSENSE_GetClosestFreeDirection(_Instance *instance,short angle,long range)
 
@@ -993,11 +946,11 @@ short MONSENSE_GetClosestFreeDirection(_Instance *instance,short angle,long rang
   pvVar5 = instance->extraData;
   uVar3 = (int)((int)angle + 0x100U & 0xfff) >> 9;
   iVar2 = 1;
-  if ((*(short *)((int)pvVar5 + uVar3 * 2 + 0xe4) == 0) &&
-     (uVar4 = uVar3 + 4 & 7, range < *(short *)((int)pvVar5 + uVar4 * 2 + 0xe4))) {
-    return *(short *)(&radarDir + uVar4 * 6);
+  if ((*(short *)((int)pvVar5 + uVar3 * 2 + 0xe8) == 0) &&
+     (uVar4 = uVar3 + 4 & 7, range < *(short *)((int)pvVar5 + uVar4 * 2 + 0xe8))) {
+    return (&radarDir)[uVar4].angle;
   }
-  sVar1 = *(short *)((int)pvVar5 + uVar3 * 2 + 0xe4);
+  sVar1 = *(short *)((int)pvVar5 + uVar3 * 2 + 0xe8);
   while( true ) {
     if (range <= sVar1) {
       return angle;
@@ -1012,8 +965,8 @@ short MONSENSE_GetClosestFreeDirection(_Instance *instance,short angle,long rang
     }
     uVar3 = uVar3 & 7;
     if (3 < iVar2) break;
-    sVar1 = *(short *)((int)pvVar5 + uVar3 * 2 + 0xe4);
-    angle = *(short *)(&radarDir + uVar3 * 6);
+    sVar1 = *(short *)((int)pvVar5 + uVar3 * 2 + 0xe8);
+    angle = (&radarDir)[uVar3].angle;
   }
   return angle;
 }
@@ -1023,39 +976,39 @@ short MONSENSE_GetClosestFreeDirection(_Instance *instance,short angle,long rang
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MONSENSE_GetDistanceInDirection(struct _Instance *instance /*$a0*/, short angle /*$a1*/)
- // line 963, offset 0x80086ee8
+ // line 933, offset 0x80086ab0
 	/* begin block 1 */
-		// Start line: 965
-		// Start offset: 0x80086EE8
+		// Start line: 935
+		// Start offset: 0x80086AB0
 		// Variables:
 	// 		struct _MonsterVars *mv; // $v1
 	// 		int bit; // $v0
 	/* end block 1 */
-	// End offset: 0x80086F08
-	// End Line: 966
+	// End offset: 0x80086AD0
+	// End Line: 936
 
 	/* begin block 2 */
-		// Start line: 2096
+		// Start line: 2035
 	/* end block 2 */
-	// End Line: 2097
+	// End Line: 2036
 
 	/* begin block 3 */
-		// Start line: 2097
+		// Start line: 2036
 	/* end block 3 */
-	// End Line: 2098
+	// End Line: 2037
 
 	/* begin block 4 */
-		// Start line: 2098
+		// Start line: 2037
 	/* end block 4 */
-	// End Line: 2099
+	// End Line: 2038
 
-/* WARNING: Removing unreachable block (ram,0x80086f04) */
+/* WARNING: Removing unreachable block (ram,0x80086acc) */
 
 int MONSENSE_GetDistanceInDirection(_Instance *instance,short angle)
 
 {
   return (int)*(short *)((int)instance->extraData +
-                        ((int)((int)angle + 0x100U & 0xfff) >> 9) * 2 + 0xe4);
+                        ((int)((int)angle + 0x100U & 0xfff) >> 9) * 2 + 0xe8);
 }
 
 
@@ -1063,23 +1016,21 @@ int MONSENSE_GetDistanceInDirection(_Instance *instance,short angle)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MONSENSE_DoSenses(struct _Instance *instance /*$s1*/)
- // line 974, offset 0x80086f20
+ // line 944, offset 0x80086ae8
 	/* begin block 1 */
-		// Start line: 975
-		// Start offset: 0x80086F20
+		// Start line: 945
+		// Start offset: 0x80086AE8
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
-	// 		static int doneThisFrame; // offset 0x44
+	// 		static int doneThisFrame; // offset 0x3c
 	/* end block 1 */
-	// End offset: 0x80087004
-	// End Line: 1005
+	// End offset: 0x80086BD4
+	// End Line: 975
 
 	/* begin block 2 */
-		// Start line: 2119
+		// Start line: 2058
 	/* end block 2 */
-	// End Line: 2120
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 2059
 
 void MONSENSE_DoSenses(_Instance *instance)
 
@@ -1088,25 +1039,24 @@ void MONSENSE_DoSenses(_Instance *instance)
   
   pvVar1 = instance->extraData;
   MONSENSE_ProcessIRList(instance);
-  if (_lastSenseFrame < theCamera.focusRotation._0_4_) {
-    if (_lastSenseFrame < theCamera.focusRotation._0_4_ + -1) {
+  if (lastSenseFrame < (int)gameTrackerX.frameCount) {
+    if (lastSenseFrame < (int)(gameTrackerX.frameCount - 1)) {
                     /* WARNING: Subroutine does not return */
       memset(&monsterSensed,0,0x28);
     }
-    default_lightgroup.colorMatrix._16_4_ = 0;
+    PAUSE_YPOS = 0;
   }
-  if ((default_lightgroup.colorMatrix._16_4_ == 0) &&
-     ((&monsterSensed)[*(char *)((int)pvVar1 + 0x14f)] == '\0')) {
-    _lastSenseFrame = theCamera.focusRotation._0_4_;
-    (&monsterSensed)[*(char *)((int)pvVar1 + 0x14f)] = '\x01';
-    default_lightgroup.colorMatrix._16_4_ = 1;
-    *(undefined *)((int)pvVar1 + 0x14e) = 1;
+  if ((PAUSE_YPOS == 0) && ((&monsterSensed)[*(char *)((int)pvVar1 + 0x15f)] == '\0')) {
+    lastSenseFrame = gameTrackerX.frameCount;
+    (&monsterSensed)[*(char *)((int)pvVar1 + 0x15f)] = '\x01';
+    PAUSE_YPOS = 1;
+    *(undefined *)((int)pvVar1 + 0x15e) = 1;
     if ((*(uint *)((int)pvVar1 + 4) & 0x20000000) == 0) {
       MONSENSE_Radar(instance);
     }
   }
   else {
-    *(undefined *)((int)pvVar1 + 0x14e) = 0;
+    *(undefined *)((int)pvVar1 + 0x15e) = 0;
   }
   return;
 }
@@ -1116,131 +1066,89 @@ void MONSENSE_DoSenses(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MONSENSE_AdjustRadarFromObjects(struct _Instance *instance /*$s3*/)
- // line 1010, offset 0x80087018
+ // line 980, offset 0x80086be8
 	/* begin block 1 */
-		// Start line: 1011
-		// Start offset: 0x80087018
+		// Start line: 981
+		// Start offset: 0x80086BE8
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s4
 	// 		struct _Instance *physob; // $s2
 
 		/* begin block 1.1 */
-			// Start line: 1019
-			// Start offset: 0x80087068
+			// Start line: 989
+			// Start offset: 0x80086C38
 			// Variables:
 		// 		struct PhysObProperties *prop; // $s1
 
 			/* begin block 1.1.1 */
-				// Start line: 1022
-				// Start offset: 0x80087080
+				// Start line: 992
+				// Start offset: 0x80086C50
 
 				/* begin block 1.1.1.1 */
-					// Start line: 1028
-					// Start offset: 0x800870BC
+					// Start line: 998
+					// Start offset: 0x80086C8C
 					// Variables:
 				// 		long dist; // $s0
 
 					/* begin block 1.1.1.1.1 */
-						// Start line: 1033
-						// Start offset: 0x800870F0
+						// Start line: 1003
+						// Start offset: 0x80086CC0
 						// Variables:
 					// 		int i; // $v1
 					// 		int min; // $a1
 					// 		int max; // $a2
 					// 		int ang; // $s0
 					/* end block 1.1.1.1.1 */
-					// End offset: 0x800871CC
-					// End Line: 1060
+					// End offset: 0x80086D9C
+					// End Line: 1031
 				/* end block 1.1.1.1 */
-				// End offset: 0x800871CC
-				// End Line: 1061
+				// End offset: 0x80086D9C
+				// End Line: 1032
 			/* end block 1.1.1 */
-			// End offset: 0x800871CC
-			// End Line: 1063
+			// End offset: 0x80086D9C
+			// End Line: 1034
 		/* end block 1.1 */
-		// End offset: 0x800871CC
-		// End Line: 1064
+		// End offset: 0x80086D9C
+		// End Line: 1035
 	/* end block 1 */
-	// End offset: 0x800871DC
-	// End Line: 1066
+	// End offset: 0x80086DAC
+	// End Line: 1037
 
 	/* begin block 2 */
-		// Start line: 2191
+		// Start line: 2130
 	/* end block 2 */
-	// End Line: 2192
+	// End Line: 2131
 
 	/* begin block 3 */
-		// Start line: 2195
+		// Start line: 2134
 	/* end block 3 */
-	// End Line: 2196
-
-/* WARNING: Removing unreachable block (ram,0x8008712c) */
-/* WARNING: Removing unreachable block (ram,0x80087144) */
+	// End Line: 2135
 
 void MONSENSE_AdjustRadarFromObjects(_Instance *instance)
 
 {
-  short sVar1;
-  short sVar2;
-  int iVar3;
-  long x;
-  void *pvVar4;
-  uint uVar5;
-  uint uVar6;
-  int iVar7;
-  int iVar8;
-  void *pvVar9;
+  int iVar1;
+  _Instance *p_Var2;
   
-  iVar8 = *(int *)(theCamera.core.vvNormalWorVecMat[1].t[2] + 4);
-  pvVar9 = instance->extraData;
-  while (iVar8 != 0) {
-    if ((((*(uint *)(*(int *)(iVar8 + 0x1c) + 0x2c) & 0x40000) != 0) &&
-        (iVar7 = *(int *)(iVar8 + 0x24), *(short *)(iVar7 + 2) == 3)) &&
-       ((*(ushort *)(iVar7 + 8) & 0x40) != 0)) {
-      iVar3 = (int)*(short *)(iVar8 + 0x60) - (int)(instance->position).z;
-      if (iVar3 < 0) {
-        iVar3 = -iVar3;
+  p_Var2 = (gameTrackerX.instanceList)->first;
+  do {
+    if (p_Var2 == (_Instance *)0x0) {
+      return;
+    }
+    if ((((p_Var2->object->oflags2 & 0x40000U) != 0) && (*(short *)((int)p_Var2->data + 2) == 3)) &&
+       ((*(ushort *)((int)p_Var2->data + 8) & 0x40) != 0)) {
+      iVar1 = (int)(p_Var2->position).z - (int)(instance->position).z;
+      if (iVar1 < 0) {
+        iVar1 = -iVar1;
       }
-      if ((iVar3 < 400) &&
-         (x = MATH3D_LengthXY((int)*(short *)(iVar8 + 0x5c) - (int)(instance->position).x,
-                              (int)*(short *)(iVar8 + 0x5e) - (int)(instance->position).y),
-         x < (int)((uint)*(ushort *)(iVar7 + 0x1e) + 0x500))) {
-        sVar1 = MATH3D_AngleFromPosToPos(&instance->position,(_Position *)(iVar8 + 0x5c));
-        sVar2 = MATH3D_FastAtan2((uint)*(ushort *)(iVar7 + 0x1e),x);
-        uVar6 = (int)((int)sVar1 + (int)sVar2 + 0x100U & 0xfff) >> 9;
-        uVar5 = (int)(((int)sVar1 - (int)sVar2) + 0x100U & 0xfff) >> 9;
-        if (uVar5 < uVar6) {
-          if (uVar5 <= uVar6) {
-            pvVar4 = (void *)(uVar5 * 2 + (int)pvVar9);
-            do {
-              *(undefined2 *)((int)pvVar4 + 0xe4) = 0;
-              uVar5 = uVar5 + 1;
-              pvVar4 = (void *)((int)pvVar4 + 2);
-            } while ((int)uVar5 <= (int)uVar6);
-          }
-        }
-        else {
-          iVar7 = 0;
-          pvVar4 = pvVar9;
-          do {
-            *(undefined2 *)((int)pvVar4 + 0xe4) = 0;
-            iVar7 = iVar7 + 1;
-            pvVar4 = (void *)((int)pvVar4 + 2);
-          } while (iVar7 <= (int)uVar6);
-          if (uVar5 < 8) {
-            pvVar4 = (void *)(uVar5 * 2 + (int)pvVar9);
-            do {
-              *(undefined2 *)((int)pvVar4 + 0xe4) = 0;
-              uVar5 = uVar5 + 1;
-              pvVar4 = (void *)((int)pvVar4 + 2);
-            } while ((int)uVar5 < 8);
-          }
-        }
+      if (iVar1 < 400) {
+                    /* WARNING: Subroutine does not return */
+        MATH3D_LengthXY((int)(p_Var2->position).x - (int)(instance->position).x,
+                        (int)(p_Var2->position).y - (int)(instance->position).y);
       }
     }
-    iVar8 = *(int *)(iVar8 + 8);
-  }
-  return;
+    p_Var2 = p_Var2->next;
+  } while( true );
 }
 
 

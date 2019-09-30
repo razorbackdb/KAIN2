@@ -1,76 +1,27 @@
-//#include "THISDUST.H"
+#include "THISDUST.H"
 #include "STRMLOAD.H"
 
 
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_NextLoadFromHead()
- // line 37, offset 0x8005fae8
+ // line 36, offset 0x80060198
 	/* begin block 1 */
-		// Start line: 74
+		// Start line: 72
 	/* end block 1 */
-	// End Line: 75
+	// End Line: 73
 
 	/* begin block 2 */
-		// Start line: 75
+		// Start line: 73
 	/* end block 2 */
-	// End Line: 76
+	// End Line: 74
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void STREAM_NextLoadFromHead(void)
 
 {
-  loadFromHead = 1;
-  return;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// void /*$ra*/ STREAM_NextLoadCanFail()
- // line 42, offset 0x8005faf8
-	/* begin block 1 */
-		// Start line: 84
-	/* end block 1 */
-	// End Line: 85
-
-	/* begin block 2 */
-		// Start line: 85
-	/* end block 2 */
-	// End Line: 86
-
-void STREAM_NextLoadCanFail(void)
-
-{
-  //uGpffff9a30 = 1;
-  return;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// void /*$ra*/ STREAM_NextLoadAsNormal()
- // line 47, offset 0x8005fb08
-	/* begin block 1 */
-		// Start line: 94
-	/* end block 1 */
-	// End Line: 95
-
-	/* begin block 2 */
-		// Start line: 95
-	/* end block 2 */
-	// End Line: 96
-
-/* WARNING: Unknown calling convention yet parameter storage is locked */
-
-void STREAM_NextLoadAsNormal(void)
-
-{
-  //loadFromHead = 0;
-  //loadCanFail = 0;
+  loadBufferedFromHead = 1;
   return;
 }
 
@@ -79,43 +30,43 @@ void STREAM_NextLoadAsNormal(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_InitLoader(char *bigFileName /*$a0*/, char *voiceFileName /*$a1*/)
- // line 53, offset 0x8005fb18
+ // line 41, offset 0x800601a8
 	/* begin block 1 */
-		// Start line: 54
-		// Start offset: 0x8005FB18
+		// Start line: 42
+		// Start offset: 0x800601A8
 		// Variables:
 	// 		int i; // $a1
 	/* end block 1 */
-	// End offset: 0x8005FB5C
-	// End Line: 69
+	// End offset: 0x800601F0
+	// End Line: 57
 
 	/* begin block 2 */
-		// Start line: 106
+		// Start line: 82
 	/* end block 2 */
-	// End Line: 107
+	// End Line: 83
 
-void STREAM_InitLoader(char *bigFileName, char *voiceFileName)
+void STREAM_InitLoader(char *bigFileName,char *voiceFileName)
 
 {
-  DVECTOR *pDVar1;
-  DVECTOR *pDVar2;
+  _LoadQueueEntry *p_Var1;
+  _LoadQueueEntry *p_Var2;
   int iVar3;
   
-  LOAD_InitCdLoader(bigFileName, voiceFileName);
+  LOAD_InitCdLoader(bigFileName,voiceFileName);
   iVar3 = 0x26;
-  pDVar2 = &DVECTOR_800d26a4;
-  pDVar1 = &DVECTOR_800d26e4;
-  shadow_vertices = &LoadQueue;
-  loadHead = 0;
-  loadTail = 0;
+  p_Var2 = &_LoadQueueEntry_800da5a0;
+  p_Var1 = &_LoadQueueEntry_800da610;
+  loadFree = &LoadQueue;
+  loadHead = (_LoadQueueEntry *)0x0;
+  loadTail = (_LoadQueueEntry *)0x0;
   numLoads = 0;
   do {
-    *(DVECTOR **)pDVar2 = pDVar1;
-    pDVar2 = pDVar2 + -0x10;
+    p_Var2->next = p_Var1;
+    p_Var2 = p_Var2 + -1;
     iVar3 = iVar3 + -1;
-    pDVar1 = (DVECTOR *)((int)pDVar1 + -0x40);
+    p_Var1 = p_Var1 + -1;
   } while (-1 < iVar3);
-  DVECTOR_800d26e4 = 0; */
+  _LoadQueueEntry_800da610.next = (_LoadQueueEntry *)0x0;
   return;
 }
 
@@ -124,48 +75,48 @@ void STREAM_InitLoader(char *bigFileName, char *voiceFileName)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_RemoveQueueHead()
- // line 73, offset 0x8005fb6c
+ // line 61, offset 0x80060204
 	/* begin block 1 */
-		// Start line: 75
-		// Start offset: 0x8005FB6C
+		// Start line: 63
+		// Start offset: 0x80060204
 		// Variables:
 	// 		struct _LoadQueueEntry *entry; // $a0
 	/* end block 1 */
-	// End offset: 0x8005FB8C
-	// End Line: 80
+	// End offset: 0x80060224
+	// End Line: 68
 
 	/* begin block 2 */
-		// Start line: 154
+		// Start line: 135
 	/* end block 2 */
-	// End Line: 155
+	// End Line: 136
 
 	/* begin block 3 */
-		// Start line: 155
+		// Start line: 136
 	/* end block 3 */
-	// End Line: 156
+	// End Line: 137
 
 	/* begin block 4 */
-		// Start line: 156
+		// Start line: 137
 	/* end block 4 */
-	// End Line: 157
+	// End Line: 138
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void STREAM_RemoveQueueHead(void)
 
 {
-  int iVar1;
-  int iVar2;
+  _LoadQueueEntry **pp_Var1;
+  _LoadQueueEntry *p_Var2;
   
-/*   iVar1 = (int)shadow_vertices;
-  if (*loadHead == 0) {
-    loadTail = 0;
+  p_Var2 = loadFree;
+  if (loadHead->next == (_LoadQueueEntry *)0x0) {
+    loadTail = (_LoadQueueEntry *)0x0;
   }
-  shadow_vertices = loadHead;
-  iVar2 = *loadHead;
-  *loadHead = iVar1;
-  loadHead = (int *)iVar2;
-  numLoads = numLoads + -1; */
+  loadFree = loadHead;
+  pp_Var1 = &loadHead->next;
+  loadHead = loadHead->next;
+  *pp_Var1 = p_Var2;
+  numLoads = numLoads + -1;
   return;
 }
 
@@ -174,23 +125,23 @@ void STREAM_RemoveQueueHead(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_RemoveQueueEntry(struct _LoadQueueEntry *entry /*$a0*/, struct _LoadQueueEntry *prev /*$a1*/)
- // line 85, offset 0x8005fbac
+ // line 73, offset 0x80060244
 	/* begin block 1 */
-		// Start line: 181
+		// Start line: 162
 	/* end block 1 */
-	// End Line: 182
+	// End Line: 163
 
 	/* begin block 2 */
-		// Start line: 182
+		// Start line: 163
 	/* end block 2 */
-	// End Line: 183
+	// End Line: 164
 
 void STREAM_RemoveQueueEntry(_LoadQueueEntry *entry,_LoadQueueEntry *prev)
 
 {
   _LoadQueueEntry *p_Var1;
   
-/*   if (loadTail == entry) {
+  if (loadTail == entry) {
     loadTail = prev;
   }
   if (prev == (_LoadQueueEntry *)0x0) {
@@ -200,9 +151,9 @@ void STREAM_RemoveQueueEntry(_LoadQueueEntry *entry,_LoadQueueEntry *prev)
     prev->next = entry->next;
   }
   p_Var1 = entry;
-  entry->next = shadow_vertices;
-  shadow_vertices = p_Var1;
-  numLoads = numLoads + -1; */
+  entry->next = loadFree;
+  loadFree = p_Var1;
+  numLoads = numLoads + -1;
   return;
 }
 
@@ -211,20 +162,30 @@ void STREAM_RemoveQueueEntry(_LoadQueueEntry *entry,_LoadQueueEntry *prev)
 // decompiled code
 // original method signature: 
 // struct _LoadQueueEntry * /*$ra*/ STREAM_AddQueueEntryToTail()
- // line 102, offset 0x8005fc08
+ // line 90, offset 0x800602a0
 	/* begin block 1 */
-		// Start line: 103
-		// Start offset: 0x8005FC08
+		// Start line: 92
+		// Start offset: 0x800602A0
 		// Variables:
-	// 		struct _LoadQueueEntry *entry; // $s0
+	// 		struct _LoadQueueEntry *entry; // $v1
 	/* end block 1 */
-	// End offset: 0x8005FC50
-	// End Line: 118
+	// End offset: 0x800602C8
+	// End Line: 104
 
 	/* begin block 2 */
-		// Start line: 218
+		// Start line: 199
 	/* end block 2 */
-	// End Line: 219
+	// End Line: 200
+
+	/* begin block 3 */
+		// Start line: 200
+	/* end block 3 */
+	// End Line: 201
+
+	/* begin block 4 */
+		// Start line: 201
+	/* end block 4 */
+	// End Line: 202
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
@@ -234,23 +195,19 @@ _LoadQueueEntry * STREAM_AddQueueEntryToTail(void)
   _LoadQueueEntry *p_Var1;
   _LoadQueueEntry *p_Var2;
   
-/*   p_Var1 = shadow_vertices;
-  if (shadow_vertices == (_LoadQueueEntry *)0x0) {
-                    /* WARNING: Subroutine does not return */
-/*     DEBUG_FatalError(&_spu_AllocBlockNum);
-  }
-  p_Var2 = shadow_vertices->next;
-  shadow_vertices->next = (_LoadQueueEntry *)0x0;
+  p_Var1 = loadFree;
+  p_Var2 = loadFree->next;
+  loadFree->next = (_LoadQueueEntry *)0x0;
   if (loadTail == (_LoadQueueEntry *)0x0) {
-    loadHead = shadow_vertices;
-    shadow_vertices = p_Var2;
+    loadHead = loadFree;
+    loadFree = p_Var2;
   }
   else {
-    *(_LoadQueueEntry **)loadTail = shadow_vertices;
-    shadow_vertices = p_Var2;
+    loadTail->next = loadFree;
+    loadFree = p_Var2;
   }
   loadTail = p_Var1;
-  numLoads = numLoads + 1; */
+  numLoads = numLoads + 1;
   return p_Var1;
 }
 
@@ -259,20 +216,30 @@ _LoadQueueEntry * STREAM_AddQueueEntryToTail(void)
 // decompiled code
 // original method signature: 
 // struct _LoadQueueEntry * /*$ra*/ STREAM_AddQueueEntryToHead()
- // line 123, offset 0x8005fc74
+ // line 109, offset 0x800602e0
 	/* begin block 1 */
-		// Start line: 124
-		// Start offset: 0x8005FC74
+		// Start line: 111
+		// Start offset: 0x800602E0
 		// Variables:
-	// 		struct _LoadQueueEntry *entry; // $s0
+	// 		struct _LoadQueueEntry *entry; // $a0
 	/* end block 1 */
-	// End offset: 0x8005FD08
-	// End Line: 148
+	// End offset: 0x80060358
+	// End Line: 132
 
 	/* begin block 2 */
-		// Start line: 268
+		// Start line: 241
 	/* end block 2 */
-	// End Line: 269
+	// End Line: 242
+
+	/* begin block 3 */
+		// Start line: 242
+	/* end block 3 */
+	// End Line: 243
+
+	/* begin block 4 */
+		// Start line: 243
+	/* end block 4 */
+	// End Line: 244
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
@@ -284,29 +251,25 @@ _LoadQueueEntry * STREAM_AddQueueEntryToHead(void)
   _LoadQueueEntry *p_Var3;
   _LoadQueueEntry *p_Var4;
   
-/*   p_Var4 = loadHead;
-  p_Var3 = shadow_vertices;
-  if (shadow_vertices == (_LoadQueueEntry *)0x0) {
-                    /* WARNING: Subroutine does not return */
-/*     DEBUG_FatalError(&_spu_AllocBlockNum);
-  }
+  p_Var4 = loadHead;
+  p_Var3 = loadFree;
   if ((((loadHead == (_LoadQueueEntry *)0x0) || (sVar1 = loadHead->status, sVar1 == 1)) ||
       (sVar1 == 5)) || ((sVar1 == 10 || (sVar1 == 8)))) {
-    loadHead = shadow_vertices;
-    pp_Var2 = &shadow_vertices->next;
-    shadow_vertices = shadow_vertices->next;
+    loadHead = loadFree;
+    pp_Var2 = &loadFree->next;
+    loadFree = loadFree->next;
     *pp_Var2 = p_Var4;
   }
   else {
-    pp_Var2 = &shadow_vertices->next;
-    shadow_vertices = shadow_vertices->next;
+    pp_Var2 = &loadFree->next;
+    loadFree = loadFree->next;
     *pp_Var2 = loadHead->next;
     p_Var4->next = p_Var3;
   }
   if (loadTail == (_LoadQueueEntry *)0x0) {
     loadTail = p_Var3;
   }
-  numLoads = numLoads + 1; */
+  numLoads = numLoads + 1;
   return p_Var3;
 }
 
@@ -315,24 +278,24 @@ _LoadQueueEntry * STREAM_AddQueueEntryToHead(void)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ STREAM_IsCdBusy(long *numberInQueue /*$a0*/)
- // line 157, offset 0x8005fd28
+ // line 141, offset 0x80060370
 	/* begin block 1 */
-		// Start line: 343
+		// Start line: 307
 	/* end block 1 */
-	// End Line: 344
+	// End Line: 308
 
 	/* begin block 2 */
-		// Start line: 344
+		// Start line: 308
 	/* end block 2 */
-	// End Line: 345
+	// End Line: 309
 
 int STREAM_IsCdBusy(long *numberInQueue)
 
 {
-/*   if (numberInQueue != (long *)0x0) {
+  if (numberInQueue != (long *)0x0) {
     *numberInQueue = numLoads;
   }
-  return numLoads; */
+  return numLoads;
 }
 
 
@@ -340,236 +303,160 @@ int STREAM_IsCdBusy(long *numberInQueue)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ STREAM_PollLoadQueue()
- // line 174, offset 0x8005fd48
+ // line 158, offset 0x80060390
 	/* begin block 1 */
-		// Start line: 175
-		// Start offset: 0x8005FD48
+		// Start line: 159
+		// Start offset: 0x80060390
 
 		/* begin block 1.1 */
-			// Start line: 180
-			// Start offset: 0x8005FD68
+			// Start line: 164
+			// Start offset: 0x800603B4
 			// Variables:
-		// 		struct _LoadQueueEntry *queueEntry; // $s0
+		// 		struct _LoadQueueEntry *queueEntry; // $s1
 
 			/* begin block 1.1.1 */
-				// Start line: 210
-				// Start offset: 0x8005FE10
+				// Start line: 182
+				// Start offset: 0x80060440
 				// Variables:
 			// 		long size; // $v0
 			/* end block 1.1.1 */
-			// End offset: 0x8005FE3C
-			// End Line: 216
+			// End offset: 0x80060470
+			// End Line: 188
 
 			/* begin block 1.1.2 */
-				// Start line: 254
-				// Start offset: 0x8005FF14
+				// Start line: 229
+				// Start offset: 0x8006052C
 				// Variables:
-			// 		struct _LoadQueueEntry *newQueue; // $v0
+			// 		struct _LoadQueueEntry *newQueue; // $s0
 			/* end block 1.1.2 */
-			// End offset: 0x8005FF14
-			// End Line: 254
+			// End offset: 0x8006052C
+			// End Line: 229
 
 			/* begin block 1.1.3 */
-				// Start line: 293
-				// Start offset: 0x8005FFAC
+				// Start line: 260
+				// Start offset: 0x800605C4
 				// Variables:
-			// 		struct _LoadQueueEntry *newQueue; // $v0
+			// 		struct _LoadQueueEntry *newQueue; // $s0
 			/* end block 1.1.3 */
-			// End offset: 0x8005FFAC
-			// End Line: 293
+			// End offset: 0x800605C4
+			// End Line: 260
 		/* end block 1.1 */
-		// End offset: 0x800600B4
-		// End Line: 409
+		// End offset: 0x80060718
+		// End Line: 374
 	/* end block 1 */
-	// End offset: 0x800600B8
-	// End Line: 412
+	// End offset: 0x80060718
+	// End Line: 376
 
 	/* begin block 2 */
-		// Start line: 377
+		// Start line: 341
 	/* end block 2 */
-	// End Line: 378
+	// End Line: 342
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 int STREAM_PollLoadQueue(void)
 
 {
-  int *piVar1;
-  short sVar2;
-  void *pvVar3;
-  int iVar4;
-  _LoadQueueEntry *p_Var5;
-  int iVar6;
-  long takeBackSize;
+  _LoadQueueEntry *p_Var1;
+  code *pcVar2;
+  long *plVar3;
+  int voiceIndex;
   
-  /* LOAD_ProcessReadQueue();
-  iVar6 = loadHead;
-  if (loadHead == 0) {
-    return numLoads;
-  }
-  if ((theCamera.positionAccl._0_4_ & 0x800) != 0) {
-    sVar2 = *(short *)(loadHead + 4);
-    if (sVar2 == 1) {
-      return numLoads;
-    }
-    if (sVar2 == 5) {
-      return numLoads;
-    }
-    if (sVar2 == 8) {
-      return numLoads;
-    }
-    if (sVar2 == 10) {
-      return numLoads;
-    }
-  }
-  switch((int)(((uint)*(ushort *)(loadHead + 4) - 1) * 0x10000) >> 0x10) {
-  case 0:
-    LOAD_NonBlockingReadFile((_NonBlockLoadEntry *)(loadHead + 8));
-    iVar4 = LOAD_ChangeDirectoryFlag();
-    if (iVar4 == 0) {
-      *(undefined2 *)(iVar6 + 4) = 2;
-      if (*(char **)(iVar6 + 0x14) != (char *)0x0) {
-        if (*(char *)(iVar6 + 7) != '\0') {
-          MEMPACK_SetMemoryBeingStreamed(*(char **)(iVar6 + 0x14));
-        }
-        if (*(undefined4 **)(iVar6 + 0x3c) != (undefined4 *)0x0) {
-          **(undefined4 **)(iVar6 + 0x3c) = *(undefined4 *)(iVar6 + 0x14);
-        }
-      }
-    }
-    else {
-      p_Var5 = STREAM_AddQueueEntryToHead();
-      takeBackSize = *(long *)(iVar6 + 0xc);
-      (p_Var5->loadEntry).fileHash = 0;
-      p_Var5->status = 10;
-      (p_Var5->loadEntry).dirHash = takeBackSize;
-    }
-    break;
-  case 1:
-    iVar4 = LOAD_IsFileLoading();
-    if (iVar4 != 0) {
-      return numLoads;
-    }
-    if ((*(char *)(iVar6 + 6) != '\0') && (*(long **)(iVar6 + 0x14) != (long *)0x0)) {
-      takeBackSize = LOAD_RelocBinaryData(*(long **)(iVar6 + 0x14),*(long *)(iVar6 + 0x18));
-      if (*(char *)(iVar6 + 7) != '\0') {
-        MEMPACK_Return(*(char **)(iVar6 + 0x14),takeBackSize);
-      }
-      *(undefined *)(iVar6 + 6) = 0;
-    }
-    if (*(int *)(iVar6 + 0x30) != 0) {
-      *(undefined2 *)(iVar6 + 4) = 7;
-      return numLoads;
-    }
-    *(undefined2 *)(iVar6 + 4) = 4;
-    if ((*(char *)(iVar6 + 7) != '\0') && (*(char **)(iVar6 + 0x14) != (char *)0x0)) {
-      MEMPACK_SetMemoryDoneStreamed(*(char **)(iVar6 + 0x14));
-    }
-    goto LAB_800600ac;
-  case 4:
-    pvVar3 = LOAD_InitBuffers();
-    *(void **)(iVar6 + 0x14) = pvVar3;
-    if (pvVar3 == (void *)0x0) {
-      *(undefined2 *)(iVar6 + 4) = 6;
-    }
-    else {
-      LOAD_CD_ReadPartOfFile((_NonBlockLoadEntry *)(iVar6 + 8));
-      iVar4 = LOAD_ChangeDirectoryFlag();
-      if (iVar4 == 0) {
-        *(undefined2 *)(iVar6 + 4) = 6;
-        *(undefined4 *)(iVar6 + 0x28) = 0;
-      }
-      else {
-        p_Var5 = STREAM_AddQueueEntryToHead();
-        takeBackSize = *(long *)(iVar6 + 0xc);
-        (p_Var5->loadEntry).fileHash = 0;
-        p_Var5->status = 10;
-        (p_Var5->loadEntry).dirHash = takeBackSize;
-        LOAD_CleanUpBuffers();
-      }
-    }
-    break;
-  case 5:
-    iVar4 = LOAD_IsFileLoading();
-    if (iVar4 == 0) {
-      *(undefined2 *)(iVar6 + 4) = 4;
-      STREAM_RemoveQueueHead();
-      LOAD_CleanUpBuffers();
-      if (*(code **)(iVar6 + 0x30) == VRAM_TransferBufferToVram) {
-        VRAM_LoadReturn(*(void **)(iVar6 + 0x14),*(void **)(iVar6 + 0x34),*(void **)(iVar6 + 0x38));
-      }
-    }
-    break;
-  case 6:
-    *(undefined2 *)(loadHead + 4) = 4;
-    STREAM_RemoveQueueHead();
-    if ((*(char *)(iVar6 + 7) != '\0') && (*(char **)(iVar6 + 0x14) != (char *)0x0)) {
-      MEMPACK_SetMemoryDoneStreamed(*(char **)(iVar6 + 0x14));
-    }
-    if (*(int *)(iVar6 + 0x30) != 0) {
-      STREAM_NextLoadFromHead();
-      (**(code **)(iVar6 + 0x30))
-                (*(undefined4 *)(iVar6 + 0x14),*(undefined4 *)(iVar6 + 0x34),
-                 *(undefined4 *)(iVar6 + 0x38));
-      STREAM_NextLoadAsNormal();
-    }
-    break;
-  case 7:
-    piVar1 = (int *)(loadHead + 8);
-    *(undefined2 *)(loadHead + 4) = 9;
-    VOICEXA_Play(*piVar1,0);
-    break;
-  case 8:
-    iVar6 = VOICEXA_IsPlayingOrPaused();
-    if (iVar6 != 0) {
-      return numLoads;
-    }
-    LOAD_InitCdStreamMode();
-    goto LAB_800600ac;
-  case 9:
-    iVar6 = LOAD_ChangeDirectoryByID(*(int *)(loadHead + 0xc));
-    if (iVar6 == 0) {
+  LOAD_ProcessReadQueue();
+  p_Var1 = loadHead;
+  if (loadHead != (_LoadQueueEntry *)0x0) {
+    if (gameTrackerX.debugFlags < 0) {
                     /* WARNING: Subroutine does not return */
-/*       DEBUG_FatalError(s_Could_not_read_directory_hash__d_800cf510);
+      FONT_Print("%s status %d\n");
     }
-    p_Var5 = STREAM_AddQueueEntryToTail();
-    return (int)p_Var5;
-  case 10:
-    iVar6 = LOAD_IsFileLoading();
-    if (iVar6 != 0) {
-      return numLoads;
+    switch((int)(((uint)(ushort)loadHead->status - 1) * 0x10000) >> 0x10) {
+    case 0:
+                    /* WARNING: Subroutine does not return */
+      TIMER_GetTimeMS();
+    case 1:
+      voiceIndex = LOAD_IsFileLoading();
+      if (voiceIndex == 0) {
+                    /* WARNING: Subroutine does not return */
+        TIMER_GetTimeMS();
+      }
+      break;
+    case 4:
+      plVar3 = (long *)LOAD_InitBuffers();
+                    /* WARNING: Subroutine does not return */
+      (p_Var1->loadEntry).loadAddr = plVar3;
+      TIMER_GetTimeMS();
+    case 5:
+      voiceIndex = LOAD_IsFileLoading();
+      if (voiceIndex == 0) {
+                    /* WARNING: Subroutine does not return */
+        TIMER_GetTimeMS();
+      }
+      break;
+    case 6:
+      loadHead->status = 4;
+      STREAM_RemoveQueueHead();
+      if (p_Var1->mempackUsed != '\0') {
+        MEMPACK_SetMemoryDoneStreamed((char *)(p_Var1->loadEntry).loadAddr);
+      }
+      STREAM_NextLoadFromHead();
+      pcVar2 = (code *)(p_Var1->loadEntry).retFunc;
+      if (pcVar2 != (code *)0x0) {
+        (*pcVar2)((p_Var1->loadEntry).loadAddr,(p_Var1->loadEntry).retData,
+                  (p_Var1->loadEntry).retData2);
+      }
+      break;
+    case 7:
+      voiceIndex = (loadHead->loadEntry).fileHash;
+      loadHead->status = 9;
+      VOICEXA_Play(voiceIndex,0);
+      break;
+    case 8:
+      voiceIndex = VOICEXA_IsPlaying();
+      if (voiceIndex == 0) {
+        LOAD_InitCdStreamMode();
+        STREAM_RemoveQueueHead();
+      }
+      break;
+    case 9:
+                    /* WARNING: Subroutine does not return */
+      TIMER_GetTimeMS();
+    case 10:
+      voiceIndex = LOAD_IsFileLoading();
+      if (voiceIndex == 0) {
+                    /* WARNING: Subroutine does not return */
+        TIMER_GetTimeMS();
+      }
     }
-LAB_800600ac:
-    STREAM_RemoveQueueHead();
   }
-  return numLoads; */ 
+  return numLoads;
 }
 
 
 
 // decompiled code
 // original method signature: 
-// struct _LoadQueueEntry * /*$ra*/ STREAM_SetUpQueueEntry(char *fileName /*$s2*/, void *retFunc /*$s3*/, void *retData /*$s4*/, void *retData2 /*$s5*/, void **retPointer /*stack 16*/, int fromhead /*stack 20*/)
- // line 414, offset 0x800600c8
+// struct _LoadQueueEntry * /*$ra*/ STREAM_SetUpQueueEntry(char *fileName /*$s1*/, void *retFunc /*$s3*/, void *retData /*$s4*/, void *retData2 /*$s5*/, void **retPointer /*stack 16*/, int fromhead /*stack 20*/)
+ // line 379, offset 0x80060730
 	/* begin block 1 */
-		// Start line: 415
-		// Start offset: 0x800600C8
+		// Start line: 380
+		// Start offset: 0x80060730
 		// Variables:
 	// 		struct _LoadQueueEntry *currentEntry; // $s0
 	/* end block 1 */
-	// End offset: 0x8006018C
-	// End Line: 448
+	// End offset: 0x80060808
+	// End Line: 414
 
 	/* begin block 2 */
-		// Start line: 865
+		// Start line: 796
 	/* end block 2 */
-	// End Line: 866
+	// End Line: 797
 
-_LoadQueueEntry *STREAM_SetUpQueueEntry(char *fileName,void *retFunc,void *retData,void *retData2,void **retPointer,int fromhead)
+_LoadQueueEntry *
+STREAM_SetUpQueueEntry
+          (char *fileName,void *retFunc,void *retData,void *retData2,void **retPointer,int fromhead)
 
 {
   _LoadQueueEntry *p_Var1;
-  long lVar2;
   
   if (fromhead == 0) {
     p_Var1 = STREAM_AddQueueEntryToTail();
@@ -577,26 +464,8 @@ _LoadQueueEntry *STREAM_SetUpQueueEntry(char *fileName,void *retFunc,void *retDa
   else {
     p_Var1 = STREAM_AddQueueEntryToHead();
   }
-/*   lVar2 = LOAD_HashName(fileName);
-  (p_Var1->loadEntry).fileHash = lVar2;
-  (p_Var1->loadEntry).posInFile = 0;
-  (p_Var1->loadEntry).checksumType = 1;
-  lVar2 = LOAD_GetSearchDirectory();
-  if (lVar2 != 0) {
-    lVar2 = LOAD_GetSearchDirectory();
-    (p_Var1->loadEntry).dirHash = lVar2;
                     /* WARNING: Subroutine does not return */
-/*     LOAD_SetSearchDirectory(0);
-  }
-  (p_Var1->loadEntry).dirHash = gCurDir;
-  (p_Var1->loadEntry).retFunc = retFunc;
-  (p_Var1->loadEntry).retData = retData;
-  (p_Var1->loadEntry).retData2 = retData2;
-  (p_Var1->loadEntry).retPointer = retPointer; */
-  if (retPointer != (void **)0x0) {
-    *retPointer = (void *)0xfafbfcfd;
-  }
-  return p_Var1;
+  strcpy((p_Var1->loadEntry).fileName,fileName);
 }
 
 
@@ -604,91 +473,48 @@ _LoadQueueEntry *STREAM_SetUpQueueEntry(char *fileName,void *retFunc,void *retDa
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_QueueNonblockingLoads(char *fileName /*$a0*/, unsigned char memType /*$s0*/, void *retFunc /*$a2*/, void *retData /*$a3*/, void *retData2 /*stack 16*/, void **retPointer /*stack 20*/, long relocateBinary /*stack 24*/)
- // line 452, offset 0x800601b4
+ // line 418, offset 0x80060830
 	/* begin block 1 */
-		// Start line: 453
-		// Start offset: 0x800601B4
+		// Start line: 419
+		// Start offset: 0x80060830
 		// Variables:
-	// 		struct _LoadQueueEntry *currentEntry; // $v1
-	// 		int fromhead; // $v0
+	// 		struct _LoadQueueEntry *currentEntry; // $a0
+	// 		int fromhead; // $v1
 	/* end block 1 */
-	// End offset: 0x8006022C
-	// End Line: 472
+	// End offset: 0x800608A8
+	// End Line: 436
 
 	/* begin block 2 */
-		// Start line: 943
+		// Start line: 876
 	/* end block 2 */
-	// End Line: 944
+	// End Line: 877
 
-int STREAM_IsCdBusy(long *numberInQueue)
+void STREAM_QueueNonblockingLoads
+               (char *fileName,uchar memType,void *retFunc,void *retData,void *retData2,
+               void **retPointer,long relocateBinary)
 
 {
-  long lVar1;
+  short sVar1;
   _LoadQueueEntry *p_Var2;
-  int fromhead;
-  uint in_a1;
-  void *in_a2;
-  void *in_a3;
-  void *in_stack_00000010;
-  void **in_stack_00000014;
-  char in_stack_00000018;
+  uint fromhead;
   
-  fromhead = theCamera.core.vvNormalWorVecMat[1].m[0]._0_4_;
-  theCamera.core.vvNormalWorVecMat[1].m[0]._0_4_ = 0;
-  p_Var2 = STREAM_SetUpQueueEntry
-                     ((char *)numberInQueue,in_a2,in_a3,in_stack_00000010,in_stack_00000014,fromhead
-                     );
-  p_Var2->mempackUsed = '\x01';
-  lVar1 = theCamera.core.vvNormalWorVecMat[1].m._4_4_;
+  fromhead = 0;
+  if (loadBufferedFromHead != 0) {
+    fromhead = (uint)(memType == '\0');
+  }
+  loadBufferedFromHead = 0;
+  p_Var2 = STREAM_SetUpQueueEntry(fileName,retFunc,retData,retData2,retPointer,fromhead);
   (p_Var2->loadEntry).loadAddr = (long *)0x0;
-  (p_Var2->loadEntry).memType = in_a1 & 0xff;
-  theCamera.core.vvNormalWorVecMat[1].m._4_4_ = 0;
-  p_Var2->relocateBinary = in_stack_00000018;
-  (p_Var2->loadEntry).mallocFailOk = lVar1;
-  if ((in_a1 & 0xff) == 0) {
-    fromhead = 5;
+  p_Var2->mempackUsed = '\x01';
+  (p_Var2->loadEntry).memType = (uint)memType;
+  p_Var2->relocateBinary = (char)relocateBinary;
+  if (memType == '\0') {
+    sVar1 = 5;
   }
   else {
-    fromhead = 1;
+    sVar1 = 1;
   }
-  p_Var2->status = (short)fromhead;
-  return fromhead;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// void /*$ra*/ LOAD_LoadToAddress(char *fileName /*$a0*/, void *loadAddr /*$s0*/, long relocateBinary /*$s1*/)
- // line 475, offset 0x80060240
-	/* begin block 1 */
-		// Start line: 476
-		// Start offset: 0x80060240
-		// Variables:
-	// 		struct _LoadQueueEntry *currentEntry; // $v0
-	/* end block 1 */
-	// End offset: 0x80060294
-	// End Line: 485
-
-	/* begin block 2 */
-		// Start line: 1011
-	/* end block 2 */
-	// End Line: 1012
-
-void LOAD_LoadToAddress(char *fileName,void *loadAddr,long relocateBinary)
-
-{
-  _LoadQueueEntry *p_Var1;
-  int iVar2;
-  
-  p_Var1 = STREAM_SetUpQueueEntry(fileName,(void *)0x0,(void *)0x0,(void *)0x0,(void **)0x0,0);
-  (p_Var1->loadEntry).loadAddr = loadAddr;
-  p_Var1->status = 1;
-  p_Var1->relocateBinary = (char)relocateBinary;
-  p_Var1->mempackUsed = '\0';
-  do {
-    iVar2 = STREAM_PollLoadQueue();
-  } while (iVar2 != 0);
+  p_Var2->status = sVar1;
   return;
 }
 
@@ -696,17 +522,53 @@ void LOAD_LoadToAddress(char *fileName,void *loadAddr,long relocateBinary)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ LOAD_NonBlockingBinaryLoad(char *fileName /*$a0*/, void *retFunc /*$t0*/, void *retData /*$t1*/, void *retData2 /*$a3*/, void **retPointer /*stack 16*/, int memType /*stack 20*/)
- // line 498, offset 0x800602a8
+// void /*$ra*/ LOAD_LoadToAddress(char *fileName /*$a0*/, void *loadAddr /*$s0*/, long relocateBinary /*$s1*/)
+ // line 439, offset 0x800608b8
 	/* begin block 1 */
-		// Start line: 1060
+		// Start line: 440
+		// Start offset: 0x800608B8
+		// Variables:
+	// 		struct _LoadQueueEntry *currentEntry; // $v0
 	/* end block 1 */
-	// End Line: 1061
+	// End offset: 0x8006090C
+	// End Line: 449
 
-void LOAD_NonBlockingBinaryLoad(long *param_1)
+	/* begin block 2 */
+		// Start line: 926
+	/* end block 2 */
+	// End Line: 927
+
+void LOAD_LoadToAddress(char *fileName,void *loadAddr,long relocateBinary)
 
 {
-  STREAM_IsCdBusy(param_1);
+  _LoadQueueEntry *p_Var1;
+  
+  p_Var1 = STREAM_SetUpQueueEntry(fileName,(void *)0x0,(void *)0x0,(void *)0x0,(void **)0x0,0);
+  (p_Var1->loadEntry).loadAddr = loadAddr;
+  p_Var1->status = 1;
+  p_Var1->relocateBinary = (char)relocateBinary;
+  p_Var1->mempackUsed = '\0';
+                    /* WARNING: Subroutine does not return */
+  STREAM_PollLoadQueue();
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ LOAD_NonBlockingBinaryLoad(char *fileName /*$a0*/, void *retFunc /*$t0*/, void *retData /*$t1*/, void *retData2 /*$a3*/, void **retPointer /*stack 16*/, int memType /*stack 20*/)
+ // line 462, offset 0x80060920
+	/* begin block 1 */
+		// Start line: 975
+	/* end block 1 */
+	// End Line: 976
+
+void LOAD_NonBlockingBinaryLoad
+               (char *fileName,void *retFunc,void *retData,void *retData2,void **retPointer,
+               int memType)
+
+{
+  STREAM_QueueNonblockingLoads(fileName,(uchar)memType,retFunc,retData,retData2,retPointer,1);
   return;
 }
 
@@ -715,18 +577,18 @@ void LOAD_NonBlockingBinaryLoad(long *param_1)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_NonBlockingFileLoad(char *fileName /*$a0*/, void *retFunc /*$v1*/, void *retData /*$t0*/, void *retData2 /*$a3*/, void **retPointer /*stack 16*/, int memType /*stack 20*/)
- // line 505, offset 0x800602ec
+ // line 469, offset 0x80060964
 	/* begin block 1 */
-		// Start line: 1078
+		// Start line: 993
 	/* end block 1 */
-	// End Line: 1079
+	// End Line: 994
 
 void LOAD_NonBlockingFileLoad
                (char *fileName,void *retFunc,void *retData,void *retData2,void **retPointer,
                int memType)
 
 {
-  STREAM_IsCdBusy((long *)fileName);
+  STREAM_QueueNonblockingLoads(fileName,(uchar)memType,retFunc,retData,retData2,retPointer,0);
   return;
 }
 
@@ -735,16 +597,16 @@ void LOAD_NonBlockingFileLoad
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_NonBlockingBufferedLoad(char *fileName /*$a0*/, void *retFunc /*$v0*/, void *retData /*$v1*/, void *retData2 /*$a3*/)
- // line 511, offset 0x8006032c
+ // line 475, offset 0x800609a4
 	/* begin block 1 */
-		// Start line: 1092
+		// Start line: 1007
 	/* end block 1 */
-	// End Line: 1093
+	// End Line: 1008
 
 void LOAD_NonBlockingBufferedLoad(char *fileName,void *retFunc,void *retData,void *retData2)
 
 {
-  STREAM_IsCdBusy((long *)fileName);
+  STREAM_QueueNonblockingLoads(fileName,'\0',retFunc,retData,retData2,(void **)0x0,0);
   return;
 }
 
@@ -753,47 +615,48 @@ void LOAD_NonBlockingBufferedLoad(char *fileName,void *retFunc,void *retData,voi
 // decompiled code
 // original method signature: 
 // int /*$ra*/ LOAD_IsXAInQueue()
- // line 516, offset 0x80060368
+ // line 480, offset 0x800609e0
 	/* begin block 1 */
-		// Start line: 518
-		// Start offset: 0x80060368
+		// Start line: 482
+		// Start offset: 0x800609E0
 		// Variables:
-	// 		struct _LoadQueueEntry *entry; // $v1
+	// 		int i; // $a0
 	/* end block 1 */
-	// End offset: 0x800603A0
-	// End Line: 527
+	// End offset: 0x80060A18
+	// End Line: 491
 
 	/* begin block 2 */
-		// Start line: 1103
+		// Start line: 1018
 	/* end block 2 */
-	// End Line: 1104
+	// End Line: 1019
 
 	/* begin block 3 */
-		// Start line: 1104
+		// Start line: 1019
 	/* end block 3 */
-	// End Line: 1105
+	// End Line: 1020
 
 	/* begin block 4 */
-		// Start line: 1106
+		// Start line: 1021
 	/* end block 4 */
-	// End Line: 1107
+	// End Line: 1022
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 int LOAD_IsXAInQueue(void)
 
 {
-  int *piVar1;
+  _LoadQueueEntry *p_Var1;
+  int iVar2;
   
-  piVar1 = loadHead;
-  if (loadHead != (int *)0x0) {
-    do {
-      if ((uint)*(ushort *)(piVar1 + 1) - 8 < 2) {
-        return 1;
-      }
-      piVar1 = (int *)*piVar1;
-    } while (piVar1 != (int *)0x0);
-  }
+  iVar2 = 0;
+  p_Var1 = &LoadQueue;
+  do {
+    iVar2 = iVar2 + 1;
+    if ((uint)(ushort)p_Var1->status - 8 < 2) {
+      return 1;
+    }
+    p_Var1 = p_Var1 + 1;
+  } while (iVar2 < 0x28);
   return 0;
 }
 
@@ -802,20 +665,20 @@ int LOAD_IsXAInQueue(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_PlayXA(int number /*$s0*/)
- // line 529, offset 0x800603b0
+ // line 493, offset 0x80060a20
 	/* begin block 1 */
-		// Start line: 530
-		// Start offset: 0x800603B0
+		// Start line: 494
+		// Start offset: 0x80060A20
 		// Variables:
 	// 		struct _LoadQueueEntry *currentEntry; // $v0
 	/* end block 1 */
-	// End offset: 0x800603B0
-	// End Line: 530
+	// End offset: 0x80060A20
+	// End Line: 494
 
 	/* begin block 2 */
-		// Start line: 1131
+		// Start line: 1047
 	/* end block 2 */
-	// End Line: 1132
+	// End Line: 1048
 
 void LOAD_PlayXA(int number)
 
@@ -823,8 +686,10 @@ void LOAD_PlayXA(int number)
   _LoadQueueEntry *p_Var1;
   
   p_Var1 = STREAM_AddQueueEntryToTail();
-  (p_Var1->loadEntry).fileHash = number;
   p_Var1->status = 8;
+  (p_Var1->loadEntry).fileHash = number;
+  *(undefined4 *)(p_Var1->loadEntry).fileName = 0x63696f76;
+  *(undefined2 *)((p_Var1->loadEntry).fileName + 4) = 0x65;
   return;
 }
 
@@ -833,32 +698,29 @@ void LOAD_PlayXA(int number)
 // decompiled code
 // original method signature: 
 // long * /*$ra*/ LOAD_ReadFile(char *fileName /*$a0*/, unsigned char memType /*$a1*/)
- // line 542, offset 0x800603e0
+ // line 506, offset 0x80060a68
 	/* begin block 1 */
-		// Start line: 543
-		// Start offset: 0x800603E0
+		// Start line: 507
+		// Start offset: 0x80060A68
 		// Variables:
 	// 		void *loadAddr; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x80060418
-	// End Line: 550
+	// End offset: 0x80060AA0
+	// End Line: 514
 
 	/* begin block 2 */
-		// Start line: 1158
+		// Start line: 1076
 	/* end block 2 */
-	// End Line: 1159
+	// End Line: 1077
 
 long * LOAD_ReadFile(char *fileName,uchar memType)
 
 {
-  int iVar1;
-  long *local_10;
+  void *local_10 [2];
   
-  STREAM_IsCdBusy((long *)fileName);
-  do {
-    iVar1 = STREAM_PollLoadQueue();
-  } while (iVar1 != 0);
-  return local_10;
+  STREAM_QueueNonblockingLoads(fileName,memType,(void *)0x0,(void *)0x0,(void *)0x0,local_10,0);
+                    /* WARNING: Subroutine does not return */
+  STREAM_PollLoadQueue();
 }
 
 
@@ -866,20 +728,20 @@ long * LOAD_ReadFile(char *fileName,uchar memType)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_ChangeDirectory(char *name /*$s1*/)
- // line 553, offset 0x8006042c
+ // line 517, offset 0x80060ab4
 	/* begin block 1 */
-		// Start line: 554
-		// Start offset: 0x8006042C
+		// Start line: 518
+		// Start offset: 0x80060AB4
 		// Variables:
 	// 		struct _LoadQueueEntry *currentEntry; // $s0
 	/* end block 1 */
-	// End offset: 0x8006042C
-	// End Line: 554
+	// End offset: 0x80060AB4
+	// End Line: 518
 
 	/* begin block 2 */
-		// Start line: 1183
+		// Start line: 1101
 	/* end block 2 */
-	// End Line: 1184
+	// End Line: 1102
 
 void LOAD_ChangeDirectory(char *name)
 
@@ -890,66 +752,9 @@ void LOAD_ChangeDirectory(char *name)
   gCurDir = LOAD_HashUnit(name);
   (p_Var1->loadEntry).dirHash = gCurDir;
   (p_Var1->loadEntry).fileHash = 0;
+                    /* WARNING: Subroutine does not return */
   p_Var1->status = 10;
-  return;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// void /*$ra*/ LOAD_AbortDirectoryChange(char *name /*$a0*/)
- // line 569, offset 0x80060478
-	/* begin block 1 */
-		// Start line: 570
-		// Start offset: 0x80060478
-
-		/* begin block 1.1 */
-			// Start line: 574
-			// Start offset: 0x80060488
-			// Variables:
-		// 		struct _LoadQueueEntry *entry; // $a0
-		// 		struct _LoadQueueEntry *prev; // $a1
-		// 		long hash; // $v1
-		/* end block 1.1 */
-		// End offset: 0x800604F0
-		// End Line: 589
-	/* end block 1 */
-	// End offset: 0x800604F0
-	// End Line: 591
-
-	/* begin block 2 */
-		// Start line: 1216
-	/* end block 2 */
-	// End Line: 1217
-
-	/* begin block 3 */
-		// Start line: 1218
-	/* end block 3 */
-	// End Line: 1219
-
-void LOAD_AbortDirectoryChange(char *name)
-
-{
-  _LoadQueueEntry *entry;
-  _LoadQueueEntry *prev;
-  _LoadQueueEntry *p_Var1;
-  long lVar2;
-  
-  if (loadHead != (_LoadQueueEntry *)0x0) {
-    lVar2 = LOAD_HashUnit(name);
-    p_Var1 = loadHead->next;
-    prev = loadHead;
-    while (entry = p_Var1, entry != (_LoadQueueEntry *)0x0) {
-      if ((entry->status == 10) && ((entry->loadEntry).dirHash == lVar2)) {
-        STREAM_RemoveQueueEntry(entry,prev);
-        return;
-      }
-      p_Var1 = entry->next;
-      prev = entry;
-    }
-  }
-  return;
+  sprintf((p_Var1->loadEntry).fileName,GlobalObjects);
 }
 
 
@@ -957,34 +762,34 @@ void LOAD_AbortDirectoryChange(char *name)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_AbortFileLoad(char *fileName /*$a0*/, void *retFunc /*$s3*/)
- // line 593, offset 0x80060500
+ // line 533, offset 0x80060b14
 	/* begin block 1 */
-		// Start line: 594
-		// Start offset: 0x80060500
+		// Start line: 534
+		// Start offset: 0x80060B14
 
 		/* begin block 1.1 */
-			// Start line: 597
-			// Start offset: 0x80060524
+			// Start line: 537
+			// Start offset: 0x80060B38
 			// Variables:
 		// 		struct _LoadQueueEntry *entry; // $s0
 		// 		struct _LoadQueueEntry *prev; // $s1
 		// 		long hash; // $v1
 		/* end block 1.1 */
-		// End offset: 0x800605B4
-		// End Line: 623
+		// End offset: 0x80060BC8
+		// End Line: 563
 	/* end block 1 */
-	// End offset: 0x800605B4
-	// End Line: 624
+	// End offset: 0x80060BC8
+	// End Line: 564
 
 	/* begin block 2 */
-		// Start line: 1276
+		// Start line: 1143
 	/* end block 2 */
-	// End Line: 1277
+	// End Line: 1144
 
 	/* begin block 3 */
-		// Start line: 1277
+		// Start line: 1144
 	/* end block 3 */
-	// End Line: 1278
+	// End Line: 1145
 
 void LOAD_AbortFileLoad(char *fileName,void *retFunc)
 

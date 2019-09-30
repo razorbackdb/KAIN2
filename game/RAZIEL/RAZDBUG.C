@@ -5,7 +5,7 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DebugProcess(struct _Instance *instance /*$a0*/, struct __Player *player /*$a1*/)
- // line 240, offset 0x800a338c
+ // line 240, offset 0x800a2630
 	/* begin block 1 */
 		// Start line: 480
 	/* end block 1 */

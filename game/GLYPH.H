@@ -2,73 +2,71 @@
 #define GLYPH_H
 
 
-extern void GlyphInit(struct _Instance *instance, struct GameTracker *gameTracker); // 0x8007A8BC
+extern void GlyphInit(struct _Instance *instance, struct GameTracker *gameTracker); // 0x8007A22C
 
-extern void GlyphCollide(struct _Instance *instance, struct GameTracker *gameTracker); // 0x8007A9D8
+extern void GlyphCollide(struct _Instance *instance, struct GameTracker *gameTracker); // 0x8007A348
 
-extern void GlyphProcess(struct _Instance *instance, struct GameTracker *gameTracker); // 0x8007A9E0
+extern void GlyphProcess(struct _Instance *instance, struct GameTracker *gameTracker); // 0x8007A350
 
-extern unsigned long GlyphQuery(struct _Instance *instance, unsigned long query); // 0x8007AA68
+extern unsigned long GlyphQuery(struct _Instance *instance, unsigned long query); // 0x8007A3D8
 
-extern void GlyphPost(struct _Instance *instance, unsigned long message, unsigned long messageData); // 0x8007AA88
+extern void GlyphPost(struct _Instance *instance, unsigned long message, unsigned long messageData); // 0x8007A3F8
 
-extern void _GlyphSwitchProcess(struct _Instance *instance, TDRFuncPtr__GlyphSwitchProcess1process process); // 0x8007AABC
+extern void _GlyphSwitchProcess(struct _Instance *instance, TDRFuncPtr__GlyphSwitchProcess1process process); // 0x8007A42C
 
-extern int GlyphIsGlyphOpen(struct _Instance *instance); // 0x8007AB5C
+extern int GlyphIsGlyphOpen(struct _Instance *instance); // 0x8007A4CC
 
-extern int _GlyphIsGlyphSet(int glyph); // 0x8007AB70
+extern int _GlyphIsGlyphSet(int glyph); // 0x8007A4E0
 
-extern int _GlyphIsGlyphUsable(int glyph); // 0x8007ABB4
+extern int _GlyphIsGlyphUsable(int glyph); // 0x8007A51C
 
-extern int _GlyphIsAnyGlyphSet(); // 0x8007ABF0
+extern int _GlyphIsAnyGlyphSet(); // 0x8007A558
 
-extern int _GlyphCost(struct _GlyphTuneData *glyphtunedata, int glyphNum); // 0x8007AC20
+extern int _GlyphCost(struct _GlyphTuneData *glyphtunedata, int glyphNum); // 0x8007A580
 
-extern int GlyphIsPuppetShowModeOn(); // 0x8007AC30
+extern void _GlyphDefaultProcess(struct _Instance *instance, int data1, int data2); // 0x8007A590
 
-extern void _GlyphDefaultProcess(struct _Instance *instance, int data1, int data2); // 0x8007AC54
+extern void HUD_GetPlayerScreenPt(struct DVECTOR *center); // 0x8007A628
 
-extern void HUD_GetPlayerScreenPt(struct DVECTOR *center); // 0x8007ACF8
+extern void GlyphDrawMenu(struct _Instance *instance); // 0x8007A6B8
 
-extern void GlyphDrawMenu(struct _Instance *instance); // 0x8007AD88
+extern long GlyphTime(int time); // 0x8007AA1C
 
-extern long GlyphTime(int time); // 0x8007B0EC
+extern void ShrinkGlyphMenu(struct _Instance *instance); // 0x8007AA38
 
-extern void ShrinkGlyphMenu(struct _Instance *instance); // 0x8007B108
+extern void EnlargeGlyphMenu(struct _Instance *instance); // 0x8007AB64
 
-extern void EnlargeGlyphMenu(struct _Instance *instance); // 0x8007B22C
+extern void _GlyphOffProcess(struct _Instance *instance, int data1, int data2); // 0x8007AC68
 
-extern void _GlyphOffProcess(struct _Instance *instance, int data1, int data2); // 0x8007B328
+extern void _GlyphSelectProcess(struct _Instance *instance, int data1, int data2); // 0x8007AD60
 
-extern void _GlyphSelectProcess(struct _Instance *instance, int data1, int data2); // 0x8007B470
+extern void Glyph_StartSpell(struct _Instance *instance, int glyphnum); // 0x8007B228
 
-extern void Glyph_StartSpell(struct _Instance *instance, int glyphnum); // 0x8007B970
+extern void Glyph_Broadcast(struct _Instance *sender, int glyphnum); // 0x8007B2D0
 
-extern void Glyph_Broadcast(struct _Instance *sender, int glyphnum); // 0x8007BA18
+extern void Glyph_DoSpell(struct _Instance *instance, int glyphnum); // 0x8007B4A4
 
-extern void Glyph_DoSpell(struct _Instance *instance, int glyphnum); // 0x8007BC70
+extern void Glyph_EndFX(); // 0x8007B74C
 
-extern void Glyph_EndFX(); // 0x8007BF14
+extern void Glyph_DoFX(struct _Instance *instance); // 0x8007B760
 
-extern void Glyph_DoFX(struct _Instance *instance); // 0x8007BF28
+extern void _GlyphGenericProcess(struct _Instance *instance, int data1, int data2); // 0x8007B810
 
-extern void _GlyphGenericProcess(struct _Instance *instance, int data1, int data2); // 0x8007BFD8
+extern void GlyphTrigger(); // 0x8007B948
 
-extern void GlyphTrigger(); // 0x8007C110
+extern void MANNA_Pickup(); // 0x8007B964
 
-extern void MANNA_Pickup(); // 0x8007C12C
+extern void HEALTHU_Pickup(struct _Instance *instance); // 0x8007B980
 
-extern void HEALTHU_Pickup(struct _Instance *instance); // 0x8007C148
+extern void HUD_Damp(short *val, short target, short *vel, short max); // 0x8007BA10
 
-extern void HUD_Damp(short *val, short target, short *vel, short max); // 0x8007C1D4
+extern void HUD_Init(); // 0x8007BA58
 
-extern void HUD_Init(); // 0x8007C21C
+extern void HUD_Setup_Chit_Count(int chits); // 0x8007BA8C
 
-extern void HUD_Setup_Chit_Count(int chits); // 0x8007C254
+extern void HUD_Update(); // 0x8007BAC0
 
-extern void HUD_Update(); // 0x8007C28C
-
-extern void HUD_Draw(); // 0x8007C4C0
+extern void HUD_Draw(); // 0x8007BD08
 
 
 typedef void (*TDRFuncPtr__GlyphSwitchProcess1process)();

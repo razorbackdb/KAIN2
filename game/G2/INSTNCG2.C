@@ -4,16 +4,16 @@
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ G2Instance_BuildTransformsForList(struct _Instance *listHead /*$s1*/)
- // line 71, offset 0x80094d90
+// void /*$ra*/ G2Instance_BuildTransformsForList(struct _Instance *listHead /*$s2*/)
+ // line 71, offset 0x800947a8
 	/* begin block 1 */
 		// Start line: 72
-		// Start offset: 0x80094D90
+		// Start offset: 0x800947A8
 		// Variables:
 	// 		struct _Instance *instance; // $s0
 	/* end block 1 */
-	// End offset: 0x80094EF8
-	// End Line: 151
+	// End offset: 0x80094954
+	// End Line: 155
 
 	/* begin block 2 */
 		// Start line: 142
@@ -23,36 +23,51 @@
 void G2Instance_BuildTransformsForList(_Instance *listHead)
 
 {
-  _G2Bool_Enum _Var1;
+  _Instance **pp_Var1;
+  _G2Bool_Enum _Var2;
+  Object *pOVar3;
   _Instance *instance;
   
   instance = listHead;
   if (listHead != (_Instance *)0x0) {
     do {
       if (instance->LinkParent == (_Instance *)0x0) {
-        if (((instance->flags2 & 1U) == 0) &&
-           ((((((instance->flags & 0x100000U) == 0 ||
-               (*(int *)&instance->oldPos != *(int *)&instance->position)) ||
-              ((instance->oldPos).z != (instance->position).z)) ||
-             ((*(int *)&instance->oldRotation != *(int *)&instance->rotation ||
-              ((instance->oldRotation).z != (instance->rotation).z)))) ||
-            ((instance->matrix == (MATRIX *)0x0 ||
-             (((instance->object->animList != (_G2AnimKeylist_Type **)0x0 &&
-               ((instance->object->oflags2 & 0x40000000U) == 0)) &&
-              (((instance->anim).flags & 1) != 0)))))))) {
-          G2Instance_BuildTransforms(instance);
+        if ((instance->flags2 & 1U) == 0) {
+          if ((((((instance->flags & 0x100000U) == 0) ||
+                (*(int *)&instance->oldPos != *(int *)&instance->position)) ||
+               ((instance->oldPos).z != (instance->position).z)) ||
+              ((*(int *)&instance->oldRotation != *(int *)&instance->rotation ||
+               ((instance->oldRotation).z != (instance->rotation).z)))) ||
+             (instance->oldMatrix == (MATRIX *)0x0)) {
+            pOVar3 = instance->object;
+          }
+          else {
+            pOVar3 = instance->object;
+            if (((pOVar3->animList == (_G2AnimKeylist_Type **)0x0) ||
+                ((pOVar3->oflags2 & 0x40000000U) != 0)) || (((instance->anim).flags & 1) == 0))
+            goto LAB_800948a4;
+          }
+          if ((pOVar3->animList == (_G2AnimKeylist_Type **)0x0) ||
+             ((pOVar3->oflags2 & 0x40000000U) != 0)) {
+            _G2Instance_BuildNonAnimatedTransforms(instance);
+          }
+          else {
+            _G2Instance_BuildAnimatedTransforms(instance);
+          }
         }
         else {
+LAB_800948a4:
           _G2Instance_BuildDeactivatedTransforms(instance);
         }
       }
-      instance = instance->next;
-    } while (instance != (_Instance *)0x0);
+      pp_Var1 = &instance->next;
+      instance = *pp_Var1;
+    } while (*pp_Var1 != (_Instance *)0x0);
   }
   if (listHead != (_Instance *)0x0) {
     do {
       if ((listHead->rebuildCallback != (_func_6 *)0x0) &&
-         (_Var1 = (*listHead->rebuildCallback)(listHead), _Var1 != G2FALSE)) {
+         (_Var2 = (*listHead->rebuildCallback)(listHead), _Var2 != G2FALSE)) {
         G2Anim_UpdateStoredFrame(&listHead->anim);
         G2Instance_RebuildTransforms(listHead);
       }
@@ -67,11 +82,11 @@ void G2Instance_BuildTransformsForList(_Instance *listHead)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Instance_BuildTransforms(struct _Instance *instance /*$a0*/)
- // line 155, offset 0x80094f0c
+ // line 159, offset 0x8009496c
 	/* begin block 1 */
-		// Start line: 333
+		// Start line: 391
 	/* end block 1 */
-	// End Line: 334
+	// End Line: 392
 
 void G2Instance_BuildTransforms(_Instance *instance)
 
@@ -91,11 +106,11 @@ void G2Instance_BuildTransforms(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Instance_RebuildTransforms(struct _Instance *instance /*$a0*/)
- // line 169, offset 0x80094f68
+ // line 173, offset 0x800949c8
 	/* begin block 1 */
-		// Start line: 361
+		// Start line: 419
 	/* end block 1 */
-	// End Line: 362
+	// End Line: 420
 
 void G2Instance_RebuildTransforms(_Instance *instance)
 
@@ -115,16 +130,16 @@ void G2Instance_RebuildTransforms(_Instance *instance)
 // decompiled code
 // original method signature: 
 // struct _G2AnimKeylist_Type * /*$ra*/ G2Instance_GetKeylist(struct _Instance *instance /*$a0*/, int id /*$a1*/)
- // line 184, offset 0x80094fc4
+ // line 188, offset 0x80094a24
 	/* begin block 1 */
-		// Start line: 391
+		// Start line: 449
 	/* end block 1 */
-	// End Line: 392
+	// End Line: 450
 
 	/* begin block 2 */
-		// Start line: 392
+		// Start line: 450
 	/* end block 2 */
-	// End Line: 393
+	// End Line: 451
 
 _G2AnimKeylist_Type * G2Instance_GetKeylist(_Instance *instance,int id)
 
@@ -137,10 +152,10 @@ _G2AnimKeylist_Type * G2Instance_GetKeylist(_Instance *instance,int id)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Instance_RebuildAnimatedTransforms(struct _Instance *instance /*$s3*/)
- // line 196, offset 0x80094fe4
+ // line 200, offset 0x80094a44
 	/* begin block 1 */
-		// Start line: 197
-		// Start offset: 0x80094FE4
+		// Start line: 201
+		// Start offset: 0x80094A44
 		// Variables:
 	// 		struct _Model *model; // $s7
 	// 		struct _G2Matrix_Type *rootMatrix; // $s4
@@ -155,28 +170,28 @@ _G2AnimKeylist_Type * G2Instance_GetKeylist(_Instance *instance,int id)
 	// 		long segIndex; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 220
-			// Start offset: 0x80095048
+			// Start line: 224
+			// Start offset: 0x80094AA8
 		/* end block 1.1 */
-		// End offset: 0x80095094
-		// End Line: 229
+		// End offset: 0x80094AF4
+		// End Line: 233
 
 		/* begin block 1.2 */
-			// Start line: 283
-			// Start offset: 0x80095244
+			// Start line: 287
+			// Start offset: 0x80094CA4
 			// Variables:
 		// 		struct VECTOR *ins_scale; // $v1
 		/* end block 1.2 */
-		// End offset: 0x80095278
-		// End Line: 291
+		// End offset: 0x80094CD8
+		// End Line: 295
 	/* end block 1 */
-	// End offset: 0x800953EC
-	// End Line: 346
+	// End offset: 0x80094E4C
+	// End Line: 350
 
 	/* begin block 2 */
-		// Start line: 415
+		// Start line: 473
 	/* end block 2 */
-	// End Line: 416
+	// End Line: 474
 
 void _G2Instance_RebuildAnimatedTransforms(_Instance *instance)
 
@@ -192,7 +207,6 @@ void _G2Instance_RebuildAnimatedTransforms(_Instance *instance)
   int iVar9;
   int iVar10;
   int iVar11;
-  ushort chanMask;
   MATRIX *pMVar12;
   undefined4 uVar13;
   long lVar14;
@@ -217,16 +231,14 @@ void _G2Instance_RebuildAnimatedTransforms(_Instance *instance)
     p_Var21 = instance->object->modelList[instance->currentModel];
     pMVar12 = pMVar20 + -1;
     if ((instance->object->oflags & 4U) != 0) {
-      iVar6 = (int)theCamera;
-      sVar2 = (instance->position).x;
-      iVar3 = (int)DAT_800cfe92;
-      sVar1 = (instance->position).y;
-      local_78 = *(undefined4 *)&instance->rotation;
-      local_74 = *(undefined4 *)&(instance->rotation).z;
+      iVar6 = (int)theCamera.core.position.x;
+      sVar1 = (instance->position).x;
+      iVar3 = (int)theCamera.core.position.y;
+      sVar2 = (instance->position).y;
       (instance->rotation).x = 0;
       (instance->rotation).y = 0;
-      sVar2 = MATH3D_FastAtan2(iVar3 - sVar1,iVar6 - sVar2);
-      (instance->rotation).z = sVar2 + 0xc00;
+                    /* WARNING: Subroutine does not return */
+      MATH3D_FastAtan2(iVar3 - sVar2,iVar6 - sVar1);
     }
     if (((instance->flags & 1U) == 0) || (instance->intro == (Intro *)0x0)) {
       anim = &instance->anim;
@@ -235,14 +247,12 @@ void _G2Instance_RebuildAnimatedTransforms(_Instance *instance)
         RotMatrix((ushort *)&instance->rotation,(uint *)pMVar12);
       }
       G2Anim_UpdateStoredFrame(anim);
-      chanMask = (ushort)auStack48;
-      G2Anim_SegmentHasActiveChannels(anim,1,chanMask);
+      G2Anim_GetSegChannelValue(anim,1,auStack48,7);
       RotMatrixZYX(auStack48,auStack112);
-      G2Anim_SegmentHasActiveChannels(anim,2,chanMask);
+      G2Anim_GetSegChannelValue(anim,2,auStack48,7);
       RotMatrixZYX(auStack48,auStack80);
-      MulMatrix2(auStack112,auStack80);
                     /* WARNING: Subroutine does not return */
-      TransposeMatrix(auStack80,(undefined4 *)pMVar12);
+      MulMatrix2((char *)auStack112,(char *)auStack80);
     }
     pMVar4 = instance->intro->multiSpline;
     uVar13 = *(undefined4 *)((pMVar4->curRotMatrix).m + 2);
@@ -259,12 +269,12 @@ void _G2Instance_RebuildAnimatedTransforms(_Instance *instance)
     pMVar20[-1].t[0] = lVar14;
     pMVar20[-1].t[1] = lVar16;
     pMVar20[-1].t[2] = lVar18;
-    if ((*(undefined **)&instance->scale != &DAT_10001000) || ((instance->scale).z != 0x1000)) {
+    if ((*(int *)&instance->scale != 0x10001000) || ((instance->scale).z != 0x1000)) {
       DAT_1f800020 = (int)(instance->scale).x;
       DAT_1f800024 = (int)(instance->scale).y;
       DAT_1f800028 = (int)(instance->scale).z;
+                    /* WARNING: Subroutine does not return */
       ScaleMatrix((int *)pMVar12,&DAT_1f800020);
-      *(undefined2 *)&pMVar20[-1].field_0x12 = 1;
     }
     pMVar20[-1].t[0] = (int)(instance->position).x;
     pMVar20[-1].t[1] = (int)(instance->position).y;
@@ -321,11 +331,11 @@ void _G2Instance_RebuildAnimatedTransforms(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Instance_ClearMatrices(struct _Instance *instance /*$s0*/)
- // line 348, offset 0x80095418
+ // line 352, offset 0x80094e78
 	/* begin block 1 */
-		// Start line: 756
+		// Start line: 814
 	/* end block 1 */
-	// End Line: 757
+	// End Line: 815
 
 void G2Instance_ClearMatrices(_Instance *instance)
 
@@ -349,26 +359,26 @@ void G2Instance_ClearMatrices(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Instance_BuildAnimatedTransforms(struct _Instance *instance /*$s0*/)
- // line 359, offset 0x8009546c
+ // line 363, offset 0x80094ecc
 	/* begin block 1 */
-		// Start line: 360
-		// Start offset: 0x8009546C
+		// Start line: 364
+		// Start offset: 0x80094ECC
 		// Variables:
 	// 		struct MATRIX *rootMatrix; // $v0
 	// 		struct _Model *model; // $v0
 	/* end block 1 */
-	// End offset: 0x80095518
-	// End Line: 388
+	// End offset: 0x80094F78
+	// End Line: 392
 
 	/* begin block 2 */
-		// Start line: 774
+		// Start line: 832
 	/* end block 2 */
-	// End Line: 775
+	// End Line: 833
 
 	/* begin block 3 */
-		// Start line: 780
+		// Start line: 838
 	/* end block 3 */
-	// End Line: 781
+	// End Line: 839
 
 void _G2Instance_BuildAnimatedTransforms(_Instance *instance)
 
@@ -404,10 +414,10 @@ void _G2Instance_BuildAnimatedTransforms(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Instance_RebuildNonAnimatedTransforms(struct _Instance *instance /*$s0*/)
- // line 392, offset 0x80095528
+ // line 396, offset 0x80094f88
 	/* begin block 1 */
-		// Start line: 393
-		// Start offset: 0x80095528
+		// Start line: 397
+		// Start offset: 0x80094F88
 		// Variables:
 	// 		struct VECTOR *scale; // $s5
 	// 		struct MATRIX *introTransform; // $s7
@@ -417,13 +427,13 @@ void _G2Instance_BuildAnimatedTransforms(_Instance *instance)
 	// 		short scale_flag; // stack offset -48
 	// 		long i; // $s4
 	/* end block 1 */
-	// End offset: 0x80095784
-	// End Line: 511
+	// End offset: 0x800951E4
+	// End Line: 515
 
 	/* begin block 2 */
-		// Start line: 847
+		// Start line: 905
 	/* end block 2 */
-	// End Line: 848
+	// End Line: 906
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
@@ -450,9 +460,9 @@ void _G2Instance_RebuildNonAnimatedTransforms(_Instance *instance)
   if (mat != (MATRIX *)0x0) {
     p_Var11 = instance->object->modelList[instance->currentModel];
     p_Var9 = p_Var11->segmentList;
-    if ((*(undefined **)&instance->scale != &DAT_10001000) || ((instance->scale).z != 0x1000)) {
+    if ((*(int *)&instance->scale != 0x10001000) || ((instance->scale).z != 0x1000)) {
       DAT_1f800028 = (int)(instance->scale).x;
-      _DAT_1f80002c = (int)(instance->scale).y;
+      DAT_1f80002c = (int)(instance->scale).y;
       _DAT_1f800030 = (int)(instance->scale).z;
       local_30 = 1;
     }
@@ -490,6 +500,7 @@ void _G2Instance_RebuildNonAnimatedTransforms(_Instance *instance)
             mat->t[2] = lVar5;
           }
           if (local_30 != 0) {
+                    /* WARNING: Subroutine does not return */
             ScaleMatrix((int *)mat,&DAT_1f800028);
           }
           *(int *)(psVar8 + 1) = (int)(instance->position).x;
@@ -517,23 +528,23 @@ void _G2Instance_RebuildNonAnimatedTransforms(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Instance_BuildDeactivatedTransforms(struct _Instance *instance /*$s0*/)
- // line 515, offset 0x800957b4
+ // line 519, offset 0x80095214
 	/* begin block 1 */
-		// Start line: 516
-		// Start offset: 0x800957B4
+		// Start line: 520
+		// Start offset: 0x80095214
 		// Variables:
 	// 		struct MATRIX *segMatrix; // $a0
 	// 		struct MATRIX *startOldMatrix; // $a1
 	// 		int numMatrices; // $s1
 	// 		struct _Model *model; // $a0
 	/* end block 1 */
-	// End offset: 0x80095920
-	// End Line: 578
+	// End offset: 0x80095360
+	// End Line: 577
 
 	/* begin block 2 */
-		// Start line: 1276
+		// Start line: 1334
 	/* end block 2 */
-	// End Line: 1277
+	// End Line: 1335
 
 void _G2Instance_BuildDeactivatedTransforms(_Instance *instance)
 
@@ -541,7 +552,7 @@ void _G2Instance_BuildDeactivatedTransforms(_Instance *instance)
   MATRIX *__dest;
   uint uVar1;
   Object *pOVar2;
-  MATRIX *pMVar3;
+  MATRIX *__src;
   _Instance *instance_00;
   int numMatrices;
   
@@ -549,40 +560,35 @@ void _G2Instance_BuildDeactivatedTransforms(_Instance *instance)
   if (((uVar1 & 0x10000000) == 0) ||
      (((uVar1 & 0x4000000) == 0 &&
       (((uVar1 & 0x20000000) == 0 || ((instance->flags & 0x800U) == 0)))))) {
-    if (instance->matrix == (MATRIX *)0x0) {
-      G2Instance_BuildTransforms(instance);
+    pOVar2 = instance->object;
+    if ((pOVar2->animList == (_G2AnimKeylist_Type **)0x0) || ((pOVar2->oflags2 & 0x40000000U) != 0))
+    {
+      numMatrices = pOVar2->modelList[instance->currentModel]->numSegments;
     }
     else {
-      pOVar2 = instance->object;
-      if ((pOVar2->animList == (_G2AnimKeylist_Type **)0x0) ||
-         ((pOVar2->oflags2 & 0x40000000U) != 0)) {
-        numMatrices = pOVar2->modelList[instance->currentModel]->numSegments;
-      }
-      else {
-        numMatrices = pOVar2->modelList[instance->currentModel]->numSegments + 1;
-      }
-      __dest = GAMELOOP_GetMatrices(numMatrices);
-      if (__dest == (MATRIX *)0x0) {
-        instance->matrix = (MATRIX *)0x0;
-      }
-      else {
-        pMVar3 = instance->matrix;
-        instance->oldMatrix = pMVar3;
-        if ((instance->object->animList != (_G2AnimKeylist_Type **)0x0) &&
-           ((instance->object->oflags2 & 0x40000000U) == 0)) {
-          instance->matrix = __dest + 1;
-          G2PoolMem_Free(__dest,pMVar3 + -1);
-          return;
-        }
+      numMatrices = pOVar2->modelList[instance->currentModel]->numSegments + 1;
+    }
+    __dest = GAMELOOP_GetMatrices(numMatrices);
+    if (__dest == (MATRIX *)0x0) {
+      instance->matrix = (MATRIX *)0x0;
+    }
+    else {
+      instance->oldMatrix = instance->matrix;
+      if ((instance->object->animList == (_G2AnimKeylist_Type **)0x0) ||
+         (__src = instance->matrix + -1, (instance->object->oflags2 & 0x40000000U) != 0)) {
+        __src = instance->oldMatrix;
         instance->matrix = __dest;
-        if (instance->oldMatrix != (MATRIX *)0x0) {
-          memcpy(__dest,instance->oldMatrix,numMatrices << 5);
-        }
-        instance_00 = instance->LinkChild;
-        while (instance_00 != (_Instance *)0x0) {
-          G2Instance_BuildTransforms(instance_00);
-          instance_00 = instance_00->LinkSibling;
-        }
+      }
+      else {
+        instance->matrix = __dest + 1;
+      }
+      if (instance->oldMatrix != (MATRIX *)0x0) {
+        memcpy(__dest,__src,numMatrices << 5);
+      }
+      instance_00 = instance->LinkChild;
+      while (instance_00 != (_Instance *)0x0) {
+        G2Instance_BuildTransforms(instance_00);
+        instance_00 = instance_00->LinkSibling;
       }
     }
   }
@@ -597,21 +603,21 @@ void _G2Instance_BuildDeactivatedTransforms(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Instance_BuildNonAnimatedTransforms(struct _Instance *instance /*$s0*/)
- // line 583, offset 0x80095934
+ // line 582, offset 0x80095374
 	/* begin block 1 */
-		// Start line: 584
-		// Start offset: 0x80095934
+		// Start line: 583
+		// Start offset: 0x80095374
 		// Variables:
 	// 		struct MATRIX *segMatrix; // $v1
 	// 		struct _Model *model; // $v0
 	/* end block 1 */
-	// End offset: 0x800959E0
-	// End Line: 611
+	// End offset: 0x80095420
+	// End Line: 610
 
 	/* begin block 2 */
-		// Start line: 1415
+		// Start line: 1463
 	/* end block 2 */
-	// End Line: 1416
+	// End Line: 1464
 
 void _G2Instance_BuildNonAnimatedTransforms(_Instance *instance)
 
@@ -646,10 +652,10 @@ void _G2Instance_BuildNonAnimatedTransforms(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Instance_BuildFacadeTransforms(struct _Instance *instance /*$s0*/, struct _Segment *segment /*$s1*/, struct MATRIX *segMatrix /*$s5*/, struct MATRIX *matrixPool /*$s6*/, long scale_flag /*stack 16*/)
- // line 619, offset 0x800959f0
+ // line 618, offset 0x80095430
 	/* begin block 1 */
-		// Start line: 620
-		// Start offset: 0x800959F0
+		// Start line: 619
+		// Start offset: 0x80095430
 		// Variables:
 	// 		struct _Position *cameraPos; // $s7
 	// 		struct SVECTOR *segmentPos; // $s3
@@ -657,77 +663,62 @@ void _G2Instance_BuildNonAnimatedTransforms(_Instance *instance)
 	// 		struct VECTOR *scale; // $fp
 
 		/* begin block 1.1 */
-			// Start line: 644
-			// Start offset: 0x80095B1C
+			// Start line: 643
+			// Start offset: 0x8009555C
 			// Variables:
 		// 		struct SVECTOR *zvec; // $s1
 		// 		struct SVECTOR *camWorldPos; // $s2
 		// 		struct SVECTOR *camLocPos; // $s6
 		// 		long sqrt; // $s0
 		/* end block 1.1 */
-		// End offset: 0x80095C38
-		// End Line: 676
+		// End offset: 0x80095678
+		// End Line: 675
 
 		/* begin block 1.2 */
-			// Start line: 683
-			// Start offset: 0x80095C98
+			// Start line: 682
+			// Start offset: 0x800956D8
 			// Variables:
 		// 		struct VECTOR *xy; // $s0
 		/* end block 1.2 */
-		// End offset: 0x80095D5C
-		// End Line: 702
+		// End offset: 0x8009579C
+		// End Line: 701
 	/* end block 1 */
-	// End offset: 0x80095D5C
-	// End Line: 703
+	// End offset: 0x8009579C
+	// End Line: 702
 
 	/* begin block 2 */
-		// Start line: 1488
+		// Start line: 1536
 	/* end block 2 */
-	// End Line: 1489
+	// End Line: 1537
 
 void _G2Instance_BuildFacadeTransforms
-               (int param_1,uint *param_2,MATRIX *param_3,int param_4,int param_5)
+               (_Instance *instance,_Segment *segment,MATRIX *segMatrix,MATRIX *matrixPool,
+               long scale_flag)
 
 {
-  long y;
-  
-  if ((*(short *)(param_2 + 4) != 0) || (param_2[3] != 0)) {
+  if ((segment->pz != 0) || (*(int *)&segment->px != 0)) {
                     /* WARNING: Subroutine does not return */
-    ApplyMatrixSV(param_4,param_2 + 3,&DAT_1f800008);
+    ApplyMatrixSV(matrixPool,&segment->px,&DAT_1f800008);
   }
-  DAT_1f800008 = *(short *)(param_1 + 0x5c);
-  DAT_1f80000a = *(short *)(param_1 + 0x5e);
-  DAT_1f80000c = *(short *)(param_1 + 0x60);
-  param_3->t[0] = (int)DAT_1f800008;
-  param_3->t[1] = (int)DAT_1f80000a;
-  param_3->t[2] = (int)DAT_1f80000c;
-  if ((*param_2 & 1) != 0) {
-    DAT_1f800058._0_2_ = *(short *)(param_4 + 4);
-    DAT_1f800058._2_2_ = *(short *)(param_4 + 10);
-    DAT_1f80005c._0_2_ = *(short *)(param_4 + 0x10);
-    y = MATH3D_FastSqrt(0x1000000 - (int)(short)DAT_1f800058 * (int)(short)DAT_1f800058);
-    DAT_1f800010 = MATH3D_FastAtan2((int)DAT_1f800058._2_2_,(int)(short)DAT_1f80005c);
-    DAT_1f800010 = -DAT_1f800010;
-    DAT_1f800012 = MATH3D_FastAtan2((int)(short)DAT_1f800058,y >> 0xc);
+  DAT_1f800008 = (instance->position).x;
+  DAT_1f80000a = (instance->position).y;
+  DAT_1f80000c = (instance->position).z;
+  segMatrix->t[0] = (int)DAT_1f800008;
+  segMatrix->t[1] = (int)DAT_1f80000a;
+  segMatrix->t[2] = (int)DAT_1f80000c;
+  if ((segment->flags & 1U) != 0) {
+    DAT_1f800058._0_2_ = matrixPool->m[2];
+    DAT_1f800058._2_2_ = matrixPool->m[5];
+    DAT_1f80005c._0_2_ = matrixPool->m[8];
                     /* WARNING: Subroutine does not return */
-    DAT_1f800014 = 0;
-    RotMatrix(&DAT_1f800010,&DAT_1f800070);
+    MATH3D_FastSqrt(0x1000000 - (int)(short)DAT_1f800058 * (int)(short)DAT_1f800058);
   }
-  if ((*param_2 & 2) != 0) {
+  if ((segment->flags & 2U) != 0) {
     DAT_1f800018 = (int)DAT_1f800000 - (int)DAT_1f800008;
     DAT_1f80001c = (int)DAT_1f800002 - (int)DAT_1f80000a;
     DAT_1f800020 = (int)DAT_1f800004 - (int)DAT_1f80000c;
-    y = MATH3D_LengthXY(DAT_1f800018,DAT_1f80001c);
-    DAT_1f800010 = MATH3D_FastAtan2(y,DAT_1f800020);
-    DAT_1f800010 = DAT_1f800010 + 0xc00;
-    DAT_1f800014 = MATH3D_FastAtan2(DAT_1f80001c,DAT_1f800018);
-    DAT_1f800014 = DAT_1f800014 + 0x400;
-    MATH3D_SetUnityMatrix(param_3);
-    if (param_5 != 0) {
-      ScaleMatrix((int *)param_3,&DAT_1f800028);
-    }
                     /* WARNING: Subroutine does not return */
-    RotMatrixX((int)DAT_1f800010,(int)param_3);
+    MATH3D_LengthXY(DAT_1f800018,DAT_1f80001c);
   }
   return;
 }

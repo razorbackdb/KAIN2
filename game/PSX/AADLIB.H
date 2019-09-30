@@ -2,197 +2,143 @@
 #define AADLIB_H
 
 
-struct MemHeader // hashcode: 0xDAEE4890 (dec: -621918064)
-{
-	unsigned short magicNumber; // size=0, offset=0
-	unsigned char memStatus; // size=0, offset=2
-	unsigned char memType; // size=0, offset=3
-	unsigned long memSize; // size=0, offset=4
-};
+extern unsigned long aadGetMemorySize(struct AadInitAttr *attributes); // 0x80051D1C
 
-struct AadInitAttr // hashcode: 0x0549E29A (dec: 88728218)
-{
-	int updateMode; // size=0, offset=0
-	int numSlots; // size=0, offset=4
-	void (*nonBlockLoadProc)(); // size=0, offset=8
-	void (*nonBlockBufferedLoadProc)(); // size=0, offset=12
-	void (**memoryMallocProc)(); // size=0, offset=16
-	void (*memoryFreeProc)(); // size=0, offset=20
-};
+extern int aadInit(struct AadInitAttr *attributes, unsigned char *memoryPtr); // 0x80051D40
 
-struct _AadDynSfxFileHdr // hashcode: 0xB9609773 (dec: -1184852109)
-{
-	unsigned long snfID; // size=0, offset=0
-	unsigned short snfVersion; // size=0, offset=4
-	unsigned short uniqueID; // size=0, offset=6
-	unsigned short handle; // size=0, offset=8
-	unsigned short numSfxInFile; // size=0, offset=10
-	struct _AadDynSfxFileHdr *prevDynSfxFile; // size=20, offset=12
-	struct _AadDynSfxFileHdr *nextDynSfxFile; // size=20, offset=16
-};
+extern void aadInstallUpdateFunc(TDRFuncPtr_aadInstallUpdateFunc0updateFuncPtr updateFuncPtr, int hblanksPerUpdate); // 0x80051FEC
 
-struct AadDynSfxAttr // hashcode: 0x20751E4B (dec: 544546379)
-{
-	unsigned short sfxID; // size=0, offset=0
-	unsigned short waveID; // size=0, offset=2
-	struct AadToneAtr toneAttr; // size=16, offset=4
-	unsigned long waveSize; // size=0, offset=20
-};
+extern void aadInitVolume(); // 0x80052068
 
-struct AadDynamicSfxLoadInfo // hashcode: 0xEDD41D4C (dec: -304865972)
-{
-	char snfFileName[40]; // size=40, offset=0
-	char smfFileName[40]; // size=40, offset=40
-	int fileHandle; // size=0, offset=80
-	long directoryID; // size=0, offset=84
-	long loadFlags; // size=0, offset=88
-	long flags; // size=0, offset=92
-	int smfLoadingState; // size=0, offset=96
-	unsigned long bytesToLoad; // size=0, offset=100
-	int numSfxToLoad; // size=0, offset=104
-	int error; // size=0, offset=108
-	unsigned long waveTransferAddr; // size=0, offset=112
-	unsigned long totalSramUsed; // size=0, offset=116
-	struct _AadDynSfxFileHdr *snfFile; // size=20, offset=120
-	struct AadDynSfxAttr attr; // size=24, offset=124
-};
+extern void aadSetMasterVolume(int volume); // 0x8005209C
 
+extern void aadStartMasterVolumeFade(int targetVolume, int volumeStep, TDRFuncPtr_aadStartMasterVolumeFade2fadeCompleteCallback fadeCompleteCallback); // 0x800520CC
 
-extern unsigned long aadGetMemorySize(struct AadInitAttr *attributes); // 0x800514D4
+extern void aadSetSfxMasterVolume(int volume); // 0x800520E4
 
-extern int aadInit(struct AadInitAttr *attributes, unsigned char *memoryPtr); // 0x800514F8
+extern void aadSetMusicMasterVolume(int volume); // 0x800520F4
 
-extern void aadInstallUpdateFunc(TDRFuncPtr_aadInstallUpdateFunc0updateFuncPtr updateFuncPtr, int hblanksPerUpdate); // 0x800517A0
+extern void aadStartMusicMasterVolFade(int targetVolume, int volumeStep, TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback fadeCompleteCallback); // 0x80052158
 
-extern void aadInitVolume(); // 0x8005181C
+extern void aadShutdown(); // 0x80052170
 
-extern void aadSetMasterVolume(int volume); // 0x80051850
+extern long aadSlotUpdateWrapper(); // 0x800521F8
 
-extern void aadStartMasterVolumeFade(int targetVolume, int volumeStep, TDRFuncPtr_aadStartMasterVolumeFade2fadeCompleteCallback fadeCompleteCallback); // 0x80051880
+extern void aadSlotUpdate(); // 0x8005223C
 
-extern void aadSetSfxMasterVolume(int volume); // 0x80051898
+extern unsigned long aadCreateFourCharID(char a, char b, char c, char d); // 0x80052768
 
-extern void aadSetMusicMasterVolume(int volume); // 0x800518A8
+extern int aadLoadDynamicSoundBank(char *sndFileName, char *smpFileName, int dynamicBankIndex, int loadOption, TDRFuncPtr_aadLoadDynamicSoundBank4retProc retProc); // 0x80052790
 
-extern void aadStartMusicMasterVolFade(int targetVolume, int volumeStep, TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback fadeCompleteCallback); // 0x8005190C
+extern void aadLoadDynamicSoundBankReturn(void *loadedDataPtr, void *data, void *data2); // 0x800528E8
 
-extern void aadShutdown(); // 0x80051924
+extern void aadLoadDynamicSoundBankReturn2(void *loadedDataPtr, long loadedDataSize, short status, void *data1, void *data2); // 0x800529B8
 
-extern long aadSlotUpdateWrapper(); // 0x800519AC
+extern int aadFreeDynamicSoundBank(int dynamicBankIndex); // 0x80052BE4
 
-extern void aadSlotUpdate(); // 0x800519F0
+extern int aadOpenDynamicSoundBank(unsigned char *soundBank, int dynamicBankIndex); // 0x80052C60
 
-extern unsigned long aadCreateFourCharID(char a, char b, char c, char d); // 0x80051F38
+extern int aadLoadDynamicSfx(char *fileName, long directoryID, long flags); // 0x80052D80
 
-extern int aadLoadDynamicSoundBank(char *sndFileName, char *smpFileName, int dynamicBankIndex, int loadOption, TDRFuncPtr_aadLoadDynamicSoundBank4retProc retProc); // 0x80051F60
+extern int aadFreeDynamicSfx(int handle); // 0x80052E34
 
-extern void aadLoadDynamicSoundBankReturn(void *loadedDataPtr, void *data, void *data2); // 0x800520B8
+extern void aadRelocateMusicMemoryBegin(); // 0x80052EA4
 
-extern void aadLoadDynamicSoundBankReturn2(void *loadedDataPtr, long loadedDataSize, short status, void *data1, void *data2); // 0x80052188
+extern void aadRelocateMusicMemoryEnd(void *oldAddress, int offset); // 0x80052EC0
 
-extern int aadFreeDynamicSoundBank(int dynamicBankIndex); // 0x800523B4
+extern void aadRelocateSfxMemory(void *oldAddress, int offset); // 0x8005306C
 
-extern int aadOpenDynamicSoundBank(unsigned char *soundBank, int dynamicBankIndex); // 0x80052430
+extern int aadGetNumLoadsQueued(); // 0x800530D4
 
-extern int aadLoadDynamicSfx(char *fileName, long directoryID, long flags); // 0x80052550
+extern void aadPurgeLoadQueue(); // 0x800530E8
 
-extern int aadFreeDynamicSfx(int handle); // 0x80052604
+extern void aadProcessLoadQueue(); // 0x80053100
 
-extern void aadRelocateMusicMemoryBegin(); // 0x800526E0
+extern void aadLoadDynamicSfxAbort(struct AadDynamicSfxLoadInfo *info, int error); // 0x8005346C
 
-extern void aadRelocateMusicMemoryEnd(struct MemHeader *newAddress, long offset, void *oldAddress); // 0x800526FC
+extern void aadLoadDynamicSfxDone(struct AadDynamicSfxLoadInfo *info); // 0x800534F0
 
-extern void aadRelocateSfxMemory(void *oldAddress, int offset); // 0x80052924
+extern void aadLoadDynamicSfxReturn(void *loadedDataPtr, void *data, void *data2); // 0x800534F8
 
-extern int aadGetNumLoadsQueued(); // 0x8005298C
+extern int aadWaveMalloc(unsigned short waveID, unsigned long waveSize); // 0x80053670
 
-extern void aadPurgeLoadQueue(); // 0x800529A0
+extern unsigned long aadGetSramBlockAddr(int handle); // 0x800538B0
 
-extern void aadProcessLoadQueue(); // 0x800529B8
+extern void aadWaveFree(int handle); // 0x800538DC
 
-extern void aadLoadDynamicSfxAbort(struct AadDynamicSfxLoadInfo *info, int error); // 0x80052CF8
+extern void aadFreeSingleDynSfx(int sfxID); // 0x800539EC
 
-extern void aadLoadDynamicSfxDone(struct AadDynamicSfxLoadInfo *info); // 0x80052D7C
+extern void setSramFullAlarm(); // 0x80053AB4
 
-extern void aadLoadDynamicSfxReturn(void *loadedDataPtr, void *data, void *data2); // 0x80052D84
+extern void aadLoadSingleDynSfx(struct AadDynamicSfxLoadInfo *info); // 0x80053B90
 
-extern int aadWaveMalloc(unsigned short waveID, unsigned long waveSize); // 0x80052EFC
+extern void HackCallback(); // 0x80053E60
 
-extern unsigned long aadGetSramBlockAddr(int handle); // 0x80053144
+extern void aadLoadDynamicSfxReturn2(void *loadedDataPtr, long loadedDataSize, short status, void *data1, void *data2); // 0x80053E98
 
-extern void aadWaveFree(int handle); // 0x80053170
+extern int aadCheckSramFragmented(); // 0x80054160
 
-extern void aadFreeSingleDynSfx(int sfxID); // 0x80053280
+extern void aadProcessSramDefrag(); // 0x80054214
 
-extern void setSramFullAlarm(); // 0x80053348
+extern int aadIsSfxLoaded(unsigned int toneID); // 0x80054568
 
-extern void aadLoadSingleDynSfx(struct AadDynamicSfxLoadInfo *info); // 0x80053424
+extern void aadInitSequenceSlot(struct _AadSequenceSlot *slot); // 0x800545A4
 
-extern void HackCallback(); // 0x800536F4
+extern int aadWaitForSramTransferComplete(); // 0x800546B0
 
-extern void aadLoadDynamicSfxReturn2(void *loadedDataPtr, long loadedDataSize, short status, void *data1, void *data2); // 0x8005372C
+extern void aadInitReverb(); // 0x800546F0
 
-extern int aadCheckSramFragmented(); // 0x800539F4
+extern void aadShutdownReverb(); // 0x80054774
 
-extern void aadProcessSramDefrag(); // 0x80053AA8
+extern int aadGetReverbMode(); // 0x800547AC
 
-extern int aadIsSfxLoaded(unsigned int toneID); // 0x80053E0C
+extern unsigned long aadGetReverbSize(); // 0x800547B4
 
-extern void aadInitSequenceSlot(struct _AadSequenceSlot *slot); // 0x80053E48
+extern int aadGetReverbDepth(); // 0x800547E8
 
-extern int aadWaitForSramTransferComplete(); // 0x80053F54
+extern int aadGetDynamicBankStatus(int bank); // 0x800547F0
 
-extern void aadInitReverb(); // 0x80053F94
+extern int aadGetNumDynamicSequences(int bank); // 0x80054808
 
-extern void aadShutdownReverb(); // 0x80054018
+extern int aadAssignDynamicSequence(int bank, int sequenceNumber, int slotNumber); // 0x80054838
 
-extern int aadGetReverbMode(); // 0x80054050
+extern struct AadTempo * aadGetTempoFromDynamicSequence(int bank, int sequenceNumber, struct AadTempo *tempo); // 0x80054914
 
-extern unsigned long aadGetReverbSize(); // 0x80054058
+extern void aadSetSlotTempo(int slotNumber, struct AadTempo *tempo); // 0x80054964
 
-extern int aadGetReverbDepth(); // 0x80054088
+extern void aadStartSlot(int slotNumber); // 0x80054A1C
 
-extern int aadGetNumDynamicSequences(int bank); // 0x80054090
+extern void aadStopSlot(int slotNumber); // 0x80054A98
 
-extern int aadAssignDynamicSequence(int bank, int sequenceNumber, int slotNumber); // 0x800540C0
+extern void aadStopAllSlots(); // 0x80054B04
 
-extern struct AadTempo * aadGetTempoFromDynamicSequence(int bank, int sequenceNumber, struct AadTempo *tempo); // 0x8005419C
+extern void aadDisableSlot(int slotNumber); // 0x80054B94
 
-extern void aadSetSlotTempo(int slotNumber, struct AadTempo *tempo); // 0x800541EC
+extern void aadEnableSlot(int slotNumber); // 0x80054BE4
 
-extern void aadStartSlot(int slotNumber); // 0x800542A0
+extern void aadPauseSlot(int slotNumber); // 0x80054C24
 
-extern void aadStopSlot(int slotNumber); // 0x8005431C
+extern void aadResumeSlot(int slotNumber); // 0x80054C74
 
-extern void aadStopAllSlots(); // 0x80054388
+extern int aadGetSlotStatus(int slotNumber); // 0x80054CE4
 
-extern void aadDisableSlot(int slotNumber); // 0x80054418
+extern void aadAllNotesOff(int slotNumber); // 0x80054D04
 
-extern void aadEnableSlot(int slotNumber); // 0x80054468
+extern void aadMuteChannels(struct _AadSequenceSlot *slot, unsigned long channelList); // 0x80054DA4
 
-extern void aadPauseSlot(int slotNumber); // 0x800544A8
+extern void aadUnMuteChannels(struct _AadSequenceSlot *slot, unsigned long channelList); // 0x80054E80
 
-extern void aadResumeSlot(int slotNumber); // 0x800544F8
+extern TDRFuncPtr_aadInstallEndSequenceCallback aadInstallEndSequenceCallback(TDRFuncPtr_aadInstallEndSequenceCallback0callbackProc callbackProc, long data); // 0x80054EB8
 
-extern int aadGetSlotStatus(int slotNumber); // 0x80054568
+extern void aadSetUserVariable(int variableNumber, int value); // 0x80054ED0
 
-extern void aadAllNotesOff(int slotNumber); // 0x80054588
+extern void aadSetNoUpdateMode(int noUpdate); // 0x80054EE4
 
-extern void aadMuteChannels(struct _AadSequenceSlot *slot, unsigned long channelList); // 0x80054628
+extern void aadPauseSound(); // 0x80054F24
 
-extern void aadUnMuteChannels(struct _AadSequenceSlot *slot, unsigned long channelList); // 0x80054704
+extern void aadCancelPauseSound(); // 0x80054FBC
 
-extern TDRFuncPtr_aadInstallEndSequenceCallback aadInstallEndSequenceCallback(TDRFuncPtr_aadInstallEndSequenceCallback0callbackProc callbackProc, long data); // 0x8005473C
-
-extern void aadSetUserVariable(int variableNumber, int value); // 0x80054754
-
-extern void aadSetNoUpdateMode(int noUpdate); // 0x80054768
-
-extern void aadPauseSound(); // 0x800547A8
-
-extern void aadCancelPauseSound(); // 0x80054840
-
-extern void aadResumeSound(); // 0x8005485C
+extern void aadResumeSound(); // 0x80054FD8
 
 
 typedef long (*TDRFuncPtr_aadInstallUpdateFunc0updateFuncPtr)();

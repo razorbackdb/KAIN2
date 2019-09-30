@@ -5,10 +5,10 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LIGHT_GetLightMatrix(struct _Instance *instance /*$a0*/, struct Level *level /*$a1*/, struct MATRIX *lightM /*$a2*/, struct MATRIX *colorM /*$a3*/)
- // line 70, offset 0x80035824
+ // line 70, offset 0x80035370
 	/* begin block 1 */
 		// Start line: 72
-		// Start offset: 0x80035824
+		// Start offset: 0x80035370
 		// Variables:
 	// 		struct MATRIX *lightGroup; // $t0
 	// 		struct LightList *lightList; // $v1
@@ -16,7 +16,7 @@
 
 		/* begin block 1.1 */
 			// Start line: 120
-			// Start offset: 0x800358F4
+			// Start offset: 0x80035444
 			// Variables:
 		// 		struct MATRIX *tlightGroup; // $t2
 		// 		struct LightList *tlightList; // $t3
@@ -27,10 +27,10 @@
 		// 		int j; // $a2
 		// 		long ratio; // $t2
 		/* end block 1.1 */
-		// End offset: 0x80035AB8
+		// End offset: 0x8003560C
 		// End Line: 186
 	/* end block 1 */
-	// End offset: 0x80035B90
+	// End offset: 0x800356E4
 	// End Line: 195
 
 	/* begin block 2 */
@@ -48,122 +48,126 @@
 	/* end block 4 */
 	// End Line: 146
 
-void LIGHT_GetLightMatrix(_Instance *param_1,int param_2,undefined2 *param_3,undefined2 *param_4)
+void LIGHT_GetLightMatrix(_Instance *instance,Level *level,MATRIX *lightM,MATRIX *colorM)
 
 {
-  int iVar1;
+  ushort uVar1;
   int iVar2;
-  int iVar3;
-  undefined *puVar4;
-  int in_v1;
+  LightGroup *pLVar3;
+  ushort *puVar4;
   short *psVar5;
   int iVar6;
   int iVar7;
-  undefined2 *puVar8;
-  uint uVar9;
-  int iVar10;
-  int in_t3;
+  LightGroup *pLVar8;
+  int iVar9;
+  uint uVar10;
+  int iVar11;
+  LightList *in_t3;
+  long in_stack_00000010;
+  undefined1 in_stack_00000014;
   
-  uVar9 = (uint)param_1->lightGroup;
-  if (sGpffffb502 == 0) {
-    if ((param_1 != p_Gpffffb524) || (iVar3 = *(int *)(param_2 + 0x180), iVar3 == 0)) {
-LAB_800358a8:
-      in_v1 = *(int *)(param_2 + 4);
-      iVar3 = 0;
+  if (gameTrackerX.gameData.asmData.MorphType == 0) {
+    if ((instance == gameTrackerX.playerInstance) && (level->razielLightGroup != (LightGroup *)0x0))
+    goto LAB_800353ec;
+  }
+  else {
+    if ((instance == gameTrackerX.playerInstance) &&
+       (level->razielSpectralLightGroup != (LightGroup *)0x0)) {
+LAB_800353ec:
+      INSTANCE_DefaultAnimCallback
+                ((char)instance,(int)level,(char)lightM,(long)colorM,in_stack_00000010,
+                 in_stack_00000014);
+      return;
+    }
+    if ((level->spectrallightList != (LightList *)0x0) &&
+       (level->spectrallightList->numLightGroups != 0)) {
+      INSTANCE_DefaultAnimCallback
+                ((char)instance,(int)level,(char)lightM,(long)colorM,in_stack_00000010,
+                 in_stack_00000014);
+      return;
+    }
+  }
+  iVar2 = level->lightList->numLightGroups;
+  if ((iVar2 == 0) || (iVar2 <= (int)(uint)instance->lightGroup)) {
+    pLVar8 = &default_lightgroup;
+  }
+  else {
+    pLVar8 = level->lightList->lightGroupList + (uint)instance->lightGroup;
+  }
+  if (gameTrackerX.gameData.asmData.MorphTime == 1000) {
+    lightM->m[0] = (pLVar8->lightMatrix).m[0];
+    lightM->m[1] = (pLVar8->lightMatrix).m[1];
+    lightM->m[2] = (pLVar8->lightMatrix).m[2];
+    lightM->m[3] = (pLVar8->lightMatrix).m[3];
+    lightM->m[4] = (pLVar8->lightMatrix).m[4];
+    lightM->m[5] = (pLVar8->lightMatrix).m[5];
+    lightM->m[6] = (pLVar8->lightMatrix).m[6];
+    lightM->m[7] = (pLVar8->lightMatrix).m[7];
+    lightM->m[8] = (pLVar8->lightMatrix).m[8];
+    colorM->m[0] = (pLVar8->colorMatrix).m[0];
+    colorM->m[1] = (pLVar8->colorMatrix).m[1];
+    colorM->m[2] = (pLVar8->colorMatrix).m[2];
+    colorM->m[3] = (pLVar8->colorMatrix).m[3];
+    colorM->m[4] = (pLVar8->colorMatrix).m[4];
+    colorM->m[5] = (pLVar8->colorMatrix).m[5];
+    colorM->m[6] = (pLVar8->colorMatrix).m[6];
+    colorM->m[7] = (pLVar8->colorMatrix).m[7];
+    colorM->m[8] = (pLVar8->colorMatrix).m[8];
+    return;
+  }
+  uVar10 = (uint)instance->lightGroup;
+  if (gameTrackerX.gameData.asmData.MorphType == 0) {
+    if ((instance == gameTrackerX.playerInstance) &&
+       (pLVar3 = level->razielSpectralLightGroup, pLVar3 != (LightGroup *)0x0)) goto LAB_800354cc;
+    in_t3 = level->spectrallightList;
+    if ((in_t3 != (LightList *)0x0) && (in_t3->numLightGroups != 0)) {
+      uVar10 = (uint)instance->spectralLightGroup;
+      pLVar3 = (LightGroup *)0x0;
+      goto LAB_800354cc;
     }
   }
   else {
-    if ((param_1 != p_Gpffffb524) || (iVar3 = *(int *)(param_2 + 0x184), iVar3 == 0)) {
-      in_v1 = *(int *)(param_2 + 0x54);
-      if ((in_v1 == 0) || (*(int *)(in_v1 + 4) == 0)) goto LAB_800358a8;
-      uVar9 = (uint)param_1->spectralLightGroup;
-      iVar3 = 0;
-    }
+    if ((instance == gameTrackerX.playerInstance) &&
+       (pLVar3 = level->razielLightGroup, pLVar3 != (LightGroup *)0x0)) goto LAB_800354cc;
   }
-  if (iVar3 != 0) {
-    INSTANCE_GetFadeValue(param_1);
-    return;
-  }
-  if ((*(int *)(in_v1 + 4) == 0) || (*(int *)(in_v1 + 4) <= (int)uVar9)) {
-    INSTANCE_GetFadeValue(param_1);
-    return;
-  }
-  puVar8 = (undefined2 *)(*(int *)(in_v1 + 8) + uVar9 * 0x40);
-  if (sGpffffb500 == 1000) {
-    *param_3 = *puVar8;
-    param_3[1] = puVar8[1];
-    param_3[2] = puVar8[2];
-    param_3[3] = puVar8[3];
-    param_3[4] = puVar8[4];
-    param_3[5] = puVar8[5];
-    param_3[6] = puVar8[6];
-    param_3[7] = puVar8[7];
-    param_3[8] = puVar8[8];
-    *param_4 = puVar8[0x10];
-    param_4[1] = puVar8[0x11];
-    param_4[2] = puVar8[0x12];
-    param_4[3] = puVar8[0x13];
-    param_4[4] = puVar8[0x14];
-    param_4[5] = puVar8[0x15];
-    param_4[6] = puVar8[0x16];
-    param_4[7] = puVar8[0x17];
-    param_4[8] = puVar8[0x18];
-    return;
-  }
-  uVar9 = (uint)param_1->lightGroup;
-  if (sGpffffb502 == 0) {
-    if ((param_1 == p_Gpffffb524) &&
-       (puVar4 = *(undefined **)(param_2 + 0x184), puVar4 != (undefined *)0x0)) goto LAB_8003597c;
-    in_t3 = *(int *)(param_2 + 0x54);
-    if ((in_t3 != 0) && (*(int *)(in_t3 + 4) != 0)) {
-      uVar9 = (uint)param_1->spectralLightGroup;
-      puVar4 = (undefined *)0x0;
-      goto LAB_8003597c;
-    }
-  }
-  else {
-    if ((param_1 == p_Gpffffb524) &&
-       (puVar4 = *(undefined **)(param_2 + 0x180), puVar4 != (undefined *)0x0)) goto LAB_8003597c;
-  }
-  in_t3 = *(int *)(param_2 + 4);
-  puVar4 = (undefined *)0x0;
-LAB_8003597c:
-  if (puVar4 == (undefined *)0x0) {
-    if ((*(int *)(in_t3 + 4) == 0) || (*(int *)(in_t3 + 4) <= (int)uVar9)) {
-      puVar4 = &gp0xffff89ac;
+  in_t3 = level->lightList;
+  pLVar3 = (LightGroup *)0x0;
+LAB_800354cc:
+  if (pLVar3 == (LightGroup *)0x0) {
+    if ((in_t3->numLightGroups == 0) || (in_t3->numLightGroups <= (int)uVar10)) {
+      pLVar3 = &default_lightgroup;
     }
     else {
-      puVar4 = (undefined *)(*(int *)(in_t3 + 8) + uVar9 * 0x40);
+      pLVar3 = in_t3->lightGroupList + uVar10;
     }
   }
-  *param_3 = *puVar8;
-  param_3[1] = puVar8[1];
-  param_3[2] = puVar8[2];
-  param_3[3] = puVar8[3];
-  param_3[4] = puVar8[4];
-  param_3[5] = puVar8[5];
-  param_3[6] = puVar8[6];
-  param_3[7] = puVar8[7];
-  param_3[8] = puVar8[8];
-  iVar10 = 0;
-  iVar3 = 0;
+  lightM->m[0] = (pLVar8->lightMatrix).m[0];
+  lightM->m[1] = (pLVar8->lightMatrix).m[1];
+  lightM->m[2] = (pLVar8->lightMatrix).m[2];
+  lightM->m[3] = (pLVar8->lightMatrix).m[3];
+  lightM->m[4] = (pLVar8->lightMatrix).m[4];
+  lightM->m[5] = (pLVar8->lightMatrix).m[5];
+  lightM->m[6] = (pLVar8->lightMatrix).m[6];
+  lightM->m[7] = (pLVar8->lightMatrix).m[7];
+  lightM->m[8] = (pLVar8->lightMatrix).m[8];
+  iVar2 = (int)gameTrackerX.gameData.asmData.MorphTime;
+  iVar11 = 0;
+  iVar9 = 0;
   do {
     iVar7 = 0;
-    iVar6 = iVar3;
+    iVar6 = iVar9;
     do {
-      iVar2 = iVar6 + 0x20;
-      iVar1 = iVar6 + 0x20;
-      psVar5 = (short *)((int)param_4 + iVar6);
+      puVar4 = (ushort *)((int)(pLVar8->colorMatrix).m + iVar6);
+      uVar1 = *(ushort *)((int)(pLVar3->colorMatrix).m + iVar6);
+      psVar5 = (short *)((int)colorM->m + iVar6);
       iVar6 = iVar6 + 2;
       iVar7 = iVar7 + 1;
-      *psVar5 = *(ushort *)(puVar4 + iVar1) +
-                (short)(((int)(((uint)*(ushort *)((int)puVar8 + iVar2) -
-                               (uint)*(ushort *)(puVar4 + iVar1)) * 0x10000) >> 0x10) *
-                        (0x1000 - ((int)sGpffffb500 << 0xc) / 1000) >> 0xc);
+      *psVar5 = uVar1 + (short)(((int)(((uint)*puVar4 - (uint)uVar1) * 0x10000) >> 0x10) *
+                                (0x1000 - (iVar2 << 0xc) / 1000) >> 0xc);
     } while (iVar7 < 3);
-    iVar10 = iVar10 + 1;
-    iVar3 = iVar3 + 6;
-  } while (iVar10 < 3);
+    iVar11 = iVar11 + 1;
+    iVar9 = iVar9 + 6;
+  } while (iVar11 < 3);
   return;
 }
 
@@ -171,38 +175,39 @@ LAB_8003597c:
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ LIGHT_PresetInstanceLight(struct _Instance *instance /*$s0*/, short attenuate /*$a1*/, struct MATRIX *lm /*$s1*/)
- // line 200, offset 0x80035b98
+// void /*$ra*/ LIGHT_PresetInstanceLight(struct _Instance *instance /*$s1*/, short attenuate /*$a1*/, struct MATRIX *lm /*$s0*/)
+ // line 200, offset 0x800356ec
 	/* begin block 1 */
 		// Start line: 201
-		// Start offset: 0x80035B98
+		// Start offset: 0x800356EC
 		// Variables:
 	// 		struct MATRIX cm; // stack offset -80
 	// 		long scale; // $a0
 	// 		long scaleRGB[3]; // stack offset -48
 	// 		int i; // $t3
 	// 		int j; // $a3
-	// 		struct Level *level; // $s2
+	// 		struct CDLight *extraLight; // $s2
+	// 		struct Level *level; // $s3
 	// 		short tempRGB[3]; // stack offset -32
 
 		/* begin block 1.1 */
 			// Start line: 254
-			// Start offset: 0x80035C34
+			// Start offset: 0x80035828
 			// Variables:
 		// 		short *todRGB; // $v0
 
 			/* begin block 1.1.1 */
-				// Start line: 271
-				// Start offset: 0x80035C68
+				// Start line: 265
+				// Start offset: 0x8003584C
 			/* end block 1.1.1 */
-			// End offset: 0x80035CD8
-			// End Line: 277
+			// End offset: 0x800358BC
+			// End Line: 271
 		/* end block 1.1 */
-		// End offset: 0x80035CF0
-		// End Line: 278
+		// End offset: 0x800358D4
+		// End Line: 272
 	/* end block 1 */
-	// End offset: 0x80035CF0
-	// End Line: 281
+	// End offset: 0x800358D4
+	// End Line: 275
 
 	/* begin block 2 */
 		// Start line: 428
@@ -221,30 +226,30 @@ void LIGHT_PresetInstanceLight(_Instance *instance,short attenuate,MATRIX *lm)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LIGHT_GetAmbient(struct _ColorType *color /*$a0*/, struct _Instance *instance /*$a1*/)
- // line 290, offset 0x80035d14
+ // line 284, offset 0x800358fc
 	/* begin block 1 */
-		// Start line: 292
-		// Start offset: 0x80035D14
+		// Start line: 286
+		// Start offset: 0x800358FC
 		// Variables:
 	// 		int lightval; // $v1
 	/* end block 1 */
-	// End offset: 0x80035D34
-	// End Line: 333
+	// End offset: 0x8003591C
+	// End Line: 327
 
 	/* begin block 2 */
-		// Start line: 648
+		// Start line: 622
 	/* end block 2 */
-	// End Line: 649
+	// End Line: 623
 
 	/* begin block 3 */
-		// Start line: 649
+		// Start line: 623
 	/* end block 3 */
-	// End Line: 650
+	// End Line: 624
 
 	/* begin block 4 */
-		// Start line: 688
+		// Start line: 662
 	/* end block 4 */
-	// End Line: 689
+	// End Line: 663
 
 void LIGHT_GetAmbient(_ColorType *color,_Instance *instance)
 
@@ -265,18 +270,18 @@ void LIGHT_GetAmbient(_ColorType *color,_Instance *instance)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ LIGHT_CalcLightValue(struct _TFace *tface /*$t2*/, struct _Instance *instance /*$fp*/, struct _Terrain *terrain /*$t3*/)
- // line 336, offset 0x80035d44
+// void /*$ra*/ LIGHT_CalcLightValue(struct _TFace *tface /*$t2*/, struct _Instance *instance /*$s7*/, struct _Terrain *terrain /*$t3*/)
+ // line 330, offset 0x8003592c
 	/* begin block 1 */
-		// Start line: 337
-		// Start offset: 0x80035D44
+		// Start line: 331
+		// Start offset: 0x8003592C
 		// Variables:
 	// 		struct _ColorType color; // stack offset -88
 	// 		short fadespeed; // $a2
 
 		/* begin block 1.1 */
-			// Start line: 348
-			// Start offset: 0x80035DA4
+			// Start line: 342
+			// Start offset: 0x8003598C
 			// Variables:
 		// 		struct _ColorType color1; // stack offset -80
 		// 		struct _ColorType color2; // stack offset -72
@@ -285,37 +290,37 @@ void LIGHT_GetAmbient(_ColorType *color,_Instance *instance)
 		// 		long edge; // $a2
 		// 		int x1; // $v1
 		// 		int x2; // $a0
-		// 		int interp1; // $s3
-		// 		int interp2; // $s2
+		// 		int interp1; // $s2
+		// 		int interp2; // $s1
 		// 		int interp; // $a3
 		// 		short *temp; // $v0
-		// 		short *vertex0; // $s6
-		// 		short *vertex1; // $s5
-		// 		short *vertex2; // $s4
+		// 		short *vertex0; // $s5
+		// 		short *vertex1; // $s4
+		// 		short *vertex2; // $s3
 		// 		short position[3]; // stack offset -64
 		// 		struct _SVector normal; // stack offset -56
 		// 		struct BSPTree *bsp; // $a1
 		// 		int major; // $a3
-		// 		int minor; // $s7
+		// 		int minor; // $s6
 
 			/* begin block 1.1.1 */
-				// Start line: 457
-				// Start offset: 0x80036194
+				// Start line: 445
+				// Start offset: 0x80035D80
 				// Variables:
 			// 		long r; // $v0
 			// 		long g; // $a1
 			// 		long b; // $v1
 			// 		int lum; // $a0
 			/* end block 1.1.1 */
-			// End offset: 0x80036244
-			// End Line: 478
+			// End offset: 0x80035E28
+			// End Line: 466
 		/* end block 1.1 */
-		// End offset: 0x80036244
-		// End Line: 478
+		// End offset: 0x80035E28
+		// End Line: 466
 
 		/* begin block 1.2 */
-			// Start line: 493
-			// Start offset: 0x80036264
+			// Start line: 481
+			// Start offset: 0x80035E48
 			// Variables:
 		// 		int i; // $t0
 		// 		struct LightInstance *li; // $t4
@@ -323,235 +328,139 @@ void LIGHT_GetAmbient(_ColorType *color,_Instance *instance)
 		// 		struct LightInstance *tli; // $t2
 
 			/* begin block 1.2.1 */
-				// Start line: 500
-				// Start offset: 0x80036274
+				// Start line: 488
+				// Start offset: 0x80035E5C
 				// Variables:
 			// 		struct _Instance *inst; // $a1
 
 				/* begin block 1.2.1.1 */
-					// Start line: 503
-					// Start offset: 0x8003629C
+					// Start line: 491
+					// Start offset: 0x80035E84
 					// Variables:
 				// 		short tdist; // $a3
 				// 		struct _Position pos; // stack offset -64
 				// 		struct MATRIX *mat; // $a1
 				/* end block 1.2.1.1 */
-				// End offset: 0x80036384
-				// End Line: 520
+				// End offset: 0x80035F6C
+				// End Line: 508
 			/* end block 1.2.1 */
-			// End offset: 0x80036384
-			// End Line: 521
+			// End offset: 0x80035F6C
+			// End Line: 509
 		/* end block 1.2 */
-		// End offset: 0x80036450
-		// End Line: 545
+		// End offset: 0x80036038
+		// End Line: 533
 	/* end block 1 */
-	// End offset: 0x80036468
-	// End Line: 553
+	// End offset: 0x80036050
+	// End Line: 541
 
 	/* begin block 2 */
-		// Start line: 740
+		// Start line: 714
 	/* end block 2 */
-	// End Line: 741
-
-/* WARNING: Removing unreachable block (ram,0x80036058) */
+	// End Line: 715
 
 void LIGHT_CalcLightValue(_TFace *tface,_Instance *instance,_Terrain *terrain)
 
 {
   short sVar1;
-  short sVar2;
-  _TVertex *p_Var3;
-  long lVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
-  _ColorType *color;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  BSPTree *pBVar5;
+  _Instance *p_Var6;
+  MATRIX *pMVar7;
   int iVar8;
-  BSPTree *pBVar9;
-  _Instance *instance_00;
-  MATRIX *pMVar10;
-  uint uVar11;
-  _TVertex *p_Var12;
-  int iVar13;
-  _Instance *p_Var14;
-  _Instance **pp_Var15;
-  _Instance **pp_Var16;
-  _TVertex *p_Var17;
-  _TVertex *p_Var18;
-  _ColorType local_58 [2];
-  undefined auStack80 [16];
-  short local_40 [4];
-  _SVector _Stack56;
-  short *local_30;
+  LightInstance *pLVar9;
+  int iVar10;
+  LightInstance *pLVar11;
+  _ColorType local_58 [6];
+  short local_40;
+  short local_3e;
+  short local_3c;
+  _SVector a_Stack56 [2];
   
-  if ((((instance->flags & 0x400000U) != 0) || (tface == (_TFace *)0x0)) ||
-     (instance->lightMatrix != 0)) {
-    LIGHT_GetAmbient(local_58,instance);
-    pp_Var16 = (_Instance **)0x0;
-    iVar13 = 0x7fff;
-    pp_Var15 = (_Instance **)theCamera.core.vvNormalWorVecMat[0].t;
-    iVar6 = 0;
-    do {
-      instance_00 = *pp_Var15;
-      if (((instance_00 != (_Instance *)0x0) && (instance_00 != instance)) &&
-         (instance_00->matrix != (MATRIX *)0x0)) {
-        pMVar10 = instance_00->matrix + *(byte *)((int)pp_Var15 + 0x12);
-        iVar7 = (int)(((uint)*(ushort *)pMVar10->t - (uint)(ushort)(instance->position).x) * 0x10000
-                     ) >> 0x10;
-        if (iVar7 < 0) {
-          iVar7 = -iVar7;
-        }
-        local_40[0] = (short)iVar7;
-        iVar8 = (int)(((uint)*(ushort *)(pMVar10->t + 1) - (uint)(ushort)(instance->position).y) *
-                     0x10000) >> 0x10;
-        if (iVar8 < 0) {
-          iVar8 = -iVar8;
-        }
-        local_40[1] = (short)iVar8;
-        iVar5 = (int)(((uint)*(ushort *)(pMVar10->t + 2) - (uint)(ushort)(instance->position).z) *
-                     0x10000) >> 0x10;
-        if (iVar5 < 0) {
-          iVar5 = -iVar5;
-        }
-        local_40[2] = (short)iVar5;
-        if (iVar5 << 0x10 < iVar8 << 0x10) {
-          iVar5 = iVar8;
-        }
-        sVar1 = (short)iVar5;
-        if (iVar5 << 0x10 < iVar7 << 0x10) {
-          sVar1 = local_40[0];
-        }
-        iVar7 = (int)sVar1;
-        if ((iVar7 < *(short *)(pp_Var15 + 4)) && (iVar7 < iVar13)) {
-          iVar13 = iVar7;
-          pp_Var16 = pp_Var15;
-        }
-      }
-      iVar6 = iVar6 + 1;
-      pp_Var15 = pp_Var15 + 5;
-    } while (iVar6 < 1);
-    if (pp_Var16 != (_Instance **)0x0) {
-      iVar13 = *(short *)(pp_Var16 + 4) - iVar13;
-      iVar6 = (uint)local_58[0].r + (iVar13 * (int)pp_Var16[1] >> 0xc);
-      local_58[0].r = (byte)iVar6;
-      if (iVar6 < 0) {
-        local_58[0].r = 0;
-      }
-      if (0xff < iVar6) {
-        local_58[0].r = 0xff;
-      }
-      iVar6 = (uint)local_58[0].g + (iVar13 * (int)pp_Var16[2] >> 0xc);
-      local_58[0].g = (byte)iVar6;
-      if (iVar6 < 0) {
-        local_58[0].g = 0;
-      }
-      if (0xff < iVar6) {
-        local_58[0].g = 0xff;
-      }
-      iVar13 = (uint)local_58[0].b + (iVar13 * (int)pp_Var16[3] >> 0xc);
-      local_58[0].b = (byte)iVar13;
-      if (iVar13 < 0) {
-        local_58[0].b = 0;
-      }
-      if (0xff < iVar13) {
-        local_58[0].b = 0xff;
-      }
-    }
+  if ((((instance->flags & 0x400000U) == 0) && (tface != (_TFace *)0x0)) &&
+     (instance->lightMatrix == 0)) {
+    pBVar5 = terrain->BSPTreeArray + instance->bspTree;
+    local_40 = (instance->position).x - (pBVar5->globalOffset).x;
+    local_3e = (instance->position).y - (pBVar5->globalOffset).y;
+    local_3c = (instance->shadowPosition).z - (pBVar5->globalOffset).z;
                     /* WARNING: Subroutine does not return */
-    LoadAverageCol((byte *)local_58,(byte *)&instance->light_color,0x100,0xf00,
-                   (undefined *)&instance->light_color);
+    COLLIDE_GetNormal(tface->normal,(short *)terrain->normalList,a_Stack56);
   }
-  p_Var12 = terrain->vertexList;
-  pBVar9 = terrain->BSPTreeArray + instance->bspTree;
-  local_40[0] = (instance->position).x - (pBVar9->globalOffset).x;
-  p_Var18 = p_Var12 + (tface->face).v0;
-  p_Var17 = p_Var12 + (tface->face).v1;
-  local_40[1] = (instance->position).y - (pBVar9->globalOffset).y;
-  local_40[2] = (instance->shadowPosition).z - (pBVar9->globalOffset).z;
-  p_Var12 = p_Var12 + (tface->face).v2;
-  lVar4 = COLLIDE_GetNormal(tface->normal,(short *)terrain->normalList,&_Stack56);
-  iVar13 = lVar4 + 2;
-  if (2 < iVar13) {
-    iVar13 = lVar4 + -1;
-  }
-  sVar1 = local_40[iVar13];
-  sVar2 = (&(p_Var18->vertex).x)[iVar13];
-  uVar11 = 0;
-  if ((sVar2 < sVar1) && (sVar1 < (&(p_Var17->vertex).x)[iVar13])) {
-LAB_80035eb4:
-    uVar11 = 1;
-LAB_80035eb8:
-    iVar6 = iVar13 * 2;
-    if ((local_40[iVar13] <= (&(p_Var17->vertex).x)[iVar13]) ||
-       ((&(p_Var12->vertex).x)[iVar13] <= local_40[iVar13])) goto LAB_80035ef0;
-LAB_80035f24:
-    uVar11 = uVar11 | 2;
-LAB_80035f28:
-    iVar7 = iVar13 * 2;
-    if ((local_40[iVar13] <= (&(p_Var12->vertex).x)[iVar13]) ||
-       ((&(p_Var18->vertex).x)[iVar13] <= local_40[iVar13])) goto LAB_80035f60;
-  }
-  else {
-    if (sVar2 <= sVar1) goto LAB_80035eb8;
-    iVar6 = iVar13 << 1;
-    if ((&(p_Var17->vertex).x)[iVar13] < sVar1) goto LAB_80035eb4;
-LAB_80035ef0:
-    if (*(short *)((int)&(p_Var17->vertex).x + iVar6) <= *(short *)((int)local_40 + iVar6))
-    goto LAB_80035f28;
-    iVar7 = iVar13 << 1;
-    if (*(short *)((int)&(p_Var12->vertex).x + iVar6) < *(short *)((int)local_40 + iVar6))
-    goto LAB_80035f24;
-LAB_80035f60:
-    if ((*(short *)((int)&(p_Var12->vertex).x + iVar7) <= *(short *)((int)local_40 + iVar7)) ||
-       (*(short *)((int)local_40 + iVar7) <= *(short *)((int)&(p_Var18->vertex).x + iVar7)))
-    goto LAB_80035f9c;
-  }
-  uVar11 = uVar11 | 4;
-LAB_80035f9c:
-  if (uVar11 == 3) {
-    iVar6 = 1;
-  }
-  else {
-    if (uVar11 == 6) {
-      iVar6 = 2;
-    }
-    else {
-      iVar6 = 0;
-      if (uVar11 != 5) {
-        return;
+  LIGHT_GetAmbient(local_58,instance);
+  pLVar11 = (LightInstance *)0x0;
+  iVar10 = 0x7fff;
+  pLVar9 = gameTrackerX.gameData.asmData.lightInstances;
+  iVar8 = 0;
+  do {
+    p_Var6 = pLVar9->lightInstance;
+    if (((p_Var6 != (_Instance *)0x0) && (p_Var6 != instance)) && (p_Var6->matrix != (MATRIX *)0x0))
+    {
+      pMVar7 = p_Var6->matrix + pLVar9->segment;
+      iVar3 = (int)(((uint)*(ushort *)pMVar7->t - (uint)(ushort)(instance->position).x) * 0x10000)
+              >> 0x10;
+      if (iVar3 < 0) {
+        iVar3 = -iVar3;
+      }
+      local_40 = (short)iVar3;
+      iVar4 = (int)(((uint)*(ushort *)(pMVar7->t + 1) - (uint)(ushort)(instance->position).y) *
+                   0x10000) >> 0x10;
+      if (iVar4 < 0) {
+        iVar4 = -iVar4;
+      }
+      local_3e = (short)iVar4;
+      iVar2 = (int)(((uint)*(ushort *)(pMVar7->t + 2) - (uint)(ushort)(instance->position).z) *
+                   0x10000) >> 0x10;
+      if (iVar2 < 0) {
+        iVar2 = -iVar2;
+      }
+      local_3c = (short)iVar2;
+      if (iVar2 << 0x10 < iVar4 << 0x10) {
+        iVar2 = iVar4;
+      }
+      sVar1 = (short)iVar2;
+      if (iVar2 << 0x10 < iVar3 << 0x10) {
+        sVar1 = local_40;
+      }
+      iVar3 = (int)sVar1;
+      if ((iVar3 < pLVar9->radius) && (iVar3 < iVar10)) {
+        iVar10 = iVar3;
+        pLVar11 = pLVar9;
       }
     }
-  }
-  iVar7 = 0;
-  p_Var3 = p_Var18;
-  if (iVar6 != 0) {
-    do {
-      p_Var18 = p_Var17;
-      p_Var17 = p_Var12;
-      p_Var12 = p_Var3;
-      iVar7 = iVar7 + 1;
-      p_Var3 = p_Var18;
-    } while (iVar7 < iVar6);
-  }
-  p_Var14 = (_Instance *)(int)(&(p_Var17->vertex).x)[iVar13];
-  instance_00 = (_Instance *)(int)(&(p_Var18->vertex).x)[iVar13];
-  if (p_Var14 != instance_00) {
-    local_30 = local_40;
-    color = (_ColorType *)((int)((int)instance_00 - (int)local_40[iVar13]) * 0x1000);
-    iVar6 = (int)color / (int)((int)p_Var14 - (int)instance_00);
-    if (iVar6 < 0) {
-      iVar6 = -iVar6;
+    iVar8 = iVar8 + 1;
+    pLVar9 = pLVar9 + 1;
+  } while (iVar8 < 1);
+  if (pLVar11 != (LightInstance *)0x0) {
+    iVar10 = pLVar11->radius - iVar10;
+    iVar8 = (uint)local_58[0].r + (iVar10 * pLVar11->r >> 0xc);
+    local_58[0].r = (byte)iVar8;
+    if (iVar8 < 0) {
+      local_58[0].r = 0;
     }
-    if (-1 < iVar6) {
-      LIGHT_GetAmbient(color,instance_00);
-      return;
+    if (0xff < iVar8) {
+      local_58[0].r = 0xff;
     }
-    if ((_Instance *)(int)(&(p_Var12->vertex).x)[iVar13] != instance_00) {
+    iVar8 = (uint)local_58[0].g + (iVar10 * pLVar11->g >> 0xc);
+    local_58[0].g = (byte)iVar8;
+    if (iVar8 < 0) {
+      local_58[0].g = 0;
+    }
+    if (0xff < iVar8) {
+      local_58[0].g = 0xff;
+    }
+    iVar10 = (uint)local_58[0].b + (iVar10 * pLVar11->b >> 0xc);
+    local_58[0].b = (byte)iVar10;
+    if (iVar10 < 0) {
+      local_58[0].b = 0;
+    }
+    if (0xff < iVar10) {
+      local_58[0].b = 0xff;
+    }
+  }
                     /* WARNING: Subroutine does not return */
-      LoadAverageCol(&p_Var18->r0,&p_Var17->r0,0x1000,0,auStack80);
-    }
-  }
-  return;
+  LoadAverageCol((byte *)local_58,(byte *)&instance->light_color,0x100,0xf00,
+                 (undefined *)&instance->light_color);
 }
 
 
@@ -559,18 +468,18 @@ LAB_80035f9c:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LIGHT_SetAmbientInstance(struct _Instance *instance /*$v0*/, struct Level *level /*$a1*/)
- // line 555, offset 0x80036498
+ // line 543, offset 0x80036080
 	/* begin block 1 */
-		// Start line: 556
-		// Start offset: 0x80036498
+		// Start line: 544
+		// Start offset: 0x80036080
 	/* end block 1 */
-	// End offset: 0x80036498
-	// End Line: 556
+	// End offset: 0x80036080
+	// End Line: 544
 
 	/* begin block 2 */
-		// Start line: 1247
+		// Start line: 1209
 	/* end block 2 */
-	// End Line: 1248
+	// End Line: 1210
 
 void LIGHT_SetAmbientInstance(_Instance *instance,Level *level)
 
@@ -585,50 +494,169 @@ void LIGHT_SetAmbientInstance(_Instance *instance,Level *level)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ LIGHT_SetMatrixForLightGroupInstance(struct _Instance *instance /*$s0*/, struct Level *level /*$a1*/)
- // line 569, offset 0x800364c8
+// void /*$ra*/ LIGHT_SetMatrixForLightGroupInstance(struct _Instance *instance /*$s2*/, struct Level *level /*$a1*/)
+ // line 557, offset 0x800360b0
 	/* begin block 1 */
-		// Start line: 570
-		// Start offset: 0x800364C8
+		// Start line: 558
+		// Start offset: 0x800360B0
 		// Variables:
-	// 		struct MATRIX lgt_cat; // stack offset -40
-	// 		struct LightList *lightList; // $v0
-	// 		int lightGrp; // $v1
+	// 		struct MATRIX *lgt; // $s0
+	// 		struct MATRIX lgt_cat; // stack offset -128
+	// 		struct MATRIX lm; // stack offset -96
+	// 		struct MATRIX cm; // stack offset -64
+	// 		struct VECTOR half; // stack offset -32
+	// 		struct LightList *lightList; // $s0
+	// 		int lightGrp; // $s1
+
+		/* begin block 1.1 */
+			// Start line: 660
+			// Start offset: 0x80036414
+			// TypeDefs:
+		// 		struct LIGHT3D_224fake cmm
+		/* end block 1.1 */
+		// End offset: 0x80036414
+		// End Line: 660
 	/* end block 1 */
-	// End offset: 0x80036634
-	// End Line: 682
+	// End offset: 0x80036464
+	// End Line: 669
 
 	/* begin block 2 */
-		// Start line: 1275
+		// Start line: 1237
 	/* end block 2 */
-	// End Line: 1276
+	// End Line: 1238
 
 void LIGHT_SetMatrixForLightGroupInstance(_Instance *instance,Level *level)
 
 {
-  int iVar1;
-  uint local_28 [8];
+  MATRIX *pMVar1;
+  LightList *pLVar2;
+  LightGroup *pLVar3;
+  uint uVar4;
+  uint local_80;
+  undefined4 local_7c;
+  undefined4 local_78;
+  undefined4 local_74;
+  undefined4 local_70;
+  long local_6c;
+  long local_68;
+  long local_64;
+  short local_60;
+  short local_5e;
+  short local_5c;
+  short local_5a;
+  short local_58;
+  short local_56;
+  undefined2 local_54;
+  undefined2 local_52;
+  undefined2 local_50;
+  int local_40;
+  undefined4 local_3c;
+  undefined4 local_38;
+  undefined4 local_34;
+  uint local_30;
+  undefined4 local_20;
+  undefined4 local_1c;
+  undefined4 local_18;
+  undefined4 local_14;
   
-  if (instance->matrix != (MATRIX *)0x0) {
-    if (((theCamera.core.vvNormalWorVecMat[0]._18_2_ == 0) ||
-        (level->spectrallightList == (LightList *)0x0)) ||
-       (iVar1 = level->spectrallightList->numLightGroups, iVar1 == 0)) {
-      if ((level->lightList != (LightList *)0x0) &&
-         (level->lightList->numLightGroups < (int)(uint)instance->lightGroup)) {
-        instance->lightGroup = '\0';
-      }
-    }
-    else {
-      if (iVar1 < (int)(uint)instance->spectralLightGroup) {
-        instance->spectralLightGroup = '\0';
-      }
-    }
-    LIGHT_SetAmbientInstance(instance,level);
-    if ((instance->lightMatrix == 0) && ((instance->flags & 1U) == 0)) {
-                    /* WARNING: Subroutine does not return */
-      RotMatrix((ushort *)&instance->rotation,local_28);
-    }
+  local_20 = 0x800;
+  local_1c = 0x800;
+  local_18 = 0x800;
+  local_14 = 0;
+  uVar4 = (uint)instance->lightGroup;
+  if (instance->matrix == (MATRIX *)0x0) {
+    return;
   }
+  if (((gameTrackerX.gameData.asmData.MorphType == 0) ||
+      (pLVar2 = level->spectrallightList, pLVar2 == (LightList *)0x0)) ||
+     (pLVar2->numLightGroups == 0)) {
+    pLVar2 = level->lightList;
+    if ((pLVar2 == (LightList *)0x0) || ((int)uVar4 <= pLVar2->numLightGroups)) goto LAB_8003617c;
+    instance->lightGroup = '\0';
+  }
+  else {
+    uVar4 = (uint)instance->spectralLightGroup;
+    if ((int)uVar4 <= pLVar2->numLightGroups) goto LAB_8003617c;
+    instance->spectralLightGroup = '\0';
+  }
+  uVar4 = 0;
+LAB_8003617c:
+  LIGHT_SetAmbientInstance(instance,level);
+  if (pLVar2->numLightGroups == 0) {
+    pLVar3 = &default_lightgroup;
+  }
+  else {
+    pLVar3 = pLVar2->lightGroupList + uVar4;
+  }
+  if ((int)instance->lightMatrix == 0) {
+    if ((instance->flags & 1U) == 0) {
+                    /* WARNING: Subroutine does not return */
+      RotMatrix((ushort *)&instance->rotation,&local_80);
+    }
+    pMVar1 = instance->matrix;
+    local_80 = *(uint *)pMVar1->m;
+    local_7c = *(undefined4 *)(pMVar1->m + 2);
+    local_78 = *(undefined4 *)(pMVar1->m + 4);
+    local_74 = *(undefined4 *)(pMVar1->m + 6);
+    local_70 = *(undefined4 *)(pMVar1->m + 8);
+    local_6c = pMVar1->t[0];
+    local_68 = pMVar1->t[1];
+    local_64 = pMVar1->t[2];
+  }
+  else {
+    pMVar1 = instance->matrix + (int)instance->lightMatrix;
+    local_80 = *(uint *)pMVar1->m;
+    local_7c = *(undefined4 *)(pMVar1->m + 2);
+    local_78 = *(undefined4 *)(pMVar1->m + 4);
+    local_74 = *(undefined4 *)(pMVar1->m + 6);
+    local_70 = *(undefined4 *)(pMVar1->m + 8);
+    local_6c = pMVar1->t[0];
+    local_68 = pMVar1->t[1];
+    local_64 = pMVar1->t[2];
+  }
+  if (instance->extraLight == (void *)0x0) {
+    MulMatrix0((undefined4 *)pLVar3,(ushort *)&local_80,&local_80);
+    SetLightMatrix(&local_80);
+    if ((instance->flags & 0x200000U) != 0) {
+      local_40 = *(int *)(pLVar3->colorMatrix).m;
+      local_3c = *(undefined4 *)((pLVar3->colorMatrix).m + 2);
+      local_38 = *(undefined4 *)((pLVar3->colorMatrix).m + 4);
+      local_34 = *(undefined4 *)((pLVar3->colorMatrix).m + 6);
+      local_30 = *(uint *)((pLVar3->colorMatrix).m + 8);
+                    /* WARNING: Subroutine does not return */
+      ScaleMatrix((int *)&local_40,&local_20);
+    }
+    pMVar1 = &pLVar3->colorMatrix;
+  }
+  else {
+    local_60 = (pLVar3->lightMatrix).m[0];
+    local_5e = (pLVar3->lightMatrix).m[1];
+    local_5c = (pLVar3->lightMatrix).m[2];
+    local_5a = (pLVar3->lightMatrix).m[3];
+    local_58 = (pLVar3->lightMatrix).m[4];
+    local_56 = (pLVar3->lightMatrix).m[5];
+    local_54 = (undefined2)
+               ((int)(instance->extraLightDir).x * (int)instance->extraLightScale >> 0xc);
+    local_52 = (undefined2)
+               ((int)(instance->extraLightDir).y * (int)instance->extraLightScale >> 0xc);
+    local_50 = (undefined2)
+               ((int)(instance->extraLightDir).z * (int)instance->extraLightScale >> 0xc);
+    local_40 = *(int *)(pLVar3->colorMatrix).m;
+    local_34 = *(undefined4 *)((pLVar3->colorMatrix).m + 6);
+    local_3c = CONCAT22((pLVar3->colorMatrix).m[3],
+                        (ushort)*(byte *)((int)instance->extraLight + 8) << 4);
+    local_38 = CONCAT22((ushort)*(byte *)((int)instance->extraLight + 9) << 4,
+                        (pLVar3->colorMatrix).m[4]);
+    local_30 = local_30 & 0xffff0000 | (uint)*(byte *)((int)instance->extraLight + 10) << 4;
+    MulMatrix0((undefined4 *)&local_60,(ushort *)&local_80,&local_80);
+    SetLightMatrix(&local_80);
+    if ((instance->flags & 0x200000U) != 0) {
+                    /* WARNING: Subroutine does not return */
+      ScaleMatrix((int *)&local_40,&local_20);
+    }
+    pMVar1 = (MATRIX *)&local_40;
+  }
+  SetColorMatrix((undefined4 *)pMVar1);
   return;
 }
 
@@ -637,10 +665,10 @@ void LIGHT_SetMatrixForLightGroupInstance(_Instance *instance,Level *level)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LIGHT_DrawShadow(struct MATRIX *wcTransform /*$s2*/, struct _Instance *instance /*$s1*/, struct _PrimPool *primPool /*$s3*/, unsigned long **ot /*$s4*/)
- // line 730, offset 0x80036644
+ // line 717, offset 0x8003647c
 	/* begin block 1 */
-		// Start line: 731
-		// Start offset: 0x80036644
+		// Start line: 718
+		// Start offset: 0x8003647C
 		// Variables:
 	// 		struct SVECTOR face_orient; // stack offset -112
 	// 		struct MATRIX rot; // stack offset -104
@@ -648,34 +676,20 @@ void LIGHT_SetMatrixForLightGroupInstance(_Instance *instance,Level *level)
 	// 		struct _Vector scale; // stack offset -40
 	// 		struct _Instance *playerInstance; // $s0
 	/* end block 1 */
-	// End offset: 0x80036908
-	// End Line: 804
+	// End offset: 0x80036740
+	// End Line: 791
 
 	/* begin block 2 */
-		// Start line: 1460
+		// Start line: 1428
 	/* end block 2 */
-	// End Line: 1461
+	// End Line: 1429
 
 void LIGHT_DrawShadow(MATRIX *wcTransform,_Instance *instance,_PrimPool *primPool,ulong **ot)
 
 {
-  short sVar1;
-  int iVar2;
-  long x;
-  ushort local_70;
-  short local_6e;
-  short local_6c;
-  uint local_68 [20];
-  
   if ((int)(instance->position).z + -0x500 < (int)(instance->shadowPosition).z) {
-    sVar1 = MATH3D_FastAtan2((int)(instance->wNormal).y,(int)(instance->wNormal).z);
-    local_70 = -sVar1;
-    iVar2 = (int)(instance->wNormal).x;
-    x = MATH3D_FastSqrt0(0x1000000 - iVar2 * iVar2);
-    local_6e = MATH3D_FastAtan2((int)(instance->wNormal).x,x);
-    local_6c = (instance->rotation).z;
                     /* WARNING: Subroutine does not return */
-    RotMatrix(&local_70,local_68);
+    MATH3D_FastAtan2((int)(instance->wNormal).y,(int)(instance->wNormal).z);
   }
   return;
 }
@@ -685,10 +699,10 @@ void LIGHT_DrawShadow(MATRIX *wcTransform,_Instance *instance,_PrimPool *primPoo
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LIGHT_CalcShadowPositions(struct GameTracker *gameTracker /*$a0*/)
- // line 806, offset 0x80036928
+ // line 793, offset 0x80036760
 	/* begin block 1 */
-		// Start line: 807
-		// Start offset: 0x80036928
+		// Start line: 794
+		// Start offset: 0x80036760
 		// Variables:
 	// 		struct _InstanceList *instanceList; // $v0
 	// 		struct _Instance *instance; // $s0
@@ -697,13 +711,13 @@ void LIGHT_DrawShadow(MATRIX *wcTransform,_Instance *instance,_PrimPool *primPoo
 	// 		struct _Position oldPos; // stack offset -16
 	// 		struct Level *level; // $v0
 	/* end block 1 */
-	// End offset: 0x80036C18
-	// End Line: 910
+	// End offset: 0x80036A50
+	// End Line: 897
 
 	/* begin block 2 */
-		// Start line: 1734
+		// Start line: 1701
 	/* end block 2 */
-	// End Line: 1735
+	// End Line: 1702
 
 void LIGHT_CalcShadowPositions(GameTracker *gameTracker)
 
@@ -718,11 +732,11 @@ void LIGHT_CalcShadowPositions(GameTracker *gameTracker)
       return;
     }
     if ((instance->flags2 & 0x40U) == 0) {
-LAB_80036bd4:
+LAB_80036a0c:
       if ((_Terrain *)instance->tfaceLevel != (_Terrain *)0x0) {
         tface = instance->tface;
         terrain = *(_Terrain **)(_Terrain *)instance->tfaceLevel;
-LAB_80036bec:
+LAB_80036a24:
         LIGHT_CalcLightValue(tface,instance,terrain);
       }
     }
@@ -734,11 +748,11 @@ LAB_80036bec:
           STREAM_GetLevelWithID(instance->currentStreamUnitID);
         }
         tface = instance->waterFace;
-        if (tface == (_TFace *)0x0) goto LAB_80036bd4;
+        if (tface == (_TFace *)0x0) goto LAB_80036a0c;
         terrain = instance->waterFaceTerrain;
-        goto LAB_80036bec;
+        goto LAB_80036a24;
       }
-      if ((instance->flags2 & 0x40U) == 0) goto LAB_80036bd4;
+      if ((instance->flags2 & 0x40U) == 0) goto LAB_80036a0c;
     }
     instance->flags = instance->flags & 0xf7ffffff;
     instance = instance->next;
@@ -749,17 +763,72 @@ LAB_80036bec:
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ LIGHT_Restore(struct LightInfo *lightInfo /*$a0*/)
- // line 1361, offset 0x80036c28
+// void /*$ra*/ LIGHT_InitSources(struct LightInfo *lightInfo /*$s1*/)
+ // line 917, offset 0x80036a60
 	/* begin block 1 */
-		// Start line: 2722
+		// Start line: 918
+		// Start offset: 0x80036A60
+		// Variables:
+	// 		struct PointLight *pointLight; // $s0
+	// 		struct PointLight *endPointLight; // $s2
+	// 		struct SpotLight *spotLight; // $s0
+	// 		struct SpotLight *endSpotLight; // $s2
 	/* end block 1 */
-	// End Line: 2723
+	// End offset: 0x80036B00
+	// End Line: 950
 
 	/* begin block 2 */
-		// Start line: 2405
+		// Start line: 1961
 	/* end block 2 */
-	// End Line: 2406
+	// End Line: 1962
+
+void LIGHT_InitSources(LightInfo *lightInfo)
+
+{
+  PointLight *node;
+  SpotLight *node_00;
+  
+  node = lightInfo->pointLightPool;
+  (lightInfo->usedPointLightList).next = (NodeType *)0x0;
+  (lightInfo->usedPointLightList).prev = (NodeType *)0x0;
+  (lightInfo->freePointLightList).next = (NodeType *)0x0;
+  (lightInfo->freePointLightList).prev = (NodeType *)0x0;
+  (lightInfo->activePointLightList).next = (NodeType *)0x0;
+  (lightInfo->activePointLightList).prev = (NodeType *)0x0;
+  while (node < (PointLight *)&lightInfo->usedPointLightList) {
+    LIST_InsertFunc(&lightInfo->freePointLightList,(NodeType *)node);
+    node = node + 1;
+  }
+  node_00 = lightInfo->spotLightPool;
+  (lightInfo->usedSpotLightList).next = (NodeType *)0x0;
+  (lightInfo->usedSpotLightList).prev = (NodeType *)0x0;
+  (lightInfo->freeSpotLightList).next = (NodeType *)0x0;
+  (lightInfo->freeSpotLightList).prev = (NodeType *)0x0;
+  (lightInfo->activeSpotLightList).next = (NodeType *)0x0;
+  (lightInfo->activeSpotLightList).prev = (NodeType *)0x0;
+  while (node_00 < (SpotLight *)&lightInfo->usedSpotLightList) {
+    LIST_InsertFunc(&lightInfo->freeSpotLightList,(NodeType *)node_00);
+    node_00 = node_00 + 1;
+  }
+  lightInfo->numSavedColors = 0;
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ LIGHT_Restore(struct LightInfo *lightInfo /*$a0*/)
+ // line 1348, offset 0x80036b1c
+	/* begin block 1 */
+		// Start line: 2862
+	/* end block 1 */
+	// End Line: 2863
+
+	/* begin block 2 */
+		// Start line: 2863
+	/* end block 2 */
+	// End Line: 2864
 
 void LIGHT_Restore(LightInfo *lightInfo)
 
@@ -771,76 +840,373 @@ void LIGHT_Restore(LightInfo *lightInfo)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ LIGHT_CalcDQPTable(struct Level *level /*$a3*/)
- // line 1600, offset 0x80036c30
+// void /*$ra*/ LIGHT_SourcesAndTerrain(struct LightInfo *lightInfo /*$a0*/, struct _Terrain *terrain /*$a1*/)
+ // line 1352, offset 0x80036b24
 	/* begin block 1 */
-		// Start line: 1601
-		// Start offset: 0x80036C30
+		// Start line: 2870
+	/* end block 1 */
+	// End Line: 2871
+
+	/* begin block 2 */
+		// Start line: 2871
+	/* end block 2 */
+	// End Line: 2872
+
+void LIGHT_SourcesAndTerrain(LightInfo *lightInfo,_Terrain *terrain)
+
+{
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ LIGHT_ActivateSources(struct _CameraCore_Type *cameraCore /*$s2*/, struct Level *level /*$a1*/, struct NodeType *activeLightList /*$s3*/, struct NodeType *usedLightList /*$s4*/)
+ // line 1383, offset 0x80036b2c
+	/* begin block 1 */
+		// Start line: 1384
+		// Start offset: 0x80036B2C
+		// Variables:
+	// 		struct NodeType lightList; // stack offset -32
+	// 		struct CDLight *light; // $s0
+
+		/* begin block 1.1 */
+			// Start line: 1392
+			// Start offset: 0x80036B74
+			// Variables:
+		// 		struct CDLight *next; // $s1
+		/* end block 1.1 */
+		// End offset: 0x80036BB4
+		// End Line: 1403
+
+		/* begin block 1.2 */
+			// Start line: 1410
+			// Start offset: 0x80036BD0
+			// Variables:
+		// 		struct CDLight *next; // $s1
+		/* end block 1.2 */
+		// End offset: 0x80036C18
+		// End Line: 1420
+	/* end block 1 */
+	// End offset: 0x80036C24
+	// End Line: 1423
+
+	/* begin block 2 */
+		// Start line: 2759
+	/* end block 2 */
+	// End Line: 2760
+
+void LIGHT_ActivateSources
+               (_CameraCore_Type *cameraCore,Level *level,NodeType *activeLightList,
+               NodeType *usedLightList)
+
+{
+  undefined auStack32 [8];
+  
+                    /* WARNING: Subroutine does not return */
+  memset(auStack32,0,8);
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ LIGHT_RelocatePointerInList(struct Level *oldLevel /*$a0*/, long sizeOfLevel /*$a1*/, long offset /*$a2*/, struct NodeType *currentLightList /*$a3*/)
+ // line 1448, offset 0x80036c4c
+	/* begin block 1 */
+		// Start line: 1450
+		// Start offset: 0x80036C4C
+		// Variables:
+	// 		struct CDLight *light; // $a3
+	/* end block 1 */
+	// End offset: 0x80036CF4
+	// End Line: 1470
+
+	/* begin block 2 */
+		// Start line: 3034
+	/* end block 2 */
+	// End Line: 3035
+
+	/* begin block 3 */
+		// Start line: 3035
+	/* end block 3 */
+	// End Line: 3036
+
+	/* begin block 4 */
+		// Start line: 3037
+	/* end block 4 */
+	// End Line: 3038
+
+void LIGHT_RelocatePointerInList
+               (Level *oldLevel,long sizeOfLevel,long offset,NodeType *currentLightList)
+
+{
+  NodeType *pNVar1;
+  NodeType *pNVar2;
+  Level *pLVar3;
+  Level *pLVar4;
+  
+  pLVar3 = (Level *)currentLightList->next;
+  if ((oldLevel <= pLVar3) && (pLVar3 <= (Level *)((int)&oldLevel->terrain + sizeOfLevel))) {
+    pNVar1 = (NodeType *)0x0;
+    if (pLVar3 != (Level *)0x0) {
+      pNVar1 = (NodeType *)((int)&pLVar3->terrain + offset);
+    }
+    currentLightList->next = pNVar1;
+  }
+  pNVar1 = currentLightList->next;
+  pLVar3 = (Level *)((int)&oldLevel->terrain + sizeOfLevel);
+  while (pNVar1 != (NodeType *)0x0) {
+    pLVar4 = (Level *)pNVar1->prev;
+    if ((oldLevel <= pLVar4) && (pLVar4 <= pLVar3)) {
+      pNVar2 = (NodeType *)0x0;
+      if (pLVar4 != (Level *)0x0) {
+        pNVar2 = (NodeType *)((int)&pLVar4->terrain + offset);
+      }
+      pNVar1->prev = pNVar2;
+    }
+    pLVar4 = (Level *)pNVar1->next;
+    if ((oldLevel <= pLVar4) && (pLVar4 <= pLVar3)) {
+      pNVar2 = (NodeType *)0x0;
+      if (pLVar4 != (Level *)0x0) {
+        pNVar2 = (NodeType *)((int)&pLVar4->terrain + offset);
+      }
+      pNVar1->next = pNVar2;
+    }
+    pNVar1 = pNVar1->next;
+  }
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ LIGHT_RelocateLights(struct LightInfo *lightInfo /*$s3*/, struct Level *oldLevel /*$s0*/, long sizeOfLevel /*$s1*/, long offset /*$s2*/)
+ // line 1472, offset 0x80036cfc
+	/* begin block 1 */
+		// Start line: 3082
+	/* end block 1 */
+	// End Line: 3083
+
+void LIGHT_RelocateLights(LightInfo *lightInfo,Level *oldLevel,long sizeOfLevel,long offset)
+
+{
+  LIGHT_RelocatePointerInList(oldLevel,sizeOfLevel,offset,&lightInfo->activeSpotLightList);
+  LIGHT_RelocatePointerInList(oldLevel,sizeOfLevel,offset,&lightInfo->usedSpotLightList);
+  LIGHT_RelocatePointerInList(oldLevel,sizeOfLevel,offset,&lightInfo->activePointLightList);
+  LIGHT_RelocatePointerInList(oldLevel,sizeOfLevel,offset,&lightInfo->usedPointLightList);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ LIGHT_ClassifySources(struct _CameraCore_Type *cameraCore /*$s0*/, struct Level *level /*$s2*/, struct LightInfo *lightInfo /*$s1*/)
+ // line 1485, offset 0x80036d90
+	/* begin block 1 */
+		// Start line: 3109
+	/* end block 1 */
+	// End Line: 3110
+
+void LIGHT_ClassifySources(_CameraCore_Type *cameraCore,Level *level,LightInfo *lightInfo)
+
+{
+  LIGHT_ActivateSources
+            (cameraCore,level,&lightInfo->activeSpotLightList,&lightInfo->usedSpotLightList);
+  LIGHT_ActivateSources
+            (cameraCore,level,&lightInfo->activePointLightList,&lightInfo->usedPointLightList);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// long /*$ra*/ LIGHT_CollideInstanceAndSphere(struct _Instance *instance /*$a0*/, struct _Sphere *sphere /*$a1*/)
+ // line 1498, offset 0x80036de8
+	/* begin block 1 */
+		// Start line: 1499
+		// Start offset: 0x80036DE8
+		// Variables:
+	// 		struct _SVector instToSphere; // stack offset -8
+	// 		long distanceSq; // $v0
+	// 		long radius; // $v0
+	// 		long radiusSquared; // $v1
+	/* end block 1 */
+	// End offset: 0x80036DE8
+	// End Line: 1499
+
+	/* begin block 2 */
+		// Start line: 3136
+	/* end block 2 */
+	// End Line: 3137
+
+	/* begin block 3 */
+		// Start line: 3141
+	/* end block 3 */
+	// End Line: 3142
+
+long LIGHT_CollideInstanceAndSphere(_Instance *instance,_Sphere *sphere)
+
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  
+  iVar1 = (int)(((uint)(ushort)(sphere->position).x - (uint)(ushort)(instance->position).x) *
+               0x10000) >> 0x10;
+  iVar2 = (int)(((uint)(ushort)(sphere->position).y - (uint)(ushort)(instance->position).y) *
+               0x10000) >> 0x10;
+  iVar3 = (int)(((uint)(ushort)(sphere->position).z - (uint)(ushort)(instance->position).z) *
+               0x10000) >> 0x10;
+  iVar4 = (int)instance->object->modelList[instance->currentModel]->maxRad + (uint)sphere->radius;
+  return (uint)(iVar1 * iVar1 + iVar2 * iVar2 + iVar3 * iVar3 < iVar4 * iVar4);
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ LIGHT_SourcesAndInstances(struct LightInfo *lightInfo /*$s2*/, struct _InstanceList *instanceList /*$a1*/)
+ // line 1521, offset 0x80036e9c
+	/* begin block 1 */
+		// Start line: 1522
+		// Start offset: 0x80036E9C
+		// Variables:
+	// 		long dp; // $a0
+	// 		struct _SVector lightToInst; // stack offset -24
+	// 		struct SpotLight *spotLight; // $s0
+	// 		struct PointLight *pointLight; // $s0
+	// 		struct _Instance *instance; // $s1
+	/* end block 1 */
+	// End offset: 0x800370A0
+	// End Line: 1577
+
+	/* begin block 2 */
+		// Start line: 3201
+	/* end block 2 */
+	// End Line: 3202
+
+void LIGHT_SourcesAndInstances(LightInfo *lightInfo,_InstanceList *instanceList)
+
+{
+  long lVar1;
+  NodeType *pNVar2;
+  _Instance *instance;
+  _Normal local_18;
+  
+  instance = instanceList->first;
+  do {
+    if (instance == (_Instance *)0x0) {
+      return;
+    }
+    instance->extraLight = (void *)0x0;
+    pNVar2 = (lightInfo->activeSpotLightList).next;
+    while (pNVar2 != (NodeType *)0x0) {
+      lVar1 = LIGHT_CollideInstanceAndSphere(instance,(_Sphere *)&pNVar2[1].next);
+      if (lVar1 != 0) {
+        local_18.x = (instance->position).x - *(short *)&pNVar2[3].prev;
+        local_18.y = (instance->position).y - *(short *)((int)&pNVar2[3].prev + 2);
+        local_18.z = (instance->position).z - *(short *)&pNVar2[3].next;
+                    /* WARNING: Subroutine does not return */
+        MATH3D_Normalize(&local_18);
+      }
+      pNVar2 = pNVar2->next;
+    }
+    pNVar2 = (lightInfo->activePointLightList).next;
+    while (pNVar2 != (NodeType *)0x0) {
+      lVar1 = LIGHT_CollideInstanceAndSphere(instance,(_Sphere *)&pNVar2[1].next);
+      if (lVar1 != 0) {
+        local_18.x = (instance->position).x - *(short *)&pNVar2[1].next;
+        local_18.y = (instance->position).y - *(short *)((int)&pNVar2[1].next + 2);
+        local_18.z = (instance->position).z - *(short *)&pNVar2[2].prev;
+                    /* WARNING: Subroutine does not return */
+        MATH3D_Normalize(&local_18);
+      }
+      pNVar2 = pNVar2->next;
+    }
+    instance = instance->next;
+  } while( true );
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ LIGHT_CalcDQPTable(struct Level *level /*$a3*/)
+ // line 1586, offset 0x800370b8
+	/* begin block 1 */
+		// Start line: 1587
+		// Start offset: 0x800370B8
 		// Variables:
 	// 		long dqa; // $a1
 	// 		long limit; // $t0
 
 		/* begin block 1.1 */
-			// Start line: 1614
-			// Start offset: 0x80036C78
+			// Start line: 1600
+			// Start offset: 0x80037100
 		/* end block 1.1 */
-		// End offset: 0x80036CA0
-		// End Line: 1621
+		// End offset: 0x80037128
+		// End Line: 1607
 
 		/* begin block 1.2 */
-			// Start line: 1624
-			// Start offset: 0x80036CB0
+			// Start line: 1610
+			// Start offset: 0x80037138
 		/* end block 1.2 */
-		// End offset: 0x80036CE4
-		// End Line: 1631
+		// End offset: 0x8003716C
+		// End Line: 1617
 	/* end block 1 */
-	// End offset: 0x80036D3C
-	// End Line: 1661
+	// End offset: 0x800371C4
+	// End Line: 1647
 
 	/* begin block 2 */
-		// Start line: 3200
+		// Start line: 3341
 	/* end block 2 */
-	// End Line: 3201
+	// End Line: 3342
 
 void LIGHT_CalcDQPTable(Level *level)
 
 {
-  long lVar1;
+  uint uVar1;
   uint uVar2;
-  uint uVar3;
-  ushort uVar4;
-  undefined *puVar5;
+  ushort uVar3;
+  undefined *puVar4;
   
-  uVar3 = (uint)level->fogFar;
-  uVar2 = (uint)level->fogNear;
-  if (uVar3 != uVar2) {
-    puVar5 = (undefined *)-((int)(uVar3 * uVar2) / (int)(uVar3 - uVar2));
-    if (0x9ffe < (int)puVar5) {
-      puVar5 = &DAT_00009ffe;
-      uVar4 = (ushort)((int)(uVar3 * 0x9ffe) / (int)(&DAT_00009ffe + -uVar3));
-      if ((uint)level->holdFogNear == uVar2) {
-        level->holdFogNear = uVar4;
+  uVar2 = (uint)level->fogFar;
+  uVar1 = (uint)level->fogNear;
+  if (uVar2 != uVar1) {
+    puVar4 = (undefined *)-((int)(uVar2 * uVar1) / (int)(uVar2 - uVar1));
+    if (0x9ffe < (int)puVar4) {
+      puVar4 = &DAT_00009ffe;
+      uVar3 = (ushort)((int)(uVar2 * 0x9ffe) / (int)(&DAT_00009ffe + -uVar2));
+      if ((uint)level->holdFogNear == uVar1) {
+        level->holdFogNear = uVar3;
       }
-      level->fogNear = uVar4;
+      level->fogNear = uVar3;
     }
-    if ((int)puVar5 < -0x9ffe) {
-      uVar4 = (ushort)((int)((uint)level->fogFar * -0x9ffe) / (int)(-0x9ffe - (uint)level->fogFar));
+    if ((int)puVar4 < -0x9ffe) {
+      uVar3 = (ushort)((int)((uint)level->fogFar * -0x9ffe) / (int)(-0x9ffe - (uint)level->fogFar));
       if (level->holdFogNear == level->fogNear) {
-        level->holdFogNear = uVar4;
+        level->holdFogNear = uVar3;
       }
-      level->fogNear = uVar4;
-      puVar5 = (undefined *)0xffff6002;
+      level->fogNear = uVar3;
+      puVar4 = (undefined *)0xffff6002;
     }
     depthQFogStart =
-         ((int)puVar5 * -0x1000) /
+         ((int)puVar4 * -0x1000) /
          ((int)((uint)level->fogFar << 0xc) / (int)((uint)level->fogFar - (uint)level->fogNear));
-    depthQBlendStart = depthQFogStart;
-    if (*(short *)&level->backColorR == 0) {
-      depthQBlendStart = 0xffff;
+    if (*(short *)&level->backColorR != 0) {
+      depthQBlendStart = depthQFogStart;
+      LIGHT_CalcDQPTable((char)level->fogNear);
+      return;
     }
-    lVar1 = depthQBlendStart;
+    depthQBlendStart = 0xffff;
     level->depthQFogStart = depthQFogStart;
-    level->depthQBlendStart = lVar1;
+    level->depthQBlendStart = 0xffff;
   }
   return;
 }

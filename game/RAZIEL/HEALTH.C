@@ -5,13 +5,12 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ InitHealthSystem()
- // line 4, offset 0x800a45c8
+ // line 4, offset 0x800a3730
 	/* begin block 1 */
 		// Start line: 8
 	/* end block 1 */
 	// End Line: 9
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void InitHealthSystem(void)
@@ -19,28 +18,26 @@ void InitHealthSystem(void)
 {
   int iVar1;
   
-  _CHAR____800d5614 = 0;
-  _CHAR____800d560c = 1;
-  _CHAR____800d560e = 0;
-  _CHAR____800d5624 = 0;
-  if (theCamera.core.vvNormalWorVecMat[0]._18_2_ == 0) {
-    _CHAR____800d564c = 2;
-    _CHAR____800d5610 = 100000;
+  Raziel.DamageFrequency = 0;
+  Raziel.HealthScale = 1;
+  Raziel.HealthBalls = 0;
+  Raziel.GlyphManaBalls = 0;
+  if (gameTrackerX.gameData.asmData.MorphType == 0) {
+    Raziel.CurrentPlane = 2;
+    Raziel.HitPoints = 100000;
     razMaterialShift();
+    iVar1 = razInBaseArea("under",5);
+    if (iVar1 == 0) {
+      razSetPlayerEventHistory(0x1000);
+    }
+    else {
+      Raziel.HitPoints = 100;
+    }
+    return;
   }
-  else {
-    _CHAR____800d564c = 1;
-    _CHAR____800d5610 = GetMaxHealth();
-    razSpectralShift();
-  }
-  iVar1 = razInBaseArea(InterfaceItem_800cf854.name + 0xc,5);
-  if (iVar1 == 0) {
-    razSetPlayerEventHistory(0x1000);
-  }
-  else {
-    _CHAR____800d5610 = 100;
-  }
-  return;
+  Raziel.CurrentPlane = 1;
+                    /* WARNING: Subroutine does not return */
+  GetMaxHealth();
 }
 
 
@@ -48,30 +45,22 @@ void InitHealthSystem(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GainHealth(int data /*$a0*/)
- // line 32, offset 0x800a4668
+ // line 32, offset 0x800a37d0
 	/* begin block 1 */
 		// Start line: 71
 	/* end block 1 */
 	// End Line: 72
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void GainHealth(int data)
 
 {
-  int iVar1;
-  
   data = data * 20000;
   if (data < 0) {
     data = data + 0xfff;
   }
-  _CHAR____800d5610 = _CHAR____800d5610 + (data >> 0xc);
-  iVar1 = GetMaxHealth();
-  if ((iVar1 <= _CHAR____800d5610) && (_CHAR____800d564c == 1)) {
-    _CHAR____800d5610 = GetMaxHealth();
-    razReaverOn();
-  }
-  return;
+  Raziel.HitPoints = Raziel.HitPoints + (data >> 0xc);
+                    /* WARNING: Subroutine does not return */
+  GetMaxHealth();
 }
 
 
@@ -79,34 +68,28 @@ void GainHealth(int data)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LoseHealth(int amount /*$a0*/)
- // line 47, offset 0x800a46f4
+ // line 47, offset 0x800a385c
 	/* begin block 1 */
 		// Start line: 101
 	/* end block 1 */
 	// End Line: 102
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void LoseHealth(int amount)
 
 {
-  if ((((_BlockVramEntry_800d59a0._12_4_ & 0x1000000) == 0) && (_CHAR____800d5618 == 0)) &&
-     (0x20d < _CHAR____800d5610)) {
+  if ((((ControlFlag & 0x1000000U) == 0) && (Raziel.invincibleTimer == 0)) &&
+     (0x20d < Raziel.HitPoints)) {
     amount = amount * 20000;
     if (amount < 0) {
       amount = amount + 0xfff;
     }
-    _CHAR____800d5610 = _CHAR____800d5610 - (amount >> 0xc);
-    _CHAR____800d5614 = _CHAR____800d5614 - (amount >> 0xc);
-    _CHAR____800d5618 = (int)*(short *)(_PlayerData + 0x34) * 0x1e000;
-    if (_CHAR____800d564c == 1) {
+    Raziel.HitPoints = Raziel.HitPoints - (amount >> 0xc);
+    Raziel.DamageFrequency = Raziel.DamageFrequency - (amount >> 0xc);
+    Raziel.invincibleTimer = (int)PlayerData->healthInvinciblePostHit * 0x1e000;
+    if (Raziel.CurrentPlane == 1) {
       razReaverOff();
-      if (_CHAR____800d5644 != (_Instance *)0x0) {
-                    /* WARNING: Subroutine does not return */
-        INSTANCE_Post(_CHAR____800d5644,0x800101,0);
-      }
     }
-    if ((theCamera.positionAccl._0_4_ & 0x80) == 0) {
+    if ((gameTrackerX.gameFlags & 0x80U) == 0) {
       GAMEPAD_Shock0(1,(int)&DAT_00002328);
     }
   }
@@ -118,46 +101,49 @@ void LoseHealth(int amount)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DrainHealth(int amount /*$a0*/)
- // line 72, offset 0x800a47f0
+ // line 67, offset 0x800a3934
 	/* begin block 1 */
-		// Start line: 153
+		// Start line: 143
 	/* end block 1 */
-	// End Line: 154
+	// End Line: 144
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	/* begin block 2 */
+		// Start line: 145
+	/* end block 2 */
+	// End Line: 146
 
 void DrainHealth(int amount)
 
 {
-  _Instance *instance;
   int iVar1;
+  int iVar2;
   
-  if ((_BlockVramEntry_800d59a0._12_4_ & 0x1000000) == 0) {
+  if ((ControlFlag & 0x1000000U) == 0) {
     if (amount < 0) {
       amount = amount + 0xfff;
     }
-    instance = (_Instance *)(amount >> 0xc);
-    if (_CHAR____800d564c == 1) {
-      iVar1 = (int)*(short *)(_PlayerData + 0x30) * (int)instance * theCamera.tiltList[0][0];
-      if (-1 < iVar1) {
-        ProcessHealth(instance);
-        return;
+    if (Raziel.CurrentPlane == 1) {
+      iVar1 = (int)PlayerData->healthMaterialRate * (amount >> 0xc) * gameTrackerX.timeMult;
+      if (iVar1 < 0) {
+        iVar1 = iVar1 + 0xfff;
       }
-      _CHAR____800d5610 = _CHAR____800d5610 + (iVar1 + 0xfff >> 0xc);
-      if (_CHAR____800d5644 != (_Instance *)0x0) {
-                    /* WARNING: Subroutine does not return */
-        INSTANCE_Post(_CHAR____800d5644,0x800101,0);
-      }
+      iVar2 = Raziel.HitPoints;
+      Raziel.HitPoints = iVar1 >> 0xc;
     }
     else {
-      if ((_CHAR____800d5618 == 0) && (0x20d < _CHAR____800d5610)) {
-        iVar1 = -(int)*(short *)(_PlayerData + 0x32) * (int)instance * theCamera.tiltList[0][0];
-        if (iVar1 < 0) {
-          iVar1 = iVar1 + 0xfff;
-        }
-        _CHAR____800d5610 = _CHAR____800d5610 + (iVar1 >> 0xc);
+      if (Raziel.invincibleTimer != 0) {
+        return;
       }
+      if (Raziel.HitPoints < 0x20e) {
+        return;
+      }
+      iVar2 = -(int)PlayerData->healthSpectralRate * (amount >> 0xc) * gameTrackerX.timeMult;
+      if (iVar2 < 0) {
+        iVar2 = iVar2 + 0xfff;
+      }
+      iVar2 = iVar2 >> 0xc;
     }
+    Raziel.HitPoints = Raziel.HitPoints + iVar2;
   }
   return;
 }
@@ -167,29 +153,25 @@ void DrainHealth(int amount)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ BumpUpHealth()
- // line 97, offset 0x800a490c
+ // line 88, offset 0x800a3a18
 	/* begin block 1 */
-		// Start line: 206
+		// Start line: 185
 	/* end block 1 */
-	// End Line: 207
+	// End Line: 186
 
 	/* begin block 2 */
-		// Start line: 215
+		// Start line: 194
 	/* end block 2 */
-	// End Line: 216
+	// End Line: 195
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void BumpUpHealth(void)
 
 {
-  _CHAR____800d560c = _CHAR____800d560c + 1;
-  if (4 < _CHAR____800d560c) {
-    _CHAR____800d560c = 4;
-  }
-  _CHAR____800d5610 = GetMaxHealth();
-  return;
+  Raziel.HealthScale = Raziel.HealthScale + 1;
+                    /* WARNING: Subroutine does not return */
+  GetMaxHealth();
 }
 
 
@@ -197,25 +179,24 @@ void BumpUpHealth(void)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ GetMaxHealth()
- // line 115, offset 0x800a4950
+ // line 104, offset 0x800a3a44
 	/* begin block 1 */
-		// Start line: 251
+		// Start line: 226
 	/* end block 1 */
-	// End Line: 252
+	// End Line: 227
 
 	/* begin block 2 */
-		// Start line: 252
+		// Start line: 227
 	/* end block 2 */
-	// End Line: 253
+	// End Line: 228
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 int GetMaxHealth(void)
 
 {
-  if (_CHAR____800d564c != 2) {
-    return ((int)_CHAR____800d560c + 1) * 100000;
+  if (Raziel.CurrentPlane != 2) {
+    return ((int)Raziel.HealthScale + 1) * 100000;
   }
   return 100000;
 }
@@ -225,138 +206,57 @@ int GetMaxHealth(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ ProcessHealth(struct _Instance *instance /*$s0*/)
- // line 132, offset 0x800a49a0
+ // line 121, offset 0x800a3a94
 	/* begin block 1 */
-		// Start line: 133
-		// Start offset: 0x800A49A0
+		// Start line: 122
+		// Start offset: 0x800A3A94
 
 		/* begin block 1.1 */
-			// Start line: 228
-			// Start offset: 0x800A4BC8
+			// Start line: 217
+			// Start offset: 0x800A3CC0
 		/* end block 1.1 */
-		// End offset: 0x800A4C5C
-		// End Line: 241
+		// End offset: 0x800A3D54
+		// End Line: 230
 	/* end block 1 */
-	// End offset: 0x800A4E3C
-	// End Line: 289
+	// End offset: 0x800A3F3C
+	// End Line: 278
 
 	/* begin block 2 */
-		// Start line: 264
+		// Start line: 236
 	/* end block 2 */
-	// End Line: 265
+	// End Line: 237
 
 	/* begin block 3 */
-		// Start line: 319
+		// Start line: 294
 	/* end block 3 */
-	// End Line: 320
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 295
 
 void ProcessHealth(_Instance *instance)
 
 {
-  undefined *puVar1;
-  int in_a3;
-  int iVar2;
+  int number;
+  int current_health;
+  int max_health;
   
-  if ((_CHAR____800d5618 == 0) && ((_CHAR____800d57c8 & 0x1000) != 0)) {
-    puVar1 = (undefined *)GetMaxHealth();
-    if ((_CHAR____800d5610 == puVar1) || (_CHAR____800d564c == 2)) {
-      razReaverOn();
-    }
-    else {
-      razReaverOff();
-    }
-    if (_CHAR____800d564c == 1) {
-      if ((instance->waterFace != (_TFace *)0x0) && ((_CHAR____800d561c & 0x10) == 0)) {
-        DrainHealth((int)&DAT_0000a000);
-      }
-      if ((_CHAR____800d5644 == (_Instance *)0x0) ||
-         (puVar1 = (undefined *)GetMaxHealth(), _CHAR____800d5610 != puVar1)) {
-        iVar2 = *(short *)(_PlayerData + 0x30) * theCamera.tiltList[0][0];
-        if (iVar2 < 0) {
-          iVar2 = iVar2 + 0xfff;
-        }
-        _CHAR____800d5610 = _CHAR____800d5610 + (iVar2 >> 0xc);
-      }
-      if ((int)_CHAR____800d5610 < 100000) {
-        razPlaneShift(instance);
-        _CHAR____800d5618 = (int)*(short *)(_PlayerData + 0x36) * 0x1e000;
-        if ((_CHAR____800d5574 & 0x40000) != 0) {
-          CAMERA_ChangeToOutOfWater((Camera *)&theCamera,instance);
-        }
-      }
-      else {
-        if ((int)_CHAR____800d5610 < 150000) {
-          iVar2 = theCamera.tiltList[0][0] * 1000;
-          if (iVar2 < 0) {
-            iVar2 = iVar2 + 0xfff;
-          }
-          _CHAR____800d5614 = _CHAR____800d5614 + -(iVar2 >> 0xc);
-          if ((int)_CHAR____800d5614 < 0) {
-            _CHAR____800d5614 = _CHAR____800d5610 + -100000;
-            if ((int)_CHAR____800d5614 < 0x493e) {
-              _CHAR____800d5614 = &DAT_0000493e;
-            }
-            FX_DoInstancePowerRing
-                      (instance,0x2ee - ((int)(&DAT_0000c350 + -(int)_CHAR____800d5614) * 300) /
-                                        0x7a12,(long *)0x0,0,0);
-            if ((theCamera.positionAccl._0_4_ & 0x80) == 0) {
-              GAMEPAD_Shock1(0x80,(int)&DAT_00005000);
-            }
-          }
-        }
-      }
-      razGetHeldItem();
-      return;
-    }
-    if ((int)_CHAR____800d5610 < 0x20e) {
-      iVar2 = *(short *)(_PlayerData + 0x32) * theCamera.tiltList[0][0];
-      if (iVar2 < 0) {
-        iVar2 = iVar2 + 0xfff;
-      }
-      _CHAR____800d5610 = _CHAR____800d5610 + -(iVar2 >> 0xc);
-    }
-    else {
-      if ((int)_CHAR____800d5610 < 100000) {
-        iVar2 = *(short *)(_PlayerData + 0x32) * theCamera.tiltList[0][0];
-        if (iVar2 < 0) {
-          iVar2 = iVar2 + 0xfff;
-        }
-        _CHAR____800d5610 = _CHAR____800d5610 + (iVar2 >> 0xc);
-      }
-      else {
-        _CHAR____800d5610 = (undefined *)0x186a0;
-      }
-    }
-    if (((_BlockVramEntry_800d59a0._12_4_ & 0x800000) == 0) && ((int)_CHAR____800d5610 < 0x20d)) {
+  if ((Raziel.invincibleTimer == 0) && ((Raziel.playerEventHistory & 0x1000) != 0)) {
                     /* WARNING: Subroutine does not return */
-      SetPhysicsWallCrawlData(0,0,3,in_a3);
-    }
-    if ((int)_CHAR____800d5610 < 0) {
-      *(uint *)&gameTracker.next[0xb].w = *(uint *)&gameTracker.next[0xb].w | 0x80000;
-      if (_CHAR____800d5644 != (_Instance *)0x0) {
-                    /* WARNING: Subroutine does not return */
-        INSTANCE_Post(_CHAR____800d5644,0x800105,0);
-      }
-      razSetPlayerEventHistory(0x8000);
-      _CHAR____800d5610 = &DAT_0000c350;
-      theCamera.core.vvNormalWorVecMat[0]._18_2_ = 1;
-      _CHAR____800d57c4 = _CHAR____800d57c4 | 0x8000;
-      razPlayUnderworldSounds((_Instance *)theCamera.core.vvNormalWorVecMat[1].t[0]);
-    }
+    GetMaxHealth();
+  }
+  Raziel.invincibleTimer = Raziel.invincibleTimer - gameTrackerX.timeMult;
+  if (Raziel.invincibleTimer < 0) {
+    Raziel.invincibleTimer = 0;
+  }
+  number = 0;
+  if (Raziel.CurrentPlane == 1) {
+    number = (int)Raziel.HealthScale;
+    max_health = number * 100000;
+    current_health = Raziel.HitPoints + -100000;
   }
   else {
-    _CHAR____800d5618 = _CHAR____800d5618 - theCamera.tiltList[0][0];
-    if (_CHAR____800d5618 < 0) {
-      _CHAR____800d5618 = 0;
-    }
-    if (_CHAR____800d564c == 1) {
-      razGetHeldItem();
-      return;
-    }
+    max_health = 100000;
+    current_health = Raziel.HitPoints;
   }
-  FX_Health_Spiral(0,(int)_CHAR____800d5610,100000);
+  FX_Health_Spiral(number,current_health,max_health);
   return;
 }
 
@@ -365,13 +265,12 @@ void ProcessHealth(_Instance *instance)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ HealthCheckForLowHealth()
- // line 292, offset 0x800a4e4c
+ // line 281, offset 0x800a3f4c
 	/* begin block 1 */
-		// Start line: 649
+		// Start line: 624
 	/* end block 1 */
-	// End Line: 650
+	// End Line: 625
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 int HealthCheckForLowHealth(void)
@@ -379,19 +278,22 @@ int HealthCheckForLowHealth(void)
 {
   int iVar1;
   int iVar2;
+  int in_a0;
   
   iVar1 = STREAM_IsMorphInProgress();
   iVar2 = 1;
   if (iVar1 == 0) {
-    if (_CHAR____800d564c == 1) {
+    if (Raziel.CurrentPlane == 1) {
       iVar2 = 0;
-      if (_CHAR____800d5610 < 0x18704) {
-        iVar2 = 1;
+      if (Raziel.HitPoints < 0x18704) {
+        iVar1 = 1;
+        razReaverScale(in_a0);
+        return iVar1;
       }
     }
     else {
       iVar2 = 1;
-      if (99 < _CHAR____800d5610) {
+      if (99 < Raziel.HitPoints) {
         iVar2 = 0;
       }
     }
@@ -404,31 +306,29 @@ int HealthCheckForLowHealth(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DrainMana(int amount /*$a0*/)
- // line 314, offset 0x800a4eb8
+ // line 303, offset 0x800a3fb8
 	/* begin block 1 */
-		// Start line: 693
+		// Start line: 668
 	/* end block 1 */
-	// End Line: 694
+	// End Line: 669
 
 	/* begin block 2 */
-		// Start line: 694
+		// Start line: 669
 	/* end block 2 */
-	// End Line: 695
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 670
 
 void DrainMana(int amount)
 
 {
   uint uVar1;
   
-  uVar1 = (uint)_CHAR____800d5624;
-  _CHAR____800d5624 = (ushort)(uVar1 - amount);
+  uVar1 = (uint)Raziel.GlyphManaBalls;
+  Raziel.GlyphManaBalls = (ushort)(uVar1 - amount);
   if ((uVar1 - amount & 0xffff) == 0) {
-    _CHAR____800d5624 = 0;
+    Raziel.GlyphManaBalls = 0;
   }
-  if (_CHAR____800d5626 < _CHAR____800d5624) {
-    _CHAR____800d5624 = _CHAR____800d5626;
+  if (Raziel.GlyphManaMax < Raziel.GlyphManaBalls) {
+    Raziel.GlyphManaBalls = Raziel.GlyphManaMax;
   }
   return;
 }
@@ -438,27 +338,25 @@ void DrainMana(int amount)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SetMana(int amount /*$a0*/)
- // line 324, offset 0x800a4efc
+ // line 313, offset 0x800a3ffc
 	/* begin block 1 */
-		// Start line: 713
+		// Start line: 688
 	/* end block 1 */
-	// End Line: 714
+	// End Line: 689
 
 	/* begin block 2 */
-		// Start line: 714
+		// Start line: 689
 	/* end block 2 */
-	// End Line: 715
+	// End Line: 690
 
-void razReaverBladeOn(void)
+void SetMana(int amount)
 
 {
-  int in_a0;
-  
-  if (in_a0 < 1) {
-    _BlockVramEntry_800d5e1c.w = 0;
+  if (amount < 1) {
+    Raziel.GlyphManaBalls = 0;
     return;
   }
-  _BlockVramEntry_800d5e1c.w = _BlockVramEntry_800d5e1c.h;
+  Raziel.GlyphManaBalls = Raziel.GlyphManaMax;
   return;
 }
 
@@ -467,28 +365,26 @@ void razReaverBladeOn(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HealthInstantDeath(struct _Instance *instance /*$a0*/)
- // line 333, offset 0x800a4f24
+ // line 322, offset 0x800a4024
 	/* begin block 1 */
-		// Start line: 731
+		// Start line: 706
 	/* end block 1 */
-	// End Line: 732
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 707
 
 void HealthInstantDeath(_Instance *instance)
 
 {
-  theCamera.core.vvNormalWorVecMat[0]._18_2_ = 1;
+  gameTrackerX.gameData.asmData.MorphType = 1;
   razSpectralShift();
-  _CHAR____800d5610 = &DAT_0000c350;
-  *(uint *)&gameTracker.next[0xb].w = *(uint *)&gameTracker.next[0xb].w | 0x80000;
-  if (_CHAR____800d5644 != (_Instance *)0x0) {
+  Raziel.HitPoints = (int)&DAT_0000c350;
+  gameTracker->streamFlags = gameTracker->streamFlags | 0x80000;
+  if (Raziel.soulReaver != (_Instance *)0x0) {
                     /* WARNING: Subroutine does not return */
-    INSTANCE_Post(_CHAR____800d5644,0x800105,0);
+    INSTANCE_Post(Raziel.soulReaver,0x800105,0);
   }
   razSetPlayerEventHistory(0x8000);
-  _CHAR____800d57c4 = _CHAR____800d57c4 | 0x8000;
-  razPlayUnderworldSounds((_Instance *)theCamera.core.vvNormalWorVecMat[1].t[0]);
+  Raziel.playerEvent = Raziel.playerEvent | 0x8000;
+  razPlayUnderworldSounds(gameTrackerX.playerInstance);
   return;
 }
 
@@ -497,54 +393,23 @@ void HealthInstantDeath(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ RAZIEL_DebugHealthSetScale(long healthScale /*$a0*/)
- // line 352, offset 0x800a4fa4
+ // line 341, offset 0x800a40a4
 	/* begin block 1 */
-		// Start line: 773
+		// Start line: 748
 	/* end block 1 */
-	// End Line: 774
+	// End Line: 749
 
 	/* begin block 2 */
-		// Start line: 778
+		// Start line: 753
 	/* end block 2 */
-	// End Line: 779
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 754
 
 void RAZIEL_DebugHealthSetScale(long healthScale)
 
 {
-  _CHAR____800d560c = (short)healthScale;
-  _CHAR____800d560e = (_CHAR____800d560c + -1) * 5;
-  _CHAR____800d5610 = (int)_CHAR____800d560c * 100000 + 100000;
-  return;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// void /*$ra*/ RAZIEL_DebugManaSetMax(long manaScale /*$a0*/)
- // line 363, offset 0x800a4ffc
-	/* begin block 1 */
-		// Start line: 800
-	/* end block 1 */
-	// End Line: 801
-
-	/* begin block 2 */
-		// Start line: 802
-	/* end block 2 */
-	// End Line: 803
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void RAZIEL_DebugManaSetMax(long manaScale)
-
-{
-  _CHAR____800d5624 = (undefined2)(manaScale << 2);
-  _CHAR____800d5626 = _CHAR____800d5624;
-  if (0x34 < (manaScale << 2 & 0xfffcU)) {
-    _CHAR____800d5626 = 0x34;
-  }
+  Raziel.HealthScale = (short)healthScale;
+  Raziel.HealthBalls = (Raziel.HealthScale + -1) * 5;
+  Raziel.HitPoints = (int)Raziel.HealthScale * 100000 + 100000;
   return;
 }
 
@@ -553,30 +418,27 @@ void RAZIEL_DebugManaSetMax(long manaScale)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ RAZIEL_DebugHealthFillUp()
- // line 375, offset 0x800a5024
+ // line 352, offset 0x800a40fc
 	/* begin block 1 */
-		// Start line: 824
+		// Start line: 775
 	/* end block 1 */
-	// End Line: 825
+	// End Line: 776
 
 	/* begin block 2 */
-		// Start line: 825
+		// Start line: 776
 	/* end block 2 */
-	// End Line: 826
+	// End Line: 777
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void RAZIEL_DebugHealthFillUp(void)
 
 {
-  _Instance *in_a0;
-  
-  if (_CHAR____800d564c != 1) {
-    razReaverPickup(in_a0,(_Instance *)&LAB_00010000);
+  if (Raziel.CurrentPlane == 1) {
+    Raziel.HitPoints = (int)Raziel.HealthScale * 100000 + 100000;
     return;
   }
-  _CHAR____800d5610 = (int)_CHAR____800d560c * 100000 + 100000;
+  Raziel.HitPoints = 100000;
   return;
 }
 
@@ -585,18 +447,18 @@ void RAZIEL_DebugHealthFillUp(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ RAZIEL_DebugManaFillUp()
- // line 387, offset 0x800a5084
+ // line 364, offset 0x800a415c
 	/* begin block 1 */
-		// Start line: 848
+		// Start line: 799
 	/* end block 1 */
-	// End Line: 849
+	// End Line: 800
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void RAZIEL_DebugManaFillUp(void)
 
 {
-  razReaverBladeOn();
+  SetMana(1);
   return;
 }
 
@@ -604,24 +466,21 @@ void RAZIEL_DebugManaFillUp(void)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ razPlayUnderworldSounds(struct _Instance *instance /*$s3*/)
- // line 395, offset 0x800a50a4
+// void /*$ra*/ razPlayUnderworldSounds(struct _Instance *instance /*$s2*/)
+ // line 372, offset 0x800a417c
 	/* begin block 1 */
-		// Start line: 864
+		// Start line: 815
 	/* end block 1 */
-	// End Line: 865
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 816
 
 void razPlayUnderworldSounds(_Instance *instance)
 
 {
-  if (_CHAR____800d577c != 0) {
-                    /* WARNING: Subroutine does not return */
-    SndEndLoop(_CHAR____800d577c);
-  }
-                    /* WARNING: Subroutine does not return */
-  razSetupSoundRamp(instance,(_SoundRamp *)&CHAR____800d577c,0x1a,-0xfa,-0xfa,0x78,0x78,0,0xdac);
+  razSetupSoundRamp(instance,(_SoundRamp *)&Raziel.soundHandle,0x1a,-0xfa,-0xfa,0x78,0x78,0,0xdac);
+  razSetupSoundRamp(instance,(_SoundRamp *)&Raziel.soundHandle,0x1a,-300,-300,0x78,0x78,0,0xdac);
+  razSetupSoundRamp(instance,(_SoundRamp *)&Raziel.soundHandle,0x12,-0xdc,-0xdc,0x78,0x78,0,0xdac);
+  razSetupSoundRamp(instance,(_SoundRamp *)&Raziel.soundHandle,0x1a,-0xfa,-0xfa,0x78,0x78,0,0xdac);
+  return;
 }
 
 

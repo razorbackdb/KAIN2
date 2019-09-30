@@ -5,15 +5,15 @@
 // decompiled code
 // original method signature: 
 // enum menu_ctrl_t /*$ra*/ menu_get_ctrl(void *gt /*$a0*/)
- // line 18, offset 0x800b87fc
+ // line 18, offset 0x800b713c
 	/* begin block 1 */
 		// Start line: 20
-		// Start offset: 0x800B87FC
+		// Start offset: 0x800B713C
 		// Variables:
-	// 		enum menu_ctrl_t ctrl; // $v1
+	// 		enum menu_ctrl_t ctrl; // $a0
 	/* end block 1 */
-	// End offset: 0x800B8874
-	// End Line: 38
+	// End offset: 0x800B71B0
+	// End Line: 30
 
 	/* begin block 2 */
 		// Start line: 36
@@ -26,31 +26,47 @@
 	// End Line: 38
 
 	/* begin block 4 */
-		// Start line: 38
+		// Start line: 39
 	/* end block 4 */
-	// End Line: 39
+	// End Line: 40
 
 menu_ctrl_t menu_get_ctrl(void *gt)
 
 {
-  menu_ctrl_t mVar1;
-  uint uVar2;
+  uint uVar1;
+  menu_ctrl_t mVar2;
   
-  uVar2 = *(uint *)((int)gt + 0x4c);
-  mVar1 = menu_ctrl_up;
-  if (((((uVar2 & 1) == 0) && (mVar1 = menu_ctrl_down, (uVar2 & 2) == 0)) &&
-      (mVar1 = menu_ctrl_left, (uVar2 & 4) == 0)) && (mVar1 = menu_ctrl_right, (uVar2 & 8) == 0)) {
-    if (((uVar2 & 0x80) == 0) || ((*(uint *)((int)gt + 0x48) & 0x300) != 0)) {
-      mVar1 = menu_ctrl_cancel;
-      if (((uVar2 & 0x10) == 0) && (mVar1 = menu_ctrl_none, (uVar2 & 0x4000) != 0)) {
-        mVar1 = menu_ctrl_start;
+  uVar1 = *(uint *)((int)gt + 0x4c);
+  if ((uVar1 & 1) == 0) {
+    if ((uVar1 & 2) == 0) {
+      if ((uVar1 & 4) == 0) {
+        if ((uVar1 & 8) == 0) {
+          if ((uVar1 & 0x80) == 0) {
+            mVar2 = menu_ctrl_cancel;
+            if (((uVar1 & 0x10) == 0) && (mVar2 = menu_ctrl_none, (uVar1 & 0x4000) != 0)) {
+              mVar2 = menu_ctrl_start;
+            }
+          }
+          else {
+            mVar2 = menu_ctrl_engage;
+          }
+        }
+        else {
+          mVar2 = menu_ctrl_right;
+        }
+      }
+      else {
+        mVar2 = menu_ctrl_left;
       }
     }
     else {
-      mVar1 = menu_ctrl_engage;
+      mVar2 = menu_ctrl_down;
     }
   }
-  return mVar1;
+  else {
+    mVar2 = menu_ctrl_up;
+  }
+  return mVar2;
 }
 
 
@@ -58,28 +74,24 @@ menu_ctrl_t menu_get_ctrl(void *gt)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ menu_print(int xpos /*$a0*/, int ypos /*$a1*/, char *text /*$s1*/, int color /*$s0*/)
- // line 41, offset 0x800b887c
+ // line 33, offset 0x800b71b8
 	/* begin block 1 */
-		// Start line: 82
+		// Start line: 66
 	/* end block 1 */
-	// End Line: 83
+	// End Line: 67
 
-int get_volume(void *gt,sfx_t sfx)
+void menu_print(int xpos,int ypos,char *text,int color)
 
 {
-  int in_v0;
-  char *in_a2;
-  int in_a3;
-  
-  FONT_SetCursor((short)gt,(short)sfx);
-  if (in_a3 != 0) {
-    FONT_SetColorIndex(in_a3);
+  FONT_SetCursor((short)xpos,(short)ypos);
+  if (color != 0) {
+    FONT_SetColorIndex(color);
   }
-  FONT_Print2(in_a2);
-  if (in_a3 != 0) {
+  FONT_Print2(text);
+  if (color != 0) {
     FONT_SetColorIndex(0);
   }
-  return in_v0;
+  return;
 }
 
 
@@ -87,19 +99,17 @@ int get_volume(void *gt,sfx_t sfx)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ menu_text_width(char *text /*$a0*/)
- // line 69, offset 0x800b88e4
+ // line 61, offset 0x800b7220
 	/* begin block 1 */
-		// Start line: 158
+		// Start line: 142
 	/* end block 1 */
-	// End Line: 159
+	// End Line: 143
 
 int menu_text_width(char *text)
 
 {
-  int iVar1;
-  
-  iVar1 = FONT_GetStringWidth(text);
-  return iVar1;
+                    /* WARNING: Subroutine does not return */
+  FONT_GetStringWidth(text);
 }
 
 
@@ -107,26 +117,26 @@ int menu_text_width(char *text)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ menu_sound(enum menu_sound_t sound /*$a0*/)
- // line 92, offset 0x800b8904
+ // line 84, offset 0x800b7240
 	/* begin block 1 */
-		// Start line: 93
-		// Start offset: 0x800B8904
+		// Start line: 85
+		// Start offset: 0x800B7240
 		// Variables:
 	// 		struct menu_sound_entry_t *entry; // $a0
 	/* end block 1 */
-	// End offset: 0x800B8904
-	// End Line: 93
+	// End offset: 0x800B7240
+	// End Line: 85
 
 	/* begin block 2 */
-		// Start line: 204
+		// Start line: 188
 	/* end block 2 */
-	// End Line: 205
+	// End Line: 189
 
 void menu_sound(menu_sound_t sound)
 
 {
-  SndPlay(*(uint *)(&SHORT_800cad9c + sound * 4));
-  return;
+                    /* WARNING: Subroutine does not return */
+  SndPlay((&the_menu_sounds)[sound].sfx);
 }
 
 

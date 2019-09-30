@@ -4,96 +4,41 @@
 
 // decompiled code
 // original method signature: 
-// char * /*$ra*/ NextTimAddr(char *addr /*$a0*/, int w /*$a1*/, int h /*$a2*/, enum bdepth bpp /*$a3*/)
- // line 25, offset 0x800b9538
-	/* begin block 1 */
-		// Start line: 27
-		// Start offset: 0x800B9538
-		// Variables:
-	// 		long addtl; // $v0
-	/* end block 1 */
-	// End offset: 0x800B9574
-	// End Line: 34
-
-	/* begin block 2 */
-		// Start line: 50
-	/* end block 2 */
-	// End Line: 51
-
-	/* begin block 3 */
-		// Start line: 51
-	/* end block 3 */
-	// End Line: 52
-
-	/* begin block 4 */
-		// Start line: 52
-	/* end block 4 */
-	// End Line: 53
-
-int NextTimAddr(int param_1,int param_2,int param_3,int param_4)
-
-{
-  int iVar1;
-  
-  if (param_4 == 0) {
-    iVar1 = (param_2 * param_3 >> 1) + 0x2c;
-  }
-  else {
-    if (param_4 == 1) {
-      iVar1 = param_2 * param_3 + 0x20c;
-    }
-    else {
-      iVar1 = param_2 * param_3 * 2;
-    }
-  }
-  return param_1 + iVar1 + 0x14;
-}
-
-
-
-// decompiled code
-// original method signature: 
 // void /*$ra*/ menuface_initialize()
- // line 76, offset 0x800b9580
+ // line 45, offset 0x800b7d3c
 	/* begin block 1 */
-		// Start line: 77
-		// Start offset: 0x800B9580
+		// Start line: 46
+		// Start offset: 0x800B7D3C
 		// Variables:
-	// 		char *addr; // $s6
-	// 		char *buttonAddr; // $s2
-	// 		int i; // $s5
-	// 		int j; // $s1
+	// 		char prefix[8][4]; // stack offset -224
+	// 		char postfix[3][8]; // stack offset -192
+	// 		char facename[128]; // stack offset -168
+	// 		int i; // $s3
+	// 		int j; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 92
-			// Start offset: 0x800B95AC
+			// Start line: 65
+			// Start offset: 0x800B7EA4
 		/* end block 1.1 */
-		// End offset: 0x800B9684
-		// End Line: 134
+		// End offset: 0x800B7EA4
+		// End Line: 65
 	/* end block 1 */
-	// End offset: 0x800B9684
-	// End Line: 139
+	// End offset: 0x800B7F18
+	// End Line: 76
 
 	/* begin block 2 */
-		// Start line: 152
+		// Start line: 90
 	/* end block 2 */
-	// End Line: 153
+	// End Line: 91
 
-	/* begin block 3 */
-		// Start line: 161
-	/* end block 3 */
-	// End Line: 162
+/* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void menuface_initialize(void)
 
 {
-  long *plVar1;
-  
-  if ((iGpffffa088 == 0) &&
-     (plVar1 = LOAD_ReadFile(s__kain2_game_psx_frontend_faces_t_800cfb40,'\v'),
-     plVar1 != (long *)0x0)) {
+  if (hack_initialized == 0) {
                     /* WARNING: Subroutine does not return */
-    MEMPACK_Malloc(0x380,'-');
+    MEMPACK_Malloc(0x180,'-');
   }
   return;
 }
@@ -103,51 +48,55 @@ void menuface_initialize(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ menuface_terminate()
- // line 141, offset 0x800b96ac
+ // line 78, offset 0x800b7f44
 	/* begin block 1 */
-		// Start line: 142
-		// Start offset: 0x800B96AC
+		// Start line: 79
+		// Start offset: 0x800B7F44
 		// Variables:
 	// 		int i; // $s3
 	// 		int j; // $s0
 	/* end block 1 */
-	// End offset: 0x800B973C
-	// End Line: 158
+	// End offset: 0x800B7FD8
+	// End Line: 95
 
 	/* begin block 2 */
-		// Start line: 329
+		// Start line: 181
 	/* end block 2 */
-	// End Line: 330
+	// End Line: 182
 
 	/* begin block 3 */
-		// Start line: 332
+		// Start line: 184
 	/* end block 3 */
-	// End Line: 333
+	// End Line: 185
 
-/* WARNING: Removing unreachable block (ram,0x800b972c) */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void menuface_terminate(void)
 
 {
-  _ButtonTexture *in_a0;
-  void *in_a1;
-  int in_a2;
-  void *in_a3;
-  int local_18;
   uint uVar1;
+  int iVar2;
+  menuface_t *pmVar3;
+  int iVar4;
   
   if (hack_initialized != 0) {
-    uVar1 = 0;
+    iVar4 = 0;
+    pmVar3 = &MenuFaces;
+    iVar2 = 0;
     do {
-      if (((int)(uint)DAT_800cfaca >> (uVar1 & 0x1f) & 1U) != 0) {
-        in_a0 = (_ButtonTexture *)(_BlockVramEntry_800d5bec.udata + uVar1 * 0x10);
-        DRAW_FreeButton(in_a0);
-      }
-      uVar1 = uVar1 + 1;
-    } while ((int)uVar1 < 7);
-    memcard_initialize((memcard_t *)in_a0,in_a1,in_a2,in_a3,local_18);
-    return;
+      uVar1 = 0;
+      do {
+        if (((int)(uint)pmVar3->loaded >> (uVar1 & 0x1f) & 1U) != 0) {
+          DRAW_FreeButton(FaceButtons + iVar2 + uVar1);
+        }
+        uVar1 = uVar1 + 1;
+      } while ((int)uVar1 < 3);
+      pmVar3 = pmVar3 + 1;
+      iVar4 = iVar4 + 1;
+      iVar2 = iVar2 + 3;
+    } while (iVar4 < 8);
+                    /* WARNING: Subroutine does not return */
+    MEMPACK_Free((char *)FaceButtons);
   }
   return;
 }
@@ -157,73 +106,67 @@ void menuface_terminate(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MENUFACE_ChangeStateRandomly(int index /*$a0*/)
- // line 163, offset 0x800b9758
+ // line 100, offset 0x800b7ff4
 	/* begin block 1 */
-		// Start line: 164
-		// Start offset: 0x800B9758
+		// Start line: 101
+		// Start offset: 0x800B7FF4
 		// Variables:
 	// 		struct menuface_t *face; // $s1
 	// 		struct menuface_t *lastFace; // $s3
 
 		/* begin block 1.1 */
-			// Start line: 177
-			// Start offset: 0x800B97B0
+			// Start line: 114
+			// Start offset: 0x800B8050
 		/* end block 1.1 */
-		// End offset: 0x800B9808
-		// End Line: 182
+		// End offset: 0x800B80A8
+		// End Line: 119
 	/* end block 1 */
-	// End offset: 0x800B9860
-	// End Line: 195
+	// End offset: 0x800B8100
+	// End Line: 132
 
 	/* begin block 2 */
-		// Start line: 381
+		// Start line: 233
 	/* end block 2 */
-	// End Line: 382
+	// End Line: 234
 
 	/* begin block 3 */
-		// Start line: 384
+		// Start line: 236
 	/* end block 3 */
-	// End Line: 385
+	// End Line: 237
 
 void MENUFACE_ChangeStateRandomly(int index)
 
 {
-  short sVar1;
-  void *gt;
-  int in_a1;
-  short *psVar2;
-  int *piVar3;
+  uchar uVar1;
+  uchar uVar2;
+  uchar *puVar3;
+  menuface_t *pmVar4;
   
   if (hack_initialized != 0) {
-    piVar3 = (int *)&MenuFaces;
-    psVar2 = &DAT_800cfac8;
+    pmVar4 = &MenuFaces;
+    puVar3 = &MenuFaces.delay;
     do {
-      sVar1 = *psVar2 + -1;
-      if (*psVar2 == 0) {
-        if (psVar2[-1] == 0) {
+      uVar1 = *puVar3 + -1;
+      if (*puVar3 == '\0') {
+        if (puVar3[-1] == '\0') {
                     /* WARNING: Subroutine does not return */
           rand();
         }
-        sVar1 = psVar2[-2];
-        psVar2[-2] = sVar1 + psVar2[-1];
-        gt = (void *)(int)(short)(sVar1 + psVar2[-1]);
-        sVar1 = 200;
-        if (gt == (void *)((uint)*(byte *)(psVar2 + -3) * 7 + -1)) {
-          memcard_main_menu(gt,in_a1);
-          return;
-        }
-        if (gt == (void *)0xffffffff) {
-          psVar2[-1] = 0;
-          goto LAB_800b984c;
+        uVar2 = puVar3[-2] + puVar3[-1];
+        puVar3[-2] = uVar2;
+        uVar1 = 'd';
+        if (((int)(char)uVar2 == (uint)puVar3[-3] * 3 + -1) || ((int)(char)uVar2 == -1)) {
+          puVar3[-1] = '\0';
+          goto LAB_800b80ec;
         }
       }
       else {
-LAB_800b984c:
-        *psVar2 = sVar1;
+LAB_800b80ec:
+        *puVar3 = uVar1;
       }
-      piVar3 = piVar3 + 4;
-      psVar2 = psVar2 + 8;
-    } while (piVar3 < &hack_initialized);
+      pmVar4 = pmVar4 + 1;
+      puVar3 = puVar3 + 0xc;
+    } while (pmVar4 < &hack_initialized);
   }
   return;
 }
@@ -233,57 +176,52 @@ LAB_800b984c:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MENUFACE_RefreshFaces()
- // line 198, offset 0x800b987c
+ // line 135, offset 0x800b811c
 	/* begin block 1 */
-		// Start line: 199
-		// Start offset: 0x800B987C
+		// Start line: 136
+		// Start offset: 0x800B811C
 		// Variables:
 	// 		int i; // $s3
 	// 		struct menuface_t *face; // $s2
 	/* end block 1 */
-	// End offset: 0x800B9908
-	// End Line: 218
+	// End offset: 0x800B81B0
+	// End Line: 153
 
 	/* begin block 2 */
-		// Start line: 474
+		// Start line: 326
 	/* end block 2 */
-	// End Line: 475
+	// End Line: 327
 
 	/* begin block 3 */
-		// Start line: 478
+		// Start line: 330
 	/* end block 3 */
-	// End Line: 479
+	// End Line: 331
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void MENUFACE_RefreshFaces(void)
 
 {
-  void *gt;
   short *psVar1;
   int iVar2;
-  short *psVar3;
+  menuface_t *pmVar3;
   int iVar4;
   
   if (hack_initialized != 0) {
     iVar4 = 0;
-    psVar3 = &MenuFaces;
-    psVar1 = &DAT_800cfabe;
+    pmVar3 = &MenuFaces;
+    psVar1 = &MenuFaces.y;
     iVar2 = 0;
     do {
-      gt = (void *)(int)psVar1[3];
-      if ((int)gt < (int)(uint)*(byte *)(psVar1 + 2)) {
-        gt2mcmenu(gt);
-        return;
+      if (-1 < (int)*(char *)((int)psVar1 + 5)) {
+        DRAW_DrawButton(FaceButtons +
+                        iVar2 + (int)*(char *)((int)psVar1 + 5) / (int)(uint)*(byte *)(psVar1 + 2),
+                        pmVar3->x,*psVar1,gameTrackerX.drawOT + 1);
       }
-      DRAW_DrawButton((_ButtonTexture *)
-                      (_BlockVramEntry_800d5bec.udata +
-                      (iVar2 + (int)gt / (int)(uint)*(byte *)(psVar1 + 2)) * 0x10),*psVar3,*psVar1,
-                      (ulong **)(theCamera.posSphere.position._0_4_ + 4));
-      iVar2 = iVar2 + 7;
+      iVar2 = iVar2 + 3;
       iVar4 = iVar4 + 1;
-      psVar1 = psVar1 + 8;
-      psVar3 = psVar3 + 8;
+      psVar1 = psVar1 + 6;
+      pmVar3 = pmVar3 + 1;
     } while (iVar4 < 8);
   }
   return;

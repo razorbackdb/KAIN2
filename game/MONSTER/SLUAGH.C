@@ -5,16 +5,16 @@
 // decompiled code
 // original method signature: 
 // unsigned long /*$ra*/ SLUAGH_Query(struct _Instance *instance /*$a0*/, unsigned long query /*$a1*/)
- // line 48, offset 0x8008d04c
+ // line 48, offset 0x8008cee0
 	/* begin block 1 */
 		// Start line: 49
-		// Start offset: 0x8008D04C
+		// Start offset: 0x8008CEE0
 		// Variables:
 	// 		struct _MonsterVars *mv; // $v1
 	// 		struct _MonsterAttributes *ma; // $a2
 	// 		unsigned long ret; // $v0
 	/* end block 1 */
-	// End offset: 0x8008D0D0
+	// End offset: 0x8008CF64
 	// End Line: 79
 
 	/* begin block 2 */
@@ -57,53 +57,52 @@ ulong SLUAGH_Query(_Instance *instance,ulong query)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ SLUAGH_DamageEffect(struct _Instance *instance /*$s2*/, struct evFXHitData *data /*$s1*/)
- // line 84, offset 0x8008d0e0
+// void /*$ra*/ SLUAGH_DamageEffect(struct _Instance *instance /*$s2*/, struct evFXHitData *data /*$s0*/)
+ // line 84, offset 0x8008cf74
 	/* begin block 1 */
 		// Start line: 85
-		// Start offset: 0x8008D0E0
-		// Variables:
-	// 		struct _MonsterVars *mv; // $s0
+		// Start offset: 0x8008CF74
 
 		/* begin block 1.1 */
-			// Start line: 92
-			// Start offset: 0x8008D11C
+			// Start line: 88
+			// Start offset: 0x8008CF94
 			// Variables:
-		// 		struct _SVector accel; // stack offset -40
+		// 		struct _SVector accel; // stack offset -48
 		/* end block 1.1 */
-		// End offset: 0x8008D11C
-		// End Line: 92
+		// End offset: 0x8008CF94
+		// End Line: 88
 
 		/* begin block 1.2 */
-			// Start line: 100
-			// Start offset: 0x8008D178
+			// Start line: 94
+			// Start offset: 0x8008CFF4
 			// Variables:
+		// 		struct _MonsterVars *mv; // $s0
 		// 		struct _FXGlowEffect *fx; // $s1
 
 			/* begin block 1.2.1 */
-				// Start line: 104
-				// Start offset: 0x8008D188
+				// Start line: 100
+				// Start offset: 0x8008D00C
 				// Variables:
 			// 		long color; // stack offset -24
 
 				/* begin block 1.2.1.1 */
-					// Start line: 108
-					// Start offset: 0x8008D1B4
+					// Start line: 104
+					// Start offset: 0x8008D038
 					// Variables:
 				// 		struct _ColorType current; // stack offset -40
 				// 		struct _ColorType target; // stack offset -32
 				/* end block 1.2.1.1 */
-				// End offset: 0x8008D260
-				// End Line: 127
+				// End offset: 0x8008D0E4
+				// End Line: 123
 			/* end block 1.2.1 */
-			// End offset: 0x8008D260
-			// End Line: 128
+			// End offset: 0x8008D0E4
+			// End Line: 124
 		/* end block 1.2 */
-		// End offset: 0x8008D2BC
-		// End Line: 138
+		// End offset: 0x8008D140
+		// End Line: 134
 	/* end block 1 */
-	// End offset: 0x8008D2BC
-	// End Line: 139
+	// End offset: 0x8008D140
+	// End Line: 135
 
 	/* begin block 2 */
 		// Start line: 168
@@ -120,16 +119,17 @@ void SLUAGH_DamageEffect(_Instance *instance,evFXHitData *data)
   int iVar3;
   uint *puVar4;
   uint uVar5;
+  undefined4 local_30;
+  undefined *local_2c;
   undefined4 local_28;
-  undefined *local_24;
   undefined4 local_20;
   uint local_18;
   
-  puVar4 = (uint *)instance->extraData;
   if (data == (evFXHitData *)0x0) {
+    puVar4 = (uint *)instance->extraData;
     uVar5 = puVar4[0x37];
     if (uVar5 != 0) {
-      iVar3 = (int)*(short *)(puVar4 + 0x4c);
+      iVar3 = (int)*(short *)(puVar4 + 0x50);
       if (iVar3 < 0) {
         iVar3 = iVar3 + 0xfff;
       }
@@ -159,20 +159,18 @@ void SLUAGH_DamageEffect(_Instance *instance,evFXHitData *data)
         local_20 = local_18;
       }
     }
-    if (((puVar4[1] & 1) != 0) && (*(short *)(puVar4 + 0x4c) != 0)) {
+    if (((puVar4[1] & 1) != 0) && (*(short *)(puVar4 + 0x50) != 0)) {
       *puVar4 = *puVar4 & 0xffdfffff;
-      *(undefined *)((int)puVar4 + 0x146) = *(undefined *)(puVar4 + 0x52);
+      *(undefined *)((int)puVar4 + 0x156) = *(undefined *)(puVar4 + 0x56);
       puVar4[1] = puVar4[1] & 0xfffffffe;
       MON_StartSpecialFade(instance,0,0x14);
     }
   }
   else {
-    if ((puVar4[1] & 1) == 0) {
-      local_28 = DAT_800cf6cc;
-      local_24 = PTR_DAT_800cf6d0;
-      FX_Blood((_SVector *)data,&data->velocity,(_SVector *)&local_28,(int)data->amount,0x308000,8);
-      FX_MakeHitFX((_SVector *)data);
-    }
+    local_30 = 0;
+    local_2c = &DAT_0000fffe;
+    FX_Blood((_SVector *)data,&data->velocity,(_SVector *)&local_30,(int)data->amount,0x308000,8);
+    FX_MakeHitFX((_SVector *)data);
   }
   return;
 }
@@ -182,22 +180,22 @@ void SLUAGH_DamageEffect(_Instance *instance,evFXHitData *data)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SLUAGH_Init(struct _Instance *instance /*$s2*/)
- // line 145, offset 0x8008d2d4
+ // line 141, offset 0x8008d158
 	/* begin block 1 */
-		// Start line: 146
-		// Start offset: 0x8008D2D4
+		// Start line: 142
+		// Start offset: 0x8008D158
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	// 		struct _MonsterAttributes *ma; // $s1
 	// 		long color; // stack offset -24
 	/* end block 1 */
-	// End offset: 0x8008D308
-	// End Line: 149
+	// End offset: 0x8008D18C
+	// End Line: 145
 
 	/* begin block 2 */
-		// Start line: 298
+		// Start line: 290
 	/* end block 2 */
-	// End Line: 299
+	// End Line: 291
 
 void SLUAGH_Init(_Instance *instance)
 
@@ -209,7 +207,7 @@ void SLUAGH_Init(_Instance *instance)
   long local_18 [2];
   
   pvVar3 = instance->extraData;
-  iVar2 = (int)*(short *)((int)pvVar3 + 0x130);
+  iVar2 = (int)*(short *)((int)pvVar3 + 0x140);
   pvVar4 = instance->data;
   if (iVar2 < 0) {
     iVar2 = iVar2 + 0xfff;
@@ -227,20 +225,20 @@ void SLUAGH_Init(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SLUAGH_DeathEntry(struct _Instance *instance /*$s1*/)
- // line 170, offset 0x8008d390
+ // line 166, offset 0x8008d214
 	/* begin block 1 */
-		// Start line: 171
-		// Start offset: 0x8008D390
+		// Start line: 167
+		// Start offset: 0x8008D214
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	/* end block 1 */
-	// End offset: 0x8008D420
-	// End Line: 192
+	// End offset: 0x8008D2A4
+	// End Line: 188
 
 	/* begin block 2 */
-		// Start line: 365
+		// Start line: 357
 	/* end block 2 */
-	// End Line: 366
+	// End Line: 358
 
 void SLUAGH_DeathEntry(_Instance *instance)
 
@@ -263,7 +261,7 @@ void SLUAGH_DeathEntry(_Instance *instance)
                           CONCAT412(in_stack_fffffffc,CONCAT48(local_8,CONCAT44(local_c,local_10))),
                  (uint)(iVar1 == 0));
   }
-  *(undefined *)((int)puVar2 + 0x146) = 9;
+  *(undefined *)((int)puVar2 + 0x156) = 9;
   if ((puVar2[1] & 1) == 0) {
     MON_BirthMana(instance);
     puVar2[1] = puVar2[1] | 1;
@@ -278,27 +276,27 @@ void SLUAGH_DeathEntry(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SLUAGH_Death(struct _Instance *instance /*$s0*/)
- // line 195, offset 0x8008d454
+ // line 191, offset 0x8008d2d8
 	/* begin block 1 */
-		// Start line: 196
-		// Start offset: 0x8008D454
+		// Start line: 192
+		// Start offset: 0x8008D2D8
 
 		/* begin block 1.1 */
-			// Start line: 202
-			// Start offset: 0x8008D494
+			// Start line: 198
+			// Start offset: 0x8008D318
 			// Variables:
 		// 		struct _MonsterVars *mv; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8008D4C4
-		// End Line: 207
+		// End offset: 0x8008D348
+		// End Line: 203
 	/* end block 1 */
-	// End offset: 0x8008D4C4
-	// End Line: 209
+	// End offset: 0x8008D348
+	// End Line: 205
 
 	/* begin block 2 */
-		// Start line: 417
+		// Start line: 409
 	/* end block 2 */
-	// End Line: 418
+	// End Line: 410
 
 /* WARNING: Restarted to delay deadcode elimination for space: stack */
 
@@ -317,8 +315,8 @@ void SLUAGH_Death(_Instance *instance)
                     /* WARNING: Subroutine does not return */
     MON_SwitchState(instance,(MonsterState)CONCAT44(unaff_retaddr,unaff_s0));
   }
+                    /* WARNING: Subroutine does not return */
   MON_DefaultQueueHandler(instance);
-  return;
 }
 
 
@@ -326,20 +324,20 @@ void SLUAGH_Death(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SLUAGH_AttackEntry(struct _Instance *instance /*$a0*/)
- // line 217, offset 0x8008d4dc
+ // line 213, offset 0x8008d360
 	/* begin block 1 */
-		// Start line: 218
-		// Start offset: 0x8008D4DC
+		// Start line: 214
+		// Start offset: 0x8008D360
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	/* end block 1 */
-	// End offset: 0x8008D530
-	// End Line: 229
+	// End offset: 0x8008D3B4
+	// End Line: 225
 
 	/* begin block 2 */
-		// Start line: 461
+		// Start line: 453
 	/* end block 2 */
-	// End Line: 462
+	// End Line: 454
 
 /* WARNING: Restarted to delay deadcode elimination for space: stack */
 
@@ -362,45 +360,36 @@ void SLUAGH_AttackEntry(_Instance *instance)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ SLUAGH_Attack(struct _Instance *instance /*$s2*/)
- // line 231, offset 0x8008d540
+// void /*$ra*/ SLUAGH_Attack(struct _Instance *instance /*$s0*/)
+ // line 227, offset 0x8008d3c4
 	/* begin block 1 */
-		// Start line: 232
-		// Start offset: 0x8008D540
+		// Start line: 228
+		// Start offset: 0x8008D3C4
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 237
-			// Start offset: 0x8008D574
+			// Start line: 233
+			// Start offset: 0x8008D3F8
 			// Variables:
 		// 		struct __Event *mess; // $a1
-
-			/* begin block 1.1.1 */
-				// Start line: 253
-				// Start offset: 0x8008D5E0
-				// Variables:
-			// 		struct _MonsterAttributes *ma; // $s0
-			// 		long color; // stack offset -24
-			/* end block 1.1.1 */
-			// End offset: 0x8008D630
-			// End Line: 259
 		/* end block 1.1 */
-		// End offset: 0x8008D680
-		// End Line: 272
+		// End offset: 0x8008D4B0
+		// End Line: 255
 	/* end block 1 */
-	// End offset: 0x8008D6BC
-	// End Line: 278
+	// End offset: 0x8008D4EC
+	// End Line: 261
 
 	/* begin block 2 */
-		// Start line: 489
+		// Start line: 481
 	/* end block 2 */
-	// End Line: 490
+	// End Line: 482
 
 void SLUAGH_Attack(_Instance *instance)
 
 {
-  MonsterState in_stack_ffffffd8;
+  undefined4 unaff_s0;
+  undefined4 unaff_s1;
   
   if ((*(uint *)((int)instance->extraData + 4) & 4) == 0) {
     MON_Attack(instance);
@@ -408,7 +397,7 @@ void SLUAGH_Attack(_Instance *instance)
   }
   if ((instance->flags2 & 0x10U) != 0) {
                     /* WARNING: Subroutine does not return */
-    MON_SwitchState(instance,in_stack_ffffffd8);
+    MON_SwitchState(instance,(MonsterState)CONCAT44(unaff_s1,unaff_s0));
   }
                     /* WARNING: Subroutine does not return */
   DeMessageQueue((__MessageQueue *)((int)instance->extraData + 8));

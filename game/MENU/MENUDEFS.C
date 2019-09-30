@@ -5,11 +5,11 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ do_check_controller(void *gt /*$a0*/)
- // line 164, offset 0x800b8938
+ // line 147, offset 0x800b7274
 	/* begin block 1 */
-		// Start line: 328
+		// Start line: 294
 	/* end block 1 */
-	// End Line: 329
+	// End Line: 295
 
 void do_check_controller(void *gt)
 
@@ -29,18 +29,18 @@ void do_check_controller(void *gt)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ do_push_menu(void *gt /*$a0*/, long menuparam /*$a1*/, enum menu_ctrl_t ctrl /*$a2*/)
- // line 180, offset 0x800b896c
+ // line 163, offset 0x800b72a8
 	/* begin block 1 */
-		// Start line: 181
-		// Start offset: 0x800B896C
+		// Start line: 164
+		// Start offset: 0x800B72A8
 	/* end block 1 */
-	// End offset: 0x800B8994
-	// End Line: 194
+	// End offset: 0x800B72D0
+	// End Line: 177
 
 	/* begin block 2 */
-		// Start line: 360
+		// Start line: 326
 	/* end block 2 */
-	// End Line: 361
+	// End Line: 327
 
 int do_push_menu(void *gt,long menuparam,menu_ctrl_t ctrl)
 
@@ -56,11 +56,11 @@ int do_push_menu(void *gt,long menuparam,menu_ctrl_t ctrl)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ do_pop_menu(void *gt /*$a0*/, long param /*$a1*/, enum menu_ctrl_t ctrl /*$a2*/)
- // line 196, offset 0x800b89a4
+ // line 179, offset 0x800b72e0
 	/* begin block 1 */
-		// Start line: 401
+		// Start line: 367
 	/* end block 1 */
-	// End Line: 402
+	// End Line: 368
 
 int do_pop_menu(void *gt,long param,menu_ctrl_t ctrl)
 
@@ -76,24 +76,24 @@ int do_pop_menu(void *gt,long param,menu_ctrl_t ctrl)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ do_function(void *gt /*$a0*/, long fnparam /*$a1*/, enum menu_ctrl_t ctrl /*$a2*/)
- // line 207, offset 0x800b89dc
+ // line 190, offset 0x800b7318
 	/* begin block 1 */
-		// Start line: 420
+		// Start line: 386
 	/* end block 1 */
-	// End Line: 421
+	// End Line: 387
 
 	/* begin block 2 */
-		// Start line: 426
+		// Start line: 392
 	/* end block 2 */
-	// End Line: 427
+	// End Line: 393
 
-uint do_function(undefined4 param_1,undefined *param_2,int param_3)
+int do_function(void *gt,long fnparam,menu_ctrl_t ctrl)
 
 {
-  if (param_3 == 5) {
-    (*(code *)param_2)();
+  if (ctrl == menu_ctrl_engage) {
+    (*(code *)fnparam)();
   }
-  return (uint)(param_3 == 5);
+  return (uint)(ctrl == menu_ctrl_engage);
 }
 
 
@@ -101,16 +101,16 @@ uint do_function(undefined4 param_1,undefined *param_2,int param_3)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ do_start_game(void *gt /*$s0*/, long parameter /*$a1*/, enum menu_ctrl_t ctrl /*$a2*/)
- // line 221, offset 0x800b8a10
+ // line 204, offset 0x800b734c
 	/* begin block 1 */
-		// Start line: 448
+		// Start line: 414
 	/* end block 1 */
-	// End Line: 449
+	// End Line: 415
 
 	/* begin block 2 */
-		// Start line: 457
+		// Start line: 423
 	/* end block 2 */
-	// End Line: 458
+	// End Line: 424
 
 int do_start_game(void *gt,long parameter,menu_ctrl_t ctrl)
 
@@ -139,19 +139,19 @@ int do_start_game(void *gt,long parameter,menu_ctrl_t ctrl)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ do_save_menu(void *gt /*$a0*/, long parameter /*$a1*/, enum menu_ctrl_t ctrl /*$a2*/)
- // line 250, offset 0x800b8a74
+ // line 230, offset 0x800b73b0
 	/* begin block 1 */
-		// Start line: 515
+		// Start line: 475
 	/* end block 1 */
-	// End Line: 516
+	// End Line: 476
 
-uint do_save_menu(int param_1,undefined4 param_2,int param_3)
+int do_save_menu(void *gt,long parameter,menu_ctrl_t ctrl)
 
 {
-  if (param_3 == 5) {
-    menu_push(*(menu_t **)(param_1 + 0x20),memcard_pause_menu);
+  if (ctrl == menu_ctrl_engage) {
+    menu_push(*(menu_t **)((int)gt + 0x20),memcard_pause_menu);
   }
-  return (uint)(param_3 == 5);
+  return (uint)(ctrl == menu_ctrl_engage);
 }
 
 
@@ -159,22 +159,22 @@ uint do_save_menu(int param_1,undefined4 param_2,int param_3)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ womp_background(char *tim_path /*$s0*/)
- // line 277, offset 0x800b8ab0
+ // line 257, offset 0x800b73ec
 	/* begin block 1 */
-		// Start line: 553
+		// Start line: 513
 	/* end block 1 */
-	// End Line: 554
+	// End Line: 514
 
 	/* begin block 2 */
-		// Start line: 573
+		// Start line: 533
 	/* end block 2 */
-	// End Line: 574
+	// End Line: 534
 
-void womp_background(void)
+void womp_background(char *tim_path)
 
 {
                     /* WARNING: Subroutine does not return */
-  MEMPACK_Free(pcGpffff8c14);
+  MEMPACK_Free((char *)mainMenuScreen);
 }
 
 
@@ -182,27 +182,27 @@ void womp_background(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ play_movie(char *name /*$s0*/)
- // line 291, offset 0x800b8ae8
+ // line 271, offset 0x800b7424
 	/* begin block 1 */
-		// Start line: 292
-		// Start offset: 0x800B8AE8
+		// Start line: 272
+		// Start offset: 0x800B7424
 	/* end block 1 */
-	// End offset: 0x800B8B20
-	// End Line: 311
+	// End offset: 0x800B745C
+	// End Line: 291
 
 	/* begin block 2 */
-		// Start line: 608
+		// Start line: 568
 	/* end block 2 */
-	// End Line: 609
+	// End Line: 569
 
-void play_movie(char *param_1)
+void play_movie(char *name)
 
 {
   int iVar1;
   
   iVar1 = CINE_Load();
   if (iVar1 != 0) {
-    CINE_Play(param_1,0xffff,2);
+    CINE_Play(name,0xffff,2);
     CINE_Unload();
     MAIN_InitVolume();
   }
@@ -214,16 +214,16 @@ void play_movie(char *param_1)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ menudefs_reset_hack_attract_mode()
- // line 331, offset 0x800b8b30
+ // line 311, offset 0x800b746c
 	/* begin block 1 */
-		// Start line: 688
+		// Start line: 648
 	/* end block 1 */
-	// End Line: 689
+	// End Line: 649
 
 	/* begin block 2 */
-		// Start line: 689
+		// Start line: 649
 	/* end block 2 */
-	// End Line: 690
+	// End Line: 650
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
@@ -231,7 +231,7 @@ void menudefs_reset_hack_attract_mode(void)
 
 {
   if (0 < hack_attract) {
-    hack_attract = theCamera.positionVel._0_4_;
+    hack_attract = gameTrackerX.vblCount;
   }
   return;
 }
@@ -241,25 +241,35 @@ void menudefs_reset_hack_attract_mode(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ check_hack_attract()
- // line 336, offset 0x800b8b54
+ // line 316, offset 0x800b7490
 	/* begin block 1 */
-		// Start line: 698
+		// Start line: 658
 	/* end block 1 */
-	// End Line: 699
+	// End Line: 659
 
 	/* begin block 2 */
-		// Start line: 700
+		// Start line: 660
 	/* end block 2 */
-	// End Line: 701
+	// End Line: 661
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void check_hack_attract(void)
 
 {
-  if ((0 < (int)uGpffff9fbc) && (uGpffff9fbc + 2000 < uGpffffb630)) {
-    uGpffff9fbc = 1;
-    play_movie(*(char **)(&the_attract_movies4 + uGpffff9fc0 * 2));
-    uGpffff9fc0 = uGpffff9fc0 + 1 & 3;
-    uGpffff9fbc = uGpffffb630;
+  int iVar1;
+  int iVar2;
+  
+  if ((0 < hack_attract) && (hack_attract + 2000U < gameTrackerX.vblCount)) {
+    hack_attract = 1;
+    play_movie((&the_attract_movies4)[hack_attract_movie]);
+    iVar2 = hack_attract_movie + 1;
+    iVar1 = iVar2;
+    if (iVar2 < 0) {
+      iVar1 = hack_attract_movie + 4;
+    }
+    hack_attract_movie = iVar2 + (iVar1 >> 2) * -4;
+    hack_attract = gameTrackerX.vblCount;
   }
   return;
 }
@@ -269,30 +279,30 @@ void check_hack_attract(void)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ get_volume(void *gt /*$a0*/, enum sfx_t sfx /*$a1*/)
- // line 377, offset 0x800b8bc4
+ // line 341, offset 0x800b7518
 	/* begin block 1 */
-		// Start line: 379
-		// Start offset: 0x800B8BC4
+		// Start line: 343
+		// Start offset: 0x800B7518
 		// Variables:
 	// 		int raw; // $a2
 	/* end block 1 */
-	// End offset: 0x800B8C00
-	// End Line: 385
+	// End offset: 0x800B7554
+	// End Line: 349
 
 	/* begin block 2 */
-		// Start line: 784
+		// Start line: 712
 	/* end block 2 */
-	// End Line: 785
+	// End Line: 713
 
 	/* begin block 3 */
-		// Start line: 785
+		// Start line: 713
 	/* end block 3 */
-	// End Line: 786
+	// End Line: 714
 
 	/* begin block 4 */
-		// Start line: 786
+		// Start line: 714
 	/* end block 4 */
-	// End Line: 787
+	// End Line: 715
 
 int get_volume(void *gt,sfx_t sfx)
 
@@ -300,18 +310,17 @@ int get_volume(void *gt,sfx_t sfx)
   int iVar1;
   
   if (sfx == sfx_sound) {
-    iVar1 = *(int *)((int)gt + 0x1b8);
+    iVar1 = *(int *)((int)gt + 0x1bc);
   }
   else {
     if (sfx == sfx_music) {
-      iVar1 = *(int *)((int)gt + 0x1b4);
+      iVar1 = *(int *)((int)gt + 0x1b8);
     }
     else {
-      if (sfx != sfx_voice) {
-        iVar1 = main_menu(gt,sfx);
-        return iVar1;
+      iVar1 = 3;
+      if (sfx == sfx_voice) {
+        iVar1 = *(int *)((int)gt + 0x1c0);
       }
-      iVar1 = *(int *)((int)gt + 0x1bc);
     }
   }
   return (iVar1 * 10) / 0x7f;
@@ -322,25 +331,25 @@ int get_volume(void *gt,sfx_t sfx)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ set_volume(enum sfx_t sfx /*$a2*/, int cooked /*$a1*/)
- // line 388, offset 0x800b8c30
+ // line 352, offset 0x800b7584
 	/* begin block 1 */
-		// Start line: 389
-		// Start offset: 0x800B8C30
+		// Start line: 353
+		// Start offset: 0x800B7584
 		// Variables:
 	// 		int raw; // $a0
 	/* end block 1 */
-	// End offset: 0x800B8CAC
-	// End Line: 397
+	// End offset: 0x800B7600
+	// End Line: 361
 
 	/* begin block 2 */
-		// Start line: 806
+		// Start line: 734
 	/* end block 2 */
-	// End Line: 807
+	// End Line: 735
 
 	/* begin block 3 */
-		// Start line: 807
+		// Start line: 735
 	/* end block 3 */
-	// End Line: 808
+	// End Line: 736
 
 void set_volume(sfx_t sfx,int cooked)
 
@@ -350,16 +359,18 @@ void set_volume(sfx_t sfx,int cooked)
   newVolume = (cooked * 0x7f + 9) / 10;
   if (sfx == sfx_music) {
     SOUND_SetMusicVolume(newVolume);
+    FUN_800b7600(newVolume);
+    return;
+  }
+  if (sfx == sfx_sound) {
+    SOUND_SetSfxVolume(newVolume);
   }
   else {
-    if (sfx == sfx_sound) {
-      SOUND_SetSfxVolume(newVolume);
+    if (sfx != sfx_voice) {
+      FUN_800b7600(newVolume);
+      return;
     }
-    else {
-      if (sfx == sfx_voice) {
-        SOUND_SetVoiceVolume(newVolume);
-      }
-    }
+    SOUND_SetVoiceVolume(newVolume);
   }
   return;
 }
@@ -369,42 +380,43 @@ void set_volume(sfx_t sfx,int cooked)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ do_sound_adjust(void *gt /*$a0*/, long sfxparam /*$s0*/, enum menu_ctrl_t ctrl /*$s1*/)
- // line 399, offset 0x800b8cbc
+ // line 363, offset 0x800b7610
 	/* begin block 1 */
-		// Start line: 400
-		// Start offset: 0x800B8CBC
+		// Start line: 364
+		// Start offset: 0x800B7610
 		// Variables:
 	// 		int volume; // $a1
 	/* end block 1 */
-	// End offset: 0x800B8D24
-	// End Line: 420
+	// End offset: 0x800B7678
+	// End Line: 384
 
 	/* begin block 2 */
-		// Start line: 829
+		// Start line: 757
 	/* end block 2 */
-	// End Line: 830
+	// End Line: 758
 
 int do_sound_adjust(void *gt,long sfxparam,menu_ctrl_t ctrl)
 
 {
-  int iVar1;
-  char *pcVar2;
+  int cooked;
   
-  iVar1 = get_volume(gt,sfxparam);
+  cooked = get_volume(gt,sfxparam);
   if (ctrl == menu_ctrl_left) {
-    if (0 < iVar1) {
-      pcVar2 = flashStart();
-      return (int)pcVar2;
+    if (cooked < 1) {
+      return 1;
     }
+    cooked = cooked + -1;
   }
   else {
     if (ctrl != menu_ctrl_right) {
       return 0;
     }
-    if (iVar1 < 10) {
-      set_volume(sfxparam,iVar1 + 1);
+    if (9 < cooked) {
+      return 1;
     }
+    cooked = cooked + 1;
   }
+  set_volume(sfxparam,cooked);
   return 1;
 }
 
@@ -413,24 +425,24 @@ int do_sound_adjust(void *gt,long sfxparam,menu_ctrl_t ctrl)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ sound_item(void *gt /*$s0*/, char *text /*$s2*/, enum sfx_t sfx /*$s1*/)
- // line 422, offset 0x800b8d38
+ // line 386, offset 0x800b768c
 	/* begin block 1 */
-		// Start line: 423
-		// Start offset: 0x800B8D38
+		// Start line: 387
+		// Start offset: 0x800B768C
 	/* end block 1 */
-	// End offset: 0x800B8D38
-	// End Line: 423
+	// End offset: 0x800B768C
+	// End Line: 387
 
 	/* begin block 2 */
-		// Start line: 875
+		// Start line: 803
 	/* end block 2 */
-	// End Line: 876
+	// End Line: 804
 
 void sound_item(void *gt,char *text,sfx_t sfx)
 
 {
   get_volume(gt,sfx);
-  menu_item(*(menu_t **)((int)gt + 0x20),do_sound_adjust,sfx,s__s__d_800cfa78);
+  menu_item(*(menu_t **)((int)gt + 0x20),do_sound_adjust,sfx,"%s %d");
   return;
 }
 
@@ -438,12 +450,12 @@ void sound_item(void *gt,char *text,sfx_t sfx)
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ menudefs_toggle_dualshock(void *gt /*$a0*/, long param /*$a1*/, enum menu_ctrl_t ctrl /*$a2*/)
- // line 1048, offset 0x800b8d9c
+// int /*$ra*/ menudefs_toggle_dualshock(void *gt /*$s0*/, long param /*$a1*/, enum menu_ctrl_t ctrl /*$a2*/)
+ // line 989, offset 0x800b76f0
 	/* begin block 1 */
-		// Start line: 2127
+		// Start line: 2009
 	/* end block 1 */
-	// End Line: 2128
+	// End Line: 2010
 
 int menudefs_toggle_dualshock(void *gt,long param,menu_ctrl_t ctrl)
 
@@ -454,13 +466,14 @@ int menudefs_toggle_dualshock(void *gt,long param,menu_ctrl_t ctrl)
     iVar1 = GAMEPAD_DualShockEnabled();
     if (iVar1 == 0) {
       GAMEPAD_EnableDualShock();
-      GAMEPAD_Shock1(0x80,0x8000);
-      iVar1 = 1;
+      if (*(int *)((int)gt + 0x248) == 0) {
+        *(undefined4 *)((int)gt + 0x248) = 1;
+      }
+                    /* WARNING: Subroutine does not return */
+      GAMEPAD_Shock1(0x80,*(int *)((int)gt + 0x248) << 3);
     }
-    else {
-      GAMEPAD_DisableDualShock();
-      iVar1 = 1;
-    }
+    GAMEPAD_DisableDualShock();
+    iVar1 = 1;
   }
   else {
     iVar1 = 0;
@@ -473,72 +486,30 @@ int menudefs_toggle_dualshock(void *gt,long param,menu_ctrl_t ctrl)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ options_menu(void *gt /*$s1*/, int index /*$s2*/)
- // line 1066, offset 0x800b8e00
+ // line 1009, offset 0x800b7774
 	/* begin block 1 */
-		// Start line: 1067
-		// Start offset: 0x800B8E00
+		// Start line: 1010
+		// Start offset: 0x800B7774
 		// Variables:
 	// 		static int wasDualShock; // offset 0x0
 	// 		int dualShock; // $s0
 	/* end block 1 */
-	// End offset: 0x800B8F30
-	// End Line: 1128
+	// End offset: 0x800B78A4
+	// End Line: 1068
 
 	/* begin block 2 */
-		// Start line: 2163
+		// Start line: 2049
 	/* end block 2 */
-	// End Line: 2164
+	// End Line: 2050
 
 int options_menu(void *gt,int index)
 
 {
-  char *format;
-  int iVar1;
-  int iVar2;
-  localstr_t id;
-  menu_t *menu;
-  code *index_00;
-  
   hack_attract = 0;
   MENUFACE_ChangeStateRandomly(index);
   do_check_controller(gt);
-  format = localstr_get(LOCALSTR_options);
-  menu_item_flags(*(menu_t **)((int)gt + 0x20),(TDRFuncPtr_menu_item_flags1fn)0x0,0,4,format);
-  format = localstr_get(LOCALSTR_sound);
-  sound_item(gt,format,sfx_sound);
-  format = localstr_get(LOCALSTR_music);
-  sound_item(gt,format,sfx_music);
-  format = localstr_get(LOCALSTR_voice);
-  sound_item(gt,format,sfx_voice);
-  iVar1 = GAMEPAD_ControllerIsDualShock();
-  if (iVar1 != 0) {
-    iVar2 = GAMEPAD_DualShockEnabled();
-    id = LOCALSTR_vibration_off;
-    if (iVar2 != 0) {
-      id = LOCALSTR_vibration_on;
-    }
-    format = localstr_get(id);
-    menu_item(*(menu_t **)((int)gt + 0x20),menudefs_toggle_dualshock,0,format);
-  }
-  format = localstr_get(LOCALSTR_done);
-  index_00 = do_pop_menu;
-  menu = *(menu_t **)((int)gt + 0x20);
-  menu_item(menu,do_pop_menu,0,format);
-  if (iVar1 == _BlockVramEntry_800d5bec.area) {
-    iVar1 = menudefs_main_menu(menu,(int)index_00);
-    return iVar1;
-  }
-  if (index < 4) {
-    iVar1 = menudefs_main_menu(menu,(int)index_00);
-    return iVar1;
-  }
-  iVar2 = iVar1 + 4;
-                    /* WARNING: Read-only address (ram,0x800d5c00) is written */
-  if (iVar2 < 0) {
-    iVar2 = 1;
-  }
-  _BlockVramEntry_800d5bec.area = iVar1;
-  return iVar2;
+                    /* WARNING: Subroutine does not return */
+  localstr_get(LOCALSTR_options);
 }
 
 
@@ -546,149 +517,109 @@ int options_menu(void *gt,int index)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ main_menu(void *gt /*$s0*/, int index /*$s1*/)
- // line 1145, offset 0x800b8f48
+ // line 1085, offset 0x800b78bc
 	/* begin block 1 */
-		// Start line: 2321
+		// Start line: 2201
 	/* end block 1 */
-	// End Line: 2322
+	// End Line: 2202
 
-int main_menu(void *param_1,int param_2)
+int main_menu(void *gt,int index)
 
 {
-  language_t lVar1;
-  char *format;
-  menu_t *menu;
-  int ypos;
-  
-  uGpffff9fbc = 0;
-  lVar1 = localstr_get_language();
-  if (lVar1 == language_spanish) {
-    menu = *(menu_t **)((int)param_1 + 0x20);
-    ypos = iGpffff9f94 + -2;
-  }
-  else {
-    menu = *(menu_t **)((int)param_1 + 0x20);
-    ypos = iGpffff9f94;
-  }
-  menu_format(menu,1,iGpffff9f9c,ypos,iGpffff9fa0,iGpffff9fac,iGpffff9fb0,0);
-  MENUFACE_ChangeStateRandomly(param_2);
-  do_check_controller(param_1);
-  format = localstr_get(LOCALSTR_start_game);
-  menu_item(*(menu_t **)((int)param_1 + 0x20),do_start_game,0,format);
-  format = localstr_get(LOCALSTR_options);
-  menu_item(*(menu_t **)((int)param_1 + 0x20),do_push_menu,(long)options_menu,format);
-  if (param_2 < 0) {
-    param_2 = 0;
-  }
-  return param_2;
+  hack_attract = 0;
+  menu_format(*(menu_t **)((int)gt + 0x20),1,0x74,0x1e,0xbe,LINESKIP,2,0);
+  MENUFACE_ChangeStateRandomly(index);
+  do_check_controller(gt);
+                    /* WARNING: Subroutine does not return */
+  localstr_get(LOCALSTR_start_game);
 }
 
 
 
-// autogenerated function stub: 
+// decompiled code
+// original method signature: 
 // int /*$ra*/ do_main_menu(void *gt /*$a0*/, long param /*$a1*/, enum menu_ctrl_t ctrl /*$a2*/)
-int do_main_menu(void *gt, long param, enum menu_ctrl_t ctrl)
-{ // line 1180, offset 0x800b904c
+ // line 1114, offset 0x800b7980
 	/* begin block 1 */
-		// Start line: 2391
+		// Start line: 2263
 	/* end block 1 */
-	// End Line: 2392
+	// End Line: 2264
 
 	/* begin block 2 */
-		// Start line: 2392
+		// Start line: 2264
 	/* end block 2 */
-	// End Line: 2393
+	// End Line: 2265
 
-	return 0;
+int do_main_menu(void *gt,long param,menu_ctrl_t ctrl)
+
+{
+  if ((StartGameFading == 0) && ((ctrl == menu_ctrl_start || (ctrl == menu_ctrl_engage)))) {
+    *(undefined2 *)((int)gt + 0xd0) = 10;
+    *(undefined2 *)((int)gt + 0xcc) = 0xffec;
+    *(undefined2 *)((int)gt + 0xce) = 0x14;
+    StartGameFading = 1;
+    return 1;
+  }
+  return 0;
 }
+
 
 
 // decompiled code
 // original method signature: 
 // char * /*$ra*/ flashStart()
- // line 1196, offset 0x800b90a0
+ // line 1130, offset 0x800b79d4
 	/* begin block 1 */
-		// Start line: 1197
-		// Start offset: 0x800B90A0
-
-		/* begin block 1.1 */
-			// Start line: 1225
-			// Start offset: 0x800B9120
-			// Variables:
-		// 		static int counter; // offset 0x98
-		// 		int intpl; // $a0
-		// 		int fcols[2][3]; // stack offset -40
-		// 		int r; // $s2
-		// 		int g; // $s1
-		// 		int b; // $s0
-		/* end block 1.1 */
-		// End offset: 0x800B9284
-		// End Line: 1247
+		// Start line: 1131
+		// Start offset: 0x800B79D4
+		// Variables:
+	// 		static int flashTimer; // offset 0x78
+	// 		static int flashOn; // offset 0x7c
 	/* end block 1 */
-	// End offset: 0x800B928C
-	// End Line: 1250
+	// End offset: 0x800B7AB0
+	// End Line: 1167
 
 	/* begin block 2 */
-		// Start line: 2427
+		// Start line: 2299
 	/* end block 2 */
-	// End Line: 2428
+	// End Line: 2300
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
 
 char * flashStart(void)
 
 {
-  char *pcVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
-  
-  uGpffffb758 = 1;
-  if (iGpffff9fb8 == 1) {
-    iGpffff9fb4 = iGpffff9fb8;
-    if (sGpffffb5c4 == -1) {
-      womp_background();
-      uGpffffb5c8 = 10;
-      sGpffffb5c4 = 0x14;
-      uGpffffb5c6 = 0x14;
-      iGpffff9fb8 = 0;
-      menu_pop(pmGpffffb518);
-      menu_push(pmGpffffb518,main_menu);
-      return (char *)0x0;
+  gameTrackerX.gameFramePassed = 1;
+  if (StartGameFading == 1) {
+    hack_reset_attract = StartGameFading;
+    if (gameTrackerX.wipeTime == -1) {
+      womp_background("\\kain2\\game\\psx\\bkgdmenu.tim");
+      gameTrackerX.wipeType = 10;
+      gameTrackerX.wipeTime = 0x14;
+      gameTrackerX.maxWipeTime = 0x14;
+      StartGameFading = 0;
+      menu_pop(gameTrackerX.menu);
+      menu_push(gameTrackerX.menu,main_menu);
     }
-    goto LAB_800b9284;
-  }
-  iGpffff9fec = (iGpffff9fec + 1) % 0x3c;
-  if (iGpffff9fec < 10) {
-    iVar3 = 0;
+    DAT_800d0d40 = 0;
   }
   else {
-    if (iGpffff9fec < 0x1e) {
-      iVar3 = iGpffff9fec + -10;
-    }
-    else {
-      if (iGpffff9fec < 0x28) {
-        iVar3 = 0x1000;
-        goto LAB_800b91ec;
+    DAT_800d0d3c = DAT_800d0d3c + 1;
+    if (0xf < DAT_800d0d3c) {
+      if (DAT_800d0d40 == 0) {
+        DAT_800d0d3c = 0;
       }
-      iVar3 = 0x3c - iGpffff9fec;
+      else {
+        DAT_800d0d3c = 10;
+      }
+      DAT_800d0d40 = DAT_800d0d40 ^ 1;
     }
-    iVar3 = (iVar3 << 0xc) / 0x14;
   }
-LAB_800b91ec:
-  iVar2 = 0x1000 - iVar3;
-  iVar4 = DAT_800cfaa4 * iVar2;
-  iVar5 = DAT_800cfab0 * iVar3;
-  iVar6 = DAT_800cfaa8 * iVar2;
-  iVar7 = DAT_800cfab4 * iVar3;
-  iVar2 = DAT_800cfaac * iVar2;
-  iVar3 = DAT_800cfab8 * iVar3;
-  FONT_SetColorIndex(4);
-  FONT_SetColorIndexCol(4,iVar4 + iVar5 >> 0xc,iVar6 + iVar7 >> 0xc,iVar2 + iVar3 >> 0xc);
-LAB_800b9284:
-  pcVar1 = localstr_get(LOCALSTR_press_start);
-  return pcVar1;
+  if (DAT_800d0d40 != 0) {
+                    /* WARNING: Subroutine does not return */
+    localstr_get(LOCALSTR_press_start);
+  }
+  return (char *)0x0;
 }
 
 
@@ -696,34 +627,34 @@ LAB_800b9284:
 // decompiled code
 // original method signature: 
 // int /*$ra*/ menudefs_main_menu(void *gt /*$s0*/, int index /*$s1*/)
- // line 1252, offset 0x800b92a4
+ // line 1169, offset 0x800b7ac0
 	/* begin block 1 */
-		// Start line: 2554
+		// Start line: 2389
 	/* end block 1 */
-	// End Line: 2555
+	// End Line: 2390
 
 	/* begin block 2 */
-		// Start line: 2555
+		// Start line: 2390
 	/* end block 2 */
-	// End Line: 2556
+	// End Line: 2391
 
-int menudefs_main_menu(int param_1,int param_2)
+int menudefs_main_menu(void *gt,int index)
 
 {
   char *format;
   
-  if (iGpffff9fb4 != 0) {
-    iGpffff9fb4 = 0;
-    uGpffff9fbc = uGpffffb630;
+  if (hack_reset_attract != 0) {
+    hack_reset_attract = 0;
+    hack_attract = gameTrackerX.vblCount;
   }
   check_hack_attract();
-  menu_format(*(menu_t **)(param_1 + 0x20),1,0x16e,0x90,100,iGpffff9fac,iGpffff9fb0,0);
+  menu_format(*(menu_t **)((int)gt + 0x20),1,0x80,100,100,LINESKIP,2,0);
   format = flashStart();
-  menu_item(*(menu_t **)(param_1 + 0x20),(TDRFuncPtr_menu_item1fn)&do_main_menu,0,format);
-  if (param_2 < 0) {
-    param_2 = 0;
+  menu_item(*(menu_t **)((int)gt + 0x20),do_main_menu,0,format);
+  if (index < 0) {
+    index = 0;
   }
-  return param_2;
+  return index;
 }
 
 
@@ -731,29 +662,19 @@ int menudefs_main_menu(int param_1,int param_2)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ menudefs_confirmexit_menu(void *gt /*$s0*/, int index /*$s1*/)
- // line 1283, offset 0x800b934c
+ // line 1193, offset 0x800b7b68
 	/* begin block 1 */
-		// Start line: 2619
+		// Start line: 2440
 	/* end block 1 */
-	// End Line: 2620
+	// End Line: 2441
 
-int menudefs_confirmexit_menu(void *param_1,int param_2)
+int menudefs_confirmexit_menu(void *gt,int index)
 
 {
-  char *format;
-  
-  uGpffff9fbc = 0;
-  do_check_controller(param_1);
-  format = localstr_get(LOCALSTR_query_quit);
-  menu_item_flags(*(menu_t **)((int)param_1 + 0x20),(TDRFuncPtr_menu_item_flags1fn)0x0,0,4,format);
-  format = localstr_get(LOCALSTR_no);
-  menu_item(*(menu_t **)((int)param_1 + 0x20),do_pop_menu,0,format);
-  format = localstr_get(LOCALSTR_yes);
-  menu_item(*(menu_t **)((int)param_1 + 0x20),do_function,(long)DEBUG_ExitGame,format);
-  if (param_2 < 0) {
-    param_2 = 1;
-  }
-  return param_2;
+  hack_attract = 0;
+  do_check_controller(gt);
+                    /* WARNING: Subroutine does not return */
+  localstr_get(LOCALSTR_query_quit);
 }
 
 
@@ -761,38 +682,22 @@ int menudefs_confirmexit_menu(void *param_1,int param_2)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ menudefs_pause_menu(void *gt /*$s1*/, int index /*$s2*/)
- // line 1294, offset 0x800b93f4
+ // line 1204, offset 0x800b7c10
 	/* begin block 1 */
-		// Start line: 2641
+		// Start line: 2462
 	/* end block 1 */
-	// End Line: 2642
+	// End Line: 2463
 
-int menudefs_pause_menu(void *param_1,int param_2)
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int menudefs_pause_menu(void *gt,int index)
 
 {
-  char *format;
-  
-  do_check_controller(param_1);
-  uGpffff9fbc = 0;
-  menu_format(*(menu_t **)((int)param_1 + 0x20),1,iGpffff9fa4,iGpffff9f98,iGpffff9fa8,iGpffff9fac,
-              iGpffff9fb0,1);
-  format = localstr_get(LOCALSTR_paused);
-  menu_item_flags(*(menu_t **)((int)param_1 + 0x20),(TDRFuncPtr_menu_item_flags1fn)0x0,0,4,format);
-  format = localstr_get(LOCALSTR_resume_game);
-  menu_item(*(menu_t **)((int)param_1 + 0x20),do_function,(long)&DEBUG_ContinueGame,format);
-  if ((uGpffffb63c & 4) == 0) {
-    format = localstr_get(LOCALSTR_save_game);
-    menu_item(*(menu_t **)((int)param_1 + 0x20),do_save_menu,0,format);
-    format = localstr_get(LOCALSTR_options);
-    menu_item(*(menu_t **)((int)param_1 + 0x20),do_push_menu,(long)options_menu,format);
-    format = localstr_get(LOCALSTR_quit_game);
-    menu_item(*(menu_t **)((int)param_1 + 0x20),do_push_menu,(long)menudefs_confirmexit_menu,format)
-    ;
-  }
-  if (param_2 < 0) {
-    param_2 = 1;
-  }
-  return param_2;
+  do_check_controller(gt);
+  hack_attract = 0;
+  menu_format(*(menu_t **)((int)gt + 0x20),1,0x100,0x3c,_PAUSE_WIDTH,LINESKIP,2,1);
+                    /* WARNING: Subroutine does not return */
+  localstr_get(LOCALSTR_paused);
 }
 
 

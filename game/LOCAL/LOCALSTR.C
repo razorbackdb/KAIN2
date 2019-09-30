@@ -5,23 +5,23 @@
 // decompiled code
 // original method signature: 
 // enum language_t /*$ra*/ localstr_get_language()
- // line 50, offset 0x800b7978
+ // line 46, offset 0x800b62c4
 	/* begin block 1 */
-		// Start line: 100
+		// Start line: 92
 	/* end block 1 */
-	// End Line: 101
+	// End Line: 93
 
 	/* begin block 2 */
-		// Start line: 101
+		// Start line: 93
 	/* end block 2 */
-	// End Line: 102
+	// End Line: 94
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 language_t localstr_get_language(void)
 
 {
-  return _BlockVramEntry_800d5bec._16_4_;
+  return the_language;
 }
 
 
@@ -29,20 +29,20 @@ language_t localstr_get_language(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ localstr_set_language(enum language_t lang /*$a0*/)
- // line 55, offset 0x800b7984
+ // line 51, offset 0x800b62d0
 	/* begin block 1 */
-		// Start line: 56
-		// Start offset: 0x800B7984
+		// Start line: 52
+		// Start offset: 0x800B62D0
 		// Variables:
 	// 		int i; // $a1
 	/* end block 1 */
-	// End offset: 0x800B7A04
-	// End Line: 92
+	// End offset: 0x800B6350
+	// End Line: 88
 
 	/* begin block 2 */
-		// Start line: 110
+		// Start line: 102
 	/* end block 2 */
-	// End Line: 111
+	// End Line: 103
 
 void localstr_set_language(language_t lang)
 
@@ -51,7 +51,7 @@ void localstr_set_language(language_t lang)
   LocalizationHeader *pLVar2;
   int iVar3;
   
-  pLVar1 = (LocalizationHeader *)LOAD_ReadFileFromCD(s__LOCALS_TBL_1_800cf9a0,6);
+  pLVar1 = (LocalizationHeader *)LOAD_ReadFileFromCD("\\LOCALS.TBL;1",6);
   pLVar2 = pLVar1 + 1;
   LocalizationTable = pLVar1;
   if (pLVar1 != (LocalizationHeader *)0x0) {
@@ -65,8 +65,7 @@ void localstr_set_language(language_t lang)
         pLVar2 = (LocalizationHeader *)&pLVar2->numXAfiles;
       } while (iVar3 < pLVar1->numStrings);
     }
-    _BlockVramEntry_800d5bec._16_4_ = LocalizationTable->language;
-                    /* WARNING: Read-only address (ram,0x800d5bfc) is written */
+    the_language = LocalizationTable->language;
   }
   return;
 }
@@ -76,36 +75,36 @@ void localstr_set_language(language_t lang)
 // decompiled code
 // original method signature: 
 // char * /*$ra*/ localstr_get(enum localstr_t id /*$a0*/)
- // line 96, offset 0x800b7a14
+ // line 92, offset 0x800b6360
 	/* begin block 1 */
-		// Start line: 98
-		// Start offset: 0x800B7A14
+		// Start line: 94
+		// Start offset: 0x800B6360
 		// Variables:
 	// 		static char BlankStr[2]; // offset 0x1c
 	/* end block 1 */
-	// End offset: 0x800B7A38
-	// End Line: 106
+	// End offset: 0x800B6388
+	// End Line: 102
 
 	/* begin block 2 */
-		// Start line: 214
+		// Start line: 206
 	/* end block 2 */
-	// End Line: 215
+	// End Line: 207
 
 	/* begin block 3 */
-		// Start line: 215
+		// Start line: 207
 	/* end block 3 */
-	// End Line: 216
+	// End Line: 208
 
 	/* begin block 4 */
-		// Start line: 216
+		// Start line: 208
 	/* end block 4 */
-	// End Line: 217
+	// End Line: 209
 
 char * localstr_get(localstr_t id)
 
 {
   if (LocalStrings == (char **)0x0) {
-    return &DAT_800cf9b0;
+    return (char *)&DAT_800d0c6c;
   }
   return LocalStrings[id];
 }

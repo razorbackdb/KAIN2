@@ -5,7 +5,7 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VWRAITH_MoveVertical(struct _Instance *instance /*$a0*/, long targetZ /*$a1*/, int velocity /*$a2*/)
- // line 89, offset 0x8008e8f4
+ // line 89, offset 0x8008e568
 	/* begin block 1 */
 		// Start line: 178
 	/* end block 1 */
@@ -50,15 +50,15 @@ void VWRAITH_MoveVertical(_Instance *instance,long targetZ,int velocity)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VWRAITH_Init(struct _Instance *instance /*$s1*/)
- // line 108, offset 0x8008e94c
+ // line 108, offset 0x8008e5c0
 	/* begin block 1 */
 		// Start line: 109
-		// Start offset: 0x8008E94C
+		// Start offset: 0x8008E5C0
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	// 		long color; // stack offset -24
 	/* end block 1 */
-	// End offset: 0x8008E97C
+	// End offset: 0x8008E5F0
 	// End Line: 111
 
 	/* begin block 2 */
@@ -69,21 +69,16 @@ void VWRAITH_MoveVertical(_Instance *instance,long targetZ,int velocity)
 void VWRAITH_Init(_Instance *instance)
 
 {
-  _FXGlowEffect *p_Var1;
-  int iVar2;
-  void *pvVar3;
+  int iVar1;
   long local_18 [2];
   
-  pvVar3 = instance->extraData;
-  iVar2 = (int)*(short *)((int)pvVar3 + 0x130);
-  if (iVar2 < 0) {
-    iVar2 = iVar2 + 0xfff;
+  iVar1 = (int)*(short *)((int)instance->extraData + 0x140);
+  if (iVar1 < 0) {
+    iVar1 = iVar1 + 0xfff;
   }
-  local_18[0] = FX_GetHealthColor(iVar2 >> 0xc);
-  p_Var1 = FX_DoInstanceTwoSegmentGlow(instance,0x15,0x17,local_18,1,0x4b0,0x9c);
+  local_18[0] = FX_GetHealthColor(iVar1 >> 0xc);
                     /* WARNING: Subroutine does not return */
-  *(_FXGlowEffect **)((int)pvVar3 + 0xdc) = p_Var1;
-  MON_DefaultInit(instance);
+  FX_DoInstanceTwoSegmentGlow(instance,0x15,0x17,local_18,1,0x4b0,0x9c);
 }
 
 
@@ -91,48 +86,45 @@ void VWRAITH_Init(_Instance *instance)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ VWRAITH_ShouldISwoop(struct _Instance *instance /*$a0*/)
- // line 131, offset 0x8008ea00
+ // line 131, offset 0x8008e674
 	/* begin block 1 */
-		// Start line: 132
-		// Start offset: 0x8008EA00
+		// Start line: 133
+		// Start offset: 0x8008E674
 		// Variables:
 	// 		struct _MonsterAttributes *ma; // $a3
 	// 		struct _MonsterVars *mv; // $v1
-
-		/* begin block 1.1 */
-			// Start line: 138
-			// Start offset: 0x8008EA34
-			// Variables:
-		// 		struct _Instance *ei; // $a1
-		/* end block 1.1 */
-		// End offset: 0x8008EA74
-		// End Line: 143
 	/* end block 1 */
-	// End offset: 0x8008EA74
-	// End Line: 146
+	// End offset: 0x8008E6D0
+	// End Line: 136
 
 	/* begin block 2 */
 		// Start line: 281
 	/* end block 2 */
 	// End Line: 282
 
+	/* begin block 3 */
+		// Start line: 282
+	/* end block 3 */
+	// End Line: 283
+
+	/* begin block 4 */
+		// Start line: 283
+	/* end block 4 */
+	// End Line: 284
+
 int VWRAITH_ShouldISwoop(_Instance *instance)
 
 {
-  int iVar1;
+  uint uVar1;
   uint uVar2;
   
-  iVar1 = 0;
-  if (((*(uint *)instance->extraData & 4) == 0) &&
-     (uVar2 = *(uint *)(instance->extraData + 0x31), uVar2 != 0)) {
-    iVar1 = 0;
-    if ((((*(_Instance **)(uVar2 + 4))->position).z <= (instance->position).z) &&
-       (iVar1 = 0, *(short *)(*(int *)((int)instance->data + 4) + 0xc) < *(short *)(uVar2 + 0x14)))
-    {
-      iVar1 = MON_ShouldIAttackInstance(instance,*(_Instance **)(uVar2 + 4));
-    }
+  uVar2 = 0;
+  if ((((*(uint *)instance->extraData & 4) == 0) &&
+      (uVar1 = *(uint *)(instance->extraData + 0x31), uVar1 != 0)) &&
+     (*(short *)(*(int *)(uVar1 + 4) + 0x60) <= (instance->position).z)) {
+    uVar2 = (uint)(*(short *)(*(int *)((int)instance->data + 4) + 0xc) < *(short *)(uVar1 + 0x14));
   }
-  return iVar1;
+  return uVar2;
 }
 
 
@@ -140,29 +132,29 @@ int VWRAITH_ShouldISwoop(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VWRAITH_PursueEntry(struct _Instance *instance /*$s1*/)
- // line 151, offset 0x8008ea84
+ // line 144, offset 0x8008e6d8
 	/* begin block 1 */
-		// Start line: 152
-		// Start offset: 0x8008EA84
+		// Start line: 145
+		// Start offset: 0x8008E6D8
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 166
-			// Start offset: 0x8008EAE0
+			// Start line: 159
+			// Start offset: 0x8008E734
 			// Variables:
 		// 		struct _MonsterAttributes *ma; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8008EB08
-		// End Line: 171
+		// End offset: 0x8008E75C
+		// End Line: 164
 	/* end block 1 */
-	// End offset: 0x8008EB08
-	// End Line: 172
+	// End offset: 0x8008E75C
+	// End Line: 165
 
 	/* begin block 2 */
-		// Start line: 324
+		// Start line: 310
 	/* end block 2 */
-	// End Line: 325
+	// End Line: 311
 
 void VWRAITH_PursueEntry(_Instance *instance)
 
@@ -190,31 +182,31 @@ void VWRAITH_PursueEntry(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VWRAITH_Pursue(struct _Instance *instance /*$s2*/)
- // line 174, offset 0x8008eb1c
+ // line 167, offset 0x8008e770
 	/* begin block 1 */
-		// Start line: 175
-		// Start offset: 0x8008EB1C
+		// Start line: 168
+		// Start offset: 0x8008E770
 		// Variables:
 	// 		struct _MonsterAttributes *ma; // $s1
 	// 		struct _MonsterVars *mv; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 195
-			// Start offset: 0x8008EBBC
+			// Start line: 188
+			// Start offset: 0x8008E810
 			// Variables:
 		// 		struct _MonsterAttributes *ma; // $s1
 		// 		struct _MonsterAttackAttributes *attack; // $s3
 		/* end block 1.1 */
-		// End offset: 0x8008ECAC
-		// End Line: 218
+		// End offset: 0x8008E900
+		// End Line: 211
 	/* end block 1 */
-	// End offset: 0x8008ECD0
-	// End Line: 225
+	// End offset: 0x8008E924
+	// End Line: 218
 
 	/* begin block 2 */
-		// Start line: 370
+		// Start line: 356
 	/* end block 2 */
-	// End Line: 371
+	// End Line: 357
 
 void VWRAITH_Pursue(_Instance *instance)
 
@@ -227,28 +219,27 @@ void VWRAITH_Pursue(_Instance *instance)
   
   pvVar2 = instance->extraData;
   pvVar3 = instance->data;
-  if ((*(uint *)((int)pvVar2 + 4) & 2) == 0) {
-    iVar1 = VWRAITH_ShouldISwoop(instance);
-    if (iVar1 != 0) {
-                    /* WARNING: Subroutine does not return */
-      MON_SwitchState(instance,(MonsterState)CONCAT44(local_14,local_18));
-    }
-    if (*(int *)((int)pvVar2 + 0xc4) != 0) {
-      VWRAITH_MoveVertical
-                (instance,(int)*(short *)(*(int *)(*(int *)((int)pvVar2 + 0xc4) + 4) + 0x60),
-                 (int)*(short *)(*(int *)((int)pvVar3 + 4) + 6));
-    }
-    MON_Pursue(instance);
-  }
-  else {
+  if ((*(uint *)((int)pvVar2 + 4) & 2) != 0) {
     if (*(int *)((int)pvVar2 + 0xc4) != 0) {
                     /* WARNING: Subroutine does not return */
       MON_TurnToPosition(instance,(_Position *)(*(int *)(*(int *)((int)pvVar2 + 0xc4) + 4) + 0x5c),
-                         *(short *)(*(int *)((int)pvVar2 + 0x154) + 0x20));
+                         *(short *)(*(int *)((int)pvVar2 + 0x164) + 0x20));
     }
     *(uint *)((int)pvVar2 + 4) = *(uint *)((int)pvVar2 + 4) & 0xfffffffd;
+                    /* WARNING: Subroutine does not return */
     MON_DefaultQueueHandler(instance);
   }
+  iVar1 = VWRAITH_ShouldISwoop(instance);
+  if (iVar1 != 0) {
+                    /* WARNING: Subroutine does not return */
+    MON_SwitchState(instance,(MonsterState)CONCAT44(local_14,local_18));
+  }
+  if (*(int *)((int)pvVar2 + 0xc4) != 0) {
+    VWRAITH_MoveVertical
+              (instance,(int)*(short *)(*(int *)(*(int *)((int)pvVar2 + 0xc4) + 4) + 0x60),
+               (int)*(short *)(*(int *)((int)pvVar3 + 4) + 6));
+  }
+  MON_Pursue(instance);
   return;
 }
 
@@ -257,30 +248,30 @@ void VWRAITH_Pursue(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VWRAITH_VerticalMove(struct _Instance *instance /*$s0*/)
- // line 230, offset 0x8008ecec
+ // line 223, offset 0x8008e940
 	/* begin block 1 */
-		// Start line: 231
-		// Start offset: 0x8008ECEC
+		// Start line: 224
+		// Start offset: 0x8008E940
 		// Variables:
 	// 		struct _MonsterVars *mv; // $v0
 
 		/* begin block 1.1 */
-			// Start line: 236
-			// Start offset: 0x8008ED18
+			// Start line: 229
+			// Start offset: 0x8008E96C
 			// Variables:
 		// 		struct _MonsterAttributes *ma; // $v0
 		// 		long targetZ; // $s1
 		/* end block 1.1 */
-		// End offset: 0x8008ED5C
-		// End Line: 242
+		// End offset: 0x8008E9B0
+		// End Line: 235
 	/* end block 1 */
-	// End offset: 0x8008ED5C
-	// End Line: 243
+	// End offset: 0x8008E9B0
+	// End Line: 236
 
 	/* begin block 2 */
-		// Start line: 494
+		// Start line: 480
 	/* end block 2 */
-	// End Line: 495
+	// End Line: 481
 
 void VWRAITH_VerticalMove(_Instance *instance)
 
@@ -306,11 +297,11 @@ void VWRAITH_VerticalMove(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VWRAITH_CombatEntry(struct _Instance *instance /*$a0*/)
- // line 248, offset 0x8008ed70
+ // line 241, offset 0x8008e9c4
 	/* begin block 1 */
-		// Start line: 531
+		// Start line: 517
 	/* end block 1 */
-	// End Line: 532
+	// End Line: 518
 
 void VWRAITH_CombatEntry(_Instance *instance)
 
@@ -324,11 +315,11 @@ void VWRAITH_CombatEntry(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VWRAITH_Combat(struct _Instance *instance /*$s0*/)
- // line 253, offset 0x8008ed90
+ // line 246, offset 0x8008e9e4
 	/* begin block 1 */
-		// Start line: 541
+		// Start line: 527
 	/* end block 1 */
-	// End Line: 542
+	// End Line: 528
 
 void VWRAITH_Combat(_Instance *instance)
 
@@ -343,11 +334,11 @@ void VWRAITH_Combat(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VWRAITH_EmbraceEntry(struct _Instance *instance /*$a0*/)
- // line 263, offset 0x8008edbc
+ // line 256, offset 0x8008ea10
 	/* begin block 1 */
-		// Start line: 561
+		// Start line: 547
 	/* end block 1 */
-	// End Line: 562
+	// End Line: 548
 
 void VWRAITH_EmbraceEntry(_Instance *instance)
 
@@ -361,11 +352,11 @@ void VWRAITH_EmbraceEntry(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VWRAITH_Embrace(struct _Instance *instance /*$s0*/)
- // line 268, offset 0x8008eddc
+ // line 261, offset 0x8008ea30
 	/* begin block 1 */
-		// Start line: 571
+		// Start line: 557
 	/* end block 1 */
-	// End Line: 572
+	// End Line: 558
 
 void VWRAITH_Embrace(_Instance *instance)
 

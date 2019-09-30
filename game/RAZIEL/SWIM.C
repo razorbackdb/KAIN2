@@ -5,7 +5,7 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ StateHandlerInitSwim(struct __CharacterState *In /*$s1*/, int CurrentSection /*$s0*/, int Data /*$a2*/)
- // line 5, offset 0x8009eefc
+ // line 5, offset 0x8009e290
 	/* begin block 1 */
 		// Start line: 10
 	/* end block 1 */
@@ -22,251 +22,217 @@ void StateHandlerInitSwim(__CharacterState *In,int CurrentSection,int Data)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ StateHandlerSwimCoil(struct __CharacterState *In /*$s1*/, int CurrentSection /*$s2*/, int Data /*$s7*/)
- // line 54, offset 0x8009f008
+// void /*$ra*/ StateHandlerSwimCoil(struct __CharacterState *In /*$s1*/, int CurrentSection /*$s2*/, int Data /*$s6*/)
+ // line 55, offset 0x8009e3a4
 	/* begin block 1 */
-		// Start line: 55
-		// Start offset: 0x8009F008
+		// Start line: 56
+		// Start offset: 0x8009E3A4
 		// Variables:
 	// 		struct __Event *Ptr; // $s0
 	// 		struct evPhysicsSwimData *SwimData; // $a0
-	// 		int rc; // $s6
-	// 		int release; // $s5
+	// 		int rc; // $s5
 
 		/* begin block 1.1 */
-			// Start line: 237
-			// Start offset: 0x8009F688
+			// Start line: 222
+			// Start offset: 0x8009E9C0
 			// Variables:
 		// 		struct evMonsterHitData *data; // $v1
 		/* end block 1.1 */
-		// End offset: 0x8009F69C
-		// End Line: 240
+		// End offset: 0x8009E9D4
+		// End Line: 225
 	/* end block 1 */
-	// End offset: 0x8009F75C
-	// End Line: 273
+	// End offset: 0x8009EA4C
+	// End Line: 251
 
 	/* begin block 2 */
-		// Start line: 108
+		// Start line: 102
 	/* end block 2 */
-	// End Line: 109
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 103
 
 void StateHandlerSwimCoil(__CharacterState *In,int CurrentSection,int Data)
 
 {
   __Event *p_Var1;
-  _Instance *instance;
-  int ID;
-  undefined *puVar2;
+  _Instance *p_Var2;
+  int CurrentSection_00;
+  undefined *puVar3;
   int NewAnim;
-  int in_a3;
-  __State *p_Var3;
-  uint uVar4;
-  int local_30;
-  int local_2c;
+  __State *p_Var4;
+  uint uVar5;
+  int local_28;
+  int local_24;
   
-  _BlockVramEntry_800d59a0._12_4_ = _BlockVramEntry_800d59a0._12_4_ & 0xfffffbff;
-  uVar4 = In->SectionList[CurrentSection].Data1;
+  ControlFlag = ControlFlag & 0xfffffbff;
+  uVar5 = In->SectionList[CurrentSection].Data1;
   if (CurrentSection == 0) {
-    if (_CHAR____800d575c != 0) {
+    if (Raziel.timeAccumulator != 0) {
       razLaunchBubbles(3,3,1);
     }
-    if ((_CHAR____800d5720 & 2) != 0) {
+    if ((Raziel.passedMask & 2) != 0) {
       razLaunchBubbles(3,6,1);
     }
-    instance = In->CharacterInstance;
-    if (instance->waterFace != (_TFace *)0x0) {
-      ID = (int)(instance->splitPoint).z;
-      if ((ID < instance->matrix[8].t[2]) || (ID < instance->matrix[0xc].t[2])) {
-        PhysicsMode.next = (_BlockVramEntry *)((int)&mainMenuScreen + 2);
+    p_Var2 = In->CharacterInstance;
+    if (p_Var2->waterFace != (_TFace *)0x0) {
+      CurrentSection_00 = (int)(p_Var2->splitPoint).z;
+      if ((CurrentSection_00 < p_Var2->matrix[8].t[2]) ||
+         (CurrentSection_00 < p_Var2->matrix[0xc].t[2])) {
+        PhysicsMode = 6;
       }
     }
   }
-  p_Var3 = In->SectionList + CurrentSection;
-  p_Var1 = PeekMessageQueue(&p_Var3->Event);
+  p_Var4 = In->SectionList + CurrentSection;
+  p_Var1 = PeekMessageQueue(&p_Var4->Event);
   if (p_Var1 == (__Event *)0x0) {
-    if ((*gameTracker._4_4_ & LONG_800cf578) == 0) {
-                    /* WARNING: Subroutine does not return */
-      EnMessageQueueData(&In->SectionList[CurrentSection].Defer,0x20000008,0);
-    }
     return;
   }
-  puVar2 = (undefined *)p_Var1->ID;
-  if (puVar2 == (undefined *)0x1000000) {
-    if ((CurrentSection == 0) && ((theCamera.core._212_4_ & 0x800) != 0)) {
+  puVar3 = (undefined *)p_Var1->ID;
+  if (puVar3 == &DAT_00100014) {
                     /* WARNING: Subroutine does not return */
-      LoseHealth(*(int *)(p_Var1->Data + 0xc));
-    }
-    goto LAB_8009f700;
+    SetControlInitIdleData(0,0,9);
   }
-  if ((int)puVar2 < 0x1000001) {
-    if (puVar2 == (undefined *)0x100000) {
-      if ((uVar4 & 0x40) == 0) {
+  if ((int)puVar3 < 0x100015) {
+    if (puVar3 == (undefined *)0x100000) {
+      if ((uVar5 & 0x40) == 0) {
         if (CurrentSection == 2) {
           NewAnim = 0x3d;
-          local_30 = 3;
-          ID = 2;
-          local_2c = CurrentSection;
+          local_28 = 3;
+          CurrentSection_00 = 2;
+          local_24 = CurrentSection;
         }
         else {
           NewAnim = 0x3f;
-          local_30 = 0x10;
-          local_2c = 2;
-          ID = CurrentSection;
+          local_28 = 0x10;
+          local_24 = 2;
+          CurrentSection_00 = CurrentSection;
         }
                     /* WARNING: Subroutine does not return */
-        G2EmulationSwitchAnimation(In,ID,NewAnim,0,local_30,local_2c);
+        G2EmulationSwitchAnimation(In,CurrentSection_00,NewAnim,0,local_28,local_24);
       }
+                    /* WARNING: Subroutine does not return */
       StateSwitchStateData(In,CurrentSection,StateHandlerSwimTread,0);
-      if (CurrentSection != 0) goto LAB_8009f700;
-      instance = In->CharacterInstance;
-      ID = *(int *)(_PlayerData + 0x7c);
-LAB_8009f558:
-      razSetSwimVelocity(instance,0,ID);
-      goto LAB_8009f700;
     }
-    if ((int)puVar2 < 0x100001) {
-      if (puVar2 == (undefined *)0x80000001) {
-        ID = G2EmulationQueryAnimation(In,CurrentSection);
-        if (ID != 0x43) {
+    if ((int)puVar3 < 0x100001) {
+      if (puVar3 == (undefined *)0x80000001) {
+        CurrentSection_00 = G2EmulationQueryAnimation(In,CurrentSection);
+        if (CurrentSection_00 != 0x43) {
                     /* WARNING: Subroutine does not return */
           G2EmulationSwitchAnimation(In,CurrentSection,0x43,0,3,1);
         }
-        goto LAB_8009f700;
+        goto LAB_8009ea3c;
       }
-      if ((((int)puVar2 < -0x7fffffff) || (puVar2 == &DAT_80000008)) || (puVar2 == &DAT_80000010))
-      goto LAB_8009f700;
+      if ((((int)puVar3 < -0x7fffffff) || (puVar3 == &DAT_80000008)) || (puVar3 == &DAT_80000010))
+      goto LAB_8009ea3c;
     }
     else {
-      if (puVar2 == &DAT_00100009) goto LAB_8009f700;
-      if ((int)puVar2 < 0x10000a) {
-        if (puVar2 == &DAT_00100001) {
-          if (_CHAR____800d5574 != 0x40000) {
-            if (CurrentSection != 0) goto LAB_8009f2f4;
-            CAMERA_ChangeToUnderWater((Camera *)&theCamera,In->CharacterInstance);
+      if (puVar3 == &DAT_00100004) {
+        if (((Raziel.Mode & 0x40000U) == 0) && (CurrentSection == 0)) {
+          CAMERA_ChangeToOutOfWater(&theCamera,In->CharacterInstance);
+        }
+        goto LAB_8009ea3c;
+      }
+      if ((int)puVar3 < 0x100005) {
+        if (puVar3 == &DAT_00100001) {
+          if (Raziel.Mode != 0x40000) {
+            if (CurrentSection != 0) goto LAB_8009e680;
+            CAMERA_ChangeToUnderWater(&theCamera,In->CharacterInstance);
           }
           if (CurrentSection == 0) {
-            _CHAR____800d5574 = 0x40000;
-            _BlockVramEntry_800d59a0._12_4_ = 0x111;
-            razSetSwimVelocity(In->CharacterInstance,*(int *)(_PlayerData + 0x68),
-                               *(int *)(_PlayerData + 0x6c));
+            Raziel.Mode = 0x40000;
+            ControlFlag = 0x111;
+            razSetSwimVelocity(In->CharacterInstance,PlayerData->SwimPhysicsCoilVelocity,
+                               PlayerData->SwimPhysicsCoilDecelerationIn);
             SetTimer(5);
           }
-LAB_8009f2f4:
-          PhysicsMode.next = (_BlockVramEntry *)((int)&mainMenuScreen + 1);
+LAB_8009e680:
+          PhysicsMode = 5;
                     /* WARNING: Subroutine does not return */
           G2EmulationSwitchAnimation(In,CurrentSection,0x41,0,9,2);
         }
-        if (puVar2 == &DAT_00100004) {
-          if (((_CHAR____800d5574 & 0x40000) == 0) && (CurrentSection == 0)) {
-            CAMERA_ChangeToOutOfWater((Camera *)&theCamera,In->CharacterInstance);
-          }
-          goto LAB_8009f700;
-        }
       }
       else {
-        if (puVar2 == &DAT_00100011) {
-          ID = p_Var1->Data;
-          if (ID == *(int *)(_PlayerData + 0x68)) {
-            razSetSwimVelocity(In->CharacterInstance,0,*(int *)(_PlayerData + 0x70));
-            ID = p_Var1->Data;
+        if (puVar3 == &DAT_00100009) goto LAB_8009ea3c;
+        if (puVar3 == &DAT_00100011) {
+          CurrentSection_00 = p_Var1->Data;
+          if (CurrentSection_00 == PlayerData->SwimPhysicsCoilVelocity) {
+            razSetSwimVelocity(In->CharacterInstance,0,PlayerData->SwimPhysicsCoilDecelerationOut);
+            CurrentSection_00 = p_Var1->Data;
           }
-          if (ID != *(int *)(_PlayerData + 0x74)) goto LAB_8009f700;
-          instance = In->CharacterInstance;
-          ID = *(int *)(_PlayerData + 0x7c);
-          goto LAB_8009f558;
-        }
-        if (puVar2 == &DAT_00100014) {
-                    /* WARNING: Subroutine does not return */
-          SetPhysicsWallCrawlData(0,0,9,in_a3);
+          if (CurrentSection_00 == PlayerData->SwimPhysicsShotVelocity) {
+            razSetSwimVelocity(In->CharacterInstance,0,PlayerData->SwimPhysicsShotAccelerationOut);
+          }
+          goto LAB_8009ea3c;
         }
       }
     }
   }
   else {
-    if (puVar2 == (undefined *)0x4020000) {
-      ID = p_Var1->Data;
-      In->SectionList[CurrentSection].Data1 = (int)*(short *)(ID + 0x10);
-      if ((_CHAR____800d564c == 1) && ((_CHAR____800d561c & 0x10) == 0)) {
-        _CHAR____800d5610 = 100000;
-      }
-      else {
-        if ((*(ushort *)(ID + 0x10) & 0x220) != 0) {
-          if (CurrentSection == 0) {
-            _CHAR____800d5574 = 0x10;
-            SetPhysics(In->CharacterInstance,-0x10,0,0x15,0xc3);
-            SteerSwitchMode(In->CharacterInstance,4);
-            _CHAR____800d55a4 = (int)(In->CharacterInstance->rotation).z;
-            _CHAR____800d559a = (In->CharacterInstance->rotation).z;
-            SetExternalForce((__Force *)&_BlockVramEntry_800d58c0.type,0,0,-0x10,1,0x1000);
-            PhysicsMode.next = (_BlockVramEntry *)0x0;
+    if (puVar3 == (undefined *)0x4010200) goto LAB_8009ea3c;
+    if ((int)puVar3 < 0x4010201) {
+      if (puVar3 == (undefined *)0x1000001) goto LAB_8009ea3c;
+      if ((int)puVar3 < 0x1000002) {
+        if (puVar3 == (undefined *)0x1000000) {
+          if ((CurrentSection == 0) && ((gameTrackerX.debugFlags2 & 0x800U) != 0)) {
+            LoseHealth(*(int *)(p_Var1->Data + 0xc));
           }
-                    /* WARNING: Subroutine does not return */
-          G2EmulationSwitchAnimation(In,CurrentSection,0x23,0,0,1);
+          goto LAB_8009ea3c;
         }
       }
-      goto LAB_8009f700;
-    }
-    if ((int)puVar2 < 0x4020001) {
-      if (puVar2 == (undefined *)0x4000001) goto LAB_8009f700;
-      if ((int)puVar2 < 0x4000002) {
-        if (puVar2 == (undefined *)0x1000001) goto LAB_8009f700;
-      }
       else {
-        if ((puVar2 == (undefined *)0x4000004) || (puVar2 == (undefined *)0x4010200))
-        goto LAB_8009f700;
+        if ((puVar3 == (undefined *)0x4000001) || (puVar3 == (undefined *)0x4000004))
+        goto LAB_8009ea3c;
       }
     }
     else {
-      if (puVar2 == (undefined *)0x8000004) {
-        razSetSwimVelocity(In->CharacterInstance,*(int *)(_PlayerData + 0x74),
-                           *(int *)(_PlayerData + 0x78));
-        goto LAB_8009f700;
+      if (puVar3 == (undefined *)0x8000004) {
+        razSetSwimVelocity(In->CharacterInstance,PlayerData->SwimPhysicsShotVelocity,
+                           PlayerData->SwimPhysicsShotAccelerationIn);
+        goto LAB_8009ea3c;
       }
-      if ((int)puVar2 < 0x8000005) {
-        if (puVar2 == (undefined *)0x8000000) {
-          ID = G2EmulationQueryAnimation(In,CurrentSection);
-          if (ID == 0x43) {
-            ID = 0x100000;
-LAB_8009f428:
+      if ((int)puVar3 < 0x8000005) {
+        if (puVar3 == (undefined *)0x4020000) {
+          CurrentSection_00 = p_Var1->Data;
+          In->SectionList[CurrentSection].Data1 = (int)*(short *)(CurrentSection_00 + 0x10);
+          if ((Raziel.CurrentPlane == 1) && ((Raziel.Abilities & 0x10U) == 0)) {
+            Raziel.HitPoints = 100000;
+          }
+          else {
+            if ((*(ushort *)(CurrentSection_00 + 0x10) & 0x220) != 0) {
+              if (CurrentSection != 0) {
                     /* WARNING: Subroutine does not return */
-            EnMessageQueueData(&p_Var3->Defer,ID,0);
+                G2EmulationSwitchAnimation(In,CurrentSection,0x23,0,0,1);
+              }
+              Raziel.Mode = 0x10;
+              SetPhysics(In->CharacterInstance,-0x10,0,0x15,0xc3);
+                    /* WARNING: Subroutine does not return */
+              SteerSwitchMode(In->CharacterInstance,4);
+            }
           }
-          goto LAB_8009f700;
+          goto LAB_8009ea3c;
         }
-        if (puVar2 == (undefined *)0x8000003) {
-          if ((*gameTracker._4_4_ & LONG_800cf56c) != 0) {
-            ID = -0x7fffffff;
-            goto LAB_8009f428;
+        if (puVar3 == (undefined *)0x8000000) {
+          CurrentSection_00 = G2EmulationQueryAnimation(In,CurrentSection);
+          if (CurrentSection_00 == 0x43) {
+LAB_8009e758:
+                    /* WARNING: Subroutine does not return */
+            EnMessageQueueData(&p_Var4->Defer,0x100000,0);
           }
-          goto LAB_8009f700;
+          goto LAB_8009ea3c;
         }
       }
       else {
-        if (puVar2 == (undefined *)0x20000001) goto LAB_8009f700;
-        if (puVar2 == (undefined *)0x20000008) {
-          ID = G2EmulationQueryAnimation(In,CurrentSection);
-          if (ID != 0x43) {
-            ID = G2EmulationQueryFrame(In,CurrentSection);
-            if (ID < 2) {
-              ID = 0x20000008;
-            }
-            else {
-              ID = 0x100000;
-            }
-                    /* WARNING: Subroutine does not return */
-            EnMessageQueueData(&p_Var3->Defer,ID,0);
-          }
-          goto LAB_8009f700;
+        if (puVar3 == (undefined *)0x20000001) goto LAB_8009ea3c;
+        if (puVar3 == (undefined *)0x20000008) {
+          CurrentSection_00 = G2EmulationQueryAnimation(In,CurrentSection);
+          if (CurrentSection_00 != 0x43) goto LAB_8009e758;
+          goto LAB_8009ea3c;
         }
       }
     }
   }
   DefaultStateHandler(In,CurrentSection,Data);
-LAB_8009f700:
+LAB_8009ea3c:
                     /* WARNING: Subroutine does not return */
-  DeMessageQueue(&p_Var3->Event);
+  DeMessageQueue(&p_Var4->Event);
 }
 
 
@@ -274,91 +240,90 @@ LAB_8009f700:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ StateHandlerSwimTread(struct __CharacterState *In /*$s1*/, int CurrentSection /*$s2*/, int Data /*$a2*/)
- // line 277, offset 0x8009f788
+ // line 255, offset 0x8009ea74
 	/* begin block 1 */
-		// Start line: 278
-		// Start offset: 0x8009F788
+		// Start line: 256
+		// Start offset: 0x8009EA74
 		// Variables:
 	// 		struct __Event *Ptr; // $a0
 	// 		struct evPhysicsSwimData *SwimData; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 422
-			// Start offset: 0x8009FCC8
+			// Start line: 400
+			// Start offset: 0x8009EFC0
 			// Variables:
 		// 		struct evPhysicsEdgeData *data; // $s0
 		/* end block 1.1 */
-		// End offset: 0x8009FD10
-		// End Line: 428
+		// End offset: 0x8009F008
+		// End Line: 406
 
 		/* begin block 1.2 */
-			// Start line: 448
-			// Start offset: 0x8009FDAC
+			// Start line: 425
+			// Start offset: 0x8009F090
 			// Variables:
 		// 		struct evMonsterHitData *data; // $v1
 		/* end block 1.2 */
-		// End offset: 0x8009FDCC
-		// End Line: 453
+		// End offset: 0x8009F0B0
+		// End Line: 430
 	/* end block 1 */
-	// End offset: 0x8009FF24
-	// End Line: 493
+	// End offset: 0x8009F208
+	// End Line: 464
 
 	/* begin block 2 */
-		// Start line: 561
+		// Start line: 518
 	/* end block 2 */
-	// End Line: 562
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 519
 
 void StateHandlerSwimTread(__CharacterState *In,int CurrentSection,int Data)
 
 {
-  __Event *p_Var1;
+  RazielData *pRVar1;
+  __Event *p_Var2;
   int Data_00;
-  undefined *puVar2;
-  int NewAnim;
-  int in_a3;
-  _Instance **pp_Var3;
+  undefined *puVar3;
+  undefined In_00;
+  _Instance **pp_Var4;
   
-  pp_Var3 = &In->CharacterInstance + CurrentSection * 0x47;
-  _BlockVramEntry_800d59a0._12_4_ = _BlockVramEntry_800d59a0._12_4_ | 0x400;
-  p_Var1 = PeekMessageQueue(&In->SectionList[CurrentSection].Event);
-  Data_00 = _PlayerData;
-  if (p_Var1 == (__Event *)0x0) {
-    if ((CurrentSection == 1) && ((_CHAR____800d5720 & 1) != 0)) {
+  pp_Var4 = &In->CharacterInstance + CurrentSection * 0x47;
+  ControlFlag = ControlFlag | 0x400;
+  p_Var2 = PeekMessageQueue(&In->SectionList[CurrentSection].Event);
+  pRVar1 = PlayerData;
+  if (p_Var2 == (__Event *)0x0) {
+    if ((CurrentSection == 1) && ((Raziel.passedMask & 1) != 0)) {
       razLaunchBubbles(3,1,0);
     }
     if (CurrentSection == 2) {
-      if ((_CHAR____800d5720 & 2) != 0) {
-        razSetSwimVelocity(In->CharacterInstance,*(int *)(_PlayerData + 0x8c),
-                           *(int *)(_PlayerData + 0x90));
+      if ((Raziel.passedMask & 2) != 0) {
+        razSetSwimVelocity(In->CharacterInstance,PlayerData->SwimPhysicsSurfKickVelocity,
+                           PlayerData->SwimPhysicsSurfKickAccel);
       }
-      if ((((*gameTracker._4_4_ & LONG_800cf56c) != 0) && (_CHAR____800d559c == 6)) &&
-         ((*gameTracker._4_4_ & 1) != 0)) {
+      if ((((*PadData & 0x80) != 0) && (Raziel.steeringMode == 6)) && ((*PadData & 1U) != 0)) {
+                    /* WARNING: Subroutine does not return */
         G2EmulationSwitchAnimationCharacter(In,0x40,0,3,1);
-        StateSwitchStateCharacterData(In,StateHandlerSwimDiveIn,0);
-        razSetSwimVelocity(In->CharacterInstance,*(int *)(_PlayerData + 0x8c),
-                           *(int *)(_PlayerData + 0x90));
-        _BlockVramEntry_800d59a0._12_4_ = _BlockVramEntry_800d59a0._12_4_ & 0xfffffbff;
       }
     }
     if (CurrentSection == 0) {
-      if (*(int *)(_PlayerData + 0x98) < (int)_CHAR____800d5724) {
-        _CHAR____800d5724 = *(short *)(_PlayerData + 0x98);
+      if (PlayerData->SwimPhysicsSurfMaxRotation < (int)Raziel.extraRot.x) {
+        Raziel.extraRot.x = *(short *)&PlayerData->SwimPhysicsSurfMaxRotation;
       }
-      if ((int)_CHAR____800d5724 < *(int *)(_PlayerData + 0x94)) {
-        _CHAR____800d5724 = *(short *)(_PlayerData + 0x94);
+      if ((int)Raziel.extraRot.x < PlayerData->SwimPhysicsSurfMinRotation) {
+        Raziel.extraRot.x = *(short *)&PlayerData->SwimPhysicsSurfMinRotation;
       }
     }
     return;
   }
-  puVar2 = (undefined *)p_Var1->ID;
-  if (puVar2 == (undefined *)0x4000001) goto LAB_8009fdd0;
-  if (0x4000001 < (int)puVar2) {
-    if (puVar2 == (undefined *)0x4020000) {
-      Data_00 = p_Var1->Data;
-      if ((_CHAR____800d564c == 1) && ((_CHAR____800d561c & 0x10) == 0)) {
-        _CHAR____800d5610 = 100000;
+  puVar3 = (undefined *)p_Var2->ID;
+  if (puVar3 == (undefined *)0x4000001) {
+LAB_8009f0b4:
+                    /* WARNING: Subroutine does not return */
+    DeMessageQueue((__MessageQueue *)(&In->CharacterInstance + CurrentSection * 0x47 + 3));
+  }
+  In_00 = SUB41(In,0);
+  if (0x4000001 < (int)puVar3) {
+    if (puVar3 == (undefined *)0x4020000) {
+      Data_00 = p_Var2->Data;
+      if ((Raziel.CurrentPlane == 1) && ((Raziel.Abilities & 0x10U) == 0)) {
+        Raziel.HitPoints = 100000;
       }
       else {
         if (CurrentSection == 2) {
@@ -374,137 +339,130 @@ void StateHandlerSwimTread(__CharacterState *In,int CurrentSection,int Data)
         }
         if ((*(ushort *)(Data_00 + 0x10) & 0x80) != 0) {
                     /* WARNING: Subroutine does not return */
-          SetPhysicsWallCrawlData(0,0,9,in_a3);
+          SetControlInitIdleData(0,0,9);
         }
       }
-LAB_8009fdd0:
-                    /* WARNING: Subroutine does not return */
-      DeMessageQueue((__MessageQueue *)(&In->CharacterInstance + CurrentSection * 0x47 + 3));
-    }
-    if ((int)puVar2 < 0x4020001) {
-      if (puVar2 == (undefined *)0x4010010) {
-        Data_00 = p_Var1->Data;
-        SetPhysics(In->CharacterInstance,0,0,0,0);
-        Data_00 = SetControlInitHangData(*(_Instance **)(Data_00 + 0x18),0,3);
-        StateSwitchStateData(In,CurrentSection,StateHandlerHang,Data_00);
-      }
-      goto LAB_8009fdd0;
-    }
-    if (puVar2 != (undefined *)0x8000001) goto LAB_8009fdd0;
-    if (p_Var1->Data == 0x42) {
-      if (pp_Var3[0x48] == (_Instance *)0x1) {
-        pp_Var3[0x48] = (_Instance *)0x0;
-        razSetSwimVelocity(In->CharacterInstance,*(int *)(Data_00 + 0x80),*(int *)(Data_00 + 0x84));
-        goto LAB_8009fdd0;
-      }
-      if (((*gameTracker._4_4_ & LONG_800cf56c) != 0) && (_CHAR____800d559c != 0)) {
-                    /* WARNING: Subroutine does not return */
-        G2EmulationSwitchAnimation(In,CurrentSection,0x3e,0,3,2);
-      }
-      razSetSwimVelocity(In->CharacterInstance,0,*(int *)(_PlayerData + 0x9c));
-      NewAnim = 0x3d;
-      Data_00 = 0xf;
     }
     else {
-      if ((p_Var1->Data != 0x3e) || ((*gameTracker._4_4_ & LONG_800cf56c) != 0)) goto LAB_8009fdd0;
-      if (CurrentSection == 2) {
-        razSetSwimVelocity(In->CharacterInstance,0,*(int *)(_PlayerData + 0x88));
-      }
-      NewAnim = 0x3d;
-      Data_00 = 0xf;
-    }
-    goto LAB_8009fb38;
-  }
-  if (puVar2 != &DAT_00100001) {
-    if ((int)puVar2 < 0x100002) {
-      if (puVar2 == &DAT_80000008) {
-        StateSwitchStateData(In,CurrentSection,StateHandlerSwimCoil,0);
+      if ((int)puVar3 < 0x4020001) {
+        if (puVar3 == (undefined *)0x4010010) {
+          Data_00 = p_Var2->Data;
+          SetPhysics(In->CharacterInstance,0,0,0,0);
+          Data_00 = SetControlInitHangData(*(_Instance **)(Data_00 + 0x18),0,3);
+                    /* WARNING: Subroutine does not return */
+          StateSwitchStateData(In,CurrentSection,StateHandlerHang,Data_00);
+        }
       }
       else {
-        if ((int)puVar2 < -0x7ffffff7) {
-          if ((puVar2 == (undefined *)0x80000001) && (_CHAR____800d559c == 6)) {
-            Data_00 = G2EmulationQueryAnimation(In,CurrentSection);
-            if (Data_00 != 0x42) {
-              if (CurrentSection == 2) {
-                razSetSwimVelocity(In->CharacterInstance,*(int *)(_PlayerData + 0x80),
-                                   *(int *)(_PlayerData + 0x84));
+        if (puVar3 == (undefined *)0x8000001) {
+          if (p_Var2->Data == 0x42) {
+            if (pp_Var4[0x48] != (_Instance *)0x1) {
+              if (((*PadData & 0x80) != 0) && (Raziel.steeringMode != 0)) {
+                    /* WARNING: Subroutine does not return */
+                G2EmulationSwitchAnimation(In,CurrentSection,0x3e,0,3,2);
               }
-              NewAnim = 0x42;
-              Data_00 = 5;
-              goto LAB_8009fb38;
+              razSetSwimVelocity(In->CharacterInstance,0,PlayerData->SwimPhysicsSurfKickDecel);
+              StateHandlerInitSwim(In_00,CurrentSection,0x3d);
+              return;
             }
-            pp_Var3[0x48] = (_Instance *)0x1;
-          }
-        }
-        else {
-          if (((puVar2 == &DAT_80000010) && ((_CHAR____800d5574 & 0x10000000) == 0)) &&
-             (CurrentSection == 0)) {
-            StateSwitchStateCharacterData(In,StateHandlerGlyphs,0);
-            G2EmulationSwitchAnimationCharacter(In,0x3d,0,9,2);
-          }
-        }
-      }
-    }
-    else {
-      if (puVar2 == &DAT_00100009) {
-        if (CurrentSection == 0) {
-          if (p_Var1->Data == 0) {
-            SteerSwitchMode(In->CharacterInstance,6);
+            pp_Var4[0x48] = (_Instance *)0x0;
+            razSetSwimVelocity(In->CharacterInstance,pRVar1->SwimPhysicsSurfVelocity,
+                               pRVar1->SwimPhysicsSurfAccelerationIn);
           }
           else {
-            SteerSwitchMode(In->CharacterInstance,0);
+            if ((p_Var2->Data == 0x3e) && ((*PadData & 0x80) == 0)) {
+              if (CurrentSection == 2) {
+                razSetSwimVelocity(In->CharacterInstance,0,
+                                   PlayerData->SwimPhysicsSurfAccelerationOut);
+              }
+              StateHandlerInitSwim(In_00,CurrentSection,0x3d);
+              return;
+            }
           }
         }
       }
+    }
+    goto LAB_8009f0b4;
+  }
+  if (puVar3 != &DAT_00100001) {
+    if ((int)puVar3 < 0x100002) {
+      if (puVar3 == &DAT_80000008) {
+                    /* WARNING: Subroutine does not return */
+        StateSwitchStateData(In,CurrentSection,StateHandlerSwimCoil,0);
+      }
+      if ((int)puVar3 < -0x7ffffff7) {
+        if ((puVar3 == (undefined *)0x80000001) && (Raziel.steeringMode == 6)) {
+          Data_00 = G2EmulationQueryAnimation(In,CurrentSection);
+          if (Data_00 != 0x42) {
+            if (CurrentSection == 2) {
+              razSetSwimVelocity(In->CharacterInstance,PlayerData->SwimPhysicsSurfVelocity,
+                                 PlayerData->SwimPhysicsSurfAccelerationIn);
+            }
+                    /* WARNING: Subroutine does not return */
+            G2EmulationSwitchAnimation(In,CurrentSection,0x42,0,5,2);
+          }
+          pp_Var4[0x48] = (_Instance *)0x1;
+        }
+      }
       else {
-        if ((int)puVar2 < 0x10000a) {
-          if (puVar2 == &DAT_00100004) {
-            if ((_CHAR____800d5574 & 0x40000) == 0) {
-              if (CurrentSection != 0) goto LAB_8009fdd0;
-              CAMERA_ChangeToOutOfWater((Camera *)&theCamera,In->CharacterInstance);
+        if (((puVar3 == &DAT_80000010) && ((Raziel.Mode & 0x10000000U) == 0)) &&
+           (CurrentSection == 0)) {
+          StateSwitchStateCharacterData(In,StateHandlerGlyphs,0);
+        }
+      }
+    }
+    else {
+      if (puVar3 == &DAT_00100009) {
+        if (CurrentSection == 0) {
+          if (p_Var2->Data == 0) {
+                    /* WARNING: Subroutine does not return */
+            SteerSwitchMode(In->CharacterInstance,6);
+          }
+                    /* WARNING: Subroutine does not return */
+          SteerSwitchMode(In->CharacterInstance,0);
+        }
+      }
+      else {
+        if ((int)puVar3 < 0x10000a) {
+          if (puVar3 == &DAT_00100004) {
+            if ((Raziel.Mode & 0x40000U) == 0) {
+              if (CurrentSection != 0) goto LAB_8009f0b4;
+              CAMERA_ChangeToOutOfWater(&theCamera,In->CharacterInstance);
             }
             if (CurrentSection == 0) {
-              _CHAR____800d5720 = 0;
+              Raziel.passedMask = 0;
             }
           }
         }
         else {
-          if (puVar2 == &DAT_00100014) {
+          if (puVar3 == &DAT_00100014) {
                     /* WARNING: Subroutine does not return */
-            SetPhysicsWallCrawlData(0,0,9,in_a3);
+            SetControlInitIdleData(0,0,9);
           }
-          if (((puVar2 == (undefined *)0x1000000) && (CurrentSection == 0)) &&
-             ((theCamera.core._212_4_ & 0x800) != 0)) {
-                    /* WARNING: Subroutine does not return */
-            LoseHealth(*(int *)(p_Var1->Data + 0xc));
+          if (((puVar3 == (undefined *)0x1000000) && (CurrentSection == 0)) &&
+             ((gameTrackerX.debugFlags2 & 0x800U) != 0)) {
+            LoseHealth(*(int *)(p_Var2->Data + 0xc));
           }
         }
       }
     }
-    goto LAB_8009fdd0;
+    goto LAB_8009f0b4;
   }
-  if ((_CHAR____800d5574 & 0x40000) == 0) {
-    if (CurrentSection == 0) {
-      CAMERA_ChangeToUnderWater((Camera *)&theCamera,In->CharacterInstance);
-      goto LAB_8009f91c;
-    }
+  if ((Raziel.Mode & 0x40000U) == 0) {
+    if (CurrentSection != 0) goto LAB_8009ec50;
+    CAMERA_ChangeToUnderWater(&theCamera,In->CharacterInstance);
   }
-  else {
-LAB_8009f91c:
-    if (CurrentSection == 0) {
-      _CHAR____800d5574 = 0x40000;
-      _BlockVramEntry_800d59a0._12_4_ = 0x511;
-      PhysicsMode.next = (_BlockVramEntry *)((int)&mainMenuScreen + 2);
-      razSetSwimVelocity(In->CharacterInstance,0,*(int *)(_PlayerData + 0x88));
-      SteerSwitchMode(In->CharacterInstance,6);
-      _CHAR____800d5720 = 0;
-    }
-  }
-  NewAnim = 0x3d;
-  Data_00 = 9;
-LAB_8009fb38:
+  if (CurrentSection == 0) {
+    Raziel.Mode = 0x40000;
+    ControlFlag = 0x511;
+    PhysicsMode = 6;
+    razSetSwimVelocity(In->CharacterInstance,0,PlayerData->SwimPhysicsSurfAccelerationOut);
                     /* WARNING: Subroutine does not return */
-  G2EmulationSwitchAnimation(In,CurrentSection,NewAnim,0,Data_00,2);
+    SteerSwitchMode(In->CharacterInstance,6);
+  }
+LAB_8009ec50:
+  StateHandlerInitSwim(In_00,CurrentSection,0x3d);
+  return;
 }
 
 
@@ -512,39 +470,36 @@ LAB_8009fb38:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ StateHandlerSwimDiveIn(struct __CharacterState *In /*$s1*/, int CurrentSection /*$s0*/, int Data /*$a2*/)
- // line 497, offset 0x8009ff50
+ // line 468, offset 0x8009f234
 	/* begin block 1 */
-		// Start line: 498
-		// Start offset: 0x8009FF50
+		// Start line: 469
+		// Start offset: 0x8009F234
 		// Variables:
 	// 		struct __Event *Ptr; // $a0
-	// 		struct evPhysicsSwimData *SwimData; // $s3
+	// 		struct evPhysicsSwimData *SwimData; // $s4
 
 		/* begin block 1.1 */
-			// Start line: 581
-			// Start offset: 0x800A01E8
+			// Start line: 548
+			// Start offset: 0x8009F49C
 			// Variables:
 		// 		struct evMonsterHitData *data; // $v1
 		/* end block 1.1 */
-		// End offset: 0x800A0208
-		// End Line: 586
+		// End offset: 0x8009F4BC
+		// End Line: 553
 	/* end block 1 */
-	// End offset: 0x800A02B8
-	// End Line: 614
+	// End offset: 0x8009F56C
+	// End Line: 581
 
 	/* begin block 2 */
-		// Start line: 1048
+		// Start line: 991
 	/* end block 2 */
-	// End Line: 1049
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 992
 
 void StateHandlerSwimDiveIn(__CharacterState *In,int CurrentSection,int Data)
 
 {
   __Event *p_Var1;
   undefined *puVar2;
-  int in_a3;
   __State *p_Var3;
   
   p_Var3 = In->SectionList + CurrentSection;
@@ -552,14 +507,14 @@ void StateHandlerSwimDiveIn(__CharacterState *In,int CurrentSection,int Data)
   if (p_Var1 == (__Event *)0x0) {
     if (CurrentSection == 0) {
       (In->CharacterInstance->position).z = (In->CharacterInstance->position).z + -0x10;
-      if ((_CHAR____800d5720 & 1) != 0) {
-        if (((_CHAR____800d5720 & 2) != 0) || ((*gameTracker._4_4_ & 1) != 0)) {
-          _CHAR____800d5724 = _CHAR____800d5724 + 0x30;
+      if ((Raziel.passedMask & 1) != 0) {
+        if (((Raziel.passedMask & 2) != 0) || ((*PadData & 1U) != 0)) {
+          Raziel.extraRot.x = Raziel.extraRot.x + 0x30;
         }
-        if (0x400 < _CHAR____800d5724) {
-          PhysicsMode.next = (_BlockVramEntry *)((int)&mainMenuScreen + 1);
+        if (0x400 < Raziel.extraRot.x) {
+          PhysicsMode = 5;
         }
-        if ((_CHAR____800d5720 & 4) != 0) {
+        if ((Raziel.passedMask & 4) != 0) {
           razLaunchBubbles(3,1,0);
         }
       }
@@ -569,27 +524,28 @@ void StateHandlerSwimDiveIn(__CharacterState *In,int CurrentSection,int Data)
   puVar2 = (undefined *)p_Var1->ID;
   if (puVar2 == &DAT_00100014) {
                     /* WARNING: Subroutine does not return */
-    SetPhysicsWallCrawlData(0,0,9,in_a3);
+    SetControlInitIdleData(0,0,9);
   }
   if ((int)puVar2 < 0x100015) {
     if ((puVar2 != (undefined *)0x100000) && (0x100000 < (int)puVar2)) {
       if (puVar2 == &DAT_00100001) {
-        if (_CHAR____800d5574 != 0x40000) {
-          if (CurrentSection != 0) goto LAB_800a0208;
-          CAMERA_ChangeToUnderWater((Camera *)&theCamera,In->CharacterInstance);
+        if (Raziel.Mode != 0x40000) {
+          if (CurrentSection != 0) goto LAB_8009f4bc;
+          CAMERA_ChangeToUnderWater(&theCamera,In->CharacterInstance);
         }
         if (CurrentSection == 0) {
-          _CHAR____800d5574 = 0x40000;
-          _BlockVramEntry_800d59a0._12_4_ = 0x191;
-          PhysicsMode.next = (_BlockVramEntry *)((int)&mainMenuScreen + 2);
+          Raziel.Mode = 0x40000;
+          ControlFlag = 0x191;
+          PhysicsMode = 6;
+                    /* WARNING: Subroutine does not return */
           SteerSwitchMode(In->CharacterInstance,0x11);
         }
       }
       else {
-        if (((puVar2 == &DAT_00100004) && ((_CHAR____800d5574 & 0x40000) == 0)) &&
-           (CurrentSection == 0)) {
-          CAMERA_ChangeToOutOfWater((Camera *)&theCamera,In->CharacterInstance);
-          _CHAR____800d5720 = 0;
+        if (((puVar2 == &DAT_00100004) && ((Raziel.Mode & 0x40000U) == 0)) && (CurrentSection == 0))
+        {
+          CAMERA_ChangeToOutOfWater(&theCamera,In->CharacterInstance);
+          Raziel.passedMask = 0;
         }
       }
     }
@@ -598,38 +554,27 @@ void StateHandlerSwimDiveIn(__CharacterState *In,int CurrentSection,int Data)
     if (puVar2 != (undefined *)0x4010200) {
       if ((int)puVar2 < 0x4010201) {
         if (((puVar2 == (undefined *)0x1000000) && (CurrentSection == 0)) &&
-           ((theCamera.core._212_4_ & 0x800) != 0)) {
-                    /* WARNING: Subroutine does not return */
+           ((gameTrackerX.debugFlags2 & 0x800U) != 0)) {
           LoseHealth(*(int *)(p_Var1->Data + 0xc));
         }
       }
       else {
-        if (puVar2 == (undefined *)0x4020000) {
-          if ((*(ushort *)(p_Var1->Data + 0x10) & 0x80) != 0) {
+        if ((puVar2 != (undefined *)0x4020000) && (puVar2 == (undefined *)0x8000000)) {
+          if ((*PadData & 0x80) != 0) {
                     /* WARNING: Subroutine does not return */
-            SetPhysicsWallCrawlData(0,0,9,in_a3);
+            EnMessageQueueData(&p_Var3->Defer,-0x7fffffff,0);
           }
-        }
-        else {
-          if (puVar2 == (undefined *)0x8000000) {
-            if ((*gameTracker._4_4_ & LONG_800cf56c) != 0) {
+          if (((ushort)DAT_00000010 & 0x40) == 0) {
                     /* WARNING: Subroutine does not return */
-              EnMessageQueueData(&p_Var3->Defer,-0x7fffffff,0);
-            }
-            if ((DAT_00000010 & 0x40) == 0) {
-              StateSwitchStateData(In,CurrentSection,StateHandlerSwim,0);
-              (&In->CharacterInstance + CurrentSection * 0x47)[0x48] =
-                   (_Instance *)((uint)(&In->CharacterInstance + CurrentSection * 0x47)[0x48] | 2);
-            }
-            else {
-              StateSwitchStateData(In,CurrentSection,StateHandlerSwimTread,0);
-            }
+            StateSwitchStateData(In,CurrentSection,StateHandlerSwim,0);
           }
+                    /* WARNING: Subroutine does not return */
+          StateSwitchStateData(In,CurrentSection,StateHandlerSwimTread,0);
         }
       }
     }
   }
-LAB_800a0208:
+LAB_8009f4bc:
                     /* WARNING: Subroutine does not return */
   DeMessageQueue(&p_Var3->Event);
 }
@@ -638,43 +583,40 @@ LAB_800a0208:
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ StateHandlerSwim(struct __CharacterState *In /*$s1*/, int CurrentSection /*$s3*/, int Data /*stack 8*/)
- // line 621, offset 0x800a02dc
+// void /*$ra*/ StateHandlerSwim(struct __CharacterState *In /*$s2*/, int CurrentSection /*$s3*/, int Data /*$fp*/)
+ // line 588, offset 0x8009f590
 	/* begin block 1 */
-		// Start line: 622
-		// Start offset: 0x800A02DC
+		// Start line: 589
+		// Start offset: 0x8009F590
 		// Variables:
-	// 		struct __Event *Ptr; // $a0
-	// 		struct evPhysicsSwimData *SwimData; // $s2
-	// 		int tap; // $fp
+	// 		struct __Event *Ptr; // $s1
+	// 		struct evPhysicsSwimData *SwimData; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 804
-			// Start offset: 0x800A0A7C
+			// Start line: 756
+			// Start offset: 0x8009FCF0
 			// Variables:
 		// 		struct _Instance *Inst; // $s0
 		/* end block 1.1 */
-		// End offset: 0x800A0B28
-		// End Line: 816
+		// End offset: 0x8009FD88
+		// End Line: 767
 
 		/* begin block 1.2 */
-			// Start line: 948
-			// Start offset: 0x800A0DE0
+			// Start line: 893
+			// Start offset: 0x800A010C
 			// Variables:
 		// 		struct evMonsterHitData *data; // $v1
 		/* end block 1.2 */
-		// End offset: 0x800A0DF4
-		// End Line: 951
+		// End offset: 0x800A0120
+		// End Line: 896
 	/* end block 1 */
-	// End offset: 0x800A0E28
-	// End Line: 962
+	// End offset: 0x800A0154
+	// End Line: 907
 
 	/* begin block 2 */
-		// Start line: 1424
+		// Start line: 1359
 	/* end block 2 */
-	// End Line: 1425
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+	// End Line: 1360
 
 void StateHandlerSwim(__CharacterState *In,int CurrentSection,int Data)
 
@@ -683,26 +625,25 @@ void StateHandlerSwim(__CharacterState *In,int CurrentSection,int Data)
   int NewAnim;
   undefined *puVar2;
   _Instance *Inst;
-  code *NewProcess;
   long adjustment;
   int NewAnim_00;
-  int in_a3;
+  code *NewProcess;
+  int local_2c;
   __MessageQueue *In_00;
   _Instance **pp_Var3;
   int local_30;
-  int local_2c;
   
   if (CurrentSection == 0) {
     if (0 < In->CharacterInstance->zVel) {
       In->SectionList[0].Data2 = In->SectionList[0].Data2 | 2;
     }
-    if (_CHAR____800d5584 < -0x60) {
+    if (Raziel.iVelocity.z < -0x60) {
       razLaunchBubbles(3,3,1);
     }
-    if ((_CHAR____800d5720 & 1) != 0) {
+    if ((Raziel.passedMask & 1) != 0) {
       razLaunchBubbles(2,1,0);
     }
-    if ((_CHAR____800d5720 & 2) != 0) {
+    if ((Raziel.passedMask & 2) != 0) {
       razLaunchBubbles(2,1,0);
     }
   }
@@ -715,84 +656,73 @@ void StateHandlerSwim(__CharacterState *In,int CurrentSection,int Data)
   puVar2 = (undefined *)p_Var1->ID;
   if (puVar2 == &DAT_00100014) {
                     /* WARNING: Subroutine does not return */
-    SetPhysicsWallCrawlData(0,0,9,in_a3);
+    SetControlInitIdleData(0,0,9);
   }
   if ((int)puVar2 < 0x100015) {
     if (puVar2 == &DAT_80000010) {
-      if (((_CHAR____800d5574 & 0x10000000) == 0) && (CurrentSection == 0)) {
+      if (((Raziel.Mode & 0x10000000U) == 0) && (CurrentSection == 0)) {
         StateSwitchStateCharacterData(In,StateHandlerGlyphs,0);
-                    /* WARNING: Subroutine does not return */
-        G2EmulationSwitchAnimation(In,2,0x3d,0,3,2);
       }
-      goto LAB_800a0e18;
+      goto LAB_800a0144;
     }
     if ((int)puVar2 < -0x7fffffef) {
       if (puVar2 == &DAT_80000002) {
         if (CurrentSection == 1) {
-          _CHAR____800d571c = In->SectionList[1].Process;
+          Raziel.returnState = (_func_60 *)In->SectionList[1].Process;
+                    /* WARNING: Subroutine does not return */
           StateSwitchStateData(In,1,StateHandlerSoulSuck,0);
         }
-        goto LAB_800a0e18;
+        goto LAB_800a0144;
       }
       if ((int)puVar2 < -0x7ffffffd) {
-        if (puVar2 == (undefined *)0x80000000) goto LAB_800a0e18;
+        if (puVar2 == (undefined *)0x80000000) goto LAB_800a0144;
         if (puVar2 == (undefined *)0x80000001) {
-          if (_CHAR____800d559c == 6) {
+          if (Raziel.steeringMode == 6) {
             NewAnim = G2EmulationQueryAnimation(In,CurrentSection);
             if (NewAnim != 0x44) {
               if (CurrentSection == 0) {
-                razSetSwimVelocity(In->CharacterInstance,*(int *)(_PlayerData + 0x54),
-                                   *(int *)(_PlayerData + 0x58));
-                _CHAR____800d5774 = 0x5dc;
-                (In->CharacterInstance->anim).section[0].swAlarmTable = (short *)0x800d5774;
+                razSetSwimVelocity(In->CharacterInstance,PlayerData->SwimPhysicsUnderKickVelocity,
+                                   PlayerData->SwimPhysicsUnderKickAccel);
+                Raziel.alarmTable = 0x5dc;
+                (In->CharacterInstance->anim).section[0].swAlarmTable = (short *)0x800d5c98;
               }
-              NewAnim = 0x44;
-              local_2c = 5;
-              goto LAB_800a0d80;
+              local_2c = 0x44;
+              NewAnim = 5;
+              goto LAB_8009fbfc;
             }
             pp_Var3[0x48] = (_Instance *)((uint)pp_Var3[0x48] | 1);
           }
-          goto LAB_800a0e18;
+          goto LAB_800a0144;
         }
       }
       else {
         if (puVar2 == &DAT_80000004) {
           Inst = In->CharacterInstance;
-          adjustment = *(long *)(_PlayerData + 100);
-LAB_800a0cdc:
+          adjustment = PlayerData->SwimPhysicsUnderStealthAdjust;
+LAB_8009ff34:
                     /* WARNING: Subroutine does not return */
           G2Anim_SetSpeedAdjustment(&Inst->anim,adjustment);
         }
         if (puVar2 == &DAT_80000008) {
-          if (CurrentSection != 0) goto LAB_800a0e18;
-          NewAnim = G2EmulationQueryFrame(In,0);
-          if (NewAnim < 2) {
-                    /* WARNING: Subroutine does not return */
-            EnMessageQueueData(&In->SectionList[0].Defer,(int)&DAT_80000008,0);
-          }
           NewProcess = StateHandlerSwimCoil;
-LAB_800a08f0:
-          StateSwitchStateCharacterData(In,NewProcess,0);
-          goto LAB_800a0e18;
+          goto LAB_800a0074;
         }
       }
     }
     else {
       if (puVar2 == &DAT_00100001) {
-        if (_CHAR____800d5574 != 0x40000) {
-          if (CurrentSection != 0) goto LAB_800a05f8;
-          CAMERA_ChangeToUnderWater((Camera *)&theCamera,In->CharacterInstance);
+        if (Raziel.Mode != 0x40000) {
+          if (CurrentSection != 0) goto LAB_8009f8ac;
+          CAMERA_ChangeToUnderWater(&theCamera,In->CharacterInstance);
         }
         if (CurrentSection == 0) {
-          _CHAR____800d5574 = 0x40000;
-          _CHAR____800d557c = 1;
-          _BlockVramEntry_800d59a0._12_4_ = 400;
-          SteerSwitchMode(In->CharacterInstance,6);
-          razSetSwimVelocity(In->CharacterInstance,0,*(int *)(_PlayerData + 0x50));
+          Raziel.Mode = 0x40000;
+          Raziel.RotationSegment = 1;
+          ControlFlag = 400;
                     /* WARNING: Subroutine does not return */
-          G2Anim_SetSpeedAdjustment(&In->CharacterInstance->anim,0x1000);
+          SteerSwitchMode(In->CharacterInstance,6);
         }
-LAB_800a05f8:
+LAB_8009f8ac:
         if (CurrentSection == 2) {
           NewAnim_00 = 0x3d;
           local_30 = 3;
@@ -813,7 +743,7 @@ LAB_800a05f8:
           Inst = razGetHeldWeapon();
           if (Inst == (_Instance *)0x0) {
             NewAnim = 0x80000;
-            if ((_CHAR____800d561c & 4) == 0) goto LAB_800a0e18;
+            if ((Raziel.Abilities & 4U) == 0) goto LAB_800a0144;
           }
           else {
             NewAnim = 0x800010;
@@ -822,15 +752,16 @@ LAB_800a05f8:
           EnMessageQueueData(In_00,NewAnim,1);
         }
         if (puVar2 == (undefined *)0x80000) {
-          if (CurrentSection != 0) goto LAB_800a0e18;
-          razLaunchForce(In->CharacterInstance);
+          if (CurrentSection == 0) {
+            razLaunchForce(In->CharacterInstance);
+          }
           NewProcess = StateHandlerThrow2;
-          goto LAB_800a08f0;
+          goto LAB_800a0074;
         }
       }
       else {
         if (puVar2 == &DAT_00100004) {
-          if ((_CHAR____800d5574 & 0x40000) == 0) {
+          if ((Raziel.Mode & 0x40000U) == 0) {
             if (CurrentSection == 0) {
                     /* WARNING: Subroutine does not return */
               G2Anim_SetSpeedAdjustment(&In->CharacterInstance->anim,0x1000);
@@ -838,49 +769,64 @@ LAB_800a05f8:
           }
           else {
             if (CurrentSection == 0) {
-              _CHAR____800d5720 = 0;
+              Raziel.passedMask = 0;
             }
           }
-          goto LAB_800a0e18;
+          goto LAB_800a0144;
         }
         if (puVar2 == &DAT_00100009) {
-          if (CurrentSection != 0) goto LAB_800a0e18;
-          if (p_Var1->Data == 0) {
-            SteerSwitchMode(In->CharacterInstance,6);
-            goto LAB_800a0e18;
+          if (CurrentSection == 0) {
+            if (p_Var1->Data == 0) {
+                    /* WARNING: Subroutine does not return */
+              SteerSwitchMode(In->CharacterInstance,6);
+            }
+                    /* WARNING: Subroutine does not return */
+            SteerSwitchMode(In->CharacterInstance,0);
           }
-          SteerSwitchMode(In->CharacterInstance,0);
-LAB_800a0a10:
-          razSetSwimVelocity(In->CharacterInstance,0,*(int *)(_PlayerData + 0x50));
-          goto LAB_800a0e18;
+          goto LAB_800a0144;
         }
       }
     }
   }
   else {
-    if (puVar2 == (undefined *)0x4010200) goto LAB_800a0e18;
+    if (puVar2 == (undefined *)0x4010200) goto LAB_800a0144;
     if ((int)puVar2 < 0x4010201) {
-      if (puVar2 == (undefined *)0x1000001) goto LAB_800a0e18;
+      if (puVar2 == (undefined *)0x1000001) goto LAB_800a0144;
       if ((int)puVar2 < 0x1000002) {
         if (puVar2 == (undefined *)0x800010) {
-          if (CurrentSection != 0) goto LAB_800a0e18;
           NewProcess = StateHandlerThrow2;
-          goto LAB_800a08f0;
+LAB_800a0074:
+                    /* WARNING: Subroutine does not return */
+          StateSwitchStateData(In,CurrentSection,NewProcess,0);
         }
         if (puVar2 == (undefined *)0x1000000) {
-          if ((CurrentSection == 0) && ((theCamera.core._212_4_ & 0x800) != 0)) {
-                    /* WARNING: Subroutine does not return */
+          if ((CurrentSection == 0) && ((gameTrackerX.debugFlags2 & 0x800U) != 0)) {
             LoseHealth(*(int *)(p_Var1->Data + 0xc));
           }
-          goto LAB_800a0e18;
+          goto LAB_800a0144;
         }
       }
       else {
         if (puVar2 == (undefined *)0x2000000) {
-          razPickupAndGrab(In,CurrentSection);
-          goto LAB_800a0e18;
+          if (((Raziel.Senses.EngagedMask & 0x20) != 0) &&
+             (Inst = razGetHeldItem(), Inst == (_Instance *)0x0)) {
+            Inst = (Raziel.Senses.EngagedList[5].instance)->LinkParent;
+            if (Inst == (_Instance *)0x0) {
+              Raziel.Mode = 0x800;
+              pp_Var3[0x47] = (_Instance *)0x0;
+                    /* WARNING: Subroutine does not return */
+              G2EmulationSwitchAnimation(In,CurrentSection,0xb,0,3,1);
+            }
+                    /* WARNING: Subroutine does not return */
+            INSTANCE_Query(Inst,0);
+          }
+          if (((p_Var1->Data & 1U) != 0) && (Inst = razGetHeldItem(), Inst != (_Instance *)0x0)) {
+            NewProcess = StateHandlerAttack2;
+            goto LAB_800a0074;
+          }
+          goto LAB_800a0144;
         }
-        if (puVar2 == (undefined *)0x4000001) goto LAB_800a0e18;
+        if (puVar2 == (undefined *)0x4000001) goto LAB_800a0144;
       }
     }
     else {
@@ -888,65 +834,65 @@ LAB_800a0a10:
         NewAnim = p_Var1->Data;
         if ((NewAnim == 0x44) || (NewAnim == 0x42)) {
           if (((uint)pp_Var3[0x48] & 1) != 0) {
-            razSetSwimVelocity(In->CharacterInstance,*(int *)(_PlayerData + 0x54),
-                               *(int *)(_PlayerData + 0x58));
+            razSetSwimVelocity(In->CharacterInstance,PlayerData->SwimPhysicsUnderKickVelocity,
+                               PlayerData->SwimPhysicsUnderKickAccel);
             pp_Var3[0x48] = (_Instance *)((uint)pp_Var3[0x48] & 0xfffffffe);
-            goto LAB_800a0e18;
+            goto LAB_800a0144;
           }
-          if (((*gameTracker._4_4_ & LONG_800cf56c) != 0) && (_CHAR____800d559c == 6)) {
+          if (((*PadData & 0x80) != 0) && (Raziel.steeringMode == 6)) {
             if (CurrentSection != 2) {
-              NewAnim = 0x3c;
-              local_2c = 0xc;
-              goto LAB_800a0d80;
+              local_2c = 0x3c;
+              NewAnim = 0xc;
+              goto LAB_8009fbfc;
             }
             NewAnim = 0;
-            goto LAB_800a0894;
+            goto LAB_8009fb48;
           }
           if (CurrentSection == 0) {
-            razSetSwimVelocity(In->CharacterInstance,0,*(int *)(_PlayerData + 0x50));
+            razSetSwimVelocity(In->CharacterInstance,0,PlayerData->SwimPhysicsUnderDeceleration);
           }
           if (CurrentSection != 2) {
-            NewAnim = 0x3f;
-            local_2c = 8;
-LAB_800a0d80:
+            local_2c = 0x3f;
+            NewAnim = 8;
+LAB_8009fbfc:
                     /* WARNING: Subroutine does not return */
-            G2EmulationSwitchAnimation(In,CurrentSection,NewAnim,0,local_2c,2);
+            G2EmulationSwitchAnimation(In,CurrentSection,local_2c,0,NewAnim,2);
           }
         }
         else {
-          if ((NewAnim == 0x3f) || ((*gameTracker._4_4_ & LONG_800cf56c) != 0)) goto LAB_800a0e18;
+          if ((NewAnim == 0x3f) || ((*PadData & 0x80) != 0)) goto LAB_800a0144;
           if (CurrentSection == 0) {
-            razSetSwimVelocity(In->CharacterInstance,0,*(int *)(_PlayerData + 0x50));
+            razSetSwimVelocity(In->CharacterInstance,0,PlayerData->SwimPhysicsUnderDeceleration);
           }
           if (CurrentSection != 2) {
-            NewAnim = 0x3f;
-            local_2c = 0x10;
-            goto LAB_800a0d80;
+            local_2c = 0x3f;
+            NewAnim = 0x10;
+            goto LAB_8009fbfc;
           }
         }
         NewAnim = 0x3d;
-LAB_800a0894:
+LAB_8009fb48:
                     /* WARNING: Subroutine does not return */
         G2EmulationSwitchAnimation(In,2,NewAnim,0,3,CurrentSection);
       }
       if ((int)puVar2 < 0x8000002) {
         if (puVar2 == (undefined *)0x4020000) {
           NewAnim = p_Var1->Data;
-          if ((_CHAR____800d564c == 1) && ((_CHAR____800d561c & 0x10) == 0)) {
-            _CHAR____800d5610 = 100000;
+          if ((Raziel.CurrentPlane == 1) && ((Raziel.Abilities & 0x10U) == 0)) {
+            Raziel.HitPoints = 100000;
           }
           else {
             if (CurrentSection == 0) {
               Inst = razGetHeldWeapon();
               PhysicsForceSetWater
                         (In->CharacterInstance,&In->SectionList[0].Data1,
-                         (int)*(short *)(NewAnim + 0xc),*(int *)(_PlayerData + 0x48),
-                         *(int *)(_PlayerData + 0x4c));
+                         (int)*(short *)(NewAnim + 0xc),PlayerData->SwimPhysicsWaterFrequency,
+                         PlayerData->SwimPhysicsWaterAmplitude);
               if (*(short *)(NewAnim + 0xc) < -0x3f) {
-                _BlockVramEntry_800d59a0._12_4_ = _BlockVramEntry_800d59a0._12_4_ & 0xfffffbff;
+                ControlFlag = ControlFlag & 0xfffffbff;
               }
               else {
-                _BlockVramEntry_800d59a0._12_4_ = _BlockVramEntry_800d59a0._12_4_ | 0x400;
+                ControlFlag = ControlFlag | 0x400;
               }
               if (Inst != (_Instance *)0x0) {
                     /* WARNING: Subroutine does not return */
@@ -954,60 +900,61 @@ LAB_800a0894:
               }
             }
             if (((*(ushort *)(NewAnim + 0x10) & 0x200) != 0) && (CurrentSection == 0)) {
-                    /* WARNING: Read-only address (ram,0x800d58d4) is written */
-              _BlockVramEntry_800d58c0.area._0_2_ = 0x30;
+                    /* WARNING: Read-only address (ram,0x800d5e04) is written */
+              ExternalForces.Friction = 0x30;
             }
-            if ((((*(ushort *)(NewAnim + 0x10) & 0x40) != 0) && (_CHAR____800d5574 == 0x40000)) &&
-               (0 < _CHAR____800d5584)) {
+            if (((*(ushort *)(NewAnim + 0x10) & 0x40) != 0) && (0 < Raziel.iVelocity.z)) {
               StateHandlerInitSwim(In,CurrentSection,Data);
             }
             if ((*(ushort *)(NewAnim + 0x10) & 0x400) != 0) {
               if (CurrentSection == 0) {
-                _CHAR____800d5574 = 0x10;
-                SetExternalForce((__Force *)&_BlockVramEntry_800d58dc.w,0,0,-0x10,1,0x1000);
-                In->CharacterInstance->xVel = (int)_CHAR____800d5580;
-                In->CharacterInstance->yVel = (int)_CHAR____800d5582;
-                In->CharacterInstance->zVel = (int)_CHAR____800d5584;
-                    /* WARNING: Read-only address (ram,0x800d58d4) is written */
-                _BlockVramEntry_800d58c0.area._0_2_ = 0x38;
+                Raziel.Mode = 0x10;
+                SetExternalForce(&__Force_800d5e1c,0,0,-0x10,1,0x1000);
+                In->CharacterInstance->xVel = (int)Raziel.iVelocity.x;
+                In->CharacterInstance->yVel = (int)Raziel.iVelocity.y;
+                In->CharacterInstance->zVel = (int)Raziel.iVelocity.z;
+                    /* WARNING: Read-only address (ram,0x800d5e04) is written */
+                ExternalForces.Friction = 0x38;
               }
                     /* WARNING: Subroutine does not return */
               G2EmulationSwitchAnimation(In,CurrentSection,0x23,0,0,1);
             }
             if ((*(ushort *)(NewAnim + 0x10) & 0x20) != 0) {
-              _CHAR____800d5574 = 0x100000;
+              Raziel.Mode = 0x100000;
                     /* WARNING: Subroutine does not return */
               G2EmulationSwitchAnimation(In,CurrentSection,0x23,0,0,1);
             }
           }
-          goto LAB_800a0e18;
+          goto LAB_800a0144;
         }
-        if (puVar2 == (undefined *)0x8000000) goto LAB_800a0e18;
+        if (puVar2 == (undefined *)0x8000000) goto LAB_800a0144;
       }
       else {
-        if (puVar2 == (undefined *)0x20000001) goto LAB_800a0e18;
+        if (puVar2 == (undefined *)0x20000001) goto LAB_800a0144;
         if ((int)puVar2 < 0x20000002) {
           if (puVar2 == (undefined *)0x8000004) {
-            if ((*gameTracker._4_4_ & LONG_800cf56c) != 0) {
-              razSetSwimVelocity(In->CharacterInstance,*(int *)(_PlayerData + 0x5c),
-                                 *(int *)(_PlayerData + 0x60));
-              goto LAB_800a0e18;
+            if ((*PadData & 0x80) == 0) {
+              razSetSwimVelocity(In->CharacterInstance,0,PlayerData->SwimPhysicsUnderDeceleration);
             }
-            goto LAB_800a0a10;
+            else {
+              razSetSwimVelocity(In->CharacterInstance,PlayerData->SwimPhysicsUnderVelocity,
+                                 PlayerData->SwimPhysicsUnderKickDecel);
+            }
+            goto LAB_800a0144;
           }
         }
         else {
           if (puVar2 == (undefined *)0x20000004) {
             Inst = In->CharacterInstance;
             adjustment = 0x1000;
-            goto LAB_800a0cdc;
+            goto LAB_8009ff34;
           }
         }
       }
     }
   }
   DefaultStateHandler(In,CurrentSection,Data);
-LAB_800a0e18:
+LAB_800a0144:
                     /* WARNING: Subroutine does not return */
   DeMessageQueue((__MessageQueue *)(&In->CharacterInstance + CurrentSection * 0x47 + 3));
 }

@@ -5,16 +5,16 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ InitMessageQueue(struct __MessageQueue *In /*$a0*/)
- // line 88, offset 0x8007071c
+ // line 88, offset 0x80070538
 	/* begin block 1 */
 		// Start line: 117
 	/* end block 1 */
 	// End Line: 118
 
 	/* begin block 2 */
-		// Start line: 176
+		// Start line: 167
 	/* end block 2 */
-	// End Line: 177
+	// End Line: 168
 
 	/* begin block 3 */
 		// Start line: 118
@@ -34,12 +34,12 @@ void InitMessageQueue(__MessageQueue *In)
 // decompiled code
 // original method signature: 
 // struct __Event * /*$ra*/ DeMessageQueue(struct __MessageQueue *In /*$a0*/)
- // line 95, offset 0x80070728
+ // line 95, offset 0x80070544
 	/* begin block 1 */
 		// Start line: 97
-		// Start offset: 0x80070728
+		// Start offset: 0x80070544
 	/* end block 1 */
-	// End offset: 0x8007075C
+	// End offset: 0x80070578
 	// End Line: 109
 
 	/* begin block 2 */
@@ -78,11 +78,11 @@ __Event * DeMessageQueue(__MessageQueue *In)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PurgeMessageQueue(struct __MessageQueue *In /*$a0*/)
- // line 157, offset 0x80070764
+ // line 157, offset 0x80070580
 	/* begin block 1 */
-		// Start line: 314
+		// Start line: 300
 	/* end block 1 */
-	// End Line: 315
+	// End Line: 301
 
 	/* begin block 2 */
 		// Start line: 207
@@ -102,7 +102,7 @@ void PurgeMessageQueue(__MessageQueue *In)
 // decompiled code
 // original method signature: 
 // struct __Event * /*$ra*/ PeekMessageQueue(struct __MessageQueue *In /*$a0*/)
- // line 164, offset 0x80070770
+ // line 164, offset 0x8007058c
 	/* begin block 1 */
 		// Start line: 220
 	/* end block 1 */
@@ -127,7 +127,7 @@ __Event * PeekMessageQueue(__MessageQueue *In)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EnMessageQueue(struct __MessageQueue *In /*$a0*/, struct __Event *Element /*$v0*/)
- // line 197, offset 0x80070798
+ // line 197, offset 0x800705b4
 	/* begin block 1 */
 		// Start line: 262
 	/* end block 1 */
@@ -138,11 +138,11 @@ __Event * PeekMessageQueue(__MessageQueue *In)
 	/* end block 2 */
 	// End Line: 290
 
-void EnMessageQueue(__MessageQueue *param_1,int *param_2)
+void EnMessageQueue(__MessageQueue *In,__Event *Element)
 
 {
                     /* WARNING: Subroutine does not return */
-  EnMessageQueueData(param_1,*param_2,param_2[1]);
+  EnMessageQueueData(In,Element->ID,Element->Data);
 }
 
 
@@ -150,14 +150,14 @@ void EnMessageQueue(__MessageQueue *param_1,int *param_2)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EnMessageQueueData(struct __MessageQueue *In /*$a0*/, int ID /*$a1*/, int Data /*$a2*/)
- // line 204, offset 0x800707c4
+ // line 204, offset 0x800705e0
 	/* begin block 1 */
 		// Start line: 206
-		// Start offset: 0x800707C4
+		// Start offset: 0x800705E0
 		// Variables:
 	// 		int i; // $v1
 	/* end block 1 */
-	// End offset: 0x80070838
+	// End offset: 0x80070654
 	// End Line: 251
 
 	/* begin block 2 */
@@ -204,14 +204,14 @@ void EnMessageQueueData(__MessageQueue *In,int ID,int Data)
 // decompiled code
 // original method signature: 
 // void * /*$ra*/ CIRC_Alloc(int size /*$a0*/)
- // line 268, offset 0x80070840
+ // line 268, offset 0x8007065c
 	/* begin block 1 */
 		// Start line: 270
-		// Start offset: 0x80070840
+		// Start offset: 0x8007065C
 		// Variables:
 	// 		void *ret; // $v1
 	/* end block 1 */
-	// End offset: 0x8007087C
+	// End offset: 0x8007069C
 	// End Line: 287
 
 	/* begin block 2 */
@@ -229,23 +229,21 @@ void EnMessageQueueData(__MessageQueue *In,int ID,int Data)
 	/* end block 4 */
 	// End Line: 438
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void * CIRC_Alloc(int size)
 
 {
   void *pvVar1;
   uint uVar2;
-  uint uVar3;
+  _BlockVramEntry *p_Var3;
   
   uVar2 = size + 3U & 0xfffffffc;
-  uVar3 = (int)_mainFormatString + uVar2;
-  pvVar1 = _mainFormatString;
-  if (0x800d3e2c < uVar3) {
-    _mainFormatString = &circBuf + uVar2;
+  p_Var3 = (_BlockVramEntry *)((int)circWhere + uVar2);
+  pvVar1 = circWhere;
+  if (&vramBlockList < p_Var3) {
+    circWhere = &circBuf + uVar2;
     return &circBuf;
   }
-  _mainFormatString = (undefined *)uVar3;
+  circWhere = p_Var3;
   return pvVar1;
 }
 
@@ -254,14 +252,14 @@ void * CIRC_Alloc(int size)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetCollideInfoData(struct _CollideInfo *srcCI /*$s0*/)
- // line 298, offset 0x80070884
+ // line 298, offset 0x800706a4
 	/* begin block 1 */
 		// Start line: 299
-		// Start offset: 0x80070884
+		// Start offset: 0x800706A4
 		// Variables:
 	// 		struct _CollideInfo *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x800708D0
+	// End offset: 0x800706F0
 	// End Line: 305
 
 	/* begin block 2 */
@@ -281,14 +279,14 @@ int SetCollideInfoData(_CollideInfo *srcCI)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetMonsterHitData(struct _Instance *Sender /*$s1*/, struct _Instance *lastHit /*$s2*/, int Power /*$s3*/, int knockBackDistance /*$s4*/, int knockBackFrames /*stack 16*/)
- // line 315, offset 0x800708e0
+ // line 315, offset 0x80070700
 	/* begin block 1 */
 		// Start line: 316
-		// Start offset: 0x800708E0
+		// Start offset: 0x80070700
 		// Variables:
 	// 		struct evMonsterHitData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x800708E0
+	// End offset: 0x80070700
 	// End Line: 316
 
 	/* begin block 2 */
@@ -309,14 +307,14 @@ int SetMonsterHitData(_Instance *Sender,_Instance *lastHit,int Power,int knockBa
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetMonsterThrownData(struct _Instance *Sender /*$s1*/, struct _Rotation *Direction /*$s0*/, int Power /*$s2*/)
- // line 332, offset 0x8007094c
+ // line 332, offset 0x8007076c
 	/* begin block 1 */
 		// Start line: 333
-		// Start offset: 0x8007094C
+		// Start offset: 0x8007076C
 		// Variables:
 	// 		struct evMonsterThrownData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x8007094C
+	// End offset: 0x8007076C
 	// End Line: 333
 
 	/* begin block 2 */
@@ -336,14 +334,14 @@ int SetMonsterThrownData(_Instance *Sender,_Rotation *Direction,int Power)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetMonsterAlarmData(struct _Instance *sender /*$s1*/, struct _Position *position /*$s0*/, int type /*$s2*/)
- // line 348, offset 0x800709b4
+ // line 348, offset 0x800707d4
 	/* begin block 1 */
 		// Start line: 349
-		// Start offset: 0x800709B4
+		// Start offset: 0x800707D4
 		// Variables:
 	// 		struct evMonsterAlarmData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x800709B4
+	// End offset: 0x800707D4
 	// End Line: 349
 
 	/* begin block 2 */
@@ -363,14 +361,14 @@ int SetMonsterAlarmData(_Instance *sender,_Position *position,int type)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetMonsterSoulSuckData(struct _Instance *Sender /*$s0*/, int x /*$s1*/, int y /*$s2*/, int z /*$s3*/)
- // line 365, offset 0x80070a1c
+ // line 365, offset 0x8007083c
 	/* begin block 1 */
 		// Start line: 366
-		// Start offset: 0x80070A1C
+		// Start offset: 0x8007083C
 		// Variables:
 	// 		struct evMonsterSoulSuckData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070A1C
+	// End offset: 0x8007083C
 	// End Line: 366
 
 	/* begin block 2 */
@@ -390,14 +388,14 @@ int SetMonsterSoulSuckData(_Instance *Sender,int x,int y,int z)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetMonsterImpaleData(struct _Instance *weapon /*$s2*/, struct _Rotation *direction /*$s0*/, struct _Position *position /*$s1*/, int distance /*$s3*/)
- // line 382, offset 0x80070a78
+ // line 382, offset 0x80070898
 	/* begin block 1 */
 		// Start line: 383
-		// Start offset: 0x80070A78
+		// Start offset: 0x80070898
 		// Variables:
 	// 		struct evMonsterImpaleData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070A78
+	// End offset: 0x80070898
 	// End Line: 383
 
 	/* begin block 2 */
@@ -417,14 +415,14 @@ int SetMonsterImpaleData(_Instance *weapon,_Rotation *direction,_Position *posit
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetObjectData(int x /*$s1*/, int y /*$s2*/, int PathNumber /*$s3*/, struct _Instance *Force /*$s4*/, int node /*stack 16*/)
- // line 403, offset 0x80070b10
+ // line 403, offset 0x80070930
 	/* begin block 1 */
 		// Start line: 404
-		// Start offset: 0x80070B10
+		// Start offset: 0x80070930
 		// Variables:
 	// 		struct evObjectData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070B10
+	// End offset: 0x80070930
 	// End Line: 404
 
 	/* begin block 2 */
@@ -432,8 +430,7 @@ int SetMonsterImpaleData(_Instance *weapon,_Rotation *direction,_Position *posit
 	/* end block 2 */
 	// End Line: 708
 
-int SetPhysicsSwimData(int CheckDepth,_SVector *iVelocity,int SwimDepth,int WadeDepth,int TreadDepth
-                      )
+int SetObjectData(int x,int y,int PathNumber,_Instance *Force,int node)
 
 {
                     /* WARNING: Subroutine does not return */
@@ -445,14 +442,14 @@ int SetPhysicsSwimData(int CheckDepth,_SVector *iVelocity,int SwimDepth,int Wade
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetPositionData(int x /*$s0*/, int y /*$s1*/, int z /*$s2*/)
- // line 420, offset 0x80070b7c
+ // line 420, offset 0x8007099c
 	/* begin block 1 */
 		// Start line: 421
-		// Start offset: 0x80070B7C
+		// Start offset: 0x8007099C
 		// Variables:
 	// 		struct evPositionData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070B7C
+	// End offset: 0x8007099C
 	// End Line: 421
 
 	/* begin block 2 */
@@ -460,7 +457,7 @@ int SetPhysicsSwimData(int CheckDepth,_SVector *iVelocity,int SwimDepth,int Wade
 	/* end block 2 */
 	// End Line: 742
 
-int SetPhysicsDropOffData(int xOffset,int yOffset,int DropOffset,int slipSlope,int UpperOffset)
+int SetPositionData(int x,int y,int z)
 
 {
                     /* WARNING: Subroutine does not return */
@@ -472,14 +469,14 @@ int SetPhysicsDropOffData(int xOffset,int yOffset,int DropOffset,int slipSlope,i
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetPhysicsGravityData(int UpperOffset /*$s2*/, int LowerOffset /*$s3*/, int x /*$s4*/, int y /*$s5*/, int z /*stack 16*/, int slope /*stack 20*/)
- // line 438, offset 0x80070bc8
+ // line 438, offset 0x800709e8
 	/* begin block 1 */
 		// Start line: 439
-		// Start offset: 0x80070BC8
+		// Start offset: 0x800709E8
 		// Variables:
 	// 		struct evPhysicsGravityData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070BC8
+	// End offset: 0x800709E8
 	// End Line: 439
 
 	/* begin block 2 */
@@ -499,14 +496,14 @@ int SetPhysicsGravityData(int UpperOffset,int LowerOffset,int x,int y,int z,int 
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetPhysicsEdgeData(int UpperOffset /*$s5*/, int ForwardOffset /*$s6*/, int AboveOffset /*$s7*/, int x /*$fp*/, int y /*stack 16*/, int z /*stack 20*/, struct _SVector *Normal1 /*stack 24*/, struct _SVector *Normal2 /*stack 28*/, struct _SVector *Delta /*stack 32*/)
- // line 462, offset 0x80070c44
+ // line 462, offset 0x80070a64
 	/* begin block 1 */
 		// Start line: 463
-		// Start offset: 0x80070C44
+		// Start offset: 0x80070A64
 		// Variables:
 	// 		struct evPhysicsEdgeData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070C44
+	// End offset: 0x80070A64
 	// End Line: 463
 
 	/* begin block 2 */
@@ -527,14 +524,14 @@ int SetPhysicsEdgeData(int UpperOffset,int ForwardOffset,int AboveOffset,int x,i
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetPhysicsSwimData(int CheckDepth /*$s1*/, struct _SVector *iVelocity /*$s2*/, int SwimDepth /*$s3*/, int WadeDepth /*$s4*/, int TreadDepth /*stack 16*/)
- // line 485, offset 0x80070cf0
+ // line 485, offset 0x80070b10
 	/* begin block 1 */
 		// Start line: 486
-		// Start offset: 0x80070CF0
+		// Start offset: 0x80070B10
 		// Variables:
 	// 		struct evPhysicsSwimData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070CF0
+	// End offset: 0x80070B10
 	// End Line: 486
 
 	/* begin block 2 */
@@ -555,14 +552,14 @@ int SetPhysicsSwimData(int CheckDepth,_SVector *iVelocity,int SwimDepth,int Wade
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetPhysicsDropOffData(int xOffset /*$s1*/, int yOffset /*$s2*/, int DropOffset /*$s3*/, int slipSlope /*$s4*/, int UpperOffset /*stack 16*/)
- // line 503, offset 0x80070d5c
+ // line 503, offset 0x80070b7c
 	/* begin block 1 */
 		// Start line: 504
-		// Start offset: 0x80070D5C
+		// Start offset: 0x80070B7C
 		// Variables:
 	// 		struct evPhysicsDropOffData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070D5C
+	// End offset: 0x80070B7C
 	// End Line: 504
 
 	/* begin block 2 */
@@ -582,14 +579,14 @@ int SetPhysicsDropOffData(int xOffset,int yOffset,int DropOffset,int slipSlope,i
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetPhysicsSlideData(int Segment /*$s3*/, int ForwardVectorX /*$s4*/, int ForwardVectorY /*$s5*/, int ForwardVectorZ /*$s6*/, int DropOffset /*stack 16*/, int UpperOffset /*stack 20*/, int Height /*stack 24*/)
- // line 523, offset 0x80070dc8
+ // line 523, offset 0x80070be8
 	/* begin block 1 */
 		// Start line: 524
-		// Start offset: 0x80070DC8
+		// Start offset: 0x80070BE8
 		// Variables:
 	// 		struct evPhysicsSlideData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070DC8
+	// End offset: 0x80070BE8
 	// End Line: 524
 
 	/* begin block 2 */
@@ -610,14 +607,14 @@ int SetPhysicsSlideData(int Segment,int ForwardVectorX,int ForwardVectorY,int Fo
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetPhysicsWallCrawlData(int Segment /*$s0*/, int Length /*$s1*/, int ForwardOffset /*$s2*/, int NormalDistance /*$s3*/)
- // line 544, offset 0x80070e54
+ // line 544, offset 0x80070c74
 	/* begin block 1 */
 		// Start line: 545
-		// Start offset: 0x80070E54
+		// Start offset: 0x80070C74
 		// Variables:
 	// 		struct evPhysicsWallCrawlData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070E54
+	// End offset: 0x80070C74
 	// End Line: 545
 
 	/* begin block 2 */
@@ -625,8 +622,7 @@ int SetPhysicsSlideData(int Segment,int ForwardVectorX,int ForwardVectorY,int Fo
 	/* end block 2 */
 	// End Line: 990
 
-int SetMonsterHitData(_Instance *Sender,_Instance *lastHit,int Power,int knockBackDistance,
-                     int knockBackFrames)
+int SetPhysicsWallCrawlData(int Segment,int Length,int ForwardOffset,int NormalDistance)
 
 {
                     /* WARNING: Subroutine does not return */
@@ -638,14 +634,14 @@ int SetMonsterHitData(_Instance *Sender,_Instance *lastHit,int Power,int knockBa
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetPhysicsLinkedMoveData(struct _Instance *instance /*$s1*/, int segment /*$s0*/, struct _SVector *posDelta /*$s2*/, struct _SVector *rotDelta /*$s3*/)
- // line 561, offset 0x80070eb0
+ // line 561, offset 0x80070cd0
 	/* begin block 1 */
 		// Start line: 562
-		// Start offset: 0x80070EB0
+		// Start offset: 0x80070CD0
 		// Variables:
 	// 		struct evPhysicsLinkedMoveData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070F34
+	// End offset: 0x80070D54
 	// End Line: 574
 
 	/* begin block 2 */
@@ -665,14 +661,14 @@ int SetPhysicsLinkedMoveData(_Instance *instance,int segment,_SVector *posDelta,
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetPhysicsDropHeightData(struct _Position *offset /*$s0*/, int dropOffset /*$s1*/, int mode /*$s2*/)
- // line 582, offset 0x80070f50
+ // line 582, offset 0x80070d70
 	/* begin block 1 */
 		// Start line: 583
-		// Start offset: 0x80070F50
+		// Start offset: 0x80070D70
 		// Variables:
 	// 		struct evPhysicsDropHeightData *ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070F50
+	// End offset: 0x80070D70
 	// End Line: 583
 
 	/* begin block 2 */
@@ -692,14 +688,14 @@ int SetPhysicsDropHeightData(_Position *offset,int dropOffset,int mode)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetAnimationControllerDoneData(struct _Instance *instance /*$s0*/, long segment /*$s1*/, long type /*$s2*/, int data /*$s3*/)
- // line 602, offset 0x80070fc0
+ // line 602, offset 0x80070de0
 	/* begin block 1 */
 		// Start line: 603
-		// Start offset: 0x80070FC0
+		// Start offset: 0x80070DE0
 		// Variables:
 	// 		struct evAnimationControllerDoneData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070FC0
+	// End offset: 0x80070DE0
 	// End Line: 603
 
 	/* begin block 2 */
@@ -719,14 +715,14 @@ int SetAnimationControllerDoneData(_Instance *instance,long segment,long type,in
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetAnimationInstanceSwitchData(struct _Instance *instance /*$s1*/, int anim /*$s2*/, int frame /*$s3*/, int frames /*$s4*/, int mode /*stack 16*/)
- // line 620, offset 0x8007101c
+ // line 620, offset 0x80070e3c
 	/* begin block 1 */
 		// Start line: 621
-		// Start offset: 0x8007101C
+		// Start offset: 0x80070E3C
 		// Variables:
 	// 		struct evAnimationInstanceSwitchData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x8007101C
+	// End offset: 0x80070E3C
 	// End Line: 621
 
 	/* begin block 2 */
@@ -746,14 +742,14 @@ int SetAnimationInstanceSwitchData(_Instance *instance,int anim,int frame,int fr
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetFXHitData(struct _Instance *hitter /*$s2*/, int segment /*$s3*/, int amount /*$s0*/, int type /*$s1*/)
- // line 639, offset 0x80071088
+ // line 639, offset 0x80070ea8
 	/* begin block 1 */
 		// Start line: 640
-		// Start offset: 0x80071088
+		// Start offset: 0x80070EA8
 		// Variables:
 	// 		struct evFXHitData *Ptr; // $a1
 	/* end block 1 */
-	// End offset: 0x80071164
+	// End offset: 0x80070F84
 	// End Line: 656
 
 	/* begin block 2 */
@@ -773,20 +769,20 @@ int SetFXHitData(_Instance *hitter,int segment,int amount,int type)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetObjectThrowData(void *target /*$s2*/, struct _SVector *angularVel /*$s7*/, unsigned short type /*$s0*/, unsigned short spinType /*$s1*/, int speed /*stack 16*/, int gravity /*stack 20*/, int zVel /*stack 24*/, int initialXRot /*stack 28*/)
- // line 693, offset 0x80071184
+ // line 693, offset 0x80070fa4
 	/* begin block 1 */
 		// Start line: 694
-		// Start offset: 0x80071184
+		// Start offset: 0x80070FA4
 		// Variables:
 	// 		struct evObjectThrowData *Ptr; // $a0
 	/* end block 1 */
-	// End offset: 0x800712B0
+	// End offset: 0x800710D0
 	// End Line: 746
 
 	/* begin block 2 */
-		// Start line: 1386
+		// Start line: 1368
 	/* end block 2 */
-	// End Line: 1387
+	// End Line: 1369
 
 int SetObjectThrowData(void *target,_SVector *angularVel,ushort type,ushort spinType,int speed,
                       int gravity,int zVel,int initialXRot)
@@ -801,14 +797,14 @@ int SetObjectThrowData(void *target,_SVector *angularVel,ushort type,ushort spin
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetObjectBreakOffData(struct _Instance *force /*$s3*/, short node /*$a1*/, short distance /*$a2*/, short animation /*$a3*/, int frame /*stack 16*/, int type /*stack 20*/, int action /*stack 24*/)
- // line 750, offset 0x800712f0
+ // line 750, offset 0x80071110
 	/* begin block 1 */
 		// Start line: 751
-		// Start offset: 0x800712F0
+		// Start offset: 0x80071110
 		// Variables:
 	// 		struct evObjectBreakOffData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x800712F0
+	// End offset: 0x80071110
 	// End Line: 751
 
 	/* begin block 2 */
@@ -830,14 +826,14 @@ int SetObjectBreakOffData
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetControlInitHangData(struct _Instance *instance /*$s0*/, long frame /*$s1*/, long frames /*$s2*/)
- // line 767, offset 0x8007137c
+ // line 767, offset 0x8007119c
 	/* begin block 1 */
 		// Start line: 768
-		// Start offset: 0x8007137C
+		// Start offset: 0x8007119C
 		// Variables:
 	// 		struct evControlInitHangData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x8007137C
+	// End offset: 0x8007119C
 	// End Line: 768
 
 	/* begin block 2 */
@@ -857,14 +853,14 @@ int SetControlInitHangData(_Instance *instance,long frame,long frames)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetControlInitIdleData(int mode /*$s0*/, long frame /*$s1*/, long frames /*$s2*/)
- // line 781, offset 0x800713c8
+ // line 781, offset 0x800711e8
 	/* begin block 1 */
 		// Start line: 782
-		// Start offset: 0x800713C8
+		// Start offset: 0x800711E8
 		// Variables:
 	// 		struct evControlInitIdleData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x800713C8
+	// End offset: 0x800711E8
 	// End Line: 782
 
 	/* begin block 2 */
@@ -872,7 +868,7 @@ int SetControlInitHangData(_Instance *instance,long frame,long frames)
 	/* end block 2 */
 	// End Line: 1432
 
-int SetPhysicsWallCrawlData(int Segment,int Length,int ForwardOffset,int NormalDistance)
+int SetControlInitIdleData(int mode,long frame,long frames)
 
 {
                     /* WARNING: Subroutine does not return */
@@ -884,14 +880,14 @@ int SetPhysicsWallCrawlData(int Segment,int Length,int ForwardOffset,int NormalD
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetObjectDraftData(short force /*$a0*/, unsigned short radius /*$a1*/, unsigned short radiusCoef /*$a2*/, unsigned short height /*$a3*/, int maxVelocity /*stack 16*/)
- // line 795, offset 0x80071414
+ // line 795, offset 0x80071234
 	/* begin block 1 */
 		// Start line: 796
-		// Start offset: 0x80071414
+		// Start offset: 0x80071234
 		// Variables:
 	// 		struct evObjectDraftData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80071414
+	// End offset: 0x80071234
 	// End Line: 796
 
 	/* begin block 2 */
@@ -911,14 +907,14 @@ int SetObjectDraftData(short force,ushort radius,ushort radiusCoef,ushort height
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetObjectAbsorbData(struct _Instance *force /*$s0*/, unsigned short node /*$a1*/, unsigned short steps /*$a2*/)
- // line 811, offset 0x80071480
+ // line 811, offset 0x800712a0
 	/* begin block 1 */
 		// Start line: 812
-		// Start offset: 0x80071480
+		// Start offset: 0x800712A0
 		// Variables:
 	// 		struct evObjectAbsorbData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80071480
+	// End offset: 0x800712A0
 	// End Line: 812
 
 	/* begin block 2 */
@@ -938,14 +934,14 @@ int SetObjectAbsorbData(_Instance *force,ushort node,ushort steps)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetControlSaveDataData(long length /*$s0*/, void *data /*$s1*/)
- // line 827, offset 0x800714cc
+ // line 827, offset 0x800712ec
 	/* begin block 1 */
 		// Start line: 828
-		// Start offset: 0x800714CC
+		// Start offset: 0x800712EC
 		// Variables:
 	// 		struct evControlSaveDataData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x800714CC
+	// End offset: 0x800712EC
 	// End Line: 828
 
 	/* begin block 2 */
@@ -965,14 +961,14 @@ int SetControlSaveDataData(long length,void *data)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetObjectIdleData(long mode /*$s0*/, struct _Instance *instance /*$s1*/)
- // line 840, offset 0x80071508
+ // line 840, offset 0x80071328
 	/* begin block 1 */
 		// Start line: 841
-		// Start offset: 0x80071508
+		// Start offset: 0x80071328
 		// Variables:
 	// 		struct evObjectIdleData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80071508
+	// End offset: 0x80071328
 	// End Line: 841
 
 	/* begin block 2 */
@@ -992,20 +988,20 @@ int SetObjectIdleData(long mode,_Instance *instance)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetActionPlayHostAnimationData(struct _Instance *instance /*$s2*/, struct _Instance *host /*$s3*/, int newAnim /*$s4*/, int newFrame /*$s5*/, int frames /*stack 16*/, int mode /*stack 20*/)
- // line 869, offset 0x80071544
+ // line 869, offset 0x80071364
 	/* begin block 1 */
 		// Start line: 870
-		// Start offset: 0x80071544
+		// Start offset: 0x80071364
 		// Variables:
 	// 		struct evActionPlayHostAnimationData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80071544
+	// End offset: 0x80071364
 	// End Line: 870
 
 	/* begin block 2 */
-		// Start line: 1738
+		// Start line: 1734
 	/* end block 2 */
-	// End Line: 1739
+	// End Line: 1735
 
 int SetActionPlayHostAnimationData
               (_Instance *instance,_Instance *host,int newAnim,int newFrame,int frames,int mode)
@@ -1020,14 +1016,14 @@ int SetActionPlayHostAnimationData
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetObjectBirthProjectileData(struct _Instance *instance /*$s0*/, int joint /*$s1*/, int type /*$s2*/)
- // line 888, offset 0x800715c0
+ // line 888, offset 0x800713e0
 	/* begin block 1 */
 		// Start line: 889
-		// Start offset: 0x800715C0
+		// Start offset: 0x800713E0
 		// Variables:
 	// 		struct evObjectBirthProjectileData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x800715C0
+	// End offset: 0x800713E0
 	// End Line: 889
 
 	/* begin block 2 */
@@ -1047,14 +1043,14 @@ int SetObjectBirthProjectileData(_Instance *instance,int joint,int type)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetShadowSegmentData(unsigned long total /*$s0*/)
- // line 907, offset 0x80071610
+ // line 907, offset 0x80071430
 	/* begin block 1 */
 		// Start line: 908
-		// Start offset: 0x80071610
+		// Start offset: 0x80071430
 		// Variables:
 	// 		struct evShadowSegmentData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80071610
+	// End offset: 0x80071430
 	// End Line: 908
 
 	/* begin block 2 */
@@ -1074,7 +1070,7 @@ int SetShadowSegmentData(ulong total)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInit()
- // line 921, offset 0x8007163c
+ // line 921, offset 0x8007145c
 	/* begin block 1 */
 		// Start line: 1691
 	/* end block 1 */
@@ -1085,36 +1081,24 @@ int SetShadowSegmentData(ulong total)
 	/* end block 2 */
 	// End Line: 1696
 
+/* WARNING: Removing unreachable block (ram,0x800715e4) */
+/* WARNING: Removing unreachable block (ram,0x800715f4) */
+/* WARNING: Removing unreachable block (ram,0x8007153c) */
+/* WARNING: Removing unreachable block (ram,0x8007154c) */
+/* WARNING: Removing unreachable block (ram,0x800714b8) */
+/* WARNING: Removing unreachable block (ram,0x800714c8) */
+/* WARNING: Removing unreachable block (ram,0x8007150c) */
+/* WARNING: Removing unreachable block (ram,0x8007151c) */
+/* WARNING: Removing unreachable block (ram,0x80071590) */
+/* WARNING: Removing unreachable block (ram,0x800715a0) */
+/* WARNING: Removing unreachable block (ram,0x80071638) */
+
 void G2EmulationInit(void)
 
 {
-  uGpffff9ae0 = 0;
-  if (iGpffff9ae4 == 0) {
+  G2AlphaTables7 = (_G2AnimAlphaTable_Type *)0x0;
                     /* WARNING: Subroutine does not return */
-    MEMPACK_Malloc(0x12,'\x19');
-  }
-  if (iGpffff9ae8 == 0) {
-                    /* WARNING: Subroutine does not return */
-    MEMPACK_Malloc(0x12,'\x19');
-  }
-  if (iGpffff9aec == 0) {
-                    /* WARNING: Subroutine does not return */
-    MEMPACK_Malloc(6,'\x19');
-  }
-  if (iGpffff9af0 == 0) {
-                    /* WARNING: Subroutine does not return */
-    MEMPACK_Malloc(0x12,'\x19');
-  }
-  if (iGpffff9af4 == 0) {
-                    /* WARNING: Subroutine does not return */
-    MEMPACK_Malloc(0x12,'\x19');
-  }
-  if (iGpffff9af8 == 0) {
-                    /* WARNING: Subroutine does not return */
-    MEMPACK_Malloc(0x12,'\x19');
-  }
-  uGpffff9ae0 = 0;
-  return;
+  MEMPACK_Malloc(0x12,'\x19');
 }
 
 
@@ -1122,15 +1106,15 @@ void G2EmulationInit(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInstancePlayAnimation(struct _Instance *instance /*$a0*/)
- // line 978, offset 0x80071828
+ // line 978, offset 0x80071648
 	/* begin block 1 */
 		// Start line: 979
-		// Start offset: 0x80071828
+		// Start offset: 0x80071648
 		// Variables:
 	// 		int i; // $s0
 	// 		struct _G2Anim_Type *anim; // $s1
 	/* end block 1 */
-	// End offset: 0x8007187C
+	// End offset: 0x8007169C
 	// End Line: 990
 
 	/* begin block 2 */
@@ -1161,7 +1145,7 @@ void G2EmulationInstancePlayAnimation(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulatePlayAnimation(struct __CharacterState *In /*$a0*/)
- // line 995, offset 0x80071890
+ // line 995, offset 0x800716b0
 	/* begin block 1 */
 		// Start line: 1858
 	/* end block 1 */
@@ -1179,15 +1163,15 @@ void G2EmulatePlayAnimation(__CharacterState *In)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInstanceToInstanceSwitchAnimation(struct _Instance *instance /*$a0*/, struct _Instance *host /*$a1*/, int CurrentSection /*$a2*/, int NewAnim /*$s2*/, int NewFrame /*stack 16*/, int Frames /*stack 20*/, int Mode /*stack 24*/)
- // line 1006, offset 0x800718b4
+ // line 1006, offset 0x800716d4
 	/* begin block 1 */
 		// Start line: 1007
-		// Start offset: 0x800718B4
+		// Start offset: 0x800716D4
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $s4
 	// 		struct _G2AnimKeylist_Type *keylist; // $s1
 	/* end block 1 */
-	// End offset: 0x80071988
+	// End offset: 0x800717A8
 	// End Line: 1028
 
 	/* begin block 2 */
@@ -1200,10 +1184,8 @@ void G2EmulationInstanceToInstanceSwitchAnimation
                int Frames,int Mode)
 
 {
-  G2Instance_GetKeylist(host,NewAnim);
                     /* WARNING: Subroutine does not return */
-  G2AnimSection_SetAlphaTable
-            ((instance->anim).section + CurrentSection,(_G2AnimAlphaTable_Type *)0x0);
+  G2Instance_GetKeylist(host,NewAnim);
 }
 
 
@@ -1211,15 +1193,15 @@ void G2EmulationInstanceToInstanceSwitchAnimation
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInstanceSwitchAnimation(struct _Instance *instance /*$a0*/, int CurrentSection /*$a1*/, int NewAnim /*$s2*/, int NewFrame /*$s3*/, int Frames /*stack 16*/, int Mode /*stack 20*/)
- // line 1032, offset 0x800719ac
+ // line 1032, offset 0x800717cc
 	/* begin block 1 */
 		// Start line: 1033
-		// Start offset: 0x800719AC
+		// Start offset: 0x800717CC
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $s4
 	// 		struct _G2AnimKeylist_Type *keylist; // $s1
 	/* end block 1 */
-	// End offset: 0x80071A7C
+	// End offset: 0x8007189C
 	// End Line: 1054
 
 	/* begin block 2 */
@@ -1231,10 +1213,8 @@ void G2EmulationInstanceSwitchAnimation
                (_Instance *instance,int CurrentSection,int NewAnim,int NewFrame,int Frames,int Mode)
 
 {
-  G2Instance_GetKeylist(instance,NewAnim);
                     /* WARNING: Subroutine does not return */
-  G2AnimSection_SetAlphaTable
-            ((instance->anim).section + CurrentSection,(_G2AnimAlphaTable_Type *)0x0);
+  G2Instance_GetKeylist(instance,NewAnim);
 }
 
 
@@ -1242,14 +1222,14 @@ void G2EmulationInstanceSwitchAnimation
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInstanceSwitchAnimationAlpha(struct _Instance *instance /*$a0*/, int CurrentSection /*$a1*/, int NewAnim /*$a2*/, int NewFrame /*$a3*/, int Frames /*stack 16*/, int Mode /*stack 20*/, int AlphaTable /*stack 24*/)
- // line 1057, offset 0x80071aa0
+ // line 1057, offset 0x800718c0
 	/* begin block 1 */
 		// Start line: 1058
-		// Start offset: 0x80071AA0
+		// Start offset: 0x800718C0
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $s1
 	/* end block 1 */
-	// End offset: 0x80071AA0
+	// End offset: 0x800718C0
 	// End Line: 1058
 
 	/* begin block 2 */
@@ -1273,7 +1253,7 @@ void G2EmulationInstanceSwitchAnimationAlpha
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationSwitchAnimation(struct __CharacterState *In /*$a0*/, int CurrentSection /*$a1*/, int NewAnim /*$a2*/, int NewFrame /*$a3*/, int Frames /*stack 16*/, int Mode /*stack 20*/)
- // line 1067, offset 0x80071b0c
+ // line 1067, offset 0x80071930
 	/* begin block 1 */
 		// Start line: 2043
 	/* end block 1 */
@@ -1297,14 +1277,14 @@ void G2EmulationSwitchAnimation
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationSwitchAnimationAlpha(struct __CharacterState *In /*$a0*/, int CurrentSection /*$a1*/, int NewAnim /*$a2*/, int NewFrame /*$a3*/, int Frames /*stack 16*/, int Mode /*stack 20*/, int AlphaTable /*stack 24*/)
- // line 1081, offset 0x80071b50
+ // line 1081, offset 0x80071974
 	/* begin block 1 */
 		// Start line: 1082
-		// Start offset: 0x80071B50
+		// Start offset: 0x80071974
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $s1
 	/* end block 1 */
-	// End offset: 0x80071B50
+	// End offset: 0x80071974
 	// End Line: 1082
 
 	/* begin block 2 */
@@ -1332,10 +1312,10 @@ void G2EmulationSwitchAnimationAlpha
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationSwitchAnimationSync(struct __CharacterState *In /*stack 0*/, int SlaveSectionID /*$fp*/, int MasterSectionID /*$a2*/, int Frames /*stack 12*/)
- // line 1093, offset 0x80071bc4
+ // line 1093, offset 0x800719ec
 	/* begin block 1 */
 		// Start line: 1094
-		// Start offset: 0x80071BC4
+		// Start offset: 0x800719EC
 		// Variables:
 	// 		struct _Instance *instance; // $a1
 	// 		struct _G2AnimSection_Type *masterAnimSection; // $s6
@@ -1345,7 +1325,7 @@ void G2EmulationSwitchAnimationAlpha
 	// 		struct __State *masterSection; // $s7
 	// 		struct __State *slaveSection; // $s2
 	/* end block 1 */
-	// End offset: 0x80071D34
+	// End offset: 0x80071B5C
 	// End Line: 1130
 
 	/* begin block 2 */
@@ -1357,18 +1337,14 @@ void G2EmulationSwitchAnimationSync
                (__CharacterState *In,int SlaveSectionID,int MasterSectionID,int Frames)
 
 {
-  _Instance *p_Var1;
   _G2AnimKeylist_Type *keylist;
   _G2AnimSection_Type *section;
   
-  p_Var1 = In->CharacterInstance;
-  section = (p_Var1->anim).section + (MasterSectionID & 0xff);
+  section = (In->CharacterInstance->anim).section + (MasterSectionID & 0xff);
   keylist = section->keylist;
   G2AnimSection_GetKeyframeNumber(section);
-  G2AnimKeylist_GetKeyframeCount(keylist);
                     /* WARNING: Subroutine does not return */
-  G2AnimSection_SetAlphaTable
-            ((p_Var1->anim).section + (SlaveSectionID & 0xff),(_G2AnimAlphaTable_Type *)0x0);
+  G2AnimKeylist_GetKeyframeCount(keylist);
 }
 
 
@@ -1376,14 +1352,14 @@ void G2EmulationSwitchAnimationSync
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInstanceToInstanceSwitchAnimationCharacter(struct _Instance *instance /*$s0*/, struct _Instance *host /*$a1*/, int NewAnim /*$s2*/, int NewFrame /*$s3*/, int Frames /*stack 16*/, int Mode /*stack 20*/)
- // line 1137, offset 0x80071d90
+ // line 1137, offset 0x80071bb8
 	/* begin block 1 */
 		// Start line: 1138
-		// Start offset: 0x80071D90
+		// Start offset: 0x80071BB8
 		// Variables:
 	// 		struct _G2AnimKeylist_Type *keylist1; // $s0
 	/* end block 1 */
-	// End offset: 0x80071E58
+	// End offset: 0x80071C80
 	// End Line: 1160
 
 	/* begin block 2 */
@@ -1395,26 +1371,8 @@ void G2EmulationInstanceToInstanceSwitchAnimationCharacter
                (_Instance *instance,_Instance *host,int NewAnim,int NewFrame,int Frames,int Mode)
 
 {
-  _G2AnimKeylist_Type *keylist;
-  _G2Anim_Type *anim;
-  
-  keylist = G2Instance_GetKeylist(host,NewAnim);
-  anim = &instance->anim;
-  G2Anim_SetAlphaTable(anim,(_G2AnimAlphaTable_Type *)0x0);
-  G2AnimSection_SwitchToKeylist((_G2AnimSection_Type *)anim,keylist,NewAnim);
-  if (Mode == 0) {
-    G2Anim_SetPaused(anim);
-  }
-  else {
-    G2Anim_SetUnpaused(anim);
-    if (Mode == 2) {
-      G2Anim_SetLooping(anim);
-    }
-    else {
-      G2Anim_SetNoLooping(anim);
-    }
-  }
-  return;
+                    /* WARNING: Subroutine does not return */
+  G2Instance_GetKeylist(host,NewAnim);
 }
 
 
@@ -1422,15 +1380,15 @@ void G2EmulationInstanceToInstanceSwitchAnimationCharacter
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationSwitchAnimationCharacter(struct __CharacterState *In /*$a0*/, int NewAnim /*$s2*/, int NewFrame /*$s5*/, int Frames /*$s3*/, int Mode /*stack 16*/)
- // line 1164, offset 0x80071e7c
+ // line 1164, offset 0x80071ca4
 	/* begin block 1 */
 		// Start line: 1165
-		// Start offset: 0x80071E7C
+		// Start offset: 0x80071CA4
 		// Variables:
 	// 		struct _Instance *instance; // $s0
 	// 		struct _G2AnimKeylist_Type *keylist; // $s0
 	/* end block 1 */
-	// End offset: 0x80071F4C
+	// End offset: 0x80071D74
 	// End Line: 1192
 
 	/* begin block 2 */
@@ -1442,29 +1400,30 @@ void G2EmulationSwitchAnimationCharacter
                (__CharacterState *In,int NewAnim,int NewFrame,int Frames,int Mode)
 
 {
-  _G2AnimKeylist_Type *keylist;
-  int local_28;
-  _Instance *instance;
-  _Instance *instance_00;
-  int in_stack_ffffffdc;
-  
   if (NewAnim < 0) {
     NewAnim = 0;
   }
-  instance_00 = In->CharacterInstance;
-  keylist = G2Instance_GetKeylist(instance_00,NewAnim);
-  instance_00 = (_Instance *)&instance_00->anim;
-  G2Anim_SetAlphaTable((_G2Anim_Type *)instance_00,(_G2AnimAlphaTable_Type *)0x0);
-  local_28 = Frames * 0x640000 >> 0x10;
-  instance = instance_00;
-  G2AnimSection_SwitchToKeylist((_G2AnimSection_Type *)instance_00,keylist,NewAnim);
-  if (Mode != 0) {
-    G2EmulationInstanceSwitchAnimation
-              (instance,(int)keylist,NewAnim,NewFrame,local_28,in_stack_ffffffdc);
-    return;
-  }
-  G2Anim_SetPaused((_G2Anim_Type *)instance_00);
-  return;
+                    /* WARNING: Subroutine does not return */
+  G2Instance_GetKeylist(In->CharacterInstance,NewAnim);
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ G2EmulationSwitchAnimationCharacterAlpha(struct __CharacterState *In /*$s1*/, int NewAnim /*$a1*/, int NewFrame /*$a2*/, int Frames /*$a3*/, int Mode /*stack 16*/, int AlphaTable /*stack 20*/)
+ // line 1195, offset 0x80071d98
+	/* begin block 1 */
+		// Start line: 2332
+	/* end block 1 */
+	// End Line: 2333
+
+void G2EmulationSwitchAnimationCharacterAlpha
+               (__CharacterState *In,int NewAnim,int NewFrame,int Frames,int Mode,int AlphaTable)
+
+{
+                    /* WARNING: Subroutine does not return */
+  G2EmulationSwitchAnimationCharacter(In,NewAnim,NewFrame,Frames,Mode);
 }
 
 
@@ -1472,30 +1431,28 @@ void G2EmulationSwitchAnimationCharacter
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInstanceSetAnimation(struct _Instance *instance /*$a0*/, int CurrentSection /*$a1*/, int NewAnim /*$s3*/, int NewFrame /*$s4*/, int Frames /*stack 16*/)
- // line 1203, offset 0x80071f70
+ // line 1203, offset 0x80071df0
 	/* begin block 1 */
 		// Start line: 1204
-		// Start offset: 0x80071F70
+		// Start offset: 0x80071DF0
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $s2
 	// 		struct _G2AnimKeylist_Type *keylist; // $s1
 	/* end block 1 */
-	// End offset: 0x80071F70
+	// End offset: 0x80071DF0
 	// End Line: 1204
 
 	/* begin block 2 */
-		// Start line: 2406
+		// Start line: 2348
 	/* end block 2 */
-	// End Line: 2407
+	// End Line: 2349
 
 void G2EmulationInstanceSetAnimation
                (_Instance *instance,int CurrentSection,int NewAnim,int NewFrame,int Frames)
 
 {
-  G2Instance_GetKeylist(instance,NewAnim);
                     /* WARNING: Subroutine does not return */
-  G2AnimSection_SetAlphaTable
-            ((instance->anim).section + (CurrentSection & 0xff),(_G2AnimAlphaTable_Type *)0x0);
+  G2Instance_GetKeylist(instance,NewAnim);
 }
 
 
@@ -1503,11 +1460,11 @@ void G2EmulationInstanceSetAnimation
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationSetAnimation(struct __CharacterState *In /*$a0*/, int CurrentSection /*$a1*/, int NewAnim /*$a2*/, int NewFrame /*$a3*/, int Frames /*stack 16*/)
- // line 1217, offset 0x80072018
+ // line 1217, offset 0x80071e98
 	/* begin block 1 */
-		// Start line: 2385
+		// Start line: 2397
 	/* end block 1 */
-	// End Line: 2386
+	// End Line: 2398
 
 void G2EmulationSetAnimation
                (__CharacterState *In,int CurrentSection,int NewAnim,int NewFrame,int Frames)
@@ -1516,8 +1473,8 @@ void G2EmulationSetAnimation
   if (NewAnim < 0) {
     NewAnim = 0;
   }
+                    /* WARNING: Subroutine does not return */
   G2EmulationInstanceSetAnimation(In->CharacterInstance,CurrentSection,NewAnim,NewFrame,Frames);
-  return;
 }
 
 
@@ -1525,20 +1482,20 @@ void G2EmulationSetAnimation
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInstanceSetMode(struct _Instance *instance /*$a0*/, int CurrentSection /*$a1*/, int Mode /*$s1*/)
- // line 1232, offset 0x80072050
+ // line 1232, offset 0x80071ed0
 	/* begin block 1 */
 		// Start line: 1233
-		// Start offset: 0x80072050
+		// Start offset: 0x80071ED0
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $s0
 	/* end block 1 */
-	// End offset: 0x800720BC
+	// End offset: 0x80071F3C
 	// End Line: 1249
 
 	/* begin block 2 */
-		// Start line: 2415
+		// Start line: 2427
 	/* end block 2 */
-	// End Line: 2416
+	// End Line: 2428
 
 void G2EmulationInstanceSetMode(_Instance *instance,int CurrentSection,int Mode)
 
@@ -1547,17 +1504,11 @@ void G2EmulationInstanceSetMode(_Instance *instance,int CurrentSection,int Mode)
   
   section = (instance->anim).section + (CurrentSection & 0xff);
   if (Mode == 0) {
-    G2AnimSection_NextKeyframe(section);
-  }
-  else {
-    G2AnimSection_SetUnpaused(section);
-    if (Mode == 1) {
                     /* WARNING: Subroutine does not return */
-      G2AnimSection_SetNoLooping(section);
-    }
-    G2AnimSection_SetLooping(section);
+    G2AnimSection_SetPaused(section);
   }
-  return;
+                    /* WARNING: Subroutine does not return */
+  G2AnimSection_SetUnpaused(section);
 }
 
 
@@ -1565,17 +1516,17 @@ void G2EmulationInstanceSetMode(_Instance *instance,int CurrentSection,int Mode)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationSetMode(struct __CharacterState *In /*$a0*/, int CurrentSection /*$a1*/, int Mode /*$a2*/)
- // line 1253, offset 0x800720d0
+ // line 1253, offset 0x80071f50
 	/* begin block 1 */
-		// Start line: 2465
+		// Start line: 2477
 	/* end block 1 */
-	// End Line: 2466
+	// End Line: 2478
 
 void G2EmulationSetMode(__CharacterState *In,int CurrentSection,int Mode)
 
 {
-                    /* WARNING: Subroutine does not return */
   G2EmulationInstanceSetMode(In->CharacterInstance,CurrentSection,Mode);
+  return;
 }
 
 
@@ -1583,35 +1534,35 @@ void G2EmulationSetMode(__CharacterState *In,int CurrentSection,int Mode)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInstanceSetAnimSpeed(struct _Instance *instance /*$a0*/, int CurrentSection /*$a1*/, int speed /*$a2*/)
- // line 1262, offset 0x800720f4
+ // line 1262, offset 0x80071f74
 	/* begin block 1 */
 		// Start line: 1264
-		// Start offset: 0x800720F4
+		// Start offset: 0x80071F74
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $v0
 	/* end block 1 */
-	// End offset: 0x800720F4
+	// End offset: 0x80071F74
 	// End Line: 1266
 
 	/* begin block 2 */
-		// Start line: 2483
+		// Start line: 2495
 	/* end block 2 */
-	// End Line: 2484
+	// End Line: 2496
 
 	/* begin block 3 */
-		// Start line: 2484
+		// Start line: 2496
 	/* end block 3 */
-	// End Line: 2485
+	// End Line: 2497
 
 	/* begin block 4 */
-		// Start line: 2486
+		// Start line: 2498
 	/* end block 4 */
-	// End Line: 2487
+	// End Line: 2499
 
-void G2EmulationInstanceSetAnimSpeed(int param_1,uint param_2,undefined4 param_3)
+void G2EmulationInstanceSetAnimSpeed(_Instance *instance,int CurrentSection,int speed)
 
 {
-  *(undefined4 *)((param_2 & 0xff) * 0x30 + param_1 + 0x1c8) = param_3;
+  (instance->anim).section[CurrentSection & 0xff].speedAdjustment = speed;
   return;
 }
 
@@ -1620,30 +1571,30 @@ void G2EmulationInstanceSetAnimSpeed(int param_1,uint param_2,undefined4 param_3
 // decompiled code
 // original method signature: 
 // int /*$ra*/ G2EmulationInstanceQueryAnimation(struct _Instance *instance /*$a0*/, int CurrentSection /*$a1*/)
- // line 1272, offset 0x80072110
+ // line 1272, offset 0x80071f90
 	/* begin block 1 */
 		// Start line: 1275
-		// Start offset: 0x80072110
+		// Start offset: 0x80071F90
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $v0
 	/* end block 1 */
-	// End offset: 0x80072110
+	// End offset: 0x80071F90
 	// End Line: 1277
 
 	/* begin block 2 */
-		// Start line: 2503
+		// Start line: 2515
 	/* end block 2 */
-	// End Line: 2504
+	// End Line: 2516
 
 	/* begin block 3 */
-		// Start line: 2505
+		// Start line: 2517
 	/* end block 3 */
-	// End Line: 2506
+	// End Line: 2518
 
 	/* begin block 4 */
-		// Start line: 2507
+		// Start line: 2519
 	/* end block 4 */
-	// End Line: 2508
+	// End Line: 2520
 
 int G2EmulationInstanceQueryAnimation(_Instance *instance,int CurrentSection)
 
@@ -1656,11 +1607,11 @@ int G2EmulationInstanceQueryAnimation(_Instance *instance,int CurrentSection)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ G2EmulationQueryAnimation(struct __CharacterState *In /*$a0*/, int CurrentSection /*$a1*/)
- // line 1283, offset 0x80072130
+ // line 1283, offset 0x80071fb0
 	/* begin block 1 */
-		// Start line: 2525
+		// Start line: 2537
 	/* end block 1 */
-	// End Line: 2526
+	// End Line: 2538
 
 int G2EmulationQueryAnimation(__CharacterState *In,int CurrentSection)
 
@@ -1676,18 +1627,18 @@ int G2EmulationQueryAnimation(__CharacterState *In,int CurrentSection)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ G2EmulationInstanceQueryFrame(struct _Instance *instance /*$a0*/, int CurrentSection /*$a1*/)
- // line 1291, offset 0x80072154
+ // line 1291, offset 0x80071fd4
 	/* begin block 1 */
 		// Start line: 1292
-		// Start offset: 0x80072154
+		// Start offset: 0x80071FD4
 	/* end block 1 */
-	// End offset: 0x80072154
+	// End offset: 0x80071FD4
 	// End Line: 1292
 
 	/* begin block 2 */
-		// Start line: 2541
+		// Start line: 2553
 	/* end block 2 */
-	// End Line: 2542
+	// End Line: 2554
 
 int G2EmulationInstanceQueryFrame(_Instance *instance,int CurrentSection)
 
@@ -1703,18 +1654,18 @@ int G2EmulationInstanceQueryFrame(_Instance *instance,int CurrentSection)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ G2EmulationInstanceQueryLastFrame(struct _Instance *instance /*$a0*/, int CurrentSection /*$a1*/)
- // line 1303, offset 0x80072188
+ // line 1303, offset 0x80072008
 	/* begin block 1 */
 		// Start line: 1304
-		// Start offset: 0x80072188
+		// Start offset: 0x80072008
 	/* end block 1 */
-	// End offset: 0x80072188
+	// End offset: 0x80072008
 	// End Line: 1304
 
 	/* begin block 2 */
-		// Start line: 2569
+		// Start line: 2581
 	/* end block 2 */
-	// End Line: 2570
+	// End Line: 2582
 
 int G2EmulationInstanceQueryLastFrame(_Instance *instance,int CurrentSection)
 
@@ -1730,20 +1681,20 @@ int G2EmulationInstanceQueryLastFrame(_Instance *instance,int CurrentSection)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ G2EmulationInstanceQueryPassedFrame(struct _Instance *instance /*$s2*/, int CurrentSection /*$a1*/, int frame /*$s1*/)
- // line 1314, offset 0x800721bc
+ // line 1314, offset 0x8007203c
 	/* begin block 1 */
 		// Start line: 1315
-		// Start offset: 0x800721BC
+		// Start offset: 0x8007203C
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $s0
 	/* end block 1 */
-	// End offset: 0x8007224C
+	// End offset: 0x800720CC
 	// End Line: 1329
 
 	/* begin block 2 */
-		// Start line: 2594
+		// Start line: 2606
 	/* end block 2 */
-	// End Line: 2595
+	// End Line: 2607
 
 int G2EmulationInstanceQueryPassedFrame(_Instance *instance,int CurrentSection,int frame)
 
@@ -1773,11 +1724,11 @@ int G2EmulationInstanceQueryPassedFrame(_Instance *instance,int CurrentSection,i
 // decompiled code
 // original method signature: 
 // int /*$ra*/ G2EmulationQueryFrame(struct __CharacterState *In /*$a0*/, int CurrentSection /*$a1*/)
- // line 1333, offset 0x80072264
+ // line 1333, offset 0x800720e4
 	/* begin block 1 */
-		// Start line: 2640
+		// Start line: 2652
 	/* end block 1 */
-	// End Line: 2641
+	// End Line: 2653
 
 int G2EmulationQueryFrame(__CharacterState *In,int CurrentSection)
 
@@ -1793,30 +1744,30 @@ int G2EmulationQueryFrame(__CharacterState *In,int CurrentSection)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ G2EmulationInstanceQueryMode(struct _Instance *instance /*$a0*/, int CurrentSection /*$a1*/)
- // line 1341, offset 0x80072288
+ // line 1341, offset 0x80072108
 	/* begin block 1 */
 		// Start line: 1344
-		// Start offset: 0x80072288
+		// Start offset: 0x80072108
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $v0
 	/* end block 1 */
-	// End offset: 0x800722C8
+	// End offset: 0x80072148
 	// End Line: 1356
 
 	/* begin block 2 */
-		// Start line: 2656
+		// Start line: 2668
 	/* end block 2 */
-	// End Line: 2657
+	// End Line: 2669
 
 	/* begin block 3 */
-		// Start line: 2658
+		// Start line: 2670
 	/* end block 3 */
-	// End Line: 2659
+	// End Line: 2671
 
 	/* begin block 4 */
-		// Start line: 2660
+		// Start line: 2672
 	/* end block 4 */
-	// End Line: 2661
+	// End Line: 2673
 
 int G2EmulationInstanceQueryMode(_Instance *instance,int CurrentSection)
 
@@ -1837,11 +1788,11 @@ int G2EmulationInstanceQueryMode(_Instance *instance,int CurrentSection)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ G2EmulationQueryMode(struct __CharacterState *In /*$a0*/, int CurrentSection /*$a1*/)
- // line 1360, offset 0x800722d0
+ // line 1360, offset 0x80072150
 	/* begin block 1 */
-		// Start line: 2700
+		// Start line: 2712
 	/* end block 1 */
-	// End Line: 2701
+	// End Line: 2713
 
 int G2EmulationQueryMode(__CharacterState *In,int CurrentSection)
 
@@ -1857,30 +1808,30 @@ int G2EmulationQueryMode(__CharacterState *In,int CurrentSection)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInstanceSetStartAndEndSegment(struct _Instance *instance /*$a0*/, int CurrentSection /*$a1*/, short Start /*$a2*/, short End /*$a3*/)
- // line 1368, offset 0x800722f4
+ // line 1368, offset 0x80072174
 	/* begin block 1 */
 		// Start line: 1371
-		// Start offset: 0x800722F4
+		// Start offset: 0x80072174
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $a0
 	/* end block 1 */
-	// End offset: 0x800722F4
+	// End offset: 0x80072174
 	// End Line: 1373
 
 	/* begin block 2 */
-		// Start line: 2716
+		// Start line: 2728
 	/* end block 2 */
-	// End Line: 2717
+	// End Line: 2729
 
 	/* begin block 3 */
-		// Start line: 2718
+		// Start line: 2730
 	/* end block 3 */
-	// End Line: 2719
+	// End Line: 2731
 
 	/* begin block 4 */
-		// Start line: 2720
+		// Start line: 2732
 	/* end block 4 */
-	// End Line: 2721
+	// End Line: 2733
 
 void G2EmulationInstanceSetStartAndEndSegment
                (_Instance *instance,int CurrentSection,short Start,short End)
@@ -1899,11 +1850,11 @@ void G2EmulationInstanceSetStartAndEndSegment
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationSetStartAndEndSegment(struct __CharacterState *In /*$a0*/, int CurrentSection /*$a1*/, short Start /*$a2*/, short End /*$a3*/)
- // line 1379, offset 0x80072320
+ // line 1379, offset 0x800721a0
 	/* begin block 1 */
-		// Start line: 2738
+		// Start line: 2750
 	/* end block 1 */
-	// End Line: 2739
+	// End Line: 2751
 
 void G2EmulationSetStartAndEndSegment(__CharacterState *In,int CurrentSection,short Start,short End)
 
@@ -1917,20 +1868,20 @@ void G2EmulationSetStartAndEndSegment(__CharacterState *In,int CurrentSection,sh
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInstanceSetTotalSections(struct _Instance *instance /*$s2*/, short Total /*$a1*/)
- // line 1387, offset 0x80072350
+ // line 1387, offset 0x800721d0
 	/* begin block 1 */
 		// Start line: 1388
-		// Start offset: 0x80072350
+		// Start offset: 0x800721D0
 		// Variables:
 	// 		struct _G2Anim_Type *anim; // $s0
 	/* end block 1 */
-	// End offset: 0x800723A8
+	// End offset: 0x80072228
 	// End Line: 1397
 
 	/* begin block 2 */
-		// Start line: 2756
+		// Start line: 2768
 	/* end block 2 */
-	// End Line: 2757
+	// End Line: 2769
 
 void G2EmulationInstanceSetTotalSections(_Instance *instance,short Total)
 
@@ -1953,11 +1904,11 @@ void G2EmulationInstanceSetTotalSections(_Instance *instance,short Total)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationSetTotalSections(struct __CharacterState *In /*$a0*/, short Total /*$a1*/)
- // line 1404, offset 0x800723d4
+ // line 1404, offset 0x80072254
 	/* begin block 1 */
-		// Start line: 2796
+		// Start line: 2808
 	/* end block 1 */
-	// End Line: 2797
+	// End Line: 2809
 
 void G2EmulationSetTotalSections(__CharacterState *In,short Total)
 
@@ -1972,30 +1923,30 @@ void G2EmulationSetTotalSections(__CharacterState *In,short Total)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInstanceInitSection(struct _Instance *instance /*$a0*/, int CurrentSection /*$a1*/, void *callback /*$a2*/, void *data /*$a3*/)
- // line 1414, offset 0x80072404
+ // line 1414, offset 0x80072284
 	/* begin block 1 */
 		// Start line: 1417
-		// Start offset: 0x80072404
+		// Start offset: 0x80072284
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $a0
 	/* end block 1 */
-	// End offset: 0x80072404
+	// End offset: 0x80072284
 	// End Line: 1419
 
 	/* begin block 2 */
-		// Start line: 2818
+		// Start line: 2830
 	/* end block 2 */
-	// End Line: 2819
+	// End Line: 2831
 
 	/* begin block 3 */
-		// Start line: 2820
+		// Start line: 2832
 	/* end block 3 */
-	// End Line: 2821
+	// End Line: 2833
 
 	/* begin block 4 */
-		// Start line: 2822
+		// Start line: 2834
 	/* end block 4 */
-	// End Line: 2823
+	// End Line: 2835
 
 void G2EmulationInstanceInitSection
                (_Instance *instance,int CurrentSection,void *callback,void *data)
@@ -2014,11 +1965,11 @@ void G2EmulationInstanceInitSection
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationSetInterpController_Vector(struct _Instance *instance /*$a0*/, long segment /*$a1*/, long type /*$a2*/, struct _G2SVector3_Type *vec /*$a3*/, int Frames /*stack 16*/, int Data /*stack 20*/)
- // line 1440, offset 0x80072428
+ // line 1440, offset 0x800722a8
 	/* begin block 1 */
-		// Start line: 2880
+		// Start line: 2874
 	/* end block 1 */
-	// End Line: 2881
+	// End Line: 2875
 
 void G2EmulationSetInterpController_Vector
                (_Instance *instance,long segment,long type,_G2SVector3_Type *vec,int Frames,int Data
@@ -2036,33 +1987,29 @@ void G2EmulationSetInterpController_Vector
 // decompiled code
 // original method signature: 
 // void /*$ra*/ StateSwitchStateDataDefault(struct __CharacterState *In /*$s1*/, int CurrentSection /*$s0*/, TDRFuncPtr_StateSwitchStateDataDefault2NewProcess NewProcess /*$a2*/, int Data /*$a3*/)
- // line 1456, offset 0x800724b0
+ // line 1456, offset 0x80072330
 	/* begin block 1 */
 		// Start line: 1457
-		// Start offset: 0x800724B0
+		// Start offset: 0x80072330
 		// Variables:
 	// 		void (*process)(); // $s2
 	/* end block 1 */
-	// End offset: 0x800724B0
+	// End offset: 0x80072330
 	// End Line: 1457
 
 	/* begin block 2 */
-		// Start line: 2907
+		// Start line: 2919
 	/* end block 2 */
-	// End Line: 2908
+	// End Line: 2920
 
 void StateSwitchStateDataDefault
                (__CharacterState *In,int CurrentSection,
                TDRFuncPtr_StateSwitchStateDataDefault2NewProcess NewProcess,int Data)
 
 {
-  _func_14 *p_Var1;
-  
-  p_Var1 = In->SectionList[CurrentSection].Process;
+                    /* WARNING: Subroutine does not return */
   StateSwitchStateData
             (In,CurrentSection,(TDRFuncPtr_StateSwitchStateData2NewProcess)NewProcess,Data);
-  (*p_Var1)(In,CurrentSection,0);
-  return;
 }
 
 
@@ -2070,20 +2017,20 @@ void StateSwitchStateDataDefault
 // decompiled code
 // original method signature: 
 // void /*$ra*/ StateSwitchStateCharacterDataDefault(struct __CharacterState *In /*$s1*/, TDRFuncPtr_StateSwitchStateCharacterDataDefault1NewProcess NewProcess /*$s2*/, int Data /*$s3*/)
- // line 1465, offset 0x80072518
+ // line 1465, offset 0x80072398
 	/* begin block 1 */
 		// Start line: 1466
-		// Start offset: 0x80072518
+		// Start offset: 0x80072398
 		// Variables:
 	// 		int i; // $s0
 	/* end block 1 */
-	// End offset: 0x80072574
+	// End offset: 0x800723F4
 	// End Line: 1474
 
 	/* begin block 2 */
-		// Start line: 2928
+		// Start line: 2940
 	/* end block 2 */
-	// End Line: 2929
+	// End Line: 2941
 
 void StateSwitchStateCharacterDataDefault
                (__CharacterState *In,
@@ -2109,40 +2056,44 @@ void StateSwitchStateCharacterDataDefault
 // decompiled code
 // original method signature: 
 // void /*$ra*/ StateSwitchStateData(struct __CharacterState *In /*$s3*/, int CurrentSection /*$s2*/, TDRFuncPtr_StateSwitchStateData2NewProcess NewProcess /*$s5*/, int Data /*$s4*/)
- // line 1478, offset 0x80072590
+ // line 1478, offset 0x80072410
 	/* begin block 1 */
-		// Start line: 2955
+		// Start line: 2967
 	/* end block 1 */
-	// End Line: 2956
+	// End Line: 2968
 
 void StateSwitchStateData
                (__CharacterState *In,int CurrentSection,
                TDRFuncPtr_StateSwitchStateData2NewProcess NewProcess,int Data)
 
 {
+  __MessageQueue *In_00;
+  
+  In_00 = &In->SectionList[CurrentSection].Event;
+  PurgeMessageQueue(In_00);
                     /* WARNING: Subroutine does not return */
-  PurgeMessageQueue(&In->SectionList[CurrentSection].Event);
+  EnMessageQueueData(In_00,(int)&DAT_00100001,Data);
 }
 
 
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ StateSwitchStateCharacterData(struct __CharacterState *In /*$s3*/, TDRFuncPtr_StateSwitchStateCharacterData1NewProcess NewProcess /*$s5*/, int Data /*$s6*/)
- // line 1492, offset 0x8007265c
+// void /*$ra*/ StateSwitchStateCharacterData(struct __CharacterState *In /*$s1*/, TDRFuncPtr_StateSwitchStateCharacterData1NewProcess NewProcess /*$s2*/, int Data /*$s3*/)
+ // line 1492, offset 0x800724dc
 	/* begin block 1 */
 		// Start line: 1493
-		// Start offset: 0x8007265C
+		// Start offset: 0x800724DC
 		// Variables:
-	// 		int i; // $s1
+	// 		int i; // $s0
 	/* end block 1 */
-	// End offset: 0x80072728
-	// End Line: 1509
+	// End offset: 0x80072538
+	// End Line: 1501
 
 	/* begin block 2 */
-		// Start line: 2987
+		// Start line: 2999
 	/* end block 2 */
-	// End Line: 2988
+	// End Line: 3000
 
 void StateSwitchStateCharacterData
                (__CharacterState *In,TDRFuncPtr_StateSwitchStateCharacterData1NewProcess NewProcess,
@@ -2151,7 +2102,7 @@ void StateSwitchStateCharacterData
 {
   if (0 < In->TotalSections) {
                     /* WARNING: Subroutine does not return */
-    PurgeMessageQueue(&In->SectionList[0].Event);
+    StateSwitchStateData(In,0,(TDRFuncPtr_StateSwitchStateData2NewProcess)NewProcess,Data);
   }
   return;
 }
@@ -2161,10 +2112,10 @@ void StateSwitchStateCharacterData
 // decompiled code
 // original method signature: 
 // void /*$ra*/ StateGovernState(struct __CharacterState *In /*$s7*/, int Frames /*$fp*/)
- // line 1513, offset 0x80072750
+ // line 1505, offset 0x80072554
 	/* begin block 1 */
-		// Start line: 1514
-		// Start offset: 0x80072750
+		// Start line: 1506
+		// Start offset: 0x80072554
 		// Variables:
 	// 		struct __State *pSectionA; // $v0
 	// 		struct __State *pSectionB; // $v1
@@ -2174,56 +2125,52 @@ void StateSwitchStateCharacterData
 	// 		int keylistID; // $s2
 	// 		int i; // $s4
 	/* end block 1 */
-	// End offset: 0x800728A0
-	// End Line: 1563
+	// End offset: 0x800726A4
+	// End Line: 1555
 
 	/* begin block 2 */
-		// Start line: 3040
+		// Start line: 3026
 	/* end block 2 */
-	// End Line: 3041
+	// End Line: 3027
 
 void StateGovernState(__CharacterState *In,int Frames)
 
 {
-  ushort uVar1;
-  _G2Bool_Enum _Var2;
+  _G2Bool_Enum _Var1;
+  int iVar2;
   int iVar3;
-  int iVar4;
   _G2AnimSection_Type *section;
   _G2AnimKeylist_Type *keylist;
   _G2AnimSection_Type *section_00;
-  uint uVar5;
+  uint uVar4;
+  int iVar5;
   int iVar6;
-  int iVar7;
   
-  uVar5 = 1;
-  iVar7 = 0x124;
-  iVar6 = 8;
+  uVar4 = 1;
+  iVar6 = 0x124;
+  iVar5 = 8;
   do {
-    if (*(int *)((int)&In->CharacterInstance + iVar6) ==
-        *(int *)((int)&In->CharacterInstance + iVar7)) {
-      section = (In->CharacterInstance->anim).section + (uVar5 - 1 & 0xff);
-      section_00 = (In->CharacterInstance->anim).section + (uVar5 & 0xff);
+    if (*(int *)((int)&In->CharacterInstance + iVar5) ==
+        *(int *)((int)&In->CharacterInstance + iVar6)) {
+      section = (In->CharacterInstance->anim).section + (uVar4 - 1 & 0xff);
+      section_00 = (In->CharacterInstance->anim).section + (uVar4 & 0xff);
       if (((section->keylistID == section_00->keylistID) &&
-          (_Var2 = G2AnimSection_IsInInterpolation(section), _Var2 == G2FALSE)) &&
-         (_Var2 = G2AnimSection_IsInInterpolation(section_00), _Var2 == G2FALSE)) {
-        iVar3 = G2AnimSection_GetKeyframeNumber(section);
-        iVar4 = G2AnimSection_GetKeyframeNumber(section_00);
-        if (iVar3 != iVar4) {
+          (_Var1 = G2AnimSection_IsInInterpolation(section), _Var1 == G2FALSE)) &&
+         (_Var1 = G2AnimSection_IsInInterpolation(section_00), _Var1 == G2FALSE)) {
+        iVar2 = G2AnimSection_GetKeyframeNumber(section);
+        iVar3 = G2AnimSection_GetKeyframeNumber(section_00);
+        if (iVar2 != iVar3) {
           keylist = section->keylist;
-          uVar1 = section->keylistID;
-          iVar3 = G2AnimSection_GetKeyframeNumber(section);
-          iVar4 = G2AnimKeylist_GetKeyframeCount(keylist);
-          G2AnimSection_InterpToKeylistFrame
-                    (section_00,keylist,(uint)uVar1,(iVar3 + Frames) % iVar4,
-                     Frames * 0x640000 >> 0x10);
+          G2AnimSection_GetKeyframeNumber(section);
+                    /* WARNING: Subroutine does not return */
+          G2AnimKeylist_GetKeyframeCount(keylist);
         }
       }
     }
-    iVar7 = iVar7 + 0x11c;
-    uVar5 = uVar5 + 1;
     iVar6 = iVar6 + 0x11c;
-  } while ((int)uVar5 < 3);
+    uVar4 = uVar4 + 1;
+    iVar5 = iVar5 + 0x11c;
+  } while ((int)uVar4 < 3);
   return;
 }
 
