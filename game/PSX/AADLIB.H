@@ -1,6 +1,30 @@
 #ifndef AADLIB_H
 #define AADLIB_H
 
+typedef unsigned char TDRFuncPtr_aadInstallUpdateFunc0updateFuncPtr;
+
+typedef unsigned char TDRFuncPtr_aadInstallEndSequenceCallback;
+
+typedef unsigned char TDRFuncPtr_aadInstallEndSequenceCallback0callbackProc;
+
+typedef unsigned char TDRFuncPtr_aadLoadDynamicSoundBank4retProc;
+
+typedef unsigned char TDRFuncPtr_aadStartMasterVolumeFade2fadeCompleteCallback;
+
+typedef unsigned char TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback;
+
+/* typedef long (*TDRFuncPtr_aadInstallUpdateFunc0updateFuncPtr)();
+
+typedef void (*TDRFuncPtr_aadInstallEndSequenceCallback)();
+
+typedef void (*TDRFuncPtr_aadInstallEndSequenceCallback0callbackProc)();
+
+typedef void (*TDRFuncPtr_aadLoadDynamicSoundBank4retProc)();
+
+typedef void (*TDRFuncPtr_aadStartMasterVolumeFade2fadeCompleteCallback)();
+
+typedef void (*TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback)(); */
+
 
 extern unsigned long aadGetMemorySize(struct AadInitAttr *attributes); // 0x80051D1C
 
@@ -139,19 +163,6 @@ extern void aadPauseSound(); // 0x80054F24
 extern void aadCancelPauseSound(); // 0x80054FBC
 
 extern void aadResumeSound(); // 0x80054FD8
-
-
-typedef long (*TDRFuncPtr_aadInstallUpdateFunc0updateFuncPtr)();
-
-typedef void (*TDRFuncPtr_aadInstallEndSequenceCallback)();
-
-typedef void (*TDRFuncPtr_aadInstallEndSequenceCallback0callbackProc)();
-
-typedef void (*TDRFuncPtr_aadLoadDynamicSoundBank4retProc)();
-
-typedef void (*TDRFuncPtr_aadStartMasterVolumeFade2fadeCompleteCallback)();
-
-typedef void (*TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback)();
 
 
 

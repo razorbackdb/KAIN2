@@ -86,7 +86,7 @@ extern void GAMELOOP_RequestLevelChange(char *name, short number, struct GameTra
 
 extern void PSX_GameLoop(struct GameTracker *gameTracker); // 0x80030D00
 
-extern struct MATRIX * GAMELOOP_GetMatrices(int numMatrices); // 0x80030D2C
+//extern struct MATRIX * GAMELOOP_GetMatrices(int numMatrices); // 0x80030D2C
 
 extern struct GameTracker * GAMELOOP_GetGT(); // 0x80030D60
 

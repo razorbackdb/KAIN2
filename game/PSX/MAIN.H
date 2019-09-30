@@ -1,6 +1,15 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+struct MainTracker // hashcode: 0x17FC94E6 (dec: 402429158)
+{
+	long mainState; // size=0, offset=0
+	long previousState; // size=0, offset=4
+	long movieNum; // size=0, offset=8
+	long done; // size=0, offset=12
+};
+
+typedef struct MainTracker MainTracker;
 
 extern void ClearDisplay(); // 0x8003840C
 

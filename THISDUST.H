@@ -23590,8 +23590,6 @@ extern void MORPH_ChangeAreaPalettes(long time);; // 0x80073360
 
 extern int printf(char *fmt);; // 0x80073368
 
-extern int sprintf(char *string,char *fmt);; // 0x800733B8
-
 extern int vsprintf(char *str,char *fmtstr,void *argptr);; // 0x800733E8
 
 extern int VRAM_InsertFreeVram(short x,short y,short w,short h,int flags);; // 0x80073460
@@ -23656,8 +23654,6 @@ extern void MORPH_ChangeAreaPalettes(long time);; // 0x80073E54
 
 extern int printf(char *fmt);; // 0x80073E5C
 
-extern int sprintf(char *__s,char *__format,...);; // 0x80073EAC
-
 extern int vsprintf(char *str,char *fmtstr,void *argptr);; // 0x80073EDC
 
 extern void VRAM_LoadReturn(void *dataPtr,void *data1,void *data2);; // 0x80073F4C
@@ -23673,8 +23669,6 @@ extern void VRAM_TransferBufferToVram(void *dataPtr,long dataSize,short status,v
 extern void MORPH_ChangeAreaPalettes(long time);; // 0x80074074
 
 extern int printf(char *fmt);; // 0x8007407C
-
-extern int sprintf(char *string,char *fmt);; // 0x800740CC
 
 extern int vsprintf(char *str,char *fmtstr,void *argptr);; // 0x800740FC
 
@@ -23711,8 +23705,6 @@ extern int printf(char *fmt);; // 0x80074418
 extern int PhysicsCheckLinkedMove(undefined1 instance,int Data,short Mode);; // 0x80074440
 
 extern int atoi(char *str);; // 0x80074448
-
-extern int sprintf(char *string,char *fmt);; // 0x80074468
 
 extern int vsprintf(char *str,char *fmtstr,void *argptr);; // 0x80074498
 
