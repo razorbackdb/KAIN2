@@ -210,10 +210,19 @@ void G2Anim_InterpToKeylistFrame
                int duration)
 
 {
+  int iVar1;
+  int iVar2;
+  
+  iVar1 = 0;
   if (anim->sectionCount != '\0') {
-                    /* WARNING: Subroutine does not return */
-    G2AnimSection_InterpToKeylistFrame
-              (anim->section,keylist,keylistID,targetFrame,(int)(short)duration);
+    iVar2 = 0x24;
+    do {
+      G2AnimSection_InterpToKeylistFrame
+                ((_G2AnimSection_Type *)(&anim->sectionCount + iVar2),keylist,keylistID,targetFrame,
+                 (int)(short)duration);
+      iVar1 = iVar1 + 1;
+      iVar2 = iVar2 + 0x30;
+    } while (iVar1 < (int)(uint)anim->sectionCount);
   }
   return;
 }
@@ -290,9 +299,17 @@ _G2Bool_Enum G2Anim_IsSegmentEnabled(_G2Anim_Type *anim,int segmentID)
 void G2Anim_SetAlphaTable(_G2Anim_Type *anim,_G2AnimAlphaTable_Type *table)
 
 {
+  int iVar1;
+  int iVar2;
+  
+  iVar1 = 0;
   if (anim->sectionCount != '\0') {
-                    /* WARNING: Subroutine does not return */
-    G2AnimSection_SetAlphaTable(anim->section,table);
+    iVar2 = 0x24;
+    do {
+      G2AnimSection_SetAlphaTable((_G2AnimSection_Type *)(&anim->sectionCount + iVar2),table);
+      iVar1 = iVar1 + 1;
+      iVar2 = iVar2 + 0x30;
+    } while (iVar1 < (int)(uint)anim->sectionCount);
   }
   return;
 }
@@ -370,9 +387,17 @@ void G2Anim_SetCallback(_G2Anim_Type *anim,TDRFuncPtr_G2Anim_SetCallback1callbac
 void G2Anim_SetLooping(_G2Anim_Type *anim)
 
 {
+  int iVar1;
+  int iVar2;
+  
+  iVar1 = 0;
   if (anim->sectionCount != '\0') {
-                    /* WARNING: Subroutine does not return */
-    G2AnimSection_SetLooping(anim->section);
+    iVar2 = 0x24;
+    do {
+      G2AnimSection_SetLooping((_G2AnimSection_Type *)(&anim->sectionCount + iVar2));
+      iVar1 = iVar1 + 1;
+      iVar2 = iVar2 + 0x30;
+    } while (iVar1 < (int)(uint)anim->sectionCount);
   }
   return;
 }
@@ -438,9 +463,17 @@ void G2Anim_SetNoLooping(_G2Anim_Type *anim)
 void G2Anim_SetPaused(_G2Anim_Type *anim)
 
 {
+  int iVar1;
+  int iVar2;
+  
+  iVar1 = 0;
   if (anim->sectionCount != '\0') {
-                    /* WARNING: Subroutine does not return */
-    G2AnimSection_SetPaused(anim->section);
+    iVar2 = 0x24;
+    do {
+      G2AnimSection_SetPaused((_G2AnimSection_Type *)(&anim->sectionCount + iVar2));
+      iVar1 = iVar1 + 1;
+      iVar2 = iVar2 + 0x30;
+    } while (iVar1 < (int)(uint)anim->sectionCount);
   }
   return;
 }
@@ -516,9 +549,17 @@ void G2Anim_SetSpeedAdjustment(_G2Anim_Type *anim,long adjustment)
 void G2Anim_SetUnpaused(_G2Anim_Type *anim)
 
 {
+  int iVar1;
+  int iVar2;
+  
+  iVar1 = 0;
   if (anim->sectionCount != '\0') {
-                    /* WARNING: Subroutine does not return */
-    G2AnimSection_SetUnpaused(anim->section);
+    iVar2 = 0x24;
+    do {
+      G2AnimSection_SetUnpaused((_G2AnimSection_Type *)(&anim->sectionCount + iVar2));
+      iVar1 = iVar1 + 1;
+      iVar2 = iVar2 + 0x30;
+    } while (iVar1 < (int)(uint)anim->sectionCount);
   }
   return;
 }
@@ -771,12 +812,15 @@ _G2Bool_Enum G2AnimSection_IsInInterpolation(_G2AnimSection_Type *section)
 short G2AnimSection_NextKeyframe(_G2AnimSection_Type *section)
 
 {
+  short interval;
+  
+  interval = 0;
   if ((section->flags & 1) == 0) {
     G2AnimSection_SetNotRewinding(section);
-                    /* WARNING: Subroutine does not return */
-    G2Timer_GetFrameTime();
+    interval = G2Timer_GetFrameTime();
+    interval = G2AnimSection_UpdateOverInterval(section,interval);
   }
-  return 0;
+  return interval;
 }
 
 
@@ -820,7 +864,6 @@ void G2AnimSection_SetInterpInfo(_G2AnimSection_Type *section,_G2AnimInterpInfo_
 {
   section->interpInfo = newInfoPtr;
   if (newInfoPtr != (_G2AnimInterpInfo_Type *)0x0) {
-                    /* WARNING: Subroutine does not return */
     memset(newInfoPtr,0,0xc);
   }
   return;
@@ -840,8 +883,10 @@ void G2AnimSection_SetInterpInfo(_G2AnimSection_Type *section,_G2AnimInterpInfo_
 void G2AnimSection_SetLooping(_G2AnimSection_Type *section)
 
 {
-                    /* WARNING: Subroutine does not return */
   G2AnimSection_ClearAlarm(section,3);
+  G2AnimSection_SetLoopRangeAll(section);
+  section->flags = section->flags | 2;
+  return;
 }
 
 

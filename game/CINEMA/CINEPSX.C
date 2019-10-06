@@ -92,12 +92,13 @@ void CINE_Play(char *strfile,ushort mask,int buffers)
 
 {
   if (the_cine_table != (cinema_fn_table_t *)0x0) {
-    if (the_cine_table->versionID != "May 25 1999") {
-                    /* WARNING: Subroutine does not return */
+    if (the_cine_table->versionID == "May 25 1999") {
+      (*the_cine_table->play)(strfile,(uint)mask);
+      LOAD_InitCdStreamMode();
+    }
+    else {
       printf("CINEMA : Version number is wrong. Not playing the cinematics.\n");
     }
-    (*the_cine_table->play)(strfile,(uint)mask);
-    LOAD_InitCdStreamMode();
   }
   return;
 }
@@ -130,22 +131,33 @@ void CINE_Play(char *strfile,ushort mask,int buffers)
 	/* end block 2 */
 	// End Line: 163
 
-/* WARNING: Removing unreachable block (ram,0x800b61f4) */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 int CINE_Load(void)
 
 {
-  _ObjectTracker *p_Var1;
+  bool bVar1;
+  _ObjectTracker *p_Var2;
+  int iVar3;
   
-  p_Var1 = STREAM_GetObjectTracker("cinemax");
-  if (p_Var1->objectStatus == 2) {
-    the_cine_table = (cinema_fn_table_t *)p_Var1->object->relocModule;
-    the_cine_tracker = p_Var1;
-    return 1;
+  iVar3 = 0;
+  p_Var2 = STREAM_GetObjectTracker("cinemax");
+  do {
+    bVar1 = iVar3 < 400;
+    if (p_Var2->objectStatus == 2) break;
+    iVar3 = iVar3 + 1;
+    STREAM_PollLoadQueue();
+    VSync(0);
+    bVar1 = iVar3 < 400;
+  } while (bVar1);
+  if (!bVar1) {
+    printf("cinema timeout\n");
   }
-                    /* WARNING: Subroutine does not return */
-  STREAM_PollLoadQueue();
+  else {
+    the_cine_table = (cinema_fn_table_t *)p_Var2->object->relocModule;
+    the_cine_tracker = p_Var2;
+  }
+  return (uint)bVar1;
 }
 
 
@@ -220,10 +232,16 @@ void CINE_Unload(void)
 void CINE_PlayIngame(int number)
 
 {
+  int iVar1;
   char acStack32 [24];
   
-                    /* WARNING: Subroutine does not return */
   sprintf(acStack32,"\\CHRONO%d.STR;1");
+  iVar1 = CINE_Load();
+  if (iVar1 != 0) {
+    CINE_Play(acStack32,0,2);
+    CINE_Unload();
+  }
+  return;
 }
 
 

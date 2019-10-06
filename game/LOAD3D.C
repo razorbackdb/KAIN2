@@ -41,10 +41,12 @@ void LOAD_InitCd(void)
 void LOAD_CdSeekCallback(uchar intr,uchar *result)
 
 {
+  uint uVar1;
+  
   if (loadStatus.state == 1) {
     loadStatus.state = 2;
-                    /* WARNING: Subroutine does not return */
-    GetRCnt(0xf2000000);
+    uVar1 = GetRCnt(0xf2000000);
+    crap1 = uVar1 & 0xffff | gameTimer << 0x10;
   }
   return;
 }
@@ -86,6 +88,8 @@ void LOAD_CdSeekCallback(uchar intr,uchar *result)
 	/* end block 2 */
 	// End Line: 344
 
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
 void LOAD_CdDataReady(void)
 
 {
@@ -93,40 +97,40 @@ void LOAD_CdDataReady(void)
   
   if (loadStatus.state == 3) {
     loadStatus.state = 4;
-    FUN_80037358();
-    return;
   }
-  if (loadStatus.state == 4) {
-    loadStatus.currentQueueFile.readCurSize =
-         loadStatus.currentQueueFile.readCurSize + loadStatus.bytesTransferred;
-    if (loadStatus.currentQueueFile.readStatus == 3) {
-      loadStatus.currentQueueFile.readCurDest =
-           (void *)((int)loadStatus.currentQueueFile.readCurDest + loadStatus.bytesTransferred);
-      if (loadStatus.currentQueueFile.readCurSize == loadStatus.currentQueueFile.readSize) {
-        loadStatus.state = 5;
-        FUN_80037358();
-        return;
-      }
-      loadStatus.state = 2;
-    }
-    else {
-      if (loadStatus.currentQueueFile.readStatus == 6) {
-        iVar1 = 2;
+  else {
+    if (loadStatus.state == 4) {
+      loadStatus.currentQueueFile.readCurSize =
+           loadStatus.currentQueueFile.readCurSize + loadStatus.bytesTransferred;
+      if (loadStatus.currentQueueFile.readStatus == 3) {
+        loadStatus.currentQueueFile.readCurDest =
+             (void *)((int)loadStatus.currentQueueFile.readCurDest + loadStatus.bytesTransferred);
         if (loadStatus.currentQueueFile.readCurSize == loadStatus.currentQueueFile.readSize) {
-          iVar1 = 5;
-        }
-        if (loadStatus.currentQueueFile.retFunc != (void *)0x0) {
-          (*(code *)loadStatus.currentQueueFile.retFunc)
-                    (loadStatus.currentQueueFile.readCurDest,loadStatus.bytesTransferred,
-                     (uint)(iVar1 == 5),loadStatus.currentQueueFile.retData,
-                     loadStatus.currentQueueFile.retData2);
-        }
-        loadStatus.state = iVar1;
-        if (loadStatus.currentQueueFile.readCurDest == loadStatus.buffer1) {
-          loadStatus.currentQueueFile.readCurDest = loadStatus.buffer2;
+          loadStatus.state = 5;
         }
         else {
-          loadStatus.currentQueueFile.readCurDest = loadStatus.buffer1;
+          loadStatus.state = 2;
+        }
+      }
+      else {
+        if (loadStatus.currentQueueFile.readStatus == 6) {
+          iVar1 = 2;
+          if (loadStatus.currentQueueFile.readCurSize == loadStatus.currentQueueFile.readSize) {
+            iVar1 = 5;
+          }
+          if (loadStatus.currentQueueFile.retFunc != (void *)0x0) {
+            (*(code *)loadStatus.currentQueueFile.retFunc)
+                      (loadStatus.currentQueueFile.readCurDest,loadStatus.bytesTransferred,
+                       (uint)(iVar1 == 5),loadStatus.currentQueueFile.retData,
+                       loadStatus.currentQueueFile.retData2);
+          }
+          loadStatus.state = iVar1;
+          if (loadStatus.currentQueueFile.readCurDest == loadStatus.buffer1) {
+            loadStatus.currentQueueFile.readCurDest = loadStatus.buffer2;
+          }
+          else {
+            loadStatus.currentQueueFile.readCurDest = loadStatus.buffer1;
+          }
         }
       }
     }
@@ -176,36 +180,50 @@ void LOAD_CdDataReady(void)
 void LOAD_CdReadReady(uchar intr,uchar *result)
 
 {
-  byte abStack40 [24];
+  uint uVar1;
+  int iVar2;
+  byte abStack40 [16];
+  byte abStack24 [8];
   
-  if (loadStatus.state != 2) {
-    if (crap1 != 0) {
-      loadStatus.seekTime = TIMER_TimeDiff(crap1);
-      crap1 = 0;
+  if (loadStatus.state == 2) {
+    if (intr == '\x01') {
+      uVar1 = loadStatus.currentQueueFile.readSize - loadStatus.currentQueueFile.readCurSize;
+      if (0x7ff < (int)uVar1) {
+        uVar1 = 0x800;
+      }
+      loadStatus.state = 4;
+      loadStatus.bytesTransferred = uVar1;
+      CdGetSector((dword)abStack40,3);
+      iVar2 = CdPosToInt(abStack40);
+      if (loadStatus.currentSector == iVar2) {
+        loadStatus.currentSector = loadStatus.currentSector + 1;
+        CdGetSector((dword)loadStatus.currentQueueFile.readCurDest,uVar1 >> 2);
+        LOAD_CdDataReady();
+      }
+      else {
+        loadStatus.state = (uint)intr;
+        CdIntToPos(loadStatus.currentSector,(char *)abStack24);
+        CdControl(6,abStack24,(undefined *)0x0);
+      }
     }
-    loadStatus.sectorTime = TIMER_TimeDiff(crap_35);
-                    /* WARNING: Subroutine does not return */
-    GetRCnt(0xf2000000);
-  }
-  if (intr == '\x01') {
-    loadStatus.bytesTransferred =
-         loadStatus.currentQueueFile.readSize - loadStatus.currentQueueFile.readCurSize;
-    if (0x7ff < loadStatus.bytesTransferred) {
-      loadStatus.bytesTransferred = 0x800;
+    else {
+      if (intr == '\x05') {
+        loadStatus.state = 6;
+        loadStatus.currentQueueFile.readStatus = 4;
+      }
+      else {
+        printf("something %x\n");
+      }
     }
-    loadStatus.state = 4;
-    CdGetSector((dword)abStack40,3);
-                    /* WARNING: Subroutine does not return */
-    CdPosToInt(abStack40);
   }
-  if (intr == '\x05') {
-    loadStatus.state = 6;
-    loadStatus.currentQueueFile.readStatus = 4;
-    LOAD_CdReadReady('\0',result);
-    return;
+  if (crap1 != 0) {
+    loadStatus.seekTime = TIMER_TimeDiff(crap1);
+    crap1 = 0;
   }
-                    /* WARNING: Subroutine does not return */
-  printf("something %x\n");
+  loadStatus.sectorTime = TIMER_TimeDiff(crap_35);
+  uVar1 = GetRCnt(0xf2000000);
+  crap_35 = uVar1 & 0xffff | gameTimer << 0x10;
+  return;
 }
 
 
@@ -370,8 +388,8 @@ void LOAD_SetupFileToDoCDReading(void)
   loadStatus.currentSector = loadStatus.bigFile.bigfileBaseOffset + (lVar1 >> 0xb);
   CdIntToPos(loadStatus.currentSector,(char *)abStack16);
   CdControl(6,abStack16,(undefined *)0x0);
-                    /* WARNING: Subroutine does not return */
-  TIMER_GetTimeMS();
+  loadStatus.cdWaitTime = TIMER_GetTimeMS();
+  return;
 }
 
 
@@ -420,8 +438,8 @@ void LOAD_SetupFileToDoBufferedCDReading(void)
   loadStatus.currentSector = loadStatus.bigFile.bigfileBaseOffset + (lVar1 >> 0xb);
   CdIntToPos(loadStatus.currentSector,(char *)abStack16);
   CdControl(6,abStack16,(undefined *)0x0);
-                    /* WARNING: Subroutine does not return */
-  TIMER_GetTimeMS();
+  loadStatus.cdWaitTime = TIMER_GetTimeMS();
+  return;
 }
 
 
@@ -470,8 +488,11 @@ void LOAD_SetupFileToDoBufferedCDReading(void)
 void LOAD_ProcessReadQueue(void)
 
 {
+  ulong uVar1;
+  int iVar2;
+  byte abStack16 [8];
+  
   if (gameTrackerX.debugFlags < 0) {
-                    /* WARNING: Subroutine does not return */
     FONT_Print("CD St %d LS %d sk %d tm %d rd %d cs %d\n");
   }
   if (loadStatus.currentQueueFile.readStatus == 3) {
@@ -498,9 +519,25 @@ void LOAD_ProcessReadQueue(void)
     loadStatus.currentQueueFile.readStatus = 1;
   }
   else {
-    if (loadStatus.cdWaitTime != 0) {
-                    /* WARNING: Subroutine does not return */
-      TIMER_GetTimeMS();
+    if ((loadStatus.cdWaitTime != 0) &&
+       (uVar1 = TIMER_GetTimeMS(), 0x20d0 < (int)(uVar1 - loadStatus.cdWaitTime))) {
+      if ((loadStatus.currentQueueFile.readStatus == 3) ||
+         (loadStatus.currentQueueFile.readStatus == 6)) {
+        loadStatus.state = 0;
+        CdReset(0);
+        LOAD_InitCdStreamMode();
+        loadStatus.state = 1;
+        CdIntToPos(loadStatus.currentSector,(char *)abStack16);
+        CdControl(6,abStack16,(undefined *)0x0);
+        loadStatus.cdWaitTime = TIMER_GetTimeMS();
+      }
+      else {
+        iVar2 = VOICEXA_IsPlaying();
+        if (iVar2 == 0) {
+          CdControlF(9,(byte *)0x0);
+        }
+        loadStatus.cdWaitTime = 0;
+      }
     }
   }
   return;
@@ -532,22 +569,42 @@ char * LOAD_ReadFileFromCD(char *filename,int memType)
 
 {
   undefined4 *puVar1;
-  int iVar2;
+  char *pcVar2;
+  char *pcVar3;
+  int iVar4;
   undefined4 uStack40;
   ulong local_24;
   
-  iVar2 = 0;
+  iVar4 = 0;
   do {
     puVar1 = CdSearchFile(&uStack40,filename);
     if (puVar1 != (undefined4 *)0x0) break;
     CdReset(0);
-    iVar2 = iVar2 + 1;
-  } while (iVar2 < 10);
-  if (iVar2 != 10) {
-                    /* WARNING: Subroutine does not return */
-    MEMPACK_Malloc(local_24,(uchar)memType);
+    iVar4 = iVar4 + 1;
+  } while (iVar4 < 10);
+  pcVar3 = (char *)0x0;
+  if (iVar4 != 10) {
+    pcVar2 = MEMPACK_Malloc(local_24,(uchar)memType);
+    pcVar3 = (char *)0x0;
+    if (pcVar2 != (char *)0x0) {
+      iVar4 = CdPosToInt((byte *)&uStack40);
+      loadStatus.currentQueueFile.readCurSize = 0;
+      loadStatus.currentQueueFile.readStatus = 1;
+      loadStatus.currentQueueFile.checksumType = 0;
+      loadStatus.currentQueueFile.checksum = 0;
+      loadStatus.currentQueueFile.readStartPos =
+           (iVar4 - loadStatus.bigFile.bigfileBaseOffset) * 0x800;
+      loadStatus.currentQueueFile.readSize = local_24;
+      loadStatus.currentQueueFile.readStartDest = pcVar2;
+      do {
+        LOAD_ProcessReadQueue();
+        iVar4 = LOAD_IsFileLoading();
+      } while (iVar4 != 0);
+      CdControlF(9,(byte *)0x0);
+      pcVar3 = pcVar2;
+    }
   }
-  return (char *)0x0;
+  return pcVar3;
 }
 
 
@@ -599,8 +656,13 @@ void LOAD_CdReadFromBigFile
 _BigFileDir * LOAD_ReadDirectory(_BigFileDirEntry *dirEntry)
 
 {
-                    /* WARNING: Subroutine does not return */
-  MEMPACK_Malloc((int)dirEntry->numFiles * 0x10 + 4,',');
+  _BigFileDir *loadAddr;
+  ulong allocSize;
+  
+  allocSize = (int)dirEntry->numFiles * 0x10 + 4;
+  loadAddr = (_BigFileDir *)MEMPACK_Malloc(allocSize,',');
+  LOAD_CdReadFromBigFile(dirEntry->subDirOffset,(ulong *)loadAddr,allocSize,0,0);
+  return loadAddr;
 }
 
 
@@ -637,7 +699,9 @@ void LOAD_InitCdLoader(char *bigFileName,char *voiceFileName)
 
 {
   undefined4 *puVar1;
+  ulong *loadAddr;
   int iVar2;
+  ulong allocSize;
   undefined4 auStack40 [6];
   
   iVar2 = 0;
@@ -650,8 +714,34 @@ void LOAD_InitCdLoader(char *bigFileName,char *voiceFileName)
   } while (iVar2 < 10);
   if (iVar2 != 10) {
     LOAD_InitCdStreamMode();
-                    /* WARNING: Subroutine does not return */
-    CdPosToInt((byte *)auStack40);
+    loadStatus.bigFile.bigfileBaseOffset = CdPosToInt((byte *)auStack40);
+    loadStatus.cdWaitTime = 0;
+    loadStatus.currentQueueFile.readStatus = 0;
+    loadStatus.bigFile.currentDir = (_BigFileDir *)0x0;
+    loadStatus.bigFile.currentDirID = 0;
+    loadStatus.bigFile.cachedDir = (_BigFileDir *)0x0;
+    loadStatus.bigFile.cachedDirID = 0;
+    loadStatus.bigFile.searchDirID = 0;
+    LOAD_CdReadFromBigFile(0,(ulong *)&loadStatus.bigFile.numSubDirs,4,0,0);
+    do {
+      LOAD_ProcessReadQueue();
+      iVar2 = LOAD_IsFileLoading();
+    } while (iVar2 != 0);
+    CdControlF(9,(byte *)0x0);
+    allocSize = loadStatus.bigFile.numSubDirs * 8 + 4;
+    loadAddr = (ulong *)MEMPACK_Malloc(allocSize,'\b');
+    CdSync(0,(undefined *)0x0);
+    LOAD_CdReadFromBigFile(0,loadAddr,allocSize,0,0);
+    loadStatus.bigFile.subDirList = (_BigFileDirEntry *)(loadAddr + 1);
+    do {
+      LOAD_ProcessReadQueue();
+      iVar2 = LOAD_IsFileLoading();
+    } while (iVar2 != 0);
+    loadStatus.bigFile.rootDir = LOAD_ReadDirectory(loadStatus.bigFile.subDirList);
+    do {
+      LOAD_ProcessReadQueue();
+      iVar2 = LOAD_IsFileLoading();
+    } while (iVar2 != 0);
   }
   return;
 }
@@ -714,20 +804,23 @@ void LOAD_NonBlockingReadFile(_NonBlockLoadEntry *loadEntry)
 
 {
   int iVar1;
+  long *plVar2;
   
   iVar1 = LOAD_SetupFileInfo(loadEntry);
   if (iVar1 == 0) {
     loadStatus.changeDir = 1;
-    return;
   }
-  if (loadEntry->loadAddr == (long *)0x0) {
-                    /* WARNING: Subroutine does not return */
-    MEMPACK_Malloc(loadEntry->loadSize,*(uchar *)&loadEntry->memType);
+  else {
+    if (loadEntry->loadAddr == (long *)0x0) {
+      plVar2 = (long *)MEMPACK_Malloc(loadEntry->loadSize,*(uchar *)&loadEntry->memType);
+      loadEntry->loadAddr = plVar2;
+    }
+    LOAD_CdReadFromBigFile
+              (loadEntry->filePos,(ulong *)loadEntry->loadAddr,loadEntry->loadSize,
+               loadEntry->checksumType,loadEntry->checksum);
+    loadStatus.changeDir = 0;
   }
-                    /* WARNING: Subroutine does not return */
-  LOAD_CdReadFromBigFile
-            (loadEntry->filePos,(ulong *)loadEntry->loadAddr,loadEntry->loadSize,
-             loadEntry->checksumType,loadEntry->checksum);
+  return;
 }
 
 
@@ -804,8 +897,57 @@ void LOAD_CD_ReadPartOfFile(_NonBlockLoadEntry *loadEntry)
 long LOAD_HashName(char *string)
 
 {
-                    /* WARNING: Subroutine does not return */
-  strlen(string);
+  size_t sVar1;
+  char *pcVar2;
+  int iVar3;
+  uint uVar4;
+  char *s2;
+  int iVar5;
+  int iVar6;
+  int iVar7;
+  uint uVar8;
+  uint uVar9;
+  uint uVar10;
+  
+  iVar7 = 0;
+  uVar8 = 0;
+  iVar6 = 0;
+  sVar1 = strlen(string);
+  iVar5 = sVar1 - 1;
+  pcVar2 = strchr(string,0x2e);
+  uVar9 = 0;
+  if (pcVar2 != (char *)0x0) {
+    uVar4 = 0;
+    s2 = "drm";
+    do {
+      iVar3 = strcmpi(pcVar2 + 1,s2);
+      uVar9 = uVar4;
+      if (iVar3 == 0) break;
+      uVar4 = uVar4 + 1;
+      s2 = s2 + 4;
+      uVar9 = 0;
+    } while ((int)uVar4 < 7);
+    if ((int)uVar4 < 7) {
+      iVar5 = sVar1 - 5;
+    }
+  }
+  uVar4 = 0;
+  while (-1 < iVar5) {
+    uVar4 = (uint)(byte)string[iVar5];
+    if (string[iVar5] != 0x5c) {
+      if (uVar4 - 0x61 < 0x1a) {
+        uVar4 = uVar4 & 0xdf;
+      }
+      uVar4 = uVar4 - 0x1a & 0xff;
+      uVar10 = uVar4 * iVar6;
+      iVar7 = iVar7 + uVar4;
+      iVar6 = iVar6 + 1;
+      uVar8 = uVar8 ^ uVar10;
+    }
+    iVar5 = iVar5 + -1;
+    uVar4 = iVar6 << 0x1b;
+  }
+  return uVar4 | iVar7 << 0xf | uVar8 << 3 | uVar9;
 }
 
 
@@ -1037,21 +1179,32 @@ void LOAD_LoadTIM(long *addr,long x_pos,long y_pos,long clut_x,long clut_y)
 
 {
   long *plVar1;
-  undefined2 uStack24;
-  undefined2 uStack22;
-  undefined2 uStack20;
-  undefined2 uStack18;
+  long *plVar2;
+  undefined2 local_18;
+  undefined2 local_16;
+  undefined2 local_14;
+  undefined2 local_12;
   
   plVar1 = addr + 2;
+  plVar2 = (long *)0x0;
   if (addr[1] == 8) {
+    plVar2 = addr + 5;
     plVar1 = addr + 0xd;
   }
-  uStack24 = (undefined2)x_pos;
-  uStack22 = (undefined2)y_pos;
-  uStack20 = *(undefined2 *)(plVar1 + 2);
-  uStack18 = *(undefined2 *)((int)plVar1 + 10);
-                    /* WARNING: Subroutine does not return */
-  LoadImage((undefined4 *)&uStack24,plVar1 + 3);
+  local_18 = (undefined2)x_pos;
+  local_16 = (undefined2)y_pos;
+  local_14 = *(undefined2 *)(plVar1 + 2);
+  local_12 = *(undefined2 *)((int)plVar1 + 10);
+  LoadImage((undefined4 *)&local_18,plVar1 + 3);
+  if (plVar2 != (long *)0x0) {
+    local_18 = (undefined2)clut_x;
+    local_16 = (undefined2)clut_y;
+    local_14 = 0x10;
+    local_12 = 1;
+    DrawSync(0);
+    LoadImage((undefined4 *)&local_18,plVar2);
+  }
+  return;
 }
 
 
@@ -1086,8 +1239,9 @@ void LOAD_LoadTIM2(long *addr,long x_pos,long y_pos,long width,long height)
   local_e = (undefined2)y_pos;
   local_c = *(undefined2 *)(addr + 4);
   local_a = *(undefined2 *)((int)addr + 0x12);
-                    /* WARNING: Subroutine does not return */
   LoadImage((undefined4 *)&local_10,addr + 5);
+  DrawSync(0);
+  return;
 }
 
 
@@ -1119,16 +1273,16 @@ long LOAD_RelocBinaryData(long *data,long fileSize)
   int iVar1;
   long *plVar2;
   long *plVar3;
-  RedirectList RStack32;
+  RedirectList local_20;
   
-  RStack32.data = data + 1;
-  RStack32.numPointers = *data;
-  iVar1 = RStack32.numPointers + 0x200;
+  local_20.data = data + 1;
+  local_20.numPointers = *data;
+  iVar1 = local_20.numPointers + 0x200;
   if (iVar1 < 0) {
-    iVar1 = RStack32.numPointers + 0x3ff;
+    iVar1 = local_20.numPointers + 0x3ff;
   }
   iVar1 = iVar1 >> 9;
-  RESOLVE_Pointers(&RStack32,data + iVar1 * 0x200,data);
+  RESOLVE_Pointers(&local_20,data + iVar1 * 0x200,data);
   plVar3 = data + (fileSize + 3 >> 2) + iVar1 * -0x200;
   if (data < plVar3) {
     plVar2 = data + iVar1 * 0x200;
@@ -1163,12 +1317,12 @@ void LOAD_CleanUpBuffers(void)
 
 {
   if (loadStatus.buffer1 != (void *)0x0) {
-                    /* WARNING: Subroutine does not return */
     MEMPACK_Free((char *)loadStatus.buffer1);
+    loadStatus.buffer1 = (void *)0x0;
   }
   if (loadStatus.buffer2 != (void *)0x0) {
-                    /* WARNING: Subroutine does not return */
     MEMPACK_Free((char *)loadStatus.buffer2);
+    loadStatus.buffer2 = (void *)0x0;
   }
   return;
 }
@@ -1189,8 +1343,9 @@ void LOAD_CleanUpBuffers(void)
 void * LOAD_InitBuffers(void)
 
 {
-                    /* WARNING: Subroutine does not return */
-  MEMPACK_Malloc(0x800,'#');
+  loadStatus.buffer1 = MEMPACK_Malloc(0x800,'#');
+  loadStatus.buffer2 = MEMPACK_Malloc(0x800,'#');
+  return loadStatus.buffer1;
 }
 
 
@@ -1249,12 +1404,14 @@ void LOAD_DumpCurrentDir(void)
 
 {
   if (loadStatus.bigFile.currentDir != (_BigFileDir *)0x0) {
-                    /* WARNING: Subroutine does not return */
     MEMPACK_Free((char *)loadStatus.bigFile.currentDir);
+    loadStatus.bigFile.currentDir = (_BigFileDir *)0x0;
+    loadStatus.bigFile.currentDirID = 0;
   }
   if (loadStatus.bigFile.cachedDir != (_BigFileDir *)0x0) {
-                    /* WARNING: Subroutine does not return */
     MEMPACK_Free((char *)loadStatus.bigFile.cachedDir);
+    loadStatus.bigFile.cachedDir = (_BigFileDir *)0x0;
+    loadStatus.bigFile.cachedDirID = 0;
   }
   return;
 }
@@ -1321,18 +1478,16 @@ int LOAD_ChangeDirectoryByID(int id)
       do {
         iVar4 = iVar3 + 1;
         if (id == (int)loadStatus.bigFile.subDirList[iVar3].streamUnitID) {
-          if (loadStatus.bigFile.cachedDir == (_BigFileDir *)0x0) {
-            loadStatus.currentDirLoading = 1;
-            loadStatus.bigFile.cachedDirID = loadStatus.bigFile.currentDirID;
-            loadStatus.bigFile.cachedDir = loadStatus.bigFile.currentDir;
-            loadStatus.bigFile.currentDir =
-                 LOAD_ReadDirectory(loadStatus.bigFile.subDirList + iVar3);
-            MEMPACK_SetMemoryBeingStreamed((char *)loadStatus.bigFile.currentDir);
-            loadStatus.bigFile.currentDirID = id;
-            return 1;
+          if (loadStatus.bigFile.cachedDir != (_BigFileDir *)0x0) {
+            MEMPACK_Free((char *)loadStatus.bigFile.cachedDir);
           }
-                    /* WARNING: Subroutine does not return */
-          MEMPACK_Free((char *)loadStatus.bigFile.cachedDir);
+          loadStatus.currentDirLoading = 1;
+          loadStatus.bigFile.cachedDirID = loadStatus.bigFile.currentDirID;
+          loadStatus.bigFile.cachedDir = loadStatus.bigFile.currentDir;
+          loadStatus.bigFile.currentDir = LOAD_ReadDirectory(loadStatus.bigFile.subDirList + iVar3);
+          MEMPACK_SetMemoryBeingStreamed((char *)loadStatus.bigFile.currentDir);
+          loadStatus.bigFile.currentDirID = id;
+          return 1;
         }
         iVar3 = iVar4;
       } while (iVar4 < loadStatus.bigFile.numSubDirs);

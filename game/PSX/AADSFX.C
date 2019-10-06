@@ -104,14 +104,17 @@ int aadIsSfxPlaying(ulong handle)
 {
   int iVar1;
   int iVar2;
+  int iVar3;
   
-  iVar1 = 0;
-  iVar2 = 0x1dc;
-  while ((((*(char *)(iVar2 + 8) != -0x30 || (*(char *)(iVar1 + 0x47c) == '\0')) ||
-          (*(char *)(iVar1 + 0x47c) == '\x02')) || (*(ulong *)(iVar2 + 4) != handle))) {
-    iVar1 = iVar1 + 1;
-    iVar2 = iVar2 + 0x1c;
-    if (0x17 < iVar1) {
+  iVar2 = 0;
+  iVar3 = 0x1dc;
+  while( true ) {
+    iVar1 = (int)&aadMem->updateCounter + iVar3;
+    if ((((*(char *)(iVar1 + 8) == -0x30) && (aadMem->voiceStatus[iVar2] != '\0')) &&
+        (aadMem->voiceStatus[iVar2] != '\x02')) && (*(ulong *)(iVar1 + 4) == handle)) break;
+    iVar2 = iVar2 + 1;
+    iVar3 = iVar3 + 0x1c;
+    if (0x17 < iVar2) {
       return 0;
     }
   }
@@ -143,8 +146,36 @@ int aadIsSfxPlaying(ulong handle)
 int aadIsSfxPlayingOrRequested(ulong handle)
 
 {
-                    /* WARNING: Subroutine does not return */
+  ushort uVar1;
+  char *pcVar2;
+  int iVar3;
+  uint uVar4;
+  uint uVar5;
+  
   EnterCriticalSection();
+  uVar1 = (aadMem->sfxSlot).commandsInQueue;
+  uVar5 = (uint)uVar1;
+  uVar4 = (uint)(aadMem->sfxSlot).commandOut;
+  if (uVar1 != 0) {
+    iVar3 = uVar4 * 0xc + 0x54;
+    do {
+      pcVar2 = (char *)((int)&aadMem->updateCounter + iVar3);
+      if ((*pcVar2 == '\0') && (*(ulong *)(pcVar2 + 4) == handle)) {
+        ExitCriticalSection();
+        return 1;
+      }
+      uVar4 = uVar4 + 1;
+      iVar3 = iVar3 + 0xc;
+      if (uVar4 == 0x20) {
+        iVar3 = 0x54;
+        uVar4 = 0;
+      }
+      uVar5 = uVar5 - 1;
+    } while (uVar5 != 0);
+  }
+  ExitCriticalSection();
+  iVar3 = aadIsSfxPlaying(handle);
+  return iVar3;
 }
 
 
@@ -183,14 +214,16 @@ int aadIsSfxTypePlaying(uint toneID)
 {
   int iVar1;
   int iVar2;
+  int iVar3;
   
-  iVar1 = 0;
-  iVar2 = 0x1dc;
-  while ((((*(char *)(iVar2 + 8) != -0x30 || ((uint)*(ushort *)(iVar2 + 4) != (toneID & 0xffff))) ||
-          (*(char *)(iVar1 + 0x47c) == '\0')) || (*(char *)(iVar1 + 0x47c) == '\x02'))) {
-    iVar1 = iVar1 + 1;
-    iVar2 = iVar2 + 0x1c;
-    if (0x17 < iVar1) {
+  iVar2 = 0;
+  iVar3 = 0x1dc;
+  while ((((iVar1 = (int)&aadMem->updateCounter + iVar3, *(char *)(iVar1 + 8) != -0x30 ||
+           ((uint)*(ushort *)(iVar1 + 4) != (toneID & 0xffff))) ||
+          (aadMem->voiceStatus[iVar2] == '\0')) || (aadMem->voiceStatus[iVar2] == '\x02'))) {
+    iVar2 = iVar2 + 1;
+    iVar3 = iVar3 + 0x1c;
+    if (0x17 < iVar2) {
       return 0;
     }
   }
@@ -222,8 +255,36 @@ int aadIsSfxTypePlaying(uint toneID)
 int aadIsSfxTypePlayingOrRequested(uint sfxToneID)
 
 {
-                    /* WARNING: Subroutine does not return */
+  ushort uVar1;
+  char *pcVar2;
+  int iVar3;
+  uint uVar4;
+  uint uVar5;
+  
   EnterCriticalSection();
+  uVar1 = (aadMem->sfxSlot).commandsInQueue;
+  uVar5 = (uint)uVar1;
+  uVar4 = (uint)(aadMem->sfxSlot).commandOut;
+  if (uVar1 != 0) {
+    iVar3 = uVar4 * 0xc + 0x54;
+    do {
+      pcVar2 = (char *)((int)&aadMem->updateCounter + iVar3);
+      if ((*pcVar2 == '\0') && ((uint)*(ushort *)(pcVar2 + 4) == sfxToneID)) {
+        ExitCriticalSection();
+        return 1;
+      }
+      uVar4 = uVar4 + 1;
+      iVar3 = iVar3 + 0xc;
+      if (uVar4 == 0x20) {
+        iVar3 = 0x54;
+        uVar4 = 0;
+      }
+      uVar5 = uVar5 - 1;
+    } while (uVar5 != 0);
+  }
+  ExitCriticalSection();
+  iVar3 = aadIsSfxTypePlaying(sfxToneID);
+  return iVar3;
 }
 
 
@@ -260,21 +321,21 @@ ulong aadSetSfxVolPanPitch(ulong handle,int volume,int pan,int pitch)
 	/* end block 2 */
 	// End Line: 336
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 ulong createSfxHandle(uint toneID)
 
 {
   ushort uVar1;
+  AadMemoryStruct *pAVar2;
+  ushort uVar3;
   
-                    /* WARNING: Read-only address (ram,0x000001d8) is written */
-  uVar1 = _UNK_000001d8 + 1;
-  if ((ushort)(_UNK_000001d8 + 1) == 0) {
-                    /* WARNING: Read-only address (ram,0x000001d8) is written */
-    uVar1 = _UNK_000001d8 + 2;
+  pAVar2 = aadMem;
+  uVar1 = (aadMem->sfxSlot).handleCounter;
+  uVar3 = uVar1 + 1;
+  (aadMem->sfxSlot).handleCounter = uVar3;
+  if (uVar3 == 0) {
+    (pAVar2->sfxSlot).handleCounter = uVar1 + 2;
   }
-  _UNK_000001d8 = uVar1;
-  return (uint)_UNK_000001d8 << 0x10 | toneID & 0xffff;
+  return (uint)(aadMem->sfxSlot).handleCounter << 0x10 | toneID & 0xffff;
 }
 
 
@@ -302,16 +363,34 @@ ulong createSfxHandle(uint toneID)
 	/* end block 3 */
 	// End Line: 355
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void aadPutSfxCommand(int statusByte,int dataByte0,int dataByte1,ulong ulongParam,int shortParam)
 
 {
-  if ((0x1d < _UNK_000001d6) && (0x1e < _UNK_000001d6)) {
-    return;
+  ushort uVar1;
+  AadMemoryStruct *pAVar2;
+  AadSfxCommand *pAVar3;
+  uchar uVar4;
+  
+  uVar4 = (uchar)statusByte;
+  uVar1 = (aadMem->sfxSlot).commandsInQueue;
+  if ((uVar1 < 0x1e) || (uVar4 = '\x04', uVar1 < 0x1f)) {
+    EnterCriticalSection();
+    pAVar3 = (aadMem->sfxSlot).commandQueue + (aadMem->sfxSlot).commandIn;
+    pAVar3->statusByte = uVar4;
+    pAVar3->dataByte[0] = (uchar)dataByte0;
+    pAVar3->dataByte[1] = (uchar)dataByte1;
+    pAVar2 = aadMem;
+    pAVar3->ulongParam = ulongParam;
+    pAVar3->shortParam = (short)shortParam;
+    uVar4 = (pAVar2->sfxSlot).commandIn + '\x01';
+    (pAVar2->sfxSlot).commandIn = uVar4;
+    if (uVar4 == ' ') {
+      (aadMem->sfxSlot).commandIn = '\0';
+    }
+    (aadMem->sfxSlot).commandsInQueue = (aadMem->sfxSlot).commandsInQueue + 1;
+    ExitCriticalSection();
   }
-                    /* WARNING: Subroutine does not return */
-  EnterCriticalSection();
+  return;
 }
 
 
@@ -367,36 +446,37 @@ void sfxCmdPlayTone(AadSfxCommand *sfxCmd)
 {
   byte bVar1;
   uchar uVar2;
-  int iVar3;
   ulong waveStartAddr;
   AadSynthVoice *voice;
+  AadLoadedSfxToneAttr *pAVar3;
   uint uVar4;
   
   uVar4 = sfxCmd->ulongParam;
-  bVar1 = *(byte *)((uVar4 & 0xffff) + 0x808);
-  if (bVar1 < 0xfe) {
-    iVar3 = (uint)bVar1 * 0x14;
-    bVar1 = *(byte *)((uint)*(ushort *)(iVar3 + 0xc0a) + 0xa08);
-    if (bVar1 < 0xfe) {
-      waveStartAddr = aadGetSramBlockAddr((uint)(byte)(&DAT_0000160b)[(uint)bVar1 * 4]);
-      bVar1 = *(byte *)(iVar3 + 0xc12);
-      voice = aadAllocateVoice((uint)*(byte *)(iVar3 + 0xc0c));
+  if (aadMem->sfxToneMasterList[uVar4 & 0xffff] < 0xfe) {
+    pAVar3 = aadMem->sfxToneAttrTbl + aadMem->sfxToneMasterList[uVar4 & 0xffff];
+    if (aadMem->sfxWaveMasterList[pAVar3->waveID] < 0xfe) {
+      waveStartAddr =
+           aadGetSramBlockAddr((uint)aadMem->sfxWaveAttrTbl
+                                     [aadMem->sfxWaveMasterList[pAVar3->waveID]].sramHandle);
+      bVar1 = (pAVar3->toneAttr).minNote;
+      voice = aadAllocateVoice((uint)(pAVar3->toneAttr).priority);
       if (voice != (AadSynthVoice *)0x0) {
-        aadPlayTone((AadToneAtr *)(iVar3 + 0xc0c),waveStartAddr,&aadDummySfxProgram,(uint)bVar1,0x7f
-                    ,(uint)sfxCmd->dataByte[0],(uint)sfxCmd->dataByte[1],(uint)UNK_000001da,
-                    DAT_0000001c,voice,(int)sfxCmd->shortParam);
+        aadPlayTone(&pAVar3->toneAttr,waveStartAddr,&aadDummySfxProgram,(uint)bVar1,0x7f,
+                    (uint)sfxCmd->dataByte[0],(uint)sfxCmd->dataByte[1],
+                    (uint)(aadMem->sfxSlot).sfxVolume,aadMem->sfxMasterVol,voice,
+                    (int)sfxCmd->shortParam);
         voice->handle = uVar4;
         voice->voiceID = -0x30;
-        uVar2 = *(uchar *)(iVar3 + 0xc0c);
+        uVar2 = (pAVar3->toneAttr).priority;
         voice->note = bVar1;
         voice->priority = uVar2;
-        uVar2 = *(uchar *)(iVar3 + 0xc0d);
+        uVar2 = (pAVar3->toneAttr).parentProgram;
         voice->volume = '\x7f';
         voice->program = uVar2;
         voice->updateVol = sfxCmd->dataByte[0];
         uVar2 = sfxCmd->dataByte[1];
         voice->progAtr = &aadDummySfxProgram;
-        voice->toneAtr = (AadToneAtr *)(iVar3 + 0xc0c);
+        voice->toneAtr = &pAVar3->toneAttr;
         voice->pan = uVar2;
       }
     }
@@ -437,33 +517,33 @@ void sfxCmdPlayTone(AadSfxCommand *sfxCmd)
 	/* end block 4 */
 	// End Line: 754
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void sfxCmdStopTone(AadSfxCommand *sfxCmd)
 
 {
-  int iVar1;
+  AadMemoryStruct *pAVar1;
   uint uVar2;
-  uint uVar3;
-  ushort uVar4;
-  ulong uVar5;
+  AadSynthVoice *pAVar3;
+  uint uVar4;
+  ushort uVar5;
+  ulong uVar6;
   
   uVar2 = 0;
-  uVar5 = sfxCmd->ulongParam;
+  uVar6 = sfxCmd->ulongParam;
+  uVar5 = 0;
   uVar4 = 0;
-  uVar3 = 0;
   do {
-    iVar1 = uVar3 * 0x1c;
-    if ((((*(char *)(iVar1 + 0x1e4) == -0x30) && (*(ulong *)(iVar1 + 0x1e0) == uVar5)) &&
-        (*(char *)(uVar3 + 0x47c) != '\0')) && (*(char *)(uVar3 + 0x47c) != '\x02')) {
-      *(undefined *)(iVar1 + 0x1e4) = 0xff;
-      uVar2 = uVar2 | *(uint *)(iVar1 + 0x1dc);
+    pAVar3 = aadMem->synthVoice + uVar4;
+    if ((((pAVar3->voiceID == -0x30) && (pAVar3->handle == uVar6)) &&
+        (aadMem->voiceStatus[uVar4] != '\0')) && (aadMem->voiceStatus[uVar4] != '\x02')) {
+      pAVar3->voiceID = -1;
+      uVar2 = uVar2 | pAVar3->voiceMask;
     }
-    uVar4 = uVar4 + 1;
-    uVar3 = (uint)uVar4;
-  } while (uVar4 < 0x18);
-  _DAT_000004c4 = _DAT_000004c4 | uVar2;
-  _DAT_000004c8 = _DAT_000004c8 & ~uVar2;
+    pAVar1 = aadMem;
+    uVar5 = uVar5 + 1;
+    uVar4 = (uint)uVar5;
+  } while (uVar5 < 0x18);
+  aadMem->voiceKeyOffRequest = aadMem->voiceKeyOffRequest | uVar2;
+  pAVar1->voiceKeyOnRequest = pAVar1->voiceKeyOnRequest & ~uVar2;
   return;
 }
 
@@ -499,31 +579,31 @@ void sfxCmdStopTone(AadSfxCommand *sfxCmd)
 	/* end block 4 */
 	// End Line: 822
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void sfxCmdStopAllTones(AadSfxCommand *sfxCmd)
 
 {
-  int iVar1;
+  AadMemoryStruct *pAVar1;
   uint uVar2;
-  uint uVar3;
-  ushort uVar4;
+  AadSynthVoice *pAVar3;
+  uint uVar4;
+  ushort uVar5;
   
   uVar2 = 0;
+  uVar5 = 0;
   uVar4 = 0;
-  uVar3 = 0;
   do {
-    iVar1 = uVar3 * 0x1c;
-    if (((*(char *)(iVar1 + 0x1e4) == -0x30) && (*(char *)(uVar3 + 0x47c) != '\0')) &&
-       (*(char *)(uVar3 + 0x47c) != '\x02')) {
-      *(undefined *)(iVar1 + 0x1e4) = 0xff;
-      uVar2 = uVar2 | *(uint *)(iVar1 + 0x1dc);
+    pAVar3 = aadMem->synthVoice + uVar4;
+    if (((pAVar3->voiceID == -0x30) && (aadMem->voiceStatus[uVar4] != '\0')) &&
+       (aadMem->voiceStatus[uVar4] != '\x02')) {
+      pAVar3->voiceID = -1;
+      uVar2 = uVar2 | pAVar3->voiceMask;
     }
-    uVar4 = uVar4 + 1;
-    uVar3 = (uint)uVar4;
-  } while (uVar4 < 0x18);
-  _DAT_000004c4 = _DAT_000004c4 | uVar2;
-  _DAT_000004c8 = _DAT_000004c8 & ~uVar2;
+    pAVar1 = aadMem;
+    uVar5 = uVar5 + 1;
+    uVar4 = (uint)uVar5;
+  } while (uVar5 < 0x18);
+  aadMem->voiceKeyOffRequest = aadMem->voiceKeyOffRequest | uVar2;
+  pAVar1->voiceKeyOnRequest = pAVar1->voiceKeyOnRequest & ~uVar2;
   return;
 }
 
@@ -617,29 +697,30 @@ void sfxCmdSetToneVolumeAndPan(AadSfxCommand *sfxCmd)
 
 {
   byte bVar1;
-  int iVar2;
-  uint uVar3;
+  uint uVar2;
+  AadSynthVoice *pAVar3;
   ushort uVar4;
   int iVar5;
   int iVar6;
+  int iVar7;
+  int iVar8;
   short local_10;
   short local_e;
   
   uVar4 = 0;
-  uVar3 = 0;
-  while( true ) {
-    iVar2 = uVar3 * 0x1c;
-    if ((((*(char *)(iVar2 + 0x1e4) == -0x30) && (*(ulong *)(iVar2 + 0x1e0) == sfxCmd->ulongParam))
-        && (*(char *)(uVar3 + 0x47c) != '\0')) && (*(char *)(uVar3 + 0x47c) != '\x02')) break;
+  uVar2 = 0;
+  while ((((pAVar3 = aadMem->synthVoice + uVar2, pAVar3->voiceID != -0x30 ||
+           (pAVar3->handle != sfxCmd->ulongParam)) || (aadMem->voiceStatus[uVar2] == '\0')) ||
+         (aadMem->voiceStatus[uVar2] == '\x02'))) {
     uVar4 = uVar4 + 1;
-    uVar3 = (uint)uVar4;
+    uVar2 = (uint)uVar4;
     if (0x17 < uVar4) {
       return;
     }
   }
-  local_10 = (ushort)*(byte *)(iVar2 + 0x1ea) * (ushort)*(byte *)(iVar2 + 0x1ea);
-  local_e = (ushort)*(byte *)(iVar2 + 0x1ea) * (ushort)*(byte *)(iVar2 + 0x1ea);
-  if (((uint)the_mcmenu_table.data_size & 1) == 0) {
+  local_10 = (ushort)pAVar3->volume * (ushort)pAVar3->volume;
+  local_e = (ushort)pAVar3->volume * (ushort)pAVar3->volume;
+  if ((aadMem->flags & 1U) == 0) {
     bVar1 = sfxCmd->dataByte[1];
     if (bVar1 < 0x41) {
       if (bVar1 < 0x3f) {
@@ -651,16 +732,16 @@ void sfxCmdSetToneVolumeAndPan(AadSfxCommand *sfxCmd)
       local_10 = (short)((int)local_e * (0x7f - (uint)bVar1) * (0x7f - (uint)bVar1) >> 0xc);
     }
   }
-  uVar3 = (uint)*(byte *)(*(int *)(iVar2 + 0x1f0) + 2);
-  iVar5 = uVar3 * uVar3;
+  uVar2 = (uint)pAVar3->toneAtr->volume;
+  iVar5 = uVar2 * uVar2;
   local_10 = (short)((uint)(local_10 * iVar5) >> 0xe);
   local_e = (short)((uint)(local_e * iVar5) >> 0xe);
-  if (((uint)the_mcmenu_table.data_size & 1) == 0) {
-    bVar1 = *(byte *)(*(int *)(iVar2 + 0x1f0) + 3);
+  if ((aadMem->flags & 1U) == 0) {
+    bVar1 = pAVar3->toneAtr->panPosition;
     if (bVar1 < 0x41) {
       if (bVar1 < 0x3f) {
-        uVar3 = (uint)*(byte *)(*(int *)(iVar2 + 0x1f0) + 3);
-        local_e = (short)((int)((int)local_10 * uVar3 * uVar3) >> 0xc);
+        uVar2 = (uint)pAVar3->toneAtr->panPosition;
+        local_e = (short)((int)((int)local_10 * uVar2 * uVar2) >> 0xc);
       }
     }
     else {
@@ -668,22 +749,22 @@ void sfxCmdSetToneVolumeAndPan(AadSfxCommand *sfxCmd)
     }
   }
   iVar5 = (uint)sfxCmd->dataByte[0] * (uint)sfxCmd->dataByte[0];
-  *(uchar *)(iVar2 + 0x1eb) = sfxCmd->dataByte[0];
-  uVar3 = (uint)*(byte *)(*(int *)(iVar2 + 500) + 4);
-  iVar2 = uVar3 * uVar3;
-  iVar6 = (uint)UNK_000001da * (uint)UNK_000001da;
-                    /* WARNING: Subroutine does not return */
+  pAVar3->updateVol = sfxCmd->dataByte[0];
+  uVar2 = (uint)pAVar3->progAtr->volume;
+  iVar6 = uVar2 * uVar2;
+  uVar2 = (uint)(aadMem->sfxSlot).sfxVolume;
+  iVar7 = uVar2 * uVar2;
+  iVar8 = aadMem->sfxMasterVol * aadMem->sfxMasterVol;
   SpuSetVoiceVolume((uint)uVar4,
-                    (int)(short)((uint)((int)(short)((uint)((short)((uint)((short)((uint)(local_10 *
-                                                                                         iVar5) >>
-                                                                                  0xe) * iVar2) >>
-                                                                   0xe) * iVar6) >> 0xe) *
-                                       DAT_0000001c * DAT_0000001c) >> 0xe),
-                    (int)(short)((uint)((int)(short)((uint)((short)((uint)((short)((uint)(local_e *
-                                                                                         iVar5) >>
-                                                                                  0xe) * iVar2) >>
-                                                                   0xe) * iVar6) >> 0xe) *
-                                       DAT_0000001c * DAT_0000001c) >> 0xe));
+                    (int)(short)((uint)((short)((uint)((short)((uint)((short)((uint)(local_10 *
+                                                                                    iVar5) >> 0xe) *
+                                                                     iVar6) >> 0xe) * iVar7) >> 0xe)
+                                       * iVar8) >> 0xe),
+                    (int)(short)((uint)((short)((uint)((short)((uint)((short)((uint)(local_e * iVar5
+                                                                                    ) >> 0xe) *
+                                                                     iVar6) >> 0xe) * iVar7) >> 0xe)
+                                       * iVar8) >> 0xe));
+  return;
 }
 
 
@@ -779,29 +860,32 @@ void sfxCmdSetToneVolPanPitch(AadSfxCommand *sfxCmd)
 
 {
   byte bVar1;
-  int iVar2;
-  uint uVar3;
-  ushort uVar4;
-  int iVar5;
-  int iVar6;
+  uint uVar2;
+  short sVar3;
+  AadToneAtr *pAVar4;
+  AadSynthVoice *pAVar5;
+  ushort uVar6;
+  int iVar7;
+  int iVar8;
+  int iVar9;
+  int iVar10;
   short local_18;
   short local_16;
   
-  uVar4 = 0;
-  uVar3 = 0;
-  while( true ) {
-    iVar2 = uVar3 * 0x1c;
-    if ((((*(char *)(iVar2 + 0x1e4) == -0x30) && (*(ulong *)(iVar2 + 0x1e0) == sfxCmd->ulongParam))
-        && (*(char *)(uVar3 + 0x47c) != '\0')) && (*(char *)(uVar3 + 0x47c) != '\x02')) break;
-    uVar4 = uVar4 + 1;
-    uVar3 = (uint)uVar4;
-    if (0x17 < uVar4) {
+  uVar6 = 0;
+  uVar2 = 0;
+  while ((((pAVar5 = aadMem->synthVoice + uVar2, pAVar5->voiceID != -0x30 ||
+           (pAVar5->handle != sfxCmd->ulongParam)) || (aadMem->voiceStatus[uVar2] == '\0')) ||
+         (aadMem->voiceStatus[uVar2] == '\x02'))) {
+    uVar6 = uVar6 + 1;
+    uVar2 = (uint)uVar6;
+    if (0x17 < uVar6) {
       return;
     }
   }
-  local_18 = (ushort)*(byte *)(iVar2 + 0x1ea) * (ushort)*(byte *)(iVar2 + 0x1ea);
-  local_16 = (ushort)*(byte *)(iVar2 + 0x1ea) * (ushort)*(byte *)(iVar2 + 0x1ea);
-  if (((uint)the_mcmenu_table.data_size & 1) == 0) {
+  local_18 = (ushort)pAVar5->volume * (ushort)pAVar5->volume;
+  local_16 = (ushort)pAVar5->volume * (ushort)pAVar5->volume;
+  if ((aadMem->flags & 1U) == 0) {
     bVar1 = sfxCmd->dataByte[1];
     if (bVar1 < 0x41) {
       if (bVar1 < 0x3f) {
@@ -813,39 +897,53 @@ void sfxCmdSetToneVolPanPitch(AadSfxCommand *sfxCmd)
       local_18 = (short)((int)local_16 * (0x7f - (uint)bVar1) * (0x7f - (uint)bVar1) >> 0xc);
     }
   }
-  uVar3 = (uint)*(byte *)(*(int *)(iVar2 + 0x1f0) + 2);
-  iVar5 = uVar3 * uVar3;
-  local_18 = (short)((uint)(local_18 * iVar5) >> 0xe);
-  local_16 = (short)((uint)(local_16 * iVar5) >> 0xe);
-  if (((uint)the_mcmenu_table.data_size & 1) == 0) {
-    bVar1 = *(byte *)(*(int *)(iVar2 + 0x1f0) + 3);
+  uVar2 = (uint)pAVar5->toneAtr->volume;
+  iVar7 = uVar2 * uVar2;
+  local_18 = (short)((uint)(local_18 * iVar7) >> 0xe);
+  local_16 = (short)((uint)(local_16 * iVar7) >> 0xe);
+  if ((aadMem->flags & 1U) == 0) {
+    bVar1 = pAVar5->toneAtr->panPosition;
     if (bVar1 < 0x41) {
       if (bVar1 < 0x3f) {
-        uVar3 = (uint)*(byte *)(*(int *)(iVar2 + 0x1f0) + 3);
-        local_16 = (short)((int)((int)local_18 * uVar3 * uVar3) >> 0xc);
+        uVar2 = (uint)pAVar5->toneAtr->panPosition;
+        local_16 = (short)((int)((int)local_18 * uVar2 * uVar2) >> 0xc);
       }
     }
     else {
       local_18 = (short)((int)local_16 * (0x7f - (uint)bVar1) * (0x7f - (uint)bVar1) >> 0xc);
     }
   }
-  iVar5 = (uint)sfxCmd->dataByte[0] * (uint)sfxCmd->dataByte[0];
-  *(uchar *)(iVar2 + 0x1eb) = sfxCmd->dataByte[0];
-  uVar3 = (uint)*(byte *)(*(int *)(iVar2 + 500) + 4);
-  iVar2 = uVar3 * uVar3;
-  iVar6 = (uint)UNK_000001da * (uint)UNK_000001da;
-                    /* WARNING: Subroutine does not return */
-  SpuSetVoiceVolume((uint)uVar4,
-                    (int)(short)((uint)((int)(short)((uint)((short)((uint)((short)((uint)(local_18 *
-                                                                                         iVar5) >>
-                                                                                  0xe) * iVar2) >>
-                                                                   0xe) * iVar6) >> 0xe) *
-                                       DAT_0000001c * DAT_0000001c) >> 0xe),
-                    (int)(short)((uint)((int)(short)((uint)((short)((uint)((short)((uint)(local_16 *
-                                                                                         iVar5) >>
-                                                                                  0xe) * iVar2) >>
-                                                                   0xe) * iVar6) >> 0xe) *
-                                       DAT_0000001c * DAT_0000001c) >> 0xe));
+  iVar7 = (uint)sfxCmd->dataByte[0] * (uint)sfxCmd->dataByte[0];
+  pAVar5->updateVol = sfxCmd->dataByte[0];
+  uVar2 = (uint)pAVar5->progAtr->volume;
+  iVar8 = uVar2 * uVar2;
+  uVar2 = (uint)(aadMem->sfxSlot).sfxVolume;
+  iVar9 = uVar2 * uVar2;
+  iVar10 = aadMem->sfxMasterVol * aadMem->sfxMasterVol;
+  SpuSetVoiceVolume((uint)uVar6,
+                    (int)(short)((uint)((short)((uint)((short)((uint)((short)((uint)(local_18 *
+                                                                                    iVar7) >> 0xe) *
+                                                                     iVar8) >> 0xe) * iVar9) >> 0xe)
+                                       * iVar10) >> 0xe),
+                    (int)(short)((uint)((short)((uint)((short)((uint)((short)((uint)(local_16 *
+                                                                                    iVar7) >> 0xe) *
+                                                                     iVar8) >> 0xe) * iVar9) >> 0xe)
+                                       * iVar10) >> 0xe));
+  pAVar4 = pAVar5->toneAtr;
+  uVar2 = (uint)pAVar5->note - ((uint)pAVar4->centerNote - 0x3c);
+  if ((pAVar4->centerFine & 0x80U) == 0) {
+    uVar2 = uVar2 & 0xffff;
+    sVar3 = (&aadPitchTable)[uVar2] +
+            (ushort)((&aadStepsPerCent)[uVar2] * 100 * (uint)(byte)pAVar4->centerFine >> 0x17);
+  }
+  else {
+    uVar2 = uVar2 & 0xffff;
+    sVar3 = (&aadPitchTable)[uVar2] -
+            (ushort)((&aadStepsPerCent)[uVar2] * 100 *
+                     (0x100 - (uint)(byte)pAVar4->centerFine & 0xffff) >> 0x17);
+  }
+  SpuSetVoicePitch((uint)uVar6,sVar3 + sfxCmd->shortParam);
+  return;
 }
 
 
@@ -913,19 +1011,22 @@ void sfxCmdSetVoiceAttr(AadSfxCommand *sfxCmd)
 
 {
   uint uVar1;
-  uint uVar2;
-  uint *puVar3;
+  uint vNum;
+  uint *puVar2;
   
-  uVar2 = 0;
-  puVar3 = (uint *)sfxCmd->ulongParam;
+  vNum = 0;
+  puVar2 = (uint *)sfxCmd->ulongParam;
   uVar1 = 1;
   do {
-    if ((uVar1 & *puVar3) != 0) break;
-    uVar2 = uVar2 + 1;
+    if ((uVar1 & *puVar2) != 0) break;
+    vNum = vNum + 1;
     uVar1 = uVar1 << 1;
-  } while (uVar2 < 0x18);
-                    /* WARNING: Subroutine does not return */
-  SpuSetVoiceVolume(uVar2,(int)*(short *)(puVar3 + 2),(int)*(short *)((int)puVar3 + 10));
+  } while (vNum < 0x18);
+  SpuSetVoiceVolume(vNum,(int)*(short *)(puVar2 + 2),(int)*(short *)((int)puVar2 + 10));
+  SpuSetVoicePitch(vNum,*(word *)(puVar2 + 5));
+  SpuSetVoiceStartAddr(vNum,puVar2[7]);
+  SpuSetVoiceADSR1ADSR2(vNum,*(ushort *)((int)puVar2 + 0x3a),*(ushort *)(puVar2 + 0xf));
+  return;
 }
 
 
@@ -944,12 +1045,10 @@ void sfxCmdSetVoiceAttr(AadSfxCommand *sfxCmd)
 	/* end block 2 */
 	// End Line: 1267
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void sfxCmdSetVoiceKeyOn(AadSfxCommand *sfxCmd)
 
 {
-  _DAT_000004c8 = _DAT_000004c8 | sfxCmd->ulongParam;
+  aadMem->voiceKeyOnRequest = aadMem->voiceKeyOnRequest | sfxCmd->ulongParam;
   return;
 }
 
@@ -969,13 +1068,14 @@ void sfxCmdSetVoiceKeyOn(AadSfxCommand *sfxCmd)
 	/* end block 2 */
 	// End Line: 1279
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void sfxCmdSetVoiceKeyOff(AadSfxCommand *sfxCmd)
 
 {
-  _DAT_000004c4 = _DAT_000004c4 | sfxCmd->ulongParam;
-  _DAT_000004c8 = _DAT_000004c8 & ~sfxCmd->ulongParam;
+  AadMemoryStruct *pAVar1;
+  
+  pAVar1 = aadMem;
+  aadMem->voiceKeyOffRequest = aadMem->voiceKeyOffRequest | sfxCmd->ulongParam;
+  pAVar1->voiceKeyOnRequest = pAVar1->voiceKeyOnRequest & ~sfxCmd->ulongParam;
   return;
 }
 

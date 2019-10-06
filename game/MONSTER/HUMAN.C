@@ -61,17 +61,20 @@ _Instance * HUMAN_CreateWeapon(_Instance *instance,int weaponid,int segment)
   _Instance *Inst;
   int Data;
   
-  if (((Object *)(&objectAccess)[weaponid].object != (Object *)0x0) &&
+  if (((Object *)(&objectAccess)[weaponid].object == (Object *)0x0) ||
      (Inst = INSTANCE_BirthObject(instance,(Object *)(&objectAccess)[weaponid].object,0),
-     Inst != (_Instance *)0x0)) {
-    Data = SetObjectData(0,0,0,instance,segment);
-                    /* WARNING: Subroutine does not return */
-    INSTANCE_Post(Inst,0x800002,Data);
+     Inst == (_Instance *)0x0)) {
+    Inst = (_Instance *)0x0;
+    instance->processFunc = HUMAN_WaitForWeapon;
+    instance->flags = instance->flags | 0x800;
+    instance->flags2 = instance->flags2 | 0x20000080;
   }
-  instance->processFunc = HUMAN_WaitForWeapon;
-  instance->flags = instance->flags | 0x800;
-  instance->flags2 = instance->flags2 | 0x20000080;
-  return (_Instance *)0x0;
+  else {
+    Data = SetObjectData(0,0,0,instance,segment);
+    INSTANCE_Post(Inst,0x800002,Data);
+    Inst->flags2 = Inst->flags2 | 0x20000;
+  }
+  return Inst;
 }
 
 
@@ -111,13 +114,13 @@ void HUMAN_Init(_Instance *instance)
   short sVar1;
   uint *puVar2;
   void *pvVar3;
-  void *pvVar4;
+  uint *puVar4;
   
   pvVar3 = instance->data;
-  pvVar4 = instance->extraData;
+  puVar4 = (uint *)instance->extraData;
   if ((*(uint *)((int)pvVar3 + 0x10) & 0x2000) == 0) {
     sVar1 = GlobalSave->humanOpinionOfRaziel;
-    puVar2 = *(uint **)(*(int *)((int)pvVar4 + 0x164) + 0xc);
+    puVar2 = *(uint **)(puVar4[0x59] + 0xc);
     if (sVar1 < 1) {
       puVar2[3] = puVar2[3] & 0xfffffffe;
       puVar2[1] = puVar2[1] & 0xfffffffe;
@@ -131,8 +134,8 @@ void HUMAN_Init(_Instance *instance)
       puVar2[1] = puVar2[1] | 1;
     }
     if ((*(uint *)((int)pvVar3 + 0x10) & 0x8000) != 0) {
-      if (((*(char *)((int)pvVar4 + 0x15a) == '\x01') && (instance->object->oflags == DAT_800d0848))
-         && (*(int *)&instance->object->id == DAT_800d084c)) {
+      if (((*(char *)((int)puVar4 + 0x15a) == '\x01') && (instance->object->oflags == 0x72676c76))
+         && (*(int *)&instance->object->id == 0x5f5f5f61)) {
         G2Anim_DisableSegment(&instance->anim,4);
         G2Anim_DisableSegment(&instance->anim,9);
       }
@@ -140,8 +143,10 @@ void HUMAN_Init(_Instance *instance)
       G2Anim_DisableSegment(&instance->anim,0x17);
     }
   }
-                    /* WARNING: Subroutine does not return */
   MON_DefaultInit(instance);
+  *(undefined2 *)(puVar4 + 0x51) = 0x4000;
+  *puVar4 = *puVar4 | 0x2000;
+  return;
 }
 
 
@@ -242,20 +247,23 @@ void HUMAN_DeadEntry(_Instance *instance)
 
 {
   int iVar1;
-  void *pvVar2;
+  ulong uVar2;
+  void *pvVar3;
   
-  pvVar2 = instance->extraData;
-  iVar1 = (int)*(short *)((int)pvVar2 + 0x144);
+  pvVar3 = instance->extraData;
+  iVar1 = (int)*(short *)((int)pvVar3 + 0x144);
   if (iVar1 < 0) {
     iVar1 = iVar1 + 3;
   }
-  *(undefined2 *)((int)pvVar2 + 0x144) = (short)(iVar1 >> 2);
+  *(undefined2 *)((int)pvVar3 + 0x144) = (short)(iVar1 >> 2);
   if (0x1000 < iVar1 >> 2) {
-    *(undefined2 *)((int)pvVar2 + 0x144) = 0x1000;
+    *(undefined2 *)((int)pvVar3 + 0x144) = 0x1000;
   }
   MON_DeadEntry(instance);
-                    /* WARNING: Subroutine does not return */
-  MON_GetTime(instance);
+  uVar2 = MON_GetTime(instance);
+  *(ulong *)((int)pvVar3 + 0x10c) = uVar2;
+  MON_BirthMana(instance);
+  return;
 }
 
 
@@ -281,8 +289,33 @@ void HUMAN_DeadEntry(_Instance *instance)
 void HUMAN_Dead(_Instance *instance)
 
 {
-                    /* WARNING: Subroutine does not return */
-  MON_GetTime(instance);
+  ushort uVar1;
+  ulong uVar2;
+  __Event *p_Var3;
+  uint *puVar4;
+  
+  puVar4 = (uint *)instance->extraData;
+  uVar2 = MON_GetTime(instance);
+  uVar1 = *(ushort *)(puVar4 + 0x43);
+  instance->fadeValue = (short)(uVar2 - uVar1);
+  if (*(char *)(puVar4 + 0x55) == '\x06') {
+    MON_Dead(instance);
+  }
+  else {
+    if (0xfff < (int)((uVar2 - uVar1) * 0x10000) >> 0x10) {
+      MON_KillMonster(instance);
+    }
+    if (((*puVar4 & 0x400000) != 0) && (uVar2 = MON_GetTime(instance), puVar4[0x46] < uVar2)) {
+      *puVar4 = *puVar4 & 0xffbfffff;
+    }
+    if ((*puVar4 & 2) == 0) {
+      MON_ApplyPhysics(instance);
+    }
+    do {
+      p_Var3 = DeMessageQueue((__MessageQueue *)(puVar4 + 2));
+    } while (p_Var3 != (__Event *)0x0);
+  }
+  return;
 }
 
 
@@ -308,11 +341,24 @@ void HUMAN_Dead(_Instance *instance)
 void HUMAN_StunnedEntry(_Instance *instance)
 
 {
-  if ((*(uint *)((int)instance->extraData + 4) & 0x10) != 0) {
-                    /* WARNING: Subroutine does not return */
-    MON_GetTime(instance);
+  ulong uVar1;
+  undefined4 local_10;
+  undefined4 local_c;
+  void *pvVar2;
+  undefined4 local_8;
+  undefined4 in_stack_fffffffc;
+  
+  pvVar2 = instance->extraData;
+  if ((*(uint *)((int)pvVar2 + 4) & 0x10) == 0) {
+    MON_StunnedEntry(instance);
   }
-  MON_StunnedEntry(instance);
+  else {
+    uVar1 = MON_GetTime(instance);
+    *(undefined **)((int)pvVar2 + 0x114) = &DAT_0000ea60 + uVar1;
+    MON_PlayAnim(instance,(MonsterAnim)
+                          CONCAT412(in_stack_fffffffc,CONCAT48(local_8,CONCAT44(local_c,local_10))),
+                 0x1e);
+  }
   return;
 }
 
@@ -339,23 +385,31 @@ void HUMAN_StunnedEntry(_Instance *instance)
 void HUMAN_Stunned(_Instance *instance)
 
 {
+  ulong uVar1;
   undefined4 unaff_s0;
+  void *pvVar2;
   undefined4 unaff_s1;
   undefined4 unaff_retaddr;
   undefined4 in_stack_fffffffc;
   
-  if ((*(uint *)((int)instance->extraData + 4) & 0x10) == 0) {
+  pvVar2 = instance->extraData;
+  if ((*(uint *)((int)pvVar2 + 4) & 0x10) == 0) {
     MON_Stunned(instance);
-    return;
   }
-  if ((instance->flags2 & 0x10U) != 0) {
-                    /* WARNING: Subroutine does not return */
-    MON_PlayAnim(instance,(MonsterAnim)
-                          CONCAT412(in_stack_fffffffc,
-                                    CONCAT48(unaff_retaddr,CONCAT44(unaff_s1,unaff_s0))),5);
+  else {
+    if ((instance->flags2 & 0x10U) != 0) {
+      MON_PlayAnim(instance,(MonsterAnim)
+                            CONCAT412(in_stack_fffffffc,
+                                      CONCAT48(unaff_retaddr,CONCAT44(unaff_s1,unaff_s0))),5);
+    }
+    uVar1 = MON_GetTime(instance);
+    if (*(uint *)((int)pvVar2 + 0x114) < uVar1) {
+      *(undefined2 *)((int)pvVar2 + 0x144) = 0x4000;
+      *(uint *)((int)pvVar2 + 4) = *(uint *)((int)pvVar2 + 4) & 0xffffffef;
+    }
+    MON_DefaultQueueHandler(instance);
   }
-                    /* WARNING: Subroutine does not return */
-  MON_GetTime(instance);
+  return;
 }
 
 
@@ -381,15 +435,24 @@ void HUMAN_Stunned(_Instance *instance)
 void HUMAN_EmbraceEntry(_Instance *instance)
 
 {
+  int iVar1;
   undefined4 unaff_s0;
   undefined4 unaff_s1;
+  void *pvVar2;
   undefined4 unaff_retaddr;
   undefined4 in_stack_fffffffc;
   
-                    /* WARNING: Subroutine does not return */
+  pvVar2 = instance->extraData;
   MON_PlayAnim(instance,(MonsterAnim)
                         CONCAT412(in_stack_fffffffc,
                                   CONCAT48(unaff_retaddr,CONCAT44(unaff_s1,unaff_s0))),0x25);
+  MON_TurnOffBodySpheres(instance);
+  iVar1 = (int)*(short *)((int)pvVar2 + 0x144);
+  if (iVar1 < 0) {
+    iVar1 = iVar1 + 0xfff;
+  }
+  *(int *)((int)pvVar2 + 0x114) = iVar1 >> 0xc;
+  return;
 }
 
 
@@ -418,8 +481,55 @@ void HUMAN_EmbraceEntry(_Instance *instance)
 void HUMAN_Embrace(_Instance *instance)
 
 {
-                    /* WARNING: Subroutine does not return */
+  bool bVar1;
+  __Event *message;
+  uint Data;
+  void *pvVar2;
+  undefined4 local_20;
+  undefined4 in_stack_ffffffe4;
+  
+  bVar1 = false;
+  pvVar2 = instance->extraData;
   MON_TurnToPosition(instance,&(gameTrackerX.playerInstance)->position,0x1000);
+  while (message = DeMessageQueue((__MessageQueue *)((int)pvVar2 + 8)), message != (__Event *)0x0) {
+    if (message->ID == 0x1000014) {
+      bVar1 = true;
+    }
+    else {
+      MON_DefaultMessageHandler(instance,message);
+    }
+  }
+  Data = (*(int *)((int)pvVar2 + 0x114) * gameTrackerX.timeMult * 0x21) / 5000;
+  INSTANCE_Post(gameTrackerX.playerInstance,0x1000016,Data);
+  if ((int)*(short *)((int)pvVar2 + 0x144) < (int)Data) {
+    *(undefined2 *)((int)pvVar2 + 0x144) = 0;
+  }
+  else {
+    *(short *)((int)pvVar2 + 0x144) = *(short *)((int)pvVar2 + 0x144) - (short)Data;
+  }
+  GAMEPAD_Shock1(0x80 - (uint)((int)*(short *)((int)pvVar2 + 0x144) << 7) /
+                        (uint)(*(int *)((int)pvVar2 + 0x114) << 0xc),0xf000);
+  if (*(short *)((int)pvVar2 + 0x144) == 0) {
+    *(undefined2 *)((int)pvVar2 + 0x150) = 0;
+    MON_SwitchState(instance,(MonsterState)CONCAT44(in_stack_ffffffe4,local_20));
+    INSTANCE_Post(gameTrackerX.playerInstance,0x1000006,(int)instance);
+    *(undefined2 *)((int)pvVar2 + 0x144) = 0;
+    SOUND_Play3dSound(&instance->position,8,-0x1c2,0x50,0xdac);
+  }
+  else {
+    if (bVar1) {
+      *(uint *)((int)pvVar2 + 4) = *(uint *)((int)pvVar2 + 4) | 0x10;
+      MON_SwitchState(instance,(MonsterState)CONCAT44(in_stack_ffffffe4,local_20));
+    }
+    else {
+      if (instance->currentMainState == 0x1b) {
+        return;
+      }
+      INSTANCE_Post(gameTrackerX.playerInstance,0x1000006,(int)instance);
+    }
+    MON_TurnOnBodySpheres(instance);
+  }
+  return;
 }
 
 
@@ -490,43 +600,45 @@ void HUMAN_Idle(_Instance *instance)
   pvVar3 = instance->data;
   uVar1 = puVar4[0x33];
   if ((((*puVar4 & 4) != 0) || (uVar1 == 0)) || ((*(ushort *)(uVar1 + 0x16) & 4) == 0)) {
-HUMAN_WaitForWeapon:
+LAB_8007cd70:
     MON_Idle(instance);
     return;
   }
   uVar2 = puVar4[1];
-  if ((uVar2 & 2) != 0) {
-                    /* WARNING: Subroutine does not return */
-    MON_TurnToPosition(instance,(_Position *)(*(int *)(uVar1 + 4) + 0x5c),
-                       *(short *)(puVar4[0x59] + 0x1c));
-  }
-  if ((uVar2 & 1) == 0) {
-    if ((uVar2 & 4) != 0) {
-      if ((instance->flags2 & 0x10U) != 0) {
-        puVar4[1] = uVar2 & 0xfffffffb;
-        MON_PlayRandomIdle(instance,2);
+  if ((uVar2 & 2) == 0) {
+    if ((uVar2 & 1) == 0) {
+      if ((uVar2 & 4) != 0) {
+        if ((instance->flags2 & 0x10U) != 0) {
+          puVar4[1] = uVar2 & 0xfffffffb;
+          MON_PlayRandomIdle(instance,2);
+        }
+        goto LAB_8007cd60;
       }
-      goto LAB_8007cd60;
+      if (1999 < *(short *)(uVar1 + 0x14)) goto LAB_8007cd70;
+      animtype = 0;
+      puVar4[1] = uVar2 | 2;
+      animList = *(char **)((int)pvVar3 + 8);
+      mode = 2;
     }
-    if (1999 < *(short *)(uVar1 + 0x14)) goto HUMAN_WaitForWeapon;
-    animtype = 0;
-    puVar4[1] = uVar2 | 2;
-    animList = *(char **)((int)pvVar3 + 8);
-    mode = 2;
+    else {
+      if (*(short *)(uVar1 + 0x14) < 2000) goto LAB_8007cd60;
+      animtype = 1;
+      puVar4[1] = uVar2 & 0xfffffffe | 4;
+      animList = *(char **)((int)pvVar3 + 8);
+      mode = 1;
+    }
+    MON_PlayAnimFromList(instance,animList,animtype,mode);
   }
   else {
-    if (*(short *)(uVar1 + 0x14) < 2000) {
-LAB_8007cd60:
-                    /* WARNING: Subroutine does not return */
-      MON_DefaultQueueHandler(instance);
+    MON_TurnToPosition(instance,(_Position *)(*(int *)(uVar1 + 4) + 0x5c),
+                       *(short *)(puVar4[0x59] + 0x1c));
+    if ((instance->flags2 & 2U) != 0) {
+      puVar4[1] = puVar4[1] & 0xfffffffd | 1;
     }
-    animtype = 1;
-    puVar4[1] = uVar2 & 0xfffffffe | 4;
-    animList = *(char **)((int)pvVar3 + 8);
-    mode = 1;
   }
-                    /* WARNING: Subroutine does not return */
-  MON_PlayAnimFromList(instance,animList,animtype,mode);
+LAB_8007cd60:
+  MON_DefaultQueueHandler(instance);
+  return;
 }
 
 
@@ -569,20 +681,23 @@ void HUMAN_Flee(_Instance *instance)
   
   puVar1 = (uint *)instance->extraData;
   uVar2 = puVar1[0x31];
-  if ((uVar2 != 0) && (*(short *)(uVar2 + 0x14) < 0x280)) {
+  if ((uVar2 == 0) || (0x27f < *(short *)(uVar2 + 0x14))) {
     if ((puVar1[1] & 8) == 0) {
-                    /* WARNING: Subroutine does not return */
-      MON_PlayAnimFromList(instance,*(char **)((int)instance->data + 8),2,2);
+      MON_Flee(instance);
     }
-                    /* WARNING: Subroutine does not return */
+    else {
+      MON_SwitchState(instance,(MonsterState)CONCAT44(unaff_s1,unaff_s0));
+    }
+  }
+  else {
+    if ((puVar1[1] & 8) == 0) {
+      MON_PlayAnimFromList(instance,*(char **)((int)instance->data + 8),2,2);
+      puVar1[1] = puVar1[1] | 8;
+    }
     MON_TurnToPosition(instance,(_Position *)(*(int *)(uVar2 + 4) + 0x5c),
                        *(short *)(puVar1[0x59] + 0x1c));
+    MON_DefaultQueueHandler(instance);
   }
-  if ((puVar1[1] & 8) != 0) {
-                    /* WARNING: Subroutine does not return */
-    MON_SwitchState(instance,(MonsterState)CONCAT44(unaff_s1,unaff_s0));
-  }
-  MON_Flee(instance);
   if (((puVar1[1] & 8) != 0) && ((*puVar1 & 1) != 0)) {
     puVar1[1] = puVar1[1] & 0xfffffff7;
   }
@@ -625,12 +740,30 @@ void HUMAN_Flee(_Instance *instance)
 	/* end block 3 */
 	// End Line: 1131
 
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
 void HUMAN_GetAngry(void)
 
 {
-  if ((gameTrackerX.instanceList)->first != (_Instance *)0x0) {
-                    /* WARNING: Subroutine does not return */
-    INSTANCE_Query((gameTrackerX.instanceList)->first,1);
+  ulong uVar1;
+  _MonsterIR *p_Var2;
+  uint *puVar3;
+  _Instance *Inst;
+  
+  Inst = (gameTrackerX.instanceList)->first;
+  while (Inst != (_Instance *)0x0) {
+    uVar1 = INSTANCE_Query(Inst,1);
+    if ((uVar1 & 0xc000) != 0) {
+      puVar3 = *(uint **)(*(int *)((int)Inst->extraData + 0x164) + 0xc);
+      puVar3[3] = puVar3[3] & 0xfffffffe;
+      puVar3[1] = puVar3[1] & 0xfffffffe;
+      *puVar3 = *puVar3 | 1;
+      p_Var2 = MONSENSE_SetEnemy(Inst,gameTrackerX.playerInstance);
+      if (p_Var2 != (_MonsterIR *)0x0) {
+        p_Var2->mirFlags = p_Var2->mirFlags & 0xfff9;
+      }
+    }
+    Inst = Inst->next;
   }
   return;
 }

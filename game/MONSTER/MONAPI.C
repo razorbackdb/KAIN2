@@ -92,24 +92,77 @@ void MonsterProcess(_Instance *instance,GameTracker *gameTracker)
 void MonsterInit(_Instance *instance,GameTracker *gameTracker)
 
 {
-  TDRFuncPtr_MONTABLE_GetCleanUpFunc pTVar1;
-  char *address;
+  short sVar1;
+  TDRFuncPtr_MONTABLE_GetCleanUpFunc pTVar2;
+  _G2AnimKeylist_Type *keylist;
+  TDRFuncPtr_MONTABLE_GetInitFunc pTVar3;
+  _MonsterState *p_Var4;
+  uint *__s;
+  int *piVar5;
   
-  if ((instance->flags & 0x20000U) != 0) {
-    address = (char *)instance->extraData;
-    pTVar1 = MONTABLE_GetCleanUpFunc(instance);
-    (*pTVar1)(instance);
+  piVar5 = (int *)instance->data;
+  if ((instance->flags & 0x20000U) == 0) {
+    if ((piVar5 != (int *)0x0) && (*piVar5 == -0x531fff9c)) {
+      __s = (uint *)MEMPACK_Malloc(0x25c,'\x17');
+      *(uint **)&instance->extraData = __s;
+      if (instance->instanceID == 0) {
+        if (__s == (uint *)0x0) {
+          return;
+        }
+        goto LAB_8007dc30;
+      }
+      if (__s != (uint *)0x0) {
+        memset(__s,0,0x25c);
+        InitMessageQueue((__MessageQueue *)(__s + 2));
+        instance->currentMainState = -1;
+        *(char *)((int)__s + 0x162) = -1;
+        sVar1 = (instance->position).z;
+        __s[0x4a] = *(uint *)&instance->position;
+        *(short *)(__s + 0x4b) = sVar1;
+        __s[0x68] = 0xffffffff;
+        __s[0x42] = 0;
+        instance->flags = instance->flags | 0x10040;
+        if ((piVar5[4] & 0x10000U) == 0) {
+          instance->flags2 = instance->flags2 | 0x100;
+        }
+        instance->maxXVel = 400;
+        instance->maxYVel = 400;
+        instance->maxZVel = 400;
+        instance->xVel = 0;
+        instance->yVel = 0;
+        instance->zVel = 0;
+        MONTABLE_SetQueryFunc(instance);
+        MONTABLE_SetMessageFunc(instance);
+        MON_ProcessIntro(instance);
+        *(undefined2 *)((int)__s + 0x142) = *(undefined2 *)(__s + 0x50);
+        MON_TurnOnAllSpheres(instance);
+        MON_TurnOffWeaponSpheres(instance);
+        MONSENSE_SetupSenses(instance);
+        MON_AnimInit(instance);
+        pTVar3 = MONTABLE_GetInitFunc(instance);
+        (*pTVar3)(instance);
+        if ((*__s & 1) == 0) {
+          return;
+        }
+        p_Var4 = MONTABLE_GetStateFuncs(instance,instance->currentMainState);
+        *__s = *__s & 0xfffffffe;
+        (*p_Var4->entryFunction)(instance);
+        return;
+      }
+    }
+    instance->data = (void *)0x0;
+    keylist = G2Instance_GetKeylist(instance,0);
+    G2Anim_SwitchToKeylist(&instance->anim,keylist,0);
+  }
+  else {
+    __s = (uint *)instance->extraData;
+    pTVar2 = MONTABLE_GetCleanUpFunc(instance);
+    (*pTVar2)(instance);
     MONSENSE_RemoveSenses(instance);
-                    /* WARNING: Subroutine does not return */
-    MEMPACK_Free(address);
+LAB_8007dc30:
+    MEMPACK_Free((char *)__s);
   }
-  if (((int *)instance->data != (int *)0x0) && (*(int *)instance->data == -0x531fff9c)) {
-                    /* WARNING: Subroutine does not return */
-    MEMPACK_Malloc(0x25c,'\x17');
-  }
-  instance->data = (void *)0x0;
-                    /* WARNING: Subroutine does not return */
-  G2Instance_GetKeylist(instance,0);
+  return;
 }
 
 
@@ -156,6 +209,7 @@ void MonsterInit(_Instance *instance,GameTracker *gameTracker)
 void SendHitObject(_Instance *instance,_Instance *hit,int type)
 
 {
+  _Instance **Data;
   void *pvVar1;
   int iVar2;
   void *pvVar3;
@@ -172,8 +226,10 @@ void SendHitObject(_Instance *instance,_Instance *hit,int type)
     }
   } while (iVar2 != *(int *)((int)pvVar3 + 0xc));
   if (iVar2 == *(int *)((int)pvVar3 + 0xc)) {
-                    /* WARNING: Subroutine does not return */
-    CIRC_Alloc(8);
+    Data = (_Instance **)CIRC_Alloc(8);
+    *Data = hit;
+    *(int *)(Data + 1) = type;
+    INSTANCE_Post(instance,0x1000008,(int)Data);
   }
   return;
 }
@@ -279,36 +335,78 @@ void MonsterCollide(_Instance *instance,GameTracker *gameTracker)
 
 {
   bool bVar1;
-  int iVar2;
+  undefined2 uVar2;
+  ulong uVar3;
+  Intro *pIVar4;
+  long lVar5;
+  _CollideInfo *p_Var6;
+  void **Data;
+  int Data_00;
+  void *pvVar7;
+  void *pvVar8;
+  int Data_01;
   BSPTree *bsp;
-  void *pvVar3;
+  void *pvVar9;
+  _CollideInfo *collideInfo;
+  uint uVar10;
+  _Terrain *p_Var11;
+  _Instance *Inst;
+  uint *puVar12;
+  void *local_50 [4];
+  _Instance *local_40;
+  _Instance *local_3c;
   
-  pvVar3 = instance->collideInfo;
+  collideInfo = (_CollideInfo *)instance->collideInfo;
+  puVar12 = (uint *)instance->extraData;
   if (instance->data == (void *)0x0) {
     return;
   }
-  if (*(char *)((int)pvVar3 + 6) != '\x01') {
+  if (collideInfo->type0 != '\x01') {
     return;
   }
-  if (*(char *)(*(int *)((int)pvVar3 + 8) + 4) == '\t') {
-    if (*(int *)((int)instance->extraData + 0xb8) == 0) {
+  if (*(char *)((int)collideInfo->prim0 + 4) == '\t') {
+    uVar10 = puVar12[0x2e];
+    if (uVar10 == 0) {
       return;
     }
-    if (*(char *)((int)pvVar3 + 7) != '\x01') {
+    if (collideInfo->type1 != '\x01') {
       return;
     }
-    if (*(char *)(*(int *)((int)pvVar3 + 0xc) + 4) != '\b') {
+    if (*(char *)((int)collideInfo->prim1 + 4) != '\b') {
       return;
     }
-                    /* WARNING: Subroutine does not return */
+    Data_01 = (int)*(char *)(uVar10 + 7);
+    Inst = (_Instance *)collideInfo->inst1;
+    if ((*puVar12 & 0x20000000) != 0) {
+      Data_01 = Data_01 << 1;
+    }
     MON_TurnOffWeaponSpheres(instance);
+    Data_01 = Data_01 * 0x100;
+    Data_00 = Data_01;
+    if (Data_01 < 0) {
+      Data_00 = Data_01 + 0x7f;
+    }
+    Data_00 = SetFXHitData(instance,(uint)(byte)collideInfo->segment,Data_00 >> 7,0x100);
+    INSTANCE_Post(Inst,0x400000,Data_00);
+    Data_01 = SetMonsterHitData(instance,(_Instance *)0x0,Data_01,(int)*(short *)(uVar10 + 4),
+                                (int)*(char *)(uVar10 + 6));
+    INSTANCE_Post(Inst,0x1000000,Data_01);
+    uVar10 = puVar12[0x31];
+    if (Inst != *(_Instance **)(uVar10 + 4)) {
+      return;
+    }
+    if ((*puVar12 & 0x10000000) != 0) {
+      *(ushort *)(uVar10 + 0x16) = *(ushort *)(uVar10 + 0x16) | 0x1000;
+    }
+    *(ushort *)(puVar12[0x31] + 0x18) = *(ushort *)(puVar12[0x31] + 0x18) | 0x100;
+    return;
   }
   bVar1 = true;
-  switch(*(undefined *)((int)pvVar3 + 7)) {
-  case 1:
-    iVar2 = *(int *)((int)pvVar3 + 0xc);
-    SendHitObject(instance,*(_Instance **)((int)pvVar3 + 0x14),1);
-    if (*(char *)(iVar2 + 4) != '\t') {
+  switch(collideInfo->type1) {
+  case '\x01':
+    pvVar9 = collideInfo->prim1;
+    SendHitObject(instance,(_Instance *)collideInfo->inst1,1);
+    if (*(char *)((int)pvVar9 + 4) != '\t') {
       if ((*(int *)&instance->position == *(int *)&instance->oldPos) &&
          ((instance->position).z == (instance->oldPos).z)) {
         bVar1 = false;
@@ -316,37 +414,91 @@ void MonsterCollide(_Instance *instance,GameTracker *gameTracker)
       break;
     }
     goto LAB_8007e314;
-  case 2:
-    SendHitObject(instance,*(_Instance **)((int)pvVar3 + 0x14),2);
+  case '\x02':
+    SendHitObject(instance,(_Instance *)collideInfo->inst1,2);
     break;
-  case 3:
-    bsp = *(BSPTree **)((int)pvVar3 + 0x14);
+  case '\x03':
+    bsp = (BSPTree *)collideInfo->inst1;
     if (((bsp->flags & 0xe0U) != 0) && ((instance->checkMask & 0x20) != 0)) {
-      MON_CheckTerrainAndRespond(instance,bsp,*(_TFace **)((int)pvVar3 + 0xc));
+      MON_CheckTerrainAndRespond(instance,bsp,(_TFace *)collideInfo->prim1);
     }
     if ((bsp->flags & 0x102U) == 0) {
-                    /* WARNING: Subroutine does not return */
-      CIRC_Alloc(0x10);
+      Data = (void **)CIRC_Alloc(0x10);
+      pvVar9 = collideInfo->prim1;
+      p_Var11 = (_Terrain *)collideInfo->level;
+      if (*(short *)((int)pvVar9 + 10) == -1) {
+        uVar2 = 0;
+      }
+      else {
+        uVar2 = *(undefined2 *)
+                 ((int)&(*(_Terrain **)p_Var11)->StartTextureList->attr +
+                 (uint)*(ushort *)((int)pvVar9 + 10));
+      }
+      *(undefined2 *)(Data + 3) = uVar2;
+      *Data = pvVar9;
+      uVar3 = INSTANCE_Query(instance,1);
+      if ((((uVar3 & 4) == 0) || (*(ushort *)((int)pvVar9 + 10) == 0xffff)) ||
+         ((*(ushort *)
+            ((int)&(*(_Terrain **)p_Var11)->StartTextureList->attr +
+            (uint)*(ushort *)((int)pvVar9 + 10)) & 0x1000) == 0)) {
+        pIVar4 = MON_TestForTerrainImpale(instance,*(_Terrain **)p_Var11);
+        if (pIVar4 == (Intro *)0x0) {
+          lVar5 = COLLIDE_FindCollisionFaceNormal(collideInfo,(_Normal *)(Data + 1));
+          if (lVar5 != 0) {
+            (collideInfo->offset).x = (collideInfo->offset).x + (*(short *)(Data + 1) >> 10);
+            (collideInfo->offset).y = (collideInfo->offset).y + (*(short *)((int)Data + 6) >> 10);
+            INSTANCE_Post(instance,0x1000007,(int)Data);
+          }
+        }
+        else {
+          INSTANCE_Post(instance,0x100001c,pIVar4->UniqueID);
+          (collideInfo->offset).x = 0;
+          (collideInfo->offset).y = 0;
+        }
+        *puVar12 = *puVar12 | 8;
+        Data = (void **)local_50;
+        if (instance->LinkParent != (_Instance *)0x0) {
+          p_Var6 = collideInfo;
+          do {
+            pvVar9 = *(void **)&p_Var6->flags;
+            pvVar7 = p_Var6->prim0;
+            pvVar8 = p_Var6->prim1;
+            *Data = p_Var6->level;
+            Data[1] = pvVar9;
+            Data[2] = pvVar7;
+            Data[3] = pvVar8;
+            p_Var6 = (_CollideInfo *)&p_Var6->inst0;
+            Data = Data + 4;
+          } while (p_Var6 != collideInfo + 1);
+          if (local_40 == instance) {
+            local_40 = instance->LinkParent;
+          }
+          if (local_3c == instance) {
+            local_3c = instance->LinkParent;
+          }
+          Data_01 = SetCollideInfoData((_CollideInfo *)local_50);
+          INSTANCE_Post(instance->LinkParent,0x200004,Data_01);
+        }
+        break;
+      }
     }
 LAB_8007e314:
     bVar1 = false;
     break;
-  case 5:
-    if ((*(short *)((int)pvVar3 + 0x2c) < -0x32) &&
+  case '\x05':
+    if (((collideInfo->offset).z < -0x32) &&
        ((*(uint *)((int)instance->data + 0x10) & 0x10004) == 0)) {
-                    /* WARNING: Subroutine does not return */
       INSTANCE_Post(instance,0x40017,6);
     }
-    SendHitObject(instance,*(_Instance **)((int)pvVar3 + 0x14),5);
+    SendHitObject(instance,(_Instance *)collideInfo->inst1,5);
   }
-  if (!bVar1) {
-    return;
+  if (bVar1) {
+    (instance->position).x = (instance->position).x + (collideInfo->offset).x;
+    (instance->position).y = (instance->position).y + (collideInfo->offset).y;
+    (instance->position).z = (instance->position).z + (collideInfo->offset).z;
+    COLLIDE_UpdateAllTransforms(instance,(SVECTOR *)&collideInfo->offset);
   }
-  (instance->position).x = (instance->position).x + *(short *)((int)pvVar3 + 0x28);
-  (instance->position).y = (instance->position).y + *(short *)((int)pvVar3 + 0x2a);
-                    /* WARNING: Subroutine does not return */
-  (instance->position).z = (instance->position).z + *(short *)((int)pvVar3 + 0x2c);
-  COLLIDE_UpdateAllTransforms(instance,(SVECTOR *)((int)pvVar3 + 0x28));
+  return;
 }
 
 
@@ -413,6 +565,7 @@ ulong MonsterQuery(_Instance *instance,ulong query)
 
 {
   MATRIX *pMVar1;
+  _MonsterSaveInfo *saveData;
   uint uVar2;
   uint *puVar3;
   void *pvVar4;
@@ -485,8 +638,10 @@ ulong MonsterQuery(_Instance *instance,ulong query)
       pMVar1 = (MATRIX *)(uint)*(byte *)((int)pvVar4 + 0x1a);
       break;
     case 0x18:
-                    /* WARNING: Subroutine does not return */
-      CIRC_Alloc(0x10);
+      saveData = (_MonsterSaveInfo *)CIRC_Alloc(0x10);
+      MON_SetUpSaveInfo(instance,saveData);
+      pMVar1 = (MATRIX *)SetControlSaveDataData(0x10,saveData);
+      break;
     case 0x19:
       pMVar1 = (MATRIX *)(int)*(short *)(puVar3 + 0x51);
       break;
@@ -583,18 +738,16 @@ void MonsterMessage(_Instance *instance,ulong message,ulong data)
             (instance->rotation).x = *(short *)data;
             (instance->rotation).y = *(short *)(data + 2);
             (instance->rotation).z = *(short *)(data + 4);
+            return;
+          }
+          if (message < 0x4000c) {
+            if (message == 0x4000a) {
+              STREAM_SetInstancePosition(&gameTrackerX,instance,(evPositionData *)data);
+              return;
+            }
           }
           else {
-            if (message < 0x4000c) {
-              if (message != 0x4000a) {
-LAB_8007e810:
-                    /* WARNING: Subroutine does not return */
-                EnMessageQueueData((__MessageQueue *)(puVar3 + 2),message,data);
-              }
-              STREAM_SetInstancePosition(&gameTrackerX,instance,(evPositionData *)data);
-            }
-            else {
-              if (message != 0x4000e) goto LAB_8007e810;
+            if (message == 0x4000e) {
               if (data == 0) {
                 uVar1 = *puVar3 & 0xfffffffb;
               }
@@ -603,27 +756,33 @@ LAB_8007e810:
               }
               *puVar3 = uVar1;
               iVar2 = instance->currentMainState;
-              if (((iVar2 == 1) || (iVar2 == 5)) || (iVar2 == 0x13)) {
-                MON_SwitchStateDoEntry(instance,(MonsterState)CONCAT44(local_14,local_18));
+              if (((iVar2 != 1) && (iVar2 != 5)) && (iVar2 != 0x13)) {
+                return;
               }
+              MON_SwitchStateDoEntry(instance,(MonsterState)CONCAT44(local_14,local_18));
+              return;
             }
           }
         }
         else {
           if (message == 0x200000) {
             MONSENSE_StartMonsterIRList(instance);
+            return;
+          }
+          if (message < 0x200001) {
+            if ((undefined *)message == &DAT_00100008) {
+              MON_RelocateCoords(instance,(_SVector *)data);
+              return;
+            }
           }
           else {
-            if (message < 0x200001) {
-              if ((undefined *)message != &DAT_00100008) goto LAB_8007e810;
-              MON_RelocateCoords(instance,(_SVector *)data);
-            }
-            else {
-              if (message != 0x200001) goto LAB_8007e810;
+            if (message == 0x200001) {
               MONSENSE_SenseInstance(instance,(evCollideInstanceStatsData *)data);
+              return;
             }
           }
         }
+        EnMessageQueueData((__MessageQueue *)(puVar3 + 2),message,data);
       }
     }
   }
@@ -666,7 +825,9 @@ void AnimDistanceAndVel(Object *object,_MonsterAnim *mAnim)
 
 {
   short intervalEnd;
-  _G2Bool_Enum _Var1;
+  ushort uVar1;
+  _G2Bool_Enum _Var2;
+  long lVar3;
   _G2AnimKeylist_Type *keylist;
   _G2Anim_Type _Stack216;
   _G2SVector3_Type local_20;
@@ -679,13 +840,16 @@ void AnimDistanceAndVel(Object *object,_MonsterAnim *mAnim)
   _Stack216.section[0].callbackData = (void *)0x0;
   G2AnimSection_SetInterpInfo(_Stack216.section,(_G2AnimInterpInfo_Type *)0x0);
   G2AnimSection_SwitchToKeylistAtTime(_Stack216.section,keylist,(int)mAnim->index[0],0);
-  _Var1 = G2Anim_SegmentHasActiveChannels(&_Stack216,0,0x700);
-  if (_Var1 != G2FALSE) {
+  _Var2 = G2Anim_SegmentHasActiveChannels(&_Stack216,0,0x700);
+  if (_Var2 != G2FALSE) {
     intervalEnd = G2AnimKeylist_GetDuration(keylist);
     G2Anim_GetRootMotionOverInterval(&_Stack216,0,intervalEnd,&local_20);
-                    /* WARNING: Subroutine does not return */
-    MATH3D_FastSqrt0((int)local_20.x * (int)local_20.x + (int)local_20.y * (int)local_20.y +
-                     (int)local_20.z * (int)local_20.z);
+    lVar3 = MATH3D_FastSqrt0((int)local_20.x * (int)local_20.x + (int)local_20.y * (int)local_20.y +
+                             (int)local_20.z * (int)local_20.z);
+    uVar1 = G2AnimKeylist_GetDuration(keylist);
+    mAnim->distance = (ushort)lVar3;
+    mAnim->velocity =
+         (ushort)((int)((uint)mAnim->playSpeed * lVar3 * 100) / ((int)((uint)uVar1 << 0x10) >> 4));
   }
   G2Anim_Free(&_Stack216);
   return;
@@ -735,27 +899,28 @@ void TranslateAnimList(Object *object,_MonsterAnim *animList,int numAnims)
 {
   byte bVar1;
   short sVar2;
-  byte *pbVar3;
-  int iVar4;
+  int iVar3;
+  byte *pbVar4;
+  int iVar5;
   _G2AnimKeylist_Type *keylist;
   
-  if ((animList != (_MonsterAnim *)0x0) && (iVar4 = 0, 0 < numAnims)) {
-    pbVar3 = &animList->startFrame;
+  if ((animList != (_MonsterAnim *)0x0) && (iVar5 = 0, 0 < numAnims)) {
+    pbVar4 = &animList->startFrame;
     do {
-      keylist = object->animList[(int)(char)pbVar3[5]];
-      if ((int)(char)pbVar3[5] != -1) {
+      keylist = object->animList[(int)(char)pbVar4[5]];
+      if ((int)(char)pbVar4[5] != -1) {
         AnimDistanceAndVel(object,animList);
-        bVar1 = *pbVar3;
+        bVar1 = *pbVar4;
         sVar2 = G2AnimKeylist_GetDuration(keylist);
         if (((int)sVar2 / 100) * 0x10000 >> 0x10 <= (int)(uint)bVar1) {
-                    /* WARNING: Subroutine does not return */
-          G2AnimKeylist_GetKeyframeCount(keylist);
+          iVar3 = G2AnimKeylist_GetKeyframeCount(keylist);
+          *pbVar4 = (char)iVar3 - 1;
         }
       }
-      iVar4 = iVar4 + 1;
-      pbVar3 = pbVar3 + 0x10;
+      iVar5 = iVar5 + 1;
+      pbVar4 = pbVar4 + 0x10;
       animList = animList + 1;
-    } while (iVar4 < numAnims);
+    } while (iVar5 < numAnims);
   }
   return;
 }
@@ -1354,28 +1519,52 @@ void MONAPI_DeleteRegen(_MONAPI_Regenerator *regen)
 void MONAPI_ProcessGenerator(void)
 
 {
-  ulong uVar1;
-  short *psVar2;
-  _MONAPI_Regenerator *p_Var3;
+  Level *pLVar1;
+  ulong uVar2;
+  uint *puVar3;
+  Intro *intro;
   int iVar4;
+  short *psVar5;
+  _MONAPI_Regenerator *regen;
+  int iVar6;
   
-  iVar4 = 0;
-  p_Var3 = GlobalSave->regenEntries;
+  iVar6 = 0;
+  regen = GlobalSave->regenEntries;
   if ('\0' < GlobalSave->numRegens) {
-    psVar2 = &GlobalSave->regenEntries[0].streamUnitID;
+    psVar5 = &GlobalSave->regenEntries[0].streamUnitID;
     do {
-      uVar1 = gameTrackerX.currentMaterialTime;
+      uVar2 = gameTrackerX.currentMaterialTime;
       if (gameTrackerX.gameData.asmData.MorphType != 0) {
-        uVar1 = gameTrackerX.currentSpectralTime;
+        uVar2 = gameTrackerX.currentSpectralTime;
       }
-      if (p_Var3->regenTime < uVar1) {
-                    /* WARNING: Subroutine does not return */
-        STREAM_GetLevelWithID((int)*psVar2);
+      if (regen->regenTime < uVar2) {
+        pLVar1 = STREAM_GetLevelWithID((int)*psVar5);
+        if (pLVar1 == (Level *)0x0) {
+LAB_8007f180:
+          MONAPI_DeleteRegen(regen);
+        }
+        else {
+          iVar4 = pLVar1->numIntros;
+          intro = pLVar1->introList;
+          puVar3 = (uint *)&intro->flags;
+          while (iVar4 != 0) {
+            iVar4 = iVar4 + -1;
+            if (puVar3[-6] == (int)psVar5[-1]) {
+              if ((*puVar3 & 0x400) != 0) goto LAB_8007f180;
+              INSTANCE_IntroduceInstance(intro,*psVar5);
+              break;
+            }
+            puVar3 = puVar3 + 0x13;
+            intro = intro + 1;
+          }
+        }
       }
-      iVar4 = iVar4 + 1;
-      psVar2 = psVar2 + 4;
-      p_Var3 = p_Var3 + 1;
-    } while (iVar4 < GlobalSave->numRegens);
+      else {
+        iVar6 = iVar6 + 1;
+        psVar5 = psVar5 + 4;
+        regen = regen + 1;
+      }
+    } while (iVar6 < GlobalSave->numRegens);
   }
   return;
 }
@@ -1411,10 +1600,18 @@ void MONAPI_ProcessGenerator(void)
 void MONAPI_AddToGenerator(_Instance *instance)
 
 {
-  if (GlobalSave->numRegens < '\t') {
+  ulong uVar1;
+  _MONAPI_Regenerator *p_Var2;
+  void *pvVar3;
+  
+  if ((int)GlobalSave->numRegens < 9) {
+    pvVar3 = instance->extraData;
+    p_Var2 = GlobalSave->regenEntries + (int)GlobalSave->numRegens;
     GlobalSave->numRegens = GlobalSave->numRegens + '\x01';
-                    /* WARNING: Subroutine does not return */
-    MON_GetTime(instance);
+    uVar1 = MON_GetTime(instance);
+    p_Var2->regenTime = uVar1 + (int)*(short *)((int)pvVar3 + 0x146) * 1000;
+    p_Var2->introUniqueID = *(short *)&instance->introUniqueID;
+    p_Var2->streamUnitID = *(short *)&instance->birthStreamUnitID;
   }
   return;
 }
@@ -1444,21 +1641,19 @@ void MONAPI_AddToGenerator(_Instance *instance)
 void MONAPI_CheckGenerator(_Instance *instance)
 
 {
-  undefined regen;
+  _MONAPI_Regenerator *regen;
   int iVar1;
   
-  _regen = GlobalSave->regenEntries;
+  regen = GlobalSave->regenEntries;
   iVar1 = 0;
   if ('\0' < GlobalSave->numRegens) {
     do {
-      regen = SUB41(_regen,0);
       iVar1 = iVar1 + 1;
-      if ((int)_regen->introUniqueID == instance->introUniqueID) {
-        MONAPI_DeleteRegen(_regen);
-        MONAPI_SetLookAround(regen);
+      if ((int)regen->introUniqueID == instance->introUniqueID) {
+        MONAPI_DeleteRegen(regen);
         return;
       }
-      _regen = _regen + 1;
+      regen = regen + 1;
     } while (iVar1 < GlobalSave->numRegens);
   }
   return;

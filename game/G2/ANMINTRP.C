@@ -32,11 +32,108 @@ void G2AnimSection_InterpToKeylistAtTime
                short targetTime,int duration)
 
 {
-  if ((duration & 0xffffU) != 0) {
-                    /* WARNING: Subroutine does not return */
-    _G2AnimSection_GetAnim(section);
+  byte bVar1;
+  short sVar2;
+  short sVar3;
+  _G2Anim_Type *anim;
+  _G2AnimQuatInfo_Type *p_Var4;
+  int iVar5;
+  _G2AnimInterpStateBlock_Type *p_Var6;
+  ulong uVar7;
+  uint uVar8;
+  _G2AnimInterpInfo_Type *p_Var9;
+  short sVar10;
+  short sVar11;
+  
+  if ((duration & 0xffffU) == 0) {
+LAB_80091b3c:
+    G2AnimSection_SwitchToKeylistAtTime(section,keylist,keylistID,targetTime);
   }
-  G2AnimSection_SwitchToKeylistAtTime(section,keylist,keylistID,targetTime);
+  else {
+    anim = _G2AnimSection_GetAnim(section);
+    p_Var9 = section->interpInfo;
+    bVar1 = section->segCount;
+    uVar8 = (uint)bVar1;
+    if (p_Var9->stateBlockList == (_G2AnimInterpStateBlock_Type *)0x0) {
+      p_Var6 = _G2Anim_AllocateInterpStateBlockList(section);
+      if (p_Var6 == (_G2AnimInterpStateBlock_Type *)0x0) goto LAB_80091b3c;
+      section->interpInfo = (_G2AnimInterpInfo_Type *)0x0;
+      _G2AnimSection_UpdateStoredFrameFromData(section,anim);
+      section->interpInfo = p_Var9;
+      _G2AnimSection_SegValueToQuat(section,0);
+    }
+    else {
+      _G2AnimSection_InterpStateToQuat(section);
+    }
+    sVar10 = section->elapsedTime;
+    uVar7 = section->alarmFlags;
+    section->interpInfo = (_G2AnimInterpInfo_Type *)0x0;
+    G2AnimSection_SwitchToKeylistAtTime(section,keylist,keylistID,targetTime);
+    _G2AnimSection_UpdateStoredFrameFromData(section,anim);
+    section->interpInfo = p_Var9;
+    section->alarmFlags = uVar7;
+    section->elapsedTime = sVar10;
+    _G2AnimSection_SegValueToQuat(section,1);
+    p_Var6 = p_Var9->stateBlockList;
+    iVar5 = 4;
+    p_Var4 = p_Var6->quatInfo;
+    if ((ushort)(p_Var6->quatInfo[0].destTrans.z |
+                p_Var6->quatInfo[0].destTrans.x | p_Var6->quatInfo[0].destTrans.y) == 0) {
+      p_Var6->quatInfo[0].srcTrans.x = 0;
+      p_Var6->quatInfo[0].srcTrans.y = 0;
+      p_Var6->quatInfo[0].srcTrans.z = 0;
+    }
+    if (bVar1 != 0) {
+      do {
+        uVar8 = uVar8 - 1;
+        iVar5 = iVar5 + -1;
+        sVar11 = (p_Var4->srcScale).y;
+        (p_Var4->destScale).x = (p_Var4->destScale).x - (p_Var4->srcScale).x;
+        sVar2 = (p_Var4->srcScale).z;
+        (p_Var4->destScale).y = (p_Var4->destScale).y - sVar11;
+        sVar11 = (p_Var4->destTrans).x;
+        sVar3 = (p_Var4->srcTrans).x;
+        (p_Var4->destScale).z = (p_Var4->destScale).z - sVar2;
+        sVar2 = (p_Var4->srcTrans).y;
+        (p_Var4->destTrans).x = sVar11 - sVar3;
+        sVar11 = (p_Var4->srcTrans).z;
+        (p_Var4->destTrans).y = (p_Var4->destTrans).y - sVar2;
+        (p_Var4->destTrans).z = (p_Var4->destTrans).z - sVar11;
+        p_Var4 = p_Var4 + 1;
+        if (iVar5 == 0) {
+          p_Var6 = p_Var6->next;
+          iVar5 = 4;
+          p_Var4 = p_Var6->quatInfo;
+        }
+      } while (0 < (int)uVar8);
+    }
+    p_Var9->targetTime = targetTime;
+    sVar11 = (short)duration;
+    p_Var9->duration = sVar11;
+    if (((section->flags & 2) == 0) && ((section->alarmFlags & 3) != 0)) {
+      iVar5 = (int)sVar10 % (uint)section->keylist->s0TailTime + 1;
+      sVar10 = (short)iVar5;
+      if (sVar11 < iVar5) {
+        sVar10 = sVar11;
+      }
+      section->elapsedTime = sVar10;
+    }
+    else {
+      section->elapsedTime = 0;
+    }
+    section->keylist = keylist;
+    section->keylistID = (ushort)keylistID;
+    section->storedTime = -keylist->timePerKey;
+    if ((section->flags & 2) != 0) {
+      G2AnimSection_SetLoopRangeAll(section);
+    }
+    G2AnimSection_ClearAlarm(section,3);
+    section->flags = section->flags & 0x7f;
+    G2AnimSection_SetUnpaused(section);
+    section->swAlarmTable = (short *)0x0;
+    section->interpInfo = p_Var9;
+    anim->flags = anim->flags | 1;
+  }
   return;
 }
 
@@ -363,10 +460,10 @@ void _G2AnimSection_SegValueToQuat(_G2AnimSection_Type *section,int zeroOne)
   int iVar4;
   _G2AnimInterpStateBlock_Type *p_Var5;
   uint uVar6;
-  ushort uStack40;
-  ushort uStack38;
-  ushort uStack36;
-  undefined2 uStack34;
+  ushort local_28;
+  ushort local_26;
+  ushort local_24;
+  undefined2 local_22;
   
   iVar4 = 4;
   uVar6 = (uint)section->segCount;
@@ -376,12 +473,12 @@ void _G2AnimSection_SegValueToQuat(_G2AnimSection_Type *section,int zeroOne)
   if (section->segCount != 0) {
     psVar2 = &(&_segValues)[section->firstSeg].trans.z;
     do {
-      uStack40 = *(ushort *)&p_Var3->rotQuat & 0xfff;
-      uStack38 = psVar2[-9] & 0xfff;
-      uStack34 = 0;
-      uStack36 = psVar2[-8] & 0xfff;
+      local_28 = *(ushort *)&p_Var3->rotQuat & 0xfff;
+      local_26 = psVar2[-9] & 0xfff;
+      local_22 = 0;
+      local_24 = psVar2[-8] & 0xfff;
       if (zeroOne == 0) {
-        G2Quat_FromEuler_S((int)p_Var1,(short *)&uStack40);
+        G2Quat_FromEuler_S((int)p_Var1,(short *)&local_28);
         (p_Var1->srcScale).x = psVar2[-6];
         (p_Var1->srcScale).y = psVar2[-5];
         (p_Var1->srcScale).z = psVar2[-4];
@@ -390,7 +487,7 @@ void _G2AnimSection_SegValueToQuat(_G2AnimSection_Type *section,int zeroOne)
         (p_Var1->srcTrans).z = *psVar2;
       }
       else {
-        G2Quat_FromEuler_S((int)&p_Var1->destQuat,(short *)&uStack40);
+        G2Quat_FromEuler_S((int)&p_Var1->destQuat,(short *)&local_28);
         (p_Var1->destScale).x = psVar2[-6];
         (p_Var1->destScale).y = psVar2[-5];
         (p_Var1->destScale).z = psVar2[-4];

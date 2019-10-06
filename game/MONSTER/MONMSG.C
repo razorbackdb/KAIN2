@@ -63,8 +63,23 @@ void MON_SetGlyphHitData(_Instance *instance,evFXHitData *data,int type,int amou
 int MON_GroundMoveQueueHandler(_Instance *instance)
 
 {
-                    /* WARNING: Subroutine does not return */
-  DeMessageQueue((__MessageQueue *)((int)instance->extraData + 8));
+  __Event *message;
+  int iVar1;
+  void *pvVar2;
+  
+  iVar1 = 0;
+  pvVar2 = instance->extraData;
+  while( true ) {
+    message = DeMessageQueue((__MessageQueue *)((int)pvVar2 + 8));
+    if (message == (__Event *)0x0) break;
+    if (message->ID == 0x4010080) {
+      iVar1 = 0x4010080;
+    }
+    else {
+      MON_IdleMessageHandler(instance,message);
+    }
+  }
+  return iVar1;
 }
 
 
@@ -122,76 +137,110 @@ int MON_GroundMoveQueueHandler(_Instance *instance)
 	/* end block 2 */
 	// End Line: 156
 
+/* WARNING: Type propagation algorithm not settling */
+
 void MON_PupateMessageHandler(_Instance *instance,__Event *message)
 
 {
-  int iVar1;
-  uint *puVar2;
-  MonsterState in_stack_ffffffb8;
+  short angle;
+  long lVar1;
+  ulong uVar2;
+  int iVar3;
+  _Instance *p_Var4;
+  uint *puVar5;
+  undefined4 local_48;
+  undefined4 in_stack_ffffffbc;
   evFXHitData eStack64;
   evFXHitData eStack40;
   
-  iVar1 = message->ID;
-  puVar2 = (uint *)instance->extraData;
-  if (iVar1 == 0x80004) {
-    if (*(char *)(puVar2[0x59] + 0x3a) != '\0') {
-                    /* WARNING: Subroutine does not return */
-      MON_SwitchState(instance,in_stack_ffffffb8);
+  iVar3 = message->ID;
+  puVar5 = (uint *)instance->extraData;
+  if (iVar3 == 0x80004) {
+    if (*(char *)(puVar5[0x59] + 0x3a) == '\0') {
+      return;
     }
+    MON_SwitchState(instance,(MonsterState)CONCAT44(in_stack_ffffffbc,local_48));
+    *(undefined2 *)(puVar5 + 0x54) = 0x10;
+    return;
   }
-  else {
-    if (iVar1 < 0x80005) {
-      if (iVar1 == 0x80002) {
-        iVar1 = MON_TakeDamage(instance,0x3000,0x100);
-        if ((iVar1 != 0) && ((*puVar2 & 0x2000) != 0)) {
-          *(undefined2 *)(puVar2 + 0x54) = 0x100;
-        }
-LAB_8008472c:
-                    /* WARNING: Subroutine does not return */
-        MON_SwitchState(instance,in_stack_ffffffb8);
-      }
-      if (iVar1 < 0x80003) {
-        if ((iVar1 == 0x80001) && (instance->zVel == 0)) {
-                    /* WARNING: Subroutine does not return */
-          MATH3D_AngleFromPosToPos(&(gameTrackerX.playerInstance)->position,&instance->position);
-        }
-      }
-      else {
-        if (*(char *)(puVar2[0x59] + 0x3c) != '\0') {
-          MON_SetGlyphHitData(instance,&eStack40,0x200,1);
-          *(undefined2 *)(puVar2 + 0x54) = 0x200;
-          MON_DamageEffect(instance,&eStack40);
-          goto LAB_8008472c;
-        }
+  if (iVar3 < 0x80005) {
+    if (iVar3 == 0x80002) {
+      iVar3 = MON_TakeDamage(instance,0x3000,0x100);
+      if ((iVar3 != 0) && ((*puVar5 & 0x2000) != 0)) {
+        *(undefined2 *)(puVar5 + 0x54) = 0x100;
       }
     }
     else {
-      if (iVar1 != 0x80006) {
-        if (0x80005 < iVar1) {
-          if (iVar1 == 0x1000000) {
-            *puVar2 = *puVar2 & 0xffffff7f;
-            return;
-          }
-          if (iVar1 != 0x1000011) {
-            return;
-          }
-          iVar1 = message->Data;
-                    /* WARNING: Subroutine does not return */
-          MATH3D_LengthXYZ((int)*(short *)(iVar1 + 4) - (int)(instance->position).x,
-                           (int)*(short *)(iVar1 + 6) - (int)(instance->position).y,
-                           (int)*(short *)(iVar1 + 8) - (int)(instance->position).z);
+      if (iVar3 < 0x80003) {
+        if (iVar3 != 0x80001) {
+          return;
         }
-        if (*(char *)(puVar2[0x59] + 0x39) != '\0') {
-          MON_SetGlyphHitData(instance,&eStack64,0x20,1);
-          *(undefined2 *)(puVar2 + 0x54) = 0x20;
-          MON_DamageEffect(instance,&eStack64);
-          goto LAB_8008472c;
+        if (instance->zVel != 0) {
+          return;
         }
+        angle = MATH3D_AngleFromPosToPos
+                          (&(gameTrackerX.playerInstance)->position,&instance->position);
+        PhysicsSetVelFromZRot(instance,angle,100);
+        instance->zVel = 0x32;
+        (instance->position).z = (instance->position).z + 100;
+        (instance->oldPos).z = (instance->oldPos).z + 100;
       }
-      if (*(char *)(puVar2[0x59] + 0x38) != '\0') {
-                    /* WARNING: Subroutine does not return */
-        MON_SwitchState(instance,in_stack_ffffffb8);
+      else {
+        if (*(char *)(puVar5[0x59] + 0x3c) == '\0') {
+          return;
+        }
+        MON_SetGlyphHitData(instance,&eStack40,0x200,1);
+        *(undefined2 *)(puVar5 + 0x54) = 0x200;
+        MON_DamageEffect(instance,&eStack40);
       }
+    }
+LAB_8008472c:
+    MON_SwitchState(instance,(MonsterState)CONCAT44(in_stack_ffffffbc,local_48));
+  }
+  else {
+    if (iVar3 != 0x80006) {
+      if (0x80005 < iVar3) {
+        if (iVar3 == 0x1000000) {
+          *puVar5 = *puVar5 & 0xffffff7f;
+          return;
+        }
+        if (iVar3 != 0x1000011) {
+          return;
+        }
+        p_Var4 = (_Instance *)message->Data;
+        lVar1 = MATH3D_LengthXYZ((int)*(short *)((int)&p_Var4->node + 4) -
+                                 (int)(instance->position).x,
+                                 (int)*(short *)((int)&p_Var4->node + 6) -
+                                 (int)(instance->position).y,
+                                 (int)*(short *)&p_Var4->next - (int)(instance->position).z);
+        if (*(short *)(*(int *)(puVar5[0x59] + 4) + 0xe) <= lVar1) {
+          return;
+        }
+        *puVar5 = *puVar5 & 0xffffff7f;
+        if (puVar5[0x31] != 0) {
+          return;
+        }
+        if (*(_Instance **)&p_Var4->node == (_Instance *)0x0) {
+          return;
+        }
+        uVar2 = INSTANCE_Query(*(_Instance **)&p_Var4->node,1);
+        if ((uVar2 & 0xb) == 0) {
+          return;
+        }
+        MONSENSE_SetEnemy(instance,*(_Instance **)&p_Var4->node);
+        return;
+      }
+      if (*(char *)(puVar5[0x59] + 0x39) != '\0') {
+        MON_SetGlyphHitData(instance,&eStack64,0x20,1);
+        *(undefined2 *)(puVar5 + 0x54) = 0x20;
+        MON_DamageEffect(instance,&eStack64);
+        goto LAB_8008472c;
+      }
+    }
+    if (*(char *)(puVar5[0x59] + 0x38) != '\0') {
+      MON_SwitchState(instance,(MonsterState)CONCAT44(in_stack_ffffffbc,local_48));
+      MON_MonsterGlow(instance,0xffffff,0x46,10,0x14);
+      *(undefined2 *)(puVar5 + 0x54) = 0x40;
     }
   }
   return;
@@ -239,30 +288,38 @@ LAB_8008472c:
 void MON_IdleMessageHandler(_Instance *instance,__Event *message)
 
 {
-  undefined4 unaff_s0;
-  undefined4 unaff_s1;
+  ulong uVar1;
+  undefined4 local_10;
+  undefined4 local_c;
+  uint *puVar2;
   
+  puVar2 = (uint *)instance->extraData;
   switch(message->ID) {
   case 0x1000002:
   case 0x100000a:
   case 0x1000023:
     if (message->Data == 0) {
-                    /* WARNING: Subroutine does not return */
-      MON_SwitchState(instance,(MonsterState)CONCAT44(unaff_s1,unaff_s0));
+      MON_SwitchState(instance,(MonsterState)CONCAT44(local_c,local_10));
     }
   default:
     MON_DefaultMessageHandler(instance,message);
     break;
   case 0x100000e:
-    if ((*(uint *)instance->extraData & 4) == 0) {
-                    /* WARNING: Subroutine does not return */
-      INSTANCE_Query(*(_Instance **)(message->Data + 4),1);
+    if ((*puVar2 & 4) == 0) {
+      uVar1 = INSTANCE_Query(*(_Instance **)(message->Data + 4),1);
+      if ((uVar1 & 1) != 0) {
+        MON_ChangeBehavior(instance,(uint)*(byte *)(puVar2 + 0x56));
+      }
+      MON_SwitchState(instance,(MonsterState)CONCAT44(local_c,local_10));
     }
     break;
   case 0x1000012:
-    if ((*(uint *)instance->extraData & 4) == 0) {
-                    /* WARNING: Subroutine does not return */
-      INSTANCE_Query(*(_Instance **)(message->Data + 4),1);
+    if ((*puVar2 & 4) == 0) {
+      uVar1 = INSTANCE_Query(*(_Instance **)(message->Data + 4),1);
+      if ((uVar1 & 1) != 0) {
+        MON_ChangeBehavior(instance,(uint)*(byte *)(puVar2 + 0x56));
+      }
+      MON_SwitchState(instance,(MonsterState)CONCAT44(local_c,local_10));
     }
   }
   return;
@@ -469,91 +526,140 @@ void MON_IdleMessageHandler(_Instance *instance,__Event *message)
 	/* end block 2 */
 	// End Line: 491
 
-/* WARNING: Removing unreachable block (ram,0x80084ea4) */
-/* WARNING: Removing unreachable block (ram,0x80084ebc) */
-/* WARNING: Removing unreachable block (ram,0x80084ec4) */
 /* WARNING: Type propagation algorithm not settling */
 
 void MON_DefaultMessageHandler(_Instance *instance,__Event *message)
 
 {
-  short sVar1;
-  bool bVar2;
-  TDRFuncPtr_MONTABLE_GetDamageEffectFunc pTVar3;
+  ushort uVar1;
+  short sVar2;
+  bool bVar3;
+  short angle;
+  ulong uVar4;
+  long lVar5;
+  TDRFuncPtr_MONTABLE_GetDamageEffectFunc pTVar6;
   uint CurrentSection;
-  undefined2 uVar4;
   int Data;
-  undefined2 *puVar5;
-  evFXHitData *data;
-  char cVar6;
-  uint *puVar7;
-  uint *puVar8;
-  _Instance *Inst;
+  short *psVar7;
+  uint uVar8;
+  _MonsterIR *Data_00;
   int iVar9;
+  evFXHitData *data;
+  byte bVar10;
+  _Instance *p_Var11;
+  _MonsterVars *mv;
+  _Instance *Inst;
   undefined4 local_58;
   undefined4 local_54;
   evFXHitData eStack72;
   evFXHitData eStack48;
   
   Data = message->ID;
-  puVar8 = (uint *)instance->extraData;
+  mv = (_MonsterVars *)instance->extraData;
   if (0x1000008 < Data) {
     if (Data == 0x1000016) {
-      if (*(char *)(*(int *)(puVar8[0x59] + 8) + 0x18) == '\0') {
+      if (mv->subAttr->combatAttributes->hitPoints == '\0') {
         return;
       }
-      Data = (int)*(short *)(puVar8 + 0x50) + message->Data;
-      uVar4 = (undefined2)Data;
+      Data = (int)mv->hitPoints + message->Data;
+      angle = (short)Data;
       if (0x6000 < Data) {
-        uVar4 = 0x6000;
+        angle = 0x6000;
       }
 LAB_800851b8:
-      *(undefined2 *)(puVar8 + 0x50) = uVar4;
+      mv->hitPoints = angle;
       return;
     }
     if (Data < 0x1000017) {
       if (Data == 0x100000c) {
-        if (((*puVar8 & 1) != 0) && (instance->currentMainState == 0xb)) {
+        if (((mv->mvFlags & 1) != 0) && (instance->currentMainState == 0xb)) {
           return;
         }
         Data = message->Data;
         if (Data == 0x20) {
-          cVar6 = '\0';
-          if ((*puVar8 & 0x400) == 0) {
-            cVar6 = *(char *)(puVar8[0x59] + 0x39);
+          bVar10 = 0;
+          if ((mv->mvFlags & 0x400) == 0) {
+            bVar10 = mv->subAttr->fireVuln;
           }
         }
         else {
           if (Data < 0x21) {
-            cVar6 = '\0';
+            bVar10 = 0;
             if (Data == 0x10) {
-              cVar6 = *(char *)(puVar8[0x59] + 0x3a);
+              bVar10 = mv->subAttr->waterVuln;
             }
           }
           else {
-            cVar6 = '\0';
+            bVar10 = 0;
             if (Data == 0x40) {
-              cVar6 = *(char *)(puVar8[0x59] + 0x38);
+              bVar10 = mv->subAttr->sunVuln;
             }
           }
         }
-        if (cVar6 == '\0') {
+        if (bVar10 != 0) {
+          mv->damageType = *(ushort *)&message->Data;
+          Data = SetFXHitData((_Instance *)0x0,0,0,message->Data);
+          INSTANCE_Post(instance,0x400000,Data);
+        }
+        if (bVar10 == 1) {
+          MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
           return;
         }
-        *(undefined2 *)(puVar8 + 0x54) = *(undefined2 *)&message->Data;
-        Data = SetFXHitData((_Instance *)0x0,0,0,message->Data);
-                    /* WARNING: Subroutine does not return */
-        INSTANCE_Post(instance,0x400000,Data);
+        if (bVar10 == 0) {
+          return;
+        }
+        if (3 < bVar10) {
+          return;
+        }
+        mv->mvFlags = mv->mvFlags | 0x200000;
+        MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
+        return;
       }
-      if (0x100000c < Data) {
-        if (Data == 0x1000011) {
-          Inst = *(_Instance **)&((_Instance *)message->Data)->node;
-          if (Inst == (_Instance *)0x0) {
+      if (Data < 0x100000d) {
+        if (Data == 0x100000a) {
+          p_Var11 = (_Instance *)message->Data;
+          if (p_Var11 != (_Instance *)0x0) {
+            mv->held = *(_Instance **)&p_Var11->node;
+            Data = rsin((int)*(short *)&p_Var11->next);
+            Data = *(short *)((int)&p_Var11->instanceID + 2) * Data;
+            if (Data < 0) {
+              Data = Data + 0xfff;
+            }
+            angle = *(short *)&p_Var11->prev;
+            iVar9 = rcos((int)*(short *)&p_Var11->next);
+            iVar9 = *(short *)((int)&p_Var11->instanceID + 2) * iVar9;
+            if (iVar9 < 0) {
+              iVar9 = iVar9 + 0xfff;
+            }
+            sVar2 = *(short *)((int)&p_Var11->prev + 2);
+            (instance->position).x = angle + (short)(Data >> 0xc);
+            (instance->position).y = sVar2 - (short)(iVar9 >> 0xc);
+            (instance->rotation).z = *(short *)&p_Var11->next + 0x800U & 0xfff;
+            MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
             return;
           }
-                    /* WARNING: Subroutine does not return */
-          INSTANCE_Query(Inst,1);
+          Data_00 = mv->enemy;
+          if (Data_00 == (_MonsterIR *)0x0) {
+            return;
+          }
+          Data_00->mirConditions = Data_00->mirConditions | 0x80;
+          return;
         }
+        if (0x100000a < Data) {
+          MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
+          return;
+        }
+        Data = message->Data;
+        lVar5 = MATH3D_LengthXYZ((int)(instance->position).x - (int)*(short *)(Data + 4),
+                                 (int)(instance->position).y - (int)*(short *)(Data + 6),
+                                 (int)(instance->position).z - (int)*(short *)(Data + 8));
+        if (6999 < lVar5) {
+          return;
+        }
+        MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
+        return;
+      }
+      if (Data != 0x1000011) {
         if (Data < 0x1000012) {
           if (Data != 0x100000e) {
             return;
@@ -567,52 +673,65 @@ LAB_800851b8:
             if (message->Data == 0) {
               return;
             }
-            if (0x1fff < *(short *)(puVar8 + 0x51)) {
-                    /* WARNING: Subroutine does not return */
+            if (mv->soulJuice < 0x2000) {
+              mv->soulJuice = 0;
+              mv->damageType = 0;
               MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
+              return;
             }
-            *(undefined2 *)(puVar8 + 0x51) = 0;
-                    /* WARNING: Subroutine does not return */
-            *(undefined2 *)(puVar8 + 0x54) = 0;
             MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
+            return;
           }
         }
-        if ((*puVar8 & 4) != 0) {
+        if ((mv->mvFlags & 4) != 0) {
           return;
         }
-                    /* WARNING: Subroutine does not return */
-        INSTANCE_Query(*(_Instance **)(message->Data + 4),1);
-      }
-      if (Data != 0x100000a) {
-        if (0x100000a < Data) {
-                    /* WARNING: Subroutine does not return */
-          MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
-        }
-        Data = message->Data;
-                    /* WARNING: Subroutine does not return */
-        MATH3D_LengthXYZ((int)(instance->position).x - (int)*(short *)(Data + 4),
-                         (int)(instance->position).y - (int)*(short *)(Data + 6),
-                         (int)(instance->position).z - (int)*(short *)(Data + 8));
-      }
-      puVar7 = (uint *)message->Data;
-      if (puVar7 == (uint *)0x0) {
-        CurrentSection = puVar8[0x31];
-        if (CurrentSection == 0) {
+        uVar4 = INSTANCE_Query(*(_Instance **)(message->Data + 4),1);
+        if ((uVar4 & 1) == 0) {
           return;
         }
-        *(ushort *)(CurrentSection + 0x18) = *(ushort *)(CurrentSection + 0x18) | 0x80;
+        mv->behaviorState = mv->triggeredBehavior;
         return;
       }
-      puVar8[0x34] = *puVar7;
-                    /* WARNING: Subroutine does not return */
-      rsin((int)*(short *)(puVar7 + 2));
+      p_Var11 = (_Instance *)message->Data;
+      Inst = *(_Instance **)&p_Var11->node;
+      if (Inst == (_Instance *)0x0) {
+        return;
+      }
+      uVar4 = INSTANCE_Query(Inst,1);
+      if ((uVar4 & 0xb) == 0) {
+        return;
+      }
+      Data_00 = MONSENSE_FindIR(mv,Inst);
+      if (Data_00 != (_MonsterIR *)0x0) {
+        return;
+      }
+      lVar5 = MATH3D_LengthXYZ((int)(instance->position).x -
+                               (int)*(short *)((int)&p_Var11->node + 4),
+                               (int)(instance->position).y -
+                               (int)*(short *)((int)&p_Var11->node + 6),
+                               (int)(instance->position).z - (int)*(short *)&p_Var11->next);
+      if (mv->subAttr->senses->alarmRadius <= lVar5) {
+        return;
+      }
+      Data_00 = MONSENSE_SetEnemy(instance,Inst);
+      if (Data_00 == (_MonsterIR *)0x0) {
+        return;
+      }
+      Data = 0x1000012;
+      goto LAB_80085540;
     }
     if (Data != 0x1000021) {
       if (0x1000021 < Data) {
         if (Data == 0x2000002) {
-                    /* WARNING: Subroutine does not return */
-          SetMonsterHitData(instance,(_Instance *)0x0,*(int *)(message->Data + 0xc),
-                            (int)*(short *)(puVar8[0x2e] + 4),(int)*(char *)(puVar8[0x2e] + 6));
+          p_Var11 = (_Instance *)message->Data;
+          Data_00 = (_MonsterIR *)
+                    SetMonsterHitData(instance,(_Instance *)0x0,(int)p_Var11->prev,
+                                      (int)mv->attackType->knockBackDistance,
+                                      (int)mv->attackType->knockBackDuration);
+          Data = 0x1000000;
+          instance = *(_Instance **)&p_Var11->node;
+          goto LAB_80085540;
         }
         if (0x2000002 < Data) {
           if (Data == 0x4010080) {
@@ -621,8 +740,8 @@ LAB_800851b8:
           if (Data != 0x8000008) {
             return;
           }
-                    /* WARNING: Subroutine does not return */
           MON_PlayAnimID(instance,*(int *)(message->Data + 4),*(int *)(message->Data + 0x10));
+          return;
         }
         if (Data != 0x1000023) {
           return;
@@ -630,23 +749,23 @@ LAB_800851b8:
         if (message->Data != 0x1000) {
           return;
         }
-        *(undefined2 *)(puVar8 + 0x54) = 0x400;
+        mv->damageType = 0x400;
         goto LAB_80085350;
       }
       if (Data == 0x100001a) {
         if (message->Data != 0) {
-          if ((*puVar8 & 0x20000000) != 0) {
+          if ((mv->mvFlags & 0x20000000) != 0) {
             return;
           }
-          *puVar8 = *puVar8 | 0x20000000;
-          *(short *)(puVar8 + 0x50) = (short)((int)*(short *)(puVar8 + 0x50) << 1);
+          mv->mvFlags = mv->mvFlags | 0x20000000;
+          mv->hitPoints = (short)((int)mv->hitPoints << 1);
           return;
         }
-        if ((*puVar8 & 0x20000000) == 0) {
+        if ((mv->mvFlags & 0x20000000) == 0) {
           return;
         }
-        *puVar8 = *puVar8 & 0xdfffffff;
-        uVar4 = (undefined2)(((int)*(short *)(puVar8 + 0x50) + 1) / 2);
+        mv->mvFlags = mv->mvFlags & 0xdfffffff;
+        angle = (short)(((int)mv->hitPoints + 1) / 2);
         goto LAB_800851b8;
       }
       if (Data < 0x100001b) {
@@ -654,30 +773,30 @@ LAB_800851b8:
           return;
         }
         MONSENSE_SetEnemy(instance,gameTrackerX.playerInstance);
-                    /* WARNING: Subroutine does not return */
-        puVar8[0x34] = message->Data;
+        mv->held = (_Instance *)message->Data;
         MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
+        return;
       }
       if (Data == 0x100001c) {
-        puVar8[0x68] = message->Data;
+        mv->terrainImpaleID = message->Data;
         MON_MoveInstanceToImpalePoint(instance);
-                    /* WARNING: Subroutine does not return */
         MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
+        return;
       }
       if (Data != 0x100001f) {
         return;
       }
     }
-    if ((*puVar8 & 0x200040) != 0) {
+    if ((mv->mvFlags & 0x200040) != 0) {
       return;
     }
-    bVar2 = false;
+    bVar3 = false;
     iVar9 = message->Data;
-    sVar1 = *(short *)(iVar9 + 0xc);
-    *(short *)(puVar8 + 0x54) = sVar1;
+    uVar1 = *(ushort *)(iVar9 + 0xc);
+    mv->damageType = uVar1;
     Data = 0;
-    if (sVar1 == 0x20) {
-      bVar2 = true;
+    if (uVar1 == 0x20) {
+      bVar3 = true;
     }
     else {
       Data = 0x3000;
@@ -685,25 +804,42 @@ LAB_800851b8:
         Data = 0x2000;
       }
     }
-    if (bVar2) {
-                    /* WARNING: Subroutine does not return */
+    if (bVar3) {
       MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
     }
     if (Data == 0) {
-      *puVar8 = *puVar8 | 0x40;
+      mv->mvFlags = mv->mvFlags | 0x40;
       return;
     }
     *(int *)(iVar9 + 0xc) = Data;
 LAB_80084bd0:
-    if (((*puVar8 & 0x200040) == 0) && (instance->currentMainState != 10)) {
-      Inst = (_Instance *)message->Data;
-      if (0x2fff < (int)Inst->prev) {
-        instance->constrictAngle = 0;
-      }
-      *puVar8 = *puVar8 | 0x40;
-                    /* WARNING: Subroutine does not return */
-      INSTANCE_Query(*(_Instance **)&Inst->node,1);
+    if ((mv->mvFlags & 0x200040) != 0) {
+      return;
     }
+    if (instance->currentMainState == 10) {
+      return;
+    }
+    p_Var11 = (_Instance *)message->Data;
+    if (0x2fff < (int)p_Var11->prev) {
+      instance->constrictAngle = 0;
+    }
+    mv->mvFlags = mv->mvFlags | 0x40;
+    uVar4 = INSTANCE_Query(*(_Instance **)&p_Var11->node,1);
+    Inst = gameTrackerX.playerInstance;
+    if (uVar4 != 0x20) {
+      Inst = *(_Instance **)&p_Var11->node;
+    }
+    MONSENSE_SetEnemy(instance,Inst);
+    Data = MON_TakeDamage(instance,(int)p_Var11->prev,0x100);
+    iVar9 = 8;
+    if ((Data != 0) && (iVar9 = 9, (mv->mvFlags & 0x2000) != 0)) {
+      iVar9 = 0x10;
+    }
+    if (iVar9 != -1) {
+      MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
+    }
+    mv->damageType = 0x100;
+    *(_Instance **)&mv->messageData = p_Var11;
     return;
   }
   if (0x1000006 < Data) {
@@ -713,34 +849,39 @@ LAB_80084bd0:
     if (instance->zVel != 0) {
       return;
     }
-    if ((*puVar8 & 0x200000) != 0) {
+    if ((mv->mvFlags & 0x200000) != 0) {
       return;
     }
-    CurrentSection = puVar8[0x31];
-    if (CurrentSection != 0) {
-      *(ushort *)(CurrentSection + 0x16) = *(ushort *)(CurrentSection + 0x16) & 0xefff;
+    Data_00 = mv->enemy;
+    if (Data_00 != (_MonsterIR *)0x0) {
+      Data_00->mirFlags = Data_00->mirFlags & 0xefff;
     }
-                    /* WARNING: Subroutine does not return */
-    MATH3D_AngleFromPosToPos(&(gameTrackerX.playerInstance)->position,&instance->position);
+    angle = MATH3D_AngleFromPosToPos(&(gameTrackerX.playerInstance)->position,&instance->position);
+    PhysicsSetVelFromZRot(instance,angle,100);
+    instance->zVel = 0x46;
+    (instance->position).z = (instance->position).z + 0x78;
+    (instance->oldPos).z = (instance->oldPos).z + 0x78;
+    MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
+    return;
   }
   if (Data < 0x80002) {
     if (Data == 0x4000d) {
       Data = message->Data;
-      puVar8[1] = puVar8[1] | 0x10000000;
-      *(undefined2 *)(puVar8 + 0x49) = *(undefined2 *)(Data + 4);
+      mv->auxFlags = mv->auxFlags | 0x10000000;
+      (mv->destination).z = *(short *)(Data + 4);
       return;
     }
     if (Data < 0x4000e) {
       if (Data == 0x40009) {
-        *(undefined2 *)(puVar8 + 0x54) = 0x2000;
-                    /* WARNING: Subroutine does not return */
+        mv->damageType = 0x2000;
         MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
+        return;
       }
       if (Data < 0x4000a) {
         if (Data != 0x40003) {
           return;
         }
-        CurrentSection = (uint)*(byte *)(puVar8[0x59] + 0x2a);
+        CurrentSection = (uint)mv->subAttr->numSections;
         Data = message->Data;
         while (CurrentSection = CurrentSection - 1, -1 < (int)CurrentSection) {
           G2EmulationInstanceToInstanceSwitchAnimation
@@ -755,49 +896,52 @@ LAB_80084bd0:
     }
     else {
       if (Data == 0x40010) {
-        *puVar8 = *puVar8 & 0x7fffffff;
+        CurrentSection = mv->mvFlags;
+        uVar8 = 0x7fffffff;
+LAB_800854dc:
+        mv->mvFlags = CurrentSection & uVar8;
         return;
       }
       if (Data < 0x40011) {
         if (Data != 0x4000f) {
           return;
         }
-        puVar5 = (undefined2 *)message->Data;
-        *puVar8 = *puVar8 | 0x80000000;
-        *(undefined2 *)((int)puVar8 + 0x12e) = *puVar5;
-        *(undefined2 *)(puVar8 + 0x4c) = puVar5[1];
-        *(undefined2 *)((int)puVar8 + 0x132) = puVar5[2];
+        psVar7 = (short *)message->Data;
+        mv->mvFlags = mv->mvFlags | 0x80000000;
+        (mv->lookAtPosData).x = *psVar7;
+        (mv->lookAtPosData).y = psVar7[1];
+        (mv->lookAtPosData).z = psVar7[2];
         return;
       }
       if (Data != 0x40016) {
         if (Data != 0x40017) {
           return;
         }
-                    /* WARNING: Subroutine does not return */
-        *(undefined2 *)(puVar8 + 0x54) = *(undefined2 *)(&LAB_800cb194 + message->Data * 4);
+        mv->damageType = *(ushort *)(&LAB_800cb194 + message->Data * 4);
         MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
+        return;
       }
     }
-    puVar5 = (undefined2 *)message->Data;
-    *(undefined2 *)(puVar8 + 0x48) = *puVar5;
-    *(undefined2 *)((int)puVar8 + 0x122) = puVar5[1];
-    uVar4 = puVar5[2];
-    *puVar8 = *puVar8 | 0x40000;
-                    /* WARNING: Subroutine does not return */
-    *(undefined2 *)(puVar8 + 0x49) = uVar4;
+    psVar7 = (short *)message->Data;
+    (mv->destination).x = *psVar7;
+    (mv->destination).y = psVar7[1];
+    angle = psVar7[2];
+    mv->mvFlags = mv->mvFlags | 0x40000;
+    (mv->destination).z = angle;
     MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
+    return;
   }
   if (Data == 0x80005) {
-    if (*(char *)(puVar8[0x59] + 0x39) == '\0') goto LAB_80085200;
+    if (mv->subAttr->fireVuln == '\0') goto LAB_80085200;
     MON_SetGlyphHitData(instance,&eStack72,0x20,1);
-    *(undefined2 *)(puVar8 + 0x54) = 0x20;
+    mv->damageType = 0x20;
     data = &eStack72;
   }
   else {
     if (0x80005 < Data) {
       if (Data == 0x400000) {
-        pTVar3 = MONTABLE_GetDamageEffectFunc(instance);
-        (*pTVar3)(instance,message->Data);
+        pTVar6 = MONTABLE_GetDamageEffectFunc(instance);
+        (*pTVar6)(instance,message->Data);
         return;
       }
       if (0x400000 < Data) {
@@ -806,16 +950,18 @@ LAB_80084bd0:
             return;
           }
           if (message->Data == 0) {
-            CurrentSection = puVar8[0x31];
-            if (CurrentSection == 0) {
+            Data_00 = mv->enemy;
+            if (Data_00 == (_MonsterIR *)0x0) {
               return;
             }
-            *(ushort *)(CurrentSection + 0x18) = *(ushort *)(CurrentSection + 0x18) | 0x40;
+            Data_00->mirConditions = Data_00->mirConditions | 0x40;
             return;
           }
           MONSENSE_SetEnemy(instance,gameTrackerX.playerInstance);
-                    /* WARNING: Subroutine does not return */
           MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
+          CurrentSection = mv->mvFlags;
+          uVar8 = 0xfffffffd;
+          goto LAB_800854dc;
         }
         goto LAB_80084bd0;
       }
@@ -824,45 +970,55 @@ LAB_80084bd0:
       }
 LAB_80085200:
       if ((*(uint *)((int)instance->data + 0x10) & 0x10008) == 0) {
-                    /* WARNING: Subroutine does not return */
         MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
+        MON_MonsterGlow(instance,0xffffff,0x46,10,0x14);
+        mv->damageType = 0x40;
+        return;
       }
-      Data = SetMonsterAlarmData(gameTrackerX.playerInstance,
-                                 &(gameTrackerX.playerInstance)->position,2);
+      Data_00 = (_MonsterIR *)
+                SetMonsterAlarmData(gameTrackerX.playerInstance,
+                                    &(gameTrackerX.playerInstance)->position,2);
+      Data = 0x1000011;
 LAB_80085540:
-                    /* WARNING: Subroutine does not return */
-      INSTANCE_Post(instance,0x1000011,Data);
+      INSTANCE_Post(instance,Data,(int)Data_00);
+      return;
     }
     if (Data != 0x80003) {
       if (Data < 0x80004) {
         if (instance->petrifyValue != 0) {
           return;
         }
-                    /* WARNING: Subroutine does not return */
         MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
+        instance->petrifyValue = 0x1000;
+        return;
       }
-      if ((*(char *)(puVar8[0x59] + 0x3a) != '\0') &&
-         ((*(uint *)((int)instance->data + 0x10) & 8) == 0)) {
-                    /* WARNING: Subroutine does not return */
+      if ((mv->subAttr->waterVuln != '\0') && ((*(uint *)((int)instance->data + 0x10) & 8) == 0)) {
         MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
+        MON_MonsterGlow(instance,0xff0000,0x46,10,0x14);
+        mv->damageType = 0x10;
+        return;
       }
-      Data = SetMonsterAlarmData(gameTrackerX.playerInstance,
-                                 &(gameTrackerX.playerInstance)->position,2);
+      Data_00 = (_MonsterIR *)
+                SetMonsterAlarmData(gameTrackerX.playerInstance,
+                                    &(gameTrackerX.playerInstance)->position,2);
+      Data = 0x1000011;
       goto LAB_80085540;
     }
-    if (*(char *)(puVar8[0x59] + 0x3c) == '\0') {
-      Data = SetMonsterAlarmData(gameTrackerX.playerInstance,
-                                 &(gameTrackerX.playerInstance)->position,2);
+    if (mv->subAttr->soundVuln == '\0') {
+      Data_00 = (_MonsterIR *)
+                SetMonsterAlarmData(gameTrackerX.playerInstance,
+                                    &(gameTrackerX.playerInstance)->position,2);
+      Data = 0x1000011;
       goto LAB_80085540;
     }
     data = &eStack48;
     MON_SetGlyphHitData(instance,data,0x200,1);
-    *(undefined2 *)(puVar8 + 0x54) = 0x200;
+    mv->damageType = 0x200;
   }
   MON_DamageEffect(instance,data);
 LAB_80085350:
-                    /* WARNING: Subroutine does not return */
   MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
+  return;
 }
 
 
@@ -889,8 +1045,14 @@ LAB_80085350:
 void MON_PupateQueueHandler(_Instance *instance)
 
 {
-                    /* WARNING: Subroutine does not return */
-  DeMessageQueue((__MessageQueue *)((int)instance->extraData + 8));
+  __Event *message;
+  void *pvVar1;
+  
+  pvVar1 = instance->extraData;
+  while (message = DeMessageQueue((__MessageQueue *)((int)pvVar1 + 8)), message != (__Event *)0x0) {
+    MON_PupateMessageHandler(instance,message);
+  }
+  return;
 }
 
 
@@ -917,8 +1079,14 @@ void MON_PupateQueueHandler(_Instance *instance)
 void MON_IdleQueueHandler(_Instance *instance)
 
 {
-                    /* WARNING: Subroutine does not return */
-  DeMessageQueue((__MessageQueue *)((int)instance->extraData + 8));
+  __Event *message;
+  void *pvVar1;
+  
+  pvVar1 = instance->extraData;
+  while (message = DeMessageQueue((__MessageQueue *)((int)pvVar1 + 8)), message != (__Event *)0x0) {
+    MON_IdleMessageHandler(instance,message);
+  }
+  return;
 }
 
 
@@ -945,8 +1113,14 @@ void MON_IdleQueueHandler(_Instance *instance)
 void MON_DefaultQueueHandler(_Instance *instance)
 
 {
-                    /* WARNING: Subroutine does not return */
-  DeMessageQueue((__MessageQueue *)((int)instance->extraData + 8));
+  __Event *message;
+  void *pvVar1;
+  
+  pvVar1 = instance->extraData;
+  while (message = DeMessageQueue((__MessageQueue *)((int)pvVar1 + 8)), message != (__Event *)0x0) {
+    MON_DefaultMessageHandler(instance,message);
+  }
+  return;
 }
 
 

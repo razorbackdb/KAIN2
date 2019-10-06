@@ -38,55 +38,62 @@
 AadSynthVoice * aadAllocateVoice(int priority)
 
 {
-  AadSynthVoice *pAVar1;
-  ushort uVar2;
-  int iVar3;
-  uint uVar4;
-  uint uVar5;
-  AadSynthVoice *pAVar6;
-  AadSynthVoice *pAVar7;
+  char cVar1;
+  AadSynthVoice *pAVar2;
+  ushort uVar3;
+  int iVar4;
+  int iVar5;
+  int iVar6;
+  uint uVar7;
+  uint uVar8;
+  AadSynthVoice *pAVar9;
+  AadSynthVoice *pAVar10;
   
-  uVar4 = 0x7fff;
-  uVar5 = 0x7fff;
-  pAVar6 = (AadSynthVoice *)0x0;
-  pAVar7 = (AadSynthVoice *)0x0;
-  iVar3 = 0;
-  pAVar1 = (AadSynthVoice *)&UNK_000001dc;
+  uVar7 = 0x7fff;
+  uVar8 = 0x7fff;
+  pAVar10 = (AadSynthVoice *)0x0;
+  iVar5 = 0;
+  iVar6 = 0x1dc;
+  pAVar9 = (AadSynthVoice *)0x0;
   do {
-    if ((pAVar1->flags & 1) == 0) {
-      if (*(char *)(iVar3 + 0x47c) == '\0') {
-        *(undefined *)(iVar3 + 0x47c) = 1;
-        uVar2 = pAVar1->flags;
+    pAVar2 = (AadSynthVoice *)((int)&aadMem->updateCounter + iVar6);
+    iVar4 = (int)&aadMem->updateCounter + iVar5;
+    if ((pAVar2->flags & 1) == 0) {
+      cVar1 = *(char *)(iVar4 + 0x47c);
+      if (cVar1 == '\0') {
+        *(undefined *)(iVar4 + 0x47c) = 1;
+        uVar3 = pAVar2->flags;
         goto LAB_80058258;
       }
-      if (*(char *)(iVar3 + 0x47c) == '\x02') {
-        if ((uint)pAVar1->priority < uVar4) {
-          uVar4 = (uint)pAVar1->priority;
-          pAVar6 = pAVar1;
+      if (cVar1 == '\x02') {
+        if ((uint)pAVar2->priority < uVar7) {
+          uVar7 = (uint)pAVar2->priority;
+          pAVar9 = pAVar2;
         }
       }
       else {
-        if ((uint)pAVar1->priority < uVar5) {
-          uVar5 = (uint)pAVar1->priority;
-          pAVar7 = pAVar1;
+        if ((uint)pAVar2->priority < uVar8) {
+          uVar8 = (uint)pAVar2->priority;
+          pAVar10 = pAVar2;
         }
       }
     }
-    iVar3 = iVar3 + 1;
-    pAVar1 = pAVar1 + 1;
-  } while (iVar3 < 0x18);
-  if (priority < (int)uVar4) {
-    if (priority < (int)uVar5) {
+    pAVar2 = pAVar9;
+    iVar5 = iVar5 + 1;
+    iVar6 = iVar6 + 0x1c;
+    pAVar9 = pAVar2;
+  } while (iVar5 < 0x18);
+  if (priority < (int)uVar7) {
+    if (priority < (int)uVar8) {
       return (AadSynthVoice *)0x0;
     }
-    pAVar7->flags = pAVar7->flags | 2;
-    return pAVar7;
+    pAVar10->flags = pAVar10->flags | 2;
+    return pAVar10;
   }
-  uVar2 = pAVar6->flags;
-  pAVar1 = pAVar6;
+  uVar3 = pAVar2->flags;
 LAB_80058258:
-  pAVar1->flags = uVar2 | 2;
-  return pAVar1;
+  pAVar2->flags = uVar3 | 2;
+  return pAVar2;
 }
 
 
@@ -241,13 +248,14 @@ void aadPlayTone(AadToneAtr *toneAtr,ulong waveStartAddr,AadProgramAtr *progAtr,
 
 {
   byte bVar1;
-  int iVar2;
+  short sVar2;
+  int iVar3;
   short local_20;
   short local_1e;
   
   local_20 = (short)volume * (short)volume;
   local_1e = local_20;
-  if (((uint)the_mcmenu_table.data_size & 1) == 0) {
+  if ((aadMem->flags & 1U) == 0) {
     if (masterPan < 0x41) {
       if (masterPan < 0x3f) {
         local_1e = (short)(local_20 * masterPan * masterPan >> 0xc);
@@ -257,10 +265,10 @@ void aadPlayTone(AadToneAtr *toneAtr,ulong waveStartAddr,AadProgramAtr *progAtr,
       local_20 = (short)((uint)((int)local_20 * (0x7f - masterPan) * (0x7f - masterPan)) >> 0xc);
     }
   }
-  iVar2 = (uint)toneAtr->volume * (uint)toneAtr->volume;
-  local_20 = (short)((uint)(local_20 * iVar2) >> 0xe);
-  local_1e = (short)((uint)(local_1e * iVar2) >> 0xe);
-  if (((uint)the_mcmenu_table.data_size & 1) == 0) {
+  iVar3 = (uint)toneAtr->volume * (uint)toneAtr->volume;
+  local_20 = (short)((uint)(local_20 * iVar3) >> 0xe);
+  local_1e = (short)((uint)(local_1e * iVar3) >> 0xe);
+  if ((aadMem->flags & 1U) == 0) {
     bVar1 = toneAtr->panPosition;
     if (bVar1 < 0x41) {
       if (bVar1 < 0x3f) {
@@ -272,17 +280,37 @@ void aadPlayTone(AadToneAtr *toneAtr,ulong waveStartAddr,AadProgramAtr *progAtr,
       local_20 = (short)((int)local_1e * (0x7f - (uint)bVar1) * (0x7f - (uint)bVar1) >> 0xc);
     }
   }
-  iVar2 = (uint)progAtr->volume * (uint)progAtr->volume;
-                    /* WARNING: Subroutine does not return */
+  iVar3 = (uint)progAtr->volume * (uint)progAtr->volume;
   SpuSetVoiceVolume((uint)voice->voiceNum,
                     (int)(short)((uint)((int)(short)((uint)((int)(short)((uint)((short)((uint)((int)
                                                   local_20 * masterVolume * masterVolume) >> 0xe) *
-                                                  iVar2) >> 0xe) * slotVolume * slotVolume) >> 0xe)
+                                                  iVar3) >> 0xe) * slotVolume * slotVolume) >> 0xe)
                                        * masterMasterVol * masterMasterVol) >> 0xe),
                     (int)(short)((uint)((int)(short)((uint)((int)(short)((uint)((short)((uint)((int)
                                                   local_1e * masterVolume * masterVolume) >> 0xe) *
-                                                  iVar2) >> 0xe) * slotVolume * slotVolume) >> 0xe)
+                                                  iVar3) >> 0xe) * slotVolume * slotVolume) >> 0xe)
                                        * masterMasterVol * masterMasterVol) >> 0xe));
+  midiNote = midiNote - ((uint)toneAtr->centerNote - 0x3c);
+  if ((toneAtr->centerFine & 0x80U) == 0) {
+    sVar2 = (&aadPitchTable)[midiNote] +
+            (ushort)((&aadStepsPerCent)[midiNote] * 100 * (uint)(byte)toneAtr->centerFine >> 0x17);
+  }
+  else {
+    sVar2 = (&aadPitchTable)[midiNote] -
+            (ushort)((&aadStepsPerCent)[midiNote] * 100 * (0x100 - (uint)(byte)toneAtr->centerFine)
+                    >> 0x17);
+  }
+  SpuSetVoicePitch((uint)voice->voiceNum,sVar2 + (short)pitchOffset);
+  SpuSetVoiceStartAddr((uint)voice->voiceNum,waveStartAddr);
+  SpuSetVoiceADSR1ADSR2((uint)voice->voiceNum,toneAtr->adsr1,toneAtr->adsr2);
+  if (toneAtr->mode == '\x04') {
+    aadMem->voiceReverbRequest = aadMem->voiceReverbRequest | voice->voiceMask;
+  }
+  else {
+    aadMem->voiceReverbRequest = aadMem->voiceReverbRequest & ~voice->voiceMask;
+  }
+  aadMem->voiceKeyOnRequest = aadMem->voiceKeyOnRequest | voice->voiceMask;
+  return;
 }
 
 
@@ -379,13 +407,15 @@ void aadPlayTonePitchBend
 
 {
   byte bVar1;
-  int iVar2;
+  short sVar2;
+  int iVar3;
+  int iVar4;
   short local_20;
   short local_1e;
   
   local_20 = (short)volume * (short)volume;
   local_1e = local_20;
-  if (((uint)the_mcmenu_table.data_size & 1) == 0) {
+  if ((aadMem->flags & 1U) == 0) {
     if (masterPan < 0x41) {
       if (masterPan < 0x3f) {
         local_1e = (short)(local_20 * masterPan * masterPan >> 0xc);
@@ -395,10 +425,10 @@ void aadPlayTonePitchBend
       local_20 = (short)((uint)((int)local_20 * (0x7f - masterPan) * (0x7f - masterPan)) >> 0xc);
     }
   }
-  iVar2 = (uint)toneAtr->volume * (uint)toneAtr->volume;
-  local_20 = (short)((uint)(local_20 * iVar2) >> 0xe);
-  local_1e = (short)((uint)(local_1e * iVar2) >> 0xe);
-  if (((uint)the_mcmenu_table.data_size & 1) == 0) {
+  iVar3 = (uint)toneAtr->volume * (uint)toneAtr->volume;
+  local_20 = (short)((uint)(local_20 * iVar3) >> 0xe);
+  local_1e = (short)((uint)(local_1e * iVar3) >> 0xe);
+  if ((aadMem->flags & 1U) == 0) {
     bVar1 = toneAtr->panPosition;
     if (bVar1 < 0x41) {
       if (bVar1 < 0x3f) {
@@ -410,17 +440,40 @@ void aadPlayTonePitchBend
       local_20 = (short)((int)local_1e * (0x7f - (uint)bVar1) * (0x7f - (uint)bVar1) >> 0xc);
     }
   }
-  iVar2 = (uint)progAtr->volume * (uint)progAtr->volume;
-                    /* WARNING: Subroutine does not return */
+  iVar3 = (uint)progAtr->volume * (uint)progAtr->volume;
   SpuSetVoiceVolume((uint)voice->voiceNum,
                     (int)(short)((uint)((int)(short)((uint)((int)(short)((uint)((short)((uint)((int)
                                                   local_20 * masterVolume * masterVolume) >> 0xe) *
-                                                  iVar2) >> 0xe) * slotVolume * slotVolume) >> 0xe)
+                                                  iVar3) >> 0xe) * slotVolume * slotVolume) >> 0xe)
                                        * masterMasterVol * masterMasterVol) >> 0xe),
                     (int)(short)((uint)((int)(short)((uint)((int)(short)((uint)((short)((uint)((int)
                                                   local_1e * masterVolume * masterVolume) >> 0xe) *
-                                                  iVar2) >> 0xe) * slotVolume * slotVolume) >> 0xe)
+                                                  iVar3) >> 0xe) * slotVolume * slotVolume) >> 0xe)
                                        * masterMasterVol * masterMasterVol) >> 0xe));
+  iVar4 = 0x2000 / (int)(uint)toneAtr->pitchBendMax;
+  iVar3 = (midiNote - ((uint)toneAtr->centerNote - 0x3c)) + (pitchWheelPos + -0x2000) / iVar4;
+  if ((toneAtr->centerFine & 0x80U) == 0) {
+    sVar2 = (&aadPitchTable)[iVar3] +
+            (ushort)((&aadStepsPerCent)[iVar3] * 100 * (uint)(byte)toneAtr->centerFine >> 0x17);
+  }
+  else {
+    sVar2 = (&aadPitchTable)[iVar3] -
+            (ushort)((&aadStepsPerCent)[iVar3] * 100 * (0x100 - (uint)(byte)toneAtr->centerFine) >>
+                    0x17);
+  }
+  SpuSetVoicePitch((uint)voice->voiceNum,
+                   sVar2 + (short)(((int)(&aadStepsPerSemitone)[iVar3] *
+                                   ((pitchWheelPos + -0x2000) % iVar4)) / iVar4));
+  SpuSetVoiceStartAddr((uint)voice->voiceNum,waveStartAddr);
+  SpuSetVoiceADSR1ADSR2((uint)voice->voiceNum,toneAtr->adsr1,toneAtr->adsr2);
+  if (toneAtr->mode == '\x04') {
+    aadMem->voiceReverbRequest = aadMem->voiceReverbRequest | voice->voiceMask;
+  }
+  else {
+    aadMem->voiceReverbRequest = aadMem->voiceReverbRequest & ~voice->voiceMask;
+  }
+  aadMem->voiceKeyOnRequest = aadMem->voiceKeyOnRequest | voice->voiceMask;
+  return;
 }
 
 

@@ -141,8 +141,8 @@ __Event * PeekMessageQueue(__MessageQueue *In)
 void EnMessageQueue(__MessageQueue *In,__Event *Element)
 
 {
-                    /* WARNING: Subroutine does not return */
   EnMessageQueueData(In,Element->ID,Element->Data);
+  return;
 }
 
 
@@ -270,8 +270,28 @@ void * CIRC_Alloc(int size)
 int SetCollideInfoData(_CollideInfo *srcCI)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0x30);
+  void **ppvVar1;
+  void **ppvVar2;
+  _CollideInfo *p_Var3;
+  void *pvVar4;
+  void *pvVar5;
+  void *pvVar6;
+  
+  ppvVar1 = (void **)CIRC_Alloc(0x30);
+  p_Var3 = srcCI + 1;
+  ppvVar2 = ppvVar1;
+  do {
+    pvVar4 = *(void **)&srcCI->flags;
+    pvVar5 = srcCI->prim0;
+    pvVar6 = srcCI->prim1;
+    *ppvVar2 = srcCI->level;
+    ppvVar2[1] = pvVar4;
+    ppvVar2[2] = pvVar5;
+    ppvVar2[3] = pvVar6;
+    srcCI = (_CollideInfo *)&srcCI->inst0;
+    ppvVar2 = ppvVar2 + 4;
+  } while (srcCI != p_Var3);
+  return (int)ppvVar1;
 }
 
 
@@ -298,8 +318,15 @@ int SetMonsterHitData(_Instance *Sender,_Instance *lastHit,int Power,int knockBa
                      int knockBackFrames)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0x10);
+  _Instance **pp_Var1;
+  
+  pp_Var1 = (_Instance **)CIRC_Alloc(0x10);
+  *pp_Var1 = Sender;
+  pp_Var1[1] = lastHit;
+  *(int *)(pp_Var1 + 3) = Power;
+  *(short *)(pp_Var1 + 2) = (short)knockBackDistance;
+  *(undefined2 *)((int)pp_Var1 + 10) = (short)knockBackFrames;
+  return (int)pp_Var1;
 }
 
 
@@ -325,8 +352,17 @@ int SetMonsterHitData(_Instance *Sender,_Instance *lastHit,int Power,int knockBa
 int SetMonsterThrownData(_Instance *Sender,_Rotation *Direction,int Power)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0x10);
+  short sVar1;
+  _Instance **pp_Var2;
+  
+  pp_Var2 = (_Instance **)CIRC_Alloc(0x10);
+  *pp_Var2 = Sender;
+  *(short *)(pp_Var2 + 1) = Direction->x;
+  *(short *)((int)pp_Var2 + 6) = Direction->y;
+  sVar1 = Direction->z;
+  *(short *)(pp_Var2 + 3) = (short)Power;
+  *(short *)(pp_Var2 + 2) = sVar1;
+  return (int)pp_Var2;
 }
 
 
@@ -352,8 +388,17 @@ int SetMonsterThrownData(_Instance *Sender,_Rotation *Direction,int Power)
 int SetMonsterAlarmData(_Instance *sender,_Position *position,int type)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0xc);
+  short sVar1;
+  _Instance **pp_Var2;
+  
+  pp_Var2 = (_Instance **)CIRC_Alloc(0xc);
+  *pp_Var2 = sender;
+  *(short *)(pp_Var2 + 1) = position->x;
+  *(short *)((int)pp_Var2 + 6) = position->y;
+  sVar1 = position->z;
+  *(undefined2 *)((int)pp_Var2 + 10) = (short)type;
+  *(short *)(pp_Var2 + 2) = sVar1;
+  return (int)pp_Var2;
 }
 
 
@@ -379,8 +424,14 @@ int SetMonsterAlarmData(_Instance *sender,_Position *position,int type)
 int SetMonsterSoulSuckData(_Instance *Sender,int x,int y,int z)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0xc);
+  _Instance **pp_Var1;
+  
+  pp_Var1 = (_Instance **)CIRC_Alloc(0xc);
+  *pp_Var1 = Sender;
+  *(short *)(pp_Var1 + 1) = (short)x;
+  *(undefined2 *)((int)pp_Var1 + 6) = (short)y;
+  *(short *)(pp_Var1 + 2) = (short)z;
+  return (int)pp_Var1;
 }
 
 
@@ -406,8 +457,20 @@ int SetMonsterSoulSuckData(_Instance *Sender,int x,int y,int z)
 int SetMonsterImpaleData(_Instance *weapon,_Rotation *direction,_Position *position,int distance)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0x14);
+  short sVar1;
+  _Instance **pp_Var2;
+  
+  pp_Var2 = (_Instance **)CIRC_Alloc(0x14);
+  *pp_Var2 = weapon;
+  *(short *)(pp_Var2 + 1) = direction->x;
+  *(short *)((int)pp_Var2 + 6) = direction->y;
+  *(short *)(pp_Var2 + 2) = direction->z;
+  *(short *)(pp_Var2 + 3) = position->x;
+  *(short *)((int)pp_Var2 + 0xe) = position->y;
+  sVar1 = position->z;
+  *(undefined2 *)((int)pp_Var2 + 0x12) = (short)distance;
+  *(short *)(pp_Var2 + 4) = sVar1;
+  return (int)pp_Var2;
 }
 
 
@@ -433,8 +496,15 @@ int SetMonsterImpaleData(_Instance *weapon,_Rotation *direction,_Position *posit
 int SetObjectData(int x,int y,int PathNumber,_Instance *Force,int node)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0x10);
+  undefined2 *puVar1;
+  
+  puVar1 = (undefined2 *)CIRC_Alloc(0x10);
+  *puVar1 = (short)x;
+  puVar1[1] = (short)y;
+  puVar1[2] = (short)PathNumber;
+  *(_Instance **)(puVar1 + 4) = Force;
+  puVar1[3] = (short)node;
+  return (int)puVar1;
 }
 
 
@@ -460,8 +530,13 @@ int SetObjectData(int x,int y,int PathNumber,_Instance *Force,int node)
 int SetPositionData(int x,int y,int z)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(8);
+  undefined2 *puVar1;
+  
+  puVar1 = (undefined2 *)CIRC_Alloc(8);
+  *puVar1 = (short)x;
+  puVar1[1] = (short)y;
+  puVar1[2] = (short)z;
+  return (int)puVar1;
 }
 
 
@@ -487,8 +562,16 @@ int SetPositionData(int x,int y,int z)
 int SetPhysicsGravityData(int UpperOffset,int LowerOffset,int x,int y,int z,int slope)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0xc);
+  undefined2 *puVar1;
+  
+  puVar1 = (undefined2 *)CIRC_Alloc(0xc);
+  *puVar1 = (short)UpperOffset;
+  puVar1[1] = (short)LowerOffset;
+  puVar1[2] = (short)x;
+  puVar1[3] = (short)y;
+  puVar1[4] = (short)z;
+  puVar1[5] = (short)slope;
+  return (int)puVar1;
 }
 
 
@@ -515,8 +598,19 @@ int SetPhysicsEdgeData(int UpperOffset,int ForwardOffset,int AboveOffset,int x,i
                       _SVector *Normal1,_SVector *Normal2,_SVector *Delta)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0x24);
+  undefined2 *puVar1;
+  
+  puVar1 = (undefined2 *)CIRC_Alloc(0x24);
+  *puVar1 = (short)UpperOffset;
+  puVar1[1] = (short)ForwardOffset;
+  puVar1[2] = (short)AboveOffset;
+  puVar1[3] = (short)x;
+  puVar1[4] = (short)y;
+  puVar1[5] = (short)z;
+  *(_SVector **)(puVar1 + 6) = Normal1;
+  *(_SVector **)(puVar1 + 8) = Normal2;
+  *(_SVector **)(puVar1 + 10) = Delta;
+  return (int)puVar1;
 }
 
 
@@ -543,8 +637,15 @@ int SetPhysicsSwimData(int CheckDepth,_SVector *iVelocity,int SwimDepth,int Wade
                       )
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0x18);
+  undefined2 *puVar1;
+  
+  puVar1 = (undefined2 *)CIRC_Alloc(0x18);
+  *puVar1 = (short)CheckDepth;
+  *(_SVector **)(puVar1 + 4) = iVelocity;
+  puVar1[1] = (short)SwimDepth;
+  puVar1[2] = (short)WadeDepth;
+  puVar1[3] = (short)TreadDepth;
+  return (int)puVar1;
 }
 
 
@@ -570,8 +671,15 @@ int SetPhysicsSwimData(int CheckDepth,_SVector *iVelocity,int SwimDepth,int Wade
 int SetPhysicsDropOffData(int xOffset,int yOffset,int DropOffset,int slipSlope,int UpperOffset)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0xc);
+  undefined2 *puVar1;
+  
+  puVar1 = (undefined2 *)CIRC_Alloc(0xc);
+  *puVar1 = (short)xOffset;
+  puVar1[1] = (short)yOffset;
+  puVar1[2] = (short)DropOffset;
+  puVar1[3] = (short)slipSlope;
+  *(int *)(puVar1 + 4) = UpperOffset;
+  return (int)puVar1;
 }
 
 
@@ -598,8 +706,17 @@ int SetPhysicsSlideData(int Segment,int ForwardVectorX,int ForwardVectorY,int Fo
                        int DropOffset,int UpperOffset,int Height)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0x28);
+  undefined2 *puVar1;
+  
+  puVar1 = (undefined2 *)CIRC_Alloc(0x28);
+  puVar1[0xc] = (short)Segment;
+  *puVar1 = (short)ForwardVectorX;
+  puVar1[1] = (short)ForwardVectorY;
+  puVar1[2] = (short)ForwardVectorZ;
+  puVar1[0xd] = (short)DropOffset;
+  puVar1[0xe] = (short)UpperOffset;
+  puVar1[0xf] = (short)Height;
+  return (int)puVar1;
 }
 
 
@@ -625,8 +742,14 @@ int SetPhysicsSlideData(int Segment,int ForwardVectorX,int ForwardVectorY,int Fo
 int SetPhysicsWallCrawlData(int Segment,int Length,int ForwardOffset,int NormalDistance)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0x2c);
+  undefined2 *puVar1;
+  
+  puVar1 = (undefined2 *)CIRC_Alloc(0x2c);
+  *puVar1 = (short)Segment;
+  puVar1[1] = (short)Length;
+  puVar1[2] = (short)ForwardOffset;
+  puVar1[3] = (short)NormalDistance;
+  return (int)puVar1;
 }
 
 
@@ -652,8 +775,23 @@ int SetPhysicsWallCrawlData(int Segment,int Length,int ForwardOffset,int NormalD
 int SetPhysicsLinkedMoveData(_Instance *instance,int segment,_SVector *posDelta,_SVector *rotDelta)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0x18);
+  _Instance **pp_Var1;
+  _Instance *p_Var2;
+  
+  pp_Var1 = (_Instance **)CIRC_Alloc(0x18);
+  *(int *)(pp_Var1 + 1) = segment;
+  *pp_Var1 = instance;
+  if (posDelta != (_SVector *)0x0) {
+    p_Var2 = *(_Instance **)&posDelta->z;
+    pp_Var1[2] = *(_Instance **)posDelta;
+    pp_Var1[3] = p_Var2;
+  }
+  if (rotDelta != (_SVector *)0x0) {
+    p_Var2 = *(_Instance **)&rotDelta->z;
+    pp_Var1[4] = *(_Instance **)rotDelta;
+    pp_Var1[5] = p_Var2;
+  }
+  return (int)pp_Var1;
 }
 
 
@@ -679,8 +817,15 @@ int SetPhysicsLinkedMoveData(_Instance *instance,int segment,_SVector *posDelta,
 int SetPhysicsDropHeightData(_Position *offset,int dropOffset,int mode)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0x14);
+  short *psVar1;
+  
+  psVar1 = (short *)CIRC_Alloc(0x14);
+  psVar1[4] = (short)dropOffset;
+  psVar1[3] = (short)mode;
+  *psVar1 = offset->x;
+  psVar1[1] = offset->y;
+  psVar1[2] = offset->z + 0x19;
+  return (int)psVar1;
 }
 
 
@@ -706,8 +851,14 @@ int SetPhysicsDropHeightData(_Position *offset,int dropOffset,int mode)
 int SetAnimationControllerDoneData(_Instance *instance,long segment,long type,int data)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0x10);
+  _Instance **pp_Var1;
+  
+  pp_Var1 = (_Instance **)CIRC_Alloc(0x10);
+  *pp_Var1 = instance;
+  *(long *)(pp_Var1 + 1) = segment;
+  *(long *)(pp_Var1 + 2) = type;
+  *(int *)(pp_Var1 + 3) = data;
+  return (int)pp_Var1;
 }
 
 
@@ -733,8 +884,15 @@ int SetAnimationControllerDoneData(_Instance *instance,long segment,long type,in
 int SetAnimationInstanceSwitchData(_Instance *instance,int anim,int frame,int frames,int mode)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0x14);
+  _Instance **pp_Var1;
+  
+  pp_Var1 = (_Instance **)CIRC_Alloc(0x14);
+  *pp_Var1 = instance;
+  *(int *)(pp_Var1 + 1) = anim;
+  *(int *)(pp_Var1 + 2) = frame;
+  *(int *)(pp_Var1 + 3) = frames;
+  *(int *)(pp_Var1 + 4) = mode;
+  return (int)pp_Var1;
 }
 
 
@@ -760,8 +918,24 @@ int SetAnimationInstanceSwitchData(_Instance *instance,int anim,int frame,int fr
 int SetFXHitData(_Instance *hitter,int segment,int amount,int type)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0x14);
+  short sVar1;
+  short *psVar2;
+  
+  psVar2 = (short *)CIRC_Alloc(0x14);
+  psVar2[8] = (short)amount;
+  psVar2[9] = (short)type;
+  if (hitter != (_Instance *)0x0) {
+    sVar1 = *(short *)hitter->matrix[segment].t;
+    *psVar2 = sVar1;
+    psVar2[4] = sVar1 - *(short *)hitter->oldMatrix[segment].t;
+    sVar1 = *(short *)(hitter->matrix[segment].t + 1);
+    psVar2[1] = sVar1;
+    psVar2[5] = sVar1 - *(short *)(hitter->oldMatrix[segment].t + 1);
+    sVar1 = *(short *)(hitter->matrix[segment].t + 2);
+    psVar2[2] = sVar1;
+    psVar2[6] = sVar1 - *(short *)(hitter->oldMatrix[segment].t + 2);
+  }
+  return (int)psVar2;
 }
 
 
@@ -788,8 +962,48 @@ int SetObjectThrowData(void *target,_SVector *angularVel,ushort type,ushort spin
                       int gravity,int zVel,int initialXRot)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0x1c);
+  ushort uVar1;
+  ushort *puVar2;
+  undefined4 uVar3;
+  
+  puVar2 = (ushort *)CIRC_Alloc(0x1c);
+  *puVar2 = type;
+  puVar2[1] = spinType;
+  if (target == (void *)0x0) {
+    *puVar2 = 0;
+  }
+  else {
+    switch(type) {
+    case 1:
+      *(void **)(puVar2 + 2) = target;
+      break;
+    case 2:
+    case 4:
+      uVar1 = *(ushort *)((int)target + 4);
+      *(undefined4 *)(puVar2 + 2) = *(undefined4 *)target;
+      puVar2[4] = uVar1;
+      break;
+    case 3:
+      uVar3 = *(undefined4 *)((int)target + 4);
+      *(undefined4 *)(puVar2 + 2) = *(undefined4 *)target;
+      *(undefined4 *)(puVar2 + 4) = uVar3;
+    }
+  }
+  if ((1 < spinType) && (spinType == 2)) {
+    if (angularVel == (_SVector *)0x0) {
+      puVar2[1] = 0;
+    }
+    else {
+      uVar3 = *(undefined4 *)&angularVel->z;
+      *(undefined4 *)(puVar2 + 6) = *(undefined4 *)angularVel;
+      *(undefined4 *)(puVar2 + 8) = uVar3;
+    }
+  }
+  puVar2[10] = (ushort)speed;
+  puVar2[0xb] = (ushort)gravity;
+  puVar2[0xd] = (ushort)zVel;
+  puVar2[0xc] = (ushort)initialXRot;
+  return (int)puVar2;
 }
 
 
@@ -817,8 +1031,17 @@ int SetObjectBreakOffData
               int action)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0x10);
+  _Instance **pp_Var1;
+  
+  pp_Var1 = (_Instance **)CIRC_Alloc(0x10);
+  *pp_Var1 = force;
+  *(short *)(pp_Var1 + 1) = node;
+  *(short *)((int)pp_Var1 + 6) = distance;
+  *(short *)(pp_Var1 + 2) = animation;
+  *(undefined2 *)((int)pp_Var1 + 10) = (short)frame;
+  *(short *)(pp_Var1 + 3) = (short)type;
+  *(undefined2 *)((int)pp_Var1 + 0xe) = (short)action;
+  return (int)pp_Var1;
 }
 
 
@@ -844,8 +1067,13 @@ int SetObjectBreakOffData
 int SetControlInitHangData(_Instance *instance,long frame,long frames)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0xc);
+  _Instance **pp_Var1;
+  
+  pp_Var1 = (_Instance **)CIRC_Alloc(0xc);
+  *pp_Var1 = instance;
+  *(long *)(pp_Var1 + 1) = frame;
+  *(long *)(pp_Var1 + 2) = frames;
+  return (int)pp_Var1;
 }
 
 
@@ -871,8 +1099,13 @@ int SetControlInitHangData(_Instance *instance,long frame,long frames)
 int SetControlInitIdleData(int mode,long frame,long frames)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0xc);
+  int *piVar1;
+  
+  piVar1 = (int *)CIRC_Alloc(0xc);
+  *piVar1 = mode;
+  piVar1[1] = frame;
+  piVar1[2] = frames;
+  return (int)piVar1;
 }
 
 
@@ -898,8 +1131,15 @@ int SetControlInitIdleData(int mode,long frame,long frames)
 int SetObjectDraftData(short force,ushort radius,ushort radiusCoef,ushort height,int maxVelocity)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(10);
+  short *psVar1;
+  
+  psVar1 = (short *)CIRC_Alloc(10);
+  *psVar1 = force;
+  psVar1[1] = radius;
+  psVar1[2] = radiusCoef;
+  psVar1[3] = height;
+  psVar1[4] = (short)maxVelocity;
+  return (int)psVar1;
 }
 
 
@@ -925,8 +1165,13 @@ int SetObjectDraftData(short force,ushort radius,ushort radiusCoef,ushort height
 int SetObjectAbsorbData(_Instance *force,ushort node,ushort steps)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(8);
+  _Instance **pp_Var1;
+  
+  pp_Var1 = (_Instance **)CIRC_Alloc(8);
+  *pp_Var1 = force;
+  *(ushort *)(pp_Var1 + 1) = node;
+  *(ushort *)((int)pp_Var1 + 6) = steps;
+  return (int)pp_Var1;
 }
 
 
@@ -952,8 +1197,12 @@ int SetObjectAbsorbData(_Instance *force,ushort node,ushort steps)
 int SetControlSaveDataData(long length,void *data)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(8);
+  long *plVar1;
+  
+  plVar1 = (long *)CIRC_Alloc(8);
+  *plVar1 = length;
+  *(void **)(plVar1 + 1) = data;
+  return (int)plVar1;
 }
 
 
@@ -979,8 +1228,12 @@ int SetControlSaveDataData(long length,void *data)
 int SetObjectIdleData(long mode,_Instance *instance)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(8);
+  long *plVar1;
+  
+  plVar1 = (long *)CIRC_Alloc(8);
+  *plVar1 = mode;
+  *(_Instance **)(plVar1 + 1) = instance;
+  return (int)plVar1;
 }
 
 
@@ -1007,8 +1260,16 @@ int SetActionPlayHostAnimationData
               (_Instance *instance,_Instance *host,int newAnim,int newFrame,int frames,int mode)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0x18);
+  _Instance **pp_Var1;
+  
+  pp_Var1 = (_Instance **)CIRC_Alloc(0x18);
+  *pp_Var1 = instance;
+  pp_Var1[1] = host;
+  *(int *)(pp_Var1 + 2) = newAnim;
+  *(int *)(pp_Var1 + 3) = newFrame;
+  *(int *)(pp_Var1 + 4) = frames;
+  *(int *)(pp_Var1 + 5) = mode;
+  return (int)pp_Var1;
 }
 
 
@@ -1034,8 +1295,14 @@ int SetActionPlayHostAnimationData
 int SetObjectBirthProjectileData(_Instance *instance,int joint,int type)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0x10);
+  _Instance **pp_Var1;
+  
+  pp_Var1 = (_Instance **)CIRC_Alloc(0x10);
+  *pp_Var1 = instance;
+  *(int *)(pp_Var1 + 1) = joint;
+  *(int *)(pp_Var1 + 2) = type;
+  pp_Var1[3] = (_Instance *)0x0;
+  return (int)pp_Var1;
 }
 
 
@@ -1061,8 +1328,11 @@ int SetObjectBirthProjectileData(_Instance *instance,int joint,int type)
 int SetShadowSegmentData(ulong total)
 
 {
-                    /* WARNING: Subroutine does not return */
-  CIRC_Alloc(0xc);
+  ulong *puVar1;
+  
+  puVar1 = (ulong *)CIRC_Alloc(0xc);
+  *puVar1 = total;
+  return (int)puVar1;
 }
 
 
@@ -1081,24 +1351,58 @@ int SetShadowSegmentData(ulong total)
 	/* end block 2 */
 	// End Line: 1696
 
-/* WARNING: Removing unreachable block (ram,0x800715e4) */
-/* WARNING: Removing unreachable block (ram,0x800715f4) */
-/* WARNING: Removing unreachable block (ram,0x8007153c) */
-/* WARNING: Removing unreachable block (ram,0x8007154c) */
-/* WARNING: Removing unreachable block (ram,0x800714b8) */
-/* WARNING: Removing unreachable block (ram,0x800714c8) */
-/* WARNING: Removing unreachable block (ram,0x8007150c) */
-/* WARNING: Removing unreachable block (ram,0x8007151c) */
-/* WARNING: Removing unreachable block (ram,0x80071590) */
-/* WARNING: Removing unreachable block (ram,0x800715a0) */
-/* WARNING: Removing unreachable block (ram,0x80071638) */
+/* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void G2EmulationInit(void)
 
 {
   G2AlphaTables7 = (_G2AnimAlphaTable_Type *)0x0;
-                    /* WARNING: Subroutine does not return */
-  MEMPACK_Malloc(0x12,'\x19');
+  if (PTR_800d07e0 == (_G2AnimAlphaTable_Type *)0x0) {
+    PTR_800d07e0 = (_G2AnimAlphaTable_Type *)MEMPACK_Malloc(0x12,'\x19');
+    PTR_800d07e0->size = 4;
+    PTR_800d07e0[1] = (_G2AnimAlphaTable_Type)0x0;
+    PTR_800d07e0[2] = (_G2AnimAlphaTable_Type)0x100;
+    PTR_800d07e0[3] = (_G2AnimAlphaTable_Type)0x400;
+    PTR_800d07e0[4] = (_G2AnimAlphaTable_Type)0x1000;
+  }
+  if (PTR_800d07e4 == (_G2AnimAlphaTable_Type *)0x0) {
+    PTR_800d07e4 = (_G2AnimAlphaTable_Type *)MEMPACK_Malloc(0x12,'\x19');
+    PTR_800d07e4->size = 4;
+    PTR_800d07e4[1] = (_G2AnimAlphaTable_Type)0x0;
+    PTR_800d07e4[2] = (_G2AnimAlphaTable_Type)0xc00;
+    PTR_800d07e4[3] = (_G2AnimAlphaTable_Type)0xf00;
+    PTR_800d07e4[4] = (_G2AnimAlphaTable_Type)0x1000;
+  }
+  if (PTR_800d07e8 == (_G2AnimAlphaTable_Type *)0x0) {
+    PTR_800d07e8 = (_G2AnimAlphaTable_Type *)MEMPACK_Malloc(6,'\x19');
+    PTR_800d07e8->size = 1;
+    PTR_800d07e8[1] = (_G2AnimAlphaTable_Type)0x1000;
+  }
+  if (PTR_800d07ec == (_G2AnimAlphaTable_Type *)0x0) {
+    PTR_800d07ec = (_G2AnimAlphaTable_Type *)MEMPACK_Malloc(0x12,'\x19');
+    PTR_800d07ec->size = 4;
+    PTR_800d07ec[1] = (_G2AnimAlphaTable_Type)0x0;
+    PTR_800d07ec[2] = (_G2AnimAlphaTable_Type)0x100;
+    PTR_800d07ec[3] = (_G2AnimAlphaTable_Type)0xf00;
+    PTR_800d07ec[4] = (_G2AnimAlphaTable_Type)0x1000;
+  }
+  if (PTR_800d07f0 == (_G2AnimAlphaTable_Type *)0x0) {
+    PTR_800d07f0 = (_G2AnimAlphaTable_Type *)MEMPACK_Malloc(0x12,'\x19');
+    PTR_800d07f0->size = 4;
+    PTR_800d07f0[1] = (_G2AnimAlphaTable_Type)0x0;
+    PTR_800d07f0[2] = (_G2AnimAlphaTable_Type)0x80;
+    PTR_800d07f0[3] = (_G2AnimAlphaTable_Type)0x200;
+    PTR_800d07f0[4] = (_G2AnimAlphaTable_Type)0x1000;
+  }
+  if (PTR_800d07f4 == (_G2AnimAlphaTable_Type *)0x0) {
+    PTR_800d07f4 = (_G2AnimAlphaTable_Type *)MEMPACK_Malloc(0x12,'\x19');
+    PTR_800d07f4->size = 4;
+    PTR_800d07f4[1] = (_G2AnimAlphaTable_Type)0x0;
+    PTR_800d07f4[2] = (_G2AnimAlphaTable_Type)0xe00;
+    PTR_800d07f4[3] = (_G2AnimAlphaTable_Type)0xf80;
+    PTR_800d07f4[4] = (_G2AnimAlphaTable_Type)0x1000;
+  }
+  return;
 }
 
 
@@ -1184,8 +1488,26 @@ void G2EmulationInstanceToInstanceSwitchAnimation
                int Frames,int Mode)
 
 {
-                    /* WARNING: Subroutine does not return */
-  G2Instance_GetKeylist(host,NewAnim);
+  _G2AnimKeylist_Type *keylist;
+  _G2AnimSection_Type *section;
+  
+  section = (instance->anim).section + CurrentSection;
+  keylist = G2Instance_GetKeylist(host,NewAnim);
+  G2AnimSection_SetAlphaTable(section,(_G2AnimAlphaTable_Type *)0x0);
+  G2AnimSection_InterpToKeylistFrame(section,keylist,NewAnim,NewFrame,Frames * 0x640000 >> 0x10);
+  if (Mode == 0) {
+    G2AnimSection_SetPaused(section);
+  }
+  else {
+    G2AnimSection_SetUnpaused(section);
+    if (Mode == 2) {
+      G2AnimSection_SetLooping(section);
+    }
+    else {
+      G2AnimSection_SetNoLooping(section);
+    }
+  }
+  return;
 }
 
 
@@ -1213,8 +1535,26 @@ void G2EmulationInstanceSwitchAnimation
                (_Instance *instance,int CurrentSection,int NewAnim,int NewFrame,int Frames,int Mode)
 
 {
-                    /* WARNING: Subroutine does not return */
-  G2Instance_GetKeylist(instance,NewAnim);
+  _G2AnimKeylist_Type *keylist;
+  _G2AnimSection_Type *section;
+  
+  section = (instance->anim).section + CurrentSection;
+  keylist = G2Instance_GetKeylist(instance,NewAnim);
+  G2AnimSection_SetAlphaTable(section,(_G2AnimAlphaTable_Type *)0x0);
+  G2AnimSection_InterpToKeylistFrame(section,keylist,NewAnim,NewFrame,Frames * 0x640000 >> 0x10);
+  if (Mode == 0) {
+    G2AnimSection_SetPaused(section);
+  }
+  else {
+    G2AnimSection_SetUnpaused(section);
+    if (Mode == 2) {
+      G2AnimSection_SetLooping(section);
+    }
+    else {
+      G2AnimSection_SetNoLooping(section);
+    }
+  }
+  return;
 }
 
 
@@ -1243,9 +1583,9 @@ void G2EmulationInstanceSwitchAnimationAlpha
 
 {
   G2EmulationInstanceSwitchAnimation(instance,CurrentSection,NewAnim,NewFrame,Frames,Mode);
-                    /* WARNING: Subroutine does not return */
   G2AnimSection_SetAlphaTable
             ((instance->anim).section + (CurrentSection & 0xff),(&G2AlphaTables7)[AlphaTable]);
+  return;
 }
 
 
@@ -1302,9 +1642,9 @@ void G2EmulationSwitchAnimationAlpha
   p_Var1 = In->CharacterInstance;
   G2EmulationInstanceSwitchAnimation
             (In->CharacterInstance,CurrentSection,NewAnim,NewFrame,Frames,Mode);
-                    /* WARNING: Subroutine does not return */
   G2AnimSection_SetAlphaTable
             ((p_Var1->anim).section + (CurrentSection & 0xff),(&G2AlphaTables7)[AlphaTable]);
+  return;
 }
 
 
@@ -1337,14 +1677,41 @@ void G2EmulationSwitchAnimationSync
                (__CharacterState *In,int SlaveSectionID,int MasterSectionID,int Frames)
 
 {
+  ushort uVar1;
+  int iVar2;
+  int iVar3;
   _G2AnimKeylist_Type *keylist;
   _G2AnimSection_Type *section;
+  _G2AnimSection_Type *section_00;
+  __State *p_Var4;
   
-  section = (In->CharacterInstance->anim).section + (MasterSectionID & 0xff);
-  keylist = section->keylist;
-  G2AnimSection_GetKeyframeNumber(section);
-                    /* WARNING: Subroutine does not return */
-  G2AnimKeylist_GetKeyframeCount(keylist);
+  section_00 = (In->CharacterInstance->anim).section + (MasterSectionID & 0xff);
+  section = (In->CharacterInstance->anim).section + (SlaveSectionID & 0xff);
+  p_Var4 = In->SectionList + MasterSectionID;
+  keylist = section_00->keylist;
+  uVar1 = section_00->keylistID;
+  iVar2 = G2AnimSection_GetKeyframeNumber(section_00);
+  iVar3 = G2AnimKeylist_GetKeyframeCount(keylist);
+  G2AnimSection_SetAlphaTable(section,(_G2AnimAlphaTable_Type *)0x0);
+  G2AnimSection_InterpToKeylistFrame
+            (section,keylist,(uint)uVar1,(iVar2 + Frames) % iVar3,Frames * 0x640000 >> 0x10);
+  if ((section_00->flags & 2) == 0) {
+    G2AnimSection_SetNoLooping(section);
+  }
+  else {
+    G2AnimSection_SetLooping(section);
+  }
+  if ((section_00->flags & 1) == 0) {
+    G2AnimSection_SetUnpaused(section);
+  }
+  else {
+    G2AnimSection_SetPaused(section);
+  }
+  StateSwitchStateData
+            (In,SlaveSectionID,(TDRFuncPtr_StateSwitchStateData2NewProcess)p_Var4->Process,0);
+  In->SectionList[SlaveSectionID].Data1 = p_Var4->Data1;
+  In->SectionList[SlaveSectionID].Data2 = p_Var4->Data2;
+  return;
 }
 
 
@@ -1371,8 +1738,26 @@ void G2EmulationInstanceToInstanceSwitchAnimationCharacter
                (_Instance *instance,_Instance *host,int NewAnim,int NewFrame,int Frames,int Mode)
 
 {
-                    /* WARNING: Subroutine does not return */
-  G2Instance_GetKeylist(host,NewAnim);
+  _G2AnimKeylist_Type *keylist;
+  _G2Anim_Type *anim;
+  
+  keylist = G2Instance_GetKeylist(host,NewAnim);
+  anim = &instance->anim;
+  G2Anim_SetAlphaTable(anim,(_G2AnimAlphaTable_Type *)0x0);
+  G2Anim_InterpToKeylistFrame(anim,keylist,NewAnim,NewFrame,Frames * 0x640000 >> 0x10);
+  if (Mode == 0) {
+    G2Anim_SetPaused(anim);
+  }
+  else {
+    G2Anim_SetUnpaused(anim);
+    if (Mode == 2) {
+      G2Anim_SetLooping(anim);
+    }
+    else {
+      G2Anim_SetNoLooping(anim);
+    }
+  }
+  return;
 }
 
 
@@ -1400,11 +1785,31 @@ void G2EmulationSwitchAnimationCharacter
                (__CharacterState *In,int NewAnim,int NewFrame,int Frames,int Mode)
 
 {
+  _G2AnimKeylist_Type *keylist;
+  _Instance *instance;
+  _G2Anim_Type *anim;
+  
   if (NewAnim < 0) {
     NewAnim = 0;
   }
-                    /* WARNING: Subroutine does not return */
-  G2Instance_GetKeylist(In->CharacterInstance,NewAnim);
+  instance = In->CharacterInstance;
+  keylist = G2Instance_GetKeylist(instance,NewAnim);
+  anim = &instance->anim;
+  G2Anim_SetAlphaTable(anim,(_G2AnimAlphaTable_Type *)0x0);
+  G2Anim_InterpToKeylistFrame(anim,keylist,NewAnim,NewFrame,Frames * 0x640000 >> 0x10);
+  if (Mode == 0) {
+    G2Anim_SetPaused(anim);
+  }
+  else {
+    G2Anim_SetUnpaused(anim);
+    if (Mode == 2) {
+      G2Anim_SetLooping(anim);
+    }
+    else {
+      G2Anim_SetNoLooping(anim);
+    }
+  }
+  return;
 }
 
 
@@ -1422,8 +1827,9 @@ void G2EmulationSwitchAnimationCharacterAlpha
                (__CharacterState *In,int NewAnim,int NewFrame,int Frames,int Mode,int AlphaTable)
 
 {
-                    /* WARNING: Subroutine does not return */
   G2EmulationSwitchAnimationCharacter(In,NewAnim,NewFrame,Frames,Mode);
+  G2Anim_SetAlphaTable(&In->CharacterInstance->anim,(&G2AlphaTables7)[AlphaTable]);
+  return;
 }
 
 
@@ -1451,8 +1857,14 @@ void G2EmulationInstanceSetAnimation
                (_Instance *instance,int CurrentSection,int NewAnim,int NewFrame,int Frames)
 
 {
-                    /* WARNING: Subroutine does not return */
-  G2Instance_GetKeylist(instance,NewAnim);
+  _G2AnimKeylist_Type *keylist;
+  _G2AnimSection_Type *section;
+  
+  section = (instance->anim).section + (CurrentSection & 0xff);
+  keylist = G2Instance_GetKeylist(instance,NewAnim);
+  G2AnimSection_SetAlphaTable(section,(_G2AnimAlphaTable_Type *)0x0);
+  G2AnimSection_InterpToKeylistFrame(section,keylist,NewAnim,NewFrame,Frames * 0x640000 >> 0x10);
+  return;
 }
 
 
@@ -1473,8 +1885,8 @@ void G2EmulationSetAnimation
   if (NewAnim < 0) {
     NewAnim = 0;
   }
-                    /* WARNING: Subroutine does not return */
   G2EmulationInstanceSetAnimation(In->CharacterInstance,CurrentSection,NewAnim,NewFrame,Frames);
+  return;
 }
 
 
@@ -1504,11 +1916,18 @@ void G2EmulationInstanceSetMode(_Instance *instance,int CurrentSection,int Mode)
   
   section = (instance->anim).section + (CurrentSection & 0xff);
   if (Mode == 0) {
-                    /* WARNING: Subroutine does not return */
     G2AnimSection_SetPaused(section);
   }
-                    /* WARNING: Subroutine does not return */
-  G2AnimSection_SetUnpaused(section);
+  else {
+    G2AnimSection_SetUnpaused(section);
+    if (Mode == 1) {
+      G2AnimSection_SetNoLooping(section);
+    }
+    else {
+      G2AnimSection_SetLooping(section);
+    }
+  }
+  return;
 }
 
 
@@ -2007,9 +2426,13 @@ void StateSwitchStateDataDefault
                TDRFuncPtr_StateSwitchStateDataDefault2NewProcess NewProcess,int Data)
 
 {
-                    /* WARNING: Subroutine does not return */
+  _func_14 *p_Var1;
+  
+  p_Var1 = In->SectionList[CurrentSection].Process;
   StateSwitchStateData
             (In,CurrentSection,(TDRFuncPtr_StateSwitchStateData2NewProcess)NewProcess,Data);
+  (*p_Var1)(In,CurrentSection,0);
+  return;
 }
 
 
@@ -2071,8 +2494,13 @@ void StateSwitchStateData
   
   In_00 = &In->SectionList[CurrentSection].Event;
   PurgeMessageQueue(In_00);
-                    /* WARNING: Subroutine does not return */
   EnMessageQueueData(In_00,(int)&DAT_00100001,Data);
+  *(TDRFuncPtr_StateSwitchStateData2NewProcess *)&In->SectionList[CurrentSection].Process =
+       NewProcess;
+  (*NewProcess)(In,CurrentSection,0);
+  EnMessageQueueData(In_00,(int)&DAT_00100004,0);
+  EnMessageQueueData(In_00,(int)&DAT_00100004,0);
+  return;
 }
 
 
@@ -2100,9 +2528,15 @@ void StateSwitchStateCharacterData
                int Data)
 
 {
+  int CurrentSection;
+  
+  CurrentSection = 0;
   if (0 < In->TotalSections) {
-                    /* WARNING: Subroutine does not return */
-    StateSwitchStateData(In,0,(TDRFuncPtr_StateSwitchStateData2NewProcess)NewProcess,Data);
+    do {
+      StateSwitchStateData
+                (In,CurrentSection,(TDRFuncPtr_StateSwitchStateData2NewProcess)NewProcess,Data);
+      CurrentSection = CurrentSection + 1;
+    } while (CurrentSection < In->TotalSections);
   }
   return;
 }
@@ -2136,41 +2570,45 @@ void StateSwitchStateCharacterData
 void StateGovernState(__CharacterState *In,int Frames)
 
 {
-  _G2Bool_Enum _Var1;
-  int iVar2;
+  ushort uVar1;
+  _G2Bool_Enum _Var2;
   int iVar3;
+  int iVar4;
   _G2AnimSection_Type *section;
   _G2AnimKeylist_Type *keylist;
   _G2AnimSection_Type *section_00;
-  uint uVar4;
-  int iVar5;
+  uint uVar5;
   int iVar6;
+  int iVar7;
   
-  uVar4 = 1;
-  iVar6 = 0x124;
-  iVar5 = 8;
+  uVar5 = 1;
+  iVar7 = 0x124;
+  iVar6 = 8;
   do {
-    if (*(int *)((int)&In->CharacterInstance + iVar5) ==
-        *(int *)((int)&In->CharacterInstance + iVar6)) {
-      section = (In->CharacterInstance->anim).section + (uVar4 - 1 & 0xff);
-      section_00 = (In->CharacterInstance->anim).section + (uVar4 & 0xff);
+    if (*(int *)((int)&In->CharacterInstance + iVar6) ==
+        *(int *)((int)&In->CharacterInstance + iVar7)) {
+      section = (In->CharacterInstance->anim).section + (uVar5 - 1 & 0xff);
+      section_00 = (In->CharacterInstance->anim).section + (uVar5 & 0xff);
       if (((section->keylistID == section_00->keylistID) &&
-          (_Var1 = G2AnimSection_IsInInterpolation(section), _Var1 == G2FALSE)) &&
-         (_Var1 = G2AnimSection_IsInInterpolation(section_00), _Var1 == G2FALSE)) {
-        iVar2 = G2AnimSection_GetKeyframeNumber(section);
-        iVar3 = G2AnimSection_GetKeyframeNumber(section_00);
-        if (iVar2 != iVar3) {
+          (_Var2 = G2AnimSection_IsInInterpolation(section), _Var2 == G2FALSE)) &&
+         (_Var2 = G2AnimSection_IsInInterpolation(section_00), _Var2 == G2FALSE)) {
+        iVar3 = G2AnimSection_GetKeyframeNumber(section);
+        iVar4 = G2AnimSection_GetKeyframeNumber(section_00);
+        if (iVar3 != iVar4) {
           keylist = section->keylist;
-          G2AnimSection_GetKeyframeNumber(section);
-                    /* WARNING: Subroutine does not return */
-          G2AnimKeylist_GetKeyframeCount(keylist);
+          uVar1 = section->keylistID;
+          iVar3 = G2AnimSection_GetKeyframeNumber(section);
+          iVar4 = G2AnimKeylist_GetKeyframeCount(keylist);
+          G2AnimSection_InterpToKeylistFrame
+                    (section_00,keylist,(uint)uVar1,(iVar3 + Frames) % iVar4,
+                     Frames * 0x640000 >> 0x10);
         }
       }
     }
+    iVar7 = iVar7 + 0x11c;
+    uVar5 = uVar5 + 1;
     iVar6 = iVar6 + 0x11c;
-    uVar4 = uVar4 + 1;
-    iVar5 = iVar5 + 0x11c;
-  } while ((int)uVar4 < 3);
+  } while ((int)uVar5 < 3);
   return;
 }
 

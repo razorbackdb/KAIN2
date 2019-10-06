@@ -227,7 +227,7 @@ void start(void)
   __heapsize = &DAT_0011d5fc;
   __heapbase = &DAT_800de9fc;
   __ra_temp = unaff_retaddr;
-  InitHeap((char *)&DAT_800dea00,&DAT_0011d5fc);
+  InitHeap();
   uVar2 = 0x800b5710;
   main();
   trap(1);

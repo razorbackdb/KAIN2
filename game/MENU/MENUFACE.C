@@ -36,9 +36,37 @@
 void menuface_initialize(void)
 
 {
+  uint uVar1;
+  uint uVar2;
+  menuface_t *pmVar3;
+  int iVar4;
+  int iVar5;
+  char acStack168 [128];
+  
   if (hack_initialized == 0) {
-                    /* WARNING: Subroutine does not return */
-    MEMPACK_Malloc(0x180,'-');
+    FaceButtons = (_ButtonTexture *)MEMPACK_Malloc(0x180,'-');
+    iVar4 = 0;
+    if (FaceButtons != (_ButtonTexture *)0x0) {
+      pmVar3 = &MenuFaces;
+      iVar5 = 0;
+      do {
+        uVar2 = 0;
+        pmVar3->curFrame = -1;
+        pmVar3->transitionDir = '\0';
+        pmVar3->loaded = '\0';
+        do {
+          sprintf(acStack168,"\\kain2\\game\\psx\\frontend\\%s_%s.tim");
+          DRAW_LoadButtonByName(acStack168,FaceButtons + iVar5 + uVar2);
+          uVar1 = uVar2 & 0x1f;
+          uVar2 = uVar2 + 1;
+          pmVar3->loaded = pmVar3->loaded | (byte)(1 << uVar1);
+        } while ((int)uVar2 < 3);
+        pmVar3 = pmVar3 + 1;
+        iVar4 = iVar4 + 1;
+        iVar5 = iVar5 + 3;
+      } while (iVar4 < 8);
+      hack_initialized = 1;
+    }
   }
   return;
 }
@@ -95,8 +123,8 @@ void menuface_terminate(void)
       iVar4 = iVar4 + 1;
       iVar2 = iVar2 + 3;
     } while (iVar4 < 8);
-                    /* WARNING: Subroutine does not return */
     MEMPACK_Free((char *)FaceButtons);
+    hack_initialized = 0;
   }
   return;
 }
@@ -139,34 +167,44 @@ void MENUFACE_ChangeStateRandomly(int index)
 {
   uchar uVar1;
   uchar uVar2;
-  uchar *puVar3;
-  menuface_t *pmVar4;
+  int iVar3;
+  uchar *puVar4;
+  menuface_t *pmVar5;
   
   if (hack_initialized != 0) {
-    pmVar4 = &MenuFaces;
-    puVar3 = &MenuFaces.delay;
+    pmVar5 = &MenuFaces;
+    puVar4 = &MenuFaces.delay;
     do {
-      uVar1 = *puVar3 + -1;
-      if (*puVar3 == '\0') {
-        if (puVar3[-1] == '\0') {
-                    /* WARNING: Subroutine does not return */
-          rand();
+      uVar1 = *puVar4 + -1;
+      if (*puVar4 == '\0') {
+        if (puVar4[-1] == '\0') {
+          iVar3 = rand();
+          if (iVar3 == (iVar3 / 0x96) * 0x96) {
+            if (puVar4[-2] == -1) {
+              puVar4[-1] = '\x01';
+            }
+            else {
+              puVar4[-1] = -1;
+            }
+          }
         }
-        uVar2 = puVar3[-2] + puVar3[-1];
-        puVar3[-2] = uVar2;
-        uVar1 = 'd';
-        if (((int)(char)uVar2 == (uint)puVar3[-3] * 3 + -1) || ((int)(char)uVar2 == -1)) {
-          puVar3[-1] = '\0';
-          goto LAB_800b80ec;
+        else {
+          uVar2 = puVar4[-2] + puVar4[-1];
+          puVar4[-2] = uVar2;
+          uVar1 = 'd';
+          if (((int)(char)uVar2 == (uint)puVar4[-3] * 3 + -1) || ((int)(char)uVar2 == -1)) {
+            puVar4[-1] = '\0';
+            goto LAB_800b80ec;
+          }
         }
       }
       else {
 LAB_800b80ec:
-        *puVar3 = uVar1;
+        *puVar4 = uVar1;
       }
-      pmVar4 = pmVar4 + 1;
-      puVar3 = puVar3 + 0xc;
-    } while (pmVar4 < &hack_initialized);
+      pmVar5 = pmVar5 + 1;
+      puVar4 = puVar4 + 0xc;
+    } while (pmVar5 < &hack_initialized);
   }
   return;
 }

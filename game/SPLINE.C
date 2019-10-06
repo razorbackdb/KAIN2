@@ -143,22 +143,33 @@ ushort SplineGetFrameNumber(Spline *spline,SplineDef *def)
 
 {
   ushort uVar1;
+  SplineKey *pSVar2;
+  short sVar3;
+  short sVar4;
   uint local_10;
   long local_c;
   
-  if ((spline != (Spline *)0x0) && (def != (SplineDef *)0x0)) {
-    local_c = def->fracCurr;
-    _uVar1 = 0;
-    uVar1 = 0;
-    if ((int)def->currkey != 0) {
-      do {
-        _uVar1 = _uVar1 + 1;
-        uVar1 = (ushort)_uVar1;
-      } while (_uVar1 < (uint)(int)def->currkey);
+  if (spline != (Spline *)0x0) {
+    sVar3 = 0;
+    if (def != (SplineDef *)0x0) {
+      pSVar2 = spline->key;
+      local_c = def->fracCurr;
+      _uVar1 = 0;
+      uVar1 = 0;
+      sVar4 = 0;
+      if ((int)def->currkey != 0) {
+        do {
+          _uVar1 = _uVar1 + 1;
+          uVar1 = (ushort)_uVar1;
+          sVar3 = sVar4 + pSVar2->count;
+          pSVar2 = pSVar2 + 1;
+          sVar4 = sVar3;
+        } while (_uVar1 < (uint)(int)def->currkey);
+      }
+      local_10 = *(uint *)def & 0xffff0000 | (uint)uVar1;
+      SplineSetDefDenom(spline,(SplineDef *)&local_10,0);
+      return sVar3 + (short)(local_c >> 0xc);
     }
-    local_10 = *(uint *)def & 0xffff0000 | (uint)uVar1;
-                    /* WARNING: Subroutine does not return */
-    SplineSetDefDenom(spline,(SplineDef *)&local_10,0);
   }
   return 0xffff;
 }
@@ -419,9 +430,8 @@ _SVector * SplineGetNextPoint(Spline *spline,SplineDef *def)
   ulong uVar1;
   
   uVar1 = SplineGetNext(spline,def);
-  if (uVar1 != 0) {
-                    /* WARNING: Subroutine does not return */
-    SplineGetData(spline,def,&point_53);
+  if ((uVar1 != 0) && (uVar1 = SplineGetData(spline,def,&point_53), uVar1 != 0)) {
+    return (_SVector *)&point_53;
   }
   return (_SVector *)0x0;
 }
@@ -452,9 +462,8 @@ _SVector * SplineGetPreviousPoint(Spline *spline,SplineDef *def)
   ulong uVar1;
   
   uVar1 = SplineGetPrev(spline,def);
-  if (uVar1 != 0) {
-                    /* WARNING: Subroutine does not return */
-    SplineGetData(spline,def,&point_56);
+  if ((uVar1 != 0) && (uVar1 = SplineGetData(spline,def,&point_56), uVar1 != 0)) {
+    return (_SVector *)&point_56;
   }
   return (_SVector *)0x0;
 }
@@ -492,107 +501,131 @@ _SVector * SplineGetPreviousPoint(Spline *spline,SplineDef *def)
 	/* end block 2 */
 	// End Line: 901
 
-/* WARNING: Removing unreachable block (ram,0x80041f4c) */
-
 _SVector * SplineGetNearestPoint(Spline *spline,_SVector *point,SplineDef *def)
 
 {
-  bool bVar1;
+  int iVar1;
   int iVar2;
-  int iVar3;
+  SplineKey *pSVar3;
   int iVar4;
   int iVar5;
-  SplineKey *pSVar6;
-  int iVar7;
-  short *psVar8;
+  short *psVar6;
   undefined4 in_t2;
+  undefined4 uVar7;
   undefined4 in_t3;
-  int iVar9;
-  short sVar10;
+  int iVar8;
+  short sVar9;
+  int iVar10;
   int iVar11;
   int iVar12;
-  SplineDef SStack64;
-  int iStack56;
-  uint uStack52;
-  SplineDef *pSStack48;
+  int iVar13;
+  SplineDef local_40;
+  int local_38;
+  uint local_34;
+  SplineDef *local_30;
   
-  iStack56 = 0x7fffffff;
-  iVar9 = 0;
-  iVar11 = 0;
+  iVar12 = 0x7fffffff;
+  iVar8 = 0;
+  iVar10 = 0;
   if (0 < spline->numkeys) {
-    psVar8 = &(spline->key->point).z;
+    psVar6 = &(spline->key->point).z;
     do {
-      setCopReg(2,def,(int)point->x - (int)psVar8[-2]);
-      setCopReg(2,in_t2,(int)point->y - (int)psVar8[-1]);
-      setCopReg(2,in_t3,(int)point->z - (int)*psVar8);
+      setCopReg(2,def,(int)point->x - (int)psVar6[-2]);
+      setCopReg(2,in_t2,(int)point->y - (int)psVar6[-1]);
+      setCopReg(2,in_t3,(int)point->z - (int)*psVar6);
       copFunction(2,0xa00428);
-      iVar2 = getCopReg(2,0x19);
-      iVar3 = getCopReg(2,0x1a);
-      iVar7 = getCopReg(2,0x1b);
-      iVar7 = iVar2 + iVar3 + iVar7;
-      if (iVar7 < iStack56) {
-        iVar11 = iVar9;
-        iStack56 = iVar7;
+      iVar13 = getCopReg(2,0x19);
+      iVar1 = getCopReg(2,0x1a);
+      iVar4 = getCopReg(2,0x1b);
+      iVar4 = iVar13 + iVar1 + iVar4;
+      if (iVar4 < iVar12) {
+        iVar10 = iVar8;
+        iVar12 = iVar4;
       }
-      iVar9 = iVar9 + 1;
-      psVar8 = psVar8 + 0x10;
-    } while (iVar9 < spline->numkeys);
+      iVar8 = iVar8 + 1;
+      psVar6 = psVar6 + 0x10;
+    } while (iVar8 < spline->numkeys);
   }
-  if (iVar11 == 0) {
-    iVar12 = 1;
+  if (iVar10 == 0) {
+    iVar11 = 1;
   }
   else {
-    if (iVar11 == (int)spline->numkeys + -1) {
-      iVar12 = (int)spline->numkeys + -2;
+    if (iVar10 == (int)spline->numkeys + -1) {
+      iVar11 = (int)spline->numkeys + -2;
     }
     else {
-      pSVar6 = spline->key + iVar11;
-      setCopReg(2,def,(int)point->x - (int)pSVar6[-1].point.x);
-      setCopReg(2,in_t2,(int)point->y - (int)pSVar6[-1].point.y);
-      setCopReg(2,in_t3,(int)point->z - (int)pSVar6[-1].point.z);
+      pSVar3 = spline->key + iVar10;
+      setCopReg(2,def,(int)point->x - (int)pSVar3[-1].point.x);
+      setCopReg(2,in_t2,(int)point->y - (int)pSVar3[-1].point.y);
+      setCopReg(2,in_t3,(int)point->z - (int)pSVar3[-1].point.z);
       copFunction(2,0xa00428);
-      iVar9 = getCopReg(2,0x19);
-      iVar2 = getCopReg(2,0x1a);
-      iVar3 = getCopReg(2,0x1b);
-      pSVar6 = spline->key + iVar11;
-      setCopReg(2,def,(int)point->x - (int)pSVar6[1].point.x);
-      setCopReg(2,in_t2,(int)point->y - (int)pSVar6[1].point.y);
-      setCopReg(2,in_t3,(int)point->z - (int)pSVar6[1].point.z);
+      iVar8 = getCopReg(2,0x19);
+      iVar13 = getCopReg(2,0x1a);
+      iVar1 = getCopReg(2,0x1b);
+      pSVar3 = spline->key + iVar10;
+      setCopReg(2,def,(int)point->x - (int)pSVar3[1].point.x);
+      setCopReg(2,in_t2,(int)point->y - (int)pSVar3[1].point.y);
+      setCopReg(2,in_t3,(int)point->z - (int)pSVar3[1].point.z);
       copFunction(2,0xa00428);
-      iVar7 = getCopReg(2,0x19);
-      iVar4 = getCopReg(2,0x1a);
-      iVar5 = getCopReg(2,0x1b);
-      iVar12 = iVar11 + 1;
-      if (iVar9 + iVar2 + iVar3 <= iVar7 + iVar4 + iVar5) {
-        iVar12 = iVar11 + -1;
+      iVar4 = getCopReg(2,0x19);
+      iVar5 = getCopReg(2,0x1a);
+      iVar2 = getCopReg(2,0x1b);
+      iVar11 = iVar10 + 1;
+      if (iVar8 + iVar13 + iVar1 <= iVar4 + iVar5 + iVar2) {
+        iVar11 = iVar10 + -1;
       }
     }
   }
-  bVar1 = iVar12 < iVar11;
-  sVar10 = (short)iVar11;
-  SStack64.currkey = sVar10;
-  if (bVar1) {
-    SStack64.currkey = (short)iVar12;
+  uVar7 = 1;
+  sVar9 = (short)iVar10;
+  local_40.currkey = sVar9;
+  if (iVar11 < iVar10) {
+    local_40.currkey = (short)iVar11;
   }
-  uStack52 = (uint)bVar1;
-  SStack64.fracCurr = 0;
-  SStack64.denomFlag = 0;
-  if (0 < spline->key[SStack64.currkey].count) {
-    pSStack48 = def;
-                    /* WARNING: Subroutine does not return */
-    SplineGetData(spline,&SStack64,&dpoint_59);
+  local_34 = (uint)(iVar11 < iVar10);
+  iVar8 = 0;
+  local_40.fracCurr = 0;
+  iVar13 = (int)spline->key[local_40.currkey].count;
+  iVar10 = 0;
+  local_40.denomFlag = 0;
+  local_38 = iVar12;
+  if (0 < iVar13) {
+    do {
+      local_30 = def;
+      SplineGetData(spline,&local_40,&dpoint_59);
+      local_40.fracCurr = local_40.fracCurr + 0x1000;
+      setCopReg(2,def,(int)point->x - (int)dpoint_59);
+      setCopReg(2,uVar7,(int)point->y - (int)DAT_800d2662);
+      setCopReg(2,in_t3,(int)point->z - (int)DAT_800d2664);
+      copFunction(2,0xa00428);
+      iVar1 = getCopReg(2,0x19);
+      iVar4 = getCopReg(2,0x1a);
+      iVar5 = getCopReg(2,0x1b);
+      iVar5 = iVar1 + iVar4 + iVar5;
+      if (iVar5 < iVar12) {
+        iVar10 = iVar8;
+        iVar12 = iVar5;
+      }
+      iVar8 = iVar8 + 1;
+      def = local_30;
+    } while (iVar8 < iVar13);
   }
-  if (bVar1) {
-    def->currkey = sVar10;
-    def->fracCurr = 0;
+  if (local_34 == 0) {
+    def->currkey = sVar9;
   }
   else {
-    def->currkey = sVar10;
-    def->fracCurr = 0;
+    if (local_38 <= iVar12) {
+      def->currkey = sVar9;
+      def->fracCurr = 0;
+      goto LAB_80041f5c;
+    }
+    def->currkey = (short)iVar11;
   }
-                    /* WARNING: Subroutine does not return */
+  def->fracCurr = iVar10 << 0xc;
+LAB_80041f5c:
   def->denomFlag = 0;
   SplineGetData(spline,def,&dpoint_59);
+  return (_SVector *)&dpoint_59;
 }
 
 
@@ -648,12 +681,71 @@ _SVector * SplineGetNearestPoint(Spline *spline,_SVector *point,SplineDef *def)
 ulong SplineGetData(Spline *spline,SplineDef *def,void *p)
 
 {
-  if ((((spline != (Spline *)0x0) && (def != (SplineDef *)0x0)) && (def->currkey < spline->numkeys))
-     && (-1 < def->currkey)) {
-                    /* WARNING: Subroutine does not return */
-    SplineSetDefDenom(spline,def,0);
+  short sVar1;
+  short sVar2;
+  bool bVar3;
+  int iVar4;
+  short *psVar5;
+  int iVar6;
+  SplineKey *pSVar7;
+  int iVar8;
+  ulong uVar9;
+  ulong uVar10;
+  undefined4 local_28;
+  undefined4 local_24;
+  undefined4 local_20;
+  undefined4 local_1c;
+  
+  uVar9 = 0;
+  uVar10 = uVar9;
+  if ((spline != (Spline *)0x0) && (uVar10 = 0, def != (SplineDef *)0x0)) {
+    bVar3 = spline->type != '\x01';
+    uVar10 = uVar9;
+    if ((def->currkey < spline->numkeys) && (-1 < def->currkey)) {
+      SplineSetDefDenom(spline,def,0);
+      uVar10 = 1;
+      if (spline->type == '\x01') {
+        sVar1 = (&spline->key->count)[(int)def->currkey * 5];
+      }
+      else {
+        sVar1 = spline->key[def->currkey].count;
+      }
+      iVar6 = (int)sVar1;
+      if ((iVar6 == 0) || (iVar4 = def->fracCurr, iVar4 == 0)) {
+        if (bVar3) {
+          pSVar7 = spline->key + def->currkey;
+          sVar1 = (pSVar7->point).y;
+          sVar2 = (pSVar7->point).z;
+          *(short *)p = (pSVar7->point).x;
+          *(short *)((int)p + 2) = sVar1;
+          *(short *)((int)p + 4) = sVar2;
+        }
+        else {
+          psVar5 = &spline->key->count + (int)def->currkey * 5;
+          local_28 = *(undefined4 *)(psVar5 + 1);
+          local_24 = *(undefined4 *)(psVar5 + 3);
+        }
+      }
+      else {
+        if (bVar3) {
+          _SplineS2Pos((vecS *)p,(iVar4 << 3) / iVar6,spline->key + def->currkey,
+                       spline->key + def->currkey + 1);
+        }
+        else {
+          iVar8 = (int)def->currkey * 10;
+          G2Quat_Slerp_VM(iVar4 / iVar6,(_G2Quat_Type *)((int)&spline->key->point + iVar8),
+                          (_G2Quat_Type *)((int)&(spline->key->dd).y + iVar8),
+                          (_G2Quat_Type *)&local_28,0);
+        }
+      }
+      if (!bVar3) {
+        G2Quat_ToEuler((_G2Quat_Type *)&local_28,(_G2EulerAngles_Type *)&local_20,0x15);
+        *(undefined4 *)p = local_20;
+        *(undefined4 *)((int)p + 4) = local_1c;
+      }
+    }
   }
-  return 0;
+  return uVar10;
 }
 
 
@@ -688,12 +780,38 @@ ulong SplineGetData(Spline *spline,SplineDef *def,void *p)
 ulong SplineGetQuatData(Spline *spline,SplineDef *def,void *p)
 
 {
-  if ((((spline != (Spline *)0x0) && (def != (SplineDef *)0x0)) && (def->currkey < spline->numkeys))
-     && (-1 < def->currkey)) {
-                    /* WARNING: Subroutine does not return */
-    SplineSetDefDenom(spline,def,0);
+  short *psVar1;
+  undefined4 local_20;
+  undefined4 local_1c;
+  
+  if (spline == (Spline *)0x0) {
+    return 0;
   }
-  return 0;
+  if (def == (SplineDef *)0x0) {
+    return 0;
+  }
+  if (spline->numkeys <= def->currkey) {
+    return 0;
+  }
+  if (def->currkey < 0) {
+    return 0;
+  }
+  SplineSetDefDenom(spline,def,0);
+  psVar1 = &spline->key->count + (int)def->currkey * 5;
+  if ((int)*psVar1 != 0) {
+    if (def->fracCurr != 0) {
+      G2Quat_Slerp_VM(def->fracCurr / (int)*psVar1,(_G2Quat_Type *)(psVar1 + 1),
+                      (_G2Quat_Type *)(psVar1 + 6),(_G2Quat_Type *)&local_20,0);
+      goto LAB_800422b0;
+    }
+  }
+  psVar1 = &spline->key->count + (int)def->currkey * 5;
+  local_20 = *(undefined4 *)(psVar1 + 1);
+  local_1c = *(undefined4 *)(psVar1 + 3);
+LAB_800422b0:
+  *(undefined4 *)p = local_20;
+  *(undefined4 *)((int)p + 4) = local_1c;
+  return 1;
 }
 
 
@@ -720,12 +838,46 @@ ulong SplineGetQuatData(Spline *spline,SplineDef *def,void *p)
 ulong SplineGetNext(Spline *spline,SplineDef *def)
 
 {
-  if (((spline != (Spline *)0x0) && (def != (SplineDef *)0x0)) && (def->currkey < spline->numkeys))
-  {
-                    /* WARNING: Subroutine does not return */
-    SplineSetDefDenom(spline,def,0);
+  short sVar1;
+  SplineKey *pSVar2;
+  int iVar3;
+  ulong uVar4;
+  
+  uVar4 = 0;
+  if ((spline != (Spline *)0x0) && (uVar4 = 0, def != (SplineDef *)0x0)) {
+    iVar3 = (int)def->currkey;
+    uVar4 = 0;
+    if (iVar3 < spline->numkeys) {
+      if (spline->type == '\x01') {
+        pSVar2 = spline->key;
+        iVar3 = iVar3 * 10;
+      }
+      else {
+        pSVar2 = spline->key;
+        iVar3 = iVar3 << 5;
+      }
+      sVar1 = *(short *)((int)&pSVar2->count + iVar3);
+      SplineSetDefDenom(spline,def,0);
+      iVar3 = def->fracCurr + 0x1000;
+      def->fracCurr = iVar3;
+      uVar4 = 1;
+      if ((int)sVar1 <= iVar3 * 0x10 >> 0x10) {
+        def->fracCurr = 0;
+        def->currkey = def->currkey + 1;
+        uVar4 = 1;
+        if ((int)spline->numkeys + -1 < (int)def->currkey) {
+          uVar4 = 0;
+          if ((*(uint *)&spline->numkeys & 0x6000000) == 0) {
+            def->currkey = spline->numkeys + -1;
+          }
+          else {
+            def->currkey = 0;
+          }
+        }
+      }
+    }
   }
-  return 0;
+  return uVar4;
 }
 
 
@@ -753,11 +905,49 @@ ulong SplineGetNext(Spline *spline,SplineDef *def)
 ulong SplineGetPrev(Spline *spline,SplineDef *def)
 
 {
-  if ((spline != (Spline *)0x0) && (def != (SplineDef *)0x0)) {
-                    /* WARNING: Subroutine does not return */
-    SplineSetDefDenom(spline,def,0);
+  short sVar1;
+  bool bVar2;
+  ushort uVar3;
+  int iVar4;
+  
+  if (spline == (Spline *)0x0) {
+    return 0;
   }
-  return 0;
+  if (def == (SplineDef *)0x0) {
+    return 0;
+  }
+  SplineSetDefDenom(spline,def,0);
+  bVar2 = spline->type != '\x01';
+  if (spline->numkeys <= def->currkey) {
+    return 0;
+  }
+  if (0x1000 < def->fracCurr) {
+    iVar4 = def->fracCurr + -0x1000;
+    goto LAB_80042518;
+  }
+  uVar3 = def->currkey - 1;
+  if (def->currkey < 1) {
+    if ((*(uint *)&spline->numkeys & 0x6000000) == 0) {
+      def->currkey = 0;
+      def->fracCurr = 0;
+      return 0;
+    }
+    uVar3 = spline->numkeys - 2;
+    def->currkey = uVar3;
+    if (bVar2) goto LAB_800424fc;
+LAB_800424d0:
+    sVar1 = (&spline->key->count)[(int)(short)uVar3 * 5];
+  }
+  else {
+    def->currkey = uVar3;
+    if (!bVar2) goto LAB_800424d0;
+LAB_800424fc:
+    sVar1 = *(short *)((int)&spline->key->count + ((int)((uint)uVar3 << 0x10) >> 0xb));
+  }
+  iVar4 = ((int)sVar1 + -1) * 0x1000;
+LAB_80042518:
+  def->fracCurr = iVar4;
+  return 1;
 }
 
 
@@ -786,24 +976,72 @@ ulong SplineGetOffsetNext(Spline *spline,SplineDef *def,long fracOffset)
 
 {
   short sVar1;
-  ulong uVar2;
-  undefined1 in_a3;
+  bool bVar2;
+  int iVar3;
+  SplineKey *pSVar4;
+  int iVar5;
+  ulong uVar6;
   
-  if ((spline == (Spline *)0x0) || (def == (SplineDef *)0x0)) {
-    return 0;
-  }
-  sVar1 = def->currkey;
-  if ((int)spline->numkeys <= (int)sVar1) {
-                    /* WARNING: Subroutine does not return */
+  if (spline != (Spline *)0x0) {
+    if (def == (SplineDef *)0x0) {
+      return 0;
+    }
+    iVar5 = (int)def->currkey;
+    bVar2 = spline->type != '\x01';
+    if (iVar5 < spline->numkeys) {
+      uVar6 = 1;
+      if (bVar2) {
+        pSVar4 = spline->key;
+        iVar5 = iVar5 << 5;
+      }
+      else {
+        pSVar4 = spline->key;
+        iVar5 = iVar5 * 10;
+      }
+      iVar5 = (int)*(short *)((int)&pSVar4->count + iVar5);
+      if (iVar5 < 1) {
+        iVar5 = 1;
+      }
+      SplineSetDefDenom(spline,def,0);
+      iVar3 = def->fracCurr + fracOffset;
+      def->fracCurr = iVar3;
+      if (iVar3 >> 0xc <= iVar5) {
+        return 1;
+      }
+      do {
+        def->currkey = def->currkey + 1;
+        def->fracCurr = def->fracCurr + iVar5 * -0x1000;
+        if ((int)spline->numkeys + -1 < (int)def->currkey) {
+          if ((*(uint *)&spline->numkeys & 0x6000000) == 0) {
+            def->currkey = spline->numkeys + -1;
+            uVar6 = 0;
+          }
+          else {
+            def->currkey = 0;
+          }
+          if ((int)def->currkey <= (int)spline->numkeys + -1) goto LAB_80042674;
+        }
+        else {
+LAB_80042674:
+          if (bVar2) {
+            sVar1 = spline->key[def->currkey].count;
+          }
+          else {
+            sVar1 = (&spline->key->count)[(int)def->currkey * 5];
+          }
+          iVar5 = (int)sVar1;
+          if (iVar5 < 1) {
+            iVar5 = 1;
+          }
+        }
+        if (def->fracCurr >> 0xc <= iVar5) {
+          return uVar6;
+        }
+      } while( true );
+    }
     printf("def->currkey=%d spline->numkeys=%d\n");
   }
-  if (spline->type == '\x01') {
-    uVar2 = (int)sVar1 * 10;
-    FX_AniTexSetup((char)spline,(char)sVar1,(char)spline->numkeys,in_a3);
-    return uVar2;
-  }
-                    /* WARNING: Subroutine does not return */
-  SplineSetDefDenom(spline,def,0);
+  return 0;
 }
 
 
@@ -831,11 +1069,53 @@ ulong SplineGetOffsetNext(Spline *spline,SplineDef *def,long fracOffset)
 ulong SplineGetOffsetPrev(Spline *spline,SplineDef *def,long fracOffset)
 
 {
-  if ((spline != (Spline *)0x0) && (def != (SplineDef *)0x0)) {
-                    /* WARNING: Subroutine does not return */
+  short sVar1;
+  bool bVar2;
+  ushort uVar3;
+  int iVar4;
+  ulong uVar5;
+  
+  uVar5 = 0;
+  if ((spline != (Spline *)0x0) && (uVar5 = 0, def != (SplineDef *)0x0)) {
     SplineSetDefDenom(spline,def,0);
+    bVar2 = spline->type == '\x01';
+    uVar5 = 0;
+    if (def->currkey < spline->numkeys) {
+      uVar5 = 1;
+      iVar4 = def->fracCurr - fracOffset;
+      def->fracCurr = iVar4;
+      while (iVar4 < 0) {
+        uVar3 = def->currkey - 1;
+        if (def->currkey < 1) {
+          if ((*(uint *)&spline->numkeys & 0x6000000) != 0) {
+            uVar3 = spline->numkeys - 1;
+            def->currkey = uVar3;
+            if (bVar2) goto LAB_80042804;
+LAB_80042830:
+            sVar1 = *(short *)((int)&spline->key->count + ((int)((uint)uVar3 << 0x10) >> 0xb));
+            goto code_r0x80042844;
+          }
+          uVar5 = 0;
+          def->currkey = 0;
+          def->fracCurr = 0;
+        }
+        else {
+          def->currkey = uVar3;
+          if (!bVar2) goto LAB_80042830;
+LAB_80042804:
+          sVar1 = (&spline->key->count)[(int)(short)uVar3 * 5];
+code_r0x80042844:
+          iVar4 = (int)sVar1;
+          if (iVar4 < 1) {
+            iVar4 = 1;
+          }
+          def->fracCurr = def->fracCurr + iVar4 * 0x1000;
+        }
+        iVar4 = def->fracCurr;
+      }
+    }
   }
-  return 0;
+  return uVar5;
 }
 
 
@@ -864,9 +1144,8 @@ _SVector * SplineGetOffsetNextPoint(Spline *spline,SplineDef *def,long offset)
   ulong uVar1;
   
   uVar1 = SplineGetOffsetNext(spline,def,offset);
-  if (uVar1 != 0) {
-                    /* WARNING: Subroutine does not return */
-    SplineGetData(spline,def,&point_77);
+  if ((uVar1 != 0) && (uVar1 = SplineGetData(spline,def,&point_77), uVar1 != 0)) {
+    return (_SVector *)&point_77;
   }
   return (_SVector *)0x0;
 }
@@ -897,9 +1176,8 @@ _SVector * SplineGetOffsetPreviousPoint(Spline *spline,SplineDef *def,long offse
   ulong uVar1;
   
   uVar1 = SplineGetOffsetPrev(spline,def,offset);
-  if (uVar1 != 0) {
-                    /* WARNING: Subroutine does not return */
-    SplineGetData(spline,def,&point_80);
+  if ((uVar1 != 0) && (uVar1 = SplineGetData(spline,def,&point_80), uVar1 != 0)) {
+    return (_SVector *)&point_80;
   }
   return (_SVector *)0x0;
 }

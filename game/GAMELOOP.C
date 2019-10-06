@@ -16,8 +16,24 @@
 void GAMELOOP_AllocStaticMemory(void)
 
 {
-                    /* WARNING: Subroutine does not return */
-  MEMPACK_Malloc(0x10c,'\x06');
+  instanceList = (_InstanceList *)MEMPACK_Malloc(0x10c,'\x06');
+  instancePool = (_InstancePool *)MEMPACK_Malloc((ulong)&DAT_00009bac,'\x06');
+  gOt2 = (ulong **)MEMPACK_Malloc(0x34e18,'\x06');
+  PTR_800d1d1c = gOt2 + 0xc00;
+  primPool2 = (_PrimPool *)(gOt2 + 0x1800);
+  PTR_800d1d24 = (_PrimPool *)(gOt2 + 0x75c3);
+  primBase = (char *)gOt2;
+  gLightInfo = (LightInfo *)MEMPACK_Malloc(0x47c,'\x06');
+  memset(gLightInfo,0,0x47c);
+  gPolytopeList = (_PolytopeList *)MEMPACK_Malloc((ulong)&DAT_000018c0,'\x06');
+  gVertexPool = (_VertexPool *)gPolytopeList;
+  gFXT = (_FXTracker *)MEMPACK_Malloc((ulong)&DAT_000079a8,'\x06');
+  fxTracker = gFXT;
+  planningPool = MEMPACK_Malloc(3000,'\x06');
+  enemyPlanPool = MEMPACK_Malloc(1000,'\x06');
+  GlobalObjects = (_ObjectTracker *)MEMPACK_Malloc(0x6c0,'\x06');
+  G2Anim_Install();
+  return;
 }
 
 
@@ -143,6 +159,8 @@ void GAMELOOP_ResetGameStates(void)
 		// Start line: 845
 	/* end block 2 */
 	// End Line: 846
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void GAMELOOP_ClearGameTracker(void)
 
@@ -338,14 +356,18 @@ int GAMELOOP_GetTimeOfDayIdx(int timeOfDay)
 	/* end block 2 */
 	// End Line: 1886
 
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
 int GAMELOOP_WaitForLoad(void)
 
 {
+  int iVar1;
+  
   if ((gameTrackerX.debugFlags & 0x80000U) != 0) {
     VOICEXA_Tick();
   }
-                    /* WARNING: Subroutine does not return */
-  STREAM_PollLoadQueue();
+  iVar1 = STREAM_PollLoadQueue();
+  return iVar1;
 }
 
 
@@ -400,8 +422,60 @@ int GAMELOOP_WaitForLoad(void)
 _StreamUnit * LoadLevels(char *baseAreaName,GameTracker *gameTracker)
 
 {
-                    /* WARNING: Subroutine does not return */
-  strlen("");
+  short sVar1;
+  size_t sVar2;
+  _StreamUnit *streamUnit;
+  int iVar3;
+  int iVar4;
+  Level *pLVar5;
+  _BSPNode *p_Var6;
+  _MultiSignal *p_Var7;
+  BSPTree *pBVar8;
+  _SVector local_20;
+  
+  sVar2 = strlen("");
+  if (sVar2 != 0) {
+    STREAM_AbortAreaLoad("");
+  }
+  strcpy("",baseAreaName);
+  LOAD_ChangeDirectory(baseAreaName);
+  streamUnit = STREAM_LoadLevel(gameTracker,baseAreaName,(StreamUnitPortal *)0x0,0);
+  if (streamUnit->used == 1) {
+    DRAW_LoadingMessage();
+    sVar1 = streamUnit->used;
+    while (sVar1 == 1) {
+      GAMELOOP_WaitForLoad();
+      sVar1 = streamUnit->used;
+    }
+    STREAM_NextLoadFromHead();
+    STREAM_LoadMainVram(gameTracker,baseAreaName,streamUnit);
+    iVar3 = GAMELOOP_WaitForLoad();
+    do {
+      iVar4 = GAMELOOP_WaitForLoad();
+      if (iVar4 == 0) break;
+    } while (iVar3 + -1 <= iVar4);
+  }
+  else {
+    STREAM_LoadMainVram(gameTracker,baseAreaName,streamUnit);
+  }
+  pLVar5 = streamUnit->level;
+  p_Var7 = pLVar5->startUnitMainSignal;
+  if (p_Var7 != (_MultiSignal *)0x0) {
+    if (gameTracker->playerInstance != (_Instance *)0x0) {
+      p_Var7->flags = p_Var7->flags | 1;
+      SIGNAL_HandleSignal(gameTracker->playerInstance,
+                          streamUnit->level->startUnitMainSignal->signalList,0);
+      EVENT_AddSignalToReset(streamUnit->level->startUnitMainSignal);
+    }
+    pLVar5 = streamUnit->level;
+  }
+  pBVar8 = pLVar5->terrain->BSPTreeArray;
+  p_Var6 = pBVar8->bspRoot;
+  local_20.x = -((p_Var6->sphere).position.x + (pBVar8->globalOffset).x);
+  local_20.y = -((p_Var6->sphere).position.y + (pBVar8->globalOffset).y);
+  local_20.z = -((p_Var6->sphere).position.z + (pBVar8->globalOffset).z);
+  PreloadAllConnectedUnits(gameTracker,streamUnit,&local_20);
+  return streamUnit;
 }
 
 
@@ -485,6 +559,13 @@ void GAMELOOP_LevelLoadAndInit(char *baseAreaName,GameTracker *gameTracker)
 {
   _InstanceList *list;
   _InstancePool *pool;
+  _StreamUnit *p_Var1;
+  int iVar2;
+  int iVar3;
+  _Instance *p_Var4;
+  _MultiSignal *p_Var5;
+  Level *pLVar6;
+  int iVar7;
   
   G2Anim_ResetInternalState();
   pool = instancePool;
@@ -499,9 +580,70 @@ void GAMELOOP_LevelLoadAndInit(char *baseAreaName,GameTracker *gameTracker)
   WARPGATE_Init();
   DRAW_InitShadow();
   GAMELOOP_InitStandardObjects();
-  LoadLevels(baseAreaName,gameTracker);
-                    /* WARNING: Subroutine does not return */
-  STREAM_PollLoadQueue();
+  p_Var1 = LoadLevels(baseAreaName,gameTracker);
+  do {
+    iVar2 = STREAM_PollLoadQueue();
+  } while (iVar2 != 0);
+  gameTracker->introFX = (void *)0x0;
+  pLVar6 = p_Var1->level;
+  RENDER_currentStreamUnitID = *(short *)&gameTracker->StreamUnitID;
+  fontsObject = (Object *)(void *)0x0;
+  iVar2 = 0;
+  if (0 < pLVar6->numIntros) {
+    iVar7 = 0;
+    do {
+      iVar3 = strcmpi(pLVar6->introList->name + iVar7,"raziel");
+      if (iVar3 == 0) {
+        INSTANCE_IntroduceInstance
+                  ((Intro *)(p_Var1->level->introList->name + iVar7),*(short *)&p_Var1->StreamUnitID
+                  );
+        break;
+      }
+      pLVar6 = p_Var1->level;
+      iVar2 = iVar2 + 1;
+      iVar7 = iVar7 + 0x4c;
+    } while (iVar2 < pLVar6->numIntros);
+  }
+  gameTracker->playerInstance->data = gameTracker->playerInstance->object->data;
+  CAMERA_SetInstanceFocus(&theCamera,gameTracker->playerInstance);
+  p_Var4 = gameTracker->playerInstance;
+  theCamera.core.position.x = (p_Var4->position).x;
+  theCamera.core.position.y = (p_Var4->position).y;
+  theCamera.core.position.z = (p_Var4->position).z;
+  SetFogNearFar((uint)p_Var1->level->fogNear,(uint)p_Var1->level->fogFar,0x140);
+  SetFarColor(0,0,0);
+  clearRect.r0 = p_Var1->level->backColorR;
+                    /* WARNING: Read-only address (ram,0x800d20ac) is written */
+  clearRect.g0 = p_Var1->level->backColorG;
+                    /* WARNING: Read-only address (ram,0x800d20ad) is written */
+  clearRect.b0 = p_Var1->level->backColorB;
+                    /* WARNING: Read-only address (ram,0x800d20ae) is written */
+  BLK_FILL_800d20b8.r0 = p_Var1->level->backColorR;
+                    /* WARNING: Read-only address (ram,0x800d20bc) is written */
+  BLK_FILL_800d20b8.g0 = p_Var1->level->backColorG;
+                    /* WARNING: Read-only address (ram,0x800d20bd) is written */
+  BLK_FILL_800d20b8.b0 = p_Var1->level->backColorB;
+                    /* WARNING: Read-only address (ram,0x800d20be) is written */
+  LIGHT_InitSources(gLightInfo);
+  gameTracker->wipeType = 10;
+  gameTracker->hideBG = 0;
+  gameTracker->wipeTime = 0x1e;
+  gameTracker->maxWipeTime = 0x1e;
+  p_Var5 = p_Var1->level->startSignal;
+  if (p_Var5 != (_MultiSignal *)0x0) {
+    p_Var5->flags = p_Var5->flags | 1;
+    SIGNAL_HandleSignal(gameTracker->playerInstance,p_Var1->level->startSignal->signalList,0);
+    EVENT_AddSignalToReset(p_Var1->level->startSignal);
+  }
+  gameTracker->vblFrames = 0;
+  p_Var5 = p_Var1->level->startUnitMainSignal;
+  if ((p_Var5 != (_MultiSignal *)0x0) && (gameTracker->playerInstance != (_Instance *)0x0)) {
+    p_Var5->flags = p_Var5->flags | 1;
+    SIGNAL_HandleSignal(gameTracker->playerInstance,p_Var1->level->startUnitMainSignal->signalList,0
+                       );
+    EVENT_AddSignalToReset(p_Var1->level->startUnitMainSignal);
+  }
+  return;
 }
 
 
@@ -599,14 +741,18 @@ void GAMELOOP_HandleScreenWipes(ulong **drawot)
       if (gameTrackerX.wipeType == 10) {
         r = (int)(short)((((int)gameTrackerX.maxWipeTime + r + 2) * 0xff) /
                         (int)gameTrackerX.maxWipeTime);
-                    /* WARNING: Subroutine does not return */
         DRAW_TranslucentQuad(0,0,0x200,0,0,0xf0,0x200,0xf0,r,r,r,2,primPool,drawot);
       }
-      if (gameTrackerX.wipeType == 0xb) {
-        r = (int)(short)((((int)gameTrackerX.maxWipeTime + r) * 0xff) /
-                        (int)gameTrackerX.maxWipeTime);
-                    /* WARNING: Subroutine does not return */
-        DRAW_TranslucentQuad(0,0,0x200,0,0,0x1e,0x200,0x1e,r,r,r,2,primPool,drawot);
+      else {
+        if (gameTrackerX.wipeType == 0xb) {
+          r = (int)(short)((((int)gameTrackerX.maxWipeTime + r) * 0xff) /
+                          (int)gameTrackerX.maxWipeTime);
+          DRAW_TranslucentQuad(0,0,0x200,0,0,0x1e,0x200,0x1e,r,r,r,2,primPool,drawot);
+          DRAW_TranslucentQuad(0,0xd2,0x200,0xd2,0,0xf0,0x200,0xf0,r,r,r,2,primPool,drawot);
+          if (gameTrackerX.wipeTime == -2) {
+            GlobalSave->flags = GlobalSave->flags | 1;
+          }
+        }
       }
       if (gameTrackerX.gameFramePassed != 0) {
         gameTrackerX.wipeTime = gameTrackerX.wipeTime + 1;
@@ -631,13 +777,15 @@ void GAMELOOP_HandleScreenWipes(ulong **drawot)
   else {
     if (gameTrackerX.wipeType == 10) {
       r = (int)(short)((r * 0xff) / (int)gameTrackerX.maxWipeTime);
-                    /* WARNING: Subroutine does not return */
       DRAW_TranslucentQuad(0,0,0x200,0,0,0xf0,0x200,0xf0,r,r,r,2,primPool,drawot);
     }
-    if (gameTrackerX.wipeType == 0xb) {
-      r = (int)(short)((r * 0xff) / (int)gameTrackerX.maxWipeTime);
-                    /* WARNING: Subroutine does not return */
-      DRAW_TranslucentQuad(0,0,0x200,0,0,0x1e,0x200,0x1e,r,r,r,2,primPool,drawot);
+    else {
+      if (gameTrackerX.wipeType == 0xb) {
+        r = (int)(short)((r * 0xff) / (int)gameTrackerX.maxWipeTime);
+        DRAW_TranslucentQuad(0,0,0x200,0,0,0x1e,0x200,0x1e,r,r,r,2,primPool,drawot);
+        DRAW_TranslucentQuad(0,0xd2,0x200,0xd2,0,0xf0,0x200,0xf0,r,r,r,2,primPool,drawot);
+        GlobalSave->flags = GlobalSave->flags & 0xfffe;
+      }
     }
     if (gameTrackerX.gameFramePassed != 0) {
       gameTrackerX.wipeTime = gameTrackerX.wipeTime + -1;
@@ -676,54 +824,62 @@ void UpdateFogSettings(_StreamUnit *currentUnit,Level *level)
   ushort uVar2;
   bool bVar3;
   bool bVar4;
-  uint uVar5;
-  int iVar6;
+  bool bVar5;
+  uint uVar6;
   int iVar7;
+  int iVar8;
   
   bVar4 = false;
   uVar1 = currentUnit->TargetFogNear;
-  iVar6 = (int)(short)uVar1;
-  uVar5 = (uint)level->fogNear;
+  iVar7 = (int)(short)uVar1;
+  uVar6 = (uint)level->fogNear;
   uVar2 = currentUnit->TargetFogFar;
-  iVar7 = (int)(short)uVar2;
-  if (iVar6 < (int)uVar5) {
-    level->fogNear = (ushort)(uVar5 - 500);
-    bVar3 = iVar6 < (int)(uVar5 - 500 & 0xffff);
+  iVar8 = (int)(short)uVar2;
+  bVar5 = false;
+  if (iVar7 < (int)uVar6) {
+    level->fogNear = (ushort)(uVar6 - 500);
+    bVar3 = iVar7 < (int)(uVar6 - 500 & 0xffff);
 LAB_8002e5fc:
     bVar4 = true;
     if (!bVar3) {
+      bVar5 = true;
       level->fogNear = uVar1;
-      UpdateFogSettings((char)uVar1,(char)uVar2);
-      return;
     }
   }
   else {
-    if ((int)uVar5 < iVar6) {
-      level->fogNear = (ushort)(uVar5 + 500);
-      bVar3 = (int)(uVar5 + 500 & 0xffff) < iVar6;
+    if ((int)uVar6 < iVar7) {
+      level->fogNear = (ushort)(uVar6 + 500);
+      bVar3 = (int)(uVar6 + 500 & 0xffff) < iVar7;
       goto LAB_8002e5fc;
     }
+    bVar5 = true;
   }
-  uVar5 = (uint)level->fogFar;
-  if (iVar7 < (int)uVar5) {
-    level->fogFar = (ushort)(uVar5 - 500);
+  uVar6 = (uint)level->fogFar;
+  if (iVar8 < (int)uVar6) {
+    level->fogFar = (ushort)(uVar6 - 500);
     bVar4 = true;
-    if (iVar7 < (int)(uVar5 - 500 & 0xffff)) goto LAB_8002e670;
+    if (iVar8 < (int)(uVar6 - 500 & 0xffff)) {
+      bVar5 = false;
+      goto LAB_8002e670;
+    }
   }
   else {
-    if (iVar7 <= (int)uVar5) goto LAB_8002e670;
-    level->fogFar = (ushort)(uVar5 + 500);
+    if (iVar8 <= (int)uVar6) goto LAB_8002e670;
+    level->fogFar = (ushort)(uVar6 + 500);
     bVar4 = true;
-    if ((int)(uVar5 + 500 & 0xffff) < iVar7) goto LAB_8002e670;
+    if ((int)(uVar6 + 500 & 0xffff) < iVar8) {
+      bVar5 = false;
+      goto LAB_8002e670;
+    }
   }
   bVar4 = true;
   level->fogFar = uVar2;
 LAB_8002e670:
-  if (!bVar4) {
-    return;
+  if ((bVar4) && (LIGHT_CalcDQPTable(level), bVar5)) {
+    currentUnit->TargetFogNear = level->fogNear;
+    currentUnit->TargetFogFar = level->fogFar;
   }
-                    /* WARNING: Subroutine does not return */
-  LIGHT_CalcDQPTable(level);
+  return;
 }
 
 
@@ -768,8 +924,43 @@ int CheckForNoBlend(_ColorType *Color)
 void BlendToColor(_ColorType *target,_ColorType *current,_ColorType *dest)
 
 {
-                    /* WARNING: Subroutine does not return */
+  int iVar1;
+  
   LoadAverageCol((byte *)target,(byte *)current,0x200,0xe00,(undefined *)dest);
+  iVar1 = (uint)target->r - (uint)dest->r;
+  if (iVar1 < 0) {
+    if (4 < (int)((uint)dest->r - (uint)target->r)) goto LAB_8002e7dc;
+  }
+  else {
+    if (4 < iVar1) {
+      dest->code = '\0';
+      return;
+    }
+  }
+  iVar1 = (uint)target->g - (uint)dest->g;
+  if (iVar1 < 0) {
+    if (4 < (int)((uint)dest->g - (uint)target->g)) goto LAB_8002e7dc;
+  }
+  else {
+    if (4 < iVar1) {
+      dest->code = '\0';
+      return;
+    }
+  }
+  iVar1 = (uint)target->b - (uint)dest->b;
+  if (iVar1 < 0) {
+    if (4 < (int)((uint)dest->b - (uint)target->b)) goto LAB_8002e7dc;
+  }
+  else {
+    if (4 < iVar1) {
+      dest->code = '\0';
+      return;
+    }
+  }
+  *dest = *target;
+LAB_8002e7dc:
+  dest->code = '\0';
+  return;
 }
 
 
@@ -835,13 +1026,17 @@ void MainRenderLevel(_StreamUnit *currentUnit,ulong **drawot)
 {
   MATRIX *pMVar1;
   LightInfo *lightInfo;
-  ushort uVar2;
+  _Instance *p_Var2;
+  ulong *puVar3;
+  ushort uVar4;
   int unitID;
-  uint uVar3;
+  uint uVar5;
   Level *level;
-  int iVar4;
-  int iVar5;
+  int **ppiVar6;
+  _Instance *p_Var7;
+  int iVar8;
   _Terrain *terrain;
+  int **local_64;
   undefined4 local_60;
   short local_5c;
   undefined4 local_58;
@@ -870,22 +1065,26 @@ void MainRenderLevel(_StreamUnit *currentUnit,ulong **drawot)
   clearRect.b0 = level->backColorB;
                     /* WARNING: Read-only address (ram,0x800d20ae) is written */
   BLK_FILL_800d20b8.r0 = level->backColorR;
+                    /* WARNING: Read-only address (ram,0x800d20bc) is written */
   BLK_FILL_800d20b8.g0 = level->backColorG;
+                    /* WARNING: Read-only address (ram,0x800d20bd) is written */
   BLK_FILL_800d20b8.b0 = level->backColorB;
-  if ((int)gameTrackerX.gameData.asmData.MorphTime != 1000) {
+                    /* WARNING: Read-only address (ram,0x800d20be) is written */
+  if ((int)gameTrackerX.gameData.asmData.MorphTime == 1000) {
+    if (gameTrackerX.gameData.asmData.MorphType == 1) {
+      local_30[0] = *(_ColorType *)&level->specturalColorR;
+    }
+    else {
+      local_30[0] = *(_ColorType *)&level->backColorR;
+    }
+  }
+  else {
     unitID = ((int)gameTrackerX.gameData.asmData.MorphTime << 0xc) / 1000;
     if (gameTrackerX.gameData.asmData.MorphType == 1) {
       unitID = 0x1000 - unitID;
     }
-                    /* WARNING: Subroutine does not return */
     LoadAverageCol(&level->specturalColorR,&level->backColorR,unitID,0x1000 - unitID,
                    (undefined *)local_30);
-  }
-  if (gameTrackerX.gameData.asmData.MorphType == 1) {
-    local_30[0] = *(_ColorType *)&level->specturalColorR;
-  }
-  else {
-    local_30[0] = *(_ColorType *)&level->backColorR;
   }
   BlendToColor(local_30,(_ColorType *)&currentUnit->FogColor,(_ColorType *)&currentUnit->FogColor);
   depthQBackColor = currentUnit->FogColor;
@@ -907,8 +1106,11 @@ void MainRenderLevel(_StreamUnit *currentUnit,ulong **drawot)
   clearRect.g0 = depthQBackColor._1_1_;
                     /* WARNING: Read-only address (ram,0x800d20ae) is written */
   clearRect.b0 = depthQBackColor._2_1_;
+                    /* WARNING: Read-only address (ram,0x800d20bc) is written */
   BLK_FILL_800d20b8.r0 = (uchar)depthQBackColor;
+                    /* WARNING: Read-only address (ram,0x800d20bd) is written */
   BLK_FILL_800d20b8.g0 = depthQBackColor._1_1_;
+                    /* WARNING: Read-only address (ram,0x800d20be) is written */
   BLK_FILL_800d20b8.b0 = depthQBackColor._2_1_;
   PIPE3D_AnimateTerrainTextures
             (terrain->aniList,gameTrackerX.frameCount,gameTrackerX.primPool,drawot);
@@ -923,8 +1125,6 @@ void MainRenderLevel(_StreamUnit *currentUnit,ulong **drawot)
   LIGHT_SourcesAndTerrain(gLightInfo,terrain);
   PIPE3D_InstanceListTransformAndDraw
             (currentUnit,&gameTrackerX,drawot,(_CameraCore_Type *)&theCamera);
-  lightInfo = gLightInfo;
-  pMVar1 = theCamera.core.wcTransform;
   local_60 = theCamera.core.position._0_4_;
   local_5c = theCamera.core.position.z;
   local_58 = *(undefined4 *)(theCamera.core.wcTransform)->m;
@@ -935,30 +1135,43 @@ void MainRenderLevel(_StreamUnit *currentUnit,ulong **drawot)
   local_44 = (theCamera.core.wcTransform)->t[0];
   local_40 = (theCamera.core.wcTransform)->t[1];
   local_3c = (theCamera.core.wcTransform)->t[2];
-  iVar5 = 0;
+  iVar8 = 0;
   if (0 < terrain->numBSPTrees) {
     do {
-      iVar4 = (int)&terrain->BSPTreeArray->bspRoot + iVar5;
-      if ((-1 < *(short *)(iVar4 + 0x1a)) && ((*(ushort *)(iVar4 + 0x12) & 1) == 0)) {
-        if ((*(ushort *)(iVar4 + 0x12) & 0x40) != 0) {
+      p_Var2 = gameTrackerX.gameData.asmData.lightInstances[0].lightInstance;
+      ppiVar6 = (int **)((int)&terrain->BSPTreeArray->bspRoot + iVar8);
+      if ((-1 < *(short *)((int)ppiVar6 + 0x1a)) && ((*(ushort *)((int)ppiVar6 + 0x12) & 1) == 0)) {
+        p_Var7 = (_Instance *)0x0;
+        if ((*(ushort *)((int)ppiVar6 + 0x12) & 0x40) != 0) {
           gameTrackerX.gameData.asmData.lightInstances[0].lightInstance = (_Instance *)0x0;
+          p_Var7 = p_Var2;
         }
-        local_60._2_2_ = (short)(theCamera.core.position._0_4_ >> 0x10);
-        uVar3 = (theCamera.core.position._0_4_ & 0xffff) - (uint)*(ushort *)(iVar4 + 0xc);
-        local_38 = -(short)uVar3;
-        uVar2 = local_60._2_2_ - *(short *)(iVar4 + 0xe);
-        theCamera.core.position._0_4_ = uVar3 & 0xffff | (uint)uVar2 << 0x10;
-        local_36 = -uVar2;
-        theCamera.core.position.z = theCamera.core.position.z - *(short *)(iVar4 + 0x10);
+        uVar5 = (local_60 & 0xffff) - (uint)*(ushort *)(ppiVar6 + 3);
+        local_38 = -(short)uVar5;
+        uVar4 = local_60._2_2_ - *(short *)((int)ppiVar6 + 0xe);
+        theCamera.core.position._0_4_ = uVar5 & 0xffff | (uint)uVar4 << 0x10;
+        local_36 = -uVar4;
+        theCamera.core.position.z = local_5c - *(short *)(ppiVar6 + 4);
         local_34 = -theCamera.core.position.z;
-                    /* WARNING: Subroutine does not return */
         ApplyMatrix(&local_58,&local_38,(theCamera.core.wcTransform)->t);
+        BSP_MarkVisibleLeaves_S(ppiVar6,(undefined4 *)&theCamera,(int *)gPolytopeList);
+        local_64 = ppiVar6 + 3;
+        puVar3 = (ulong *)(*(code *)gameTrackerX.drawDisplayPolytopeListFunc)
+                                    (gPolytopeList,terrain,&theCamera,gameTrackerX.primPool);
+        (gameTrackerX.primPool)->nextPrim = puVar3;
+        if ((*(ushort *)((int)ppiVar6 + 0x12) & 0x40) != 0) {
+          gameTrackerX.gameData.asmData.lightInstances[0].lightInstance = p_Var7;
+        }
       }
       unitID = unitID + 1;
-      iVar5 = iVar5 + 0x24;
+      iVar8 = iVar8 + 0x24;
     } while (unitID < terrain->numBSPTrees);
   }
+  lightInfo = gLightInfo;
+  pMVar1 = theCamera.core.wcTransform;
   unitID = (int)RENDER_currentStreamUnitID;
+  theCamera.core.position._0_4_ = local_60;
+  theCamera.core.position.z = local_5c;
   *(undefined4 *)(theCamera.core.wcTransform)->m = local_58;
   *(undefined4 *)(pMVar1->m + 2) = local_54;
   *(undefined4 *)(pMVar1->m + 4) = local_50;
@@ -1056,13 +1269,16 @@ long StreamRenderLevel(_StreamUnit *currentUnit,Level *mainLevel,ulong **drawot,
   long lVar2;
   LightInfo *lightInfo;
   int unitID;
-  ushort uVar3;
-  uint uVar4;
-  int iVar5;
+  ulong *puVar3;
+  ushort uVar4;
+  uint uVar5;
+  int **ppiVar6;
   Level *level;
   _Terrain *terrain;
-  int iVar6;
-  undefined auStack112 [24];
+  int iVar7;
+  undefined auStack112 [16];
+  ulong **local_60;
+  int **local_5c;
   undefined4 local_58;
   short local_54;
   undefined4 local_50;
@@ -1101,8 +1317,6 @@ long StreamRenderLevel(_StreamUnit *currentUnit,Level *mainLevel,ulong **drawot,
   LIGHT_SourcesAndTerrain(gLightInfo,terrain);
   PIPE3D_InstanceListTransformAndDraw
             (currentUnit,&gameTrackerX,drawot,(_CameraCore_Type *)&theCamera);
-  lightInfo = gLightInfo;
-  pMVar1 = theCamera.core.wcTransform;
   local_58 = theCamera.core.position._0_4_;
   local_54 = theCamera.core.position.z;
   local_50 = *(undefined4 *)(theCamera.core.wcTransform)->m;
@@ -1115,26 +1329,34 @@ long StreamRenderLevel(_StreamUnit *currentUnit,Level *mainLevel,ulong **drawot,
   local_34 = (theCamera.core.wcTransform)->t[2];
   unitID = 0;
   if (0 < terrain->numBSPTrees) {
-    iVar6 = 0;
+    iVar7 = 0;
     do {
-      iVar5 = (int)&terrain->BSPTreeArray->bspRoot + iVar6;
-      if ((-1 < *(short *)(iVar5 + 0x1a)) && ((*(ushort *)(iVar5 + 0x12) & 1) == 0)) {
-        local_58._2_2_ = (short)(theCamera.core.position._0_4_ >> 0x10);
-        uVar4 = (theCamera.core.position._0_4_ & 0xffff) - (uint)*(ushort *)(iVar5 + 0xc);
-        local_30 = -(short)uVar4;
-        uVar3 = local_58._2_2_ - *(short *)(iVar5 + 0xe);
-        theCamera.core.position._0_4_ = uVar4 & 0xffff | (uint)uVar3 << 0x10;
-        local_2e = -uVar3;
-        theCamera.core.position.z = theCamera.core.position.z - *(short *)(iVar5 + 0x10);
+      ppiVar6 = (int **)((int)&terrain->BSPTreeArray->bspRoot + iVar7);
+      if ((-1 < *(short *)((int)ppiVar6 + 0x1a)) && ((*(ushort *)((int)ppiVar6 + 0x12) & 1) == 0)) {
+        uVar5 = (local_58 & 0xffff) - (uint)*(ushort *)(ppiVar6 + 3);
+        local_30 = -(short)uVar5;
+        uVar4 = local_58._2_2_ - *(short *)((int)ppiVar6 + 0xe);
+        theCamera.core.position._0_4_ = uVar5 & 0xffff | (uint)uVar4 << 0x10;
+        local_2e = -uVar4;
+        theCamera.core.position.z = local_54 - *(short *)(ppiVar6 + 4);
         local_2c = -theCamera.core.position.z;
-                    /* WARNING: Subroutine does not return */
         ApplyMatrix(&local_50,&local_30,(theCamera.core.wcTransform)->t);
+        BSP_MarkVisibleLeaves_S(ppiVar6,(undefined4 *)&theCamera,(int *)gPolytopeList);
+        local_5c = ppiVar6 + 3;
+        local_60 = drawot;
+        puVar3 = (ulong *)(*(code *)gameTrackerX.drawDisplayPolytopeListFunc)
+                                    (gPolytopeList,terrain,&theCamera,gameTrackerX.primPool);
+        (gameTrackerX.primPool)->nextPrim = puVar3;
       }
       unitID = unitID + 1;
-      iVar6 = iVar6 + 0x24;
+      iVar7 = iVar7 + 0x24;
     } while (unitID < terrain->numBSPTrees);
   }
+  lightInfo = gLightInfo;
+  pMVar1 = theCamera.core.wcTransform;
   unitID = (int)RENDER_currentStreamUnitID;
+  theCamera.core.position._0_4_ = local_58;
+  theCamera.core.position.z = local_54;
   InStreamUnit = 1;
   *(undefined4 *)(theCamera.core.wcTransform)->m = local_50;
   *(undefined4 *)(pMVar1->m + 2) = local_4c;
@@ -1169,8 +1391,24 @@ long StreamRenderLevel(_StreamUnit *currentUnit,Level *mainLevel,ulong **drawot,
 void GAMELOOP_FlipScreenAndDraw(GameTracker *gameTracker,ulong **drawot)
 
 {
-                    /* WARNING: Subroutine does not return */
+  int iVar1;
+  uint uVar2;
+  
   DrawOTag(drawot + 0xbff);
+  do {
+    iVar1 = CheckVolatile(gameTracker->drawTimerReturn);
+  } while (iVar1 != 0);
+  ResetPrimPool();
+  PutDrawEnv((undefined4 *)(&draw + gameTracker->drawPage));
+  do {
+    iVar1 = CheckVolatile(gameTracker->reqDisp);
+  } while (iVar1 != 0);
+  uVar2 = GetRCnt(0xf2000000);
+  *(ulong **)&gameTracker->drawTimerReturn = &gameTracker->drawTime;
+  iVar1 = (gameTracker->gameData).asmData.dispPage;
+  gameTracker->usecsStartDraw = uVar2 & 0xffff | gameTimer << 0x10;
+  (gameTracker->gameData).asmData.dispPage = 1 - iVar1;
+  return;
 }
 
 
@@ -1255,8 +1493,14 @@ void GAMELOOP_SwitchTheDrawBuffer(ulong **drawot)
 
 {
   GAMELOOP_AddClearPrim(drawot);
-                    /* WARNING: Subroutine does not return */
   DrawSync(0);
+  if (gameTrackerX.drawTimerReturn != (long *)0x0) {
+    gameTrackerX.drawTimerReturn = (long *)0x0;
+    gameTrackerX.reqDisp =
+         (void *)((int)gameTrackerX.disp + gameTrackerX.gameData.asmData.dispPage * 0x14);
+  }
+  PutDrawEnv((undefined4 *)(&draw + gameTrackerX.drawPage));
+  return;
 }
 
 
@@ -1326,19 +1570,32 @@ void GAMELOOP_SetupRenderFunction(GameTracker *gameTracker)
 _StreamUnit * GAMELOOP_GetMainRenderUnit(void)
 
 {
-  _StreamUnit *p_Var1;
+  _Instance *p_Var1;
+  _StreamUnit *p_Var2;
+  _StreamUnit *p_Var3;
   
+  p_Var1 = theCamera.focusInstance;
   if (theCamera.mode == 5) {
-    p_Var1 = STREAM_WhichUnitPointerIsIn(theCamera.data.Cinematic.posSpline);
-    return p_Var1;
+    p_Var2 = STREAM_WhichUnitPointerIsIn(theCamera.data.Cinematic.posSpline);
   }
-  if ((theCamera.focusInstance == gameTrackerX.playerInstance) &&
-     (gameTrackerX.SwitchToNewStreamUnit != 0)) {
-                    /* WARNING: Subroutine does not return */
-    STREAM_GetStreamUnitWithID(gameTrackerX.moveRazielToStreamID);
+  else {
+    if ((theCamera.focusInstance == gameTrackerX.playerInstance) &&
+       (gameTrackerX.SwitchToNewStreamUnit != 0)) {
+      p_Var2 = STREAM_GetStreamUnitWithID(gameTrackerX.moveRazielToStreamID);
+      if (p_Var2 == (_StreamUnit *)0x0) {
+        p_Var2 = STREAM_GetStreamUnitWithID(p_Var1->currentStreamUnitID);
+        return p_Var2;
+      }
+    }
+    else {
+      p_Var2 = STREAM_GetStreamUnitWithID((theCamera.focusInstance)->currentStreamUnitID);
+    }
+    p_Var3 = COLLIDE_CameraWithStreamSignals(&theCamera);
+    if (p_Var3 != (_StreamUnit *)0x0) {
+      p_Var2 = p_Var3;
+    }
   }
-                    /* WARNING: Subroutine does not return */
-  STREAM_GetStreamUnitWithID((theCamera.focusInstance)->currentStreamUnitID);
+  return p_Var2;
 }
 
 
@@ -1388,12 +1645,17 @@ void GAMELOOP_DisplayFrame(GameTracker *gameTracker)
   long lVar2;
   int *piVar3;
   int iVar4;
+  uint uVar5;
+  ulong uVar6;
   StreamUnitPortal *portal;
   STracker *currentUnit_00;
-  int iVar5;
-  int iVar6;
+  ulong **polyAddr;
   int iVar7;
+  _StreamUnit *currentUnit_01;
   int iVar8;
+  ushort *puVar9;
+  int iVar10;
+  StreamUnitPortal *curStreamPortal;
   RECT local_40;
   ulong **local_38;
   Level *local_34;
@@ -1413,7 +1675,6 @@ void GAMELOOP_DisplayFrame(GameTracker *gameTracker)
     currentUnit = GAMELOOP_GetMainRenderUnit();
     local_34 = currentUnit->level;
     if ((gameTracker->debugFlags & 4U) != 0) {
-                    /* WARNING: Subroutine does not return */
       FONT_Print("Cameraunit: %s\n");
     }
     RENDER_currentStreamUnitID = *(short *)&currentUnit->StreamUnitID;
@@ -1432,15 +1693,16 @@ void GAMELOOP_DisplayFrame(GameTracker *gameTracker)
       }
     }
     piVar3 = (int *)local_34->terrain->StreamUnits;
-    iVar6 = 0;
+    iVar8 = 0;
     local_30 = *piVar3;
+    curStreamPortal = (StreamUnitPortal *)(piVar3 + 1);
     if (0 < local_30) {
-      iVar7 = (int)piVar3 + 0x22;
+      puVar9 = (ushort *)((int)piVar3 + 0x22);
       do {
-        currentUnit = *(_StreamUnit **)(iVar7 + 10);
-        iVar8 = *(int *)(iVar7 + -10);
-        if ((currentUnit == (_StreamUnit *)0x0) ||
-           (currentUnit->FrameCount != gameTrackerX.displayFrameCount)) {
+        currentUnit_01 = *(_StreamUnit **)(puVar9 + 5);
+        iVar10 = *(int *)(puVar9 + -5);
+        if ((currentUnit_01 == (_StreamUnit *)0x0) ||
+           (currentUnit_01->FrameCount != gameTrackerX.displayFrameCount)) {
           local_40.x = 0x200;
           local_40.y = 0xf0;
           local_40.w = -0x200;
@@ -1450,18 +1712,18 @@ void GAMELOOP_DisplayFrame(GameTracker *gameTracker)
           theCamera.core.topY = 0;
           theCamera.core.bottomY = 0xf0;
           CAMERA_SetViewVolume(&theCamera);
-          iVar5 = 0;
+          iVar7 = 0;
           bVar1 = false;
           portal = (StreamUnitPortal *)((int)local_34->terrain->StreamUnits + 4);
           if (0 < local_30) {
             do {
-              if ((portal->streamID == iVar8) &&
+              if ((portal->streamID == iVar10) &&
                  (iVar4 = STREAM_GetClipRect(portal,&local_40), iVar4 != 0)) {
                 bVar1 = true;
               }
-              iVar5 = iVar5 + 1;
+              iVar7 = iVar7 + 1;
               portal = portal + 1;
-            } while (iVar5 < local_30);
+            } while (iVar7 < local_30);
           }
           if (bVar1) {
             theCamera.core.leftX = (int)local_40.x * 0x140;
@@ -1477,20 +1739,45 @@ void GAMELOOP_DisplayFrame(GameTracker *gameTracker)
             theCamera.core.rightX = theCamera.core.rightX >> 9;
             theCamera.core.bottomY = theCamera.core.topY + local_40.h;
             CAMERA_SetViewVolume(&theCamera);
-                    /* WARNING: Subroutine does not return */
             SetRotMatrix((undefined4 *)theCamera.core.wcTransform);
+            SetTransMatrix((int)theCamera.core.wcTransform);
+            if ((*puVar9 & 1) == 0) {
+              if ((currentUnit_01 != (_StreamUnit *)0x0) &&
+                 (currentUnit_01->FrameCount != gameTrackerX.displayFrameCount)) {
+                currentUnit_01->FrameCount = gameTrackerX.displayFrameCount;
+                STREAM_RenderAdjacantUnit
+                          (local_38,curStreamPortal,currentUnit_01,currentUnit,&local_40);
+              }
+            }
+            else {
+              if ((currentUnit->flags & 8U) == 0) {
+                WARPGATE_IsItActive(currentUnit);
+              }
+              else {
+                if (currentUnit_01 != (_StreamUnit *)0x0) {
+                  if (currentUnit_01->FrameCount == gameTrackerX.displayFrameCount)
+                  goto LAB_8002f7f8;
+                  currentUnit_01->FrameCount = gameTrackerX.displayFrameCount;
+                }
+                STREAM_RenderWarpGate(local_38,curStreamPortal,currentUnit,&local_40);
+              }
+            }
           }
-          if ((currentUnit != (_StreamUnit *)0x0) &&
-             (currentUnit->FrameCount != gameTrackerX.displayFrameCount)) {
-            currentUnit->FrameCount = gameTrackerX.displayFrameCount;
-            StreamIntroInstancesForUnit(currentUnit);
+          else {
+            if ((currentUnit_01 != (_StreamUnit *)0x0) &&
+               (currentUnit_01->FrameCount != gameTrackerX.displayFrameCount)) {
+              currentUnit_01->FrameCount = gameTrackerX.displayFrameCount;
+              StreamIntroInstancesForUnit(currentUnit_01);
+            }
           }
         }
-        iVar6 = iVar6 + 1;
-        iVar7 = iVar7 + 0x5c;
-      } while (iVar6 < local_30);
+LAB_8002f7f8:
+        iVar8 = iVar8 + 1;
+        puVar9 = puVar9 + 0x2e;
+        curStreamPortal = curStreamPortal + 1;
+      } while (iVar8 < local_30);
     }
-    iVar6 = 0;
+    iVar8 = 0;
     currentUnit_00 = &StreamTracker;
     do {
       if ((*(short *)currentUnit_00->StreamList == 2) &&
@@ -1498,9 +1785,9 @@ void GAMELOOP_DisplayFrame(GameTracker *gameTracker)
         *(ulong *)currentUnit_00->StreamList = gameTrackerX.displayFrameCount;
         StreamIntroInstancesForUnit((_StreamUnit *)currentUnit_00);
       }
-      iVar6 = iVar6 + 1;
+      iVar8 = iVar8 + 1;
       currentUnit_00 = (STracker *)(currentUnit_00->StreamList + 1);
-    } while (iVar6 < 0x10);
+    } while (iVar8 < 0x10);
     theCamera.core.rightX = 0x140;
     theCamera.core.leftX = 0;
     theCamera.core.topY = 0;
@@ -1513,8 +1800,37 @@ void GAMELOOP_DisplayFrame(GameTracker *gameTracker)
   DEBUG_Draw(gameTracker,local_38);
   FONT_Flush();
   GAMELOOP_SwitchTheDrawBuffer(local_38);
-                    /* WARNING: Subroutine does not return */
-  GetRCnt(0xf2000000);
+  uVar5 = GetRCnt(0xf2000000);
+  gameTracker->idleTime = uVar5 & 0xffff | gameTimer << 0x10;
+  if ((uint)gameTracker->frameRateLock < gameTracker->vblFrames) {
+    if ((ushort *)gameTracker->reqDisp != (ushort *)0x0) {
+      PutDispEnv((ushort *)gameTracker->reqDisp);
+      gameTracker->reqDisp = (void *)0x0;
+      gameTracker->vblFrames = 0;
+    }
+  }
+  else {
+    do {
+      iVar8 = CheckVolatile(gameTracker->reqDisp);
+    } while (iVar8 != 0);
+  }
+  uVar6 = TIMER_TimeDiff(gameTracker->idleTime);
+  polyAddr = local_38 + 0xbff;
+  iVar8 = (gameTracker->gameData).asmData.dispPage;
+  gameTracker->idleTime = uVar6;
+  (gameTracker->gameData).asmData.dispPage = 1 - iVar8;
+  DEBUG_DrawShrinkCels(polyAddr);
+  GAMELOOP_HandleScreenWipes(local_38);
+  uVar5 = GetRCnt(0xf2000000);
+  *(ulong **)&gameTracker->drawTimerReturn = &gameTracker->drawTime;
+  gameTracker->usecsStartDraw = uVar5 & 0xffff | gameTimer << 0x10;
+  if ((gameTrackerX.gameFlags & 0x8000000U) == 0) {
+    DrawOTag(polyAddr);
+  }
+  else {
+    GAMELOOP_DrawSavedOT(local_38);
+  }
+  return;
 }
 
 
@@ -1623,8 +1939,8 @@ void GAMELOOP_DrawSavedOT(ulong **newOT)
   }
   (gameTrackerX.savedOTEnd)->addr =
        (gameTrackerX.savedOTEnd)->addr & 0xff000000 | (uint)(newOT + 0xbff) & 0xffffff;
-                    /* WARNING: Subroutine does not return */
-  DrawOTag(gameTrackerX.savedOTStart);
+  DrawOTag((undefined4 *)gameTrackerX.savedOTStart);
+  return;
 }
 
 
@@ -1696,8 +2012,64 @@ void ResetPrimPool(void)
 void SaveOT(void)
 
 {
-                    /* WARNING: Subroutine does not return */
+  char cVar1;
+  P_TAG *pPVar2;
+  P_TAG *pPVar3;
+  uint uVar4;
+  P_TAG *pPVar5;
+  P_TAG *pPVar6;
+  P_TAG *pPVar7;
+  
   DrawSync(0);
+  pPVar5 = (P_TAG *)(gameTrackerX.drawOT + 0xbff);
+  cVar1 = *(char *)((int)gameTrackerX.drawOT + 0x2fff);
+  pPVar7 = (P_TAG *)0x0;
+  while (cVar1 == '\0') {
+    uVar4 = pPVar5->addr & 0xffffff;
+    pPVar5 = (P_TAG *)(uVar4 | 0x80000000);
+    if (uVar4 == 0xffffff) goto LAB_8002fcc0;
+    cVar1 = *(char *)((int)&pPVar5->addr + 3);
+  }
+  if ((pPVar5->addr & 0xffffff) == 0xffffff) {
+LAB_8002fcc0:
+    gameTrackerX.savedOTStart = (P_TAG *)0x0;
+  }
+  else {
+    pPVar2 = pPVar5;
+    pPVar3 = (P_TAG *)0x0;
+    gameTrackerX.savedOTStart = pPVar5;
+    if ((pPVar5->addr & 0xffffff) != 0xffffff) {
+      do {
+        while (pPVar6 = pPVar3, pPVar5 = pPVar2, *(char *)((int)&pPVar5->addr + 3) != '\0') {
+          uVar4 = pPVar5->addr & 0xffffff;
+          if (uVar4 == 0xffffff) goto LAB_8002fdac;
+          pPVar2 = (P_TAG *)(uVar4 | 0x80000000);
+          pPVar3 = pPVar5;
+          pPVar7 = pPVar6;
+        }
+        if ((pPVar5->addr & 0xffffff) == 0xffffff) goto LAB_8002fdac;
+        cVar1 = *(char *)((int)&pPVar5->addr + 3);
+        while ((cVar1 == '\0' && (uVar4 = pPVar5->addr & 0xffffff, uVar4 != 0xffffff))) {
+          pPVar5 = (P_TAG *)(uVar4 | 0x80000000);
+          cVar1 = *(char *)((int)&pPVar5->addr + 3);
+        }
+        pPVar6->addr = pPVar6->addr & 0xff000000 | (uint)pPVar5 & 0xffffff;
+        pPVar2 = pPVar5;
+        pPVar3 = pPVar6;
+      } while ((pPVar5->addr & 0xffffff) != 0xffffff);
+      if ((pPVar5->addr & 0xffffff) != 0xffffff) {
+        gameTrackerX.savedOTEnd = pPVar5;
+        return;
+      }
+    }
+LAB_8002fdac:
+    gameTrackerX.savedOTEnd = pPVar5;
+    if (pPVar7 != (P_TAG *)0x0) {
+      gameTrackerX.savedOTEnd = pPVar7;
+      pPVar7->addr = pPVar7->addr | 0xffffff;
+    }
+  }
+  return;
 }
 
 
@@ -1738,8 +2110,8 @@ void ResetDrawPage(void)
   gameTrackerX.dispOT = gameTrackerX.drawOT;
   gameTrackerX.drawPage = 1 - gameTrackerX.drawPage;
   gameTrackerX.drawOT = ppuVar1;
-                    /* WARNING: Subroutine does not return */
   ClearOTagR(ppuVar1,0xc00);
+  return;
 }
 
 
@@ -1757,6 +2129,8 @@ void ResetDrawPage(void)
 		// Start line: 6603
 	/* end block 2 */
 	// End Line: 6604
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void GAMELOOP_Set24FPS(void)
 
@@ -1825,8 +2199,67 @@ void GAMELOOP_Reset24FPS(void)
 void GAMELOOP_DoTimeProcess(void)
 
 {
-                    /* WARNING: Subroutine does not return */
-  TIMER_GetTimeMS();
+  ulong uVar1;
+  uint uVar2;
+  uint uVar3;
+  
+  uVar1 = TIMER_GetTimeMS();
+  if ((gameTrackerX.gameFlags & 0x10000000U) == 0) {
+    gameTrackerX.totalTime = TIMER_TimeDiff(gameTrackerX.currentTicks);
+    uVar2 = GetRCnt(0xf2000000);
+    gameTrackerX.currentTicks = uVar2 & 0xffff | gameTimer << 0x10;
+    if (gameTrackerX.frameRateLock < 1) {
+      gameTrackerX.frameRateLock = 1;
+    }
+    if (2 < gameTrackerX.frameRateLock) {
+      gameTrackerX.frameRateLock = 2;
+    }
+    if ((gameTrackerX.decoupleGame == 0) || ((gameTrackerX.gameFlags & 0x10000000U) != 0)) {
+      if (gameTrackerX.frameRateLock == 1) {
+        gameTrackerX.lastLoopTime = 0x21;
+      }
+      else {
+        if (gameTrackerX.frameRateLock == 2) {
+          gameTrackerX.lastLoopTime = 0x32;
+        }
+      }
+      uVar2 = (uint)((ulonglong)(gameTrackerX.lastLoopTime << 0xc) * 0x3e0f83e1 >> 0x20);
+    }
+    else {
+      uVar3 = 0x21;
+      if ((gameTrackerX.frameRateLock != 1) && (gameTrackerX.frameRateLock == 2)) {
+        uVar3 = 0x32;
+      }
+      uVar2 = uVar3;
+      if (gameTrackerX.lastLoopTime != 0xffffffff) {
+        uVar2 = uVar1 - gameTrackerX.currentTime;
+      }
+      if (((gameTrackerX.frameRateLock == 1) && (gameTrackerX.frameRate24fps != 0)) &&
+         (uVar2 = uVar2 - 9, gameTrackerX.gameData.asmData.MorphTime != 1000)) {
+        uVar2 = 0x21;
+      }
+      if ((uVar3 <= uVar2) && (uVar3 = uVar2, 0x42 < uVar2)) {
+        uVar3 = 0x42;
+      }
+      uVar2 = (uint)((ulonglong)(uVar3 << 0xc) * 0x3e0f83e1 >> 0x20);
+      gameTrackerX.lastLoopTime = uVar3;
+    }
+    gameTrackerX.timeMult = uVar2 >> 3;
+    gameTrackerX.gameFramePassed = 0;
+    gameTrackerX.timeSinceLastGameFrame =
+         gameTrackerX.timeSinceLastGameFrame + gameTrackerX.timeMult;
+    while (gameTrackerX.globalTimeMult = gameTrackerX.timeMult,
+          0x1000 < gameTrackerX.timeSinceLastGameFrame) {
+      gameTrackerX.gameFramePassed = 1;
+      gameTrackerX.timeSinceLastGameFrame = gameTrackerX.timeSinceLastGameFrame - 0x1000;
+      gameTrackerX.fps30Count = gameTrackerX.fps30Count + 1;
+    }
+  }
+  else {
+    gameTrackerX.lastLoopTime = 0xffffffff;
+  }
+  gameTrackerX.currentTime = uVar1;
+  return;
 }
 
 
@@ -1890,38 +2323,192 @@ void GAMELOOP_DoTimeProcess(void)
 	/* end block 3 */
 	// End Line: 6855
 
+/* WARNING: This function may have set the stack pointer */
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void GAMELOOP_Process(GameTracker *gameTracker)
 
 {
-  if (gEndGameNow != 0) {
-    DEBUG_ExitGame();
-    gameTracker->levelDone = 3;
-    return;
-  }
-  GAMELOOP_DoTimeProcess();
-  if ((gameTrackerX.gameMode != 6) && ((gameTrackerX.streamFlags & 0x100000U) == 0)) {
-    MORPH_UpdateTimeMult();
-    GAMELOOP_CalcGameTime();
-    if ((gameTracker->gameData).asmData.MorphType == 0) {
-      if (gameTrackerX.playerInstance != (_Instance *)0x0) {
-                    /* WARNING: Subroutine does not return */
-        STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID);
+  bool bVar1;
+  Level *pLVar2;
+  int iVar3;
+  uchar **ppuVar4;
+  STracker *streamUnit;
+  int iVar5;
+  int iVar6;
+  int iVar7;
+  undefined *puVar8;
+  
+  if (gEndGameNow == 0) {
+    GAMELOOP_DoTimeProcess();
+    if ((gameTrackerX.gameMode != 6) && ((gameTrackerX.streamFlags & 0x100000U) == 0)) {
+      MORPH_UpdateTimeMult();
+      GAMELOOP_CalcGameTime();
+      if ((gameTracker->gameData).asmData.MorphType == 0) {
+        bVar1 = true;
+        if ((gameTrackerX.playerInstance != (_Instance *)0x0) &&
+           (pLVar2 = STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID),
+           pLVar2 != (Level *)0x0)) {
+          bVar1 = (pLVar2->unitFlags & 0x2000U) == 0;
+        }
+        if (bVar1) {
+          gameTracker->currentTimeOfDayTime =
+               gameTracker->currentTimeOfDayTime + gameTracker->lastLoopTime;
+        }
+        gameTracker->currentMaterialTime =
+             gameTracker->currentMaterialTime + gameTracker->lastLoopTime;
       }
-      gameTracker->currentTimeOfDayTime =
-           gameTracker->currentTimeOfDayTime + gameTracker->lastLoopTime;
-      gameTracker->currentMaterialTime =
-           gameTracker->currentMaterialTime + gameTracker->lastLoopTime;
+      else {
+        gameTracker->currentSpectralTime =
+             gameTracker->currentSpectralTime + gameTracker->lastLoopTime;
+      }
+    }
+    gameTracker->numGSignals = 0;
+    GAMELOOP_ChangeMode();
+    ResetPrimPool();
+    memset(gameTracker->overrideData,0,0x28);
+    if (gameTrackerX.gameMode != 6) {
+      if ((gameTrackerX.streamFlags & 0x100000U) == 0) {
+        if (gameTrackerX.SwitchToNewStreamUnit == 1) {
+          INSTANCE_Post(gameTrackerX.playerInstance,0x4000006,0);
+          STREAM_MoveIntoNewStreamUnit();
+        }
+        if ((VRAM_NeedToUpdateMorph != 0) && (iVar3 = STREAM_IsCdBusy((long *)0x0), iVar3 == 0)) {
+          VRAM_UpdateMorphPalettes();
+          VRAM_NeedToUpdateMorph = 0;
+        }
+        if ((gameTracker->gameData).asmData.MorphTime < 1000) {
+          MORPH_Continue();
+        }
+        if ((gameTracker->streamFlags & 0x80000U) != 0) {
+          gameTracker->streamFlags = gameTracker->streamFlags & 0xfff7ffff;
+          UNDERWORLD_StartProcess();
+        }
+      }
+      if (gameTrackerX.gameMode != 6) {
+        if ((gameTrackerX.streamFlags & 0x100000U) == 0) {
+          EVENT_DoProcess();
+          streamUnit = &StreamTracker;
+          do {
+            if (*(short *)streamUnit->StreamList == 2) {
+              if ((*(Level **)streamUnit->StreamList)->PuzzleInstances != (EventPointers *)0x0) {
+                if ((gameTrackerX.debugFlags2 & 0x100U) != 0) {
+                  FONT_Print("Processing unit %s\n");
+                }
+                EVENT_ProcessEvents((*(Level **)streamUnit->StreamList)->PuzzleInstances,
+                                    *(Level **)streamUnit->StreamList);
+              }
+              EVENT_BSPProcess((_StreamUnit *)streamUnit);
+            }
+            streamUnit = (STracker *)(streamUnit->StreamList + 1);
+          } while ((int)streamUnit < -0x7ff2d1f4);
+          EVENT_ResetAllOneTimeVariables();
+        }
+        if (gameTrackerX.gameMode != 6) {
+          EVENT_ProcessHints();
+        }
+      }
+    }
+    iVar7 = 0;
+    streamUnit = &StreamTracker;
+    iVar3 = iVar7;
+    do {
+      if ((streamUnit->StreamList[0].used == 2) &&
+         (iVar5 = 0, 0 < (streamUnit->StreamList[0].level)->NumberOfSFXMarkers)) {
+        iVar6 = 0;
+        do {
+          ppuVar4 = (uchar **)
+                    (*(int *)(*(int *)((int)&StreamTracker.StreamList[0].level + iVar3) + 0xec) +
+                    iVar6);
+          if ((ppuVar4 != (uchar **)0x0) && (*ppuVar4 != (uchar *)0x0)) {
+            SOUND_ProcessInstanceSounds
+                      (*ppuVar4,(SoundInstance *)(ppuVar4 + 2),(_Position *)(ppuVar4 + 5),
+                       (int)ppuVar4[7],(int)ppuVar4[8],0,(long *)0x0);
+          }
+          iVar5 = iVar5 + 1;
+          iVar6 = iVar6 + 0x24;
+        } while (iVar5 < (StreamTracker.StreamList[iVar7].level)->NumberOfSFXMarkers);
+      }
+      iVar3 = iVar3 + 0x40;
+      iVar7 = iVar7 + 1;
+      streamUnit = (STracker *)(streamUnit->StreamList + 1);
+    } while (iVar7 < 0x10);
+    if ((gameTrackerX.gameMode != 6) && ((gameTrackerX.streamFlags & 0x100000U) == 0)) {
+      INSTANCE_SpatialRelationships(instanceList);
+    }
+    INSTANCE_ProcessFunctions(gameTracker->instanceList);
+    INSTANCE_CleanUpInstanceList(gameTracker->instanceList,0);
+    INSTANCE_DeactivateFarInstances(gameTracker);
+    MONAPI_ProcessGenerator();
+    _DAT_1f800000 = theCamera.core.position._0_4_;
+    _DAT_1f800004 = theCamera.core._4_4_;
+    StackSave = (ulong)&stack0xffffffc0;
+    G2Instance_BuildTransformsForList(gameTracker->instanceList->first);
+    puVar8 = (undefined *)StackSave;
+    if (gameTrackerX.gameMode != 6) {
+      if ((gameTrackerX.streamFlags & 0x100000U) == 0) {
+        FX_ProcessList(fxTracker);
+      }
+      puVar8 = (undefined *)StackSave;
+      if (gameTrackerX.gameMode != 6) {
+        if ((gameTrackerX.streamFlags & 0x100000U) == 0) {
+          VM_Tick(0x100,*(undefined *)StackSave);
+          if ((gameTracker->debugFlags2 & 0x10000U) != 0) {
+            FONT_Print("Military Time %04d\n",*puVar8);
+          }
+          iVar3 = 0;
+          streamUnit = &StreamTracker;
+          do {
+            if (streamUnit->StreamList[0].used == 2) {
+              VM_ProcessVMObjectList_S(streamUnit->StreamList[0].level,*puVar8);
+            }
+            iVar3 = iVar3 + 1;
+            streamUnit = (STracker *)(streamUnit->StreamList + 1);
+          } while (iVar3 < 0x10);
+        }
+        if ((gameTrackerX.gameMode != 6) && ((gameTrackerX.streamFlags & 0x100000U) == 0)) {
+          PLANAPI_UpdatePlanningDatabase(gameTracker,gameTrackerX.playerInstance,*puVar8);
+        }
+      }
+    }
+    DEBUG_Process(gameTracker,*puVar8);
+    if ((gameTrackerX.gameMode != 6) && ((gameTrackerX.streamFlags & 0x100000U) == 0)) {
+      COLLIDE_InstanceList(gameTracker->instanceList,*puVar8);
+      COLLIDE_InstanceListTerrain(gameTracker->instanceList,*puVar8);
+    }
+    INSTANCE_AdditionalCollideFunctions(instanceList,*puVar8);
+    COLLIDE_InstanceListWithSignals(instanceList,*puVar8);
+    if (gameTrackerX.gameMode != 6) {
+      if ((gameTrackerX.streamFlags & 0x100000U) == 0) {
+        LIGHT_CalcShadowPositions(gameTracker,*puVar8);
+        INSTANCE_CleanUpInstanceList(gameTracker->instanceList,0x10,*puVar8);
+      }
+      if (gameTrackerX.gameMode != 6) {
+        CAMERA_Process(&theCamera,*puVar8);
+      }
+    }
+    PIPE3D_CalculateWCTransform(&theCamera,*puVar8);
+    *(undefined2 *)&(theCamera.core.wcTransform2)->field_0x12 = 0;
+    PIPE3D_InvertTransform(theCamera.core.cwTransform2,theCamera.core.wcTransform2,*puVar8);
+    CAMERA_CalcVVClipInfo(&theCamera,*puVar8);
+    if (gameTracker->levelChange != 0) {
+      gameTracker->levelChange = 0;
+    }
+    SAVE_IntroduceBufferIntros(*puVar8);
+    if (gameTracker->levelDone == 0) {
+      GAMELOOP_DisplayFrame(gameTracker,*puVar8);
     }
     else {
-      gameTracker->currentSpectralTime =
-           gameTracker->currentSpectralTime + gameTracker->lastLoopTime;
+      ResetDrawPage(*puVar8);
     }
+    gameTracker->frameCount = gameTracker->frameCount + 1;
+    gameTracker->debugFlags = gameTracker->debugFlags & 0xf7ffffff;
   }
-  gameTracker->numGSignals = 0;
-  GAMELOOP_ChangeMode();
-  ResetPrimPool();
-                    /* WARNING: Subroutine does not return */
-  memset(gameTracker->overrideData,0,0x28);
+  else {
+    DEBUG_ExitGame();
+    gameTracker->levelDone = 3;
+  }
+  return;
 }
 
 
@@ -1949,15 +2536,14 @@ void GAMELOOP_ModeStartRunning(void)
   if ((gameTrackerX.gameFlags & 0x8000000U) != 0) {
     gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xf7ffffff;
     gameTrackerX.savedOTStart = (P_TAG *)0x0;
-                    /* WARNING: Subroutine does not return */
     DrawSync(0);
   }
   gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xefffffff;
   (gameTrackerX.playerInstance)->flags = (gameTrackerX.playerInstance)->flags & 0xfffffeff;
   gameTrackerX.gameMode = 0;
   GAMEPAD_RestoreControllers();
-                    /* WARNING: Subroutine does not return */
   INSTANCE_Post(gameTrackerX.playerInstance,(int)&DAT_0010000a,0);
+  return;
 }
 
 
@@ -1977,8 +2563,25 @@ void GAMELOOP_ModeStartPause(void)
 
 {
   gameTrackerX.gameMode = 6;
-                    /* WARNING: Subroutine does not return */
   INSTANCE_Post(gameTrackerX.playerInstance,(int)&DAT_0010000a,1);
+  currentMenu = &pauseMenu;
+  menu_set(gameTrackerX.menu,menudefs_pause_menu);
+  SOUND_PauseAllSound();
+  VOICEXA_Pause();
+  SndPlay(5);
+  gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x10000000;
+  GAMEPAD_SaveControllers();
+  gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x8000000;
+  if (gameTrackerX.primPool == primPool2) {
+    gameTrackerX.primPool = PTR_800d1d24;
+  }
+  else {
+    gameTrackerX.primPool = primPool2;
+  }
+  (gameTrackerX.primPool)->nextPrim = (gameTrackerX.primPool)->prim;
+  (gameTrackerX.primPool)->numPrims = 0;
+  SaveOT();
+  return;
 }
 
 
@@ -1996,6 +2599,8 @@ void GAMELOOP_ModeStartPause(void)
 		// Start line: 7826
 	/* end block 2 */
 	// End Line: 7827
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void GAMELOOP_DemoSetup(void)
 
@@ -2040,17 +2645,19 @@ void GAMELOOP_ChangeMode(void)
              ((gameTrackerX.playerInstance)->position).z + 100;
         (gameTrackerX.playerInstance)->zVel = 0;
         gameTrackerX.cheatMode = '\x01';
-                    /* WARNING: Subroutine does not return */
         INSTANCE_Post(gameTrackerX.playerInstance,(int)&DAT_00100010,1);
+        (gameTrackerX.playerInstance)->flags = (gameTrackerX.playerInstance)->flags & 0xfffff7ff;
       }
-      if ((gameTrackerX.controlCommand[0][0] & 0xa02U) == 0xa02) {
-        theCamera.forced_movement = 1;
-        ((gameTrackerX.playerInstance)->position).z =
-             ((gameTrackerX.playerInstance)->position).z + -100;
-        (gameTrackerX.playerInstance)->zVel = 0;
-        gameTrackerX.cheatMode = '\0';
-                    /* WARNING: Subroutine does not return */
-        INSTANCE_Post(gameTrackerX.playerInstance,(int)&DAT_00100010,0);
+      else {
+        if ((gameTrackerX.controlCommand[0][0] & 0xa02U) == 0xa02) {
+          theCamera.forced_movement = 1;
+          ((gameTrackerX.playerInstance)->position).z =
+               ((gameTrackerX.playerInstance)->position).z + -100;
+          (gameTrackerX.playerInstance)->zVel = 0;
+          gameTrackerX.cheatMode = '\0';
+          INSTANCE_Post(gameTrackerX.playerInstance,(int)&DAT_00100010,0);
+          gameTrackerX.gameMode = 0;
+        }
       }
     }
     if ((gameTrackerX.debugFlags & 0x40000U) != 0) goto LAB_800309c0;
@@ -2098,14 +2705,13 @@ LAB_80030ae4:
        (gameTrackerX.gameMode != 0)) || ((gameTrackerX.gameFlags & 0x80U) != 0)) ||
      ((gameTrackerX.wipeTime != 0 &&
       ((gameTrackerX.wipeType == 0xb || (gameTrackerX.wipeTime != -1)))))) {
-    if ((((gameTrackerX.controlCommand[0][1] & 0x4000U) != 0) ||
-        ((gameTrackerX.gameFlags & 0x40000000U) != 0)) &&
-       (((gameTrackerX.gameMode != 0 && ((gameTrackerX.gameFlags & 0x20000000U) == 0)) &&
-        ((gameTrackerX.wipeTime == 0 ||
-         ((gameTrackerX.wipeType != 0xb && (gameTrackerX.wipeTime == -1)))))))) {
+    if (((((gameTrackerX.controlCommand[0][1] & 0x4000U) != 0) ||
+         ((gameTrackerX.gameFlags & 0x40000000U) != 0)) &&
+        ((gameTrackerX.gameMode != 0 && ((gameTrackerX.gameFlags & 0x20000000U) == 0)))) &&
+       ((gameTrackerX.wipeTime == 0 ||
+        ((gameTrackerX.wipeType != 0xb && (gameTrackerX.wipeTime == -1)))))) {
       if (((gameTrackerX.controlCommand[0][1] & 0x4000U) != 0) &&
          ((gameTrackerX.gameFlags & 0x40000000U) == 0)) {
-                    /* WARNING: Subroutine does not return */
         SndPlay(5);
       }
       gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xbfffffff;
@@ -2143,8 +2749,9 @@ void GAMELOOP_RequestLevelChange(char *name,short number,GameTracker *gameTracke
   if (gameTracker->levelChange == 0) {
     gameTracker->gameFlags = gameTracker->gameFlags | 1;
     SOUND_ResetAllSound();
-                    /* WARNING: Subroutine does not return */
     sprintf(gameTracker->baseAreaName,"%s%d");
+    gameTracker->levelChange = 1;
+    gameTracker->levelDone = 1;
   }
   return;
 }

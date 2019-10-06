@@ -21,8 +21,16 @@
 void G2PoolMem_InitPool(void *voidPool,int blockCount,int blockSize)
 
 {
-                    /* WARNING: Subroutine does not return */
-  MEMPACK_Malloc(blockCount * blockSize,'\x19');
+  char *pcVar1;
+  
+  pcVar1 = MEMPACK_Malloc(blockCount * blockSize,'\x19');
+  *(char **)((int)voidPool + 0xc) = pcVar1;
+  pcVar1 = MEMPACK_Malloc(blockCount << 1,'\x19');
+  *(char **)((int)voidPool + 8) = pcVar1;
+  *(short *)voidPool = (short)blockSize;
+  *(undefined2 *)((int)voidPool + 4) = (short)blockCount;
+  G2PoolMem_ResetPool(voidPool);
+  return;
 }
 
 

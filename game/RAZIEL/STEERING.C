@@ -164,8 +164,42 @@ int GetControllerInput(int *ZDirection,long *controlCommand)
 int DecodeDirection(int Source,int Destination,short *Difference,short *Zone)
 
 {
-                    /* WARNING: Subroutine does not return */
-  AngleDiff((short)Destination,(short)Source);
+  short sVar1;
+  short sVar2;
+  int iVar3;
+  
+  sVar1 = AngleDiff((short)Destination,(short)Source);
+  *Difference = sVar1;
+  if ((ushort)(sVar1 + 0x1ffU) < 0x3ff) {
+    *Zone = 0;
+    iVar3 = 0x10000001;
+  }
+  else {
+    if ((ushort)(sVar1 - 0x200U) < 0x400) {
+      *Zone = 0x400;
+      iVar3 = 0x10000004;
+    }
+    else {
+      if ((ushort)(sVar1 + 0x5ffU) < 0x400) {
+        *Zone = -0x400;
+        iVar3 = 0x10000002;
+      }
+      else {
+        if (sVar1 < 0x600) {
+          sVar2 = -0x800;
+          if (-0x600 < sVar1) {
+            return 0;
+          }
+        }
+        else {
+          sVar2 = 0x800;
+        }
+        *Zone = sVar2;
+        iVar3 = 0x10000003;
+      }
+    }
+  }
+  return iVar3;
 }
 
 
@@ -268,22 +302,37 @@ int DecodeDirection(int Source,int Destination,short *Difference,short *Zone)
 int ProcessMovement(_Instance *instance,long *controlCommand,GameTracker *GT)
 
 {
+  short destination;
+  ushort uVar1;
+  long lVar2;
+  _G2Bool_Enum _Var3;
   int ix;
   int iy;
-  int iVar1;
-  int aiStack32 [4];
+  short step;
+  short *Difference;
+  short *Zone;
+  _G2Anim_Type *anim;
+  int rc;
+  _G2SVector3_Type local_28;
+  int iStack32;
+  short sStack28;
+  short sStack26;
+  short sStack24;
+  short asStack22 [3];
   
   if (((Raziel.steeringMode == 9) || (Raziel.steeringMode == 0xe)) || (Raziel.steeringMode == 0xf))
   {
-    iVar1 = 0;
+    rc = 0;
   }
   else {
-    iVar1 = GetControllerInput(aiStack32,controlCommand);
+    rc = GetControllerInput(&iStack32,controlCommand);
   }
   razZeroAxis(controlCommand + 3,controlCommand + 4,0x400);
   ix = controlCommand[3];
   if (((ix == 0x80) || (ix == -0x80)) || ((iy = controlCommand[4], iy == 0x80 || (iy == -0x80)))) {
     ix = 0x1000;
+LAB_800a17f8:
+    Raziel.Magnitude = ix;
   }
   else {
     Raziel.Magnitude = MATH3D_veclen2(ix,iy);
@@ -291,17 +340,153 @@ int ProcessMovement(_Instance *instance,long *controlCommand,GameTracker *GT)
     if (0x1000 < Raziel.Magnitude) {
       Raziel.Magnitude = 0x1000;
     }
-    if ((Raziel.Magnitude == 0) || (ix = 0x400, 0x3ff < Raziel.Magnitude)) goto LAB_800a17fc;
+    if ((Raziel.Magnitude != 0) && (ix = 0x400, Raziel.Magnitude < 0x400)) goto LAB_800a17f8;
   }
-  Raziel.Magnitude = ix;
-LAB_800a17fc:
   Raziel.lastInput = Raziel.input;
   ix = (controlCommand[4] << 0xc) >> 0x1f;
   iy = (controlCommand[3] << 0xc) >> 0x1f;
-                    /* WARNING: Subroutine does not return */
-  Raziel.input = iVar1;
-  ratan2(((controlCommand[4] << 0xc) / 6 + ix >> 4) - ix,
-         ((controlCommand[3] << 0xc) / 6 + iy >> 4) - iy);
+  Raziel.input = rc;
+  ix = ratan2(((controlCommand[4] << 0xc) / 6 + ix >> 4) - ix,
+              ((controlCommand[3] << 0xc) / 6 + iy >> 4) - iy);
+  Raziel.ZDirection = 0x400U - ix & 0xfff;
+  if (rc != 0) {
+    Raziel.LastBearing = (short)Raziel.ZDirection + theCamera.lagZ;
+  }
+  Raziel.Bearing = AngleDiff((instance->rotation).z,Raziel.LastBearing);
+  switch(Raziel.steeringMode) {
+  case 0:
+  case 0x10:
+    goto switchD_800a18b4_caseD_0;
+  case 1:
+    Raziel.steeringVelocity = 0x100;
+    goto LAB_800a1928;
+  case 2:
+    SteerMove(instance,rc);
+    break;
+  case 4:
+    local_28.y = 0;
+    local_28.x = 0;
+    local_28.z = (short)Raziel.steeringLockRotation - Raziel.LastBearing;
+    (instance->rotation).z = Raziel.LastBearing;
+    if (rc != 0) {
+      lVar2 = 0x15;
+      if (Raziel.Mode == 0x10) {
+        lVar2 = 0x28;
+      }
+      instance->yVel = lVar2;
+    }
+    G2Anim_SetController_Vector(&instance->anim,1,0xe,&local_28);
+    break;
+  case 5:
+  case 9:
+    if (rc != 0) {
+LAB_800a1a80:
+      rc = SteerAutoFace(instance,controlCommand);
+      return rc;
+    }
+    if ((*PadData & 0x200) == 0) {
+      return 0;
+    }
+    if ((Raziel.Senses.EngagedMask & 0x40) == 0) {
+      return 0;
+    }
+    SteerDisableAutoFace(instance);
+    destination = MATH3D_AngleFromPosToPos
+                            (&instance->position,&(Raziel.Senses.EngagedList[6].instance)->position)
+    ;
+    Raziel.steeringVelocity = 0x80;
+    step = (short)((gameTrackerX.timeMult << 0xb) >> 0x10);
+    goto LAB_800a1bb0;
+  case 6:
+  case 0x11:
+    if (rc != 0) {
+      SteerSwim(instance);
+    }
+    anim = &instance->anim;
+    _Var3 = G2Anim_IsControllerActive(anim,1,0xe);
+    if (_Var3 == G2FALSE) {
+      G2Anim_EnableController(anim,1,0xe);
+    }
+    G2Anim_SetController_Vector(anim,1,0xe,&Raziel.extraRot);
+    break;
+  case 7:
+    SteerWallcrawling(instance);
+    Difference = &sStack24;
+    if (rc == 0) {
+      return 0;
+    }
+    Zone = asStack22;
+    goto LAB_800a1b74;
+  case 8:
+    Raziel.steeringVelocity = 0x60;
+    goto LAB_800a1928;
+  case 10:
+    destination = MATH3D_AngleFromPosToPos(&instance->position,&(Raziel.attackedBy)->position);
+    Raziel.steeringVelocity = 0x100;
+    step = (short)((gameTrackerX.timeMult << 0xc) >> 0x10);
+    goto LAB_800a1bb0;
+  case 0xb:
+    anim = &instance->anim;
+    _Var3 = G2Anim_IsControllerActive(anim,1,0xe);
+    if (_Var3 == G2FALSE) {
+      G2Anim_EnableController(anim,1,0xe);
+    }
+    G2Anim_SetController_Vector(anim,1,0xe,&Raziel.extraRot);
+    goto switchD_800a18b4_caseD_0;
+  case 0xc:
+    destination = MATH3D_AngleFromPosToPos(&instance->position,&Raziel.puppetRotToPoint);
+    goto LAB_800a1c10;
+  case 0xd:
+    destination = Raziel.puppetRotToPoint.z;
+LAB_800a1c10:
+    Raziel.steeringVelocity = 0x100;
+    AngleMoveToward(&(instance->rotation).z,destination,
+                    (short)((gameTrackerX.timeMult << 0xc) >> 0x10));
+    if (destination == (instance->rotation).z) {
+      SteerSwitchMode(instance,0);
+    }
+    break;
+  case 0xe:
+    if (((*PadData & 0x200) != 0) && ((Raziel.Senses.EngagedMask & 0x40) != 0)) {
+      destination = MATH3D_AngleFromPosToPos
+                              (&instance->position,
+                               &(Raziel.Senses.EngagedList[6].instance)->position);
+      (instance->rotation).z = destination;
+    }
+    break;
+  case 0xf:
+    if (rc != 0) goto LAB_800a1a80;
+    if ((Raziel.Senses.EngagedMask & 0x40) == 0) {
+      return 0;
+    }
+    SteerDisableAutoFace(instance);
+    destination = MATH3D_AngleFromPosToPos
+                            (&instance->position,&(Raziel.Senses.EngagedList[6].instance)->position)
+    ;
+    uVar1 = MON_FacingOffset(Raziel.Senses.EngagedList[6].instance,instance);
+    if (((uint)uVar1 & 0xfff) - 0x2ab < 0xaab) {
+      return 0;
+    }
+    Raziel.steeringVelocity = 0x80;
+    step = (short)((gameTrackerX.timeMult << 0xb) >> 0x10);
+LAB_800a1bb0:
+    AngleMoveToward(&(instance->rotation).z,destination,step);
+    break;
+  case 0x12:
+    Raziel.steeringVelocity = 0x40;
+LAB_800a1928:
+    SteerTurn(instance,rc);
+  }
+  return rc;
+switchD_800a18b4_caseD_0:
+  Difference = &sStack28;
+  if (rc == 0) {
+    return 0;
+  }
+  Zone = &sStack26;
+LAB_800a1b74:
+  rc = DecodeDirection((int)Raziel.Bearing,0,Difference,Zone);
+  return rc;
 }
 
 
@@ -338,17 +523,19 @@ void SteerTurn(_Instance *instance,int rc)
   
   if ((rc == 0) && (Raziel.Bearing == 0)) {
     Raziel.steeringVelocity = 0;
-    return;
   }
-  sVar1 = Raziel.LastBearing;
-  if ((Raziel.Bearing == 0x800) &&
-     (sVar1 = Raziel.LastBearing + 1, (int)(instance->rotation).z - (int)Raziel.LastBearing < 1)) {
-    sVar1 = Raziel.LastBearing + -1;
+  else {
+    sVar1 = Raziel.LastBearing;
+    if ((Raziel.Bearing == 0x800) &&
+       (sVar1 = Raziel.LastBearing + 1, (int)(instance->rotation).z - (int)Raziel.LastBearing < 1))
+    {
+      sVar1 = Raziel.LastBearing + -1;
+    }
+    Raziel.LastBearing = sVar1;
+    AngleMoveToward(&(instance->rotation).z,Raziel.LastBearing,
+                    (short)((int)Raziel.steeringVelocity * gameTrackerX.timeMult * 0x10 >> 0x10));
   }
-  Raziel.LastBearing = sVar1;
-                    /* WARNING: Subroutine does not return */
-  AngleMoveToward(&(instance->rotation).z,Raziel.LastBearing,
-                  (short)((int)Raziel.steeringVelocity * gameTrackerX.timeMult * 0x10 >> 0x10));
+  return;
 }
 
 
@@ -369,23 +556,24 @@ void SteerMove(_Instance *instance,int rc)
   
   if ((rc == 0) && (Raziel.Bearing == 0)) {
     Raziel.steeringVelocity = 0;
-    return;
   }
-  Raziel.steeringVelocity = -Raziel.Bearing;
-  if (-1 < Raziel.Bearing) {
-    Raziel.steeringVelocity = Raziel.Bearing;
-  }
-  iVar1 = (int)Raziel.steeringVelocity;
-  Raziel.steeringVelocity = 0x70;
-  if (0x300 < iVar1) {
-    if (iVar1 < 0) {
-      iVar1 = iVar1 + 3;
+  else {
+    Raziel.steeringVelocity = -Raziel.Bearing;
+    if (-1 < Raziel.Bearing) {
+      Raziel.steeringVelocity = Raziel.Bearing;
     }
-    Raziel.steeringVelocity = (short)(iVar1 >> 2) + 0x70;
+    iVar1 = (int)Raziel.steeringVelocity;
+    Raziel.steeringVelocity = 0x70;
+    if (0x300 < iVar1) {
+      if (iVar1 < 0) {
+        iVar1 = iVar1 + 3;
+      }
+      Raziel.steeringVelocity = (short)(iVar1 >> 2) + 0x70;
+    }
+    AngleMoveToward(&(instance->rotation).z,Raziel.LastBearing,
+                    (short)((int)Raziel.steeringVelocity * gameTrackerX.timeMult * 0x10 >> 0x10));
   }
-                    /* WARNING: Subroutine does not return */
-  AngleMoveToward(&(instance->rotation).z,Raziel.LastBearing,
-                  (short)((int)Raziel.steeringVelocity * gameTrackerX.timeMult * 0x10 >> 0x10));
+  return;
 }
 
 
@@ -421,8 +609,88 @@ void SteerMove(_Instance *instance,int rc)
 int SteerAutoFace(_Instance *instance,long *controlCommand)
 
 {
-                    /* WARNING: Subroutine does not return */
-  MATH3D_AngleFromPosToPos(&instance->position,&(Raziel.Senses.EngagedList[6].instance)->position);
+  bool bVar1;
+  short current;
+  short sVar2;
+  _G2Bool_Enum _Var3;
+  _G2Anim_Type *anim;
+  int iVar4;
+  uint uVar5;
+  _G2SVector3_Type local_20;
+  
+  current = MATH3D_AngleFromPosToPos
+                      (&instance->position,&(Raziel.Senses.EngagedList[6].instance)->position);
+  Raziel.autoFaceTrueAngle = (int)current;
+  Raziel.autoFaceLastAnim = Raziel.autoFaceAnim;
+  sVar2 = AngleDiff(current,Raziel.LastBearing);
+  current = Raziel.LastBearing;
+  iVar4 = (int)sVar2;
+  bVar1 = iVar4 + 0x17fU < 0x2ff;
+  if (bVar1) {
+    Raziel.autoFaceAnim = 0;
+    Raziel.autoFaceRootAngle = 0;
+  }
+  uVar5 = (uint)bVar1;
+  if (iVar4 + 0x5ffU < 0x480) {
+    uVar5 = 2;
+    Raziel.autoFaceAnim = 1;
+    Raziel.autoFaceRootAngle = 0x400;
+  }
+  if (iVar4 - 0x180U < 0x480) {
+    uVar5 = 4;
+    Raziel.autoFaceAnim = 3;
+    Raziel.autoFaceRootAngle = -0x400;
+  }
+  if (0xbfe < iVar4 + 0x5ffU) {
+    uVar5 = 3;
+    Raziel.autoFaceAnim = 2;
+    Raziel.autoFaceRootAngle = 0x800;
+  }
+  Raziel.steeringVelocity = 0x40;
+  AngleMoveToward(&(instance->rotation).z,Raziel.LastBearing,
+                  (short)((gameTrackerX.timeMult << 10) >> 0x10));
+  Raziel.autoFaceAnim = uVar5 - 1;
+  Raziel.autoFaceAngle = current;
+  if (Raziel.autoFaceAnim != Raziel.autoFaceLastAnim) {
+    anim = &instance->anim;
+    (instance->rotation).z = Raziel.LastBearing;
+    local_20.x = 0;
+    local_20.y = 0;
+    local_20.z = (short)Raziel.autoFaceRootAngle;
+    _Var3 = G2Anim_IsControllerActive(anim,1,10);
+    if (_Var3 == G2FALSE) {
+      G2Anim_EnableController(anim,1,10);
+    }
+    if (Raziel.input == Raziel.lastInput) {
+      G2EmulationSetInterpController_Vector(instance,1,10,&local_20,4,3);
+    }
+    else {
+      G2Anim_SetController_Vector(anim,1,10,&local_20);
+    }
+  }
+  anim = &instance->anim;
+  current = AngleDiff((instance->rotation).z,(short)Raziel.autoFaceTrueAngle);
+  _Var3 = G2Anim_IsControllerInterpolating(anim,1,10);
+  if (_Var3 == G2FALSE) {
+    local_20.x = 0;
+    local_20.y = 0;
+    local_20.z = current - (short)Raziel.autoFaceRootAngle;
+    _Var3 = G2Anim_IsControllerActive(anim,0xe,0xe);
+    if (_Var3 == G2FALSE) {
+      G2Anim_EnableController(anim,0xe,0xe);
+    }
+    G2Anim_SetController_Vector(anim,0xe,0xe,&local_20);
+  }
+  else {
+    _Var3 = G2Anim_IsControllerInterpolating(anim,0xe,0xe);
+    if (_Var3 == G2FALSE) {
+      local_20.x = 0;
+      local_20.y = 0;
+      local_20.z = current - (short)Raziel.autoFaceRootAngle;
+      G2EmulationSetInterpController_Vector(instance,0xe,0xe,&local_20,4,3);
+    }
+  }
+  return uVar5 | 0x10001000;
 }
 
 
@@ -449,8 +717,31 @@ int SteerAutoFace(_Instance *instance,long *controlCommand)
 void SteerSwim(_Instance *instance)
 
 {
-                    /* WARNING: Subroutine does not return */
-  rsin(Raziel.ZDirection);
+  int iVar1;
+  
+  iVar1 = rsin(Raziel.ZDirection);
+  iVar1 = ((gameTrackerX.timeMult << 5) >> 0xc) * iVar1;
+  if (iVar1 < 0) {
+    iVar1 = iVar1 + 0xfff;
+  }
+  (instance->rotation).z = (instance->rotation).z - (short)(iVar1 >> 0xc);
+  iVar1 = rcos(Raziel.ZDirection);
+  if ((Raziel.steeringMode != 0x11) || (iVar1 < 0)) {
+    iVar1 = (gameTrackerX.timeMult * 0x30 >> 0xc) * iVar1;
+    if (iVar1 < 0) {
+      iVar1 = iVar1 + 0xfff;
+    }
+    Raziel.extraRot.x = Raziel.extraRot.x - (short)(iVar1 >> 0xc);
+  }
+  if (0x800 < Raziel.extraRot.x) {
+    Raziel.extraRot.x = 0x800;
+  }
+  if (Raziel.extraRot.x < 0) {
+    Raziel.extraRot.x = 0;
+  }
+  Raziel.extraRot.y = 0;
+  Raziel.extraRot.z = 0;
+  return;
 }
 
 
@@ -472,9 +763,10 @@ void SteerSwim(_Instance *instance)
 void SteerWallcrawling(_Instance *instance)
 
 {
-                    /* WARNING: Subroutine does not return */
-  AngleDiff((short)(((uint)(ushort)ExtraRot->y - 0x800) * 0x10000 >> 0x10),(short)Raziel.ZDirection)
-  ;
+  Raziel.Bearing =
+       AngleDiff((short)(((uint)(ushort)ExtraRot->y - 0x800) * 0x10000 >> 0x10),
+                 (short)Raziel.ZDirection);
+  return;
 }
 
 
@@ -497,12 +789,10 @@ void SteerDisableAutoFace(_Instance *instance)
   anim = &instance->anim;
   _Var1 = G2Anim_IsControllerActive(anim,1,10);
   if (_Var1 != G2FALSE) {
-                    /* WARNING: Subroutine does not return */
     G2Anim_DisableController(anim,1,10);
   }
   _Var1 = G2Anim_IsControllerActive(anim,0xe,0xe);
   if (_Var1 != G2FALSE) {
-                    /* WARNING: Subroutine does not return */
     G2Anim_DisableController(anim,0xe,0xe);
   }
   (instance->rotation).z = (instance->rotation).z + (short)Raziel.autoFaceRootAngle;
@@ -530,7 +820,8 @@ void SteerDisableAutoFace(_Instance *instance)
 void SteerSwitchMode(_Instance *instance,int mode)
 
 {
-  _G2Bool_Enum _Var1;
+  short sVar1;
+  _G2Bool_Enum _Var2;
   
   switch(Raziel.steeringMode) {
   case 0:
@@ -539,10 +830,11 @@ void SteerSwitchMode(_Instance *instance,int mode)
   case 4:
   case 8:
   case 0x12:
-    _Var1 = G2Anim_IsControllerActive(&instance->anim,1,0xe);
-    if (_Var1 != G2FALSE) {
-                    /* WARNING: Subroutine does not return */
+    _Var2 = G2Anim_IsControllerActive(&instance->anim,1,0xe);
+    if (_Var2 != G2FALSE) {
       G2Anim_DisableController(&instance->anim,1,0xe);
+      (instance->rotation).z = (short)Raziel.steeringLockRotation;
+      Raziel.LastBearing = (short)Raziel.steeringLockRotation;
     }
     break;
   case 5:
@@ -553,8 +845,8 @@ void SteerSwitchMode(_Instance *instance,int mode)
   case 6:
   case 0x11:
     if ((((mode != 6) && (mode != 0xb)) && (mode != 0x10)) && (mode != 0x11)) {
-      _Var1 = G2Anim_IsControllerActive(&instance->anim,1,0xe);
-      if (_Var1 != G2FALSE) {
+      _Var2 = G2Anim_IsControllerActive(&instance->anim,1,0xe);
+      if (_Var2 != G2FALSE) {
         G2Anim_InterpDisableController(&instance->anim,1,0xe,600);
       }
       Raziel.extraRot.x = 0;
@@ -602,9 +894,9 @@ void SteerSwitchMode(_Instance *instance,int mode)
     Raziel.RotationSegment = 1;
     break;
   case 0xe:
-                    /* WARNING: Subroutine does not return */
-    MATH3D_AngleFromPosToPos(&instance->position,&(Raziel.Senses.EngagedList[6].instance)->position)
-    ;
+    sVar1 = MATH3D_AngleFromPosToPos
+                      (&instance->position,&(Raziel.Senses.EngagedList[6].instance)->position);
+    (instance->rotation).z = sVar1;
   }
   Raziel.steeringMode = mode;
   return;
@@ -633,8 +925,36 @@ void SteerSwitchMode(_Instance *instance,int mode)
 void razInitWallCrawlSteering(_Instance *instance)
 
 {
-                    /* WARNING: Subroutine does not return */
-  G2Anim_EnableController(&instance->anim,1,0x26);
+  MATRIX *pMVar1;
+  _G2Anim_Type *anim;
+  _G2SVector3_Type local_18;
+  
+  anim = &instance->anim;
+  G2Anim_EnableController(anim,1,0x26);
+  local_18.x = 0;
+  local_18.y = 0;
+  local_18.z = -0x13e;
+  (instance->position).z = (instance->position).z + 0x13e;
+  pMVar1 = instance->matrix;
+  (instance->oldPos).z = (instance->oldPos).z + 0x13e;
+  pMVar1->t[2] = pMVar1->t[2] + 0x13e;
+  instance->oldMatrix->t[2] = instance->oldMatrix->t[2] + 0x13e;
+  G2Anim_SetController_Vector(anim,1,0x26,&local_18);
+  G2Anim_EnableController(anim,0,0xe);
+  local_18.x = (instance->rotation).x;
+  local_18.y = (instance->rotation).y;
+  local_18.z = (instance->rotation).z;
+  G2Anim_EnableController(anim,0,8);
+  G2Anim_SetControllerAngleOrder(anim,0,8,1);
+  G2Anim_SetController_Vector(anim,0,8,&local_18);
+  G2Anim_EnableController(anim,0xe,0xe);
+  G2Anim_EnableController(anim,0x32,0x4c);
+  G2Anim_EnableController(anim,0x3a,0x4c);
+  ExtraRotData.x = 0;
+  ExtraRotData.y = 0;
+  ExtraRotData.z = 0;
+  ExtraRot = &ExtraRotData;
+  return;
 }
 
 
@@ -651,8 +971,22 @@ void razInitWallCrawlSteering(_Instance *instance)
 void razDeinitWallCrawlSteering(_Instance *instance)
 
 {
-                    /* WARNING: Subroutine does not return */
-  G2Anim_DisableController(&instance->anim,1,0x26);
+  MATRIX *pMVar1;
+  _G2Anim_Type *anim;
+  
+  anim = &instance->anim;
+  G2Anim_DisableController(anim,1,0x26);
+  (instance->position).z = (instance->position).z + -0x13e;
+  pMVar1 = instance->matrix;
+  (instance->oldPos).z = (instance->oldPos).z + -0x13e;
+  pMVar1->t[2] = pMVar1->t[2] + -0x13e;
+  instance->oldMatrix->t[2] = instance->oldMatrix->t[2] + -0x13e;
+  G2Anim_InterpDisableController(anim,0,0xe,300);
+  G2Anim_InterpDisableController(anim,0,8,300);
+  G2Anim_InterpDisableController(anim,0xe,0xe,300);
+  G2Anim_InterpDisableController(anim,0x32,0x4c,300);
+  G2Anim_InterpDisableController(anim,0x3a,0x4c,300);
+  return;
 }
 
 

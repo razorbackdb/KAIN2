@@ -125,27 +125,38 @@ int PLANCOLL_CheckUnderwaterPoint(_Position *position)
   BSPTree *pBVar2;
   _BSPNode *p_Var3;
   Level **ppLVar4;
-  int iVar5;
+  Level *pLVar5;
+  int iVar6;
+  STracker *pSVar7;
   
-  iVar5 = 0x10;
+  pSVar7 = &StreamTracker;
+  iVar6 = 0x10;
   ppLVar4 = &StreamTracker.StreamList[0].level;
-  while ((*(short *)(ppLVar4 + -1) != 2 ||
-         (lVar1 = MEMPACK_MemoryValidFunc((char *)*ppLVar4), lVar1 == 0))) {
-    iVar5 = iVar5 + -1;
+  do {
+    if ((*(short *)(ppLVar4 + -1) == 2) &&
+       (lVar1 = MEMPACK_MemoryValidFunc((char *)*ppLVar4), lVar1 != 0)) {
+      pLVar5 = *ppLVar4;
+      pBVar2 = pLVar5->terrain->BSPTreeArray;
+      p_Var3 = pBVar2->bspRoot;
+      lVar1 = MATH3D_LengthXYZ((int)position->x -
+                               (int)(short)((p_Var3->sphere).position.x + (pBVar2->globalOffset).x),
+                               (int)position->y -
+                               (int)(short)((p_Var3->sphere).position.y + (pBVar2->globalOffset).y),
+                               (int)position->z -
+                               (int)(short)((p_Var3->sphere).position.z + (pBVar2->globalOffset).z))
+      ;
+      if ((lVar1 < (int)(uint)(p_Var3->sphere).radius) && ((int)position->z < pLVar5->waterZLevel))
+      {
+        return pSVar7->StreamList[0].StreamUnitID;
+      }
+    }
+    iVar6 = iVar6 + -1;
     ppLVar4 = ppLVar4 + 0x10;
-    if (iVar5 == 0) {
+    pSVar7 = (STracker *)(pSVar7->StreamList + 1);
+    if (iVar6 == 0) {
       return -1;
     }
-  }
-  pBVar2 = (*ppLVar4)->terrain->BSPTreeArray;
-  p_Var3 = pBVar2->bspRoot;
-                    /* WARNING: Subroutine does not return */
-  MATH3D_LengthXYZ((int)position->x -
-                   (int)(short)((p_Var3->sphere).position.x + (pBVar2->globalOffset).x),
-                   (int)position->y -
-                   (int)(short)((p_Var3->sphere).position.y + (pBVar2->globalOffset).y),
-                   (int)position->z -
-                   (int)(short)((p_Var3->sphere).position.z + (pBVar2->globalOffset).z));
+  } while( true );
 }
 
 
@@ -273,8 +284,28 @@ int PLANCOLL_DoesWaterPathUpExist
               int passThroughHit)
 
 {
-                    /* WARNING: Subroutine does not return */
-  MATH3D_FastSqrt(0x50000);
+  short sVar1;
+  short sVar2;
+  long lVar3;
+  long lVar4;
+  int iVar5;
+  
+  lVar3 = MATH3D_FastSqrt(0x50000);
+  iVar5 = ((uint)(ushort)startPos->z - (uint)(ushort)endPos->z) + 0x280;
+  peakPos->z = (short)iVar5;
+  lVar4 = MATH3D_FastSqrt((iVar5 * 0x20000) / 3);
+  if (lVar4 < 0) {
+    lVar4 = lVar4 + 0xf;
+  }
+  iVar5 = lVar4 >> 4;
+  sVar1 = endPos->y;
+  sVar2 = startPos->y;
+  peakPos->x = endPos->x +
+               (short)((((int)(((uint)(ushort)startPos->x - (uint)(ushort)endPos->x) * 0x10000) >>
+                        0x10) * iVar5) / (lVar3 + iVar5));
+  peakPos->y = endPos->y + (short)(((short)(sVar2 - sVar1) * iVar5) / (lVar3 + iVar5));
+  iVar5 = PLANCOLL_DoesLOSExistFinal(startPos,peakPos,collideType,passThroughHit,0);
+  return iVar5;
 }
 
 

@@ -69,16 +69,24 @@ void VWRAITH_MoveVertical(_Instance *instance,long targetZ,int velocity)
 void VWRAITH_Init(_Instance *instance)
 
 {
-  int iVar1;
+  _FXGlowEffect *p_Var1;
+  int iVar2;
+  uint *puVar3;
   long local_18 [2];
   
-  iVar1 = (int)*(short *)((int)instance->extraData + 0x140);
-  if (iVar1 < 0) {
-    iVar1 = iVar1 + 0xfff;
+  puVar3 = (uint *)instance->extraData;
+  iVar2 = (int)*(short *)(puVar3 + 0x50);
+  if (iVar2 < 0) {
+    iVar2 = iVar2 + 0xfff;
   }
-  local_18[0] = FX_GetHealthColor(iVar1 >> 0xc);
-                    /* WARNING: Subroutine does not return */
-  FX_DoInstanceTwoSegmentGlow(instance,0x15,0x17,local_18,1,0x4b0,0x9c);
+  local_18[0] = FX_GetHealthColor(iVar2 >> 0xc);
+  p_Var1 = FX_DoInstanceTwoSegmentGlow(instance,0x15,0x17,local_18,1,0x4b0,0x9c);
+  *(_FXGlowEffect **)(puVar3 + 0x37) = p_Var1;
+  MON_DefaultInit(instance);
+  *(undefined2 *)(puVar3 + 0x51) = 0x3000;
+  puVar3[1] = puVar3[1] & 0xfffffffe;
+  *puVar3 = *puVar3 | 0x10002800;
+  return;
 }
 
 
@@ -169,12 +177,15 @@ void VWRAITH_PursueEntry(_Instance *instance)
   }
   if ((*(uint *)((int)pvVar2 + 4) & 2) == 0) {
     MON_PursueEntry(instance);
-    return;
   }
-                    /* WARNING: Subroutine does not return */
-  MON_PlayAnimFromList
-            (instance,*(char **)((int)instance->data + 8),
-             (int)*(char *)(*(int *)((int)instance->data + 4) + 0xe),1);
+  else {
+    MON_PlayAnimFromList
+              (instance,*(char **)((int)instance->data + 8),
+               (int)*(char *)(*(int *)((int)instance->data + 4) + 0xe),1);
+    *(undefined4 *)((int)pvVar2 + 0x108) = 4;
+    *(undefined2 *)((int)pvVar2 + 0x126) = 0;
+  }
+  return;
 }
 
 
@@ -211,35 +222,67 @@ void VWRAITH_PursueEntry(_Instance *instance)
 void VWRAITH_Pursue(_Instance *instance)
 
 {
-  int iVar1;
+  char cVar1;
+  int iVar2;
+  _MonsterAnim *p_Var3;
   undefined4 local_18;
-  void *pvVar2;
+  void *pvVar4;
   undefined4 local_14;
-  void *pvVar3;
+  void *pvVar5;
   
-  pvVar2 = instance->extraData;
-  pvVar3 = instance->data;
-  if ((*(uint *)((int)pvVar2 + 4) & 2) != 0) {
-    if (*(int *)((int)pvVar2 + 0xc4) != 0) {
-                    /* WARNING: Subroutine does not return */
-      MON_TurnToPosition(instance,(_Position *)(*(int *)(*(int *)((int)pvVar2 + 0xc4) + 4) + 0x5c),
-                         *(short *)(*(int *)((int)pvVar2 + 0x164) + 0x20));
+  pvVar4 = instance->extraData;
+  pvVar5 = instance->data;
+  if ((*(uint *)((int)pvVar4 + 4) & 2) == 0) {
+    iVar2 = VWRAITH_ShouldISwoop(instance);
+    if (iVar2 == 0) {
+      if (*(int *)((int)pvVar4 + 0xc4) != 0) {
+        VWRAITH_MoveVertical
+                  (instance,(int)*(short *)(*(int *)(*(int *)((int)pvVar4 + 0xc4) + 4) + 0x60),
+                   (int)*(short *)(*(int *)((int)pvVar5 + 4) + 6));
+      }
+      MON_Pursue(instance);
     }
-    *(uint *)((int)pvVar2 + 4) = *(uint *)((int)pvVar2 + 4) & 0xfffffffd;
-                    /* WARNING: Subroutine does not return */
+    else {
+      MON_SwitchState(instance,(MonsterState)CONCAT44(local_14,local_18));
+    }
+  }
+  else {
+    if (*(int *)((int)pvVar4 + 0xc4) == 0) {
+      *(uint *)((int)pvVar4 + 4) = *(uint *)((int)pvVar4 + 4) & 0xfffffffd;
+    }
+    else {
+      cVar1 = *(char *)(*(int *)((int)pvVar5 + 4) + 0x10);
+      iVar2 = *(int *)((int)pvVar5 + 0x38);
+      MON_TurnToPosition(instance,(_Position *)(*(int *)(*(int *)((int)pvVar4 + 0xc4) + 4) + 0x5c),
+                         *(short *)(*(int *)((int)pvVar4 + 0x164) + 0x20));
+      if (*(short *)(*(int *)((int)pvVar4 + 0xc4) + 0x14) <
+          *(short *)(*(int *)((int)pvVar5 + 4) + 10)) {
+        *(int *)((int)pvVar4 + 0xb8) = iVar2 + (int)cVar1 * 0x20;
+        *(undefined *)((int)pvVar4 + 0x15b) = 0;
+        *(undefined2 *)((int)pvVar4 + 0x126) = 0;
+        *(uint *)((int)pvVar4 + 4) = *(uint *)((int)pvVar4 + 4) & 0xfffffffd;
+        MON_SwitchState(instance,(MonsterState)CONCAT44(local_14,local_18));
+      }
+      else {
+        if ((instance->flags2 & 0x10U) != 0) {
+          p_Var3 = MON_GetAnim(instance,*(char **)((int)pvVar5 + 8),
+                               (int)*(char *)(*(int *)((int)pvVar5 + 4) + 0xf));
+          *(ushort *)((int)pvVar4 + 0x126) = p_Var3->velocity;
+          MON_PlayAnimFromList
+                    (instance,*(char **)((int)pvVar5 + 8),
+                     (int)*(char *)(*(int *)((int)pvVar5 + 4) + 0xf),2);
+        }
+      }
+      VWRAITH_MoveVertical
+                (instance,(int)*(short *)(*(int *)(*(int *)((int)pvVar4 + 0xc4) + 4) + 0x60) +
+                          (int)*(short *)(*(int *)((int)pvVar5 + 4) + 2),
+                 (int)*(short *)(*(int *)((int)pvVar5 + 4) + 4));
+      if (*(short *)((int)pvVar4 + 0x126) != 0) {
+        MON_MoveForward(instance);
+      }
+    }
     MON_DefaultQueueHandler(instance);
   }
-  iVar1 = VWRAITH_ShouldISwoop(instance);
-  if (iVar1 != 0) {
-                    /* WARNING: Subroutine does not return */
-    MON_SwitchState(instance,(MonsterState)CONCAT44(local_14,local_18));
-  }
-  if (*(int *)((int)pvVar2 + 0xc4) != 0) {
-    VWRAITH_MoveVertical
-              (instance,(int)*(short *)(*(int *)(*(int *)((int)pvVar2 + 0xc4) + 4) + 0x60),
-               (int)*(short *)(*(int *)((int)pvVar3 + 4) + 6));
-  }
-  MON_Pursue(instance);
   return;
 }
 
@@ -285,7 +328,6 @@ void VWRAITH_VerticalMove(_Instance *instance)
     targetZ = (int)*(short *)(*(int *)(targetZ + 4) + 0x60);
     VWRAITH_MoveVertical(instance,targetZ,(int)*(short *)(*(int *)((int)instance->data + 4) + 8));
     if ((instance->currentMainState == 6) && ((int)(instance->position).z != targetZ)) {
-                    /* WARNING: Subroutine does not return */
       MON_SwitchState(instance,(MonsterState)CONCAT44(local_c,local_10));
     }
   }

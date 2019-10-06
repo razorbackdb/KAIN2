@@ -104,7 +104,7 @@ char * localstr_get(localstr_t id)
 
 {
   if (LocalStrings == (char **)0x0) {
-    return (char *)&DAT_800d0c6c;
+    return ".";
   }
   return LocalStrings[id];
 }

@@ -540,58 +540,56 @@ _BlockVramEntry * VRAM_GetOpenBlock(void)
 int VRAM_DeleteFreeVram(short x,short y,short w,short h)
 
 {
-  bool bVar1;
-  uint uVar2;
-  undefined block;
+  _BlockVramEntry *p_Var1;
+  _BlockVramEntry *p_Var2;
   _BlockVramEntry *p_Var3;
   _BlockVramEntry *p_Var4;
-  _BlockVramEntry *p_Var5;
+  int iVar5;
   int iVar6;
   _BlockVramEntry **pp_Var7;
   _BlockVramEntry *local_18 [4];
   
   pp_Var7 = local_18;
   iVar6 = 0;
+  iVar5 = 0;
   local_18[2] = openVramBlocks;
   local_18[3] = usedVramBlocks;
   local_18[0] = openVramBlocks;
   local_18[1] = usedVramBlocks;
   do {
     if (*pp_Var7 != (_BlockVramEntry *)0x0) {
-      p_Var4 = *pp_Var7;
-      p_Var5 = (_BlockVramEntry *)0x0;
+      p_Var1 = *pp_Var7;
+      p_Var3 = (_BlockVramEntry *)0x0;
       do {
-        p_Var3 = p_Var4;
-        p_Var4 = p_Var3->next;
-        if (((((int)x <= (int)p_Var3->x) && ((int)p_Var3->x + (int)p_Var3->w <= (int)x + (int)w)) &&
-            ((int)y <= (int)p_Var3->y)) &&
-           (bVar1 = (int)y + (int)h < (int)p_Var3->y + (int)p_Var3->h, uVar2 = (uint)bVar1, !bVar1))
-        {
-          p_Var3->flags = '\0';
-          block = (undefined)x;
-          if (p_Var5 != (_BlockVramEntry *)0x0) {
-            p_Var5->next = p_Var4;
-            VRAM_InsertUsedBlock(block);
-            return uVar2;
+        p_Var2 = p_Var1->next;
+        p_Var4 = p_Var1;
+        if (((((int)x <= (int)p_Var1->x) && ((int)p_Var1->x + (int)p_Var1->w <= (int)x + (int)w)) &&
+            ((int)y <= (int)p_Var1->y)) && ((int)p_Var1->y + (int)p_Var1->h <= (int)y + (int)h)) {
+          p_Var1->flags = '\0';
+          p_Var4 = p_Var3;
+          if (p_Var3 == (_BlockVramEntry *)0x0) {
+            if (iVar5 == 0) {
+              iVar6 = iVar6 + 1;
+              openVramBlocks = p_Var2;
+            }
+            else {
+              iVar6 = iVar6 + 1;
+              usedVramBlocks = p_Var2;
+            }
           }
-          if (iVar6 == 0) {
-            openVramBlocks = p_Var4;
-            VRAM_InsertUsedBlock(block);
-            return uVar2;
+          else {
+            p_Var3->next = p_Var2;
+            iVar6 = iVar6 + 1;
           }
-          usedVramBlocks = p_Var4;
-          VRAM_InsertUsedBlock(block);
-          return uVar2;
         }
-        p_Var5 = p_Var3;
-      } while (p_Var4 != (_BlockVramEntry *)0x0);
+        p_Var1 = p_Var2;
+        p_Var3 = p_Var4;
+      } while (p_Var2 != (_BlockVramEntry *)0x0);
     }
-    iVar6 = iVar6 + 1;
+    iVar5 = iVar5 + 1;
     pp_Var7 = pp_Var7 + 1;
-    if (1 < iVar6) {
-      return 0;
-    }
-  } while( true );
+  } while (iVar5 < 2);
+  return iVar6;
 }
 
 
@@ -617,12 +615,51 @@ int VRAM_DeleteFreeVram(short x,short y,short w,short h)
 int VRAM_InsertFreeVram(short x,short y,short w,short h,int flags)
 
 {
-  if (((x & 0x3fU) != 0) && ((int)(0x40 - ((uint)(ushort)x & 0x3f)) < (int)w)) {
-                    /* WARNING: Subroutine does not return */
-    VRAM_GetOpenBlock();
+  short sVar1;
+  _BlockVramEntry *block;
+  uchar uVar2;
+  long lVar3;
+  
+  uVar2 = (uchar)flags;
+  if (((x & 0x3fU) == 0) || ((int)w <= (int)(0x40 - ((uint)(ushort)x & 0x3f)))) {
+    block = VRAM_GetOpenBlock();
+    lVar3 = (int)w * (int)h;
+    block->next = (_BlockVramEntry *)0x0;
+    block->flags = uVar2;
+    block->time = 0;
+    block->ID = 0;
+    block->x = x;
+    block->y = y;
+    block->w = w;
+    block->h = h;
   }
-                    /* WARNING: Subroutine does not return */
-  VRAM_GetOpenBlock();
+  else {
+    block = VRAM_GetOpenBlock();
+    sVar1 = (short)((uint)(ushort)x & 0x3f);
+    block->w = 0x40 - sVar1;
+    block->next = (_BlockVramEntry *)0x0;
+    block->flags = uVar2;
+    block->time = 0;
+    block->ID = 0;
+    block->x = x;
+    block->y = y;
+    block->h = h;
+    block->area = (int)block->w * (int)h;
+    VRAM_InsertFreeBlock(block);
+    block = VRAM_GetOpenBlock();
+    block->w = w + -0x40 + sVar1;
+    lVar3 = (int)block->w * (int)h;
+    block->next = (_BlockVramEntry *)0x0;
+    block->flags = uVar2;
+    block->time = 0;
+    block->ID = 0;
+    block->y = y;
+    block->h = h;
+    block->x = (x + 0x40) - sVar1;
+  }
+  block->area = lVar3;
+  VRAM_InsertFreeBlock(block);
+  return 1;
 }
 
 
@@ -674,26 +711,28 @@ int VRAM_InsertFreeVram(short x,short y,short w,short h,int flags)
 _BlockVramEntry * VRAM_CheckVramSlot(short *x,short *y,short w,short h,int type,int startY)
 
 {
+  ushort uVar1;
+  bool bVar2;
   ushort x_00;
   ushort y_00;
-  ushort uVar1;
-  ushort h_00;
-  bool bVar2;
   int iVar3;
   uint uVar4;
   int iVar5;
+  ushort h_00;
   uint uVar6;
   int iVar7;
   int iVar8;
+  uint uVar9;
   _BlockVramEntry *block;
   short w_00;
-  _BlockVramEntry *p_Var9;
+  _BlockVramEntry *p_Var10;
+  uint uVar11;
   uchar local_30;
   
   uVar6 = (uint)(ushort)h;
   uVar4 = (uint)(ushort)w;
   bVar2 = false;
-  p_Var9 = (_BlockVramEntry *)0x0;
+  p_Var10 = (_BlockVramEntry *)0x0;
   _w_00 = 0;
   w_00 = 0;
   block = openVramBlocks;
@@ -716,7 +755,7 @@ LAB_80073150:
           if ((iVar3 <= (int)(0x40 - ((short)x_00 + iVar5 & 0x3fU))) && (iVar3 <= iVar7 - iVar5)) {
             bVar2 = true;
             _w_00 = iVar5;
-            p_Var9 = block;
+            p_Var10 = block;
           }
         }
         else {
@@ -737,12 +776,12 @@ LAB_80073150:
     } while (block != (_BlockVramEntry *)0x0);
     if (block != (_BlockVramEntry *)0x0) goto LAB_80073098;
   }
-  if ((p_Var9 != (_BlockVramEntry *)0x0) && (bVar2)) {
-    VRAM_InsertFreeVram(p_Var9->x,p_Var9->y,w_00,p_Var9->h,(uint)p_Var9->flags);
+  if ((p_Var10 != (_BlockVramEntry *)0x0) && (bVar2)) {
+    VRAM_InsertFreeVram(p_Var10->x,p_Var10->y,w_00,p_Var10->h,(uint)p_Var10->flags);
     bVar2 = false;
-    p_Var9->x = p_Var9->x + w_00;
-    p_Var9->w = p_Var9->w - w_00;
-    block = p_Var9;
+    p_Var10->x = p_Var10->x + w_00;
+    p_Var10->w = p_Var10->w - w_00;
+    block = p_Var10;
   }
   if (block == (_BlockVramEntry *)0x0) {
     return (_BlockVramEntry *)0x0;
@@ -752,7 +791,9 @@ LAB_80073098:
     x_00 = block->x;
     y_00 = block->y;
     uVar1 = block->w;
+    uVar9 = (uint)uVar1;
     h_00 = block->h;
+    uVar11 = (uint)h_00;
     VRAM_DeleteFreeBlock(block);
     block->next = (_BlockVramEntry *)0x0;
     block->flags = '\x01';
@@ -766,41 +807,43 @@ LAB_80073098:
     _w_00 = (int)(short)uVar1;
     iVar3 = (int)w;
     if (_w_00 == iVar3) {
-      p_Var9 = (_BlockVramEntry *)&UNK_00000001;
-      if ((uint)h_00 << 0x10 != uVar6 << 0x10) {
-        VRAM_DeleteUsedBlock((char)x_00);
-        return p_Var9;
+      if (uVar11 << 0x10 == uVar6 << 0x10) {
+        return block;
       }
+      y_00 = (ushort)((y_00 + uVar6) * 0x10000 >> 0x10);
+      h_00 = (ushort)((uVar11 - uVar6) * 0x10000 >> 0x10);
     }
     else {
       iVar7 = (int)(short)h_00;
       iVar8 = (int)h;
       if (iVar7 == iVar8) {
-        block = (_BlockVramEntry *)&UNK_00000001;
-        VRAM_DeleteUsedBlock((char)((x_00 + uVar4) * 0x10000 >> 0x10));
-        return block;
-      }
-      iVar5 = (_w_00 - iVar3) * iVar8 - _w_00 * (iVar7 - iVar8);
-      if (iVar5 < 0) {
-        iVar5 = -iVar5;
-      }
-      _w_00 = (_w_00 - iVar3) * iVar7 - iVar3 * (iVar7 - iVar8);
-      if (_w_00 < 0) {
-        _w_00 = -_w_00;
-      }
-      iVar3 = x_00 + uVar4;
-      if (_w_00 < iVar5) {
-        VRAM_InsertFreeVram((short)((uint)(iVar3 * 0x10000) >> 0x10),y_00,
-                            (short)((uVar1 - uVar4) * 0x10000 >> 0x10),h,1);
-        w = uVar1;
+        x_00 = (ushort)((x_00 + uVar4) * 0x10000 >> 0x10);
+        w = (short)((uVar9 - uVar4) * 0x10000 >> 0x10);
       }
       else {
-        VRAM_InsertFreeVram((short)((uint)(iVar3 * 0x10000) >> 0x10),y_00,
-                            (short)((uVar1 - uVar4) * 0x10000 >> 0x10),h_00,1);
+        iVar5 = (_w_00 - iVar3) * iVar8 - _w_00 * (iVar7 - iVar8);
+        if (iVar5 < 0) {
+          iVar5 = -iVar5;
+        }
+        _w_00 = (_w_00 - iVar3) * iVar7 - iVar3 * (iVar7 - iVar8);
+        if (_w_00 < 0) {
+          _w_00 = -_w_00;
+        }
+        iVar3 = x_00 + uVar4;
+        if (_w_00 < iVar5) {
+          VRAM_InsertFreeVram((short)((uint)(iVar3 * 0x10000) >> 0x10),y_00,
+                              (short)((uVar9 - uVar4) * 0x10000 >> 0x10),h,1);
+          w = uVar1;
+        }
+        else {
+          VRAM_InsertFreeVram((short)((uint)(iVar3 * 0x10000) >> 0x10),y_00,
+                              (short)((uVar9 - uVar4) * 0x10000 >> 0x10),h_00,1);
+        }
+        y_00 = (ushort)((y_00 + uVar6) * 0x10000 >> 0x10);
+        h_00 = (ushort)((uVar11 - uVar6) * 0x10000 >> 0x10);
       }
-      VRAM_InsertFreeVram(x_00,(short)((y_00 + uVar6) * 0x10000 >> 0x10),w,
-                          (short)(((uint)h_00 - uVar6) * 0x10000 >> 0x10),1);
     }
+    VRAM_InsertFreeVram(x_00,y_00,w,h_00,1);
   }
   return block;
 }
@@ -1010,58 +1053,67 @@ _BlockVramEntry * VRAM_InsertionSort(_BlockVramEntry *rootNode,_BlockVramEntry *
 void VRAM_RearrangeVramsLayer(long whichLayer)
 
 {
-  _BlockVramEntry **pp_Var1;
-  _BlockVramEntry **pp_Var2;
-  _BlockVramEntry *p_Var3;
-  _BlockVramEntry *p_Var4;
-  _BlockVramEntry *p_Var5;
-  _BlockVramEntry *p_Var6;
-  int iVar7;
+  byte bVar1;
+  short sVar2;
+  int iVar3;
+  _BlockVramEntry *newBlock;
+  _BlockVramEntry **pp_Var4;
+  _BlockVramEntry *block;
+  undefined4 uVar5;
+  long lVar6;
+  undefined4 uVar7;
+  _BlockVramEntry *rootNode;
+  int iVar8;
+  short sVar9;
   _BlockVramEntry *local_638 [48];
-  _BlockVramEntry *local_578 [336];
-  undefined2 local_38;
-  undefined2 local_36;
-  undefined2 local_34;
-  undefined2 local_32;
+  _BlockVramEntry local_578 [48];
+  short local_38;
+  short local_36;
+  short local_34;
+  short local_32;
+  ushort local_30;
+  ushort local_2e [3];
   
-  iVar7 = 0;
+  iVar8 = 0;
   if (usedVramBlocks != (_BlockVramEntry *)0x0) {
-    pp_Var2 = local_578;
-    pp_Var1 = local_638;
-    p_Var6 = usedVramBlocks;
+    newBlock = local_578;
+    pp_Var4 = local_638;
+    rootNode = usedVramBlocks;
     do {
       if (whichLayer == 0) {
-        if (p_Var6->y < 0x100) {
-          *pp_Var1 = p_Var6;
+        if (rootNode->y < 0x100) {
+          *pp_Var4 = rootNode;
 LAB_800735cc:
-          p_Var3 = *(_BlockVramEntry **)&p_Var6->type;
-          p_Var4 = (_BlockVramEntry *)p_Var6->ID;
-          p_Var5 = *(_BlockVramEntry **)&p_Var6->x;
-          *pp_Var2 = p_Var6->next;
-          pp_Var2[1] = p_Var3;
-          pp_Var2[2] = p_Var4;
-          pp_Var2[3] = p_Var5;
-          p_Var3 = (_BlockVramEntry *)p_Var6->area;
-          p_Var4 = (_BlockVramEntry *)p_Var6->udata;
-          pp_Var2[4] = *(_BlockVramEntry **)&p_Var6->w;
-          pp_Var2[5] = p_Var3;
-          pp_Var2[6] = p_Var4;
-          pp_Var2 = pp_Var2 + 7;
-          pp_Var1 = pp_Var1 + 1;
-          iVar7 = iVar7 + 1;
+          uVar5 = *(undefined4 *)&rootNode->type;
+          lVar6 = rootNode->ID;
+          uVar7 = *(undefined4 *)&rootNode->x;
+          newBlock->next = rootNode->next;
+          *(undefined4 *)&newBlock->type = uVar5;
+          newBlock->ID = lVar6;
+          *(undefined4 *)&newBlock->x = uVar7;
+          lVar6 = rootNode->area;
+          uVar5 = rootNode->udata;
+          *(undefined4 *)&newBlock->w = *(undefined4 *)&rootNode->w;
+          newBlock->area = lVar6;
+          newBlock->udata = uVar5;
+          newBlock = newBlock + 1;
+          pp_Var4 = pp_Var4 + 1;
+          iVar8 = iVar8 + 1;
         }
       }
       else {
-        if (0xff < p_Var6->y) {
-          *pp_Var1 = p_Var6;
+        if (0xff < rootNode->y) {
+          *pp_Var4 = rootNode;
           goto LAB_800735cc;
         }
       }
-      p_Var6 = p_Var6->next;
-    } while (p_Var6 != (_BlockVramEntry *)0x0);
+      rootNode = rootNode->next;
+    } while (rootNode != (_BlockVramEntry *)0x0);
   }
-  if (0 < iVar7) {
+  if (0 < iVar8) {
+    sVar9 = 0x100;
     if (whichLayer == 0) {
+      sVar9 = 0;
       local_36 = 0;
     }
     else {
@@ -1072,17 +1124,76 @@ LAB_800735cc:
     local_32 = 0x100;
     do {
       do {
-        iVar7 = CheckVolatile(gameTrackerX.drawTimerReturn);
-      } while (iVar7 != 0);
-      iVar7 = CheckVolatile(gameTrackerX.reqDisp);
-    } while (iVar7 != 0);
+        iVar3 = CheckVolatile(gameTrackerX.drawTimerReturn);
+      } while (iVar3 != 0);
+      iVar3 = CheckVolatile(gameTrackerX.reqDisp);
+    } while (iVar3 != 0);
+    iVar3 = 0;
+    rootNode = (_BlockVramEntry *)0x0;
+    sVar2 = (short)(gameTrackerX.gameData.asmData.dispPage ^ 1U) * 0x100;
     MoveImage((undefined4 *)&local_38,0,
               (int)((gameTrackerX.gameData.asmData.dispPage ^ 1U) << 0x18) >> 0x10);
-                    /* WARNING: Subroutine does not return */
     DrawSync(0);
+    pp_Var4 = local_638;
+    if (0 < iVar8) {
+      newBlock = local_578;
+      do {
+        block = *pp_Var4;
+        pp_Var4 = pp_Var4 + 1;
+        VRAM_ClearVramBlock(block);
+        iVar3 = iVar3 + 1;
+        newBlock->next = (_BlockVramEntry *)0x0;
+        newBlock->area = (int)newBlock->w * (int)newBlock->h;
+        rootNode = VRAM_InsertionSort(rootNode,newBlock);
+        newBlock = newBlock + 1;
+      } while (iVar3 < iVar8);
+    }
+    while (rootNode != (_BlockVramEntry *)0x0) {
+      local_34 = rootNode->w;
+      local_32 = rootNode->h;
+      local_38 = rootNode->x + -0x200;
+      local_36 = sVar2;
+      if (whichLayer != 0) {
+        local_36 = sVar2 + -0x100;
+      }
+      local_36 = rootNode->y + local_36;
+      local_30 = rootNode->x;
+      local_2e[0] = rootNode->y;
+      newBlock = VRAM_CheckVramSlot((short *)&local_30,(short *)local_2e,local_34,local_32,
+                                    (uint)rootNode->type,(int)sVar9);
+      if (newBlock == (_BlockVramEntry *)0x0) {
+        VRAM_PrintInfo();
+        VRAM_PrintVramBlock(rootNode);
+      }
+      MoveImage((undefined4 *)&local_38,(int)(short)local_30,(int)(short)local_2e[0]);
+      DrawSync(0);
+      bVar1 = rootNode->type;
+      if (bVar1 == 2) {
+        AdjustVramCoordsObject
+                  ((int)rootNode->x,(int)rootNode->y,(int)(short)local_30,(int)(short)local_2e[0],
+                   *(Object **)(rootNode->udata + 0x10));
+        *(_BlockVramEntry **)(rootNode->udata + 0x18) = newBlock;
+        newBlock->udata = rootNode->udata;
+      }
+      else {
+        if ((2 < bVar1) && (bVar1 == 3)) {
+          fontTracker.font_tpage =
+               (short)(local_2e[0] & 0x100) >> 4 | (ushort)(((uint)local_30 & 0x3ff) >> 6) |
+               (ushort)(((uint)local_2e[0] & 0x200) << 2);
+          fontTracker.font_vramU = (short)(((uint)local_30 & 0x3f) << 2);
+          fontTracker.font_vramV = local_2e[0] & 0xff;
+          fontTracker.font_vramX = local_30;
+          SpecialFogClut = local_30 >> 4 & 0x3f;
+          fontTracker.font_clut = (local_2e[0] + 0x7e) * 0x40 | SpecialFogClut;
+          fontTracker.font_vramY = local_2e[0];
+          SpecialFogClut = (local_2e[0] + 0x7f) * 0x40 | SpecialFogClut;
+        }
+      }
+      rootNode = rootNode->next;
+    }
   }
-                    /* WARNING: Subroutine does not return */
   DrawSync(0);
+  return;
 }
 
 
@@ -1125,9 +1236,77 @@ LAB_800735cc:
 void VRAM_TransferBufferToVram(void *dataPtr,long dataSize,short status,void *data1,void *data2)
 
 {
-  BreakDraw();
-                    /* WARNING: Subroutine does not return */
+  short sVar1;
+  long *plVar2;
+  undefined4 *puVar3;
+  int iVar4;
+  short sVar5;
+  size_t __n;
+  int iVar6;
+  undefined2 local_28;
+  short local_26;
+  undefined2 local_24;
+  short local_22;
+  
+  puVar3 = (undefined4 *)BreakDraw();
   DrawSync(0);
+  plVar2 = gameTrackerX.drawTimerReturn;
+  gameTrackerX.drawTimerReturn = (long *)0x0;
+  if (data1 != (void *)0x0) {
+    if ((*(uint *)data1 & 1) == 0) {
+      *(uint *)data1 = *(uint *)data1 | 1;
+      dataPtr = (void *)((int)dataPtr + 0x24);
+      dataSize = dataSize - 0x24;
+    }
+    iVar4 = (int)*(short *)((int)data1 + 0xe);
+    if (iVar4 != 0) {
+      iVar6 = (int)*(short *)((int)data1 + 8) * 2 - (uint)*(ushort *)((int)data1 + 0xe);
+      __n = iVar6 * 0x10000 >> 0x10;
+      if (dataSize < (int)__n) {
+        memcpy((void *)(*(int *)((int)data1 + 0x10) + iVar4),dataPtr,dataSize);
+        sVar1 = (short)dataSize;
+        dataSize = 0;
+        *(short *)((int)data1 + 0xe) = *(short *)((int)data1 + 0xe) + sVar1;
+      }
+      else {
+        memcpy((void *)(*(int *)((int)data1 + 0x10) + iVar4),dataPtr,__n);
+        dataPtr = (void *)((int)dataPtr + __n);
+        dataSize = dataSize - __n;
+        local_28 = *(undefined2 *)((int)data1 + 4);
+        *(short *)((int)data1 + 0xe) = *(short *)((int)data1 + 0xe) + (short)iVar6;
+        local_26 = *(short *)((int)data1 + 6) + *(short *)((int)data1 + 0xc);
+        local_24 = *(undefined2 *)((int)data1 + 8);
+        local_22 = 1;
+        *(short *)((int)data1 + 0xc) = *(short *)((int)data1 + 0xc) + 1;
+        LoadImage((undefined4 *)&local_28,*(undefined4 *)((int)data1 + 0x10));
+        *(undefined2 *)((int)data1 + 0xe) = 0;
+      }
+    }
+    if (0 < dataSize) {
+      sVar1 = *(short *)((int)data1 + 8);
+      iVar4 = dataSize / ((int)sVar1 << 1);
+      local_28 = *(undefined2 *)((int)data1 + 4);
+      local_26 = *(short *)((int)data1 + 6) + *(short *)((int)data1 + 0xc);
+      local_24 = *(undefined2 *)((int)data1 + 8);
+      sVar5 = (short)iVar4;
+      local_22 = sVar5;
+      LoadImage((undefined4 *)&local_28,dataPtr);
+      *(short *)((int)data1 + 0xc) = *(short *)((int)data1 + 0xc) + sVar5;
+      iVar4 = (int)(short)(sVar1 * (short)((iVar4 << 0x10) >> 0xf));
+      __n = dataSize - iVar4;
+      if (0 < (int)__n) {
+        memcpy((void *)(*(int *)((int)data1 + 0x10) + (int)*(short *)((int)data1 + 0xe)),
+               (void *)((int)dataPtr + iVar4),__n);
+        *(short *)((int)data1 + 0xe) = *(short *)((int)data1 + 0xe) + (short)__n;
+      }
+    }
+  }
+  DrawSync(0);
+  gameTrackerX.drawTimerReturn = plVar2;
+  if ((puVar3 != (undefined4 *)0x0) && (puVar3 != (undefined4 *)0xffffffff)) {
+    DrawOTag(puVar3);
+  }
+  return;
 }
 
 
@@ -1151,8 +1330,8 @@ void VRAM_TransferBufferToVram(void *dataPtr,long dataSize,short status,void *da
 void VRAM_LoadReturn(void *dataPtr,void *data1,void *data2)
 
 {
-                    /* WARNING: Subroutine does not return */
   MEMPACK_Free((char *)data1);
+  return;
 }
 
 

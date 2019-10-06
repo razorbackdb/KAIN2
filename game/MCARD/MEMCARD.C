@@ -65,22 +65,20 @@ int MEMCARD_IsWrongVersion(memcard_t *memcard)
 void load(memcard_t *memcard)
 
 {
-  _PrimPool *p_Var1;
   Object *loadAddr;
   
-  p_Var1 = gameTrackerX.primPool;
   if ((gameTrackerX.gameFlags & 0x8000000U) == 0) {
-                    /* WARNING: Subroutine does not return */
-    MEMPACK_Malloc((ulong)&DAT_00009c40,'+');
+    loadAddr = (Object *)MEMPACK_Malloc((ulong)&DAT_00009c40,'+');
   }
-  loadAddr = (Object *)(gameTrackerX.primPool)->prim;
+  else {
+    loadAddr = (Object *)(gameTrackerX.primPool)->prim;
+  }
   LOAD_LoadToAddress("\\kain2\\object\\mcardx\\mcardx.drm",loadAddr,1);
-  memcard->table = (mcmenu_table_t *)p_Var1->prim[0x10];
-  RELMOD_InitModulePointers(p_Var1->prim[0x10],(int *)p_Var1->prim[0xf]);
+  memcard->table = (mcmenu_table_t *)loadAddr->relocModule;
+  RELMOD_InitModulePointers((int)loadAddr->relocModule,(int *)loadAddr->relocList);
   memcard->object = loadAddr;
   if (memcard->table->versionID != "May 25 1999") {
     if ((gameTrackerX.gameFlags & 0x8000000U) == 0) {
-                    /* WARNING: Subroutine does not return */
       MEMPACK_Free((char *)loadAddr);
     }
     memcard->table = (mcmenu_table_t *)0x0;
@@ -107,7 +105,6 @@ void unload(memcard_t *memcard)
   address = memcard->object;
   if (address != (Object *)0x0) {
     if (address != (Object *)(gameTrackerX.primPool)->prim) {
-                    /* WARNING: Subroutine does not return */
       MEMPACK_Free((char *)address);
     }
     memcard->object = (Object *)0x0;
@@ -163,8 +160,22 @@ int memcard_data_size(void)
 int memcard_initialize(memcard_t *memcard,void *gt,int nblocks,void *buffer,int nbytes)
 
 {
-                    /* WARNING: Subroutine does not return */
+  int iVar1;
+  
   memset(memcard,0,0x10);
+  load(memcard);
+  memcard->wrongVerison = 0;
+  if (memcard->table == (mcmenu_table_t *)0x0) {
+    memcard->wrongVerison = 1;
+    iVar1 = 0;
+  }
+  else {
+    *(MEMCARD_211fake **)&memcard->mcmenu = &gMcmenu;
+    (*memcard->table->initialize)(&gMcmenu,memcard,nblocks);
+    iVar1 = (*memcard->table->set_buffer)(memcard->mcmenu,buffer,nbytes);
+    unload(memcard);
+  }
+  return iVar1;
 }
 
 

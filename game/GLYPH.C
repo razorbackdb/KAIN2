@@ -23,12 +23,37 @@
 void GlyphInit(_Instance *instance,GameTracker *gameTracker)
 
 {
-  if ((instance->flags & 0x20000U) != 0) {
-                    /* WARNING: Subroutine does not return */
+  undefined4 *puVar1;
+  
+  if ((instance->flags & 0x20000U) == 0) {
+    puVar1 = (undefined4 *)MEMPACK_Malloc(0x9c,'\x1d');
+    *(undefined4 **)&instance->extraData = puVar1;
+    InitMessageQueue((__MessageQueue *)(puVar1 + 1));
+    EnMessageQueueData((__MessageQueue *)(puVar1 + 1),(int)&DAT_00100001,0);
+    *puVar1 = 0x8007ac68;
+    *(undefined2 *)(puVar1 + 0x23) = 7;
+    *(undefined2 *)(puVar1 + 0x26) = 0xdb6;
+    *(undefined2 *)(puVar1 + 0x24) = 0;
+    glyph_time = 0;
+    *(undefined2 *)((int)puVar1 + 0x92) = 0;
+    *(undefined2 *)(puVar1 + 0x25) = 0;
+    *(undefined2 *)((int)puVar1 + 0x9a) = 1;
+    *(undefined2 *)((int)puVar1 + 0x8e) = 0;
+    glyph_trigger = 0;
+    fx_blastring = (_FXBlastringEffect *)0x0;
+    fx_going = 0;
+    *(short *)((int)puVar1 + 0x96) = (*(short *)(puVar1 + 0x23) + -1) * 0x249;
+    glyph_cost = -1;
+    instance->flags = instance->flags | 0x10800;
+  }
+  else {
     MEMPACK_Free((char *)instance->extraData);
   }
-                    /* WARNING: Subroutine does not return */
-  MEMPACK_Malloc(0x9c,'\x1d');
+  HUD_Init();
+  MANNA_Position = -0x40;
+  MANNA_Pos_vel = 0;
+  MANNA_Pickup_Time = 0;
+  return;
 }
 
 
@@ -138,7 +163,6 @@ void GlyphPost(_Instance *instance,ulong message,ulong messageData)
 
 {
   if ((undefined *)message != &DAT_00100007) {
-                    /* WARNING: Subroutine does not return */
     EnMessageQueueData((__MessageQueue *)((int)instance->extraData + 4),message,messageData);
   }
   return;
@@ -168,11 +192,17 @@ void _GlyphSwitchProcess(_Instance *instance,TDRFuncPtr__GlyphSwitchProcess1proc
 
 {
   __MessageQueue *In;
+  TDRFuncPtr__GlyphSwitchProcess1process *ppTVar1;
   
-  In = (__MessageQueue *)((int)instance->extraData + 4);
+  ppTVar1 = (TDRFuncPtr__GlyphSwitchProcess1process *)instance->extraData;
+  In = (__MessageQueue *)(ppTVar1 + 1);
   PurgeMessageQueue(In);
-                    /* WARNING: Subroutine does not return */
   EnMessageQueueData(In,(int)&DAT_00100004,0);
+  (**ppTVar1)(instance,0,0);
+  EnMessageQueueData(In,(int)&DAT_00100001,0);
+  *ppTVar1 = process;
+  (*process)(instance,0,0);
+  return;
 }
 
 
@@ -225,8 +255,10 @@ int GlyphIsGlyphOpen(_Instance *instance)
 int _GlyphIsGlyphSet(int glyph)
 
 {
-                    /* WARNING: Subroutine does not return */
-  INSTANCE_Query(gameTrackerX.playerInstance,0x24);
+  ulong uVar1;
+  
+  uVar1 = INSTANCE_Query(gameTrackerX.playerInstance,0x24);
+  return 1 << (glyph + 0x11U & 0x1f) & uVar1;
 }
 
 
@@ -243,8 +275,10 @@ int _GlyphIsGlyphSet(int glyph)
 int _GlyphIsGlyphUsable(int glyph)
 
 {
-                    /* WARNING: Subroutine does not return */
-  INSTANCE_Query(gameTrackerX.playerInstance,0x13);
+  ulong uVar1;
+  
+  uVar1 = INSTANCE_Query(gameTrackerX.playerInstance,0x13);
+  return 1 << (glyph + 0x11U & 0x1f) & uVar1;
 }
 
 
@@ -263,8 +297,10 @@ int _GlyphIsGlyphUsable(int glyph)
 int _GlyphIsAnyGlyphSet(void)
 
 {
-                    /* WARNING: Subroutine does not return */
-  INSTANCE_Query(gameTrackerX.playerInstance,0x24);
+  ulong uVar1;
+  
+  uVar1 = INSTANCE_Query(gameTrackerX.playerInstance,0x24);
+  return uVar1 & 0x1fc0000;
 }
 
 
@@ -317,17 +353,14 @@ void _GlyphDefaultProcess(_Instance *instance,int data1,int data2)
   __MessageQueue *In;
   
   In = (__MessageQueue *)((int)instance->extraData + 4);
-  p_Var1 = PeekMessageQueue(In);
-  if (p_Var1 == (__Event *)0x0) {
-    return;
+  while (p_Var1 = PeekMessageQueue(In), p_Var1 != (__Event *)0x0) {
+    if ((undefined *)p_Var1->ID == &DAT_80000010) {
+      _GlyphSwitchProcess(instance,_GlyphSelectProcess);
+      SndPlayVolPan(0x11,0x7f,0x40,0);
+    }
+    DeMessageQueue(In);
   }
-  if ((undefined *)p_Var1->ID == &DAT_80000010) {
-    _GlyphSwitchProcess(instance,_GlyphSelectProcess);
-                    /* WARNING: Subroutine does not return */
-    SndPlayVolPan(0x11,0x7f,0x40,0);
-  }
-                    /* WARNING: Subroutine does not return */
-  DeMessageQueue(In);
+  return;
 }
 
 
@@ -353,9 +386,23 @@ void _GlyphDefaultProcess(_Instance *instance,int data1,int data2)
 void HUD_GetPlayerScreenPt(DVECTOR *center)
 
 {
+  DVECTOR DVar1;
+  undefined4 in_zero;
+  undefined4 in_at;
+  uint local_c;
+  
   PushMatrix();
-                    /* WARNING: Subroutine does not return */
   SetRotMatrix((undefined4 *)theCamera.core.wcTransform);
+  SetTransMatrix((int)theCamera.core.wcTransform);
+  local_c = local_c & 0xffff0000 |
+            (uint)(ushort)(((gameTrackerX.playerInstance)->position).z + 0x1c0);
+  setCopReg(2,in_zero,*(undefined4 *)&(gameTrackerX.playerInstance)->position);
+  setCopReg(2,in_at,local_c);
+  copFunction(2,0x180001);
+  DVar1 = (DVECTOR)getCopReg(2,0xe);
+  *center = DVar1;
+  PopMatrix();
+  return;
 }
 
 
@@ -430,8 +477,130 @@ void HUD_GetPlayerScreenPt(DVECTOR *center)
 void GlyphDrawMenu(_Instance *instance)
 
 {
-                    /* WARNING: Subroutine does not return */
-  INSTANCE_Query(gameTrackerX.playerInstance,0x20);
+  short current;
+  ushort uVar1;
+  ulong uVar2;
+  int iVar3;
+  int glyphnum;
+  uint enabled;
+  uint uVar4;
+  int glyph;
+  int iVar5;
+  void *pvVar6;
+  int iVar7;
+  _GlyphTuneData *glyphtunedata;
+  _Position local_48;
+  DVECTOR local_40 [2];
+  _Vector local_38;
+  
+  uVar4 = (gameTrackerX.timeMult << 6) >> 0xc;
+  pvVar6 = instance->extraData;
+  glyphtunedata = (_GlyphTuneData *)instance->object->data;
+  uVar2 = INSTANCE_Query(gameTrackerX.playerInstance,0x20);
+  if (*(short *)((int)pvVar6 + 0x98) != *(short *)((int)pvVar6 + 0x96)) {
+    current = AngleDiff(*(short *)((int)pvVar6 + 0x98),*(short *)((int)pvVar6 + 0x96));
+    iVar3 = (int)current;
+    if (iVar3 < 0) {
+      iVar3 = -iVar3;
+    }
+    if ((int)uVar4 < iVar3) {
+      current = (short)uVar4;
+      if (*(short *)((int)pvVar6 + 0x9a) < 1) {
+        uVar1 = *(short *)((int)pvVar6 + 0x96) - current;
+      }
+      else {
+        uVar1 = *(short *)((int)pvVar6 + 0x96) + current;
+      }
+      *(ushort *)((int)pvVar6 + 0x96) = uVar1 & 0xfff;
+    }
+    else {
+      *(undefined2 *)((int)pvVar6 + 0x96) = *(undefined2 *)((int)pvVar6 + 0x98);
+    }
+  }
+  HUD_GetPlayerScreenPt(local_40);
+  if (local_40[0].vy < 0x48) {
+    local_40[0].vy = 0x48;
+  }
+  iVar7 = 0;
+  iVar3 = (int)*(short *)((int)pvVar6 + 0x92);
+  uVar4 = (int)*(short *)((int)pvVar6 + 0x96) + 0xc00;
+  do {
+    uVar4 = uVar4 & 0xfff;
+    current = (short)uVar4;
+    uVar1 = AngleDiff(current,0xc00);
+    if ((int)((uint)uVar1 << 0x10) < 0) {
+      uVar1 = AngleDiff(current,0xc00);
+      iVar5 = (int)((uint)uVar1 << 0x10) >> 0xf;
+    }
+    else {
+      uVar1 = AngleDiff(current,0xc00);
+      iVar5 = -((int)((uint)uVar1 << 0x10) >> 0xf);
+    }
+    iVar5 = iVar5 + 0x1000;
+    if (iVar5 < 0x600) {
+      iVar5 = 0x600;
+    }
+    iVar5 = *(short *)((int)pvVar6 + 0x94) * iVar5;
+    if (iVar5 < 0) {
+      iVar5 = iVar5 + 0xfff;
+    }
+    glyphnum = rcos(uVar4);
+    local_48.x = local_40[0].vx + (short)(glyphnum * iVar3 >> 0xc);
+    glyphnum = rsin(uVar4);
+    glyphnum = glyphnum * iVar3 >> 0xc;
+    glyph = iVar7 + 1;
+    if (glyphnum < 0) {
+      glyphnum = glyphnum + 7;
+    }
+    local_48.y = local_40[0].vy - (short)(glyphnum >> 3);
+    glyphnum = _GlyphIsGlyphSet(glyph);
+    if (glyphnum == 0) {
+      glyphnum = 7;
+      if (glyph == 7) goto LAB_8007a8d8;
+      enabled = 1;
+    }
+    else {
+      glyphnum = _GlyphIsGlyphUsable(glyph);
+      if (glyphnum == 0) {
+LAB_8007a8d8:
+        enabled = 0;
+        glyphnum = iVar7;
+      }
+      else {
+        glyphnum = _GlyphCost(glyphtunedata,glyph);
+        enabled = (uint)((int)uVar2 < glyphnum) ^ 1;
+        glyphnum = iVar7;
+      }
+    }
+    iVar5 = (int)glyphtunedata->glyph_size * (iVar5 >> 0xc);
+    if (iVar5 < 0) {
+      iVar5 = iVar5 + 0x1fff;
+    }
+    uVar4 = uVar4 - 0x249;
+    iVar7 = iVar7 + 1;
+    FX_MakeGlyphIcon(&local_48,instance->object,iVar5 >> 0xd,glyphnum,enabled);
+    if (6 < iVar7) {
+      iVar7 = (int)*(short *)((int)pvVar6 + 0x90);
+      if (iVar7 == 0x1000) {
+        if ((*(short *)((int)pvVar6 + 0x98) == *(short *)((int)pvVar6 + 0x96)) &&
+           (iVar7 = _GlyphCost(glyphtunedata,(int)*(short *)((int)pvVar6 + 0x8c)),
+           iVar7 <= (int)uVar2)) {
+          local_38.x = (int)local_40[0].vx;
+          if (iVar3 < 0) {
+            iVar3 = iVar3 + 7;
+          }
+          local_38.y = (int)local_40[0].vy + (iVar3 >> 3);
+          DRAW_CreateAGlowingCircle
+                    (&local_38,0x140,gameTrackerX.primPool,gameTrackerX.drawOT,5,0x1404040,0x1a,0x18
+                     ,0);
+        }
+        iVar7 = (int)*(short *)((int)pvVar6 + 0x90);
+      }
+      uVar4 = iVar7 / (int)glyphtunedata->glyph_darkness;
+      FX_DrawScreenPoly(2,uVar4 | uVar4 << 0x10 | uVar4 << 8,0x20);
+      return;
+    }
+  } while( true );
 }
 
 
@@ -608,28 +777,30 @@ void _GlyphOffProcess(_Instance *instance,int data1,int data2)
   
   pvVar3 = instance->extraData;
   ShrinkGlyphMenu(instance);
-  p_Var1 = PeekMessageQueue((__MessageQueue *)((int)pvVar3 + 4));
-  if (p_Var1 == (__Event *)0x0) {
-    Glyph_DoFX(instance);
-    return;
-  }
-  puVar2 = (undefined *)p_Var1->ID;
-  if (puVar2 != &DAT_00100001) {
-    if ((int)puVar2 < 0x100002) {
-      if (puVar2 == &DAT_80000010) {
-        _GlyphSwitchProcess(instance,_GlyphSelectProcess);
-                    /* WARNING: Subroutine does not return */
-        SndPlayVolPan(0x11,0x7f,0x40,0);
+  do {
+    p_Var1 = PeekMessageQueue((__MessageQueue *)((int)pvVar3 + 4));
+    if (p_Var1 == (__Event *)0x0) {
+      Glyph_DoFX(instance);
+      return;
+    }
+    puVar2 = (undefined *)p_Var1->ID;
+    if (puVar2 != &DAT_00100001) {
+      if ((int)puVar2 < 0x100002) {
+        if (puVar2 == &DAT_80000010) {
+          _GlyphSwitchProcess(instance,_GlyphSelectProcess);
+          SndPlayVolPan(0x11,0x7f,0x40,0);
+        }
+        else {
+LAB_8007ad20:
+          _GlyphDefaultProcess(instance,data1,data2);
+        }
+      }
+      else {
+        if (puVar2 != &DAT_00100004) goto LAB_8007ad20;
       }
     }
-    else {
-      if (puVar2 == &DAT_00100004) goto LAB_8007ad28;
-    }
-    _GlyphDefaultProcess(instance,data1,data2);
-  }
-LAB_8007ad28:
-                    /* WARNING: Subroutine does not return */
-  DeMessageQueue((__MessageQueue *)((int)pvVar3 + 4));
+    DeMessageQueue((__MessageQueue *)((int)pvVar3 + 4));
+  } while( true );
 }
 
 
@@ -667,80 +838,170 @@ LAB_8007ad28:
 void _GlyphSelectProcess(_Instance *instance,int data1,int data2)
 
 {
-  __Event *p_Var1;
-  int iVar2;
-  undefined *puVar3;
-  uint sample;
+  bool bVar1;
   ushort vol;
-  void *pvVar4;
+  short sVar2;
+  __Event *p_Var3;
+  int iVar4;
+  ulong uVar5;
+  undefined *puVar6;
+  uint sample;
+  void *pvVar7;
   _GlyphTuneData *glyphtunedata;
   
-  pvVar4 = instance->extraData;
+  bVar1 = false;
+  pvVar7 = instance->extraData;
   glyphtunedata = (_GlyphTuneData *)instance->object->data;
-  p_Var1 = PeekMessageQueue((__MessageQueue *)((int)pvVar4 + 4));
-  if (p_Var1 == (__Event *)0x0) {
-    iVar2 = _GlyphCost(glyphtunedata,(int)*(short *)((int)pvVar4 + 0x8c));
-    glyph_cost = (short)iVar2;
-    EnlargeGlyphMenu(instance);
-    Glyph_DoFX(instance);
-    return;
-  }
-  puVar3 = (undefined *)p_Var1->ID;
-  if (puVar3 == &DAT_00100001) {
-    *(undefined2 *)((int)pvVar4 + 0x8c) = 7;
-    *(undefined2 *)((int)pvVar4 + 0x98) = 0xdb6;
-    *(short *)((int)pvVar4 + 0x96) = (*(short *)((int)pvVar4 + 0x8c) + -1) * 0x249;
-    *(undefined2 *)((int)pvVar4 + 0x96) = *(undefined2 *)((int)pvVar4 + 0x98);
-  }
-  else {
-    if ((int)puVar3 < 0x100002) {
-      if (puVar3 == (undefined *)0x80000000) {
-        if ((fx_going == 0) &&
-           (iVar2 = _GlyphIsGlyphSet((int)*(short *)((int)pvVar4 + 0x8c)), iVar2 != 0)) {
-                    /* WARNING: Subroutine does not return */
-          INSTANCE_Query(gameTrackerX.playerInstance,0x20);
-        }
-        sample = 0x10;
-        vol = 100;
-LAB_8007b1a4:
-                    /* WARNING: Subroutine does not return */
-        SndPlayVolPan(sample,vol,0x40,0);
+  do {
+    p_Var3 = PeekMessageQueue((__MessageQueue *)((int)pvVar7 + 4));
+    if (p_Var3 == (__Event *)0x0) {
+      if (!bVar1) {
+        iVar4 = _GlyphCost(glyphtunedata,(int)*(short *)((int)pvVar7 + 0x8c));
+        glyph_cost = (short)iVar4;
+        EnlargeGlyphMenu(instance);
       }
-      if (puVar3 == &DAT_80000010) {
+      Glyph_DoFX(instance);
+      return;
+    }
+    puVar6 = (undefined *)p_Var3->ID;
+    if (puVar6 == &DAT_00100001) {
+      bVar1 = true;
+      *(undefined2 *)((int)pvVar7 + 0x8c) = 7;
+      *(undefined2 *)((int)pvVar7 + 0x98) = 0xdb6;
+      *(short *)((int)pvVar7 + 0x96) = (*(short *)((int)pvVar7 + 0x8c) + -1) * 0x249;
+      *(undefined2 *)((int)pvVar7 + 0x96) = *(undefined2 *)((int)pvVar7 + 0x98);
+      goto LAB_8007b1c4;
+    }
+    if ((int)puVar6 < 0x100002) {
+      if (puVar6 == (undefined *)0x80000000) {
+        sample = 0x10;
+        if (fx_going == 0) {
+          iVar4 = _GlyphIsGlyphSet((int)*(short *)((int)pvVar7 + 0x8c));
+          sample = 0x10;
+          if (iVar4 != 0) {
+            uVar5 = INSTANCE_Query(gameTrackerX.playerInstance,0x20);
+            iVar4 = _GlyphCost(glyphtunedata,(int)*(short *)((int)pvVar7 + 0x8c));
+            sample = 0x10;
+            if (iVar4 <= (int)uVar5) {
+              iVar4 = _GlyphIsGlyphUsable((int)*(short *)((int)pvVar7 + 0x8c));
+              if (iVar4 != 0) {
+                bVar1 = true;
+                _GlyphSwitchProcess(instance,_GlyphGenericProcess);
+                goto LAB_8007b1c4;
+              }
+              sample = 0x10;
+            }
+          }
+        }
+LAB_8007b1a0:
+        vol = 100;
+      }
+      else {
+        if (puVar6 != &DAT_80000010) goto LAB_8007b1bc;
+        bVar1 = true;
         _GlyphSwitchProcess(instance,_GlyphOffProcess);
         sample = 0xf;
         vol = 0x7f;
-        goto LAB_8007b1a4;
       }
+LAB_8007b1a4:
+      SndPlayVolPan(sample,vol,0x40,0);
     }
     else {
-      if (puVar3 == (undefined *)0x10000002) {
-        iVar2 = _GlyphIsAnyGlyphSet();
-        if (iVar2 != 0) {
-                    /* WARNING: Subroutine does not return */
-          AngleDiff(*(short *)((int)pvVar4 + 0x96),*(short *)((int)pvVar4 + 0x98));
+      if (puVar6 == (undefined *)0x10000002) {
+        iVar4 = _GlyphIsAnyGlyphSet();
+        if (iVar4 != 0) {
+          vol = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
+          if ((int)((uint)vol << 0x10) < 0) {
+            sVar2 = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
+            if (-(int)sVar2 < 0x40) goto LAB_8007b054;
+          }
+          else {
+            sVar2 = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
+            if (sVar2 < 0x40) {
+LAB_8007b054:
+              do {
+                *(short *)((int)pvVar7 + 0x8c) = *(short *)((int)pvVar7 + 0x8c) + 1;
+                *(undefined2 *)((int)pvVar7 + 0x9a) = 1;
+                if (7 < *(short *)((int)pvVar7 + 0x8c)) {
+                  *(undefined2 *)((int)pvVar7 + 0x8c) = 1;
+                }
+                *(short *)((int)pvVar7 + 0x98) = (*(short *)((int)pvVar7 + 0x8c) + -1) * 0x249;
+                iVar4 = _GlyphIsGlyphSet((int)*(short *)((int)pvVar7 + 0x8c));
+              } while (iVar4 == 0);
+              vol = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
+              if ((int)((uint)vol << 0x10) < 0) {
+                sVar2 = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
+                sample = 0x12;
+                if (0x3f < -(int)sVar2) {
+                  vol = 100;
+                  goto LAB_8007b1a4;
+                }
+              }
+              else {
+                sVar2 = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
+joined_r0x8007b0e4:
+                sample = 0x12;
+                if (0x3f < sVar2) goto LAB_8007b1a0;
+              }
+            }
+          }
         }
-        goto LAB_8007b1c4;
-      }
-      if ((int)puVar3 < 0x10000003) {
-        if (puVar3 == &DAT_00100004) goto LAB_8007b1c4;
       }
       else {
-        if (puVar3 == (undefined *)0x10000004) {
-          iVar2 = _GlyphIsAnyGlyphSet();
-          if (iVar2 != 0) {
-                    /* WARNING: Subroutine does not return */
-            AngleDiff(*(short *)((int)pvVar4 + 0x96),*(short *)((int)pvVar4 + 0x98));
+        if ((int)puVar6 < 0x10000003) {
+          if (puVar6 == &DAT_00100004) {
+            bVar1 = true;
+            goto LAB_8007b1c4;
           }
-          goto LAB_8007b1c4;
         }
+        else {
+          if (puVar6 == (undefined *)0x10000004) {
+            iVar4 = _GlyphIsAnyGlyphSet();
+            if (iVar4 != 0) {
+              vol = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
+              if ((int)((uint)vol << 0x10) < 0) {
+                sVar2 = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
+                if (-(int)sVar2 < 0x40) goto LAB_8007af0c;
+              }
+              else {
+                sVar2 = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
+                if (sVar2 < 0x40) {
+LAB_8007af0c:
+                  do {
+                    *(undefined2 *)((int)pvVar7 + 0x9a) = 0xffff;
+                    vol = *(short *)((int)pvVar7 + 0x8c) - 1;
+                    *(ushort *)((int)pvVar7 + 0x8c) = vol;
+                    if ((int)((uint)vol << 0x10) < 1) {
+                      *(undefined2 *)((int)pvVar7 + 0x8c) = 7;
+                    }
+                    *(short *)((int)pvVar7 + 0x98) = (*(short *)((int)pvVar7 + 0x8c) + -1) * 0x249;
+                    iVar4 = _GlyphIsGlyphSet((int)*(short *)((int)pvVar7 + 0x8c));
+                  } while (iVar4 == 0);
+                  vol = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
+                  if (-1 < (int)((uint)vol << 0x10)) {
+                    sVar2 = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98))
+                    ;
+                    goto joined_r0x8007b0e4;
+                  }
+                  sVar2 = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
+                  sample = 0x12;
+                  if (0x3f < -(int)sVar2) {
+                    vol = 100;
+                    goto LAB_8007b1a4;
+                  }
+                }
+              }
+            }
+            goto LAB_8007b1c4;
+          }
+        }
+LAB_8007b1bc:
+        _GlyphDefaultProcess(instance,data1,data2);
       }
     }
-    _GlyphDefaultProcess(instance,data1,data2);
-  }
 LAB_8007b1c4:
-                    /* WARNING: Subroutine does not return */
-  DeMessageQueue((__MessageQueue *)((int)pvVar4 + 4));
+    DeMessageQueue((__MessageQueue *)((int)pvVar7 + 4));
+  } while( true );
 }
 
 
@@ -791,8 +1052,8 @@ void Glyph_StartSpell(_Instance *instance,int glyphnum)
   case 7:
     Message = 0x80007;
   }
-                    /* WARNING: Subroutine does not return */
   INSTANCE_Post(gameTrackerX.playerInstance,Message,0);
+  return;
 }
 
 
@@ -833,25 +1094,61 @@ void Glyph_StartSpell(_Instance *instance,int glyphnum)
 void Glyph_Broadcast(_Instance *sender,int glyphnum)
 
 {
+  ulong uVar1;
+  int iVar2;
+  _Instance *Inst;
+  int Message;
+  uint uVar3;
+  int iVar4;
+  int plane;
+  
+  uVar3 = 0;
+  Message = 0;
+  plane = (int)gameTrackerX.gameData.asmData.MorphType;
+  iVar4 = fx_blastring->radius;
   switch(glyphnum) {
   case 1:
+    uVar3 = 10;
+    Message = 0x80001;
     break;
   case 2:
+    uVar3 = 10;
+    Message = 0x80002;
     break;
   case 3:
+    uVar3 = 10;
+    Message = 0x80003;
     break;
   case 4:
+    uVar3 = 10;
+    Message = 0x80004;
     break;
   case 5:
+    uVar3 = 0x2a;
+    Message = 0x80005;
     break;
   case 6:
+    uVar3 = 10;
+    Message = 0x80006;
     break;
   case 7:
     goto switchD_8007b338_caseD_7;
   }
-  if ((gameTrackerX.instanceList)->first != (_Instance *)0x0) {
-                    /* WARNING: Subroutine does not return */
-    INSTANCE_Query((gameTrackerX.instanceList)->first,1);
+  Inst = (gameTrackerX.instanceList)->first;
+  while (Inst != (_Instance *)0x0) {
+    uVar1 = INSTANCE_Query(Inst,1);
+    if ((((Inst != sender) && ((uVar1 & uVar3) != 0)) &&
+        (iVar2 = INSTANCE_InPlane(Inst,plane), iVar2 != 0)) &&
+       ((uVar1 != 0x20 || (uVar1 = INSTANCE_Query(Inst,2), (uVar1 & 0x4000) != 0)))) {
+      iVar2 = MATH3D_veclen2((int)(Inst->position).x - (int)(sender->position).x,
+                             (int)(Inst->position).y - (int)(sender->position).y);
+      iVar2 = iVar2 << 0xc;
+      if (((iVar2 <= iVar4) && (fx_radius_old <= iVar2)) ||
+         ((iVar4 <= iVar2 && (iVar2 <= fx_radius_old)))) {
+        INSTANCE_Post(Inst,Message,0);
+      }
+    }
+    Inst = Inst->next;
   }
 switchD_8007b338_caseD_7:
   return;
@@ -904,7 +1201,7 @@ void Glyph_DoSpell(_Instance *instance,int glyphnum)
   int height1;
   int radius;
   MATRIX MStack80;
-  long lStack48;
+  long local_30;
   
   radius = 0;
   vel = (undefined *)0x0;
@@ -915,7 +1212,7 @@ void Glyph_DoSpell(_Instance *instance,int glyphnum)
   size2 = 0;
   pvVar1 = instance->object->data;
   fx_going = 0;
-  lStack48 = 0;
+  local_30 = 0;
   MATH3D_SetUnityMatrix(&MStack80);
   fx_radius_old = 0;
   blast_range = (int)*(short *)((int)pvVar1 + (glyphnum + -1) * 2 + 0xc);
@@ -925,7 +1222,7 @@ void Glyph_DoSpell(_Instance *instance,int glyphnum)
     colorChangeRadius = blast_range + 3;
   }
   colorChangeRadius = blast_range - (colorChangeRadius >> 2);
-  startColor = lStack48;
+  startColor = local_30;
   switch(glyphnum) {
   case 1:
     radius = 1;
@@ -1116,38 +1413,39 @@ void _GlyphGenericProcess(_Instance *instance,int data1,int data2)
   
   pvVar3 = instance->extraData;
   ShrinkGlyphMenu(instance);
-  p_Var1 = PeekMessageQueue((__MessageQueue *)((int)pvVar3 + 4));
-  if (p_Var1 == (__Event *)0x0) {
-    if (glyph_trigger == 0) {
+  do {
+    p_Var1 = PeekMessageQueue((__MessageQueue *)((int)pvVar3 + 4));
+    if (p_Var1 == (__Event *)0x0) {
+      if (glyph_trigger != 0) {
+        glyphtunedata = (_GlyphTuneData *)instance->object->data;
+        Glyph_DoSpell(instance,(int)*(short *)((int)pvVar3 + 0x8c));
+        glyph_trigger = 0;
+        Data = _GlyphCost(glyphtunedata,(int)*(short *)((int)pvVar3 + 0x8c));
+        INSTANCE_Post(gameTrackerX.playerInstance,0x40008,Data);
+      }
       Glyph_DoFX(instance);
       return;
     }
-    glyphtunedata = (_GlyphTuneData *)instance->object->data;
-    Glyph_DoSpell(instance,(int)*(short *)((int)pvVar3 + 0x8c));
-    glyph_trigger = 0;
-    Data = _GlyphCost(glyphtunedata,(int)*(short *)((int)pvVar3 + 0x8c));
-                    /* WARNING: Subroutine does not return */
-    INSTANCE_Post(gameTrackerX.playerInstance,0x40008,Data);
-  }
-  puVar2 = (undefined *)p_Var1->ID;
-  if (puVar2 == &DAT_00100001) {
-    Glyph_StartSpell(instance,(int)*(short *)((int)pvVar3 + 0x8c));
-  }
-  else {
-    if ((int)puVar2 < 0x100002) {
-      if (puVar2 == (undefined *)0x80000000) {
-        _GlyphSwitchProcess(instance,_GlyphOffProcess);
-        goto LAB_8007b8c8;
-      }
+    puVar2 = (undefined *)p_Var1->ID;
+    if (puVar2 == &DAT_00100001) {
+      Glyph_StartSpell(instance,(int)*(short *)((int)pvVar3 + 0x8c));
     }
     else {
-      if (puVar2 == &DAT_00100004) goto LAB_8007b8c8;
+      if ((int)puVar2 < 0x100002) {
+        if (puVar2 == (undefined *)0x80000000) {
+          _GlyphSwitchProcess(instance,_GlyphOffProcess);
+        }
+        else {
+LAB_8007b8c0:
+          _GlyphDefaultProcess(instance,data1,data2);
+        }
+      }
+      else {
+        if (puVar2 != &DAT_00100004) goto LAB_8007b8c0;
+      }
     }
-    _GlyphDefaultProcess(instance,data1,data2);
-  }
-LAB_8007b8c8:
-                    /* WARNING: Subroutine does not return */
-  DeMessageQueue((__MessageQueue *)((int)pvVar3 + 4));
+    DeMessageQueue((__MessageQueue *)((int)pvVar3 + 4));
+  } while( true );
 }
 
 
@@ -1217,8 +1515,17 @@ void MANNA_Pickup(void)
 void HEALTHU_Pickup(_Instance *instance)
 
 {
-                    /* WARNING: Subroutine does not return */
   ApplyMatrixSV(theCamera.core.wcTransform2,&instance->position,&HUD_Cap_Pos);
+  HUD_Cap_Pos.x = HUD_Cap_Pos.x + *(short *)(theCamera.core.wcTransform2)->t;
+  HUD_Cap_Pos.y = HUD_Cap_Pos.y + *(short *)((theCamera.core.wcTransform2)->t + 1);
+  HUD_Cap_Vel.z = 0;
+  HUD_Cap_Vel.y = 0;
+  HUD_Cap_Vel.x = 0;
+  HUD_Cap_Pos.z = HUD_Cap_Pos.z + *(short *)((theCamera.core.wcTransform2)->t + 2);
+  INSTANCE_KillInstance(instance);
+  HUD_Captured = 1;
+  HUD_State = 1;
+  return;
 }
 
 
@@ -1342,7 +1649,6 @@ void HUD_Update(void)
   else {
     if (gameTrackerX.gameMode == 6) {
       if ((1 < HUD_State) && (HUD_State < 7)) {
-        HUD_Captured = 0;
         return;
       }
     }
@@ -1399,7 +1705,6 @@ void HUD_Update(void)
       HUD_State = 6;
       HUD_Rotation = 0;
       HUD_Wait = 10;
-                    /* WARNING: Read-only address (ram,0x800d081c) is written */
       HUD_Captured = 0;
       HUD_Count = HUD_Count + 1;
       sVar2 = HUD_Wait;
@@ -1413,7 +1718,6 @@ void HUD_Update(void)
       }
     }
   }
-                    /* WARNING: Read-only address (ram,0x800d081c) is written */
   HUD_Wait = sVar2;
   return;
 }
@@ -1483,76 +1787,31 @@ void HUD_Update(void)
 	/* end block 2 */
 	// End Line: 2724
 
-/* WARNING: Removing unreachable block (ram,0x8007bfbc) */
-/* WARNING: Removing unreachable block (ram,0x8007bfcc) */
-/* WARNING: Removing unreachable block (ram,0x8007bffc) */
-/* WARNING: Removing unreachable block (ram,0x8007bff4) */
-/* WARNING: Removing unreachable block (ram,0x8007c000) */
-/* WARNING: Removing unreachable block (ram,0x8007c040) */
-/* WARNING: Removing unreachable block (ram,0x8007c050) */
-/* WARNING: Removing unreachable block (ram,0x8007c060) */
-/* WARNING: Removing unreachable block (ram,0x8007c078) */
-/* WARNING: Removing unreachable block (ram,0x8007c080) */
-/* WARNING: Removing unreachable block (ram,0x8007c070) */
-/* WARNING: Removing unreachable block (ram,0x8007c084) */
-/* WARNING: Removing unreachable block (ram,0x8007c08c) */
-/* WARNING: Removing unreachable block (ram,0x8007c090) */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void HUD_Draw(void)
 
 {
   bool bVar1;
-  uint uVar2;
-  undefined **ppuVar3;
+  long lVar2;
+  long lVar3;
+  int fade;
+  int iVar4;
+  ulong uVar5;
+  ulong uVar6;
+  int fade_00;
+  uint uVar7;
+  undefined **ppuVar8;
   _SVector local_50;
   _SVector local_48;
   _SVector local_40;
-  DVECTOR local_38 [8];
+  DVECTOR local_38 [2];
+  _Position local_30;
+  _SVector _Stack40;
+  _SVector local_20;
   
   if ((theCamera.instance_mode & 0x80000000) == 0) {
-    if (warpDraw == 0) {
-      HUD_Update();
-      local_40.x = 0;
-      local_40.y = 0;
-      local_40.z = 0x87;
-      if (-0x40 < MANNA_Position) {
-                    /* WARNING: Subroutine does not return */
-        INSTANCE_Query(gameTrackerX.playerInstance,0x20);
-      }
-      if (-1000 < HUD_Position) {
-        local_40.y = 0;
-        local_40.x = 0;
-                    /* WARNING: Read-only address (ram,0x800d4e1c) is written */
-                    /* WARNING: Read-only address (ram,0x800d4e1e) is written */
-                    /* WARNING: Read-only address (ram,0x800d4e20) is written */
-        uVar2 = 0;
-        ppuVar3 = &PTR_LAB_80011d6c;
-        local_50.x = 0x400;
-        local_48.y = 0x260;
-        local_50.y = 0;
-        local_48.z = 0xa00;
-        local_40.z = 0;
-        local_48.x = HUD_Position + -0x600;
-        local_50.z = HUD_Rotation;
-        bVar1 = true;
-        do {
-          if (bVar1) {
-                    /* WARNING: Could not recover jumptable at 0x8007c10c. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-            (*(code *)*ppuVar3)();
-            return;
-          }
-          ppuVar3 = (code **)ppuVar3 + 1;
-          local_50.z = local_50.z - HUD_Rotation & 0xfff;
-          FX_DrawModel((Object *)(void *)0x0,0,&local_50,&local_48,&local_40,
-                       (uint)((int)uVar2 < HUD_Count) ^ 1);
-          uVar2 = uVar2 + 1;
-          bVar1 = uVar2 < 5;
-        } while ((int)uVar2 < 5);
-      }
-      return;
-    }
+    if (warpDraw == 0) goto LAB_8007beb4;
     warpDraw = warpDraw - (gameTrackerX.timeMult >> 4);
     if (warpDraw < 0) {
       warpDraw = 0;
@@ -1565,8 +1824,115 @@ void HUD_Draw(void)
     }
   }
   HUD_GetPlayerScreenPt(local_38);
-                    /* WARNING: Subroutine does not return */
-  rcos(glowdeg);
+  fade = rcos(glowdeg);
+  fade = (warpDraw / 10) * fade;
+  if (fade < 0) {
+    fade = fade + 0xfff;
+  }
+  fade = warpDraw / 3 + (fade >> 0xc);
+  if (fade < 0) {
+    fade = 0;
+  }
+  glowdeg = glowdeg + (gameTrackerX.timeMult >> 5);
+  fade_00 = fade;
+  if (hud_warp_arrow_flash < 1) {
+LAB_8007be40:
+    if (hud_warp_arrow_flash < 0) {
+      iVar4 = hud_warp_arrow_flash + (gameTrackerX.timeMult >> 3);
+      fade = fade - hud_warp_arrow_flash;
+      hud_warp_arrow_flash = iVar4;
+      if (0 < iVar4) {
+        hud_warp_arrow_flash = 0;
+      }
+    }
+  }
+  else {
+    iVar4 = hud_warp_arrow_flash - (gameTrackerX.timeMult >> 3);
+    fade_00 = fade + hud_warp_arrow_flash;
+    hud_warp_arrow_flash = iVar4;
+    if (iVar4 < 0) {
+      hud_warp_arrow_flash = 0;
+      goto LAB_8007be40;
+    }
+  }
+  FX_MakeWarpArrow((int)local_38[0].vx + -0x40,(int)local_38[0].vy,-0x40,0x20,fade);
+  FX_MakeWarpArrow((int)local_38[0].vx + 0x40,(int)local_38[0].vy,0x40,0x20,fade_00);
+LAB_8007beb4:
+  HUD_Update();
+  lVar3 = fontTracker.font_ypos;
+  lVar2 = fontTracker.font_xpos;
+  local_40.x = 0;
+  local_40.y = 0;
+  local_40.z = 0x87;
+  if (-0x40 < MANNA_Position) {
+    uVar5 = INSTANCE_Query(gameTrackerX.playerInstance,0x20);
+    uVar6 = INSTANCE_Query(gameTrackerX.playerInstance,0x2d);
+    FX_MakeMannaIcon((int)MANNA_Position,0x17,0x33,0x20);
+    FONT_Flush();
+    FONT_SetCursor((short)(((uint)(ushort)MANNA_Position + 0x3a) * 0x10000 >> 0x10),0x20);
+    if (glyph_cost != -1) {
+      FONT_Print("%d/");
+    }
+    if ((int)uVar6 <= (int)uVar5) {
+      FONT_SetColorIndex(2);
+    }
+    FONT_Print((char *)&PTR_DAT_800d0824);
+    FONT_SetColorIndex(0);
+    FONT_SetCursor((short)lVar2,(short)lVar3);
+    FONT_Flush();
+  }
+  if (-1000 < HUD_Position) {
+    if ((HUD_Captured != 0) && (gameTrackerX.gameMode != 6)) {
+      local_20.x = 0x400;
+      local_30.x = -0x600;
+      local_20.y = 0;
+      local_20.z = 0;
+      local_30.z = 0xa00;
+      if (HUD_State < 4) {
+        local_30.y = 0x120;
+      }
+      else {
+        local_30.y = 0x260;
+      }
+      CriticalDampPosition(1,(_Position *)&HUD_Cap_Pos,&local_30,&HUD_Cap_Vel,&_Stack40,0x80);
+      if (((HUD_Cap_Vel.x == 0) && (HUD_Cap_Vel.y == 0)) && (HUD_Cap_Vel.z == 0)) {
+        if (HUD_State == 3) {
+          HUD_State = 4;
+        }
+        else {
+          if (HUD_State == 4) {
+            HUD_State = 5;
+          }
+        }
+      }
+      FX_DrawModel((Object *)(void *)0x0,0,&local_20,&HUD_Cap_Pos,&local_40,0);
+    }
+    uVar7 = 0;
+    ppuVar8 = &PTR_LAB_80011d6c;
+    local_50.x = 0x400;
+    local_48.y = 0x260;
+    local_50.y = 0;
+    local_48.z = 0xa00;
+    local_40.z = 0;
+    local_48.x = HUD_Position + -0x600;
+    local_50.z = HUD_Rotation;
+    bVar1 = true;
+    do {
+      if (bVar1) {
+                    /* WARNING: Could not recover jumptable at 0x8007c10c. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+        (*(code *)*ppuVar8)();
+        return;
+      }
+      ppuVar8 = (code **)ppuVar8 + 1;
+      local_50.z = local_50.z - HUD_Rotation & 0xfff;
+      FX_DrawModel((Object *)(void *)0x0,0,&local_50,&local_48,&local_40,
+                   (uint)((int)uVar7 < HUD_Count) ^ 1);
+      uVar7 = uVar7 + 1;
+      bVar1 = uVar7 < 5;
+    } while ((int)uVar7 < 5);
+  }
+  return;
 }
 
 

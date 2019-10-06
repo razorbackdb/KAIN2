@@ -206,16 +206,11 @@ char * MEMPACK_Malloc(ulong allocSize,uchar memType)
 {
   long lVar1;
   MemHeader *pMVar2;
-  char *pcVar3;
-  ulong uVar4;
-  uchar bestAddress;
-  undefined2 *puVar5;
-  MemHeader *pMVar6;
-  long in_a2;
-  ulong in_a3;
+  ulong uVar3;
+  undefined2 *puVar4;
+  MemHeader *pMVar5;
   uint allocSize_00;
   
-  bestAddress = memType;
   lVar1 = MEMPACK_RelocatableType((uint)memType);
   if ((newMemTracker.doingGarbageCollection == 0) && (lVar1 != 0)) {
     MEMPACK_DoGarbageCollection();
@@ -229,12 +224,12 @@ char * MEMPACK_Malloc(ulong allocSize,uchar memType)
   }
   if (pMVar2 == (MemHeader *)0x0) {
     STREAM_DumpNonResidentObjects();
-    if (lVar1 != 0) {
-      pMVar2 = MEMPACK_GetSmallestBlockTopBottom(allocSize_00);
-      MEMPACK_GarbageSplitMemoryNow(allocSize_00,bestAddress,in_a2,in_a3);
-      return (char *)pMVar2;
+    if (lVar1 == 0) {
+      pMVar2 = MEMPACK_GetSmallestBlockBottomTop(allocSize_00);
     }
-    pMVar2 = MEMPACK_GetSmallestBlockBottomTop(allocSize_00);
+    else {
+      pMVar2 = MEMPACK_GetSmallestBlockTopBottom(allocSize_00);
+    }
     if (pMVar2 == (MemHeader *)0x0) {
       if (memType == '\x10') {
         return (char *)0x0;
@@ -245,42 +240,41 @@ char * MEMPACK_Malloc(ulong allocSize,uchar memType)
                       );
     }
   }
-  uVar4 = pMVar2->memSize;
-  if (uVar4 - allocSize_00 < 8) {
-    allocSize_00 = uVar4;
+  uVar3 = pMVar2->memSize;
+  if (uVar3 - allocSize_00 < 8) {
+    allocSize_00 = uVar3;
   }
-  if (allocSize_00 == uVar4) {
+  if (allocSize_00 == uVar3) {
     pMVar2->magicNumber = 0xbade;
-    pMVar2->memStatus = '\x01';
-    pMVar2->memType = memType;
-    pMVar2->memSize = allocSize_00;
-    newMemTracker.currentMemoryUsed = newMemTracker.currentMemoryUsed + allocSize_00;
   }
   else {
-    puVar5 = (undefined2 *)((int)&pMVar2->magicNumber + allocSize_00);
-    if (lVar1 != 0) {
-      *puVar5 = 0xbade;
-      *(undefined *)(puVar5 + 1) = 0;
-      *(undefined *)((int)puVar5 + 3) = 0;
-      *(ulong *)(puVar5 + 2) = pMVar2->memSize - allocSize_00;
-      pcVar3 = &UNK_00000001;
+    puVar4 = (undefined2 *)((int)&pMVar2->magicNumber + allocSize_00);
+    if (lVar1 == 0) {
+      pMVar5 = (MemHeader *)((int)pMVar2 + (uVar3 - allocSize_00));
+      pMVar5->magicNumber = 0xbade;
+      pMVar5->memStatus = '\x01';
+      pMVar5->memType = memType;
+      pMVar5->memSize = allocSize_00;
+      newMemTracker.currentMemoryUsed = newMemTracker.currentMemoryUsed + allocSize_00;
       pMVar2->magicNumber = 0xbade;
-      MEMPACK_ReportMemory2();
-      return pcVar3;
+      pMVar2->memStatus = '\0';
+      pMVar2->memType = '\0';
+      pMVar2->memSize = uVar3 - allocSize_00;
+      goto LAB_80050618;
     }
-    pMVar6 = (MemHeader *)((int)pMVar2 + (uVar4 - allocSize_00));
-    pMVar6->magicNumber = 0xbade;
-    pMVar6->memStatus = '\x01';
-    pMVar6->memType = memType;
-    pMVar6->memSize = allocSize_00;
-    newMemTracker.currentMemoryUsed = newMemTracker.currentMemoryUsed + allocSize_00;
+    *puVar4 = 0xbade;
+    *(undefined *)(puVar4 + 1) = 0;
+    *(undefined *)((int)puVar4 + 3) = 0;
+    *(ulong *)(puVar4 + 2) = pMVar2->memSize - allocSize_00;
     pMVar2->magicNumber = 0xbade;
-    pMVar2->memStatus = '\0';
-    pMVar2->memType = '\0';
-    pMVar2->memSize = uVar4 - allocSize_00;
-    pMVar2 = pMVar6;
   }
-  return (char *)(pMVar2 + 1);
+  pMVar2->memStatus = '\x01';
+  pMVar2->memType = memType;
+  pMVar2->memSize = allocSize_00;
+  newMemTracker.currentMemoryUsed = newMemTracker.currentMemoryUsed + allocSize_00;
+  pMVar5 = pMVar2;
+LAB_80050618:
+  return (char *)(pMVar5 + 1);
 }
 
 
@@ -427,19 +421,24 @@ void MEMPACK_Free(char *address)
 void MEMPACK_FreeByType(uchar memType)
 
 {
-  MemHeader *pMVar1;
+  bool bVar1;
+  MemHeader *pMVar2;
   
-  pMVar1 = newMemTracker.rootNode;
-  if (newMemTracker.rootNode != (MemHeader *)newMemTracker.lastMemoryAddress) {
-    do {
-      if ((pMVar1->memStatus == '\x01') && (pMVar1->memType == memType)) {
-                    /* WARNING: Subroutine does not return */
-        MEMPACK_Free((char *)(pMVar1 + 1));
+  do {
+    bVar1 = false;
+    pMVar2 = newMemTracker.rootNode;
+    while (pMVar2 != (MemHeader *)newMemTracker.lastMemoryAddress) {
+      if ((pMVar2->memStatus == '\x01') && (pMVar2->memType == memType)) {
+        bVar1 = true;
+        MEMPACK_Free((char *)(pMVar2 + 1));
+        break;
       }
-      pMVar1 = (MemHeader *)((int)&pMVar1->magicNumber + pMVar1->memSize);
-    } while (pMVar1 != (MemHeader *)newMemTracker.lastMemoryAddress);
-  }
-  return;
+      pMVar2 = (MemHeader *)((int)&pMVar2->magicNumber + pMVar2->memSize);
+    }
+    if (!bVar1) {
+      return;
+    }
+  } while( true );
 }
 
 
@@ -491,6 +490,8 @@ ulong MEMPACK_Size(char *address)
 		// Start line: 1308
 	/* end block 2 */
 	// End Line: 1309
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
 
 ulong MEMPACK_ReportFreeMemory(void)
 

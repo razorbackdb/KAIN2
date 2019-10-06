@@ -372,7 +372,6 @@ void ProcessPhysics(__Player *player,__CharacterState *In,int CurrentSection,int
         PhysicsMoveLocalZClamp(instance,segment,time,clamp);
         PHYSICS_StopIfCloseToTarget(instance,0,0,(int)player->swimTargetSpeed);
         if (((instance->xAccl == 0) && (instance->yAccl == 0)) && (instance->zAccl == 0)) {
-                    /* WARNING: Subroutine does not return */
           INSTANCE_Post(instance,(int)&DAT_00100011,(int)player->swimTargetSpeed);
         }
       }

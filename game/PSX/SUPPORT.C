@@ -24,11 +24,13 @@
 int printf(char *fmt)
 
 {
+  int iVar1;
   undefined local_res4 [12];
   char acStack264 [256];
   
-                    /* WARNING: Subroutine does not return */
-  vsprintf(acStack264,fmt,local_res4);
+  iVar1 = vsprintf(acStack264,fmt,local_res4);
+  puts(acStack264);
+  return iVar1;
 }
 
 
@@ -52,10 +54,11 @@ int printf(char *fmt)
 int sprintf(char *string,char *fmt)
 
 {
+  int iVar1;
   undefined local_res8 [8];
   
-                    /* WARNING: Subroutine does not return */
-  vsprintf(string,fmt,local_res8);
+  iVar1 = vsprintf(string,fmt,local_res8);
+  return iVar1;
 }
 
 
@@ -96,47 +99,63 @@ int sprintf(char *string,char *fmt)
 int vsprintf(char *str,char *fmtstr,void *argptr)
 
 {
-  char cVar1;
+  byte bVar1;
   byte bVar2;
-  ulong value;
-  char *__s;
-  byte *pbVar3;
-  byte *pbVar4;
+  byte bVar3;
+  size_t sVar4;
+  char *__dest;
   int radix;
+  int iVar5;
+  char *__s;
+  byte *pbVar6;
+  byte *pbVar7;
+  int iVar8;
+  int __c;
   char local_38;
   undefined local_37;
   
-  cVar1 = *fmtstr;
-  radix = 0;
+  bVar1 = *fmtstr;
+  iVar8 = 0;
   do {
-    if (cVar1 == '\0') {
-      str[radix] = '\0';
-      return radix;
+    if (bVar1 == 0) {
+      str[iVar8] = '\0';
+      return iVar8;
     }
-    if (cVar1 == '%') {
-      pbVar3 = (byte *)(fmtstr + 1);
-      if (*pbVar3 != 0x25) {
-        if (*pbVar3 == 0x2d) {
-          pbVar3 = (byte *)(fmtstr + 2);
+    if (bVar1 == 0x25) {
+      pbVar6 = (byte *)fmtstr + 1;
+      bVar1 = *pbVar6;
+      if (bVar1 == 0x25) {
+        str[iVar8] = '%';
+        iVar8 = iVar8 + 1;
+        fmtstr = (char *)((byte *)fmtstr + 2);
+      }
+      else {
+        if (bVar1 == 0x2d) {
+          pbVar6 = (byte *)fmtstr + 2;
         }
-        if (*pbVar3 == 0x30) {
-          pbVar3 = pbVar3 + 1;
+        __c = 0x20;
+        if (*pbVar6 == 0x30) {
+          __c = 0x30;
+          pbVar6 = pbVar6 + 1;
         }
-        bVar2 = *pbVar3;
+        bVar2 = *pbVar6;
+        iVar5 = 0;
         while ((uint)bVar2 - 0x30 < 10) {
-          pbVar3 = pbVar3 + 1;
-          bVar2 = *pbVar3;
+          bVar3 = *pbVar6;
+          pbVar6 = pbVar6 + 1;
+          bVar2 = *pbVar6;
+          iVar5 = iVar5 * 10 + (uint)bVar3 + -0x30;
         }
         do {
           do {
-            pbVar4 = pbVar3;
-            bVar2 = *pbVar4;
-            pbVar3 = pbVar4 + 1;
+            pbVar7 = pbVar6;
+            bVar2 = *pbVar7;
+            pbVar6 = pbVar7 + 1;
           } while (bVar2 == 0x4e);
-          pbVar3 = pbVar4 + 1;
-        } while ((((bVar2 == 0x46) || (pbVar3 = pbVar4 + 1, bVar2 == 0x68)) ||
-                 (pbVar3 = pbVar4 + 1, bVar2 == 0x6c)) || (pbVar3 = pbVar4 + 1, bVar2 == 0x4c));
-        bVar2 = *pbVar4;
+          pbVar6 = pbVar7 + 1;
+        } while ((((bVar2 == 0x46) || (pbVar6 = pbVar7 + 1, bVar2 == 0x68)) ||
+                 (pbVar6 = pbVar7 + 1, bVar2 == 0x6c)) || (pbVar6 = pbVar7 + 1, bVar2 == 0x4c));
+        bVar2 = *pbVar7;
         if (bVar2 == 99) {
           local_38 = *(char *)argptr;
           __s = &local_38;
@@ -148,28 +167,48 @@ int vsprintf(char *str,char *fmtstr,void *argptr)
           }
           else {
             if ((bVar2 == 0x78) || (bVar2 == 0x58)) {
-              value = *(ulong *)argptr;
+              __s = *(char **)argptr;
               radix = 0x10;
             }
             else {
-              value = *(ulong *)argptr;
+              __s = *(char **)argptr;
               radix = 10;
             }
-            __s = my_itoa(value,&local_38,radix);
+            __s = my_itoa((ulong)__s,&local_38,radix);
           }
         }
-                    /* WARNING: Subroutine does not return */
-        strlen(__s);
+        argptr = (char **)argptr + 1;
+        fmtstr = (char *)(pbVar7 + 1);
+        sVar4 = strlen(__s);
+        if (iVar5 == 0) {
+LAB_80073ee8:
+          __dest = str + iVar8;
+        }
+        else {
+          __dest = str + iVar8;
+          if ((int)sVar4 < iVar5) {
+            if (bVar1 == 0x2d) {
+              strcpy(__dest,__s);
+              memset(str + iVar8 + sVar4,__c,iVar5 - sVar4);
+              iVar8 = iVar8 + sVar4 + (iVar5 - sVar4);
+              goto LAB_80073ef8;
+            }
+            memset(__dest,__c,iVar5 - sVar4);
+            iVar8 = iVar8 + (iVar5 - sVar4);
+            goto LAB_80073ee8;
+          }
+        }
+        strcpy(__dest,__s);
+        iVar8 = iVar8 + sVar4;
       }
-      str[radix] = '%';
-      fmtstr = fmtstr + 2;
     }
     else {
-      str[radix] = cVar1;
-      fmtstr = fmtstr + 1;
+      str[iVar8] = bVar1;
+      fmtstr = (char *)((byte *)fmtstr + 1);
+      iVar8 = iVar8 + 1;
     }
-    radix = radix + 1;
-    cVar1 = *fmtstr;
+LAB_80073ef8:
+    bVar1 = *fmtstr;
   } while( true );
 }
 

@@ -173,8 +173,9 @@ int do_save_menu(void *gt,long parameter,menu_ctrl_t ctrl)
 void womp_background(char *tim_path)
 
 {
-                    /* WARNING: Subroutine does not return */
   MEMPACK_Free((char *)mainMenuScreen);
+  mainMenuScreen = MAIN_LoadTim(tim_path);
+  return;
 }
 
 
@@ -359,18 +360,16 @@ void set_volume(sfx_t sfx,int cooked)
   newVolume = (cooked * 0x7f + 9) / 10;
   if (sfx == sfx_music) {
     SOUND_SetMusicVolume(newVolume);
-    FUN_800b7600(newVolume);
-    return;
-  }
-  if (sfx == sfx_sound) {
-    SOUND_SetSfxVolume(newVolume);
   }
   else {
-    if (sfx != sfx_voice) {
-      FUN_800b7600(newVolume);
-      return;
+    if (sfx == sfx_sound) {
+      SOUND_SetSfxVolume(newVolume);
     }
-    SOUND_SetVoiceVolume(newVolume);
+    else {
+      if (sfx == sfx_voice) {
+        SOUND_SetVoiceVolume(newVolume);
+      }
+    }
   }
   return;
 }
@@ -469,11 +468,13 @@ int menudefs_toggle_dualshock(void *gt,long param,menu_ctrl_t ctrl)
       if (*(int *)((int)gt + 0x248) == 0) {
         *(undefined4 *)((int)gt + 0x248) = 1;
       }
-                    /* WARNING: Subroutine does not return */
       GAMEPAD_Shock1(0x80,*(int *)((int)gt + 0x248) << 3);
+      iVar1 = 1;
     }
-    GAMEPAD_DisableDualShock();
-    iVar1 = 1;
+    else {
+      GAMEPAD_DisableDualShock();
+      iVar1 = 1;
+    }
   }
   else {
     iVar1 = 0;
@@ -505,11 +506,42 @@ int menudefs_toggle_dualshock(void *gt,long param,menu_ctrl_t ctrl)
 int options_menu(void *gt,int index)
 
 {
+  char *format;
+  int iVar1;
+  int iVar2;
+  localstr_t id;
+  
   hack_attract = 0;
   MENUFACE_ChangeStateRandomly(index);
   do_check_controller(gt);
-                    /* WARNING: Subroutine does not return */
-  localstr_get(LOCALSTR_options);
+  format = localstr_get(LOCALSTR_options);
+  menu_item_flags(*(menu_t **)((int)gt + 0x20),(TDRFuncPtr_menu_item_flags1fn)0x0,0,4,format);
+  format = localstr_get(LOCALSTR_sound);
+  sound_item(gt,format,sfx_sound);
+  format = localstr_get(LOCALSTR_music);
+  sound_item(gt,format,sfx_music);
+  format = localstr_get(LOCALSTR_voice);
+  sound_item(gt,format,sfx_voice);
+  iVar1 = GAMEPAD_ControllerIsDualShock();
+  if (iVar1 != 0) {
+    iVar2 = GAMEPAD_DualShockEnabled();
+    id = LOCALSTR_vibration_off;
+    if (iVar2 != 0) {
+      id = LOCALSTR_vibration_on;
+    }
+    format = localstr_get(id);
+    menu_item(*(menu_t **)((int)gt + 0x20),menudefs_toggle_dualshock,0,format);
+  }
+  format = localstr_get(LOCALSTR_done);
+  menu_item(*(menu_t **)((int)gt + 0x20),do_pop_menu,0,format);
+  if ((iVar1 != wasDualShock_54) && (3 < index)) {
+    index = iVar1 + 4;
+  }
+  if (index < 0) {
+    index = 1;
+  }
+  wasDualShock_54 = iVar1;
+  return index;
 }
 
 
@@ -526,12 +558,20 @@ int options_menu(void *gt,int index)
 int main_menu(void *gt,int index)
 
 {
+  char *format;
+  
   hack_attract = 0;
-  menu_format(*(menu_t **)((int)gt + 0x20),1,0x74,0x1e,0xbe,LINESKIP,2,0);
+  menu_format(*(menu_t **)((int)gt + 0x20),1,0x74,0x1e,0xbe,0xe,2,0);
   MENUFACE_ChangeStateRandomly(index);
   do_check_controller(gt);
-                    /* WARNING: Subroutine does not return */
-  localstr_get(LOCALSTR_start_game);
+  format = localstr_get(LOCALSTR_start_game);
+  menu_item(*(menu_t **)((int)gt + 0x20),do_start_game,0,format);
+  format = localstr_get(LOCALSTR_options);
+  menu_item(*(menu_t **)((int)gt + 0x20),do_push_menu,(long)options_menu,format);
+  if (index < 0) {
+    index = 0;
+  }
+  return index;
 }
 
 
@@ -589,6 +629,8 @@ int do_main_menu(void *gt,long param,menu_ctrl_t ctrl)
 char * flashStart(void)
 
 {
+  char *pcVar1;
+  
   gameTrackerX.gameFramePassed = 1;
   if (StartGameFading == 1) {
     hack_reset_attract = StartGameFading;
@@ -615,11 +657,11 @@ char * flashStart(void)
       DAT_800d0d40 = DAT_800d0d40 ^ 1;
     }
   }
+  pcVar1 = (char *)0x0;
   if (DAT_800d0d40 != 0) {
-                    /* WARNING: Subroutine does not return */
-    localstr_get(LOCALSTR_press_start);
+    pcVar1 = localstr_get(LOCALSTR_press_start);
   }
-  return (char *)0x0;
+  return pcVar1;
 }
 
 
@@ -648,7 +690,7 @@ int menudefs_main_menu(void *gt,int index)
     hack_attract = gameTrackerX.vblCount;
   }
   check_hack_attract();
-  menu_format(*(menu_t **)((int)gt + 0x20),1,0x80,100,100,LINESKIP,2,0);
+  menu_format(*(menu_t **)((int)gt + 0x20),1,0x80,100,100,0xe,2,0);
   format = flashStart();
   menu_item(*(menu_t **)((int)gt + 0x20),do_main_menu,0,format);
   if (index < 0) {
@@ -671,10 +713,20 @@ int menudefs_main_menu(void *gt,int index)
 int menudefs_confirmexit_menu(void *gt,int index)
 
 {
+  char *format;
+  
   hack_attract = 0;
   do_check_controller(gt);
-                    /* WARNING: Subroutine does not return */
-  localstr_get(LOCALSTR_query_quit);
+  format = localstr_get(LOCALSTR_query_quit);
+  menu_item_flags(*(menu_t **)((int)gt + 0x20),(TDRFuncPtr_menu_item_flags1fn)0x0,0,4,format);
+  format = localstr_get(LOCALSTR_no);
+  menu_item(*(menu_t **)((int)gt + 0x20),do_pop_menu,0,format);
+  format = localstr_get(LOCALSTR_yes);
+  menu_item(*(menu_t **)((int)gt + 0x20),do_function,(long)DEBUG_ExitGame,format);
+  if (index < 0) {
+    index = 1;
+  }
+  return index;
 }
 
 
@@ -688,16 +740,28 @@ int menudefs_confirmexit_menu(void *gt,int index)
 	/* end block 1 */
 	// End Line: 2463
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 int menudefs_pause_menu(void *gt,int index)
 
 {
+  char *format;
+  
   do_check_controller(gt);
   hack_attract = 0;
-  menu_format(*(menu_t **)((int)gt + 0x20),1,0x100,0x3c,_PAUSE_WIDTH,LINESKIP,2,1);
-                    /* WARNING: Subroutine does not return */
-  localstr_get(LOCALSTR_paused);
+  menu_format(*(menu_t **)((int)gt + 0x20),1,0x100,0x3c,0x100,0xe,2,1);
+  format = localstr_get(LOCALSTR_paused);
+  menu_item_flags(*(menu_t **)((int)gt + 0x20),(TDRFuncPtr_menu_item_flags1fn)0x0,0,4,format);
+  format = localstr_get(LOCALSTR_resume_game);
+  menu_item(*(menu_t **)((int)gt + 0x20),do_function,(long)DEBUG_ContinueGame,format);
+  format = localstr_get(LOCALSTR_save_game);
+  menu_item(*(menu_t **)((int)gt + 0x20),do_save_menu,0,format);
+  format = localstr_get(LOCALSTR_options);
+  menu_item(*(menu_t **)((int)gt + 0x20),do_push_menu,(long)options_menu,format);
+  format = localstr_get(LOCALSTR_quit_game);
+  menu_item(*(menu_t **)((int)gt + 0x20),do_push_menu,(long)menudefs_confirmexit_menu,format);
+  if (index < 0) {
+    index = 1;
+  }
+  return index;
 }
 
 

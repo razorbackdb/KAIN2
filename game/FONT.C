@@ -27,23 +27,29 @@ void FONT_MakeSpecialFogClut(int x,int y)
 {
   undefined2 *puVar1;
   int iVar2;
-  undefined2 local_12 [4];
+  undefined2 local_30 [15];
+  undefined2 local_12;
+  undefined4 local_10;
+  undefined2 local_c;
   undefined2 local_a;
   
   iVar2 = 0xf;
-  puVar1 = local_12;
+  puVar1 = &local_12;
   do {
     *puVar1 = 0x4210;
     iVar2 = iVar2 + -1;
     puVar1 = puVar1 + -1;
   } while (-1 < iVar2);
-  local_12[3] = 0x10;
+  local_c = 0x10;
   local_a = 1;
   SpecialFogClut = (ushort)(y << 6) | (ushort)(x >> 4) & 0x3f;
-  local_12[1] = (undefined2)x;
-  local_12[2] = (undefined2)y;
-                    /* WARNING: Subroutine does not return */
+  local_30[0] = 0;
+  local_10._0_2_ = (undefined2)x;
+  local_10._2_2_ = (undefined2)y;
   DrawSync(0);
+  LoadImage(&local_10,local_30);
+  DrawSync(0);
+  return;
 }
 
 
@@ -73,13 +79,26 @@ void FONT_MakeSpecialFogClut(int x,int y)
 void FONT_Init(void)
 
 {
-  short local_10;
-  short local_e [3];
+  long *addr;
+  ushort local_10;
+  ushort local_e [3];
   
-  FONT_vramBlock = VRAM_CheckVramSlot(&local_10,local_e,0x10,0x80,3,-1);
+  FONT_vramBlock = VRAM_CheckVramSlot((short *)&local_10,(short *)local_e,0x10,0x80,3,-1);
   if (FONT_vramBlock != (_BlockVramEntry *)0x0) {
-                    /* WARNING: Subroutine does not return */
-    LOAD_ReadFile("\\kain2\\game\\font.tim",'\x05');
+    addr = LOAD_ReadFile("\\kain2\\game\\font.tim",'\x05');
+    LOAD_LoadTIM(addr,(int)(short)local_10,(int)(short)local_e[0],(int)(short)local_10,
+                 (int)(short)local_e[0] + 0x7e);
+    MEMPACK_Free((char *)addr);
+    fontTracker.sprite_sort_push = 0;
+    fontTracker.font_tpage =
+         (short)(local_e[0] & 0x100) >> 4 | (ushort)(((uint)local_10 & 0x3ff) >> 6) |
+         (ushort)(((uint)local_e[0] & 0x200) << 2);
+    fontTracker.font_clut = (local_e[0] + 0x7e) * 0x40 | (short)local_10 >> 4 & 0x3fU;
+    fontTracker.font_vramX = local_10;
+    fontTracker.font_vramY = local_e[0];
+    fontTracker.font_vramV = local_e[0] & 0xff;
+    fontTracker.font_vramU = (short)(((uint)local_10 & 0x3f) << 2);
+    FONT_MakeSpecialFogClut((int)(short)local_10,(int)(short)local_e[0] + 0x7f);
   }
   fontTracker.font_xpos = 10;
   fontTracker.font_ypos = 0x10;
@@ -115,8 +134,14 @@ void FONT_Init(void)
 void FONT_ReloadFont(void)
 
 {
-                    /* WARNING: Subroutine does not return */
-  LOAD_ReadFile("\\kain2\\game\\font.tim",'\x05');
+  long *addr;
+  
+  addr = LOAD_ReadFile("\\kain2\\game\\font.tim",'\x05');
+  LOAD_LoadTIM(addr,(int)fontTracker.font_vramX,(int)fontTracker.font_vramY,
+               (int)fontTracker.font_vramX,(int)fontTracker.font_vramY + 0x7e);
+  MEMPACK_Free((char *)addr);
+  FONT_MakeSpecialFogClut((int)fontTracker.font_vramX,(int)fontTracker.font_vramY + 0x7f);
+  return;
 }
 
 
@@ -592,10 +617,22 @@ void FONT_AddCharToBuffer(char c,long x,long y)
 void FONT_Print(char *fmt)
 
 {
+  byte bVar1;
+  char *pcVar2;
   undefined local_res4 [12];
   
-                    /* WARNING: Subroutine does not return */
   vsprintf(&fp_str,fmt,local_res4);
+  pcVar2 = &fp_str;
+  bVar1 = fp_str;
+  while (bVar1 != 0) {
+    if ((uint)(byte)*pcVar2 - 0x41 < 0x1a) {
+      *pcVar2 = *pcVar2 + 0x20;
+    }
+    pcVar2 = (char *)((byte *)pcVar2 + 1);
+    bVar1 = *pcVar2;
+  }
+  FONT_VaReallyPrint(&fp_str,local_res4);
+  return;
 }
 
 
@@ -623,8 +660,9 @@ void FONT_Print2(char *fmt)
 {
   undefined local_res4 [12];
   
-                    /* WARNING: Subroutine does not return */
   vsprintf(&fp_str,fmt,local_res4);
+  FONT_VaReallyPrint(&fp_str,local_res4);
+  return;
 }
 
 
@@ -652,8 +690,25 @@ void FONT_Print2(char *fmt)
 int FONT_GetStringWidth(char *str)
 
 {
-                    /* WARNING: Subroutine does not return */
-  strlen(str);
+  size_t sVar1;
+  char *pcVar2;
+  long lVar3;
+  int iVar4;
+  int iVar5;
+  
+  sVar1 = strlen(str);
+  iVar4 = 0;
+  iVar5 = 0;
+  pcVar2 = str;
+  if (0 < (int)sVar1) {
+    do {
+      iVar4 = iVar4 + 1;
+      lVar3 = FONT_CharSpacing(*pcVar2,8);
+      iVar5 = iVar5 + lVar3;
+      pcVar2 = str + iVar4;
+    } while (iVar4 < (int)sVar1);
+  }
+  return iVar5;
 }
 
 
@@ -828,8 +883,12 @@ LAB_8002d650:
 void FONT_FontPrintCentered(char *text,long y)
 
 {
-                    /* WARNING: Subroutine does not return */
-  FONT_GetStringWidth(text);
+  int iVar1;
+  
+  iVar1 = FONT_GetStringWidth(text);
+  FONT_SetCursor((short)((uint)((0x100 - (iVar1 >> 1)) * 0x10000) >> 0x10),(short)y);
+  FONT_Print2(text);
+  return;
 }
 
 

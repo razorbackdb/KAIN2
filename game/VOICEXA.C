@@ -28,9 +28,16 @@
 void VOICEXA_Init(void)
 
 {
+  undefined4 *puVar1;
+  int iVar2;
+  XAVoiceTracker *pXVar3;
+  int iVar4;
+  undefined4 auStack80 [6];
   char acStack56 [32];
   
+  pXVar3 = &voiceTracker;
   if ((gameTrackerX.debugFlags & 0x80000U) != 0) {
+    iVar4 = 0;
     voiceTracker.voiceStatus = '\0';
     voiceTracker.cdStatus = '\0';
     voiceTracker.reqIn = '\0';
@@ -42,8 +49,19 @@ void VOICEXA_Init(void)
     voiceTracker.voiceCmdIn = '\0';
     voiceTracker.voiceCmdOut = '\0';
     voiceTracker.voiceCmdsQueued = '\0';
-                    /* WARNING: Subroutine does not return */
-    sprintf(acStack56,"\\VOICE\\VOICE%02d.XA;1");
+    do {
+      sprintf(acStack56,"\\VOICE\\VOICE%02d.XA;1");
+      puVar1 = CdSearchFile(auStack80,acStack56);
+      if (puVar1 == (undefined4 *)0x0) {
+        pXVar3->xaFileInfo[0].startPos = 0;
+      }
+      else {
+        iVar2 = CdPosToInt((byte *)auStack80);
+        pXVar3->xaFileInfo[0].startPos = iVar2;
+      }
+      iVar4 = iVar4 + 1;
+      pXVar3 = (XAVoiceTracker *)&pXVar3->currentSector;
+    } while (iVar4 < 0x1e);
   }
   return;
 }
@@ -300,10 +318,60 @@ void processVoiceCommands(XAVoiceTracker *vt)
 void voiceCmdPlay(XAVoiceTracker *vt,short voiceIndex)
 
 {
+  ushort *puVar1;
+  XAFileInfo *pXVar2;
+  uchar local_58;
+  byte local_57;
+  uchar auStack80 [8];
+  undefined *local_48;
+  undefined2 local_44;
+  undefined2 local_42;
+  undefined2 local_40;
+  undefined2 local_3e;
+  short local_38;
+  short local_36;
+  undefined4 local_34;
+  undefined4 local_30;
+  undefined2 local_2c;
+  undefined2 local_2a;
+  undefined4 local_28;
+  undefined4 local_24;
+  uchar local_20 [8];
+  
   if (voiceList != (XAVoiceListEntry *)0x0) {
+    puVar1 = &voiceList->length;
     vt->fileNum = voiceIndex >> 4;
-                    /* WARNING: Subroutine does not return */
+    pXVar2 = vt->xaFileInfo + ((int)((uint)(ushort)voiceIndex << 0x10) >> 0x14);
     putCdCommand(vt,'\t',0,(uchar *)0x0);
+    local_58 = '\x01';
+    local_57 = (byte)voiceIndex & 0xf;
+    putCdCommand(vt,'\r',4,&local_58);
+    local_20[0] = -0x38;
+    putCdCommand(vt,'\x0e',1,local_20);
+    CdIntToPos(pXVar2->startPos,(char *)vt);
+    vt->endSector =
+         pXVar2->startPos +
+         ((uint)*(ushort *)((int)puVar1 + ((int)((uint)(ushort)voiceIndex << 0x10) >> 0xf)) - 0x96);
+    CdIntToPos(pXVar2->startPos,(char *)auStack80);
+    putCdCommand(vt,'\x1b',4,auStack80);
+    local_48 = &DAT_00003fcf;
+    local_44 = 0x3fff;
+    local_42 = 0x3fff;
+    local_40 = 0;
+    local_3e = 0;
+    local_34 = 0;
+    local_30 = 1;
+    local_2c = 0x7fff;
+    local_2a = 0x7fff;
+    local_28 = 0;
+    local_24 = 1;
+    local_38 = (short)gameTrackerX.sound.gVoiceVol << 8;
+    local_36 = local_38;
+    SpuSetCommonAttr((uint *)&local_48);
+    if (0x3c < gameTrackerX.sound.gMusicVol) {
+      aadStartMusicMasterVolFade
+                (0x3c,-1,(TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback)0x0);
+    }
   }
   return;
 }
@@ -331,9 +399,19 @@ void voiceCmdPlay(XAVoiceTracker *vt,short voiceIndex)
 void voiceCmdStop(XAVoiceTracker *vt,short cmdParam)
 
 {
+  undefined *local_30 [6];
+  undefined4 local_18;
+  undefined4 local_c;
+  
   if (vt->voiceStatus != '\0') {
-                    /* WARNING: Subroutine does not return */
     putCdCommand(vt,'\t',0,(uchar *)0x0);
+    local_30[0] = &DAT_00002200;
+    local_18 = 0;
+    local_c = 0;
+    SpuSetCommonAttr((uint *)local_30);
+    aadStartMusicMasterVolFade
+              (gameTrackerX.sound.gMusicVol,1,
+               (TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback)0x0);
   }
   return;
 }
@@ -353,7 +431,6 @@ void voiceCmdPause(XAVoiceTracker *vt,short cmdParam)
 
 {
   if ((uint)vt->voiceStatus - 1 < 2) {
-                    /* WARNING: Subroutine does not return */
     putCdCommand(vt,'\t',0,(uchar *)0x0);
   }
   return;
@@ -374,7 +451,6 @@ void voiceCmdResume(XAVoiceTracker *vt,short cmdParam)
 
 {
   if (vt->voiceStatus == '\x03') {
-                    /* WARNING: Subroutine does not return */
     putCdCommand(vt,'\x1b',4,(uchar *)vt);
   }
   return;
@@ -432,18 +508,17 @@ void VOICEXA_Play(int voiceIndex,int queueRequests)
       (voiceTracker.xaFileInfo[voiceIndex >> 4].startPos != 0)) &&
      (gameTrackerX.sound.gVoiceOn != '\0')) {
     if (queueRequests == 0) {
-                    /* WARNING: Subroutine does not return */
       putVoiceCommand(&voiceTracker,'\0','\x01',voiceIndex);
     }
-    voiceTracker.requestQueue[voiceTracker.reqIn] = (ushort)voiceIndex;
-    uVar1 = voiceTracker.reqsQueued + '\x01';
-    if (voiceTracker.reqsQueued < 3) {
-      voiceTracker.reqIn = voiceTracker.reqIn + '\x01';
-      voiceTracker.reqsQueued = uVar1;
-      if (voiceTracker.reqIn == '\x04') {
-        voiceTracker.reqIn = '\0';
-        voiceCmdPause(4,(short)queueRequests);
-        return;
+    else {
+      voiceTracker.requestQueue[voiceTracker.reqIn] = (ushort)voiceIndex;
+      uVar1 = voiceTracker.reqsQueued + '\x01';
+      if (voiceTracker.reqsQueued < 3) {
+        voiceTracker.reqIn = voiceTracker.reqIn + '\x01';
+        voiceTracker.reqsQueued = uVar1;
+        if (voiceTracker.reqIn == '\x04') {
+          voiceTracker.reqIn = '\0';
+        }
       }
     }
   }
@@ -516,6 +591,8 @@ int VOICEXA_FinalStatus(XAVoiceTracker *vt)
 	/* end block 2 */
 	// End Line: 910
 
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
 void VOICEXA_Pause(void)
 
 {
@@ -524,22 +601,21 @@ void VOICEXA_Pause(void)
   uchar nextVoiceStatus;
   
   iVar1 = VOICEXA_FinalStatus(&voiceTracker);
-  if ((gameTrackerX.debugFlags & 0x80000U) == 0) {
-    return;
-  }
-  voiceCmd = '\x02';
-  if (iVar1 - 1U < 2) {
-    nextVoiceStatus = '\x03';
-  }
-  else {
-    if (iVar1 != 0) {
-      return;
+  if ((gameTrackerX.debugFlags & 0x80000U) != 0) {
+    voiceCmd = '\x02';
+    if (iVar1 - 1U < 2) {
+      nextVoiceStatus = '\x03';
     }
-    voiceCmd = '\x04';
-    nextVoiceStatus = '\x04';
+    else {
+      if (iVar1 != 0) {
+        return;
+      }
+      voiceCmd = '\x04';
+      nextVoiceStatus = '\x04';
+    }
+    putVoiceCommand(&voiceTracker,voiceCmd,nextVoiceStatus,0);
   }
-                    /* WARNING: Subroutine does not return */
-  putVoiceCommand(&voiceTracker,voiceCmd,nextVoiceStatus,0);
+  return;
 }
 
 
@@ -573,22 +649,21 @@ void VOICEXA_Resume(void)
   uchar nextVoiceStatus;
   
   iVar1 = VOICEXA_FinalStatus(&voiceTracker);
-  if ((gameTrackerX.debugFlags & 0x80000U) == 0) {
-    return;
-  }
-  voiceCmd = '\x03';
-  if (iVar1 == 3) {
-    nextVoiceStatus = '\x01';
-  }
-  else {
-    if (iVar1 != 4) {
-      return;
+  if ((gameTrackerX.debugFlags & 0x80000U) != 0) {
+    voiceCmd = '\x03';
+    if (iVar1 == 3) {
+      nextVoiceStatus = '\x01';
     }
-    voiceCmd = '\x04';
-    nextVoiceStatus = '\0';
+    else {
+      if (iVar1 != 4) {
+        return;
+      }
+      voiceCmd = '\x04';
+      nextVoiceStatus = '\0';
+    }
+    putVoiceCommand(&voiceTracker,voiceCmd,nextVoiceStatus,0);
   }
-                    /* WARNING: Subroutine does not return */
-  putVoiceCommand(&voiceTracker,voiceCmd,nextVoiceStatus,0);
+  return;
 }
 
 
@@ -623,9 +698,13 @@ void VOICEXA_Tick(void)
        (voiceTracker.voiceStatus < 3)) {
       if (voiceTracker.voiceStatus == '\0') {
         if (voiceTracker.reqsQueued != '\0') {
-                    /* WARNING: Subroutine does not return */
           putVoiceCommand(&voiceTracker,'\0','\x01',
                           (uint)voiceTracker.requestQueue[voiceTracker.reqOut]);
+          voiceTracker.reqsQueued = voiceTracker.reqsQueued + -1;
+          voiceTracker.reqOut = voiceTracker.reqOut + '\x01';
+          if (voiceTracker.reqOut == '\x04') {
+            voiceTracker.reqOut = '\0';
+          }
         }
       }
       else {
@@ -635,9 +714,12 @@ void VOICEXA_Tick(void)
           voiceTracker.currentPos.track = '\0';
           voiceTracker.currentPos.minute = voiceTracker.cdResult[0];
           voiceTracker.currentPos.second = voiceTracker.cdResult[1];
-                    /* WARNING: Subroutine does not return */
           voiceTracker.currentPos.sector = voiceTracker.cdResult[2];
-          CdPosToInt((byte *)&voiceTracker);
+          voiceTracker.currentSector = CdPosToInt((byte *)&voiceTracker);
+          voiceTracker.currentSector = voiceTracker.currentSector + -0x96;
+          if (voiceTracker.endSector <= voiceTracker.currentSector) {
+            putVoiceCommand(&voiceTracker,'\x01','\0',0);
+          }
         }
       }
     }

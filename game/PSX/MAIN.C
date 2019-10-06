@@ -1,30 +1,5 @@
-//#include "THISDUST.H"
+#include "THISDUST.H"
 #include "MAIN.H"
-#include "SUPPORT.H"
-#include "CINEMA/CINEPSX.H"
-#include "STRMLOAD.H"
-#include "GAMELOOP.H"
-#include "DRAW.H"
-#include "MEMPACK.H"
-#include "VRAM.H"
-#include "FONT.H"
-#include "MENU/MENU.H"
-#include "GAMEPAD.H"
-#include "SOUND.H"
-#include "VOICEXA.H"
-#include "SAVEINFO.H"
-#include "AADLIB.H"
-#include "RAZIEL/RAZLIB.H"
-#include "MENU/MENUFACE.H"
-#include "DEBUG.H"
-#include "LOAD3D.H"
-#include "MAING2.H"
-
-#include "TYPES.H"
-#include "LIBAPI.H"
-#include "LIBGTE.H"
-#include "LIBETC.H"
-#include "LIBGPU.H"
 
 
 // decompiled code
@@ -46,7 +21,12 @@
 void ClearDisplay(void)
 
 {
-  //PutDrawEnv((unsigned char *)(&draw + gameTrackerX.gameData.asmData.dispPage));
+  PutDrawEnv((undefined4 *)(&draw + gameTrackerX.gameData.asmData.dispPage));
+  DrawPrim((int)(&clearRect + gameTrackerX.gameData.asmData.dispPage));
+  DrawSync(0);
+  PutDispEnv((ushort *)(&disp + gameTrackerX.gameData.asmData.dispPage));
+  SetDispMask(1);
+  return;
 }
 
 
@@ -72,8 +52,14 @@ void ClearDisplay(void)
 void show_screen(char *name)
 
 {
-                    /* WARNING: Subroutine does not return */
-  LOAD_ReadFile(name,'\v');
+  long *addr;
+  
+  addr = LOAD_ReadFile(name,'\v');
+  if (addr != (long *)0x0) {
+    LOAD_LoadTIM2(addr,0,gameTrackerX.gameData.asmData.dispPage << 8,0x200,0x100);
+    MEMPACK_Free((char *)addr);
+  }
+  return;
 }
 
 
@@ -241,21 +227,20 @@ void ExtractLevelNum(char *levelNum,char *levelName)
   byte bVar1;
   
   bVar1 = *levelName;
-  while( true ) {
-    if (bVar1 == 0x2d) {
-      //InitMainTracker(levelNum);
-      return;
-    }
-    if ((uint)bVar1 - 0x30 < 10) break;
+  while (bVar1 != 0x2d) {
+    if ((uint)bVar1 - 0x30 < 10) goto LAB_80038658;
     levelName = (char *)((byte *)levelName + 1);
     bVar1 = *levelName;
   }
-  do {
+  bVar1 = *levelName;
+  while ((uint)bVar1 - 0x30 < 10) {
+LAB_80038658:
     bVar1 = *levelName;
     levelName = (char *)((byte *)levelName + 1);
     *levelNum = bVar1;
+    bVar1 = *levelName;
     levelNum = (char *)((byte *)levelNum + 1);
-  } while ((uint)(byte)*levelName - 0x30 < 10);
+  }
   *levelNum = 0;
   return;
 }
@@ -285,8 +270,69 @@ void ExtractLevelNum(char *levelNum,char *levelName)
 void ProcessArgs(char *baseAreaName,GameTracker *gameTracker)
 
 {
-                    /* WARNING: Subroutine does not return */
-  LOAD_ReadFile("\\kain2\\game\\psx\\kain2.arg",'\n');
+  long *levelName;
+  char *pcVar1;
+  char acStack88 [32];
+  char acStack56 [32];
+  
+  levelName = LOAD_ReadFile("\\kain2\\game\\psx\\kain2.arg",'\n');
+  if (levelName == (long *)0x0) {
+    *(undefined4 *)baseAreaName = 0x65646e75;
+    baseAreaName[4] = 'r';
+    baseAreaName[5] = '1';
+    baseAreaName[6] = '\0';
+  }
+  else {
+    ExtractWorldName(acStack56,(char *)levelName);
+    ExtractLevelNum(acStack88,(char *)levelName);
+    sprintf(baseAreaName,"%s%s");
+    pcVar1 = FindTextInLine("-NOSOUND",(char *)levelName);
+    if (pcVar1 != (char *)0x0) {
+      nosound = 1;
+      nomusic = 1;
+    }
+    pcVar1 = FindTextInLine("-NOMUSIC",(char *)levelName);
+    if (pcVar1 != (char *)0x0) {
+      nomusic = 1;
+    }
+    pcVar1 = FindTextInLine("-TIMEOUT",(char *)levelName);
+    if (pcVar1 != (char *)0x0) {
+      gameTracker->debugFlags = gameTracker->debugFlags | 0x20000;
+    }
+    pcVar1 = FindTextInLine("-DEMO",(char *)levelName);
+    if (pcVar1 != (char *)0x0) {
+      gameTrackerX.setDemoMode = '\x01';
+    }
+    pcVar1 = FindTextInLine("-MAINMENU",(char *)levelName);
+    if (pcVar1 != (char *)0x0) {
+      DoMainMenu = 1;
+    }
+    pcVar1 = FindTextInLine("-INSPECTRAL",(char *)levelName);
+    if (pcVar1 != (char *)0x0) {
+      gameTrackerX.gameData.asmData.MorphType = 1;
+    }
+    pcVar1 = FindTextInLine("-VOICE",(char *)levelName);
+    if (pcVar1 != (char *)0x0) {
+      gameTracker->debugFlags = gameTracker->debugFlags | 0x80000;
+    }
+    pcVar1 = FindTextInLine("-DEBUG_CD",(char *)levelName);
+    if (pcVar1 != (char *)0x0) {
+      gameTracker->debugFlags = gameTracker->debugFlags | 0x80000000;
+    }
+    pcVar1 = FindTextInLine("-LOADGAME",(char *)levelName);
+    if (pcVar1 != (char *)0x0) {
+      gameTrackerX.streamFlags = gameTrackerX.streamFlags | 0x200000;
+    }
+    pcVar1 = FindTextInLine("-ALLWARP",(char *)levelName);
+    if (pcVar1 != (char *)0x0) {
+      gameTrackerX.streamFlags = gameTrackerX.streamFlags | 0x400000;
+    }
+    gameTracker->demoEnabled = '\x01';
+    gameTracker->debugFlags = gameTracker->debugFlags | 0x80000;
+    MEMPACK_Free((char *)levelName);
+  }
+  gameTrackerX.debugFlags = gameTrackerX.debugFlags | 0x40000;
+  return;
 }
 
 
@@ -315,10 +361,63 @@ void ProcessArgs(char *baseAreaName,GameTracker *gameTracker)
 void InitDisplay(void)
 
 {
-  //ResetGraph(3);
-  //SetGraphDebug(0);
-  //SetDefDrawEnv((undefined2 *)&draw,0,0,0x200,0xf0);
-  //SetDefDispEnv((undefined2 *)&disp,0,0,0x200,0xf0);
+  BLK_FILL *pBVar1;
+  int iVar2;
+  undefined4 local_10;
+  undefined4 local_c;
+  
+  local_10 = 0x200;
+  local_c = 0x2000200;
+  ResetGraph(3);
+  SetGraphDebug('\0');
+  SetDefDrawEnv((undefined2 *)&draw,0,0,0x200,0xf0);
+  SetDefDispEnv((undefined2 *)&disp,0,0,0x200,0xf0);
+  SetDefDrawEnv((undefined2 *)&DRAWENV_800d1fe8,0,0x100,0x200,0xf0);
+  SetDefDispEnv((undefined2 *)&DISPENV_800d1f74,0,0x100,0x200,0xf0);
+  iVar2 = 0;
+  pBVar1 = &clearRect;
+                    /* WARNING: Read-only address (ram,0x800d1ffe) is written */
+  DRAWENV_800d1fe8.dtd = '\x01';
+                    /* WARNING: Read-only address (ram,0x800d1fa2) is written */
+  draw.dtd = '\x01';
+                    /* WARNING: Read-only address (ram,0x800d1fff) is written */
+  DRAWENV_800d1fe8.dfe = '\x01';
+                    /* WARNING: Read-only address (ram,0x800d1fa3) is written */
+  draw.dfe = '\x01';
+                    /* WARNING: Read-only address (ram,0x800d2000) is written */
+  DRAWENV_800d1fe8.isbg = '\0';
+                    /* WARNING: Read-only address (ram,0x800d1fa4) is written */
+  draw.isbg = '\0';
+                    /* WARNING: Read-only address (ram,0x800d1fa5) is written */
+  draw.r0 = '\0';
+                    /* WARNING: Read-only address (ram,0x800d1fa6) is written */
+  draw.g0 = '\0';
+                    /* WARNING: Read-only address (ram,0x800d1fa7) is written */
+  draw.b0 = '\0';
+                    /* WARNING: Read-only address (ram,0x800d2001) is written */
+  DRAWENV_800d1fe8.r0 = '\0';
+                    /* WARNING: Read-only address (ram,0x800d2002) is written */
+  DRAWENV_800d1fe8.g0 = '\0';
+                    /* WARNING: Read-only address (ram,0x800d2003) is written */
+  DRAWENV_800d1fe8.b0 = '\0';
+  do {
+    *(undefined *)((int)&pBVar1->tag + 3) = 3;
+    pBVar1->code = '\x02';
+    pBVar1->x0 = 0;
+    pBVar1->y0 = (ushort)(iVar2 << 8);
+    pBVar1->w = 0x200;
+    pBVar1->h = 0xf0;
+    pBVar1->r0 = '\0';
+    pBVar1->g0 = '\0';
+    pBVar1->b0 = '\0';
+    iVar2 = iVar2 + 1;
+    pBVar1 = pBVar1 + 1;
+  } while (iVar2 < 2);
+  ClearDisplay();
+  ClearOTagR(gameTrackerX.drawOT,0xc00);
+  ClearOTagR(gameTrackerX.dispOT,0xc00);
+  ClearImage(&local_10,0,0xff,0);
+  return;
 }
 
 
@@ -338,6 +437,13 @@ void StartTimer(void)
 
 {
   EnterCriticalSection();
+  __timerEvent = OpenEvent();
+  EnableEvent();
+  SetRCnt(0xf2000000,0xffff,(uint)&DAT_00001001);
+  StartRCnt(0xf2000000);
+  ExitCriticalSection();
+  gTimerEnabled = 1;
+  return;
 }
 
 
@@ -361,7 +467,7 @@ void StartTimer(void)
 void VblTick(void)
 
 {
-/*   if (devstation != 0) {
+  if (devstation != 0) {
     trap(0x400);
   }
   gameTrackerX.vblFrames = gameTrackerX.vblFrames + 1;
@@ -371,7 +477,7 @@ void VblTick(void)
     PutDispEnv((ushort *)gameTrackerX.reqDisp);
     gameTrackerX.reqDisp = (void *)0x0;
     gameTrackerX.vblFrames = 0;
-  } */
+  }
   return;
 }
 
@@ -396,7 +502,7 @@ void VblTick(void)
 void DrawCallback(void)
 
 {
-/*   ulong uVar1;
+  ulong uVar1;
   
   if (gameTrackerX.drawTimerReturn != (long *)0x0) {
     uVar1 = TIMER_TimeDiff(gameTrackerX.usecsStartDraw);
@@ -404,7 +510,7 @@ void DrawCallback(void)
     gameTrackerX.drawTimerReturn = (long *)0x0;
     gameTrackerX.reqDisp =
          (void *)((int)gameTrackerX.disp + gameTrackerX.gameData.asmData.dispPage * 0x14);
-  } */
+  }
   return;
 }
 
@@ -433,7 +539,43 @@ void DrawCallback(void)
 void FadeOutSayingLoading(GameTracker *gameTracker)
 
 {
-  //DRAW_TranslucentQuad(0,0,0x200,0,0,0xf0,0x200,0xf0,0,0,0,2,gameTracker->primPool,gameTracker->drawOT);
+  bool bVar1;
+  int iVar2;
+  undefined uVar3;
+  int iVar4;
+  ulong *puVar5;
+  ulong **ot;
+  
+  ot = gameTracker->drawOT;
+  puVar5 = gameTracker->primPool->nextPrim;
+  DRAW_TranslucentQuad(0,0,0x200,0,0,0xf0,0x200,0xf0,0,0,0,2,gameTracker->primPool,ot);
+  iVar4 = 0x10;
+  FONT_Flush();
+  do {
+    if (0xff < iVar4) {
+      iVar4 = 0xff;
+    }
+    gameTracker->drawPage = 1 - gameTracker->drawPage;
+    uVar3 = (undefined)iVar4;
+    *(undefined *)(puVar5 + 2) = uVar3;
+    *(undefined *)((int)puVar5 + 9) = uVar3;
+    *(undefined *)((int)puVar5 + 10) = uVar3;
+    do {
+      iVar2 = CheckVolatile(gameTracker->drawTimerReturn);
+    } while (iVar2 != 0);
+    PutDrawEnv((undefined4 *)(&draw + gameTracker->drawPage));
+    do {
+      iVar2 = CheckVolatile(gameTracker->reqDisp);
+    } while (iVar2 != 0);
+    iVar2 = (gameTracker->gameData).asmData.dispPage;
+    *(ulong **)&gameTracker->drawTimerReturn = &gameTracker->drawTime;
+    (gameTracker->gameData).asmData.dispPage = 1 - iVar2;
+    VSync(0);
+    DrawOTag(ot + 0xbff);
+    bVar1 = iVar4 != 0xff;
+    iVar4 = iVar4 + 0x10;
+  } while (bVar1);
+  return;
 }
 
 
@@ -464,9 +606,9 @@ void FadeOutSayingLoading(GameTracker *gameTracker)
 void CheckForDevStation(void)
 
 {
-  //devstation = 1;
-  //DAT_80180000 = 0;
-  //_DAT_80380000 = 0x12345678;
+  devstation = 1;
+  DAT_80180000 = 0;
+  _DAT_80380000 = 0x12345678;
   return;
 }
 
@@ -506,15 +648,26 @@ void CheckForDevStation(void)
 void MAIN_ShowLoadingScreen(void)
 
 {
-/*   language_t lVar1;
+  language_t lVar1;
+  long *addr;
+  char *string;
   char acStack80 [64];
   
   VSync(0);
   lVar1 = localstr_get_language();
-  if (lVar1 != language_english) {
-    sprintf(acStack80, "\\kain2\\game\\psx\\loading.tim");
+  if (lVar1 == language_english) {
+    string = "\\kain2\\game\\psx\\loading.tim";
   }
-  LOAD_ReadFile("\\kain2\\game\\psx\\loading.tim",'\v'); */
+  else {
+    string = acStack80;
+    sprintf(string,"\\kain2\\game\\psx\\loading%c.tim");
+  }
+  addr = LOAD_ReadFile(string,'\v');
+  if (addr != (long *)0x0) {
+    LOAD_LoadTIM2(addr,0,gameTrackerX.gameData.asmData.dispPage << 8,0x200,0x100);
+    MEMPACK_Free((char *)addr);
+  }
+  return;
 }
 
 
@@ -538,8 +691,10 @@ void MAIN_ShowLoadingScreen(void)
 long * MAIN_LoadTim(char *name)
 
 {
-                    /* WARNING: Subroutine does not return */
-  LOAD_ReadFile(name,'\v');
+  long *plVar1;
+  
+  plVar1 = LOAD_ReadFile(name,'\v');
+  return plVar1;
 }
 
 
@@ -566,9 +721,13 @@ void init_menus(GameTracker *gt)
 
 {
   ulong allocSize;
+  menu_t *menu;
   
   allocSize = menu_data_size();
-  MEMPACK_Malloc(allocSize,'-');
+  menu = (menu_t *)MEMPACK_Malloc(allocSize,'-');
+  menu_initialize(menu,gt);
+  gt->menu = menu;
+  return;
 }
 
 
@@ -587,7 +746,7 @@ void init_menus(GameTracker *gt)
 void MAIN_DoMainInit(void)
 
 {
-/*   InitDisplay();
+  InitDisplay();
   InitGeom();
   SetGeomOffset(0x100,0x78);
   SetGeomScreen(0x140);
@@ -613,7 +772,7 @@ void MAIN_DoMainInit(void)
   }
   init_menus(&gameTrackerX);
   SAVE_Init(&gameTrackerX);
-  srand(0); */
+  srand(0);
   return;
 }
 
@@ -640,7 +799,14 @@ void MAIN_DoMainInit(void)
 void MAIN_ShowPalWarningScreen(GameTracker *gameTracker)
 
 {
-  LOAD_ReadFile("\\kain2\\game\\psx\\warning.tim",'\v');
+  long *addr;
+  
+  addr = LOAD_ReadFile("\\kain2\\game\\psx\\warning.tim",'\v');
+  if (addr != (long *)0x0) {
+    LOAD_LoadTIM(addr,0,(gameTracker->gameData).asmData.dispPage << 8,0,0);
+    MEMPACK_Free((char *)addr);
+  }
+  return;
 }
 
 
@@ -659,10 +825,12 @@ void MAIN_ShowPalWarningScreen(GameTracker *gameTracker)
 void MAIN_InitVolume(void)
 
 {
-/*   aadInitVolume();
-  aadStartMasterVolumeFade(gameTrackerX.sound.gMasterVol, 0, nullptr); //, (TDRFuncPtr_aadStartMasterVolumeFade2fadeCompleteCallback)
+  aadInitVolume();
+  aadStartMasterVolumeFade
+            (gameTrackerX.sound.gMasterVol,0x100,
+             (TDRFuncPtr_aadStartMasterVolumeFade2fadeCompleteCallback)0x0);
   gameTrackerX.sound.soundsLoaded = '\x01';
-  aadSetNoUpdateMode(0); */
+  aadSetNoUpdateMode(0);
   return;
 }
 
@@ -682,9 +850,9 @@ void MAIN_InitVolume(void)
 void MAIN_ResetGame(void)
 
 {
-/*   GAMELOOP_SetScreenWipe(0,0,-1);
+  GAMELOOP_SetScreenWipe(0,0,-1);
   gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xffffff6e;
-  RAZIEL_StartNewGame(); */
+  RAZIEL_StartNewGame();
   return;
 }
 
@@ -720,41 +888,58 @@ void MAIN_ResetGame(void)
 /* WARNING: Removing unreachable block (ram,0x800390d8) */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-/* void MAIN_MainMenuInit(void)
+void MAIN_MainMenuInit(void)
 
 {
   undefined4 *puVar1;
   undefined4 *puVar2;
-  undefined4 *puVar3;
-  undefined4 *puVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
+  long lVar3;
+  int iVar4;
+  undefined4 *puVar5;
+  undefined4 *puVar6;
   undefined4 uVar7;
+  undefined4 uVar8;
+  undefined4 uVar9;
   undefined4 local_48 [10];
   undefined auStack32 [24];
   
   mainMenuMode = 0;
   mainMenuTimeOut = 0;
-  puVar1 = (undefined4 *)"\\kain2\\sfx\\object\\mainmenu\\mainmenu.snf";
+  puVar1 = &DAT_800cf9c0;
   puVar2 = local_48;
   do {
-    puVar4 = puVar2;
-    puVar3 = puVar1;
-    uVar5 = puVar3[1];
-    uVar6 = puVar3[2];
-    uVar7 = puVar3[3];
-    *puVar4 = *puVar3;
-    puVar4[1] = uVar5;
-    puVar4[2] = uVar6;
-    puVar4[3] = uVar7;
-    puVar1 = puVar3 + 4;
-    puVar2 = puVar4 + 4;
-  } while (puVar3 + 4 != (undefined4 *)0x800cf9e0);
-  uVar5 = puVar3[5];
-  puVar4[4] = 0x2e756e65;
-  puVar4[5] = uVar5;
+    puVar6 = puVar2;
+    puVar5 = puVar1;
+    uVar7 = puVar5[1];
+    uVar8 = puVar5[2];
+    uVar9 = puVar5[3];
+    *puVar6 = *puVar5;
+    puVar6[1] = uVar7;
+    puVar6[2] = uVar8;
+    puVar6[3] = uVar9;
+    puVar1 = puVar5 + 4;
+    puVar2 = puVar6 + 4;
+  } while (puVar5 + 4 != (undefined4 *)0x800cf9e0);
+  uVar7 = puVar5[5];
+  puVar6[4] = 0x2e756e65;
+  puVar6[5] = uVar7;
   memset(auStack32,0,0x18);
-} */
+  mainMenuSfx = 0;
+  lVar3 = LOAD_DoesFileExist((char *)local_48);
+  if (lVar3 != 0) {
+    mainMenuSfx = aadLoadDynamicSfx("mainmenu",0,0);
+    while (iVar4 = aadGetNumLoadsQueued(), iVar4 != 0) {
+      aadProcessLoadQueue();
+    }
+  }
+  mainMenuScreen = MAIN_LoadTim("\\kain2\\game\\psx\\frontend\\title1.tim");
+  VRAM_EnableTerrainArea();
+  menuface_initialize();
+  currentMenu = &mainMenu;
+  gameTrackerX.gameMode = 4;
+  menu_set(gameTrackerX.menu,menudefs_main_menu);
+  return;
+}
 
 
 
@@ -772,17 +957,18 @@ void MAIN_ResetGame(void)
 void MAIN_FreeMainMenuStuff(void)
 
 {
-/*   int iVar1;
+  int iVar1;
   
   menuface_terminate();
   VRAM_DisableTerrainArea();
   if (mainMenuScreen != (long *)0x0) {
     MEMPACK_Free((char *)mainMenuScreen);
+    mainMenuScreen = (long *)0x0;
   }
   aadFreeDynamicSfx(mainMenuSfx);
   while (iVar1 = aadGetNumLoadsQueued(), iVar1 != 0) {
     aadProcessLoadQueue();
-  } */
+  }
   return;
 }
 
@@ -807,7 +993,7 @@ void MAIN_FreeMainMenuStuff(void)
 void MAIN_StartGame(void)
 
 {
-/*   if (mainMenuFading == 0) {
+  if (mainMenuFading == 0) {
     gameTrackerX.gameMode = 0;
     currentMenu = (DebugMenuLine *)0x0;
     mainMenuFading = 1;
@@ -818,8 +1004,8 @@ void MAIN_StartGame(void)
     MAIN_FreeMainMenuStuff();
     gEndGameNow = 0;
     mainMenuFading = 0;
-    //currentMenu = &standardMenu;
-  } */
+    currentMenu = &standardMenu;
+  }
   return;
 }
 
@@ -846,7 +1032,7 @@ void MAIN_StartGame(void)
 long MAIN_DoMainMenu(GameTracker *gameTracker,MainTracker *mainTracker,long menuPos)
 
 {
-/*   ulong **drawot;
+  ulong **drawot;
   
   drawot = gameTracker->drawOT;
   DrawPrim((int)(&clearRect + gameTracker->drawPage));
@@ -862,7 +1048,7 @@ long MAIN_DoMainMenu(GameTracker *gameTracker,MainTracker *mainTracker,long menu
   GAMELOOP_FlipScreenAndDraw(gameTracker,drawot);
   if ((mainMenuFading != 0) && (gameTracker->wipeTime == -1)) {
     MAIN_StartGame();
-  } */
+  }
   return 0;
 }
 
@@ -903,51 +1089,195 @@ long MAIN_DoMainMenu(GameTracker *gameTracker,MainTracker *mainTracker,long menu
 int MainG2(void *appData)
 
 {
-/*   G2Bool _Var1;
-  int iVar2;
+  bool bVar1;
+  long lVar2;
+  _G2Bool_Enum _Var3;
+  int iVar4;
+  long menuPos;
   
+  menuPos = 0;
   CheckForDevStation();
   mainOptionsInit = '\0';
-  _Var1 = MainG2_InitEngine(appData,0x200,0xf0,(char *)0x0);
-  if (_Var1 == G2FALSE) {
-    MainG2_ShutDownEngine(appData);
-    return 0;
-  }
-  MEMPACK_Init();
-  LOAD_InitCd();
-  StartTimer();
-  STREAM_InitLoader("\\BIGFILE.DAT;1","");
-  localstr_set_language(~language_english);
-  GAMELOOP_SystemInit(&gameTrackerX);
-  gameTrackerX.lastLvl = -1;
-  gameTrackerX.currentLvl = -1;
-  gameTrackerX.disp = &disp;
-  ProcessArgs(gameTrackerX.baseAreaName,&gameTrackerX);
-  InitMainTracker(&mainTrackerX);
-  MAIN_DoMainInit();
-  mainTrackerX.mainState = 6;
-  mainTrackerX.movieNum = 0;
-  mainTrackerX.previousState = 6;
-  CINE_Load();
-  do {
-    if (mainTrackerX.movieNum < 0) goto LAB_8003959c;
-    iVar2 = CINE_Loaded();
-    if (iVar2 != 0) {
-      CINE_Play((char *)(&InterfaceItems + mainTrackerX.movieNum),0xffff,2);
-      ClearDisplay();
-    }
-    mainTrackerX.movieNum = (long)(&InterfaceItems)[mainTrackerX.movieNum].nextItem;
-  } while ((&InterfaceItems)[mainTrackerX.movieNum].itemType == 0);
-  mainTrackerX.mainState = 4;
-  LAB_8003959c:
-  CINE_Unload();
-  if (mainTrackerX.movieNum < 0) {
-    mainTrackerX.mainState = 8;
-  }
-  if (nosound == 0) {
+  _Var3 = MainG2_InitEngine(appData,0x200,0xf0,(char *)0x0);
+  if (_Var3 != G2FALSE) {
+    MEMPACK_Init();
+    LOAD_InitCd();
+    StartTimer();
+    STREAM_InitLoader("\\BIGFILE.DAT;1","");
+    localstr_set_language(~language_english);
+    GAMELOOP_SystemInit(&gameTrackerX);
+    gameTrackerX.lastLvl = -1;
+    gameTrackerX.currentLvl = -1;
+    gameTrackerX.disp = &disp;
+    ProcessArgs(gameTrackerX.baseAreaName,&gameTrackerX);
+    InitMainTracker(&mainTrackerX);
+    MAIN_DoMainInit();
+    mainTrackerX.mainState = 6;
+    mainTrackerX.movieNum = 0;
+    do {
+      mainTrackerX.previousState = mainTrackerX.mainState;
+      switch(mainTrackerX.mainState) {
+      case 1:
+        SOUND_UpdateSound();
+        if ((gameTrackerX.debugFlags & 0x80000U) != 0) {
+          VOICEXA_Tick();
+        }
+        PSX_GameLoop(&gameTrackerX);
+        if (gameTrackerX.levelDone != 0) {
+          FadeOutSayingLoading(&gameTrackerX);
+          SOUND_StopAllSound();
+          SOUND_FreeDynamicMusic();
+          STREAM_DumpAllLevels(0,0);
+          RemoveAllObjects(&gameTrackerX);
+          while (iVar4 = aadGetNumLoadsQueued(), iVar4 != 0) {
+            aadProcessLoadQueue();
+          }
+          MEMPACK_FreeByType('\x0e');
+          GAMELOOP_ResetGameStates();
+          MEMPACK_DoGarbageCollection();
+          iVar4 = (int)gameTrackerX.levelDone;
+          if (iVar4 == 2) {
+LAB_80039890:
+            mainTrackerX.mainState = 8;
+          }
+          else {
+            if (iVar4 == 3) {
+              mainTrackerX.mainState = 6;
+              mainTrackerX.movieNum = iVar4;
+            }
+            else {
+              if (iVar4 != 4) goto LAB_80039688;
+              mainTrackerX.mainState = 2;
+              if ((gameTrackerX.streamFlags & 0x200000U) == 0) {
+                SAVE_ClearMemory(&gameTrackerX);
+              }
+            }
+          }
+        }
+        break;
+      case 2:
+      case 0xb:
+        if ((gameTrackerX.streamFlags & 0x1000000U) != 0) {
+          play_movie((char *)&InterfaceItem_800cf7e4);
+          gameTrackerX.streamFlags = gameTrackerX.streamFlags & 0xfeffffff;
+        }
+        if ((gameTrackerX.streamFlags & 0x200000U) != 0) {
+          gameTrackerX.streamFlags = gameTrackerX.streamFlags & 0xffdfffff;
+        }
+        if (nosound == 0) {
+          MAIN_InitVolume();
+        }
+        MAIN_ShowLoadingScreen();
+        FONT_ReloadFont();
+        DrawSync(0);
+        gameTrackerX.frameCount = 0;
+        STREAM_Init();
+        GAMEPAD_LoadDemo();
+        GAMELOOP_LevelLoadAndInit(gameTrackerX.baseAreaName,&gameTrackerX);
+        gameTrackerX.levelDone = 0;
+        mainTrackerX.mainState = 1;
+        do {
+          iVar4 = STREAM_PollLoadQueue();
+        } while (iVar4 != 0);
+        gameTrackerX.vblFrames = 0;
+        break;
+      case 3:
+        DrawSync(0);
+        MAIN_ShowPalWarningScreen(&gameTrackerX);
+        gameTrackerX.vblCount = 0;
+        mainTrackerX.mainState = 5;
+        break;
+      case 4:
+        LOAD_ChangeDirectory("Menustuff");
+        lVar2 = mainTrackerX.movieNum;
+        show_screen((char *)(&InterfaceItems + mainTrackerX.movieNum));
+        iVar4 = 1;
+        if ((&InterfaceItems)[lVar2].timeout != 0) {
+          do {
+            GAMEPAD_Process(&gameTrackerX);
+            if (((int)(uint)(&InterfaceItems)[lVar2].buttonTimeout < iVar4) &&
+               ((gameTrackerX.controlCommand[0][1] & 0x80U) != 0)) break;
+            VSync(0);
+            bVar1 = iVar4 < (int)(uint)(&InterfaceItems)[lVar2].timeout;
+            iVar4 = iVar4 + 1;
+          } while (bVar1);
+        }
+        FONT_ReloadFont();
+        if (DoMainMenu == 0) {
+          MAIN_ResetGame();
+          mainTrackerX.mainState = 2;
+        }
+        else {
+          if (gameTrackerX.setDemoMode == '\0') goto LAB_80039890;
+LAB_80039688:
+          mainTrackerX.mainState = 2;
+        }
+        break;
+      case 5:
+        if (0x1e < gameTrackerX.vblCount) {
+          mainTrackerX.mainState = 6;
+          mainTrackerX.movieNum = 0;
+        }
+        break;
+      case 6:
+        CINE_Load();
+        do {
+          if (mainTrackerX.movieNum < 0) goto LAB_8003959c;
+          iVar4 = CINE_Loaded();
+          if (iVar4 != 0) {
+            CINE_Play((char *)(&InterfaceItems + mainTrackerX.movieNum),0xffff,2);
+            ClearDisplay();
+          }
+          mainTrackerX.movieNum = (long)(&InterfaceItems)[mainTrackerX.movieNum].nextItem;
+        } while ((&InterfaceItems)[mainTrackerX.movieNum].itemType == 0);
+        mainTrackerX.mainState = 4;
+LAB_8003959c:
+        CINE_Unload();
+        if (mainTrackerX.movieNum < 0) {
+          mainTrackerX.mainState = 8;
+        }
+        if (nosound == 0) {
+          SOUND_StopAllSound();
+        }
+        break;
+      case 7:
+        mainTrackerX.done = 1;
+        break;
+      case 8:
+        gameTrackerX.gameData.asmData.MorphType = 0;
+        ProcessArgs(gameTrackerX.baseAreaName,&gameTrackerX);
+        MAIN_ResetGame();
+        LOAD_ChangeDirectory("Menustuff");
+        MAIN_MainMenuInit();
+        MAIN_InitVolume();
+        SAVE_ClearMemory(&gameTrackerX);
+        mainTrackerX.mainState = 9;
+        FONT_ReloadFont();
+        break;
+      case 9:
+        menuPos = MAIN_DoMainMenu(&gameTrackerX,&mainTrackerX,menuPos);
+      }
+      STREAM_PollLoadQueue();
+    } while (mainTrackerX.done == 0);
     SOUND_StopAllSound();
+    SOUND_Free();
+    SetDispMask(0);
+    DrawSync(0);
+    VSync(0);
+    DrawSyncCallback(0);
+    VSyncCallback(0);
+    EnterCriticalSection();
+    StopRCnt(0xf2000000);
+    DisableEvent();
+    CloseEvent();
+    ExitCriticalSection();
+    VSync(5);
+    StopCallback();
+    StopPAD();
+    ResetGraph(3);
   }
-  STREAM_PollLoadQueue(); */
+  MainG2_ShutDownEngine(appData);
+  return 0;
 }
 
 

@@ -63,8 +63,11 @@ void GenericInit(_Instance *instance,GameTracker *gameTracker)
               (instance,0,0,
                (short)(((uint)*(ushort *)&pOVar3->modelList[instance->currentModel]->numSegments - 1
                        ) * 0x10000 >> 0x10));
-                    /* WARNING: Subroutine does not return */
     G2EmulationInstanceSetAnimation(instance,0,0,0,0);
+    G2EmulationInstanceSetMode(instance,0,0);
+    if ((*(int *)pOVar3->name == 0x65697261) && (*(int *)(pOVar3->name + 1) == 0x5f5f5f6c)) {
+      G2AnimSection_SetInterpInfo((instance->anim).section,(_G2AnimInterpInfo_Type *)&crap_24);
+    }
   }
   return;
 }
@@ -168,25 +171,27 @@ ulong GenericQuery(_Instance *instance,ulong query)
   short sVar1;
   short sVar2;
   short sVar3;
-  uint uVar4;
-  MATRIX *pMVar5;
+  long *plVar4;
+  uint uVar5;
+  MATRIX *pMVar6;
+  long lVar7;
   
-  pMVar5 = (MATRIX *)0x0;
+  pMVar6 = (MATRIX *)0x0;
   switch(query) {
   case 1:
-    uVar4 = instance->object->oflags2;
-    if ((uVar4 & 0x4000000) == 0) {
+    uVar5 = instance->object->oflags2;
+    if ((uVar5 & 0x4000000) == 0) {
       if ((instance->object->oflags & 0x100000U) == 0) {
-        if ((uVar4 & 0x20) != 0) {
-          pMVar5 = (MATRIX *)0x200000;
+        if ((uVar5 & 0x20) != 0) {
+          pMVar6 = (MATRIX *)0x200000;
         }
       }
       else {
-        pMVar5 = (MATRIX *)&DAT_00100000;
+        pMVar6 = (MATRIX *)&DAT_00100000;
       }
     }
     else {
-      pMVar5 = (MATRIX *)0x40000;
+      pMVar6 = (MATRIX *)0x40000;
     }
     break;
   case 2:
@@ -205,7 +210,7 @@ ulong GenericQuery(_Instance *instance,ulong query)
   case 0x15:
   case 0x16:
   case 0x17:
-    pMVar5 = (MATRIX *)0x0;
+    pMVar6 = (MATRIX *)0x0;
     break;
   case 6:
     sVar1 = (instance->position).x;
@@ -217,33 +222,37 @@ ulong GenericQuery(_Instance *instance,ulong query)
     sVar2 = (instance->rotation).y;
     sVar3 = (instance->rotation).z;
 LAB_8003eefc:
-    pMVar5 = (MATRIX *)SetPositionData((int)sVar1,(int)sVar2,(int)sVar3);
+    pMVar6 = (MATRIX *)SetPositionData((int)sVar1,(int)sVar2,(int)sVar3);
     break;
   case 0xb:
-    pMVar5 = (MATRIX *)&UNK_00000001;
+    pMVar6 = (MATRIX *)&UNK_00000001;
     if ((instance->flags2 & 0x8000000U) != 0) {
-      pMVar5 = (MATRIX *)&UNK_00000002;
+      pMVar6 = (MATRIX *)&UNK_00000002;
     }
     break;
   case 0xc:
-    pMVar5 = instance->matrix;
+    pMVar6 = instance->matrix;
     break;
   case 0x11:
-    pMVar5 = (MATRIX *)G2EmulationInstanceQueryAnimation(instance,0);
+    pMVar6 = (MATRIX *)G2EmulationInstanceQueryAnimation(instance,0);
     break;
   case 0x12:
-    pMVar5 = (MATRIX *)G2EmulationInstanceQueryFrame(instance,0);
+    pMVar6 = (MATRIX *)G2EmulationInstanceQueryFrame(instance,0);
     break;
   case 0x18:
     if ((instance->flags2 & 4U) != 0) {
-                    /* WARNING: Subroutine does not return */
-      CIRC_Alloc(0xc);
+      pMVar6 = (MATRIX *)CIRC_Alloc(0xc);
+      plVar4 = *(long **)(pMVar6->m + 2);
+      *(undefined4 *)pMVar6->m = 8;
+      lVar7 = instance->flags2;
+      *plVar4 = instance->flags;
+      plVar4[1] = lVar7;
     }
     break;
   default:
     return 0;
   }
-  return (ulong)pMVar5;
+  return (ulong)pMVar6;
 }
 
 
@@ -316,18 +325,20 @@ void GenericMessage(_Instance *instance,ulong message,ulong data)
         else {
           local_18 = *(int *)(data + 0xc);
         }
-                    /* WARNING: Subroutine does not return */
         G2EmulationInstanceSetAnimation(instance,0,*(int *)(data + 4),*(int *)(data + 8),local_18);
-      }
-      if (message < 0x8000009) {
-        if ((undefined *)message == &DAT_00100007) {
-          instance->flags = **(long **)(data + 4);
-          instance->flags2 = *(long *)(*(int *)(data + 4) + 4);
-        }
+        G2EmulationInstanceSetMode(instance,0,*(int *)(data + 0x10));
       }
       else {
-        if (message == 0x8000010) {
-          G2EmulationInstanceSetMode(instance,0,data);
+        if (message < 0x8000009) {
+          if ((undefined *)message == &DAT_00100007) {
+            instance->flags = **(long **)(data + 4);
+            instance->flags2 = *(long *)(*(int *)(data + 4) + 4);
+          }
+        }
+        else {
+          if (message == 0x8000010) {
+            G2EmulationInstanceSetMode(instance,0,data);
+          }
         }
       }
     }

@@ -78,16 +78,17 @@ LAB_80030e58:
 LAB_80030eac:
   iVar2 = iVar2 + pad;
   puVar5 = (uint *)(*data + iVar2);
-  puVar5[1] = ~(int)(short)(&lastPad_24)[pad] & *puVar5;
-  (&lastPad_24)[pad] = *(short *)puVar5;
+  puVar5[1] = ~(int)*(short *)(&lastPad_24 + pad * 2) & *puVar5;
+  *(short *)(&lastPad_24 + pad * 2) = *(short *)puVar5;
   puVar4 = (uint *)(*command + iVar2);
   puVar4[3] = uVar8;
   puVar4[4] = uVar6;
   if ((gameTrackerX.gameFlags & 0x10U) == 0) {
     iVar2 = 0;
     if ((gameTrackerX.gameFlags & 1U) != 0) {
-                    /* WARNING: Subroutine does not return */
       memset(gameTrackerX.controlCommand,0,0x28);
+      memset(gameTrackerX.controlData,0,0x28);
+      return;
     }
     puVar4[1] = ~*puVar4 & *puVar5;
     *puVar4 = *puVar5;
@@ -159,6 +160,8 @@ LAB_80030eac:
 		// Start line: 627
 	/* end block 2 */
 	// End Line: 628
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
 
 int GAMEPAD_ControllerIsDualShock(void)
 
@@ -484,8 +487,18 @@ void GAMEPAD_Init(void)
   PadInitDirect(&readGPBuffer1,&readGPBuffer2);
   PadStartCom();
   GAMEPAD_Detect();
-                    /* WARNING: Subroutine does not return */
   memset(&gDummyCommand,0,0x10);
+  memset(&readGPBuffer1,0,0x22);
+  memset(&readGPBuffer2,0,0x22);
+  gpbuffer1.transStatus = '\0';
+  gpbuffer1.data._0_2_ = 0xffff;
+  readGPBuffer1.transStatus = '\0';
+  readGPBuffer1.data._0_2_ = 0xffff;
+  gpbuffer2.transStatus = '\0';
+  gpbuffer2.data._0_2_ = 0xffff;
+  readGPBuffer2.transStatus = '\0';
+  readGPBuffer2.data._0_2_ = 0xffff;
+  return;
 }
 
 
@@ -512,10 +525,16 @@ void GAMEPAD_Init(void)
 void GAMEPAD_FillOutDemoNames(char *baseAreaName,char *demoName)
 
 {
+  char *pcVar1;
   char acStack32 [16];
   
-                    /* WARNING: Subroutine does not return */
   strcpy(acStack32,baseAreaName);
+  pcVar1 = strpbrk(acStack32,"0123456789");
+  if (pcVar1 != (char *)0x0) {
+    *pcVar1 = '\0';
+  }
+  sprintf(demoName,"\\kain2\\area\\%s\\bin\\%s.dat");
+  return;
 }
 
 
@@ -543,6 +562,8 @@ void GAMEPAD_FillOutDemoNames(char *baseAreaName,char *demoName)
 	/* end block 3 */
 	// End Line: 1163
 
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
 void GAMEPAD_LoadDemo(void)
 
 {
@@ -551,10 +572,14 @@ void GAMEPAD_LoadDemo(void)
   gameTrackerX.demoMode = '\0';
   if (gameTrackerX.setDemoMode != '\0') {
     GAMEPAD_FillOutDemoNames(gameTrackerX.baseAreaName,acStack88);
-                    /* WARNING: Subroutine does not return */
-    LOAD_ReadFile(acStack88,'\x11');
+    __demoBufferStart = (ushort *)LOAD_ReadFile(acStack88,'\x11');
+    __currentData = 0xffff;
+    __dataCount = 0;
+    gameTrackerX.demoMode = '\x01';
+    gameTrackerX.setDemoMode = '\0';
+    __demoBuffer = __demoBufferStart;
+    GAMELOOP_DemoSetup();
   }
-  gameTrackerX.demoMode = '\0';
   return;
 }
 
@@ -798,8 +823,6 @@ void GAMEPAD_GetData(long (*data) [5])
 LAB_800319cc:
   (*data)[3] = iVar1;
   (*data)[4] = uVar3 - 0x80;
-                    /* WARNING: Read-only address (ram,0x800d1e18) is written */
-                    /* WARNING: Read-only address (ram,0x800d1e60) is written */
   return;
 }
 
@@ -831,9 +854,14 @@ LAB_800319cc:
 void GAMEPAD_DisplayControllerStatus(int msgY)
 
 {
+  char *text;
+  int len;
+  
   if (5 < gamePadControllerOut) {
-                    /* WARNING: Subroutine does not return */
-    localstr_get(LOCALSTR_no_controller);
+    text = localstr_get(LOCALSTR_no_controller);
+    FONT_FontPrintCentered(text,msgY);
+    len = FONT_GetStringWidth(text);
+    DisplayHintBox(len,msgY);
   }
   return;
 }
@@ -866,11 +894,14 @@ void GAMEPAD_DisplayControllerStatus(int msgY)
 void GAMEPAD_Process(GameTracker *gameTracker)
 
 {
+  int iVar1;
   long (*data) [5];
   
   if (gameTracker->demoMode != '\0') {
-                    /* WARNING: Subroutine does not return */
-    FONT_GetStringWidth("DEMO MODE");
+    iVar1 = FONT_GetStringWidth("DEMO MODE");
+    fontTracker.font_xpos = (0x200 - iVar1) / 2;
+    fontTracker.font_ypos = 0xd8;
+    FONT_Print("DEMO MODE");
   }
   data = (long (*) [5])gameTracker->controlData;
   GAMEPAD_GetData(data);
@@ -894,6 +925,8 @@ void GAMEPAD_Process(GameTracker *gameTracker)
 		// Start line: 2195
 	/* end block 2 */
 	// End Line: 2196
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void GAMEPAD_SaveControllers(void)
 
@@ -992,9 +1025,9 @@ void GAMEPAD_RestoreControllers(void)
       plVar4[3] = lVar7;
       plVar1 = plVar3 + 4;
       plVar2 = plVar4 + 4;
-    } while (plVar3 + 4 != (long *)&crap_24);
+    } while (plVar3 + 4 != (long *)&UNK_800d1d94);
     lVar5 = plVar3[5];
-    plVar4[4] = _crap_24;
+    plVar4[4] = _UNK_800d1d94;
     plVar4[5] = lVar5;
     plVar1 = &overrideCommand;
     plVar2 = gameTrackerX.controlCommand;
@@ -1010,9 +1043,9 @@ void GAMEPAD_RestoreControllers(void)
       plVar4[3] = lVar7;
       plVar1 = plVar3 + 4;
       plVar2 = plVar4 + 4;
-    } while (plVar3 + 4 != (long *)&ScreenMorphArray);
+    } while (plVar3 + 4 != (long *)&UNK_800d1dc4);
     lVar5 = plVar3[5];
-    plVar4[4] = _ScreenMorphArray;
+    plVar4[4] = _UNK_800d1dc4;
     plVar4[5] = lVar5;
     gameTrackerX.controlCommand[0][0] = gameTrackerX.controlCommand[0][0] | 0x80;
   }

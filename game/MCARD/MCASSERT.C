@@ -14,12 +14,14 @@
 void mcassert(char *exp,char *file,long line)
 
 {
-  if (exp != (char *)0x0) {
-                    /* WARNING: Subroutine does not return */
+  if (exp == (char *)0x0) {
+    printf("%s:%ld: assertion failure\n");
+  }
+  else {
     printf("%s:%ld: %s\n");
   }
-                    /* WARNING: Subroutine does not return */
-  printf("%s:%ld: assertion failure\n");
+  trap(0x407);
+  return;
 }
 
 

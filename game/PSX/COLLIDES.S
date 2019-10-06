@@ -2272,39 +2272,99 @@ LAB_800790a8:
 	/* end block 13 */
 	// End Line: 4374
 
-int G2EulerAngles_ToMatrix_S(undefined4 param_1,short *param_2)
+int G2EulerAngles_ToMatrix_S(undefined2 *param_1,short *param_2)
 
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
+  short sVar1;
+  short sVar2;
+  short sVar3;
+  short sVar4;
+  short sVar5;
+  short sVar6;
+  long lVar7;
+  int iVar8;
+  int iVar9;
+  undefined4 uVar10;
+  short *psVar11;
+  int iVar12;
+  short *psVar13;
+  int iVar14;
+  undefined4 uVar15;
+  undefined4 uVar16;
+  int iVar17;
+  int iVar18;
+  int iVar19;
+  int iVar20;
+  int iVar21;
   
-  iVar2 = (int)*param_2;
-  iVar3 = (int)param_2[4];
-  iVar4 = (int)param_2[8];
-  iVar1 = iVar2 + iVar3 + iVar4;
-  if (0 < iVar1) {
-                    /* WARNING: Subroutine does not return */
-    MATH3D_FastSqrt(iVar1 + 0x1000);
+  iVar9 = (int)*param_2;
+  iVar12 = (int)param_2[4];
+  iVar14 = (int)param_2[8];
+  iVar8 = iVar9 + iVar12 + iVar14;
+  if (0 < iVar8) {
+    lVar7 = MATH3D_FastSqrt(iVar8 + 0x1000);
+    sVar1 = param_2[7];
+    sVar2 = param_2[5];
+    sVar3 = param_2[2];
+    sVar4 = param_2[6];
+    sVar5 = param_2[3];
+    sVar6 = param_2[1];
+    param_1[3] = (short)(lVar7 >> 1);
+    setCopReg(2,0x4800,(int)sVar1 - (int)sVar2);
+    setCopReg(2,0x5000,(int)sVar3 - (int)sVar4);
+    setCopReg(2,0x5800,(int)sVar5 - (int)sVar6);
+    setCopReg(2,0x4000,0x800000 / lVar7);
+    copFunction(2,0x198003d);
+    uVar10 = getCopReg(2,0x4800);
+    uVar15 = getCopReg(2,0x5000);
+    uVar16 = getCopReg(2,0x5800);
+    *param_1 = (short)uVar10;
+    param_1[1] = (short)uVar15;
+    param_1[2] = (short)uVar16;
+    return 0x800000 / lVar7;
   }
-  iVar1 = iVar2;
-  iVar5 = iVar3;
-  iVar6 = iVar4;
-  if (iVar2 < iVar3) {
-    iVar1 = iVar3;
-    iVar5 = iVar4;
-    iVar6 = iVar2;
+  iVar19 = 0;
+  iVar20 = 2;
+  iVar21 = 4;
+  iVar8 = iVar9;
+  iVar17 = iVar12;
+  iVar18 = iVar14;
+  if (iVar9 < iVar12) {
+    iVar19 = 2;
+    iVar20 = 4;
+    iVar21 = 0;
+    iVar8 = iVar12;
+    iVar17 = iVar14;
+    iVar18 = iVar9;
   }
-  if (iVar1 < iVar4) {
-    iVar1 = iVar4;
-    iVar5 = iVar2;
-    iVar6 = iVar3;
+  if (iVar8 < iVar14) {
+    iVar19 = 4;
+    iVar20 = 0;
+    iVar21 = 2;
+    iVar8 = iVar14;
+    iVar17 = iVar9;
+    iVar18 = iVar12;
   }
-                    /* WARNING: Subroutine does not return */
-  MATH3D_FastSqrt((iVar1 - (iVar5 + iVar6)) + 0x1000);
+  lVar7 = MATH3D_FastSqrt((iVar8 - (iVar17 + iVar18)) + 0x1000);
+  *(undefined2 *)((int)param_1 + iVar19) = (short)(lVar7 >> 1);
+  psVar11 = (short *)(iVar19 * 3 + (int)param_2);
+  psVar13 = (short *)(iVar20 * 3 + (int)param_2);
+  param_2 = (short *)(iVar21 * 3 + (int)param_2);
+  setCopReg(2,0x4000,0x800000 / lVar7);
+  setCopReg(2,0x4800,(int)*(short *)((int)param_2 + iVar20) - (int)*(short *)((int)psVar13 + iVar21)
+           );
+  setCopReg(2,0x5000,(int)*(short *)((int)psVar13 + iVar19) + (int)*(short *)((int)psVar11 + iVar20)
+           );
+  setCopReg(2,0x5800,(int)*(short *)((int)param_2 + iVar19) + (int)*(short *)((int)psVar11 + iVar21)
+           );
+  copFunction(2,0x198003d);
+  uVar10 = getCopReg(2,0x4800);
+  uVar15 = getCopReg(2,0x5000);
+  uVar16 = getCopReg(2,0x5800);
+  param_1[3] = (short)uVar10;
+  *(undefined2 *)(iVar20 + (int)param_1) = (short)uVar15;
+  *(undefined2 *)(iVar21 + (int)param_1) = (short)uVar16;
+  return 0x800000 / lVar7;
 }
 
 

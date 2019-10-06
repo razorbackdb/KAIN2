@@ -360,73 +360,146 @@ int STREAM_PollLoadQueue(void)
   _LoadQueueEntry *p_Var1;
   code *pcVar2;
   long *plVar3;
-  int voiceIndex;
+  _LoadQueueEntry *p_Var4;
+  int id;
+  ulong uVar5;
+  long **pplVar6;
+  long takeBackSize;
   
   LOAD_ProcessReadQueue();
   p_Var1 = loadHead;
-  if (loadHead != (_LoadQueueEntry *)0x0) {
-    if (gameTrackerX.debugFlags < 0) {
-                    /* WARNING: Subroutine does not return */
-      FONT_Print("%s status %d\n");
-    }
-    switch((int)(((uint)(ushort)loadHead->status - 1) * 0x10000) >> 0x10) {
-    case 0:
-                    /* WARNING: Subroutine does not return */
-      TIMER_GetTimeMS();
-    case 1:
-      voiceIndex = LOAD_IsFileLoading();
-      if (voiceIndex == 0) {
-                    /* WARNING: Subroutine does not return */
-        TIMER_GetTimeMS();
-      }
-      break;
-    case 4:
-      plVar3 = (long *)LOAD_InitBuffers();
-                    /* WARNING: Subroutine does not return */
-      (p_Var1->loadEntry).loadAddr = plVar3;
-      TIMER_GetTimeMS();
-    case 5:
-      voiceIndex = LOAD_IsFileLoading();
-      if (voiceIndex == 0) {
-                    /* WARNING: Subroutine does not return */
-        TIMER_GetTimeMS();
-      }
-      break;
-    case 6:
-      loadHead->status = 4;
-      STREAM_RemoveQueueHead();
+  if (loadHead == (_LoadQueueEntry *)0x0) {
+    return numLoads;
+  }
+  if (gameTrackerX.debugFlags < 0) {
+    FONT_Print("%s status %d\n");
+  }
+  switch((int)(((uint)(ushort)p_Var1->status - 1) * 0x10000) >> 0x10) {
+  case 0:
+    uVar5 = TIMER_GetTimeMS();
+    p_Var1->endLoadTime = uVar5;
+    LOAD_NonBlockingReadFile(&p_Var1->loadEntry);
+    id = LOAD_ChangeDirectoryFlag();
+    if (id == 0) {
+      p_Var1->status = 2;
       if (p_Var1->mempackUsed != '\0') {
-        MEMPACK_SetMemoryDoneStreamed((char *)(p_Var1->loadEntry).loadAddr);
+        MEMPACK_SetMemoryBeingStreamed((char *)(p_Var1->loadEntry).loadAddr);
       }
-      STREAM_NextLoadFromHead();
-      pcVar2 = (code *)(p_Var1->loadEntry).retFunc;
-      if (pcVar2 != (code *)0x0) {
-        (*pcVar2)((p_Var1->loadEntry).loadAddr,(p_Var1->loadEntry).retData,
-                  (p_Var1->loadEntry).retData2);
-      }
-      break;
-    case 7:
-      voiceIndex = (loadHead->loadEntry).fileHash;
-      loadHead->status = 9;
-      VOICEXA_Play(voiceIndex,0);
-      break;
-    case 8:
-      voiceIndex = VOICEXA_IsPlaying();
-      if (voiceIndex == 0) {
-        LOAD_InitCdStreamMode();
-        STREAM_RemoveQueueHead();
-      }
-      break;
-    case 9:
-                    /* WARNING: Subroutine does not return */
-      TIMER_GetTimeMS();
-    case 10:
-      voiceIndex = LOAD_IsFileLoading();
-      if (voiceIndex == 0) {
-                    /* WARNING: Subroutine does not return */
-        TIMER_GetTimeMS();
+      pplVar6 = (long **)(p_Var1->loadEntry).retPointer;
+      if (pplVar6 != (long **)0x0) {
+        *pplVar6 = (p_Var1->loadEntry).loadAddr;
       }
     }
+    else {
+      p_Var4 = STREAM_AddQueueEntryToHead();
+      sprintf((p_Var4->loadEntry).fileName,"(%d)");
+      takeBackSize = (p_Var1->loadEntry).dirHash;
+      p_Var4->status = 10;
+      (p_Var4->loadEntry).dirHash = takeBackSize;
+    }
+    break;
+  case 1:
+    id = LOAD_IsFileLoading();
+    if (id != 0) {
+      return numLoads;
+    }
+    uVar5 = TIMER_GetTimeMS();
+    p_Var1->endLoadTime = uVar5 - p_Var1->endLoadTime;
+    if (p_Var1->relocateBinary != '\0') {
+      takeBackSize = LOAD_RelocBinaryData((p_Var1->loadEntry).loadAddr,(p_Var1->loadEntry).loadSize)
+      ;
+      if (p_Var1->mempackUsed != '\0') {
+        MEMPACK_Return((char *)(p_Var1->loadEntry).loadAddr,takeBackSize);
+      }
+      p_Var1->relocateBinary = '\0';
+    }
+    if ((p_Var1->loadEntry).retFunc != (void *)0x0) {
+      p_Var1->status = 7;
+      return numLoads;
+    }
+    p_Var1->status = 4;
+    if (p_Var1->mempackUsed != '\0') {
+      MEMPACK_SetMemoryDoneStreamed((char *)(p_Var1->loadEntry).loadAddr);
+    }
+    goto LAB_80060710;
+  case 4:
+    plVar3 = (long *)LOAD_InitBuffers();
+    (p_Var1->loadEntry).loadAddr = plVar3;
+    uVar5 = TIMER_GetTimeMS();
+    p_Var1->endLoadTime = uVar5;
+    LOAD_CD_ReadPartOfFile(&p_Var1->loadEntry);
+    id = LOAD_ChangeDirectoryFlag();
+    if (id == 0) {
+      p_Var1->status = 6;
+      (p_Var1->loadEntry).posInFile = 0;
+    }
+    else {
+      p_Var4 = STREAM_AddQueueEntryToHead();
+      sprintf((p_Var4->loadEntry).fileName,"(%d)");
+      takeBackSize = (p_Var1->loadEntry).dirHash;
+      p_Var4->status = 10;
+      (p_Var4->loadEntry).dirHash = takeBackSize;
+      LOAD_CleanUpBuffers();
+    }
+    break;
+  case 5:
+    id = LOAD_IsFileLoading();
+    if (id == 0) {
+      uVar5 = TIMER_GetTimeMS();
+      p_Var1->status = 4;
+      p_Var1->endLoadTime = uVar5 - p_Var1->endLoadTime;
+      STREAM_RemoveQueueHead();
+      LOAD_CleanUpBuffers();
+      if ((code *)(p_Var1->loadEntry).retFunc == VRAM_TransferBufferToVram) {
+        VRAM_LoadReturn((p_Var1->loadEntry).loadAddr,(p_Var1->loadEntry).retData,
+                        (p_Var1->loadEntry).retData2);
+      }
+    }
+    break;
+  case 6:
+    p_Var1->status = 4;
+    STREAM_RemoveQueueHead();
+    if (p_Var1->mempackUsed != '\0') {
+      MEMPACK_SetMemoryDoneStreamed((char *)(p_Var1->loadEntry).loadAddr);
+    }
+    STREAM_NextLoadFromHead();
+    pcVar2 = (code *)(p_Var1->loadEntry).retFunc;
+    if (pcVar2 != (code *)0x0) {
+      (*pcVar2)((p_Var1->loadEntry).loadAddr,(p_Var1->loadEntry).retData,
+                (p_Var1->loadEntry).retData2);
+    }
+    break;
+  case 7:
+    id = (p_Var1->loadEntry).fileHash;
+    p_Var1->status = 9;
+    VOICEXA_Play(id,0);
+    break;
+  case 8:
+    id = VOICEXA_IsPlaying();
+    if (id != 0) {
+      return numLoads;
+    }
+    LOAD_InitCdStreamMode();
+    goto LAB_80060710;
+  case 9:
+    uVar5 = TIMER_GetTimeMS();
+    id = (p_Var1->loadEntry).dirHash;
+    p_Var1->endLoadTime = uVar5;
+    id = LOAD_ChangeDirectoryByID(id);
+    if (id == 0) {
+      DEBUG_FatalError("Could not read directory hash %d\n");
+    }
+    p_Var1->status = 0xb;
+    break;
+  case 10:
+    id = LOAD_IsFileLoading();
+    if (id != 0) {
+      return numLoads;
+    }
+    uVar5 = TIMER_GetTimeMS();
+    p_Var1->endLoadTime = uVar5 - p_Var1->endLoadTime;
+LAB_80060710:
+    STREAM_RemoveQueueHead();
   }
   return numLoads;
 }
@@ -457,6 +530,7 @@ STREAM_SetUpQueueEntry
 
 {
   _LoadQueueEntry *p_Var1;
+  long lVar2;
   
   if (fromhead == 0) {
     p_Var1 = STREAM_AddQueueEntryToTail();
@@ -464,8 +538,31 @@ STREAM_SetUpQueueEntry
   else {
     p_Var1 = STREAM_AddQueueEntryToHead();
   }
-                    /* WARNING: Subroutine does not return */
   strcpy((p_Var1->loadEntry).fileName,fileName);
+  lVar2 = LOAD_HashName(fileName);
+  (p_Var1->loadEntry).fileHash = lVar2;
+  lVar2 = LOAD_GetSearchDirectory();
+  (p_Var1->loadEntry).dirHash = lVar2;
+  (p_Var1->loadEntry).posInFile = 0;
+  (p_Var1->loadEntry).checksumType = 1;
+  lVar2 = LOAD_GetSearchDirectory();
+  if (lVar2 == 0) {
+    (p_Var1->loadEntry).dirHash = gCurDir;
+    (p_Var1->loadEntry).retFunc = retFunc;
+  }
+  else {
+    lVar2 = LOAD_GetSearchDirectory();
+    (p_Var1->loadEntry).dirHash = lVar2;
+    LOAD_SetSearchDirectory(0);
+    (p_Var1->loadEntry).retFunc = retFunc;
+  }
+  (p_Var1->loadEntry).retData = retData;
+  (p_Var1->loadEntry).retData2 = retData2;
+  (p_Var1->loadEntry).retPointer = retPointer;
+  if (retPointer != (void **)0x0) {
+    *retPointer = (void *)0xfafbfcfd;
+  }
+  return p_Var1;
 }
 
 
@@ -542,14 +639,17 @@ void LOAD_LoadToAddress(char *fileName,void *loadAddr,long relocateBinary)
 
 {
   _LoadQueueEntry *p_Var1;
+  int iVar2;
   
   p_Var1 = STREAM_SetUpQueueEntry(fileName,(void *)0x0,(void *)0x0,(void *)0x0,(void **)0x0,0);
   (p_Var1->loadEntry).loadAddr = loadAddr;
   p_Var1->status = 1;
   p_Var1->relocateBinary = (char)relocateBinary;
   p_Var1->mempackUsed = '\0';
-                    /* WARNING: Subroutine does not return */
-  STREAM_PollLoadQueue();
+  do {
+    iVar2 = STREAM_PollLoadQueue();
+  } while (iVar2 != 0);
+  return;
 }
 
 
@@ -716,11 +816,14 @@ void LOAD_PlayXA(int number)
 long * LOAD_ReadFile(char *fileName,uchar memType)
 
 {
-  void *local_10 [2];
+  int iVar1;
+  long *local_10 [2];
   
   STREAM_QueueNonblockingLoads(fileName,memType,(void *)0x0,(void *)0x0,(void *)0x0,local_10,0);
-                    /* WARNING: Subroutine does not return */
-  STREAM_PollLoadQueue();
+  do {
+    iVar1 = STREAM_PollLoadQueue();
+  } while (iVar1 != 0);
+  return local_10[0];
 }
 
 
@@ -752,9 +855,9 @@ void LOAD_ChangeDirectory(char *name)
   gCurDir = LOAD_HashUnit(name);
   (p_Var1->loadEntry).dirHash = gCurDir;
   (p_Var1->loadEntry).fileHash = 0;
-                    /* WARNING: Subroutine does not return */
   p_Var1->status = 10;
-  sprintf((p_Var1->loadEntry).fileName,GlobalObjects);
+  sprintf((p_Var1->loadEntry).fileName,"dir %s");
+  return;
 }
 
 

@@ -128,7 +128,7 @@ void RELMOD_RelocModulePointers(int baseaddr,int offset,int *relocs)
         if (uVar3 < 2) {
           if (uVar3 == 0) {
             iVar1 = *piVar5 + offset;
-MANNA_Pickup:
+LAB_8007c35c:
             *piVar5 = iVar1;
           }
         }
@@ -140,7 +140,7 @@ MANNA_Pickup:
             if (uVar3 == 3) {
               iVar1 = (*piVar5 - ((uint)((baseaddr - offset) * 0x10) >> 6)) +
                       ((uint)(baseaddr << 4) >> 6);
-              goto MANNA_Pickup;
+              goto LAB_8007c35c;
             }
           }
         }

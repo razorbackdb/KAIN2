@@ -101,8 +101,8 @@ void DEBUG_UpdateFog(long *var)
   uVar4 = debugFogBlu << 0x10 | debugFogGrn << 8 | debugFogRed;
   p_Var3->FogColor = uVar4;
   *(uint *)&pLVar2->backColorR = uVar4;
-                    /* WARNING: Subroutine does not return */
   LIGHT_CalcDQPTable(gameTrackerX.level);
+  return;
 }
 
 
@@ -279,8 +279,19 @@ void DEBUG_SendCinematicSwitch(void)
 void DEBUG_SendMoveTo(void)
 
 {
-                    /* WARNING: Subroutine does not return */
-  rand();
+  short sVar1;
+  uint uVar2;
+  uint uVar3;
+  int Data;
+  
+  uVar2 = rand();
+  sVar1 = ((gameTrackerX.playerInstance)->position).x;
+  uVar3 = rand();
+  Data = SetPositionData((int)sVar1 + (uVar2 & 0x7ff) + -0x400,
+                         (int)((gameTrackerX.playerInstance)->position).y + (uVar3 & 0x7ff) + -0x400
+                         ,(int)((gameTrackerX.playerInstance)->position).z);
+  INSTANCE_Broadcast((_Instance *)0x0,0xe,0x4000c,Data);
+  return;
 }
 
 
@@ -641,8 +652,8 @@ void maybe_change_menu_choice(GameTracker *gt,DebugMenuLine *menu)
       }
     } while (DEBUG_LINE_TYPE_ENDLIST < menu[iVar3].type);
     if (iVar3 != debugMenuChoice) {
-                    /* WARNING: Subroutine does not return */
       SndPlay(5);
+      debugMenuChoice = iVar3;
     }
   }
   return;
@@ -1117,10 +1128,10 @@ void adjust_format(char *ctrl,debug_format_t *fmt)
       }
     }
     else {
-      iVar2 = strncmp(ctrl,s__center_800ceee4,7);
+      iVar2 = strncmp(ctrl,"-center",7);
       if (iVar2 != 0) {
-                    /* WARNING: Subroutine does not return */
         printf("unknown format control: %s\n");
+        return;
       }
       fmt->is_centered = 1;
       pbVar4 = (byte *)ctrl + 7;
@@ -1194,28 +1205,37 @@ void draw_menu_item(GameTracker *gt,debug_format_t *fmt,char *text)
 {
   char cVar1;
   char *pcVar2;
+  int iVar3;
+  short x;
+  short y;
   
   while( true ) {
     pcVar2 = find_eol(text);
     cVar1 = *pcVar2;
     *pcVar2 = '\0';
-    if (fmt->is_centered != 0) {
-                    /* WARNING: Subroutine does not return */
-      FONT_GetStringWidth(text);
+    if (fmt->is_centered == 0) {
+      x = *(short *)&fmt->xpos;
+      y = *(short *)&fmt->ypos;
     }
-    FONT_SetCursor(*(short *)&fmt->xpos,*(short *)&fmt->ypos);
-    if (currentMenu->type != DEBUG_LINE_TYPE_FORMAT) break;
-    FONT_Print2(text);
+    else {
+      iVar3 = FONT_GetStringWidth(text);
+      y = *(short *)&fmt->ypos;
+      x = (short)(((uint)*(ushort *)&fmt->xpos - (iVar3 >> 1)) * 0x10000 >> 0x10);
+    }
+    FONT_SetCursor(x,y);
+    if (currentMenu->type == DEBUG_LINE_TYPE_FORMAT) {
+      FONT_Print2(text);
+    }
+    else {
+      FONT_Print(text);
+    }
     text = pcVar2 + 1;
-    if (cVar1 == '\0') {
-      fmt->ypos = fmt->ypos + cem_item_leading;
-      return;
-    }
+    if (cVar1 == '\0') break;
     *pcVar2 = cVar1;
     fmt->ypos = fmt->ypos + cem_line_leading;
   }
-                    /* WARNING: Subroutine does not return */
-  FONT_Print(text);
+  fmt->ypos = fmt->ypos + cem_item_leading;
+  return;
 }
 
 
@@ -1282,11 +1302,7 @@ void draw_menu(GameTracker *gt,DebugMenuLine *menu)
     set_debug_leading();
     iVar4 = 0;
   }
-  do {
-    iVar2 = local_38.xpos;
-    if (menu->type == DEBUG_LINE_TYPE_ENDLIST) {
-      return;
-    }
+  while (iVar2 = local_38.xpos, menu->type != DEBUG_LINE_TYPE_ENDLIST) {
     if (menu->type == DEBUG_LINE_TYPE_FORMAT) {
       adjust_format(menu->text,&local_38);
     }
@@ -1298,7 +1314,6 @@ void draw_menu(GameTracker *gt,DebugMenuLine *menu)
           sVar1 = sVar1 + -0x78;
         }
         FONT_SetCursor(sVar1 + -0x14,y);
-                    /* WARNING: Subroutine does not return */
         FONT_Print(">");
       }
       draw_menu_item(gt,&local_38,menu->text);
@@ -1310,21 +1325,23 @@ void draw_menu(GameTracker *gt,DebugMenuLine *menu)
       }
       FONT_SetCursor((short)((uint)((iVar3 + iVar2) * 0x10000) >> 0x10),y);
       if (menu->type == DEBUG_LINE_TYPE_BIT) {
-        if ((*menu->var_address & menu->bit_mask) != menu->bit_mask) {
-                    /* WARNING: Subroutine does not return */
-          FONT_Print((char *)&depthQFogFar);
+        if ((*menu->var_address & menu->bit_mask) == menu->bit_mask) {
+          FONT_Print("YES");
         }
-                    /* WARNING: Subroutine does not return */
-        FONT_Print("YES");
+        else {
+          FONT_Print((char *)&PTR_DAT_800cef10);
+        }
       }
-      if (menu->type == DEBUG_LINE_TYPE_LONG) {
-                    /* WARNING: Subroutine does not return */
-        FONT_Print((char *)&depthQBackColor);
+      else {
+        if (menu->type == DEBUG_LINE_TYPE_LONG) {
+          FONT_Print((char *)&PTR_DAT_800cef14);
+        }
       }
     }
     menu = menu + 1;
     iVar4 = iVar4 + 1;
-  } while( true );
+  }
+  return;
 }
 
 
@@ -1418,8 +1435,47 @@ void DEBUG_Menu(GameTracker *gt)
 void DEBUG_DisplayStatus(GameTracker *gameTracker)
 
 {
-                    /* WARNING: Subroutine does not return */
+  int iVar1;
+  char *fmt;
+  long local_18 [2];
+  
   STREAM_GetLevelWithID(gameTracker->playerInstance->currentStreamUnitID);
+  if ((gameTracker->debugFlags & 0x40000000U) != 0) {
+    EVENT_PrintVars();
+  }
+  if ((gameTracker->debugFlags & 0x4000004U) != 0) {
+    if ((gameTracker->debugFlags & 0x4000000U) == 0) {
+      fmt = "$@KG\n FRTE %d\n";
+    }
+    else {
+      fmt = "$@EF\n FRTE %d\n";
+    }
+    FONT_Print(fmt);
+    FONT_Print(" Focus XYZ(%d,%d,%d)\n");
+    if ((gameTracker->debugFlags & 4U) != 0) {
+      if (gameTracker->idleTime == 0) {
+        FONT_Print(" IDLE ZERO\n");
+      }
+      else {
+        FONT_Print(" IDLE %d PCT\n");
+      }
+      FONT_Print(" DRAW %d\n");
+      FONT_Print(" INS  %d");
+      FONT_Print("/%d\n");
+      FONT_Print(" Far Plane =%d\n");
+      FONT_Print(" Fog Near = %d Fog Far = %d\n");
+      FONT_Print("Military Time %04d\n");
+    }
+    MEMPACK_ReportFreeMemory();
+    SAVE_SizeOfFreeSpace();
+    FONT_Print(" FMEM %d  FreeSaveMem %d\n");
+    FONT_Print(" AREA DRM = %s\n");
+    FONT_Print(" CAM TILT %d DIST %d\n");
+  }
+  if ((gameTracker->debugFlags < 0) && (iVar1 = STREAM_IsCdBusy(local_18), iVar1 != 0)) {
+    FONT_Print("Loading From CD: In Queue(%d)\n");
+  }
+  return;
 }
 
 
@@ -1634,8 +1690,9 @@ void DEBUG_SetViewVram(void)
 void DEBUG_EndViewVram(GameTracker *gameTracker)
 
 {
-                    /* WARNING: Subroutine does not return */
   SetDefDispEnv((undefined2 *)&disp,0,0,0x200,0xf0);
+  SetDefDispEnv((undefined2 *)&DISPENV_800d1f74,0,0x100,0x200,0xf0);
+  return;
 }
 
 
@@ -1675,8 +1732,10 @@ void DEBUG_ViewVram(GameTracker *gameTracker)
   if (((gameTracker->controlCommand[1] & 8U) != 0) && (DAT_800cf108 < 0x200)) {
     DAT_800cf108 = DAT_800cf108 + 0x20;
   }
-                    /* WARNING: Subroutine does not return */
   SetDefDispEnv((undefined2 *)&disp,(short)DAT_800cf108,(short)DAT_800cf10c,0x200,0xf0);
+  SetDefDispEnv((undefined2 *)&DISPENV_800d1f74,(short)DAT_800cf108,(short)DAT_800cf10c,0x200,0xf0);
+  gameTracker->playerInstance->flags = gameTracker->playerInstance->flags | 0x100;
+  return;
 }
 
 
@@ -1727,19 +1786,62 @@ void DEBUG_CaptureScreen(GameTracker *gameTracker)
 	/* end block 3 */
 	// End Line: 6296
 
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
 void DEBUG_PageFlip(void)
 
 {
-  int iVar1;
+  ulong **ppuVar1;
+  int iVar2;
+  undefined auStack32 [3];
+  undefined local_1d;
+  undefined local_1c;
+  undefined local_1b;
+  undefined local_1a;
+  undefined local_19;
+  undefined2 local_18;
+  undefined2 local_16;
+  undefined2 local_14;
+  undefined2 local_12;
+  undefined2 local_10;
+  short local_e;
+  undefined2 local_c;
+  short local_a;
   
   do {
-    iVar1 = CheckVolatile(gameTrackerX.drawTimerReturn);
-  } while (iVar1 != 0);
+    iVar2 = CheckVolatile(gameTrackerX.drawTimerReturn);
+  } while (iVar2 != 0);
   do {
-    iVar1 = CheckVolatile(gameTrackerX.reqDisp);
-  } while (iVar1 != 0);
-                    /* WARNING: Subroutine does not return */
+    iVar2 = CheckVolatile(gameTrackerX.reqDisp);
+  } while (iVar2 != 0);
   DrawSync(0);
+  DrawSyncCallback(0);
+  VSyncCallback(0);
+  ResetPrimPool();
+  ppuVar1 = gameTrackerX.drawOT;
+  gameTrackerX.drawPage = 0;
+  PutDrawEnv((undefined4 *)&draw);
+  ClearOTagR(ppuVar1,0xc00);
+  DrawSync(0);
+  local_1d = 5;
+  local_19 = 0x28;
+  local_1c = 0x20;
+  local_1b = 0x20;
+  local_1a = 0x20;
+  local_18 = 0;
+  local_16 = 0xe;
+  local_14 = 0x1ff;
+  local_12 = 0xe;
+  local_10 = 0;
+  local_c = 0x1ff;
+  local_e = (short)fontTracker.font_ypos + -2;
+  local_a = local_e;
+  DrawPrim((int)auStack32);
+  FONT_Flush();
+  DrawOTag(ppuVar1);
+  DrawSync(0);
+  PutDispEnv((ushort *)gameTrackerX.disp);
+  return;
 }
 
 
@@ -1769,8 +1871,11 @@ void DEBUG_FatalError(char *fmt)
   char acStack264 [256];
   
   FONT_Flush();
-                    /* WARNING: Subroutine does not return */
   vsprintf(acStack264,fmt,local_res4);
+  FONT_Print(acStack264);
+  DEBUG_PageFlip();
+  trap(0x407);
+  return;
 }
 
 
@@ -1831,7 +1936,11 @@ void DEBUG_ProcessCheat(GameTracker *gameTracker)
 {
   uint uVar1;
   int iVar2;
-  undefined auStack80 [56];
+  undefined auStack80 [2];
+  undefined2 local_4e;
+  short local_48 [2];
+  short local_44;
+  MATRIX MStack56;
   
   uVar1 = gameTracker->controlCommand[0];
   iVar2 = 0;
@@ -1876,8 +1985,16 @@ void DEBUG_ProcessCheat(GameTracker *gameTracker)
     }
   }
   if (iVar2 != 0) {
-                    /* WARNING: Subroutine does not return */
     memset(auStack80,0,8);
+    memset(local_48,0,0x10);
+    local_4e = 0xff00;
+    MATH3D_SetUnityMatrix(&MStack56);
+    RotMatrixZ(theCamera.core.rotation.z + iVar2,(uint *)&MStack56);
+    ApplyMatrix(&MStack56,auStack80,local_48);
+    (gameTracker->playerInstance->position).x =
+         (gameTracker->playerInstance->position).x + local_48[0];
+    (gameTracker->playerInstance->position).y = (gameTracker->playerInstance->position).y + local_44
+    ;
   }
   return;
 }

@@ -222,8 +222,7 @@ int PLANAPI_AddNodeOfTypeToPool(_Position *pos,int type)
     pos = &local_28.collidePos;
     iVar1 = PLANCOLL_FindTerrainHitFinal(&local_28,(int *)local_18,0x100,-0x280,0,5);
     if (iVar1 == 0) {
-      iVar1 = PLANAPI_NumNodesInPool(pos);
-      return iVar1;
+      return 0;
     }
     nodeType = (ushort)(((uint)local_18[0] & 3) << 3) | (ushort)type & 7;
   }
@@ -428,7 +427,7 @@ void PLANAPI_InitPlanning(void *planningPool)
     iVar4 = iVar4 + 1;
   } while (iVar4 < 0x20);
   iVar4 = 9;
-  plVar2 = &constrictData;
+  plVar2 = &LONG_800d56f8;
   do {
     *plVar2 = 0;
     iVar4 = iVar4 + -1;
@@ -578,8 +577,134 @@ int PLANAPI_PassThroughHit(PlanningNode *node1,PlanningNode *node2)
 void PLANAPI_UpdatePlanningDatabase(GameTracker *gameTracker,_Instance *player)
 
 {
-                    /* WARNING: Subroutine does not return */
-  GetRCnt(0xf2000000);
+  byte *pbVar1;
+  byte bVar2;
+  ushort uVar3;
+  uint uVar4;
+  long lVar5;
+  int passThroughHit;
+  uint uVar6;
+  PlanningNode *node1;
+  PlanningNode *node2;
+  PlanningNode *startNode;
+  PlanningNode *planningPool;
+  int local_20;
+  
+  planningPool = (PlanningNode *)gameTracker->planningPool;
+  uVar4 = GetRCnt(0xf2000000);
+  gameTrackerX.plan_collide_override = '\x01';
+  uVar6 = gameTimer << 0x10;
+  bVar2 = *poolManagementData;
+  if (bVar2 == 1) {
+    PLAN_AddOrRemoveNodes(planningPool,player);
+    bVar2 = 2;
+  }
+  else {
+    if (bVar2 < 2) {
+      if (bVar2 == 0) {
+        PLAN_AddInitialNodes(planningPool,player);
+        *poolManagementData = 1;
+        goto LAB_80097dfc;
+      }
+    }
+    else {
+      if (bVar2 == 2) {
+        startNode = PLAN_FindNodeMostInNeedOfConnectivityExpansion(planningPool);
+        node2 = PLANPOOL_GetClosestUnexploredValidNeighbor(startNode,planningPool);
+        *poolManagementData = 1;
+        if ((startNode == (PlanningNode *)0x0) || (node2 == (PlanningNode *)0x0)) goto LAB_80097dfc;
+        lVar5 = MATH3D_LengthXYZ((int)(startNode->pos).x - (int)(node2->pos).x,
+                                 (int)(startNode->pos).y - (int)(node2->pos).y,
+                                 (int)(startNode->pos).z - (int)(node2->pos).z);
+        node1 = startNode;
+        if (lVar5 < 6000) {
+          uVar3 = PLANAPI_PairType(startNode,node2);
+          *(ushort *)(poolManagementData + 0x14) = uVar3;
+          if (uVar3 == 3) {
+            if ((startNode->nodeType >> 3 & 3) == 3) {
+              node1 = node2;
+              node2 = startNode;
+            }
+            passThroughHit = PLANAPI_PassThroughHit(node1,node2);
+            passThroughHit =
+                 PLANCOLL_DoesWaterPathUpExist
+                           ((_Position *)node1,(_Position *)node2,0,
+                            (_Position *)(poolManagementData + 0x16),passThroughHit);
+          }
+          else {
+            if (uVar3 < 4) {
+              if (uVar3 == 0) goto LAB_80097c5c;
+LAB_80097cc8:
+              passThroughHit = PLANAPI_PassThroughHit(startNode,node2);
+              local_20 = 0;
+            }
+            else {
+              if (uVar3 != 0x202) goto LAB_80097cc8;
+LAB_80097c5c:
+              passThroughHit = PLANAPI_PassThroughHit(startNode,node2);
+              local_20 = 0x100;
+            }
+            passThroughHit =
+                 PLANCOLL_DoesLOSExistFinal
+                           ((_Position *)startNode,(_Position *)node2,0,passThroughHit,local_20);
+          }
+          pbVar1 = poolManagementData;
+          if (passThroughHit != 0) {
+            *(PlanningNode **)(poolManagementData + 8) = node1;
+            *(PlanningNode **)(pbVar1 + 0xc) = node2;
+            *pbVar1 = 3;
+            goto LAB_80097dfc;
+          }
+        }
+        PLANPOOL_MarkTwoNodesAsNotConnected(node1,node2,planningPool);
+        goto LAB_80097dfc;
+      }
+      if (bVar2 == 3) {
+        node2 = *(PlanningNode **)(poolManagementData + 8);
+        uVar3 = *(ushort *)(poolManagementData + 0x14);
+        startNode = *(PlanningNode **)(poolManagementData + 0xc);
+        if ((uint)uVar3 == (uint)bVar2) {
+          passThroughHit = PLANAPI_PassThroughHit(node2,startNode);
+          passThroughHit =
+               PLANCOLL_DoesLOSExistFinal
+                         ((_Position *)startNode,(_Position *)(poolManagementData + 0x16),0,
+                          passThroughHit,0);
+        }
+        else {
+          if (uVar3 < 4) {
+            passThroughHit = 1;
+            if (uVar3 == 0) {
+LAB_80097d54:
+              passThroughHit = PLANAPI_PassThroughHit(node2,startNode);
+              passThroughHit =
+                   PLANCOLL_DoesLOSExistFinal
+                             ((_Position *)node2,(_Position *)startNode,0,passThroughHit,0x3c0);
+            }
+          }
+          else {
+            passThroughHit = 1;
+            if (uVar3 == 0x202) goto LAB_80097d54;
+          }
+        }
+        if (passThroughHit == 0) {
+          PLANPOOL_MarkTwoNodesAsNotConnected
+                    (*(PlanningNode **)(poolManagementData + 8),
+                     *(PlanningNode **)(poolManagementData + 0xc),planningPool);
+        }
+        else {
+          PLANPOOL_MarkTwoNodesAsConnected
+                    (*(PlanningNode **)(poolManagementData + 8),
+                     *(PlanningNode **)(poolManagementData + 0xc),planningPool);
+        }
+      }
+    }
+    bVar2 = 1;
+  }
+  *poolManagementData = bVar2;
+LAB_80097dfc:
+  PLANAPI_DoTimingCalcsAndDrawing(uVar4 & 0xffff | uVar6,planningPool);
+  gameTrackerX.plan_collide_override = '\0';
+  return;
 }
 
 
@@ -669,8 +794,8 @@ void PLANAPI_InitPlanMkrList(_StreamUnit *streamUnit)
   int distBefore;
   int distAfter;
   int iVar4;
-  int start;
-  int end;
+  int local_30;
+  int local_2c;
   _PlanCollideInfo _Stack40;
   
   p_Var3 = streamUnit->level->PlanMarkerList;
@@ -686,24 +811,24 @@ void PLANAPI_InitPlanMkrList(_StreamUnit *streamUnit)
           if ((uVar2 & 0x2000) == 0) {
             distBefore = 0x80;
             distAfter = -0x400;
-            start = 0;
-            end = 0;
+            local_30 = 0;
+            local_2c = 0;
           }
           else {
             distBefore = -0x100;
             distAfter = 0x280;
-            start = 5;
-            end = 5;
+            local_30 = 5;
+            local_2c = 5;
           }
         }
         else {
           distBefore = -0x100;
           distAfter = 0x280;
-          start = 1;
-          end = 4;
+          local_30 = 1;
+          local_2c = 4;
         }
         distBefore = PLANCOLL_FindTerrainHitFinal
-                               (&_Stack40,(int *)0x0,distBefore,distAfter,start,end);
+                               (&_Stack40,(int *)0x0,distBefore,distAfter,local_30,local_2c);
         if (distBefore != 0) {
           (p_Var3->pos).x = _Stack40.collidePos.x;
           (p_Var3->pos).y = _Stack40.collidePos.y;
@@ -883,38 +1008,65 @@ int PLANAPI_FindNodePositionInUnit(_StreamUnit *streamUnit,_Position *pos,int id
 	/* end block 2 */
 	// End Line: 1650
 
-/* WARNING: Removing unreachable block (ram,0x800981a4) */
-
 int PLANAPI_FindClosestNodePositionInUnit
               (_StreamUnit *streamUnit,_Position *target,_Position *pos,int offset,int max,int type,
               int distanceCheck)
 
 {
-  uint uVar1;
-  int iVar2;
-  _PlanMkr *p_Var3;
-  _PlanMkr *p_Var4;
+  short sVar1;
+  short sVar2;
+  uint uVar3;
+  long lVar4;
+  int iVar5;
+  int iVar6;
+  _PlanMkr *p_Var7;
+  _PlanMkr *p_Var8;
+  _PlanMkr *p_Var9;
+  int iVar10;
+  int iVar11;
   
-  p_Var3 = streamUnit->level->PlanMarkerList;
-  iVar2 = streamUnit->level->NumberOfPlanMarkers;
-  uVar1 = PLANAPI_GetFlags(type);
-  p_Var4 = p_Var3;
-  while( true ) {
-    if (iVar2 < 1) {
-      return 0;
+  p_Var9 = (_PlanMkr *)0x0;
+  iVar10 = 0x7fff;
+  p_Var7 = streamUnit->level->PlanMarkerList;
+  iVar6 = streamUnit->level->NumberOfPlanMarkers;
+  iVar11 = 0;
+  uVar3 = PLANAPI_GetFlags(type);
+  p_Var8 = p_Var7;
+  while (0 < iVar6) {
+    if (((int)p_Var7->id & uVar3) != 0) {
+      if (distanceCheck == 0) {
+        lVar4 = MATH3D_LengthXY((int)target->x - (int)(p_Var8->pos).x,
+                                (int)target->y - (int)(p_Var7->pos).y);
+      }
+      else {
+        lVar4 = MATH3D_LengthXYZ((int)target->x - (int)(p_Var8->pos).x,
+                                 (int)target->y - (int)(p_Var7->pos).y,
+                                 (int)target->z - (int)(p_Var7->pos).z);
+      }
+      if (lVar4 < max) {
+        iVar5 = lVar4 - offset;
+        if (iVar5 < 0) {
+          iVar5 = -iVar5;
+        }
+        if (iVar5 < iVar10) {
+          iVar11 = 1;
+          p_Var9 = p_Var7;
+          iVar10 = iVar5;
+        }
+      }
     }
-    if (((int)p_Var3->id & uVar1) != 0) break;
-    iVar2 = iVar2 + -1;
-    p_Var3 = p_Var3 + 1;
-    p_Var4 = p_Var4 + 1;
+    iVar6 = iVar6 + -1;
+    p_Var7 = p_Var7 + 1;
+    p_Var8 = p_Var8 + 1;
   }
-  if (distanceCheck != 0) {
-                    /* WARNING: Subroutine does not return */
-    MATH3D_LengthXYZ((int)target->x - (int)(p_Var4->pos).x,(int)target->y - (int)(p_Var3->pos).y,
-                     (int)target->z - (int)(p_Var3->pos).z);
+  if (iVar11 != 0) {
+    sVar1 = (p_Var9->pos).y;
+    sVar2 = (p_Var9->pos).z;
+    pos->x = (p_Var9->pos).x;
+    pos->y = sVar1;
+    pos->z = sVar2;
   }
-                    /* WARNING: Subroutine does not return */
-  MATH3D_LengthXY((int)target->x - (int)(p_Var4->pos).x,(int)target->y - (int)(p_Var3->pos).y);
+  return iVar11;
 }
 
 

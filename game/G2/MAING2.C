@@ -1,6 +1,5 @@
-//#include "THISDUST.H"
+#include "THISDUST.H"
 #include "MAING2.H"
-#include "TYPES.H"
 
 
 // decompiled code
@@ -17,7 +16,8 @@
 	/* end block 2 */
 	// End Line: 122
 
-G2Bool MainG2_InitEngine(void *appData,uint screenWidth,uint screenHeight,char *filesystemName)
+_G2Bool_Enum
+MainG2_InitEngine(void *appData,uint screenWidth,uint screenHeight,char *filesystemName)
 
 {
   return 1;

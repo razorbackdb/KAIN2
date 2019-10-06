@@ -14,8 +14,16 @@
 void PLAYER_TurnHead(_Instance *instance,short *rotx,short *rotz,GameTracker *gameTracker)
 
 {
-                    /* WARNING: Subroutine does not return */
-  INSTANCE_Query(instance,1);
+  ulong uVar1;
+  
+  uVar1 = INSTANCE_Query(instance,1);
+  if ((uVar1 & 1) == 0) {
+    MONAPI_TurnHead(instance,rotx,rotz,gameTracker);
+  }
+  else {
+    RAZIEL_TurnHead(instance,rotx,rotz,gameTracker);
+  }
+  return;
 }
 
 
@@ -32,8 +40,17 @@ void PLAYER_TurnHead(_Instance *instance,short *rotx,short *rotz,GameTracker *ga
 long PLAYER_OkToLookAround(_Instance *instance)
 
 {
-                    /* WARNING: Subroutine does not return */
-  INSTANCE_Query(instance,1);
+  ulong uVar1;
+  long lVar2;
+  
+  uVar1 = INSTANCE_Query(instance,1);
+  if ((uVar1 & 1) == 0) {
+    lVar2 = MONAPI_OkToLookAround(instance);
+  }
+  else {
+    lVar2 = RAZIEL_OkToLookAround(instance);
+  }
+  return lVar2;
 }
 
 
@@ -55,8 +72,16 @@ long PLAYER_OkToLookAround(_Instance *instance)
 void PLAYER_SetLookAround(_Instance *instance)
 
 {
-                    /* WARNING: Subroutine does not return */
-  INSTANCE_Query(instance,1);
+  ulong uVar1;
+  
+  uVar1 = INSTANCE_Query(instance,1);
+  if ((uVar1 & 1) == 0) {
+    MONAPI_SetLookAround(instance);
+  }
+  else {
+    RAZIEL_SetLookAround(instance);
+  }
+  return;
 }
 
 
@@ -73,8 +98,16 @@ void PLAYER_SetLookAround(_Instance *instance)
 void PLAYER_ReSetLookAround(_Instance *instance)
 
 {
-                    /* WARNING: Subroutine does not return */
-  INSTANCE_Query(instance,1);
+  ulong uVar1;
+  
+  uVar1 = INSTANCE_Query(instance,1);
+  if ((uVar1 & 1) == 0) {
+    MONAPI_ResetLookAround(instance);
+  }
+  else {
+    RAZIEL_ResetLookAround(instance);
+  }
+  return;
 }
 
 

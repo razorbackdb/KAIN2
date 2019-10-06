@@ -55,8 +55,10 @@ int menu_data_size(void)
 void menu_initialize(menu_t *menu,void *opaque)
 
 {
-                    /* WARNING: Subroutine does not return */
   memset(menu,0,0x388);
+  menu->nmenus = -1;
+  menu->opaque = opaque;
+  return;
 }
 
 
@@ -248,17 +250,21 @@ void menu_item_flags(menu_t *menu,TDRFuncPtr_menu_item_flags1fn fn,long paramete
 
 {
   int iVar1;
-  menu_item_t *pmVar2;
+  size_t sVar2;
+  menu_item_t *pmVar3;
   
-  pmVar2 = menu->items + menu->nitems;
+  pmVar3 = menu->items + menu->nitems;
   menu->nitems = menu->nitems + 1;
-  *(TDRFuncPtr_menu_item_flags1fn *)&pmVar2->fn = fn;
-  pmVar2->parameter = parameter;
+  *(TDRFuncPtr_menu_item_flags1fn *)&pmVar3->fn = fn;
+  pmVar3->parameter = parameter;
   iVar1 = menu->nbytes;
-  pmVar2->flags = flags;
-  pmVar2->text = menu->bytes + iVar1;
-                    /* WARNING: Subroutine does not return */
+  pmVar3->flags = flags;
+  pmVar3->text = menu->bytes + iVar1;
   vsprintf(menu->bytes + iVar1,format,&stack0x00000014);
+  iVar1 = menu->nbytes;
+  sVar2 = strlen(pmVar3->text);
+  menu->nbytes = iVar1 + 1 + sVar2;
+  return;
 }
 
 
@@ -299,20 +305,25 @@ void menu_item(menu_t *menu,TDRFuncPtr_menu_item1fn fn,long parameter,char *form
 
 {
   int iVar1;
-  menu_item_t *pmVar2;
+  size_t sVar2;
+  menu_item_t *pmVar3;
   
-  pmVar2 = menu->items + menu->nitems;
+  pmVar3 = menu->items + menu->nitems;
   menu->nitems = menu->nitems + 1;
-  *(TDRFuncPtr_menu_item1fn *)&pmVar2->fn = fn;
-  pmVar2->parameter = parameter;
+  *(TDRFuncPtr_menu_item1fn *)&pmVar3->fn = fn;
+  pmVar3->parameter = parameter;
   iVar1 = menu->nbytes;
-  pmVar2->flags = 0;
-  pmVar2->text = menu->bytes + iVar1;
-  if (format != (char *)0x0) {
-                    /* WARNING: Subroutine does not return */
-    vsprintf(menu->bytes + iVar1,format,&stack0x00000010);
+  pmVar3->flags = 0;
+  pmVar3->text = menu->bytes + iVar1;
+  if (format == (char *)0x0) {
+    pmVar3->text = (char *)0x0;
   }
-  pmVar2->text = (char *)0x0;
+  else {
+    vsprintf(menu->bytes + iVar1,format,&stack0x00000010);
+    iVar1 = menu->nbytes;
+    sVar2 = strlen(pmVar3->text);
+    menu->nbytes = iVar1 + 1 + sVar2;
+  }
   return;
 }
 
@@ -389,16 +400,26 @@ void DisplayHintBox(int len,int y)
 
 {
   short x1;
-  int x2;
-  int y3;
+  int y2;
+  int x3;
+  int iVar1;
   
-  x2 = 0xfb - (len >> 1);
-  y3 = y + 0xd;
-  x1 = (short)x2;
-                    /* WARNING: Subroutine does not return */
-  DRAW_TranslucentQuad
-            (x1 + -0xe,(short)(y + -1 + y3 >> 1),x1,(short)y3,x2,y + -1,(len >> 1) + 0x105,y3,0,0,0,
-             0,gameTrackerX.primPool,gameTrackerX.drawOT + 1);
+  iVar1 = 0;
+  len = len >> 1;
+  x3 = len + 0x105;
+  y2 = y + -1;
+  y = y + 0xd;
+  do {
+    x1 = (short)(0xfb - len);
+    DRAW_TranslucentQuad
+              (x1 + -0xe,(short)(y2 + y >> 1),x1,(short)y,0xfb - len,y2,x3,y,0,0,0,0,
+               gameTrackerX.primPool,gameTrackerX.drawOT + 1);
+    iVar1 = iVar1 + 1;
+    DRAW_TranslucentQuad
+              (x1,(short)y2,(short)x3,(short)y,x3,y2,len + 0x113,y2 + y >> 1,0,0,0,0,
+               gameTrackerX.primPool,gameTrackerX.drawOT + 1);
+  } while (iVar1 < 2);
+  return;
 }
 
 
@@ -446,36 +467,55 @@ void DisplayMenuBox(int x0,int x1,int y0,int y1)
 
 {
   short y0_00;
+  int iVar1;
+  _PrimPool *primPool;
   int y2;
-  int *piVar1;
-  int iVar2;
+  int *piVar2;
   int iVar3;
   int iVar4;
+  int *piVar5;
+  int iVar6;
+  ulong **ot;
+  int iVar7;
+  int iVar8;
   
-  iVar4 = 0;
-  iVar2 = x0 + -0xc;
+  primPool = gameTrackerX.primPool;
+  iVar8 = 0;
+  iVar3 = x0 + -0xc;
+  iVar4 = x1 + 0xc;
   y2 = y0 + -5;
   y0_00 = (short)y1 + 5;
+  ot = gameTrackerX.drawOT + 1;
   if (y1 - y0 < 0x50) {
-    piVar1 = &DAT_800d0c70;
+    piVar2 = &DAT_800d0c70;
     do {
-      piVar1 = piVar1 + 1;
-      iVar4 = iVar4 + 1;
-    } while (y1 - y0 < *piVar1 << 1);
+      piVar2 = piVar2 + 1;
+      iVar8 = iVar8 + 1;
+    } while (y1 - y0 < *piVar2 << 1);
   }
-  iVar3 = iVar4 + 1;
-  if (iVar4 < 0xf) {
-                    /* WARNING: Subroutine does not return */
+  iVar7 = 0;
+  do {
+    iVar1 = iVar8;
+    while (iVar1 < 0xf) {
+      iVar6 = iVar1 + 1;
+      piVar2 = &DAT_800d0c70 + iVar1;
+      piVar5 = &DAT_800d0c70 + iVar6;
+      DRAW_TranslucentQuad
+                ((short)(iVar3 + iVar1),y0_00 - (short)*piVar2,(short)iVar3 + (short)iVar6,
+                 y0_00 - (short)*piVar5,iVar3 + iVar1,y2 + *piVar2,iVar3 + iVar6,y2 + *piVar5,0,0,0,
+                 0,primPool,ot);
+      DRAW_TranslucentQuad
+                ((short)(iVar4 - iVar1),y0_00 - (short)*piVar2,(short)iVar4 - (short)iVar6,
+                 y0_00 - (short)*piVar5,iVar4 - iVar1,y2 + *piVar2,iVar4 - iVar6,y2 + *piVar5,0,0,0,
+                 0,primPool,ot);
+      iVar1 = iVar6;
+    }
+    iVar7 = iVar7 + 1;
     DRAW_TranslucentQuad
-              ((short)(iVar2 + iVar4),y0_00 - (short)(&DAT_800d0c70)[iVar4],
-               (short)iVar2 + (short)iVar3,y0_00 - (short)(&DAT_800d0c70)[iVar3],iVar2 + iVar4,
-               y2 + (&DAT_800d0c70)[iVar4],iVar2 + iVar3,y2 + (&DAT_800d0c70)[iVar3],0,0,0,0,
-               gameTrackerX.primPool,gameTrackerX.drawOT + 1);
-  }
-                    /* WARNING: Subroutine does not return */
-  DRAW_TranslucentQuad
-            ((short)(x0 + 3),y0_00,(short)x1 + -3,y0_00,x0 + 3,y2,x1 + -3,y2,0,0,0,0,
-             gameTrackerX.primPool,gameTrackerX.drawOT + 1);
+              ((short)(x0 + 3),y0_00,(short)iVar4 + -0xf,y0_00,x0 + 3,y2,x1 + -3,y2,0,0,0,0,primPool
+               ,ot);
+  } while (iVar7 < 2);
+  return;
 }
 
 
@@ -558,8 +598,136 @@ int menu_draw_item(menu_t *menu,int ypos,int xadj,int yadj,char *text,int color,
                   Extents2d *e)
 
 {
-                    /* WARNING: Subroutine does not return */
-  strlen(text);
+  int *piVar1;
+  size_t sVar2;
+  char *__src;
+  char *pcVar3;
+  char *pcVar4;
+  char *pcVar5;
+  int iVar6;
+  int xpos;
+  int iVar7;
+  int xpos_00;
+  int ypos_00;
+  char acStack320 [256];
+  int *local_40;
+  int local_3c;
+  int local_38;
+  int local_34;
+  int local_30;
+  
+  local_3c = 0;
+  piVar1 = &menu->nmenus + menu->nmenus * 9;
+  local_40 = piVar1 + -4;
+  local_38 = 1;
+  if (((flags & 1U) == 0) && (local_38 = 0, (flags & 2U) == 0)) {
+    local_38 = piVar1[1];
+  }
+  if (ypos == 0) {
+    ypos = piVar1[-3];
+  }
+  ypos = ypos + yadj;
+  sVar2 = strlen(text);
+  iVar7 = 1;
+  xpos = 0;
+  __src = text;
+  if (0 < (int)sVar2) {
+    do {
+      if (*__src == '\t') {
+        iVar7 = iVar7 + 1;
+      }
+      xpos = xpos + 1;
+      __src = text + xpos;
+    } while (xpos < (int)sVar2);
+  }
+  iVar7 = local_40[4] / iVar7;
+  if (local_40[5] == 0) {
+    local_34 = *local_40 + xadj;
+  }
+  else {
+    local_34 = (*local_40 + xadj) - (local_40[4] >> 1);
+  }
+  __src = strtok(text,"\t");
+  if (__src != (char *)0x0) {
+    local_30 = 0;
+    do {
+      xpos = local_34 + xadj + local_30;
+      if (local_38 != 0) {
+        xpos = xpos + (iVar7 >> 1);
+      }
+      if (ypos < e->ymin) {
+        e->ymin = ypos;
+      }
+      strcpy(acStack320,__src);
+      __src = acStack320;
+      ypos_00 = ypos;
+      do {
+        pcVar3 = strchr(__src,10);
+        if (pcVar3 != (char *)0x0) {
+          *pcVar3 = '\0';
+        }
+        while (__src != (char *)0x0) {
+          pcVar4 = strchr(__src,0x20);
+          if (pcVar4 != (char *)0x0) {
+            do {
+              pcVar5 = strchr(pcVar4 + 1,0x20);
+              if (pcVar5 != (char *)0x0) {
+                *pcVar5 = '\0';
+              }
+              iVar6 = menu_text_width(__src);
+              if (pcVar5 != (char *)0x0) {
+                *pcVar5 = ' ';
+              }
+            } while ((iVar6 <= iVar7) && (pcVar4 = pcVar5, pcVar5 != (char *)0x0));
+            if (pcVar4 != (char *)0x0) {
+              *pcVar4 = '\0';
+            }
+          }
+          if (local_38 == 0) {
+            iVar6 = menu_text_width(__src);
+            menu_print(xpos,ypos_00,__src,color);
+            if (xpos < e->xmin) {
+              e->xmin = xpos;
+            }
+            xpos_00 = e->xmax;
+          }
+          else {
+            iVar6 = menu_text_width(__src);
+            iVar6 = iVar6 >> 1;
+            xpos_00 = xpos - iVar6;
+            menu_print(xpos_00,ypos_00,__src,color);
+            if (xpos_00 < e->xmin) {
+              e->xmin = xpos_00;
+            }
+            xpos_00 = e->xmax;
+          }
+          if (xpos_00 < xpos + iVar6) {
+            e->xmax = xpos + iVar6;
+          }
+          ypos_00 = ypos_00 + local_40[2];
+          if (pcVar4 == (char *)0x0) break;
+          __src = pcVar4 + 1;
+          *pcVar4 = ' ';
+        }
+        if (pcVar3 == (char *)0x0) break;
+        __src = pcVar3 + 1;
+        *pcVar3 = '\n';
+      } while (__src != (char *)0x0);
+      local_30 = local_30 + iVar7;
+      __src = strtok((char *)0x0,"\t");
+      if (local_3c < ypos_00) {
+        local_3c = ypos_00;
+      }
+    } while (__src != (char *)0x0);
+  }
+  if (e->ymax < local_3c) {
+    e->ymax = local_3c;
+  }
+  local_3c = local_3c + local_40[3];
+  if ((flags & 4U) != 0) {
+    local_3c = local_3c + (local_40[2] >> 1);
+  }
+  return local_3c;
 }
 
 
@@ -615,8 +783,8 @@ void menu_draw(menu_t *menu)
   Extents2d local_30;
   
   local_30.xmin = 0x7fffffff;
-  local_30.xmax = PTR_DAT_800d0cb8;
-  local_30.ymin = DAT_800d0cbc;
+  local_30.xmax = &DAT_80000000;
+  local_30.ymin = 0x7fffffff;
   local_30.ymax = &DAT_80000000;
   iVar2 = menu->nmenus;
   iVar6 = (&menu->nmenus + iVar2 * 9)[-5];
@@ -676,65 +844,51 @@ void menu_draw(menu_t *menu)
 void menu_run(menu_t *menu)
 
 {
-  undefined ctrl;
+  menu_ctrl_t mVar1;
   menu_sound_t sound;
-  int iVar1;
-  int *piVar2;
-  void *gt;
-  long menuparam;
+  _func_64 *p_Var2;
   int iVar3;
+  int *piVar4;
+  int iVar5;
   
-  _ctrl = menu_get_ctrl(menu->opaque);
-  ctrl = (undefined)_ctrl;
-  piVar2 = &menu->nmenus + menu->nmenus * 9;
-  iVar3 = piVar2[-5];
-  if ((-1 < iVar3) && (_ctrl != menu_ctrl_none)) {
+  mVar1 = menu_get_ctrl(menu->opaque);
+  piVar4 = &menu->nmenus + menu->nmenus * 9;
+  iVar5 = piVar4[-5];
+  if ((-1 < iVar5) && (mVar1 != menu_ctrl_none)) {
     menudefs_reset_hack_attract_mode();
-    gt = menu->opaque;
-    menuparam = menu->items[iVar3].parameter;
-    sound = (*menu->items[iVar3].fn)();
+    sound = (*menu->items[iVar5].fn)(menu->opaque,menu->items[iVar5].parameter,mVar1);
     if (sound == menu_sound_none) {
-      if (_ctrl == menu_ctrl_down) {
-        iVar3 = (iVar3 + 1) % menu->nitems;
-        if (menu->items[iVar3].fn == (_func_64 *)0x0) {
-          do {
-            iVar3 = (iVar3 + 1) % menu->nitems;
-          } while (menu->items[iVar3].fn == (_func_64 *)0x0);
-          FUN_800b70cc(gt,menuparam,ctrl);
-          return;
+      if (mVar1 == menu_ctrl_down) {
+        iVar5 = (iVar5 + 1) % menu->nitems;
+        p_Var2 = menu->items[iVar5].fn;
+        while (p_Var2 == (_func_64 *)0x0) {
+          iVar5 = (iVar5 + 1) % menu->nitems;
+          p_Var2 = menu->items[iVar5].fn;
         }
       }
       else {
-        if (_ctrl < menu_ctrl_left) {
-          if (_ctrl != menu_ctrl_up) {
-            FUN_800b70cc(gt,menuparam,ctrl);
-            return;
-          }
-          iVar1 = menu->nitems;
-          iVar3 = (iVar3 + iVar1 + -1) % iVar1;
-          if (menu->items[iVar3].fn == (_func_64 *)0x0) {
-            do {
-              iVar3 = (iVar3 + iVar1 + -1) % iVar1;
-            } while (menu->items[iVar3].fn == (_func_64 *)0x0);
-            FUN_800b70cc(gt,menuparam,ctrl);
-            return;
+        if (mVar1 < menu_ctrl_left) {
+          if (mVar1 == menu_ctrl_up) {
+            iVar3 = menu->nitems;
+            iVar5 = (iVar5 + iVar3 + -1) % iVar3;
+            p_Var2 = menu->items[iVar5].fn;
+            while (p_Var2 == (_func_64 *)0x0) {
+              iVar5 = (iVar5 + iVar3 + -1) % iVar3;
+              p_Var2 = menu->items[iVar5].fn;
+            }
           }
         }
         else {
-          if (_ctrl != menu_ctrl_cancel) {
-            FUN_800b70cc(gt,menuparam,ctrl);
-            return;
-          }
-          if (1 < menu->nmenus) {
+          if ((mVar1 == menu_ctrl_cancel) && (1 < menu->nmenus)) {
             menu_sound(menu_sound_pop);
             menu_pop(menu);
           }
         }
       }
-      if (iVar3 != piVar2[-5]) {
+      if (iVar5 != piVar4[-5]) {
         menu_sound(menu_sound_select);
       }
-      piVar2[-5] = iVar3;
+      piVar4[-5] = iVar5;
     }
     else {
       menu_sound(sound);

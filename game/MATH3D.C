@@ -106,12 +106,10 @@ void MATH3D_Sort3VectorCoords(long *a,long *b,long *c)
 long MATH3D_LengthXYZ(long x,long y,long z)
 
 {
-  short sVar1;
-  long lVar2;
-  undefined2 extraout_var;
+  int iVar1;
+  int iVar2;
   int iVar3;
   int iVar4;
-  int iVar5;
   
   if (x < 0) {
     x = -x;
@@ -122,32 +120,23 @@ long MATH3D_LengthXYZ(long x,long y,long z)
   if (z < 0) {
     z = -z;
   }
-  iVar3 = y;
+  iVar1 = x;
   if (x < y) {
-    if (z < x) {
-      lVar2 = MATH3D_LengthXYZ(z,y,y);
-      return lVar2;
-    }
-    iVar4 = x;
-    iVar5 = z;
-    if (z < y) {
-      sVar1 = MATH3D_FastAtan2(x,z);
-      return CONCAT22(extraout_var,sVar1);
-    }
+    iVar1 = y;
+    y = x;
   }
-  else {
-    iVar4 = z;
-    iVar5 = x;
-    if ((y <= z) && (iVar4 = y, iVar3 = x, iVar5 = z, z < x)) {
-      iVar3 = z;
-      iVar5 = x;
-    }
+  iVar2 = z;
+  iVar3 = y;
+  iVar4 = iVar1;
+  if ((y <= z) && (iVar2 = y, iVar3 = iVar1, iVar4 = z, z < iVar1)) {
+    iVar3 = z;
+    iVar4 = iVar1;
   }
-  iVar3 = iVar5 * 0x1e + iVar3 * 0xc + iVar4 * 9;
-  if (iVar3 < 0) {
-    iVar3 = iVar3 + 0x1f;
+  iVar1 = iVar4 * 0x1e + iVar3 * 0xc + iVar2 * 9;
+  if (iVar1 < 0) {
+    iVar1 = iVar1 + 0x1f;
   }
-  return iVar3 >> 5;
+  return iVar1 >> 5;
 }
 
 
@@ -213,8 +202,15 @@ long MATH3D_LengthXY(long x,long y)
 void MATH3D_Normalize(_Normal *normal)
 
 {
-                    /* WARNING: Subroutine does not return */
-  MATH3D_LengthXYZ((int)normal->x << 2,(int)normal->y << 2,(int)normal->z << 2);
+  long lVar1;
+  
+  lVar1 = MATH3D_LengthXYZ((int)normal->x << 2,(int)normal->y << 2,(int)normal->z << 2);
+  if (lVar1 != 0) {
+    normal->x = (short)(((int)normal->x << 0xe) / lVar1);
+    normal->y = (short)(((int)normal->y << 0xe) / lVar1);
+    normal->z = (short)(((int)normal->z << 0xe) / lVar1);
+  }
+  return;
 }
 
 
@@ -345,63 +341,58 @@ short MATH3D_FastAtan2(long y,long x)
 long MATH3D_FastSqrt(long square)
 
 {
-  short sVar1;
+  int iVar1;
   int iVar2;
-  undefined2 extraout_var;
-  int iVar3;
-  uint uVar4;
-  int iVar5;
-  uint uVar6;
-  int iVar7;
-  uint uVar8;
+  uint uVar3;
+  int iVar4;
+  uint uVar5;
+  int iVar6;
+  uint uVar7;
   
-  iVar5 = 0x1f;
+  iVar4 = 0x1f;
   if (square == 0) {
     return 0;
   }
-  uVar4 = 0x80000000;
+  uVar3 = 0x80000000;
   if (-1 < square) {
     do {
-      uVar4 = (int)uVar4 >> 1;
-      iVar5 = iVar5 + -1;
-    } while ((uVar4 & square) == 0);
+      uVar3 = (int)uVar3 >> 1;
+      iVar4 = iVar4 + -1;
+    } while ((uVar3 & square) == 0);
   }
-  uVar6 = iVar5 >> 1;
-  uVar4 = 1 << (uVar6 + 6 & 0x1f);
-  iVar5 = 1 << ((uVar6 & 0xf) << 1);
-  uVar8 = uVar4;
-  iVar7 = iVar5;
-  iVar3 = square - iVar5;
-  while( true ) {
-    uVar6 = uVar6 - 1;
-    if (uVar6 == 0xffffffff) {
-      iVar5 = iVar5 << 0xc;
-      iVar2 = 0x1000;
-      iVar7 = iVar3 << 0xc;
-      while( true ) {
-        uVar4 = (int)uVar4 >> 1;
-        iVar2 = iVar2 >> 2;
-        if (uVar4 == 0) break;
-        iVar3 = iVar7 - (iVar5 + iVar2);
-        iVar5 = iVar5 >> 1;
-        if (-1 < iVar3) {
-          iVar5 = iVar5 + iVar2;
-          uVar8 = uVar8 | uVar4;
-          iVar7 = iVar3;
-        }
-      }
-      return uVar8;
+  uVar5 = iVar4 >> 1;
+  uVar3 = 1 << (uVar5 + 6 & 0x1f);
+  iVar4 = 1 << ((uVar5 & 0xf) << 1);
+  uVar7 = uVar3;
+  iVar6 = iVar4;
+  iVar2 = square - iVar4;
+  while (uVar5 = uVar5 - 1, uVar5 != 0xffffffff) {
+    iVar6 = iVar6 >> 2;
+    iVar1 = iVar2 - (iVar4 + iVar6);
+    uVar3 = (int)uVar3 >> 1;
+    iVar4 = iVar4 >> 1;
+    if (-1 < iVar1) {
+      iVar4 = iVar4 + iVar6;
+      uVar7 = uVar7 | uVar3;
+      iVar2 = iVar1;
     }
-    iVar7 = iVar7 >> 2;
-    iVar2 = iVar3 - (iVar5 + iVar7);
-    uVar4 = (int)uVar4 >> 1;
-    if (iVar2 < 0) break;
-    iVar5 = (iVar5 >> 1) + iVar7;
-    uVar8 = uVar8 | uVar4;
-    iVar3 = iVar2;
   }
-  sVar1 = MATH3D_AngleBetweenVectors((char)iVar3,(char)uVar4);
-  return CONCAT22(extraout_var,sVar1);
+  iVar4 = iVar4 << 0xc;
+  iVar1 = 0x1000;
+  iVar6 = iVar2 << 0xc;
+  while( true ) {
+    uVar3 = (int)uVar3 >> 1;
+    iVar1 = iVar1 >> 2;
+    if (uVar3 == 0) break;
+    iVar2 = iVar6 - (iVar4 + iVar1);
+    iVar4 = iVar4 >> 1;
+    if (-1 < iVar2) {
+      iVar4 = iVar4 + iVar1;
+      uVar7 = uVar7 | uVar3;
+      iVar6 = iVar2;
+    }
+  }
+  return uVar7;
 }
 
 
@@ -505,11 +496,12 @@ long MATH3D_DistanceBetweenPositions(_Position *pos1,_Position *pos2)
 
 {
   ulong square;
+  long lVar1;
   
   square = MATH3D_SquareLength((int)pos2->x - (int)pos1->x,(int)pos2->y - (int)pos1->y,
                                (int)pos2->z - (int)pos1->z);
-                    /* WARNING: Subroutine does not return */
-  MATH3D_FastSqrt0(square);
+  lVar1 = MATH3D_FastSqrt0(square);
+  return lVar1;
 }
 
 
@@ -535,30 +527,32 @@ long MATH3D_DistanceBetweenPositions(_Position *pos1,_Position *pos2)
 short MATH3D_AngleBetweenVectors(_SVector *vector1,_SVector *vector2)
 
 {
-  int iVar1;
-  int iVar2;
+  uint uVar1;
+  uint uVar2;
+  int iVar3;
   
-  iVar2 = (int)vector1->x * (int)vector2->x;
+  iVar3 = (int)vector1->x * (int)vector2->x;
   if ((int)vector1->x == (int)vector2->x) {
     if ((vector1->y == vector2->y) && (vector1->z == vector2->z)) {
       return 0;
     }
-    iVar2 = (int)vector1->x * (int)vector2->x;
+    iVar3 = (int)vector1->x * (int)vector2->x;
   }
-  iVar2 = iVar2 + (int)vector1->y * (int)vector2->y + (int)vector1->z * (int)vector2->z + 0x800 >>
+  uVar2 = iVar3 + (int)vector1->y * (int)vector2->y + (int)vector1->z * (int)vector2->z + 0x800 >>
           0xc;
-  if (iVar2 < 0x1001) {
-    iVar1 = iVar2 * iVar2;
-    if (-0x1001 < iVar2) goto LAB_80039f9c;
-    iVar1 = -0x1000;
+  if ((int)uVar2 < 0x1001) {
+    iVar3 = uVar2 * uVar2;
+    if (-0x1001 < (int)uVar2) goto LAB_80039f9c;
+    uVar2 = 0xfffff000;
   }
   else {
-    iVar1 = 0x1000;
+    uVar2 = 0x1000;
   }
-  iVar1 = iVar1 * iVar1;
+  iVar3 = uVar2 * uVar2;
 LAB_80039f9c:
-                    /* WARNING: Subroutine does not return */
-  MATH3D_FastSqrt0(0x1000000 - iVar1);
+  uVar1 = MATH3D_FastSqrt0(0x1000000 - iVar3);
+  iVar3 = ratan2(uVar1,uVar2);
+  return (short)iVar3;
 }
 
 
@@ -588,11 +582,27 @@ void MATH3D_RotMatAboutVec(_SVector *vec,MATRIX *mat,short angle)
 
 {
   ulong uVar1;
+  uint uVar2;
+  int iVar3;
+  ushort local_60;
+  undefined2 local_5e;
+  undefined2 local_5c;
+  uint auStack88 [8];
+  undefined4 auStack56 [8];
   
-  if (angle != 0) {
+  if ((int)angle != 0) {
     uVar1 = MATH3D_SquareLength(0,(int)vec->y,(int)vec->z);
-                    /* WARNING: Subroutine does not return */
-    MATH3D_FastSqrt0(uVar1 + 0x800);
+    uVar2 = MATH3D_FastSqrt0(uVar1 + 0x800);
+    iVar3 = ratan2((int)vec->y,(int)vec->z);
+    local_60 = -(short)iVar3;
+    iVar3 = ratan2((int)vec->x,uVar2);
+    local_5e = (undefined2)iVar3;
+    local_5c = 0;
+    RotMatrix(&local_60,auStack88);
+    TransposeMatrix(auStack88,auStack56);
+    MulMatrix2(auStack56,(uint *)mat);
+    RotMatrixZ((int)angle,(uint *)mat);
+    MulMatrix2(auStack88,(uint *)mat);
   }
   return;
 }
@@ -648,8 +658,32 @@ void MATH3D_SetUnityMatrix(MATRIX *mat)
 void AngleMoveToward(short *current_ptr,short destination,short step)
 
 {
-                    /* WARNING: Subroutine does not return */
-  AngleDiff(*current_ptr,destination);
+  ushort current;
+  short sVar1;
+  int iVar2;
+  int iVar3;
+  
+  current = *current_ptr;
+  sVar1 = AngleDiff(current,destination);
+  iVar3 = (int)sVar1;
+  if (iVar3 == 0) {
+LAB_8003a120:
+    *current_ptr = destination;
+    return;
+  }
+  iVar2 = iVar3;
+  if (iVar3 < 0) {
+    iVar2 = -iVar3;
+  }
+  if (iVar2 < step) goto LAB_8003a120;
+  if (iVar3 < 1) {
+    if (-1 < iVar3) goto LAB_8003a148;
+    step = -step;
+  }
+  current = current + step;
+LAB_8003a148:
+  *current_ptr = current & 0xfff;
+  return;
 }
 
 
@@ -713,8 +747,10 @@ short AngleDiff(short current,short destination)
 short MATH3D_AngleFromPosToPos(_Position *from,_Position *to)
 
 {
-                    /* WARNING: Subroutine does not return */
-  ratan2((int)from->y - (int)to->y,(int)from->x - (int)to->x);
+  int iVar1;
+  
+  iVar1 = ratan2((int)from->y - (int)to->y,(int)from->x - (int)to->x);
+  return (short)((short)iVar1 + 0xc00U & 0xfff);
 }
 
 
@@ -745,8 +781,11 @@ void MATH3D_ZYXtoXYZ(_Rotation *rot)
   _G2EulerAngles_Type local_10;
   
   RotMatrixZYX((ushort *)rot,(uint *)&_Stack48);
-                    /* WARNING: Subroutine does not return */
   G2EulerAngles_FromMatrix(&local_10,&_Stack48,0x15);
+  rot->x = local_10.x;
+  rot->y = local_10.y;
+  rot->z = local_10.z;
+  return;
 }
 
 
@@ -772,11 +811,13 @@ short MATH3D_ElevationFromPosToPos(_Position *from,_Position *to)
 {
   int iVar1;
   int iVar2;
+  long lVar3;
   
   iVar1 = (int)from->x - (int)to->x;
   iVar2 = (int)from->y - (int)to->y;
-                    /* WARNING: Subroutine does not return */
-  MATH3D_FastSqrt0(iVar1 * iVar1 + iVar2 * iVar2);
+  lVar3 = MATH3D_FastSqrt0(iVar1 * iVar1 + iVar2 * iVar2);
+  iVar1 = ratan2((int)to->z - (int)from->z,(int)(short)lVar3);
+  return (short)(-(short)iVar1 & 0xfff);
 }
 
 
@@ -797,9 +838,10 @@ void MATH3D_RotationFromPosToPos(_Position *from,_Position *to,_Rotation *rot)
   
   sVar1 = MATH3D_ElevationFromPosToPos(from,to);
   rot->x = sVar1;
-                    /* WARNING: Subroutine does not return */
   rot->y = 0;
-  MATH3D_AngleFromPosToPos(from,to);
+  sVar1 = MATH3D_AngleFromPosToPos(from,to);
+  rot->z = sVar1;
+  return;
 }
 
 
@@ -878,49 +920,66 @@ void MATH3D_RotateAxisToVector(MATRIX *dest,MATRIX *src,_SVector *vec,MATH3D_AXI
   short *psVar1;
   int iVar2;
   int iVar3;
+  ulong square;
   int iVar4;
   int iVar5;
-  ulong square;
-  int iVar6;
-  int iVar7;
+  long lVar6;
+  uint uVar7;
+  ushort auStack64 [16];
+  short local_20;
+  short local_1e;
+  short local_1c;
+  undefined2 local_1a;
   
   if (axis < AXIS_NEG_X) {
     psVar1 = src->m + axis;
-    iVar5 = (int)*psVar1;
-    iVar6 = (int)psVar1[3];
-    iVar7 = (int)psVar1[6];
+    iVar3 = (int)*psVar1;
+    iVar4 = (int)psVar1[3];
+    iVar5 = (int)psVar1[6];
   }
   else {
     psVar1 = src->m + axis + ~AXIS_Z;
-    iVar5 = -(int)*psVar1;
-    iVar6 = -(int)psVar1[3];
-    iVar7 = -(int)psVar1[6];
+    iVar3 = -(int)*psVar1;
+    iVar4 = -(int)psVar1[3];
+    iVar5 = -(int)psVar1[6];
   }
-  iVar2 = iVar6 * vec->z - iVar7 * vec->y;
+  iVar2 = iVar4 * vec->z - iVar5 * vec->y;
   if (iVar2 < 0) {
     iVar2 = iVar2 + 0xfff;
   }
-  iVar3 = iVar7 * vec->x - iVar5 * vec->z;
+  local_20 = (short)(iVar2 >> 0xc);
+  iVar2 = iVar5 * vec->x - iVar3 * vec->z;
+  if (iVar2 < 0) {
+    iVar2 = iVar2 + 0xfff;
+  }
+  local_1e = (short)(iVar2 >> 0xc);
+  iVar2 = iVar3 * vec->y - iVar4 * vec->x;
+  if (iVar2 < 0) {
+    iVar2 = iVar2 + 0xfff;
+  }
+  local_1c = (short)(iVar2 >> 0xc);
+  iVar3 = iVar3 * vec->x + iVar4 * vec->y + iVar5 * vec->z;
   if (iVar3 < 0) {
     iVar3 = iVar3 + 0xfff;
   }
-  iVar4 = iVar5 * vec->y - iVar6 * vec->x;
-  if (iVar4 < 0) {
-    iVar4 = iVar4 + 0xfff;
-  }
-  iVar5 = iVar5 * vec->x + iVar6 * vec->y + iVar7 * vec->z;
-  if (iVar5 < 0) {
-    iVar5 = iVar5 + 0xfff;
-  }
-  iVar5 = MATH3D_racos_S(iVar5 >> 0xc);
-  square = MATH3D_SquareLength((int)(short)(iVar2 >> 0xc),(int)(short)(iVar3 >> 0xc),
-                               (int)(short)(iVar4 >> 0xc));
+  iVar3 = MATH3D_racos_S(iVar3 >> 0xc);
+  uVar7 = ((iVar3 << 0x10) >> 0x10) - ((iVar3 << 0x10) >> 0x1f) >> 1;
+  square = MATH3D_SquareLength((int)local_20,(int)local_1e,(int)local_1c);
   if ((int)square < 1) {
-                    /* WARNING: Subroutine does not return */
-    rsin(((iVar5 << 0x10) >> 0x10) - ((iVar5 << 0x10) >> 0x1f) >> 1);
+    lVar6 = 0x1000;
   }
-                    /* WARNING: Subroutine does not return */
-  MATH3D_FastSqrt0(square);
+  else {
+    lVar6 = MATH3D_FastSqrt0(square);
+  }
+  iVar3 = rsin(uVar7);
+  local_20 = (short)((local_20 * iVar3) / lVar6);
+  local_1e = (short)((local_1e * iVar3) / lVar6);
+  local_1c = (short)((local_1c * iVar3) / lVar6);
+  iVar3 = rcos(uVar7);
+  local_1a = (undefined2)iVar3;
+  G2Quat_ToMatrix_S(&local_20,(short *)auStack64);
+  MulMatrix0((undefined4 *)src,auStack64,(uint *)dest);
+  return;
 }
 
 
@@ -954,14 +1013,31 @@ void MATH3D_RotateAxisToVector(MATRIX *dest,MATRIX *src,_SVector *vec,MATH3D_AXI
 int MATH3D_ConeDetect(_SVector *pos,int arc,int elevation)
 
 {
+  short sVar1;
+  short sVar2;
+  long x;
   int y;
+  int x_00;
   
-  y = (int)pos->x;
-  if (y < 0) {
-    y = -y;
+  x_00 = (int)pos->x;
+  sVar2 = pos->y;
+  y = x_00;
+  if (x_00 < 0) {
+    y = -x_00;
   }
-                    /* WARNING: Subroutine does not return */
-  MATH3D_FastAtan2(y,-(int)pos->y);
+  sVar1 = MATH3D_FastAtan2(y,-(int)sVar2);
+  if (sVar1 < arc) {
+    x = MATH3D_LengthXY(x_00,-(int)sVar2);
+    y = (int)pos->z;
+    if (y < 0) {
+      y = -y;
+    }
+    sVar2 = MATH3D_FastAtan2(y,x);
+    if (sVar2 < elevation) {
+      return 1;
+    }
+  }
+  return 0;
 }
 
 

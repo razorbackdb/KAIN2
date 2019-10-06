@@ -346,12 +346,31 @@ PlanningNode * PLANPOOL_GetNodeWithID(PlanningNode *planningPool,short type,shor
 PlanningNode * PLANPOOL_GetNodeByPosition(_Position *currentPos,PlanningNode *planningPool)
 
 {
+  long lVar1;
+  int iVar2;
+  int iVar3;
+  PlanningNode *pPVar4;
+  
+  iVar3 = 0;
+  pPVar4 = (PlanningNode *)0x0;
   if (*(char *)(poolManagementData + 1) != '\0') {
-                    /* WARNING: Subroutine does not return */
-    MATH3D_LengthXY((int)currentPos->x - (int)(planningPool->pos).x,
-                    (int)currentPos->y - (int)(planningPool->pos).y);
+    do {
+      lVar1 = MATH3D_LengthXY((int)currentPos->x - (int)(planningPool->pos).x,
+                              (int)currentPos->y - (int)(planningPool->pos).y);
+      if (lVar1 < 0xb) {
+        iVar2 = (int)currentPos->z - (int)(planningPool->pos).z;
+        if (iVar2 < 0) {
+          iVar2 = -iVar2;
+        }
+        if (iVar2 != -1) {
+          pPVar4 = planningPool;
+        }
+      }
+      iVar3 = iVar3 + 1;
+      planningPool = planningPool + 1;
+    } while (iVar3 < (int)(uint)*(byte *)(poolManagementData + 1));
   }
-  return (PlanningNode *)0x0;
+  return pPVar4;
 }
 
 
@@ -380,17 +399,34 @@ PlanningNode * PLANPOOL_GetNodeByPosition(_Position *currentPos,PlanningNode *pl
 PlanningNode * PLANPOOL_GetClosestNode(_Position *pos,PlanningNode *planningPool,char distanceType)
 
 {
-  if (*(char *)(poolManagementData + 1) == '\0') {
-    return (PlanningNode *)0x0;
+  long lVar1;
+  int iVar2;
+  PlanningNode *pPVar3;
+  int iVar4;
+  
+  iVar4 = 0x7fffffff;
+  iVar2 = 0;
+  pPVar3 = (PlanningNode *)0x0;
+  if (*(char *)(poolManagementData + 1) != '\0') {
+    do {
+      if (distanceType == '\0') {
+        lVar1 = MATH3D_LengthXY((int)pos->x - (int)(planningPool->pos).x,
+                                (int)pos->y - (int)(planningPool->pos).y);
+      }
+      else {
+        lVar1 = MATH3D_LengthXYZ((int)pos->x - (int)(planningPool->pos).x,
+                                 (int)pos->y - (int)(planningPool->pos).y,
+                                 (int)pos->z - (int)(planningPool->pos).z);
+      }
+      if (lVar1 < iVar4) {
+        pPVar3 = planningPool;
+        iVar4 = lVar1;
+      }
+      iVar2 = iVar2 + 1;
+      planningPool = planningPool + 1;
+    } while (iVar2 < (int)(uint)*(byte *)(poolManagementData + 1));
   }
-  if (distanceType == '\0') {
-                    /* WARNING: Subroutine does not return */
-    MATH3D_LengthXY((int)pos->x - (int)(planningPool->pos).x,
-                    (int)pos->y - (int)(planningPool->pos).y);
-  }
-                    /* WARNING: Subroutine does not return */
-  MATH3D_LengthXYZ((int)pos->x - (int)(planningPool->pos).x,(int)pos->y - (int)(planningPool->pos).y
-                   ,(int)pos->z - (int)(planningPool->pos).z);
+  return pPVar3;
 }
 
 
@@ -425,69 +461,70 @@ PlanningNode * PLANPOOL_GetClosestNode(_Position *pos,PlanningNode *planningPool
 int PLANPOOL_AppropriatePair(PlanningNode *node1,PlanningNode *node2)
 
 {
-  uint uVar1;
-  int iVar2;
-  uint uVar3;
-  int iVar4;
-  PlanningNode *pPVar5;
-  uint uVar6;
+  long lVar1;
+  uint uVar2;
+  int iVar3;
+  uint uVar4;
+  int iVar5;
+  PlanningNode *pPVar6;
   uint uVar7;
   uint uVar8;
+  uint uVar9;
   
-  uVar8 = (uint)(node1->nodeType >> 3) & 3;
-  uVar6 = (uint)(node2->nodeType >> 3) & 3;
-  uVar3 = (uint)node1->nodeType & 7;
-  uVar7 = (uint)node2->nodeType & 7;
-  pPVar5 = node2;
-  if (uVar6 < uVar8) {
-    uVar8 = uVar8 ^ uVar6;
-    uVar6 = uVar6 ^ uVar8;
-    uVar8 = uVar8 ^ uVar6;
-    pPVar5 = node1;
+  uVar9 = (uint)(node1->nodeType >> 3) & 3;
+  uVar7 = (uint)(node2->nodeType >> 3) & 3;
+  uVar4 = (uint)node1->nodeType & 7;
+  uVar8 = (uint)node2->nodeType & 7;
+  pPVar6 = node2;
+  if (uVar7 < uVar9) {
+    uVar9 = uVar9 ^ uVar7;
+    uVar7 = uVar7 ^ uVar9;
+    uVar9 = uVar9 ^ uVar7;
+    pPVar6 = node1;
     node1 = node2;
   }
-  uVar1 = uVar3 ^ uVar7;
-  if (uVar7 < uVar3) {
-    uVar7 = uVar7 ^ uVar1;
-    uVar3 = uVar1 ^ uVar7;
+  uVar2 = uVar4 ^ uVar8;
+  if (uVar8 < uVar4) {
+    uVar8 = uVar8 ^ uVar2;
+    uVar4 = uVar2 ^ uVar8;
   }
-  uVar6 = uVar6 | uVar8 << 8;
-  uVar7 = uVar7 | uVar3 << 8;
-  if (uVar6 == 3) {
-    if (uVar7 != 0x404) {
+  uVar7 = uVar7 | uVar9 << 8;
+  uVar8 = uVar8 | uVar4 << 8;
+  if (uVar7 == 3) {
+    if (uVar8 != 0x404) {
       return 0;
     }
     return 1;
   }
-  if (uVar6 < 4) {
-    if (uVar6 != 1) {
-      if (uVar6 == 2) {
+  if (uVar7 < 4) {
+    if (uVar7 != 1) {
+      if (uVar7 == 2) {
         return 0;
       }
       return 1;
     }
   }
   else {
-    if (uVar6 == 0x103) {
+    if (uVar7 == 0x103) {
       return 0;
     }
-    if (0x103 < uVar6) {
-      if (uVar6 == 0x203) {
+    if (0x103 < uVar7) {
+      if (uVar7 == 0x203) {
         return 0;
       }
       return 1;
     }
-    if (uVar6 != 0x102) {
+    if (uVar7 != 0x102) {
       return 1;
     }
   }
-  if (uVar7 == 0x404) {
-    iVar2 = (int)(node1->pos).z;
-    iVar4 = (int)(pPVar5->pos).z;
-    if ((iVar2 < iVar4) && (iVar4 < iVar2 + 800)) {
-                    /* WARNING: Subroutine does not return */
-      MATH3D_LengthXY((int)(node1->pos).x - (int)(pPVar5->pos).x,
-                      (int)(node1->pos).y - (int)(pPVar5->pos).y);
+  if (uVar8 == 0x404) {
+    iVar3 = (int)(node1->pos).z;
+    iVar5 = (int)(pPVar6->pos).z;
+    if (((iVar3 < iVar5) && (iVar5 < iVar3 + 800)) &&
+       (lVar1 = MATH3D_LengthXY((int)(node1->pos).x - (int)(pPVar6->pos).x,
+                                (int)(node1->pos).y - (int)(pPVar6->pos).y), lVar1 < 0x321)) {
+      return 1;
     }
   }
   return 0;
@@ -655,33 +692,43 @@ PLANPOOL_GetClosestUnexploredValidNeighbor(PlanningNode *startNode,PlanningNode 
 
 {
   int iVar1;
-  PlanningNode *node2;
   uint uVar2;
-  int iVar3;
+  PlanningNode *node2;
+  uint uVar3;
+  int iVar4;
+  PlanningNode *pPVar5;
+  uint uVar6;
   
+  uVar6 = 0xffffffff;
+  pPVar5 = (PlanningNode *)0x0;
   if (startNode != (PlanningNode *)0x0) {
-    uVar2 = startNode->connectionStatus;
-    iVar3 = 0;
+    uVar3 = startNode->connectionStatus;
+    iVar4 = 0;
     node2 = planningPool;
     if (*(char *)(poolManagementData + 1) != '\0') {
       do {
-        if ((uVar2 & 1) == 0) {
+        if ((uVar3 & 1) == 0) {
           iVar1 = PLANPOOL_AppropriatePair(startNode,node2);
-          if (iVar1 != 0) {
-                    /* WARNING: Subroutine does not return */
-            MATH3D_LengthXYZ((int)(startNode->pos).x - (int)(node2->pos).x,
-                             (int)(startNode->pos).y - (int)(node2->pos).y,
-                             (int)(startNode->pos).z - (int)(node2->pos).z);
+          if (iVar1 == 0) {
+            PLANPOOL_MarkTwoNodesAsNotConnected(startNode,node2,planningPool);
           }
-          PLANPOOL_MarkTwoNodesAsNotConnected(startNode,node2,planningPool);
+          else {
+            uVar2 = MATH3D_LengthXYZ((int)(startNode->pos).x - (int)(node2->pos).x,
+                                     (int)(startNode->pos).y - (int)(node2->pos).y,
+                                     (int)(startNode->pos).z - (int)(node2->pos).z);
+            if (uVar2 < uVar6) {
+              pPVar5 = node2;
+              uVar6 = uVar2;
+            }
+          }
         }
-        uVar2 = uVar2 >> 1;
-        iVar3 = iVar3 + 1;
+        uVar3 = uVar3 >> 1;
+        iVar4 = iVar4 + 1;
         node2 = node2 + 1;
-      } while (iVar3 < (int)(uint)*(byte *)(poolManagementData + 1));
+      } while (iVar4 < (int)(uint)*(byte *)(poolManagementData + 1));
     }
   }
-  return (PlanningNode *)0x0;
+  return pPVar5;
 }
 
 

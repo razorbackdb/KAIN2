@@ -159,39 +159,77 @@ void INSTANCE_DeactivatedProcess(_Instance *instance,GameTracker *gameTracker)
 void INSTANCE_DeactivateFarInstances(GameTracker *gameTracker)
 
 {
-  int iVar1;
-  int iVar2;
-  _Instance *instance;
+  ulong uVar1;
+  uint uVar2;
   int iVar3;
+  int iVar4;
+  int iVar5;
+  _Instance *Inst;
+  int iVar6;
   
-  iVar2 = gameTracker->instanceList->numInstances;
-  instance = gameTracker->instanceList->first;
-  iVar3 = (iVar2 >> 3) + 1;
-  if (iVar2 <= DAT_800cf588) {
+  iVar5 = gameTracker->instanceList->numInstances;
+  Inst = gameTracker->instanceList->first;
+  iVar6 = (iVar5 >> 3) + 1;
+  if (iVar5 <= DAT_800cf588) {
     DAT_800cf588 = 0;
   }
-  iVar1 = DAT_800cf588;
-  DAT_800cf588 = DAT_800cf588 + iVar3;
-  if (iVar2 <= DAT_800cf588) {
+  iVar3 = DAT_800cf588;
+  DAT_800cf588 = DAT_800cf588 + iVar6;
+  if (iVar5 <= DAT_800cf588) {
     DAT_800cf588 = 0;
   }
-  while (iVar1 != 0) {
-    instance = instance->next;
-    iVar1 = iVar1 + -1;
-  }
-  while( true ) {
-    if ((instance == (_Instance *)0x0) || (iVar3 == 0)) {
-      return;
-    }
-    if (((instance->flags2 & 0x80U) == 0) && ((instance->object->oflags & 0x10000U) == 0)) break;
-    if ((instance->flags2 & 1U) != 0) {
-      INSTANCE_Reactivate(instance);
-    }
-    instance = instance->next;
+  while (iVar3 != 0) {
+    Inst = Inst->next;
     iVar3 = iVar3 + -1;
   }
-                    /* WARNING: Subroutine does not return */
-  INSTANCE_Query(instance,0x23);
+  do {
+    if ((Inst == (_Instance *)0x0) || (iVar6 == 0)) {
+      return;
+    }
+    if (((((Inst->flags2 & 0x80U) == 0) && ((Inst->object->oflags & 0x10000U) == 0)) &&
+        (uVar1 = INSTANCE_Query(Inst,0x23), uVar1 == 0)) &&
+       ((Inst->LinkParent == (_Instance *)0x0 && (Inst->matrix != (MATRIX *)0x0)))) {
+      DAT_1f800000 = (Inst->position).x - theCamera.core.position.x;
+      iVar5 = (uint)(ushort)(Inst->position).y - (uint)(ushort)theCamera.core.position.y;
+      DAT_1f800002 = (undefined2)iVar5;
+      iVar5 = iVar5 * 0x10000 >> 0x10;
+      iVar4 = (uint)(ushort)(Inst->position).z - (uint)(ushort)theCamera.core.position.z;
+      iVar3 = iVar4 * 0x10000 >> 0x10;
+      DAT_1f800004 = (undefined2)iVar4;
+      iVar5 = (int)DAT_1f800000 * (int)DAT_1f800000 + iVar5 * iVar5 + iVar3 * iVar3;
+      if ((Inst->flags & 0x200U) == 0) {
+        if ((Inst->flags2 & 0x80000U) == 0) {
+          iVar3 = (int)Inst->object->removeDist;
+          iVar3 = iVar3 * iVar3;
+        }
+        else {
+          iVar3 = gameTracker->defRemoveDist * gameTracker->defRemoveDist;
+        }
+        uVar2 = Inst->flags2 & 1;
+        if (iVar5 <= iVar3) goto LAB_80032038;
+      }
+      else {
+        iVar3 = (int)Inst->object->vvRemoveDist;
+        if (iVar5 <= iVar3 * iVar3) {
+          uVar2 = Inst->flags2 & 1;
+          goto LAB_80032038;
+        }
+        uVar2 = Inst->flags2 & 1;
+      }
+      if (uVar2 == 0) {
+        INSTANCE_Deactivate(Inst);
+      }
+    }
+    else {
+      uVar2 = Inst->flags2 & 1;
+LAB_80032038:
+      if (uVar2 != 0) {
+        INSTANCE_Reactivate(Inst);
+      }
+    }
+    Inst = Inst->next;
+    iVar6 = iVar6 + -1;
+  } while( true );
 }
 
 
@@ -354,34 +392,32 @@ long INSTANCE_InstanceGroupNumber(_Instance *instance)
 {
   int iVar1;
   uint uVar2;
-  Object *pOVar3;
-  uint uVar4;
+  uint uVar3;
   
   uVar2 = instance->object->oflags;
-  uVar4 = 0;
+  uVar3 = 0;
   if ((uVar2 & 0x80) != 0) {
-    uVar4 = (uint)((instance->flags & 0x8000U) == 0);
+    uVar3 = (uint)((instance->flags & 0x8000U) == 0);
   }
   if (((uVar2 & 0x20) != 0) && ((instance->flags & 0x2000U) == 0)) {
-    uVar4 = uVar4 | 2;
+    uVar3 = uVar3 | 2;
   }
   if (((instance->object->oflags & 0x40U) != 0) && ((instance->flags & 0x4000U) == 0)) {
-    uVar4 = uVar4 | 4;
+    uVar3 = uVar3 | 4;
   }
   if (((instance->object->oflags & 0x10U) != 0) && ((instance->flags & 0x1000U) == 0)) {
-    uVar4 = uVar4 | 0x10;
+    uVar3 = uVar3 | 0x10;
   }
-  pOVar3 = instance->object;
-  uVar2 = pOVar3->oflags & 1;
-  if (uVar2 != 0) {
-    INSTANCE_InsertInstanceGroup((char)pOVar3,0);
-    return uVar2;
+  if ((instance->object->oflags & 1U) == 0) {
+    iVar1 = strcmp(instance->object->name,"raziel__");
+    if (iVar1 != 0) {
+      uVar3 = uVar3 & 0xfffffffc;
+    }
   }
-  iVar1 = strcmp(pOVar3->name,"raziel__");
-  if (iVar1 != 0) {
-    uVar4 = uVar4 & 0xfffffffc;
+  else {
+    uVar3 = uVar3 | 8;
   }
-  return uVar4;
+  return uVar3;
 }
 
 
@@ -481,50 +517,47 @@ void INSTANCE_ReallyRemoveInstance(_InstanceList *list,_Instance *instance,long 
   }
   LIST_DeleteFunc((NodeType *)instance);
   FX_EndInstanceEffects(instance);
-  if ((instance->flags & 0x10000U) == 0) {
-    if ((instance->object->animList != (_G2AnimKeylist_Type **)0x0) &&
-       ((instance->object->oflags2 & 0x40000000U) == 0)) {
-      G2Anim_Free(&instance->anim);
-    }
-    if (instance->shadow0 != (void *)0x0) {
-      *(undefined4 *)((int)instance->shadow0 + 0x10) = 0;
-    }
-    if (instance->shadow1 != (void *)0x0) {
-      *(undefined4 *)((int)instance->shadow1 + 0x10) = 0;
-    }
-    if ((instance->object->oflags2 & 4U) != 0) {
-      SOUND_EndInstanceSounds(instance->object->soundData,instance->soundInstanceTbl);
-    }
-    if (instance->LinkParent == (_Instance *)0x0) {
-      if (instance->LinkChild != (_Instance *)0x0) {
-        INSTANCE_UnlinkChildren(instance);
-      }
-      if (instance->hModelList == (_HModel *)0x0) {
-        if (instance->perVertexColor != (CVECTOR *)0x0) {
-                    /* WARNING: Subroutine does not return */
-          MEMPACK_Free((char *)instance->perVertexColor);
-        }
-        iVar4 = 0;
-        pGVar2 = &gameTrackerX;
-        do {
-          iVar4 = iVar4 + 1;
-          if ((pGVar2->gameData).asmData.lightInstances[0].lightInstance == instance) {
-            (pGVar2->gameData).asmData.lightInstances[0].lightInstance = (_Instance *)0x0;
-            return;
-          }
-          pGVar2 = (GameTracker *)&(pGVar2->gameData).asmData.lightInstances[0].g;
-        } while (iVar4 < 1);
-        return;
-      }
-                    /* WARNING: Subroutine does not return */
-      MEMPACK_Free((char *)instance->hModelList);
-    }
-                    /* WARNING: Subroutine does not return */
+  if ((instance->flags & 0x10000U) != 0) {
+    instance->flags = instance->flags | 0x20000;
+    OBTABLE_InstanceInit(instance);
+  }
+  if ((instance->object->animList != (_G2AnimKeylist_Type **)0x0) &&
+     ((instance->object->oflags2 & 0x40000000U) == 0)) {
+    G2Anim_Free(&instance->anim);
+  }
+  if (instance->shadow0 != (void *)0x0) {
+    *(undefined4 *)((int)instance->shadow0 + 0x10) = 0;
+  }
+  if (instance->shadow1 != (void *)0x0) {
+    *(undefined4 *)((int)instance->shadow1 + 0x10) = 0;
+  }
+  if ((instance->object->oflags2 & 4U) != 0) {
+    SOUND_EndInstanceSounds(instance->object->soundData,instance->soundInstanceTbl);
+  }
+  if (instance->LinkParent != (_Instance *)0x0) {
     INSTANCE_UnlinkFromParent(instance);
   }
-  instance->flags = instance->flags | 0x20000;
-                    /* WARNING: Subroutine does not return */
-  OBTABLE_InstanceInit(instance);
+  if (instance->LinkChild != (_Instance *)0x0) {
+    INSTANCE_UnlinkChildren(instance);
+  }
+  if (instance->hModelList != (_HModel *)0x0) {
+    MEMPACK_Free((char *)instance->hModelList);
+  }
+  if (instance->perVertexColor != (CVECTOR *)0x0) {
+    MEMPACK_Free((char *)instance->perVertexColor);
+    instance->perVertexColor = (CVECTOR *)0x0;
+  }
+  iVar4 = 0;
+  pGVar2 = &gameTrackerX;
+  do {
+    iVar4 = iVar4 + 1;
+    if ((pGVar2->gameData).asmData.lightInstances[0].lightInstance == instance) {
+      (pGVar2->gameData).asmData.lightInstances[0].lightInstance = (_Instance *)0x0;
+      return;
+    }
+    pGVar2 = (GameTracker *)&(pGVar2->gameData).asmData.lightInstances[0].g;
+  } while (iVar4 < 1);
+  return;
 }
 
 
@@ -617,10 +650,8 @@ long INSTANCE_Introduced(Intro *intro,short streamUnitID)
   long *plVar1;
   long lVar2;
   _Instance *p_Var3;
-  undefined intro_00;
   long lVar4;
   
-  intro_00 = SUB41(intro,0);
   p_Var3 = (gameTrackerX.instanceList)->first;
   lVar4 = 0;
   if (p_Var3 != (_Instance *)0x0) {
@@ -634,17 +665,11 @@ long INSTANCE_Introduced(Intro *intro,short streamUnitID)
       }
     } while (p_Var3 != (_Instance *)0x0);
   }
-  if (lVar4 == 0) {
-    lVar2 = SAVE_HasSavedIntro(intro,(int)streamUnitID);
-    if (lVar2 != 0) {
-      lVar4 = INSTANCE_FindIntroCommand(intro_00,streamUnitID);
-      return lVar4;
-    }
-    lVar2 = SAVE_IsIntroDeadDead(intro);
-    if (lVar2 != 0) {
-      intro->flags = intro->flags | 8;
-      lVar4 = 1;
-    }
+  if ((lVar4 == 0) &&
+     ((lVar2 = SAVE_HasSavedIntro(intro,(int)streamUnitID), lVar2 != 0 ||
+      (lVar2 = SAVE_IsIntroDeadDead(intro), lVar2 != 0)))) {
+    intro->flags = intro->flags | 8;
+    lVar4 = 1;
   }
   return lVar4;
 }
@@ -668,11 +693,13 @@ long INSTANCE_Introduced(Intro *intro,short streamUnitID)
 INICommand * INSTANCE_GetIntroCommand(INICommand *command,int cmd)
 
 {
-  INICommand *pIVar1;
-  
   if (command != (INICommand *)0x0) {
-    pIVar1 = (INICommand *)FUN_80032718((char)command);
-    return pIVar1;
+    while (command->command != 0) {
+      if ((int)command->command == cmd) {
+        return command;
+      }
+      command = command + (int)command->numParameters + 1;
+    }
   }
   return (INICommand *)0x0;
 }
@@ -860,40 +887,221 @@ void INSTANCE_InitEffects(_Instance *instance,Object *object)
 _Instance * INSTANCE_IntroduceInstance(Intro *intro,short streamUnitID)
 
 {
-  long lVar1;
-  INICommand *pIVar2;
+  byte bVar1;
+  short frameNum;
+  long lVar2;
+  INICommand *pIVar3;
   _ObjectTracker *objectTracker;
   _Instance *instance;
+  MultiSpline *pMVar4;
+  SavedIntroSpline *pSVar5;
+  SavedIntroSmall *pSVar6;
+  int Data;
+  uint uVar7;
+  Spline *pSVar8;
+  RSpline *pRVar9;
+  undefined4 uVar10;
   INICommand introUniqueID;
+  _Instance *instance_00;
   Object *object;
   
-  lVar1 = INSTANCE_Introduced(intro,streamUnitID);
-  if (lVar1 == 0) {
-    introUniqueID = (INICommand)0x0;
-    pIVar2 = INSTANCE_GetIntroCommand((INICommand *)intro->data,0x1a);
-    if (pIVar2 != (INICommand *)0x0) {
-      introUniqueID = pIVar2[1];
-    }
-    objectTracker = STREAM_GetObjectTracker((char *)intro);
-    if (objectTracker != (_ObjectTracker *)0x0) {
-      object = objectTracker->object;
-      lVar1 = MEMPACK_MemoryValidFunc((char *)object);
-      if ((((lVar1 != 0) &&
-           ((introUniqueID == (INICommand)0x0 ||
-            (instance = INSTANCE_Find((long)introUniqueID), instance != (_Instance *)0x0)))) &&
-          (((object->oflags2 & 0x10000000U) == 0 ||
-           (OBTABLE_InitAnimPointers(objectTracker), (object->oflags2 & 0x10000000U) == 0)))) &&
-         (instance = INSTANCE_NewInstance(gameTrackerX.instanceList), instance != (_Instance *)0x0))
-      {
-        intro->flags = intro->flags | 8;
-        objectTracker->numInUse = objectTracker->numInUse + 1;
-        INSTANCE_DefaultInit(instance,object,0);
-                    /* WARNING: Subroutine does not return */
-        strcpy(instance->introName,(char *)intro);
-      }
+  instance_00 = (_Instance *)0x0;
+  lVar2 = INSTANCE_Introduced(intro,streamUnitID);
+  if (lVar2 != 0) {
+    return (_Instance *)0x0;
+  }
+  introUniqueID = (INICommand)0x0;
+  pIVar3 = INSTANCE_GetIntroCommand((INICommand *)intro->data,0x1a);
+  if (pIVar3 != (INICommand *)0x0) {
+    introUniqueID = pIVar3[1];
+  }
+  objectTracker = STREAM_GetObjectTracker((char *)intro);
+  if (objectTracker == (_ObjectTracker *)0x0) {
+    return (_Instance *)0x0;
+  }
+  object = objectTracker->object;
+  lVar2 = MEMPACK_MemoryValidFunc((char *)object);
+  if (lVar2 == 0) {
+    return (_Instance *)0x0;
+  }
+  if ((introUniqueID != (INICommand)0x0) &&
+     (instance_00 = INSTANCE_Find((long)introUniqueID), instance_00 == (_Instance *)0x0)) {
+    return (_Instance *)0x0;
+  }
+  if (((object->oflags2 & 0x10000000U) != 0) &&
+     (OBTABLE_InitAnimPointers(objectTracker), (object->oflags2 & 0x10000000U) != 0)) {
+    return (_Instance *)0x0;
+  }
+  instance = INSTANCE_NewInstance(gameTrackerX.instanceList);
+  if (instance == (_Instance *)0x0) {
+    return (_Instance *)0x0;
+  }
+  intro->flags = intro->flags | 8;
+  objectTracker->numInUse = objectTracker->numInUse + 1;
+  INSTANCE_DefaultInit(instance,object,0);
+  strcpy(instance->introName,(char *)intro);
+  instance->introUniqueID = intro->UniqueID;
+  lVar2 = intro->intronum;
+  instance->birthStreamUnitID = (int)streamUnitID;
+  instance->currentStreamUnitID = (int)streamUnitID;
+  instance->introNum = lVar2;
+  intro->instance = instance;
+  instance->intro = intro;
+  instance->introData = intro->data;
+  frameNum = (intro->position).z;
+  *(undefined4 *)&instance->position = *(undefined4 *)&intro->position;
+  (instance->position).z = frameNum;
+  if ((gameTrackerX.gameData.asmData.MorphType == 1) &&
+     ((*(int *)&intro->spectralPosition != 0 || ((intro->spectralPosition).z != 0)))) {
+    (instance->position).x = (intro->position).x + (intro->spectralPosition).x;
+    (instance->position).y = (intro->position).y + (intro->spectralPosition).y;
+    (instance->position).z = (intro->position).z + (intro->spectralPosition).z;
+  }
+  frameNum = (instance->position).z;
+  *(undefined4 *)&instance->initialPos = *(undefined4 *)&instance->position;
+  (instance->initialPos).z = frameNum;
+  frameNum = (intro->position).z;
+  *(undefined4 *)&instance->oldPos = *(undefined4 *)&intro->position;
+  (instance->oldPos).z = frameNum;
+  *(INICommand *)&instance->attachedID = introUniqueID;
+  LIGHT_GetAmbient((_ColorType *)&instance->light_color,instance);
+  uVar10 = *(undefined4 *)&(intro->rotation).z;
+  *(undefined4 *)&instance->rotation = *(undefined4 *)&intro->rotation;
+  *(undefined4 *)&(instance->rotation).z = uVar10;
+  if ((instance->object->oflags & 0x100U) != 0) {
+    INSTANCE_BuildStaticShadow(instance);
+  }
+  (instance->scale).x = 0x1000;
+  (instance->scale).y = 0x1000;
+  (instance->scale).z = 0x1000;
+  if ((intro->flags & 0x2000U) != 0) {
+    instance->flags = instance->flags | 0x400;
+  }
+  if ((intro->flags & 0x10000U) != 0) {
+    instance->flags2 = instance->flags2 | 0x20000;
+  }
+  if (instance_00 != (_Instance *)0x0) {
+    INSTANCE_ForceActive(instance_00);
+    instance_00->flags2 = instance_00->flags2 | 0x80;
+  }
+  if ((object->oflags2 & 0x80U) != 0) {
+    instance->flags = instance->flags | 0x800;
+  }
+  if (((intro->flags & 0x800U) != 0) && (object->id == -1)) {
+    frameNum = SCRIPTCountFramesInSpline(instance);
+    SCRIPT_InstanceSplineSet(instance,frameNum,(SplineDef *)0x0,(SplineDef *)0x0,(SplineDef *)0x0);
+    instance->flags = instance->flags ^ 0x1000000U | 0x100000;
+  }
+  instance->lightGroup = *(uchar *)&(intro->rotation).pad;
+  instance->spectralLightGroup = *(uchar *)&intro->specturalLightGroup;
+  INSTANCE_InsertInstanceGroup(gameTrackerX.instanceList,instance);
+  OBTABLE_GetInstanceCollideFunc(instance);
+  OBTABLE_GetInstanceProcessFunc(instance);
+  OBTABLE_GetInstanceQueryFunc(instance);
+  OBTABLE_GetInstanceMessageFunc(instance);
+  OBTABLE_GetInstanceAdditionalCollideFunc(instance);
+  if ((intro->flags & 0x10U) == 0) {
+    OBTABLE_InstanceInit(instance);
+  }
+  MORPH_SetupInstanceFlags(&gameTrackerX,instance);
+  if ((intro->flags & 0x80U) != 0) {
+    uVar7 = instance->flags2;
+    instance->flags = instance->flags | 0x800;
+    instance->flags2 = uVar7 | 0x20000000;
+    if ((object->oflags2 & 0x80000U) != 0) {
+      instance->flags2 = uVar7 | 0x30000000;
     }
   }
-  return (_Instance *)0x0;
+  pMVar4 = SCRIPT_GetMultiSpline(instance,(ulong *)0x0,(ulong *)0x0);
+  if (pMVar4 == (MultiSpline *)0x0) {
+    instance->flags = instance->flags & 0xfdffffffU | 0x100000;
+  }
+  else {
+    pMVar4 = SCRIPT_GetMultiSpline(instance,(ulong *)0x0,(ulong *)0x0);
+    pSVar5 = SAVE_GetIntroSpline(instance);
+    if (pSVar5 != (SavedIntroSpline *)0x0) {
+      SCRIPT_InstanceSplineSet
+                (instance,pSVar5->splineKeyFrame,(SplineDef *)0x0,(SplineDef *)0x0,(SplineDef *)0x0)
+      ;
+      frameNum = (instance->position).z;
+      *(undefined4 *)&instance->oldPos = *(undefined4 *)&instance->position;
+      (instance->oldPos).z = frameNum;
+      instance->splineFlags = pSVar5->splineFlags;
+      instance->clipBeg = pSVar5->splineClipBeg;
+      instance->clipEnd = pSVar5->splineClipEnd;
+      if ((instance->splineFlags & 0x80U) != 0) {
+        instance->flags = instance->flags | 0x1000000;
+      }
+      if ((instance->splineFlags & 0x100U) != 0) {
+        instance->flags = instance->flags | 0x2000000;
+      }
+      if ((pSVar5->splineFlags & 0x10U) == 0) {
+        if ((instance->splineFlags & 0x20U) == 0) {
+          if ((instance->splineFlags & 0x40U) == 0) goto LAB_80032f08;
+          pSVar8 = pMVar4->positional;
+          if (pSVar8 != (Spline *)0x0) {
+            pSVar8->flags = pSVar8->flags | 4;
+          }
+          pRVar9 = pMVar4->rotational;
+          if (pRVar9 != (RSpline *)0x0) {
+            pRVar9->flags = pRVar9->flags | 4;
+          }
+          pSVar8 = pMVar4->scaling;
+          if (pSVar8 != (Spline *)0x0) {
+            pSVar8->flags = pSVar8->flags | 4;
+          }
+          pSVar8 = pMVar4->color;
+          if (pSVar8 == (Spline *)0x0) goto LAB_80032f08;
+          bVar1 = pSVar8->flags | 4;
+        }
+        else {
+          pSVar8 = pMVar4->positional;
+          if (pSVar8 != (Spline *)0x0) {
+            pSVar8->flags = pSVar8->flags | 2;
+          }
+          pRVar9 = pMVar4->rotational;
+          if (pRVar9 != (RSpline *)0x0) {
+            pRVar9->flags = pRVar9->flags | 2;
+          }
+          pSVar8 = pMVar4->scaling;
+          if (pSVar8 != (Spline *)0x0) {
+            pSVar8->flags = pSVar8->flags | 2;
+          }
+          pSVar8 = pMVar4->color;
+          if (pSVar8 == (Spline *)0x0) goto LAB_80032f08;
+          bVar1 = pSVar8->flags | 2;
+        }
+      }
+      else {
+        pSVar8 = pMVar4->positional;
+        if (pSVar8 != (Spline *)0x0) {
+          pSVar8->flags = pSVar8->flags | 1;
+        }
+        pRVar9 = pMVar4->rotational;
+        if (pRVar9 != (RSpline *)0x0) {
+          pRVar9->flags = pRVar9->flags | 1;
+        }
+        pSVar8 = pMVar4->scaling;
+        if (pSVar8 != (Spline *)0x0) {
+          pSVar8->flags = pSVar8->flags | 1;
+        }
+        pSVar8 = pMVar4->color;
+        if (pSVar8 == (Spline *)0x0) goto LAB_80032f08;
+        bVar1 = pSVar8->flags | 1;
+      }
+      pSVar8->flags = bVar1;
+    }
+  }
+LAB_80032f08:
+  EVENT_AddInstanceToInstanceList(instance);
+  INSTANCE_ProcessIntro(instance);
+  INSTANCE_InitEffects(instance,object);
+  pSVar6 = SAVE_GetSavedSmallIntro(instance);
+  if (pSVar6 != (SavedIntroSmall *)0x0) {
+    Data = SetControlSaveDataData((uint)pSVar6->shiftedSaveSize * 4 + -4,pSVar6 + 1);
+    INSTANCE_Post(instance,(int)&DAT_00100007,Data);
+  }
+  return instance;
 }
 
 
@@ -1062,90 +1270,94 @@ void INSTANCE_ProcessFunctions(_InstanceList *instanceList)
   short sVar4;
   bool bVar5;
   short frameNum;
-  uint uVar6;
+  ulong uVar6;
   MultiSpline *multi;
   long lVar7;
   long lVar8;
   long lVar9;
   Spline *pSVar10;
   int iVar11;
-  _Instance *instance;
+  _Instance *Inst;
+  uint hidden;
   int iVar12;
   ushort uVar13;
   
   if ((gameTrackerX.debugFlags & 0x8000010U) == 0) {
-    instance = instanceList->first;
-    while (instance != (_Instance *)0x0) {
+    Inst = instanceList->first;
+    while (Inst != (_Instance *)0x0) {
       gameTrackerX.timeMult = gameTrackerX.globalTimeMult;
-      if (((instance->object != (Object *)0x0) && ((instance->object->oflags2 & 0x2000000U) != 0))
-         && (gameTrackerX.timeMult = gameTrackerX.materialTimeMult,
-            (instance->flags2 & 0x8000000U) != 0)) {
+      if (((Inst->object != (Object *)0x0) && ((Inst->object->oflags2 & 0x2000000U) != 0)) &&
+         (gameTrackerX.timeMult = gameTrackerX.materialTimeMult, (Inst->flags2 & 0x8000000U) != 0))
+      {
         gameTrackerX.timeMult = gameTrackerX.spectralTimeMult;
       }
-      if ((instance->object->oflags2 & 4U) != 0) {
-                    /* WARNING: Subroutine does not return */
-        INSTANCE_Query(instance,2);
+      if ((Inst->object->oflags2 & 4U) != 0) {
+        hidden = Inst->flags & 0x800;
+        uVar6 = INSTANCE_Query(Inst,2);
+        if (((uVar6 & 0x20) != 0) && (uVar6 = INSTANCE_Query(Inst,3), (uVar6 & 0x10000) == 0)) {
+          hidden = 1;
+        }
+        SOUND_ProcessInstanceSounds
+                  (Inst->object->soundData,Inst->soundInstanceTbl,&Inst->position,
+                   Inst->object->oflags2 & 0x2000000,Inst->flags2 & 0x8000000,hidden,&Inst->flags2);
       }
-      if (((((instance->intro == (Intro *)0x0) || ((instance->intro->flags & 0x100U) == 0)) &&
-           ((gameTrackerX.gameMode != 6 || ((instance->object->oflags & 0x20000U) != 0)))) &&
-          (((gameTrackerX.streamFlags & 0x100000U) == 0 ||
-           ((instance->object->oflags & 0x40000U) != 0)))) &&
-         ((instance->flags2 & 0x10000000U) == 0)) {
-        frameNum = (instance->position).y;
-        sVar1 = (instance->position).z;
-        sVar2 = (instance->rotation).x;
-        sVar3 = (instance->rotation).y;
-        uVar6 = instance->flags;
-        sVar4 = (instance->rotation).z;
-        (instance->oldPos).x = (instance->position).x;
-        (instance->oldPos).y = frameNum;
-        (instance->oldPos).z = sVar1;
-        (instance->oldRotation).x = sVar2;
-        (instance->oldRotation).y = sVar3;
-        (instance->oldRotation).z = sVar4;
-        if ((((uVar6 & 0x100000) == 0) &&
-            (multi = SCRIPT_GetMultiSpline(instance,(ulong *)0x0,(ulong *)0x0),
-            multi != (MultiSpline *)0x0)) && (uVar6 = instance->flags, (uVar6 & 0x2000000) != 0)) {
+      if ((((Inst->intro == (Intro *)0x0) || ((Inst->intro->flags & 0x100U) == 0)) &&
+          ((gameTrackerX.gameMode != 6 || ((Inst->object->oflags & 0x20000U) != 0)))) &&
+         ((((gameTrackerX.streamFlags & 0x100000U) == 0 || ((Inst->object->oflags & 0x40000U) != 0))
+          && ((Inst->flags2 & 0x10000000U) == 0)))) {
+        frameNum = (Inst->position).y;
+        sVar1 = (Inst->position).z;
+        sVar2 = (Inst->rotation).x;
+        sVar3 = (Inst->rotation).y;
+        hidden = Inst->flags;
+        sVar4 = (Inst->rotation).z;
+        (Inst->oldPos).x = (Inst->position).x;
+        (Inst->oldPos).y = frameNum;
+        (Inst->oldPos).z = sVar1;
+        (Inst->oldRotation).x = sVar2;
+        (Inst->oldRotation).y = sVar3;
+        (Inst->oldRotation).z = sVar4;
+        if ((((hidden & 0x100000) == 0) &&
+            (multi = SCRIPT_GetMultiSpline(Inst,(ulong *)0x0,(ulong *)0x0),
+            multi != (MultiSpline *)0x0)) && (hidden = Inst->flags, (hidden & 0x2000000) != 0)) {
           uVar13 = 1;
-          if ((uVar6 & 0x1000000) != 0) {
+          if ((hidden & 0x1000000) != 0) {
             uVar13 = 0xffff;
           }
-          if ((instance->object->oflags & 0x10000000U) != 0) {
-            instance->flags = uVar6 | 0x400;
+          if ((Inst->object->oflags & 0x10000000U) != 0) {
+            Inst->flags = hidden | 0x400;
             frameNum = SplineMultiIsWhere(multi);
             if (frameNum != 0) {
               if ((int)((uint)uVar13 << 0x10) < 1) {
-                instance->intro->flags = instance->intro->flags & 0xfffff7ff;
+                Inst->intro->flags = Inst->intro->flags & 0xfffff7ff;
               }
               else {
-                instance->intro->flags = instance->intro->flags | 0x800;
+                Inst->intro->flags = Inst->intro->flags | 0x800;
               }
             }
           }
-          lVar7 = INSTANCE_GetSplineFrameNumber(instance,multi);
+          lVar7 = INSTANCE_GetSplineFrameNumber(Inst,multi);
           lVar8 = SCRIPT_InstanceSplineProcess
-                            (instance,&multi->curPositional,&multi->curRotational,&multi->curScaling
-                             ,(int)(short)uVar13);
-          if (instance->splineFlags == 0) {
+                            (Inst,&multi->curPositional,&multi->curRotational,&multi->curScaling,
+                             (int)(short)uVar13);
+          if (Inst->splineFlags == 0) {
             if ((gameTrackerX.debugFlags2 & 0x400000U) != 0) {
-              INSTANCE_GetSplineFrameNumber(instance,multi);
-                    /* WARNING: Subroutine does not return */
-              FONT_Print(s_Spline__s_d_prevFrame__d__frame__800cf61c);
+              INSTANCE_GetSplineFrameNumber(Inst,multi);
+              FONT_Print("Spline %s%d prevFrame=%d, frame=%d\n");
             }
           }
           else {
-            lVar9 = INSTANCE_GetSplineFrameNumber(instance,multi);
-            frameNum = SCRIPTCountFramesInSpline(instance);
+            lVar9 = INSTANCE_GetSplineFrameNumber(Inst,multi);
+            frameNum = SCRIPTCountFramesInSpline(Inst);
             iVar12 = (int)frameNum;
-            if ((instance->splineFlags & 1U) != 0) {
+            if ((Inst->splineFlags & 1U) != 0) {
               if ((gameTrackerX.debugFlags2 & 0x400000U) != 0) {
-                    /* WARNING: Subroutine does not return */
                 printf(
                       "Spline %s%ld playto %d preveFram=%ld frame=%ld endOfSpline=%ld, maxFrames=%ld\n"
                       );
               }
               if ((int)(short)uVar13 < 1) {
-                iVar11 = (int)instance->targetFrame;
+                iVar11 = (int)Inst->targetFrame;
                 if (lVar9 <= iVar11) {
                   if (iVar11 <= lVar7) goto LAB_800334d8;
                   if (lVar7 < lVar9) {
@@ -1158,7 +1370,7 @@ void INSTANCE_ProcessFunctions(_InstanceList *instanceList)
                 if (iVar12 < lVar7) {
                   lVar7 = iVar12;
                 }
-                iVar11 = (int)instance->targetFrame;
+                iVar11 = (int)Inst->targetFrame;
                 if ((lVar9 < iVar11) || (iVar11 < lVar7)) {
                   if ((lVar9 < lVar7) && (lVar9 >= iVar11)) {
                     bVar5 = iVar11 + iVar12 < lVar7;
@@ -1168,102 +1380,99 @@ LAB_800334d0:
                 }
                 else {
 LAB_800334d8:
-                  instance->flags = instance->flags & 0xfdffffff;
+                  Inst->flags = Inst->flags & 0xfdffffff;
                   SCRIPT_InstanceSplineSet
-                            (instance,instance->targetFrame,(SplineDef *)0x0,(SplineDef *)0x0,
+                            (Inst,Inst->targetFrame,(SplineDef *)0x0,(SplineDef *)0x0,
                              (SplineDef *)0x0);
                   lVar8 = 0;
-                  instance->splineFlags = instance->splineFlags & 0xfffe;
+                  Inst->splineFlags = Inst->splineFlags & 0xfffe;
                 }
               }
             }
-            if ((instance->splineFlags & 2U) != 0) {
+            if ((Inst->splineFlags & 2U) != 0) {
               if ((gameTrackerX.debugFlags2 & 0x400000U) != 0) {
-                    /* WARNING: Subroutine does not return */
-                FONT_Print(debugFogGrn);
+                FONT_Print("Spline %s%d : clip(%d,%d) prevFrame=%d, frame=%d\n");
               }
               if (uVar13 == 1) {
-                if (((lVar7 <= instance->clipEnd) && (instance->clipEnd <= lVar9)) ||
-                   (lVar9 < instance->clipBeg)) {
+                if (((lVar7 <= Inst->clipEnd) && (Inst->clipEnd <= lVar9)) ||
+                   (lVar9 < Inst->clipBeg)) {
                   if ((*(uint *)&multi->positional->numkeys & 0x6000000) == 0) {
-                    frameNum = instance->clipEnd;
+                    frameNum = Inst->clipEnd;
 LAB_80033640:
                     lVar8 = 1;
                   }
                   else {
-                    frameNum = instance->clipBeg;
+                    frameNum = Inst->clipBeg;
                   }
 LAB_80033644:
                   SCRIPT_InstanceSplineSet
-                            (instance,frameNum,(SplineDef *)0x0,(SplineDef *)0x0,(SplineDef *)0x0);
+                            (Inst,frameNum,(SplineDef *)0x0,(SplineDef *)0x0,(SplineDef *)0x0);
                 }
               }
               else {
-                if (((instance->clipBeg <= lVar7) && (lVar9 <= instance->clipBeg)) ||
-                   (instance->clipEnd < lVar9)) {
+                if (((Inst->clipBeg <= lVar7) && (lVar9 <= Inst->clipBeg)) ||
+                   (Inst->clipEnd < lVar9)) {
                   if ((*(uint *)&multi->positional->numkeys & 0x6000000) == 0) {
-                    frameNum = instance->clipBeg;
+                    frameNum = Inst->clipBeg;
                     goto LAB_80033640;
                   }
-                  frameNum = instance->clipEnd;
+                  frameNum = Inst->clipEnd;
                   goto LAB_80033644;
                 }
               }
             }
           }
           if (0 < lVar8) {
-            if ((instance->object->oflags & 0x10000000U) != 0) {
-              instance->flags = instance->flags & 0xfdfffbffU | 0x100000;
+            if ((Inst->object->oflags & 0x10000000U) != 0) {
+              Inst->flags = Inst->flags & 0xfdfffbffU | 0x100000;
             }
-            uVar6 = instance->object->oflags;
-            if ((uVar6 & 0x2000) != 0) {
-              instance->flags = instance->flags | 0x100000;
-              INSTANCE_KillInstance(instance);
+            hidden = Inst->object->oflags;
+            if ((hidden & 0x2000) != 0) {
+              Inst->flags = Inst->flags | 0x100000;
+              INSTANCE_KillInstance(Inst);
               goto LAB_8003388c;
             }
-            if ((uVar6 & 0x1000) == 0) {
-              if ((uVar6 & 0x1000000) != 0) {
-                instance->flags = instance->flags & 0xfdffffff;
+            if ((hidden & 0x1000) == 0) {
+              if ((hidden & 0x1000000) != 0) {
+                Inst->flags = Inst->flags & 0xfdffffff;
               }
             }
             else {
-              instance->flags = instance->flags & 0xfdffffff;
-              if ((instance->object->oflags & 0x800000U) != 0) {
-                SCRIPT_InstanceSplineInit(instance);
+              Inst->flags = Inst->flags & 0xfdffffff;
+              if ((Inst->object->oflags & 0x800000U) != 0) {
+                SCRIPT_InstanceSplineInit(Inst);
               }
             }
             pSVar10 = multi->positional;
             if (((pSVar10 != (Spline *)0x0) ||
                 (pSVar10 = (Spline *)multi->rotational, pSVar10 != (Spline *)0x0)) &&
-               (((pSVar10->flags & 4) == 0 && ((instance->object->oflags & 0x800000U) == 0)))) {
-              instance->flags = instance->flags ^ 0x1000000;
+               (((pSVar10->flags & 4) == 0 && ((Inst->object->oflags & 0x800000U) == 0)))) {
+              Inst->flags = Inst->flags ^ 0x1000000;
             }
-            if ((((instance->object->oflags & 0x200000U) != 0) &&
-                ((int *)instance->introData != (int *)0x0)) &&
-               (iVar12 = *(int *)instance->introData, iVar12 != 0)) {
-                    /* WARNING: Subroutine does not return */
-              SIGNAL_HandleSignal(instance,(Signal *)(iVar12 + 8),0);
+            if ((((Inst->object->oflags & 0x200000U) != 0) && ((int *)Inst->introData != (int *)0x0)
+                ) && (iVar12 = *(int *)Inst->introData, iVar12 != 0)) {
+              SIGNAL_HandleSignal(Inst,(Signal *)(iVar12 + 8),0);
             }
           }
         }
-        if (instance->processFunc != (_func_1 *)0x0) {
-          if ((instance->flags2 & 1U) == 0) {
-            (*instance->processFunc)(instance,&gameTrackerX);
+        if (Inst->processFunc != (_func_1 *)0x0) {
+          if ((Inst->flags2 & 1U) == 0) {
+            (*Inst->processFunc)(Inst,&gameTrackerX);
           }
           else {
-            INSTANCE_DeactivatedProcess(instance,&gameTrackerX);
+            INSTANCE_DeactivatedProcess(Inst,&gameTrackerX);
           }
         }
-        iVar12 = (int)(instance->position).z - (int)(instance->oldPos).z;
+        iVar12 = (int)(Inst->position).z - (int)(Inst->oldPos).z;
         if (0x8000 < iVar12) {
-          INSTANCE_PlainDeath(instance);
+          INSTANCE_PlainDeath(Inst);
         }
         if (iVar12 < -0x8000) {
-          INSTANCE_PlainDeath(instance);
+          INSTANCE_PlainDeath(Inst);
         }
       }
 LAB_8003388c:
-      instance = instance->next;
+      Inst = Inst->next;
     }
   }
   gameTrackerX.timeMult = gameTrackerX.globalTimeMult;
@@ -1297,10 +1506,17 @@ _Instance * INSTANCE_BirthObject(_Instance *parent,Object *object,int modelNum)
   short sVar1;
   _GlobalSaveTracker *p_Var2;
   _Instance *instance;
-  undefined4 uVar3;
+  size_t sVar3;
+  MultiSpline *pMVar4;
+  int iVar5;
+  undefined4 uVar6;
+  int iVar7;
   
-  if ((object != (Object *)0x0) &&
-     (instance = INSTANCE_NewInstance(gameTrackerX.instanceList), instance != (_Instance *)0x0)) {
+  if ((object == (Object *)0x0) ||
+     (instance = INSTANCE_NewInstance(gameTrackerX.instanceList), instance == (_Instance *)0x0)) {
+    instance = (_Instance *)0x0;
+  }
+  else {
     INSTANCE_DefaultInit(instance,object,modelNum);
     sVar1 = (parent->position).z;
     *(undefined4 *)&instance->position = *(undefined4 *)&parent->position;
@@ -1311,24 +1527,56 @@ _Instance * INSTANCE_BirthObject(_Instance *parent,Object *object,int modelNum)
     sVar1 = (parent->position).z;
     *(undefined4 *)&instance->oldPos = *(undefined4 *)&parent->position;
     (instance->oldPos).z = sVar1;
-    uVar3 = *(undefined4 *)&(parent->rotation).z;
+    uVar6 = *(undefined4 *)&(parent->rotation).z;
     *(undefined4 *)&instance->rotation = *(undefined4 *)&parent->rotation;
-    *(undefined4 *)&(instance->rotation).z = uVar3;
-    uVar3 = *(undefined4 *)&(parent->scale).z;
+    *(undefined4 *)&(instance->rotation).z = uVar6;
+    uVar6 = *(undefined4 *)&(parent->scale).z;
     *(undefined4 *)&instance->scale = *(undefined4 *)&parent->scale;
-    *(undefined4 *)&(instance->scale).z = uVar3;
+    *(undefined4 *)&(instance->scale).z = uVar6;
     instance->lightGroup = parent->lightGroup;
     instance->spectralLightGroup = parent->spectralLightGroup;
     p_Var2 = GlobalSave;
     instance->currentStreamUnitID = parent->currentStreamUnitID;
     instance->birthStreamUnitID = parent->birthStreamUnitID;
     sVar1 = p_Var2->CurrentBirthID;
+    iVar7 = 0;
     p_Var2->CurrentBirthID = sVar1 + 1;
     instance->introUniqueID = (int)sVar1;
-                    /* WARNING: Subroutine does not return */
     strcpy(instance->introName,object->name);
+    do {
+      sVar3 = strlen(instance->introName);
+      iVar5 = (int)&(instance->node).prev + iVar7;
+      if ((int)sVar3 <= iVar7) goto LAB_80033a2c;
+      iVar7 = iVar7 + 1;
+    } while (*(char *)(iVar5 + 0x158) != '_');
+    *(undefined *)(iVar5 + 0x158) = 0;
+LAB_80033a2c:
+    instance->parent = parent;
+    instance->intro = parent->intro;
+    instance->introData = parent->introData;
+    LIGHT_GetAmbient((_ColorType *)&instance->light_color,instance);
+    if ((instance->object->oflags & 0x100U) != 0) {
+      INSTANCE_BuildStaticShadow(instance);
+    }
+    pMVar4 = SCRIPT_GetMultiSpline(instance,(ulong *)0x0,(ulong *)0x0);
+    if (pMVar4 == (MultiSpline *)0x0) {
+      instance->flags = instance->flags | 0x100000;
+    }
+    if ((parent->flags2 & 0x8000000U) != 0) {
+      instance->flags2 = instance->flags2 | 0x8000000;
+    }
+    INSTANCE_InsertInstanceGroup(gameTrackerX.instanceList,instance);
+    OBTABLE_GetInstanceCollideFunc(instance);
+    OBTABLE_GetInstanceProcessFunc(instance);
+    OBTABLE_GetInstanceQueryFunc(instance);
+    OBTABLE_GetInstanceMessageFunc(instance);
+    OBTABLE_GetInstanceAdditionalCollideFunc(instance);
+    instance->flags = instance->flags | 2;
+    OBTABLE_InstanceInit(instance);
+    EVENT_AddInstanceToInstanceList(instance);
+    INSTANCE_InitEffects(instance,object);
   }
-  return (_Instance *)0x0;
+  return instance;
 }
 
 
@@ -1432,8 +1680,155 @@ void INSTANCE_BuildStaticShadow(_Instance *instance)
 void INSTANCE_DefaultInit(_Instance *instance,Object *object,int modelNum)
 
 {
-                    /* WARNING: Subroutine does not return */
+  void *pvVar1;
+  _G2AnimKeylist_Type *keylist;
+  _HFace **pp_Var2;
+  _HSphere **pp_Var3;
+  _HBox **pp_Var4;
+  _HInfo *p_Var5;
+  _Segment *p_Var6;
+  int iVar7;
+  _HPrim *p_Var8;
+  undefined uVar9;
+  int iVar10;
+  _HFace *p_Var11;
+  _HSphere *p_Var12;
+  _HBox *p_Var13;
+  int iVar14;
+  int *piVar15;
+  _Model **pp_Var16;
+  _G2Anim_Type *anim;
+  int iVar17;
+  _Model *p_Var18;
+  _HModel *p_Var19;
+  
   memset(&instance->flags,0,0x284);
+  instance->object = object;
+  pvVar1 = object->data;
+  instance->currentModel = (short)modelNum;
+  instance->cachedTFace = -1;
+  instance->data = pvVar1;
+  if ((object->animList != (_G2AnimKeylist_Type **)0x0) && ((object->oflags2 & 0x40000000U) == 0)) {
+    anim = &instance->anim;
+    G2Anim_Init(anim,object->modelList[modelNum]);
+    keylist = G2Instance_GetKeylist(instance,0);
+    G2Anim_SwitchToKeylist(anim,keylist,0);
+    G2Anim_SetCallback(anim,INSTANCE_DefaultAnimCallback,instance);
+  }
+  if ((object->oflags & 0x4000000U) != 0) {
+    instance->flags2 = instance->flags2 | 4;
+  }
+  if ((object->oflags & 0x200U) != 0) {
+    instance->flags2 = instance->flags2 | 0x40;
+  }
+  if ((object->oflags & 8U) != 0) {
+    instance->flags2 = instance->flags2 | 0x8000000;
+  }
+  if ((object->oflags & 0x1000800U) == 0) {
+    instance->flags = instance->flags | 0x2000000;
+  }
+  if ((object->oflags & 0x20000000U) != 0) {
+    instance->flags2 = instance->flags2 | 0x20;
+  }
+  iVar17 = (int)object->numModels;
+  pp_Var16 = object->modelList;
+  iVar7 = 0;
+  iVar14 = iVar17;
+  while (iVar14 != 0) {
+    iVar10 = (*pp_Var16)->numSegments;
+    p_Var6 = (*pp_Var16)->segmentList;
+    while (iVar10 != 0) {
+      p_Var5 = p_Var6->hInfo;
+      if (p_Var5 != (_HInfo *)0x0) {
+        iVar7 = iVar7 + p_Var5->numHFaces + p_Var5->numHSpheres + p_Var5->numHBoxes;
+      }
+      iVar10 = iVar10 + -1;
+      p_Var6 = p_Var6 + 1;
+    }
+    iVar14 = iVar14 + -1;
+    pp_Var16 = pp_Var16 + 1;
+  }
+  if (iVar7 == 0) {
+    instance->hModelList = (_HModel *)0x0;
+    instance->flags2 = instance->flags2 | 0x40000;
+  }
+  else {
+    p_Var19 = (_HModel *)MEMPACK_Malloc((instance->object->numModels + iVar7) * 8,'\x0e');
+    instance->hModelList = p_Var19;
+    pp_Var16 = object->modelList;
+    p_Var8 = (_HPrim *)(p_Var19 + iVar17);
+    if (iVar17 != 0) {
+      piVar15 = &p_Var19->numHPrims;
+      do {
+        p_Var18 = *pp_Var16;
+        *piVar15 = 0;
+        p_Var19->hPrimList = p_Var8;
+        p_Var6 = p_Var18->segmentList;
+        iVar14 = 0;
+        if (0 < p_Var18->numSegments) {
+          do {
+            p_Var5 = p_Var6->hInfo;
+            if (p_Var5 != (_HInfo *)0x0) {
+              p_Var11 = p_Var5->hfaceList;
+              p_Var12 = p_Var5->hsphereList;
+              p_Var13 = p_Var5->hboxList;
+              *piVar15 = *piVar15 + p_Var5->numHFaces + p_Var5->numHSpheres + p_Var5->numHBoxes;
+              iVar7 = p_Var5->numHFaces;
+              pp_Var2 = (_HFace **)&p_Var8->data;
+              uVar9 = (undefined)iVar14;
+              while (iVar7 != 0) {
+                p_Var8->hpFlags = 'M';
+                *(undefined *)((int)pp_Var2 + -3) = 0x24;
+                *(undefined *)((int)pp_Var2 + -2) = 2;
+                *(undefined *)((int)pp_Var2 + -1) = uVar9;
+                *pp_Var2 = p_Var11;
+                pp_Var2 = pp_Var2 + 2;
+                p_Var8 = p_Var8 + 1;
+                iVar7 = iVar7 + -1;
+                p_Var11 = p_Var11 + 1;
+              }
+              iVar7 = p_Var5->numHSpheres;
+              pp_Var3 = (_HSphere **)&p_Var8->data;
+              while (iVar7 != 0) {
+                p_Var8->hpFlags = '/';
+                *(undefined *)((int)pp_Var3 + -3) = 0x76;
+                *(undefined *)((int)pp_Var3 + -2) = 1;
+                *(undefined *)((int)pp_Var3 + -1) = uVar9;
+                *pp_Var3 = p_Var12;
+                pp_Var3 = pp_Var3 + 2;
+                p_Var8 = p_Var8 + 1;
+                iVar7 = iVar7 + -1;
+                p_Var12 = p_Var12 + 1;
+              }
+              iVar7 = p_Var5->numHBoxes;
+              pp_Var4 = (_HBox **)&p_Var8->data;
+              while (iVar7 != 0) {
+                p_Var8->hpFlags = '\x1d';
+                *(undefined *)((int)pp_Var4 + -3) = 0x24;
+                *(undefined *)((int)pp_Var4 + -2) = 5;
+                *(undefined *)((int)pp_Var4 + -1) = uVar9;
+                *pp_Var4 = p_Var13;
+                pp_Var4 = pp_Var4 + 2;
+                p_Var8 = p_Var8 + 1;
+                iVar7 = iVar7 + -1;
+                p_Var13 = p_Var13 + 1;
+              }
+            }
+            iVar14 = iVar14 + 1;
+            p_Var6 = p_Var6 + 1;
+          } while (iVar14 < p_Var18->numSegments);
+        }
+        iVar17 = iVar17 + -1;
+        pp_Var16 = pp_Var16 + 1;
+        piVar15 = piVar15 + 2;
+        p_Var19 = p_Var19 + 1;
+      } while (iVar17 != 0);
+    }
+  }
+  if (instance->maxCheckDistance == 0) {
+    instance->maxCheckDistance = 12000;
+  }
+  return;
 }
 
 
@@ -1608,18 +2003,21 @@ void INSTANCE_Post(_Instance *Inst,int Message,int Data)
 void INSTANCE_Broadcast(_Instance *sender,long whatAmIMask,int Message,int Data)
 
 {
+  ulong uVar1;
+  int iVar2;
   _Instance *Inst;
+  int plane;
   
   Inst = (gameTrackerX.instanceList)->first;
-  while( true ) {
-    if (Inst == (_Instance *)0x0) {
-      return;
+  plane = (int)gameTrackerX.gameData.asmData.MorphType;
+  while (Inst != (_Instance *)0x0) {
+    if (((Inst != sender) && (uVar1 = INSTANCE_Query(Inst,1), (uVar1 & whatAmIMask) != 0)) &&
+       (iVar2 = INSTANCE_InPlane(Inst,plane), iVar2 != 0)) {
+      INSTANCE_Post(Inst,Message,Data);
     }
-    if (Inst != sender) break;
     Inst = Inst->next;
   }
-                    /* WARNING: Subroutine does not return */
-  INSTANCE_Query(Inst,1);
+  return;
 }
 
 
@@ -1732,32 +2130,35 @@ long INSTANCE_FindWithID(long uniqueID)
 _Instance * INSTANCE_FindWithName(long areaID,char *instanceName,_Instance *startInstance)
 
 {
-  long *plVar1;
-  char *s1;
+  int iVar1;
   _Instance *p_Var2;
+  _Instance *p_Var3;
   
-  p_Var2 = (gameTrackerX.instanceList)->first;
+  p_Var3 = (gameTrackerX.instanceList)->first;
   if (startInstance != (_Instance *)0x0) {
-    p_Var2 = startInstance->next;
+    p_Var3 = startInstance->next;
   }
   if (areaID == 0) {
-    if (p_Var2 != (_Instance *)0x0) {
-                    /* WARNING: Subroutine does not return */
-      strcmpi(p_Var2->introName,instanceName);
-    }
+    do {
+      p_Var2 = p_Var3;
+      if (p_Var2 == (_Instance *)0x0) {
+        return (_Instance *)0x0;
+      }
+      p_Var3 = p_Var2->next;
+      iVar1 = strcmpi(p_Var2->introName,instanceName);
+    } while (iVar1 != 0);
   }
   else {
-    while (p_Var2 != (_Instance *)0x0) {
-      plVar1 = &p_Var2->birthStreamUnitID;
-      s1 = p_Var2->introName;
-      p_Var2 = p_Var2->next;
-      if (*plVar1 == areaID) {
-                    /* WARNING: Subroutine does not return */
-        strcmpi(s1,instanceName);
+    do {
+      p_Var2 = p_Var3;
+      if (p_Var2 == (_Instance *)0x0) {
+        return (_Instance *)0x0;
       }
-    }
+      p_Var3 = p_Var2->next;
+    } while ((p_Var2->birthStreamUnitID != areaID) ||
+            (iVar1 = strcmpi(p_Var2->introName,instanceName), iVar1 != 0));
   }
-  return (_Instance *)0x0;
+  return p_Var2;
 }
 
 
@@ -1785,8 +2186,25 @@ _Instance * INSTANCE_FindWithName(long areaID,char *instanceName,_Instance *star
 Intro * INSTANCE_FindIntro(long areaID,long introUniqueID)
 
 {
-                    /* WARNING: Subroutine does not return */
-  STREAM_GetLevelWithID(areaID);
+  Level *pLVar1;
+  Intro *pIVar2;
+  int iVar3;
+  
+  pLVar1 = STREAM_GetLevelWithID(areaID);
+  if (pLVar1 != (Level *)0x0) {
+    iVar3 = 0;
+    if (0 < pLVar1->numIntros) {
+      pIVar2 = pLVar1->introList;
+      do {
+        if (introUniqueID == pIVar2->UniqueID) {
+          return pIVar2;
+        }
+        iVar3 = iVar3 + 1;
+        pIVar2 = pIVar2 + 1;
+      } while (iVar3 < pLVar1->numIntros);
+    }
+  }
+  return (Intro *)0x0;
 }
 
 
@@ -1911,31 +2329,46 @@ _Instance * INSTANCE_Find(long introUniqueID)
 _Instance * INSTANCE_IntroduceSavedInstance(_SavedIntro *savedIntro,_StreamUnit *streamUnit)
 
 {
-  long lVar1;
+  short sVar1;
+  short sVar2;
+  short sVar3;
+  short sVar4;
+  BSPTree *pBVar5;
+  long lVar6;
   _ObjectTracker *objectTracker;
   _Instance *instance;
+  Level *pLVar7;
+  uint uVar8;
+  Intro *pIVar9;
+  Object *pOVar10;
+  int Data;
+  Intro *pIVar11;
+  Intro *pIVar12;
+  _Instance *instance_00;
   Object *object;
-  undefined4 uStack56;
-  undefined4 uStack52;
-  undefined uStack48;
+  undefined4 local_38;
+  undefined4 local_34;
+  undefined local_30;
   
-  lVar1 = INSTANCE_FindWithID((int)savedIntro->introUniqueID);
+  instance_00 = (_Instance *)0x0;
+  pBVar5 = streamUnit->level->terrain->BSPTreeArray;
+  lVar6 = INSTANCE_FindWithID((int)savedIntro->introUniqueID);
   instance = (_Instance *)0x0;
-  if (lVar1 == 0) {
-    uStack56 = *(undefined4 *)savedIntro->name;
-    uStack52 = *(undefined4 *)(savedIntro->name + 4);
-    uStack48 = 0;
+  if (lVar6 == 0) {
+    local_38 = *(undefined4 *)savedIntro->name;
+    local_34 = *(undefined4 *)(savedIntro->name + 4);
+    local_30 = 0;
     LOAD_SetSearchDirectory((int)savedIntro->birthUnitID);
-    objectTracker = STREAM_GetObjectTracker((char *)&uStack56);
+    objectTracker = STREAM_GetObjectTracker((char *)&local_38);
     LOAD_SetSearchDirectory(0);
     instance = (_Instance *)0x0;
     if (objectTracker != (_ObjectTracker *)0x0) {
       object = objectTracker->object;
-      lVar1 = MEMPACK_MemoryValidFunc((char *)object);
-      if ((lVar1 == 0) ||
+      lVar6 = MEMPACK_MemoryValidFunc((char *)object);
+      if ((lVar6 == 0) ||
          ((savedIntro->attachedUniqueID != 0 &&
-          (instance = INSTANCE_Find((uint)savedIntro->attachedUniqueID),
-          instance == (_Instance *)0x0)))) {
+          (instance_00 = INSTANCE_Find((uint)savedIntro->attachedUniqueID),
+          instance_00 == (_Instance *)0x0)))) {
         SAVE_BufferIntro((SavedBasic *)savedIntro);
         instance = (_Instance *)0x0;
       }
@@ -1948,8 +2381,92 @@ _Instance * INSTANCE_IntroduceSavedInstance(_SavedIntro *savedIntro,_StreamUnit 
         if (instance != (_Instance *)0x0) {
           objectTracker->numInUse = objectTracker->numInUse + 1;
           INSTANCE_DefaultInit(instance,object,0);
-                    /* WARNING: Subroutine does not return */
-          strcpy(instance->introName,(char *)&uStack56);
+          strcpy(instance->introName,(char *)&local_38);
+          instance->introUniqueID = (int)savedIntro->introUniqueID;
+          instance->currentStreamUnitID = (int)savedIntro->streamUnitID;
+          instance->birthStreamUnitID = (int)savedIntro->birthUnitID;
+          LIGHT_GetAmbient((_ColorType *)&instance->light_color,instance);
+          pIVar11 = (Intro *)0x0;
+          pLVar7 = STREAM_GetLevelWithID(instance->birthStreamUnitID);
+          pIVar12 = pIVar11;
+          if (pLVar7 != (Level *)0x0) {
+            Data = pLVar7->terrain->numIntros;
+            pIVar9 = pLVar7->terrain->introList;
+            if (Data != 0) {
+              do {
+                Data = Data + -1;
+                pIVar12 = pIVar9;
+                if (pIVar9->UniqueID == instance->introUniqueID) break;
+                pIVar9 = pIVar9 + 1;
+                pIVar12 = pIVar11;
+              } while (Data != 0);
+            }
+          }
+          if (pIVar12 == (Intro *)0x0) {
+            instance->intro = (Intro *)0x0;
+            instance->introData = (void *)0x0;
+          }
+          else {
+            instance->intro = pIVar12;
+            instance->introData = pIVar12->data;
+          }
+          sVar1 = (savedIntro->position).y;
+          sVar2 = (savedIntro->position).z;
+          sVar3 = (pBVar5->globalOffset).y;
+          sVar4 = (pBVar5->globalOffset).z;
+          (instance->position).x = (savedIntro->position).x + (pBVar5->globalOffset).x;
+          (instance->position).y = sVar1 + sVar3;
+          (instance->position).z = sVar2 + sVar4;
+          sVar1 = (instance->position).z;
+          *(undefined4 *)&instance->initialPos = *(undefined4 *)&instance->position;
+          (instance->initialPos).z = sVar1;
+          sVar1 = (instance->position).z;
+          *(undefined4 *)&instance->oldPos = *(undefined4 *)&instance->position;
+          (instance->oldPos).z = sVar1;
+          pOVar10 = instance->object;
+          (instance->rotation).x = (savedIntro->smallRotation).x;
+          (instance->rotation).y = (savedIntro->smallRotation).y;
+          (instance->rotation).z = (savedIntro->smallRotation).z;
+          if ((pOVar10->oflags & 0x100U) != 0) {
+            INSTANCE_BuildStaticShadow(instance);
+          }
+          (instance->scale).x = 0x1000;
+          (instance->scale).y = 0x1000;
+          (instance->scale).z = 0x1000;
+          instance->lightGroup = savedIntro->lightGroup;
+          instance->spectralLightGroup = savedIntro->specturalLightGroup;
+          INSTANCE_InsertInstanceGroup(gameTrackerX.instanceList,instance);
+          OBTABLE_GetInstanceCollideFunc(instance);
+          OBTABLE_GetInstanceProcessFunc(instance);
+          OBTABLE_GetInstanceQueryFunc(instance);
+          OBTABLE_GetInstanceMessageFunc(instance);
+          OBTABLE_GetInstanceAdditionalCollideFunc(instance);
+          OBTABLE_InstanceInit(instance);
+          instance->flags = savedIntro->flags;
+          instance->flags2 = savedIntro->flags2 & 0xfffffffe;
+          if (instance_00 != (_Instance *)0x0) {
+            INSTANCE_ForceActive(instance_00);
+            instance_00->flags2 = instance_00->flags2 | 0x80;
+          }
+          if ((instance->flags & 0x40000U) == 0) {
+            uVar8 = instance->flags2 & 0xdfffffff;
+          }
+          else {
+            uVar8 = instance->flags2 | 0x20000000;
+          }
+          instance->flags2 = uVar8;
+          instance->flags = instance->flags & 0xfdfbffffU | 0x100000;
+          MORPH_SetupInstanceFlags(&gameTrackerX,instance);
+          if (instance->intro != (Intro *)0x0) {
+            INSTANCE_ProcessIntro(instance);
+          }
+          uVar8 = (uint)savedIntro->shiftedSaveSize * 4;
+          if (0x28 < uVar8) {
+            Data = SetControlSaveDataData(uVar8 - 0x28,savedIntro + 1);
+            INSTANCE_Post(instance,(int)&DAT_00100007,Data);
+          }
+          EVENT_AddInstanceToInstanceList(instance);
+          INSTANCE_InitEffects(instance,object);
         }
       }
     }
@@ -2017,27 +2534,40 @@ _Instance *
 INSTANCE_IntroduceSavedInstanceWithIntro(_SavedIntroWithIntro *savedIntro,_StreamUnit *streamUnit)
 
 {
-  long lVar1;
+  short sVar1;
+  short sVar2;
+  short sVar3;
+  short sVar4;
+  long lVar5;
   _ObjectTracker *objectTracker;
   _Instance *instance;
+  MultiSpline *pMVar6;
+  int Data;
+  BSPTree *pBVar7;
+  Object *pOVar8;
+  uint uVar9;
+  uint uVar10;
   Intro *name;
+  _Instance *instance_00;
   Object *object;
   
+  instance_00 = (_Instance *)0x0;
+  pBVar7 = streamUnit->level->terrain->BSPTreeArray;
   name = streamUnit->level->introList + savedIntro->introOffset;
-  lVar1 = INSTANCE_FindWithID(name->UniqueID);
+  lVar5 = INSTANCE_FindWithID(name->UniqueID);
   instance = (_Instance *)0x0;
-  if (lVar1 == 0) {
+  if (lVar5 == 0) {
     LOAD_SetSearchDirectory(streamUnit->StreamUnitID);
     objectTracker = STREAM_GetObjectTracker((char *)name);
     LOAD_SetSearchDirectory(0);
     instance = (_Instance *)0x0;
     if (objectTracker != (_ObjectTracker *)0x0) {
       object = objectTracker->object;
-      lVar1 = MEMPACK_MemoryValidFunc((char *)object);
-      if ((lVar1 == 0) ||
+      lVar5 = MEMPACK_MemoryValidFunc((char *)object);
+      if ((lVar5 == 0) ||
          ((savedIntro->attachedUniqueID != 0 &&
-          ((instance = INSTANCE_Find((uint)savedIntro->attachedUniqueID),
-           instance == (_Instance *)0x0 || (instance->matrix == (MATRIX *)0x0)))))) {
+          ((instance_00 = INSTANCE_Find((uint)savedIntro->attachedUniqueID),
+           instance_00 == (_Instance *)0x0 || (instance_00->matrix == (MATRIX *)0x0)))))) {
         SAVE_BufferIntro((SavedBasic *)savedIntro);
         instance = (_Instance *)0x0;
       }
@@ -2050,8 +2580,81 @@ INSTANCE_IntroduceSavedInstanceWithIntro(_SavedIntroWithIntro *savedIntro,_Strea
         if (instance != (_Instance *)0x0) {
           objectTracker->numInUse = objectTracker->numInUse + 1;
           INSTANCE_DefaultInit(instance,object,0);
-                    /* WARNING: Subroutine does not return */
           strcpy(instance->introName,(char *)name);
+          instance->introUniqueID = name->UniqueID;
+          instance->introNum = name->intronum;
+          instance->birthStreamUnitID = streamUnit->StreamUnitID;
+          instance->currentStreamUnitID = streamUnit->StreamUnitID;
+          instance->attachedID = (uint)savedIntro->attachedUniqueID;
+          LIGHT_GetAmbient((_ColorType *)&instance->light_color,instance);
+          name->instance = instance;
+          STREAM_GetLevelWithID(instance->birthStreamUnitID);
+          instance->intro = name;
+          instance->introData = name->data;
+          sVar1 = (savedIntro->position).y;
+          sVar2 = (savedIntro->position).z;
+          sVar3 = (pBVar7->globalOffset).y;
+          sVar4 = (pBVar7->globalOffset).z;
+          (instance->position).x = (savedIntro->position).x + (pBVar7->globalOffset).x;
+          (instance->position).y = sVar1 + sVar3;
+          (instance->position).z = sVar2 + sVar4;
+          sVar1 = (instance->position).z;
+          *(undefined4 *)&instance->initialPos = *(undefined4 *)&instance->position;
+          (instance->initialPos).z = sVar1;
+          sVar1 = (instance->position).z;
+          *(undefined4 *)&instance->oldPos = *(undefined4 *)&instance->position;
+          (instance->oldPos).z = sVar1;
+          pOVar8 = instance->object;
+          (instance->rotation).x = (savedIntro->smallRotation).x;
+          (instance->rotation).y = (savedIntro->smallRotation).y;
+          (instance->rotation).z = (savedIntro->smallRotation).z;
+          if ((pOVar8->oflags & 0x100U) != 0) {
+            INSTANCE_BuildStaticShadow(instance);
+          }
+          (instance->scale).x = 0x1000;
+          (instance->scale).y = 0x1000;
+          (instance->scale).z = 0x1000;
+          instance->lightGroup = savedIntro->lightGroup;
+          instance->spectralLightGroup = savedIntro->specturalLightGroup;
+          INSTANCE_InsertInstanceGroup(gameTrackerX.instanceList,instance);
+          OBTABLE_GetInstanceCollideFunc(instance);
+          OBTABLE_GetInstanceProcessFunc(instance);
+          OBTABLE_GetInstanceQueryFunc(instance);
+          OBTABLE_GetInstanceMessageFunc(instance);
+          OBTABLE_GetInstanceAdditionalCollideFunc(instance);
+          OBTABLE_InstanceInit(instance);
+          instance->flags = savedIntro->flags;
+          instance->flags2 = savedIntro->flags2;
+          if (instance_00 != (_Instance *)0x0) {
+            INSTANCE_ForceActive(instance_00);
+            instance_00->flags2 = instance_00->flags2 | 0x80;
+          }
+          uVar9 = instance->flags2;
+          uVar10 = uVar9 & 0xfffffffe;
+          instance->flags2 = uVar10;
+          if ((instance->flags & 0x40000U) == 0) {
+            uVar10 = uVar9 & 0xdffffffe;
+          }
+          else {
+            uVar10 = uVar10 | 0x20000000;
+          }
+          instance->flags2 = uVar10;
+          instance->flags = instance->flags & 0xfffbffff;
+          pMVar6 = SCRIPT_GetMultiSpline(instance,(ulong *)0x0,(ulong *)0x0);
+          if (pMVar6 == (MultiSpline *)0x0) {
+            instance->flags = instance->flags & 0xfdffffffU | 0x100000;
+          }
+          MORPH_SetupInstanceFlags(&gameTrackerX,instance);
+          if (instance->intro != (Intro *)0x0) {
+            INSTANCE_ProcessIntro(instance);
+          }
+          uVar10 = (uint)savedIntro->shiftedSaveSize * 4;
+          if (0x20 < uVar10) {
+            Data = SetControlSaveDataData(uVar10 - 0x20,savedIntro + 1);
+            INSTANCE_Post(instance,(int)&DAT_00100007,Data);
+          }
+          EVENT_AddInstanceToInstanceList(instance);
+          INSTANCE_InitEffects(instance,object);
         }
       }
     }
@@ -2112,18 +2715,43 @@ INSTANCE_IntroduceSavedInstanceWithIntro(_SavedIntroWithIntro *savedIntro,_Strea
 void INSTANCE_SpatialRelationships(_InstanceList *instanceList)
 
 {
+  undefined4 *puVar1;
+  ulong uVar2;
+  int iVar3;
+  MATRIX *pMVar4;
   _Instance *Inst;
+  _Instance *Inst_00;
+  uint uVar5;
+  MATRIX MStack80;
+  evCollideInstanceStatsData eStack48;
   
-  Inst = instanceList->first;
-  while( true ) {
-    if (Inst == (_Instance *)0x0) {
-      return;
+  Inst_00 = instanceList->first;
+  while (Inst_00 != (_Instance *)0x0) {
+    if ((Inst_00->flags2 & 0x10000401U) == 0x400) {
+      uVar5 = Inst_00->checkMask;
+      puVar1 = (undefined4 *)INSTANCE_Query(Inst_00,0xd);
+      INSTANCE_Post(Inst_00,0x200000,0);
+      if (puVar1 != (undefined4 *)0x0) {
+        TransposeMatrix(puVar1,(undefined4 *)&MStack80);
+        Inst = instanceList->first;
+        while (Inst != (_Instance *)0x0) {
+          if ((((Inst != Inst_00) && ((Inst->flags2 & 0x10000000U) == 0)) &&
+              ((Inst->flags & 0x20U) == 0)) &&
+             (uVar2 = INSTANCE_Query(Inst,1), (uVar2 & uVar5) != 0)) {
+            pMVar4 = (MATRIX *)INSTANCE_Query(Inst,0xe);
+            if (((pMVar4 != (MATRIX *)0x0) || (pMVar4 = Inst->matrix, pMVar4 != (MATRIX *)0x0)) &&
+               (iVar3 = INSTANCE_SetStatsData(Inst_00,Inst,(_Vector *)pMVar4->t,&eStack48,&MStack80)
+               , iVar3 != 0)) {
+              INSTANCE_Post(Inst_00,0x200001,(int)&eStack48);
+            }
+          }
+          Inst = Inst->next;
+        }
+      }
     }
-    if ((Inst->flags2 & 0x10000401U) == 0x400) break;
-    Inst = Inst->next;
+    Inst_00 = Inst_00->next;
   }
-                    /* WARNING: Subroutine does not return */
-  INSTANCE_Query(Inst,0xd);
+  return;
 }
 
 
@@ -2160,10 +2788,26 @@ int INSTANCE_SetStatsData
               evCollideInstanceStatsData *data,MATRIX *mat)
 
 {
-                    /* WARNING: Subroutine does not return */
-  MATH3D_LengthXYZ((int)(instance->position).x - checkPoint->x,
-                   (int)(instance->position).y - checkPoint->y,
-                   (int)(instance->position).z - checkPoint->z);
+  bool bVar1;
+  uint uVar2;
+  long lVar3;
+  
+  uVar2 = MATH3D_LengthXYZ((int)(instance->position).x - checkPoint->x,
+                           (int)(instance->position).y - checkPoint->y,
+                           (int)(instance->position).z - checkPoint->z);
+  bVar1 = uVar2 < instance->maxCheckDistance;
+  if (bVar1) {
+    DAT_1f800000 = *(short *)&checkPoint->x - (instance->position).x;
+    DAT_1f800002 = *(short *)&checkPoint->y - (instance->position).y;
+    DAT_1f800004 = *(short *)&checkPoint->z - (instance->position).z;
+    ApplyMatrixSV(mat,0x1f800000,&data->relativePosition);
+    data->instance = checkee;
+    data->distance = uVar2;
+    data->zDelta = (int)DAT_1f800004;
+    lVar3 = MATH3D_LengthXY((int)DAT_1f800000,(int)DAT_1f800002);
+    data->xyDistance = lVar3;
+  }
+  return (uint)bVar1;
 }
 
 
@@ -2191,8 +2835,9 @@ void INSTANCE_LinkToParent(_Instance *instance,_Instance *parent,int node)
   (instance->scale).y = (short)(((int)(instance->scale).y << 0xc) / (int)(parent->scale).y);
   (instance->scale).z = (short)(((int)(instance->scale).z << 0xc) / (int)(parent->scale).z);
   INSTANCE_UpdateFamilyStreamUnitID(parent);
-                    /* WARNING: Subroutine does not return */
   INSTANCE_Post(parent,(int)&DAT_00100012,(int)instance);
+  instance->flags2 = instance->flags2 | 8;
+  return;
 }
 
 
@@ -2244,17 +2889,19 @@ void INSTANCE_UnlinkFromParent(_Instance *instance)
   _G2EulerAngles_Type local_18;
   
   Inst = instance->LinkParent;
-  if (Inst == (_Instance *)0x0) {
-    return;
-  }
-  p_Var2 = Inst->LinkChild;
-  if (p_Var2 != instance) {
-    p_Var3 = p_Var2->LinkSibling;
-    while (p_Var3 != instance) {
-      p_Var2 = p_Var2->LinkSibling;
-      p_Var3 = p_Var2->LinkSibling;
+  if (Inst != (_Instance *)0x0) {
+    p_Var2 = Inst->LinkChild;
+    if (p_Var2 == instance) {
+      Inst->LinkChild = instance->LinkSibling;
     }
-    p_Var2->LinkSibling = instance->LinkSibling;
+    else {
+      p_Var3 = p_Var2->LinkSibling;
+      while (p_Var3 != instance) {
+        p_Var2 = p_Var2->LinkSibling;
+        p_Var3 = p_Var2->LinkSibling;
+      }
+      p_Var2->LinkSibling = instance->LinkSibling;
+    }
     sVar1 = (instance->scale).x;
     instance->LinkSibling = (_Instance *)0x0;
     instance->LinkParent = (_Instance *)0x0;
@@ -2273,16 +2920,15 @@ void INSTANCE_UnlinkFromParent(_Instance *instance)
       iVar4 = iVar4 + 0xfff;
     }
     (instance->scale).z = (short)(iVar4 >> 0xc);
-    if (Inst->matrix == (MATRIX *)0x0) {
-                    /* WARNING: Subroutine does not return */
-      INSTANCE_Post(Inst,(int)&DAT_00100013,(int)instance);
+    if (Inst->matrix != (MATRIX *)0x0) {
+      G2EulerAngles_FromMatrix
+                (&local_18,(_G2Matrix_Type *)(Inst->matrix + instance->ParentLinkNode),0x15);
+      (instance->rotation).x = local_18.x;
+      (instance->rotation).y = local_18.y;
+      (instance->rotation).z = local_18.z;
     }
-                    /* WARNING: Subroutine does not return */
-    G2EulerAngles_FromMatrix
-              (&local_18,(_G2Matrix_Type *)(Inst->matrix + instance->ParentLinkNode),0x15);
+    INSTANCE_Post(Inst,(int)&DAT_00100013,(int)instance);
   }
-  Inst->LinkChild = instance->LinkSibling;
-  INSTANCE_UpdateFamilyStreamUnitID((char)instance);
   return;
 }
 
@@ -2318,9 +2964,16 @@ void INSTANCE_UnlinkFromParent(_Instance *instance)
 void INSTANCE_UnlinkChildren(_Instance *instance)
 
 {
-  if (instance->LinkChild != (_Instance *)0x0) {
-                    /* WARNING: Subroutine does not return */
-    INSTANCE_Post(instance,(int)&DAT_00100013,(int)instance->LinkChild);
+  _Instance *Data;
+  _Instance *p_Var1;
+  
+  Data = instance->LinkChild;
+  while (Data != (_Instance *)0x0) {
+    p_Var1 = Data->LinkSibling;
+    INSTANCE_Post(instance,(int)&DAT_00100013,(int)Data);
+    Data->LinkParent = (_Instance *)0x0;
+    Data->LinkSibling = (_Instance *)0x0;
+    Data = p_Var1;
   }
   instance->LinkChild = (_Instance *)0x0;
   return;

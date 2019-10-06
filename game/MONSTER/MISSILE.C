@@ -14,10 +14,12 @@
 void MISSILE_Process(_Instance *instance,GameTracker *gameTracker)
 
 {
+  ulong uVar1;
+  
   ProcessPhysicalObject(instance,gameTracker);
-  if (instance->LinkParent == (_Instance *)0x0) {
-                    /* WARNING: Subroutine does not return */
-    MON_GetTime(instance);
+  if ((instance->LinkParent == (_Instance *)0x0) &&
+     (uVar1 = MON_GetTime(instance), (uint)instance->work2 < uVar1)) {
+    INSTANCE_KillInstance(instance);
   }
   return;
 }
@@ -185,6 +187,7 @@ _Instance * MISSILE_Fire(_Instance *instance,_MonsterMissile *missiledef,void *t
 {
   _Instance *Inst;
   int Data;
+  ulong uVar1;
   ushort spinType;
   _SVector local_20;
   
@@ -198,10 +201,11 @@ _Instance * MISSILE_Fire(_Instance *instance,_MonsterMissile *missiledef,void *t
       local_20.z = 0;
     }
     Data = SetObjectThrowData(target,&local_20,(ushort)type,spinType,(uint)missiledef->speed,0,0,0);
-                    /* WARNING: Subroutine does not return */
     INSTANCE_Post(Inst,0x800010,Data);
+    uVar1 = MON_GetTime(Inst);
+    *(undefined **)&Inst->work2 = &DAT_00001388 + uVar1;
   }
-  return (_Instance *)0x0;
+  return Inst;
 }
 
 

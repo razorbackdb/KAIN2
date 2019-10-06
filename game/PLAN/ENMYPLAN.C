@@ -225,10 +225,31 @@ void ENMYPLAN_ReleasePlanningWorkspace(int slotID)
 int ENMYPLAN_WayPointSkipped(_Position *currentPos,_Position *targetPos,_Position *nextTargetPos)
 
 {
-                    /* WARNING: Subroutine does not return */
-  MATH3D_LengthXYZ((int)(((uint)(ushort)targetPos->x - (uint)(ushort)currentPos->x) * 0x10000) >>
-                   0x10,(int)(short)(targetPos->y - currentPos->y),
-                   (int)(short)(targetPos->z - currentPos->z));
+  short sVar1;
+  short sVar2;
+  short sVar3;
+  int iVar4;
+  int iVar5;
+  short sVar6;
+  uint local_28;
+  uint local_24;
+  
+  iVar4 = (uint)(ushort)targetPos->x - (uint)(ushort)currentPos->x;
+  sVar1 = targetPos->y - currentPos->y;
+  sVar6 = targetPos->z - currentPos->z;
+  local_28 = MATH3D_LengthXYZ(iVar4 * 0x10000 >> 0x10,(int)sVar1,(int)sVar6);
+  iVar5 = (uint)(ushort)nextTargetPos->x - (uint)(ushort)targetPos->x;
+  sVar2 = nextTargetPos->y - targetPos->y;
+  sVar3 = nextTargetPos->z - targetPos->z;
+  local_24 = MATH3D_LengthXYZ(iVar5 * 0x10000 >> 0x10,(int)sVar2,(int)sVar3);
+  if ((int)local_28 < (int)local_24) {
+    local_28 = local_28 ^ local_24;
+    local_24 = local_24 ^ local_28;
+    local_28 = local_28 ^ local_24;
+  }
+  return (uint)((int)(((int)(local_28 * 0x2d4) >> 10) * local_24) <
+               (int)(short)iVar4 * (int)(short)iVar5 + (int)sVar1 * (int)sVar2 +
+               (int)sVar6 * (int)sVar3) ^ 1;
 }
 
 
@@ -254,9 +275,20 @@ int ENMYPLAN_WayPointSkipped(_Position *currentPos,_Position *targetPos,_Positio
 int ENMYPLAN_WayPointReached(_Position *currentPos,_Position *oldCurrentPos,_Position *targetPos)
 
 {
-                    /* WARNING: Subroutine does not return */
-  MATH3D_LengthXYZ((int)targetPos->x - (int)currentPos->x,(int)targetPos->y - (int)currentPos->y,
-                   (int)targetPos->z - (int)currentPos->z);
+  long lVar1;
+  long lVar2;
+  int iVar3;
+  
+  lVar1 = MATH3D_LengthXYZ((int)targetPos->x - (int)currentPos->x,
+                           (int)targetPos->y - (int)currentPos->y,
+                           (int)targetPos->z - (int)currentPos->z);
+  lVar2 = MATH3D_LengthXYZ((int)targetPos->x - (int)oldCurrentPos->x,
+                           (int)targetPos->y - (int)oldCurrentPos->y,
+                           (int)targetPos->z - (int)oldCurrentPos->z);
+  if (((lVar1 <= lVar2) || (iVar3 = 1, 399 < lVar1)) && (iVar3 = 1, 0x31 < lVar1)) {
+    iVar3 = 0;
+  }
+  return iVar3;
 }
 
 
@@ -304,10 +336,41 @@ void ENMYPLAN_Replan(EnemyPlanSlotData *planSlot)
 int ENMYPLAN_PathClear(_Position *pos,_Position *target)
 
 {
-                    /* WARNING: Subroutine does not return */
-  MATH3D_LengthXYZ((int)(((uint)(ushort)target->x - (uint)(ushort)pos->x) * 0x10000) >> 0x10,
-                   (int)(((uint)(ushort)target->y - (uint)(ushort)pos->y) * 0x10000) >> 0x10,
-                   (int)(((uint)(ushort)target->z - (uint)(ushort)pos->z) * 0x10000) >> 0x10);
+  int iVar1;
+  long lVar2;
+  int iVar3;
+  int iVar4;
+  _Position *endPos;
+  _Position local_10;
+  
+  iVar4 = (uint)(ushort)target->x - (uint)(ushort)pos->x;
+  local_10.x = (short)iVar4;
+  iVar1 = (uint)(ushort)target->y - (uint)(ushort)pos->y;
+  local_10.y = (short)iVar1;
+  iVar3 = (uint)(ushort)target->z - (uint)(ushort)pos->z;
+  local_10.z = (short)iVar3;
+  lVar2 = MATH3D_LengthXYZ(iVar4 * 0x10000 >> 0x10,iVar1 * 0x10000 >> 0x10,iVar3 * 0x10000 >> 0x10);
+  endPos = pos;
+  if (0x500 < lVar2) {
+    iVar1 = (((int)local_10.x << 0xc) / lVar2) * 0x500;
+    if (iVar1 < 0) {
+      iVar1 = iVar1 + 0xfff;
+    }
+    iVar3 = (((int)local_10.y << 0xc) / lVar2) * 0x500;
+    if (iVar3 < 0) {
+      iVar3 = iVar3 + 0xfff;
+    }
+    iVar4 = (((int)local_10.z << 0xc) / lVar2) * 0x500;
+    if (iVar4 < 0) {
+      iVar4 = iVar4 + 0xfff;
+    }
+    local_10.x = (short)(iVar1 >> 0xc) + pos->x;
+    local_10.y = (short)(iVar3 >> 0xc) + pos->y;
+    local_10.z = (short)(iVar4 >> 0xc) + pos->z;
+    endPos = &local_10;
+  }
+  iVar1 = PLANCOLL_DoesStraightLinePathExist(pos,endPos,0);
+  return iVar1;
 }
 
 
@@ -349,165 +412,178 @@ int ENMYPLAN_MoveToTargetFinal
   uchar uVar1;
   byte bVar2;
   byte bVar3;
-  int iVar4;
+  void *pvVar4;
   int iVar5;
-  short sVar6;
-  uint uVar7;
-  int iVar8;
-  uchar *puVar9;
-  void *pvVar10;
+  int iVar6;
+  long lVar7;
+  short sVar8;
+  uint uVar9;
+  int iVar10;
   uchar *puVar11;
-  byte bVar12;
+  EnemyPlanSlotData *planSlot;
+  uchar *puVar12;
+  byte bVar13;
   EnemyPlanData *planData;
-  uint uVar13;
+  uint uVar14;
   _Position *nextTargetPos;
   _Position *targetPos_00;
   
-  pvVar10 = gameTrackerX.enemyPlanPool;
+  pvVar4 = gameTrackerX.enemyPlanPool;
   gameTrackerX.plan_collide_override = '\x01';
-  sVar6 = targetPos->z;
+  sVar8 = targetPos->z;
   *(undefined4 *)outputPos = *(undefined4 *)targetPos;
-  outputPos->z = sVar6;
+  outputPos->z = sVar8;
   if ((slotID == -1) || (9 < slotID)) {
     gameTrackerX.plan_collide_override = '\x01';
-    iVar4 = 2;
+    iVar5 = 2;
   }
   else {
-    pvVar10 = (void *)((int)pvVar10 + slotID * 0x5e);
-    bVar12 = *(byte *)((int)pvVar10 + 1);
-    planData = (EnemyPlanData *)((int)pvVar10 + 0x16);
-    if (bVar12 == 1) {
-      iVar4 = PLANAPI_FindPathInGraphToTarget
-                        ((_Position *)((int)pvVar10 + 4),planData,validNodeTypes);
-      sVar6 = *(short *)((int)pvVar10 + 0x5c) + 1;
-      *(short *)((int)pvVar10 + 0x5c) = sVar6;
-      if (iVar4 == 0) {
-        if (0x3c < sVar6) {
-          *(undefined *)((int)pvVar10 + 1) = 4;
+    planSlot = (EnemyPlanSlotData *)((int)pvVar4 + slotID * 0x5e);
+    bVar13 = planSlot->state;
+    planData = &planSlot->planData;
+    if (bVar13 == 1) {
+      iVar5 = PLANAPI_FindPathInGraphToTarget(&planSlot->startPos,planData,validNodeTypes);
+      sVar8 = planSlot->timer + 1;
+      planSlot->timer = sVar8;
+      if (iVar5 == 0) {
+        if (0x3c < sVar8) {
+          planSlot->state = '\x04';
         }
       }
       else {
-        *(undefined *)((int)pvVar10 + 1) = 2;
-        *(undefined *)((int)pvVar10 + 2) = 1;
+        planSlot->state = '\x02';
+        planSlot->wayPointBeingServoedTo = '\x01';
       }
     }
     else {
-      if (bVar12 < 2) {
-        if (bVar12 == 0) {
-          sVar6 = (instance->position).z;
-          *(undefined4 *)((int)pvVar10 + 4) = *(undefined4 *)&instance->position;
-          *(short *)((int)pvVar10 + 8) = sVar6;
-          sVar6 = targetPos->z;
-          *(undefined4 *)((int)pvVar10 + 10) = *(undefined4 *)targetPos;
-          *(short *)((int)pvVar10 + 0xe) = sVar6;
-          *(undefined2 *)((int)pvVar10 + 0x5c) = 0;
-          iVar4 = PLANAPI_AddNodeOfTypeToPool((_Position *)((int)pvVar10 + 10),3);
-          if (iVar4 != 0) {
-            PLANAPI_AddNodeOfTypeToPool((_Position *)((int)pvVar10 + 4),2);
-            *(undefined *)((int)pvVar10 + 1) = 1;
+      if (bVar13 < 2) {
+        if (bVar13 == 0) {
+          sVar8 = (instance->position).z;
+          *(undefined4 *)&planSlot->startPos = *(undefined4 *)&instance->position;
+          (planSlot->startPos).z = sVar8;
+          sVar8 = targetPos->z;
+          *(undefined4 *)&planSlot->goalPos = *(undefined4 *)targetPos;
+          (planSlot->goalPos).z = sVar8;
+          planSlot->timer = 0;
+          iVar5 = PLANAPI_AddNodeOfTypeToPool(&planSlot->goalPos,3);
+          if (iVar5 != 0) {
+            PLANAPI_AddNodeOfTypeToPool(&planSlot->startPos,2);
+            planSlot->state = '\x01';
           }
         }
       }
       else {
-        if (bVar12 == 2) {
-          bVar12 = *(byte *)((int)pvVar10 + 2);
-          uVar13 = (uint)bVar12;
-          puVar11 = planData->nodeSkipArray + uVar13;
-          uVar1 = *puVar11;
-          targetPos_00 = planData->wayPointArray + uVar13;
-          sVar6 = targetPos_00->z;
+        if (bVar13 == 2) {
+          bVar13 = planSlot->wayPointBeingServoedTo;
+          uVar14 = (uint)bVar13;
+          puVar12 = planData->nodeSkipArray + uVar14;
+          uVar1 = *puVar12;
+          targetPos_00 = planData->wayPointArray + uVar14;
+          sVar8 = targetPos_00->z;
           *(undefined4 *)outputPos = *(undefined4 *)targetPos_00;
-          outputPos->z = sVar6;
+          outputPos->z = sVar8;
           if (uVar1 == '\x02') {
-            iVar4 = ENMYPLAN_PathClear(&instance->position,targetPos_00);
-            if (((iVar4 == 0) && (*(char *)(&planData[-1].field_0x43 + uVar13) == '\x01')) &&
-               (bVar12 != 0)) {
+            iVar5 = ENMYPLAN_PathClear(&instance->position,targetPos_00);
+            if (((iVar5 == 0) && (*(char *)(&planData[-1].field_0x43 + uVar14) == '\x01')) &&
+               (bVar13 != 0)) {
               do {
-                uVar7 = uVar13 - 1;
-                if ((*(char *)(&planData[-1].field_0x43 + uVar13) != '\x01') || (uVar7 == 0)) {
-                  *(undefined *)((int)pvVar10 + 2) = (char)uVar7;
-                  planData->nodeSkipArray[uVar13] = '\x02';
+                uVar9 = uVar14 - 1;
+                if ((*(char *)(&planData[-1].field_0x43 + uVar14) != '\x01') || (uVar9 == 0)) {
+                  planSlot->wayPointBeingServoedTo = (char)uVar9;
+                  planData->nodeSkipArray[uVar14] = '\x02';
                   break;
                 }
-                uVar13 = uVar7;
-              } while (0 < (int)uVar7);
+                uVar14 = uVar9;
+              } while (0 < (int)uVar9);
             }
           }
           else {
-            iVar4 = (uint)*(byte *)((int)pvVar10 + 2) + 1;
-            iVar8 = iVar4 * 6 + 0x10;
-            bVar12 = planData->nodeTypeArray[(uint)*(byte *)((int)pvVar10 + 2) + 1] >> 3 & 3;
-            if (((puVar11[8] >> 3 & 3) == bVar12) &&
-               (bVar3 = puVar11[8] >> 3 & 3, *puVar11 != '\x02')) {
+            iVar5 = (uint)(byte)planSlot->wayPointBeingServoedTo + 1;
+            iVar10 = iVar5 * 6 + 0x10;
+            bVar13 = planData->nodeTypeArray[(uint)(byte)planSlot->wayPointBeingServoedTo + 1] >> 3
+                     & 3;
+            if (((puVar12[8] >> 3 & 3) == bVar13) &&
+               (bVar3 = puVar12[8] >> 3 & 3, *puVar12 != '\x02')) {
               do {
-                bVar2 = bVar12;
+                bVar2 = bVar13;
                 if (bVar3 != 0) goto LAB_800967d8;
-                nextTargetPos = (_Position *)(planData->nodeSkipArray + iVar8);
-                iVar5 = ENMYPLAN_WayPointSkipped(&instance->position,targetPos_00,nextTargetPos);
-                puVar9 = planData->nodeSkipArray + uVar13;
-                if (iVar5 == 0) break;
-                if ((int)((uint)*(byte *)((int)pvVar10 + 0x58) - 2) <=
-                    (int)(uint)*(byte *)((int)pvVar10 + 2)) goto LAB_800967d8;
-                *puVar11 = '\x01';
-                puVar11 = puVar11 + 1;
-                uVar13 = uVar13 + 1;
-                iVar8 = iVar8 + 6;
-                *(char *)((int)pvVar10 + 2) = *(char *)((int)pvVar10 + 2) + '\x01';
-                bVar12 = planData->nodeTypeArray[iVar4 + 1] >> 3 & 3;
+                nextTargetPos = (_Position *)(planData->nodeSkipArray + iVar10);
+                iVar6 = ENMYPLAN_WayPointSkipped(&instance->position,targetPos_00,nextTargetPos);
+                puVar11 = planData->nodeSkipArray + uVar14;
+                if (iVar6 == 0) break;
+                if ((int)((uint)(planSlot->planData).numWayPoints - 2) <=
+                    (int)(uint)(byte)planSlot->wayPointBeingServoedTo) goto LAB_800967d8;
+                *puVar12 = '\x01';
+                puVar12 = puVar12 + 1;
+                uVar14 = uVar14 + 1;
+                iVar10 = iVar10 + 6;
+                planSlot->wayPointBeingServoedTo = planSlot->wayPointBeingServoedTo + '\x01';
+                bVar13 = planData->nodeTypeArray[iVar5 + 1] >> 3 & 3;
                 targetPos_00 = nextTargetPos;
-                if (bVar2 != bVar12) goto LAB_800967d8;
-                puVar9 = planData->nodeSkipArray + uVar13;
-                iVar4 = iVar4 + 1;
+                if (bVar2 != bVar13) goto LAB_800967d8;
+                puVar11 = planData->nodeSkipArray + uVar14;
+                iVar5 = iVar5 + 1;
                 bVar3 = bVar2;
-              } while (*puVar11 != '\x02');
+              } while (*puVar12 != '\x02');
             }
             else {
 LAB_800967d8:
-              puVar9 = planData->nodeSkipArray + uVar13;
+              puVar11 = planData->nodeSkipArray + uVar14;
             }
-            *puVar9 = '\x02';
+            *puVar11 = '\x02';
           }
-          iVar4 = ENMYPLAN_WayPointReached
-                            (&instance->position,(_Position *)((int)pvVar10 + 0x10),targetPos_00);
-          if ((iVar4 != 0) &&
-             (*(char *)((int)pvVar10 + 2) = *(char *)((int)pvVar10 + 2) + '\x01',
-             (int)((uint)*(byte *)((int)pvVar10 + 0x58) - 1) <=
-             (int)(uint)*(byte *)((int)pvVar10 + 2))) {
-            *(undefined *)((int)pvVar10 + 1) = 3;
+          iVar5 = ENMYPLAN_WayPointReached
+                            (&instance->position,&planSlot->oldCurrentPos,targetPos_00);
+          if ((iVar5 != 0) &&
+             (planSlot->wayPointBeingServoedTo = planSlot->wayPointBeingServoedTo + '\x01',
+             (int)((uint)(planSlot->planData).numWayPoints - 1) <=
+             (int)(uint)(byte)planSlot->wayPointBeingServoedTo)) {
+            planSlot->state = '\x03';
             PLANAPI_DeleteNodesFromPoolByType(2);
             PLANAPI_DeleteNodesFromPoolByType(3);
           }
         }
         else {
-          if (bVar12 == 3) {
-                    /* WARNING: Subroutine does not return */
-            MATH3D_LengthXYZ((int)targetPos->x - (int)(instance->position).x,
-                             (int)targetPos->y - (int)(instance->position).y,
-                             (int)targetPos->z - (int)(instance->position).z);
+          if (bVar13 == 3) {
+            lVar7 = MATH3D_LengthXYZ((int)targetPos->x - (int)(instance->position).x,
+                                     (int)targetPos->y - (int)(instance->position).y,
+                                     (int)targetPos->z - (int)(instance->position).z);
+            if (0x400 < lVar7) {
+              targetPos_00 = planData->wayPointArray + (byte)planSlot->wayPointBeingServoedTo;
+              lVar7 = MATH3D_LengthXYZ((int)targetPos->x - (int)targetPos_00->x,
+                                       (int)targetPos->y - (int)targetPos_00->y,
+                                       (int)targetPos->z - (int)targetPos_00->z);
+              if (0x400 < lVar7) {
+                ENMYPLAN_Replan(planSlot);
+              }
+            }
+            sVar8 = targetPos->z;
+            *(undefined4 *)outputPos = *(undefined4 *)targetPos;
+            outputPos->z = sVar8;
           }
         }
       }
     }
-    sVar6 = (instance->position).z;
-    *(undefined4 *)((int)pvVar10 + 0x10) = *(undefined4 *)&instance->position;
-    *(short *)((int)pvVar10 + 0x14) = sVar6;
-    switch(*(undefined *)((int)pvVar10 + 1)) {
-    case 0:
-    case 1:
-      iVar4 = 0;
+    sVar8 = (instance->position).z;
+    *(undefined4 *)&planSlot->oldCurrentPos = *(undefined4 *)&instance->position;
+    (planSlot->oldCurrentPos).z = sVar8;
+    switch(planSlot->state) {
+    case '\0':
+    case '\x01':
+      iVar5 = 0;
       break;
-    case 2:
-      iVar4 = 1;
+    case '\x02':
+      iVar5 = 1;
       break;
-    case 3:
-      iVar4 = 2;
+    case '\x03':
+      iVar5 = 2;
       break;
     default:
-      iVar4 = 3;
+      iVar5 = 3;
     }
     gameTrackerX.plan_collide_override = '\0';
   }
-  return iVar4;
+  return iVar5;
 }
 
 

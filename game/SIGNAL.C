@@ -278,10 +278,82 @@ long SIGNAL_HandleCameraValue(_Instance *instance,Signal *signal)
 long SIGNAL_HandleStreamLevel(_Instance *instance,Signal *signal)
 
 {
+  bool bVar1;
+  char *pcVar2;
+  int id;
+  _StreamUnit *p_Var3;
+  long lVar4;
+  Level *level;
+  short sVar5;
   char acStack48 [16];
   
-                    /* WARNING: Subroutine does not return */
+  sVar5 = -1;
+  bVar1 = false;
   strcpy(acStack48,(char *)(signal->data + 8));
+  pcVar2 = strchr(acStack48,0x2c);
+  if (pcVar2 != (char *)0x0) {
+    id = atoi(pcVar2 + 1);
+    sVar5 = (short)id;
+    *pcVar2 = '\0';
+  }
+  id = strcmpi(acStack48,"warpgate");
+  if (id == 0) {
+    p_Var3 = STREAM_GetStreamUnitWithID(instance->currentStreamUnitID);
+    if (gameTrackerX.currentTime - DAT_800cf180 < 0x65) {
+      return 1;
+    }
+    if ((p_Var3->flags & 8U) == 0) {
+      return 1;
+    }
+    id = ((&WarpRoomArray)[CurrentWarpNumber].streamUnit)->StreamUnitID;
+    strcpy(acStack48,(char *)(&WarpRoomArray + CurrentWarpNumber));
+    bVar1 = true;
+    if ((&WarpRoomArray)[CurrentWarpNumber].streamUnit == (_StreamUnit *)0x0) {
+      return 1;
+    }
+    if ((((&WarpRoomArray)[CurrentWarpNumber].streamUnit)->flags & 8U) == 0) {
+      return 1;
+    }
+  }
+  else {
+    id = *(int *)(signal->data + 4);
+  }
+  if (instance->currentStreamUnitID != id) {
+    if (instance == gameTrackerX.playerInstance) {
+      gameTrackerX.SwitchToNewStreamUnit = 1;
+      DAT_800cf180 = gameTrackerX.currentTime;
+      strcpy(gameTrackerX.S_baseAreaName,acStack48);
+      gameTrackerX.fromSignal = *(short *)signal->data;
+      gameTrackerX.toSignal = sVar5;
+      gameTrackerX.moveRazielToStreamID = id;
+      if (bVar1) {
+        if ((gameTrackerX.gameData.asmData.MorphType == 0) &&
+           (id = strcmpi(acStack48,"under3"), id == 0)) {
+          INSTANCE_Post(gameTrackerX.playerInstance,0x10002001,0);
+        }
+        lVar4 = WARPGATE_GetWarpRoomIndex(gameTrackerX.baseAreaName);
+        gameTrackerX.SwitchToNewWarpIndex = (short)lVar4;
+      }
+      else {
+        gameTrackerX.SwitchToNewWarpIndex = -1;
+      }
+    }
+    else {
+      if (instance->LinkParent == (_Instance *)0x0) {
+        level = STREAM_GetLevelWithID(id);
+        if (level == (Level *)0x0) {
+          level = STREAM_GetLevelWithID(instance->currentStreamUnitID);
+          SAVE_Instance(instance,level);
+          instance->flags = instance->flags | 0x20;
+        }
+        else {
+          instance->currentStreamUnitID = id;
+          INSTANCE_UpdateFamilyStreamUnitID(instance);
+        }
+      }
+    }
+  }
+  return 1;
 }
 
 
@@ -312,8 +384,15 @@ long SIGNAL_HandleStreamLevel(_Instance *instance,Signal *signal)
 long SIGNAL_HandleFogNear(_Instance *instance,Signal *signal)
 
 {
-                    /* WARNING: Subroutine does not return */
-  STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID);
+  ushort uVar1;
+  Level *level;
+  
+  level = STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID);
+  uVar1 = *(ushort *)signal->data;
+  level->fogNear = uVar1;
+  SetFogNearFar((uint)uVar1,(uint)level->fogFar,theCamera.core.projDistance);
+  LIGHT_CalcDQPTable(level);
+  return 1;
 }
 
 
@@ -344,8 +423,15 @@ long SIGNAL_HandleFogNear(_Instance *instance,Signal *signal)
 long SIGNAL_HandleFogFar(_Instance *instance,Signal *signal)
 
 {
-                    /* WARNING: Subroutine does not return */
-  STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID);
+  ushort uVar1;
+  Level *level;
+  
+  level = STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID);
+  uVar1 = *(ushort *)signal->data;
+  level->fogFar = uVar1;
+  SetFogNearFar((uint)level->fogNear,(uint)uVar1,theCamera.core.projDistance);
+  LIGHT_CalcDQPTable(level);
+  return 1;
 }
 
 
@@ -380,8 +466,8 @@ long SIGNAL_HandleCameraShake(_Instance *instance,Signal *signal)
 long SIGNAL_HandleCallSignal(_Instance *instance,Signal *signal)
 
 {
-                    /* WARNING: Subroutine does not return */
   SIGNAL_HandleSignal(instance,(Signal *)(*(int *)signal->data + 8),0);
+  return 1;
 }
 
 
@@ -478,25 +564,21 @@ void SIGNAL_RelocateCameraSpline(Signal *signal,long offset)
 long SIGNAL_HandleCameraSpline(_Instance *instance,Signal *signal)
 
 {
-  long lVar1;
-  
   if (*(int *)signal->data == 0) {
-    if (*(int *)(signal->data + 4) != 0) {
-      theCamera.Spline00 = *(MultiSpline **)(*(int *)(signal->data + 4) + 0x38);
+    if (*(int *)(signal->data + 4) == 0) {
+      theCamera.Spline00 = (MultiSpline *)0x0;
       return 1;
     }
-    theCamera.Spline00 = (MultiSpline *)0x0;
+    theCamera.Spline00 = *(MultiSpline **)(*(int *)(signal->data + 4) + 0x38);
     return 1;
   }
-  if (*(int *)signal->data != 1) {
-    lVar1 = SIGNAL_HandleCameraSpline((char)instance,(char)signal);
-    return lVar1;
+  if (*(int *)signal->data == 1) {
+    if (*(int *)(signal->data + 4) != 0) {
+      theCamera.Spline01 = *(MultiSpline **)(*(int *)(signal->data + 4) + 0x38);
+      return 1;
+    }
+    theCamera.Spline01 = (MultiSpline *)0x0;
   }
-  if (*(int *)(signal->data + 4) != 0) {
-    theCamera.Spline01 = *(MultiSpline **)(*(int *)(signal->data + 4) + 0x38);
-    return 1;
-  }
-  theCamera.Spline01 = (MultiSpline *)0x0;
   return 1;
 }
 
@@ -599,7 +681,6 @@ long SIGNAL_HandleSetSlideAngle(_Instance *instance,Signal *signal)
 
 {
   if (instance != (_Instance *)0x0) {
-                    /* WARNING: Subroutine does not return */
     INSTANCE_Post(instance,0x4000005,*(int *)signal->data);
   }
   return 1;
@@ -620,7 +701,6 @@ long SIGNAL_HandleResetSlideAngle(_Instance *instance,Signal *signal)
 
 {
   if (instance != (_Instance *)0x0) {
-                    /* WARNING: Subroutine does not return */
     INSTANCE_Post(instance,0x4000006,0);
   }
   return 1;
@@ -777,10 +857,17 @@ void COLLIDE_HandleSignal(_Instance *instance,Signal *signal,long numSignals,int
 long SIGNAL_IsThisStreamAWarpGate(Signal *signal)
 
 {
+  char *pcVar1;
+  int iVar2;
   char acStack40 [32];
   
-                    /* WARNING: Subroutine does not return */
   strcpy(acStack40,(char *)(signal->data + 8));
+  pcVar1 = strchr(acStack40,0x2c);
+  if (pcVar1 != (char *)0x0) {
+    *pcVar1 = '\0';
+  }
+  iVar2 = strcmpi(acStack40,"warpgate");
+  return (uint)(iVar2 == 0);
 }
 
 
@@ -981,8 +1068,13 @@ _MultiSignal * SIGNAL_FindSignal(Level *level,long id)
 void SIGNAL_OutOfWater(_Instance *instance)
 
 {
-                    /* WARNING: Subroutine does not return */
-  STREAM_GetLevelWithID(instance->currentStreamUnitID);
+  Level *pLVar1;
+  
+  pLVar1 = STREAM_GetLevelWithID(instance->currentStreamUnitID);
+  if ((pLVar1 != (Level *)0x0) && (pLVar1->startGoingOutOfWaterSignal != (_MultiSignal *)0x0)) {
+    SIGNAL_HandleSignal(instance,pLVar1->startGoingOutOfWaterSignal->signalList,0);
+  }
+  return;
 }
 
 
@@ -1008,8 +1100,13 @@ void SIGNAL_OutOfWater(_Instance *instance)
 void SIGNAL_InWater(_Instance *instance)
 
 {
-                    /* WARNING: Subroutine does not return */
-  STREAM_GetLevelWithID(instance->currentStreamUnitID);
+  Level *pLVar1;
+  
+  pLVar1 = STREAM_GetLevelWithID(instance->currentStreamUnitID);
+  if ((pLVar1 != (Level *)0x0) && (pLVar1->startGoingIntoWaterSignal != (_MultiSignal *)0x0)) {
+    SIGNAL_HandleSignal(instance,pLVar1->startGoingIntoWaterSignal->signalList,0);
+  }
+  return;
 }
 
 

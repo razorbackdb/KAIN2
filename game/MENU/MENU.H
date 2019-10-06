@@ -1,21 +1,6 @@
 #ifndef MENU_H
 #define MENU_H
 
-typedef unsigned char TDRFuncPtr_menu_item_flags1fn;
-
-typedef unsigned char TDRFuncPtr_menu_item1fn;
-
-typedef unsigned char TDRFuncPtr_menu_push1fn;
-
-typedef unsigned char TDRFuncPtr_menu_set1fn;
-
-/* typedef int (*TDRFuncPtr_menu_item_flags1fn)();
-
-typedef int (*TDRFuncPtr_menu_item1fn)();
-
-typedef int (*TDRFuncPtr_menu_push1fn)();
-
-typedef int (*TDRFuncPtr_menu_set1fn)(); */
 
 extern int menu_data_size(); // 0x800B6390
 
@@ -46,6 +31,15 @@ extern void menu_draw(struct menu_t *menu); // 0x800B6DD0
 extern void menu_run(struct menu_t *menu); // 0x800B6F18
 
 extern void menu_process(struct menu_t *menu); // 0x800B7108
+
+
+typedef int (*TDRFuncPtr_menu_item_flags1fn)();
+
+typedef int (*TDRFuncPtr_menu_item1fn)();
+
+typedef int (*TDRFuncPtr_menu_push1fn)();
+
+typedef int (*TDRFuncPtr_menu_set1fn)();
 
 
 

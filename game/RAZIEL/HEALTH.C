@@ -26,18 +26,20 @@ void InitHealthSystem(void)
     Raziel.CurrentPlane = 2;
     Raziel.HitPoints = 100000;
     razMaterialShift();
-    iVar1 = razInBaseArea("under",5);
-    if (iVar1 == 0) {
-      razSetPlayerEventHistory(0x1000);
-    }
-    else {
-      Raziel.HitPoints = 100;
-    }
-    return;
   }
-  Raziel.CurrentPlane = 1;
-                    /* WARNING: Subroutine does not return */
-  GetMaxHealth();
+  else {
+    Raziel.CurrentPlane = 1;
+    Raziel.HitPoints = GetMaxHealth();
+    razSpectralShift();
+  }
+  iVar1 = razInBaseArea("under",5);
+  if (iVar1 == 0) {
+    razSetPlayerEventHistory(0x1000);
+  }
+  else {
+    Raziel.HitPoints = 100;
+  }
+  return;
 }
 
 
@@ -54,13 +56,19 @@ void InitHealthSystem(void)
 void GainHealth(int data)
 
 {
+  int iVar1;
+  
   data = data * 20000;
   if (data < 0) {
     data = data + 0xfff;
   }
   Raziel.HitPoints = Raziel.HitPoints + (data >> 0xc);
-                    /* WARNING: Subroutine does not return */
-  GetMaxHealth();
+  iVar1 = GetMaxHealth();
+  if ((iVar1 <= Raziel.HitPoints) && (Raziel.CurrentPlane == 1)) {
+    Raziel.HitPoints = GetMaxHealth();
+    razReaverOn();
+  }
+  return;
 }
 
 
@@ -170,8 +178,8 @@ void BumpUpHealth(void)
 
 {
   Raziel.HealthScale = Raziel.HealthScale + 1;
-                    /* WARNING: Subroutine does not return */
-  GetMaxHealth();
+  Raziel.HitPoints = GetMaxHealth();
+  return;
 }
 
 
@@ -234,29 +242,118 @@ int GetMaxHealth(void)
 void ProcessHealth(_Instance *instance)
 
 {
+  int Data;
   int number;
-  int current_health;
   int max_health;
   
   if ((Raziel.invincibleTimer == 0) && ((Raziel.playerEventHistory & 0x1000) != 0)) {
-                    /* WARNING: Subroutine does not return */
-    GetMaxHealth();
-  }
-  Raziel.invincibleTimer = Raziel.invincibleTimer - gameTrackerX.timeMult;
-  if (Raziel.invincibleTimer < 0) {
-    Raziel.invincibleTimer = 0;
-  }
-  number = 0;
-  if (Raziel.CurrentPlane == 1) {
-    number = (int)Raziel.HealthScale;
-    max_health = number * 100000;
-    current_health = Raziel.HitPoints + -100000;
+    Data = GetMaxHealth();
+    if ((Raziel.HitPoints == Data) || (Raziel.CurrentPlane == 2)) {
+      razReaverOn();
+    }
+    else {
+      razReaverOff();
+    }
+    if (Raziel.CurrentPlane == 1) {
+      if ((instance->waterFace != (_TFace *)0x0) && ((Raziel.Abilities & 0x10U) == 0)) {
+        DrainHealth((int)&DAT_0000a000);
+      }
+      if ((Raziel.soulReaver == (_Instance *)0x0) ||
+         (Data = GetMaxHealth(), Raziel.HitPoints != Data)) {
+        Data = (int)PlayerData->healthMaterialRate * gameTrackerX.timeMult;
+        if (Data < 0) {
+          Data = Data + 0xfff;
+        }
+        Raziel.HitPoints = Raziel.HitPoints + (Data >> 0xc);
+      }
+      if (Raziel.HitPoints < 100000) {
+        razPlaneShift(instance);
+        Raziel.invincibleTimer = (int)PlayerData->healthInvinciblePostShunt * 0x1e000;
+        if ((Raziel.Mode & 0x40000U) != 0) {
+          CAMERA_ChangeToOutOfWater(&theCamera,instance);
+        }
+      }
+      else {
+        if (Raziel.HitPoints < 150000) {
+          Data = gameTrackerX.timeMult * 1000;
+          if (Data < 0) {
+            Data = Data + 0xfff;
+          }
+          Raziel.DamageFrequency = Raziel.DamageFrequency - (Data >> 0xc);
+          if (Raziel.DamageFrequency < 0) {
+            Raziel.DamageFrequency = Raziel.HitPoints + -100000;
+            if (Raziel.DamageFrequency < 0x493e) {
+              Raziel.DamageFrequency = (int)&DAT_0000493e;
+            }
+            FX_DoInstancePowerRing
+                      (instance,0x2ee - ((int)(&DAT_0000c350 + -Raziel.DamageFrequency) * 300) /
+                                        0x7a12,(long *)0x0,0,0);
+            if ((gameTrackerX.gameFlags & 0x80U) == 0) {
+              GAMEPAD_Shock1(0x80,(int)&DAT_00005000);
+            }
+          }
+        }
+      }
+      number = (int)Raziel.HealthScale;
+      Data = Raziel.HitPoints + -100000;
+      max_health = number * 100000;
+      goto LAB_800a3f34;
+    }
+    if (Raziel.HitPoints < 0x20e) {
+      Data = (int)PlayerData->healthSpectralRate * gameTrackerX.timeMult;
+      if (Data < 0) {
+        Data = Data + 0xfff;
+      }
+      Raziel.HitPoints = Raziel.HitPoints - (Data >> 0xc);
+    }
+    else {
+      if (Raziel.HitPoints < 100000) {
+        Data = (int)PlayerData->healthSpectralRate * gameTrackerX.timeMult;
+        if (Data < 0) {
+          Data = Data + 0xfff;
+        }
+        Raziel.HitPoints = Raziel.HitPoints + (Data >> 0xc);
+      }
+      else {
+        Raziel.HitPoints = 100000;
+      }
+    }
+    if (((ControlFlag & 0x800000U) == 0) && (Raziel.HitPoints < 0x20d)) {
+      Data = SetControlInitIdleData(0,0,3);
+      StateSwitchStateCharacterData(&Raziel.State,StateHandlerIdle,Data);
+      G2EmulationSwitchAnimationCharacter(&Raziel.State,0xd6,0,3,1);
+      Raziel.HitPoints = 0x20d;
+      ControlFlag = ControlFlag | 0x804000;
+    }
+    if (Raziel.HitPoints < 0) {
+      gameTracker->streamFlags = gameTracker->streamFlags | 0x80000;
+      if (Raziel.soulReaver != (_Instance *)0x0) {
+        INSTANCE_Post(Raziel.soulReaver,0x800105,0);
+      }
+      razSetPlayerEventHistory(0x8000);
+      Raziel.HitPoints = (int)&DAT_0000c350;
+      gameTrackerX.gameData.asmData.MorphType = 1;
+      Raziel.playerEvent = Raziel.playerEvent | 0x8000;
+      razPlayUnderworldSounds(gameTrackerX.playerInstance);
+    }
   }
   else {
-    max_health = 100000;
-    current_health = Raziel.HitPoints;
+    Raziel.invincibleTimer = Raziel.invincibleTimer - gameTrackerX.timeMult;
+    if (Raziel.invincibleTimer < 0) {
+      Raziel.invincibleTimer = 0;
+    }
+    if (Raziel.CurrentPlane == 1) {
+      number = (int)Raziel.HealthScale;
+      max_health = number * 100000;
+      Data = Raziel.HitPoints + -100000;
+      goto LAB_800a3f34;
+    }
   }
-  FX_Health_Spiral(number,current_health,max_health);
+  number = 0;
+  max_health = 100000;
+  Data = Raziel.HitPoints;
+LAB_800a3f34:
+  FX_Health_Spiral(number,Data,max_health);
   return;
 }
 
@@ -278,7 +375,6 @@ int HealthCheckForLowHealth(void)
 {
   int iVar1;
   int iVar2;
-  int in_a0;
   
   iVar1 = STREAM_IsMorphInProgress();
   iVar2 = 1;
@@ -286,9 +382,7 @@ int HealthCheckForLowHealth(void)
     if (Raziel.CurrentPlane == 1) {
       iVar2 = 0;
       if (Raziel.HitPoints < 0x18704) {
-        iVar1 = 1;
-        razReaverScale(in_a0);
-        return iVar1;
+        iVar2 = 1;
       }
     }
     else {
@@ -379,7 +473,6 @@ void HealthInstantDeath(_Instance *instance)
   Raziel.HitPoints = (int)&DAT_0000c350;
   gameTracker->streamFlags = gameTracker->streamFlags | 0x80000;
   if (Raziel.soulReaver != (_Instance *)0x0) {
-                    /* WARNING: Subroutine does not return */
     INSTANCE_Post(Raziel.soulReaver,0x800105,0);
   }
   razSetPlayerEventHistory(0x8000);

@@ -108,8 +108,10 @@ void menu_print(int xpos,int ypos,char *text,int color)
 int menu_text_width(char *text)
 
 {
-                    /* WARNING: Subroutine does not return */
-  FONT_GetStringWidth(text);
+  int iVar1;
+  
+  iVar1 = FONT_GetStringWidth(text);
+  return iVar1;
 }
 
 
@@ -135,8 +137,8 @@ int menu_text_width(char *text)
 void menu_sound(menu_sound_t sound)
 
 {
-                    /* WARNING: Subroutine does not return */
   SndPlay((&the_menu_sounds)[sound].sfx);
+  return;
 }
 
 
