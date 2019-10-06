@@ -20,8 +20,6 @@ extern void lowerSplitPush() ; // 0x800CF36C
 
 extern void overlayAddress() ; // 0x800CF370
 
-extern void forceDrawInFront() ; // 0x800CF374
-
 extern void ClearBss() ; // 0x80024D14
 
 extern void clearloop() ; // 0x80024D24
