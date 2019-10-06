@@ -1,5 +1,16 @@
 #include "THISDUST.H"
 #include "LOAD3D.H"
+#include "MEMPACK.H"
+#include "SUPPORT.H"
+#include "TIMER.H"
+#include "FONT.H"
+#include "VOICEXA.H"
+#include "DEBUG.H"
+#include "RESOLVE.H"
+
+#include "LIBETC.H"
+#include "LIBCD.H"
+#include "LIBGPU.H"
 
 
 // decompiled code
@@ -46,7 +57,7 @@ void LOAD_CdSeekCallback(uchar intr,uchar *result)
   if (loadStatus.state == 1) {
     loadStatus.state = 2;
     uVar1 = GetRCnt(0xf2000000);
-    crap1 = uVar1 & 0xffff | gameTimer << 0x10;
+    //crap1 = uVar1 & 0xffff | gameTimer << 0x10;
   }
   return;
 }
@@ -104,7 +115,7 @@ void LOAD_CdDataReady(void)
            loadStatus.currentQueueFile.readCurSize + loadStatus.bytesTransferred;
       if (loadStatus.currentQueueFile.readStatus == 3) {
         loadStatus.currentQueueFile.readCurDest =
-             (void *)((int)loadStatus.currentQueueFile.readCurDest + loadStatus.bytesTransferred);
+             (void *)(loadStatus.currentQueueFile.readCurDest + loadStatus.bytesTransferred);
         if (loadStatus.currentQueueFile.readCurSize == loadStatus.currentQueueFile.readSize) {
           loadStatus.state = 5;
         }
@@ -118,12 +129,12 @@ void LOAD_CdDataReady(void)
           if (loadStatus.currentQueueFile.readCurSize == loadStatus.currentQueueFile.readSize) {
             iVar1 = 5;
           }
-          if (loadStatus.currentQueueFile.retFunc != (void *)0x0) {
+/*           if (loadStatus.currentQueueFile.retFunc != (void *)0x0) {
             (*(code *)loadStatus.currentQueueFile.retFunc)
                       (loadStatus.currentQueueFile.readCurDest,loadStatus.bytesTransferred,
                        (uint)(iVar1 == 5),loadStatus.currentQueueFile.retData,
                        loadStatus.currentQueueFile.retData2);
-          }
+                       } */
           loadStatus.state = iVar1;
           if (loadStatus.currentQueueFile.readCurDest == loadStatus.buffer1) {
             loadStatus.currentQueueFile.readCurDest = loadStatus.buffer2;
@@ -193,17 +204,17 @@ void LOAD_CdReadReady(uchar intr,uchar *result)
       }
       loadStatus.state = 4;
       loadStatus.bytesTransferred = uVar1;
-      CdGetSector((dword)abStack40,3);
+      //CdGetSector((dword)abStack40,3);
       iVar2 = CdPosToInt(abStack40);
       if (loadStatus.currentSector == iVar2) {
         loadStatus.currentSector = loadStatus.currentSector + 1;
-        CdGetSector((dword)loadStatus.currentQueueFile.readCurDest,uVar1 >> 2);
+        //CdGetSector((dword)loadStatus.currentQueueFile.readCurDest,uVar1 >> 2);
         LOAD_CdDataReady();
       }
       else {
         loadStatus.state = (uint)intr;
         CdIntToPos(loadStatus.currentSector,(char *)abStack24);
-        CdControl(6,abStack24,(undefined *)0x0);
+        CdControl(6,abStack24, 0x0);
       }
     }
     else {
@@ -220,9 +231,9 @@ void LOAD_CdReadReady(uchar intr,uchar *result)
     loadStatus.seekTime = TIMER_TimeDiff(crap1);
     crap1 = 0;
   }
-  loadStatus.sectorTime = TIMER_TimeDiff(crap_35);
+  //loadStatus.sectorTime = TIMER_TimeDiff(crap_35);
   uVar1 = GetRCnt(0xf2000000);
-  crap_35 = uVar1 & 0xffff | gameTimer << 0x10;
+  //crap_35 = uVar1 & 0xffff | gameTimer << 0x10;
   return;
 }
 
@@ -387,7 +398,7 @@ void LOAD_SetupFileToDoCDReading(void)
   }
   loadStatus.currentSector = loadStatus.bigFile.bigfileBaseOffset + (lVar1 >> 0xb);
   CdIntToPos(loadStatus.currentSector,(char *)abStack16);
-  CdControl(6,abStack16,(undefined *)0x0);
+  CdControl(6,abStack16,0x0);
   loadStatus.cdWaitTime = TIMER_GetTimeMS();
   return;
 }
@@ -437,7 +448,7 @@ void LOAD_SetupFileToDoBufferedCDReading(void)
   }
   loadStatus.currentSector = loadStatus.bigFile.bigfileBaseOffset + (lVar1 >> 0xb);
   CdIntToPos(loadStatus.currentSector,(char *)abStack16);
-  CdControl(6,abStack16,(undefined *)0x0);
+  CdControl(6,abStack16,0x0);
   loadStatus.cdWaitTime = TIMER_GetTimeMS();
   return;
 }
@@ -528,7 +539,7 @@ void LOAD_ProcessReadQueue(void)
         LOAD_InitCdStreamMode();
         loadStatus.state = 1;
         CdIntToPos(loadStatus.currentSector,(char *)abStack16);
-        CdControl(6,abStack16,(undefined *)0x0);
+        CdControl(6,abStack16,0x0);
         loadStatus.cdWaitTime = TIMER_GetTimeMS();
       }
       else {
@@ -568,17 +579,17 @@ void LOAD_ProcessReadQueue(void)
 char * LOAD_ReadFileFromCD(char *filename,int memType)
 
 {
-  undefined4 *puVar1;
+  unsigned char *puVar1;
   char *pcVar2;
   char *pcVar3;
   int iVar4;
-  undefined4 uStack40;
+  unsigned char uStack40;
   ulong local_24;
   
   iVar4 = 0;
   do {
     puVar1 = CdSearchFile(&uStack40,filename);
-    if (puVar1 != (undefined4 *)0x0) break;
+    if (puVar1 != (unsigned char *)0x0) break;
     CdReset(0);
     iVar4 = iVar4 + 1;
   } while (iVar4 < 10);
@@ -698,17 +709,17 @@ _BigFileDir * LOAD_ReadDirectory(_BigFileDirEntry *dirEntry)
 void LOAD_InitCdLoader(char *bigFileName,char *voiceFileName)
 
 {
-  undefined4 *puVar1;
+  unsigned char *puVar1;
   ulong *loadAddr;
   int iVar2;
   ulong allocSize;
-  undefined4 auStack40 [6];
+  unsigned char auStack40 [6];
   
   iVar2 = 0;
   loadStatus.state = 0;
   do {
     puVar1 = CdSearchFile(auStack40,bigFileName);
-    if (puVar1 != (undefined4 *)0x0) break;
+    if (puVar1 != (unsigned char *)0x0) break;
     CdReset(0);
     iVar2 = iVar2 + 1;
   } while (iVar2 < 10);
@@ -730,7 +741,7 @@ void LOAD_InitCdLoader(char *bigFileName,char *voiceFileName)
     CdControlF(9,(byte *)0x0);
     allocSize = loadStatus.bigFile.numSubDirs * 8 + 4;
     loadAddr = (ulong *)MEMPACK_Malloc(allocSize,'\b');
-    CdSync(0,(undefined *)0x0);
+    CdSync(0,0x0);
     LOAD_CdReadFromBigFile(0,loadAddr,allocSize,0,0);
     loadStatus.bigFile.subDirList = (_BigFileDirEntry *)(loadAddr + 1);
     do {
@@ -862,7 +873,7 @@ void LOAD_CD_ReadPartOfFile(_NonBlockLoadEntry *loadEntry)
     loadStatus.currentQueueFile.retData = loadEntry->retData;
     loadStatus.currentQueueFile.retData2 = loadEntry->retData2;
   }
-  loadStatus.changeDir = ZEXT14(iVar1 == 0);
+  //loadStatus.changeDir = ZEXT14(iVar1 == 0);
   return;
 }
 
@@ -1180,10 +1191,10 @@ void LOAD_LoadTIM(long *addr,long x_pos,long y_pos,long clut_x,long clut_y)
 {
   long *plVar1;
   long *plVar2;
-  undefined2 local_18;
+/*   undefined2 local_18;
   undefined2 local_16;
   undefined2 local_14;
-  undefined2 local_12;
+  undefined2 local_12; */
   
   plVar1 = addr + 2;
   plVar2 = (long *)0x0;
@@ -1191,19 +1202,19 @@ void LOAD_LoadTIM(long *addr,long x_pos,long y_pos,long clut_x,long clut_y)
     plVar2 = addr + 5;
     plVar1 = addr + 0xd;
   }
-  local_18 = (undefined2)x_pos;
+/*   local_18 = (undefined2)x_pos;
   local_16 = (undefined2)y_pos;
   local_14 = *(undefined2 *)(plVar1 + 2);
   local_12 = *(undefined2 *)((int)plVar1 + 10);
-  LoadImage((undefined4 *)&local_18,plVar1 + 3);
+  LoadImage((unsigned char *)&local_18,plVar1 + 3);
   if (plVar2 != (long *)0x0) {
     local_18 = (undefined2)clut_x;
     local_16 = (undefined2)clut_y;
     local_14 = 0x10;
     local_12 = 1;
     DrawSync(0);
-    LoadImage((undefined4 *)&local_18,plVar2);
-  }
+    LoadImage((unsigned char *)&local_18,plVar2);
+  } */
   return;
 }
 
@@ -1230,7 +1241,7 @@ void LOAD_LoadTIM(long *addr,long x_pos,long y_pos,long clut_x,long clut_y)
 void LOAD_LoadTIM2(long *addr,long x_pos,long y_pos,long width,long height)
 
 {
-  undefined2 local_10;
+/*   undefined2 local_10;
   undefined2 local_e;
   undefined2 local_c;
   undefined2 local_a;
@@ -1239,7 +1250,7 @@ void LOAD_LoadTIM2(long *addr,long x_pos,long y_pos,long width,long height)
   local_e = (undefined2)y_pos;
   local_c = *(undefined2 *)(addr + 4);
   local_a = *(undefined2 *)((int)addr + 0x12);
-  LoadImage((undefined4 *)&local_10,addr + 5);
+  LoadImage((unsigned char *)&local_10,addr + 5); */
   DrawSync(0);
   return;
 }
@@ -1378,7 +1389,7 @@ void LOAD_InitCdStreamMode(void)
   local_10[0] = 0xa0;
   CdReadyCallback(LOAD_CdReadReady);
   CdSyncCallback(LOAD_CdSeekCallback);
-  CdControl(0xe,local_10,(undefined *)0x0);
+  CdControl(0xe,local_10,0x0);
   return;
 }
 

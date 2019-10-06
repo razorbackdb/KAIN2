@@ -9,16 +9,6 @@ struct NodeType // hashcode: 0x5BF613D7 (dec: 1542853591)
 	struct NodeType *next; // size=8, offset=4
 };
 
-struct DIRENTRY // hashcode: 0xD989A944 (dec: -645289660)
-{
-	char name[20]; // size=20, offset=0
-	long attr; // size=0, offset=20
-	long size; // size=0, offset=24
-	struct DIRENTRY *next; // size=40, offset=28
-	long head; // size=0, offset=32
-	char system[4]; // size=4, offset=36
-};
-
 struct MATRIX // hashcode: 0x610186A2 (dec: 1627489954)
 {
 	short m[3][3]; // size=18, offset=0
@@ -267,33 +257,6 @@ struct SoundInstance // hashcode: 0xFF235679 (dec: -14461319)
 	unsigned char delay; // size=0, offset=2
 };
 
-struct TCB // hashcode: 0x6A70BBF4 (dec: 1785773044)
-{
-	long status; // size=0, offset=0
-	long mode; // size=0, offset=4
-	unsigned long reg[40]; // size=160, offset=8
-	long system[6]; // size=24, offset=168
-};
-
-struct EXEC // hashcode: 0x4291A2AD (dec: 1116840621)
-{
-	unsigned long pc0; // size=0, offset=0
-	unsigned long gp0; // size=0, offset=4
-	unsigned long t_addr; // size=0, offset=8
-	unsigned long t_size; // size=0, offset=12
-	unsigned long d_addr; // size=0, offset=16
-	unsigned long d_size; // size=0, offset=20
-	unsigned long b_addr; // size=0, offset=24
-	unsigned long b_size; // size=0, offset=28
-	unsigned long s_addr; // size=0, offset=32
-	unsigned long s_size; // size=0, offset=36
-	unsigned long sp; // size=0, offset=40
-	unsigned long fp; // size=0, offset=44
-	unsigned long gp; // size=0, offset=48
-	unsigned long ret; // size=0, offset=52
-	unsigned long base; // size=0, offset=56
-};
-
 struct RVECTOR // hashcode: 0xEC34D5C3 (dec: -332081725)
 {
 	struct SVECTOR v; // size=8, offset=0
@@ -327,38 +290,6 @@ struct CRVECTOR4 // hashcode: 0x56AED614 (dec: 1454298644)
 	struct RVECTOR *r2; // size=24, offset=128
 	struct RVECTOR *r3; // size=24, offset=132
 	unsigned long *rtn; // size=0, offset=136
-};
-
-struct RECT // hashcode: 0xDFC821CB (dec: -540532277)
-{
-	short x; // size=0, offset=0
-	short y; // size=0, offset=2
-	short w; // size=0, offset=4
-	short h; // size=0, offset=6
-};
-
-struct DR_ENV // hashcode: 0xD77E7FD5 (dec: -679575595)
-{
-	unsigned long tag; // size=0, offset=0
-	unsigned long code[15]; // size=60, offset=4
-};
-
-struct P_TAG // hashcode: 0x962C4103 (dec: -1775484669)
-{
-	unsigned int addr; // size=24, offset=0
-	unsigned int len; // size=8, offset=24
-	unsigned char r0; // size=0, offset=4
-	unsigned char g0; // size=0, offset=5
-	unsigned char b0; // size=0, offset=6
-	unsigned char code; // size=0, offset=7
-};
-
-struct CdlLOC // hashcode: 0x449289F8 (dec: 1150454264)
-{
-	unsigned char minute; // size=0, offset=0
-	unsigned char second; // size=0, offset=1
-	unsigned char sector; // size=0, offset=2
-	unsigned char track; // size=0, offset=3
 };
 
 struct LightInstance // hashcode: 0xB8D5E61F (dec: -1193941473)
@@ -1862,8 +1793,8 @@ struct GameTracker // hashcode: 0x1AD7FFD8 (dec: 450363352)
 	struct Intro *introFXIntro; // size=76, offset=468
 	unsigned long **drawOT; // size=0, offset=472
 	unsigned long **dispOT; // size=0, offset=476
-	struct P_TAG *savedOTStart; // size=8, offset=480
-	struct P_TAG *savedOTEnd; // size=8, offset=484
+	//P_TAG *savedOTStart; // size=8, offset=480
+	//P_TAG *savedOTEnd; // size=8, offset=484
 	long introWaitTime; // size=0, offset=488
 	long mirrorZPush; // size=0, offset=492
 	long defVVRemoveDist; // size=0, offset=496
@@ -2025,14 +1956,6 @@ typedef struct RVECTOR RVECTOR;
 typedef struct CRVECTOR3 CRVECTOR3;
 
 typedef struct CRVECTOR4 CRVECTOR4;
-
-typedef struct RECT RECT;
-
-typedef struct DR_ENV DR_ENV;
-
-typedef struct P_TAG P_TAG;
-
-typedef struct CdlLOC CdlLOC;
 
 typedef struct LightInstance LightInstance;
 
@@ -2342,8 +2265,6 @@ typedef unsigned short uid_t;
 
 typedef unsigned short gid_t;
 
-typedef void (*CdlCB)();
-
 typedef void *va_list;
 
 typedef unsigned char uchar;
@@ -2513,23 +2434,6 @@ typedef void RelocateInstObFunc();
 typedef void (*VoidProc)();
 
 typedef void (*StateHandler)();
-
-struct POLY_F4 // hashcode: 0x4777CA51 (dec: 1199032913)
-{
-	unsigned long tag; // size=0, offset=0
-	unsigned char r0; // size=0, offset=4
-	unsigned char g0; // size=0, offset=5
-	unsigned char b0; // size=0, offset=6
-	unsigned char code; // size=0, offset=7
-	short x0; // size=0, offset=8
-	short y0; // size=0, offset=10
-	short x1; // size=0, offset=12
-	short y1; // size=0, offset=14
-	short x2; // size=0, offset=16
-	short y2; // size=0, offset=18
-	short x3; // size=0, offset=20
-	short y3; // size=0, offset=22
-};
 
 union DEBUG_117fake // Hashcode: 0x8FDB6CEB (dec: -1881445141)
 {
@@ -3442,7 +3346,6 @@ struct debug_format_t // hashcode: 0x6E2CC554 (dec: 1848427860)
 	int is_centered; // size=0, offset=8
 };
 
-typedef struct POLY_F4 POLY_F4;
 
 typedef struct _SmallRotation SmallRotation;
 
@@ -3589,79 +3492,6 @@ typedef void option_fn_t();
 typedef int menu_fn_t();
 
 typedef void debug_dispatch_fn_t();
-
-struct POLY_GT3 // hashcode: 0xD669B49A (dec: -697715558)
-{
-	unsigned long tag; // size=0, offset=0
-	unsigned char r0; // size=0, offset=4
-	unsigned char g0; // size=0, offset=5
-	unsigned char b0; // size=0, offset=6
-	unsigned char code; // size=0, offset=7
-	short x0; // size=0, offset=8
-	short y0; // size=0, offset=10
-	unsigned char u0; // size=0, offset=12
-	unsigned char v0; // size=0, offset=13
-	unsigned short clut; // size=0, offset=14
-	unsigned char r1; // size=0, offset=16
-	unsigned char g1; // size=0, offset=17
-	unsigned char b1; // size=0, offset=18
-	unsigned char p1; // size=0, offset=19
-	short x1; // size=0, offset=20
-	short y1; // size=0, offset=22
-	unsigned char u1; // size=0, offset=24
-	unsigned char v1; // size=0, offset=25
-	unsigned short tpage; // size=0, offset=26
-	unsigned char r2; // size=0, offset=28
-	unsigned char g2; // size=0, offset=29
-	unsigned char b2; // size=0, offset=30
-	unsigned char p2; // size=0, offset=31
-	short x2; // size=0, offset=32
-	short y2; // size=0, offset=34
-	unsigned char u2; // size=0, offset=36
-	unsigned char v2; // size=0, offset=37
-	unsigned short pad2; // size=0, offset=38
-};
-
-struct POLY_GT4 // hashcode: 0xF09EF1FF (dec: -258018817)
-{
-	unsigned long tag; // size=0, offset=0
-	unsigned char r0; // size=0, offset=4
-	unsigned char g0; // size=0, offset=5
-	unsigned char b0; // size=0, offset=6
-	unsigned char code; // size=0, offset=7
-	short x0; // size=0, offset=8
-	short y0; // size=0, offset=10
-	unsigned char u0; // size=0, offset=12
-	unsigned char v0; // size=0, offset=13
-	unsigned short clut; // size=0, offset=14
-	unsigned char r1; // size=0, offset=16
-	unsigned char g1; // size=0, offset=17
-	unsigned char b1; // size=0, offset=18
-	unsigned char p1; // size=0, offset=19
-	short x1; // size=0, offset=20
-	short y1; // size=0, offset=22
-	unsigned char u1; // size=0, offset=24
-	unsigned char v1; // size=0, offset=25
-	unsigned short tpage; // size=0, offset=26
-	unsigned char r2; // size=0, offset=28
-	unsigned char g2; // size=0, offset=29
-	unsigned char b2; // size=0, offset=30
-	unsigned char p2; // size=0, offset=31
-	short x2; // size=0, offset=32
-	short y2; // size=0, offset=34
-	unsigned char u2; // size=0, offset=36
-	unsigned char v2; // size=0, offset=37
-	unsigned short pad2; // size=0, offset=38
-	unsigned char r3; // size=0, offset=40
-	unsigned char g3; // size=0, offset=41
-	unsigned char b3; // size=0, offset=42
-	unsigned char p3; // size=0, offset=43
-	short x3; // size=0, offset=44
-	short y3; // size=0, offset=46
-	unsigned char u3; // size=0, offset=48
-	unsigned char v3; // size=0, offset=49
-	unsigned short pad3; // size=0, offset=50
-};
 
 union DRAW_71fake // Hashcode: 0xCB8F2557 (dec: -879811241)
 {
@@ -3842,10 +3672,6 @@ struct SP_SUBDIV_STRUCT // hashcode: 0x409957AF (dec: 1083791279)
 	struct DVECTOR sxy[4]; // size=16, offset=196
 };
 
-typedef struct POLY_GT3 POLY_GT3;
-
-typedef struct POLY_GT4 POLY_GT4;
-
 typedef struct _Vector Vector;
 
 typedef struct _PFace PFace;
@@ -3865,35 +3691,6 @@ typedef struct SP_SUBDIV_STRUCT SP_SUBDIV_STRUCT;
 typedef void BSPLeafFunc();
 
 typedef void G2AppData;
-
-struct POLY_FT4 // hashcode: 0xF9F847B2 (dec: -101169230)
-{
-	unsigned long tag; // size=0, offset=0
-	unsigned char r0; // size=0, offset=4
-	unsigned char g0; // size=0, offset=5
-	unsigned char b0; // size=0, offset=6
-	unsigned char code; // size=0, offset=7
-	short x0; // size=0, offset=8
-	short y0; // size=0, offset=10
-	unsigned char u0; // size=0, offset=12
-	unsigned char v0; // size=0, offset=13
-	unsigned short clut; // size=0, offset=14
-	short x1; // size=0, offset=16
-	short y1; // size=0, offset=18
-	unsigned char u1; // size=0, offset=20
-	unsigned char v1; // size=0, offset=21
-	unsigned short tpage; // size=0, offset=22
-	short x2; // size=0, offset=24
-	short y2; // size=0, offset=26
-	unsigned char u2; // size=0, offset=28
-	unsigned char v2; // size=0, offset=29
-	unsigned short pad1; // size=0, offset=30
-	short x3; // size=0, offset=32
-	short y3; // size=0, offset=34
-	unsigned char u3; // size=0, offset=36
-	unsigned char v3; // size=0, offset=37
-	unsigned short pad2; // size=0, offset=38
-};
 
 union FONT_76fake // Hashcode: 0x437DBE1C (dec: 1132314140)
 {
@@ -3989,8 +3786,6 @@ struct FontPos // hashcode: 0x5BE713A2 (dec: 1541870498)
 	char w; // size=0, offset=2
 	char h; // size=0, offset=3
 };
-
-typedef struct POLY_FT4 POLY_FT4;
 
 typedef struct FontTracker FontTracker;
 
@@ -4436,12 +4231,6 @@ struct LIGHT3D_224fake // hashcode: 0xD1FB8CE9 (dec: -772043543)
 
 typedef long LightFunc();
 
-struct CdlFILE // hashcode: 0x93E9031B (dec: -1813445861)
-{
-	struct CdlLOC pos; // size=4, offset=0
-	unsigned long size; // size=0, offset=4
-	char name[16]; // size=16, offset=8
-};
 
 union LOAD3D_76fake // Hashcode: 0x57B5CC77 (dec: 1471532151)
 {
@@ -4529,36 +4318,9 @@ struct RedirectList // hashcode: 0x638D8352 (dec: 1670218578)
 	long *data; // size=0, offset=4
 };
 
-typedef struct CdlFILE CdlFILE;
-
 typedef struct _LoadStatus LoadStatus;
 
 typedef struct RedirectList RedirectList;
-
-struct DRAWENV // hashcode: 0x6012ACC1 (dec: 1611836609)
-{
-	struct RECT clip; // size=8, offset=0
-	short ofs[2]; // size=4, offset=8
-	struct RECT tw; // size=8, offset=12
-	unsigned short tpage; // size=0, offset=20
-	unsigned char dtd; // size=0, offset=22
-	unsigned char dfe; // size=0, offset=23
-	unsigned char isbg; // size=0, offset=24
-	unsigned char r0; // size=0, offset=25
-	unsigned char g0; // size=0, offset=26
-	unsigned char b0; // size=0, offset=27
-	struct DR_ENV dr_env; // size=64, offset=28
-};
-
-struct DISPENV // hashcode: 0xF5F0EB6A (dec: -168760470)
-{
-	struct RECT disp; // size=8, offset=0
-	struct RECT screen; // size=8, offset=8
-	unsigned char isinter; // size=0, offset=16
-	unsigned char isrgb24; // size=0, offset=17
-	unsigned char pad0; // size=0, offset=18
-	unsigned char pad1; // size=0, offset=19
-};
 
 struct BLK_FILL // hashcode: 0x17977E9C (dec: 395804316)
 {
@@ -4678,10 +4440,6 @@ struct InterfaceItem // hashcode: 0xE1D09348 (dec: -506424504)
 	short itemType; // size=0, offset=52
 	short nextItem; // size=0, offset=54
 };
-
-typedef struct DRAWENV DRAWENV;
-
-typedef struct DISPENV DISPENV;
 
 typedef struct BLK_FILL BLK_FILL;
 
@@ -5148,30 +4906,6 @@ enum MATH3D_AXIS // Hashcode: 0x977BA192 (dec: -1753505390)
 	AXIS_NEG_Z = 5,
 };
 
-struct POLY_FT3 // hashcode: 0x0A08FE0D (dec: 168361485)
-{
-	unsigned long tag; // size=0, offset=0
-	unsigned char r0; // size=0, offset=4
-	unsigned char g0; // size=0, offset=5
-	unsigned char b0; // size=0, offset=6
-	unsigned char code; // size=0, offset=7
-	short x0; // size=0, offset=8
-	short y0; // size=0, offset=10
-	unsigned char u0; // size=0, offset=12
-	unsigned char v0; // size=0, offset=13
-	unsigned short clut; // size=0, offset=14
-	short x1; // size=0, offset=16
-	short y1; // size=0, offset=18
-	unsigned char u1; // size=0, offset=20
-	unsigned char v1; // size=0, offset=21
-	unsigned short tpage; // size=0, offset=22
-	short x2; // size=0, offset=24
-	short y2; // size=0, offset=26
-	unsigned char u2; // size=0, offset=28
-	unsigned char v2; // size=0, offset=29
-	unsigned short pad1; // size=0, offset=30
-};
-
 union PIPE3D_71fake // Hashcode: 0x0E8B451A (dec: 244008218)
 {
 	struct {
@@ -5297,8 +5031,6 @@ struct TransformAnimatedInstanceVerticesWork_t // hashcode: 0x182E453B (dec: 405
 	struct MATRIX llm; // size=32, offset=64
 	struct _Vector vector; // size=12, offset=96
 };
-
-typedef struct POLY_FT3 POLY_FT3;
 
 typedef struct _Mirror Mirror;
 
@@ -5963,12 +5695,6 @@ union SPLINE_72fake // Hashcode: 0x0E8A2D70 (dec: 243936624)
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-struct DR_TPAGE // hashcode: 0xE20E8F38 (dec: -502362312)
-{
-	unsigned long tag; // size=0, offset=0
-	unsigned long code[1]; // size=4, offset=4
-};
-
 union FX_71fake // Hashcode: 0x405FB133 (dec: 1080013107)
 {
 	struct {
@@ -6301,8 +6027,6 @@ struct _POLY_2G4T // hashcode: 0xC66905DE (dec: -966195746)
 	struct _BASIC_G4 p2; // size=32, offset=40
 };
 
-typedef struct DR_TPAGE DR_TPAGE;
-
 typedef struct _POLY_SG4 POLY_SG4;
 
 typedef struct _FXGeneralEffect FXGeneralEffect;
@@ -6617,41 +6341,6 @@ struct SpuVoiceAttr // hashcode: 0x72F4027F (dec: 1928594047)
 
 typedef struct SpuVoiceAttr SpuVoiceAttr;
 
-struct POLY_G4 // hashcode: 0xC4DFE412 (dec: -991960046)
-{
-	unsigned long tag; // size=0, offset=0
-	unsigned char r0; // size=0, offset=4
-	unsigned char g0; // size=0, offset=5
-	unsigned char b0; // size=0, offset=6
-	unsigned char code; // size=0, offset=7
-	short x0; // size=0, offset=8
-	short y0; // size=0, offset=10
-	unsigned char r1; // size=0, offset=12
-	unsigned char g1; // size=0, offset=13
-	unsigned char b1; // size=0, offset=14
-	unsigned char pad1; // size=0, offset=15
-	short x1; // size=0, offset=16
-	short y1; // size=0, offset=18
-	unsigned char r2; // size=0, offset=20
-	unsigned char g2; // size=0, offset=21
-	unsigned char b2; // size=0, offset=22
-	unsigned char pad2; // size=0, offset=23
-	short x2; // size=0, offset=24
-	short y2; // size=0, offset=26
-	unsigned char r3; // size=0, offset=28
-	unsigned char g3; // size=0, offset=29
-	unsigned char b3; // size=0, offset=30
-	unsigned char pad3; // size=0, offset=31
-	short x3; // size=0, offset=32
-	short y3; // size=0, offset=34
-};
-
-struct DR_AREA // hashcode: 0x89605187 (dec: -1990176377)
-{
-	unsigned long tag; // size=0, offset=0
-	unsigned long code[2]; // size=8, offset=4
-};
-
 union STREAM_76fake // Hashcode: 0xBF63C681 (dec: -1083980159)
 {
 	struct {
@@ -6752,10 +6441,6 @@ struct STREAM_289fake // hashcode: 0xE57F8529 (dec: -444627671)
 	long maxTime; // size=0, offset=12
 	struct _Instance *warpFaceInstance; // size=664, offset=16
 };
-
-typedef struct POLY_G4 POLY_G4;
-
-typedef struct DR_AREA DR_AREA;
 
 typedef struct evPositionData evPositionData;
 
@@ -10869,12 +10554,6 @@ typedef struct RazielData RazielData;
 
 typedef struct __razController razController;
 
-struct DR_STP // hashcode: 0x368DFF73 (dec: 915275635)
-{
-	unsigned long tag; // size=0, offset=0
-	unsigned long code[2]; // size=8, offset=4
-};
-
 union UNDRWRLD_76fake // Hashcode: 0xF6DD58D9 (dec: -153265959)
 {
 	struct {
@@ -10944,8 +10623,6 @@ struct UW_ScreenXY // hashcode: 0x0F0F4643 (dec: 252659267)
 	short dx; // size=0, offset=4
 	short dy; // size=0, offset=6
 };
-
-typedef struct DR_STP DR_STP;
 
 typedef struct UW_ScreenXY UW_ScreenXY;
 
@@ -11539,13 +11216,6 @@ typedef struct SavedDeadDeadBits SavedDeadDeadBits;
 
 typedef struct _GlobalSaveTracker GlobalSaveTracker;
 
-struct CdlFILTER // hashcode: 0x4EE0EF08 (dec: 1323364104)
-{
-	unsigned char file; // size=0, offset=0
-	unsigned char chan; // size=0, offset=1
-	unsigned short pad; // size=0, offset=2
-};
-
 struct SpuCommonAttr // hashcode: 0xDDA59288 (dec: -576351608)
 {
 	unsigned long mask; // size=0, offset=0
@@ -11612,7 +11282,7 @@ struct VOICEXA_169fake // hashcode: 0x0FA4A0E7 (dec: 262447335)
 
 struct XAVoiceTracker // hashcode: 0x4B01AB69 (dec: 1258400617)
 {
-	struct CdlLOC currentPos; // size=4, offset=0
+	//struct CdlLOC currentPos; // size=4, offset=0
 	int currentSector; // size=0, offset=4
 	int endSector; // size=0, offset=8
 	void (*prevCallback)(); // size=0, offset=12
@@ -11636,8 +11306,6 @@ struct XAVoiceTracker // hashcode: 0x4B01AB69 (dec: 1258400617)
 	short unused2; // size=0, offset=174
 	struct XAFileInfo xaFileInfo[30]; // size=120, offset=176
 };
-
-typedef struct CdlFILTER CdlFILTER;
 
 typedef struct SpuCommonAttr SpuCommonAttr;
 
@@ -12002,13 +11670,7 @@ extern void InterruptCallback(uint param_1,int param_2);; // 0x800B86DC
 
 extern void DMACallback(void);; // 0x800B870C
 
-extern void VSyncCallback(u_char param_1);; // 0x800B873C
-
 extern void VSyncCallbacks(void);; // 0x800B8770
-
-extern void StopCallback(void);; // 0x800B87A0
-
-extern uint CheckCallback(void);; // 0x800B87D0
 
 //extern uint SetIntrMask(word param_1);; // 0x800B87E0
 
@@ -12017,12 +11679,6 @@ extern int strncmp(char *__s1,char *__s2,size_t __n);; // 0x800B8D24
 extern uint ResetGraph(uint param_1);; // 0x800B8DA4
 
 extern uint SetGraphDebug(char param_1);; // 0x800B8F18
-
-extern u_char DrawSyncCallback(u_char param_1);; // 0x800B8F74
-
-extern void SetDispMask(int param_1);; // 0x800B8FD4
-
-extern void DrawSync(int param_1);; // 0x800B906C
 
 extern void FUN_800b90d4(u_char param_1,short *param_2);; // 0x800B90D4
 
@@ -12120,8 +11776,6 @@ extern void PadSetActAlign(u_char param_1,u_char param_2);; // 0x800BC97C
 
 //extern void PadSetAct(u_char param_1,u_char param_2,undefined param_3);; // 0x800BC9B4
 
-extern uint VSync(int param_1);; // 0x800BCA04
-
 extern void FUN_800bcb7c(int param_1,int param_2);; // 0x800BCB7C
 
 extern int strcmp(char *__s1,char *__s2);; // 0x800BCC14
@@ -12134,15 +11788,7 @@ extern void SetColorMatrix(u_char *param_1);; // 0x800BCCD4
 
 extern uint * MulMatrix0(u_char *param_1,ushort *param_2,uint *param_3);; // 0x800BCD04
 
-extern uint CdStatus(void);; // 0x800BCE14
-
-extern uint CdMode(void);; // 0x800BCE24
-
 //extern undefined1 * CdLastPos(void);; // 0x800BCE34
-
-extern u_char CdReset(int param_1);; // 0x800BCE40
-
-extern void CdFlush(void);; // 0x800BCEAC
 
 extern u_char CdSetDebug(u_char param_1);; // 0x800BCECC
 
@@ -12151,8 +11797,6 @@ extern u_char CdSetDebug(u_char param_1);; // 0x800BCECC
 //extern void CdReady(int param_1,undefined *param_2);; // 0x800BCF00
 
 extern u_char CdSyncCallback(u_char param_1);; // 0x800BCF20
-
-extern u_char CdReadyCallback(u_char param_1);; // 0x800BCF34
 
 //extern u_char CdControl(byte param_1,byte *param_2,undefined *param_3);; // 0x800BCF48
 
@@ -12166,21 +11810,9 @@ extern u_char CdReadyCallback(u_char param_1);; // 0x800BCF34
 
 extern void CdDataCallback(void);; // 0x800BD344
 
-extern void CdDataSync(int param_1);; // 0x800BD368
-
 extern void CdIntToPos(int param_1,char *param_2);; // 0x800BD388
 
 extern int CdPosToInt(byte *param_1);; // 0x800BD48C
-
-extern u_char CdInit(void);; // 0x800BD50C
-
-extern uint FUN_800bd59c(void);; // 0x800BD59C
-
-extern void FUN_800bd5d8(void);; // 0x800BD5D8
-
-extern void FUN_800bd600(void);; // 0x800BD600
-
-extern void FUN_800bd628(void);; // 0x800BD628
 
 extern u_char * CdSearchFile(u_char *param_1,char *param_2);; // 0x800BD65C
 
@@ -12194,11 +11826,7 @@ extern u_char FUN_800bdcbc(int param_1);; // 0x800BDCBC
 
 extern uint FUN_800bdf58(u_char param_1,int param_2,u_char param_3);; // 0x800BDF58
 
-extern void ExitCriticalSection(void);; // 0x800BDFCC
-
 extern int SpuIsTransferCompleted(int param_1);; // 0x800BDFDC
-
-extern void EnterCriticalSection(void);; // 0x800BE08C
 
 extern void SetGeomOffset(int param_1,int param_2);; // 0x800BE09C
 
@@ -12207,8 +11835,6 @@ extern uint InitGeom(void);; // 0x800BE0C4
 extern void EnableEvent(void);; // 0x800BE14C
 
 extern u_char GsGetWorkBase(void);; // 0x800BE15C
-
-extern void StopPAD(void);; // 0x800BE16C
 
 extern u_char FUN_800be1a4(void);; // 0x800BE1A4
 
@@ -12266,8 +11892,6 @@ extern int SpuSetReverb(int param_1);; // 0x800BEE5C
 
 extern void SpuInit(void);; // 0x800BEF2C
 
-extern u_char GetGp(void);; // 0x800BEF4C
-
 extern void SpuQuit(void);; // 0x800BEF5C
 
 extern u_char SpuSetReverbModeType(uint param_1);; // 0x800BEFDC
@@ -12293,12 +11917,6 @@ extern void InitHeap(void);; // 0x800BF5A0
 extern void SpuSetCommonAttr(uint *param_1);; // 0x800BF5B0
 
 extern char * strtok(char *__s,char *__delim);; // 0x800BF930
-
-extern void StCdInterrupt(void);; // 0x800BFA50
-
-extern void StClearRing(void);; // 0x800C0540
-
-extern void StUnSetRing(void);; // 0x800C05A0
 
 extern void CdRead2(uint param_1);; // 0x800C0620
 
@@ -12328,10 +11946,6 @@ extern void HookEntryInt(void);; // 0x800C0A6C
 
 //extern undefined * startIntrDMA(void);; // 0x800C0B9C
 
-extern void _96_remove(void);; // 0x800C0E44
-
-extern void ReturnFromException(void);; // 0x800C0E5C
-
 extern void ChangeClearPAD(void);; // 0x800C0E6C
 
 extern void ChangeClearRCnt(void);; // 0x800C0E7C
@@ -12339,8 +11953,6 @@ extern void ChangeClearRCnt(void);; // 0x800C0E7C
 extern void ResetEntryInt(void);; // 0x800C0E8C
 
 extern void GPU_cw(void);; // 0x800C0E9C
-
-extern u_char GetVideoMode(void);; // 0x800C0EAC
 
 extern void SetDQA(u_char param_1);; // 0x800C0EC8
 
@@ -12454,8 +12066,6 @@ extern void TestEvent(void);; // 0x800C5118
 
 extern void _patch_gte(void);; // 0x800C5128
 
-extern void DisablePAD(void);; // 0x800C5208
-
 extern void StopPAD2(void);; // 0x800C521C
 
 extern void SysDeqIntRP(void);; // 0x800C522C
@@ -12507,10 +12117,6 @@ extern void DsDataCallback(void);; // 0x800C6008
 extern void setRC2wait(u_char param_1);; // 0x800C602C
 
 extern uint chkRC2wait(void);; // 0x800C604C
-
-extern void FlushCache(void);; // 0x800C66DC
-
-extern void _bu_init(void);; // 0x800C66EC
 
 extern void firstfile2(void);; // 0x800C66FC
 
@@ -12792,13 +12398,9 @@ extern int devstation; // offset 0x800D1F88
 
 static struct _fth directionList[6]; // offset 0x800D09DC
 
-extern struct DISPENV disp[2]; // offset 0x800D1F60
-
 extern long DoMainMenu; // offset 0x800CF88C
 
 static int Down; // offset 0x800D07D8
-
-extern struct DRAWENV draw[2]; // offset 0x800D1F8C
 
 extern long draw_belowSplit; // offset 0x800CF378
 

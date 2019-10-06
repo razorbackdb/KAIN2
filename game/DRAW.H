@@ -1,6 +1,7 @@
 #ifndef DRAW_H
 #define DRAW_H
 
+#include "LIBGPU.H"
 
 extern void fDRAW_SPLIT_INTPL_XYZ(struct _SVector *newVertex, struct _SVector *pvb, struct _SVector *pvc); // 0x8002A478
 
@@ -36,7 +37,7 @@ extern unsigned long * DRAW_DrawGlowPoint(struct _Instance *instance, long seg1,
 
 extern int DRAW_DisplayTFace_zclipped_C(struct SVECTOR *vertex0, struct SVECTOR *vertex1, struct SVECTOR *vertex2, struct UVTYPE *uv0, struct UVTYPE *uv1, struct UVTYPE *uv2, long color0, long color1, long color2, struct _PrimPool *primPool, unsigned long **ot, int ndiv); // 0x8002BC30
 
-extern long * DRAW_Zclip_subdiv(struct POLY_GT3 *texture, unsigned long **ot, int ndiv); // 0x8002C470
+extern long * DRAW_Zclip_subdiv(POLY_GT3 *texture, unsigned long **ot, int ndiv); // 0x8002C470
 
 extern void DRAW_LoadingMessage(); // 0x8002C974
 

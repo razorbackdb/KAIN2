@@ -1,5 +1,13 @@
 #include "THISDUST.H"
 #include "STRMLOAD.H"
+#include "LOAD3D.H"
+#include "SUPPORT.H"
+#include "FONT.H"
+#include "TIMER.H"
+#include "MEMPACK.H"
+#include "VRAM.H"
+#include "VOICEXA.H"
+#include "DEBUG.H"
 
 
 // decompiled code
@@ -54,9 +62,9 @@ void STREAM_InitLoader(char *bigFileName,char *voiceFileName)
   
   LOAD_InitCdLoader(bigFileName,voiceFileName);
   iVar3 = 0x26;
-  p_Var2 = &_LoadQueueEntry_800da5a0;
-  p_Var1 = &_LoadQueueEntry_800da610;
-  loadFree = &LoadQueue;
+  //p_Var2 = &_LoadQueueEntry_800da5a0;
+  //p_Var1 = &_LoadQueueEntry_800da610;
+  loadFree = LoadQueue;
   loadHead = (_LoadQueueEntry *)0x0;
   loadTail = (_LoadQueueEntry *)0x0;
   numLoads = 0;
@@ -66,7 +74,7 @@ void STREAM_InitLoader(char *bigFileName,char *voiceFileName)
     iVar3 = iVar3 + -1;
     p_Var1 = p_Var1 + -1;
   } while (-1 < iVar3);
-  _LoadQueueEntry_800da610.next = (_LoadQueueEntry *)0x0;
+  //_LoadQueueEntry_800da610.next = (_LoadQueueEntry *)0x0;
   return;
 }
 
@@ -358,7 +366,7 @@ int STREAM_PollLoadQueue(void)
 
 {
   _LoadQueueEntry *p_Var1;
-  code *pcVar2;
+  //code *pcVar2;
   long *plVar3;
   _LoadQueueEntry *p_Var4;
   int id;
@@ -450,10 +458,10 @@ int STREAM_PollLoadQueue(void)
       p_Var1->endLoadTime = uVar5 - p_Var1->endLoadTime;
       STREAM_RemoveQueueHead();
       LOAD_CleanUpBuffers();
-      if ((code *)(p_Var1->loadEntry).retFunc == VRAM_TransferBufferToVram) {
+/*       if ((code *)(p_Var1->loadEntry).retFunc == VRAM_TransferBufferToVram) {
         VRAM_LoadReturn((p_Var1->loadEntry).loadAddr,(p_Var1->loadEntry).retData,
                         (p_Var1->loadEntry).retData2);
-      }
+      } */
     }
     break;
   case 6:
@@ -463,11 +471,11 @@ int STREAM_PollLoadQueue(void)
       MEMPACK_SetMemoryDoneStreamed((char *)(p_Var1->loadEntry).loadAddr);
     }
     STREAM_NextLoadFromHead();
-    pcVar2 = (code *)(p_Var1->loadEntry).retFunc;
+/*     pcVar2 = (code *)(p_Var1->loadEntry).retFunc;
     if (pcVar2 != (code *)0x0) {
       (*pcVar2)((p_Var1->loadEntry).loadAddr,(p_Var1->loadEntry).retData,
                 (p_Var1->loadEntry).retData2);
-    }
+    } */
     break;
   case 7:
     id = (p_Var1->loadEntry).fileHash;
@@ -642,7 +650,7 @@ void LOAD_LoadToAddress(char *fileName,void *loadAddr,long relocateBinary)
   int iVar2;
   
   p_Var1 = STREAM_SetUpQueueEntry(fileName,(void *)0x0,(void *)0x0,(void *)0x0,(void **)0x0,0);
-  (p_Var1->loadEntry).loadAddr = loadAddr;
+  //(p_Var1->loadEntry).loadAddr = loadAddr;
   p_Var1->status = 1;
   p_Var1->relocateBinary = (char)relocateBinary;
   p_Var1->mempackUsed = '\0';
@@ -749,7 +757,7 @@ int LOAD_IsXAInQueue(void)
   int iVar2;
   
   iVar2 = 0;
-  p_Var1 = &LoadQueue;
+  p_Var1 = LoadQueue;
   do {
     iVar2 = iVar2 + 1;
     if ((uint)(ushort)p_Var1->status - 8 < 2) {
@@ -788,8 +796,8 @@ void LOAD_PlayXA(int number)
   p_Var1 = STREAM_AddQueueEntryToTail();
   p_Var1->status = 8;
   (p_Var1->loadEntry).fileHash = number;
-  *(undefined4 *)(p_Var1->loadEntry).fileName = 0x63696f76;
-  *(undefined2 *)((p_Var1->loadEntry).fileName + 4) = 0x65;
+  *(unsigned char *)(p_Var1->loadEntry).fileName = 0x63696f76;
+  //*(undefined2 *)((p_Var1->loadEntry).fileName + 4) = 0x65;
   return;
 }
 
@@ -819,7 +827,7 @@ long * LOAD_ReadFile(char *fileName,uchar memType)
   int iVar1;
   long *local_10 [2];
   
-  STREAM_QueueNonblockingLoads(fileName,memType,(void *)0x0,(void *)0x0,(void *)0x0,local_10,0);
+  STREAM_QueueNonblockingLoads(fileName,memType,(void *)0x0,(void *)0x0,(void *)0x0,0,0);
   do {
     iVar1 = STREAM_PollLoadQueue();
   } while (iVar1 != 0);
@@ -913,8 +921,8 @@ void LOAD_AbortFileLoad(char *fileName,void *retFunc)
         if (entry->status == 6) {
           LOAD_CleanUpBuffers();
         }
-        (*(code *)retFunc)((entry->loadEntry).loadAddr,(entry->loadEntry).retData,
-                           (entry->loadEntry).retData2);
+/*         (*(code *)retFunc)((entry->loadEntry).loadAddr,(entry->loadEntry).retData,
+                           (entry->loadEntry).retData2); */
         STREAM_RemoveQueueEntry(entry,prev);
         return;
       }

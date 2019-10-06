@@ -26,6 +26,12 @@
 #include "MAING2.H"
 
 
+#include <LIBETC.H>
+#include <LIBGPU.H>
+#include <LIBAPI.H>
+#include <LIBGPU.H>
+#include <STDDEF.H>
+
 // decompiled code
 // original method signature: 
 // void /*$ra*/ ClearDisplay()
@@ -45,11 +51,11 @@
 void ClearDisplay(void)
 
 {
-  PutDrawEnv((u_char *)(&draw + gameTrackerX.gameData.asmData.dispPage));
+/*   PutDrawEnv((u_char *)(&draw + gameTrackerX.gameData.asmData.dispPage));
   //DrawPrim((int)(&clearRect + gameTrackerX.gameData.asmData.dispPage));
   DrawSync(0);
   PutDispEnv((ushort *)(&disp + gameTrackerX.gameData.asmData.dispPage));
-  SetDispMask(1);
+  SetDispMask(1); */
   return;
 }
 
@@ -562,7 +568,7 @@ void FadeOutSayingLoading(GameTracker *gameTracker)
     do {
       //iVar2 = CheckVolatile(gameTracker->drawTimerReturn);
     } while (iVar2 != 0);
-    PutDrawEnv((u_char *)(&draw + gameTracker->drawPage));
+    //PutDrawEnv((u_char *)(&draw + gameTracker->drawPage));
     do {
       //iVar2 = CheckVolatile(gameTracker->reqDisp);
     } while (iVar2 != 0);
@@ -1105,7 +1111,7 @@ int MainG2(void *appData)
     GAMELOOP_SystemInit(&gameTrackerX);
     gameTrackerX.lastLvl = -1;
     gameTrackerX.currentLvl = -1;
-    gameTrackerX.disp = &disp;
+    //gameTrackerX.disp = &disp;
     ProcessArgs(gameTrackerX.baseAreaName,&gameTrackerX);
     InitMainTracker(&mainTrackerX);
     MAIN_DoMainInit();
