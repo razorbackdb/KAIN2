@@ -22,16 +22,16 @@
 	/* end block 2 */
 	// End Line: 97
 
-ulong SLUAGH_Query(_Instance *instance,ulong query)
+u_long SLUAGH_Query(_Instance *instance,u_long query)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   void *pvVar2;
   
   pvVar2 = instance->extraData;
   if (query == 0) {
-    if ((*(uint *)((int)pvVar2 + 4) & 1) == 0) {
-      uVar1 = ((uint)*(byte *)((int)pvVar2 + 1) & 1) << 0x1d;
+    if ((*(u_int *)((int)pvVar2 + 4) & 1) == 0) {
+      uVar1 = ((u_int)*(byte *)((int)pvVar2 + 1) & 1) << 0x1d;
     }
     else {
       uVar1 = 0x4000000;
@@ -39,11 +39,11 @@ ulong SLUAGH_Query(_Instance *instance,ulong query)
   }
   else {
     if (query == 1) {
-      if ((*(uint *)((int)pvVar2 + 4) & 1) == 0) {
-        uVar1 = *(ulong *)((int)instance->data + 0x10);
+      if ((*(u_int *)((int)pvVar2 + 4) & 1) == 0) {
+        uVar1 = *(u_long *)((int)instance->data + 0x10);
       }
       else {
-        uVar1 = *(uint *)((int)instance->data + 0x10) | 4;
+        uVar1 = *(u_int *)((int)instance->data + 0x10) | 4;
       }
     }
     else {
@@ -117,16 +117,16 @@ void SLUAGH_DamageEffect(_Instance *instance,evFXHitData *data)
   byte bVar1;
   char cVar2;
   int iVar3;
-  uint *puVar4;
-  uint uVar5;
+  u_int *puVar4;
+  u_int uVar5;
   undefined4 local_30;
   undefined *local_2c;
   undefined4 local_28;
   undefined4 local_20;
-  uint local_18;
+  u_int local_18;
   
   if (data == (evFXHitData *)0x0) {
-    puVar4 = (uint *)instance->extraData;
+    puVar4 = (u_int *)instance->extraData;
     uVar5 = puVar4[0x37];
     if (uVar5 != 0) {
       iVar3 = (int)*(short *)(puVar4 + 0x50);
@@ -134,28 +134,28 @@ void SLUAGH_DamageEffect(_Instance *instance,evFXHitData *data)
         iVar3 = iVar3 + 0xfff;
       }
       local_18 = FX_GetHealthColor(iVar3 >> 0xc);
-      if (*(uint *)(uVar5 + 0x18) != local_18) {
-        local_28 = *(uint *)(uVar5 + 0x18);
+      if (*(u_int *)(uVar5 + 0x18) != local_18) {
+        local_28 = *(u_int *)(uVar5 + 0x18);
         bVar1 = (char)local_28 - 4;
         if (((local_18 & 0xff) < (local_28 & 0xff)) ||
            (bVar1 = (char)local_28 + 4, (local_28 & 0xff) < (local_18 & 0xff))) {
-          local_28 = local_28 & 0xffffff00 | (uint)bVar1;
+          local_28 = local_28 & 0xffffff00 | (u_int)bVar1;
         }
         local_20._1_1_ = (byte)(local_18 >> 8);
         cVar2 = local_28._1_1_ - 4;
         if ((local_20._1_1_ < local_28._1_1_) ||
            (cVar2 = local_28._1_1_ + 4, local_28._1_1_ < local_20._1_1_)) {
           local_28._0_2_ = CONCAT11(cVar2,(char)local_28);
-          local_28 = local_28 & 0xffff0000 | (uint)(ushort)local_28;
+          local_28 = local_28 & 0xffff0000 | (u_int)(ushort)local_28;
         }
         local_20._2_1_ = (byte)(local_18 >> 0x10);
         cVar2 = local_28._2_1_ - 4;
         if ((local_20._2_1_ < local_28._2_1_) ||
            (cVar2 = local_28._2_1_ + 4, local_28._2_1_ < local_20._2_1_)) {
           local_28._0_3_ = CONCAT12(cVar2,(ushort)local_28);
-          local_28 = local_28 & 0xff000000 | (uint)(uint3)local_28;
+          local_28 = local_28 & 0xff000000 | (u_int)(u_int3)local_28;
         }
-        *(uint *)(uVar5 + 0x18) = local_28;
+        *(u_int *)(uVar5 + 0x18) = local_28;
         local_20 = local_18;
       }
     }
@@ -202,11 +202,11 @@ void SLUAGH_Init(_Instance *instance)
 {
   _FXGlowEffect *p_Var1;
   int iVar2;
-  uint *puVar3;
+  u_int *puVar3;
   void *pvVar4;
   long local_18 [2];
   
-  puVar3 = (uint *)instance->extraData;
+  puVar3 = (u_int *)instance->extraData;
   iVar2 = (int)*(short *)(puVar3 + 0x50);
   pvVar4 = instance->data;
   if (iVar2 < 0) {
@@ -214,7 +214,7 @@ void SLUAGH_Init(_Instance *instance)
   }
   local_18[0] = FX_GetHealthColor(iVar2 >> 0xc);
   p_Var1 = FX_DoInstanceOneSegmentGlow
-                     (instance,(uint)*(byte *)((int)pvVar4 + 0x19),local_18,1,0x4b0,0x68,0x70);
+                     (instance,(u_int)*(byte *)((int)pvVar4 + 0x19),local_18,1,0x4b0,0x68,0x70);
   *(_FXGlowEffect **)(puVar3 + 0x37) = p_Var1;
   MON_DefaultInit(instance);
   *(undefined2 *)(puVar3 + 0x51) = 0x2000;
@@ -248,12 +248,12 @@ void SLUAGH_DeathEntry(_Instance *instance)
 {
   int iVar1;
   undefined4 local_10;
-  uint *puVar2;
+  u_int *puVar2;
   undefined4 local_c;
   undefined4 local_8;
   undefined4 in_stack_fffffffc;
   
-  puVar2 = (uint *)instance->extraData;
+  puVar2 = (u_int *)instance->extraData;
   FX_StopGlowEffect((_FXGlowEffect *)puVar2[0x37],0);
   puVar2[0x37] = 0;
   if (puVar2[0x31] != 0) {
@@ -261,7 +261,7 @@ void SLUAGH_DeathEntry(_Instance *instance)
                                (evMonsterHitData *)puVar2[0x30]);
     MON_PlayAnim(instance,(MonsterAnim)
                           CONCAT412(in_stack_fffffffc,CONCAT48(local_8,CONCAT44(local_c,local_10))),
-                 (uint)(iVar1 == 0));
+                 (u_int)(iVar1 == 0));
   }
   *(undefined *)((int)puVar2 + 0x156) = 9;
   if ((puVar2[1] & 1) == 0) {
@@ -355,7 +355,7 @@ void SLUAGH_AttackEntry(_Instance *instance)
   }
   else {
     MON_PlayAnim(instance,(MonsterAnim)CONCAT88(uStackX0,CONCAT44(unaff_retaddr,unaff_s0)),0x1e);
-    *(uint *)((int)pvVar1 + 4) = *(uint *)((int)pvVar1 + 4) | 4;
+    *(u_int *)((int)pvVar1 + 4) = *(u_int *)((int)pvVar1 + 4) | 4;
   }
   return;
 }
@@ -401,7 +401,7 @@ void SLUAGH_Attack(_Instance *instance)
   void *pvVar1;
   
   pvVar1 = instance->extraData;
-  if ((*(uint *)((int)pvVar1 + 4) & 4) == 0) {
+  if ((*(u_int *)((int)pvVar1 + 4) & 4) == 0) {
     MON_Attack(instance);
   }
   else {
@@ -426,7 +426,7 @@ void SLUAGH_Attack(_Instance *instance)
       INSTANCE_Post(*(_Instance **)(*(int *)((int)pvVar1 + 0xc4) + 4),0x1000009,Data);
     }
     else {
-      *(uint *)((int)pvVar1 + 4) = *(uint *)((int)pvVar1 + 4) & 0xfffffffb;
+      *(u_int *)((int)pvVar1 + 4) = *(u_int *)((int)pvVar1 + 4) & 0xfffffffb;
     }
   }
   return;

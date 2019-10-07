@@ -27,10 +27,10 @@ void MonsterProcess(_Instance *instance,GameTracker *gameTracker)
 {
   _MonsterState *p_Var1;
   TDRFuncPtr_MONTABLE_GetDamageEffectFunc pTVar2;
-  uint *puVar3;
+  u_int *puVar3;
   
-  puVar3 = (uint *)instance->extraData;
-  if (((puVar3 != (uint *)0x0) && (instance->data != (void *)0x0)) && ((*puVar3 & 0x80000) == 0)) {
+  puVar3 = (u_int *)instance->extraData;
+  if (((puVar3 != (u_int *)0x0) && (instance->data != (void *)0x0)) && ((*puVar3 & 0x80000) == 0)) {
     MONSENSE_DoSenses(instance);
     MON_DoCombatTimers(instance);
     p_Var1 = MONTABLE_GetStateFuncs(instance,instance->currentMainState);
@@ -97,27 +97,27 @@ void MonsterInit(_Instance *instance,GameTracker *gameTracker)
   _G2AnimKeylist_Type *keylist;
   TDRFuncPtr_MONTABLE_GetInitFunc pTVar3;
   _MonsterState *p_Var4;
-  uint *__s;
+  u_int *__s;
   int *piVar5;
   
   piVar5 = (int *)instance->data;
   if ((instance->flags & 0x20000U) == 0) {
     if ((piVar5 != (int *)0x0) && (*piVar5 == -0x531fff9c)) {
-      __s = (uint *)MEMPACK_Malloc(0x25c,'\x17');
-      *(uint **)&instance->extraData = __s;
+      __s = (u_int *)MEMPACK_Malloc(0x25c,'\x17');
+      *(u_int **)&instance->extraData = __s;
       if (instance->instanceID == 0) {
-        if (__s == (uint *)0x0) {
+        if (__s == (u_int *)0x0) {
           return;
         }
         goto LAB_8007dc30;
       }
-      if (__s != (uint *)0x0) {
+      if (__s != (u_int *)0x0) {
         memset(__s,0,0x25c);
         InitMessageQueue((__MessageQueue *)(__s + 2));
         instance->currentMainState = -1;
         *(char *)((int)__s + 0x162) = -1;
         sVar1 = (instance->position).z;
-        __s[0x4a] = *(uint *)&instance->position;
+        __s[0x4a] = *(u_int *)&instance->position;
         *(short *)(__s + 0x4b) = sVar1;
         __s[0x68] = 0xffffffff;
         __s[0x42] = 0;
@@ -155,7 +155,7 @@ void MonsterInit(_Instance *instance,GameTracker *gameTracker)
     G2Anim_SwitchToKeylist(&instance->anim,keylist,0);
   }
   else {
-    __s = (uint *)instance->extraData;
+    __s = (u_int *)instance->extraData;
     pTVar2 = MONTABLE_GetCleanUpFunc(instance);
     (*pTVar2)(instance);
     MONSENSE_RemoveSenses(instance);
@@ -336,7 +336,7 @@ void MonsterCollide(_Instance *instance,GameTracker *gameTracker)
 {
   bool bVar1;
   undefined2 uVar2;
-  ulong uVar3;
+  u_long uVar3;
   Intro *pIVar4;
   long lVar5;
   _CollideInfo *p_Var6;
@@ -348,16 +348,16 @@ void MonsterCollide(_Instance *instance,GameTracker *gameTracker)
   BSPTree *bsp;
   void *pvVar9;
   _CollideInfo *collideInfo;
-  uint uVar10;
+  u_int uVar10;
   _Terrain *p_Var11;
   _Instance *Inst;
-  uint *puVar12;
+  u_int *puVar12;
   void *local_50 [4];
   _Instance *local_40;
   _Instance *local_3c;
   
   collideInfo = (_CollideInfo *)instance->collideInfo;
-  puVar12 = (uint *)instance->extraData;
+  puVar12 = (u_int *)instance->extraData;
   if (instance->data == (void *)0x0) {
     return;
   }
@@ -386,7 +386,7 @@ void MonsterCollide(_Instance *instance,GameTracker *gameTracker)
     if (Data_01 < 0) {
       Data_00 = Data_01 + 0x7f;
     }
-    Data_00 = SetFXHitData(instance,(uint)(byte)collideInfo->segment,Data_00 >> 7,0x100);
+    Data_00 = SetFXHitData(instance,(u_int)(byte)collideInfo->segment,Data_00 >> 7,0x100);
     INSTANCE_Post(Inst,0x400000,Data_00);
     Data_01 = SetMonsterHitData(instance,(_Instance *)0x0,Data_01,(int)*(short *)(uVar10 + 4),
                                 (int)*(char *)(uVar10 + 6));
@@ -432,7 +432,7 @@ void MonsterCollide(_Instance *instance,GameTracker *gameTracker)
       else {
         uVar2 = *(undefined2 *)
                  ((int)&(*(_Terrain **)p_Var11)->StartTextureList->attr +
-                 (uint)*(ushort *)((int)pvVar9 + 10));
+                 (u_int)*(ushort *)((int)pvVar9 + 10));
       }
       *(undefined2 *)(Data + 3) = uVar2;
       *Data = pvVar9;
@@ -440,7 +440,7 @@ void MonsterCollide(_Instance *instance,GameTracker *gameTracker)
       if ((((uVar3 & 4) == 0) || (*(ushort *)((int)pvVar9 + 10) == 0xffff)) ||
          ((*(ushort *)
             ((int)&(*(_Terrain **)p_Var11)->StartTextureList->attr +
-            (uint)*(ushort *)((int)pvVar9 + 10)) & 0x1000) == 0)) {
+            (u_int)*(ushort *)((int)pvVar9 + 10)) & 0x1000) == 0)) {
         pIVar4 = MON_TestForTerrainImpale(instance,*(_Terrain **)p_Var11);
         if (pIVar4 == (Intro *)0x0) {
           lVar5 = COLLIDE_FindCollisionFaceNormal(collideInfo,(_Normal *)(Data + 1));
@@ -487,7 +487,7 @@ LAB_8007e314:
     break;
   case '\x05':
     if (((collideInfo->offset).z < -0x32) &&
-       ((*(uint *)((int)instance->data + 0x10) & 0x10004) == 0)) {
+       ((*(u_int *)((int)instance->data + 0x10) & 0x10004) == 0)) {
       INSTANCE_Post(instance,0x40017,6);
     }
     SendHitObject(instance,(_Instance *)collideInfo->inst1,5);
@@ -561,17 +561,17 @@ void MonsterAdditionalCollide(_Instance *instance,GameTracker *gameTracker)
 	/* end block 2 */
 	// End Line: 1223
 
-ulong MonsterQuery(_Instance *instance,ulong query)
+u_long MonsterQuery(_Instance *instance,u_long query)
 
 {
   MATRIX *pMVar1;
   _MonsterSaveInfo *saveData;
-  uint uVar2;
-  uint *puVar3;
+  u_int uVar2;
+  u_int *puVar3;
   void *pvVar4;
   
   pvVar4 = instance->data;
-  puVar3 = (uint *)instance->extraData;
+  puVar3 = (u_int *)instance->extraData;
   pMVar1 = (MATRIX *)0x0;
   if (pvVar4 != (void *)0x0) {
     switch(query) {
@@ -597,7 +597,7 @@ ulong MonsterQuery(_Instance *instance,ulong query)
             pMVar1 = (MATRIX *)0x4000000;
           }
           if ((*puVar3 & 0x100) != 0) {
-            pMVar1 = (MATRIX *)((uint)pMVar1 | 0x20000000);
+            pMVar1 = (MATRIX *)((u_int)pMVar1 | 0x20000000);
           }
         }
       }
@@ -606,7 +606,7 @@ ulong MonsterQuery(_Instance *instance,ulong query)
       pMVar1 = *(MATRIX **)((int)pvVar4 + 0x10);
       break;
     case 2:
-      pMVar1 = (MATRIX *)(uint)*(byte *)(puVar3[0x59] + 0x27);
+      pMVar1 = (MATRIX *)(u_int)*(byte *)(puVar3[0x59] + 0x27);
       break;
     default:
       pMVar1 = (MATRIX *)GenericQuery(instance,query);
@@ -635,7 +635,7 @@ ulong MonsterQuery(_Instance *instance,ulong query)
       }
       break;
     case 0xf:
-      pMVar1 = (MATRIX *)(uint)*(byte *)((int)pvVar4 + 0x1a);
+      pMVar1 = (MATRIX *)(u_int)*(byte *)((int)pvVar4 + 0x1a);
       break;
     case 0x18:
       saveData = (_MonsterSaveInfo *)CIRC_Alloc(0x10);
@@ -660,7 +660,7 @@ ulong MonsterQuery(_Instance *instance,ulong query)
       *(ushort *)((int)pMVar1->m + 6) = (ushort)*(byte *)((int)pvVar4 + 0x21);
     }
   }
-  return (ulong)pMVar1;
+  return (u_long)pMVar1;
 }
 
 
@@ -704,17 +704,17 @@ ulong MonsterQuery(_Instance *instance,ulong query)
 	/* end block 2 */
 	// End Line: 1450
 
-void MonsterMessage(_Instance *instance,ulong message,ulong data)
+void MonsterMessage(_Instance *instance,u_long message,u_long data)
 
 {
-  uint uVar1;
+  u_int uVar1;
   int iVar2;
   undefined4 local_18;
-  uint *puVar3;
+  u_int *puVar3;
   undefined4 local_14;
   
-  puVar3 = (uint *)instance->extraData;
-  if (puVar3 != (uint *)0x0) {
+  puVar3 = (u_int *)instance->extraData;
+  if (puVar3 != (u_int *)0x0) {
     if ((undefined *)message == &DAT_00100007) {
       MON_GetSaveInfo(instance,*(_MonsterSaveInfo **)(data + 4));
     }
@@ -835,7 +835,7 @@ void AnimDistanceAndVel(Object *object,_MonsterAnim *mAnim)
   keylist = object->animList[mAnim->index[0]];
   G2Anim_Init(&_Stack216,*object->modelList);
   _Stack216.section[0].firstSeg = '\0';
-  _Stack216.section[0].segCount = *(uchar *)&(*object->modelList)->numSegments;
+  _Stack216.section[0].segCount = *(u_char *)&(*object->modelList)->numSegments;
   _Stack216.section[0].callback = (_func_8 *)0x0;
   _Stack216.section[0].callbackData = (void *)0x0;
   G2AnimSection_SetInterpInfo(_Stack216.section,(_G2AnimInterpInfo_Type *)0x0);
@@ -849,7 +849,7 @@ void AnimDistanceAndVel(Object *object,_MonsterAnim *mAnim)
     uVar1 = G2AnimKeylist_GetDuration(keylist);
     mAnim->distance = (ushort)lVar3;
     mAnim->velocity =
-         (ushort)((int)((uint)mAnim->playSpeed * lVar3 * 100) / ((int)((uint)uVar1 << 0x10) >> 4));
+         (ushort)((int)((u_int)mAnim->playSpeed * lVar3 * 100) / ((int)((u_int)uVar1 << 0x10) >> 4));
   }
   G2Anim_Free(&_Stack216);
   return;
@@ -912,7 +912,7 @@ void TranslateAnimList(Object *object,_MonsterAnim *animList,int numAnims)
         AnimDistanceAndVel(object,animList);
         bVar1 = *pbVar4;
         sVar2 = G2AnimKeylist_GetDuration(keylist);
-        if (((int)sVar2 / 100) * 0x10000 >> 0x10 <= (int)(uint)bVar1) {
+        if (((int)sVar2 / 100) * 0x10000 >> 0x10 <= (int)(u_int)bVar1) {
           iVar3 = G2AnimKeylist_GetKeyframeCount(keylist);
           *pbVar4 = (char)iVar3 - 1;
         }
@@ -1431,7 +1431,7 @@ void MONAPI_ResetLookAround(_Instance *instance)
 long MONAPI_OkToLookAround(_Instance *instance)
 
 {
-  return (uint)(instance->currentMainState == 2);
+  return (u_int)(instance->currentMainState == 2);
 }
 
 
@@ -1520,8 +1520,8 @@ void MONAPI_ProcessGenerator(void)
 
 {
   Level *pLVar1;
-  ulong uVar2;
-  uint *puVar3;
+  u_long uVar2;
+  u_int *puVar3;
   Intro *intro;
   int iVar4;
   short *psVar5;
@@ -1546,7 +1546,7 @@ LAB_8007f180:
         else {
           iVar4 = pLVar1->numIntros;
           intro = pLVar1->introList;
-          puVar3 = (uint *)&intro->flags;
+          puVar3 = (u_int *)&intro->flags;
           while (iVar4 != 0) {
             iVar4 = iVar4 + -1;
             if (puVar3[-6] == (int)psVar5[-1]) {
@@ -1600,7 +1600,7 @@ LAB_8007f180:
 void MONAPI_AddToGenerator(_Instance *instance)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   _MONAPI_Regenerator *p_Var2;
   void *pvVar3;
   

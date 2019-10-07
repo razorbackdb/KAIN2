@@ -91,13 +91,13 @@ void FONT_Init(void)
     MEMPACK_Free((char *)addr);
     fontTracker.sprite_sort_push = 0;
     fontTracker.font_tpage =
-         (short)(local_e[0] & 0x100) >> 4 | (ushort)(((uint)local_10 & 0x3ff) >> 6) |
-         (ushort)(((uint)local_e[0] & 0x200) << 2);
+         (short)(local_e[0] & 0x100) >> 4 | (ushort)(((u_int)local_10 & 0x3ff) >> 6) |
+         (ushort)(((u_int)local_e[0] & 0x200) << 2);
     fontTracker.font_clut = (local_e[0] + 0x7e) * 0x40 | (short)local_10 >> 4 & 0x3fU;
     fontTracker.font_vramX = local_10;
     fontTracker.font_vramY = local_e[0];
     fontTracker.font_vramV = local_e[0] & 0xff;
-    fontTracker.font_vramU = (short)(((uint)local_10 & 0x3f) << 2);
+    fontTracker.font_vramU = (short)(((u_int)local_10 & 0x3f) << 2);
     FONT_MakeSpecialFogClut((int)(short)local_10,(int)(short)local_e[0] + 0x7f);
   }
   fontTracker.font_xpos = 10;
@@ -190,10 +190,10 @@ void FONT_DrawChar(FontChar *fontChar)
 	/* end block 2 */
 	// End Line: 1056
 
-long FONT_Get2DImageIndex(uchar c)
+long FONT_Get2DImageIndex(u_char c)
 
 {
-  return (uint)
+  return (u_int)
                "$$$$$$$$$$$$$$$$$VWXYZ[$$$$$$$$$$%($$)$3+,/-2\'$&\x1a\x1b\x1c\x1d\x1e\x1f !\"#*$U.T0$456789:;<=>?@ABCDEFGHIJKLMN$OR$$"
                [c];
 }
@@ -267,10 +267,10 @@ void drawChar2DPoly(long fpi,long x,long y)
   char cVar1;
   char cVar2;
   short sVar3;
-  ulong **ppuVar4;
-  uint uVar5;
+  u_long **ppuVar4;
+  u_int uVar5;
   short sVar6;
-  ulong *puVar7;
+  u_long *puVar7;
   char cVar8;
   char cVar9;
   char cVar10;
@@ -322,7 +322,7 @@ void drawChar2DPoly(long fpi,long x,long y)
     *(undefined *)((int)puVar7 + 7) = 0x2d;
   }
   else {
-    uVar5 = (uint)(byte)fontTracker.color_local;
+    uVar5 = (u_int)(byte)fontTracker.color_local;
     *(undefined *)((int)puVar7 + 7) = 0x2c;
     *(undefined *)(puVar7 + 1) = *(undefined *)&(&the_font_color_table)[uVar5].r;
     *(undefined *)((int)puVar7 + 5) = *(undefined *)&(&the_font_color_table)[uVar5].g;
@@ -347,8 +347,8 @@ void drawChar2DPoly(long fpi,long x,long y)
   *(byte *)((int)puVar7 + 7) = *(byte *)((int)puVar7 + 7) & 0xfd;
   *(short *)((int)puVar7 + 0x16) = fontTracker.font_tpage;
   *(short *)((int)puVar7 + 0xe) = fontTracker.font_clut;
-  *puVar7 = (uint)*ppuVar4 & 0xffffff | 0x9000000;
-  *ppuVar4 = (ulong *)((uint)puVar7 & 0xffffff);
+  *puVar7 = (u_int)*ppuVar4 & 0xffffff | 0x9000000;
+  *ppuVar4 = (u_long *)((u_int)puVar7 & 0xffffff);
   (gameTrackerX.primPool)->nextPrim = puVar7 + 10;
   return;
 }
@@ -387,7 +387,7 @@ void drawChar2DPoly(long fpi,long x,long y)
 	/* end block 3 */
 	// End Line: 1440
 
-void FONT_DrawChar2D(uchar c,long x,long y)
+void FONT_DrawChar2D(u_char c,long x,long y)
 
 {
   long y_00;
@@ -521,7 +521,7 @@ long FONT_CharSpacing(char c,long fontXSize)
       iVar5 = (int)(&fontPos)[iVar3].h;
     }
     iVar3 = 8;
-    if (-1 < (int)((uint)(byte)""[iVar1] << 0x18)) {
+    if (-1 < (int)((u_int)(byte)""[iVar1] << 0x18)) {
       iVar3 = iVar5;
     }
     iVar5 = (int)(&fontPos)[(int)(&CHAR_FFh_800c8d81)[iVar1]].w;
@@ -625,7 +625,7 @@ void FONT_Print(char *fmt)
   pcVar2 = &fp_str;
   bVar1 = fp_str;
   while (bVar1 != 0) {
-    if ((uint)(byte)*pcVar2 - 0x41 < 0x1a) {
+    if ((u_int)(byte)*pcVar2 - 0x41 < 0x1a) {
       *pcVar2 = *pcVar2 + 0x20;
     }
     pcVar2 = (char *)((byte *)pcVar2 + 1);
@@ -827,7 +827,7 @@ void FONT_VaReallyPrint(char *fmt,void *ap)
     }
     if (bVar1 == 10) {
       fontTracker.font_ypos = fontTracker.font_ypos + 0xc;
-      fontTracker.font_xpos = (uint)bVar1;
+      fontTracker.font_xpos = (u_int)bVar1;
 LAB_8002d650:
       fmt = (char *)((byte *)fmt + 1);
     }
@@ -862,7 +862,7 @@ LAB_8002d650:
       bVar1 = ((byte *)fmt)[1];
       bVar2 = ((byte *)fmt)[2];
       FONT_AddCharToBuffer('@',fontTracker.font_xpos,fontTracker.font_ypos);
-      FONT_AddCharToBuffer('@',(uint)bVar2 - 0x40 & 0xff,(uint)bVar1 - 0x40 & 0xff);
+      FONT_AddCharToBuffer('@',(u_int)bVar2 - 0x40 & 0xff,(u_int)bVar1 - 0x40 & 0xff);
       fmt = (char *)((byte *)fmt + 3);
     }
     bVar1 = *fmt;
@@ -886,7 +886,7 @@ void FONT_FontPrintCentered(char *text,long y)
   int iVar1;
   
   iVar1 = FONT_GetStringWidth(text);
-  FONT_SetCursor((short)((uint)((0x100 - (iVar1 >> 1)) * 0x10000) >> 0x10),(short)y);
+  FONT_SetCursor((short)((u_int)((0x100 - (iVar1 >> 1)) * 0x10000) >> 0x10),(short)y);
   FONT_Print2(text);
   return;
 }

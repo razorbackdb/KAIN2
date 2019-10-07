@@ -75,7 +75,7 @@ void G2PoolMem_ResetPool(void *voidPool)
     do {
       *(undefined2 *)(iVar1 * 2 + *(int *)((int)voidPool + 8)) = (short)iVar1;
       iVar1 = iVar1 + 1;
-    } while (iVar1 < (int)(uint)*(ushort *)((int)voidPool + 4));
+    } while (iVar1 < (int)(u_int)*(ushort *)((int)voidPool + 4));
   }
   return;
 }
@@ -106,9 +106,9 @@ void * G2PoolMem_Allocate(void *voidPool)
   ushort uVar1;
   
   if (*(ushort *)((int)voidPool + 2) < *(ushort *)((int)voidPool + 4)) {
-    uVar1 = *(ushort *)((uint)*(ushort *)((int)voidPool + 2) * 2 + *(int *)((int)voidPool + 8));
+    uVar1 = *(ushort *)((u_int)*(ushort *)((int)voidPool + 2) * 2 + *(int *)((int)voidPool + 8));
     *(short *)((int)voidPool + 2) = *(ushort *)((int)voidPool + 2) + 1;
-    return (void *)(*(int *)((int)voidPool + 0xc) + (uint)*(ushort *)voidPool * (uint)uVar1);
+    return (void *)(*(int *)((int)voidPool + 0xc) + (u_int)*(ushort *)voidPool * (u_int)uVar1);
   }
   return (void *)0x0;
 }
@@ -150,8 +150,8 @@ void G2PoolMem_Free(void *voidPool,void *block)
   
   uVar1 = *(short *)((int)voidPool + 2) - 1;
   *(ushort *)((int)voidPool + 2) = uVar1;
-  *(undefined2 *)((uint)uVar1 * 2 + *(int *)((int)voidPool + 8)) =
-       (short)((int)((int)block - *(int *)((int)voidPool + 0xc)) / (int)(uint)*(ushort *)voidPool);
+  *(undefined2 *)((u_int)uVar1 * 2 + *(int *)((int)voidPool + 8)) =
+       (short)((int)((int)block - *(int *)((int)voidPool + 0xc)) / (int)(u_int)*(ushort *)voidPool);
   return;
 }
 

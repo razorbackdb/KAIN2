@@ -33,10 +33,10 @@
 menu_ctrl_t menu_get_ctrl(void *gt)
 
 {
-  uint uVar1;
+  u_int uVar1;
   menu_ctrl_t mVar2;
   
-  uVar1 = *(uint *)((int)gt + 0x4c);
+  uVar1 = *(u_int *)((int)gt + 0x4c);
   if ((uVar1 & 1) == 0) {
     if ((uVar1 & 2) == 0) {
       if ((uVar1 & 4) == 0) {

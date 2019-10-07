@@ -35,11 +35,11 @@ void _G2Anim_DecompressChannel_AdaptiveDelta
   ushort uVar2;
   ushort *puVar3;
   ushort uVar4;
-  uint uVar5;
+  u_int uVar5;
   short sVar6;
   int iVar7;
   int iVar8;
-  uint uVar9;
+  u_int uVar9;
   short sVar10;
   
   uVar9 = dcInfo->storedKey;
@@ -50,7 +50,7 @@ void _G2Anim_DecompressChannel_AdaptiveDelta
   uVar1 = dcInfo->keylist->keyCount;
   while ((int)uVar9 < dcInfo->targetKey) {
     uVar9 = uVar9 + 1;
-    uVar5 = (int)(uint)(puVar3 + 2)[(int)uVar9 >> 2] >> ((uVar9 & 3) << 2);
+    uVar5 = (int)(u_int)(puVar3 + 2)[(int)uVar9 >> 2] >> ((uVar9 & 3) << 2);
     uVar2 = *(ushort *)(&_stepSizeTable + iVar7);
     iVar8 = iVar7 + (&_indexTable)[uVar5 & 0xf];
     iVar7 = iVar8;
@@ -78,7 +78,7 @@ void _G2Anim_DecompressChannel_AdaptiveDelta
   }
   status->index = sVar6;
   status->keyData = sVar10;
-  dcInfo->chanData = puVar3 + 2 + ((int)((uint)uVar1 + 3) >> 2);
+  dcInfo->chanData = puVar3 + 2 + ((int)((u_int)uVar1 + 3) >> 2);
   return;
 }
 
@@ -126,12 +126,12 @@ void _G2Anim_DecompressChannel_Linear
   int iVar3;
   ushort *puVar4;
   int iVar5;
-  uint uVar6;
+  u_int uVar6;
   
   puVar4 = dcInfo->chanData;
   iVar5 = dcInfo->targetKey;
-  dcInfo->chanData = puVar4 + ((uint)*puVar4 & 0xfff) + 1;
-  uVar6 = (uint)puVar4[1];
+  dcInfo->chanData = puVar4 + ((u_int)*puVar4 & 0xfff) + 1;
+  uVar6 = (u_int)puVar4[1];
   uVar1 = puVar4[2];
   while( true ) {
     iVar2 = (int)((int)(short)uVar1 & 0xf800U) >> 0xb;
@@ -193,7 +193,7 @@ void _G2Anim_InitializeChannel_AdaptiveDelta
   uVar1 = dcInfo->keylist->keyCount;
   status->index = (ushort)*(byte *)puVar2;
   status->keyData = puVar2[1];
-  dcInfo->chanData = puVar2 + ((int)((uint)uVar1 + 3) >> 2) + 2;
+  dcInfo->chanData = puVar2 + ((int)((u_int)uVar1 + 3) >> 2) + 2;
   return;
 }
 
@@ -238,7 +238,7 @@ void _G2Anim_InitializeChannel_Linear
   puVar2 = dcInfo->chanData;
   uVar1 = *puVar2;
   status->keyData = puVar2[1];
-  dcInfo->chanData = puVar2 + ((uint)uVar1 & 0xfff) + 1;
+  dcInfo->chanData = puVar2 + ((u_int)uVar1 & 0xfff) + 1;
   return;
 }
 

@@ -14,11 +14,11 @@
 void MISSILE_Process(_Instance *instance,GameTracker *gameTracker)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   
   ProcessPhysicalObject(instance,gameTracker);
   if ((instance->LinkParent == (_Instance *)0x0) &&
-     (uVar1 = MON_GetTime(instance), (uint)instance->work2 < uVar1)) {
+     (uVar1 = MON_GetTime(instance), (u_int)instance->work2 < uVar1)) {
     INSTANCE_KillInstance(instance);
   }
   return;
@@ -84,7 +84,7 @@ _Instance * MISSILE_Find(_Instance *instance,_MonsterMissile *missiledef)
   p_Var1 = instance->LinkChild;
   if (p_Var1 != (_Instance *)0x0) {
     do {
-      if ((p_Var1->ParentLinkNode == (uint)missiledef->segment) &&
+      if ((p_Var1->ParentLinkNode == (u_int)missiledef->segment) &&
          (p_Var1->object ==
           (Object *)(&objectAccess)[(&MISSILE_objectTable)[missiledef->graphic].object].object)) {
         return p_Var1;
@@ -137,7 +137,7 @@ _Instance * MISSILE_Birth(_Instance *instance,_MonsterMissile *missiledef)
     p_Var1->collideFunc = MISSILE_Collide;
   }
   else {
-    peVar2 = PHYSOB_BirthProjectile(instance,(uint)missiledef->segment,(uint)missiledef->graphic);
+    peVar2 = PHYSOB_BirthProjectile(instance,(u_int)missiledef->segment,(u_int)missiledef->graphic);
     p_Var1 = peVar2->birthInstance;
     if (p_Var1 != (_Instance *)0x0) {
       p_Var1->processFunc = MISSILE_Process;
@@ -187,7 +187,7 @@ _Instance * MISSILE_Fire(_Instance *instance,_MonsterMissile *missiledef,void *t
 {
   _Instance *Inst;
   int Data;
-  ulong uVar1;
+  u_long uVar1;
   ushort spinType;
   _SVector local_20;
   
@@ -200,7 +200,7 @@ _Instance * MISSILE_Fire(_Instance *instance,_MonsterMissile *missiledef,void *t
       local_20.y = 0;
       local_20.z = 0;
     }
-    Data = SetObjectThrowData(target,&local_20,(ushort)type,spinType,(uint)missiledef->speed,0,0,0);
+    Data = SetObjectThrowData(target,&local_20,(ushort)type,spinType,(u_int)missiledef->speed,0,0,0);
     INSTANCE_Post(Inst,0x800010,Data);
     uVar1 = MON_GetTime(Inst);
     *(undefined **)&Inst->work2 = &DAT_00001388 + uVar1;

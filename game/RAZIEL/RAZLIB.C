@@ -26,7 +26,7 @@ void razAlignYMoveRot(_Instance *dest,short distance,_Position *position,_Rotati
                      int extraZ)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   undefined2 local_48;
   short local_46;
   undefined2 local_44;
@@ -40,7 +40,7 @@ void razAlignYMoveRot(_Instance *dest,short distance,_Position *position,_Rotati
   uVar1 = INSTANCE_Query(dest,7);
   rotation->z = *(short *)(uVar1 + 4) + (short)extraZ + 0x800;
   MATH3D_SetUnityMatrix(&MStack56);
-  RotMatrixZ((int)rotation->z,(uint *)&MStack56);
+  RotMatrixZ((int)rotation->z,(u_int *)&MStack56);
   ApplyMatrixSV(&MStack56,&local_48,&local_40);
   position->x = (dest->position).x + local_40;
   position->y = (dest->position).y + local_3e;
@@ -81,7 +81,7 @@ void razAlignYRotMove(_Instance *dest,short distance,_Position *position,_Rotati
   short local_4e;
   ushort auStack72 [2];
   short local_44;
-  uint auStack64 [8];
+  u_int auStack64 [8];
   
   memset(auStack72,0,8);
   local_44 = MATH3D_AngleFromPosToPos(position,&dest->position);
@@ -120,7 +120,7 @@ void razAlignYRotMove(_Instance *dest,short distance,_Position *position,_Rotati
 	// End Line: 211
 
 void razAlignYRotMoveInterp
-               (_Instance *source,_Instance *dest,short distance,uchar segNumber,int Frames,
+               (_Instance *source,_Instance *dest,short distance,u_char segNumber,int Frames,
                int extraZ)
 
 {
@@ -137,8 +137,8 @@ void razAlignYRotMoveInterp
   local_18.x = 0;
   local_18.y = 0;
   local_18.z = _Stack32.z;
-  G2Anim_EnableController(&source->anim,(uint)segNumber,8);
-  G2EmulationSetInterpController_Vector(source,(uint)segNumber,8,&local_18,Frames,0);
+  G2Anim_EnableController(&source->anim,(u_int)segNumber,8);
+  G2EmulationSetInterpController_Vector(source,(u_int)segNumber,8,&local_18,Frames,0);
   (source->rotation).z = _Stack32.z;
   return;
 }
@@ -154,7 +154,7 @@ void razAlignYRotMoveInterp
 	/* end block 1 */
 	// End Line: 307
 
-void razAlignYRotInterp(_Instance *source,_Position *dest,uchar segNumber,int Frames)
+void razAlignYRotInterp(_Instance *source,_Position *dest,u_char segNumber,int Frames)
 
 {
   short sVar1;
@@ -290,7 +290,7 @@ void razRotateUpperBody(_Instance *instance,evActionLookAroundData *data)
   sVar1 = *data->rotx;
   local_20.y = 0;
   iVar2 = -(int)sVar1;
-  iVar4 = (uint)(ushort)*data->rotz << 0x10;
+  iVar4 = (u_int)(ushort)*data->rotz << 0x10;
   iVar5 = iVar4 >> 0x10;
   local_20.x = (short)(iVar2 / 2);
   local_20.z = (short)(iVar5 - (iVar4 >> 0x1f) >> 1);
@@ -474,14 +474,14 @@ int RAZIEL_OkToShift(void)
 
 {
   int iVar1;
-  uint uVar2;
+  u_int uVar2;
   
   if (Raziel.CurrentPlane == 2) {
     iVar1 = GetMaxHealth();
     uVar2 = 0;
     if (Raziel.HitPoints == iVar1) {
       if ((Raziel.Abilities & 0x40U) == 0) {
-        uVar2 = (uint)((Raziel.Senses.Flags & 0x40U) != 0);
+        uVar2 = (u_int)((Raziel.Senses.Flags & 0x40U) != 0);
       }
       else {
         uVar2 = 1;
@@ -543,7 +543,7 @@ int razPickupAndGrab(__CharacterState *In,int CurrentSection)
 {
   _Instance *Inst;
   int Data;
-  ulong uVar1;
+  u_long uVar1;
   
   if ((Raziel.Senses.EngagedMask & 0x20) == 0) {
     Data = 1;
@@ -572,7 +572,7 @@ int razPickupAndGrab(__CharacterState *In,int CurrentSection)
       }
       (&In->CharacterInstance + CurrentSection * 0x47)[0x47] = (_Instance *)0x0;
       uVar1 = INSTANCE_Query(Raziel.Senses.EngagedList[5].instance,4);
-      G2EmulationSwitchAnimation(In,CurrentSection,(uint)""[uVar1],0,3,1);
+      G2EmulationSwitchAnimation(In,CurrentSection,(u_int)""[uVar1],0,3,1);
       Raziel.returnState = (_func_60 *)(&In->CharacterInstance + CurrentSection * 0x47)[2];
       StateSwitchStateData(In,CurrentSection,StateHandlerPickupObject,0);
       Data = 0;
@@ -604,10 +604,10 @@ int razPickupAndGrab(__CharacterState *In,int CurrentSection)
 int razZeroAxis(long *x,long *y,int radius)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   
   uVar1 = MATH3D_SquareLength(*x,*y,0);
-  if (uVar1 < (uint)radius) {
+  if (uVar1 < (u_int)radius) {
     uVar1 = 0;
     *x = 0;
     *y = 0;
@@ -689,7 +689,7 @@ int razAdjustSpeed(_Instance *instance,int minSpeed)
 void razLaunchForce(_Instance *instance)
 
 {
-  PHYSOB_BirthProjectile(instance,0x31,(uint)Raziel.Abilities._1_1_ & 1);
+  PHYSOB_BirthProjectile(instance,0x31,(u_int)Raziel.Abilities._1_1_ & 1);
   Raziel.effectsFlags = Raziel.effectsFlags | 4;
   razSetupSoundRamp(instance,(_SoundRamp *)&Raziel.soundHandle,0xc,(int)PlayerData->forceMinPitch,
                     (int)PlayerData->forceMaxPitch,(int)PlayerData->forceMinVolume,
@@ -771,7 +771,7 @@ _Instance * razGetHeldWeapon(void)
 
 {
   _Instance *Inst;
-  ulong uVar1;
+  u_long uVar1;
   
   Inst = razGetHeldItem();
   if (Inst == (_Instance *)0x0) {
@@ -1041,9 +1041,9 @@ int razGetReaverFromMask(int reaverMask)
 
 {
   int iVar1;
-  uint uVar2;
+  u_int uVar2;
   
-  uVar2 = (uint)reaverMask >> 10 & 0xff;
+  uVar2 = (u_int)reaverMask >> 10 & 0xff;
   iVar1 = 0;
   while (uVar2 != 0) {
     uVar2 = (int)uVar2 >> 1;
@@ -1122,7 +1122,7 @@ void razGetForwardNormal(_Instance *inst,_Instance *target)
   local_10.vy = *(short *)(target->matrix[1].t + 1);
   local_10.vz = *(short *)(target->matrix[1].t + 2);
   PHYSICS_CheckLineInWorld(inst,&local_48);
-  if (((uint)local_48.type - 2 < 2) || (local_48.type == 5)) {
+  if (((u_int)local_48.type - 2 < 2) || (local_48.type == 5)) {
     Raziel.Senses.ForwardNormal.x = local_48.wNormal.vx;
     Raziel.Senses.ForwardNormal.y = local_48.wNormal.vy;
     Raziel.Senses.ForwardNormal.z = local_48.wNormal.vz;
@@ -1218,12 +1218,12 @@ void razCenterWithBlock(_Instance *inst,_Instance *target,int dist)
     iVar1 = -iVar1;
   }
   MATH3D_SetUnityMatrix(&MStack64);
-  RotMatrixZ((int)_Stack72.z,(uint *)&MStack64);
+  RotMatrixZ((int)_Stack72.z,(u_int *)&MStack64);
   local_56 = 0x140 - (short)dist;
   local_54 = 0;
   local_58 = 0;
   ApplyMatrixSV(&MStack64,&local_58,&local_50);
-  iVar4 = (uint)(ushort)(inst->position).x - (uint)(ushort)(target->position).x;
+  iVar4 = (u_int)(ushort)(inst->position).x - (u_int)(ushort)(target->position).x;
   iVar8 = iVar4 * 0x10000;
   iVar7 = iVar8 >> 0x10;
   local_58 = (short)iVar4;
@@ -1231,7 +1231,7 @@ void razCenterWithBlock(_Instance *inst,_Instance *target,int dist)
   if (iVar7 < 0) {
     iVar4 = -iVar7;
   }
-  iVar5 = (uint)(ushort)(inst->position).y - (uint)(ushort)(target->position).y;
+  iVar5 = (u_int)(ushort)(inst->position).y - (u_int)(ushort)(target->position).y;
   local_56 = (short)iVar5;
   iVar5 = iVar5 * 0x10000;
   iVar6 = iVar5 >> 0x10;
@@ -1380,8 +1380,8 @@ void razSelectMotionAnim(__CharacterState *In,int CurrentSection,int Frames,int 
 {
   ushort uVar1;
   short sVar2;
-  uint uVar3;
-  uint uVar4;
+  u_int uVar3;
+  u_int uVar4;
   _G2Bool_Enum _Var5;
   int frame;
   _Instance *p_Var6;
@@ -1615,7 +1615,7 @@ LAB_800a5a0c:
     if (frame_00 == 0) {
       return;
     }
-    G2AnimSection_InterpToKeylistFrame(section_00,keylist,(uint)uVar1,frame,600);
+    G2AnimSection_InterpToKeylistFrame(section_00,keylist,(u_int)uVar1,frame,600);
     return;
   }
   if ((ControlFlag & 0x20000000U) != 0) {
@@ -1816,7 +1816,7 @@ void razEnterWater(__CharacterState *In,int CurrentSection,evPhysicsSwimData *Sw
 
 {
   _Instance *Inst;
-  ulong uVar1;
+  u_long uVar1;
   int CurrentSection_00;
   int NewAnim;
   int local_20;
@@ -1959,7 +1959,7 @@ void razSetSwimVelocity(_Instance *instance,int vel,int accl)
 void razSetWallCrawlNodes(_Instance *instance,evPhysicsWallCrawlData *data)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   _G2SVector3_Type local_18;
   
   if ((data->rc & 8U) != 0) {
@@ -2165,10 +2165,10 @@ void razSwitchVAnimSingle(_Instance *instance,int section,int anim,int frame,int
 void razSwitchVAnim(_Instance *instance,int section,__VAnim *vAnim,int frame,int frames)
 
 {
-  uint local_14;
-  uint AlphaTable;
+  u_int local_14;
+  u_int AlphaTable;
   int CurrentSection;
-  uint NewAnim;
+  u_int NewAnim;
   
   if (frame == -1) {
     frame = ZEXT24(vAnim->frame);
@@ -2177,9 +2177,9 @@ void razSwitchVAnim(_Instance *instance,int section,__VAnim *vAnim,int frame,int
     frames = ZEXT14(vAnim->frames);
   }
   if (section == 1) {
-    NewAnim = (uint)vAnim->anim1;
-    local_14 = (uint)vAnim->mode;
-    AlphaTable = (uint)vAnim->alpha;
+    NewAnim = (u_int)vAnim->anim1;
+    local_14 = (u_int)vAnim->mode;
+    AlphaTable = (u_int)vAnim->alpha;
     CurrentSection = 1;
   }
   else {
@@ -2187,9 +2187,9 @@ void razSwitchVAnim(_Instance *instance,int section,__VAnim *vAnim,int frame,int
       if (section != 0) {
         return;
       }
-      NewAnim = (uint)vAnim->anim0;
-      local_14 = (uint)vAnim->mode;
-      AlphaTable = (uint)vAnim->alpha;
+      NewAnim = (u_int)vAnim->anim0;
+      local_14 = (u_int)vAnim->mode;
+      AlphaTable = (u_int)vAnim->alpha;
       CurrentSection = 0;
     }
     else {
@@ -2197,9 +2197,9 @@ void razSwitchVAnim(_Instance *instance,int section,__VAnim *vAnim,int frame,int
       if (section != 2) {
         return;
       }
-      NewAnim = (uint)vAnim->anim2;
-      local_14 = (uint)vAnim->mode;
-      AlphaTable = (uint)vAnim->alpha;
+      NewAnim = (u_int)vAnim->anim2;
+      local_14 = (u_int)vAnim->mode;
+      AlphaTable = (u_int)vAnim->alpha;
     }
   }
   G2EmulationInstanceSwitchAnimationAlpha
@@ -2535,11 +2535,11 @@ void razAttachControllers(void)
   iVar5 = 1;
   do {
     G2Anim_AttachControllerToSeg
-              (&(gameTrackerX.playerInstance)->anim,(uint)p_Var4->segment,(uint)p_Var4->type);
+              (&(gameTrackerX.playerInstance)->anim,(u_int)p_Var4->segment,(u_int)p_Var4->type);
     puVar3 = &p_Var4->segment;
     puVar1 = &p_Var4->type;
     p_Var4 = p_Var4 + 1;
-    G2Anim_DisableController(&(gameTrackerX.playerInstance)->anim,(uint)*puVar3,(uint)*puVar1);
+    G2Anim_DisableController(&(gameTrackerX.playerInstance)->anim,(u_int)*puVar3,(u_int)*puVar1);
     bVar2 = iVar5 < 0x18;
     iVar5 = iVar5 + 1;
   } while (bVar2);
@@ -2586,7 +2586,7 @@ void razSetPlayerEvent(void)
 
 {
   _func_14 *p_Var1;
-  ulong uVar2;
+  u_long uVar2;
   _Instance *p_Var3;
   int iVar4;
   int local_10;
@@ -2696,7 +2696,7 @@ void razClearPlayerEvent(void)
 	/* end block 2 */
 	// End Line: 3998
 
-void razSetPlayerEventHistory(ulong event)
+void razSetPlayerEventHistory(u_long event)
 
 {
   Raziel.playerEventHistory = Raziel.playerEventHistory | event;
@@ -2727,7 +2727,7 @@ void razSetPlayerEventHistory(ulong event)
 int razSideMoveSpiderCheck(_Instance *instance,int x)
 
 {
-  uint uVar1;
+  u_int uVar1;
   short x_00;
   SVECTOR SStack32;
   SVECTOR SStack24;
@@ -2814,7 +2814,7 @@ _Instance * RAZIEL_QueryEngagedInstance(int index)
 int razUpdateSoundRamp(_Instance *instance,_SoundRamp *sound)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   int iVar2;
   int iVar3;
   int maxVolume;
@@ -2863,7 +2863,7 @@ void razSetupSoundRamp(_Instance *instance,_SoundRamp *sound,int sfx,int startPi
                       int startVolume,int endVolume,int timer,int distance)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   
   if (sound->soundHandle == 0) {
     uVar1 = SOUND_Play3dSound(&instance->position,sfx,startPitch,startVolume,distance);
@@ -2905,7 +2905,7 @@ void razSetupSoundRamp(_Instance *instance,_SoundRamp *sound,int sfx,int startPi
 void RAZIEL_SetInteractiveMusic(int modifier,int action)
 
 {
-  uint uVar1;
+  u_int uVar1;
   
   uVar1 = 1 << (modifier & 0x1fU);
   if (action == 0) {
@@ -2967,7 +2967,7 @@ int razInBaseArea(char *name,int length)
 
 {
   char *pcVar1;
-  uint uVar2;
+  u_int uVar2;
   int iVar3;
   char acStack32 [16];
   
@@ -2978,7 +2978,7 @@ int razInBaseArea(char *name,int length)
   else {
     acStack32[length] = '\0';
     iVar3 = strcmp(name,acStack32);
-    uVar2 = (uint)(iVar3 == 0);
+    uVar2 = (u_int)(iVar3 == 0);
   }
   return uVar2;
 }

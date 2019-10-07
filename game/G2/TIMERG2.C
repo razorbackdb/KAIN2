@@ -36,7 +36,7 @@ short G2Timer_GetFrameTime(void)
 
 {
   short sVar1;
-  uint uVar2;
+  u_int uVar2;
   
   if (gameTrackerX.timeMult == 0) {
     uVar2 = 100;

@@ -1,6 +1,5 @@
 #include "THISDUST.H"
 #include "SUPPORT.H"
-#include "STRINGS.H"
 
 
 // decompiled code

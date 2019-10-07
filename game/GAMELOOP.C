@@ -17,17 +17,17 @@ void GAMELOOP_AllocStaticMemory(void)
 
 {
   instanceList = (_InstanceList *)MEMPACK_Malloc(0x10c,'\x06');
-  instancePool = (_InstancePool *)MEMPACK_Malloc((ulong)&DAT_00009bac,'\x06');
-  gOt2 = (ulong **)MEMPACK_Malloc(0x34e18,'\x06');
+  instancePool = (_InstancePool *)MEMPACK_Malloc((u_long)&DAT_00009bac,'\x06');
+  gOt2 = (u_long **)MEMPACK_Malloc(0x34e18,'\x06');
   PTR_800d1d1c = gOt2 + 0xc00;
   primPool2 = (_PrimPool *)(gOt2 + 0x1800);
   PTR_800d1d24 = (_PrimPool *)(gOt2 + 0x75c3);
   primBase = (char *)gOt2;
   gLightInfo = (LightInfo *)MEMPACK_Malloc(0x47c,'\x06');
   memset(gLightInfo,0,0x47c);
-  gPolytopeList = (_PolytopeList *)MEMPACK_Malloc((ulong)&DAT_000018c0,'\x06');
+  gPolytopeList = (_PolytopeList *)MEMPACK_Malloc((u_long)&DAT_000018c0,'\x06');
   gVertexPool = (_VertexPool *)gPolytopeList;
-  gFXT = (_FXTracker *)MEMPACK_Malloc((ulong)&DAT_000079a8,'\x06');
+  gFXT = (_FXTracker *)MEMPACK_Malloc((u_long)&DAT_000079a8,'\x06');
   fxTracker = gFXT;
   planningPool = MEMPACK_Malloc(3000,'\x06');
   enemyPlanPool = MEMPACK_Malloc(1000,'\x06');
@@ -506,7 +506,7 @@ void GAMELOOP_InitStandardObjects(void)
 {
   char *name;
   undefined **ppuVar1;
-  uint uVar2;
+  u_int uVar2;
   
   LOAD_DumpCurrentDir();
   uVar2 = 0;
@@ -610,7 +610,7 @@ void GAMELOOP_LevelLoadAndInit(char *baseAreaName,GameTracker *gameTracker)
   theCamera.core.position.x = (p_Var4->position).x;
   theCamera.core.position.y = (p_Var4->position).y;
   theCamera.core.position.z = (p_Var4->position).z;
-  SetFogNearFar((uint)p_Var1->level->fogNear,(uint)p_Var1->level->fogFar,0x140);
+  SetFogNearFar((u_int)p_Var1->level->fogNear,(u_int)p_Var1->level->fogFar,0x140);
   SetFarColor(0,0,0);
   clearRect.r0 = p_Var1->level->backColorR;
                     /* WARNING: Read-only address (ram,0x800d20ac) is written */
@@ -723,7 +723,7 @@ void GAMELOOP_SetScreenWipe(int time,int maxTime,int type)
 	/* end block 3 */
 	// End Line: 2626
 
-void GAMELOOP_HandleScreenWipes(ulong **drawot)
+void GAMELOOP_HandleScreenWipes(u_long **drawot)
 
 {
   _PrimPool *primPool;
@@ -825,14 +825,14 @@ void UpdateFogSettings(_StreamUnit *currentUnit,Level *level)
   bool bVar3;
   bool bVar4;
   bool bVar5;
-  uint uVar6;
+  u_int uVar6;
   int iVar7;
   int iVar8;
   
   bVar4 = false;
   uVar1 = currentUnit->TargetFogNear;
   iVar7 = (int)(short)uVar1;
-  uVar6 = (uint)level->fogNear;
+  uVar6 = (u_int)level->fogNear;
   uVar2 = currentUnit->TargetFogFar;
   iVar8 = (int)(short)uVar2;
   bVar5 = false;
@@ -854,7 +854,7 @@ LAB_8002e5fc:
     }
     bVar5 = true;
   }
-  uVar6 = (uint)level->fogFar;
+  uVar6 = (u_int)level->fogFar;
   if (iVar8 < (int)uVar6) {
     level->fogFar = (ushort)(uVar6 - 500);
     bVar4 = true;
@@ -927,9 +927,9 @@ void BlendToColor(_ColorType *target,_ColorType *current,_ColorType *dest)
   int iVar1;
   
   LoadAverageCol((byte *)target,(byte *)current,0x200,0xe00,(undefined *)dest);
-  iVar1 = (uint)target->r - (uint)dest->r;
+  iVar1 = (u_int)target->r - (u_int)dest->r;
   if (iVar1 < 0) {
-    if (4 < (int)((uint)dest->r - (uint)target->r)) goto LAB_8002e7dc;
+    if (4 < (int)((u_int)dest->r - (u_int)target->r)) goto LAB_8002e7dc;
   }
   else {
     if (4 < iVar1) {
@@ -937,9 +937,9 @@ void BlendToColor(_ColorType *target,_ColorType *current,_ColorType *dest)
       return;
     }
   }
-  iVar1 = (uint)target->g - (uint)dest->g;
+  iVar1 = (u_int)target->g - (u_int)dest->g;
   if (iVar1 < 0) {
-    if (4 < (int)((uint)dest->g - (uint)target->g)) goto LAB_8002e7dc;
+    if (4 < (int)((u_int)dest->g - (u_int)target->g)) goto LAB_8002e7dc;
   }
   else {
     if (4 < iVar1) {
@@ -947,9 +947,9 @@ void BlendToColor(_ColorType *target,_ColorType *current,_ColorType *dest)
       return;
     }
   }
-  iVar1 = (uint)target->b - (uint)dest->b;
+  iVar1 = (u_int)target->b - (u_int)dest->b;
   if (iVar1 < 0) {
-    if (4 < (int)((uint)dest->b - (uint)target->b)) goto LAB_8002e7dc;
+    if (4 < (int)((u_int)dest->b - (u_int)target->b)) goto LAB_8002e7dc;
   }
   else {
     if (4 < iVar1) {
@@ -1021,16 +1021,16 @@ LAB_8002e7dc:
 /* WARNING: This function may have set the stack pointer */
 /* WARNING: Could not reconcile some variable overlaps */
 
-void MainRenderLevel(_StreamUnit *currentUnit,ulong **drawot)
+void MainRenderLevel(_StreamUnit *currentUnit,u_long **drawot)
 
 {
   MATRIX *pMVar1;
   LightInfo *lightInfo;
   _Instance *p_Var2;
-  ulong *puVar3;
+  u_long *puVar3;
   ushort uVar4;
   int unitID;
-  uint uVar5;
+  u_int uVar5;
   Level *level;
   int **ppiVar6;
   _Instance *p_Var7;
@@ -1056,7 +1056,7 @@ void MainRenderLevel(_StreamUnit *currentUnit,ulong **drawot)
   terrain = level->terrain;
   UpdateFogSettings(currentUnit,level);
   currentUnit->FrameCount = gameTrackerX.displayFrameCount;
-  SetFogNearFar((uint)level->fogNear,(uint)level->fogFar,0x140);
+  SetFogNearFar((u_int)level->fogNear,(u_int)level->fogFar,0x140);
   SetFarColor(0,0,0);
   clearRect.r0 = level->backColorR;
                     /* WARNING: Read-only address (ram,0x800d20ac) is written */
@@ -1093,21 +1093,21 @@ void MainRenderLevel(_StreamUnit *currentUnit,ulong **drawot)
      (gameTrackerX.gameData.asmData.MorphTime == 1000)) {
     depthQBackColor = depthQBackColor & 0xfff8f8f8 | 0x40404;
   }
-  depthQFogStart = (uint)level->fogNear;
-  depthQFogFar = (uint)level->fogFar;
+  depthQFogStart = (u_int)level->fogNear;
+  depthQFogFar = (u_int)level->fogFar;
   unitID = CheckForNoBlend((_ColorType *)&depthQBackColor);
   depthQBlendStart = 0xffff;
   if (unitID == 0) {
     depthQBlendStart = depthQFogStart;
   }
                     /* WARNING: Read-only address (ram,0x800d20ac) is written */
-  clearRect.r0 = (uchar)depthQBackColor;
+  clearRect.r0 = (u_char)depthQBackColor;
                     /* WARNING: Read-only address (ram,0x800d20ad) is written */
   clearRect.g0 = depthQBackColor._1_1_;
                     /* WARNING: Read-only address (ram,0x800d20ae) is written */
   clearRect.b0 = depthQBackColor._2_1_;
                     /* WARNING: Read-only address (ram,0x800d20bc) is written */
-  BLK_FILL_800d20b8.r0 = (uchar)depthQBackColor;
+  BLK_FILL_800d20b8.r0 = (u_char)depthQBackColor;
                     /* WARNING: Read-only address (ram,0x800d20bd) is written */
   BLK_FILL_800d20b8.g0 = depthQBackColor._1_1_;
                     /* WARNING: Read-only address (ram,0x800d20be) is written */
@@ -1146,17 +1146,17 @@ void MainRenderLevel(_StreamUnit *currentUnit,ulong **drawot)
           gameTrackerX.gameData.asmData.lightInstances[0].lightInstance = (_Instance *)0x0;
           p_Var7 = p_Var2;
         }
-        uVar5 = (local_60 & 0xffff) - (uint)*(ushort *)(ppiVar6 + 3);
+        uVar5 = (local_60 & 0xffff) - (u_int)*(ushort *)(ppiVar6 + 3);
         local_38 = -(short)uVar5;
         uVar4 = local_60._2_2_ - *(short *)((int)ppiVar6 + 0xe);
-        theCamera.core.position._0_4_ = uVar5 & 0xffff | (uint)uVar4 << 0x10;
+        theCamera.core.position._0_4_ = uVar5 & 0xffff | (u_int)uVar4 << 0x10;
         local_36 = -uVar4;
         theCamera.core.position.z = local_5c - *(short *)(ppiVar6 + 4);
         local_34 = -theCamera.core.position.z;
         ApplyMatrix(&local_58,&local_38,(theCamera.core.wcTransform)->t);
         BSP_MarkVisibleLeaves_S(ppiVar6,(undefined4 *)&theCamera,(int *)gPolytopeList);
         local_64 = ppiVar6 + 3;
-        puVar3 = (ulong *)(*(code *)gameTrackerX.drawDisplayPolytopeListFunc)
+        puVar3 = (u_long *)(*(code *)gameTrackerX.drawDisplayPolytopeListFunc)
                                     (gPolytopeList,terrain,&theCamera,gameTrackerX.primPool);
         (gameTrackerX.primPool)->nextPrim = puVar3;
         if ((*(ushort *)((int)ppiVar6 + 0x12) & 0x40) != 0) {
@@ -1181,7 +1181,7 @@ void MainRenderLevel(_StreamUnit *currentUnit,ulong **drawot)
   pMVar1->t[1] = local_40;
   pMVar1->t[2] = local_3c;
   SBSP_IntroduceInstancesAndLights(terrain,(_CameraCore_Type *)&theCamera,lightInfo,unitID);
-  StackSave = (ulong)&stack0xffffff88;
+  StackSave = (u_long)&stack0xffffff88;
   FX_DrawList(fxTracker,&gameTrackerX,gameTrackerX.drawOT,theCamera.core.wcTransform);
   if ((gameTrackerX.playerInstance)->currentStreamUnitID == currentUnit->StreamUnitID) {
     FX_DrawReaver(gameTrackerX.primPool,gameTrackerX.drawOT,theCamera.core.wcTransform);
@@ -1262,22 +1262,22 @@ void StreamIntroInstancesForUnit(_StreamUnit *currentUnit)
 /* WARNING: This function may have set the stack pointer */
 /* WARNING: Could not reconcile some variable overlaps */
 
-long StreamRenderLevel(_StreamUnit *currentUnit,Level *mainLevel,ulong **drawot,long portalFogColor)
+long StreamRenderLevel(_StreamUnit *currentUnit,Level *mainLevel,u_long **drawot,long portalFogColor)
 
 {
   MATRIX *pMVar1;
   long lVar2;
   LightInfo *lightInfo;
   int unitID;
-  ulong *puVar3;
+  u_long *puVar3;
   ushort uVar4;
-  uint uVar5;
+  u_int uVar5;
   int **ppiVar6;
   Level *level;
   _Terrain *terrain;
   int iVar7;
   undefined auStack112 [16];
-  ulong **local_60;
+  u_long **local_60;
   int **local_5c;
   undefined4 local_58;
   short local_54;
@@ -1298,8 +1298,8 @@ long StreamRenderLevel(_StreamUnit *currentUnit,Level *mainLevel,ulong **drawot,
   terrain = level->terrain;
   SetFarColor(0,0,0);
   UpdateFogSettings(currentUnit,level);
-  depthQFogFar = (uint)level->fogFar;
-  depthQFogStart = (uint)level->fogNear;
+  depthQFogFar = (u_int)level->fogFar;
+  depthQFogStart = (u_int)level->fogNear;
   depthQBackColor = portalFogColor;
   currentUnit->FogColor = portalFogColor;
   theCamera.core.farPlane = depthQFogFar;
@@ -1333,10 +1333,10 @@ long StreamRenderLevel(_StreamUnit *currentUnit,Level *mainLevel,ulong **drawot,
     do {
       ppiVar6 = (int **)((int)&terrain->BSPTreeArray->bspRoot + iVar7);
       if ((-1 < *(short *)((int)ppiVar6 + 0x1a)) && ((*(ushort *)((int)ppiVar6 + 0x12) & 1) == 0)) {
-        uVar5 = (local_58 & 0xffff) - (uint)*(ushort *)(ppiVar6 + 3);
+        uVar5 = (local_58 & 0xffff) - (u_int)*(ushort *)(ppiVar6 + 3);
         local_30 = -(short)uVar5;
         uVar4 = local_58._2_2_ - *(short *)((int)ppiVar6 + 0xe);
-        theCamera.core.position._0_4_ = uVar5 & 0xffff | (uint)uVar4 << 0x10;
+        theCamera.core.position._0_4_ = uVar5 & 0xffff | (u_int)uVar4 << 0x10;
         local_2e = -uVar4;
         theCamera.core.position.z = local_54 - *(short *)(ppiVar6 + 4);
         local_2c = -theCamera.core.position.z;
@@ -1344,7 +1344,7 @@ long StreamRenderLevel(_StreamUnit *currentUnit,Level *mainLevel,ulong **drawot,
         BSP_MarkVisibleLeaves_S(ppiVar6,(undefined4 *)&theCamera,(int *)gPolytopeList);
         local_5c = ppiVar6 + 3;
         local_60 = drawot;
-        puVar3 = (ulong *)(*(code *)gameTrackerX.drawDisplayPolytopeListFunc)
+        puVar3 = (u_long *)(*(code *)gameTrackerX.drawDisplayPolytopeListFunc)
                                     (gPolytopeList,terrain,&theCamera,gameTrackerX.primPool);
         (gameTrackerX.primPool)->nextPrim = puVar3;
       }
@@ -1371,7 +1371,7 @@ long StreamRenderLevel(_StreamUnit *currentUnit,Level *mainLevel,ulong **drawot,
   theCamera.core.farPlane = lVar2;
   if ((gameTrackerX.playerInstance)->currentStreamUnitID == currentUnit->StreamUnitID) {
     hackOT = drawot;
-    StackSave = (ulong)auStack112;
+    StackSave = (u_long)auStack112;
     FX_DrawReaver(gameTrackerX.primPool,drawot,theCamera.core.wcTransform);
   }
   return 0;
@@ -1388,11 +1388,11 @@ long StreamRenderLevel(_StreamUnit *currentUnit,Level *mainLevel,ulong **drawot,
 	/* end block 1 */
 	// End Line: 4979
 
-void GAMELOOP_FlipScreenAndDraw(GameTracker *gameTracker,ulong **drawot)
+void GAMELOOP_FlipScreenAndDraw(GameTracker *gameTracker,u_long **drawot)
 
 {
   int iVar1;
-  uint uVar2;
+  u_int uVar2;
   
   DrawOTag(drawot + 0xbff);
   do {
@@ -1404,7 +1404,7 @@ void GAMELOOP_FlipScreenAndDraw(GameTracker *gameTracker,ulong **drawot)
     iVar1 = CheckVolatile(gameTracker->reqDisp);
   } while (iVar1 != 0);
   uVar2 = GetRCnt(0xf2000000);
-  *(ulong **)&gameTracker->drawTimerReturn = &gameTracker->drawTime;
+  *(u_long **)&gameTracker->drawTimerReturn = &gameTracker->drawTime;
   iVar1 = (gameTracker->gameData).asmData.dispPage;
   gameTracker->usecsStartDraw = uVar2 & 0xffff | gameTimer << 0x10;
   (gameTracker->gameData).asmData.dispPage = 1 - iVar1;
@@ -1452,26 +1452,26 @@ void GAMELOOP_FlipScreenAndDraw(GameTracker *gameTracker,ulong **drawot)
 	/* end block 3 */
 	// End Line: 5052
 
-void GAMELOOP_AddClearPrim(ulong **drawot)
+void GAMELOOP_AddClearPrim(u_long **drawot)
 
 {
-  ulong *puVar1;
-  ulong uVar2;
-  ulong uVar3;
-  ulong uVar4;
+  u_long *puVar1;
+  u_long uVar2;
+  u_long uVar3;
+  u_long uVar4;
   
   if ((gameTrackerX.gameFlags & 0x8000000U) == 0) {
     puVar1 = (gameTrackerX.primPool)->nextPrim;
-    uVar2 = *(ulong *)&(&clearRect)[gameTrackerX.drawPage].r0;
-    uVar3 = *(ulong *)&(&clearRect)[gameTrackerX.drawPage].x0;
-    uVar4 = *(ulong *)&(&clearRect)[gameTrackerX.drawPage].w;
+    uVar2 = *(u_long *)&(&clearRect)[gameTrackerX.drawPage].r0;
+    uVar3 = *(u_long *)&(&clearRect)[gameTrackerX.drawPage].x0;
+    uVar4 = *(u_long *)&(&clearRect)[gameTrackerX.drawPage].w;
     *puVar1 = (&clearRect)[gameTrackerX.drawPage].tag;
     puVar1[1] = uVar2;
     puVar1[2] = uVar3;
     puVar1[3] = uVar4;
     (gameTrackerX.primPool)->nextPrim = puVar1 + 4;
-    *puVar1 = (uint)drawot[0xbff] & 0xffffff | 0x3000000;
-    drawot[0xbff] = (ulong *)((uint)puVar1 & 0xffffff);
+    *puVar1 = (u_int)drawot[0xbff] & 0xffffff | 0x3000000;
+    drawot[0xbff] = (u_long *)((u_int)puVar1 & 0xffffff);
     return;
   }
   *(ushort *)&(gameTrackerX.savedOTStart)->b0 = (&clearRect)[gameTrackerX.drawPage].y0;
@@ -1489,7 +1489,7 @@ void GAMELOOP_AddClearPrim(ulong **drawot)
 	/* end block 1 */
 	// End Line: 5121
 
-void GAMELOOP_SwitchTheDrawBuffer(ulong **drawot)
+void GAMELOOP_SwitchTheDrawBuffer(u_long **drawot)
 
 {
   GAMELOOP_AddClearPrim(drawot);
@@ -1645,11 +1645,11 @@ void GAMELOOP_DisplayFrame(GameTracker *gameTracker)
   long lVar2;
   int *piVar3;
   int iVar4;
-  uint uVar5;
-  ulong uVar6;
+  u_int uVar5;
+  u_long uVar6;
   StreamUnitPortal *portal;
   STracker *currentUnit_00;
-  ulong **polyAddr;
+  u_long **polyAddr;
   int iVar7;
   _StreamUnit *currentUnit_01;
   int iVar8;
@@ -1657,7 +1657,7 @@ void GAMELOOP_DisplayFrame(GameTracker *gameTracker)
   int iVar10;
   StreamUnitPortal *curStreamPortal;
   RECT local_40;
-  ulong **local_38;
+  u_long **local_38;
   Level *local_34;
   int local_30;
   
@@ -1685,8 +1685,8 @@ void GAMELOOP_DisplayFrame(GameTracker *gameTracker)
     CAMERA_SetViewVolume(&theCamera);
     lVar2 = MEMPACK_MemoryValidFunc((char *)local_34);
     if (lVar2 != 0) {
-      if ((uint)local_34->fogFar != theCamera.core.farPlane) {
-        theCamera.core.farPlane = (uint)local_34->fogFar;
+      if ((u_int)local_34->fogFar != theCamera.core.farPlane) {
+        theCamera.core.farPlane = (u_int)local_34->fogFar;
       }
       if ((gameTracker->debugFlags & 0x8000U) == 0) {
         MainRenderLevel(currentUnit,local_38);
@@ -1781,8 +1781,8 @@ LAB_8002f7f8:
     currentUnit_00 = &StreamTracker;
     do {
       if ((*(short *)currentUnit_00->StreamList == 2) &&
-         (*(ulong *)currentUnit_00->StreamList != gameTrackerX.displayFrameCount)) {
-        *(ulong *)currentUnit_00->StreamList = gameTrackerX.displayFrameCount;
+         (*(u_long *)currentUnit_00->StreamList != gameTrackerX.displayFrameCount)) {
+        *(u_long *)currentUnit_00->StreamList = gameTrackerX.displayFrameCount;
         StreamIntroInstancesForUnit((_StreamUnit *)currentUnit_00);
       }
       iVar8 = iVar8 + 1;
@@ -1802,7 +1802,7 @@ LAB_8002f7f8:
   GAMELOOP_SwitchTheDrawBuffer(local_38);
   uVar5 = GetRCnt(0xf2000000);
   gameTracker->idleTime = uVar5 & 0xffff | gameTimer << 0x10;
-  if ((uint)gameTracker->frameRateLock < gameTracker->vblFrames) {
+  if ((u_int)gameTracker->frameRateLock < gameTracker->vblFrames) {
     if ((ushort *)gameTracker->reqDisp != (ushort *)0x0) {
       PutDispEnv((ushort *)gameTracker->reqDisp);
       gameTracker->reqDisp = (void *)0x0;
@@ -1822,7 +1822,7 @@ LAB_8002f7f8:
   DEBUG_DrawShrinkCels(polyAddr);
   GAMELOOP_HandleScreenWipes(local_38);
   uVar5 = GetRCnt(0xf2000000);
-  *(ulong **)&gameTracker->drawTimerReturn = &gameTracker->drawTime;
+  *(u_long **)&gameTracker->drawTimerReturn = &gameTracker->drawTime;
   gameTracker->usecsStartDraw = uVar5 & 0xffff | gameTimer << 0x10;
   if ((gameTrackerX.gameFlags & 0x8000000U) == 0) {
     DrawOTag(polyAddr);
@@ -1879,15 +1879,15 @@ LAB_8002f7f8:
 	/* end block 2 */
 	// End Line: 6187
 
-void GAMELOOP_DrawSavedOT(ulong **newOT)
+void GAMELOOP_DrawSavedOT(u_long **newOT)
 
 {
   byte bVar1;
   short sVar2;
   ushort uVar3;
-  uint uVar4;
+  u_int uVar4;
   byte bVar5;
-  uint uVar6;
+  u_int uVar6;
   P_TAG *pPVar7;
   
   sVar2 = (&draw)[gameTrackerX.drawPage].ofs[1];
@@ -1923,14 +1923,14 @@ void GAMELOOP_DrawSavedOT(ulong **newOT)
           if (bVar1 == 0xe3) {
             if (sVar2 == 0) {
               uVar4 = pPVar7->len & 0xfffbffff;
-              uVar6 = *(uint *)&pPVar7->r0 & 0xfffbffff;
+              uVar6 = *(u_int *)&pPVar7->r0 & 0xfffbffff;
             }
             else {
               uVar4 = pPVar7->len | 0x40000;
-              uVar6 = *(uint *)&pPVar7->r0 | 0x40000;
+              uVar6 = *(u_int *)&pPVar7->r0 | 0x40000;
             }
             pPVar7->len = uVar4;
-            *(uint *)&pPVar7->r0 = uVar6;
+            *(u_int *)&pPVar7->r0 = uVar6;
           }
         }
       }
@@ -1938,7 +1938,7 @@ void GAMELOOP_DrawSavedOT(ulong **newOT)
     } while (pPVar7 != gameTrackerX.savedOTEnd);
   }
   (gameTrackerX.savedOTEnd)->addr =
-       (gameTrackerX.savedOTEnd)->addr & 0xff000000 | (uint)(newOT + 0xbff) & 0xffffff;
+       (gameTrackerX.savedOTEnd)->addr & 0xff000000 | (u_int)(newOT + 0xbff) & 0xffffff;
   DrawOTag((undefined4 *)gameTrackerX.savedOTStart);
   return;
 }
@@ -1979,7 +1979,7 @@ void ResetPrimPool(void)
       ppuVar1 = &PTR_000101dc;
     }
     (gameTrackerX.primPool)->nextPrim =
-         (ulong *)((int)&(gameTrackerX.primPool)->numPrims + (int)ppuVar1);
+         (u_long *)((int)&(gameTrackerX.primPool)->numPrims + (int)ppuVar1);
   }
   (gameTrackerX.primPool)->numPrims = 0;
   return;
@@ -2015,7 +2015,7 @@ void SaveOT(void)
   char cVar1;
   P_TAG *pPVar2;
   P_TAG *pPVar3;
-  uint uVar4;
+  u_int uVar4;
   P_TAG *pPVar5;
   P_TAG *pPVar6;
   P_TAG *pPVar7;
@@ -2053,7 +2053,7 @@ LAB_8002fcc0:
           pPVar5 = (P_TAG *)(uVar4 | 0x80000000);
           cVar1 = *(char *)((int)&pPVar5->addr + 3);
         }
-        pPVar6->addr = pPVar6->addr & 0xff000000 | (uint)pPVar5 & 0xffffff;
+        pPVar6->addr = pPVar6->addr & 0xff000000 | (u_int)pPVar5 & 0xffffff;
         pPVar2 = pPVar5;
         pPVar3 = pPVar6;
       } while ((pPVar5->addr & 0xffffff) != 0xffffff);
@@ -2104,7 +2104,7 @@ LAB_8002fdac:
 void ResetDrawPage(void)
 
 {
-  ulong **ppuVar1;
+  u_long **ppuVar1;
   
   ppuVar1 = gameTrackerX.dispOT;
   gameTrackerX.dispOT = gameTrackerX.drawOT;
@@ -2199,9 +2199,9 @@ void GAMELOOP_Reset24FPS(void)
 void GAMELOOP_DoTimeProcess(void)
 
 {
-  ulong uVar1;
-  uint uVar2;
-  uint uVar3;
+  u_long uVar1;
+  u_int uVar2;
+  u_int uVar3;
   
   uVar1 = TIMER_GetTimeMS();
   if ((gameTrackerX.gameFlags & 0x10000000U) == 0) {
@@ -2223,7 +2223,7 @@ void GAMELOOP_DoTimeProcess(void)
           gameTrackerX.lastLoopTime = 0x32;
         }
       }
-      uVar2 = (uint)((ulonglong)(gameTrackerX.lastLoopTime << 0xc) * 0x3e0f83e1 >> 0x20);
+      uVar2 = (u_int)((u_longlong)(gameTrackerX.lastLoopTime << 0xc) * 0x3e0f83e1 >> 0x20);
     }
     else {
       uVar3 = 0x21;
@@ -2241,7 +2241,7 @@ void GAMELOOP_DoTimeProcess(void)
       if ((uVar3 <= uVar2) && (uVar3 = uVar2, 0x42 < uVar2)) {
         uVar3 = 0x42;
       }
-      uVar2 = (uint)((ulonglong)(uVar3 << 0xc) * 0x3e0f83e1 >> 0x20);
+      uVar2 = (u_int)((u_longlong)(uVar3 << 0xc) * 0x3e0f83e1 >> 0x20);
       gameTrackerX.lastLoopTime = uVar3;
     }
     gameTrackerX.timeMult = uVar2 >> 3;
@@ -2332,7 +2332,7 @@ void GAMELOOP_Process(GameTracker *gameTracker)
   bool bVar1;
   Level *pLVar2;
   int iVar3;
-  uchar **ppuVar4;
+  u_char **ppuVar4;
   STracker *streamUnit;
   int iVar5;
   int iVar6;
@@ -2417,10 +2417,10 @@ void GAMELOOP_Process(GameTracker *gameTracker)
          (iVar5 = 0, 0 < (streamUnit->StreamList[0].level)->NumberOfSFXMarkers)) {
         iVar6 = 0;
         do {
-          ppuVar4 = (uchar **)
+          ppuVar4 = (u_char **)
                     (*(int *)(*(int *)((int)&StreamTracker.StreamList[0].level + iVar3) + 0xec) +
                     iVar6);
-          if ((ppuVar4 != (uchar **)0x0) && (*ppuVar4 != (uchar *)0x0)) {
+          if ((ppuVar4 != (u_char **)0x0) && (*ppuVar4 != (u_char *)0x0)) {
             SOUND_ProcessInstanceSounds
                       (*ppuVar4,(SoundInstance *)(ppuVar4 + 2),(_Position *)(ppuVar4 + 5),
                        (int)ppuVar4[7],(int)ppuVar4[8],0,(long *)0x0);
@@ -2442,7 +2442,7 @@ void GAMELOOP_Process(GameTracker *gameTracker)
     MONAPI_ProcessGenerator();
     _DAT_1f800000 = theCamera.core.position._0_4_;
     _DAT_1f800004 = theCamera.core._4_4_;
-    StackSave = (ulong)&stack0xffffffc0;
+    StackSave = (u_long)&stack0xffffffc0;
     G2Instance_BuildTransformsForList(gameTracker->instanceList->first);
     puVar8 = (undefined *)StackSave;
     if (gameTrackerX.gameMode != 6) {
@@ -2635,7 +2635,7 @@ void GAMELOOP_DemoSetup(void)
 void GAMELOOP_ChangeMode(void)
 
 {
-  uint uVar1;
+  u_int uVar1;
   
   if ((gameTrackerX.debugFlags & 0x40000U) == 0) {
     if ((gameTrackerX.debugFlags & 0x200000U) == 0) {

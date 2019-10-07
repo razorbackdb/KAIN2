@@ -20,12 +20,12 @@
 	/* end block 2 */
 	// End Line: 9
 
-int SetEngagedInstance(__Player *player,evCollideInstanceStatsData *Ptr,ulong Attribute)
+int SetEngagedInstance(__Player *player,evCollideInstanceStatsData *Ptr,u_long Attribute)
 
 {
-  uint uVar1;
+  u_int uVar1;
   __EngagedInstance *p_Var2;
-  uint uVar3;
+  u_int uVar3;
   int iVar4;
   
   uVar3 = (player->Senses).EngagedMask;
@@ -181,19 +181,19 @@ void UpdateEngagementList(evCollideInstanceStatsData *Ptr,__Player *player)
 
 {
   short sVar1;
-  ulong uVar2;
-  ulong Attribute;
+  u_long uVar2;
+  u_long Attribute;
   short *Data;
-  ulong uVar3;
+  u_long uVar3;
   MATRIX *pMVar4;
   _Instance *Inst;
-  uint uVar5;
+  u_int uVar5;
   int Data_00;
-  uint in_t1;
+  u_int in_t1;
   undefined4 in_t2;
   undefined4 in_t3;
-  uint uVar6;
-  uint Data_01;
+  u_int uVar6;
+  u_int Data_01;
   int iVar7;
   int local_40;
   undefined4 local_3c;
@@ -271,19 +271,19 @@ LAB_800a30b4:
   Attribute = INSTANCE_Query(Inst,2);
   if (((Attribute & 0x100) != 0) && ((Ptr->instance->flags & 0x800U) == 0)) {
     Data = (short *)INSTANCE_Query(Ptr->instance,0x16);
-    if ((Ptr->xyDistance < (int)(uint)(ushort)Data[1]) && (Data_00 = Ptr->zDelta, Data_00 < 0)) {
-      if ((int)-(uint)(ushort)Data[3] < Data_00) {
+    if ((Ptr->xyDistance < (int)(u_int)(ushort)Data[1]) && (Data_00 = Ptr->zDelta, Data_00 < 0)) {
+      if ((int)-(u_int)(ushort)Data[3] < Data_00) {
         in_t2 = 0x1000;
-        iVar7 = (0x1000 - (Ptr->xyDistance << 0xc) / (int)(uint)(ushort)Data[1]) * (int)*Data;
+        iVar7 = (0x1000 - (Ptr->xyDistance << 0xc) / (int)(u_int)(ushort)Data[1]) * (int)*Data;
         if (iVar7 < 0) {
           iVar7 = iVar7 + 0xfff;
         }
-        in_t1 = (uint)(ushort)Data[2];
+        in_t1 = (u_int)(ushort)Data[2];
         iVar7 = (iVar7 >> 0xc) * in_t1;
         if (iVar7 < 0) {
           iVar7 = iVar7 + 0xfff;
         }
-        Data_00 = (0x1000 - (Data_00 * -0x1000) / (int)(uint)(ushort)Data[3]) * (int)*Data;
+        Data_00 = (0x1000 - (Data_00 * -0x1000) / (int)(u_int)(ushort)Data[3]) * (int)*Data;
         if (Data_00 < 0) {
           Data_00 = Data_00 + 0xfff;
         }
@@ -329,12 +329,12 @@ LAB_800a30b4:
   }
   if ((((Attribute & 0x40) != 0) &&
       (uVar3 = INSTANCE_Query(Ptr->instance,0x17),
-      Ptr->xyDistance < (int)(uint)*(ushort *)(uVar3 + 0x1a))) &&
+      Ptr->xyDistance < (int)(u_int)*(ushort *)(uVar3 + 0x1a))) &&
      (((int)*(char *)(uVar3 + 0x1c) < Ptr->zDelta && (Ptr->zDelta < (int)*(char *)(uVar3 + 0x1d)))))
   {
     Data_00 = MATH3D_ConeDetect(&Ptr->relativePosition,
-                                (int)((uint)*(byte *)(uVar3 + 0x1e) * 0x1000) / 0x168,
-                                (int)((uint)*(byte *)(uVar3 + 0x1f) * 0x1000) / 0x168);
+                                (int)((u_int)*(byte *)(uVar3 + 0x1e) * 0x1000) / 0x168,
+                                (int)((u_int)*(byte *)(uVar3 + 0x1f) * 0x1000) / 0x168);
     if (Data_00 != 0) {
       SetEngagedInstance(player,Ptr,3);
     }
@@ -348,7 +348,7 @@ LAB_800a30b4:
       if (Inst == (_Instance *)0x0) {
         uVar6 = 0x800;
         if (Raziel.soulReaver != (_Instance *)0x0) {
-          uVar6 = (uint)Raziel.Abilities >> 9 & 0x1fe & (uint)*(ushort *)(Attribute + 8) | 0x800;
+          uVar6 = (u_int)Raziel.Abilities >> 9 & 0x1fe & (u_int)*(ushort *)(Attribute + 8) | 0x800;
         }
         if (Raziel.currentSoulReaver == 6) {
           uVar6 = uVar6 | 0x200;
@@ -370,12 +370,12 @@ LAB_800a30b4:
     }
     if (((((uVar6 & *(ushort *)(Attribute + 8)) != 0) ||
          ((uVar6 & *(ushort *)(Attribute + 10)) != 0)) && (*(short *)(Attribute + 0x1c) != 2)) &&
-       (((Ptr->xyDistance < (int)(uint)*(ushort *)(Attribute + 0x1e) &&
+       (((Ptr->xyDistance < (int)(u_int)*(ushort *)(Attribute + 0x1e) &&
          ((int)*(short *)(Attribute + 0x20) < Ptr->zDelta)) &&
         ((Ptr->zDelta < (int)*(short *)(Attribute + 0x22) &&
          (Data_00 = MATH3D_ConeDetect(&Ptr->relativePosition,
-                                      (int)((uint)*(byte *)(Attribute + 0x24) * 0x1000) / 0x168,
-                                      (int)((uint)*(byte *)(Attribute + 0x25) * 0x1000) / 0x168),
+                                      (int)((u_int)*(byte *)(Attribute + 0x24) * 0x1000) / 0x168,
+                                      (int)((u_int)*(byte *)(Attribute + 0x25) * 0x1000) / 0x168),
          Data_00 != 0)))))) {
       if ((uVar6 & *(ushort *)(Attribute + 8)) == 0) {
         Attribute = 0xd;
@@ -402,12 +402,12 @@ LAB_800a30b4:
     local_3c = CONCAT22(local_3c._2_2_,
                         *(undefined2 *)((gameTrackerX.playerInstance)->matrix[1].t + 2));
     uVar6 = MATH3D_DistanceBetweenPositions((_Position *)&local_40,(_Position *)&local_38);
-    uVar5 = *(uint *)(Attribute + 0xc);
+    uVar5 = *(u_int *)(Attribute + 0xc);
     if (((Ptr->distance < uVar5) || (Data_01 < uVar5)) || (uVar6 < uVar5)) {
-      switch((int)(((uint)*(ushort *)(Attribute + 8) - 1) * 0x10000) >> 0x10) {
+      switch((int)(((u_int)*(ushort *)(Attribute + 8) - 1) * 0x10000) >> 0x10) {
       case 0:
         Raziel.HealthBalls = Raziel.HealthBalls + 1;
-        in_t3 = (undefined4)((ulonglong)((longlong)(int)Raziel.HealthBalls * 0x66666667) >> 0x20);
+        in_t3 = (undefined4)((u_longlong)((longlong)(int)Raziel.HealthBalls * 0x66666667) >> 0x20);
         if ((int)Raziel.HealthScale < (((int)Raziel.HealthBalls / 5) * 0x10000 >> 0x10) + 1) {
           BumpUpHealth();
         }
@@ -423,7 +423,7 @@ LAB_800a2e9c:
             Raziel.GlyphManaBalls = Raziel.GlyphManaMax;
           }
           Inst = Ptr->instance;
-          Data_01 = (uint)Raziel.GlyphManaBalls;
+          Data_01 = (u_int)Raziel.GlyphManaBalls;
           goto LAB_800a2e9c;
         }
         break;
@@ -438,11 +438,11 @@ LAB_800a2e9c:
         INSTANCE_Post(Ptr->instance,0x800026,0);
         break;
       case 5:
-        INSTANCE_Post(Ptr->instance,0x800026,(uint)Raziel.GlyphManaBalls);
+        INSTANCE_Post(Ptr->instance,0x800026,(u_int)Raziel.GlyphManaBalls);
         RAZIEL_DebugHealthFillUp();
         break;
       case 6:
-        INSTANCE_Post(Ptr->instance,0x800026,(uint)Raziel.GlyphManaBalls);
+        INSTANCE_Post(Ptr->instance,0x800026,(u_int)Raziel.GlyphManaBalls);
         SetMana(1);
       }
     }

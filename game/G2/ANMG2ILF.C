@@ -39,8 +39,8 @@
 void G2Anim_DisableSegment(_G2Anim_Type *anim,int segmentID)
 
 {
-  *(uint *)(&anim->sectionCount + (segmentID >> 5) * 4 + 0x18) =
-       *(uint *)(&anim->sectionCount + (segmentID >> 5) * 4 + 0x18) | 1 << (segmentID & 0x1fU);
+  *(u_int *)(&anim->sectionCount + (segmentID >> 5) * 4 + 0x18) =
+       *(u_int *)(&anim->sectionCount + (segmentID >> 5) * 4 + 0x18) | 1 << (segmentID & 0x1fU);
   return;
 }
 
@@ -78,8 +78,8 @@ void G2Anim_DisableSegment(_G2Anim_Type *anim,int segmentID)
 void G2Anim_EnableSegment(_G2Anim_Type *anim,int segmentID)
 
 {
-  *(uint *)(&anim->sectionCount + (segmentID >> 5) * 4 + 0x18) =
-       *(uint *)(&anim->sectionCount + (segmentID >> 5) * 4 + 0x18) & ~(1 << (segmentID & 0x1fU));
+  *(u_int *)(&anim->sectionCount + (segmentID >> 5) * 4 + 0x18) =
+       *(u_int *)(&anim->sectionCount + (segmentID >> 5) * 4 + 0x18) & ~(1 << (segmentID & 0x1fU));
   return;
 }
 
@@ -180,7 +180,7 @@ void G2Anim_GetRootMotionOverInterval
 {
   G2Anim_GetRootMotionFromTimeForDuration
             (anim,intervalStart,
-             (short)(((uint)(ushort)intervalEnd - (uint)(ushort)intervalStart) * 0x10000 >> 0x10),
+             (short)(((u_int)(ushort)intervalEnd - (u_int)(ushort)intervalStart) * 0x10000 >> 0x10),
              motionVector);
   return;
 }
@@ -222,7 +222,7 @@ void G2Anim_InterpToKeylistFrame
                  (int)(short)duration);
       iVar1 = iVar1 + 1;
       iVar2 = iVar2 + 0x30;
-    } while (iVar1 < (int)(uint)anim->sectionCount);
+    } while (iVar1 < (int)(u_int)anim->sectionCount);
   }
   return;
 }
@@ -309,7 +309,7 @@ void G2Anim_SetAlphaTable(_G2Anim_Type *anim,_G2AnimAlphaTable_Type *table)
       G2AnimSection_SetAlphaTable((_G2AnimSection_Type *)(&anim->sectionCount + iVar2),table);
       iVar1 = iVar1 + 1;
       iVar2 = iVar2 + 0x30;
-    } while (iVar1 < (int)(uint)anim->sectionCount);
+    } while (iVar1 < (int)(u_int)anim->sectionCount);
   }
   return;
 }
@@ -359,7 +359,7 @@ void G2Anim_SetCallback(_G2Anim_Type *anim,TDRFuncPtr_G2Anim_SetCallback1callbac
       p_Var2->section[0].callbackData = data;
       iVar1 = iVar1 + 1;
       p_Var2 = (_G2Anim_Type *)&p_Var2->section[0].swAlarmTable;
-    } while (iVar1 < (int)(uint)anim->sectionCount);
+    } while (iVar1 < (int)(u_int)anim->sectionCount);
   }
   return;
 }
@@ -397,7 +397,7 @@ void G2Anim_SetLooping(_G2Anim_Type *anim)
       G2AnimSection_SetLooping((_G2AnimSection_Type *)(&anim->sectionCount + iVar2));
       iVar1 = iVar1 + 1;
       iVar2 = iVar2 + 0x30;
-    } while (iVar1 < (int)(uint)anim->sectionCount);
+    } while (iVar1 < (int)(u_int)anim->sectionCount);
   }
   return;
 }
@@ -435,7 +435,7 @@ void G2Anim_SetNoLooping(_G2Anim_Type *anim)
       G2AnimSection_SetNoLooping((_G2AnimSection_Type *)(&anim->sectionCount + iVar2));
       iVar1 = iVar1 + 1;
       iVar2 = iVar2 + 0x30;
-    } while (iVar1 < (int)(uint)anim->sectionCount);
+    } while (iVar1 < (int)(u_int)anim->sectionCount);
   }
   return;
 }
@@ -473,7 +473,7 @@ void G2Anim_SetPaused(_G2Anim_Type *anim)
       G2AnimSection_SetPaused((_G2AnimSection_Type *)(&anim->sectionCount + iVar2));
       iVar1 = iVar1 + 1;
       iVar2 = iVar2 + 0x30;
-    } while (iVar1 < (int)(uint)anim->sectionCount);
+    } while (iVar1 < (int)(u_int)anim->sectionCount);
   }
   return;
 }
@@ -521,7 +521,7 @@ void G2Anim_SetSpeedAdjustment(_G2Anim_Type *anim,long adjustment)
       p_Var2->section[0].speedAdjustment = adjustment;
       iVar1 = iVar1 + 1;
       p_Var2 = (_G2Anim_Type *)&p_Var2->section[0].swAlarmTable;
-    } while (iVar1 < (int)(uint)anim->sectionCount);
+    } while (iVar1 < (int)(u_int)anim->sectionCount);
   }
   return;
 }
@@ -559,7 +559,7 @@ void G2Anim_SetUnpaused(_G2Anim_Type *anim)
       G2AnimSection_SetUnpaused((_G2AnimSection_Type *)(&anim->sectionCount + iVar2));
       iVar1 = iVar1 + 1;
       iVar2 = iVar2 + 0x30;
-    } while (iVar1 < (int)(uint)anim->sectionCount);
+    } while (iVar1 < (int)(u_int)anim->sectionCount);
   }
   return;
 }
@@ -598,7 +598,7 @@ void G2Anim_SwitchToKeylist(_G2Anim_Type *anim,_G2AnimKeylist_Type *keylist,int 
                 ((_G2AnimSection_Type *)(&anim->sectionCount + iVar2),keylist,keylistID);
       iVar1 = iVar1 + 1;
       iVar2 = iVar2 + 0x30;
-    } while (iVar1 < (int)(uint)anim->sectionCount);
+    } while (iVar1 < (int)(u_int)anim->sectionCount);
   }
   return;
 }
@@ -622,8 +622,8 @@ void G2Anim_SwitchToKeylist(_G2Anim_Type *anim,_G2AnimKeylist_Type *keylist,int 
 short G2AnimKeylist_GetDuration(_G2AnimKeylist_Type *keylist)
 
 {
-  return (short)(((uint)keylist->s0TailTime +
-                 (int)keylist->timePerKey * ((uint)keylist->keyCount - 1)) * 0x10000 >> 0x10);
+  return (short)(((u_int)keylist->s0TailTime +
+                 (int)keylist->timePerKey * ((u_int)keylist->keyCount - 1)) * 0x10000 >> 0x10);
 }
 
 
@@ -645,8 +645,8 @@ short G2AnimKeylist_GetDuration(_G2AnimKeylist_Type *keylist)
 int G2AnimKeylist_GetKeyframeCount(_G2AnimKeylist_Type *keylist)
 
 {
-  return (int)((int)keylist->timePerKey * ((uint)keylist->keyCount - 1) + -1 +
-              (uint)keylist->s0TailTime * 2) / (int)(uint)keylist->s0TailTime;
+  return (int)((int)keylist->timePerKey * ((u_int)keylist->keyCount - 1) + -1 +
+              (u_int)keylist->s0TailTime * 2) / (int)(u_int)keylist->s0TailTime;
 }
 
 
@@ -665,7 +665,7 @@ int G2AnimKeylist_GetKeyframeCount(_G2AnimKeylist_Type *keylist)
 	/* end block 2 */
 	// End Line: 1095
 
-void G2AnimSection_ClearAlarm(_G2AnimSection_Type *section,ulong flag)
+void G2AnimSection_ClearAlarm(_G2AnimSection_Type *section,u_long flag)
 
 {
   section->alarmFlags = section->alarmFlags & ~flag;
@@ -699,7 +699,7 @@ int G2AnimSection_GetKeyframeNumber(_G2AnimSection_Type *section)
     sVar2 = section->interpInfo->targetTime;
     bVar1 = section->keylist->s0TailTime;
   }
-  return (int)sVar2 / (int)(uint)bVar1;
+  return (int)sVar2 / (int)(u_int)bVar1;
 }
 
 
@@ -726,7 +726,7 @@ int G2AnimSection_GetKeyframeNumber(_G2AnimSection_Type *section)
 int G2AnimSection_GetStoredKeyframeNumber(_G2AnimSection_Type *section)
 
 {
-  return (int)section->storedTime / (int)(uint)section->keylist->s0TailTime;
+  return (int)section->storedTime / (int)(u_int)section->keylist->s0TailTime;
 }
 
 

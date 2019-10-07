@@ -1,0 +1,453 @@
+GAME/PSX/MAIN.C: In function `ProcessArgs':
+GAME/PSX/MAIN.C:315: warning: large integer implicitly truncated to unsigned type
+GAME/PSX/MAIN.C: In function `VblTick':
+GAME/PSX/MAIN.C:488: warning: passing arg 1 of `PutDispEnv' from incompatible pointer type
+GAME/PSX/MAIN.C: In function `MAIN_DoMainInit':
+GAME/PSX/MAIN.C:762: warning: large integer implicitly truncated to unsigned type
+GAME/PSX/MAIN.C: In function `MAIN_MainMenuInit':
+GAME/PSX/MAIN.C:932: warning: large integer implicitly truncated to unsigned type
+GAME/LOAD3D.C: In function `LOAD_CdReadReady':
+GAME/LOAD3D.C:214: warning: passing arg 1 of `CdPosToInt' from incompatible pointer type
+GAME/LOAD3D.C:222: warning: passing arg 2 of `CdIntToPos' from incompatible pointer type
+GAME/LOAD3D.C: In function `LOAD_SetupFileToDoCDReading':
+GAME/LOAD3D.C:406: warning: passing arg 2 of `CdIntToPos' from incompatible pointer type
+GAME/LOAD3D.C: In function `LOAD_SetupFileToDoBufferedCDReading':
+GAME/LOAD3D.C:456: warning: passing arg 2 of `CdIntToPos' from incompatible pointer type
+GAME/LOAD3D.C: In function `LOAD_ProcessReadQueue':
+GAME/LOAD3D.C:547: warning: passing arg 2 of `CdIntToPos' from incompatible pointer type
+GAME/LOAD3D.C: In function `LOAD_ReadFileFromCD':
+GAME/LOAD3D.C:597: warning: passing arg 1 of `CdSearchFile' from incompatible pointer type
+GAME/LOAD3D.C:597: warning: assignment from incompatible pointer type
+GAME/LOAD3D.C:607: warning: passing arg 1 of `CdPosToInt' from incompatible pointer type
+GAME/LOAD3D.C: In function `LOAD_InitCdLoader':
+GAME/LOAD3D.C:727: warning: passing arg 1 of `CdSearchFile' from incompatible pointer type
+GAME/LOAD3D.C:727: warning: assignment from incompatible pointer type
+GAME/LOAD3D.C:734: warning: passing arg 1 of `CdPosToInt' from incompatible pointer type
+GAME/STRMLOAD.C: In function `LOAD_PlayXA':
+GAME/STRMLOAD.C:799: warning: large integer implicitly truncated to unsigned type
+GAME/DRAW.C: In function `DRAW_InitShadow':
+GAME/DRAW.C:74: `undefined' undeclared (first use this function)
+GAME/DRAW.C:74: (Each undeclared identifier is reported only once
+GAME/DRAW.C:74: for each function it appears in.)
+GAME/DRAW.C:74: `puVar2' undeclared (first use this function)
+GAME/DRAW.C:75: parse error before `*'
+GAME/DRAW.C:76: `puVar4' undeclared (first use this function)
+GAME/DRAW.C:77: parse error before `int'
+GAME/DRAW.C:79: parse error before `)'
+GAME/DRAW.C:80: `iVar5' undeclared (first use this function)
+GAME/DRAW.C:81: `pSVar3' undeclared (first use this function)
+GAME/DRAW.C:96: `UNK_00199999' undeclared (first use this function)
+GAME/DRAW.C:102: `SVECTOR_800d14e8' undeclared (first use this function)
+GAME/DRAW.C:102: request for member `vx' in something not a structure or union
+GAME/DRAW.C:103: request for member `vy' in something not a structure or union
+GAME/DRAW.C:104: request for member `vz' in something not a structure or union
+GAME/DRAW.C: At top level:
+GAME/DRAW.C:134: parse error before `*'
+GAME/DRAW.C: In function `DRAW_DrawShadow':
+GAME/DRAW.C:136: number of arguments doesn't match prototype
+cc1psx.exe: prototype declaration
+GAME/DRAW.C:144: `_PrimPool' undeclared (first use this function)
+GAME/DRAW.C:144: `p_Var6' undeclared (first use this function)
+GAME/DRAW.C:145: parse error before `*'
+GAME/DRAW.C:152: `puVar7' undeclared (first use this function)
+GAME/DRAW.C:152: request for member `nextPrim' in something not a structure or union
+GAME/DRAW.C:153: `local_14' undeclared (first use this function)
+GAME/DRAW.C:157: `iVar9' undeclared (first use this function)
+GAME/DRAW.C:158: `local_10' undeclared (first use this function)
+GAME/DRAW.C:159: `fadeValue' undeclared (first use this function)
+GAME/DRAW.C:163: `ot' undeclared (first use this function)
+GAME/DRAW.C:168: `pSVar10' undeclared (first use this function)
+GAME/DRAW.C:169: `puVar8' undeclared (first use this function)
+GAME/DRAW.C:175: `SVECTOR_800d14a0' undeclared (first use this function)
+GAME/DRAW.C:178: request for member `lastPrim' in something not a structure or union
+GAME/DRAW.C:186: parse error before `)'
+GAME/DRAW.C:199: parse error before `)'
+GAME/DRAW.C:203: request for member `numPrims' in something not a structure or union
+GAME/DRAW.C:203: request for member `numPrims' in something not a structure or union
+GAME/DRAW.C: At top level:
+GAME/DRAW.C:234: parse error before `_PrimPool'
+GAME/DRAW.C: In function `DRAW_FlatQuad':
+GAME/DRAW.C:236: number of arguments doesn't match prototype
+GAME/DRAW.H:12: prototype declaration
+GAME/DRAW.C:240: request for member `nextPrim' in something not a structure or union
+GAME/DRAW.C:241: request for member `lastPrim' in something not a structure or union
+GAME/DRAW.C:242: `color' undeclared (first use this function)
+GAME/DRAW.C:243: `x0' undeclared (first use this function)
+GAME/DRAW.C:244: `y0' undeclared (first use this function)
+GAME/DRAW.C:245: `x1' undeclared (first use this function)
+GAME/DRAW.C:246: `undefined2' undeclared (first use this function)
+GAME/DRAW.C:246: parse error before `)'
+GAME/DRAW.C:246: `y1' undeclared (first use this function)
+GAME/DRAW.C:247: `x2' undeclared (first use this function)
+GAME/DRAW.C:248: parse error before `)'
+GAME/DRAW.C:248: `y2' undeclared (first use this function)
+GAME/DRAW.C:249: `x3' undeclared (first use this function)
+GAME/DRAW.C:250: parse error before `)'
+GAME/DRAW.C:250: `y3' undeclared (first use this function)
+GAME/DRAW.C:252: `undefined' undeclared (first use this function)
+GAME/DRAW.C:252: parse error before `)'
+GAME/DRAW.C:253: `ot' undeclared (first use this function)
+GAME/DRAW.C:255: request for member `nextPrim' in something not a structure or union
+GAME/DRAW.C:255: request for member `nextPrim' in something not a structure or union
+GAME/DRAW.C:256: request for member `numPrims' in something not a structure or union
+GAME/DRAW.C:256: request for member `numPrims' in something not a structure or union
+GAME/DRAW.C: At top level:
+GAME/DRAW.C:283: parse error before `_PrimPool'
+GAME/DRAW.C: In function `DRAW_TranslucentQuad':
+GAME/DRAW.C:285: number of arguments doesn't match prototype
+GAME/DRAW.H:14: prototype declaration
+GAME/DRAW.C:288: request for member `nextPrim' in something not a structure or union
+GAME/DRAW.C:289: request for member `lastPrim' in something not a structure or union
+GAME/DRAW.C:290: `abr' undeclared (first use this function)
+GAME/DRAW.C:291: `undefined' undeclared (first use this function)
+GAME/DRAW.C:291: parse error before `)'
+GAME/DRAW.C:292: `r' undeclared (first use this function)
+GAME/DRAW.C:293: parse error before `)'
+GAME/DRAW.C:293: `g' undeclared (first use this function)
+GAME/DRAW.C:294: parse error before `)'
+GAME/DRAW.C:294: `b' undeclared (first use this function)
+GAME/DRAW.C:295: `x0' undeclared (first use this function)
+GAME/DRAW.C:296: `y0' undeclared (first use this function)
+GAME/DRAW.C:297: `x1' undeclared (first use this function)
+GAME/DRAW.C:298: `y1' undeclared (first use this function)
+GAME/DRAW.C:299: `x2' undeclared (first use this function)
+GAME/DRAW.C:300: `undefined2' undeclared (first use this function)
+GAME/DRAW.C:300: parse error before `)'
+GAME/DRAW.C:300: `y2' undeclared (first use this function)
+GAME/DRAW.C:301: `x3' undeclared (first use this function)
+GAME/DRAW.C:302: parse error before `)'
+GAME/DRAW.C:302: `y3' undeclared (first use this function)
+GAME/DRAW.C:303: `ot' undeclared (first use this function)
+GAME/DRAW.C:305: request for member `nextPrim' in something not a structure or union
+GAME/DRAW.C:305: request for member `nextPrim' in something not a structure or union
+GAME/DRAW.C:306: request for member `numPrims' in something not a structure or union
+GAME/DRAW.C:306: request for member `numPrims' in something not a structure or union
+GAME/DRAW.C: At top level:
+GAME/DRAW.C:336: parse error before `*'
+GAME/DRAW.C: In function `DRAW_DrawButton':
+GAME/DRAW.C:338: number of arguments doesn't match prototype
+GAME/DRAW.H:16: prototype declaration
+GAME/DRAW.C:343: `_PrimPool' undeclared (first use this function)
+GAME/DRAW.C:343: `p_Var5' undeclared (first use this function)
+GAME/DRAW.C:344: parse error before `short'
+GAME/DRAW.C:353: `puVar12' undeclared (first use this function)
+GAME/DRAW.C:355: `uVar7' undeclared (first use this function)
+GAME/DRAW.C:355: `button' undeclared (first use this function)
+GAME/DRAW.C:357: `iVar10' undeclared (first use this function)
+GAME/DRAW.C:359: `cVar11' undeclared (first use this function)
+GAME/DRAW.C:361: `sVar8' undeclared (first use this function)
+GAME/DRAW.C:361: `x' undeclared (first use this function)
+GAME/DRAW.C:364: `cVar9' undeclared (first use this function)
+GAME/DRAW.C:367: `sVar6' undeclared (first use this function)
+GAME/DRAW.C:367: `y' undeclared (first use this function)
+GAME/DRAW.C:386: `ot' undeclared (first use this function)
+GAME/DRAW.C: At top level:
+GAME/DRAW.C:419: parse error before `_ButtonTexture'
+GAME/DRAW.C: In function `DRAW_LoadButton':
+GAME/DRAW.C:421: number of arguments doesn't match prototype
+GAME/DRAW.H:18: prototype declaration
+GAME/DRAW.C:422: `bool' undeclared (first use this function)
+GAME/DRAW.C:422: parse error before `bVar1'
+GAME/DRAW.C:423: `_BlockVramEntry' undeclared (first use this function)
+GAME/DRAW.C:423: `p_Var2' undeclared (first use this function)
+GAME/DRAW.C:424: parse error before `int'
+GAME/DRAW.C:433: `plVar4' undeclared (first use this function)
+GAME/DRAW.C:433: `addr' undeclared (first use this function)
+GAME/DRAW.C:434: `plVar6' undeclared (first use this function)
+GAME/DRAW.C:435: `sVar5' undeclared (first use this function)
+GAME/DRAW.C:436: `button' undeclared (first use this function)
+GAME/DRAW.C:437: `bVar1' undeclared (first use this function)
+GAME/DRAW.C:446: `local_1c' undeclared (first use this function)
+GAME/DRAW.C:450: `iVar3' undeclared (first use this function)
+GAME/DRAW.C:451: `local_1a' undeclared (first use this function)
+GAME/DRAW.C:452: `local_20' undeclared (first use this function)
+GAME/DRAW.C:456: `local_1e' undeclared (first use this function)
+GAME/DRAW.C:458: `_ButtonTexture' undeclared (first use this function)
+GAME/DRAW.C:458: parse error before `)'
+GAME/DRAW.C: At top level:
+GAME/DRAW.C:493: parse error before `_ButtonTexture'
+GAME/DRAW.C: In function `DRAW_LoadButtonByName':
+GAME/DRAW.C:495: number of arguments doesn't match prototype
+GAME/DRAW.H:20: prototype declaration
+GAME/DRAW.C:498: `name' undeclared (first use this function)
+GAME/DRAW.C:498: warning: assignment makes pointer from integer without a cast
+GAME/DRAW.C:500: `button' undeclared (first use this function)
+GAME/DRAW.C: At top level:
+GAME/DRAW.C:517: parse error before `*'
+GAME/DRAW.C: In function `DRAW_FreeButton':
+GAME/DRAW.C:519: number of arguments doesn't match prototype
+GAME/DRAW.H:22: prototype declaration
+GAME/DRAW.C:520: `button' undeclared (first use this function)
+GAME/DRAW.C: At top level:
+GAME/DRAW.C:551: parse error before `*'
+GAME/DRAW.C: In function `DRAW_RingLine':
+GAME/DRAW.C:553: number of arguments doesn't match prototype
+GAME/DRAW.H:24: prototype declaration
+GAME/DRAW.C:562: request for member `nextPrim' in something not a structure or union
+GAME/DRAW.C:563: request for member `lastPrim' in something not a structure or union
+GAME/DRAW.C:583: `color' undeclared (first use this function)
+GAME/DRAW.C:589: `ot' undeclared (first use this function)
+GAME/DRAW.C:594: request for member `nextPrim' in something not a structure or union
+GAME/DRAW.C: At top level:
+GAME/DRAW.C:619: parse error before `*'
+GAME/DRAW.C: In function `DRAW_RingPoint':
+GAME/DRAW.C:621: number of arguments doesn't match prototype
+GAME/DRAW.H:26: prototype declaration
+GAME/DRAW.C:632: `vel' undeclared (first use this function)
+GAME/DRAW.C:649: `acc' undeclared (first use this function)
+GAME/DRAW.C:649: `color' undeclared (first use this function)
+GAME/DRAW.C: At top level:
+GAME/DRAW.C:683: parse error before `*'
+GAME/DRAW.C: In function `DRAW_DrawRingPoints':
+GAME/DRAW.C:686: number of arguments doesn't match prototype
+GAME/DRAW.H:26: prototype declaration
+GAME/DRAW.C:696: `_MFace' undeclared (first use this function)
+GAME/DRAW.C:696: `p_Var5' undeclared (first use this function)
+GAME/DRAW.C:697: `p_Var6' undeclared (first use this function)
+GAME/DRAW.C:698: `undefined8' undeclared (first use this function)
+GAME/DRAW.C:698: parse error before `uStack80'
+GAME/DRAW.C:704: `model' undeclared (first use this function)
+GAME/DRAW.C:706: `ring_type' undeclared (first use this function)
+GAME/DRAW.C:707: `local_38' undeclared (first use this function)
+GAME/DRAW.C:710: `local_30' undeclared (first use this function)
+GAME/DRAW.C:714: `pcTransform' undeclared (first use this function)
+GAME/DRAW.C:720: `vertexPool' undeclared (first use this function)
+GAME/DRAW.C:732: `local_48' undeclared (first use this function)
+GAME/DRAW.C:733: `local_40' undeclared (first use this function)
+GAME/DRAW.C:738: `uStack80' undeclared (first use this function)
+GAME/DRAW.C:778: `ot' undeclared (first use this function)
+GAME/DRAW.C:778: `color' undeclared (first use this function)
+GAME/DRAW.C:778: warning: passing arg 1 of `DRAW_RingPoint' from incompatible pointer type
+GAME/DRAW.C:790: warning: passing arg 1 of `DRAW_RingLine' from incompatible pointer type
+GAME/DRAW.C:797: request for member `nextPrim' in something not a structure or union
+GAME/DRAW.C: At top level:
+GAME/DRAW.C:823: parse error before `*'
+GAME/DRAW.C: In function `DRAW_GlowQuad':
+GAME/DRAW.C:826: number of arguments doesn't match prototype
+GAME/DRAW.H:30: prototype declaration
+GAME/DRAW.C:833: request for member `nextPrim' in something not a structure or union
+GAME/DRAW.C:834: request for member `lastPrim' in something not a structure or union
+GAME/DRAW.C:835: request for member `numPrims' in something not a structure or union
+GAME/DRAW.C:835: request for member `numPrims' in something not a structure or union
+GAME/DRAW.C:836: `color' undeclared (first use this function)
+GAME/DRAW.C:844: `v0' undeclared (first use this function)
+GAME/DRAW.C:846: request for member `_1_1_' in something not a structure or union
+GAME/DRAW.C:847: request for member `_2_1_' in something not a structure or union
+GAME/DRAW.C:849: `undefined2' undeclared (first use this function)
+GAME/DRAW.C:849: parse error before `)'
+GAME/DRAW.C:849: parse error before `)'
+GAME/DRAW.C:850: parse error before `)'
+GAME/DRAW.C:850: parse error before `)'
+GAME/DRAW.C:855: `undefined' undeclared (first use this function)
+GAME/DRAW.C:855: parse error before `)'
+GAME/DRAW.C:856: parse error before `)'
+GAME/DRAW.C:857: `v1' undeclared (first use this function)
+GAME/DRAW.C:859: request for member `_1_1_' in something not a structure or union
+GAME/DRAW.C:860: request for member `_2_1_' in something not a structure or union
+GAME/DRAW.C:862: parse error before `)'
+GAME/DRAW.C:862: parse error before `)'
+GAME/DRAW.C:863: parse error before `)'
+GAME/DRAW.C:863: parse error before `)'
+GAME/DRAW.C:868: parse error before `)'
+GAME/DRAW.C:869: parse error before `)'
+GAME/DRAW.C:870: `v2' undeclared (first use this function)
+GAME/DRAW.C:872: request for member `_1_1_' in something not a structure or union
+GAME/DRAW.C:873: request for member `_2_1_' in something not a structure or union
+GAME/DRAW.C:875: parse error before `)'
+GAME/DRAW.C:875: parse error before `)'
+GAME/DRAW.C:876: parse error before `)'
+GAME/DRAW.C:876: parse error before `)'
+GAME/DRAW.C:881: parse error before `)'
+GAME/DRAW.C:882: parse error before `)'
+GAME/DRAW.C:883: `v3' undeclared (first use this function)
+GAME/DRAW.C:885: request for member `_1_1_' in something not a structure or union
+GAME/DRAW.C:886: request for member `_2_1_' in something not a structure or union
+GAME/DRAW.C:888: parse error before `)'
+GAME/DRAW.C:888: parse error before `)'
+GAME/DRAW.C:889: parse error before `)'
+GAME/DRAW.C:889: parse error before `)'
+GAME/DRAW.C:894: parse error before `)'
+GAME/DRAW.C:895: parse error before `)'
+GAME/DRAW.C:896: `ot' undeclared (first use this function)
+GAME/DRAW.C:896: `otz' undeclared (first use this function)
+GAME/DRAW.C:898: parse error before `)'
+GAME/DRAW.C:899: request for member `nextPrim' in something not a structure or union
+GAME/DRAW.C: At top level:
+GAME/DRAW.C:1126: parse error before `*'
+GAME/DRAW.C: In function `DRAW_CreateAGlowingCircle':
+GAME/DRAW.C:1129: number of arguments doesn't match prototype
+GAME/DRAW.H:32: prototype declaration
+GAME/DRAW.C:1144: `_Vector' undeclared (first use this function)
+GAME/DRAW.C:1144: parse error before `local_a8'
+GAME/DRAW.C:1153: `local_34' undeclared (first use this function)
+GAME/DRAW.C:1154: parse error before `int'
+GAME/DRAW.C:1156: `f1' undeclared (first use this function)
+GAME/DRAW.C:1157: `z' undeclared (first use this function)
+GAME/DRAW.C:1157: `otz' undeclared (first use this function)
+GAME/DRAW.C:1160: `h' undeclared (first use this function)
+GAME/DRAW.C:1161: `angle' undeclared (first use this function)
+GAME/DRAW.C:1168: `w' undeclared (first use this function)
+GAME/DRAW.C:1175: `local_30' undeclared (first use this function)
+GAME/DRAW.C:1176: `local_6c' undeclared (first use this function)
+GAME/DRAW.C:1183: `local_90' undeclared (first use this function)
+GAME/DRAW.C:1185: `local_a8' undeclared (first use this function)
+GAME/DRAW.C:1187: `local_9c' undeclared (first use this function)
+GAME/DRAW.C:1191: `local_84' undeclared (first use this function)
+GAME/DRAW.C:1193: `local_78' undeclared (first use this function)
+GAME/DRAW.C:1197: `local_60' undeclared (first use this function)
+GAME/DRAW.C:1199: `local_54' undeclared (first use this function)
+GAME/DRAW.C:1201: `local_48' undeclared (first use this function)
+GAME/DRAW.C:1212: `ot' undeclared (first use this function)
+GAME/DRAW.C:1212: `color' undeclared (first use this function)
+GAME/DRAW.C:1212: warning: passing arg 1 of `DRAW_GlowQuad' from incompatible pointer type
+GAME/DRAW.C:1213: warning: passing arg 1 of `DRAW_GlowQuad' from incompatible pointer type
+GAME/DRAW.C:1214: warning: passing arg 1 of `DRAW_GlowQuad' from incompatible pointer type
+GAME/DRAW.C:1215: warning: passing arg 1 of `DRAW_GlowQuad' from incompatible pointer type
+GAME/DRAW.C: At top level:
+GAME/DRAW.C:1250: parse error before `*'
+GAME/DRAW.C: In function `DRAW_DrawGlowPoints2':
+GAME/DRAW.C:1253: number of arguments doesn't match prototype
+GAME/DRAW.H:32: prototype declaration
+GAME/DRAW.C:1260: `_Position' undeclared (first use this function)
+GAME/DRAW.C:1260: parse error before `local_58'
+GAME/DRAW.C:1266: `_Vector' undeclared (first use this function)
+GAME/DRAW.C:1266: parse error before `local_28'
+GAME/DRAW.C:1268: `instance' undeclared (first use this function)
+GAME/DRAW.C:1268: `seg1' undeclared (first use this function)
+GAME/DRAW.C:1268: `local_58' undeclared (first use this function)
+GAME/DRAW.C:1269: `seg2' undeclared (first use this function)
+GAME/DRAW.C:1269: `local_50' undeclared (first use this function)
+GAME/DRAW.C:1280: `local_28' undeclared (first use this function)
+GAME/DRAW.C:1289: `ot' undeclared (first use this function)
+GAME/DRAW.C:1289: `color' undeclared (first use this function)
+GAME/DRAW.C:1289: `height' undeclared (first use this function)
+GAME/DRAW.C:1290: warning: passing arg 3 of `DRAW_CreateAGlowingCircle' from incompatible pointer type
+GAME/DRAW.C:1293: request for member `nextPrim' in something not a structure or union
+GAME/DRAW.C: At top level:
+GAME/DRAW.C:1320: parse error before `*'
+GAME/DRAW.C: In function `DRAW_DrawGlowPoint':
+GAME/DRAW.C:1323: number of arguments doesn't match prototype
+GAME/DRAW.H:32: prototype declaration
+GAME/DRAW.C:1327: `_Position' undeclared (first use this function)
+GAME/DRAW.C:1327: parse error before `local_30'
+GAME/DRAW.C:1328: `_Vector' undeclared (first use this function)
+GAME/DRAW.C:1331: `instance' undeclared (first use this function)
+GAME/DRAW.C:1331: `seg1' undeclared (first use this function)
+GAME/DRAW.C:1331: `local_30' undeclared (first use this function)
+GAME/DRAW.C:1334: `local_28' undeclared (first use this function)
+GAME/DRAW.C:1338: `ot' undeclared (first use this function)
+GAME/DRAW.C:1338: `color' undeclared (first use this function)
+GAME/DRAW.C:1338: `width' undeclared (first use this function)
+GAME/DRAW.C:1338: `height' undeclared (first use this function)
+GAME/DRAW.C:1339: warning: passing arg 3 of `DRAW_CreateAGlowingCircle' from incompatible pointer type
+GAME/DRAW.C:1342: request for member `nextPrim' in something not a structure or union
+GAME/DRAW.C: At top level:
+GAME/DRAW.C:1450: parse error before `_PrimPool'
+GAME/DRAW.C: In function `DRAW_DisplayTFace_zclipped_C':
+GAME/DRAW.C:1453: number of arguments doesn't match prototype
+GAME/DRAW.H:38: prototype declaration
+GAME/DRAW.C:1454: `bool' undeclared (first use this function)
+GAME/DRAW.C:1454: parse error before `bVar1'
+GAME/DRAW.C:1486: `DAT_1f800200' undeclared (first use this function)
+GAME/DRAW.C:1487: `vertex0' undeclared (first use this function)
+GAME/DRAW.C:1490: `DAT_1f800278' undeclared (first use this function)
+GAME/DRAW.C:1491: `DAT_1f80027c' undeclared (first use this function)
+GAME/DRAW.C:1492: `DAT_1f800280' undeclared (first use this function)
+GAME/DRAW.C:1493: `vertex1' undeclared (first use this function)
+GAME/DRAW.C:1496: `DAT_1f800284' undeclared (first use this function)
+GAME/DRAW.C:1497: `_DAT_1f800288' undeclared (first use this function)
+GAME/DRAW.C:1498: `DAT_1f80028c' undeclared (first use this function)
+GAME/DRAW.C:1499: `vertex2' undeclared (first use this function)
+GAME/DRAW.C:1502: `DAT_1f800290' undeclared (first use this function)
+GAME/DRAW.C:1503: `DAT_1f800294' undeclared (first use this function)
+GAME/DRAW.C:1504: `DAT_1f800298' undeclared (first use this function)
+GAME/DRAW.C:1510: request for member `nextPrim' in something not a structure or union
+GAME/DRAW.C:1511: `DAT_1f8002b8' undeclared (first use this function)
+GAME/DRAW.C:1511: `uv0' undeclared (first use this function)
+GAME/DRAW.C:1514: `DAT_1f8002bc' undeclared (first use this function)
+GAME/DRAW.C:1514: `uv1' undeclared (first use this function)
+GAME/DRAW.C:1516: `DAT_1f8002c0' undeclared (first use this function)
+GAME/DRAW.C:1516: `uv2' undeclared (first use this function)
+GAME/DRAW.C:1517: `DAT_1f8002a8' undeclared (first use this function)
+GAME/DRAW.C:1517: `color0' undeclared (first use this function)
+GAME/DRAW.C:1519: `DAT_1f8002ac' undeclared (first use this function)
+GAME/DRAW.C:1519: `color1' undeclared (first use this function)
+GAME/DRAW.C:1521: `DAT_1f8002b0' undeclared (first use this function)
+GAME/DRAW.C:1521: `color2' undeclared (first use this function)
+GAME/DRAW.C:1546: `DAT_1f8002c4' undeclared (first use this function)
+GAME/DRAW.C:1611: `undefined' undeclared (first use this function)
+GAME/DRAW.C:1611: parse error before `)'
+GAME/DRAW.C:1626: parse error before `)'
+GAME/DRAW.C:1627: parse error before `)'
+GAME/DRAW.C:1656: `ndiv' undeclared (first use this function)
+GAME/DRAW.C:1657: `bVar1' undeclared (first use this function)
+GAME/DRAW.C:1657: `false' undeclared (first use this function)
+GAME/DRAW.C:1676: `true' undeclared (first use this function)
+GAME/DRAW.C:1697: `DAT_1f8002d0' undeclared (first use this function)
+GAME/DRAW.C:1698: `DAT_1f8002c8' undeclared (first use this function)
+GAME/DRAW.C:1705: `DAT_1f8002d2' undeclared (first use this function)
+GAME/DRAW.C:1733: `ot' undeclared (first use this function)
+GAME/DRAW.C:1752: request for member `numPrims' in something not a structure or union
+GAME/DRAW.C:1753: request for member `nextPrim' in something not a structure or union
+GAME/DRAW.C:1772: request for member `numPrims' in something not a structure or union
+GAME/DRAW.C:1773: request for member `nextPrim' in something not a structure or union
+GAME/DRAW.C:1776: request for member `nextPrim' in something not a structure or union
+GAME/DRAW.C:1777: request for member `numPrims' in something not a structure or union
+GAME/DRAW.C: In function `DRAW_Zclip_subdiv':
+GAME/DRAW.C:1812: `_PrimPool' undeclared (first use this function)
+GAME/DRAW.C:1813: parse error before `uVar2'
+GAME/DRAW.C:1826: `puVar7' undeclared (first use this function)
+GAME/DRAW.C:1826: `DAT_1f800200' undeclared (first use this function)
+GAME/DRAW.C:1828: `DAT_1f8002d4' undeclared (first use this function)
+GAME/DRAW.C:1848: incompatible types in assignment
+GAME/DRAW.C:1858: `undefined2' undeclared (first use this function)
+GAME/DRAW.C:1858: parse error before `)'
+GAME/DRAW.C:1864: parse error before `)'
+GAME/DRAW.C:1870: parse error before `)'
+GAME/DRAW.C:1874: `uv1_00' undeclared (first use this function)
+GAME/DRAW.C:1876: `uv2' undeclared (first use this function)
+GAME/DRAW.C:1878: `vertex1_00' undeclared (first use this function)
+GAME/DRAW.C:1882: `vertex2' undeclared (first use this function)
+GAME/DRAW.C:1883: parse error before `)'
+GAME/DRAW.C:1883: parse error before `)'
+GAME/DRAW.C:1884: parse error before `)'
+GAME/DRAW.C:1884: parse error before `)'
+GAME/DRAW.C:1885: `undefined' undeclared (first use this function)
+GAME/DRAW.C:1885: parse error before `)'
+GAME/DRAW.C:1890: parse error before `)'
+GAME/DRAW.C:1895: parse error before `)'
+GAME/DRAW.C:1898: parse error before `)'
+GAME/DRAW.C:1898: parse error before `)'
+GAME/DRAW.C:1901: parse error before `)'
+GAME/DRAW.C:1904: parse error before `)'
+GAME/DRAW.C:1909: parse error before `)'
+GAME/DRAW.C:1912: parse error before `)'
+GAME/DRAW.C:1917: parse error before `)'
+GAME/DRAW.C:1920: parse error before `)'
+GAME/DRAW.C:1923: parse error before `)'
+GAME/DRAW.C:1923: parse error before `)'
+GAME/DRAW.C:1924: parse error before `)'
+GAME/DRAW.C:1924: parse error before `)'
+GAME/DRAW.C:1925: `uVar2' undeclared (first use this function)
+GAME/DRAW.C:1927: warning: passing arg 10 of `DRAW_DisplayTFace_zclipped_C' from incompatible pointer type
+GAME/DRAW.C:1928: `uv1' undeclared (first use this function)
+GAME/DRAW.C:1929: `vertex1' undeclared (first use this function)
+GAME/DRAW.C:1930: `uVar3' undeclared (first use this function)
+GAME/DRAW.C:1933: warning: passing arg 10 of `DRAW_DisplayTFace_zclipped_C' from incompatible pointer type
+GAME/DRAW.C:1934: parse error before `)'
+GAME/DRAW.C:1934: parse error before `)'
+GAME/DRAW.C:1935: parse error before `)'
+GAME/DRAW.C:1935: parse error before `)'
+GAME/DRAW.C:1936: `uVar4' undeclared (first use this function)
+GAME/DRAW.C:1938: warning: passing arg 10 of `DRAW_DisplayTFace_zclipped_C' from incompatible pointer type
+GAME/DRAW.C:1939: `uVar5' undeclared (first use this function)
+GAME/DRAW.C:1942: warning: passing arg 10 of `DRAW_DisplayTFace_zclipped_C' from incompatible pointer type
+GAME/DRAW.C:1943: `puVar6' undeclared (first use this function)
+GAME/DRAW.C:1945: request for member `nextPrim' in something not a structure or union
+GAME/DRAW.C: In function `DRAW_LoadingMessage':
+GAME/DRAW.C:1988: `draw' undeclared (first use this function)
+GAME/DRAW.C:1989: warning: assignment makes pointer from integer without a cast
+GAME/DRAW.C:1991: warning: assignment makes pointer from integer without a cast
+GAME/DRAW.C:1997: warning: passing arg 1 of `ClearOTagR' from incompatible pointer type
+GAME/DRAW.C:1999: `VblTick' undeclared (first use this function)
+GAME/DRAW.C:2000: `DrawCallback' undeclared (first use this function)

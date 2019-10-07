@@ -224,8 +224,8 @@ void _G2Instance_RebuildAnimatedTransforms(_Instance *instance)
   _Model *p_Var23;
   undefined4 local_78;
   undefined4 local_74;
-  uint auStack112 [8];
-  uint auStack80 [8];
+  u_int auStack112 [8];
+  u_int auStack80 [8];
   ushort auStack48 [4];
   
   pMVar22 = instance->matrix;
@@ -247,7 +247,7 @@ void _G2Instance_RebuildAnimatedTransforms(_Instance *instance)
     if (((instance->flags & 1U) == 0) || (instance->intro == (Intro *)0x0)) {
       anim = &instance->anim;
       if (instance->LinkParent == (_Instance *)0x0) {
-        RotMatrix((ushort *)&instance->rotation,(uint *)pMVar14);
+        RotMatrix((ushort *)&instance->rotation,(u_int *)pMVar14);
       }
       else {
         G2Anim_UpdateStoredFrame(anim);
@@ -273,7 +273,7 @@ void _G2Instance_RebuildAnimatedTransforms(_Instance *instance)
         pMVar10->t[0] = lVar16;
         pMVar10->t[1] = lVar18;
         pMVar10->t[2] = lVar20;
-        MulMatrix2((undefined4 *)instance->matrix,(uint *)pMVar14);
+        MulMatrix2((undefined4 *)instance->matrix,(u_int *)pMVar14);
         pMVar7 = instance->matrix;
         (instance->position).x = *(short *)instance->matrix->t;
         (instance->position).y = *(short *)(pMVar7->t + 1);
@@ -412,7 +412,7 @@ void _G2Instance_BuildAnimatedTransforms(_Instance *instance)
 
 {
   MATRIX *pMVar1;
-  uint uVar2;
+  u_int uVar2;
   MATRIX *pMVar3;
   
   uVar2 = instance->flags2;
@@ -505,7 +505,7 @@ void _G2Instance_RebuildNonAnimatedTransforms(_Instance *instance)
                 MATH3D_SetUnityMatrix(mat);
               }
               else {
-                RotMatrix((ushort *)&instance->rotation,(uint *)mat);
+                RotMatrix((ushort *)&instance->rotation,(u_int *)mat);
               }
             }
             else {
@@ -533,12 +533,12 @@ void _G2Instance_RebuildNonAnimatedTransforms(_Instance *instance)
             *(int *)(puVar8 + 5) = (int)(instance->position).z;
           }
           else {
-            RotMatrix((ushort *)&instance->rotation,(uint *)&DAT_1f800038);
+            RotMatrix((ushort *)&instance->rotation,(u_int *)&DAT_1f800038);
             if (local_30 != 0) {
               ScaleMatrix((int *)&DAT_1f800038,&DAT_1f800028);
             }
             _G2Instance_BuildFacadeTransforms
-                      (instance,segment,mat,(MATRIX *)&DAT_1f800038,(uint)local_30);
+                      (instance,segment,mat,(MATRIX *)&DAT_1f800038,(u_int)local_30);
           }
         }
         mat = mat + 1;
@@ -584,7 +584,7 @@ void _G2Instance_BuildDeactivatedTransforms(_Instance *instance)
 
 {
   MATRIX *__dest;
-  uint uVar1;
+  u_int uVar1;
   Object *pOVar2;
   MATRIX *__src;
   _Instance *instance_00;
@@ -658,7 +658,7 @@ void _G2Instance_BuildNonAnimatedTransforms(_Instance *instance)
 {
   MATRIX *pMVar1;
   MATRIX *pMVar2;
-  uint uVar3;
+  u_int uVar3;
   
   uVar3 = instance->flags2;
   if (((uVar3 & 0x10000000) == 0) ||
@@ -761,7 +761,7 @@ void _G2Instance_BuildFacadeTransforms
         ScaleMatrix((int *)segMatrix,&DAT_1f800028);
       }
       RotMatrixX((int)DAT_1f800010,(int)segMatrix);
-      RotMatrixZ((int)DAT_1f800014,(uint *)segMatrix);
+      RotMatrixZ((int)DAT_1f800014,(u_int *)segMatrix);
     }
   }
   else {
@@ -785,8 +785,8 @@ void _G2Instance_BuildFacadeTransforms
     }
     DAT_1f800014 = MATH3D_FastAtan2((int)DAT_1f80006a,(int)DAT_1f800068);
     DAT_1f800014 = DAT_1f800014 + 0x400;
-    RotMatrixZ((int)DAT_1f800014,(uint *)segMatrix);
-    RotMatrixY((int)DAT_1f800012,(uint *)segMatrix);
+    RotMatrixZ((int)DAT_1f800014,(u_int *)segMatrix);
+    RotMatrixY((int)DAT_1f800012,(u_int *)segMatrix);
     RotMatrixX((int)DAT_1f800010,(int)segMatrix);
   }
   return;

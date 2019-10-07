@@ -20,7 +20,7 @@ extern unsigned long aadSetSfxVolPanPitch(unsigned long handle, int volume, int 
 
 extern unsigned long createSfxHandle(unsigned int toneID); // 0x8005747C
 
-extern void aadPutSfxCommand(int statusByte, int dataByte0, int dataByte1, unsigned long ulongParam, int shortParam); // 0x800574C4
+extern void aadPutSfxCommand(int statusByte, int dataByte0, int dataByte1, unsigned long u_longParam, int shortParam); // 0x800574C4
 
 extern void aadExecuteSfxCommand(struct AadSfxCommand *sfxCmd); // 0x800575B8
 

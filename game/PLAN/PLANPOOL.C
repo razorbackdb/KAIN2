@@ -166,11 +166,11 @@ PlanningNode * PLANPOOL_GetFirstNodeOfSource(PlanningNode *planningPool,char nod
   if (*(byte *)(poolManagementData + 1) != 0) {
     do {
       iVar1 = iVar1 + 1;
-      if (((uint)planningPool->nodeType & 7) == (uint)(byte)nodeSource) {
+      if (((u_int)planningPool->nodeType & 7) == (u_int)(byte)nodeSource) {
         return planningPool;
       }
       planningPool = planningPool + 1;
-    } while (iVar1 < (int)(uint)*(byte *)(poolManagementData + 1));
+    } while (iVar1 < (int)(u_int)*(byte *)(poolManagementData + 1));
   }
   return (PlanningNode *)0x0;
 }
@@ -211,12 +211,12 @@ int PLANPOOL_NumberOfNodesOfType(PlanningNode *planningPool,char nodeType)
   iVar1 = 0;
   if (*(byte *)(poolManagementData + 1) != 0) {
     do {
-      if ((uint)planningPool->nodeType == (uint)(byte)nodeType) {
+      if ((u_int)planningPool->nodeType == (u_int)(byte)nodeType) {
         iVar1 = iVar1 + 1;
       }
       iVar2 = iVar2 + 1;
       planningPool = planningPool + 1;
-    } while (iVar2 < (int)(uint)*(byte *)(poolManagementData + 1));
+    } while (iVar2 < (int)(u_int)*(byte *)(poolManagementData + 1));
   }
   return iVar1;
 }
@@ -257,12 +257,12 @@ int PLANPOOL_NumberOfNodesOfSource(PlanningNode *planningPool,char nodeSource)
   iVar1 = 0;
   if (*(byte *)(poolManagementData + 1) != 0) {
     do {
-      if (((uint)planningPool->nodeType & 7) == (uint)(byte)nodeSource) {
+      if (((u_int)planningPool->nodeType & 7) == (u_int)(byte)nodeSource) {
         iVar1 = iVar1 + 1;
       }
       iVar2 = iVar2 + 1;
       planningPool = planningPool + 1;
-    } while (iVar2 < (int)(uint)*(byte *)(poolManagementData + 1));
+    } while (iVar2 < (int)(u_int)*(byte *)(poolManagementData + 1));
   }
   return iVar1;
 }
@@ -305,12 +305,12 @@ PlanningNode * PLANPOOL_GetNodeWithID(PlanningNode *planningPool,short type,shor
   iVar1 = 0;
   if (*(byte *)(poolManagementData + 1) != 0) {
     do {
-      if (((uint)planningPool->nodeType == (int)type) && ((uint)planningPool->id == (int)id)) {
+      if (((u_int)planningPool->nodeType == (int)type) && ((u_int)planningPool->id == (int)id)) {
         return planningPool;
       }
       iVar1 = iVar1 + 1;
       planningPool = planningPool + 1;
-    } while (iVar1 < (int)(uint)*(byte *)(poolManagementData + 1));
+    } while (iVar1 < (int)(u_int)*(byte *)(poolManagementData + 1));
   }
   return (PlanningNode *)0x0;
 }
@@ -368,7 +368,7 @@ PlanningNode * PLANPOOL_GetNodeByPosition(_Position *currentPos,PlanningNode *pl
       }
       iVar3 = iVar3 + 1;
       planningPool = planningPool + 1;
-    } while (iVar3 < (int)(uint)*(byte *)(poolManagementData + 1));
+    } while (iVar3 < (int)(u_int)*(byte *)(poolManagementData + 1));
   }
   return pPVar4;
 }
@@ -424,7 +424,7 @@ PlanningNode * PLANPOOL_GetClosestNode(_Position *pos,PlanningNode *planningPool
       }
       iVar2 = iVar2 + 1;
       planningPool = planningPool + 1;
-    } while (iVar2 < (int)(uint)*(byte *)(poolManagementData + 1));
+    } while (iVar2 < (int)(u_int)*(byte *)(poolManagementData + 1));
   }
   return pPVar3;
 }
@@ -462,19 +462,19 @@ int PLANPOOL_AppropriatePair(PlanningNode *node1,PlanningNode *node2)
 
 {
   long lVar1;
-  uint uVar2;
+  u_int uVar2;
   int iVar3;
-  uint uVar4;
+  u_int uVar4;
   int iVar5;
   PlanningNode *pPVar6;
-  uint uVar7;
-  uint uVar8;
-  uint uVar9;
+  u_int uVar7;
+  u_int uVar8;
+  u_int uVar9;
   
-  uVar9 = (uint)(node1->nodeType >> 3) & 3;
-  uVar7 = (uint)(node2->nodeType >> 3) & 3;
-  uVar4 = (uint)node1->nodeType & 7;
-  uVar8 = (uint)node2->nodeType & 7;
+  uVar9 = (u_int)(node1->nodeType >> 3) & 3;
+  uVar7 = (u_int)(node2->nodeType >> 3) & 3;
+  uVar4 = (u_int)node1->nodeType & 7;
+  uVar8 = (u_int)node2->nodeType & 7;
   pPVar6 = node2;
   if (uVar7 < uVar9) {
     uVar9 = uVar9 ^ uVar7;
@@ -555,7 +555,7 @@ int PLANPOOL_AreTwoNodesConnected
 
 {
   int iVar1;
-  uint uVar2;
+  u_int uVar2;
   
   uVar2 = 1 << ((int)((int)node2 - (int)planningPool) * -0x49249249 >> 2 & 0x1fU);
   iVar1 = 0;
@@ -592,10 +592,10 @@ void PLANPOOL_MarkTwoNodesAsConnected
 {
   int iVar1;
   long lVar2;
-  uint uVar3;
+  u_int uVar3;
   undefined2 uVar4;
-  uint uVar5;
-  uint uVar6;
+  u_int uVar5;
+  u_int uVar6;
   
   uVar6 = (int)((int)node1 - (int)planningPool) * -0x49249249 >> 2;
   uVar5 = (int)((int)node2 - (int)planningPool) * -0x49249249 >> 2;
@@ -651,8 +651,8 @@ void PLANPOOL_MarkTwoNodesAsNotConnected
                (PlanningNode *node1,PlanningNode *node2,PlanningNode *planningPool)
 
 {
-  uint uVar1;
-  uint uVar2;
+  u_int uVar1;
+  u_int uVar2;
   
   uVar1 = 1 << ((int)((int)node2 - (int)planningPool) * -0x49249249 >> 2 & 0x1fU);
   node1->connectionStatus = node1->connectionStatus | uVar1;
@@ -692,12 +692,12 @@ PLANPOOL_GetClosestUnexploredValidNeighbor(PlanningNode *startNode,PlanningNode 
 
 {
   int iVar1;
-  uint uVar2;
+  u_int uVar2;
   PlanningNode *node2;
-  uint uVar3;
+  u_int uVar3;
   int iVar4;
   PlanningNode *pPVar5;
-  uint uVar6;
+  u_int uVar6;
   
   uVar6 = 0xffffffff;
   pPVar5 = (PlanningNode *)0x0;
@@ -725,7 +725,7 @@ PLANPOOL_GetClosestUnexploredValidNeighbor(PlanningNode *startNode,PlanningNode 
         uVar3 = uVar3 >> 1;
         iVar4 = iVar4 + 1;
         node2 = node2 + 1;
-      } while (iVar4 < (int)(uint)*(byte *)(poolManagementData + 1));
+      } while (iVar4 < (int)(u_int)*(byte *)(poolManagementData + 1));
     }
   }
   return pPVar5;
@@ -759,7 +759,7 @@ void PLANPOOL_ChangeNodePosition
   short sVar1;
   int iVar2;
   int iVar3;
-  uint uVar4;
+  u_int uVar4;
   
   iVar2 = poolManagementData;
   if (nodeToChange != (PlanningNode *)0x0) {
@@ -777,7 +777,7 @@ void PLANPOOL_ChangeNodePosition
         planningPool->connectionStatus = planningPool->connectionStatus & uVar4;
         planningPool->connections = planningPool->connections & uVar4;
         planningPool = planningPool + 1;
-      } while (iVar3 < (int)(uint)*(byte *)(iVar2 + 1));
+      } while (iVar3 < (int)(u_int)*(byte *)(iVar2 + 1));
     }
   }
   return;
@@ -843,20 +843,20 @@ PLANPOOL_AddNodeToPool
     pPVar7->nodeType = nodeType;
     pPVar7->id = nodeID;
     pPVar7->streamUnitID = streamUnitID;
-    pPVar7->connectionStatus = 1 << ((uint)bVar1 & 0x1f);
+    pPVar7->connectionStatus = 1 << ((u_int)bVar1 & 0x1f);
     *(char *)(iVar4 + 1) = *(char *)(iVar4 + 1) + '\x01';
     iVar4 = poolManagementData;
     iVar6 = 0;
     if (*(char *)(poolManagementData + 1) != '\0') {
       iVar5 = 0;
       do {
-        *(undefined2 *)(iVar5 + (uint)*(byte *)(iVar4 + 1) * 0x40 + *(int *)(iVar4 + 0x10) + -0x40)
+        *(undefined2 *)(iVar5 + (u_int)*(byte *)(iVar4 + 1) * 0x40 + *(int *)(iVar4 + 0x10) + -0x40)
              = 0;
-        *(undefined2 *)((uint)*(byte *)(iVar4 + 1) * 2 + iVar6 * 0x40 + *(int *)(iVar4 + 0x10) + -2)
+        *(undefined2 *)((u_int)*(byte *)(iVar4 + 1) * 2 + iVar6 * 0x40 + *(int *)(iVar4 + 0x10) + -2)
              = 0;
         iVar6 = iVar6 + 1;
         iVar5 = iVar6 * 2;
-      } while (iVar6 < (int)(uint)*(byte *)(iVar4 + 1));
+      } while (iVar6 < (int)(u_int)*(byte *)(iVar4 + 1));
     }
   }
   return pPVar7;
@@ -901,23 +901,23 @@ void PLANPOOL_DeleteNodeFromPool(PlanningNode *nodeToDelete,PlanningNode *planni
 
 {
   PlanningNode *pPVar1;
-  uint uVar2;
+  u_int uVar2;
   int iVar3;
-  uint uVar4;
-  uint uVar5;
+  u_int uVar4;
+  u_int uVar5;
   int iVar6;
   int iVar7;
-  uint uVar8;
-  uint uVar9;
-  uint uVar10;
+  u_int uVar8;
+  u_int uVar9;
+  u_int uVar10;
   undefined4 uVar11;
-  ulong uVar12;
+  u_long uVar12;
   long lVar13;
-  ulong uVar14;
+  u_long uVar14;
   
   iVar6 = 0;
   if (nodeToDelete != (PlanningNode *)0x0) {
-    uVar9 = (uint)*(byte *)(poolManagementData + 1) - 1;
+    uVar9 = (u_int)*(byte *)(poolManagementData + 1) - 1;
     pPVar1 = planningPool + uVar9;
     uVar11 = *(undefined4 *)&(pPVar1->pos).z;
     uVar12 = pPVar1->connectionStatus;
@@ -935,7 +935,7 @@ void PLANPOOL_DeleteNodeFromPool(PlanningNode *nodeToDelete,PlanningNode *planni
     uVar10 = (int)((int)nodeToDelete - (int)planningPool) * -0x49249249 >> 2;
     uVar8 = 1 << (uVar10 & 0x1f);
     uVar4 = 1 << (uVar9 & 0x1f);
-    if (0 < (int)((uint)*(byte *)(poolManagementData + 1) - 1)) {
+    if (0 < (int)((u_int)*(byte *)(poolManagementData + 1) - 1)) {
       do {
         uVar5 = planningPool->connectionStatus;
         uVar2 = uVar5 | uVar8;
@@ -953,18 +953,18 @@ void PLANPOOL_DeleteNodeFromPool(PlanningNode *nodeToDelete,PlanningNode *planni
         iVar6 = iVar6 + 1;
         planningPool->connections = planningPool->connections & ~uVar4;
         planningPool = planningPool + 1;
-      } while (iVar6 < (int)((uint)*(byte *)(iVar7 + 1) - 1));
+      } while (iVar6 < (int)((u_int)*(byte *)(iVar7 + 1) - 1));
     }
     iVar6 = poolManagementData;
     iVar7 = 0;
-    if (0 < (int)((uint)*(byte *)(poolManagementData + 1) - 1)) {
+    if (0 < (int)((u_int)*(byte *)(poolManagementData + 1) - 1)) {
       do {
         *(undefined2 *)(iVar7 * 2 + uVar10 * 0x40 + *(int *)(iVar6 + 0x10)) =
              *(undefined2 *)(iVar7 * 2 + uVar9 * 0x40 + *(int *)(iVar6 + 0x10));
         iVar3 = iVar7 * 0x40 + *(int *)(iVar6 + 0x10);
         *(undefined2 *)(uVar10 * 2 + iVar3) = *(undefined2 *)(uVar9 * 2 + iVar3);
         iVar7 = iVar7 + 1;
-      } while (iVar7 < (int)((uint)*(byte *)(iVar6 + 1) - 1));
+      } while (iVar7 < (int)((u_int)*(byte *)(iVar6 + 1) - 1));
     }
     *(char *)(poolManagementData + 1) = *(char *)(poolManagementData + 1) + -1;
   }

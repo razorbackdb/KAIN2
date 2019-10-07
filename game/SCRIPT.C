@@ -38,12 +38,12 @@ void SCRIPT_CombineEulerAngles
 
 {
   _G2Matrix_Type _Stack88;
-  uint auStack56 [8];
+  u_int auStack56 [8];
   _G2EulerAngles_Type local_18;
   
-  RotMatrix((ushort *)inputRotation1,(uint *)&_Stack88);
+  RotMatrix((ushort *)inputRotation1,(u_int *)&_Stack88);
   RotMatrix((ushort *)inputRotation2,auStack56);
-  MulMatrix2(auStack56,(uint *)&_Stack88);
+  MulMatrix2(auStack56,(u_int *)&_Stack88);
   G2EulerAngles_FromMatrix(&local_18,&_Stack88,0x15);
   combinedRotation->x = local_18.x;
   combinedRotation->y = local_18.y;
@@ -171,8 +171,8 @@ void SCRIPT_InstanceSplineInit(_Instance *instance)
   Spline *spline_00;
   _G2EulerAngles_Type local_50;
   _Rotation local_48 [4];
-  ulong local_28;
-  ulong local_24;
+  u_long local_28;
+  u_long local_24;
   
   multi = SCRIPT_GetMultiSpline(instance,&local_28,&local_24);
   if (multi != (MultiSpline *)0x0) {
@@ -187,8 +187,8 @@ void SCRIPT_InstanceSplineInit(_Instance *instance)
         pMVar7 = &multi->curRotMatrix;
         G2Quat_ToMatrix_S((short *)quat,(short *)pMVar7);
         if (instance->intro != (Intro *)0x0) {
-          RotMatrix((ushort *)&instance->intro->rotation,(uint *)local_48);
-          MulMatrix0((undefined4 *)pMVar7,(ushort *)local_48,(uint *)pMVar7);
+          RotMatrix((ushort *)&instance->intro->rotation,(u_int *)local_48);
+          MulMatrix0((undefined4 *)pMVar7,(ushort *)local_48,(u_int *)pMVar7);
         }
         instance->flags = instance->flags | 1;
       }
@@ -294,7 +294,7 @@ short SCRIPTCountFramesInSpline(_Instance *instance)
   if (pSVar2 == (Spline *)0x0) {
     pRVar3 = ScriptGetRotSpline(instance);
     if (pRVar3 == (RSpline *)0x0) {
-      pMVar4 = SCRIPT_GetMultiSpline(instance,(ulong *)0x0,(ulong *)0x0);
+      pMVar4 = SCRIPT_GetMultiSpline(instance,(u_long *)0x0,(u_long *)0x0);
       if (pMVar4 != (MultiSpline *)0x0) {
         iVar6 = (int)pMVar4->scaling->numkeys;
         pSVar7 = pMVar4->scaling->key;
@@ -304,7 +304,7 @@ short SCRIPTCountFramesInSpline(_Instance *instance)
             iVar10 = iVar10 + 1;
             puVar1 = (ushort *)&pSVar7->count;
             pSVar7 = pSVar7 + 1;
-            iVar9 = iVar9 + (uint)*puVar1;
+            iVar9 = iVar9 + (u_int)*puVar1;
             sVar5 = (short)iVar9;
           } while (iVar10 * 0x10000 >> 0x10 < iVar6);
         }
@@ -318,9 +318,9 @@ short SCRIPTCountFramesInSpline(_Instance *instance)
           iVar10 = iVar10 + 1;
           puVar1 = (ushort *)&pSVar8->count;
           pSVar8 = pSVar8 + 1;
-          iVar9 = iVar9 + (uint)*puVar1;
+          iVar9 = iVar9 + (u_int)*puVar1;
         } while (iVar10 * 0x10000 >> 0x10 < (int)pRVar3->numkeys);
-        sVar5 = (short)((uint)(iVar9 * 0x10000) >> 0x10);
+        sVar5 = (short)((u_int)(iVar9 * 0x10000) >> 0x10);
       }
     }
   }
@@ -331,9 +331,9 @@ short SCRIPTCountFramesInSpline(_Instance *instance)
         iVar10 = iVar10 + 1;
         puVar1 = (ushort *)&pSVar7->count;
         pSVar7 = pSVar7 + 1;
-        iVar9 = iVar9 + (uint)*puVar1;
+        iVar9 = iVar9 + (u_int)*puVar1;
       } while (iVar10 * 0x10000 >> 0x10 < (int)pSVar2->numkeys);
-      sVar5 = (short)((uint)(iVar9 * 0x10000) >> 0x10);
+      sVar5 = (short)((u_int)(iVar9 * 0x10000) >> 0x10);
     }
   }
   return sVar5;
@@ -365,7 +365,7 @@ Spline * ScriptGetPosSpline(_Instance *instance)
   MultiSpline *pMVar1;
   Spline *pSVar2;
   
-  pMVar1 = SCRIPT_GetMultiSpline(instance,(ulong *)0x0,(ulong *)0x0);
+  pMVar1 = SCRIPT_GetMultiSpline(instance,(u_long *)0x0,(u_long *)0x0);
   if (pMVar1 == (MultiSpline *)0x0) {
     pSVar2 = (Spline *)0x0;
   }
@@ -401,7 +401,7 @@ RSpline * ScriptGetRotSpline(_Instance *instance)
   MultiSpline *pMVar1;
   RSpline *pRVar2;
   
-  pMVar1 = SCRIPT_GetMultiSpline(instance,(ulong *)0x0,(ulong *)0x0);
+  pMVar1 = SCRIPT_GetMultiSpline(instance,(u_long *)0x0,(u_long *)0x0);
   if (pMVar1 == (MultiSpline *)0x0) {
     pRVar2 = (RSpline *)0x0;
   }
@@ -436,7 +436,7 @@ int SCRIPT_GetSplineFrameNumber(_Instance *instance,SplineDef *splineDef)
     spline = ScriptGetPosSpline(instance);
   }
   uVar1 = SplineGetFrameNumber(spline,splineDef);
-  return (uint)uVar1;
+  return (u_int)uVar1;
 }
 
 
@@ -474,7 +474,7 @@ int SCRIPT_GetSplineFrameNumber(_Instance *instance,SplineDef *splineDef)
 	/* end block 5 */
 	// End Line: 643
 
-MultiSpline * SCRIPT_GetMultiSpline(_Instance *instance,ulong *isParent,ulong *isClass)
+MultiSpline * SCRIPT_GetMultiSpline(_Instance *instance,u_long *isParent,u_long *isClass)
 
 {
   MultiSpline *pMVar1;
@@ -482,20 +482,20 @@ MultiSpline * SCRIPT_GetMultiSpline(_Instance *instance,ulong *isParent,ulong *i
   MultiSpline *pMVar3;
   
   pMVar3 = (MultiSpline *)0x0;
-  if (isParent != (ulong *)0x0) {
+  if (isParent != (u_long *)0x0) {
     *isParent = 0;
   }
-  if (isClass != (ulong *)0x0) {
+  if (isClass != (u_long *)0x0) {
     *isClass = 0;
   }
   if ((((instance != (_Instance *)0x0) && (instance->intro != (Intro *)0x0)) &&
       (pMVar1 = instance->intro->multiSpline, pMVar1 != (MultiSpline *)0x0)) &&
-     ((pMVar3 = pMVar1, (instance->flags & 0x100002U) == 2 && (isParent != (ulong *)0x0)))) {
+     ((pMVar3 = pMVar1, (instance->flags & 0x100002U) == 2 && (isParent != (u_long *)0x0)))) {
     *isParent = 1;
   }
   if (((pMVar3 == (MultiSpline *)0x0) &&
       (p_Var2 = *instance->object->modelList, p_Var2 != (_Model *)0x0)) &&
-     (pMVar3 = p_Var2->multiSpline, isClass != (ulong *)0x0)) {
+     (pMVar3 = p_Var2->multiSpline, isClass != (u_long *)0x0)) {
     *isClass = 1;
   }
   return pMVar3;
@@ -527,7 +527,7 @@ MultiSpline * SCRIPT_GetMultiSpline(_Instance *instance,ulong *isParent,ulong *i
 	// End Line: 703
 
 SplineDef *
-SCRIPT_GetPosSplineDef(_Instance *instance,MultiSpline *multi,ulong isParent,ulong isClass)
+SCRIPT_GetPosSplineDef(_Instance *instance,MultiSpline *multi,u_long isParent,u_long isClass)
 
 {
   SplineDef *pSVar1;
@@ -568,7 +568,7 @@ SCRIPT_GetPosSplineDef(_Instance *instance,MultiSpline *multi,ulong isParent,ulo
 	// End Line: 727
 
 SplineDef *
-SCRIPT_GetRotSplineDef(_Instance *instance,MultiSpline *multi,ulong isParent,ulong isClass)
+SCRIPT_GetRotSplineDef(_Instance *instance,MultiSpline *multi,u_long isParent,u_long isClass)
 
 {
   SplineDef *pSVar1;
@@ -609,7 +609,7 @@ SCRIPT_GetRotSplineDef(_Instance *instance,MultiSpline *multi,ulong isParent,ulo
 	// End Line: 751
 
 SplineDef *
-SCRIPT_GetScaleSplineDef(_Instance *instance,MultiSpline *multi,ulong isParent,ulong isClass)
+SCRIPT_GetScaleSplineDef(_Instance *instance,MultiSpline *multi,u_long isParent,u_long isClass)
 
 {
   SplineDef *pSVar1;
@@ -738,7 +738,7 @@ void SCRIPT_RelativisticSpline(_Instance *instance,_SVector *point)
     local_10 = point->x;
     local_e = point->y;
     local_c = point->z;
-    RotMatrix((ushort *)&instance->intro->rotation,(uint *)&local_38);
+    RotMatrix((ushort *)&instance->intro->rotation,(u_int *)&local_38);
     iVar7 = (int)local_10;
     iVar6 = (int)local_e;
     iVar8 = (int)local_c;
@@ -845,7 +845,7 @@ void SCRIPT_InstanceSplineSet
 
 {
   MultiSpline *multi;
-  ulong uVar1;
+  u_long uVar1;
   Intro *pIVar2;
   Spline *spline;
   MATRIX *pMVar3;
@@ -856,8 +856,8 @@ void SCRIPT_InstanceSplineSet
   short local_56;
   short local_54;
   _Rotation local_50 [4];
-  ulong local_30;
-  ulong local_2c;
+  u_long local_30;
+  u_long local_2c;
   
   multi = SCRIPT_GetMultiSpline(instance,&local_30,&local_2c);
   if (multi != (MultiSpline *)0x0) {
@@ -907,8 +907,8 @@ void SCRIPT_InstanceSplineSet
           pMVar3 = &multi->curRotMatrix;
           G2Quat_ToMatrix_S(&local_58,(short *)pMVar3);
           if (instance->intro != (Intro *)0x0) {
-            RotMatrix((ushort *)&instance->intro->rotation,(uint *)local_50);
-            MulMatrix0((undefined4 *)pMVar3,(ushort *)local_50,(uint *)pMVar3);
+            RotMatrix((ushort *)&instance->intro->rotation,(u_int *)local_50);
+            MulMatrix0((undefined4 *)pMVar3,(ushort *)local_50,(u_int *)pMVar3);
           }
         }
       }
@@ -1011,14 +1011,14 @@ long SCRIPT_SplineProcess
                SplineDef *ssplineDef,int direction,int isClass)
 
 {
-  ulong uVar1;
-  ulong fracOffset;
+  u_long uVar1;
+  u_long fracOffset;
   Spline *spline;
   Intro *pIVar2;
   Spline *spline_00;
   MATRIX *pMVar3;
   _SVector *point;
-  uint uVar4;
+  u_int uVar4;
   Spline *spline_01;
   short local_60;
   short local_5e;
@@ -1068,7 +1068,7 @@ long SCRIPT_SplineProcess
     }
     else {
       uVar1 = SplineGetOffsetNext(spline_00,rsplineDef,fracOffset);
-      uVar4 = (uint)(uVar1 == 0);
+      uVar4 = (u_int)(uVar1 == 0);
     }
     if (uVar4 == 0) {
       if ((instance->flags & 1U) == 0) {
@@ -1091,8 +1091,8 @@ long SCRIPT_SplineProcess
           pMVar3 = &multi->curRotMatrix;
           G2Quat_ToMatrix_S((short *)&_Stack80,(short *)pMVar3);
           if (instance->intro != (Intro *)0x0) {
-            RotMatrix((ushort *)&instance->intro->rotation,(uint *)local_48);
-            MulMatrix0((undefined4 *)pMVar3,(ushort *)local_48,(uint *)pMVar3);
+            RotMatrix((ushort *)&instance->intro->rotation,(u_int *)local_48);
+            MulMatrix0((undefined4 *)pMVar3,(ushort *)local_48,(u_int *)pMVar3);
           }
           goto LAB_8003defc;
         }
@@ -1162,8 +1162,8 @@ long SCRIPT_InstanceSplineProcess
 {
   MultiSpline *multi;
   long lVar1;
-  ulong local_20;
-  ulong local_1c;
+  u_long local_20;
+  u_long local_1c;
   
   multi = SCRIPT_GetMultiSpline(instance,&local_20,&local_1c);
   lVar1 = -1;
@@ -1201,7 +1201,7 @@ void SCRIPT_FadeOutProcess(_Instance *instance)
 {
   int iVar1;
   
-  iVar1 = (uint)(ushort)instance->fadeValue + (gameTrackerX.timeMult >> 5);
+  iVar1 = (u_int)(ushort)instance->fadeValue + (gameTrackerX.timeMult >> 5);
   instance->fadeValue = (short)iVar1;
   if (0xfff < iVar1 * 0x10000 >> 0x10) {
     INSTANCE_PlainDeath(instance);
@@ -1282,7 +1282,7 @@ void ScriptKillInstance(_Instance *instance,int effect)
      (iVar2 = *(int *)instance->introData, iVar2 != 0)) {
     SIGNAL_HandleSignal(instance,(Signal *)(iVar2 + 8),0);
   }
-  bVar1 = (uint)effect < 8;
+  bVar1 = (u_int)effect < 8;
   if ((effect == 1) && (bVar1 = true, (instance->object->oflags & 0x8000U) != 0)) {
     effect = 5;
     bVar1 = true;

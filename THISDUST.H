@@ -1591,7 +1591,7 @@ struct AadSfxCommand // hashcode: 0x3310EEED (dec: 856747757)
 {
 	unsigned char statusByte; // size=0, offset=0
 	unsigned char dataByte[3]; // size=3, offset=1
-	unsigned long ulongParam; // size=0, offset=4
+	unsigned long u_longParam; // size=0, offset=4
 	short shortParam; // size=0, offset=8
 	unsigned short unused; // size=0, offset=10
 };

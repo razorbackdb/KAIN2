@@ -21,11 +21,11 @@ void VWRAITH_MoveVertical(_Instance *instance,long targetZ,int velocity)
 {
   bool bVar1;
   int iVar2;
-  uint uVar3;
+  u_int uVar3;
   int iVar4;
   
   iVar4 = (int)(instance->position).z;
-  uVar3 = (uint)(ushort)(instance->position).z;
+  uVar3 = (u_int)(ushort)(instance->position).z;
   iVar2 = uVar3 + velocity;
   if (iVar4 < targetZ) {
     (instance->position).z = (short)iVar2;
@@ -71,10 +71,10 @@ void VWRAITH_Init(_Instance *instance)
 {
   _FXGlowEffect *p_Var1;
   int iVar2;
-  uint *puVar3;
+  u_int *puVar3;
   long local_18 [2];
   
-  puVar3 = (uint *)instance->extraData;
+  puVar3 = (u_int *)instance->extraData;
   iVar2 = (int)*(short *)(puVar3 + 0x50);
   if (iVar2 < 0) {
     iVar2 = iVar2 + 0xfff;
@@ -123,14 +123,14 @@ void VWRAITH_Init(_Instance *instance)
 int VWRAITH_ShouldISwoop(_Instance *instance)
 
 {
-  uint uVar1;
-  uint uVar2;
+  u_int uVar1;
+  u_int uVar2;
   
   uVar2 = 0;
-  if ((((*(uint *)instance->extraData & 4) == 0) &&
-      (uVar1 = *(uint *)(instance->extraData + 0x31), uVar1 != 0)) &&
+  if ((((*(u_int *)instance->extraData & 4) == 0) &&
+      (uVar1 = *(u_int *)(instance->extraData + 0x31), uVar1 != 0)) &&
      (*(short *)(*(int *)(uVar1 + 4) + 0x60) <= (instance->position).z)) {
-    uVar2 = (uint)(*(short *)(*(int *)((int)instance->data + 4) + 0xc) < *(short *)(uVar1 + 0x14));
+    uVar2 = (u_int)(*(short *)(*(int *)((int)instance->data + 4) + 0xc) < *(short *)(uVar1 + 0x14));
   }
   return uVar2;
 }
@@ -173,9 +173,9 @@ void VWRAITH_PursueEntry(_Instance *instance)
   pvVar2 = instance->extraData;
   iVar1 = VWRAITH_ShouldISwoop(instance);
   if (iVar1 != 0) {
-    *(uint *)((int)pvVar2 + 4) = *(uint *)((int)pvVar2 + 4) | 2;
+    *(u_int *)((int)pvVar2 + 4) = *(u_int *)((int)pvVar2 + 4) | 2;
   }
-  if ((*(uint *)((int)pvVar2 + 4) & 2) == 0) {
+  if ((*(u_int *)((int)pvVar2 + 4) & 2) == 0) {
     MON_PursueEntry(instance);
   }
   else {
@@ -232,7 +232,7 @@ void VWRAITH_Pursue(_Instance *instance)
   
   pvVar4 = instance->extraData;
   pvVar5 = instance->data;
-  if ((*(uint *)((int)pvVar4 + 4) & 2) == 0) {
+  if ((*(u_int *)((int)pvVar4 + 4) & 2) == 0) {
     iVar2 = VWRAITH_ShouldISwoop(instance);
     if (iVar2 == 0) {
       if (*(int *)((int)pvVar4 + 0xc4) != 0) {
@@ -248,7 +248,7 @@ void VWRAITH_Pursue(_Instance *instance)
   }
   else {
     if (*(int *)((int)pvVar4 + 0xc4) == 0) {
-      *(uint *)((int)pvVar4 + 4) = *(uint *)((int)pvVar4 + 4) & 0xfffffffd;
+      *(u_int *)((int)pvVar4 + 4) = *(u_int *)((int)pvVar4 + 4) & 0xfffffffd;
     }
     else {
       cVar1 = *(char *)(*(int *)((int)pvVar5 + 4) + 0x10);
@@ -260,7 +260,7 @@ void VWRAITH_Pursue(_Instance *instance)
         *(int *)((int)pvVar4 + 0xb8) = iVar2 + (int)cVar1 * 0x20;
         *(undefined *)((int)pvVar4 + 0x15b) = 0;
         *(undefined2 *)((int)pvVar4 + 0x126) = 0;
-        *(uint *)((int)pvVar4 + 4) = *(uint *)((int)pvVar4 + 4) & 0xfffffffd;
+        *(u_int *)((int)pvVar4 + 4) = *(u_int *)((int)pvVar4 + 4) & 0xfffffffd;
         MON_SwitchState(instance,(MonsterState)CONCAT44(local_14,local_18));
       }
       else {

@@ -44,8 +44,8 @@ int StateHandlerDecodeHold(int *Message,int *Data)
 
 {
   _Instance *Inst;
-  uint uVar1;
-  ulong uVar2;
+  u_int uVar1;
+  u_long uVar2;
   int iVar3;
   
   iVar3 = 1;
@@ -258,7 +258,7 @@ void StateHandlerAttack2(__CharacterState *In,int CurrentSection,int Data)
 {
   RazielData *pRVar1;
   __Event *p_Var2;
-  ulong uVar3;
+  u_long uVar3;
   undefined *puVar4;
   _Instance *instance;
   __MessageQueue *In_00;
@@ -266,15 +266,15 @@ void StateHandlerAttack2(__CharacterState *In,int CurrentSection,int Data)
   _Instance **pp_Var5;
   int NewAnim;
   code *NewProcess;
-  ulong endColor;
-  ulong startColor;
+  u_long endColor;
+  u_long startColor;
   __MessageQueue *In_01;
   int local_58;
   int local_54;
   int local_40;
   int local_3c;
   int local_38;
-  uint local_34;
+  u_int local_34;
   __State *local_30;
   
   local_38 = G2EmulationQueryFrame(In,CurrentSection);
@@ -297,7 +297,7 @@ void StateHandlerAttack2(__CharacterState *In,int CurrentSection,int Data)
     pRVar1 = PlayerData;
     if (p_Var2 == (__Event *)0x0) {
       if (((Raziel.attackFlags & 4U) != 0) &&
-         ((int)((uint)(Raziel.attack)->switchDelay * 100) <=
+         ((int)((u_int)(Raziel.attack)->switchDelay * 100) <=
           (int)(In->CharacterInstance->anim).section[CurrentSection & 0xff].elapsedTime)) {
         EnMessageQueueData(&In->SectionList[CurrentSection].Event,0x100000,0);
       }
@@ -324,8 +324,8 @@ void StateHandlerAttack2(__CharacterState *In,int CurrentSection,int Data)
                 (&((__AttackItem *)PlayerData->attackList[Raziel.currentAttack])->anim +
                 (int)pp_Var5[0x48] * 4);
           G2EmulationSwitchAnimationAlpha
-                    (In,CurrentSection,(uint)(Raziel.attack)->anim,0,(uint)(Raziel.attack)->framesIn
-                     ,1,(uint)(Raziel.attack)->alphaIn);
+                    (In,CurrentSection,(u_int)(Raziel.attack)->anim,0,(u_int)(Raziel.attack)->framesIn
+                     ,1,(u_int)(Raziel.attack)->alphaIn);
           if (CurrentSection == 1) {
             startColor = (Raziel.attack)->ribbonStartColor;
             endColor = (Raziel.attack)->ribbonEndColor;
@@ -354,8 +354,8 @@ void StateHandlerAttack2(__CharacterState *In,int CurrentSection,int Data)
             Raziel.attackCurrentHit = (_Instance *)0x0;
             FX_StartRibbon(instance,(ushort)(Raziel.attack)->ribbonStartSegment,
                            (ushort)(Raziel.attack)->ribbonEndSegment,0,
-                           (uint)(Raziel.attack)->ribbonLifeTime,
-                           (uint)(Raziel.attack)->ribbonFaceLifeTime,
+                           (u_int)(Raziel.attack)->ribbonLifeTime,
+                           (u_int)(Raziel.attack)->ribbonFaceLifeTime,
                            (int)(short)(Raziel.attack)->ribbonStartOpacity,startColor,endColor);
           }
           EnMessageQueueData(&local_30->Defer,(int)&DAT_00100002,0);
@@ -441,8 +441,8 @@ void StateHandlerAttack2(__CharacterState *In,int CurrentSection,int Data)
                         (&((__AttackItem *)PlayerData->attackList[Raziel.currentAttack])->anim +
                         In->SectionList[CurrentSection].Data2 * 4);
                   G2EmulationSwitchAnimationAlpha
-                            (In,CurrentSection,(uint)(Raziel.attack)->anim,0,
-                             (uint)(Raziel.attack)->framesIn,1,(uint)(Raziel.attack)->alphaIn);
+                            (In,CurrentSection,(u_int)(Raziel.attack)->anim,0,
+                             (u_int)(Raziel.attack)->framesIn,1,(u_int)(Raziel.attack)->alphaIn);
                   if (CurrentSection == 1) {
                     startColor = (Raziel.attack)->ribbonStartColor;
                     endColor = (Raziel.attack)->ribbonEndColor;
@@ -469,8 +469,8 @@ void StateHandlerAttack2(__CharacterState *In,int CurrentSection,int Data)
                     }
                     FX_StartRibbon(instance,(ushort)(Raziel.attack)->ribbonStartSegment,
                                    (ushort)(Raziel.attack)->ribbonEndSegment,0,
-                                   (uint)(Raziel.attack)->ribbonLifeTime,
-                                   (uint)(Raziel.attack)->ribbonFaceLifeTime,
+                                   (u_int)(Raziel.attack)->ribbonLifeTime,
+                                   (u_int)(Raziel.attack)->ribbonFaceLifeTime,
                                    (int)(short)(Raziel.attack)->ribbonStartOpacity,startColor,
                                    endColor);
                     mode = 9;
@@ -516,8 +516,8 @@ LAB_8009b994:
                *(__AttackItem **)
                 (&((__AttackItem *)PlayerData->attackList[Raziel.currentAttack])->anim +
                 In->SectionList[CurrentSection].Data2 * 4);
-          if ((local_34 == (uint)(Raziel.attack)->anim) &&
-             ((int)(uint)(Raziel.attack)->ignoreDelay <= local_38)) {
+          if ((local_34 == (u_int)(Raziel.attack)->anim) &&
+             ((int)(u_int)(Raziel.attack)->ignoreDelay <= local_38)) {
             Raziel.attackFlags = Raziel.attackFlags | 4;
           }
           if ((CurrentSection == 1) && (Raziel.glowEffect != (_FXGlowEffect *)0x0)) {
@@ -609,8 +609,8 @@ LAB_8009c300:
                      *(_Instance **)((int)&instance->node + 4) != (_Instance *)0x0)) {
                     mode = SetMonsterHitData(*(_Instance **)&instance->node,(_Instance *)0x0,
                                              (int)instance->prev,
-                                             (uint)(Raziel.attack)->knockBackDistance,
-                                             (uint)(Raziel.attack)->knockBackFrames);
+                                             (u_int)(Raziel.attack)->knockBackDistance,
+                                             (u_int)(Raziel.attack)->knockBackFrames);
                     local_54 = 0x100001f;
                     instance = *(_Instance **)((int)&instance->node + 4);
 LAB_8009c2f0:
@@ -642,13 +642,13 @@ LAB_8009c2f0:
                 if (puVar4 == (undefined *)0x2000002) {
                   if (CurrentSection == 1) {
                     instance = (_Instance *)p_Var2->Data;
-                    mode = (int)instance->prev * (uint)(Raziel.attack)->hitPowerScale;
+                    mode = (int)instance->prev * (u_int)(Raziel.attack)->hitPowerScale;
                     if (mode < 0) {
                       mode = mode + 0xfff;
                     }
                     mode = SetMonsterHitData(In->CharacterInstance,Raziel.attackLastHit,mode >> 0xc,
-                                             (uint)(Raziel.attack)->knockBackDistance,
-                                             (uint)(Raziel.attack)->knockBackFrames);
+                                             (u_int)(Raziel.attack)->knockBackDistance,
+                                             (u_int)(Raziel.attack)->knockBackFrames);
                     INSTANCE_Post(*(_Instance **)&instance->node,0x1000000,mode);
                     if (((Raziel.attack)->handsToCollide & 2) != 0) {
                       mode = SetFXHitData(In->CharacterInstance,0x29,0x20,0x100);
@@ -684,7 +684,7 @@ LAB_8009c2f0:
                         NewProcess = StateHandlerAutoFace;
                         goto LAB_8009c0c0;
                       }
-                      mode = SetControlInitIdleData(1,0,(uint)(Raziel.attack)->framesOut);
+                      mode = SetControlInitIdleData(1,0,(u_int)(Raziel.attack)->framesOut);
                       StateSwitchStateData(In,CurrentSection,StateHandlerIdle,mode);
                     }
                     else {
@@ -1201,10 +1201,10 @@ void StateHandlerThrow2(__CharacterState *In,int CurrentSection,int Data)
   byte bVar3;
   ushort uVar4;
   RazielData *pRVar5;
-  uint uVar6;
+  u_int uVar6;
   __Event *p_Var7;
   _Instance *Inst;
-  ulong uVar8;
+  u_long uVar8;
   undefined *puVar9;
   __MessageQueue *In_00;
   _Position *target;
@@ -1350,7 +1350,7 @@ LAB_8009d130:
                     bVar3 = (Raziel.throwData)->prepAnimAlphaIn;
                   }
                   G2EmulationSwitchAnimationAlpha
-                            (In,CurrentSection,(uint)bVar1,0,(uint)bVar2,1,(uint)bVar3);
+                            (In,CurrentSection,(u_int)bVar1,0,(u_int)bVar2,1,(u_int)bVar3);
                 }
                 else {
                   if (uVar6 != 0x3f) {
@@ -1368,7 +1368,7 @@ LAB_8009d130:
               if ((int)puVar9 < 0x100002) {
                 if (puVar9 == (undefined *)0x100000) {
                   if ((Raziel.Mode & 0x40000U) == 0) {
-                    local_54 = SetControlInitIdleData(0,0,(uint)(Raziel.throwData)->framesOut);
+                    local_54 = SetControlInitIdleData(0,0,(u_int)(Raziel.throwData)->framesOut);
                     StateSwitchStateData(In,CurrentSection,StateHandlerIdle,local_54);
                     if (((*PadData & 0x800) == 0) || ((*PadData & 0x400) == 0)) goto LAB_8009d6b0;
                     Raziel.returnState = StateHandlerIdle;
@@ -1413,16 +1413,16 @@ LAB_8009d6a8:
       else {
         if (puVar9 == (undefined *)0x8000000) {
           Raziel.throwMode = Raziel.throwMode & 0xfffffffb;
-          if (uVar6 == (uint)(Raziel.throwData)->prepAnim) {
+          if (uVar6 == (u_int)(Raziel.throwData)->prepAnim) {
             if (((Raziel.Mode & 0x40000U) == 0) || (CurrentSection != 0)) {
               G2EmulationSwitchAnimationAlpha
-                        (In,CurrentSection,(uint)(Raziel.throwData)->coilAnim,0,
-                         (uint)(Raziel.throwData)->coilAnimFramesIn,1,
-                         (uint)(Raziel.throwData)->coilAnimAlphaIn);
+                        (In,CurrentSection,(u_int)(Raziel.throwData)->coilAnim,0,
+                         (u_int)(Raziel.throwData)->coilAnimFramesIn,1,
+                         (u_int)(Raziel.throwData)->coilAnimAlphaIn);
             }
           }
           else {
-            if ((uVar6 == (uint)(Raziel.throwData)->throwAnim) &&
+            if ((uVar6 == (u_int)(Raziel.throwData)->throwAnim) &&
                (local_54 = 0x100000, CurrentSection == 1)) {
               Inst = In->CharacterInstance;
 LAB_8009d324:
@@ -1463,7 +1463,7 @@ LAB_8009d324:
                   }
                   local_54 = SetObjectThrowData(Raziel.Senses.EngagedList[7].instance,
                                                 (_SVector *)0x0,1,0,
-                                                (uint)(ushort)(Raziel.throwData)->velocity,
+                                                (u_int)(ushort)(Raziel.throwData)->velocity,
                                                 (int)(Raziel.throwData)->gravity,0,-0x400);
                   INSTANCE_Post(Inst,0x800010,local_54);
                   uVar8 = INSTANCE_Query(Raziel.Senses.EngagedList[7].instance,0xc);
@@ -1478,7 +1478,7 @@ LAB_8009d324:
                   uVar4 = (Raziel.throwData)->velocity;
                   local_54 = (int)(Raziel.throwData)->gravity;
 LAB_8009d554:
-                  local_54 = SetObjectThrowData(target,(_SVector *)0x0,type,0,(uint)uVar4,local_54,0
+                  local_54 = SetObjectThrowData(target,(_SVector *)0x0,type,0,(u_int)uVar4,local_54,0
                                                 ,-0x400);
                   INSTANCE_Post(Inst,0x800010,local_54);
                 }
@@ -1489,14 +1489,14 @@ LAB_8009d554:
                 if (puVar9 != (undefined *)0x20000020) goto LAB_8009d6a8;
                 if (pp_Var10[0x48] != (_Instance *)0x0) {
                   In_00 = &p_Var11->Defer;
-                  if (uVar6 != (uint)(Raziel.throwData)->coilAnim) {
+                  if (uVar6 != (u_int)(Raziel.throwData)->coilAnim) {
                     local_54 = 0x20000020;
                     goto LAB_8009d40c;
                   }
                   if (((Raziel.Mode & 0x40000U) == 0) || (CurrentSection != 0)) {
                     G2EmulationSwitchAnimation
-                              (In,CurrentSection,(uint)(Raziel.throwData)->throwAnim,0,
-                               (uint)(Raziel.throwData)->throwAnimFramesInFactor,1);
+                              (In,CurrentSection,(u_int)(Raziel.throwData)->throwAnim,0,
+                               (u_int)(Raziel.throwData)->throwAnimFramesInFactor,1);
                   }
                   if (CurrentSection == 1) {
                     Raziel.alarmTable = (ushort)(Raziel.throwData)->throwFrameToLaunch * 100;
@@ -1800,13 +1800,13 @@ void LimitRotation(_Rotation *rot)
 void StateHandlerGrab(__CharacterState *In,int CurrentSection,int Data)
 
 {
-  uint uVar1;
+  u_int uVar1;
   __Event *p_Var2;
   _Instance *Inst;
   int Data_00;
   undefined *puVar3;
-  uint NewAnim;
-  uint local_30;
+  u_int NewAnim;
+  u_int local_30;
   int local_2c;
   
   uVar1 = G2EmulationQueryAnimation(In,CurrentSection);
@@ -1818,7 +1818,7 @@ void StateHandlerGrab(__CharacterState *In,int CurrentSection,int Data)
     puVar3 = (undefined *)p_Var2->ID;
     if (puVar3 == &DAT_00100015) {
       if (CurrentSection == 0) {
-        if (uVar1 == (uint)(Raziel.throwData)->prepAnim) {
+        if (uVar1 == (u_int)(Raziel.throwData)->prepAnim) {
           if ((Raziel.Senses.EngagedMask & 0x100) != 0) {
             INSTANCE_Post(Raziel.Senses.EngagedList[8].instance,0x1000002,(int)In->CharacterInstance
                          );
@@ -1847,9 +1847,9 @@ LAB_8009e098:
     else {
       if ((int)puVar3 < 0x100016) {
         if (puVar3 == (undefined *)0x0) {
-          if ((((CurrentSection == 0) && (uVar1 != (uint)(Raziel.throwData)->prepAnim)) &&
+          if ((((CurrentSection == 0) && (uVar1 != (u_int)(Raziel.throwData)->prepAnim)) &&
               (uVar1 != 0x47)) &&
-             ((uVar1 != (uint)(Raziel.throwData)->throwAnim &&
+             ((uVar1 != (u_int)(Raziel.throwData)->throwAnim &&
               (SteerSwitchMode(In->CharacterInstance,0), uVar1 == 1)))) {
             Data_00 = 0x37;
 LAB_8009df04:
@@ -1885,7 +1885,7 @@ LAB_8009df04:
                   Inst = (_Instance *)0xd;
                   if (CurrentSection == 0) {
                     G2EmulationSwitchAnimationCharacter
-                              (In,0x47,0,(uint)(Raziel.throwData)->prepAnimFramesIn,1);
+                              (In,0x47,0,(u_int)(Raziel.throwData)->prepAnimFramesIn,1);
                     if ((Raziel.Senses.EngagedMask & 0x100) != 0) {
                       INSTANCE_Post(Raziel.Senses.EngagedList[8].instance,0x1000002,0);
                     }
@@ -1901,8 +1901,8 @@ LAB_8009df04:
                     local_2c = CurrentSection;
                   }
                   else {
-                    NewAnim = (uint)(Raziel.throwData)->prepAnim;
-                    local_30 = (uint)(Raziel.throwData)->prepAnimFramesIn;
+                    NewAnim = (u_int)(Raziel.throwData)->prepAnim;
+                    local_30 = (u_int)(Raziel.throwData)->prepAnimFramesIn;
                     local_2c = 1;
                     Data_00 = CurrentSection;
                   }
@@ -1911,10 +1911,10 @@ LAB_8009df04:
                     if ((Raziel.Senses.EngagedMask & 0x100) != 0) {
                       razAlignYRotMoveInterp
                                 (In->CharacterInstance,Raziel.Senses.EngagedList[8].instance,200,
-                                 '\0',(uint)(Raziel.throwData)->prepAnimFramesIn,0);
+                                 '\0',(u_int)(Raziel.throwData)->prepAnimFramesIn,0);
                     }
-                    SetTimer((uint)(Raziel.throwData)->coilAnimFramesIn +
-                             (uint)(Raziel.throwData)->prepAnimFramesIn);
+                    SetTimer((u_int)(Raziel.throwData)->coilAnimFramesIn +
+                             (u_int)(Raziel.throwData)->prepAnimFramesIn);
                   }
                   Raziel.Mode = 0x20000000;
                   Inst = (_Instance *)0xb;
@@ -1934,7 +1934,7 @@ LAB_8009df04:
                   }
                 }
 LAB_8009e140:
-                Data_00 = SetControlInitIdleData(0,0,(uint)(Raziel.throwData)->framesOut);
+                Data_00 = SetControlInitIdleData(0,0,(u_int)(Raziel.throwData)->framesOut);
                 StateSwitchStateData(In,CurrentSection,StateHandlerIdle,Data_00);
               }
             }
@@ -2000,9 +2000,9 @@ LAB_8009e24c:
             }
             else {
               if (puVar3 == (undefined *)0x10000000) {
-                if ((((CurrentSection == 0) && (uVar1 != (uint)(Raziel.throwData)->prepAnim)) &&
+                if ((((CurrentSection == 0) && (uVar1 != (u_int)(Raziel.throwData)->prepAnim)) &&
                     (uVar1 != 0x47)) &&
-                   ((uVar1 != (uint)(Raziel.throwData)->throwAnim &&
+                   ((uVar1 != (u_int)(Raziel.throwData)->throwAnim &&
                     (SteerSwitchMode(In->CharacterInstance,0x12), uVar1 == 0x37)))) {
                   Data_00 = 1;
                   goto LAB_8009df04;
@@ -2017,12 +2017,12 @@ LAB_8009e24c:
                   else {
                     if (In->SectionList[0].Data2 != 0xc) {
                       G2EmulationSwitchAnimationCharacter
-                                (In,(uint)(Raziel.throwData)->throwAnim,0,
-                                 (uint)(Raziel.throwData)->throwAnimFramesInFactor,1);
+                                (In,(u_int)(Raziel.throwData)->throwAnim,0,
+                                 (u_int)(Raziel.throwData)->throwAnimFramesInFactor,1);
                       PurgeMessageQueue(&In->SectionList[0].Event);
                       Raziel.Mode = 0x20000;
-                      SetTimer((uint)(Raziel.throwData)->throwFrameToLaunch +
-                               (uint)(Raziel.throwData)->throwAnimFramesInFactor);
+                      SetTimer((u_int)(Raziel.throwData)->throwFrameToLaunch +
+                               (u_int)(Raziel.throwData)->throwAnimFramesInFactor);
                       In->SectionList[0].Data2 = 0xc;
                     }
                   }

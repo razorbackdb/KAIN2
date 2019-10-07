@@ -50,7 +50,7 @@ int PLANCOLL_DoesLOSExistFinal
               (_Position *startPos,_Position *endPos,int collideType,int passThroughHit,int zoffset)
 
 {
-  uint uVar1;
+  u_int uVar1;
   _PCollideInfo local_48;
   SVECTOR local_18;
   SVECTOR local_10;
@@ -72,8 +72,8 @@ int PLANCOLL_DoesLOSExistFinal
      (uVar1 = 1,
      (*(ushort *)
        ((int)&((local_48.inst)->node).prev[6].next[1].prev +
-       (uint)*(ushort *)((int)local_48.prim + 10) + 2) & 0x1000) == 0)) {
-    uVar1 = (uint)(local_48.type == 0);
+       (u_int)*(ushort *)((int)local_48.prim + 10) + 2) & 0x1000) == 0)) {
+    uVar1 = (u_int)(local_48.type == 0);
   }
   return uVar1;
 }
@@ -145,7 +145,7 @@ int PLANCOLL_CheckUnderwaterPoint(_Position *position)
                                (int)position->z -
                                (int)(short)((p_Var3->sphere).position.z + (pBVar2->globalOffset).z))
       ;
-      if ((lVar1 < (int)(uint)(p_Var3->sphere).radius) && ((int)position->z < pLVar5->waterZLevel))
+      if ((lVar1 < (int)(u_int)(p_Var3->sphere).radius) && ((int)position->z < pLVar5->waterZLevel))
       {
         return pSVar7->StreamList[0].StreamUnitID;
       }
@@ -244,14 +244,14 @@ int PLANCOLL_DoesStraightLinePathExist(_Position *startPos,_Position *endPos,int
 {
   bool bVar1;
   int iVar2;
-  uint uVar3;
+  u_int uVar3;
   
   uVar3 = 0;
   bVar1 = gameTrackerX.gameFlags < 0;
-  iVar2 = PLANCOLL_DoesLOSExistFinal(startPos,endPos,collideType,(uint)bVar1,0x100);
+  iVar2 = PLANCOLL_DoesLOSExistFinal(startPos,endPos,collideType,(u_int)bVar1,0x100);
   if (iVar2 != 0) {
-    iVar2 = PLANCOLL_DoesLOSExistFinal(startPos,endPos,collideType,(uint)bVar1,0x3c0);
-    uVar3 = (uint)(iVar2 != 0);
+    iVar2 = PLANCOLL_DoesLOSExistFinal(startPos,endPos,collideType,(u_int)bVar1,0x3c0);
+    uVar3 = (u_int)(iVar2 != 0);
   }
   return uVar3;
 }
@@ -291,7 +291,7 @@ int PLANCOLL_DoesWaterPathUpExist
   int iVar5;
   
   lVar3 = MATH3D_FastSqrt(0x50000);
-  iVar5 = ((uint)(ushort)startPos->z - (uint)(ushort)endPos->z) + 0x280;
+  iVar5 = ((u_int)(ushort)startPos->z - (u_int)(ushort)endPos->z) + 0x280;
   peakPos->z = (short)iVar5;
   lVar4 = MATH3D_FastSqrt((iVar5 * 0x20000) / 3);
   if (lVar4 < 0) {
@@ -301,7 +301,7 @@ int PLANCOLL_DoesWaterPathUpExist
   sVar1 = endPos->y;
   sVar2 = startPos->y;
   peakPos->x = endPos->x +
-               (short)((((int)(((uint)(ushort)startPos->x - (uint)(ushort)endPos->x) * 0x10000) >>
+               (short)((((int)(((u_int)(ushort)startPos->x - (u_int)(ushort)endPos->x) * 0x10000) >>
                         0x10) * iVar5) / (lVar3 + iVar5));
   peakPos->y = endPos->y + (short)(((short)(sVar2 - sVar1) * iVar5) / (lVar3 + iVar5));
   iVar5 = PLANCOLL_DoesLOSExistFinal(startPos,peakPos,collideType,passThroughHit,0);

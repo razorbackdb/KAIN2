@@ -98,7 +98,7 @@ void G2Anim_ResetInternalState(void)
 void G2Anim_Init(_G2Anim_Type *anim,_Model *modelData)
 
 {
-  uchar *puVar1;
+  u_char *puVar1;
   int iVar2;
   int iVar3;
   
@@ -119,7 +119,7 @@ void G2Anim_Init(_G2Anim_Type *anim,_Model *modelData)
     *(undefined4 *)(puVar1 + 0x10) = 0x1000;
     iVar2 = iVar2 + 0x30;
   } while (iVar3 < 3);
-  anim->section[0].segCount = *(uchar *)&modelData->numSegments;
+  anim->section[0].segCount = *(u_char *)&modelData->numSegments;
   return;
 }
 
@@ -146,15 +146,15 @@ void G2Anim_Init(_G2Anim_Type *anim,_Model *modelData)
 _G2AnimSection_Type * G2Anim_AddSection(_G2Anim_Type *anim,int firstSegID,int segCount)
 
 {
-  uchar uVar1;
+  u_char uVar1;
   _G2AnimSection_Type *__s;
   
   __s = anim->section + anim->sectionCount;
   memset(__s,0,0x30);
   uVar1 = anim->sectionCount;
   __s->storedTime = -1;
-  __s->firstSeg = (uchar)firstSegID;
-  __s->segCount = (uchar)segCount;
+  __s->firstSeg = (u_char)firstSegID;
+  __s->segCount = (u_char)segCount;
   __s->swAlarmTable = (short *)0x0;
   __s->speedAdjustment = 0x1000;
   __s->sectionID = uVar1;
@@ -211,7 +211,7 @@ void G2Anim_Free(_G2Anim_Type *anim)
       }
       iVar3 = iVar3 + 1;
       iVar4 = iVar4 + 0x30;
-    } while (iVar3 < (int)(uint)anim->sectionCount);
+    } while (iVar3 < (int)(u_int)anim->sectionCount);
   }
   return;
 }
@@ -255,7 +255,7 @@ void G2Anim_Restore(_G2Anim_Type *anim)
       }
       iVar1 = iVar1 + 1;
       iVar2 = iVar2 + 0x30;
-    } while (iVar1 < (int)(uint)anim->sectionCount);
+    } while (iVar1 < (int)(u_int)anim->sectionCount);
   }
   return;
 }
@@ -386,12 +386,12 @@ void G2Anim_UpdateStoredFrame(_G2Anim_Type *anim)
   ushort intervalStart;
   ushort intervalEnd;
   _G2AnimSection_Type *section;
-  uint uVar3;
+  u_int uVar3;
   undefined4 local_20;
   short local_1c;
   
   section = anim->section;
-  uVar3 = (uint)anim->sectionCount;
+  uVar3 = (u_int)anim->sectionCount;
   intervalStart = anim->section[0].storedTime;
   uVar1 = anim->section[0].elapsedTime;
   if (anim->sectionCount != 0) {
@@ -407,7 +407,7 @@ void G2Anim_UpdateStoredFrame(_G2Anim_Type *anim)
       uVar3 = uVar3 - 1;
     } while (0 < (int)uVar3);
   }
-  if ((int)((uint)intervalStart << 0x10) < 0) {
+  if ((int)((u_int)intervalStart << 0x10) < 0) {
     intervalStart = 0;
   }
   local_20 = 0;
@@ -479,8 +479,8 @@ _G2AnimSection_Type * G2Anim_GetSectionWithSeg(_G2Anim_Type *anim,int segNumber)
   
   p_Var1 = anim->section;
   while ((p_Var2 = (_G2AnimSection_Type *)0x0, p_Var1 < anim->section + anim->sectionCount &&
-         ((segNumber < (int)(uint)p_Var1->firstSeg ||
-          (p_Var2 = p_Var1, (int)((uint)p_Var1->firstSeg + (uint)p_Var1->segCount) <= segNumber)))))
+         ((segNumber < (int)(u_int)p_Var1->firstSeg ||
+          (p_Var2 = p_Var1, (int)((u_int)p_Var1->firstSeg + (u_int)p_Var1->segCount) <= segNumber)))))
   {
     p_Var1 = p_Var1 + 1;
   }
@@ -522,9 +522,9 @@ _G2Bool_Enum G2Anim_SegmentHasActiveChannels(_G2Anim_Type *anim,int segNumber,us
   int iVar5;
   ushort *puVar6;
   int iVar7;
-  uint uVar8;
+  u_int uVar8;
   int iVar9;
-  uint uVar10;
+  u_int uVar10;
   
   p_Var3 = G2Anim_GetSectionWithSeg(anim,segNumber);
   iVar7 = anim->modelData->numSegments * 3;
@@ -538,24 +538,24 @@ _G2Bool_Enum G2Anim_SegmentHasActiveChannels(_G2Anim_Type *anim,int segNumber,us
   if (segNumber < 0) {
     iVar7 = segNumber + 7;
   }
-  iVar9 = (int)&p_Var4->sectionData + (iVar7 >> 3) + (uint)p_Var4->sectionCount * 4;
+  iVar9 = (int)&p_Var4->sectionData + (iVar7 >> 3) + (u_int)p_Var4->sectionCount * 4;
   puVar6 = (ushort *)(iVar9 + 1);
   uVar10 = segNumber + (iVar7 >> 3) * -8;
-  bVar1 = *(byte *)(&p_Var4->sectionData + (uint)p_Var4->sectionCount);
+  bVar1 = *(byte *)(&p_Var4->sectionData + (u_int)p_Var4->sectionCount);
   uVar8 = 0;
   if ((bVar1 & 1) != 0) {
     puVar6 = (ushort *)((int)puVar6 + (iVar5 >> 3));
-    uVar8 = (int)(uint)*(ushort *)(iVar9 + 1) >> (uVar10 & 0x1f) & 7;
+    uVar8 = (int)(u_int)*(ushort *)(iVar9 + 1) >> (uVar10 & 0x1f) & 7;
   }
   if ((bVar1 & 2) != 0) {
     uVar2 = *puVar6;
     puVar6 = (ushort *)((int)puVar6 + (iVar5 >> 3));
-    uVar8 = uVar8 | ((int)(uint)uVar2 >> (uVar10 & 0x1f) & 7U) << 4;
+    uVar8 = uVar8 | ((int)(u_int)uVar2 >> (uVar10 & 0x1f) & 7U) << 4;
   }
   if ((bVar1 & 4) != 0) {
-    uVar8 = uVar8 | ((int)(uint)*puVar6 >> (uVar10 & 0x1f) & 7U) << 8;
+    uVar8 = uVar8 | ((int)(u_int)*puVar6 >> (uVar10 & 0x1f) & 7U) << 8;
   }
-  return (uint)((uVar8 & chanMask) != 0);
+  return (u_int)((uVar8 & chanMask) != 0);
 }
 
 
@@ -600,9 +600,9 @@ void G2Anim_GetSegChannelValue
 
 {
   _G2AnimSegValue_Type *p_Var1;
-  uint uVar2;
+  u_int uVar2;
   
-  uVar2 = (uint)channelMask;
+  uVar2 = (u_int)channelMask;
   G2Anim_UpdateStoredFrame(anim);
   _segValues.trans._0_4_ = *(undefined4 *)&anim->rootTrans;
   _segValues.trans.z = (anim->rootTrans).z;
@@ -687,35 +687,35 @@ void G2Anim_GetRootMotionFromTimeForDuration
 {
   short sVar1;
   ushort uVar2;
-  uint uVar3;
+  u_int uVar3;
   long lVar4;
-  uint uVar5;
+  u_int uVar5;
   _G2AnimInterpInfo_Type *p_Var6;
-  uint uVar7;
+  u_int uVar7;
   undefined4 uVar8;
   undefined4 uVar9;
   undefined4 uVar10;
   _G2AnimInterpStateBlock_Type *p_Var11;
-  uint uVar12;
+  u_int uVar12;
   _G2AnimKeylist_Type *p_Var13;
   int iVar14;
-  uint uVar15;
+  u_int uVar15;
   _G2Anim_Type local_d8;
   
-  uVar5 = (uint)(ushort)duration;
-  uVar7 = (uint)(ushort)durationStart;
+  uVar5 = (u_int)(ushort)duration;
+  uVar7 = (u_int)(ushort)durationStart;
   p_Var6 = anim->section[0].interpInfo;
   if (p_Var6 != (_G2AnimInterpInfo_Type *)0x0) {
     p_Var11 = p_Var6->stateBlockList;
     if (p_Var11 != (_G2AnimInterpStateBlock_Type *)0x0) {
       lVar4 = _G2AnimAlphaTable_GetValue
                         (p_Var6->alphaTable,((int)(uVar7 << 0x10) >> 4) / (int)p_Var6->duration);
-      setCopReg(2,0xc800,(uint)(ushort)p_Var11->quatInfo[0].srcTrans.x);
-      setCopReg(2,0xd000,(uint)(ushort)p_Var11->quatInfo[0].srcTrans.y);
-      setCopReg(2,0xd800,(uint)(ushort)p_Var11->quatInfo[0].srcTrans.z);
-      setCopReg(2,0x4800,(uint)(ushort)p_Var11->quatInfo[0].destTrans.x);
-      setCopReg(2,0x5000,(uint)(ushort)p_Var11->quatInfo[0].destTrans.y);
-      setCopReg(2,0x5800,(uint)(ushort)p_Var11->quatInfo[0].destTrans.z);
+      setCopReg(2,0xc800,(u_int)(ushort)p_Var11->quatInfo[0].srcTrans.x);
+      setCopReg(2,0xd000,(u_int)(ushort)p_Var11->quatInfo[0].srcTrans.y);
+      setCopReg(2,0xd800,(u_int)(ushort)p_Var11->quatInfo[0].srcTrans.z);
+      setCopReg(2,0x4800,(u_int)(ushort)p_Var11->quatInfo[0].destTrans.x);
+      setCopReg(2,0x5000,(u_int)(ushort)p_Var11->quatInfo[0].destTrans.y);
+      setCopReg(2,0x5800,(u_int)(ushort)p_Var11->quatInfo[0].destTrans.z);
       setCopReg(2,0x4000,lVar4);
       copFunction(2,0x1a8003e);
       uVar8 = getCopReg(2,0xc800);
@@ -733,7 +733,7 @@ void G2Anim_GetRootMotionFromTimeForDuration
   }
   p_Var13 = anim->section[0].keylist;
   sVar1 = p_Var13->timePerKey;
-  uVar12 = (uint)(ushort)p_Var13->timePerKey;
+  uVar12 = (u_int)(ushort)p_Var13->timePerKey;
   uVar15 = uVar12 * ((int)durationStart / (int)sVar1 + 1);
   uVar2 = p_Var13->keyCount;
   local_d8.sectionCount = '\x01';
@@ -750,7 +750,7 @@ void G2Anim_GetRootMotionFromTimeForDuration
     do {
       local_d8.section[0].elapsedTime = (short)uVar7;
       if ((short)(sVar1 * (uVar2 - 1)) <= local_d8.section[0].elapsedTime) {
-        uVar12 = (uint)p_Var13->s0TailTime;
+        uVar12 = (u_int)p_Var13->s0TailTime;
       }
       _G2AnimSection_UpdateStoredFrameFromData(local_d8.section,&local_d8);
       uVar3 = uVar15 - uVar7;
@@ -763,12 +763,12 @@ void G2Anim_GetRootMotionFromTimeForDuration
       else {
         iVar14 = 0x1000;
       }
-      setCopReg(2,0xc800,(uint)(ushort)motionVector->x);
-      setCopReg(2,0xd000,(uint)(ushort)motionVector->y);
-      setCopReg(2,0xd800,(uint)(ushort)motionVector->z);
-      setCopReg(2,0x4800,(uint)(ushort)_segValues.trans.x);
-      setCopReg(2,0x5000,(uint)(ushort)_segValues.trans.y);
-      setCopReg(2,0x5800,(uint)(ushort)_segValues.trans.z);
+      setCopReg(2,0xc800,(u_int)(ushort)motionVector->x);
+      setCopReg(2,0xd000,(u_int)(ushort)motionVector->y);
+      setCopReg(2,0xd800,(u_int)(ushort)motionVector->z);
+      setCopReg(2,0x4800,(u_int)(ushort)_segValues.trans.x);
+      setCopReg(2,0x5000,(u_int)(ushort)_segValues.trans.y);
+      setCopReg(2,0x5800,(u_int)(ushort)_segValues.trans.z);
       setCopReg(2,0x4000,iVar14);
       copFunction(2,0x1a8003e);
       uVar8 = getCopReg(2,0xc800);
@@ -855,7 +855,7 @@ void G2AnimSection_SwitchToKeylistAtTime
       G2Anim_GetRootMotionOverInterval
                 (anim,section->storedTime,section->elapsedTime,(_G2SVector3_Type *)&local_28);
     }
-    local_28 = CONCAT22((short)((uint)local_28 >> 0x10) + (anim->rootTrans).y,
+    local_28 = CONCAT22((short)((u_int)local_28 >> 0x10) + (anim->rootTrans).y,
                         (short)local_28 + (anim->rootTrans).x);
     local_24 = local_24 + (anim->rootTrans).z;
   }
@@ -999,9 +999,9 @@ short G2AnimSection_UpdateOverInterval(_G2AnimSection_Type *section,short interv
       anim = _G2AnimSection_GetAnim(section);
       anim->flags = anim->flags | 1;
       intervalStart = section->elapsedTime;
-      iVar3 = (uint)intervalStart + ((int)interval * section->speedAdjustment >> 0xc);
-      iVar2 = (iVar3 - (uint)(ushort)p_Var4->duration) * 0x10000;
-      sVar1 = (short)((uint)iVar2 >> 0x10);
+      iVar3 = (u_int)intervalStart + ((int)interval * section->speedAdjustment >> 0xc);
+      iVar2 = (iVar3 - (u_int)(ushort)p_Var4->duration) * 0x10000;
+      sVar1 = (short)((u_int)iVar2 >> 0x10);
       if (iVar2 >> 0x10 < 0) {
         section->elapsedTime = (short)iVar3;
         sVar1 = 0;
@@ -1023,7 +1023,7 @@ short G2AnimSection_UpdateOverInterval(_G2AnimSection_Type *section,short interv
         }
         section->alarmFlags = section->alarmFlags | 0x10;
         if (section->callback != (_func_8 *)0x0) {
-          (*section->callback)(anim,(uint)section->sectionID,3,0,0,section->callbackData);
+          (*section->callback)(anim,(u_int)section->sectionID,3,0,0,section->callbackData);
         }
       }
     }
@@ -1103,10 +1103,10 @@ short G2AnimSection_AdvanceOverInterval(_G2AnimSection_Type *section,short inter
   int iVar7;
   long lVar8;
   int iVar9;
-  uint uVar10;
+  u_int uVar10;
   int iVar11;
   undefined4 uVar12;
-  uint uVar13;
+  u_int uVar13;
   undefined4 local_38;
   short local_34;
   ushort local_30;
@@ -1125,8 +1125,8 @@ short G2AnimSection_AdvanceOverInterval(_G2AnimSection_Type *section,short inter
     else {
       uVar2 = section->loopEndTime;
     }
-    uVar13 = (uint)uVar2;
-    lVar8 = (uint)startTime + ((int)interval * section->speedAdjustment >> 0xc);
+    uVar13 = (u_int)uVar2;
+    lVar8 = (u_int)startTime + ((int)interval * section->speedAdjustment >> 0xc);
     psVar4 = section->swAlarmTable;
     if (psVar4 == (short *)0x0) {
       G2AnimSection_ClearAlarm(section,0x20);
@@ -1141,7 +1141,7 @@ short G2AnimSection_AdvanceOverInterval(_G2AnimSection_Type *section,short inter
               ((section->storedTime < 1 && (iVar11 == iVar7)))) &&
              (section->alarmFlags = section->alarmFlags | 0x20, section->callback != (_func_8 *)0x0)
              ) {
-            (*section->callback)(anim,(uint)section->sectionID,5,iVar11,iVar9,section->callbackData)
+            (*section->callback)(anim,(u_int)section->sectionID,5,iVar11,iVar9,section->callbackData)
             ;
           }
           psVar4 = psVar4 + 1;
@@ -1166,11 +1166,11 @@ short G2AnimSection_AdvanceOverInterval(_G2AnimSection_Type *section,short inter
       else {
         section->alarmFlags = section->alarmFlags | 4;
         G2AnimSection_JumpToTime(section,section->loopStartTime);
-        lVar8 = (uint)(ushort)section->loopStartTime + uVar10;
+        lVar8 = (u_int)(ushort)section->loopStartTime + uVar10;
         local_30 = (short)lVar8 - intervalEnd;
         _G2AnimSection_TriggerEffects
-                  (section,(short)(((uint)(ushort)section->loopStartTime - 1) * 0x10000 >> 0x10),
-                   (short)((uint)(lVar8 * 0x10000) >> 0x10));
+                  (section,(short)(((u_int)(ushort)section->loopStartTime - 1) * 0x10000 >> 0x10),
+                   (short)((u_int)(lVar8 * 0x10000) >> 0x10));
         if ((int)intervalEnd <= lVar8 * 0x10000 >> 0x10) {
           lVar8 = uVar13 - 1;
         }
@@ -1182,7 +1182,7 @@ short G2AnimSection_AdvanceOverInterval(_G2AnimSection_Type *section,short inter
       if (section->callback != (_func_8 *)0x0) {
         p_Var5 = _G2AnimSection_GetAnim(section);
         lVar6 = (*section->callback)
-                          (p_Var5,(uint)section->sectionID,uVar12,(int)(short)lVar8,(int)sVar3,
+                          (p_Var5,(u_int)section->sectionID,uVar12,(int)(short)lVar8,(int)sVar3,
                            section->callbackData);
         intervalEnd = (short)lVar6;
         if ((int)intervalEnd == (int)(short)lVar8) {
@@ -1207,8 +1207,8 @@ short G2AnimSection_AdvanceOverInterval(_G2AnimSection_Type *section,short inter
         section->flags = section->flags | 0x80;
       }
       if ((section->flags & 2) == 0) goto LAB_80093634;
-      uVar13 = (uint)(ushort)section->loopEndTime;
-      uVar10 = (uint)local_30;
+      uVar13 = (u_int)(ushort)section->loopEndTime;
+      uVar10 = (u_int)local_30;
       iVar7 = uVar10 << 0x10;
     }
     sVar3 = 0;
@@ -1282,7 +1282,7 @@ short G2AnimSection_RewindOverInterval(_G2AnimSection_Type *section,short interv
   int iVar3;
   _G2Anim_Type *p_Var4;
   long lVar5;
-  uint uVar6;
+  u_int uVar6;
   short sVar7;
   undefined4 uVar8;
   undefined4 local_30;
@@ -1297,9 +1297,9 @@ short G2AnimSection_RewindOverInterval(_G2AnimSection_Type *section,short interv
     intervalStart = section->elapsedTime;
     section->flags = bVar1 | 4;
     if ((bVar1 & 2) != 0) {
-      uVar6 = (uint)(ushort)section->loopStartTime;
+      uVar6 = (u_int)(ushort)section->loopStartTime;
     }
-    iVar3 = (uint)intervalStart - ((int)interval * section->speedAdjustment >> 0xc);
+    iVar3 = (u_int)intervalStart - ((int)interval * section->speedAdjustment >> 0xc);
     sVar7 = (short)iVar3;
     iVar3 = uVar6 - iVar3;
     sVar2 = (short)iVar3;
@@ -1325,7 +1325,7 @@ short G2AnimSection_RewindOverInterval(_G2AnimSection_Type *section,short interv
       if (section->callback != (_func_8 *)0x0) {
         p_Var4 = _G2AnimSection_GetAnim(section);
         lVar5 = (*section->callback)
-                          (p_Var4,(uint)section->sectionID,uVar8,(int)sVar7,(int)sVar2,
+                          (p_Var4,(u_int)section->sectionID,uVar8,(int)sVar7,(int)sVar2,
                            section->callbackData);
         targetTime = (short)lVar5;
         if (((section->flags & 2) == 0) && ((int)targetTime == (int)sVar7)) {
@@ -1384,13 +1384,13 @@ void _G2Anim_BuildTransformsNoControllers(_G2Anim_Type *anim)
 {
   int iVar1;
   _G2Bool_Enum bRootTransUpdated;
-  uint *puVar2;
-  uint uVar3;
+  u_int *puVar2;
+  u_int uVar3;
   ushort *puVar4;
   int segIndex;
   _G2Matrix_Type *segMatrix;
   int iVar5;
-  ulong local_38 [4];
+  u_long local_38 [4];
   
   segMatrix = anim->segMatrices;
   uVar3 = 1;
@@ -1404,7 +1404,7 @@ void _G2Anim_BuildTransformsNoControllers(_G2Anim_Type *anim)
     puVar4 = (ushort *)&anim->modelData->segmentList->parent;
     puVar2 = local_38;
     do {
-      iVar1 = (uint)*puVar4 << 0x10;
+      iVar1 = (u_int)*puVar4 << 0x10;
       if ((iVar1 >> 0x10 != -1) && ((local_38[iVar1 >> 0x15] & 1 << (*puVar4 & 0x1f)) != 0)) {
         *puVar2 = *puVar2 | uVar3;
       }
@@ -1494,26 +1494,26 @@ void _G2Anim_BuildSegTransformNoControllers
   setCopControlWord(2,0x1000,*(undefined4 *)(parentMatrix->rotScale + 4));
   setCopControlWord(2,0x1800,*(undefined4 *)(parentMatrix->rotScale + 6));
   setCopControlWord(2,0x2000,*(undefined4 *)(parentMatrix->rotScale + 8));
-  setCopReg(2,0x4800,(uint)(ushort)segMatrix->rotScale[0]);
-  setCopReg(2,0x5000,(uint)(ushort)segMatrix->rotScale[3]);
-  setCopReg(2,0x5800,(uint)(ushort)segMatrix->rotScale[6]);
+  setCopReg(2,0x4800,(u_int)(ushort)segMatrix->rotScale[0]);
+  setCopReg(2,0x5000,(u_int)(ushort)segMatrix->rotScale[3]);
+  setCopReg(2,0x5800,(u_int)(ushort)segMatrix->rotScale[6]);
   copFunction(2,0x49e012);
   uVar1 = segMatrix->rotScale[2];
   uVar7 = getCopReg(2,0x4800);
   uVar8 = getCopReg(2,0x5000);
   uVar9 = getCopReg(2,0x5800);
-  setCopReg(2,0x4800,(uint)(ushort)segMatrix->rotScale[1]);
-  setCopReg(2,0x5000,(uint)(ushort)segMatrix->rotScale[4]);
-  setCopReg(2,0x5800,(uint)(ushort)segMatrix->rotScale[7]);
+  setCopReg(2,0x4800,(u_int)(ushort)segMatrix->rotScale[1]);
+  setCopReg(2,0x5000,(u_int)(ushort)segMatrix->rotScale[4]);
+  setCopReg(2,0x5800,(u_int)(ushort)segMatrix->rotScale[7]);
   segMatrix->rotScale[0] = (short)uVar7;
   segMatrix->rotScale[3] = (short)uVar8;
   copFunction(2,0x49e012);
   uVar7 = getCopReg(2,0x4800);
   uVar8 = getCopReg(2,0x5000);
   uVar6 = getCopReg(2,0x5800);
-  setCopReg(2,0x4800,(uint)uVar1);
-  setCopReg(2,0x5000,(uint)(ushort)segMatrix->rotScale[5]);
-  setCopReg(2,0x5800,(uint)(ushort)segMatrix->rotScale[8]);
+  setCopReg(2,0x4800,(u_int)uVar1);
+  setCopReg(2,0x5000,(u_int)(ushort)segMatrix->rotScale[5]);
+  setCopReg(2,0x5800,(u_int)(ushort)segMatrix->rotScale[8]);
   segMatrix->rotScale[6] = (short)uVar9;
   segMatrix->rotScale[1] = (short)uVar7;
   copFunction(2,0x49e012);
@@ -1592,13 +1592,13 @@ void _G2Anim_BuildSegTransformNoControllers
 void _G2Anim_BuildSegLocalRotMatrix(_G2AnimSegValue_Type *segValue,_G2Matrix_Type *segMatrix)
 
 {
-  uint local_10;
+  u_int local_10;
   ushort local_c;
   
   if (segValue->bIsQuat == 0) {
     local_c = *(ushort *)((int)&segValue->rotQuat + 4) & 0xfff;
-    local_10 = *(uint *)&segValue->rotQuat & 0xfff0fff;
-    RotMatrixZYX((ushort *)&local_10,(uint *)segMatrix);
+    local_10 = *(u_int *)&segValue->rotQuat & 0xfff0fff;
+    RotMatrixZYX((ushort *)&local_10,(u_int *)segMatrix);
   }
   else {
     G2Quat_ToMatrix_S((short *)segValue,(short *)segMatrix);
@@ -1637,13 +1637,13 @@ void _G2Anim_BuildSegLocalRotMatrix(_G2AnimSegValue_Type *segValue,_G2Matrix_Typ
 	/* end block 4 */
 	// End Line: 4721
 
-void wombat(uchar *segKeyList,int flagBitOffset,_G2AnimSegKeyflagInfo_Type *kfInfo)
+void wombat(u_char *segKeyList,int flagBitOffset,_G2AnimSegKeyflagInfo_Type *kfInfo)
 
 {
-  uint uVar1;
+  u_int uVar1;
   
-  *(uchar **)&kfInfo->stream = segKeyList + (flagBitOffset >> 5) * 4;
-  uVar1 = *(uint *)(segKeyList + (flagBitOffset >> 5) * 4);
+  *(u_char **)&kfInfo->stream = segKeyList + (flagBitOffset >> 5) * 4;
+  uVar1 = *(u_int *)(segKeyList + (flagBitOffset >> 5) * 4);
   kfInfo->bitCount = 0x20 - (flagBitOffset & 0x1fU);
   kfInfo->flags = uVar1 >> (flagBitOffset & 0x1fU);
   return;
@@ -1680,16 +1680,16 @@ void wombat(uchar *segKeyList,int flagBitOffset,_G2AnimSegKeyflagInfo_Type *kfIn
 	/* end block 4 */
 	// End Line: 4764
 
-ulong kangaroo(_G2AnimSegKeyflagInfo_Type *kfInfo)
+u_long kangaroo(_G2AnimSegKeyflagInfo_Type *kfInfo)
 
 {
   int iVar1;
-  ulong *puVar2;
-  uint uVar3;
-  ulong uVar4;
+  u_long *puVar2;
+  u_int uVar3;
+  u_long uVar4;
   
   uVar4 = 0;
-  if (kfInfo->stream != (ulong *)0x0) {
+  if (kfInfo->stream != (u_long *)0x0) {
     uVar4 = kfInfo->flags & 7;
     iVar1 = kfInfo->bitCount + -3;
     kfInfo->flags = kfInfo->flags >> 3;
@@ -1772,16 +1772,16 @@ void _G2Anim_InitializeSegValue(_G2Anim_Type *anim,_G2AnimSegValue_Type *segValu
 
 {
   _Segment *p_Var1;
-  uint uVar2;
+  u_int uVar2;
   
   *(undefined4 *)((int)&segValue->rotQuat + 4) = 0x10000000;
   *(undefined4 *)&segValue->scale = 0x10001000;
   *(undefined4 *)&segValue->rotQuat = 0;
   (segValue->scale).z = 0x1000;
   p_Var1 = anim->modelData->segmentList + segIndex;
-  uVar2 = *(uint *)&p_Var1->pz;
+  uVar2 = *(u_int *)&p_Var1->pz;
   *(undefined4 *)&segValue->trans = *(undefined4 *)&p_Var1->px;
-  *(uint *)&(segValue->trans).z = uVar2 & 0xffff;
+  *(u_int *)&(segValue->trans).z = uVar2 & 0xffff;
   return;
 }
 
@@ -1843,41 +1843,41 @@ void _G2AnimSection_InitStatus(_G2AnimSection_Type *section,_G2Anim_Type *anim)
 
 {
   _func_7 **pp_Var1;
-  uint uVar2;
-  ulong uVar3;
-  ulong uVar4;
+  u_int uVar2;
+  u_long uVar3;
+  u_long uVar4;
   byte bVar5;
   int flagBitOffset;
   _func_7 ***segKeyList;
-  uint uVar6;
-  uint segIndex;
+  u_int uVar6;
+  u_int segIndex;
   _G2AnimChanStatus_Type *status;
   _G2AnimChanStatusBlock_Type *p_Var7;
   _G2AnimChanStatusBlock_Type *p_Var8;
   _G2AnimSegValue_Type *segValue;
-  uint uVar9;
+  u_int uVar9;
   _G2AnimDecompressChannelInfo_Type local_68;
   _G2AnimSegKeyflagInfo_Type local_58;
   _G2AnimSegKeyflagInfo_Type local_48;
   _G2AnimSegKeyflagInfo_Type local_38;
   
-  flagBitOffset = (uint)section->firstSeg * 3 + 8;
+  flagBitOffset = (u_int)section->firstSeg * 3 + 8;
   segKeyList = &section->keylist->sectionData + section->keylist->sectionCount;
   bVar5 = *(byte *)segKeyList;
   segIndex = anim->modelData->numSegments * 3 + 7U & 0xfffffff8;
-  local_58.stream = (ulong *)0x0;
-  local_48.stream = (ulong *)0x0;
-  local_38.stream = (ulong *)0x0;
+  local_58.stream = (u_long *)0x0;
+  local_48.stream = (u_long *)0x0;
+  local_38.stream = (u_long *)0x0;
   if ((bVar5 & 1) != 0) {
-    wombat((uchar *)segKeyList,flagBitOffset,&local_58);
+    wombat((u_char *)segKeyList,flagBitOffset,&local_58);
     flagBitOffset = flagBitOffset + segIndex;
   }
   if ((bVar5 & 2) != 0) {
-    wombat((uchar *)segKeyList,flagBitOffset,&local_48);
+    wombat((u_char *)segKeyList,flagBitOffset,&local_48);
     flagBitOffset = flagBitOffset + segIndex;
   }
   if ((bVar5 & 4) != 0) {
-    wombat((uchar *)segKeyList,flagBitOffset,&local_38);
+    wombat((u_char *)segKeyList,flagBitOffset,&local_38);
   }
   status = (_G2AnimChanStatus_Type *)0x0;
   _G2Anim_FreeChanStatusBlockList(section->chanStatusBlockList);
@@ -1885,7 +1885,7 @@ void _G2AnimSection_InitStatus(_G2AnimSection_Type *section,_G2Anim_Type *anim)
   local_68.keylist = section->keylist;
   section->chanStatusBlockList = (_G2AnimChanStatusBlock_Type *)0x0;
   local_68.chanData = (&section->keylist->sectionData)[section->sectionID];
-  segIndex = (uint)section->firstSeg;
+  segIndex = (u_int)section->firstSeg;
   segValue = &_segValues + segIndex;
   uVar9 = segIndex + section->segCount;
   p_Var8 = (_G2AnimChanStatusBlock_Type *)&section->chanStatusBlockList;
@@ -1904,7 +1904,7 @@ void _G2AnimSection_InitStatus(_G2AnimSection_Type *section,_G2Anim_Type *anim)
             bVar5 = 0;
           }
           if (bVar5 == 0) {
-            pp_Var1 = (_func_7 **)((int)local_68.chanData + (uint)(local_68.keylist)->keyCount * 2);
+            pp_Var1 = (_func_7 **)((int)local_68.chanData + (u_int)(local_68.keylist)->keyCount * 2);
           }
           else {
             pp_Var1 = local_68.chanData + 1;
@@ -2005,18 +2005,18 @@ void FooBar(_G2AnimSection_Type *section,_G2Anim_Type *anim,int decompressedKey,
            long timeOffset)
 
 {
-  uint uVar1;
-  ulong uVar2;
-  ulong uVar3;
-  ulong uVar4;
+  u_int uVar1;
+  u_long uVar2;
+  u_long uVar3;
+  u_long uVar4;
   _func_7 **pp_Var5;
-  uint uVar6;
+  u_int uVar6;
   byte bVar7;
   int flagBitOffset;
   _func_7 ***segKeyList;
   _G2AnimSegValue_Type *p_Var8;
-  uint segIndex;
-  uint uVar9;
+  u_int segIndex;
+  u_int uVar9;
   _G2AnimChanStatus_Type *status;
   _G2AnimSegValue_Type *segValue;
   _G2AnimChanStatusBlock_Type *p_Var10;
@@ -2027,25 +2027,25 @@ void FooBar(_G2AnimSection_Type *section,_G2Anim_Type *anim,int decompressedKey,
   _G2AnimDecompressChannelInfo_Type local_58;
   _G2AnimDecompressChannelInfo_Type local_48;
   _G2AnimChanStatus_Type local_38 [2];
-  uint local_30;
+  u_int local_30;
   
-  flagBitOffset = (uint)section->firstSeg * 3 + 8;
+  flagBitOffset = (u_int)section->firstSeg * 3 + 8;
   segKeyList = &section->keylist->sectionData + section->keylist->sectionCount;
   bVar7 = *(byte *)segKeyList;
   segIndex = anim->modelData->numSegments * 3 + 7U & 0xfffffff8;
-  local_88.stream = (ulong *)0x0;
-  local_78.stream = (ulong *)0x0;
-  local_68.stream = (ulong *)0x0;
+  local_88.stream = (u_long *)0x0;
+  local_78.stream = (u_long *)0x0;
+  local_68.stream = (u_long *)0x0;
   if ((bVar7 & 1) != 0) {
-    wombat((uchar *)segKeyList,flagBitOffset,&local_88);
+    wombat((u_char *)segKeyList,flagBitOffset,&local_88);
     flagBitOffset = flagBitOffset + segIndex;
   }
   if ((bVar7 & 2) != 0) {
-    wombat((uchar *)segKeyList,flagBitOffset,&local_78);
+    wombat((u_char *)segKeyList,flagBitOffset,&local_78);
     flagBitOffset = flagBitOffset + segIndex;
   }
   if ((bVar7 & 4) != 0) {
-    wombat((uchar *)segKeyList,flagBitOffset,&local_68);
+    wombat((u_char *)segKeyList,flagBitOffset,&local_68);
   }
   p_Var10 = section->chanStatusBlockList;
   local_98.keylist = section->keylist;
@@ -2055,7 +2055,7 @@ void FooBar(_G2AnimSection_Type *section,_G2Anim_Type *anim,int decompressedKey,
   if ((timeOffset != 0) &&
      (local_58.targetKey = targetKey + 1, local_58.keylist = local_98.keylist,
      local_58.chanData = local_98.chanData, local_58.storedKey = targetKey,
-     (int)(uint)section->keylist->keyCount <= local_58.targetKey)) {
+     (int)(u_int)section->keylist->keyCount <= local_58.targetKey)) {
     if ((section->flags & 2) == 0) {
       timeOffset = 0;
     }
@@ -2066,7 +2066,7 @@ void FooBar(_G2AnimSection_Type *section,_G2Anim_Type *anim,int decompressedKey,
       local_48.chanData = local_98.chanData;
     }
   }
-  segIndex = (uint)section->firstSeg;
+  segIndex = (u_int)section->firstSeg;
   segValue = &_segValues + segIndex;
   local_30 = segIndex + section->segCount;
   local_98.storedKey = decompressedKey;
@@ -2089,7 +2089,7 @@ void FooBar(_G2AnimSection_Type *section,_G2Anim_Type *anim,int decompressedKey,
             *(undefined2 *)&p_Var8->rotQuat =
                  *(undefined2 *)((int)local_98.chanData + targetKey * 2);
             local_98.chanData =
-                 (_func_7 **)((int)local_98.chanData + (uint)(local_98.keylist)->keyCount * 2);
+                 (_func_7 **)((int)local_98.chanData + (u_int)(local_98.keylist)->keyCount * 2);
           }
           else {
             if (bVar7 == 0x20) {
@@ -2130,13 +2130,13 @@ void FooBar(_G2AnimSection_Type *section,_G2Anim_Type *anim,int decompressedKey,
                   local_58.chanData = local_98.chanData;
                   local_48.chanData = local_98.chanData;
                   local_38[0] = (_G2AnimChanStatus_Type)
-                                ((uint)local_38[0] & 0xffff0000 | (uint)*(ushort *)pp_Var5);
+                                ((u_int)local_38[0] & 0xffff0000 | (u_int)*(ushort *)pp_Var5);
                 }
                 else {
                   if (bVar7 == 0x20) {
                     local_38[0] = (_G2AnimChanStatus_Type)
-                                  ((uint)local_38[0] & 0xffff0000 |
-                                  (uint)*(ushort *)&p_Var8->rotQuat);
+                                  ((u_int)local_38[0] & 0xffff0000 |
+                                  (u_int)*(ushort *)&p_Var8->rotQuat);
                     local_58.chanData = local_98.chanData;
                     local_48.chanData = local_98.chanData;
                   }
@@ -2151,16 +2151,16 @@ void FooBar(_G2AnimSection_Type *section,_G2Anim_Type *anim,int decompressedKey,
                 }
               }
             }
-            uVar6 = ((uint)local_38[0] & 0xffff) - (uint)*(ushort *)&p_Var8->rotQuat;
+            uVar6 = ((u_int)local_38[0] & 0xffff) - (u_int)*(ushort *)&p_Var8->rotQuat;
             uVar1 = uVar6 & 0xffff;
             if (0x7ff < (int)(uVar6 * 0x10000) >> 0x10) {
-              uVar1 = (uint)(ushort)((short)uVar6 - 0x1000);
+              uVar1 = (u_int)(ushort)((short)uVar6 - 0x1000);
             }
             local_38[0].keyData = (short)uVar1;
             if (local_38[0].keyData < -0x7ff) {
-              uVar1 = (uint)(ushort)(local_38[0].keyData + 0x1000);
+              uVar1 = (u_int)(ushort)(local_38[0].keyData + 0x1000);
             }
-            local_38[0] = (_G2AnimChanStatus_Type)((uint)local_38[0] & 0xffff0000 | uVar1);
+            local_38[0] = (_G2AnimChanStatus_Type)((u_int)local_38[0] & 0xffff0000 | uVar1);
             if (segIndex != 0) {
               local_38[0].keyData = (short)uVar1;
               *(short *)&p_Var8->rotQuat =
@@ -2256,7 +2256,7 @@ void _G2AnimSection_UpdateStoredFrameFromData(_G2AnimSection_Type *section,_G2An
 _G2Anim_Type * _G2AnimSection_GetAnim(_G2AnimSection_Type *section)
 
 {
-  return (_G2Anim_Type *)((int)section - ((uint)section->sectionID * 0x30 + 0x24));
+  return (_G2Anim_Type *)((int)section - ((u_int)section->sectionID * 0x30 + 0x24));
 }
 
 
@@ -2298,16 +2298,16 @@ void _G2AnimSection_TriggerEffects(_G2AnimSection_Type *section,short startTime,
     cVar1 = p_Var4->type;
     while (cVar1 != -1) {
       bVar2 = p_Var4->sizeAndSection;
-      if (((((uint)bVar2 & 0xf) == (uint)section->sectionID) &&
+      if (((((u_int)bVar2 & 0xf) == (u_int)section->sectionID) &&
           (((sVar3 = p_Var4->keyframeID * (ushort)p_Var6->s0TailTime, startTime < sVar3 ||
             ((sVar3 == 0 && (startTime <= sVar3)))) && (sVar3 <= endTime)))) &&
          (section->callback != (_func_8 *)0x0)) {
         p_Var5 = _G2AnimSection_GetAnim(section);
         (*section->callback)
-                  (p_Var5,(uint)section->sectionID,6,(int)p_Var4->type,p_Var4 + 1,
+                  (p_Var5,(u_int)section->sectionID,6,(int)p_Var4->type,p_Var4 + 1,
                    section->callbackData);
       }
-      p_Var4 = (_G2AnimFxHeader_Type *)(&p_Var4->sizeAndSection + (((uint)bVar2 & 0xf0) >> 2));
+      p_Var4 = (_G2AnimFxHeader_Type *)(&p_Var4->sizeAndSection + (((u_int)bVar2 & 0xf0) >> 2));
       cVar1 = p_Var4->type;
     }
   }
@@ -2376,10 +2376,10 @@ long _G2AnimAlphaTable_GetValue(_G2AnimAlphaTable_Type *table,long trueAlpha)
 
 {
   int iVar1;
-  uint uVar2;
+  u_int uVar2;
   
   if (table != (_G2AnimAlphaTable_Type *)0x0) {
-    uVar2 = ((uint)table->size - 1) * trueAlpha;
+    uVar2 = ((u_int)table->size - 1) * trueAlpha;
     iVar1 = (int)uVar2 >> 0xc;
     return (int)table[iVar1 + 1] +
            ((int)(((int)table[iVar1 + 2] - (int)table[iVar1 + 1]) * (uVar2 & 0xfff)) >> 0xc);

@@ -62,7 +62,7 @@ int GetControllerInput(int *ZDirection,long *controlCommand)
 
 {
   int iVar1;
-  uint uVar2;
+  u_int uVar2;
   
   if (((gameTrackerX.playerInstance)->flags & 0x100U) == 0) {
     uVar2 = *controlCommand;
@@ -464,7 +464,7 @@ LAB_800a1c10:
                             (&instance->position,&(Raziel.Senses.EngagedList[6].instance)->position)
     ;
     uVar1 = MON_FacingOffset(Raziel.Senses.EngagedList[6].instance,instance);
-    if (((uint)uVar1 & 0xfff) - 0x2ab < 0xaab) {
+    if (((u_int)uVar1 & 0xfff) - 0x2ab < 0xaab) {
       return 0;
     }
     Raziel.steeringVelocity = 0x80;
@@ -615,7 +615,7 @@ int SteerAutoFace(_Instance *instance,long *controlCommand)
   _G2Bool_Enum _Var3;
   _G2Anim_Type *anim;
   int iVar4;
-  uint uVar5;
+  u_int uVar5;
   _G2SVector3_Type local_20;
   
   current = MATH3D_AngleFromPosToPos
@@ -630,7 +630,7 @@ int SteerAutoFace(_Instance *instance,long *controlCommand)
     Raziel.autoFaceAnim = 0;
     Raziel.autoFaceRootAngle = 0;
   }
-  uVar5 = (uint)bVar1;
+  uVar5 = (u_int)bVar1;
   if (iVar4 + 0x5ffU < 0x480) {
     uVar5 = 2;
     Raziel.autoFaceAnim = 1;
@@ -764,7 +764,7 @@ void SteerWallcrawling(_Instance *instance)
 
 {
   Raziel.Bearing =
-       AngleDiff((short)(((uint)(ushort)ExtraRot->y - 0x800) * 0x10000 >> 0x10),
+       AngleDiff((short)(((u_int)(ushort)ExtraRot->y - 0x800) * 0x10000 >> 0x10),
                  (short)Raziel.ZDirection);
   return;
 }

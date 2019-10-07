@@ -45,13 +45,13 @@ void G2Quat_Slerp_VM(long ratio,_G2Quat_Type *quatA,_G2Quat_Type *quatB,_G2Quat_
   undefined4 uVar8;
   undefined4 uVar9;
   undefined4 uVar10;
-  uint uVar11;
+  u_int uVar11;
   
-  setCopReg(2,0x4800,(uint)(ushort)quatA->x);
-  setCopReg(2,0x5000,(uint)(ushort)quatA->y);
-  setCopReg(2,0x5800,(uint)(ushort)quatA->z);
-  setCopControlWord(2,0,(uint)(ushort)(quatB->x | quatB->y));
-  setCopControlWord(2,0x800,(uint)(ushort)quatB->z);
+  setCopReg(2,0x4800,(u_int)(ushort)quatA->x);
+  setCopReg(2,0x5000,(u_int)(ushort)quatA->y);
+  setCopReg(2,0x5800,(u_int)(ushort)quatA->z);
+  setCopControlWord(2,0,(u_int)(ushort)(quatB->x | quatB->y));
+  setCopControlWord(2,0x800,(u_int)(ushort)quatB->z);
   copFunction(2,0x49e012);
   uVar11 = getCopReg(2,0x19);
   iVar5 = (uVar11 & 0xffff) + ((int)quatA->w * (int)quatB->w >> 0xc);
@@ -73,14 +73,14 @@ void G2Quat_Slerp_VM(long ratio,_G2Quat_Type *quatA,_G2Quat_Type *quatB,_G2Quat_
   if (bVar1) {
     ratio = -ratio;
   }
-  setCopReg(2,0x4800,(uint)(ushort)quatA->x);
-  setCopReg(2,0x5000,(uint)(ushort)quatA->y);
-  setCopReg(2,0x5800,(uint)(ushort)quatA->z);
+  setCopReg(2,0x4800,(u_int)(ushort)quatA->x);
+  setCopReg(2,0x5000,(u_int)(ushort)quatA->y);
+  setCopReg(2,0x5800,(u_int)(ushort)quatA->z);
   setCopReg(2,0x4000,iVar5);
   copFunction(2,0x198003d);
-  setCopReg(2,0x4800,(uint)(ushort)quatB->x);
-  setCopReg(2,0x5000,(uint)(ushort)quatB->y);
-  setCopReg(2,0x5800,(uint)(ushort)quatB->z);
+  setCopReg(2,0x4800,(u_int)(ushort)quatB->x);
+  setCopReg(2,0x5000,(u_int)(ushort)quatB->y);
+  setCopReg(2,0x5800,(u_int)(ushort)quatB->z);
   setCopReg(2,0x4000,ratio);
   copFunction(2,0x1a8003e);
   iVar6 = (iVar5 * quatA->w >> 0xc) + (ratio * quatB->w >> 0xc);

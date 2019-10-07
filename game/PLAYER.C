@@ -14,7 +14,7 @@
 void PLAYER_TurnHead(_Instance *instance,short *rotx,short *rotz,GameTracker *gameTracker)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   
   uVar1 = INSTANCE_Query(instance,1);
   if ((uVar1 & 1) == 0) {
@@ -40,7 +40,7 @@ void PLAYER_TurnHead(_Instance *instance,short *rotx,short *rotz,GameTracker *ga
 long PLAYER_OkToLookAround(_Instance *instance)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   long lVar2;
   
   uVar1 = INSTANCE_Query(instance,1);
@@ -72,7 +72,7 @@ long PLAYER_OkToLookAround(_Instance *instance)
 void PLAYER_SetLookAround(_Instance *instance)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   
   uVar1 = INSTANCE_Query(instance,1);
   if ((uVar1 & 1) == 0) {
@@ -98,7 +98,7 @@ void PLAYER_SetLookAround(_Instance *instance)
 void PLAYER_ReSetLookAround(_Instance *instance)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   
   uVar1 = INSTANCE_Query(instance,1);
   if ((uVar1 & 1) == 0) {

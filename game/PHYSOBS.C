@@ -204,7 +204,7 @@ int CheckPhysOb(_Instance *instance)
   if (instance->data == (void *)0x0) {
     return 0;
   }
-  return (uint)(*(short *)((int)instance->data + 4) == -0x4ff5);
+  return (u_int)(*(short *)((int)instance->data + 4) == -0x4ff5);
 }
 
 
@@ -356,7 +356,7 @@ int GetPhysicalAbility(_Instance *instance)
     if (*(short *)((int)pvVar1 + 2) == 3) {
       return (int)*(short *)((int)instance->extraData + 4);
     }
-    return (uint)*(ushort *)((int)pvVar1 + 6);
+    return (u_int)*(ushort *)((int)pvVar1 + 6);
   }
   return 0;
 }
@@ -411,7 +411,7 @@ int AnyBlocksInMotion(void)
     if (((((p_Var1->object->oflags2 & 0x40000U) != 0) &&
          ((*(ushort *)((int)p_Var1->data + 6) & 8) != 0)) &&
         (*(short *)((int)p_Var1->data + 4) == -0x4ff5)) &&
-       ((*(uint *)p_Var1->extraData & 0x14e) != 0)) break;
+       ((*(u_int *)p_Var1->extraData & 0x14e) != 0)) break;
     p_Var1 = p_Var1->next;
   }
   return 1;
@@ -530,7 +530,7 @@ void ThrowPhysOb(_Instance *instance,evObjectThrowData *throwData)
 {
   short angle;
   int iVar1;
-  ulong uVar2;
+  u_long uVar2;
   MATRIX *pMVar3;
   _Instance *parent;
   int NewAnim;
@@ -538,7 +538,7 @@ void ThrowPhysOb(_Instance *instance,evObjectThrowData *throwData)
   int iVar5;
   void *pvVar6;
   _Instance *Inst;
-  uint *puVar7;
+  u_int *puVar7;
   int iVar8;
   _PCollideInfo local_60;
   SVECTOR local_30;
@@ -557,7 +557,7 @@ void ThrowPhysOb(_Instance *instance,evObjectThrowData *throwData)
     throwData = (evObjectThrowData *)
                 SetObjectThrowData((void *)0x0,(_SVector *)0x0,0,0,0x180,0,0x40,-0x400);
   }
-  puVar7 = (uint *)instance->extraData;
+  puVar7 = (u_int *)instance->extraData;
   puVar7[2] = 0;
   *puVar7 = *puVar7 & 0xffffff7e | 0x1010;
   angle = throwData->initialXRot;
@@ -578,14 +578,14 @@ void ThrowPhysOb(_Instance *instance,evObjectThrowData *throwData)
     else {
       angle = (parent->LinkParent->rotation).z;
     }
-    PhysicsSetVelFromZRot(instance,angle,(uint)throwData->speed);
+    PhysicsSetVelFromZRot(instance,angle,(u_int)throwData->speed);
     instance->zVel = (int)throwData->zVel;
     break;
   case 1:
     Inst = *(_Instance **)&throwData->data;
     *(_Instance **)(puVar7 + 2) = Inst;
     angle = MATH3D_AngleFromPosToPos(&instance->position,&Inst->position);
-    PhysicsSetVelFromZRot(instance,angle,(uint)throwData->speed);
+    PhysicsSetVelFromZRot(instance,angle,(u_int)throwData->speed);
     instance->zVel = 0;
     uVar2 = INSTANCE_Query(Inst,0xc);
     iVar5 = instance->xVel;
@@ -614,7 +614,7 @@ void ThrowPhysOb(_Instance *instance,evObjectThrowData *throwData)
     break;
   case 2:
     angle = MATH3D_AngleFromPosToPos(&instance->position,(_Position *)&throwData->data);
-    PhysicsSetVelFromZRot(instance,angle,(uint)throwData->speed);
+    PhysicsSetVelFromZRot(instance,angle,(u_int)throwData->speed);
     iVar5 = instance->xVel;
     iVar4 = instance->yVel;
     NewAnim = iVar5;
@@ -641,7 +641,7 @@ void ThrowPhysOb(_Instance *instance,evObjectThrowData *throwData)
     instance->zVel = iVar5 / NewAnim - (iVar8 >> 1);
     break;
   case 3:
-    PhysicsSetVelFromRot(instance,(_Rotation *)&throwData->data,(uint)throwData->speed);
+    PhysicsSetVelFromRot(instance,(_Rotation *)&throwData->data,(u_int)throwData->speed);
     break;
   case 4:
     instance->xVel = (int)*(short *)&throwData->data;
@@ -740,15 +740,15 @@ int PushPhysOb(_Instance *instance,short x,short y,short PathNumber,_Instance *F
 
 {
   int iVar1;
-  uint *puVar2;
-  uint uVar3;
+  u_int *puVar2;
+  u_int uVar3;
   short local_20;
   short local_1e [3];
   
   uVar3 = 0;
   if (((*(ushort *)((int)instance->data + 6) & 8) != 0) &&
      (uVar3 = 0, *(short *)((int)instance->data + 4) == -0x4ff5)) {
-    puVar2 = (uint *)instance->extraData;
+    puVar2 = (u_int *)instance->extraData;
     uVar3 = 0;
     if ((*puVar2 & 0x214a) == 0) {
       local_20 = x;
@@ -815,10 +815,10 @@ void ResetSwitchPhysOb(_Instance *instance)
   iVar2 = CheckPhysObFamily(instance,2);
   if (iVar2 != 0) {
     pvVar3 = instance->data;
-    *(uint *)instance->extraData = *(uint *)instance->extraData | 0x800;
+    *(u_int *)instance->extraData = *(u_int *)instance->extraData | 0x800;
     if (((*(ushort *)((int)instance->extraData + 0x14) & 2) != 0) &&
        (bVar1 = *(byte *)((int)pvVar3 + 0x10), bVar1 != 0)) {
-      G2EmulationInstanceSetAnimation(instance,0,(uint)bVar1,0,0);
+      G2EmulationInstanceSetAnimation(instance,0,(u_int)bVar1,0,0);
       G2EmulationInstanceSetMode(instance,0,1);
     }
   }
@@ -853,7 +853,7 @@ int SwitchPhysOb(_Instance *instance)
   ushort uVar1;
   int iVar2;
   int iVar3;
-  uint uVar4;
+  u_int uVar4;
   void *pvVar5;
   void *pvVar6;
   
@@ -861,18 +861,18 @@ int SwitchPhysOb(_Instance *instance)
   iVar2 = CheckPhysObFamily(instance,2);
   iVar3 = 1;
   if (iVar2 != 0) {
-    *(uint *)instance->extraData = *(uint *)instance->extraData | 0x800;
+    *(u_int *)instance->extraData = *(u_int *)instance->extraData | 0x800;
     pvVar6 = instance->extraData;
     uVar1 = *(ushort *)((int)pvVar6 + 0x14);
     if ((uVar1 & 1) == 0) {
       if ((uVar1 & 2) == 0) {
         if (*(byte *)((int)pvVar5 + 0xe) != 0xff) {
-          G2EmulationInstanceSetAnimation(instance,0,(uint)*(byte *)((int)pvVar5 + 0xe),0,0);
+          G2EmulationInstanceSetAnimation(instance,0,(u_int)*(byte *)((int)pvVar5 + 0xe),0,0);
         }
       }
       else {
         *(ushort *)((int)pvVar6 + 0x14) = uVar1 | 5;
-        G2EmulationInstanceSetAnimation(instance,0,(uint)*(byte *)((int)pvVar5 + 0xc),0,0);
+        G2EmulationInstanceSetAnimation(instance,0,(u_int)*(byte *)((int)pvVar5 + 0xc),0,0);
         if (*(short *)((int)pvVar5 + 10) == 7) {
           *(undefined2 *)((int)pvVar6 + 0x16) = 0x400;
         }
@@ -888,14 +888,14 @@ int SwitchPhysOb(_Instance *instance)
     else {
       if ((uVar1 & 2) == 0) {
         if (*(byte *)((int)pvVar5 + 0xf) != 0xff) {
-          G2EmulationInstanceSetAnimation(instance,0,(uint)*(byte *)((int)pvVar5 + 0xf),0,0);
+          G2EmulationInstanceSetAnimation(instance,0,(u_int)*(byte *)((int)pvVar5 + 0xf),0,0);
           G2EmulationInstanceSetMode(instance,0,1);
           *(ushort *)((int)pvVar6 + 0x14) = *(ushort *)((int)pvVar6 + 0x14) | 2;
         }
       }
       else {
         *(ushort *)((int)pvVar6 + 0x14) = uVar1 & 0xfffe | 8;
-        G2EmulationInstanceSetAnimation(instance,0,(uint)*(byte *)((int)pvVar5 + 0xd),0,0);
+        G2EmulationInstanceSetAnimation(instance,0,(u_int)*(byte *)((int)pvVar5 + 0xd),0,0);
         G2EmulationInstanceSetMode(instance,0,1);
         (instance->rotation).z = (instance->rotation).z + *(short *)((int)pvVar6 + 0x16);
         if (*(short *)((int)pvVar5 + 10) == 7) {
@@ -982,8 +982,8 @@ int InteractPhysOb(_Instance *instance,_Instance *Force,int LinkNode,int Action)
 
 {
   int Mode;
-  uint *puVar1;
-  uint uVar2;
+  u_int *puVar1;
+  u_int uVar2;
   _PhysObLight *pLight;
   byte bVar3;
   _Model **pp_Var4;
@@ -995,7 +995,7 @@ int InteractPhysOb(_Instance *instance,_Instance *Force,int LinkNode,int Action)
   if (Mode == 0) {
     return 1;
   }
-  puVar1 = (uint *)instance->extraData;
+  puVar1 = (u_int *)instance->extraData;
   if (*(char *)((int)pvVar5 + 0x14) != -1) {
     if (Action == 2) {
       instance_00 = Force->LinkChild;
@@ -1023,16 +1023,16 @@ int InteractPhysOb(_Instance *instance,_Instance *Force,int LinkNode,int Action)
         }
       }
     }
-    if (Action == (uint)*(ushort *)((int)pvVar5 + 0xc)) {
+    if (Action == (u_int)*(ushort *)((int)pvVar5 + 0xc)) {
       instance->flags = instance->flags | 8;
     }
-    if (Action == (uint)*(ushort *)((int)pvVar5 + 0xe)) {
+    if (Action == (u_int)*(ushort *)((int)pvVar5 + 0xe)) {
       instance->flags = instance->flags | 0x10;
     }
   }
   if ((*(byte *)((int)pvVar5 + 0x11) == 0xff) || ((*(ushort *)((int)pvVar5 + 6) & 0x8000) == 0))
   goto LAB_80069d10;
-  G2EmulationInstanceSetAnimation(instance,0,(uint)*(byte *)((int)pvVar5 + 0x11),0,0);
+  G2EmulationInstanceSetAnimation(instance,0,(u_int)*(byte *)((int)pvVar5 + 0x11),0,0);
   bVar3 = *(byte *)((int)pvVar5 + 0x15) & 0x30;
   if (bVar3 == 0x10) {
     Mode = 1;
@@ -1252,7 +1252,7 @@ LAB_8006a0a0:
   }
   local_14 = local_28.z + sVar1 & 0xfc00;
 LAB_8006a0dc:
-  iVar4 = (int)(((uint)local_28.x - (uint)local_18) * 0x10000) >> 0x10;
+  iVar4 = (int)(((u_int)local_28.x - (u_int)local_18) * 0x10000) >> 0x10;
   if (iVar4 < 0) {
     iVar4 = iVar4 + -0x96;
   }
@@ -1363,7 +1363,7 @@ void PhysOb_AlignPush(_Instance *instance,int x,int y,int path,PhysObData *Data)
   _G2Anim_Type *anim;
   short sVar1;
   _G2SVector3_Type local_60;
-  uint auStack88 [6];
+  u_int auStack88 [6];
   undefined auStack64 [24];
   _G2EulerAngles_Type local_28;
   
@@ -1384,7 +1384,7 @@ void PhysOb_AlignPush(_Instance *instance,int x,int y,int path,PhysObData *Data)
   G2Anim_SetController_Vector(anim,0,0x4c,&local_60);
   local_60.z = -sVar1;
   RotMatrixZYX((ushort *)&local_60,auStack88);
-  MulMatrix0(auStack88,(ushort *)(instance->matrix + 2),(uint *)(_G2Matrix_Type *)auStack64);
+  MulMatrix0(auStack88,(ushort *)(instance->matrix + 2),(u_int *)(_G2Matrix_Type *)auStack64);
   G2EulerAngles_FromMatrix(&local_28,(_G2Matrix_Type *)auStack64,0x15);
   local_60.x = local_28.x;
   local_60.y = local_28.y;
@@ -1422,8 +1422,8 @@ int FlipPhysOb(_Instance *instance,short x,short y,_Instance *Force)
   short sVar1;
   _Instance *p_Var2;
   int iVar3;
-  uint *puVar4;
-  uint uVar5;
+  u_int *puVar4;
+  u_int uVar5;
   short local_20;
   short local_1e [3];
   
@@ -1434,7 +1434,7 @@ int FlipPhysOb(_Instance *instance,short x,short y,_Instance *Force)
     p_Var2 = PHYSOBS_IsAPushBlockAttached(instance);
     uVar5 = 0;
     if (p_Var2 == (_Instance *)0x0) {
-      puVar4 = (uint *)instance->extraData;
+      puVar4 = (u_int *)instance->extraData;
       uVar5 = 0;
       if ((*puVar4 & 0x2000) == 0) {
         iVar3 = AnyBlocksInMotion();
@@ -1584,9 +1584,9 @@ int PickUpPhysOb(_Instance *instance,short Steps,_Instance *Force,int LinkNode)
 {
   int iVar1;
   _PhysObLight *pLight;
-  uint *puVar2;
+  u_int *puVar2;
   
-  puVar2 = (uint *)instance->extraData;
+  puVar2 = (u_int *)instance->extraData;
   if (instance->LinkParent == (_Instance *)0x0) {
     if ((*puVar2 & 0x2000000) != 0) {
       return 1;
@@ -1781,22 +1781,22 @@ void PHYSOB_SetLightTable(_PhysObLight *pLight,LightInstance *li,short burnAmpli
   int iVar1;
   LightTableEntry *pLVar2;
   LightTableEntry *pLVar3;
-  uint uVar4;
-  uint uVar5;
+  u_int uVar4;
+  u_int uVar5;
   
-  uVar5 = (int)((uint)(ushort)gameTrackerX.vblCount * (int)pLight->speed) %
-          ((uint)pLight->length << 0xc);
+  uVar5 = (int)((u_int)(ushort)gameTrackerX.vblCount * (int)pLight->speed) %
+          ((u_int)pLight->length << 0xc);
   pLVar2 = pLight->lightTable;
   uVar4 = uVar5 & 0xfff;
   iVar1 = (int)uVar5 >> 0xc;
   uVar5 = iVar1 + 1;
   pLVar3 = pLVar2 + iVar1;
-  if (uVar5 == (uint)pLight->length) {
+  if (uVar5 == (u_int)pLight->length) {
     uVar5 = 0;
   }
   li->segment = pLight->segment;
   pLVar2 = pLVar2 + uVar5;
-  iVar1 = ((int)(((uint)(ushort)pLVar3->radius +
+  iVar1 = ((int)(((u_int)(ushort)pLVar3->radius +
                  ((int)(((int)pLVar2->radius - (int)pLVar3->radius) * uVar4) >> 0xc)) * 0x10000) >>
           0x10) * (int)burnAmplitude >> 0xc;
   li->radius = (short)iVar1;
@@ -1884,9 +1884,9 @@ void PHYSOB_EndLighting(_Instance *instance,_PhysObLight *pLight)
 void PHYSOB_StartLighting(_Instance *instance,_PhysObLight *pLight)
 
 {
-  uint *puVar1;
+  u_int *puVar1;
   
-  puVar1 = (uint *)instance->extraData;
+  puVar1 = (u_int *)instance->extraData;
   if (*(short *)(puVar1 + 0xd) < 0) {
     *(short *)(puVar1 + 0xd) = -*(short *)(puVar1 + 0xd);
   }
@@ -1989,9 +1989,9 @@ void PHYSOB_StartBurning(_Instance *instance,_PhysObLight *pLight)
 void PHYSOB_StopLighting(_Instance *instance,_PhysObLight *pLight)
 
 {
-  uint *puVar1;
+  u_int *puVar1;
   
-  puVar1 = (uint *)instance->extraData;
+  puVar1 = (u_int *)instance->extraData;
   *(undefined2 *)(puVar1 + 0xd) = 0xf000;
   *puVar1 = *puVar1 | 0x8000;
   return;
@@ -2030,9 +2030,9 @@ void PHYSOB_StopLighting(_Instance *instance,_PhysObLight *pLight)
 void PHYSOB_StopBurning(_Instance *instance,_PhysObLight *pLight)
 
 {
-  uint *puVar1;
+  u_int *puVar1;
   
-  puVar1 = (uint *)instance->extraData;
+  puVar1 = (u_int *)instance->extraData;
   *(undefined2 *)(puVar1 + 0xd) = 0xf000;
   *puVar1 = *puVar1 | 0x48000;
   return;
@@ -2061,9 +2061,9 @@ void PHYSOB_StopBurning(_Instance *instance,_PhysObLight *pLight)
 void PHYSOB_EndBurning(_Instance *instance,_PhysObLight *pLight)
 
 {
-  uint *puVar1;
+  u_int *puVar1;
   
-  puVar1 = (uint *)instance->extraData;
+  puVar1 = (u_int *)instance->extraData;
   FX_EndInstanceEffects(instance);
   PHYSOB_EndLighting(instance,pLight);
   *(undefined2 *)(puVar1 + 0xd) = 0;
@@ -2213,9 +2213,9 @@ void InitPhysicalObject(_Instance *instance,GameTracker *gameTracker)
 
 {
   int segment;
-  uint *puVar1;
-  ulong uVar2;
-  uint uVar3;
+  u_int *puVar1;
+  u_long uVar2;
+  u_int uVar3;
   INICommand *pIVar4;
   _PhysObLight *pLight;
   byte bVar5;
@@ -2242,8 +2242,8 @@ void InitPhysicalObject(_Instance *instance,GameTracker *gameTracker)
     return;
   }
   pvVar9 = instance->data;
-  puVar1 = (uint *)MEMPACK_Malloc(0x48,'\x1a');
-  *(uint **)&instance->extraData = puVar1;
+  puVar1 = (u_int *)MEMPACK_Malloc(0x48,'\x1a');
+  *(u_int **)&instance->extraData = puVar1;
   *puVar1 = 1;
   *(undefined2 *)((int)puVar1 + 0x1a) = 0x1001;
   *(undefined2 *)((int)puVar1 + 0x22) = 0x1002;
@@ -2282,7 +2282,7 @@ void InitPhysicalObject(_Instance *instance,GameTracker *gameTracker)
     G2EmulationInstanceSetTotalSections(instance,1);
     G2EmulationInstanceSetStartAndEndSegment
               (instance,0,0,
-               (short)(((uint)*(ushort *)
+               (short)(((u_int)*(ushort *)
                                &instance->object->modelList[instance->currentModel]->numSegments - 1
                        ) * 0x10000 >> 0x10));
     G2EmulationInstanceSetAnimation(instance,0,0,0,0);
@@ -2292,7 +2292,7 @@ void InitPhysicalObject(_Instance *instance,GameTracker *gameTracker)
     pvVar8 = instance->data;
     G2EmulationInstanceInitSection(instance,0,PhysobAnimCallback,instance);
     if (*(byte *)((int)pvVar8 + 0x10) != 0xff) {
-      G2EmulationInstanceSetAnimation(instance,0,(uint)*(byte *)((int)pvVar8 + 0x10),0,0);
+      G2EmulationInstanceSetAnimation(instance,0,(u_int)*(byte *)((int)pvVar8 + 0x10),0,0);
       G2EmulationInstanceSetMode(instance,0,2);
     }
     sVar6 = *(short *)((int)pvVar8 + 8);
@@ -2326,7 +2326,7 @@ void InitPhysicalObject(_Instance *instance,GameTracker *gameTracker)
           if (*(char *)((int)pvVar8 + 0x19) == -1) {
             *(undefined *)((int)pvVar8 + 0x19) = 0;
           }
-          G2EmulationInstanceSetAnimation(instance,0,(uint)*(byte *)((int)pvVar8 + 0x19),0,0);
+          G2EmulationInstanceSetAnimation(instance,0,(u_int)*(byte *)((int)pvVar8 + 0x19),0,0);
           G2EmulationInstanceInitSection(instance,0,PhysobAnimCallback,instance);
         }
         segment = CheckPhysObFamily(instance,7);
@@ -2351,7 +2351,7 @@ void InitPhysicalObject(_Instance *instance,GameTracker *gameTracker)
         local_50.x = (instance->rotation).x;
         local_50.y = (instance->rotation).y;
         local_50.z = (instance->rotation).z;
-        RotMatrixZYX((ushort *)&local_50,(uint *)&_Stack72);
+        RotMatrixZYX((ushort *)&local_50,(u_int *)&_Stack72);
         G2EulerAngles_FromMatrix(&local_28,&_Stack72,0x15);
         local_50.x = local_28.x;
         local_50.y = local_28.y;
@@ -2427,7 +2427,7 @@ LAB_8006b3ec:
   }
 LAB_8006b3f4:
   if ((*(byte *)((int)pvVar8 + 0x10) != 0xff) && ((*(ushort *)((int)pvVar9 + 6) & 0x8000) != 0)) {
-    G2EmulationInstanceSetAnimation(instance,0,(uint)*(byte *)((int)pvVar8 + 0x10),0,0);
+    G2EmulationInstanceSetAnimation(instance,0,(u_int)*(byte *)((int)pvVar8 + 0x10),0,0);
   }
   if (*(short *)((int)pvVar8 + 0x1c) == 2) {
     segment = SetObjectIdleData(1,instance);
@@ -2439,7 +2439,7 @@ LAB_8006b65c:
     pIVar4 = INSTANCE_FindIntroCommand(instance,0x15);
     pLight = PhysObGetLight(instance);
     if ((pLight == (_PhysObLight *)0x0) ||
-       ((pIVar4 != (INICommand *)0x0 && (((uint)pIVar4[1] & 1) != 0)))) {
+       ((pIVar4 != (INICommand *)0x0 && (((u_int)pIVar4[1] & 1) != 0)))) {
       PHYSOB_EndBurning(instance,pLight);
     }
     else {
@@ -2633,21 +2633,21 @@ void ProcessPhysicalObject(_Instance *instance,GameTracker *gameTracker)
   _PhysObLight *pLight;
   int NewAnim;
   _Instance *p_Var3;
-  uint uVar4;
-  ulong uVar5;
+  u_int uVar4;
+  u_long uVar5;
   Level *pLVar6;
   int iVar7;
-  uint uVar8;
+  u_int uVar8;
   short sVar9;
   void *pvVar10;
   short burnAmplitude;
-  uint *puVar11;
+  u_int *puVar11;
   int iVar12;
   _PCollideInfo _Stack96;
   SVECTOR local_30;
   SVECTOR local_28;
   
-  puVar11 = (uint *)instance->extraData;
+  puVar11 = (u_int *)instance->extraData;
   if (((instance == (gameTracker->gameData).asmData.lightInstances[0].lightInstance) &&
       (pLight = PhysObGetLight(instance), pLight != (_PhysObLight *)0x0)) &&
      ((gameTracker->gameData).asmData.lightInstances[0].lightInstance == instance)) {
@@ -2670,7 +2670,7 @@ void ProcessPhysicalObject(_Instance *instance,GameTracker *gameTracker)
     instance->flags2 = uVar4;
   }
   if (((*puVar11 & 0x2000000) != 0) &&
-     (NewAnim = (uint)(ushort)instance->fadeValue + (gameTrackerX.timeMult >> 5),
+     (NewAnim = (u_int)(ushort)instance->fadeValue + (gameTrackerX.timeMult >> 5),
      instance->fadeValue = (short)NewAnim, 0xfff < NewAnim * 0x10000 >> 0x10)) {
     instance->flags = instance->flags | 0x20;
   }
@@ -2678,7 +2678,7 @@ void ProcessPhysicalObject(_Instance *instance,GameTracker *gameTracker)
     uVar2 = *(short *)(puVar11 + 0xd) + 0x88;
     if (*(short *)(puVar11 + 0xd) < 0) {
       *(ushort *)(puVar11 + 0xd) = uVar2;
-      if (-1 < (int)((uint)uVar2 << 0x10)) {
+      if (-1 < (int)((u_int)uVar2 << 0x10)) {
         *(undefined2 *)(puVar11 + 0xd) = 0;
         *puVar11 = *puVar11 & 0xffff7fff;
         if ((*(ushort *)((int)instance->data + 6) & 0x20) != 0) {
@@ -2718,7 +2718,7 @@ void ProcessPhysicalObject(_Instance *instance,GameTracker *gameTracker)
         else {
           uVar2 = instance->fadeValue - 0x40;
           if ((instance->fadeValue != 0) &&
-             (instance->fadeValue = uVar2, (int)((uint)uVar2 << 0x10) < 0)) {
+             (instance->fadeValue = uVar2, (int)((u_int)uVar2 << 0x10) < 0)) {
             instance->fadeValue = 0;
           }
         }
@@ -2778,7 +2778,7 @@ void ProcessPhysicalObject(_Instance *instance,GameTracker *gameTracker)
   if (((*puVar11 & 0x100000) != 0) && (NewAnim = CheckPhysObFamily(instance,5), NewAnim != 0)) {
     bVar1 = *(byte *)((int)instance->data + 0x10);
     if (bVar1 != 0xff) {
-      G2EmulationInstanceSetAnimation(instance,0,(uint)bVar1,0,0);
+      G2EmulationInstanceSetAnimation(instance,0,(u_int)bVar1,0,0);
       G2EmulationInstanceSetMode(instance,0,2);
     }
     *puVar11 = *puVar11 & 0xffefffff;
@@ -2832,7 +2832,7 @@ void ProcessPhysicalObject(_Instance *instance,GameTracker *gameTracker)
     burnAmplitude = 0xa0;
     iVar7 = 0xa00000;
   }
-  sVar9 = (short)((uint)iVar7 >> 0x10);
+  sVar9 = (short)((u_int)iVar7 >> 0x10);
   if (iVar7 >> 0x10 < NewAnim) {
     sVar9 = (short)NewAnim;
     burnAmplitude = (short)NewAnim;
@@ -2921,17 +2921,17 @@ code_r0x8006c048:
     local_28.vy = local_30.vy;
     PHYSICS_CheckLineInWorld(instance,&_Stack96);
     instance->zAccl = 0;
-    burnAmplitude = (short)((uint)local_30.vz - (uint)local_28.vz);
-    if (0x3bf < (int)(((uint)local_30.vz - (uint)local_28.vz) * 0x10000) >> 0x10) {
+    burnAmplitude = (short)((u_int)local_30.vz - (u_int)local_28.vz);
+    if (0x3bf < (int)(((u_int)local_30.vz - (u_int)local_28.vz) * 0x10000) >> 0x10) {
       uVar2 = (instance->position).z;
       burnAmplitude =
            uVar2 - (*(ushort *)((int)puVar11 + 0x12) +
-                   ((short)((uint)((((int)(((uint)*(ushort *)((int)puVar11 + 0x12) - (uint)uVar2) *
+                   ((short)((u_int)((((int)(((u_int)*(ushort *)((int)puVar11 + 0x12) - (u_int)uVar2) *
                                           0x10000) >> 0x10) / 0x280) * 0x10000) >> 0x10) + 1) *
                    -0x280);
     }
     instance->zVel =
-         -(int)(short)((uint)((((int)burnAmplitude * 1000) /
+         -(int)(short)((u_int)((((int)burnAmplitude * 1000) /
                                ((1000 - (int)gameTrackerX.gameData.asmData.MorphTime) * 0x32) <<
                               0x10) >> 4) / gameTrackerX.timeMult);
   }
@@ -3082,7 +3082,7 @@ LAB_8006c274:
 
 /* WARNING: Type propagation algorithm not settling */
 
-ulong PhysicalObjectQuery(_Instance *instance,ulong Query)
+u_long PhysicalObjectQuery(_Instance *instance,u_long Query)
 
 {
   short sVar1;
@@ -3102,15 +3102,15 @@ ulong PhysicalObjectQuery(_Instance *instance,ulong Query)
     if (iVar2 != 0) {
       iVar2 = CheckPhysObFamily(instance,6);
       if (iVar2 == 0) {
-        return (ulong)(MATRIX *)&DAT_00000020;
+        return (u_long)(MATRIX *)&DAT_00000020;
       }
       if ((*(ushort *)((int)instance->data + 8) & 1) == 0) {
-        return (ulong)(MATRIX *)&DAT_00000020;
+        return (u_long)(MATRIX *)&DAT_00000020;
       }
       if ((instance->flags & 0x800U) != 0) {
-        return (ulong)(MATRIX *)0x0;
+        return (u_long)(MATRIX *)0x0;
       }
-      return (ulong)(MATRIX *)&DAT_00000020;
+      return (u_long)(MATRIX *)&DAT_00000020;
     }
     goto switchD_8006c380_caseD_8;
   case 2:
@@ -3134,7 +3134,7 @@ ulong PhysicalObjectQuery(_Instance *instance,ulong Query)
           pMVar5 = (MATRIX *)(int)*(short *)((int)pvVar6 + 10);
         }
         else {
-          pMVar5 = (MATRIX *)((uint)(sVar1 == 7) << 3);
+          pMVar5 = (MATRIX *)((u_int)(sVar1 == 7) << 3);
         }
       }
     }
@@ -3175,8 +3175,8 @@ ulong PhysicalObjectQuery(_Instance *instance,ulong Query)
     }
     else {
       pMVar5 = (MATRIX *)
-               SetPositionData(0,0,(int)(((uint)(ushort)(instance->rotation).z +
-                                         (uint)*(ushort *)((int)instance->extraData + 0x16)) *
+               SetPositionData(0,0,(int)(((u_int)(ushort)(instance->rotation).z +
+                                         (u_int)*(ushort *)((int)instance->extraData + 0x16)) *
                                         0x10000) >> 0x10);
     }
     break;
@@ -3192,7 +3192,7 @@ ulong PhysicalObjectQuery(_Instance *instance,ulong Query)
   case 0xe:
     iVar2 = CheckPhysObFamily(instance,5);
     if (iVar2 != 0) {
-      return (ulong)(instance->matrix + *(ushort *)((int)instance->data + 0x12));
+      return (u_long)(instance->matrix + *(ushort *)((int)instance->data + 0x12));
     }
     goto switchD_8006c380_caseD_8;
   case 0x15:
@@ -3212,7 +3212,7 @@ ulong PhysicalObjectQuery(_Instance *instance,ulong Query)
                SetObjectDraftData(*(short *)((int)pvVar6 + 8),*(ushort *)((int)pvVar6 + 10),
                                   *(ushort *)((int)pvVar6 + 0xc),*(ushort *)((int)pvVar6 + 0x10),
                                   (int)*(short *)((int)pvVar6 + 0xe));
-      return (ulong)pMVar5;
+      return (u_long)pMVar5;
     }
 switchD_8006c380_caseD_8:
     pMVar5 = (MATRIX *)0x0;
@@ -3220,7 +3220,7 @@ switchD_8006c380_caseD_8:
   case 0x17:
     iVar2 = CheckPhysObAbility(instance,0x40);
     if (iVar2 == 0) {
-      return (ulong)(MATRIX *)0x0;
+      return (u_long)(MATRIX *)0x0;
     }
     goto LAB_8006c7ac;
   case 0x18:
@@ -3237,12 +3237,12 @@ LAB_8006c70c:
          (instance->ParentLinkNode == 3)) {
         if ((instance->LinkParent != (_Instance *)0x0) &&
            (instance->LinkParent == gameTrackerX.playerInstance)) {
-          *(uint *)(pMVar5->m + 6) = (uint)*(MATRIX **)pMVar4->m & 0xffffef6f | 0x400004;
-          return (ulong)pMVar5;
+          *(u_int *)(pMVar5->m + 6) = (u_int)*(MATRIX **)pMVar4->m & 0xffffef6f | 0x400004;
+          return (u_long)pMVar5;
         }
         goto LAB_8006c70c;
       }
-      pMVar4 = (MATRIX *)((uint)*(MATRIX **)pMVar4->m | 0x2000000);
+      pMVar4 = (MATRIX *)((u_int)*(MATRIX **)pMVar4->m | 0x2000000);
     }
     *(MATRIX **)(pMVar5->m + 6) = pMVar4;
     break;
@@ -3265,22 +3265,22 @@ LAB_8006c7ac:
       pMVar5 = (MATRIX *)instance->data;
     }
   }
-  return (ulong)pMVar5;
+  return (u_long)pMVar5;
 switchD_8006c380_caseD_1a:
   iVar2 = CheckPhysObFamily(instance,2);
   if (iVar2 != 0) {
     if ((*(ushort *)((int)instance->extraData + 0x14) & 2) != 0) {
-      return (ulong)pMVar5;
+      return (u_long)pMVar5;
     }
-    return (ulong)(MATRIX *)((uint)pMVar5 ^ 1);
+    return (u_long)(MATRIX *)((u_int)pMVar5 ^ 1);
   }
   if (*(short *)((int)instance->data + 10) != 0) {
-    return (ulong)pMVar5;
+    return (u_long)pMVar5;
   }
-  if ((*(uint *)instance->extraData & 0x2000) == 0) {
-    return (ulong)pMVar5;
+  if ((*(u_int *)instance->extraData & 0x2000) == 0) {
+    return (u_long)pMVar5;
   }
-  return (ulong)(MATRIX *)((uint)pMVar5 ^ 1);
+  return (u_long)(MATRIX *)((u_int)pMVar5 ^ 1);
 }
 
 
@@ -3409,18 +3409,18 @@ switchD_8006c380_caseD_1a:
 	/* end block 2 */
 	// End Line: 6188
 
-void PhysicalObjectPost(_Instance *instance,ulong Message,ulong Data)
+void PhysicalObjectPost(_Instance *instance,u_long Message,u_long Data)
 
 {
-  uint *puVar1;
-  uint uVar2;
+  u_int *puVar1;
+  u_int uVar2;
   int Mode;
   _PhysObLight *pLight;
-  uint uVar3;
-  uint *puVar4;
+  u_int uVar3;
+  u_int *puVar4;
   void *pvVar5;
   
-  puVar4 = (uint *)instance->extraData;
+  puVar4 = (u_int *)instance->extraData;
   if (Message == 0x800010) {
     ThrowPhysOb(instance,(evObjectThrowData *)Data);
     return;
@@ -3437,7 +3437,7 @@ LAB_8006ce3c:
     }
     if (Message < 0x200006) {
       if ((undefined *)Message == &DAT_00100007) {
-        puVar1 = *(uint **)(Data + 4);
+        puVar1 = *(u_int **)(Data + 4);
         puVar4[5] = *puVar1;
         uVar2 = puVar1[1];
         *puVar4 = uVar2 & 0xffeff7ff;
@@ -3480,7 +3480,7 @@ LAB_8006ce3c:
       if ((undefined *)Message != &DAT_00100008) {
         return;
       }
-      if (puVar4 == (uint *)0x0) {
+      if (puVar4 == (u_int *)0x0) {
         return;
       }
       *(short *)((int)puVar4 + 0xe) = *(short *)((int)puVar4 + 0xe) + *(short *)Data;
@@ -3593,7 +3593,7 @@ LAB_8006ce54:
       if (Data != 2) {
         return;
       }
-      puVar4 = (uint *)instance->extraData;
+      puVar4 = (u_int *)instance->extraData;
       *(undefined2 *)(puVar4 + 0xd) = 0;
       *puVar4 = *puVar4 & 0xffff7fff;
       PHYSOB_EndBurning(instance,pLight);
@@ -3642,7 +3642,7 @@ LAB_8006ce54:
     if (*(short *)((int)pvVar5 + 10) != 0) {
       return;
     }
-    puVar4 = (uint *)instance->extraData;
+    puVar4 = (u_int *)instance->extraData;
     if (Message == 0x800021) {
       *puVar4 = *puVar4 & 0xffffdfff;
       return;
@@ -3661,12 +3661,12 @@ LAB_8006ce54:
     if ((Mode == 0) && (gameTrackerX.gameData.asmData.MorphType != 0)) {
       return;
     }
-    InteractPhysOb(instance,*(_Instance **)Data,(uint)*(ushort *)(Data + 4),
-                   (uint)*(ushort *)(Data + 0xe));
+    InteractPhysOb(instance,*(_Instance **)Data,(u_int)*(ushort *)(Data + 4),
+                   (u_int)*(ushort *)(Data + 0xe));
     return;
   }
   pvVar5 = instance->data;
-  switch((int)(((uint)*(ushort *)((int)pvVar5 + 8) - 1) * 0x10000) >> 0x10) {
+  switch((int)(((u_int)*(ushort *)((int)pvVar5 + 8) - 1) * 0x10000) >> 0x10) {
   case 0:
     HEALTHU_Pickup(instance);
     break;
@@ -3682,9 +3682,9 @@ LAB_8006ce54:
   case 5:
     if ((*(char *)((int)pvVar5 + 0x11) != -1) &&
        (uVar2 = G2EmulationInstanceQueryAnimation(instance,0),
-       uVar2 != (uint)*(byte *)((int)pvVar5 + 0x11))) {
+       uVar2 != (u_int)*(byte *)((int)pvVar5 + 0x11))) {
       printf("Collect %s\n");
-      G2EmulationInstanceSetAnimation(instance,0,(uint)*(byte *)((int)pvVar5 + 0x11),0,0);
+      G2EmulationInstanceSetAnimation(instance,0,(u_int)*(byte *)((int)pvVar5 + 0x11),0,0);
       Mode = 1;
 LAB_8006cf40:
       G2EmulationInstanceSetMode(instance,0,Mode);
@@ -3724,11 +3724,11 @@ long PhysobAnimCallback(_G2Anim_Type *anim,int sectionID,_G2AnimCallbackMsg_Enum
                        long messageDataA,long messageDataB,void *data)
 
 {
-  uint uVar1;
-  uint *puVar2;
+  u_int uVar1;
+  u_int *puVar2;
   
   if (message == G2ANIM_MSG_DONE) {
-    puVar2 = *(uint **)((int)data + 0x168);
+    puVar2 = *(u_int **)((int)data + 0x168);
     G2AnimSection_SetPaused(anim->section + sectionID);
     uVar1 = *puVar2;
     *puVar2 = uVar1 | 0x100000;
@@ -3931,17 +3931,17 @@ void CollidePhysicalObject(_Instance *instance,GameTracker *gameTracker)
   long lVar8;
   _CollideInfo *p_Var9;
   PhysObSplinter *pPVar10;
-  ulong uVar11;
+  u_long uVar11;
   int iVar12;
   void **ppvVar13;
   FXSplinter *splintDef;
-  uint uVar14;
+  u_int uVar14;
   void *pvVar15;
   void *pvVar16;
   SVECTOR *nrml;
   void *pvVar17;
   _CollideInfo *collideInfo;
-  uint *puVar18;
+  u_int *puVar18;
   _Instance *instance_00;
   void *pvVar19;
   short local_78;
@@ -3958,7 +3958,7 @@ void CollidePhysicalObject(_Instance *instance,GameTracker *gameTracker)
   pvVar19 = (void *)0x0;
   bVar5 = true;
   collideInfo = (_CollideInfo *)instance->collideInfo;
-  puVar18 = (uint *)instance->extraData;
+  puVar18 = (u_int *)instance->extraData;
   nrml = &collideInfo->point0;
   Data = CheckPhysObFamily(instance,7);
   if ((((Data == 0) || (*(int *)((int)instance->extraData + 4) != 8)) ||
@@ -3985,7 +3985,7 @@ void CollidePhysicalObject(_Instance *instance,GameTracker *gameTracker)
         return;
       }
       if (instance_00 != (_Instance *)0x0) {
-        if ((*(uint *)&collideInfo->flags & 0xffff0000) == 0x1010000) {
+        if ((*(u_int *)&collideInfo->flags & 0xffff0000) == 0x1010000) {
           return;
         }
         if ((instance_00->object->oflags2 & 0x40000U) != 0) {
@@ -3997,7 +3997,7 @@ void CollidePhysicalObject(_Instance *instance,GameTracker *gameTracker)
           return;
         }
         if ((*(ushort *)
-              (*(int *)(*(int *)collideInfo->level + 0x34) + (uint)*(ushort *)((int)pvVar19 + 10) +
+              (*(int *)(*(int *)collideInfo->level + 0x34) + (u_int)*(ushort *)((int)pvVar19 + 10) +
               10) & 0x1000) == 0) {
           return;
         }
@@ -4057,7 +4057,7 @@ void CollidePhysicalObject(_Instance *instance,GameTracker *gameTracker)
       Data = CheckPhysObFamily(instance,7);
       if ((((Data != 0) && (pvVar19 != (void *)0x0)) && (*(ushort *)((int)pvVar19 + 10) != 0xffff))
          && ((*(ushort *)
-               (*(int *)(*(int *)collideInfo->level + 0x34) + (uint)*(ushort *)((int)pvVar19 + 10) +
+               (*(int *)(*(int *)collideInfo->level + 0x34) + (u_int)*(ushort *)((int)pvVar19 + 10) +
                10) & 0x1000) != 0)) {
         return;
       }
@@ -4387,7 +4387,7 @@ void TurnOnCollisionPhysOb(_Instance *instance,int coll)
 {
   PhysObWeaponAttributes *pPVar1;
   
-  *(uint *)instance->extraData = *(uint *)instance->extraData & 0xfeffffff;
+  *(u_int *)instance->extraData = *(u_int *)instance->extraData & 0xfeffffff;
   pPVar1 = PhysObGetWeapon(instance);
   if (pPVar1 != (PhysObWeaponAttributes *)0x0) {
     if ((coll & 2U) != 0) {
@@ -4489,21 +4489,21 @@ int GetPhysObCollisionType(_Instance *instance)
 
 {
   PhysObWeaponAttributes *pPVar1;
-  ulong uVar2;
+  u_long uVar2;
   int Data;
   _Instance *Inst;
   int Power;
   _Instance *Sender;
   void *pvVar3;
-  uint *puVar4;
+  u_int *puVar4;
   void *pvVar5;
   
-  puVar4 = (uint *)instance->extraData;
+  puVar4 = (u_int *)instance->extraData;
   pvVar5 = instance->collideInfo;
   if ((*puVar4 & 0x1600001) != 0) {
     return 0;
   }
-  if ((*(uint *)((int)pvVar5 + 4) & 0xffff0000) != 0x1010000) {
+  if ((*(u_int *)((int)pvVar5 + 4) & 0xffff0000) != 0x1010000) {
     return 0;
   }
   if (*(char *)(*(int *)((int)pvVar5 + 8) + 4) != '\t') {
@@ -4568,7 +4568,7 @@ LAB_8006de70:
   else {
     Data = 0x20;
   }
-  Data = SetFXHitData(instance,(uint)*(byte *)((int)pvVar5 + 5),pPVar1->Damage >> 7,Data);
+  Data = SetFXHitData(instance,(u_int)*(byte *)((int)pvVar5 + 5),pPVar1->Damage >> 7,Data);
   INSTANCE_Post(Sender,0x400000,Data);
   return 1;
 }
@@ -4666,9 +4666,9 @@ void ExecuteDrag(_Instance *instance)
 
 {
   short sVar1;
-  uint *puVar2;
+  u_int *puVar2;
   
-  puVar2 = (uint *)instance->extraData;
+  puVar2 = (u_int *)instance->extraData;
   if ((*puVar2 & 2) != 0) {
     *puVar2 = *puVar2 & 0xfffffffd;
   }
@@ -4710,9 +4710,9 @@ void ExecuteSlideToStop(_Instance *instance)
 
 {
   short sVar1;
-  uint *puVar2;
+  u_int *puVar2;
   
-  puVar2 = (uint *)instance->extraData;
+  puVar2 = (u_int *)instance->extraData;
   if ((*puVar2 & 0x100000) == 0) {
     G2EmulationInstancePlayAnimation(instance);
   }
@@ -4751,9 +4751,9 @@ void ExecuteFlip(_Instance *instance)
 
 {
   short sVar1;
-  uint *puVar2;
+  u_int *puVar2;
   
-  puVar2 = (uint *)instance->extraData;
+  puVar2 = (u_int *)instance->extraData;
   if ((*puVar2 & 2) != 0) {
     *puVar2 = *puVar2 & 0xfffffffd;
   }
@@ -4793,11 +4793,11 @@ void ExecuteFlip(_Instance *instance)
 int CheckSlope(int Znormal,int Slope,int Slop)
 
 {
-  uint uVar1;
+  u_int uVar1;
   
   uVar1 = 0;
   if (Slope - Slop < Znormal) {
-    uVar1 = (uint)(Znormal < Slope + Slop);
+    uVar1 = (u_int)(Znormal < Slope + Slop);
   }
   return uVar1;
 }
@@ -4852,7 +4852,7 @@ int CheckBlockSlope(_Instance *instance,int x,int y,int hOff,int vOff,int dH,int
   local_10.vx = local_18.vx + (short)x * (short)dH;
   local_10.vy = local_18.vy + (short)y * (short)dH;
   PHYSICS_CheckLineInWorld(instance,&local_48);
-  return (uint)(local_48.type == 5);
+  return (u_int)(local_48.type == 5);
 }
 
 
@@ -5029,13 +5029,13 @@ int PHYSOB_CheckThrownLineCollision(_Instance *instance,_Instance *parent)
       iVar2 = rcos((int)(parent->rotation).z);
       local_26 = -(short)iVar2;
       local_24 = 0;
-      iVar2 = (uint)(ushort)(parent->position).x - (uint)local_38.vx;
+      iVar2 = (u_int)(ushort)(parent->position).x - (u_int)local_38.vx;
       local_20 = (undefined2)iVar2;
-      iVar5 = (uint)(ushort)(parent->position).y - (uint)local_38.vy;
+      iVar5 = (u_int)(ushort)(parent->position).y - (u_int)local_38.vy;
       iVar2 = (iVar2 * 0x10000 >> 0x10) * (int)local_28 + (iVar5 * 0x10000 >> 0x10) * (int)local_26;
       local_1e = (undefined2)iVar5;
       if (0 < iVar2) {
-        iVar5 = (uint)local_40.vx - (uint)local_38.vx;
+        iVar5 = (u_int)local_40.vx - (u_int)local_38.vx;
         local_26 = local_40.vy - local_38.vy;
         local_24 = local_40.vz - local_38.vz;
         local_28 = (short)iVar5;
@@ -5218,7 +5218,7 @@ int PHYSOB_CheckDroppedLineCollision(_Instance *instance,_Instance *parent)
   _G2EulerAngles_Type local_28;
   
   if (parent != (_Instance *)0x0) {
-    local_98 = *(uint *)&parent->position;
+    local_98 = *(u_int *)&parent->position;
     local_94 = (parent->position).z;
     bVar1 = false;
     if (instance->matrix != (MATRIX *)0x0) {
@@ -5232,7 +5232,7 @@ int PHYSOB_CheckDroppedLineCollision(_Instance *instance,_Instance *parent)
         pMVar4 = instance->matrix + iVar5;
         local_88.vx = (short)local_98;
         local_88.vz = *(short *)(pMVar4->t + 2) + 100;
-        iVar2 = ((int)(((uint)*(ushort *)pMVar4->t - (local_98 & 0xffff)) * 0x10000) >> 0x10) * 6000
+        iVar2 = ((int)(((u_int)*(ushort *)pMVar4->t - (local_98 & 0xffff)) * 0x10000) >> 0x10) * 6000
         ;
         if (iVar2 < 0) {
           iVar2 = iVar2 + 0xfff;
@@ -5394,7 +5394,7 @@ long PHYSOBS_CheckForStackedForwardHits(_Instance *block,long xoffset,long yoffs
 	/* end block 1 */
 	// End Line: 9486
 
-void PHYSOBS_SetNewAnim(_Instance *instance,PhysObData *Data,ulong modeBits,int path,int resetflg)
+void PHYSOBS_SetNewAnim(_Instance *instance,PhysObData *Data,u_long modeBits,int path,int resetflg)
 
 {
   Data->PathNumber = (short)path;
@@ -5439,7 +5439,7 @@ long PHYSOB_CheckForEnemyInBlkSpot(_Instance *instance,int dx,int dy)
 
 {
   int iVar1;
-  ulong uVar2;
+  u_long uVar2;
   int iVar3;
   _Instance *Inst;
   
@@ -5510,11 +5510,11 @@ long PHYSOBS_CheckForValidMove(_Instance *instance)
   ushort uVar2;
   int Data;
   long lVar3;
-  uint uVar4;
-  uint uVar5;
+  u_int uVar4;
+  u_int uVar5;
   PhysObData *Data_00;
   evPhysicsSlideData *local_20;
-  uint local_1c;
+  u_int local_1c;
   evPhysicsSlideData *local_18 [2];
   
   gameTrackerX.block_collide_override = '\x01';
@@ -5536,7 +5536,7 @@ long PHYSOBS_CheckForValidMove(_Instance *instance)
             local_1c = 0;
           }
           uVar2 = Data_00->PathNumber;
-          if ((1 < (uint)uVar2 - 2) && (local_1c != 0)) {
+          if ((1 < (u_int)uVar2 - 2) && (local_1c != 0)) {
             if ((int)(short)uVar2 == 5) {
               local_1c = local_1c & 0xfffffffa;
             }
@@ -5656,7 +5656,7 @@ void ExecuteGravitate(_Instance *instance)
   int iVar1;
   short sVar2;
   MATRIX *pMVar3;
-  uint *puVar4;
+  u_int *puVar4;
   _G2Matrix_Type *matrix;
   _Model *p_Var5;
   _Instance *parent;
@@ -5665,7 +5665,7 @@ void ExecuteGravitate(_Instance *instance)
   int local_24;
   int local_20;
   
-  puVar4 = (uint *)instance->extraData;
+  puVar4 = (u_int *)instance->extraData;
   parent = (_Instance *)puVar4[2];
   p_Var5 = *instance->object->modelList;
   matrix = (_G2Matrix_Type *)(parent->matrix + *(short *)(puVar4 + 3));
@@ -5819,7 +5819,7 @@ void ExecuteFollow(_Instance *instance)
 void PHYSOB_Normalize(_SVector *v)
 
 {
-  ulong square;
+  u_long square;
   long lVar1;
   
   square = MATH3D_SquareLength((int)v->x,(int)v->y,(int)v->z);
@@ -5867,10 +5867,10 @@ int PHYSOB_MoveTowardsAlign(_Instance *instance,_SVector *orgVec,_SVector *endVe
 {
   int iVar1;
   int iVar2;
-  ulong square;
-  uint uVar3;
+  u_long square;
+  u_int uVar3;
   long lVar4;
-  uint uVar5;
+  u_int uVar5;
   MATRIX *pMVar6;
   undefined4 auStack104 [8];
   _G2Matrix_Type _Stack72;
@@ -5927,12 +5927,12 @@ int PHYSOB_MoveTowardsAlign(_Instance *instance,_SVector *orgVec,_SVector *endVe
   iVar1 = rcos(uVar5);
   local_22 = (undefined2)iVar1;
   G2Quat_ToMatrix_S(&local_28,(short *)auStack104);
-  MulMatrix0(auStack104,(ushort *)pMVar6,(uint *)&_Stack72);
+  MulMatrix0(auStack104,(ushort *)pMVar6,(u_int *)&_Stack72);
   G2EulerAngles_FromMatrix(&local_20,&_Stack72,0x15);
   (instance->rotation).x = local_20.x;
   (instance->rotation).y = local_20.y;
   (instance->rotation).z = local_20.z;
-  return (uint)((int)uVar5 < 0x14);
+  return (u_int)((int)uVar5 < 0x14);
 }
 
 
@@ -6074,18 +6074,18 @@ int PHYSOB_ReAlignFalling(_Instance *instance,int zEndOff)
   short sVar4;
   int iVar5;
   int iVar6;
-  uint uVar7;
+  u_int uVar7;
   short sVar8;
   int iVar9;
   MATRIX *pMVar10;
-  uint uVar11;
+  u_int uVar11;
   undefined4 uVar12;
   short sVar13;
   short sVar14;
   int iVar15;
   int iVar16;
   _Model *p_Var17;
-  uint uVar18;
+  u_int uVar18;
   undefined4 local_d0;
   ushort local_cc;
   undefined4 local_c8;
@@ -6095,9 +6095,9 @@ int PHYSOB_ReAlignFalling(_Instance *instance,int zEndOff)
   undefined4 local_b8;
   short local_b4;
   _PCollideInfo local_b0;
-  uint local_80;
+  u_int local_80;
   ushort local_7c;
-  uint local_78;
+  u_int local_78;
   short local_74;
   _PCollideInfo local_70;
   SVECTOR local_40;
@@ -6126,15 +6126,15 @@ int PHYSOB_ReAlignFalling(_Instance *instance,int zEndOff)
         local_7c = *(short *)(iVar5 + 0x1c) + (short)zEndOff;
         local_74 = *(short *)(iVar5 + 0x1c) + 300;
         if (bVar3) {
-          iVar5 = (uint)uVar1 - (local_c0 & 0xffff);
-          iVar9 = (uint)uVar2 - (local_c0 >> 0x10);
+          iVar5 = (u_int)uVar1 - (local_c0 & 0xffff);
+          iVar9 = (u_int)uVar2 - (local_c0 >> 0x10);
           iVar6 = iVar5 * 0x10000;
-          sVar4 = (short)((uint)iVar6 >> 0x10);
+          sVar4 = (short)((u_int)iVar6 >> 0x10);
           if (iVar6 >> 0x10 < 0) {
             sVar4 = -sVar4;
           }
           iVar6 = iVar9 * 0x10000;
-          sVar8 = (short)((uint)iVar6 >> 0x10);
+          sVar8 = (short)((u_int)iVar6 >> 0x10);
           if (iVar6 >> 0x10 < 0) {
             sVar8 = -sVar8;
           }
@@ -6167,7 +6167,7 @@ int PHYSOB_ReAlignFalling(_Instance *instance,int zEndOff)
         local_b0.oldPoint = (SVECTOR *)&local_78;
         PHYSICS_CheckLineInWorld(instance,&local_b0);
         if (local_b0.type != 0) {
-          uVar18 = (uint)local_7c - (uint)*(ushort *)((int)instance->matrix->t + iVar16 + 8);
+          uVar18 = (u_int)local_7c - (u_int)*(ushort *)((int)instance->matrix->t + iVar16 + 8);
           if ((int)(uVar18 * 0x10000) < (int)(uVar7 << 0x10)) {
             uVar18 = uVar7;
           }
@@ -6204,10 +6204,10 @@ int PHYSOB_ReAlignFalling(_Instance *instance,int zEndOff)
     (instance->position).z = *(short *)(instance->matrix->t + 2) + (short)uVar18;
     uVar11 = (local_b8 & 0xffff) - (local_c0 & 0xffff);
     local_b4 = local_b4 - local_bc;
-    local_b8 = uVar11 & 0xffff | (uint)(ushort)(local_b8._2_2_ - local_c0._2_2_) << 0x10;
+    local_b8 = uVar11 & 0xffff | (u_int)(ushort)(local_b8._2_2_ - local_c0._2_2_) << 0x10;
     uVar7 = (local_c8 & 0xffff) - (local_d0 & 0xffff);
     local_c4 = local_c4 - local_cc;
-    local_c8 = uVar7 & 0xffff | (uint)(ushort)(local_c8._2_2_ - local_d0._2_2_) << 0x10;
+    local_c8 = uVar7 & 0xffff | (u_int)(ushort)(local_c8._2_2_ - local_d0._2_2_) << 0x10;
     if ((((uVar11 * 0x10000 != uVar7 * 0x10000) ||
          ((short)(local_b8._2_2_ - local_c0._2_2_) != (short)(local_c8._2_2_ - local_d0._2_2_))) ||
         (local_b4 != local_c4)) || (uVar7 = 1, (uVar18 & 0xffff) != 0)) {
@@ -6244,7 +6244,7 @@ int PHYSOB_ReAlignFalling(_Instance *instance,int zEndOff)
       iVar15 = PHYSOB_MoveTowardsAlign(instance,(_SVector *)&local_b8,(_SVector *)&local_c8);
       uVar7 = 0;
       if ((uVar18 & 0xffff) == 0) {
-        uVar7 = (uint)(iVar15 != 0);
+        uVar7 = (u_int)(iVar15 != 0);
       }
     }
   }
@@ -6276,11 +6276,11 @@ void DropPhysOb(_Instance *instance,int flags)
 
 {
   int zEndOff;
-  uint *puVar1;
+  u_int *puVar1;
   _Instance *parent;
   
   parent = instance->LinkParent;
-  puVar1 = (uint *)instance->extraData;
+  puVar1 = (u_int *)instance->extraData;
   if (parent == (_Instance *)0x0) {
     *puVar1 = *puVar1 & 0xff7fffff;
   }

@@ -145,7 +145,7 @@ int MONSENSE_See(_Instance *instance,evCollideInstanceStatsData *data)
 {
   short sVar1;
   int arc;
-  ulong uVar2;
+  u_long uVar2;
   MATRIX *pMVar3;
   int elevation;
   short *psVar4;
@@ -159,7 +159,7 @@ int MONSENSE_See(_Instance *instance,evCollideInstanceStatsData *data)
   
   psVar4 = *(short **)(*(int *)((int)instance->extraData + 0x164) + 4);
   arc = 0;
-  if (data->distance < (uint)(int)psVar4[1]) {
+  if (data->distance < (u_int)(int)psVar4[1]) {
     sVar1 = MATH3D_FastAtan2(500,data->distance);
     elevation = (int)sVar1;
     arc = elevation;
@@ -232,14 +232,14 @@ int MONSENSE_See(_Instance *instance,evCollideInstanceStatsData *data)
 int MONSENSE_Hear(_Instance *instance,evCollideInstanceStatsData *data)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   int iVar2;
   int iVar3;
   
   iVar3 = *(int *)(*(int *)((int)instance->extraData + 0x164) + 4);
   uVar1 = INSTANCE_Query(data->instance,10);
   if ((((uVar1 & 0x10b0143) == 0) || (iVar2 = 0, (uVar1 & 0x200000) != 0)) &&
-     (iVar2 = 0, data->distance < (uint)(int)*(short *)(iVar3 + 8))) {
+     (iVar2 = 0, data->distance < (u_int)(int)*(short *)(iVar3 + 8))) {
     iVar2 = MATH3D_ConeDetect(&data->relativePosition,(int)*(short *)(iVar3 + 6),
                               (int)*(short *)(iVar3 + 10));
   }
@@ -274,8 +274,8 @@ int MONSENSE_Hear(_Instance *instance,evCollideInstanceStatsData *data)
 int MONSENSE_Smell(_Instance *instance,evCollideInstanceStatsData *data)
 
 {
-  return (uint)(data->distance <
-               (uint)*(ushort *)(*(int *)(*(int *)((int)instance->extraData + 0x164) + 4) + 0xc));
+  return (u_int)(data->distance <
+               (u_int)*(ushort *)(*(int *)(*(int *)((int)instance->extraData + 0x164) + 4) + 0xc));
 }
 
 
@@ -302,7 +302,7 @@ int MONSENSE_DetectPlayer(_Instance *instance)
   _MonsterIR *p_Var1;
   
   p_Var1 = MONSENSE_FindIR((_MonsterVars *)instance->extraData,gameTrackerX.playerInstance);
-  return (uint)(p_Var1 != (_MonsterIR *)0x0);
+  return (u_int)(p_Var1 != (_MonsterIR *)0x0);
 }
 
 
@@ -341,8 +341,8 @@ _MonsterIR * MONSENSE_FirstSense(_Instance *instance,_Instance *sensed)
 {
   ushort uVar1;
   _MonsterIR *p_Var2;
-  ulong uVar3;
-  ulong uVar4;
+  u_long uVar3;
+  u_long uVar4;
   _MonsterVars *mv;
   _MonsterAllegiances *p_Var5;
   
@@ -366,7 +366,7 @@ _MonsterIR * MONSENSE_FirstSense(_Instance *instance,_Instance *sensed)
     if ((uVar3 & p_Var5->allies) != 0) {
       uVar1 = p_Var2->mirFlags;
       p_Var2->mirFlags = uVar1 | 2;
-      if ((*(uint *)sensed->extraData & 0x100000) != 0) {
+      if ((*(u_int *)sensed->extraData & 0x100000) != 0) {
         p_Var2->mirFlags = uVar1 | 0x12;
       }
     }
@@ -439,7 +439,7 @@ void MONSENSE_SetupMIR(_Instance *instance,evCollideInstanceStatsData *data,int 
   ushort uVar4;
   _MonsterIR *p_Var5;
   _MonsterCombatAttributes *p_Var6;
-  ulong uVar7;
+  u_long uVar7;
   ushort uVar8;
   _MonsterVars *mv;
   
@@ -603,14 +603,14 @@ LAB_80085e0c:
 void MONSENSE_SenseInstance(_Instance *instance,evCollideInstanceStatsData *data)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   int iVar2;
-  uint flags;
+  u_int flags;
   void *pvVar3;
-  uint *puVar4;
+  u_int *puVar4;
   
   flags = 0;
-  puVar4 = (uint *)instance->extraData;
+  puVar4 = (u_int *)instance->extraData;
   uVar1 = INSTANCE_Query(data->instance,1);
   if ((*puVar4 & 0x200) == 0) {
     if ((uVar1 & 0x20) == 0) {
@@ -627,8 +627,8 @@ void MONSENSE_SenseInstance(_Instance *instance,evCollideInstanceStatsData *data
         if (iVar2 != 0) {
           flags = flags | 0x40;
         }
-        if (((uVar1 & *(uint *)(*(int *)(puVar4[0x59] + 0xc) + 4)) != 0) &&
-           (data->distance < (uint)*(ushort *)(*(int *)(puVar4[0x59] + 4) + 0x10))) {
+        if (((uVar1 & *(u_int *)(*(int *)(puVar4[0x59] + 0xc) + 4)) != 0) &&
+           (data->distance < (u_int)*(ushort *)(*(int *)(puVar4[0x59] + 4) + 0x10))) {
           flags = flags | 2;
         }
         MONSENSE_SetupMIR(instance,data,flags);
@@ -637,7 +637,7 @@ void MONSENSE_SenseInstance(_Instance *instance,evCollideInstanceStatsData *data
     else {
       pvVar3 = data->instance->data;
       if ((((*(short *)((int)pvVar3 + 2) == 3) &&
-           (data->xyDistance < (int)(uint)(*(ushort *)((int)pvVar3 + 0x1e) >> 1))) &&
+           (data->xyDistance < (int)(u_int)(*(ushort *)((int)pvVar3 + 0x1e) >> 1))) &&
           (data->zDelta < (int)*(short *)((int)pvVar3 + 0x22))) &&
          ((int)*(short *)((int)pvVar3 + 0x20) < data->zDelta)) {
         if ((*(ushort *)((int)pvVar3 + 8) & 0x40) != 0) {
@@ -693,7 +693,7 @@ void MONSENSE_StartMonsterIRList(_Instance *instance)
   bool bVar1;
   undefined4 *puVar2;
   undefined4 *puVar3;
-  ulong uVar4;
+  u_long uVar4;
   void *pvVar5;
   undefined4 *puVar6;
   
@@ -706,7 +706,7 @@ void MONSENSE_StartMonsterIRList(_Instance *instance)
       puVar6 = (undefined4 *)*puVar3;
       if ((puVar3[2] == *(int *)(puVar3[1] + 0x10)) &&
          (((*(ushort *)((int)puVar3 + 0x16) & 0xe0) != 0 ||
-          (uVar4 = MON_GetTime(instance), uVar4 <= (uint)puVar3[7])))) {
+          (uVar4 = MON_GetTime(instance), uVar4 <= (u_int)puVar3[7])))) {
         *(undefined4 **)puVar3 = puVar2;
         *(ushort *)((int)puVar3 + 0x16) = *(ushort *)((int)puVar3 + 0x16) & 0xff1f;
         puVar2 = puVar3;
@@ -853,8 +853,8 @@ _MonsterIR * MONSENSE_SetEnemy(_Instance *instance,_Instance *newenemy)
   short sVar1;
   _MonsterIR *p_Var2;
   int iVar3;
-  uint uVar4;
-  uint uVar5;
+  u_int uVar4;
+  u_int uVar5;
   _MonsterVars *mv;
   
   mv = (_MonsterVars *)instance->extraData;
@@ -869,11 +869,11 @@ _MonsterIR * MONSENSE_SetEnemy(_Instance *instance,_Instance *newenemy)
       p_Var2 = MONSENSE_FirstSense(instance,newenemy);
       if (p_Var2 == (_MonsterIR *)0x0) goto LAB_80086380;
     }
-    uVar5 = (uint)(ushort)(instance->rotation).z & 0xfff;
+    uVar5 = (u_int)(ushort)(instance->rotation).z & 0xfff;
     if (0x800 < uVar5) {
       uVar5 = uVar5 - 0x1000;
     }
-    uVar4 = (uint)(ushort)(newenemy->rotation).z & 0xfff;
+    uVar4 = (u_int)(ushort)(newenemy->rotation).z & 0xfff;
     iVar3 = uVar5 - uVar4;
     if (0x800 < uVar4) {
       iVar3 = (uVar5 + 0x1000) - uVar4;
@@ -924,7 +924,7 @@ LAB_80086380:
 void MONSENSE_ProcessIRList(_Instance *instance)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   int Message;
   int *Data;
   int *piVar2;
@@ -1121,13 +1121,13 @@ void MONSENSE_Radar(_Instance *instance)
   undefined2 uVar1;
   long lVar2;
   void *pvVar3;
-  uint uVar4;
+  u_int uVar4;
   SVECTOR local_60;
   SVECTOR local_58;
   _PCollideInfo local_50;
   
   pvVar3 = instance->extraData;
-  uVar4 = (uint)""[*(int *)((int)pvVar3 + 0xe4)];
+  uVar4 = (u_int)""[*(int *)((int)pvVar3 + 0xe4)];
   local_60.vx = (instance->position).x + (&radarDir)[uVar4].x;
   local_60.vy = (instance->position).y + (&radarDir)[uVar4].y;
   local_60.vz = (instance->position).z + 100;
@@ -1147,12 +1147,12 @@ void MONSENSE_Radar(_Instance *instance)
     local_60.vz = (instance->position).z + -0x100;
     PHYSICS_CheckLineInWorld(instance,&local_50);
     if (local_50.type != 0) goto LAB_800868d4;
-    *(uint *)((int)pvVar3 + 0xe0) = *(uint *)((int)pvVar3 + 0xe0) | 1 << (uVar4 & 0x1f);
+    *(u_int *)((int)pvVar3 + 0xe0) = *(u_int *)((int)pvVar3 + 0xe0) | 1 << (uVar4 & 0x1f);
     uVar1 = 0x500;
   }
   else {
 LAB_800868d4:
-    *(uint *)((int)pvVar3 + 0xe0) = *(uint *)((int)pvVar3 + 0xe0) & ~(1 << (uVar4 & 0x1f));
+    *(u_int *)((int)pvVar3 + 0xe0) = *(u_int *)((int)pvVar3 + 0xe0) & ~(1 << (uVar4 & 0x1f));
     if ((local_50.type == 3) &&
        ((*(ushort *)
           ((int)((local_50.inst)->node).prev[9].prev + (int)local_50.segment * 0x24 + 0x12) & 2) !=
@@ -1167,7 +1167,7 @@ LAB_800868d4:
   *(undefined2 *)((int)pvVar3 + uVar4 * 2 + 0xe8) = uVar1;
 LAB_80086960:
   uVar4 = *(int *)((int)pvVar3 + 0xe4) + 1;
-  *(uint *)((int)pvVar3 + 0xe4) = uVar4;
+  *(u_int *)((int)pvVar3 + 0xe4) = uVar4;
   if (7 < uVar4) {
     *(undefined4 *)((int)pvVar3 + 0xe4) = 0;
   }
@@ -1203,8 +1203,8 @@ short MONSENSE_GetClosestFreeDirection(_Instance *instance,short angle,long rang
 {
   short sVar1;
   int iVar2;
-  uint uVar3;
-  uint uVar4;
+  u_int uVar3;
+  u_int uVar4;
   void *pvVar5;
   
   pvVar5 = instance->extraData;
@@ -1315,7 +1315,7 @@ void MONSENSE_DoSenses(_Instance *instance)
     (&monsterSensed)[*(char *)((int)pvVar1 + 0x15f)] = '\x01';
     DAT_800d08d0 = 1;
     *(undefined *)((int)pvVar1 + 0x15e) = 1;
-    if ((*(uint *)((int)pvVar1 + 4) & 0x20000000) == 0) {
+    if ((*(u_int *)((int)pvVar1 + 4) & 0x20000000) == 0) {
       MONSENSE_Radar(instance);
     }
   }
@@ -1398,8 +1398,8 @@ void MONSENSE_AdjustRadarFromObjects(_Instance *instance)
   short sVar2;
   int iVar3;
   long x;
-  uint uVar4;
-  uint uVar5;
+  u_int uVar4;
+  u_int uVar5;
   void *pvVar6;
   _Instance *p_Var7;
   void *pvVar8;
@@ -1417,9 +1417,9 @@ void MONSENSE_AdjustRadarFromObjects(_Instance *instance)
       if ((iVar3 < 400) &&
          (x = MATH3D_LengthXY((int)(p_Var7->position).x - (int)(instance->position).x,
                               (int)(p_Var7->position).y - (int)(instance->position).y),
-         x < (int)((uint)*(ushort *)((int)pvVar6 + 0x1e) + 0x500))) {
+         x < (int)((u_int)*(ushort *)((int)pvVar6 + 0x1e) + 0x500))) {
         sVar1 = MATH3D_AngleFromPosToPos(&instance->position,&p_Var7->position);
-        sVar2 = MATH3D_FastAtan2((uint)*(ushort *)((int)pvVar6 + 0x1e),x);
+        sVar2 = MATH3D_FastAtan2((u_int)*(ushort *)((int)pvVar6 + 0x1e),x);
         uVar5 = (int)((int)sVar1 + (int)sVar2 + 0x100U & 0xfff) >> 9;
         uVar4 = (int)(((int)sVar1 - (int)sVar2) + 0x100U & 0xfff) >> 9;
         if (uVar4 < uVar5) {

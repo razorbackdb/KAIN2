@@ -89,9 +89,9 @@ void SplineSetDefDenom(Spline *spline,SplineDef *def,int denomFlag)
 
 {
   short sVar1;
-  uint uVar2;
+  u_int uVar2;
   
-  if ((uint)def->denomFlag != denomFlag) {
+  if ((u_int)def->denomFlag != denomFlag) {
     if (def->fracCurr != 0) {
       if (spline->type == '\x01') {
         sVar1 = (&spline->key->count)[(int)def->currkey * 5];
@@ -104,7 +104,7 @@ void SplineSetDefDenom(Spline *spline,SplineDef *def,int denomFlag)
         uVar2 = 1;
       }
       if (denomFlag == 0) {
-        uVar2 = (uint)(def->fracCurr << 0xf) / uVar2;
+        uVar2 = (u_int)(def->fracCurr << 0xf) / uVar2;
       }
       else {
         uVar2 = def->fracCurr * uVar2 >> 0xf;
@@ -146,7 +146,7 @@ ushort SplineGetFrameNumber(Spline *spline,SplineDef *def)
   SplineKey *pSVar2;
   short sVar3;
   short sVar4;
-  uint local_10;
+  u_int local_10;
   long local_c;
   
   if (spline != (Spline *)0x0) {
@@ -164,9 +164,9 @@ ushort SplineGetFrameNumber(Spline *spline,SplineDef *def)
           sVar3 = sVar4 + pSVar2->count;
           pSVar2 = pSVar2 + 1;
           sVar4 = sVar3;
-        } while (_uVar1 < (uint)(int)def->currkey);
+        } while (_uVar1 < (u_int)(int)def->currkey);
       }
-      local_10 = *(uint *)def & 0xffff0000 | (uint)uVar1;
+      local_10 = *(u_int *)def & 0xffff0000 | (u_int)uVar1;
       SplineSetDefDenom(spline,(SplineDef *)&local_10,0);
       return sVar3 + (short)(local_c >> 0xc);
     }
@@ -211,9 +211,9 @@ short SplineSetDef2FrameNumber(Spline *spline,SplineDef *def,ushort frame_number
   bool bVar2;
   SplineKey *pSVar3;
   SplineKey *pSVar4;
-  uint uVar5;
+  u_int uVar5;
   short sVar6;
-  uint uVar7;
+  u_int uVar7;
   
   sVar6 = 0;
   uVar5 = 0;
@@ -256,7 +256,7 @@ short SplineSetDef2FrameNumber(Spline *spline,SplineDef *def,ushort frame_number
           pSVar3 = (SplineKey *)((int)&(pSVar3->dd).x + 2);
           pSVar4 = pSVar4 + 1;
         }
-      } while ((uVar5 & 0xffff) < (uint)frame_number);
+      } while ((uVar5 & 0xffff) < (u_int)frame_number);
     }
     def->denomFlag = 0;
   }
@@ -292,7 +292,7 @@ short SplineIsWhere(Spline *spline,SplineDef *def)
 
 {
   short sVar1;
-  uint uVar2;
+  u_int uVar2;
   
   uVar2 = def->fracCurr >> 0xc;
   if (((uVar2 & 0xffff) == 0) && (def->currkey == 0)) {
@@ -427,7 +427,7 @@ _SVector * SplineGetFirstPoint(Spline *spline,SplineDef *def)
 _SVector * SplineGetNextPoint(Spline *spline,SplineDef *def)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   
   uVar1 = SplineGetNext(spline,def);
   if ((uVar1 != 0) && (uVar1 = SplineGetData(spline,def,&point_53), uVar1 != 0)) {
@@ -459,7 +459,7 @@ _SVector * SplineGetNextPoint(Spline *spline,SplineDef *def)
 _SVector * SplineGetPreviousPoint(Spline *spline,SplineDef *def)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   
   uVar1 = SplineGetPrev(spline,def);
   if ((uVar1 != 0) && (uVar1 = SplineGetData(spline,def,&point_56), uVar1 != 0)) {
@@ -521,7 +521,7 @@ _SVector * SplineGetNearestPoint(Spline *spline,_SVector *point,SplineDef *def)
   int iVar13;
   SplineDef local_40;
   int local_38;
-  uint local_34;
+  u_int local_34;
   SplineDef *local_30;
   
   iVar12 = 0x7fffffff;
@@ -582,7 +582,7 @@ _SVector * SplineGetNearestPoint(Spline *spline,_SVector *point,SplineDef *def)
   if (iVar11 < iVar10) {
     local_40.currkey = (short)iVar11;
   }
-  local_34 = (uint)(iVar11 < iVar10);
+  local_34 = (u_int)(iVar11 < iVar10);
   iVar8 = 0;
   local_40.fracCurr = 0;
   iVar13 = (int)spline->key[local_40.currkey].count;
@@ -678,7 +678,7 @@ LAB_80041f5c:
 	/* end block 2 */
 	// End Line: 1853
 
-ulong SplineGetData(Spline *spline,SplineDef *def,void *p)
+u_long SplineGetData(Spline *spline,SplineDef *def,void *p)
 
 {
   short sVar1;
@@ -689,8 +689,8 @@ ulong SplineGetData(Spline *spline,SplineDef *def,void *p)
   int iVar6;
   SplineKey *pSVar7;
   int iVar8;
-  ulong uVar9;
-  ulong uVar10;
+  u_long uVar9;
+  u_long uVar10;
   undefined4 local_28;
   undefined4 local_24;
   undefined4 local_20;
@@ -777,7 +777,7 @@ ulong SplineGetData(Spline *spline,SplineDef *def,void *p)
 	/* end block 2 */
 	// End Line: 1704
 
-ulong SplineGetQuatData(Spline *spline,SplineDef *def,void *p)
+u_long SplineGetQuatData(Spline *spline,SplineDef *def,void *p)
 
 {
   short *psVar1;
@@ -835,13 +835,13 @@ LAB_800422b0:
 	/* end block 2 */
 	// End Line: 1806
 
-ulong SplineGetNext(Spline *spline,SplineDef *def)
+u_long SplineGetNext(Spline *spline,SplineDef *def)
 
 {
   short sVar1;
   SplineKey *pSVar2;
   int iVar3;
-  ulong uVar4;
+  u_long uVar4;
   
   uVar4 = 0;
   if ((spline != (Spline *)0x0) && (uVar4 = 0, def != (SplineDef *)0x0)) {
@@ -867,7 +867,7 @@ ulong SplineGetNext(Spline *spline,SplineDef *def)
         uVar4 = 1;
         if ((int)spline->numkeys + -1 < (int)def->currkey) {
           uVar4 = 0;
-          if ((*(uint *)&spline->numkeys & 0x6000000) == 0) {
+          if ((*(u_int *)&spline->numkeys & 0x6000000) == 0) {
             def->currkey = spline->numkeys + -1;
           }
           else {
@@ -902,7 +902,7 @@ ulong SplineGetNext(Spline *spline,SplineDef *def)
 	/* end block 2 */
 	// End Line: 1942
 
-ulong SplineGetPrev(Spline *spline,SplineDef *def)
+u_long SplineGetPrev(Spline *spline,SplineDef *def)
 
 {
   short sVar1;
@@ -927,7 +927,7 @@ ulong SplineGetPrev(Spline *spline,SplineDef *def)
   }
   uVar3 = def->currkey - 1;
   if (def->currkey < 1) {
-    if ((*(uint *)&spline->numkeys & 0x6000000) == 0) {
+    if ((*(u_int *)&spline->numkeys & 0x6000000) == 0) {
       def->currkey = 0;
       def->fracCurr = 0;
       return 0;
@@ -942,7 +942,7 @@ LAB_800424d0:
     def->currkey = uVar3;
     if (!bVar2) goto LAB_800424d0;
 LAB_800424fc:
-    sVar1 = *(short *)((int)&spline->key->count + ((int)((uint)uVar3 << 0x10) >> 0xb));
+    sVar1 = *(short *)((int)&spline->key->count + ((int)((u_int)uVar3 << 0x10) >> 0xb));
   }
   iVar4 = ((int)sVar1 + -1) * 0x1000;
 LAB_80042518:
@@ -972,7 +972,7 @@ LAB_80042518:
 	/* end block 2 */
 	// End Line: 2120
 
-ulong SplineGetOffsetNext(Spline *spline,SplineDef *def,long fracOffset)
+u_long SplineGetOffsetNext(Spline *spline,SplineDef *def,long fracOffset)
 
 {
   short sVar1;
@@ -980,7 +980,7 @@ ulong SplineGetOffsetNext(Spline *spline,SplineDef *def,long fracOffset)
   int iVar3;
   SplineKey *pSVar4;
   int iVar5;
-  ulong uVar6;
+  u_long uVar6;
   
   if (spline != (Spline *)0x0) {
     if (def == (SplineDef *)0x0) {
@@ -1012,7 +1012,7 @@ ulong SplineGetOffsetNext(Spline *spline,SplineDef *def,long fracOffset)
         def->currkey = def->currkey + 1;
         def->fracCurr = def->fracCurr + iVar5 * -0x1000;
         if ((int)spline->numkeys + -1 < (int)def->currkey) {
-          if ((*(uint *)&spline->numkeys & 0x6000000) == 0) {
+          if ((*(u_int *)&spline->numkeys & 0x6000000) == 0) {
             def->currkey = spline->numkeys + -1;
             uVar6 = 0;
           }
@@ -1066,14 +1066,14 @@ LAB_80042674:
 	/* end block 2 */
 	// End Line: 2281
 
-ulong SplineGetOffsetPrev(Spline *spline,SplineDef *def,long fracOffset)
+u_long SplineGetOffsetPrev(Spline *spline,SplineDef *def,long fracOffset)
 
 {
   short sVar1;
   bool bVar2;
   ushort uVar3;
   int iVar4;
-  ulong uVar5;
+  u_long uVar5;
   
   uVar5 = 0;
   if ((spline != (Spline *)0x0) && (uVar5 = 0, def != (SplineDef *)0x0)) {
@@ -1087,12 +1087,12 @@ ulong SplineGetOffsetPrev(Spline *spline,SplineDef *def,long fracOffset)
       while (iVar4 < 0) {
         uVar3 = def->currkey - 1;
         if (def->currkey < 1) {
-          if ((*(uint *)&spline->numkeys & 0x6000000) != 0) {
+          if ((*(u_int *)&spline->numkeys & 0x6000000) != 0) {
             uVar3 = spline->numkeys - 1;
             def->currkey = uVar3;
             if (bVar2) goto LAB_80042804;
 LAB_80042830:
-            sVar1 = *(short *)((int)&spline->key->count + ((int)((uint)uVar3 << 0x10) >> 0xb));
+            sVar1 = *(short *)((int)&spline->key->count + ((int)((u_int)uVar3 << 0x10) >> 0xb));
             goto code_r0x80042844;
           }
           uVar5 = 0;
@@ -1141,7 +1141,7 @@ code_r0x80042844:
 _SVector * SplineGetOffsetNextPoint(Spline *spline,SplineDef *def,long offset)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   
   uVar1 = SplineGetOffsetNext(spline,def,offset);
   if ((uVar1 != 0) && (uVar1 = SplineGetData(spline,def,&point_77), uVar1 != 0)) {
@@ -1173,7 +1173,7 @@ _SVector * SplineGetOffsetNextPoint(Spline *spline,SplineDef *def,long offset)
 _SVector * SplineGetOffsetPreviousPoint(Spline *spline,SplineDef *def,long offset)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   
   uVar1 = SplineGetOffsetPrev(spline,def,offset);
   if ((uVar1 != 0) && (uVar1 = SplineGetData(spline,def,&point_80), uVar1 != 0)) {

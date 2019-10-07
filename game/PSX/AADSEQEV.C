@@ -57,10 +57,10 @@ void aadExecuteEvent(AadSeqEvent *event,_AadSequenceSlot *slot)
     if (0x4d < event->statusByte) {
       return;
     }
-    pcVar1 = (code *)(&midiMetaEventFunction)[(uint)event->statusByte & 0x7f];
+    pcVar1 = (code *)(&midiMetaEventFunction)[(u_int)event->statusByte & 0x7f];
   }
   else {
-    pcVar1 = *(code **)((int)&midiEventFunction + ((uint)(event->statusByte >> 2) & 0x1c));
+    pcVar1 = *(code **)((int)&midiEventFunction + ((u_int)(event->statusByte >> 2) & 0x1c));
   }
   (*pcVar1)(event,slot);
   return;
@@ -129,34 +129,34 @@ void midiNoteOn(AadSeqEvent *event,_AadSequenceSlot *slot)
 {
   byte bVar1;
   byte bVar2;
-  uchar uVar3;
+  u_char uVar3;
   AadMemoryStruct *pAVar4;
-  ulong *puVar5;
+  u_long *puVar5;
   AadSynthVoice *voice;
-  ulong *puVar6;
+  u_long *puVar6;
   int iVar7;
-  uint *puVar8;
+  u_int *puVar8;
   AadToneAtr *toneAtr;
   int iVar9;
-  uint uVar10;
+  u_int uVar10;
   AadProgramAtr *progAtr;
-  uint uVar11;
-  uint uVar12;
-  uint local_38;
+  u_int uVar11;
+  u_int uVar12;
+  u_int local_38;
   
-  uVar12 = (uint)event->statusByte & 0xf;
+  uVar12 = (u_int)event->statusByte & 0xf;
   iVar7 = (int)&(slot->tempo).currentTick + uVar12;
-  if ((((int)(uint)slot->channelMute >> uVar12 & 1U) == 0) && (*(char *)(iVar7 + 0x590) != -1)) {
+  if ((((int)(u_int)slot->channelMute >> uVar12 & 1U) == 0) && (*(char *)(iVar7 + 0x590) != -1)) {
     bVar1 = event->dataByte[0];
-    uVar11 = (uint)bVar1;
+    uVar11 = (u_int)bVar1;
     iVar9 = 0;
     if (event->dataByte[1] == '\0') {
       iVar7 = 0x1dc;
       do {
         pAVar4 = aadMem;
-        puVar8 = (uint *)((int)&aadMem->updateCounter + iVar7);
-        if ((((uint)*(byte *)(puVar8 + 2) == (slot->slotID | uVar12)) &&
-            ((uint)*(byte *)((int)puVar8 + 10) == uVar11)) &&
+        puVar8 = (u_int *)((int)&aadMem->updateCounter + iVar7);
+        if ((((u_int)*(byte *)(puVar8 + 2) == (slot->slotID | uVar12)) &&
+            ((u_int)*(byte *)((int)puVar8 + 10) == uVar11)) &&
            ((aadMem->voiceStatus[iVar9] != '\0' && (aadMem->voiceStatus[iVar9] != '\x02')))) {
           aadMem->voiceKeyOffRequest = aadMem->voiceKeyOffRequest | *puVar8;
           pAVar4->voiceKeyOnRequest = pAVar4->voiceKeyOnRequest & ~*puVar8;
@@ -168,53 +168,53 @@ void midiNoteOn(AadSeqEvent *event,_AadSequenceSlot *slot)
     }
     else {
       local_38 = uVar11;
-      if (((int)(uint)slot->ignoreTranspose >> uVar12 & 1U) == 0) {
+      if (((int)(u_int)slot->ignoreTranspose >> uVar12 & 1U) == 0) {
         local_38 = uVar11 + *(byte *)(iVar7 + 0x5c0) & 0xff;
       }
       iVar7 = (int)&(slot->tempo).currentTick + uVar12;
       bVar2 = *(byte *)(iVar7 + 0x560);
       puVar6 = &aadMem->updateCounter + bVar2;
       if (puVar6[0x140] == 2) {
-        progAtr = (AadProgramAtr *)(puVar6[0x136] + (uint)*(byte *)(iVar7 + 0x590) * 8);
-        uVar10 = (uint)progAtr->firstTone;
+        progAtr = (AadProgramAtr *)(puVar6[0x136] + (u_int)*(byte *)(iVar7 + 0x590) * 8);
+        uVar10 = (u_int)progAtr->firstTone;
         if (uVar10 < uVar10 + progAtr->numTones) {
-          puVar5 = (ulong *)((int)&(slot->tempo).currentTick + uVar12 * 2);
+          puVar5 = (u_long *)((int)&(slot->tempo).currentTick + uVar12 * 2);
           toneAtr = (AadToneAtr *)(puVar6[0x138] + uVar10 * 0x10);
           do {
             if (((toneAtr->minNote <= uVar11) && (uVar11 <= toneAtr->maxNote)) &&
-               (voice = aadAllocateVoice((uint)toneAtr->priority), voice != (AadSynthVoice *)0x0)) {
+               (voice = aadAllocateVoice((u_int)toneAtr->priority), voice != (AadSynthVoice *)0x0)) {
               if ((toneAtr->pitchBendMax == '\0') || (*(short *)(puVar5 + 0x15c) == 0x2000)) {
-                aadPlayTone(toneAtr,*(ulong *)(aadMem->dynamicWaveAddr[bVar2] +
+                aadPlayTone(toneAtr,*(u_long *)(aadMem->dynamicWaveAddr[bVar2] +
                                               (int)toneAtr->waveIndex * 4),progAtr,local_38,
-                            (uint)(byte)event->dataByte[1],(uint)*(byte *)(iVar7 + 0x5a0),
-                            (uint)*(byte *)(iVar7 + 0x5b0),(uint)slot->slotVolume,
+                            (u_int)(byte)event->dataByte[1],(u_int)*(byte *)(iVar7 + 0x5a0),
+                            (u_int)*(byte *)(iVar7 + 0x5b0),(u_int)slot->slotVolume,
                             *slot->masterVolPtr,voice,0);
                 voice->handle = 0;
               }
               else {
                 aadPlayTonePitchBend
-                          (toneAtr,*(ulong *)(aadMem->dynamicWaveAddr[bVar2] +
+                          (toneAtr,*(u_long *)(aadMem->dynamicWaveAddr[bVar2] +
                                              (int)toneAtr->waveIndex * 4),progAtr,local_38,
-                           (uint)(byte)event->dataByte[1],(uint)*(byte *)(iVar7 + 0x5a0),
-                           (uint)*(byte *)(iVar7 + 0x5b0),(uint)slot->slotVolume,*slot->masterVolPtr
-                           ,voice,(uint)*(ushort *)(puVar5 + 0x15c));
+                           (u_int)(byte)event->dataByte[1],(u_int)*(byte *)(iVar7 + 0x5a0),
+                           (u_int)*(byte *)(iVar7 + 0x5b0),(u_int)slot->slotVolume,*slot->masterVolPtr
+                           ,voice,(u_int)*(ushort *)(puVar5 + 0x15c));
                 voice->handle = 0;
               }
               voice->voiceID = slot->slotID | (byte)uVar12;
               uVar3 = toneAtr->priority;
               voice->note = bVar1;
               voice->priority = uVar3;
-              voice->program = *(uchar *)(iVar7 + 0x590);
+              voice->program = *(u_char *)(iVar7 + 0x590);
               voice->volume = event->dataByte[1];
-              voice->updateVol = *(uchar *)(iVar7 + 0x5a0);
-              uVar3 = *(uchar *)(iVar7 + 0x5b0);
+              voice->updateVol = *(u_char *)(iVar7 + 0x5a0);
+              uVar3 = *(u_char *)(iVar7 + 0x5b0);
               voice->progAtr = progAtr;
               voice->toneAtr = toneAtr;
               voice->pan = uVar3;
             }
             uVar10 = uVar10 + 1;
             toneAtr = toneAtr + 1;
-          } while ((int)uVar10 < (int)((uint)progAtr->firstTone + (uint)progAtr->numTones));
+          } while ((int)uVar10 < (int)((u_int)progAtr->firstTone + (u_int)progAtr->numTones));
         }
       }
     }
@@ -311,7 +311,7 @@ void aadUpdateChannelVolPan(_AadSequenceSlot *slot,int channel)
 
 {
   byte bVar1;
-  uint uVar2;
+  u_int uVar2;
   int iVar3;
   int iVar4;
   int iVar5;
@@ -328,46 +328,46 @@ void aadUpdateChannelVolPan(_AadSequenceSlot *slot,int channel)
   iVar6 = 0x1dc;
   do {
     iVar3 = (int)&aadMem->updateCounter + iVar6;
-    if ((uint)*(byte *)(iVar3 + 8) == ((uint)slot->slotID | channel)) {
+    if ((u_int)*(byte *)(iVar3 + 8) == ((u_int)slot->slotID | channel)) {
       local_28 = (ushort)*(byte *)(iVar3 + 0xe) * (ushort)*(byte *)(iVar3 + 0xe);
       local_26 = (ushort)*(byte *)(iVar3 + 0xe) * (ushort)*(byte *)(iVar3 + 0xe);
       if ((aadMem->flags & 1U) == 0) {
         bVar1 = *(byte *)(iVar4 + 0x5b0);
         if (bVar1 < 0x41) {
           if (bVar1 < 0x3f) {
-            local_26 = (short)((int)((int)local_28 * (uint)*(byte *)(iVar4 + 0x5b0) *
-                                    (uint)*(byte *)(iVar4 + 0x5b0)) >> 0xc);
+            local_26 = (short)((int)((int)local_28 * (u_int)*(byte *)(iVar4 + 0x5b0) *
+                                    (u_int)*(byte *)(iVar4 + 0x5b0)) >> 0xc);
           }
         }
         else {
-          local_28 = (short)((int)local_26 * (0x7f - (uint)bVar1) * (0x7f - (uint)bVar1) >> 0xc);
+          local_28 = (short)((int)local_26 * (0x7f - (u_int)bVar1) * (0x7f - (u_int)bVar1) >> 0xc);
         }
       }
-      uVar2 = (uint)*(byte *)(*(int *)(iVar3 + 0x14) + 2);
+      uVar2 = (u_int)*(byte *)(*(int *)(iVar3 + 0x14) + 2);
       iVar7 = uVar2 * uVar2;
-      local_28 = (short)((uint)(local_28 * iVar7) >> 0xe);
-      local_26 = (short)((uint)(local_26 * iVar7) >> 0xe);
+      local_28 = (short)((u_int)(local_28 * iVar7) >> 0xe);
+      local_26 = (short)((u_int)(local_26 * iVar7) >> 0xe);
       if ((aadMem->flags & 1U) == 0) {
         bVar1 = *(byte *)(*(int *)(iVar3 + 0x14) + 3);
         if (bVar1 < 0x41) {
           if (bVar1 < 0x3f) {
-            uVar2 = (uint)*(byte *)(*(int *)(iVar3 + 0x14) + 3);
+            uVar2 = (u_int)*(byte *)(*(int *)(iVar3 + 0x14) + 3);
             local_26 = (short)((int)((int)local_28 * uVar2 * uVar2) >> 0xc);
           }
         }
         else {
-          local_28 = (short)((int)local_26 * (0x7f - (uint)bVar1) * (0x7f - (uint)bVar1) >> 0xc);
+          local_28 = (short)((int)local_26 * (0x7f - (u_int)bVar1) * (0x7f - (u_int)bVar1) >> 0xc);
         }
       }
-      iVar7 = (uint)*(byte *)(iVar4 + 0x5a0) * (uint)*(byte *)(iVar4 + 0x5a0);
-      uVar2 = (uint)*(byte *)(*(int *)(iVar3 + 0x18) + 4);
+      iVar7 = (u_int)*(byte *)(iVar4 + 0x5a0) * (u_int)*(byte *)(iVar4 + 0x5a0);
+      uVar2 = (u_int)*(byte *)(*(int *)(iVar3 + 0x18) + 4);
       iVar8 = uVar2 * uVar2;
-      iVar9 = (uint)slot->slotVolume * (uint)slot->slotVolume;
+      iVar9 = (u_int)slot->slotVolume * (u_int)slot->slotVolume;
       iVar10 = *slot->masterVolPtr * *slot->masterVolPtr;
-      SpuSetVoiceVolume(iVar5,(int)(short)((uint)((short)((uint)((short)((uint)((short)((uint)(
+      SpuSetVoiceVolume(iVar5,(int)(short)((u_int)((short)((u_int)((short)((u_int)((short)((u_int)(
                                                   local_28 * iVar7) >> 0xe) * iVar8) >> 0xe) * iVar9
                                                   ) >> 0xe) * iVar10) >> 0xe),
-                        (int)(short)((uint)((short)((uint)((short)((uint)((short)((uint)(local_26 *
+                        (int)(short)((u_int)((short)((u_int)((short)((u_int)((short)((u_int)(local_26 *
                                                                                         iVar7) >>
                                                                                  0xe) * iVar8) >>
                                                                   0xe) * iVar9) >> 0xe) * iVar10) >>
@@ -471,8 +471,8 @@ void aadUpdateSlotVolPan(_AadSequenceSlot *slot)
 
 {
   byte bVar1;
-  uint uVar2;
-  uint uVar3;
+  u_int uVar2;
+  u_int uVar3;
   int iVar4;
   int iVar5;
   int iVar6;
@@ -486,48 +486,48 @@ void aadUpdateSlotVolPan(_AadSequenceSlot *slot)
   iVar5 = 0x1dc;
   do {
     iVar7 = (int)&aadMem->updateCounter + iVar5;
-    if (((uint)*(byte *)(iVar7 + 8) & 0xf0) == (uint)slot->slotID) {
+    if (((u_int)*(byte *)(iVar7 + 8) & 0xf0) == (u_int)slot->slotID) {
       local_18 = (ushort)*(byte *)(iVar7 + 0xe) * (ushort)*(byte *)(iVar7 + 0xe);
       local_16 = (ushort)*(byte *)(iVar7 + 0xe) * (ushort)*(byte *)(iVar7 + 0xe);
-      uVar3 = (uint)*(byte *)(iVar7 + 8) & 0xf;
+      uVar3 = (u_int)*(byte *)(iVar7 + 8) & 0xf;
       if ((aadMem->flags & 1U) == 0) {
         iVar6 = (int)&(slot->tempo).currentTick + uVar3;
         bVar1 = *(byte *)(iVar6 + 0x5b0);
         if (bVar1 < 0x41) {
           if (bVar1 < 0x3f) {
-            uVar2 = (uint)*(byte *)(iVar6 + 0x5b0);
+            uVar2 = (u_int)*(byte *)(iVar6 + 0x5b0);
             local_16 = (short)((int)((int)local_18 * uVar2 * uVar2) >> 0xc);
           }
         }
         else {
-          local_18 = (short)((int)local_16 * (0x7f - (uint)bVar1) * (0x7f - (uint)bVar1) >> 0xc);
+          local_18 = (short)((int)local_16 * (0x7f - (u_int)bVar1) * (0x7f - (u_int)bVar1) >> 0xc);
         }
       }
-      uVar2 = (uint)*(byte *)(*(int *)(iVar7 + 0x14) + 2);
+      uVar2 = (u_int)*(byte *)(*(int *)(iVar7 + 0x14) + 2);
       iVar6 = uVar2 * uVar2;
-      local_18 = (short)((uint)(local_18 * iVar6) >> 0xe);
-      local_16 = (short)((uint)(local_16 * iVar6) >> 0xe);
+      local_18 = (short)((u_int)(local_18 * iVar6) >> 0xe);
+      local_16 = (short)((u_int)(local_16 * iVar6) >> 0xe);
       if ((aadMem->flags & 1U) == 0) {
         bVar1 = *(byte *)(*(int *)(iVar7 + 0x14) + 3);
         if (bVar1 < 0x41) {
           if (bVar1 < 0x3f) {
-            uVar2 = (uint)*(byte *)(*(int *)(iVar7 + 0x14) + 3);
+            uVar2 = (u_int)*(byte *)(*(int *)(iVar7 + 0x14) + 3);
             local_16 = (short)((int)((int)local_18 * uVar2 * uVar2) >> 0xc);
           }
         }
         else {
-          local_18 = (short)((int)local_16 * (0x7f - (uint)bVar1) * (0x7f - (uint)bVar1) >> 0xc);
+          local_18 = (short)((int)local_16 * (0x7f - (u_int)bVar1) * (0x7f - (u_int)bVar1) >> 0xc);
         }
       }
-      iVar6 = (uint)slot->volume[uVar3] * (uint)slot->volume[uVar3];
-      uVar3 = (uint)*(byte *)(*(int *)(iVar7 + 0x18) + 4);
+      iVar6 = (u_int)slot->volume[uVar3] * (u_int)slot->volume[uVar3];
+      uVar3 = (u_int)*(byte *)(*(int *)(iVar7 + 0x18) + 4);
       iVar7 = uVar3 * uVar3;
-      iVar8 = (uint)slot->slotVolume * (uint)slot->slotVolume;
+      iVar8 = (u_int)slot->slotVolume * (u_int)slot->slotVolume;
       iVar9 = *slot->masterVolPtr * *slot->masterVolPtr;
-      SpuSetVoiceVolume(iVar4,(int)(short)((uint)((short)((uint)((short)((uint)((short)((uint)(
+      SpuSetVoiceVolume(iVar4,(int)(short)((u_int)((short)((u_int)((short)((u_int)((short)((u_int)(
                                                   local_18 * iVar6) >> 0xe) * iVar7) >> 0xe) * iVar8
                                                   ) >> 0xe) * iVar9) >> 0xe),
-                        (int)(short)((uint)((short)((uint)((short)((uint)((short)((uint)(local_16 *
+                        (int)(short)((u_int)((short)((u_int)((short)((u_int)((short)((u_int)(local_16 *
                                                                                         iVar6) >>
                                                                                  0xe) * iVar7) >>
                                                                   0xe) * iVar8) >> 0xe) * iVar9) >>
@@ -578,21 +578,21 @@ void aadUpdateChannelPitchBend(_AadSequenceSlot *slot,int channel)
   
   iVar4 = 0;
   iVar5 = 0x1dc;
-  iVar6 = (uint)slot->pitchWheel[channel] - 0x2000;
+  iVar6 = (u_int)slot->pitchWheel[channel] - 0x2000;
   do {
     iVar1 = (int)&aadMem->updateCounter + iVar5;
-    if ((uint)*(byte *)(iVar1 + 8) == ((uint)slot->slotID | channel)) {
+    if ((u_int)*(byte *)(iVar1 + 8) == ((u_int)slot->slotID | channel)) {
       iVar3 = *(int *)(iVar1 + 0x14);
       if (*(byte *)(iVar3 + 9) != 0) {
-        iVar7 = 0x2000 / (int)(uint)*(byte *)(iVar3 + 9);
-        iVar1 = ((uint)*(byte *)(iVar1 + 10) - ((uint)*(byte *)(iVar3 + 4) - 0x3c)) + iVar6 / iVar7;
+        iVar7 = 0x2000 / (int)(u_int)*(byte *)(iVar3 + 9);
+        iVar1 = ((u_int)*(byte *)(iVar1 + 10) - ((u_int)*(byte *)(iVar3 + 4) - 0x3c)) + iVar6 / iVar7;
         if ((*(byte *)(iVar3 + 5) & 0x80) == 0) {
           sVar2 = (&aadPitchTable)[iVar1] +
-                  (ushort)((&aadStepsPerCent)[iVar1] * 100 * (uint)*(byte *)(iVar3 + 5) >> 0x17);
+                  (ushort)((&aadStepsPerCent)[iVar1] * 100 * (u_int)*(byte *)(iVar3 + 5) >> 0x17);
         }
         else {
           sVar2 = (&aadPitchTable)[iVar1] -
-                  (ushort)((&aadStepsPerCent)[iVar1] * 100 * (0x100 - (uint)*(byte *)(iVar3 + 5)) >>
+                  (ushort)((&aadStepsPerCent)[iVar1] * 100 * (0x100 - (u_int)*(byte *)(iVar3 + 5)) >>
                           0x17);
         }
         SpuSetVoicePitch(iVar4,sVar2 + (short)(((int)(&aadStepsPerSemitone)[iVar1] * (iVar6 % iVar7)
@@ -650,7 +650,7 @@ void midiPolyphonicAftertouch(AadSeqEvent *event,_AadSequenceSlot *slot)
 void midiControlChange(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  (*(code *)(&midiControlFunction)[(uint)(byte)event->dataByte[0] & 0xf])();
+  (*(code *)(&midiControlFunction)[(u_int)(byte)event->dataByte[0] & 0xf])();
   return;
 }
 
@@ -687,7 +687,7 @@ void midiControlChange(AadSeqEvent *event,_AadSequenceSlot *slot)
 void midiProgramChange(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  slot->currentProgram[(uint)event->statusByte & 0xf] = event->dataByte[0];
+  slot->currentProgram[(u_int)event->statusByte & 0xf] = event->dataByte[0];
   return;
 }
 
@@ -736,9 +736,9 @@ void midiChannelAftertouch(AadSeqEvent *event,_AadSequenceSlot *slot)
 void midiPitchWheelControl(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  uint channel;
+  u_int channel;
   
-  channel = (uint)event->statusByte & 0xf;
+  channel = (u_int)event->statusByte & 0xf;
   slot->pitchWheel[channel] =
        (ushort)(byte)event->dataByte[0] | (ushort)(byte)event->dataByte[1] << 7;
   aadUpdateChannelPitchBend(slot,channel);
@@ -812,11 +812,11 @@ void midiControlBankSelect(AadSeqEvent *event,_AadSequenceSlot *slot)
 void midiControlVolume(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  uint channel;
+  u_int channel;
   
-  channel = (uint)event->statusByte & 0xf;
+  channel = (u_int)event->statusByte & 0xf;
   slot->volume[channel] = event->dataByte[1];
-  if (((int)(uint)slot->enableSustainUpdate >> channel & 1U) != 0) {
+  if (((int)(u_int)slot->enableSustainUpdate >> channel & 1U) != 0) {
     aadUpdateChannelVolPan(slot,channel);
   }
   return;
@@ -845,11 +845,11 @@ void midiControlVolume(AadSeqEvent *event,_AadSequenceSlot *slot)
 void midiControlPan(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  uint channel;
+  u_int channel;
   
-  channel = (uint)event->statusByte & 0xf;
+  channel = (u_int)event->statusByte & 0xf;
   slot->panPosition[channel] = event->dataByte[1];
-  if (((int)(uint)slot->enableSustainUpdate >> channel & 1U) != 0) {
+  if (((int)(u_int)slot->enableSustainUpdate >> channel & 1U) != 0) {
     aadUpdateChannelVolPan(slot,channel);
   }
   return;
@@ -883,8 +883,8 @@ void midiControlCallback(AadSeqEvent *event,_AadSequenceSlot *slot)
 {
   if (aadMem->controller11Callback != (_func_48 *)0x0) {
     (*aadMem->controller11Callback)
-              (aadMem->controller11CallbackData,(uint)slot->thisSlotNumber,
-               (uint)event->statusByte & 0xf,(uint)(byte)event->dataByte[1]);
+              (aadMem->controller11CallbackData,(u_int)slot->thisSlotNumber,
+               (u_int)event->statusByte & 0xf,(u_int)(byte)event->dataByte[1]);
   }
   return;
 }

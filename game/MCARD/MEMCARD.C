@@ -68,7 +68,7 @@ void load(memcard_t *memcard)
   Object *loadAddr;
   
   if ((gameTrackerX.gameFlags & 0x8000000U) == 0) {
-    loadAddr = (Object *)MEMPACK_Malloc((ulong)&DAT_00009c40,'+');
+    loadAddr = (Object *)MEMPACK_Malloc((u_long)&DAT_00009c40,'+');
   }
   else {
     loadAddr = (Object *)(gameTrackerX.primPool)->prim;

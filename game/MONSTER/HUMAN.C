@@ -112,15 +112,15 @@ void HUMAN_Init(_Instance *instance)
 
 {
   short sVar1;
-  uint *puVar2;
+  u_int *puVar2;
   void *pvVar3;
-  uint *puVar4;
+  u_int *puVar4;
   
   pvVar3 = instance->data;
-  puVar4 = (uint *)instance->extraData;
-  if ((*(uint *)((int)pvVar3 + 0x10) & 0x2000) == 0) {
+  puVar4 = (u_int *)instance->extraData;
+  if ((*(u_int *)((int)pvVar3 + 0x10) & 0x2000) == 0) {
     sVar1 = GlobalSave->humanOpinionOfRaziel;
-    puVar2 = *(uint **)(puVar4[0x59] + 0xc);
+    puVar2 = *(u_int **)(puVar4[0x59] + 0xc);
     if (sVar1 < 1) {
       puVar2[3] = puVar2[3] & 0xfffffffe;
       puVar2[1] = puVar2[1] & 0xfffffffe;
@@ -133,7 +133,7 @@ void HUMAN_Init(_Instance *instance)
       puVar2[3] = puVar2[3] | 1;
       puVar2[1] = puVar2[1] | 1;
     }
-    if ((*(uint *)((int)pvVar3 + 0x10) & 0x8000) != 0) {
+    if ((*(u_int *)((int)pvVar3 + 0x10) & 0x8000) != 0) {
       if (((*(char *)((int)puVar4 + 0x15a) == '\x01') && (instance->object->oflags == 0x72676c76))
          && (*(int *)&instance->object->id == 0x5f5f5f61)) {
         G2Anim_DisableSegment(&instance->anim,4);
@@ -189,21 +189,21 @@ void HUMAN_CleanUp(_Instance *instance)
 	/* end block 2 */
 	// End Line: 455
 
-ulong HUMAN_Query(_Instance *instance,ulong query)
+u_long HUMAN_Query(_Instance *instance,u_long query)
 
 {
-  ulong uVar1;
-  uint uVar2;
-  uint *puVar3;
+  u_long uVar1;
+  u_int uVar2;
+  u_int *puVar3;
   
-  puVar3 = (uint *)instance->extraData;
+  puVar3 = (u_int *)instance->extraData;
   uVar1 = 0;
   if (instance->data != (void *)0x0) {
     if (query == 0) {
       uVar2 = *puVar3;
       uVar1 = 0x40000000;
       if (((((uVar2 & 0x200) == 0) && (uVar1 = 0x12000000, instance->currentMainState != 0x1e)) &&
-          (uVar1 = (uint)((uVar2 & 0x100) != 0) << 0x1d, (uVar2 & 0x200000) == 0)) &&
+          (uVar1 = (u_int)((uVar2 & 0x100) != 0) << 0x1d, (uVar2 & 0x200000) == 0)) &&
          ((*(short *)(puVar3 + 0x50) < 0x1001 || ((puVar3[1] & 3) != 0)))) {
         uVar1 = uVar1 | 0x8000000;
       }
@@ -211,8 +211,8 @@ ulong HUMAN_Query(_Instance *instance,ulong query)
     else {
       if (query == 0x25) {
         uVar1 = 0;
-        if ((*(uint *)((int)instance->data + 0x10) & 0x8000) == 0) {
-          uVar1 = **(uint **)(puVar3[0x59] + 0xc) & 1;
+        if ((*(u_int *)((int)instance->data + 0x10) & 0x8000) == 0) {
+          uVar1 = **(u_int **)(puVar3[0x59] + 0xc) & 1;
         }
       }
       else {
@@ -247,7 +247,7 @@ void HUMAN_DeadEntry(_Instance *instance)
 
 {
   int iVar1;
-  ulong uVar2;
+  u_long uVar2;
   void *pvVar3;
   
   pvVar3 = instance->extraData;
@@ -261,7 +261,7 @@ void HUMAN_DeadEntry(_Instance *instance)
   }
   MON_DeadEntry(instance);
   uVar2 = MON_GetTime(instance);
-  *(ulong *)((int)pvVar3 + 0x10c) = uVar2;
+  *(u_long *)((int)pvVar3 + 0x10c) = uVar2;
   MON_BirthMana(instance);
   return;
 }
@@ -290,11 +290,11 @@ void HUMAN_Dead(_Instance *instance)
 
 {
   ushort uVar1;
-  ulong uVar2;
+  u_long uVar2;
   __Event *p_Var3;
-  uint *puVar4;
+  u_int *puVar4;
   
-  puVar4 = (uint *)instance->extraData;
+  puVar4 = (u_int *)instance->extraData;
   uVar2 = MON_GetTime(instance);
   uVar1 = *(ushort *)(puVar4 + 0x43);
   instance->fadeValue = (short)(uVar2 - uVar1);
@@ -341,7 +341,7 @@ void HUMAN_Dead(_Instance *instance)
 void HUMAN_StunnedEntry(_Instance *instance)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   undefined4 local_10;
   undefined4 local_c;
   void *pvVar2;
@@ -349,7 +349,7 @@ void HUMAN_StunnedEntry(_Instance *instance)
   undefined4 in_stack_fffffffc;
   
   pvVar2 = instance->extraData;
-  if ((*(uint *)((int)pvVar2 + 4) & 0x10) == 0) {
+  if ((*(u_int *)((int)pvVar2 + 4) & 0x10) == 0) {
     MON_StunnedEntry(instance);
   }
   else {
@@ -385,7 +385,7 @@ void HUMAN_StunnedEntry(_Instance *instance)
 void HUMAN_Stunned(_Instance *instance)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   undefined4 unaff_s0;
   void *pvVar2;
   undefined4 unaff_s1;
@@ -393,7 +393,7 @@ void HUMAN_Stunned(_Instance *instance)
   undefined4 in_stack_fffffffc;
   
   pvVar2 = instance->extraData;
-  if ((*(uint *)((int)pvVar2 + 4) & 0x10) == 0) {
+  if ((*(u_int *)((int)pvVar2 + 4) & 0x10) == 0) {
     MON_Stunned(instance);
   }
   else {
@@ -403,9 +403,9 @@ void HUMAN_Stunned(_Instance *instance)
                                       CONCAT48(unaff_retaddr,CONCAT44(unaff_s1,unaff_s0))),5);
     }
     uVar1 = MON_GetTime(instance);
-    if (*(uint *)((int)pvVar2 + 0x114) < uVar1) {
+    if (*(u_int *)((int)pvVar2 + 0x114) < uVar1) {
       *(undefined2 *)((int)pvVar2 + 0x144) = 0x4000;
-      *(uint *)((int)pvVar2 + 4) = *(uint *)((int)pvVar2 + 4) & 0xffffffef;
+      *(u_int *)((int)pvVar2 + 4) = *(u_int *)((int)pvVar2 + 4) & 0xffffffef;
     }
     MON_DefaultQueueHandler(instance);
   }
@@ -483,7 +483,7 @@ void HUMAN_Embrace(_Instance *instance)
 {
   bool bVar1;
   __Event *message;
-  uint Data;
+  u_int Data;
   void *pvVar2;
   undefined4 local_20;
   undefined4 in_stack_ffffffe4;
@@ -507,8 +507,8 @@ void HUMAN_Embrace(_Instance *instance)
   else {
     *(short *)((int)pvVar2 + 0x144) = *(short *)((int)pvVar2 + 0x144) - (short)Data;
   }
-  GAMEPAD_Shock1(0x80 - (uint)((int)*(short *)((int)pvVar2 + 0x144) << 7) /
-                        (uint)(*(int *)((int)pvVar2 + 0x114) << 0xc),0xf000);
+  GAMEPAD_Shock1(0x80 - (u_int)((int)*(short *)((int)pvVar2 + 0x144) << 7) /
+                        (u_int)(*(int *)((int)pvVar2 + 0x114) << 0xc),0xf000);
   if (*(short *)((int)pvVar2 + 0x144) == 0) {
     *(undefined2 *)((int)pvVar2 + 0x150) = 0;
     MON_SwitchState(instance,(MonsterState)CONCAT44(in_stack_ffffffe4,local_20));
@@ -518,7 +518,7 @@ void HUMAN_Embrace(_Instance *instance)
   }
   else {
     if (bVar1) {
-      *(uint *)((int)pvVar2 + 4) = *(uint *)((int)pvVar2 + 4) | 0x10;
+      *(u_int *)((int)pvVar2 + 4) = *(u_int *)((int)pvVar2 + 4) | 0x10;
       MON_SwitchState(instance,(MonsterState)CONCAT44(in_stack_ffffffe4,local_20));
     }
     else {
@@ -559,7 +559,7 @@ void HUMAN_IdleEntry(_Instance *instance)
   
   pvVar1 = instance->extraData;
   MON_IdleEntry(instance);
-  *(uint *)((int)pvVar1 + 4) = *(uint *)((int)pvVar1 + 4) & 0xfffffff8;
+  *(u_int *)((int)pvVar1 + 4) = *(u_int *)((int)pvVar1 + 4) & 0xfffffff8;
   return;
 }
 
@@ -588,15 +588,15 @@ void HUMAN_IdleEntry(_Instance *instance)
 void HUMAN_Idle(_Instance *instance)
 
 {
-  uint uVar1;
-  uint uVar2;
+  u_int uVar1;
+  u_int uVar2;
   char *animList;
   int animtype;
   void *pvVar3;
   int mode;
-  uint *puVar4;
+  u_int *puVar4;
   
-  puVar4 = (uint *)instance->extraData;
+  puVar4 = (u_int *)instance->extraData;
   pvVar3 = instance->data;
   uVar1 = puVar4[0x33];
   if ((((*puVar4 & 4) != 0) || (uVar1 == 0)) || ((*(ushort *)(uVar1 + 0x16) & 4) == 0)) {
@@ -675,11 +675,11 @@ void HUMAN_Flee(_Instance *instance)
 
 {
   undefined4 unaff_s0;
-  uint *puVar1;
+  u_int *puVar1;
   undefined4 unaff_s1;
-  uint uVar2;
+  u_int uVar2;
   
-  puVar1 = (uint *)instance->extraData;
+  puVar1 = (u_int *)instance->extraData;
   uVar2 = puVar1[0x31];
   if ((uVar2 == 0) || (0x27f < *(short *)(uVar2 + 0x14))) {
     if ((puVar1[1] & 8) == 0) {
@@ -745,16 +745,16 @@ void HUMAN_Flee(_Instance *instance)
 void HUMAN_GetAngry(void)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   _MonsterIR *p_Var2;
-  uint *puVar3;
+  u_int *puVar3;
   _Instance *Inst;
   
   Inst = (gameTrackerX.instanceList)->first;
   while (Inst != (_Instance *)0x0) {
     uVar1 = INSTANCE_Query(Inst,1);
     if ((uVar1 & 0xc000) != 0) {
-      puVar3 = *(uint **)(*(int *)((int)Inst->extraData + 0x164) + 0xc);
+      puVar3 = *(u_int **)(*(int *)((int)Inst->extraData + 0x164) + 0xc);
       puVar3[3] = puVar3[3] & 0xfffffffe;
       puVar3[1] = puVar3[1] & 0xfffffffe;
       *puVar3 = *puVar3 | 1;

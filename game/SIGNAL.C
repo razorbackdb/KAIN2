@@ -390,7 +390,7 @@ long SIGNAL_HandleFogNear(_Instance *instance,Signal *signal)
   level = STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID);
   uVar1 = *(ushort *)signal->data;
   level->fogNear = uVar1;
-  SetFogNearFar((uint)uVar1,(uint)level->fogFar,theCamera.core.projDistance);
+  SetFogNearFar((u_int)uVar1,(u_int)level->fogFar,theCamera.core.projDistance);
   LIGHT_CalcDQPTable(level);
   return 1;
 }
@@ -429,7 +429,7 @@ long SIGNAL_HandleFogFar(_Instance *instance,Signal *signal)
   level = STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID);
   uVar1 = *(ushort *)signal->data;
   level->fogFar = uVar1;
-  SetFogNearFar((uint)level->fogNear,(uint)uVar1,theCamera.core.projDistance);
+  SetFogNearFar((u_int)level->fogNear,(u_int)uVar1,theCamera.core.projDistance);
   LIGHT_CalcDQPTable(level);
   return 1;
 }
@@ -816,7 +816,7 @@ void COLLIDE_HandleSignal(_Instance *instance,Signal *signal,long numSignals,int
 
 {
   long lVar1;
-  uint uVar2;
+  u_int uVar2;
   
   if (numSignals != 0) {
     while( true ) {
@@ -867,7 +867,7 @@ long SIGNAL_IsThisStreamAWarpGate(Signal *signal)
     *pcVar1 = '\0';
   }
   iVar2 = strcmpi(acStack40,"warpgate");
-  return (uint)(iVar2 == 0);
+  return (u_int)(iVar2 == 0);
 }
 
 
@@ -897,7 +897,7 @@ long SIGNAL_IsStreamSignal(Signal *signal,long *isWarpGate)
 {
   bool bVar1;
   long lVar2;
-  uint uVar3;
+  u_int uVar3;
   long lVar4;
   
   lVar4 = 0;

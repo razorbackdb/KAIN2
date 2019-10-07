@@ -414,9 +414,9 @@ int HealthCheckForLowHealth(void)
 void DrainMana(int amount)
 
 {
-  uint uVar1;
+  u_int uVar1;
   
-  uVar1 = (uint)Raziel.GlyphManaBalls;
+  uVar1 = (u_int)Raziel.GlyphManaBalls;
   Raziel.GlyphManaBalls = (ushort)(uVar1 - amount);
   if ((uVar1 - amount & 0xffff) == 0) {
     Raziel.GlyphManaBalls = 0;

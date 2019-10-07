@@ -33,14 +33,14 @@
 void RELMOD_InitModulePointers(int baseaddr,int *relocs)
 
 {
-  uint uVar1;
-  uint uVar2;
-  uint *puVar3;
+  u_int uVar1;
+  u_int uVar2;
+  u_int *puVar3;
   int *piVar4;
   
   if (*relocs != -1) {
     uVar1 = *relocs;
-    puVar3 = (uint *)(relocs + 1);
+    puVar3 = (u_int *)(relocs + 1);
     do {
       uVar2 = uVar1 & 3;
       piVar4 = (int *)(baseaddr + (uVar1 & 0xfffffffc));
@@ -61,7 +61,7 @@ void RELMOD_InitModulePointers(int baseaddr,int *relocs)
           }
           else {
             if (uVar2 == 3) {
-              *piVar4 = *piVar4 + ((uint)(baseaddr << 4) >> 6);
+              *piVar4 = *piVar4 + ((u_int)(baseaddr << 4) >> 6);
             }
           }
         }
@@ -108,14 +108,14 @@ void RELMOD_RelocModulePointers(int baseaddr,int offset,int *relocs)
 
 {
   int iVar1;
-  uint uVar2;
-  uint uVar3;
-  uint *puVar4;
+  u_int uVar2;
+  u_int uVar3;
+  u_int *puVar4;
   int *piVar5;
   
   if (*relocs != -1) {
     uVar2 = *relocs;
-    puVar4 = (uint *)(relocs + 1);
+    puVar4 = (u_int *)(relocs + 1);
     do {
       uVar3 = uVar2 & 3;
       piVar5 = (int *)(baseaddr + (uVar2 & 0xfffffffc));
@@ -138,8 +138,8 @@ LAB_8007c35c:
           }
           else {
             if (uVar3 == 3) {
-              iVar1 = (*piVar5 - ((uint)((baseaddr - offset) * 0x10) >> 6)) +
-                      ((uint)(baseaddr << 4) >> 6);
+              iVar1 = (*piVar5 - ((u_int)((baseaddr - offset) * 0x10) >> 6)) +
+                      ((u_int)(baseaddr << 4) >> 6);
               goto LAB_8007c35c;
             }
           }

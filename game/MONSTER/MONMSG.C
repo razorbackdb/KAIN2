@@ -144,17 +144,17 @@ void MON_PupateMessageHandler(_Instance *instance,__Event *message)
 {
   short angle;
   long lVar1;
-  ulong uVar2;
+  u_long uVar2;
   int iVar3;
   _Instance *p_Var4;
-  uint *puVar5;
+  u_int *puVar5;
   undefined4 local_48;
   undefined4 in_stack_ffffffbc;
   evFXHitData eStack64;
   evFXHitData eStack40;
   
   iVar3 = message->ID;
-  puVar5 = (uint *)instance->extraData;
+  puVar5 = (u_int *)instance->extraData;
   if (iVar3 == 0x80004) {
     if (*(char *)(puVar5[0x59] + 0x3a) == '\0') {
       return;
@@ -288,12 +288,12 @@ LAB_8008472c:
 void MON_IdleMessageHandler(_Instance *instance,__Event *message)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   undefined4 local_10;
   undefined4 local_c;
-  uint *puVar2;
+  u_int *puVar2;
   
-  puVar2 = (uint *)instance->extraData;
+  puVar2 = (u_int *)instance->extraData;
   switch(message->ID) {
   case 0x1000002:
   case 0x100000a:
@@ -308,7 +308,7 @@ void MON_IdleMessageHandler(_Instance *instance,__Event *message)
     if ((*puVar2 & 4) == 0) {
       uVar1 = INSTANCE_Query(*(_Instance **)(message->Data + 4),1);
       if ((uVar1 & 1) != 0) {
-        MON_ChangeBehavior(instance,(uint)*(byte *)(puVar2 + 0x56));
+        MON_ChangeBehavior(instance,(u_int)*(byte *)(puVar2 + 0x56));
       }
       MON_SwitchState(instance,(MonsterState)CONCAT44(local_c,local_10));
     }
@@ -317,7 +317,7 @@ void MON_IdleMessageHandler(_Instance *instance,__Event *message)
     if ((*puVar2 & 4) == 0) {
       uVar1 = INSTANCE_Query(*(_Instance **)(message->Data + 4),1);
       if ((uVar1 & 1) != 0) {
-        MON_ChangeBehavior(instance,(uint)*(byte *)(puVar2 + 0x56));
+        MON_ChangeBehavior(instance,(u_int)*(byte *)(puVar2 + 0x56));
       }
       MON_SwitchState(instance,(MonsterState)CONCAT44(local_c,local_10));
     }
@@ -535,13 +535,13 @@ void MON_DefaultMessageHandler(_Instance *instance,__Event *message)
   short sVar2;
   bool bVar3;
   short angle;
-  ulong uVar4;
+  u_long uVar4;
   long lVar5;
   TDRFuncPtr_MONTABLE_GetDamageEffectFunc pTVar6;
-  uint CurrentSection;
+  u_int CurrentSection;
   int Data;
   short *psVar7;
-  uint uVar8;
+  u_int uVar8;
   _MonsterIR *Data_00;
   int iVar9;
   evFXHitData *data;
@@ -881,7 +881,7 @@ LAB_80084bd0:
         if (Data != 0x40003) {
           return;
         }
-        CurrentSection = (uint)mv->subAttr->numSections;
+        CurrentSection = (u_int)mv->subAttr->numSections;
         Data = message->Data;
         while (CurrentSection = CurrentSection - 1, -1 < (int)CurrentSection) {
           G2EmulationInstanceToInstanceSwitchAnimation
@@ -969,7 +969,7 @@ LAB_800854dc:
         return;
       }
 LAB_80085200:
-      if ((*(uint *)((int)instance->data + 0x10) & 0x10008) == 0) {
+      if ((*(u_int *)((int)instance->data + 0x10) & 0x10008) == 0) {
         MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
         MON_MonsterGlow(instance,0xffffff,0x46,10,0x14);
         mv->damageType = 0x40;
@@ -992,7 +992,7 @@ LAB_80085540:
         instance->petrifyValue = 0x1000;
         return;
       }
-      if ((mv->subAttr->waterVuln != '\0') && ((*(uint *)((int)instance->data + 0x10) & 8) == 0)) {
+      if ((mv->subAttr->waterVuln != '\0') && ((*(u_int *)((int)instance->data + 0x10) & 8) == 0)) {
         MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
         MON_MonsterGlow(instance,0xff0000,0x46,10,0x14);
         mv->damageType = 0x10;

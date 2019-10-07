@@ -84,7 +84,7 @@ void DEBUG_UpdateFog(long *var)
   ushort uVar1;
   Level *pLVar2;
   _StreamUnit *p_Var3;
-  uint uVar4;
+  u_int uVar4;
   
   p_Var3 = FindStreamUnitFromLevel(gameTrackerX.level);
   pLVar2 = gameTrackerX.level;
@@ -100,7 +100,7 @@ void DEBUG_UpdateFog(long *var)
   pLVar2 = gameTrackerX.level;
   uVar4 = debugFogBlu << 0x10 | debugFogGrn << 8 | debugFogRed;
   p_Var3->FogColor = uVar4;
-  *(uint *)&pLVar2->backColorR = uVar4;
+  *(u_int *)&pLVar2->backColorR = uVar4;
   LIGHT_CalcDQPTable(gameTrackerX.level);
   return;
 }
@@ -198,9 +198,9 @@ void DEBUG_FogLoad(void)
   debugOrgFogGrn = *(byte *)((int)&p_Var1->FogColor + 1);
   debugFogFar = (int)p_Var1->TargetFogFar;
   debugFogNear = (int)p_Var1->TargetFogNear;
-  debugFogRed = (uint)*(byte *)&p_Var1->FogColor;
-  debugFogGrn = (uint)debugOrgFogGrn;
-  debugFogBlu = (uint)debugOrgFogBlu;
+  debugFogRed = (u_int)*(byte *)&p_Var1->FogColor;
+  debugFogGrn = (u_int)debugOrgFogGrn;
+  debugFogBlu = (u_int)debugOrgFogBlu;
   debugOrgFogNear = p_Var1->TargetFogNear;
   debugOrgFogRed = *(byte *)&p_Var1->FogColor;
   debugOrgFogFar = p_Var1->TargetFogFar;
@@ -259,7 +259,7 @@ void DEBUG_SendCinematicSwitch(void)
 
 {
   gameTrackerX.debugFlags2 = gameTrackerX.debugFlags2 ^ 0x200;
-  INSTANCE_Broadcast((_Instance *)0x0,0xe,0x4000e,(uint)((gameTrackerX.debugFlags2 & 0x200U) != 0));
+  INSTANCE_Broadcast((_Instance *)0x0,0xe,0x4000e,(u_int)((gameTrackerX.debugFlags2 & 0x200U) != 0));
   return;
 }
 
@@ -280,8 +280,8 @@ void DEBUG_SendMoveTo(void)
 
 {
   short sVar1;
-  uint uVar2;
-  uint uVar3;
+  u_int uVar2;
+  u_int uVar3;
   int Data;
   
   uVar2 = rand();
@@ -353,8 +353,8 @@ void DEBUG_Process(GameTracker *gameTracker)
 
 {
   short sVar1;
-  uint uVar2;
-  uint uVar3;
+  u_int uVar2;
+  u_int uVar3;
   
   uVar3 = gameTracker->debugFlags;
   sVar1 = gameTracker->gameMode;
@@ -420,7 +420,7 @@ LAB_80013230:
 	/* end block 1 */
 	// End Line: 2961
 
-void DEBUG_Draw(GameTracker *gameTracker,ulong **ot)
+void DEBUG_Draw(GameTracker *gameTracker,u_long **ot)
 
 {
   if (((gameTracker->gameMode == 0) || (gameTracker->cheatMode == '\x01')) ||
@@ -633,13 +633,13 @@ void maybe_change_menu_choice(GameTracker *gt,DebugMenuLine *menu)
 
 {
   int iVar1;
-  uint uVar2;
+  u_int uVar2;
   int iVar3;
   
   iVar3 = debugMenuChoice;
   iVar1 = num_menu_items(menu);
   if ((gt->controlCommand[1] & 1U) == 0) {
-    uVar2 = (uint)gt->controlCommand[1] >> 1 & 1;
+    uVar2 = (u_int)gt->controlCommand[1] >> 1 & 1;
   }
   else {
     uVar2 = 0xffffffff;
@@ -691,7 +691,7 @@ void maybe_change_menu_choice(GameTracker *gt,DebugMenuLine *menu)
 void handle_line_type_long(GameTracker *gt,DebugMenuLine *line)
 
 {
-  uint uVar1;
+  u_int uVar1;
   int *piVar2;
   int iVar3;
   
@@ -814,7 +814,7 @@ void handle_line_type_action(GameTracker *gt,DebugMenuLine *line)
 void handle_line_type_action_with_line(GameTracker *gt,DebugMenuLine *line)
 
 {
-  uint uVar1;
+  u_int uVar1;
   int iVar2;
   
   uVar1 = gt->controlCommand[1];
@@ -1050,7 +1050,7 @@ void set_user_leading(void)
 int isdigit(char c)
 
 {
-  return (uint)((byte)(c - 0x30U) < 10);
+  return (u_int)((byte)(c - 0x30U) < 10);
 }
 
 
@@ -1104,7 +1104,7 @@ void adjust_format(char *ctrl,debug_format_t *fmt)
       while (iVar3 = isdigit(*pbVar4), iVar3 != 0) {
         bVar1 = *pbVar4;
         pbVar4 = pbVar4 + 1;
-        iVar2 = iVar2 * 10 + (uint)bVar1 + -0x30;
+        iVar2 = iVar2 * 10 + (u_int)bVar1 + -0x30;
       }
       if (*pbVar4 != 0) {
         pbVar4 = pbVar4 + 1;
@@ -1112,7 +1112,7 @@ void adjust_format(char *ctrl,debug_format_t *fmt)
       while (iVar3 = isdigit(*pbVar4), iVar3 != 0) {
         bVar1 = *pbVar4;
         pbVar4 = pbVar4 + 1;
-        iVar5 = iVar5 * 10 + (uint)bVar1 + -0x30;
+        iVar5 = iVar5 * 10 + (u_int)bVar1 + -0x30;
       }
       if (*pbVar4 != 0) {
         pbVar4 = pbVar4 + 1;
@@ -1220,7 +1220,7 @@ void draw_menu_item(GameTracker *gt,debug_format_t *fmt,char *text)
     else {
       iVar3 = FONT_GetStringWidth(text);
       y = *(short *)&fmt->ypos;
-      x = (short)(((uint)*(ushort *)&fmt->xpos - (iVar3 >> 1)) * 0x10000 >> 0x10);
+      x = (short)(((u_int)*(ushort *)&fmt->xpos - (iVar3 >> 1)) * 0x10000 >> 0x10);
     }
     FONT_SetCursor(x,y);
     if (currentMenu->type == DEBUG_LINE_TYPE_FORMAT) {
@@ -1323,7 +1323,7 @@ void draw_menu(GameTracker *gt,DebugMenuLine *menu)
       else {
         iVar3 = 0x78;
       }
-      FONT_SetCursor((short)((uint)((iVar3 + iVar2) * 0x10000) >> 0x10),y);
+      FONT_SetCursor((short)((u_int)((iVar3 + iVar2) * 0x10000) >> 0x10),y);
       if (menu->type == DEBUG_LINE_TYPE_BIT) {
         if ((*menu->var_address & menu->bit_mask) == menu->bit_mask) {
           FONT_Print("YES");
@@ -1494,7 +1494,7 @@ void DEBUG_DisplayStatus(GameTracker *gameTracker)
 	/* end block 2 */
 	// End Line: 5601
 
-void DEBUG_DrawShrinkCels(ulong **polyAddr)
+void DEBUG_DrawShrinkCels(u_long **polyAddr)
 
 {
   return;
@@ -1791,7 +1791,7 @@ void DEBUG_CaptureScreen(GameTracker *gameTracker)
 void DEBUG_PageFlip(void)
 
 {
-  ulong **ppuVar1;
+  u_long **ppuVar1;
   int iVar2;
   undefined auStack32 [3];
   undefined local_1d;
@@ -1934,7 +1934,7 @@ void DEBUG_ProcessSecondController(GameTracker *gameTracker)
 void DEBUG_ProcessCheat(GameTracker *gameTracker)
 
 {
-  uint uVar1;
+  u_int uVar1;
   int iVar2;
   undefined auStack80 [2];
   undefined2 local_4e;
@@ -1989,7 +1989,7 @@ void DEBUG_ProcessCheat(GameTracker *gameTracker)
     memset(local_48,0,0x10);
     local_4e = 0xff00;
     MATH3D_SetUnityMatrix(&MStack56);
-    RotMatrixZ(theCamera.core.rotation.z + iVar2,(uint *)&MStack56);
+    RotMatrixZ(theCamera.core.rotation.z + iVar2,(u_int *)&MStack56);
     ApplyMatrix(&MStack56,auStack80,local_48);
     (gameTracker->playerInstance->position).x =
          (gameTracker->playerInstance->position).x + local_48[0];

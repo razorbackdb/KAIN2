@@ -199,12 +199,12 @@ int PhysicsCheckLinkedMove(_Instance *instance,int Data,short Mode)
   long lVar5;
   int introUniqueID;
   int iVar6;
-  uint *puVar7;
+  u_int *puVar7;
   undefined4 *puVar8;
   int iVar9;
   int iVar10;
   _G2Matrix_Type _Stack144;
-  uint local_70;
+  u_int local_70;
   int local_6c;
   int local_68;
   _G2EulerAngles_Type local_60;
@@ -251,7 +251,7 @@ int PhysicsCheckLinkedMove(_Instance *instance,int Data,short Mode)
         TransposeMatrix(puVar8,(undefined4 *)&_Stack144);
         if (bVar3) {
           MulMatrix0((undefined4 *)&_Stack144,(ushort *)instance->matrix,
-                     (uint *)&instance->relativeMatrix);
+                     (u_int *)&instance->relativeMatrix);
         }
         if (bVar2) {
           local_70 = iVar9 - introUniqueID;
@@ -263,8 +263,8 @@ int PhysicsCheckLinkedMove(_Instance *instance,int Data,short Mode)
           (instance->relativeMatrix).t[2] = (instance->relativeMatrix).t[2] + local_68;
         }
       }
-      ApplyMatrixLV(puVar8,(uint *)(instance->relativeMatrix).t,(int *)local_58);
-      MulMatrix0(puVar8,(ushort *)&instance->relativeMatrix,(uint *)&_Stack144);
+      ApplyMatrixLV(puVar8,(u_int *)(instance->relativeMatrix).t,(int *)local_58);
+      MulMatrix0(puVar8,(ushort *)&instance->relativeMatrix,(u_int *)&_Stack144);
       G2EulerAngles_FromMatrix(&local_60,&_Stack144,0x15);
       *(short *)(Data + 8) = (local_58[0] + (short)local_40) - sVar1;
       *(short *)(Data + 10) = (local_54 + (short)local_3c) - (short)local_34;
@@ -278,7 +278,7 @@ int PhysicsCheckLinkedMove(_Instance *instance,int Data,short Mode)
          (p_Var4 = INSTANCE_Find(introUniqueID), p_Var4 != (_Instance *)0x0)) {
         p_Var4->flags2 = p_Var4->flags2 & 0xffffff7f;
       }
-      *(uint *)(iVar6 + 0x18) = *(uint *)(iVar6 + 0x18) | 0x80;
+      *(u_int *)(iVar6 + 0x18) = *(u_int *)(iVar6 + 0x18) | 0x80;
       instance->attachedID = *(long *)(iVar6 + 0x3c);
       lVar5 = *(long *)(Data + 4);
       instance->zAccl = 0;
@@ -286,12 +286,12 @@ int PhysicsCheckLinkedMove(_Instance *instance,int Data,short Mode)
       instance->attachedSegment = lVar5;
       TransposeMatrix(puVar8,(undefined4 *)&_Stack144);
       local_70 = iVar9 - local_40;
-      puVar7 = (uint *)(instance->relativeMatrix).t;
+      puVar7 = (u_int *)(instance->relativeMatrix).t;
       local_6c = local_34 - local_3c;
       local_68 = local_30 - local_38;
       ApplyMatrixLV((undefined4 *)&_Stack144,&local_70,(int *)puVar7);
       MulMatrix0((undefined4 *)&_Stack144,(ushort *)instance->matrix,
-                 (uint *)&instance->relativeMatrix);
+                 (u_int *)&instance->relativeMatrix);
       ApplyMatrixLV(puVar8,puVar7,(int *)&local_70);
       *(undefined2 *)(Data + 0x14) = 0;
       *(undefined2 *)(Data + 0x12) = 0;
@@ -302,7 +302,7 @@ int PhysicsCheckLinkedMove(_Instance *instance,int Data,short Mode)
     }
     if ((local_48 & 4) != 0) {
       PhysicsDefaultLinkedMoveResponse
-                (instance,(evPhysicsLinkedMoveData *)Data,((uint)(local_48 >> 3) ^ 1) & 1);
+                (instance,(evPhysicsLinkedMoveData *)Data,((u_int)(local_48 >> 3) ^ 1) & 1);
     }
     if ((local_48 & 2) != 0) {
       INSTANCE_Post(instance,0x4010008,Data);
@@ -396,12 +396,12 @@ int PhysicsCheckGravity(_Instance *instance,int Data,short Mode)
   int Data_00;
   int iVar3;
   _Instance *p_Var4;
-  uint uVar5;
+  u_int uVar5;
   int iVar6;
   NodeType *pNVar7;
   int iVar8;
   _TFace *tface;
-  uint uVar9;
+  u_int uVar9;
   _PCollideInfo local_68;
   SVECTOR local_38;
   SVECTOR local_30;
@@ -410,7 +410,7 @@ int PhysicsCheckGravity(_Instance *instance,int Data,short Mode)
   uVar9 = 0;
   local_38.vy = (instance->position).y;
   bVar1 = false;
-  uVar5 = (uint)(ushort)(instance->position).z;
+  uVar5 = (u_int)(ushort)(instance->position).z;
   Data_00 = uVar5 + *(ushort *)Data;
   local_38.vz = (short)Data_00;
   iVar6 = uVar5 - *(ushort *)(Data + 2);
@@ -451,7 +451,7 @@ LAB_800748bc:
   }
   gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xffff7fff;
 LAB_800748d8:
-  if (((((uint)local_68.type - 2 < 2) || (local_68.type == 5)) &&
+  if (((((u_int)local_68.type - 2 < 2) || (local_68.type == 5)) &&
       (Data_00 = (int)local_68.wNormal.vz, Data_00 < *(short *)(Data + 10))) && (0 < Data_00)) {
     iVar8 = (int)-local_68.wNormal.vz;
     iVar6 = -(local_68.wNormal.vx * iVar8);
@@ -493,7 +493,7 @@ LAB_800748d8:
     local_30.vx = local_38.vx;
     local_30.vy = local_38.vy;
     PHYSICS_CheckLineInWorld(instance,&local_68);
-    if (((uint)local_68.type - 2 < 2) || (local_68.type == 5)) {
+    if (((u_int)local_68.type - 2 < 2) || (local_68.type == 5)) {
       if ((local_68.wNormal.vz < *(short *)(Data + 10)) && (0 < local_68.wNormal.vz)) {
         bVar1 = true;
       }
@@ -512,7 +512,7 @@ LAB_800748d8:
     sVar2 = -1;
   }
   instance->cachedTFace = sVar2;
-  if (((uint)local_68.type - 2 < 2) || (local_68.type == 5)) {
+  if (((u_int)local_68.type - 2 < 2) || (local_68.type == 5)) {
     if ((Mode & 7U) != 0) {
       if (bVar1) {
         *(short *)(Data + 4) = (local_68.newPoint)->vx - (instance->position).x;
@@ -671,7 +671,7 @@ int PhysicsCheckEdgeGrabbing(_Instance *instance,GameTracker *gameTracker,int Da
   undefined4 uVar2;
   undefined4 uVar3;
   bool bVar4;
-  uint uVar5;
+  u_int uVar5;
   undefined4 in_zero;
   undefined4 in_at;
   ushort uVar6;
@@ -684,9 +684,9 @@ int PhysicsCheckEdgeGrabbing(_Instance *instance,GameTracker *gameTracker,int Da
   short local_70;
   _PCollideInfo local_68;
   undefined4 local_38;
-  uint local_34;
+  u_int local_34;
   int local_30;
-  uint local_2c;
+  u_int local_2c;
   
   iVar9 = 0;
   bVar4 = true;
@@ -704,11 +704,11 @@ int PhysicsCheckEdgeGrabbing(_Instance *instance,GameTracker *gameTracker,int Da
     RotMatrix(puVar7,&TempMat_40);
   }
   PHYSICS_GenericLineCheckSetup
-            (0,0,(short)(((uint)*(ushort *)Data + (uint)*(ushort *)(Data + 4)) * 0x10000 >> 0x10),
+            (0,0,(short)(((u_int)*(ushort *)Data + (u_int)*(ushort *)(Data + 4)) * 0x10000 >> 0x10),
              (SVECTOR *)&local_38);
   PHYSICS_GenericLineCheckSetup
             (0,*(short *)(Data + 2),
-             (short)(((uint)*(ushort *)Data + (uint)*(ushort *)(Data + 4)) * 0x10000 >> 0x10),
+             (short)(((u_int)*(ushort *)Data + (u_int)*(ushort *)(Data + 4)) * 0x10000 >> 0x10),
              (SVECTOR *)&local_30);
   PHYSICS_GenericLineCheck(instance,instance->matrix,pTempMat_41,&local_68);
   iVar8 = PHYSICS_CheckFaceStick(&local_68);
@@ -716,7 +716,7 @@ int PhysicsCheckEdgeGrabbing(_Instance *instance,GameTracker *gameTracker,int Da
   if (local_68.type == 0) {
     PHYSICS_GenericLineCheckSetup(0,0,*(short *)(Data + 4),(SVECTOR *)&local_38);
     PHYSICS_GenericLineCheckSetup
-              (0,0,(short)(((uint)*(ushort *)Data + (uint)*(ushort *)(Data + 4) + 0x80) * 0x10000 >>
+              (0,0,(short)(((u_int)*(ushort *)Data + (u_int)*(ushort *)(Data + 4) + 0x80) * 0x10000 >>
                           0x10),(SVECTOR *)&local_30);
     PHYSICS_GenericLineCheck(instance,instance->matrix,pTempMat_41,&local_68);
     if (local_68.type == 0) goto LAB_80075094;
@@ -741,8 +741,8 @@ LAB_80075094:
     local_74 = (short)uVar2;
     local_38 = CONCAT22((instance->position).y + local_74,(instance->position).x + local_78);
     local_70 = (short)uVar3;
-    local_34 = local_34 & 0xffff0000 | (uint)(ushort)((instance->position).z + local_70);
-    local_30 = (uint)*(ushort *)(Data + 2) << 0x10;
+    local_34 = local_34 & 0xffff0000 | (u_int)(ushort)((instance->position).z + local_70);
+    local_30 = (u_int)*(ushort *)(Data + 2) << 0x10;
     local_2c = uVar5 | *(ushort *)Data;
     setCopControlWord(2,0,*(undefined4 *)pTempMat_41->m);
     setCopControlWord(2,0x800,*(undefined4 *)(pTempMat_41->m + 2));
@@ -799,8 +799,8 @@ LAB_80075094:
       local_30 = CONCAT22(local_74,local_78);
       local_38 = CONCAT22(local_74,local_78);
       uVar6 = (local_68.newPoint)->vz + local_70;
-      local_2c = local_2c & 0xffff0000 | (uint)uVar6;
-      local_34 = uVar5 & 0xffff0000 | (uint)(ushort)(uVar6 + *(short *)(Data + 4));
+      local_2c = local_2c & 0xffff0000 | (u_int)uVar6;
+      local_34 = uVar5 & 0xffff0000 | (u_int)(ushort)(uVar6 + *(short *)(Data + 4));
       PHYSICS_CheckLineInWorld(instance,&local_68);
       iVar8 = PHYSICS_CheckDontGrabEdge(&local_68);
       if ((iVar8 == 0) && (((local_68.type == 3 || (local_68.type == 5)) || (local_68.type == 2))))
@@ -899,7 +899,7 @@ void PhysicsDefaultEdgeGrabResponse(_Instance *instance,evPhysicsEdgeData *Data,
   short local_48;
   short local_44;
   short local_40;
-  uint local_38;
+  u_int local_38;
   undefined4 local_34;
   undefined4 local_30;
   undefined4 local_2c;
@@ -952,7 +952,7 @@ void PhysicsDefaultEdgeGrabResponse(_Instance *instance,evPhysicsEdgeData *Data,
   Data->zRot = (int)local_50.z;
   local_14 = CONCAT22(local_14._2_2_,Data->ZDistance);
   local_18 = *(undefined4 *)&Data->XDistance;
-  RotMatrix((ushort *)&instance->rotation,(uint *)&local_38);
+  RotMatrix((ushort *)&instance->rotation,(u_int *)&local_38);
   setCopControlWord(2,0,local_38);
   setCopControlWord(2,0x800,local_34);
   setCopControlWord(2,0x1000,local_30);
@@ -1028,7 +1028,7 @@ int PhysicsCheckSliding(_Instance *instance,int Data,short Mode)
 {
   Level *pLVar1;
   int iVar2;
-  uint uVar3;
+  u_int uVar3;
   short local_78;
   short local_74;
   short local_70;
@@ -1298,7 +1298,7 @@ int PhysicsCheckBlockers(_Instance *instance,GameTracker *gameTracker,int Data,s
     if (((local_68.type == 3) && (*(ushort *)((int)local_68.prim + 10) != 0xffff)) &&
        ((*(ushort *)
           ((int)&((local_68.inst)->node).prev[6].next[1].prev +
-          (uint)*(ushort *)((int)local_68.prim + 10) + 2) & 0x1000) != 0)) {
+          (u_int)*(ushort *)((int)local_68.prim + 10) + 2) & 0x1000) != 0)) {
       if (-0xec8 < iVar2 >> 0xc) goto LAB_80076164;
     }
     else {
@@ -1315,11 +1315,11 @@ int PhysicsCheckBlockers(_Instance *instance,GameTracker *gameTracker,int Data,s
     if (((local_68.type == 3) && (*(ushort *)((int)local_68.prim + 10) != 0xffff)) &&
        ((*(ushort *)
           ((int)&((local_68.inst)->node).prev[6].next[1].prev +
-          (uint)*(ushort *)((int)local_68.prim + 10) + 2) & 0x1000) != 0)) {
-      *(uint *)(Data + 0x20) = *(uint *)(Data + 0x20) | 0x20000;
+          (u_int)*(ushort *)((int)local_68.prim + 10) + 2) & 0x1000) != 0)) {
+      *(u_int *)(Data + 0x20) = *(u_int *)(Data + 0x20) | 0x20000;
     }
     pMVar1 = pTempMat_51;
-    *(uint *)(Data + 0x20) = *(uint *)(Data + 0x20) | 2;
+    *(u_int *)(Data + 0x20) = *(u_int *)(Data + 0x20) | 2;
     local_38.vx = 0;
     local_38.vy = -0x10;
     local_38.vz = 0;
@@ -1338,7 +1338,7 @@ int PhysicsCheckBlockers(_Instance *instance,GameTracker *gameTracker,int Data,s
         *(short *)(*(int *)(Data + 0x10) + 4) = local_68.wNormal.vz;
       }
       if (0xb50 < local_68.wNormal.vz) {
-        *(uint *)(Data + 0x20) = *(uint *)(Data + 0x20) | 4;
+        *(u_int *)(Data + 0x20) = *(u_int *)(Data + 0x20) | 4;
       }
     }
     if ((Mode & 2U) != 0) {
@@ -1467,12 +1467,12 @@ int PhysicsCheckSwim(_Instance *instance,int Data,short Mode)
 int PhysicsDefaultCheckSwimResponse(_Instance *instance,evPhysicsSwimData *Data)
 
 {
-  uint uVar1;
+  u_int uVar1;
   int iVar2;
   
   STREAM_GetLevelWithID(instance->currentStreamUnitID);
   iVar2 = Data->WaterLevel;
-  uVar1 = (uint)(-(int)Data->WadeDepth < (int)Data->WaterDepth) << 7;
+  uVar1 = (u_int)(-(int)Data->WadeDepth < (int)Data->WaterDepth) << 7;
   if ((-(int)Data->TreadDepth < (int)Data->Depth) && ((int)Data->Depth < 0)) {
     uVar1 = uVar1 | 0x40;
   }
@@ -1539,7 +1539,7 @@ void PhysicsForceSetWater(_Instance *instance,int *Time,int Depth,int rate,int m
     iVar3 = 0;
   }
   iVar1 = iVar3 * maxAmplitude >> 0x1f;
-  iVar2 = *Time + (uint)(rate << 0xc) / gameTrackerX.timeMult;
+  iVar2 = *Time + (u_int)(rate << 0xc) / gameTrackerX.timeMult;
   *Time = iVar2;
   if (0x1000 < iVar2) {
     *Time = iVar2 + -0x1000;
@@ -1583,7 +1583,7 @@ int PhysicsCheckLOS(_Instance *instance,int Data,int Mode)
   local_38.oldPoint = (SVECTOR *)(Data + 8);
   local_38.newPoint = (SVECTOR *)Data;
   PHYSICS_CheckLineInWorld(instance,&local_38);
-  return (uint)(local_38.type == 0);
+  return (u_int)(local_38.type == 0);
 }
 
 
@@ -1667,8 +1667,8 @@ int PhysicsCheckDropHeight(_Instance *instance,int Data,int Mode)
     }
     else {
       pTempMat_63 = (MATRIX *)&TempMat_62;
-      RotMatrix(puVar1,(uint *)&TempMat_62);
-      MulMatrix2((undefined4 *)instance->matrix,(uint *)pTempMat_63);
+      RotMatrix(puVar1,(u_int *)&TempMat_62);
+      MulMatrix2((undefined4 *)instance->matrix,(u_int *)pTempMat_63);
     }
     ApplyMatrix(pTempMat_63,Data,local_28);
     local_60.vx = (instance->position).x + local_28[0];
@@ -1762,8 +1762,8 @@ int PhysicsCheckDropOff(_Instance *instance,int Data,short Mode)
     pTempMat_67 = instance->matrix;
     if (puVar1 != (ushort *)0x0) {
       pTempMat_67 = (MATRIX *)&TempMat_66;
-      RotMatrix(puVar1,(uint *)&TempMat_66);
-      MulMatrix2((undefined4 *)instance->matrix,(uint *)pTempMat_67);
+      RotMatrix(puVar1,(u_int *)&TempMat_66);
+      MulMatrix2((undefined4 *)instance->matrix,(u_int *)pTempMat_67);
     }
     local_28.vx = *(short *)Data;
     local_28.vy = *(short *)(Data + 2);
@@ -1777,7 +1777,7 @@ int PhysicsCheckDropOff(_Instance *instance,int Data,short Mode)
     local_20.vx = local_28.vx;
     local_20.vy = local_28.vy;
     PHYSICS_CheckLineInWorld(instance,&local_58);
-    if (((uint)local_58.type - 2 < 2) || (local_58.type == 5)) {
+    if (((u_int)local_58.type - 2 < 2) || (local_58.type == 5)) {
       if ((Mode & 2U) != 0) {
         if (*(short *)(Data + 6) < local_58.wNormal.vz) {
           INSTANCE_Post(instance,0x4010080,1);
@@ -1845,7 +1845,7 @@ int PhysicsFollowWall(_Instance *instance,GameTracker *gameTracker,int Data,shor
 
 {
   short sVar1;
-  uint uVar2;
+  u_int uVar2;
   int iVar3;
   short local_a0 [2];
   short local_9c;
@@ -1855,7 +1855,7 @@ int PhysicsFollowWall(_Instance *instance,GameTracker *gameTracker,int Data,shor
   SVECTOR local_58;
   _Position local_50;
   _Position local_48;
-  uint auStack64 [8];
+  u_int auStack64 [8];
   
   local_90.oldPoint = &local_58;
   *(undefined4 *)(Data + 0x28) = 0;
@@ -1865,7 +1865,7 @@ int PhysicsFollowWall(_Instance *instance,GameTracker *gameTracker,int Data,shor
   PHYSICS_GenericLineCheckSetup(0,*(short *)(Data + 2),0,&local_60);
   PHYSICS_GenericLineCheck(instance,pTempMat_72,pTempMat_72,&local_90);
   if ((local_90.type == 3) || (local_90.type == 5)) {
-    *(uint *)(Data + 0x28) = *(uint *)(Data + 0x28) | 8;
+    *(u_int *)(Data + 0x28) = *(u_int *)(Data + 0x28) | 8;
     if ((Mode & 7U) != 0) {
       *(short *)(Data + 8) = local_90.wNormal.vx;
       *(short *)(Data + 10) = local_90.wNormal.vy;
@@ -1910,13 +1910,13 @@ int PhysicsFollowWall(_Instance *instance,GameTracker *gameTracker,int Data,shor
     instance->bspTree = (int)local_90.segment;
   }
   PHYSICS_GenericLineCheckSetup(0,0x40,*(short *)(Data + 4),&local_58);
-  iVar3 = (uint)*(ushort *)(Data + 6) << 0x10;
+  iVar3 = (u_int)*(ushort *)(Data + 6) << 0x10;
   PHYSICS_GenericLineCheckSetup
-            (0,(short)(((uint)*(ushort *)(Data + 2) + ((iVar3 >> 0x10) - (iVar3 >> 0x1f) >> 1)) *
+            (0,(short)(((u_int)*(ushort *)(Data + 2) + ((iVar3 >> 0x10) - (iVar3 >> 0x1f) >> 1)) *
                        0x10000 >> 0x10),*(short *)(Data + 4),&local_60);
   PHYSICS_GenericLineCheck(instance,pTempMat_72,pTempMat_72,&local_90);
   if ((local_90.type == 3) || (local_90.type == 5)) {
-    *(uint *)(Data + 0x28) = *(uint *)(Data + 0x28) | 2;
+    *(u_int *)(Data + 0x28) = *(u_int *)(Data + 0x28) | 2;
     if ((Mode & 7U) != 0) {
       *(short *)(Data + 0x10) = local_90.wNormal.vx;
       *(short *)(Data + 0x12) = local_90.wNormal.vy;
@@ -1942,7 +1942,7 @@ int PhysicsFollowWall(_Instance *instance,GameTracker *gameTracker,int Data,shor
     local_58.vz = local_60.vz + local_98;
     PHYSICS_CheckLineInWorld(instance,&local_90);
     if ((local_90.type == 3) || (local_90.type == 5)) {
-      *(uint *)(Data + 0x28) = *(uint *)(Data + 0x28) | 4;
+      *(u_int *)(Data + 0x28) = *(u_int *)(Data + 0x28) | 4;
     }
   }
   if ((Mode & 2U) != 0) {
@@ -2157,7 +2157,7 @@ void PhysicsSetVelFromZRot(_Instance *instance,short angle,long magnitude)
 void PhysicsSetVelFromRot(_Instance *instance,_Rotation *rot,long magnitude)
 
 {
-  uint auStack56 [8];
+  u_int auStack56 [8];
   undefined2 local_18;
   short local_16;
   undefined2 local_14;
@@ -2221,7 +2221,7 @@ void PHYSICS_SetVAndAFromRot(_Instance *instance,_Rotation *rot,long v,long a)
   undefined2 local_48;
   short local_46;
   undefined2 local_44;
-  uint auStack64 [8];
+  u_int auStack64 [8];
   short local_20;
   short local_1e;
   short local_1c;
@@ -2402,7 +2402,7 @@ int PHYSICS_CheckForTerrainCollide
   local_38.oldPoint = startVec;
   PHYSICS_GenericLineCheckMask
             (instance,instance->matrix + segment,instance->matrix + segment,&local_38);
-  return (uint)(local_38.type == 3);
+  return (u_int)(local_38.type == 3);
 }
 
 
@@ -2436,7 +2436,7 @@ int PHYSICS_CheckForObjectCollide(_Instance *instance,SVECTOR *startVec,SVECTOR 
   local_38.oldPoint = startVec;
   PHYSICS_GenericLineCheckMask
             (instance,instance->matrix + segment,instance->matrix + segment,&local_38);
-  return (uint)(local_38.type != 0);
+  return (u_int)(local_38.type != 0);
 }
 
 
@@ -2465,7 +2465,7 @@ int PHYSICS_CheckForValidMove(_Instance *instance,SVECTOR *startVec,SVECTOR *end
 
 {
   int iVar1;
-  uint uVar2;
+  u_int uVar2;
   _PCollideInfo local_38;
   
   local_38.newPoint = endVec;
@@ -2473,8 +2473,8 @@ int PHYSICS_CheckForValidMove(_Instance *instance,SVECTOR *startVec,SVECTOR *end
   PHYSICS_GenericLineCheck(instance,instance->matrix + segment,instance->matrix + segment,&local_38)
   ;
   iVar1 = PHYSICS_CheckFaceStick(&local_38);
-  uVar2 = (uint)(iVar1 != 0);
-  if (((uint)local_38.type - 2 < 2) || (local_38.type == 5)) {
+  uVar2 = (u_int)(iVar1 != 0);
+  if (((u_int)local_38.type - 2 < 2) || (local_38.type == 5)) {
     uVar2 = uVar2 + 2;
   }
   return uVar2;
@@ -2522,14 +2522,14 @@ int PHYSICS_CheckFaceStick(_PCollideInfo *CInfo)
 
 {
   ushort uVar1;
-  uint uVar2;
+  u_int uVar2;
   
   uVar2 = 0;
   if (CInfo->type == 3) {
     uVar1 = *(ushort *)((int)CInfo->prim + 10);
     uVar2 = 0;
     if (uVar1 != 0xffff) {
-      uVar2 = (uint)((*(ushort *)((int)&(CInfo->inst->node).prev[6].next[1].prev + (uint)uVar1 + 2)
+      uVar2 = (u_int)((*(ushort *)((int)&(CInfo->inst->node).prev[6].next[1].prev + (u_int)uVar1 + 2)
                      & 0x200) != 0);
     }
   }
@@ -2587,15 +2587,15 @@ int PHYSICS_CheckDontGrabEdge(_PCollideInfo *CInfo)
 {
   short sVar1;
   ushort uVar2;
-  ulong uVar3;
-  uint uVar4;
+  u_long uVar3;
+  u_int uVar4;
   
   sVar1 = CInfo->type;
   uVar4 = 0;
   if (sVar1 == 3) {
     uVar2 = *(ushort *)((int)CInfo->prim + 10);
     if (uVar2 != 0xffff) {
-      uVar4 = (uint)((*(ushort *)((int)&(CInfo->inst->node).prev[6].next[1].prev + (uint)uVar2 + 2)
+      uVar4 = (u_int)((*(ushort *)((int)&(CInfo->inst->node).prev[6].next[1].prev + (u_int)uVar2 + 2)
                      & 0x80) != 0);
     }
     if (((int)*(short *)((int)(CInfo->inst->node).prev[9].prev + (int)CInfo->segment * 0x24 + 0x12)

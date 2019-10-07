@@ -296,14 +296,14 @@ void STREAM_LoadObjectReturn(void *loadData,void *data,void *data2)
   char acStack80 [64];
   
   GetRCnt(0xf2000000);
-  if ((((*(uint *)loadData & 0x8000000) != 0) && (*(int **)((int)loadData + 0x3c) != (int *)0x0)) &&
+  if ((((*(u_int *)loadData & 0x8000000) != 0) && (*(int **)((int)loadData + 0x3c) != (int *)0x0)) &&
      (*(int *)((int)loadData + 0x40) != 0)) {
     RELMOD_InitModulePointers(*(int *)((int)loadData + 0x40),*(int **)((int)loadData + 0x3c));
   }
   STREAM_PackVRAMObject((_ObjectTracker *)data);
   OBTABLE_InitAnimPointers((_ObjectTracker *)data);
   OBTABLE_InitObjectWithID((Object *)loadData);
-  if ((*(uint *)((int)loadData + 0x2c) & 0x800000) != 0) {
+  if ((*(u_int *)((int)loadData + 0x2c) & 0x800000) != 0) {
     sprintf(acStack80,"\\kain2\\sfx\\object\\%s\\%s.snf");
     *(undefined2 *)((int)loadData + 6) = 0;
     lVar1 = LOAD_DoesFileExist(acStack80);
@@ -730,11 +730,11 @@ void LoadLevelObjects(Level *level,GameTracker *gameTracker)
       iVar2 = FindObjectName(level->introList->name + iVar3);
       if (iVar2 == -1) {
         name = level->introList->name + iVar3;
-        *(uint *)(name + 0x2c) = *(uint *)(name + 0x2c) | 0x4000;
+        *(u_int *)(name + 0x2c) = *(u_int *)(name + 0x2c) | 0x4000;
       }
       else {
         name = level->introList->name + iVar3;
-        *(uint *)(name + 0x2c) = *(uint *)(name + 0x2c) & 0xffffbfff;
+        *(u_int *)(name + 0x2c) = *(u_int *)(name + 0x2c) & 0xffffbfff;
       }
       iVar4 = iVar4 + 1;
       iVar3 = iVar3 + 0x4c;
@@ -1073,7 +1073,7 @@ void STREAM_RemoveAllObjectsNotInUse(GameTracker *gameTracker)
       pcVar10 = &tracker->numObjectsUsing;
       p_Var5 = tracker;
       do {
-        if ((uint)*(ushort *)(pcVar10 + -8) - 1 < 2) {
+        if ((u_int)*(ushort *)(pcVar10 + -8) - 1 < 2) {
           cVar1 = *pcVar10;
           iVar7 = 0;
           p_Var6 = p_Var5;
@@ -1340,7 +1340,7 @@ void STREAM_CalculateWaterLevel(Level *level)
 int STREAM_IsMorphInProgress(void)
 
 {
-  return (uint)(gameTrackerX.gameData.asmData.MorphTime != 1000);
+  return (u_int)(gameTrackerX.gameData.asmData.MorphTime != 1000);
 }
 
 
@@ -1699,7 +1699,7 @@ LAB_80059f9c:
         iVar11 = iVar11 + 1;
         if (iVar10 == 0) {
           pcVar2 = streamUnit->level->introList->name + iVar14;
-          *(uint *)(pcVar2 + 0x2c) = *(uint *)(pcVar2 + 0x2c) | 8;
+          *(u_int *)(pcVar2 + 0x2c) = *(u_int *)(pcVar2 + 0x2c) | 8;
           return;
         }
         pLVar5 = streamUnit->level;
@@ -2088,7 +2088,7 @@ LAB_8005a3f8:
 _StreamUnit * STREAM_WhichUnitPointerIsIn(void *pointer)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   Level *address;
   STracker *pSVar2;
   int iVar3;
@@ -2201,7 +2201,7 @@ void STREAM_UpdateObjectPointer(Object *oldObject,Object *newObject,long sizeOfO
       } while (iVar13 < p_Var1->numObjectsUsing);
     }
     OBTABLE_ChangeObjectAccessPointers(oldObject,newObject);
-    if ((((newObject->oflags & 0x8000000U) != 0) && (newObject->relocList != (ulong *)0x0)) &&
+    if ((((newObject->oflags & 0x8000000U) != 0) && (newObject->relocList != (u_long *)0x0)) &&
        (newObject->relocModule != (void *)0x0)) {
       RELMOD_RelocModulePointers
                 ((int)newObject->relocModule,(int)offset,(int *)newObject->relocList);
@@ -2715,7 +2715,7 @@ void STREAM_DumpUnit(_StreamUnit *streamUnit,long doSave)
   Level *pLVar4;
   int iVar5;
   int iVar6;
-  uchar **ppuVar7;
+  u_char **ppuVar7;
   STracker *pSVar8;
   int iVar9;
   char acStack104 [80];
@@ -2757,7 +2757,7 @@ void STREAM_DumpUnit(_StreamUnit *streamUnit,long doSave)
     if (0 < pLVar4->NumberOfSFXMarkers) {
       iVar5 = 0;
       do {
-        ppuVar7 = (uchar **)((int)&pLVar4->SFXMarkerList->soundData + iVar5);
+        ppuVar7 = (u_char **)((int)&pLVar4->SFXMarkerList->soundData + iVar5);
         SOUND_EndInstanceSounds(*ppuVar7,(SoundInstance *)(ppuVar7 + 2));
         pLVar4 = streamUnit->level;
         iVar9 = iVar9 + 1;
@@ -2812,7 +2812,7 @@ void STREAM_DumpAllUnitsNotNeeded(GameTracker *gameTracker)
   streamUnit = &StreamTracker;
   do {
     if ((*(short *)streamUnit->StreamList != 0) &&
-       (*(ulong *)streamUnit->StreamList != gameTracker->displayFrameCount)) {
+       (*(u_long *)streamUnit->StreamList != gameTracker->displayFrameCount)) {
       STREAM_DumpUnit((_StreamUnit *)streamUnit,1);
     }
     iVar1 = iVar1 + 1;
@@ -3170,7 +3170,7 @@ int WARPGATE_IsWarpgateInUse(void)
 int WARPGATE_IsWarpgateActive(void)
 
 {
-  return (uint)(WarpGateLoadInfo.loading != '\0');
+  return (u_int)(WarpGateLoadInfo.loading != '\0');
 }
 
 
@@ -3194,7 +3194,7 @@ int WARPGATE_IsWarpgateActive(void)
 int WARPGATE_IsWarpgateUsable(void)
 
 {
-  return (uint)(WarpGateLoadInfo._4_2_ == 4);
+  return (u_int)(WarpGateLoadInfo._4_2_ == 4);
 }
 
 
@@ -3216,7 +3216,7 @@ int WARPGATE_IsWarpgateSpectral(void)
   int iVar1;
   
   iVar1 = strcmpi((char *)(&WarpRoomArray + CurrentWarpNumber),"under3");
-  return (uint)(iVar1 == 0);
+  return (u_int)(iVar1 == 0);
 }
 
 
@@ -4659,7 +4659,7 @@ void MORPH_SetupInstanceFlags(GameTracker *gameTracker,_Instance *instance)
 
 {
   long lVar1;
-  uint uVar2;
+  u_int uVar2;
   
   if ((instance->object->oflags & 0x80000U) != 0) {
     return;
@@ -4861,9 +4861,9 @@ void MORPH_UpdateTimeMult(void)
 
 {
   int iVar1;
-  uint uVar2;
+  u_int uVar2;
   
-  uVar2 = (uint)(ushort)gameTrackerX.gameData.asmData.MorphTime;
+  uVar2 = (u_int)(ushort)gameTrackerX.gameData.asmData.MorphTime;
   if (gameTrackerX.gameData.asmData.MorphTime != 1000) {
     iVar1 = uVar2 - 0x2ee;
     if (gameTrackerX.gameData.asmData.MorphType == 0) {
@@ -4883,7 +4883,7 @@ void MORPH_UpdateTimeMult(void)
     if (gameTrackerX.materialTimeMult == 0) {
       gameTrackerX.materialTimeMult = 1;
     }
-    uVar2 = (uint)(ushort)gameTrackerX.gameData.asmData.MorphTime;
+    uVar2 = (u_int)(ushort)gameTrackerX.gameData.asmData.MorphTime;
     if (gameTrackerX.gameData.asmData.MorphType == 0) {
       iVar1 = uVar2 - 0x2ee;
       if (iVar1 * 0x10000 < 0) {
@@ -4994,11 +4994,11 @@ void MORPH_UpdateNormals(Level *BaseLevel)
   short sVar5;
   _Terrain *p_Var6;
   _TVertex *p_Var7;
-  uint *puVar8;
+  u_int *puVar8;
   int iVar9;
   byte *pbVar10;
   undefined4 *puVar11;
-  uint uVar12;
+  u_int uVar12;
   ushort *puVar13;
   _MorphColor *p_Var14;
   SpotLight *pSVar15;
@@ -5007,7 +5007,7 @@ void MORPH_UpdateNormals(Level *BaseLevel)
   ushort *puVar18;
   long lVar19;
   int iVar20;
-  uint uVar21;
+  u_int uVar21;
   int iVar22;
   short *psVar23;
   _TVertex *p_Var24;
@@ -5017,10 +5017,10 @@ void MORPH_UpdateNormals(Level *BaseLevel)
   undefined4 uVar28;
   undefined4 uVar29;
   _Instance *instance;
-  uint local_20;
-  uint local_1c;
-  uint local_18;
-  uint local_14;
+  u_int local_20;
+  u_int local_1c;
+  u_int local_18;
+  u_int local_14;
   undefined4 local_10;
   
   p_Var6 = BaseLevel->terrain;
@@ -5063,7 +5063,7 @@ void MORPH_UpdateNormals(Level *BaseLevel)
     p_Var24 = p_Var7 + p_Var6->numVertices;
     pbVar10 = &p_Var7->b0;
     while (p_Var7 < p_Var24) {
-      pbVar10[-2] = (byte)(((uint)*(byte *)&p_Var14->morphColor15 & 0x1f) << 3);
+      pbVar10[-2] = (byte)(((u_int)*(byte *)&p_Var14->morphColor15 & 0x1f) << 3);
       p_Var7 = p_Var7 + 1;
       pbVar10[-1] = (byte)((ushort)p_Var14->morphColor15 >> 2) & 0xf8;
       puVar18 = (ushort *)&p_Var14->morphColor15;
@@ -5090,7 +5090,7 @@ void MORPH_UpdateNormals(Level *BaseLevel)
   if (0 < p_Var6->numBSPTrees) {
     iVar20 = 0;
     do {
-      puVar8 = (uint *)((int)&p_Var6->BSPTreeArray->bspRoot + iVar20);
+      puVar8 = (u_int *)((int)&p_Var6->BSPTreeArray->bspRoot + iVar20);
       puVar16 = (undefined4 *)*puVar8;
       puVar11 = puVar16 + 7;
       if (puVar16 < (undefined4 *)puVar8[1]) {
@@ -5141,14 +5141,14 @@ void MORPH_UpdateNormals(Level *BaseLevel)
     if ((pIVar17 != (Intro *)0x0) &&
        (((*(int *)&pIVar17->spectralPosition != 0 || ((pIVar17->spectralPosition).z != 0)) &&
         ((instance->flags2 & 8U) == 0)))) {
-      local_18 = *(uint *)&instance->position;
-      uVar12 = (uint)(ushort)(instance->position).z;
+      local_18 = *(u_int *)&instance->position;
+      uVar12 = (u_int)(ushort)(instance->position).z;
       local_14 = local_14 & 0xffff0000 | uVar12;
       (instance->position).x = (pIVar17->position).x + (pIVar17->spectralPosition).x;
       (instance->position).y = (pIVar17->position).y + (pIVar17->spectralPosition).y;
       (instance->position).z = (pIVar17->position).z + (pIVar17->spectralPosition).z;
-      uVar21 = (uint)(ushort)(instance->position).x - (local_18 & 0xffff);
-      iVar22 = (uint)(ushort)(instance->position).y - (local_18 >> 0x10);
+      uVar21 = (u_int)(ushort)(instance->position).x - (local_18 & 0xffff);
+      iVar22 = (u_int)(ushort)(instance->position).y - (local_18 >> 0x10);
       local_20 = uVar21 & 0xffff | iVar22 * 0x10000;
       uVar12 = (ushort)(instance->position).z - uVar12;
       local_1c = local_1c & 0xffff0000 | uVar12 & 0xffff;
@@ -5241,11 +5241,11 @@ void MORPH_BringBackNormals(Level *BaseLevel)
   short sVar4;
   _Terrain *p_Var5;
   _TVertex *p_Var6;
-  uint *puVar7;
+  u_int *puVar7;
   int iVar8;
   undefined4 *puVar9;
   Intro *pIVar10;
-  uint uVar11;
+  u_int uVar11;
   ushort *puVar12;
   _MorphVertex *p_Var13;
   byte *pbVar14;
@@ -5254,7 +5254,7 @@ void MORPH_BringBackNormals(Level *BaseLevel)
   ushort *puVar17;
   long lVar18;
   int iVar19;
-  uint uVar20;
+  u_int uVar20;
   int iVar21;
   short *psVar22;
   _TVertex *p_Var23;
@@ -5263,10 +5263,10 @@ void MORPH_BringBackNormals(Level *BaseLevel)
   undefined4 uVar26;
   undefined4 uVar27;
   _Instance *instance;
-  uint local_20;
-  uint local_1c;
-  uint local_18;
-  uint local_14;
+  u_int local_20;
+  u_int local_1c;
+  u_int local_18;
+  u_int local_14;
   undefined4 local_10;
   
   p_Var5 = BaseLevel->terrain;
@@ -5307,7 +5307,7 @@ void MORPH_BringBackNormals(Level *BaseLevel)
     pbVar14 = &p_Var6->b0;
     while (p_Var6 < p_Var23) {
       p_Var6 = p_Var6 + 1;
-      pbVar14[-2] = (byte)(((uint)pbVar14[-4] & 0x1f) << 3);
+      pbVar14[-2] = (byte)(((u_int)pbVar14[-4] & 0x1f) << 3);
       pbVar14[-1] = (byte)(*(ushort *)(pbVar14 + -4) >> 2) & 0xf8;
       *pbVar14 = (byte)(*(ushort *)(pbVar14 + -4) >> 7) & 0xf8;
       pbVar14 = pbVar14 + 0xc;
@@ -5331,7 +5331,7 @@ void MORPH_BringBackNormals(Level *BaseLevel)
   if (0 < p_Var5->numBSPTrees) {
     iVar19 = 0;
     do {
-      puVar7 = (uint *)((int)&p_Var5->BSPTreeArray->bspRoot + iVar19);
+      puVar7 = (u_int *)((int)&p_Var5->BSPTreeArray->bspRoot + iVar19);
       puVar16 = (undefined4 *)*puVar7;
       puVar9 = puVar16 + 7;
       if (puVar16 < (undefined4 *)puVar7[1]) {
@@ -5382,14 +5382,14 @@ void MORPH_BringBackNormals(Level *BaseLevel)
     if ((pIVar10 != (Intro *)0x0) &&
        (((*(int *)&pIVar10->spectralPosition != 0 || ((pIVar10->spectralPosition).z != 0)) &&
         ((instance->flags2 & 8U) == 0)))) {
-      local_18 = *(uint *)&instance->position;
-      uVar11 = (uint)(ushort)(instance->position).z;
+      local_18 = *(u_int *)&instance->position;
+      uVar11 = (u_int)(ushort)(instance->position).z;
       local_14 = local_14 & 0xffff0000 | uVar11;
       (instance->position).x = (pIVar10->position).x;
       (instance->position).y = (pIVar10->position).y;
       (instance->position).z = (pIVar10->position).z;
-      uVar20 = (uint)(ushort)(instance->position).x - (local_18 & 0xffff);
-      iVar21 = (uint)(ushort)(instance->position).y - (local_18 >> 0x10);
+      uVar20 = (u_int)(ushort)(instance->position).x - (local_18 & 0xffff);
+      iVar21 = (u_int)(ushort)(instance->position).y - (local_18 >> 0x10);
       local_20 = uVar20 & 0xffff | iVar21 * 0x10000;
       uVar11 = (ushort)(instance->position).z - uVar11;
       local_1c = local_1c & 0xffff0000 | uVar11 & 0xffff;
@@ -5482,17 +5482,17 @@ void MORPH_AddOffsets(Level *BaseLevel,int time)
   Intro *pIVar10;
   int iVar11;
   _Terrain *p_Var12;
-  uint uVar13;
+  u_int uVar13;
   short *psVar14;
   int iVar15;
-  uint uVar16;
+  u_int uVar16;
   _MorphVertex *p_Var17;
-  uchar *puVar18;
+  u_char *puVar18;
   _MorphColor *p_Var19;
   _TVertex *p_Var20;
   _Instance *instance;
   SVECTOR local_20;
-  uint local_18;
+  u_int local_18;
   ushort local_14;
   
   instance = (gameTrackerX.instanceList)->first;
@@ -5527,17 +5527,17 @@ void MORPH_AddOffsets(Level *BaseLevel,int time)
         ((instance->flags2 & 8U) == 0)))) {
       sVar4 = (pIVar10->spectralPosition).y;
       sVar3 = (pIVar10->spectralPosition).z;
-      local_18 = *(uint *)&instance->position;
+      local_18 = *(u_int *)&instance->position;
       local_14 = (instance->position).z;
       (instance->position).x =
            (pIVar10->position).x + (short)((pIVar10->spectralPosition).x * iVar7 >> 0xc);
       (instance->position).y = (pIVar10->position).y + (short)(sVar4 * iVar7 >> 0xc);
       (instance->position).z = (pIVar10->position).z + (short)(sVar3 * iVar7 >> 0xc);
-      iVar15 = (uint)(ushort)(instance->position).x - (local_18 & 0xffff);
+      iVar15 = (u_int)(ushort)(instance->position).x - (local_18 & 0xffff);
       local_20.vx = (short)iVar15;
-      iVar11 = (uint)(ushort)(instance->position).y - (local_18 >> 0x10);
+      iVar11 = (u_int)(ushort)(instance->position).y - (local_18 >> 0x10);
       local_20.vy = (short)iVar11;
-      iVar9 = (uint)(ushort)(instance->position).z - (uint)local_14;
+      iVar9 = (u_int)(ushort)(instance->position).z - (u_int)local_14;
       local_20.vz = (short)iVar9;
       if ((iVar15 * 0x10000 >> 0x10) + (iVar11 * 0x10000 >> 0x10) + (iVar9 * 0x10000 >> 0x10) != 0)
       {
@@ -5556,13 +5556,13 @@ void MORPH_AddOffsets(Level *BaseLevel,int time)
       do {
         uVar5 = *(ushort *)(puVar18 + -4);
         puVar6 = (ushort *)&p_Var19->morphColor15;
-        uVar16 = (uint)(uVar5 >> 2) & 0xf8;
-        iVar9 = (uint)*puVar6 << 0x10;
-        uVar13 = (uint)(uVar5 >> 7) & 0xf8;
+        uVar16 = (u_int)(uVar5 >> 2) & 0xf8;
+        iVar9 = (u_int)*puVar6 << 0x10;
+        uVar13 = (u_int)(uVar5 >> 7) & 0xf8;
         p_Var8 = p_Var8 + 1;
         p_Var19 = p_Var19 + 1;
-        puVar18[-2] = (char)((uint)uVar5 & 0x1f) * '\b' +
-                      (char)((int)((((uint)*puVar6 & 0x1f) * 8 + ((uint)uVar5 & 0x1f) * -8) * iVar7)
+        puVar18[-2] = (char)((u_int)uVar5 & 0x1f) * '\b' +
+                      (char)((int)((((u_int)*puVar6 & 0x1f) * 8 + ((u_int)uVar5 & 0x1f) * -8) * iVar7)
                             >> 0xc);
         puVar18[-1] = (char)uVar16 +
                       (char)((int)(((iVar9 >> 0x12 & 0xf8U) - uVar16) * iVar7) >> 0xc);
@@ -5653,17 +5653,17 @@ void MORPH_SubtractOffsets(Level *BaseLevel,int time)
   _Terrain *p_Var10;
   Intro *pIVar11;
   int iVar12;
-  uint uVar13;
+  u_int uVar13;
   short *psVar14;
   int iVar15;
-  uint uVar16;
+  u_int uVar16;
   _MorphVertex *p_Var17;
-  uchar *puVar18;
+  u_char *puVar18;
   _MorphColor *p_Var19;
   _TVertex *p_Var20;
   _Instance *instance;
   SVECTOR local_20;
-  uint local_18;
+  u_int local_18;
   ushort local_14;
   
   instance = (gameTrackerX.instanceList)->first;
@@ -5698,17 +5698,17 @@ void MORPH_SubtractOffsets(Level *BaseLevel,int time)
         ((instance->flags2 & 8U) == 0)))) {
       sVar4 = (pIVar11->spectralPosition).y;
       sVar3 = (pIVar11->spectralPosition).z;
-      local_18 = *(uint *)&instance->position;
+      local_18 = *(u_int *)&instance->position;
       local_14 = (instance->position).z;
       (instance->position).x =
            (pIVar11->position).x + (short)((pIVar11->spectralPosition).x * iVar7 >> 0xc);
       (instance->position).y = (pIVar11->position).y + (short)(sVar4 * iVar7 >> 0xc);
       (instance->position).z = (pIVar11->position).z + (short)(sVar3 * iVar7 >> 0xc);
-      iVar15 = (uint)(ushort)(instance->position).x - (local_18 & 0xffff);
+      iVar15 = (u_int)(ushort)(instance->position).x - (local_18 & 0xffff);
       local_20.vx = (short)iVar15;
-      iVar12 = (uint)(ushort)(instance->position).y - (local_18 >> 0x10);
+      iVar12 = (u_int)(ushort)(instance->position).y - (local_18 >> 0x10);
       local_20.vy = (short)iVar12;
-      iVar9 = (uint)(ushort)(instance->position).z - (uint)local_14;
+      iVar9 = (u_int)(ushort)(instance->position).z - (u_int)local_14;
       local_20.vz = (short)iVar9;
       if ((iVar15 * 0x10000 >> 0x10) + (iVar12 * 0x10000 >> 0x10) + (iVar9 * 0x10000 >> 0x10) != 0)
       {
@@ -5727,13 +5727,13 @@ void MORPH_SubtractOffsets(Level *BaseLevel,int time)
       do {
         uVar5 = *(ushort *)(puVar18 + -4);
         puVar6 = (ushort *)&p_Var19->morphColor15;
-        uVar16 = (uint)(uVar5 >> 2) & 0xf8;
-        iVar9 = (uint)*puVar6 << 0x10;
-        uVar13 = (uint)(uVar5 >> 7) & 0xf8;
+        uVar16 = (u_int)(uVar5 >> 2) & 0xf8;
+        iVar9 = (u_int)*puVar6 << 0x10;
+        uVar13 = (u_int)(uVar5 >> 7) & 0xf8;
         p_Var8 = p_Var8 + 1;
         p_Var19 = p_Var19 + 1;
-        puVar18[-2] = (char)((uint)uVar5 & 0x1f) * '\b' +
-                      (char)((int)((((uint)*puVar6 & 0x1f) * 8 + ((uint)uVar5 & 0x1f) * -8) * iVar7)
+        puVar18[-2] = (char)((u_int)uVar5 & 0x1f) * '\b' +
+                      (char)((int)((((u_int)*puVar6 & 0x1f) * 8 + ((u_int)uVar5 & 0x1f) * -8) * iVar7)
                             >> 0xc);
         puVar18[-1] = (char)uVar16 +
                       (char)((int)(((iVar9 >> 0x12 & 0xf8U) - uVar16) * iVar7) >> 0xc);
@@ -5935,7 +5935,7 @@ void MORPH_AveragePoint(_SVector *start,_SVector *end,int interp,_SVector *out)
     p_Var1 = start;
     start = end;
   }
-  LoadAverageShort12((uint *)p_Var1,(uint *)start,puVar2,interp,(uint *)out);
+  LoadAverageShort12((u_int *)p_Var1,(u_int *)start,puVar2,interp,(u_int *)out);
   return;
 }
 
@@ -6075,7 +6075,7 @@ void MORPH_ToggleMorph(void)
   Level **ppLVar2;
   int iVar3;
   
-  SOUND_PlaneShift((uint)(gameTrackerX.gameData.asmData.MorphType == 0));
+  SOUND_PlaneShift((u_int)(gameTrackerX.gameData.asmData.MorphType == 0));
   INSTANCE_Broadcast((_Instance *)0x0,10,0x1000020,(int)gameTrackerX.gameData.asmData.MorphType);
   iVar3 = 0x10;
   MORPH_GetComponentsForTrackingPoint
@@ -6215,19 +6215,19 @@ void MORPH_SetFog(_StreamUnit *streamUnit,int mainUnitFlag)
   if (gameTrackerX.gameData.asmData.MorphType == 0) {
     iVar2 = 0x1000 - iVar2;
   }
-  iVar4 = ((uint)pLVar3->holdFogNear - (uint)pLVar3->spectralFogNear) * iVar2;
+  iVar4 = ((u_int)pLVar3->holdFogNear - (u_int)pLVar3->spectralFogNear) * iVar2;
   if (iVar4 < 0) {
     iVar4 = iVar4 + 0xfff;
   }
-  iVar2 = ((uint)pLVar3->holdFogFar - (uint)pLVar3->spectralFogFar) * iVar2;
-  iVar4 = (iVar4 >> 0xc) + (uint)pLVar3->spectralFogNear;
+  iVar2 = ((u_int)pLVar3->holdFogFar - (u_int)pLVar3->spectralFogFar) * iVar2;
+  iVar4 = (iVar4 >> 0xc) + (u_int)pLVar3->spectralFogNear;
   if (iVar2 < 0) {
     iVar2 = iVar2 + 0xfff;
   }
-  iVar2 = (iVar2 >> 0xc) + (uint)pLVar3->spectralFogFar;
+  iVar2 = (iVar2 >> 0xc) + (u_int)pLVar3->spectralFogFar;
   if (mainUnitFlag == 0) {
-    STREAM_SetStreamFog(streamUnit,(short)((uint)(iVar4 * 0x10000) >> 0x10),
-                        (short)((uint)(iVar2 * 0x10000) >> 0x10));
+    STREAM_SetStreamFog(streamUnit,(short)((u_int)(iVar4 * 0x10000) >> 0x10),
+                        (short)((u_int)(iVar2 * 0x10000) >> 0x10));
   }
   else {
     sVar1 = (short)iVar4;
@@ -6311,7 +6311,7 @@ void MORPH_UpdateTextures(void)
 void MORPH_Continue(void)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   _TFace *face;
   Level *level;
   STracker *streamUnit;
@@ -6424,7 +6424,7 @@ int AddVertex(VECTOR *v0,RECT *rect)
   undefined4 uVar6;
   undefined4 uVar7;
   undefined4 local_8;
-  uint local_4;
+  u_int local_4;
   
   iVar2 = v0->vx;
   if (iVar2 < 0) {
@@ -6450,7 +6450,7 @@ LAB_8005e6c8:
   v0->vz = iVar1 + iVar2;
 LAB_8005e714:
   local_8 = CONCAT22(*(undefined2 *)((int)&v0->vy + 2),*(undefined2 *)((int)&v0->vx + 2));
-  local_4 = local_4 & 0xffff0000 | (uint)*(ushort *)((int)&v0->vz + 2);
+  local_4 = local_4 & 0xffff0000 | (u_int)*(ushort *)((int)&v0->vz + 2);
   setCopReg(2,in_zero,local_8);
   setCopReg(2,in_at,local_4);
   copFunction(2,0x480012);
@@ -6606,7 +6606,7 @@ int AddClippedTri(SVECTOR *iv,RECT *cliprect,int *minz)
   VECTOR local_240 [16];
   VECTOR aVStack320 [16];
   int local_40;
-  uint local_3c;
+  u_int local_3c;
   int local_38;
   VECTOR *local_34;
   VECTOR *local_30;
@@ -6633,7 +6633,7 @@ int AddClippedTri(SVECTOR *iv,RECT *cliprect,int *minz)
     if (!bVar2) {
       local_40 = i + -3;
     }
-    local_3c = (uint)!bVar2;
+    local_3c = (u_int)!bVar2;
     dist1 = GetPlaneDist(local_3c,local_40,i,local_34);
     iVar8 = 1;
     iVar6 = 0;
@@ -6691,7 +6691,7 @@ LAB_8005eb1c:
     local_34 = local_30;
     local_30 = v;
     if (iVar6 < 3) {
-      return (uint)(iVar6 != 0);
+      return (u_int)(iVar6 != 0);
     }
     i = i + 1;
     bVar2 = i < 3;
@@ -6766,9 +6766,9 @@ int STREAM_GetClipRect(StreamUnitPortal *portal,RECT *rect)
 {
   short sVar1;
   int iVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
+  u_int uVar3;
+  u_int uVar4;
+  u_int uVar5;
   int iVar6;
   int iVar7;
   MATRIX *pMVar8;
@@ -6787,7 +6787,7 @@ int STREAM_GetClipRect(StreamUnitPortal *portal,RECT *rect)
   int local_3c;
   int local_38;
   long local_34;
-  uint local_30;
+  u_int local_30;
   int local_2c;
   
   local_2c = 0;
@@ -6796,7 +6796,7 @@ int STREAM_GetClipRect(StreamUnitPortal *portal,RECT *rect)
   iVar11 = (int)portal->t1[1].z;
   local_30 = 0;
   if (iVar17 == iVar11) {
-    local_30 = (uint)(sVar9 == portal->t1[2].z);
+    local_30 = (u_int)(sVar9 == portal->t1[2].z);
   }
   iVar10 = (int)portal->t1[0].y;
   iVar15 = iVar10 - portal->t1[1].y;
@@ -6914,7 +6914,7 @@ int STREAM_GetClipRect(StreamUnitPortal *portal,RECT *rect)
           uVar3 = 0;
         }
         else {
-          uVar3 = (uint)(0 < rect->h);
+          uVar3 = (u_int)(0 < rect->h);
         }
       }
       else {
@@ -6971,27 +6971,27 @@ long GetFogColor(StreamUnitPortal *portal,_StreamUnit *mainStreamUnit,Level *mai
 {
   undefined4 in_zero;
   undefined4 in_at;
-  uint uVar1;
+  u_int uVar1;
   byte *pbVar2;
   Level *pLVar3;
   int iVar4;
   int iVar5;
   int iVar6;
-  uint local_28;
+  u_int local_28;
   int local_24;
   int local_20;
   int local_1c;
-  uint local_18;
-  uint local_14;
+  u_int local_18;
+  u_int local_14;
   
   local_18 = mainStreamUnit->FogColor;
   pLVar3 = portal->toStreamUnit->level;
   if ((int)gameTrackerX.gameData.asmData.MorphTime == 1000) {
     if (gameTrackerX.gameData.asmData.MorphType == 1) {
-      local_28 = *(uint *)&pLVar3->specturalColorR;
+      local_28 = *(u_int *)&pLVar3->specturalColorR;
     }
     else {
-      local_28 = *(uint *)&pLVar3->backColorR;
+      local_28 = *(u_int *)&pLVar3->backColorR;
     }
   }
   else {
@@ -7046,8 +7046,8 @@ LAB_8005f314:
   if (iVar4 < iVar6) {
     iVar4 = iVar6;
   }
-  uVar1 = (uint)mainLevel->fogFar;
-  if ((int)(iVar4 + 0x80U) < (int)(uint)mainLevel->fogFar) {
+  uVar1 = (u_int)mainLevel->fogFar;
+  if ((int)(iVar4 + 0x80U) < (int)(u_int)mainLevel->fogFar) {
     uVar1 = iVar4 + 0x80U;
   }
   s_zval = (int)uVar1 >> 2;
@@ -7058,9 +7058,9 @@ LAB_8005f314:
     }
   }
   else {
-    iVar5 = uVar1 - (uint)mainLevel->fogNear;
+    iVar5 = uVar1 - (u_int)mainLevel->fogNear;
     if (-1 < iVar5) {
-      iVar6 = (iVar5 * 0x10000) / (int)((uint)mainLevel->fogFar - (uint)mainLevel->fogNear) >> 4;
+      iVar6 = (iVar5 * 0x10000) / (int)((u_int)mainLevel->fogFar - (u_int)mainLevel->fogNear) >> 4;
       iVar5 = iVar6;
       if (iVar6 < 0) {
         iVar5 = 0;
@@ -7104,12 +7104,12 @@ LAB_8005f314:
 	/* end block 3 */
 	// End Line: 11928
 
-void DrawFogRectangle(RECT *cliprect,_PrimPool *primPool,int otzpos,ulong **drawot,long color)
+void DrawFogRectangle(RECT *cliprect,_PrimPool *primPool,int otzpos,u_long **drawot,long color)
 
 {
   short sVar1;
   short sVar2;
-  ulong *puVar3;
+  u_long *puVar3;
   
   puVar3 = (gameTrackerX.primPool)->nextPrim;
   if (puVar3 + 9 < (gameTrackerX.primPool)->lastPrim) {
@@ -7130,8 +7130,8 @@ void DrawFogRectangle(RECT *cliprect,_PrimPool *primPool,int otzpos,ulong **draw
     puVar3[7] = color;
     *(undefined *)((int)puVar3 + 7) = 0x38;
     *(short *)((int)puVar3 + 0x22) = sVar1 + sVar2;
-    *puVar3 = (uint)drawot[otzpos] & 0xffffff | 0x8000000;
-    drawot[otzpos] = (ulong *)((uint)puVar3 & 0xffffff);
+    *puVar3 = (u_int)drawot[otzpos] & 0xffffff | 0x8000000;
+    drawot[otzpos] = (u_long *)((u_int)puVar3 & 0xffffff);
   }
   return;
 }
@@ -7164,7 +7164,7 @@ void DrawFogRectangle(RECT *cliprect,_PrimPool *primPool,int otzpos,ulong **draw
 	// End Line: 12107
 
 void STREAM_RenderAdjacantUnit
-               (ulong **curOT,StreamUnitPortal *curStreamPortal,_StreamUnit *toStreamUnit,
+               (u_long **curOT,StreamUnitPortal *curStreamPortal,_StreamUnit *toStreamUnit,
                _StreamUnit *mainStreamUnit,RECT *cliprect)
 
 {
@@ -7440,7 +7440,7 @@ _Instance * WARPGATE_UnHideCloudCoverInUnit(long streamUnitID)
 	// End Line: 12422
 
 void STREAM_RenderWarpGate
-               (ulong **mainOT,StreamUnitPortal *curStreamPortal,_StreamUnit *mainStreamUnit,
+               (u_long **mainOT,StreamUnitPortal *curStreamPortal,_StreamUnit *mainStreamUnit,
                RECT *cliprect)
 
 {
@@ -7574,15 +7574,15 @@ void STREAM_RenderWarpGate
 /* WARNING: Could not reconcile some variable overlaps */
 
 void WARPGATE_RenderWarpUnit
-               (ulong **mainOT,StreamUnitPortal *curStreamPortal,_StreamUnit *mainStreamUnit,
+               (u_long **mainOT,StreamUnitPortal *curStreamPortal,_StreamUnit *mainStreamUnit,
                RECT *cliprect)
 
 {
   int iVar1;
   long color;
-  ulong *puVar2;
+  u_long *puVar2;
   _StreamUnit *streamUnit;
-  ulong **drawot;
+  u_long **drawot;
   undefined4 local_30;
   undefined4 local_2c;
   
@@ -7590,13 +7590,13 @@ void WARPGATE_RenderWarpUnit
   if ((gameTrackerX.debugFlags2 & 0x1000000U) != 0) {
     FONT_Print("Looking at warp unit =%s\n");
   }
-  WARPGATE_BlockWarpGateEntrance(mainStreamUnit,(uint)((streamUnit->flags & 8U) != 0));
+  WARPGATE_BlockWarpGateEntrance(mainStreamUnit,(u_int)((streamUnit->flags & 8U) != 0));
   WARPGATE_DrawWarpGateRim(streamUnit,1);
   color = MEMPACK_MemoryValidFunc((char *)streamUnit->level);
   if ((color != 0) &&
-     (drawot = (ulong **)(gameTrackerX.primPool)->nextPrim,
+     (drawot = (u_long **)(gameTrackerX.primPool)->nextPrim,
      drawot < (gameTrackerX.primPool)->lastPrim + -0xc00)) {
-    *(ulong ***)&(gameTrackerX.primPool)->nextPrim = drawot + 0xc00;
+    *(u_long ***)&(gameTrackerX.primPool)->nextPrim = drawot + 0xc00;
     ClearOTagR(drawot,0xc00);
     RENDER_currentStreamUnitID = *(short *)&streamUnit->StreamUnitID;
     curStreamPortal->toStreamUnit = streamUnit;
@@ -7609,28 +7609,28 @@ void WARPGATE_RenderWarpUnit
     (gameTrackerX.primPool)->nextPrim = puVar2 + 3;
     local_2c = *(undefined4 *)&cliprect->w;
     local_30._0_2_ = (short)*(undefined4 *)cliprect;
-    local_30 = CONCAT22((short)((uint)*(undefined4 *)cliprect >> 0x10) +
+    local_30 = CONCAT22((short)((u_int)*(undefined4 *)cliprect >> 0x10) +
                         (&draw)[gameTrackerX.drawPage].ofs[1],
                         (short)local_30 + (&draw)[gameTrackerX.drawPage].ofs[0]);
     SetDrawArea((int)puVar2,(ushort *)&local_30);
-    *puVar2 = (uint)drawot[0xbfe] & 0xffffff | 0x2000000;
-    drawot[0xbfe] = (ulong *)((uint)puVar2 & 0xffffff);
+    *puVar2 = (u_int)drawot[0xbfe] & 0xffffff | 0x2000000;
+    drawot[0xbfe] = (u_long *)((u_int)puVar2 & 0xffffff);
     if ((streamUnit->flags & 8U) == 0) {
       DRAW_TranslucentQuad
                 (cliprect->x,cliprect->y,
-                 (short)(((uint)(ushort)cliprect->x + (uint)(ushort)cliprect->w) * 0x10000 >> 0x10),
+                 (short)(((u_int)(ushort)cliprect->x + (u_int)(ushort)cliprect->w) * 0x10000 >> 0x10),
                  cliprect->y,(int)cliprect->x,
-                 (int)(((uint)(ushort)cliprect->y + (uint)(ushort)cliprect->h) * 0x10000) >> 0x10,
-                 (int)(((uint)(ushort)cliprect->x + (uint)(ushort)cliprect->w) * 0x10000) >> 0x10,
-                 (int)(((uint)(ushort)cliprect->y + (uint)(ushort)cliprect->h) * 0x10000) >> 0x10,
+                 (int)(((u_int)(ushort)cliprect->y + (u_int)(ushort)cliprect->h) * 0x10000) >> 0x10,
+                 (int)(((u_int)(ushort)cliprect->x + (u_int)(ushort)cliprect->w) * 0x10000) >> 0x10,
+                 (int)(((u_int)(ushort)cliprect->y + (u_int)(ushort)cliprect->h) * 0x10000) >> 0x10,
                  0x32,0x32,0x32,1,gameTrackerX.primPool,drawot + 1);
       DRAW_TranslucentQuad
                 (cliprect->x,cliprect->y,
-                 (short)(((uint)(ushort)cliprect->x + (uint)(ushort)cliprect->w) * 0x10000 >> 0x10),
+                 (short)(((u_int)(ushort)cliprect->x + (u_int)(ushort)cliprect->w) * 0x10000 >> 0x10),
                  cliprect->y,(int)cliprect->x,
-                 (int)(((uint)(ushort)cliprect->y + (uint)(ushort)cliprect->h) * 0x10000) >> 0x10,
-                 (int)(((uint)(ushort)cliprect->x + (uint)(ushort)cliprect->w) * 0x10000) >> 0x10,
-                 (int)(((uint)(ushort)cliprect->y + (uint)(ushort)cliprect->h) * 0x10000) >> 0x10,
+                 (int)(((u_int)(ushort)cliprect->y + (u_int)(ushort)cliprect->h) * 0x10000) >> 0x10,
+                 (int)(((u_int)(ushort)cliprect->x + (u_int)(ushort)cliprect->w) * 0x10000) >> 0x10,
+                 (int)(((u_int)(ushort)cliprect->y + (u_int)(ushort)cliprect->h) * 0x10000) >> 0x10,
                  0x32,0x32,0x32,2,gameTrackerX.primPool,drawot + 1);
     }
     puVar2 = (gameTrackerX.primPool)->nextPrim;
@@ -7638,9 +7638,9 @@ void WARPGATE_RenderWarpUnit
     local_30 = *(undefined4 *)(&draw)[gameTrackerX.drawPage].ofs;
     local_2c = 0xf00200;
     SetDrawArea((int)puVar2,(ushort *)&local_30);
-    *puVar2 = (uint)drawot[1] & 0xffffff | 0x2000000;
+    *puVar2 = (u_int)drawot[1] & 0xffffff | 0x2000000;
     iVar1 = s_zval;
-    drawot[1] = (ulong *)((uint)puVar2 & 0xffffff);
+    drawot[1] = (u_long *)((u_int)puVar2 & 0xffffff);
     puVar2 = mainOT[iVar1];
     mainOT[iVar1] = drawot[0xbff];
     *drawot = puVar2;
@@ -7739,7 +7739,7 @@ int STREAM_TryAndDumpNonResident(_ObjectTracker *otr)
 {
   _Instance **pp_Var1;
   _Instance *instance;
-  uint uVar2;
+  u_int uVar2;
   int iVar3;
   _Instance *p_Var4;
   
@@ -7775,7 +7775,7 @@ int STREAM_TryAndDumpNonResident(_ObjectTracker *otr)
         }
       }
       STREAM_RemoveAllObjectsNotInUse(&gameTrackerX);
-      uVar2 = (uint)(otr->objectStatus == 0);
+      uVar2 = (u_int)(otr->objectStatus == 0);
     }
   }
   return uVar2;

@@ -39,8 +39,8 @@ void G2AnimSection_InterpToKeylistAtTime
   _G2AnimQuatInfo_Type *p_Var4;
   int iVar5;
   _G2AnimInterpStateBlock_Type *p_Var6;
-  ulong uVar7;
-  uint uVar8;
+  u_long uVar7;
+  u_int uVar8;
   _G2AnimInterpInfo_Type *p_Var9;
   short sVar10;
   short sVar11;
@@ -53,7 +53,7 @@ LAB_80091b3c:
     anim = _G2AnimSection_GetAnim(section);
     p_Var9 = section->interpInfo;
     bVar1 = section->segCount;
-    uVar8 = (uint)bVar1;
+    uVar8 = (u_int)bVar1;
     if (p_Var9->stateBlockList == (_G2AnimInterpStateBlock_Type *)0x0) {
       p_Var6 = _G2Anim_AllocateInterpStateBlockList(section);
       if (p_Var6 == (_G2AnimInterpStateBlock_Type *)0x0) goto LAB_80091b3c;
@@ -111,7 +111,7 @@ LAB_80091b3c:
     sVar11 = (short)duration;
     p_Var9->duration = sVar11;
     if (((section->flags & 2) == 0) && ((section->alarmFlags & 3) != 0)) {
-      iVar5 = (int)sVar10 % (uint)section->keylist->s0TailTime + 1;
+      iVar5 = (int)sVar10 % (u_int)section->keylist->s0TailTime + 1;
       sVar10 = (short)iVar5;
       if (sVar11 < iVar5) {
         sVar10 = sVar11;
@@ -222,14 +222,14 @@ void _G2AnimSection_UpdateStoredFrameFromQuat(_G2AnimSection_Type *section)
   ushort *puVar7;
   _G2AnimInterpStateBlock_Type *p_Var8;
   int iVar9;
-  uint uVar10;
+  u_int uVar10;
   undefined4 local_30;
   undefined4 local_2c;
   
   p_Var5 = section->interpInfo;
   iVar9 = 4;
   bVar1 = section->segCount;
-  uVar10 = (uint)bVar1;
+  uVar10 = (u_int)bVar1;
   ratio = _G2AnimAlphaTable_GetValue
                     (p_Var5->alphaTable,((int)section->elapsedTime << 0xc) / (int)p_Var5->duration);
   p_Var8 = p_Var5->stateBlockList;
@@ -241,12 +241,12 @@ void _G2AnimSection_UpdateStoredFrameFromQuat(_G2AnimSection_Type *section)
       G2Quat_Slerp_VM(ratio,(_G2Quat_Type *)quatA,&quatA->destQuat,(_G2Quat_Type *)&local_30,0);
       *(undefined4 *)&p_Var6->rotQuat = local_30;
       *(undefined4 *)(puVar7 + -9) = local_2c;
-      setCopReg(2,0xc800,(uint)(ushort)(quatA->srcScale).x);
-      setCopReg(2,0xd000,(uint)(ushort)(quatA->srcScale).y);
-      setCopReg(2,0xd800,(uint)(ushort)(quatA->srcScale).z);
-      setCopReg(2,0x4800,(uint)(ushort)(quatA->destScale).x);
-      setCopReg(2,0x5000,(uint)(ushort)(quatA->destScale).y);
-      setCopReg(2,0x5800,(uint)(ushort)(quatA->destScale).z);
+      setCopReg(2,0xc800,(u_int)(ushort)(quatA->srcScale).x);
+      setCopReg(2,0xd000,(u_int)(ushort)(quatA->srcScale).y);
+      setCopReg(2,0xd800,(u_int)(ushort)(quatA->srcScale).z);
+      setCopReg(2,0x4800,(u_int)(ushort)(quatA->destScale).x);
+      setCopReg(2,0x5000,(u_int)(ushort)(quatA->destScale).y);
+      setCopReg(2,0x5800,(u_int)(ushort)(quatA->destScale).z);
       setCopReg(2,0x4000,ratio);
       copFunction(2,0x1a8003e);
       uVar2 = getCopReg(2,0xc800);
@@ -255,12 +255,12 @@ void _G2AnimSection_UpdateStoredFrameFromQuat(_G2AnimSection_Type *section)
       (p_Var6->scale).x = (short)uVar2;
       (p_Var6->scale).y = (short)uVar3;
       (p_Var6->scale).z = (short)uVar4;
-      setCopReg(2,0xc800,(uint)(ushort)(quatA->srcTrans).x);
-      setCopReg(2,0xd000,(uint)(ushort)(quatA->srcTrans).y);
-      setCopReg(2,0xd800,(uint)(ushort)(quatA->srcTrans).z);
-      setCopReg(2,0x4800,(uint)(ushort)(quatA->destTrans).x);
-      setCopReg(2,0x5000,(uint)(ushort)(quatA->destTrans).y);
-      setCopReg(2,0x5800,(uint)(ushort)(quatA->destTrans).z);
+      setCopReg(2,0xc800,(u_int)(ushort)(quatA->srcTrans).x);
+      setCopReg(2,0xd000,(u_int)(ushort)(quatA->srcTrans).y);
+      setCopReg(2,0xd800,(u_int)(ushort)(quatA->srcTrans).z);
+      setCopReg(2,0x4800,(u_int)(ushort)(quatA->destTrans).x);
+      setCopReg(2,0x5000,(u_int)(ushort)(quatA->destTrans).y);
+      setCopReg(2,0x5800,(u_int)(ushort)(quatA->destTrans).z);
       setCopReg(2,0x4000,ratio);
       copFunction(2,0x1a8003e);
       uVar2 = getCopReg(2,0xc800);
@@ -367,14 +367,14 @@ void _G2AnimSection_InterpStateToQuat(_G2AnimSection_Type *section)
   _G2AnimQuatInfo_Type *quatA;
   int iVar6;
   _G2AnimInterpStateBlock_Type *p_Var7;
-  uint uVar8;
+  u_int uVar8;
   undefined4 local_28;
   undefined4 local_24;
   
   p_Var5 = section->interpInfo;
   iVar6 = 4;
   bVar1 = section->segCount;
-  uVar8 = (uint)bVar1;
+  uVar8 = (u_int)bVar1;
   ratio = _G2AnimAlphaTable_GetValue
                     (p_Var5->alphaTable,((int)section->elapsedTime << 0xc) / (int)p_Var5->duration);
   p_Var7 = p_Var5->stateBlockList;
@@ -384,12 +384,12 @@ void _G2AnimSection_InterpStateToQuat(_G2AnimSection_Type *section)
       G2Quat_Slerp_VM(ratio,(_G2Quat_Type *)quatA,&quatA->destQuat,(_G2Quat_Type *)&local_28,0);
       *(undefined4 *)&(quatA->srcQuat).z = local_24;
       *(undefined4 *)&quatA->srcQuat = local_28;
-      setCopReg(2,0xc800,(uint)(ushort)(quatA->srcScale).x);
-      setCopReg(2,0xd000,(uint)(ushort)(quatA->srcScale).y);
-      setCopReg(2,0xd800,(uint)(ushort)(quatA->srcScale).z);
-      setCopReg(2,0x4800,(uint)(ushort)(quatA->destScale).x);
-      setCopReg(2,0x5000,(uint)(ushort)(quatA->destScale).y);
-      setCopReg(2,0x5800,(uint)(ushort)(quatA->destScale).z);
+      setCopReg(2,0xc800,(u_int)(ushort)(quatA->srcScale).x);
+      setCopReg(2,0xd000,(u_int)(ushort)(quatA->srcScale).y);
+      setCopReg(2,0xd800,(u_int)(ushort)(quatA->srcScale).z);
+      setCopReg(2,0x4800,(u_int)(ushort)(quatA->destScale).x);
+      setCopReg(2,0x5000,(u_int)(ushort)(quatA->destScale).y);
+      setCopReg(2,0x5800,(u_int)(ushort)(quatA->destScale).z);
       setCopReg(2,0x4000,ratio);
       copFunction(2,0x1a8003e);
       uVar2 = getCopReg(2,0xc800);
@@ -398,12 +398,12 @@ void _G2AnimSection_InterpStateToQuat(_G2AnimSection_Type *section)
       (quatA->srcScale).x = (short)uVar2;
       (quatA->srcScale).y = (short)uVar3;
       (quatA->srcScale).z = (short)uVar4;
-      setCopReg(2,0xc800,(uint)(ushort)(quatA->srcTrans).x);
-      setCopReg(2,0xd000,(uint)(ushort)(quatA->srcTrans).y);
-      setCopReg(2,0xd800,(uint)(ushort)(quatA->srcTrans).z);
-      setCopReg(2,0x4800,(uint)(ushort)(quatA->destTrans).x);
-      setCopReg(2,0x5000,(uint)(ushort)(quatA->destTrans).y);
-      setCopReg(2,0x5800,(uint)(ushort)(quatA->destTrans).z);
+      setCopReg(2,0xc800,(u_int)(ushort)(quatA->srcTrans).x);
+      setCopReg(2,0xd000,(u_int)(ushort)(quatA->srcTrans).y);
+      setCopReg(2,0xd800,(u_int)(ushort)(quatA->srcTrans).z);
+      setCopReg(2,0x4800,(u_int)(ushort)(quatA->destTrans).x);
+      setCopReg(2,0x5000,(u_int)(ushort)(quatA->destTrans).y);
+      setCopReg(2,0x5800,(u_int)(ushort)(quatA->destTrans).z);
       setCopReg(2,0x4000,ratio);
       copFunction(2,0x1a8003e);
       uVar2 = getCopReg(2,0xc800);
@@ -459,14 +459,14 @@ void _G2AnimSection_SegValueToQuat(_G2AnimSection_Type *section,int zeroOne)
   _G2AnimSegValue_Type *p_Var3;
   int iVar4;
   _G2AnimInterpStateBlock_Type *p_Var5;
-  uint uVar6;
+  u_int uVar6;
   ushort local_28;
   ushort local_26;
   ushort local_24;
   undefined2 local_22;
   
   iVar4 = 4;
-  uVar6 = (uint)section->segCount;
+  uVar6 = (u_int)section->segCount;
   p_Var5 = section->interpInfo->stateBlockList;
   p_Var3 = &_segValues + section->firstSeg;
   p_Var1 = p_Var5->quatInfo;
@@ -537,10 +537,10 @@ _G2AnimInterpStateBlock_Type * _G2Anim_AllocateInterpStateBlockList(_G2AnimSecti
 {
   _G2AnimInterpStateBlock_Type *p_Var1;
   _G2AnimInterpStateBlock_Type *p_Var2;
-  uint uVar3;
+  u_int uVar3;
   _G2AnimInterpInfo_Type *p_Var4;
   
-  uVar3 = (uint)section->segCount;
+  uVar3 = (u_int)section->segCount;
   p_Var4 = section->interpInfo;
   p_Var2 = (_G2AnimInterpStateBlock_Type *)G2PoolMem_Allocate(&_interpStateBlockPool);
   p_Var4->stateBlockList = p_Var2;

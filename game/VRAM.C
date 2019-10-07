@@ -186,9 +186,9 @@ int VRAM_ConcatanateMemory(_BlockVramEntry *curBlock)
       block = curBlock->next;
       while (block != (_BlockVramEntry *)0x0) {
         if ((curBlock->x == block->x) && (curBlock->w == block->w)) {
-          iVar2 = (uint)(ushort)curBlock->y << 0x10;
+          iVar2 = (u_int)(ushort)curBlock->y << 0x10;
           iVar4 = iVar2 >> 0x10;
-          iVar1 = (uint)(ushort)block->y << 0x10;
+          iVar1 = (u_int)(ushort)block->y << 0x10;
           iVar3 = iVar1 >> 0x10;
           if (iVar2 >> 0x18 == iVar1 >> 0x18) {
             if (iVar4 + curBlock->h == iVar3) {
@@ -617,11 +617,11 @@ int VRAM_InsertFreeVram(short x,short y,short w,short h,int flags)
 {
   short sVar1;
   _BlockVramEntry *block;
-  uchar uVar2;
+  u_char uVar2;
   long lVar3;
   
-  uVar2 = (uchar)flags;
-  if (((x & 0x3fU) == 0) || ((int)w <= (int)(0x40 - ((uint)(ushort)x & 0x3f)))) {
+  uVar2 = (u_char)flags;
+  if (((x & 0x3fU) == 0) || ((int)w <= (int)(0x40 - ((u_int)(ushort)x & 0x3f)))) {
     block = VRAM_GetOpenBlock();
     lVar3 = (int)w * (int)h;
     block->next = (_BlockVramEntry *)0x0;
@@ -635,7 +635,7 @@ int VRAM_InsertFreeVram(short x,short y,short w,short h,int flags)
   }
   else {
     block = VRAM_GetOpenBlock();
-    sVar1 = (short)((uint)(ushort)x & 0x3f);
+    sVar1 = (short)((u_int)(ushort)x & 0x3f);
     block->w = 0x40 - sVar1;
     block->next = (_BlockVramEntry *)0x0;
     block->flags = uVar2;
@@ -716,21 +716,21 @@ _BlockVramEntry * VRAM_CheckVramSlot(short *x,short *y,short w,short h,int type,
   ushort x_00;
   ushort y_00;
   int iVar3;
-  uint uVar4;
+  u_int uVar4;
   int iVar5;
   ushort h_00;
-  uint uVar6;
+  u_int uVar6;
   int iVar7;
   int iVar8;
-  uint uVar9;
+  u_int uVar9;
   _BlockVramEntry *block;
   short w_00;
   _BlockVramEntry *p_Var10;
-  uint uVar11;
-  uchar local_30;
+  u_int uVar11;
+  u_char local_30;
   
-  uVar6 = (uint)(ushort)h;
-  uVar4 = (uint)(ushort)w;
+  uVar6 = (u_int)(ushort)h;
+  uVar4 = (u_int)(ushort)w;
   bVar2 = false;
   p_Var10 = (_BlockVramEntry *)0x0;
   _w_00 = 0;
@@ -745,7 +745,7 @@ _BlockVramEntry * VRAM_CheckVramSlot(short *x,short *y,short w,short h,int type,
       if (((iVar3 <= iVar7) && (h <= block->h)) &&
          ((iVar8 == -1 || ((iVar8 <= (int)block->y && ((int)block->y < iVar8 + 0x100)))))) {
         x_00 = block->x;
-        iVar5 = 0x40 - ((uint)x_00 & 0x3f);
+        iVar5 = 0x40 - ((u_int)x_00 & 0x3f);
         if ((x_00 & 0x3f) == 0) {
 LAB_80073150:
           bVar2 = false;
@@ -760,10 +760,10 @@ LAB_80073150:
         }
         else {
           if ((x_00 & 0xf) == 0) goto LAB_80073150;
-          iVar5 = 0x10 - ((uint)x_00 & 0xf);
+          iVar5 = 0x10 - ((u_int)x_00 & 0xf);
           if ((iVar3 <= (int)(0x40 - ((short)x_00 + iVar5 & 0x3fU))) && (iVar3 <= iVar7 - iVar5)) {
-            VRAM_InsertFreeVram(x_00,block->y,(short)((uint)(iVar5 * 0x10000) >> 0x10),block->h,
-                                (uint)block->flags);
+            VRAM_InsertFreeVram(x_00,block->y,(short)((u_int)(iVar5 * 0x10000) >> 0x10),block->h,
+                                (u_int)block->flags);
             bVar2 = false;
             block->x = block->x + (short)iVar5;
             block->w = block->w - (short)iVar5;
@@ -777,7 +777,7 @@ LAB_80073150:
     if (block != (_BlockVramEntry *)0x0) goto LAB_80073098;
   }
   if ((p_Var10 != (_BlockVramEntry *)0x0) && (bVar2)) {
-    VRAM_InsertFreeVram(p_Var10->x,p_Var10->y,w_00,p_Var10->h,(uint)p_Var10->flags);
+    VRAM_InsertFreeVram(p_Var10->x,p_Var10->y,w_00,p_Var10->h,(u_int)p_Var10->flags);
     bVar2 = false;
     p_Var10->x = p_Var10->x + w_00;
     p_Var10->w = p_Var10->w - w_00;
@@ -791,13 +791,13 @@ LAB_80073098:
     x_00 = block->x;
     y_00 = block->y;
     uVar1 = block->w;
-    uVar9 = (uint)uVar1;
+    uVar9 = (u_int)uVar1;
     h_00 = block->h;
-    uVar11 = (uint)h_00;
+    uVar11 = (u_int)h_00;
     VRAM_DeleteFreeBlock(block);
     block->next = (_BlockVramEntry *)0x0;
     block->flags = '\x01';
-    local_30 = (uchar)type;
+    local_30 = (u_char)type;
     block->w = w;
     block->h = h;
     block->type = local_30;
@@ -831,12 +831,12 @@ LAB_80073098:
         }
         iVar3 = x_00 + uVar4;
         if (_w_00 < iVar5) {
-          VRAM_InsertFreeVram((short)((uint)(iVar3 * 0x10000) >> 0x10),y_00,
+          VRAM_InsertFreeVram((short)((u_int)(iVar3 * 0x10000) >> 0x10),y_00,
                               (short)((uVar9 - uVar4) * 0x10000 >> 0x10),h,1);
           w = uVar1;
         }
         else {
-          VRAM_InsertFreeVram((short)((uint)(iVar3 * 0x10000) >> 0x10),y_00,
+          VRAM_InsertFreeVram((short)((u_int)(iVar3 * 0x10000) >> 0x10),y_00,
                               (short)((uVar9 - uVar4) * 0x10000 >> 0x10),h_00,1);
         }
         y_00 = (ushort)((y_00 + uVar6) * 0x10000 >> 0x10);
@@ -906,7 +906,7 @@ void AdjustVramCoordsObject(int oldx,int oldy,int newx,int newy,Object *object)
   ushort uVar2;
   char cVar3;
   char cVar4;
-  uint uVar5;
+  u_int uVar5;
   TextureMT3 *pTVar6;
   ushort *puVar7;
   _Model *p_Var8;
@@ -922,23 +922,23 @@ void AdjustVramCoordsObject(int oldx,int oldy,int newx,int newy,Object *object)
         puVar7 = &pTVar6->clut;
         do {
           uVar1 = puVar7[2];
-          uVar5 = newy + (((uint)uVar1 & 0x10) * 0x10 - (oldy & 0xffffff00U));
+          uVar5 = newy + (((u_int)uVar1 & 0x10) * 0x10 - (oldy & 0xffffff00U));
           uVar2 = *puVar7;
           *(char *)((int)puVar7 + -1) = *(char *)((int)puVar7 + -1) + cVar3;
           *(char *)((int)puVar7 + 7) = *(char *)((int)puVar7 + 7) + cVar3;
           *(char *)((int)puVar7 + 3) = *(char *)((int)puVar7 + 3) + cVar3;
           cVar4 = (char)(((int)(((newx & 0x3fU) - (oldx & 0x3fU)) * 0x10000) >> 0x10) <<
-                        (2 - ((uint)(uVar1 >> 7) & 3) & 0x1f));
+                        (2 - ((u_int)(uVar1 >> 7) & 3) & 0x1f));
           pTVar6->u0 = pTVar6->u0 + cVar4;
           pTVar6 = pTVar6 + 1;
           puVar7[2] = uVar1 & 0x1e0 |
                       (ushort)((int)(uVar5 & 0x100) >> 4) |
                       (ushort)((int)((newx & 0xffffffc0U) +
-                                     (((uint)uVar1 & 0xf) * 0x40 - (oldx & 0xffffffc0U)) & 0x3ff) >>
+                                     (((u_int)uVar1 & 0xf) * 0x40 - (oldx & 0xffffffc0U)) & 0x3ff) >>
                               6) | (ushort)((uVar5 & 0x200) << 2);
           *puVar7 = ((short)newy + ((uVar2 >> 6) - (short)oldy)) * 0x40 |
                     (ushort)((int)((newx & 0xfffffff0U) +
-                                  (((uint)uVar2 & 0x3f) * 0x10 - (oldx & 0xfffffff0U))) >> 4) & 0x3f
+                                  (((u_int)uVar2 & 0x3f) * 0x10 - (oldx & 0xfffffff0U))) >> 4) & 0x3f
           ;
           *(char *)(puVar7 + 1) = *(char *)(puVar7 + 1) + cVar4;
           *(char *)(puVar7 + 3) = *(char *)(puVar7 + 3) + cVar4;
@@ -1160,7 +1160,7 @@ LAB_800735cc:
       local_30 = rootNode->x;
       local_2e[0] = rootNode->y;
       newBlock = VRAM_CheckVramSlot((short *)&local_30,(short *)local_2e,local_34,local_32,
-                                    (uint)rootNode->type,(int)sVar9);
+                                    (u_int)rootNode->type,(int)sVar9);
       if (newBlock == (_BlockVramEntry *)0x0) {
         VRAM_PrintInfo();
         VRAM_PrintVramBlock(rootNode);
@@ -1178,9 +1178,9 @@ LAB_800735cc:
       else {
         if ((2 < bVar1) && (bVar1 == 3)) {
           fontTracker.font_tpage =
-               (short)(local_2e[0] & 0x100) >> 4 | (ushort)(((uint)local_30 & 0x3ff) >> 6) |
-               (ushort)(((uint)local_2e[0] & 0x200) << 2);
-          fontTracker.font_vramU = (short)(((uint)local_30 & 0x3f) << 2);
+               (short)(local_2e[0] & 0x100) >> 4 | (ushort)(((u_int)local_30 & 0x3ff) >> 6) |
+               (ushort)(((u_int)local_2e[0] & 0x200) << 2);
+          fontTracker.font_vramU = (short)(((u_int)local_30 & 0x3f) << 2);
           fontTracker.font_vramV = local_2e[0] & 0xff;
           fontTracker.font_vramX = local_30;
           SpecialFogClut = local_30 >> 4 & 0x3f;
@@ -1253,14 +1253,14 @@ void VRAM_TransferBufferToVram(void *dataPtr,long dataSize,short status,void *da
   plVar2 = gameTrackerX.drawTimerReturn;
   gameTrackerX.drawTimerReturn = (long *)0x0;
   if (data1 != (void *)0x0) {
-    if ((*(uint *)data1 & 1) == 0) {
-      *(uint *)data1 = *(uint *)data1 | 1;
+    if ((*(u_int *)data1 & 1) == 0) {
+      *(u_int *)data1 = *(u_int *)data1 | 1;
       dataPtr = (void *)((int)dataPtr + 0x24);
       dataSize = dataSize - 0x24;
     }
     iVar4 = (int)*(short *)((int)data1 + 0xe);
     if (iVar4 != 0) {
-      iVar6 = (int)*(short *)((int)data1 + 8) * 2 - (uint)*(ushort *)((int)data1 + 0xe);
+      iVar6 = (int)*(short *)((int)data1 + 8) * 2 - (u_int)*(ushort *)((int)data1 + 0xe);
       __n = iVar6 * 0x10000 >> 0x10;
       if (dataSize < (int)__n) {
         memcpy((void *)(*(int *)((int)data1 + 0x10) + iVar4),dataPtr,dataSize);

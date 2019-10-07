@@ -475,7 +475,7 @@ void DisplayMenuBox(int x0,int x1,int y0,int y1)
   int iVar4;
   int *piVar5;
   int iVar6;
-  ulong **ot;
+  u_long **ot;
   int iVar7;
   int iVar8;
   
@@ -800,7 +800,7 @@ void menu_draw(menu_t *menu)
       iVar5 = iVar5 + 0x10;
       bVar1 = iVar4 != iVar6;
       iVar4 = iVar4 + 1;
-      ypos = menu_draw_item(menu,ypos,0,0,*ppcVar3,(uint)bVar1,(long)ppcVar3[3],&local_30);
+      ypos = menu_draw_item(menu,ypos,0,0,*ppcVar3,(u_int)bVar1,(long)ppcVar3[3],&local_30);
     } while (iVar4 < menu->nitems);
   }
   if ((&menu->nmenus + iVar2 * 9)[2] != 0) {

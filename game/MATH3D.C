@@ -159,7 +159,7 @@ long MATH3D_LengthXY(long x,long y)
 
 {
   int iVar1;
-  uint uVar2;
+  u_int uVar2;
   
   if (x < 0) {
     x = -x;
@@ -267,7 +267,7 @@ short MATH3D_FastAtan2(long y,long x)
     if (x < 1) {
       if (y < 1) {
         if (iVar2 < iVar3) {
-          return (short)((uint)(((iVar2 << 9) / iVar3 + 0x800) * 0x10000) >> 0x10);
+          return (short)((u_int)(((iVar2 << 9) / iVar3 + 0x800) * 0x10000) >> 0x10);
         }
         sVar4 = (short)((iVar3 << 9) / iVar2);
         sVar1 = 0xc00;
@@ -343,11 +343,11 @@ long MATH3D_FastSqrt(long square)
 {
   int iVar1;
   int iVar2;
-  uint uVar3;
+  u_int uVar3;
   int iVar4;
-  uint uVar5;
+  u_int uVar5;
   int iVar6;
-  uint uVar7;
+  u_int uVar7;
   
   iVar4 = 0x1f;
   if (square == 0) {
@@ -439,9 +439,9 @@ long MATH3D_FastSqrt0(long square)
   int iVar2;
   int iVar3;
   int iVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
+  u_int uVar5;
+  u_int uVar6;
+  u_int uVar7;
   
   iVar4 = 0x1f;
   if (square == 0) {
@@ -495,7 +495,7 @@ long MATH3D_FastSqrt0(long square)
 long MATH3D_DistanceBetweenPositions(_Position *pos1,_Position *pos2)
 
 {
-  ulong square;
+  u_long square;
   long lVar1;
   
   square = MATH3D_SquareLength((int)pos2->x - (int)pos1->x,(int)pos2->y - (int)pos1->y,
@@ -527,8 +527,8 @@ long MATH3D_DistanceBetweenPositions(_Position *pos1,_Position *pos2)
 short MATH3D_AngleBetweenVectors(_SVector *vector1,_SVector *vector2)
 
 {
-  uint uVar1;
-  uint uVar2;
+  u_int uVar1;
+  u_int uVar2;
   int iVar3;
   
   iVar3 = (int)vector1->x * (int)vector2->x;
@@ -581,13 +581,13 @@ LAB_80039f9c:
 void MATH3D_RotMatAboutVec(_SVector *vec,MATRIX *mat,short angle)
 
 {
-  ulong uVar1;
-  uint uVar2;
+  u_long uVar1;
+  u_int uVar2;
   int iVar3;
   ushort local_60;
   undefined2 local_5e;
   undefined2 local_5c;
-  uint auStack88 [8];
+  u_int auStack88 [8];
   undefined4 auStack56 [8];
   
   if ((int)angle != 0) {
@@ -600,9 +600,9 @@ void MATH3D_RotMatAboutVec(_SVector *vec,MATRIX *mat,short angle)
     local_5c = 0;
     RotMatrix(&local_60,auStack88);
     TransposeMatrix(auStack88,auStack56);
-    MulMatrix2(auStack56,(uint *)mat);
-    RotMatrixZ((int)angle,(uint *)mat);
-    MulMatrix2(auStack88,(uint *)mat);
+    MulMatrix2(auStack56,(u_int *)mat);
+    RotMatrixZ((int)angle,(u_int *)mat);
+    MulMatrix2(auStack88,(u_int *)mat);
   }
   return;
 }
@@ -780,7 +780,7 @@ void MATH3D_ZYXtoXYZ(_Rotation *rot)
   _G2Matrix_Type _Stack48;
   _G2EulerAngles_Type local_10;
   
-  RotMatrixZYX((ushort *)rot,(uint *)&_Stack48);
+  RotMatrixZYX((ushort *)rot,(u_int *)&_Stack48);
   G2EulerAngles_FromMatrix(&local_10,&_Stack48,0x15);
   rot->x = local_10.x;
   rot->y = local_10.y;
@@ -868,7 +868,7 @@ int MATH3D_veclen2(int ix,int iy)
 
 {
   bool bVar1;
-  uint uVar2;
+  u_int uVar2;
   
   if (ix < 0) {
     ix = -ix;
@@ -920,11 +920,11 @@ void MATH3D_RotateAxisToVector(MATRIX *dest,MATRIX *src,_SVector *vec,MATH3D_AXI
   short *psVar1;
   int iVar2;
   int iVar3;
-  ulong square;
+  u_long square;
   int iVar4;
   int iVar5;
   long lVar6;
-  uint uVar7;
+  u_int uVar7;
   ushort auStack64 [16];
   short local_20;
   short local_1e;
@@ -978,7 +978,7 @@ void MATH3D_RotateAxisToVector(MATRIX *dest,MATRIX *src,_SVector *vec,MATH3D_AXI
   iVar3 = rcos(uVar7);
   local_1a = (undefined2)iVar3;
   G2Quat_ToMatrix_S(&local_20,(short *)auStack64);
-  MulMatrix0((undefined4 *)src,auStack64,(uint *)dest);
+  MulMatrix0((undefined4 *)src,auStack64,(u_int *)dest);
   return;
 }
 
@@ -1076,7 +1076,7 @@ void MATH3D_CrossProduct(_SVector *t,_SVector *r,_SVector *s)
 	/* end block 1 */
 	// End Line: 1749
 
-ulong MATH3D_SquareLength(long x,long y,long z)
+u_long MATH3D_SquareLength(long x,long y,long z)
 
 {
   int iVar1;

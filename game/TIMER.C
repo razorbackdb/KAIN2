@@ -23,15 +23,15 @@
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-ulong TIMER_GetTimeMS(void)
+u_long TIMER_GetTimeMS(void)
 
 {
-  uint uVar1;
-  uint uVar2;
+  u_int uVar1;
+  u_int uVar2;
   
   EnterCriticalSection();
   uVar2 = GetRCnt(0xf2000000);
-  uVar1 = gameTimer;
+  //uVar1 = gameTimer;
   ExitCriticalSection();
   return (uVar1 >> 0x10) * 0x1ef63 + (uVar2 & 0xffff | uVar1 << 0x10) / 0x844d;
 }
@@ -62,20 +62,20 @@ ulong TIMER_GetTimeMS(void)
 	/* end block 2 */
 	// End Line: 155
 
-ulong TIMER_TimeDiff(ulong x)
+u_long TIMER_TimeDiff(u_long x)
 
 {
-  uint uVar1;
-  uint uVar2;
-  ulong uVar3;
-  uint uVar4;
-  uint uVar5;
+  u_int uVar1;
+  u_int uVar2;
+  u_long uVar3;
+  u_int uVar4;
+  u_int uVar5;
   int iVar6;
   
   uVar1 = GetRCnt(0xf2000000);
   uVar1 = uVar1 & 0xffff;
   uVar5 = x >> 0x10;
-  uVar2 = gameTimer & 0xffff;
+  //uVar2 = gameTimer & 0xffff;
   uVar4 = x & 0xffff;
   if (uVar2 < uVar5) {
     uVar5 = (uVar2 + 0x10000) - uVar5;

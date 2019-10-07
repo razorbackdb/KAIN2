@@ -334,7 +334,7 @@ void ProcessPhysics(__Player *player,__CharacterState *In,int CurrentSection,int
   long segment;
   long clamp;
   _Instance *instance;
-  uint time;
+  u_int time;
   
   instance = In->CharacterInstance;
   if (instance->matrix != (MATRIX *)0x0) {

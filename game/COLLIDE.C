@@ -87,7 +87,7 @@ int COLLIDE_PointInTriangle(_SVector *v0,_SVector *v1,_SVector *v2,_SVector *poi
   short *psVar12;
   int iVar13;
   short *psVar14;
-  uint uVar15;
+  u_int uVar15;
   int iVar16;
   
   iVar7 = (int)normal->x;
@@ -137,11 +137,11 @@ LAB_8001e5c0:
   uVar15 = 0;
   bVar5 = false;
   iVar16 = 3;
-  iVar9 = (int)((uint)uVar3 << 0x10) >> 0x10;
+  iVar9 = (int)((u_int)uVar3 << 0x10) >> 0x10;
   iVar7 = (int)sVar2;
   psVar12 = &DAT_1f800008;
   psVar14 = &DAT_1f800000;
-  bVar8 = (int)((uint)uVar3 << 0x10) <= (int)((uint)uVar1 << 0x10);
+  bVar8 = (int)((u_int)uVar3 << 0x10) <= (int)((u_int)uVar1 << 0x10);
   do {
     iVar13 = (int)psVar14[1];
     if (bVar8 == iVar9 <= iVar13) {
@@ -169,7 +169,7 @@ LAB_8001e5c0:
       iVar11 = (int)*psVar14;
       if (iVar7 <= iVar10 == iVar7 <= iVar11) {
         if (iVar7 <= iVar10) {
-          uVar15 = (uint)(uVar15 == 0);
+          uVar15 = (u_int)(uVar15 == 0);
         }
       }
       else {
@@ -183,7 +183,7 @@ LAB_8001e5c0:
           }
         }
         else {
-          uVar15 = (uint)(uVar15 == 0);
+          uVar15 = (u_int)(uVar15 == 0);
         }
       }
       bVar6 = true;
@@ -292,7 +292,7 @@ long COLLIDE_GetNormal(short nNum,short *nrmlArray,_SVector *nrml)
     uVar2 = puVar4[2];
   }
   nrml->z = uVar2;
-  return (int)((uint)uVar1 << 0x10) >> 0x1d;
+  return (int)((u_int)uVar1 << 0x10) >> 0x1d;
 }
 
 
@@ -579,11 +579,11 @@ void COLLIDE_MoveAllTransforms(_Instance *instance,_Position *offset)
 long COLLIDE_WithinYZBounds(_SVector *point,_HBox *hbox)
 
 {
-  uint uVar1;
+  u_int uVar1;
   
   uVar1 = 0;
   if (((hbox->minY <= point->y) && (point->y <= hbox->maxY)) && (hbox->minZ <= point->z)) {
-    uVar1 = (uint)(hbox->maxZ < point->z) ^ 1;
+    uVar1 = (u_int)(hbox->maxZ < point->z) ^ 1;
   }
   return uVar1;
 }
@@ -607,11 +607,11 @@ long COLLIDE_WithinYZBounds(_SVector *point,_HBox *hbox)
 long COLLIDE_WithinXZBounds(_SVector *point,_HBox *hbox)
 
 {
-  uint uVar1;
+  u_int uVar1;
   
   uVar1 = 0;
   if (((hbox->minX <= point->x) && (point->x <= hbox->maxX)) && (hbox->minZ <= point->z)) {
-    uVar1 = (uint)(hbox->maxZ < point->z) ^ 1;
+    uVar1 = (u_int)(hbox->maxZ < point->z) ^ 1;
   }
   return uVar1;
 }
@@ -635,11 +635,11 @@ long COLLIDE_WithinXZBounds(_SVector *point,_HBox *hbox)
 long COLLIDE_WithinXYBounds(_SVector *point,_HBox *hbox)
 
 {
-  uint uVar1;
+  u_int uVar1;
   
   uVar1 = 0;
   if (((hbox->minX <= point->x) && (point->x <= hbox->maxX)) && (hbox->minY <= point->y)) {
-    uVar1 = (uint)(hbox->maxY < point->y) ^ 1;
+    uVar1 = (u_int)(hbox->maxY < point->y) ^ 1;
   }
   return uVar1;
 }
@@ -866,7 +866,7 @@ long COLLIDE_IntersectLineAndBox
                _SVector *start,_HBox *hbox)
 
 {
-  uint uVar1;
+  u_int uVar1;
   _SVector local_40;
   int local_38;
   int local_34;
@@ -918,7 +918,7 @@ long COLLIDE_IntersectLineAndBox
             (start->z,local_30,hbox->maxZ,start,(_Vector *)&local_38,hbox,COLLIDE_WithinXYBounds,
              &local_40);
   if ((undefined *)collide_t1 == &DAT_00001001) {
-    uVar1 = (uint)((undefined *)collide_t0 != &DAT_00001001);
+    uVar1 = (u_int)((undefined *)collide_t0 != &DAT_00001001);
   }
   else {
     uVar1 = 2;
@@ -1192,10 +1192,10 @@ _TFace * COLLIDE_PointAndTerrainFunc
                    long ignoreAttr,long acceptAttr,_LCollideInfo *lcolinfo)
 
 {
-  uchar uVar1;
+  u_char uVar1;
   short sVar2;
   short sVar3;
-  uint uVar4;
+  u_int uVar4;
   undefined4 in_zero;
   undefined4 in_at;
   BSPTree *pBVar5;
@@ -1224,7 +1224,7 @@ _TFace * COLLIDE_PointAndTerrainFunc
   DAT_1f80009c = terrain->vertexList;
   DAT_1f8000a0 = (_TFace *)0x0;
   _DAT_1f800078 = *(undefined4 *)pSVar12;
-  _DAT_1f80007c = _DAT_1f80007c & 0xffff0000 | (uint)(ushort)pSVar12->vz;
+  _DAT_1f80007c = _DAT_1f80007c & 0xffff0000 | (u_int)(ushort)pSVar12->vz;
   DAT_1f800080 = pSVar10->vx;
   DAT_1f800082 = pSVar10->vy;
   DAT_1f800084 = pSVar10->vz;
@@ -1265,7 +1265,7 @@ LAB_8001f2fc:
               DAT_1f800078 = DAT_1f800078 - (pBVar5->globalOffset).x;
               DAT_1f80007a = DAT_1f80007a - (pBVar5->globalOffset).y;
               uVar9 = DAT_1f80007c - (pBVar5->globalOffset).z;
-              _DAT_1f80007c = _DAT_1f80007c & 0xffff0000 | (uint)uVar9;
+              _DAT_1f80007c = _DAT_1f80007c & 0xffff0000 | (u_int)uVar9;
               DAT_1f800080 = DAT_1f800080 - (pBVar5->globalOffset).x;
               DAT_1f800082 = DAT_1f800082 - (pBVar5->globalOffset).y;
               DAT_1f800084 = DAT_1f800084 - (pBVar5->globalOffset).z;
@@ -1355,7 +1355,7 @@ LAB_8001fb50:
                               if (((*pbVar15 & DAT_1f80006c) == 0) ||
                                  ((*pbVar15 & DAT_1f800070) != 0)) {
                                 if ((DAT_1f800094 == 2) &&
-                                   ((uint)*(ushort *)(pbVar15 + 2) !=
+                                   ((u_int)*(ushort *)(pbVar15 + 2) !=
                                     (int)terrain->morphNormalIdx
                                          [(int)((int)tface - (int)terrain->faceList) * -0x55555555
                                           >> 2])) {
@@ -1367,13 +1367,13 @@ LAB_8001fb50:
                                     p_Var8 = (_Normal *)((int)DAT_1f800098 + iVar11 * -6);
                                     DAT_1f800050 = CONCAT22(-p_Var8->y,-(p_Var8->x & 0x1fffU));
                                     DAT_1f800054 = DAT_1f800054 & 0xffff0000 |
-                                                   (uint)(ushort)-p_Var8->z;
+                                                   (u_int)(ushort)-p_Var8->z;
                                   }
                                   else {
-                                    DAT_1f800050 = *(uint *)(&DAT_1f800098->x + iVar11 * 3) &
+                                    DAT_1f800050 = *(u_int *)(&DAT_1f800098->x + iVar11 * 3) &
                                                    0xffff1fff;
                                     DAT_1f800054 = DAT_1f800054 & 0xffff0000 |
-                                                   (uint)(ushort)(&DAT_1f800098->x + iVar11 * 3)[1];
+                                                   (u_int)(ushort)(&DAT_1f800098->x + iVar11 * 3)[1];
                                   }
                                 }
                                 v0 = DAT_1f80009c + (tface->face).v0;
@@ -1403,7 +1403,7 @@ LAB_8001fb50:
                                                  (short)(DAT_1f8000a4 * iVar11 >> 0xc));
                                   _DAT_1f800068 =
                                        _DAT_1f800068 & 0xffff0000 |
-                                       (uint)(ushort)(DAT_1f800084 +
+                                       (u_int)(ushort)(DAT_1f800084 +
                                                      (short)(DAT_1f8000a8 * iVar11 >> 0xc));
                                   iVar11 = COLLIDE_PointInTriangle
                                                      ((_SVector *)v0,
@@ -1423,7 +1423,7 @@ LAB_8001fb50:
                                       if (((*(ushort *)(pbVar15 + 4) == 0xffff) ||
                                           ((*(ushort *)
                                              ((int)&terrain->StartTextureList->attr +
-                                             (uint)*(ushort *)(pbVar15 + 4)) & 0x2000) == 0)) ||
+                                             (u_int)*(ushort *)(pbVar15 + 4)) & 0x2000) == 0)) ||
                                          ((*pbVar15 & DAT_1f800070) != 0)) {
                                         _DAT_1f80007c = _DAT_1f800068;
                                         DAT_1f80007c = (short)_DAT_1f800068;
@@ -1432,7 +1432,7 @@ LAB_8001fb50:
                                         DAT_1f800078 = (short)_DAT_1f800064;
                                         _DAT_1f800034 =
                                              _DAT_1f800034 & 0xffff0000 | _DAT_1f800068 & 0xffff;
-                                        DAT_1f80007a = (short)((uint)_DAT_1f800064 >> 0x10);
+                                        DAT_1f80007a = (short)((u_int)_DAT_1f800064 >> 0x10);
                                         DAT_1f8000a4 = DAT_1f800080 - DAT_1f800078;
                                         DAT_1f8000a6 = DAT_1f800082 - DAT_1f80007a;
                                         DAT_1f8000a8 = DAT_1f800084 - DAT_1f80007c;
@@ -1450,7 +1450,7 @@ LAB_8001fb50:
                                         p_Var16->waterFaceTerrain = terrain;
                                         uVar4 = _DAT_1f800068;
                                         *(undefined4 *)&p_Var16->splitPoint = _DAT_1f800064;
-                                        *(uint *)&(p_Var16->splitPoint).z = uVar4;
+                                        *(u_int *)&(p_Var16->splitPoint).z = uVar4;
                                         sVar2 = (pBVar5->globalOffset).y;
                                         sVar3 = (pBVar5->globalOffset).z;
                                         (p_Var16->splitPoint).x =
@@ -1484,7 +1484,7 @@ LAB_8001fb50:
                             DAT_1f800078 + (pBVar5->globalOffset).x);
               _DAT_1f80007c =
                    _DAT_1f80007c & 0xffff0000 |
-                   (uint)(ushort)(DAT_1f80007c + (pBVar5->globalOffset).z);
+                   (u_int)(ushort)(DAT_1f80007c + (pBVar5->globalOffset).z);
               DAT_1f800080 = DAT_1f800080 + (pBVar5->globalOffset).x;
               DAT_1f800082 = DAT_1f800082 + (pBVar5->globalOffset).y;
               DAT_1f800084 = DAT_1f800084 + (pBVar5->globalOffset).z;
@@ -1754,7 +1754,7 @@ void COLLIDE_PointAndInstance(_PCollideInfo *pcollideInfo,_Instance *instance)
   int iVar7;
   int iVar8;
   int iVar9;
-  uint *puVar10;
+  u_int *puVar10;
   _HBox *hbox;
   _HFace *hface;
   byte *pbVar11;
@@ -1768,15 +1768,15 @@ void COLLIDE_PointAndInstance(_PCollideInfo *pcollideInfo,_Instance *instance)
   MATRIX *local_5c;
   MATRIX *local_58;
   short *local_54;
-  uint *local_50;
+  u_int *local_50;
   int *local_4c;
   _SVector *local_48;
-  uint *local_44;
+  u_int *local_44;
   undefined2 *local_40;
   _Model *local_3c;
   _HPrim *local_38;
   int local_34;
-  uint local_30;
+  u_int local_30;
   _SVector *local_2c;
   
   local_58 = (MATRIX *)&DAT_1f8000a0;
@@ -1784,7 +1784,7 @@ void COLLIDE_PointAndInstance(_PCollideInfo *pcollideInfo,_Instance *instance)
   local_50 = &DAT_1f800150;
   local_4c = (int *)&DAT_1f800160;
   local_48 = (_SVector *)&DAT_1f8001a0;
-  local_44 = (uint *)&DAT_1f8001b0;
+  local_44 = (u_int *)&DAT_1f8001b0;
   local_40 = &DAT_1f8001c0;
   local_34 = instance->hModelList[instance->currentModel].numHPrims;
   local_38 = instance->hModelList[instance->currentModel].hPrimList;
@@ -1831,15 +1831,15 @@ LAB_800205d0:
         }
         else {
           if (bVar1 < 3) {
-            if (((bVar1 == 1) && (puVar10 = *(uint **)(pbVar11 + 1), (*puVar10 & 0x2000) != 0)) &&
+            if (((bVar1 == 1) && (puVar10 = *(u_int **)(pbVar11 + 1), (*puVar10 & 0x2000) != 0)) &&
                ((local_30 & 0x20) == 0)) {
               COLLIDE_NearestPointOnLine_S
-                        (local_44,(uint *)local_48,(uint *)&DAT_1f8001a8,puVar10 + 2);
+                        (local_44,(u_int *)local_48,(u_int *)&DAT_1f8001a8,puVar10 + 2);
               DAT_1f800180 = (int)*(short *)local_44 - (int)*(short *)(puVar10 + 2);
               DAT_1f800184 = (int)*(short *)((int)local_44 + 2) - (int)*(short *)((int)puVar10 + 10)
               ;
               DAT_1f800188 = (int)*(short *)(local_44 + 1) - (int)*(short *)(puVar10 + 3);
-              if ((uint)(DAT_1f800180 * DAT_1f800180 + DAT_1f800184 * DAT_1f800184 +
+              if ((u_int)(DAT_1f800180 * DAT_1f800180 + DAT_1f800184 * DAT_1f800184 +
                         DAT_1f800188 * DAT_1f800188) < puVar10[4]) {
                 DAT_1f800180 = (int)DAT_1f8001a8 - (int)*(short *)(puVar10 + 2);
                 DAT_1f800184 = (int)DAT_1f8001aa - (int)*(short *)((int)puVar10 + 10);
@@ -1866,13 +1866,13 @@ LAB_800205d0:
                   local_50[1] = iVar7 / iVar8;
                   local_50[2] = iVar5 / iVar8;
                   DAT_1f800180 = (int)(DAT_1f800180 *
-                                       ((uint)*(ushort *)((int)puVar10 + 0xe) - iVar8) * 0x20) /
+                                       ((u_int)*(ushort *)((int)puVar10 + 0xe) - iVar8) * 0x20) /
                                  iVar9;
                   DAT_1f800184 = (int)(DAT_1f800184 *
-                                       ((uint)*(ushort *)((int)puVar10 + 0xe) - iVar8) * 0x20) /
+                                       ((u_int)*(ushort *)((int)puVar10 + 0xe) - iVar8) * 0x20) /
                                  iVar9;
                   DAT_1f800188 = (int)(DAT_1f800188 *
-                                       ((uint)*(ushort *)((int)puVar10 + 0xe) - iVar8) * 0x20) /
+                                       ((u_int)*(ushort *)((int)puVar10 + 0xe) - iVar8) * 0x20) /
                                  iVar9;
                   DAT_1f8001a8 = DAT_1f8001a8 + (short)DAT_1f800180;
                   DAT_1f8001aa = DAT_1f8001aa + (short)DAT_1f800184;
@@ -1890,7 +1890,7 @@ LAB_800205d0:
                   pcollideInfo->type = (ushort)bVar1;
                   (pcollideInfo->wNormal).vz = sVar2;
                   bVar1 = *pbVar11;
-                  *(uint **)&pcollideInfo->prim = puVar10;
+                  *(u_int **)&pcollideInfo->prim = puVar10;
                   pcollideInfo->inst = instance;
                   goto LAB_800205d0;
                 }
@@ -1905,8 +1905,8 @@ LAB_800205d0:
                 hbox->minX = hbox->refMinX;
               }
               else {
-                hbox->maxX = (short)((int)((int)hbox->refMaxX * (uint)uVar4) >> 0xc);
-                hbox->minX = (short)((int)((int)hbox->refMinX * (uint)uVar4) >> 0xc);
+                hbox->maxX = (short)((int)((int)hbox->refMaxX * (u_int)uVar4) >> 0xc);
+                hbox->minX = (short)((int)((int)hbox->refMinX * (u_int)uVar4) >> 0xc);
               }
               uVar4 = (instance->scale).y;
               if (uVar4 == 0x1000) {
@@ -1914,8 +1914,8 @@ LAB_800205d0:
                 hbox->minY = hbox->refMinY;
               }
               else {
-                hbox->maxY = (short)((int)((int)hbox->refMaxY * (uint)uVar4) >> 0xc);
-                hbox->minY = (short)((int)((int)hbox->refMinY * (uint)uVar4) >> 0xc);
+                hbox->maxY = (short)((int)((int)hbox->refMaxY * (u_int)uVar4) >> 0xc);
+                hbox->minY = (short)((int)((int)hbox->refMinY * (u_int)uVar4) >> 0xc);
               }
               uVar4 = (instance->scale).z;
               if (uVar4 == 0x1000) {
@@ -1923,8 +1923,8 @@ LAB_800205d0:
                 hbox->minZ = hbox->refMinZ;
               }
               else {
-                hbox->maxZ = (short)((int)((int)hbox->refMaxZ * (uint)uVar4) >> 0xc);
-                hbox->minZ = (short)((int)((int)hbox->refMinZ * (uint)uVar4) >> 0xc);
+                hbox->maxZ = (short)((int)((int)hbox->refMaxZ * (u_int)uVar4) >> 0xc);
+                hbox->minZ = (short)((int)((int)hbox->refMinZ * (u_int)uVar4) >> 0xc);
               }
               lVar6 = COLLIDE_IntersectLineAndBox
                                 (local_2c,&_Stack136,&_Stack120,&_Stack112,(_SVector *)&DAT_1f8001a8
@@ -2014,8 +2014,8 @@ void COLLIDE_PointAndInstanceTrivialReject(_PCollideInfo *pcollideInfo,_Instance
       (instance->hModelList != (_HModel *)0x0)) &&
      (((pcollideInfo->collideType & 0x40U) == 0 || ((instance->object->oflags2 & 0x40U) == 0)))) {
     COLLIDE_NearestPointOnLine_S
-              ((uint *)&local_20,(uint *)pcollideInfo->oldPoint,(uint *)pcollideInfo->newPoint,
-               (uint *)&instance->position);
+              ((u_int *)&local_20,(u_int *)pcollideInfo->oldPoint,(u_int *)pcollideInfo->newPoint,
+               (u_int *)&instance->position);
     _DAT_1f800000 = (int)local_20 - (int)(instance->position).x >> 1;
     _DAT_1f800004 = (int)local_1e - (int)(instance->position).y >> 1;
     _DAT_1f800008 = (int)local_1c - (int)(instance->position).z >> 1;
@@ -2093,7 +2093,7 @@ void COLLIDE_PointAndWorld(_PCollideInfo *pcollideInfo,Level *level)
   _InstanceList *p_Var2;
   long lVar3;
   _StreamUnit *p_Var4;
-  uint uVar5;
+  u_int uVar5;
   _Instance *instance;
   int iVar6;
   ushort *puVar7;
@@ -2371,7 +2371,7 @@ long COLLIDE_SphereAndPoint(_Sphere *sphere,_SVector *point,_SVector *normal)
   _DAT_1f800004 = (int)(sphere->position).y - (int)point->y;
   _DAT_1f800008 = (int)(sphere->position).z - (int)point->z;
   lVar1 = 0;
-  if ((uint)(_DAT_1f800000 * _DAT_1f800000 + _DAT_1f800004 * _DAT_1f800004 +
+  if ((u_int)(_DAT_1f800000 * _DAT_1f800000 + _DAT_1f800004 * _DAT_1f800004 +
             _DAT_1f800008 * _DAT_1f800008) < sphere->radiusSquared) {
     local_28 = _DAT_1f800000;
     if (_DAT_1f800000 < 0) {
@@ -2393,9 +2393,9 @@ long COLLIDE_SphereAndPoint(_Sphere *sphere,_SVector *point,_SVector *normal)
       normal->x = (short)((_DAT_1f800000 << 0xc) / iVar2);
       normal->y = (short)((_DAT_1f800004 << 0xc) / iVar2);
       normal->z = (short)((_DAT_1f800008 << 0xc) / iVar2);
-      _DAT_1f800000 = (int)(_DAT_1f800000 * (uint)sphere->radius * 0x20) / iVar3;
-      _DAT_1f800004 = (int)(_DAT_1f800004 * (uint)sphere->radius * 0x20) / iVar3;
-      _DAT_1f800008 = (int)(_DAT_1f800008 * (uint)sphere->radius * 0x20) / iVar3;
+      _DAT_1f800000 = (int)(_DAT_1f800000 * (u_int)sphere->radius * 0x20) / iVar3;
+      _DAT_1f800004 = (int)(_DAT_1f800004 * (u_int)sphere->radius * 0x20) / iVar3;
+      _DAT_1f800008 = (int)(_DAT_1f800008 * (u_int)sphere->radius * 0x20) / iVar3;
       (sphere->position).x = point->x + DAT_1f800000;
       (sphere->position).y = point->y + DAT_1f800004;
       lVar1 = 1;
@@ -2577,12 +2577,12 @@ long COLLIDE_SphereAndHBox(_HBox *hbox,_Sphere *sphere,_Position *oldPos,_SVecto
       collide_localPoint.y = local_58.y;
       collide_localPoint.z = local_58.z;
       (sphere->position).x =
-           local_58.x + (short)((int)((int)normal->x * (uint)sphere->radius) >> 0xc);
+           local_58.x + (short)((int)((int)normal->x * (u_int)sphere->radius) >> 0xc);
       (sphere->position).y =
-           local_58.y + (short)((int)((int)normal->y * (uint)sphere->radius) >> 0xc);
+           local_58.y + (short)((int)((int)normal->y * (u_int)sphere->radius) >> 0xc);
       lVar2 = 1;
       (sphere->position).z =
-           local_58.z + (short)((int)((int)normal->z * (uint)sphere->radius) >> 0xc);
+           local_58.z + (short)((int)((int)normal->z * (u_int)sphere->radius) >> 0xc);
     }
   }
   else {
@@ -2592,7 +2592,7 @@ long COLLIDE_SphereAndHBox(_HBox *hbox,_Sphere *sphere,_Position *oldPos,_SVecto
     if (lVar2 == 0) {
       sVar1 = (short)((int)hbox->minY + (int)hbox->maxY >> 1) - (sphere->position).y;
       sVar5 = (short)((int)hbox->minZ + (int)hbox->maxZ >> 1) - (sphere->position).z;
-      iVar8 = (int)((((int)hbox->minX + (int)hbox->maxX >> 1) - (uint)(ushort)(sphere->position).x)
+      iVar8 = (int)((((int)hbox->minX + (int)hbox->maxX >> 1) - (u_int)(ushort)(sphere->position).x)
                    * 0x10000) >> 0x10;
       iVar6 = iVar8;
       if (iVar8 < 0) {
@@ -2657,11 +2657,11 @@ long COLLIDE_SphereAndHBox(_HBox *hbox,_Sphere *sphere,_Position *oldPos,_SVecto
       collide_localPoint.y = local_58.y;
       collide_localPoint.z = local_58.z;
       (sphere->position).x =
-           local_58.x + (short)((int)((int)normal->x * (uint)sphere->radius) >> 0xc);
+           local_58.x + (short)((int)((int)normal->x * (u_int)sphere->radius) >> 0xc);
       (sphere->position).y =
-           local_58.y + (short)((int)((int)normal->y * (uint)sphere->radius) >> 0xc);
+           local_58.y + (short)((int)((int)normal->y * (u_int)sphere->radius) >> 0xc);
       (sphere->position).z =
-           local_58.z + (short)((int)((int)normal->z * (uint)sphere->radius) >> 0xc);
+           local_58.z + (short)((int)((int)normal->z * (u_int)sphere->radius) >> 0xc);
     }
   }
   return lVar2;
@@ -2864,7 +2864,7 @@ void COLLIDE_Instance1SpheresToInstance2
       local_2c = &local_40->segment;
       do {
         if (((local_40->hpFlags & 1) != 0) &&
-           ((undefined **)(*(uint *)local_40 & 0xff0400) == &PTR_00010400)) {
+           ((undefined **)(*(u_int *)local_40 & 0xff0400) == &PTR_00010400)) {
           bVar1 = *local_2c;
           local_4c = instance1->matrix + bVar1;
           source = instance1->oldMatrix;
@@ -2917,7 +2917,7 @@ void COLLIDE_Instance1SpheresToInstance2
                   *(short *)((int)local_54 + 2) = local_74[2];
                   *(short *)(local_54 + 1) = sVar8;
                   *(short *)local_54 = sVar2;
-                  iVar6 = (uint)(ushort)p_Var12->maxZ + (uint)(ushort)hbox->maxZ;
+                  iVar6 = (u_int)(ushort)p_Var12->maxZ + (u_int)(ushort)hbox->maxZ;
                   if (iVar5 * iVar5 + iVar13 + DAT_1f800150 * DAT_1f800150 < iVar6 * iVar6) {
                     if (iVar5 < 0) {
                       iVar5 = -iVar5;
@@ -2948,13 +2948,13 @@ void COLLIDE_Instance1SpheresToInstance2
                       }
                       iVar6 = iVar5 >> 5;
                       DAT_1f800148 = DAT_1f800148 *
-                                     (((uint)(ushort)p_Var12->maxZ + (uint)(ushort)hbox->maxZ) -
+                                     (((u_int)(ushort)p_Var12->maxZ + (u_int)(ushort)hbox->maxZ) -
                                      iVar6);
                       DAT_1f80014c = DAT_1f80014c *
-                                     (((uint)(ushort)p_Var12->maxZ + (uint)(ushort)hbox->maxZ) -
+                                     (((u_int)(ushort)p_Var12->maxZ + (u_int)(ushort)hbox->maxZ) -
                                      iVar6);
                       DAT_1f800150 = DAT_1f800150 *
-                                     (((uint)(ushort)p_Var12->maxZ + (uint)(ushort)hbox->maxZ) -
+                                     (((u_int)(ushort)p_Var12->maxZ + (u_int)(ushort)hbox->maxZ) -
                                      iVar6);
                       DAT_1f800216 = 1;
                       DAT_1f800217 = 1;
@@ -3235,7 +3235,7 @@ void COLLIDE_Instances(_Instance *instance1,_Instance *instance2)
     iVar2 = getCopReg(2,0xc800);
     iVar4 = getCopReg(2,0xd000);
     iVar3 = getCopReg(2,0xd800);
-    if ((((uint)(iVar2 + iVar4 + iVar3) < (uint)(iVar1 * iVar1)) &&
+    if ((((u_int)(iVar2 + iVar4 + iVar3) < (u_int)(iVar1 * iVar1)) &&
         (((instance1->matrix != (MATRIX *)0x0 && (instance1->oldMatrix != (MATRIX *)0x0)) &&
          (instance2->matrix != (MATRIX *)0x0)))) && (instance2->oldMatrix != (MATRIX *)0x0)) {
       COLLIDE_Instance1SpheresToInstance2(instance1,instance2,1);
@@ -3496,9 +3496,9 @@ long COLLIDE_SphereAndHFace
   int iVar3;
   int iVar4;
   _HVertex *p_Var5;
-  uint uVar6;
+  u_int uVar6;
   int iVar7;
-  uint uVar8;
+  u_int uVar8;
   int iVar9;
   long lVar10;
   short local_40;
@@ -3531,8 +3531,8 @@ long COLLIDE_SphereAndHFace
     _DAT_1f800080 = getCopReg(2,0x1a);
     _DAT_1f800084 = getCopReg(2,0x1b);
     lVar10 = 0;
-    if (((_DAT_1f80007c <= _DAT_1f800080) && (lVar10 = 0, _DAT_1f80007c < (int)(uint)sphere->radius)
-        ) && (lVar10 = 0, (int)-(uint)sphere->radius <= _DAT_1f800080)) {
+    if (((_DAT_1f80007c <= _DAT_1f800080) && (lVar10 = 0, _DAT_1f80007c < (int)(u_int)sphere->radius)
+        ) && (lVar10 = 0, (int)-(u_int)sphere->radius <= _DAT_1f800080)) {
       if (_DAT_1f80007c < 0) {
         iVar3 = COLLIDE_IntersectLineAndPlane_S
                           (&DAT_1f800090,oldPos,sphere,&DAT_1f800054,_DAT_1f800084);
@@ -3550,8 +3550,8 @@ long COLLIDE_SphereAndHFace
                          (_SVector *)&DAT_1f800054);
       if (iVar3 == 0) {
         COLLIDE_NearestPointOnLine_S
-                  (&DAT_1f800088,(uint *)hfaceInfo->vertex0,(uint *)hfaceInfo->vertex1,
-                   (uint *)sphere);
+                  (&DAT_1f800088,(u_int *)hfaceInfo->vertex0,(u_int *)hfaceInfo->vertex1,
+                   (u_int *)sphere);
         setCopReg(2,0x4800,(int)(sphere->position).x - (int)(short)DAT_1f800088);
         setCopReg(2,0x5000,(int)(sphere->position).y - (int)DAT_1f800088._2_2_);
         setCopReg(2,0x5800,(int)(sphere->position).z - (int)(short)DAT_1f80008c);
@@ -3562,8 +3562,8 @@ long COLLIDE_SphereAndHFace
         uVar8 = iVar7 + iVar4 + iVar3;
         if (sphere->radiusSquared <= uVar8) {
           COLLIDE_NearestPointOnLine_S
-                    (&DAT_1f800090,(uint *)hfaceInfo->vertex1,(uint *)hfaceInfo->vertex2,
-                     (uint *)sphere);
+                    (&DAT_1f800090,(u_int *)hfaceInfo->vertex1,(u_int *)hfaceInfo->vertex2,
+                     (u_int *)sphere);
           setCopReg(2,0x4800,(int)(sphere->position).x - (int)(short)DAT_1f800090);
           setCopReg(2,0x5000,(int)(sphere->position).y - (int)DAT_1f800090._2_2_);
           setCopReg(2,0x5800,(int)(sphere->position).z - (int)(short)DAT_1f800094);
@@ -3579,8 +3579,8 @@ long COLLIDE_SphereAndHFace
           }
           if (sphere->radiusSquared <= uVar8) {
             COLLIDE_NearestPointOnLine_S
-                      (&DAT_1f800090,(uint *)hfaceInfo->vertex2,(uint *)hfaceInfo->vertex0,
-                       (uint *)sphere);
+                      (&DAT_1f800090,(u_int *)hfaceInfo->vertex2,(u_int *)hfaceInfo->vertex0,
+                       (u_int *)sphere);
             setCopReg(2,0x4800,(int)(sphere->position).x - (int)(short)DAT_1f800090);
             setCopReg(2,0x5000,(int)(sphere->position).y - (int)DAT_1f800090._2_2_);
             setCopReg(2,0x5800,(int)(sphere->position).z - (int)(short)DAT_1f800094);
@@ -3620,14 +3620,14 @@ long COLLIDE_SphereAndHFace
         intersect->z = (short)DAT_1f80008c;
         iVar9 = local_28[0] * 0x1e + local_2c * 0xc + local_30 * 9;
         if (iVar9 == 0) {
-          local_40 = (short)((int)((int)(short)DAT_1f800054 * (uint)sphere->radius) >> 0xc);
-          local_3c = (short)((int)((int)DAT_1f800054._2_2_ * (uint)sphere->radius) >> 0xc);
-          local_38 = (short)((int)((int)(short)DAT_1f800058 * (uint)sphere->radius) >> 0xc);
+          local_40 = (short)((int)((int)(short)DAT_1f800054 * (u_int)sphere->radius) >> 0xc);
+          local_3c = (short)((int)((int)DAT_1f800054._2_2_ * (u_int)sphere->radius) >> 0xc);
+          local_38 = (short)((int)((int)(short)DAT_1f800058 * (u_int)sphere->radius) >> 0xc);
         }
         else {
-          local_3c = (short)((int)(iVar4 * (uint)sphere->radius * 0x20) / iVar9);
-          local_38 = (short)((int)(iVar7 * (uint)sphere->radius * 0x20) / iVar9);
-          local_40 = (short)((int)(iVar3 * (uint)sphere->radius * 0x20) / iVar9);
+          local_3c = (short)((int)(iVar4 * (u_int)sphere->radius * 0x20) / iVar9);
+          local_38 = (short)((int)(iVar7 * (u_int)sphere->radius * 0x20) / iVar9);
+          local_40 = (short)((int)(iVar3 * (u_int)sphere->radius * 0x20) / iVar9);
         }
         (sphere->position).x = local_40 + (short)DAT_1f800088;
         (sphere->position).y = local_3c + DAT_1f800088._2_2_;
@@ -3642,11 +3642,11 @@ long COLLIDE_SphereAndHFace
         intersect->z = (short)DAT_1f80008c;
         uVar1 = sphere->radius;
         uVar2 = sphere->radius;
-        local_40 = (short)((int)((int)(short)DAT_1f800054 * (uint)sphere->radius) >> 0xc);
+        local_40 = (short)((int)((int)(short)DAT_1f800054 * (u_int)sphere->radius) >> 0xc);
         (sphere->position).x = local_40 + (short)DAT_1f800088;
-        local_3c = (short)((int)((int)DAT_1f800054._2_2_ * (uint)uVar1) >> 0xc);
+        local_3c = (short)((int)((int)DAT_1f800054._2_2_ * (u_int)uVar1) >> 0xc);
         (sphere->position).y = local_3c + DAT_1f800088._2_2_;
-        local_38 = (short)((int)((int)(short)DAT_1f800058 * (uint)uVar2) >> 0xc);
+        local_38 = (short)((int)((int)(short)DAT_1f800058 * (u_int)uVar2) >> 0xc);
         (sphere->position).z = local_38 + (short)DAT_1f80008c;
         *edge = 0;
         lVar10 = -1;
@@ -3887,14 +3887,14 @@ long COLLIDE_SAndT(SCollideInfo *scollideInfo,Level *level)
   byte bVar1;
   short sVar2;
   bool bVar3;
-  uint uVar4;
+  u_int uVar4;
   undefined4 in_zero;
   undefined4 in_at;
   short sVar5;
   _Sphere *p_Var6;
   SVECTOR *pSVar7;
   long lVar8;
-  ulong uVar9;
+  u_long uVar9;
   _BSPNode *p_Var10;
   _Normal *p_Var11;
   ushort uVar12;
@@ -3930,7 +3930,7 @@ long COLLIDE_SAndT(SCollideInfo *scollideInfo,Level *level)
   DAT_1f800270 = scollideInfo->prim;
   p_Var6 = scollideInfo->sphere;
   DAT_1f80027c = *(undefined4 *)&p_Var6->position;
-  DAT_1f800280 = *(uint *)&(p_Var6->position).z;
+  DAT_1f800280 = *(u_int *)&(p_Var6->position).z;
   DAT_1f800284 = p_Var6->radiusSquared;
   DAT_1f800288 = 0;
   DAT_1f80028c = 0;
@@ -3939,7 +3939,7 @@ long COLLIDE_SAndT(SCollideInfo *scollideInfo,Level *level)
   DAT_1f800268 = pSVar7->vx;
   DAT_1f80026a = pSVar7->vy;
   DAT_1f80026c = pSVar7->vz;
-  DAT_1f80027c._2_2_ = (short)((uint)DAT_1f80027c >> 0x10);
+  DAT_1f80027c._2_2_ = (short)((u_int)DAT_1f80027c >> 0x10);
   DAT_1f800250 = (short)DAT_1f80027c;
   DAT_1f800248 = (short)DAT_1f80027c - DAT_1f800268;
   DAT_1f800252 = DAT_1f80027c._2_2_;
@@ -3989,7 +3989,7 @@ long COLLIDE_SAndT(SCollideInfo *scollideInfo,Level *level)
           DAT_1f80027c._0_2_ = (short)DAT_1f80027c - (pBVar19->globalOffset).x;
           DAT_1f80027c._2_2_ = DAT_1f80027c._2_2_ - (pBVar19->globalOffset).y;
           uVar12 = (short)DAT_1f800280 - (pBVar19->globalOffset).z;
-          DAT_1f800280 = DAT_1f800280 & 0xffff0000 | (uint)uVar12;
+          DAT_1f800280 = DAT_1f800280 & 0xffff0000 | (u_int)uVar12;
           _DAT_1f8001c8 = CONCAT22(DAT_1f80027c._2_2_,(short)DAT_1f80027c);
           _DAT_1f8001cc = CONCAT22(DAT_1f800268,uVar12);
           DAT_1f80026a = DAT_1f8001d0;
@@ -4080,10 +4080,10 @@ LAB_800235c4:
                       bVar1 = *(byte *)(puVar18 + 1);
                       if (((((bVar1 & DAT_1f80028c) == 0) || ((bVar1 & DAT_1f800290) != 0)) &&
                           ((puVar18[3] == 0xffff ||
-                           ((*(ushort *)((int)&terrain->StartTextureList->attr + (uint)puVar18[3]) &
+                           ((*(ushort *)((int)&terrain->StartTextureList->attr + (u_int)puVar18[3]) &
                             0x2000) == 0)))) && ((bVar1 & 8) == 0)) {
                         if ((DAT_1f800264 == 2) &&
-                           ((uint)puVar18[2] !=
+                           ((u_int)puVar18[2] !=
                             (int)terrain->morphNormalIdx
                                  [(int)((int)tface - (int)terrain->faceList) * -0x55555555 >> 2])) {
                           COLLIDE_MakeNormal(terrain,tface,(_SVector *)&DAT_1f800274);
@@ -4093,12 +4093,12 @@ LAB_800235c4:
                           if (iVar13 < 0) {
                             p_Var11 = (_Normal *)((int)DAT_1f8001f4 + iVar13 * -6);
                             DAT_1f800274 = CONCAT22(-p_Var11->y,-(p_Var11->x & 0x1fffU));
-                            DAT_1f800278 = DAT_1f800278 & 0xffff0000 | (uint)(ushort)-p_Var11->z;
+                            DAT_1f800278 = DAT_1f800278 & 0xffff0000 | (u_int)(ushort)-p_Var11->z;
                           }
                           else {
-                            DAT_1f800274 = *(uint *)(&DAT_1f8001f4->x + iVar13 * 3) & 0xffff1fff;
+                            DAT_1f800274 = *(u_int *)(&DAT_1f8001f4->x + iVar13 * 3) & 0xffff1fff;
                             DAT_1f800278 = DAT_1f800278 & 0xffff0000 |
-                                           (uint)(ushort)(&DAT_1f8001f4->x + iVar13 * 3)[1];
+                                           (u_int)(ushort)(&DAT_1f8001f4->x + iVar13 * 3)[1];
                           }
                         }
                         p_Var15 = DAT_1f800298 + (tface->face).v0;
@@ -4149,7 +4149,7 @@ LAB_800235c4:
                               }
                               DAT_1f800288 = 1;
                               _DAT_1f8001c8 = DAT_1f80027c;
-                              _DAT_1f8001cc = DAT_1f800280 & 0xffff | (uint)DAT_1f8001ce << 0x10;
+                              _DAT_1f8001cc = DAT_1f800280 & 0xffff | (u_int)DAT_1f8001ce << 0x10;
                             }
                             SetRotMatrix((undefined4 *)&DAT_1f8001c8);
                           }
@@ -4163,7 +4163,7 @@ LAB_800235c4:
                     } while (bVar3);
                   }
                   _DAT_1f8001c8 = DAT_1f80027c;
-                  _DAT_1f8001cc = DAT_1f800280 & 0xffff | (uint)DAT_1f8001ce << 0x10;
+                  _DAT_1f8001cc = DAT_1f800280 & 0xffff | (u_int)DAT_1f8001ce << 0x10;
                   setCopControlWord(2,0,DAT_1f80027c);
                   setCopControlWord(2,0x800,_DAT_1f8001cc);
                 }
@@ -4180,7 +4180,7 @@ LAB_800235c4:
           DAT_1f80027c = CONCAT22(DAT_1f80027c._2_2_ + (pBVar19->globalOffset).y,
                                   (short)DAT_1f80027c + (pBVar19->globalOffset).x);
           DAT_1f800280 = DAT_1f800280 & 0xffff0000 |
-                         (uint)(ushort)((short)DAT_1f800280 + (pBVar19->globalOffset).z);
+                         (u_int)(ushort)((short)DAT_1f800280 + (pBVar19->globalOffset).z);
         }
         local_2c = local_2c + 1;
       } while (local_2c < terrain->numBSPTrees);
@@ -4350,8 +4350,8 @@ void COLLIDE_InstanceTerrain(_Instance *instance,Level *level)
             local_60.sphere = (_Sphere *)&DAT_1f8001b8;
             local_60.oldPos = (SVECTOR *)&DAT_1f800168;
             local_60.collideFunc = local_34;
-            local_60.segment = (uint)*pbVar5;
-            local_60.id = (uint)*(byte *)((int)pvVar4 + 4);
+            local_60.segment = (u_int)*pbVar5;
+            local_60.id = (u_int)*(byte *)((int)pvVar4 + 4);
             local_60.instance = instance;
             local_60.prim = pvVar4;
             COLLIDE_SphereAndTerrain(&local_60,level);
@@ -4577,9 +4577,9 @@ long COLLIDE_LineWithSignals
   ppiVar9 = (int **)&DAT_1f8000a4;
   DAT_1f8000a0 = p_Var11->vertexList;
   _DAT_1f800084 = *(undefined4 *)startPoint;
-  DAT_1f800088 = *(uint *)&startPoint->z;
+  DAT_1f800088 = *(u_int *)&startPoint->z;
   DAT_1f80008c = *(undefined4 *)endPoint;
-  DAT_1f800090 = *(uint *)&endPoint->z;
+  DAT_1f800090 = *(u_int *)&endPoint->z;
   if (gameTrackerX.gameData.asmData.MorphTime == 1000) {
     DAT_1f800098 = (int)gameTrackerX.gameData.asmData.MorphType;
     if (DAT_1f800098 != 1) {
@@ -4589,8 +4589,8 @@ long COLLIDE_LineWithSignals
   else {
     DAT_1f800098 = 2;
   }
-  DAT_1f800086 = (short)((uint)_DAT_1f800084 >> 0x10);
-  DAT_1f80008c._2_2_ = (short)((uint)DAT_1f80008c >> 0x10);
+  DAT_1f800086 = (short)((u_int)_DAT_1f800084 >> 0x10);
+  DAT_1f80008c._2_2_ = (short)((u_int)DAT_1f80008c >> 0x10);
   DAT_1f800080 = (short)DAT_1f800088 - (short)DAT_1f800090;
   _DAT_1f80007c = CONCAT22(DAT_1f800086 - DAT_1f80008c._2_2_,DAT_1f800084 - (short)DAT_1f80008c);
   if (((_DAT_1f80007c != 0) || (iVar3 = 0, DAT_1f800080 != 0)) &&
@@ -4603,12 +4603,12 @@ long COLLIDE_LineWithSignals
         DAT_1f80008c._0_2_ = (short)DAT_1f80008c - *(short *)(iVar13 + 0xc);
         DAT_1f80008c._2_2_ = DAT_1f80008c._2_2_ - *(short *)(iVar13 + 0xe);
         DAT_1f800090 = DAT_1f800090 & 0xffff0000 |
-                       (uint)(ushort)((short)DAT_1f800090 - *(short *)(iVar13 + 0x10));
+                       (u_int)(ushort)((short)DAT_1f800090 - *(short *)(iVar13 + 0x10));
         iVar13 = (int)&p_Var11->BSPTreeArray->bspRoot + iVar12;
         DAT_1f800084 = DAT_1f800084 - *(short *)(iVar13 + 0xc);
         DAT_1f800086 = DAT_1f800086 - *(short *)(iVar13 + 0xe);
         DAT_1f800088 = DAT_1f800088 & 0xffff0000 |
-                       (uint)(ushort)((short)DAT_1f800088 - *(short *)(iVar13 + 0x10));
+                       (u_int)(ushort)((short)DAT_1f800088 - *(short *)(iVar13 + 0x10));
         ppiVar9 = ppiVar9 + 1;
         *ppiVar9 = *(int **)((int)&p_Var11->BSPTreeArray->bspRoot + iVar12);
         DAT_1f800040._0_2_ = (short)DAT_1f80008c;
@@ -4679,13 +4679,13 @@ long COLLIDE_LineWithSignals
                       if (iVar4 < 0) {
                         p_Var5 = (_Normal *)((int)DAT_1f80009c + iVar4 * -6);
                         DAT_1f800060 = CONCAT22(-p_Var5->y,-(p_Var5->x & 0x1fffU));
-                        _DAT_1f800064 = _DAT_1f800064 & 0xffff0000 | (uint)(ushort)-p_Var5->z;
+                        _DAT_1f800064 = _DAT_1f800064 & 0xffff0000 | (u_int)(ushort)-p_Var5->z;
                       }
                       else {
-                        DAT_1f800060 = *(uint *)(&DAT_1f80009c->x + iVar4 * 3) & 0xffff1fff;
+                        DAT_1f800060 = *(u_int *)(&DAT_1f80009c->x + iVar4 * 3) & 0xffff1fff;
                         _DAT_1f800064 =
                              _DAT_1f800064 & 0xffff0000 |
-                             (uint)(ushort)(&DAT_1f80009c->x + iVar4 * 3)[1];
+                             (u_int)(ushort)(&DAT_1f80009c->x + iVar4 * 3)[1];
                       }
                       v0 = DAT_1f8000a0 + *puVar10;
                       setCopControlWord(2,0x1800,*(undefined4 *)&v0->vertex);
@@ -4706,7 +4706,7 @@ long COLLIDE_LineWithSignals
                           iVar4 = (DAT_1f80006c * 0x1000) / (_DAT_1f800068 - DAT_1f80006c);
                         }
                         DAT_1f800074._0_2_ = DAT_1f800084 + (short)(DAT_1f80007c * iVar4 >> 0xc);
-                        DAT_1f80007e = (short)((uint)_DAT_1f80007c >> 0x10);
+                        DAT_1f80007e = (short)((u_int)_DAT_1f80007c >> 0x10);
                         DAT_1f800074._2_2_ = DAT_1f800086 + (short)(DAT_1f80007e * iVar4 >> 0xc);
                         DAT_1f800078 = (short)DAT_1f800088 + (short)(DAT_1f800080 * iVar4 >> 0xc);
                         iVar4 = COLLIDE_PointInTriangle
@@ -4716,7 +4716,7 @@ long COLLIDE_LineWithSignals
                         if ((iVar4 != 0) && (iVar3 < maxSignals)) {
                           iVar13 = iVar3 + 1;
                           signalList[iVar3] =
-                               (_MultiSignal *)((int)&p_Var11->signals->numSignals + (uint)*puVar7);
+                               (_MultiSignal *)((int)&p_Var11->signals->numSignals + (u_int)*puVar7);
                         }
                       }
                     }
@@ -4735,13 +4735,13 @@ long COLLIDE_LineWithSignals
         DAT_1f80008c = CONCAT22(DAT_1f80008c._2_2_ + *(short *)(iVar13 + 0xe),
                                 (short)DAT_1f80008c + *(short *)(iVar13 + 0xc));
         DAT_1f800090 = DAT_1f800090 & 0xffff0000 |
-                       (uint)(ushort)((short)DAT_1f800090 + *(short *)(iVar13 + 0x10));
+                       (u_int)(ushort)((short)DAT_1f800090 + *(short *)(iVar13 + 0x10));
         iVar13 = (int)&p_Var11->BSPTreeArray->bspRoot + iVar12;
         _DAT_1f800084 =
              CONCAT22(DAT_1f800086 + *(short *)(iVar13 + 0xe),
                       DAT_1f800084 + *(short *)(iVar13 + 0xc));
         DAT_1f800088 = DAT_1f800088 & 0xffff0000 |
-                       (uint)(ushort)((short)DAT_1f800088 + *(short *)(iVar13 + 0x10));
+                       (u_int)(ushort)((short)DAT_1f800088 + *(short *)(iVar13 + 0x10));
       }
       iVar12 = iVar12 + 0x24;
       local_38 = local_38 + 1;
@@ -4793,26 +4793,26 @@ void COLLIDE_InstanceTerrainSignal(_Instance *instance,Level *level)
   int iVar3;
   _MultiSignal **signalList;
   undefined4 local_48;
-  uint local_44;
+  u_int local_44;
   undefined4 local_40;
-  uint local_3c;
+  u_int local_3c;
   _MultiSignal *local_38 [8];
   
   p_Var1 = instance->object->modelList[instance->currentModel];
   if ((instance->matrix != (MATRIX *)0x0) && (instance->oldMatrix != (MATRIX *)0x0)) {
     if ((p_Var1 == (_Model *)0x0) || (p_Var1->numSegments < 2)) {
       local_48 = *(undefined4 *)&instance->oldPos;
-      local_44 = *(uint *)&(instance->oldPos).z;
+      local_44 = *(u_int *)&(instance->oldPos).z;
       local_40 = *(undefined4 *)&instance->position;
-      local_3c = *(uint *)&(instance->position).z;
+      local_3c = *(u_int *)&(instance->position).z;
     }
     else {
       local_48 = CONCAT22(*(undefined2 *)(instance->oldMatrix[1].t + 1),
                           *(undefined2 *)instance->oldMatrix[1].t);
-      local_44 = local_44 & 0xffff0000 | (uint)*(ushort *)(instance->oldMatrix[1].t + 2);
+      local_44 = local_44 & 0xffff0000 | (u_int)*(ushort *)(instance->oldMatrix[1].t + 2);
       local_40 = CONCAT22(*(undefined2 *)(instance->matrix[1].t + 1),
                           *(undefined2 *)instance->matrix[1].t);
-      local_3c = local_3c & 0xffff0000 | (uint)*(ushort *)(instance->matrix[1].t + 2);
+      local_3c = local_3c & 0xffff0000 | (u_int)*(ushort *)(instance->matrix[1].t + 2);
     }
     signalList = local_38;
     iVar3 = 0;
@@ -5119,7 +5119,7 @@ void COLLIDE_SegmentCollisionOn(_Instance *instance,int segment)
     iVar3 = p_Var1->numHPrims;
     p_Var2 = p_Var1->hPrimList;
     while (iVar3 != 0) {
-      if ((uint)p_Var2->segment == segment) {
+      if ((u_int)p_Var2->segment == segment) {
         p_Var2->hpFlags = p_Var2->hpFlags | 1;
       }
       iVar3 = iVar3 + -1;
@@ -5179,7 +5179,7 @@ void COLLIDE_SegmentCollisionOff(_Instance *instance,int segment)
     p_Var3 = p_Var2->hPrimList;
     bVar1 = false;
     while (iVar4 != 0) {
-      if ((uint)p_Var3->segment == segment) {
+      if ((u_int)p_Var3->segment == segment) {
         p_Var3->hpFlags = p_Var3->hpFlags & 0xfe;
       }
       if ((!bVar1) && ((p_Var3->hpFlags & 1) != 0)) {
@@ -5267,7 +5267,7 @@ long COLLIDE_FindCollisionFaceNormal(_CollideInfo *collideInfo,_Normal *normal)
     if (cVar1 == '\x03') {
       uVar2 = *(ushort *)((int)collideInfo->prim1 + 10);
       if ((uVar2 == 0xffff) ||
-         ((*(ushort *)(*(int *)(*(int *)collideInfo->level + 0x34) + (uint)uVar2 + 10) & 0x2000) ==
+         ((*(ushort *)(*(int *)(*(int *)collideInfo->level + 0x34) + (u_int)uVar2 + 10) & 0x2000) ==
           0)) {
         COLLIDE_GetNormal(*(short *)((int)collideInfo->prim1 + 8),
                           *(short **)(*(int *)collideInfo->level + 0x24),(_SVector *)normal);
@@ -5287,7 +5287,7 @@ long COLLIDE_FindCollisionFaceNormal(_CollideInfo *collideInfo,_Normal *normal)
       }
       else {
         nrml = &collideInfo->point0;
-        if ((*(uint *)&collideInfo->flags & 0xffff0000) != 0x5010000) {
+        if ((*(u_int *)&collideInfo->flags & 0xffff0000) != 0x5010000) {
           return 0;
         }
         uVar3 = *(undefined4 *)((int)collideInfo->inst1 + 0x40);
@@ -5476,7 +5476,7 @@ int COLLIDE_PointAndTfaceFunc
   undefined4 in_at;
   short sVar2;
   int iVar3;
-  uint *puVar4;
+  u_int *puVar4;
   _Normal *p_Var5;
   short sVar6;
   _TVertex *p_Var7;
@@ -5506,12 +5506,12 @@ int COLLIDE_PointAndTfaceFunc
       if (iVar3 < 0) {
         p_Var5 = (_Normal *)((int)terrain->normalList + iVar3 * -6);
         _DAT_1f800078 = CONCAT22(-p_Var5->y,-(p_Var5->x & 0x1fffU));
-        _DAT_1f80007c = _DAT_1f80007c & 0xffff0000 | (uint)(ushort)-p_Var5->z;
+        _DAT_1f80007c = _DAT_1f80007c & 0xffff0000 | (u_int)(ushort)-p_Var5->z;
       }
       else {
-        puVar4 = (uint *)(&terrain->normalList->x + iVar3 * 3);
+        puVar4 = (u_int *)(&terrain->normalList->x + iVar3 * 3);
         _DAT_1f800078 = *puVar4 & 0xffff1fff;
-        _DAT_1f80007c = _DAT_1f80007c & 0xffff0000 | (uint)*(ushort *)(puVar4 + 1);
+        _DAT_1f80007c = _DAT_1f80007c & 0xffff0000 | (u_int)*(ushort *)(puVar4 + 1);
       }
       p_Var7 = terrain->vertexList;
       uVar1 = (tface->face).v1;

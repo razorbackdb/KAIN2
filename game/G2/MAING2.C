@@ -17,7 +17,7 @@
 	// End Line: 122
 
 _G2Bool_Enum
-MainG2_InitEngine(void *appData,uint screenWidth,uint screenHeight,char *filesystemName)
+MainG2_InitEngine(void *appData,u_int screenWidth,u_int screenHeight,char *filesystemName)
 
 {
   return 1;

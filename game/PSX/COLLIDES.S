@@ -38,18 +38,18 @@
 	/* end block 5 */
 	// End Line: 70
 
-void COLLIDE_NearestPointOnLine_S(uint *param_1,uint *param_2,uint *param_3,uint *param_4)
+void COLLIDE_NearestPointOnLine_S(u_int *param_1,u_int *param_2,u_int *param_3,u_int *param_4)
 
 {
   ushort uVar1;
   ushort uVar2;
-  uint uVar3;
+  u_int uVar3;
   int iVar4;
   int iVar5;
   int iVar6;
-  uint uVar7;
-  uint uVar8;
-  uint uVar9;
+  u_int uVar7;
+  u_int uVar8;
+  u_int uVar9;
   undefined4 uVar10;
   int iVar11;
   undefined4 uVar12;
@@ -61,11 +61,11 @@ void COLLIDE_NearestPointOnLine_S(uint *param_1,uint *param_2,uint *param_3,uint
   uVar8 = *param_3;
   uVar2 = *(ushort *)(param_3 + 1);
   setCopControlWord(2,0,uVar7);
-  setCopControlWord(2,0x800,*param_4 << 0x10 | (uint)uVar1);
-  setCopControlWord(2,0x1000,(uint)*(ushort *)(param_4 + 1) << 0x10 | *param_4 >> 0x10);
+  setCopControlWord(2,0x800,*param_4 << 0x10 | (u_int)uVar1);
+  setCopControlWord(2,0x1000,(u_int)*(ushort *)(param_4 + 1) << 0x10 | *param_4 >> 0x10);
   uVar9 = (uVar8 & 0xffff) - (uVar7 & 0xffff);
   iVar11 = (uVar8 >> 0x10) - (uVar7 >> 0x10);
-  iVar13 = (uint)uVar2 - (uint)uVar1;
+  iVar13 = (u_int)uVar2 - (u_int)uVar1;
   uVar3 = iVar11 * 0x10000 | uVar9 & 0xffff;
   setCopControlWord(2,0x1800,uVar3);
   setCopControlWord(2,0x2000,iVar13);
@@ -130,18 +130,18 @@ void COLLIDE_NearestPointOnLine_S(uint *param_1,uint *param_2,uint *param_3,uint
 
 undefined4
 COLLIDE_IntersectLineAndPlane_S
-          (short *param_1,uint *param_2,uint *param_3,undefined4 *param_4,int param_5)
+          (short *param_1,u_int *param_2,u_int *param_3,undefined4 *param_4,int param_5)
 
 {
   ushort uVar1;
   undefined4 in_zero;
   undefined4 in_at;
-  uint uVar2;
+  u_int uVar2;
   int iVar3;
   int iVar4;
   int iVar5;
   undefined4 uVar6;
-  uint uVar7;
+  u_int uVar7;
   undefined4 uVar8;
   int iVar9;
   undefined4 uVar10;
@@ -151,11 +151,11 @@ COLLIDE_IntersectLineAndPlane_S
   uVar1 = *(ushort *)(param_2 + 1);
   iVar5 = (*param_3 & 0xffff) - (uVar2 & 0xffff);
   uVar7 = (*param_3 >> 0x10) - (uVar2 >> 0x10);
-  iVar9 = (uint)*(ushort *)(param_3 + 1) - (uint)uVar1;
+  iVar9 = (u_int)*(ushort *)(param_3 + 1) - (u_int)uVar1;
   setCopReg(2,in_zero,*param_4);
   setCopReg(2,in_at,param_4[1]);
   setCopControlWord(2,0,uVar2);
-  setCopControlWord(2,0x800,(uint)uVar1 | iVar5 * 0x10000);
+  setCopControlWord(2,0x800,(u_int)uVar1 | iVar5 * 0x10000);
   setCopControlWord(2,0x1000,iVar9 * 0x10000 | uVar7 & 0xffff);
   copFunction(2,0x486012);
   iVar3 = getCopReg(2,0xc800);
@@ -250,7 +250,7 @@ void COLLIDE_NearestPointOnPlane_S(short *param_1,int *param_2,int param_3,undef
   uVar4 = getCopReg(2,0x5000);
   uVar5 = getCopReg(2,0x5800);
   *param_1 = (short)uVar3 + (short)uVar6;
-  param_1[1] = (short)uVar4 + (short)((uint)uVar6 >> 0x10);
+  param_1[1] = (short)uVar4 + (short)((u_int)uVar6 >> 0x10);
   param_1[2] = (short)uVar5 + sVar1;
   return;
 }
@@ -374,12 +374,12 @@ void VM_ProcessVMObjectList_S(int param_1)
 {
   int iVar1;
   undefined4 unaff_s0;
-  uint *puVar2;
+  u_int *puVar2;
   undefined4 unaff_s1;
   int iVar3;
   undefined4 unaff_s2;
   undefined4 unaff_s3;
-  uint uVar4;
+  u_int uVar4;
   undefined4 unaff_s4;
   undefined4 unaff_s5;
   undefined4 unaff_s6;
@@ -388,7 +388,7 @@ void VM_ProcessVMObjectList_S(int param_1)
   undefined4 unaff_retaddr;
   
   iVar3 = *(int *)(param_1 + 8);
-  puVar2 = *(uint **)(param_1 + 0xc);
+  puVar2 = *(u_int **)(param_1 + 0xc);
   _DAT_1f800000 = unaff_retaddr;
   _DAT_1f800004 = unaff_s0;
   _DAT_1f800008 = unaff_s1;
@@ -453,14 +453,14 @@ void VM_ProcessVMObjectList_S(int param_1)
 	/* end block 6 */
 	// End Line: 1477
 
-uint BSP_SphereIntersectsViewVolume_S(undefined4 *param_1,int param_2)
+u_int BSP_SphereIntersectsViewVolume_S(undefined4 *param_1,int param_2)
 
 {
   bool bVar1;
   int iVar2;
   undefined4 in_zero;
   undefined4 in_at;
-  uint uVar3;
+  u_int uVar3;
   int iVar4;
   int iVar5;
   int iVar6;
@@ -473,19 +473,19 @@ uint BSP_SphereIntersectsViewVolume_S(undefined4 *param_1,int param_2)
   setCopReg(2,in_zero,*param_1);
   setCopReg(2,in_at,param_1[1]);
   copFunction(2,0x486012);
-  iVar2 = -(uint)*(ushort *)((int)param_1 + 6);
+  iVar2 = -(u_int)*(ushort *)((int)param_1 + 6);
   iVar4 = getCopReg(2,0xc800);
   iVar5 = getCopReg(2,0xd000);
   iVar6 = getCopReg(2,0xd800);
   iVar4 = iVar4 - *(int *)(param_2 + 0x48);
-  uVar3 = (uint)(iVar2 < iVar4);
+  uVar3 = (u_int)(iVar2 < iVar4);
   if (iVar2 < iVar4) {
-    bVar1 = iVar4 < (int)(*(int *)(param_2 + 100) + (uint)*(ushort *)((int)param_1 + 6));
-    uVar3 = (uint)bVar1;
+    bVar1 = iVar4 < (int)(*(int *)(param_2 + 100) + (u_int)*(ushort *)((int)param_1 + 6));
+    uVar3 = (u_int)bVar1;
     if (bVar1) {
       bVar1 = iVar2 < iVar5 - *(int *)(param_2 + 0x4c);
-      uVar3 = (uint)bVar1;
-      if ((bVar1) && (bVar1 = iVar2 < iVar6 - *(int *)(param_2 + 0x50), uVar3 = (uint)bVar1, bVar1))
+      uVar3 = (u_int)bVar1;
+      if ((bVar1) && (bVar1 = iVar2 < iVar6 - *(int *)(param_2 + 0x50), uVar3 = (u_int)bVar1, bVar1))
       {
         setCopControlWord(2,0,*(undefined4 *)(param_2 + 0x28));
         setCopControlWord(2,0x800,*(undefined4 *)(param_2 + 0x2c));
@@ -494,9 +494,9 @@ uint BSP_SphereIntersectsViewVolume_S(undefined4 *param_1,int param_2)
         iVar4 = getCopReg(2,0xc800);
         iVar5 = getCopReg(2,0xd000);
         bVar1 = iVar2 < iVar4 - *(int *)(param_2 + 0x54);
-        uVar3 = (uint)bVar1;
+        uVar3 = (u_int)bVar1;
         if (bVar1) {
-          uVar3 = (uint)(iVar2 < iVar5 - *(int *)(param_2 + 0x58));
+          uVar3 = (u_int)(iVar2 < iVar5 - *(int *)(param_2 + 0x58));
         }
       }
     }
@@ -540,14 +540,14 @@ uint BSP_SphereIntersectsViewVolume_S(undefined4 *param_1,int param_2)
 	/* end block 6 */
 	// End Line: 1599
 
-void RotMatrixZYX(ushort *param_1,uint *param_2)
+void RotMatrixZYX(ushort *param_1,u_int *param_2)
 
 {
   ushort uVar1;
   ushort uVar2;
   undefined4 uVar3;
-  uint uVar4;
-  uint uVar5;
+  u_int uVar4;
+  u_int uVar5;
   int iVar6;
   undefined4 uVar7;
   int iVar8;
@@ -734,14 +734,14 @@ void rmzyx_onlyz()
 	/* end block 3 */
 	// End Line: 1840
 
-void RotMatrix(ushort *param_1,uint *param_2)
+void RotMatrix(ushort *param_1,u_int *param_2)
 
 {
   ushort uVar1;
   ushort uVar2;
   undefined4 uVar3;
-  uint uVar4;
-  uint uVar5;
+  u_int uVar4;
+  u_int uVar5;
   int iVar6;
   undefined4 uVar7;
   int iVar8;
@@ -910,7 +910,7 @@ void rm_3()
 	/* end block 4 */
 	// End Line: 2051
 
-undefined8 RotMatrixX(uint param_1,int param_2)
+undefined8 RotMatrixX(u_int param_1,int param_2)
 
 {
   int iVar1;
@@ -966,11 +966,11 @@ undefined8 RotMatrixX(uint param_1,int param_2)
   setCopReg(2,0x5800,(int)*(short *)(param_2 + 0x10));
   copFunction(2,0x198003d);
   *(short *)(param_2 + 6) = (short)uVar11 - (short)uVar4;
-  *(uint *)(param_2 + 8) = iVar12 - iVar1 & 0xffffU | (iVar13 - iVar5) * 0x10000;
+  *(u_int *)(param_2 + 8) = iVar12 - iVar1 & 0xffffU | (iVar13 - iVar5) * 0x10000;
   iVar1 = getCopReg(2,0x4800);
   iVar5 = getCopReg(2,0x5000);
   uVar4 = getCopReg(2,0x5800);
-  *(uint *)(param_2 + 0xc) = iVar6 + iVar1 & 0xffffU | (iVar7 + iVar5) * 0x10000;
+  *(u_int *)(param_2 + 0xc) = iVar6 + iVar1 & 0xffffU | (iVar7 + iVar5) * 0x10000;
   *(short *)(param_2 + 0x10) = (short)uVar8 + (short)uVar4;
   return CONCAT44(iVar2,iVar3);
 }
@@ -1014,7 +1014,7 @@ void RMX_0()
 	/* end block 3 */
 	// End Line: 2232
 
-undefined8 RotMatrixY(uint param_1,uint *param_2)
+undefined8 RotMatrixY(u_int param_1,u_int *param_2)
 
 {
   int iVar1;
@@ -1113,7 +1113,7 @@ void RMY_0()
 	/* end block 2 */
 	// End Line: 2403
 
-undefined8 RotMatrixZ(uint param_1,uint *param_2)
+undefined8 RotMatrixZ(u_int param_1,u_int *param_2)
 
 {
   int iVar1;
@@ -1334,7 +1334,7 @@ int * ScaleMatrix(int *param_1,undefined4 *param_2)
 	/* end block 4 */
 	// End Line: 2771
 
-int rsin(uint param_1)
+int rsin(u_int param_1)
 
 {
   int iVar1;
@@ -1375,7 +1375,7 @@ void rsin_exit()
 	/* end block 2 */
 	// End Line: 2803
 
-int rcos(uint param_1)
+int rcos(u_int param_1)
 
 {
   int iVar1;
@@ -1577,7 +1577,7 @@ void * memcpy(void *__dest,void *__src,size_t __n)
   if (__n != 0) {
     puVar4 = (undefined *)__dest;
     puVar2 = (undefined4 *)__dest;
-    if ((((uint)__dest | (uint)__src | __n) & 3) == 0) {
+    if ((((u_int)__dest | (u_int)__src | __n) & 3) == 0) {
       do {
         uVar5 = *(undefined4 *)__src;
         __src = (undefined4 *)__src + 1;
@@ -1969,15 +1969,15 @@ void BSP_MarkVisibleLeaves_S(int **param_1,undefined4 *param_2,int *param_3)
   undefined4 *puVar2;
   int *piVar3;
   int iVar4;
-  uint uVar5;
-  uint uVar6;
+  u_int uVar5;
+  u_int uVar6;
   int iVar7;
-  uint uVar8;
+  u_int uVar8;
   int iVar9;
-  uint uVar10;
+  u_int uVar10;
   int iVar11;
   int **ppiVar12;
-  uint uVar13;
+  u_int uVar13;
   int iVar14;
   int iVar15;
   undefined4 uVar16;
@@ -2034,7 +2034,7 @@ void BSP_MarkVisibleLeaves_S(int **param_1,undefined4 *param_2,int *param_3)
   setCopControlWord(2,0x800,_DAT_1f800004);
   setCopControlWord(2,0x1000,_DAT_1f800008);
   setCopControlWord(2,0x1800,_DAT_1f80000c);
-  setCopControlWord(2,0x2000,(uint)DAT_1f800010);
+  setCopControlWord(2,0x2000,(u_int)DAT_1f800010);
   setCopReg(2,0,DAT_1f800040);
   setCopReg(2,0x800,(int)*(short *)(param_2 + 1));
   copFunction(2,0x486012);
@@ -2054,7 +2054,7 @@ void BSP_MarkVisibleLeaves_S(int **param_1,undefined4 *param_2,int *param_3)
   setCopControlWord(2,0x800,puVar1[1]);
   setCopControlWord(2,0x1000,puVar1[2]);
   setCopControlWord(2,0x1800,puVar1[3]);
-  setCopControlWord(2,0x2000,(uint)*(ushort *)(puVar1 + 4));
+  setCopControlWord(2,0x2000,(u_int)*(ushort *)(puVar1 + 4));
   uVar5 = (param_2[0x28] + -0xa0) * iVar4 >> 0xf & 0xffff;
   uVar6 = (param_2[0x2a] + -0x78) * iVar4 * 2 & 0xffff0000;
   uVar8 = (param_2[0x29] + -0xa0) * iVar4 >> 0xf & 0xffff;
@@ -2095,7 +2095,7 @@ void BSP_MarkVisibleLeaves_S(int **param_1,undefined4 *param_2,int *param_3)
   setCopControlWord(2,0x800,_DAT_1f800004);
   setCopControlWord(2,0x1000,_DAT_1f800008);
   setCopControlWord(2,0x1800,_DAT_1f80000c);
-  setCopControlWord(2,0x2000,(uint)DAT_1f800010);
+  setCopControlWord(2,0x2000,(u_int)DAT_1f800010);
   param_1 = (int **)*param_1;
   ppiVar17 = (int **)&DAT_1f8000c4;
   do {
@@ -2132,7 +2132,7 @@ void BSP_MarkVisibleLeaves_S(int **param_1,undefined4 *param_2,int *param_3)
           setCopControlWord(2,0x800,_DAT_1f800044);
           setCopControlWord(2,0x1000,_DAT_1f800048);
           setCopControlWord(2,0x1800,_DAT_1f80004c);
-          setCopControlWord(2,0x2000,(uint)(ushort)DAT_1f800050);
+          setCopControlWord(2,0x2000,(u_int)(ushort)DAT_1f800050);
           setCopReg(2,0,param_1[2]);
           setCopReg(2,0x800,param_1[3]);
           copFunction(2,0x486012);
@@ -2190,7 +2190,7 @@ LAB_800790a8:
       setCopControlWord(2,0x800,_DAT_1f800004);
       setCopControlWord(2,0x1000,_DAT_1f800008);
       setCopControlWord(2,0x1800,_DAT_1f80000c);
-      setCopControlWord(2,0x2000,(uint)DAT_1f800010);
+      setCopControlWord(2,0x2000,(u_int)DAT_1f800010);
     }
     param_1 = (int **)*ppiVar18;
     ppiVar17 = ppiVar18;
@@ -2509,13 +2509,13 @@ void G2Quat_ToMatrix_S(short *param_1,short *param_2)
 void G2Quat_FromEuler_S(int param_1,short *param_2)
 
 {
-  uint uVar1;
+  u_int uVar1;
   int iVar2;
   undefined2 uVar3;
   int iVar4;
   int iVar5;
   short sVar6;
-  uint uVar7;
+  u_int uVar7;
   int iVar8;
   int iVar9;
   int iVar10;

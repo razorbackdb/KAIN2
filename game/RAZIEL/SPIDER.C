@@ -180,7 +180,7 @@ void StateHandlerWallIdle(__CharacterState *In,int CurrentSection,int Data)
   int Data_00;
   __Event *p_Var2;
   _Instance *instance;
-  uint uVar3;
+  u_int uVar3;
   undefined *puVar4;
   int Data_01;
   int NewAnim;

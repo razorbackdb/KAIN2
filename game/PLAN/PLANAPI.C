@@ -25,14 +25,14 @@ void PLANAPI_ConvertPlanIntoEnmyPlanDataFormat
                (PlanningNode *goalNode,EnemyPlanData *planData,PlanningNode *planningPool)
 
 {
-  uchar uVar1;
+  u_char uVar1;
   short sVar2;
-  uint uVar3;
+  u_int uVar3;
   int iVar4;
-  uchar *puVar5;
+  u_char *puVar5;
   
   uVar3 = PLANPOOL_NumNodesInPlan(goalNode,planningPool);
-  planData->numWayPoints = (uchar)uVar3;
+  planData->numWayPoints = (u_char)uVar3;
   iVar4 = (uVar3 & 0xff) - 1;
   if (-1 < iVar4) {
     puVar5 = planData->nodeSkipArray + iVar4 * 6;
@@ -41,7 +41,7 @@ void PLANAPI_ConvertPlanIntoEnmyPlanDataFormat
         sVar2 = (goalNode->pos).z;
         *(undefined4 *)(puVar5 + 0x10) = *(undefined4 *)&goalNode->pos;
         *(short *)(puVar5 + 0x14) = sVar2;
-        uVar1 = *(uchar *)&goalNode->nodeType;
+        uVar1 = *(u_char *)&goalNode->nodeType;
         planData->nodeSkipArray[iVar4] = '\0';
         (planData->nodeSkipArray + iVar4)[8] = uVar1;
       }
@@ -128,7 +128,7 @@ int PLANAPI_FindPathBetweenNodes
 void PLANAPI_DoTimingCalcsAndDrawing(long startTime,PlanningNode *planningPool)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   int iVar2;
   long *plVar3;
   int iVar4;
@@ -224,7 +224,7 @@ int PLANAPI_AddNodeOfTypeToPool(_Position *pos,int type)
     if (iVar1 == 0) {
       return 0;
     }
-    nodeType = (ushort)(((uint)local_18[0] & 3) << 3) | (ushort)type & 7;
+    nodeType = (ushort)(((u_int)local_18[0] & 3) << 3) | (ushort)type & 7;
   }
   else {
     nodeType = (ushort)type & 7 | 0x18;
@@ -273,14 +273,14 @@ void PLANAPI_DeleteNodesFromPoolByType(int nodeSource)
   nodeToDelete = (PlanningNode *)gameTrackerX.planningPool;
   if (*(char *)(poolManagementData + 1) != '\0') {
     do {
-      if (((uint)nodeToDelete->nodeType & 7) == nodeSource) {
+      if (((u_int)nodeToDelete->nodeType & 7) == nodeSource) {
         PLANPOOL_DeleteNodeFromPool(nodeToDelete,(PlanningNode *)planningPool);
       }
       else {
         iVar1 = iVar1 + 1;
         nodeToDelete = nodeToDelete + 1;
       }
-    } while (iVar1 < (int)(uint)*(byte *)(poolManagementData + 1));
+    } while (iVar1 < (int)(u_int)*(byte *)(poolManagementData + 1));
   }
   return;
 }
@@ -331,7 +331,7 @@ void PLANAPI_DeleteNodeFromPoolByUnit(long streamUnitID)
         iVar1 = iVar1 + 1;
         nodeToDelete = nodeToDelete + 1;
       }
-    } while (iVar1 < (int)(uint)*(byte *)(poolManagementData + 1));
+    } while (iVar1 < (int)(u_int)*(byte *)(poolManagementData + 1));
   }
   return;
 }
@@ -471,12 +471,12 @@ void PLANAPI_InitPlanning(void *planningPool)
 short PLANAPI_PairType(PlanningNode *node1,PlanningNode *node2)
 
 {
-  uint uVar1;
-  uint uVar2;
+  u_int uVar1;
+  u_int uVar2;
   ushort uVar3;
   
-  uVar2 = (uint)(node1->nodeType >> 3) & 3;
-  _uVar3 = (uint)(node2->nodeType >> 3) & 3;
+  uVar2 = (u_int)(node1->nodeType >> 3) & 3;
+  _uVar3 = (u_int)(node2->nodeType >> 3) & 3;
   uVar3 = (ushort)_uVar3;
   if (_uVar3 < uVar2) {
     uVar1 = _uVar3 ^ uVar2 ^ _uVar3;
@@ -521,12 +521,12 @@ short PLANAPI_PairType(PlanningNode *node1,PlanningNode *node2)
 int PLANAPI_PassThroughHit(PlanningNode *node1,PlanningNode *node2)
 
 {
-  uint uVar1;
-  uint uVar2;
+  u_int uVar1;
+  u_int uVar2;
   
   if (gameTrackerX.gameFlags < 0) {
-    uVar2 = (uint)node1->nodeType & 7;
-    uVar1 = (uint)node2->nodeType & 7;
+    uVar2 = (u_int)node1->nodeType & 7;
+    uVar1 = (u_int)node2->nodeType & 7;
     if (uVar1 < uVar2) {
       uVar2 = uVar2 ^ uVar1;
       uVar1 = uVar1 ^ uVar2;
@@ -580,10 +580,10 @@ void PLANAPI_UpdatePlanningDatabase(GameTracker *gameTracker,_Instance *player)
   byte *pbVar1;
   byte bVar2;
   ushort uVar3;
-  uint uVar4;
+  u_int uVar4;
   long lVar5;
   int passThroughHit;
-  uint uVar6;
+  u_int uVar6;
   PlanningNode *node1;
   PlanningNode *node2;
   PlanningNode *startNode;
@@ -663,7 +663,7 @@ LAB_80097c5c:
         node2 = *(PlanningNode **)(poolManagementData + 8);
         uVar3 = *(ushort *)(poolManagementData + 0x14);
         startNode = *(PlanningNode **)(poolManagementData + 0xc);
-        if ((uint)uVar3 == (uint)bVar2) {
+        if ((u_int)uVar3 == (u_int)bVar2) {
           passThroughHit = PLANAPI_PassThroughHit(node2,startNode);
           passThroughHit =
                PLANCOLL_DoesLOSExistFinal
@@ -726,7 +726,7 @@ LAB_80097dfc:
 int PLANAPI_NumNodesInPool(void *planningPool)
 
 {
-  return (uint)*(byte *)(poolManagementData + 1);
+  return (u_int)*(byte *)(poolManagementData + 1);
 }
 
 
@@ -837,7 +837,7 @@ void PLANAPI_InitPlanMkrList(_StreamUnit *streamUnit)
       }
       iVar4 = iVar4 + 1;
       p_Var3 = p_Var3 + 1;
-    } while (iVar4 < (int)(uint)uVar1);
+    } while (iVar4 < (int)(u_int)uVar1);
   }
   return;
 }
@@ -940,7 +940,7 @@ int PLANAPI_FindNodePositionInUnit(_StreamUnit *streamUnit,_Position *pos,int id
 {
   short sVar1;
   short sVar2;
-  uint uVar3;
+  u_int uVar3;
   short *psVar4;
   int iVar5;
   _PlanMkr *p_Var6;
@@ -1015,7 +1015,7 @@ int PLANAPI_FindClosestNodePositionInUnit
 {
   short sVar1;
   short sVar2;
-  uint uVar3;
+  u_int uVar3;
   long lVar4;
   int iVar5;
   int iVar6;

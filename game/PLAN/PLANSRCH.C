@@ -34,11 +34,11 @@ PLANSRCH_FindNodeToExpand(PlanningNode *planningPool,PlanningNode *goalNode,int 
 
 {
   long lVar1;
-  uint uVar2;
+  u_int uVar2;
   PlanningNode *pPVar3;
   int iVar4;
   PlanningNode *pPVar5;
-  uint uVar6;
+  u_int uVar6;
   
   uVar6 = 0xffffffff;
   iVar4 = 0;
@@ -46,12 +46,12 @@ PLANSRCH_FindNodeToExpand(PlanningNode *planningPool,PlanningNode *goalNode,int 
   pPVar3 = planningPool;
   if (*(char *)(poolManagementData + 1) != '\0') {
     do {
-      if ((((validNodeTypes >> ((uint)planningPool->nodeType & 0x1f) & 1U) != 0) &&
+      if ((((validNodeTypes >> ((u_int)planningPool->nodeType & 0x1f) & 1U) != 0) &&
           ((planningPool->flags & 1) != 0)) && ((planningPool->flags & 2) == 0)) {
         lVar1 = MATH3D_LengthXYZ((int)(pPVar3->pos).x - (int)(goalNode->pos).x,
                                  (int)(planningPool->pos).y - (int)(goalNode->pos).y,
                                  (int)(planningPool->pos).z - (int)(goalNode->pos).z);
-        uVar2 = (uint)planningPool->cost + lVar1;
+        uVar2 = (u_int)planningPool->cost + lVar1;
         if (uVar2 <= uVar6) {
           pPVar5 = planningPool;
           uVar6 = uVar2;
@@ -60,7 +60,7 @@ PLANSRCH_FindNodeToExpand(PlanningNode *planningPool,PlanningNode *goalNode,int 
       planningPool = planningPool + 1;
       iVar4 = iVar4 + 1;
       pPVar3 = pPVar3 + 1;
-    } while (iVar4 < (int)(uint)*(byte *)(poolManagementData + 1));
+    } while (iVar4 < (int)(u_int)*(byte *)(poolManagementData + 1));
   }
   return pPVar5;
 }
@@ -102,8 +102,8 @@ void PLANSRCH_ExpandNode(PlanningNode *planningPool,PlanningNode *nodeToExpand)
   ushort uVar1;
   int iVar2;
   int iVar3;
-  uint uVar4;
-  uint uVar5;
+  u_int uVar4;
+  u_int uVar5;
   
   iVar2 = poolManagementData;
   iVar3 = 0;
@@ -114,9 +114,9 @@ void PLANSRCH_ExpandNode(PlanningNode *planningPool,PlanningNode *nodeToExpand)
     do {
       if (((((planningPool->connectionStatus & uVar4) != 0) &&
            ((planningPool->connections & uVar4) != 0)) && (planningPool != nodeToExpand)) &&
-         ((iVar2 = (uint)nodeToExpand->cost +
+         ((iVar2 = (u_int)nodeToExpand->cost +
                    (int)*(short *)(iVar3 * 2 + uVar5 * 0x40 + *(int *)(iVar2 + 0x10)),
-          (planningPool->flags & 1) == 0 || (iVar2 < (int)(uint)planningPool->cost)))) {
+          (planningPool->flags & 1) == 0 || (iVar2 < (int)(u_int)planningPool->cost)))) {
         planningPool->parent = (ushort)uVar5;
         if (iVar2 < -0x7fff) {
           iVar2 = -0x7fff;
@@ -131,7 +131,7 @@ void PLANSRCH_ExpandNode(PlanningNode *planningPool,PlanningNode *nodeToExpand)
       iVar3 = iVar3 + 1;
       planningPool = planningPool + 1;
       iVar2 = poolManagementData;
-    } while (iVar3 < (int)(uint)*(byte *)(poolManagementData + 1));
+    } while (iVar3 < (int)(u_int)*(byte *)(poolManagementData + 1));
   }
   return;
 }
@@ -181,7 +181,7 @@ void PLANSRCH_InitNodesForSearch(PlanningNode *planningPool)
       planningPool->parent = 0;
       planningPool->flags = planningPool->flags & 0xfffc;
       planningPool = planningPool + 1;
-    } while (iVar2 < (int)(uint)*(byte *)(iVar1 + 1));
+    } while (iVar2 < (int)(u_int)*(byte *)(iVar1 + 1));
   }
   return;
 }

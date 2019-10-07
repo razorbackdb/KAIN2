@@ -48,7 +48,7 @@ int do_push_menu(void *gt,long menuparam,menu_ctrl_t ctrl)
   if (ctrl == menu_ctrl_engage) {
     menu_push(*(menu_t **)((int)gt + 0x20),(TDRFuncPtr_menu_push1fn)menuparam);
   }
-  return (uint)(ctrl == menu_ctrl_engage);
+  return (u_int)(ctrl == menu_ctrl_engage);
 }
 
 
@@ -68,7 +68,7 @@ int do_pop_menu(void *gt,long param,menu_ctrl_t ctrl)
   if (ctrl == menu_ctrl_engage) {
     menu_pop(*(menu_t **)((int)gt + 0x20));
   }
-  return (uint)(ctrl == menu_ctrl_engage);
+  return (u_int)(ctrl == menu_ctrl_engage);
 }
 
 
@@ -93,7 +93,7 @@ int do_function(void *gt,long fnparam,menu_ctrl_t ctrl)
   if (ctrl == menu_ctrl_engage) {
     (*(code *)fnparam)();
   }
-  return (uint)(ctrl == menu_ctrl_engage);
+  return (u_int)(ctrl == menu_ctrl_engage);
 }
 
 
@@ -151,7 +151,7 @@ int do_save_menu(void *gt,long parameter,menu_ctrl_t ctrl)
   if (ctrl == menu_ctrl_engage) {
     menu_push(*(menu_t **)((int)gt + 0x20),memcard_pause_menu);
   }
-  return (uint)(ctrl == menu_ctrl_engage);
+  return (u_int)(ctrl == menu_ctrl_engage);
 }
 
 

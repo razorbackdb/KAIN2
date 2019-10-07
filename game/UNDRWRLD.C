@@ -71,7 +71,7 @@ long UNDERWORLD_RotateScreenStep(long time)
 
 {
   UW_ScreenXY *pUVar1;
-  ulong uVar2;
+  u_long uVar2;
   long lVar3;
   int iVar4;
   int iVar5;
@@ -143,12 +143,12 @@ long UNDERWORLD_RotateScreenStep(long time)
 	/* end block 3 */
 	// End Line: 364
 
-void UNDERWORLD_DoUV(uchar *uv,UW_ScreenXY *p0,int tx)
+void UNDERWORLD_DoUV(u_char *uv,UW_ScreenXY *p0,int tx)
 
 {
   tx = p0->sx - tx;
   if (tx < 0x100) {
-    *uv = (uchar)tx;
+    *uv = (u_char)tx;
   }
   else {
     *uv = -1;
@@ -157,7 +157,7 @@ void UNDERWORLD_DoUV(uchar *uv,UW_ScreenXY *p0,int tx)
     uv[1] = -1;
     return;
   }
-  uv[1] = *(uchar *)&p0->sy;
+  uv[1] = *(u_char *)&p0->sy;
   return;
 }
 
@@ -188,7 +188,7 @@ POLY_GT3 * UNDERWORLD_Poly(POLY_GT3 *last,UW_ScreenXY *p0,UW_ScreenXY *p1,UW_Scr
 {
   ushort uVar1;
   int iVar2;
-  uint tx;
+  u_int tx;
   POLY_GT3 *pPVar3;
   
   uVar1 = p0->sx;
@@ -202,7 +202,7 @@ POLY_GT3 * UNDERWORLD_Poly(POLY_GT3 *last,UW_ScreenXY *p0,UW_ScreenXY *p1,UW_Scr
     uVar1 = p1->sx;
     if ((int)p2->sx <= (int)p1->sx) goto LAB_800b3790;
   }
-  iVar2 = (uint)uVar1 << 0x10;
+  iVar2 = (u_int)uVar1 << 0x10;
 LAB_800b3790:
   tx = iVar2 >> 0x10 & 0xffffffc0;
   *(undefined *)((int)&last[1].tag + 3) = 9;
@@ -224,7 +224,7 @@ LAB_800b3790:
   last[1].r2 = '\x10';
   last[1].g2 = '\x10';
   last[1].b2 = '\x10';
-  pPVar3->tag = pPVar3->tag & 0xff000000 | (uint)last & 0xffffff;
+  pPVar3->tag = pPVar3->tag & 0xff000000 | (u_int)last & 0xffffff;
   last[1].code = last[1].code | 2;
   return pPVar3;
 }
@@ -269,9 +269,9 @@ void UNDERWORLD_DisplayFrame(long *primStart,long drawY)
   UW_ScreenXY *p2_00;
   int iVar3;
   int iVar4;
-  uint *puVar5;
+  u_int *puVar5;
   
-  puVar5 = (uint *)(primStart + 10);
+  puVar5 = (u_int *)(primStart + 10);
   iVar3 = 0;
   iVar4 = 0;
   *primStart = 0xffffff;
@@ -477,7 +477,7 @@ _StreamUnit * UNDERWORLD_LoadLevel(char *baseAreaName,GameTracker *gameTracker)
 
 {
   int iVar1;
-  ulong time;
+  u_long time;
   _StreamUnit *streamUnit;
   _BSPNode *p_Var2;
   int iVar3;
@@ -532,7 +532,7 @@ _StreamUnit * UNDERWORLD_LoadLevel(char *baseAreaName,GameTracker *gameTracker)
       iVar3 = strcmpi(pLVar4->introList->name + iVar7,"raziel");
       if (iVar3 == 0) {
         pcVar5 = streamUnit->level->introList->name + iVar7;
-        *(uint *)(pcVar5 + 0x2c) = *(uint *)(pcVar5 + 0x2c) | 8;
+        *(u_int *)(pcVar5 + 0x2c) = *(u_int *)(pcVar5 + 0x2c) | 8;
         break;
       }
       pLVar4 = streamUnit->level;

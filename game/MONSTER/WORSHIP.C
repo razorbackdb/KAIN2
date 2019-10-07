@@ -39,11 +39,11 @@ void WORSHIP_Init(_Instance *instance)
     bVar1 = *(byte *)((int)pvVar4 + 0x24);
   }
   else {
-    HUMAN_CreateWeapon(instance,0xb,(uint)*(byte *)((int)pvVar4 + 0x23));
+    HUMAN_CreateWeapon(instance,0xb,(u_int)*(byte *)((int)pvVar4 + 0x23));
     bVar1 = *(byte *)((int)pvVar4 + 0x24);
     weaponid = 0xb;
   }
-  p_Var3 = HUMAN_CreateWeapon(instance,weaponid,(uint)bVar1);
+  p_Var3 = HUMAN_CreateWeapon(instance,weaponid,(u_int)bVar1);
   if (p_Var3 != (_Instance *)0x0) {
     HUMAN_Init(instance);
   }
@@ -95,23 +95,23 @@ void WORSHIP_CombatEntry(_Instance *instance)
 
 {
   _Instance *instance_00;
-  uint *puVar1;
+  u_int *puVar1;
   void *pvVar2;
   
-  puVar1 = (uint *)instance->extraData;
+  puVar1 = (u_int *)instance->extraData;
   if (((puVar1[0x31] != 0) &&
       (*(short *)(puVar1[0x31] + 0x14) < *(short *)(*(int *)(puVar1[0x59] + 8) + 10))) &&
      (*(char *)((int)puVar1 + 0x15a) == '\x01')) {
     instance_00 = instance->LinkChild;
     pvVar2 = instance->data;
     if (instance_00 == (_Instance *)0x0) {
-      HUMAN_CreateWeapon(instance,0xb,(uint)*(byte *)((int)pvVar2 + 0x23));
+      HUMAN_CreateWeapon(instance,0xb,(u_int)*(byte *)((int)pvVar2 + 0x23));
     }
     else {
       if ((instance_00->LinkSibling != (_Instance *)0x0) ||
-         (instance_00->ParentLinkNode != (uint)*(byte *)((int)pvVar2 + 0x24))) goto LAB_8008ebd8;
+         (instance_00->ParentLinkNode != (u_int)*(byte *)((int)pvVar2 + 0x24))) goto LAB_8008ebd8;
       INSTANCE_UnlinkFromParent(instance_00);
-      INSTANCE_LinkToParent(instance_00,instance,(uint)*(byte *)((int)pvVar2 + 0x23));
+      INSTANCE_LinkToParent(instance_00,instance,(u_int)*(byte *)((int)pvVar2 + 0x23));
     }
     *puVar1 = *puVar1 | 0x20;
   }

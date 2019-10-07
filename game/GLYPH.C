@@ -133,7 +133,7 @@ void GlyphProcess(_Instance *instance,GameTracker *gameTracker)
 	/* end block 2 */
 	// End Line: 467
 
-ulong GlyphQuery(_Instance *instance,ulong query)
+u_long GlyphQuery(_Instance *instance,u_long query)
 
 {
   return 0;
@@ -159,7 +159,7 @@ ulong GlyphQuery(_Instance *instance,ulong query)
 	/* end block 2 */
 	// End Line: 500
 
-void GlyphPost(_Instance *instance,ulong message,ulong messageData)
+void GlyphPost(_Instance *instance,u_long message,u_long messageData)
 
 {
   if ((undefined *)message != &DAT_00100007) {
@@ -255,7 +255,7 @@ int GlyphIsGlyphOpen(_Instance *instance)
 int _GlyphIsGlyphSet(int glyph)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   
   uVar1 = INSTANCE_Query(gameTrackerX.playerInstance,0x24);
   return 1 << (glyph + 0x11U & 0x1f) & uVar1;
@@ -275,7 +275,7 @@ int _GlyphIsGlyphSet(int glyph)
 int _GlyphIsGlyphUsable(int glyph)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   
   uVar1 = INSTANCE_Query(gameTrackerX.playerInstance,0x13);
   return 1 << (glyph + 0x11U & 0x1f) & uVar1;
@@ -297,7 +297,7 @@ int _GlyphIsGlyphUsable(int glyph)
 int _GlyphIsAnyGlyphSet(void)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   
   uVar1 = INSTANCE_Query(gameTrackerX.playerInstance,0x24);
   return uVar1 & 0x1fc0000;
@@ -322,7 +322,7 @@ int _GlyphIsAnyGlyphSet(void)
 int _GlyphCost(_GlyphTuneData *glyphtunedata,int glyphNum)
 
 {
-  return (uint)*(byte *)((int)&glyphtunedata->glyph_darkness + glyphNum + 1);
+  return (u_int)*(byte *)((int)&glyphtunedata->glyph_darkness + glyphNum + 1);
 }
 
 
@@ -389,13 +389,13 @@ void HUD_GetPlayerScreenPt(DVECTOR *center)
   DVECTOR DVar1;
   undefined4 in_zero;
   undefined4 in_at;
-  uint local_c;
+  u_int local_c;
   
   PushMatrix();
   SetRotMatrix((undefined4 *)theCamera.core.wcTransform);
   SetTransMatrix((int)theCamera.core.wcTransform);
   local_c = local_c & 0xffff0000 |
-            (uint)(ushort)(((gameTrackerX.playerInstance)->position).z + 0x1c0);
+            (u_int)(ushort)(((gameTrackerX.playerInstance)->position).z + 0x1c0);
   setCopReg(2,in_zero,*(undefined4 *)&(gameTrackerX.playerInstance)->position);
   setCopReg(2,in_at,local_c);
   copFunction(2,0x180001);
@@ -479,11 +479,11 @@ void GlyphDrawMenu(_Instance *instance)
 {
   short current;
   ushort uVar1;
-  ulong uVar2;
+  u_long uVar2;
   int iVar3;
   int glyphnum;
-  uint enabled;
-  uint uVar4;
+  u_int enabled;
+  u_int uVar4;
   int glyph;
   int iVar5;
   void *pvVar6;
@@ -528,13 +528,13 @@ void GlyphDrawMenu(_Instance *instance)
     uVar4 = uVar4 & 0xfff;
     current = (short)uVar4;
     uVar1 = AngleDiff(current,0xc00);
-    if ((int)((uint)uVar1 << 0x10) < 0) {
+    if ((int)((u_int)uVar1 << 0x10) < 0) {
       uVar1 = AngleDiff(current,0xc00);
-      iVar5 = (int)((uint)uVar1 << 0x10) >> 0xf;
+      iVar5 = (int)((u_int)uVar1 << 0x10) >> 0xf;
     }
     else {
       uVar1 = AngleDiff(current,0xc00);
-      iVar5 = -((int)((uint)uVar1 << 0x10) >> 0xf);
+      iVar5 = -((int)((u_int)uVar1 << 0x10) >> 0xf);
     }
     iVar5 = iVar5 + 0x1000;
     if (iVar5 < 0x600) {
@@ -568,7 +568,7 @@ LAB_8007a8d8:
       }
       else {
         glyphnum = _GlyphCost(glyphtunedata,glyph);
-        enabled = (uint)((int)uVar2 < glyphnum) ^ 1;
+        enabled = (u_int)((int)uVar2 < glyphnum) ^ 1;
         glyphnum = iVar7;
       }
     }
@@ -665,7 +665,7 @@ void ShrinkGlyphMenu(_Instance *instance)
     glyph_cost = -1;
   }
   else {
-    iVar1 = (uint)*(ushort *)((int)pvVar3 + 0x90) - ((gameTrackerX.timeMult << 9) >> 0xc);
+    iVar1 = (u_int)*(ushort *)((int)pvVar3 + 0x90) - ((gameTrackerX.timeMult << 9) >> 0xc);
     *(undefined2 *)((int)pvVar3 + 0x90) = (short)iVar1;
     if (iVar1 * 0x10000 < 0) {
       *(undefined2 *)((int)pvVar3 + 0x90) = 0;
@@ -726,7 +726,7 @@ void EnlargeGlyphMenu(_Instance *instance)
   pvVar3 = instance->extraData;
   gameTrackerX.streamFlags = gameTrackerX.streamFlags | 0x100000;
   if (*(short *)((int)pvVar3 + 0x90) < 0x1000) {
-    iVar1 = (uint)*(ushort *)((int)pvVar3 + 0x90) + ((gameTrackerX.timeMult << 9) >> 0xc);
+    iVar1 = (u_int)*(ushort *)((int)pvVar3 + 0x90) + ((gameTrackerX.timeMult << 9) >> 0xc);
     *(undefined2 *)((int)pvVar3 + 0x90) = (short)iVar1;
     if (0x1000 < iVar1 * 0x10000 >> 0x10) {
       *(undefined2 *)((int)pvVar3 + 0x90) = 0x1000;
@@ -843,9 +843,9 @@ void _GlyphSelectProcess(_Instance *instance,int data1,int data2)
   short sVar2;
   __Event *p_Var3;
   int iVar4;
-  ulong uVar5;
+  u_long uVar5;
   undefined *puVar6;
-  uint sample;
+  u_int sample;
   void *pvVar7;
   _GlyphTuneData *glyphtunedata;
   
@@ -911,7 +911,7 @@ LAB_8007b1a4:
         iVar4 = _GlyphIsAnyGlyphSet();
         if (iVar4 != 0) {
           vol = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
-          if ((int)((uint)vol << 0x10) < 0) {
+          if ((int)((u_int)vol << 0x10) < 0) {
             sVar2 = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
             if (-(int)sVar2 < 0x40) goto LAB_8007b054;
           }
@@ -929,7 +929,7 @@ LAB_8007b054:
                 iVar4 = _GlyphIsGlyphSet((int)*(short *)((int)pvVar7 + 0x8c));
               } while (iVar4 == 0);
               vol = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
-              if ((int)((uint)vol << 0x10) < 0) {
+              if ((int)((u_int)vol << 0x10) < 0) {
                 sVar2 = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
                 sample = 0x12;
                 if (0x3f < -(int)sVar2) {
@@ -959,7 +959,7 @@ joined_r0x8007b0e4:
             iVar4 = _GlyphIsAnyGlyphSet();
             if (iVar4 != 0) {
               vol = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
-              if ((int)((uint)vol << 0x10) < 0) {
+              if ((int)((u_int)vol << 0x10) < 0) {
                 sVar2 = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
                 if (-(int)sVar2 < 0x40) goto LAB_8007af0c;
               }
@@ -971,14 +971,14 @@ LAB_8007af0c:
                     *(undefined2 *)((int)pvVar7 + 0x9a) = 0xffff;
                     vol = *(short *)((int)pvVar7 + 0x8c) - 1;
                     *(ushort *)((int)pvVar7 + 0x8c) = vol;
-                    if ((int)((uint)vol << 0x10) < 1) {
+                    if ((int)((u_int)vol << 0x10) < 1) {
                       *(undefined2 *)((int)pvVar7 + 0x8c) = 7;
                     }
                     *(short *)((int)pvVar7 + 0x98) = (*(short *)((int)pvVar7 + 0x8c) + -1) * 0x249;
                     iVar4 = _GlyphIsGlyphSet((int)*(short *)((int)pvVar7 + 0x8c));
                   } while (iVar4 == 0);
                   vol = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
-                  if (-1 < (int)((uint)vol << 0x10)) {
+                  if (-1 < (int)((u_int)vol << 0x10)) {
                     sVar2 = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98))
                     ;
                     goto joined_r0x8007b0e4;
@@ -1094,11 +1094,11 @@ void Glyph_StartSpell(_Instance *instance,int glyphnum)
 void Glyph_Broadcast(_Instance *sender,int glyphnum)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   int iVar2;
   _Instance *Inst;
   int Message;
-  uint uVar3;
+  u_int uVar3;
   int iVar4;
   int plane;
   
@@ -1653,7 +1653,7 @@ void HUD_Update(void)
       }
     }
     else {
-      if ((uint)(ushort)HUD_State - 10 < 2) {
+      if ((u_int)(ushort)HUD_State - 10 < 2) {
         HUD_State = 0xc;
       }
     }
@@ -1797,10 +1797,10 @@ void HUD_Draw(void)
   long lVar3;
   int fade;
   int iVar4;
-  ulong uVar5;
-  ulong uVar6;
+  u_long uVar5;
+  u_long uVar6;
   int fade_00;
-  uint uVar7;
+  u_int uVar7;
   undefined **ppuVar8;
   _SVector local_50;
   _SVector local_48;
@@ -1869,7 +1869,7 @@ LAB_8007beb4:
     uVar6 = INSTANCE_Query(gameTrackerX.playerInstance,0x2d);
     FX_MakeMannaIcon((int)MANNA_Position,0x17,0x33,0x20);
     FONT_Flush();
-    FONT_SetCursor((short)(((uint)(ushort)MANNA_Position + 0x3a) * 0x10000 >> 0x10),0x20);
+    FONT_SetCursor((short)(((u_int)(ushort)MANNA_Position + 0x3a) * 0x10000 >> 0x10),0x20);
     if (glyph_cost != -1) {
       FONT_Print("%d/");
     }
@@ -1927,7 +1927,7 @@ LAB_8007beb4:
       ppuVar8 = (code **)ppuVar8 + 1;
       local_50.z = local_50.z - HUD_Rotation & 0xfff;
       FX_DrawModel((Object *)(void *)0x0,0,&local_50,&local_48,&local_40,
-                   (uint)((int)uVar7 < HUD_Count) ^ 1);
+                   (u_int)((int)uVar7 < HUD_Count) ^ 1);
       uVar7 = uVar7 + 1;
       bVar1 = uVar7 < 5;
     } while ((int)uVar7 < 5);

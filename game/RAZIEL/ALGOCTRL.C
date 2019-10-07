@@ -30,7 +30,7 @@ void InitAlgorithmicWings(_Instance *instance)
 
 {
   MATRIX *pMVar1;
-  uint segNumber;
+  u_int segNumber;
   byte bVar2;
   _G2EulerAngles_Type local_18;
   
@@ -48,9 +48,9 @@ void InitAlgorithmicWings(_Instance *instance)
           local_18.x = 0;
         }
         else {
-          G2EulerAngles_FromMatrix(&local_18,(instance->anim).segMatrices + ((uint)bVar2 - 1),0x15);
+          G2EulerAngles_FromMatrix(&local_18,(instance->anim).segMatrices + ((u_int)bVar2 - 1),0x15);
         }
-        segNumber = (uint)bVar2;
+        segNumber = (u_int)bVar2;
         G2Anim_EnableController(&instance->anim,segNumber,8);
         G2EmulationSetInterpController_Vector
                   (instance,segNumber,8,(_G2SVector3_Type *)&local_18,(segNumber - 0x32) * 3,2);
@@ -66,9 +66,9 @@ void InitAlgorithmicWings(_Instance *instance)
           local_18.x = 0;
         }
         else {
-          G2EulerAngles_FromMatrix(&local_18,(instance->anim).segMatrices + ((uint)bVar2 - 1),0x15);
+          G2EulerAngles_FromMatrix(&local_18,(instance->anim).segMatrices + ((u_int)bVar2 - 1),0x15);
         }
-        segNumber = (uint)bVar2;
+        segNumber = (u_int)bVar2;
         G2Anim_EnableController(&instance->anim,segNumber,8);
         G2EmulationSetInterpController_Vector
                   (instance,segNumber,8,(_G2SVector3_Type *)&local_18,(segNumber - 0x3a) * 3,2);
@@ -113,12 +113,12 @@ void DeInitAlgorithmicWings(_Instance *instance)
   if ((AlgoControlFlag & 1U) != 0) {
     bVar1 = 0x33;
     do {
-      G2Anim_DisableController(&instance->anim,(uint)bVar1,8);
+      G2Anim_DisableController(&instance->anim,(u_int)bVar1,8);
       bVar1 = bVar1 + 1;
     } while (bVar1 < 0x36);
     bVar1 = 0x3b;
     do {
-      G2Anim_DisableController(&instance->anim,(uint)bVar1,8);
+      G2Anim_DisableController(&instance->anim,(u_int)bVar1,8);
       bVar1 = bVar1 + 1;
     } while (bVar1 < 0x3e);
     AlgoControlFlag = AlgoControlFlag & 0xfffffffe;
@@ -205,11 +205,11 @@ void AlgorithmicNeck(_Instance *Player,_Instance *Target)
 
 {
   short sVar1;
-  uint uVar2;
+  u_int uVar2;
   int iVar3;
   _G2Bool_Enum _Var4;
-  ulong uVar5;
-  uint uVar6;
+  u_long uVar5;
+  u_int uVar6;
   _Position local_60;
   _Position local_58;
   _Rotation local_50;
@@ -264,10 +264,10 @@ void AlgorithmicNeck(_Instance *Player,_Instance *Target)
     if (sVar1 < -0x200) {
       local_50.z = (Player->rotation).z + -0x200;
     }
-    if ((uint)local_50.x - 0x201 < 0x5ff) {
+    if ((u_int)local_50.x - 0x201 < 0x5ff) {
       local_50.x = 0x200;
     }
-    if ((uint)local_50.x - 0x801 < 0x56d) {
+    if ((u_int)local_50.x - 0x801 < 0x56d) {
       local_50.x = 0xd6e;
     }
     MATH3D_ZYXtoXYZ(&local_50);

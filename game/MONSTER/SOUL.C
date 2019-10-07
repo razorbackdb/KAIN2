@@ -106,13 +106,13 @@ void SOUL_Fade(_Instance *instance)
 
 {
   short sVar1;
-  ulong uVar2;
+  u_long uVar2;
   void *pvVar3;
   
   pvVar3 = instance->extraData;
   uVar2 = MON_GetTime(instance);
   if ((gameTrackerX.gameFlags & 0x80U) == 0) {
-    if (*(uint *)((int)pvVar3 + 0x10c) < uVar2) {
+    if (*(u_int *)((int)pvVar3 + 0x10c) < uVar2) {
       sVar1 = instance->fadeValue;
       if (sVar1 == 0) {
         MON_StartSpecialFade(instance,0x1000,100);
@@ -214,12 +214,12 @@ void SOUL_MoveToDest(_Instance *instance,long maxAccel,long time)
 void SOUL_Init(_Instance *instance)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   undefined4 local_10;
   undefined4 local_c;
-  uint *puVar2;
+  u_int *puVar2;
   
-  puVar2 = (uint *)instance->extraData;
+  puVar2 = (u_int *)instance->extraData;
   MON_DefaultInit(instance);
   *puVar2 = *puVar2 | 0x200880;
   instance->maxXVel = 600;
@@ -281,7 +281,7 @@ void SOUL_BirthEntry(_Instance *instance)
 
 {
   short sVar1;
-  ulong uVar2;
+  u_long uVar2;
   void *pvVar3;
   
   sVar1 = (instance->position).z;
@@ -320,7 +320,7 @@ void SOUL_BirthEntry(_Instance *instance)
 void SOUL_Birth(_Instance *instance)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   undefined4 local_10;
   void *pvVar2;
   undefined4 local_c;
@@ -329,7 +329,7 @@ void SOUL_Birth(_Instance *instance)
   pvVar2 = instance->extraData;
   SOUL_Physics(instance,gameTrackerX.timeMult);
   uVar1 = MON_GetTime(instance);
-  if (*(uint *)((int)pvVar2 + 0x114) < uVar1) {
+  if (*(u_int *)((int)pvVar2 + 0x114) < uVar1) {
     MON_SwitchState(instance,(MonsterState)CONCAT44(local_c,local_10));
   }
   SOUL_QueueHandler(instance);
@@ -512,7 +512,7 @@ void SOUL_SoulSuck(_Instance *instance)
   int Data;
   int iVar5;
   _Instance *p_Var6;
-  uint *puVar7;
+  u_int *puVar7;
   _Instance *Inst;
   _Instance *instance_00;
   undefined4 local_38;
@@ -524,7 +524,7 @@ void SOUL_SoulSuck(_Instance *instance)
   
   Inst = (_Instance *)0x0;
   instance_00 = (_Instance *)0x0;
-  puVar7 = (uint *)instance->extraData;
+  puVar7 = (u_int *)instance->extraData;
 LAB_8008da0c:
   while( true ) {
     message = DeMessageQueue((__MessageQueue *)(puVar7 + 2));
@@ -614,7 +614,7 @@ LAB_8008da0c:
           sVar2 = G2Anim_GetElapsedTime(&instance->anim);
           Data = ((int)sVar1 * 0x1e000) / 3000 - ((int)sVar2 * 0x1e000) / 3000;
           if (0 < Data) {
-            iVar5 = (uint)*(ushort *)(puVar7 + 0x48) - (uint)(ushort)(instance->position).x;
+            iVar5 = (u_int)*(ushort *)(puVar7 + 0x48) - (u_int)(ushort)(instance->position).x;
             local_30 = (undefined2)iVar5;
             local_2e = *(short *)((int)puVar7 + 0x122) - (instance->position).y;
             local_2c = *(short *)(puVar7 + 0x49) - (instance->position).z;
@@ -680,9 +680,9 @@ void SOUL_WanderEntry(_Instance *instance)
 {
   _Position *in;
   short r;
-  uint *puVar1;
+  u_int *puVar1;
   
-  puVar1 = (uint *)instance->extraData;
+  puVar1 = (u_int *)instance->extraData;
   instance->maxXVel = 10;
   instance->maxYVel = 10;
   instance->maxZVel = 0x11;
@@ -733,9 +733,9 @@ void SOUL_Wander(_Instance *instance)
   long lVar1;
   undefined4 local_10;
   undefined4 local_c;
-  uint *puVar2;
+  u_int *puVar2;
   
-  puVar2 = (uint *)instance->extraData;
+  puVar2 = (u_int *)instance->extraData;
   if ((*puVar2 & 0x40000) == 0) {
     if (instance->intro == (Intro *)0x0) {
       MON_GetRandomDestinationInWorld(instance,&instance->position,*(short *)((int)puVar2 + 0x136));
@@ -905,11 +905,11 @@ void SOUL_Flee(_Instance *instance)
 void SOUL_IdleEntry(_Instance *instance)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   int iVar2;
-  uint *puVar3;
+  u_int *puVar3;
   
-  puVar3 = (uint *)instance->extraData;
+  puVar3 = (u_int *)instance->extraData;
   instance->maxXVel = 0xf;
   instance->maxYVel = 0xf;
   instance->maxZVel = 0x11;
@@ -945,16 +945,16 @@ void SOUL_IdleEntry(_Instance *instance)
 void SOUL_Idle(_Instance *instance)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   int iVar2;
   int iVar3;
   int iVar4;
   undefined4 local_10;
   undefined4 local_c;
-  uint *puVar5;
+  u_int *puVar5;
   
   iVar2 = instance->xVel;
-  puVar5 = (uint *)instance->extraData;
+  puVar5 = (u_int *)instance->extraData;
   iVar4 = 3;
   if ((-4 < iVar2) && (iVar4 = -3, iVar2 < 4)) {
     iVar4 = -iVar2;

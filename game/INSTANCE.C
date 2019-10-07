@@ -23,7 +23,7 @@
 void INSTANCE_Deactivate(_Instance *instance)
 
 {
-  uint uVar1;
+  u_int uVar1;
   
   if ((gameTrackerX.streamFlags & 0x2000000U) == 0) {
     uVar1 = instance->flags2;
@@ -66,8 +66,8 @@ void INSTANCE_Deactivate(_Instance *instance)
 void INSTANCE_Reactivate(_Instance *instance)
 
 {
-  uint uVar1;
-  uint uVar2;
+  u_int uVar1;
+  u_int uVar2;
   
   uVar1 = instance->flags2;
   uVar2 = uVar1 & 0xfffffffe;
@@ -159,8 +159,8 @@ void INSTANCE_DeactivatedProcess(_Instance *instance,GameTracker *gameTracker)
 void INSTANCE_DeactivateFarInstances(GameTracker *gameTracker)
 
 {
-  ulong uVar1;
-  uint uVar2;
+  u_long uVar1;
+  u_int uVar2;
   int iVar3;
   int iVar4;
   int iVar5;
@@ -190,10 +190,10 @@ void INSTANCE_DeactivateFarInstances(GameTracker *gameTracker)
         (uVar1 = INSTANCE_Query(Inst,0x23), uVar1 == 0)) &&
        ((Inst->LinkParent == (_Instance *)0x0 && (Inst->matrix != (MATRIX *)0x0)))) {
       DAT_1f800000 = (Inst->position).x - theCamera.core.position.x;
-      iVar5 = (uint)(ushort)(Inst->position).y - (uint)(ushort)theCamera.core.position.y;
+      iVar5 = (u_int)(ushort)(Inst->position).y - (u_int)(ushort)theCamera.core.position.y;
       DAT_1f800002 = (undefined2)iVar5;
       iVar5 = iVar5 * 0x10000 >> 0x10;
-      iVar4 = (uint)(ushort)(Inst->position).z - (uint)(ushort)theCamera.core.position.z;
+      iVar4 = (u_int)(ushort)(Inst->position).z - (u_int)(ushort)theCamera.core.position.z;
       iVar3 = iVar4 * 0x10000 >> 0x10;
       DAT_1f800004 = (undefined2)iVar4;
       iVar5 = (int)DAT_1f800000 * (int)DAT_1f800000 + iVar5 * iVar5 + iVar3 * iVar3;
@@ -391,13 +391,13 @@ long INSTANCE_InstanceGroupNumber(_Instance *instance)
 
 {
   int iVar1;
-  uint uVar2;
-  uint uVar3;
+  u_int uVar2;
+  u_int uVar3;
   
   uVar2 = instance->object->oflags;
   uVar3 = 0;
   if ((uVar2 & 0x80) != 0) {
-    uVar3 = (uint)((instance->flags & 0x8000U) == 0);
+    uVar3 = (u_int)((instance->flags & 0x8000U) == 0);
   }
   if (((uVar2 & 0x20) != 0) && ((instance->flags & 0x2000U) == 0)) {
     uVar3 = uVar3 | 2;
@@ -586,7 +586,7 @@ void INSTANCE_CleanUpInstanceList(_InstanceList *list,long reset)
 {
   _Instance **pp_Var1;
   _Instance *instance;
-  uint uVar2;
+  u_int uVar2;
   _Instance *p_Var3;
   
   p_Var3 = list->first;
@@ -897,7 +897,7 @@ _Instance * INSTANCE_IntroduceInstance(Intro *intro,short streamUnitID)
   SavedIntroSpline *pSVar5;
   SavedIntroSmall *pSVar6;
   int Data;
-  uint uVar7;
+  u_int uVar7;
   Spline *pSVar8;
   RSpline *pRVar9;
   undefined4 uVar10;
@@ -992,8 +992,8 @@ _Instance * INSTANCE_IntroduceInstance(Intro *intro,short streamUnitID)
     SCRIPT_InstanceSplineSet(instance,frameNum,(SplineDef *)0x0,(SplineDef *)0x0,(SplineDef *)0x0);
     instance->flags = instance->flags ^ 0x1000000U | 0x100000;
   }
-  instance->lightGroup = *(uchar *)&(intro->rotation).pad;
-  instance->spectralLightGroup = *(uchar *)&intro->specturalLightGroup;
+  instance->lightGroup = *(u_char *)&(intro->rotation).pad;
+  instance->spectralLightGroup = *(u_char *)&intro->specturalLightGroup;
   INSTANCE_InsertInstanceGroup(gameTrackerX.instanceList,instance);
   OBTABLE_GetInstanceCollideFunc(instance);
   OBTABLE_GetInstanceProcessFunc(instance);
@@ -1012,12 +1012,12 @@ _Instance * INSTANCE_IntroduceInstance(Intro *intro,short streamUnitID)
       instance->flags2 = uVar7 | 0x30000000;
     }
   }
-  pMVar4 = SCRIPT_GetMultiSpline(instance,(ulong *)0x0,(ulong *)0x0);
+  pMVar4 = SCRIPT_GetMultiSpline(instance,(u_long *)0x0,(u_long *)0x0);
   if (pMVar4 == (MultiSpline *)0x0) {
     instance->flags = instance->flags & 0xfdffffffU | 0x100000;
   }
   else {
-    pMVar4 = SCRIPT_GetMultiSpline(instance,(ulong *)0x0,(ulong *)0x0);
+    pMVar4 = SCRIPT_GetMultiSpline(instance,(u_long *)0x0,(u_long *)0x0);
     pSVar5 = SAVE_GetIntroSpline(instance);
     if (pSVar5 != (SavedIntroSpline *)0x0) {
       SCRIPT_InstanceSplineSet
@@ -1098,7 +1098,7 @@ LAB_80032f08:
   INSTANCE_InitEffects(instance,object);
   pSVar6 = SAVE_GetSavedSmallIntro(instance);
   if (pSVar6 != (SavedIntroSmall *)0x0) {
-    Data = SetControlSaveDataData((uint)pSVar6->shiftedSaveSize * 4 + -4,pSVar6 + 1);
+    Data = SetControlSaveDataData((u_int)pSVar6->shiftedSaveSize * 4 + -4,pSVar6 + 1);
     INSTANCE_Post(instance,(int)&DAT_00100007,Data);
   }
   return instance;
@@ -1270,7 +1270,7 @@ void INSTANCE_ProcessFunctions(_InstanceList *instanceList)
   short sVar4;
   bool bVar5;
   short frameNum;
-  ulong uVar6;
+  u_long uVar6;
   MultiSpline *multi;
   long lVar7;
   long lVar8;
@@ -1278,7 +1278,7 @@ void INSTANCE_ProcessFunctions(_InstanceList *instanceList)
   Spline *pSVar10;
   int iVar11;
   _Instance *Inst;
-  uint hidden;
+  u_int hidden;
   int iVar12;
   ushort uVar13;
   
@@ -1318,7 +1318,7 @@ void INSTANCE_ProcessFunctions(_InstanceList *instanceList)
         (Inst->oldRotation).y = sVar3;
         (Inst->oldRotation).z = sVar4;
         if ((((hidden & 0x100000) == 0) &&
-            (multi = SCRIPT_GetMultiSpline(Inst,(ulong *)0x0,(ulong *)0x0),
+            (multi = SCRIPT_GetMultiSpline(Inst,(u_long *)0x0,(u_long *)0x0),
             multi != (MultiSpline *)0x0)) && (hidden = Inst->flags, (hidden & 0x2000000) != 0)) {
           uVar13 = 1;
           if ((hidden & 0x1000000) != 0) {
@@ -1328,7 +1328,7 @@ void INSTANCE_ProcessFunctions(_InstanceList *instanceList)
             Inst->flags = hidden | 0x400;
             frameNum = SplineMultiIsWhere(multi);
             if (frameNum != 0) {
-              if ((int)((uint)uVar13 << 0x10) < 1) {
+              if ((int)((u_int)uVar13 << 0x10) < 1) {
                 Inst->intro->flags = Inst->intro->flags & 0xfffff7ff;
               }
               else {
@@ -1396,7 +1396,7 @@ LAB_800334d8:
               if (uVar13 == 1) {
                 if (((lVar7 <= Inst->clipEnd) && (Inst->clipEnd <= lVar9)) ||
                    (lVar9 < Inst->clipBeg)) {
-                  if ((*(uint *)&multi->positional->numkeys & 0x6000000) == 0) {
+                  if ((*(u_int *)&multi->positional->numkeys & 0x6000000) == 0) {
                     frameNum = Inst->clipEnd;
 LAB_80033640:
                     lVar8 = 1;
@@ -1412,7 +1412,7 @@ LAB_80033644:
               else {
                 if (((Inst->clipBeg <= lVar7) && (lVar9 <= Inst->clipBeg)) ||
                    (Inst->clipEnd < lVar9)) {
-                  if ((*(uint *)&multi->positional->numkeys & 0x6000000) == 0) {
+                  if ((*(u_int *)&multi->positional->numkeys & 0x6000000) == 0) {
                     frameNum = Inst->clipBeg;
                     goto LAB_80033640;
                   }
@@ -1558,7 +1558,7 @@ LAB_80033a2c:
     if ((instance->object->oflags & 0x100U) != 0) {
       INSTANCE_BuildStaticShadow(instance);
     }
-    pMVar4 = SCRIPT_GetMultiSpline(instance,(ulong *)0x0,(ulong *)0x0);
+    pMVar4 = SCRIPT_GetMultiSpline(instance,(u_long *)0x0,(u_long *)0x0);
     if (pMVar4 == (MultiSpline *)0x0) {
       instance->flags = instance->flags | 0x100000;
     }
@@ -1861,7 +1861,7 @@ void INSTANCE_DefaultInit(_Instance *instance,Object *object,int modelNum)
 void INSTANCE_PlainDeath(_Instance *instance)
 
 {
-  uint uVar1;
+  u_int uVar1;
   _Instance *p_Var2;
   Object *pOVar3;
   
@@ -1927,10 +1927,10 @@ void INSTANCE_KillInstance(_Instance *instance)
 	/* end block 2 */
 	// End Line: 3611
 
-ulong INSTANCE_Query(_Instance *Inst,int Query)
+u_long INSTANCE_Query(_Instance *Inst,int Query)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   
   if (Inst->queryFunc == (_func_4 *)0x0) {
     uVar1 = 0;
@@ -2003,7 +2003,7 @@ void INSTANCE_Post(_Instance *Inst,int Message,int Data)
 void INSTANCE_Broadcast(_Instance *sender,long whatAmIMask,int Message,int Data)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   int iVar2;
   _Instance *Inst;
   int plane;
@@ -2338,7 +2338,7 @@ _Instance * INSTANCE_IntroduceSavedInstance(_SavedIntro *savedIntro,_StreamUnit 
   _ObjectTracker *objectTracker;
   _Instance *instance;
   Level *pLVar7;
-  uint uVar8;
+  u_int uVar8;
   Intro *pIVar9;
   Object *pOVar10;
   int Data;
@@ -2367,7 +2367,7 @@ _Instance * INSTANCE_IntroduceSavedInstance(_SavedIntro *savedIntro,_StreamUnit 
       lVar6 = MEMPACK_MemoryValidFunc((char *)object);
       if ((lVar6 == 0) ||
          ((savedIntro->attachedUniqueID != 0 &&
-          (instance_00 = INSTANCE_Find((uint)savedIntro->attachedUniqueID),
+          (instance_00 = INSTANCE_Find((u_int)savedIntro->attachedUniqueID),
           instance_00 == (_Instance *)0x0)))) {
         SAVE_BufferIntro((SavedBasic *)savedIntro);
         instance = (_Instance *)0x0;
@@ -2460,7 +2460,7 @@ _Instance * INSTANCE_IntroduceSavedInstance(_SavedIntro *savedIntro,_StreamUnit 
           if (instance->intro != (Intro *)0x0) {
             INSTANCE_ProcessIntro(instance);
           }
-          uVar8 = (uint)savedIntro->shiftedSaveSize * 4;
+          uVar8 = (u_int)savedIntro->shiftedSaveSize * 4;
           if (0x28 < uVar8) {
             Data = SetControlSaveDataData(uVar8 - 0x28,savedIntro + 1);
             INSTANCE_Post(instance,(int)&DAT_00100007,Data);
@@ -2545,8 +2545,8 @@ INSTANCE_IntroduceSavedInstanceWithIntro(_SavedIntroWithIntro *savedIntro,_Strea
   int Data;
   BSPTree *pBVar7;
   Object *pOVar8;
-  uint uVar9;
-  uint uVar10;
+  u_int uVar9;
+  u_int uVar10;
   Intro *name;
   _Instance *instance_00;
   Object *object;
@@ -2566,7 +2566,7 @@ INSTANCE_IntroduceSavedInstanceWithIntro(_SavedIntroWithIntro *savedIntro,_Strea
       lVar5 = MEMPACK_MemoryValidFunc((char *)object);
       if ((lVar5 == 0) ||
          ((savedIntro->attachedUniqueID != 0 &&
-          ((instance_00 = INSTANCE_Find((uint)savedIntro->attachedUniqueID),
+          ((instance_00 = INSTANCE_Find((u_int)savedIntro->attachedUniqueID),
            instance_00 == (_Instance *)0x0 || (instance_00->matrix == (MATRIX *)0x0)))))) {
         SAVE_BufferIntro((SavedBasic *)savedIntro);
         instance = (_Instance *)0x0;
@@ -2585,7 +2585,7 @@ INSTANCE_IntroduceSavedInstanceWithIntro(_SavedIntroWithIntro *savedIntro,_Strea
           instance->introNum = name->intronum;
           instance->birthStreamUnitID = streamUnit->StreamUnitID;
           instance->currentStreamUnitID = streamUnit->StreamUnitID;
-          instance->attachedID = (uint)savedIntro->attachedUniqueID;
+          instance->attachedID = (u_int)savedIntro->attachedUniqueID;
           LIGHT_GetAmbient((_ColorType *)&instance->light_color,instance);
           name->instance = instance;
           STREAM_GetLevelWithID(instance->birthStreamUnitID);
@@ -2640,7 +2640,7 @@ INSTANCE_IntroduceSavedInstanceWithIntro(_SavedIntroWithIntro *savedIntro,_Strea
           }
           instance->flags2 = uVar10;
           instance->flags = instance->flags & 0xfffbffff;
-          pMVar6 = SCRIPT_GetMultiSpline(instance,(ulong *)0x0,(ulong *)0x0);
+          pMVar6 = SCRIPT_GetMultiSpline(instance,(u_long *)0x0,(u_long *)0x0);
           if (pMVar6 == (MultiSpline *)0x0) {
             instance->flags = instance->flags & 0xfdffffffU | 0x100000;
           }
@@ -2648,7 +2648,7 @@ INSTANCE_IntroduceSavedInstanceWithIntro(_SavedIntroWithIntro *savedIntro,_Strea
           if (instance->intro != (Intro *)0x0) {
             INSTANCE_ProcessIntro(instance);
           }
-          uVar10 = (uint)savedIntro->shiftedSaveSize * 4;
+          uVar10 = (u_int)savedIntro->shiftedSaveSize * 4;
           if (0x20 < uVar10) {
             Data = SetControlSaveDataData(uVar10 - 0x20,savedIntro + 1);
             INSTANCE_Post(instance,(int)&DAT_00100007,Data);
@@ -2716,12 +2716,12 @@ void INSTANCE_SpatialRelationships(_InstanceList *instanceList)
 
 {
   undefined4 *puVar1;
-  ulong uVar2;
+  u_long uVar2;
   int iVar3;
   MATRIX *pMVar4;
   _Instance *Inst;
   _Instance *Inst_00;
-  uint uVar5;
+  u_int uVar5;
   MATRIX MStack80;
   evCollideInstanceStatsData eStack48;
   
@@ -2789,7 +2789,7 @@ int INSTANCE_SetStatsData
 
 {
   bool bVar1;
-  uint uVar2;
+  u_int uVar2;
   long lVar3;
   
   uVar2 = MATH3D_LengthXYZ((int)(instance->position).x - checkPoint->x,
@@ -2807,7 +2807,7 @@ int INSTANCE_SetStatsData
     lVar3 = MATH3D_LengthXY((int)DAT_1f800000,(int)DAT_1f800002);
     data->xyDistance = lVar3;
   }
-  return (uint)bVar1;
+  return (u_int)bVar1;
 }
 
 
@@ -3099,7 +3099,7 @@ int INSTANCE_Linked(_Instance *instance1,_Instance *instance2)
   while (instance2->LinkParent != (_Instance *)0x0) {
     instance2 = instance2->LinkParent;
   }
-  return (uint)(instance1 == instance2);
+  return (u_int)(instance1 == instance2);
 }
 
 
@@ -3171,7 +3171,7 @@ int INSTANCE_GetFadeValue(_Instance *instance)
 	/* end block 2 */
 	// End Line: 6317
 
-ulong INSTANCE_DefaultAnimCallback
+u_long INSTANCE_DefaultAnimCallback
                 (_G2Anim_Type *anim,int sectionID,_G2AnimCallbackMsg_Enum message,long messageDataA,
                 long messageDataB,_Instance *instance)
 

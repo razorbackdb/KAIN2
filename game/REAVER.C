@@ -97,7 +97,7 @@ void SoulReaverCollide(_Instance *instance,GameTracker *gameTracker)
   _Instance *lastHit;
   
   collideInfo = (_CollideInfo *)instance->collideInfo;
-  if ((((*(uint *)&collideInfo->flags & 0xffff0000) == 0x1010000) &&
+  if ((((*(u_int *)&collideInfo->flags & 0xffff0000) == 0x1010000) &&
       (*(char *)((int)collideInfo->prim0 + 4) == '\t')) &&
      (*(char *)((int)collideInfo->prim1 + 4) == '\b')) {
     lastHit = (_Instance *)collideInfo->inst1;
@@ -118,7 +118,7 @@ void SoulReaverCollide(_Instance *instance,GameTracker *gameTracker)
       COLLIDE_SegmentCollisionOff(instance,0);
       Data = SetMonsterHitData(instance->LinkParent,lastHit,Power,0,0);
       INSTANCE_Post(gameTrackerX.playerInstance,0x100001f,Data);
-      Power = SetFXHitData(instance,(uint)(byte)collideInfo->segment,0x32,Power);
+      Power = SetFXHitData(instance,(u_int)(byte)collideInfo->segment,0x32,Power);
       INSTANCE_Post(lastHit,0x400000,Power);
     }
   }
@@ -126,7 +126,7 @@ void SoulReaverCollide(_Instance *instance,GameTracker *gameTracker)
     COLLIDE_SetBSPTreeFlag(collideInfo,0x800);
   }
   else {
-    *(uint *)((int)collideInfo->inst1 + 0x14) = *(uint *)((int)collideInfo->inst1 + 0x14) | 4;
+    *(u_int *)((int)collideInfo->inst1 + 0x14) = *(u_int *)((int)collideInfo->inst1 + 0x14) | 4;
   }
   return;
 }
@@ -210,7 +210,7 @@ void CollideReaverProjectile(_Instance *instance,GameTracker *gameTracker)
   Inst = (_Instance *)collideInfo->inst1;
   iVar2 = *(int *)((int)instance->extraData + 4) + -2;
   Power = 0;
-  if ((*(uint *)&collideInfo->flags & 0xffff0000) == 0x1010000) {
+  if ((*(u_int *)&collideInfo->flags & 0xffff0000) == 0x1010000) {
     if (0 < iVar2) {
       if (iVar2 < 3) {
         Power = 0x1000;
@@ -229,7 +229,7 @@ void CollideReaverProjectile(_Instance *instance,GameTracker *gameTracker)
       Power = SetMonsterHitData(instance,(_Instance *)0x0,Power,0,0);
       INSTANCE_Post(Inst,0x1000021,Power);
       if (iVar2 == 2) {
-        Power = SetFXHitData(instance,(uint)(byte)collideInfo->segment,0x20,0x100);
+        Power = SetFXHitData(instance,(u_int)(byte)collideInfo->segment,0x20,0x100);
         INSTANCE_Post(Inst,0x400000,Power);
         INSTANCE_Post(Inst,0x80001,0);
       }
@@ -239,7 +239,7 @@ void CollideReaverProjectile(_Instance *instance,GameTracker *gameTracker)
     COLLIDE_SetBSPTreeFlag(collideInfo,0x800);
   }
   else {
-    *(uint *)((int)collideInfo->inst1 + 0x14) = *(uint *)((int)collideInfo->inst1 + 0x14) | 4;
+    *(u_int *)((int)collideInfo->inst1 + 0x14) = *(u_int *)((int)collideInfo->inst1 + 0x14) | 4;
   }
   CollidePhysicalObject(instance,gameTracker);
   return;
@@ -278,10 +278,10 @@ void CollideReaverProjectile(_Instance *instance,GameTracker *gameTracker)
 	/* end block 3 */
 	// End Line: 792
 
-ulong SoulReaverQuery(_Instance *instance,ulong query)
+u_long SoulReaverQuery(_Instance *instance,u_long query)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   
   if (query == 4) {
     return 0x1000;
@@ -468,7 +468,7 @@ void StopSoulReaverCharge(__ReaverData *data,_Instance *instance)
 	/* end block 2 */
 	// End Line: 1061
 
-void SoulReaverPost(_Instance *instance,ulong message,ulong data)
+void SoulReaverPost(_Instance *instance,u_long message,u_long data)
 
 {
   int Data;
@@ -616,10 +616,10 @@ void SoulReaverPost(_Instance *instance,ulong message,ulong data)
 	/* end block 4 */
 	// End Line: 1354
 
-ulong REAVER_GetGlowColor(_Instance *instance)
+u_long REAVER_GetGlowColor(_Instance *instance)
 
 {
-  return *(ulong *)((int)instance->data + (int)*(short *)((int)instance->extraData + 4) * 4 + -4);
+  return *(u_long *)((int)instance->data + (int)*(short *)((int)instance->extraData + 4) * 4 + -4);
 }
 
 

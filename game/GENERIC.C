@@ -61,7 +61,7 @@ void GenericInit(_Instance *instance,GameTracker *gameTracker)
     G2EmulationInstanceSetTotalSections(instance,1);
     G2EmulationInstanceSetStartAndEndSegment
               (instance,0,0,
-               (short)(((uint)*(ushort *)&pOVar3->modelList[instance->currentModel]->numSegments - 1
+               (short)(((u_int)*(ushort *)&pOVar3->modelList[instance->currentModel]->numSegments - 1
                        ) * 0x10000 >> 0x10));
     G2EmulationInstanceSetAnimation(instance,0,0,0,0);
     G2EmulationInstanceSetMode(instance,0,0);
@@ -165,14 +165,14 @@ void GenericProcess(_Instance *instance,GameTracker *gameTracker)
 	/* end block 2 */
 	// End Line: 302
 
-ulong GenericQuery(_Instance *instance,ulong query)
+u_long GenericQuery(_Instance *instance,u_long query)
 
 {
   short sVar1;
   short sVar2;
   short sVar3;
   long *plVar4;
-  uint uVar5;
+  u_int uVar5;
   MATRIX *pMVar6;
   long lVar7;
   
@@ -252,7 +252,7 @@ LAB_8003eefc:
   default:
     return 0;
   }
-  return (ulong)pMVar6;
+  return (u_long)pMVar6;
 }
 
 
@@ -296,7 +296,7 @@ LAB_8003eefc:
 	/* end block 2 */
 	// End Line: 446
 
-void GenericMessage(_Instance *instance,ulong message,ulong data)
+void GenericMessage(_Instance *instance,u_long message,u_long data)
 
 {
   int local_18;

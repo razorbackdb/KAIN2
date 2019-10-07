@@ -95,21 +95,21 @@ void G2EulerAngles_FromMatrix(_G2EulerAngles_Type *euler,_G2Matrix_Type *matrix,
 
 {
   short sVar1;
-  uint uVar2;
+  u_int uVar2;
   int iVar3;
   int iVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
-  uint uVar9;
+  u_int uVar5;
+  u_int uVar6;
+  u_int uVar7;
+  u_int uVar8;
+  u_int uVar9;
   short local_res8;
   
-  uVar6 = (uint)order >> 2 & 1;
-  uVar8 = (uint)*(byte *)((int)&PTR_LAB_800d09cc + ((uint)order >> 3 & 3));
-  uVar9 = (uint)(byte)(&DAT_800d09d4)[uVar8 + uVar6];
-  uVar2 = (uint)(byte)(&DAT_800d09d4)[uVar8 - (uVar6 - 1)];
-  if (((uint)order >> 1 & 1) == 1) {
+  uVar6 = (u_int)order >> 2 & 1;
+  uVar8 = (u_int)*(byte *)((int)&PTR_LAB_800d09cc + ((u_int)order >> 3 & 3));
+  uVar9 = (u_int)(byte)(&DAT_800d09d4)[uVar8 + uVar6];
+  uVar2 = (u_int)(byte)(&DAT_800d09d4)[uVar8 - (uVar6 - 1)];
+  if (((u_int)order >> 1 & 1) == 1) {
     iVar3 = (int)matrix->rotScale[uVar8 * 3 + uVar9];
     iVar4 = (int)matrix->rotScale[uVar8 * 3 + uVar2];
     uVar5 = MATH3D_FastSqrt(iVar3 * iVar3 + iVar4 * iVar4 >> 0xc);

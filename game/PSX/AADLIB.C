@@ -16,10 +16,10 @@
 	/* end block 2 */
 	// End Line: 80
 
-ulong aadGetMemorySize(AadInitAttr *attributes)
+u_long aadGetMemorySize(AadInitAttr *attributes)
 
 {
-  return (ulong)(&DAT_00001c88 + attributes->numSlots * 0x5d0);
+  return (u_long)(&DAT_00001c88 + attributes->numSlots * 0x5d0);
 }
 
 
@@ -45,26 +45,26 @@ ulong aadGetMemorySize(AadInitAttr *attributes)
 	/* end block 2 */
 	// End Line: 91
 
-int aadInit(AadInitAttr *attributes,uchar *memoryPtr)
+int aadInit(AadInitAttr *attributes,u_char *memoryPtr)
 
 {
   byte bVar1;
   AadMemoryStruct *pAVar2;
   AadMemoryStruct *pAVar3;
-  ulong __n;
+  u_long __n;
   undefined *puVar4;
   _func_36 *p_Var5;
   _func_36 *p_Var6;
   _func_36 *p_Var7;
   int iVar8;
-  uint uVar9;
+  u_int uVar9;
   int iVar10;
   
   aadGp = GetGp();
   EnterCriticalSection();
   __n = aadGetMemorySize(attributes);
   aadMem = (AadMemoryStruct *)memoryPtr;
-  if (memoryPtr == (uchar *)0x0) {
+  if (memoryPtr == (u_char *)0x0) {
     puVar4 = &DAT_00001009;
   }
   else {
@@ -130,19 +130,19 @@ int aadInit(AadInitAttr *attributes,uchar *memoryPtr)
         (pAVar2->sfxSlot).sfxVolume = '\x7f';
         pAVar2 = aadMem;
         iVar10 = 0;
-        aadMem->numSlots = (uint)*(byte *)&attributes->numSlots;
+        aadMem->numSlots = (u_int)*(byte *)&attributes->numSlots;
         bVar1 = *(byte *)&attributes->updateMode;
         pAVar2->sfxMasterVol = 0x7f;
         pAVar2->musicMasterVol = 0x7f;
         pAVar2->endSequenceCallback = (_func_49 *)0x0;
         pAVar2->controller11Callback = (_func_48 *)0x0;
-        pAVar2->updateMode = (uint)bVar1;
+        pAVar2->updateMode = (u_int)bVar1;
         do {
           iVar8 = (int)&aadMem->updateCounter + iVar10;
           *(undefined *)(iVar8 + 0x1e4) = 0xff;
           pAVar2 = aadMem;
           *(int *)(iVar8 + 0x1dc) = 1 << (uVar9 & 0x1f);
-          (&pAVar2->synthVoice[0].voiceNum)[iVar10] = (uchar)uVar9;
+          (&pAVar2->synthVoice[0].voiceNum)[iVar10] = (u_char)uVar9;
           pAVar2 = aadMem;
           uVar9 = uVar9 + 1;
           iVar10 = iVar10 + 0x1c;
@@ -152,7 +152,7 @@ int aadInit(AadInitAttr *attributes,uchar *memoryPtr)
         pAVar2->voiceKeyOnRequest = 0;
         pAVar2->voiceReverbRequest = 0;
         if (iVar10 < 4) {
-          aadInstallUpdateFunc(aadSlotUpdateWrapper,(uint)(&aadHblanksPerUpdate)[iVar10]);
+          aadInstallUpdateFunc(aadSlotUpdateWrapper,(u_int)(&aadHblanksPerUpdate)[iVar10]);
         }
         aadMem->flags = 0;
         ExitCriticalSection();
@@ -377,9 +377,9 @@ void aadStartMusicMasterVolFade
 void aadShutdown(void)
 
 {
-  uint uVar1;
+  u_int uVar1;
   undefined4 uVar2;
-  uint in_a2;
+  u_int in_a2;
   
   EnterCriticalSection();
   StopRCnt(0xf2000001);
@@ -479,14 +479,14 @@ void aadSlotUpdate(void)
   bool bVar4;
   AadSfxSlot *pAVar5;
   AadMemoryStruct *pAVar6;
-  ulong uVar7;
+  u_long uVar7;
   int track;
   int iVar8;
-  uchar uVar9;
+  u_char uVar9;
   _func_12 *p_Var10;
-  uint uVar11;
+  u_int uVar11;
   AadSeqEvent *event;
-  uint uVar12;
+  u_int uVar12;
   int iVar13;
   _AadSequenceSlot *p_Var14;
   _AadSequenceSlot *slot;
@@ -521,7 +521,7 @@ LAB_800522e8:
           slot = *(_AadSequenceSlot **)((int)aadMem->sequenceSlots + track);
           if (((slot->status & 1) != 0) && ((slot->slotFlags & 1) == 0)) {
             (slot->tempo).currentTick =
-                 (slot->tempo).currentTick + (uint)(slot->tempo).ticksPerUpdate;
+                 (slot->tempo).currentTick + (u_int)(slot->tempo).ticksPerUpdate;
             uVar11 = (slot->tempo).tickTimeFixed;
             uVar12 = (slot->tempo).currentError + (slot->tempo).errorPerUpdate;
             (slot->tempo).currentError = uVar12;
@@ -551,7 +551,7 @@ LAB_800522e8:
               uVar9 = p_Var15->eventsInQueue[0];
               while (uVar9 != '\0') {
                 event = (AadSeqEvent *)
-                        ((int)&slot->eventQueue[(uint)p_Var15->eventOut[0] * 0x10].deltaTime + iVar8
+                        ((int)&slot->eventQueue[(u_int)p_Var15->eventOut[0] * 0x10].deltaTime + iVar8
                         );
                 uVar12 = event->deltaTime + p_Var14->lastEventExecutedTime[0];
                 if ((slot->tempo).currentTick < uVar12) break;
@@ -664,7 +664,7 @@ LAB_800522e8:
 	/* end block 2 */
 	// End Line: 1402
 
-ulong aadCreateFourCharID(char a,char b,char c,char d)
+u_long aadCreateFourCharID(char a,char b,char c,char d)
 
 {
   return CONCAT13(a,CONCAT12(b,CONCAT11(c,d)));
@@ -761,13 +761,13 @@ int aadLoadDynamicSoundBank
 void aadLoadDynamicSoundBankReturn(void *loadedDataPtr,void *data,void *data2)
 
 {
-  ulong *puVar1;
+  u_long *puVar1;
   AadMemoryStruct *pAVar2;
-  uint uVar3;
-  uint dynamicBankIndex;
+  u_int uVar3;
+  u_int dynamicBankIndex;
   
-  dynamicBankIndex = *(uint *)((int)data + 0x40);
-  uVar3 = aadOpenDynamicSoundBank((uchar *)loadedDataPtr,dynamicBankIndex);
+  dynamicBankIndex = *(u_int *)((int)data + 0x40);
+  uVar3 = aadOpenDynamicSoundBank((u_char *)loadedDataPtr,dynamicBankIndex);
   pAVar2 = aadMem;
   if (uVar3 == 0) {
     (*aadMem->nonBlockBufferedLoadProc)((int)data + 0x20,aadLoadDynamicSoundBankReturn2,data,0);
@@ -823,22 +823,22 @@ void aadLoadDynamicSoundBankReturn2
 
 {
   AadMemoryStruct *pAVar1;
-  ulong uVar2;
+  u_long uVar2;
   int iVar3;
-  ulong *puVar4;
-  uint uVar5;
+  u_long *puVar4;
+  u_int uVar5;
   code *pcVar6;
   undefined4 *puVar7;
-  uint uVar8;
+  u_int uVar8;
   int iVar9;
   
-  uVar5 = (uint)(ushort)status << 0x10;
+  uVar5 = (u_int)(ushort)status << 0x10;
   iVar9 = (int)uVar5 >> 0x10;
-  uVar8 = *(uint *)((int)data1 + 0x40);
+  uVar8 = *(u_int *)((int)data1 + 0x40);
   if (iVar9 < 0x100) {
-    if ((*(uint *)((int)data1 + 0x54) & 1) == 0) {
+    if ((*(u_int *)((int)data1 + 0x54) & 1) == 0) {
       puVar7 = (undefined4 *)((int)loadedDataPtr + 4);
-      *(uint *)((int)data1 + 0x54) = *(uint *)((int)data1 + 0x54) | 1;
+      *(u_int *)((int)data1 + 0x54) = *(u_int *)((int)data1 + 0x54) | 1;
       loadedDataPtr = (void *)((int)loadedDataPtr + 8);
       loadedDataSize = loadedDataSize - 8;
       *(undefined4 *)((int)data1 + 0x4c) = *puVar7;
@@ -849,10 +849,10 @@ void aadLoadDynamicSoundBankReturn2
         uVar2 = aadGetReverbSize();
         *(int *)((int)data1 + 0x50) = (0x80000 - *(int *)((int)data1 + 0x4c)) - uVar2;
       }
-      aadMem->dynamicSoundBankSramData[uVar8] = *(ulong *)((int)data1 + 0x50);
+      aadMem->dynamicSoundBankSramData[uVar8] = *(u_long *)((int)data1 + 0x50);
     }
     aadWaitForSramTransferComplete();
-    SpuSetTransferStartAddr(*(uint *)((int)data1 + 0x50));
+    SpuSetTransferStartAddr(*(u_int *)((int)data1 + 0x50));
     SpuWrite((word *)loadedDataPtr,loadedDataSize,uVar5);
     *(int *)((int)data1 + 0x50) = *(int *)((int)data1 + 0x50) + loadedDataSize;
     if (status != 1) {
@@ -877,10 +877,10 @@ void aadLoadDynamicSoundBankReturn2
     iVar9 = 0;
   }
   else {
-    if ((*(uint *)((int)data1 + 0x54) & 2) != 0) {
+    if ((*(u_int *)((int)data1 + 0x54) & 2) != 0) {
       return;
     }
-    *(uint *)((int)data1 + 0x54) = *(uint *)((int)data1 + 0x54) | 2;
+    *(u_int *)((int)data1 + 0x54) = *(u_int *)((int)data1 + 0x54) | 2;
     pAVar1 = aadMem;
     puVar4 = &aadMem->updateCounter;
     (puVar4 + uVar8)[0x140] = uVar5 >> 0x18 | 0x80;
@@ -913,7 +913,7 @@ int aadFreeDynamicSoundBank(int dynamicBankIndex)
 {
   AadMemoryStruct *pAVar1;
   undefined *puVar2;
-  ulong *puVar3;
+  u_long *puVar3;
   
   pAVar1 = aadMem;
   if (dynamicBankIndex < 2) {
@@ -959,13 +959,13 @@ int aadFreeDynamicSoundBank(int dynamicBankIndex)
 	/* end block 2 */
 	// End Line: 2075
 
-int aadOpenDynamicSoundBank(uchar *soundBank,int dynamicBankIndex)
+int aadOpenDynamicSoundBank(u_char *soundBank,int dynamicBankIndex)
 
 {
   undefined *puVar1;
-  ulong uVar2;
-  uchar *puVar3;
-  ulong *puVar4;
+  u_long uVar2;
+  u_char *puVar3;
+  u_long *puVar4;
   int iVar5;
   int iVar6;
   int *piVar7;
@@ -978,7 +978,7 @@ int aadOpenDynamicSoundBank(uchar *soundBank,int dynamicBankIndex)
   if (dynamicBankIndex < 2) {
     uVar2 = aadCreateFourCharID('a','S','N','D');
     puVar1 = &DAT_00001001;
-    if ((*(ulong *)soundBank == uVar2) && (puVar1 = &DAT_00001002, *(int *)(soundBank + 8) == 0x106)
+    if ((*(u_long *)soundBank == uVar2) && (puVar1 = &DAT_00001002, *(int *)(soundBank + 8) == 0x106)
        ) {
       iVar12 = 0;
       iVar5 = *(int *)(soundBank + 0xc);
@@ -988,13 +988,13 @@ int aadOpenDynamicSoundBank(uchar *soundBank,int dynamicBankIndex)
       iVar11 = *(int *)(soundBank + 0x1c);
       puVar4 = &aadMem->updateCounter + dynamicBankIndex;
       puVar3 = soundBank + *(int *)(soundBank + 4);
-      *(uchar **)(puVar4 + 0x136) = puVar3;
+      *(u_char **)(puVar4 + 0x136) = puVar3;
       puVar3 = puVar3 + iVar5 * 8;
-      *(uchar **)(puVar4 + 0x138) = puVar3;
+      *(u_char **)(puVar4 + 0x138) = puVar3;
       piVar8 = (int *)(puVar3 + iVar9 * 0x10 + iVar10 * 4);
       piVar7 = piVar8 + iVar6;
-      *(uchar **)(puVar4 + 0x134) = soundBank;
-      *(uchar **)(puVar4 + 0x13a) = puVar3 + iVar9 * 0x10;
+      *(u_char **)(puVar4 + 0x134) = soundBank;
+      *(u_char **)(puVar4 + 0x13a) = puVar3 + iVar9 * 0x10;
       *(int **)(puVar4 + 0x13c) = piVar8;
       *(int **)(puVar4 + 0x13e) = piVar7;
       if (0 < *(int *)(soundBank + 0x18)) {
@@ -1039,7 +1039,7 @@ int aadLoadDynamicSfx(char *fileName,long directoryID,long flags)
   int *piVar1;
   AadMemoryStruct *pAVar2;
   int iVar3;
-  uint uVar4;
+  u_int uVar4;
   AadDynamicLoadRequest *pAVar5;
   
   pAVar2 = aadMem;
@@ -1245,7 +1245,7 @@ void aadRelocateMusicMemoryEnd(void *oldAddress,int offset)
                 *(int *)(p_Var9 + iVar3 + 1000) = *(int *)(p_Var9 + iVar3 + 1000) + offset;
                 iVar5 = iVar5 + 1;
                 iVar3 = iVar3 + 0x40;
-              } while (iVar5 < (int)(uint)(byte)(p_Var9 + iVar8)[0x4e8]);
+              } while (iVar5 < (int)(u_int)(byte)(p_Var9 + iVar8)[0x4e8]);
             }
           }
           iVar10 = iVar10 + 4;
@@ -1444,7 +1444,7 @@ void aadProcessLoadQueue(void)
 
 {
   int *piVar1;
-  ulong *puVar2;
+  u_long *puVar2;
   AadMemoryStruct *pAVar3;
   char *fmt;
   long lVar4;
@@ -1528,16 +1528,16 @@ void aadProcessLoadQueue(void)
           p_Var7 = pAVar3->firstDynSfxFile;
           if (p_Var7 != (_AadDynSfxFileHdr *)0x0) {
 LAB_80053310:
-            if ((uint)p_Var7->handle != pAVar8->handle) goto LAB_800533c8;
+            if ((u_int)p_Var7->handle != pAVar8->handle) goto LAB_800533c8;
             id = 0;
             p_Var6 = p_Var7 + 1;
             if (p_Var7->numSfxInFile != 0) {
               do {
                 puVar2 = &p_Var6->snfID;
                 p_Var6 = (_AadDynSfxFileHdr *)((int)&p_Var6->snfID + 2);
-                aadFreeSingleDynSfx((uint)*(ushort *)puVar2);
+                aadFreeSingleDynSfx((u_int)*(ushort *)puVar2);
                 id = id + 1;
-              } while (id < (int)(uint)p_Var7->numSfxInFile);
+              } while (id < (int)(u_int)p_Var7->numSfxInFile);
             }
             if (p_Var7->prevDynSfxFile == (_AadDynSfxFileHdr *)0x0) {
               aadMem->firstDynSfxFile = p_Var7->nextDynSfxFile;
@@ -1645,13 +1645,13 @@ void aadLoadDynamicSfxReturn(void *loadedDataPtr,void *data,void *data2)
 
 {
   AadMemoryStruct *pAVar1;
-  ulong uVar2;
+  u_long uVar2;
   _AadDynSfxFileHdr *p_Var3;
   _AadDynSfxFileHdr *p_Var4;
-  ulong *puVar5;
+  u_long *puVar5;
   
-  puVar5 = *(ulong **)((int)data + 0x78);
-  if ((puVar5 == (ulong *)0x0) || (puVar5 != (ulong *)loadedDataPtr)) {
+  puVar5 = *(u_long **)((int)data + 0x78);
+  if ((puVar5 == (u_long *)0x0) || (puVar5 != (u_long *)loadedDataPtr)) {
     aadLoadDynamicSfxAbort((AadDynamicSfxLoadInfo *)data,(int)&DAT_0000100e);
   }
   else {
@@ -1675,7 +1675,7 @@ void aadLoadDynamicSfxReturn(void *loadedDataPtr,void *data,void *data2)
       }
       *(undefined4 *)(*(int *)((int)data + 0x78) + 0x10) = 0;
       *(undefined4 *)((int)data + 0x60) = 0;
-      *(uint *)((int)data + 0x5c) = *(uint *)((int)data + 0x5c) | 2;
+      *(u_int *)((int)data + 0x5c) = *(u_int *)((int)data + 0x5c) | 2;
       if (*(int *)((int)data + 0x54) != 0) {
         LOAD_SetSearchDirectory(*(int *)((int)data + 0x54));
       }
@@ -1717,21 +1717,21 @@ void aadLoadDynamicSfxReturn(void *loadedDataPtr,void *data,void *data2)
 	/* end block 2 */
 	// End Line: 3482
 
-int aadWaveMalloc(ushort waveID,ulong waveSize)
+int aadWaveMalloc(ushort waveID,u_long waveSize)
 
 {
   byte bVar1;
   ushort uVar2;
-  uint uVar3;
+  u_int uVar3;
   ushort uVar4;
-  uint uVar5;
+  u_int uVar5;
   AadNewSramBlockDesc *pAVar6;
   int iVar7;
-  uchar uVar8;
-  uint uVar9;
+  u_char uVar8;
+  u_int uVar9;
   AadNewSramBlockDesc *pAVar10;
   AadNewSramBlockDesc *pAVar11;
-  uint uVar12;
+  u_int uVar12;
   
   pAVar10 = (AadNewSramBlockDesc *)0x0;
   uVar12 = 0xff;
@@ -1743,9 +1743,9 @@ int aadWaveMalloc(ushort waveID,ulong waveSize)
     iVar7 = 0x7f;
     do {
       if (iVar7 == -1) break;
-      if ((((pAVar6->waveID & 0x4000) == 0) && (uVar5 + 6 <= (uint)pAVar6->size)) &&
+      if ((((pAVar6->waveID & 0x4000) == 0) && (uVar5 + 6 <= (u_int)pAVar6->size)) &&
          ((pAVar10 == (AadNewSramBlockDesc *)0x0 ||
-          (((uint)pAVar6->size - 6) - uVar5 < ((uint)pAVar10->size - 6) - uVar5)))) {
+          (((u_int)pAVar6->size - 6) - uVar5 < ((u_int)pAVar10->size - 6) - uVar5)))) {
         pAVar10 = pAVar6;
         uVar12 = uVar9;
       }
@@ -1753,7 +1753,7 @@ int aadWaveMalloc(ushort waveID,ulong waveSize)
         pAVar6 = (AadNewSramBlockDesc *)0x0;
       }
       else {
-        uVar3 = (uint)pAVar6->nextIndex;
+        uVar3 = (u_int)pAVar6->nextIndex;
         pAVar6 = (AadNewSramBlockDesc *)0x0;
         if (uVar3 != uVar9) {
           pAVar6 = pAVar11 + uVar3;
@@ -1779,13 +1779,13 @@ int aadWaveMalloc(ushort waveID,ulong waveSize)
       }
     }
     uVar5 = aadMem->nextSramDescIndex;
-    uVar8 = (uchar)uVar5;
+    uVar8 = (u_char)uVar5;
     pAVar6 = pAVar11 + uVar5;
     uVar2 = pAVar6->waveID;
     uVar9 = uVar5;
     while ((uVar2 & 0x8000) != 0) {
       uVar9 = uVar9 + 1 & 0x7f;
-      uVar8 = (uchar)uVar9;
+      uVar8 = (u_char)uVar9;
       if (uVar9 == uVar5) {
         return 0xff;
       }
@@ -1796,11 +1796,11 @@ int aadWaveMalloc(ushort waveID,ulong waveSize)
     pAVar6->waveID = 0x8000;
     pAVar6->address = pAVar10->address + uVar4;
     uVar2 = pAVar10->size;
-    pAVar6->prevIndex = (uchar)uVar12;
+    pAVar6->prevIndex = (u_char)uVar12;
     pAVar6->size = uVar2 - uVar4;
     bVar1 = pAVar10->nextIndex;
     pAVar6->nextIndex = bVar1;
-    if (-1 < (int)((uint)bVar1 << 0x18)) {
+    if (-1 < (int)((u_int)bVar1 << 0x18)) {
       pAVar11[pAVar6->nextIndex].prevIndex = uVar8;
     }
     pAVar10->size = uVar4;
@@ -1839,13 +1839,13 @@ int aadWaveMalloc(ushort waveID,ulong waveSize)
 	/* end block 4 */
 	// End Line: 3729
 
-ulong aadGetSramBlockAddr(int handle)
+u_long aadGetSramBlockAddr(int handle)
 
 {
   if (0x7f < handle) {
     return 0;
   }
-  return (uint)aadMem->sramDescriptorTbl[handle].address << 3;
+  return (u_int)aadMem->sramDescriptorTbl[handle].address << 3;
 }
 
 
@@ -1915,8 +1915,8 @@ void aadWaveFree(int handle)
       bVar1 = pAVar3->nextIndex;
       pAVar3->waveID = 0;
       pAVar2->nextIndex = bVar1;
-      if (-1 < (int)((uint)bVar1 << 0x18)) {
-        pAVar4[pAVar2->nextIndex].prevIndex = (uchar)handle;
+      if (-1 < (int)((u_int)bVar1 << 0x18)) {
+        pAVar4[pAVar2->nextIndex].prevIndex = (u_char)handle;
       }
     }
     if ((-1 < (char)pAVar2->prevIndex) &&
@@ -1925,7 +1925,7 @@ void aadWaveFree(int handle)
       bVar1 = pAVar2->nextIndex;
       pAVar2->waveID = 0;
       pAVar3->nextIndex = bVar1;
-      if (-1 < (int)((uint)bVar1 << 0x18)) {
+      if (-1 < (int)((u_int)bVar1 << 0x18)) {
         pAVar4[pAVar2->nextIndex].prevIndex = pAVar2->prevIndex;
       }
     }
@@ -1988,7 +1988,7 @@ void aadFreeSingleDynSfx(int sfxID)
         *psVar5 = sVar2 + -1;
         if ((short)(sVar2 + -1) == 0) {
           pAVar3->sfxWaveMasterList[pAVar6->waveID] = -1;
-          aadWaveFree((uint)*(byte *)((int)psVar5 + 3));
+          aadWaveFree((u_int)*(byte *)((int)psVar5 + 3));
         }
       }
     }
@@ -2038,12 +2038,12 @@ void aadFreeSingleDynSfx(int sfxID)
 void setSramFullAlarm(void)
 
 {
-  uint uVar1;
+  u_int uVar1;
   AadNewSramBlockDesc *pAVar2;
   int iVar3;
   int iVar4;
   int iVar5;
-  uint uVar6;
+  u_int uVar6;
   
   iVar4 = 0;
   iVar5 = 0;
@@ -2055,7 +2055,7 @@ void setSramFullAlarm(void)
   do {
     if (pAVar2 == (AadNewSramBlockDesc *)0x0) break;
     if ((pAVar2->waveID & 0x4000) == 0) {
-      uVar1 = (uint)pAVar2->size;
+      uVar1 = (u_int)pAVar2->size;
       gSramFreeBlocks = gSramFreeBlocks + 1;
       iVar5 = iVar5 + uVar1;
       if (uVar6 < uVar1) {
@@ -2064,7 +2064,7 @@ void setSramFullAlarm(void)
     }
     else {
       gSramUsedBlocks = gSramUsedBlocks + 1;
-      iVar4 = iVar4 + (uint)pAVar2->size;
+      iVar4 = iVar4 + (u_int)pAVar2->size;
     }
     if ((char)pAVar2->nextIndex < '\0') {
       pAVar2 = (AadNewSramBlockDesc *)0x0;
@@ -2115,9 +2115,9 @@ void aadLoadSingleDynSfx(AadDynamicSfxLoadInfo *info)
   ushort uVar1;
   AadMemoryStruct *pAVar2;
   int iVar3;
-  ulong uVar4;
-  uchar uVar5;
-  uint uVar6;
+  u_long uVar4;
+  u_char uVar5;
+  u_int uVar6;
   int iVar7;
   AadLoadedSfxToneAttr *pAVar8;
   int iVar9;
@@ -2130,7 +2130,7 @@ void aadLoadSingleDynSfx(AadDynamicSfxLoadInfo *info)
   pAVar2 = aadMem;
   uVar1 = (info->attr).sfxID;
   info->waveTransferAddr = 0;
-  iVar3 = (int)&pAVar2->updateCounter + (uint)uVar1;
+  iVar3 = (int)&pAVar2->updateCounter + (u_int)uVar1;
   pAVar14 = &info->attr;
   if (*(char *)(iVar3 + 0x808) == -2) {
     *(undefined *)(iVar3 + 0x808) = 0xff;
@@ -2138,16 +2138,16 @@ void aadLoadSingleDynSfx(AadDynamicSfxLoadInfo *info)
   pAVar2 = aadMem;
   if (aadMem->sfxToneMasterList[(info->attr).sfxID] == 0xff) {
     _uVar5 = aadMem->nextToneIndex;
-    uVar5 = (uchar)_uVar5;
+    uVar5 = (u_char)_uVar5;
     pAVar8 = aadMem->sfxToneAttrTbl + _uVar5;
     uVar1 = pAVar8->referenceCount;
     uVar6 = _uVar5;
     while (uVar1 != 0) {
       uVar6 = uVar6 + 1 & 0x7f;
-      uVar5 = (uchar)uVar6;
+      uVar5 = (u_char)uVar6;
       if (uVar6 == _uVar5) {
         info->smfLoadingState = 2;
-        iVar3 = (int)&pAVar2->updateCounter + (uint)pAVar14->sfxID;
+        iVar3 = (int)&pAVar2->updateCounter + (u_int)pAVar14->sfxID;
         goto LAB_80053e3c;
       }
       pAVar8 = aadMem->sfxToneAttrTbl + uVar6;
@@ -2179,11 +2179,11 @@ void aadLoadSingleDynSfx(AadDynamicSfxLoadInfo *info)
             pAVar2->nextWaveIndex = iVar9 + -0x70;
           }
           *psVar13 = 1;
-          aadMem->sfxWaveMasterList[(info->attr).waveID] = (uchar)iVar3;
+          aadMem->sfxWaveMasterList[(info->attr).waveID] = (u_char)iVar3;
           iVar3 = aadWaveMalloc((info->attr).waveID,(info->attr).waveSize);
           *(undefined *)((int)psVar13 + 3) = (char)iVar3;
           if (-1 < iVar3 << 0x18) {
-            uVar4 = aadGetSramBlockAddr((uint)*(byte *)((int)psVar13 + 3));
+            uVar4 = aadGetSramBlockAddr((u_int)*(byte *)((int)psVar13 + 3));
             info->waveTransferAddr = uVar4;
             info->smfLoadingState = 3;
             return;
@@ -2195,9 +2195,9 @@ void aadLoadSingleDynSfx(AadDynamicSfxLoadInfo *info)
         }
         iVar3 = iVar7;
       } while (iVar7 != aadMem->nextWaveIndex);
-      aadFreeSingleDynSfx((uint)pAVar14->sfxID);
+      aadFreeSingleDynSfx((u_int)pAVar14->sfxID);
       info->smfLoadingState = 2;
-      iVar3 = (int)&aadMem->updateCounter + (uint)pAVar14->sfxID;
+      iVar3 = (int)&aadMem->updateCounter + (u_int)pAVar14->sfxID;
 LAB_80053e3c:
       *(undefined *)(iVar3 + 0x808) = 0xfe;
       setSramFullAlarm();
@@ -2266,8 +2266,8 @@ void aadLoadDynamicSfxReturn2
                (void *loadedDataPtr,long loadedDataSize,short status,void *data1,void *data2)
 
 {
-  ulong uVar1;
-  uint __n;
+  u_long uVar1;
+  u_int __n;
   int iVar2;
   void *__src;
   undefined2 in_register_0000001a;
@@ -2281,8 +2281,8 @@ void aadLoadDynamicSfxReturn2
       iVar2 = *(int *)((int)data1 + 0x60);
       if (iVar2 == 1) {
         __src = (void *)((int)loadedDataPtr + iVar4);
-        __n = *(uint *)((int)data1 + 100);
-        if ((uint)loadedDataSize < *(uint *)((int)data1 + 100)) {
+        __n = *(u_int *)((int)data1 + 100);
+        if ((u_int)loadedDataSize < *(u_int *)((int)data1 + 100)) {
           __n = loadedDataSize;
         }
         iVar4 = iVar4 + __n;
@@ -2301,7 +2301,7 @@ void aadLoadDynamicSfxReturn2
           if (iVar2 == 0) {
             sVar3 = 0x4d;
             uVar1 = aadCreateFourCharID('a','S','M','F');
-            if (*(ulong *)loadedDataPtr != uVar1) {
+            if (*(u_long *)loadedDataPtr != uVar1) {
               aadLoadDynamicSfxAbort((AadDynamicSfxLoadInfo *)data1,(int)&DAT_0000100b);
               return;
             }
@@ -2314,19 +2314,19 @@ LAB_80053f98:
               aadLoadDynamicSfxAbort((AadDynamicSfxLoadInfo *)data1,(int)&DAT_0000100d);
               return;
             }
-            __n = (uint)*(ushort *)(*(int *)((int)data1 + 0x78) + 10);
+            __n = (u_int)*(ushort *)(*(int *)((int)data1 + 0x78) + 10);
             iVar4 = iVar4 + 0x10;
-            if ((uint)*(ushort *)((int)loadedDataPtr + 8) != __n) goto LAB_80053f98;
+            if ((u_int)*(ushort *)((int)loadedDataPtr + 8) != __n) goto LAB_80053f98;
             loadedDataSize = loadedDataSize - 0x10;
             *(undefined4 *)((int)data1 + 0x60) = 1;
             *(undefined4 *)((int)data1 + 100) = 0x18;
-            *(uint *)((int)data1 + 0x68) = __n;
+            *(u_int *)((int)data1 + 0x68) = __n;
           }
         }
         else {
           if (iVar2 == 2) {
-            __n = *(uint *)((int)data1 + 100);
-            if ((uint)loadedDataSize < *(uint *)((int)data1 + 100)) {
+            __n = *(u_int *)((int)data1 + 100);
+            if ((u_int)loadedDataSize < *(u_int *)((int)data1 + 100)) {
               __n = loadedDataSize;
             }
             iVar4 = iVar4 + __n;
@@ -2347,14 +2347,14 @@ LAB_800540f4:
           }
           else {
             if (iVar2 == 3) {
-              __n = *(uint *)((int)data1 + 100);
-              if ((uint)loadedDataSize < *(uint *)((int)data1 + 100)) {
+              __n = *(u_int *)((int)data1 + 100);
+              if ((u_int)loadedDataSize < *(u_int *)((int)data1 + 100)) {
                 __n = loadedDataSize;
               }
               loadedDataSize = loadedDataSize - __n;
               aadWaitForSramTransferComplete();
               SpuSetTransferCallback((int)HackCallback);
-              SpuSetTransferStartAddr(*(uint *)((int)data1 + 0x70));
+              SpuSetTransferStartAddr(*(u_int *)((int)data1 + 0x70));
               SpuWrite((word *)((int)loadedDataPtr + iVar4),__n,sVar3);
               iVar4 = iVar4 + __n;
               iVar2 = *(int *)((int)data1 + 100) - __n;
@@ -2373,7 +2373,7 @@ LAB_800540f4:
                 *(undefined4 *)((int)data1 + 100) = 0x18;
               }
               if (loadedDataSize != 0) {
-                smfDataPtr = (uchar *)((int)loadedDataPtr + iVar4);
+                smfDataPtr = (u_char *)((int)loadedDataPtr + iVar4);
                 smfBytesLeft = loadedDataSize;
                 smfInfo = (AadDynamicSfxLoadInfo *)data1;
                 return;
@@ -2429,7 +2429,7 @@ LAB_800540f4:
 int aadCheckSramFragmented(void)
 
 {
-  uint uVar1;
+  u_int uVar1;
   undefined *puVar2;
   AadNewSramBlockDesc *pAVar3;
   int iVar4;
@@ -2445,7 +2445,7 @@ int aadCheckSramFragmented(void)
   do {
     if (pAVar3 == (AadNewSramBlockDesc *)0x0) break;
     if ((pAVar3->waveID & 0x4000) == 0) {
-      puVar2 = (undefined *)(uint)pAVar3->size;
+      puVar2 = (undefined *)(u_int)pAVar3->size;
       iVar5 = iVar5 + 1;
       puVar6 = puVar2 + (int)puVar6;
       if (puVar2 < puVar7) {
@@ -2462,7 +2462,7 @@ int aadCheckSramFragmented(void)
   } while (iVar4 != 0);
   uVar1 = 0;
   if (2 < iVar5) {
-    uVar1 = (uint)((int)puVar7 < (int)puVar6 >> 2);
+    uVar1 = (u_int)((int)puVar7 < (int)puVar6 >> 2);
   }
   return uVar1;
 }
@@ -2513,13 +2513,13 @@ void aadProcessSramDefrag(void)
   ushort uVar3;
   AadMemoryStruct *pAVar4;
   AadMemoryStruct *pAVar5;
-  uchar *puVar6;
+  u_char *puVar6;
   int iVar7;
   undefined *puVar8;
-  ulong uVar9;
-  uint in_a2;
+  u_long uVar9;
+  u_int in_a2;
   undefined *puVar10;
-  uint uVar11;
+  u_int uVar11;
   AadNewSramBlockDesc *pAVar12;
   AadNewSramBlockDesc *pAVar13;
   AadSramDefragInfo *pAVar14;
@@ -2540,7 +2540,7 @@ void aadProcessSramDefrag(void)
         if ((pAVar12->waveID & 0x4000) == 0) break;
         iVar7 = iVar7 + -1;
         bVar15 = pAVar12->nextIndex;
-        uVar11 = (uint)bVar15;
+        uVar11 = (u_int)bVar15;
         if ((iVar7 == 0) || (0x7f < bVar15)) {
           pAVar12 = (AadNewSramBlockDesc *)0x0;
         }
@@ -2552,20 +2552,20 @@ void aadProcessSramDefrag(void)
         bVar1 = pAVar12->nextIndex;
         pAVar13 = pAVar16 + bVar1;
         if ((pAVar13->waveID & 0x4000) != 0) {
-          puVar6 = (uchar *)(*aadMem->memoryMallocProc)(0x1000,0x30);
+          puVar6 = (u_char *)(*aadMem->memoryMallocProc)(0x1000,0x30);
           (pAVar4->sramDefragInfo).fragBuffer = puVar6;
           pAVar5 = aadMem;
-          if (puVar6 != (uchar *)0x0) {
-            uVar11 = (uint)pAVar13->waveID & 0x3fff;
+          if (puVar6 != (u_char *)0x0) {
+            uVar11 = (u_int)pAVar13->waveID & 0x3fff;
             iVar7 = (int)&aadMem->updateCounter + uVar11;
             bVar2 = *(byte *)(iVar7 + 0xa08);
-            (pAVar4->sramDefragInfo).masterListEntry = (uint)bVar2;
+            (pAVar4->sramDefragInfo).masterListEntry = (u_int)bVar2;
             if (bVar2 < 0xfe) {
               *(undefined *)(iVar7 + 0xa08) = 0xff;
               (pAVar4->sramDefragInfo).waveID = uVar11;
-              (pAVar4->sramDefragInfo).destSramAddr = (uint)pAVar12->address << 3;
-              (pAVar4->sramDefragInfo).srcSramAddr = (uint)pAVar13->address << 3;
-              (pAVar4->sramDefragInfo).moveSize = (uint)pAVar13->size << 3;
+              (pAVar4->sramDefragInfo).destSramAddr = (u_int)pAVar12->address << 3;
+              (pAVar4->sramDefragInfo).srcSramAddr = (u_int)pAVar13->address << 3;
+              (pAVar4->sramDefragInfo).moveSize = (u_int)pAVar13->size << 3;
               uVar3 = pAVar12->size;
               pAVar12->size = pAVar13->size;
               pAVar13->size = uVar3;
@@ -2579,7 +2579,7 @@ void aadProcessSramDefrag(void)
                 bVar2 = pAVar12->nextIndex;
                 pAVar12->waveID = 0;
                 pAVar13->nextIndex = bVar2;
-                if (-1 < (int)((uint)bVar2 << 0x18)) {
+                if (-1 < (int)((u_int)bVar2 << 0x18)) {
                   pAVar16[pAVar13->nextIndex].prevIndex = bVar1;
                 }
               }
@@ -2605,7 +2605,7 @@ void aadProcessSramDefrag(void)
             puVar10 = puVar8;
           }
           SpuSetTransferStartAddr((pAVar4->sramDefragInfo).srcSramAddr);
-          SpuRead((uint)(pAVar4->sramDefragInfo).fragBuffer,(uint)puVar10,in_a2);
+          SpuRead((u_int)(pAVar4->sramDefragInfo).fragBuffer,(u_int)puVar10,in_a2);
           *(undefined **)&(pAVar4->sramDefragInfo).readSize = puVar10;
           (pAVar4->sramDefragInfo).status = 3;
         }
@@ -2622,7 +2622,7 @@ void aadProcessSramDefrag(void)
           if (uVar9 == 0) {
             (*aadMem->memoryFreeProc)((pAVar4->sramDefragInfo).fragBuffer);
             aadMem->sfxWaveMasterList[(pAVar4->sramDefragInfo).waveID] =
-                 *(uchar *)&(pAVar4->sramDefragInfo).masterListEntry;
+                 *(u_char *)&(pAVar4->sramDefragInfo).masterListEntry;
             (pAVar4->sramDefragInfo).status = 0;
             gSramCheckRequest = 1;
           }
@@ -2652,7 +2652,7 @@ void aadProcessSramDefrag(void)
 	/* end block 2 */
 	// End Line: 5419
 
-int aadIsSfxLoaded(uint toneID)
+int aadIsSfxLoaded(u_int toneID)
 
 {
   int iVar1;
@@ -2712,7 +2712,7 @@ void aadInitSequenceSlot(_AadSequenceSlot *slot)
   p_Var3 = slot;
   p_Var5 = p_Var6;
   do {
-    if (iVar4 < (int)(uint)*(ushort *)(p_Var6 + 0xc)) {
+    if (iVar4 < (int)(u_int)*(ushort *)(p_Var6 + 0xc)) {
       *(_func_41 **)p_Var3->sequencePosition = p_Var6 + *(int *)(p_Var5 + 0x10);
     }
     else {
@@ -2805,11 +2805,11 @@ int aadWaitForSramTransferComplete(void)
 void aadInitReverb(void)
 
 {
-  uint uVar1;
+  u_int uVar1;
   int iVar2;
   int iVar3;
   undefined4 uVar4;
-  uint in_a2;
+  u_int in_a2;
   
   uVar1 = aadGetReverbMode();
   SpuSetReverbModeType(uVar1);
@@ -2844,9 +2844,9 @@ void aadShutdownReverb(void)
 
 {
   int iVar1;
-  uint uVar2;
+  u_int uVar2;
   undefined4 in_a1;
-  uint in_a2;
+  u_int in_a2;
   
   iVar1 = aadWaitForSramTransferComplete();
   if (iVar1 != 0) {
@@ -2893,7 +2893,7 @@ int aadGetReverbMode(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-ulong aadGetReverbSize(void)
+u_long aadGetReverbSize(void)
 
 {
   int iVar1;
@@ -3010,7 +3010,7 @@ int aadAssignDynamicSequence(int bank,int sequenceNumber,int slotNumber)
   
   if (aadMem->dynamicBankStatus[bank] == 2) {
     slot = (_AadSequenceSlot *)aadMem->sequenceSlots[slotNumber];
-    slot->sequenceNumberAssigned = (uchar)sequenceNumber;
+    slot->sequenceNumberAssigned = (u_char)sequenceNumber;
     slot->sequenceAssignedDynamicBank = bank;
     aadInitSequenceSlot(slot);
     aadAllNotesOff(slotNumber);
@@ -3073,8 +3073,8 @@ AadTempo * aadGetTempoFromDynamicSequence(int bank,int sequenceNumber,AadTempo *
   
   if ((&aadMem->updateCounter + bank)[0x140] == 2) {
     iVar1 = *(int *)((&aadMem->updateCounter + bank)[0x13c] + sequenceNumber * 4);
-    tempo->quarterNoteTime = *(ulong *)(iVar1 + 4);
-    tempo->ppqn = (uint)*(ushort *)(iVar1 + 8);
+    tempo->quarterNoteTime = *(u_long *)(iVar1 + 4);
+    tempo->ppqn = (u_int)*(ushort *)(iVar1 + 8);
   }
   return tempo;
 }
@@ -3115,7 +3115,7 @@ void aadSetSlotTempo(int slotNumber,AadTempo *tempo)
 
 {
   AadMemoryStruct *pAVar1;
-  uint uVar2;
+  u_int uVar2;
   _func_36 *p_Var3;
   
   pAVar1 = aadMem;
@@ -3123,10 +3123,10 @@ void aadSetSlotTempo(int slotNumber,AadTempo *tempo)
   p_Var3 = aadMem->sequenceSlots[slotNumber];
   uVar2 = (tempo->quarterNoteTime / uVar2) * 0x10000 +
           (tempo->quarterNoteTime % uVar2 << 0x10) / uVar2;
-  *(uint *)(p_Var3 + 8) = uVar2;
+  *(u_int *)(p_Var3 + 8) = uVar2;
   *(short *)(p_Var3 + 0x10) = (short)((&aadUpdateRate)[pAVar1->updateMode & 3] / uVar2);
-  *(uint *)(p_Var3 + 0xc) = (&aadUpdateRate)[pAVar1->updateMode & 3] % *(uint *)(p_Var3 + 8);
-  *(ulong *)(p_Var3 + 0x14) = tempo->quarterNoteTime;
+  *(u_int *)(p_Var3 + 0xc) = (&aadUpdateRate)[pAVar1->updateMode & 3] % *(u_int *)(p_Var3 + 8);
+  *(u_long *)(p_Var3 + 0x14) = tempo->quarterNoteTime;
   *(undefined2 *)(p_Var3 + 0x12) = *(undefined2 *)&tempo->ppqn;
   return;
 }
@@ -3413,7 +3413,7 @@ void aadResumeSlot(int slotNumber)
 int aadGetSlotStatus(int slotNumber)
 
 {
-  return (uint)*(ushort *)(aadMem->sequenceSlots[slotNumber] + 0x540);
+  return (u_int)*(ushort *)(aadMem->sequenceSlots[slotNumber] + 0x540);
 }
 
 
@@ -3453,8 +3453,8 @@ void aadAllNotesOff(int slotNumber)
 
 {
   AadMemoryStruct *pAVar1;
-  uint *puVar2;
-  uint uVar3;
+  u_int *puVar2;
+  u_int uVar3;
   int iVar4;
   int iVar5;
   _func_36 *p_Var6;
@@ -3464,7 +3464,7 @@ void aadAllNotesOff(int slotNumber)
   iVar4 = 0x1dc;
   p_Var6 = aadMem->sequenceSlots[slotNumber];
   do {
-    puVar2 = (uint *)((int)&aadMem->updateCounter + iVar4);
+    puVar2 = (u_int *)((int)&aadMem->updateCounter + iVar4);
     if ((_func_36)(*(byte *)(puVar2 + 2) & 0xf0) == p_Var6[0x551]) {
       *(undefined *)(puVar2 + 2) = 0xff;
       uVar3 = uVar3 | *puVar2;
@@ -3515,16 +3515,16 @@ void aadAllNotesOff(int slotNumber)
 	/* end block 4 */
 	// End Line: 7113
 
-void aadMuteChannels(_AadSequenceSlot *slot,ulong channelList)
+void aadMuteChannels(_AadSequenceSlot *slot,u_long channelList)
 
 {
   AadMemoryStruct *pAVar1;
-  uint uVar2;
-  uint *puVar3;
+  u_int uVar2;
+  u_int *puVar3;
   int iVar4;
   int iVar5;
-  uint uVar6;
-  uint uVar7;
+  u_int uVar6;
+  u_int uVar7;
   
   uVar2 = slot->delayedMuteMode & channelList;
   if (uVar2 != 0) {
@@ -3540,8 +3540,8 @@ void aadMuteChannels(_AadSequenceSlot *slot,ulong channelList)
       iVar5 = 0;
       iVar4 = 0x1dc;
       do {
-        puVar3 = (uint *)((int)&aadMem->updateCounter + iVar4);
-        if ((uint)*(byte *)(puVar3 + 2) == (slot->slotID | uVar6)) {
+        puVar3 = (u_int *)((int)&aadMem->updateCounter + iVar4);
+        if ((u_int)*(byte *)(puVar3 + 2) == (slot->slotID | uVar6)) {
           *(undefined *)(puVar3 + 2) = 0xff;
           uVar7 = uVar7 | *puVar3;
         }
@@ -3590,12 +3590,12 @@ void aadMuteChannels(_AadSequenceSlot *slot,ulong channelList)
 	/* end block 4 */
 	// End Line: 7205
 
-void aadUnMuteChannels(_AadSequenceSlot *slot,ulong channelList)
+void aadUnMuteChannels(_AadSequenceSlot *slot,u_long channelList)
 
 {
   ushort uVar1;
   ushort uVar2;
-  uint uVar3;
+  u_int uVar3;
   
   uVar2 = (ushort)channelList;
   uVar3 = slot->delayedMuteMode & channelList;

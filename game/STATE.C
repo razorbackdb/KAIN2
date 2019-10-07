@@ -233,7 +233,7 @@ void * CIRC_Alloc(int size)
 
 {
   void *pvVar1;
-  uint uVar2;
+  u_int uVar2;
   _BlockVramEntry *p_Var3;
   
   uVar2 = size + 3U & 0xfffffffc;
@@ -1325,12 +1325,12 @@ int SetObjectBirthProjectileData(_Instance *instance,int joint,int type)
 	/* end block 2 */
 	// End Line: 1664
 
-int SetShadowSegmentData(ulong total)
+int SetShadowSegmentData(u_long total)
 
 {
-  ulong *puVar1;
+  u_long *puVar1;
   
-  puVar1 = (ulong *)CIRC_Alloc(0xc);
+  puVar1 = (u_long *)CIRC_Alloc(0xc);
   *puVar1 = total;
   return (int)puVar1;
 }
@@ -1429,8 +1429,8 @@ void G2EmulationInit(void)
 void G2EmulationInstancePlayAnimation(_Instance *instance)
 
 {
-  uint uVar1;
-  uint uVar2;
+  u_int uVar1;
+  u_int uVar2;
   
   uVar2 = 0;
   if ((instance->anim).sectionCount != '\0') {
@@ -1439,7 +1439,7 @@ void G2EmulationInstancePlayAnimation(_Instance *instance)
       G2AnimSection_NextKeyframe((instance->anim).section + uVar1);
       uVar2 = uVar2 + 1;
       uVar1 = uVar2 & 0xff;
-    } while ((int)uVar2 < (int)(uint)(instance->anim).sectionCount);
+    } while ((int)uVar2 < (int)(u_int)(instance->anim).sectionCount);
   }
   return;
 }
@@ -1694,7 +1694,7 @@ void G2EmulationSwitchAnimationSync
   iVar3 = G2AnimKeylist_GetKeyframeCount(keylist);
   G2AnimSection_SetAlphaTable(section,(_G2AnimAlphaTable_Type *)0x0);
   G2AnimSection_InterpToKeylistFrame
-            (section,keylist,(uint)uVar1,(iVar2 + Frames) % iVar3,Frames * 0x640000 >> 0x10);
+            (section,keylist,(u_int)uVar1,(iVar2 + Frames) % iVar3,Frames * 0x640000 >> 0x10);
   if ((section_00->flags & 2) == 0) {
     G2AnimSection_SetNoLooping(section);
   }
@@ -2018,7 +2018,7 @@ void G2EmulationInstanceSetAnimSpeed(_Instance *instance,int CurrentSection,int 
 int G2EmulationInstanceQueryAnimation(_Instance *instance,int CurrentSection)
 
 {
-  return (uint)(instance->anim).section[CurrentSection & 0xff].keylistID;
+  return (u_int)(instance->anim).section[CurrentSection & 0xff].keylistID;
 }
 
 
@@ -2119,7 +2119,7 @@ int G2EmulationInstanceQueryPassedFrame(_Instance *instance,int CurrentSection,i
 
 {
   _G2Bool_Enum _Var1;
-  uint uVar2;
+  u_int uVar2;
   _G2AnimKeylist_Type *p_Var3;
   short sVar4;
   _G2AnimSection_Type *section;
@@ -2132,7 +2132,7 @@ int G2EmulationInstanceQueryPassedFrame(_Instance *instance,int CurrentSection,i
     sVar4 = (short)frame * (ushort)p_Var3->s0TailTime;
     uVar2 = 0;
     if (section->storedTime < sVar4) {
-      uVar2 = (uint)(section->elapsedTime < sVar4) ^ 1;
+      uVar2 = (u_int)(section->elapsedTime < sVar4) ^ 1;
     }
   }
   return uVar2;
@@ -2259,8 +2259,8 @@ void G2EmulationInstanceSetStartAndEndSegment
   _G2AnimSection_Type *p_Var1;
   
   p_Var1 = (instance->anim).section + (CurrentSection & 0xff);
-  p_Var1->firstSeg = (uchar)Start;
-  p_Var1->segCount = ((char)End - (uchar)Start) + '\x01';
+  p_Var1->firstSeg = (u_char)Start;
+  p_Var1->segCount = ((char)End - (u_char)Start) + '\x01';
   return;
 }
 
@@ -2310,7 +2310,7 @@ void G2EmulationInstanceSetTotalSections(_Instance *instance,short Total)
   
   bVar1 = (instance->anim).sectionCount;
   anim = &instance->anim;
-  while ((int)(uint)bVar1 < (int)Total) {
+  while ((int)(u_int)bVar1 < (int)Total) {
     G2Anim_AddSection(anim,0,0);
     bVar1 = anim->sectionCount;
   }
@@ -2577,7 +2577,7 @@ void StateGovernState(__CharacterState *In,int Frames)
   _G2AnimSection_Type *section;
   _G2AnimKeylist_Type *keylist;
   _G2AnimSection_Type *section_00;
-  uint uVar5;
+  u_int uVar5;
   int iVar6;
   int iVar7;
   
@@ -2600,7 +2600,7 @@ void StateGovernState(__CharacterState *In,int Frames)
           iVar3 = G2AnimSection_GetKeyframeNumber(section);
           iVar4 = G2AnimKeylist_GetKeyframeCount(keylist);
           G2AnimSection_InterpToKeylistFrame
-                    (section_00,keylist,(uint)uVar1,(iVar3 + Frames) % iVar4,
+                    (section_00,keylist,(u_int)uVar1,(iVar3 + Frames) % iVar4,
                      Frames * 0x640000 >> 0x10);
         }
       }

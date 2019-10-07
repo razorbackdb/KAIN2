@@ -86,29 +86,29 @@ void PIPE3D_CalculateWCTransform(_CameraCore_Type *cameraCore)
   undefined2 local_42;
   undefined2 local_40;
   undefined4 local_30;
-  uint local_2c;
+  u_int local_2c;
   undefined4 local_28;
   undefined4 local_24;
   undefined4 local_20;
   
   matrix = cameraCore->wcTransform;
   local_30 = CONCAT22(-(cameraCore->position).y,-(cameraCore->position).x);
-  local_2c = local_2c & 0xffff0000 | (uint)(ushort)-(cameraCore->position).z;
+  local_2c = local_2c & 0xffff0000 | (u_int)(ushort)-(cameraCore->position).z;
   if ((gameTrackerX.debugFlags & 8U) == 0) {
     MATH3D_SetUnityMatrix(&MStack112);
-    RotMatrixZ(-(int)(cameraCore->rotation).z,(uint *)&MStack112);
+    RotMatrixZ(-(int)(cameraCore->rotation).z,(u_int *)&MStack112);
     RotMatrixX(-(int)(cameraCore->rotation).x,(int)&MStack112);
-    RotMatrixY(-(int)(cameraCore->rotation).y,(uint *)&MStack112);
+    RotMatrixY(-(int)(cameraCore->rotation).y,(u_int *)&MStack112);
     local_30 = CONCAT22(-(cameraCore->position).y,-(cameraCore->position).x);
-    local_2c = local_2c & 0xffff0000 | (uint)(ushort)-(cameraCore->position).z;
+    local_2c = local_2c & 0xffff0000 | (u_int)(ushort)-(cameraCore->position).z;
   }
   else {
     MATH3D_SetUnityMatrix(&MStack112);
-    RotMatrixZ(-(int)(cameraCore->debugRot).z,(uint *)&MStack112);
-    RotMatrixY(-(int)(cameraCore->debugRot).y,(uint *)&MStack112);
+    RotMatrixZ(-(int)(cameraCore->debugRot).z,(u_int *)&MStack112);
+    RotMatrixY(-(int)(cameraCore->debugRot).y,(u_int *)&MStack112);
     RotMatrixX(-(int)(cameraCore->debugRot).x,(int)&MStack112);
     local_30 = CONCAT22(-(cameraCore->debugPos).y,-(cameraCore->debugPos).x);
-    local_2c = local_2c & 0xffff0000 | (uint)(ushort)-(cameraCore->debugPos).z;
+    local_2c = local_2c & 0xffff0000 | (u_int)(ushort)-(cameraCore->debugPos).z;
     sVar1 = (cameraCore->position).y;
     sVar2 = (cameraCore->position).z;
     sVar3 = (cameraCore->debugPos).x;
@@ -130,8 +130,8 @@ void PIPE3D_CalculateWCTransform(_CameraCore_Type *cameraCore)
   local_44 = 0;
   local_42 = 0x1000;
   local_40 = 0;
-  MulMatrix0((undefined4 *)&local_50,(ushort *)&MStack112,(uint *)matrix);
-  MulMatrix0((undefined4 *)&local_50,(ushort *)&MStack112,(uint *)cameraCore->wcTransform2);
+  MulMatrix0((undefined4 *)&local_50,(ushort *)&MStack112,(u_int *)matrix);
+  MulMatrix0((undefined4 *)&local_50,(ushort *)&MStack112,(u_int *)cameraCore->wcTransform2);
   PIPE3D_AspectAdjustMatrix(matrix);
   sVar1 = matrix->m[1];
   matrix->m[0] = (short)((int)matrix->m[0] * (int)(cameraCore->screenScale).x >> 0xc);
@@ -196,7 +196,7 @@ void PIPE3D_InvertTransform(MATRIX *target,MATRIX *source)
 
 {
   MATRIX *pMVar1;
-  uint local_40;
+  u_int local_40;
   int local_3c;
   int local_38;
   MATRIX MStack48;
@@ -236,7 +236,7 @@ long PIPE3D_MatrixColumnLength(MATRIX *transform,long column)
 
 {
   short *psVar1;
-  ulong square;
+  u_long square;
   long lVar2;
   
   psVar1 = transform->m + column;
@@ -428,16 +428,16 @@ void PIPE3D_TransformVerticesToWorld
             p_Var10->y = (short)uVar6;
             p_Var10->z = (short)uVar7;
             if ((short)local_38 < p_Var10->x) {
-              local_38 = (undefined *)((uint)local_38 & 0xffff0000 | (uint)(ushort)p_Var10->x);
+              local_38 = (undefined *)((u_int)local_38 & 0xffff0000 | (u_int)(ushort)p_Var10->x);
             }
             if (p_Var10->x < (short)local_40) {
-              local_40 = local_40 & 0xffff0000 | (uint)(ushort)p_Var10->x;
+              local_40 = local_40 & 0xffff0000 | (u_int)(ushort)p_Var10->x;
             }
             if (local_38._2_2_ < psVar2[-1]) {
-              local_38 = (undefined *)((uint)local_38 & 0xffff | (uint)(ushort)psVar2[-1] << 0x10);
+              local_38 = (undefined *)((u_int)local_38 & 0xffff | (u_int)(ushort)psVar2[-1] << 0x10);
             }
             if (psVar2[-1] < local_40._2_2_) {
-              local_40 = local_40 & 0xffff | (uint)(ushort)psVar2[-1] << 0x10;
+              local_40 = local_40 & 0xffff | (u_int)(ushort)psVar2[-1] << 0x10;
             }
             if (local_34 < *psVar2) {
               local_34 = *psVar2;
@@ -525,15 +525,15 @@ void PIPE3D_TransformVerticesToWorld
 
 void PIPE3D_InstanceTransformAndDraw
                (_Instance *instance,_CameraCore_Type *cameraCore,_VertexPool *vertexPool,
-               _PrimPool *primPool,ulong **ot,_Mirror *mirror)
+               _PrimPool *primPool,u_long **ot,_Mirror *mirror)
 
 {
   undefined4 uVar1;
   undefined4 uVar2;
   undefined4 in_zero;
   undefined4 in_at;
-  uint uVar3;
-  ulong *puVar4;
+  u_int uVar3;
+  u_long *puVar4;
   int iVar5;
   int iVar6;
   int iVar7;
@@ -565,11 +565,11 @@ void PIPE3D_InstanceTransformAndDraw
     }
     modelFadeValue = INSTANCE_GetFadeValue(instance);
     uVar3 = PIPE3D_TransformAnimatedInstanceVertices_S
-                      ((int)p_Var8,(undefined4 *)vertexPool,(uint)p_Var11,
+                      ((int)p_Var8,(undefined4 *)vertexPool,(u_int)p_Var11,
                        (undefined4 *)cameraCore->wcTransform,(ushort *)pMVar10,
-                       (undefined4 *)&MStack80,(uint *)pCVar12,(uint *)instance->perVertexColor);
+                       (undefined4 *)&MStack80,(u_int *)pCVar12,(u_int *)instance->perVertexColor);
     LIGHT_PresetInstanceLight(instance,0x1000,&MStack80);
-    MulMatrix0((undefined4 *)&MStack80,(ushort *)(pMVar10 + instance->lightMatrix),(uint *)&MStack80
+    MulMatrix0((undefined4 *)&MStack80,(ushort *)(pMVar10 + instance->lightMatrix),(u_int *)&MStack80
               );
     SetLightMatrix((undefined4 *)&MStack80);
     if ((uVar3 & 0x8000) != 0) {
@@ -600,12 +600,12 @@ void PIPE3D_InstanceTransformAndDraw
           setCopReg(2,0x4000,local_30);
         }
         else {
-          setCopReg(2,0x4000,(uint)(ushort)instance->petrifyValue);
+          setCopReg(2,0x4000,(u_int)(ushort)instance->petrifyValue);
         }
       }
       if ((modelFadeValue < 0xffe) &&
          (((instance->object->oflags2 & 0x1000U) != 0 || (local_30 < 0xffa)))) {
-        puVar4 = (ulong *)(*(code *)gameTrackerX.drawAnimatedModelFunc)
+        puVar4 = (u_long *)(*(code *)gameTrackerX.drawAnimatedModelFunc)
                                     (p_Var11,vertexPool,primPool,ot,pCVar12);
         primPool->nextPrim = puVar4;
       }
@@ -756,7 +756,7 @@ LAB_8003b4e8:
           goto LAB_8003b4e8;
         }
       }
-      firstPrim = firstPrim + (uint)*(byte *)((int)firstPrim + 3) + 1;
+      firstPrim = firstPrim + (u_int)*(byte *)((int)firstPrim + 3) + 1;
     } while (firstPrim < lastPrim);
   }
   *pminx = iVar3;
@@ -808,10 +808,10 @@ void PIPE3D_AddPredatorEffect_Scale(long *firstPrim,long *lastPrim)
   short sVar4;
   short sVar5;
   int iVar6;
-  uint uVar7;
+  u_int uVar7;
   int iVar8;
   int iVar9;
-  uint uVar10;
+  u_int uVar10;
   int local_38;
   int local_34;
   int local_30;
@@ -829,14 +829,14 @@ void PIPE3D_AddPredatorEffect_Scale(long *firstPrim,long *lastPrim)
       if (*(char *)((int)firstPrim + 7) == '$') {
         uVar2 = *(ushort *)(firstPrim + 2);
         if (*(short *)(firstPrim + 2) < *(short *)(firstPrim + 4)) {
-          iVar6 = (uint)*(ushort *)(firstPrim + 6) << 0x10;
+          iVar6 = (u_int)*(ushort *)(firstPrim + 6) << 0x10;
           if (*(short *)(firstPrim + 2) < *(short *)(firstPrim + 6)) {
 LAB_8003b638:
-            iVar6 = (uint)uVar2 << 0x10;
+            iVar6 = (u_int)uVar2 << 0x10;
           }
         }
         else {
-          iVar6 = (uint)*(ushort *)(firstPrim + 6) << 0x10;
+          iVar6 = (u_int)*(ushort *)(firstPrim + 6) << 0x10;
           uVar2 = *(ushort *)(firstPrim + 4);
           if (*(short *)(firstPrim + 4) < *(short *)(firstPrim + 6)) goto LAB_8003b638;
         }
@@ -868,14 +868,14 @@ LAB_8003b638:
         if (*(char *)((int)firstPrim + 7) == '4') {
           uVar2 = *(ushort *)(firstPrim + 2);
           if (*(short *)(firstPrim + 2) < *(short *)(firstPrim + 5)) {
-            iVar6 = (uint)*(ushort *)(firstPrim + 8) << 0x10;
+            iVar6 = (u_int)*(ushort *)(firstPrim + 8) << 0x10;
             if (*(short *)(firstPrim + 2) < *(short *)(firstPrim + 8)) {
 LAB_8003b7b4:
-              iVar6 = (uint)uVar2 << 0x10;
+              iVar6 = (u_int)uVar2 << 0x10;
             }
           }
           else {
-            iVar6 = (uint)*(ushort *)(firstPrim + 8) << 0x10;
+            iVar6 = (u_int)*(ushort *)(firstPrim + 8) << 0x10;
             uVar2 = *(ushort *)(firstPrim + 5);
             if (*(short *)(firstPrim + 5) < *(short *)(firstPrim + 8)) goto LAB_8003b7b4;
           }
@@ -904,7 +904,7 @@ LAB_8003b7b4:
                (short)((*(short *)((int)firstPrim + 0x22) - iVar8) * 0x1200 >> 0xc) + sVar5;
         }
       }
-      firstPrim = firstPrim + (uint)bVar1 + 1;
+      firstPrim = firstPrim + (u_int)bVar1 + 1;
     } while (firstPrim < lastPrim);
   }
   return;
@@ -937,7 +937,7 @@ LAB_8003b7b4:
 	// End Line: 2674
 
 void PIPE3D_InstanceListTransformAndDrawFunc
-               (_StreamUnit *unit,ulong **ot,_CameraCore_Type *cameraCore,_Instance *instance)
+               (_StreamUnit *unit,u_long **ot,_CameraCore_Type *cameraCore,_Instance *instance)
 
 {
   int iVar1;
@@ -947,17 +947,17 @@ void PIPE3D_InstanceListTransformAndDrawFunc
   _PrimPool *primPool;
   undefined4 in_zero;
   undefined4 in_at;
-  uint uVar4;
+  u_int uVar4;
   int iVar5;
   int iVar6;
   Level *level;
-  ulong *firstPrim;
-  uint local_24;
+  u_long *firstPrim;
+  u_int local_24;
   
   primPool = gameTrackerX.primPool;
   vertexPool = gameTrackerX.vertexPool;
   level = unit->level;
-  local_24 = local_24 & 0xffff0000 | (uint)(ushort)(instance->position).z;
+  local_24 = local_24 & 0xffff0000 | (u_int)(ushort)(instance->position).z;
   iVar6 = (int)instance->object->modelList[instance->currentModel]->maxRad;
   setCopControlWord(2,0,*(undefined4 *)cameraCore->vvNormalWorVecMat[0].m);
   setCopControlWord(2,0x800,*(undefined4 *)(cameraCore->vvNormalWorVecMat[0].m + 2));
@@ -1054,7 +1054,7 @@ LAB_8003bc58:
 	// End Line: 2980
 
 void PIPE3D_InstanceListTransformAndDraw
-               (_StreamUnit *unit,GameTracker *gameTracker,ulong **ot,_CameraCore_Type *cameraCore)
+               (_StreamUnit *unit,GameTracker *gameTracker,u_long **ot,_CameraCore_Type *cameraCore)
 
 {
   _Instance *instance;
@@ -1151,7 +1151,7 @@ void PIPE3D_TransformFromZAxis(MATRIX *transform,_SVector *normal)
   transform->m[7] = normal->y;
   transform->m[8] = normal->z;
   G2EulerAngles_FromMatrix(&_Stack40,(_G2Matrix_Type *)transform,0x15);
-  RotMatrix((ushort *)&_Stack40,(uint *)transform);
+  RotMatrix((ushort *)&_Stack40,(u_int *)transform);
   return;
 }
 
@@ -1186,11 +1186,11 @@ void PIPE3D_CalcWorldToSplitPlaneTransform
   undefined4 in_zero;
   undefined4 in_at;
   undefined4 local_28;
-  uint local_24;
+  u_int local_24;
   
   PIPE3D_TransformFromZAxis(wpTransform,normal);
   local_28 = CONCAT22(-translation->y,-translation->x);
-  local_24 = local_24 & 0xffff0000 | (uint)(ushort)-translation->z;
+  local_24 = local_24 & 0xffff0000 | (u_int)(ushort)-translation->z;
   setCopControlWord(2,0,*(undefined4 *)wpTransform->m);
   setCopControlWord(2,0x800,*(undefined4 *)(wpTransform->m + 2));
   setCopControlWord(2,0x1000,*(undefined4 *)(wpTransform->m + 4));
@@ -1269,9 +1269,9 @@ long PIPE3D_TransformAnimatedSplitInstanceVertices
   CVECTOR CVar3;
   undefined4 in_zero;
   undefined4 in_at;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
+  u_int uVar4;
+  u_int uVar5;
+  u_int uVar6;
   long *plVar7;
   CVECTOR *pCVar8;
   _MVertex *p_Var9;
@@ -1284,7 +1284,7 @@ long PIPE3D_TransformAnimatedSplitInstanceVertices
   int local_40;
   _Segment *local_3c;
   _MVertex *local_38;
-  uint local_34;
+  u_int local_34;
   undefined4 *local_30;
   
   local_3c = model->segmentList;
@@ -1312,7 +1312,7 @@ long PIPE3D_TransformAnimatedSplitInstanceVertices
           MulMatrix0((undefined4 *)lm,(ushort *)pMVar11,&DAT_1f800040);
           SetLightMatrix(&DAT_1f800040);
         }
-        CompMatrix((undefined4 *)wcTransform,(ushort *)pMVar11,(uint *)&DAT_1f800000);
+        CompMatrix((undefined4 *)wcTransform,(ushort *)pMVar11,(u_int *)&DAT_1f800000);
         SetRotMatrix((undefined4 *)&DAT_1f800000);
         SetTransMatrix(0x1f800000);
         if (local_38 <= p_Var14 + -2) {
@@ -1325,9 +1325,9 @@ long PIPE3D_TransformAnimatedSplitInstanceVertices
             setCopReg(2,in_zero,*(undefined4 *)&local_38->vertex);
             setCopReg(2,in_at,*(undefined4 *)&(local_38->vertex).z);
             copFunction(2,0x480012);
-            uVar4 = (uint)p_Var9[-2].normal;
-            uVar6 = (uint)p_Var9[-1].normal;
-            uVar5 = (uint)p_Var9->normal;
+            uVar4 = (u_int)p_Var9[-2].normal;
+            uVar6 = (u_int)p_Var9[-1].normal;
+            uVar5 = (u_int)p_Var9->normal;
             uVar2 = getCopReg(2,0x19);
             *local_30 = uVar2;
             uVar2 = getCopReg(2,0x1a);
@@ -1367,7 +1367,7 @@ long PIPE3D_TransformAnimatedSplitInstanceVertices
               if (vertexSrcCol != (CVECTOR *)0x0) {
                 pCVar13 = vertexSrcCol + 1;
                 pCVar12 = vertexSrcCol + 2;
-                local_34 = (uint)*vertexSrcCol & (uint)vertexSrcCol[1] & (uint)vertexSrcCol[2];
+                local_34 = (u_int)*vertexSrcCol & (u_int)vertexSrcCol[1] & (u_int)vertexSrcCol[2];
                 pCVar10 = vertexSrcCol;
                 vertexSrcCol = vertexSrcCol + 3;
               }
@@ -1406,13 +1406,13 @@ long PIPE3D_TransformAnimatedSplitInstanceVertices
                 vertexColor[1] = CVar3;
                 CVar3 = (CVECTOR)getCopReg(2,0x16);
                 *pCVar8 = CVar3;
-                if (((uint)*pCVar10 & 0x40000000) != 0) {
+                if (((u_int)*pCVar10 & 0x40000000) != 0) {
                   *vertexColor = *pCVar10;
                 }
-                if (((uint)*pCVar13 & 0x40000000) != 0) {
+                if (((u_int)*pCVar13 & 0x40000000) != 0) {
                   pCVar8[-1] = *pCVar13;
                 }
-                if (((uint)*pCVar12 & 0x40000000) != 0) {
+                if (((u_int)*pCVar12 & 0x40000000) != 0) {
                   *pCVar8 = *pCVar12;
                 }
               }
@@ -1451,7 +1451,7 @@ long PIPE3D_TransformAnimatedSplitInstanceVertices
                 pCVar10 = vertexSrcCol;
                 vertexSrcCol = vertexSrcCol + 1;
               }
-              if (((uint)*pCVar10 & 0x40000000) == 0) {
+              if (((u_int)*pCVar10 & 0x40000000) == 0) {
                 setCopReg(2,local_38,*pCVar10);
                 setCopReg(2,in_zero,*(undefined4 *)(&gNormalList + uVar1));
                 setCopReg(2,in_at,*(undefined4 *)&(&gNormalList)[uVar1].z);
@@ -1532,7 +1532,7 @@ void PIPE3D_TransformSplitInstanceVertices
       if (*(short *)((int)&model->segmentList->lastVertex + iVar6) != -1) {
         sVar1 = *psVar4;
         p_Var3 = vertexList + psVar4[-1];
-        CompMatrix((undefined4 *)wpTransform,(ushort *)matrixPool,(uint *)&DAT_1f800000);
+        CompMatrix((undefined4 *)wpTransform,(ushort *)matrixPool,(u_int *)&DAT_1f800000);
         SetRotMatrix((undefined4 *)&DAT_1f800000);
         SetTransMatrix(0x1f800000);
         if (p_Var3 <= vertexList + sVar1) {
@@ -1590,16 +1590,16 @@ void PIPE3D_AnimateTextures(AniTex *aniTextures,long req_frame)
 {
   TextureMT3 *pTVar1;
   TextureMT3 *pTVar2;
-  uint *puVar3;
+  u_int *puVar3;
   int iVar4;
   AniTexInfo *pAVar5;
   
   if (((aniTextures != (AniTex *)0x0) && (pAVar5 = &aniTextures->aniTexInfo, req_frame != -1)) &&
      (iVar4 = 0, 0 < aniTextures->numAniTextues)) {
-    puVar3 = (uint *)&(aniTextures->aniTexInfo).numFrames;
+    puVar3 = (u_int *)&(aniTextures->aniTexInfo).numFrames;
     do {
       pTVar2 = pAVar5->texture;
-      pTVar1 = pTVar2 + ((uint)req_frame / puVar3[1]) % *puVar3;
+      pTVar1 = pTVar2 + ((u_int)req_frame / puVar3[1]) % *puVar3;
       *(undefined4 *)pTVar2 = *(undefined4 *)(pTVar1 + 1);
       *(undefined4 *)&pTVar2->u1 = *(undefined4 *)&pTVar1[1].u1;
       pAVar5 = pAVar5 + 1;
@@ -1642,13 +1642,13 @@ void PIPE3D_AnimateTextures(AniTex *aniTextures,long req_frame)
 	// End Line: 4433
 
 void PIPE3D_AnimateTerrainTextures
-               (DrMoveAniTex *aniTextures,long req_frame,_PrimPool *primPool,ulong **drawot)
+               (DrMoveAniTex *aniTextures,long req_frame,_PrimPool *primPool,u_long **drawot)
 
 {
-  uint *puVar1;
+  u_int *puVar1;
   DrMoveAniTexDestInfo *pDVar2;
   DrMoveAniTexSrcInfo *pDVar3;
-  uint *puVar4;
+  u_int *puVar4;
   int iVar5;
   DrMoveAniTex *pDVar6;
   
@@ -1661,28 +1661,28 @@ void PIPE3D_AnimateTerrainTextures
       pDVar6 = aniTextures;
       do {
         pDVar2 = pDVar6->aniTexInfo;
-        pDVar3 = &pDVar2->frame + ((uint)req_frame / (uint)pDVar2->speed) % pDVar2->numFrames;
-        if (*(uint *)pDVar3 != *(uint *)&pDVar2->pixCurrentX) {
+        pDVar3 = &pDVar2->frame + ((u_int)req_frame / (u_int)pDVar2->speed) % pDVar2->numFrames;
+        if (*(u_int *)pDVar3 != *(u_int *)&pDVar2->pixCurrentX) {
           puVar1[-4] = 0x1000000;
           puVar1[-3] = 0x80000000;
-          puVar1[-2] = *(uint *)pDVar3;
-          puVar1[-1] = *(uint *)pDVar2;
-          *puVar1 = *(uint *)&pDVar2->pixW;
-          *puVar4 = (uint)*drawot & 0xffffff | 0x5000000;
-          *drawot = (ulong *)((uint)puVar4 & 0xffffff);
+          puVar1[-2] = *(u_int *)pDVar3;
+          puVar1[-1] = *(u_int *)pDVar2;
+          *puVar1 = *(u_int *)&pDVar2->pixW;
+          *puVar4 = (u_int)*drawot & 0xffffff | 0x5000000;
+          *drawot = (u_long *)((u_int)puVar4 & 0xffffff);
           puVar1 = puVar1 + 6;
-          *(uint *)&pDVar2->pixCurrentX = *(uint *)pDVar3;
+          *(u_int *)&pDVar2->pixCurrentX = *(u_int *)pDVar3;
           puVar4 = puVar4 + 6;
           primPool->numPrims = primPool->numPrims + 1;
         }
         if (*(int *)&pDVar3->clutSrcX != *(int *)&pDVar2->clutCurrentX) {
           puVar1[-4] = 0x1000000;
           puVar1[-3] = 0x80000000;
-          puVar1[-2] = *(uint *)&pDVar3->clutSrcX;
-          puVar1[-1] = *(uint *)&pDVar2->clutDstX;
-          *puVar1 = *(uint *)&pDVar2->clutW;
-          *puVar4 = (uint)*drawot & 0xffffff | 0x5000000;
-          *drawot = (ulong *)((uint)puVar4 & 0xffffff);
+          puVar1[-2] = *(u_int *)&pDVar3->clutSrcX;
+          puVar1[-1] = *(u_int *)&pDVar2->clutDstX;
+          *puVar1 = *(u_int *)&pDVar2->clutW;
+          *puVar4 = (u_int)*drawot & 0xffffff | 0x5000000;
+          *drawot = (u_long *)((u_int)puVar4 & 0xffffff);
           puVar1 = puVar1 + 6;
           *(undefined4 *)&pDVar2->clutCurrentX = *(undefined4 *)&pDVar3->clutSrcX;
           puVar4 = puVar4 + 6;
@@ -1729,16 +1729,16 @@ void PIPE3D_AnimateTerrainTextures
 
 void PIPE3D_HalvePlaneInstanceTransformAndDraw
                (_Instance *instance,MATRIX *wcTransform,_VertexPool *vertexPool,_PrimPool *primPool,
-               ulong **ot,_Mirror *mirror)
+               u_long **ot,_Mirror *mirror)
 
 {
-  ulong *puVar1;
+  u_long *puVar1;
   _Model *model;
   MATRIX *matrixPool;
   _MVertex *vertexList;
   MATRIX MStack184;
   MATRIX MStack152;
-  uint auStack120 [8];
+  u_int auStack120 [8];
   MATRIX MStack88;
   _SVector local_38;
   _SVector local_30;
@@ -1763,7 +1763,7 @@ void PIPE3D_HalvePlaneInstanceTransformAndDraw
                vertexPool->color,instance->perVertexColor);
     if (primPool->nextPrim + model->numFaces * 0xc < primPool->lastPrim) {
       draw_belowSplit = ZEXT14(((instance->halvePlane).flags & 2U) != 0);
-      puVar1 = (ulong *)DRAW_SplitModel_S((int)model,instance,(int)vertexPool,auStack120,
+      puVar1 = (u_long *)DRAW_SplitModel_S((int)model,instance,(int)vertexPool,auStack120,
                                           (int)primPool);
       primPool->nextPrim = puVar1;
     }
@@ -1804,10 +1804,10 @@ void PIPE3D_HalvePlaneInstanceTransformAndDraw
 
 void PIPE3D_HalvePlaneGetRingPoints
                (_Instance *instance,MATRIX *wcTransform,_VertexPool *vertexPool,_PrimPool *primPool,
-               ulong **ot,_FXHalvePlane *ring)
+               u_long **ot,_FXHalvePlane *ring)
 
 {
-  ulong *puVar1;
+  u_long *puVar1;
   _PlaneConstants *p_Var2;
   _Model *model;
   MATRIX *matrixPool;
@@ -1839,14 +1839,14 @@ void PIPE3D_HalvePlaneGetRingPoints
     PIPE3D_InvertTransform(&MStack88,&MStack152);
   }
   else {
-    CompMatrix((undefined4 *)wcTransform,(ushort *)&MStack120,(uint *)&MStack88);
+    CompMatrix((undefined4 *)wcTransform,(ushort *)&MStack120,(u_int *)&MStack88);
   }
   if (matrixPool != (MATRIX *)0x0) {
     PIPE3D_TransformSplitInstanceVertices
               (vertexList,(_PVertex *)vertexPool,model,&MStack152,matrixPool,(_Mirror *)0x0);
     draw_belowSplit = 0;
     puVar1 = DRAW_DrawRingPoints(model,vertexPool,&MStack88,primPool,ot,ring->currentColor,
-                                 (uint)ring->type);
+                                 (u_int)ring->type);
     primPool->nextPrim = puVar1;
   }
   return;
@@ -1895,22 +1895,22 @@ void PIPE3D_HalvePlaneGetRingPoints
 	// End Line: 4543
 
 void PIPE3D_DoGlow(_Instance *instance,MATRIX *wcTransform,_VertexPool *vertexPool,
-                  _PrimPool *primPool,ulong **ot,_FXGlowEffect *glow)
+                  _PrimPool *primPool,u_long **ot,_FXGlowEffect *glow)
 
 {
   bool bVar1;
   long *plVar2;
   int iVar3;
-  ulong *puVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
+  u_long *puVar4;
+  u_int uVar5;
+  u_int uVar6;
+  u_int uVar7;
   undefined4 uVar8;
   undefined4 uVar9;
   undefined4 uVar10;
   int seg1;
-  uint uVar11;
-  uint local_20;
+  u_int uVar11;
+  u_int local_20;
   
   uVar7 = 0;
   if ((instance->flags & 0x200U) != 0) {
@@ -1919,28 +1919,28 @@ void PIPE3D_DoGlow(_Instance *instance,MATRIX *wcTransform,_VertexPool *vertexPo
     glow->diffTime = uVar5;
     if (1 < (int)uVar6) {
       uVar5 = uVar5 % ((int)glow->colorBlendCycle * uVar6);
-      uVar11 = (uVar5 / (uint)(int)glow->colorBlendCycle) % uVar6;
+      uVar11 = (uVar5 / (u_int)(int)glow->colorBlendCycle) % uVar6;
       glow->diffTime = uVar5;
       uVar5 = uVar11;
       if (uVar11 == 0) {
         uVar5 = uVar6;
       }
       uVar6 = (glow->diffTime % ((int)glow->colorBlendCycle + 1U) << 0xc) /
-              (uint)(int)glow->colorBlendCycle;
+              (u_int)(int)glow->colorBlendCycle;
       if (0xfff < (int)uVar6) {
         uVar6 = 0;
       }
       setCopReg(2,0x4000,0x1000 - uVar6);
       plVar2 = glow->colorArray + (uVar5 - 1);
-      setCopReg(2,0x4800,(uint)*(byte *)plVar2);
-      setCopReg(2,0x5000,(uint)*(byte *)((int)plVar2 + 1));
-      setCopReg(2,0x5800,(uint)*(byte *)((int)plVar2 + 2));
+      setCopReg(2,0x4800,(u_int)*(byte *)plVar2);
+      setCopReg(2,0x5000,(u_int)*(byte *)((int)plVar2 + 1));
+      setCopReg(2,0x5800,(u_int)*(byte *)((int)plVar2 + 2));
       copFunction(2,0x198003d);
       setCopReg(2,0x4000,uVar6);
       plVar2 = glow->colorArray + uVar11;
-      setCopReg(2,0x4800,(uint)*(byte *)plVar2);
-      setCopReg(2,0x5000,(uint)*(byte *)((int)plVar2 + 1));
-      setCopReg(2,0x5800,(uint)*(byte *)((int)plVar2 + 2));
+      setCopReg(2,0x4800,(u_int)*(byte *)plVar2);
+      setCopReg(2,0x5000,(u_int)*(byte *)((int)plVar2 + 1));
+      setCopReg(2,0x5800,(u_int)*(byte *)((int)plVar2 + 2));
       copFunction(2,0x1a8003e);
       uVar8 = getCopReg(2,0x4800);
       uVar9 = getCopReg(2,0x5000);
@@ -1957,8 +1957,8 @@ void PIPE3D_DoGlow(_Instance *instance,MATRIX *wcTransform,_VertexPool *vertexPo
       if (((int)instance->fadeValue == 0) && (gameTrackerX.gameData.asmData.MorphTime == 1000)) {
         iVar3 = (int)glow->lifeTime;
         if (-1 < iVar3) {
-          if (glow->diffTime < (uint)(int)glow->fadein_time) {
-            uVar7 = (glow->diffTime << 0xc) / (uint)(int)glow->fadein_time;
+          if (glow->diffTime < (u_int)(int)glow->fadein_time) {
+            uVar7 = (glow->diffTime << 0xc) / (u_int)(int)glow->fadein_time;
             bVar1 = true;
           }
           else {
@@ -1981,14 +1981,14 @@ void PIPE3D_DoGlow(_Instance *instance,MATRIX *wcTransform,_VertexPool *vertexPo
       }
       if (bVar1) {
         setCopReg(2,0x4000,uVar7);
-        setCopReg(2,0x4800,(uint)*(byte *)&glow->currentColor);
-        setCopReg(2,0x5000,(uint)*(byte *)((int)&glow->currentColor + 1));
-        setCopReg(2,0x5800,(uint)*(byte *)((int)&glow->currentColor + 2));
+        setCopReg(2,0x4800,(u_int)*(byte *)&glow->currentColor);
+        setCopReg(2,0x5000,(u_int)*(byte *)((int)&glow->currentColor + 1));
+        setCopReg(2,0x5800,(u_int)*(byte *)((int)&glow->currentColor + 2));
         copFunction(2,0x198003d);
         uVar8 = getCopReg(2,0x4800);
         uVar9 = getCopReg(2,0x5000);
         uVar10 = getCopReg(2,0x5800);
-        local_20 = (uint)CONCAT12((char)uVar10,CONCAT11((char)uVar9,(char)uVar8));
+        local_20 = (u_int)CONCAT12((char)uVar10,CONCAT11((char)uVar9,(char)uVar8));
         if ((glow->currentColor & 0x1000000U) != 0) {
           local_20 = local_20 | 0x1000000;
         }
@@ -2003,14 +2003,14 @@ void PIPE3D_DoGlow(_Instance *instance,MATRIX *wcTransform,_VertexPool *vertexPo
       }
       else {
         seg1 = (int)glow->segment;
-        iVar3 = seg1 + (uint)glow->numSegments;
+        iVar3 = seg1 + (u_int)glow->numSegments;
         while (seg1 < iVar3 + -1) {
           puVar4 = DRAW_DrawGlowPoints2
-                             (instance,seg1,seg1 + (uint)glow->SegmentInc,primPool,ot,local_20,
+                             (instance,seg1,seg1 + (u_int)glow->SegmentInc,primPool,ot,local_20,
                               (int)glow->height);
           primPool->nextPrim = puVar4;
           seg1 = seg1 + 1;
-          iVar3 = (int)glow->segment + (uint)glow->numSegments;
+          iVar3 = (int)glow->segment + (u_int)glow->numSegments;
         }
       }
     }
@@ -2049,13 +2049,13 @@ long PIPE3D_Segment2ScreenPt(_Instance *instance,MATRIX *wcTransform,int segInde
   int iVar2;
   undefined4 in_zero;
   undefined4 in_at;
-  uint auStack56 [9];
+  u_int auStack56 [9];
   undefined4 local_14;
   
   CompMatrix((undefined4 *)wcTransform,(ushort *)(instance->matrix + segIndex),auStack56);
   SetRotMatrix(auStack56);
   SetTransMatrix((int)auStack56);
-  local_14 = (uint)local_14._2_2_ << 0x10;
+  local_14 = (u_int)local_14._2_2_ << 0x10;
   setCopReg(2,in_zero,0);
   setCopReg(2,in_at,local_14);
   copFunction(2,0x180001);

@@ -36,8 +36,8 @@
 void menuface_initialize(void)
 
 {
-  uint uVar1;
-  uint uVar2;
+  u_int uVar1;
+  u_int uVar2;
   menuface_t *pmVar3;
   int iVar4;
   int iVar5;
@@ -102,7 +102,7 @@ void menuface_initialize(void)
 void menuface_terminate(void)
 
 {
-  uint uVar1;
+  u_int uVar1;
   int iVar2;
   menuface_t *pmVar3;
   int iVar4;
@@ -114,7 +114,7 @@ void menuface_terminate(void)
     do {
       uVar1 = 0;
       do {
-        if (((int)(uint)pmVar3->loaded >> (uVar1 & 0x1f) & 1U) != 0) {
+        if (((int)(u_int)pmVar3->loaded >> (uVar1 & 0x1f) & 1U) != 0) {
           DRAW_FreeButton(FaceButtons + iVar2 + uVar1);
         }
         uVar1 = uVar1 + 1;
@@ -165,10 +165,10 @@ void menuface_terminate(void)
 void MENUFACE_ChangeStateRandomly(int index)
 
 {
-  uchar uVar1;
-  uchar uVar2;
+  u_char uVar1;
+  u_char uVar2;
   int iVar3;
-  uchar *puVar4;
+  u_char *puVar4;
   menuface_t *pmVar5;
   
   if (hack_initialized != 0) {
@@ -192,7 +192,7 @@ void MENUFACE_ChangeStateRandomly(int index)
           uVar2 = puVar4[-2] + puVar4[-1];
           puVar4[-2] = uVar2;
           uVar1 = 'd';
-          if (((int)(char)uVar2 == (uint)puVar4[-3] * 3 + -1) || ((int)(char)uVar2 == -1)) {
+          if (((int)(char)uVar2 == (u_int)puVar4[-3] * 3 + -1) || ((int)(char)uVar2 == -1)) {
             puVar4[-1] = '\0';
             goto LAB_800b80ec;
           }
@@ -253,7 +253,7 @@ void MENUFACE_RefreshFaces(void)
     do {
       if (-1 < (int)*(char *)((int)psVar1 + 5)) {
         DRAW_DrawButton(FaceButtons +
-                        iVar2 + (int)*(char *)((int)psVar1 + 5) / (int)(uint)*(byte *)(psVar1 + 2),
+                        iVar2 + (int)*(char *)((int)psVar1 + 5) / (int)(u_int)*(byte *)(psVar1 + 2),
                         pmVar3->x,*psVar1,gameTrackerX.drawOT + 1);
       }
       iVar2 = iVar2 + 3;

@@ -163,7 +163,7 @@ void PLAN_UpdatePlanMkrNodes(PlanningNode *planningPool,_Position *playerPos)
       }
       iVar6 = iVar6 + 1;
       nodeToDelete = nodeToDelete + 1;
-    } while (iVar6 < (int)(uint)*(byte *)(poolManagementData + 1));
+    } while (iVar6 < (int)(u_int)*(byte *)(poolManagementData + 1));
   }
   return;
 }
@@ -232,7 +232,7 @@ void PLAN_UpdatePlayerNode(PlanningNode *planningPool,_Position *playerPos)
       }
       else {
         PLANPOOL_ChangeNodePosition(&_Stack48.collidePos,nodeToChange,planningPool);
-        uVar1 = (ushort)(((uint)local_20[0] & 3) << 3) | 1;
+        uVar1 = (ushort)(((u_int)local_20[0] & 3) << 3) | 1;
       }
     }
     else {
@@ -315,7 +315,7 @@ void PLAN_AddRandomNode(PlanningNode *planningPool,_Position *playerPos)
     local_38.collidePos.x =
          local_38.collidePos.x + -12000 + (short)iVar2 + (short)(iVar2 / 24000) * -24000;
     iVar2 = rand();
-    iVar2 = ((uint)local_38.collidePos.y - 12000) + iVar2 % 24000;
+    iVar2 = ((u_int)local_38.collidePos.y - 12000) + iVar2 % 24000;
     local_38.collidePos.y = (ushort)iVar2;
     lVar3 = MATH3D_LengthXYZ((int)playerPos->x - (int)local_38.collidePos.x,
                              (int)playerPos->y - (iVar2 * 0x10000 >> 0x10),
@@ -411,7 +411,7 @@ void PLAN_DeleteOutOfRangeNodesOfSource
   if (*(char *)(poolManagementData + 1) != '\0') {
     nodeToDelete = planningPool;
     do {
-      if ((((uint)nodeToDelete->nodeType & 7) == (uint)(byte)nodeSourceToCheck) &&
+      if ((((u_int)nodeToDelete->nodeType & 7) == (u_int)(byte)nodeSourceToCheck) &&
          (lVar1 = MATH3D_LengthXYZ((int)playerPos->x - (int)(nodeToDelete->pos).x,
                                    (int)playerPos->y - (int)(nodeToDelete->pos).y,
                                    (int)playerPos->z - (int)(nodeToDelete->pos).z),
@@ -420,7 +420,7 @@ void PLAN_DeleteOutOfRangeNodesOfSource
       }
       iVar2 = iVar2 + 1;
       nodeToDelete = nodeToDelete + 1;
-    } while (iVar2 < (int)(uint)*(byte *)(poolManagementData + 1));
+    } while (iVar2 < (int)(u_int)*(byte *)(poolManagementData + 1));
   }
   return;
 }
@@ -455,7 +455,7 @@ void PLAN_AddOrRemoveRandomNodes(PlanningNode *planningPool,_Position *playerPos
 {
   int iVar1;
   
-  iVar1 = (uint)*(byte *)(poolManagementData + 1) - 0x10;
+  iVar1 = (u_int)*(byte *)(poolManagementData + 1) - 0x10;
   if (iVar1 < 0) {
     PLAN_AddRandomNode(planningPool,playerPos);
   }
@@ -602,7 +602,7 @@ PlanningNode * PLAN_FindNodeMostInNeedOfConnectivityExpansion(PlanningNode *plan
 
 {
   int iVar1;
-  uint uVar2;
+  u_int uVar2;
   int iVar3;
   PlanningNode *pPVar4;
   int iVar5;
@@ -615,13 +615,13 @@ PlanningNode * PLAN_FindNodeMostInNeedOfConnectivityExpansion(PlanningNode *plan
       iVar1 = PLANPOOL_NumConnectionsForNode(planningPool);
       if ((iVar1 < iVar5) &&
          (uVar2 = PLANPOOL_NumConnectionsExaminedForNode(planningPool),
-         uVar2 != (uint)*(byte *)(poolManagementData + 1))) {
+         uVar2 != (u_int)*(byte *)(poolManagementData + 1))) {
         pPVar4 = planningPool;
         iVar5 = iVar1;
       }
       iVar3 = iVar3 + 1;
       planningPool = planningPool + 1;
-    } while (iVar3 < (int)(uint)*(byte *)(poolManagementData + 1));
+    } while (iVar3 < (int)(u_int)*(byte *)(poolManagementData + 1));
   }
   return pPVar4;
 }

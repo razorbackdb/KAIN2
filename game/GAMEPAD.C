@@ -27,12 +27,12 @@ void GAMEPAD_Commands(long (*command) [5],long (*data) [5],long pad)
 {
   long (*palVar1) [5];
   int iVar2;
-  uint uVar3;
-  uint *puVar4;
-  uint *puVar5;
-  uint uVar6;
+  u_int uVar3;
+  u_int *puVar4;
+  u_int *puVar5;
+  u_int uVar6;
   int iVar7;
-  uint uVar8;
+  u_int uVar8;
   
   palVar1 = data + pad;
   (command + pad)[2] = (command + pad)[0] & ~(*palVar1)[0];
@@ -77,10 +77,10 @@ LAB_80030e58:
   iVar2 = pad << 2;
 LAB_80030eac:
   iVar2 = iVar2 + pad;
-  puVar5 = (uint *)(*data + iVar2);
+  puVar5 = (u_int *)(*data + iVar2);
   puVar5[1] = ~(int)*(short *)(&lastPad_24 + pad * 2) & *puVar5;
   *(short *)(&lastPad_24 + pad * 2) = *(short *)puVar5;
-  puVar4 = (uint *)(*command + iVar2);
+  puVar4 = (u_int *)(*command + iVar2);
   puVar4[3] = uVar8;
   puVar4[4] = uVar6;
   if ((gameTrackerX.gameFlags & 0x10U) == 0) {
@@ -210,7 +210,7 @@ void GAMEPAD_DisableDualShock(void)
 
 {
   dualshock_onflag = 0;
-  UCHAR_00h_800c8ebd = '\0';
+  u_char_00h_800c8ebd = '\0';
   dualshock_motors = '\0';
   dualshock1_time = 0;
   dualshock0_time = 0;
@@ -278,8 +278,8 @@ void GAMEPAD_HandleDualShock(void)
 
 {
   bool bVar1;
-  ulong uVar2;
-  uint uVar3;
+  u_long uVar2;
+  u_int uVar3;
   int iVar4;
   int iVar5;
   
@@ -309,7 +309,7 @@ void GAMEPAD_HandleDualShock(void)
   iVar5 = dualshock1_time - uVar2;
   if ((0 < dualshock1_time) && (dualshock1_time = iVar5, iVar5 < 1)) {
     dualshock1_time = 0;
-    UCHAR_00h_800c8ebd = '\0';
+    u_char_00h_800c8ebd = '\0';
   }
   return;
 }
@@ -334,8 +334,8 @@ void GAMEPAD_Shock(int motor0_speed,int motor0_time,int motor1_speed,int motor1_
 
 {
   if (dualshock_onflag != 0) {
-    dualshock_motors = (uchar)motor0_speed;
-    UCHAR_00h_800c8ebd = (uchar)motor1_speed;
+    dualshock_motors = (u_char)motor0_speed;
+    u_char_00h_800c8ebd = (u_char)motor1_speed;
     dualshock0_time = motor0_time;
     dualshock1_time = motor1_time;
     PadSetAct(0,&dualshock_motors,2);
@@ -363,7 +363,7 @@ void GAMEPAD_Shock0(int motor0_speed,int motor0_time)
 
 {
   if (dualshock_onflag != 0) {
-    dualshock_motors = (uchar)motor0_speed;
+    dualshock_motors = (u_char)motor0_speed;
     dualshock0_time = motor0_time;
     PadSetAct(0,&dualshock_motors,2);
   }
@@ -390,7 +390,7 @@ void GAMEPAD_Shock1(int motor1_speed,int motor1_time)
 
 {
   if (dualshock_onflag != 0) {
-    UCHAR_00h_800c8ebd = (uchar)motor1_speed;
+    u_char_00h_800c8ebd = (u_char)motor1_speed;
     dualshock1_time = motor1_time;
     PadSetAct(0,&dualshock_motors,2);
   }
@@ -423,7 +423,7 @@ void GAMEPAD_Shock1(int motor1_speed,int motor1_time)
 void GAMEPAD_Detect(void)
 
 {
-  uint uVar1;
+  u_int uVar1;
   int iVar2;
   
   dualshock0_time = 0;
@@ -623,7 +623,7 @@ void PSXPAD_TranslateData(long *data,ushort padData,ushort lastData)
 {
   ushort uVar1;
   undefined **ppuVar2;
-  uint uVar3;
+  u_int uVar3;
   undefined4 *puVar4;
   undefined4 *puVar5;
   int iVar6;
@@ -650,7 +650,7 @@ void PSXPAD_TranslateData(long *data,ushort padData,ushort lastData)
   iVar6 = 0;
   do {
     uVar1 = *(ushort *)puVar5;
-    uVar3 = (uint)((ushort *)puVar5)[1];
+    uVar3 = (u_int)((ushort *)puVar5)[1];
     if ((padData & uVar1) == 0) {
       *data = *data | uVar3;
       if ((lastData & uVar1) != 0) {
@@ -699,9 +699,9 @@ void PSXPAD_TranslateData(long *data,ushort padData,ushort lastData)
 ushort GAMEPAD_RemapAnalogueButtons(ushort in)
 
 {
-  uint uVar1;
+  u_int uVar1;
   
-  uVar1 = ~(uint)in;
+  uVar1 = ~(u_int)in;
   return ~((ushort)uVar1 & 0x61f9 |
           (ushort)((uVar1 & 0x800) << 1) | (ushort)((uVar1 & 0x400) << 5) |
           (ushort)((uVar1 & 0x200) << 1) | (ushort)((uVar1 & 0x8000) >> 6) |
@@ -741,9 +741,9 @@ void GAMEPAD_GetData(long (*data) [5])
 {
   int iVar1;
   ControllerPacket *pCVar2;
-  uint uVar3;
+  u_int uVar3;
   ControllerPacket *pCVar4;
-  uint uVar5;
+  u_int uVar5;
   undefined4 uVar6;
   undefined4 uVar7;
   undefined4 uVar8;
@@ -810,8 +810,8 @@ void GAMEPAD_GetData(long (*data) [5])
   if ((gpbuffer1.dataFormat != 's') && (gpbuffer1.dataFormat != 'S')) {
     return;
   }
-  uVar5 = (uint)gpbuffer1.data[4];
-  uVar3 = (uint)gpbuffer1.data[5];
+  uVar5 = (u_int)gpbuffer1.data[4];
+  uVar3 = (u_int)gpbuffer1.data[5];
   if (uVar5 - 0x4a < 0x6d) {
     iVar1 = uVar5 - 0x80;
     if ((gpbuffer1.data[5] < 0x4a) || (iVar1 = uVar5 - 0x80, 0xb6 < gpbuffer1.data[5]))

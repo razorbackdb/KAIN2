@@ -27,16 +27,16 @@
 	/* end block 2 */
 	// End Line: 233
 
-void WCBEGG_Message(_Instance *instance,ulong message,ulong data)
+void WCBEGG_Message(_Instance *instance,u_long message,u_long data)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   void *pvVar2;
   
   if (message == 0x800002) {
     pvVar2 = instance->extraData;
     uVar1 = MON_GetTime(instance);
-    *(ulong *)((int)pvVar2 + 0x28) = uVar1;
+    *(u_long *)((int)pvVar2 + 0x28) = uVar1;
     G2EmulationInstanceSwitchAnimationAlpha(instance,0,1,0,0,2,0);
   }
   PhysicalObjectPost(instance,message,data);
@@ -68,7 +68,7 @@ int WCBEGG_ShouldIgniteEgg(_Instance *egg,_walbossAttributes *wa)
 
 {
   _InstanceList *p_Var1;
-  ulong uVar2;
+  u_long uVar2;
   long lVar3;
   int iVar4;
   _Instance *Inst;
@@ -122,7 +122,7 @@ int WCBEGG_ShouldIgniteEgg(_Instance *egg,_walbossAttributes *wa)
 void WCBEGG_Process(_Instance *instance,GameTracker *gameTracker)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   Object *pOVar2;
   void *pvVar3;
   int iVar4;
@@ -189,7 +189,7 @@ void WCBEGG_Process(_Instance *instance,GameTracker *gameTracker)
 void WCBEGG_ExplodeProcess(_Instance *instance,GameTracker *gameTracker)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   int iVar2;
   void *pvVar3;
   int iVar4;
@@ -237,20 +237,20 @@ void WCBEGG_ExplodeCollide(_Instance *instance,GameTracker *gameTracker)
 
 {
   byte bVar1;
-  ulong uVar2;
+  u_long uVar2;
   void *pvVar3;
   _Instance *Inst;
-  uint *puVar4;
+  u_int *puVar4;
   
   pvVar3 = instance->collideInfo;
-  puVar4 = (uint *)instance->extraData;
+  puVar4 = (u_int *)instance->extraData;
   bVar1 = *(byte *)((int)pvVar3 + 7);
   if ((((bVar1 == 1) && (*(char *)(*(int *)((int)pvVar3 + 0xc) + 4) == '\b')) &&
       (Inst = *(_Instance **)((int)pvVar3 + 0x14), Inst != (_Instance *)0x0)) &&
      (uVar2 = INSTANCE_Query(Inst,1), uVar2 == 0x10102)) {
     if (((*puVar4 & 0x10000) != 0) && (instance->LinkParent == (_Instance *)0x0)) {
       INSTANCE_Post(Inst,0x1000017,2);
-      G2EmulationInstanceSwitchAnimationAlpha(instance,0,4,0,0,(uint)bVar1,0);
+      G2EmulationInstanceSwitchAnimationAlpha(instance,0,4,0,0,(u_int)bVar1,0);
       instance->processFunc = WCBEGG_ExplodeProcess;
       uVar2 = MON_GetTime(instance);
       puVar4[10] = uVar2;
@@ -374,7 +374,7 @@ void WALBOSC_Collide(_Instance *instance,GameTracker *gameTracker)
     if (Data < 0) {
       Data = Data + 0x7f;
     }
-    Data = SetFXHitData(instance,(uint)*(byte *)((int)pvVar1 + 5),Data >> 7,0x100);
+    Data = SetFXHitData(instance,(u_int)*(byte *)((int)pvVar1 + 5),Data >> 7,0x100);
     INSTANCE_Post(Inst,0x400000,Data);
     Data = SetMonsterHitData(instance,(_Instance *)0x0,*(int *)((int)pvVar2 + 8),
                              (int)*(short *)((int)pvVar2 + 0x10),(int)*(char *)((int)pvVar2 + 0x12))
@@ -395,7 +395,7 @@ void WALBOSC_Collide(_Instance *instance,GameTracker *gameTracker)
 	/* end block 1 */
 	// End Line: 774
 
-void WALBOSC_Message(_Instance *instance,ulong message,ulong data)
+void WALBOSC_Message(_Instance *instance,u_long message,u_long data)
 
 {
   if ((message == 0x1000017) && (data == 0)) {

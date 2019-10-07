@@ -20,7 +20,7 @@ void StateHandlerInitSwim(__CharacterState *In,int CurrentSection,int Data)
   StateSwitchStateData(In,CurrentSection,StateHandlerSwimTread,0);
   plVar1 = PadData;
   (&In->CharacterInstance + CurrentSection * 0x47)[0x48] =
-       (_Instance *)((uint)(&In->CharacterInstance + CurrentSection * 0x47)[0x48] | 2);
+       (_Instance *)((u_int)(&In->CharacterInstance + CurrentSection * 0x47)[0x48] | 2);
   if ((*plVar1 & 0x80) != 0) {
     EnMessageQueueData(&In->SectionList[CurrentSection].Defer,-0x7fffffff,0);
   }
@@ -79,7 +79,7 @@ void StateHandlerSwimCoil(__CharacterState *In,int CurrentSection,int Data)
   int NewAnim;
   _Instance **pp_Var3;
   __State *p_Var4;
-  uint uVar5;
+  u_int uVar5;
   int local_28;
   int local_24;
   
@@ -134,7 +134,7 @@ LAB_8009ea10:
             }
             G2EmulationSwitchAnimation(In,Data_00,NewAnim,0,local_28,local_24);
             StateSwitchStateData(In,CurrentSection,StateHandlerSwim,0);
-            pp_Var3[0x48] = (_Instance *)((uint)pp_Var3[0x48] | 2);
+            pp_Var3[0x48] = (_Instance *)((u_int)pp_Var3[0x48] | 2);
           }
           else {
             StateSwitchStateData(In,CurrentSection,StateHandlerSwimTread,0);
@@ -650,7 +650,7 @@ void StateHandlerSwimDiveIn(__CharacterState *In,int CurrentSection,int Data)
                   StateSwitchStateData(In,CurrentSection,StateHandlerSwim,0);
                   (&In->CharacterInstance + CurrentSection * 0x47)[0x48] =
                        (_Instance *)
-                       ((uint)(&In->CharacterInstance + CurrentSection * 0x47)[0x48] | 2);
+                       ((u_int)(&In->CharacterInstance + CurrentSection * 0x47)[0x48] | 2);
                 }
                 else {
                   StateSwitchStateData(In,CurrentSection,StateHandlerSwimTread,0);
@@ -710,7 +710,7 @@ void StateHandlerSwim(__CharacterState *In,int CurrentSection,int Data)
 {
   __Event *p_Var1;
   int Data_00;
-  ulong uVar2;
+  u_long uVar2;
   undefined *puVar3;
   _Instance *Inst;
   long adjustment;
@@ -783,7 +783,7 @@ void StateHandlerSwim(__CharacterState *In,int CurrentSection,int Data)
                       Data_00 = 5;
                       goto LAB_8009fbfc;
                     }
-                    pp_Var4[0x48] = (_Instance *)((uint)pp_Var4[0x48] | 1);
+                    pp_Var4[0x48] = (_Instance *)((u_int)pp_Var4[0x48] | 1);
                   }
                 }
               }
@@ -942,7 +942,7 @@ LAB_8009fc84:
             if (puVar3 == (undefined *)0x8000001) {
               Data_00 = p_Var1->Data;
               if ((Data_00 == 0x44) || (Data_00 == 0x42)) {
-                if (((uint)pp_Var4[0x48] & 1) == 0) {
+                if (((u_int)pp_Var4[0x48] & 1) == 0) {
                   if (((*PadData & 0x80) == 0) || (Raziel.steeringMode != 6)) {
                     if (CurrentSection == 0) {
                       razSetSwimVelocity(In->CharacterInstance,0,
@@ -966,7 +966,7 @@ LAB_8009fbfc:
                 else {
                   razSetSwimVelocity(In->CharacterInstance,PlayerData->SwimPhysicsUnderKickVelocity,
                                      PlayerData->SwimPhysicsUnderKickAccel);
-                  pp_Var4[0x48] = (_Instance *)((uint)pp_Var4[0x48] & 0xfffffffe);
+                  pp_Var4[0x48] = (_Instance *)((u_int)pp_Var4[0x48] & 0xfffffffe);
                 }
               }
               else {
