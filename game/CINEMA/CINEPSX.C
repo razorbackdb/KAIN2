@@ -1,6 +1,18 @@
 #include "THISDUST.H"
 #include "CINEPSX.H"
+#include "SUPPORT.H"
+#include "LOAD3D.H"
+#include "STREAM.H"
+#include "STRMLOAD.H"
+#include "MAIN.H"
 
+#include "LIBETC.H"
+
+typedef enum
+{
+    FALSE,
+    TRUE
+} bool;
 
 // decompiled code
 // original method signature: 
@@ -48,9 +60,9 @@ ushort CINE_Pad(int pad)
 
 {
   if (pad == 0) {
-    return readGPBuffer1.data._0_2_;
+    //return readGPBuffer1.data._0_2_;
   }
-  return readGPBuffer2.data._0_2_;
+  //return readGPBuffer2.data._0_2_;
 }
 
 
@@ -93,7 +105,7 @@ void CINE_Play(char *strfile,ushort mask,int buffers)
 {
   if (the_cine_table != (cinema_fn_table_t *)0x0) {
     if (the_cine_table->versionID == "May 25 1999") {
-      (*the_cine_table->play)(strfile,(uint)mask);
+      (*the_cine_table->play);
       LOAD_InitCdStreamMode();
     }
     else {
@@ -113,7 +125,7 @@ void CINE_Play(char *strfile,ushort mask,int buffers)
 		// Start line: 80
 		// Start offset: 0x800B6178
 		// Variables:
-	// 		struct _ObjectTracker *tracker; // $s1
+	// 		struct ObjectTracker *tracker; // $s1
 	// 		int attempts; // $s0
 
 		/* begin block 1.1 */
@@ -137,7 +149,7 @@ int CINE_Load(void)
 
 {
   bool bVar1;
-  _ObjectTracker *p_Var2;
+  ObjectTracker *p_Var2;
   int iVar3;
   
   iVar3 = 0;
@@ -157,7 +169,7 @@ int CINE_Load(void)
     the_cine_table = (cinema_fn_table_t *)p_Var2->object->relocModule;
     the_cine_tracker = p_Var2;
   }
-  return (uint)bVar1;
+  return (u_int)bVar1;
 }
 
 
@@ -181,7 +193,7 @@ int CINE_Load(void)
 int CINE_Loaded(void)
 
 {
-  return (uint)(the_cine_tracker != (_ObjectTracker *)0x0);
+  return (u_int)(the_cine_tracker != (ObjectTracker *)0x0);
 }
 
 
@@ -202,9 +214,9 @@ void CINE_Unload(void)
 {
   VSyncCallback(VblTick);
   the_cine_table = (cinema_fn_table_t *)0x0;
-  if (the_cine_tracker != (_ObjectTracker *)0x0) {
+  if (the_cine_tracker != (ObjectTracker *)0x0) {
     STREAM_DumpObject(the_cine_tracker);
-    the_cine_tracker = (_ObjectTracker *)0x0;
+    the_cine_tracker = (ObjectTracker *)0x0;
   }
   return;
 }

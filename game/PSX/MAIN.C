@@ -25,12 +25,17 @@
 #include "DEBUG.H"
 #include "MAING2.H"
 
+#include "LIBETC.H"
+#include "LIBGPU.H"
+#include "LIBAPI.H"
+#include "LIBGPU.H"
+#include "STDDEF.H"
 
-#include <LIBETC.H>
-#include <LIBGPU.H>
-#include <LIBAPI.H>
-#include <LIBGPU.H>
-#include <STDDEF.H>
+typedef enum
+{
+    FALSE,
+    TRUE
+} bool;
 
 // decompiled code
 // original method signature: 
@@ -225,7 +230,7 @@ void ExtractWorldName(char *worldName,char *levelName)
   byte bVar1;
   
   bVar1 = *levelName;
-  while ((bVar1 != 0x2d && (((uint)bVar1 - 0x41 < 0x1a || ((uint)bVar1 - 0x61 < 0x1a))))) {
+  while ((bVar1 != 0x2d && (((u_int)bVar1 - 0x41 < 0x1a || ((u_int)bVar1 - 0x61 < 0x1a))))) {
     levelName = (char *)((byte *)levelName + 1);
     *worldName = bVar1;
     bVar1 = *levelName;
@@ -258,12 +263,12 @@ void ExtractLevelNum(char *levelNum,char *levelName)
   
   bVar1 = *levelName;
   while (bVar1 != 0x2d) {
-    if ((uint)bVar1 - 0x30 < 10) goto LAB_80038658;
+    if ((u_int)bVar1 - 0x30 < 10) goto LAB_80038658;
     levelName = (char *)((byte *)levelName + 1);
     bVar1 = *levelName;
   }
   bVar1 = *levelName;
-  while ((uint)bVar1 - 0x30 < 10) {
+  while ((u_int)bVar1 - 0x30 < 10) {
 LAB_80038658:
     bVar1 = *levelName;
     levelName = (char *)((byte *)levelName + 1);
@@ -444,8 +449,8 @@ void StartTimer(void)
 {
   EnterCriticalSection();
   //__timerEvent = OpenEvent();
-  EnableEvent();
-  //SetRCnt(0xf2000000,0xffff,(uint)&DAT_00001001);
+  //EnableEvent();
+  //SetRCnt(0xf2000000,0xffff,(u_int)&DAT_00001001);
   StartRCnt(0xf2000000);
   ExitCriticalSection();
   gTimerEnabled = 1;
@@ -479,7 +484,7 @@ void VblTick(void)
   gameTrackerX.vblFrames = gameTrackerX.vblFrames + 1;
   gameTrackerX.vblCount = gameTrackerX.vblCount + 1;
   if ((gameTrackerX.reqDisp != (void *)0x0) &&
-     ((uint)gameTrackerX.frameRateLock < gameTrackerX.vblFrames)) {
+     ((u_int)gameTrackerX.frameRateLock < gameTrackerX.vblFrames)) {
     PutDispEnv((ushort *)gameTrackerX.reqDisp);
     gameTrackerX.reqDisp = (void *)0x0;
     gameTrackerX.vblFrames = 0;
@@ -508,7 +513,7 @@ void VblTick(void)
 void DrawCallback(void)
 
 {
-  ulong uVar1;
+  u_long uVar1;
   
   if (gameTrackerX.drawTimerReturn != (long *)0x0) {
     uVar1 = TIMER_TimeDiff(gameTrackerX.usecsStartDraw);
@@ -548,8 +553,8 @@ void FadeOutSayingLoading(GameTracker *gameTracker)
   int iVar2;
   //undefined uVar3;
   int iVar4;
-  ulong *puVar5;
-  ulong **ot;
+  u_long *puVar5;
+  u_long **ot;
   
   ot = gameTracker->drawOT;
   puVar5 = gameTracker->primPool->nextPrim;
@@ -573,7 +578,7 @@ void FadeOutSayingLoading(GameTracker *gameTracker)
       //iVar2 = CheckVolatile(gameTracker->reqDisp);
     } while (iVar2 != 0);
     iVar2 = (gameTracker->gameData).asmData.dispPage;
-    *(ulong **)&gameTracker->drawTimerReturn = &gameTracker->drawTime;
+    *(u_long **)&gameTracker->drawTimerReturn = &gameTracker->drawTime;
     (gameTracker->gameData).asmData.dispPage = 1 - iVar2;
     VSync(0);
     //DrawOTag(ot + 0xbff);
@@ -725,7 +730,7 @@ long * MAIN_LoadTim(char *name)
 void init_menus(GameTracker *gt)
 
 {
-  ulong allocSize;
+  u_long allocSize;
   menu_t *menu;
   
   allocSize = menu_data_size();
@@ -1035,7 +1040,7 @@ void MAIN_StartGame(void)
 long MAIN_DoMainMenu(GameTracker *gameTracker,MainTracker *mainTracker,long menuPos)
 
 {
-  ulong **drawot;
+  u_long **drawot;
   
   drawot = gameTracker->drawOT;
   //DrawPrim((int)(clearRect + gameTracker->drawPage));
@@ -1094,7 +1099,7 @@ int MainG2(void *appData)
 {
   bool bVar1;
   long lVar2;
-  _G2Bool_Enum _Var3;
+  bool _Var3;
   int iVar4;
   long menuPos;
   
@@ -1198,10 +1203,10 @@ LAB_80039890:
         if ((InterfaceItems)[lVar2].timeout != 0) {
           do {
             GAMEPAD_Process(&gameTrackerX);
-            if (((int)(uint)(InterfaceItems)[lVar2].buttonTimeout < iVar4) &&
+            if (((int)(u_int)(InterfaceItems)[lVar2].buttonTimeout < iVar4) &&
                ((gameTrackerX.controlCommand[0][1] & 0x80U) != 0)) break;
             VSync(0);
-            bVar1 = iVar4 < (int)(uint)(InterfaceItems)[lVar2].timeout;
+            bVar1 = iVar4 < (int)(u_int)(InterfaceItems)[lVar2].timeout;
             iVar4 = iVar4 + 1;
           } while (bVar1);
         }
@@ -1271,8 +1276,8 @@ LAB_8003959c:
     VSyncCallback(0);
     EnterCriticalSection();
     StopRCnt(0xf2000000);
-    DisableEvent();
-    CloseEvent();
+    //DisableEvent();
+    //CloseEvent();
     ExitCriticalSection();
     VSync(5);
     StopCallback();

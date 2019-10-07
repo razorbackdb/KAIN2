@@ -1,5 +1,6 @@
 #include "THISDUST.H"
 #include "SUPPORT.H"
+#include "STRINGS.H"
 
 
 // decompiled code
@@ -25,10 +26,10 @@ int printf(char *fmt)
 
 {
   int iVar1;
-  undefined local_res4 [12];
+  //undefined local_res4 [12];
   char acStack264 [256];
   
-  iVar1 = vsprintf(acStack264,fmt,local_res4);
+  //iVar1 = vsprintf(acStack264,fmt,local_res4);
   puts(acStack264);
   return iVar1;
 }
@@ -55,9 +56,9 @@ int sprintf(char *string,char *fmt)
 
 {
   int iVar1;
-  undefined local_res8 [8];
+  //undefined local_res8 [8];
   
-  iVar1 = vsprintf(string,fmt,local_res8);
+  //iVar1 = vsprintf(string,fmt,local_res8);
   return iVar1;
 }
 
@@ -112,7 +113,7 @@ int vsprintf(char *str,char *fmtstr,void *argptr)
   int iVar8;
   int __c;
   char local_38;
-  undefined local_37;
+  //undefined local_37;
   
   bVar1 = *fmtstr;
   iVar8 = 0;
@@ -140,11 +141,11 @@ int vsprintf(char *str,char *fmtstr,void *argptr)
         }
         bVar2 = *pbVar6;
         iVar5 = 0;
-        while ((uint)bVar2 - 0x30 < 10) {
+        while ((u_int)bVar2 - 0x30 < 10) {
           bVar3 = *pbVar6;
           pbVar6 = pbVar6 + 1;
           bVar2 = *pbVar6;
-          iVar5 = iVar5 * 10 + (uint)bVar3 + -0x30;
+          iVar5 = iVar5 * 10 + (u_int)bVar3 + -0x30;
         }
         do {
           do {
@@ -159,7 +160,7 @@ int vsprintf(char *str,char *fmtstr,void *argptr)
         if (bVar2 == 99) {
           local_38 = *(char *)argptr;
           __s = &local_38;
-          local_37 = 0;
+          //local_37 = 0;
         }
         else {
           if (bVar2 == 0x73) {
@@ -174,7 +175,7 @@ int vsprintf(char *str,char *fmtstr,void *argptr)
               __s = *(char **)argptr;
               radix = 10;
             }
-            __s = my_itoa((ulong)__s,&local_38,radix);
+            //__s = my_itoa((u_long)__s,&local_38,radix);
           }
         }
         argptr = (char **)argptr + 1;
@@ -209,7 +210,7 @@ LAB_80073ee8:
     }
 LAB_80073ef8:
     bVar1 = *fmtstr;
-  } while( true );
+  } while( 1 );
 }
 
 
@@ -234,7 +235,7 @@ LAB_80073ef8:
 	/* end block 2 */
 	// End Line: 467
 
-char * my_itoa(ulong value,char *str,int radix)
+char * my_itoa(u_long value,char *str,int radix)
 
 {
   char cVar1;
@@ -260,7 +261,7 @@ char * my_itoa(ulong value,char *str,int radix)
     }
     while (value != 0) {
       *pbVar2 = (char)(value % radix);
-      value = value / (uint)radix;
+      value = value / (u_int)radix;
       pbVar2 = pbVar2 + 1;
     }
     pbVar2 = pbVar2 + -1;
@@ -319,7 +320,7 @@ int atoi(char *str)
     bVar3 = *str;
     str = (char *)((byte *)str + 1);
     bVar2 = *str;
-    iVar4 = iVar4 * 10 + -0x30 + (uint)bVar3;
+    iVar4 = iVar4 * 10 + -0x30 + (u_int)bVar3;
   }
   if (cVar1 != '-') {
     return iVar4;
@@ -383,10 +384,10 @@ int strcmpi(char *s1,char *s2)
   do {
     bVar1 = *s1;
     s1 = (char *)((byte *)s1 + 1);
-    iVar2 = mytolower((uint)bVar1);
+    iVar2 = mytolower((u_int)bVar1);
     bVar1 = *s2;
     s2 = (char *)((byte *)s2 + 1);
-    iVar3 = mytolower((uint)bVar1);
+    iVar3 = mytolower((u_int)bVar1);
     if (iVar2 != iVar3) {
       return iVar2 - iVar3;
     }

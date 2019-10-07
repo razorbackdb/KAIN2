@@ -1,7 +1,7 @@
 #ifndef THISDUST_H
 #define THISDUST_H
 
-#include "INCLUDE\TYPES.H"
+#include "TYPES.H"
 
 struct NodeType // hashcode: 0x5BF613D7 (dec: 1542853591)
 {
@@ -2231,50 +2231,6 @@ typedef struct __MessageQueue MessageQueue;
 
 typedef struct __State State;
 
-typedef unsigned char u_char;
-
-typedef unsigned short u_short;
-
-typedef unsigned int u_int;
-
-typedef unsigned long u_long;
-
-typedef unsigned short ushort;
-
-typedef struct _physadr *physadr;
-
-typedef long daddr_t;
-
-typedef char *caddr_t;
-
-typedef long *qaddr_t;
-
-typedef unsigned long ino_t;
-
-typedef long swblk_t;
-
-typedef unsigned int size_t;
-
-typedef long time_t;
-
-typedef short dev_t;
-
-typedef long off_t;
-
-typedef unsigned short uid_t;
-
-typedef unsigned short gid_t;
-
-typedef void *va_list;
-
-typedef unsigned char uchar;
-
-typedef unsigned char u_byte;
-
-typedef unsigned char ubyte;
-
-typedef unsigned long ulong;
-
 typedef char int8;
 
 typedef short int16;
@@ -2283,29 +2239,21 @@ typedef long int32;
 
 typedef long int64;
 
-typedef unsigned char uint8;
+typedef unsigned char u_int8;
 
-typedef unsigned short uint16;
+typedef unsigned short u_int16;
 
-typedef unsigned long uint32;
+typedef unsigned long u_int32;
 
-typedef unsigned long uint64;
-
-typedef char BYTE;
-
-typedef unsigned char UBYTE;
-
-typedef unsigned long ULONG;
-
-typedef unsigned short USHORT;
+typedef unsigned long u_int64;
 
 typedef unsigned long *OTag;
 
-typedef unsigned char G2UInt8;
+typedef unsigned char G2u_int8;
 
-typedef unsigned short G2UInt16;
+typedef unsigned short G2u_int16;
 
-typedef unsigned long G2UInt32;
+typedef unsigned long G2u_int32;
 
 typedef char G2Int8;
 
@@ -11666,459 +11614,278 @@ typedef struct memcard_t memcard_t;
 
 typedef int mcard_filename_fn_t();
 
-extern void InterruptCallback(uint param_1,int param_2);; // 0x800B86DC
+extern void InterruptCallback(u_int param_1,int param_2); // 0x800B86DC
 
-extern void DMACallback(void);; // 0x800B870C
+extern void DMACallback(void); // 0x800B870C
 
-extern void VSyncCallbacks(void);; // 0x800B8770
+extern void VSyncCallbacks(void); // 0x800B8770
 
-//extern uint SetIntrMask(word param_1);; // 0x800B87E0
+//extern u_int SetIntrMask(word param_1); // 0x800B87E0
 
-extern int strncmp(char *__s1,char *__s2,size_t __n);; // 0x800B8D24
+extern int strncmp(char *__s1,char *__s2,size_t __n); // 0x800B8D24
 
-extern uint ResetGraph(uint param_1);; // 0x800B8DA4
+extern void FUN_800b90d4(u_char param_1,short *param_2); // 0x800B90D4
 
-extern uint SetGraphDebug(char param_1);; // 0x800B8F18
+//extern void ClearOTagR(u_char *param_1,dword param_2); // 0x800B9398
 
-extern void FUN_800b90d4(u_char param_1,short *param_2);; // 0x800B90D4
+extern u_char * ApplyMatrix(u_char *param_1,u_char *param_2,u_char *param_3); // 0x800BB5C0
 
-extern void ClearImage(u_char *param_1,uint param_2,uint param_3,uint param_4);; // 0x800B91F0
+extern void * memset(void *__s,int __c,size_t __n); // 0x800BB610
 
-extern void LoadImage(u_char *param_1,u_char param_2);; // 0x800B9280
+extern int rand(void); // 0x800BB640
 
-extern uint MoveImage(u_char *param_1,uint param_2,int param_3);; // 0x800B92E0
+extern void srand(u_int __seed); // 0x800BB670
 
-//extern void ClearOTagR(u_char *param_1,dword param_2);; // 0x800B9398
+extern void SetTransMatrix(int param_1); // 0x800BB680
 
-extern void DrawPrim(int param_1);; // 0x800B9444
+extern void SetRotMatrix(u_char *param_1); // 0x800BB6A0
 
-extern void DrawOTag(u_char *param_1);; // 0x800B94A0
+extern void SetGeomScreen(u_char param_1); // 0x800BB7C0
 
-extern u_char * PutDrawEnv(u_char *param_1);; // 0x800B9510
+extern ushort * ApplyMatrixSV(u_char *param_1,u_char *param_2,ushort *param_3); // 0x800BB7D0
 
-extern ushort * PutDispEnv(ushort *param_1);; // 0x800B95D0
+extern int ratan2(u_int param_1,u_int param_2); // 0x800BB830
 
-extern void SetDrawArea(int param_1,ushort *param_2);; // 0x800B9AC8
+extern u_char LoadAverageShort12(u_int *param_1,u_int *param_2,u_char param_3,u_char param_4,u_int *param_5); // 0x800BB9B0
 
-extern void SetDrawStp(int param_1,int param_2);; // 0x800B9B48
+//extern u_char LoadAverageCol(byte *param_1,byte *param_2,u_char param_3,u_char param_4,undefined *param_5); // 0x800BBA38
 
-extern void SetDrawEnv(int param_1,ushort *param_2);; // 0x800B9B70
+extern void SetFogNearFar(int param_1,int param_2,int param_3); // 0x800BBAB8
 
-extern u_char * ApplyMatrix(u_char *param_1,u_char *param_2,u_char *param_3);; // 0x800BB5C0
+extern char * strchr(char *__s,int __c); // 0x800BBBC8
 
-extern void * memset(void *__s,int __c,size_t __n);; // 0x800BB610
+extern int * ApplyMatrixLV(u_char *param_1,u_int *param_2,int *param_3); // 0x800BBC58
 
-extern int rand(void);; // 0x800BB640
+extern u_char * TransposeMatrix(u_char *param_1,u_char *param_2); // 0x800BBDB8
 
-extern void srand(uint __seed);; // 0x800BB670
+extern void RotTrans(u_char *param_1,u_char *param_2,u_char *param_3); // 0x800BBDF8
 
-extern void SetTransMatrix(int param_1);; // 0x800BB680
+extern size_t strlen(char *__s); // 0x800BBE48
 
-extern void SetRotMatrix(u_char *param_1);; // 0x800BB6A0
+extern void SetFarColor(int param_1,int param_2,int param_3); // 0x800BBE88
 
-extern void SetDefDrawEnv(ushort *param_1,ushort param_2,ushort param_3,ushort param_4,int param_5);; // 0x800BB6D0
+extern void PadInitDirect(u_char param_1,u_char param_2); // 0x800BBFE0
 
-extern void SetDefDispEnv(ushort *param_1,ushort param_2,ushort param_3,ushort param_4,ushort param_5);; // 0x800BB784
+extern void FUN_800bc29c(int param_1); // 0x800BC29C
 
-extern void SetGeomScreen(u_char param_1);; // 0x800BB7C0
+extern char * strpbrk(char *__s,char *__accept); // 0x800BC640
 
-extern ushort * ApplyMatrixSV(u_char *param_1,u_char *param_2,ushort *param_3);; // 0x800BB7D0
+extern void PadStartCom(void); // 0x800BC6B0
 
-extern int ratan2(uint param_1,uint param_2);; // 0x800BB830
+extern void PadStopCom(void); // 0x800BC6D0
 
-extern u_char LoadAverageShort12(uint *param_1,uint *param_2,u_char param_3,u_char param_4,uint *param_5);; // 0x800BB9B0
+extern u_int PadGetState(void); // 0x800BC6F0
 
-//extern u_char LoadAverageCol(byte *param_1,byte *param_2,u_char param_3,u_char param_4,undefined *param_5);; // 0x800BBA38
+extern u_int PadInfoMode(u_char param_1,int param_2,int param_3); // 0x800BC7B0
 
-extern void SetFogNearFar(int param_1,int param_2,int param_3);; // 0x800BBAB8
+extern u_int PadInfoAct(u_char param_1,int param_2,u_char param_3); // 0x800BC8A8
 
-extern char * strchr(char *__s,int __c);; // 0x800BBBC8
+extern void PadSetActAlign(u_char param_1,u_char param_2); // 0x800BC97C
 
-extern char * strcpy(char *__dest,char *__src);; // 0x800BBC08
+//extern void PadSetAct(u_char param_1,u_char param_2,undefined param_3); // 0x800BC9B4
 
-extern int * ApplyMatrixLV(u_char *param_1,uint *param_2,int *param_3);; // 0x800BBC58
+extern void FUN_800bcb7c(int param_1,int param_2); // 0x800BCB7C
 
-extern u_char * TransposeMatrix(u_char *param_1,u_char *param_2);; // 0x800BBDB8
+extern void SetLightMatrix(u_char *param_1); // 0x800BCC84
 
-extern void RotTrans(u_char *param_1,u_char *param_2,u_char *param_3);; // 0x800BBDF8
+extern void SetBackColor(int param_1,int param_2,int param_3); // 0x800BCCB4
 
-extern void SetPolyFT4(int param_1);; // 0x800BBE28
+extern void SetColorMatrix(u_char *param_1); // 0x800BCCD4
 
-extern size_t strlen(char *__s);; // 0x800BBE48
+extern u_int * MulMatrix0(u_char *param_1,ushort *param_2,u_int *param_3); // 0x800BCD04
 
-extern void SetFarColor(int param_1,int param_2,int param_3);; // 0x800BBE88
+extern int SpuIsTransferCompleted(int param_1); // 0x800BDFDC
 
-extern u_char SetRCnt(uint param_1,ushort param_2,uint param_3);; // 0x800BBEA8
+extern void SetGeomOffset(int param_1,int param_2); // 0x800BE09C
 
-extern uint GetRCnt(uint param_1);; // 0x800BBF44
+extern u_int InitGeom(void); // 0x800BE0C4
 
-extern uint StartRCnt(uint param_1);; // 0x800BBF7C
+extern u_int * MulMatrix2(u_char *param_1,u_int *param_2); // 0x800BE330
 
-extern u_char StopRCnt(uint param_1);; // 0x800BBFAC
+extern u_int * CompMatrix(u_char *param_1,ushort *param_2,u_int *param_3); // 0x800BE440
 
-extern void PadInitDirect(u_char param_1,u_char param_2);; // 0x800BBFE0
+extern int TransMatrix(int param_1,u_char *param_2); // 0x800BE5A0
 
-extern void FUN_800bc29c(int param_1);; // 0x800BC29C
+extern void PushMatrix(void); // 0x800BE610
 
-extern char * strpbrk(char *__s,char *__accept);; // 0x800BC640
+extern void PopMatrix(void); // 0x800BE6B4
 
-extern void PadStartCom(void);; // 0x800BC6B0
+extern char * strncpy(char *__dest,char *__src,size_t __n); // 0x800BE760
 
-extern void PadStopCom(void);; // 0x800BC6D0
+extern int SpuSetTransferStartAddr(u_int param_1); // 0x800BE7D0
 
-extern uint PadGetState(void);; // 0x800BC6F0
+//extern u_int SpuWrite(word *param_1,u_int param_2,u_int param_3); // 0x800BE830
 
-extern uint PadInfoMode(u_char param_1,int param_2,int param_3);; // 0x800BC7B0
+//extern void SpuSetReverbModeDepth(word param_1,word param_2); // 0x800BE890
 
-extern uint PadInfoAct(u_char param_1,int param_2,u_char param_3);; // 0x800BC8A8
+//extern void SpuGetVoicePitch(int param_1,word *param_2); // 0x800BE8C0
 
-extern void PadSetActAlign(u_char param_1,u_char param_2);; // 0x800BC97C
+//extern void SpuSetVoicePitch(int param_1,word param_2); // 0x800BE8E0
 
-//extern void PadSetAct(u_char param_1,u_char param_2,undefined param_3);; // 0x800BC9B4
+extern void SpuSetCommonCDMix(int param_1); // 0x800BE950
 
-extern void FUN_800bcb7c(int param_1,int param_2);; // 0x800BCB7C
+extern void SpuSetKey(int param_1,u_int param_2); // 0x800BE990
 
-extern int strcmp(char *__s1,char *__s2);; // 0x800BCC14
+//extern void SpuGetAllKeysStatus(undefined *param_1); // 0x800BEB50
 
-extern void SetLightMatrix(u_char *param_1);; // 0x800BCC84
+extern u_char SpuClearReverbWorkArea(u_int param_1,u_char param_2,u_int param_3); // 0x800BEBDC
 
-extern void SetBackColor(int param_1,int param_2,int param_3);; // 0x800BCCB4
+extern void SpuSetCommonMasterVolume(u_char param_1,u_char param_2); // 0x800BED7C
 
-extern void SetColorMatrix(u_char *param_1);; // 0x800BCCD4
+extern u_int SpuRead(u_int param_1,u_int param_2,u_int param_3); // 0x800BED9C
 
-extern uint * MulMatrix0(u_char *param_1,ushort *param_2,uint *param_3);; // 0x800BCD04
+extern void SpuSetTransferCallback(int param_1); // 0x800BEDFC
 
-//extern undefined1 * CdLastPos(void);; // 0x800BCE34
+extern void SpuSetReverbVoice(int param_1,u_int param_2); // 0x800BEE2C
 
-extern u_char CdSetDebug(u_char param_1);; // 0x800BCECC
+extern int SpuSetReverb(int param_1); // 0x800BEE5C
 
-//extern void CdSync(int param_1,undefined *param_2);; // 0x800BCEE0
+extern void SpuInit(void); // 0x800BEF2C
 
-//extern void CdReady(int param_1,undefined *param_2);; // 0x800BCF00
+extern void SpuQuit(void); // 0x800BEF5C
 
-extern u_char CdSyncCallback(u_char param_1);; // 0x800BCF20
+extern u_char SpuSetReverbModeType(u_int param_1); // 0x800BEFDC
 
-//extern u_char CdControl(byte param_1,byte *param_2,undefined *param_3);; // 0x800BCF48
+extern void SpuSetVoiceVolume(int param_1,u_char param_2,u_char param_3); // 0x800BF1AC
 
-//extern u_char CdControlF(byte param_1,byte *param_2);; // 0x800BD084
+extern void SpuSetVoiceStartAddr(int param_1,u_int param_2); // 0x800BF22C
 
-//extern uint CdControlB(byte param_1,byte *param_2,undefined *param_3);; // 0x800BD1B8
+extern void SpuSetVoiceADSRAttr(int param_1,u_int param_2,u_int param_3,u_int param_4,u_char param_5,u_char param_6,int param_7,int param_8,int param_9); // 0x800BF2AC
 
-//extern uint CdGetSector(dword param_1,uint param_2);; // 0x800BD304
+extern int FUN_800bf408(byte *param_1,byte *param_2,int param_3); // 0x800BF408
 
-//extern uint CdGetSector2(dword param_1,uint param_2);; // 0x800BD324
+//extern dword BreakDraw(void); // 0x800BF43C
 
-extern void CdDataCallback(void);; // 0x800BD344
+extern int puts(char *__s); // 0x800BF4D0
 
-extern void CdIntToPos(int param_1,char *param_2);; // 0x800BD388
+extern void InitHeap(void); // 0x800BF5A0
 
-extern int CdPosToInt(byte *param_1);; // 0x800BD48C
+extern void SpuSetCommonAttr(u_int *param_1); // 0x800BF5B0
 
-extern u_char * CdSearchFile(u_char *param_1,char *param_2);; // 0x800BD65C
+extern char * strtok(char *__s,char *__delim); // 0x800BF930
 
-extern uint FUN_800bd934(char *param_1,char *param_2);; // 0x800BD934
+extern void data_ready_callback(void); // 0x800C0870
 
-extern u_char FUN_800bd954(void);; // 0x800BD954
 
-extern int FUN_800bdc18(int param_1,char *param_2);; // 0x800BDC18
+extern void SpuInitHot(void); // 0x800C0A10
 
-extern u_char FUN_800bdcbc(int param_1);; // 0x800BDCBC
+//extern int setjmp(__jmp_buf_tag *__env); // 0x800C0A30
 
-extern uint FUN_800bdf58(u_char param_1,int param_2,u_char param_3);; // 0x800BDF58
+extern void HookEntryInt(void); // 0x800C0A6C
 
-extern int SpuIsTransferCompleted(int param_1);; // 0x800BDFDC
+//extern undefined * startIntrVSync(void); // 0x800C0A7C
 
-extern void SetGeomOffset(int param_1,int param_2);; // 0x800BE09C
+//extern undefined * startIntrDMA(void); // 0x800C0B9C
 
-extern uint InitGeom(void);; // 0x800BE0C4
+extern void ResetEntryInt(void); // 0x800C0E8C
 
-extern void EnableEvent(void);; // 0x800BE14C
+extern void GPU_cw(void); // 0x800C0E9C
 
-extern u_char GsGetWorkBase(void);; // 0x800BE15C
+extern void SetDQA(u_char param_1); // 0x800C0EC8
 
-extern u_char FUN_800be1a4(void);; // 0x800BE1A4
+extern void SetDQB(u_char param_1); // 0x800C0ED4
 
-extern u_char FUN_800be21c(void);; // 0x800BE21C
+extern void _padSetVsyncParam(void); // 0x800C0EE0
 
-extern u_char FUN_800be254(void);; // 0x800BE254
+extern u_char FUN_800c0f0c(void); // 0x800C0F0C
 
-extern void OpenEvent(void);; // 0x800BE300
+extern u_char FUN_800c0f74(void); // 0x800C0F74
 
-extern void DisableEvent(void);; // 0x800BE310
+extern void _padStartCom(void); // 0x800C10E0
 
-extern void CloseEvent(void);; // 0x800BE320
+extern void _padStopCom(void); // 0x800C11AC
 
-extern uint * MulMatrix2(u_char *param_1,uint *param_2);; // 0x800BE330
+extern u_char _padInitSioMode(int param_1); // 0x800C11F0
 
-extern uint * CompMatrix(u_char *param_1,ushort *param_2,uint *param_3);; // 0x800BE440
+extern void FUN_800c1524(void); // 0x800C1524
 
-extern int TransMatrix(int param_1,u_char *param_2);; // 0x800BE5A0
+extern u_int _padSioRW(int param_1,int param_2); // 0x800C15EC
 
-extern uint GetTPage(uint param_1,uint param_2,uint param_3,uint param_4);; // 0x800BE5D0
+//extern u_int _padSioRW2(int param_1,undefined param_2); // 0x800C17C4
 
-extern void PushMatrix(void);; // 0x800BE610
+extern u_char _padClrIntSio0(void); // 0x800C19FC
 
-extern void PopMatrix(void);; // 0x800BE6B4
+extern void _padWaitRXready(void); // 0x800C1A8C
 
-extern char * strncpy(char *__dest,char *__src,size_t __n);; // 0x800BE760
+extern void _padInitDirSeq(void); // 0x800C1AB4
 
-extern int SpuSetTransferStartAddr(uint param_1);; // 0x800BE7D0
+extern u_char FUN_800c1ae8(int param_1); // 0x800C1AE8
 
-//extern uint SpuWrite(word *param_1,uint param_2,uint param_3);; // 0x800BE830
+extern void FUN_800c1be8(int *param_1); // 0x800C1BE8
 
-//extern void SpuSetReverbModeDepth(word param_1,word param_2);; // 0x800BE890
+extern void _dirFailAuto(int param_1); // 0x800C1E38
 
-//extern void SpuGetVoicePitch(int param_1,word *param_2);; // 0x800BE8C0
+extern u_char FUN_800c1f14(int param_1); // 0x800C1F14
 
-//extern void SpuSetVoicePitch(int param_1,word param_2);; // 0x800BE8E0
+//extern void _padSetAct(int param_1,u_char param_2,undefined param_3); // 0x800C1F74
 
-extern void SpuSetCommonCDMix(int param_1);; // 0x800BE950
+extern void _padSendAtLoadInfo(int param_1); // 0x800C1F80
 
-extern void SpuSetKey(int param_1,uint param_2);; // 0x800BE990
+extern u_char _padRecvAtLoadInfo(int *param_1); // 0x800C2004
 
-//extern void SpuGetAllKeysStatus(undefined *param_1);; // 0x800BEB50
+extern int _padGetActSize(int param_1); // 0x800C2150
 
-extern u_char SpuClearReverbWorkArea(uint param_1,u_char param_2,uint param_3);; // 0x800BEBDC
+extern u_char _padLoadActInfo(int *param_1,int param_2); // 0x800C2188
 
-extern void SpuSetCommonMasterVolume(u_char param_1,u_char param_2);; // 0x800BED7C
+extern void FUN_800c225c(int param_1); // 0x800C225C
 
-extern uint SpuRead(uint param_1,uint param_2,uint param_3);; // 0x800BED9C
+extern u_int _padSetActAlign(int param_1,u_char param_2); // 0x800C2578
 
-extern void SpuSetTransferCallback(int param_1);; // 0x800BEDFC
+//extern void _padCmdParaMode(int param_1,undefined param_2); // 0x800C26C4
 
-extern void SpuSetReverbVoice(int param_1,uint param_2);; // 0x800BEE2C
+extern void _SpuInit(int param_1); // 0x800C455C
 
-extern int SpuSetReverb(int param_1);; // 0x800BEE5C
+extern void SpuStart(void); // 0x800C4644
 
-extern void SpuInit(void);; // 0x800BEF2C
+extern u_char _spu_init(int param_1); // 0x800C46BC
 
-extern void SpuQuit(void);; // 0x800BEF5C
+extern void _spu_FiDMA(void); // 0x800C4AFC
 
-extern u_char SpuSetReverbModeType(uint param_1);; // 0x800BEFDC
+extern u_char _spu_t(int param_1,u_int param_2,u_int param_3); // 0x800C4BB8
 
-extern void SpuSetVoiceVolume(int param_1,u_char param_2,u_char param_3);; // 0x800BF1AC
+//extern u_int _spu_Fw(word *param_1,u_int param_2,u_int param_3); // 0x800C4E38
 
-extern void SpuSetVoiceStartAddr(int param_1,uint param_2);; // 0x800BF22C
+extern u_int _spu_Fr(u_int param_1,u_int param_2,u_int param_3); // 0x800C4EBC
 
-extern void SpuSetVoiceADSRAttr(int param_1,uint param_2,uint param_3,uint param_4,u_char param_5,u_char param_6,int param_7,int param_8,int param_9);; // 0x800BF2AC
+extern void _spu_FsetRXX(int param_1,u_int param_2,int param_3); // 0x800C4F20
 
-extern int memcmp(byte *param_1,byte *param_2,int param_3);; // 0x800BF3EC
+extern u_int _spu_FsetRXXa(int param_1,u_int param_2); // 0x800C4F64
 
-extern int FUN_800bf408(byte *param_1,byte *param_2,int param_3);; // 0x800BF408
+extern void _spu_Fw1ts(void); // 0x800C50B0
 
-//extern dword BreakDraw(void);; // 0x800BF43C
+extern void _patch_gte(void); // 0x800C5128
 
-extern int puts(char *__s);; // 0x800BF4D0
+extern void StopPAD2(void); // 0x800C521C
 
-extern void * memmove(void *__dest,void *__src,size_t __n);; // 0x800BF530
+extern void SysDeqIntRP(void); // 0x800C522C
 
-extern void InitHeap(void);; // 0x800BF5A0
+extern void SysEnqIntRP(void); // 0x800C523C
 
-extern void SpuSetCommonAttr(uint *param_1);; // 0x800BF5B0
+extern u_char _SpuIsInAllocateArea_(int param_1); // 0x800C524C
 
-extern char * strtok(char *__s,char *__delim);; // 0x800BF930
+extern u_int _SpuSetAnyVoice(int param_1,u_int param_2,int param_3,int param_4); // 0x800C52EC
 
-extern void CdRead2(uint param_1);; // 0x800C0620
+extern void _SpuDataCallback(void); // 0x800C55AC
 
-extern void FUN_800c06a4(void);; // 0x800C06A4
+extern void _spu_setReverbAttr(u_int *param_1); // 0x800C55DC
 
-extern void StSetStream(uint param_1,u_char param_2,u_char param_3,u_char param_4,u_char param_5);; // 0x800C06D0
+extern int _putchar(int __c); // 0x800C5AAC
 
-extern void StSetMask(u_char param_1,u_char param_2,u_char param_3);; // 0x800C0760
+extern void _putchar_flash(void); // 0x800C5BA8
 
-extern void StSetRing(u_char param_1,u_char param_2);; // 0x800C0780
+extern char * strcat(char *__dest,char *__src); // 0x800C5BE4
 
-extern uint StGetNext(int *param_1,short **param_2);; // 0x800C07B0
+extern void init_ring_status(int param_1,u_int param_2); // 0x800C5FB4
 
-extern void data_ready_callback(void);; // 0x800C0870
+extern u_char DsReadyCallback(u_char param_1); // 0x800C5FF4
 
-extern u_char StGetBackloc(char *param_1);; // 0x800C08FC
+extern void DsDataCallback(void); // 0x800C6008
 
-extern u_char StFreeRing(int param_1);; // 0x800C0960
+extern void setRC2wait(u_char param_1); // 0x800C602C
 
-extern void SpuInitHot(void);; // 0x800C0A10
+extern u_int chkRC2wait(void); // 0x800C604C
 
-//extern int setjmp(__jmp_buf_tag *__env);; // 0x800C0A30
-
-extern void HookEntryInt(void);; // 0x800C0A6C
-
-//extern undefined * startIntrVSync(void);; // 0x800C0A7C
-
-//extern undefined * startIntrDMA(void);; // 0x800C0B9C
-
-extern void ChangeClearPAD(void);; // 0x800C0E6C
-
-extern void ChangeClearRCnt(void);; // 0x800C0E7C
-
-extern void ResetEntryInt(void);; // 0x800C0E8C
-
-extern void GPU_cw(void);; // 0x800C0E9C
-
-extern void SetDQA(u_char param_1);; // 0x800C0EC8
-
-extern void SetDQB(u_char param_1);; // 0x800C0ED4
-
-extern void _padSetVsyncParam(void);; // 0x800C0EE0
-
-extern u_char FUN_800c0f0c(void);; // 0x800C0F0C
-
-extern u_char FUN_800c0f74(void);; // 0x800C0F74
-
-extern void _padStartCom(void);; // 0x800C10E0
-
-extern void _padStopCom(void);; // 0x800C11AC
-
-extern u_char _padInitSioMode(int param_1);; // 0x800C11F0
-
-extern void FUN_800c1524(void);; // 0x800C1524
-
-extern uint _padSioRW(int param_1,int param_2);; // 0x800C15EC
-
-//extern uint _padSioRW2(int param_1,undefined param_2);; // 0x800C17C4
-
-extern u_char _padClrIntSio0(void);; // 0x800C19FC
-
-extern void _padWaitRXready(void);; // 0x800C1A8C
-
-extern void _padInitDirSeq(void);; // 0x800C1AB4
-
-extern u_char FUN_800c1ae8(int param_1);; // 0x800C1AE8
-
-extern void FUN_800c1be8(int *param_1);; // 0x800C1BE8
-
-extern void _dirFailAuto(int param_1);; // 0x800C1E38
-
-extern u_char FUN_800c1f14(int param_1);; // 0x800C1F14
-
-extern void bzero(void *__s,size_t __n);; // 0x800C1F44
-
-//extern void _padSetAct(int param_1,u_char param_2,undefined param_3);; // 0x800C1F74
-
-extern void _padSendAtLoadInfo(int param_1);; // 0x800C1F80
-
-extern u_char _padRecvAtLoadInfo(int *param_1);; // 0x800C2004
-
-extern int _padGetActSize(int param_1);; // 0x800C2150
-
-extern u_char _padLoadActInfo(int *param_1,int param_2);; // 0x800C2188
-
-extern void FUN_800c225c(int param_1);; // 0x800C225C
-
-extern uint _padSetActAlign(int param_1,u_char param_2);; // 0x800C2578
-
-//extern void _padCmdParaMode(int param_1,undefined param_2);; // 0x800C26C4
-
-//extern uint CD_sync(int param_1,undefined *param_2);; // 0x800C2CD4
-
-//extern uint CD_ready(int param_1,undefined *param_2);; // 0x800C2F54
-
-//extern u_char CD_cw(byte param_1,byte *param_2,undefined *param_3,int param_4);; // 0x800C321C
-
-extern void CD_flush(void);; // 0x800C3628
-
-extern u_char CD_initvol(void);; // 0x800C36FC
-
-extern void CD_initintr(void);; // 0x800C37EC
-
-extern u_char CD_init(void);; // 0x800C3838
-
-extern u_char CD_datasync(int param_1);; // 0x800C3A18
-
-//extern u_char CD_getsector(dword param_1,uint param_2);; // 0x800C3B80
-
-//extern u_char CD_getsector2(dword param_1,uint param_2);; // 0x800C3C80
-
-extern void FUN_800c3d78(void);; // 0x800C3D78
-
-extern void DeliverEvent(void);; // 0x800C3E50
-
-extern u_char FUN_800c41ac(int param_1);; // 0x800C41AC
-
-extern uint CdRead(u_char param_1,u_char param_2,uint param_3);; // 0x800C4394
-
-//extern int CdReadSync(int param_1,undefined *param_2);; // 0x800C4494
-
-extern void _SpuInit(int param_1);; // 0x800C455C
-
-extern void SpuStart(void);; // 0x800C4644
-
-extern u_char _spu_init(int param_1);; // 0x800C46BC
-
-extern void _spu_FiDMA(void);; // 0x800C4AFC
-
-extern u_char _spu_t(int param_1,uint param_2,uint param_3);; // 0x800C4BB8
-
-//extern uint _spu_Fw(word *param_1,uint param_2,uint param_3);; // 0x800C4E38
-
-extern uint _spu_Fr(uint param_1,uint param_2,uint param_3);; // 0x800C4EBC
-
-extern void _spu_FsetRXX(int param_1,uint param_2,int param_3);; // 0x800C4F20
-
-extern uint _spu_FsetRXXa(int param_1,uint param_2);; // 0x800C4F64
-
-extern void FUN_800c5060(void);; // 0x800C5060
-
-extern void FUN_800c5088(void);; // 0x800C5088
-
-extern void _spu_Fw1ts(void);; // 0x800C50B0
-
-extern void TestEvent(void);; // 0x800C5118
-
-extern void _patch_gte(void);; // 0x800C5128
-
-extern void StopPAD2(void);; // 0x800C521C
-
-extern void SysDeqIntRP(void);; // 0x800C522C
-
-extern void SysEnqIntRP(void);; // 0x800C523C
-
-extern u_char _SpuIsInAllocateArea_(int param_1);; // 0x800C524C
-
-extern void WaitEvent(void);; // 0x800C52DC
-
-extern uint _SpuSetAnyVoice(int param_1,uint param_2,int param_3,int param_4);; // 0x800C52EC
-
-extern void _SpuDataCallback(void);; // 0x800C55AC
-
-extern void _spu_setReverbAttr(uint *param_1);; // 0x800C55DC
-
-extern int _putchar(int __c);; // 0x800C5AAC
-
-extern void _putchar_flash(void);; // 0x800C5BA8
-
-extern char * strcat(char *__dest,char *__src);; // 0x800C5BE4
-
-extern int open(char *__file,int __oflag,...);; // 0x800C5C94
-
-extern int close(int __fd);; // 0x800C5CA4
-
-//extern __off_t lseek(int __fd,__off_t __offset,int __whence);; // 0x800C5CB4
-
-extern size_t read(int __fd,void *__buf,size_t __nbytes);; // 0x800C5CC4
-
-extern size_t write(int __fd,void *__buf,size_t __n);; // 0x800C5CD4
-
-extern u_char firstfile(char *param_1);; // 0x800C5CE4
-
-extern void FUN_800c5e80(int *param_1,u_char param_2,u_char param_3);; // 0x800C5E80
-
-extern void nextfile(void);; // 0x800C5F84
-
-extern void erase(void);; // 0x800C5F94
-
-extern void format(void);; // 0x800C5FA4
-
-extern void init_ring_status(int param_1,uint param_2);; // 0x800C5FB4
-
-extern u_char DsReadyCallback(u_char param_1);; // 0x800C5FF4
-
-extern void DsDataCallback(void);; // 0x800C6008
-
-extern void setRC2wait(u_char param_1);; // 0x800C602C
-
-extern uint chkRC2wait(void);; // 0x800C604C
-
-extern void firstfile2(void);; // 0x800C66FC
+extern void firstfile2(void); // 0x800C66FC
 
 static unsigned short __currentData; // offset 0x800CF4F8
 
