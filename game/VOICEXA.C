@@ -25,14 +25,14 @@
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void VOICEXA_Init(void)
+void VOICEXA_Play(void)
 
 {
-  undefined4 *puVar1;
+  u_char *puVar1;
   int iVar2;
   XAVoiceTracker *pXVar3;
   int iVar4;
-  undefined4 auStack80 [6];
+  u_char auStack80 [6];
   char acStack56 [32];
   
   pXVar3 = &voiceTracker;
@@ -52,7 +52,7 @@ void VOICEXA_Init(void)
     do {
       sprintf(acStack56,"\\VOICE\\VOICE%02d.XA;1");
       puVar1 = CdSearchFile(auStack80,acStack56);
-      if (puVar1 == (undefined4 *)0x0) {
+      if (puVar1 == (u_char *)0x0) {
         pXVar3->xaFileInfo[0].startPos = 0;
       }
       else {
@@ -91,7 +91,7 @@ void VOICEXA_Init(void)
 	/* end block 3 */
 	// End Line: 229
 
-void putCdCommand(XAVoiceTracker *vt,u_char cdCommand,int numParams,u_char *params)
+void processCdCommands(XAVoiceTracker *vt,u_char cdCommand,int numParams,u_char *params)
 
 {
   u_char uVar1;
@@ -179,7 +179,7 @@ void VOICEXA_CdSyncCallback(u_char status,u_char *result)
 	/* end block 2 */
 	// End Line: 320
 
-void processCdCommands(XAVoiceTracker *vt)
+void putCdCommand(XAVoiceTracker *vt)
 
 {
   _func_65 *p_Var1;
@@ -204,7 +204,7 @@ void processCdCommands(XAVoiceTracker *vt)
     vt->prevCallback = p_Var1;
     bVar2 = pCVar3->cdCommand;
   }
-  CdControl(bVar2,pCVar3->cdCmdParam,vt->cdResult);
+  CdControlF(bVar2,pCVar3->cdCmdParam,vt->cdResult);
   return;
 }
 
@@ -224,7 +224,7 @@ void processCdCommands(XAVoiceTracker *vt)
 	/* end block 2 */
 	// End Line: 416
 
-void putVoiceCommand(XAVoiceTracker *vt,u_char voiceCmd,u_char nextVoiceStatus,int voiceCmdParam)
+void processVoiceCommands(XAVoiceTracker *vt,u_char voiceCmd,u_char nextVoiceStatus,int voiceCmdParam)
 
 {
   u_char uVar1;
@@ -263,7 +263,7 @@ void putVoiceCommand(XAVoiceTracker *vt,u_char voiceCmd,u_char nextVoiceStatus,i
 	/* end block 2 */
 	// End Line: 450
 
-void processVoiceCommands(XAVoiceTracker *vt)
+void putVoiceCommand(XAVoiceTracker *vt)
 
 {
   u_int uVar1;
@@ -330,30 +330,30 @@ void voiceCmdPlay(XAVoiceTracker *vt,short voiceIndex)
   undefined2 local_3e;
   short local_38;
   short local_36;
-  undefined4 local_34;
-  undefined4 local_30;
+  u_char local_34;
+  u_char local_30;
   undefined2 local_2c;
   undefined2 local_2a;
-  undefined4 local_28;
-  undefined4 local_24;
+  u_char local_28;
+  u_char local_24;
   u_char local_20 [8];
   
   if (voiceList != (XAVoiceListEntry *)0x0) {
     puVar1 = &voiceList->length;
     vt->fileNum = voiceIndex >> 4;
     pXVar2 = vt->xaFileInfo + ((int)((u_int)(ushort)voiceIndex << 0x10) >> 0x14);
-    putCdCommand(vt,'\t',0,(u_char *)0x0);
+    processCdCommands(vt,'\t',0,(u_char *)0x0);
     local_58 = '\x01';
     local_57 = (byte)voiceIndex & 0xf;
-    putCdCommand(vt,'\r',4,&local_58);
+    processCdCommands(vt,'\r',4,&local_58);
     local_20[0] = -0x38;
-    putCdCommand(vt,'\x0e',1,local_20);
+    processCdCommands(vt,'\x0e',1,local_20);
     CdIntToPos(pXVar2->startPos,(char *)vt);
     vt->endSector =
          pXVar2->startPos +
          ((u_int)*(ushort *)((int)puVar1 + ((int)((u_int)(ushort)voiceIndex << 0x10) >> 0xf)) - 0x96);
     CdIntToPos(pXVar2->startPos,(char *)auStack80);
-    putCdCommand(vt,'\x1b',4,auStack80);
+    processCdCommands(vt,'\x1b',4,auStack80);
     local_48 = &DAT_00003fcf;
     local_44 = 0x3fff;
     local_42 = 0x3fff;
@@ -367,9 +367,9 @@ void voiceCmdPlay(XAVoiceTracker *vt,short voiceIndex)
     local_24 = 1;
     local_38 = (short)gameTrackerX.sound.gVoiceVol << 8;
     local_36 = local_38;
-    SpuSetCommonAttr((u_int *)&local_48);
+    SpuSetCommonCDMix((u_int *)&local_48);
     if (0x3c < gameTrackerX.sound.gMusicVol) {
-      aadStartMusicMasterVolFade
+      aadStartMasterVolumeFade
                 (0x3c,-1,(TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback)0x0);
     }
   }
@@ -396,20 +396,20 @@ void voiceCmdPlay(XAVoiceTracker *vt,short voiceIndex)
 	/* end block 2 */
 	// End Line: 714
 
-void voiceCmdStop(XAVoiceTracker *vt,short cmdParam)
+void voiceCmdResume(XAVoiceTracker *vt,short cmdParam)
 
 {
   undefined *local_30 [6];
-  undefined4 local_18;
-  undefined4 local_c;
+  u_char local_18;
+  u_char local_c;
   
   if (vt->voiceStatus != '\0') {
-    putCdCommand(vt,'\t',0,(u_char *)0x0);
+    processCdCommands(vt,'\t',0,(u_char *)0x0);
     local_30[0] = &DAT_00002200;
     local_18 = 0;
     local_c = 0;
-    SpuSetCommonAttr((u_int *)local_30);
-    aadStartMusicMasterVolFade
+    SpuSetCommonCDMix((u_int *)local_30);
+    aadStartMasterVolumeFade
               (gameTrackerX.sound.gMusicVol,1,
                (TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback)0x0);
   }
@@ -431,7 +431,7 @@ void voiceCmdPause(XAVoiceTracker *vt,short cmdParam)
 
 {
   if ((u_int)vt->voiceStatus - 1 < 2) {
-    putCdCommand(vt,'\t',0,(u_char *)0x0);
+    processCdCommands(vt,'\t',0,(u_char *)0x0);
   }
   return;
 }
@@ -447,11 +447,11 @@ void voiceCmdPause(XAVoiceTracker *vt,short cmdParam)
 	/* end block 1 */
 	// End Line: 771
 
-void voiceCmdResume(XAVoiceTracker *vt,short cmdParam)
+void voiceCmdStop(XAVoiceTracker *vt,short cmdParam)
 
 {
   if (vt->voiceStatus == '\x03') {
-    putCdCommand(vt,'\x1b',4,(u_char *)vt);
+    processCdCommands(vt,'\x1b',4,(u_char *)vt);
   }
   return;
 }
@@ -499,7 +499,7 @@ void voiceCmdNull(XAVoiceTracker *vt,short cmdParam)
 	/* end block 2 */
 	// End Line: 795
 
-void VOICEXA_Play(int voiceIndex,int queueRequests)
+void VOICEXA_Init(int voiceIndex,int queueRequests)
 
 {
   u_char uVar1;
@@ -508,7 +508,7 @@ void VOICEXA_Play(int voiceIndex,int queueRequests)
       (voiceTracker.xaFileInfo[voiceIndex >> 4].startPos != 0)) &&
      (gameTrackerX.sound.gVoiceOn != '\0')) {
     if (queueRequests == 0) {
-      putVoiceCommand(&voiceTracker,'\0','\x01',voiceIndex);
+      processVoiceCommands(&voiceTracker,'\0','\x01',voiceIndex);
     }
     else {
       voiceTracker.requestQueue[voiceTracker.reqIn] = (ushort)voiceIndex;
@@ -593,7 +593,7 @@ int VOICEXA_FinalStatus(XAVoiceTracker *vt)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void VOICEXA_Pause(void)
+void VOICEXA_Resume(void)
 
 {
   int iVar1;
@@ -613,7 +613,7 @@ void VOICEXA_Pause(void)
       voiceCmd = '\x04';
       nextVoiceStatus = '\x04';
     }
-    putVoiceCommand(&voiceTracker,voiceCmd,nextVoiceStatus,0);
+    processVoiceCommands(&voiceTracker,voiceCmd,nextVoiceStatus,0);
   }
   return;
 }
@@ -641,7 +641,7 @@ void VOICEXA_Pause(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void VOICEXA_Resume(void)
+void VOICEXA_Pause(void)
 
 {
   int iVar1;
@@ -661,7 +661,7 @@ void VOICEXA_Resume(void)
       voiceCmd = '\x04';
       nextVoiceStatus = '\0';
     }
-    putVoiceCommand(&voiceTracker,voiceCmd,nextVoiceStatus,0);
+    processVoiceCommands(&voiceTracker,voiceCmd,nextVoiceStatus,0);
   }
   return;
 }
@@ -692,14 +692,15 @@ void VOICEXA_Tick(void)
 
 {
   if ((gameTrackerX.debugFlags & 0x80000U) != 0) {
-    processVoiceCommands(&voiceTracker);
-    processCdCommands(&voiceTracker);
+    putVoiceCommand(&voiceTracker);
+    putCdCommand(&voiceTracker);
     if (((voiceTracker.cdCmdsQueued == '\0') && (voiceTracker.voiceCmdsQueued == '\0')) &&
        (voiceTracker.voiceStatus < 3)) {
       if (voiceTracker.voiceStatus == '\0') {
         if (voiceTracker.reqsQueued != '\0') {
-          putVoiceCommand(&voiceTracker,'\0','\x01',
-                          (u_int)voiceTracker.requestQueue[voiceTracker.reqOut]);
+          processVoiceCommands
+                    (&voiceTracker,'\0','\x01',(u_int)voiceTracker.requestQueue[voiceTracker.reqOut])
+          ;
           voiceTracker.reqsQueued = voiceTracker.reqsQueued + -1;
           voiceTracker.reqOut = voiceTracker.reqOut + '\x01';
           if (voiceTracker.reqOut == '\x04') {
@@ -718,7 +719,7 @@ void VOICEXA_Tick(void)
           voiceTracker.currentSector = CdPosToInt((byte *)&voiceTracker);
           voiceTracker.currentSector = voiceTracker.currentSector + -0x96;
           if (voiceTracker.endSector <= voiceTracker.currentSector) {
-            putVoiceCommand(&voiceTracker,'\x01','\0',0);
+            processVoiceCommands(&voiceTracker,'\x01','\0',0);
           }
         }
       }

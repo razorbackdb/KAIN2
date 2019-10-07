@@ -16,12 +16,12 @@
 void UNDERWORLD_StartProcess(void)
 
 {
-  INSTANCE_Post(gameTrackerX.playerInstance,0x40001,0);
+  INSTANCE_Query(gameTrackerX.playerInstance,0x40001,0);
   STREAM_DumpAllLevels((gameTrackerX.playerInstance)->currentStreamUnitID,1);
-  UNDERWORLD_InitDisplayProcess();
-  UNDERWORLD_LoadLevel("under1",&gameTrackerX);
+  InitDisplay();
+  STREAM_LoadLevel("under1",&gameTrackerX);
   if (ScreenMorphArray != (UW_ScreenXY *)0x0) {
-    MEMPACK_Free((char *)ScreenMorphArray);
+    MEMPACK_Init((char *)ScreenMorphArray);
     ScreenMorphArray = (UW_ScreenXY *)0x0;
   }
   return;
@@ -207,9 +207,9 @@ LAB_800b3790:
   tx = iVar2 >> 0x10 & 0xffffffc0;
   *(undefined *)((int)&last[1].tag + 3) = 9;
   last[1].code = '4';
-  *(undefined4 *)&last[1].x0 = *(undefined4 *)&p0->dx;
-  *(undefined4 *)&last[1].x1 = *(undefined4 *)&p1->dx;
-  *(undefined4 *)&last[1].x2 = *(undefined4 *)&p2->dx;
+  *(u_char *)&last[1].x0 = *(u_char *)&p0->dx;
+  *(u_char *)&last[1].x1 = *(u_char *)&p1->dx;
+  *(u_char *)&last[1].x2 = *(u_char *)&p2->dx;
   UNDERWORLD_DoUV(&last[1].u0,p0,tx);
   UNDERWORLD_DoUV(&last[1].u1,p1,tx);
   UNDERWORLD_DoUV(&last[1].u2,p2,tx);
@@ -334,17 +334,17 @@ void UNDERWORLD_SetupSource(void)
   undefined2 local_1a;
   undefined auStack24 [16];
   
-  SetDrawStp((int)auStack24,1);
+  SetDrawArea((int)auStack24,1);
   DrawPrim((int)auStack24);
   local_1c = 0x200;
   local_20 = 0;
   local_1a = 0xf0;
   local_1e = (undefined2)(gameTrackerX.gameData.asmData.dispPage << 8);
-  MoveImage((undefined4 *)&local_20,0,(gameTrackerX.gameData.asmData.dispPage ^ 1U) << 8);
-  SetDrawStp((int)auStack24,0);
+  MoveImage((u_char *)&local_20,0,(gameTrackerX.gameData.asmData.dispPage ^ 1U) << 8);
+  SetDrawArea((int)auStack24,0);
   DrawPrim((int)auStack24);
   DrawSync(0);
-  PutDrawEnv((undefined4 *)(&draw + gameTrackerX.gameData.asmData.dispPage));
+  PutDrawEnv((u_char *)(&draw + gameTrackerX.gameData.asmData.dispPage));
   return;
 }
 
@@ -380,7 +380,7 @@ void UNDERWORLD_SetupSource(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void UNDERWORLD_InitDisplayProcess(void)
+void InitDisplay(void)
 
 {
   int iVar1;
@@ -473,7 +473,7 @@ void UNDERWORLD_InitDisplayProcess(void)
 	/* end block 2 */
 	// End Line: 822
 
-_StreamUnit * UNDERWORLD_LoadLevel(char *baseAreaName,GameTracker *gameTracker)
+_StreamUnit * STREAM_LoadLevel(char *baseAreaName,GameTracker *gameTracker)
 
 {
   int iVar1;
@@ -503,23 +503,23 @@ _StreamUnit * UNDERWORLD_LoadLevel(char *baseAreaName,GameTracker *gameTracker)
   undefined2 local_2a;
   undefined auStack40 [3];
   undefined local_25;
-  undefined4 local_24;
+  u_char local_24;
   
   time = gameTrackerX.vblCount;
   while (iVar1 = STREAM_PollLoadQueue(), iVar1 != 0) {
     time = UNDERWORLD_RotateScreenStep(time);
   }
-  LOAD_ChangeDirectory(baseAreaName);
-  streamUnit = STREAM_LoadLevel(gameTracker,baseAreaName,(StreamUnitPortal *)0x0,0);
+  LOAD_ReadDirectory(baseAreaName);
+  streamUnit = LoadLevels(gameTracker,baseAreaName,(StreamUnitPortal *)0x0,0);
   while (iVar1 = STREAM_PollLoadQueue(), iVar1 != 0) {
     time = UNDERWORLD_RotateScreenStep(time);
   }
   p_Var6 = streamUnit->level->startUnitMainSignal;
   if (p_Var6 != (_MultiSignal *)0x0) {
-    SIGNAL_HandleSignal(gameTracker->playerInstance,p_Var6->signalList,0);
+    SIGNAL_HandleFogNear(gameTracker->playerInstance,p_Var6->signalList,0);
   }
   STREAM_LoadMainVram(gameTracker,"under1",streamUnit);
-  INSTANCE_Post(gameTracker->playerInstance,0x40001,streamUnit->level->streamUnitID);
+  INSTANCE_Query(gameTracker->playerInstance,0x40001,streamUnit->level->streamUnitID);
   p_Var2 = streamUnit->level->terrain->BSPTreeArray->bspRoot;
   local_48.x = -(p_Var2->sphere).position.x;
   local_48.y = -(p_Var2->sphere).position.y;
@@ -529,7 +529,7 @@ _StreamUnit * UNDERWORLD_LoadLevel(char *baseAreaName,GameTracker *gameTracker)
   if (0 < pLVar4->numIntros) {
     iVar7 = 0;
     do {
-      iVar3 = strcmpi(pLVar4->introList->name + iVar7,"raziel");
+      iVar3 = strcpy(pLVar4->introList->name + iVar7,"raziel");
       if (iVar3 == 0) {
         pcVar5 = streamUnit->level->introList->name + iVar7;
         *(u_int *)(pcVar5 + 0x2c) = *(u_int *)(pcVar5 + 0x2c) | 8;
@@ -541,7 +541,7 @@ _StreamUnit * UNDERWORLD_LoadLevel(char *baseAreaName,GameTracker *gameTracker)
     } while (iVar1 < pLVar4->numIntros);
   }
   (gameTrackerX.playerInstance)->currentStreamUnitID = gameTracker->StreamUnitID;
-  UNDERWORLD_UpdatePlayer(streamUnit->level->introList + iVar1,gameTrackerX.playerInstance);
+  PLAN_UpdatePlayerNode(streamUnit->level->introList + iVar1,gameTrackerX.playerInstance);
   time_00 = UNDERWORLD_RotateScreenStep(time);
   PreloadAllConnectedUnits(gameTracker,streamUnit,&local_48);
   RENDER_currentStreamUnitID = *(short *)&gameTracker->StreamUnitID;
@@ -613,7 +613,7 @@ _StreamUnit * UNDERWORLD_LoadLevel(char *baseAreaName,GameTracker *gameTracker)
 	/* end block 2 */
 	// End Line: 1086
 
-void UNDERWORLD_UpdatePlayer(Intro *playerIntro,_Instance *instance)
+void PLAN_UpdatePlayerNode(Intro *playerIntro,_Instance *instance)
 
 {
   _SVector local_10;
@@ -621,7 +621,7 @@ void UNDERWORLD_UpdatePlayer(Intro *playerIntro,_Instance *instance)
   local_10.x = (playerIntro->position).x - (instance->position).x;
   local_10.y = (playerIntro->position).y - (instance->position).y;
   local_10.z = (playerIntro->position).z - (instance->position).z;
-  STREAM_RelocateInstance(&gameTrackerX,instance,&local_10);
+  RelocateInstances(&gameTrackerX,instance,&local_10);
   return;
 }
 

@@ -43,14 +43,14 @@ void FX_Init(_FXTracker *fxTracker)
   node = fxTracker;
   if (fxTracker < (_FXTracker *)&fxTracker->usedMatrixList) {
     do {
-      LIST_InsertFunc(&fxTracker->freeMatrixList,(NodeType *)node);
+      LIST_GetFunc(&fxTracker->freeMatrixList,(NodeType *)node);
       p_Var1 = node->matrixPool;
       node = (_FXTracker *)(p_Var1 + 1);
     } while ((_FXTracker *)(p_Var1 + 1) < (_FXTracker *)&fxTracker->usedMatrixList);
   }
   node_00 = fxTracker->primPool;
   while (node_00 < (_FX_PRIM *)&fxTracker->usedPrimList) {
-    LIST_InsertFunc(&fxTracker->freePrimList,(NodeType *)node_00);
+    LIST_GetFunc(&fxTracker->freePrimList,(NodeType *)node_00);
     node_00 = node_00 + 1;
   }
   FX_LastUsedPrim = (_FX_PRIM *)0x0;
@@ -80,7 +80,7 @@ void FX_Init(_FXTracker *fxTracker)
 	/* end block 2 */
 	// End Line: 417
 
-void FX_Die(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
+void FX_Dot(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 
 {
   if ((FX_LastUsedPrim == fxPrim) &&
@@ -90,7 +90,7 @@ void FX_Die(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
   }
   fxPrim->flags = fxPrim->flags | 0x10;
   LIST_DeleteFunc((NodeType *)fxPrim);
-  LIST_InsertFunc(&fxTracker->freePrimList,(NodeType *)fxPrim);
+  LIST_GetFunc(&fxTracker->freePrimList,(NodeType *)fxPrim);
   return;
 }
 
@@ -119,10 +119,10 @@ _FX_MATRIX * FX_GetMatrix(_FXTracker *fxTracker)
 {
   _FX_MATRIX *node;
   
-  node = (_FX_MATRIX *)LIST_GetFunc(&fxTracker->freeMatrixList);
+  node = (_FX_MATRIX *)LIST_InsertFunc(&fxTracker->freeMatrixList);
   if (node != (_FX_MATRIX *)0x0) {
     *(NodeType **)&node->flags = (NodeType *)0x1;
-    LIST_InsertFunc(&fxTracker->usedMatrixList,(NodeType *)node);
+    LIST_GetFunc(&fxTracker->usedMatrixList,(NodeType *)node);
   }
   return node;
 }
@@ -154,7 +154,7 @@ _FX_PRIM * FX_GetPrim(_FXTracker *fxTracker)
   _FX_PRIM *p_Var2;
   _FX_PRIM *p_Var3;
   
-  p_Var3 = (_FX_PRIM *)LIST_GetFunc(&fxTracker->freePrimList);
+  p_Var3 = (_FX_PRIM *)LIST_InsertFunc(&fxTracker->freePrimList);
   p_Var2 = FX_LastUsedPrim;
   if (p_Var3 == (_FX_PRIM *)0x0) {
     if (FX_LastUsedPrim != (_FX_PRIM *)0x0) {
@@ -333,7 +333,7 @@ void FX_ShatterProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
     fxPrim->timeToLive = fxPrim->timeToLive + -1;
   }
   if (fxPrim->timeToLive == 0) {
-    FX_Die(fxPrim,fxTracker);
+    FX_Dot(fxPrim,fxTracker);
   }
   else {
     if ((fxPrim->flags & 2U) == 0) {
@@ -375,7 +375,7 @@ void FX_ShatterProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
         local_14 = (short)(iVar5 * (p_Var4->lwTransform).m[6] >> 0xc) +
                    (short)(iVar7 * (p_Var4->lwTransform).m[7] >> 0xc) +
                    (short)(iVar6 * (p_Var4->lwTransform).m[8] >> 0xc);
-        RotMatrix(&local_18,auStack64);
+        RotMatrixY(&local_18,auStack64);
         MulMatrix2(auStack64,(u_int *)&fxPrim->matrix->lwTransform);
       }
     }
@@ -434,7 +434,7 @@ void FX_DFacadeProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
     fxPrim->timeToLive = fxPrim->timeToLive + -1;
   }
   if (fxPrim->timeToLive == 0) {
-    FX_Die(fxPrim,fxTracker);
+    FX_Dot(fxPrim,fxTracker);
   }
   else {
     if ((fxPrim->flags & 0x20U) == 0) {
@@ -469,9 +469,9 @@ void FX_DFacadeProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
     if (((uVar6 & 2) == 0) && (fxPrim->matrix->flags = uVar6 | 2, (fxPrim->flags & 0x80U) != 0)) {
       cVar1 = *(char *)&fxPrim->work3;
       cVar2 = *(char *)((int)&fxPrim->work3 + 1);
-      RotMatrixX((int)*(char *)((int)&fxPrim->work2 + 1) << 2,(int)&fxPrim->matrix->lwTransform);
-      RotMatrixY((int)(short)((int)cVar1 << 2),(u_int *)&fxPrim->matrix->lwTransform);
-      RotMatrixZ((int)(short)((int)cVar2 << 2),(u_int *)&fxPrim->matrix->lwTransform);
+      RotMatrixZ((int)*(char *)((int)&fxPrim->work2 + 1) << 2,(int)&fxPrim->matrix->lwTransform);
+      RotMatrix((int)(short)((int)cVar1 << 2),(u_int *)&fxPrim->matrix->lwTransform);
+      RotMatrixX((int)(short)((int)cVar2 << 2),(u_int *)&fxPrim->matrix->lwTransform);
     }
   }
   return;
@@ -520,7 +520,7 @@ _FX_BuildSingleFaceWithModel
       (*fxSetup)(node,fxProcess,fxMatrix,0,mface,p_Var1,center,vel,accl,fxTracker,
                  (int)(short)timeToLive);
     }
-    LIST_InsertFunc(&fxTracker->usedPrimList,(NodeType *)node);
+    LIST_GetFunc(&fxTracker->usedPrimList,(NodeType *)node);
   }
   return node;
 }
@@ -579,9 +579,9 @@ void _FX_SetupLighting(_Instance *instance)
   MATRIX MStack40;
   
   LIGHT_PresetInstanceLight(instance,0x800,&MStack40);
-  MulMatrix0((undefined4 *)&MStack40,(ushort *)(instance->matrix + instance->lightMatrix),
-             (u_int *)&MStack40);
-  SetLightMatrix((undefined4 *)&MStack40);
+  PopMatrix((u_char *)&MStack40,(ushort *)(instance->matrix + instance->lightMatrix),
+            (u_int *)&MStack40);
+  SetLightMatrix((u_char *)&MStack40);
   return;
 }
 
@@ -611,8 +611,8 @@ long _FX_DoLighting(_MFace *mface)
 
 {
   byte bVar1;
-  undefined4 in_zero;
-  undefined4 in_at;
+  u_char in_zero;
+  u_char in_at;
   u_int uVar2;
   u_int uVar3;
   int iVar4;
@@ -621,8 +621,8 @@ long _FX_DoLighting(_MFace *mface)
   bVar1 = mface->flags;
   if ((bVar1 & 2) == 0) {
     if ((bVar1 & 8) == 0) {
-      setCopReg(2,in_zero,*(undefined4 *)(&gNormalList + mface->normal));
-      setCopReg(2,in_at,*(undefined4 *)&(&gNormalList)[mface->normal].z);
+      setCopReg(2,in_zero,*(u_char *)(&gNormalList + mface->normal));
+      setCopReg(2,in_at,*(u_char *)&(&gNormalList)[mface->normal].z);
       setCopReg(2,0,mface->color);
       setCopReg(2,0x4000,0);
       copFunction(2,0xe80413);
@@ -637,9 +637,9 @@ long _FX_DoLighting(_MFace *mface)
   else {
     iVar4 = mface->color;
     if ((bVar1 & 8) == 0) {
-      setCopReg(2,in_zero,*(undefined4 *)(&gNormalList + mface->normal));
-      setCopReg(2,in_at,*(undefined4 *)&(&gNormalList)[mface->normal].z);
-      setCopReg(2,0,*(undefined4 *)(iVar4 + 0xc));
+      setCopReg(2,in_zero,*(u_char *)(&gNormalList + mface->normal));
+      setCopReg(2,in_at,*(u_char *)&(&gNormalList)[mface->normal].z);
+      setCopReg(2,0,*(u_char *)(iVar4 + 0xc));
       setCopReg(2,0x4000,0);
       copFunction(2,0xe80413);
       local_8 = getCopReg(2,0x16);
@@ -861,7 +861,7 @@ void _FX_BuildSegmentedSplinters
           local_60.x = *(short *)instance->matrix[(int)CVar12].t - local_70[0];
           local_30->y = local_30->y - local_6c;
           local_30->z = local_30->z - local_68;
-          MATH3D_Normalize(local_30);
+          CAMERA_Initialize(local_30);
           if (splintDef == (FXSplinter *)0x0) {
             iVar15 = rand();
             puVar19 = (undefined2 *)(local_34 + iVar20 * 8);
@@ -1056,7 +1056,7 @@ LAB_80043888:
           ;
         }
 LAB_80043e10:
-        LIST_InsertFunc(&fxTracker->usedPrimList,(NodeType *)fxPrim);
+        LIST_GetFunc(&fxTracker->usedPrimList,(NodeType *)fxPrim);
         p_Var18 = mface;
       }
       mface = p_Var18 + local_4c;
@@ -1190,7 +1190,7 @@ void _FX_BuildNonSegmentedSplinters
   long lVar8;
   int iVar9;
   u_int uVar10;
-  undefined4 *puVar11;
+  u_char *puVar11;
   int iVar12;
   ushort uVar13;
   _PVertex *p_Var14;
@@ -1200,11 +1200,11 @@ void _FX_BuildNonSegmentedSplinters
   _PVertex *p_Var17;
   _MFace *p_Var18;
   _FX_MATRIX *local_c8 [4];
-  undefined4 local_b8;
-  undefined4 local_b4;
-  undefined4 local_b0;
-  undefined4 local_ac;
-  undefined4 local_a8;
+  u_char local_b8;
+  u_char local_b4;
+  u_char local_b0;
+  u_char local_ac;
+  u_char local_a8;
   long local_a4;
   long local_a0;
   long local_9c;
@@ -1220,13 +1220,13 @@ void _FX_BuildNonSegmentedSplinters
   short local_78;
   short local_76;
   short local_74;
-  undefined4 local_70;
+  u_char local_70;
   undefined *local_6c;
   undefined *local_68;
   undefined *local_64;
-  undefined4 local_60;
+  u_char local_60;
   undefined *local_5c;
-  undefined4 local_58;
+  u_char local_58;
   undefined *local_54;
   ushort local_50;
   int local_48;
@@ -1352,11 +1352,11 @@ void _FX_BuildNonSegmentedSplinters
     }
     else {
       local_c8[iVar4] = p_Var5;
-      *(undefined4 *)(p_Var5->lwTransform).m = local_b8;
-      *(undefined4 *)((p_Var5->lwTransform).m + 2) = local_b4;
-      *(undefined4 *)((p_Var5->lwTransform).m + 4) = local_b0;
-      *(undefined4 *)((p_Var5->lwTransform).m + 6) = local_ac;
-      *(undefined4 *)((p_Var5->lwTransform).m + 8) = local_a8;
+      *(u_char *)(p_Var5->lwTransform).m = local_b8;
+      *(u_char *)((p_Var5->lwTransform).m + 2) = local_b4;
+      *(u_char *)((p_Var5->lwTransform).m + 4) = local_b0;
+      *(u_char *)((p_Var5->lwTransform).m + 6) = local_ac;
+      *(u_char *)((p_Var5->lwTransform).m + 8) = local_a8;
       (p_Var5->lwTransform).t[0] = local_a4;
       (p_Var5->lwTransform).t[1] = local_a0;
       (p_Var5->lwTransform).t[2] = local_9c;
@@ -1560,7 +1560,7 @@ LAB_800448cc:
           (*fxSetup)(fxPrim,fxProcess,p_Var5,instance,mface,local_38,center,vel,accl,fxTracker,0x1e)
           ;
         }
-        LIST_InsertFunc(&fxTracker->usedPrimList,(NodeType *)fxPrim);
+        LIST_GetFunc(&fxTracker->usedPrimList,(NodeType *)fxPrim);
         p_Var18 = mface;
       }
       mface = p_Var18 + local_44;
@@ -1580,15 +1580,15 @@ LAB_800448cc:
 	/* end block 1 */
 	// End Line: 3750
 
-void _FX_BuildSplinters(_Instance *instance,SVECTOR *center,SVECTOR *vel,SVECTOR *accl,
-                       FXSplinter *splintDef,_FXTracker *fxTracker,
-                       TDRFuncPtr__FX_BuildSplinters6fxSetup fxSetup,
-                       TDRFuncPtr__FX_BuildSplinters7fxProcess fxProcess,int shardFlags)
+void _FX_BuildNonSegmentedSplinters
+               (_Instance *instance,SVECTOR *center,SVECTOR *vel,SVECTOR *accl,FXSplinter *splintDef
+               ,_FXTracker *fxTracker,TDRFuncPtr__FX_BuildSplinters6fxSetup fxSetup,
+               TDRFuncPtr__FX_BuildSplinters7fxProcess fxProcess,int shardFlags)
 
 {
   long lVar1;
   
-  lVar1 = MEMPACK_MemoryValidFunc((char *)instance->object);
+  lVar1 = MEMPACK_ReportMemory((char *)instance->object);
   if (lVar1 != 0) {
     if (splintDef != (FXSplinter *)0x0) {
       shardFlags = (u_int)(ushort)splintDef->flags | shardFlags;
@@ -1626,14 +1626,14 @@ void _FX_BuildSplinters(_Instance *instance,SVECTOR *center,SVECTOR *vel,SVECTOR
 	/* end block 1 */
 	// End Line: 3801
 
-void _FX_Build(_Instance *instance,SVECTOR *center,SVECTOR *vel,SVECTOR *accl,_FXTracker *fxTracker,
-              TDRFuncPtr__FX_Build5fxSetup fxSetup,TDRFuncPtr__FX_Build6fxProcess fxProcess,
-              int shardFlags)
+void _FX_BuildSplinters(_Instance *instance,SVECTOR *center,SVECTOR *vel,SVECTOR *accl,
+                       _FXTracker *fxTracker,TDRFuncPtr__FX_Build5fxSetup fxSetup,
+                       TDRFuncPtr__FX_Build6fxProcess fxProcess,int shardFlags)
 
 {
   long lVar1;
   
-  lVar1 = MEMPACK_MemoryValidFunc((char *)instance->object);
+  lVar1 = MEMPACK_ReportMemory((char *)instance->object);
   if (lVar1 != 0) {
     if (instance->object->modelList[instance->currentModel]->numSegments < 4) {
       _FX_BuildNonSegmentedSplinters
@@ -1664,12 +1664,12 @@ void _FX_Build(_Instance *instance,SVECTOR *center,SVECTOR *vel,SVECTOR *accl,_F
 	/* end block 1 */
 	// End Line: 4155
 
-void FX_Build(_Instance *instance,SVECTOR *center,SVECTOR *vel,SVECTOR *accl,_FXTracker *fxTracker,
-             TDRFuncPtr_FX_Build5fxSetup fxSetup,TDRFuncPtr_FX_Build6fxProcess fxProcess)
+void _FX_Build(_Instance *instance,SVECTOR *center,SVECTOR *vel,SVECTOR *accl,_FXTracker *fxTracker,
+              TDRFuncPtr_FX_Build5fxSetup fxSetup,TDRFuncPtr_FX_Build6fxProcess fxProcess)
 
 {
-  _FX_Build(instance,center,vel,accl,fxTracker,(TDRFuncPtr__FX_Build5fxSetup)fxSetup,
-            (TDRFuncPtr__FX_Build6fxProcess)fxProcess,0);
+  _FX_BuildSplinters(instance,center,vel,accl,fxTracker,(TDRFuncPtr__FX_Build5fxSetup)fxSetup,
+                     (TDRFuncPtr__FX_Build6fxProcess)fxProcess,0);
   return;
 }
 
@@ -1778,7 +1778,7 @@ void FX_UpdatePos(_FX_PRIM *fxPrim,_SVector *offset,int spriteflag)
 	/* end block 2 */
 	// End Line: 4208
 
-void FX_Relocate(_SVector *offset)
+void CAMERA_Relocate(_SVector *offset)
 
 {
   byte bVar1;
@@ -1852,7 +1852,7 @@ void FX_Relocate(_SVector *offset)
 	/* end block 2 */
 	// End Line: 4336
 
-void FX_UpdateTexturePointers(_FX_PRIM *fxPrim,Object *oldObject,long sizeOfObject,long offset)
+void LOAD_UpdateBigFilePointers(_FX_PRIM *fxPrim,Object *oldObject,long sizeOfObject,long offset)
 
 {
   AniTex *pAVar1;
@@ -1923,7 +1923,7 @@ void FX_UpdateTexturePointers(_FX_PRIM *fxPrim,Object *oldObject,long sizeOfObje
 	/* end block 2 */
 	// End Line: 4371
 
-void FX_RelocateFXPointers(Object *oldObject,Object *newObject,long sizeOfObject)
+void RelocateSpotLights(Object *oldObject,Object *newObject,long sizeOfObject)
 
 {
   _FXTracker *p_Var1;
@@ -1933,9 +1933,9 @@ void FX_RelocateFXPointers(Object *oldObject,Object *newObject,long sizeOfObject
   
   p_Var1 = gFXT;
   newObject = (Object *)((int)newObject - (int)oldObject);
-  FX_UpdateTexturePointers
+  LOAD_UpdateBigFilePointers
             ((_FX_PRIM *)(gFXT->usedPrimList).next,oldObject,sizeOfObject,(long)newObject);
-  FX_UpdateTexturePointers
+  LOAD_UpdateBigFilePointers
             ((_FX_PRIM *)(p_Var1->usedPrimListSprite).next,oldObject,sizeOfObject,(long)newObject);
   if (FX_GeneralEffectTracker != (_FXGeneralEffect *)0x0) {
     p_Var4 = FX_GeneralEffectTracker;
@@ -2047,7 +2047,7 @@ void FX_ProcessList(_FXTracker *fxTracker)
     pNVar4 = node->next;
     if (((u_int)node[1].prev & 1) == 0) {
       LIST_DeleteFunc(node);
-      LIST_InsertFunc(&fxTracker->freeMatrixList,node);
+      LIST_GetFunc(&fxTracker->freeMatrixList,node);
     }
   }
   while (p_Var1 = p_Var5, p_Var1 != (_FXGeneralEffect *)0x0) {
@@ -2060,10 +2060,10 @@ void FX_ProcessList(_FXTracker *fxTracker)
     FX_ConstrictStage = 0;
   }
   if (snow_amount != 0) {
-    FX_ContinueSnow(fxTracker);
+    FX_ContinueRain(fxTracker);
   }
   if (rain_amount != 0) {
-    FX_ContinueRain(fxTracker);
+    FX_ContinueLightning(fxTracker);
   }
   FX_UpdateWind(fxTracker);
   return;
@@ -2084,8 +2084,8 @@ void FX_DrawReaver(_PrimPool *primPool,u_long **ot,MATRIX *wcTransform)
 
 {
   if (FX_reaver_instance != (_Instance *)0x0) {
-    FX_SoulReaverWinding(FX_reaver_instance,primPool,ot,wcTransform);
-    FX_SoulReaverBlade(FX_reaver_instance,ot);
+    StopSoulReaverCharge(FX_reaver_instance,primPool,ot,wcTransform);
+    _SoulReaverAnimate(FX_reaver_instance,ot);
   }
   FX_reaver_instance = (_Instance *)0x0;
   return;
@@ -2247,7 +2247,7 @@ void FX_DrawReaver(_PrimPool *primPool,u_long **ot,MATRIX *wcTransform)
 /* WARNING: Type propagation algorithm not settling */
 /* WARNING: Could not reconcile some variable overlaps */
 
-void FX_DrawList(_FXTracker *fxTracker,GameTracker *gameTracker,u_long **ot,MATRIX *wcTransform)
+void FX_DrawLightning(_FXTracker *fxTracker,GameTracker *gameTracker,u_long **ot,MATRIX *wcTransform)
 
 {
   byte bVar1;
@@ -2258,8 +2258,8 @@ void FX_DrawList(_FXTracker *fxTracker,GameTracker *gameTracker,u_long **ot,MATR
   int iVar6;
   short sVar7;
   GameTracker *pGVar8;
-  undefined4 in_zero;
-  undefined4 in_at;
+  u_char in_zero;
+  u_char in_at;
   u_int uVar9;
   u_long *puVar10;
   char cVar11;
@@ -2274,10 +2274,10 @@ void FX_DrawList(_FXTracker *fxTracker,GameTracker *gameTracker,u_long **ot,MATR
   ushort uVar20;
   u_int *puVar21;
   u_int *puVar22;
-  undefined4 uVar23;
-  undefined4 uVar24;
+  u_char uVar23;
+  u_char uVar24;
   int iVar25;
-  undefined4 uVar26;
+  u_char uVar26;
   NodeType *pNVar27;
   u_int *puVar28;
   u_int *puVar29;
@@ -2294,7 +2294,7 @@ void FX_DrawList(_FXTracker *fxTracker,GameTracker *gameTracker,u_long **ot,MATR
   byte local_50;
   byte local_4f;
   byte local_4e;
-  undefined4 local_48;
+  u_char local_48;
   GameTracker *local_40;
   GameTracker *local_3c;
   int local_38;
@@ -2320,18 +2320,18 @@ void FX_DrawList(_FXTracker *fxTracker,GameTracker *gameTracker,u_long **ot,MATR
           pNVar27[3].prev[4].next = (NodeType *)(int)*(short *)((int)&pNVar27[5].next + 2);
           pNVar27[3].prev[5].prev = (NodeType *)(int)*(short *)&pNVar27[6].prev;
           gameTracker = (GameTracker *)&pNVar27[3].prev[1].next;
-          CompMatrix((undefined4 *)wcTransform,(ushort *)gameTracker,(u_int *)&DAT_1f800000);
-          SetRotMatrix((undefined4 *)&DAT_1f800000);
-          SetTransMatrix(0x1f800000);
+          CompMatrix((u_char *)wcTransform,(ushort *)gameTracker,(u_int *)&DAT_1f800000);
+          SetRotMatrix((u_char *)&DAT_1f800000);
+          TransMatrix(0x1f800000);
           bVar4 = false;
         }
         else {
           if (!bVar4) {
-            setCopControlWord(2,0,*(undefined4 *)wcTransform->m);
-            setCopControlWord(2,0x800,*(undefined4 *)(wcTransform->m + 2));
-            setCopControlWord(2,0x1000,*(undefined4 *)(wcTransform->m + 4));
-            setCopControlWord(2,0x1800,*(undefined4 *)(wcTransform->m + 6));
-            setCopControlWord(2,0x2000,*(undefined4 *)(wcTransform->m + 8));
+            setCopControlWord(2,0,*(u_char *)wcTransform->m);
+            setCopControlWord(2,0x800,*(u_char *)(wcTransform->m + 2));
+            setCopControlWord(2,0x1000,*(u_char *)(wcTransform->m + 4));
+            setCopControlWord(2,0x1800,*(u_char *)(wcTransform->m + 6));
+            setCopControlWord(2,0x2000,*(u_char *)(wcTransform->m + 8));
             setCopControlWord(2,0x2800,wcTransform->t[0]);
             setCopControlWord(2,0x3000,wcTransform->t[1]);
             setCopControlWord(2,0x3800,wcTransform->t[2]);
@@ -2682,8 +2682,8 @@ LAB_80045de0:
       pNVar27 = pNVar32;
     } while (pNVar32 != (NodeType *)0x0);
   }
-  SetRotMatrix((undefined4 *)wcTransform);
-  SetTransMatrix((int)wcTransform);
+  SetRotMatrix((u_char *)wcTransform);
+  TransMatrix((int)wcTransform);
   pNVar27 = (fxTracker->usedPrimListSprite).next;
   puVar29 = puVar28;
 joined_r0x80045e0c:
@@ -3210,7 +3210,7 @@ void FX_WaterBubbleProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
   (fxPrim->v2).y = sVar4;
   (fxPrim->v0).y = sVar4;
   if ((iVar5 * 0x10000 >> 0x10 < (int)sVar1) || (fxPrim->timeToLive < (int)(fxPrim->position).z)) {
-    FX_Die(fxPrim,fxTracker);
+    FX_Dot(fxPrim,fxTracker);
   }
   return;
 }
@@ -3229,7 +3229,7 @@ void FX_WaterBubbleProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 void FX_Sprite_Insert(NodeType *list,_FX_PRIM *fxPrim)
 
 {
-  LIST_InsertFunc(list,(NodeType *)fxPrim);
+  LIST_GetFunc(list,(NodeType *)fxPrim);
   if (FX_LastUsedPrim == (_FX_PRIM *)0x0) {
     FX_LastUsedPrim = fxPrim;
   }
@@ -3530,7 +3530,7 @@ void FX_MakeGlyphIcon(_Position *position,Object *glyphObject,int size,int glyph
   TextureMT3 *texture;
   undefined *color3;
   POLY_GT4 *pPVar4;
-  undefined4 *puVar5;
+  u_char *puVar5;
   int iVar6;
   int x1;
   int y1;
@@ -3556,7 +3556,7 @@ void FX_MakeGlyphIcon(_Position *position,Object *glyphObject,int size,int glyph
       local_30 = &LAB_00202020;
     }
     else {
-      puVar5 = (undefined4 *)((int)glyphObject->data + glyphnum * 0x10 + 0x1c);
+      puVar5 = (u_char *)((int)glyphObject->data + glyphnum * 0x10 + 0x1c);
       x1 = sVar1 - iVar3;
       y1 = sVar2 - size;
       local_38 = (undefined *)*puVar5;
@@ -3604,11 +3604,11 @@ void FX_SoulDustProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
   short sVar2;
   int iVar3;
   int iVar4;
-  undefined4 local_10;
-  undefined4 local_c;
+  u_char local_10;
+  u_char local_c;
   
   if (fxPrim->work1 < 0x20) {
-    FX_Die(fxPrim,fxTracker);
+    FX_Dot(fxPrim,fxTracker);
   }
   else {
     sVar2 = fxPrim->work2;
@@ -3835,9 +3835,9 @@ void FX_MakeWaterTrail(_Instance *instance,int depth)
         }
         iVar7 = iVar7 + 1;
         local_18.y = sVar2 + (short)(iVar4 >> 7);
-        FX_Dot(&local_18,&local_28,&local_20,0,0x404040,0x18,0x14,0);
+        FX_Die(&local_18,&local_28,&local_20,0,0x404040,0x18,0x14,0);
       } while (iVar7 < 8);
-      INSTANCE_Post(gameTrackerX.playerInstance,0x40024,0);
+      INSTANCE_Query(gameTrackerX.playerInstance,0x40024,0);
     }
   }
   return;
@@ -3884,7 +3884,7 @@ FX_StartRibbon(_Instance *instance,short startSegment,short endSegment,short typ
   if ((iVar7 < 2) || (ptr = (_FXRibbon *)MEMPACK_Malloc(0x2c,'\r'), ptr == (_FXRibbon *)0x0)) {
     return (_FXRibbon *)0x0;
   }
-  *(code **)&ptr->continue_process = FX_ContinueRibbon;
+  *(code **)&ptr->continue_process = FX_ContinueSnow;
   ptr->effectType = '\0';
   ptr->endIndex = 0;
   if (type == 1) {
@@ -3897,7 +3897,7 @@ FX_StartRibbon(_Instance *instance,short startSegment,short endSegment,short typ
   pSVar2 = (SVECTOR *)MEMPACK_Malloc((int)ptr->numberVerts << 3,'\r');
   ptr->vertexPool = pSVar2;
   if (pSVar2 == (SVECTOR *)0x0) {
-    MEMPACK_Free((char *)ptr);
+    MEMPACK_Init((char *)ptr);
     return (_FXRibbon *)0x0;
   }
   ptr->faceLifeTime = (short)faceLifeTime;
@@ -3989,7 +3989,7 @@ void FX_RibbonProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
     fxPrim->timeToLive = fxPrim->timeToLive + -1;
   }
   if (fxPrim->timeToLive == 0) {
-    FX_Die(fxPrim,fxTracker);
+    FX_Dot(fxPrim,fxTracker);
   }
   else {
     iVar3 = 0;
@@ -4028,7 +4028,7 @@ void FX_RibbonProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 	/* end block 1 */
 	// End Line: 8681
 
-void FX_ConstrictProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
+void FX_StartConstrict(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 
 {
   short sVar1;
@@ -4305,11 +4305,11 @@ void FX_SubDividePrim(_FX_PRIM *fxPrim1,_FX_PRIM *fxPrim2)
 
 /* WARNING: Could not reconcile some variable overlaps */
 
-void FX_ContinueRibbon(_FXRibbon *ribbon,_FXTracker *fxTracker)
+void FX_ContinueSnow(_FXRibbon *ribbon,_FXTracker *fxTracker)
 
 {
   int iVar1;
-  undefined4 *puVar2;
+  u_char *puVar2;
   _FX_PRIM *fxPrim1;
   long lVar3;
   code *pcVar4;
@@ -4323,19 +4323,19 @@ void FX_ContinueRibbon(_FXRibbon *ribbon,_FXTracker *fxTracker)
   int iVar11;
   NodeType *pNVar12;
   TextureMT3 *pTVar13;
-  undefined4 uVar14;
-  undefined4 uVar15;
-  undefined4 uVar16;
-  undefined4 uVar17;
+  u_char uVar14;
+  u_char uVar15;
+  u_char uVar16;
+  u_char uVar17;
   int iVar18;
   int iVar19;
   int iVar20;
-  undefined4 local_50;
-  undefined4 local_4c;
+  u_char local_50;
+  u_char local_4c;
   short local_44;
   short local_3c;
-  undefined4 local_38;
-  undefined4 local_34;
+  u_char local_38;
+  u_char local_34;
   
   if ((ribbon != (_FXRibbon *)0x0) && (pMVar7 = ribbon->instance->matrix, pMVar7 != (MATRIX *)0x0))
   {
@@ -4386,32 +4386,32 @@ void FX_ContinueRibbon(_FXRibbon *ribbon,_FXTracker *fxTracker)
         if (iVar8 < 0) {
           iVar8 = iVar8 + ribbon->numberVerts;
         }
-        puVar2 = (undefined4 *)((int)&ribbon->vertexPool->vx + iVar19);
-        uVar14 = *(undefined4 *)(ribbon->vertexPool + iVar8);
-        uVar16 = *(undefined4 *)&ribbon->vertexPool[iVar8].vz;
+        puVar2 = (u_char *)((int)&ribbon->vertexPool->vx + iVar19);
+        uVar14 = *(u_char *)(ribbon->vertexPool + iVar8);
+        uVar16 = *(u_char *)&ribbon->vertexPool[iVar8].vz;
         iVar18 = 0;
-        uVar15 = *(undefined4 *)(ribbon->vertexPool + iVar8 + 1);
-        uVar17 = *(undefined4 *)&(ribbon->vertexPool + iVar8)[1].vz;
+        uVar15 = *(u_char *)(ribbon->vertexPool + iVar8 + 1);
+        uVar17 = *(u_char *)&(ribbon->vertexPool + iVar8)[1].vz;
         iVar8 = (int)&ribbon->vertexPool->vx + iVar19;
         local_50 = *puVar2;
         local_4c = puVar2[1];
-        local_38 = *(undefined4 *)(iVar8 + 8);
-        local_34 = *(undefined4 *)(iVar8 + 0xc);
+        local_38 = *(u_char *)(iVar8 + 8);
+        local_34 = *(u_char *)(iVar8 + 0xc);
         do {
           fxPrim1 = FX_GetPrim(fxTracker);
           if (fxPrim1 != (_FX_PRIM *)0x0) {
             (fxPrim1->position).x = *(short *)((int)&ribbon->vertexPool->vx + iVar19);
             (fxPrim1->position).y = *(short *)((int)&ribbon->vertexPool->vy + iVar19);
             (fxPrim1->position).z = *(short *)((int)&ribbon->vertexPool->vz + iVar19);
-            *(undefined4 *)&fxPrim1->v0 = local_50;
+            *(u_char *)&fxPrim1->v0 = local_50;
             (fxPrim1->v0).z = (short)local_4c;
             local_44 = (short)uVar16;
-            *(undefined4 *)&fxPrim1->v1 = uVar14;
+            *(u_char *)&fxPrim1->v1 = uVar14;
             (fxPrim1->v1).z = local_44;
             local_3c = (short)uVar17;
-            *(undefined4 *)&fxPrim1->v3 = uVar15;
+            *(u_char *)&fxPrim1->v3 = uVar15;
             (fxPrim1->v3).z = local_3c;
-            *(undefined4 *)&fxPrim1->v2 = local_38;
+            *(u_char *)&fxPrim1->v2 = local_38;
             (fxPrim1->v2).z = (short)local_34;
             fxPrim1->fadeValue[0] = ribbon->startFadeValue;
             fxPrim1->fadeValue[1] = ribbon->startFadeValue;
@@ -4427,14 +4427,14 @@ void FX_ContinueRibbon(_FXRibbon *ribbon,_FXTracker *fxTracker)
             fxPrim1->endColor = lVar3;
             fxPrim1->colorFadeStep = ribbon->colorStepValue;
             if (ribbon->type == '\x02') {
-              pcVar4 = FX_ConstrictProcess;
+              pcVar4 = FX_StartConstrict;
             }
             else {
               pcVar4 = FX_RibbonProcess;
             }
             *(code **)&fxPrim1->process = pcVar4;
             fxPrim1->timeToLive = (int)ribbon->faceLifeTime;
-            LIST_InsertFunc(&fxTracker->usedPrimList,(NodeType *)fxPrim1);
+            LIST_GetFunc(&fxTracker->usedPrimList,(NodeType *)fxPrim1);
             fxPrim2 = FX_GetPrim(fxTracker);
             if (fxPrim2 != (_FX_PRIM *)0x0) {
               p_Var5 = fxPrim1;
@@ -4466,7 +4466,7 @@ void FX_ContinueRibbon(_FXRibbon *ribbon,_FXTracker *fxTracker)
               fxPrim1->fadeValue[1] = sVar6;
               fxPrim2->fadeValue[2] = sVar6;
               fxPrim2->fadeValue[3] = sVar6;
-              LIST_InsertFunc(&fxTracker->usedPrimList,(NodeType *)fxPrim2);
+              LIST_GetFunc(&fxTracker->usedPrimList,(NodeType *)fxPrim2);
             }
           }
           iVar18 = iVar18 + 0x1000;
@@ -4557,9 +4557,9 @@ void FX_StandardFXPrimProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
   u_int uVar8;
   u_int uVar9;
   u_int uVar10;
-  undefined4 uVar11;
-  undefined4 uVar12;
-  undefined4 uVar13;
+  u_char uVar11;
+  u_char uVar12;
+  u_char uVar13;
   
   iVar6 = fxPrim->timeToLive;
   if (0 < iVar6) {
@@ -4568,7 +4568,7 @@ void FX_StandardFXPrimProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
   }
   if (iVar6 == 0) {
 LAB_80048848:
-    FX_Die(fxPrim,fxTracker);
+    FX_Dot(fxPrim,fxTracker);
   }
   else {
     uVar10 = fxPrim->flags;
@@ -4649,9 +4649,9 @@ LAB_80048848:
         ((p_Var7->flags & 2U) == 0)) && (p_Var7->flags = p_Var7->flags | 2, (uVar10 & 0x80) != 0)) {
       cVar1 = *(char *)&fxPrim->work3;
       cVar2 = *(char *)((int)&fxPrim->work3 + 1);
-      RotMatrixX((int)*(char *)((int)&fxPrim->work2 + 1) << 2,(int)&fxPrim->matrix->lwTransform);
-      RotMatrixY((int)(short)((int)cVar1 << 2),(u_int *)&fxPrim->matrix->lwTransform);
-      RotMatrixZ((int)(short)((int)cVar2 << 2),(u_int *)&fxPrim->matrix->lwTransform);
+      RotMatrixZ((int)*(char *)((int)&fxPrim->work2 + 1) << 2,(int)&fxPrim->matrix->lwTransform);
+      RotMatrix((int)(short)((int)cVar1 << 2),(u_int *)&fxPrim->matrix->lwTransform);
+      RotMatrixX((int)(short)((int)cVar2 << 2),(u_int *)&fxPrim->matrix->lwTransform);
     }
   }
   return;
@@ -4888,7 +4888,7 @@ void FX_DFacadeParticleSetup
 	// End Line: 10374
 
 _FX_PRIM *
-FX_Dot(_SVector *location,_SVector *vel,_SVector *accel,int scale_speed,long color,long size,
+FX_Die(_SVector *location,_SVector *vel,_SVector *accel,int scale_speed,long color,long size,
       int lifetime,int texture_num)
 
 {
@@ -4956,8 +4956,8 @@ FX_Dot(_SVector *location,_SVector *vel,_SVector *accel,int scale_speed,long col
 	/* end block 2 */
 	// End Line: 10448
 
-void FX_Blood(_SVector *location,_SVector *input_vel,_SVector *accel,int amount,long color,long size
-             )
+void FX_BloodCone(_SVector *location,_SVector *input_vel,_SVector *accel,int amount,long color,
+                 long size)
 
 {
   int iVar1;
@@ -4984,7 +4984,7 @@ void FX_Blood(_SVector *location,_SVector *input_vel,_SVector *accel,int amount,
         iVar2 = iVar2 + 0x7f;
       }
       local_28.z = (short)(iVar2 >> 7) + ((ushort)iVar1 & 7) + -4;
-      FX_Dot(location,&local_28,accel,0,color,size,0x10,-1);
+      FX_Die(location,&local_28,accel,0,color,size,0x10,-1);
       amount = amount + -1;
     } while (amount != 0);
   }
@@ -5006,7 +5006,7 @@ void FX_Blood2(_SVector *location,_SVector *input_vel,_SVector *accel,int amount
               long dummyCrapShouldRemove)
 
 {
-  FX_Blood(location,input_vel,accel,amount,color,4);
+  FX_BloodCone(location,input_vel,accel,amount,color,4);
   return;
 }
 
@@ -5126,7 +5126,7 @@ void FX_Blood_Impale(_Instance *locinst,short locseg,_Instance *instance,short s
 	/* end block 2 */
 	// End Line: 10669
 
-_FXParticle * FX_BloodCone(_Instance *instance,short startSegment,long time)
+_FXParticle * FX_Blood(_Instance *instance,short startSegment,long time)
 
 {
   _FXParticle *ptr;
@@ -5316,16 +5316,16 @@ int FX_GetMorphFadeVal(void)
 void FX_ConvertCamPersToWorld(SVECTOR *campos,SVECTOR *worldpos)
 
 {
-  undefined4 in_zero;
-  undefined4 in_at;
+  u_char in_zero;
+  u_char in_at;
   int iVar1;
   short sVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
+  u_char uVar3;
+  u_char uVar4;
+  u_char uVar5;
   
-  SetRotMatrix((undefined4 *)theCamera.core.cwTransform2);
-  SetTransMatrix((int)theCamera.core.cwTransform2);
+  SetRotMatrix((u_char *)theCamera.core.cwTransform2);
+  TransMatrix((int)theCamera.core.cwTransform2);
   sVar2 = campos->vx + -0x100;
   iVar1 = (int)sVar2 * 0x140;
   campos->vx = sVar2;
@@ -5336,8 +5336,8 @@ void FX_ConvertCamPersToWorld(SVECTOR *campos,SVECTOR *worldpos)
   campos->vy = campos->vy + -0x78;
   campos->vx = (short)(((int)campos->vx * (int)campos->vz) / 0x140);
   campos->vy = (short)(((int)campos->vy * (int)campos->vz) / 0x140);
-  setCopReg(2,in_zero,*(undefined4 *)campos);
-  setCopReg(2,in_at,*(undefined4 *)&campos->vz);
+  setCopReg(2,in_zero,*(u_char *)campos);
+  setCopReg(2,in_at,*(u_char *)&campos->vz);
   copFunction(2,0x480012);
   uVar3 = getCopReg(2,0x4800);
   uVar4 = getCopReg(2,0x5000);
@@ -5441,7 +5441,7 @@ void FX_ProcessSnow(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
     return;
   }
 LAB_800497d0:
-  FX_Die(fxPrim,fxTracker);
+  FX_Dot(fxPrim,fxTracker);
   return;
 }
 
@@ -5476,7 +5476,7 @@ LAB_800497d0:
 	/* end block 2 */
 	// End Line: 11124
 
-void FX_ContinueSnow(_FXTracker *fxTracker)
+void FX_ContinueRain(_FXTracker *fxTracker)
 
 {
   u_int uVar1;
@@ -5612,7 +5612,7 @@ void FX_UpdateWind(_FXTracker *fxTracker)
 	/* end block 1 */
 	// End Line: 11277
 
-void FX_ProcessRain(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
+void ProcessRazControl(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 
 {
   short sVar1;
@@ -5637,7 +5637,7 @@ void FX_ProcessRain(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
     (fxPrim->v0).z = sVar3 + sVar2;
   }
   else {
-    FX_Die(fxPrim,fxTracker);
+    FX_Dot(fxPrim,fxTracker);
   }
   return;
 }
@@ -5685,7 +5685,7 @@ void FX_ProcessRain(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 	/* end block 2 */
 	// End Line: 11333
 
-void FX_ContinueRain(_FXTracker *fxTracker)
+void FX_ContinueLightning(_FXTracker *fxTracker)
 
 {
   short sVar1;
@@ -5714,7 +5714,7 @@ void FX_ContinueRain(_FXTracker *fxTracker)
       }
     }
     iVar10 = 0;
-    pLVar6 = STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID);
+    pLVar6 = STREAM_GetWaterZLevel((gameTrackerX.playerInstance)->currentStreamUnitID);
     iVar5 = pLVar6->waterZLevel;
     do {
       uVar7 = rand();
@@ -5759,7 +5759,7 @@ void FX_ContinueRain(_FXTracker *fxTracker)
           node->color = 0x52404040;
           sVar1 = (node->v0).x;
           sVar2 = *(short *)&node->duo;
-          *(code **)&node->process = FX_ProcessRain;
+          *(code **)&node->process = ProcessRazControl;
           sVar3 = (node->v0).y;
           *(short *)((int)&node->duo + 4) = (short)iVar9;
           sVar4 = *(short *)((int)&node->duo + 2);
@@ -5769,7 +5769,7 @@ void FX_ContinueRain(_FXTracker *fxTracker)
           sVar1 = (node->v0).z;
           (node->v1).y = sVar3 + sVar4;
           (node->v1).z = sVar1 + (short)iVar9;
-          LIST_InsertFunc(&fxTracker->usedPrimList,(NodeType *)node);
+          LIST_GetFunc(&fxTracker->usedPrimList,(NodeType *)node);
         }
       }
 LAB_80049e64:
@@ -5884,7 +5884,7 @@ void FX_ContinueParticle(_FXParticle *currentParticle,_FXTracker *fxTracker)
   int local_40;
   int local_3c;
   int local_38;
-  undefined4 local_30;
+  u_char local_30;
   u_int local_2c;
   
   local_30 = 0;
@@ -6117,7 +6117,7 @@ switchD_8004a25c_caseD_0:
             (fxPrim->v0).z = sVar4;
             (fxPrim->v1).y = sVar3 + sVar6;
             (fxPrim->v1).z = sVar4 + sVar7;
-            LIST_InsertFunc(&fxTracker->usedPrimList,(NodeType *)fxPrim);
+            LIST_GetFunc(&fxTracker->usedPrimList,(NodeType *)fxPrim);
           }
           else {
             FX_Sprite_Insert(&fxTracker->usedPrimListSprite,fxPrim);
@@ -6258,7 +6258,7 @@ void FX_MakeParticleTexFX
 	/* end block 2 */
 	// End Line: 12375
 
-void FX_MakeHitFX(_SVector *position)
+void FX_MakeSpark(_SVector *position)
 
 {
   _FX_PRIM *fxPrim;
@@ -6284,7 +6284,7 @@ void FX_MakeHitFX(_SVector *position)
 	/* end block 1 */
 	// End Line: 12454
 
-void FX_ContinueLightning(_FXLightning *zap,_FXTracker *fxTracker)
+void FX_ContinueFlash(_FXLightning *zap,_FXTracker *fxTracker)
 
 {
   int iVar1;
@@ -6319,7 +6319,7 @@ void FX_ContinueLightning(_FXLightning *zap,_FXTracker *fxTracker)
 	/* end block 2 */
 	// End Line: 12478
 
-void FX_MakeHitFlame(_SVector *startpos,int zpos,int angle,int dist,int size)
+void FX_MakeHitFX(_SVector *startpos,int zpos,int angle,int dist,int size)
 
 {
   _FX_PRIM *fxPrim;
@@ -6448,7 +6448,7 @@ void FX_SetReaverInstance(_Instance *instance)
 /* WARNING: Removing unreachable block (ram,0x8004afb8) */
 /* WARNING: Removing unreachable block (ram,0x8004afd8) */
 
-void FX_SoulReaverBlade(_Instance *instance,u_long **drawot)
+void _SoulReaverAnimate(_Instance *instance,u_long **drawot)
 
 {
   return;
@@ -6504,7 +6504,7 @@ void FX_ReaverBladeInit(void)
 	/* end block 2 */
 	// End Line: 13104
 
-void FX_SoulReaverWinding(_Instance *instance,_PrimPool *primPool,u_long **ot,MATRIX *wcTransform)
+void StopSoulReaverCharge(_Instance *instance,_PrimPool *primPool,u_long **ot,MATRIX *wcTransform)
 
 {
   short deg;
@@ -6519,7 +6519,7 @@ void FX_SoulReaverWinding(_Instance *instance,_PrimPool *primPool,u_long **ot,MA
   pcVar1 = (char *)instance->extraData;
   if ((*pcVar1 != '\0') && (pcVar1[1] != '\0')) {
     deg = -*(short *)(pcVar1 + 6);
-    CompMatrix((undefined4 *)wcTransform,(ushort *)((gameTrackerX.playerInstance)->matrix + 0x28),
+    CompMatrix((u_char *)wcTransform,(ushort *)((gameTrackerX.playerInstance)->matrix + 0x28),
                (u_int *)&MStack96);
     local_40.z = 0;
     local_40.y = 0;
@@ -6529,13 +6529,13 @@ void FX_SoulReaverWinding(_Instance *instance,_PrimPool *primPool,u_long **ot,MA
     local_38.z = -0x80;
     color = *(long *)(pcVar1 + 0x14);
     local_30 = *(long *)(pcVar1 + 0x18);
-    FX_Lightning(wcTransform,ot,&MStack96,deg,&local_40,&local_38,0x1e,10,0x10,0x20,0,color,local_30
-                );
-    CompMatrix((undefined4 *)wcTransform,(ushort *)((gameTrackerX.playerInstance)->matrix + 0x27),
+    FX_CreateLightning(wcTransform,ot,&MStack96,deg,&local_40,&local_38,0x1e,10,0x10,0x20,0,color,
+                       local_30);
+    CompMatrix((u_char *)wcTransform,(ushort *)((gameTrackerX.playerInstance)->matrix + 0x27),
                (u_int *)&MStack96);
     local_38.z = -0x60;
-    FX_Lightning(wcTransform,ot,&MStack96,deg,&local_40,&local_38,0x1e,10,0x10,0x20,0,color,local_30
-                );
+    FX_CreateLightning(wcTransform,ot,&MStack96,deg,&local_40,&local_38,0x1e,10,0x10,0x20,0,color,
+                       local_30);
     iVar2 = (int)*(short *)(pcVar1 + 2) * (int)*(short *)(pcVar1 + 0x1c);
     if (iVar2 < 0) {
       iVar2 = iVar2 + 0xfff;
@@ -6548,8 +6548,9 @@ void FX_SoulReaverWinding(_Instance *instance,_PrimPool *primPool,u_long **ot,MA
     if (*(short *)(pcVar1 + 4) == 1) {
       color = 0xfcffd3;
     }
-    CompMatrix((undefined4 *)wcTransform,(ushort *)(instance->matrix + 1),(u_int *)&MStack96);
-    FX_Lightning(wcTransform,ot,&MStack96,deg,&local_40,&local_38,0,0x19,4,8,0,color,local_30);
+    CompMatrix((u_char *)wcTransform,(ushort *)(instance->matrix + 1),(u_int *)&MStack96);
+    FX_CreateLightning(wcTransform,ot,&MStack96,deg,&local_40,&local_38,0,0x19,4,8,0,color,local_30)
+    ;
   }
   return;
 }
@@ -6577,7 +6578,7 @@ void FX_SoulReaverWinding(_Instance *instance,_PrimPool *primPool,u_long **ot,MA
 	/* end block 2 */
 	// End Line: 13296
 
-void FX_StartInstanceBurrow(_Instance *instance,Level *level,_TFace *tface)
+void FX_StartInstanceEffect(_Instance *instance,Level *level,_TFace *tface)
 
 {
   short sVar1;
@@ -6744,10 +6745,10 @@ void FX_DoInstancePowerRing
     return;
   }
   ptr[0xc] = -0x7e;
-  *(undefined4 *)(ptr + 4) = 0x8004b8cc;
-  *(undefined4 *)(ptr + 0x10) = 0;
+  *(u_char *)(ptr + 4) = 0x8004b8cc;
+  *(u_char *)(ptr + 0x10) = 0;
   *(_Instance **)(ptr + 8) = instance;
-  *(undefined4 *)(ptr + 0x24) = 0;
+  *(u_char *)(ptr + 0x24) = 0;
   *(undefined2 *)(ptr + 0x2a) = 0;
   *(short *)(ptr + 0x28) = (short)numColors;
   ptr[0xd] = (char)follow_halveplane;
@@ -6824,9 +6825,9 @@ void FX_UpdatePowerRing(_FXHalvePlane *ring)
   long *plVar5;
   _Instance *p_Var6;
   int iVar7;
-  undefined4 uVar8;
-  undefined4 uVar9;
-  undefined4 uVar10;
+  u_char uVar8;
+  u_char uVar9;
+  u_char uVar10;
   u_int uVar11;
   int iVar12;
   
@@ -6934,7 +6935,7 @@ void FX_UpdateInstanceSplitRing(_FXHalvePlane *ring,_FXTracker *fxTracker)
 	/* end block 1 */
 	// End Line: 13971
 
-void FX_UpdateGlowEffect(_FXGlowEffect *effect,_FXTracker *fxTracker)
+void FX_StopGlowEffect(_FXGlowEffect *effect,_FXTracker *fxTracker)
 
 {
   if (effect->lifeTime == 0) {
@@ -7030,9 +7031,9 @@ void FX_DeleteGeneralEffect(_FXGeneralEffect *effect)
       } while ((_FXGeneralEffect *)p_Var2->next != (_FXGeneralEffect *)0x0);
     }
     if (effect->effectType == '\0') {
-      MEMPACK_Free((char *)effect[1].continue_process);
+      MEMPACK_Init((char *)effect[1].continue_process);
     }
-    MEMPACK_Free((char *)effect);
+    MEMPACK_Init((char *)effect);
   }
   return;
 }
@@ -7067,7 +7068,7 @@ void FX_DeleteGeneralEffect(_FXGeneralEffect *effect)
 	// End Line: 14080
 
 _FXGlowEffect *
-FX_DoInstanceOneSegmentGlow
+FX_DoInstanceTwoSegmentGlow
           (_Instance *instance,long segment,long *color,long numColors,long atuColorCycleRate,
           long width,long height)
 
@@ -7082,7 +7083,7 @@ FX_DoInstanceOneSegmentGlow
   p_Var2 = (_FXGlowEffect *)MEMPACK_Malloc(numColors * 4 + 0x2c,'\r');
   if (p_Var2 == (_FXGlowEffect *)0x0) goto LAB_8004bb64;
   p_Var2->effectType = -0x7d;
-  *(code **)&p_Var2->continue_process = FX_UpdateGlowEffect;
+  *(code **)&p_Var2->continue_process = FX_StopGlowEffect;
   p_Var2->colorArray = (long *)0x0;
   p_Var2->numColors = (short)numColors;
   p_Var2->colorBlendCycle = (short)(atuColorCycleRate * 0x21);
@@ -7171,7 +7172,7 @@ void FX_SetGlowFades(_FXGlowEffect *glowEffect,int fadein,int fadeout)
 	// End Line: 14228
 
 _FXGlowEffect *
-FX_DoInstanceTwoSegmentGlow
+FX_DoInstanceManySegmentGlow
           (_Instance *instance,long segment,long segmentEnd,long *color,long numColors,
           long atuColorCycleRate,long height)
 
@@ -7184,7 +7185,7 @@ FX_DoInstanceTwoSegmentGlow
     uVar2 = -uVar2;
     segment = segmentEnd;
   }
-  p_Var1 = FX_DoInstanceOneSegmentGlow
+  p_Var1 = FX_DoInstanceTwoSegmentGlow
                      (instance,segment,color,numColors,atuColorCycleRate,height,height);
   p_Var1->numSegments = '\x02';
   p_Var1->SegmentInc = uVar2;
@@ -7212,14 +7213,14 @@ FX_DoInstanceTwoSegmentGlow
 	// End Line: 14264
 
 _FXGlowEffect *
-FX_DoInstanceManySegmentGlow
+FX_DoInstanceOneSegmentGlow
           (_Instance *instance,long segment,long numSegments,long *color,long numColors,
           long atuColorCycleRate,long height)
 
 {
   _FXGlowEffect *p_Var1;
   
-  p_Var1 = FX_DoInstanceOneSegmentGlow
+  p_Var1 = FX_DoInstanceTwoSegmentGlow
                      (instance,segment,color,numColors,atuColorCycleRate,height,height);
   p_Var1->numSegments = (u_char)numSegments;
   return p_Var1;
@@ -7253,7 +7254,7 @@ FX_DoInstanceOneSegmentGlowWithTime
 {
   _FXGlowEffect *p_Var1;
   
-  p_Var1 = FX_DoInstanceOneSegmentGlow
+  p_Var1 = FX_DoInstanceTwoSegmentGlow
                      (instance,segment,color,numColors,atuColorCycleRate,width,height);
   p_Var1->lifeTime = (short)ATULifeTime * 0x21;
   return p_Var1;
@@ -7287,7 +7288,7 @@ FX_DoInstanceOneSegmentGlowWithTime
 	/* end block 2 */
 	// End Line: 14313
 
-void FX_StopAllGlowEffects(_Instance *instance,int fadeout_time)
+void FX_UpdateGlowEffect(_Instance *instance,int fadeout_time)
 
 {
   _FXGeneralEffect *effect;
@@ -7342,7 +7343,7 @@ void FX_StopAllGlowEffects(_Instance *instance,int fadeout_time)
 	/* end block 2 */
 	// End Line: 14379
 
-void FX_StopGlowEffect(_FXGlowEffect *glowEffect,int fadeout_time)
+void FX_StopAllGlowEffects(_FXGlowEffect *glowEffect,int fadeout_time)
 
 {
   short sVar1;
@@ -7394,7 +7395,7 @@ void FX_StopGlowEffect(_FXGlowEffect *glowEffect,int fadeout_time)
 	/* end block 2 */
 	// End Line: 14433
 
-void FX_DrawLightning(_FXLightning *zap,MATRIX *wcTransform,u_long **ot)
+void FX_DrawList(_FXLightning *zap,MATRIX *wcTransform,u_long **ot)
 
 {
   MATRIX *pMVar1;
@@ -7419,7 +7420,7 @@ void FX_DrawLightning(_FXLightning *zap,MATRIX *wcTransform,u_long **ot)
     }
     else {
       mat = mat + zap->startSeg;
-      ApplyMatrixSV(mat,&zap->start_offset,&local_20);
+      ApplyMatrix(mat,&zap->start_offset,&local_20);
       local_30.x = *(short *)mat->t + local_20;
       local_30.y = *(short *)(mat->t + 1) + local_1e;
       local_30.z = *(short *)(mat->t + 2) + local_1c;
@@ -7439,7 +7440,7 @@ void FX_DrawLightning(_FXLightning *zap,MATRIX *wcTransform,u_long **ot)
     }
     else {
       mat = mat + zap->endSeg;
-      ApplyMatrixSV(mat,&zap->end_offset,&local_20);
+      ApplyMatrix(mat,&zap->end_offset,&local_20);
       local_28.x = *(short *)mat->t + local_20;
       local_28.y = *(short *)(mat->t + 1) + local_1e;
       local_28.z = *(short *)(mat->t + 2) + local_1c;
@@ -7452,8 +7453,9 @@ void FX_DrawLightning(_FXLightning *zap,MATRIX *wcTransform,u_long **ot)
       mat = pMVar1 + (int)zap->matrixSeg;
     }
   }
-  FX_Lightning(wcTransform,ot,mat,zap->deg,&local_30,&local_28,(int)zap->width,(int)zap->small_width
-               ,(int)zap->segs,(int)zap->sine_size,(int)zap->variation,zap->color,zap->glow_color);
+  FX_CreateLightning(wcTransform,ot,mat,zap->deg,&local_30,&local_28,(int)zap->width,
+                     (int)zap->small_width,(int)zap->segs,(int)zap->sine_size,(int)zap->variation,
+                     zap->color,zap->glow_color);
   return;
 }
 
@@ -7539,7 +7541,7 @@ void FX_DrawAllGeneralEffects
           }
           else {
             if (bVar1 == 0x84) {
-              FX_DrawBlastring(wcTransform,blast);
+              FX_DrawRing(wcTransform,blast);
             }
             else {
               if (bVar1 == 0x85) {
@@ -7552,7 +7554,7 @@ void FX_DrawAllGeneralEffects
                 }
                 else {
                   if (bVar1 == 0x87) {
-                    FX_DrawLightning((_FXLightning *)blast,wcTransform,ot);
+                    FX_DrawList((_FXLightning *)blast,wcTransform,ot);
                   }
                   else {
                     if (bVar1 == 0x88) {
@@ -7696,11 +7698,11 @@ FX_DoBlastRing(_Instance *instance,_SVector *position,MATRIX *mat,int segment,in
 
 {
   _FXBlastringEffect *ptr;
-  undefined4 uVar1;
+  u_char uVar1;
   long lVar2;
-  undefined4 uVar3;
+  u_char uVar3;
   long lVar4;
-  undefined4 uVar5;
+  u_char uVar5;
   long lVar6;
   
   ptr = (_FXBlastringEffect *)MEMPACK_Malloc(0x78,'\r');
@@ -7716,21 +7718,21 @@ FX_DoBlastRing(_Instance *instance,_SVector *position,MATRIX *mat,int segment,in
     }
     ptr->predator_offset = (short)pred_offset;
     ptr->lifeTime = (short)lifeTime;
-    uVar1 = *(undefined4 *)&position->z;
-    *(undefined4 *)&ptr->position = *(undefined4 *)position;
-    *(undefined4 *)&(ptr->position).z = uVar1;
+    uVar1 = *(u_char *)&position->z;
+    *(u_char *)&ptr->position = *(u_char *)position;
+    *(u_char *)&(ptr->position).z = uVar1;
     if (mat != (MATRIX *)0x0) {
-      uVar1 = *(undefined4 *)(mat->m + 2);
-      uVar3 = *(undefined4 *)(mat->m + 4);
-      uVar5 = *(undefined4 *)(mat->m + 6);
-      *(undefined4 *)(ptr->matrix).m = *(undefined4 *)mat->m;
-      *(undefined4 *)((ptr->matrix).m + 2) = uVar1;
-      *(undefined4 *)((ptr->matrix).m + 4) = uVar3;
-      *(undefined4 *)((ptr->matrix).m + 6) = uVar5;
+      uVar1 = *(u_char *)(mat->m + 2);
+      uVar3 = *(u_char *)(mat->m + 4);
+      uVar5 = *(u_char *)(mat->m + 6);
+      *(u_char *)(ptr->matrix).m = *(u_char *)mat->m;
+      *(u_char *)((ptr->matrix).m + 2) = uVar1;
+      *(u_char *)((ptr->matrix).m + 4) = uVar3;
+      *(u_char *)((ptr->matrix).m + 6) = uVar5;
       lVar2 = mat->t[0];
       lVar4 = mat->t[1];
       lVar6 = mat->t[2];
-      *(undefined4 *)((ptr->matrix).m + 8) = *(undefined4 *)(mat->m + 8);
+      *(u_char *)((ptr->matrix).m + 8) = *(u_char *)(mat->m + 8);
       (ptr->matrix).t[0] = lVar2;
       (ptr->matrix).t[1] = lVar4;
       (ptr->matrix).t[2] = lVar6;
@@ -7789,13 +7791,13 @@ FX_DoBlastRing(_Instance *instance,_SVector *position,MATRIX *mat,int segment,in
 
 /* WARNING: Could not reconcile some variable overlaps */
 
-void FX_DrawBlastring(MATRIX *wcTransform,_FXBlastringEffect *blast)
+void FX_DrawRing(MATRIX *wcTransform,_FXBlastringEffect *blast)
 
 {
   int radius;
   MATRIX *pMVar1;
-  undefined4 local_40;
-  undefined4 local_3c;
+  u_char local_40;
+  u_char local_3c;
   MATRIX MStack56;
   
   radius = blast->radius;
@@ -7804,9 +7806,9 @@ void FX_DrawBlastring(MATRIX *wcTransform,_FXBlastringEffect *blast)
   }
   radius = radius >> 0xc;
   if ((int)blast->segment < 0) {
-    CompMatrix((undefined4 *)wcTransform,(ushort *)&blast->matrix,(u_int *)&MStack56);
-    local_40 = *(undefined4 *)&blast->position;
-    local_3c = *(undefined4 *)&(blast->position).z;
+    CompMatrix((u_char *)wcTransform,(ushort *)&blast->matrix,(u_int *)&MStack56);
+    local_40 = *(u_char *)&blast->position;
+    local_3c = *(u_char *)&(blast->position).z;
   }
   else {
     pMVar1 = blast->instance->matrix;
@@ -7814,20 +7816,20 @@ void FX_DrawBlastring(MATRIX *wcTransform,_FXBlastringEffect *blast)
       return;
     }
     pMVar1 = pMVar1 + (int)blast->segment;
-    CompMatrix((undefined4 *)wcTransform,(ushort *)pMVar1,(u_int *)&MStack56);
+    CompMatrix((u_char *)wcTransform,(ushort *)pMVar1,(u_int *)&MStack56);
     local_40 = CONCAT22(*(undefined2 *)(pMVar1->t + 1),*(undefined2 *)pMVar1->t);
     local_3c = CONCAT22(local_3c._2_2_,*(undefined2 *)(pMVar1->t + 2));
   }
   if (blast->type == '\0') {
-    FX_DrawRing(wcTransform,(_SVector *)&local_40,&MStack56,radius,radius + blast->size1,
-                radius + blast->size2,blast->height1,blast->height2,blast->height3,blast->color,
-                (int)blast->sortInWorld);
+    FX_DrawRing2(wcTransform,(_SVector *)&local_40,&MStack56,radius,radius + blast->size1,
+                 radius + blast->size2,blast->height1,blast->height2,blast->height3,blast->color,
+                 (int)blast->sortInWorld);
   }
   else {
     if (blast->type == '\x01') {
-      FX_DrawRing2(wcTransform,&blast->position,&MStack56,radius,radius + blast->size1,
-                   radius + blast->size2,blast->height1,blast->height2,blast->height3,
-                   (int)blast->predator_offset,(int)blast->sortInWorld);
+      FX_DrawBlastring(wcTransform,&blast->position,&MStack56,radius,radius + blast->size1,
+                       radius + blast->size2,blast->height1,blast->height2,blast->height3,
+                       (int)blast->predator_offset,(int)blast->sortInWorld);
     }
   }
   return;
@@ -7844,7 +7846,7 @@ void FX_DrawBlastring(MATRIX *wcTransform,_FXBlastringEffect *blast)
 	/* end block 1 */
 	// End Line: 15049
 
-void FX_ContinueFlash(_FXFlash *flash,_FXTracker *fxTracker)
+void FX_ContinueRibbon(_FXFlash *flash,_FXTracker *fxTracker)
 
 {
   int iVar1;
@@ -7894,7 +7896,7 @@ void FX_DrawFlash(_FXFlash *flash)
   int iVar4;
   int transtype;
   u_int local_10;
-  undefined4 local_c;
+  u_char local_c;
   
   iVar2 = flash->currentTime;
   if (iVar2 < 0) {
@@ -8110,7 +8112,7 @@ FX_StartGenericParticle(_Instance *instance,int num,int segOverride,int lifeOver
 /* WARNING: Removing unreachable block (ram,0x8004ccbc) */
 /* WARNING: Removing unreachable block (ram,0x8004cccc) */
 
-void FX_StartGenericRibbon(_Instance *instance,int num,int segOverride,int endOverride,int InitFlag)
+void FX_StartGenericGlow(_Instance *instance,int num,int segOverride,int endOverride,int InitFlag)
 
 {
   return;
@@ -8192,7 +8194,8 @@ void FX_StartGenericRibbon(_Instance *instance,int num,int segOverride,int endOv
 /* WARNING: Removing unreachable block (ram,0x8004ce90) */
 /* WARNING: Removing unreachable block (ram,0x8004cea0) */
 
-void FX_StartGenericGlow(_Instance *instance,int num,int segOverride,int seg2Override,int InitFlag)
+void FX_StartGenericBlastring
+               (_Instance *instance,int num,int segOverride,int seg2Override,int InitFlag)
 
 {
   return;
@@ -8227,7 +8230,7 @@ FX_CreateLightning(_Instance *instance,int lifeTime,int deg,int deg_inc,int widt
   
   ptr = (_FXLightning *)MEMPACK_Malloc(0x3c,'\r');
   if (ptr != (_FXLightning *)0x0) {
-    *(code **)&ptr->continue_process = FX_ContinueLightning;
+    *(code **)&ptr->continue_process = FX_ContinueFlash;
     ptr->instance = instance;
     ptr->end_instance = instance;
     ptr->effectType = -0x79;
@@ -8293,12 +8296,12 @@ void FX_SetLightingPos(_FXLightning *zap,_Instance *startInstance,int startSeg,
 LAB_8004d01c:
   if (startOffset != (_Position *)0x0) {
     sVar1 = startOffset->z;
-    *(undefined4 *)&zap->start_offset = *(undefined4 *)startOffset;
+    *(u_char *)&zap->start_offset = *(u_char *)startOffset;
     (zap->start_offset).z = sVar1;
   }
   if (endOffset != (_Position *)0x0) {
     sVar1 = endOffset->z;
-    *(undefined4 *)&zap->end_offset = *(undefined4 *)endOffset;
+    *(u_char *)&zap->end_offset = *(u_char *)endOffset;
     (zap->end_offset).z = sVar1;
   }
   zap->startSeg = (short)startSeg;
@@ -8358,8 +8361,7 @@ LAB_8004d01c:
 /* WARNING: Removing unreachable block (ram,0x8004d198) */
 /* WARNING: Removing unreachable block (ram,0x8004d1bc) */
 
-_FXLightning *
-FX_StartGenericLightning(_Instance *instance,int num,int segOverride,int endSegOverride)
+_FXLightning * FX_StartGenericRibbon(_Instance *instance,int num,int segOverride,int endSegOverride)
 
 {
   return (_FXLightning *)0x0;
@@ -8409,7 +8411,7 @@ FX_StartGenericLightning(_Instance *instance,int num,int segOverride,int endSegO
 /* WARNING: Removing unreachable block (ram,0x8004d388) */
 
 _FXBlastringEffect *
-FX_StartGenericBlastring(_Instance *instance,int num,int segOverride,int matrixSegOverride)
+FX_StartGenericLightning(_Instance *instance,int num,int segOverride,int matrixSegOverride)
 
 {
   return (_FXBlastringEffect *)0x0;
@@ -8657,7 +8659,7 @@ void FX_StartInstanceEffect(_Instance *instance,ObjectEffect *effect,int InitFla
     if ((u_int)effect->modifierList[1] - 1 < 5) {
       local_20[0] = (undefined *)(&FX_ColorArray)[effect->modifierList[1]];
     }
-    FX_DoInstanceOneSegmentGlow
+    FX_DoInstanceTwoSegmentGlow
               (instance,(u_int)effect->modifierList[0],(long *)local_20,1,0x400,0x32,100);
     break;
   case '\x03':
@@ -8668,7 +8670,7 @@ void FX_StartInstanceEffect(_Instance *instance,ObjectEffect *effect,int InitFla
     if ((u_int)effect->modifierList[2] - 1 < 5) {
       local_20[0] = (undefined *)(&FX_ColorArray)[effect->modifierList[2]];
     }
-    FX_DoInstanceManySegmentGlow
+    FX_DoInstanceOneSegmentGlow
               (instance,(u_int)effect->modifierList[0],numSegments,(long *)local_20,1,0x400,0x41);
     break;
   case '\x05':
@@ -8677,13 +8679,13 @@ void FX_StartInstanceEffect(_Instance *instance,ObjectEffect *effect,int InitFla
                (u_int)effect->modifierList[2],InitFlag);
     break;
   case '\x06':
-    FX_StartGenericRibbon
-              (instance,(u_int)effect->modifierList[0],(u_int)effect->modifierList[1],
-               (u_int)effect->modifierList[2],InitFlag);
-    break;
-  case '\a':
     FX_StartGenericGlow(instance,(u_int)effect->modifierList[0],(u_int)effect->modifierList[1],
                         (u_int)effect->modifierList[2],InitFlag);
+    break;
+  case '\a':
+    FX_StartGenericBlastring
+              (instance,(u_int)effect->modifierList[0],(u_int)effect->modifierList[1],
+               (u_int)effect->modifierList[2],InitFlag);
     break;
   case '\b':
     GlyphTrigger();
@@ -8695,7 +8697,7 @@ void FX_StartInstanceEffect(_Instance *instance,ObjectEffect *effect,int InitFla
     FX_Start_Rain((u_int)effect->modifierList[0]);
     break;
   case '\f':
-    uVar3 = INSTANCE_Query(instance,0x16);
+    uVar3 = INSTANCE_Post(instance,0x16);
     if ((uVar3 != 0) &&
        (p_Var4 = FX_StartGenericParticle
                            (instance,(u_int)effect->modifierList[0],(u_int)effect->modifierList[1],
@@ -8715,13 +8717,13 @@ void FX_StartInstanceEffect(_Instance *instance,ObjectEffect *effect,int InitFla
                       (u_int)effect->modifierList[2]);
     break;
   case '\x0e':
-    FX_StartGenericLightning
+    FX_StartGenericRibbon
               (instance,(u_int)effect->modifierList[0],(u_int)effect->modifierList[1],
                (u_int)effect->modifierList[2]);
     break;
   case '\x0f':
     if (InitFlag == 0) {
-      FX_StartGenericBlastring
+      FX_StartGenericLightning
                 (instance,(u_int)effect->modifierList[0],(u_int)effect->modifierList[1],
                  (u_int)effect->modifierList[2]);
     }
@@ -8740,9 +8742,10 @@ void FX_StartInstanceEffect(_Instance *instance,ObjectEffect *effect,int InitFla
         splintDef = (FXSplinter *)puVar5[1];
         sVar2 = (short)((*puVar5 & 2) << 3);
       }
-      _FX_BuildSplinters(instance,(SVECTOR *)0x0,(SVECTOR *)0x0,(SVECTOR *)0x0,splintDef,gFXT,
-                         (TDRFuncPtr__FX_BuildSplinters6fxSetup)0x0,
-                         (TDRFuncPtr__FX_BuildSplinters7fxProcess)0x0,(int)sVar2);
+      _FX_BuildNonSegmentedSplinters
+                (instance,(SVECTOR *)0x0,(SVECTOR *)0x0,(SVECTOR *)0x0,splintDef,gFXT,
+                 (TDRFuncPtr__FX_BuildSplinters6fxSetup)0x0,
+                 (TDRFuncPtr__FX_BuildSplinters7fxProcess)0x0,(int)sVar2);
     }
   }
   return;
@@ -9381,8 +9384,8 @@ void FX_DrawModel(Object *object,int model_num,_SVector *rotation,_SVector *posi
 {
   u_long uVar1;
   u_long **ppuVar2;
-  undefined4 in_zero;
-  undefined4 in_at;
+  u_char in_zero;
+  u_char in_at;
   _Model *p_Var3;
   _MVertex *p_Var4;
   _MVertex *p_Var5;
@@ -9404,16 +9407,16 @@ void FX_DrawModel(Object *object,int model_num,_SVector *rotation,_SVector *posi
   puVar13 = (gameTrackerX.primPool)->nextPrim;
   PushMatrix();
   MATH3D_SetUnityMatrix(&MStack88);
-  RotMatrixX((int)rotation->x,(int)&MStack88);
-  RotMatrixY((int)rotation->y,(u_int *)&MStack88);
-  RotMatrixZ((int)rotation->z,(u_int *)&MStack88);
+  RotMatrixZ((int)rotation->x,(int)&MStack88);
+  RotMatrix((int)rotation->y,(u_int *)&MStack88);
+  RotMatrixX((int)rotation->z,(u_int *)&MStack88);
   PIPE3D_AspectAdjustMatrix(&MStack88);
-  ApplyMatrixSV(&MStack88,offset,&local_38);
+  ApplyMatrix(&MStack88,offset,&local_38);
   MStack88.t[0] = (int)position->x + (int)local_38;
   MStack88.t[1] = (int)position->y + (int)local_36;
   MStack88.t[2] = (int)position->z + (int)local_34;
-  SetRotMatrix((undefined4 *)&MStack88);
-  SetTransMatrix((int)&MStack88);
+  SetRotMatrix((u_char *)&MStack88);
+  TransMatrix((int)&MStack88);
   uVar11 = 0x34808080;
   if (transflag != 0) {
     uVar11 = 0x36404040;
@@ -9434,12 +9437,12 @@ void FX_DrawModel(Object *object,int model_num,_SVector *rotation,_SVector *posi
         p_Var6 = p_Var12 + (p_Var10->face).v0;
         p_Var5 = p_Var12 + puVar8[-1];
         p_Var4 = p_Var12 + *puVar8;
-        setCopReg(2,in_zero,*(undefined4 *)&p_Var6->vertex);
-        setCopReg(2,in_at,*(undefined4 *)&(p_Var6->vertex).z);
-        setCopReg(2,p_Var4,*(undefined4 *)&p_Var5->vertex);
-        setCopReg(2,p_Var5,*(undefined4 *)&(p_Var5->vertex).z);
-        setCopReg(2,p_Var6,*(undefined4 *)&p_Var4->vertex);
-        setCopReg(2,puVar7,*(undefined4 *)&(p_Var4->vertex).z);
+        setCopReg(2,in_zero,*(u_char *)&p_Var6->vertex);
+        setCopReg(2,in_at,*(u_char *)&(p_Var6->vertex).z);
+        setCopReg(2,p_Var4,*(u_char *)&p_Var5->vertex);
+        setCopReg(2,p_Var5,*(u_char *)&(p_Var5->vertex).z);
+        setCopReg(2,p_Var6,*(u_char *)&p_Var4->vertex);
+        setCopReg(2,puVar7,*(u_char *)&(p_Var4->vertex).z);
         copFunction(2,0x280030);
         puVar13[3] = *puVar7;
         puVar13[6] = puVar7[1];
@@ -9468,7 +9471,7 @@ void FX_DrawModel(Object *object,int model_num,_SVector *rotation,_SVector *posi
   }
   (gameTrackerX.primPool)->nextPrim = puVar13;
 LAB_8004e634:
-  PopMatrix();
+  MulMatrix0();
   return;
 }
 
@@ -9496,8 +9499,8 @@ LAB_8004e634:
 void fx_calc_points(_SVector *points,int degrees,int radius,int radius2,int radius3)
 
 {
-  undefined4 in_zero;
-  undefined4 in_at;
+  u_char in_zero;
+  u_char in_at;
   int iVar1;
   int iVar2;
   int iVar3;
@@ -9511,12 +9514,12 @@ void fx_calc_points(_SVector *points,int degrees,int radius,int radius2,int radi
   points[2].x = (short)(iVar1 * radius3 >> 0xc);
   iVar3 = iVar2 * radius3 >> 0xc;
   points[2].y = (short)iVar3;
-  setCopReg(2,in_zero,*(undefined4 *)points);
-  setCopReg(2,in_at,*(undefined4 *)&points->z);
-  setCopReg(2,iVar3,*(undefined4 *)(points + 1));
-  setCopReg(2,iVar2 * radius,*(undefined4 *)&points[1].z);
-  setCopReg(2,iVar1 * radius2,*(undefined4 *)(points + 2));
-  setCopReg(2,iVar2 * radius2,*(undefined4 *)&points[2].z);
+  setCopReg(2,in_zero,*(u_char *)points);
+  setCopReg(2,in_at,*(u_char *)&points->z);
+  setCopReg(2,iVar3,*(u_char *)(points + 1));
+  setCopReg(2,iVar2 * radius,*(u_char *)&points[1].z);
+  setCopReg(2,iVar1 * radius2,*(u_char *)(points + 2));
+  setCopReg(2,iVar2 * radius2,*(u_char *)&points[2].z);
   copFunction(2,0x280030);
   return;
 }
@@ -9544,20 +9547,20 @@ void fx_calc_points(_SVector *points,int degrees,int radius,int radius2,int radi
 long fx_get_startz(_SVector *position)
 
 {
-  undefined4 in_zero;
-  undefined4 in_at;
+  u_char in_zero;
+  u_char in_at;
   undefined auStack40 [20];
-  undefined4 local_14;
-  undefined4 local_10;
+  u_char local_14;
+  u_char local_10;
   int local_c;
   
-  setCopReg(2,in_zero,*(undefined4 *)position);
-  setCopReg(2,in_at,*(undefined4 *)&position->z);
+  setCopReg(2,in_zero,*(u_char *)position);
+  setCopReg(2,in_at,*(u_char *)&position->z);
   copFunction(2,0x480012);
   local_14 = getCopReg(2,0x19);
   local_10 = getCopReg(2,0x1a);
   local_c = getCopReg(2,0x1b);
-  SetTransMatrix((int)auStack40);
+  TransMatrix((int)auStack40);
   if (local_c < 0) {
     local_c = local_c + 3;
   }
@@ -9599,8 +9602,8 @@ long fx_get_startz(_SVector *position)
 	/* end block 3 */
 	// End Line: 18425
 
-void FX_DrawRing(MATRIX *wcTransform,_SVector *position,MATRIX *matrix,int radius,int radius2,
-                int radius3,int z1,int z2,int z3,long color,int sortInWorld)
+void FX_DrawRing2(MATRIX *wcTransform,_SVector *position,MATRIX *matrix,int radius,int radius2,
+                 int radius3,int z1,int z2,int z3,long color,int sortInWorld)
 
 {
   long lVar1;
@@ -9618,7 +9621,7 @@ void FX_DrawRing(MATRIX *wcTransform,_SVector *position,MATRIX *matrix,int radiu
   u_long local_44;
   u_long local_40;
   int local_38;
-  undefined4 local_34;
+  u_char local_34;
   int local_30;
   u_long **local_2c;
   
@@ -9626,10 +9629,10 @@ void FX_DrawRing(MATRIX *wcTransform,_SVector *position,MATRIX *matrix,int radiu
   local_2c = gameTrackerX.drawOT;
   if (puVar5 + 0x240 < (gameTrackerX.primPool)->lastPrim) {
     PushMatrix();
-    SetRotMatrix((undefined4 *)wcTransform);
-    SetTransMatrix((int)wcTransform);
+    SetRotMatrix((u_char *)wcTransform);
+    TransMatrix((int)wcTransform);
     lVar1 = fx_get_startz(position);
-    SetRotMatrix((undefined4 *)matrix);
+    SetRotMatrix((u_char *)matrix);
     _Stack96.z = (short)z1;
     local_54 = (undefined2)z2;
     local_4c = (undefined2)z3;
@@ -9687,7 +9690,7 @@ void FX_DrawRing(MATRIX *wcTransform,_SVector *position,MATRIX *matrix,int radiu
       degrees = degrees + 0x80;
     } while (iVar7 < 0x20);
     (gameTrackerX.primPool)->nextPrim = puVar5;
-    PopMatrix();
+    MulMatrix0();
   }
   return;
 }
@@ -9761,8 +9764,8 @@ void fx_setTex(DVECTOR *x,u_char *uv,int tx,int offset)
 
 /* WARNING: Could not reconcile some variable overlaps */
 
-void FX_DrawRing2(MATRIX *wcTransform,_SVector *position,MATRIX *matrix,int radius,int radius2,
-                 int radius3,int z1,int z2,int z3,long offset,int sortInWorld)
+void FX_DrawBlastring(MATRIX *wcTransform,_SVector *position,MATRIX *matrix,int radius,int radius2,
+                     int radius3,int z1,int z2,int z3,long offset,int sortInWorld)
 
 {
   ushort uVar1;
@@ -9781,10 +9784,10 @@ void FX_DrawRing2(MATRIX *wcTransform,_SVector *position,MATRIX *matrix,int radi
   undefined2 local_5c;
   undefined2 local_54;
   u_long local_50;
-  undefined4 local_4c;
+  u_char local_4c;
   u_long local_48;
   int local_40;
-  undefined4 local_3c;
+  u_char local_3c;
   int local_38;
   u_long **local_34;
   u_int local_30;
@@ -9793,10 +9796,10 @@ void FX_DrawRing2(MATRIX *wcTransform,_SVector *position,MATRIX *matrix,int radi
   local_34 = gameTrackerX.drawOT;
   if (puVar7 + 0x140 < (gameTrackerX.primPool)->lastPrim) {
     PushMatrix();
-    SetRotMatrix((undefined4 *)wcTransform);
-    SetTransMatrix((int)wcTransform);
+    SetRotMatrix((u_char *)wcTransform);
+    TransMatrix((int)wcTransform);
     lVar4 = fx_get_startz(position);
-    SetRotMatrix((undefined4 *)matrix);
+    SetRotMatrix((u_char *)matrix);
     _Stack104.z = (short)z1;
     local_5c = (undefined2)z2;
     uVar6 = (gameTrackerX.gameData.asmData.dispPage ^ 1U) << 8;
@@ -9876,7 +9879,7 @@ void FX_DrawRing2(MATRIX *wcTransform,_SVector *position,MATRIX *matrix,int radi
       degrees = degrees + 0x80;
     } while (iVar8 < 0x20);
     (gameTrackerX.primPool)->nextPrim = puVar7;
-    PopMatrix();
+    MulMatrix0();
   }
   return;
 }
@@ -9917,7 +9920,7 @@ void FX_DrawFField(MATRIX *wcTransform,_FXForceFieldEffect *field)
   int iVar5;
   MATRIX MStack64;
   _SVector local_20;
-  undefined4 local_18;
+  u_char local_18;
   u_int local_14;
   
   p_Var4 = field->instance;
@@ -9961,10 +9964,10 @@ void FX_DrawFField(MATRIX *wcTransform,_FXForceFieldEffect *field)
   }
   local_14 = local_14 & 0xffffff;
   MATH3D_SetUnityMatrix(&MStack64);
-  RotMatrixZ(0x400,(u_int *)&MStack64);
-  RotMatrixX((int)theCamera.core.rotation.x,(int)&MStack64);
-  FX_DrawRing(wcTransform,&local_20,&MStack64,(int)field->size - iVar3,(int)field->size,
-              field->size - iVar3,0,0,0,local_14,0);
+  RotMatrixX(0x400,(u_int *)&MStack64);
+  RotMatrixZ((int)theCamera.core.rotation.x,(int)&MStack64);
+  FX_DrawRing2(wcTransform,&local_20,&MStack64,(int)field->size - iVar3,(int)field->size,
+               field->size - iVar3,0,0,0,local_14,0);
   return;
 }
 
@@ -10226,13 +10229,13 @@ void FX_Draw_Glowing_Line
 
 /* WARNING: Could not reconcile some variable overlaps */
 
-void FX_Lightning(MATRIX *wcTransform,u_long **ot,MATRIX *mat,short deg,_SVector *start,_SVector *end
-                 ,int width,int small_width,int segs,int sine_size,int variation,long color,
-                 long glow_color)
+void FX_CreateLightning(MATRIX *wcTransform,u_long **ot,MATRIX *mat,short deg,_SVector *start,
+                       _SVector *end,int width,int small_width,int segs,int sine_size,int variation,
+                       long color,long glow_color)
 
 {
-  undefined4 in_zero;
-  undefined4 in_at;
+  u_char in_zero;
+  u_char in_at;
   int iVar1;
   int iy;
   int ix;
@@ -10247,7 +10250,7 @@ void FX_Lightning(MATRIX *wcTransform,u_long **ot,MATRIX *mat,short deg,_SVector
   DVECTOR local_58 [2];
   DVECTOR local_50 [2];
   DVECTOR local_48 [2];
-  undefined4 local_40;
+  u_char local_40;
   u_int local_3c;
   int local_38;
   int local_34;
@@ -10255,14 +10258,14 @@ void FX_Lightning(MATRIX *wcTransform,u_long **ot,MATRIX *mat,short deg,_SVector
   
   local_30 = (u_int)(ushort)deg & 0xfff;
   if (mat == (MATRIX *)0x0) {
-    SetRotMatrix((undefined4 *)wcTransform);
+    SetRotMatrix((u_char *)wcTransform);
   }
   else {
-    SetRotMatrix((undefined4 *)mat);
+    SetRotMatrix((u_char *)mat);
     wcTransform = mat;
   }
   otz = 0x7fff;
-  SetTransMatrix((int)wcTransform);
+  TransMatrix((int)wcTransform);
   width = width * 0x140;
   small_width = small_width * 0x140;
   local_34 = 0x1000 / segs;
@@ -10475,8 +10478,8 @@ void FX_LightHouse(MATRIX *wcTransform,u_long **ot,_Instance *instance,int start
 
 {
   bool bVar1;
-  undefined4 in_zero;
-  undefined4 in_at;
+  u_char in_zero;
+  u_char in_at;
   long lVar2;
   int iVar3;
   int iVar4;
@@ -10493,12 +10496,12 @@ void FX_LightHouse(MATRIX *wcTransform,u_long **ot,_Instance *instance,int start
   DVECTOR local_68 [2];
   DVECTOR local_60 [2];
   u_int local_58;
-  undefined4 local_54;
+  u_char local_54;
   u_int local_50;
-  undefined4 local_4c;
+  u_char local_4c;
   int local_48;
   long local_44;
-  undefined4 local_40;
+  u_char local_40;
   long local_3c;
   long local_38;
   int local_34;
@@ -10516,8 +10519,8 @@ void FX_LightHouse(MATRIX *wcTransform,u_long **ot,_Instance *instance,int start
       local_80.x = *(short *)pMVar5->t;
       local_80.y = *(short *)(pMVar5->t + 1);
       local_80.z = *(short *)(pMVar5->t + 2);
-      SetRotMatrix((undefined4 *)wcTransform);
-      SetTransMatrix((int)wcTransform);
+      SetRotMatrix((u_char *)wcTransform);
+      TransMatrix((int)wcTransform);
       local_38 = beam_color;
       local_68[0] = (DVECTOR)0x0;
       local_3c = beam_color;

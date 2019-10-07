@@ -73,13 +73,13 @@ void load(memcard_t *memcard)
   else {
     loadAddr = (Object *)(gameTrackerX.primPool)->prim;
   }
-  LOAD_LoadToAddress("\\kain2\\object\\mcardx\\mcardx.drm",loadAddr,1);
+  LOAD_LoadTIM("\\kain2\\object\\mcardx\\mcardx.drm",loadAddr,1);
   memcard->table = (mcmenu_table_t *)loadAddr->relocModule;
   RELMOD_InitModulePointers((int)loadAddr->relocModule,(int *)loadAddr->relocList);
   memcard->object = loadAddr;
   if (memcard->table->versionID != "May 25 1999") {
     if ((gameTrackerX.gameFlags & 0x8000000U) == 0) {
-      MEMPACK_Free((char *)loadAddr);
+      MEMPACK_Init((char *)loadAddr);
     }
     memcard->table = (mcmenu_table_t *)0x0;
   }
@@ -105,7 +105,7 @@ void unload(memcard_t *memcard)
   address = memcard->object;
   if (address != (Object *)0x0) {
     if (address != (Object *)(gameTrackerX.primPool)->prim) {
-      MEMPACK_Free((char *)address);
+      MEMPACK_Init((char *)address);
     }
     memcard->object = (Object *)0x0;
   }
@@ -131,7 +131,7 @@ void unload(memcard_t *memcard)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-int memcard_data_size(void)
+int menu_data_size(void)
 
 {
   return 0x10;
@@ -157,7 +157,7 @@ int memcard_data_size(void)
 	/* end block 2 */
 	// End Line: 305
 
-int memcard_initialize(memcard_t *memcard,void *gt,int nblocks,void *buffer,int nbytes)
+int memcard_item(memcard_t *memcard,void *gt,int nblocks,void *buffer,int nbytes)
 
 {
   int iVar1;
@@ -189,7 +189,7 @@ int memcard_initialize(memcard_t *memcard,void *gt,int nblocks,void *buffer,int 
 	/* end block 1 */
 	// End Line: 390
 
-void memcard_end(memcard_t *memcard)
+void memcard_data_size(memcard_t *memcard)
 
 {
   (*memcard->table->end)(memcard->mcmenu);
@@ -242,7 +242,7 @@ int maybe_start(memcard_t *memcard)
 	/* end block 2 */
 	// End Line: 445
 
-int memcard_main_menu(void *gt,int index)
+int do_main_menu(void *gt,int index)
 
 {
   int iVar1;
@@ -278,7 +278,7 @@ int memcard_main_menu(void *gt,int index)
 	/* end block 2 */
 	// End Line: 462
 
-int memcard_pause_menu(void *gt,int index)
+int menudefs_pause_menu(void *gt,int index)
 
 {
   int iVar1;
@@ -336,11 +336,11 @@ void * gt2mcmenu(void *gt)
 	/* end block 1 */
 	// End Line: 499
 
-void memcard_pop(void *opaque)
+void memcard_end(void *opaque)
 
 {
   menu_pop(gameTrackerX.menu);
-  memcard_end(gameTrackerX.memcard);
+  memcard_data_size(gameTrackerX.memcard);
   return;
 }
 
@@ -355,12 +355,12 @@ void memcard_pop(void *opaque)
 	/* end block 1 */
 	// End Line: 518
 
-void memcard_start(void *opaque)
+void memcard_main_menu(void *opaque)
 
 {
   gameTrackerX.streamFlags = gameTrackerX.streamFlags | 0x1000000;
   MAIN_StartGame();
-  memcard_end(gameTrackerX.memcard);
+  memcard_data_size(gameTrackerX.memcard);
   return;
 }
 
@@ -375,13 +375,13 @@ void memcard_start(void *opaque)
 	/* end block 1 */
 	// End Line: 539
 
-void memcard_load(void *opaque)
+void memcard_start(void *opaque)
 
 {
   gameTrackerX.streamFlags = gameTrackerX.streamFlags | 0x200000;
-  SAVE_RestoreGame();
+  SAVE_RestoreGlobalSaveTracker();
   MAIN_StartGame();
-  memcard_end(gameTrackerX.memcard);
+  memcard_data_size(gameTrackerX.memcard);
   return;
 }
 
@@ -396,7 +396,7 @@ void memcard_load(void *opaque)
 	/* end block 1 */
 	// End Line: 559
 
-void memcard_save(void *opaque)
+void memcard_pop(void *opaque)
 
 {
   SAVE_SaveGame();
@@ -414,11 +414,12 @@ void memcard_save(void *opaque)
 	/* end block 1 */
 	// End Line: 569
 
-void memcard_item(void *opaque,TDRFuncPtr_memcard_item1fn fn,long parameter,long flags,char *text)
+void memcard_initialize(void *opaque,TDRFuncPtr_memcard_item1fn fn,long parameter,long flags,
+                       char *text)
 
 {
   if (flags == 0) {
-    menu_item(gameTrackerX.menu,(TDRFuncPtr_menu_item1fn)fn,parameter,text);
+    num_menu_items(gameTrackerX.menu,(TDRFuncPtr_menu_item1fn)fn,parameter,text);
   }
   else {
     menu_item_flags(gameTrackerX.menu,(TDRFuncPtr_menu_item_flags1fn)fn,parameter,flags,text);

@@ -107,8 +107,8 @@ void VRAM_InitVramBlockCache(void)
     iVar2 = iVar2 + -1;
     p_Var1 = p_Var1 + -1;
   } while (-1 < iVar2);
-  VRAM_InsertFreeVram(0x200,0x100,0x200,0x100,1);
-  VRAM_InitMorphPalettes();
+  VRAM_InsertFreeBlock(0x200,0x100,0x200,0x100,1);
+  VM_UpdateMorph();
   return;
 }
 
@@ -128,7 +128,7 @@ void VRAM_InitVramBlockCache(void)
 void VRAM_EnableTerrainArea(void)
 
 {
-  VRAM_InsertFreeVram(0x200,0,0x200,0x100,0);
+  VRAM_InsertFreeBlock(0x200,0,0x200,0x100,0);
   return;
 }
 
@@ -240,7 +240,7 @@ LAB_80072980:
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void VRAM_GarbageCollect(void)
+void MEMPACK_GarbageCollectFree(void)
 
 {
   int iVar1;
@@ -272,7 +272,7 @@ void VRAM_GarbageCollect(void)
 	/* end block 2 */
 	// End Line: 522
 
-int VRAM_InsertFreeBlock(_BlockVramEntry *block)
+int VRAM_InsertFreeVram(_BlockVramEntry *block)
 
 {
   int iVar1;
@@ -304,7 +304,7 @@ int VRAM_InsertFreeBlock(_BlockVramEntry *block)
       block->next = p_Var3;
       p_Var4->next = block;
     }
-    VRAM_GarbageCollect();
+    MEMPACK_GarbageCollectFree();
     iVar1 = 1;
   }
   return iVar1;
@@ -388,7 +388,7 @@ void VRAM_DeleteFreeBlock(_BlockVramEntry *block)
 	/* end block 2 */
 	// End Line: 650
 
-void VRAM_InsertUsedBlock(_BlockVramEntry *block)
+void VRAM_DeleteUsedBlock(_BlockVramEntry *block)
 
 {
   if (block != (_BlockVramEntry *)0x0) {
@@ -612,7 +612,7 @@ int VRAM_DeleteFreeVram(short x,short y,short w,short h)
 	/* end block 2 */
 	// End Line: 885
 
-int VRAM_InsertFreeVram(short x,short y,short w,short h,int flags)
+int VRAM_InsertFreeBlock(short x,short y,short w,short h,int flags)
 
 {
   short sVar1;
@@ -645,7 +645,7 @@ int VRAM_InsertFreeVram(short x,short y,short w,short h,int flags)
     block->y = y;
     block->h = h;
     block->area = (int)block->w * (int)h;
-    VRAM_InsertFreeBlock(block);
+    VRAM_InsertFreeVram(block);
     block = VRAM_GetOpenBlock();
     block->w = w + -0x40 + sVar1;
     lVar3 = (int)block->w * (int)h;
@@ -658,7 +658,7 @@ int VRAM_InsertFreeVram(short x,short y,short w,short h,int flags)
     block->x = (x + 0x40) - sVar1;
   }
   block->area = lVar3;
-  VRAM_InsertFreeBlock(block);
+  VRAM_InsertFreeVram(block);
   return 1;
 }
 
@@ -762,8 +762,9 @@ LAB_80073150:
           if ((x_00 & 0xf) == 0) goto LAB_80073150;
           iVar5 = 0x10 - ((u_int)x_00 & 0xf);
           if ((iVar3 <= (int)(0x40 - ((short)x_00 + iVar5 & 0x3fU))) && (iVar3 <= iVar7 - iVar5)) {
-            VRAM_InsertFreeVram(x_00,block->y,(short)((u_int)(iVar5 * 0x10000) >> 0x10),block->h,
-                                (u_int)block->flags);
+            VRAM_InsertFreeBlock
+                      (x_00,block->y,(short)((u_int)(iVar5 * 0x10000) >> 0x10),block->h,
+                       (u_int)block->flags);
             bVar2 = false;
             block->x = block->x + (short)iVar5;
             block->w = block->w - (short)iVar5;
@@ -777,7 +778,7 @@ LAB_80073150:
     if (block != (_BlockVramEntry *)0x0) goto LAB_80073098;
   }
   if ((p_Var10 != (_BlockVramEntry *)0x0) && (bVar2)) {
-    VRAM_InsertFreeVram(p_Var10->x,p_Var10->y,w_00,p_Var10->h,(u_int)p_Var10->flags);
+    VRAM_InsertFreeBlock(p_Var10->x,p_Var10->y,w_00,p_Var10->h,(u_int)p_Var10->flags);
     bVar2 = false;
     p_Var10->x = p_Var10->x + w_00;
     p_Var10->w = p_Var10->w - w_00;
@@ -801,7 +802,7 @@ LAB_80073098:
     block->w = w;
     block->h = h;
     block->type = local_30;
-    VRAM_InsertUsedBlock(block);
+    VRAM_DeleteUsedBlock(block);
     *x = block->x;
     *y = block->y;
     _w_00 = (int)(short)uVar1;
@@ -831,19 +832,21 @@ LAB_80073098:
         }
         iVar3 = x_00 + uVar4;
         if (_w_00 < iVar5) {
-          VRAM_InsertFreeVram((short)((u_int)(iVar3 * 0x10000) >> 0x10),y_00,
-                              (short)((uVar9 - uVar4) * 0x10000 >> 0x10),h,1);
+          VRAM_InsertFreeBlock
+                    ((short)((u_int)(iVar3 * 0x10000) >> 0x10),y_00,
+                     (short)((uVar9 - uVar4) * 0x10000 >> 0x10),h,1);
           w = uVar1;
         }
         else {
-          VRAM_InsertFreeVram((short)((u_int)(iVar3 * 0x10000) >> 0x10),y_00,
-                              (short)((uVar9 - uVar4) * 0x10000 >> 0x10),h_00,1);
+          VRAM_InsertFreeBlock
+                    ((short)((u_int)(iVar3 * 0x10000) >> 0x10),y_00,
+                     (short)((uVar9 - uVar4) * 0x10000 >> 0x10),h_00,1);
         }
         y_00 = (ushort)((y_00 + uVar6) * 0x10000 >> 0x10);
         h_00 = (ushort)((uVar11 - uVar6) * 0x10000 >> 0x10);
       }
     }
-    VRAM_InsertFreeVram(x_00,y_00,w,h_00,1);
+    VRAM_InsertFreeBlock(x_00,y_00,w,h_00,1);
   }
   return block;
 }
@@ -864,7 +867,7 @@ void VRAM_ClearVramBlock(_BlockVramEntry *block)
 {
   if (block != (_BlockVramEntry *)0x0) {
     VRAM_DeleteUsedBlock(block);
-    VRAM_InsertFreeBlock(block);
+    VRAM_InsertFreeVram(block);
   }
   return;
 }
@@ -982,7 +985,7 @@ void AdjustVramCoordsObject(int oldx,int oldy,int newx,int newy,Object *object)
 	/* end block 4 */
 	// End Line: 2177
 
-_BlockVramEntry * VRAM_InsertionSort(_BlockVramEntry *rootNode,_BlockVramEntry *newBlock)
+_BlockVramEntry * VRAM_InsertUsedBlock(_BlockVramEntry *rootNode,_BlockVramEntry *newBlock)
 
 {
   _BlockVramEntry *p_Var1;
@@ -1059,9 +1062,9 @@ void VRAM_RearrangeVramsLayer(long whichLayer)
   _BlockVramEntry *newBlock;
   _BlockVramEntry **pp_Var4;
   _BlockVramEntry *block;
-  undefined4 uVar5;
+  u_char uVar5;
   long lVar6;
-  undefined4 uVar7;
+  u_char uVar7;
   _BlockVramEntry *rootNode;
   int iVar8;
   short sVar9;
@@ -1084,16 +1087,16 @@ void VRAM_RearrangeVramsLayer(long whichLayer)
         if (rootNode->y < 0x100) {
           *pp_Var4 = rootNode;
 LAB_800735cc:
-          uVar5 = *(undefined4 *)&rootNode->type;
+          uVar5 = *(u_char *)&rootNode->type;
           lVar6 = rootNode->ID;
-          uVar7 = *(undefined4 *)&rootNode->x;
+          uVar7 = *(u_char *)&rootNode->x;
           newBlock->next = rootNode->next;
-          *(undefined4 *)&newBlock->type = uVar5;
+          *(u_char *)&newBlock->type = uVar5;
           newBlock->ID = lVar6;
-          *(undefined4 *)&newBlock->x = uVar7;
+          *(u_char *)&newBlock->x = uVar7;
           lVar6 = rootNode->area;
           uVar5 = rootNode->udata;
-          *(undefined4 *)&newBlock->w = *(undefined4 *)&rootNode->w;
+          *(u_char *)&newBlock->w = *(u_char *)&rootNode->w;
           newBlock->area = lVar6;
           newBlock->udata = uVar5;
           newBlock = newBlock + 1;
@@ -1131,7 +1134,7 @@ LAB_800735cc:
     iVar3 = 0;
     rootNode = (_BlockVramEntry *)0x0;
     sVar2 = (short)(gameTrackerX.gameData.asmData.dispPage ^ 1U) * 0x100;
-    MoveImage((undefined4 *)&local_38,0,
+    MoveImage((u_char *)&local_38,0,
               (int)((gameTrackerX.gameData.asmData.dispPage ^ 1U) << 0x18) >> 0x10);
     DrawSync(0);
     pp_Var4 = local_638;
@@ -1144,7 +1147,7 @@ LAB_800735cc:
         iVar3 = iVar3 + 1;
         newBlock->next = (_BlockVramEntry *)0x0;
         newBlock->area = (int)newBlock->w * (int)newBlock->h;
-        rootNode = VRAM_InsertionSort(rootNode,newBlock);
+        rootNode = VRAM_InsertUsedBlock(rootNode,newBlock);
         newBlock = newBlock + 1;
       } while (iVar3 < iVar8);
     }
@@ -1165,7 +1168,7 @@ LAB_800735cc:
         VRAM_PrintInfo();
         VRAM_PrintVramBlock(rootNode);
       }
-      MoveImage((undefined4 *)&local_38,(int)(short)local_30,(int)(short)local_2e[0]);
+      MoveImage((u_char *)&local_38,(int)(short)local_30,(int)(short)local_2e[0]);
       DrawSync(0);
       bVar1 = rootNode->type;
       if (bVar1 == 2) {
@@ -1238,7 +1241,7 @@ void VRAM_TransferBufferToVram(void *dataPtr,long dataSize,short status,void *da
 {
   short sVar1;
   long *plVar2;
-  undefined4 *puVar3;
+  u_char *puVar3;
   int iVar4;
   short sVar5;
   size_t __n;
@@ -1248,7 +1251,7 @@ void VRAM_TransferBufferToVram(void *dataPtr,long dataSize,short status,void *da
   undefined2 local_24;
   short local_22;
   
-  puVar3 = (undefined4 *)BreakDraw();
+  puVar3 = (u_char *)BreakDraw();
   DrawSync(0);
   plVar2 = gameTrackerX.drawTimerReturn;
   gameTrackerX.drawTimerReturn = (long *)0x0;
@@ -1278,7 +1281,7 @@ void VRAM_TransferBufferToVram(void *dataPtr,long dataSize,short status,void *da
         local_24 = *(undefined2 *)((int)data1 + 8);
         local_22 = 1;
         *(short *)((int)data1 + 0xc) = *(short *)((int)data1 + 0xc) + 1;
-        LoadImage((undefined4 *)&local_28,*(undefined4 *)((int)data1 + 0x10));
+        LoadImage((u_char *)&local_28,*(u_char *)((int)data1 + 0x10));
         *(undefined2 *)((int)data1 + 0xe) = 0;
       }
     }
@@ -1290,7 +1293,7 @@ void VRAM_TransferBufferToVram(void *dataPtr,long dataSize,short status,void *da
       local_24 = *(undefined2 *)((int)data1 + 8);
       sVar5 = (short)iVar4;
       local_22 = sVar5;
-      LoadImage((undefined4 *)&local_28,dataPtr);
+      LoadImage((u_char *)&local_28,dataPtr);
       *(short *)((int)data1 + 0xc) = *(short *)((int)data1 + 0xc) + sVar5;
       iVar4 = (int)(short)(sVar1 * (short)((iVar4 << 0x10) >> 0xf));
       __n = dataSize - iVar4;
@@ -1303,7 +1306,7 @@ void VRAM_TransferBufferToVram(void *dataPtr,long dataSize,short status,void *da
   }
   DrawSync(0);
   gameTrackerX.drawTimerReturn = plVar2;
-  if ((puVar3 != (undefined4 *)0x0) && (puVar3 != (undefined4 *)0xffffffff)) {
+  if ((puVar3 != (u_char *)0x0) && (puVar3 != (u_char *)0xffffffff)) {
     DrawOTag(puVar3);
   }
   return;
@@ -1330,7 +1333,7 @@ void VRAM_TransferBufferToVram(void *dataPtr,long dataSize,short status,void *da
 void VRAM_LoadReturn(void *dataPtr,void *data1,void *data2)
 
 {
-  MEMPACK_Free((char *)data1);
+  MEMPACK_Init((char *)data1);
   return;
 }
 
@@ -1405,7 +1408,7 @@ long VRAM_GetObjectVramSpace(VramSize *vramSize,_ObjectTracker *objectTracker)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void VRAM_InitMorphPalettes(void)
+void VM_UpdateMorph(void)
 
 {
   return;
@@ -1429,7 +1432,7 @@ void VRAM_InitMorphPalettes(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void VRAM_UpdateMorphPalettes(void)
+void VRAM_InitMorphPalettes(void)
 
 {
   return;

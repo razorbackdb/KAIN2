@@ -157,7 +157,7 @@ void OBTABLE_GetInstanceProcessFunc(_Instance *instance)
     *(_func_25 **)&instance->processFunc = (&objectFunc)[iVar1].processFunc;
     return;
   }
-  instance->processFunc = GenericProcess;
+  instance->processFunc = _GlyphGenericProcess;
   return;
 }
 
@@ -186,7 +186,7 @@ void OBTABLE_GetInstanceProcessFunc(_Instance *instance)
 	/* end block 3 */
 	// End Line: 475
 
-void OBTABLE_GetInstanceQueryFunc(_Instance *instance)
+void OBTABLE_GetInstanceMessageFunc(_Instance *instance)
 
 {
   int iVar1;
@@ -225,7 +225,7 @@ void OBTABLE_GetInstanceQueryFunc(_Instance *instance)
 	/* end block 3 */
 	// End Line: 535
 
-void OBTABLE_GetInstanceMessageFunc(_Instance *instance)
+void OBTABLE_GetInstanceQueryFunc(_Instance *instance)
 
 {
   int iVar1;
@@ -284,7 +284,7 @@ void OBTABLE_InitObjectWithID(Object *object)
       iVar4 = 0;
       pOVar3 = &objectFunc;
       do {
-        iVar1 = strcmp(pOVar3->scriptName,object->script);
+        iVar1 = strcmpi(pOVar3->scriptName,object->script);
         if (iVar1 == 0) break;
         pOVar3 = pOVar3 + 1;
         iVar4 = iVar4 + 1;
@@ -299,7 +299,7 @@ LAB_8003e87c:
       iVar4 = 0;
       pOVar3 = &objectFunc;
       do {
-        iVar1 = strcmp(pOVar3->scriptName,"monster_");
+        iVar1 = strcmpi(pOVar3->scriptName,"monster_");
         if (iVar1 == 0) goto LAB_8003e87c;
         pOVar3 = pOVar3 + 1;
         iVar4 = iVar4 + 1;
@@ -310,7 +310,7 @@ LAB_8003e87c:
     iVar4 = 0;
     pOVar3 = &objectFunc;
     do {
-      iVar1 = strcmp(pOVar3->scriptName,"physical");
+      iVar1 = strcmpi(pOVar3->scriptName,"physical");
       if (iVar1 == 0) goto LAB_8003e87c;
       pOVar3 = pOVar3 + 1;
       iVar4 = iVar4 + 1;
@@ -451,7 +451,7 @@ void OBTABLE_RemoveObjectEntry(Object *object)
 	/* end block 3 */
 	// End Line: 818
 
-Object * OBTABLE_FindObject(char *objectName)
+Object * OBTABLE_RelocateObjectTune(char *objectName)
 
 {
   long lVar1;
@@ -464,7 +464,7 @@ Object * OBTABLE_FindObject(char *objectName)
   do {
     if (*(short *)(ppOVar2 + 1) != 0) {
       address = *ppOVar2;
-      lVar1 = MEMPACK_MemoryValidFunc((char *)address);
+      lVar1 = MEMPACK_ReportMemory((char *)address);
       if (((lVar1 != 0) && (*(int *)objectName == *(int *)address->name)) &&
          (*(int *)(objectName + 4) == *(int *)(address->name + 1))) {
         return address;
@@ -588,7 +588,7 @@ void OBTABLE_RelocateObjectTune(Object *object,long offset)
 	/* end block 2 */
 	// End Line: 941
 
-void OBTABLE_RelocateInstanceObject(_Instance *instance,long offset)
+void STREAM_RelocateInstance(_Instance *instance,long offset)
 
 {
   int iVar1;

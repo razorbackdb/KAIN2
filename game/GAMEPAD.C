@@ -214,7 +214,7 @@ void GAMEPAD_DisableDualShock(void)
   dualshock_motors = '\0';
   dualshock1_time = 0;
   dualshock0_time = 0;
-  PadSetAct(0,&dualshock_motors,2);
+  _padSetAct(0,&dualshock_motors,2);
   return;
 }
 
@@ -274,14 +274,13 @@ void GAMEPAD_EnableDualShock(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void GAMEPAD_HandleDualShock(void)
+void GAMEPAD_Shock0(void)
 
 {
   bool bVar1;
   u_long uVar2;
   u_int uVar3;
   int iVar4;
-  int iVar5;
   
   uVar2 = gameTrackerX.timeMult;
   uVar3 = PadInfoMode(0,2,0);
@@ -289,25 +288,25 @@ void GAMEPAD_HandleDualShock(void)
     align_flag = 0;
   }
   else {
-    iVar5 = 0;
+    iVar4 = 0;
     if (align_flag == 0) {
-      PadSetAct(0,&dualshock_motors,2);
+      _padSetAct(0,&dualshock_motors,2);
       do {
-        iVar4 = PadSetActAlign(0,"");
-        bVar1 = iVar5 < 100000;
-        if (iVar4 != 0) break;
-        iVar5 = iVar5 + 1;
+        uVar3 = _padSetActAlign(0,"");
+        bVar1 = iVar4 < 100000;
+        if (uVar3 != 0) break;
+        iVar4 = iVar4 + 1;
       } while (bVar1);
       align_flag = 1;
     }
   }
-  iVar5 = dualshock0_time - uVar2;
-  if ((0 < dualshock0_time) && (dualshock0_time = iVar5, iVar5 < 1)) {
+  iVar4 = dualshock0_time - uVar2;
+  if ((0 < dualshock0_time) && (dualshock0_time = iVar4, iVar4 < 1)) {
     dualshock0_time = 0;
     dualshock_motors = '\0';
   }
-  iVar5 = dualshock1_time - uVar2;
-  if ((0 < dualshock1_time) && (dualshock1_time = iVar5, iVar5 < 1)) {
+  iVar4 = dualshock1_time - uVar2;
+  if ((0 < dualshock1_time) && (dualshock1_time = iVar4, iVar4 < 1)) {
     dualshock1_time = 0;
     u_char_00h_800c8ebd = '\0';
   }
@@ -330,7 +329,7 @@ void GAMEPAD_HandleDualShock(void)
 	/* end block 2 */
 	// End Line: 792
 
-void GAMEPAD_Shock(int motor0_speed,int motor0_time,int motor1_speed,int motor1_time)
+void GAMEPAD_DisableDualShock(int motor0_speed,int motor0_time,int motor1_speed,int motor1_time)
 
 {
   if (dualshock_onflag != 0) {
@@ -338,7 +337,7 @@ void GAMEPAD_Shock(int motor0_speed,int motor0_time,int motor1_speed,int motor1_
     u_char_00h_800c8ebd = (u_char)motor1_speed;
     dualshock0_time = motor0_time;
     dualshock1_time = motor1_time;
-    PadSetAct(0,&dualshock_motors,2);
+    _padSetAct(0,&dualshock_motors,2);
   }
   return;
 }
@@ -359,13 +358,13 @@ void GAMEPAD_Shock(int motor0_speed,int motor0_time,int motor1_speed,int motor1_
 	/* end block 2 */
 	// End Line: 831
 
-void GAMEPAD_Shock0(int motor0_speed,int motor0_time)
+void GAMEPAD_Shock1(int motor0_speed,int motor0_time)
 
 {
   if (dualshock_onflag != 0) {
     dualshock_motors = (u_char)motor0_speed;
     dualshock0_time = motor0_time;
-    PadSetAct(0,&dualshock_motors,2);
+    _padSetAct(0,&dualshock_motors,2);
   }
   return;
 }
@@ -386,13 +385,13 @@ void GAMEPAD_Shock0(int motor0_speed,int motor0_time)
 	/* end block 2 */
 	// End Line: 861
 
-void GAMEPAD_Shock1(int motor1_speed,int motor1_time)
+void GAMEPAD_HandleDualShock(int motor1_speed,int motor1_time)
 
 {
   if (dualshock_onflag != 0) {
     u_char_00h_800c8ebd = (u_char)motor1_speed;
     dualshock1_time = motor1_time;
-    PadSetAct(0,&dualshock_motors,2);
+    _padSetAct(0,&dualshock_motors,2);
   }
   return;
 }
@@ -420,7 +419,7 @@ void GAMEPAD_Shock1(int motor1_speed,int motor1_time)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void GAMEPAD_Detect(void)
+void GAMEPAD_Shock(void)
 
 {
   u_int uVar1;
@@ -435,7 +434,7 @@ LAB_80031394:
   iVar2 = 0;
 LAB_80031398:
   VSync(0);
-  uVar1 = PadGetState();
+  uVar1 = SetStates();
   if (uVar1 == 0) goto code_r0x800313b4;
   goto LAB_800313c4;
 code_r0x800313b4:
@@ -459,7 +458,7 @@ LAB_800313c4:
   while (iVar2 < 0x1e) {
 LAB_800313f8:
     VSync(0);
-    uVar1 = PadGetState();
+    uVar1 = SetStates();
     iVar2 = iVar2 + 1;
     if (uVar1 == 6) break;
   }
@@ -481,12 +480,12 @@ LAB_8003141c:
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void GAMEPAD_Init(void)
+void GAMEPAD_Detect(void)
 
 {
   PadInitDirect(&readGPBuffer1,&readGPBuffer2);
-  PadStartCom();
-  GAMEPAD_Detect();
+  _padStartCom();
+  GAMEPAD_Shock();
   memset(&gDummyCommand,0,0x10);
   memset(&readGPBuffer1,0,0x22);
   memset(&readGPBuffer2,0,0x22);
@@ -528,7 +527,7 @@ void GAMEPAD_FillOutDemoNames(char *baseAreaName,char *demoName)
   char *pcVar1;
   char acStack32 [16];
   
-  strcpy(acStack32,baseAreaName);
+  strcmp(acStack32,baseAreaName);
   pcVar1 = strpbrk(acStack32,"0123456789");
   if (pcVar1 != (char *)0x0) {
     *pcVar1 = '\0';
@@ -572,13 +571,13 @@ void GAMEPAD_LoadDemo(void)
   gameTrackerX.demoMode = '\0';
   if (gameTrackerX.setDemoMode != '\0') {
     GAMEPAD_FillOutDemoNames(gameTrackerX.baseAreaName,acStack88);
-    __demoBufferStart = (ushort *)LOAD_ReadFile(acStack88,'\x11');
+    __demoBufferStart = (ushort *)LOAD_ReadFileFromCD(acStack88,'\x11');
     __currentData = 0xffff;
     __dataCount = 0;
     gameTrackerX.demoMode = '\x01';
     gameTrackerX.setDemoMode = '\0';
     __demoBuffer = __demoBufferStart;
-    GAMELOOP_DemoSetup();
+    GAMELOOP_Set24FPS();
   }
   return;
 }
@@ -624,13 +623,13 @@ void PSXPAD_TranslateData(long *data,ushort padData,ushort lastData)
   ushort uVar1;
   undefined **ppuVar2;
   u_int uVar3;
-  undefined4 *puVar4;
-  undefined4 *puVar5;
+  u_char *puVar4;
+  u_char *puVar5;
   int iVar6;
   undefined *puVar7;
   undefined *puVar8;
   undefined *puVar9;
-  undefined4 local_40;
+  u_char local_40;
   undefined *local_3c [15];
   
   puVar4 = &local_40;
@@ -663,7 +662,7 @@ void PSXPAD_TranslateData(long *data,ushort padData,ushort lastData)
       }
     }
     iVar6 = iVar6 + 1;
-    puVar5 = (undefined4 *)((ushort *)puVar5 + 2);
+    puVar5 = (u_char *)((ushort *)puVar5 + 2);
   } while (iVar6 < 0x10);
   return;
 }
@@ -744,9 +743,9 @@ void GAMEPAD_GetData(long (*data) [5])
   u_int uVar3;
   ControllerPacket *pCVar4;
   u_int uVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  undefined4 uVar8;
+  u_char uVar6;
+  u_char uVar7;
+  u_char uVar8;
   
   (*data)[2] = 0;
   (*data)[1] = 0;
@@ -760,20 +759,20 @@ void GAMEPAD_GetData(long (*data) [5])
   (*data)[4] = 0;
   (data + 1)[3] = 0;
   (data + 1)[4] = 0;
-  GAMEPAD_HandleDualShock();
+  GAMEPAD_Shock0();
   if ((gameTrackerX.demoMode != '\0') && (0 < gameTrackerX.introFXTime)) {
     return;
   }
   pCVar4 = &gpbuffer1;
   pCVar2 = &readGPBuffer1;
   do {
-    uVar6 = *(undefined4 *)(pCVar2->data + 2);
-    uVar7 = *(undefined4 *)(pCVar2->data + 6);
-    uVar8 = *(undefined4 *)(pCVar2->data + 10);
-    *(undefined4 *)pCVar4 = *(undefined4 *)pCVar2;
-    *(undefined4 *)(pCVar4->data + 2) = uVar6;
-    *(undefined4 *)(pCVar4->data + 6) = uVar7;
-    *(undefined4 *)(pCVar4->data + 10) = uVar8;
+    uVar6 = *(u_char *)(pCVar2->data + 2);
+    uVar7 = *(u_char *)(pCVar2->data + 6);
+    uVar8 = *(u_char *)(pCVar2->data + 10);
+    *(u_char *)pCVar4 = *(u_char *)pCVar2;
+    *(u_char *)(pCVar4->data + 2) = uVar6;
+    *(u_char *)(pCVar4->data + 6) = uVar7;
+    *(u_char *)(pCVar4->data + 10) = uVar8;
     pCVar2 = (ControllerPacket *)(pCVar2->data + 0xe);
     pCVar4 = (ControllerPacket *)(pCVar4->data + 0xe);
   } while (pCVar2 != (ControllerPacket *)(readGPBuffer1.data + 0x1e));
@@ -781,13 +780,13 @@ void GAMEPAD_GetData(long (*data) [5])
   pCVar4 = &gpbuffer2;
   pCVar2 = &readGPBuffer2;
   do {
-    uVar6 = *(undefined4 *)(pCVar2->data + 2);
-    uVar7 = *(undefined4 *)(pCVar2->data + 6);
-    uVar8 = *(undefined4 *)(pCVar2->data + 10);
-    *(undefined4 *)pCVar4 = *(undefined4 *)pCVar2;
-    *(undefined4 *)(pCVar4->data + 2) = uVar6;
-    *(undefined4 *)(pCVar4->data + 6) = uVar7;
-    *(undefined4 *)(pCVar4->data + 10) = uVar8;
+    uVar6 = *(u_char *)(pCVar2->data + 2);
+    uVar7 = *(u_char *)(pCVar2->data + 6);
+    uVar8 = *(u_char *)(pCVar2->data + 10);
+    *(u_char *)pCVar4 = *(u_char *)pCVar2;
+    *(u_char *)(pCVar4->data + 2) = uVar6;
+    *(u_char *)(pCVar4->data + 6) = uVar7;
+    *(u_char *)(pCVar4->data + 10) = uVar8;
     pCVar2 = (ControllerPacket *)(pCVar2->data + 0xe);
     pCVar4 = (ControllerPacket *)(pCVar4->data + 0xe);
   } while (pCVar2 != (ControllerPacket *)(readGPBuffer2.data + 0x1e));
@@ -797,7 +796,7 @@ void GAMEPAD_GetData(long (*data) [5])
     return;
   }
   if (5 < gamePadControllerOut) {
-    GAMEPAD_Detect();
+    GAMEPAD_Shock();
   }
   psxData = gpbuffer1.data._0_2_;
   gamePadControllerOut = 0;
@@ -851,7 +850,7 @@ LAB_800319cc:
 	/* end block 3 */
 	// End Line: 2012
 
-void GAMEPAD_DisplayControllerStatus(int msgY)
+void GAMEPAD_SaveControllers(int msgY)
 
 {
   char *text;
@@ -891,7 +890,7 @@ void GAMEPAD_DisplayControllerStatus(int msgY)
 	/* end block 2 */
 	// End Line: 2052
 
-void GAMEPAD_Process(GameTracker *gameTracker)
+void DEBUG_Process(GameTracker *gameTracker)
 
 {
   int iVar1;
@@ -928,7 +927,7 @@ void GAMEPAD_Process(GameTracker *gameTracker)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void GAMEPAD_SaveControllers(void)
+void GAMEPAD_RestoreControllers(void)
 
 {
   long *plVar1;
@@ -998,7 +997,7 @@ void GAMEPAD_SaveControllers(void)
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void GAMEPAD_RestoreControllers(void)
+void GAMEPAD_DisplayControllerStatus(void)
 
 {
   long *plVar1;

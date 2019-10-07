@@ -51,28 +51,28 @@ void CAMERA_CalculateViewVolumeNormals(Camera *camera)
        -(short)((int)sVar3 * (int)sVar1 - (int)sVar1 * (int)sVar5 >> 0xc);
   (camera->core).viewVolumeNormal[1].z =
        (short)((int)sVar3 * (int)sVar2 - (int)sVar2 * (int)sVar5 >> 0xc);
-  CAMERA_Normalize((_SVector *)((camera->core).viewVolumeNormal + 1));
+  PHYSOB_Normalize((_SVector *)((camera->core).viewVolumeNormal + 1));
   (camera->core).viewVolumeNormal[2].x =
        (short)((int)sVar4 * (int)sVar1 - (int)sVar1 * (int)sVar2 >> 0xc);
   (camera->core).viewVolumeNormal[2].y =
        -(short)((int)sVar3 * (int)sVar1 - (int)sVar1 * (int)sVar3 >> 0xc);
   (camera->core).viewVolumeNormal[2].z =
        (short)((int)sVar3 * (int)sVar2 - (int)sVar4 * (int)sVar3 >> 0xc);
-  CAMERA_Normalize((_SVector *)((camera->core).viewVolumeNormal + 2));
+  PHYSOB_Normalize((_SVector *)((camera->core).viewVolumeNormal + 2));
   (camera->core).viewVolumeNormal[3].x =
        (short)((int)sVar2 * (int)sVar1 - (int)sVar1 * (int)sVar4 >> 0xc);
   (camera->core).viewVolumeNormal[3].y =
        -(short)((int)sVar5 * (int)sVar1 - (int)sVar1 * (int)sVar5 >> 0xc);
   (camera->core).viewVolumeNormal[3].z =
        (short)((int)sVar5 * (int)sVar4 - (int)sVar2 * (int)sVar5 >> 0xc);
-  CAMERA_Normalize((_SVector *)((camera->core).viewVolumeNormal + 3));
+  PHYSOB_Normalize((_SVector *)((camera->core).viewVolumeNormal + 3));
   (camera->core).viewVolumeNormal[4].x =
        (short)((int)sVar4 * (int)sVar1 - (int)sVar1 * (int)sVar4 >> 0xc);
   (camera->core).viewVolumeNormal[4].y =
        -(short)((int)sVar5 * (int)sVar1 - (int)sVar1 * (int)sVar3 >> 0xc);
   (camera->core).viewVolumeNormal[4].z =
        (short)((int)sVar5 * (int)sVar4 - (int)sVar4 * (int)sVar3 >> 0xc);
-  CAMERA_Normalize((_SVector *)((camera->core).viewVolumeNormal + 4));
+  PHYSOB_Normalize((_SVector *)((camera->core).viewVolumeNormal + 4));
   return;
 }
 
@@ -91,28 +91,28 @@ void CAMERA_CalcVVClipInfo(Camera *camera)
 
 {
   long lVar1;
-  undefined4 in_zero;
-  undefined4 in_at;
+  u_char in_zero;
+  u_char in_at;
   MATRIX *pMVar2;
   MATRIX *pMVar3;
   
   pMVar3 = (camera->core).vvNormalWorVecMat;
-  ApplyMatrixSV((camera->core).cwTransform2,(camera->core).viewVolumeNormal,pMVar3);
-  ApplyMatrixSV((camera->core).cwTransform2,(camera->core).viewVolumeNormal + 1,
-                (camera->core).vvNormalWorVecMat[0].m + 3);
-  ApplyMatrixSV((camera->core).cwTransform2,(camera->core).viewVolumeNormal + 2,
-                (camera->core).vvNormalWorVecMat[0].m + 6);
+  ApplyMatrix((camera->core).cwTransform2,(camera->core).viewVolumeNormal,pMVar3);
+  ApplyMatrix((camera->core).cwTransform2,(camera->core).viewVolumeNormal + 1,
+              (camera->core).vvNormalWorVecMat[0].m + 3);
+  ApplyMatrix((camera->core).cwTransform2,(camera->core).viewVolumeNormal + 2,
+              (camera->core).vvNormalWorVecMat[0].m + 6);
   pMVar2 = (camera->core).vvNormalWorVecMat + 1;
-  ApplyMatrixSV((camera->core).cwTransform2,(camera->core).viewVolumeNormal + 3,pMVar2);
-  ApplyMatrixSV((camera->core).cwTransform2,(camera->core).viewVolumeNormal + 4,
-                (camera->core).vvNormalWorVecMat[1].m + 3);
-  setCopControlWord(2,0,*(undefined4 *)pMVar3->m);
-  setCopControlWord(2,0x800,*(undefined4 *)((camera->core).vvNormalWorVecMat[0].m + 2));
-  setCopControlWord(2,0x1000,*(undefined4 *)((camera->core).vvNormalWorVecMat[0].m + 4));
-  setCopControlWord(2,0x1800,*(undefined4 *)((camera->core).vvNormalWorVecMat[0].m + 6));
-  setCopControlWord(2,0x2000,*(undefined4 *)((camera->core).vvNormalWorVecMat[0].m + 8));
-  setCopReg(2,in_zero,*(undefined4 *)&(camera->core).position);
-  setCopReg(2,in_at,*(undefined4 *)&(camera->core).position.z);
+  ApplyMatrix((camera->core).cwTransform2,(camera->core).viewVolumeNormal + 3,pMVar2);
+  ApplyMatrix((camera->core).cwTransform2,(camera->core).viewVolumeNormal + 4,
+              (camera->core).vvNormalWorVecMat[1].m + 3);
+  setCopControlWord(2,0,*(u_char *)pMVar3->m);
+  setCopControlWord(2,0x800,*(u_char *)((camera->core).vvNormalWorVecMat[0].m + 2));
+  setCopControlWord(2,0x1000,*(u_char *)((camera->core).vvNormalWorVecMat[0].m + 4));
+  setCopControlWord(2,0x1800,*(u_char *)((camera->core).vvNormalWorVecMat[0].m + 6));
+  setCopControlWord(2,0x2000,*(u_char *)((camera->core).vvNormalWorVecMat[0].m + 8));
+  setCopReg(2,in_zero,*(u_char *)&(camera->core).position);
+  setCopReg(2,in_at,*(u_char *)&(camera->core).position.z);
   copFunction(2,0x486012);
   lVar1 = getCopReg(2,0x19);
   (camera->core).vvPlaneConsts[0] = lVar1;
@@ -120,13 +120,13 @@ void CAMERA_CalcVVClipInfo(Camera *camera)
   (camera->core).vvPlaneConsts[1] = lVar1;
   lVar1 = getCopReg(2,0x1b);
   (camera->core).vvPlaneConsts[2] = lVar1;
-  setCopControlWord(2,0,*(undefined4 *)pMVar2->m);
-  setCopControlWord(2,0x800,*(undefined4 *)((camera->core).vvNormalWorVecMat[1].m + 2));
-  setCopControlWord(2,0x1000,*(undefined4 *)((camera->core).vvNormalWorVecMat[1].m + 4));
-  setCopControlWord(2,0x1800,*(undefined4 *)((camera->core).vvNormalWorVecMat[1].m + 6));
-  setCopControlWord(2,0x2000,*(undefined4 *)((camera->core).vvNormalWorVecMat[1].m + 8));
-  setCopReg(2,in_zero,*(undefined4 *)&(camera->core).position);
-  setCopReg(2,in_at,*(undefined4 *)&(camera->core).position.z);
+  setCopControlWord(2,0,*(u_char *)pMVar2->m);
+  setCopControlWord(2,0x800,*(u_char *)((camera->core).vvNormalWorVecMat[1].m + 2));
+  setCopControlWord(2,0x1000,*(u_char *)((camera->core).vvNormalWorVecMat[1].m + 4));
+  setCopControlWord(2,0x1800,*(u_char *)((camera->core).vvNormalWorVecMat[1].m + 6));
+  setCopControlWord(2,0x2000,*(u_char *)((camera->core).vvNormalWorVecMat[1].m + 8));
+  setCopReg(2,in_zero,*(u_char *)&(camera->core).position);
+  setCopReg(2,in_at,*(u_char *)&(camera->core).position.z);
   copFunction(2,0x486012);
   lVar1 = getCopReg(2,0x19);
   (camera->core).vvPlaneConsts[3] = lVar1;
@@ -177,7 +177,7 @@ void CAMERA_SetViewVolume(Camera *camera)
 	/* end block 2 */
 	// End Line: 588
 
-void CAMERA_SetProjDistance(Camera *camera,long distance)
+void CAMERA_SetInstanceFocus(Camera *camera,long distance)
 
 {
   Level *level;
@@ -259,7 +259,7 @@ void CAMERA_CreateNewFocuspoint(Camera *camera)
   
   distance = camera->focusDistance;
   (camera->focusRotation).x = camera->actual_x_rot;
-  CAMERA_CalcPosition(&camera->targetPos,(_Position *)camera,&camera->focusRotation,distance);
+  CAMERA_CalcFollowPosition(&camera->targetPos,(_Position *)camera,&camera->focusRotation,distance);
   distance = (camera->core).position.y;
   sVar1 = (camera->core).position.z;
   sVar2 = (camera->targetPos).y;
@@ -308,16 +308,16 @@ void CAMERA_SaveMode(Camera *camera,long mode)
   short sVar1;
   int iVar2;
   _Position *p_Var3;
-  undefined4 *puVar4;
+  u_char *puVar4;
   _SavedCinematic *p_Var5;
   Camera *pCVar6;
   int iVar7;
   Camera *pCVar8;
   int iVar9;
   int iVar10;
-  undefined4 uVar11;
-  undefined4 uVar12;
-  undefined4 uVar13;
+  u_char uVar11;
+  u_char uVar12;
+  u_char uVar13;
   
   sVar1 = camera->stack + 1;
   camera->stack = sVar1;
@@ -331,19 +331,19 @@ void CAMERA_SaveMode(Camera *camera,long mode)
     do {
       p_Var5 = pCVar8->savedCinematic;
       iVar2 = (int)&(camera->core).position.x + iVar9;
-      puVar4 = (undefined4 *)(iVar2 + 0x2a0);
+      puVar4 = (u_char *)(iVar2 + 0x2a0);
       pCVar6->savedMode[0] = *(long *)((int)camera->savedMode + iVar7);
       do {
         uVar11 = puVar4[1];
         uVar12 = puVar4[2];
         uVar13 = puVar4[3];
-        *(undefined4 *)&p_Var5->position = *puVar4;
-        *(undefined4 *)&(p_Var5->position).z = uVar11;
-        *(undefined4 *)&(p_Var5->focusPoint).y = uVar12;
-        *(undefined4 *)&p_Var5->base = uVar13;
+        *(u_char *)&p_Var5->position = *puVar4;
+        *(u_char *)&(p_Var5->position).z = uVar11;
+        *(u_char *)&(p_Var5->focusPoint).y = uVar12;
+        *(u_char *)&p_Var5->base = uVar13;
         puVar4 = puVar4 + 4;
         p_Var5 = (_SavedCinematic *)&(p_Var5->base).z;
-      } while (puVar4 != (undefined4 *)(iVar2 + 0x310));
+      } while (puVar4 != (u_char *)(iVar2 + 0x310));
       iVar9 = iVar9 + 0x70;
       pCVar8 = (Camera *)&(pCVar8->core).wcTransform2;
       iVar7 = iVar7 + 4;
@@ -355,36 +355,36 @@ void CAMERA_SaveMode(Camera *camera,long mode)
   if (((mode == 2) || (mode == 5)) || (mode == 4)) {
     p_Var3 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
     sVar1 = (camera->core).position.z;
-    *(undefined4 *)(p_Var3 + 0x70) = *(undefined4 *)&(camera->core).position;
+    *(u_char *)(p_Var3 + 0x70) = *(u_char *)&(camera->core).position;
     p_Var3[0x70].z = sVar1;
     p_Var3 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
     sVar1 = (camera->focusPoint).z;
-    *(undefined4 *)(p_Var3 + 0x71) = *(undefined4 *)&camera->focusPoint;
+    *(u_char *)(p_Var3 + 0x71) = *(u_char *)&camera->focusPoint;
     p_Var3[0x71].z = sVar1;
     p_Var3 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
     sVar1 = (camera->targetPos).z;
-    *(undefined4 *)(p_Var3 + 0x73) = *(undefined4 *)&camera->targetPos;
+    *(u_char *)(p_Var3 + 0x73) = *(u_char *)&camera->targetPos;
     p_Var3[0x73].z = sVar1;
     p_Var3 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
     sVar1 = (camera->targetFocusPoint).z;
-    *(undefined4 *)(p_Var3 + 0x74) = *(undefined4 *)&camera->targetFocusPoint;
+    *(u_char *)(p_Var3 + 0x74) = *(u_char *)&camera->targetFocusPoint;
     p_Var3[0x74].z = sVar1;
     p_Var3 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
-    uVar11 = *(undefined4 *)&(camera->focusRotation).z;
-    *(undefined4 *)&p_Var3[0x77].y = *(undefined4 *)&camera->focusRotation;
-    *(undefined4 *)(p_Var3 + 0x78) = uVar11;
+    uVar11 = *(u_char *)&(camera->focusRotation).z;
+    *(u_char *)&p_Var3[0x77].y = *(u_char *)&camera->focusRotation;
+    *(u_char *)(p_Var3 + 0x78) = uVar11;
     p_Var3 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
-    uVar11 = *(undefined4 *)&(camera->targetFocusRotation).z;
-    *(undefined4 *)&p_Var3[0x78].z = *(undefined4 *)&camera->targetFocusRotation;
-    *(undefined4 *)&p_Var3[0x79].y = uVar11;
+    uVar11 = *(u_char *)&(camera->targetFocusRotation).z;
+    *(u_char *)&p_Var3[0x78].z = *(u_char *)&camera->targetFocusRotation;
+    *(u_char *)&p_Var3[0x79].y = uVar11;
     p_Var3 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
-    uVar11 = *(undefined4 *)&(camera->focusPointVel).z;
-    *(undefined4 *)&p_Var3[0x7a].z = *(undefined4 *)&camera->focusPointVel;
-    *(undefined4 *)&p_Var3[0x7b].y = uVar11;
+    uVar11 = *(u_char *)&(camera->focusPointVel).z;
+    *(u_char *)&p_Var3[0x7a].z = *(u_char *)&camera->focusPointVel;
+    *(u_char *)&p_Var3[0x7b].y = uVar11;
     p_Var3 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
-    uVar11 = *(undefined4 *)&(camera->focusPointAccl).z;
-    *(undefined4 *)(p_Var3 + 0x7c) = *(undefined4 *)&camera->focusPointAccl;
-    *(undefined4 *)&p_Var3[0x7c].z = uVar11;
+    uVar11 = *(u_char *)&(camera->focusPointAccl).z;
+    *(u_char *)(p_Var3 + 0x7c) = *(u_char *)&camera->focusPointAccl;
+    *(u_char *)&p_Var3[0x7c].z = uVar11;
     camera->savedCinematic[camera->stack].maxVel = (int)camera->maxVel;
     camera->savedCinematic[camera->stack].focusDistance = camera->focusDistance;
     camera->savedCinematic[camera->stack].targetFocusDistance = camera->targetFocusDistance;
@@ -430,7 +430,7 @@ void CAMERA_RestoreMode(Camera *camera)
   MultiSpline *pMVar3;
   u_long uVar4;
   _Instance *Inst;
-  undefined4 uVar5;
+  u_char uVar5;
   short sVar6;
   int iVar7;
   
@@ -450,7 +450,7 @@ void CAMERA_RestoreMode(Camera *camera)
     case 0xc:
     case 0xd:
     case 0x10:
-      CAMERA_SetProjDistance(camera,0x140);
+      CAMERA_SetInstanceFocus(camera,0x140);
       Inst = gameTrackerX.playerInstance;
       if (camera->mode == 5) {
         (camera->focusOffset).x = 0;
@@ -486,46 +486,46 @@ void CAMERA_RestoreMode(Camera *camera)
     case 2:
     case 4:
     case 5:
-      CAMERA_SetProjDistance(camera,0x140);
+      CAMERA_SetInstanceFocus(camera,0x140);
       p_Var2 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
       sVar1 = p_Var2[0x70].z;
-      *(undefined4 *)&(camera->core).position = *(undefined4 *)(p_Var2 + 0x70);
+      *(u_char *)&(camera->core).position = *(u_char *)(p_Var2 + 0x70);
       (camera->core).position.z = sVar1;
       p_Var2 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
       sVar1 = p_Var2[0x71].z;
-      *(undefined4 *)&camera->focusPoint = *(undefined4 *)(p_Var2 + 0x71);
+      *(u_char *)&camera->focusPoint = *(u_char *)(p_Var2 + 0x71);
       (camera->focusPoint).z = sVar1;
       p_Var2 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
       sVar1 = p_Var2[0x73].z;
-      *(undefined4 *)&camera->targetPos = *(undefined4 *)(p_Var2 + 0x73);
+      *(u_char *)&camera->targetPos = *(u_char *)(p_Var2 + 0x73);
       (camera->targetPos).z = sVar1;
       p_Var2 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
       sVar1 = p_Var2[0x74].z;
-      *(undefined4 *)&camera->targetFocusPoint = *(undefined4 *)(p_Var2 + 0x74);
+      *(u_char *)&camera->targetFocusPoint = *(u_char *)(p_Var2 + 0x74);
       (camera->targetFocusPoint).z = sVar1;
       camera->targetFocusDistance = camera->savedCinematic[(int)camera->stack].targetFocusDistance;
       p_Var2 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
-      uVar5 = *(undefined4 *)&p_Var2[0x79].y;
-      *(undefined4 *)&camera->targetFocusRotation = *(undefined4 *)&p_Var2[0x78].z;
-      *(undefined4 *)&(camera->targetFocusRotation).z = uVar5;
+      uVar5 = *(u_char *)&p_Var2[0x79].y;
+      *(u_char *)&camera->targetFocusRotation = *(u_char *)&p_Var2[0x78].z;
+      *(u_char *)&(camera->targetFocusRotation).z = uVar5;
       if ((camera->smooth == 0) && (camera->mode != 6)) {
         camera->focusDistance = camera->savedCinematic[(int)camera->stack].focusDistance;
         p_Var2 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
-        uVar5 = *(undefined4 *)(p_Var2 + 0x78);
-        *(undefined4 *)&camera->focusRotation = *(undefined4 *)&p_Var2[0x77].y;
-        *(undefined4 *)&(camera->focusRotation).z = uVar5;
+        uVar5 = *(u_char *)(p_Var2 + 0x78);
+        *(u_char *)&camera->focusRotation = *(u_char *)&p_Var2[0x77].y;
+        *(u_char *)&(camera->focusRotation).z = uVar5;
       }
       else {
         camera->always_rotate_flag = 1;
       }
       p_Var2 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
-      uVar5 = *(undefined4 *)&p_Var2[0x7b].y;
-      *(undefined4 *)&camera->focusPointVel = *(undefined4 *)&p_Var2[0x7a].z;
-      *(undefined4 *)&(camera->focusPointVel).z = uVar5;
+      uVar5 = *(u_char *)&p_Var2[0x7b].y;
+      *(u_char *)&camera->focusPointVel = *(u_char *)&p_Var2[0x7a].z;
+      *(u_char *)&(camera->focusPointVel).z = uVar5;
       p_Var2 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
-      uVar5 = *(undefined4 *)&p_Var2[0x7c].z;
-      *(undefined4 *)&camera->focusPointAccl = *(undefined4 *)(p_Var2 + 0x7c);
-      *(undefined4 *)&(camera->focusPointAccl).z = uVar5;
+      uVar5 = *(u_char *)&p_Var2[0x7c].z;
+      *(u_char *)&camera->focusPointAccl = *(u_char *)(p_Var2 + 0x7c);
+      *(u_char *)&(camera->focusPointAccl).z = uVar5;
       iVar7 = (int)camera->stack;
       Inst = camera->focusInstance;
       camera->maxVel = *(short *)&camera->savedCinematic[iVar7].maxVel;
@@ -533,7 +533,7 @@ void CAMERA_RestoreMode(Camera *camera)
       pMVar3 = camera->savedCinematic[iVar7].targetSpline;
       camera->mode = sVar6;
       (camera->data).Cinematic.targetSpline = pMVar3;
-      uVar4 = INSTANCE_Query(Inst,9);
+      uVar4 = INSTANCE_Post(Inst,9);
       if ((uVar4 & 0x50) != 0) {
         CAMERA_ChangeToUnderWater(camera,camera->focusInstance);
       }
@@ -584,7 +584,7 @@ void CAMERA_RestoreMode(Camera *camera)
 	/* end block 2 */
 	// End Line: 1059
 
-void CAMERA_Save(Camera *camera,long save)
+void CAMERA_Lock(Camera *camera,long save)
 
 {
   short sVar1;
@@ -684,13 +684,13 @@ void CAMERA_Restore(Camera *camera,long restore)
 	/* end block 2 */
 	// End Line: 1218
 
-_SVector * SplineGetNextPointDC(Spline *spline,SplineDef *def)
+_SVector * SplineGetPreviousPoint(Spline *spline,SplineDef *def)
 
 {
   u_long uVar1;
   
-  uVar1 = SplineGetOffsetNext(spline,def,gameTrackerX.timeMult);
-  if ((uVar1 != 0) && (uVar1 = SplineGetData(spline,def,&point_42), uVar1 != 0)) {
+  uVar1 = SplineGetOffsetPrev(spline,def,gameTrackerX.timeMult);
+  if ((uVar1 != 0) && (uVar1 = SplineGetNext(spline,def,&point_42), uVar1 != 0)) {
     return (_SVector *)&point_42;
   }
   return (_SVector *)0x0;
@@ -802,7 +802,7 @@ _SVector * SplineGetNextPointDC(Spline *spline,SplineDef *def)
 	/* end block 2 */
 	// End Line: 1251
 
-void CAMERA_SetMode(Camera *camera,long mode)
+void CAMERA_Save(Camera *camera,long mode)
 
 {
   short sVar1;
@@ -813,7 +813,7 @@ void CAMERA_SetMode(Camera *camera,long mode)
   _SVector *p_Var6;
   u_int uVar7;
   MultiSpline *pMVar8;
-  undefined4 uVar9;
+  u_char uVar9;
   SplineDef local_38;
   _SVector local_30;
   _SVector _Stack40;
@@ -862,7 +862,7 @@ void CAMERA_SetMode(Camera *camera,long mode)
   case 0xd:
     CAMERA_SaveMode(camera,(int)camera->mode);
     if (mode == 5) {
-      CAMERA_Save(camera,7);
+      CAMERA_Lock(camera,7);
     }
     CAMERA_CreateNewFocuspoint(camera);
   }
@@ -877,7 +877,7 @@ void CAMERA_SetMode(Camera *camera,long mode)
   case 2:
   case 4:
   case 5:
-    CAMERA_SetProjDistance(camera,0x140);
+    CAMERA_SetInstanceFocus(camera,0x140);
     (camera->data).Cinematic.posSpline = camera->Spline00;
     pMVar5 = camera->Spline01;
     pMVar8 = (camera->data).Cinematic.posSpline;
@@ -889,11 +889,11 @@ void CAMERA_SetMode(Camera *camera,long mode)
     camera->Spline01 = (MultiSpline *)0x0;
     (camera->data).Cinematic.targetSpline = pMVar5;
     if (pMVar8 != (MultiSpline *)0x0) {
-      *(undefined4 *)&pMVar8->curPositional = 0;
+      *(u_char *)&pMVar8->curPositional = 0;
     }
     pMVar5 = (camera->data).Cinematic.targetSpline;
     if (pMVar5 != (MultiSpline *)0x0) {
-      *(undefined4 *)&pMVar5->curPositional = 0;
+      *(u_char *)&pMVar5->curPositional = 0;
     }
     pMVar5 = (camera->data).Cinematic.posSpline;
     camera->mode = (short)mode;
@@ -901,16 +901,18 @@ void CAMERA_SetMode(Camera *camera,long mode)
       if ((mode == 4) || (mode == 2)) {
         splinecam_helprot.x = (camera->focusRotation).x;
         splinecam_helprot.z = (camera->focusRotation).z + 0x800U & 0xfff;
-        CAMERA_CalcPosition((_Position *)&_Stack40,&camera->targetFocusPoint,&splinecam_helprot,
-                            camera->targetFocusDistance);
-        local_20[0] = SplineGetNearestPoint
+        CAMERA_CalcFollowPosition
+                  ((_Position *)&_Stack40,&camera->targetFocusPoint,&splinecam_helprot,
+                   camera->targetFocusDistance);
+        local_20[0] = CAMERA_SplineGetNearestPoint2
                                 (((camera->data).Cinematic.posSpline)->positional,&_Stack40,
                                  &local_38);
         CAMERA_CalcRotation(&splinecam_helprot,&camera->focusInstance->position,
                             (_Position *)local_20);
         pMVar5 = (camera->data).Cinematic.posSpline;
         (camera->data).Cinematic.splinecam_helpkey = (int)local_38.currkey;
-        local_20[0] = SplineGetNearestPoint(pMVar5->positional,(_SVector *)camera,&local_38);
+        local_20[0] = CAMERA_SplineGetNearestPoint2(pMVar5->positional,(_SVector *)camera,&local_38)
+        ;
         (camera->data).Cinematic.splinecam_currkey = (int)local_38.currkey;
       }
       else {
@@ -937,9 +939,9 @@ void CAMERA_SetMode(Camera *camera,long mode)
         }
       }
     }
-    uVar9 = *(undefined4 *)&(camera->focusRotation).z;
-    *(undefined4 *)&camera->targetRotation = *(undefined4 *)&camera->focusRotation;
-    *(undefined4 *)&(camera->targetRotation).z = uVar9;
+    uVar9 = *(u_char *)&(camera->focusRotation).z;
+    *(u_char *)&camera->targetRotation = *(u_char *)&camera->focusRotation;
+    *(u_char *)&(camera->targetRotation).z = uVar9;
     camera->tiltState = 0;
     camera->lead_angle = 0;
     camera->flags = camera->flags & 0xffffdfff;
@@ -947,7 +949,7 @@ void CAMERA_SetMode(Camera *camera,long mode)
   case 0xc:
   case 0xd:
   case 0x10:
-    CAMERA_SetProjDistance(camera,0x140);
+    CAMERA_SetInstanceFocus(camera,0x140);
     if (mode == 0x10) {
       mode = 0xc;
       uVar7 = camera->flags | 0x2000;
@@ -967,14 +969,14 @@ void CAMERA_SetMode(Camera *camera,long mode)
     (camera->focusRotVel).z = 0;
     camera->targetFocusDistance = sVar3;
     if (((int)sVar1 == 5) && (camera->focusInstance != (_Instance *)0x0)) {
-      CAMERA_SetFocus(camera,&camera->targetFocusPoint);
+      CAMERA_SetInstanceFocus(camera,&camera->targetFocusPoint);
     }
   }
   camera->collisionTargetFocusDistance = camera->targetFocusDistance;
-  uVar9 = *(undefined4 *)&(camera->targetFocusRotation).z;
-  *(undefined4 *)&camera->collisionTargetFocusRotation = *(undefined4 *)&camera->targetFocusRotation
+  uVar9 = *(u_char *)&(camera->targetFocusRotation).z;
+  *(u_char *)&camera->collisionTargetFocusRotation = *(u_char *)&camera->targetFocusRotation
   ;
-  *(undefined4 *)&(camera->collisionTargetFocusRotation).z = uVar9;
+  *(u_char *)&(camera->collisionTargetFocusRotation).z = uVar9;
   return;
 }
 
@@ -998,7 +1000,7 @@ void CAMERA_SetMode(Camera *camera,long mode)
 	/* end block 2 */
 	// End Line: 1672
 
-void CAMERA_Initialize(Camera *camera)
+void CAMERA_Normalize(Camera *camera)
 
 {
   _CameraCore_Type *p_Var1;
@@ -1076,7 +1078,7 @@ void CAMERA_Initialize(Camera *camera)
   camera->always_rotate_flag = 0;
   camera->follow_flag = 0;
   iVar2._1_2_ = (camera->focusPoint).z;
-  *(undefined4 *)&camera->real_focuspoint = *(undefined4 *)&camera->focusPoint;
+  *(u_char *)&camera->real_focuspoint = *(u_char *)&camera->focusPoint;
   (camera->real_focuspoint).z = iVar2._1_2_;
   iVar2._1_2_ = (camera->focusPoint).z;
   camera->minFocusDistance = 0x200;
@@ -1094,7 +1096,7 @@ void CAMERA_Initialize(Camera *camera)
   iVar4 = 2;
   camera->presetIndex = 1;
   camera->mode = 0;
-  CAMERA_SetMode(camera,mode);
+  CAMERA_Save(camera,mode);
   p_Var1 = &camera->core;
   camera->maxXYDist = 3000;
   uVar3 = camera->flags;
@@ -1112,7 +1114,7 @@ void CAMERA_Initialize(Camera *camera)
     p_Var1 = (_CameraCore_Type *)p_Var1->vvNormalWorVecMat[-1].t;
   } while (-1 < iVar4);
   (camera->core).projDistance = 0x140;
-  CAMERA_SetProjDistance(camera,0x140);
+  CAMERA_SetInstanceFocus(camera,0x140);
   (camera->data).Cinematic.cinema_done = 0;
   roll_target = 0;
   current_roll_amount = 0;
@@ -1143,7 +1145,7 @@ void CAMERA_Initialize(Camera *camera)
 	/* end block 2 */
 	// End Line: 2459
 
-void CAMERA_SetInstanceFocus(Camera *camera,_Instance *instance)
+void CAMERA_SetProjDistance(Camera *camera,_Instance *instance)
 
 {
   short sVar1;
@@ -1151,7 +1153,7 @@ void CAMERA_SetInstanceFocus(Camera *camera,_Instance *instance)
   camera->focusInstance = instance;
   camera->flags = camera->flags | 0x800;
   sVar1 = (instance->position).z;
-  *(undefined4 *)&camera->newFocusInstancePos = *(undefined4 *)&instance->position;
+  *(u_char *)&camera->newFocusInstancePos = *(u_char *)&instance->position;
   (camera->newFocusInstancePos).z = sVar1;
   if (instance->object != (Object *)0x0) {
     sVar1 = 0x200;
@@ -1181,7 +1183,7 @@ void CAMERA_SetInstanceFocus(Camera *camera,_Instance *instance)
 	/* end block 2 */
 	// End Line: 2525
 
-void CAMERA_SetZRotation(Camera *camera,short zrot)
+void CAMERA_SetMode(Camera *camera,short zrot)
 
 {
   (camera->core).rotation.z = zrot;
@@ -1244,7 +1246,7 @@ long CAMERA_LengthSVector(_SVector *sv)
 	/* end block 3 */
 	// End Line: 2653
 
-void CAMERA_SetValue(Camera *camera,long index,long value)
+void CAMERA_SetTimer(Camera *camera,long index,long value)
 
 {
   short sVar1;
@@ -1482,7 +1484,7 @@ LAB_800162fc:
 	/* end block 2 */
 	// End Line: 2771
 
-short CAMERA_AngleDifference(short angle0,short angle1)
+short AngleDiff(short angle0,short angle1)
 
 {
   u_int uVar1;
@@ -1525,7 +1527,7 @@ short CAMERA_SignedAngleDifference(short angle0,short angle1)
 {
   short sVar1;
   
-  sVar1 = AngleDiff(angle1,angle0);
+  sVar1 = CAMERA_AngleDifference(angle1,angle0);
   return sVar1;
 }
 
@@ -1555,7 +1557,7 @@ u_long CAMERA_QueryMode(Camera *camera)
   u_long uVar1;
   int iVar2;
   
-  uVar1 = INSTANCE_Query(camera->focusInstance,10);
+  uVar1 = INSTANCE_Post(camera->focusInstance,10);
   if (camera->focusInstance == gameTrackerX.playerInstance) {
     if ((uVar1 & 0x2000000) == 0) {
       if (0 < combat_cam_debounce) {
@@ -1618,7 +1620,7 @@ u_long CAMERA_QueryMode(Camera *camera)
 	/* end block 2 */
 	// End Line: 2891
 
-void CAMERA_SetMaxVel(Camera *camera)
+void CAMERA_SetupColInfo(Camera *camera)
 
 {
   long lVar1;
@@ -1736,21 +1738,22 @@ void CAMERA_SetTarget(Camera *camera,_Position *pos)
 	/* end block 2 */
 	// End Line: 3004
 
-void CAMERA_CalcPosition(_Position *position,_Position *base,_Rotation *rotation,short distance)
+void CAMERA_CalcFollowPosition
+               (_Position *position,_Position *base,_Rotation *rotation,short distance)
 
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 in_zero;
-  undefined4 in_at;
+  u_char uVar1;
+  u_char uVar2;
+  u_char uVar3;
+  u_char in_zero;
+  u_char in_at;
   int local_60;
   u_int local_5c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
+  u_char local_48;
+  u_char local_44;
+  u_char local_40;
+  u_char local_3c;
+  u_char local_38;
   short local_28;
   short local_24;
   short local_20;
@@ -1758,9 +1761,9 @@ void CAMERA_CalcPosition(_Position *position,_Position *base,_Rotation *rotation
   local_60 = (u_int)(ushort)-distance << 0x10;
   local_5c = local_5c & 0xffff0000;
   MATH3D_SetUnityMatrix((MATRIX *)&local_48);
-  RotMatrixX((int)rotation->x,(int)(MATRIX *)&local_48);
-  RotMatrixY((int)rotation->y,(u_int *)(MATRIX *)&local_48);
-  RotMatrixZ((int)rotation->z,(u_int *)(MATRIX *)&local_48);
+  RotMatrixZ((int)rotation->x,(int)(MATRIX *)&local_48);
+  RotMatrix((int)rotation->y,(u_int *)(MATRIX *)&local_48);
+  RotMatrixX((int)rotation->z,(u_int *)(MATRIX *)&local_48);
   setCopControlWord(2,0,local_48);
   setCopControlWord(2,0x800,local_44);
   setCopControlWord(2,0x1000,local_40);
@@ -1909,7 +1912,7 @@ void CAMERA_CalcPosition(_Position *position,_Position *base,_Rotation *rotation
 	/* end block 2 */
 	// End Line: 3099
 
-void CAMERA_SetFocus(Camera *camera,_Position *targetfocusPoint)
+void CAMERA_SetInstanceFocus(Camera *camera,_Position *targetfocusPoint)
 
 {
   short sVar1;
@@ -1933,7 +1936,7 @@ void CAMERA_SetFocus(Camera *camera,_Position *targetfocusPoint)
     local_40 = p_Var4[1].px;
     local_3e = p_Var4[1].py;
     local_3c = p_Var4[1].pz;
-    ApplyMatrix(Inst->matrix + 1,&local_40,auStack48);
+    ApplyMatrixSV(Inst->matrix + 1,&local_40,auStack48);
     sVar1 = (Inst->position).x;
     sVar2 = (Inst->position).y;
     sVar3 = (Inst->position).z;
@@ -1944,13 +1947,13 @@ void CAMERA_SetFocus(Camera *camera,_Position *targetfocusPoint)
       targetfocusPoint->x = sVar1 + local_40;
       targetfocusPoint->y = targetfocusPoint->y + local_3e;
       targetfocusPoint->z = sVar3 + local_3c;
-      uVar5 = INSTANCE_Query(Inst,9);
+      uVar5 = INSTANCE_Post(Inst,9);
       if ((uVar5 & 0x40) != 0) {
         targetfocusPoint->z = targetfocusPoint->z + 0xc0;
       }
     }
     sVar1 = targetfocusPoint->z;
-    *(undefined4 *)&camera->real_focuspoint = *(undefined4 *)targetfocusPoint;
+    *(u_char *)&camera->real_focuspoint = *(u_char *)targetfocusPoint;
     (camera->real_focuspoint).z = sVar1;
     goto LAB_80016998;
   }
@@ -1963,7 +1966,7 @@ LAB_800168f8:
     targetfocusPoint->z = sVar2;
   }
   else {
-    uVar5 = INSTANCE_Query(Inst,0x22);
+    uVar5 = INSTANCE_Post(Inst,0x22);
     if (uVar5 == 0) goto LAB_800168f8;
     LoadAverageShort12((u_int *)(uVar5 + 0x5c),(u_int *)&Inst->position,
                        0x1000 - (int)combat_cam_weight,(int)combat_cam_weight,(u_int *)&local_20);
@@ -1971,12 +1974,12 @@ LAB_800168f8:
     targetfocusPoint->y = local_1e;
     targetfocusPoint->z = local_1c;
   }
-  CAMERA_CalcFocusOffset(&local_38,camera);
+  CAMERA_CalcFSRotation(&local_38,camera);
   targetfocusPoint->x = targetfocusPoint->x + local_38.x;
   targetfocusPoint->y = targetfocusPoint->y + local_38.y;
   targetfocusPoint->z = targetfocusPoint->z + local_38.z;
   sVar1 = targetfocusPoint->z;
-  *(undefined4 *)&camera->real_focuspoint = *(undefined4 *)targetfocusPoint;
+  *(u_char *)&camera->real_focuspoint = *(u_char *)targetfocusPoint;
   (camera->real_focuspoint).z = sVar1;
   if ((camera->instance_mode & 0x2038) != 0) {
     if ((camera->instance_mode & 0x2000) == 0) {
@@ -2007,7 +2010,7 @@ LAB_80016998:
 	/* end block 2 */
 	// End Line: 3347
 
-void CAMERA_Lock(Camera *camera,long lock)
+void CAMERA_Unlock(Camera *camera,long lock)
 
 {
   camera->lock = camera->lock | lock;
@@ -2061,7 +2064,7 @@ void CAMERA_SetSmoothValue(Camera *camera,long smooth)
   camera->smooth = (short)smooth;
   if ((smooth == 0) && (((u_int)(ushort)camera->mode - 0xc < 2 || (camera->mode == 0x10)))) {
     sVar1 = (camera->targetFocusPoint).z;
-    *(undefined4 *)&camera->focusPoint = *(undefined4 *)&camera->targetFocusPoint;
+    *(u_char *)&camera->focusPoint = *(u_char *)&camera->targetFocusPoint;
     (camera->focusPoint).z = sVar1;
   }
   return;
@@ -2078,10 +2081,10 @@ void CAMERA_SetSmoothValue(Camera *camera,long smooth)
 	/* end block 1 */
 	// End Line: 3392
 
-void CAMERA_SetTimer(Camera *camera,long time)
+void CAMERA_QueryMode(Camera *camera,long time)
 
 {
-  CAMERA_Save(camera,-1);
+  CAMERA_Lock(camera,-1);
   return;
 }
 
@@ -2138,7 +2141,7 @@ void CAMERA_Adjust_tilt(Camera *camera,long tilt)
 	/* end block 2 */
 	// End Line: 3444
 
-void CAMERA_Adjust_distance(Camera *camera,long dist)
+void CAMERA_Adjust_rotation(Camera *camera,long dist)
 
 {
   short sVar1;
@@ -2174,14 +2177,14 @@ void CAMERA_Adjust_distance(Camera *camera,long dist)
 	/* end block 1 */
 	// End Line: 3481
 
-void CAMERA_Adjust_rotation(Camera *camera,long rotation)
+void CAMERA_Adjust_distance(Camera *camera,long rotation)
 
 {
   u_long uVar1;
   short sVar2;
   ushort uVar3;
   
-  sVar2 = CAMERA_AngleDifference((ushort)rotation,(camera->targetFocusRotation).z);
+  sVar2 = AngleDiff((ushort)rotation,(camera->targetFocusRotation).z);
   if (sVar2 != 0) {
     camera->rotState = 3;
     sVar2 = camera->smooth;
@@ -2300,13 +2303,13 @@ void CAMERA_Adjust(Camera *camera,long adjust)
       local_18.y = p_Var1->y - p_Var1->ty;
       local_18.z = p_Var1->z - p_Var1->tz;
       dist = CAMERA_LengthSVector(&local_18);
-      CAMERA_Adjust_distance(camera,dist);
+      CAMERA_Adjust_rotation(camera,dist);
     }
     if ((adjust & 2U) != 0) {
       CAMERA_Adjust_tilt(camera,(int)p_Var1->rx);
     }
     if ((adjust & 4U) != 0) {
-      CAMERA_Adjust_rotation(camera,(int)p_Var1->rz);
+      CAMERA_Adjust_distance(camera,(int)p_Var1->rz);
     }
   }
   return;
@@ -2328,7 +2331,7 @@ void CAMERA_Adjust(Camera *camera,long adjust)
 	/* end block 2 */
 	// End Line: 3688
 
-void CAMERA_ChangeTo(Camera *camera,_CameraKey *cameraKey)
+void CAMERA_ChangeToOutOfWater(Camera *camera,_CameraKey *cameraKey)
 
 {
   camera->cameraKey = cameraKey;
@@ -2356,7 +2359,7 @@ void CAMERA_ChangeTo(Camera *camera,_CameraKey *cameraKey)
 	/* end block 2 */
 	// End Line: 3697
 
-void CAMERA_SetShake(Camera *camera,long shake,long scale)
+void CAMERA_SetMaxVel(Camera *camera,long shake,long scale)
 
 {
   int motor1_speed;
@@ -2388,7 +2391,7 @@ void CAMERA_SetShake(Camera *camera,long shake,long scale)
   if (motor1_time < 0x4000) {
     motor1_time = 0x4000;
   }
-  GAMEPAD_Shock1(motor1_speed,motor1_time);
+  GAMEPAD_HandleDualShock(motor1_speed,motor1_time);
   return;
 }
 
@@ -3017,7 +3020,7 @@ void CAMERA_CalcRotation(_Rotation *rotation,_Position *target,_Position *positi
 	/* end block 2 */
 	// End Line: 4402
 
-void CAMERA_CalcFSRotation(Camera *camera,_Rotation *rotation,_Position *target,_Position *position)
+void CAMERA_CalculateLead(Camera *camera,_Rotation *rotation,_Position *target,_Position *position)
 
 {
   u_int uVar1;
@@ -3440,11 +3443,11 @@ _TFace * CAMERA_SphereToSphereWithLines
   local_40 = (_TFace *)0x0;
   local_38 = 1;
   iVar9 = 0;
-  local_34 = STREAM_GetLevelWithID(camera->focusInstance->currentStreamUnitID);
+  local_34 = STREAM_GetWaterZLevel(camera->focusInstance->currentStreamUnitID);
   if (local_34 == (Level *)0x0) {
     return local_40;
   }
-  lVar3 = MEMPACK_MemoryValidFunc((char *)local_34);
+  lVar3 = MEMPACK_ReportMemory((char *)local_34);
   if (lVar3 == 0) {
     return local_40;
   }
@@ -3455,7 +3458,7 @@ _TFace * CAMERA_SphereToSphereWithLines
   local_fc = 0;
   local_e8 = 0;
   local_e4 = 0;
-  CAMERA_CalcFSRotation(camera,&local_c0,(_Position *)colInfo->end,(_Position *)colInfo->start);
+  CAMERA_CalculateLead(camera,&local_c0,(_Position *)colInfo->end,(_Position *)colInfo->start);
   if ((camera->flags & 0x10000U) != 0) {
     p_Var7 = colInfo->start;
     (p_Var7->position).x =
@@ -3471,11 +3474,11 @@ _TFace * CAMERA_SphereToSphereWithLines
          (short)((int)(colInfo->end->position).z - (int)(p_Var7->position).z >> 5);
   }
   MATH3D_SetUnityMatrix(&MStack184);
-  RotMatrixZ((int)local_c0.z + 0x400,(u_int *)&MStack184);
+  RotMatrixX((int)local_c0.z + 0x400,(u_int *)&MStack184);
   if ((((camera->flags & 0x10000U) == 0) && ((camera->instance_mode & 0x4000000) == 0)) &&
      (camera->mode != 6)) {
     local_fe = 0x1000;
-    ApplyMatrix(&MStack184,&local_100,&local_98);
+    ApplyMatrixSV(&MStack184,&local_100,&local_98);
     ACE_amount = local_98 * (camera->focusInstanceVelVec).x +
                  local_94 * (camera->focusInstanceVelVec).y +
                  local_90 * (camera->focusInstanceVelVec).z >> 0xc;
@@ -3524,8 +3527,8 @@ LAB_80017c58:
   if (0 < iVar9) {
     local_e6 = local_e6 + (short)iVar9 * 5;
   }
-  ApplyMatrix(&MStack184,&local_100,local_f8);
-  ApplyMatrix(&MStack184,&local_e8,local_e0);
+  ApplyMatrixSV(&MStack184,&local_100,local_f8);
+  ApplyMatrixSV(&MStack184,&local_e8,local_e0);
   p_Var7 = colInfo->start;
   local_148.x = (p_Var7->position).x + local_f8[0];
   local_148.y = (p_Var7->position).y + local_f4;
@@ -3547,8 +3550,8 @@ LAB_80017c58:
   if (iVar9 < 0) {
     local_e6 = local_e6 + (short)iVar9 * -5;
   }
-  ApplyMatrix(&MStack184,&local_100,local_f8);
-  ApplyMatrix(&MStack184,&local_e8,local_e0);
+  ApplyMatrixSV(&MStack184,&local_100,local_f8);
+  ApplyMatrixSV(&MStack184,&local_e8,local_e0);
   p_Var7 = colInfo->start;
   local_140.x = (p_Var7->position).x - local_f8[0];
   local_140.y = (p_Var7->position).y - local_f4;
@@ -3560,10 +3563,10 @@ LAB_80017c58:
   local_e6 = 0xb4;
   local_fe = 0x20;
   MATH3D_SetUnityMatrix(&MStack184);
-  RotMatrixX((int)local_c0.x + 0x400,(int)&MStack184);
-  RotMatrixZ((int)local_c0.z,(u_int *)&MStack184);
-  ApplyMatrix(&MStack184,&local_100,local_f8);
-  ApplyMatrix(&MStack184,&local_e8,local_e0);
+  RotMatrixZ((int)local_c0.x + 0x400,(int)&MStack184);
+  RotMatrixX((int)local_c0.z,(u_int *)&MStack184);
+  ApplyMatrixSV(&MStack184,&local_100,local_f8);
+  ApplyMatrixSV(&MStack184,&local_e8,local_e0);
   p_Var7 = colInfo->start;
   local_138 = local_f8[0] + (p_Var7->position).x;
   local_136 = local_f4 + (p_Var7->position).y;
@@ -3587,13 +3590,13 @@ LAB_80017c58:
   left_point.x = local_140.x + (camera->focusInstanceVelVec).x;
   left_point.y = local_140.y + (camera->focusInstanceVelVec).y;
   left_point.z = local_140.z + (camera->focusInstanceVelVec).z;
-  ApplyMatrix(&MStack184,&local_100,local_f8);
+  ApplyMatrixSV(&MStack184,&local_100,local_f8);
   local_fe = 0;
   local_fc = 0x1000;
   camera_plane.x = local_f8[0];
   camera_plane.y = local_f4;
   camera_plane.z = local_f0;
-  ApplyMatrix(&MStack184,&local_100,&local_d0);
+  ApplyMatrixSV(&MStack184,&local_100,&local_d0);
   p_Var7 = colInfo->start;
   local_150.vx = (p_Var7->position).x;
   local_150.vy = (p_Var7->position).y;
@@ -3619,7 +3622,7 @@ LAB_80017c58:
       _Stack120.collideType = 1;
       _Stack120.newPoint = pSVar12;
       _Stack120.oldPoint = pSVar11;
-      p_Var5 = COLLIDE_PointAndTerrainFunc
+      p_Var5 = COLLIDE_PointAndWorld
                          (local_34->terrain,&_Stack120,Flags,local_48,(long)&DAT_000010d0,0x20,
                           (_LCollideInfo *)auStack136);
       *(_TFace **)pCVar13->tfaceList = p_Var5;
@@ -3630,9 +3633,9 @@ LAB_80017c58:
         do {
           address = *(Level **)(puVar8 + 1);
           if ((((puVar8[-1] == 2) && (address != local_34)) &&
-              (lVar3 = MEMPACK_MemoryValidFunc((char *)address), lVar3 != 0)) &&
+              (lVar3 = MEMPACK_ReportMemory((char *)address), lVar3 != 0)) &&
              ((local_30 == 0 || ((*puVar8 & 1) == 0)))) {
-            p_Var5 = COLLIDE_PointAndTerrainFunc
+            p_Var5 = COLLIDE_PointAndWorld
                                (address->terrain,&_Stack120,Flags,local_48,(long)&DAT_000010d0,0x20,
                                 (_LCollideInfo *)auStack136);
             *(_TFace **)pCVar13->tfaceList = p_Var5;
@@ -3739,7 +3742,7 @@ LAB_80018510:
 	/* end block 2 */
 	// End Line: 5810
 
-long CAMERA_CalcTilt(_Normal *normal,short zRot)
+long CAMERA_SetZRotation(_Normal *normal,short zRot)
 
 {
   int iVar1;
@@ -3749,8 +3752,8 @@ long CAMERA_CalcTilt(_Normal *normal,short zRot)
   u_int local_18;
   
   MATH3D_SetUnityMatrix(&MStack64);
-  RotMatrixZ(-(int)zRot,(u_int *)&MStack64);
-  ApplyMatrix(&MStack64,normal,auStack32);
+  RotMatrixX(-(int)zRot,(u_int *)&MStack64);
+  ApplyMatrixSV(&MStack64,normal,auStack32);
   iVar1 = ratan2(local_1c,local_18);
   return -(int)(short)iVar1;
 }
@@ -3780,13 +3783,13 @@ long CAMERA_CalcTilt(_Normal *normal,short zRot)
 	/* end block 3 */
 	// End Line: 5850
 
-void CAMERA_SetLookFocusAndBase(_Instance *focusInstance,_Position *focusPoint)
+void CAMERA_SetFocus(_Instance *focusInstance,_Position *focusPoint)
 
 {
   short sVar1;
   
   sVar1 = (focusInstance->position).z;
-  *(undefined4 *)focusPoint = *(undefined4 *)&focusInstance->position;
+  *(u_char *)focusPoint = *(u_char *)&focusInstance->position;
   focusPoint->z = sVar1 + 0x200;
   return;
 }
@@ -3892,7 +3895,7 @@ void CAMERA_SetLookFocusAndDistance(Camera *camera,VECTOR *focuspoint,int distan
 	/* end block 3 */
 	// End Line: 5893
 
-void CAMERA_LookProcess(Camera *camera)
+void CAMERA_Lock(Camera *camera)
 
 {
   short sVar1;
@@ -3913,7 +3916,7 @@ void CAMERA_LookProcess(Camera *camera)
   if (distance <= sVar2) {
     distance = sVar2;
   }
-  CAMERA_CalcPosition(&camera->targetPos,&camera->focusPoint,&camera->focusRotation,distance);
+  CAMERA_CalcFollowPosition(&camera->targetPos,&camera->focusPoint,&camera->focusRotation,distance);
   dampMode = CAMERA_DoCameraCollision2(camera,&camera->targetPos,1);
   (camera->data).Follow.hit = dampMode;
   if (dampMode == 0) {
@@ -3958,8 +3961,8 @@ void CAMERA_LookProcess(Camera *camera)
                     &(camera->focusRotAccl).z,0x40);
   CriticalDampAngle(1,(short *)&camera->focusRotation,(camera->targetFocusRotation).x,
                     (short *)&camera->focusRotVel,(short *)&camera->focusRotAccl,0x40);
-  CAMERA_CalcPosition(&camera->targetPos,&camera->focusPoint,&camera->focusRotation,
-                      camera->focusDistance);
+  CAMERA_CalcFollowPosition
+            (&camera->targetPos,&camera->focusPoint,&camera->focusRotation,camera->focusDistance);
   distance = (camera->targetPos).y;
   sVar1 = (camera->targetPos).z;
   (camera->core).position.x = (camera->targetPos).x;
@@ -3978,7 +3981,7 @@ void CAMERA_LookProcess(Camera *camera)
   distance = (camera->core).rotation.z;
   camera->distanceState = 0;
   camera->lagZ = distance;
-  CAMERA_CalculateLead(camera);
+  CAMERA_CalcTilt(camera);
   return;
 }
 
@@ -4002,7 +4005,7 @@ void CAMERA_LookProcess(Camera *camera)
 	/* end block 2 */
 	// End Line: 6188
 
-void CAMERA_Normalize(_SVector *svector)
+void PHYSOB_Normalize(_SVector *svector)
 
 {
   long lVar1;
@@ -4047,8 +4050,7 @@ void CAMERA_HandleTransitions(Camera *camera)
     (camera->targetFocusRotation).z = sVar1;
     (camera->collisionTargetFocusRotation).z = sVar1;
     if (((sVar2 == 1) && ((camera->lock & 4U) == 0)) ||
-       (sVar2 = CAMERA_AngleDifference((camera->targetFocusRotation).z,(camera->focusRotation).z),
-       sVar2 < 4)) {
+       (sVar2 = AngleDiff((camera->targetFocusRotation).z,(camera->focusRotation).z), sVar2 < 4)) {
       camera->rotState = 0;
       (camera->focusRotVel).z = 0;
       (camera->focusRotAccl).z = 0;
@@ -4057,8 +4059,7 @@ void CAMERA_HandleTransitions(Camera *camera)
   if ((camera->tiltState == 3) &&
      (((sVar2 = camera->forced_movement, (camera->targetFocusRotation).x = (camera->signalRot).x,
        sVar2 == 3 && ((camera->lock & 2U) == 0)) ||
-      (sVar2 = CAMERA_AngleDifference((camera->focusRotation).x,(camera->signalRot).x), sVar2 < 4)))
-     ) {
+      (sVar2 = AngleDiff((camera->focusRotation).x,(camera->signalRot).x), sVar2 < 4)))) {
     camera->tiltState = 0;
     (camera->focusRotVel).x = 0;
     (camera->focusRotAccl).x = 0;
@@ -4125,15 +4126,15 @@ LAB_80018a6c:
 	/* end block 2 */
 	// End Line: 6446
 
-void CAMERA_CalcFocusOffset(_SVector *offset,Camera *camera)
+void CAMERA_CalcFSRotation(_SVector *offset,Camera *camera)
 
 {
   ushort uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 in_zero;
-  undefined4 in_at;
+  u_char uVar2;
+  u_char uVar3;
+  u_char uVar4;
+  u_char in_zero;
+  u_char in_at;
   MATRIX *pMVar5;
   short local_18;
   short local_14;
@@ -4146,12 +4147,12 @@ void CAMERA_CalcFocusOffset(_SVector *offset,Camera *camera)
   }
   local_4 = local_4 & 0xffff0000 | (u_int)uVar1;
   pMVar5 = camera->focusInstance->matrix;
-  setCopControlWord(2,0,*(undefined4 *)pMVar5->m);
-  setCopControlWord(2,0x800,*(undefined4 *)(pMVar5->m + 2));
-  setCopControlWord(2,0x1000,*(undefined4 *)(pMVar5->m + 4));
-  setCopControlWord(2,0x1800,*(undefined4 *)(pMVar5->m + 6));
-  setCopControlWord(2,0x2000,*(undefined4 *)(pMVar5->m + 8));
-  setCopReg(2,in_zero,*(undefined4 *)&camera->focusOffset);
+  setCopControlWord(2,0,*(u_char *)pMVar5->m);
+  setCopControlWord(2,0x800,*(u_char *)(pMVar5->m + 2));
+  setCopControlWord(2,0x1000,*(u_char *)(pMVar5->m + 4));
+  setCopControlWord(2,0x1800,*(u_char *)(pMVar5->m + 6));
+  setCopControlWord(2,0x2000,*(u_char *)(pMVar5->m + 8));
+  setCopReg(2,in_zero,*(u_char *)&camera->focusOffset);
   setCopReg(2,in_at,local_4);
   copFunction(2,0x486012);
   uVar2 = getCopReg(2,0x19);
@@ -4200,7 +4201,7 @@ void CAMERA_CalcFocusOffset(_SVector *offset,Camera *camera)
 	/* end block 2 */
 	// End Line: 6514
 
-void CAMERA_CalcFocusOffsetForSwim(_SVector *offset,Camera *camera)
+void CAMERA_CalcFocusOffset(_SVector *offset,Camera *camera)
 
 {
   short local_20 [2];
@@ -4213,7 +4214,7 @@ void CAMERA_CalcFocusOffsetForSwim(_SVector *offset,Camera *camera)
   local_10 = (camera->focusOffset).x;
   local_e = (camera->focusOffset).y;
   local_c = (camera->focusOffset).z;
-  ApplyMatrix(camera->focusInstance->matrix + 1,&local_10,local_20);
+  ApplyMatrixSV(camera->focusInstance->matrix + 1,&local_10,local_20);
   offset->x = local_20[0];
   offset->y = local_1c;
   offset->z = local_18;
@@ -4255,7 +4256,7 @@ short CAMERA_CalcIntersectAngle
   int iVar1;
   _Position _Stack24;
   
-  iVar1 = COLLIDE_IntersectLineAndPlane_S
+  iVar1 = COLLIDE_IntersectLineAndBox
                     (&_Stack24,vertex0,vertex1,&camera_plane,
                      (int)camera_plane.x * (int)linept->x + (int)camera_plane.y * (int)linept->y +
                      (int)camera_plane.z * (int)linept->z >> 0xc);
@@ -4387,7 +4388,7 @@ short CAMERA_GetLineAngle(Camera *camera,CameraCollisionInfo *colInfo,_SVector *
 	/* end block 2 */
 	// End Line: 6855
 
-long CAMERA_ACForcedMovement(Camera *camera,CameraCollisionInfo *colInfo)
+long CAMERA_ACNoForcedMovement(Camera *camera,CameraCollisionInfo *colInfo)
 
 {
   _Sphere *p_Var1;
@@ -4402,7 +4403,7 @@ long CAMERA_ACForcedMovement(Camera *camera,CameraCollisionInfo *colInfo)
   local_18.x = (p_Var1->position).x - (p_Var2->position).x;
   local_18.y = (p_Var1->position).y - (p_Var2->position).y;
   local_18.z = (p_Var1->position).z - (p_Var2->position).z;
-  CAMERA_Normalize(&local_18);
+  PHYSOB_Normalize(&local_18);
   camera->collisionTargetFocusDistance = *(short *)&colInfo->lenCenterToExtend;
   return 0;
 }
@@ -4518,7 +4519,7 @@ short CAMERA_dampgetline(short angle)
 	/* end block 2 */
 	// End Line: 7031
 
-long CAMERA_ACNoForcedMovement(Camera *camera,CameraCollisionInfo *colInfo)
+long CAMERA_ACForcedMovement(Camera *camera,CameraCollisionInfo *colInfo)
 
 {
   bool bVar1;
@@ -4724,7 +4725,7 @@ long CAMERA_AbsoluteCollision(Camera *camera,CameraCollisionInfo *colInfo)
        ((uVar3 & 0x2000) == 0)) && ((camera->rotState == 0 && (camera->always_rotate_flag == 0))))
      || ((camera->lock & 1U) != 0)) {
     if (*(int *)&camera->forced_movement != 0) {
-      lVar2 = CAMERA_ACForcedMovement(camera,colInfo);
+      lVar2 = CAMERA_ACNoForcedMovement(camera,colInfo);
       return lVar2;
     }
   }
@@ -4743,7 +4744,7 @@ long CAMERA_AbsoluteCollision(Camera *camera,CameraCollisionInfo *colInfo)
       return 0;
     }
   }
-  lVar2 = CAMERA_ACNoForcedMovement(camera,colInfo);
+  lVar2 = CAMERA_ACForcedMovement(camera,colInfo);
   return lVar2;
 }
 
@@ -4882,10 +4883,10 @@ LAB_800198d8:
 void CAMERA_CombatCamDist(Camera *camera)
 
 {
-  undefined4 uVar1;
+  u_char uVar1;
   u_int uVar2;
-  undefined4 in_zero;
-  undefined4 in_at;
+  u_char in_zero;
+  u_char in_at;
   short sVar3;
   u_long uVar4;
   int iVar5;
@@ -4894,17 +4895,17 @@ void CAMERA_CombatCamDist(Camera *camera)
   short sStack46;
   short local_28;
   short sStack38;
-  undefined4 local_20;
+  u_char local_20;
   u_int local_1c;
   
-  uVar4 = INSTANCE_Query(camera->focusInstance,0x22);
+  uVar4 = INSTANCE_Post(camera->focusInstance,0x22);
   if (uVar4 == 0) {
     combat_cam_distance = camera->targetFocusDistance;
     combat_cam_weight = 0x1000;
     return;
   }
-  SetRotMatrix((undefined4 *)(camera->core).wcTransform);
-  SetTransMatrix((int)(camera->core).wcTransform);
+  SetRotMatrix((u_char *)(camera->core).wcTransform);
+  TransMatrix((int)(camera->core).wcTransform);
   local_20 = CONCAT22((camera->focusInstance->position).y,(camera->focusInstance->position).x);
   uVar2 = local_1c & 0xffff0000;
   local_1c = uVar2 | (ushort)(camera->focusInstance->position).z;
@@ -4950,7 +4951,7 @@ void CAMERA_CombatCamDist(Camera *camera)
   combat_cam_weight = sVar3;
 LAB_80019af4:
   local_1c = uVar2 | *(ushort *)(uVar4 + 0x60);
-  setCopReg(2,in_zero,*(undefined4 *)(uVar4 + 0x5c));
+  setCopReg(2,in_zero,*(u_char *)(uVar4 + 0x5c));
   setCopReg(2,in_at,local_1c);
   copFunction(2,0x180001);
   uVar1 = getCopReg(2,0xe);
@@ -5068,7 +5069,7 @@ void CAMERA_GenericCameraProcess(Camera *camera)
   int iVar6;
   _Instance *focusInstance;
   _Position _Stack32;
-  undefined4 local_18;
+  u_char local_18;
   short local_14;
   
   focusInstance = camera->focusInstance;
@@ -5078,10 +5079,10 @@ void CAMERA_GenericCameraProcess(Camera *camera)
   if ((camera->instance_mode & 0x2000000) == 0) {
     combat_cam_weight = 0x800;
   }
-  CAMERA_SetMaxVel(camera);
-  CAMERA_SetFocus(camera,&camera->targetFocusPoint);
+  CAMERA_SetupColInfo(camera);
+  CAMERA_SetInstanceFocus(camera,&camera->targetFocusPoint);
   if (((camera->flags & 0x10000U) == 0) && ((camera->instance_mode & 0x4000000) == 0)) {
-    CAMERA_UpdateFocusRotationX(camera,focusInstance);
+    CAMERA_CalcPosition(camera,focusInstance);
     if (((((camera->mode == 0xd) && (0 < camera->instance_xyvel)) &&
          ((camera->instance_mode & 0x82000400) == 0)) &&
         ((camera->always_rotate_flag == 0 && (camera->rotState != 3)))) &&
@@ -5157,18 +5158,19 @@ LAB_80019ed4:
     else {
       CAMERA_CombatCamDist(camera);
     }
-    CAMERA_CalcPosition(&_Stack32,&camera->focusPoint,&camera->focusRotation,combat_cam_distance);
+    CAMERA_CalcFollowPosition
+              (&_Stack32,&camera->focusPoint,&camera->focusRotation,combat_cam_distance);
     lVar4 = CAMERA_DoCameraCollision2(camera,&_Stack32,0);
     (camera->data).Follow.hit = lVar4;
   }
   if ((int)camera->instance_mode < 0) {
     camera->collisionTargetFocusDistance = 2000;
   }
+  CAMERA_UpdateFocusRoll(camera);
   CAMERA_UpdateFocusDistance(camera);
-  CAMERA_UpdateFocusTilt(camera);
   CAMERA_UpdateFocusRotate(camera);
   if ((camera->flags & 0x1800U) == 0) {
-    local_18 = *(undefined4 *)&camera->targetFocusPoint;
+    local_18 = *(u_char *)&camera->targetFocusPoint;
     local_14 = (camera->targetFocusPoint).z;
     if ((camera->flags & 0x10000U) == 0) {
       local_14 = (camera->focusPoint).z;
@@ -5189,12 +5191,12 @@ LAB_80019ed4:
     (camera->focusPoint).z = sVar1;
     camera->focusDistance = camera->targetFocusDistance;
     if ((camera->flags & 0x1000U) != 0) {
-      CAMERA_SetZRotation(camera,camera->teleportZRot);
+      CAMERA_SetMode(camera,camera->teleportZRot);
     }
   }
-  CAMERA_CalcFollowPosition(camera,&camera->focusRotation);
-  CAMERA_CalculateLead(camera);
-  CAMERA_UpdateFocusRoll(camera);
+  CAMERA_CalcPosition(camera,&camera->focusRotation);
+  CAMERA_CalcTilt(camera);
+  CAMERA_UpdateFocusTilt(camera);
   return;
 }
 
@@ -5318,10 +5320,10 @@ void CAMERA_CinematicProcess(Camera *camera)
   pos_00 = (_SVector *)0x0;
   if (camera->posState == 0) {
     if (pMVar6 == (MultiSpline *)0x0) {
-      CAMERA_SetFocus(camera,&camera->targetFocusPoint);
+      CAMERA_SetInstanceFocus(camera,&camera->targetFocusPoint);
     }
     if (pMVar7 != (MultiSpline *)0x0) {
-      pos = SplineGetNextPointDC(pMVar7->positional,&pMVar7->curPositional);
+      pos = SplineGetPreviousPoint(pMVar7->positional,&pMVar7->curPositional);
       if (pos != (_SVector *)0x0) {
         if ((camera->data).Cinematic.splinePointAhead == 0) {
           sVar1 = pos->y;
@@ -5340,13 +5342,13 @@ void CAMERA_CinematicProcess(Camera *camera)
       }
       if ((camera->data).Cinematic.splinePointAhead == 0) {
         if (pMVar6 == (MultiSpline *)0x0) {
-          CAMERA_SetMaxVel(camera);
+          CAMERA_SetupColInfo(camera);
           CriticalDampPosition
                     (1,&camera->focusPoint,&camera->targetFocusPoint,&camera->focusPointVel,
                      &camera->focusPointAccl,((int)camera->maxVel << 0x11) >> 0x10);
         }
         else {
-          pos_00 = SplineGetNextPointDC(pMVar6->positional,&pMVar6->curPositional);
+          pos_00 = SplineGetPreviousPoint(pMVar6->positional,&pMVar6->curPositional);
           if (pos_00 != (_SVector *)0x0) {
             sVar1 = pos_00->y;
             sVar2 = pos_00->z;
@@ -5373,7 +5375,7 @@ void CAMERA_CinematicProcess(Camera *camera)
       if ((pMVar7 != (MultiSpline *)0x0) &&
          (((camera->data).Cinematic.targetSpline != (MultiSpline *)0x0 ||
           ((camera->data).Cinematic.splinePointAhead != 0)))) {
-        CAMERA_SetMaxVel(camera);
+        CAMERA_SetupColInfo(camera);
         CriticalDampPosition
                   (1,&camera->focusPoint,&camera->targetFocusPoint,&camera->focusPointVel,
                    &camera->focusPointAccl,((int)camera->maxVel << 0x11) >> 0x10);
@@ -5389,7 +5391,7 @@ void CAMERA_CinematicProcess(Camera *camera)
             (4,(_Position *)camera,&camera->targetPos,&camera->positionVel,&camera->positionAccl,
              (int)-camera->smooth);
   if ((camera->data).Cinematic.targetSpline == (MultiSpline *)0x0) {
-    CAMERA_SetFocus(camera,&camera->targetFocusPoint);
+    CAMERA_SetInstanceFocus(camera,&camera->targetFocusPoint);
     CriticalDampPosition
               (4,&camera->focusPoint,&camera->targetFocusPoint,&camera->focusPointVel,
                &camera->focusPointAccl,(int)-camera->smooth);
@@ -5475,7 +5477,7 @@ LAB_8001a530:
   sVar1 = (camera->core).rotation.z;
   camera->actual_x_rot = (camera->core).rotation.x;
   camera->lagZ = sVar1;
-  CAMERA_UpdateFocusRoll(camera);
+  CAMERA_UpdateFocusTilt(camera);
   return;
 }
 
@@ -5510,9 +5512,9 @@ int CAMERA_GetDistSq(_SVector *point1,_SVector *point2)
   int iVar1;
   int iVar2;
   int iVar3;
-  undefined4 in_t1;
-  undefined4 in_t2;
-  undefined4 in_t3;
+  u_char in_t1;
+  u_char in_t2;
+  u_char in_t3;
   
   setCopReg(2,in_t1,(int)point1->x - (int)point2->x);
   setCopReg(2,in_t2,(int)point1->y - (int)point2->y);
@@ -5573,7 +5575,7 @@ void CAMERA_NearestPointOnLineVec
   local_34 = point->x;
   local_32 = point->y;
   local_30 = point->z;
-  ApplyMatrix(&local_40,line,&local_20);
+  ApplyMatrixSV(&local_40,line,&local_20);
   iVar1 = (local_1c - local_18) * 0x1000;
   if (local_20 != 0) {
     iVar1 = ((local_1c - local_18) * -0x1000) / local_20;
@@ -5600,7 +5602,7 @@ void CAMERA_NearestPointOnLineVec
 	/* end block 2 */
 	// End Line: 8937
 
-int CAMERA_CheckPoint(int linePoint,int linept1,int linept2)
+int CAMERA_CheckIfPointOnLine(int linePoint,int linept1,int linept2)
 
 {
   int iVar1;
@@ -5625,18 +5627,18 @@ int CAMERA_CheckPoint(int linePoint,int linept1,int linept2)
 	/* end block 1 */
 	// End Line: 8948
 
-int CAMERA_CheckIfPointOnLine(_SVector *linePoint,_SVector *linept1,_SVector *linept2)
+int CAMERA_CheckPoint(_SVector *linePoint,_SVector *linept1,_SVector *linept2)
 
 {
   int iVar1;
   u_int uVar2;
   
-  iVar1 = CAMERA_CheckPoint((int)linePoint->x,(int)linept1->x,(int)linept2->x);
+  iVar1 = CAMERA_CheckIfPointOnLine((int)linePoint->x,(int)linept1->x,(int)linept2->x);
   uVar2 = 0;
   if (iVar1 == 0) {
-    iVar1 = CAMERA_CheckPoint((int)linePoint->y,(int)linept1->y,(int)linept2->y);
+    iVar1 = CAMERA_CheckIfPointOnLine((int)linePoint->y,(int)linept1->y,(int)linept2->y);
     if (iVar1 == 0) {
-      iVar1 = CAMERA_CheckPoint((int)linePoint->z,(int)linept1->z,(int)linept2->z);
+      iVar1 = CAMERA_CheckIfPointOnLine((int)linePoint->z,(int)linept1->z,(int)linept2->z);
       uVar2 = (u_int)(iVar1 == 0);
     }
     else {
@@ -5727,7 +5729,7 @@ int CAMERA_FindLinePoint
   iVar2 = 0;
   if (0 < target_dist_sq - iVar1) {
     lVar3 = MATH3D_FastSqrt0(target_dist_sq - iVar1);
-    CAMERA_Normalize(&local_30);
+    PHYSOB_Normalize(&local_30);
     iVar1 = 0;
     iVar2 = 0;
     do {
@@ -5746,7 +5748,7 @@ int CAMERA_FindLinePoint
         iVar4 = iVar4 + 0xfff;
       }
       local_28.z = local_38.z + (short)(iVar4 >> 0xc);
-      iVar4 = CAMERA_CheckIfPointOnLine(&local_28,linept1,linept2);
+      iVar4 = CAMERA_CheckPoint(&local_28,linept1,linept2);
       if (iVar4 != 0) {
         iVar2 = iVar2 + 1;
         results->x = local_28.x;
@@ -5856,7 +5858,7 @@ int CAMERA_FindLinePoint
 	/* end block 2 */
 	// End Line: 9081
 
-void CAMERA_SplineGetNearestPoint2
+void SplineGetNearestPoint
                (Camera *camera,Spline *spline,_SVector *point,int *currkey,_SVector *ret_dpoint)
 
 {
@@ -6030,11 +6032,11 @@ void CAMERA_SplineGetNearestPoint(Spline *spline,_SVector *point,int *currkey,_S
   SplineKey *pSVar8;
   int iVar9;
   u_int local_60;
-  undefined4 local_5c;
+  u_char local_5c;
   u_int local_58;
-  undefined4 local_54;
+  u_char local_54;
   u_int local_50;
-  undefined4 local_4c;
+  u_char local_4c;
   short local_48;
   short local_46;
   short local_44;
@@ -6131,7 +6133,7 @@ LAB_8001ae54:
       if ((0xffe < iVar3 - 1U) ||
          (iVar4 = CAMERA_GetDistSq((_SVector *)&local_50,point), iVar5 <= iVar4)) {
         *(u_int *)ret_dpoint = local_60;
-        *(undefined4 *)&ret_dpoint->z = local_5c;
+        *(u_char *)&ret_dpoint->z = local_5c;
         return;
       }
       *currkey = iVar9;
@@ -6147,7 +6149,7 @@ LAB_8001ae54:
       *currkey = iVar9;
     }
     *(u_int *)ret_dpoint = local_50;
-    *(undefined4 *)&ret_dpoint->z = local_4c;
+    *(u_char *)&ret_dpoint->z = local_4c;
   }
   else {
     pSVar6 = pSVar8 + iVar7 + 1;
@@ -6160,7 +6162,7 @@ LAB_8001ae54:
     *currkey = iVar7;
 LAB_8001ae7c:
     *(u_int *)ret_dpoint = local_58;
-    *(undefined4 *)&ret_dpoint->z = local_54;
+    *(u_char *)&ret_dpoint->z = local_54;
   }
   return;
 }
@@ -6203,22 +6205,22 @@ void CAMERA_SplineHelpMove(Camera *camera)
   
   pMVar4 = (camera->data).Cinematic.posSpline;
   p_Var5 = camera->focusInstance;
-  sVar1 = CAMERA_AngleDifference(splinecam_helprot.z,(camera->targetFocusRotation).z);
+  sVar1 = AngleDiff(splinecam_helprot.z,(camera->targetFocusRotation).z);
   if (sVar1 < 400) {
     splinecam_helprot.z = (camera->targetFocusRotation).z + 0x800;
     (camera->targetFocusRotation).z = (camera->targetFocusRotation).z & 0xfff;
   }
-  CAMERA_CalcPosition((_Position *)&_Stack40,&camera->targetFocusPoint,&splinecam_helprot,
-                      camera->targetFocusDistance);
-  CAMERA_SplineGetNearestPoint2
+  CAMERA_CalcFollowPosition
+            ((_Position *)&_Stack40,&camera->targetFocusPoint,&splinecam_helprot,
+             camera->targetFocusDistance);
+  SplineGetNearestPoint
             (camera,pMVar4->positional,&_Stack40,&(camera->data).Cinematic.splinecam_helpkey,
              &_Stack48);
   CAMERA_CalcRotation(&local_20,&camera->focusPoint,(_Position *)&_Stack48);
   splinecam_helprot.x = local_20.x;
   splinecam_helprot.z = local_20.z;
-  sVar1 = CAMERA_AngleDifference
-                    ((p_Var5->rotation).z,
-                     (short)(((u_int)(ushort)camera->lagZ + 0x800) * 0x10000 >> 0x10));
+  sVar1 = AngleDiff((p_Var5->rotation).z,
+                    (short)(((u_int)(ushort)camera->lagZ + 0x800) * 0x10000 >> 0x10));
   if (sVar1 < 900) {
     local_20.z = local_20.z + 0x800 & 0xfff;
     sVar1 = CAMERA_SignedAngleDifference(local_20.z,camera->lagZ);
@@ -6277,7 +6279,7 @@ void CAMERA_SplineHelpMove(Camera *camera)
 	/* end block 2 */
 	// End Line: 9572
 
-void CAMERA_SplineProcess(Camera *camera)
+void CAMERA_LookProcess(Camera *camera)
 
 {
   short sVar1;
@@ -6295,13 +6297,13 @@ void CAMERA_SplineProcess(Camera *camera)
   local_20.x = (camera->targetFocusRotation).x;
   local_20.y = 0;
   local_20.z = (camera->targetFocusRotation).z;
-  CAMERA_SetFocus(camera,&camera->targetFocusPoint);
+  CAMERA_SetInstanceFocus(camera,&camera->targetFocusPoint);
   distance = camera->targetFocusDistance;
   point = (_SVector *)&camera->targetPos;
   if (pMVar3 != (MultiSpline *)0x0) {
-    CAMERA_CalcPosition((_Position *)point,&camera->targetFocusPoint,&local_20,distance);
+    CAMERA_CalcFollowPosition((_Position *)point,&camera->targetFocusPoint,&local_20,distance);
     if (camera->mode == 4) {
-      CAMERA_SplineGetNearestPoint2
+      SplineGetNearestPoint
                 (camera,pMVar3->positional,point,&(camera->data).Cinematic.splinecam_currkey,
                  &local_30);
     }
@@ -6355,8 +6357,9 @@ void CAMERA_SplineProcess(Camera *camera)
                       &(camera->focusRotAccl).z,smooth);
     if (((camera->forced_movement == 1) || (camera->always_rotate_flag != 0)) || (DAT_800cf16c != 0)
        ) {
-      CAMERA_CalcPosition(&camera->targetPos,&camera->focusPoint,&camera->focusRotation,
-                          camera->targetFocusDistance);
+      CAMERA_CalcFollowPosition
+                (&camera->targetPos,&camera->focusPoint,&camera->focusRotation,
+                 camera->targetFocusDistance);
       lVar2 = CAMERA_DoCameraCollision2(camera,&camera->targetPos,1);
       (camera->data).Follow.hit = lVar2;
       if (lVar2 != 0) {
@@ -6365,16 +6368,16 @@ void CAMERA_SplineProcess(Camera *camera)
     }
     CriticalDampValue(5,&camera->focusDistance,distance,&camera->focusDistanceVel,
                       &camera->focusDistanceAccl,smooth_00);
-    distance = CAMERA_AngleDifference((camera->focusRotation).z,local_20.z);
+    distance = AngleDiff((camera->focusRotation).z,local_20.z);
     if (distance < 0x20) {
       camera->always_rotate_flag = 0;
       camera->rotState = 0;
     }
-    CAMERA_CalcFollowPosition(camera,&camera->focusRotation);
+    CAMERA_CalcPosition(camera,&camera->focusRotation);
     if ((camera->mode == 4) && ((camera->flags & 0x10000U) == 0)) {
       CAMERA_SplineHelpMove(camera);
     }
-    CAMERA_CalculateLead(camera);
+    CAMERA_CalcTilt(camera);
   }
   return;
 }
@@ -6390,7 +6393,7 @@ void CAMERA_SplineProcess(Camera *camera)
 	/* end block 1 */
 	// End Line: 9937
 
-void CAMERA_ShakeCamera(Camera *camera)
+void CAMERA_SetValue(Camera *camera)
 
 {
   ushort uVar1;
@@ -6457,7 +6460,7 @@ void CAMERA_ShakeCamera(Camera *camera)
 	/* end block 2 */
 	// End Line: 9979
 
-void CAMERA_Process(Camera *camera)
+void CAMERA_Panic(Camera *camera)
 
 {
   short sVar1;
@@ -6470,23 +6473,23 @@ void CAMERA_Process(Camera *camera)
   long lVar8;
   u_int uVar9;
   _Instance *p_Var10;
-  undefined4 uVar11;
+  u_char uVar11;
   
   p_Var10 = camera->focusInstance;
   camera->focuspoint_fallz =
        camera->focuspoint_fallz - ((camera->newFocusInstancePos).z - (p_Var10->oldPos).z);
   sVar1 = (camera->newFocusInstancePos).z;
-  *(undefined4 *)&camera->oldFocusInstancePos = *(undefined4 *)&camera->newFocusInstancePos;
+  *(u_char *)&camera->oldFocusInstancePos = *(u_char *)&camera->newFocusInstancePos;
   (camera->oldFocusInstancePos).z = sVar1;
   sVar1 = (p_Var10->position).z;
-  *(undefined4 *)&camera->newFocusInstancePos = *(undefined4 *)&p_Var10->position;
+  *(u_char *)&camera->newFocusInstancePos = *(u_char *)&p_Var10->position;
   (camera->newFocusInstancePos).z = sVar1;
-  uVar11 = *(undefined4 *)&(camera->newFocusInstanceRot).z;
-  *(undefined4 *)&camera->oldFocusInstanceRot = *(undefined4 *)&camera->newFocusInstanceRot;
-  *(undefined4 *)&(camera->oldFocusInstanceRot).z = uVar11;
-  uVar11 = *(undefined4 *)&(p_Var10->rotation).z;
-  *(undefined4 *)&camera->newFocusInstanceRot = *(undefined4 *)&p_Var10->rotation;
-  *(undefined4 *)&(camera->newFocusInstanceRot).z = uVar11;
+  uVar11 = *(u_char *)&(camera->newFocusInstanceRot).z;
+  *(u_char *)&camera->oldFocusInstanceRot = *(u_char *)&camera->newFocusInstanceRot;
+  *(u_char *)&(camera->oldFocusInstanceRot).z = uVar11;
+  uVar11 = *(u_char *)&(p_Var10->rotation).z;
+  *(u_char *)&camera->newFocusInstanceRot = *(u_char *)&p_Var10->rotation;
+  *(u_char *)&(camera->newFocusInstanceRot).z = uVar11;
   if ((*(int *)&camera->signalPos == *(int *)&(camera->core).position) &&
      ((camera->signalPos).z == (camera->core).position.z)) {
     camera_still = 1;
@@ -6495,7 +6498,7 @@ void CAMERA_Process(Camera *camera)
     camera_still = 0;
   }
   sVar1 = (camera->core).position.z;
-  *(undefined4 *)&camera->signalPos = *(undefined4 *)&(camera->core).position;
+  *(u_char *)&camera->signalPos = *(u_char *)&(camera->core).position;
   (camera->signalPos).z = sVar1;
   camera->x_rot_change = 0;
   camera->prev_instance_mode = camera->instance_mode;
@@ -6533,7 +6536,7 @@ void CAMERA_Process(Camera *camera)
     return;
   }
   camera->flags = camera->flags & 0xffffe7ff;
-  CAMERA_ShakeCamera(camera);
+  CAMERA_SetValue(camera);
   return;
 }
 
@@ -6576,14 +6579,12 @@ void CAMERA_CenterCamera(Camera *camera)
     uVar3 = (camera->focusInstance->rotation).z + 0x800;
   }
   else {
-    sVar1 = CAMERA_AngleDifference
-                      ((camera->focusRotation).z,
-                       (short)(((u_int)(ushort)(camera->focusInstance->rotation).z + 0x400) * 0x10000
-                              >> 0x10));
-    sVar2 = CAMERA_AngleDifference
-                      ((camera->focusRotation).z,
-                       (short)(((u_int)(ushort)(camera->focusInstance->rotation).z - 0x400) * 0x10000
-                              >> 0x10));
+    sVar1 = AngleDiff((camera->focusRotation).z,
+                      (short)(((u_int)(ushort)(camera->focusInstance->rotation).z + 0x400) * 0x10000
+                             >> 0x10));
+    sVar2 = AngleDiff((camera->focusRotation).z,
+                      (short)(((u_int)(ushort)(camera->focusInstance->rotation).z - 0x400) * 0x10000
+                             >> 0x10));
     if (sVar1 < sVar2) {
       uVar3 = (camera->focusInstance->rotation).z + 0x400;
     }
@@ -6613,7 +6614,7 @@ void CAMERA_CenterCamera(Camera *camera)
 	/* end block 2 */
 	// End Line: 10413
 
-void CAMERA_SetLookRot(Camera *camera,int x_rotation,int z_rotation)
+void CAMERA_SetLookFocusAndBase(Camera *camera,int x_rotation,int z_rotation)
 
 {
   (camera->lookRot).x = (short)x_rotation;
@@ -6632,26 +6633,26 @@ void CAMERA_SetLookRot(Camera *camera,int x_rotation,int z_rotation)
 	/* end block 1 */
 	// End Line: 10424
 
-void CAMERA_StartLookaroundMode(Camera *camera)
+void CAMERA_ForceEndLookaroundMode(Camera *camera)
 
 {
   _Instance *focusInstance;
-  undefined4 uVar1;
+  u_char uVar1;
   
   Camera_lookHeight = 0x200;
   Camera_lookDist = 0x28a;
   CAMERA_SaveMode(camera,(int)camera->mode);
   camera->mode = 6;
   camera->savedFocusDistance = camera->targetFocusDistance;
-  uVar1 = *(undefined4 *)&(camera->targetFocusRotation).z;
-  *(undefined4 *)&camera->savedFocusRotation = *(undefined4 *)&camera->targetFocusRotation;
-  *(undefined4 *)&(camera->savedFocusRotation).z = uVar1;
+  uVar1 = *(u_char *)&(camera->targetFocusRotation).z;
+  *(u_char *)&camera->savedFocusRotation = *(u_char *)&camera->targetFocusRotation;
+  *(u_char *)&(camera->savedFocusRotation).z = uVar1;
   focusInstance = camera->focusInstance;
   camera->targetFocusDistance = 0x28a;
   (camera->lookRot).x = 0;
   (camera->lookRot).y = 0;
   (camera->lookRot).z = 0;
-  CAMERA_SetLookFocusAndBase(focusInstance,&camera->targetFocusPoint);
+  CAMERA_SetFocus(focusInstance,&camera->targetFocusPoint);
   return;
 }
 
@@ -6670,7 +6671,7 @@ void CAMERA_StartSwimThrowMode(Camera *camera)
 
 {
   CameraLookStickyFlag = 1;
-  CAMERA_StartLookaroundMode(camera);
+  CAMERA_ForceEndLookaroundMode(camera);
   PLAYER_SetLookAround(camera->focusInstance);
   camera->lookTimer = 2;
   return;
@@ -6706,7 +6707,7 @@ void CAMERA_EndSwimThrowMode(Camera *camera)
 	/* end block 1 */
 	// End Line: 10499
 
-void CAMERA_ForceEndLookaroundMode(Camera *camera)
+void CAMERA_StartLookaroundMode(Camera *camera)
 
 {
   CameraLookStickyFlag = 0;
@@ -6845,9 +6846,9 @@ void CAMERA_Control(Camera *camera,_Instance *playerInstance)
               sVar3 = camera->lookTimer + 1;
               camera->lookTimer = sVar3;
               if (sVar3 == 2) {
-                lVar4 = PLAYER_OkToLookAround(instance);
+                lVar4 = RAZIEL_OkToLookAround(instance);
                 if ((lVar4 != 0) && ((camera->lock & 0x200U) == 0)) {
-                  CAMERA_StartLookaroundMode(camera);
+                  CAMERA_ForceEndLookaroundMode(camera);
                   PLAYER_SetLookAround(instance);
                   camera->collideRotControl = 0;
                   return;
@@ -6881,7 +6882,7 @@ void CAMERA_Control(Camera *camera,_Instance *playerInstance)
         sVar3 = (camera->focusRotation).z;
         (camera->collisionTargetFocusRotation).z = sVar3;
         (camera->targetFocusRotation).z = sVar3;
-        sVar3 = CAMERA_AngleDifference((camera->focusRotation).z,angle1);
+        sVar3 = AngleDiff((camera->focusRotation).z,angle1);
         if (sVar3 < 8) {
           CenterFlag = -1;
         }
@@ -6916,7 +6917,7 @@ void CAMERA_EndLook(Camera *camera)
 {
   short sVar1;
   ushort uVar2;
-  undefined4 uVar3;
+  u_char uVar3;
   _Instance *instance;
   
   instance = camera->focusInstance;
@@ -6925,9 +6926,9 @@ void CAMERA_EndLook(Camera *camera)
     camera->forced_movement = 0;
     camera->smooth = 8;
     camera->targetFocusDistance = camera->savedFocusDistance;
-    uVar3 = *(undefined4 *)&(camera->savedFocusRotation).z;
-    *(undefined4 *)&camera->targetFocusRotation = *(undefined4 *)&camera->savedFocusRotation;
-    *(undefined4 *)&(camera->targetFocusRotation).z = uVar3;
+    uVar3 = *(u_char *)&(camera->savedFocusRotation).z;
+    *(u_char *)&camera->targetFocusRotation = *(u_char *)&camera->savedFocusRotation;
+    *(u_char *)&(camera->targetFocusRotation).z = uVar3;
     uVar2 = (instance->rotation).z + 0x800U & 0xfff;
     (camera->targetFocusRotation).z = uVar2;
     (camera->collisionTargetFocusRotation).z = uVar2;
@@ -6935,7 +6936,7 @@ void CAMERA_EndLook(Camera *camera)
     sVar1 = (camera->core).rotation.x;
     camera->always_rotate_flag = 1;
     camera->actual_x_rot = sVar1;
-    PLAYER_ReSetLookAround(instance);
+    RAZIEL_ResetLookAround(instance);
   }
   camera->lookTimer = 0;
   return;
@@ -6968,7 +6969,7 @@ void CAMERA_ChangeToUnderWater(Camera *camera,_Instance *instance)
           CAMERA_CreateNewFocuspoint(camera);
         }
         else {
-          CAMERA_SetMode(camera,0xd);
+          CAMERA_Save(camera,0xd);
         }
         camera->smooth = 8;
         camera->targetFocusDistance = 0x640;
@@ -6994,7 +6995,7 @@ void CAMERA_ChangeToUnderWater(Camera *camera,_Instance *instance)
 	/* end block 1 */
 	// End Line: 11237
 
-void CAMERA_ChangeToOutOfWater(Camera *camera,_Instance *instance)
+void CAMERA_ChangeTo(Camera *camera,_Instance *instance)
 
 {
   if (instance == camera->focusInstance) {
@@ -7002,7 +7003,7 @@ void CAMERA_ChangeToOutOfWater(Camera *camera,_Instance *instance)
       CAMERA_SaveMode(camera,0xd);
     }
     else {
-      CAMERA_SetMode(camera,0xd);
+      CAMERA_Save(camera,0xd);
       (camera->rotationVel).z = 0;
       camera->targetTilt = 0;
     }
@@ -7032,7 +7033,7 @@ void CAMERA_ChangeToOutOfWater(Camera *camera,_Instance *instance)
 	/* end block 2 */
 	// End Line: 9817
 
-void CAMERA_UpdateFocusDistance(Camera *camera)
+void CAMERA_UpdateFocusRoll(Camera *camera)
 
 {
   int smooth;
@@ -7074,7 +7075,7 @@ void CAMERA_UpdateFocusDistance(Camera *camera)
 	/* end block 1 */
 	// End Line: 11468
 
-void CAMERA_UpdateFocusTilt(Camera *camera)
+void CAMERA_UpdateFocusDistance(Camera *camera)
 
 {
   short sVar1;
@@ -7124,7 +7125,7 @@ void CAMERA_UpdateFocusTilt(Camera *camera)
 	/* end block 3 */
 	// End Line: 11542
 
-void CAMERA_UpdateFocusRoll(Camera *camera)
+void CAMERA_UpdateFocusTilt(Camera *camera)
 
 {
   short sVar1;
@@ -7154,8 +7155,7 @@ void CAMERA_UpdateFocusRoll(Camera *camera)
     if (roll_target < 0) {
       lVar5 = roll_target + 0xfff;
     }
-    sVar1 = CAMERA_AngleDifference
-                      ((short)((u_int)(lVar3 << 4) >> 0x10),(short)((u_int)(lVar5 << 4) >> 0x10));
+    sVar1 = AngleDiff((short)((u_int)(lVar3 << 4) >> 0x10),(short)((u_int)(lVar5 << 4) >> 0x10));
     iVar6 = iVar2;
     if (iVar2 < 0) {
       iVar6 = iVar2 + 0xfff;
@@ -7235,7 +7235,7 @@ void CAMERA_UpdateFocusRotate(Camera *camera)
       }
       CriticalDampAngle(dampMode,&(camera->focusRotation).z,(camera->collisionTargetFocusRotation).z
                         ,&(camera->focusRotVel).z,&(camera->focusRotAccl).z,(int)sVar1);
-      sVar1 = CAMERA_AngleDifference((camera->targetFocusRotation).z,(camera->focusRotation).z);
+      sVar1 = AngleDiff((camera->targetFocusRotation).z,(camera->focusRotation).z);
       if (3 < sVar1) {
         return;
       }
@@ -7287,7 +7287,7 @@ void CAMERA_UpdateFocusRotate(Camera *camera)
 	/* end block 2 */
 	// End Line: 11675
 
-void CAMERA_UpdateFocusRotationX(Camera *camera,_Instance *focusInstance)
+void CAMERA_CalcPosition(Camera *camera,_Instance *focusInstance)
 
 {
   short sVar1;
@@ -7319,7 +7319,7 @@ void CAMERA_UpdateFocusRotationX(Camera *camera,_Instance *focusInstance)
   else {
     COLLIDE_GetNormal(p_Var4->normal,*(short **)(local_1c + 0x24),&_Stack24);
     if (_Stack24.z < 0xffa) {
-      lVar2 = CAMERA_CalcTilt((_Normal *)&_Stack24,(camera->focusRotation).z);
+      lVar2 = CAMERA_SetZRotation((_Normal *)&_Stack24,(camera->focusRotation).z);
       local_1c = lVar2 * 9;
       if (local_1c < 0) {
         local_1c = local_1c + 0xf;
@@ -7440,7 +7440,7 @@ void CAMERA_FollowPlayerTilt(Camera *camera,_Instance *focusInstance)
   _SVector local_20;
   _Normal local_18;
   
-  uVar3 = INSTANCE_Query(focusInstance,9);
+  uVar3 = INSTANCE_Post(focusInstance,9);
   current = 0x20;
   if ((camera->instance_mode & 0x4000000) == 0) {
     if ((uVar3 & 0x40) != 0) {
@@ -7448,21 +7448,21 @@ void CAMERA_FollowPlayerTilt(Camera *camera,_Instance *focusInstance)
       current = 0x20;
       goto LAB_8001c864;
     }
-    CAMERA_CalcFocusOffsetForSwim(&local_20,camera);
+    CAMERA_CalcFocusOffset(&local_20,camera);
     local_18.z = local_20.z;
     local_18.x = local_20.x;
     local_18.y = local_20.y;
-    lVar4 = CAMERA_CalcTilt(&local_18,(camera->targetFocusRotation).z);
+    lVar4 = CAMERA_SetZRotation(&local_18,(camera->targetFocusRotation).z);
     camera->targetTilt = (short)lVar4 + 0x400;
     current = camera->targetTilt + -0x80;
     camera->targetTilt = current;
-    uVar2 = AngleDiff(current,camera->tilt);
+    uVar2 = CAMERA_AngleDifference(current,camera->tilt);
     if ((int)((u_int)uVar2 << 0x10) < 0) {
-      current = AngleDiff(camera->targetTilt,camera->tilt);
+      current = CAMERA_AngleDifference(camera->targetTilt,camera->tilt);
       iVar5 = -(int)current;
     }
     else {
-      current = AngleDiff(camera->targetTilt,camera->tilt);
+      current = CAMERA_AngleDifference(camera->targetTilt,camera->tilt);
       iVar5 = (int)current;
     }
     if (iVar5 < 0) {
@@ -7472,7 +7472,7 @@ void CAMERA_FollowPlayerTilt(Camera *camera,_Instance *focusInstance)
     if (0x20 < iVar5 >> 4) {
       current = 0x20;
     }
-    pLVar6 = STREAM_GetLevelWithID(camera->focusInstance->currentStreamUnitID);
+    pLVar6 = STREAM_GetWaterZLevel(camera->focusInstance->currentStreamUnitID);
     iVar5 = (int)camera->focusDistance;
     uVar8 = (int)(camera->focusPoint).z - (pLVar6->waterZLevel + -0xa0);
     uVar7 = uVar8;
@@ -7620,7 +7620,7 @@ void CAMERA_FollowGoBehindPlayer(Camera *camera)
 	/* end block 2 */
 	// End Line: 12156
 
-void CAMERA_CalculateLead(Camera *camera)
+void CAMERA_CalcTilt(Camera *camera)
 
 {
   ushort uVar1;
@@ -7667,7 +7667,7 @@ void CAMERA_CalculateLead(Camera *camera)
             angle0 = (short)iVar3;
           }
         }
-        sVar2 = CAMERA_AngleDifference(angle0,camera->lead_angle);
+        sVar2 = AngleDiff(angle0,camera->lead_angle);
         smooth = 8;
         if (0x50 < sVar2) {
           smooth = 0xc;
@@ -7750,7 +7750,7 @@ LAB_8001cb40:
 	/* end block 2 */
 	// End Line: 12300
 
-void CAMERA_CalcFollowPosition(Camera *camera,_Rotation *rotation)
+void CAMERA_CalcPosition(Camera *camera,_Rotation *rotation)
 
 {
   short sVar1;
@@ -7761,12 +7761,12 @@ void CAMERA_CalcFollowPosition(Camera *camera,_Rotation *rotation)
   int iVar5;
   int iVar6;
   u_int uVar7;
-  undefined4 in_t2;
-  undefined4 in_t3;
+  u_char in_t2;
+  u_char in_t3;
   
-  CAMERA_CalcPosition(&camera->targetPos,&camera->focusPoint,rotation,camera->focusDistance);
+  CAMERA_CalcFollowPosition(&camera->targetPos,&camera->focusPoint,rotation,camera->focusDistance);
   angle0 = (camera->targetPos).z;
-  *(undefined4 *)&(camera->core).position = *(undefined4 *)&camera->targetPos;
+  *(u_char *)&(camera->core).position = *(u_char *)&camera->targetPos;
   (camera->core).position.z = angle0;
   sVar3 = rotation->y;
   sVar1 = rotation->z;
@@ -7791,7 +7791,7 @@ void CAMERA_CalcFollowPosition(Camera *camera,_Rotation *rotation)
   iVar5 = ratan2((int)(camera->real_focuspoint).z - (int)(camera->targetPos).z,uVar4);
   angle0 = (short)iVar5;
   if ((camera->instance_mode & 0x1038) == 0) {
-    sVar3 = CAMERA_AngleDifference(angle0,(camera->core).rotation.x);
+    sVar3 = AngleDiff(angle0,(camera->core).rotation.x);
     if (sVar3 < 4) goto LAB_8001cd6c;
   }
   else {
@@ -7921,7 +7921,7 @@ LAB_8001ce60:
 	/* end block 2 */
 	// End Line: 12548
 
-void CAMERA_SetupColInfo(Camera *camera,CameraCollisionInfo *colInfo,_Position *targetCamPos)
+void CAMERA_SetLookRot(Camera *camera,CameraCollisionInfo *colInfo,_Position *targetCamPos)
 
 {
   bool bVar1;
@@ -8010,7 +8010,7 @@ void CAMERA_DoPanicCheck(Camera *camera,CameraCollisionInfo *tmpcolInfo,_Rotatio
 {
   _Position local_20;
   
-  CAMERA_CalcPosition(&local_20,&camera->focusPoint,rotation,camera->targetFocusDistance);
+  CAMERA_CalcFollowPosition(&local_20,&camera->focusPoint,rotation,camera->targetFocusDistance);
   (camera->posSphere).position.x = local_20.x;
   (camera->posSphere).position.y = local_20.y;
   (camera->posSphere).position.z = local_20.z;
@@ -8051,7 +8051,7 @@ void CAMERA_DoPanicCheck(Camera *camera,CameraCollisionInfo *tmpcolInfo,_Rotatio
 
 /* WARNING: Could not reconcile some variable overlaps */
 
-void CAMERA_Panic(Camera *camera,short min_dist)
+void CAMERA_Process(Camera *camera,short min_dist)
 
 {
   int iVar1;
@@ -8059,7 +8059,7 @@ void CAMERA_Panic(Camera *camera,short min_dist)
   int iVar3;
   int iVar4;
   _Position _Stack160;
-  undefined4 local_98;
+  u_char local_98;
   u_int local_94;
   CameraCollisionInfo CStack144;
   short local_30;
@@ -8068,9 +8068,9 @@ void CAMERA_Panic(Camera *camera,short min_dist)
   iVar4 = 0;
   iVar3 = 0;
   local_2e[0] = min_dist;
-  CAMERA_SetupColInfo(camera,&CStack144,&_Stack160);
+  CAMERA_SetLookRot(camera,&CStack144,&_Stack160);
   iVar2 = 0;
-  local_98 = *(undefined4 *)&camera->focusRotation;
+  local_98 = *(u_char *)&camera->focusRotation;
   local_94 = *(u_int *)&(camera->focusRotation).z;
   local_30 = (short)local_94;
   while( true ) {
@@ -8174,7 +8174,7 @@ long CAMERA_DoCameraCollision2(Camera *camera,_Position *targetCamPos,int simple
   int local_2c;
   
   lVar7 = 0;
-  CAMERA_SetupColInfo(camera,(CameraCollisionInfo *)auStack120,targetCamPos);
+  CAMERA_SetLookRot(camera,(CameraCollisionInfo *)auStack120,targetCamPos);
   secondcheck_flag = 0;
   if ((camera->flags & 0x10000U) == 0) {
     iVar6 = (int)(camera->real_focuspoint).z;
@@ -8212,7 +8212,7 @@ long CAMERA_DoCameraCollision2(Camera *camera,_Position *targetCamPos,int simple
     else {
       if (panic_count < 0xb) goto LAB_8001d3d8;
     }
-    CAMERA_Panic(camera,(short)local_2c);
+    CAMERA_Process(camera,(short)local_2c);
   }
   else {
     panic_count = 0;
@@ -8246,8 +8246,7 @@ LAB_8001d3d8:
         }
         CAMERA_dampgetline(0);
         if ((camera->mode == 0xd) && (0 < camera->instance_xyvel)) {
-          step = CAMERA_AngleDifference
-                           ((camera->collisionTargetFocusRotation).z,(camera->focusRotation).z);
+          step = AngleDiff((camera->collisionTargetFocusRotation).z,(camera->focusRotation).z);
           if (step < 5) {
             bVar1 = DAT_800cf178 == 0;
             (camera->collisionTargetFocusRotation).z = (camera->targetFocusRotation).z;
@@ -8305,13 +8304,16 @@ LAB_8001d3d8:
                 (&(camera->collisionTargetFocusRotation).z,(camera->targetFocusRotation).z,0x40);
       return lVar7;
     }
-    uVar3 = AngleDiff((camera->collisionTargetFocusRotation).z,(camera->targetFocusRotation).z);
+    uVar3 = CAMERA_AngleDifference
+                      ((camera->collisionTargetFocusRotation).z,(camera->targetFocusRotation).z);
     if ((int)((u_int)uVar3 << 0x10) < 0) {
-      step = AngleDiff((camera->collisionTargetFocusRotation).z,(camera->targetFocusRotation).z);
+      step = CAMERA_AngleDifference
+                       ((camera->collisionTargetFocusRotation).z,(camera->targetFocusRotation).z);
       secondcheck_flag = -(int)step;
     }
     else {
-      step = AngleDiff((camera->collisionTargetFocusRotation).z,(camera->targetFocusRotation).z);
+      step = CAMERA_AngleDifference
+                       ((camera->collisionTargetFocusRotation).z,(camera->targetFocusRotation).z);
       secondcheck_flag = (int)step;
     }
     if ((local_38 & 6) == 0) {

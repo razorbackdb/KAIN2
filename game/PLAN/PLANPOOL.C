@@ -157,7 +157,7 @@ int PLANPOOL_NumConnectionsForNode(PlanningNode *node)
 	/* end block 3 */
 	// End Line: 343
 
-PlanningNode * PLANPOOL_GetFirstNodeOfSource(PlanningNode *planningPool,char nodeSource)
+PlanningNode * PLANPOOL_GetClosestNode(PlanningNode *planningPool,char nodeSource)
 
 {
   int iVar1;
@@ -343,7 +343,7 @@ PlanningNode * PLANPOOL_GetNodeWithID(PlanningNode *planningPool,short type,shor
 	/* end block 3 */
 	// End Line: 454
 
-PlanningNode * PLANPOOL_GetNodeByPosition(_Position *currentPos,PlanningNode *planningPool)
+PlanningNode * PLANPOOL_GetFirstNodeOfSource(_Position *currentPos,PlanningNode *planningPool)
 
 {
   long lVar1;
@@ -355,8 +355,8 @@ PlanningNode * PLANPOOL_GetNodeByPosition(_Position *currentPos,PlanningNode *pl
   pPVar4 = (PlanningNode *)0x0;
   if (*(char *)(poolManagementData + 1) != '\0') {
     do {
-      lVar1 = MATH3D_LengthXY((int)currentPos->x - (int)(planningPool->pos).x,
-                              (int)currentPos->y - (int)(planningPool->pos).y);
+      lVar1 = MATH3D_LengthXYZ((int)currentPos->x - (int)(planningPool->pos).x,
+                               (int)currentPos->y - (int)(planningPool->pos).y);
       if (lVar1 < 0xb) {
         iVar2 = (int)currentPos->z - (int)(planningPool->pos).z;
         if (iVar2 < 0) {
@@ -396,7 +396,8 @@ PlanningNode * PLANPOOL_GetNodeByPosition(_Position *currentPos,PlanningNode *pl
 	/* end block 2 */
 	// End Line: 512
 
-PlanningNode * PLANPOOL_GetClosestNode(_Position *pos,PlanningNode *planningPool,char distanceType)
+PlanningNode *
+PLANPOOL_GetNodeByPosition(_Position *pos,PlanningNode *planningPool,char distanceType)
 
 {
   long lVar1;
@@ -410,13 +411,13 @@ PlanningNode * PLANPOOL_GetClosestNode(_Position *pos,PlanningNode *planningPool
   if (*(char *)(poolManagementData + 1) != '\0') {
     do {
       if (distanceType == '\0') {
-        lVar1 = MATH3D_LengthXY((int)pos->x - (int)(planningPool->pos).x,
-                                (int)pos->y - (int)(planningPool->pos).y);
+        lVar1 = MATH3D_LengthXYZ((int)pos->x - (int)(planningPool->pos).x,
+                                 (int)pos->y - (int)(planningPool->pos).y);
       }
       else {
-        lVar1 = MATH3D_LengthXYZ((int)pos->x - (int)(planningPool->pos).x,
-                                 (int)pos->y - (int)(planningPool->pos).y,
-                                 (int)pos->z - (int)(planningPool->pos).z);
+        lVar1 = MATH3D_LengthXY((int)pos->x - (int)(planningPool->pos).x,
+                                (int)pos->y - (int)(planningPool->pos).y,
+                                (int)pos->z - (int)(planningPool->pos).z);
       }
       if (lVar1 < iVar4) {
         pPVar3 = planningPool;
@@ -522,8 +523,8 @@ int PLANPOOL_AppropriatePair(PlanningNode *node1,PlanningNode *node2)
     iVar3 = (int)(node1->pos).z;
     iVar5 = (int)(pPVar6->pos).z;
     if (((iVar3 < iVar5) && (iVar5 < iVar3 + 800)) &&
-       (lVar1 = MATH3D_LengthXY((int)(node1->pos).x - (int)(pPVar6->pos).x,
-                                (int)(node1->pos).y - (int)(pPVar6->pos).y), lVar1 < 0x321)) {
+       (lVar1 = MATH3D_LengthXYZ((int)(node1->pos).x - (int)(pPVar6->pos).x,
+                                 (int)(node1->pos).y - (int)(pPVar6->pos).y), lVar1 < 0x321)) {
       return 1;
     }
   }
@@ -713,9 +714,9 @@ PLANPOOL_GetClosestUnexploredValidNeighbor(PlanningNode *startNode,PlanningNode 
             PLANPOOL_MarkTwoNodesAsNotConnected(startNode,node2,planningPool);
           }
           else {
-            uVar2 = MATH3D_LengthXYZ((int)(startNode->pos).x - (int)(node2->pos).x,
-                                     (int)(startNode->pos).y - (int)(node2->pos).y,
-                                     (int)(startNode->pos).z - (int)(node2->pos).z);
+            uVar2 = MATH3D_LengthXY((int)(startNode->pos).x - (int)(node2->pos).x,
+                                    (int)(startNode->pos).y - (int)(node2->pos).y,
+                                    (int)(startNode->pos).z - (int)(node2->pos).z);
             if (uVar2 < uVar6) {
               pPVar5 = node2;
               uVar6 = uVar2;
@@ -764,7 +765,7 @@ void PLANPOOL_ChangeNodePosition
   iVar2 = poolManagementData;
   if (nodeToChange != (PlanningNode *)0x0) {
     sVar1 = newPos->z;
-    *(undefined4 *)&nodeToChange->pos = *(undefined4 *)newPos;
+    *(u_char *)&nodeToChange->pos = *(u_char *)newPos;
     (nodeToChange->pos).z = sVar1;
     nodeToChange->connectionStatus = 0;
     nodeToChange->connections = 0;
@@ -897,7 +898,7 @@ PLANPOOL_AddNodeToPool
 	/* end block 4 */
 	// End Line: 1139
 
-void PLANPOOL_DeleteNodeFromPool(PlanningNode *nodeToDelete,PlanningNode *planningPool)
+void PLANAPI_DeleteNodesFromPoolByType(PlanningNode *nodeToDelete,PlanningNode *planningPool)
 
 {
   PlanningNode *pPVar1;
@@ -910,7 +911,7 @@ void PLANPOOL_DeleteNodeFromPool(PlanningNode *nodeToDelete,PlanningNode *planni
   u_int uVar8;
   u_int uVar9;
   u_int uVar10;
-  undefined4 uVar11;
+  u_char uVar11;
   u_long uVar12;
   long lVar13;
   u_long uVar14;
@@ -919,17 +920,17 @@ void PLANPOOL_DeleteNodeFromPool(PlanningNode *nodeToDelete,PlanningNode *planni
   if (nodeToDelete != (PlanningNode *)0x0) {
     uVar9 = (u_int)*(byte *)(poolManagementData + 1) - 1;
     pPVar1 = planningPool + uVar9;
-    uVar11 = *(undefined4 *)&(pPVar1->pos).z;
+    uVar11 = *(u_char *)&(pPVar1->pos).z;
     uVar12 = pPVar1->connectionStatus;
     uVar14 = pPVar1->connections;
-    *(undefined4 *)&nodeToDelete->pos = *(undefined4 *)&pPVar1->pos;
-    *(undefined4 *)&(nodeToDelete->pos).z = uVar11;
+    *(u_char *)&nodeToDelete->pos = *(u_char *)&pPVar1->pos;
+    *(u_char *)&(nodeToDelete->pos).z = uVar11;
     nodeToDelete->connectionStatus = uVar12;
     nodeToDelete->connections = uVar14;
-    uVar11 = *(undefined4 *)&pPVar1->nodeType;
+    uVar11 = *(u_char *)&pPVar1->nodeType;
     lVar13 = pPVar1->streamUnitID;
-    *(undefined4 *)&nodeToDelete->cost = *(undefined4 *)&pPVar1->cost;
-    *(undefined4 *)&nodeToDelete->nodeType = uVar11;
+    *(u_char *)&nodeToDelete->cost = *(u_char *)&pPVar1->cost;
+    *(u_char *)&nodeToDelete->nodeType = uVar11;
     nodeToDelete->streamUnitID = lVar13;
     iVar7 = poolManagementData;
     uVar10 = (int)((int)nodeToDelete - (int)planningPool) * -0x49249249 >> 2;

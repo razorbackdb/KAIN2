@@ -50,11 +50,11 @@ void COLLIDE_NearestPointOnLine_S(u_int *param_1,u_int *param_2,u_int *param_3,u
   u_int uVar7;
   u_int uVar8;
   u_int uVar9;
-  undefined4 uVar10;
+  u_char uVar10;
   int iVar11;
-  undefined4 uVar12;
+  u_char uVar12;
   int iVar13;
-  undefined4 uVar14;
+  u_char uVar14;
   
   uVar7 = *param_2;
   uVar1 = *(ushort *)(param_2 + 1);
@@ -128,23 +128,23 @@ void COLLIDE_NearestPointOnLine_S(u_int *param_1,u_int *param_2,u_int *param_3,u
 	/* end block 4 */
 	// End Line: 253
 
-undefined4
-COLLIDE_IntersectLineAndPlane_S
-          (short *param_1,u_int *param_2,u_int *param_3,undefined4 *param_4,int param_5)
+u_char
+COLLIDE_IntersectLineAndBox
+          (short *param_1,u_int *param_2,u_int *param_3,u_char *param_4,int param_5)
 
 {
   ushort uVar1;
-  undefined4 in_zero;
-  undefined4 in_at;
+  u_char in_zero;
+  u_char in_at;
   u_int uVar2;
   int iVar3;
   int iVar4;
   int iVar5;
-  undefined4 uVar6;
+  u_char uVar6;
   u_int uVar7;
-  undefined4 uVar8;
+  u_char uVar8;
   int iVar9;
-  undefined4 uVar10;
+  u_char uVar10;
   undefined *puVar11;
   
   uVar2 = *param_2;
@@ -221,15 +221,15 @@ COLLIDE_IntersectLineAndPlane_S
 	/* end block 7 */
 	// End Line: 372
 
-void COLLIDE_NearestPointOnPlane_S(short *param_1,int *param_2,int param_3,undefined4 *param_4)
+void COLLIDE_NearestPointOnPlane_S(short *param_1,int *param_2,int param_3,u_char *param_4)
 
 {
   short sVar1;
   int iVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
+  u_char uVar3;
+  u_char uVar4;
+  u_char uVar5;
+  u_char uVar6;
   int iVar7;
   
   uVar6 = *param_4;
@@ -286,16 +286,16 @@ void COLLIDE_NearestPointOnPlane_S(short *param_1,int *param_2,int param_3,undef
 void VM_ProcessVMObjectSetColor_S(void)
 
 {
-  undefined4 unaff_s0;
-  undefined4 unaff_s1;
-  undefined4 unaff_s2;
-  undefined4 unaff_s3;
-  undefined4 unaff_s4;
-  undefined4 unaff_s5;
-  undefined4 unaff_s6;
-  undefined4 unaff_s7;
-  undefined4 unaff_s8;
-  undefined4 unaff_retaddr;
+  u_char unaff_s0;
+  u_char unaff_s1;
+  u_char unaff_s2;
+  u_char unaff_s3;
+  u_char unaff_s4;
+  u_char unaff_s5;
+  u_char unaff_s6;
+  u_char unaff_s7;
+  u_char unaff_s8;
+  u_char unaff_retaddr;
   
   _DAT_1f800000 = unaff_retaddr;
   _DAT_1f800004 = unaff_s0;
@@ -373,19 +373,19 @@ void VM_ProcessVMObjectList_S(int param_1)
 
 {
   int iVar1;
-  undefined4 unaff_s0;
+  u_char unaff_s0;
   u_int *puVar2;
-  undefined4 unaff_s1;
+  u_char unaff_s1;
   int iVar3;
-  undefined4 unaff_s2;
-  undefined4 unaff_s3;
+  u_char unaff_s2;
+  u_char unaff_s3;
   u_int uVar4;
-  undefined4 unaff_s4;
-  undefined4 unaff_s5;
-  undefined4 unaff_s6;
-  undefined4 unaff_s7;
-  undefined4 unaff_s8;
-  undefined4 unaff_retaddr;
+  u_char unaff_s4;
+  u_char unaff_s5;
+  u_char unaff_s6;
+  u_char unaff_s7;
+  u_char unaff_s8;
+  u_char unaff_retaddr;
   
   iVar3 = *(int *)(param_1 + 8);
   puVar2 = *(u_int **)(param_1 + 0xc);
@@ -453,23 +453,23 @@ void VM_ProcessVMObjectList_S(int param_1)
 	/* end block 6 */
 	// End Line: 1477
 
-u_int BSP_SphereIntersectsViewVolume_S(undefined4 *param_1,int param_2)
+u_int BSP_SphereIntersectsViewVolume_S(u_char *param_1,int param_2)
 
 {
   bool bVar1;
   int iVar2;
-  undefined4 in_zero;
-  undefined4 in_at;
+  u_char in_zero;
+  u_char in_at;
   u_int uVar3;
   int iVar4;
   int iVar5;
   int iVar6;
   
-  setCopControlWord(2,0,*(undefined4 *)(param_2 + 8));
-  setCopControlWord(2,0x800,*(undefined4 *)(param_2 + 0xc));
-  setCopControlWord(2,0x1000,*(undefined4 *)(param_2 + 0x10));
-  setCopControlWord(2,0x1800,*(undefined4 *)(param_2 + 0x14));
-  setCopControlWord(2,0x2000,*(undefined4 *)(param_2 + 0x18));
+  setCopControlWord(2,0,*(u_char *)(param_2 + 8));
+  setCopControlWord(2,0x800,*(u_char *)(param_2 + 0xc));
+  setCopControlWord(2,0x1000,*(u_char *)(param_2 + 0x10));
+  setCopControlWord(2,0x1800,*(u_char *)(param_2 + 0x14));
+  setCopControlWord(2,0x2000,*(u_char *)(param_2 + 0x18));
   setCopReg(2,in_zero,*param_1);
   setCopReg(2,in_at,param_1[1]);
   copFunction(2,0x486012);
@@ -487,9 +487,9 @@ u_int BSP_SphereIntersectsViewVolume_S(undefined4 *param_1,int param_2)
       uVar3 = (u_int)bVar1;
       if ((bVar1) && (bVar1 = iVar2 < iVar6 - *(int *)(param_2 + 0x50), uVar3 = (u_int)bVar1, bVar1))
       {
-        setCopControlWord(2,0,*(undefined4 *)(param_2 + 0x28));
-        setCopControlWord(2,0x800,*(undefined4 *)(param_2 + 0x2c));
-        setCopControlWord(2,0x1000,*(undefined4 *)(param_2 + 0x30));
+        setCopControlWord(2,0,*(u_char *)(param_2 + 0x28));
+        setCopControlWord(2,0x800,*(u_char *)(param_2 + 0x2c));
+        setCopControlWord(2,0x1000,*(u_char *)(param_2 + 0x30));
         copFunction(2,0x486012);
         iVar4 = getCopReg(2,0xc800);
         iVar5 = getCopReg(2,0xd000);
@@ -545,19 +545,19 @@ void RotMatrixZYX(ushort *param_1,u_int *param_2)
 {
   ushort uVar1;
   ushort uVar2;
-  undefined4 uVar3;
+  u_char uVar3;
   u_int uVar4;
   u_int uVar5;
   int iVar6;
-  undefined4 uVar7;
+  u_char uVar7;
   int iVar8;
-  undefined4 uVar9;
+  u_char uVar9;
   int iVar10;
   int iVar11;
   int iVar12;
-  undefined4 uVar13;
-  undefined4 uVar14;
-  undefined4 uVar15;
+  u_char uVar13;
+  u_char uVar14;
+  u_char uVar15;
   
   uVar1 = param_1[1];
   uVar2 = *param_1;
@@ -734,24 +734,25 @@ void rmzyx_onlyz()
 	/* end block 3 */
 	// End Line: 1840
 
-void RotMatrix(ushort *param_1,u_int *param_2)
+u_longlong RotMatrixY(ushort *param_1,u_int *param_2)
 
 {
   ushort uVar1;
   ushort uVar2;
-  undefined4 uVar3;
+  u_char in_v0;
+  u_char uVar3;
   u_int uVar4;
   u_int uVar5;
   int iVar6;
-  undefined4 uVar7;
+  u_char uVar7;
   int iVar8;
-  undefined4 uVar9;
+  u_char uVar9;
   int iVar10;
   int iVar11;
   int iVar12;
-  undefined4 uVar13;
-  undefined4 uVar14;
-  undefined4 uVar15;
+  u_char uVar13;
+  u_char uVar14;
+  u_char uVar15;
   
   uVar1 = param_1[1];
   uVar2 = *param_1;
@@ -806,18 +807,19 @@ void RotMatrix(ushort *param_1,u_int *param_2)
     uVar3 = getCopReg(2,0x4800);
     uVar7 = getCopReg(2,0x5000);
     uVar9 = getCopReg(2,0x5800);
+    iVar12 = iVar10 * iVar11 >> 0xc;
     *(short *)((int)param_2 + 6) = (short)uVar9 + (short)uVar14;
     *(short *)(param_2 + 3) = (short)iVar10 - (short)uVar3;
-    *(short *)(param_2 + 2) = (short)uVar13 - (short)(iVar10 * iVar11 >> 0xc);
+    *(short *)(param_2 + 2) = (short)uVar13 - (short)iVar12;
     *(short *)((int)param_2 + 0xe) = (short)uVar7 + (short)uVar15;
-    return;
+    return CONCAT44(iVar12,0x800c9894);
   }
   *param_2 = iVar12 * -0x10000 | uVar4 & 0xffff;
   param_2[1] = iVar12 * 0x10000;
   param_2[2] = uVar4 & 0xffff;
   param_2[3] = 0;
   *(undefined2 *)(param_2 + 4) = 0x1000;
-  return;
+  return CONCAT44(in_v0,0x800c0000) | 0x9894;
 }
 
 
@@ -910,20 +912,20 @@ void rm_3()
 	/* end block 4 */
 	// End Line: 2051
 
-undefined8 RotMatrixX(u_int param_1,int param_2)
+undefined8 RotMatrixZ(u_int param_1,int param_2)
 
 {
   int iVar1;
   int iVar2;
   int iVar3;
-  undefined4 uVar4;
+  u_char uVar4;
   int iVar5;
   int iVar6;
   int iVar7;
-  undefined4 uVar8;
+  u_char uVar8;
   int iVar9;
   int iVar10;
-  undefined4 uVar11;
+  u_char uVar11;
   int iVar12;
   int iVar13;
   
@@ -1014,22 +1016,22 @@ void RMX_0()
 	/* end block 3 */
 	// End Line: 2232
 
-undefined8 RotMatrixY(u_int param_1,u_int *param_2)
+undefined8 RotMatrix(u_int param_1,u_int *param_2)
 
 {
   int iVar1;
   int iVar2;
   int iVar3;
   int iVar4;
-  undefined4 uVar5;
+  u_char uVar5;
   int iVar6;
   int iVar7;
-  undefined4 uVar8;
+  u_char uVar8;
   int iVar9;
   int iVar10;
   int iVar11;
   int iVar12;
-  undefined4 uVar13;
+  u_char uVar13;
   
   iVar2 = (int)(&SHORT_800ca094)[param_1 & 0x7ff];
   iVar3 = (int)(&ecostable)[param_1 & 0x7ff];
@@ -1113,7 +1115,7 @@ void RMY_0()
 	/* end block 2 */
 	// End Line: 2403
 
-undefined8 RotMatrixZ(u_int param_1,u_int *param_2)
+undefined8 RotMatrixX(u_int param_1,u_int *param_2)
 
 {
   int iVar1;
@@ -1262,14 +1264,14 @@ void ApplyMatrix_S()
 	/* end block 6 */
 	// End Line: 2643
 
-int * ScaleMatrix(int *param_1,undefined4 *param_2)
+int * ScaleMatrix(int *param_1,u_char *param_2)
 
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
+  u_char uVar1;
+  u_char uVar2;
+  u_char uVar3;
+  u_char uVar4;
+  u_char uVar5;
   
   setCopReg(2,0x4800,(int)(short)*param_1);
   setCopReg(2,0x5000,param_1[1] >> 0x10);
@@ -1562,25 +1564,25 @@ void * memcpy(void *__dest,void *__src,size_t __n)
 
 {
   undefined uVar1;
-  undefined4 *puVar2;
-  undefined4 *puVar3;
+  u_char *puVar2;
+  u_char *puVar3;
   undefined *puVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  undefined4 uVar8;
-  undefined4 uVar9;
-  undefined4 uVar10;
-  undefined4 uVar11;
-  undefined4 uVar12;
+  u_char uVar5;
+  u_char uVar6;
+  u_char uVar7;
+  u_char uVar8;
+  u_char uVar9;
+  u_char uVar10;
+  u_char uVar11;
+  u_char uVar12;
   
   if (__n != 0) {
     puVar4 = (undefined *)__dest;
-    puVar2 = (undefined4 *)__dest;
+    puVar2 = (u_char *)__dest;
     if ((((u_int)__dest | (u_int)__src | __n) & 3) == 0) {
       do {
-        uVar5 = *(undefined4 *)__src;
-        __src = (undefined4 *)__src + 1;
+        uVar5 = *(u_char *)__src;
+        __src = (u_char *)__src + 1;
         puVar3 = puVar2 + 1;
         __n = __n - 4;
         *puVar2 = uVar5;
@@ -1588,16 +1590,16 @@ void * memcpy(void *__dest,void *__src,size_t __n)
       } while ((__n & 0x1f) != 0);
       if (__n != 0) {
         do {
-          uVar5 = *(undefined4 *)__src;
-          uVar6 = ((undefined4 *)__src)[1];
-          uVar7 = ((undefined4 *)__src)[2];
-          uVar8 = ((undefined4 *)__src)[3];
-          uVar9 = ((undefined4 *)__src)[4];
-          uVar10 = ((undefined4 *)__src)[5];
-          uVar11 = ((undefined4 *)__src)[6];
-          uVar12 = ((undefined4 *)__src)[7];
+          uVar5 = *(u_char *)__src;
+          uVar6 = ((u_char *)__src)[1];
+          uVar7 = ((u_char *)__src)[2];
+          uVar8 = ((u_char *)__src)[3];
+          uVar9 = ((u_char *)__src)[4];
+          uVar10 = ((u_char *)__src)[5];
+          uVar11 = ((u_char *)__src)[6];
+          uVar12 = ((u_char *)__src)[7];
           __n = __n - 0x20;
-          __src = (undefined4 *)__src + 8;
+          __src = (u_char *)__src + 8;
           *puVar3 = uVar5;
           puVar3[1] = uVar6;
           puVar3[2] = uVar7;
@@ -1962,11 +1964,11 @@ void * memcpy(void *__dest,void *__src,size_t __n)
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void BSP_MarkVisibleLeaves_S(int **param_1,undefined4 *param_2,int *param_3)
+void BSP_MarkVisibleLeaves_S(int **param_1,u_char *param_2,int *param_3)
 
 {
-  undefined4 *puVar1;
-  undefined4 *puVar2;
+  u_char *puVar1;
+  u_char *puVar2;
   int *piVar3;
   int iVar4;
   u_int uVar5;
@@ -1980,23 +1982,23 @@ void BSP_MarkVisibleLeaves_S(int **param_1,undefined4 *param_2,int *param_3)
   u_int uVar13;
   int iVar14;
   int iVar15;
-  undefined4 uVar16;
-  undefined4 unaff_s0;
+  u_char uVar16;
+  u_char unaff_s0;
   int **ppiVar17;
   int **ppiVar18;
-  undefined4 unaff_s1;
-  undefined4 unaff_s2;
-  undefined4 unaff_s3;
-  undefined4 unaff_s4;
-  undefined4 unaff_s5;
-  undefined4 unaff_s6;
-  undefined4 unaff_s7;
+  u_char unaff_s1;
+  u_char unaff_s2;
+  u_char unaff_s3;
+  u_char unaff_s4;
+  u_char unaff_s5;
+  u_char unaff_s6;
+  u_char unaff_s7;
   int **ppiVar19;
-  undefined4 uVar20;
-  undefined4 uVar21;
+  u_char uVar20;
+  u_char uVar21;
   int *piVar22;
-  undefined4 unaff_s8;
-  undefined4 unaff_retaddr;
+  u_char unaff_s8;
+  u_char unaff_retaddr;
   
   DAT_1f8000c0 = &DAT_1f8000c0;
   ppiVar19 = (int **)(param_3 + 1);
@@ -2005,7 +2007,7 @@ void BSP_MarkVisibleLeaves_S(int **param_1,undefined4 *param_2,int *param_3)
     iVar15 = param_2[0x19];
   }
   puVar1 = param_2 + 2;
-  puVar2 = (undefined4 *)&DAT_1f800000;
+  puVar2 = (u_char *)&DAT_1f800000;
   iVar4 = 0x40;
   DAT_1f800098 = unaff_s0;
   DAT_1f80009c = unaff_s1;
@@ -2045,7 +2047,7 @@ void BSP_MarkVisibleLeaves_S(int **param_1,undefined4 *param_2,int *param_3)
   setCopControlWord(2,0x800,DAT_1f800024);
   setCopControlWord(2,0x1000,DAT_1f800028);
   copFunction(2,0x486012);
-  puVar1 = (undefined4 *)param_2[0x1d];
+  puVar1 = (u_char *)param_2[0x1d];
   DAT_1f80006c = getCopReg(2,0x19);
   DAT_1f800070 = getCopReg(2,0x1a);
   iVar4 = (iVar15 << 0xf) / (int)param_2[0x1a];
@@ -2284,13 +2286,13 @@ int G2EulerAngles_ToMatrix_S(undefined2 *param_1,short *param_2)
   long lVar7;
   int iVar8;
   int iVar9;
-  undefined4 uVar10;
+  u_char uVar10;
   short *psVar11;
   int iVar12;
   short *psVar13;
   int iVar14;
-  undefined4 uVar15;
-  undefined4 uVar16;
+  u_char uVar15;
+  u_char uVar16;
   int iVar17;
   int iVar18;
   int iVar19;
@@ -2398,61 +2400,59 @@ int G2EulerAngles_ToMatrix_S(undefined2 *param_1,short *param_2)
 	/* end block 5 */
 	// End Line: 4722
 
-void G2Quat_ToMatrix_S(short *param_1,short *param_2)
+int G2Quat_ToMatrix_S(short *param_1,short *param_2)
 
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  int iVar7;
-  undefined4 uVar8;
-  int iVar9;
-  undefined4 uVar10;
+  u_char uVar1;
+  u_char uVar2;
+  u_char uVar3;
+  u_char uVar4;
+  u_char uVar5;
+  int iVar6;
+  u_char uVar7;
+  int iVar8;
+  u_char uVar9;
+  int iVar10;
   int iVar11;
-  undefined4 uVar12;
-  int iVar13;
   
-  iVar7 = (int)*param_1;
-  iVar13 = (int)param_1[3];
-  iVar9 = (int)param_1[1];
-  iVar11 = (int)param_1[2];
-  setCopReg(2,0x4000,iVar7 << 1);
-  setCopReg(2,0x4800,iVar7);
-  setCopReg(2,0x5000,iVar13);
-  setCopReg(2,0x5800,iVar9);
+  iVar6 = (int)*param_1;
+  iVar11 = (int)param_1[3];
+  iVar8 = (int)param_1[1];
+  iVar10 = (int)param_1[2];
+  setCopReg(2,0x4000,iVar6 << 1);
+  setCopReg(2,0x4800,iVar6);
+  setCopReg(2,0x5000,iVar11);
+  setCopReg(2,0x5800,iVar8);
   copFunction(2,0x198003d);
   uVar1 = getCopReg(2,0xc800);
   uVar2 = getCopReg(2,0xd000);
   uVar3 = getCopReg(2,0xd800);
-  setCopReg(2,0x4000,iVar9 << 1);
-  setCopReg(2,0x4800,iVar9);
-  setCopReg(2,0x5000,iVar13);
-  setCopReg(2,0x5800,iVar11);
+  setCopReg(2,0x4000,iVar8 << 1);
+  setCopReg(2,0x4800,iVar8);
+  setCopReg(2,0x5000,iVar11);
+  setCopReg(2,0x5800,iVar10);
   copFunction(2,0x198003d);
   uVar4 = getCopReg(2,0xc800);
-  uVar5 = getCopReg(2,0xd000);
-  uVar6 = getCopReg(2,0xd800);
-  setCopReg(2,0x4000,iVar11 << 1);
-  setCopReg(2,0x4800,iVar11);
-  setCopReg(2,0x5000,iVar13);
-  setCopReg(2,0x5800,iVar7);
+  iVar8 = getCopReg(2,0xd000);
+  uVar5 = getCopReg(2,0xd800);
+  setCopReg(2,0x4000,iVar10 << 1);
+  setCopReg(2,0x4800,iVar10);
+  setCopReg(2,0x5000,iVar11);
+  setCopReg(2,0x5800,iVar6);
   copFunction(2,0x198003d);
-  param_2[7] = (short)uVar6 + (short)uVar2;
+  param_2[7] = (short)uVar5 + (short)uVar2;
   param_2[8] = 0x1000 - ((short)uVar1 + (short)uVar4);
-  uVar8 = getCopReg(2,0xc800);
-  uVar10 = getCopReg(2,0xd000);
-  uVar12 = getCopReg(2,0xd800);
-  *param_2 = 0x1000 - ((short)uVar4 + (short)uVar8);
-  param_2[1] = (short)uVar3 - (short)uVar10;
-  param_2[2] = (short)uVar12 + (short)uVar5;
-  param_2[3] = (short)uVar3 + (short)uVar10;
-  param_2[4] = 0x1000 - ((short)uVar1 + (short)uVar8);
-  param_2[5] = (short)uVar6 - (short)uVar2;
-  param_2[6] = (short)uVar12 - (short)uVar5;
-  return;
+  uVar7 = getCopReg(2,0xc800);
+  uVar9 = getCopReg(2,0xd000);
+  iVar6 = getCopReg(2,0xd800);
+  *param_2 = 0x1000 - ((short)uVar4 + (short)uVar7);
+  param_2[1] = (short)uVar3 - (short)uVar9;
+  param_2[2] = (short)iVar6 + (short)iVar8;
+  param_2[3] = (short)uVar3 + (short)uVar9;
+  param_2[4] = 0x1000 - ((short)uVar1 + (short)uVar7);
+  param_2[5] = (short)uVar5 - (short)uVar2;
+  param_2[6] = (short)(iVar6 - iVar8);
+  return iVar6 - iVar8;
 }
 
 
@@ -2506,7 +2506,7 @@ void G2Quat_ToMatrix_S(short *param_1,short *param_2)
 	/* end block 9 */
 	// End Line: 4888
 
-void G2Quat_FromEuler_S(int param_1,short *param_2)
+void G2Quat_ToEuler(int param_1,short *param_2)
 
 {
   u_int uVar1;

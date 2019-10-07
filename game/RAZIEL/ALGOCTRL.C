@@ -38,7 +38,7 @@ void InitAlgorithmicWings(_Instance *instance)
     pMVar1 = instance->matrix;
     bVar2 = 0x33;
     if (pMVar1 == (MATRIX *)0x0) {
-      INSTANCE_Post(instance,(int)&DAT_00100006,0);
+      INSTANCE_Query(instance,(int)&DAT_00100006,0);
     }
     else {
       while( true ) {
@@ -51,7 +51,7 @@ void InitAlgorithmicWings(_Instance *instance)
           G2EulerAngles_FromMatrix(&local_18,(instance->anim).segMatrices + ((u_int)bVar2 - 1),0x15);
         }
         segNumber = (u_int)bVar2;
-        G2Anim_EnableController(&instance->anim,segNumber,8);
+        G2Anim_DisableController(&instance->anim,segNumber,8);
         G2EmulationSetInterpController_Vector
                   (instance,segNumber,8,(_G2SVector3_Type *)&local_18,(segNumber - 0x32) * 3,2);
         bVar2 = bVar2 + 1;
@@ -69,7 +69,7 @@ void InitAlgorithmicWings(_Instance *instance)
           G2EulerAngles_FromMatrix(&local_18,(instance->anim).segMatrices + ((u_int)bVar2 - 1),0x15);
         }
         segNumber = (u_int)bVar2;
-        G2Anim_EnableController(&instance->anim,segNumber,8);
+        G2Anim_DisableController(&instance->anim,segNumber,8);
         G2EmulationSetInterpController_Vector
                   (instance,segNumber,8,(_G2SVector3_Type *)&local_18,(segNumber - 0x3a) * 3,2);
         bVar2 = bVar2 + 1;
@@ -113,12 +113,12 @@ void DeInitAlgorithmicWings(_Instance *instance)
   if ((AlgoControlFlag & 1U) != 0) {
     bVar1 = 0x33;
     do {
-      G2Anim_DisableController(&instance->anim,(u_int)bVar1,8);
+      _G2Anim_FindController(&instance->anim,(u_int)bVar1,8);
       bVar1 = bVar1 + 1;
     } while (bVar1 < 0x36);
     bVar1 = 0x3b;
     do {
-      G2Anim_DisableController(&instance->anim,(u_int)bVar1,8);
+      _G2Anim_FindController(&instance->anim,(u_int)bVar1,8);
       bVar1 = bVar1 + 1;
     } while (bVar1 < 0x3e);
     AlgoControlFlag = AlgoControlFlag & 0xfffffffe;
@@ -220,7 +220,7 @@ void AlgorithmicNeck(_Instance *Player,_Instance *Target)
   uVar6 = Raziel.Senses.Flags & 0x10;
   Raziel.Senses.Flags = uVar2;
   if (uVar6 != 0) {
-    TransposeMatrix((undefined4 *)Player->oldMatrix,(undefined4 *)&MStack72);
+    TransposeMatrix((u_char *)Player->oldMatrix,(u_char *)&MStack72);
     iVar3 = INSTANCE_SetStatsData
                       (Player,(_Instance *)0x0,&Raziel.Senses.lookAtPoint,&eStack40,&MStack72);
     if (((iVar3 != 0) && (eStack40.distance < 0xc80)) &&
@@ -229,18 +229,18 @@ void AlgorithmicNeck(_Instance *Player,_Instance *Target)
     }
   }
   if ((Target == (_Instance *)0x0) && ((Raziel.Senses.Flags & 8U) == 0)) {
-    _Var4 = G2Anim_IsControllerActive(&Player->anim,0x11,8);
+    _Var4 = G2Anim_DetachControllerFromSeg(&Player->anim,0x11,8);
     if (_Var4 != G2FALSE) {
       G2Anim_InterpDisableController(&Player->anim,0x11,8,900);
     }
   }
   else {
-    _Var4 = G2Anim_IsControllerActive(&Player->anim,0x11,8);
+    _Var4 = G2Anim_DetachControllerFromSeg(&Player->anim,0x11,8);
     if (_Var4 == G2FALSE) {
-      G2Anim_EnableController(&Player->anim,0x11,8);
+      G2Anim_DisableController(&Player->anim,0x11,8);
     }
     if ((Raziel.Senses.Flags & 8U) == 0) {
-      uVar5 = INSTANCE_Query(Target,0xc);
+      uVar5 = INSTANCE_Post(Target,0xc);
       if (uVar5 == 0) {
         return;
       }
@@ -257,7 +257,7 @@ void AlgorithmicNeck(_Instance *Player,_Instance *Target)
     local_60.y = *(short *)(Player->matrix[0x11].t + 1);
     local_60.z = *(short *)(Player->matrix[0x11].t + 2);
     MATH3D_RotationFromPosToPos(&local_60,&local_58,&local_50);
-    sVar1 = AngleDiff((Player->rotation).z,local_50.z);
+    sVar1 = CAMERA_AngleDifference((Player->rotation).z,local_50.z);
     if (0x200 < sVar1) {
       local_50.z = (Player->rotation).z + 0x200;
     }

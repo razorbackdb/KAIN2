@@ -29,7 +29,7 @@ void FONT_MakeSpecialFogClut(int x,int y)
   int iVar2;
   undefined2 local_30 [15];
   undefined2 local_12;
-  undefined4 local_10;
+  u_char local_10;
   undefined2 local_c;
   undefined2 local_a;
   
@@ -76,7 +76,7 @@ void FONT_MakeSpecialFogClut(int x,int y)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void FONT_Init(void)
+void EVENT_Init(void)
 
 {
   long *addr;
@@ -85,10 +85,10 @@ void FONT_Init(void)
   
   FONT_vramBlock = VRAM_CheckVramSlot((short *)&local_10,(short *)local_e,0x10,0x80,3,-1);
   if (FONT_vramBlock != (_BlockVramEntry *)0x0) {
-    addr = LOAD_ReadFile("\\kain2\\game\\font.tim",'\x05');
-    LOAD_LoadTIM(addr,(int)(short)local_10,(int)(short)local_e[0],(int)(short)local_10,
-                 (int)(short)local_e[0] + 0x7e);
-    MEMPACK_Free((char *)addr);
+    addr = LOAD_ReadFileFromCD("\\kain2\\game\\font.tim",'\x05');
+    LOAD_LoadToAddress(addr,(int)(short)local_10,(int)(short)local_e[0],(int)(short)local_10,
+                       (int)(short)local_e[0] + 0x7e);
+    MEMPACK_Init((char *)addr);
     fontTracker.sprite_sort_push = 0;
     fontTracker.font_tpage =
          (short)(local_e[0] & 0x100) >> 4 | (ushort)(((u_int)local_10 & 0x3ff) >> 6) |
@@ -136,10 +136,10 @@ void FONT_ReloadFont(void)
 {
   long *addr;
   
-  addr = LOAD_ReadFile("\\kain2\\game\\font.tim",'\x05');
-  LOAD_LoadTIM(addr,(int)fontTracker.font_vramX,(int)fontTracker.font_vramY,
-               (int)fontTracker.font_vramX,(int)fontTracker.font_vramY + 0x7e);
-  MEMPACK_Free((char *)addr);
+  addr = LOAD_ReadFileFromCD("\\kain2\\game\\font.tim",'\x05');
+  LOAD_LoadToAddress(addr,(int)fontTracker.font_vramX,(int)fontTracker.font_vramY,
+                     (int)fontTracker.font_vramX,(int)fontTracker.font_vramY + 0x7e);
+  MEMPACK_Init((char *)addr);
   FONT_MakeSpecialFogClut((int)fontTracker.font_vramX,(int)fontTracker.font_vramY + 0x7f);
   return;
 }
@@ -166,11 +166,11 @@ void FONT_ReloadFont(void)
 	/* end block 2 */
 	// End Line: 343
 
-void FONT_DrawChar(FontChar *fontChar)
+void FONT_DrawChar2D(FontChar *fontChar)
 
 {
   fontTracker.color_local = fontChar->color;
-  FONT_DrawChar2D(fontChar->c,(int)fontChar->x,(int)fontChar->y);
+  drawChar2DPoly(fontChar->c,(int)fontChar->x,(int)fontChar->y);
   return;
 }
 
@@ -261,7 +261,7 @@ long FONT_Get2DImageIndex(u_char c)
 	/* end block 2 */
 	// End Line: 1108
 
-void drawChar2DPoly(long fpi,long x,long y)
+void FONT_DrawChar(long fpi,long x,long y)
 
 {
   char cVar1;
@@ -387,7 +387,7 @@ void drawChar2DPoly(long fpi,long x,long y)
 	/* end block 3 */
 	// End Line: 1440
 
-void FONT_DrawChar2D(u_char c,long x,long y)
+void drawChar2DPoly(u_char c,long x,long y)
 
 {
   long y_00;
@@ -444,7 +444,7 @@ void FONT_DrawChar2D(u_char c,long x,long y)
       }
     }
     if (-1 < fpi) {
-      drawChar2DPoly(fpi,x + (iVar5 - iVar1) / 2,y);
+      FONT_DrawChar(fpi,x + (iVar5 - iVar1) / 2,y);
     }
     y_00 = y;
     if (c == 'A') {
@@ -454,10 +454,10 @@ void FONT_DrawChar2D(u_char c,long x,long y)
       y = y + 3;
     }
     if (-1 < fpi_00) {
-      drawChar2DPoly(fpi_00,x + (iVar5 - iVar2) / 2,y_00);
+      FONT_DrawChar(fpi_00,x + (iVar5 - iVar2) / 2,y_00);
     }
     if (-1 < fpi_01) {
-      drawChar2DPoly(fpi_01,x + (iVar5 - iVar3) / 2,(y - iVar4) + -1);
+      FONT_DrawChar(fpi_01,x + (iVar5 - iVar3) / 2,(y - iVar4) + -1);
     }
   }
   return;
@@ -747,7 +747,7 @@ void FONT_Flush(void)
     lVar1 = fontTracker.font_buffIndex;
     do {
       if ((*(char *)fontChar->font_buffer != ' ') && (*(char *)fontChar->font_buffer != '@')) {
-        FONT_DrawChar((FontChar *)fontChar);
+        FONT_DrawChar2D((FontChar *)fontChar);
       }
       lVar1 = lVar1 + -1;
       fontChar = (FontTracker *)(fontChar->font_buffer + 1);

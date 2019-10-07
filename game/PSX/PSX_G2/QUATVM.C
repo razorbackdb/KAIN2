@@ -42,9 +42,9 @@ void G2Quat_Slerp_VM(long ratio,_G2Quat_Type *quatA,_G2Quat_Type *quatB,_G2Quat_
   int iVar5;
   int iVar6;
   short sVar7;
-  undefined4 uVar8;
-  undefined4 uVar9;
-  undefined4 uVar10;
+  u_char uVar8;
+  u_char uVar9;
+  u_char uVar10;
   u_int uVar11;
   
   setCopReg(2,0x4800,(u_int)(ushort)quatA->x);

@@ -8,15 +8,15 @@ extern void menu_initialize(struct menu_t *menu, void *opaque); // 0x800B6398
 
 extern void menu_format(struct menu_t *menu, int center, int xpos, int ypos, int width, int lineskip, int itemskip, int border); // 0x800B63DC
 
-//extern void menu_set(struct menu_t *menu, TDRFuncPtr_menu_set1fn fn); // 0x800B642C
+extern void menu_set(struct menu_t *menu, TDRFuncPtr_menu_set1fn fn); // 0x800B642C
 
-//extern void menu_push(struct menu_t *menu, TDRFuncPtr_menu_push1fn fn); // 0x800B6450
+extern void menu_push(struct menu_t *menu, TDRFuncPtr_menu_push1fn fn); // 0x800B6450
 
 extern void menu_pop(struct menu_t *menu); // 0x800B64C0
 
-//extern void menu_item_flags(struct menu_t *menu, TDRFuncPtr_menu_item_flags1fn fn, long parameter, long flags, char *format); // 0x800B64D4
+extern void menu_item_flags(struct menu_t *menu, TDRFuncPtr_menu_item_flags1fn fn, long parameter, long flags, char *format); // 0x800B64D4
 
-//extern void menu_item(struct menu_t *menu, TDRFuncPtr_menu_item1fn fn, long parameter, char *format); // 0x800B6564
+extern void menu_item(struct menu_t *menu, TDRFuncPtr_menu_item1fn fn, long parameter, char *format); // 0x800B6564
 
 extern void menu_build(struct menu_t *menu); // 0x800B6608
 

@@ -65,7 +65,7 @@ void GAMELOOP_AllocStaticMemory(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void GAMELOOP_InitGameTracker(void)
+void GAMELOOP_ClearGameTracker(void)
 
 {
   int iVar1;
@@ -100,7 +100,7 @@ void GAMELOOP_InitGameTracker(void)
   } while (iVar2 < 0x30);
   gameTrackerX.gameData.asmData.MorphTime = 1000;
   OBTABLE_ClearObjectReferences();
-  EVENT_Init();
+  EVENT_InitTimers();
   return;
 }
 
@@ -120,7 +120,7 @@ void GAMELOOP_SystemInit(GameTracker *gameTracker)
 {
   GAMELOOP_AllocStaticMemory();
   INSTANCE_InitInstanceList(instanceList,instancePool);
-  GAMELOOP_InitGameTracker();
+  GAMELOOP_ClearGameTracker();
   return;
 }
 
@@ -140,7 +140,7 @@ void GAMELOOP_SystemInit(GameTracker *gameTracker)
 void GAMELOOP_ResetGameStates(void)
 
 {
-  EVENT_Init();
+  EVENT_InitTimers();
   return;
 }
 
@@ -162,7 +162,7 @@ void GAMELOOP_ResetGameStates(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void GAMELOOP_ClearGameTracker(void)
+void GAMELOOP_InitGameTracker(void)
 
 {
   gameTrackerX.gameData.asmData.drawBackFaces = 0;
@@ -325,7 +325,7 @@ int GAMELOOP_GetTimeOfDay(void)
 	/* end block 2 */
 	// End Line: 1022
 
-int GAMELOOP_GetTimeOfDayIdx(int timeOfDay)
+int GAMELOOP_GetMatrices(int timeOfDay)
 
 {
   int iVar1;
@@ -419,7 +419,7 @@ int GAMELOOP_WaitForLoad(void)
 	/* end block 2 */
 	// End Line: 1920
 
-_StreamUnit * LoadLevels(char *baseAreaName,GameTracker *gameTracker)
+_StreamUnit * UNDERWORLD_LoadLevel(char *baseAreaName,GameTracker *gameTracker)
 
 {
   short sVar1;
@@ -437,9 +437,9 @@ _StreamUnit * LoadLevels(char *baseAreaName,GameTracker *gameTracker)
   if (sVar2 != 0) {
     STREAM_AbortAreaLoad("");
   }
-  strcpy("",baseAreaName);
-  LOAD_ChangeDirectory(baseAreaName);
-  streamUnit = STREAM_LoadLevel(gameTracker,baseAreaName,(StreamUnitPortal *)0x0,0);
+  strcmp("",baseAreaName);
+  LOAD_ReadDirectory(baseAreaName);
+  streamUnit = LoadLevels(gameTracker,baseAreaName,(StreamUnitPortal *)0x0,0);
   if (streamUnit->used == 1) {
     DRAW_LoadingMessage();
     sVar1 = streamUnit->used;
@@ -463,8 +463,8 @@ _StreamUnit * LoadLevels(char *baseAreaName,GameTracker *gameTracker)
   if (p_Var7 != (_MultiSignal *)0x0) {
     if (gameTracker->playerInstance != (_Instance *)0x0) {
       p_Var7->flags = p_Var7->flags | 1;
-      SIGNAL_HandleSignal(gameTracker->playerInstance,
-                          streamUnit->level->startUnitMainSignal->signalList,0);
+      SIGNAL_HandleFogNear
+                (gameTracker->playerInstance,streamUnit->level->startUnitMainSignal->signalList,0);
       EVENT_AddSignalToReset(streamUnit->level->startUnitMainSignal);
     }
     pLVar5 = streamUnit->level;
@@ -554,7 +554,7 @@ void GAMELOOP_InitStandardObjects(void)
 	/* end block 2 */
 	// End Line: 2123
 
-void GAMELOOP_LevelLoadAndInit(char *baseAreaName,GameTracker *gameTracker)
+void GAMELOOP_StreamLevelLoadAndInit(char *baseAreaName,GameTracker *gameTracker)
 
 {
   _InstanceList *list;
@@ -572,15 +572,15 @@ void GAMELOOP_LevelLoadAndInit(char *baseAreaName,GameTracker *gameTracker)
   list = instanceList;
   gameTracker->playerInstance = (_Instance *)0x0;
   INSTANCE_InitInstanceList(list,pool);
-  GAMELOOP_ClearGameTracker();
-  CAMERA_Initialize(&theCamera);
+  GAMELOOP_InitGameTracker();
+  CAMERA_Normalize(&theCamera);
   PLANAPI_InitPlanning(planningPool);
   ENMYPLAN_InitEnemyPlanPool(enemyPlanPool);
   FX_Init(fxTracker);
-  WARPGATE_Init();
+  WARPGATE_IsWarpgateInUse();
   DRAW_InitShadow();
   GAMELOOP_InitStandardObjects();
-  p_Var1 = LoadLevels(baseAreaName,gameTracker);
+  p_Var1 = UNDERWORLD_LoadLevel(baseAreaName,gameTracker);
   do {
     iVar2 = STREAM_PollLoadQueue();
   } while (iVar2 != 0);
@@ -592,9 +592,9 @@ void GAMELOOP_LevelLoadAndInit(char *baseAreaName,GameTracker *gameTracker)
   if (0 < pLVar6->numIntros) {
     iVar7 = 0;
     do {
-      iVar3 = strcmpi(pLVar6->introList->name + iVar7,"raziel");
+      iVar3 = strcpy(pLVar6->introList->name + iVar7,"raziel");
       if (iVar3 == 0) {
-        INSTANCE_IntroduceInstance
+        INSTANCE_InsertInstanceGroup
                   ((Intro *)(p_Var1->level->introList->name + iVar7),*(short *)&p_Var1->StreamUnitID
                   );
         break;
@@ -605,7 +605,7 @@ void GAMELOOP_LevelLoadAndInit(char *baseAreaName,GameTracker *gameTracker)
     } while (iVar2 < pLVar6->numIntros);
   }
   gameTracker->playerInstance->data = gameTracker->playerInstance->object->data;
-  CAMERA_SetInstanceFocus(&theCamera,gameTracker->playerInstance);
+  CAMERA_SetProjDistance(&theCamera,gameTracker->playerInstance);
   p_Var4 = gameTracker->playerInstance;
   theCamera.core.position.x = (p_Var4->position).x;
   theCamera.core.position.y = (p_Var4->position).y;
@@ -624,7 +624,7 @@ void GAMELOOP_LevelLoadAndInit(char *baseAreaName,GameTracker *gameTracker)
                     /* WARNING: Read-only address (ram,0x800d20bd) is written */
   BLK_FILL_800d20b8.b0 = p_Var1->level->backColorB;
                     /* WARNING: Read-only address (ram,0x800d20be) is written */
-  LIGHT_InitSources(gLightInfo);
+  LIGHT_ActivateSources(gLightInfo);
   gameTracker->wipeType = 10;
   gameTracker->hideBG = 0;
   gameTracker->wipeTime = 0x1e;
@@ -632,15 +632,15 @@ void GAMELOOP_LevelLoadAndInit(char *baseAreaName,GameTracker *gameTracker)
   p_Var5 = p_Var1->level->startSignal;
   if (p_Var5 != (_MultiSignal *)0x0) {
     p_Var5->flags = p_Var5->flags | 1;
-    SIGNAL_HandleSignal(gameTracker->playerInstance,p_Var1->level->startSignal->signalList,0);
+    SIGNAL_HandleFogNear(gameTracker->playerInstance,p_Var1->level->startSignal->signalList,0);
     EVENT_AddSignalToReset(p_Var1->level->startSignal);
   }
   gameTracker->vblFrames = 0;
   p_Var5 = p_Var1->level->startUnitMainSignal;
   if ((p_Var5 != (_MultiSignal *)0x0) && (gameTracker->playerInstance != (_Instance *)0x0)) {
     p_Var5->flags = p_Var5->flags | 1;
-    SIGNAL_HandleSignal(gameTracker->playerInstance,p_Var1->level->startUnitMainSignal->signalList,0
-                       );
+    SIGNAL_HandleFogNear
+              (gameTracker->playerInstance,p_Var1->level->startUnitMainSignal->signalList,0);
     EVENT_AddSignalToReset(p_Var1->level->startUnitMainSignal);
   }
   return;
@@ -664,11 +664,11 @@ void GAMELOOP_LevelLoadAndInit(char *baseAreaName,GameTracker *gameTracker)
 	/* end block 2 */
 	// End Line: 2557
 
-void GAMELOOP_StreamLevelLoadAndInit
+void GAMELOOP_LevelLoadAndInit
                (char *baseAreaName,GameTracker *gameTracker,int toSignalNum,int fromSignalNum)
 
 {
-  LoadLevels(baseAreaName,gameTracker);
+  UNDERWORLD_LoadLevel(baseAreaName,gameTracker);
   return;
 }
 
@@ -723,7 +723,7 @@ void GAMELOOP_SetScreenWipe(int time,int maxTime,int type)
 	/* end block 3 */
 	// End Line: 2626
 
-void GAMELOOP_HandleScreenWipes(u_long **drawot)
+void SIGNAL_HandleScreenWipe(u_long **drawot)
 
 {
   _PrimPool *primPool;
@@ -1037,13 +1037,13 @@ void MainRenderLevel(_StreamUnit *currentUnit,u_long **drawot)
   int iVar8;
   _Terrain *terrain;
   int **local_64;
-  undefined4 local_60;
+  u_char local_60;
   short local_5c;
-  undefined4 local_58;
-  undefined4 local_54;
-  undefined4 local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
+  u_char local_58;
+  u_char local_54;
+  u_char local_50;
+  u_char local_4c;
+  u_char local_48;
   long local_44;
   long local_40;
   long local_3c;
@@ -1120,18 +1120,17 @@ void MainRenderLevel(_StreamUnit *currentUnit,u_long **drawot)
   LIGHT_Restore(gLightInfo);
   lightInfo = gLightInfo;
   gLightInfo->numSavedColors = 0;
-  LIGHT_ClassifySources((_CameraCore_Type *)&theCamera,level,lightInfo);
+  LIGHT_InitSources((_CameraCore_Type *)&theCamera,level,lightInfo);
   LIGHT_SourcesAndInstances(gLightInfo,gameTrackerX.instanceList);
   LIGHT_SourcesAndTerrain(gLightInfo,terrain);
-  PIPE3D_InstanceListTransformAndDraw
-            (currentUnit,&gameTrackerX,drawot,(_CameraCore_Type *)&theCamera);
+  PIPE3D_InstanceTransformAndDraw(currentUnit,&gameTrackerX,drawot,(_CameraCore_Type *)&theCamera);
   local_60 = theCamera.core.position._0_4_;
   local_5c = theCamera.core.position.z;
-  local_58 = *(undefined4 *)(theCamera.core.wcTransform)->m;
-  local_54 = *(undefined4 *)((theCamera.core.wcTransform)->m + 2);
-  local_50 = *(undefined4 *)((theCamera.core.wcTransform)->m + 4);
-  local_4c = *(undefined4 *)((theCamera.core.wcTransform)->m + 6);
-  local_48 = *(undefined4 *)((theCamera.core.wcTransform)->m + 8);
+  local_58 = *(u_char *)(theCamera.core.wcTransform)->m;
+  local_54 = *(u_char *)((theCamera.core.wcTransform)->m + 2);
+  local_50 = *(u_char *)((theCamera.core.wcTransform)->m + 4);
+  local_4c = *(u_char *)((theCamera.core.wcTransform)->m + 6);
+  local_48 = *(u_char *)((theCamera.core.wcTransform)->m + 8);
   local_44 = (theCamera.core.wcTransform)->t[0];
   local_40 = (theCamera.core.wcTransform)->t[1];
   local_3c = (theCamera.core.wcTransform)->t[2];
@@ -1153,8 +1152,8 @@ void MainRenderLevel(_StreamUnit *currentUnit,u_long **drawot)
         local_36 = -uVar4;
         theCamera.core.position.z = local_5c - *(short *)(ppiVar6 + 4);
         local_34 = -theCamera.core.position.z;
-        ApplyMatrix(&local_58,&local_38,(theCamera.core.wcTransform)->t);
-        BSP_MarkVisibleLeaves_S(ppiVar6,(undefined4 *)&theCamera,(int *)gPolytopeList);
+        ApplyMatrixSV(&local_58,&local_38,(theCamera.core.wcTransform)->t);
+        BSP_MarkVisibleLeaves_S(ppiVar6,(u_char *)&theCamera,(int *)gPolytopeList);
         local_64 = ppiVar6 + 3;
         puVar3 = (u_long *)(*(code *)gameTrackerX.drawDisplayPolytopeListFunc)
                                     (gPolytopeList,terrain,&theCamera,gameTrackerX.primPool);
@@ -1172,17 +1171,17 @@ void MainRenderLevel(_StreamUnit *currentUnit,u_long **drawot)
   unitID = (int)RENDER_currentStreamUnitID;
   theCamera.core.position._0_4_ = local_60;
   theCamera.core.position.z = local_5c;
-  *(undefined4 *)(theCamera.core.wcTransform)->m = local_58;
-  *(undefined4 *)(pMVar1->m + 2) = local_54;
-  *(undefined4 *)(pMVar1->m + 4) = local_50;
-  *(undefined4 *)(pMVar1->m + 6) = local_4c;
-  *(undefined4 *)(pMVar1->m + 8) = local_48;
+  *(u_char *)(theCamera.core.wcTransform)->m = local_58;
+  *(u_char *)(pMVar1->m + 2) = local_54;
+  *(u_char *)(pMVar1->m + 4) = local_50;
+  *(u_char *)(pMVar1->m + 6) = local_4c;
+  *(u_char *)(pMVar1->m + 8) = local_48;
   pMVar1->t[0] = local_44;
   pMVar1->t[1] = local_40;
   pMVar1->t[2] = local_3c;
-  SBSP_IntroduceInstancesAndLights(terrain,(_CameraCore_Type *)&theCamera,lightInfo,unitID);
+  INSTANCE_IntroduceSavedInstance(terrain,(_CameraCore_Type *)&theCamera,lightInfo,unitID);
   StackSave = (u_long)&stack0xffffff88;
-  FX_DrawList(fxTracker,&gameTrackerX,gameTrackerX.drawOT,theCamera.core.wcTransform);
+  FX_DrawLightning(fxTracker,&gameTrackerX,gameTrackerX.drawOT,theCamera.core.wcTransform);
   if ((gameTrackerX.playerInstance)->currentStreamUnitID == currentUnit->StreamUnitID) {
     FX_DrawReaver(gameTrackerX.primPool,gameTrackerX.drawOT,theCamera.core.wcTransform);
   }
@@ -1279,13 +1278,13 @@ long StreamRenderLevel(_StreamUnit *currentUnit,Level *mainLevel,u_long **drawot
   undefined auStack112 [16];
   u_long **local_60;
   int **local_5c;
-  undefined4 local_58;
+  u_char local_58;
   short local_54;
-  undefined4 local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
+  u_char local_50;
+  u_char local_4c;
+  u_char local_48;
+  u_char local_44;
+  u_char local_40;
   long local_3c;
   long local_38;
   long local_34;
@@ -1313,17 +1312,16 @@ long StreamRenderLevel(_StreamUnit *currentUnit,Level *mainLevel,u_long **drawot
             (terrain->aniList,gameTrackerX.frameCount,gameTrackerX.primPool,drawot);
   PIPE3D_AnimateTerrainTextures
             (level->bgAniList,gameTrackerX.frameCount,gameTrackerX.primPool,drawot);
-  LIGHT_ClassifySources((_CameraCore_Type *)&theCamera,level,gLightInfo);
+  LIGHT_InitSources((_CameraCore_Type *)&theCamera,level,gLightInfo);
   LIGHT_SourcesAndTerrain(gLightInfo,terrain);
-  PIPE3D_InstanceListTransformAndDraw
-            (currentUnit,&gameTrackerX,drawot,(_CameraCore_Type *)&theCamera);
+  PIPE3D_InstanceTransformAndDraw(currentUnit,&gameTrackerX,drawot,(_CameraCore_Type *)&theCamera);
   local_58 = theCamera.core.position._0_4_;
   local_54 = theCamera.core.position.z;
-  local_50 = *(undefined4 *)(theCamera.core.wcTransform)->m;
-  local_4c = *(undefined4 *)((theCamera.core.wcTransform)->m + 2);
-  local_48 = *(undefined4 *)((theCamera.core.wcTransform)->m + 4);
-  local_44 = *(undefined4 *)((theCamera.core.wcTransform)->m + 6);
-  local_40 = *(undefined4 *)((theCamera.core.wcTransform)->m + 8);
+  local_50 = *(u_char *)(theCamera.core.wcTransform)->m;
+  local_4c = *(u_char *)((theCamera.core.wcTransform)->m + 2);
+  local_48 = *(u_char *)((theCamera.core.wcTransform)->m + 4);
+  local_44 = *(u_char *)((theCamera.core.wcTransform)->m + 6);
+  local_40 = *(u_char *)((theCamera.core.wcTransform)->m + 8);
   local_3c = (theCamera.core.wcTransform)->t[0];
   local_38 = (theCamera.core.wcTransform)->t[1];
   local_34 = (theCamera.core.wcTransform)->t[2];
@@ -1340,8 +1338,8 @@ long StreamRenderLevel(_StreamUnit *currentUnit,Level *mainLevel,u_long **drawot
         local_2e = -uVar4;
         theCamera.core.position.z = local_54 - *(short *)(ppiVar6 + 4);
         local_2c = -theCamera.core.position.z;
-        ApplyMatrix(&local_50,&local_30,(theCamera.core.wcTransform)->t);
-        BSP_MarkVisibleLeaves_S(ppiVar6,(undefined4 *)&theCamera,(int *)gPolytopeList);
+        ApplyMatrixSV(&local_50,&local_30,(theCamera.core.wcTransform)->t);
+        BSP_MarkVisibleLeaves_S(ppiVar6,(u_char *)&theCamera,(int *)gPolytopeList);
         local_5c = ppiVar6 + 3;
         local_60 = drawot;
         puVar3 = (u_long *)(*(code *)gameTrackerX.drawDisplayPolytopeListFunc)
@@ -1358,15 +1356,15 @@ long StreamRenderLevel(_StreamUnit *currentUnit,Level *mainLevel,u_long **drawot
   theCamera.core.position._0_4_ = local_58;
   theCamera.core.position.z = local_54;
   InStreamUnit = 1;
-  *(undefined4 *)(theCamera.core.wcTransform)->m = local_50;
-  *(undefined4 *)(pMVar1->m + 2) = local_4c;
-  *(undefined4 *)(pMVar1->m + 4) = local_48;
-  *(undefined4 *)(pMVar1->m + 6) = local_44;
-  *(undefined4 *)(pMVar1->m + 8) = local_40;
+  *(u_char *)(theCamera.core.wcTransform)->m = local_50;
+  *(u_char *)(pMVar1->m + 2) = local_4c;
+  *(u_char *)(pMVar1->m + 4) = local_48;
+  *(u_char *)(pMVar1->m + 6) = local_44;
+  *(u_char *)(pMVar1->m + 8) = local_40;
   pMVar1->t[0] = local_3c;
   pMVar1->t[1] = local_38;
   pMVar1->t[2] = local_34;
-  SBSP_IntroduceInstancesAndLights(terrain,(_CameraCore_Type *)&theCamera,lightInfo,unitID);
+  INSTANCE_IntroduceSavedInstance(terrain,(_CameraCore_Type *)&theCamera,lightInfo,unitID);
   InStreamUnit = 0;
   theCamera.core.farPlane = lVar2;
   if ((gameTrackerX.playerInstance)->currentStreamUnitID == currentUnit->StreamUnitID) {
@@ -1399,7 +1397,7 @@ void GAMELOOP_FlipScreenAndDraw(GameTracker *gameTracker,u_long **drawot)
     iVar1 = CheckVolatile(gameTracker->drawTimerReturn);
   } while (iVar1 != 0);
   ResetPrimPool();
-  PutDrawEnv((undefined4 *)(&draw + gameTracker->drawPage));
+  PutDrawEnv((u_char *)(&draw + gameTracker->drawPage));
   do {
     iVar1 = CheckVolatile(gameTracker->reqDisp);
   } while (iVar1 != 0);
@@ -1499,7 +1497,7 @@ void GAMELOOP_SwitchTheDrawBuffer(u_long **drawot)
     gameTrackerX.reqDisp =
          (void *)((int)gameTrackerX.disp + gameTrackerX.gameData.asmData.dispPage * 0x14);
   }
-  PutDrawEnv((undefined4 *)(&draw + gameTrackerX.drawPage));
+  PutDrawEnv((u_char *)(&draw + gameTrackerX.drawPage));
   return;
 }
 
@@ -1683,7 +1681,7 @@ void GAMELOOP_DisplayFrame(GameTracker *gameTracker)
     theCamera.core.topY = 0;
     theCamera.core.bottomY = 0xf0;
     CAMERA_SetViewVolume(&theCamera);
-    lVar2 = MEMPACK_MemoryValidFunc((char *)local_34);
+    lVar2 = MEMPACK_ReportMemory((char *)local_34);
     if (lVar2 != 0) {
       if ((u_int)local_34->fogFar != theCamera.core.farPlane) {
         theCamera.core.farPlane = (u_int)local_34->fogFar;
@@ -1739,19 +1737,19 @@ void GAMELOOP_DisplayFrame(GameTracker *gameTracker)
             theCamera.core.rightX = theCamera.core.rightX >> 9;
             theCamera.core.bottomY = theCamera.core.topY + local_40.h;
             CAMERA_SetViewVolume(&theCamera);
-            SetRotMatrix((undefined4 *)theCamera.core.wcTransform);
-            SetTransMatrix((int)theCamera.core.wcTransform);
+            SetRotMatrix((u_char *)theCamera.core.wcTransform);
+            TransMatrix((int)theCamera.core.wcTransform);
             if ((*puVar9 & 1) == 0) {
               if ((currentUnit_01 != (_StreamUnit *)0x0) &&
                  (currentUnit_01->FrameCount != gameTrackerX.displayFrameCount)) {
                 currentUnit_01->FrameCount = gameTrackerX.displayFrameCount;
-                STREAM_RenderAdjacantUnit
-                          (local_38,curStreamPortal,currentUnit_01,currentUnit,&local_40);
+                STREAM_RenderWarpGate(local_38,curStreamPortal,currentUnit_01,currentUnit,&local_40)
+                ;
               }
             }
             else {
               if ((currentUnit->flags & 8U) == 0) {
-                WARPGATE_IsItActive(currentUnit);
+                WARPGATE_Init(currentUnit);
               }
               else {
                 if (currentUnit_01 != (_StreamUnit *)0x0) {
@@ -1759,7 +1757,7 @@ void GAMELOOP_DisplayFrame(GameTracker *gameTracker)
                   goto LAB_8002f7f8;
                   currentUnit_01->FrameCount = gameTrackerX.displayFrameCount;
                 }
-                STREAM_RenderWarpGate(local_38,curStreamPortal,currentUnit,&local_40);
+                STREAM_RenderAdjacantUnit(local_38,curStreamPortal,currentUnit,&local_40);
               }
             }
           }
@@ -1820,7 +1818,7 @@ LAB_8002f7f8:
   gameTracker->idleTime = uVar6;
   (gameTracker->gameData).asmData.dispPage = 1 - iVar8;
   DEBUG_DrawShrinkCels(polyAddr);
-  GAMELOOP_HandleScreenWipes(local_38);
+  SIGNAL_HandleScreenWipe(local_38);
   uVar5 = GetRCnt(0xf2000000);
   *(u_long **)&gameTracker->drawTimerReturn = &gameTracker->drawTime;
   gameTracker->usecsStartDraw = uVar5 & 0xffff | gameTimer << 0x10;
@@ -1939,7 +1937,7 @@ void GAMELOOP_DrawSavedOT(u_long **newOT)
   }
   (gameTrackerX.savedOTEnd)->addr =
        (gameTrackerX.savedOTEnd)->addr & 0xff000000 | (u_int)(newOT + 0xbff) & 0xffffff;
-  DrawOTag((undefined4 *)gameTrackerX.savedOTStart);
+  DrawOTag((u_char *)gameTrackerX.savedOTStart);
   return;
 }
 
@@ -2132,7 +2130,7 @@ void ResetDrawPage(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void GAMELOOP_Set24FPS(void)
+void GAMELOOP_SystemInit(void)
 
 {
   gameTrackerX.frameRate24fps = 1;
@@ -2347,7 +2345,7 @@ void GAMELOOP_Process(GameTracker *gameTracker)
       if ((gameTracker->gameData).asmData.MorphType == 0) {
         bVar1 = true;
         if ((gameTrackerX.playerInstance != (_Instance *)0x0) &&
-           (pLVar2 = STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID),
+           (pLVar2 = STREAM_GetWaterZLevel((gameTrackerX.playerInstance)->currentStreamUnitID),
            pLVar2 != (Level *)0x0)) {
           bVar1 = (pLVar2->unitFlags & 0x2000U) == 0;
         }
@@ -2370,11 +2368,11 @@ void GAMELOOP_Process(GameTracker *gameTracker)
     if (gameTrackerX.gameMode != 6) {
       if ((gameTrackerX.streamFlags & 0x100000U) == 0) {
         if (gameTrackerX.SwitchToNewStreamUnit == 1) {
-          INSTANCE_Post(gameTrackerX.playerInstance,0x4000006,0);
+          INSTANCE_Query(gameTrackerX.playerInstance,0x4000006,0);
           STREAM_MoveIntoNewStreamUnit();
         }
         if ((VRAM_NeedToUpdateMorph != 0) && (iVar3 = STREAM_IsCdBusy((long *)0x0), iVar3 == 0)) {
-          VRAM_UpdateMorphPalettes();
+          VRAM_InitMorphPalettes();
           VRAM_NeedToUpdateMorph = 0;
         }
         if ((gameTracker->gameData).asmData.MorphTime < 1000) {
@@ -2387,7 +2385,7 @@ void GAMELOOP_Process(GameTracker *gameTracker)
       }
       if (gameTrackerX.gameMode != 6) {
         if ((gameTrackerX.streamFlags & 0x100000U) == 0) {
-          EVENT_DoProcess();
+          EVENT_ProcessEvents();
           streamUnit = &StreamTracker;
           do {
             if (*(short *)streamUnit->StreamList == 2) {
@@ -2395,17 +2393,17 @@ void GAMELOOP_Process(GameTracker *gameTracker)
                 if ((gameTrackerX.debugFlags2 & 0x100U) != 0) {
                   FONT_Print("Processing unit %s\n");
                 }
-                EVENT_ProcessEvents((*(Level **)streamUnit->StreamList)->PuzzleInstances,
-                                    *(Level **)streamUnit->StreamList);
+                EVENT_ProcessHints((*(Level **)streamUnit->StreamList)->PuzzleInstances,
+                                   *(Level **)streamUnit->StreamList);
               }
-              EVENT_BSPProcess((_StreamUnit *)streamUnit);
+              EVENT_DoProcess((_StreamUnit *)streamUnit);
             }
             streamUnit = (STracker *)(streamUnit->StreamList + 1);
           } while ((int)streamUnit < -0x7ff2d1f4);
           EVENT_ResetAllOneTimeVariables();
         }
         if (gameTrackerX.gameMode != 6) {
-          EVENT_ProcessHints();
+          EVENT_Process();
         }
       }
     }
@@ -2421,7 +2419,7 @@ void GAMELOOP_Process(GameTracker *gameTracker)
                     (*(int *)(*(int *)((int)&StreamTracker.StreamList[0].level + iVar3) + 0xec) +
                     iVar6);
           if ((ppuVar4 != (u_char **)0x0) && (*ppuVar4 != (u_char *)0x0)) {
-            SOUND_ProcessInstanceSounds
+            SOUND_StartInstanceSound
                       (*ppuVar4,(SoundInstance *)(ppuVar4 + 2),(_Position *)(ppuVar4 + 5),
                        (int)ppuVar4[7],(int)ppuVar4[8],0,(long *)0x0);
           }
@@ -2437,13 +2435,13 @@ void GAMELOOP_Process(GameTracker *gameTracker)
       INSTANCE_SpatialRelationships(instanceList);
     }
     INSTANCE_ProcessFunctions(gameTracker->instanceList);
-    INSTANCE_CleanUpInstanceList(gameTracker->instanceList,0);
-    INSTANCE_DeactivateFarInstances(gameTracker);
+    COLLIDE_InstanceListTerrain(gameTracker->instanceList,0);
+    INSTANCE_Reactivate(gameTracker);
     MONAPI_ProcessGenerator();
     _DAT_1f800000 = theCamera.core.position._0_4_;
     _DAT_1f800004 = theCamera.core._4_4_;
     StackSave = (u_long)&stack0xffffffc0;
-    G2Instance_BuildTransformsForList(gameTracker->instanceList->first);
+    G2Instance_RebuildTransforms(gameTracker->instanceList->first);
     puVar8 = (undefined *)StackSave;
     if (gameTrackerX.gameMode != 6) {
       if ((gameTrackerX.streamFlags & 0x100000U) == 0) {
@@ -2471,25 +2469,26 @@ void GAMELOOP_Process(GameTracker *gameTracker)
         }
       }
     }
-    DEBUG_Process(gameTracker,*puVar8);
+    DEBUG_ProcessSecondController(gameTracker,*puVar8);
     if ((gameTrackerX.gameMode != 6) && ((gameTrackerX.streamFlags & 0x100000U) == 0)) {
-      COLLIDE_InstanceList(gameTracker->instanceList,*puVar8);
-      COLLIDE_InstanceListTerrain(gameTracker->instanceList,*puVar8);
+      COLLIDE_PointAndInstanceTrivialReject(gameTracker->instanceList,*puVar8);
+      COLLIDE_Instances(gameTracker->instanceList,*puVar8);
     }
     INSTANCE_AdditionalCollideFunctions(instanceList,*puVar8);
-    COLLIDE_InstanceListWithSignals(instanceList,*puVar8);
+    COLLIDE_InstanceList(instanceList,*puVar8);
     if (gameTrackerX.gameMode != 6) {
       if ((gameTrackerX.streamFlags & 0x100000U) == 0) {
         LIGHT_CalcShadowPositions(gameTracker,*puVar8);
-        INSTANCE_CleanUpInstanceList(gameTracker->instanceList,0x10,*puVar8);
+        COLLIDE_InstanceListTerrain(gameTracker->instanceList,0x10,*puVar8);
       }
       if (gameTrackerX.gameMode != 6) {
-        CAMERA_Process(&theCamera,*puVar8);
+        CAMERA_Panic(&theCamera,*puVar8);
       }
     }
     PIPE3D_CalculateWCTransform(&theCamera,*puVar8);
     *(undefined2 *)&(theCamera.core.wcTransform2)->field_0x12 = 0;
-    PIPE3D_InvertTransform(theCamera.core.cwTransform2,theCamera.core.wcTransform2,*puVar8);
+    PIPE3D_InstanceListTransformAndDraw
+              (theCamera.core.cwTransform2,theCamera.core.wcTransform2,*puVar8);
     CAMERA_CalcVVClipInfo(&theCamera,*puVar8);
     if (gameTracker->levelChange != 0) {
       gameTracker->levelChange = 0;
@@ -2524,14 +2523,14 @@ void GAMELOOP_Process(GameTracker *gameTracker)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void GAMELOOP_ModeStartRunning(void)
+void GAMELOOP_ModeStartPause(void)
 
 {
   if (((gameTrackerX.gameMode == 4) || (gameTrackerX.gameMode == 6)) &&
      (DEBUG_ExitMenus(), gameTrackerX.gameMode == 6)) {
     currentMenu = &standardMenu;
-    SOUND_ResumeAllSound();
-    VOICEXA_Resume();
+    SOUND_PauseAllSound();
+    VOICEXA_Pause();
   }
   if ((gameTrackerX.gameFlags & 0x8000000U) != 0) {
     gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xf7ffffff;
@@ -2541,8 +2540,8 @@ void GAMELOOP_ModeStartRunning(void)
   gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xefffffff;
   (gameTrackerX.playerInstance)->flags = (gameTrackerX.playerInstance)->flags & 0xfffffeff;
   gameTrackerX.gameMode = 0;
-  GAMEPAD_RestoreControllers();
-  INSTANCE_Post(gameTrackerX.playerInstance,(int)&DAT_0010000a,0);
+  GAMEPAD_DisplayControllerStatus();
+  INSTANCE_Query(gameTrackerX.playerInstance,(int)&DAT_0010000a,0);
   return;
 }
 
@@ -2559,18 +2558,18 @@ void GAMELOOP_ModeStartRunning(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void GAMELOOP_ModeStartPause(void)
+void GAMELOOP_ModeStartRunning(void)
 
 {
   gameTrackerX.gameMode = 6;
-  INSTANCE_Post(gameTrackerX.playerInstance,(int)&DAT_0010000a,1);
+  INSTANCE_Query(gameTrackerX.playerInstance,(int)&DAT_0010000a,1);
   currentMenu = &pauseMenu;
-  menu_set(gameTrackerX.menu,menudefs_pause_menu);
-  SOUND_PauseAllSound();
-  VOICEXA_Pause();
+  menu_sound(gameTrackerX.menu,memcard_pause_menu);
+  SOUND_ResetAllSound();
+  VOICEXA_Resume();
   SndPlay(5);
   gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x10000000;
-  GAMEPAD_SaveControllers();
+  GAMEPAD_RestoreControllers();
   gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x8000000;
   if (gameTrackerX.primPool == primPool2) {
     gameTrackerX.primPool = PTR_800d1d24;
@@ -2602,7 +2601,7 @@ void GAMELOOP_ModeStartPause(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void GAMELOOP_DemoSetup(void)
+void GAMELOOP_Set24FPS(void)
 
 {
   gameTrackerX.savedPlayerCameraMode = playerCameraMode;
@@ -2645,7 +2644,7 @@ void GAMELOOP_ChangeMode(void)
              ((gameTrackerX.playerInstance)->position).z + 100;
         (gameTrackerX.playerInstance)->zVel = 0;
         gameTrackerX.cheatMode = '\x01';
-        INSTANCE_Post(gameTrackerX.playerInstance,(int)&DAT_00100010,1);
+        INSTANCE_Query(gameTrackerX.playerInstance,(int)&DAT_00100010,1);
         (gameTrackerX.playerInstance)->flags = (gameTrackerX.playerInstance)->flags & 0xfffff7ff;
       }
       else {
@@ -2655,7 +2654,7 @@ void GAMELOOP_ChangeMode(void)
                ((gameTrackerX.playerInstance)->position).z + -100;
           (gameTrackerX.playerInstance)->zVel = 0;
           gameTrackerX.cheatMode = '\0';
-          INSTANCE_Post(gameTrackerX.playerInstance,(int)&DAT_00100010,0);
+          INSTANCE_Query(gameTrackerX.playerInstance,(int)&DAT_00100010,0);
           gameTrackerX.gameMode = 0;
         }
       }
@@ -2692,11 +2691,11 @@ LAB_800309c0:
     }
     else {
       if (gameTrackerX.gameMode == 7) {
-        DEBUG_EndViewVram(&gameTrackerX);
+        DEBUG_ViewVram(&gameTrackerX);
         gameTrackerX.gameMode = 0;
       }
       else {
-        GAMELOOP_ModeStartRunning();
+        GAMELOOP_ModeStartPause();
       }
     }
   }
@@ -2715,11 +2714,11 @@ LAB_80030ae4:
         SndPlay(5);
       }
       gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xbfffffff;
-      GAMELOOP_ModeStartRunning();
+      GAMELOOP_ModeStartPause();
     }
   }
   else {
-    GAMELOOP_ModeStartPause();
+    GAMELOOP_ModeStartRunning();
   }
   if ((gameTrackerX.controlCommand[0][0] & 0x40000000U) == 0) {
     if ((gameTrackerX.controlCommand[0][2] & 0x40000000U) != 0) {
@@ -2748,7 +2747,7 @@ void GAMELOOP_RequestLevelChange(char *name,short number,GameTracker *gameTracke
 {
   if (gameTracker->levelChange == 0) {
     gameTracker->gameFlags = gameTracker->gameFlags | 1;
-    SOUND_ResetAllSound();
+    SOUND_StopAllSound();
     sprintf(gameTracker->baseAreaName,"%s%d");
     gameTracker->levelChange = 1;
     gameTracker->levelDone = 1;
@@ -2770,7 +2769,7 @@ void GAMELOOP_RequestLevelChange(char *name,short number,GameTracker *gameTracke
 void PSX_GameLoop(GameTracker *gameTracker)
 
 {
-  GAMEPAD_Process(gameTracker);
+  DEBUG_Process(gameTracker);
   GAMELOOP_Process(gameTracker);
   return;
 }
@@ -2806,7 +2805,7 @@ void PSX_GameLoop(GameTracker *gameTracker)
 	/* end block 4 */
 	// End Line: 8335
 
-MATRIX * GAMELOOP_GetMatrices(int numMatrices)
+MATRIX * GAMELOOP_GetTimeOfDayIdx(int numMatrices)
 
 {
   MATRIX *pMVar1;

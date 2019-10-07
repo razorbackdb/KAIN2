@@ -123,7 +123,7 @@ LAB_80058258:
 	/* end block 2 */
 	// End Line: 292
 
-void SpuSetVoiceADSR1ADSR2(int vNum,ushort adsr1,ushort adsr2)
+void SOUND_SetVoiceVolume(int vNum,ushort adsr1,ushort adsr2)
 
 {
   int iVar1;
@@ -150,9 +150,9 @@ void SpuSetVoiceADSR1ADSR2(int vNum,ushort adsr1,ushort adsr2)
       iVar1 = 7;
     }
   }
-  SpuSetVoiceADSRAttr(vNum,(u_int)(adsr1 >> 8) & 0x7f,(u_int)(adsr1 >> 4) & 0xf,
-                      ((u_int)adsr2 & 0x1fc0) >> 6,(u_int)adsr2 & 0x1f,(u_int)adsr1 & 0xf,iVar3,iVar1,
-                      iVar2);
+  sfxCmdSetVoiceAttr(vNum,(u_int)(adsr1 >> 8) & 0x7f,(u_int)(adsr1 >> 4) & 0xf,
+                     ((u_int)adsr2 & 0x1fc0) >> 6,(u_int)adsr2 & 0x1f,(u_int)adsr1 & 0xf,iVar3,iVar1,
+                     iVar2);
   return;
 }
 
@@ -281,15 +281,20 @@ void aadPlayTone(AadToneAtr *toneAtr,u_long waveStartAddr,AadProgramAtr *progAtr
     }
   }
   iVar3 = (u_int)progAtr->volume * (u_int)progAtr->volume;
-  SpuSetVoiceVolume((u_int)voice->voiceNum,
-                    (int)(short)((u_int)((int)(short)((u_int)((int)(short)((u_int)((short)((u_int)((int)
-                                                  local_20 * masterVolume * masterVolume) >> 0xe) *
-                                                  iVar3) >> 0xe) * slotVolume * slotVolume) >> 0xe)
-                                       * masterMasterVol * masterMasterVol) >> 0xe),
-                    (int)(short)((u_int)((int)(short)((u_int)((int)(short)((u_int)((short)((u_int)((int)
-                                                  local_1e * masterVolume * masterVolume) >> 0xe) *
-                                                  iVar3) >> 0xe) * slotVolume * slotVolume) >> 0xe)
-                                       * masterMasterVol * masterMasterVol) >> 0xe));
+  SpuSetVoiceADSR1ADSR2
+            ((u_int)voice->voiceNum,
+             (ushort)((u_int)((int)(short)((u_int)((int)(short)((u_int)((short)((u_int)((int)local_20 *
+                                                                                   masterVolume *
+                                                                                   masterVolume) >>
+                                                                            0xe) * iVar3) >> 0xe) *
+                                                slotVolume * slotVolume) >> 0xe) *
+                            masterMasterVol * masterMasterVol) >> 0xe),
+             (ushort)((u_int)((int)(short)((u_int)((int)(short)((u_int)((short)((u_int)((int)local_1e *
+                                                                                   masterVolume *
+                                                                                   masterVolume) >>
+                                                                            0xe) * iVar3) >> 0xe) *
+                                                slotVolume * slotVolume) >> 0xe) *
+                            masterMasterVol * masterMasterVol) >> 0xe));
   midiNote = midiNote - ((u_int)toneAtr->centerNote - 0x3c);
   if ((toneAtr->centerFine & 0x80U) == 0) {
     sVar2 = (&aadPitchTable)[midiNote] +
@@ -300,9 +305,9 @@ void aadPlayTone(AadToneAtr *toneAtr,u_long waveStartAddr,AadProgramAtr *progAtr
             (ushort)((&aadStepsPerCent)[midiNote] * 100 * (0x100 - (u_int)(byte)toneAtr->centerFine)
                     >> 0x17);
   }
-  SpuSetVoicePitch((u_int)voice->voiceNum,sVar2 + (short)pitchOffset);
-  SpuSetVoiceStartAddr((u_int)voice->voiceNum,waveStartAddr);
-  SpuSetVoiceADSR1ADSR2((u_int)voice->voiceNum,toneAtr->adsr1,toneAtr->adsr2);
+  SpuSetVoiceStartAddr((u_int)voice->voiceNum,sVar2 + (short)pitchOffset);
+  SpuSetVoicePitch((u_int)voice->voiceNum,waveStartAddr);
+  SOUND_SetVoiceVolume((u_int)voice->voiceNum,toneAtr->adsr1,toneAtr->adsr2);
   if (toneAtr->mode == '\x04') {
     aadMem->voiceReverbRequest = aadMem->voiceReverbRequest | voice->voiceMask;
   }
@@ -441,15 +446,20 @@ void aadPlayTonePitchBend
     }
   }
   iVar3 = (u_int)progAtr->volume * (u_int)progAtr->volume;
-  SpuSetVoiceVolume((u_int)voice->voiceNum,
-                    (int)(short)((u_int)((int)(short)((u_int)((int)(short)((u_int)((short)((u_int)((int)
-                                                  local_20 * masterVolume * masterVolume) >> 0xe) *
-                                                  iVar3) >> 0xe) * slotVolume * slotVolume) >> 0xe)
-                                       * masterMasterVol * masterMasterVol) >> 0xe),
-                    (int)(short)((u_int)((int)(short)((u_int)((int)(short)((u_int)((short)((u_int)((int)
-                                                  local_1e * masterVolume * masterVolume) >> 0xe) *
-                                                  iVar3) >> 0xe) * slotVolume * slotVolume) >> 0xe)
-                                       * masterMasterVol * masterMasterVol) >> 0xe));
+  SpuSetVoiceADSR1ADSR2
+            ((u_int)voice->voiceNum,
+             (ushort)((u_int)((int)(short)((u_int)((int)(short)((u_int)((short)((u_int)((int)local_20 *
+                                                                                   masterVolume *
+                                                                                   masterVolume) >>
+                                                                            0xe) * iVar3) >> 0xe) *
+                                                slotVolume * slotVolume) >> 0xe) *
+                            masterMasterVol * masterMasterVol) >> 0xe),
+             (ushort)((u_int)((int)(short)((u_int)((int)(short)((u_int)((short)((u_int)((int)local_1e *
+                                                                                   masterVolume *
+                                                                                   masterVolume) >>
+                                                                            0xe) * iVar3) >> 0xe) *
+                                                slotVolume * slotVolume) >> 0xe) *
+                            masterMasterVol * masterMasterVol) >> 0xe));
   iVar4 = 0x2000 / (int)(u_int)toneAtr->pitchBendMax;
   iVar3 = (midiNote - ((u_int)toneAtr->centerNote - 0x3c)) + (pitchWheelPos + -0x2000) / iVar4;
   if ((toneAtr->centerFine & 0x80U) == 0) {
@@ -461,11 +471,12 @@ void aadPlayTonePitchBend
             (ushort)((&aadStepsPerCent)[iVar3] * 100 * (0x100 - (u_int)(byte)toneAtr->centerFine) >>
                     0x17);
   }
-  SpuSetVoicePitch((u_int)voice->voiceNum,
-                   sVar2 + (short)(((int)(&aadStepsPerSemitone)[iVar3] *
-                                   ((pitchWheelPos + -0x2000) % iVar4)) / iVar4));
-  SpuSetVoiceStartAddr((u_int)voice->voiceNum,waveStartAddr);
-  SpuSetVoiceADSR1ADSR2((u_int)voice->voiceNum,toneAtr->adsr1,toneAtr->adsr2);
+  SpuSetVoiceStartAddr
+            ((u_int)voice->voiceNum,
+             sVar2 + (short)(((int)(&aadStepsPerSemitone)[iVar3] *
+                             ((pitchWheelPos + -0x2000) % iVar4)) / iVar4));
+  SpuSetVoicePitch((u_int)voice->voiceNum,waveStartAddr);
+  SOUND_SetVoiceVolume((u_int)voice->voiceNum,toneAtr->adsr1,toneAtr->adsr2);
   if (toneAtr->mode == '\x04') {
     aadMem->voiceReverbRequest = aadMem->voiceReverbRequest | voice->voiceMask;
   }

@@ -33,7 +33,7 @@
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void menuface_initialize(void)
+void menu_initialize(void)
 
 {
   u_int uVar1;
@@ -115,7 +115,7 @@ void menuface_terminate(void)
       uVar1 = 0;
       do {
         if (((int)(u_int)pmVar3->loaded >> (uVar1 & 0x1f) & 1U) != 0) {
-          DRAW_FreeButton(FaceButtons + iVar2 + uVar1);
+          DRAW_LoadButton(FaceButtons + iVar2 + uVar1);
         }
         uVar1 = uVar1 + 1;
       } while ((int)uVar1 < 3);
@@ -123,7 +123,7 @@ void menuface_terminate(void)
       iVar4 = iVar4 + 1;
       iVar2 = iVar2 + 3;
     } while (iVar4 < 8);
-    MEMPACK_Free((char *)FaceButtons);
+    MEMPACK_Init((char *)FaceButtons);
     hack_initialized = 0;
   }
   return;

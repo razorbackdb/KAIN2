@@ -46,11 +46,11 @@ int SKINNER_BurrowInEntry(_Instance *instance)
   if (((instance->tface != (_TFace *)0x0) && (uVar1 = instance->tface->textoff, uVar1 != 0xffff)) &&
      ((*(ushort *)(*(int *)(*(int *)instance->tfaceLevel + 0x34) + (u_int)uVar1 + 10) & 0x100) != 0))
   {
-    level = STREAM_GetLevelWithID(instance->currentStreamUnitID);
+    level = STREAM_GetWaterZLevel(instance->currentStreamUnitID);
     *(u_int *)((int)pvVar3 + 4) = *(u_int *)((int)pvVar3 + 4) | 1;
-    MON_TurnOffBodySpheres(instance);
-    MON_PlayAnimFromList(instance,*(char **)((int)pvVar4 + 8),0,1);
-    FX_StartInstanceBurrow(instance,level,instance->tface);
+    MON_TurnOnBodySpheres(instance);
+    MON_PlayAnimFromListIfNotPlaying(instance,*(char **)((int)pvVar4 + 8),0,1);
+    FX_StartInstanceEffect(instance,level,instance->tface);
     iVar2 = 1;
     *(ushort *)((int)pvVar3 + 0x14e) = *(ushort *)((int)pvVar3 + 0x14e) & 0xffef;
   }
@@ -90,7 +90,7 @@ int SKINNER_BurrowIn(_Instance *instance)
     FX_StopInstanceBurrow(instance);
     *(u_int *)((int)pvVar2 + 4) = *(u_int *)((int)pvVar2 + 4) & 0xfffffffe | 4;
     instance->flags = instance->flags | 0x800;
-    MON_TurnOffWeaponSpheres(instance);
+    MON_TurnOnWeaponSpheres(instance);
   }
   return (u_int)bVar1;
 }
@@ -147,14 +147,13 @@ int SKINNER_GetBurrowDest(_Instance *instance,_Position *enemyPos)
   int iVar5;
   _TFace *p_Var6;
   long lVar7;
-  undefined4 local_20;
+  u_char local_20;
   short local_1c;
   
   iVar5 = 0;
   p_Var6 = instance->tface;
   lVar7 = instance->bspTree;
-  iVar2 = MON_GetRandomGroundPoint
-                    (instance,(_Position *)&local_20,enemyPos,0x80,0xcc,0,0x1000,0x2aa);
+  iVar2 = MON_GetRandomPoint(instance,(_Position *)&local_20,enemyPos,0x80,0xcc,0,0x1000,0x2aa);
   if (iVar2 != 0) {
     uVar1 = instance->tface->textoff;
     iVar5 = 0;
@@ -162,13 +161,13 @@ int SKINNER_GetBurrowDest(_Instance *instance,_Position *enemyPos)
        (iVar5 = 0,
        (*(ushort *)(*(int *)(*(int *)instance->tfaceLevel + 0x34) + (u_int)uVar1 + 10) & 0x100) != 0)
        ) {
-      level = STREAM_GetLevelWithID(instance->currentStreamUnitID);
-      lVar3 = STREAM_GetWaterZLevel(level,instance);
+      level = STREAM_GetWaterZLevel(instance->currentStreamUnitID);
+      lVar3 = STREAM_GetLevelWithID(level,instance);
       iVar5 = 0;
       if (0 < local_1c - lVar3) {
         pvVar4 = instance->extraData;
         iVar5 = 1;
-        *(undefined4 *)((int)pvVar4 + 0x120) = local_20;
+        *(u_char *)((int)pvVar4 + 0x120) = local_20;
         *(short *)((int)pvVar4 + 0x124) = local_1c;
       }
     }
@@ -209,7 +208,7 @@ void SKINNER_CalcBurrowingMove(_Instance *instance,_Position *enemyPos)
   void *pvVar5;
   
   pvVar5 = instance->extraData;
-  uVar2 = MON_GetTime(instance);
+  uVar2 = MON_GetAnim(instance);
   iVar4 = (int)*(short *)((int)pvVar5 + 0x120) - (int)(instance->position).x;
   if (iVar4 < 0) {
     iVar4 = -iVar4;
@@ -220,9 +219,9 @@ void SKINNER_CalcBurrowingMove(_Instance *instance,_Position *enemyPos)
   }
   *(int *)((int)pvVar5 + 0x114) = uVar2 + ((iVar4 + iVar3) * 1000) / 0xa00;
   sVar1 = *(short *)((int)pvVar5 + 0x124);
-  *(undefined4 *)&instance->position = *(undefined4 *)((int)pvVar5 + 0x120);
+  *(u_char *)&instance->position = *(u_char *)((int)pvVar5 + 0x120);
   (instance->position).z = sVar1;
-  MON_TurnToPosition(instance,enemyPos,0x1000);
+  MON_MoveToPosition(instance,enemyPos,0x1000);
   return;
 }
 
@@ -252,8 +251,8 @@ void SKINNER_PupateEntry(_Instance *instance)
   void *pvVar1;
   
   pvVar1 = instance->extraData;
-  MON_PupateEntry(instance);
-  MON_TurnOffBodySpheres(instance);
+  MON_PursueEntry(instance);
+  MON_TurnOnBodySpheres(instance);
   *(u_int *)((int)pvVar1 + 4) = *(u_int *)((int)pvVar1 + 4) | 4;
   return;
 }
@@ -269,11 +268,11 @@ void SKINNER_PupateEntry(_Instance *instance)
 	/* end block 1 */
 	// End Line: 335
 
-void SKINNER_Pupate(_Instance *instance)
+void MON_Pupate(_Instance *instance)
 
 {
-  undefined4 local_8;
-  undefined4 local_4;
+  u_char local_8;
+  u_char local_4;
   
   MON_Pupate(instance);
   if ((instance->flags & 0x800U) == 0) {
@@ -297,7 +296,7 @@ void SKINNER_Pupate(_Instance *instance)
 void SKINNER_PursueEntry(_Instance *instance)
 
 {
-  MON_PursueEntry(instance);
+  MON_HideEntry(instance);
   return;
 }
 
@@ -347,16 +346,16 @@ void SKINNER_PursueEntry(_Instance *instance)
 	/* end block 2 */
 	// End Line: 373
 
-void SKINNER_Pursue(_Instance *instance)
+void SKINNER_Hide(_Instance *instance)
 
 {
   bool bVar1;
   u_long uVar2;
   __Event *p_Var3;
   u_int uVar4;
-  undefined4 local_18;
+  u_char local_18;
   int iVar5;
-  undefined4 local_14;
+  u_char local_14;
   int iVar6;
   void *pvVar7;
   
@@ -382,7 +381,7 @@ void SKINNER_Pursue(_Instance *instance)
     else {
       if ((uVar4 & 1) == 0) {
         if (((uVar4 & 4) != 0) &&
-           (uVar2 = MON_GetTime(instance), *(u_int *)((int)pvVar7 + 0x114) < uVar2)) {
+           (uVar2 = MON_GetAnim(instance), *(u_int *)((int)pvVar7 + 0x114) < uVar2)) {
           bVar1 = false;
           if (((undefined *)((u_int)*(ushort *)(iVar5 + 0x14) - 0xcd) < &DAT_00002733) &&
              (iVar6 = SKINNER_GetBurrowDest(instance,(_Position *)(*(int *)(iVar5 + 4) + 0x5c)),
@@ -403,7 +402,7 @@ void SKINNER_Pursue(_Instance *instance)
       }
     }
     do {
-      p_Var3 = DeMessageQueue((__MessageQueue *)((int)pvVar7 + 8));
+      p_Var3 = PurgeMessageQueue((__MessageQueue *)((int)pvVar7 + 8));
     } while (p_Var3 != (__Event *)0x0);
   }
   return;
@@ -429,11 +428,11 @@ void SKINNER_Pursue(_Instance *instance)
 	/* end block 2 */
 	// End Line: 512
 
-void SKINNER_HideEntry(_Instance *instance)
+void MON_HideEntry(_Instance *instance)
 
 {
   if (*(char *)((int)instance->extraData + 0x15a) == '\0') {
-    MON_HideEntry(instance);
+    MON_Hit(instance);
   }
   else {
     SKINNER_BurrowInEntry(instance);
@@ -470,12 +469,12 @@ void SKINNER_HideEntry(_Instance *instance)
 	/* end block 2 */
 	// End Line: 538
 
-void SKINNER_Hide(_Instance *instance)
+void SKINNER_Pursue(_Instance *instance)
 
 {
   int iVar1;
-  undefined4 local_10;
-  undefined4 local_c;
+  u_char local_10;
+  u_char local_c;
   void *pvVar2;
   
   pvVar2 = instance->extraData;
@@ -496,13 +495,13 @@ void SKINNER_Hide(_Instance *instance)
     }
     if ((*(char *)((int)pvVar2 + 0x156) != '\b') ||
        (iVar1 = *(int *)((int)pvVar2 + 0xc4),
-       MON_TurnToPosition(instance,(_Position *)(*(int *)(iVar1 + 4) + 0x5c),
+       MON_MoveToPosition(instance,(_Position *)(*(int *)(iVar1 + 4) + 0x5c),
                           *(short *)(*(int *)((int)pvVar2 + 0x164) + 0x1c)),
        *(short *)((int)pvVar2 + 0x13a) <= *(short *)(iVar1 + 0x14))) goto LAB_8008cdb0;
   }
   MON_SwitchState(instance,(MonsterState)CONCAT44(local_c,local_10));
 LAB_8008cdb0:
-  MON_DefaultQueueHandler(instance);
+  MON_DefaultMessageHandler(instance);
   return;
 }
 
@@ -537,12 +536,12 @@ void SKINNER_SurpriseAttackEntry(_Instance *instance)
     *(u_int *)((int)instance->extraData + 4) = uVar1 & 0xfffffffb | 2;
     instance->flags = instance->flags & 0xfffff7ff;
     if (instance->tface != (_TFace *)0x0) {
-      level = STREAM_GetLevelWithID(instance->currentStreamUnitID);
-      FX_StartInstanceBurrow(instance,level,instance->tface);
+      level = STREAM_GetWaterZLevel(instance->currentStreamUnitID);
+      FX_StartInstanceEffect(instance,level,instance->tface);
     }
-    GAMEPAD_Shock1(0x40,0x1e000);
+    GAMEPAD_HandleDualShock(0x40,0x1e000);
   }
-  MON_SurpriseAttackEntry(instance);
+  MON_AttackEntry(instance);
   return;
 }
 
@@ -566,7 +565,7 @@ void SKINNER_SurpriseAttackEntry(_Instance *instance)
 	/* end block 2 */
 	// End Line: 660
 
-void SKINNER_SurpriseAttack(_Instance *instance)
+void MON_SurpriseAttackEntry(_Instance *instance)
 
 {
   void *pvVar1;
@@ -576,7 +575,7 @@ void SKINNER_SurpriseAttack(_Instance *instance)
   if (instance->currentMainState != 0x15) {
     *(u_int *)((int)pvVar1 + 4) = *(u_int *)((int)pvVar1 + 4) & 0xfffffff8;
     FX_StopInstanceBurrow(instance);
-    MON_TurnOnBodySpheres(instance);
+    MON_TurnOnWeaponSphere(instance);
     *(ushort *)((int)pvVar1 + 0x14e) = *(ushort *)((int)pvVar1 + 0x14e) | 0x10;
   }
   return;

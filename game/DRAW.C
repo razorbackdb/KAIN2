@@ -4,7 +4,7 @@
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ fDRAW_SPLIT_INTPL_XYZ(struct SVector *newVertex /*$a0*/, struct SVector *pvb /*$a1*/, struct SVector *pvc /*$a2*/)
+// void /*$ra*/ fDRAW_SPLIT_INTPL_XYZ(struct _SVector *newVertex /*$a0*/, struct _SVector *pvb /*$a1*/, struct _SVector *pvc /*$a2*/)
  // line 61, offset 0x8002a478
 	/* begin block 1 */
 		// Start line: 122
@@ -16,7 +16,7 @@
 	/* end block 2 */
 	// End Line: 124
 
-void fDRAW_SPLIT_INTPL_XYZ(SVector *newVertex,SVector *pvb,SVector *pvc)
+void fDRAW_SPLIT_INTPL_XYZ(_SVector *newVertex,_SVector *pvb,_SVector *pvc)
 
 {
   short sVar1;
@@ -416,7 +416,7 @@ void DRAW_DrawButton(_ButtonTexture *button,short x,short y,u_long **ot)
 
 /* WARNING: Type propagation algorithm not settling */
 
-void DRAW_LoadButton(long *addr,_ButtonTexture *button)
+void DRAW_FreeButton(long *addr,_ButtonTexture *button)
 
 {
   bool bVar1;
@@ -495,10 +495,10 @@ void DRAW_LoadButtonByName(char *name,_ButtonTexture *button)
 {
   long *addr;
   
-  addr = LOAD_ReadFile(name,'\v');
+  addr = LOAD_ReadFileFromCD(name,'\v');
   if (addr != (long *)0x0) {
-    DRAW_LoadButton(addr,button);
-    MEMPACK_Free((char *)addr);
+    DRAW_FreeButton(addr,button);
+    MEMPACK_Init((char *)addr);
   }
   return;
 }
@@ -514,7 +514,7 @@ void DRAW_LoadButtonByName(char *name,_ButtonTexture *button)
 	/* end block 1 */
 	// End Line: 4634
 
-void DRAW_FreeButton(_ButtonTexture *button)
+void DRAW_LoadButton(_ButtonTexture *button)
 
 {
   VRAM_ClearVramBlock(button->vramBlock);
@@ -600,13 +600,13 @@ void DRAW_RingLine(_PrimPool *primPool,u_long **ot,long color)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ DRAW_RingPoint(struct _PrimPool *primPool /*$a0*/, unsigned long **ot /*$a1*/, long color /*$s2*/, struct SVector *vel /*$s1*/, struct SVector *acc /*stack 16*/)
+// void /*$ra*/ DRAW_RingPoint(struct _PrimPool *primPool /*$a0*/, unsigned long **ot /*$a1*/, long color /*$s2*/, struct _SVector *vel /*$s1*/, struct _SVector *acc /*stack 16*/)
  // line 3714, offset 0x8002adb8
 	/* begin block 1 */
 		// Start line: 3715
 		// Start offset: 0x8002ADB8
 		// Variables:
-	// 		struct SVector outpoint; // stack offset -24
+	// 		struct _SVector outpoint; // stack offset -24
 	/* end block 1 */
 	// End offset: 0x8002AEB0
 	// End Line: 3726
@@ -616,7 +616,7 @@ void DRAW_RingLine(_PrimPool *primPool,u_long **ot,long color)
 	/* end block 2 */
 	// End Line: 4797
 
-void DRAW_RingPoint(_PrimPool *primPool,u_long **ot,long color,SVector *vel,SVector *acc)
+void DRAW_RingPoint(_PrimPool *primPool,u_long **ot,long color,_SVector *vel,_SVector *acc)
 
 {
   u_int uVar1;
@@ -624,7 +624,7 @@ void DRAW_RingPoint(_PrimPool *primPool,u_long **ot,long color,SVector *vel,SVec
   u_char uVar3;
   u_char uVar4;
   u_char uVar5;
-  SVector local_18;
+  _SVector local_18;
   
   uVar1 = rand();
   if (0xe < (uVar1 & 0x3f)) {
@@ -646,7 +646,7 @@ void DRAW_RingPoint(_PrimPool *primPool,u_long **ot,long color,SVector *vel,SVec
     local_18.y = local_18.y + -1 + ((ushort)iVar2 & 3);
     iVar2 = rand();
     local_18.z = local_18.z + -1 + ((ushort)iVar2 & 3);
-    FX_Dot(&local_18,vel,acc,0,color,4,8,-1);
+    FX_Die(&local_18,vel,acc,0,color,4,8,-1);
   }
   return;
 }
@@ -664,13 +664,13 @@ void DRAW_RingPoint(_PrimPool *primPool,u_long **ot,long color,SVector *vel,SVec
 	// 		struct _MFace *mface; // $s1
 	// 		struct _MFace *endMFace; // $s4
 	// 		struct _PVertex *pvertexList; // $s3
-	// 		struct SVector (*pvertex[3]); // stack offset -96
-	// 		struct SVector newVertex[3]; // stack offset -80
+	// 		struct _SVector (*pvertex[3]); // stack offset -96
+	// 		struct _SVector newVertex[3]; // stack offset -80
 	// 		long outcode; // $a0
 	// 		int first; // $v1
 	// 		int second; // $a0
-	// 		struct SVector vel; // stack offset -56
-	// 		struct SVector acc; // stack offset -48
+	// 		struct _SVector vel; // stack offset -56
+	// 		struct _SVector acc; // stack offset -48
 	/* end block 1 */
 	// End offset: 0x8002B1B0
 	// End Line: 3837
@@ -689,17 +689,17 @@ u_long * DRAW_DrawRingPoints(_Model *model,_VertexPool *vertexPool,MATRIX *pcTra
   int iVar1;
   u_int uVar2;
   int iVar3;
-  SVector *pvc;
-  SVector *pvb;
-  SVector *pvb_00;
+  _SVector *pvc;
+  _SVector *pvb;
+  _SVector *pvb_00;
   ushort *puVar4;
   _MFace *p_Var5;
   _MFace *p_Var6;
   undefined8 uStack80;
-  SVector local_48;
-  SVector local_40;
-  SVector local_38;
-  SVector local_30;
+  _SVector local_48;
+  _SVector local_40;
+  _SVector local_38;
+  _SVector local_30;
   
   p_Var5 = model->faceList;
   p_Var6 = p_Var5 + model->numFaces;
@@ -712,14 +712,14 @@ u_long * DRAW_DrawRingPoints(_Model *model,_VertexPool *vertexPool,MATRIX *pcTra
     local_30.z = -1;
   }
   SetRotMatrix((u_char *)pcTransform);
-  SetTransMatrix((int)pcTransform);
+  TransMatrix((int)pcTransform);
   if (p_Var5 < p_Var6) {
     puVar4 = &(p_Var5->face).v2;
     do {
       if ((*(byte *)((int)puVar4 + 3) & 0x10) != 0) goto switchD_8002b008_caseD_6;
-      pvc = (SVector *)(vertexPool->vertex + (p_Var5->face).v0);
-      pvb_00 = (SVector *)(vertexPool->vertex + puVar4[-1]);
-      pvb = (SVector *)(vertexPool->vertex + *puVar4);
+      pvc = (_SVector *)(vertexPool->vertex + (p_Var5->face).v0);
+      pvb_00 = (_SVector *)(vertexPool->vertex + puVar4[-1]);
+      pvb = (_SVector *)(vertexPool->vertex + *puVar4);
       uVar2 = (u_int)~(int)(&pvc->x)[2] >> 0x1f;
       if (-1 < (&pvb_00->x)[2]) {
         uVar2 = uVar2 | 2;
@@ -735,7 +735,7 @@ u_long * DRAW_DrawRingPoints(_Model *model,_VertexPool *vertexPool,MATRIX *pcTra
         iVar3 = 2;
         break;
       case 2:
-        fDRAW_SPLIT_INTPL_XYZ((SVector *)&uStack80,pvb_00,pvc);
+        fDRAW_SPLIT_INTPL_XYZ((_SVector *)&uStack80,pvb_00,pvc);
         fDRAW_SPLIT_INTPL_XYZ(&local_40,pvb_00,pvb);
         iVar1 = 2;
         iVar3 = 0;
@@ -743,17 +743,17 @@ u_long * DRAW_DrawRingPoints(_Model *model,_VertexPool *vertexPool,MATRIX *pcTra
         break;
       case 3:
         fDRAW_SPLIT_INTPL_XYZ(&local_48,pvb_00,pvb);
-        fDRAW_SPLIT_INTPL_XYZ((SVector *)&uStack80,pvc,pvb);
+        fDRAW_SPLIT_INTPL_XYZ((_SVector *)&uStack80,pvc,pvb);
         iVar1 = 1;
         iVar3 = 0;
         break;
       case 4:
-        fDRAW_SPLIT_INTPL_XYZ((SVector *)&uStack80,pvb,pvc);
+        fDRAW_SPLIT_INTPL_XYZ((_SVector *)&uStack80,pvb,pvc);
         fDRAW_SPLIT_INTPL_XYZ(&local_48,pvb,pvb_00);
         iVar1 = 0;
         goto LAB_8002b10c;
       case 5:
-        fDRAW_SPLIT_INTPL_XYZ((SVector *)&uStack80,pvc,pvb_00);
+        fDRAW_SPLIT_INTPL_XYZ((_SVector *)&uStack80,pvc,pvb_00);
         fDRAW_SPLIT_INTPL_XYZ(&local_40,pvb,pvb_00);
         iVar1 = 0;
         iVar3 = 2;
@@ -772,14 +772,14 @@ LAB_8002b10c:
         goto switchD_8002b008_caseD_6;
       }
       if (ring_type == 2) {
-        setCopReg(2,in_zero,*(u_char *)((SVector *)&uStack80 + iVar1));
+        setCopReg(2,in_zero,*(u_char *)((_SVector *)&uStack80 + iVar1));
         setCopReg(2,in_at,*(u_char *)((int)&uStack80 + iVar1 * 8 + 4));
         copFunction(2,0x480012);
         DRAW_RingPoint(primPool,ot,color,&local_38,&local_30);
       }
       else {
-        pvb_00 = (SVector *)&uStack80 + iVar1;
-        pvb = (SVector *)&uStack80 + iVar3;
+        pvb_00 = (_SVector *)&uStack80 + iVar1;
+        pvb = (_SVector *)&uStack80 + iVar3;
         setCopReg(2,in_zero,*(u_char *)pvb_00);
         setCopReg(2,in_at,*(u_char *)((int)&uStack80 + iVar1 * 8 + 4));
         setCopReg(2,pvb,*(u_char *)pvb);
@@ -1246,9 +1246,8 @@ void DRAW_CreateAGlowingCircle
 	/* end block 2 */
 	// End Line: 5542
 
-u_long * DRAW_DrawGlowPoints2
-                  (_Instance *instance,long seg1,long seg2,_PrimPool *primPool,u_long **ot,long color
-                  ,long height)
+u_long * DRAW_DrawGlowPoint(_Instance *instance,long seg1,long seg2,_PrimPool *primPool,u_long **ot,
+                          long color,long height)
 
 {
   long lVar1;
@@ -1317,8 +1316,9 @@ u_long * DRAW_DrawGlowPoints2
 	/* end block 2 */
 	// End Line: 5690
 
-u_long * DRAW_DrawGlowPoint(_Instance *instance,long seg1,_PrimPool *primPool,u_long **ot,long color,
-                          int width,int height)
+u_long * DRAW_DrawGlowPoints2
+                  (_Instance *instance,long seg1,_PrimPool *primPool,u_long **ot,long color,int width
+                  ,int height)
 
 {
   u_int uVar1;
@@ -1982,8 +1982,8 @@ void DRAW_LoadingMessage(void)
   do {
     len = CheckVolatile(gameTrackerX.reqDisp);
   } while (len != 0);
-  DrawSyncCallback(0);
-  VSyncCallback(0);
+  DMACallback(0);
+  DrawCallback(0);
   ppuVar1 = gameTrackerX.drawOT;
   PutDrawEnv((u_char *)(&draw + (gameTrackerX.drawPage ^ 1)));
   text = localstr_get(LOCALSTR_Hint52);
@@ -1996,8 +1996,8 @@ void DRAW_LoadingMessage(void)
   DrawSync(0);
   ClearOTagR(ppuVar1,0xc00);
   PutDrawEnv((u_char *)(&draw + gameTrackerX.drawPage));
-  VSyncCallback(VblTick);
-  DrawSyncCallback(DrawCallback);
+  DrawCallback(VblTick);
+  DMACallback(VSyncCallbacks);
   return;
 }
 

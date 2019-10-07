@@ -66,7 +66,7 @@ void GainHealth(int data)
   iVar1 = GetMaxHealth();
   if ((iVar1 <= Raziel.HitPoints) && (Raziel.CurrentPlane == 1)) {
     Raziel.HitPoints = GetMaxHealth();
-    razReaverOn();
+    razReaverOff();
   }
   return;
 }
@@ -95,10 +95,10 @@ void LoseHealth(int amount)
     Raziel.DamageFrequency = Raziel.DamageFrequency - (amount >> 0xc);
     Raziel.invincibleTimer = (int)PlayerData->healthInvinciblePostHit * 0x1e000;
     if (Raziel.CurrentPlane == 1) {
-      razReaverOff();
+      razReaverOn();
     }
     if ((gameTrackerX.gameFlags & 0x80U) == 0) {
-      GAMEPAD_Shock0(1,(int)&DAT_00002328);
+      GAMEPAD_Shock1(1,(int)&DAT_00002328);
     }
   }
   return;
@@ -249,10 +249,10 @@ void ProcessHealth(_Instance *instance)
   if ((Raziel.invincibleTimer == 0) && ((Raziel.playerEventHistory & 0x1000) != 0)) {
     Data = GetMaxHealth();
     if ((Raziel.HitPoints == Data) || (Raziel.CurrentPlane == 2)) {
-      razReaverOn();
+      razReaverOff();
     }
     else {
-      razReaverOff();
+      razReaverOn();
     }
     if (Raziel.CurrentPlane == 1) {
       if ((instance->waterFace != (_TFace *)0x0) && ((Raziel.Abilities & 0x10U) == 0)) {
@@ -267,10 +267,10 @@ void ProcessHealth(_Instance *instance)
         Raziel.HitPoints = Raziel.HitPoints + (Data >> 0xc);
       }
       if (Raziel.HitPoints < 100000) {
-        razPlaneShift(instance);
+        SOUND_PlaneShift(instance);
         Raziel.invincibleTimer = (int)PlayerData->healthInvinciblePostShunt * 0x1e000;
         if ((Raziel.Mode & 0x40000U) != 0) {
-          CAMERA_ChangeToOutOfWater(&theCamera,instance);
+          CAMERA_ChangeTo(&theCamera,instance);
         }
       }
       else {
@@ -289,7 +289,7 @@ void ProcessHealth(_Instance *instance)
                       (instance,0x2ee - ((int)(&DAT_0000c350 + -Raziel.DamageFrequency) * 300) /
                                         0x7a12,(long *)0x0,0,0);
             if ((gameTrackerX.gameFlags & 0x80U) == 0) {
-              GAMEPAD_Shock1(0x80,(int)&DAT_00005000);
+              GAMEPAD_HandleDualShock(0x80,(int)&DAT_00005000);
             }
           }
         }
@@ -320,15 +320,15 @@ void ProcessHealth(_Instance *instance)
     }
     if (((ControlFlag & 0x800000U) == 0) && (Raziel.HitPoints < 0x20d)) {
       Data = SetControlInitIdleData(0,0,3);
-      StateSwitchStateCharacterData(&Raziel.State,StateHandlerIdle,Data);
-      G2EmulationSwitchAnimationCharacter(&Raziel.State,0xd6,0,3,1);
+      StateSwitchStateCharacterDataDefault(&Raziel.State,StateHandlerPickupObject,Data);
+      G2EmulationSwitchAnimationSync(&Raziel.State,0xd6,0,3,1);
       Raziel.HitPoints = 0x20d;
       ControlFlag = ControlFlag | 0x804000;
     }
     if (Raziel.HitPoints < 0) {
       gameTracker->streamFlags = gameTracker->streamFlags | 0x80000;
       if (Raziel.soulReaver != (_Instance *)0x0) {
-        INSTANCE_Post(Raziel.soulReaver,0x800105,0);
+        INSTANCE_Query(Raziel.soulReaver,0x800105,0);
       }
       razSetPlayerEventHistory(0x8000);
       Raziel.HitPoints = (int)&DAT_0000c350;
@@ -376,7 +376,7 @@ int HealthCheckForLowHealth(void)
   int iVar1;
   int iVar2;
   
-  iVar1 = STREAM_IsMorphInProgress();
+  iVar1 = STREAM_IsMonster();
   iVar2 = 1;
   if (iVar1 == 0) {
     if (Raziel.CurrentPlane == 1) {
@@ -473,7 +473,7 @@ void HealthInstantDeath(_Instance *instance)
   Raziel.HitPoints = (int)&DAT_0000c350;
   gameTracker->streamFlags = gameTracker->streamFlags | 0x80000;
   if (Raziel.soulReaver != (_Instance *)0x0) {
-    INSTANCE_Post(Raziel.soulReaver,0x800105,0);
+    INSTANCE_Query(Raziel.soulReaver,0x800105,0);
   }
   razSetPlayerEventHistory(0x8000);
   Raziel.playerEvent = Raziel.playerEvent | 0x8000;
@@ -497,7 +497,7 @@ void HealthInstantDeath(_Instance *instance)
 	/* end block 2 */
 	// End Line: 754
 
-void RAZIEL_DebugHealthSetScale(long healthScale)
+void RAZIEL_DebugHealthFillUp(long healthScale)
 
 {
   Raziel.HealthScale = (short)healthScale;
@@ -524,7 +524,7 @@ void RAZIEL_DebugHealthSetScale(long healthScale)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void RAZIEL_DebugHealthFillUp(void)
+void RAZIEL_DebugManaSetMax(void)
 
 {
   if (Raziel.CurrentPlane == 1) {
@@ -548,7 +548,7 @@ void RAZIEL_DebugHealthFillUp(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void RAZIEL_DebugManaFillUp(void)
+void RAZIEL_DebugHealthSetScale(void)
 
 {
   SetMana(1);

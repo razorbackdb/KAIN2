@@ -18,7 +18,7 @@
 	/* end block 2 */
 	// End Line: 19
 
-void G2PoolMem_InitPool(void *voidPool,int blockCount,int blockSize)
+void G2PoolMem_Free(void *voidPool,int blockCount,int blockSize)
 
 {
   char *pcVar1;
@@ -143,7 +143,7 @@ void * G2PoolMem_Allocate(void *voidPool)
 	/* end block 4 */
 	// End Line: 201
 
-void G2PoolMem_Free(void *voidPool,void *block)
+void G2PoolMem_InitPool(void *voidPool,void *block)
 
 {
   ushort uVar1;

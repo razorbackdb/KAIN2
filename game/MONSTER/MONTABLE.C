@@ -84,7 +84,7 @@ void MONTABLE_SetupTablePointer(Object *object)
 	/* end block 3 */
 	// End Line: 800
 
-_MonsterState * MONTABLE_GetStateFuncs(_Instance *instance,int state)
+_MonsterState * MON_DamageEffect(_Instance *instance,int state)
 
 {
   void *pvVar1;
@@ -131,7 +131,7 @@ _MonsterState * MONTABLE_GetStateFuncs(_Instance *instance,int state)
 	/* end block 3 */
 	// End Line: 833
 
-TDRFuncPtr_MONTABLE_GetDamageEffectFunc MONTABLE_GetDamageEffectFunc(_Instance *instance)
+TDRFuncPtr_MONTABLE_GetDamageEffectFunc MONTABLE_GetStateFuncs(_Instance *instance)
 
 {
   void *pvVar1;
@@ -141,7 +141,7 @@ TDRFuncPtr_MONTABLE_GetDamageEffectFunc MONTABLE_GetDamageEffectFunc(_Instance *
   if ((pvVar1 == (void *)0x0) ||
      (pcVar2 = *(TDRFuncPtr_MONTABLE_GetDamageEffectFunc *)((int)pvVar1 + 8),
      pcVar2 == (TDRFuncPtr_MONTABLE_GetDamageEffectFunc)0x0)) {
-    pcVar2 = MON_DamageEffect;
+    pcVar2 = SLUAGH_DamageEffect;
   }
   return pcVar2;
 }
@@ -180,7 +180,7 @@ TDRFuncPtr_MONTABLE_GetInitFunc MONTABLE_GetInitFunc(_Instance *instance)
   ppTVar1 = (TDRFuncPtr_MONTABLE_GetInitFunc *)instance->object->relocModule;
   if ((ppTVar1 == (TDRFuncPtr_MONTABLE_GetInitFunc *)0x0) ||
      (pcVar2 = *ppTVar1, pcVar2 == (TDRFuncPtr_MONTABLE_GetInitFunc)0x0)) {
-    pcVar2 = MON_DefaultInit;
+    pcVar2 = MON_SetDefaults;
   }
   return pcVar2;
 }
@@ -210,7 +210,7 @@ TDRFuncPtr_MONTABLE_GetInitFunc MONTABLE_GetInitFunc(_Instance *instance)
 	/* end block 3 */
 	// End Line: 873
 
-TDRFuncPtr_MONTABLE_GetCleanUpFunc MONTABLE_GetCleanUpFunc(_Instance *instance)
+TDRFuncPtr_MONTABLE_GetCleanUpFunc MONTABLE_GetDamageEffectFunc(_Instance *instance)
 
 {
   void *pvVar1;
@@ -220,7 +220,7 @@ TDRFuncPtr_MONTABLE_GetCleanUpFunc MONTABLE_GetCleanUpFunc(_Instance *instance)
   if ((pvVar1 == (void *)0x0) ||
      (pcVar2 = *(TDRFuncPtr_MONTABLE_GetCleanUpFunc *)((int)pvVar1 + 4),
      pcVar2 == (TDRFuncPtr_MONTABLE_GetCleanUpFunc)0x0)) {
-    pcVar2 = MON_CleanUp;
+    pcVar2 = HUMAN_CleanUp;
   }
   return pcVar2;
 }

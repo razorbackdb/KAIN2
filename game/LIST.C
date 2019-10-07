@@ -16,7 +16,7 @@
 	/* end block 2 */
 	// End Line: 94
 
-void LIST_InsertFunc(NodeType *list,NodeType *node)
+void LIST_GetFunc(NodeType *list,NodeType *node)
 
 {
   node->prev = list;
@@ -87,7 +87,7 @@ LAB_8004fdd8:
 	/* end block 2 */
 	// End Line: 153
 
-NodeType * LIST_GetFunc(NodeType *list)
+NodeType * LIST_InsertFunc(NodeType *list)
 
 {
   NodeType *pNVar1;
@@ -131,7 +131,7 @@ void LIST_Concatenate(NodeType *target,NodeType *source)
   while (node != (NodeType *)0x0) {
     node = source->next;
     LIST_DeleteFunc(node);
-    LIST_InsertFunc(target,node);
+    LIST_GetFunc(target,node);
     node = source->next;
   }
   return;

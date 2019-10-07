@@ -190,20 +190,20 @@ void UpdateEngagementList(evCollideInstanceStatsData *Ptr,__Player *player)
   u_int uVar5;
   int Data_00;
   u_int in_t1;
-  undefined4 in_t2;
-  undefined4 in_t3;
+  u_char in_t2;
+  u_char in_t3;
   u_int uVar6;
   u_int Data_01;
   int iVar7;
   int local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
+  u_char local_3c;
+  u_char local_38;
   short local_34;
   int local_30;
   int local_2c;
-  undefined4 local_28;
+  u_char local_28;
   
-  uVar2 = INSTANCE_Query(Ptr->instance,1);
+  uVar2 = INSTANCE_Post(Ptr->instance,1);
   Inst = Ptr->instance;
   Data_01 = Inst->flags & 0x800;
   if ((uVar2 & 0x20) == 0) {
@@ -214,12 +214,12 @@ void UpdateEngagementList(evCollideInstanceStatsData *Ptr,__Player *player)
           SetEngagedInstance(player,Ptr,0xb);
         }
         if ((Raziel.Abilities & 8U) != 0) {
-          razReaverPickup((player->State).CharacterInstance,Ptr->instance);
+          razReaverImbue((player->State).CharacterInstance,Ptr->instance);
         }
       }
       goto LAB_800a32a0;
     }
-    Attribute = INSTANCE_Query(Inst,0);
+    Attribute = INSTANCE_Post(Inst,0);
     if ((Attribute & 0x44000000) != 0) goto LAB_800a32a0;
     Inst = Ptr->instance;
     if ((((Inst->flags2 & 0x20U) != 0) && (Ptr->xyDistance < 0x780)) &&
@@ -262,15 +262,15 @@ LAB_800a30b4:
        (Data_00 = MATH3D_ConeDetect(&Ptr->relativePosition,0x3c7,0x3c7), Data_00 != 0)) {
       SetEngagedInstance(player,Ptr,10);
     }
-    if ((Ptr->distance < 0x1e00) && (Attribute = INSTANCE_Query(Ptr->instance,0x25), Attribute != 0)
-       ) {
+    if ((Ptr->distance < 0x1e00) && (Attribute = INSTANCE_Post(Ptr->instance,0x25), Attribute != 0))
+    {
       Raziel.Senses.Flags = Raziel.Senses.Flags | 0x20;
     }
     goto LAB_800a32a0;
   }
-  Attribute = INSTANCE_Query(Inst,2);
+  Attribute = INSTANCE_Post(Inst,2);
   if (((Attribute & 0x100) != 0) && ((Ptr->instance->flags & 0x800U) == 0)) {
-    Data = (short *)INSTANCE_Query(Ptr->instance,0x16);
+    Data = (short *)INSTANCE_Post(Ptr->instance,0x16);
     if ((Ptr->xyDistance < (int)(u_int)(ushort)Data[1]) && (Data_00 = Ptr->zDelta, Data_00 < 0)) {
       if ((int)-(u_int)(ushort)Data[3] < Data_00) {
         in_t2 = 0x1000;
@@ -292,7 +292,7 @@ LAB_800a30b4:
           Data_00 = Data_00 + 0xfff;
         }
         *Data = (short)(iVar7 >> 0xc) + (short)(Data_00 >> 0xc);
-        INSTANCE_Post((player->State).CharacterInstance,0x4000007,(int)Data);
+        INSTANCE_Query((player->State).CharacterInstance,0x4000007,(int)Data);
       }
     }
   }
@@ -302,15 +302,15 @@ LAB_800a30b4:
       Ptr->zDelta = Ptr->zDelta / 2;
     }
     Inst = Ptr->instance->LinkParent;
-    if ((((Inst == (_Instance *)0x0) || (uVar3 = INSTANCE_Query(Inst,0), (uVar3 & 0x40000000) != 0))
+    if ((((Inst == (_Instance *)0x0) || (uVar3 = INSTANCE_Post(Inst,0), (uVar3 & 0x40000000) != 0))
         && (Ptr->xyDistance < 0x200)) && (Ptr->zDelta + 0xffU < 0x37f)) {
       SetEngagedInstance(player,Ptr,5);
     }
   }
   if ((((Attribute & 0xe) != 0) && (Data_01 == 0)) &&
      (Data_00 = MATH3D_ConeDetect(&Ptr->relativePosition,0x3c7,0x3c7), Data_00 != 0)) {
-    PHYSICS_GenericLineCheckSetup(0,0,0,(SVECTOR *)&local_40);
-    PHYSICS_GenericLineCheckSetup(0,-0x140,0,(SVECTOR *)&local_38);
+    PHYSICS_GenericLineCheckMask(0,0,0,(SVECTOR *)&local_40);
+    PHYSICS_GenericLineCheckMask(0,-0x140,0,(SVECTOR *)&local_38);
     Data_00 = PHYSICS_CheckForTerrainCollide
                         (gameTrackerX.playerInstance,(SVECTOR *)&local_40,(SVECTOR *)&local_38,1);
     if (Data_00 == 0) {
@@ -328,7 +328,7 @@ LAB_800a30b4:
     }
   }
   if ((((Attribute & 0x40) != 0) &&
-      (uVar3 = INSTANCE_Query(Ptr->instance,0x17),
+      (uVar3 = INSTANCE_Post(Ptr->instance,0x17),
       Ptr->xyDistance < (int)(u_int)*(ushort *)(uVar3 + 0x1a))) &&
      (((int)*(char *)(uVar3 + 0x1c) < Ptr->zDelta && (Ptr->zDelta < (int)*(char *)(uVar3 + 0x1d)))))
   {
@@ -338,10 +338,10 @@ LAB_800a30b4:
     if (Data_00 != 0) {
       SetEngagedInstance(player,Ptr,3);
     }
-    INSTANCE_Query(Ptr->instance,5);
+    INSTANCE_Post(Ptr->instance,5);
   }
   if ((Attribute & 0x80) != 0) {
-    Attribute = INSTANCE_Query(Ptr->instance,0x15);
+    Attribute = INSTANCE_Post(Ptr->instance,0x15);
     uVar6 = 0;
     if (((*(ushort *)(Attribute + 8) & 1) == 0) && ((*(ushort *)(Attribute + 10) & 1) == 0)) {
       Inst = razGetHeldItem();
@@ -355,9 +355,9 @@ LAB_800a30b4:
         }
       }
       else {
-        uVar3 = INSTANCE_Query(Inst,2);
+        uVar3 = INSTANCE_Post(Inst,2);
         if ((uVar3 & 0x20) != 0) {
-          uVar3 = INSTANCE_Query(Inst,3);
+          uVar3 = INSTANCE_Post(Inst,3);
           uVar6 = 0x400;
           if ((uVar3 & 0x10000) != 0) {
             uVar6 = 0x200;
@@ -386,9 +386,9 @@ LAB_800a30b4:
       SetEngagedInstance(player,Ptr,Attribute);
     }
   }
-  Attribute = INSTANCE_Query(Ptr->instance,0x1d);
+  Attribute = INSTANCE_Post(Ptr->instance,0x1d);
   if ((Attribute != 0) && (Data_01 == 0)) {
-    uVar3 = INSTANCE_Query(Ptr->instance,0xe);
+    uVar3 = INSTANCE_Post(Ptr->instance,0xe);
     if (uVar3 != 0) {
       local_38 = CONCAT22(*(undefined2 *)(uVar3 + 0x18),*(undefined2 *)(uVar3 + 0x14));
       local_34 = *(short *)(uVar3 + 0x1c);
@@ -407,14 +407,14 @@ LAB_800a30b4:
       switch((int)(((u_int)*(ushort *)(Attribute + 8) - 1) * 0x10000) >> 0x10) {
       case 0:
         Raziel.HealthBalls = Raziel.HealthBalls + 1;
-        in_t3 = (undefined4)((u_longlong)((longlong)(int)Raziel.HealthBalls * 0x66666667) >> 0x20);
+        in_t3 = (u_char)((u_longlong)((longlong)(int)Raziel.HealthBalls * 0x66666667) >> 0x20);
         if ((int)Raziel.HealthScale < (((int)Raziel.HealthBalls / 5) * 0x10000 >> 0x10) + 1) {
           BumpUpHealth();
         }
         Inst = Ptr->instance;
         Data_01 = SEXT24(Raziel.HealthBalls);
 LAB_800a2e9c:
-        INSTANCE_Post(Inst,0x800026,Data_01);
+        INSTANCE_Query(Inst,0x800026,Data_01);
         break;
       case 1:
         if (Raziel.GlyphManaBalls < Raziel.GlyphManaMax) {
@@ -428,21 +428,21 @@ LAB_800a2e9c:
         }
         break;
       case 2:
-        INSTANCE_Post(Ptr->instance,0x800026,0);
+        INSTANCE_Query(Ptr->instance,0x800026,0);
         debugRazielFlags1 = Raziel.Abilities | (int)*(short *)(Attribute + 10) << 0x11;
         Raziel.Abilities = debugRazielFlags1;
         break;
       case 4:
         Raziel.GlyphManaBalls = Raziel.GlyphManaMax + *(short *)(Attribute + 10);
         Raziel.GlyphManaMax = Raziel.GlyphManaBalls;
-        INSTANCE_Post(Ptr->instance,0x800026,0);
+        INSTANCE_Query(Ptr->instance,0x800026,0);
         break;
       case 5:
-        INSTANCE_Post(Ptr->instance,0x800026,(u_int)Raziel.GlyphManaBalls);
-        RAZIEL_DebugHealthFillUp();
+        INSTANCE_Query(Ptr->instance,0x800026,(u_int)Raziel.GlyphManaBalls);
+        RAZIEL_DebugManaSetMax();
         break;
       case 6:
-        INSTANCE_Post(Ptr->instance,0x800026,(u_int)Raziel.GlyphManaBalls);
+        INSTANCE_Query(Ptr->instance,0x800026,(u_int)Raziel.GlyphManaBalls);
         SetMana(1);
       }
     }
@@ -452,7 +452,7 @@ LAB_800a2e9c:
     SetEngagedInstance(player,Ptr,10);
   }
 LAB_800a32a0:
-  Attribute = INSTANCE_Query(Ptr->instance,0);
+  Attribute = INSTANCE_Post(Ptr->instance,0);
   if ((((Attribute & 0x8000000) != 0) && (Ptr->xyDistance < 0x200)) &&
      ((Ptr->zDelta + 99U < 0x2e3 &&
       (Data_00 = MATH3D_ConeDetect(&Ptr->relativePosition,0x2aa,0x2aa), Data_00 != 0)))) {
@@ -462,8 +462,8 @@ LAB_800a32a0:
      (Raziel.playerEvent = Raziel.playerEvent | 0x1000, (ControlFlag & 0x40U) != 0)) {
     Inst = (player->State).CharacterInstance;
     pMVar4 = Inst->matrix;
-    Data_00 = SetMonsterSoulSuckData(Inst,pMVar4[0xf].t[0],pMVar4[0xf].t[1],pMVar4[0xf].t[2]);
-    INSTANCE_Post(Ptr->instance,0x1000009,Data_00);
+    Data_00 = SetMonsterHitData(Inst,pMVar4[0xf].t[0],pMVar4[0xf].t[1],pMVar4[0xf].t[2]);
+    INSTANCE_Query(Ptr->instance,0x1000009,Data_00);
   }
   if ((Ptr->instance->object->oflags2 & 0x4000000U) != 0) {
     if ((Raziel.constrictFlag & 0x20U) != 0) {
@@ -504,15 +504,15 @@ LAB_800a32a0:
           Inst = Ptr->instance;
           if ((Inst->constrictAngle == 1) || (Inst->constrictAngle == -1)) {
             FX_StartConstrict(Raziel.State.CharacterInstance,&Raziel.constrictCenter,1,0x12);
-            INSTANCE_Post(Ptr->instance,0x40009,0);
+            INSTANCE_Query(Ptr->instance,0x40009,0);
           }
           else {
             if (2 < (ushort)(Inst->constrictAngle + 1U)) {
               FX_EndConstrict(1,Inst);
               Raziel.constrictFlag = 1;
-              Data_00 = SetMonsterHitData((player->State).CharacterInstance,Ptr->instance,0x3000,0,0
-                                         );
-              INSTANCE_Post(Ptr->instance,0x1000000,Data_00);
+              Data_00 = SetMonsterImpaleData
+                                  ((player->State).CharacterInstance,Ptr->instance,0x3000,0,0);
+              INSTANCE_Query(Ptr->instance,0x1000000,Data_00);
               razSetupSoundRamp(gameTrackerX.playerInstance,(_SoundRamp *)&Raziel.soundHandle,0x30,
                                 100,100,100,100,0,0xdac);
             }

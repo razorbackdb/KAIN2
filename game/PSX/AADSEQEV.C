@@ -47,13 +47,13 @@ int aadQueueNextEvent(struct _AadSequenceSlot *slot, int track)
 	/* end block 2 */
 	// End Line: 211
 
-void aadExecuteEvent(AadSeqEvent *event,_AadSequenceSlot *slot)
+void aadExecuteSfxCommand(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
   code *pcVar1;
   
   if ((event->statusByte & 0x80) == 0) {
-    aadSubstituteVariables(event,slot);
+    metaCmdSubstituteVariableParam2(event,slot);
     if (0x4d < event->statusByte) {
       return;
     }
@@ -314,20 +314,20 @@ void aadUpdateChannelVolPan(_AadSequenceSlot *slot,int channel)
   u_int uVar2;
   int iVar3;
   int iVar4;
+  int vNum;
   int iVar5;
   int iVar6;
   int iVar7;
   int iVar8;
   int iVar9;
-  int iVar10;
   short local_28;
   short local_26;
   
-  iVar5 = 0;
+  vNum = 0;
   iVar4 = (int)&(slot->tempo).currentTick + channel;
-  iVar6 = 0x1dc;
+  iVar5 = 0x1dc;
   do {
-    iVar3 = (int)&aadMem->updateCounter + iVar6;
+    iVar3 = (int)&aadMem->updateCounter + iVar5;
     if ((u_int)*(byte *)(iVar3 + 8) == ((u_int)slot->slotID | channel)) {
       local_28 = (ushort)*(byte *)(iVar3 + 0xe) * (ushort)*(byte *)(iVar3 + 0xe);
       local_26 = (ushort)*(byte *)(iVar3 + 0xe) * (ushort)*(byte *)(iVar3 + 0xe);
@@ -344,9 +344,9 @@ void aadUpdateChannelVolPan(_AadSequenceSlot *slot,int channel)
         }
       }
       uVar2 = (u_int)*(byte *)(*(int *)(iVar3 + 0x14) + 2);
-      iVar7 = uVar2 * uVar2;
-      local_28 = (short)((u_int)(local_28 * iVar7) >> 0xe);
-      local_26 = (short)((u_int)(local_26 * iVar7) >> 0xe);
+      iVar6 = uVar2 * uVar2;
+      local_28 = (short)((u_int)(local_28 * iVar6) >> 0xe);
+      local_26 = (short)((u_int)(local_26 * iVar6) >> 0xe);
       if ((aadMem->flags & 1U) == 0) {
         bVar1 = *(byte *)(*(int *)(iVar3 + 0x14) + 3);
         if (bVar1 < 0x41) {
@@ -359,25 +359,24 @@ void aadUpdateChannelVolPan(_AadSequenceSlot *slot,int channel)
           local_28 = (short)((int)local_26 * (0x7f - (u_int)bVar1) * (0x7f - (u_int)bVar1) >> 0xc);
         }
       }
-      iVar7 = (u_int)*(byte *)(iVar4 + 0x5a0) * (u_int)*(byte *)(iVar4 + 0x5a0);
+      iVar6 = (u_int)*(byte *)(iVar4 + 0x5a0) * (u_int)*(byte *)(iVar4 + 0x5a0);
       uVar2 = (u_int)*(byte *)(*(int *)(iVar3 + 0x18) + 4);
-      iVar8 = uVar2 * uVar2;
-      iVar9 = (u_int)slot->slotVolume * (u_int)slot->slotVolume;
-      iVar10 = *slot->masterVolPtr * *slot->masterVolPtr;
-      SpuSetVoiceVolume(iVar5,(int)(short)((u_int)((short)((u_int)((short)((u_int)((short)((u_int)(
-                                                  local_28 * iVar7) >> 0xe) * iVar8) >> 0xe) * iVar9
-                                                  ) >> 0xe) * iVar10) >> 0xe),
-                        (int)(short)((u_int)((short)((u_int)((short)((u_int)((short)((u_int)(local_26 *
-                                                                                        iVar7) >>
-                                                                                 0xe) * iVar8) >>
-                                                                  0xe) * iVar9) >> 0xe) * iVar10) >>
-                                    0xe));
+      iVar7 = uVar2 * uVar2;
+      iVar8 = (u_int)slot->slotVolume * (u_int)slot->slotVolume;
+      iVar9 = *slot->masterVolPtr * *slot->masterVolPtr;
+      SpuSetVoiceADSR1ADSR2
+                (vNum,(ushort)((u_int)((short)((u_int)((short)((u_int)((short)((u_int)(local_28 * iVar6)
+                                                                           >> 0xe) * iVar7) >> 0xe)
+                                                    * iVar8) >> 0xe) * iVar9) >> 0xe),
+                 (ushort)((u_int)((short)((u_int)((short)((u_int)((short)((u_int)(local_26 * iVar6) >>
+                                                                      0xe) * iVar7) >> 0xe) * iVar8)
+                                        >> 0xe) * iVar9) >> 0xe));
       *(undefined *)(iVar3 + 0xf) = *(undefined *)(iVar4 + 0x5a0);
       *(undefined *)(iVar3 + 0x10) = *(undefined *)(iVar4 + 0x5b0);
     }
-    iVar5 = iVar5 + 1;
-    iVar6 = iVar6 + 0x1c;
-  } while (iVar5 < 0x18);
+    vNum = vNum + 1;
+    iVar5 = iVar5 + 0x1c;
+  } while (vNum < 0x18);
   return;
 }
 
@@ -473,29 +472,29 @@ void aadUpdateSlotVolPan(_AadSequenceSlot *slot)
   byte bVar1;
   u_int uVar2;
   u_int uVar3;
+  int vNum;
   int iVar4;
   int iVar5;
   int iVar6;
   int iVar7;
   int iVar8;
-  int iVar9;
   short local_18;
   short local_16;
   
-  iVar4 = 0;
-  iVar5 = 0x1dc;
+  vNum = 0;
+  iVar4 = 0x1dc;
   do {
-    iVar7 = (int)&aadMem->updateCounter + iVar5;
-    if (((u_int)*(byte *)(iVar7 + 8) & 0xf0) == (u_int)slot->slotID) {
-      local_18 = (ushort)*(byte *)(iVar7 + 0xe) * (ushort)*(byte *)(iVar7 + 0xe);
-      local_16 = (ushort)*(byte *)(iVar7 + 0xe) * (ushort)*(byte *)(iVar7 + 0xe);
-      uVar3 = (u_int)*(byte *)(iVar7 + 8) & 0xf;
+    iVar6 = (int)&aadMem->updateCounter + iVar4;
+    if (((u_int)*(byte *)(iVar6 + 8) & 0xf0) == (u_int)slot->slotID) {
+      local_18 = (ushort)*(byte *)(iVar6 + 0xe) * (ushort)*(byte *)(iVar6 + 0xe);
+      local_16 = (ushort)*(byte *)(iVar6 + 0xe) * (ushort)*(byte *)(iVar6 + 0xe);
+      uVar3 = (u_int)*(byte *)(iVar6 + 8) & 0xf;
       if ((aadMem->flags & 1U) == 0) {
-        iVar6 = (int)&(slot->tempo).currentTick + uVar3;
-        bVar1 = *(byte *)(iVar6 + 0x5b0);
+        iVar5 = (int)&(slot->tempo).currentTick + uVar3;
+        bVar1 = *(byte *)(iVar5 + 0x5b0);
         if (bVar1 < 0x41) {
           if (bVar1 < 0x3f) {
-            uVar2 = (u_int)*(byte *)(iVar6 + 0x5b0);
+            uVar2 = (u_int)*(byte *)(iVar5 + 0x5b0);
             local_16 = (short)((int)((int)local_18 * uVar2 * uVar2) >> 0xc);
           }
         }
@@ -503,15 +502,15 @@ void aadUpdateSlotVolPan(_AadSequenceSlot *slot)
           local_18 = (short)((int)local_16 * (0x7f - (u_int)bVar1) * (0x7f - (u_int)bVar1) >> 0xc);
         }
       }
-      uVar2 = (u_int)*(byte *)(*(int *)(iVar7 + 0x14) + 2);
-      iVar6 = uVar2 * uVar2;
-      local_18 = (short)((u_int)(local_18 * iVar6) >> 0xe);
-      local_16 = (short)((u_int)(local_16 * iVar6) >> 0xe);
+      uVar2 = (u_int)*(byte *)(*(int *)(iVar6 + 0x14) + 2);
+      iVar5 = uVar2 * uVar2;
+      local_18 = (short)((u_int)(local_18 * iVar5) >> 0xe);
+      local_16 = (short)((u_int)(local_16 * iVar5) >> 0xe);
       if ((aadMem->flags & 1U) == 0) {
-        bVar1 = *(byte *)(*(int *)(iVar7 + 0x14) + 3);
+        bVar1 = *(byte *)(*(int *)(iVar6 + 0x14) + 3);
         if (bVar1 < 0x41) {
           if (bVar1 < 0x3f) {
-            uVar2 = (u_int)*(byte *)(*(int *)(iVar7 + 0x14) + 3);
+            uVar2 = (u_int)*(byte *)(*(int *)(iVar6 + 0x14) + 3);
             local_16 = (short)((int)((int)local_18 * uVar2 * uVar2) >> 0xc);
           }
         }
@@ -519,23 +518,22 @@ void aadUpdateSlotVolPan(_AadSequenceSlot *slot)
           local_18 = (short)((int)local_16 * (0x7f - (u_int)bVar1) * (0x7f - (u_int)bVar1) >> 0xc);
         }
       }
-      iVar6 = (u_int)slot->volume[uVar3] * (u_int)slot->volume[uVar3];
-      uVar3 = (u_int)*(byte *)(*(int *)(iVar7 + 0x18) + 4);
-      iVar7 = uVar3 * uVar3;
-      iVar8 = (u_int)slot->slotVolume * (u_int)slot->slotVolume;
-      iVar9 = *slot->masterVolPtr * *slot->masterVolPtr;
-      SpuSetVoiceVolume(iVar4,(int)(short)((u_int)((short)((u_int)((short)((u_int)((short)((u_int)(
-                                                  local_18 * iVar6) >> 0xe) * iVar7) >> 0xe) * iVar8
-                                                  ) >> 0xe) * iVar9) >> 0xe),
-                        (int)(short)((u_int)((short)((u_int)((short)((u_int)((short)((u_int)(local_16 *
-                                                                                        iVar6) >>
-                                                                                 0xe) * iVar7) >>
-                                                                  0xe) * iVar8) >> 0xe) * iVar9) >>
-                                    0xe));
+      iVar5 = (u_int)slot->volume[uVar3] * (u_int)slot->volume[uVar3];
+      uVar3 = (u_int)*(byte *)(*(int *)(iVar6 + 0x18) + 4);
+      iVar6 = uVar3 * uVar3;
+      iVar7 = (u_int)slot->slotVolume * (u_int)slot->slotVolume;
+      iVar8 = *slot->masterVolPtr * *slot->masterVolPtr;
+      SpuSetVoiceADSR1ADSR2
+                (vNum,(ushort)((u_int)((short)((u_int)((short)((u_int)((short)((u_int)(local_18 * iVar5)
+                                                                           >> 0xe) * iVar6) >> 0xe)
+                                                    * iVar7) >> 0xe) * iVar8) >> 0xe),
+                 (ushort)((u_int)((short)((u_int)((short)((u_int)((short)((u_int)(local_16 * iVar5) >>
+                                                                      0xe) * iVar6) >> 0xe) * iVar7)
+                                        >> 0xe) * iVar8) >> 0xe));
     }
-    iVar4 = iVar4 + 1;
-    iVar5 = iVar5 + 0x1c;
-  } while (iVar4 < 0x18);
+    vNum = vNum + 1;
+    iVar4 = iVar4 + 0x1c;
+  } while (vNum < 0x18);
   return;
 }
 
@@ -595,8 +593,9 @@ void aadUpdateChannelPitchBend(_AadSequenceSlot *slot,int channel)
                   (ushort)((&aadStepsPerCent)[iVar1] * 100 * (0x100 - (u_int)*(byte *)(iVar3 + 5)) >>
                           0x17);
         }
-        SpuSetVoicePitch(iVar4,sVar2 + (short)(((int)(&aadStepsPerSemitone)[iVar1] * (iVar6 % iVar7)
-                                               ) / iVar7));
+        SpuSetVoiceStartAddr
+                  (iVar4,sVar2 + (short)(((int)(&aadStepsPerSemitone)[iVar1] * (iVar6 % iVar7)) /
+                                        iVar7));
       }
     }
     iVar4 = iVar4 + 1;
@@ -809,7 +808,7 @@ void midiControlBankSelect(AadSeqEvent *event,_AadSequenceSlot *slot)
 	/* end block 2 */
 	// End Line: 1134
 
-void midiControlVolume(AadSeqEvent *event,_AadSequenceSlot *slot)
+void midiControlPan(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
   u_int channel;
@@ -842,7 +841,7 @@ void midiControlVolume(AadSeqEvent *event,_AadSequenceSlot *slot)
 	/* end block 2 */
 	// End Line: 1165
 
-void midiControlPan(AadSeqEvent *event,_AadSequenceSlot *slot)
+void midiControlVolume(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
   u_int channel;

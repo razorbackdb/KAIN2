@@ -21,7 +21,7 @@
 	/* end block 3 */
 	// End Line: 119
 
-void InitMessageQueue(__MessageQueue *In)
+void EnMessageQueue(__MessageQueue *In)
 
 {
   In->Head = 0;
@@ -57,7 +57,7 @@ void InitMessageQueue(__MessageQueue *In)
 	/* end block 4 */
 	// End Line: 136
 
-__Event * DeMessageQueue(__MessageQueue *In)
+__Event * PurgeMessageQueue(__MessageQueue *In)
 
 {
   int iVar1;
@@ -89,7 +89,7 @@ __Event * DeMessageQueue(__MessageQueue *In)
 	/* end block 2 */
 	// End Line: 208
 
-void PurgeMessageQueue(__MessageQueue *In)
+void EnMessageQueueData(__MessageQueue *In)
 
 {
   In->Tail = 0;
@@ -138,10 +138,10 @@ __Event * PeekMessageQueue(__MessageQueue *In)
 	/* end block 2 */
 	// End Line: 290
 
-void EnMessageQueue(__MessageQueue *In,__Event *Element)
+void InitMessageQueue(__MessageQueue *In,__Event *Element)
 
 {
-  EnMessageQueueData(In,Element->ID,Element->Data);
+  DeMessageQueue(In,Element->ID,Element->Data);
   return;
 }
 
@@ -175,7 +175,7 @@ void EnMessageQueue(__MessageQueue *In,__Event *Element)
 	/* end block 4 */
 	// End Line: 309
 
-void EnMessageQueueData(__MessageQueue *In,int ID,int Data)
+void DeMessageQueue(__MessageQueue *In,int ID,int Data)
 
 {
   int iVar1;
@@ -314,8 +314,9 @@ int SetCollideInfoData(_CollideInfo *srcCI)
 	/* end block 2 */
 	// End Line: 529
 
-int SetMonsterHitData(_Instance *Sender,_Instance *lastHit,int Power,int knockBackDistance,
-                     int knockBackFrames)
+int SetMonsterImpaleData
+              (_Instance *Sender,_Instance *lastHit,int Power,int knockBackDistance,
+              int knockBackFrames)
 
 {
   _Instance **pp_Var1;
@@ -421,7 +422,7 @@ int SetMonsterAlarmData(_Instance *sender,_Position *position,int type)
 	/* end block 2 */
 	// End Line: 631
 
-int SetMonsterSoulSuckData(_Instance *Sender,int x,int y,int z)
+int SetMonsterHitData(_Instance *Sender,int x,int y,int z)
 
 {
   _Instance **pp_Var1;
@@ -454,7 +455,7 @@ int SetMonsterSoulSuckData(_Instance *Sender,int x,int y,int z)
 	/* end block 2 */
 	// End Line: 665
 
-int SetMonsterImpaleData(_Instance *weapon,_Rotation *direction,_Position *position,int distance)
+int SetMonsterSoulSuckData(_Instance *weapon,_Rotation *direction,_Position *position,int distance)
 
 {
   short sVar1;
@@ -493,7 +494,7 @@ int SetMonsterImpaleData(_Instance *weapon,_Rotation *direction,_Position *posit
 	/* end block 2 */
 	// End Line: 708
 
-int SetObjectData(int x,int y,int PathNumber,_Instance *Force,int node)
+int SetObjectBreakOffData(int x,int y,int PathNumber,_Instance *Force,int node)
 
 {
   undefined2 *puVar1;
@@ -559,7 +560,7 @@ int SetPositionData(int x,int y,int z)
 	/* end block 2 */
 	// End Line: 778
 
-int SetPhysicsGravityData(int UpperOffset,int LowerOffset,int x,int y,int z,int slope)
+int SetPhysicsDropOffData(int UpperOffset,int LowerOffset,int x,int y,int z,int slope)
 
 {
   undefined2 *puVar1;
@@ -594,8 +595,9 @@ int SetPhysicsGravityData(int UpperOffset,int LowerOffset,int x,int y,int z,int 
 	/* end block 2 */
 	// End Line: 826
 
-int SetPhysicsEdgeData(int UpperOffset,int ForwardOffset,int AboveOffset,int x,int y,int z,
-                      _SVector *Normal1,_SVector *Normal2,_SVector *Delta)
+int SetPhysicsDropHeightData
+              (int UpperOffset,int ForwardOffset,int AboveOffset,int x,int y,int z,_SVector *Normal1
+              ,_SVector *Normal2,_SVector *Delta)
 
 {
   undefined2 *puVar1;
@@ -633,8 +635,8 @@ int SetPhysicsEdgeData(int UpperOffset,int ForwardOffset,int AboveOffset,int x,i
 	/* end block 2 */
 	// End Line: 872
 
-int SetPhysicsSwimData(int CheckDepth,_SVector *iVelocity,int SwimDepth,int WadeDepth,int TreadDepth
-                      )
+int SetPhysicsDropOffData
+              (int CheckDepth,_SVector *iVelocity,int SwimDepth,int WadeDepth,int TreadDepth)
 
 {
   undefined2 *puVar1;
@@ -668,7 +670,7 @@ int SetPhysicsSwimData(int CheckDepth,_SVector *iVelocity,int SwimDepth,int Wade
 	/* end block 2 */
 	// End Line: 908
 
-int SetPhysicsDropOffData(int xOffset,int yOffset,int DropOffset,int slipSlope,int UpperOffset)
+int SetPhysics(int xOffset,int yOffset,int DropOffset,int slipSlope,int UpperOffset)
 
 {
   undefined2 *puVar1;
@@ -702,8 +704,8 @@ int SetPhysicsDropOffData(int xOffset,int yOffset,int DropOffset,int slipSlope,i
 	/* end block 2 */
 	// End Line: 948
 
-int SetPhysicsSlideData(int Segment,int ForwardVectorX,int ForwardVectorY,int ForwardVectorZ,
-                       int DropOffset,int UpperOffset,int Height)
+int SetPhysicsSwimData(int Segment,int ForwardVectorX,int ForwardVectorY,int ForwardVectorZ,
+                      int DropOffset,int UpperOffset,int Height)
 
 {
   undefined2 *puVar1;
@@ -772,7 +774,7 @@ int SetPhysicsWallCrawlData(int Segment,int Length,int ForwardOffset,int NormalD
 	/* end block 2 */
 	// End Line: 1024
 
-int SetPhysicsLinkedMoveData(_Instance *instance,int segment,_SVector *posDelta,_SVector *rotDelta)
+int SetPhysicsSlideData(_Instance *instance,int segment,_SVector *posDelta,_SVector *rotDelta)
 
 {
   _Instance **pp_Var1;
@@ -814,7 +816,7 @@ int SetPhysicsLinkedMoveData(_Instance *instance,int segment,_SVector *posDelta,
 	/* end block 2 */
 	// End Line: 1066
 
-int SetPhysicsDropHeightData(_Position *offset,int dropOffset,int mode)
+int SetPhysicsEdgeData(_Position *offset,int dropOffset,int mode)
 
 {
   short *psVar1;
@@ -958,13 +960,13 @@ int SetFXHitData(_Instance *hitter,int segment,int amount,int type)
 	/* end block 2 */
 	// End Line: 1369
 
-int SetObjectThrowData(void *target,_SVector *angularVel,ushort type,ushort spinType,int speed,
-                      int gravity,int zVel,int initialXRot)
+int SetObjectData(void *target,_SVector *angularVel,ushort type,ushort spinType,int speed,
+                 int gravity,int zVel,int initialXRot)
 
 {
   ushort uVar1;
   ushort *puVar2;
-  undefined4 uVar3;
+  u_char uVar3;
   
   puVar2 = (ushort *)CIRC_Alloc(0x1c);
   *puVar2 = type;
@@ -980,13 +982,13 @@ int SetObjectThrowData(void *target,_SVector *angularVel,ushort type,ushort spin
     case 2:
     case 4:
       uVar1 = *(ushort *)((int)target + 4);
-      *(undefined4 *)(puVar2 + 2) = *(undefined4 *)target;
+      *(u_char *)(puVar2 + 2) = *(u_char *)target;
       puVar2[4] = uVar1;
       break;
     case 3:
-      uVar3 = *(undefined4 *)((int)target + 4);
-      *(undefined4 *)(puVar2 + 2) = *(undefined4 *)target;
-      *(undefined4 *)(puVar2 + 4) = uVar3;
+      uVar3 = *(u_char *)((int)target + 4);
+      *(u_char *)(puVar2 + 2) = *(u_char *)target;
+      *(u_char *)(puVar2 + 4) = uVar3;
     }
   }
   if ((1 < spinType) && (spinType == 2)) {
@@ -994,9 +996,9 @@ int SetObjectThrowData(void *target,_SVector *angularVel,ushort type,ushort spin
       puVar2[1] = 0;
     }
     else {
-      uVar3 = *(undefined4 *)&angularVel->z;
-      *(undefined4 *)(puVar2 + 6) = *(undefined4 *)angularVel;
-      *(undefined4 *)(puVar2 + 8) = uVar3;
+      uVar3 = *(u_char *)&angularVel->z;
+      *(u_char *)(puVar2 + 6) = *(u_char *)angularVel;
+      *(u_char *)(puVar2 + 8) = uVar3;
     }
   }
   puVar2[10] = (ushort)speed;
@@ -1026,9 +1028,8 @@ int SetObjectThrowData(void *target,_SVector *angularVel,ushort type,ushort spin
 	/* end block 2 */
 	// End Line: 1370
 
-int SetObjectBreakOffData
-              (_Instance *force,short node,short distance,short animation,int frame,int type,
-              int action)
+int SetObjectThrowData(_Instance *force,short node,short distance,short animation,int frame,int type
+                      ,int action)
 
 {
   _Instance **pp_Var1;
@@ -1162,7 +1163,7 @@ int SetObjectDraftData(short force,ushort radius,ushort radiusCoef,ushort height
 	/* end block 2 */
 	// End Line: 1492
 
-int SetObjectAbsorbData(_Instance *force,ushort node,ushort steps)
+int SetObjectIdleData(_Instance *force,ushort node,ushort steps)
 
 {
   _Instance **pp_Var1;
@@ -1225,7 +1226,7 @@ int SetControlSaveDataData(long length,void *data)
 	/* end block 2 */
 	// End Line: 1550
 
-int SetObjectIdleData(long mode,_Instance *instance)
+int SetObjectAbsorbData(long mode,_Instance *instance)
 
 {
   long *plVar1;
@@ -1353,7 +1354,7 @@ int SetShadowSegmentData(u_long total)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void G2EmulationInit(void)
+void G2EmulationInstanceSwitchAnimation(void)
 
 {
   G2AlphaTables7 = (_G2AnimAlphaTable_Type *)0x0;
@@ -1426,7 +1427,7 @@ void G2EmulationInit(void)
 	/* end block 2 */
 	// End Line: 1816
 
-void G2EmulationInstancePlayAnimation(_Instance *instance)
+void G2EmulationSwitchAnimation(_Instance *instance)
 
 {
   u_int uVar1;
@@ -1436,7 +1437,7 @@ void G2EmulationInstancePlayAnimation(_Instance *instance)
   if ((instance->anim).sectionCount != '\0') {
     uVar1 = 0;
     do {
-      G2AnimSection_NextKeyframe((instance->anim).section + uVar1);
+      G2AnimSection_JumpToTime((instance->anim).section + uVar1);
       uVar2 = uVar2 + 1;
       uVar1 = uVar2 & 0xff;
     } while ((int)uVar2 < (int)(u_int)(instance->anim).sectionCount);
@@ -1455,10 +1456,10 @@ void G2EmulationInstancePlayAnimation(_Instance *instance)
 	/* end block 1 */
 	// End Line: 1859
 
-void G2EmulatePlayAnimation(__CharacterState *In)
+void G2EmulationInstanceSetAnimSpeed(__CharacterState *In)
 
 {
-  G2EmulationInstancePlayAnimation(In->CharacterInstance);
+  G2EmulationSwitchAnimation(In->CharacterInstance);
   return;
 }
 
@@ -1496,12 +1497,12 @@ void G2EmulationInstanceToInstanceSwitchAnimation
   G2AnimSection_SetAlphaTable(section,(_G2AnimAlphaTable_Type *)0x0);
   G2AnimSection_InterpToKeylistFrame(section,keylist,NewAnim,NewFrame,Frames * 0x640000 >> 0x10);
   if (Mode == 0) {
-    G2AnimSection_SetPaused(section);
+    G2AnimSection_SetNotRewinding(section);
   }
   else {
-    G2AnimSection_SetUnpaused(section);
+    G2Anim_SetUnpaused(section);
     if (Mode == 2) {
-      G2AnimSection_SetLooping(section);
+      G2Anim_SetNoLooping(section);
     }
     else {
       G2AnimSection_SetNoLooping(section);
@@ -1531,7 +1532,7 @@ void G2EmulationInstanceToInstanceSwitchAnimation
 	/* end block 2 */
 	// End Line: 1955
 
-void G2EmulationInstanceSwitchAnimation
+void G2EmulationSwitchAnimationAlpha
                (_Instance *instance,int CurrentSection,int NewAnim,int NewFrame,int Frames,int Mode)
 
 {
@@ -1543,12 +1544,12 @@ void G2EmulationInstanceSwitchAnimation
   G2AnimSection_SetAlphaTable(section,(_G2AnimAlphaTable_Type *)0x0);
   G2AnimSection_InterpToKeylistFrame(section,keylist,NewAnim,NewFrame,Frames * 0x640000 >> 0x10);
   if (Mode == 0) {
-    G2AnimSection_SetPaused(section);
+    G2AnimSection_SetNotRewinding(section);
   }
   else {
-    G2AnimSection_SetUnpaused(section);
+    G2Anim_SetUnpaused(section);
     if (Mode == 2) {
-      G2AnimSection_SetLooping(section);
+      G2Anim_SetNoLooping(section);
     }
     else {
       G2AnimSection_SetNoLooping(section);
@@ -1577,12 +1578,12 @@ void G2EmulationInstanceSwitchAnimation
 	/* end block 2 */
 	// End Line: 2022
 
-void G2EmulationInstanceSwitchAnimationAlpha
+void G2EmulationSwitchAnimationCharacter
                (_Instance *instance,int CurrentSection,int NewAnim,int NewFrame,int Frames,int Mode,
                int AlphaTable)
 
 {
-  G2EmulationInstanceSwitchAnimation(instance,CurrentSection,NewAnim,NewFrame,Frames,Mode);
+  G2EmulationSwitchAnimationAlpha(instance,CurrentSection,NewAnim,NewFrame,Frames,Mode);
   G2AnimSection_SetAlphaTable
             ((instance->anim).section + (CurrentSection & 0xff),(&G2AlphaTables7)[AlphaTable]);
   return;
@@ -1599,7 +1600,7 @@ void G2EmulationInstanceSwitchAnimationAlpha
 	/* end block 1 */
 	// End Line: 2044
 
-void G2EmulationSwitchAnimation
+void G2EmulatePlayAnimation
                (__CharacterState *In,int CurrentSection,int NewAnim,int NewFrame,int Frames,int Mode
                )
 
@@ -1607,8 +1608,8 @@ void G2EmulationSwitchAnimation
   if (NewAnim < 0) {
     NewAnim = 0;
   }
-  G2EmulationInstanceSwitchAnimation
-            (In->CharacterInstance,CurrentSection,NewAnim,NewFrame,Frames,Mode);
+  G2EmulationSwitchAnimationAlpha(In->CharacterInstance,CurrentSection,NewAnim,NewFrame,Frames,Mode)
+  ;
   return;
 }
 
@@ -1632,7 +1633,7 @@ void G2EmulationSwitchAnimation
 	/* end block 2 */
 	// End Line: 2072
 
-void G2EmulationSwitchAnimationAlpha
+void SetAnimationInstanceSwitchData
                (__CharacterState *In,int CurrentSection,int NewAnim,int NewFrame,int Frames,int Mode
                ,int AlphaTable)
 
@@ -1640,8 +1641,8 @@ void G2EmulationSwitchAnimationAlpha
   _Instance *p_Var1;
   
   p_Var1 = In->CharacterInstance;
-  G2EmulationInstanceSwitchAnimation
-            (In->CharacterInstance,CurrentSection,NewAnim,NewFrame,Frames,Mode);
+  G2EmulationSwitchAnimationAlpha(In->CharacterInstance,CurrentSection,NewAnim,NewFrame,Frames,Mode)
+  ;
   G2AnimSection_SetAlphaTable
             ((p_Var1->anim).section + (CurrentSection & 0xff),(&G2AlphaTables7)[AlphaTable]);
   return;
@@ -1673,7 +1674,7 @@ void G2EmulationSwitchAnimationAlpha
 	/* end block 2 */
 	// End Line: 2098
 
-void G2EmulationSwitchAnimationSync
+void G2EmulationInstanceSwitchAnimationAlpha
                (__CharacterState *In,int SlaveSectionID,int MasterSectionID,int Frames)
 
 {
@@ -1699,13 +1700,13 @@ void G2EmulationSwitchAnimationSync
     G2AnimSection_SetNoLooping(section);
   }
   else {
-    G2AnimSection_SetLooping(section);
+    G2Anim_SetNoLooping(section);
   }
   if ((section_00->flags & 1) == 0) {
-    G2AnimSection_SetUnpaused(section);
+    G2Anim_SetUnpaused(section);
   }
   else {
-    G2AnimSection_SetPaused(section);
+    G2AnimSection_SetNotRewinding(section);
   }
   StateSwitchStateData
             (In,SlaveSectionID,(TDRFuncPtr_StateSwitchStateData2NewProcess)p_Var4->Process,0);
@@ -1734,7 +1735,7 @@ void G2EmulationSwitchAnimationSync
 	/* end block 2 */
 	// End Line: 2209
 
-void G2EmulationInstanceToInstanceSwitchAnimationCharacter
+void G2EmulationInstancePlayAnimation
                (_Instance *instance,_Instance *host,int NewAnim,int NewFrame,int Frames,int Mode)
 
 {
@@ -1746,15 +1747,15 @@ void G2EmulationInstanceToInstanceSwitchAnimationCharacter
   G2Anim_SetAlphaTable(anim,(_G2AnimAlphaTable_Type *)0x0);
   G2Anim_InterpToKeylistFrame(anim,keylist,NewAnim,NewFrame,Frames * 0x640000 >> 0x10);
   if (Mode == 0) {
-    G2Anim_SetPaused(anim);
+    _G2AnimSection_TriggerEffects(anim);
   }
   else {
-    G2Anim_SetUnpaused(anim);
+    G2Anim_SetPaused(anim);
     if (Mode == 2) {
       G2Anim_SetLooping(anim);
     }
     else {
-      G2Anim_SetNoLooping(anim);
+      G2Anim_SetLooping(anim);
     }
   }
   return;
@@ -1781,7 +1782,7 @@ void G2EmulationInstanceToInstanceSwitchAnimationCharacter
 	/* end block 2 */
 	// End Line: 2271
 
-void G2EmulationSwitchAnimationCharacter
+void G2EmulationSwitchAnimationSync
                (__CharacterState *In,int NewAnim,int NewFrame,int Frames,int Mode)
 
 {
@@ -1798,15 +1799,15 @@ void G2EmulationSwitchAnimationCharacter
   G2Anim_SetAlphaTable(anim,(_G2AnimAlphaTable_Type *)0x0);
   G2Anim_InterpToKeylistFrame(anim,keylist,NewAnim,NewFrame,Frames * 0x640000 >> 0x10);
   if (Mode == 0) {
-    G2Anim_SetPaused(anim);
+    _G2AnimSection_TriggerEffects(anim);
   }
   else {
-    G2Anim_SetUnpaused(anim);
+    G2Anim_SetPaused(anim);
     if (Mode == 2) {
       G2Anim_SetLooping(anim);
     }
     else {
-      G2Anim_SetNoLooping(anim);
+      G2Anim_SetLooping(anim);
     }
   }
   return;
@@ -1823,11 +1824,11 @@ void G2EmulationSwitchAnimationCharacter
 	/* end block 1 */
 	// End Line: 2333
 
-void G2EmulationSwitchAnimationCharacterAlpha
+void G2EmulationSwitchAnimationSync
                (__CharacterState *In,int NewAnim,int NewFrame,int Frames,int Mode,int AlphaTable)
 
 {
-  G2EmulationSwitchAnimationCharacter(In,NewAnim,NewFrame,Frames,Mode);
+  G2EmulationSwitchAnimationSync(In,NewAnim,NewFrame,Frames,Mode);
   G2Anim_SetAlphaTable(&In->CharacterInstance->anim,(&G2AlphaTables7)[AlphaTable]);
   return;
 }
@@ -1853,7 +1854,7 @@ void G2EmulationSwitchAnimationCharacterAlpha
 	/* end block 2 */
 	// End Line: 2349
 
-void G2EmulationInstanceSetAnimation
+void G2EmulationInstanceToInstanceSwitchAnimationCharacter
                (_Instance *instance,int CurrentSection,int NewAnim,int NewFrame,int Frames)
 
 {
@@ -1878,14 +1879,15 @@ void G2EmulationInstanceSetAnimation
 	/* end block 1 */
 	// End Line: 2398
 
-void G2EmulationSetAnimation
+void G2EmulationQueryMode
                (__CharacterState *In,int CurrentSection,int NewAnim,int NewFrame,int Frames)
 
 {
   if (NewAnim < 0) {
     NewAnim = 0;
   }
-  G2EmulationInstanceSetAnimation(In->CharacterInstance,CurrentSection,NewAnim,NewFrame,Frames);
+  G2EmulationInstanceToInstanceSwitchAnimationCharacter
+            (In->CharacterInstance,CurrentSection,NewAnim,NewFrame,Frames);
   return;
 }
 
@@ -1909,22 +1911,22 @@ void G2EmulationSetAnimation
 	/* end block 2 */
 	// End Line: 2428
 
-void G2EmulationInstanceSetMode(_Instance *instance,int CurrentSection,int Mode)
+void G2EmulationInstanceInitSection(_Instance *instance,int CurrentSection,int Mode)
 
 {
   _G2AnimSection_Type *section;
   
   section = (instance->anim).section + (CurrentSection & 0xff);
   if (Mode == 0) {
-    G2AnimSection_SetPaused(section);
+    G2AnimSection_SetNotRewinding(section);
   }
   else {
-    G2AnimSection_SetUnpaused(section);
+    G2Anim_SetUnpaused(section);
     if (Mode == 1) {
       G2AnimSection_SetNoLooping(section);
     }
     else {
-      G2AnimSection_SetLooping(section);
+      G2Anim_SetNoLooping(section);
     }
   }
   return;
@@ -1944,7 +1946,7 @@ void G2EmulationInstanceSetMode(_Instance *instance,int CurrentSection,int Mode)
 void G2EmulationSetMode(__CharacterState *In,int CurrentSection,int Mode)
 
 {
-  G2EmulationInstanceSetMode(In->CharacterInstance,CurrentSection,Mode);
+  G2EmulationInstanceInitSection(In->CharacterInstance,CurrentSection,Mode);
   return;
 }
 
@@ -1978,7 +1980,7 @@ void G2EmulationSetMode(__CharacterState *In,int CurrentSection,int Mode)
 	/* end block 4 */
 	// End Line: 2499
 
-void G2EmulationInstanceSetAnimSpeed(_Instance *instance,int CurrentSection,int speed)
+void G2EmulationSetAnimation(_Instance *instance,int CurrentSection,int speed)
 
 {
   (instance->anim).section[CurrentSection & 0xff].speedAdjustment = speed;
@@ -2015,7 +2017,7 @@ void G2EmulationInstanceSetAnimSpeed(_Instance *instance,int CurrentSection,int 
 	/* end block 4 */
 	// End Line: 2520
 
-int G2EmulationInstanceQueryAnimation(_Instance *instance,int CurrentSection)
+int G2EmulationInstanceSetMode(_Instance *instance,int CurrentSection)
 
 {
   return (u_int)(instance->anim).section[CurrentSection & 0xff].keylistID;
@@ -2037,7 +2039,7 @@ int G2EmulationQueryAnimation(__CharacterState *In,int CurrentSection)
 {
   int iVar1;
   
-  iVar1 = G2EmulationInstanceQueryAnimation(In->CharacterInstance,CurrentSection);
+  iVar1 = G2EmulationInstanceSetMode(In->CharacterInstance,CurrentSection);
   return iVar1;
 }
 
@@ -2059,7 +2061,7 @@ int G2EmulationQueryAnimation(__CharacterState *In,int CurrentSection)
 	/* end block 2 */
 	// End Line: 2554
 
-int G2EmulationInstanceQueryFrame(_Instance *instance,int CurrentSection)
+int G2EmulationInstanceQueryAnimation(_Instance *instance,int CurrentSection)
 
 {
   int iVar1;
@@ -2091,7 +2093,7 @@ int G2EmulationInstanceQueryLastFrame(_Instance *instance,int CurrentSection)
 {
   int iVar1;
   
-  iVar1 = G2AnimSection_GetStoredKeyframeNumber((instance->anim).section + (CurrentSection & 0xff));
+  iVar1 = _G2AnimSection_GetAnim((instance->anim).section + (CurrentSection & 0xff));
   return iVar1;
 }
 
@@ -2125,7 +2127,7 @@ int G2EmulationInstanceQueryPassedFrame(_Instance *instance,int CurrentSection,i
   _G2AnimSection_Type *section;
   
   section = (instance->anim).section + (CurrentSection & 0xff);
-  _Var1 = G2AnimSection_IsInInterpolation(section);
+  _Var1 = G2AnimSection_AdvanceOverInterval(section);
   uVar2 = 0;
   if ((_Var1 == G2FALSE) && (uVar2 = 1, frame != 0)) {
     p_Var3 = G2Anim_GetKeylist(&instance->anim);
@@ -2154,7 +2156,7 @@ int G2EmulationQueryFrame(__CharacterState *In,int CurrentSection)
 {
   int iVar1;
   
-  iVar1 = G2EmulationInstanceQueryFrame(In->CharacterInstance,CurrentSection);
+  iVar1 = G2EmulationInstanceQueryAnimation(In->CharacterInstance,CurrentSection);
   return iVar1;
 }
 
@@ -2213,7 +2215,7 @@ int G2EmulationInstanceQueryMode(_Instance *instance,int CurrentSection)
 	/* end block 1 */
 	// End Line: 2713
 
-int G2EmulationQueryMode(__CharacterState *In,int CurrentSection)
+int G2EmulationInstanceSetAnimation(__CharacterState *In,int CurrentSection)
 
 {
   int iVar1;
@@ -2252,7 +2254,7 @@ int G2EmulationQueryMode(__CharacterState *In,int CurrentSection)
 	/* end block 4 */
 	// End Line: 2733
 
-void G2EmulationInstanceSetStartAndEndSegment
+void G2EmulationInstanceToInstanceSwitchAnimation
                (_Instance *instance,int CurrentSection,short Start,short End)
 
 {
@@ -2275,10 +2277,11 @@ void G2EmulationInstanceSetStartAndEndSegment
 	/* end block 1 */
 	// End Line: 2751
 
-void G2EmulationSetStartAndEndSegment(__CharacterState *In,int CurrentSection,short Start,short End)
+void G2EmulationInstanceSetStartAndEndSegment
+               (__CharacterState *In,int CurrentSection,short Start,short End)
 
 {
-  G2EmulationInstanceSetStartAndEndSegment(In->CharacterInstance,CurrentSection,Start,End);
+  G2EmulationInstanceToInstanceSwitchAnimation(In->CharacterInstance,CurrentSection,Start,End);
   return;
 }
 
@@ -2302,7 +2305,7 @@ void G2EmulationSetStartAndEndSegment(__CharacterState *In,int CurrentSection,sh
 	/* end block 2 */
 	// End Line: 2769
 
-void G2EmulationInstanceSetTotalSections(_Instance *instance,short Total)
+void G2EmulationInit(_Instance *instance,short Total)
 
 {
   byte bVar1;
@@ -2314,7 +2317,7 @@ void G2EmulationInstanceSetTotalSections(_Instance *instance,short Total)
     G2Anim_AddSection(anim,0,0);
     bVar1 = anim->sectionCount;
   }
-  G2Anim_SetCallback(anim,INSTANCE_DefaultAnimCallback,instance);
+  MON_AnimCallback(anim,INSTANCE_DefaultAnimCallback,instance);
   return;
 }
 
@@ -2329,11 +2332,11 @@ void G2EmulationInstanceSetTotalSections(_Instance *instance,short Total)
 	/* end block 1 */
 	// End Line: 2809
 
-void G2EmulationSetTotalSections(__CharacterState *In,short Total)
+void G2EmulationInstanceSetTotalSections(__CharacterState *In,short Total)
 
 {
   In->TotalSections = (int)Total;
-  G2EmulationInstanceSetTotalSections(In->CharacterInstance,Total);
+  G2EmulationInit(In->CharacterInstance,Total);
   return;
 }
 
@@ -2367,8 +2370,7 @@ void G2EmulationSetTotalSections(__CharacterState *In,short Total)
 	/* end block 4 */
 	// End Line: 2835
 
-void G2EmulationInstanceInitSection
-               (_Instance *instance,int CurrentSection,void *callback,void *data)
+void G2EmulationInstanceQueryFrame(_Instance *instance,int CurrentSection,void *callback,void *data)
 
 {
   _G2AnimSection_Type *p_Var1;
@@ -2395,9 +2397,9 @@ void G2EmulationSetInterpController_Vector
                )
 
 {
-  G2Anim_SetInterpController_Vector
+  G2EmulationSetInterpController_Vector
             (&instance->anim,segment & 0xffU,type & 0xffU,vec,Frames * 0x640000 >> 0x10);
-  G2Anim_SetControllerCallbackData(&instance->anim,segment & 0xffU,type & 0xffU,(void *)Data);
+  G2Anim_SetInterpController_Vector(&instance->anim,segment & 0xffU,type & 0xffU,(void *)Data);
   return;
 }
 
@@ -2421,7 +2423,7 @@ void G2EmulationSetInterpController_Vector
 	/* end block 2 */
 	// End Line: 2920
 
-void StateSwitchStateDataDefault
+void StateSwitchStateCharacterData
                (__CharacterState *In,int CurrentSection,
                TDRFuncPtr_StateSwitchStateDataDefault2NewProcess NewProcess,int Data)
 
@@ -2455,7 +2457,7 @@ void StateSwitchStateDataDefault
 	/* end block 2 */
 	// End Line: 2941
 
-void StateSwitchStateCharacterDataDefault
+void StateSwitchStateDataDefault
                (__CharacterState *In,
                TDRFuncPtr_StateSwitchStateCharacterDataDefault1NewProcess NewProcess,int Data)
 
@@ -2465,7 +2467,7 @@ void StateSwitchStateCharacterDataDefault
   CurrentSection = 0;
   if (0 < In->TotalSections) {
     do {
-      StateSwitchStateDataDefault
+      StateSwitchStateCharacterData
                 (In,CurrentSection,(TDRFuncPtr_StateSwitchStateDataDefault2NewProcess)NewProcess,
                  Data);
       CurrentSection = CurrentSection + 1;
@@ -2493,13 +2495,13 @@ void StateSwitchStateData
   __MessageQueue *In_00;
   
   In_00 = &In->SectionList[CurrentSection].Event;
-  PurgeMessageQueue(In_00);
-  EnMessageQueueData(In_00,(int)&DAT_00100001,Data);
+  EnMessageQueueData(In_00);
+  DeMessageQueue(In_00,(int)&DAT_00100001,Data);
   *(TDRFuncPtr_StateSwitchStateData2NewProcess *)&In->SectionList[CurrentSection].Process =
        NewProcess;
   (*NewProcess)(In,CurrentSection,0);
-  EnMessageQueueData(In_00,(int)&DAT_00100004,0);
-  EnMessageQueueData(In_00,(int)&DAT_00100004,0);
+  DeMessageQueue(In_00,(int)&DAT_00100004,0);
+  DeMessageQueue(In_00,(int)&DAT_00100004,0);
   return;
 }
 
@@ -2523,7 +2525,7 @@ void StateSwitchStateData
 	/* end block 2 */
 	// End Line: 3000
 
-void StateSwitchStateCharacterData
+void StateSwitchStateCharacterDataDefault
                (__CharacterState *In,TDRFuncPtr_StateSwitchStateCharacterData1NewProcess NewProcess,
                int Data)
 
@@ -2590,8 +2592,8 @@ void StateGovernState(__CharacterState *In,int Frames)
       section = (In->CharacterInstance->anim).section + (uVar5 - 1 & 0xff);
       section_00 = (In->CharacterInstance->anim).section + (uVar5 & 0xff);
       if (((section->keylistID == section_00->keylistID) &&
-          (_Var2 = G2AnimSection_IsInInterpolation(section), _Var2 == G2FALSE)) &&
-         (_Var2 = G2AnimSection_IsInInterpolation(section_00), _Var2 == G2FALSE)) {
+          (_Var2 = G2AnimSection_AdvanceOverInterval(section), _Var2 == G2FALSE)) &&
+         (_Var2 = G2AnimSection_AdvanceOverInterval(section_00), _Var2 == G2FALSE)) {
         iVar3 = G2AnimSection_GetKeyframeNumber(section);
         iVar4 = G2AnimSection_GetKeyframeNumber(section_00);
         if (iVar3 != iVar4) {

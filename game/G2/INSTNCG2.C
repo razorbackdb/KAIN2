@@ -20,7 +20,7 @@
 	/* end block 2 */
 	// End Line: 143
 
-void G2Instance_BuildTransformsForList(_Instance *listHead)
+void G2Instance_RebuildTransforms(_Instance *listHead)
 
 {
   _Instance **pp_Var1;
@@ -49,15 +49,15 @@ void G2Instance_BuildTransformsForList(_Instance *listHead)
           }
           if ((pOVar3->animList == (_G2AnimKeylist_Type **)0x0) ||
              ((pOVar3->oflags2 & 0x40000000U) != 0)) {
-            _G2Instance_BuildNonAnimatedTransforms(instance);
+            G2Instance_BuildTransforms(instance);
           }
           else {
-            _G2Instance_BuildAnimatedTransforms(instance);
+            G2Anim_BuildTransforms(instance);
           }
         }
         else {
 LAB_800948a4:
-          _G2Instance_BuildDeactivatedTransforms(instance);
+          PIPE3D_TransformAnimatedSplitInstanceVertices(instance);
         }
       }
       pp_Var1 = &instance->next;
@@ -68,8 +68,8 @@ LAB_800948a4:
     do {
       if ((listHead->rebuildCallback != (_func_6 *)0x0) &&
          (_Var2 = (*listHead->rebuildCallback)(listHead), _Var2 != G2FALSE)) {
-        G2Anim_UpdateStoredFrame(&listHead->anim);
-        G2Instance_RebuildTransforms(listHead);
+        _G2AnimSection_UpdateStoredFrameFromData(&listHead->anim);
+        _G2Instance_BuildNonAnimatedTransforms(listHead);
       }
       listHead = listHead->next;
     } while (listHead != (_Instance *)0x0);
@@ -88,15 +88,15 @@ LAB_800948a4:
 	/* end block 1 */
 	// End Line: 392
 
-void G2Instance_BuildTransforms(_Instance *instance)
+void _G2Instance_BuildAnimatedTransforms(_Instance *instance)
 
 {
   if ((instance->object->animList == (_G2AnimKeylist_Type **)0x0) ||
      ((instance->object->oflags2 & 0x40000000U) != 0)) {
-    _G2Instance_BuildNonAnimatedTransforms(instance);
+    G2Instance_BuildTransforms(instance);
   }
   else {
-    _G2Instance_BuildAnimatedTransforms(instance);
+    G2Anim_BuildTransforms(instance);
   }
   return;
 }
@@ -112,7 +112,7 @@ void G2Instance_BuildTransforms(_Instance *instance)
 	/* end block 1 */
 	// End Line: 420
 
-void G2Instance_RebuildTransforms(_Instance *instance)
+void _G2Instance_BuildNonAnimatedTransforms(_Instance *instance)
 
 {
   if ((instance->object->animList == (_G2AnimKeylist_Type **)0x0) ||
@@ -210,11 +210,11 @@ void _G2Instance_RebuildAnimatedTransforms(_Instance *instance)
   int iVar12;
   int iVar13;
   MATRIX *pMVar14;
-  undefined4 uVar15;
+  u_char uVar15;
   long lVar16;
-  undefined4 uVar17;
+  u_char uVar17;
   long lVar18;
-  undefined4 uVar19;
+  u_char uVar19;
   long lVar20;
   int *piVar21;
   _G2Anim_Type *anim;
@@ -222,8 +222,8 @@ void _G2Instance_RebuildAnimatedTransforms(_Instance *instance)
   _Instance *instance_00;
   MATRIX *pMVar22;
   _Model *p_Var23;
-  undefined4 local_78;
-  undefined4 local_74;
+  u_char local_78;
+  u_char local_74;
   u_int auStack112 [8];
   u_int auStack80 [8];
   ushort auStack48 [4];
@@ -237,8 +237,8 @@ void _G2Instance_RebuildAnimatedTransforms(_Instance *instance)
       sVar2 = (instance->position).x;
       iVar3 = (int)theCamera.core.position.y;
       sVar1 = (instance->position).y;
-      local_78 = *(undefined4 *)&instance->rotation;
-      local_74 = *(undefined4 *)&(instance->rotation).z;
+      local_78 = *(u_char *)&instance->rotation;
+      local_74 = *(u_char *)&(instance->rotation).z;
       (instance->rotation).x = 0;
       (instance->rotation).y = 0;
       sVar2 = MATH3D_FastAtan2(iVar3 - sVar1,iVar6 - sVar2);
@@ -247,33 +247,33 @@ void _G2Instance_RebuildAnimatedTransforms(_Instance *instance)
     if (((instance->flags & 1U) == 0) || (instance->intro == (Intro *)0x0)) {
       anim = &instance->anim;
       if (instance->LinkParent == (_Instance *)0x0) {
-        RotMatrix((ushort *)&instance->rotation,(u_int *)pMVar14);
+        RotMatrixY((ushort *)&instance->rotation,(u_int *)pMVar14);
       }
       else {
-        G2Anim_UpdateStoredFrame(anim);
+        _G2AnimSection_UpdateStoredFrameFromData(anim);
         G2Anim_GetSegChannelValue(anim,1,auStack48,7);
         RotMatrixZYX(auStack48,auStack112);
         G2Anim_GetSegChannelValue(anim,2,auStack48,7);
         RotMatrixZYX(auStack48,auStack80);
         MulMatrix2(auStack112,auStack80);
-        TransposeMatrix(auStack80,(undefined4 *)pMVar14);
+        TransposeMatrix(auStack80,(u_char *)pMVar14);
         pMVar10 = instance->matrix;
         pMVar7 = instance->LinkParent->matrix + instance->ParentLinkNode;
-        uVar15 = *(undefined4 *)(pMVar7->m + 2);
-        uVar17 = *(undefined4 *)(pMVar7->m + 4);
-        uVar19 = *(undefined4 *)(pMVar7->m + 6);
-        *(undefined4 *)pMVar10->m = *(undefined4 *)pMVar7->m;
-        *(undefined4 *)(pMVar10->m + 2) = uVar15;
-        *(undefined4 *)(pMVar10->m + 4) = uVar17;
-        *(undefined4 *)(pMVar10->m + 6) = uVar19;
+        uVar15 = *(u_char *)(pMVar7->m + 2);
+        uVar17 = *(u_char *)(pMVar7->m + 4);
+        uVar19 = *(u_char *)(pMVar7->m + 6);
+        *(u_char *)pMVar10->m = *(u_char *)pMVar7->m;
+        *(u_char *)(pMVar10->m + 2) = uVar15;
+        *(u_char *)(pMVar10->m + 4) = uVar17;
+        *(u_char *)(pMVar10->m + 6) = uVar19;
         lVar16 = pMVar7->t[0];
         lVar18 = pMVar7->t[1];
         lVar20 = pMVar7->t[2];
-        *(undefined4 *)(pMVar10->m + 8) = *(undefined4 *)(pMVar7->m + 8);
+        *(u_char *)(pMVar10->m + 8) = *(u_char *)(pMVar7->m + 8);
         pMVar10->t[0] = lVar16;
         pMVar10->t[1] = lVar18;
         pMVar10->t[2] = lVar20;
-        MulMatrix2((undefined4 *)instance->matrix,(u_int *)pMVar14);
+        MulMatrix2((u_char *)instance->matrix,(u_int *)pMVar14);
         pMVar7 = instance->matrix;
         (instance->position).x = *(short *)instance->matrix->t;
         (instance->position).y = *(short *)(pMVar7->t + 1);
@@ -282,17 +282,17 @@ void _G2Instance_RebuildAnimatedTransforms(_Instance *instance)
     }
     else {
       pMVar4 = instance->intro->multiSpline;
-      uVar15 = *(undefined4 *)((pMVar4->curRotMatrix).m + 2);
-      uVar17 = *(undefined4 *)((pMVar4->curRotMatrix).m + 4);
-      uVar19 = *(undefined4 *)((pMVar4->curRotMatrix).m + 6);
-      *(undefined4 *)pMVar14->m = *(undefined4 *)(pMVar4->curRotMatrix).m;
-      *(undefined4 *)(pMVar22[-1].m + 2) = uVar15;
-      *(undefined4 *)(pMVar22[-1].m + 4) = uVar17;
-      *(undefined4 *)(pMVar22[-1].m + 6) = uVar19;
+      uVar15 = *(u_char *)((pMVar4->curRotMatrix).m + 2);
+      uVar17 = *(u_char *)((pMVar4->curRotMatrix).m + 4);
+      uVar19 = *(u_char *)((pMVar4->curRotMatrix).m + 6);
+      *(u_char *)pMVar14->m = *(u_char *)(pMVar4->curRotMatrix).m;
+      *(u_char *)(pMVar22[-1].m + 2) = uVar15;
+      *(u_char *)(pMVar22[-1].m + 4) = uVar17;
+      *(u_char *)(pMVar22[-1].m + 6) = uVar19;
       lVar16 = (pMVar4->curRotMatrix).t[0];
       lVar18 = (pMVar4->curRotMatrix).t[1];
       lVar20 = (pMVar4->curRotMatrix).t[2];
-      *(undefined4 *)(pMVar22[-1].m + 8) = *(undefined4 *)((pMVar4->curRotMatrix).m + 8);
+      *(u_char *)(pMVar22[-1].m + 8) = *(u_char *)((pMVar4->curRotMatrix).m + 8);
       pMVar22[-1].t[0] = lVar16;
       pMVar22[-1].t[1] = lVar18;
       pMVar22[-1].t[2] = lVar20;
@@ -308,7 +308,7 @@ void _G2Instance_RebuildAnimatedTransforms(_Instance *instance)
     pMVar22[-1].t[1] = (int)(instance->position).y;
     pMVar22[-1].t[2] = (int)(instance->position).z;
     (instance->anim).segMatrices = (_G2Matrix_Type *)instance->matrix;
-    G2Anim_BuildTransforms(&instance->anim);
+    _G2Anim_BuildTransformsNoControllers(&instance->anim);
     if (instance->LinkParent != (_Instance *)0x0) {
       pMVar14 = instance->matrix;
       segNumber = 0;
@@ -321,7 +321,7 @@ void _G2Instance_RebuildAnimatedTransforms(_Instance *instance)
       if (0 < p_Var23->numSegments) {
         piVar21 = pMVar14->t + 2;
         do {
-          _Var5 = G2Anim_IsControllerActive(&instance->anim,segNumber,0x20);
+          _Var5 = G2Anim_DetachControllerFromSeg(&instance->anim,segNumber,0x20);
           if (_Var5 != G2FALSE) break;
           segNumber = segNumber + 1;
           piVar21[-2] = piVar21[-2] + (iVar13 - iVar8);
@@ -342,12 +342,12 @@ void _G2Instance_RebuildAnimatedTransforms(_Instance *instance)
     (instance->position).y = *(short *)(pMVar22[-1].t + 1);
     (instance->position).z = *(short *)(pMVar22[-1].t + 2);
     if ((pOVar9->oflags & 4U) != 0) {
-      *(undefined4 *)&instance->rotation = local_78;
-      *(undefined4 *)&(instance->rotation).z = local_74;
+      *(u_char *)&instance->rotation = local_78;
+      *(u_char *)&(instance->rotation).z = local_74;
     }
     instance_00 = instance->LinkChild;
     while (instance_00 != (_Instance *)0x0) {
-      G2Instance_BuildTransforms(instance_00);
+      _G2Instance_BuildAnimatedTransforms(instance_00);
       instance_00 = instance_00->LinkSibling;
     }
   }
@@ -408,7 +408,7 @@ void G2Instance_ClearMatrices(_Instance *instance)
 	/* end block 3 */
 	// End Line: 839
 
-void _G2Instance_BuildAnimatedTransforms(_Instance *instance)
+void G2Anim_BuildTransforms(_Instance *instance)
 
 {
   MATRIX *pMVar1;
@@ -419,7 +419,7 @@ void _G2Instance_BuildAnimatedTransforms(_Instance *instance)
   if (((uVar2 & 0x10000000) == 0) ||
      (((uVar2 & 0x4000000) == 0 &&
       (((uVar2 & 0x20000000) == 0 || ((instance->flags & 0x800U) == 0)))))) {
-    pMVar1 = GAMELOOP_GetMatrices
+    pMVar1 = GAMELOOP_GetTimeOfDayIdx
                        (instance->object->modelList[instance->currentModel]->numSegments + 1);
     if (pMVar1 == (MATRIX *)0x0) {
       instance->matrix = (MATRIX *)0x0;
@@ -469,11 +469,11 @@ void _G2Instance_RebuildNonAnimatedTransforms(_Instance *instance)
 
 {
   MultiSpline *pMVar1;
-  undefined4 uVar2;
+  u_char uVar2;
   long lVar3;
-  undefined4 uVar4;
+  u_char uVar4;
   long lVar5;
-  undefined4 uVar6;
+  u_char uVar6;
   long lVar7;
   _Instance *instance_00;
   MATRIX *mat;
@@ -505,22 +505,22 @@ void _G2Instance_RebuildNonAnimatedTransforms(_Instance *instance)
                 MATH3D_SetUnityMatrix(mat);
               }
               else {
-                RotMatrix((ushort *)&instance->rotation,(u_int *)mat);
+                RotMatrixY((ushort *)&instance->rotation,(u_int *)mat);
               }
             }
             else {
               pMVar1 = instance->intro->multiSpline;
-              uVar6 = *(undefined4 *)((pMVar1->curRotMatrix).m + 2);
-              uVar2 = *(undefined4 *)((pMVar1->curRotMatrix).m + 4);
-              uVar4 = *(undefined4 *)((pMVar1->curRotMatrix).m + 6);
-              *(undefined4 *)mat->m = *(undefined4 *)(pMVar1->curRotMatrix).m;
-              *(undefined4 *)(mat->m + 2) = uVar6;
-              *(undefined4 *)(mat->m + 4) = uVar2;
-              *(undefined4 *)(mat->m + 6) = uVar4;
+              uVar6 = *(u_char *)((pMVar1->curRotMatrix).m + 2);
+              uVar2 = *(u_char *)((pMVar1->curRotMatrix).m + 4);
+              uVar4 = *(u_char *)((pMVar1->curRotMatrix).m + 6);
+              *(u_char *)mat->m = *(u_char *)(pMVar1->curRotMatrix).m;
+              *(u_char *)(mat->m + 2) = uVar6;
+              *(u_char *)(mat->m + 4) = uVar2;
+              *(u_char *)(mat->m + 6) = uVar4;
               lVar7 = (pMVar1->curRotMatrix).t[0];
               lVar3 = (pMVar1->curRotMatrix).t[1];
               lVar5 = (pMVar1->curRotMatrix).t[2];
-              *(undefined4 *)(mat->m + 8) = *(undefined4 *)((pMVar1->curRotMatrix).m + 8);
+              *(u_char *)(mat->m + 8) = *(u_char *)((pMVar1->curRotMatrix).m + 8);
               mat->t[0] = lVar7;
               mat->t[1] = lVar3;
               mat->t[2] = lVar5;
@@ -533,11 +533,11 @@ void _G2Instance_RebuildNonAnimatedTransforms(_Instance *instance)
             *(int *)(puVar8 + 5) = (int)(instance->position).z;
           }
           else {
-            RotMatrix((ushort *)&instance->rotation,(u_int *)&DAT_1f800038);
+            RotMatrixY((ushort *)&instance->rotation,(u_int *)&DAT_1f800038);
             if (local_30 != 0) {
               ScaleMatrix((int *)&DAT_1f800038,&DAT_1f800028);
             }
-            _G2Instance_BuildFacadeTransforms
+            G2Instance_BuildTransformsForList
                       (instance,segment,mat,(MATRIX *)&DAT_1f800038,(u_int)local_30);
           }
         }
@@ -550,7 +550,7 @@ void _G2Instance_RebuildNonAnimatedTransforms(_Instance *instance)
     }
     instance_00 = instance->LinkChild;
     while (instance_00 != (_Instance *)0x0) {
-      G2Instance_BuildTransforms(instance_00);
+      _G2Instance_BuildAnimatedTransforms(instance_00);
       instance_00 = instance_00->LinkSibling;
     }
   }
@@ -580,7 +580,7 @@ void _G2Instance_RebuildNonAnimatedTransforms(_Instance *instance)
 	/* end block 2 */
 	// End Line: 1335
 
-void _G2Instance_BuildDeactivatedTransforms(_Instance *instance)
+void PIPE3D_TransformAnimatedSplitInstanceVertices(_Instance *instance)
 
 {
   MATRIX *__dest;
@@ -602,7 +602,7 @@ void _G2Instance_BuildDeactivatedTransforms(_Instance *instance)
     else {
       numMatrices = pOVar2->modelList[instance->currentModel]->numSegments + 1;
     }
-    __dest = GAMELOOP_GetMatrices(numMatrices);
+    __dest = GAMELOOP_GetTimeOfDayIdx(numMatrices);
     if (__dest == (MATRIX *)0x0) {
       instance->matrix = (MATRIX *)0x0;
     }
@@ -621,7 +621,7 @@ void _G2Instance_BuildDeactivatedTransforms(_Instance *instance)
       }
       instance_00 = instance->LinkChild;
       while (instance_00 != (_Instance *)0x0) {
-        G2Instance_BuildTransforms(instance_00);
+        _G2Instance_BuildAnimatedTransforms(instance_00);
         instance_00 = instance_00->LinkSibling;
       }
     }
@@ -653,7 +653,7 @@ void _G2Instance_BuildDeactivatedTransforms(_Instance *instance)
 	/* end block 2 */
 	// End Line: 1464
 
-void _G2Instance_BuildNonAnimatedTransforms(_Instance *instance)
+void G2Instance_BuildTransforms(_Instance *instance)
 
 {
   MATRIX *pMVar1;
@@ -664,7 +664,8 @@ void _G2Instance_BuildNonAnimatedTransforms(_Instance *instance)
   if (((uVar3 & 0x10000000) == 0) ||
      (((uVar3 & 0x4000000) == 0 &&
       (((uVar3 & 0x20000000) == 0 || ((instance->flags & 0x800U) == 0)))))) {
-    pMVar1 = GAMELOOP_GetMatrices(instance->object->modelList[instance->currentModel]->numSegments);
+    pMVar1 = GAMELOOP_GetTimeOfDayIdx
+                       (instance->object->modelList[instance->currentModel]->numSegments);
     if (pMVar1 == (MATRIX *)0x0) {
       instance->matrix = (MATRIX *)0x0;
     }
@@ -725,7 +726,7 @@ void _G2Instance_BuildNonAnimatedTransforms(_Instance *instance)
 	/* end block 2 */
 	// End Line: 1537
 
-void _G2Instance_BuildFacadeTransforms
+void G2Instance_BuildTransformsForList
                (_Instance *instance,_Segment *segment,MATRIX *segMatrix,MATRIX *matrixPool,
                long scale_flag)
 
@@ -738,7 +739,7 @@ void _G2Instance_BuildFacadeTransforms
     DAT_1f80000c = (instance->position).z;
   }
   else {
-    ApplyMatrixSV(matrixPool,&segment->px,&DAT_1f800008);
+    ApplyMatrix(matrixPool,&segment->px,&DAT_1f800008);
     DAT_1f800008 = DAT_1f800008 + (instance->position).x;
     DAT_1f80000a = DAT_1f80000a + (instance->position).y;
     DAT_1f80000c = DAT_1f80000c + (instance->position).z;
@@ -751,7 +752,7 @@ void _G2Instance_BuildFacadeTransforms
       DAT_1f800018 = (int)DAT_1f800000 - (int)DAT_1f800008;
       DAT_1f80001c = (int)DAT_1f800002 - (int)DAT_1f80000a;
       DAT_1f800020 = (int)DAT_1f800004 - (int)DAT_1f80000c;
-      y = MATH3D_LengthXY(DAT_1f800018,DAT_1f80001c);
+      y = MATH3D_LengthXYZ(DAT_1f800018,DAT_1f80001c);
       DAT_1f800010 = MATH3D_FastAtan2(y,DAT_1f800020);
       DAT_1f800010 = DAT_1f800010 + 0xc00;
       DAT_1f800014 = MATH3D_FastAtan2(DAT_1f80001c,DAT_1f800018);
@@ -760,8 +761,8 @@ void _G2Instance_BuildFacadeTransforms
       if (scale_flag != 0) {
         ScaleMatrix((int *)segMatrix,&DAT_1f800028);
       }
-      RotMatrixX((int)DAT_1f800010,(int)segMatrix);
-      RotMatrixZ((int)DAT_1f800014,(u_int *)segMatrix);
+      RotMatrixZ((int)DAT_1f800010,(int)segMatrix);
+      RotMatrixX((int)DAT_1f800014,(u_int *)segMatrix);
     }
   }
   else {
@@ -773,21 +774,21 @@ void _G2Instance_BuildFacadeTransforms
     DAT_1f800010 = -DAT_1f800010;
     DAT_1f800012 = MATH3D_FastAtan2((int)(short)DAT_1f800058,y >> 0xc);
     DAT_1f800014 = 0;
-    RotMatrix(&DAT_1f800010,&DAT_1f800070);
-    TransposeMatrix(&DAT_1f800070,(undefined4 *)&DAT_1f800038);
+    RotMatrixY(&DAT_1f800010,&DAT_1f800070);
+    TransposeMatrix(&DAT_1f800070,(u_char *)&DAT_1f800038);
     DAT_1f800060._0_2_ = DAT_1f800000 - DAT_1f800008;
     DAT_1f800060._2_2_ = DAT_1f800002 - DAT_1f80000a;
     DAT_1f800064 = DAT_1f800004 - DAT_1f80000c;
-    ApplyMatrixSV(&DAT_1f800038,&DAT_1f800060,&DAT_1f800068);
+    ApplyMatrix(&DAT_1f800038,&DAT_1f800060,&DAT_1f800068);
     MATH3D_SetUnityMatrix(segMatrix);
     if (scale_flag != 0) {
       ScaleMatrix((int *)segMatrix,&DAT_1f800028);
     }
     DAT_1f800014 = MATH3D_FastAtan2((int)DAT_1f80006a,(int)DAT_1f800068);
     DAT_1f800014 = DAT_1f800014 + 0x400;
-    RotMatrixZ((int)DAT_1f800014,(u_int *)segMatrix);
-    RotMatrixY((int)DAT_1f800012,(u_int *)segMatrix);
-    RotMatrixX((int)DAT_1f800010,(int)segMatrix);
+    RotMatrixX((int)DAT_1f800014,(u_int *)segMatrix);
+    RotMatrix((int)DAT_1f800012,(u_int *)segMatrix);
+    RotMatrixZ((int)DAT_1f800010,(int)segMatrix);
   }
   return;
 }

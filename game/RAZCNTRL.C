@@ -16,7 +16,7 @@
 	/* end block 2 */
 	// End Line: 137
 
-void ProcessRazControl(long *command)
+void FX_ProcessRain(long *command)
 
 {
   if ((*command & 0x20) == 0) {

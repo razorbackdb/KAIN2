@@ -214,10 +214,10 @@ void start(void)
 
 {
   DebugMenuLine *pDVar1;
-  undefined4 unaff_s0;
-  undefined4 unaff_s1;
-  undefined4 unaff_retaddr;
-  undefined4 uVar2;
+  u_char unaff_s0;
+  u_char unaff_s1;
+  u_char unaff_retaddr;
+  u_char uVar2;
   
   pDVar1 = &debugSoundMenu;
   do {

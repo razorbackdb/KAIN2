@@ -36,7 +36,7 @@
 	/* end block 5 */
 	// End Line: 71
 
-void G2Anim_DisableSegment(_G2Anim_Type *anim,int segmentID)
+void G2Anim_EnableSegment(_G2Anim_Type *anim,int segmentID)
 
 {
   *(u_int *)(&anim->sectionCount + (segmentID >> 5) * 4 + 0x18) =
@@ -75,7 +75,7 @@ void G2Anim_DisableSegment(_G2Anim_Type *anim,int segmentID)
 	/* end block 4 */
 	// End Line: 108
 
-void G2Anim_EnableSegment(_G2Anim_Type *anim,int segmentID)
+void G2Anim_DisableSegment(_G2Anim_Type *anim,int segmentID)
 
 {
   *(u_int *)(&anim->sectionCount + (segmentID >> 5) * 4 + 0x18) =
@@ -173,7 +173,7 @@ _G2AnimKeylist_Type * G2Anim_GetKeylist(_G2Anim_Type *anim)
 	/* end block 2 */
 	// End Line: 311
 
-void G2Anim_GetRootMotionOverInterval
+void G2AnimSection_UpdateOverInterval
                (_G2Anim_Type *anim,short intervalStart,short intervalEnd,
                _G2SVector3_Type *motionVector)
 
@@ -344,8 +344,7 @@ void G2Anim_SetAlphaTable(_G2Anim_Type *anim,_G2AnimAlphaTable_Type *table)
 	/* end block 4 */
 	// End Line: 573
 
-void G2Anim_SetCallback(_G2Anim_Type *anim,TDRFuncPtr_G2Anim_SetCallback1callback callback,
-                       void *data)
+void MON_AnimCallback(_G2Anim_Type *anim,TDRFuncPtr_G2Anim_SetCallback1callback callback,void *data)
 
 {
   int iVar1;
@@ -394,7 +393,7 @@ void G2Anim_SetLooping(_G2Anim_Type *anim)
   if (anim->sectionCount != '\0') {
     iVar2 = 0x24;
     do {
-      G2AnimSection_SetLooping((_G2AnimSection_Type *)(&anim->sectionCount + iVar2));
+      G2Anim_SetNoLooping((_G2AnimSection_Type *)(&anim->sectionCount + iVar2));
       iVar1 = iVar1 + 1;
       iVar2 = iVar2 + 0x30;
     } while (iVar1 < (int)(u_int)anim->sectionCount);
@@ -422,7 +421,7 @@ void G2Anim_SetLooping(_G2Anim_Type *anim)
 	/* end block 2 */
 	// End Line: 1126
 
-void G2Anim_SetNoLooping(_G2Anim_Type *anim)
+void G2Anim_SetLooping(_G2Anim_Type *anim)
 
 {
   int iVar1;
@@ -460,7 +459,7 @@ void G2Anim_SetNoLooping(_G2Anim_Type *anim)
 	/* end block 2 */
 	// End Line: 1178
 
-void G2Anim_SetPaused(_G2Anim_Type *anim)
+void _G2AnimSection_TriggerEffects(_G2Anim_Type *anim)
 
 {
   int iVar1;
@@ -470,7 +469,7 @@ void G2Anim_SetPaused(_G2Anim_Type *anim)
   if (anim->sectionCount != '\0') {
     iVar2 = 0x24;
     do {
-      G2AnimSection_SetPaused((_G2AnimSection_Type *)(&anim->sectionCount + iVar2));
+      G2AnimSection_SetNotRewinding((_G2AnimSection_Type *)(&anim->sectionCount + iVar2));
       iVar1 = iVar1 + 1;
       iVar2 = iVar2 + 0x30;
     } while (iVar1 < (int)(u_int)anim->sectionCount);
@@ -546,7 +545,7 @@ void G2Anim_SetSpeedAdjustment(_G2Anim_Type *anim,long adjustment)
 	/* end block 2 */
 	// End Line: 1293
 
-void G2Anim_SetUnpaused(_G2Anim_Type *anim)
+void G2Anim_SetPaused(_G2Anim_Type *anim)
 
 {
   int iVar1;
@@ -556,7 +555,7 @@ void G2Anim_SetUnpaused(_G2Anim_Type *anim)
   if (anim->sectionCount != '\0') {
     iVar2 = 0x24;
     do {
-      G2AnimSection_SetUnpaused((_G2AnimSection_Type *)(&anim->sectionCount + iVar2));
+      G2Anim_SetUnpaused((_G2AnimSection_Type *)(&anim->sectionCount + iVar2));
       iVar1 = iVar1 + 1;
       iVar2 = iVar2 + 0x30;
     } while (iVar1 < (int)(u_int)anim->sectionCount);
@@ -584,7 +583,7 @@ void G2Anim_SetUnpaused(_G2Anim_Type *anim)
 	/* end block 2 */
 	// End Line: 1349
 
-void G2Anim_SwitchToKeylist(_G2Anim_Type *anim,_G2AnimKeylist_Type *keylist,int keylistID)
+void G2Anim_GetKeylist(_G2Anim_Type *anim,_G2AnimKeylist_Type *keylist,int keylistID)
 
 {
   int iVar1;
@@ -594,8 +593,8 @@ void G2Anim_SwitchToKeylist(_G2Anim_Type *anim,_G2AnimKeylist_Type *keylist,int 
   if (anim->sectionCount != '\0') {
     iVar2 = 0x24;
     do {
-      G2AnimSection_SwitchToKeylist
-                ((_G2AnimSection_Type *)(&anim->sectionCount + iVar2),keylist,keylistID);
+      G2Anim_SwitchToKeylist((_G2AnimSection_Type *)(&anim->sectionCount + iVar2),keylist,keylistID)
+      ;
       iVar1 = iVar1 + 1;
       iVar2 = iVar2 + 0x30;
     } while (iVar1 < (int)(u_int)anim->sectionCount);
@@ -665,7 +664,7 @@ int G2AnimKeylist_GetKeyframeCount(_G2AnimKeylist_Type *keylist)
 	/* end block 2 */
 	// End Line: 1095
 
-void G2AnimSection_ClearAlarm(_G2AnimSection_Type *section,u_long flag)
+void G2AnimSection_SetLooping(_G2AnimSection_Type *section,u_long flag)
 
 {
   section->alarmFlags = section->alarmFlags & ~flag;
@@ -690,7 +689,7 @@ int G2AnimSection_GetKeyframeNumber(_G2AnimSection_Type *section)
   short sVar2;
   _G2Bool_Enum _Var3;
   
-  _Var3 = G2AnimSection_IsInInterpolation(section);
+  _Var3 = G2AnimSection_AdvanceOverInterval(section);
   if (_Var3 == G2FALSE) {
     sVar2 = section->elapsedTime;
     bVar1 = section->keylist->s0TailTime;
@@ -723,7 +722,7 @@ int G2AnimSection_GetKeyframeNumber(_G2AnimSection_Type *section)
 	/* end block 3 */
 	// End Line: 1343
 
-int G2AnimSection_GetStoredKeyframeNumber(_G2AnimSection_Type *section)
+int _G2AnimSection_GetAnim(_G2AnimSection_Type *section)
 
 {
   return (int)section->storedTime / (int)(u_int)section->keylist->s0TailTime;
@@ -752,7 +751,7 @@ void G2AnimSection_InterpToKeylistFrame
                int targetFrame,int duration)
 
 {
-  G2AnimSection_InterpToKeylistAtTime
+  G2AnimSection_SwitchToKeylist
             (section,keylist,keylistID,(short)targetFrame * (ushort)keylist->s0TailTime,
              (int)(short)duration);
   return;
@@ -788,7 +787,7 @@ void G2AnimSection_InterpToKeylistFrame
 	/* end block 4 */
 	// End Line: 1416
 
-_G2Bool_Enum G2AnimSection_IsInInterpolation(_G2AnimSection_Type *section)
+_G2Bool_Enum G2AnimSection_AdvanceOverInterval(_G2AnimSection_Type *section)
 
 {
   if ((section->interpInfo != (_G2AnimInterpInfo_Type *)0x0) &&
@@ -809,16 +808,16 @@ _G2Bool_Enum G2AnimSection_IsInInterpolation(_G2AnimSection_Type *section)
 	/* end block 1 */
 	// End Line: 1526
 
-short G2AnimSection_NextKeyframe(_G2AnimSection_Type *section)
+short G2AnimSection_JumpToTime(_G2AnimSection_Type *section)
 
 {
   short interval;
   
   interval = 0;
   if ((section->flags & 1) == 0) {
-    G2AnimSection_SetNotRewinding(section);
+    G2AnimSection_SetLoopRangeAll(section);
     interval = G2Timer_GetFrameTime();
-    interval = G2AnimSection_UpdateOverInterval(section,interval);
+    interval = G2AnimSection_SetInterpInfo(section,interval);
   }
   return interval;
 }
@@ -859,7 +858,8 @@ void G2AnimSection_SetAlphaTable(_G2AnimSection_Type *section,_G2AnimAlphaTable_
 	/* end block 1 */
 	// End Line: 1663
 
-void G2AnimSection_SetInterpInfo(_G2AnimSection_Type *section,_G2AnimInterpInfo_Type *newInfoPtr)
+void _G2AnimSection_InterpStateToQuat
+               (_G2AnimSection_Type *section,_G2AnimInterpInfo_Type *newInfoPtr)
 
 {
   section->interpInfo = newInfoPtr;
@@ -880,11 +880,11 @@ void G2AnimSection_SetInterpInfo(_G2AnimSection_Type *section,_G2AnimInterpInfo_
 	/* end block 1 */
 	// End Line: 2388
 
-void G2AnimSection_SetLooping(_G2AnimSection_Type *section)
+void G2Anim_SetNoLooping(_G2AnimSection_Type *section)
 
 {
-  G2AnimSection_ClearAlarm(section,3);
-  G2AnimSection_SetLoopRangeAll(section);
+  G2AnimSection_SetLooping(section,3);
+  G2AnimSection_SetPaused(section);
   section->flags = section->flags | 2;
   return;
 }
@@ -900,7 +900,7 @@ void G2AnimSection_SetLooping(_G2AnimSection_Type *section)
 	/* end block 1 */
 	// End Line: 1741
 
-void G2AnimSection_SetLoopRangeAll(_G2AnimSection_Type *section)
+void G2AnimSection_SetPaused(_G2AnimSection_Type *section)
 
 {
   short sVar1;
@@ -950,7 +950,7 @@ void G2AnimSection_SetNoLooping(_G2AnimSection_Type *section)
 	/* end block 2 */
 	// End Line: 1808
 
-void G2AnimSection_SetNotRewinding(_G2AnimSection_Type *section)
+void G2AnimSection_SetLoopRangeAll(_G2AnimSection_Type *section)
 
 {
   section->flags = section->flags & 0xfb;
@@ -973,7 +973,7 @@ void G2AnimSection_SetNotRewinding(_G2AnimSection_Type *section)
 	/* end block 2 */
 	// End Line: 1826
 
-void G2AnimSection_SetPaused(_G2AnimSection_Type *section)
+void G2AnimSection_SetNotRewinding(_G2AnimSection_Type *section)
 
 {
   section->flags = section->flags | 1;
@@ -996,7 +996,7 @@ void G2AnimSection_SetPaused(_G2AnimSection_Type *section)
 	/* end block 2 */
 	// End Line: 1883
 
-void G2AnimSection_SetUnpaused(_G2AnimSection_Type *section)
+void G2Anim_SetUnpaused(_G2AnimSection_Type *section)
 
 {
   section->flags = section->flags & 0xfe;
@@ -1014,11 +1014,10 @@ void G2AnimSection_SetUnpaused(_G2AnimSection_Type *section)
 	/* end block 1 */
 	// End Line: 1902
 
-void G2AnimSection_SwitchToKeylist
-               (_G2AnimSection_Type *section,_G2AnimKeylist_Type *keylist,int keylistID)
+void G2Anim_SwitchToKeylist(_G2AnimSection_Type *section,_G2AnimKeylist_Type *keylist,int keylistID)
 
 {
-  G2AnimSection_SwitchToKeylistAtTime(section,keylist,keylistID,0);
+  G2AnimSection_InterpToKeylistAtTime(section,keylist,keylistID,0);
   return;
 }
 

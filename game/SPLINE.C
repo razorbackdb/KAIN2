@@ -139,7 +139,7 @@ void SplineSetDefDenom(Spline *spline,SplineDef *def,int denomFlag)
 	/* end block 2 */
 	// End Line: 493
 
-ushort SplineGetFrameNumber(Spline *spline,SplineDef *def)
+ushort SCRIPT_GetSplineFrameNumber(Spline *spline,SplineDef *def)
 
 {
   ushort uVar1;
@@ -424,13 +424,13 @@ _SVector * SplineGetFirstPoint(Spline *spline,SplineDef *def)
 	/* end block 2 */
 	// End Line: 996
 
-_SVector * SplineGetNextPoint(Spline *spline,SplineDef *def)
+_SVector * SplineGetOffsetNextPoint(Spline *spline,SplineDef *def)
 
 {
   u_long uVar1;
   
-  uVar1 = SplineGetNext(spline,def);
-  if ((uVar1 != 0) && (uVar1 = SplineGetData(spline,def,&point_53), uVar1 != 0)) {
+  uVar1 = SplineGetNextPointDC(spline,def);
+  if ((uVar1 != 0) && (uVar1 = SplineGetNext(spline,def,&point_53), uVar1 != 0)) {
     return (_SVector *)&point_53;
   }
   return (_SVector *)0x0;
@@ -456,13 +456,13 @@ _SVector * SplineGetNextPoint(Spline *spline,SplineDef *def)
 	/* end block 2 */
 	// End Line: 847
 
-_SVector * SplineGetPreviousPoint(Spline *spline,SplineDef *def)
+_SVector * SplineGetOffsetPreviousPoint(Spline *spline,SplineDef *def)
 
 {
   u_long uVar1;
   
-  uVar1 = SplineGetPrev(spline,def);
-  if ((uVar1 != 0) && (uVar1 = SplineGetData(spline,def,&point_56), uVar1 != 0)) {
+  uVar1 = SplineGetData(spline,def);
+  if ((uVar1 != 0) && (uVar1 = SplineGetNext(spline,def,&point_56), uVar1 != 0)) {
     return (_SVector *)&point_56;
   }
   return (_SVector *)0x0;
@@ -501,7 +501,7 @@ _SVector * SplineGetPreviousPoint(Spline *spline,SplineDef *def)
 	/* end block 2 */
 	// End Line: 901
 
-_SVector * SplineGetNearestPoint(Spline *spline,_SVector *point,SplineDef *def)
+_SVector * CAMERA_SplineGetNearestPoint2(Spline *spline,_SVector *point,SplineDef *def)
 
 {
   int iVar1;
@@ -510,9 +510,9 @@ _SVector * SplineGetNearestPoint(Spline *spline,_SVector *point,SplineDef *def)
   int iVar4;
   int iVar5;
   short *psVar6;
-  undefined4 in_t2;
-  undefined4 uVar7;
-  undefined4 in_t3;
+  u_char in_t2;
+  u_char uVar7;
+  u_char in_t3;
   int iVar8;
   short sVar9;
   int iVar10;
@@ -592,7 +592,7 @@ _SVector * SplineGetNearestPoint(Spline *spline,_SVector *point,SplineDef *def)
   if (0 < iVar13) {
     do {
       local_30 = def;
-      SplineGetData(spline,&local_40,&dpoint_59);
+      SplineGetNext(spline,&local_40,&dpoint_59);
       local_40.fracCurr = local_40.fracCurr + 0x1000;
       setCopReg(2,def,(int)point->x - (int)dpoint_59);
       setCopReg(2,uVar7,(int)point->y - (int)DAT_800d2662);
@@ -624,7 +624,7 @@ _SVector * SplineGetNearestPoint(Spline *spline,_SVector *point,SplineDef *def)
   def->fracCurr = iVar10 << 0xc;
 LAB_80041f5c:
   def->denomFlag = 0;
-  SplineGetData(spline,def,&dpoint_59);
+  SplineGetNext(spline,def,&dpoint_59);
   return (_SVector *)&dpoint_59;
 }
 
@@ -678,7 +678,7 @@ LAB_80041f5c:
 	/* end block 2 */
 	// End Line: 1853
 
-u_long SplineGetData(Spline *spline,SplineDef *def,void *p)
+u_long SplineGetNext(Spline *spline,SplineDef *def,void *p)
 
 {
   short sVar1;
@@ -691,10 +691,10 @@ u_long SplineGetData(Spline *spline,SplineDef *def,void *p)
   int iVar8;
   u_long uVar9;
   u_long uVar10;
-  undefined4 local_28;
-  undefined4 local_24;
-  undefined4 local_20;
-  undefined4 local_1c;
+  u_char local_28;
+  u_char local_24;
+  u_char local_20;
+  u_char local_1c;
   
   uVar9 = 0;
   uVar10 = uVar9;
@@ -722,8 +722,8 @@ u_long SplineGetData(Spline *spline,SplineDef *def,void *p)
         }
         else {
           psVar5 = &spline->key->count + (int)def->currkey * 5;
-          local_28 = *(undefined4 *)(psVar5 + 1);
-          local_24 = *(undefined4 *)(psVar5 + 3);
+          local_28 = *(u_char *)(psVar5 + 1);
+          local_24 = *(u_char *)(psVar5 + 3);
         }
       }
       else {
@@ -739,9 +739,9 @@ u_long SplineGetData(Spline *spline,SplineDef *def,void *p)
         }
       }
       if (!bVar3) {
-        G2Quat_ToEuler((_G2Quat_Type *)&local_28,(_G2EulerAngles_Type *)&local_20,0x15);
-        *(undefined4 *)p = local_20;
-        *(undefined4 *)((int)p + 4) = local_1c;
+        G2Quat_FromEuler_S((_G2Quat_Type *)&local_28,(_G2EulerAngles_Type *)&local_20,0x15);
+        *(u_char *)p = local_20;
+        *(u_char *)((int)p + 4) = local_1c;
       }
     }
   }
@@ -781,8 +781,8 @@ u_long SplineGetQuatData(Spline *spline,SplineDef *def,void *p)
 
 {
   short *psVar1;
-  undefined4 local_20;
-  undefined4 local_1c;
+  u_char local_20;
+  u_char local_1c;
   
   if (spline == (Spline *)0x0) {
     return 0;
@@ -806,11 +806,11 @@ u_long SplineGetQuatData(Spline *spline,SplineDef *def,void *p)
     }
   }
   psVar1 = &spline->key->count + (int)def->currkey * 5;
-  local_20 = *(undefined4 *)(psVar1 + 1);
-  local_1c = *(undefined4 *)(psVar1 + 3);
+  local_20 = *(u_char *)(psVar1 + 1);
+  local_1c = *(u_char *)(psVar1 + 3);
 LAB_800422b0:
-  *(undefined4 *)p = local_20;
-  *(undefined4 *)((int)p + 4) = local_1c;
+  *(u_char *)p = local_20;
+  *(u_char *)((int)p + 4) = local_1c;
   return 1;
 }
 
@@ -835,7 +835,7 @@ LAB_800422b0:
 	/* end block 2 */
 	// End Line: 1806
 
-u_long SplineGetNext(Spline *spline,SplineDef *def)
+u_long SplineGetNextPointDC(Spline *spline,SplineDef *def)
 
 {
   short sVar1;
@@ -902,7 +902,7 @@ u_long SplineGetNext(Spline *spline,SplineDef *def)
 	/* end block 2 */
 	// End Line: 1942
 
-u_long SplineGetPrev(Spline *spline,SplineDef *def)
+u_long SplineGetData(Spline *spline,SplineDef *def)
 
 {
   short sVar1;
@@ -972,7 +972,7 @@ LAB_80042518:
 	/* end block 2 */
 	// End Line: 2120
 
-u_long SplineGetOffsetNext(Spline *spline,SplineDef *def,long fracOffset)
+u_long SplineGetOffsetPrev(Spline *spline,SplineDef *def,long fracOffset)
 
 {
   short sVar1;
@@ -1066,7 +1066,7 @@ LAB_80042674:
 	/* end block 2 */
 	// End Line: 2281
 
-u_long SplineGetOffsetPrev(Spline *spline,SplineDef *def,long fracOffset)
+u_long SplineGetOffsetNext(Spline *spline,SplineDef *def,long fracOffset)
 
 {
   short sVar1;
@@ -1138,13 +1138,13 @@ code_r0x80042844:
 	/* end block 2 */
 	// End Line: 2426
 
-_SVector * SplineGetOffsetNextPoint(Spline *spline,SplineDef *def,long offset)
+_SVector * SplineGetNextPoint(Spline *spline,SplineDef *def,long offset)
 
 {
   u_long uVar1;
   
-  uVar1 = SplineGetOffsetNext(spline,def,offset);
-  if ((uVar1 != 0) && (uVar1 = SplineGetData(spline,def,&point_77), uVar1 != 0)) {
+  uVar1 = SplineGetOffsetPrev(spline,def,offset);
+  if ((uVar1 != 0) && (uVar1 = SplineGetNext(spline,def,&point_77), uVar1 != 0)) {
     return (_SVector *)&point_77;
   }
   return (_SVector *)0x0;
@@ -1170,13 +1170,13 @@ _SVector * SplineGetOffsetNextPoint(Spline *spline,SplineDef *def,long offset)
 	/* end block 2 */
 	// End Line: 2456
 
-_SVector * SplineGetOffsetPreviousPoint(Spline *spline,SplineDef *def,long offset)
+_SVector * SplineGetPrev(Spline *spline,SplineDef *def,long offset)
 
 {
   u_long uVar1;
   
-  uVar1 = SplineGetOffsetPrev(spline,def,offset);
-  if ((uVar1 != 0) && (uVar1 = SplineGetData(spline,def,&point_80), uVar1 != 0)) {
+  uVar1 = SplineGetOffsetNext(spline,def,offset);
+  if ((uVar1 != 0) && (uVar1 = SplineGetNext(spline,def,&point_80), uVar1 != 0)) {
     return (_SVector *)&point_80;
   }
   return (_SVector *)0x0;

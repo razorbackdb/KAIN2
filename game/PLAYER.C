@@ -16,7 +16,7 @@ void PLAYER_TurnHead(_Instance *instance,short *rotx,short *rotz,GameTracker *ga
 {
   u_long uVar1;
   
-  uVar1 = INSTANCE_Query(instance,1);
+  uVar1 = INSTANCE_Post(instance,1);
   if ((uVar1 & 1) == 0) {
     MONAPI_TurnHead(instance,rotx,rotz,gameTracker);
   }
@@ -37,18 +37,18 @@ void PLAYER_TurnHead(_Instance *instance,short *rotx,short *rotz,GameTracker *ga
 	/* end block 1 */
 	// End Line: 67
 
-long PLAYER_OkToLookAround(_Instance *instance)
+long RAZIEL_OkToLookAround(_Instance *instance)
 
 {
   u_long uVar1;
   long lVar2;
   
-  uVar1 = INSTANCE_Query(instance,1);
+  uVar1 = INSTANCE_Post(instance,1);
   if ((uVar1 & 1) == 0) {
     lVar2 = MONAPI_OkToLookAround(instance);
   }
   else {
-    lVar2 = RAZIEL_OkToLookAround(instance);
+    lVar2 = PLAYER_OkToLookAround(instance);
   }
   return lVar2;
 }
@@ -74,7 +74,7 @@ void PLAYER_SetLookAround(_Instance *instance)
 {
   u_long uVar1;
   
-  uVar1 = INSTANCE_Query(instance,1);
+  uVar1 = INSTANCE_Post(instance,1);
   if ((uVar1 & 1) == 0) {
     MONAPI_SetLookAround(instance);
   }
@@ -95,17 +95,17 @@ void PLAYER_SetLookAround(_Instance *instance)
 	/* end block 1 */
 	// End Line: 101
 
-void PLAYER_ReSetLookAround(_Instance *instance)
+void RAZIEL_ResetLookAround(_Instance *instance)
 
 {
   u_long uVar1;
   
-  uVar1 = INSTANCE_Query(instance,1);
+  uVar1 = INSTANCE_Post(instance,1);
   if ((uVar1 & 1) == 0) {
     MONAPI_ResetLookAround(instance);
   }
   else {
-    RAZIEL_ResetLookAround(instance);
+    PLAYER_ReSetLookAround(instance);
   }
   return;
 }

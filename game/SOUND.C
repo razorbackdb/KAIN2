@@ -129,7 +129,7 @@ SoundEffectChannel * SndGetSfxChannel(int channelNum)
 	/* end block 3 */
 	// End Line: 215
 
-void SOUND_ProcessInstanceSounds
+void SOUND_StartInstanceSound
                (u_char *sfxFileData,SoundInstance *soundInstTbl,_Position *position,
                int livesInOnePlace,int inSpectral,int hidden,long *triggerFlags)
 
@@ -203,7 +203,7 @@ LAB_8003f3a0:
 	/* end block 2 */
 	// End Line: 347
 
-void SOUND_EndInstanceSounds(u_char *sfxFileData,SoundInstance *soundInstTbl)
+void SOUND_StopInstanceSound(u_char *sfxFileData,SoundInstance *soundInstTbl)
 
 {
   byte bVar1;
@@ -712,7 +712,7 @@ void processEventSound(_Position *position,SoundInstance *soundInst,ObjectEventS
 	/* end block 2 */
 	// End Line: 1247
 
-void SOUND_StartInstanceSound(SoundInstance *soundInst)
+void SOUND_ProcessInstanceSounds(SoundInstance *soundInst)
 
 {
   if ((soundInst->state & 0xf) == 1) {
@@ -741,7 +741,7 @@ void SOUND_StartInstanceSound(SoundInstance *soundInst)
 	/* end block 2 */
 	// End Line: 1260
 
-void SOUND_StopInstanceSound(SoundInstance *soundInst)
+void SOUND_SetInstanceSoundPitch(SoundInstance *soundInst)
 
 {
   SoundEffectChannel *pSVar1;
@@ -907,7 +907,7 @@ void SOUND_SetInstanceSoundPitch(SoundInstance *soundInst,long pitchChangeAmt,lo
 	/* end block 2 */
 	// End Line: 1540
 
-void SOUND_SetInstanceSoundVolume(SoundInstance *soundInst,long volumeChangeAmt,long time)
+void SOUND_EndInstanceSounds(SoundInstance *soundInst,long volumeChangeAmt,long time)
 
 {
   short sVar1;
@@ -1331,23 +1331,23 @@ void SOUND_HandleGlobalValueSignal(int name,long data)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void SOUND_Init(void)
+void GAMEPAD_Init(void)
 
 {
   AadInitAttr local_20;
   
   local_20.numSlots = 4;
-  local_20.nonBlockLoadProc = LOAD_NonBlockingFileLoad;
-  local_20.nonBlockBufferedLoadProc = LOAD_NonBlockingBufferedLoad;
+  local_20.nonBlockLoadProc = LOAD_IsFileLoading;
+  local_20.nonBlockBufferedLoadProc = LOAD_NonBlockingBinaryLoad;
   local_20.memoryMallocProc = MEMPACK_Malloc;
   local_20.updateMode = 1;
-  local_20.memoryFreeProc = MEMPACK_Free;
+  local_20.memoryFreeProc = MEMPACK_Init;
   aadGetMemorySize(&local_20);
   aadInit(&local_20,(u_char *)&soundBuffer);
   gameTrackerX.sound.gMasterVol = 0x3fff;
-  SOUND_SetMusicVolume(0x50);
-  SOUND_SetSfxVolume(0x7f);
-  SOUND_SetVoiceVolume(0x4b);
+  SOUND_SetSfxVolume(0x50);
+  SOUND_SetInstanceSoundVolume(0x7f);
+  SpuSetVoiceVolume(0x4b);
   gameTrackerX.sound.gSfxOn = '\x01';
   gameTrackerX.sound.gMusicOn = '\x01';
   gameTrackerX.sound.gVoiceOn = '\x01';
@@ -1374,7 +1374,7 @@ void SOUND_Free(void)
 
 {
   gameTrackerX.sound.soundsLoaded = '\0';
-  aadShutdown();
+  aadShutdownReverb();
   return;
 }
 
@@ -1407,14 +1407,14 @@ void SOUND_SetMusicVariable(int variable,int value)
 	/* end block 1 */
 	// End Line: 2455
 
-void SOUND_SetMusicVolume(int newVolume)
+void SOUND_SetSfxVolume(int newVolume)
 
 {
   if (newVolume == -1) {
     newVolume = gameTrackerX.sound.gMusicVol;
   }
   gameTrackerX.sound.gMusicVol = newVolume;
-  aadSetMusicMasterVolume(newVolume);
+  SOUND_SetMusicVolume(newVolume);
   return;
 }
 
@@ -1429,14 +1429,14 @@ void SOUND_SetMusicVolume(int newVolume)
 	/* end block 1 */
 	// End Line: 2618
 
-void SOUND_SetSfxVolume(int newVolume)
+void SOUND_SetInstanceSoundVolume(int newVolume)
 
 {
   if (newVolume == -1) {
     newVolume = gameTrackerX.sound.gSfxVol;
   }
   gameTrackerX.sound.gSfxVol = newVolume;
-  aadSetSfxMasterVolume(newVolume);
+  aadSetMasterVolume(newVolume);
   return;
 }
 
@@ -1456,7 +1456,7 @@ void SOUND_SetSfxVolume(int newVolume)
 	/* end block 2 */
 	// End Line: 2633
 
-void SOUND_SetVoiceVolume(int newVolume)
+void SpuSetVoiceVolume(int newVolume)
 
 {
   if (newVolume == -1) {
@@ -1484,11 +1484,11 @@ void SOUND_SetVoiceVolume(int newVolume)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void SOUND_PauseAllSound(void)
+void SOUND_ResetAllSound(void)
 
 {
   if (gameTrackerX.sound.soundsLoaded != '\0') {
-    aadShutdownReverb();
+    aadShutdown();
     aadPauseSound();
   }
   return;
@@ -1512,7 +1512,7 @@ void SOUND_PauseAllSound(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void SOUND_ResumeAllSound(void)
+void SOUND_PauseAllSound(void)
 
 {
   if (gameTrackerX.sound.soundsLoaded != '\0') {
@@ -1540,13 +1540,13 @@ void SOUND_ResumeAllSound(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void SOUND_StopAllSound(void)
+void SOUND_ResumeAllSound(void)
 
 {
   if (gameTrackerX.sound.soundsLoaded != '\0') {
-    aadStopAllSfx();
     aadStopAllSlots();
-    aadShutdownReverb();
+    aadStopAllSfx();
+    aadShutdown();
     aadCancelPauseSound();
   }
   return;
@@ -1570,11 +1570,11 @@ void SOUND_StopAllSound(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void SOUND_ResetAllSound(void)
+void SOUND_StopAllSound(void)
 
 {
   if (gameTrackerX.sound.soundsLoaded != '\0') {
-    SOUND_StopAllSound();
+    SOUND_ResumeAllSound();
     aadInitReverb();
   }
   return;
@@ -1613,8 +1613,8 @@ void SOUND_MusicOff(void)
     aadDisableSlot(slotNumber);
     iVar1 = aadGetSlotStatus(slotNumber);
     if (iVar1 == 1) {
-      aadStopSlot(slotNumber);
-      aadStartSlot(slotNumber);
+      aadStopSfx(slotNumber);
+      PadStartCom(slotNumber);
     }
     slotNumber = slotNumber + 1;
   } while (slotNumber < 4);
@@ -1672,7 +1672,7 @@ void SOUND_MusicOn(void)
 void SOUND_SfxOff(void)
 
 {
-  aadStopAllSfx();
+  aadStopAllSlots();
   return;
 }
 
@@ -1716,7 +1716,7 @@ int SndIsPlaying(u_long handle)
 {
   int iVar1;
   
-  iVar1 = aadIsSfxPlaying(handle);
+  iVar1 = aadIsSfxPlayingOrRequested(handle);
   return iVar1;
 }
 
@@ -1736,7 +1736,7 @@ int SndIsPlayingOrRequested(u_long handle)
 {
   int iVar1;
   
-  iVar1 = aadIsSfxPlayingOrRequested(handle);
+  iVar1 = SndTypeIsPlayingOrRequested(handle);
   return iVar1;
 }
 
@@ -1751,12 +1751,12 @@ int SndIsPlayingOrRequested(u_long handle)
 	/* end block 1 */
 	// End Line: 2725
 
-int SndTypeIsPlayingOrRequested(u_int sfxToneID)
+int aadIsSfxTypePlayingOrRequested(u_int sfxToneID)
 
 {
   int iVar1;
   
-  iVar1 = aadIsSfxTypePlayingOrRequested(sfxToneID);
+  iVar1 = aadIsSfxPlaying(sfxToneID);
   return iVar1;
 }
 
@@ -1900,9 +1900,9 @@ void transitionMusicEndCallback(long userData,int slot,int loopFlag)
   
   if (slot == 0) {
     aadInstallEndSequenceCallback((TDRFuncPtr_aadInstallEndSequenceCallback0callbackProc)0x0,0);
-    iVar1 = aadAssignDynamicSequence(0,0,0);
+    iVar1 = aadGetNumDynamicSequences(0,0,0);
     if (iVar1 == 0) {
-      aadStartSlot(0);
+      PadStartCom(0);
     }
     aadFreeDynamicSoundBank(1);
     musicLoadInProgress = 0;
@@ -1964,12 +1964,12 @@ void mainMusicEndCallback(long userData,int slot,int loopFlag)
   
   if (slot == 0) {
     aadInstallEndSequenceCallback((TDRFuncPtr_aadInstallEndSequenceCallback0callbackProc)0x0,0);
-    iVar1 = aadAssignDynamicSequence(1,0,0);
+    iVar1 = aadGetNumDynamicSequences(1,0,0);
     if (iVar1 == 0) {
-      aadStartSlot(0);
+      PadStartCom(0);
       sprintf(acStack80,"\\kain2\\music\\%s\\%s.snd");
       sprintf(acStack48,"\\kain2\\music\\%s\\%s.smp");
-      aadLoadDynamicSoundBank(acStack80,acStack48,0,1,loadMainMusicReturn);
+      aadLoadDynamicSfxReturn(acStack80,acStack48,0,1,loadMainMusicReturn);
     }
     else {
       musicLoadInProgress = 0;
@@ -2025,9 +2025,9 @@ void initialLoadMainMusicReturn(int dynamicBankIndex,int errorStatus)
 {
   int iVar1;
   
-  iVar1 = aadAssignDynamicSequence(0,0,0);
+  iVar1 = aadGetNumDynamicSequences(0,0,0);
   if (iVar1 == 0) {
-    aadStartSlot(0);
+    PadStartCom(0);
   }
   musicLoadInProgress = 0;
   return;
@@ -2050,7 +2050,7 @@ void musicFadeoutDone(void)
 
 {
   SOUND_FreeDynamicMusic();
-  aadStartMusicMasterVolFade
+  aadStartMasterVolumeFade
             (gameTrackerX.sound.gMusicVol,1,
              (TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback)0x0);
   return;
@@ -2089,7 +2089,7 @@ void musicFadeoutDone(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void SOUND_UpdateSound(void)
+void SOUND_Update3dSound(void)
 
 {
   bool bVar1;
@@ -2101,22 +2101,22 @@ void SOUND_UpdateSound(void)
   undefined local_56;
   undefined local_55;
   undefined local_54;
-  undefined4 local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
+  u_char local_50;
+  u_char local_4c;
+  u_char local_48;
+  u_char local_44;
+  u_char local_40;
+  u_char local_3c;
   undefined2 local_38;
-  undefined local_36;
-  undefined4 local_30;
-  undefined4 local_2c;
-  undefined4 local_28;
-  undefined4 local_24;
-  undefined4 local_20;
-  undefined4 local_1c;
+  char local_36;
+  u_char local_30;
+  u_char local_2c;
+  u_char local_28;
+  u_char local_24;
+  u_char local_20;
+  u_char local_1c;
   undefined2 local_18;
-  undefined local_16;
+  char local_16;
   
   aadProcessLoadQueue();
   if (((gameTrackerX.debugFlags & 0x40000U) == 0) &&
@@ -2133,12 +2133,12 @@ void SOUND_UpdateSound(void)
      (((aadMem->sramDefragInfo).status == 0 &&
       (bVar1 = checkMusicDelay == 0, checkMusicDelay = checkMusicDelay + -1, bVar1)))) {
     checkMusicDelay = 0x1e;
-    pLVar3 = STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID);
+    pLVar3 = STREAM_GetWaterZLevel((gameTrackerX.playerInstance)->currentStreamUnitID);
     if (reqMusicStartPlaneShift == 0) {
       if (pLVar3->dynamicMusicName == (char *)0x0) {
         if (currentDynamicSoundName != '\0') {
           currentDynamicSoundName = '\0';
-          aadStartMusicMasterVolFade(0,-1,musicFadeoutDone);
+          aadStartMasterVolumeFade(0,-1,musicFadeoutDone);
         }
       }
       else {
@@ -2153,7 +2153,7 @@ void SOUND_UpdateSound(void)
           local_55 = 0x70;
         }
         local_54 = 0;
-        iVar2 = strcmpi(&local_58,&currentDynamicSoundName);
+        iVar2 = strcpy(&local_58,&currentDynamicSoundName);
         if (iVar2 != 0) {
           if (currentDynamicSoundName == '\0') {
             sprintf((char *)&local_50,"\\kain2\\music\\%s\\%s.snd");
@@ -2162,9 +2162,9 @@ void SOUND_UpdateSound(void)
             if (lVar4 == 0) {
               return;
             }
-            aadLoadDynamicSoundBank
+            aadLoadDynamicSfxReturn
                       ((char *)&local_50,(char *)&local_30,0,1,initialLoadMainMusicReturn);
-            strcpy(&currentDynamicSoundName,&local_58);
+            strcmp(&currentDynamicSoundName,&local_58);
           }
           else {
             sprintf((char *)&local_50,"\\kain2\\music\\%s\\%s.snd");
@@ -2172,7 +2172,7 @@ void SOUND_UpdateSound(void)
             if (lVar4 == 0) {
               return;
             }
-            strcpy(&currentDynamicSoundName,&local_58);
+            strcmp(&currentDynamicSoundName,&local_58);
             local_50 = 0x69616b5c;
             local_4c = 0x6d5c326e;
             local_48 = 0x63697375;
@@ -2180,7 +2180,7 @@ void SOUND_UpdateSound(void)
             local_40 = 0x77755c72;
             local_3c = 0x732e7274;
             local_38 = 0x646e;
-            local_36 = 0;
+            local_36 = '\0';
             local_30 = 0x69616b5c;
             local_2c = 0x6d5c326e;
             local_28 = 0x63697375;
@@ -2188,8 +2188,8 @@ void SOUND_UpdateSound(void)
             local_20 = 0x77755c72;
             local_1c = 0x732e7274;
             local_18 = 0x706d;
-            local_16 = 0;
-            aadLoadDynamicSoundBank
+            local_16 = '\0';
+            aadLoadDynamicSfxReturn
                       ((char *)&local_50,(char *)&local_30,1,0,loadTransitionMusicReturn);
           }
           musicLoadInProgress = 1;
@@ -2198,7 +2198,7 @@ void SOUND_UpdateSound(void)
     }
     else {
       reqMusicStartPlaneShift = 0;
-      SOUND_PlaneShift(reqMusicNewPlane);
+      razPlaneShift(reqMusicNewPlane);
     }
   }
   return;
@@ -2221,7 +2221,7 @@ void musicPlaneShiftFadeoutDone(void)
 
 {
   SOUND_FreeDynamicMusic();
-  aadStartMusicMasterVolFade
+  aadStartMasterVolumeFade
             (gameTrackerX.sound.gMusicVol,1,
              (TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback)0x0);
   checkMusicDelay = 0;
@@ -2251,7 +2251,7 @@ void musicPlaneShiftFadeoutDone(void)
 	/* end block 3 */
 	// End Line: 3523
 
-void SOUND_PlaneShift(int newPlane)
+void razPlaneShift(int newPlane)
 
 {
   int iVar1;
@@ -2264,7 +2264,7 @@ void SOUND_PlaneShift(int newPlane)
       if (currentDynamicSoundName != '\0') {
         checkMusicDelay = 300;
         reqMusicNewPlane = newPlane;
-        aadStartMusicMasterVolFade(0,-3,musicPlaneShiftFadeoutDone);
+        aadStartMasterVolumeFade(0,-3,musicPlaneShiftFadeoutDone);
         iVar1 = currentMusicPlane;
       }
     }
@@ -2296,7 +2296,7 @@ void SOUND_FreeDynamicMusic(void)
 {
   int iVar1;
   
-  aadStopAllSlots();
+  aadStopAllSfx();
   currentDynamicSoundName = '\0';
   musicLoadInProgress = 0;
   iVar1 = aadGetDynamicBankStatus(0);
@@ -2321,7 +2321,7 @@ void SOUND_FreeDynamicMusic(void)
 	/* end block 1 */
 	// End Line: 3663
 
-void SOUND_SetMusicModifier(long modifier)
+void SOUND_ResetMusicModifier(long modifier)
 
 {
   int variable;
@@ -2391,7 +2391,7 @@ switchD_800414c4_caseD_7:
 	/* end block 1 */
 	// End Line: 3777
 
-void SOUND_ResetMusicModifier(long modifier)
+void SOUND_SetMusicModifier(long modifier)
 
 {
   int variable;

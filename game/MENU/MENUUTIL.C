@@ -80,7 +80,7 @@ menu_ctrl_t menu_get_ctrl(void *gt)
 	/* end block 1 */
 	// End Line: 67
 
-void menu_print(int xpos,int ypos,char *text,int color)
+void menu_pop(int xpos,int ypos,char *text,int color)
 
 {
   FONT_SetCursor((short)xpos,(short)ypos);
@@ -134,7 +134,7 @@ int menu_text_width(char *text)
 	/* end block 2 */
 	// End Line: 189
 
-void menu_sound(menu_sound_t sound)
+void menu_set(menu_sound_t sound)
 
 {
   SndPlay((&the_menu_sounds)[sound].sfx);

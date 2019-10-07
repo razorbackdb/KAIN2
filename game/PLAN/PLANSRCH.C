@@ -30,7 +30,7 @@
 	// End Line: 163
 
 PlanningNode *
-PLANSRCH_FindNodeToExpand(PlanningNode *planningPool,PlanningNode *goalNode,int validNodeTypes)
+PLANSRCH_ExpandNode(PlanningNode *planningPool,PlanningNode *goalNode,int validNodeTypes)
 
 {
   long lVar1;
@@ -48,9 +48,9 @@ PLANSRCH_FindNodeToExpand(PlanningNode *planningPool,PlanningNode *goalNode,int 
     do {
       if ((((validNodeTypes >> ((u_int)planningPool->nodeType & 0x1f) & 1U) != 0) &&
           ((planningPool->flags & 1) != 0)) && ((planningPool->flags & 2) == 0)) {
-        lVar1 = MATH3D_LengthXYZ((int)(pPVar3->pos).x - (int)(goalNode->pos).x,
-                                 (int)(planningPool->pos).y - (int)(goalNode->pos).y,
-                                 (int)(planningPool->pos).z - (int)(goalNode->pos).z);
+        lVar1 = MATH3D_LengthXY((int)(pPVar3->pos).x - (int)(goalNode->pos).x,
+                                (int)(planningPool->pos).y - (int)(goalNode->pos).y,
+                                (int)(planningPool->pos).z - (int)(goalNode->pos).z);
         uVar2 = (u_int)planningPool->cost + lVar1;
         if (uVar2 <= uVar6) {
           pPVar5 = planningPool;
@@ -96,7 +96,7 @@ PLANSRCH_FindNodeToExpand(PlanningNode *planningPool,PlanningNode *goalNode,int 
 	/* end block 2 */
 	// End Line: 252
 
-void PLANSRCH_ExpandNode(PlanningNode *planningPool,PlanningNode *nodeToExpand)
+void PLANSRCH_FindNodeToExpand(PlanningNode *planningPool,PlanningNode *nodeToExpand)
 
 {
   ushort uVar1;
@@ -207,7 +207,7 @@ void PLANSRCH_InitNodesForSearch(PlanningNode *planningPool)
 	// End Line: 416
 
 PlanningNode *
-PLANSRCH_FindPathInGraph
+PLANAPI_FindPathInGraphToTarget
           (PlanningNode *planningPool,PlanningNode *startNode,PlanningNode *goalNode,
           int validNodeTypes)
 
@@ -228,12 +228,12 @@ PLANSRCH_FindPathInGraph
       goalNode->parent = uVar2;
       return goalNode;
     }
-    while (nodeToExpand = PLANSRCH_FindNodeToExpand(planningPool,goalNode,validNodeTypes),
+    while (nodeToExpand = PLANSRCH_ExpandNode(planningPool,goalNode,validNodeTypes),
           nodeToExpand != (PlanningNode *)0x0) {
       if (nodeToExpand == goalNode) {
         return nodeToExpand;
       }
-      PLANSRCH_ExpandNode(planningPool,nodeToExpand);
+      PLANSRCH_FindNodeToExpand(planningPool,nodeToExpand);
     }
   }
   return (PlanningNode *)0x0;

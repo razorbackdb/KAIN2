@@ -278,8 +278,8 @@ void clearloop()
 undefined8 TimerTick(void)
 
 {
-  undefined4 in_v0;
-  undefined4 in_v1;
+  u_char in_v0;
+  u_char in_v1;
   
   gameTimer = gameTimer + 1;
   return CONCAT44(in_v0,in_v1);
@@ -301,7 +301,7 @@ undefined8 TimerTick(void)
 	/* end block 2 */
 	// End Line: 209
 
-undefined4 CheckVolatile(undefined4 param_1)
+u_char CheckVolatile(u_char param_1)
 
 {
   return param_1;
@@ -1770,17 +1770,17 @@ void super_clip()
 	/* end block 12 */
 	// End Line: 2475
 
-undefined4 DRAW_DisplayTFace_S(undefined4 param_1,u_int param_2,int param_3)
+u_char DRAW_DisplayTFace_S(u_char param_1,u_int param_2,int param_3)
 
 {
-  undefined4 uVar1;
+  u_char uVar1;
   long *plVar2;
   int iVar3;
   u_int uVar4;
   POLY_GT3 *in_t0;
-  undefined4 in_t1;
-  undefined4 in_t2;
-  undefined4 in_t3;
+  u_char in_t1;
+  u_char in_t2;
+  u_char in_t3;
   int in_t4;
   u_int uVar5;
   int iVar6;
@@ -1793,7 +1793,7 @@ undefined4 DRAW_DisplayTFace_S(undefined4 param_1,u_int param_2,int param_3)
   int iVar9;
   u_int uVar10;
   int iVar11;
-  undefined4 unaff_retaddr;
+  u_char unaff_retaddr;
   
   uVar8 = getCopControlWord(2,0xf800);
   copFunction(2,0x1400006);
@@ -1842,29 +1842,29 @@ undefined4 DRAW_DisplayTFace_S(undefined4 param_1,u_int param_2,int param_3)
         *(u_int *)(param_3 + (int)unaff_s4) = (u_int)in_t0 & param_2;
         in_t0->tag = uVar4 | unaff_s3;
         uVar1 = getCopReg(2,0xc);
-        *(undefined4 *)&in_t0->x0 = uVar1;
+        *(u_char *)&in_t0->x0 = uVar1;
         uVar1 = getCopReg(2,0xd);
-        *(undefined4 *)&in_t0->x1 = uVar1;
+        *(u_char *)&in_t0->x1 = uVar1;
         uVar1 = getCopReg(2,0xe);
-        *(undefined4 *)&in_t0->x2 = uVar1;
+        *(u_char *)&in_t0->x2 = uVar1;
         uVar1 = getCopReg(2,0x14);
-        *(undefined4 *)&in_t0->r0 = uVar1;
+        *(u_char *)&in_t0->r0 = uVar1;
         uVar1 = getCopReg(2,0x15);
-        *(undefined4 *)&in_t0->r1 = uVar1;
+        *(u_char *)&in_t0->r1 = uVar1;
         uVar1 = getCopReg(2,0x16);
-        *(undefined4 *)&in_t0->r2 = uVar1;
+        *(u_char *)&in_t0->r2 = uVar1;
         return 0;
       }
     }
   }
   *(POLY_GT3 **)(in_t4 + 0xdc) = in_t0;
-  *(undefined4 *)(in_t4 + 0xe0) = in_t1;
-  *(undefined4 *)(in_t4 + 0xe4) = in_t2;
-  *(undefined4 *)(in_t4 + 0xe8) = in_t3;
+  *(u_char *)(in_t4 + 0xe0) = in_t1;
+  *(u_char *)(in_t4 + 0xe4) = in_t2;
+  *(u_char *)(in_t4 + 0xe8) = in_t3;
   *(int *)(in_t4 + 0xec) = in_t6;
   *(u_int *)(in_t4 + 0xf0) = param_2;
   *(int *)(in_t4 + 0xf4) = param_3;
-  *(undefined4 *)(in_t4 + 0xf8) = unaff_retaddr;
+  *(u_char *)(in_t4 + 0xf8) = unaff_retaddr;
   plVar2 = DRAW_Zclip_subdiv(in_t0,unaff_s4,0);
   if (plVar2 == (long *)0x0) {
     return 1;
@@ -2173,18 +2173,18 @@ void DRAW_DisplaySubdivPolytope_S(int *param_1,int param_2)
   char cVar1;
   short sVar2;
   bool bVar3;
-  undefined4 uVar4;
+  u_char uVar4;
   ushort uVar5;
-  undefined4 in_zero;
+  u_char in_zero;
   u_int in_at;
   undefined uVar6;
   u_int uVar7;
   u_int uVar8;
   u_int uVar9;
-  undefined4 extraout_v1;
+  u_char extraout_v1;
   int iVar10;
   u_int uVar11;
-  undefined4 uVar12;
+  u_char uVar12;
   int *piVar13;
   u_int uVar14;
   int *piVar15;
@@ -2195,30 +2195,30 @@ void DRAW_DisplaySubdivPolytope_S(int *param_1,int param_2)
   int iVar19;
   u_int uVar20;
   u_int uVar21;
-  undefined4 uVar22;
+  u_char uVar22;
   int iVar23;
   int iVar24;
   u_int uVar25;
-  undefined4 unaff_s0;
-  undefined4 unaff_s1;
+  u_char unaff_s0;
+  u_char unaff_s1;
   u_int *puVar26;
-  undefined4 unaff_s2;
+  u_char unaff_s2;
   u_int uVar27;
-  undefined4 unaff_s3;
+  u_char unaff_s3;
   int unaff_s4;
-  undefined4 unaff_s5;
+  u_char unaff_s5;
   int iVar28;
-  undefined4 unaff_s6;
+  u_char unaff_s6;
   u_int *puVar29;
-  undefined4 unaff_s7;
+  u_char unaff_s7;
   u_int uVar30;
   int iVar31;
   int iVar32;
   int iVar33;
   u_int uVar34;
-  undefined4 uVar35;
-  undefined4 unaff_s8;
-  undefined4 unaff_retaddr;
+  u_char uVar35;
+  u_char unaff_s8;
+  u_char unaff_retaddr;
   longlong lVar36;
   undefined8 uVar37;
   
@@ -2247,7 +2247,7 @@ void DRAW_DisplaySubdivPolytope_S(int *param_1,int param_2)
         uVar21 = (int)uVar7 >> 0x10;
         if ((uVar21 & 4) == 0) break;
 skip_tface:
-        *(undefined4 *)(iVar18 + 0xac) = 0;
+        *(u_char *)(iVar18 + 0xac) = 0;
 joined_r0x80026958:
         puVar26 = puVar26 + 3;
         if (puVar29 <= puVar26) {
@@ -2262,7 +2262,7 @@ joined_r0x80026958:
       iVar24 = *piVar13;
       iVar31 = piVar13[1];
       uVar35 = getCopReg(2,8);
-      *(undefined4 *)(iVar18 + 0xbc) = uVar35;
+      *(u_char *)(iVar18 + 0xbc) = uVar35;
       setCopReg(2,0,iVar24);
       setCopReg(2,0x800,iVar31);
       uVar27 = getCopControlWord(2,0xf800);
@@ -2271,7 +2271,7 @@ joined_r0x80026958:
       iVar24 = *piVar15;
       iVar31 = piVar15[1];
       uVar35 = getCopReg(2,8);
-      *(undefined4 *)(iVar18 + 0xc0) = uVar35;
+      *(u_char *)(iVar18 + 0xc0) = uVar35;
       setCopReg(2,0,iVar24);
       setCopReg(2,0x800,iVar31);
       uVar8 = getCopControlWord(2,0xf800);
@@ -2282,7 +2282,7 @@ joined_r0x80026958:
       uVar11 = puVar17[2];
       uVar9 = getCopControlWord(2,0xf800);
       uVar35 = getCopReg(2,8);
-      *(undefined4 *)(iVar18 + 0xc4) = uVar35;
+      *(u_char *)(iVar18 + 0xc4) = uVar35;
       uVar9 = uVar27 | uVar8 | uVar9;
       copFunction(2,0x1400006);
       in_t0[3] = uVar25;
@@ -2319,7 +2319,7 @@ do_poly:
       iVar24 = *piVar16;
       if (*(int *)(iVar18 + 0x18) != 0) {
         uVar35 = getCopReg(2,8);
-        *(undefined4 *)(iVar18 + 0xc4) = uVar35;
+        *(u_char *)(iVar18 + 0xc4) = uVar35;
         iVar31 = (int)(short)iVar24 - *(int *)(iVar18 + 0x1c);
         iVar24 = (iVar24 >> 0x10) - *(int *)(iVar18 + 0x20);
         if (iVar31 < 0) {
@@ -2340,9 +2340,9 @@ do_poly:
           iVar24 = iVar31;
         }
         if (iVar24 < *(short *)(iVar33 + 0x10)) {
-          setCopReg(2,uVar8,*(undefined4 *)(iVar33 + 4));
-          setCopReg(2,uVar11,*(undefined4 *)(iVar33 + 8));
-          setCopReg(2,uVar25,*(undefined4 *)(iVar33 + 0xc));
+          setCopReg(2,uVar8,*(u_char *)(iVar33 + 4));
+          setCopReg(2,uVar11,*(u_char *)(iVar33 + 8));
+          setCopReg(2,uVar25,*(u_char *)(iVar33 + 0xc));
           setCopReg(2,0x4000,(*(short *)(iVar33 + 0x10) - iVar24) * 0x10);
           setCopReg(2,0x3000,uVar27);
           uVar27 = uVar27 & uVar14;
@@ -2351,7 +2351,7 @@ do_poly:
           setCopReg(2,0xd800,(uVar27 >> 0x10) << 4);
           copFunction(2,0x1a8003e);
           uVar35 = getCopReg(2,0x16);
-          *(undefined4 *)(iVar18 + 0x7c) = uVar35;
+          *(u_char *)(iVar18 + 0x7c) = uVar35;
         }
         iVar24 = (int)(short)*piVar13 - *(int *)(iVar18 + 0x1c);
         iVar31 = (*piVar13 >> 0x10) - *(int *)(iVar18 + 0x20);
@@ -2373,9 +2373,9 @@ do_poly:
           iVar31 = iVar24;
         }
         if (iVar31 < *(short *)(iVar33 + 0x10)) {
-          setCopReg(2,uVar8,*(undefined4 *)(iVar33 + 4));
-          setCopReg(2,uVar11,*(undefined4 *)(iVar33 + 8));
-          setCopReg(2,uVar25,*(undefined4 *)(iVar33 + 0xc));
+          setCopReg(2,uVar8,*(u_char *)(iVar33 + 4));
+          setCopReg(2,uVar11,*(u_char *)(iVar33 + 8));
+          setCopReg(2,uVar25,*(u_char *)(iVar33 + 0xc));
           setCopReg(2,0x4000,(*(short *)(iVar33 + 0x10) - iVar31) * 0x10);
           setCopReg(2,0x3000,*(u_int *)(iVar18 + 0x80));
           uVar27 = *(u_int *)(iVar18 + 0x80) & uVar14;
@@ -2384,7 +2384,7 @@ do_poly:
           setCopReg(2,0xd800,(uVar27 >> 0x10) << 4);
           copFunction(2,0x1a8003e);
           uVar35 = getCopReg(2,0x16);
-          *(undefined4 *)(iVar18 + 0x80) = uVar35;
+          *(u_char *)(iVar18 + 0x80) = uVar35;
         }
         iVar24 = (int)(short)*piVar15 - *(int *)(iVar18 + 0x1c);
         iVar31 = (*piVar15 >> 0x10) - *(int *)(iVar18 + 0x20);
@@ -2408,9 +2408,9 @@ do_poly:
         }
         in_at = (u_int)(iVar31 < iVar19);
         if (iVar31 < iVar19) {
-          setCopReg(2,uVar8,*(undefined4 *)(iVar33 + 4));
-          setCopReg(2,uVar11,*(undefined4 *)(iVar33 + 8));
-          setCopReg(2,uVar25,*(undefined4 *)(iVar33 + 0xc));
+          setCopReg(2,uVar8,*(u_char *)(iVar33 + 4));
+          setCopReg(2,uVar11,*(u_char *)(iVar33 + 8));
+          setCopReg(2,uVar25,*(u_char *)(iVar33 + 0xc));
           setCopReg(2,0x4000,(iVar19 - iVar31) * 0x10);
           setCopReg(2,0x3000,*(u_int *)(iVar18 + 0x84));
           uVar27 = *(u_int *)(iVar18 + 0x84) & uVar14;
@@ -2419,15 +2419,15 @@ do_poly:
           setCopReg(2,0xd800,(uVar27 >> 0x10) << 4);
           copFunction(2,0x1a8003e);
           uVar35 = getCopReg(2,0x16);
-          *(undefined4 *)(iVar18 + 0x84) = uVar35;
+          *(u_char *)(iVar18 + 0x84) = uVar35;
         }
-        setCopReg(2,in_t0,*(undefined4 *)(iVar18 + 0xc4));
+        setCopReg(2,in_t0,*(u_char *)(iVar18 + 0xc4));
       }
       if ((uVar21 & 8) != 0) {
 no_subdiv:
-        *(undefined4 *)(iVar18 + 0xac) = 0;
+        *(u_char *)(iVar18 + 0xac) = 0;
         if ((uVar9 & 0x66000) != 0) goto subdiv_begin;
-        *(undefined4 *)(iVar18 + 0xac) = 0;
+        *(u_char *)(iVar18 + 0xac) = 0;
         uVar27 = getCopReg(2,0x8800);
         uVar34 = getCopReg(2,0x9000);
         uVar20 = getCopReg(2,0x9800);
@@ -2467,11 +2467,11 @@ no_subdiv:
               if (iVar31 < 1) {
                 iVar31 = 0;
               }
-              setCopReg(2,piVar15,*(undefined4 *)(iVar18 + 0x7c));
+              setCopReg(2,piVar15,*(u_char *)(iVar18 + 0x7c));
               setCopReg(2,0x4000,iVar31);
               copFunction(2,0x780010);
               uVar4 = getCopReg(2,0x16);
-              *(undefined4 *)(iVar18 + 0x7c) = uVar4;
+              *(u_char *)(iVar18 + 0x7c) = uVar4;
             }
             iVar31 = getCopReg(2,0x9000);
             iVar31 = 0x1000 - iVar31;
@@ -2479,11 +2479,11 @@ no_subdiv:
               if (iVar31 < 1) {
                 iVar31 = 0;
               }
-              setCopReg(2,piVar15,*(undefined4 *)(iVar18 + 0x80));
+              setCopReg(2,piVar15,*(u_char *)(iVar18 + 0x80));
               setCopReg(2,0x4000,iVar31);
               copFunction(2,0x780010);
               uVar4 = getCopReg(2,0x16);
-              *(undefined4 *)(iVar18 + 0x80) = uVar4;
+              *(u_char *)(iVar18 + 0x80) = uVar4;
             }
             iVar31 = getCopReg(2,0x9800);
             iVar31 = 0x1000 - iVar31;
@@ -2492,11 +2492,11 @@ no_subdiv:
               if (iVar31 < 1) {
                 iVar31 = 0;
               }
-              setCopReg(2,piVar15,*(undefined4 *)(iVar18 + 0x84));
+              setCopReg(2,piVar15,*(u_char *)(iVar18 + 0x84));
               setCopReg(2,0x4000,iVar31);
               copFunction(2,0x780010);
               uVar4 = getCopReg(2,0x16);
-              *(undefined4 *)(iVar18 + 0x84) = uVar4;
+              *(u_char *)(iVar18 + 0x84) = uVar4;
             }
             setCopReg(2,0xa800,uVar35);
             setCopReg(2,0xb000,uVar22);
@@ -2516,8 +2516,8 @@ no_subdiv:
           in_t0 = in_t0 + 10;
         }
         else {
-          setCopReg(2,piVar15,*(undefined4 *)(iVar18 + 0x84));
-          setCopReg(2,in_t0,*(undefined4 *)(iVar18 + 0xc4));
+          setCopReg(2,piVar15,*(u_char *)(iVar18 + 0x84));
+          setCopReg(2,in_t0,*(u_char *)(iVar18 + 0xc4));
           puVar17 = (u_int *)(iVar24 + unaff_s4);
           uVar7 = *puVar17;
           copFunction(2,0x780010);
@@ -2525,17 +2525,17 @@ no_subdiv:
           *in_t0 = uVar7 | 0x9000000;
           uVar7 = getCopReg(2,0x16);
           in_t0[7] = uVar7;
-          setCopReg(2,puVar17,*(undefined4 *)(iVar18 + 0x80));
-          setCopReg(2,in_t0,*(undefined4 *)(iVar18 + 0xc0));
+          setCopReg(2,puVar17,*(u_char *)(iVar18 + 0x80));
+          setCopReg(2,in_t0,*(u_char *)(iVar18 + 0xc0));
           copFunction(2,0x780010);
           in_t0[8] = uVar25;
           in_t0[5] = uVar11;
           cVar1 = *(char *)(iVar18 + 0x7f);
           uVar7 = getCopReg(2,0x16);
           in_t0[4] = uVar7;
-          setCopReg(2,puVar17,*(undefined4 *)(iVar18 + 0x7c));
-          setCopReg(2,in_t0,*(undefined4 *)(iVar18 + 0xbc));
-          uVar35 = *(undefined4 *)(iVar18 + 0xcc);
+          setCopReg(2,puVar17,*(u_char *)(iVar18 + 0x7c));
+          setCopReg(2,in_t0,*(u_char *)(iVar18 + 0xbc));
+          uVar35 = *(u_char *)(iVar18 + 0xcc);
           in_t0[2] = uVar8;
           copFunction(2,0x780010);
           bVar3 = *(int *)(iVar18 + 0xb8) < (int)uVar34;
@@ -2550,13 +2550,13 @@ no_subdiv:
               iVar33 = *(int *)(iVar18 + 0xcc);
               copFunction(2,0x780010);
               *(ushort *)((int)in_t0 + 0x1a) = uVar5 & 0xff9f | 0x20;
-              uVar35 = *(undefined4 *)(iVar18 + 0xc0);
+              uVar35 = *(u_char *)(iVar18 + 0xc0);
               in_t0[0xd] = uVar8;
               iVar31 = getCopReg(2,0xb000);
               in_t0[0xc] = iVar33 - iVar31 | 0x30000000;
               setCopReg(2,0x4000,uVar35);
               copFunction(2,0x780010);
-              uVar35 = *(undefined4 *)(iVar18 + 0xc4);
+              uVar35 = *(u_char *)(iVar18 + 0xc4);
               in_t0[0xf] = uVar11;
               in_t0[0xb] = 0xe1000640;
               iVar31 = getCopReg(2,0xb000);
@@ -2582,7 +2582,7 @@ no_subdiv:
               }
               copFunction(2,0x780010);
               *(ushort *)((int)in_t0 + 0x1a) = uVar5 & 0xff9f | 0x20;
-              uVar35 = *(undefined4 *)(iVar18 + 0xc0);
+              uVar35 = *(u_char *)(iVar18 + 0xc0);
               in_t0[0xc] = uVar8;
               iVar33 = getCopReg(2,0xb000);
               in_t0[0xb] = iVar31 - iVar33 | 0x34000000;
@@ -2592,7 +2592,7 @@ no_subdiv:
               in_t0[0xd] = in_t0[3];
               in_t0[0x13] = in_t0[9];
               *(undefined2 *)((int)in_t0 + 0x36) = *(undefined2 *)(iVar18 + 0xd4);
-              uVar35 = *(undefined4 *)(iVar18 + 0xc4);
+              uVar35 = *(u_char *)(iVar18 + 0xc4);
               in_t0[0xf] = uVar11;
               iVar33 = getCopReg(2,0xb000);
               in_t0[0xe] = iVar31 - iVar33;
@@ -2640,11 +2640,11 @@ subdiv_begin:
           if (iVar24 < 1) {
             iVar24 = 0;
           }
-          setCopReg(2,piVar15,*(undefined4 *)(iVar18 + 0x7c));
+          setCopReg(2,piVar15,*(u_char *)(iVar18 + 0x7c));
           setCopReg(2,0x4000,iVar24);
           copFunction(2,0x780010);
           uVar4 = getCopReg(2,0x16);
-          *(undefined4 *)(iVar18 + 0x7c) = uVar4;
+          *(u_char *)(iVar18 + 0x7c) = uVar4;
         }
         iVar24 = getCopReg(2,0x9000);
         iVar24 = 0x1000 - iVar24;
@@ -2652,11 +2652,11 @@ subdiv_begin:
           if (iVar24 < 1) {
             iVar24 = 0;
           }
-          setCopReg(2,piVar15,*(undefined4 *)(iVar18 + 0x80));
+          setCopReg(2,piVar15,*(u_char *)(iVar18 + 0x80));
           setCopReg(2,0x4000,iVar24);
           copFunction(2,0x780010);
           uVar4 = getCopReg(2,0x16);
-          *(undefined4 *)(iVar18 + 0x80) = uVar4;
+          *(u_char *)(iVar18 + 0x80) = uVar4;
         }
         iVar24 = getCopReg(2,0x9800);
         iVar24 = 0x1000 - iVar24;
@@ -2665,11 +2665,11 @@ subdiv_begin:
           if (iVar24 < 1) {
             iVar24 = 0;
           }
-          setCopReg(2,piVar15,*(undefined4 *)(iVar18 + 0x84));
+          setCopReg(2,piVar15,*(u_char *)(iVar18 + 0x84));
           setCopReg(2,0x4000,iVar24);
           copFunction(2,0x780010);
           uVar4 = getCopReg(2,0x16);
-          *(undefined4 *)(iVar18 + 0x84) = uVar4;
+          *(u_char *)(iVar18 + 0x84) = uVar4;
         }
         setCopReg(2,0xa800,uVar35);
         setCopReg(2,0xb000,uVar22);
@@ -2742,133 +2742,133 @@ subdiv_begin:
       *(short *)(iVar18 + 0x6a) = sVar2;
       *(short *)(iVar18 + 0x6e) = *(short *)(iVar18 + 0x5a);
       *(undefined *)(iVar18 + 200) = uVar6;
-      setCopReg(2,in_zero,*(undefined4 *)(iVar18 + 0x28));
-      setCopReg(2,in_at,*(undefined4 *)(iVar18 + 0x2c));
-      setCopReg(2,(int)*(short *)(iVar18 + 0x5a),*(undefined4 *)(iVar18 + 0x40));
-      setCopReg(2,(int)sVar2,*(undefined4 *)(iVar18 + 0x44));
-      setCopReg(2,piVar13,*(undefined4 *)(iVar18 + 0x50));
-      setCopReg(2,uVar14,*(undefined4 *)(iVar18 + 0x54));
+      setCopReg(2,in_zero,*(u_char *)(iVar18 + 0x28));
+      setCopReg(2,in_at,*(u_char *)(iVar18 + 0x2c));
+      setCopReg(2,(int)*(short *)(iVar18 + 0x5a),*(u_char *)(iVar18 + 0x40));
+      setCopReg(2,(int)sVar2,*(u_char *)(iVar18 + 0x44));
+      setCopReg(2,piVar13,*(u_char *)(iVar18 + 0x50));
+      setCopReg(2,uVar14,*(u_char *)(iVar18 + 0x54));
       copFunction(2,0x280030);
       uVar7 = *(u_int *)(iVar18 + 100);
       uVar21 = *(u_int *)(iVar18 + 0x6c);
       in_t0[3] = *(u_int *)(iVar18 + 0x58);
       in_t0[6] = uVar7;
       in_t0[9] = uVar21;
-      setCopReg(2,iVar28,*(undefined4 *)(iVar18 + 0x70));
-      setCopReg(2,puVar29,*(undefined4 *)(iVar18 + 0x78));
-      setCopReg(2,0xa000,*(undefined4 *)(iVar18 + 0x7c));
-      setCopReg(2,0x3000,*(undefined4 *)(iVar18 + 0x7c));
+      setCopReg(2,iVar28,*(u_char *)(iVar18 + 0x70));
+      setCopReg(2,puVar29,*(u_char *)(iVar18 + 0x78));
+      setCopReg(2,0xa000,*(u_char *)(iVar18 + 0x7c));
+      setCopReg(2,0x3000,*(u_char *)(iVar18 + 0x7c));
       lVar36 = DRAW_DisplayTFace_S();
       if (lVar36 < 0x100000000) {
-        setCopReg(2,in_zero,*(undefined4 *)(iVar18 + 0x50));
-        setCopReg(2,in_at,*(undefined4 *)(iVar18 + 0x54));
-        setCopReg(2,(int)((u_longlong)lVar36 >> 0x20),*(undefined4 *)(iVar18 + 0x48));
-        setCopReg(2,(int)lVar36,*(undefined4 *)(iVar18 + 0x4c));
-        setCopReg(2,piVar13,*(undefined4 *)(iVar18 + 0x38));
-        setCopReg(2,uVar14,*(undefined4 *)(iVar18 + 0x3c));
+        setCopReg(2,in_zero,*(u_char *)(iVar18 + 0x50));
+        setCopReg(2,in_at,*(u_char *)(iVar18 + 0x54));
+        setCopReg(2,(int)((u_longlong)lVar36 >> 0x20),*(u_char *)(iVar18 + 0x48));
+        setCopReg(2,(int)lVar36,*(u_char *)(iVar18 + 0x4c));
+        setCopReg(2,piVar13,*(u_char *)(iVar18 + 0x38));
+        setCopReg(2,uVar14,*(u_char *)(iVar18 + 0x3c));
         copFunction(2,0x280030);
         uVar7 = *(u_int *)(iVar18 + 0x68);
         uVar21 = *(u_int *)(iVar18 + 0x60);
         in_t0[3] = *(u_int *)(iVar18 + 0x6c);
         in_t0[6] = uVar7;
         in_t0[9] = uVar21;
-        setCopReg(2,iVar28,*(undefined4 *)(iVar18 + 0x74));
-        setCopReg(2,puVar29,*(undefined4 *)(iVar18 + 0x84));
-        setCopReg(2,0xa000,*(undefined4 *)(iVar18 + 0x78));
-        setCopReg(2,0x3000,*(undefined4 *)(iVar18 + 0x78));
+        setCopReg(2,iVar28,*(u_char *)(iVar18 + 0x74));
+        setCopReg(2,puVar29,*(u_char *)(iVar18 + 0x84));
+        setCopReg(2,0xa000,*(u_char *)(iVar18 + 0x78));
+        setCopReg(2,0x3000,*(u_char *)(iVar18 + 0x78));
         iVar24 = DRAW_DisplayTFace_S();
         if (iVar24 < 1) {
           *(short *)(iVar18 + 0x66) = *(short *)(iVar18 + 0x5a);
           *(short *)(iVar18 + 0x6e) = *(short *)(iVar18 + 0x5e);
-          setCopReg(2,in_zero,*(undefined4 *)(iVar18 + 0x40));
-          setCopReg(2,in_at,*(undefined4 *)(iVar18 + 0x44));
-          setCopReg(2,(int)*(short *)(iVar18 + 0x5a),*(undefined4 *)(iVar18 + 0x48));
-          setCopReg(2,(int)*(short *)(iVar18 + 0x5e),*(undefined4 *)(iVar18 + 0x4c));
-          setCopReg(2,piVar13,*(undefined4 *)(iVar18 + 0x50));
-          setCopReg(2,uVar14,*(undefined4 *)(iVar18 + 0x54));
+          setCopReg(2,in_zero,*(u_char *)(iVar18 + 0x40));
+          setCopReg(2,in_at,*(u_char *)(iVar18 + 0x44));
+          setCopReg(2,(int)*(short *)(iVar18 + 0x5a),*(u_char *)(iVar18 + 0x48));
+          setCopReg(2,(int)*(short *)(iVar18 + 0x5e),*(u_char *)(iVar18 + 0x4c));
+          setCopReg(2,piVar13,*(u_char *)(iVar18 + 0x50));
+          setCopReg(2,uVar14,*(u_char *)(iVar18 + 0x54));
           copFunction(2,0x280030);
           uVar7 = *(u_int *)(iVar18 + 0x68);
           uVar21 = *(u_int *)(iVar18 + 0x6c);
           in_t0[3] = *(u_int *)(iVar18 + 100);
           in_t0[6] = uVar7;
           in_t0[9] = uVar21;
-          setCopReg(2,iVar28,*(undefined4 *)(iVar18 + 0x74));
-          setCopReg(2,puVar29,*(undefined4 *)(iVar18 + 0x78));
-          setCopReg(2,0xa000,*(undefined4 *)(iVar18 + 0x70));
-          setCopReg(2,0x3000,*(undefined4 *)(iVar18 + 0x70));
+          setCopReg(2,iVar28,*(u_char *)(iVar18 + 0x74));
+          setCopReg(2,puVar29,*(u_char *)(iVar18 + 0x78));
+          setCopReg(2,0xa000,*(u_char *)(iVar18 + 0x70));
+          setCopReg(2,0x3000,*(u_char *)(iVar18 + 0x70));
           lVar36 = DRAW_DisplayTFace_S();
           if (lVar36 < 0x100000000) {
-            setCopReg(2,in_zero,*(undefined4 *)(iVar18 + 0x40));
-            setCopReg(2,in_at,*(undefined4 *)(iVar18 + 0x44));
-            setCopReg(2,(int)((u_longlong)lVar36 >> 0x20),*(undefined4 *)(iVar18 + 0x30));
-            setCopReg(2,(int)lVar36,*(undefined4 *)(iVar18 + 0x34));
-            setCopReg(2,piVar13,*(undefined4 *)(iVar18 + 0x48));
-            setCopReg(2,uVar14,*(undefined4 *)(iVar18 + 0x4c));
+            setCopReg(2,in_zero,*(u_char *)(iVar18 + 0x40));
+            setCopReg(2,in_at,*(u_char *)(iVar18 + 0x44));
+            setCopReg(2,(int)((u_longlong)lVar36 >> 0x20),*(u_char *)(iVar18 + 0x30));
+            setCopReg(2,(int)lVar36,*(u_char *)(iVar18 + 0x34));
+            setCopReg(2,piVar13,*(u_char *)(iVar18 + 0x48));
+            setCopReg(2,uVar14,*(u_char *)(iVar18 + 0x4c));
             copFunction(2,0x280030);
             uVar7 = *(u_int *)(iVar18 + 0x5c);
             uVar21 = *(u_int *)(iVar18 + 0x68);
             in_t0[3] = *(u_int *)(iVar18 + 100);
             in_t0[6] = uVar7;
             in_t0[9] = uVar21;
-            setCopReg(2,iVar28,*(undefined4 *)(iVar18 + 0x80));
-            setCopReg(2,puVar29,*(undefined4 *)(iVar18 + 0x74));
-            setCopReg(2,0xa000,*(undefined4 *)(iVar18 + 0x70));
-            setCopReg(2,0x3000,*(undefined4 *)(iVar18 + 0x70));
+            setCopReg(2,iVar28,*(u_char *)(iVar18 + 0x80));
+            setCopReg(2,puVar29,*(u_char *)(iVar18 + 0x74));
+            setCopReg(2,0xa000,*(u_char *)(iVar18 + 0x70));
+            setCopReg(2,0x3000,*(u_char *)(iVar18 + 0x70));
             lVar36 = DRAW_DisplayTFace_S();
             if (lVar36 < 0x100000000) {
               iVar24 = (int)*(char *)(iVar18 + 200) + 1;
               *(undefined *)(iVar18 + 200) = (char)iVar24;
-              setCopReg(2,in_zero,*(undefined4 *)(iVar18 + 0x28));
-              setCopReg(2,in_at,*(undefined4 *)(iVar18 + 0x2c));
-              setCopReg(2,iVar24,*(undefined4 *)(iVar18 + 0x30));
-              setCopReg(2,(int)lVar36,*(undefined4 *)(iVar18 + 0x34));
-              setCopReg(2,piVar13,*(undefined4 *)(iVar18 + 0x40));
-              setCopReg(2,uVar14,*(undefined4 *)(iVar18 + 0x44));
+              setCopReg(2,in_zero,*(u_char *)(iVar18 + 0x28));
+              setCopReg(2,in_at,*(u_char *)(iVar18 + 0x2c));
+              setCopReg(2,iVar24,*(u_char *)(iVar18 + 0x30));
+              setCopReg(2,(int)lVar36,*(u_char *)(iVar18 + 0x34));
+              setCopReg(2,piVar13,*(u_char *)(iVar18 + 0x40));
+              setCopReg(2,uVar14,*(u_char *)(iVar18 + 0x44));
               copFunction(2,0x280030);
               uVar7 = *(u_int *)(iVar18 + 0x5c);
               uVar21 = *(u_int *)(iVar18 + 100);
               in_t0[3] = *(u_int *)(iVar18 + 0x58);
               in_t0[6] = uVar7;
               in_t0[9] = uVar21;
-              setCopReg(2,iVar28,*(undefined4 *)(iVar18 + 0x80));
-              setCopReg(2,puVar29,*(undefined4 *)(iVar18 + 0x70));
-              setCopReg(2,0xa000,*(undefined4 *)(iVar18 + 0x7c));
-              setCopReg(2,0x3000,*(undefined4 *)(iVar18 + 0x7c));
+              setCopReg(2,iVar28,*(u_char *)(iVar18 + 0x80));
+              setCopReg(2,puVar29,*(u_char *)(iVar18 + 0x70));
+              setCopReg(2,0xa000,*(u_char *)(iVar18 + 0x7c));
+              setCopReg(2,0x3000,*(u_char *)(iVar18 + 0x7c));
               DRAW_DisplayTFace_S();
               *(short *)(iVar18 + 0x6a) = *(short *)(iVar18 + 0x5a);
-              setCopReg(2,in_zero,*(undefined4 *)(iVar18 + 0x48));
-              setCopReg(2,in_at,*(undefined4 *)(iVar18 + 0x4c));
-              setCopReg(2,(int)*(short *)(iVar18 + 0x5a),*(undefined4 *)(iVar18 + 0x30));
-              setCopReg(2,extraout_v1,*(undefined4 *)(iVar18 + 0x34));
-              setCopReg(2,piVar13,*(undefined4 *)(iVar18 + 0x38));
-              setCopReg(2,uVar14,*(undefined4 *)(iVar18 + 0x3c));
+              setCopReg(2,in_zero,*(u_char *)(iVar18 + 0x48));
+              setCopReg(2,in_at,*(u_char *)(iVar18 + 0x4c));
+              setCopReg(2,(int)*(short *)(iVar18 + 0x5a),*(u_char *)(iVar18 + 0x30));
+              setCopReg(2,extraout_v1,*(u_char *)(iVar18 + 0x34));
+              setCopReg(2,piVar13,*(u_char *)(iVar18 + 0x38));
+              setCopReg(2,uVar14,*(u_char *)(iVar18 + 0x3c));
               copFunction(2,0x280030);
               uVar7 = *(u_int *)(iVar18 + 0x5c);
               uVar21 = *(u_int *)(iVar18 + 0x60);
               in_t0[3] = *(u_int *)(iVar18 + 0x68);
               in_t0[6] = uVar7;
               in_t0[9] = uVar21;
-              setCopReg(2,iVar28,*(undefined4 *)(iVar18 + 0x80));
-              setCopReg(2,puVar29,*(undefined4 *)(iVar18 + 0x84));
-              setCopReg(2,0xa000,*(undefined4 *)(iVar18 + 0x74));
-              setCopReg(2,0x3000,*(undefined4 *)(iVar18 + 0x74));
+              setCopReg(2,iVar28,*(u_char *)(iVar18 + 0x80));
+              setCopReg(2,puVar29,*(u_char *)(iVar18 + 0x84));
+              setCopReg(2,0xa000,*(u_char *)(iVar18 + 0x74));
+              setCopReg(2,0x3000,*(u_char *)(iVar18 + 0x74));
               uVar37 = DRAW_DisplayTFace_S();
-              setCopReg(2,in_zero,*(undefined4 *)(iVar18 + 0x28));
-              setCopReg(2,in_at,*(undefined4 *)(iVar18 + 0x2c));
-              setCopReg(2,(int)((u_longlong)uVar37 >> 0x20),*(undefined4 *)(iVar18 + 0x50));
-              setCopReg(2,(int)uVar37,*(undefined4 *)(iVar18 + 0x54));
-              setCopReg(2,piVar13,*(undefined4 *)(iVar18 + 0x38));
-              setCopReg(2,uVar14,*(undefined4 *)(iVar18 + 0x3c));
+              setCopReg(2,in_zero,*(u_char *)(iVar18 + 0x28));
+              setCopReg(2,in_at,*(u_char *)(iVar18 + 0x2c));
+              setCopReg(2,(int)((u_longlong)uVar37 >> 0x20),*(u_char *)(iVar18 + 0x50));
+              setCopReg(2,(int)uVar37,*(u_char *)(iVar18 + 0x54));
+              setCopReg(2,piVar13,*(u_char *)(iVar18 + 0x38));
+              setCopReg(2,uVar14,*(u_char *)(iVar18 + 0x3c));
               copFunction(2,0x280030);
               uVar7 = *(u_int *)(iVar18 + 0x6c);
               uVar21 = *(u_int *)(iVar18 + 0x60);
               in_t0[3] = *(u_int *)(iVar18 + 0x58);
               in_t0[6] = uVar7;
               in_t0[9] = uVar21;
-              setCopReg(2,iVar28,*(undefined4 *)(iVar18 + 0x78));
-              setCopReg(2,puVar29,*(undefined4 *)(iVar18 + 0x84));
-              setCopReg(2,0xa000,*(undefined4 *)(iVar18 + 0x7c));
-              setCopReg(2,0x3000,*(undefined4 *)(iVar18 + 0x7c));
+              setCopReg(2,iVar28,*(u_char *)(iVar18 + 0x78));
+              setCopReg(2,puVar29,*(u_char *)(iVar18 + 0x84));
+              setCopReg(2,0xa000,*(u_char *)(iVar18 + 0x7c));
+              setCopReg(2,0x3000,*(u_char *)(iVar18 + 0x7c));
               DRAW_DisplayTFace_S();
             }
           }
@@ -3905,37 +3905,37 @@ void DRAW_DisplayPolytopeList_S()
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 u_int PIPE3D_TransformAnimatedInstanceVertices_S
-               (int param_1,undefined4 *param_2,u_int param_3,undefined4 *param_4,ushort *param_5,
-               undefined4 *param_6,u_int *param_7,u_int *param_8)
+               (int param_1,u_char *param_2,u_int param_3,u_char *param_4,ushort *param_5,
+               u_char *param_6,u_int *param_7,u_int *param_8)
 
 {
   u_int uVar1;
   int iVar2;
-  undefined4 uVar3;
-  undefined4 *puVar4;
-  undefined4 *puVar5;
+  u_char uVar3;
+  u_char *puVar4;
+  u_char *puVar5;
   int iVar6;
   u_int uVar7;
-  undefined4 uVar8;
-  undefined4 *puVar9;
+  u_char uVar8;
+  u_char *puVar9;
   int iVar10;
   u_int uVar11;
-  undefined4 uVar12;
-  undefined4 uVar13;
+  u_char uVar12;
+  u_char uVar13;
   u_int uVar14;
   int iVar15;
-  undefined4 uVar16;
-  undefined4 uVar17;
-  undefined4 *puVar18;
-  undefined4 unaff_s0;
-  undefined4 uVar19;
-  undefined4 unaff_s1;
+  u_char uVar16;
+  u_char uVar17;
+  u_char *puVar18;
+  u_char unaff_s0;
+  u_char uVar19;
+  u_char unaff_s1;
   u_int *puVar20;
-  undefined4 unaff_s2;
-  undefined4 unaff_s3;
-  undefined4 unaff_s4;
-  undefined4 unaff_s5;
-  undefined4 unaff_s6;
+  u_char unaff_s2;
+  u_char unaff_s3;
+  u_char unaff_s4;
+  u_char unaff_s5;
+  u_char unaff_s6;
   u_int *puVar21;
   int iVar22;
   
@@ -3963,8 +3963,8 @@ u_int PIPE3D_TransformAnimatedInstanceVertices_S
       do {
         iVar2 = (int)*(u_int *)(iVar22 + 8) >> 0x10;
         if (iVar2 != -1) {
-          puVar18 = (undefined4 *)(param_1 + iVar2 * 8);
-          puVar4 = (undefined4 *)(param_1 + (*(u_int *)(iVar22 + 8) & 0xffff) * 8);
+          puVar18 = (u_char *)(param_1 + iVar2 * 8);
+          puVar4 = (u_char *)(param_1 + (*(u_int *)(iVar22 + 8) & 0xffff) * 8);
           setCopControlWord(2,0,_DAT_1f800000);
           setCopControlWord(2,0x800,_DAT_1f800004);
           setCopControlWord(2,0x1000,_DAT_1f800008);
@@ -4000,7 +4000,7 @@ u_int PIPE3D_TransformAnimatedInstanceVertices_S
           setCopControlWord(2,0x3000,DAT_1f800018);
           setCopControlWord(2,0x3800,DAT_1f80001c);
           setCopReg(2,0,CONCAT22(param_5[0xc],param_5[10]));
-          setCopReg(2,uVar1,*(undefined4 *)(param_5 + 0xe));
+          setCopReg(2,uVar1,*(u_char *)(param_5 + 0xe));
           copFunction(2,0x480012);
           uVar8 = getCopReg(2,0x4800);
           uVar12 = getCopReg(2,0x5000);
@@ -4099,8 +4099,8 @@ u_int PIPE3D_TransformAnimatedInstanceVertices_S
         do {
           iVar2 = (int)*(u_int *)(iVar22 + 8) >> 0x10;
           if (iVar2 != -1) {
-            puVar18 = (undefined4 *)(param_1 + iVar2 * 8);
-            puVar4 = (undefined4 *)(param_1 + (*(u_int *)(iVar22 + 8) & 0xffff) * 8);
+            puVar18 = (u_char *)(param_1 + iVar2 * 8);
+            puVar4 = (u_char *)(param_1 + (*(u_int *)(iVar22 + 8) & 0xffff) * 8);
             setCopControlWord(2,0,_DAT_1f800034);
             setCopControlWord(2,0x800,_DAT_1f800038);
             setCopControlWord(2,0x1000,DAT_1f80003c);
@@ -4172,7 +4172,7 @@ u_int PIPE3D_TransformAnimatedInstanceVertices_S
             setCopControlWord(2,0x3000,DAT_1f800018);
             setCopControlWord(2,0x3800,DAT_1f80001c);
             setCopReg(2,0,CONCAT22(param_5[0xc],param_5[10]));
-            setCopReg(2,uVar1,*(undefined4 *)(param_5 + 0xe));
+            setCopReg(2,uVar1,*(u_char *)(param_5 + 0xe));
             copFunction(2,0x480012);
             uVar8 = getCopReg(2,0x4800);
             uVar12 = getCopReg(2,0x5000);
@@ -4202,12 +4202,12 @@ u_int PIPE3D_TransformAnimatedInstanceVertices_S
               setCopReg(2,0x2000,uVar16);
               setCopReg(2,0x2800,uVar1);
               copFunction(2,0x280030);
-              uVar12 = *(undefined4 *)(&gNormalList + (uVar7 >> 0x10));
-              uVar16 = *(undefined4 *)&(&gNormalList)[uVar7 >> 0x10].z;
-              uVar13 = *(undefined4 *)(&gNormalList + (uVar11 >> 0x10));
-              uVar17 = *(undefined4 *)&(&gNormalList)[uVar11 >> 0x10].z;
-              uVar3 = *(undefined4 *)(&gNormalList + (uVar1 >> 0x10));
-              uVar19 = *(undefined4 *)&(&gNormalList)[uVar1 >> 0x10].z;
+              uVar12 = *(u_char *)(&gNormalList + (uVar7 >> 0x10));
+              uVar16 = *(u_char *)&(&gNormalList)[uVar7 >> 0x10].z;
+              uVar13 = *(u_char *)(&gNormalList + (uVar11 >> 0x10));
+              uVar17 = *(u_char *)&(&gNormalList)[uVar11 >> 0x10].z;
+              uVar3 = *(u_char *)(&gNormalList + (uVar1 >> 0x10));
+              uVar19 = *(u_char *)&(&gNormalList)[uVar1 >> 0x10].z;
               uVar8 = getCopReg(2,0xc);
               *puVar5 = uVar8;
               uVar8 = getCopReg(2,0x11);
@@ -4263,8 +4263,8 @@ u_int PIPE3D_TransformAnimatedInstanceVertices_S
               setCopReg(2,0,uVar8);
               setCopReg(2,0x800,uVar7);
               copFunction(2,0x180001);
-              uVar16 = *(undefined4 *)(&gNormalList + (uVar7 >> 0x10));
-              uVar3 = *(undefined4 *)&(&gNormalList)[uVar7 >> 0x10].z;
+              uVar16 = *(u_char *)(&gNormalList + (uVar7 >> 0x10));
+              uVar3 = *(u_char *)&(&gNormalList)[uVar7 >> 0x10].z;
               uVar8 = getCopReg(2,0xe);
               *puVar5 = uVar8;
               uVar8 = getCopReg(2,0x13);
@@ -4293,8 +4293,8 @@ u_int PIPE3D_TransformAnimatedInstanceVertices_S
                 setCopReg(2,0,uVar12);
                 setCopReg(2,0x800,uVar11);
                 copFunction(2,0x180001);
-                uVar12 = *(undefined4 *)(&gNormalList + (uVar11 >> 0x10));
-                uVar16 = *(undefined4 *)&(&gNormalList)[uVar11 >> 0x10].z;
+                uVar12 = *(u_char *)(&gNormalList + (uVar11 >> 0x10));
+                uVar16 = *(u_char *)&(&gNormalList)[uVar11 >> 0x10].z;
                 uVar8 = getCopReg(2,0xe);
                 *param_2 = uVar8;
                 uVar8 = getCopReg(2,0x13);
@@ -4333,8 +4333,8 @@ u_int PIPE3D_TransformAnimatedInstanceVertices_S
         do {
           iVar2 = (int)*(u_int *)(iVar22 + 8) >> 0x10;
           if (iVar2 != -1) {
-            puVar18 = (undefined4 *)(param_1 + iVar2 * 8);
-            puVar4 = (undefined4 *)(param_1 + (*(u_int *)(iVar22 + 8) & 0xffff) * 8);
+            puVar18 = (u_char *)(param_1 + iVar2 * 8);
+            puVar4 = (u_char *)(param_1 + (*(u_int *)(iVar22 + 8) & 0xffff) * 8);
             setCopControlWord(2,0,_DAT_1f800034);
             setCopControlWord(2,0x800,_DAT_1f800038);
             setCopControlWord(2,0x1000,DAT_1f80003c);
@@ -4406,7 +4406,7 @@ u_int PIPE3D_TransformAnimatedInstanceVertices_S
             setCopControlWord(2,0x3000,DAT_1f800018);
             setCopControlWord(2,0x3800,DAT_1f80001c);
             setCopReg(2,0,CONCAT22(param_5[0xc],param_5[10]));
-            setCopReg(2,uVar1,*(undefined4 *)(param_5 + 0xe));
+            setCopReg(2,uVar1,*(u_char *)(param_5 + 0xe));
             copFunction(2,0x480012);
             uVar8 = getCopReg(2,0x4800);
             uVar12 = getCopReg(2,0x5000);
@@ -4437,8 +4437,8 @@ u_int PIPE3D_TransformAnimatedInstanceVertices_S
               setCopReg(2,0x2000,uVar16);
               setCopReg(2,0x2800,uVar1);
               copFunction(2,0x280030);
-              uVar12 = *(undefined4 *)(&gNormalList + (uVar7 >> 0x10));
-              uVar16 = *(undefined4 *)&(&gNormalList)[uVar7 >> 0x10].z;
+              uVar12 = *(u_char *)(&gNormalList + (uVar7 >> 0x10));
+              uVar16 = *(u_char *)&(&gNormalList)[uVar7 >> 0x10].z;
               uVar14 = *puVar21;
               uVar8 = getCopReg(2,0xc);
               *puVar5 = uVar8;
@@ -4474,8 +4474,8 @@ u_int PIPE3D_TransformAnimatedInstanceVertices_S
               *puVar20 = uVar14;
               uVar7 = puVar21[1];
               if ((uVar7 & 0x40000000) == 0) {
-                setCopReg(2,0,*(undefined4 *)(&gNormalList + (uVar11 >> 0x10)));
-                setCopReg(2,0x800,*(undefined4 *)&(&gNormalList)[uVar11 >> 0x10].z);
+                setCopReg(2,0,*(u_char *)(&gNormalList + (uVar11 >> 0x10)));
+                setCopReg(2,0x800,*(u_char *)&(&gNormalList)[uVar11 >> 0x10].z);
                 setCopReg(2,0x3000,uVar7);
                 if (iVar2 == 0) {
                   copFunction(2,0x108041b);
@@ -4488,8 +4488,8 @@ u_int PIPE3D_TransformAnimatedInstanceVertices_S
               puVar20[1] = uVar7;
               uVar7 = puVar21[2];
               if ((uVar7 & 0x40000000) == 0) {
-                setCopReg(2,0,*(undefined4 *)(&gNormalList + (uVar1 >> 0x10)));
-                setCopReg(2,0x800,*(undefined4 *)&(&gNormalList)[uVar1 >> 0x10].z);
+                setCopReg(2,0,*(u_char *)(&gNormalList + (uVar1 >> 0x10)));
+                setCopReg(2,0x800,*(u_char *)&(&gNormalList)[uVar1 >> 0x10].z);
                 setCopReg(2,0x3000,uVar7);
                 if (iVar2 == 0) {
                   copFunction(2,0x108041b);
@@ -4520,8 +4520,8 @@ u_int PIPE3D_TransformAnimatedInstanceVertices_S
               setCopReg(2,0,uVar8);
               setCopReg(2,0x800,uVar7);
               copFunction(2,0x180001);
-              uVar16 = *(undefined4 *)(&gNormalList + (uVar7 >> 0x10));
-              uVar3 = *(undefined4 *)&(&gNormalList)[uVar7 >> 0x10].z;
+              uVar16 = *(u_char *)(&gNormalList + (uVar7 >> 0x10));
+              uVar3 = *(u_char *)&(&gNormalList)[uVar7 >> 0x10].z;
               uVar1 = *puVar21;
               uVar8 = getCopReg(2,0xe);
               *puVar5 = uVar8;
@@ -4555,8 +4555,8 @@ u_int PIPE3D_TransformAnimatedInstanceVertices_S
                 setCopReg(2,0,uVar12);
                 setCopReg(2,0x800,uVar11);
                 copFunction(2,0x180001);
-                uVar12 = *(undefined4 *)(&gNormalList + (uVar11 >> 0x10));
-                uVar16 = *(undefined4 *)&(&gNormalList)[uVar11 >> 0x10].z;
+                uVar12 = *(u_char *)(&gNormalList + (uVar11 >> 0x10));
+                uVar16 = *(u_char *)&(&gNormalList)[uVar11 >> 0x10].z;
                 uVar11 = *param_8;
                 uVar8 = getCopReg(2,0xe);
                 *param_2 = uVar8;
@@ -5255,26 +5255,26 @@ u_int PIPE3D_TransformAnimatedInstanceVertices_S
 	/* end block 131 */
 	// End Line: 7726
 
-void DRAW_MFace3_S(undefined4 param_1,undefined4 param_2)
+void DRAW_MFace3_S(u_char param_1,u_char param_2)
 
 {
   char cVar1;
   byte bVar2;
-  undefined4 in_zero;
-  undefined4 in_at;
+  u_char in_zero;
+  u_char in_at;
   u_int in_v0;
   u_int in_v1;
   u_int uVar3;
   int iVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
+  u_char uVar5;
+  u_char uVar6;
   int iVar7;
   u_int uVar8;
   u_int uVar9;
   u_int uVar10;
   u_int uVar11;
   u_int uVar12;
-  undefined4 uVar13;
+  u_char uVar13;
   int iVar14;
   u_int *unaff_s0;
   u_int *puVar15;
@@ -5337,8 +5337,8 @@ void DRAW_MFace3_S(undefined4 param_1,undefined4 param_2)
         *(u_int *)(iVar4 + unaff_s1) = (u_int)unaff_s0 & 0xffffff;
         return;
       }
-      setCopReg(2,in_zero,**(undefined4 **)(unaff_s8 + 0x4c));
-      setCopReg(2,in_at,(*(undefined4 **)(unaff_s8 + 0x4c))[1]);
+      setCopReg(2,in_zero,**(u_char **)(unaff_s8 + 0x4c));
+      setCopReg(2,in_at,(*(u_char **)(unaff_s8 + 0x4c))[1]);
       setCopReg(2,0x3000,in_v1);
       copFunction(2,0xe80413);
       *unaff_s0 = *(u_int *)(iVar4 + unaff_s1);
@@ -5370,9 +5370,9 @@ void DRAW_MFace3_S(undefined4 param_1,undefined4 param_2)
         *(u_int *)(iVar4 + unaff_s1) = (u_int)unaff_s0 & 0xffffff;
         return;
       }
-      setCopReg(2,in_zero,**(undefined4 **)(unaff_s8 + 0x4c));
-      setCopReg(2,in_at,(*(undefined4 **)(unaff_s8 + 0x4c))[1]);
-      setCopReg(2,0x3000,*(undefined4 *)(in_v1 + 0xc));
+      setCopReg(2,in_zero,**(u_char **)(unaff_s8 + 0x4c));
+      setCopReg(2,in_at,(*(u_char **)(unaff_s8 + 0x4c))[1]);
+      setCopReg(2,0x3000,*(u_char *)(in_v1 + 0xc));
       copFunction(2,0xe80413);
       uVar3 = *unaff_s6;
       uVar8 = *unaff_s7;
@@ -5387,8 +5387,8 @@ void DRAW_MFace3_S(undefined4 param_1,undefined4 param_2)
       *(byte *)((int)unaff_s0 + 7) = *(byte *)((int)unaff_s0 + 7) | bVar2;
       return;
     }
-    setCopReg(2,in_zero,**(undefined4 **)(unaff_s8 + 0x4c));
-    setCopReg(2,in_at,(*(undefined4 **)(unaff_s8 + 0x4c))[1]);
+    setCopReg(2,in_zero,**(u_char **)(unaff_s8 + 0x4c));
+    setCopReg(2,in_at,(*(u_char **)(unaff_s8 + 0x4c))[1]);
     setCopReg(2,0x3000,*(u_int *)(in_v1 + 0xc) & 0xefffffff | 0x2000000);
     copFunction(2,0xe80413);
     uVar3 = *unaff_s6;
@@ -5429,26 +5429,26 @@ DRAW_MFace3_fog_backface:
       uVar5 = getCopControlWord(2,0xa800);
       uVar6 = getCopControlWord(2,0xb000);
       uVar13 = getCopControlWord(2,0xb800);
-      *(undefined4 *)(unaff_s8 + 0x70) = uVar5;
-      *(undefined4 *)(unaff_s8 + 0x74) = uVar6;
-      *(undefined4 *)(unaff_s8 + 0x78) = uVar13;
+      *(u_char *)(unaff_s8 + 0x70) = uVar5;
+      *(u_char *)(unaff_s8 + 0x74) = uVar6;
+      *(u_char *)(unaff_s8 + 0x78) = uVar13;
       setCopControlWord(2,0xa800,(int)*(char *)(unaff_s8 + 0x7c) << 4);
       setCopControlWord(2,0xb000,(int)*(char *)(unaff_s8 + 0x7d) << 4);
       setCopControlWord(2,0xb800,(int)*(char *)(unaff_s8 + 0x7e) << 4);
-      setCopReg(2,in_zero,**(undefined4 **)(unaff_s8 + 0x4c));
-      setCopReg(2,in_at,(*(undefined4 **)(unaff_s8 + 0x4c))[1]);
-      setCopReg(2,in_v0,**(undefined4 **)(unaff_s8 + 0x50));
-      setCopReg(2,in_v1,(*(undefined4 **)(unaff_s8 + 0x50))[1]);
-      setCopReg(2,param_1,**(undefined4 **)(unaff_s8 + 0x54));
-      setCopReg(2,param_2,(*(undefined4 **)(unaff_s8 + 0x54))[1]);
+      setCopReg(2,in_zero,**(u_char **)(unaff_s8 + 0x4c));
+      setCopReg(2,in_at,(*(u_char **)(unaff_s8 + 0x4c))[1]);
+      setCopReg(2,in_v0,**(u_char **)(unaff_s8 + 0x50));
+      setCopReg(2,in_v1,(*(u_char **)(unaff_s8 + 0x50))[1]);
+      setCopReg(2,param_1,**(u_char **)(unaff_s8 + 0x54));
+      setCopReg(2,param_2,(*(u_char **)(unaff_s8 + 0x54))[1]);
       setCopReg(2,0x3000,in_v1);
       copFunction(2,0xf80416);
       *unaff_s0 = *(u_int *)(iVar4 + unaff_s1);
       *(undefined *)((int)unaff_s0 + 3) = 6;
       *(u_int *)(iVar4 + unaff_s1) = (u_int)unaff_s0 & 0xffffff;
-      uVar5 = *(undefined4 *)(unaff_s8 + 0x70);
-      uVar6 = *(undefined4 *)(unaff_s8 + 0x74);
-      uVar13 = *(undefined4 *)(unaff_s8 + 0x78);
+      uVar5 = *(u_char *)(unaff_s8 + 0x70);
+      uVar6 = *(u_char *)(unaff_s8 + 0x74);
+      uVar13 = *(u_char *)(unaff_s8 + 0x78);
       uVar3 = getCopReg(2,0x14);
       unaff_s0[1] = uVar3;
       uVar3 = getCopReg(2,0x15);
@@ -5469,12 +5469,12 @@ DRAW_MFace3_fog_backface:
       unaff_s0[5] = uVar3;
       uVar3 = getCopReg(2,0xe);
       unaff_s0[7] = uVar3;
-      setCopReg(2,in_zero,**(undefined4 **)(unaff_s8 + 0x4c));
-      setCopReg(2,in_at,(*(undefined4 **)(unaff_s8 + 0x4c))[1]);
-      setCopReg(2,in_v0,**(undefined4 **)(unaff_s8 + 0x50));
-      setCopReg(2,in_v1,(*(undefined4 **)(unaff_s8 + 0x50))[1]);
-      setCopReg(2,param_1,**(undefined4 **)(unaff_s8 + 0x54));
-      setCopReg(2,param_2,(*(undefined4 **)(unaff_s8 + 0x54))[1]);
+      setCopReg(2,in_zero,**(u_char **)(unaff_s8 + 0x4c));
+      setCopReg(2,in_at,(*(u_char **)(unaff_s8 + 0x4c))[1]);
+      setCopReg(2,in_v0,**(u_char **)(unaff_s8 + 0x50));
+      setCopReg(2,in_v1,(*(u_char **)(unaff_s8 + 0x50))[1]);
+      setCopReg(2,param_1,**(u_char **)(unaff_s8 + 0x54));
+      setCopReg(2,param_2,(*(u_char **)(unaff_s8 + 0x54))[1]);
       setCopReg(2,0x3000,in_v1);
       copFunction(2,0xf80416);
       *unaff_s0 = *(u_int *)(iVar4 + unaff_s1);
@@ -5495,12 +5495,12 @@ DRAW_MFace3_fog_backface:
     unaff_s0[4] = uVar3;
     uVar3 = getCopReg(2,0xe);
     unaff_s0[6] = uVar3;
-    setCopReg(2,in_zero,**(undefined4 **)(unaff_s8 + 0x4c));
-    setCopReg(2,in_at,(*(undefined4 **)(unaff_s8 + 0x4c))[1]);
-    setCopReg(2,in_v0,**(undefined4 **)(unaff_s8 + 0x50));
-    setCopReg(2,in_v1,(*(undefined4 **)(unaff_s8 + 0x50))[1]);
-    setCopReg(2,param_1,**(undefined4 **)(unaff_s8 + 0x54));
-    setCopReg(2,param_2,(*(undefined4 **)(unaff_s8 + 0x54))[1]);
+    setCopReg(2,in_zero,**(u_char **)(unaff_s8 + 0x4c));
+    setCopReg(2,in_at,(*(u_char **)(unaff_s8 + 0x4c))[1]);
+    setCopReg(2,in_v0,**(u_char **)(unaff_s8 + 0x50));
+    setCopReg(2,in_v1,(*(u_char **)(unaff_s8 + 0x50))[1]);
+    setCopReg(2,param_1,**(u_char **)(unaff_s8 + 0x54));
+    setCopReg(2,param_2,(*(u_char **)(unaff_s8 + 0x54))[1]);
     setCopReg(2,0x3000,in_v1);
     copFunction(2,0xf80416);
     *unaff_s0 = *(u_int *)(iVar4 + unaff_s1);
@@ -5599,7 +5599,7 @@ DMF_faded_tpage_calc:
   *(char *)(unaff_s0 + 0xf) = (char)uVar10 - cVar1;
   *(char *)(unaff_s0 + 0x11) = (char)uVar12 - cVar1;
   *(ushort *)((int)unaff_s0 + 0x3e) =
-       (ushort)(uVar3 >> 6) | (ushort)*(undefined4 *)(unaff_s8 + 0x88);
+       (ushort)(uVar3 >> 6) | (ushort)*(u_char *)(unaff_s8 + 0x88);
   unaff_s0[10] = *(u_int *)(iVar4 + unaff_s1);
   *(undefined *)((int)unaff_s0 + 0x2b) = 7;
   *(u_int *)(iVar4 + unaff_s1) = (u_int)(unaff_s0 + 10) & 0xffffff;
@@ -6407,7 +6407,7 @@ void DRAW_MFace3_fog_backface()
     */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-u_int DRAW_SplitModel_S(int param_1,undefined4 param_2,int param_3,undefined4 *param_4,int param_5)
+u_int DRAW_SplitModel_S(int param_1,u_char param_2,int param_3,u_char *param_4,int param_5)
 
 {
   u_int uVar1;
@@ -6456,7 +6456,7 @@ u_int DRAW_SplitModel_S(int param_1,undefined4 param_2,int param_3,undefined4 *p
       uVar1 = (**(code **)((((u_int)(0 < *(short *)(param_3 + (u_int)puVar2[2] * 8 + 4)) << 1 |
                             (u_int)(0 < *(short *)(param_3 + (u_int)puVar2[1] * 8 + 4))) << 1 |
                            (u_int)(0 < *(short *)(param_3 + (u_int)*puVar2 * 8 + 4))) * 4 + 0x1f800000
-                          ))(&gNormalList,*(undefined4 *)(param_1 + 4));
+                          ))(&gNormalList,*(u_char *)(param_1 + 4));
       return uVar1;
     }
     puVar2 = puVar2 + 6;

@@ -37,8 +37,8 @@ void HUNTER_InitFlamethrow(_Instance *instance)
   if (puVar1 != (undefined2 *)0x0) {
     puVar1[1] = 0;
     *puVar1 = 0;
-    *(undefined4 *)(puVar1 + 4) = 0;
-    *(undefined4 *)(puVar1 + 2) = 0;
+    *(u_char *)(puVar1 + 4) = 0;
+    *(u_char *)(puVar1 + 2) = 0;
     *(u_int *)((int)pvVar2 + 4) = *(u_int *)((int)pvVar2 + 4) & 0xfffffffb;
   }
   return;
@@ -174,8 +174,8 @@ int HUNTER_Flamethrow(_Instance *instance,int damage,int newPoint,int segment)
             Data = -Data;
           }
           if (((Data < 200) &&
-              (lVar5 = MATH3D_LengthXY((int)local_48.x - (int)local_40,
-                                       (int)local_48.y - (int)local_3e), lVar5 < 0x4b0)) &&
+              (lVar5 = MATH3D_LengthXYZ((int)local_48.x - (int)local_40,
+                                        (int)local_48.y - (int)local_3e), lVar5 < 0x4b0)) &&
              ((int)(short)puVar11[((int)(short)puVar11[1] - (lVar5 / 0x4b + 1) & 0xfU) + 6] != -1))
           {
             uVar4 = (int)sVar2 -
@@ -191,8 +191,8 @@ int HUNTER_Flamethrow(_Instance *instance,int damage,int newPoint,int segment)
               }
               if (0x50 < Data) goto LAB_8007d2a0;
             }
-            Data = SetMonsterHitData(instance,(_Instance *)0x0,damage << 8,0,0);
-            INSTANCE_Post(*(_Instance **)(iVar9 + 4),0x1000000,Data);
+            Data = SetMonsterImpaleData(instance,(_Instance *)0x0,damage << 8,0,0);
+            INSTANCE_Query(*(_Instance **)(iVar9 + 4),0x1000000,Data);
           }
         }
       }
@@ -220,7 +220,7 @@ LAB_8007d2a0:
               if (size < 0x25) {
                 size = 0x25;
               }
-              FX_MakeHitFlame(&local_48,0,(int)(short)uVar1,Data,size);
+              FX_MakeHitFX(&local_48,0,(int)(short)uVar1,Data,size);
               Data = Data + iVar6 / 2;
               size = Data / 6 + (Data >> 0x1f);
             } while (Data < iVar10);
@@ -280,7 +280,7 @@ void HUNTER_Init(_Instance *instance)
   p_Var3 = HUMAN_CreateWeapon(instance,weaponid,(u_int)bVar1);
   if (p_Var3 != (_Instance *)0x0) {
     HUMAN_Init(instance);
-    *(undefined4 *)((int)pvVar5 + 0x16c) = 0;
+    *(u_char *)((int)pvVar5 + 0x16c) = 0;
     if (*(char *)((int)pvVar5 + 0x15a) == '\0') {
       uVar2 = 0x5000;
     }
@@ -291,8 +291,8 @@ void HUNTER_Init(_Instance *instance)
       uVar2 = 0x6000;
     }
     *(undefined2 *)((int)pvVar5 + 0x144) = uVar2;
-    G2Anim_DisableSegment(&instance->anim,0x1f);
-    G2Anim_DisableSegment(&instance->anim,0x17);
+    G2Anim_EnableSegment(&instance->anim,0x1f);
+    G2Anim_EnableSegment(&instance->anim,0x17);
   }
   return;
 }
@@ -325,9 +325,9 @@ void HUNTER_CleanUp(_Instance *instance)
   
   if ((instance->extraData != (void *)0x0) &&
      (address = *(char **)((int)instance->extraData + 0x16c), address != (char *)0x0)) {
-    MEMPACK_Free(address);
+    MEMPACK_Init(address);
   }
-  HUMAN_CleanUp(instance);
+  MON_CleanUp(instance);
   return;
 }
 
@@ -390,7 +390,7 @@ void HUNTER_ProjectileEntry(_Instance *instance)
 	/* end block 2 */
 	// End Line: 994
 
-void HUNTER_Projectile(_Instance *instance)
+void BirthProjectilePhysOb(_Instance *instance)
 
 {
   char cVar1;
@@ -398,9 +398,9 @@ void HUNTER_Projectile(_Instance *instance)
   u_long uVar3;
   long lVar4;
   u_int animtype;
-  undefined4 local_18;
+  u_char local_18;
   void *pvVar5;
-  undefined4 local_14;
+  u_char local_14;
   int iVar6;
   int mode;
   int *piVar7;
@@ -411,7 +411,7 @@ void HUNTER_Projectile(_Instance *instance)
           (int)*(char *)(*(int *)(*(int *)((int)pvVar5 + 0x164) + 8) + 0x1a) * 0x10;
   piVar7 = *(int **)((int)instance->data + 4);
   if (*(char *)((int)pvVar5 + 0x15a) == '\0') {
-    MON_Projectile(instance);
+    MON_ProjectileEntry(instance);
     goto LAB_8007d784;
   }
   if (mode == 0) {
@@ -429,7 +429,7 @@ void HUNTER_Projectile(_Instance *instance)
            iVar6 != 0)) {
           *(u_int *)((int)pvVar5 + 4) = *(u_int *)((int)pvVar5 + 4) | 1;
           HUNTER_InitFlamethrow(instance);
-          uVar3 = MON_GetTime(instance);
+          uVar3 = MON_GetAnim(instance);
           *(int *)(mode + 8) = uVar3 + *piVar7 * 0x21;
         }
         goto LAB_8007d784;
@@ -442,7 +442,7 @@ void HUNTER_Projectile(_Instance *instance)
         if (animtype == (u_int)*(byte *)(iVar6 + 5)) {
           mode = 2;
         }
-        MON_PlayAnimFromList(instance,(char *)(iVar6 + 0xe),animtype,mode);
+        MON_PlayAnimFromListIfNotPlaying(instance,(char *)(iVar6 + 0xe),animtype,mode);
         goto LAB_8007d784;
       }
     }
@@ -453,19 +453,19 @@ void HUNTER_Projectile(_Instance *instance)
       *(u_int *)((int)pvVar5 + 4) = *(u_int *)((int)pvVar5 + 4) | 2;
       if (*(int *)((int)pvVar5 + 0xc4) != 0) {
         iVar6 = *(int *)(*(int *)((int)pvVar5 + 0xc4) + 4);
-        lVar4 = MATH3D_LengthXY((int)*(short *)(iVar6 + 0x5c) - (int)(instance->position).x,
-                                (int)*(short *)(iVar6 + 0x5e) - (int)(instance->position).y);
-        uVar3 = MON_GetTime(instance);
+        lVar4 = MATH3D_LengthXYZ((int)*(short *)(iVar6 + 0x5c) - (int)(instance->position).x,
+                                 (int)*(short *)(iVar6 + 0x5e) - (int)(instance->position).y);
+        uVar3 = MON_GetAnim(instance);
         if ((uVar3 <= *(u_int *)(mode + 8)) || (lVar4 < 0x4b0)) {
           *(u_int *)((int)pvVar5 + 4) = *(u_int *)((int)pvVar5 + 4) & 0xfffffffd;
         }
-        MON_TurnToPosition(instance,(_Position *)(*(int *)(*(int *)((int)pvVar5 + 0xc4) + 4) + 0x5c)
+        MON_MoveToPosition(instance,(_Position *)(*(int *)(*(int *)((int)pvVar5 + 0xc4) + 4) + 0x5c)
                            ,*(short *)(*(int *)((int)pvVar5 + 0x164) + 0x1c));
       }
       goto LAB_8007d784;
     }
     if (*(int *)((int)pvVar5 + 0xc4) != 0) {
-      MON_TurnToPosition(instance,(_Position *)(*(int *)(*(int *)((int)pvVar5 + 0xc4) + 4) + 0x5c),
+      MON_MoveToPosition(instance,(_Position *)(*(int *)(*(int *)((int)pvVar5 + 0xc4) + 4) + 0x5c),
                          *(short *)(*(int *)((int)pvVar5 + 0x164) + 0x1c));
     }
     mode = HUNTER_Flamethrow(instance,(u_int)*(byte *)(iVar6 + 7),0,(u_int)*(byte *)(iVar6 + 6));
@@ -473,13 +473,13 @@ void HUNTER_Projectile(_Instance *instance)
     cVar1 = *(char *)((int)pvVar5 + 0x15b) + '\x01';
     *(char *)((int)pvVar5 + 0x15b) = cVar1;
     if ((int)cVar1 < (int)(u_int)*(byte *)(iVar6 + 0xd)) {
-      MON_PlayAnimFromList(instance,(char *)(iVar6 + 0xe),(int)cVar1,1);
+      MON_PlayAnimFromListIfNotPlaying(instance,(char *)(iVar6 + 0xe),(int)cVar1,1);
       goto LAB_8007d784;
     }
   }
   MON_SwitchState(instance,(MonsterState)CONCAT44(local_14,local_18));
 LAB_8007d784:
-  MON_DefaultQueueHandler(instance);
+  MON_DefaultMessageHandler(instance);
   return;
 }
 

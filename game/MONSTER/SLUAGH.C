@@ -119,10 +119,10 @@ void SLUAGH_DamageEffect(_Instance *instance,evFXHitData *data)
   int iVar3;
   u_int *puVar4;
   u_int uVar5;
-  undefined4 local_30;
+  u_char local_30;
   undefined *local_2c;
-  undefined4 local_28;
-  undefined4 local_20;
+  u_char local_28;
+  u_char local_20;
   u_int local_18;
   
   if (data == (evFXHitData *)0x0) {
@@ -169,8 +169,9 @@ void SLUAGH_DamageEffect(_Instance *instance,evFXHitData *data)
   else {
     local_30 = 0;
     local_2c = &DAT_0000fffe;
-    FX_Blood((_SVector *)data,&data->velocity,(_SVector *)&local_30,(int)data->amount,0x308000,8);
-    FX_MakeHitFX((_SVector *)data);
+    FX_BloodCone((_SVector *)data,&data->velocity,(_SVector *)&local_30,(int)data->amount,0x308000,8
+                );
+    FX_MakeSpark((_SVector *)data);
   }
   return;
 }
@@ -197,7 +198,7 @@ void SLUAGH_DamageEffect(_Instance *instance,evFXHitData *data)
 	/* end block 2 */
 	// End Line: 291
 
-void SLUAGH_Init(_Instance *instance)
+void SLUAGH_Attack(_Instance *instance)
 
 {
   _FXGlowEffect *p_Var1;
@@ -213,10 +214,10 @@ void SLUAGH_Init(_Instance *instance)
     iVar2 = iVar2 + 0xfff;
   }
   local_18[0] = FX_GetHealthColor(iVar2 >> 0xc);
-  p_Var1 = FX_DoInstanceOneSegmentGlow
+  p_Var1 = FX_DoInstanceTwoSegmentGlow
                      (instance,(u_int)*(byte *)((int)pvVar4 + 0x19),local_18,1,0x4b0,0x68,0x70);
   *(_FXGlowEffect **)(puVar3 + 0x37) = p_Var1;
-  MON_DefaultInit(instance);
+  MON_SetDefaults(instance);
   *(undefined2 *)(puVar3 + 0x51) = 0x2000;
   puVar3[1] = puVar3[1] & 0xfffffffe;
   *puVar3 = *puVar3 | 0x2002000;
@@ -243,18 +244,18 @@ void SLUAGH_Init(_Instance *instance)
 	/* end block 2 */
 	// End Line: 358
 
-void SLUAGH_DeathEntry(_Instance *instance)
+void SLUAGH_Death(_Instance *instance)
 
 {
   int iVar1;
-  undefined4 local_10;
+  u_char local_10;
   u_int *puVar2;
-  undefined4 local_c;
-  undefined4 local_8;
-  undefined4 in_stack_fffffffc;
+  u_char local_c;
+  u_char local_8;
+  u_char in_stack_fffffffc;
   
   puVar2 = (u_int *)instance->extraData;
-  FX_StopGlowEffect((_FXGlowEffect *)puVar2[0x37],0);
+  FX_StopAllGlowEffects((_FXGlowEffect *)puVar2[0x37],0);
   puVar2[0x37] = 0;
   if (puVar2[0x31] != 0) {
     iVar1 = MON_SetUpKnockBack(instance,*(_Instance **)(puVar2[0x31] + 4),
@@ -265,7 +266,7 @@ void SLUAGH_DeathEntry(_Instance *instance)
   }
   *(undefined *)((int)puVar2 + 0x156) = 9;
   if ((puVar2[1] & 1) == 0) {
-    MON_BirthMana(instance);
+    MON_BirthEntry(instance);
     puVar2[1] = puVar2[1] | 1;
   }
   *puVar2 = *puVar2 | 0x200000;
@@ -302,11 +303,11 @@ void SLUAGH_DeathEntry(_Instance *instance)
 
 /* WARNING: Restarted to delay deadcode elimination for space: stack */
 
-void SLUAGH_Death(_Instance *instance)
+void SLUAGH_DeathEntry(_Instance *instance)
 
 {
-  undefined4 local_8;
-  undefined4 local_4;
+  u_char local_8;
+  u_char local_4;
   undefined8 uStackX0;
   
   if ((instance->flags2 & 0x10U) != 0) {
@@ -315,7 +316,7 @@ void SLUAGH_Death(_Instance *instance)
   if ((instance->flags2 & 2U) != 0) {
     MON_SwitchState(instance,(MonsterState)CONCAT44(local_4,local_8));
   }
-  MON_DefaultQueueHandler(instance);
+  MON_DefaultMessageHandler(instance);
   return;
 }
 
@@ -344,14 +345,14 @@ void SLUAGH_Death(_Instance *instance)
 void SLUAGH_AttackEntry(_Instance *instance)
 
 {
-  undefined4 unaff_s0;
+  u_char unaff_s0;
   void *pvVar1;
-  undefined4 unaff_retaddr;
+  u_char unaff_retaddr;
   undefined8 uStackX0;
   
   pvVar1 = instance->extraData;
   if ((*(ushort *)(*(int *)((int)pvVar1 + 0xc4) + 0x16) & 8) == 0) {
-    MON_AttackEntry(instance);
+    MON_Attack(instance);
   }
   else {
     MON_PlayAnim(instance,(MonsterAnim)CONCAT88(uStackX0,CONCAT44(unaff_retaddr,unaff_s0)),0x1e);
@@ -391,39 +392,38 @@ void SLUAGH_AttackEntry(_Instance *instance)
 
 /* WARNING: Type propagation algorithm not settling */
 
-void SLUAGH_Attack(_Instance *instance)
+void SLUAGH_Init(_Instance *instance)
 
 {
   __Event *message;
   int Data;
-  undefined4 local_10;
-  undefined4 local_c;
+  u_char local_10;
+  u_char local_c;
   void *pvVar1;
   
   pvVar1 = instance->extraData;
   if ((*(u_int *)((int)pvVar1 + 4) & 4) == 0) {
-    MON_Attack(instance);
+    MON_ChooseAttack(instance);
   }
   else {
     if ((instance->flags2 & 0x10U) != 0) {
       MON_SwitchState(instance,(MonsterState)CONCAT44(local_c,local_10));
     }
-    while (message = DeMessageQueue((__MessageQueue *)((int)pvVar1 + 8)), message != (__Event *)0x0)
-    {
+    while (message = PurgeMessageQueue((__MessageQueue *)((int)pvVar1 + 8)),
+          message != (__Event *)0x0) {
       if (message->ID == 0x1000009) {
         if (*(_Instance **)&((_Instance *)message->Data)->node != gameTrackerX.playerInstance) {
           MON_SwitchState(instance,(MonsterState)CONCAT44(local_c,local_10));
         }
       }
       else {
-        MON_DefaultMessageHandler(instance,message);
+        MON_PupateMessageHandler(instance,message);
       }
     }
     if ((instance->currentMainState == 6) && (*(int *)((int)pvVar1 + 0xc4) != 0)) {
-      Data = SetMonsterSoulSuckData
-                       (instance,(int)(instance->position).x,(int)(instance->position).y,
-                        (int)(instance->position).z);
-      INSTANCE_Post(*(_Instance **)(*(int *)((int)pvVar1 + 0xc4) + 4),0x1000009,Data);
+      Data = SetMonsterHitData(instance,(int)(instance->position).x,(int)(instance->position).y,
+                               (int)(instance->position).z);
+      INSTANCE_Query(*(_Instance **)(*(int *)((int)pvVar1 + 0xc4) + 4),0x1000009,Data);
     }
     else {
       *(u_int *)((int)pvVar1 + 4) = *(u_int *)((int)pvVar1 + 4) & 0xfffffffb;

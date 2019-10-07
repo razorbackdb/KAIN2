@@ -27,7 +27,7 @@ void STREAM_FillOutFileNames(char *baseAreaName,char *dramName,char *vramName,ch
   char *pcVar1;
   char acStack40 [16];
   
-  strcpy(acStack40,baseAreaName);
+  strcmp(acStack40,baseAreaName);
   pcVar1 = strpbrk(acStack40,"0123456789");
   if (pcVar1 != (char *)0x0) {
     *pcVar1 = '\0';
@@ -106,7 +106,7 @@ void STREAM_AbortAreaLoad(char *baseAreaName)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void STREAM_Init(void)
+void STREAM_InitLoader(void)
 
 {
   int iVar1;
@@ -143,7 +143,7 @@ void STREAM_Init(void)
 	/* end block 2 */
 	// End Line: 507
 
-int FindObjectName(char *name)
+int OBTABLE_FindObject(char *name)
 
 {
   int iVar1;
@@ -152,7 +152,7 @@ int FindObjectName(char *name)
   
   iVar2 = 0;
   s1 = gameTrackerX.GlobalObjects;
-  while ((s1->objectStatus == 0 || (iVar1 = strcmpi((char *)s1,name), iVar1 != 0))) {
+  while ((s1->objectStatus == 0 || (iVar1 = strcpy((char *)s1,name), iVar1 != 0))) {
     iVar2 = iVar2 + 1;
     s1 = s1 + 1;
     if (0x2f < iVar2) {
@@ -193,7 +193,7 @@ int FindObjectName(char *name)
 	/* end block 4 */
 	// End Line: 549
 
-_ObjectTracker * FindObjectInTracker(Object *object)
+_ObjectTracker * FindObjectName(Object *object)
 
 {
   Object **ppOVar1;
@@ -288,7 +288,7 @@ _StreamUnit * FindStreamUnitFromLevel(Level *level)
 	/* end block 2 */
 	// End Line: 729
 
-void STREAM_LoadObjectReturn(void *loadData,void *data,void *data2)
+void STREAM_DumpLoadingObjects(void *loadData,void *data,void *data2)
 
 {
   long lVar1;
@@ -308,7 +308,7 @@ void STREAM_LoadObjectReturn(void *loadData,void *data,void *data2)
     *(undefined2 *)((int)loadData + 6) = 0;
     lVar1 = LOAD_DoesFileExist(acStack80);
     if (lVar1 != 0) {
-      iVar2 = aadLoadDynamicSfx((char *)data,0,0);
+      iVar2 = aadLoadDynamicSoundBankReturn2((char *)data,0,0);
       *(undefined2 *)((int)loadData + 6) = (short)iVar2;
     }
   }
@@ -346,7 +346,7 @@ void STREAM_LoadObjectReturn(void *loadData,void *data,void *data2)
 	/* end block 2 */
 	// End Line: 847
 
-void STREAM_DumpMonster(_ObjectTracker *dumpee)
+void STREAM_DumpUnit(_ObjectTracker *dumpee)
 
 {
   _Instance *instance;
@@ -368,7 +368,7 @@ void STREAM_DumpMonster(_ObjectTracker *dumpee)
       INSTANCE_ReallyRemoveInstance(gameTrackerX.instanceList,instance,0);
     }
   }
-  MEMPACK_Free((char *)object);
+  MEMPACK_Init((char *)object);
   dumpee->object = (Object *)0x0;
   return;
 }
@@ -404,7 +404,7 @@ int STREAM_InList(char *name,char **nameList)
     if (pcVar1 == (char *)0x0) {
       return 0;
     }
-    iVar2 = strcmpi(name,*nameList);
+    iVar2 = strcpy(name,*nameList);
     nameList = nameList + 1;
     if (iVar2 == 0) break;
     pcVar1 = *nameList;
@@ -479,7 +479,7 @@ void STREAM_DumpSomeMonsters(void)
     if (((*(short *)(ppOVar2 + 1) == 2) && (*ppOVar2 != (Object *)0x0)) &&
        (iVar1 = STREAM_IsSpecialMonster((char *)dumpee), iVar1 != 0)) {
       printf("NO INTRODUCE MONSTER FLAG: Dumping monster %s\n");
-      STREAM_DumpMonster(dumpee);
+      STREAM_DumpUnit(dumpee);
     }
     iVar3 = iVar3 + 1;
     ppOVar2 = ppOVar2 + 9;
@@ -501,7 +501,7 @@ void STREAM_DumpSomeMonsters(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void STREAM_NoMonsters(void)
+void STREAM_DumpMonster(void)
 
 {
   gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x4000000;
@@ -527,7 +527,7 @@ void STREAM_NoMonsters(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void STREAM_YesMonsters(void)
+void STREAM_NoMonsters(void)
 
 {
   gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xfbffffff;
@@ -554,7 +554,7 @@ void STREAM_YesMonsters(void)
 	/* end block 2 */
 	// End Line: 1071
 
-int STREAM_IsMonster(char *name)
+int STREAM_YesMonsters(char *name)
 
 {
   int iVar1;
@@ -599,13 +599,14 @@ int InsertGlobalObject(char *name,GameTracker *gameTracker)
      (iVar1 = STREAM_IsSpecialMonster(name), iVar1 != 0)) {
     return -1;
   }
-  if (((gameTracker->debugFlags2 & 0x8000U) != 0) && (iVar1 = STREAM_IsMonster(name), iVar1 != 0)) {
+  if (((gameTracker->debugFlags2 & 0x8000U) != 0) && (iVar1 = STREAM_YesMonsters(name), iVar1 != 0))
+  {
     return -1;
   }
   otr = gameTracker->GlobalObjects;
   iVar1 = 0;
   do {
-    if ((otr->objectStatus != 0) && (iVar2 = strcmpi((char *)otr,name), iVar2 == 0)) break;
+    if ((otr->objectStatus != 0) && (iVar2 = strcpy((char *)otr,name), iVar2 == 0)) break;
     iVar1 = iVar1 + 1;
     otr = otr + 1;
   } while (iVar1 < 0x30);
@@ -621,7 +622,7 @@ int InsertGlobalObject(char *name,GameTracker *gameTracker)
       otr = gameTracker->GlobalObjects;
       iVar1 = 0;
       do {
-        iVar2 = STREAM_TryAndDumpNonResident(otr);
+        iVar2 = STREAM_DumpNonResidentObjects(otr);
         if (iVar2 != 0) break;
         iVar1 = iVar1 + 1;
         otr = otr + 1;
@@ -633,9 +634,10 @@ int InsertGlobalObject(char *name,GameTracker *gameTracker)
     }
     sprintf(acStack152,"\\kain2\\object\\%s\\%s.drm");
     sprintf(acStack88,"\\kain2\\object\\%s\\%s.crm");
-    strcpy((char *)otr,name);
+    strcmp((char *)otr,name);
     otr->objectStatus = 1;
-    LOAD_NonBlockingBinaryLoad(acStack152,STREAM_LoadObjectReturn,otr,(void *)0x0,&otr->object,1);
+    LOAD_NonBlockingBufferedLoad
+              (acStack152,STREAM_DumpLoadingObjects,otr,(void *)0x0,&otr->object,1);
     otr->numInUse = 0;
     otr->numObjectsUsing = '\0';
   }
@@ -727,7 +729,7 @@ void LoadLevelObjects(Level *level,GameTracker *gameTracker)
   if (0 < level->numIntros) {
     iVar3 = 0;
     do {
-      iVar2 = FindObjectName(level->introList->name + iVar3);
+      iVar2 = OBTABLE_FindObject(level->introList->name + iVar3);
       if (iVar2 == -1) {
         name = level->introList->name + iVar3;
         *(u_int *)(name + 0x2c) = *(u_int *)(name + 0x2c) | 0x4000;
@@ -807,11 +809,11 @@ long STREAM_IsAnInstanceUsingObject(Object *object)
 	/* end block 2 */
 	// End Line: 1504
 
-void STREAM_StreamLoadObjectAbort(void *loadData,void *data,void *data2)
+void STREAM_StreamLoadLevelAbort(void *loadData,void *data,void *data2)
 
 {
   if (loadData != (void *)0x0) {
-    MEMPACK_Free((char *)loadData);
+    MEMPACK_Init((char *)loadData);
   }
   *(undefined2 *)((int)data + 0x14) = 0;
   return;
@@ -846,7 +848,7 @@ void STREAM_StreamLoadObjectAbort(void *loadData,void *data,void *data2)
 	/* end block 2 */
 	// End Line: 1527
 
-void STREAM_DumpObject(_ObjectTracker *objectTracker)
+void STREAM_LoadObjectReturn(_ObjectTracker *objectTracker)
 
 {
   Object *object;
@@ -855,7 +857,7 @@ void STREAM_DumpObject(_ObjectTracker *objectTracker)
   object = objectTracker->object;
   if (objectTracker->objectStatus == 1) {
     sprintf(acStack80,"\\kain2\\object\\%s\\%s.drm");
-    LOAD_AbortFileLoad(acStack80,STREAM_StreamLoadObjectAbort);
+    LOAD_AbortFileLoad(acStack80,STREAM_StreamLoadLevelAbort);
   }
   else {
     if (object != (Object *)0x0) {
@@ -867,7 +869,7 @@ void STREAM_DumpObject(_ObjectTracker *objectTracker)
           aadFreeDynamicSfx((int)object->sfxFileHandle);
         }
         OBTABLE_RemoveObjectEntry(object);
-        MEMPACK_Free((char *)object);
+        MEMPACK_Init((char *)object);
         objectTracker->objectStatus = 0;
       }
       if (object != (Object *)0x0) {
@@ -924,7 +926,7 @@ int STREAM_IsObjectInAnyUnit(_ObjectTracker *tracker)
       s2 = *(char **)(iVar2 + 0x8c);
       cVar1 = *s2;
       while (cVar1 != -1) {
-        iVar2 = strcmpi((char *)tracker,s2);
+        iVar2 = strcpy((char *)tracker,s2);
         s2 = s2 + 0x10;
         if (iVar2 == 0) {
           return 1;
@@ -1100,7 +1102,7 @@ void STREAM_RemoveAllObjectsNotInUse(GameTracker *gameTracker)
         pcVar10 = pcVar10 + 0x24;
         p_Var5 = p_Var5 + 1;
       } while (iVar3 < 0x30);
-      STREAM_DumpObject(tracker_00);
+      STREAM_LoadObjectReturn(tracker_00);
     }
     iVar11 = iVar11 + 1;
     tracker_00 = tracker_00 + 1;
@@ -1110,7 +1112,7 @@ void STREAM_RemoveAllObjectsNotInUse(GameTracker *gameTracker)
       do {
         if (((*(short *)(pcVar10 + -8) == 1) &&
             (iVar3 = STREAM_IsObjectInAnyUnit(tracker), iVar3 == 0)) && (*pcVar10 == '\0')) {
-          STREAM_DumpObject(tracker);
+          STREAM_LoadObjectReturn(tracker);
         }
         iVar11 = iVar11 + 1;
         pcVar10 = pcVar10 + 0x24;
@@ -1152,7 +1154,7 @@ void RemoveAllObjects(GameTracker *gameTracker)
   objectTracker = gameTracker->GlobalObjects;
   do {
     if (objectTracker->objectStatus != 0) {
-      STREAM_DumpObject(objectTracker);
+      STREAM_LoadObjectReturn(objectTracker);
     }
     iVar1 = iVar1 + 1;
     objectTracker = objectTracker + 1;
@@ -1186,7 +1188,7 @@ void RemoveAllObjects(GameTracker *gameTracker)
 	/* end block 3 */
 	// End Line: 2046
 
-Level * STREAM_GetLevelWithID(long id)
+Level * STREAM_GetWaterZLevel(long id)
 
 {
   STracker *pSVar1;
@@ -1337,7 +1339,7 @@ void STREAM_CalculateWaterLevel(Level *level)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-int STREAM_IsMorphInProgress(void)
+int STREAM_IsMonster(void)
 
 {
   return (u_int)(gameTrackerX.gameData.asmData.MorphTime != 1000);
@@ -1373,7 +1375,7 @@ int STREAM_IsMorphInProgress(void)
 	/* end block 4 */
 	// End Line: 2279
 
-long STREAM_GetWaterZLevel(Level *level,_Instance *instance)
+long STREAM_GetLevelWithID(Level *level,_Instance *instance)
 
 {
   if ((instance->flags2 & 0x8000000U) == 0) {
@@ -1460,7 +1462,7 @@ void STREAM_SetMainFog(_StreamUnit *streamUnit)
 	/* end block 2 */
 	// End Line: 2381
 
-void STREAM_SetStreamFog(_StreamUnit *streamUnit,short fogNear,short fogFar)
+void STREAM_GetStreamUnitWithID(_StreamUnit *streamUnit,short fogNear,short fogFar)
 
 {
   _StreamUnit *p_Var1;
@@ -1591,7 +1593,7 @@ void STREAM_ConnectStream(_StreamUnit *streamUnit)
     if (0 < iVar14) {
       ppSVar8 = (STracker **)(piVar6 + 0xb);
       do {
-        strcpy(acStack72,(char *)__src);
+        strcmp(acStack72,(char *)__src);
         pcVar2 = strchr(acStack72,0x2c);
         iVar10 = 0;
         if (pcVar2 != (char *)0x0) {
@@ -1599,7 +1601,7 @@ void STREAM_ConnectStream(_StreamUnit *streamUnit)
           iVar10 = atoi(pcVar2 + 1);
         }
         pSVar12 = (STracker *)STREAM_GetStreamUnitWithID((long)ppSVar8[-5]);
-        iVar3 = strcmpi(acStack72,"warpgate");
+        iVar3 = strcpy(acStack72,"warpgate");
         if ((iVar3 == 0) && (lVar4 = WARPGATE_IsUnitWarpRoom((_StreamUnit *)local_30), lVar4 != 0))
         {
           pSVar12 = local_30;
@@ -1617,7 +1619,7 @@ void STREAM_ConnectStream(_StreamUnit *streamUnit)
                 local_38.x = *(short *)(piVar6 + 6) - *(short *)(ppSVar8 + -4);
                 local_38.y = *(short *)((int)piVar6 + 0x1a) - *(short *)((int)ppSVar8 + -0xe);
                 local_38.z = *(short *)(piVar6 + 7) - *(short *)(ppSVar8 + -3);
-                RelocateLevel(streamUnit->level,&local_38);
+                CAMERA_Restore(streamUnit->level,&local_38);
                 break;
               }
               piVar6 = piVar6 + 0x17;
@@ -1642,7 +1644,7 @@ void STREAM_ConnectStream(_StreamUnit *streamUnit)
           pp_Var9 = (_StreamUnit **)(piVar6 + 0xb);
           do {
             bVar1 = false;
-            strcpy(acStack72,(char *)__src);
+            strcmp(acStack72,(char *)__src);
             pcVar2 = strchr(acStack72,0x2c);
             iVar10 = 0;
             if (pcVar2 != (char *)0x0) {
@@ -1655,7 +1657,7 @@ LAB_80059f9c:
               bVar1 = true;
             }
             else {
-              iVar3 = strcmpi(acStack72,"warpgate");
+              iVar3 = strcpy(acStack72,"warpgate");
               if ((iVar3 == 0) && (lVar4 = WARPGATE_IsUnitWarpRoom(streamUnit), lVar4 != 0)) {
                 *pp_Var9 = streamUnit;
                 goto LAB_80059f9c;
@@ -1673,7 +1675,7 @@ LAB_80059f9c:
                     local_38.x = *(short *)(pp_Var9 + -4) - *(short *)(piVar6 + 6);
                     local_38.y = *(short *)((int)pp_Var9 + -0xe) - *(short *)((int)piVar6 + 0x1a);
                     local_38.z = *(short *)(pp_Var9 + -3) - *(short *)(piVar6 + 7);
-                    RelocateLevel(streamUnit->level,&local_38);
+                    CAMERA_Restore(streamUnit->level,&local_38);
                     break;
                   }
                   piVar6 = piVar6 + 0x17;
@@ -1695,7 +1697,7 @@ LAB_80059f9c:
     if (0 < pLVar5->numIntros) {
       iVar14 = 0;
       do {
-        iVar10 = strcmpi(pLVar5->introList->name + iVar14,"raziel");
+        iVar10 = strcpy(pLVar5->introList->name + iVar14,"raziel");
         iVar11 = iVar11 + 1;
         if (iVar10 == 0) {
           pcVar2 = streamUnit->level->introList->name + iVar14;
@@ -1730,13 +1732,13 @@ LAB_80059f9c:
 	/* end block 2 */
 	// End Line: 3092
 
-void STREAM_StreamLoadLevelAbort(void *loadData,void *data,void *data2)
+void STREAM_StreamLoadObjectAbort(void *loadData,void *data,void *data2)
 
 {
   if (loadData != (void *)0x0) {
-    MEMPACK_Free((char *)loadData);
+    MEMPACK_Init((char *)loadData);
   }
-  *(undefined4 *)((int)data2 + 8) = 0;
+  *(u_char *)((int)data2 + 8) = 0;
   *(undefined2 *)((int)data2 + 4) = 0;
   return;
 }
@@ -1777,7 +1779,7 @@ void STREAM_FinishLoad(_StreamUnit *streamUnit)
   streamUnit->sfxFileHandle = 0;
   lVar1 = LOAD_DoesFileExist(acStack96);
   if (lVar1 != 0) {
-    iVar2 = aadLoadDynamicSfx(streamUnit->baseAreaName,streamUnit->StreamUnitID,1);
+    iVar2 = aadLoadDynamicSoundBankReturn2(streamUnit->baseAreaName,streamUnit->StreamUnitID,1);
     streamUnit->sfxFileHandle = (short)iVar2;
   }
   LoadLevelObjects(level,&gameTrackerX);
@@ -1787,7 +1789,7 @@ void STREAM_FinishLoad(_StreamUnit *streamUnit)
   LIGHT_CalcDQPTable(level);
   STREAM_CalculateWaterLevel(level);
   if (gameTrackerX.gameData.asmData.MorphType == 1) {
-    MORPH_UpdateNormals(level);
+    MORPH_UpdateTextures(level);
   }
   STREAM_ConnectStream(streamUnit);
   streamUnit->used = 2;
@@ -1796,7 +1798,7 @@ void STREAM_FinishLoad(_StreamUnit *streamUnit)
   p_Var3 = level->startUnitLoadedSignal;
   if (p_Var3 != (_MultiSignal *)0x0) {
     p_Var3->flags = p_Var3->flags | 1;
-    SIGNAL_HandleSignal(gameTrackerX.playerInstance,level->startUnitLoadedSignal->signalList,0);
+    SIGNAL_HandleFogNear(gameTrackerX.playerInstance,level->startUnitLoadedSignal->signalList,0);
     EVENT_AddSignalToReset(level->startUnitLoadedSignal);
   }
   SAVE_IntroForStreamID(streamUnit);
@@ -1828,7 +1830,7 @@ void STREAM_LoadLevelReturn(void *loadData,void *data,void *data2)
 
 {
   GetRCnt(0xf2000000);
-  *(undefined4 *)data2 = *(undefined4 *)((int)loadData + 0xf8);
+  *(u_char *)data2 = *(u_char *)((int)loadData + 0xf8);
   gameTrackerX.StreamUnitID = *(long *)((int)loadData + 0xf8);
   gameTrackerX.level = (Level *)loadData;
   STREAM_SetMainFog((_StreamUnit *)data2);
@@ -1864,11 +1866,11 @@ void STREAM_StreamLoadLevelReturn(void *loadData,void *data,void *data2)
   short fogFar;
   
   GetRCnt(0xf2000000);
-  *(undefined4 *)data2 = *(undefined4 *)((int)loadData + 0xf8);
+  *(u_char *)data2 = *(u_char *)((int)loadData + 0xf8);
   if (*(short *)((int)data2 + 4) == 3) {
     *(undefined2 *)((int)data2 + 4) = 0;
-    MEMPACK_Free(*(char **)((int)data2 + 8));
-    *(undefined4 *)((int)data2 + 8) = 0;
+    MEMPACK_Init(*(char **)((int)data2 + 8));
+    *(u_char *)((int)data2 + 8) = 0;
   }
   else {
     if (gameTrackerX.gameData.asmData.MorphType == 0) {
@@ -1879,11 +1881,11 @@ void STREAM_StreamLoadLevelReturn(void *loadData,void *data,void *data2)
       fogNear = *(short *)((int)loadData + 0x4a);
       fogFar = *(short *)((int)loadData + 0x48);
     }
-    STREAM_SetStreamFog((_StreamUnit *)data2,fogNear,fogFar);
+    STREAM_GetStreamUnitWithID((_StreamUnit *)data2,fogNear,fogFar);
     STREAM_FinishLoad((_StreamUnit *)data2);
     if ((gameTrackerX.playerInstance != (_Instance *)0x0) &&
        (*(int *)((int)loadData + 0xf8) == (gameTrackerX.playerInstance)->currentStreamUnitID)) {
-      strcpy(gameTrackerX.baseAreaName,*(char **)((int)loadData + 0x98));
+      strcmp(gameTrackerX.baseAreaName,*(char **)((int)loadData + 0x98));
       STREAM_SetMainFog((_StreamUnit *)data2);
       gameTrackerX.StreamUnitID = *(long *)((int)loadData + 0xf8);
       gameTrackerX.level = (Level *)loadData;
@@ -2055,7 +2057,7 @@ LAB_8005a3f8:
           pCVar9 = (Camera *)&(pCVar9->core).wcTransform2;
         } while (iVar10 <= theCamera.stack);
       }
-      EVENT_UpdateResetSignalArray(oldLevel,newLevel,sizeOfLevel);
+      EVENT_UpdateResetSignalArrayAndWaterMovement(oldLevel,newLevel,sizeOfLevel);
       return;
     }
   }
@@ -2174,7 +2176,7 @@ void STREAM_UpdateObjectPointer(Object *oldObject,Object *newObject,long sizeOfO
   Object *offset;
   
   offset = (Object *)((int)newObject - (int)oldObject);
-  p_Var1 = FindObjectInTracker(oldObject);
+  p_Var1 = FindObjectName(oldObject);
   iVar13 = 0;
   if (p_Var1 != (_ObjectTracker *)0x0) {
     p_Var1->object = newObject;
@@ -2232,7 +2234,7 @@ void STREAM_UpdateObjectPointer(Object *oldObject,Object *newObject,long sizeOfO
             iVar10 = iVar10 + 8;
           } while (iVar13 < instance->object->numModels);
         }
-        OBTABLE_RelocateInstanceObject(instance,(long)offset);
+        STREAM_RelocateInstance(instance,(long)offset);
       }
       pOVar12 = (Object *)instance->data;
       if ((oldObject <= pOVar12) && (pOVar12 <= (Object *)((int)&oldObject->oflags + sizeOfObject)))
@@ -2248,7 +2250,7 @@ void STREAM_UpdateObjectPointer(Object *oldObject,Object *newObject,long sizeOfO
   }
   OBTABLE_RelocateObjectTune(newObject,(long)offset);
   if ((newObject->oflags2 & 0x20000000U) != 0) {
-    FX_RelocateFXPointers(oldObject,newObject,sizeOfObject);
+    RelocateSpotLights(oldObject,newObject,sizeOfObject);
   }
   return;
 }
@@ -2320,15 +2322,15 @@ void STREAM_LoadMainVram(GameTracker *gameTracker,char *baseAreaName,_StreamUnit
 
 {
   short sVar1;
-  undefined4 *retData;
+  u_char *retData;
   Level *pLVar2;
   char acStack176 [80];
   char acStack96 [80];
   
   pLVar2 = streamUnit->level;
   STREAM_FillOutFileNames(gameTracker->baseAreaName,acStack176,acStack96,(char *)0x0);
-  retData = (undefined4 *)MEMPACK_Malloc((int)(pLVar2->vramSize).w * 2 + 0x14,'#');
-  *(undefined4 **)(retData + 4) = retData + 5;
+  retData = (u_char *)MEMPACK_Malloc((int)(pLVar2->vramSize).w * 2 + 0x14,'#');
+  *(u_char **)(retData + 4) = retData + 5;
   *retData = 0;
   *(short *)(retData + 1) = (pLVar2->vramSize).x + 0x200;
   *(short *)((int)retData + 6) = (pLVar2->vramSize).y;
@@ -2338,7 +2340,7 @@ void STREAM_LoadMainVram(GameTracker *gameTracker,char *baseAreaName,_StreamUnit
   *(undefined2 *)(retData + 3) = 0;
   *(undefined2 *)((int)retData + 0xe) = 0;
   *(short *)((int)retData + 10) = sVar1;
-  LOAD_NonBlockingBufferedLoad(acStack96,VRAM_TransferBufferToVram,retData,streamUnit);
+  LOAD_NonBlockingBinaryLoad(acStack96,VRAM_TransferBufferToVram,retData,streamUnit);
   return;
 }
 
@@ -2365,7 +2367,7 @@ void STREAM_MoveIntoNewStreamUnit(void)
 {
   (gameTrackerX.playerInstance)->currentStreamUnitID = gameTrackerX.moveRazielToStreamID;
   INSTANCE_UpdateFamilyStreamUnitID(gameTrackerX.playerInstance);
-  GAMELOOP_StreamLevelLoadAndInit
+  GAMELOOP_LevelLoadAndInit
             (gameTrackerX.S_baseAreaName,&gameTrackerX,(int)gameTrackerX.toSignal,
              (int)gameTrackerX.fromSignal);
   gameTrackerX.SwitchToNewStreamUnit = 0;
@@ -2424,8 +2426,7 @@ void STREAM_MoveIntoNewStreamUnit(void)
 	// End Line: 4302
 
 _StreamUnit *
-STREAM_LoadLevel(GameTracker *gameTracker,char *baseAreaName,StreamUnitPortal *streamPortal,
-                int loadnext)
+LoadLevels(GameTracker *gameTracker,char *baseAreaName,StreamUnitPortal *streamPortal,int loadnext)
 
 {
   int iVar1;
@@ -2447,7 +2448,7 @@ STREAM_LoadLevel(GameTracker *gameTracker,char *baseAreaName,StreamUnitPortal *s
   while( true ) {
     streamUnit = (_StreamUnit *)((int)&StreamTracker.StreamList[0].StreamUnitID + iVar1);
     if ((*(short *)((int)&StreamTracker.StreamList[0].used + iVar1) != 0) &&
-       (iVar2 = strcmpi(StreamTracker.StreamList[0].baseAreaName + iVar1,baseAreaName), iVar2 == 0))
+       (iVar2 = strcpy(StreamTracker.StreamList[0].baseAreaName + iVar1,baseAreaName), iVar2 == 0))
     break;
     iVar3 = iVar3 + 1;
     iVar1 = iVar3 * 0x40;
@@ -2462,12 +2463,12 @@ LAB_8005ac60:
           if (*(short *)((int)&StreamTracker.StreamList[0].used + iVar1) == 0) {
             STREAM_FillOutFileNames(baseAreaName,acStack112,(char *)0x0,(char *)0x0);
             *(undefined2 *)((int)&StreamTracker.StreamList[0].used + iVar1) = 1;
-            strcpy(StreamTracker.StreamList[0].baseAreaName + iVar1,baseAreaName);
+            strcmp(StreamTracker.StreamList[0].baseAreaName + iVar1,baseAreaName);
             streamUnit->StreamUnitID = lVar4;
-            *(undefined4 *)((int)&StreamTracker.StreamList[0].FrameCount + iVar1) = 0;
+            *(u_char *)((int)&StreamTracker.StreamList[0].FrameCount + iVar1) = 0;
             *(undefined2 *)((int)&StreamTracker.StreamList[0].flags + iVar1) = 0;
             if (streamPortal == (StreamUnitPortal *)0x0) {
-              strcpy(gameTracker->baseAreaName,baseAreaName);
+              strcmp(gameTracker->baseAreaName,baseAreaName);
               retFunc = STREAM_LoadLevelReturn;
               gameTracker->StreamUnitID = streamUnit->StreamUnitID;
             }
@@ -2475,7 +2476,7 @@ LAB_8005ac60:
               retFunc = STREAM_StreamLoadLevelReturn;
               streamPortal->toStreamUnit = (_StreamUnit *)0x0;
             }
-            LOAD_NonBlockingBinaryLoad
+            LOAD_NonBlockingBufferedLoad
                       (acStack112,retFunc,(void *)0x0,streamUnit,
                        (void **)((int)&StreamTracker.StreamList[0].level + iVar1),2);
             return streamUnit;
@@ -2492,9 +2493,9 @@ LAB_8005ac60:
   }
   else {
     if (fogNear != 1) {
-      *(undefined4 *)((int)&StreamTracker.StreamList[0].FrameCount + iVar1) = 0;
+      *(u_char *)((int)&StreamTracker.StreamList[0].FrameCount + iVar1) = 0;
       if (streamPortal == (StreamUnitPortal *)0x0) {
-        strcpy(gameTracker->baseAreaName,baseAreaName);
+        strcmp(gameTracker->baseAreaName,baseAreaName);
         STREAM_SetMainFog(streamUnit);
         gameTracker->StreamUnitID = streamUnit->StreamUnitID;
         gameTracker->level = *(Level **)((int)&StreamTracker.StreamList[0].level + iVar1);
@@ -2510,7 +2511,7 @@ LAB_8005ac60:
           fogNear = *(short *)(iVar1 + 0x4a);
           fogFar = *(short *)(iVar1 + 0x48);
         }
-        STREAM_SetStreamFog(streamUnit,fogNear,fogFar);
+        STREAM_GetStreamUnitWithID(streamUnit,fogNear,fogFar);
       }
     }
   }
@@ -2604,12 +2605,12 @@ void STREAM_RemoveInstancesWithIDInInstanceList(_InstanceList *list,long id,Leve
   while (instance = p_Var1, instance != (_Instance *)0x0) {
     p_Var1 = instance->next;
     if (instance->currentStreamUnitID == id) {
-      SAVE_Instance(instance,level);
+      COLLIDE_InstanceTerrain(instance,level);
       INSTANCE_ReallyRemoveInstance(list,instance,0);
     }
     else {
       if (instance->birthStreamUnitID == id) {
-        SAVE_Instance(instance,level);
+        COLLIDE_InstanceTerrain(instance,level);
         instance->intro = (Intro *)0x0;
       }
     }
@@ -2706,7 +2707,7 @@ void STREAM_MarkUnitNeeded(long streamID)
 	/* end block 2 */
 	// End Line: 5030
 
-void STREAM_DumpUnit(_StreamUnit *streamUnit,long doSave)
+void STREAM_DumpObject(_StreamUnit *streamUnit,long doSave)
 
 {
   int *piVar1;
@@ -2743,7 +2744,7 @@ void STREAM_DumpUnit(_StreamUnit *streamUnit,long doSave)
   } while (iVar9 < 0x10);
   if ((streamUnit->used == 1) || (streamUnit->used == 3)) {
     STREAM_FillOutFileNames(streamUnit->baseAreaName,acStack104,(char *)0x0,(char *)0x0);
-    LOAD_AbortFileLoad(acStack104,STREAM_StreamLoadLevelAbort);
+    LOAD_AbortFileLoad(acStack104,STREAM_StreamLoadObjectAbort);
     streamUnit->used = 0;
   }
   else {
@@ -2751,14 +2752,14 @@ void STREAM_DumpUnit(_StreamUnit *streamUnit,long doSave)
     if (lVar2 != 0) {
       WARPGATE_RemoveFromArray(streamUnit);
     }
-    EVENT_RemoveStreamToInstanceList(streamUnit);
+    STREAM_RemoveInstancesWithIDInInstanceList(streamUnit);
     pLVar4 = streamUnit->level;
     iVar9 = 0;
     if (0 < pLVar4->NumberOfSFXMarkers) {
       iVar5 = 0;
       do {
         ppuVar7 = (u_char **)((int)&pLVar4->SFXMarkerList->soundData + iVar5);
-        SOUND_EndInstanceSounds(*ppuVar7,(SoundInstance *)(ppuVar7 + 2));
+        SOUND_StopInstanceSound(*ppuVar7,(SoundInstance *)(ppuVar7 + 2));
         pLVar4 = streamUnit->level;
         iVar9 = iVar9 + 1;
         iVar5 = iVar5 + 0x24;
@@ -2768,14 +2769,14 @@ void STREAM_DumpUnit(_StreamUnit *streamUnit,long doSave)
       aadFreeDynamicSfx((int)streamUnit->sfxFileHandle);
     }
     RemoveIntroducedLights(streamUnit->level);
-    PLANAPI_DeleteNodeFromPoolByUnit(streamUnit->StreamUnitID);
+    PLANPOOL_DeleteNodeFromPool(streamUnit->StreamUnitID);
     STREAM_RemoveInstancesWithIDInInstanceList
               (gameTrackerX.instanceList,streamUnit->StreamUnitID,streamUnit->level);
     if (doSave != 0) {
       EVENT_SaveEventsFromLevel(streamUnit->StreamUnitID,streamUnit->level);
-      SAVE_CreatedSavedLevel(streamUnit->StreamUnitID,streamUnit->level);
+      SAVE_HasSavedLevel(streamUnit->StreamUnitID,streamUnit->level);
     }
-    MEMPACK_Free((char *)streamUnit->level);
+    MEMPACK_Init((char *)streamUnit->level);
     streamUnit->level = (Level *)0x0;
     streamUnit->used = 0;
   }
@@ -2813,7 +2814,7 @@ void STREAM_DumpAllUnitsNotNeeded(GameTracker *gameTracker)
   do {
     if ((*(short *)streamUnit->StreamList != 0) &&
        (*(u_long *)streamUnit->StreamList != gameTracker->displayFrameCount)) {
-      STREAM_DumpUnit((_StreamUnit *)streamUnit,1);
+      STREAM_DumpObject((_StreamUnit *)streamUnit,1);
     }
     iVar1 = iVar1 + 1;
     streamUnit = (STracker *)(streamUnit->StreamList + 1);
@@ -2852,7 +2853,7 @@ void STREAM_DumpAllLevels(long IDNoRemove,int DoSave)
   do {
     if ((*(short *)streamUnit->StreamList != 0) &&
        (streamUnit->StreamList[0].StreamUnitID != IDNoRemove)) {
-      STREAM_DumpUnit((_StreamUnit *)streamUnit,DoSave);
+      STREAM_DumpObject((_StreamUnit *)streamUnit,DoSave);
     }
     iVar1 = iVar1 + 1;
     streamUnit = (STracker *)(streamUnit->StreamList + 1);
@@ -2883,13 +2884,12 @@ void STREAM_LoadCurrentWarpRoom(StreamUnitPortal *streamPortal,_StreamUnit *main
   int iVar2;
   _StreamUnit *p_Var3;
   
-  iVar2 = strcmpi(mainStreamUnit->level->worldName,(char *)(&WarpRoomArray + CurrentWarpNumber));
+  iVar2 = strcpy(mainStreamUnit->level->worldName,(char *)(&WarpRoomArray + CurrentWarpNumber));
   if (iVar2 == 0) {
     WarpGateLoadInfo.loading = '\x03';
     WarpGateLoadInfo.curTime = WarpGateLoadInfo.maxTime;
   }
-  p_Var3 = STREAM_LoadLevel(&gameTrackerX,(char *)(&WarpRoomArray + CurrentWarpNumber),streamPortal,
-                            0);
+  p_Var3 = LoadLevels(&gameTrackerX,(char *)(&WarpRoomArray + CurrentWarpNumber),streamPortal,0);
   lVar1 = CurrentWarpNumber;
   (&WarpRoomArray)[CurrentWarpNumber].streamUnit = p_Var3;
   if (p_Var3 != (_StreamUnit *)0x0) {
@@ -2931,7 +2931,7 @@ void WARPGATE_RelocateLoadedWarpRooms(_StreamUnit *mainUnit,StreamUnitPortal *st
   pSVar1 = &StreamTracker;
   do {
     if ((pSVar1 != (STracker *)mainUnit) && ((*(ushort *)pSVar1->StreamList & 1) != 0)) {
-      STREAM_LoadLevel(&gameTrackerX,baseAreaName,streamPortal,0);
+      LoadLevels(&gameTrackerX,baseAreaName,streamPortal,0);
     }
     baseAreaName = baseAreaName + 0x40;
     iVar2 = iVar2 + 1;
@@ -2970,7 +2970,7 @@ long WARPGATE_GetWarpRoomIndex(char *name)
   iVar2 = 0;
   s1 = &WarpRoomArray;
   do {
-    iVar1 = strcmpi((char *)s1,name);
+    iVar1 = strcpy((char *)s1,name);
     if (iVar1 == 0) {
       return iVar2;
     }
@@ -3060,7 +3060,7 @@ void WARPGATE_RemoveFromArray(_StreamUnit *streamUnit)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void WARPGATE_Init(void)
+void WARPGATE_IsWarpgateInUse(void)
 
 {
   CurrentWarpNumber = 0;
@@ -3092,7 +3092,7 @@ void WARPGATE_Init(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void WARPGATE_StartUsingWarpgate(void)
+void WARPGATE_EndUsingWarpgate(void)
 
 {
   if (WarpGateLoadInfo.warpgate_in_use == 0) {
@@ -3115,7 +3115,7 @@ void WARPGATE_StartUsingWarpgate(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void WARPGATE_EndUsingWarpgate(void)
+void WARPGATE_IsWarpgateUsable(void)
 
 {
   if (WarpGateLoadInfo.warpgate_in_use == 1) {
@@ -3191,7 +3191,7 @@ int WARPGATE_IsWarpgateActive(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-int WARPGATE_IsWarpgateUsable(void)
+int WARPGATE_IsWarpgateSpectral(void)
 
 {
   return (u_int)(WarpGateLoadInfo._4_2_ == 4);
@@ -3210,12 +3210,12 @@ int WARPGATE_IsWarpgateUsable(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-int WARPGATE_IsWarpgateSpectral(void)
+int WARPGATE_StartUsingWarpgate(void)
 
 {
   int iVar1;
   
-  iVar1 = strcmpi((char *)(&WarpRoomArray + CurrentWarpNumber),"under3");
+  iVar1 = strcpy((char *)(&WarpRoomArray + CurrentWarpNumber),"under3");
   return (u_int)(iVar1 == 0);
 }
 
@@ -3250,7 +3250,7 @@ int WARPGATE_IsWarpgateSpectral(void)
 	/* end block 4 */
 	// End Line: 5608
 
-void WARPGATE_IsItActive(_StreamUnit *streamUnit)
+void WARPGATE_Init(_StreamUnit *streamUnit)
 
 {
   int iVar1;
@@ -3363,7 +3363,7 @@ void WARPGATE_FixUnit(_StreamUnit *streamUnit)
   
   lVar1 = WARPGATE_IsUnitWarpRoom(streamUnit);
   if (lVar1 != 0) {
-    WARPGATE_IsItActive(streamUnit);
+    WARPGATE_Init(streamUnit);
   }
   return;
 }
@@ -3453,7 +3453,7 @@ long WARPGATE_IncrementIndex(void)
     WarpGateLoadInfo.warpFaceInstance = (_Instance *)0x0;
     (&WarpRoomArray)[CurrentWarpNumber].streamUnit = (_StreamUnit *)0x0;
     CurrentWarpNumber = (CurrentWarpNumber + 1) % 0xe;
-    iVar1 = strcmpi(gameTrackerX.baseAreaName,(char *)(&WarpRoomArray + CurrentWarpNumber));
+    iVar1 = strcpy(gameTrackerX.baseAreaName,(char *)(&WarpRoomArray + CurrentWarpNumber));
     if (iVar1 == 0) {
       CurrentWarpNumber = (CurrentWarpNumber + 1) % 0xe;
     }
@@ -3535,7 +3535,7 @@ long WARPGATE_DecrementIndex(void)
     if (iVar1 < 0) {
       CurrentWarpNumber = 0xd;
     }
-    iVar1 = strcmpi(gameTrackerX.baseAreaName,(char *)(&WarpRoomArray + CurrentWarpNumber));
+    iVar1 = strcpy(gameTrackerX.baseAreaName,(char *)(&WarpRoomArray + CurrentWarpNumber));
     if ((iVar1 == 0) && (CurrentWarpNumber = CurrentWarpNumber + -1, CurrentWarpNumber < 0)) {
       CurrentWarpNumber = 0xd;
     }
@@ -3587,12 +3587,12 @@ void PreloadAllConnectedUnits(GameTracker *gameTracker,_StreamUnit *streamUnit,_
   __src = __src + 1;
   if (0 < iVar5) {
     do {
-      strcpy(acStack48,(char *)__src);
+      strcmp(acStack48,(char *)__src);
       pcVar1 = strchr(acStack48,0x2c);
       if (pcVar1 != (char *)0x0) {
         *pcVar1 = '\0';
       }
-      iVar2 = strcmpi(acStack48,"warpgate");
+      iVar2 = strcpy(acStack48,"warpgate");
       if (iVar2 == 0) {
         STREAM_MarkWarpUnitsNeeded();
       }
@@ -3607,7 +3607,7 @@ void PreloadAllConnectedUnits(GameTracker *gameTracker,_StreamUnit *streamUnit,_
   STREAM_MarkUnitNeeded(streamUnit->StreamUnitID);
   STREAM_DumpAllUnitsNotNeeded(gameTracker);
   STREAM_RemoveAllObjectsNotInUse(gameTracker);
-  RelocateLevelWithInstances(streamUnit->level,offset);
+  EVENT_RelocateInstanceList(streamUnit->level,offset);
   MEMPACK_DoGarbageCollection();
   __src = (int *)streamUnit->level->terrain->StreamUnits;
   iVar5 = *__src;
@@ -3615,18 +3615,18 @@ void PreloadAllConnectedUnits(GameTracker *gameTracker,_StreamUnit *streamUnit,_
   if (0 < iVar5) {
     puVar4 = (ushort *)((int)__src + 0x22);
     do {
-      strcpy(acStack48,(char *)streamPortal);
+      strcmp(acStack48,(char *)streamPortal);
       pcVar1 = strchr(acStack48,0x2c);
       if (pcVar1 != (char *)0x0) {
         *pcVar1 = '\0';
-        iVar2 = strcmpi(acStack48,"warpgate");
+        iVar2 = strcpy(acStack48,"warpgate");
         if (iVar2 == 0) {
-          *(undefined4 *)(puVar4 + 5) = 0;
+          *(u_char *)(puVar4 + 5) = 0;
           *puVar4 = *puVar4 | 1;
           WARPGATE_RelocateLoadedWarpRooms(streamUnit,streamPortal);
         }
         else {
-          STREAM_LoadLevel(gameTracker,acStack48,streamPortal,1);
+          LoadLevels(gameTracker,acStack48,streamPortal,1);
         }
       }
       iVar3 = iVar3 + 1;
@@ -3672,7 +3672,7 @@ void PreloadAllConnectedUnits(GameTracker *gameTracker,_StreamUnit *streamUnit,_
 	/* end block 2 */
 	// End Line: 5476
 
-void RelocateLevel(Level *level,_SVector *offset)
+void CAMERA_Restore(Level *level,_SVector *offset)
 
 {
   short sVar1;
@@ -3684,14 +3684,14 @@ void RelocateLevel(Level *level,_SVector *offset)
   
   RelocateTerrain(level->terrain,offset);
   RelocateVMObjects(level->vmobjectList,level->numVMObjects,offset);
-  RelocateSpotLights(level->spotLightList,level->numSpotLights,offset);
-  RelocatePointLights(level->pointLightList,level->numPointLights,offset);
+  FX_Relocate(level->spotLightList,level->numSpotLights,offset);
+  FX_RelocateFXPointers(level->pointLightList,level->numPointLights,offset);
   RelocateBGObjects(level->bgObjectList,level->numBGObjects,offset);
-  RelocateCameras((_CameraKey *)level->cameraList,level->numCameras,offset);
+  RelocateLevel((_CameraKey *)level->cameraList,level->numCameras,offset);
   RelocateSavedCameras(&theCamera,level,offset);
   level->deathZ = level->deathZ + (int)offset->z;
   RelocatePlanMarkers(level->PlanMarkerList,level->NumberOfPlanMarkers,offset);
-  RelocateSFXMarkers(level->SFXMarkerList,level->NumberOfSFXMarkers,offset);
+  RelocateCameras(level->SFXMarkerList,level->NumberOfSFXMarkers,offset);
   iVar4 = level->waterZLevel;
   if ((iVar4 != -0x7fff) && (iVar4 != 0x7fff)) {
     level->waterZLevel = iVar4 + offset->z;
@@ -3745,7 +3745,7 @@ void RelocateLevel(Level *level,_SVector *offset)
 	/* end block 4 */
 	// End Line: 6461
 
-void RelocateCameras(_CameraKey *cameraList,long numCameras,_SVector *offset)
+void RelocateLevel(_CameraKey *cameraList,long numCameras,_SVector *offset)
 
 {
   int iVar1;
@@ -3907,11 +3907,11 @@ void RelocateSavedCameras(Camera *camera,Level *level,_SVector *offset)
 	/* end block 1 */
 	// End Line: 6591
 
-void RelocateLevelWithInstances(Level *level,_SVector *offset)
+void EVENT_RelocateInstanceList(Level *level,_SVector *offset)
 
 {
-  RelocateLevel(level,offset);
-  RelocateInstances(&gameTrackerX,offset,gameTrackerX.StreamUnitID);
+  CAMERA_Restore(level,offset);
+  RelocateLevelWithInstances(&gameTrackerX,offset,gameTrackerX.StreamUnitID);
   RelocatePlanPool((PlanningNode *)gameTrackerX.planningPool,offset);
   return;
 }
@@ -4045,7 +4045,7 @@ void RelocateVMObjects(_VMObject *vobjectlist,long numvmobjs,_SVector *offset)
 	/* end block 4 */
 	// End Line: 6953
 
-void RelocateSpotLights(SpotLight *spotLightList,long numSpotLights,_SVector *offset)
+void FX_Relocate(SpotLight *spotLightList,long numSpotLights,_SVector *offset)
 
 {
   int iVar1;
@@ -4096,7 +4096,7 @@ void RelocateSpotLights(SpotLight *spotLightList,long numSpotLights,_SVector *of
 	/* end block 4 */
 	// End Line: 7003
 
-void RelocatePointLights(PointLight *PLightList,long numPLights,_SVector *offset)
+void FX_RelocateFXPointers(PointLight *PLightList,long numPLights,_SVector *offset)
 
 {
   int iVar1;
@@ -4308,7 +4308,7 @@ void RelocatePlanMarkers(_PlanMkr *planMkrList,int numPlanMkrs,_SVector *offset)
 	/* end block 4 */
 	// End Line: 7171
 
-void RelocateSFXMarkers(_SFXMkr *sfxMkrList,int numSFXMkrs,_SVector *offset)
+void RelocateCameras(_SFXMkr *sfxMkrList,int numSFXMkrs,_SVector *offset)
 
 {
   short sVar1;
@@ -4389,11 +4389,11 @@ void STREAM_AdjustMultiSpline(MultiSpline *multi,_SVector *offset)
 	/* end block 1 */
 	// End Line: 7259
 
-void STREAM_RelocateInstance(GameTracker *gameTracker,_Instance *instance,_SVector *offset)
+void RelocateInstances(GameTracker *gameTracker,_Instance *instance,_SVector *offset)
 
 {
   STREAM_OffsetInstancePosition(gameTracker,instance,offset,1);
-  INSTANCE_Post(instance,(int)&DAT_00100008,(int)offset);
+  INSTANCE_Query(instance,(int)&DAT_00100008,(int)offset);
   return;
 }
 
@@ -4421,8 +4421,8 @@ void STREAM_OffsetInstancePosition
   (instance->shadowPosition).x = (instance->shadowPosition).x + offset->x;
   (instance->shadowPosition).y = (instance->shadowPosition).y + offset->y;
   (instance->shadowPosition).z = (instance->shadowPosition).z + offset->z;
-  COLLIDE_UpdateAllTransforms(instance,(SVECTOR *)offset);
-  COLLIDE_MoveAllTransforms(instance,(_Position *)offset);
+  COLLIDE_MoveAllTransforms(instance,(SVECTOR *)offset);
+  COLLIDE_UpdateAllTransforms(instance,(_Position *)offset);
   if (instance == theCamera.focusInstance) {
     CAMERA_Relocate(&theCamera,offset,streamSignalFlag);
   }
@@ -4482,17 +4482,17 @@ void STREAM_SetInstancePosition(GameTracker *gameTracker,_Instance *instance,evP
 	/* end block 2 */
 	// End Line: 7372
 
-void RelocateInstances(GameTracker *gameTracker,_SVector *offset,long StreamUnitID)
+void RelocateLevelWithInstances(GameTracker *gameTracker,_SVector *offset,long StreamUnitID)
 
 {
   _Instance *instance;
   
   instance = gameTracker->instanceList->first;
   while (instance != (_Instance *)0x0) {
-    STREAM_RelocateInstance(gameTracker,instance,offset);
+    RelocateInstances(gameTracker,instance,offset);
     instance = instance->next;
   }
-  FX_Relocate(offset);
+  CAMERA_Relocate(offset);
   return;
 }
 
@@ -4612,7 +4612,7 @@ void STREAM_PackVRAMObject(_ObjectTracker *objectTracker)
 {
   undefined2 uVar1;
   long lVar2;
-  undefined4 *retData;
+  u_char *retData;
   void *pvVar3;
   char acStack80 [64];
   
@@ -4629,8 +4629,8 @@ void STREAM_PackVRAMObject(_ObjectTracker *objectTracker)
                  objectTracker->object);
     }
     sprintf(acStack80,"\\kain2\\object\\%s\\%s.crm");
-    retData = (undefined4 *)MEMPACK_Malloc((int)*(short *)((int)pvVar3 + 0x10) * 2 + 0x14,'#');
-    *(undefined4 **)(retData + 4) = retData + 5;
+    retData = (u_char *)MEMPACK_Malloc((int)*(short *)((int)pvVar3 + 0x10) * 2 + 0x14,'#');
+    *(u_char **)(retData + 4) = retData + 5;
     *retData = 0;
     *(undefined2 *)(retData + 1) = *(undefined2 *)((int)pvVar3 + 0xc);
     *(undefined2 *)((int)retData + 6) = *(undefined2 *)((int)pvVar3 + 0xe);
@@ -4639,7 +4639,7 @@ void STREAM_PackVRAMObject(_ObjectTracker *objectTracker)
     *(undefined2 *)(retData + 3) = 0;
     *(undefined2 *)((int)retData + 0xe) = 0;
     *(undefined2 *)((int)retData + 10) = uVar1;
-    LOAD_NonBlockingBufferedLoad(acStack80,VRAM_TransferBufferToVram,retData,(void *)0x0);
+    LOAD_NonBlockingBinaryLoad(acStack80,VRAM_TransferBufferToVram,retData,(void *)0x0);
   }
   return;
 }
@@ -4655,7 +4655,7 @@ void STREAM_PackVRAMObject(_ObjectTracker *objectTracker)
 	/* end block 1 */
 	// End Line: 7726
 
-void MORPH_SetupInstanceFlags(GameTracker *gameTracker,_Instance *instance)
+void MORPH_SetupInstanceListFlags(GameTracker *gameTracker,_Instance *instance)
 
 {
   long lVar1;
@@ -4679,7 +4679,7 @@ void MORPH_SetupInstanceFlags(GameTracker *gameTracker,_Instance *instance)
     }
   }
   instance->flags2 = uVar2 | 0x10000000;
-  lVar1 = MEMPACK_MemoryValidFunc((char *)instance->object);
+  lVar1 = MEMPACK_ReportMemory((char *)instance->object);
   if (lVar1 == 0) {
     return;
   }
@@ -4717,14 +4717,14 @@ LAB_8005c8fc:
 	/* end block 2 */
 	// End Line: 7823
 
-void MORPH_SetupInstanceListFlags(GameTracker *gameTracker)
+void MORPH_InMorphInstanceListFlags(GameTracker *gameTracker)
 
 {
   _Instance *instance;
   
   instance = gameTracker->instanceList->first;
   while (instance != (_Instance *)0x0) {
-    MORPH_SetupInstanceFlags(gameTracker,instance);
+    MORPH_SetupInstanceListFlags(gameTracker,instance);
     instance = instance->next;
   }
   return;
@@ -4760,7 +4760,7 @@ void MORPH_SetupInstanceListFlags(GameTracker *gameTracker)
 	/* end block 4 */
 	// End Line: 7856
 
-void MORPH_InMorphInstanceListFlags(GameTracker *gameTracker)
+void MORPH_SetupInstanceFlags(GameTracker *gameTracker)
 
 {
   _Instance *p_Var1;
@@ -4984,7 +4984,7 @@ void MORPH_UpdateTimeMult(void)
 	/* end block 2 */
 	// End Line: 8081
 
-void MORPH_UpdateNormals(Level *BaseLevel)
+void MORPH_UpdateTextures(Level *BaseLevel)
 
 {
   short *psVar1;
@@ -4997,12 +4997,12 @@ void MORPH_UpdateNormals(Level *BaseLevel)
   u_int *puVar8;
   int iVar9;
   byte *pbVar10;
-  undefined4 *puVar11;
+  u_char *puVar11;
   u_int uVar12;
   ushort *puVar13;
   _MorphColor *p_Var14;
   SpotLight *pSVar15;
-  undefined4 *puVar16;
+  u_char *puVar16;
   Intro *pIVar17;
   ushort *puVar18;
   long lVar19;
@@ -5014,14 +5014,14 @@ void MORPH_UpdateNormals(Level *BaseLevel)
   PointLight *pPVar25;
   _MorphVertex *p_Var26;
   long lVar27;
-  undefined4 uVar28;
-  undefined4 uVar29;
+  u_char uVar28;
+  u_char uVar29;
   _Instance *instance;
   u_int local_20;
   u_int local_1c;
   u_int local_18;
   u_int local_14;
-  undefined4 local_10;
+  u_char local_10;
   
   p_Var6 = BaseLevel->terrain;
   puVar18 = (ushort *)p_Var6->morphNormalIdx;
@@ -5091,9 +5091,9 @@ void MORPH_UpdateNormals(Level *BaseLevel)
     iVar20 = 0;
     do {
       puVar8 = (u_int *)((int)&p_Var6->BSPTreeArray->bspRoot + iVar20);
-      puVar16 = (undefined4 *)*puVar8;
+      puVar16 = (u_char *)*puVar8;
       puVar11 = puVar16 + 7;
-      if (puVar16 < (undefined4 *)puVar8[1]) {
+      if (puVar16 < (u_char *)puVar8[1]) {
         do {
           uVar28 = *puVar16;
           local_1c = puVar16[1];
@@ -5104,11 +5104,11 @@ void MORPH_UpdateNormals(Level *BaseLevel)
           puVar11[1] = local_1c;
           puVar16 = puVar16 + 0xb;
           puVar11 = puVar11 + 0xb;
-        } while (puVar16 < *(undefined4 **)((int)&p_Var6->BSPTreeArray->startLeaves + iVar20));
+        } while (puVar16 < *(u_char **)((int)&p_Var6->BSPTreeArray->startLeaves + iVar20));
       }
       iVar9 = (int)&p_Var6->BSPTreeArray->bspRoot + iVar20;
-      puVar16 = *(undefined4 **)(iVar9 + 4);
-      if (puVar16 < *(undefined4 **)(iVar9 + 8)) {
+      puVar16 = *(u_char **)(iVar9 + 4);
+      if (puVar16 < *(u_char **)(iVar9 + 8)) {
         puVar11 = puVar16 + 7;
         do {
           uVar28 = *puVar16;
@@ -5129,7 +5129,7 @@ void MORPH_UpdateNormals(Level *BaseLevel)
           puVar11[2] = local_10;
           puVar16 = puVar16 + 0xc;
           puVar11 = puVar11 + 0xc;
-        } while (puVar16 < *(undefined4 **)((int)&p_Var6->BSPTreeArray->endLeaves + iVar20));
+        } while (puVar16 < *(u_char **)((int)&p_Var6->BSPTreeArray->endLeaves + iVar20));
       }
       iVar22 = iVar22 + 1;
       iVar20 = iVar20 + 0x24;
@@ -5154,7 +5154,7 @@ void MORPH_UpdateNormals(Level *BaseLevel)
       local_1c = local_1c & 0xffff0000 | uVar12 & 0xffff;
       if (((int)(uVar21 * 0x10000) >> 0x10) + (iVar22 * 0x10000 >> 0x10) +
           ((int)(uVar12 * 0x10000) >> 0x10) != 0) {
-        COLLIDE_UpdateAllTransforms(instance,(SVECTOR *)&local_20);
+        COLLIDE_MoveAllTransforms(instance,(SVECTOR *)&local_20);
       }
     }
     instance = instance->next;
@@ -5243,14 +5243,14 @@ void MORPH_BringBackNormals(Level *BaseLevel)
   _TVertex *p_Var6;
   u_int *puVar7;
   int iVar8;
-  undefined4 *puVar9;
+  u_char *puVar9;
   Intro *pIVar10;
   u_int uVar11;
   ushort *puVar12;
   _MorphVertex *p_Var13;
   byte *pbVar14;
   SpotLight *pSVar15;
-  undefined4 *puVar16;
+  u_char *puVar16;
   ushort *puVar17;
   long lVar18;
   int iVar19;
@@ -5260,14 +5260,14 @@ void MORPH_BringBackNormals(Level *BaseLevel)
   _TVertex *p_Var23;
   PointLight *pPVar24;
   long lVar25;
-  undefined4 uVar26;
-  undefined4 uVar27;
+  u_char uVar26;
+  u_char uVar27;
   _Instance *instance;
   u_int local_20;
   u_int local_1c;
   u_int local_18;
   u_int local_14;
-  undefined4 local_10;
+  u_char local_10;
   
   p_Var5 = BaseLevel->terrain;
   puVar17 = (ushort *)p_Var5->morphNormalIdx;
@@ -5332,9 +5332,9 @@ void MORPH_BringBackNormals(Level *BaseLevel)
     iVar19 = 0;
     do {
       puVar7 = (u_int *)((int)&p_Var5->BSPTreeArray->bspRoot + iVar19);
-      puVar16 = (undefined4 *)*puVar7;
+      puVar16 = (u_char *)*puVar7;
       puVar9 = puVar16 + 7;
-      if (puVar16 < (undefined4 *)puVar7[1]) {
+      if (puVar16 < (u_char *)puVar7[1]) {
         do {
           uVar26 = *puVar16;
           local_1c = puVar16[1];
@@ -5345,11 +5345,11 @@ void MORPH_BringBackNormals(Level *BaseLevel)
           puVar9[1] = local_1c;
           puVar16 = puVar16 + 0xb;
           puVar9 = puVar9 + 0xb;
-        } while (puVar16 < *(undefined4 **)((int)&p_Var5->BSPTreeArray->startLeaves + iVar19));
+        } while (puVar16 < *(u_char **)((int)&p_Var5->BSPTreeArray->startLeaves + iVar19));
       }
       iVar8 = (int)&p_Var5->BSPTreeArray->bspRoot + iVar19;
-      puVar16 = *(undefined4 **)(iVar8 + 4);
-      if (puVar16 < *(undefined4 **)(iVar8 + 8)) {
+      puVar16 = *(u_char **)(iVar8 + 4);
+      if (puVar16 < *(u_char **)(iVar8 + 8)) {
         puVar9 = puVar16 + 7;
         do {
           uVar26 = *puVar16;
@@ -5370,7 +5370,7 @@ void MORPH_BringBackNormals(Level *BaseLevel)
           puVar9[2] = local_10;
           puVar16 = puVar16 + 0xc;
           puVar9 = puVar9 + 0xc;
-        } while (puVar16 < *(undefined4 **)((int)&p_Var5->BSPTreeArray->endLeaves + iVar19));
+        } while (puVar16 < *(u_char **)((int)&p_Var5->BSPTreeArray->endLeaves + iVar19));
       }
       iVar21 = iVar21 + 1;
       iVar19 = iVar19 + 0x24;
@@ -5395,7 +5395,7 @@ void MORPH_BringBackNormals(Level *BaseLevel)
       local_1c = local_1c & 0xffff0000 | uVar11 & 0xffff;
       if (((int)(uVar20 * 0x10000) >> 0x10) + (iVar21 * 0x10000 >> 0x10) +
           ((int)(uVar11 * 0x10000) >> 0x10) != 0) {
-        COLLIDE_UpdateAllTransforms(instance,(SVECTOR *)&local_20);
+        COLLIDE_MoveAllTransforms(instance,(SVECTOR *)&local_20);
       }
     }
     instance = instance->next;
@@ -5541,7 +5541,7 @@ void MORPH_AddOffsets(Level *BaseLevel,int time)
       local_20.vz = (short)iVar9;
       if ((iVar15 * 0x10000 >> 0x10) + (iVar11 * 0x10000 >> 0x10) + (iVar9 * 0x10000 >> 0x10) != 0)
       {
-        COLLIDE_UpdateAllTransforms(instance,&local_20);
+        COLLIDE_MoveAllTransforms(instance,&local_20);
       }
     }
     instance = instance->next;
@@ -5712,7 +5712,7 @@ void MORPH_SubtractOffsets(Level *BaseLevel,int time)
       local_20.vz = (short)iVar9;
       if ((iVar15 * 0x10000 >> 0x10) + (iVar12 * 0x10000 >> 0x10) + (iVar9 * 0x10000 >> 0x10) != 0)
       {
-        COLLIDE_UpdateAllTransforms(instance,&local_20);
+        COLLIDE_MoveAllTransforms(instance,&local_20);
       }
     }
     instance = instance->next;
@@ -6075,7 +6075,7 @@ void MORPH_ToggleMorph(void)
   Level **ppLVar2;
   int iVar3;
   
-  SOUND_PlaneShift((u_int)(gameTrackerX.gameData.asmData.MorphType == 0));
+  razPlaneShift((u_int)(gameTrackerX.gameData.asmData.MorphType == 0));
   INSTANCE_Broadcast((_Instance *)0x0,10,0x1000020,(int)gameTrackerX.gameData.asmData.MorphType);
   iVar3 = 0x10;
   MORPH_GetComponentsForTrackingPoint
@@ -6094,7 +6094,7 @@ void MORPH_ToggleMorph(void)
         mSignal = pLVar1->materialSignal;
         if (mSignal != (_MultiSignal *)0x0) {
           mSignal->flags = mSignal->flags | 1;
-          SIGNAL_HandleSignal(gameTrackerX.playerInstance,pLVar1->materialSignal->signalList,0);
+          SIGNAL_HandleFogNear(gameTrackerX.playerInstance,pLVar1->materialSignal->signalList,0);
           mSignal = pLVar1->materialSignal;
 LAB_8005e2d0:
           EVENT_AddSignalToReset(mSignal);
@@ -6104,7 +6104,7 @@ LAB_8005e2d0:
         mSignal = pLVar1->spectralSignal;
         if (mSignal != (_MultiSignal *)0x0) {
           mSignal->flags = mSignal->flags | 1;
-          SIGNAL_HandleSignal(gameTrackerX.playerInstance,pLVar1->spectralSignal->signalList,0);
+          SIGNAL_HandleFogNear(gameTrackerX.playerInstance,pLVar1->spectralSignal->signalList,0);
           mSignal = pLVar1->spectralSignal;
           goto LAB_8005e2d0;
         }
@@ -6145,16 +6145,16 @@ void MORPH_DoStep(_StreamUnit *streamUnit,char *baseAreaName)
   int time;
   Level *level;
   
-  GAMEPAD_Shock1(0x40,0xf000);
+  GAMEPAD_HandleDualShock(0x40,0xf000);
   level = streamUnit->level;
   if (level->terrain->MorphDiffList != (_MorphVertex *)0x0) {
-    VM_UpdateMorph(level,0);
+    VRAM_UpdateMorphPalettes(level,0);
     time = (int)gameTrackerX.gameData.asmData.MorphTime;
     if (time == 1000) {
       bVar1 = gameTrackerX.gameData.asmData.MorphType == 0;
       gameTrackerX.gameData.asmData.MorphType = gameTrackerX.gameData.asmData.MorphType ^ 1;
       if (bVar1) {
-        MORPH_UpdateNormals(level);
+        MORPH_UpdateTextures(level);
       }
       else {
         MORPH_BringBackNormals(level);
@@ -6226,8 +6226,9 @@ void MORPH_SetFog(_StreamUnit *streamUnit,int mainUnitFlag)
   }
   iVar2 = (iVar2 >> 0xc) + (u_int)pLVar3->spectralFogFar;
   if (mainUnitFlag == 0) {
-    STREAM_SetStreamFog(streamUnit,(short)((u_int)(iVar4 * 0x10000) >> 0x10),
-                        (short)((u_int)(iVar2 * 0x10000) >> 0x10));
+    STREAM_GetStreamUnitWithID
+              (streamUnit,(short)((u_int)(iVar4 * 0x10000) >> 0x10),
+               (short)((u_int)(iVar2 * 0x10000) >> 0x10));
   }
   else {
     sVar1 = (short)iVar4;
@@ -6267,7 +6268,7 @@ void MORPH_SetFog(_StreamUnit *streamUnit,int mainUnitFlag)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void MORPH_UpdateTextures(void)
+void MORPH_UpdateNormals(void)
 
 {
   int time;
@@ -6319,7 +6320,7 @@ void MORPH_Continue(void)
   int iVar2;
   
   if (gameTrackerX.gameData.asmData.MorphTime == 0) {
-    MORPH_InMorphInstanceListFlags(&gameTrackerX);
+    MORPH_SetupInstanceFlags(&gameTrackerX);
   }
   iVar2 = 0;
   baseAreaName = StreamTracker.StreamList[0].baseAreaName;
@@ -6335,7 +6336,7 @@ void MORPH_Continue(void)
     iVar2 = iVar2 + 1;
     streamUnit = (STracker *)(streamUnit->StreamList + 1);
   } while (iVar2 < 0x10);
-  uVar1 = INSTANCE_Query(gameTrackerX.playerInstance,10);
+  uVar1 = INSTANCE_Post(gameTrackerX.playerInstance,10);
   face = (gameTrackerX.playerInstance)->tface;
   if ((face != (_TFace *)0x0) && (-1 < (int)uVar1)) {
     level = MORPH_SavedLevel;
@@ -6346,7 +6347,7 @@ void MORPH_Continue(void)
     }
     MORPH_UpdateTrackingPoint(face,level);
   }
-  MORPH_UpdateTextures();
+  MORPH_UpdateNormals();
   if (gameTrackerX.gameData.asmData.MorphTime == 1000) {
     gameTrackerX.gameData.asmData.MorphType = gameTrackerX.gameData.asmData.MorphType ^ 1;
     if (gameTrackerX.gameData.asmData.MorphType == 0) {
@@ -6355,7 +6356,7 @@ void MORPH_Continue(void)
     else {
       (gameTrackerX.playerInstance)->flags2 = (gameTrackerX.playerInstance)->flags2 | 0x8000000;
     }
-    MORPH_SetupInstanceListFlags(&gameTrackerX);
+    MORPH_InMorphInstanceListFlags(&gameTrackerX);
   }
   return;
 }
@@ -6414,16 +6415,16 @@ void STREAM_MORPH_Relocate(void)
 int AddVertex(VECTOR *v0,RECT *rect)
 
 {
-  undefined4 in_zero;
-  undefined4 in_at;
+  u_char in_zero;
+  u_char in_at;
   int iVar1;
   int iVar2;
   int iVar3;
   short sVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  undefined4 local_8;
+  u_char uVar5;
+  u_char uVar6;
+  u_char uVar7;
+  u_char local_8;
   u_int local_4;
   
   iVar2 = v0->vx;
@@ -6859,11 +6860,11 @@ int STREAM_GetClipRect(StreamUnitPortal *portal,RECT *rect)
   if ((-0x401 < iVar11) || (uVar3 = 0, local_2c != 0)) {
     rect->w = rect->w + rect->x;
     rect->h = rect->h + rect->y;
-    setCopControlWord(2,0,*(undefined4 *)(theCamera.core.wcTransform)->m);
-    setCopControlWord(2,0x800,*(undefined4 *)((theCamera.core.wcTransform)->m + 2));
-    setCopControlWord(2,0x1000,*(undefined4 *)((theCamera.core.wcTransform)->m + 4));
-    setCopControlWord(2,0x1800,*(undefined4 *)((theCamera.core.wcTransform)->m + 6));
-    setCopControlWord(2,0x2000,*(undefined4 *)((theCamera.core.wcTransform)->m + 8));
+    setCopControlWord(2,0,*(u_char *)(theCamera.core.wcTransform)->m);
+    setCopControlWord(2,0x800,*(u_char *)((theCamera.core.wcTransform)->m + 2));
+    setCopControlWord(2,0x1000,*(u_char *)((theCamera.core.wcTransform)->m + 4));
+    setCopControlWord(2,0x1800,*(u_char *)((theCamera.core.wcTransform)->m + 6));
+    setCopControlWord(2,0x2000,*(u_char *)((theCamera.core.wcTransform)->m + 8));
     setCopControlWord(2,0x2800,(theCamera.core.wcTransform)->t[0]);
     setCopControlWord(2,0x3000,(theCamera.core.wcTransform)->t[1]);
     setCopControlWord(2,0x3800,(theCamera.core.wcTransform)->t[2]);
@@ -6969,8 +6970,8 @@ int STREAM_GetClipRect(StreamUnitPortal *portal,RECT *rect)
 long GetFogColor(StreamUnitPortal *portal,_StreamUnit *mainStreamUnit,Level *mainLevel)
 
 {
-  undefined4 in_zero;
-  undefined4 in_at;
+  u_char in_zero;
+  u_char in_at;
   u_int uVar1;
   byte *pbVar2;
   Level *pLVar3;
@@ -7004,12 +7005,12 @@ long GetFogColor(StreamUnitPortal *portal,_StreamUnit *mainStreamUnit,Level *mai
     LoadAverageCol(pbVar2,(byte *)pLVar3,iVar5,0x1000 - iVar5,(undefined *)&local_28);
     local_28 = local_28 & 0xffffff;
   }
-  setCopReg(2,in_zero,*(undefined4 *)portal->t1);
-  setCopReg(2,in_at,*(undefined4 *)&portal->t1[0].z);
-  setCopReg(2,portal->t1 + 2,*(undefined4 *)(portal->t1 + 1));
-  setCopReg(2,portal->t1 + 1,*(undefined4 *)&portal->t1[1].z);
-  setCopReg(2,portal->t1,*(undefined4 *)(portal->t1 + 2));
-  setCopReg(2,pLVar3,*(undefined4 *)&portal->t1[2].z);
+  setCopReg(2,in_zero,*(u_char *)portal->t1);
+  setCopReg(2,in_at,*(u_char *)&portal->t1[0].z);
+  setCopReg(2,portal->t1 + 2,*(u_char *)(portal->t1 + 1));
+  setCopReg(2,portal->t1 + 1,*(u_char *)&portal->t1[1].z);
+  setCopReg(2,portal->t1,*(u_char *)(portal->t1 + 2));
+  setCopReg(2,pLVar3,*(u_char *)&portal->t1[2].z);
   copFunction(2,0x280030);
   iVar5 = getCopReg(2,0x11);
   iVar6 = getCopReg(2,0x12);
@@ -7025,12 +7026,12 @@ long GetFogColor(StreamUnitPortal *portal,_StreamUnit *mainStreamUnit,Level *mai
   }
   iVar4 = iVar6;
 LAB_8005f314:
-  setCopReg(2,in_zero,*(undefined4 *)portal->t2);
-  setCopReg(2,in_at,*(undefined4 *)&portal->t2[0].z);
-  setCopReg(2,portal->t2 + 2,*(undefined4 *)(portal->t2 + 1));
-  setCopReg(2,portal->t2 + 1,*(undefined4 *)&portal->t2[1].z);
-  setCopReg(2,portal->t2,*(undefined4 *)(portal->t2 + 2));
-  setCopReg(2,iVar4,*(undefined4 *)&portal->t2[2].z);
+  setCopReg(2,in_zero,*(u_char *)portal->t2);
+  setCopReg(2,in_at,*(u_char *)&portal->t2[0].z);
+  setCopReg(2,portal->t2 + 2,*(u_char *)(portal->t2 + 1));
+  setCopReg(2,portal->t2 + 1,*(u_char *)&portal->t2[1].z);
+  setCopReg(2,portal->t2,*(u_char *)(portal->t2 + 2));
+  setCopReg(2,iVar4,*(u_char *)&portal->t2[2].z);
   copFunction(2,0x280030);
   local_24 = getCopReg(2,0x11);
   local_20 = getCopReg(2,0x12);
@@ -7163,21 +7164,21 @@ void DrawFogRectangle(RECT *cliprect,_PrimPool *primPool,int otzpos,u_long **dra
 	/* end block 2 */
 	// End Line: 12107
 
-void STREAM_RenderAdjacantUnit
+void STREAM_RenderWarpGate
                (u_long **curOT,StreamUnitPortal *curStreamPortal,_StreamUnit *toStreamUnit,
                _StreamUnit *mainStreamUnit,RECT *cliprect)
 
 {
   long color;
   
-  color = MEMPACK_MemoryValidFunc((char *)toStreamUnit->level);
+  color = MEMPACK_ReportMemory((char *)toStreamUnit->level);
   if (color != 0) {
     RENDER_currentStreamUnitID = *(short *)&toStreamUnit->StreamUnitID;
     color = GetFogColor(curStreamPortal,mainStreamUnit,mainStreamUnit->level);
     DrawFogRectangle(cliprect,gameTrackerX.primPool,0xbff,curOT,color);
     PushMatrix();
     StreamRenderLevel(toStreamUnit,mainStreamUnit->level,curOT,color);
-    PopMatrix();
+    MulMatrix0();
   }
   return;
 }
@@ -7439,7 +7440,7 @@ _Instance * WARPGATE_UnHideCloudCoverInUnit(long streamUnitID)
 	/* end block 2 */
 	// End Line: 12422
 
-void STREAM_RenderWarpGate
+void STREAM_RenderAdjacantUnit
                (u_long **mainOT,StreamUnitPortal *curStreamPortal,_StreamUnit *mainStreamUnit,
                RECT *cliprect)
 
@@ -7452,7 +7453,7 @@ void STREAM_RenderWarpGate
   if (WarpGateLoadInfo.loading == '\x01') {
     if (WarpGateLoadInfo.maxTime < WarpGateLoadInfo.curTime) {
       if (streamUnit != (_StreamUnit *)0x0) {
-        STREAM_DumpUnit(streamUnit,1);
+        STREAM_DumpObject(streamUnit,1);
       }
       WarpGateLoadInfo.loading = '\x02';
       STREAM_LoadCurrentWarpRoom(curStreamPortal,mainStreamUnit);
@@ -7481,8 +7482,8 @@ void STREAM_RenderWarpGate
           WARPGATE_HideAllCloudCovers();
           iVar1 = WARPGATE_IsWarpgateInUse();
           if ((iVar1 == 0) &&
-             (iVar1 = strcmpi(gameTrackerX.baseAreaName,(char *)(&WarpRoomArray + CurrentWarpNumber)
-                             ), iVar1 == 0)) {
+             (iVar1 = strcpy(gameTrackerX.baseAreaName,(char *)(&WarpRoomArray + CurrentWarpNumber))
+             , iVar1 == 0)) {
             WarpGateLoadInfo.loading = '\0';
             CurrentWarpNumber = 0;
           }
@@ -7502,8 +7503,7 @@ void STREAM_RenderWarpGate
       WARPGATE_BlockWarpGateEntrance(mainStreamUnit,1);
     }
     else {
-      iVar1 = strcmpi(mainStreamUnit->level->worldName,(char *)(&WarpRoomArray + CurrentWarpNumber))
-      ;
+      iVar1 = strcpy(mainStreamUnit->level->worldName,(char *)(&WarpRoomArray + CurrentWarpNumber));
       if (iVar1 == 0) {
         CurrentWarpNumber = (CurrentWarpNumber + 1) % 0xe;
       }
@@ -7521,8 +7521,8 @@ void STREAM_RenderWarpGate
       WarpGateLoadInfo.curTime = 0;
       WarpGateLoadInfo.warpFaceInstance = (_Instance *)0x0;
       (&WarpRoomArray)[CurrentWarpNumber].streamUnit = (_StreamUnit *)0x0;
-      while (iVar1 = strcmpi(gameTrackerX.baseAreaName,(char *)(&WarpRoomArray + CurrentWarpNumber))
-            , iVar1 != 0) {
+      while (iVar1 = strcpy(gameTrackerX.baseAreaName,(char *)(&WarpRoomArray + CurrentWarpNumber)),
+            iVar1 != 0) {
         CurrentWarpNumber = (CurrentWarpNumber + 1) % 0xe;
       }
     }
@@ -7583,8 +7583,8 @@ void WARPGATE_RenderWarpUnit
   u_long *puVar2;
   _StreamUnit *streamUnit;
   u_long **drawot;
-  undefined4 local_30;
-  undefined4 local_2c;
+  u_char local_30;
+  u_char local_2c;
   
   streamUnit = curStreamPortal->toStreamUnit;
   if ((gameTrackerX.debugFlags2 & 0x1000000U) != 0) {
@@ -7592,7 +7592,7 @@ void WARPGATE_RenderWarpUnit
   }
   WARPGATE_BlockWarpGateEntrance(mainStreamUnit,(u_int)((streamUnit->flags & 8U) != 0));
   WARPGATE_DrawWarpGateRim(streamUnit,1);
-  color = MEMPACK_MemoryValidFunc((char *)streamUnit->level);
+  color = MEMPACK_ReportMemory((char *)streamUnit->level);
   if ((color != 0) &&
      (drawot = (u_long **)(gameTrackerX.primPool)->nextPrim,
      drawot < (gameTrackerX.primPool)->lastPrim + -0xc00)) {
@@ -7604,15 +7604,15 @@ void WARPGATE_RenderWarpUnit
     DrawFogRectangle(cliprect,gameTrackerX.primPool,0xbff,drawot,color);
     PushMatrix();
     StreamRenderLevel(streamUnit,mainStreamUnit->level,drawot,color);
-    PopMatrix();
+    MulMatrix0();
     puVar2 = (gameTrackerX.primPool)->nextPrim;
     (gameTrackerX.primPool)->nextPrim = puVar2 + 3;
-    local_2c = *(undefined4 *)&cliprect->w;
-    local_30._0_2_ = (short)*(undefined4 *)cliprect;
-    local_30 = CONCAT22((short)((u_int)*(undefined4 *)cliprect >> 0x10) +
+    local_2c = *(u_char *)&cliprect->w;
+    local_30._0_2_ = (short)*(u_char *)cliprect;
+    local_30 = CONCAT22((short)((u_int)*(u_char *)cliprect >> 0x10) +
                         (&draw)[gameTrackerX.drawPage].ofs[1],
                         (short)local_30 + (&draw)[gameTrackerX.drawPage].ofs[0]);
-    SetDrawArea((int)puVar2,(ushort *)&local_30);
+    SetDrawStp((int)puVar2,(ushort *)&local_30);
     *puVar2 = (u_int)drawot[0xbfe] & 0xffffff | 0x2000000;
     drawot[0xbfe] = (u_long *)((u_int)puVar2 & 0xffffff);
     if ((streamUnit->flags & 8U) == 0) {
@@ -7635,9 +7635,9 @@ void WARPGATE_RenderWarpUnit
     }
     puVar2 = (gameTrackerX.primPool)->nextPrim;
     (gameTrackerX.primPool)->nextPrim = puVar2 + 3;
-    local_30 = *(undefined4 *)(&draw)[gameTrackerX.drawPage].ofs;
+    local_30 = *(u_char *)(&draw)[gameTrackerX.drawPage].ofs;
     local_2c = 0xf00200;
-    SetDrawArea((int)puVar2,(ushort *)&local_30);
+    SetDrawStp((int)puVar2,(ushort *)&local_30);
     *puVar2 = (u_int)drawot[1] & 0xffffff | 0x2000000;
     iVar1 = s_zval;
     drawot[1] = (u_long *)((u_int)puVar2 & 0xffffff);
@@ -7685,7 +7685,7 @@ void WARPGATE_RenderWarpUnit
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void STREAM_DumpNonResidentObjects(void)
+void STREAM_TryAndDumpANonResidentObject(void)
 
 {
   _Instance *instance;
@@ -7702,7 +7702,7 @@ void STREAM_DumpNonResidentObjects(void)
     if (((object->oflags & 0x2000000U) == 0) &&
        (p_Var1 = STREAM_GetStreamUnitWithID(instance->birthStreamUnitID),
        p_Var1 == (_StreamUnit *)0x0)) {
-      tracker = FindObjectInTracker(object);
+      tracker = FindObjectName(object);
       iVar2 = STREAM_IsObjectInAnyUnit(tracker);
       if (iVar2 == 0) {
         INSTANCE_ReallyRemoveInstance(gameTrackerX.instanceList,instance,0);
@@ -7734,7 +7734,7 @@ void STREAM_DumpNonResidentObjects(void)
 	/* end block 2 */
 	// End Line: 13155
 
-int STREAM_TryAndDumpNonResident(_ObjectTracker *otr)
+int STREAM_DumpNonResidentObjects(_ObjectTracker *otr)
 
 {
   _Instance **pp_Var1;
@@ -7770,7 +7770,7 @@ int STREAM_TryAndDumpNonResident(_ObjectTracker *otr)
       while (instance = p_Var4, instance != (_Instance *)0x0) {
         p_Var4 = instance->next;
         if (instance->object == otr->object) {
-          SAVE_DeleteInstance(instance);
+          SAVE_Instance(instance);
           INSTANCE_ReallyRemoveInstance(gameTrackerX.instanceList,instance,0);
         }
       }

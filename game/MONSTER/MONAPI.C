@@ -33,19 +33,19 @@ void MonsterProcess(_Instance *instance,GameTracker *gameTracker)
   if (((puVar3 != (u_int *)0x0) && (instance->data != (void *)0x0)) && ((*puVar3 & 0x80000) == 0)) {
     MONSENSE_DoSenses(instance);
     MON_DoCombatTimers(instance);
-    p_Var1 = MONTABLE_GetStateFuncs(instance,instance->currentMainState);
+    p_Var1 = MON_DamageEffect(instance,instance->currentMainState);
     instance->flags2 = instance->flags2 & 0xffffffed;
     if ((*puVar3 & 0x80) == 0) {
-      G2EmulationInstancePlayAnimation(instance);
+      G2EmulationSwitchAnimation(instance);
     }
     (*p_Var1->stateFunction)(instance);
     if ((*puVar3 & 1) != 0) {
-      p_Var1 = MONTABLE_GetStateFuncs(instance,instance->currentMainState);
+      p_Var1 = MON_DamageEffect(instance,instance->currentMainState);
       (*p_Var1->entryFunction)(instance);
     }
     *puVar3 = *puVar3 & 0xffffffbe;
     if ((instance->flags & 0x200U) != 0) {
-      pTVar2 = MONTABLE_GetDamageEffectFunc(instance);
+      pTVar2 = MONTABLE_GetStateFuncs(instance);
       (*pTVar2)(instance,0);
     }
     MON_ProcessLookAt(instance);
@@ -113,7 +113,7 @@ void MonsterInit(_Instance *instance,GameTracker *gameTracker)
       }
       if (__s != (u_int *)0x0) {
         memset(__s,0,0x25c);
-        InitMessageQueue((__MessageQueue *)(__s + 2));
+        EnMessageQueue((__MessageQueue *)(__s + 2));
         instance->currentMainState = -1;
         *(char *)((int)__s + 0x162) = -1;
         sVar1 = (instance->position).z;
@@ -133,18 +133,18 @@ void MonsterInit(_Instance *instance,GameTracker *gameTracker)
         instance->zVel = 0;
         MONTABLE_SetQueryFunc(instance);
         MONTABLE_SetMessageFunc(instance);
-        MON_ProcessIntro(instance);
+        INSTANCE_ProcessIntro(instance);
         *(undefined2 *)((int)__s + 0x142) = *(undefined2 *)(__s + 0x50);
-        MON_TurnOnAllSpheres(instance);
-        MON_TurnOffWeaponSpheres(instance);
+        MON_TurnOffBodySpheres(instance);
+        MON_TurnOnWeaponSpheres(instance);
         MONSENSE_SetupSenses(instance);
-        MON_AnimInit(instance);
+        MON_AnimIDPlaying(instance);
         pTVar3 = MONTABLE_GetInitFunc(instance);
         (*pTVar3)(instance);
         if ((*__s & 1) == 0) {
           return;
         }
-        p_Var4 = MONTABLE_GetStateFuncs(instance,instance->currentMainState);
+        p_Var4 = MON_DamageEffect(instance,instance->currentMainState);
         *__s = *__s & 0xfffffffe;
         (*p_Var4->entryFunction)(instance);
         return;
@@ -152,15 +152,15 @@ void MonsterInit(_Instance *instance,GameTracker *gameTracker)
     }
     instance->data = (void *)0x0;
     keylist = G2Instance_GetKeylist(instance,0);
-    G2Anim_SwitchToKeylist(&instance->anim,keylist,0);
+    G2Anim_GetKeylist(&instance->anim,keylist,0);
   }
   else {
     __s = (u_int *)instance->extraData;
-    pTVar2 = MONTABLE_GetCleanUpFunc(instance);
+    pTVar2 = MONTABLE_GetDamageEffectFunc(instance);
     (*pTVar2)(instance);
     MONSENSE_RemoveSenses(instance);
 LAB_8007dc30:
-    MEMPACK_Free((char *)__s);
+    MEMPACK_Init((char *)__s);
   }
   return;
 }
@@ -229,7 +229,7 @@ void SendHitObject(_Instance *instance,_Instance *hit,int type)
     Data = (_Instance **)CIRC_Alloc(8);
     *Data = hit;
     *(int *)(Data + 1) = type;
-    INSTANCE_Post(instance,0x1000008,(int)Data);
+    INSTANCE_Query(instance,0x1000008,(int)Data);
   }
   return;
 }
@@ -380,17 +380,18 @@ void MonsterCollide(_Instance *instance,GameTracker *gameTracker)
     if ((*puVar12 & 0x20000000) != 0) {
       Data_01 = Data_01 << 1;
     }
-    MON_TurnOffWeaponSpheres(instance);
+    MON_TurnOnWeaponSpheres(instance);
     Data_01 = Data_01 * 0x100;
     Data_00 = Data_01;
     if (Data_01 < 0) {
       Data_00 = Data_01 + 0x7f;
     }
     Data_00 = SetFXHitData(instance,(u_int)(byte)collideInfo->segment,Data_00 >> 7,0x100);
-    INSTANCE_Post(Inst,0x400000,Data_00);
-    Data_01 = SetMonsterHitData(instance,(_Instance *)0x0,Data_01,(int)*(short *)(uVar10 + 4),
-                                (int)*(char *)(uVar10 + 6));
-    INSTANCE_Post(Inst,0x1000000,Data_01);
+    INSTANCE_Query(Inst,0x400000,Data_00);
+    Data_01 = SetMonsterImpaleData
+                        (instance,(_Instance *)0x0,Data_01,(int)*(short *)(uVar10 + 4),
+                         (int)*(char *)(uVar10 + 6));
+    INSTANCE_Query(Inst,0x1000000,Data_01);
     uVar10 = puVar12[0x31];
     if (Inst != *(_Instance **)(uVar10 + 4)) {
       return;
@@ -420,7 +421,7 @@ void MonsterCollide(_Instance *instance,GameTracker *gameTracker)
   case '\x03':
     bsp = (BSPTree *)collideInfo->inst1;
     if (((bsp->flags & 0xe0U) != 0) && ((instance->checkMask & 0x20) != 0)) {
-      MON_CheckTerrainAndRespond(instance,bsp,(_TFace *)collideInfo->prim1);
+      MON_CheckTerrain(instance,bsp,(_TFace *)collideInfo->prim1);
     }
     if ((bsp->flags & 0x102U) == 0) {
       Data = (void **)CIRC_Alloc(0x10);
@@ -436,7 +437,7 @@ void MonsterCollide(_Instance *instance,GameTracker *gameTracker)
       }
       *(undefined2 *)(Data + 3) = uVar2;
       *Data = pvVar9;
-      uVar3 = INSTANCE_Query(instance,1);
+      uVar3 = INSTANCE_Post(instance,1);
       if ((((uVar3 & 4) == 0) || (*(ushort *)((int)pvVar9 + 10) == 0xffff)) ||
          ((*(ushort *)
             ((int)&(*(_Terrain **)p_Var11)->StartTextureList->attr +
@@ -447,11 +448,11 @@ void MonsterCollide(_Instance *instance,GameTracker *gameTracker)
           if (lVar5 != 0) {
             (collideInfo->offset).x = (collideInfo->offset).x + (*(short *)(Data + 1) >> 10);
             (collideInfo->offset).y = (collideInfo->offset).y + (*(short *)((int)Data + 6) >> 10);
-            INSTANCE_Post(instance,0x1000007,(int)Data);
+            INSTANCE_Query(instance,0x1000007,(int)Data);
           }
         }
         else {
-          INSTANCE_Post(instance,0x100001c,pIVar4->UniqueID);
+          INSTANCE_Query(instance,0x100001c,pIVar4->UniqueID);
           (collideInfo->offset).x = 0;
           (collideInfo->offset).y = 0;
         }
@@ -477,7 +478,7 @@ void MonsterCollide(_Instance *instance,GameTracker *gameTracker)
             local_3c = instance->LinkParent;
           }
           Data_01 = SetCollideInfoData((_CollideInfo *)local_50);
-          INSTANCE_Post(instance->LinkParent,0x200004,Data_01);
+          INSTANCE_Query(instance->LinkParent,0x200004,Data_01);
         }
         break;
       }
@@ -488,7 +489,7 @@ LAB_8007e314:
   case '\x05':
     if (((collideInfo->offset).z < -0x32) &&
        ((*(u_int *)((int)instance->data + 0x10) & 0x10004) == 0)) {
-      INSTANCE_Post(instance,0x40017,6);
+      INSTANCE_Query(instance,0x40017,6);
     }
     SendHitObject(instance,(_Instance *)collideInfo->inst1,5);
   }
@@ -496,7 +497,7 @@ LAB_8007e314:
     (instance->position).x = (instance->position).x + (collideInfo->offset).x;
     (instance->position).y = (instance->position).y + (collideInfo->offset).y;
     (instance->position).z = (instance->position).z + (collideInfo->offset).z;
-    COLLIDE_UpdateAllTransforms(instance,(SVECTOR *)&collideInfo->offset);
+    COLLIDE_MoveAllTransforms(instance,(SVECTOR *)&collideInfo->offset);
   }
   return;
 }
@@ -512,7 +513,7 @@ LAB_8007e314:
 	/* end block 1 */
 	// End Line: 1205
 
-void MonsterAdditionalCollide(_Instance *instance,GameTracker *gameTracker)
+void INSTANCE_AdditionalCollideFunctions(_Instance *instance,GameTracker *gameTracker)
 
 {
   if (instance->data != (void *)0x0) {
@@ -709,9 +710,9 @@ void MonsterMessage(_Instance *instance,u_long message,u_long data)
 {
   u_int uVar1;
   int iVar2;
-  undefined4 local_18;
+  u_char local_18;
   u_int *puVar3;
-  undefined4 local_14;
+  u_char local_14;
   
   puVar3 = (u_int *)instance->extraData;
   if (puVar3 != (u_int *)0x0) {
@@ -777,12 +778,12 @@ void MonsterMessage(_Instance *instance,u_long message,u_long data)
           }
           else {
             if (message == 0x200001) {
-              MONSENSE_SenseInstance(instance,(evCollideInstanceStatsData *)data);
+              MONSENSE_FirstSense(instance,(evCollideInstanceStatsData *)data);
               return;
             }
           }
         }
-        EnMessageQueueData((__MessageQueue *)(puVar3 + 2),message,data);
+        DeMessageQueue((__MessageQueue *)(puVar3 + 2),message,data);
       }
     }
   }
@@ -833,17 +834,17 @@ void AnimDistanceAndVel(Object *object,_MonsterAnim *mAnim)
   _G2SVector3_Type local_20;
   
   keylist = object->animList[mAnim->index[0]];
-  G2Anim_Init(&_Stack216,*object->modelList);
+  _G2Anim_InitializeChannel_AdaptiveDelta(&_Stack216,*object->modelList);
   _Stack216.section[0].firstSeg = '\0';
   _Stack216.section[0].segCount = *(u_char *)&(*object->modelList)->numSegments;
   _Stack216.section[0].callback = (_func_8 *)0x0;
   _Stack216.section[0].callbackData = (void *)0x0;
-  G2AnimSection_SetInterpInfo(_Stack216.section,(_G2AnimInterpInfo_Type *)0x0);
-  G2AnimSection_SwitchToKeylistAtTime(_Stack216.section,keylist,(int)mAnim->index[0],0);
+  _G2AnimSection_InterpStateToQuat(_Stack216.section,(_G2AnimInterpInfo_Type *)0x0);
+  G2AnimSection_InterpToKeylistAtTime(_Stack216.section,keylist,(int)mAnim->index[0],0);
   _Var2 = G2Anim_SegmentHasActiveChannels(&_Stack216,0,0x700);
   if (_Var2 != G2FALSE) {
     intervalEnd = G2AnimKeylist_GetDuration(keylist);
-    G2Anim_GetRootMotionOverInterval(&_Stack216,0,intervalEnd,&local_20);
+    G2AnimSection_UpdateOverInterval(&_Stack216,0,intervalEnd,&local_20);
     lVar3 = MATH3D_FastSqrt0((int)local_20.x * (int)local_20.x + (int)local_20.y * (int)local_20.y +
                              (int)local_20.z * (int)local_20.z);
     uVar1 = G2AnimKeylist_GetDuration(keylist);
@@ -851,7 +852,7 @@ void AnimDistanceAndVel(Object *object,_MonsterAnim *mAnim)
     mAnim->velocity =
          (ushort)((int)((u_int)mAnim->playSpeed * lVar3 * 100) / ((int)((u_int)uVar1 << 0x10) >> 4));
   }
-  G2Anim_Free(&_Stack216);
+  G2Anim_Init(&_Stack216);
   return;
 }
 
@@ -1376,8 +1377,8 @@ void MONAPI_SetLookAround(_Instance *instance)
   void *pvVar1;
   
   pvVar1 = instance->extraData;
-  MON_EnableHeadMove(instance);
-  *(undefined4 *)((int)pvVar1 + 0x108) = 0x80000;
+  MON_DisableHeadMove(instance);
+  *(u_char *)((int)pvVar1 + 0x108) = 0x80000;
   return;
 }
 
@@ -1407,8 +1408,8 @@ void MONAPI_ResetLookAround(_Instance *instance)
   void *pvVar1;
   
   pvVar1 = instance->extraData;
-  MON_DisableHeadMove(instance);
-  *(undefined4 *)((int)pvVar1 + 0x108) = 1;
+  MON_EnableHeadMove(instance);
+  *(u_char *)((int)pvVar1 + 0x108) = 1;
   return;
 }
 
@@ -1538,7 +1539,7 @@ void MONAPI_ProcessGenerator(void)
         uVar2 = gameTrackerX.currentSpectralTime;
       }
       if (regen->regenTime < uVar2) {
-        pLVar1 = STREAM_GetLevelWithID((int)*psVar5);
+        pLVar1 = STREAM_GetWaterZLevel((int)*psVar5);
         if (pLVar1 == (Level *)0x0) {
 LAB_8007f180:
           MONAPI_DeleteRegen(regen);
@@ -1551,7 +1552,7 @@ LAB_8007f180:
             iVar4 = iVar4 + -1;
             if (puVar3[-6] == (int)psVar5[-1]) {
               if ((*puVar3 & 0x400) != 0) goto LAB_8007f180;
-              INSTANCE_IntroduceInstance(intro,*psVar5);
+              INSTANCE_InsertInstanceGroup(intro,*psVar5);
               break;
             }
             puVar3 = puVar3 + 0x13;
@@ -1608,7 +1609,7 @@ void MONAPI_AddToGenerator(_Instance *instance)
     pvVar3 = instance->extraData;
     p_Var2 = GlobalSave->regenEntries + (int)GlobalSave->numRegens;
     GlobalSave->numRegens = GlobalSave->numRegens + '\x01';
-    uVar1 = MON_GetTime(instance);
+    uVar1 = MON_GetAnim(instance);
     p_Var2->regenTime = uVar1 + (int)*(short *)((int)pvVar3 + 0x146) * 1000;
     p_Var2->introUniqueID = *(short *)&instance->introUniqueID;
     p_Var2->streamUnitID = *(short *)&instance->birthStreamUnitID;

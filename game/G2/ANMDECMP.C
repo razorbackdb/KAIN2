@@ -182,7 +182,7 @@ void _G2Anim_DecompressChannel_Linear
 	/* end block 5 */
 	// End Line: 568
 
-void _G2Anim_InitializeChannel_AdaptiveDelta
+void _G2Anim_InitializeSegValue
                (_G2AnimDecompressChannelInfo_Type *dcInfo,_G2AnimChanStatus_Type *status)
 
 {
@@ -228,7 +228,7 @@ void _G2Anim_InitializeChannel_AdaptiveDelta
 	/* end block 4 */
 	// End Line: 609
 
-void _G2Anim_InitializeChannel_Linear
+void _G2Anim_DecompressChannel_Linear
                (_G2AnimDecompressChannelInfo_Type *dcInfo,_G2AnimChanStatus_Type *status)
 
 {

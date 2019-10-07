@@ -1,13 +1,5 @@
 #include "THISDUST.H"
 #include "STRMLOAD.H"
-#include "LOAD3D.H"
-#include "SUPPORT.H"
-#include "FONT.H"
-#include "TIMER.H"
-#include "MEMPACK.H"
-#include "VRAM.H"
-#include "VOICEXA.H"
-#include "DEBUG.H"
 
 
 // decompiled code
@@ -53,20 +45,20 @@ void STREAM_NextLoadFromHead(void)
 	/* end block 2 */
 	// End Line: 83
 
-void STREAM_InitLoader(char *bigFileName,char *voiceFileName)
+void STREAM_Init(char *bigFileName,char *voiceFileName)
 
 {
-  LoadQueueEntry *p_Var1;
-  LoadQueueEntry *p_Var2;
+  _LoadQueueEntry *p_Var1;
+  _LoadQueueEntry *p_Var2;
   int iVar3;
   
   LOAD_InitCdLoader(bigFileName,voiceFileName);
   iVar3 = 0x26;
-  //p_Var2 = &LoadQueueEntry_800da5a0;
-  //p_Var1 = &LoadQueueEntry_800da610;
-  loadFree = LoadQueue;
-  loadHead = (LoadQueueEntry *)0x0;
-  loadTail = (LoadQueueEntry *)0x0;
+  p_Var2 = &_LoadQueueEntry_800da5a0;
+  p_Var1 = &_LoadQueueEntry_800da610;
+  loadFree = &LoadQueue;
+  loadHead = (_LoadQueueEntry *)0x0;
+  loadTail = (_LoadQueueEntry *)0x0;
   numLoads = 0;
   do {
     p_Var2->next = p_Var1;
@@ -74,7 +66,7 @@ void STREAM_InitLoader(char *bigFileName,char *voiceFileName)
     iVar3 = iVar3 + -1;
     p_Var1 = p_Var1 + -1;
   } while (-1 < iVar3);
-  //LoadQueueEntry_800da610.next = (LoadQueueEntry *)0x0;
+  _LoadQueueEntry_800da610.next = (_LoadQueueEntry *)0x0;
   return;
 }
 
@@ -88,7 +80,7 @@ void STREAM_InitLoader(char *bigFileName,char *voiceFileName)
 		// Start line: 63
 		// Start offset: 0x80060204
 		// Variables:
-	// 		struct LoadQueueEntry *entry; // $a0
+	// 		struct _LoadQueueEntry *entry; // $a0
 	/* end block 1 */
 	// End offset: 0x80060224
 	// End Line: 68
@@ -110,15 +102,15 @@ void STREAM_InitLoader(char *bigFileName,char *voiceFileName)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void STREAM_RemoveQueueHead(void)
+void STREAM_RemoveQueueEntry(void)
 
 {
-  LoadQueueEntry **pp_Var1;
-  LoadQueueEntry *p_Var2;
+  _LoadQueueEntry **pp_Var1;
+  _LoadQueueEntry *p_Var2;
   
   p_Var2 = loadFree;
-  if (loadHead->next == (LoadQueueEntry *)0x0) {
-    loadTail = (LoadQueueEntry *)0x0;
+  if (loadHead->next == (_LoadQueueEntry *)0x0) {
+    loadTail = (_LoadQueueEntry *)0x0;
   }
   loadFree = loadHead;
   pp_Var1 = &loadHead->next;
@@ -132,7 +124,7 @@ void STREAM_RemoveQueueHead(void)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ STREAM_RemoveQueueEntry(struct LoadQueueEntry *entry /*$a0*/, struct LoadQueueEntry *prev /*$a1*/)
+// void /*$ra*/ STREAM_RemoveQueueEntry(struct _LoadQueueEntry *entry /*$a0*/, struct _LoadQueueEntry *prev /*$a1*/)
  // line 73, offset 0x80060244
 	/* begin block 1 */
 		// Start line: 162
@@ -144,15 +136,15 @@ void STREAM_RemoveQueueHead(void)
 	/* end block 2 */
 	// End Line: 164
 
-void STREAM_RemoveQueueEntry(LoadQueueEntry *entry,LoadQueueEntry *prev)
+void STREAM_RemoveQueueHead(_LoadQueueEntry *entry,_LoadQueueEntry *prev)
 
 {
-  LoadQueueEntry *p_Var1;
+  _LoadQueueEntry *p_Var1;
   
   if (loadTail == entry) {
     loadTail = prev;
   }
-  if (prev == (LoadQueueEntry *)0x0) {
+  if (prev == (_LoadQueueEntry *)0x0) {
     loadHead = entry->next;
   }
   else {
@@ -169,13 +161,13 @@ void STREAM_RemoveQueueEntry(LoadQueueEntry *entry,LoadQueueEntry *prev)
 
 // decompiled code
 // original method signature: 
-// struct LoadQueueEntry * /*$ra*/ STREAM_AddQueueEntryToTail()
+// struct _LoadQueueEntry * /*$ra*/ STREAM_AddQueueEntryToTail()
  // line 90, offset 0x800602a0
 	/* begin block 1 */
 		// Start line: 92
 		// Start offset: 0x800602A0
 		// Variables:
-	// 		struct LoadQueueEntry *entry; // $v1
+	// 		struct _LoadQueueEntry *entry; // $v1
 	/* end block 1 */
 	// End offset: 0x800602C8
 	// End Line: 104
@@ -197,16 +189,16 @@ void STREAM_RemoveQueueEntry(LoadQueueEntry *entry,LoadQueueEntry *prev)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-LoadQueueEntry * STREAM_AddQueueEntryToTail(void)
+_LoadQueueEntry * STREAM_AddQueueEntryToTail(void)
 
 {
-  LoadQueueEntry *p_Var1;
-  LoadQueueEntry *p_Var2;
+  _LoadQueueEntry *p_Var1;
+  _LoadQueueEntry *p_Var2;
   
   p_Var1 = loadFree;
   p_Var2 = loadFree->next;
-  loadFree->next = (LoadQueueEntry *)0x0;
-  if (loadTail == (LoadQueueEntry *)0x0) {
+  loadFree->next = (_LoadQueueEntry *)0x0;
+  if (loadTail == (_LoadQueueEntry *)0x0) {
     loadHead = loadFree;
     loadFree = p_Var2;
   }
@@ -223,13 +215,13 @@ LoadQueueEntry * STREAM_AddQueueEntryToTail(void)
 
 // decompiled code
 // original method signature: 
-// struct LoadQueueEntry * /*$ra*/ STREAM_AddQueueEntryToHead()
+// struct _LoadQueueEntry * /*$ra*/ STREAM_AddQueueEntryToHead()
  // line 109, offset 0x800602e0
 	/* begin block 1 */
 		// Start line: 111
 		// Start offset: 0x800602E0
 		// Variables:
-	// 		struct LoadQueueEntry *entry; // $a0
+	// 		struct _LoadQueueEntry *entry; // $a0
 	/* end block 1 */
 	// End offset: 0x80060358
 	// End Line: 132
@@ -251,17 +243,17 @@ LoadQueueEntry * STREAM_AddQueueEntryToTail(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-LoadQueueEntry * STREAM_AddQueueEntryToHead(void)
+_LoadQueueEntry * STREAM_SetUpQueueEntry(void)
 
 {
   short sVar1;
-  LoadQueueEntry **pp_Var2;
-  LoadQueueEntry *p_Var3;
-  LoadQueueEntry *p_Var4;
+  _LoadQueueEntry **pp_Var2;
+  _LoadQueueEntry *p_Var3;
+  _LoadQueueEntry *p_Var4;
   
   p_Var4 = loadHead;
   p_Var3 = loadFree;
-  if ((((loadHead == (LoadQueueEntry *)0x0) || (sVar1 = loadHead->status, sVar1 == 1)) ||
+  if ((((loadHead == (_LoadQueueEntry *)0x0) || (sVar1 = loadHead->status, sVar1 == 1)) ||
       (sVar1 == 5)) || ((sVar1 == 10 || (sVar1 == 8)))) {
     loadHead = loadFree;
     pp_Var2 = &loadFree->next;
@@ -274,7 +266,7 @@ LoadQueueEntry * STREAM_AddQueueEntryToHead(void)
     *pp_Var2 = loadHead->next;
     p_Var4->next = p_Var3;
   }
-  if (loadTail == (LoadQueueEntry *)0x0) {
+  if (loadTail == (_LoadQueueEntry *)0x0) {
     loadTail = p_Var3;
   }
   numLoads = numLoads + 1;
@@ -320,7 +312,7 @@ int STREAM_IsCdBusy(long *numberInQueue)
 			// Start line: 164
 			// Start offset: 0x800603B4
 			// Variables:
-		// 		struct LoadQueueEntry *queueEntry; // $s1
+		// 		struct _LoadQueueEntry *queueEntry; // $s1
 
 			/* begin block 1.1.1 */
 				// Start line: 182
@@ -335,7 +327,7 @@ int STREAM_IsCdBusy(long *numberInQueue)
 				// Start line: 229
 				// Start offset: 0x8006052C
 				// Variables:
-			// 		struct LoadQueueEntry *newQueue; // $s0
+			// 		struct _LoadQueueEntry *newQueue; // $s0
 			/* end block 1.1.2 */
 			// End offset: 0x8006052C
 			// End Line: 229
@@ -344,7 +336,7 @@ int STREAM_IsCdBusy(long *numberInQueue)
 				// Start line: 260
 				// Start offset: 0x800605C4
 				// Variables:
-			// 		struct LoadQueueEntry *newQueue; // $s0
+			// 		struct _LoadQueueEntry *newQueue; // $s0
 			/* end block 1.1.3 */
 			// End offset: 0x800605C4
 			// End Line: 260
@@ -365,10 +357,10 @@ int STREAM_IsCdBusy(long *numberInQueue)
 int STREAM_PollLoadQueue(void)
 
 {
-  LoadQueueEntry *p_Var1;
-  //code *pcVar2;
+  _LoadQueueEntry *p_Var1;
+  code *pcVar2;
   long *plVar3;
-  LoadQueueEntry *p_Var4;
+  _LoadQueueEntry *p_Var4;
   int id;
   u_long uVar5;
   long **pplVar6;
@@ -376,7 +368,7 @@ int STREAM_PollLoadQueue(void)
   
   LOAD_ProcessReadQueue();
   p_Var1 = loadHead;
-  if (loadHead == (LoadQueueEntry *)0x0) {
+  if (loadHead == (_LoadQueueEntry *)0x0) {
     return numLoads;
   }
   if (gameTrackerX.debugFlags < 0) {
@@ -387,7 +379,7 @@ int STREAM_PollLoadQueue(void)
     uVar5 = TIMER_GetTimeMS();
     p_Var1->endLoadTime = uVar5;
     LOAD_NonBlockingReadFile(&p_Var1->loadEntry);
-    id = LOAD_ChangeDirectoryFlag();
+    id = LOAD_ChangeDirectory();
     if (id == 0) {
       p_Var1->status = 2;
       if (p_Var1->mempackUsed != '\0') {
@@ -399,7 +391,7 @@ int STREAM_PollLoadQueue(void)
       }
     }
     else {
-      p_Var4 = STREAM_AddQueueEntryToHead();
+      p_Var4 = STREAM_SetUpQueueEntry();
       sprintf((p_Var4->loadEntry).fileName,"(%d)");
       takeBackSize = (p_Var1->loadEntry).dirHash;
       p_Var4->status = 10;
@@ -407,7 +399,7 @@ int STREAM_PollLoadQueue(void)
     }
     break;
   case 1:
-    id = LOAD_IsFileLoading();
+    id = LOAD_NonBlockingFileLoad();
     if (id != 0) {
       return numLoads;
     }
@@ -436,13 +428,13 @@ int STREAM_PollLoadQueue(void)
     uVar5 = TIMER_GetTimeMS();
     p_Var1->endLoadTime = uVar5;
     LOAD_CD_ReadPartOfFile(&p_Var1->loadEntry);
-    id = LOAD_ChangeDirectoryFlag();
+    id = LOAD_ChangeDirectory();
     if (id == 0) {
       p_Var1->status = 6;
       (p_Var1->loadEntry).posInFile = 0;
     }
     else {
-      p_Var4 = STREAM_AddQueueEntryToHead();
+      p_Var4 = STREAM_SetUpQueueEntry();
       sprintf((p_Var4->loadEntry).fileName,"(%d)");
       takeBackSize = (p_Var1->loadEntry).dirHash;
       p_Var4->status = 10;
@@ -451,36 +443,36 @@ int STREAM_PollLoadQueue(void)
     }
     break;
   case 5:
-    id = LOAD_IsFileLoading();
+    id = LOAD_NonBlockingFileLoad();
     if (id == 0) {
       uVar5 = TIMER_GetTimeMS();
       p_Var1->status = 4;
       p_Var1->endLoadTime = uVar5 - p_Var1->endLoadTime;
-      STREAM_RemoveQueueHead();
+      STREAM_RemoveQueueEntry();
       LOAD_CleanUpBuffers();
-/*       if ((code *)(p_Var1->loadEntry).retFunc == VRAM_TransferBufferToVram) {
+      if ((code *)(p_Var1->loadEntry).retFunc == VRAM_TransferBufferToVram) {
         VRAM_LoadReturn((p_Var1->loadEntry).loadAddr,(p_Var1->loadEntry).retData,
                         (p_Var1->loadEntry).retData2);
-      } */
+      }
     }
     break;
   case 6:
     p_Var1->status = 4;
-    STREAM_RemoveQueueHead();
+    STREAM_RemoveQueueEntry();
     if (p_Var1->mempackUsed != '\0') {
       MEMPACK_SetMemoryDoneStreamed((char *)(p_Var1->loadEntry).loadAddr);
     }
     STREAM_NextLoadFromHead();
-/*     pcVar2 = (code *)(p_Var1->loadEntry).retFunc;
+    pcVar2 = (code *)(p_Var1->loadEntry).retFunc;
     if (pcVar2 != (code *)0x0) {
       (*pcVar2)((p_Var1->loadEntry).loadAddr,(p_Var1->loadEntry).retData,
                 (p_Var1->loadEntry).retData2);
-    } */
+    }
     break;
   case 7:
     id = (p_Var1->loadEntry).fileHash;
     p_Var1->status = 9;
-    VOICEXA_Play(id,0);
+    VOICEXA_Init(id,0);
     break;
   case 8:
     id = VOICEXA_IsPlaying();
@@ -500,14 +492,14 @@ int STREAM_PollLoadQueue(void)
     p_Var1->status = 0xb;
     break;
   case 10:
-    id = LOAD_IsFileLoading();
+    id = LOAD_NonBlockingFileLoad();
     if (id != 0) {
       return numLoads;
     }
     uVar5 = TIMER_GetTimeMS();
     p_Var1->endLoadTime = uVar5 - p_Var1->endLoadTime;
 LAB_80060710:
-    STREAM_RemoveQueueHead();
+    STREAM_RemoveQueueEntry();
   }
   return numLoads;
 }
@@ -516,13 +508,13 @@ LAB_80060710:
 
 // decompiled code
 // original method signature: 
-// struct LoadQueueEntry * /*$ra*/ STREAM_SetUpQueueEntry(char *fileName /*$s1*/, void *retFunc /*$s3*/, void *retData /*$s4*/, void *retData2 /*$s5*/, void **retPointer /*stack 16*/, int fromhead /*stack 20*/)
+// struct _LoadQueueEntry * /*$ra*/ STREAM_SetUpQueueEntry(char *fileName /*$s1*/, void *retFunc /*$s3*/, void *retData /*$s4*/, void *retData2 /*$s5*/, void **retPointer /*stack 16*/, int fromhead /*stack 20*/)
  // line 379, offset 0x80060730
 	/* begin block 1 */
 		// Start line: 380
 		// Start offset: 0x80060730
 		// Variables:
-	// 		struct LoadQueueEntry *currentEntry; // $s0
+	// 		struct _LoadQueueEntry *currentEntry; // $s0
 	/* end block 1 */
 	// End offset: 0x80060808
 	// End Line: 414
@@ -532,21 +524,21 @@ LAB_80060710:
 	/* end block 2 */
 	// End Line: 797
 
-LoadQueueEntry *
-STREAM_SetUpQueueEntry
+_LoadQueueEntry *
+STREAM_AddQueueEntryToHead
           (char *fileName,void *retFunc,void *retData,void *retData2,void **retPointer,int fromhead)
 
 {
-  LoadQueueEntry *p_Var1;
+  _LoadQueueEntry *p_Var1;
   long lVar2;
   
   if (fromhead == 0) {
     p_Var1 = STREAM_AddQueueEntryToTail();
   }
   else {
-    p_Var1 = STREAM_AddQueueEntryToHead();
+    p_Var1 = STREAM_SetUpQueueEntry();
   }
-  strcpy((p_Var1->loadEntry).fileName,fileName);
+  strcmp((p_Var1->loadEntry).fileName,fileName);
   lVar2 = LOAD_HashName(fileName);
   (p_Var1->loadEntry).fileHash = lVar2;
   lVar2 = LOAD_GetSearchDirectory();
@@ -583,7 +575,7 @@ STREAM_SetUpQueueEntry
 		// Start line: 419
 		// Start offset: 0x80060830
 		// Variables:
-	// 		struct LoadQueueEntry *currentEntry; // $a0
+	// 		struct _LoadQueueEntry *currentEntry; // $a0
 	// 		int fromhead; // $v1
 	/* end block 1 */
 	// End offset: 0x800608A8
@@ -600,7 +592,7 @@ void STREAM_QueueNonblockingLoads
 
 {
   short sVar1;
-  LoadQueueEntry *p_Var2;
+  _LoadQueueEntry *p_Var2;
   u_int fromhead;
   
   fromhead = 0;
@@ -608,7 +600,7 @@ void STREAM_QueueNonblockingLoads
     fromhead = (u_int)(memType == '\0');
   }
   loadBufferedFromHead = 0;
-  p_Var2 = STREAM_SetUpQueueEntry(fileName,retFunc,retData,retData2,retPointer,fromhead);
+  p_Var2 = STREAM_AddQueueEntryToHead(fileName,retFunc,retData,retData2,retPointer,fromhead);
   (p_Var2->loadEntry).loadAddr = (long *)0x0;
   p_Var2->mempackUsed = '\x01';
   (p_Var2->loadEntry).memType = (u_int)memType;
@@ -633,7 +625,7 @@ void STREAM_QueueNonblockingLoads
 		// Start line: 440
 		// Start offset: 0x800608B8
 		// Variables:
-	// 		struct LoadQueueEntry *currentEntry; // $v0
+	// 		struct _LoadQueueEntry *currentEntry; // $v0
 	/* end block 1 */
 	// End offset: 0x8006090C
 	// End Line: 449
@@ -643,14 +635,14 @@ void STREAM_QueueNonblockingLoads
 	/* end block 2 */
 	// End Line: 927
 
-void LOAD_LoadToAddress(char *fileName,void *loadAddr,long relocateBinary)
+void LOAD_LoadTIM(char *fileName,void *loadAddr,long relocateBinary)
 
 {
-  LoadQueueEntry *p_Var1;
+  _LoadQueueEntry *p_Var1;
   int iVar2;
   
-  p_Var1 = STREAM_SetUpQueueEntry(fileName,(void *)0x0,(void *)0x0,(void *)0x0,(void **)0x0,0);
-  //(p_Var1->loadEntry).loadAddr = loadAddr;
+  p_Var1 = STREAM_AddQueueEntryToHead(fileName,(void *)0x0,(void *)0x0,(void *)0x0,(void **)0x0,0);
+  (p_Var1->loadEntry).loadAddr = loadAddr;
   p_Var1->status = 1;
   p_Var1->relocateBinary = (char)relocateBinary;
   p_Var1->mempackUsed = '\0';
@@ -671,7 +663,7 @@ void LOAD_LoadToAddress(char *fileName,void *loadAddr,long relocateBinary)
 	/* end block 1 */
 	// End Line: 976
 
-void LOAD_NonBlockingBinaryLoad
+void LOAD_NonBlockingBufferedLoad
                (char *fileName,void *retFunc,void *retData,void *retData2,void **retPointer,
                int memType)
 
@@ -691,9 +683,8 @@ void LOAD_NonBlockingBinaryLoad
 	/* end block 1 */
 	// End Line: 994
 
-void LOAD_NonBlockingFileLoad
-               (char *fileName,void *retFunc,void *retData,void *retData2,void **retPointer,
-               int memType)
+void LOAD_IsFileLoading(char *fileName,void *retFunc,void *retData,void *retData2,void **retPointer,
+                       int memType)
 
 {
   STREAM_QueueNonblockingLoads(fileName,(u_char)memType,retFunc,retData,retData2,retPointer,0);
@@ -711,7 +702,7 @@ void LOAD_NonBlockingFileLoad
 	/* end block 1 */
 	// End Line: 1008
 
-void LOAD_NonBlockingBufferedLoad(char *fileName,void *retFunc,void *retData,void *retData2)
+void LOAD_NonBlockingBinaryLoad(char *fileName,void *retFunc,void *retData,void *retData2)
 
 {
   STREAM_QueueNonblockingLoads(fileName,'\0',retFunc,retData,retData2,(void **)0x0,0);
@@ -753,11 +744,11 @@ void LOAD_NonBlockingBufferedLoad(char *fileName,void *retFunc,void *retData,voi
 int LOAD_IsXAInQueue(void)
 
 {
-  LoadQueueEntry *p_Var1;
+  _LoadQueueEntry *p_Var1;
   int iVar2;
   
   iVar2 = 0;
-  p_Var1 = LoadQueue;
+  p_Var1 = &LoadQueue;
   do {
     iVar2 = iVar2 + 1;
     if ((u_int)(ushort)p_Var1->status - 8 < 2) {
@@ -778,7 +769,7 @@ int LOAD_IsXAInQueue(void)
 		// Start line: 494
 		// Start offset: 0x80060A20
 		// Variables:
-	// 		struct LoadQueueEntry *currentEntry; // $v0
+	// 		struct _LoadQueueEntry *currentEntry; // $v0
 	/* end block 1 */
 	// End offset: 0x80060A20
 	// End Line: 494
@@ -791,13 +782,13 @@ int LOAD_IsXAInQueue(void)
 void LOAD_PlayXA(int number)
 
 {
-  LoadQueueEntry *p_Var1;
+  _LoadQueueEntry *p_Var1;
   
   p_Var1 = STREAM_AddQueueEntryToTail();
   p_Var1->status = 8;
   (p_Var1->loadEntry).fileHash = number;
-  *(unsigned char *)(p_Var1->loadEntry).fileName = 0x63696f76;
-  //*(undefined2 *)((p_Var1->loadEntry).fileName + 4) = 0x65;
+  *(u_char *)(p_Var1->loadEntry).fileName = 0x63696f76;
+  *(undefined2 *)((p_Var1->loadEntry).fileName + 4) = 0x65;
   return;
 }
 
@@ -821,13 +812,13 @@ void LOAD_PlayXA(int number)
 	/* end block 2 */
 	// End Line: 1077
 
-long * LOAD_ReadFile(char *fileName,u_char memType)
+long * LOAD_ReadFileFromCD(char *fileName,u_char memType)
 
 {
   int iVar1;
   long *local_10 [2];
   
-  STREAM_QueueNonblockingLoads(fileName,memType,(void *)0x0,(void *)0x0,(void *)0x0,0,0);
+  STREAM_QueueNonblockingLoads(fileName,memType,(void *)0x0,(void *)0x0,(void *)0x0,local_10,0);
   do {
     iVar1 = STREAM_PollLoadQueue();
   } while (iVar1 != 0);
@@ -844,7 +835,7 @@ long * LOAD_ReadFile(char *fileName,u_char memType)
 		// Start line: 518
 		// Start offset: 0x80060AB4
 		// Variables:
-	// 		struct LoadQueueEntry *currentEntry; // $s0
+	// 		struct _LoadQueueEntry *currentEntry; // $s0
 	/* end block 1 */
 	// End offset: 0x80060AB4
 	// End Line: 518
@@ -854,10 +845,10 @@ long * LOAD_ReadFile(char *fileName,u_char memType)
 	/* end block 2 */
 	// End Line: 1102
 
-void LOAD_ChangeDirectory(char *name)
+void LOAD_ReadDirectory(char *name)
 
 {
-  LoadQueueEntry *p_Var1;
+  _LoadQueueEntry *p_Var1;
   
   p_Var1 = STREAM_AddQueueEntryToTail();
   gCurDir = LOAD_HashUnit(name);
@@ -882,8 +873,8 @@ void LOAD_ChangeDirectory(char *name)
 			// Start line: 537
 			// Start offset: 0x80060B38
 			// Variables:
-		// 		struct LoadQueueEntry *entry; // $s0
-		// 		struct LoadQueueEntry *prev; // $s1
+		// 		struct _LoadQueueEntry *entry; // $s0
+		// 		struct _LoadQueueEntry *prev; // $s1
 		// 		long hash; // $v1
 		/* end block 1.1 */
 		// End offset: 0x80060BC8
@@ -905,25 +896,25 @@ void LOAD_ChangeDirectory(char *name)
 void LOAD_AbortFileLoad(char *fileName,void *retFunc)
 
 {
-  LoadQueueEntry *prev;
-  LoadQueueEntry *entry;
+  _LoadQueueEntry *prev;
+  _LoadQueueEntry *entry;
   long lVar1;
   
-  if (loadHead != (LoadQueueEntry *)0x0) {
+  if (loadHead != (_LoadQueueEntry *)0x0) {
     lVar1 = LOAD_HashName(fileName);
-    prev = (LoadQueueEntry *)0x0;
+    prev = (_LoadQueueEntry *)0x0;
     entry = loadHead;
-    while (entry != (LoadQueueEntry *)0x0) {
+    while (entry != (_LoadQueueEntry *)0x0) {
       if ((entry->loadEntry).fileHash == lVar1) {
-        if (prev == (LoadQueueEntry *)0x0) {
+        if (prev == (_LoadQueueEntry *)0x0) {
           LOAD_StopLoad();
         }
         if (entry->status == 6) {
           LOAD_CleanUpBuffers();
         }
-/*         (*(code *)retFunc)((entry->loadEntry).loadAddr,(entry->loadEntry).retData,
-                           (entry->loadEntry).retData2); */
-        STREAM_RemoveQueueEntry(entry,prev);
+        (*(code *)retFunc)((entry->loadEntry).loadAddr,(entry->loadEntry).retData,
+                           (entry->loadEntry).retData2);
+        STREAM_RemoveQueueHead(entry,prev);
         return;
       }
       prev = entry;

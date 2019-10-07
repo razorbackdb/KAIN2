@@ -20,7 +20,7 @@ void do_check_controller(void *gt)
   if (*(short *)((int)gt + 0x172) == 6) {
     msgY = 0xaa;
   }
-  GAMEPAD_DisplayControllerStatus(msgY);
+  GAMEPAD_SaveControllers(msgY);
   return;
 }
 
@@ -42,11 +42,11 @@ void do_check_controller(void *gt)
 	/* end block 2 */
 	// End Line: 327
 
-int do_push_menu(void *gt,long menuparam,menu_ctrl_t ctrl)
+int menu_push(void *gt,long menuparam,menu_ctrl_t ctrl)
 
 {
   if (ctrl == menu_ctrl_engage) {
-    menu_push(*(menu_t **)((int)gt + 0x20),(TDRFuncPtr_menu_push1fn)menuparam);
+    menu_print(*(menu_t **)((int)gt + 0x20),(TDRFuncPtr_menu_push1fn)menuparam);
   }
   return (u_int)(ctrl == menu_ctrl_engage);
 }
@@ -120,7 +120,7 @@ int do_start_game(void *gt,long parameter,menu_ctrl_t ctrl)
   if (ctrl == menu_ctrl_engage) {
     iVar1 = MEMCARD_IsWrongVersion(*(memcard_t **)((int)gt + 0x24));
     if (iVar1 == 0) {
-      menu_push(*(menu_t **)((int)gt + 0x20),memcard_main_menu);
+      menu_print(*(menu_t **)((int)gt + 0x20),do_main_menu);
       iVar1 = 1;
     }
     else {
@@ -149,7 +149,7 @@ int do_save_menu(void *gt,long parameter,menu_ctrl_t ctrl)
 
 {
   if (ctrl == menu_ctrl_engage) {
-    menu_push(*(menu_t **)((int)gt + 0x20),memcard_pause_menu);
+    menu_print(*(menu_t **)((int)gt + 0x20),menudefs_pause_menu);
   }
   return (u_int)(ctrl == menu_ctrl_engage);
 }
@@ -173,7 +173,7 @@ int do_save_menu(void *gt,long parameter,menu_ctrl_t ctrl)
 void womp_background(char *tim_path)
 
 {
-  MEMPACK_Free((char *)mainMenuScreen);
+  MEMPACK_Init((char *)mainMenuScreen);
   mainMenuScreen = MAIN_LoadTim(tim_path);
   return;
 }
@@ -359,15 +359,15 @@ void set_volume(sfx_t sfx,int cooked)
   
   newVolume = (cooked * 0x7f + 9) / 10;
   if (sfx == sfx_music) {
-    SOUND_SetMusicVolume(newVolume);
+    SOUND_SetSfxVolume(newVolume);
   }
   else {
     if (sfx == sfx_sound) {
-      SOUND_SetSfxVolume(newVolume);
+      SOUND_SetInstanceSoundVolume(newVolume);
     }
     else {
       if (sfx == sfx_voice) {
-        SOUND_SetVoiceVolume(newVolume);
+        SpuSetVoiceVolume(newVolume);
       }
     }
   }
@@ -441,7 +441,7 @@ void sound_item(void *gt,char *text,sfx_t sfx)
 
 {
   get_volume(gt,sfx);
-  menu_item(*(menu_t **)((int)gt + 0x20),do_sound_adjust,sfx,"%s %d");
+  num_menu_items(*(menu_t **)((int)gt + 0x20),do_sound_adjust,sfx,"%s %d");
   return;
 }
 
@@ -466,9 +466,9 @@ int menudefs_toggle_dualshock(void *gt,long param,menu_ctrl_t ctrl)
     if (iVar1 == 0) {
       GAMEPAD_EnableDualShock();
       if (*(int *)((int)gt + 0x248) == 0) {
-        *(undefined4 *)((int)gt + 0x248) = 1;
+        *(u_char *)((int)gt + 0x248) = 1;
       }
-      GAMEPAD_Shock1(0x80,*(int *)((int)gt + 0x248) << 3);
+      GAMEPAD_HandleDualShock(0x80,*(int *)((int)gt + 0x248) << 3);
       iVar1 = 1;
     }
     else {
@@ -530,10 +530,10 @@ int options_menu(void *gt,int index)
       id = LOCALSTR_vibration_on;
     }
     format = localstr_get(id);
-    menu_item(*(menu_t **)((int)gt + 0x20),menudefs_toggle_dualshock,0,format);
+    num_menu_items(*(menu_t **)((int)gt + 0x20),menudefs_toggle_dualshock,0,format);
   }
   format = localstr_get(LOCALSTR_done);
-  menu_item(*(menu_t **)((int)gt + 0x20),do_pop_menu,0,format);
+  num_menu_items(*(menu_t **)((int)gt + 0x20),do_pop_menu,0,format);
   if ((iVar1 != wasDualShock_54) && (3 < index)) {
     index = iVar1 + 4;
   }
@@ -555,7 +555,7 @@ int options_menu(void *gt,int index)
 	/* end block 1 */
 	// End Line: 2202
 
-int main_menu(void *gt,int index)
+int menudefs_main_menu(void *gt,int index)
 
 {
   char *format;
@@ -565,9 +565,9 @@ int main_menu(void *gt,int index)
   MENUFACE_ChangeStateRandomly(index);
   do_check_controller(gt);
   format = localstr_get(LOCALSTR_start_game);
-  menu_item(*(menu_t **)((int)gt + 0x20),do_start_game,0,format);
+  num_menu_items(*(menu_t **)((int)gt + 0x20),do_start_game,0,format);
   format = localstr_get(LOCALSTR_options);
-  menu_item(*(menu_t **)((int)gt + 0x20),do_push_menu,(long)options_menu,format);
+  num_menu_items(*(menu_t **)((int)gt + 0x20),menu_push,(long)options_menu,format);
   if (index < 0) {
     index = 0;
   }
@@ -590,7 +590,7 @@ int main_menu(void *gt,int index)
 	/* end block 2 */
 	// End Line: 2265
 
-int do_main_menu(void *gt,long param,menu_ctrl_t ctrl)
+int main_menu(void *gt,long param,menu_ctrl_t ctrl)
 
 {
   if ((StartGameFading == 0) && ((ctrl == menu_ctrl_start || (ctrl == menu_ctrl_engage)))) {
@@ -641,7 +641,7 @@ char * flashStart(void)
       gameTrackerX.maxWipeTime = 0x14;
       StartGameFading = 0;
       menu_pop(gameTrackerX.menu);
-      menu_push(gameTrackerX.menu,main_menu);
+      menu_print(gameTrackerX.menu,menudefs_main_menu);
     }
     DAT_800d0d40 = 0;
   }
@@ -692,7 +692,7 @@ int menudefs_main_menu(void *gt,int index)
   check_hack_attract();
   menu_format(*(menu_t **)((int)gt + 0x20),1,0x80,100,100,0xe,2,0);
   format = flashStart();
-  menu_item(*(menu_t **)((int)gt + 0x20),do_main_menu,0,format);
+  num_menu_items(*(menu_t **)((int)gt + 0x20),main_menu,0,format);
   if (index < 0) {
     index = 0;
   }
@@ -720,9 +720,9 @@ int menudefs_confirmexit_menu(void *gt,int index)
   format = localstr_get(LOCALSTR_query_quit);
   menu_item_flags(*(menu_t **)((int)gt + 0x20),(TDRFuncPtr_menu_item_flags1fn)0x0,0,4,format);
   format = localstr_get(LOCALSTR_no);
-  menu_item(*(menu_t **)((int)gt + 0x20),do_pop_menu,0,format);
+  num_menu_items(*(menu_t **)((int)gt + 0x20),do_pop_menu,0,format);
   format = localstr_get(LOCALSTR_yes);
-  menu_item(*(menu_t **)((int)gt + 0x20),do_function,(long)DEBUG_ExitGame,format);
+  num_menu_items(*(menu_t **)((int)gt + 0x20),do_function,(long)DEBUG_ExitGame,format);
   if (index < 0) {
     index = 1;
   }
@@ -740,7 +740,7 @@ int menudefs_confirmexit_menu(void *gt,int index)
 	/* end block 1 */
 	// End Line: 2463
 
-int menudefs_pause_menu(void *gt,int index)
+int memcard_pause_menu(void *gt,int index)
 
 {
   char *format;
@@ -751,13 +751,13 @@ int menudefs_pause_menu(void *gt,int index)
   format = localstr_get(LOCALSTR_paused);
   menu_item_flags(*(menu_t **)((int)gt + 0x20),(TDRFuncPtr_menu_item_flags1fn)0x0,0,4,format);
   format = localstr_get(LOCALSTR_resume_game);
-  menu_item(*(menu_t **)((int)gt + 0x20),do_function,(long)DEBUG_ContinueGame,format);
+  num_menu_items(*(menu_t **)((int)gt + 0x20),do_function,(long)DEBUG_ContinueGame,format);
   format = localstr_get(LOCALSTR_save_game);
-  menu_item(*(menu_t **)((int)gt + 0x20),do_save_menu,0,format);
+  num_menu_items(*(menu_t **)((int)gt + 0x20),do_save_menu,0,format);
   format = localstr_get(LOCALSTR_options);
-  menu_item(*(menu_t **)((int)gt + 0x20),do_push_menu,(long)options_menu,format);
+  num_menu_items(*(menu_t **)((int)gt + 0x20),menu_push,(long)options_menu,format);
   format = localstr_get(LOCALSTR_quit_game);
-  menu_item(*(menu_t **)((int)gt + 0x20),do_push_menu,(long)menudefs_confirmexit_menu,format);
+  num_menu_items(*(menu_t **)((int)gt + 0x20),menu_push,(long)menudefs_confirmexit_menu,format);
   if (index < 0) {
     index = 1;
   }

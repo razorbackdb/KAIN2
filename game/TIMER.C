@@ -29,10 +29,10 @@ u_long TIMER_GetTimeMS(void)
   u_int uVar1;
   u_int uVar2;
   
-  EnterCriticalSection();
-  uVar2 = GetRCnt(0xf2000000);
-  //uVar1 = gameTimer;
   ExitCriticalSection();
+  uVar2 = GetRCnt(0xf2000000);
+  uVar1 = gameTimer;
+  EnterCriticalSection();
   return (uVar1 >> 0x10) * 0x1ef63 + (uVar2 & 0xffff | uVar1 << 0x10) / 0x844d;
 }
 
@@ -75,7 +75,7 @@ u_long TIMER_TimeDiff(u_long x)
   uVar1 = GetRCnt(0xf2000000);
   uVar1 = uVar1 & 0xffff;
   uVar5 = x >> 0x10;
-  //uVar2 = gameTimer & 0xffff;
+  uVar2 = gameTimer & 0xffff;
   uVar4 = x & 0xffff;
   if (uVar2 < uVar5) {
     uVar5 = (uVar2 + 0x10000) - uVar5;

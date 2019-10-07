@@ -58,15 +58,15 @@ void GenericInit(_Instance *instance,GameTracker *gameTracker)
   }
   if (((pOVar3 != (Object *)0x0) && (pOVar3->numAnims != 0)) &&
      ((pOVar3->oflags2 & 0x40000000U) == 0)) {
-    G2EmulationInstanceSetTotalSections(instance,1);
-    G2EmulationInstanceSetStartAndEndSegment
+    G2EmulationInit(instance,1);
+    G2EmulationInstanceToInstanceSwitchAnimation
               (instance,0,0,
                (short)(((u_int)*(ushort *)&pOVar3->modelList[instance->currentModel]->numSegments - 1
                        ) * 0x10000 >> 0x10));
-    G2EmulationInstanceSetAnimation(instance,0,0,0,0);
-    G2EmulationInstanceSetMode(instance,0,0);
+    G2EmulationInstanceToInstanceSwitchAnimationCharacter(instance,0,0,0,0);
+    G2EmulationInstanceInitSection(instance,0,0);
     if ((*(int *)pOVar3->name == 0x65697261) && (*(int *)(pOVar3->name + 1) == 0x5f5f5f6c)) {
-      G2AnimSection_SetInterpInfo((instance->anim).section,(_G2AnimInterpInfo_Type *)&crap_24);
+      _G2AnimSection_InterpStateToQuat((instance->anim).section,(_G2AnimInterpInfo_Type *)&crap_24);
     }
   }
   return;
@@ -114,7 +114,7 @@ void GenericCollide(_Instance *instance,GameTracker *gameTracker)
 	/* end block 2 */
 	// End Line: 272
 
-void GenericProcess(_Instance *instance,GameTracker *gameTracker)
+void _GlyphGenericProcess(_Instance *instance,GameTracker *gameTracker)
 
 {
   Object *pOVar1;
@@ -122,7 +122,7 @@ void GenericProcess(_Instance *instance,GameTracker *gameTracker)
   pOVar1 = instance->object;
   if (((pOVar1 != (Object *)0x0) && (pOVar1->numAnims != 0)) &&
      ((pOVar1->oflags2 & 0x40000000U) == 0)) {
-    G2EmulationInstancePlayAnimation(instance);
+    G2EmulationSwitchAnimation(instance);
   }
   return;
 }
@@ -234,16 +234,16 @@ LAB_8003eefc:
     pMVar6 = instance->matrix;
     break;
   case 0x11:
-    pMVar6 = (MATRIX *)G2EmulationInstanceQueryAnimation(instance,0);
+    pMVar6 = (MATRIX *)G2EmulationInstanceSetMode(instance,0);
     break;
   case 0x12:
-    pMVar6 = (MATRIX *)G2EmulationInstanceQueryFrame(instance,0);
+    pMVar6 = (MATRIX *)G2EmulationInstanceQueryAnimation(instance,0);
     break;
   case 0x18:
     if ((instance->flags2 & 4U) != 0) {
       pMVar6 = (MATRIX *)CIRC_Alloc(0xc);
       plVar4 = *(long **)(pMVar6->m + 2);
-      *(undefined4 *)pMVar6->m = 8;
+      *(u_char *)pMVar6->m = 8;
       lVar7 = instance->flags2;
       *plVar4 = instance->flags;
       plVar4[1] = lVar7;
@@ -325,8 +325,9 @@ void GenericMessage(_Instance *instance,u_long message,u_long data)
         else {
           local_18 = *(int *)(data + 0xc);
         }
-        G2EmulationInstanceSetAnimation(instance,0,*(int *)(data + 4),*(int *)(data + 8),local_18);
-        G2EmulationInstanceSetMode(instance,0,*(int *)(data + 0x10));
+        G2EmulationInstanceToInstanceSwitchAnimationCharacter
+                  (instance,0,*(int *)(data + 4),*(int *)(data + 8),local_18);
+        G2EmulationInstanceInitSection(instance,0,*(int *)(data + 0x10));
       }
       else {
         if (message < 0x8000009) {
@@ -337,7 +338,7 @@ void GenericMessage(_Instance *instance,u_long message,u_long data)
         }
         else {
           if (message == 0x8000010) {
-            G2EmulationInstanceSetMode(instance,0,data);
+            G2EmulationInstanceInitSection(instance,0,data);
           }
         }
       }

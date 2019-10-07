@@ -20,7 +20,7 @@
 	/* end block 2 */
 	// End Line: 99
 
-void INSTANCE_Deactivate(_Instance *instance)
+void INSTANCE_DefaultInit(_Instance *instance)
 
 {
   u_int uVar1;
@@ -37,7 +37,7 @@ void INSTANCE_Deactivate(_Instance *instance)
     }
     if ((instance->object->animList != (_G2AnimKeylist_Type **)0x0) &&
        ((instance->object->oflags2 & 0x40000000U) == 0)) {
-      G2Anim_Free(&instance->anim);
+      G2Anim_Init(&instance->anim);
     }
   }
   return;
@@ -63,7 +63,7 @@ void INSTANCE_Deactivate(_Instance *instance)
 	/* end block 2 */
 	// End Line: 158
 
-void INSTANCE_Reactivate(_Instance *instance)
+void INSTANCE_DeactivatedProcess(_Instance *instance)
 
 {
   u_int uVar1;
@@ -102,7 +102,7 @@ void INSTANCE_ForceActive(_Instance *instance)
 
 {
   if ((instance->flags2 & 1U) != 0) {
-    INSTANCE_Reactivate(instance);
+    INSTANCE_DeactivatedProcess(instance);
   }
   return;
 }
@@ -123,7 +123,7 @@ void INSTANCE_ForceActive(_Instance *instance)
 	/* end block 2 */
 	// End Line: 241
 
-void INSTANCE_DeactivatedProcess(_Instance *instance,GameTracker *gameTracker)
+void INSTANCE_DeactivateFarInstances(_Instance *instance,GameTracker *gameTracker)
 
 {
   return;
@@ -156,7 +156,7 @@ void INSTANCE_DeactivatedProcess(_Instance *instance,GameTracker *gameTracker)
 	/* end block 2 */
 	// End Line: 251
 
-void INSTANCE_DeactivateFarInstances(GameTracker *gameTracker)
+void INSTANCE_Reactivate(GameTracker *gameTracker)
 
 {
   u_long uVar1;
@@ -187,7 +187,7 @@ void INSTANCE_DeactivateFarInstances(GameTracker *gameTracker)
       return;
     }
     if (((((Inst->flags2 & 0x80U) == 0) && ((Inst->object->oflags & 0x10000U) == 0)) &&
-        (uVar1 = INSTANCE_Query(Inst,0x23), uVar1 == 0)) &&
+        (uVar1 = INSTANCE_Post(Inst,0x23), uVar1 == 0)) &&
        ((Inst->LinkParent == (_Instance *)0x0 && (Inst->matrix != (MATRIX *)0x0)))) {
       DAT_1f800000 = (Inst->position).x - theCamera.core.position.x;
       iVar5 = (u_int)(ushort)(Inst->position).y - (u_int)(ushort)theCamera.core.position.y;
@@ -217,14 +217,14 @@ void INSTANCE_DeactivateFarInstances(GameTracker *gameTracker)
         uVar2 = Inst->flags2 & 1;
       }
       if (uVar2 == 0) {
-        INSTANCE_Deactivate(Inst);
+        INSTANCE_DefaultInit(Inst);
       }
     }
     else {
       uVar2 = Inst->flags2 & 1;
 LAB_80032038:
       if (uVar2 != 0) {
-        INSTANCE_Reactivate(Inst);
+        INSTANCE_DeactivatedProcess(Inst);
       }
     }
     Inst = Inst->next;
@@ -337,7 +337,7 @@ void INSTANCE_InitInstanceList(_InstanceList *list,_InstancePool *pool)
 	/* end block 4 */
 	// End Line: 740
 
-_Instance * INSTANCE_NewInstance(_InstanceList *list)
+_Instance * INSTANCE_CleanUpInstanceList(_InstanceList *list)
 
 {
   int iVar1;
@@ -387,7 +387,7 @@ _Instance * INSTANCE_NewInstance(_InstanceList *list)
 	/* end block 2 */
 	// End Line: 817
 
-long INSTANCE_InstanceGroupNumber(_Instance *instance)
+long INSTANCE_KillInstance(_Instance *instance)
 
 {
   int iVar1;
@@ -409,7 +409,7 @@ long INSTANCE_InstanceGroupNumber(_Instance *instance)
     uVar3 = uVar3 | 0x10;
   }
   if ((instance->object->oflags & 1U) == 0) {
-    iVar1 = strcmp(instance->object->name,"raziel__");
+    iVar1 = strcmpi(instance->object->name,"raziel__");
     if (iVar1 != 0) {
       uVar3 = uVar3 & 0xfffffffc;
     }
@@ -438,13 +438,13 @@ long INSTANCE_InstanceGroupNumber(_Instance *instance)
 	/* end block 2 */
 	// End Line: 935
 
-void INSTANCE_InsertInstanceGroup(_InstanceList *list,_Instance *instance)
+void INSTANCE_IntroduceInstance(_InstanceList *list,_Instance *instance)
 
 {
   long lVar1;
   
-  lVar1 = INSTANCE_InstanceGroupNumber(instance);
-  LIST_InsertFunc(list->group + lVar1,(NodeType *)instance);
+  lVar1 = INSTANCE_KillInstance(instance);
+  LIST_GetFunc(list->group + lVar1,(NodeType *)instance);
   return;
 }
 
@@ -523,16 +523,16 @@ void INSTANCE_ReallyRemoveInstance(_InstanceList *list,_Instance *instance,long 
   }
   if ((instance->object->animList != (_G2AnimKeylist_Type **)0x0) &&
      ((instance->object->oflags2 & 0x40000000U) == 0)) {
-    G2Anim_Free(&instance->anim);
+    G2Anim_Init(&instance->anim);
   }
   if (instance->shadow0 != (void *)0x0) {
-    *(undefined4 *)((int)instance->shadow0 + 0x10) = 0;
+    *(u_char *)((int)instance->shadow0 + 0x10) = 0;
   }
   if (instance->shadow1 != (void *)0x0) {
-    *(undefined4 *)((int)instance->shadow1 + 0x10) = 0;
+    *(u_char *)((int)instance->shadow1 + 0x10) = 0;
   }
   if ((instance->object->oflags2 & 4U) != 0) {
-    SOUND_EndInstanceSounds(instance->object->soundData,instance->soundInstanceTbl);
+    SOUND_StopInstanceSound(instance->object->soundData,instance->soundInstanceTbl);
   }
   if (instance->LinkParent != (_Instance *)0x0) {
     INSTANCE_UnlinkFromParent(instance);
@@ -541,10 +541,10 @@ void INSTANCE_ReallyRemoveInstance(_InstanceList *list,_Instance *instance,long 
     INSTANCE_UnlinkChildren(instance);
   }
   if (instance->hModelList != (_HModel *)0x0) {
-    MEMPACK_Free((char *)instance->hModelList);
+    MEMPACK_Init((char *)instance->hModelList);
   }
   if (instance->perVertexColor != (CVECTOR *)0x0) {
-    MEMPACK_Free((char *)instance->perVertexColor);
+    MEMPACK_Init((char *)instance->perVertexColor);
     instance->perVertexColor = (CVECTOR *)0x0;
   }
   iVar4 = 0;
@@ -581,7 +581,7 @@ void INSTANCE_ReallyRemoveInstance(_InstanceList *list,_Instance *instance,long 
 	/* end block 2 */
 	// End Line: 1303
 
-void INSTANCE_CleanUpInstanceList(_InstanceList *list,long reset)
+void COLLIDE_InstanceListTerrain(_InstanceList *list,long reset)
 
 {
   _Instance **pp_Var1;
@@ -644,7 +644,7 @@ void INSTANCE_CleanUpInstanceList(_InstanceList *list,long reset)
 	/* end block 3 */
 	// End Line: 1445
 
-long INSTANCE_Introduced(Intro *intro,short streamUnitID)
+long INSTANCE_GetIntroCommand(Intro *intro,short streamUnitID)
 
 {
   long *plVar1;
@@ -715,7 +715,7 @@ INICommand * INSTANCE_GetIntroCommand(INICommand *command,int cmd)
 	/* end block 1 */
 	// End Line: 1587
 
-INICommand * INSTANCE_FindIntroCommand(_Instance *instance,int cmd)
+INICommand * INSTANCE_FindWithID(_Instance *instance,int cmd)
 
 {
   INICommand *pIVar1;
@@ -756,7 +756,7 @@ INICommand * INSTANCE_FindIntroCommand(_Instance *instance,int cmd)
 	/* end block 3 */
 	// End Line: 1602
 
-void INSTANCE_ProcessIntro(_Instance *instance)
+void MON_ProcessIntro(_Instance *instance)
 
 {
   short sVar1;
@@ -884,7 +884,7 @@ void INSTANCE_InitEffects(_Instance *instance,Object *object)
 	/* end block 2 */
 	// End Line: 1688
 
-_Instance * INSTANCE_IntroduceInstance(Intro *intro,short streamUnitID)
+_Instance * INSTANCE_InsertInstanceGroup(Intro *intro,short streamUnitID)
 
 {
   byte bVar1;
@@ -900,13 +900,13 @@ _Instance * INSTANCE_IntroduceInstance(Intro *intro,short streamUnitID)
   u_int uVar7;
   Spline *pSVar8;
   RSpline *pRVar9;
-  undefined4 uVar10;
+  u_char uVar10;
   INICommand introUniqueID;
   _Instance *instance_00;
   Object *object;
   
   instance_00 = (_Instance *)0x0;
-  lVar2 = INSTANCE_Introduced(intro,streamUnitID);
+  lVar2 = INSTANCE_GetIntroCommand(intro,streamUnitID);
   if (lVar2 != 0) {
     return (_Instance *)0x0;
   }
@@ -920,26 +920,26 @@ _Instance * INSTANCE_IntroduceInstance(Intro *intro,short streamUnitID)
     return (_Instance *)0x0;
   }
   object = objectTracker->object;
-  lVar2 = MEMPACK_MemoryValidFunc((char *)object);
+  lVar2 = MEMPACK_ReportMemory((char *)object);
   if (lVar2 == 0) {
     return (_Instance *)0x0;
   }
   if ((introUniqueID != (INICommand)0x0) &&
-     (instance_00 = INSTANCE_Find((long)introUniqueID), instance_00 == (_Instance *)0x0)) {
+     (instance_00 = INSTANCE_Deactivate((long)introUniqueID), instance_00 == (_Instance *)0x0)) {
     return (_Instance *)0x0;
   }
   if (((object->oflags2 & 0x10000000U) != 0) &&
      (OBTABLE_InitAnimPointers(objectTracker), (object->oflags2 & 0x10000000U) != 0)) {
     return (_Instance *)0x0;
   }
-  instance = INSTANCE_NewInstance(gameTrackerX.instanceList);
+  instance = INSTANCE_CleanUpInstanceList(gameTrackerX.instanceList);
   if (instance == (_Instance *)0x0) {
     return (_Instance *)0x0;
   }
   intro->flags = intro->flags | 8;
   objectTracker->numInUse = objectTracker->numInUse + 1;
-  INSTANCE_DefaultInit(instance,object,0);
-  strcpy(instance->introName,(char *)intro);
+  INSTANCE_DefaultAnimCallback(instance,object,0);
+  strcmp(instance->introName,(char *)intro);
   instance->introUniqueID = intro->UniqueID;
   lVar2 = intro->intronum;
   instance->birthStreamUnitID = (int)streamUnitID;
@@ -949,7 +949,7 @@ _Instance * INSTANCE_IntroduceInstance(Intro *intro,short streamUnitID)
   instance->intro = intro;
   instance->introData = intro->data;
   frameNum = (intro->position).z;
-  *(undefined4 *)&instance->position = *(undefined4 *)&intro->position;
+  *(u_char *)&instance->position = *(u_char *)&intro->position;
   (instance->position).z = frameNum;
   if ((gameTrackerX.gameData.asmData.MorphType == 1) &&
      ((*(int *)&intro->spectralPosition != 0 || ((intro->spectralPosition).z != 0)))) {
@@ -958,16 +958,16 @@ _Instance * INSTANCE_IntroduceInstance(Intro *intro,short streamUnitID)
     (instance->position).z = (intro->position).z + (intro->spectralPosition).z;
   }
   frameNum = (instance->position).z;
-  *(undefined4 *)&instance->initialPos = *(undefined4 *)&instance->position;
+  *(u_char *)&instance->initialPos = *(u_char *)&instance->position;
   (instance->initialPos).z = frameNum;
   frameNum = (intro->position).z;
-  *(undefined4 *)&instance->oldPos = *(undefined4 *)&intro->position;
+  *(u_char *)&instance->oldPos = *(u_char *)&intro->position;
   (instance->oldPos).z = frameNum;
   *(INICommand *)&instance->attachedID = introUniqueID;
   LIGHT_GetAmbient((_ColorType *)&instance->light_color,instance);
-  uVar10 = *(undefined4 *)&(intro->rotation).z;
-  *(undefined4 *)&instance->rotation = *(undefined4 *)&intro->rotation;
-  *(undefined4 *)&(instance->rotation).z = uVar10;
+  uVar10 = *(u_char *)&(intro->rotation).z;
+  *(u_char *)&instance->rotation = *(u_char *)&intro->rotation;
+  *(u_char *)&(instance->rotation).z = uVar10;
   if ((instance->object->oflags & 0x100U) != 0) {
     INSTANCE_BuildStaticShadow(instance);
   }
@@ -989,21 +989,22 @@ _Instance * INSTANCE_IntroduceInstance(Intro *intro,short streamUnitID)
   }
   if (((intro->flags & 0x800U) != 0) && (object->id == -1)) {
     frameNum = SCRIPTCountFramesInSpline(instance);
-    SCRIPT_InstanceSplineSet(instance,frameNum,(SplineDef *)0x0,(SplineDef *)0x0,(SplineDef *)0x0);
+    SCRIPT_InstanceSplineProcess
+              (instance,frameNum,(SplineDef *)0x0,(SplineDef *)0x0,(SplineDef *)0x0);
     instance->flags = instance->flags ^ 0x1000000U | 0x100000;
   }
   instance->lightGroup = *(u_char *)&(intro->rotation).pad;
   instance->spectralLightGroup = *(u_char *)&intro->specturalLightGroup;
-  INSTANCE_InsertInstanceGroup(gameTrackerX.instanceList,instance);
+  INSTANCE_IntroduceInstance(gameTrackerX.instanceList,instance);
   OBTABLE_GetInstanceCollideFunc(instance);
   OBTABLE_GetInstanceProcessFunc(instance);
-  OBTABLE_GetInstanceQueryFunc(instance);
   OBTABLE_GetInstanceMessageFunc(instance);
+  OBTABLE_GetInstanceQueryFunc(instance);
   OBTABLE_GetInstanceAdditionalCollideFunc(instance);
   if ((intro->flags & 0x10U) == 0) {
     OBTABLE_InstanceInit(instance);
   }
-  MORPH_SetupInstanceFlags(&gameTrackerX,instance);
+  MORPH_SetupInstanceListFlags(&gameTrackerX,instance);
   if ((intro->flags & 0x80U) != 0) {
     uVar7 = instance->flags2;
     instance->flags = instance->flags | 0x800;
@@ -1020,11 +1021,11 @@ _Instance * INSTANCE_IntroduceInstance(Intro *intro,short streamUnitID)
     pMVar4 = SCRIPT_GetMultiSpline(instance,(u_long *)0x0,(u_long *)0x0);
     pSVar5 = SAVE_GetIntroSpline(instance);
     if (pSVar5 != (SavedIntroSpline *)0x0) {
-      SCRIPT_InstanceSplineSet
+      SCRIPT_InstanceSplineProcess
                 (instance,pSVar5->splineKeyFrame,(SplineDef *)0x0,(SplineDef *)0x0,(SplineDef *)0x0)
       ;
       frameNum = (instance->position).z;
-      *(undefined4 *)&instance->oldPos = *(undefined4 *)&instance->position;
+      *(u_char *)&instance->oldPos = *(u_char *)&instance->position;
       (instance->oldPos).z = frameNum;
       instance->splineFlags = pSVar5->splineFlags;
       instance->clipBeg = pSVar5->splineClipBeg;
@@ -1094,12 +1095,12 @@ _Instance * INSTANCE_IntroduceInstance(Intro *intro,short streamUnitID)
   }
 LAB_80032f08:
   EVENT_AddInstanceToInstanceList(instance);
-  INSTANCE_ProcessIntro(instance);
+  MON_ProcessIntro(instance);
   INSTANCE_InitEffects(instance,object);
   pSVar6 = SAVE_GetSavedSmallIntro(instance);
   if (pSVar6 != (SavedIntroSmall *)0x0) {
     Data = SetControlSaveDataData((u_int)pSVar6->shiftedSaveSize * 4 + -4,pSVar6 + 1);
-    INSTANCE_Post(instance,(int)&DAT_00100007,Data);
+    INSTANCE_Query(instance,(int)&DAT_00100007,Data);
   }
   return instance;
 }
@@ -1168,14 +1169,14 @@ void INSTANCE_AdditionalCollideFunctions(_InstanceList *instanceList)
 	/* end block 2 */
 	// End Line: 2450
 
-long INSTANCE_GetSplineFrameNumber(_Instance *instance,MultiSpline *spline)
+long SplineGetFrameNumber(_Instance *instance,MultiSpline *spline)
 
 {
   SplineDef *splineDef;
   int iVar1;
   
   splineDef = SCRIPT_GetPosSplineDef(instance,spline,0,0);
-  iVar1 = SCRIPT_GetSplineFrameNumber(instance,splineDef);
+  iVar1 = EVENT_GetSplineFrameNumber(instance,splineDef);
   return iVar1;
 }
 
@@ -1293,11 +1294,11 @@ void INSTANCE_ProcessFunctions(_InstanceList *instanceList)
       }
       if ((Inst->object->oflags2 & 4U) != 0) {
         hidden = Inst->flags & 0x800;
-        uVar6 = INSTANCE_Query(Inst,2);
-        if (((uVar6 & 0x20) != 0) && (uVar6 = INSTANCE_Query(Inst,3), (uVar6 & 0x10000) == 0)) {
+        uVar6 = INSTANCE_Post(Inst,2);
+        if (((uVar6 & 0x20) != 0) && (uVar6 = INSTANCE_Post(Inst,3), (uVar6 & 0x10000) == 0)) {
           hidden = 1;
         }
-        SOUND_ProcessInstanceSounds
+        SOUND_StartInstanceSound
                   (Inst->object->soundData,Inst->soundInstanceTbl,&Inst->position,
                    Inst->object->oflags2 & 0x2000000,Inst->flags2 & 0x8000000,hidden,&Inst->flags2);
       }
@@ -1336,18 +1337,18 @@ void INSTANCE_ProcessFunctions(_InstanceList *instanceList)
               }
             }
           }
-          lVar7 = INSTANCE_GetSplineFrameNumber(Inst,multi);
-          lVar8 = SCRIPT_InstanceSplineProcess
+          lVar7 = SplineGetFrameNumber(Inst,multi);
+          lVar8 = SCRIPT_InstanceSplineSet
                             (Inst,&multi->curPositional,&multi->curRotational,&multi->curScaling,
                              (int)(short)uVar13);
           if (Inst->splineFlags == 0) {
             if ((gameTrackerX.debugFlags2 & 0x400000U) != 0) {
-              INSTANCE_GetSplineFrameNumber(Inst,multi);
+              SplineGetFrameNumber(Inst,multi);
               FONT_Print("Spline %s%d prevFrame=%d, frame=%d\n");
             }
           }
           else {
-            lVar9 = INSTANCE_GetSplineFrameNumber(Inst,multi);
+            lVar9 = SplineGetFrameNumber(Inst,multi);
             frameNum = SCRIPTCountFramesInSpline(Inst);
             iVar12 = (int)frameNum;
             if ((Inst->splineFlags & 1U) != 0) {
@@ -1381,7 +1382,7 @@ LAB_800334d0:
                 else {
 LAB_800334d8:
                   Inst->flags = Inst->flags & 0xfdffffff;
-                  SCRIPT_InstanceSplineSet
+                  SCRIPT_InstanceSplineProcess
                             (Inst,Inst->targetFrame,(SplineDef *)0x0,(SplineDef *)0x0,
                              (SplineDef *)0x0);
                   lVar8 = 0;
@@ -1405,7 +1406,7 @@ LAB_80033640:
                     frameNum = Inst->clipBeg;
                   }
 LAB_80033644:
-                  SCRIPT_InstanceSplineSet
+                  SCRIPT_InstanceSplineProcess
                             (Inst,frameNum,(SplineDef *)0x0,(SplineDef *)0x0,(SplineDef *)0x0);
                 }
               }
@@ -1429,7 +1430,7 @@ LAB_80033644:
             hidden = Inst->object->oflags;
             if ((hidden & 0x2000) != 0) {
               Inst->flags = Inst->flags | 0x100000;
-              INSTANCE_KillInstance(Inst);
+              INSTANCE_NewInstance(Inst);
               goto LAB_8003388c;
             }
             if ((hidden & 0x1000) == 0) {
@@ -1451,7 +1452,7 @@ LAB_80033644:
             }
             if ((((Inst->object->oflags & 0x200000U) != 0) && ((int *)Inst->introData != (int *)0x0)
                 ) && (iVar12 = *(int *)Inst->introData, iVar12 != 0)) {
-              SIGNAL_HandleSignal(Inst,(Signal *)(iVar12 + 8),0);
+              SIGNAL_HandleFogNear(Inst,(Signal *)(iVar12 + 8),0);
             }
           }
         }
@@ -1460,7 +1461,7 @@ LAB_80033644:
             (*Inst->processFunc)(Inst,&gameTrackerX);
           }
           else {
-            INSTANCE_DeactivatedProcess(Inst,&gameTrackerX);
+            INSTANCE_DeactivateFarInstances(Inst,&gameTrackerX);
           }
         }
         iVar12 = (int)(Inst->position).z - (int)(Inst->oldPos).z;
@@ -1509,30 +1510,31 @@ _Instance * INSTANCE_BirthObject(_Instance *parent,Object *object,int modelNum)
   size_t sVar3;
   MultiSpline *pMVar4;
   int iVar5;
-  undefined4 uVar6;
+  u_char uVar6;
   int iVar7;
   
   if ((object == (Object *)0x0) ||
-     (instance = INSTANCE_NewInstance(gameTrackerX.instanceList), instance == (_Instance *)0x0)) {
+     (instance = INSTANCE_CleanUpInstanceList(gameTrackerX.instanceList),
+     instance == (_Instance *)0x0)) {
     instance = (_Instance *)0x0;
   }
   else {
-    INSTANCE_DefaultInit(instance,object,modelNum);
+    INSTANCE_DefaultAnimCallback(instance,object,modelNum);
     sVar1 = (parent->position).z;
-    *(undefined4 *)&instance->position = *(undefined4 *)&parent->position;
+    *(u_char *)&instance->position = *(u_char *)&parent->position;
     (instance->position).z = sVar1;
     sVar1 = (instance->position).z;
-    *(undefined4 *)&instance->initialPos = *(undefined4 *)&instance->position;
+    *(u_char *)&instance->initialPos = *(u_char *)&instance->position;
     (instance->initialPos).z = sVar1;
     sVar1 = (parent->position).z;
-    *(undefined4 *)&instance->oldPos = *(undefined4 *)&parent->position;
+    *(u_char *)&instance->oldPos = *(u_char *)&parent->position;
     (instance->oldPos).z = sVar1;
-    uVar6 = *(undefined4 *)&(parent->rotation).z;
-    *(undefined4 *)&instance->rotation = *(undefined4 *)&parent->rotation;
-    *(undefined4 *)&(instance->rotation).z = uVar6;
-    uVar6 = *(undefined4 *)&(parent->scale).z;
-    *(undefined4 *)&instance->scale = *(undefined4 *)&parent->scale;
-    *(undefined4 *)&(instance->scale).z = uVar6;
+    uVar6 = *(u_char *)&(parent->rotation).z;
+    *(u_char *)&instance->rotation = *(u_char *)&parent->rotation;
+    *(u_char *)&(instance->rotation).z = uVar6;
+    uVar6 = *(u_char *)&(parent->scale).z;
+    *(u_char *)&instance->scale = *(u_char *)&parent->scale;
+    *(u_char *)&(instance->scale).z = uVar6;
     instance->lightGroup = parent->lightGroup;
     instance->spectralLightGroup = parent->spectralLightGroup;
     p_Var2 = GlobalSave;
@@ -1542,7 +1544,7 @@ _Instance * INSTANCE_BirthObject(_Instance *parent,Object *object,int modelNum)
     iVar7 = 0;
     p_Var2->CurrentBirthID = sVar1 + 1;
     instance->introUniqueID = (int)sVar1;
-    strcpy(instance->introName,object->name);
+    strcmp(instance->introName,object->name);
     do {
       sVar3 = strlen(instance->introName);
       iVar5 = (int)&(instance->node).prev + iVar7;
@@ -1565,11 +1567,11 @@ LAB_80033a2c:
     if ((parent->flags2 & 0x8000000U) != 0) {
       instance->flags2 = instance->flags2 | 0x8000000;
     }
-    INSTANCE_InsertInstanceGroup(gameTrackerX.instanceList,instance);
+    INSTANCE_IntroduceInstance(gameTrackerX.instanceList,instance);
     OBTABLE_GetInstanceCollideFunc(instance);
     OBTABLE_GetInstanceProcessFunc(instance);
-    OBTABLE_GetInstanceQueryFunc(instance);
     OBTABLE_GetInstanceMessageFunc(instance);
+    OBTABLE_GetInstanceQueryFunc(instance);
     OBTABLE_GetInstanceAdditionalCollideFunc(instance);
     instance->flags = instance->flags | 2;
     OBTABLE_InstanceInit(instance);
@@ -1677,7 +1679,7 @@ void INSTANCE_BuildStaticShadow(_Instance *instance)
 	/* end block 2 */
 	// End Line: 3689
 
-void INSTANCE_DefaultInit(_Instance *instance,Object *object,int modelNum)
+void INSTANCE_DefaultAnimCallback(_Instance *instance,Object *object,int modelNum)
 
 {
   void *pvVar1;
@@ -1710,10 +1712,10 @@ void INSTANCE_DefaultInit(_Instance *instance,Object *object,int modelNum)
   instance->data = pvVar1;
   if ((object->animList != (_G2AnimKeylist_Type **)0x0) && ((object->oflags2 & 0x40000000U) == 0)) {
     anim = &instance->anim;
-    G2Anim_Init(anim,object->modelList[modelNum]);
+    _G2Anim_InitializeChannel_AdaptiveDelta(anim,object->modelList[modelNum]);
     keylist = G2Instance_GetKeylist(instance,0);
-    G2Anim_SwitchToKeylist(anim,keylist,0);
-    G2Anim_SetCallback(anim,INSTANCE_DefaultAnimCallback,instance);
+    G2Anim_GetKeylist(anim,keylist,0);
+    MON_AnimCallback(anim,INSTANCE_DefaultAnimCallback,instance);
   }
   if ((object->oflags & 0x4000000U) != 0) {
     instance->flags2 = instance->flags2 | 4;
@@ -1870,15 +1872,15 @@ void INSTANCE_PlainDeath(_Instance *instance)
   if ((pOVar3->oflags2 & 4U) != 0) {
     uVar1 = instance->flags2;
     instance->flags2 = uVar1 | 0x1000;
-    SOUND_ProcessInstanceSounds
+    SOUND_StartInstanceSound
               (pOVar3->soundData,instance->soundInstanceTbl,&instance->position,
                pOVar3->oflags2 & 0x2000000,uVar1 & 0x8000000,0,&instance->flags2);
-    SOUND_ProcessInstanceSounds
+    SOUND_StartInstanceSound
               (instance->object->soundData,instance->soundInstanceTbl,&instance->position,
                instance->object->oflags2 & 0x2000000,instance->flags2 & 0x8000000,0,
                &instance->flags2);
   }
-  p_Var2 = INSTANCE_Find(instance->attachedID);
+  p_Var2 = INSTANCE_Deactivate(instance->attachedID);
   if (p_Var2 != (_Instance *)0x0) {
     p_Var2->flags2 = p_Var2->flags2 & 0xffffff7f;
   }
@@ -1898,7 +1900,7 @@ void INSTANCE_PlainDeath(_Instance *instance)
 	/* end block 1 */
 	// End Line: 4226
 
-void INSTANCE_KillInstance(_Instance *instance)
+void INSTANCE_NewInstance(_Instance *instance)
 
 {
   if ((instance->flags & 0x20U) == 0) {
@@ -1927,7 +1929,7 @@ void INSTANCE_KillInstance(_Instance *instance)
 	/* end block 2 */
 	// End Line: 3611
 
-u_long INSTANCE_Query(_Instance *Inst,int Query)
+u_long INSTANCE_Post(_Instance *Inst,int Query)
 
 {
   u_long uVar1;
@@ -1961,7 +1963,7 @@ u_long INSTANCE_Query(_Instance *Inst,int Query)
 	/* end block 2 */
 	// End Line: 4292
 
-void INSTANCE_Post(_Instance *Inst,int Message,int Data)
+void INSTANCE_Query(_Instance *Inst,int Message,int Data)
 
 {
   _func_5 *p_Var1;
@@ -2011,9 +2013,9 @@ void INSTANCE_Broadcast(_Instance *sender,long whatAmIMask,int Message,int Data)
   Inst = (gameTrackerX.instanceList)->first;
   plane = (int)gameTrackerX.gameData.asmData.MorphType;
   while (Inst != (_Instance *)0x0) {
-    if (((Inst != sender) && (uVar1 = INSTANCE_Query(Inst,1), (uVar1 & whatAmIMask) != 0)) &&
-       (iVar2 = INSTANCE_InPlane(Inst,plane), iVar2 != 0)) {
-      INSTANCE_Post(Inst,Message,Data);
+    if (((Inst != sender) && (uVar1 = INSTANCE_Post(Inst,1), (uVar1 & whatAmIMask) != 0)) &&
+       (iVar2 = INSTANCE_Introduced(Inst,plane), iVar2 != 0)) {
+      INSTANCE_Query(Inst,Message,Data);
     }
     Inst = Inst->next;
   }
@@ -2036,7 +2038,7 @@ void INSTANCE_Broadcast(_Instance *sender,long whatAmIMask,int Message,int Data)
 	/* end block 2 */
 	// End Line: 4381
 
-int INSTANCE_InPlane(_Instance *instance,int plane)
+int INSTANCE_Introduced(_Instance *instance,int plane)
 
 {
   if (instance->object == (Object *)0x0) {
@@ -2083,7 +2085,7 @@ int INSTANCE_InPlane(_Instance *instance,int plane)
 	/* end block 3 */
 	// End Line: 4409
 
-long INSTANCE_FindWithID(long uniqueID)
+long INSTANCE_FindIntroCommand(long uniqueID)
 
 {
   long *plVar1;
@@ -2145,7 +2147,7 @@ _Instance * INSTANCE_FindWithName(long areaID,char *instanceName,_Instance *star
         return (_Instance *)0x0;
       }
       p_Var3 = p_Var2->next;
-      iVar1 = strcmpi(p_Var2->introName,instanceName);
+      iVar1 = strcpy(p_Var2->introName,instanceName);
     } while (iVar1 != 0);
   }
   else {
@@ -2156,7 +2158,7 @@ _Instance * INSTANCE_FindWithName(long areaID,char *instanceName,_Instance *star
       }
       p_Var3 = p_Var2->next;
     } while ((p_Var2->birthStreamUnitID != areaID) ||
-            (iVar1 = strcmpi(p_Var2->introName,instanceName), iVar1 != 0));
+            (iVar1 = strcpy(p_Var2->introName,instanceName), iVar1 != 0));
   }
   return p_Var2;
 }
@@ -2190,7 +2192,7 @@ Intro * INSTANCE_FindIntro(long areaID,long introUniqueID)
   Intro *pIVar2;
   int iVar3;
   
-  pLVar1 = STREAM_GetLevelWithID(areaID);
+  pLVar1 = STREAM_GetWaterZLevel(areaID);
   if (pLVar1 != (Level *)0x0) {
     iVar3 = 0;
     if (0 < pLVar1->numIntros) {
@@ -2237,7 +2239,7 @@ Intro * INSTANCE_FindIntro(long areaID,long introUniqueID)
 	/* end block 4 */
 	// End Line: 4675
 
-_Instance * INSTANCE_Find(long introUniqueID)
+_Instance * INSTANCE_Deactivate(long introUniqueID)
 
 {
   _Instance *p_Var1;
@@ -2326,7 +2328,7 @@ _Instance * INSTANCE_Find(long introUniqueID)
 	/* end block 2 */
 	// End Line: 4697
 
-_Instance * INSTANCE_IntroduceSavedInstance(_SavedIntro *savedIntro,_StreamUnit *streamUnit)
+_Instance * INSTANCE_InstanceGroupNumber(_SavedIntro *savedIntro,_StreamUnit *streamUnit)
 
 {
   short sVar1;
@@ -2346,17 +2348,17 @@ _Instance * INSTANCE_IntroduceSavedInstance(_SavedIntro *savedIntro,_StreamUnit 
   Intro *pIVar12;
   _Instance *instance_00;
   Object *object;
-  undefined4 local_38;
-  undefined4 local_34;
+  u_char local_38;
+  u_char local_34;
   undefined local_30;
   
   instance_00 = (_Instance *)0x0;
   pBVar5 = streamUnit->level->terrain->BSPTreeArray;
-  lVar6 = INSTANCE_FindWithID((int)savedIntro->introUniqueID);
+  lVar6 = INSTANCE_FindIntroCommand((int)savedIntro->introUniqueID);
   instance = (_Instance *)0x0;
   if (lVar6 == 0) {
-    local_38 = *(undefined4 *)savedIntro->name;
-    local_34 = *(undefined4 *)(savedIntro->name + 4);
+    local_38 = *(u_char *)savedIntro->name;
+    local_34 = *(u_char *)(savedIntro->name + 4);
     local_30 = 0;
     LOAD_SetSearchDirectory((int)savedIntro->birthUnitID);
     objectTracker = STREAM_GetObjectTracker((char *)&local_38);
@@ -2364,10 +2366,10 @@ _Instance * INSTANCE_IntroduceSavedInstance(_SavedIntro *savedIntro,_StreamUnit 
     instance = (_Instance *)0x0;
     if (objectTracker != (_ObjectTracker *)0x0) {
       object = objectTracker->object;
-      lVar6 = MEMPACK_MemoryValidFunc((char *)object);
+      lVar6 = MEMPACK_ReportMemory((char *)object);
       if ((lVar6 == 0) ||
          ((savedIntro->attachedUniqueID != 0 &&
-          (instance_00 = INSTANCE_Find((u_int)savedIntro->attachedUniqueID),
+          (instance_00 = INSTANCE_Deactivate((u_int)savedIntro->attachedUniqueID),
           instance_00 == (_Instance *)0x0)))) {
         SAVE_BufferIntro((SavedBasic *)savedIntro);
         instance = (_Instance *)0x0;
@@ -2377,17 +2379,17 @@ _Instance * INSTANCE_IntroduceSavedInstance(_SavedIntro *savedIntro,_StreamUnit 
            (OBTABLE_InitAnimPointers(objectTracker), (object->oflags2 & 0x10000000U) != 0)) {
           return (_Instance *)0x0;
         }
-        instance = INSTANCE_NewInstance(gameTrackerX.instanceList);
+        instance = INSTANCE_CleanUpInstanceList(gameTrackerX.instanceList);
         if (instance != (_Instance *)0x0) {
           objectTracker->numInUse = objectTracker->numInUse + 1;
-          INSTANCE_DefaultInit(instance,object,0);
-          strcpy(instance->introName,(char *)&local_38);
+          INSTANCE_DefaultAnimCallback(instance,object,0);
+          strcmp(instance->introName,(char *)&local_38);
           instance->introUniqueID = (int)savedIntro->introUniqueID;
           instance->currentStreamUnitID = (int)savedIntro->streamUnitID;
           instance->birthStreamUnitID = (int)savedIntro->birthUnitID;
           LIGHT_GetAmbient((_ColorType *)&instance->light_color,instance);
           pIVar11 = (Intro *)0x0;
-          pLVar7 = STREAM_GetLevelWithID(instance->birthStreamUnitID);
+          pLVar7 = STREAM_GetWaterZLevel(instance->birthStreamUnitID);
           pIVar12 = pIVar11;
           if (pLVar7 != (Level *)0x0) {
             Data = pLVar7->terrain->numIntros;
@@ -2418,10 +2420,10 @@ _Instance * INSTANCE_IntroduceSavedInstance(_SavedIntro *savedIntro,_StreamUnit 
           (instance->position).y = sVar1 + sVar3;
           (instance->position).z = sVar2 + sVar4;
           sVar1 = (instance->position).z;
-          *(undefined4 *)&instance->initialPos = *(undefined4 *)&instance->position;
+          *(u_char *)&instance->initialPos = *(u_char *)&instance->position;
           (instance->initialPos).z = sVar1;
           sVar1 = (instance->position).z;
-          *(undefined4 *)&instance->oldPos = *(undefined4 *)&instance->position;
+          *(u_char *)&instance->oldPos = *(u_char *)&instance->position;
           (instance->oldPos).z = sVar1;
           pOVar10 = instance->object;
           (instance->rotation).x = (savedIntro->smallRotation).x;
@@ -2435,11 +2437,11 @@ _Instance * INSTANCE_IntroduceSavedInstance(_SavedIntro *savedIntro,_StreamUnit 
           (instance->scale).z = 0x1000;
           instance->lightGroup = savedIntro->lightGroup;
           instance->spectralLightGroup = savedIntro->specturalLightGroup;
-          INSTANCE_InsertInstanceGroup(gameTrackerX.instanceList,instance);
+          INSTANCE_IntroduceInstance(gameTrackerX.instanceList,instance);
           OBTABLE_GetInstanceCollideFunc(instance);
           OBTABLE_GetInstanceProcessFunc(instance);
-          OBTABLE_GetInstanceQueryFunc(instance);
           OBTABLE_GetInstanceMessageFunc(instance);
+          OBTABLE_GetInstanceQueryFunc(instance);
           OBTABLE_GetInstanceAdditionalCollideFunc(instance);
           OBTABLE_InstanceInit(instance);
           instance->flags = savedIntro->flags;
@@ -2456,14 +2458,14 @@ _Instance * INSTANCE_IntroduceSavedInstance(_SavedIntro *savedIntro,_StreamUnit 
           }
           instance->flags2 = uVar8;
           instance->flags = instance->flags & 0xfdfbffffU | 0x100000;
-          MORPH_SetupInstanceFlags(&gameTrackerX,instance);
+          MORPH_SetupInstanceListFlags(&gameTrackerX,instance);
           if (instance->intro != (Intro *)0x0) {
-            INSTANCE_ProcessIntro(instance);
+            MON_ProcessIntro(instance);
           }
           uVar8 = (u_int)savedIntro->shiftedSaveSize * 4;
           if (0x28 < uVar8) {
             Data = SetControlSaveDataData(uVar8 - 0x28,savedIntro + 1);
-            INSTANCE_Post(instance,(int)&DAT_00100007,Data);
+            INSTANCE_Query(instance,(int)&DAT_00100007,Data);
           }
           EVENT_AddInstanceToInstanceList(instance);
           INSTANCE_InitEffects(instance,object);
@@ -2554,7 +2556,7 @@ INSTANCE_IntroduceSavedInstanceWithIntro(_SavedIntroWithIntro *savedIntro,_Strea
   instance_00 = (_Instance *)0x0;
   pBVar7 = streamUnit->level->terrain->BSPTreeArray;
   name = streamUnit->level->introList + savedIntro->introOffset;
-  lVar5 = INSTANCE_FindWithID(name->UniqueID);
+  lVar5 = INSTANCE_FindIntroCommand(name->UniqueID);
   instance = (_Instance *)0x0;
   if (lVar5 == 0) {
     LOAD_SetSearchDirectory(streamUnit->StreamUnitID);
@@ -2563,10 +2565,10 @@ INSTANCE_IntroduceSavedInstanceWithIntro(_SavedIntroWithIntro *savedIntro,_Strea
     instance = (_Instance *)0x0;
     if (objectTracker != (_ObjectTracker *)0x0) {
       object = objectTracker->object;
-      lVar5 = MEMPACK_MemoryValidFunc((char *)object);
+      lVar5 = MEMPACK_ReportMemory((char *)object);
       if ((lVar5 == 0) ||
          ((savedIntro->attachedUniqueID != 0 &&
-          ((instance_00 = INSTANCE_Find((u_int)savedIntro->attachedUniqueID),
+          ((instance_00 = INSTANCE_Deactivate((u_int)savedIntro->attachedUniqueID),
            instance_00 == (_Instance *)0x0 || (instance_00->matrix == (MATRIX *)0x0)))))) {
         SAVE_BufferIntro((SavedBasic *)savedIntro);
         instance = (_Instance *)0x0;
@@ -2576,11 +2578,11 @@ INSTANCE_IntroduceSavedInstanceWithIntro(_SavedIntroWithIntro *savedIntro,_Strea
            (OBTABLE_InitAnimPointers(objectTracker), (object->oflags2 & 0x10000000U) != 0)) {
           return (_Instance *)0x0;
         }
-        instance = INSTANCE_NewInstance(gameTrackerX.instanceList);
+        instance = INSTANCE_CleanUpInstanceList(gameTrackerX.instanceList);
         if (instance != (_Instance *)0x0) {
           objectTracker->numInUse = objectTracker->numInUse + 1;
-          INSTANCE_DefaultInit(instance,object,0);
-          strcpy(instance->introName,(char *)name);
+          INSTANCE_DefaultAnimCallback(instance,object,0);
+          strcmp(instance->introName,(char *)name);
           instance->introUniqueID = name->UniqueID;
           instance->introNum = name->intronum;
           instance->birthStreamUnitID = streamUnit->StreamUnitID;
@@ -2588,7 +2590,7 @@ INSTANCE_IntroduceSavedInstanceWithIntro(_SavedIntroWithIntro *savedIntro,_Strea
           instance->attachedID = (u_int)savedIntro->attachedUniqueID;
           LIGHT_GetAmbient((_ColorType *)&instance->light_color,instance);
           name->instance = instance;
-          STREAM_GetLevelWithID(instance->birthStreamUnitID);
+          STREAM_GetWaterZLevel(instance->birthStreamUnitID);
           instance->intro = name;
           instance->introData = name->data;
           sVar1 = (savedIntro->position).y;
@@ -2599,10 +2601,10 @@ INSTANCE_IntroduceSavedInstanceWithIntro(_SavedIntroWithIntro *savedIntro,_Strea
           (instance->position).y = sVar1 + sVar3;
           (instance->position).z = sVar2 + sVar4;
           sVar1 = (instance->position).z;
-          *(undefined4 *)&instance->initialPos = *(undefined4 *)&instance->position;
+          *(u_char *)&instance->initialPos = *(u_char *)&instance->position;
           (instance->initialPos).z = sVar1;
           sVar1 = (instance->position).z;
-          *(undefined4 *)&instance->oldPos = *(undefined4 *)&instance->position;
+          *(u_char *)&instance->oldPos = *(u_char *)&instance->position;
           (instance->oldPos).z = sVar1;
           pOVar8 = instance->object;
           (instance->rotation).x = (savedIntro->smallRotation).x;
@@ -2616,11 +2618,11 @@ INSTANCE_IntroduceSavedInstanceWithIntro(_SavedIntroWithIntro *savedIntro,_Strea
           (instance->scale).z = 0x1000;
           instance->lightGroup = savedIntro->lightGroup;
           instance->spectralLightGroup = savedIntro->specturalLightGroup;
-          INSTANCE_InsertInstanceGroup(gameTrackerX.instanceList,instance);
+          INSTANCE_IntroduceInstance(gameTrackerX.instanceList,instance);
           OBTABLE_GetInstanceCollideFunc(instance);
           OBTABLE_GetInstanceProcessFunc(instance);
-          OBTABLE_GetInstanceQueryFunc(instance);
           OBTABLE_GetInstanceMessageFunc(instance);
+          OBTABLE_GetInstanceQueryFunc(instance);
           OBTABLE_GetInstanceAdditionalCollideFunc(instance);
           OBTABLE_InstanceInit(instance);
           instance->flags = savedIntro->flags;
@@ -2644,14 +2646,14 @@ INSTANCE_IntroduceSavedInstanceWithIntro(_SavedIntroWithIntro *savedIntro,_Strea
           if (pMVar6 == (MultiSpline *)0x0) {
             instance->flags = instance->flags & 0xfdffffffU | 0x100000;
           }
-          MORPH_SetupInstanceFlags(&gameTrackerX,instance);
+          MORPH_SetupInstanceListFlags(&gameTrackerX,instance);
           if (instance->intro != (Intro *)0x0) {
-            INSTANCE_ProcessIntro(instance);
+            MON_ProcessIntro(instance);
           }
           uVar10 = (u_int)savedIntro->shiftedSaveSize * 4;
           if (0x20 < uVar10) {
             Data = SetControlSaveDataData(uVar10 - 0x20,savedIntro + 1);
-            INSTANCE_Post(instance,(int)&DAT_00100007,Data);
+            INSTANCE_Query(instance,(int)&DAT_00100007,Data);
           }
           EVENT_AddInstanceToInstanceList(instance);
           INSTANCE_InitEffects(instance,object);
@@ -2715,7 +2717,7 @@ INSTANCE_IntroduceSavedInstanceWithIntro(_SavedIntroWithIntro *savedIntro,_Strea
 void INSTANCE_SpatialRelationships(_InstanceList *instanceList)
 
 {
-  undefined4 *puVar1;
+  u_char *puVar1;
   u_long uVar2;
   int iVar3;
   MATRIX *pMVar4;
@@ -2729,20 +2731,20 @@ void INSTANCE_SpatialRelationships(_InstanceList *instanceList)
   while (Inst_00 != (_Instance *)0x0) {
     if ((Inst_00->flags2 & 0x10000401U) == 0x400) {
       uVar5 = Inst_00->checkMask;
-      puVar1 = (undefined4 *)INSTANCE_Query(Inst_00,0xd);
-      INSTANCE_Post(Inst_00,0x200000,0);
-      if (puVar1 != (undefined4 *)0x0) {
-        TransposeMatrix(puVar1,(undefined4 *)&MStack80);
+      puVar1 = (u_char *)INSTANCE_Post(Inst_00,0xd);
+      INSTANCE_Query(Inst_00,0x200000,0);
+      if (puVar1 != (u_char *)0x0) {
+        TransposeMatrix(puVar1,(u_char *)&MStack80);
         Inst = instanceList->first;
         while (Inst != (_Instance *)0x0) {
           if ((((Inst != Inst_00) && ((Inst->flags2 & 0x10000000U) == 0)) &&
-              ((Inst->flags & 0x20U) == 0)) &&
-             (uVar2 = INSTANCE_Query(Inst,1), (uVar2 & uVar5) != 0)) {
-            pMVar4 = (MATRIX *)INSTANCE_Query(Inst,0xe);
+              ((Inst->flags & 0x20U) == 0)) && (uVar2 = INSTANCE_Post(Inst,1), (uVar2 & uVar5) != 0)
+             ) {
+            pMVar4 = (MATRIX *)INSTANCE_Post(Inst,0xe);
             if (((pMVar4 != (MATRIX *)0x0) || (pMVar4 = Inst->matrix, pMVar4 != (MATRIX *)0x0)) &&
                (iVar3 = INSTANCE_SetStatsData(Inst_00,Inst,(_Vector *)pMVar4->t,&eStack48,&MStack80)
                , iVar3 != 0)) {
-              INSTANCE_Post(Inst_00,0x200001,(int)&eStack48);
+              INSTANCE_Query(Inst_00,0x200001,(int)&eStack48);
             }
           }
           Inst = Inst->next;
@@ -2792,19 +2794,19 @@ int INSTANCE_SetStatsData
   u_int uVar2;
   long lVar3;
   
-  uVar2 = MATH3D_LengthXYZ((int)(instance->position).x - checkPoint->x,
-                           (int)(instance->position).y - checkPoint->y,
-                           (int)(instance->position).z - checkPoint->z);
+  uVar2 = MATH3D_LengthXY((int)(instance->position).x - checkPoint->x,
+                          (int)(instance->position).y - checkPoint->y,
+                          (int)(instance->position).z - checkPoint->z);
   bVar1 = uVar2 < instance->maxCheckDistance;
   if (bVar1) {
     DAT_1f800000 = *(short *)&checkPoint->x - (instance->position).x;
     DAT_1f800002 = *(short *)&checkPoint->y - (instance->position).y;
     DAT_1f800004 = *(short *)&checkPoint->z - (instance->position).z;
-    ApplyMatrixSV(mat,0x1f800000,&data->relativePosition);
+    ApplyMatrix(mat,0x1f800000,&data->relativePosition);
     data->instance = checkee;
     data->distance = uVar2;
     data->zDelta = (int)DAT_1f800004;
-    lVar3 = MATH3D_LengthXY((int)DAT_1f800000,(int)DAT_1f800002);
+    lVar3 = MATH3D_LengthXYZ((int)DAT_1f800000,(int)DAT_1f800002);
     data->xyDistance = lVar3;
   }
   return (u_int)bVar1;
@@ -2835,7 +2837,7 @@ void INSTANCE_LinkToParent(_Instance *instance,_Instance *parent,int node)
   (instance->scale).y = (short)(((int)(instance->scale).y << 0xc) / (int)(parent->scale).y);
   (instance->scale).z = (short)(((int)(instance->scale).z << 0xc) / (int)(parent->scale).z);
   INSTANCE_UpdateFamilyStreamUnitID(parent);
-  INSTANCE_Post(parent,(int)&DAT_00100012,(int)instance);
+  INSTANCE_Query(parent,(int)&DAT_00100012,(int)instance);
   instance->flags2 = instance->flags2 | 8;
   return;
 }
@@ -2927,7 +2929,7 @@ void INSTANCE_UnlinkFromParent(_Instance *instance)
       (instance->rotation).y = local_18.y;
       (instance->rotation).z = local_18.z;
     }
-    INSTANCE_Post(Inst,(int)&DAT_00100013,(int)instance);
+    INSTANCE_Query(Inst,(int)&DAT_00100013,(int)instance);
   }
   return;
 }
@@ -2970,7 +2972,7 @@ void INSTANCE_UnlinkChildren(_Instance *instance)
   Data = instance->LinkChild;
   while (Data != (_Instance *)0x0) {
     p_Var1 = Data->LinkSibling;
-    INSTANCE_Post(instance,(int)&DAT_00100013,(int)Data);
+    INSTANCE_Query(instance,(int)&DAT_00100013,(int)Data);
     Data->LinkParent = (_Instance *)0x0;
     Data->LinkSibling = (_Instance *)0x0;
     Data = p_Var1;
@@ -3086,7 +3088,7 @@ _Instance * INSTANCE_GetChildLinkedToSegment(_Instance *instance,int segment)
 	/* end block 4 */
 	// End Line: 6208
 
-int INSTANCE_Linked(_Instance *instance1,_Instance *instance2)
+int INSTANCE_InPlane(_Instance *instance1,_Instance *instance2)
 
 {
   _Instance *p_Var1;
@@ -3133,7 +3135,7 @@ int INSTANCE_GetFadeValue(_Instance *instance)
   iVar3 = (int)instance->fadeValue;
   if (gameTrackerX.gameData.asmData.MorphTime != 1000) {
     iVar3 = 0x1000 - iVar3;
-    lVar2 = MEMPACK_MemoryValidFunc((char *)instance->object);
+    lVar2 = MEMPACK_ReportMemory((char *)instance->object);
     if ((lVar2 != 0) &&
        (((instance->object->oflags2 & 0x2000000U) != 0 ||
         ((instance->LinkParent != (_Instance *)0x0 &&

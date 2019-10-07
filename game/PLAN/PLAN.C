@@ -27,18 +27,18 @@ long PLAN_CalcMinDistFromExistingNodes(_Position *pos,PlanningNode *planningPool
   PlanningNode *pPVar1;
   long lVar2;
   
-  pPVar1 = PLANPOOL_GetClosestNode(pos,planningPool,distanceType);
+  pPVar1 = PLANPOOL_GetNodeByPosition(pos,planningPool,distanceType);
   if (pPVar1 == (PlanningNode *)0x0) {
     lVar2 = 0x7fffffff;
   }
   else {
     if (distanceType == '\0') {
-      lVar2 = MATH3D_LengthXY((int)pos->x - (int)(pPVar1->pos).x,(int)pos->y - (int)(pPVar1->pos).y)
-      ;
+      lVar2 = MATH3D_LengthXYZ((int)pos->x - (int)(pPVar1->pos).x,(int)pos->y - (int)(pPVar1->pos).y
+                              );
     }
     else {
-      lVar2 = MATH3D_LengthXYZ((int)pos->x - (int)(pPVar1->pos).x,(int)pos->y - (int)(pPVar1->pos).y
-                               ,(int)pos->z - (int)(pPVar1->pos).z);
+      lVar2 = MATH3D_LengthXY((int)pos->x - (int)(pPVar1->pos).x,(int)pos->y - (int)(pPVar1->pos).y,
+                              (int)pos->z - (int)(pPVar1->pos).z);
     }
   }
   return lVar2;
@@ -108,14 +108,14 @@ void PLAN_UpdatePlanMkrNodes(PlanningNode *planningPool,_Position *playerPos)
   local_30 = 0;
   do {
     if ((*(short *)(ppLVar7 + -1) == 2) &&
-       (lVar2 = MEMPACK_MemoryValidFunc((char *)*ppLVar7), lVar2 != 0)) {
+       (lVar2 = MEMPACK_ReportMemory((char *)*ppLVar7), lVar2 != 0)) {
       iVar6 = (*ppLVar7)->NumberOfPlanMarkers;
       pos = (*ppLVar7)->PlanMarkerList;
       if ((iVar6 != 0) && (iVar5 = 0, 0 < iVar6)) {
         puVar4 = (ushort *)&pos->id;
         do {
-          lVar2 = MATH3D_LengthXY((int)(pos->pos).x - (int)playerPos->x,
-                                  (int)(short)puVar4[-2] - (int)playerPos->y);
+          lVar2 = MATH3D_LengthXYZ((int)(pos->pos).x - (int)playerPos->x,
+                                   (int)(short)puVar4[-2] - (int)playerPos->y);
           iVar3 = (int)playerPos->z - (int)(short)puVar4[-1];
           if (iVar3 < 0) {
             iVar3 = -iVar3;
@@ -151,14 +151,14 @@ void PLAN_UpdatePlanMkrNodes(PlanningNode *planningPool,_Position *playerPos)
   if (*(char *)(poolManagementData + 1) != '\0') {
     do {
       if ((nodeToDelete->nodeType & 7) == 4) {
-        lVar2 = MATH3D_LengthXY((int)(nodeToDelete->pos).x - (int)playerPos->x,
-                                (int)(nodeToDelete->pos).y - (int)playerPos->y);
+        lVar2 = MATH3D_LengthXYZ((int)(nodeToDelete->pos).x - (int)playerPos->x,
+                                 (int)(nodeToDelete->pos).y - (int)playerPos->y);
         iVar5 = (int)playerPos->z - (int)(nodeToDelete->pos).z;
         if (iVar5 < 0) {
           iVar5 = -iVar5;
         }
         if ((10000 < lVar2) || (5000 < iVar5)) {
-          PLANPOOL_DeleteNodeFromPool(nodeToDelete,planningPool);
+          PLANAPI_DeleteNodesFromPoolByType(nodeToDelete,planningPool);
         }
       }
       iVar6 = iVar6 + 1;
@@ -202,7 +202,7 @@ void PLAN_UpdatePlanMkrNodes(PlanningNode *planningPool,_Position *playerPos)
 	/* end block 2 */
 	// End Line: 539
 
-void PLAN_UpdatePlayerNode(PlanningNode *planningPool,_Position *playerPos)
+void PLAN_UpdatePlanMkrNodes(PlanningNode *planningPool,_Position *playerPos)
 
 {
   ushort uVar1;
@@ -212,7 +212,7 @@ void PLAN_UpdatePlayerNode(PlanningNode *planningPool,_Position *playerPos)
   _PlanCollideInfo _Stack48;
   ushort local_20 [4];
   
-  nodeToChange = PLANPOOL_GetFirstNodeOfSource(planningPool,'\x01');
+  nodeToChange = PLANPOOL_GetClosestNode(planningPool,'\x01');
   if (nodeToChange != (PlanningNode *)0x0) {
     iVar2 = PLANCOLL_CheckUnderwaterPoint(playerPos);
     if (iVar2 == -1) {
@@ -221,9 +221,9 @@ void PLAN_UpdatePlayerNode(PlanningNode *planningPool,_Position *playerPos)
       _Stack48.collidePos.z = playerPos->z;
       iVar2 = PLANCOLL_FindTerrainHitFinal(&_Stack48,(int *)local_20,0x100,-0x280,0,5);
       if (iVar2 == 0) {
-        lVar3 = MATH3D_LengthXYZ((int)playerPos->x - (int)(nodeToChange->pos).x,
-                                 (int)playerPos->y - (int)(nodeToChange->pos).y,
-                                 (int)playerPos->z - (int)(nodeToChange->pos).z);
+        lVar3 = MATH3D_LengthXY((int)playerPos->x - (int)(nodeToChange->pos).x,
+                                (int)playerPos->y - (int)(nodeToChange->pos).y,
+                                (int)playerPos->z - (int)(nodeToChange->pos).z);
         if (lVar3 < 0x2ee1) {
           return;
         }
@@ -317,9 +317,9 @@ void PLAN_AddRandomNode(PlanningNode *planningPool,_Position *playerPos)
     iVar2 = rand();
     iVar2 = ((u_int)local_38.collidePos.y - 12000) + iVar2 % 24000;
     local_38.collidePos.y = (ushort)iVar2;
-    lVar3 = MATH3D_LengthXYZ((int)playerPos->x - (int)local_38.collidePos.x,
-                             (int)playerPos->y - (iVar2 * 0x10000 >> 0x10),
-                             (int)playerPos->z - (int)local_38.collidePos.z);
+    lVar3 = MATH3D_LengthXY((int)playerPos->x - (int)local_38.collidePos.x,
+                            (int)playerPos->y - (iVar2 * 0x10000 >> 0x10),
+                            (int)playerPos->z - (int)local_38.collidePos.z);
     if ((lVar3 < 12000) &&
        (lVar3 = PLAN_CalcMinDistFromExistingNodes(&local_38.collidePos,planningPool,'\0'),
        1000 < lVar3)) break;
@@ -332,7 +332,7 @@ LAB_80097070:
            (iVar5 = PLANCOLL_FindTerrainHitFinal(&local_38,(int *)0x0,2000,0,0,0), iVar5 == 0)) {
           return;
         }
-        pLVar4 = STREAM_GetLevelWithID(local_38.StreamUnitID);
+        pLVar4 = STREAM_GetWaterZLevel(local_38.StreamUnitID);
         COLLIDE_GetNormal((local_38.tFace)->normal,(short *)pLVar4->terrain->normalList,&_Stack40);
         if (0x800 < _Stack40.z) {
           PLANPOOL_AddNodeToPool(&local_38.collidePos,planningPool,0,0,local_38.StreamUnitID);
@@ -363,13 +363,13 @@ LAB_80097070:
 	/* end block 2 */
 	// End Line: 767
 
-void PLAN_DeleteRandomNode(PlanningNode *planningPool)
+void PLAN_AddRandomNode(PlanningNode *planningPool)
 
 {
   PlanningNode *nodeToDelete;
   
-  nodeToDelete = PLANPOOL_GetFirstNodeOfSource(planningPool,'\0');
-  PLANPOOL_DeleteNodeFromPool(nodeToDelete,planningPool);
+  nodeToDelete = PLANPOOL_GetClosestNode(planningPool,'\0');
+  PLANAPI_DeleteNodesFromPoolByType(nodeToDelete,planningPool);
   return;
 }
 
@@ -412,11 +412,11 @@ void PLAN_DeleteOutOfRangeNodesOfSource
     nodeToDelete = planningPool;
     do {
       if ((((u_int)nodeToDelete->nodeType & 7) == (u_int)(byte)nodeSourceToCheck) &&
-         (lVar1 = MATH3D_LengthXYZ((int)playerPos->x - (int)(nodeToDelete->pos).x,
-                                   (int)playerPos->y - (int)(nodeToDelete->pos).y,
-                                   (int)playerPos->z - (int)(nodeToDelete->pos).z),
+         (lVar1 = MATH3D_LengthXY((int)playerPos->x - (int)(nodeToDelete->pos).x,
+                                  (int)playerPos->y - (int)(nodeToDelete->pos).y,
+                                  (int)playerPos->z - (int)(nodeToDelete->pos).z),
          removeDist < lVar1)) {
-        PLANPOOL_DeleteNodeFromPool(nodeToDelete,planningPool);
+        PLANAPI_DeleteNodesFromPoolByType(nodeToDelete,planningPool);
       }
       iVar2 = iVar2 + 1;
       nodeToDelete = nodeToDelete + 1;
@@ -461,7 +461,7 @@ void PLAN_AddOrRemoveRandomNodes(PlanningNode *planningPool,_Position *playerPos
   }
   else {
     if (0 < iVar1) {
-      PLAN_DeleteRandomNode(planningPool);
+      PLAN_AddRandomNode(planningPool);
     }
   }
   return;
@@ -515,7 +515,7 @@ void PLAN_AddInitialNodes(PlanningNode *planningPool,_Instance *player)
   PLAN_UpdatePlanMkrNodes(planningPool,&player->position);
   iVar2 = poolManagementData;
   sVar1 = (player->position).z;
-  *(undefined4 *)(poolManagementData + 2) = *(undefined4 *)&player->position;
+  *(u_char *)(poolManagementData + 2) = *(u_char *)&player->position;
   *(short *)(iVar2 + 6) = sVar1;
   return;
 }
@@ -543,7 +543,7 @@ void PLAN_AddInitialNodes(PlanningNode *planningPool,_Instance *player)
 	/* end block 3 */
 	// End Line: 919
 
-void PLAN_AddOrRemoveNodes(PlanningNode *planningPool,_Instance *player)
+void PLAN_DeleteRandomNode(PlanningNode *planningPool,_Instance *player)
 
 {
   short sVar1;
@@ -551,19 +551,19 @@ void PLAN_AddOrRemoveNodes(PlanningNode *planningPool,_Instance *player)
   long lVar3;
   _Position *playerPos;
   
-  lVar3 = MATH3D_LengthXYZ((int)(player->position).x - (int)*(short *)(poolManagementData + 2),
-                           (int)(player->position).y - (int)*(short *)(poolManagementData + 4),
-                           (int)(player->position).z - (int)*(short *)(poolManagementData + 6));
+  lVar3 = MATH3D_LengthXY((int)(player->position).x - (int)*(short *)(poolManagementData + 2),
+                          (int)(player->position).y - (int)*(short *)(poolManagementData + 4),
+                          (int)(player->position).z - (int)*(short *)(poolManagementData + 6));
   if (500 < lVar3) {
     playerPos = &player->position;
-    PLAN_UpdatePlayerNode(planningPool,playerPos);
+    PLAN_UpdatePlanMkrNodes(planningPool,playerPos);
     PLAN_UpdatePlanMkrNodes(planningPool,playerPos);
     PLAN_DeleteOutOfRangeNodesOfSource(planningPool,playerPos,'\0',(long)&DAT_00002ee0);
     PLAN_DeleteOutOfRangeNodesOfSource(planningPool,playerPos,'\x02',(long)&DAT_00002ee0);
     PLAN_DeleteOutOfRangeNodesOfSource(planningPool,playerPos,'\x03',(long)&DAT_00002ee0);
     iVar2 = poolManagementData;
     sVar1 = (player->position).z;
-    *(undefined4 *)(poolManagementData + 2) = *(undefined4 *)&player->position;
+    *(u_char *)(poolManagementData + 2) = *(u_char *)&player->position;
     *(short *)(iVar2 + 6) = sVar1;
   }
   PLAN_AddOrRemoveRandomNodes(planningPool,&player->position);

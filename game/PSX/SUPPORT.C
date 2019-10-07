@@ -25,10 +25,10 @@ int printf(char *fmt)
 
 {
   int iVar1;
-  //undefined local_res4 [12];
+  undefined local_res4 [12];
   char acStack264 [256];
   
-  //iVar1 = vsprintf(acStack264,fmt,local_res4);
+  iVar1 = vsprintf(acStack264,fmt,local_res4);
   puts(acStack264);
   return iVar1;
 }
@@ -55,9 +55,9 @@ int sprintf(char *string,char *fmt)
 
 {
   int iVar1;
-  //undefined local_res8 [8];
+  undefined local_res8 [8];
   
-  //iVar1 = vsprintf(string,fmt,local_res8);
+  iVar1 = vsprintf(string,fmt,local_res8);
   return iVar1;
 }
 
@@ -112,7 +112,7 @@ int vsprintf(char *str,char *fmtstr,void *argptr)
   int iVar8;
   int __c;
   char local_38;
-  //undefined local_37;
+  undefined local_37;
   
   bVar1 = *fmtstr;
   iVar8 = 0;
@@ -159,7 +159,7 @@ int vsprintf(char *str,char *fmtstr,void *argptr)
         if (bVar2 == 99) {
           local_38 = *(char *)argptr;
           __s = &local_38;
-          //local_37 = 0;
+          local_37 = 0;
         }
         else {
           if (bVar2 == 0x73) {
@@ -174,7 +174,7 @@ int vsprintf(char *str,char *fmtstr,void *argptr)
               __s = *(char **)argptr;
               radix = 10;
             }
-            //__s = my_itoa((u_long)__s,&local_38,radix);
+            __s = my_itoa((u_long)__s,&local_38,radix);
           }
         }
         argptr = (char **)argptr + 1;
@@ -188,7 +188,7 @@ LAB_80073ee8:
           __dest = str + iVar8;
           if ((int)sVar4 < iVar5) {
             if (bVar1 == 0x2d) {
-              strcpy(__dest,__s);
+              strcmp(__dest,__s);
               memset(str + iVar8 + sVar4,__c,iVar5 - sVar4);
               iVar8 = iVar8 + sVar4 + (iVar5 - sVar4);
               goto LAB_80073ef8;
@@ -198,7 +198,7 @@ LAB_80073ee8:
             goto LAB_80073ee8;
           }
         }
-        strcpy(__dest,__s);
+        strcmp(__dest,__s);
         iVar8 = iVar8 + sVar4;
       }
     }
@@ -209,7 +209,7 @@ LAB_80073ee8:
     }
 LAB_80073ef8:
     bVar1 = *fmtstr;
-  } while( 1 );
+  } while( true );
 }
 
 
@@ -373,7 +373,7 @@ int mytolower(int c)
 	/* end block 2 */
 	// End Line: 631
 
-int strcmpi(char *s1,char *s2)
+int strcpy(char *s1,char *s2)
 
 {
   byte bVar1;

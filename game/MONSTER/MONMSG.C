@@ -16,7 +16,7 @@
 	/* end block 2 */
 	// End Line: 60
 
-void MON_SetGlyphHitData(_Instance *instance,evFXHitData *data,int type,int amount)
+void MON_SetFXHitData(_Instance *instance,evFXHitData *data,int type,int amount)
 
 {
   short sVar1;
@@ -60,7 +60,7 @@ void MON_SetGlyphHitData(_Instance *instance,evFXHitData *data,int type,int amou
 	/* end block 3 */
 	// End Line: 92
 
-int MON_GroundMoveQueueHandler(_Instance *instance)
+int SOUL_QueueHandler(_Instance *instance)
 
 {
   __Event *message;
@@ -70,7 +70,7 @@ int MON_GroundMoveQueueHandler(_Instance *instance)
   iVar1 = 0;
   pvVar2 = instance->extraData;
   while( true ) {
-    message = DeMessageQueue((__MessageQueue *)((int)pvVar2 + 8));
+    message = PurgeMessageQueue((__MessageQueue *)((int)pvVar2 + 8));
     if (message == (__Event *)0x0) break;
     if (message->ID == 0x4010080) {
       iVar1 = 0x4010080;
@@ -148,8 +148,8 @@ void MON_PupateMessageHandler(_Instance *instance,__Event *message)
   int iVar3;
   _Instance *p_Var4;
   u_int *puVar5;
-  undefined4 local_48;
-  undefined4 in_stack_ffffffbc;
+  u_char local_48;
+  u_char in_stack_ffffffbc;
   evFXHitData eStack64;
   evFXHitData eStack40;
   
@@ -189,9 +189,9 @@ void MON_PupateMessageHandler(_Instance *instance,__Event *message)
         if (*(char *)(puVar5[0x59] + 0x3c) == '\0') {
           return;
         }
-        MON_SetGlyphHitData(instance,&eStack40,0x200,1);
+        MON_SetFXHitData(instance,&eStack40,0x200,1);
         *(undefined2 *)(puVar5 + 0x54) = 0x200;
-        MON_DamageEffect(instance,&eStack40);
+        SLUAGH_DamageEffect(instance,&eStack40);
       }
     }
 LAB_8008472c:
@@ -208,11 +208,11 @@ LAB_8008472c:
           return;
         }
         p_Var4 = (_Instance *)message->Data;
-        lVar1 = MATH3D_LengthXYZ((int)*(short *)((int)&p_Var4->node + 4) -
-                                 (int)(instance->position).x,
-                                 (int)*(short *)((int)&p_Var4->node + 6) -
-                                 (int)(instance->position).y,
-                                 (int)*(short *)&p_Var4->next - (int)(instance->position).z);
+        lVar1 = MATH3D_LengthXY((int)*(short *)((int)&p_Var4->node + 4) -
+                                (int)(instance->position).x,
+                                (int)*(short *)((int)&p_Var4->node + 6) -
+                                (int)(instance->position).y,
+                                (int)*(short *)&p_Var4->next - (int)(instance->position).z);
         if (*(short *)(*(int *)(puVar5[0x59] + 4) + 0xe) <= lVar1) {
           return;
         }
@@ -223,23 +223,23 @@ LAB_8008472c:
         if (*(_Instance **)&p_Var4->node == (_Instance *)0x0) {
           return;
         }
-        uVar2 = INSTANCE_Query(*(_Instance **)&p_Var4->node,1);
+        uVar2 = INSTANCE_Post(*(_Instance **)&p_Var4->node,1);
         if ((uVar2 & 0xb) == 0) {
           return;
         }
-        MONSENSE_SetEnemy(instance,*(_Instance **)&p_Var4->node);
+        MONSENSE_See(instance,*(_Instance **)&p_Var4->node);
         return;
       }
       if (*(char *)(puVar5[0x59] + 0x39) != '\0') {
-        MON_SetGlyphHitData(instance,&eStack64,0x20,1);
+        MON_SetFXHitData(instance,&eStack64,0x20,1);
         *(undefined2 *)(puVar5 + 0x54) = 0x20;
-        MON_DamageEffect(instance,&eStack64);
+        SLUAGH_DamageEffect(instance,&eStack64);
         goto LAB_8008472c;
       }
     }
     if (*(char *)(puVar5[0x59] + 0x38) != '\0') {
       MON_SwitchState(instance,(MonsterState)CONCAT44(in_stack_ffffffbc,local_48));
-      MON_MonsterGlow(instance,0xffffff,0x46,10,0x14);
+      MON_LaunchMonster(instance,0xffffff,0x46,10,0x14);
       *(undefined2 *)(puVar5 + 0x54) = 0x40;
     }
   }
@@ -289,8 +289,8 @@ void MON_IdleMessageHandler(_Instance *instance,__Event *message)
 
 {
   u_long uVar1;
-  undefined4 local_10;
-  undefined4 local_c;
+  u_char local_10;
+  u_char local_c;
   u_int *puVar2;
   
   puVar2 = (u_int *)instance->extraData;
@@ -302,11 +302,11 @@ void MON_IdleMessageHandler(_Instance *instance,__Event *message)
       MON_SwitchState(instance,(MonsterState)CONCAT44(local_c,local_10));
     }
   default:
-    MON_DefaultMessageHandler(instance,message);
+    MON_PupateMessageHandler(instance,message);
     break;
   case 0x100000e:
     if ((*puVar2 & 4) == 0) {
-      uVar1 = INSTANCE_Query(*(_Instance **)(message->Data + 4),1);
+      uVar1 = INSTANCE_Post(*(_Instance **)(message->Data + 4),1);
       if ((uVar1 & 1) != 0) {
         MON_ChangeBehavior(instance,(u_int)*(byte *)(puVar2 + 0x56));
       }
@@ -315,7 +315,7 @@ void MON_IdleMessageHandler(_Instance *instance,__Event *message)
     break;
   case 0x1000012:
     if ((*puVar2 & 4) == 0) {
-      uVar1 = INSTANCE_Query(*(_Instance **)(message->Data + 4),1);
+      uVar1 = INSTANCE_Post(*(_Instance **)(message->Data + 4),1);
       if ((uVar1 & 1) != 0) {
         MON_ChangeBehavior(instance,(u_int)*(byte *)(puVar2 + 0x56));
       }
@@ -528,7 +528,7 @@ void MON_IdleMessageHandler(_Instance *instance,__Event *message)
 
 /* WARNING: Type propagation algorithm not settling */
 
-void MON_DefaultMessageHandler(_Instance *instance,__Event *message)
+void MON_PupateMessageHandler(_Instance *instance,__Event *message)
 
 {
   ushort uVar1;
@@ -549,8 +549,8 @@ void MON_DefaultMessageHandler(_Instance *instance,__Event *message)
   _Instance *p_Var11;
   _MonsterVars *mv;
   _Instance *Inst;
-  undefined4 local_58;
-  undefined4 local_54;
+  u_char local_58;
+  u_char local_54;
   evFXHitData eStack72;
   evFXHitData eStack48;
   
@@ -599,7 +599,7 @@ LAB_800851b8:
         if (bVar10 != 0) {
           mv->damageType = *(ushort *)&message->Data;
           Data = SetFXHitData((_Instance *)0x0,0,0,message->Data);
-          INSTANCE_Post(instance,0x400000,Data);
+          INSTANCE_Query(instance,0x400000,Data);
         }
         if (bVar10 == 1) {
           MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
@@ -650,9 +650,9 @@ LAB_800851b8:
           return;
         }
         Data = message->Data;
-        lVar5 = MATH3D_LengthXYZ((int)(instance->position).x - (int)*(short *)(Data + 4),
-                                 (int)(instance->position).y - (int)*(short *)(Data + 6),
-                                 (int)(instance->position).z - (int)*(short *)(Data + 8));
+        lVar5 = MATH3D_LengthXY((int)(instance->position).x - (int)*(short *)(Data + 4),
+                                (int)(instance->position).y - (int)*(short *)(Data + 6),
+                                (int)(instance->position).z - (int)*(short *)(Data + 8));
         if (6999 < lVar5) {
           return;
         }
@@ -686,7 +686,7 @@ LAB_800851b8:
         if ((mv->mvFlags & 4) != 0) {
           return;
         }
-        uVar4 = INSTANCE_Query(*(_Instance **)(message->Data + 4),1);
+        uVar4 = INSTANCE_Post(*(_Instance **)(message->Data + 4),1);
         if ((uVar4 & 1) == 0) {
           return;
         }
@@ -698,7 +698,7 @@ LAB_800851b8:
       if (Inst == (_Instance *)0x0) {
         return;
       }
-      uVar4 = INSTANCE_Query(Inst,1);
+      uVar4 = INSTANCE_Post(Inst,1);
       if ((uVar4 & 0xb) == 0) {
         return;
       }
@@ -706,15 +706,14 @@ LAB_800851b8:
       if (Data_00 != (_MonsterIR *)0x0) {
         return;
       }
-      lVar5 = MATH3D_LengthXYZ((int)(instance->position).x -
-                               (int)*(short *)((int)&p_Var11->node + 4),
-                               (int)(instance->position).y -
+      lVar5 = MATH3D_LengthXY((int)(instance->position).x - (int)*(short *)((int)&p_Var11->node + 4)
+                              ,(int)(instance->position).y -
                                (int)*(short *)((int)&p_Var11->node + 6),
-                               (int)(instance->position).z - (int)*(short *)&p_Var11->next);
+                              (int)(instance->position).z - (int)*(short *)&p_Var11->next);
       if (mv->subAttr->senses->alarmRadius <= lVar5) {
         return;
       }
-      Data_00 = MONSENSE_SetEnemy(instance,Inst);
+      Data_00 = MONSENSE_See(instance,Inst);
       if (Data_00 == (_MonsterIR *)0x0) {
         return;
       }
@@ -726,9 +725,10 @@ LAB_800851b8:
         if (Data == 0x2000002) {
           p_Var11 = (_Instance *)message->Data;
           Data_00 = (_MonsterIR *)
-                    SetMonsterHitData(instance,(_Instance *)0x0,(int)p_Var11->prev,
-                                      (int)mv->attackType->knockBackDistance,
-                                      (int)mv->attackType->knockBackDuration);
+                    SetMonsterImpaleData
+                              (instance,(_Instance *)0x0,(int)p_Var11->prev,
+                               (int)mv->attackType->knockBackDistance,
+                               (int)mv->attackType->knockBackDuration);
           Data = 0x1000000;
           instance = *(_Instance **)&p_Var11->node;
           goto LAB_80085540;
@@ -772,7 +772,7 @@ LAB_800851b8:
         if (Data != 0x1000019) {
           return;
         }
-        MONSENSE_SetEnemy(instance,gameTrackerX.playerInstance);
+        MONSENSE_See(instance,gameTrackerX.playerInstance);
         mv->held = (_Instance *)message->Data;
         MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
         return;
@@ -824,12 +824,12 @@ LAB_80084bd0:
       instance->constrictAngle = 0;
     }
     mv->mvFlags = mv->mvFlags | 0x40;
-    uVar4 = INSTANCE_Query(*(_Instance **)&p_Var11->node,1);
+    uVar4 = INSTANCE_Post(*(_Instance **)&p_Var11->node,1);
     Inst = gameTrackerX.playerInstance;
     if (uVar4 != 0x20) {
       Inst = *(_Instance **)&p_Var11->node;
     }
-    MONSENSE_SetEnemy(instance,Inst);
+    MONSENSE_See(instance,Inst);
     Data = MON_TakeDamage(instance,(int)p_Var11->prev,0x100);
     iVar9 = 8;
     if ((Data != 0) && (iVar9 = 9, (mv->mvFlags & 0x2000) != 0)) {
@@ -933,14 +933,14 @@ LAB_800854dc:
   }
   if (Data == 0x80005) {
     if (mv->subAttr->fireVuln == '\0') goto LAB_80085200;
-    MON_SetGlyphHitData(instance,&eStack72,0x20,1);
+    MON_SetFXHitData(instance,&eStack72,0x20,1);
     mv->damageType = 0x20;
     data = &eStack72;
   }
   else {
     if (0x80005 < Data) {
       if (Data == 0x400000) {
-        pTVar6 = MONTABLE_GetDamageEffectFunc(instance);
+        pTVar6 = MONTABLE_GetStateFuncs(instance);
         (*pTVar6)(instance,message->Data);
         return;
       }
@@ -957,7 +957,7 @@ LAB_800854dc:
             Data_00->mirConditions = Data_00->mirConditions | 0x40;
             return;
           }
-          MONSENSE_SetEnemy(instance,gameTrackerX.playerInstance);
+          MONSENSE_See(instance,gameTrackerX.playerInstance);
           MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
           CurrentSection = mv->mvFlags;
           uVar8 = 0xfffffffd;
@@ -971,7 +971,7 @@ LAB_800854dc:
 LAB_80085200:
       if ((*(u_int *)((int)instance->data + 0x10) & 0x10008) == 0) {
         MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
-        MON_MonsterGlow(instance,0xffffff,0x46,10,0x14);
+        MON_LaunchMonster(instance,0xffffff,0x46,10,0x14);
         mv->damageType = 0x40;
         return;
       }
@@ -980,7 +980,7 @@ LAB_80085200:
                                     &(gameTrackerX.playerInstance)->position,2);
       Data = 0x1000011;
 LAB_80085540:
-      INSTANCE_Post(instance,Data,(int)Data_00);
+      INSTANCE_Query(instance,Data,(int)Data_00);
       return;
     }
     if (Data != 0x80003) {
@@ -994,7 +994,7 @@ LAB_80085540:
       }
       if ((mv->subAttr->waterVuln != '\0') && ((*(u_int *)((int)instance->data + 0x10) & 8) == 0)) {
         MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
-        MON_MonsterGlow(instance,0xff0000,0x46,10,0x14);
+        MON_LaunchMonster(instance,0xff0000,0x46,10,0x14);
         mv->damageType = 0x10;
         return;
       }
@@ -1012,10 +1012,10 @@ LAB_80085540:
       goto LAB_80085540;
     }
     data = &eStack48;
-    MON_SetGlyphHitData(instance,data,0x200,1);
+    MON_SetFXHitData(instance,data,0x200,1);
     mv->damageType = 0x200;
   }
-  MON_DamageEffect(instance,data);
+  SLUAGH_DamageEffect(instance,data);
 LAB_80085350:
   MON_SwitchState(instance,(MonsterState)CONCAT44(local_54,local_58));
   return;
@@ -1049,7 +1049,8 @@ void MON_PupateQueueHandler(_Instance *instance)
   void *pvVar1;
   
   pvVar1 = instance->extraData;
-  while (message = DeMessageQueue((__MessageQueue *)((int)pvVar1 + 8)), message != (__Event *)0x0) {
+  while (message = PurgeMessageQueue((__MessageQueue *)((int)pvVar1 + 8)), message != (__Event *)0x0
+        ) {
     MON_PupateMessageHandler(instance,message);
   }
   return;
@@ -1076,14 +1077,15 @@ void MON_PupateQueueHandler(_Instance *instance)
 	/* end block 2 */
 	// End Line: 1628
 
-void MON_IdleQueueHandler(_Instance *instance)
+void MON_Idle(_Instance *instance)
 
 {
   __Event *message;
   void *pvVar1;
   
   pvVar1 = instance->extraData;
-  while (message = DeMessageQueue((__MessageQueue *)((int)pvVar1 + 8)), message != (__Event *)0x0) {
+  while (message = PurgeMessageQueue((__MessageQueue *)((int)pvVar1 + 8)), message != (__Event *)0x0
+        ) {
     MON_IdleMessageHandler(instance,message);
   }
   return;
@@ -1110,15 +1112,16 @@ void MON_IdleQueueHandler(_Instance *instance)
 	/* end block 2 */
 	// End Line: 1646
 
-void MON_DefaultQueueHandler(_Instance *instance)
+void MON_DefaultMessageHandler(_Instance *instance)
 
 {
   __Event *message;
   void *pvVar1;
   
   pvVar1 = instance->extraData;
-  while (message = DeMessageQueue((__MessageQueue *)((int)pvVar1 + 8)), message != (__Event *)0x0) {
-    MON_DefaultMessageHandler(instance,message);
+  while (message = PurgeMessageQueue((__MessageQueue *)((int)pvVar1 + 8)), message != (__Event *)0x0
+        ) {
+    MON_PupateMessageHandler(instance,message);
   }
   return;
 }

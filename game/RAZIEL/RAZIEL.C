@@ -34,7 +34,7 @@
 	/* end block 3 */
 	// End Line: 377
 
-void InitStates(_Instance *PlayerInstance)
+void PadGetState(_Instance *PlayerInstance)
 
 {
   _G2AnimSection_Type *p_Var1;
@@ -48,24 +48,26 @@ void InitStates(_Instance *PlayerInstance)
   PlayerData = (RazielData *)PlayerInstance->data;
   bVar3 = 0;
   Raziel.State.CharacterInstance = PlayerInstance;
-  G2EmulationSetTotalSections(&Raziel.State,3);
-  G2EmulationSetStartAndEndSegment(&Raziel.State,0,0,0xd);
-  G2EmulationSetStartAndEndSegment(&Raziel.State,1,0xe,0x31);
-  G2EmulationSetStartAndEndSegment(&Raziel.State,2,0x32,0x41);
+  G2EmulationInstanceSetTotalSections(&Raziel.State,3);
+  G2EmulationInstanceSetStartAndEndSegment(&Raziel.State,0,0,0xd);
+  G2EmulationInstanceSetStartAndEndSegment(&Raziel.State,1,0xe,0x31);
+  G2EmulationInstanceSetStartAndEndSegment(&Raziel.State,2,0x32,0x41);
   uVar2 = 0;
   do {
     p_Var1 = (PlayerInstance->anim).section + uVar2;
     p_Var1->callback = RazielAnimCallback;
     p_Var1->callbackData = (void *)0x0;
-    Raziel.State.SectionList[uVar2].Process = StateHandlerIdle;
-    InitMessageQueue(&Raziel.State.SectionList[uVar2].Event);
-    InitMessageQueue(&Raziel.State.SectionList[uVar2].Defer);
+    Raziel.State.SectionList[uVar2].Process = StateHandlerPickupObject;
+    EnMessageQueue(&Raziel.State.SectionList[uVar2].Event);
+    EnMessageQueue(&Raziel.State.SectionList[uVar2].Defer);
     bVar3 = bVar3 + 1;
     uVar2 = (u_int)bVar3;
   } while (bVar3 < 3);
-  G2AnimSection_SetInterpInfo((PlayerInstance->anim).section,&razInterpInfo);
-  G2AnimSection_SetInterpInfo((PlayerInstance->anim).section + 1,&_G2AnimInterpInfo_Type_800d5d10);
-  G2AnimSection_SetInterpInfo((PlayerInstance->anim).section + 2,&_G2AnimInterpInfo_Type_800d5d1c);
+  _G2AnimSection_InterpStateToQuat((PlayerInstance->anim).section,&razInterpInfo);
+  _G2AnimSection_InterpStateToQuat
+            ((PlayerInstance->anim).section + 1,&_G2AnimInterpInfo_Type_800d5d10);
+  _G2AnimSection_InterpStateToQuat
+            ((PlayerInstance->anim).section + 2,&_G2AnimInterpInfo_Type_800d5d1c);
   Raziel.Mode = 1;
   gameTrackerX.debugFlags2 = gameTrackerX.debugFlags2 | 0x800;
   InitHealthSystem();
@@ -82,11 +84,11 @@ void InitStates(_Instance *PlayerInstance)
   Raziel.idleInstance = (_Instance *)0x0;
   Raziel.soulReaver = (_Instance *)0x0;
   Raziel.fallZVelocity = -0x20;
-  G2EmulationSetAnimation(&Raziel.State,0,0,0,0);
+  G2EmulationQueryMode(&Raziel.State,0,0,0,0);
   G2EmulationSetMode(&Raziel.State,0,2);
-  G2EmulationSetAnimation(&Raziel.State,1,0,0,0);
+  G2EmulationQueryMode(&Raziel.State,1,0,0,0);
   G2EmulationSetMode(&Raziel.State,1,2);
-  G2EmulationSetAnimation(&Raziel.State,2,0,0,0);
+  G2EmulationQueryMode(&Raziel.State,2,0,0,0);
   G2EmulationSetMode(&Raziel.State,2,2);
   ControlFlag = 0x519;
   PlayerInstance->maxXVel = 0x100;
@@ -94,14 +96,14 @@ void InitStates(_Instance *PlayerInstance)
   PlayerInstance->maxZVel = 0x100;
   razSetCowlNoDraw(1);
   InitExternalForces(&ExternalForces,4);
-  ResetPhysics(PlayerInstance,-0x10);
+  PhysicsMove(PlayerInstance,-0x10);
   ExtraRot = (_G2SVector3_Type *)0x0;
-  CAMERA_ChangeToOutOfWater(&theCamera,PlayerInstance);
+  CAMERA_ChangeTo(&theCamera,PlayerInstance);
   razAttachControllers();
-  INSTANCE_Post(PlayerInstance,(int)&DAT_00100006,0);
+  INSTANCE_Query(PlayerInstance,(int)&DAT_00100006,0);
   PlayerInstance->checkMask = 0x3e002e;
   PlayerInstance->flags2 = PlayerInstance->flags2 | 0x400;
-  G2EmulationInit();
+  G2EmulationInstanceSwitchAnimation();
   InitGlyphSystem(PlayerInstance);
   gameTrackerX.raziel_collide_override = '\0';
   Raziel.slipSlope = 0xb50;
@@ -227,8 +229,8 @@ LAB_800a7624:
         return;
       }
       if (*(int *)Ptr == 0) {
-        G2EmulationSwitchAnimation(In,1,0x75,0,((int *)Ptr)[2],2);
-        razReaverScale(0xaf0);
+        G2EmulatePlayAnimation(In,1,0x75,0,((int *)Ptr)[2],2);
+        razReaverPickup(0xaf0);
         return;
       }
       CurrentSection = 1;
@@ -238,7 +240,7 @@ LAB_800a7624:
   }
   local_14 = 2;
 LAB_800a7634:
-  G2EmulationSwitchAnimation(In,CurrentSection,NewAnim,0,local_18,local_14);
+  G2EmulatePlayAnimation(In,CurrentSection,NewAnim,0,local_18,local_14);
   return;
 }
 
@@ -282,7 +284,7 @@ LAB_800a7634:
 	/* end block 2 */
 	// End Line: 1197
 
-void StateHandlerIdle(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerPickupObject(__CharacterState *In,int CurrentSection,int Data)
 
 {
   bool bVar1;
@@ -309,12 +311,11 @@ void StateHandlerIdle(__CharacterState *In,int CurrentSection,int Data)
           ((iVar2 != 0xd6 && (Raziel.idleCount = Raziel.idleCount + 1, 300 < Raziel.idleCount)))) &&
          (Raziel.idleCount == (Raziel.idleCount / 900) * 900)) {
         if (Raziel.idleInstance == (_Instance *)0x0) {
-          G2EmulationSwitchAnimationCharacter(In,0x18,0,3,1);
-          COLLIDE_SegmentCollisionOff(In->CharacterInstance,1);
+          G2EmulationSwitchAnimationSync(In,0x18,0,3,1);
+          COLLIDE_SegmentCollisionOn(In->CharacterInstance,1);
         }
         else {
-          G2EmulationInstanceToInstanceSwitchAnimationCharacter
-                    (In->CharacterInstance,Raziel.idleInstance,1,0,3,1);
+          G2EmulationInstancePlayAnimation(In->CharacterInstance,Raziel.idleInstance,1,0,3,1);
         }
       }
       return;
@@ -326,7 +327,7 @@ void StateHandlerIdle(__CharacterState *In,int CurrentSection,int Data)
           if ((Raziel.Senses.EngagedMask & 0x2010) == 0) {
             if ((Raziel.Senses.EngagedMask & 0x800) == 0) {
               if ((Raziel.Senses.EngagedMask & 0x4000) != 0) {
-                NewProcess = StateHandlerWarpGate;
+                NewProcess = StateHandlerThrow2;
                 goto LAB_800a7ce4;
               }
               Ptr = razPickupAndGrab(In,CurrentSection);
@@ -334,19 +335,19 @@ void StateHandlerIdle(__CharacterState *In,int CurrentSection,int Data)
             }
             else {
               if (CurrentSection == 1) {
-                razReaverPickup(In->CharacterInstance,Raziel.Senses.EngagedList[0xb].instance);
+                razReaverImbue(In->CharacterInstance,Raziel.Senses.EngagedList[0xb].instance);
               }
             }
           }
           else {
             if (Raziel.Senses.heldClass == 3) {
               Inst = razGetHeldItem();
-              if ((Inst == (_Instance *)0x0) ||
-                 (uVar4 = INSTANCE_Query(Inst,2), (uVar4 & 0x20) == 0)) goto LAB_800a7dd4;
-              NewProcess = StateHandlerBreakOff;
+              if ((Inst == (_Instance *)0x0) || (uVar4 = INSTANCE_Post(Inst,2), (uVar4 & 0x20) == 0)
+                 ) goto LAB_800a7dd4;
+              NewProcess = StateHandlerStopMove;
             }
             else {
-              NewProcess = StateHandlerBreakOff;
+              NewProcess = StateHandlerStopMove;
             }
 LAB_800a7ce4:
             StateSwitchStateData(In,CurrentSection,NewProcess,0);
@@ -354,7 +355,7 @@ LAB_800a7ce4:
         }
         else {
           if (CurrentSection == 0) {
-            NewProcess = StateHandlerPullSwitch;
+            NewProcess = StateHandlerMove;
             goto LAB_800a7db4;
           }
         }
@@ -362,8 +363,8 @@ LAB_800a7ce4:
       else {
         Raziel.Mode = 0x200;
         pp_Var6[0x47] = (_Instance *)0x0;
-        G2EmulationSwitchAnimation(In,CurrentSection,0x15,0,6,1);
-        StateSwitchStateData(In,CurrentSection,StateHandlerPushObject,0);
+        G2EmulatePlayAnimation(In,CurrentSection,0x15,0,6,1);
+        StateSwitchStateData(In,CurrentSection,StateHandlerLookAround,0);
         ControlFlag = ControlFlag & 0xfffffffe;
       }
     }
@@ -372,25 +373,25 @@ LAB_800a7ce4:
         if (puVar5 == &DAT_80000002) {
           if ((CurrentSection == 0) && ((*PadData & 0x40) != 0)) {
             Raziel.returnState = (_func_60 *)0x0;
-            NewProcess = StateHandlerSoulSuck;
+            NewProcess = StateHandlerAttack2;
 LAB_800a7db4:
-            StateSwitchStateCharacterData(In,NewProcess,0);
+            StateSwitchStateCharacterDataDefault(In,NewProcess,0);
           }
         }
         else {
           if ((int)puVar5 < -0x7ffffffd) {
             if (puVar5 == (undefined *)0x80000000) {
 LAB_800a7cd4:
-              NewProcess = StateHandlerAttack2;
+              NewProcess = StateHandlerHang;
               goto LAB_800a7ce4;
             }
             if (puVar5 != (undefined *)0x80000001) goto LAB_800a7dc8;
             if (CurrentSection == 0) {
               Raziel.Mode = 0x10;
               ControlFlag = ControlFlag | 0x10;
-              Ptr = razSwitchVAnimCharacterGroup(In->CharacterInstance,0x10,(int *)0x0,(int *)0x0);
+              Ptr = razSwitchVAnimCharacterSingle(In->CharacterInstance,0x10,(int *)0x0,(int *)0x0);
               if (Ptr != 0) {
-                G2EmulationSwitchAnimationCharacter(In,0x22,0,2,1);
+                G2EmulationSwitchAnimationSync(In,0x22,0,2,1);
               }
               NewProcess = StateHandlerCompression;
               goto LAB_800a7db4;
@@ -415,22 +416,22 @@ LAB_800a7cd4:
                      ((In->CharacterInstance->tface != (_TFace *)0x0 ||
                       (In->CharacterInstance->attachedID != 0)))) {
                     if ((Raziel.Mode & 0x800U) == 0) {
-                      NewProcess = StateHandlerGlyphs;
+                      NewProcess = StateHandlerWallGrab;
                       goto LAB_800a7db4;
                     }
-                    EnMessageQueueData(&In->SectionList[0].Defer,(int)&DAT_80000010,0);
+                    DeMessageQueue(&In->SectionList[0].Defer,(int)&DAT_80000010,0);
                   }
                 }
                 else {
 LAB_800a7dc8:
-                  DefaultStateHandler(In,CurrentSection,Data);
+                  StateHandlerDragObject(In,CurrentSection,Data);
                 }
               }
               else {
                 if (puVar5 != &DAT_00100004) goto LAB_800a7dc8;
                 if (CurrentSection == 0) {
-                  razReaverScale(0x1000);
-                  razResetPauseTranslation(In->CharacterInstance);
+                  razReaverPickup(0x1000);
+                  razSetPauseTranslation(In->CharacterInstance);
                   goto LAB_800a78f4;
                 }
               }
@@ -451,10 +452,10 @@ LAB_800a7dc8:
               if (puVar5 != (undefined *)0x4010080) goto LAB_800a7dc8;
               if (CurrentSection == 0) {
                 if (p_Var3->Data == 0) {
-                  razSetPauseTranslation(In->CharacterInstance);
+                  razResetPauseTranslation(In->CharacterInstance);
                 }
                 else {
-                  razResetPauseTranslation(In->CharacterInstance);
+                  razSetPauseTranslation(In->CharacterInstance);
                 }
               }
             }
@@ -465,7 +466,7 @@ LAB_800a7dc8:
                 ControlFlag = ControlFlag & 0xff7fffff;
               }
               if (iVar2 == 0xd6) {
-                G2EmulationSwitchAnimation(In,CurrentSection,0xd7,0,3,1);
+                G2EmulatePlayAnimation(In,CurrentSection,0xd7,0,3,1);
               }
               else {
                 Ptr = SetControlInitIdleData(0,0,3);
@@ -475,7 +476,7 @@ LAB_800a7dc8:
                     ControlFlag = ControlFlag & 0xffff7fff;
                   }
 LAB_800a78f4:
-                  COLLIDE_SegmentCollisionOn(In->CharacterInstance,1);
+                  COLLIDE_SegmentCollisionOff(In->CharacterInstance,1);
                 }
               }
             }
@@ -488,14 +489,14 @@ LAB_800a78f4:
                 if (puVar5 != (undefined *)0x10000000) goto LAB_800a7dc8;
                 if ((*PadData & 0x200) != 0) {
 LAB_800a7ad4:
-                  StateSwitchStateData(In,CurrentSection,StateHandlerMove,3);
+                  StateSwitchStateData(In,CurrentSection,DefaultPuppetStateHandler,3);
                   goto LAB_800a7dd4;
                 }
                 if (-0x201 < Raziel.Bearing) {
                   if (Raziel.Bearing < 0x201) {
                     if (bVar1) goto LAB_800a7dd4;
                     if (0xfff < Raziel.Magnitude) {
-                      NewProcess = StateHandlerStartMove;
+                      NewProcess = StateHandlerDecodeHold;
                       goto LAB_800a7ce4;
                     }
                     goto LAB_800a7ad4;
@@ -511,7 +512,7 @@ LAB_800a7ad4:
                     Mode = 1;
                     Ptr = CurrentSection;
 LAB_800a7a88:
-                    G2EmulationSwitchAnimation(In,Ptr,0x35,0,2,Mode);
+                    G2EmulatePlayAnimation(In,Ptr,0x35,0,2,Mode);
                   }
                   StateSwitchStateData(In,CurrentSection,StateHandlerStartTurn,0);
                   pp_Var6[0x47] = (_Instance *)0x33;
@@ -527,7 +528,7 @@ LAB_800a7a88:
                   Ptr = CurrentSection;
                   Mode = 1;
 LAB_800a79fc:
-                  G2EmulationSwitchAnimation(In,Ptr,0x36,0,2,Mode);
+                  G2EmulatePlayAnimation(In,Ptr,0x36,0,2,Mode);
                 }
                 StateSwitchStateData(In,CurrentSection,StateHandlerStartTurn,0);
                 pp_Var6[0x47] = (_Instance *)0x34;
@@ -538,7 +539,7 @@ LAB_800a79fc:
       }
     }
 LAB_800a7dd4:
-    DeMessageQueue((__MessageQueue *)(&In->CharacterInstance + CurrentSection * 0x47 + 3));
+    PurgeMessageQueue((__MessageQueue *)(&In->CharacterInstance + CurrentSection * 0x47 + 3));
   } while( true );
 }
 
@@ -590,7 +591,7 @@ LAB_800a7dd4:
 	/* end block 2 */
 	// End Line: 1816
 
-void StateHandlerLookAround(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerBlock(__CharacterState *In,int CurrentSection,int Data)
 
 {
   __Event *p_Var1;
@@ -605,7 +606,7 @@ void StateHandlerLookAround(__CharacterState *In,int CurrentSection,int Data)
     p_Var1 = PeekMessageQueue(&In->SectionList[CurrentSection].Event);
     if (p_Var1 == (__Event *)0x0) {
       if (((*PadData & 0x800) == 0) || ((*PadData & 0x400) == 0)) {
-        EnMessageQueueData(&In->SectionList[CurrentSection].Defer,0x100000,0);
+        DeMessageQueue(&In->SectionList[CurrentSection].Defer,0x100000,0);
       }
       return;
     }
@@ -621,22 +622,22 @@ LAB_800a8184:
         if (puVar2 == (undefined *)0x40005) {
 LAB_800a8174:
           Data_00 = p_Var1->Data;
-          NewProcess = StateHandlerStumble;
+          NewProcess = StateHandlerCrouch;
           goto LAB_800a8184;
         }
         if ((int)puVar2 < 0x40006) {
           if ((puVar2 == &DAT_80000020) &&
-             (Data_00 = StateHandlerDecodeHold(&local_20,&iStack28), Data_00 != 0)) {
+             (Data_00 = StateHandlerAutoFace(&local_20,&iStack28), Data_00 != 0)) {
             if ((local_20 == 0x80000) && (CurrentSection == 0)) {
               razLaunchForce(In->CharacterInstance);
-              StateSwitchStateData(In,0,StateHandlerThrow2,0);
+              StateSwitchStateData(In,0,StateHandlerWallIdle,0);
             }
-            StateSwitchStateData(In,CurrentSection,StateHandlerThrow2,0);
+            StateSwitchStateData(In,CurrentSection,StateHandlerWallIdle,0);
             if ((Raziel.Senses.heldClass != 0x1000) && (Raziel.Senses.heldClass != 8)) {
               razSetFadeEffect(In->CharacterInstance->fadeValue,PlayerData->throwFadeValue,
                                (int)PlayerData->throwFadeInRate);
             }
-            Raziel.returnState = StateHandlerIdle;
+            Raziel.returnState = StateHandlerPickupObject;
             Raziel.throwMode = 2;
           }
         }
@@ -657,16 +658,16 @@ LAB_800a8174:
           if ((int)puVar2 < 0x100005) {
             if ((puVar2 == &DAT_00100001) && (CurrentSection == 1)) {
               anim = &In->CharacterInstance->anim;
-              G2Anim_EnableController(anim,0x11,0xe);
-              G2Anim_EnableController(anim,0x10,0xe);
-              G2Anim_EnableController(anim,0xe,0xe);
+              G2Anim_DisableController(anim,0x11,0xe);
+              G2Anim_DisableController(anim,0x10,0xe);
+              G2Anim_DisableController(anim,0xe,0xe);
               ControlFlag = 0x8001008;
             }
           }
           else {
             if (puVar2 == (undefined *)0x1000000) {
               if (CurrentSection == 0) {
-                CAMERA_ForceEndLookaroundMode(&theCamera);
+                CAMERA_StartLookaroundMode(&theCamera);
               }
               Data_00 = p_Var1->Data;
               NewProcess = StateHandlerHitReaction;
@@ -676,7 +677,7 @@ LAB_800a8174:
         }
       }
     }
-    DeMessageQueue(&In->SectionList[CurrentSection].Event);
+    PurgeMessageQueue(&In->SectionList[CurrentSection].Event);
   } while( true );
 }
 
@@ -712,7 +713,7 @@ LAB_800a8174:
 	/* end block 2 */
 	// End Line: 1978
 
-void StateHandlerCrouch(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerSwimCoil(__CharacterState *In,int CurrentSection,int Data)
 
 {
   _Instance *Inst;
@@ -731,8 +732,8 @@ void StateHandlerCrouch(__CharacterState *In,int CurrentSection,int Data)
     p_Var1 = PeekMessageQueue(&In->SectionList[CurrentSection].Event);
     if (p_Var1 == (__Event *)0x0) {
       if (((*PadData & 0x100) == 0) &&
-         (In->SectionList[CurrentSection].Process == StateHandlerCrouch)) {
-        EnMessageQueueData(&In->SectionList[CurrentSection].Event,0x20000008,0);
+         (In->SectionList[CurrentSection].Process == StateHandlerSwimCoil)) {
+        DeMessageQueue(&In->SectionList[CurrentSection].Event,0x20000008,0);
       }
       return;
     }
@@ -745,7 +746,7 @@ void StateHandlerCrouch(__CharacterState *In,int CurrentSection,int Data)
         PhysicsMode = 3;
         SteerSwitchMode(In->CharacterInstance,0);
         if (p_Var1->Data == 0) {
-          NewAnim = razSwitchVAnimCharacterGroup(In->CharacterInstance,0x4c,(int *)0x0,(int *)0x0);
+          NewAnim = razSwitchVAnimCharacterSingle(In->CharacterInstance,0x4c,(int *)0x0,(int *)0x0);
           if (NewAnim != 0) {
             local_30 = 2;
             NewAnim = 4;
@@ -754,17 +755,17 @@ void StateHandlerCrouch(__CharacterState *In,int CurrentSection,int Data)
           }
         }
         else {
-          NewAnim = razSwitchVAnimCharacterGroup(In->CharacterInstance,0x48,(int *)0x0,(int *)0x0);
+          NewAnim = razSwitchVAnimCharacterSingle(In->CharacterInstance,0x48,(int *)0x0,(int *)0x0);
           if (NewAnim != 0) {
             local_30 = 1;
             NewAnim = 3;
             Frames = 3;
 LAB_800a843c:
-            G2EmulationSwitchAnimationCharacter(In,NewAnim,0,Frames,local_30);
+            G2EmulationSwitchAnimationSync(In,NewAnim,0,Frames,local_30);
           }
         }
         if (Inst != (_Instance *)0x0) {
-          INSTANCE_Post(Inst,0x80002c,0);
+          INSTANCE_Query(Inst,0x80002c,0);
         }
       }
       if (p_Var1->Data == 0) {
@@ -782,32 +783,32 @@ LAB_800a843c:
               if (Inst != (_Instance *)0x0) {
                 razSwitchVAnimGroup(In->CharacterInstance,CurrentSection,0x50,-1,-1);
                 pp_Var4[0x48] = (_Instance *)0x50;
-                INSTANCE_Post(Inst,0x200005,0);
+                INSTANCE_Query(Inst,0x200005,0);
               }
             }
             else {
               if (puVar2 != (undefined *)0x80000001) goto LAB_800a889c;
               if (((CurrentSection == 0) && (NewAnim != 5)) && (NewAnim != 0x55)) {
                 Raziel.Mode = 0x20;
-                NewAnim = razSwitchVAnimCharacterGroup
+                NewAnim = razSwitchVAnimCharacterSingle
                                     (In->CharacterInstance,0x20,(int *)0x0,(int *)0x0);
                 if (NewAnim != 0) {
-                  G2EmulationSwitchAnimationCharacter(In,0x26,0,1,1);
+                  G2EmulationSwitchAnimationSync(In,0x26,0,1,1);
                 }
-                StateSwitchStateCharacterData(In,StateHandlerCompression,0);
+                StateSwitchStateCharacterDataDefault(In,StateHandlerCompression,0);
               }
             }
           }
           else {
             if (puVar2 == &DAT_80000010) {
               if ((CurrentSection == 0) && (In->CharacterInstance->tface != (_TFace *)0x0)) {
-                EnMessageQueueData(&In->SectionList[0].Defer,(int)&DAT_80000010,0);
+                DeMessageQueue(&In->SectionList[0].Defer,(int)&DAT_80000010,0);
                 ControlFlag = ControlFlag | 0x800000;
               }
 LAB_800a87c4:
               if (((NewAnim != 5) && (NewAnim != 0x55)) && (pp_Var4[0x48] != (_Instance *)0x50)) {
                 NewAnim = SetControlInitIdleData(0,0,3);
-                StateSwitchStateData(In,CurrentSection,StateHandlerIdle,NewAnim);
+                StateSwitchStateData(In,CurrentSection,StateHandlerPickupObject,NewAnim);
                 Raziel.Mode = 0x1000000;
               }
             }
@@ -818,7 +819,7 @@ LAB_800a87c4:
               else {
                 if (puVar2 != (undefined *)0x100000) goto LAB_800a889c;
                 NewAnim = SetControlInitIdleData(0,0,3);
-                StateSwitchStateData(In,CurrentSection,StateHandlerIdle,NewAnim);
+                StateSwitchStateData(In,CurrentSection,StateHandlerPickupObject,NewAnim);
               }
             }
           }
@@ -837,27 +838,28 @@ LAB_800a87c4:
                   p_Var3 = In;
                   do {
                     p_Var3->SectionList[0].Data1 = 0;
-                    PurgeMessageQueue((__MessageQueue *)((int)&In->TotalSections + Frames));
+                    EnMessageQueueData((__MessageQueue *)((int)&In->TotalSections + Frames));
                     Frames = Frames + 0x11c;
                     NewAnim = NewAnim + 1;
                     p_Var3 = (__CharacterState *)&p_Var3->SectionList[0].Data1;
                   } while (NewAnim < 3);
                   razCenterWithBlock(In->CharacterInstance,Raziel.Senses.EngagedList[2].instance,
                                      -0x8d);
-                  NewAnim = SetObjectData(-(int)Raziel.Senses.ForwardNormal.x,
-                                          -(int)Raziel.Senses.ForwardNormal.y,0,(_Instance *)0x0,0);
-                  INSTANCE_Post(Raziel.Senses.EngagedList[2].instance,0x800001,NewAnim);
+                  NewAnim = SetObjectBreakOffData
+                                      (-(int)Raziel.Senses.ForwardNormal.x,
+                                       -(int)Raziel.Senses.ForwardNormal.y,0,(_Instance *)0x0,0);
+                  INSTANCE_Query(Raziel.Senses.EngagedList[2].instance,0x800001,NewAnim);
                   Frames = 0x100000;
                   if ((*(u_int *)(NewAnim + 0xc) & 1) == 0) {
                     instance = In->CharacterInstance;
                     goto LAB_800a86b0;
                   }
-                  COLLIDE_SegmentCollisionOff(In->CharacterInstance,1);
+                  COLLIDE_SegmentCollisionOn(In->CharacterInstance,1);
                   Frames = 0x55;
                   if ((*(u_int *)(NewAnim + 0xc) & 8) == 0) {
                     Frames = 5;
                   }
-                  G2EmulationSwitchAnimationCharacter(In,Frames,0,0,1);
+                  G2EmulationSwitchAnimationSync(In,Frames,0,0,1);
                   razSetPlayerEventHistory(2);
                 }
               }
@@ -866,13 +868,13 @@ LAB_800a87c4:
               if ((int)puVar2 < 0x2000001) {
                 if (puVar2 != &DAT_00100004) goto LAB_800a889c;
                 if ((CurrentSection == 0) &&
-                   (COLLIDE_SegmentCollisionOn(In->CharacterInstance,1), Inst != (_Instance *)0x0))
+                   (COLLIDE_SegmentCollisionOff(In->CharacterInstance,1), Inst != (_Instance *)0x0))
                 {
-                  INSTANCE_Post(Inst,0x200003,7);
+                  INSTANCE_Query(Inst,0x200003,7);
                   Frames = 0x80002b;
                   instance = Inst;
 LAB_800a86b0:
-                  INSTANCE_Post(instance,Frames,0);
+                  INSTANCE_Query(instance,Frames,0);
                 }
               }
               else {
@@ -883,7 +885,7 @@ LAB_800a86b0:
           else {
             if (puVar2 == (undefined *)0x10000000) {
               if (((Raziel.Senses.heldClass != 3) && (NewAnim != 5)) && (NewAnim != 0x55)) {
-                StateSwitchStateData(In,CurrentSection,StateHandlerMove,3);
+                StateSwitchStateData(In,CurrentSection,DefaultPuppetStateHandler,3);
               }
             }
             else {
@@ -891,23 +893,23 @@ LAB_800a86b0:
                 if (puVar2 == (undefined *)0x8000000) {
                   if ((NewAnim == 5) || (NewAnim == 0x55)) {
                     NewAnim = SetControlInitIdleData(0,0,3);
-                    StateSwitchStateData(In,CurrentSection,StateHandlerIdle,NewAnim);
+                    StateSwitchStateData(In,CurrentSection,StateHandlerPickupObject,NewAnim);
                     pp_Var4[0x47] = (_Instance *)0x1;
                     ControlFlag = ControlFlag & 0xf7ffefff;
                   }
                   else {
                     if (CurrentSection == 1) {
                       if ((In->SectionList[1].Data2 == 0x50) && (Inst != (_Instance *)0x0)) {
-                        INSTANCE_Post(Inst,0x800008,0);
-                        razReaverOn();
+                        INSTANCE_Query(Inst,0x800008,0);
+                        razReaverOff();
                       }
                       In->SectionList[0].Data2 = 0x4c;
                       pp_Var4[0x48] = (_Instance *)0x4c;
                       instance = In->CharacterInstance;
                       In->SectionList[2].Data2 = 0x4c;
-                      NewAnim = razSwitchVAnimCharacterGroup(instance,0x4c,(int *)0x0,(int *)0x0);
+                      NewAnim = razSwitchVAnimCharacterSingle(instance,0x4c,(int *)0x0,(int *)0x0);
                       if (NewAnim != 0) {
-                        G2EmulationSwitchAnimationCharacter(In,4,0,8,2);
+                        G2EmulationSwitchAnimationSync(In,4,0,8,2);
                       }
                     }
                   }
@@ -918,14 +920,14 @@ LAB_800a86b0:
                 if (puVar2 == (undefined *)0x20000008) goto LAB_800a87c4;
               }
 LAB_800a889c:
-              DefaultStateHandler(In,CurrentSection,Data);
+              StateHandlerDragObject(In,CurrentSection,Data);
             }
           }
         }
       }
     }
 LAB_800a88ac:
-    DeMessageQueue((__MessageQueue *)(&In->CharacterInstance + CurrentSection * 0x47 + 3));
+    PurgeMessageQueue((__MessageQueue *)(&In->CharacterInstance + CurrentSection * 0x47 + 3));
   } while( true );
 }
 
@@ -949,7 +951,7 @@ LAB_800a88ac:
 	/* end block 2 */
 	// End Line: 2386
 
-void StateHandlerDropAction(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerStumble(__CharacterState *In,int CurrentSection,int Data)
 
 {
   __Event *p_Var1;
@@ -969,11 +971,11 @@ void StateHandlerDropAction(__CharacterState *In,int CurrentSection,int Data)
         Inst = razGetHeldItem();
         if (Inst != (_Instance *)0x0) {
           Inst = razGetHeldItem();
-          INSTANCE_Post(Inst,0x800008,0);
-          razReaverOn();
+          INSTANCE_Query(Inst,0x800008,0);
+          razReaverOff();
         }
         Data_00 = SetControlInitIdleData(0,0,3);
-        StateSwitchStateCharacterData(In,StateHandlerIdle,Data_00);
+        StateSwitchStateCharacterDataDefault(In,StateHandlerPickupObject,Data_00);
       }
     }
     else {
@@ -983,11 +985,11 @@ void StateHandlerDropAction(__CharacterState *In,int CurrentSection,int Data)
           Inst = razGetHeldItem();
           if ((Inst == (_Instance *)0x0) || (CurrentSection != 1)) {
             if (CurrentSection == 2) {
-              G2EmulationSwitchAnimationAlpha(In,2,0x45,0,3,1,1);
+              SetAnimationInstanceSwitchData(In,2,0x45,0,3,1,1);
             }
             else {
               if (CurrentSection == 0) {
-                G2EmulationSwitchAnimationAlpha(In,0,3,0,3,1,1);
+                SetAnimationInstanceSwitchData(In,0,3,0,3,1,1);
                 Raziel.Mode = 0x40;
               }
             }
@@ -997,7 +999,7 @@ void StateHandlerDropAction(__CharacterState *In,int CurrentSection,int Data)
               Data_00 = 0x69;
               Frames = 3;
 LAB_800a8a94:
-              G2EmulationSwitchAnimation(In,1,Data_00,0,Frames,1);
+              G2EmulatePlayAnimation(In,1,Data_00,0,Frames,1);
             }
             else {
               if (Raziel.Senses.heldClass < 3) {
@@ -1016,7 +1018,7 @@ LAB_800a8a94:
               }
             }
             Inst = razGetHeldItem();
-            INSTANCE_Post(Inst,0x80002c,0);
+            INSTANCE_Query(Inst,0x80002c,0);
           }
           ControlFlag = ControlFlag | 0x40000000;
         }
@@ -1024,11 +1026,11 @@ LAB_800a8a94:
       else {
         if ((puVar2 != (undefined *)0x10000000) && (puVar2 != (undefined *)0x20000008)) {
 LAB_800a8b9c:
-          DefaultStateHandler(In,CurrentSection,Data);
+          StateHandlerDragObject(In,CurrentSection,Data);
         }
       }
     }
-    DeMessageQueue(&In->SectionList[CurrentSection].Event);
+    PurgeMessageQueue(&In->SectionList[CurrentSection].Event);
   } while( true );
 }
 
@@ -1067,7 +1069,7 @@ LAB_800a8b9c:
 	/* end block 3 */
 	// End Line: 2556
 
-void StateHandlerSoulSuck(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerAttack2(__CharacterState *In,int CurrentSection,int Data)
 
 {
   int iVar1;
@@ -1094,13 +1096,13 @@ void StateHandlerSoulSuck(__CharacterState *In,int CurrentSection,int Data)
     if (puVar4 == (undefined *)0x1000006) {
 LAB_800a8e80:
       if (iVar1 == 0x4f) {
-        G2EmulationSwitchAnimation(In,CurrentSection,0x2f,0,3,1);
-        PurgeMessageQueue(&p_Var5->Event);
+        G2EmulatePlayAnimation(In,CurrentSection,0x2f,0,3,1);
+        EnMessageQueueData(&p_Var5->Event);
       }
       else {
         if (Raziel.returnState == (_func_60 *)0x0) {
           Data_00 = SetControlInitIdleData(0,0,3);
-          NewProcess = StateHandlerIdle;
+          NewProcess = StateHandlerPickupObject;
         }
         else {
           Data_00 = 0;
@@ -1110,7 +1112,7 @@ LAB_800a8e80:
       }
       if (((Raziel.Senses.EngagedMask & 0x1000) != 0) && (CurrentSection == 0)) {
 LAB_800a8f18:
-        INSTANCE_Post(Raziel.Senses.EngagedList[0xc].instance,0x1000014,0);
+        INSTANCE_Query(Raziel.Senses.EngagedList[0xc].instance,0x1000014,0);
       }
     }
     else {
@@ -1120,14 +1122,15 @@ LAB_800a8f18:
             ControlFlag = 9;
             PhysicsMode = 3;
             if (((Raziel.Senses.EngagedMask & 0x1000) != 0) && (Raziel.Senses.heldClass != 3)) {
-              razAlignYRotMove(Raziel.Senses.EngagedList[0xc].instance,0xdc,
-                               &In->CharacterInstance->position,&In->CharacterInstance->rotation,0);
-              INSTANCE_Post(Raziel.Senses.EngagedList[0xc].instance,0x1000014,1);
+              razAlignYRotMoveInterp
+                        (Raziel.Senses.EngagedList[0xc].instance,0xdc,
+                         &In->CharacterInstance->position,&In->CharacterInstance->rotation,0);
+              INSTANCE_Query(Raziel.Senses.EngagedList[0xc].instance,0x1000014,1);
             }
-            G2EmulationSwitchAnimationAlpha(In,0,0x4e,0,4,1,4);
+            SetAnimationInstanceSwitchData(In,0,0x4e,0,4,1,4);
           }
           if (CurrentSection == 2) {
-            G2EmulationSwitchAnimation(In,2,0,0,4,2);
+            G2EmulatePlayAnimation(In,2,0,0,4,2);
           }
           if (CurrentSection == 1) {
             p_Var3 = razGetHeldWeapon();
@@ -1137,7 +1140,7 @@ LAB_800a8f18:
             else {
               Data_00 = 0x5e;
             }
-            G2EmulationSwitchAnimation(In,1,Data_00,0,4,1);
+            G2EmulatePlayAnimation(In,1,Data_00,0,4,1);
             Raziel.Mode = Raziel.Mode | 0x10000000;
           }
         }
@@ -1145,7 +1148,7 @@ LAB_800a8f18:
           if ((int)puVar4 < 0x100002) {
             if (puVar4 != &DAT_80000010) {
 LAB_800a90d0:
-              DefaultStateHandler(In,CurrentSection,Data);
+              StateHandlerDragObject(In,CurrentSection,Data);
             }
           }
           else {
@@ -1166,7 +1169,7 @@ LAB_800a90d0:
       else {
         if (puVar4 == (undefined *)0x4020000) {
           if ((*(ushort *)(p_Var2->Data + 0x10) & 0x40) != 0) {
-            StateHandlerInitSwim(In,CurrentSection,0);
+            StateHandlerSoulSuck(In,CurrentSection,0);
           }
         }
         else {
@@ -1175,7 +1178,7 @@ LAB_800a90d0:
               NewAnim = 0x50;
               Data_00 = 2;
 LAB_800a9088:
-              G2EmulationSwitchAnimation(In,CurrentSection,NewAnim,0,Data_00,1);
+              G2EmulatePlayAnimation(In,CurrentSection,NewAnim,0,Data_00,1);
             }
             else {
               if (puVar4 != (undefined *)0x1000016) goto LAB_800a90d0;
@@ -1193,7 +1196,7 @@ LAB_800a9088:
             if (iVar1 == 0x2f) {
               if (Raziel.returnState == (_func_60 *)0x0) {
                 Data_00 = SetControlInitIdleData(0,0,3);
-                NewProcess_00 = StateHandlerIdle;
+                NewProcess_00 = StateHandlerPickupObject;
               }
               else {
                 Data_00 = 0;
@@ -1204,7 +1207,7 @@ LAB_800a9088:
                          ,Data_00);
             }
             if (iVar1 == 0x4e) {
-              G2EmulationSwitchAnimation(In,CurrentSection,0x4f,0,0,1);
+              G2EmulatePlayAnimation(In,CurrentSection,0x4f,0,0,1);
             }
             if (iVar1 == 0x50) {
               if ((*PadData & 0x40) != 0) {
@@ -1214,7 +1217,7 @@ LAB_800a9088:
               }
               if (Raziel.returnState == (_func_60 *)0x0) {
                 Data_00 = SetControlInitIdleData(0,0,3);
-                StateSwitchStateData(In,CurrentSection,StateHandlerIdle,Data_00);
+                StateSwitchStateData(In,CurrentSection,StateHandlerPickupObject,Data_00);
               }
               else {
                 StateSwitchStateData
@@ -1226,7 +1229,7 @@ LAB_800a9088:
         }
       }
     }
-    DeMessageQueue(&p_Var5->Event);
+    PurgeMessageQueue(&p_Var5->Event);
   } while( true );
 }
 
@@ -1260,7 +1263,7 @@ void StateHandlerStartTurn(__CharacterState *In,int CurrentSection,int Data)
   
   G2EmulationQueryFrame(In,CurrentSection);
   if (Raziel.Bearing == 0) {
-    EnMessageQueueData(&In->SectionList[CurrentSection].Defer,0x100000,0);
+    DeMessageQueue(&In->SectionList[CurrentSection].Defer,0x100000,0);
   }
   do {
     p_Var1 = PeekMessageQueue(&In->SectionList[CurrentSection].Event);
@@ -1273,12 +1276,12 @@ LAB_800a9220:
       if (CurrentSection == 0) {
         if ((*PadData & 0x8000000fU) == 0) {
           Data_00 = SetControlInitIdleData(0,0,3);
-          StateSwitchStateCharacterData(In,StateHandlerIdle,Data_00);
+          StateSwitchStateCharacterDataDefault(In,StateHandlerPickupObject,Data_00);
         }
         else {
-          NewProcess = StateHandlerStartMove;
+          NewProcess = StateHandlerDecodeHold;
 LAB_800a92c8:
-          StateSwitchStateCharacterData(In,NewProcess,0);
+          StateSwitchStateCharacterDataDefault(In,NewProcess,0);
         }
       }
     }
@@ -1287,9 +1290,9 @@ LAB_800a92c8:
         if (puVar2 == (undefined *)0x80000001) {
           if (CurrentSection == 0) {
             Raziel.Mode = 8;
-            Data_00 = razSwitchVAnimCharacterGroup(In->CharacterInstance,0,(int *)0x0,(int *)0x0);
+            Data_00 = razSwitchVAnimCharacterSingle(In->CharacterInstance,0,(int *)0x0,(int *)0x0);
             if (Data_00 != 0) {
-              G2EmulationSwitchAnimationCharacter(In,0x1a,0,0,1);
+              G2EmulationSwitchAnimationSync(In,0x1a,0,0,1);
             }
             NewProcess = StateHandlerCompression;
             goto LAB_800a92c8;
@@ -1298,7 +1301,7 @@ LAB_800a92c8:
         else {
           if (puVar2 == (undefined *)0x0) goto LAB_800a9220;
 LAB_800a92d8:
-          DefaultStateHandler(In,CurrentSection,Data);
+          StateHandlerDragObject(In,CurrentSection,Data);
         }
       }
       else {
@@ -1314,7 +1317,7 @@ LAB_800a92d8:
         }
       }
     }
-    DeMessageQueue(&In->SectionList[CurrentSection].Event);
+    PurgeMessageQueue(&In->SectionList[CurrentSection].Event);
   } while( true );
 }
 
@@ -1334,13 +1337,13 @@ LAB_800a92d8:
 	/* end block 2 */
 	// End Line: 2957
 
-void StateInitStartMove(__CharacterState *In,int CurrentSection,int Frame)
+void InitStates(__CharacterState *In,int CurrentSection,int Frame)
 
 {
   int iVar1;
   
   if ((*PadData & 0x200) != 0) {
-    StateSwitchStateData(In,CurrentSection,StateHandlerMove,3);
+    StateSwitchStateData(In,CurrentSection,DefaultPuppetStateHandler,3);
   }
   iVar1 = razSwitchVAnimGroup(In->CharacterInstance,CurrentSection,0x30,Frame,-1);
   if (iVar1 != 0) {
@@ -1379,7 +1382,7 @@ void StateInitStartMove(__CharacterState *In,int CurrentSection,int Frame)
 	/* end block 2 */
 	// End Line: 3135
 
-void StateHandlerStartMove(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerDecodeHold(__CharacterState *In,int CurrentSection,int Data)
 
 {
   __Event *p_Var1;
@@ -1405,22 +1408,22 @@ void StateHandlerStartMove(__CharacterState *In,int CurrentSection,int Data)
       Data_00 = G2EmulationQueryFrame(In,CurrentSection);
       if (((10 < Data_00) && (CurrentSection == 0)) &&
          (Data_00 = CheckHolding(In->CharacterInstance), Data_00 != 0)) {
-        if (In->SectionList[1].Process == StateHandlerStartMove) {
-          StateSwitchStateData(In,1,StateHandlerMove,0xb);
+        if (In->SectionList[1].Process == StateHandlerDecodeHold) {
+          StateSwitchStateData(In,1,DefaultPuppetStateHandler,0xb);
         }
-        if (In->SectionList[2].Process == StateHandlerStartMove) {
-          StateSwitchStateData(In,2,StateHandlerMove,0xb);
+        if (In->SectionList[2].Process == StateHandlerDecodeHold) {
+          StateSwitchStateData(In,2,DefaultPuppetStateHandler,0xb);
         }
       }
       if (((Raziel.Magnitude != 0) && (Raziel.Magnitude < 0x1000)) && ((Raziel.passedMask & 1) != 0)
          ) {
-        StateSwitchStateData(In,CurrentSection,StateHandlerMove,0);
+        StateSwitchStateData(In,CurrentSection,DefaultPuppetStateHandler,0);
       }
       return;
     }
     puVar3 = (undefined *)p_Var1->ID;
     if (puVar3 == &DAT_00100001) {
-      StateInitStartMove(In,CurrentSection,p_Var1->Data);
+      InitStates(In,CurrentSection,p_Var1->Data);
       In->SectionList[CurrentSection].Data2 = 1;
       if (CurrentSection == 0) {
         ControlFlag = (int)&LAB_0002a118_1;
@@ -1439,13 +1442,13 @@ void StateHandlerStartMove(__CharacterState *In,int CurrentSection,int Data)
 LAB_800a9604:
           if (CurrentSection == 0) {
             if (In->CharacterInstance->tface != (_TFace *)0x0) {
-              EnMessageQueueData(&In->SectionList[0].Defer,p_Var1->ID,0);
+              DeMessageQueue(&In->SectionList[0].Defer,p_Var1->ID,0);
               ControlFlag = ControlFlag | 0x800000;
             }
 LAB_800a9640:
             if (CurrentSection == 0) {
               if (((Raziel.passedMask & 7) != 0) ||
-                 (Data_00 = G2EmulationQueryMode(In,0), Data_00 == 0)) {
+                 (Data_00 = G2EmulationInstanceSetAnimation(In,0), Data_00 == 0)) {
                 if ((Raziel.passedMask & 1) == 0) {
                   mode = Raziel.passedMask & 4;
                   if ((Raziel.passedMask & 2) != 0) {
@@ -1456,7 +1459,7 @@ LAB_800a9640:
                   mode = 2;
                 }
                 Data_00 = SetControlInitIdleData(mode,5,5);
-                StateSwitchStateCharacterData(In,StateHandlerIdle,Data_00);
+                StateSwitchStateCharacterDataDefault(In,StateHandlerPickupObject,Data_00);
                 ControlFlag = ControlFlag & 0xffffdfff;
               }
               ControlFlag = ControlFlag | 0x2000;
@@ -1468,26 +1471,26 @@ LAB_800a9640:
             if (puVar3 == (undefined *)0x80000000) {
               if ((Raziel.passedMask & 4) == 0) {
                 if (CurrentSection == 0) {
-                  NewProcess = StateHandlerAttack2;
+                  NewProcess = StateHandlerHang;
 LAB_800a9860:
-                  StateSwitchStateCharacterData(In,NewProcess,0);
+                  StateSwitchStateCharacterDataDefault(In,NewProcess,0);
                 }
               }
               else {
                 if (CurrentSection != 1) goto LAB_800a9784;
-                StateSwitchStateData(In,1,StateHandlerAttack2,10);
+                StateSwitchStateData(In,1,StateHandlerHang,10);
               }
             }
             else {
               if (puVar3 != (undefined *)0x80000001) goto LAB_800a98b4;
               if (CurrentSection == 0) {
                 Raziel.Mode = 8;
-                Data_00 = razSwitchVAnimCharacterGroup
+                Data_00 = razSwitchVAnimCharacterSingle
                                     (In->CharacterInstance,0,(int *)0x0,(int *)0x0);
                 if (Data_00 != 0) {
-                  G2EmulationSwitchAnimationCharacter(In,0x1a,0,0,1);
+                  G2EmulationSwitchAnimationSync(In,0x1a,0,0,1);
                 }
-                StateSwitchStateCharacterData(In,StateHandlerCompression,0);
+                StateSwitchStateCharacterDataDefault(In,StateHandlerCompression,0);
 LAB_800a9734:
                 ControlFlag = ControlFlag & 0xffffdfff;
               }
@@ -1497,7 +1500,7 @@ LAB_800a9734:
           if (puVar3 == &DAT_80000010) goto LAB_800a9604;
           if ((int)puVar3 < -0x7fffffef) {
             if (puVar3 == &DAT_80000004) {
-              StateSwitchStateData(In,CurrentSection,StateHandlerMove,3);
+              StateSwitchStateData(In,CurrentSection,DefaultPuppetStateHandler,3);
               goto LAB_800a98c0;
             }
           }
@@ -1505,13 +1508,13 @@ LAB_800a9734:
             if (puVar3 == (undefined *)0x0) goto LAB_800a9640;
           }
 LAB_800a98b4:
-          DefaultStateHandler(In,CurrentSection,Data);
+          StateHandlerDragObject(In,CurrentSection,Data);
         }
       }
       else {
         if (puVar3 == (undefined *)0x4010401) {
           Data_00 = SetControlInitIdleData(0,5,5);
-          StateSwitchStateData(In,CurrentSection,StateHandlerIdle,Data_00);
+          StateSwitchStateData(In,CurrentSection,StateHandlerPickupObject,Data_00);
         }
         else {
           if ((int)puVar3 < 0x4010402) {
@@ -1520,12 +1523,12 @@ LAB_800a98b4:
                 PhysicsMode = 0;
                 SetDropPhysics(In->CharacterInstance,&Raziel);
                 if (In->CharacterInstance->zVel < -0x20) {
-                  Data_00 = razSwitchVAnimCharacterGroup
+                  Data_00 = razSwitchVAnimCharacterSingle
                                       (In->CharacterInstance,0x18,(int *)0x0,(int *)0x0);
                   if (Data_00 != 0) {
-                    G2EmulationSwitchAnimationCharacter(In,0x24,0,4,1);
+                    G2EmulationSwitchAnimationSync(In,0x24,0,4,1);
                   }
-                  NewProcess = StateHandlerFall;
+                  NewProcess = StateHandlerGrab;
                   goto LAB_800a9860;
                 }
               }
@@ -1551,7 +1554,7 @@ LAB_800a98b4:
             if ((int)puVar3 < 0x8000000) goto LAB_800a98b4;
             if ((int)puVar3 < 0x8000002) {
 LAB_800a9784:
-              StateSwitchStateData(In,CurrentSection,StateHandlerMove,0);
+              StateSwitchStateData(In,CurrentSection,DefaultPuppetStateHandler,0);
             }
             else {
               if (puVar3 != (undefined *)0x10000000) goto LAB_800a98b4;
@@ -1561,7 +1564,7 @@ LAB_800a9784:
       }
     }
 LAB_800a98c0:
-    DeMessageQueue((__MessageQueue *)(&In->CharacterInstance + CurrentSection * 0x47 + 3));
+    PurgeMessageQueue((__MessageQueue *)(&In->CharacterInstance + CurrentSection * 0x47 + 3));
   } while( true );
 }
 
@@ -1581,7 +1584,7 @@ LAB_800a98c0:
 	/* end block 2 */
 	// End Line: 3496
 
-void StateInitMove(__CharacterState *In,int CurrentSection,int Frames)
+void StateInitStartMove(__CharacterState *In,int CurrentSection,int Frames)
 
 {
   int iVar1;
@@ -1610,7 +1613,7 @@ void StateInitMove(__CharacterState *In,int CurrentSection,int Frames)
         razResetMotion(In->CharacterInstance);
         iVar1 = razSwitchVAnimGroup(In->CharacterInstance,CurrentSection,0x38,-1,-1);
         if (iVar1 != 0) {
-          G2EmulationSwitchAnimation(In,CurrentSection,0x4a,0,3,2);
+          G2EmulatePlayAnimation(In,CurrentSection,0x4a,0,3,2);
         }
         (&In->CharacterInstance + CurrentSection * 0x47)[0x48] = (_Instance *)0x38;
       }
@@ -1667,7 +1670,7 @@ void StateInitMove(__CharacterState *In,int CurrentSection,int Frames)
 	/* end block 2 */
 	// End Line: 3926
 
-void StateHandlerMove(__CharacterState *In,int CurrentSection,int Data)
+void DefaultPuppetStateHandler(__CharacterState *In,int CurrentSection,int Data)
 
 {
   int iVar1;
@@ -1685,7 +1688,7 @@ void StateHandlerMove(__CharacterState *In,int CurrentSection,int Data)
   do {
     p_Var3 = PeekMessageQueue(&In->SectionList[CurrentSection].Event);
     if (p_Var3 == (__Event *)0x0) {
-      if ((CurrentSection == 0) && (In->SectionList[0].Process != StateHandlerMove)) {
+      if ((CurrentSection == 0) && (In->SectionList[0].Process != DefaultPuppetStateHandler)) {
         razResetMotion(In->CharacterInstance);
       }
       return;
@@ -1701,17 +1704,17 @@ LAB_800a9ec4:
         else {
           if (((Raziel.Mode == 2) || (iVar1 == 0x7b)) || (iVar1 == 0x7c)) {
             Data_00 = SetControlInitIdleData(0,0,3);
-            StateSwitchStateCharacterData(In,StateHandlerIdle,Data_00);
+            StateSwitchStateCharacterDataDefault(In,StateHandlerPickupObject,Data_00);
           }
           else {
             if (Raziel.Mode == 0x1000000) {
-              StateSwitchStateCharacterData(In,StateHandlerCrouch,0);
+              StateSwitchStateCharacterDataDefault(In,StateHandlerSwimCoil,0);
             }
             else {
               if ((p_Var3->Data < 4) && ((ControlFlag & 0x800000U) == 0)) {
                 ControlFlag = ControlFlag | 0x2000;
                 if ((*PadData & 0x8000000fU) == 0) {
-                  EnMessageQueueData(&In->SectionList[0].Defer,0,p_Var3->Data + 1);
+                  DeMessageQueue(&In->SectionList[0].Defer,0,p_Var3->Data + 1);
                   razApplyMotion(In,0);
                 }
               }
@@ -1723,7 +1726,7 @@ LAB_800a9ec4:
                 if ((Raziel.passedMask & 0x1000) != 0) {
                   Data_00 = 0x3c;
                 }
-                StateSwitchStateCharacterData(In,StateHandlerStopMove,Data_00);
+                StateSwitchStateCharacterDataDefault(In,StateHandlerSwimDiveIn,Data_00);
               }
             }
           }
@@ -1736,7 +1739,7 @@ LAB_800a9ec4:
 LAB_800a9e88:
           if (CurrentSection == 0) {
             if (In->CharacterInstance->tface != (_TFace *)0x0) {
-              EnMessageQueueData(&In->SectionList[0].Defer,p_Var3->ID,0);
+              DeMessageQueue(&In->SectionList[0].Defer,p_Var3->ID,0);
               ControlFlag = ControlFlag | 0x800000;
             }
             goto LAB_800a9ec4;
@@ -1749,20 +1752,20 @@ LAB_800a9e88:
                 if (pp_Var2[0x48] == (_Instance *)0x38) {
                   p_Var4 = razGetHeldItem();
                   if (p_Var4 != (_Instance *)0x0) {
-                    NewProcess = StateHandlerDropAction;
+                    NewProcess = StateHandlerStumble;
                     goto LAB_800aa210;
                   }
                 }
                 else {
                   if (CurrentSection == 1) {
-                    StateSwitchStateData(In,1,StateHandlerAttack2,10);
+                    StateSwitchStateData(In,1,StateHandlerHang,10);
                   }
                   Raziel.dropOffHeight = 200;
                   Raziel.fallZVelocity = -0x60;
                 }
               }
               else {
-                NewProcess = StateHandlerAttack2;
+                NewProcess = StateHandlerHang;
 LAB_800aa210:
                 StateSwitchStateData(In,CurrentSection,NewProcess,0);
               }
@@ -1772,7 +1775,7 @@ LAB_800aa210:
               if (CurrentSection != 0) goto LAB_800aa23c;
               if ((*PadData & 0x100) == 0) {
                 Raziel.Mode = 8;
-                Data_00 = razSwitchVAnimCharacterGroup
+                Data_00 = razSwitchVAnimCharacterSingle
                                     (In->CharacterInstance,0,(int *)0x0,(int *)0x0);
                 if (Data_00 != 0) {
                   Data_00 = 0;
@@ -1781,15 +1784,15 @@ LAB_800aa210:
               }
               else {
                 Raziel.Mode = 0x20;
-                Data_00 = razSwitchVAnimCharacterGroup
+                Data_00 = razSwitchVAnimCharacterSingle
                                     (In->CharacterInstance,0x20,(int *)0x0,(int *)0x0);
                 if (Data_00 != 0) {
                   Data_00 = 1;
 LAB_800aa15c:
-                  G2EmulationSwitchAnimationCharacter(In,0x1a,0,Data_00,1);
+                  G2EmulationSwitchAnimationSync(In,0x1a,0,Data_00,1);
                 }
               }
-              StateSwitchStateCharacterData(In,StateHandlerCompression,0);
+              StateSwitchStateCharacterDataDefault(In,StateHandlerCompression,0);
 LAB_800aa178:
               ControlFlag = ControlFlag & 0xffffdfff;
             }
@@ -1806,7 +1809,7 @@ LAB_800aa178:
                     Data_00 = 2;
                     local_2c = CurrentSection;
                   }
-                  G2EmulationSwitchAnimation(In,Data_00,(u_int)(CurrentSection != 2),0,3,local_2c);
+                  G2EmulatePlayAnimation(In,Data_00,(u_int)(CurrentSection != 2),0,3,local_2c);
                   Raziel.Mode = 2;
                   ControlFlag = ControlFlag | 0x2000;
                   goto LAB_800aa23c;
@@ -1816,7 +1819,7 @@ LAB_800aa178:
                 if (puVar5 == &DAT_80000010) goto LAB_800a9e88;
               }
 LAB_800aa230:
-              DefaultStateHandler(In,CurrentSection,Data);
+              StateHandlerDragObject(In,CurrentSection,Data);
             }
           }
         }
@@ -1825,10 +1828,10 @@ LAB_800aa230:
         if (puVar5 == (undefined *)0x4010080) {
           if (CurrentSection == 0) {
             if (p_Var3->Data == 0) {
-              razSetPauseTranslation(In->CharacterInstance);
+              razResetPauseTranslation(In->CharacterInstance);
             }
             else {
-              razResetPauseTranslation(In->CharacterInstance);
+              razSetPauseTranslation(In->CharacterInstance);
             }
           }
         }
@@ -1842,10 +1845,10 @@ LAB_800aa0b8:
             if ((int)puVar5 < 0x20000005) {
               if (puVar5 == (undefined *)0x10000000) {
                 if (Raziel.Magnitude < 0x1000) {
-                  StateInitMove(In,CurrentSection,3);
+                  StateInitStartMove(In,CurrentSection,3);
                 }
                 else {
-                  StateInitMove(In,CurrentSection,0);
+                  StateInitStartMove(In,CurrentSection,0);
                 }
                 goto LAB_800aa23c;
               }
@@ -1863,7 +1866,7 @@ LAB_800aa0b8:
             if ((int)puVar5 < 0x100005) {
               if (puVar5 != &DAT_00100001) goto LAB_800aa230;
               pp_Var2[0x48] = (_Instance *)0xffffffff;
-              StateInitMove(In,CurrentSection,p_Var3->Data);
+              StateInitStartMove(In,CurrentSection,p_Var3->Data);
               Raziel.constrictFlag = 1;
               SteerSwitchMode(In->CharacterInstance,2);
               pp_Var2[0x47] = (_Instance *)0x0;
@@ -1878,7 +1881,7 @@ LAB_800aa0b8:
       }
     }
 LAB_800aa23c:
-    DeMessageQueue((__MessageQueue *)(&In->CharacterInstance + CurrentSection * 0x47 + 3));
+    PurgeMessageQueue((__MessageQueue *)(&In->CharacterInstance + CurrentSection * 0x47 + 3));
   } while( true );
 }
 
@@ -1902,7 +1905,7 @@ LAB_800aa23c:
 	/* end block 2 */
 	// End Line: 4242
 
-void StateHandlerStopMove(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerSwimDiveIn(__CharacterState *In,int CurrentSection,int Data)
 
 {
   __Event *p_Var1;
@@ -1950,7 +1953,7 @@ LAB_800aa43c:
           frames = 6;
 LAB_800aa504:
           anim = SetControlInitIdleData(0,0,frames);
-          StateSwitchStateData(In,CurrentSection,StateHandlerIdle,anim);
+          StateSwitchStateData(In,CurrentSection,StateHandlerPickupObject,anim);
         }
       }
     }
@@ -1958,18 +1961,18 @@ LAB_800aa504:
       if ((int)puVar2 < 0x100002) {
         if (puVar2 == &DAT_80000002) {
 LAB_800aa4e0:
-          EnMessageQueueData(&p_Var3->Defer,p_Var1->ID,0);
+          DeMessageQueue(&p_Var3->Defer,p_Var1->ID,0);
         }
         else {
           if ((int)puVar2 < -0x7ffffffd) {
             if (puVar2 == (undefined *)0x80000001) {
               if (CurrentSection == 0) {
                 Raziel.Mode = 0x10;
-                anim = razSwitchVAnimCharacterGroup(In->CharacterInstance,0,(int *)0x0,(int *)0x0);
+                anim = razSwitchVAnimCharacterSingle(In->CharacterInstance,0,(int *)0x0,(int *)0x0);
                 if (anim != 0) {
-                  G2EmulationSwitchAnimationCharacter(In,0x1a,0,0,1);
+                  G2EmulationSwitchAnimationSync(In,0x1a,0,0,1);
                 }
-                StateSwitchStateCharacterData(In,StateHandlerCompression,0);
+                StateSwitchStateCharacterDataDefault(In,StateHandlerCompression,0);
               }
               goto LAB_800aa590;
             }
@@ -1978,7 +1981,7 @@ LAB_800aa4e0:
             if (puVar2 == &DAT_80000010) goto LAB_800aa4e0;
           }
 LAB_800aa588:
-          DefaultStateHandler(In,CurrentSection,Data);
+          StateHandlerDragObject(In,CurrentSection,Data);
         }
       }
       else {
@@ -1990,23 +1993,23 @@ LAB_800aa588:
           if (puVar2 != (undefined *)0x4010080) goto LAB_800aa588;
           if (CurrentSection == 0) {
             if (p_Var1->Data == 0) {
-              razSetPauseTranslation(In->CharacterInstance);
+              razResetPauseTranslation(In->CharacterInstance);
               anim = SetControlInitIdleData(0,0,5);
-              StateSwitchStateCharacterData(In,StateHandlerIdle,anim);
+              StateSwitchStateCharacterDataDefault(In,StateHandlerPickupObject,anim);
             }
             else {
-              razResetPauseTranslation(In->CharacterInstance);
+              razSetPauseTranslation(In->CharacterInstance);
             }
           }
         }
         else {
           if (puVar2 != (undefined *)0x10000000) goto LAB_800aa588;
-          StateSwitchStateData(In,CurrentSection,StateHandlerStartMove,0);
+          StateSwitchStateData(In,CurrentSection,StateHandlerDecodeHold,0);
         }
       }
     }
 LAB_800aa590:
-    DeMessageQueue(&p_Var3->Event);
+    PurgeMessageQueue(&p_Var3->Event);
   } while( true );
 }
 
@@ -2057,14 +2060,14 @@ void StateHandlerCompression(__CharacterState *In,int CurrentSection,int Data)
           uVar9 = 0x80000000;
           p_Var2 = p_Var10;
 LAB_800aa93c:
-          EnMessageQueueData(&p_Var2->Defer,uVar9 | 1,0);
+          DeMessageQueue(&p_Var2->Defer,uVar9 | 1,0);
         }
         else {
           if (-0x80000000 < (int)puVar7) {
             if (puVar7 != &DAT_00100001) goto LAB_800aa950;
             if (CurrentSection == 0) {
               ControlFlag = 0x111;
-              SetExternalForce(&__Force_800d5e1c,0,0,0,1,0);
+              SetExternalTransitionForce(&__Force_800d5e1c,0,0,0,1,0);
               In->SectionList[0].Data1 = 0;
               PhysicsMode = 3;
               Raziel.movementMinRate = 0;
@@ -2083,9 +2086,9 @@ LAB_800aa93c:
               }
               Raziel.steeringLockRotation = (int)sVar1;
               p_Var8->yVel = lVar4;
-              _Var5 = G2Anim_IsControllerActive(&In->CharacterInstance->anim,1,0xe);
+              _Var5 = G2Anim_DetachControllerFromSeg(&In->CharacterInstance->anim,1,0xe);
               if (_Var5 == G2FALSE) {
-                G2Anim_EnableController(&In->CharacterInstance->anim,1,0xe);
+                G2Anim_DisableController(&In->CharacterInstance->anim,1,0xe);
               }
             }
           }
@@ -2095,33 +2098,33 @@ LAB_800aa93c:
         if (puVar7 == (undefined *)0x8000000) {
           if (Raziel.Mode == 8) {
             if (CurrentSection == 0) {
-              iVar6 = razSwitchVAnimCharacterGroup(In->CharacterInstance,4,(int *)0x0,(int *)0x0);
+              iVar6 = razSwitchVAnimCharacterSingle(In->CharacterInstance,4,(int *)0x0,(int *)0x0);
               if (iVar6 != 0) {
-                G2EmulationSwitchAnimationCharacter(In,0x1b,0,0,1);
+                G2EmulationSwitchAnimationSync(In,0x1b,0,0,1);
               }
-              SetPhysics(In->CharacterInstance,-0x10,0,0x53,0x9a);
+              SetPhysicsGravityData(In->CharacterInstance,-0x10,0,0x53,0x9a);
             }
           }
           else {
             if (Raziel.Mode == 0x20) {
               if (CurrentSection == 0) {
-                iVar6 = razSwitchVAnimCharacterGroup
+                iVar6 = razSwitchVAnimCharacterSingle
                                   (In->CharacterInstance,0x24,(int *)0x0,(int *)0x0);
                 if (iVar6 != 0) {
-                  G2EmulationSwitchAnimationCharacter(In,0x27,0,0,1);
+                  G2EmulationSwitchAnimationSync(In,0x27,0,0,1);
                 }
-                SetPhysics(In->CharacterInstance,-0x10,0,0x15,0xc3);
+                SetPhysicsGravityData(In->CharacterInstance,-0x10,0,0x15,0xc3);
                 In->CharacterInstance->yVel = 0;
               }
             }
             else {
               if (CurrentSection == 0) {
-                iVar6 = razSwitchVAnimCharacterGroup
+                iVar6 = razSwitchVAnimCharacterSingle
                                   (In->CharacterInstance,0x14,(int *)0x0,(int *)0x0);
                 if (iVar6 != 0) {
-                  G2EmulationSwitchAnimationCharacter(In,0x23,0,0,1);
+                  G2EmulationSwitchAnimationSync(In,0x23,0,0,1);
                 }
-                SetPhysics(In->CharacterInstance,-0x10,0,0x28,0x9a);
+                SetPhysicsGravityData(In->CharacterInstance,-0x10,0,0x28,0x9a);
                 In->CharacterInstance->yVel = 0;
                 if (In->SectionList[0].Data1 == 1) {
                   In->CharacterInstance->zVel = (In->CharacterInstance->zVel << 1) / 3;
@@ -2129,13 +2132,13 @@ LAB_800aa93c:
               }
             }
           }
-          StateSwitchStateData(In,CurrentSection,StateHandlerJump,0);
+          StateSwitchStateData(In,CurrentSection,StateHandlerDeCompression,0);
         }
         else {
           if ((int)puVar7 < 0x8000001) {
             if (puVar7 != (undefined *)0x4020000) {
 LAB_800aa950:
-              DefaultStateHandler(In,CurrentSection,Data);
+              StateHandlerDragObject(In,CurrentSection,Data);
             }
           }
           else {
@@ -2153,7 +2156,7 @@ LAB_800aa950:
       }
     }
 LAB_800aa958:
-    DeMessageQueue(&p_Var10->Event);
+    PurgeMessageQueue(&p_Var10->Event);
   } while( true );
 }
 
@@ -2177,7 +2180,7 @@ LAB_800aa958:
 	/* end block 2 */
 	// End Line: 4674
 
-void StateHandlerJump(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerDeCompression(__CharacterState *In,int CurrentSection,int Data)
 
 {
   __Event *p_Var1;
@@ -2205,13 +2208,13 @@ void StateHandlerJump(__CharacterState *In,int CurrentSection,int Data)
             In_00 = &p_Var4->Defer;
             if (1 < NewAnim) {
               if (Raziel.Senses.heldClass != 3) {
-                StateSwitchStateData(In,CurrentSection,StateHandlerGlide,0);
+                StateSwitchStateData(In,CurrentSection,StateHandlerIdle,0);
               }
               goto LAB_800aad8c;
             }
             uVar3 = 0x80000000;
 LAB_800aad60:
-            EnMessageQueueData(In_00,uVar3 | 1,0);
+            DeMessageQueue(In_00,uVar3 | 1,0);
           }
         }
         else {
@@ -2219,7 +2222,7 @@ LAB_800aad60:
             if ((int)puVar2 < 0x40006) {
               if (puVar2 != &DAT_80000020) {
 LAB_800aad84:
-                DefaultStateHandler(In,CurrentSection,Data);
+                StateHandlerDragObject(In,CurrentSection,Data);
               }
             }
             else {
@@ -2273,12 +2276,13 @@ LAB_800aac9c:
                 NewAnim = G2EmulationQueryFrame(In,0);
                 if (In->SectionList[0].Data1 < NewAnim) {
                   SetDropPhysics(In->CharacterInstance,&Raziel);
-                  NewAnim = razSwitchVAnimCharacterGroup
+                  NewAnim = razSwitchVAnimCharacterSingle
                                       (In->CharacterInstance,8,(int *)0x0,(int *)0x0);
                   if (NewAnim != 0) {
-                    G2EmulationSwitchAnimationCharacter(In,0x1c,0,7,1);
+                    G2EmulationSwitchAnimationSync(In,0x1c,0,7,1);
                   }
-                  StateSwitchStateCharacterData(In,StateHandlerFall,In->SectionList[0].Data2);
+                  StateSwitchStateCharacterDataDefault(In,StateHandlerGrab,In->SectionList[0].Data2)
+                  ;
                   goto LAB_800aad8c;
                 }
               }
@@ -2289,7 +2293,7 @@ LAB_800aac9c:
             if (puVar2 != (undefined *)0x8000000) goto LAB_800aad84;
             if (CurrentSection == 0) {
               if (Raziel.Mode == 0x10) {
-                NewAnim = razSwitchVAnimCharacterGroup
+                NewAnim = razSwitchVAnimCharacterSingle
                                     (In->CharacterInstance,0x18,(int *)0x0,(int *)0x0);
                 if (NewAnim != 0) {
                   NewAnim = 0x24;
@@ -2299,17 +2303,17 @@ LAB_800aac9c:
               }
               else {
                 if (Raziel.Mode == 0x20) {
-                  NewAnim = razSwitchVAnimCharacterGroup
+                  NewAnim = razSwitchVAnimCharacterSingle
                                       (In->CharacterInstance,0x28,(int *)0x0,(int *)0x0);
                   if (NewAnim != 0) {
                     NewAnim = 0x28;
                     Frames = 10;
 LAB_800aabf8:
-                    G2EmulationSwitchAnimationCharacter(In,NewAnim,0,Frames,1);
+                    G2EmulationSwitchAnimationSync(In,NewAnim,0,Frames,1);
                   }
                 }
                 else {
-                  NewAnim = razSwitchVAnimCharacterGroup
+                  NewAnim = razSwitchVAnimCharacterSingle
                                       (In->CharacterInstance,8,(int *)0x0,(int *)0x0);
                   if (NewAnim != 0) {
                     NewAnim = 0x1c;
@@ -2319,7 +2323,7 @@ LAB_800aabf8:
                 }
               }
             }
-            StateSwitchStateData(In,CurrentSection,StateHandlerFall,0);
+            StateSwitchStateData(In,CurrentSection,StateHandlerGrab,0);
             if ((*PadData & 0x80) == 0) {
               In->SectionList[CurrentSection].Data2 = 1;
             }
@@ -2328,7 +2332,7 @@ LAB_800aabf8:
       }
     }
 LAB_800aad8c:
-    DeMessageQueue(&p_Var4->Event);
+    PurgeMessageQueue(&p_Var4->Event);
   } while( true );
 }
 
@@ -2362,7 +2366,7 @@ LAB_800aad8c:
 	/* end block 2 */
 	// End Line: 4914
 
-void StateHandlerFall(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerGrab(__CharacterState *In,int CurrentSection,int Data)
 
 {
   short sVar1;
@@ -2378,9 +2382,9 @@ void StateHandlerFall(__CharacterState *In,int CurrentSection,int Data)
   Data_00 = 0;
   bVar2 = true;
   if (CurrentSection == 0) {
-    pLVar3 = STREAM_GetLevelWithID(In->CharacterInstance->currentStreamUnitID);
+    pLVar3 = STREAM_GetWaterZLevel(In->CharacterInstance->currentStreamUnitID);
     if ((pLVar3->unitFlags & 0x1000U) != 0) {
-      EnMessageQueueData(&In->SectionList[0].Event,0x100000,0);
+      DeMessageQueue(&In->SectionList[0].Event,0x100000,0);
     }
   }
   p_Var7 = In->SectionList + CurrentSection;
@@ -2396,7 +2400,7 @@ void StateHandlerFall(__CharacterState *In,int CurrentSection,int Data)
           if ((int)puVar5 < -0x7fffffdf) {
             if (puVar5 == (undefined *)0x80000001) {
               if ((Raziel.Senses.heldClass != 3) && ((ControlFlag & 0x2000000U) == 0)) {
-                StateSwitchStateData(In,CurrentSection,StateHandlerGlide,3);
+                StateSwitchStateData(In,CurrentSection,StateHandlerIdle,3);
               }
             }
             else {
@@ -2405,13 +2409,13 @@ void StateHandlerFall(__CharacterState *In,int CurrentSection,int Data)
           }
           else {
             if (puVar5 == (undefined *)0x100000) {
-              StateSwitchStateCharacterData(In,StateHandlerForcedGlide,0);
+              StateSwitchStateCharacterDataDefault(In,StateHandlerGlyphs,0);
             }
             else {
               if ((int)puVar5 < 0x100001) {
                 if (puVar5 != (undefined *)0x40005) {
 LAB_800ab1a8:
-                  DefaultStateHandler(In,CurrentSection,Data);
+                  StateHandlerDragObject(In,CurrentSection,Data);
                 }
               }
               else {
@@ -2426,7 +2430,7 @@ LAB_800ab1a8:
                   PhysicsMode = 0;
                 }
                 if ((p_Var4->Data != 0) && ((*PadData & 0x80) != 0)) {
-                  EnMessageQueueData(&p_Var7->Defer,-0x7fffffff,0);
+                  DeMessageQueue(&p_Var7->Defer,-0x7fffffff,0);
                 }
               }
             }
@@ -2438,7 +2442,7 @@ LAB_800ab1a8:
           iVar6 = p_Var4->Data;
           if (((*(short *)(iVar6 + 0xc) < 0) &&
               (instance = In->CharacterInstance, instance->zVel == 0)) && (-1 < instance->zAccl)) {
-            ResetPhysics(instance,-0x10);
+            PhysicsMove(instance,-0x10);
           }
           razEnterWater(In,CurrentSection,(evPhysicsSwimData *)p_Var4->Data);
           sVar1 = *(short *)(iVar6 + 0xe);
@@ -2456,7 +2460,7 @@ LAB_800ab1a8:
               else {
                 if (puVar5 != (undefined *)0x4010008) goto LAB_800ab1a8;
                 if (bVar2) {
-                  EnMessageQueueData(&p_Var7->Event,0x4010008,0);
+                  DeMessageQueue(&p_Var7->Event,0x4010008,0);
                   bVar2 = false;
                 }
                 else {
@@ -2464,7 +2468,7 @@ LAB_800ab1a8:
                 }
                 In->SectionList[CurrentSection].Data2 = 2;
                 PhysicsMode = 3;
-                ResetPhysics(In->CharacterInstance,-0x10);
+                PhysicsMove(In->CharacterInstance,-0x10);
               }
             }
           }
@@ -2487,7 +2491,7 @@ LAB_800ab1a8:
         }
       }
     }
-    DeMessageQueue(&p_Var7->Event);
+    PurgeMessageQueue(&p_Var7->Event);
   } while( true );
 }
 
@@ -2511,7 +2515,7 @@ LAB_800ab1a8:
 	/* end block 2 */
 	// End Line: 5327
 
-void StateHandlerSlide(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerPuppetShow(__CharacterState *In,int CurrentSection,int Data)
 
 {
   __Event *p_Var1;
@@ -2527,7 +2531,7 @@ void StateHandlerSlide(__CharacterState *In,int CurrentSection,int Data)
     if (puVar2 == (undefined *)0x100000) {
 LAB_800ab36c:
       Data_00 = SetControlInitIdleData(0,0,3);
-      StateSwitchStateData(In,CurrentSection,StateHandlerIdle,Data_00);
+      StateSwitchStateData(In,CurrentSection,StateHandlerPickupObject,Data_00);
     }
     else {
       if ((int)puVar2 < 0x100001) {
@@ -2535,7 +2539,7 @@ LAB_800ab36c:
           if ((int)puVar2 < -0x7ffffff7) {
             if (-0x7fffffff < (int)puVar2) {
 LAB_800ab3a0:
-              DefaultStateHandler(In,CurrentSection,Data);
+              StateHandlerDragObject(In,CurrentSection,Data);
             }
           }
           else {
@@ -2551,7 +2555,7 @@ LAB_800ab3a0:
               Raziel.Mode = 0x400000;
               ControlFlag = 0x509;
               PhysicsMode = 0;
-              ResetPhysics(In->CharacterInstance,-0x10);
+              PhysicsMove(In->CharacterInstance,-0x10);
               Raziel.soundHandle =
                    SOUND_Play3dSound(&In->CharacterInstance->position,0x1e,0,0x3c,0xdac);
             }
@@ -2570,7 +2574,7 @@ LAB_800ab3a0:
         }
       }
     }
-    DeMessageQueue(&In->SectionList[CurrentSection].Event);
+    PurgeMessageQueue(&In->SectionList[CurrentSection].Event);
   } while( true );
 }
 
@@ -2630,7 +2634,7 @@ LAB_800ab3a0:
 	/* end block 2 */
 	// End Line: 5470
 
-void StateHandlerBlock(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerBreakOff(__CharacterState *In,int CurrentSection,int Data)
 
 {
   int iVar1;
@@ -2652,7 +2656,7 @@ void StateHandlerBlock(__CharacterState *In,int CurrentSection,int Data)
     }
     puVar4 = (undefined *)p_Var2->ID;
     if (puVar4 == &DAT_00100004) {
-      COLLIDE_SegmentCollisionOn(In->CharacterInstance,1);
+      COLLIDE_SegmentCollisionOff(In->CharacterInstance,1);
       BlockCount = 0;
       FX_EndPassthruFX(In->CharacterInstance);
     }
@@ -2661,14 +2665,14 @@ void StateHandlerBlock(__CharacterState *In,int CurrentSection,int Data)
         if (puVar4 == (undefined *)0x0) {
           if ((CurrentSection == 0) && (iVar1 != 0x6c)) {
             Data_00 = SetControlInitIdleData(0,0,3);
-            StateSwitchStateCharacterData(In,StateHandlerIdle,Data_00);
+            StateSwitchStateCharacterDataDefault(In,StateHandlerPickupObject,Data_00);
           }
         }
         else {
           if ((int)puVar4 < 1) {
             if (puVar4 != (undefined *)0x80000000) {
 LAB_800ab7a8:
-              DefaultStateHandler(In,CurrentSection,Data);
+              StateHandlerDragObject(In,CurrentSection,Data);
             }
           }
           else {
@@ -2678,7 +2682,7 @@ LAB_800ab7a8:
               ControlFlag = (int)&DAT_00008009;
               PhysicsMode = 3;
               SteerSwitchMode(In->CharacterInstance,0);
-              G2EmulationSwitchAnimationCharacter(In,0x51,0,10,1);
+              G2EmulationSwitchAnimationSync(In,0x51,0,10,1);
             }
             In->SectionList[CurrentSection].Data1 = 0;
           }
@@ -2689,10 +2693,9 @@ LAB_800ab7a8:
           Data_00 = p_Var2->Data;
           if ((((*(u_int *)(Data_00 + 0x20) & 0x20000) != 0) && ((Raziel.Abilities & 1U) != 0)) &&
              (Raziel.CurrentPlane == 2)) {
-            PHYSICS_GenericLineCheckSetup(0,0,0,&SStack56);
-            PHYSICS_GenericLineCheckSetup(0,-0x140,0,&SStack48);
-            iVar3 = PHYSICS_CheckForObjectCollide(gameTrackerX.playerInstance,&SStack56,&SStack48,1)
-            ;
+            PHYSICS_GenericLineCheckMask(0,0,0,&SStack56);
+            PHYSICS_GenericLineCheckMask(0,-0x140,0,&SStack48);
+            iVar3 = PHYSICS_CheckForValidMove(gameTrackerX.playerInstance,&SStack56,&SStack48,1);
             if ((iVar3 == 0) &&
                ((&In->CharacterInstance + CurrentSection * 0x47)[0x47] == (_Instance *)0x0)) {
               FX_StartPassthruFX(In->CharacterInstance,*(_SVector **)(Data_00 + 0xc),
@@ -2710,20 +2713,20 @@ LAB_800ab7a8:
               if (CurrentSection == 0) {
                 if ((iVar1 == 0x52) || (iVar1 == 0x6c)) {
                   Data_00 = SetControlInitIdleData(0,0,3);
-                  StateSwitchStateCharacterData(In,StateHandlerIdle,Data_00);
+                  StateSwitchStateCharacterDataDefault(In,StateHandlerPickupObject,Data_00);
                   if (iVar1 == 0x6c) {
                     razSetPlayerEventHistory(0x10000);
                   }
                 }
                 else {
                   if (In->SectionList[0].Data1 == 0) {
-                    G2EmulationSwitchAnimationCharacter(In,0x52,0,3,1);
+                    G2EmulationSwitchAnimationSync(In,0x52,0,3,1);
                     Raziel.alarmTable = 0x640;
                     (In->CharacterInstance->anim).section[0].swAlarmTable = (short *)0x800d5c98;
                   }
                   else {
-                    G2EmulationSwitchAnimationCharacter(In,0x6c,0,5,1);
-                    COLLIDE_SegmentCollisionOff(In->CharacterInstance,1);
+                    G2EmulationSwitchAnimationSync(In,0x6c,0,5,1);
+                    COLLIDE_SegmentCollisionOn(In->CharacterInstance,1);
                     razGetRotFromNormal(&Raziel.Senses.ForwardNormal,(_Rotation *)&SStack56);
                     (In->CharacterInstance->rotation).z = SStack56.vz;
                   }
@@ -2735,16 +2738,17 @@ LAB_800ab7a8:
               if ((Raziel.Senses.EngagedMask & 1) != 0) {
                 razGetForwardNormal(In->CharacterInstance,(Raziel.Senses.EngagedList)->instance);
                 SetupReaction(In->CharacterInstance,(Raziel.Senses.EngagedList)->instance);
-                Data_00 = SetObjectData(-(int)Raziel.Senses.ForwardNormal.x,
-                                        -(int)Raziel.Senses.ForwardNormal.y,6,(_Instance *)0x0,0);
-                INSTANCE_Post((Raziel.Senses.EngagedList)->instance,0x800000,Data_00);
+                Data_00 = SetObjectBreakOffData
+                                    (-(int)Raziel.Senses.ForwardNormal.x,
+                                     -(int)Raziel.Senses.ForwardNormal.y,6,(_Instance *)0x0,0);
+                INSTANCE_Query((Raziel.Senses.EngagedList)->instance,0x800000,Data_00);
               }
             }
           }
         }
       }
     }
-    DeMessageQueue(&In->SectionList[CurrentSection].Event);
+    PurgeMessageQueue(&In->SectionList[CurrentSection].Event);
   } while( true );
 }
 
@@ -2807,23 +2811,23 @@ void StateHandlerDeCompression(__CharacterState *In,int CurrentSection,int Data)
           instance = In->CharacterInstance;
           if (instance->zVel < -0x100) goto LAB_800ab980;
           if (((Raziel.Mode & 0x10U) == 0) && (p_Var2->Data != 0)) {
-            NewAnim = razSwitchVAnimCharacterGroup(instance,0xc,(int *)0x0,(int *)0x0);
+            NewAnim = razSwitchVAnimCharacterSingle(instance,0xc,(int *)0x0,(int *)0x0);
             if (NewAnim != 0) {
-              G2EmulationSwitchAnimationCharacter(In,0x1d,0,0,1);
+              G2EmulationSwitchAnimationSync(In,0x1d,0,0,1);
             }
             goto LAB_800abb1c;
           }
-          NewAnim = razSwitchVAnimCharacterGroup(instance,0x1c,(int *)0x0,(int *)0x0);
+          NewAnim = razSwitchVAnimCharacterSingle(instance,0x1c,(int *)0x0,(int *)0x0);
           if (NewAnim == 0) goto LAB_800abb1c;
           NewAnim = 0x25;
         }
         else {
 LAB_800ab980:
-          NewAnim = razSwitchVAnimCharacterGroup(In->CharacterInstance,0x2c,(int *)0x0,(int *)0x0);
+          NewAnim = razSwitchVAnimCharacterSingle(In->CharacterInstance,0x2c,(int *)0x0,(int *)0x0);
           if (NewAnim == 0) goto LAB_800abb1c;
           NewAnim = 0x29;
         }
-        G2EmulationSwitchAnimationCharacter(In,NewAnim,0,1,1);
+        G2EmulationSwitchAnimationSync(In,NewAnim,0,1,1);
       }
       else {
         pp_Var4[0x47] = (_Instance *)In->SectionList[CurrentSection + -1].Data1;
@@ -2838,27 +2842,27 @@ LAB_800ab980:
           if ((*PadData & 0x100) == 0) {
             if ((*PadData & 0x8000000fU) == 0) {
               NewAnim = SetControlInitIdleData(0,0,4);
-              StateSwitchStateData(In,CurrentSection,StateHandlerIdle,NewAnim);
+              StateSwitchStateData(In,CurrentSection,StateHandlerPickupObject,NewAnim);
               Raziel.Mode = 1;
             }
             else {
               if (CurrentSection == 0) {
                 NewAnim = G2EmulationQueryAnimation(In,0);
                 if (NewAnim != 0x1d) {
-                  StateSwitchStateCharacterData(In,StateHandlerStartMove,5);
+                  StateSwitchStateCharacterDataDefault(In,StateHandlerDecodeHold,5);
                   pp_Var4[0x47] = (_Instance *)0x0;
                   goto LAB_800abb1c;
                 }
-                NewProcess = StateHandlerMove;
+                NewProcess = DefaultPuppetStateHandler;
                 goto LAB_800abab8;
               }
             }
           }
           else {
             if (CurrentSection == 0) {
-              NewProcess = StateHandlerCrouch;
+              NewProcess = StateHandlerSwimCoil;
 LAB_800abab8:
-              StateSwitchStateCharacterData(In,NewProcess,0);
+              StateSwitchStateCharacterDataDefault(In,NewProcess,0);
               pp_Var4[0x47] = (_Instance *)0x0;
               goto LAB_800abb1c;
             }
@@ -2868,11 +2872,11 @@ LAB_800abab8:
         else {
           if ((int)puVar3 < 0x8000001) {
             if (puVar3 == &DAT_00100004) {
-              SetPhysics(In->CharacterInstance,-0x10,0,0,0);
+              SetPhysicsGravityData(In->CharacterInstance,-0x10,0,0,0);
             }
             else {
 LAB_800abb14:
-              DefaultStateHandler(In,CurrentSection,Data);
+              StateHandlerDragObject(In,CurrentSection,Data);
             }
           }
           else {
@@ -2882,7 +2886,7 @@ LAB_800abb14:
       }
     }
 LAB_800abb1c:
-    DeMessageQueue(&In->SectionList[CurrentSection].Event);
+    PurgeMessageQueue(&In->SectionList[CurrentSection].Event);
   } while( true );
 }
 
@@ -2927,7 +2931,7 @@ LAB_800abb1c:
 	/* end block 2 */
 	// End Line: 5879
 
-void StateHandlerGlide(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerIdle(__CharacterState *In,int CurrentSection,int Data)
 
 {
   bool bVar1;
@@ -2961,7 +2965,7 @@ void StateHandlerGlide(__CharacterState *In,int CurrentSection,int Data)
           else {
             local_38 = 0;
           }
-          SetExternalTransitionForce(&ExternalForces,In->CharacterInstance,10,0,local_38,-0x18);
+          SetExternalForce(&ExternalForces,In->CharacterInstance,10,0,local_38,-0x18);
           In->SectionList[0].Data2 = 0;
         }
         else {
@@ -2982,9 +2986,9 @@ void StateHandlerGlide(__CharacterState *In,int CurrentSection,int Data)
           if ((int)puVar4 < -0x7fffffdf) {
             if (puVar4 == &DAT_80000004) {
               if (CurrentSection == 1) {
-                SetExternalTransitionForce(&ExternalForces,In->CharacterInstance,4,0,0x18,-0x18);
+                SetExternalForce(&ExternalForces,In->CharacterInstance,4,0,0x18,-0x18);
               }
-              G2EmulationSwitchAnimation(In,CurrentSection,0x11,0,5,1);
+              G2EmulatePlayAnimation(In,CurrentSection,0x11,0,5,1);
               pp_Var6[0x47] = (_Instance *)0x0;
               if (((u_int)pp_Var6[0x48] & 1) != 0) {
                 razSetPlayerEventHistory(0x4000);
@@ -2994,7 +2998,7 @@ void StateHandlerGlide(__CharacterState *In,int CurrentSection,int Data)
               if ((int)puVar4 < -0x7ffffffb) {
                 if (puVar4 != (undefined *)0x80000000) {
 LAB_800ac1c0:
-                  DefaultStateHandler(In,CurrentSection,Data);
+                  StateHandlerDragObject(In,CurrentSection,Data);
                 }
               }
               else {
@@ -3011,12 +3015,12 @@ LAB_800ac1c0:
                 SteerSwitchMode(In->CharacterInstance,8);
                 DeInitAlgorithmicWings(In->CharacterInstance);
                 if (In->CharacterInstance->zVel < 0) {
-                  SetPhysics(In->CharacterInstance,0,0,0x34,-0x18);
+                  SetPhysicsGravityData(In->CharacterInstance,0,0,0x34,-0x18);
                 }
               }
               pp_Var6[0x47] = (_Instance *)0x1;
               pp_Var6[0x48] = (_Instance *)0x0;
-              G2EmulationSwitchAnimation(In,CurrentSection,0x10,p_Var3->Data,5,1);
+              G2EmulatePlayAnimation(In,CurrentSection,0x10,p_Var3->Data,5,1);
             }
             else {
               if ((int)puVar4 < 0x100002) {
@@ -3035,7 +3039,7 @@ LAB_800ac1c0:
       else {
         if (puVar4 == (undefined *)0x8000000) {
           if (pp_Var6[0x47] != (_Instance *)0x0) {
-            G2EmulationSwitchAnimationAlpha(In,CurrentSection,0x12,0,5,1,4);
+            SetAnimationInstanceSwitchData(In,CurrentSection,0x12,0,5,1,4);
             pp_Var6[0x47] = (_Instance *)0x0;
           }
         }
@@ -3058,7 +3062,7 @@ LAB_800ac1b0:
                     z = *(short *)p_Var3->Data;
                     local_34 = 0xffc;
                   }
-                  SetExternalForce(&__Force_800d5e08,0,0,z,0,local_34);
+                  SetExternalTransitionForce(&__Force_800d5e08,0,0,z,0,local_34);
                   pp_Var6[0x48] = (_Instance *)((u_int)pp_Var6[0x48] | 3);
                   Raziel.playerEvent = Raziel.playerEvent | 0x4000;
                 }
@@ -3068,10 +3072,10 @@ LAB_800ac1b0:
                 z = *(short *)(p_Var3->Data + 0xe);
                 if (((z < 0) && (z != -0x7fff)) && (Raziel.CurrentPlane == 1)) {
                   if (CurrentSection == 0) {
-                    SetPhysics(In->CharacterInstance,-0x10,0,0,0);
+                    SetPhysicsGravityData(In->CharacterInstance,-0x10,0,0,0);
                   }
-                  G2EmulationSwitchAnimation(In,CurrentSection,0x13,0,4,1);
-                  NewProcess = StateHandlerFall;
+                  G2EmulatePlayAnimation(In,CurrentSection,0x13,0,4,1);
+                  NewProcess = StateHandlerGrab;
                   goto LAB_800ac1b0;
                 }
               }
@@ -3082,16 +3086,16 @@ LAB_800ac1b0:
               bVar1 = true;
               if (local_38 != 0x10) {
                 if (0 < Raziel.Bearing) {
-                  G2EmulationSwitchAnimation(In,CurrentSection,0x2b,0,6,1);
+                  G2EmulatePlayAnimation(In,CurrentSection,0x2b,0,6,1);
                   pp_Var6[0x47] = (_Instance *)0x2;
                 }
                 if (Raziel.Bearing < 0) {
-                  G2EmulationSwitchAnimation(In,CurrentSection,0x2c,0,6,1);
+                  G2EmulatePlayAnimation(In,CurrentSection,0x2c,0,6,1);
                   pp_Var6[0x47] = (_Instance *)0x2;
                 }
                 bVar1 = true;
                 if ((Raziel.Bearing == 0) && (pp_Var6[0x47] == (_Instance *)0x2)) {
-                  G2EmulationSwitchAnimation(In,CurrentSection,0x12,0,5,1);
+                  G2EmulatePlayAnimation(In,CurrentSection,0x12,0,5,1);
                   pp_Var6[0x47] = (_Instance *)0x0;
                   bVar1 = true;
                 }
@@ -3101,33 +3105,32 @@ LAB_800ac1b0:
               if ((int)puVar4 < 0x10000001) {
                 if (puVar4 != (undefined *)0x8000003) goto LAB_800ac1c0;
                 if (local_38 == 0x10) {
-                  SetPhysics(In->CharacterInstance,0,0,0x34,-0x18);
+                  SetPhysicsGravityData(In->CharacterInstance,0,0,0x34,-0x18);
                 }
               }
               else {
                 if (puVar4 == (undefined *)0x20000001) {
                   if (((iVar2 < 0xd) && (local_38 == 0x10)) || ((*PadData & 0x80) != 0)) {
-                    EnMessageQueueData(&p_Var7->Defer,0x20000001,0);
+                    DeMessageQueue(&p_Var7->Defer,0x20000001,0);
                   }
                   else {
                     if (CurrentSection == 0) {
-                      SetPhysics(In->CharacterInstance,-0x10,0,0,0);
-                      local_34 = razSwitchVAnimCharacterGroup
+                      SetPhysicsGravityData(In->CharacterInstance,-0x10,0,0,0);
+                      local_34 = razSwitchVAnimCharacterSingle
                                            (In->CharacterInstance,0x18,(int *)0x0,(int *)0x0);
                       if (local_34 != 0) {
-                        G2EmulationSwitchAnimationCharacter(In,0x24,0,4,1);
+                        G2EmulationSwitchAnimationSync(In,0x24,0,4,1);
                       }
                     }
-                    StateSwitchStateCharacterData(In,StateHandlerFall,0);
+                    StateSwitchStateCharacterDataDefault(In,StateHandlerGrab,0);
                   }
                 }
                 else {
                   if (puVar4 != (undefined *)0x20000004) goto LAB_800ac1c0;
                   if (CurrentSection == 0) {
-                    SetExternalTransitionForce(&ExternalForces,In->CharacterInstance,4,0,0x34,-0x18)
-                    ;
+                    SetExternalForce(&ExternalForces,In->CharacterInstance,4,0,0x34,-0x18);
                   }
-                  G2EmulationSwitchAnimation(In,CurrentSection,0x12,0,5,1);
+                  G2EmulatePlayAnimation(In,CurrentSection,0x12,0,5,1);
                   pp_Var6[0x47] = (_Instance *)0x0;
                 }
               }
@@ -3136,7 +3139,7 @@ LAB_800ac1b0:
         }
       }
     }
-    DeMessageQueue(&p_Var7->Event);
+    PurgeMessageQueue(&p_Var7->Event);
   } while( true );
 }
 
@@ -3172,7 +3175,7 @@ LAB_800ac1b0:
 
 /* WARNING: Type propagation algorithm not settling */
 
-void StateHandlerHang(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerForcedGlide(__CharacterState *In,int CurrentSection,int Data)
 
 {
   int iVar1;
@@ -3202,12 +3205,12 @@ void StateHandlerHang(__CharacterState *In,int CurrentSection,int Data)
         if (puVar3 == (undefined *)0x100000) {
           if ((*PadData & 0x8000000fU) == 0) {
             CurrentSection_00 = SetControlInitIdleData(0,0,3);
-            StateSwitchStateData(In,CurrentSection,StateHandlerIdle,CurrentSection_00);
+            StateSwitchStateData(In,CurrentSection,StateHandlerPickupObject,CurrentSection_00);
             Raziel.Mode = 1;
             pp_Var5[0x47] = (_Instance *)0x0;
           }
           else {
-            StateSwitchStateData(In,CurrentSection,StateHandlerStartMove,10);
+            StateSwitchStateData(In,CurrentSection,StateHandlerDecodeHold,10);
             pp_Var5[0x47] = (_Instance *)0x0;
           }
         }
@@ -3257,21 +3260,21 @@ void StateHandlerHang(__CharacterState *In,int CurrentSection,int Data)
                   Frames = Frames->next;
                   CurrentSection_00 = 0;
                 }
-                G2EmulationSwitchAnimation(In,CurrentSection,7,CurrentSection_00,(int)Frames,1);
+                G2EmulatePlayAnimation(In,CurrentSection,7,CurrentSection_00,(int)Frames,1);
                 pp_Var5[0x47] = (_Instance *)0x0;
               }
               else {
                 if (puVar3 != &DAT_00100014) goto LAB_800ac79c;
 LAB_800ac730:
                 if (CurrentSection == 1) {
-                  SetPhysics(In->CharacterInstance,-0x10,0,0,0);
+                  SetPhysicsGravityData(In->CharacterInstance,-0x10,0,0,0);
                   CurrentSection_00 =
-                       razSwitchVAnimCharacterGroup
+                       razSwitchVAnimCharacterSingle
                                  (In->CharacterInstance,0x18,(int *)0x0,(int *)0x0);
                   if (CurrentSection_00 != 0) {
-                    G2EmulationSwitchAnimationCharacter(In,0x24,0,4,1);
+                    G2EmulationSwitchAnimationSync(In,0x24,0,4,1);
                   }
-                  StateSwitchStateCharacterData(In,StateHandlerFall,0);
+                  StateSwitchStateCharacterDataDefault(In,StateHandlerGrab,0);
                 }
               }
             }
@@ -3286,7 +3289,7 @@ LAB_800ac730:
             if ((int)puVar3 < 0x4000012) {
               if (puVar3 != (undefined *)0x4000001) {
 LAB_800ac79c:
-                DefaultStateHandler(In,CurrentSection,Data);
+                StateHandlerDragObject(In,CurrentSection,Data);
               }
             }
             else {
@@ -3297,14 +3300,14 @@ LAB_800ac79c:
         else {
           if (puVar3 == (undefined *)0x8000001) {
             if (pp_Var5[0x47] == (_Instance *)0x1) {
-              EnMessageQueueData(In_00,0x100000,0);
+              DeMessageQueue(In_00,0x100000,0);
             }
           }
           else {
             if ((int)puVar3 < 0x8000002) {
               if (puVar3 != (undefined *)0x8000000) goto LAB_800ac79c;
               if (pp_Var5[0x47] == (_Instance *)0x1) {
-                EnMessageQueueData(In_00,0x100000,0);
+                DeMessageQueue(In_00,0x100000,0);
                 (In->CharacterInstance->rotation).x = 0;
                 (In->CharacterInstance->rotation).y = 0;
               }
@@ -3319,7 +3322,7 @@ LAB_800ac79c:
                   local_2c = 0;
                   CurrentSection_00 = CurrentSection;
                 }
-                G2EmulationSwitchAnimation(In,CurrentSection_00,NewAnim,0,3,local_2c);
+                G2EmulatePlayAnimation(In,CurrentSection_00,NewAnim,0,3,local_2c);
               }
               if (CurrentSection == 0) {
                 ControlFlag = ControlFlag & 0xfffffbff;
@@ -3341,8 +3344,8 @@ LAB_800ac79c:
                 }
                 if ((CurrentSection_00 == 0x10000001) || ((*PadData & 1U) != 0)) {
                   if (pp_Var5[0x47] == (_Instance *)0x0) {
-                    G2EmulationSwitchAnimation(In,CurrentSection,8,0,2,1);
-                    PurgeMessageQueue(&p_Var6->Event);
+                    G2EmulatePlayAnimation(In,CurrentSection,8,0,2,1);
+                    EnMessageQueueData(&p_Var6->Event);
                   }
                   pp_Var5[0x47] = (_Instance *)0x1;
                 }
@@ -3352,7 +3355,7 @@ LAB_800ac79c:
         }
       }
     }
-    DeMessageQueue(&p_Var6->Event);
+    PurgeMessageQueue(&p_Var6->Event);
   } while( true );
 }
 
@@ -3390,7 +3393,7 @@ LAB_800ac79c:
 	/* end block 3 */
 	// End Line: 6602
 
-void StateHandlerPushObject(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerLookAround(__CharacterState *In,int CurrentSection,int Data)
 
 {
   __Event *p_Var1;
@@ -3400,7 +3403,7 @@ void StateHandlerPushObject(__CharacterState *In,int CurrentSection,int Data)
   int local_24;
   
   if ((Raziel.Senses.EngagedMask & 3) == 0) {
-    EnMessageQueueData(&In->SectionList[CurrentSection].Defer,0x100000,0);
+    DeMessageQueue(&In->SectionList[CurrentSection].Defer,0x100000,0);
   }
   do {
     p_Var1 = PeekMessageQueue(&In->SectionList[CurrentSection].Event);
@@ -3424,13 +3427,13 @@ void StateHandlerPushObject(__CharacterState *In,int CurrentSection,int Data)
         if (puVar2 != &DAT_80000008) {
           if (puVar2 != (undefined *)0x100000) goto LAB_800acad8;
           CurrentSection_00 = SetControlInitIdleData(0,0,6);
-          StateSwitchStateData(In,CurrentSection,StateHandlerIdle,CurrentSection_00);
+          StateSwitchStateData(In,CurrentSection,StateHandlerPickupObject,CurrentSection_00);
         }
       }
       else {
         if ((int)puVar2 < 0x8000000) {
 LAB_800acad8:
-          DefaultStateHandler(In,CurrentSection,Data);
+          StateHandlerDragObject(In,CurrentSection,Data);
         }
         else {
           if ((int)puVar2 < 0x8000002) {
@@ -3446,7 +3449,7 @@ LAB_800acad8:
                   local_24 = 1;
                   CurrentSection_00 = CurrentSection;
                 }
-                G2EmulationSwitchAnimation(In,CurrentSection_00,NewAnim,0,3,local_24);
+                G2EmulatePlayAnimation(In,CurrentSection_00,NewAnim,0,3,local_24);
                 In->SectionList[CurrentSection].Data1 = 1;
                 if (CurrentSection == 0) {
                   Raziel.alarmTable = 400;
@@ -3455,28 +3458,29 @@ LAB_800acad8:
               }
               else {
                 CurrentSection_00 = SetControlInitIdleData(0,0,3);
-                StateSwitchStateData(In,CurrentSection,StateHandlerIdle,CurrentSection_00);
+                StateSwitchStateData(In,CurrentSection,StateHandlerPickupObject,CurrentSection_00);
                 ControlFlag = ControlFlag | 1;
               }
             }
             else {
-              StateSwitchStateData(In,CurrentSection,StateHandlerDragObject,0);
+              StateSwitchStateData(In,CurrentSection,StateHandlerInitSwim,0);
             }
           }
           else {
             if (puVar2 != (undefined *)0x8000004) goto LAB_800acad8;
             CurrentSection_00 =
-                 SetObjectData(-(int)Raziel.Senses.ForwardNormal.x,
-                               -(int)Raziel.Senses.ForwardNormal.y,6,(_Instance *)0x0,0);
-            INSTANCE_Post((Raziel.Senses.EngagedList)->instance,0x800000,CurrentSection_00);
+                 SetObjectBreakOffData
+                           (-(int)Raziel.Senses.ForwardNormal.x,-(int)Raziel.Senses.ForwardNormal.y,
+                            6,(_Instance *)0x0,0);
+            INSTANCE_Query((Raziel.Senses.EngagedList)->instance,0x800000,CurrentSection_00);
             if (*(int *)(CurrentSection_00 + 0xc) == 0) {
-              INSTANCE_Post(In->CharacterInstance,0x100000,0);
+              INSTANCE_Query(In->CharacterInstance,0x100000,0);
             }
           }
         }
       }
     }
-    DeMessageQueue(&In->SectionList[CurrentSection].Event);
+    PurgeMessageQueue(&In->SectionList[CurrentSection].Event);
   } while( true );
 }
 
@@ -3523,7 +3527,7 @@ LAB_800acad8:
 	/* end block 2 */
 	// End Line: 6760
 
-void StateHandlerBreakOff(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerStopMove(__CharacterState *In,int CurrentSection,int Data)
 
 {
   byte bVar1;
@@ -3557,7 +3561,7 @@ void StateHandlerBreakOff(__CharacterState *In,int CurrentSection,int Data)
             else {
               force = Raziel.Senses.EngagedList[4].instance;
             }
-            uVar5 = INSTANCE_Query(force,0x15);
+            uVar5 = INSTANCE_Post(force,0x15);
             if ((Raziel.Senses.EngagedMask & 0x10) == 0) {
               bVar1 = *(byte *)(uVar5 + 0x13);
             }
@@ -3565,8 +3569,7 @@ void StateHandlerBreakOff(__CharacterState *In,int CurrentSection,int Data)
               bVar1 = *(byte *)(uVar5 + 0x12);
             }
             pp_Var8[0x48] = force;
-            G2EmulationInstanceToInstanceSwitchAnimationCharacter
-                      (In->CharacterInstance,force,(u_int)bVar1,0,0,1);
+            G2EmulationInstancePlayAnimation(In->CharacterInstance,force,(u_int)bVar1,0,0,1);
             if (*(byte *)(uVar5 + 0x14) != 0xff) {
               Raziel.alarmTable = (ushort)*(byte *)(uVar5 + 0x14) * 100;
               (In->CharacterInstance->anim).section[0].swAlarmTable = (short *)0x800d5c98;
@@ -3580,7 +3583,7 @@ void StateHandlerBreakOff(__CharacterState *In,int CurrentSection,int Data)
               p_Var7 = In->CharacterInstance;
               local_34 = 0;
 LAB_800acd64:
-              razAlignYMoveRot(force,-distance,&p_Var7->position,&p_Var7->rotation,local_34);
+              razAlignYRotMove(force,-distance,&p_Var7->position,&p_Var7->rotation,local_34);
             }
             else {
               if (uVar2 < 2) {
@@ -3589,8 +3592,7 @@ LAB_800acd64:
                   local_38 = 3;
                   local_34 = 0;
 LAB_800acd40:
-                  razAlignYRotMoveInterp
-                            (In->CharacterInstance,force,distance,'\0',local_38,local_34);
+                  razAlignYMoveRot(In->CharacterInstance,force,distance,'\0',local_38,local_34);
                 }
               }
               else {
@@ -3613,16 +3615,16 @@ LAB_800acd40:
       else {
         if ((int)puVar6 < 0x8000000) {
 LAB_800ace70:
-          DefaultStateHandler(In,CurrentSection,Data);
+          StateHandlerDragObject(In,CurrentSection,Data);
         }
         else {
           if ((int)puVar6 < 0x8000002) {
             local_34 = SetControlInitIdleData(0,0,3);
-            StateSwitchStateData(In,CurrentSection,StateHandlerIdle,local_34);
+            StateSwitchStateData(In,CurrentSection,StateHandlerPickupObject,local_34);
           }
           else {
             if (puVar6 != (undefined *)0x8000004) goto LAB_800ace70;
-            uVar5 = INSTANCE_Query(pp_Var8[0x48],0x15);
+            uVar5 = INSTANCE_Post(pp_Var8[0x48],0x15);
             force = Raziel.soulReaver;
             if ((Raziel.Senses.EngagedMask & 0x10) == 0) {
               uVar2 = *(ushort *)(uVar5 + 0xe);
@@ -3636,18 +3638,18 @@ LAB_800ace70:
               force = In->CharacterInstance;
             }
             else {
-              razReaverImbue((u_int)uVar2);
+              razReaverBladeOff((u_int)uVar2);
             }
-            local_34 = SetObjectBreakOffData(force,0x31,0,0,0,0,(int)(short)uVar2);
-            INSTANCE_Post(pp_Var8[0x48],0x800023,local_34);
+            local_34 = SetObjectThrowData(force,0x31,0,0,0,0,(int)(short)uVar2);
+            INSTANCE_Query(pp_Var8[0x48],0x800023,local_34);
             if (uVar2 == 1) {
-              razReaverOff();
+              razReaverOn();
             }
           }
         }
       }
     }
-    DeMessageQueue(&In->SectionList[CurrentSection].Event);
+    PurgeMessageQueue(&In->SectionList[CurrentSection].Event);
   } while( true );
 }
 
@@ -3725,7 +3727,7 @@ LAB_800ace70:
 
 /* WARNING: Type propagation algorithm not settling */
 
-void StateHandlerPullSwitch(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerMove(__CharacterState *In,int CurrentSection,int Data)
 
 {
   byte bVar1;
@@ -3760,22 +3762,22 @@ void StateHandlerPullSwitch(__CharacterState *In,int CurrentSection,int Data)
     puVar10 = (undefined *)p_Var6->ID;
     if (puVar10 == (undefined *)0x100000) {
       Inst = Raziel.Senses.EngagedList[3].instance;
-      uVar7 = INSTANCE_Query(Inst,4);
-      Data_00 = INSTANCE_Query(Raziel.Senses.EngagedList[3].instance,0x17);
-      uVar8 = INSTANCE_Query(Inst,5);
+      uVar7 = INSTANCE_Post(Inst,4);
+      Data_00 = INSTANCE_Post(Raziel.Senses.EngagedList[3].instance,0x17);
+      uVar8 = INSTANCE_Post(Inst,5);
       if (uVar7 == 6) {
         bVar3 = true;
         if (((*PadData & 0x20) == 0) || (p_Var6->Data != 0)) {
           Data_01 = SetControlInitIdleData(0,0,3);
-          StateSwitchStateData(In,CurrentSection,StateHandlerIdle,Data_01);
+          StateSwitchStateData(In,CurrentSection,StateHandlerPickupObject,Data_01);
           ControlFlag = ControlFlag | 1;
           if (CurrentSection == 0) {
-            INSTANCE_Post(Raziel.Senses.EngagedList[3].instance,0x800020,0);
+            INSTANCE_Query(Raziel.Senses.EngagedList[3].instance,0x800020,0);
           }
         }
         else {
 LAB_800ad3ec:
-          EnMessageQueueData(&p_Var12->Defer,0x100000,0);
+          DeMessageQueue(&p_Var12->Defer,0x100000,0);
         }
       }
       else {
@@ -3786,15 +3788,15 @@ LAB_800ad3ec:
           else {
             bVar1 = *(byte *)(Data_00 + 0x11);
           }
-          SetTimer((u_int)bVar1 + 6);
-          G2EmulationSwitchAnimation(In,CurrentSection,0x7b,0,6,2);
+          CAMERA_SetShake((u_int)bVar1 + 6);
+          G2EmulatePlayAnimation(In,CurrentSection,0x7b,0,6,2);
           if (CurrentSection == 0) {
-            INSTANCE_Post(Raziel.Senses.EngagedList[3].instance,0x80002d,0x14);
+            INSTANCE_Query(Raziel.Senses.EngagedList[3].instance,0x80002d,0x14);
           }
         }
         else {
           Data_01 = SetControlInitIdleData(0,0,3);
-          StateSwitchStateData(In,CurrentSection,StateHandlerIdle,Data_01);
+          StateSwitchStateData(In,CurrentSection,StateHandlerPickupObject,Data_01);
           ControlFlag = ControlFlag | 1;
         }
       }
@@ -3805,7 +3807,7 @@ LAB_800ad3ec:
           if ((int)puVar10 < -0x7ffffff7) {
             if (puVar10 != (undefined *)0x80000000) {
 LAB_800ad468:
-              DefaultStateHandler(In,CurrentSection,Data);
+              StateHandlerDragObject(In,CurrentSection,Data);
             }
           }
           else {
@@ -3817,15 +3819,15 @@ LAB_800ad468:
         if (puVar10 == (undefined *)0x1000000) {
           Inst = (_Instance *)p_Var6->Data;
           if (bVar3) {
-            EnMessageQueueData(&p_Var12->Event,0x100000,1);
+            DeMessageQueue(&p_Var12->Event,0x100000,1);
           }
           if (!bVar4) {
             bVar4 = true;
-            Data_01 = SetMonsterHitData(*(_Instance **)&Inst->node,
-                                        *(_Instance **)((int)&Inst->node + 4),(int)Inst->prev,
-                                        (int)*(short *)&Inst->next,
-                                        (int)*(short *)((int)&Inst->next + 2));
-            EnMessageQueueData(&p_Var12->Defer,0x1000000,Data_01);
+            Data_01 = SetMonsterImpaleData
+                                (*(_Instance **)&Inst->node,*(_Instance **)((int)&Inst->node + 4),
+                                 (int)Inst->prev,(int)*(short *)&Inst->next,
+                                 (int)*(short *)((int)&Inst->next + 2));
+            DeMessageQueue(&p_Var12->Defer,0x1000000,Data_01);
           }
         }
         else {
@@ -3839,10 +3841,10 @@ LAB_800ad468:
                 if ((Raziel.Senses.EngagedMask & 8) != 0) {
                   sVar11 = 0;
                   Inst = Raziel.Senses.EngagedList[3].instance;
-                  uVar7 = INSTANCE_Query(Inst,0x17);
-                  Data_00 = INSTANCE_Query(Inst,5);
-                  uVar8 = INSTANCE_Query(Inst,0x1c);
-                  uVar9 = INSTANCE_Query(Inst,4);
+                  uVar7 = INSTANCE_Post(Inst,0x17);
+                  Data_00 = INSTANCE_Post(Inst,5);
+                  uVar8 = INSTANCE_Post(Inst,0x1c);
+                  uVar9 = INSTANCE_Post(Inst,4);
                   if (uVar9 == 9) {
                     uVar5 = MON_FacingOffset(In->CharacterInstance,Inst);
                     uVar5 = uVar5 & 0xfff;
@@ -3857,7 +3859,7 @@ LAB_800ad468:
                       Data_00 = Data_00 | 1;
                       sVar11 = 0x800;
                     }
-                    INSTANCE_Post(Inst,0x80002a,Data_00);
+                    INSTANCE_Query(Inst,0x80002a,Data_00);
                   }
                   if ((Data_00 & 1) == 0) {
                     if ((Data_00 & 2) == 0) {
@@ -3870,7 +3872,7 @@ LAB_800ad468:
                     if (*(char *)(uVar7 + 0x14) == -1) goto LAB_800ad148;
                     NewAnim = (u_int)*(byte *)(uVar7 + 0x14);
 LAB_800ad158:
-                    G2EmulationInstanceToInstanceSwitchAnimationCharacter
+                    G2EmulationInstancePlayAnimation
                               (In->CharacterInstance,Raziel.Senses.EngagedList[3].instance,NewAnim,0
                                ,0,1);
                   }
@@ -3891,11 +3893,11 @@ LAB_800ad148:
                     bVar2 = false;
                   }
                   if (bVar2) {
-                    razAlignYMoveRot(Raziel.Senses.EngagedList[3].instance,*(short *)(uVar8 + 8),
+                    razAlignYRotMove(Raziel.Senses.EngagedList[3].instance,*(short *)(uVar8 + 8),
                                      &In->CharacterInstance->position,
                                      &In->CharacterInstance->rotation,(int)sVar11);
-                    INSTANCE_Post(Raziel.Senses.EngagedList[3].instance,0x800020,0);
-                    uVar7 = INSTANCE_Query(Inst,4);
+                    INSTANCE_Query(Raziel.Senses.EngagedList[3].instance,0x800020,0);
+                    uVar7 = INSTANCE_Post(Inst,4);
                     if (uVar7 == 9) {
                       razSetPlayerEventHistory(8);
                     }
@@ -3904,7 +3906,7 @@ LAB_800ad148:
                     }
                   }
                   else {
-                    INSTANCE_Post(In->CharacterInstance,0x100000,Data_00);
+                    INSTANCE_Query(In->CharacterInstance,0x100000,Data_00);
                   }
                 }
               }
@@ -3912,20 +3914,20 @@ LAB_800ad148:
             else {
               if (puVar10 != &DAT_00100015) goto LAB_800ad468;
               Data_01 = SetControlInitIdleData(0,0,3);
-              StateSwitchStateData(In,CurrentSection,StateHandlerIdle,Data_01);
+              StateSwitchStateData(In,CurrentSection,StateHandlerPickupObject,Data_01);
             }
           }
           else {
             if (puVar10 != (undefined *)0x1000001) {
               if (puVar10 != (undefined *)0x8000000) goto LAB_800ad468;
               if (CurrentSection != 2) goto LAB_800ad3ec;
-              G2EmulationSwitchAnimation(In,2,0,0,3,2);
+              G2EmulatePlayAnimation(In,2,0,0,3,2);
             }
           }
         }
       }
     }
-    DeMessageQueue(&p_Var12->Event);
+    PurgeMessageQueue(&p_Var12->Event);
   } while( true );
 }
 
@@ -3986,7 +3988,7 @@ LAB_800ad148:
 
 /* WARNING: Type propagation algorithm not settling */
 
-void StateHandlerDragObject(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerInitSwim(__CharacterState *In,int CurrentSection,int Data)
 
 {
   bool bVar1;
@@ -4005,7 +4007,7 @@ void StateHandlerDragObject(__CharacterState *In,int CurrentSection,int Data)
   bVar1 = false;
   if ((Raziel.Senses.EngagedMask & 2) == 0) {
     Inst = (_Instance *)0x0;
-    EnMessageQueueData(&In->SectionList[CurrentSection].Defer,0x100000,0);
+    DeMessageQueue(&In->SectionList[CurrentSection].Defer,0x100000,0);
   }
   else {
     Inst = Raziel.Senses.EngagedList[1].instance;
@@ -4024,7 +4026,7 @@ void StateHandlerDragObject(__CharacterState *In,int CurrentSection,int Data)
     if (puVar5 == (undefined *)0x100000) {
 LAB_800adb04:
       Data_00 = SetControlInitIdleData(0,0,3);
-      StateSwitchStateData(In,CurrentSection,StateHandlerIdle,Data_00);
+      StateSwitchStateData(In,CurrentSection,StateHandlerPickupObject,Data_00);
     }
     else {
       if ((int)puVar5 < 0x100001) {
@@ -4032,7 +4034,7 @@ LAB_800adb04:
           if ((int)puVar5 < -0x7ffffff7) {
             if (-0x7fffffff < (int)puVar5) {
 LAB_800adba4:
-              DefaultStateHandler(In,CurrentSection,Data);
+              StateHandlerDragObject(In,CurrentSection,Data);
             }
           }
           else {
@@ -4044,11 +4046,11 @@ LAB_800adba4:
         if (puVar5 == (undefined *)0x8000000) {
           if (Data_00 == 0x17) {
             local_34 = SetControlInitIdleData(0,0,3);
-            StateSwitchStateData(In,CurrentSection,StateHandlerIdle,local_34);
+            StateSwitchStateData(In,CurrentSection,StateHandlerPickupObject,local_34);
           }
           if (Inst == (_Instance *)0x0) goto LAB_800adb04;
           if (CurrentSection == 0) {
-            INSTANCE_Post(Inst,0x800004,0);
+            INSTANCE_Query(Inst,0x800004,0);
             ControlFlag = ControlFlag | 8;
             if (((Data_00 != 0) && (Data_00 != 0x16)) && (Data_00 != 0x14)) {
               razCenterWithBlock(In->CharacterInstance,Inst,-0x8d);
@@ -4066,10 +4068,10 @@ LAB_800adba4:
             local_34 = 2;
             Data_00 = CurrentSection;
           }
-          G2EmulationSwitchAnimation(In,Data_00,NewAnim,0,local_38,local_34);
+          G2EmulatePlayAnimation(In,Data_00,NewAnim,0,local_38,local_34);
 LAB_800adad0:
           if ((*PadData & 0x20) == 0) {
-            EnMessageQueueData(&p_Var6->Event,0x100000,0);
+            DeMessageQueue(&p_Var6->Event,0x100000,0);
           }
         }
         else {
@@ -4081,23 +4083,24 @@ LAB_800adad0:
                 PhysicsMode = 3;
                 SteerSwitchMode(In->CharacterInstance,0);
               }
-              G2EmulationSwitchAnimation(In,CurrentSection,0x14,0,3,1);
+              G2EmulatePlayAnimation(In,CurrentSection,0x14,0,3,1);
             }
             else {
               if (puVar5 != (undefined *)0x1000000) goto LAB_800adba4;
               if (CurrentSection == 0) {
                 if (Data_00 == 0x16) {
-                  StateSwitchStateCharacterData(In,StateHandlerHitReaction,p_Var2->Data);
+                  StateSwitchStateCharacterDataDefault(In,StateHandlerHitReaction,p_Var2->Data);
                 }
                 else {
                   if (!bVar1) {
                     p_Var4 = (_Instance *)p_Var2->Data;
                     bVar1 = true;
-                    Data_00 = SetMonsterHitData(*(_Instance **)&p_Var4->node,
-                                                *(_Instance **)((int)&p_Var4->node + 4),
-                                                (int)p_Var4->prev,(int)*(short *)&p_Var4->next,
-                                                (int)*(short *)((int)&p_Var4->next + 2));
-                    EnMessageQueueData(&In->SectionList[0].Defer,0x1000000,Data_00);
+                    Data_00 = SetMonsterImpaleData
+                                        (*(_Instance **)&p_Var4->node,
+                                         *(_Instance **)((int)&p_Var4->node + 4),(int)p_Var4->prev,
+                                         (int)*(short *)&p_Var4->next,
+                                         (int)*(short *)((int)&p_Var4->next + 2));
+                    DeMessageQueue(&In->SectionList[0].Defer,0x1000000,Data_00);
                   }
                 }
               }
@@ -4114,14 +4117,14 @@ LAB_800adad0:
                                       (In->CharacterInstance,-(int)Raziel.Senses.ForwardNormal.y,
                                        (int)Raziel.Senses.ForwardNormal.x,apeStack48);
                     if ((uVar3 & 0x4002) == 0x4000) {
-                      Data_00 = SetObjectData(-(int)Raziel.Senses.ForwardNormal.y,
-                                              (int)Raziel.Senses.ForwardNormal.x,2,(_Instance *)0x0,
-                                              0);
-                      INSTANCE_Post(Inst,0x800000,Data_00);
+                      Data_00 = SetObjectBreakOffData
+                                          (-(int)Raziel.Senses.ForwardNormal.y,
+                                           (int)Raziel.Senses.ForwardNormal.x,2,(_Instance *)0x0,0);
+                      INSTANCE_Query(Inst,0x800000,Data_00);
                       if ((*(u_int *)(Data_00 + 0xc) & 4) != 0) {
                         Data_00 = 0x1e;
 LAB_800ad9b8:
-                        G2EmulationSwitchAnimationCharacter(In,Data_00,0,0,1);
+                        G2EmulationSwitchAnimationSync(In,Data_00,0,0,1);
                         ControlFlag = ControlFlag & 0xfffffff7;
                       }
                     }
@@ -4130,25 +4133,27 @@ LAB_800ad9b8:
                     if (Data_00 < 0x10000003) {
                       if (Data_00 == 0x10000001) {
                         gameTrackerX.raziel_collide_override = '\0';
-                        Data_00 = SetObjectData(-(int)Raziel.Senses.ForwardNormal.x,
-                                                -(int)Raziel.Senses.ForwardNormal.y,5,
-                                                (_Instance *)0x0,0);
-                        INSTANCE_Post(Inst,0x800000,Data_00);
+                        Data_00 = SetObjectBreakOffData
+                                            (-(int)Raziel.Senses.ForwardNormal.x,
+                                             -(int)Raziel.Senses.ForwardNormal.y,5,(_Instance *)0x0,
+                                             0);
+                        INSTANCE_Query(Inst,0x800000,Data_00);
                         if ((*(u_int *)(Data_00 + 0xc) & 4) == 0) {
                           if ((*(u_int *)(Data_00 + 0xc) & 2) != 0) {
-                            G2EmulationSwitchAnimationCharacter(In,0x17,0,3,1);
-                            Data_00 = SetObjectData(-(int)Raziel.Senses.ForwardNormal.x,
-                                                    -(int)Raziel.Senses.ForwardNormal.y,6,
-                                                    (_Instance *)0x0,0);
-                            INSTANCE_Post(Inst,0x800000,Data_00);
+                            G2EmulationSwitchAnimationSync(In,0x17,0,3,1);
+                            Data_00 = SetObjectBreakOffData
+                                                (-(int)Raziel.Senses.ForwardNormal.x,
+                                                 -(int)Raziel.Senses.ForwardNormal.y,6,
+                                                 (_Instance *)0x0,0);
+                            INSTANCE_Query(Inst,0x800000,Data_00);
                           }
                         }
                         else {
-                          G2EmulationSwitchAnimation(In,2,0,0,3,2);
-                          G2EmulationSwitchAnimation(In,0,0x2e,0,0,1);
+                          G2EmulatePlayAnimation(In,2,0,0,3,2);
+                          G2EmulatePlayAnimation(In,0,0x2e,0,0,1);
                           Data_00 = 0x2e;
 LAB_800ad8c8:
-                          G2EmulationSwitchAnimation(In,1,Data_00,0,0,1);
+                          G2EmulatePlayAnimation(In,1,Data_00,0,0,1);
                         }
                       }
                     }
@@ -4158,13 +4163,14 @@ LAB_800ad8c8:
                                           (In->CharacterInstance,(int)Raziel.Senses.ForwardNormal.x,
                                            (int)Raziel.Senses.ForwardNormal.y,apeStack48);
                         if ((uVar3 & 0x4002) == 0x4000) {
-                          Data_00 = SetObjectData((int)Raziel.Senses.ForwardNormal.x,
-                                                  (int)Raziel.Senses.ForwardNormal.y,4,
-                                                  (_Instance *)0x0,0);
-                          INSTANCE_Post(Inst,0x800000,Data_00);
+                          Data_00 = SetObjectBreakOffData
+                                              ((int)Raziel.Senses.ForwardNormal.x,
+                                               (int)Raziel.Senses.ForwardNormal.y,4,(_Instance *)0x0
+                                               ,0);
+                          INSTANCE_Query(Inst,0x800000,Data_00);
                           if ((*(u_int *)(Data_00 + 0xc) & 4) != 0) {
-                            G2EmulationSwitchAnimation(In,2,0,0,3,2);
-                            G2EmulationSwitchAnimation(In,0,0x1f,0,0,1);
+                            G2EmulatePlayAnimation(In,2,0,0,3,2);
+                            G2EmulatePlayAnimation(In,0,0x1f,0,0,1);
                             Data_00 = 0x1f;
                             goto LAB_800ad8c8;
                           }
@@ -4177,10 +4183,11 @@ LAB_800ad8c8:
                                                (int)Raziel.Senses.ForwardNormal.y,
                                                -(int)Raziel.Senses.ForwardNormal.x,apeStack48),
                            (uVar3 & 0x4002) == 0x4000)) {
-                          Data_00 = SetObjectData((int)Raziel.Senses.ForwardNormal.y,
-                                                  -(int)Raziel.Senses.ForwardNormal.x,3,
-                                                  (_Instance *)0x0,0);
-                          INSTANCE_Post(Inst,0x800000,Data_00);
+                          Data_00 = SetObjectBreakOffData
+                                              ((int)Raziel.Senses.ForwardNormal.y,
+                                               -(int)Raziel.Senses.ForwardNormal.x,3,
+                                               (_Instance *)0x0,0);
+                          INSTANCE_Query(Inst,0x800000,Data_00);
                           if ((*(u_int *)(Data_00 + 0xc) & 4) != 0) {
                             Data_00 = 0x2d;
                             goto LAB_800ad9b8;
@@ -4206,7 +4213,7 @@ LAB_800ad8c8:
         }
       }
     }
-    DeMessageQueue(&p_Var6->Event);
+    PurgeMessageQueue(&p_Var6->Event);
   } while( true );
 }
 
@@ -4239,7 +4246,7 @@ LAB_800ad8c8:
 	/* end block 2 */
 	// End Line: 7755
 
-void StateHandlerPickupObject(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerPullSwitch(__CharacterState *In,int CurrentSection,int Data)
 
 {
   __Event *p_Var1;
@@ -4268,24 +4275,25 @@ void StateHandlerPickupObject(__CharacterState *In,int CurrentSection,int Data)
       if ((int)puVar2 < 0x100002) {
         if (puVar2 != (undefined *)0x80000000) {
 LAB_800add98:
-          DefaultStateHandler(In,CurrentSection,Data);
+          StateHandlerDragObject(In,CurrentSection,Data);
         }
       }
       else {
         if (puVar2 == &DAT_00100004) {
           if (CurrentSection == 1) {
             ControlFlag = ControlFlag & 0xffffefff;
-            FX_StopAllGlowEffects(In->CharacterInstance,0);
+            FX_UpdateGlowEffect(In->CharacterInstance,0);
           }
         }
         else {
           if (puVar2 != (undefined *)0x8000000) goto LAB_800add98;
           if (CurrentSection == 1) {
-            FX_StopAllGlowEffects(In->CharacterInstance,0);
+            FX_UpdateGlowEffect(In->CharacterInstance,0);
           }
-          if ((Raziel.returnState == StateHandlerIdle) || (Raziel.returnState == (_func_60 *)0x0)) {
+          if ((Raziel.returnState == StateHandlerPickupObject) ||
+             (Raziel.returnState == (_func_60 *)0x0)) {
             Data_00 = SetControlInitIdleData(0,0,3);
-            NewProcess = StateHandlerIdle;
+            NewProcess = StateHandlerPickupObject;
           }
           else {
             Data_00 = 0;
@@ -4298,7 +4306,7 @@ LAB_800add98:
         }
       }
     }
-    DeMessageQueue(&In->SectionList[CurrentSection].Event);
+    PurgeMessageQueue(&In->SectionList[CurrentSection].Event);
   } while( true );
 }
 
@@ -4324,7 +4332,7 @@ LAB_800add98:
 	/* end block 2 */
 	// End Line: 7872
 
-void StateHandlerAutoFace(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerPushObject(__CharacterState *In,int CurrentSection,int Data)
 
 {
   int iVar1;
@@ -4347,7 +4355,7 @@ void StateHandlerAutoFace(__CharacterState *In,int CurrentSection,int Data)
     p_Var2 = PeekMessageQueue(&In->SectionList[CurrentSection].Event);
     if (p_Var2 == (__Event *)0x0) {
       if ((Raziel.nothingCounter == 6) || ((Raziel.Senses.EngagedMask & 0x40) == 0)) {
-        EnMessageQueueData(&In->SectionList[CurrentSection].Event,0x100000,0);
+        DeMessageQueue(&In->SectionList[CurrentSection].Event,0x100000,0);
       }
       return;
     }
@@ -4355,7 +4363,7 @@ void StateHandlerAutoFace(__CharacterState *In,int CurrentSection,int Data)
     if (puVar3 == &DAT_00100004) {
       if (CurrentSection == 0) {
 LAB_800ae058:
-        razResetPauseTranslation(In->CharacterInstance);
+        razSetPauseTranslation(In->CharacterInstance);
       }
     }
     else {
@@ -4363,8 +4371,8 @@ LAB_800ae058:
       if ((int)puVar3 < 0x100005) {
         if (puVar3 == &DAT_80000002) {
           if (Raziel.Senses.heldClass != 3) {
-            Raziel.returnState = StateHandlerIdle;
-            NewProcess = StateHandlerSoulSuck;
+            Raziel.returnState = StateHandlerPickupObject;
+            NewProcess = StateHandlerAttack2;
             goto LAB_800ae420;
           }
         }
@@ -4372,7 +4380,7 @@ LAB_800ae058:
           if ((int)puVar3 < -0x7ffffffd) {
             if (puVar3 == (undefined *)0x80000000) {
               if (CurrentSection == 0) {
-                StateSwitchStateCharacterData(In,StateHandlerAttack2,0);
+                StateSwitchStateCharacterDataDefault(In,StateHandlerHang,0);
               }
             }
             else {
@@ -4383,7 +4391,7 @@ LAB_800ae058:
             if (puVar3 == (undefined *)0x100000) {
 LAB_800ae38c:
               local_30 = SetControlInitIdleData(0,0,3);
-              StateSwitchStateData(In,CurrentSection,StateHandlerIdle,local_30);
+              StateSwitchStateData(In,CurrentSection,StateHandlerPickupObject,local_30);
             }
             else {
               if ((int)puVar3 < 0x100001) {
@@ -4398,7 +4406,7 @@ LAB_800ae38c:
                 }
                 else {
 LAB_800ae450:
-                  DefaultStateHandler(In,CurrentSection,Data);
+                  StateHandlerDragObject(In,CurrentSection,Data);
                 }
               }
               else {
@@ -4418,7 +4426,7 @@ LAB_800ae450:
                 pp_Var6[0x47] = (_Instance *)0x0;
                 local_30 = razSwitchVAnimGroup(In->CharacterInstance,CurrentSection,0x54,-1,-1);
                 if (local_30 != 0) {
-                  G2EmulationSwitchAnimation(In,CurrentSection,0x37,0,6,2);
+                  G2EmulatePlayAnimation(In,CurrentSection,0x37,0,6,2);
                 }
                 razSetPlayerEventHistory(0x20);
               }
@@ -4440,7 +4448,7 @@ LAB_800ae450:
           if (puVar3 == (undefined *)0x2000000) {
             NewAnim = razPickupAndGrab(In,CurrentSection);
             if (NewAnim != 0) {
-              NewProcess = StateHandlerAttack2;
+              NewProcess = StateHandlerHang;
 LAB_800ae420:
               StateSwitchStateData(In,local_30,NewProcess,0);
             }
@@ -4472,9 +4480,9 @@ LAB_800ae420:
                       goto LAB_800ae37c;
                     }
                     if (((PadData[1] & 0x80) != 0) &&
-                       (StateSwitchStateData(In,CurrentSection,StateHandlerAttack2,5),
+                       (StateSwitchStateData(In,CurrentSection,StateHandlerHang,5),
                        CurrentSection == 2)) {
-                      StateSwitchStateData(In,1,StateHandlerAttack2,5);
+                      StateSwitchStateData(In,1,StateHandlerHang,5);
                     }
                   }
                 }
@@ -4485,13 +4493,13 @@ LAB_800ae420:
                         SteerSwitchMode(In->CharacterInstance,0xe);
                         local_30 = 0x5b;
 LAB_800ae294:
-                        G2EmulationSwitchAnimation(In,CurrentSection,local_30,0,0,1);
+                        G2EmulatePlayAnimation(In,CurrentSection,local_30,0,0,1);
                       }
                     }
                     else {
                       NewAnim = 0xd;
 LAB_800ae37c:
-                      G2EmulationSwitchAnimation(In,CurrentSection,NewAnim,0,local_30,2);
+                      G2EmulatePlayAnimation(In,CurrentSection,NewAnim,0,local_30,2);
                     }
                   }
                   else {
@@ -4514,7 +4522,7 @@ LAB_800ae37c:
               if (puVar3 != (undefined *)0x4010080) goto LAB_800ae450;
               if (CurrentSection == 0) {
                 if (p_Var2->Data != 0) goto LAB_800ae058;
-                razSetPauseTranslation(In->CharacterInstance);
+                razResetPauseTranslation(In->CharacterInstance);
               }
             }
           }
@@ -4524,10 +4532,10 @@ LAB_800ae37c:
             if ((ControlFlag & 2U) == 0) {
               if (CurrentSection == 0) {
                 local_30 = 0;
-                NewProcess = StateHandlerStartMove;
+                NewProcess = StateHandlerDecodeHold;
                 goto LAB_800ae420;
               }
-              EnMessageQueueData(&In->SectionList[0].Event,(int)&DAT_00100005,CurrentSection);
+              DeMessageQueue(&In->SectionList[0].Event,(int)&DAT_00100005,CurrentSection);
             }
           }
           else {
@@ -4547,7 +4555,7 @@ LAB_800ae37c:
         }
       }
     }
-    DeMessageQueue((__MessageQueue *)(&In->CharacterInstance + CurrentSection * 0x47 + 3));
+    PurgeMessageQueue((__MessageQueue *)(&In->CharacterInstance + CurrentSection * 0x47 + 3));
   } while( true );
 }
 
@@ -4601,7 +4609,7 @@ LAB_800ae37c:
 
 /* WARNING: Type propagation algorithm not settling */
 
-void StateHandlerGlyphs(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerWallGrab(__CharacterState *In,int CurrentSection,int Data)
 
 {
   bool bVar1;
@@ -4633,9 +4641,9 @@ void StateHandlerGlyphs(__CharacterState *In,int CurrentSection,int Data)
         }
         pp_Var5[0x47] = (_Instance *)0x0;
         if (CurrentSection == 0) {
-          razPlaneShift(In->CharacterInstance);
+          SOUND_PlaneShift(In->CharacterInstance);
           if ((Raziel.Mode & 0x40000U) != 0) {
-            CAMERA_ChangeToOutOfWater(&theCamera,In->CharacterInstance);
+            CAMERA_ChangeTo(&theCamera,In->CharacterInstance);
             SteerSwitchMode(In->CharacterInstance,6);
           }
           SteerSwitchMode(In->CharacterInstance,0);
@@ -4650,7 +4658,7 @@ void StateHandlerGlyphs(__CharacterState *In,int CurrentSection,int Data)
       if ((int)puVar4 < 0x80008) {
         if (puVar4 == (undefined *)0x40025) {
 LAB_800aed10:
-          EnMessageQueueData(&p_Var6->Defer,p_Var2->ID,p_Var2->Data);
+          DeMessageQueue(&p_Var6->Defer,p_Var2->ID,p_Var2->Data);
         }
         else {
           if ((int)puVar4 < 0x40026) {
@@ -4658,14 +4666,14 @@ LAB_800aed10:
               if (pp_Var5[0x47] != (_Instance *)0x0) {
                 if (CurrentSection == 0) {
                   In->SectionList[0].Data1 = 0;
-                  INSTANCE_Post(Raziel.GlyphSystem,(int)&DAT_80000010,(int)In->CharacterInstance);
+                  INSTANCE_Query(Raziel.GlyphSystem,(int)&DAT_80000010,(int)In->CharacterInstance);
                 }
                 if ((Raziel.Mode & 0x40000U) == 0) {
                   Ptr = SetControlInitIdleData(0,0,3);
-                  StateSwitchStateData(In,CurrentSection,StateHandlerIdle,Ptr);
+                  StateSwitchStateData(In,CurrentSection,StateHandlerPickupObject,Ptr);
                 }
                 else {
-                  StateSwitchStateData(In,CurrentSection,StateHandlerSwim,0);
+                  StateSwitchStateData(In,CurrentSection,StateHandlerSwimTread,0);
                 }
               }
             }
@@ -4683,7 +4691,7 @@ LAB_800aed10:
                                    (int)p_Var3->prev,(int)p_Var3->instanceID,(int)p_Var3->flags);
                   ID = p_Var2->ID;
 LAB_800aed00:
-                  EnMessageQueueData(&p_Var6->Defer,ID,Ptr);
+                  DeMessageQueue(&p_Var6->Defer,ID,Ptr);
                 }
                 else {
                   if ((int)puVar4 < 0x40004) {
@@ -4693,7 +4701,7 @@ LAB_800aed00:
                     if (puVar4 == (undefined *)0x40005) goto LAB_800aed10;
                   }
 LAB_800aed28:
-                  DefaultStateHandler(In,CurrentSection,Data);
+                  StateHandlerDragObject(In,CurrentSection,Data);
                 }
               }
             }
@@ -4760,25 +4768,25 @@ LAB_800aeacc:
         if (puVar4 == (undefined *)0x2000000) {
 LAB_800aeb78:
           if ((pp_Var5[0x47] != (_Instance *)0x0) && (CurrentSection == 0)) {
-            INSTANCE_Post(Raziel.GlyphSystem,-0x80000000,0);
-            razReaverOff();
+            INSTANCE_Query(Raziel.GlyphSystem,-0x80000000,0);
+            razReaverOn();
             p_Var3 = razGetHeldItem();
             if (p_Var3 != (_Instance *)0x0) {
               razSetFadeEffect(0,0x1000,0x100);
               Raziel.throwInstance = p_Var3;
             }
             ControlFlag = ControlFlag | 0x4000;
-            PurgeMessageQueue(&In->SectionList[0].Event);
+            EnMessageQueueData(&In->SectionList[0].Event);
           }
         }
         else {
           if ((int)puVar4 < 0x2000001) {
             if (puVar4 == &DAT_00100004) {
               if (CurrentSection == 0) {
-                razReaverOn();
+                razReaverOff();
                 Ptr = GlyphIsGlyphOpen(Raziel.GlyphSystem);
                 if (Ptr != 0) {
-                  INSTANCE_Post(Raziel.GlyphSystem,(int)&DAT_80000010,(int)In->CharacterInstance);
+                  INSTANCE_Query(Raziel.GlyphSystem,(int)&DAT_80000010,(int)In->CharacterInstance);
                 }
               }
               Raziel.invincibleTimer = 0;
@@ -4789,10 +4797,10 @@ LAB_800aeb78:
                   if (pp_Var5[0x47] == (_Instance *)0x0) {
                     if (((Raziel.Mode & 0x40000U) == 0) || (Raziel.CurrentPlane != 1)) {
                       Ptr = SetControlInitIdleData(0,0,3);
-                      NewProcess = StateHandlerIdle;
+                      NewProcess = StateHandlerPickupObject;
                     }
                     else {
-                      NewProcess = StateHandlerSwim;
+                      NewProcess = StateHandlerSwimTread;
                       Ptr = 0;
                     }
                     StateSwitchStateData(In,CurrentSection,NewProcess,Ptr);
@@ -4812,8 +4820,8 @@ LAB_800aeb78:
                   if (puVar4 != &DAT_00100001) goto LAB_800aed28;
                   if (CurrentSection == 0) {
                     if (p_Var2->Data == 0) {
-                      INSTANCE_Post(Raziel.GlyphSystem,(int)&DAT_80000010,(int)In->CharacterInstance
-                                   );
+                      INSTANCE_Query(Raziel.GlyphSystem,(int)&DAT_80000010,
+                                     (int)In->CharacterInstance);
                     }
                     Raziel.Mode = Raziel.Mode | 1;
                     ControlFlag = 0x1100008;
@@ -4823,7 +4831,7 @@ LAB_800aeb78:
                   pp_Var5[0x47] = (_Instance *)0x1;
                   PhysicsMode = 3;
                   if (p_Var2->Data != 0) {
-                    EnMessageQueueData(&p_Var6->Defer,0x80007,0);
+                    DeMessageQueue(&p_Var6->Defer,0x80007,0);
                   }
                 }
               }
@@ -4840,10 +4848,11 @@ LAB_800aeb78:
                 p_Var3 = (_Instance *)p_Var2->Data;
                 if (!bVar1) {
                   bVar1 = true;
-                  Ptr = SetMonsterHitData(*(_Instance **)&p_Var3->node,
-                                          *(_Instance **)((int)&p_Var3->node + 4),(int)p_Var3->prev,
-                                          (int)*(short *)&p_Var3->next,
-                                          (int)*(short *)((int)&p_Var3->next + 2));
+                  Ptr = SetMonsterImpaleData
+                                  (*(_Instance **)&p_Var3->node,
+                                   *(_Instance **)((int)&p_Var3->node + 4),(int)p_Var3->prev,
+                                   (int)*(short *)&p_Var3->next,
+                                   (int)*(short *)((int)&p_Var3->next + 2));
                   ID = 0x1000000;
                   goto LAB_800aed00;
                 }
@@ -4872,10 +4881,10 @@ LAB_800aeb78:
                     if (puVar4 == (undefined *)0x10000000) {
                       if (CurrentSection == 0) {
                         if ((*PadData & 4U) != 0) {
-                          INSTANCE_Post(Raziel.GlyphSystem,0x10000004,p_Var2->Data);
+                          INSTANCE_Query(Raziel.GlyphSystem,0x10000004,p_Var2->Data);
                         }
                         if ((*PadData & 8U) != 0) {
-                          INSTANCE_Post(Raziel.GlyphSystem,0x10000002,p_Var2->Data);
+                          INSTANCE_Query(Raziel.GlyphSystem,0x10000002,p_Var2->Data);
                         }
                       }
                       goto LAB_800aed30;
@@ -4894,7 +4903,7 @@ LAB_800ae80c:
       }
     }
 LAB_800aed30:
-    DeMessageQueue(&p_Var6->Event);
+    PurgeMessageQueue(&p_Var6->Event);
   } while( true );
 }
 
@@ -4968,7 +4977,7 @@ LAB_800aed30:
 	/* end block 2 */
 	// End Line: 8934
 
-void DefaultStateHandler(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerDragObject(__CharacterState *In,int CurrentSection,int Data)
 
 {
   short sVar1;
@@ -4999,8 +5008,8 @@ void DefaultStateHandler(__CharacterState *In,int CurrentSection,int Data)
     if (Raziel.invincibleTimer != 0) {
       return;
     }
-    StateSwitchStateCharacterDataDefault(In,StateHandlerHitReaction,p_Var2->Data);
-    CAMERA_ForceEndLookaroundMode(&theCamera);
+    StateSwitchStateDataDefault(In,StateHandlerHitReaction,p_Var2->Data);
+    CAMERA_StartLookaroundMode(&theCamera);
     return;
   }
   if (0x1000000 < (int)puVar4) {
@@ -5015,9 +5024,9 @@ void DefaultStateHandler(__CharacterState *In,int CurrentSection,int Data)
       local_28.y = *(short *)(NewAnim + 6);
       local_28.z = *(short *)(NewAnim + 8);
       sVar1 = MATH3D_AngleFromPosToPos((_Position *)&local_30,&local_28);
-      _Var3 = G2Anim_IsControllerActive(&In->CharacterInstance->anim,1,0xe);
+      _Var3 = G2Anim_DetachControllerFromSeg(&In->CharacterInstance->anim,1,0xe);
       if (_Var3 != G2FALSE) {
-        G2Anim_DisableController(&In->CharacterInstance->anim,1,0xe);
+        _G2Anim_FindController(&In->CharacterInstance->anim,1,0xe);
         if (ExtraRot != (_G2SVector3_Type *)0x0) {
           (In->CharacterInstance->rotation).z = (In->CharacterInstance->rotation).z + ExtraRot->z;
         }
@@ -5032,11 +5041,11 @@ void DefaultStateHandler(__CharacterState *In,int CurrentSection,int Data)
         NewAnim = 0x4d;
         (p_Var5->rotation).z = sVar1 + 0x800;
       }
-      G2EmulationSwitchAnimationCharacter(&Raziel.State,NewAnim,0,6,2);
+      G2EmulationSwitchAnimationSync(&Raziel.State,NewAnim,0,6,2);
       In = &Raziel.State;
-      NewProcess = StateHandlerSlide;
+      NewProcess = StateHandlerPuppetShow;
 LAB_800af36c:
-      StateSwitchStateCharacterDataDefault(In,NewProcess,0);
+      StateSwitchStateDataDefault(In,NewProcess,0);
       return;
     }
     if ((int)puVar4 < 0x4010201) {
@@ -5056,14 +5065,14 @@ LAB_800af36c:
           if (CurrentSection != 0) {
             return;
           }
-          NewAnim = razSwitchVAnimCharacterGroup(In->CharacterInstance,0x18,(int *)0x0,(int *)0x0);
+          NewAnim = razSwitchVAnimCharacterSingle(In->CharacterInstance,0x18,(int *)0x0,(int *)0x0);
           if (NewAnim != 0) {
-            G2EmulationSwitchAnimationCharacter(In,0x24,0,4,1);
+            G2EmulationSwitchAnimationSync(In,0x24,0,4,1);
           }
-          NewProcess = StateHandlerFall;
+          NewProcess = StateHandlerGrab;
           goto LAB_800af36c;
         }
-        NewProcess = StateHandlerAutoFace;
+        NewProcess = StateHandlerPushObject;
         local_1c = 0;
       }
       else {
@@ -5072,7 +5081,7 @@ LAB_800af36c:
             return;
           }
           PhysicsMode = 3;
-          SetPhysics(In->CharacterInstance,-0x10,0,0,0);
+          SetPhysicsGravityData(In->CharacterInstance,-0x10,0,0,0);
           return;
         }
         if (0x4010008 < (int)puVar4) {
@@ -5081,7 +5090,7 @@ LAB_800af36c:
           }
           iVar6 = p_Var2->Data;
           NewAnim = SetControlInitHangData(*(_Instance **)(iVar6 + 0x18),0,3);
-          StateSwitchStateDataDefault(In,CurrentSection,StateHandlerHang,NewAnim);
+          StateSwitchStateCharacterData(In,CurrentSection,StateHandlerForcedGlide,NewAnim);
           (In->CharacterInstance->rotation).z = *(short *)(iVar6 + 0x1c);
           return;
         }
@@ -5105,14 +5114,14 @@ LAB_800af36c:
         if (NewAnim != 0) {
           return;
         }
-        NewProcess = StateHandlerWallGrab;
+        NewProcess = StateHandlerFall;
         local_1c = 0;
       }
     }
     else {
       if (puVar4 == (undefined *)0x8000000) {
         NewAnim = SetControlInitIdleData(0,0,3);
-        StateSwitchStateData(In,CurrentSection,StateHandlerIdle,NewAnim);
+        StateSwitchStateData(In,CurrentSection,StateHandlerPickupObject,NewAnim);
         return;
       }
       if ((int)puVar4 < 0x8000001) {
@@ -5133,7 +5142,7 @@ LAB_800af36c:
         if (BlockCount < 0x10) {
           return;
         }
-        NewProcess = StateHandlerBlock;
+        NewProcess = StateHandlerBreakOff;
         local_1c = 0;
       }
       else {
@@ -5147,7 +5156,7 @@ LAB_800af36c:
           Raziel.Mode = Raziel.Mode & 0xfffffffdU | 1;
           return;
         }
-        NewProcess = StateHandlerGlyphs;
+        NewProcess = StateHandlerWallGrab;
         local_1c = 1;
       }
     }
@@ -5159,7 +5168,7 @@ LAB_800af36c:
         if (CurrentSection != 0) {
           return;
         }
-        StateSwitchStateCharacterDataDefault(In,StateHandlerCrouch,1);
+        StateSwitchStateDataDefault(In,StateHandlerSwimCoil,1);
         return;
       }
       if ((int)puVar4 < -0x7ffffff7) {
@@ -5173,7 +5182,7 @@ LAB_800af36c:
         if ((Raziel.Mode & 0x40000U) != 0) {
           return;
         }
-        NewProcess = StateHandlerAttack2;
+        NewProcess = StateHandlerHang;
         local_1c = 0;
       }
       else {
@@ -5182,28 +5191,28 @@ LAB_800af36c:
             return;
           }
           if (CurrentSection == 2) {
-            G2EmulationSwitchAnimation(In,2,0,0,3,2);
+            G2EmulatePlayAnimation(In,2,0,0,3,2);
             return;
           }
-          G2EmulationSwitchAnimation(In,CurrentSection,0x17,0,3,1);
+          G2EmulatePlayAnimation(In,CurrentSection,0x17,0,3,1);
           return;
         }
-        NewAnim = StateHandlerDecodeHold(&local_20,&local_1c);
+        NewAnim = StateHandlerAutoFace(&local_20,&local_1c);
         if (NewAnim == 0) {
           return;
         }
         if (local_20 == 0x800010) {
-          NewProcess = StateHandlerThrow2;
+          NewProcess = StateHandlerWallIdle;
           local_1c = 0;
         }
         else {
           if (local_20 == 0x1000002) {
-            NewProcess = StateHandlerGrab;
+            NewProcess = StateHandlerJump;
           }
           else {
             if (local_20 != 0x80000) {
-              StateSwitchStateDataDefault(In,CurrentSection,StateHandlerAttack2,0);
-              EnMessageQueueData(&In->SectionList[CurrentSection].Defer,(int)&DAT_80000020,0);
+              StateSwitchStateCharacterData(In,CurrentSection,StateHandlerHang,0);
+              DeMessageQueue(&In->SectionList[CurrentSection].Defer,(int)&DAT_80000020,0);
               return;
             }
             if (CurrentSection == 0) {
@@ -5211,7 +5220,7 @@ LAB_800af36c:
               razSetPlayerEventHistory(0x400);
               razLaunchForce(In->CharacterInstance);
             }
-            NewProcess = StateHandlerThrow2;
+            NewProcess = StateHandlerWallIdle;
             local_1c = 0;
           }
         }
@@ -5222,7 +5231,7 @@ LAB_800af36c:
       NewAnim = p_Var2->Data;
       if (NewAnim == 1) {
         if (In->CharacterInstance->LinkChild != (_Instance *)0x0) {
-          G2EmulationSwitchAnimation(In,p_Var2->Data,0x32,0,3,2);
+          G2EmulatePlayAnimation(In,p_Var2->Data,0x32,0,3,2);
           NewProcess = In->SectionList[CurrentSection].Process;
           local_1c = 0;
           CurrentSection = p_Var2->Data;
@@ -5230,7 +5239,7 @@ LAB_800af36c:
         }
         NewAnim = 1;
       }
-      G2EmulationSwitchAnimationSync(In,NewAnim,0,3);
+      G2EmulationInstanceSwitchAnimationAlpha(In,NewAnim,0,3);
       return;
     }
     if (0x100005 < (int)puVar4) {
@@ -5260,13 +5269,13 @@ LAB_800af36c:
       else {
         if (CurrentSection == 0) {
           Raziel.returnState = (_func_60 *)In->SectionList[0].Process;
-          if (Raziel.returnState == StateHandlerSoulSuck) {
-            Raziel.returnState = StateHandlerIdle;
+          if (Raziel.returnState == StateHandlerAttack2) {
+            Raziel.returnState = StateHandlerPickupObject;
           }
           In->SectionList[0].Data1 = Raziel.Mode;
           Raziel.Mode = 0x80000;
         }
-        NewProcess = StateHandlerLookAround;
+        NewProcess = StateHandlerBlock;
         local_1c = 0;
       }
       goto LAB_800af65c;
@@ -5284,9 +5293,9 @@ LAB_800af36c:
     }
   }
   local_1c = p_Var2->Data;
-  NewProcess = StateHandlerStumble;
+  NewProcess = StateHandlerCrouch;
 LAB_800af65c:
-  StateSwitchStateDataDefault(In,CurrentSection,NewProcess,local_1c);
+  StateSwitchStateCharacterData(In,CurrentSection,NewProcess,local_1c);
   return;
 }
 
@@ -5382,16 +5391,13 @@ long RazielAnimCallback(_G2Anim_Type *anim,int sectionID,_G2AnimCallbackMsg_Enum
   p_Var5 = anim->section + sectionID;
   switch(message) {
   case G2ANIM_MSG_DONE:
-    EnMessageQueueData(&Raziel.State.SectionList[sectionID].Event,0x8000000,(u_int)p_Var5->keylistID)
-    ;
+    DeMessageQueue(&Raziel.State.SectionList[sectionID].Event,0x8000000,(u_int)p_Var5->keylistID);
     break;
   case G2ANIM_MSG_LOOPPOINT:
-    EnMessageQueueData(&Raziel.State.SectionList[sectionID].Event,0x8000001,(u_int)p_Var5->keylistID)
-    ;
+    DeMessageQueue(&Raziel.State.SectionList[sectionID].Event,0x8000001,(u_int)p_Var5->keylistID);
     break;
   case G2ANIM_MSG_SECTION_INTERPDONE:
-    EnMessageQueueData(&Raziel.State.SectionList[sectionID].Event,0x8000003,(u_int)p_Var5->keylistID)
-    ;
+    DeMessageQueue(&Raziel.State.SectionList[sectionID].Event,0x8000003,(u_int)p_Var5->keylistID);
     break;
   case G2ANIM_MSG_SEGCTRLR_INTERPDONE:
     ControllerData =
@@ -5410,7 +5416,7 @@ long RazielAnimCallback(_G2Anim_Type *anim,int sectionID,_G2AnimCallbackMsg_Enum
       }
       else {
         if (iVar4 == 4) {
-          G2Anim_DisableController
+          _G2Anim_FindController
                     (&ControllerData->instance->anim,ControllerData->segment,ControllerData->type);
         }
       }
@@ -5418,7 +5424,7 @@ long RazielAnimCallback(_G2Anim_Type *anim,int sectionID,_G2AnimCallbackMsg_Enum
     break;
   case G2ANIM_MSG_SWALARMSET:
     p_Var5->swAlarmTable = (short *)0x0;
-    EnMessageQueueData(&Raziel.State.SectionList[sectionID].Event,0x8000004,0);
+    DeMessageQueue(&Raziel.State.SectionList[sectionID].Event,0x8000004,0);
     break;
   case G2ANIM_MSG_PLAYEFFECT:
     if (messageDataA != 2) {
@@ -5432,11 +5438,11 @@ long RazielAnimCallback(_G2Anim_Type *anim,int sectionID,_G2AnimCallbackMsg_Enum
           if (Inst == (_Instance *)0x0) {
             return 0;
           }
-          uVar3 = INSTANCE_Query(Inst,2);
+          uVar3 = INSTANCE_Post(Inst,2);
           if ((uVar3 & 0x20) == 0) {
             return 0;
           }
-          uVar3 = INSTANCE_Query(Inst,3);
+          uVar3 = INSTANCE_Post(Inst,3);
           if ((uVar3 & 0x10000) == 0) {
             return 0;
           }
@@ -5458,7 +5464,7 @@ long RazielAnimCallback(_G2Anim_Type *anim,int sectionID,_G2AnimCallbackMsg_Enum
         EnableWristCollision(gameTrackerX.playerInstance,(int)*(short *)(messageDataB + 2));
       }
       else {
-        INSTANCE_Post(Inst,0x200002,(int)*(short *)(messageDataB + 2));
+        INSTANCE_Query(Inst,0x200002,(int)*(short *)(messageDataB + 2));
       }
       break;
     case 1:
@@ -5466,7 +5472,7 @@ long RazielAnimCallback(_G2Anim_Type *anim,int sectionID,_G2AnimCallbackMsg_Enum
         DisableWristCollision(gameTrackerX.playerInstance,(int)*(short *)(messageDataB + 2));
       }
       else {
-        INSTANCE_Post(Inst,0x200003,(int)*(short *)(messageDataB + 2));
+        INSTANCE_Query(Inst,0x200003,(int)*(short *)(messageDataB + 2));
       }
       ControlFlag = ControlFlag | 0x10000000;
       break;
@@ -5506,12 +5512,12 @@ long RazielAnimCallback(_G2Anim_Type *anim,int sectionID,_G2AnimCallbackMsg_Enum
       break;
     case 8:
       if (Inst != (_Instance *)0x0) {
-        INSTANCE_Post(Inst,0x200005,(int)*(short *)(messageDataB + 2));
+        INSTANCE_Query(Inst,0x200005,(int)*(short *)(messageDataB + 2));
       }
       break;
     case 9:
       if (Inst != (_Instance *)0x0) {
-        INSTANCE_Post(Inst,0x200006,(int)*(short *)(messageDataB + 2));
+        INSTANCE_Query(Inst,0x200006,(int)*(short *)(messageDataB + 2));
       }
       break;
     case 10:
@@ -5685,7 +5691,7 @@ u_long RazielQuery(_Instance *instance,u_long Query)
     }
     break;
   case 0x13:
-    pLVar1 = STREAM_GetLevelWithID(instance->currentStreamUnitID);
+    pLVar1 = STREAM_GetWaterZLevel(instance->currentStreamUnitID);
     iVar3 = Raziel.Abilities;
     p_Var4 = (_Instance *)(Raziel.Abilities & 0x1fc0000);
     if (((pLVar1->unitFlags & 0x800U) != 0) || (iVar2 = RAZIEL_OkToShift(), iVar2 == 0)) {
@@ -5845,20 +5851,20 @@ void RazielPost(_Instance *instance,u_long Message,u_long Data)
       do {
         iVar1 = (int)&(instance->node).prev + Data_00;
         CurrentSection = CurrentSection + 1;
-        *(undefined4 *)(iVar1 + 0x1c) = 0;
-        *(undefined4 *)(iVar1 + 0x20) = 0;
+        *(u_char *)(iVar1 + 0x1c) = 0;
+        *(u_char *)(iVar1 + 0x20) = 0;
         Data_00 = Data_00 + 0x30;
       } while (CurrentSection < 3);
       DeInitAlgorithmicWings(instance);
-      razResetPauseTranslation(instance);
+      razSetPauseTranslation(instance);
       return;
     }
     Data_00 = 0x1e8;
     do {
       iVar1 = (int)&(instance->node).prev + Data_00;
       CurrentSection = CurrentSection + 1;
-      *(undefined4 *)(iVar1 + 0x1c) = 0x800af684;
-      *(undefined4 *)(iVar1 + 0x20) = 0;
+      *(u_char *)(iVar1 + 0x1c) = 0x800af684;
+      *(u_char *)(iVar1 + 0x20) = 0;
       Data_00 = Data_00 + 0x30;
     } while (CurrentSection < 3);
     InitAlgorithmicWings(instance);
@@ -5878,8 +5884,8 @@ void RazielPost(_Instance *instance,u_long Message,u_long Data)
     }
     if (Message < 0x200002) {
       if ((undefined *)Message == &DAT_00100012) {
-        razReaverOff();
-        Raziel.Senses.heldClass = INSTANCE_Query((_Instance *)Data,4);
+        razReaverOn();
+        Raziel.Senses.heldClass = INSTANCE_Post((_Instance *)Data,4);
         uVar3 = 0xfffff7ff;
         uVar2 = Raziel.Mode;
 LAB_800b071c:
@@ -5908,7 +5914,7 @@ LAB_800b071c:
             if ((_Instance *)Data == Raziel.soulReaver) {
               return;
             }
-            CurrentSection = razReaverOn();
+            CurrentSection = razReaverOff();
             if (CurrentSection != 0) {
               return;
             }
@@ -5924,11 +5930,11 @@ LAB_800b071c:
               return;
             }
             Raziel.Mode = 0x40000000;
-            ResetPhysics(instance,-0x10);
+            PhysicsMove(instance,-0x10);
             CurrentSection = 0;
             do {
               Data_00 = SetControlInitIdleData(0,0,3);
-              StateSwitchStateData(&Raziel.State,CurrentSection,StateHandlerIdle,Data_00);
+              StateSwitchStateData(&Raziel.State,CurrentSection,StateHandlerPickupObject,Data_00);
               CurrentSection = CurrentSection + 1;
             } while (CurrentSection < 3);
             return;
@@ -5941,7 +5947,7 @@ LAB_800b071c:
           goto LAB_800b071c;
         }
         if ((undefined *)Message == &DAT_00100011) {
-          EnMessageQueueData(&Raziel.State.SectionList[0].Defer,(int)&DAT_00100011,Data);
+          DeMessageQueue(&Raziel.State.SectionList[0].Defer,(int)&DAT_00100011,Data);
           return;
         }
       }
@@ -5957,7 +5963,7 @@ LAB_800b071c:
         }
         In = &Raziel.State.SectionList[0].Defer;
         do {
-          EnMessageQueueData(In,0x4000001,Data);
+          DeMessageQueue(In,0x4000001,Data);
           CurrentSection = CurrentSection + 1;
           In = (__MessageQueue *)&In[2].Queue[0].Data;
         } while (CurrentSection < 3);
@@ -5970,9 +5976,9 @@ LAB_800b071c:
           }
           *(u_long *)&instance->collideInfo = Data;
           *(undefined2 *)(Data + 0x2c) = 0;
-          RazielCollide(instance,&gameTrackerX);
+          RazielAdditionalCollide(instance,&gameTrackerX);
           instance_00 = razGetHeldItem();
-          COLLIDE_UpdateAllTransforms(instance_00,(SVECTOR *)((int)instance->collideInfo + 0x28));
+          COLLIDE_MoveAllTransforms(instance_00,(SVECTOR *)((int)instance->collideInfo + 0x28));
           return;
         }
         if (Message == 0x800024) {
@@ -5993,7 +5999,7 @@ LAB_800b071c:
         }
         else {
           if (Message == 0x10002000) {
-            razPlaneShift(instance);
+            SOUND_PlaneShift(instance);
             return;
           }
         }
@@ -6002,9 +6008,9 @@ LAB_800b071c:
   }
   else {
     if (Message == 0x40012) {
-      NewProcess = StateHandlerDropAction;
+      NewProcess = StateHandlerStumble;
 LAB_800b0660:
-      StateSwitchStateCharacterData(&Raziel.State,NewProcess,0);
+      StateSwitchStateCharacterDataDefault(&Raziel.State,NewProcess,0);
       return;
     }
     if (Message < 0x40013) {
@@ -6026,7 +6032,7 @@ LAB_800b0660:
           return;
         }
         if (Message == 0x40004) {
-          G2EmulationSwitchAnimationCharacter(&Raziel.State,0x80,0,3,1);
+          G2EmulationSwitchAnimationSync(&Raziel.State,0x80,0,3,1);
           NewProcess = StateHandlerCannedReaction;
           goto LAB_800b0660;
         }
@@ -6034,16 +6040,16 @@ LAB_800b0660:
       else {
         if (Message == 0x4000e) {
           if (Data != 0) {
-            Raziel.returnState = StateHandlerPuppetShow;
-            StateSwitchStateCharacterDataDefault(&Raziel.State,StateHandlerPuppetShow,0);
+            Raziel.returnState = StateHandlerGlide;
+            StateSwitchStateDataDefault(&Raziel.State,StateHandlerGlide,0);
             GAMELOOP_Reset24FPS();
             return;
           }
           Raziel.Senses.Flags = Raziel.Senses.Flags & 0xffffffef;
           ControlFlag = ControlFlag & 0xfffdffff;
           CurrentSection = SetControlInitIdleData(0,0,3);
-          StateSwitchStateCharacterDataDefault(&Raziel.State,StateHandlerIdle,CurrentSection);
-          GAMELOOP_Set24FPS();
+          StateSwitchStateDataDefault(&Raziel.State,StateHandlerPickupObject,CurrentSection);
+          GAMELOOP_SystemInit();
           return;
         }
         if (Message < 0x4000f) {
@@ -6077,10 +6083,10 @@ LAB_800b0660:
             return;
           }
           Raziel.Abilities = debugRazielFlags1;
-          RAZIEL_DebugHealthFillUp();
-          razReaverOn();
+          RAZIEL_DebugManaSetMax();
+          razReaverOff();
           CurrentSection = razGetReaverFromMask(Data);
-          razReaverImbue(CurrentSection);
+          razReaverBladeOff(CurrentSection);
           return;
         }
         if (Message == 0x40019) {
@@ -6130,7 +6136,7 @@ LAB_800b0660:
         }
         else {
           if (Message == 0x40024) {
-            CurrentSection = SndTypeIsPlayingOrRequested(1);
+            CurrentSection = aadIsSfxTypePlayingOrRequested(1);
             if (CurrentSection != 0) {
               return;
             }
@@ -6144,7 +6150,7 @@ LAB_800b0660:
   CurrentSection = 0;
   In = &Raziel.State.SectionList[0].Defer;
   do {
-    EnMessageQueueData(In,Message,Data);
+    DeMessageQueue(In,Message,Data);
     CurrentSection = CurrentSection + 1;
     In = (__MessageQueue *)&In[2].Queue[0].Data;
   } while (CurrentSection < 3);
@@ -6186,7 +6192,7 @@ LAB_800b0660:
 
 /* WARNING: Type propagation algorithm not settling */
 
-int SetStates(_Instance *instance,GameTracker *GT,long *controlCommand,int AnalogLength)
+int StateInitIdle(_Instance *instance,GameTracker *GT,long *controlCommand,int AnalogLength)
 
 {
   __CharacterState *p_Var1;
@@ -6207,11 +6213,11 @@ int SetStates(_Instance *instance,GameTracker *GT,long *controlCommand,int Analo
   PadData = controlCommand;
   do {
     while( true ) {
-      Element = DeMessageQueue((__MessageQueue *)
-                               ((int)&Raziel.State.SectionList[0].Defer.Head + Data_00));
+      Element = PurgeMessageQueue((__MessageQueue *)
+                                  ((int)&Raziel.State.SectionList[0].Defer.Head + Data_00));
       if (Element == (__Event *)0x0) break;
-      EnMessageQueue((__MessageQueue *)((int)&Raziel.State.SectionList[0].Event.Head + Data_00),
-                     Element);
+      InitMessageQueue((__MessageQueue *)((int)&Raziel.State.SectionList[0].Event.Head + Data_00),
+                       Element);
     }
     iVar3 = iVar3 + 1;
     Data_00 = Data_00 + 0x11c;
@@ -6222,21 +6228,22 @@ int SetStates(_Instance *instance,GameTracker *GT,long *controlCommand,int Analo
     (instance->position).z = (instance->position).z + Raziel.collisionEdgeOffset.z;
   }
   else {
-    INSTANCE_Post(instance,0x4000004,LoopCounter);
+    INSTANCE_Query(instance,0x4000004,LoopCounter);
     SetImpulsePhysics(instance,&Raziel);
   }
   if (Raziel.Senses.HitMonster != (_Instance *)0x0) {
-    Data_00 = SetMonsterHitData(Raziel.Senses.HitMonster,(_Instance *)0x0,0x1000,
-                                (u_int)(Raziel.attack)->knockBackDistance,
-                                (u_int)(Raziel.attack)->knockBackFrames);
-    INSTANCE_Post(instance,0x2000002,Data_00);
+    Data_00 = SetMonsterImpaleData
+                        (Raziel.Senses.HitMonster,(_Instance *)0x0,0x1000,
+                         (u_int)(Raziel.attack)->knockBackDistance,
+                         (u_int)(Raziel.attack)->knockBackFrames);
+    INSTANCE_Query(instance,0x2000002,Data_00);
     DisableWristCollision(instance,1);
     DisableWristCollision(instance,2);
   }
   if (((gameTrackerX.playerInstance)->flags & 0x100U) == 0) {
     if ((ControlFlag & 0x800000U) == 0) {
       GetControllerMessages(controlCommand);
-      while (Element = DeMessageQueue(&Raziel.padCommands), Element != (__Event *)0x0) {
+      while (Element = PurgeMessageQueue(&Raziel.padCommands), Element != (__Event *)0x0) {
         Data_00 = Element->ID;
         if ((Data_00 == -0x80000000) &&
            (((Raziel.Senses.EngagedMask & 0x681f) != 0 ||
@@ -6249,7 +6256,7 @@ int SetStates(_Instance *instance,GameTracker *GT,long *controlCommand,int Analo
         if (Data_00 != 0) {
           do {
             In = &p_Var1->SectionList[0].Event;
-            EnMessageQueueData(In,Data_00,0);
+            DeMessageQueue(In,Data_00,0);
             iVar3 = iVar3 + 1;
             p_Var1 = (__CharacterState *)(In + 2);
           } while (iVar3 < 3);
@@ -6269,7 +6276,7 @@ int SetStates(_Instance *instance,GameTracker *GT,long *controlCommand,int Analo
       p_Var1 = &Raziel.State;
       do {
         In = &p_Var1->SectionList[0].Event;
-        EnMessageQueueData(In,Data_00,Data);
+        DeMessageQueue(In,Data_00,Data);
         iVar3 = iVar3 + 1;
         p_Var1 = (__CharacterState *)(In + 2);
       } while (iVar3 < 3);
@@ -6280,14 +6287,14 @@ int SetStates(_Instance *instance,GameTracker *GT,long *controlCommand,int Analo
       p_Var1 = &Raziel.State;
       do {
         In = &p_Var1->SectionList[0].Event;
-        EnMessageQueueData(In,0,0);
+        DeMessageQueue(In,0,0);
         Data_00 = Data_00 + 1;
         p_Var1 = (__CharacterState *)(In + 2);
       } while (Data_00 < 3);
     }
   }
   razSetPlayerEvent();
-  G2EmulatePlayAnimation(&Raziel.State);
+  G2EmulationInstanceSetAnimSpeed(&Raziel.State);
   p_Var2 = &Raziel;
   Data_00 = 0;
   do {
@@ -6300,7 +6307,7 @@ int SetStates(_Instance *instance,GameTracker *GT,long *controlCommand,int Analo
   if (gameTracker->cheatMode == '\x01') {
     PhysicsMode = 3;
   }
-  ProcessPhysics(&Raziel,&Raziel.State,0,PhysicsMode);
+  ProcessPhysicalObject(&Raziel,&Raziel.State,0,PhysicsMode);
   if ((*PadData & 0x200) == 0) {
     Raziel.nothingCounter = Raziel.nothingCounter + 1;
     if (Raziel.nothingCounter < 6) {
@@ -6309,7 +6316,7 @@ int SetStates(_Instance *instance,GameTracker *GT,long *controlCommand,int Analo
         p_Var1 = &Raziel.State;
         do {
           In = &p_Var1->SectionList[0].Event;
-          EnMessageQueueData(In,0x1000001,0);
+          DeMessageQueue(In,0x1000001,0);
           Data_00 = Data_00 + 1;
           p_Var1 = (__CharacterState *)(In + 2);
         } while (Data_00 < 3);
@@ -6330,7 +6337,7 @@ int SetStates(_Instance *instance,GameTracker *GT,long *controlCommand,int Analo
       p_Var1 = &Raziel.State;
       do {
         In = &p_Var1->SectionList[0].Event;
-        EnMessageQueueData(In,0x1000001,0);
+        DeMessageQueue(In,0x1000001,0);
         Data_00 = Data_00 + 1;
         p_Var1 = (__CharacterState *)(In + 2);
       } while (Data_00 < 3);
@@ -6363,7 +6370,7 @@ int SetStates(_Instance *instance,GameTracker *GT,long *controlCommand,int Analo
   }
 LAB_800b0e5c:
   if (((ControlFlag & 0x200000U) != 0) && (gameTrackerX.gameFramePassed != 0)) {
-    ProcessConstrict();
+    FX_ConstrictProcess();
   }
   if (Raziel.effectsFlags != 0) {
     ProcessEffects(instance);
@@ -6417,7 +6424,7 @@ LAB_800b0e5c:
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void ProcessConstrict(void)
+void FX_ConstrictProcess(void)
 
 {
   ushort uVar1;
@@ -6619,13 +6626,13 @@ void ProcessEffects(_Instance *instance)
   
   p_Var2 = razGetHeldItem();
   if (((Raziel.effectsFlags & 4U) != 0) &&
-     (iVar3 = razUpdateSoundRamp(instance,(_SoundRamp *)&Raziel.soundHandle), iVar3 == 0)) {
+     (iVar3 = SOUND_UpdateSound(instance,(_SoundRamp *)&Raziel.soundHandle), iVar3 == 0)) {
     SndEndLoop(Raziel.soundHandle);
     Raziel.soundHandle = 0;
     Raziel.effectsFlags = Raziel.effectsFlags & 0xfffffffb;
   }
   if (((Raziel.effectsFlags & 8U) != 0) &&
-     (iVar3 = razUpdateSoundRamp(instance,(_SoundRamp *)&Raziel.soundHandle2), iVar3 == 0)) {
+     (iVar3 = SOUND_UpdateSound(instance,(_SoundRamp *)&Raziel.soundHandle2), iVar3 == 0)) {
     SndEndLoop(Raziel.soundHandle2);
     Raziel.soundHandle2 = 0;
     Raziel.effectsFlags = Raziel.effectsFlags & 0xfffffff7;
@@ -6713,11 +6720,11 @@ void ProcessHints(void)
       if (lVar1 == -1) {
         HINT_StartHint(0xc);
       }
-      if ((lVar1 == 0xc) && (Raziel.State.SectionList[0].Process == StateHandlerGlyphs)) {
+      if ((lVar1 == 0xc) && (Raziel.State.SectionList[0].Process == StateHandlerWallGrab)) {
         HINT_KillSpecificHint(0xc);
         HINT_StartHint(0x28);
       }
-      if ((lVar1 == 0x28) && (Raziel.State.SectionList[0].Process != StateHandlerGlyphs)) {
+      if ((lVar1 == 0x28) && (Raziel.State.SectionList[0].Process != StateHandlerWallGrab)) {
         HINT_KillSpecificHint(0x28);
         HINT_StartHint(0xc);
       }
@@ -6772,7 +6779,7 @@ void ProcessInteractiveMusic(_Instance *instance)
   u_int uVar2;
   int modifier;
   
-  pLVar1 = STREAM_GetLevelWithID(instance->currentStreamUnitID);
+  pLVar1 = STREAM_GetWaterZLevel(instance->currentStreamUnitID);
   RAZIEL_SetInteractiveMusic(6,pLVar1->unitFlags & 2);
   RAZIEL_SetInteractiveMusic(9,pLVar1->unitFlags & 0x200);
   RAZIEL_SetInteractiveMusic(10,pLVar1->unitFlags & 0x100);
@@ -6794,7 +6801,7 @@ void ProcessInteractiveMusic(_Instance *instance)
         modifier = 4;
         if ((uVar2 & 0x20) == 0) {
           Raziel.soundModifier = Raziel.soundModifier & 0xffffffe1;
-          SOUND_SetMusicModifier(0);
+          SOUND_ResetMusicModifier(0);
           return;
         }
       }
@@ -6841,7 +6848,7 @@ void ProcessTimers(_Instance *instance)
   if ((0 < Raziel.timeAccumulator) &&
      (Raziel.timeAccumulator = Raziel.timeAccumulator - gameTrackerX.timeMult,
      Raziel.timeAccumulator < 1)) {
-    INSTANCE_Post(instance,(int)&DAT_00100015,-Raziel.timeAccumulator);
+    INSTANCE_Query(instance,(int)&DAT_00100015,-Raziel.timeAccumulator);
     Raziel.timeAccumulator = 0;
   }
   if (Raziel.soundTimerNext < 1) {
@@ -6978,7 +6985,7 @@ LAB_800b1cd0:
 	/* end block 2 */
 	// End Line: 12961
 
-void SetTimer(int ticks)
+void CAMERA_SetShake(int ticks)
 
 {
   Raziel.timeAccumulator = ticks << 0xc;
@@ -7057,7 +7064,7 @@ void ProcessSpecialAbilities(_Instance *instance)
   if ((Raziel.Abilities & 8U) == 0) {
     if (Raziel.soulReaver != (_Instance *)0x0) {
       INSTANCE_UnlinkFromParent(Raziel.soulReaver);
-      INSTANCE_KillInstance(Raziel.soulReaver);
+      INSTANCE_NewInstance(Raziel.soulReaver);
       Raziel.soulReaver = (_Instance *)0x0;
       Raziel.currentSoulReaver = 0;
       debugRazielFlags2 = 0;
@@ -7086,7 +7093,7 @@ void ProcessSpecialAbilities(_Instance *instance)
     if (Raziel.soulReaver != (_Instance *)0x0) {
       if (Raziel.currentSoulReaver == Data) {
         if (Data == 6) {
-          pLVar2 = STREAM_GetLevelWithID(instance->currentStreamUnitID);
+          pLVar2 = STREAM_GetWaterZLevel(instance->currentStreamUnitID);
           if (instance->waterFace == (_TFace *)0x0) {
             if (instance->matrix == (MATRIX *)0x0) {
               return;
@@ -7100,12 +7107,12 @@ void ProcessSpecialAbilities(_Instance *instance)
             bVar1 = instance->matrix[0x29].t[2] < (int)(instance->splitPoint).z;
           }
           if (bVar1) {
-            razReaverImbue(2);
+            razReaverBladeOff(2);
           }
         }
       }
       else {
-        INSTANCE_Post(Raziel.soulReaver,0x800103,Data);
+        INSTANCE_Query(Raziel.soulReaver,0x800103,Data);
         Raziel.currentSoulReaver = Data;
       }
     }
@@ -7139,7 +7146,7 @@ int GetControllerMessages(long *controlCommand)
   
   ID = -0x80000000;
   if (((controlCommand[1] & 0x20) != 0) || (ID = 0x20000000, (controlCommand[2] & 0x20) != 0)) {
-    EnMessageQueueData(&Raziel.padCommands,ID,0);
+    DeMessageQueue(&Raziel.padCommands,ID,0);
   }
   if ((controlCommand[1] & 0x40) == 0) {
     if ((controlCommand[2] & 0x40) != 0) {
@@ -7150,7 +7157,7 @@ int GetControllerMessages(long *controlCommand)
   else {
     ID_00 = &DAT_80000002;
 LAB_800b1f88:
-    EnMessageQueueData(&Raziel.padCommands,(int)ID_00,0);
+    DeMessageQueue(&Raziel.padCommands,(int)ID_00,0);
   }
   if ((controlCommand[1] & 0x80) == 0) {
     if ((controlCommand[2] & 0x80) != 0) {
@@ -7161,7 +7168,7 @@ LAB_800b1f88:
   else {
     ID = -0x7fffffff;
 LAB_800b1fd8:
-    EnMessageQueueData(&Raziel.padCommands,ID,0);
+    DeMessageQueue(&Raziel.padCommands,ID,0);
   }
   if ((controlCommand[1] & 0x200) == 0) {
     if ((controlCommand[2] & 0x200) != 0) {
@@ -7172,7 +7179,7 @@ LAB_800b1fd8:
   else {
     ID_00 = &DAT_80000004;
 LAB_800b2028:
-    EnMessageQueueData(&Raziel.padCommands,(int)ID_00,0);
+    DeMessageQueue(&Raziel.padCommands,(int)ID_00,0);
   }
   if ((controlCommand[1] & 0x100) == 0) {
     if ((controlCommand[2] & 0x100) != 0) {
@@ -7183,7 +7190,7 @@ LAB_800b2028:
   else {
     ID_00 = &DAT_80000008;
 LAB_800b2078:
-    EnMessageQueueData(&Raziel.padCommands,(int)ID_00,0);
+    DeMessageQueue(&Raziel.padCommands,(int)ID_00,0);
   }
   if ((controlCommand[1] & 0x10) == 0) {
     if ((controlCommand[2] & 0x10) == 0) goto LAB_800b20d0;
@@ -7192,10 +7199,10 @@ LAB_800b2078:
   else {
     ID_00 = &DAT_80000020;
   }
-  EnMessageQueueData(&Raziel.padCommands,(int)ID_00,0);
+  DeMessageQueue(&Raziel.padCommands,(int)ID_00,0);
 LAB_800b20d0:
   if ((controlCommand[1] & 0x8000) != 0) {
-    EnMessageQueueData(&Raziel.padCommands,(int)&DAT_80000010,0);
+    DeMessageQueue(&Raziel.padCommands,(int)&DAT_80000010,0);
   }
   return 0;
 }
@@ -7260,7 +7267,7 @@ LAB_800b20d0:
 	/* end block 3 */
 	// End Line: 13584
 
-void RazielAdditionalCollide(_Instance *instance,GameTracker *gameTracker)
+void MonsterAdditionalCollide(_Instance *instance,GameTracker *gameTracker)
 
 {
   short *psVar1;
@@ -7274,9 +7281,8 @@ void RazielAdditionalCollide(_Instance *instance,GameTracker *gameTracker)
   
   uVar2 = ControlFlag & 8;
   if ((ControlFlag & 0x2000U) != 0) {
-    Data = SetPhysicsDropOffData
-                     (0,-0x60,(int)Raziel.dropOffHeight,(int)(short)Raziel.slipSlope,0x100);
-    PhysicsCheckDropOff(instance,Data,2);
+    Data = SetPhysics(0,-0x60,(int)Raziel.dropOffHeight,(int)(short)Raziel.slipSlope,0x100);
+    PhysicsCheckBlockers(instance,Data,2);
   }
   if (uVar2 == 0) {
     instance->oldTFace = (_TFace *)0x0;
@@ -7292,7 +7298,7 @@ void RazielAdditionalCollide(_Instance *instance,GameTracker *gameTracker)
     if ((int)(short)uVar5 < (int)(instance->oldPos).z - (int)(instance->position).z) {
       Data = ((u_int)(ushort)(instance->oldPos).z - (u_int)(ushort)(instance->position).z) * 0x10000;
     }
-    Data = SetPhysicsGravityData
+    Data = SetPhysicsDropOffData
                      ((int)*(short *)(instance->matrix[1].t + 2) - instance->matrix->t[2],
                       Data >> 0x10,0,0,0,(int)(short)Raziel.slipSlope);
     uVar2 = PhysicsCheckGravity(instance,Data,7);
@@ -7306,20 +7312,21 @@ void RazielAdditionalCollide(_Instance *instance,GameTracker *gameTracker)
   }
   if (((ControlFlag & 0x400U) != 0) && (Raziel.Senses.heldClass != 3)) {
     Data_00 = (evPhysicsEdgeData *)
-              SetPhysicsEdgeData(400,-0x100,0x90,0,-0xc4,0x1f2,&Raziel.Senses.ForwardNormal,
-                                 &Raziel.Senses.AboveNormal,&Raziel.Senses.Delta);
+              SetPhysicsDropHeightData
+                        (400,-0x100,0x90,0,-0xc4,0x1f2,&Raziel.Senses.ForwardNormal,
+                         &Raziel.Senses.AboveNormal,&Raziel.Senses.Delta);
     uVar2 = PhysicsCheckEdgeGrabbing(instance,gameTracker,(int)Data_00,3);
     if ((uVar2 & 6) == 6) {
-      SetPhysics(instance,0,0,0,0);
+      SetPhysicsGravityData(instance,0,0,0,0);
       Raziel.Senses.Flags = Raziel.Senses.Flags | 2;
       if (ExtraRot != (_G2SVector3_Type *)0x0) {
-        G2Anim_DisableController(&instance->anim,1,0xe);
+        _G2Anim_FindController(&instance->anim,1,0xe);
         psVar1 = &ExtraRot->z;
         ExtraRot = (_G2SVector3_Type *)0x0;
         (instance->rotation).z = (instance->rotation).z + *psVar1;
       }
       if (Data_00 != (evPhysicsEdgeData *)0x0) {
-        PhysicsDefaultEdgeGrabResponse(instance,Data_00,0);
+        PhysicsDefaultCheckSwimResponse(instance,Data_00,0);
       }
     }
     else {
@@ -7338,25 +7345,26 @@ void RazielAdditionalCollide(_Instance *instance,GameTracker *gameTracker)
   }
   else {
     Inst = razGetHeldWeapon();
-    Data = SetPhysicsSwimData((u_int)Raziel.Mode >> 0x12 & 1,&Raziel.iVelocity,0x100,0x1a0,0x70);
+    Data = SetPhysicsDropOffData((u_int)Raziel.Mode >> 0x12 & 1,&Raziel.iVelocity,0x100,0x1a0,0x70);
     WaterStatus = PhysicsCheckSwim(instance,Data,3);
     if (((*(ushort *)(Data + 0x10) & 0x10) != 0) && (Inst != (_Instance *)0x0)) {
-      uVar3 = INSTANCE_Query(Inst,4);
+      uVar3 = INSTANCE_Post(Inst,4);
       if (uVar3 == 3) {
         G2Anim_SetSpeedAdjustment(&instance->anim,0x800);
       }
     }
     if (((*(ushort *)(Data + 0x10) & 0x20) != 0) && (Inst != (_Instance *)0x0)) {
-      uVar3 = INSTANCE_Query(Inst,4);
+      uVar3 = INSTANCE_Post(Inst,4);
       if (uVar3 == 3) {
         G2Anim_SetSpeedAdjustment(&instance->anim,0x1000);
       }
     }
   }
   if ((ControlFlag & 0x8000U) != 0) {
-    Data = SetPhysicsEdgeData(0x100,-0x100,0x50,0,-0x68,0,&Raziel.Senses.ForwardNormal,
-                              &Raziel.Senses.AboveNormal,&Raziel.Senses.Delta);
-    uVar2 = PhysicsCheckBlockers(instance,gameTracker,Data,3);
+    Data = SetPhysicsDropHeightData
+                     (0x100,-0x100,0x50,0,-0x68,0,&Raziel.Senses.ForwardNormal,
+                      &Raziel.Senses.AboveNormal,&Raziel.Senses.Delta);
+    uVar2 = PhysicsCheckDropOff(instance,gameTracker,Data,3);
     if ((uVar2 & 4) == 0) {
       uVar4 = Raziel.Senses.Flags & 0xfffffffd;
     }
@@ -7375,13 +7383,13 @@ void RazielAdditionalCollide(_Instance *instance,GameTracker *gameTracker)
     PhysicsFollowWall(instance,gameTracker,Data,7);
   }
   if (((ControlFlag & 0x4000000U) != 0) && (Raziel.attachedPlatform != (_Instance *)0x0)) {
-    uVar3 = INSTANCE_Query(Raziel.attachedPlatform,2);
+    uVar3 = INSTANCE_Post(Raziel.attachedPlatform,2);
     Data = 2;
     if ((uVar3 & 8) == 0) {
       Data = 0;
     }
-    Data = SetPhysicsLinkedMoveData(Raziel.attachedPlatform,Data,(_SVector *)0x0,(_SVector *)0x0);
-    PhysicsCheckLinkedMove(instance,Data,5);
+    Data = SetPhysicsSlideData(Raziel.attachedPlatform,Data,(_SVector *)0x0,(_SVector *)0x0);
+    SetPhysicsLinkedMoveData(instance,Data,5);
   }
   return;
 }
@@ -7412,7 +7420,7 @@ int GetEngageEvent(_Instance *instance)
   u_long uVar1;
   
   if (instance != (_Instance *)0x0) {
-    uVar1 = INSTANCE_Query(instance,2);
+    uVar1 = INSTANCE_Post(instance,2);
     if ((uVar1 & 8) != 0) {
       return 0x2000000;
     }
@@ -7466,13 +7474,15 @@ int SetupReaction(_Instance *player,_Instance *instance)
   Data = GetEngageEvent(instance);
   sVar1 = (player->position).z;
   if (Data != 0x2000001) {
-    Data = SetPhysicsEdgeData(400,-0x100,0x90,0,-0xc4,0x1f2,&Raziel.Senses.ForwardNormal,
-                              &Raziel.Senses.AboveNormal,&Raziel.Senses.Delta);
+    Data = SetPhysicsDropHeightData
+                     (400,-0x100,0x90,0,-0xc4,0x1f2,&Raziel.Senses.ForwardNormal,
+                      &Raziel.Senses.AboveNormal,&Raziel.Senses.Delta);
     PhysicsCheckEdgeGrabbing(player,gameTracker,Data,1);
     Data_00 = (evPhysicsEdgeData *)
-              SetPhysicsEdgeData(0,0,0,0,-0x8d,0,&Raziel.Senses.ForwardNormal,(_SVector *)0x0,
-                                 &Raziel.Senses.Delta);
-    PhysicsDefaultEdgeGrabResponse(player,Data_00,1);
+              SetPhysicsDropHeightData
+                        (0,0,0,0,-0x8d,0,&Raziel.Senses.ForwardNormal,(_SVector *)0x0,
+                         &Raziel.Senses.Delta);
+    PhysicsDefaultCheckSwimResponse(player,Data_00,1);
   }
   (player->position).z = sVar1;
   return (int)sVar1;
@@ -7515,10 +7525,10 @@ void DisableWristCollision(_Instance *instance,int Side)
 
 {
   if ((Side & 1U) != 0) {
-    COLLIDE_SegmentCollisionOff(instance,0x1f);
+    COLLIDE_SegmentCollisionOn(instance,0x1f);
   }
   if ((Side & 2U) != 0) {
-    COLLIDE_SegmentCollisionOff(instance,0x29);
+    COLLIDE_SegmentCollisionOn(instance,0x29);
   }
   return;
 }
@@ -7538,10 +7548,10 @@ void EnableWristCollision(_Instance *instance,int Side)
 
 {
   if ((Side & 1U) != 0) {
-    COLLIDE_SegmentCollisionOn(instance,0x1f);
+    COLLIDE_SegmentCollisionOff(instance,0x1f);
   }
   if ((Side & 2U) != 0) {
-    COLLIDE_SegmentCollisionOn(instance,0x29);
+    COLLIDE_SegmentCollisionOff(instance,0x29);
   }
   return;
 }
@@ -7576,7 +7586,7 @@ void EnableWristCollision(_Instance *instance,int Side)
 	/* end block 2 */
 	// End Line: 14544
 
-int GetCollisionType(_Instance *instance)
+int GetPhysObCollisionType(_Instance *instance)
 
 {
   int iVar1;
@@ -7585,7 +7595,7 @@ int GetCollisionType(_Instance *instance)
   collideInfo = (_CollideInfo *)instance->collideInfo;
   if (*(char *)((int)collideInfo->prim0 + 4) == '\t') {
     if (collideInfo->type1 == '\x03') {
-      COLLIDE_SetBSPTreeFlag(collideInfo,0x800);
+      COLLIDE_GetBSPTreeFlag(collideInfo,0x800);
     }
     else {
       *(u_int *)((int)collideInfo->inst1 + 0x14) = *(u_int *)((int)collideInfo->inst1 + 0x14) | 4;
@@ -7677,8 +7687,8 @@ void mdRazielProcess(_Instance *playerInstance,GameTracker *gameTracker,long *co
 {
   ProcessTimers(playerInstance);
   razClearPlayerEvent();
-  ProcessRazControl(controlCommand);
-  SetStates(playerInstance,gameTracker,controlCommand,-1);
+  FX_ProcessRain(controlCommand);
+  StateInitIdle(playerInstance,gameTracker,controlCommand,-1);
   ProcessHints();
   CAMERA_Control(&theCamera,playerInstance);
   (playerInstance->offset).x = 0;
@@ -7689,7 +7699,7 @@ void mdRazielProcess(_Instance *playerInstance,GameTracker *gameTracker,long *co
   Raziel.collisionEdgeOffset.z = 0;
   Raziel.Senses.HitMonster = (_Instance *)0x0;
   if (Raziel.GlyphSystem != (_Instance *)0x0) {
-    GlyphProcess(Raziel.GlyphSystem,gameTracker);
+    _GlyphDefaultProcess(Raziel.GlyphSystem,gameTracker);
   }
   Raziel.Abilities = debugRazielFlags1;
   debugRazielFlags1 = debugRazielFlags1 | debugRazielFlags2;
@@ -7767,7 +7777,7 @@ void RazielInit(_Instance *instance,GameTracker *gameTracker)
   DisableWristCollision(instance,2);
   DisableWristCollision(instance,1);
   razInitCollision(instance);
-  InitStates(instance);
+  PadGetState(instance);
   return;
 }
 
@@ -7809,7 +7819,7 @@ void RazielInit(_Instance *instance,GameTracker *gameTracker)
 	/* end block 2 */
 	// End Line: 15125
 
-void RazielCollide(_Instance *instance,GameTracker *gameTracker)
+void RazielAdditionalCollide(_Instance *instance,GameTracker *gameTracker)
 
 {
   char cVar1;
@@ -7818,7 +7828,7 @@ void RazielCollide(_Instance *instance,GameTracker *gameTracker)
   void *pvVar4;
   
   pvVar4 = instance->collideInfo;
-  iVar2 = GetCollisionType(instance);
+  iVar2 = GetPhysObCollisionType(instance);
   if (iVar2 != 1) {
     cVar1 = *(char *)((int)pvVar4 + 7);
     if (cVar1 == '\x01') {
@@ -7865,7 +7875,7 @@ void RazielCollide(_Instance *instance,GameTracker *gameTracker)
         (instance->position).z = (instance->position).z + *(short *)((int)pvVar3 + 0x2c);
       }
     }
-    COLLIDE_UpdateAllTransforms(instance,(SVECTOR *)((int)pvVar4 + 0x28));
+    COLLIDE_MoveAllTransforms(instance,(SVECTOR *)((int)pvVar4 + 0x28));
   }
   return;
 }
@@ -7960,7 +7970,8 @@ void RAZIEL_TurnHead(_Instance *instance,short *rotx,short *rotz,GameTracker *ga
     *rotz = local_28.z;
     ThrowSetFocusPoint(instance,&local_28);
     if (Raziel.extraRot.x != 0) {
-      CAMERA_SetLookRot(&theCamera,(int)*rotx + (int)(Raziel.throwData)->coilRot,(int)*rotz);
+      CAMERA_SetLookFocusAndBase
+                (&theCamera,(int)*rotx + (int)(Raziel.throwData)->coilRot,(int)*rotz);
     }
   }
   return;
@@ -7983,10 +7994,10 @@ void RAZIEL_SetLookAround(_Instance *instance)
   _G2Anim_Type *anim;
   
   anim = &instance->anim;
-  G2Anim_EnableController(anim,0x11,0xe);
-  G2Anim_EnableController(anim,0x10,0xe);
-  G2Anim_EnableController(anim,0xe,0xe);
-  INSTANCE_Post(instance,(int)&DAT_00100009,1);
+  G2Anim_DisableController(anim,0x11,0xe);
+  G2Anim_DisableController(anim,0x10,0xe);
+  G2Anim_DisableController(anim,0xe,0xe);
+  INSTANCE_Query(instance,(int)&DAT_00100009,1);
   Raziel.throwXRot = 0;
   Raziel.throwZRot = 0;
   return;
@@ -8003,7 +8014,7 @@ void RAZIEL_SetLookAround(_Instance *instance)
 	/* end block 1 */
 	// End Line: 15493
 
-void RAZIEL_ResetLookAround(_Instance *instance)
+void PLAYER_ReSetLookAround(_Instance *instance)
 
 {
   _G2Anim_Type *anim;
@@ -8012,7 +8023,7 @@ void RAZIEL_ResetLookAround(_Instance *instance)
   G2Anim_InterpDisableController(anim,0x11,0xe,300);
   G2Anim_InterpDisableController(anim,0x10,0xe,300);
   G2Anim_InterpDisableController(anim,0xe,0xe,300);
-  INSTANCE_Post(instance,(int)&DAT_00100009,0);
+  INSTANCE_Query(instance,(int)&DAT_00100009,0);
   return;
 }
 
@@ -8032,17 +8043,17 @@ void RAZIEL_ResetLookAround(_Instance *instance)
 	/* end block 2 */
 	// End Line: 15553
 
-long RAZIEL_OkToLookAround(_Instance *playerInstance)
+long PLAYER_OkToLookAround(_Instance *playerInstance)
 
 {
-  if (Raziel.State.SectionList[0].Process == StateHandlerSoulSuck) {
+  if (Raziel.State.SectionList[0].Process == StateHandlerAttack2) {
     return (u_int)((Raziel.Senses.EngagedMask & 0x1000) == 0);
   }
   if (((playerInstance->tface != (_TFace *)0x0) || (playerInstance->attachedID != 0)) &&
-     ((Raziel.State.SectionList[0].Process == StateHandlerIdle ||
-      (((Raziel.State.SectionList[0].Process == StateHandlerSwim ||
-        (Raziel.State.SectionList[0].Process == StateHandlerSwimTread)) ||
-       (Raziel.State.SectionList[0].Process == StateHandlerThrow2)))))) {
+     ((Raziel.State.SectionList[0].Process == StateHandlerPickupObject ||
+      (((Raziel.State.SectionList[0].Process == StateHandlerSwimTread ||
+        (Raziel.State.SectionList[0].Process == StateHandlerSwim)) ||
+       (Raziel.State.SectionList[0].Process == StateHandlerWallIdle)))))) {
     return 1;
   }
   return 0;
@@ -8088,7 +8099,7 @@ void TrailWaterFX(_Instance *instance,int Segment,int Bubbles,int Type)
   __BubbleParams local_40;
   
   memset(&_Stack72,0,8);
-  pLVar1 = STREAM_GetLevelWithID(instance->currentStreamUnitID);
+  pLVar1 = STREAM_GetWaterZLevel(instance->currentStreamUnitID);
   local_40.DisperseFrames = 5;
   local_40.KillScale = 0x80;
   local_40.MinSplashSize = 0x800;

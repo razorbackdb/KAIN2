@@ -11,10 +11,10 @@
 	/* end block 1 */
 	// End Line: 55
 
-void SetPhysics(_Instance *instance,short gravity,long x,long y,long z)
+void SetPhysicsGravityData(_Instance *instance,short gravity,long x,long y,long z)
 
 {
-  SetExternalForce(ExternalForces,0,0,gravity,0,0x1000);
+  SetExternalTransitionForce(ExternalForces,0,0,gravity,0,0x1000);
   instance->xVel = x;
   instance->yVel = y;
   instance->zVel = z;
@@ -41,7 +41,7 @@ void SetPhysics(_Instance *instance,short gravity,long x,long y,long z)
 	/* end block 2 */
 	// End Line: 76
 
-void ResetPhysics(_Instance *instance,short gravity)
+void PhysicsMove(_Instance *instance,short gravity)
 
 {
   int iVar1;
@@ -49,10 +49,10 @@ void ResetPhysics(_Instance *instance,short gravity)
   
   iVar2 = 1;
   iVar1 = 0x14;
-  SetExternalForce(ExternalForces,0,0,gravity,0,0x1000);
+  SetExternalTransitionForce(ExternalForces,0,0,gravity,0,0x1000);
   do {
     iVar2 = iVar2 + 1;
-    SetExternalForce((__Force *)((int)&ExternalForces->Type + iVar1),0,0,0,0,0);
+    SetExternalTransitionForce((__Force *)((int)&ExternalForces->Type + iVar1),0,0,0,0,0);
     iVar1 = iVar1 + 0x14;
   } while (iVar2 < 4);
   instance->xVel = 0;
@@ -96,8 +96,9 @@ void SetDampingPhysics(_Instance *instance,int damping)
     damping = damping + 0xfff;
   }
   instance->zAccl = -(damping >> 0xc);
-  SetExternalForce(ExternalForces,*(short *)&instance->xAccl,*(short *)&instance->yAccl,
-                   *(short *)&instance->zAccl,0,0x1000);
+  SetExternalTransitionForce
+            (ExternalForces,*(short *)&instance->xAccl,*(short *)&instance->yAccl,
+             *(short *)&instance->zAccl,0,0x1000);
   return;
 }
 
@@ -177,7 +178,7 @@ void SetImpulsePhysics(_Instance *instance,__Player *player)
 void SetDropPhysics(_Instance *instance,__Player *player)
 
 {
-  SetExternalForce(ExternalForces,0,4,-0x10,0,0x1000);
+  SetExternalTransitionForce(ExternalForces,0,4,-0x10,0,0x1000);
   return;
 }
 
@@ -248,7 +249,7 @@ void InitExternalForces(__Force *Forces,int MaxForces)
 	/* end block 2 */
 	// End Line: 339
 
-void SetExternalForce(__Force *In,short x,short y,short z,int Space,int Friction)
+void SetExternalTransitionForce(__Force *In,short x,short y,short z,int Space,int Friction)
 
 {
   (In->LinearForce).x = (int)x;
@@ -275,7 +276,7 @@ void SetExternalForce(__Force *In,short x,short y,short z,int Space,int Friction
 	/* end block 2 */
 	// End Line: 367
 
-void SetExternalTransitionForce(__Force *in,_Instance *instance,int time,int x,int y,int z)
+void SetExternalForce(__Force *in,_Instance *instance,int time,int x,int y,int z)
 
 {
   int iVar1;
@@ -328,7 +329,7 @@ void SetExternalTransitionForce(__Force *in,_Instance *instance,int time,int x,i
 	/* end block 3 */
 	// End Line: 404
 
-void ProcessPhysics(__Player *player,__CharacterState *In,int CurrentSection,int Mode)
+void ProcessPhysicalObject(__Player *player,__CharacterState *In,int CurrentSection,int Mode)
 
 {
   long segment;
@@ -346,7 +347,7 @@ void ProcessPhysics(__Player *player,__CharacterState *In,int CurrentSection,int
       PHYSICS_StopIfCloseToTarget(In->CharacterInstance,0,0,0);
       instance = In->CharacterInstance;
       if (((instance->xAccl == 0) && (instance->yAccl == 0)) && (instance->zAccl == 0)) {
-        SetExternalForce(ExternalForces,0,0,0,0,0);
+        SetExternalTransitionForce(ExternalForces,0,0,0,0,0);
       }
     }
     else {
@@ -372,7 +373,7 @@ void ProcessPhysics(__Player *player,__CharacterState *In,int CurrentSection,int
         PhysicsMoveLocalZClamp(instance,segment,time,clamp);
         PHYSICS_StopIfCloseToTarget(instance,0,0,(int)player->swimTargetSpeed);
         if (((instance->xAccl == 0) && (instance->yAccl == 0)) && (instance->zAccl == 0)) {
-          INSTANCE_Post(instance,(int)&DAT_00100011,(int)player->swimTargetSpeed);
+          INSTANCE_Query(instance,(int)&DAT_00100011,(int)player->swimTargetSpeed);
         }
       }
     }

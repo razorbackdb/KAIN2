@@ -131,7 +131,7 @@ void DEBUG_UpdateFog(long *var)
 void DEBUG_UpdateHealth(long *var)
 
 {
-  RAZIEL_DebugHealthSetScale(1);
+  RAZIEL_DebugHealthFillUp(1);
   return;
 }
 
@@ -156,8 +156,8 @@ void DEBUG_UpdateHealth(long *var)
 void DEBUG_FillUpHealth(long *var)
 
 {
-  RAZIEL_DebugHealthFillUp();
-  RAZIEL_DebugManaFillUp();
+  RAZIEL_DebugManaSetMax();
+  RAZIEL_DebugHealthSetScale();
   return;
 }
 
@@ -349,7 +349,7 @@ void process_cheat_codes(GameTracker *gt,long *ctrl)
 	/* end block 2 */
 	// End Line: 2532
 
-void DEBUG_Process(GameTracker *gameTracker)
+void DEBUG_ProcessSecondController(GameTracker *gameTracker)
 
 {
   short sVar1;
@@ -371,16 +371,16 @@ void DEBUG_Process(GameTracker *gameTracker)
   if (sVar1 != 4) {
     if (sVar1 == 6) {
       process_cheat_codes(gameTracker,gameTracker->controlCommand);
-      DEBUG_Menu(gameTracker);
+      DEBUG_MenuCountLength(gameTracker);
     }
     else {
       if (sVar1 == 7) {
-        DEBUG_ViewVram(gameTracker);
+        DEBUG_EndViewVram(gameTracker);
       }
     }
     goto LAB_80013230;
   }
-  DEBUG_Menu(gameTracker);
+  DEBUG_MenuCountLength(gameTracker);
   if ((gameTracker->debugFlags2 & 0x40000U) == 0) {
 LAB_80013188:
     if ((uVar2 & 0x40000) != 0) {
@@ -461,7 +461,7 @@ void DEBUG_Draw(GameTracker *gameTracker,u_long **ot)
 	/* end block 4 */
 	// End Line: 2723
 
-long DEBUG_MenuCountLength(DebugMenuLine *menu)
+long DEBUG_Menu(DebugMenuLine *menu)
 
 {
   DEBUG_LINE_TYPE *pDVar1;
@@ -511,7 +511,7 @@ void DEBUG_ExitMenus(void)
 {
   long lVar1;
   
-  lVar1 = DEBUG_MenuCountLength(currentMenu);
+  lVar1 = DEBUG_Menu(currentMenu);
   currentMenu[lVar1].lower = debugMenuChoice;
   if (gameTrackerX.sound.gMusicOn == '\0') {
     SOUND_MusicOff();
@@ -590,7 +590,7 @@ DebugMenuLine * get_last_menu_line(DebugMenuLine *line)
 	/* end block 4 */
 	// End Line: 2843
 
-int num_menu_items(DebugMenuLine *menu)
+int menu_item(DebugMenuLine *menu)
 
 {
   DEBUG_LINE_TYPE DVar1;
@@ -637,7 +637,7 @@ void maybe_change_menu_choice(GameTracker *gt,DebugMenuLine *menu)
   int iVar3;
   
   iVar3 = debugMenuChoice;
-  iVar1 = num_menu_items(menu);
+  iVar1 = menu_item(menu);
   if ((gt->controlCommand[1] & 1U) == 0) {
     uVar2 = (u_int)gt->controlCommand[1] >> 1 & 1;
   }
@@ -688,7 +688,7 @@ void maybe_change_menu_choice(GameTracker *gt,DebugMenuLine *menu)
 	/* end block 2 */
 	// End Line: 2910
 
-void handle_line_type_long(GameTracker *gt,DebugMenuLine *line)
+void handle_line_type_action(GameTracker *gt,DebugMenuLine *line)
 
 {
   u_int uVar1;
@@ -782,7 +782,7 @@ void handle_line_type_bit(GameTracker *gt,DebugMenuLine *line)
 	/* end block 2 */
 	// End Line: 2983
 
-void handle_line_type_action(GameTracker *gt,DebugMenuLine *line)
+void handle_line_type_long(GameTracker *gt,DebugMenuLine *line)
 
 {
   if ((gt->controlCommand[1] & 0x80U) != 0) {
@@ -901,7 +901,7 @@ void handle_line_type_menu(GameTracker *gt,DebugMenuLine *line)
 	/* end block 3 */
 	// End Line: 3113
 
-void process_menu_line(GameTracker *gt,DebugMenuLine *menu)
+void menu_process(GameTracker *gt,DebugMenuLine *menu)
 
 {
   if ((menu[debugMenuChoice].type < DEBUG_LINE_TYPE_ENDLIST) &&
@@ -954,9 +954,9 @@ void post_process_functions(GameTracker *gt,DebugMenuLine *menu)
 
 {
   if (menu == &debugSoundMenu) {
-    SOUND_SetMusicVolume(-1);
     SOUND_SetSfxVolume(-1);
-    SOUND_SetVoiceVolume(-1);
+    SOUND_SetInstanceSoundVolume(-1);
+    SpuSetVoiceVolume(-1);
     if ((gt->debugFlags & 0x80000U) == 0) {
       (gt->sound).gVoiceOn = '\0';
     }
@@ -1096,8 +1096,8 @@ void adjust_format(char *ctrl,debug_format_t *fmt)
     if (bVar1 == 0) {
       return;
     }
-    iVar2 = strncmp(ctrl,"-abs ",5);
-    if ((iVar2 == 0) || (iVar2 = strncmp(ctrl,"-rel ",5), iVar2 == 0)) {
+    iVar2 = strncpy(ctrl,"-abs ",5);
+    if ((iVar2 == 0) || (iVar2 = strncpy(ctrl,"-rel ",5), iVar2 == 0)) {
       pbVar4 = (byte *)ctrl + 5;
       iVar2 = 0;
       iVar5 = 0;
@@ -1117,7 +1117,7 @@ void adjust_format(char *ctrl,debug_format_t *fmt)
       if (*pbVar4 != 0) {
         pbVar4 = pbVar4 + 1;
       }
-      iVar3 = strncmp(ctrl,"-abs ",5);
+      iVar3 = strncpy(ctrl,"-abs ",5);
       if (iVar3 == 0) {
         fmt->xpos = iVar2;
         fmt->ypos = iVar5;
@@ -1128,7 +1128,7 @@ void adjust_format(char *ctrl,debug_format_t *fmt)
       }
     }
     else {
-      iVar2 = strncmp(ctrl,"-center",7);
+      iVar2 = strncpy(ctrl,"-center",7);
       if (iVar2 != 0) {
         printf("unknown format control: %s\n");
         return;
@@ -1285,7 +1285,7 @@ void draw_menu(GameTracker *gt,DebugMenuLine *menu)
   debug_format_t local_38;
   int local_28;
   int local_24;
-  undefined4 local_20;
+  u_char local_20;
   
   local_20 = 0;
   local_28 = 0x28;
@@ -1365,7 +1365,7 @@ void draw_menu(GameTracker *gt,DebugMenuLine *menu)
 	/* end block 2 */
 	// End Line: 3686
 
-void DEBUG_Menu(GameTracker *gt)
+void DEBUG_MenuCountLength(GameTracker *gt)
 
 {
   DebugMenuLine *menu;
@@ -1376,7 +1376,7 @@ void DEBUG_Menu(GameTracker *gt)
   lVar1 = debugMenuChoice;
   menu = currentMenu;
   if ((currentMenu == &mainMenu) || (currentMenu == &pauseMenu)) {
-    menu_process(gt->menu);
+    process_menu_line(gt->menu);
   }
   else {
     iVar2 = pre_process_functions(gt,currentMenu);
@@ -1388,7 +1388,7 @@ void DEBUG_Menu(GameTracker *gt)
       }
       draw_menu(gt,menu);
       maybe_change_menu_choice(gt,menu);
-      if ((debugMenuChoice == lVar1) && (process_menu_line(gt,menu), currentMenu == menu)) {
+      if ((debugMenuChoice == lVar1) && (menu_process(gt,menu), currentMenu == menu)) {
         post_process_functions(gt,menu);
       }
     }
@@ -1439,7 +1439,7 @@ void DEBUG_DisplayStatus(GameTracker *gameTracker)
   char *fmt;
   long local_18 [2];
   
-  STREAM_GetLevelWithID(gameTracker->playerInstance->currentStreamUnitID);
+  STREAM_GetWaterZLevel(gameTracker->playerInstance->currentStreamUnitID);
   if ((gameTracker->debugFlags & 0x40000000U) != 0) {
     EVENT_PrintVars();
   }
@@ -1541,7 +1541,7 @@ void DEBUG_ContinueGame(void)
 void DEBUG_ExitGame(void)
 
 {
-  SOUND_StopAllSound();
+  SOUND_ResumeAllSound();
   gameTrackerX.gameFlags = gameTrackerX.gameFlags | 1;
   gameTrackerX.levelDone = 2;
   gameTrackerX.levelChange = 1;
@@ -1575,7 +1575,7 @@ void DEBUG_ReloadCurrentLevel(void)
       SAVE_SaveGame();
     }
     gameTrackerX.gameFlags = gameTrackerX.gameFlags | 1;
-    SOUND_ResetAllSound();
+    SOUND_StopAllSound();
     gameTrackerX.levelChange = 1;
     gameTrackerX.levelDone = 4;
   }
@@ -1687,7 +1687,7 @@ void DEBUG_SetViewVram(void)
 	/* end block 1 */
 	// End Line: 6098
 
-void DEBUG_EndViewVram(GameTracker *gameTracker)
+void DEBUG_ViewVram(GameTracker *gameTracker)
 
 {
   SetDefDispEnv((undefined2 *)&disp,0,0,0x200,0xf0);
@@ -1717,7 +1717,7 @@ void DEBUG_EndViewVram(GameTracker *gameTracker)
 	/* end block 2 */
 	// End Line: 6112
 
-void DEBUG_ViewVram(GameTracker *gameTracker)
+void DEBUG_EndViewVram(GameTracker *gameTracker)
 
 {
   if (((gameTracker->controlCommand[1] & 1U) != 0) && (-1 < DAT_800cf10c)) {
@@ -1815,12 +1815,12 @@ void DEBUG_PageFlip(void)
     iVar2 = CheckVolatile(gameTrackerX.reqDisp);
   } while (iVar2 != 0);
   DrawSync(0);
-  DrawSyncCallback(0);
-  VSyncCallback(0);
+  DMACallback(0);
+  DrawCallback(0);
   ResetPrimPool();
   ppuVar1 = gameTrackerX.drawOT;
   gameTrackerX.drawPage = 0;
-  PutDrawEnv((undefined4 *)&draw);
+  PutDrawEnv((u_char *)&draw);
   ClearOTagR(ppuVar1,0xc00);
   DrawSync(0);
   local_1d = 5;
@@ -1989,8 +1989,8 @@ void DEBUG_ProcessCheat(GameTracker *gameTracker)
     memset(local_48,0,0x10);
     local_4e = 0xff00;
     MATH3D_SetUnityMatrix(&MStack56);
-    RotMatrixZ(theCamera.core.rotation.z + iVar2,(u_int *)&MStack56);
-    ApplyMatrix(&MStack56,auStack80,local_48);
+    RotMatrixX(theCamera.core.rotation.z + iVar2,(u_int *)&MStack56);
+    ApplyMatrixSV(&MStack56,auStack80,local_48);
     (gameTracker->playerInstance->position).x =
          (gameTracker->playerInstance->position).x + local_48[0];
     (gameTracker->playerInstance->position).y = (gameTracker->playerInstance->position).y + local_44

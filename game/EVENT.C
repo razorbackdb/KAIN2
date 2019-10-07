@@ -31,7 +31,7 @@
 	/* end block 4 */
 	// End Line: 302
 
-void EVENT_UpdateResetSignalArray(Level *oldLevel,Level *newLevel,long sizeOfLevel)
+void EVENT_UpdateResetSignalArrayAndWaterMovement(Level *oldLevel,Level *newLevel,long sizeOfLevel)
 
 {
   _MultiSignal *p_Var1;
@@ -382,11 +382,13 @@ void EVENT_ProcessTimers(void)
           CurrentPuzzleLevel = *(Level **)((int)&eventTimerArray.scriptPos + iVar4);
           EventCurrentEventIndex = *(long *)((int)&eventTimerArray.level + iVar4);
           EventAbortLine = 0;
-          lVar1 = EVENT_DoAction(*(Event **)((int)&eventTimerArray.time + iVar4),
-                                 *(ScriptPCode **)((int)&eventTimerArray.event + iVar4),
-                                 *(short **)((int)&eventTimerArray.actionScript + iVar4));
+          lVar1 = EVENT_DoInstanceAction
+                            (*(Event **)((int)&eventTimerArray.time + iVar4),
+                             *(ScriptPCode **)((int)&eventTimerArray.event + iVar4),
+                             *(short **)((int)&eventTimerArray.actionScript + iVar4));
           if ((lVar1 != 0) && (EventCurrentEventIndex != -1)) {
-            EVENT_Process(*(Event **)((int)&eventTimerArray.time + iVar4),EventCurrentEventIndex);
+            EVENT_ProcessPuppetShow
+                      (*(Event **)((int)&eventTimerArray.time + iVar4),EventCurrentEventIndex);
           }
         }
       }
@@ -432,7 +434,7 @@ void EVENT_ProcessTimers(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void EVENT_ProcessHints(void)
+void EVENT_Process(void)
 
 {
   bool bVar1;
@@ -517,7 +519,7 @@ void EVENT_ProcessHints(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-EventTimer * EVENT_GetNextTimer(void)
+EventTimer * EVENT_GetNextTerrainMove(void)
 
 {
   EventTimer *pEVar1;
@@ -578,7 +580,7 @@ void EVENT_RemoveTimer(EventTimer *timer)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void EVENT_InitTimers(void)
+void FONT_Init(void)
 
 {
   numActiveEventTimers = 0;
@@ -638,11 +640,11 @@ void EVENT_InitTerrainMovement(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void EVENT_Init(void)
+void EVENT_InitTimers(void)
 
 {
   EVENT_InitTerrainMovement();
-  EVENT_InitTimers();
+  FONT_Init();
   HINT_ResetHint();
   WaitingForVoiceNumber = -1;
   WaitingToLoadSound = 0x96000;
@@ -681,7 +683,7 @@ void EVENT_Init(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-WaterLevelProcess * EVENT_GetNextTerrainMove(void)
+WaterLevelProcess * EVENT_GetNextTimer(void)
 
 {
   WaterLevelProcess *pWVar1;
@@ -741,7 +743,7 @@ WaterLevelProcess * EVENT_GetNextTerrainMove(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void EVENT_ProcessMovingWater(void)
+void EVENT_BSPProcess(void)
 
 {
   short sVar1;
@@ -801,10 +803,10 @@ void EVENT_ProcessMovingWater(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void EVENT_DoProcess(void)
+void EVENT_ProcessEvents(void)
 
 {
-  EVENT_ProcessMovingWater();
+  EVENT_BSPProcess();
   EVENT_ProcessTimers();
   return;
 }
@@ -870,7 +872,7 @@ void EVENT_DoProcess(void)
 	/* end block 2 */
 	// End Line: 1317
 
-void EVENT_BSPProcess(_StreamUnit *streamUnit)
+void EVENT_DoProcess(_StreamUnit *streamUnit)
 
 {
   short sVar1;
@@ -927,7 +929,7 @@ void EVENT_BSPProcess(_StreamUnit *streamUnit)
               (instance->position).x = (instance->position).x + sVar8;
               (instance->position).z = (instance->position).z + sVar6;
               (instance->position).y = (instance->position).y + sVar7;
-              COLLIDE_UpdateAllTransforms(instance,&local_30);
+              COLLIDE_MoveAllTransforms(instance,&local_30);
             }
             instance = instance->next;
           }
@@ -960,7 +962,7 @@ void EVENT_BSPProcess(_StreamUnit *streamUnit)
 	/* end block 2 */
 	// End Line: 1579
 
-void EVENT_Process(Event *eventInstance,long startIndex)
+void EVENT_ProcessPuppetShow(Event *eventInstance,long startIndex)
 
 {
   long lVar1;
@@ -981,7 +983,7 @@ LAB_800617e0:
         if ((*(ushort *)(*(int *)(iVar3 + (int)eventInstance->actionList) + 2) & 2) == 0) {
           actionScript = *(ScriptPCode **)(iVar3 + (int)eventInstance->actionList);
           EventAbortLine = 0;
-          EVENT_DoAction(eventInstance,actionScript,actionScript->data);
+          EVENT_DoInstanceAction(eventInstance,actionScript,actionScript->data);
         }
       }
       else {
@@ -1032,7 +1034,7 @@ LAB_8006182c:
 	/* end block 2 */
 	// End Line: 1821
 
-void EVENT_ProcessPuppetShow(Event *eventInstance,long startIndex)
+void EVENT_ProcessMovingWater(Event *eventInstance,long startIndex)
 
 {
   bool bVar1;
@@ -1080,7 +1082,7 @@ void EVENT_ProcessPuppetShow(Event *eventInstance,long startIndex)
     actionScript = eventInstance->actionList[startIndex];
   }
   EventAbortLine = 0;
-  EVENT_DoAction(eventInstance,actionScript,actionScript->data);
+  EVENT_DoInstanceAction(eventInstance,actionScript,actionScript->data);
 LAB_800619c8:
   if ((((EventAbortLine == 0) || (EventJustRecievedTimer == 1)) && (bVar1)) &&
      (eventInstance->processingPuppetShow = cVar4 + '\x02',
@@ -1110,7 +1112,7 @@ LAB_800619c8:
 	/* end block 2 */
 	// End Line: 1964
 
-void EVENT_ProcessEvents(EventPointers *eventPointers,Level *level)
+void EVENT_ProcessHints(EventPointers *eventPointers,Level *level)
 
 {
   Event *eventInstance;
@@ -1125,11 +1127,11 @@ void EVENT_ProcessEvents(EventPointers *eventPointers,Level *level)
       eventInstance = (Event *)pEVar2->eventInstances[0];
       if (eventInstance->eventNumber < 0) {
         if (eventInstance->processingPuppetShow != 0) {
-          EVENT_ProcessPuppetShow(eventInstance,(u_int)eventInstance->processingPuppetShow - 1);
+          EVENT_ProcessMovingWater(eventInstance,(u_int)eventInstance->processingPuppetShow - 1);
         }
       }
       else {
-        EVENT_Process(eventInstance,0);
+        EVENT_ProcessPuppetShow(eventInstance,0);
       }
       iVar1 = iVar1 + 1;
       pEVar2 = (EventPointers *)pEVar2->eventInstances;
@@ -1169,7 +1171,7 @@ void EVENT_ProcessEvents(EventPointers *eventPointers,Level *level)
 	/* end block 2 */
 	// End Line: 2024
 
-long EVENT_DoAction(Event *eventInstance,ScriptPCode *actionScript,short *scriptData)
+long EVENT_DoInstanceAction(Event *eventInstance,ScriptPCode *actionScript,short *scriptData)
 
 {
   long lVar1;
@@ -1190,9 +1192,9 @@ long EVENT_DoAction(Event *eventInstance,ScriptPCode *actionScript,short *script
      (lVar6 = 1, EventAbortLine == 0)) {
     lVar6 = 1;
     do {
-      scriptData = EVENT_ParseOpcode(&local_4a8,scriptData,local_20);
+      scriptData = EVENT_ParseOperand2(&local_4a8,scriptData,local_20);
       if (((EventAbortLine != 0) && (EventJustRecievedTimer == 0)) &&
-         (pEVar4 = EVENT_GetNextTimer(), psVar2 = EventAbortedPosition,
+         (pEVar4 = EVENT_GetNextTerrainMove(), psVar2 = EventAbortedPosition,
          lVar1 = EventCurrentEventIndex, pEVar4 != (EventTimer *)0x0)) {
         lVar6 = 0;
         *(Event **)&pEVar4->time = eventInstance;
@@ -1258,7 +1260,7 @@ long EVENT_IsConditionTrue(Event *eventInstance,ScriptPCode *conditionScript)
     do {
       do {
         if ((codeStream == (short *)0x0) || (EventAbortLine != 0)) goto LAB_80061d0c;
-        codeStream = EVENT_ParseOpcode(&local_4a8,codeStream,&local_20);
+        codeStream = EVENT_ParseOperand2(&local_4a8,codeStream,&local_20);
       } while ((local_20 == 0) || (EventAbortLine != 0));
       CurrentEventLine = CurrentEventLine + 1;
       iVar1 = local_4a8.topOfStack + -1;
@@ -1315,7 +1317,7 @@ long EVENT_WriteEventObject(StackType *stackEntry,long areaID,Event *event,long 
   
   lVar2 = 0;
   if (event == (Event *)0x0) {
-    pSVar1 = SAVE_GetSavedEvent(areaID,number);
+    pSVar1 = SAVE_GetSavedNextEvent(areaID,number);
     if (pSVar1 == (SavedBasic *)0x0) {
       stackEntry->id = 0x15;
       pSVar1 = EVENT_CreateSaveEvent(areaID,number);
@@ -1333,7 +1335,7 @@ long EVENT_WriteEventObject(StackType *stackEntry,long areaID,Event *event,long 
     stackEntry->id = 0x10;
     *(Event **)stackEntry->data = event;
   }
-  *(undefined4 *)(stackEntry->data + 4) = 0xffffffff;
+  *(u_char *)(stackEntry->data + 4) = 0xffffffff;
   return lVar2;
 }
 
@@ -1385,7 +1387,7 @@ _MultiSignal * EVENT_ResolveObjectSignal(_StreamUnit *stream,long signalNumber)
     }
   }
   else {
-    p_Var1 = SIGNAL_FindSignal(level,signalNumber);
+    p_Var1 = SIGNAL_HandleSignal(level,signalNumber);
   }
   return p_Var1;
 }
@@ -1408,7 +1410,7 @@ _MultiSignal * EVENT_ResolveObjectSignal(_StreamUnit *stream,long signalNumber)
 	/* end block 2 */
 	// End Line: 2509
 
-Intro * EVENT_ResolveObjectIntro(EventInstanceObject *instanceObject)
+Intro * EVENT_ResolveSFXMarker(EventInstanceObject *instanceObject)
 
 {
   Intro *pIVar1;
@@ -1449,7 +1451,7 @@ Intro * EVENT_ResolveObjectIntro(EventInstanceObject *instanceObject)
 	/* end block 4 */
 	// End Line: 2536
 
-_SFXMkr * EVENT_ResolveSFXMarker(_StreamUnit *stream,EventInstanceObject *instanceObject)
+_SFXMkr * EVENT_ResolveObjectIntro(_StreamUnit *stream,EventInstanceObject *instanceObject)
 
 {
   int iVar1;
@@ -1510,7 +1512,7 @@ void EVENT_AddGameObjectToStack(_PCodeStack *stack)
   iVar1 = stack->topOfStack;
   if (iVar1 < 0x20) {
     stack->stack[iVar1].id = 3;
-    *(undefined4 *)stack->stack[iVar1].data = 0xffffffff;
+    *(u_char *)stack->stack[iVar1].data = 0xffffffff;
     stack->topOfStack = stack->topOfStack + 1;
   }
   return;
@@ -1543,7 +1545,7 @@ void EVENT_AddGameObjectToStack(_PCodeStack *stack)
 	/* end block 2 */
 	// End Line: 2619
 
-void EVENT_AddPlayerObjectToStack(_PCodeStack *stack)
+void EVENT_AddObjectToStack(_PCodeStack *stack)
 
 {
   _Instance *p_Var1;
@@ -1553,7 +1555,7 @@ void EVENT_AddPlayerObjectToStack(_PCodeStack *stack)
     pSVar2 = stack->stack + stack->topOfStack;
     pSVar2->id = 2;
     p_Var1 = gameTrackerX.playerInstance;
-    *(undefined4 *)(pSVar2->data + 4) = 0xffffffff;
+    *(u_char *)(pSVar2->data + 4) = 0xffffffff;
     *(_Instance **)pSVar2->data = p_Var1;
     stack->topOfStack = stack->topOfStack + 1;
   }
@@ -1632,12 +1634,12 @@ void EVENT_AddPlayerObjectToStack(_PCodeStack *stack)
 	/* end block 2 */
 	// End Line: 2654
 
-void EVENT_AddObjectToStack(_PCodeStack *stack,long item)
+void EVENT_AddCharPointerToStack(_PCodeStack *stack,long item)
 
 {
   long lVar1;
   Level *pLVar2;
-  undefined4 uVar3;
+  u_char uVar3;
   EventBasicObject *pEVar4;
   StackType *stackEntry;
   long lVar5;
@@ -1653,31 +1655,31 @@ void EVENT_AddObjectToStack(_PCodeStack *stack,long item)
       if (*(int *)(pEVar4 + 6) == 0) {
         if (*(int *)(pEVar4 + 8) == 0) goto LAB_800621b0;
         stackEntry->id = 4;
-        uVar3 = *(undefined4 *)(pEVar4 + 8);
+        uVar3 = *(u_char *)(pEVar4 + 8);
       }
       else {
         stackEntry->id = 2;
-        uVar3 = *(undefined4 *)(pEVar4 + 6);
+        uVar3 = *(u_char *)(pEVar4 + 6);
       }
 LAB_80062168:
-      *(undefined4 *)(stackEntry->data + 4) = 0xffffffff;
-      *(undefined4 *)stackEntry->data = uVar3;
+      *(u_char *)(stackEntry->data + 4) = 0xffffffff;
+      *(u_char *)stackEntry->data = uVar3;
     }
     else {
       stackEntry->id = 0x1b;
       *(undefined2 *)stackEntry->data = 1;
-      uVar3 = *(undefined4 *)(pEVar4 + 8);
+      uVar3 = *(u_char *)(pEVar4 + 8);
       *(undefined2 *)(stackEntry->data + 2) = 0xffff;
-      *(undefined4 *)(stackEntry->data + 4) = 0xffffffff;
-      *(undefined4 *)(stackEntry->data + 8) = 0xffffffff;
-      *(undefined4 *)(stackEntry->data + 0xc) = 0xffffffff;
-      *(undefined4 *)(stackEntry->data + 0x10) = uVar3;
+      *(u_char *)(stackEntry->data + 4) = 0xffffffff;
+      *(u_char *)(stackEntry->data + 8) = 0xffffffff;
+      *(u_char *)(stackEntry->data + 0xc) = 0xffffffff;
+      *(u_char *)(stackEntry->data + 0x10) = uVar3;
     }
     break;
   case 1:
     stackEntry->id = 0x12;
     *(EventBasicObject **)stackEntry->data = pEVar4;
-    *(undefined4 *)(stackEntry->data + 0x18) = 0;
+    *(u_char *)(stackEntry->data + 0x18) = 0;
     *(long *)(stackEntry->data + 0x1c) = lVar1;
     break;
   case 2:
@@ -1688,39 +1690,39 @@ LAB_80062168:
   case 3:
     if (*(int *)(pEVar4 + 4) == 0) goto LAB_800621b0;
     stackEntry->id = 0x17;
-    *(undefined4 *)stackEntry->data = *(undefined4 *)(pEVar4 + 4);
-    uVar3 = *(undefined4 *)(pEVar4 + 6);
-    *(undefined4 *)(stackEntry->data + 8) = 0xffffffff;
-    *(undefined4 *)(stackEntry->data + 4) = uVar3;
+    *(u_char *)stackEntry->data = *(u_char *)(pEVar4 + 4);
+    uVar3 = *(u_char *)(pEVar4 + 6);
+    *(u_char *)(stackEntry->data + 8) = 0xffffffff;
+    *(u_char *)(stackEntry->data + 4) = uVar3;
     break;
   case 4:
     stackEntry->id = 1;
-    uVar3 = *(undefined4 *)(pEVar4 + 4);
-    *(undefined4 *)(stackEntry->data + 4) = 0xffffffff;
-    *(undefined4 *)stackEntry->data = uVar3;
-    *(undefined4 *)(stackEntry->data + 8) = *(undefined4 *)(pEVar4 + 2);
+    uVar3 = *(u_char *)(pEVar4 + 4);
+    *(u_char *)(stackEntry->data + 4) = 0xffffffff;
+    *(u_char *)stackEntry->data = uVar3;
+    *(u_char *)(stackEntry->data + 8) = *(u_char *)(pEVar4 + 2);
     break;
   case 5:
     if (*(int *)(pEVar4 + 4) != 0) {
       stackEntry->id = 0x11;
-      uVar3 = *(undefined4 *)(pEVar4 + 4);
+      uVar3 = *(u_char *)(pEVar4 + 4);
       goto LAB_80062168;
     }
     goto LAB_800621b0;
   case 6:
     if (*(int *)(pEVar4 + 10) != 0) {
       stackEntry->id = 0x1a;
-      *(undefined4 *)stackEntry->data = *(undefined4 *)(pEVar4 + 10);
+      *(u_char *)stackEntry->data = *(u_char *)(pEVar4 + 10);
       lVar5 = lVar5 + 1;
-      pLVar2 = STREAM_GetLevelWithID(*(long *)(pEVar4 + 2));
+      pLVar2 = STREAM_GetWaterZLevel(*(long *)(pEVar4 + 2));
       *(Level **)(stackEntry->data + 4) = pLVar2;
-      *(undefined4 *)(stackEntry->data + 8) = 0xffffffff;
+      *(u_char *)(stackEntry->data + 8) = 0xffffffff;
       goto LAB_800621c8;
     }
 LAB_800621b0:
     stackEntry->id = 6;
     *(long *)stackEntry->data = item;
-    *(undefined4 *)(stackEntry->data + 4) = 0xffffffff;
+    *(u_char *)(stackEntry->data + 4) = 0xffffffff;
   }
   lVar5 = lVar5 + 1;
 LAB_800621c8:
@@ -1760,7 +1762,7 @@ LAB_800621c8:
 	/* end block 3 */
 	// End Line: 3070
 
-void EVENT_AddCharPointerToStack(_PCodeStack *stack,char *pointer)
+void EVENT_AddShortPointerToStack(_PCodeStack *stack,char *pointer)
 
 {
   int iVar1;
@@ -1852,7 +1854,7 @@ void EVENT_AddShortPointerToStack(_PCodeStack *stack,short *pointer)
 	/* end block 3 */
 	// End Line: 3134
 
-void EVENT_AddNumberToStack(_PCodeStack *stack,long item,long flags)
+void EVENT_AddPlayerObjectToStack(_PCodeStack *stack,long item,long flags)
 
 {
   StackType *pSVar1;
@@ -1861,7 +1863,7 @@ void EVENT_AddNumberToStack(_PCodeStack *stack,long item,long flags)
     pSVar1 = stack->stack + stack->topOfStack;
     pSVar1->id = 7;
     *(long *)pSVar1->data = item;
-    *(undefined4 *)(pSVar1->data + 4) = 0;
+    *(u_char *)(pSVar1->data + 4) = 0;
     *(short *)(pSVar1->data + 8) = (short)flags;
     stack->topOfStack = stack->topOfStack + 1;
   }
@@ -1889,7 +1891,7 @@ void EVENT_ChangeOperandToNumber(StackType *operand,long item,long flags)
 {
   operand->id = 7;
   *(long *)operand->data = item;
-  *(undefined4 *)(operand->data + 4) = 0;
+  *(u_char *)(operand->data + 4) = 0;
   *(short *)(operand->data + 8) = (short)flags;
   return;
 }
@@ -1910,7 +1912,7 @@ void EVENT_ChangeOperandToNumber(StackType *operand,long item,long flags)
 	/* end block 2 */
 	// End Line: 3186
 
-void EVENT_ChangeOperandVector3d(StackType *operand,short x,short y,short z,long streamUnitID)
+void EVENT_ChangeOperandToNumber(StackType *operand,short x,short y,short z,long streamUnitID)
 
 {
   operand->id = 9;
@@ -1939,7 +1941,7 @@ void EVENT_Addvector3dToStack(_PCodeStack *stack,short x,short y,short z,long st
 
 {
   if (stack->topOfStack < 0x20) {
-    EVENT_ChangeOperandVector3d(stack->stack + stack->topOfStack,x,y,z,streamUnitID);
+    EVENT_ChangeOperandToNumber(stack->stack + stack->topOfStack,x,y,z,streamUnitID);
     stack->topOfStack = stack->topOfStack + 1;
   }
   return;
@@ -1961,7 +1963,7 @@ void EVENT_Addvector3dToStack(_PCodeStack *stack,short x,short y,short z,long st
 	/* end block 2 */
 	// End Line: 3244
 
-void EVENT_ChangeOperandRotation3d(StackType *operand,Rotation3d *rotation)
+void EVENT_ChangeOperandVector3d(StackType *operand,Rotation3d *rotation)
 
 {
   short sVar1;
@@ -1973,7 +1975,7 @@ void EVENT_ChangeOperandRotation3d(StackType *operand,Rotation3d *rotation)
   *(short *)(operand->data + 8) = rotation->errorx;
   *(short *)(operand->data + 10) = rotation->errory;
   sVar1 = rotation->errorz;
-  *(undefined4 *)(operand->data + 0x10) = 0xffffffff;
+  *(u_char *)(operand->data + 0x10) = 0xffffffff;
   *(short *)(operand->data + 0xc) = sVar1;
   return;
 }
@@ -2015,7 +2017,7 @@ void EVENT_ChangeOperandRotation3d(StackType *operand,Rotation3d *rotation)
 	/* end block 4 */
 	// End Line: 3283
 
-long EVENT_AddSubListObjectToStack(_PCodeStack *stack,long listNumber)
+long EVENT_AddNumberToStack(_PCodeStack *stack,long listNumber)
 
 {
   StackType *pSVar1;
@@ -2024,13 +2026,13 @@ long EVENT_AddSubListObjectToStack(_PCodeStack *stack,long listNumber)
     pSVar1 = stack->stack + stack->topOfStack;
     pSVar1->id = 0x16;
     if (*(int *)(&eventListNumInstances + listNumber * 4) < 1) {
-      *(undefined4 *)pSVar1->data = 0;
+      *(u_char *)pSVar1->data = 0;
     }
     else {
       *(_Instance **)pSVar1->data = (_Instance *)(&eventListArray2010 + listNumber * 10);
     }
     *(int *)(pSVar1->data + 4) = *(int *)(&eventListNumInstances + listNumber * 4);
-    *(undefined4 *)(pSVar1->data + 8) = 0;
+    *(u_char *)(pSVar1->data + 8) = 0;
     stack->topOfStack = stack->topOfStack + 1;
   }
   return 0;
@@ -2113,7 +2115,7 @@ void EVENT_StackDuplicate(_PCodeStack *stack)
 	/* end block 4 */
 	// End Line: 3432
 
-long EVENT_TransformTGroupAttribute
+long EVENT_TransformVector3dAttribute
                (_PCodeStack *stack,StackType *stackObject,long item,short *codeStream)
 
 {
@@ -2182,7 +2184,7 @@ switchD_80062544_caseD_5:
 	/* end block 2 */
 	// End Line: 3530
 
-long EVENT_TransformConstrictAttribute(_PCodeStack *stack,StackType *stackObject,long item)
+long EVENT_TransformSignalAttribute(_PCodeStack *stack,StackType *stackObject,long item)
 
 {
   u_int item_00;
@@ -2395,7 +2397,7 @@ long EVENT_TransformConstrictAttribute(_PCodeStack *stack,StackType *stackObject
 	/* end block 2 */
 	// End Line: 3641
 
-long EVENT_TransformInstanceAttribute
+long EVENT_TransformEventAttribute
                (_PCodeStack *stack,StackType *stackObject,long item,short *codeStream)
 
 {
@@ -2470,7 +2472,7 @@ long EVENT_TransformInstanceAttribute
     item_02 = 1;
     break;
   case 5:
-    psVar2 = (short *)INSTANCE_Query(Inst,6);
+    psVar2 = (short *)INSTANCE_Post(Inst,6);
     if (psVar2 == (short *)0x0) {
       x = (Inst->position).x;
       y = (Inst->position).y;
@@ -2481,11 +2483,11 @@ long EVENT_TransformInstanceAttribute
       y = psVar2[1];
       z = psVar2[2];
     }
-    EVENT_ChangeOperandVector3d(stackObject,x,y,z,Inst->currentStreamUnitID);
+    EVENT_ChangeOperandToNumber(stackObject,x,y,z,Inst->currentStreamUnitID);
     item_02 = 1;
     break;
   case 9:
-    psVar2 = (short *)INSTANCE_Query(Inst,7);
+    psVar2 = (short *)INSTANCE_Post(Inst,7);
     if (psVar2 == (short *)0x0) {
       local_28.vx = (Inst->rotation).x;
       local_28.vy = (Inst->rotation).y;
@@ -2499,7 +2501,7 @@ long EVENT_TransformInstanceAttribute
     local_28.errorx = 0x200;
     local_28.errorz = 0x200;
     local_28.errory = 0x200;
-    EVENT_ChangeOperandRotation3d(stackObject,&local_28);
+    EVENT_ChangeOperandVector3d(stackObject,&local_28);
     item_02 = 1;
     break;
   case 0xc:
@@ -2510,16 +2512,16 @@ long EVENT_TransformInstanceAttribute
     ;
     item_02 = 1;
     *(MultiSpline **)(stackObject->data + 4) = pMVar3;
-    *(undefined4 *)(stackObject->data + 0x14) = 0;
-    *(undefined4 *)(stackObject->data + 8) = 0xffffffff;
+    *(u_char *)(stackObject->data + 0x14) = 0;
+    *(u_char *)(stackObject->data + 8) = 0xffffffff;
     break;
   case 0x12:
-    item_01 = INSTANCE_Query(Inst,9);
+    item_01 = INSTANCE_Post(Inst,9);
     EVENT_ChangeOperandToNumber(stackObject,item_01,1);
     item_02 = 1;
     break;
   case 0x13:
-    item_01 = INSTANCE_Query(Inst,10);
+    item_01 = INSTANCE_Post(Inst,10);
     EVENT_ChangeOperandToNumber(stackObject,item_01,3);
     item_02 = 1;
     break;
@@ -2534,7 +2536,7 @@ long EVENT_TransformInstanceAttribute
     *(_Instance **)stackObject->data = Inst;
     item_02 = 1;
     pAVar6 = Inst->object->modelList[Inst->currentModel]->aniTextures;
-    *(undefined4 *)(stackObject->data + 8) = 0xffffffff;
+    *(u_char *)(stackObject->data + 8) = 0xffffffff;
     *(AniTex **)(stackObject->data + 4) = pAVar6;
     break;
   case 0x2b:
@@ -2552,7 +2554,7 @@ long EVENT_TransformInstanceAttribute
     item_02 = 1;
     break;
   case 0x38:
-    item_01 = INSTANCE_Query(Inst,0x1e);
+    item_01 = INSTANCE_Post(Inst,0x1e);
     EVENT_ChangeOperandToNumber(stackObject,item_01,0);
     item_02 = 1;
     break;
@@ -2562,7 +2564,7 @@ LAB_80062af0:
     item_02 = 1;
     stackObject->id = lVar5;
     *(_Instance **)stackObject->data = Inst;
-    *(undefined4 *)(stackObject->data + 4) = 0xffffffff;
+    *(u_char *)(stackObject->data + 4) = 0xffffffff;
     break;
   case 0x3c:
     bVar1 = (Inst->flags & 4U) != 0;
@@ -2633,13 +2635,13 @@ LAB_80062af0:
     item_02 = 1;
     break;
   case 0x89:
-    item_01 = INSTANCE_Query(Inst,0x24);
+    item_01 = INSTANCE_Post(Inst,0x24);
     EVENT_ChangeOperandToNumber(stackObject,item_01,3);
     item_02 = 1;
     break;
   case 0x8b:
   case 0xa6:
-    item_01 = INSTANCE_Query(Inst,0);
+    item_01 = INSTANCE_Post(Inst,0);
     EVENT_ChangeOperandToNumber(stackObject,item_01 >> 0x1e & 1,0);
     item_02 = 1;
     break;
@@ -2656,24 +2658,24 @@ LAB_80062af0:
     item_02 = 1;
     break;
   case 0x9f:
-    item_01 = INSTANCE_Query(Inst,0x2b);
+    item_01 = INSTANCE_Post(Inst,0x2b);
     EVENT_ChangeOperandToNumber(stackObject,item_01,0);
     item_02 = 1;
     break;
   case 0xa0:
-    item_01 = INSTANCE_Query(Inst,1);
+    item_01 = INSTANCE_Post(Inst,1);
     EVENT_ChangeOperandToNumber(stackObject,(u_int)((item_01 & 4) != 0),0);
     item_02 = 1;
     break;
   case 0xa1:
-    Inst = (_Instance *)INSTANCE_Query(Inst,0x2c);
+    Inst = (_Instance *)INSTANCE_Post(Inst,0x2c);
     if (Inst == (_Instance *)0x0) {
       item_02 = 0;
     }
     else {
-      item_01 = INSTANCE_Query(Inst,1);
+      item_01 = INSTANCE_Post(Inst,1);
       if ((item_01 & 0x20) != 0) {
-        item_01 = INSTANCE_Query(Inst,4);
+        item_01 = INSTANCE_Post(Inst,4);
         if ((item_01 & 3) != 0) {
           return 1;
         }
@@ -2685,17 +2687,17 @@ LAB_80062af0:
     item_02 = 1;
     break;
   case 0xa7:
-    item_01 = INSTANCE_Query(Inst,0);
+    item_01 = INSTANCE_Post(Inst,0);
     EVENT_ChangeOperandToNumber(stackObject,item_01 >> 0x1a & 1,0);
     item_02 = 1;
     break;
   case 0xa9:
-    item_01 = INSTANCE_Query(Inst,0x1f);
+    item_01 = INSTANCE_Post(Inst,0x1f);
     EVENT_ChangeOperandToNumber(stackObject,item_01,0);
     item_02 = 1;
     break;
   case 0xaa:
-    item_01 = INSTANCE_Query(Inst,0x20);
+    item_01 = INSTANCE_Post(Inst,0x20);
     EVENT_ChangeOperandToNumber(stackObject,item_01,0);
     item_02 = 1;
   }
@@ -2729,7 +2731,7 @@ LAB_80062af0:
 	/* end block 2 */
 	// End Line: 4637
 
-long EVENT_TransformSoundObjectAttribute
+long EVENT_TransformSubListObjectAttribute
                (_PCodeStack *stack,SoundObject *soundObject,long item,short *codeStream)
 
 {
@@ -2790,7 +2792,7 @@ long EVENT_TransformSoundObjectAttribute
 	/* end block 2 */
 	// End Line: 4795
 
-long EVENT_GetGameValue(GameObject *gameObject)
+long EVENT_SetSplineLoop(GameObject *gameObject)
 
 {
   int iVar1;
@@ -2912,7 +2914,7 @@ long EVENT_GetGameValue(GameObject *gameObject)
 	/* end block 2 */
 	// End Line: 4870
 
-long EVENT_TransformGameAttribute
+long EVENT_TransformSavedEventAttribute
                (_PCodeStack *stack,StackType *stackObject,long item,short *codeStream)
 
 {
@@ -2956,9 +2958,9 @@ long EVENT_TransformGameAttribute
     *(long *)stackObject->data = item;
     goto LAB_80063268;
   case 0x14:
-    item_00 = INSTANCE_Query(gameTrackerX.playerInstance,0xb);
+    item_00 = INSTANCE_Post(gameTrackerX.playerInstance,0xb);
     item_02 = item_00 >> 1 & 1;
-    Data = STREAM_IsMorphInProgress();
+    Data = STREAM_IsMonster();
     if (Data != 0) {
       item_02 = 0;
     }
@@ -2966,9 +2968,9 @@ long EVENT_TransformGameAttribute
     item_01 = 1;
     break;
   case 0x15:
-    item_00 = INSTANCE_Query(gameTrackerX.playerInstance,0xb);
+    item_00 = INSTANCE_Post(gameTrackerX.playerInstance,0xb);
     item_02 = item_00 & 1;
-    Data = STREAM_IsMorphInProgress();
+    Data = STREAM_IsMonster();
     if (Data != 0) {
       item_02 = 0;
     }
@@ -2985,7 +2987,7 @@ long EVENT_TransformGameAttribute
     item_01 = 1;
     break;
   case 0x31:
-    pEVar9 = EVENT_GetNextTimer();
+    pEVar9 = EVENT_GetNextTerrainMove();
     pLVar8 = CurrentPuzzleLevel;
     pSVar7 = currentActionScript;
     pEVar6 = currentEventInstance;
@@ -3015,8 +3017,8 @@ long EVENT_TransformGameAttribute
   case 0x42:
     item_01 = 1;
     stackObject->id = 0x19;
-    *(undefined4 *)stackObject->data = 0x800d0f9c;
-    *(undefined4 *)(stackObject->data + 8) = 0xffffffff;
+    *(u_char *)stackObject->data = 0x800d0f9c;
+    *(u_char *)(stackObject->data + 8) = 0xffffffff;
     break;
   case 0x4a:
     if (codeStream != (short *)0x0) {
@@ -3073,12 +3075,12 @@ LAB_80063128:
     item_01 = 1;
     break;
   case 0x9a:
-    item_00 = INSTANCE_Query(gameTrackerX.playerInstance,0x29);
+    item_00 = INSTANCE_Post(gameTrackerX.playerInstance,0x29);
     EVENT_ChangeOperandToNumber(stackObject,item_00,3);
     item_01 = 1;
     break;
   case 0x9b:
-    item_00 = INSTANCE_Query(gameTrackerX.playerInstance,0x2a);
+    item_00 = INSTANCE_Post(gameTrackerX.playerInstance,0x2a);
     EVENT_ChangeOperandToNumber(stackObject,item_00,3);
     item_01 = 1;
     break;
@@ -3099,7 +3101,7 @@ LAB_80063128:
       sVar3 = codeStream[4];
       sVar4 = codeStream[3];
       stack->topOfStack = stack->topOfStack + -1;
-      GAMEPAD_Shock((int)sVar1,(int)sVar2 << 0xc,(int)sVar4,(int)sVar3 << 0xc);
+      GAMEPAD_DisableDualShock((int)sVar1,(int)sVar2 << 0xc,(int)sVar4,(int)sVar3 << 0xc);
       return 1;
     }
 LAB_80063268:
@@ -3141,7 +3143,7 @@ LAB_80063268:
 	/* end block 2 */
 	// End Line: 5483
 
-long EVENT_TransformAreaAttribute
+long EVENT_TransformRotation3dAttribute
                (_PCodeStack *stack,StackType *stackObject,long item,short *codeStream)
 
 {
@@ -3206,7 +3208,7 @@ long EVENT_TransformAreaAttribute
 	/* end block 2 */
 	// End Line: 5607
 
-long EVENT_TransformEventAttribute
+long EVENT_TransformIntroAttribute
                (_PCodeStack *stack,StackType *stackObject,long item,short *codeStream)
 
 {
@@ -3268,7 +3270,7 @@ long EVENT_TransformEventAttribute
 	/* end block 2 */
 	// End Line: 5728
 
-long EVENT_TransformSavedEventAttribute
+long EVENT_TransformIntroAttribute
                (_PCodeStack *stack,StackType *stackObject,long item,short *codeStream)
 
 {
@@ -3294,7 +3296,7 @@ long EVENT_TransformSavedEventAttribute
         }
         else {
           stack->topOfStack = stack->topOfStack + -1;
-          EVENT_AddCharPointerToStack(stack,pcVar3 + uVar2 + 5);
+          EVENT_AddShortPointerToStack(stack,pcVar3 + uVar2 + 5);
           lVar1 = 1;
         }
       }
@@ -3333,7 +3335,7 @@ long EVENT_TransformSavedEventAttribute
 	/* end block 4 */
 	// End Line: 5862
 
-long EVENT_TransformSubListObjectAttribute(_PCodeStack *stack,StackType *stackObject,long item)
+long EVENT_TransformGameAttribute(_PCodeStack *stack,StackType *stackObject,long item)
 
 {
   int iVar1;
@@ -3376,7 +3378,7 @@ long EVENT_TransformSubListObjectAttribute(_PCodeStack *stack,StackType *stackOb
 	/* end block 4 */
 	// End Line: 5911
 
-long EVENT_TransformListObjectAttribute(_PCodeStack *stack,StackType *stackObject,long item)
+long EVENT_TransformSoundObjectAttribute(_PCodeStack *stack,StackType *stackObject,long item)
 
 {
   int iVar1;
@@ -3426,7 +3428,7 @@ long EVENT_TransformListObjectAttribute(_PCodeStack *stack,StackType *stackObjec
 	/* end block 2 */
 	// End Line: 5953
 
-long EVENT_TransformCameraObjectAttribute
+long EVENT_TransformAreaAttribute
                (_PCodeStack *stack,StackType *stackObject,long item,short *codeStream)
 
 {
@@ -3445,8 +3447,8 @@ long EVENT_TransformCameraObjectAttribute
           return 1;
         }
         MoveCodeStreamExtra = 2;
-        CAMERA_SetShake(*(Camera **)stackObject->data,(int)codeStream[1],
-                        ((int)codeStream[2] << 0xc) / 100);
+        CAMERA_SetMaxVel(*(Camera **)stackObject->data,(int)codeStream[1],
+                         ((int)codeStream[2] << 0xc) / 100);
         stack->topOfStack = stack->topOfStack + -1;
         return 1;
       }
@@ -3588,7 +3590,7 @@ long EVENT_TransformSplineAttribute
 	/* end block 2 */
 	// End Line: 6248
 
-long EVENT_TransformIntroAttribute(_PCodeStack *stack,StackType *stackObject,long item)
+long EVENT_TransformInstanceAttribute(_PCodeStack *stack,StackType *stackObject,long item)
 
 {
   short x;
@@ -3606,7 +3608,7 @@ long EVENT_TransformIntroAttribute(_PCodeStack *stack,StackType *stackObject,lon
       y = *(short *)((int)pointer + 0x22);
       z = *(short *)((int)pointer + 0x24);
       p_Var1 = STREAM_WhichUnitPointerIsIn(pointer);
-      EVENT_ChangeOperandVector3d(stackObject,x,y,z,p_Var1->StreamUnitID);
+      EVENT_ChangeOperandToNumber(stackObject,x,y,z,p_Var1->StreamUnitID);
       return 1;
     }
   default:
@@ -3619,7 +3621,7 @@ long EVENT_TransformIntroAttribute(_PCodeStack *stack,StackType *stackObject,lon
     local_30.errorx = 0x200;
     local_30.errorz = 0x200;
     local_30.errory = 0x200;
-    EVENT_ChangeOperandRotation3d(stackObject,&local_30);
+    EVENT_ChangeOperandVector3d(stackObject,&local_30);
     break;
   case 0x3e:
   case 0x8a:
@@ -3663,7 +3665,7 @@ long EVENT_TransformIntroAttribute(_PCodeStack *stack,StackType *stackObject,lon
 	/* end block 2 */
 	// End Line: 6499
 
-long EVENT_ParseOperand2(StackType *operand2,long *error,long *trueValue)
+long EVENT_ParseOpcode(StackType *operand2,long *error,long *trueValue)
 
 {
   long lVar1;
@@ -3701,7 +3703,7 @@ long EVENT_ParseOperand2(StackType *operand2,long *error,long *trueValue)
 	/* end block 2 */
 	// End Line: 6536
 
-long EVENT_DoVMObjectAction(EventVmObject *vmobject,StackType *operand2)
+long EVENT_DoIntroAction(EventVmObject *vmobject,StackType *operand2)
 
 {
   ushort uVar1;
@@ -3716,7 +3718,7 @@ long EVENT_DoVMObjectAction(EventVmObject *vmobject,StackType *operand2)
   if (vmobject->attribute == -1) {
     return 0;
   }
-  table = EVENT_ParseOperand2(operand2,&local_18,(long *)&local_14);
+  table = EVENT_ParseOpcode(operand2,&local_18,(long *)&local_14);
   iVar2 = vmobject->attribute;
   if (iVar2 == 0xe) {
     local_14 = (u_int)(local_14 == 0);
@@ -3801,7 +3803,7 @@ long EVENT_DoVMObjectAction(EventVmObject *vmobject,StackType *operand2)
 	/* end block 3 */
 	// End Line: 6695
 
-long EVENT_GetVMObjectValue(EventVmObject *vmobject)
+long EVENT_GetInstanceValue(EventVmObject *vmobject)
 
 {
   int iVar1;
@@ -3868,10 +3870,10 @@ long EVENT_DoGameAction(GameObject *gameObject,StackType *operand2)
   local_20 = 1;
   local_1c = 1;
   if (gameObject->attribute != -1) {
-    modifier = EVENT_ParseOperand2(operand2,&local_20,&local_1c);
+    modifier = EVENT_ParseOpcode(operand2,&local_20,&local_1c);
     iVar1 = gameObject->attribute;
     if (iVar1 == 0x87) {
-      SOUND_SetMusicModifier(modifier);
+      SOUND_ResetMusicModifier(modifier);
     }
     else {
       if (iVar1 < 0x88) {
@@ -3942,7 +3944,7 @@ long EVENT_DoGameAction(GameObject *gameObject,StackType *operand2)
             }
             else {
               if ((iVar1 == 0x77) && (modifier - 1U < 0x7f)) {
-                SOUND_SetVoiceVolume(modifier);
+                SpuSetVoiceVolume(modifier);
               }
             }
           }
@@ -3955,7 +3957,7 @@ long EVENT_DoGameAction(GameObject *gameObject,StackType *operand2)
         else {
           if (iVar1 < 0x94) {
             if (iVar1 == 0x88) {
-              SOUND_ResetMusicModifier(modifier);
+              SOUND_SetMusicModifier(modifier);
             }
             else {
               if (iVar1 == 0x8e) {
@@ -4002,7 +4004,7 @@ long EVENT_DoGameAction(GameObject *gameObject,StackType *operand2)
 	/* end block 2 */
 	// End Line: 7018
 
-long EVENT_DoSignalAction(SignalObject *signalObject,StackType *operand2)
+long EVENT_DoSubListAction(SignalObject *signalObject,StackType *operand2)
 
 {
   long lStack16;
@@ -4010,7 +4012,7 @@ long EVENT_DoSignalAction(SignalObject *signalObject,StackType *operand2)
   
   local_c = 1;
   if (((signalObject->attribute != -1) &&
-      (EVENT_ParseOperand2(operand2,&lStack16,&local_c), signalObject->attribute == 0x1a)) &&
+      (EVENT_ParseOpcode(operand2,&lStack16,&local_c), signalObject->attribute == 0x1a)) &&
      (local_c != 0)) {
     COLLIDE_HandleSignal
               (gameTrackerX.playerInstance,signalObject->msignal->signalList,
@@ -4040,11 +4042,11 @@ long EVENT_DoSignalAction(SignalObject *signalObject,StackType *operand2)
 	/* end block 2 */
 	// End Line: 7095
 
-long EVENT_TransformSignalAttribute(_PCodeStack *stack,StackType *stackObject,long item)
+long EVENT_TransformCameraObjectAttribute(_PCodeStack *stack,StackType *stackObject,long item)
 
 {
   if (item == 0x1a) {
-    *(undefined4 *)(stackObject->data + 4) = 0x1a;
+    *(u_char *)(stackObject->data + 4) = 0x1a;
   }
   else {
     if (item != 0x32) {
@@ -4085,7 +4087,7 @@ long EVENT_TransformSignalAttribute(_PCodeStack *stack,StackType *stackObject,lo
 	/* end block 4 */
 	// End Line: 7172
 
-long EVENT_TransformRotation3dAttribute
+long EVENT_TransformTGroupAttribute
                (_PCodeStack *stack,StackType *stackObject,long item,short *codeStream)
 
 {
@@ -4116,7 +4118,7 @@ long EVENT_TransformRotation3dAttribute
 	/* end block 2 */
 	// End Line: 7217
 
-long EVENT_TransformVector3dAttribute
+long EVENT_TransformListObjectAttribute
                (_PCodeStack *stack,StackType *stackObject,long item,short *codeStream)
 
 {
@@ -4223,7 +4225,7 @@ long EVENT_DoInstanceAnimateTextureAction
     lVar2 = 1;
   }
   else {
-    lVar1 = EVENT_ParseOperand2(operand2,&local_18,(long *)&local_14);
+    lVar1 = EVENT_ParseOpcode(operand2,&local_18,(long *)&local_14);
     lVar2 = 0;
     switch(instanceAniTexture->attribute) {
     case 0xe:
@@ -4307,7 +4309,7 @@ void EVENT_ResetAllSplineFlags(MultiSpline *spline)
 	/* end block 2 */
 	// End Line: 7534
 
-void EVENT_SetSplineLoop(MultiSpline *spline)
+void EVENT_GetSplineValue(MultiSpline *spline)
 
 {
   Spline *pSVar1;
@@ -4383,7 +4385,7 @@ void EVENT_SetSplineLoop(MultiSpline *spline)
 	/* end block 2 */
 	// End Line: 7549
 
-long EVENT_DoSplineAction(InstanceSpline *instanceSpline,StackType *operand2)
+long EVENT_DoSoundMarkerAction(InstanceSpline *instanceSpline,StackType *operand2)
 
 {
   short sVar1;
@@ -4407,7 +4409,7 @@ long EVENT_DoSplineAction(InstanceSpline *instanceSpline,StackType *operand2)
   }
   instance = instanceSpline->instance;
   spline = instanceSpline->spline;
-  iVar3 = EVENT_ParseOperand2(operand2,&lStack32,(long *)&local_1c);
+  iVar3 = EVENT_ParseOpcode(operand2,&lStack32,(long *)&local_1c);
   switch(instanceSpline->attribute) {
   case 0xd:
   case 0x29:
@@ -4435,7 +4437,7 @@ switchD_800642f4_caseD_12:
     if (iVar3 == -1) {
       return 0;
     }
-    SCRIPT_InstanceSplineSet
+    SCRIPT_InstanceSplineProcess
               (instance,(short)iVar3,(SplineDef *)0x0,(SplineDef *)0x0,(SplineDef *)0x0);
     uVar4 = 0xfdff0000;
     goto LAB_8006449c;
@@ -4443,7 +4445,7 @@ switchD_800642f4_caseD_12:
     EVENT_ResetAllSplineFlags(spline);
     instance->splineFlags = instance->splineFlags & 0xff8f;
     if (iVar3 == 2) {
-      EVENT_SetSplineLoop(spline);
+      EVENT_GetSplineValue(spline);
       uVar2 = instance->splineFlags | 0x20;
     }
     else {
@@ -4507,9 +4509,9 @@ LAB_8006449c:
         iVar3 = (int)sVar1;
       }
     }
-    lVar5 = EVENT_GetSplineFrameNumber(instanceSpline);
+    lVar5 = INSTANCE_GetSplineFrameNumber(instanceSpline);
     if (lVar5 == iVar3) {
-      SCRIPT_InstanceSplineSet
+      SCRIPT_InstanceSplineProcess
                 (instance,(short)iVar3,(SplineDef *)0x0,(SplineDef *)0x0,(SplineDef *)0x0);
       uVar4 = 0xfdff0000;
       goto LAB_8006449c;
@@ -4522,7 +4524,7 @@ LAB_8006449c:
       instanceSpline->splineFlags = uVar4;
       if (uVar4 != 0) {
         EVENT_ResetAllSplineFlags(spline);
-        EVENT_SetSplineLoop(spline);
+        EVENT_GetSplineValue(spline);
         instance->splineFlags = instance->splineFlags | 0x20;
         instance->flags = instance->flags & 0xfeffffff;
         return 0;
@@ -4536,7 +4538,7 @@ LAB_8006449c:
         goto LAB_8006449c;
       }
       EVENT_ResetAllSplineFlags(spline);
-      EVENT_SetSplineLoop(spline);
+      EVENT_GetSplineValue(spline);
       instance->splineFlags = instance->splineFlags | 0x20;
     }
 LAB_80064484:
@@ -4579,7 +4581,7 @@ LAB_80064484:
 	/* end block 2 */
 	// End Line: 7910
 
-long EVENT_DoAnimateAction(InstanceAnimate *instanceAnimate,StackType *operand2)
+long EVENT_DoAreaAction(InstanceAnimate *instanceAnimate,StackType *operand2)
 
 {
   long lVar1;
@@ -4597,7 +4599,7 @@ long EVENT_DoAnimateAction(InstanceAnimate *instanceAnimate,StackType *operand2)
     return 0;
   }
   instance = instanceAnimate->instance;
-  lVar1 = EVENT_ParseOperand2(operand2,&lStack32,(long *)&local_1c);
+  lVar1 = EVENT_ParseOpcode(operand2,&lStack32,(long *)&local_1c);
   sVar2 = (short)lVar1;
   switch(instanceAnimate->attribute) {
   case 0xe:
@@ -4625,7 +4627,7 @@ long EVENT_DoAnimateAction(InstanceAnimate *instanceAnimate,StackType *operand2)
         Message = 0x40003;
       }
     }
-    INSTANCE_Post(instance,Message,Data);
+    INSTANCE_Query(instance,Message,Data);
     memset(&instance->aliasCommand,0,0xc);
     lVar3 = 1;
     break;
@@ -4658,7 +4660,7 @@ long EVENT_DoAnimateAction(InstanceAnimate *instanceAnimate,StackType *operand2)
       Message = 0x40003;
     }
 LAB_800648d4:
-    INSTANCE_Post(instance,Message,Data);
+    INSTANCE_Query(instance,Message,Data);
     goto LAB_800648dc;
   case 0x65:
     if (operand2 != (StackType *)0x0) {
@@ -4692,7 +4694,7 @@ LAB_800648d4:
                         ,(int)(instance->aliasCommand).interpframes,0);
       Message = 0x40003;
     }
-    INSTANCE_Post(instance,Message,Data);
+    INSTANCE_Query(instance,Message,Data);
     Data = (int)(instance->aliasCommand).speed;
     if (0 < Data) {
       Message = 0x40020;
@@ -4828,7 +4830,7 @@ LAB_800648dc:
 	/* end block 2 */
 	// End Line: 8375
 
-long EVENT_DoInstanceAction(InstanceObject *instanceObject,StackType *operand2,short *codeStream)
+long EVENT_DoCameraAction(InstanceObject *instanceObject,StackType *operand2,short *codeStream)
 
 {
   long lVar1;
@@ -4852,11 +4854,11 @@ long EVENT_DoInstanceAction(InstanceObject *instanceObject,StackType *operand2,s
   if (instanceObject->attribute == -1) {
     return 0;
   }
-  type = EVENT_ParseOperand2(operand2,&lStack40,(long *)&local_24);
+  type = EVENT_ParseOpcode(operand2,&lStack40,(long *)&local_24);
   switch(instanceObject->attribute) {
   case 4:
     if (0xff < (int)type) {
-      INSTANCE_Post(sender,0x40017,type - 0x100);
+      INSTANCE_Query(sender,0x40017,type - 0x100);
       return 0;
     }
     if (type - 1 < 7) {
@@ -4866,7 +4868,7 @@ long EVENT_DoInstanceAction(InstanceObject *instanceObject,StackType *operand2,s
     if (type != 0) {
       return 0;
     }
-    SAVE_UndestroyInstance(sender);
+    SAVE_Init(sender);
     return 0;
   case 10:
     goto switchD_80064994_caseD_a;
@@ -4893,14 +4895,14 @@ LAB_80064bd8:
         sender->flags2 = type;
       }
     }
-    uVar5 = INSTANCE_Query(sender,1);
+    uVar5 = INSTANCE_Post(sender,1);
     if ((uVar5 & 0xe) == 0) {
       return 1;
     }
     Data = 0x40013;
     type = local_24;
 LAB_80064c00:
-    INSTANCE_Post(sender,Data,type);
+    INSTANCE_Query(sender,Data,type);
     return 1;
   case 0x14:
     local_24 = local_24 ^ 1;
@@ -4930,7 +4932,7 @@ LAB_80064c00:
           if (type != 4) {
             return 0;
           }
-          INSTANCE_Post(sender,0x40005,(int)&DAT_0000a000);
+          INSTANCE_Query(sender,0x40005,(int)&DAT_0000a000);
           return 0;
         }
         type = 0x40014;
@@ -4943,14 +4945,14 @@ LAB_80064c00:
     local_24 = local_24 ^ 1;
 switchD_80064994_caseD_24:
     if (local_24 == 0) {
-      uVar5 = INSTANCE_Query(instanceObject->instance,5);
+      uVar5 = INSTANCE_Post(instanceObject->instance,5);
       if ((uVar5 & 1) == 0) {
         return 0;
       }
       type = 0x800020;
     }
     else {
-      uVar5 = INSTANCE_Query(instanceObject->instance,5);
+      uVar5 = INSTANCE_Post(instanceObject->instance,5);
       if ((uVar5 & 1) != 0) {
         return 0;
       }
@@ -5019,7 +5021,7 @@ LAB_80064aa4:
           }
         }
       }
-      Data = SetObjectData(Data,y,6,(_Instance *)0x0,0);
+      Data = SetObjectBreakOffData(Data,y,6,(_Instance *)0x0,0);
       y = 0x800000;
       goto LAB_8006528c;
     }
@@ -5070,7 +5072,7 @@ LAB_80064aa4:
       }
       Data = SetPositionData((int)*(short *)operand2->data,(int)*(short *)(operand2->data + 2),
                              (int)*(short *)(operand2->data + 4));
-      INSTANCE_Post(sender,0x4000a,Data);
+      INSTANCE_Query(sender,0x4000a,Data);
       sender->currentStreamUnitID = *(long *)(operand2->data + 0x10);
     }
     break;
@@ -5091,16 +5093,16 @@ LAB_80064aa4:
     local_24 = (u_int)(local_24 == 0);
 switchD_80064994_caseD_4e:
     if (sender != gameTrackerX.playerInstance) {
-      INSTANCE_Post(sender,0x4000e,local_24);
+      INSTANCE_Query(sender,0x4000e,local_24);
       return 0;
     }
-    INSTANCE_Post(sender,0x4000e,local_24);
+    INSTANCE_Query(sender,0x4000e,local_24);
     if (local_24 == 0) {
       gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xffffff6f;
       return 0;
     }
     gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x90;
-    pEVar6 = EVENT_GetNextTimer();
+    pEVar6 = EVENT_GetNextTerrainMove();
     pSVar3 = currentActionScript;
     pEVar2 = currentEventInstance;
     lVar1 = EventCurrentEventIndex;
@@ -5146,7 +5148,7 @@ switchD_80064994_caseD_4e:
     }
     break;
   case 0x55:
-    INSTANCE_Post(sender,0x800027,local_24);
+    INSTANCE_Query(sender,0x800027,local_24);
     return 0;
   case 0x5b:
     if ((int)type < 0) {
@@ -5165,7 +5167,7 @@ switchD_80064994_caseD_4e:
   case 0x5f:
     local_24 = 0;
 switchD_80064994_caseD_5e:
-    INSTANCE_Post(sender,0x800029,local_24);
+    INSTANCE_Query(sender,0x800029,local_24);
     return 0;
   case 0x67:
     if (local_24 == 0) {
@@ -5183,7 +5185,7 @@ switchD_80064994_caseD_5e:
     Data = rcos((Data * 0x1000) / 0x168);
     y = 0x4000005;
 LAB_8006528c:
-    INSTANCE_Post(sender,y,Data);
+    INSTANCE_Query(sender,y,Data);
     return 0;
   case 0x6d:
     type = 0x4000006;
@@ -5191,10 +5193,10 @@ LAB_8006528c:
   case 0x6e:
     type = 0x40011;
 LAB_80065338:
-    INSTANCE_Post(sender,type,0);
+    INSTANCE_Query(sender,type,0);
     return 0;
   case 0x6f:
-    INSTANCE_Post(sender,0x40015,1 << (type & 0x1f));
+    INSTANCE_Query(sender,0x40015,1 << (type & 0x1f));
     return 0;
   case 0x72:
     if (operand2 != (StackType *)0x0) {
@@ -5208,7 +5210,7 @@ LAB_80065338:
     }
     break;
   case 0x74:
-    INSTANCE_Post(sender,0x40006,type << 0xc);
+    INSTANCE_Query(sender,0x40006,type << 0xc);
     return 0;
   case 0x7b:
     if (operand2 != (StackType *)0x0) {
@@ -5223,13 +5225,13 @@ LAB_80065338:
     break;
   case 0x7c:
     type = type << 0xc;
-    INSTANCE_Post(sender,0x40019,type);
+    INSTANCE_Query(sender,0x40019,type);
   case 0xa3:
     Message = 0x1000000;
 LAB_80065318:
     Message = Message | 0x22;
 LAB_8006531c:
-    INSTANCE_Post(sender,Message,type);
+    INSTANCE_Query(sender,Message,type);
     return 0;
   case 0x85:
     Message = 0x40021;
@@ -5300,7 +5302,7 @@ LAB_8006531c:
 	/* end block 3 */
 	// End Line: 9385
 
-long EVENT_GetTGroupValue(TGroupObject *terrainGroup)
+long EVENT_GetIntroValue(TGroupObject *terrainGroup)
 
 {
   ushort uVar1;
@@ -5423,7 +5425,7 @@ long EVENT_GetTGroupValue(TGroupObject *terrainGroup)
 	/* end block 2 */
 	// End Line: 9600
 
-long EVENT_DoTGroupAction(TGroupObject *terrainGroup,StackType *operand2)
+long EVENT_DoSignalAction(TGroupObject *terrainGroup,StackType *operand2)
 
 {
   short sVar1;
@@ -5442,7 +5444,7 @@ long EVENT_DoTGroupAction(TGroupObject *terrainGroup,StackType *operand2)
     return 0;
   }
   pBVar8 = terrainGroup->bspTree;
-  EVENT_ParseOperand2(operand2,&lStack24,(long *)&local_14);
+  EVENT_ParseOpcode(operand2,&lStack24,(long *)&local_14);
   iVar4 = terrainGroup->attribute;
   if (iVar4 < 0x31) {
     if (0x2e < iVar4) {
@@ -5470,7 +5472,7 @@ long EVENT_DoTGroupAction(TGroupObject *terrainGroup,StackType *operand2)
         if ((iVar4 != 0x2c) && (iVar4 != 0x2e)) {
           return 0;
         }
-        pWVar3 = EVENT_GetNextTerrainMove();
+        pWVar3 = EVENT_GetNextTimer();
         if (pWVar3 == (WaterLevelProcess *)0x0) {
           return 0;
         }
@@ -5616,7 +5618,7 @@ long EVENT_DoTGroupAction(TGroupObject *terrainGroup,StackType *operand2)
 	/* end block 2 */
 	// End Line: 9874
 
-long EVENT_DoCameraAction(CameraObject *cameraObject,StackType *operand2,short *codeStream)
+long EVENT_DoSplineAction(CameraObject *cameraObject,StackType *operand2,short *codeStream)
 
 {
   long dist;
@@ -5633,7 +5635,7 @@ long EVENT_DoCameraAction(CameraObject *cameraObject,StackType *operand2,short *
   if (cameraObject->attribute == -1) {
     return 0;
   }
-  dist = EVENT_ParseOperand2(operand2,&local_18,&local_14);
+  dist = EVENT_ParseOpcode(operand2,&local_18,&local_14);
   switch(cameraObject->attribute) {
   case 9:
   case 0x46:
@@ -5650,13 +5652,13 @@ long EVENT_DoCameraAction(CameraObject *cameraObject,StackType *operand2,short *
         if (iVar1 < 0) {
           iVar1 = iVar1 + 0x168;
         }
-        CAMERA_Adjust_rotation(cameraObject->camera,(iVar1 * 0x1000) / 0x168);
+        CAMERA_Adjust_distance(cameraObject->camera,(iVar1 * 0x1000) / 0x168);
       }
     }
     break;
   case 0x10:
     if (local_18 == 0) {
-      CAMERA_SetMode(camera,dist);
+      CAMERA_Save(camera,dist);
     }
     break;
   case 0x43:
@@ -5688,7 +5690,7 @@ long EVENT_DoCameraAction(CameraObject *cameraObject,StackType *operand2,short *
     break;
   case 0x47:
     if (local_18 == 0) {
-      CAMERA_Adjust_distance(cameraObject->camera,dist);
+      CAMERA_Adjust_rotation(cameraObject->camera,dist);
     }
     break;
   case 0x48:
@@ -5696,7 +5698,7 @@ long EVENT_DoCameraAction(CameraObject *cameraObject,StackType *operand2,short *
     break;
   case 0x49:
     if ((operand2 != (StackType *)0x0) && (operand2->id == 2)) {
-      CAMERA_SetInstanceFocus(camera,*(_Instance **)operand2->data);
+      CAMERA_SetProjDistance(camera,*(_Instance **)operand2->data);
     }
     break;
   case 0x68:
@@ -5761,7 +5763,7 @@ LAB_80065b10:
 	/* end block 2 */
 	// End Line: 10290
 
-long EVENT_DoObjectSoundAction(SoundObject *soundObject,StackType *operand2)
+long EVENT_DoAction(SoundObject *soundObject,StackType *operand2)
 
 {
   short sVar1;
@@ -5774,10 +5776,10 @@ long EVENT_DoObjectSoundAction(SoundObject *soundObject,StackType *operand2)
   local_14 = 1;
   if (soundObject->attribute != -1) {
     soundInst = (SoundInstance *)(soundObject->data + soundObject->soundNumber * 3 + 0x48);
-    EVENT_ParseOperand2(operand2,&lStack24,(long *)&local_14);
+    EVENT_ParseOpcode(operand2,&lStack24,(long *)&local_14);
     sVar1 = soundObject->attribute;
     if (sVar1 == 0x7f) {
-      SOUND_SetInstanceSoundVolume(soundInst,soundObject->value,soundObject->duration);
+      SOUND_EndInstanceSounds(soundInst,soundObject->value,soundObject->duration);
       lVar2 = 1;
     }
     else {
@@ -5789,11 +5791,11 @@ long EVENT_DoObjectSoundAction(SoundObject *soundObject,StackType *operand2)
           local_14 = (u_int)(local_14 == 0);
         }
         if (local_14 == 0) {
-          SOUND_StopInstanceSound(soundInst);
+          SOUND_SetInstanceSoundPitch(soundInst);
           lVar2 = 1;
         }
         else {
-          SOUND_StartInstanceSound(soundInst);
+          SOUND_ProcessInstanceSounds(soundInst);
           lVar2 = 1;
         }
       }
@@ -5847,7 +5849,7 @@ long EVENT_DoObjectSoundAction(SoundObject *soundObject,StackType *operand2)
 	/* end block 2 */
 	// End Line: 10415
 
-long EVENT_DoSoundMarkerAction(SoundObject *soundObject,StackType *operand2)
+long EVENT_DoObjectSoundAction(SoundObject *soundObject,StackType *operand2)
 
 {
   short sVar1;
@@ -5860,10 +5862,10 @@ long EVENT_DoSoundMarkerAction(SoundObject *soundObject,StackType *operand2)
   local_14 = 1;
   if (soundObject->attribute != -1) {
     soundInst = (SoundInstance *)(soundObject->data + soundObject->soundNumber * 3 + 8);
-    EVENT_ParseOperand2(operand2,&lStack24,(long *)&local_14);
+    EVENT_ParseOpcode(operand2,&lStack24,(long *)&local_14);
     sVar1 = soundObject->attribute;
     if (sVar1 == 0x7f) {
-      SOUND_SetInstanceSoundVolume(soundInst,soundObject->value,soundObject->duration);
+      SOUND_EndInstanceSounds(soundInst,soundObject->value,soundObject->duration);
       lVar2 = 1;
     }
     else {
@@ -5875,11 +5877,11 @@ long EVENT_DoSoundMarkerAction(SoundObject *soundObject,StackType *operand2)
           local_14 = (u_int)(local_14 == 0);
         }
         if (local_14 == 0) {
-          SOUND_StopInstanceSound(soundInst);
+          SOUND_SetInstanceSoundPitch(soundInst);
           lVar2 = 1;
         }
         else {
-          SOUND_StartInstanceSound(soundInst);
+          SOUND_ProcessInstanceSounds(soundInst);
           lVar2 = 1;
         }
       }
@@ -5933,7 +5935,7 @@ long EVENT_DoSoundMarkerAction(SoundObject *soundObject,StackType *operand2)
 	/* end block 5 */
 	// End Line: 10574
 
-long EVENT_GetSoundValue(SoundObject *soundObject)
+long EVENT_GetTGroupValue(SoundObject *soundObject)
 
 {
   return 0;
@@ -5962,7 +5964,7 @@ long EVENT_GetSoundValue(SoundObject *soundObject)
 	/* end block 2 */
 	// End Line: 10614
 
-long EVENT_DoAreaAction(AreaObject *areaObject,StackType *operand2)
+long EVENT_DoAnimateAction(AreaObject *areaObject,StackType *operand2)
 
 {
   long lVar1;
@@ -5974,7 +5976,7 @@ long EVENT_DoAreaAction(AreaObject *areaObject,StackType *operand2)
   local_14 = 1;
   p_Var3 = areaObject->streamUnit;
   if (areaObject->attribute != -1) {
-    lVar1 = EVENT_ParseOperand2(operand2,&local_18,&local_14);
+    lVar1 = EVENT_ParseOpcode(operand2,&local_18,&local_14);
     uVar2 = (ushort)lVar1;
     if (areaObject->attribute == 0x70) {
       if (local_18 == 0) {
@@ -6051,7 +6053,7 @@ long EVENT_DoAreaAction(AreaObject *areaObject,StackType *operand2)
 	/* end block 2 */
 	// End Line: 10716
 
-long EVENT_DoIntroAction(IntroObject *introObject,StackType *operand2)
+long EVENT_DoTGroupAction(IntroObject *introObject,StackType *operand2)
 
 {
   u_int uVar1;
@@ -6073,7 +6075,7 @@ long EVENT_DoIntroAction(IntroObject *introObject,StackType *operand2)
   lVar9 = lVar10;
   if (introObject->attribute != -1) {
     intro = introObject->intro;
-    EVENT_ParseOperand2(operand2,&lStack24,(long *)&local_14);
+    EVENT_ParseOpcode(operand2,&lStack24,(long *)&local_14);
     iVar7 = introObject->attribute;
     if (iVar7 != 0x14) {
       if (iVar7 < 0x15) {
@@ -6116,7 +6118,7 @@ long EVENT_DoIntroAction(IntroObject *introObject,StackType *operand2)
             pSVar8 = (STracker *)(pSVar8->StreamList + 1);
             iVar7 = iVar7 + 1;
           } while (iVar7 < 0x10);
-          p_Var4 = INSTANCE_IntroduceInstance(intro,(short)lVar9);
+          p_Var4 = INSTANCE_InsertInstanceGroup(intro,(short)lVar9);
           lVar9 = 0;
           if (p_Var4 == (_Instance *)0x0) {
             EventAbortLine = 1;
@@ -6163,7 +6165,7 @@ long EVENT_DoIntroAction(IntroObject *introObject,StackType *operand2)
 	/* end block 2 */
 	// End Line: 10220
 
-void EVENT_DoStackOperationEquals(_PCodeStack *stack,short *codeStream)
+void EVENT_DoStackMathOperation(_PCodeStack *stack,short *codeStream)
 
 {
   int iVar1;
@@ -6465,7 +6467,7 @@ LAB_800664d4:
 	/* end block 3 */
 	// End Line: 11359
 
-long EVENT_CompareListWithOperation
+long EVENT_CompareSubListWithOperation
                (_PCodeStack *stack,ListObject *listObject,StackType *operand2,long operation)
 
 {
@@ -6479,14 +6481,14 @@ long EVENT_CompareListWithOperation
   long areaID;
   long local_60;
   _Instance *local_5c;
-  undefined4 local_58;
+  u_char local_58;
   char acStack56 [16];
   
   lVar6 = 0;
   if (CurrentEventLine < 0x14) {
-    *(undefined4 *)(&eventListNumInstances + CurrentEventLine * 4) = 0;
+    *(u_char *)(&eventListNumInstances + CurrentEventLine * 4) = 0;
   }
-  strcpy(acStack56,listObject->eventInstance->objectName);
+  strcmp(acStack56,listObject->eventInstance->objectName);
   pcVar1 = strchr(acStack56,0x3f);
   if (pcVar1 != (char *)0x0) {
     *pcVar1 = '\0';
@@ -6508,12 +6510,13 @@ long EVENT_CompareListWithOperation
     local_5c = startInstance;
     if (0 < listObject->numberOfAttributes) {
       do {
-        EVENT_TransformOperand((StackType *)&local_60,stack,pLVar5->attribute[0],(short *)0x0);
+        EVENT_TransformConstrictAttribute
+                  ((StackType *)&local_60,stack,pLVar5->attribute[0],(short *)0x0);
         iVar4 = iVar4 + 1;
         pLVar5 = (ListObject *)pLVar5->attribute;
       } while (iVar4 < listObject->numberOfAttributes);
     }
-    lVar2 = EVENT_CompareOperandsWithOperation(stack,(StackType *)&local_60,operand2,operation);
+    lVar2 = EVENT_CompareListWithOperation(stack,(StackType *)&local_60,operand2,operation);
     if (lVar2 == 0) {
       if (operation == 0xb) {
         if (9 < *(int *)(&eventListNumInstances + CurrentEventLine * 4)) {
@@ -6566,7 +6569,7 @@ long EVENT_CompareListWithOperation
 	/* end block 3 */
 	// End Line: 11507
 
-long EVENT_CompareSubListWithOperation
+long EVENT_CompareOperandsWithOperation
                (_PCodeStack *stack,SubListObject *subListObject,StackType *operand2,long operation)
 
 {
@@ -6578,30 +6581,31 @@ long EVENT_CompareSubListWithOperation
   int iVar6;
   long lVar7;
   long local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
+  u_char local_4c;
+  u_char local_48;
   
   lVar7 = 0;
   if (CurrentEventLine < 0x14) {
-    *(undefined4 *)(&eventListNumInstances + CurrentEventLine * 4) = 0;
+    *(u_char *)(&eventListNumInstances + CurrentEventLine * 4) = 0;
   }
   iVar6 = 0;
   if (0 < subListObject->numberOfInstances) {
     iVar5 = 0;
     do {
       local_50 = 2;
-      local_4c = *(undefined4 *)(iVar5 + (int)subListObject->instanceList);
+      local_4c = *(u_char *)(iVar5 + (int)subListObject->instanceList);
       local_48 = 0xffffffff;
       iVar3 = 0;
       pSVar4 = subListObject;
       if (0 < subListObject->numberOfAttributes) {
         do {
-          EVENT_TransformOperand((StackType *)&local_50,stack,pSVar4->attribute[0],(short *)0x0);
+          EVENT_TransformConstrictAttribute
+                    ((StackType *)&local_50,stack,pSVar4->attribute[0],(short *)0x0);
           iVar3 = iVar3 + 1;
           pSVar4 = (SubListObject *)&pSVar4->numberOfInstances;
         } while (iVar3 < subListObject->numberOfAttributes);
       }
-      lVar1 = EVENT_CompareOperandsWithOperation(stack,(StackType *)&local_50,operand2,operation);
+      lVar1 = EVENT_CompareListWithOperation(stack,(StackType *)&local_50,operand2,operation);
       if (lVar1 != 0) {
         iVar3 = CurrentEventLine * 4;
         if (CurrentEventLine < 0x14) {
@@ -6647,7 +6651,7 @@ long EVENT_CompareSubListWithOperation
 	/* end block 2 */
 	// End Line: 11606
 
-long EVENT_CompareOperandsWithOperation
+long EVENT_CompareListWithOperation
                (_PCodeStack *stack,StackType *operand1,StackType *operand2,long operation)
 
 {
@@ -6779,12 +6783,12 @@ switchD_80066b1c_caseD_a:
     }
     break;
   case 0x12:
-    trueValue = EVENT_CompareListWithOperation
+    trueValue = EVENT_CompareSubListWithOperation
                           (stack,(ListObject *)operand1->data,operand2,operation);
     uVar5 = 1;
     goto LAB_80066b94;
   case 0x16:
-    trueValue = EVENT_CompareSubListWithOperation
+    trueValue = EVENT_CompareOperandsWithOperation
                           (stack,(SubListObject *)operand1->data,operand2,operation);
     uVar5 = 1;
 LAB_80066b94:
@@ -6825,27 +6829,27 @@ LAB_80066b94:
 	/* end block 2 */
 	// End Line: 12045
 
-void EVENT_DoStackMathOperation(_PCodeStack *stack,long operation)
+void EVENT_DoStackOperationEquals(_PCodeStack *stack,long operation)
 
 {
-  undefined4 *puVar1;
+  u_char *puVar1;
   int iVar2;
-  undefined4 *puVar3;
+  u_char *puVar3;
   long *plVar4;
   long *plVar5;
   long item;
-  undefined4 uVar6;
+  u_char uVar6;
   long lVar7;
-  undefined4 uVar8;
+  u_char uVar8;
   long lVar9;
-  undefined4 uVar10;
+  u_char uVar10;
   long local_80 [8];
-  undefined4 auStack96 [2];
+  u_char auStack96 [2];
   int local_58;
   long local_54 [7];
-  undefined4 auStack56 [2];
-  undefined4 local_30 [8];
-  undefined4 auStack16 [2];
+  u_char auStack56 [2];
+  u_char local_30 [8];
+  u_char auStack16 [2];
   
   plVar5 = (long *)&local_58;
   iVar2 = stack->topOfStack + -1;
@@ -6881,7 +6885,7 @@ void EVENT_DoStackMathOperation(_PCodeStack *stack,long operation)
   *plVar5 = *plVar4;
   if ((local_58 == 0x12) || (local_58 == 0x16)) {
     puVar3 = local_30;
-    puVar1 = (undefined4 *)local_80;
+    puVar1 = (u_char *)local_80;
     do {
       uVar6 = puVar1[1];
       uVar8 = puVar1[2];
@@ -6894,8 +6898,8 @@ void EVENT_DoStackMathOperation(_PCodeStack *stack,long operation)
       puVar3 = puVar3 + 4;
     } while (puVar1 != auStack96);
     *puVar3 = *puVar1;
-    puVar3 = (undefined4 *)local_80;
-    puVar1 = (undefined4 *)&local_58;
+    puVar3 = (u_char *)local_80;
+    puVar1 = (u_char *)&local_58;
     do {
       uVar6 = puVar1[1];
       uVar8 = puVar1[2];
@@ -6908,7 +6912,7 @@ void EVENT_DoStackMathOperation(_PCodeStack *stack,long operation)
       puVar3 = puVar3 + 4;
     } while (puVar1 != auStack56);
     *puVar3 = *puVar1;
-    puVar3 = (undefined4 *)&local_58;
+    puVar3 = (u_char *)&local_58;
     puVar1 = local_30;
     do {
       uVar6 = puVar1[1];
@@ -6923,9 +6927,9 @@ void EVENT_DoStackMathOperation(_PCodeStack *stack,long operation)
     } while (puVar1 != auStack16);
     *puVar3 = *puVar1;
   }
-  item = EVENT_CompareOperandsWithOperation
+  item = EVENT_CompareListWithOperation
                    (stack,(StackType *)local_80,(StackType *)&local_58,operation);
-  EVENT_AddNumberToStack(stack,item,0);
+  EVENT_AddPlayerObjectToStack(stack,item,0);
   return;
 }
 
@@ -6949,7 +6953,7 @@ void EVENT_DoStackMathOperation(_PCodeStack *stack,long operation)
 	/* end block 2 */
 	// End Line: 12109
 
-short * EVENT_ParseOpcode(_PCodeStack *stack,short *codeStream,long *operateOnStack)
+short * EVENT_ParseOperand2(_PCodeStack *stack,short *codeStream,long *operateOnStack)
 
 {
   ushort uVar1;
@@ -6962,7 +6966,7 @@ short * EVENT_ParseOpcode(_PCodeStack *stack,short *codeStream,long *operateOnSt
   *operateOnStack = 0;
   switch((int)(((u_int)uVar1 - 1) * 0x10000) >> 0x10) {
   case 0:
-    EVENT_AddObjectToStack(stack,(int)*codeStream_00);
+    EVENT_AddCharPointerToStack(stack,(int)*codeStream_00);
     codeStream_00 = codeStream + 2;
     break;
   case 1:
@@ -6972,7 +6976,7 @@ short * EVENT_ParseOpcode(_PCodeStack *stack,short *codeStream,long *operateOnSt
   case 2:
     goto switchD_80066e74_caseD_2;
   case 3:
-    EVENT_DoStackMathOperation(stack,10);
+    EVENT_DoStackOperationEquals(stack,10);
     break;
   case 4:
     EventAbortedPosition = codeStream_00;
@@ -6984,61 +6988,61 @@ short * EVENT_ParseOpcode(_PCodeStack *stack,short *codeStream,long *operateOnSt
     codeStream_00 = (short *)0x0;
     break;
   case 0xb:
-    EVENT_AddNumberToStack(stack,(int)*codeStream_00,0);
+    EVENT_AddPlayerObjectToStack(stack,(int)*codeStream_00,0);
     codeStream_00 = codeStream + 2;
     break;
   case 0xc:
-    EVENT_DoStackMathOperation(stack,1);
+    EVENT_DoStackOperationEquals(stack,1);
     break;
   case 0xd:
-    EVENT_DoStackMathOperation(stack,2);
+    EVENT_DoStackOperationEquals(stack,2);
     break;
   case 0xe:
-    EVENT_DoStackMathOperation(stack,3);
+    EVENT_DoStackOperationEquals(stack,3);
     break;
   case 0xf:
-    EVENT_DoStackMathOperation(stack,4);
+    EVENT_DoStackOperationEquals(stack,4);
     break;
   case 0x10:
     EVENT_StackDuplicate(stack);
-    EVENT_AddNumberToStack(stack,1,0);
+    EVENT_AddPlayerObjectToStack(stack,1,0);
     operation = 1;
     goto LAB_80066fb4;
   case 0x11:
     EVENT_StackDuplicate(stack);
-    EVENT_AddNumberToStack(stack,1,0);
+    EVENT_AddPlayerObjectToStack(stack,1,0);
     operation = 2;
 LAB_80066fb4:
-    EVENT_DoStackMathOperation(stack,operation);
+    EVENT_DoStackOperationEquals(stack,operation);
 switchD_80066e74_caseD_2:
-    EVENT_DoStackOperationEquals(stack,codeStream_00);
+    EVENT_DoStackMathOperation(stack,codeStream_00);
     break;
   case 0x12:
-    EVENT_DoStackMathOperation(stack,6);
+    EVENT_DoStackOperationEquals(stack,6);
     break;
   case 0x13:
-    EVENT_DoStackMathOperation(stack,8);
+    EVENT_DoStackOperationEquals(stack,8);
     break;
   case 0x14:
-    EVENT_DoStackMathOperation(stack,7);
+    EVENT_DoStackOperationEquals(stack,7);
     break;
   case 0x15:
-    EVENT_DoStackMathOperation(stack,9);
+    EVENT_DoStackOperationEquals(stack,9);
     break;
   case 0x16:
-    EVENT_DoStackMathOperation(stack,0xb);
+    EVENT_DoStackOperationEquals(stack,0xb);
     break;
   case 0x17:
-    EVENT_DoStackMathOperation(stack,5);
+    EVENT_DoStackOperationEquals(stack,5);
     break;
   case 0x1b:
     EVENT_AddGameObjectToStack(stack);
     break;
   case 0x1c:
-    EVENT_AddPlayerObjectToStack(stack);
+    EVENT_AddObjectToStack(stack);
     break;
   case 0x1d:
-    EVENT_AddSubListObjectToStack(stack,(int)*codeStream_00);
+    EVENT_AddNumberToStack(stack,(int)*codeStream_00);
     codeStream_00 = codeStream + 2;
     break;
   case 0x1e:
@@ -7047,7 +7051,7 @@ switchD_80066e74_caseD_2:
     }
     break;
   case 0x1f:
-    EVENT_DoStackMathOperation(stack,0xc);
+    EVENT_DoStackOperationEquals(stack,0xc);
   }
   return codeStream_00 + MoveCodeStreamExtra;
 }
@@ -7152,7 +7156,7 @@ LAB_80067114:
 	/* end block 2 */
 	// End Line: 12529
 
-void EVENT_DoSubListAction
+void EVENT_DoVMObjectAction
                (SubListObject *subListObject,StackType *operand2,_PCodeStack *stack,
                short *codeStream)
 
@@ -7162,7 +7166,7 @@ void EVENT_DoSubListAction
   int iVar3;
   long local_48;
   _Instance *local_44;
-  undefined4 local_40;
+  u_char local_40;
   
   iVar3 = 0;
   if (0 < subListObject->numberOfInstances) {
@@ -7174,7 +7178,8 @@ void EVENT_DoSubListAction
       pSVar2 = subListObject;
       if (0 < subListObject->numberOfAttributes) {
         do {
-          EVENT_TransformOperand((StackType *)&local_48,stack,pSVar2->attribute[0],(short *)0x0);
+          EVENT_TransformConstrictAttribute
+                    ((StackType *)&local_48,stack,pSVar2->attribute[0],(short *)0x0);
           iVar1 = iVar1 + 1;
           pSVar2 = (SubListObject *)&pSVar2->numberOfInstances;
         } while (iVar1 < subListObject->numberOfAttributes);
@@ -7207,7 +7212,7 @@ void EVENT_DoSubListAction
 	/* end block 2 */
 	// End Line: 12590
 
-long EVENT_GetInstanceValue(InstanceObject *instanceObject)
+long EVENT_GetVMObjectValue(InstanceObject *instanceObject)
 
 {
   u_int uVar1;
@@ -7239,25 +7244,25 @@ long EVENT_GetInstanceValue(InstanceObject *instanceObject)
     Query = 10;
     goto LAB_80067354;
   case 0x14:
-    uVar2 = INSTANCE_Query(Inst,0xb);
+    uVar2 = INSTANCE_Post(Inst,0xb);
     uVar1 = uVar2 >> 1;
     goto LAB_80067298;
   case 0x15:
-    uVar1 = INSTANCE_Query(Inst,0xb);
+    uVar1 = INSTANCE_Post(Inst,0xb);
 LAB_80067298:
     uVar2 = uVar1 & 1;
-    Query = STREAM_IsMorphInProgress();
+    Query = STREAM_IsMonster();
     if (Query != 0) {
 switchD_80067264_caseD_5:
       uVar2 = 0;
     }
     break;
   case 0x24:
-    uVar2 = INSTANCE_Query(Inst,5);
+    uVar2 = INSTANCE_Post(Inst,5);
     uVar2 = (u_long)((uVar2 & 5) == 1);
     break;
   case 0x25:
-    uVar2 = INSTANCE_Query(Inst,5);
+    uVar2 = INSTANCE_Post(Inst,5);
     uVar2 = (u_long)((uVar2 & 9) == 0);
     break;
   case 0x26:
@@ -7266,7 +7271,7 @@ switchD_80067264_caseD_5:
   case 0x27:
     Query = 0x1a;
 LAB_80067354:
-    uVar2 = INSTANCE_Query(Inst,Query);
+    uVar2 = INSTANCE_Post(Inst,Query);
     break;
   case 0x35:
     uVar2 = (u_long)((Inst->flags2 & 0x20000000U) != 0);
@@ -7281,11 +7286,11 @@ LAB_80067354:
     uVar2 = (u_long)((Inst->flags & 0x400000U) == 0);
     break;
   case 0x8f:
-    uVar2 = INSTANCE_Query(Inst,5);
+    uVar2 = INSTANCE_Post(Inst,5);
     uVar2 = uVar2 >> 2 & 1;
     break;
   case 0x90:
-    uVar2 = INSTANCE_Query(Inst,5);
+    uVar2 = INSTANCE_Post(Inst,5);
     uVar2 = uVar2 >> 3 & 1;
     break;
   case -1:
@@ -7312,7 +7317,7 @@ LAB_80067354:
 	/* end block 2 */
 	// End Line: 12869
 
-long EVENT_GetSplineFrameNumber(InstanceSpline *instanceSpline)
+long INSTANCE_GetSplineFrameNumber(InstanceSpline *instanceSpline)
 
 {
   SplineDef *splineDef;
@@ -7321,7 +7326,7 @@ long EVENT_GetSplineFrameNumber(InstanceSpline *instanceSpline)
   splineDef = SCRIPT_GetPosSplineDef
                         (instanceSpline->instance,instanceSpline->spline,instanceSpline->isParent,
                          instanceSpline->isClass);
-  iVar1 = SCRIPT_GetSplineFrameNumber(instanceSpline->instance,splineDef);
+  iVar1 = EVENT_GetSplineFrameNumber(instanceSpline->instance,splineDef);
   return iVar1;
 }
 
@@ -7355,7 +7360,7 @@ long EVENT_GetSplineFrameNumber(InstanceSpline *instanceSpline)
 	/* end block 2 */
 	// End Line: 12895
 
-long EVENT_GetSplineValue(InstanceSpline *instanceSpline)
+long EVENT_GetGameValue(InstanceSpline *instanceSpline)
 
 {
   byte bVar1;
@@ -7376,7 +7381,7 @@ long EVENT_GetSplineValue(InstanceSpline *instanceSpline)
     break;
   case 0xf:
   case 0x28:
-    uVar4 = EVENT_GetSplineFrameNumber(instanceSpline);
+    uVar4 = INSTANCE_GetSplineFrameNumber(instanceSpline);
     break;
   case 0x10:
     pSVar3 = instanceSpline->spline->positional;
@@ -7499,7 +7504,7 @@ long EVENT_GetAnimateTextureValue(InstanceAnimateTexture *instanceAniTexture)
 	/* end block 2 */
 	// End Line: 13167
 
-long EVENT_GetAnimateValue(InstanceAnimate *instanceAnimate)
+long EVENT_GetSoundValue(InstanceAnimate *instanceAnimate)
 
 {
   u_long uVar1;
@@ -7518,7 +7523,7 @@ long EVENT_GetAnimateValue(InstanceAnimate *instanceAnimate)
   case 0x1e:
     Query = 0x11;
 LAB_800675ec:
-    uVar1 = INSTANCE_Query(instanceAnimate->instance,Query);
+    uVar1 = INSTANCE_Post(instanceAnimate->instance,Query);
     break;
   case -1:
   case 0xe:
@@ -7554,7 +7559,7 @@ long EVENT_TransformObjectOnStack(_PCodeStack *stack,long item,short *codeStream
   
   lVar1 = 0;
   if (stack->topOfStack != 0) {
-    lVar1 = EVENT_TransformOperand
+    lVar1 = EVENT_TransformConstrictAttribute
                       ((StackType *)stack[-1].stack[stack->topOfStack + 0x1f].data,stack,item,
                        codeStream);
   }
@@ -7593,7 +7598,7 @@ long EVENT_TransformObjectOnStack(_PCodeStack *stack,long item,short *codeStream
 	/* end block 4 */
 	// End Line: 13305
 
-void EVENT_UpdatePuzzlePointers(EventPointers *events,long offset)
+void FX_UpdateTexturePointers(EventPointers *events,long offset)
 
 {
   _func_15 *p_Var1;
@@ -7845,7 +7850,7 @@ void EVENT_LoadEventsForLevel(long levelID,Level *level)
   
   pEVar7 = level->PuzzleInstances;
   if (pEVar7 != (EventPointers *)0x0) {
-    curSave = SAVE_GetSavedNextEvent(levelID,(SavedBasic *)0x0);
+    curSave = SAVE_GetSavedEvent(levelID,(SavedBasic *)0x0);
     while (curSave != (SavedBasic *)0x0) {
       if (pEVar7->numPuzzles != 0) {
         if (curSave->savedID == '\x02') {
@@ -7887,7 +7892,7 @@ void EVENT_LoadEventsForLevel(long levelID,Level *level)
           }
         }
       }
-      curSave = SAVE_GetSavedNextEvent(levelID,curSave);
+      curSave = SAVE_GetSavedEvent(levelID,curSave);
     }
   }
   return;
@@ -7995,7 +8000,7 @@ void EVENT_RemoveInstanceFromInstanceList(_Instance *instance)
           do {
             psVar3 = *ppsVar1;
             if ((*psVar3 == 1) && (*(_Instance **)(psVar3 + 6) == instance)) {
-              *(undefined4 *)(psVar3 + 6) = 0;
+              *(u_char *)(psVar3 + 6) = 0;
               break;
             }
             iVar4 = iVar4 + 1;
@@ -8184,7 +8189,7 @@ _VMObject * EVENT_FindVMObject(_StreamUnit *stream,char *vmoName)
   if (0 < pLVar3->numVMObjects) {
     iVar2 = 0;
     do {
-      iVar1 = strcmpi(*(char **)((int)&pLVar3->vmobjectList->name + iVar2),vmoName);
+      iVar1 = strcpy(*(char **)((int)&pLVar3->vmobjectList->name + iVar2),vmoName);
       iVar4 = iVar4 + 1;
       if (iVar1 == 0) {
         return (_VMObject *)((int)&pLVar3->vmobjectList->flags + iVar2);
@@ -8403,11 +8408,11 @@ void EVENT_FixPuzzlesForStream(_StreamUnit *stream)
                   }
                   else {
                     if (sVar1 == 1) {
-                      pIVar6 = EVENT_ResolveObjectIntro(instanceObject);
+                      pIVar6 = EVENT_ResolveSFXMarker(instanceObject);
                       if (pIVar6 == (Intro *)0x0) {
                         stream_00 = STREAM_GetStreamUnitWithID(instanceObject->unitID);
                         if ((stream_00 != (_StreamUnit *)0x0) &&
-                           (p_Var7 = EVENT_ResolveSFXMarker(stream_00,instanceObject),
+                           (p_Var7 = EVENT_ResolveObjectIntro(stream_00,instanceObject),
                            p_Var7 != (_SFXMkr *)0x0)) {
                           *(_SFXMkr **)&instanceObject->data = p_Var7;
                           instanceObject->flags = instanceObject->flags | 1;
@@ -8598,9 +8603,9 @@ void EVENT_AddStreamToInstanceList(_StreamUnit *stream)
                   }
                   else {
                     if (sVar1 == 1) {
-                      pIVar6 = EVENT_ResolveObjectIntro(instanceObject);
+                      pIVar6 = EVENT_ResolveSFXMarker(instanceObject);
                       if (pIVar6 == (Intro *)0x0) {
-                        p_Var7 = EVENT_ResolveSFXMarker(stream,instanceObject);
+                        p_Var7 = EVENT_ResolveObjectIntro(stream,instanceObject);
                         if (p_Var7 != (_SFXMkr *)0x0) {
                           *(_SFXMkr **)&instanceObject->data = p_Var7;
                           instanceObject->flags = instanceObject->flags | 1;
@@ -8675,7 +8680,7 @@ void EVENT_AddStreamToInstanceList(_StreamUnit *stream)
 	/* end block 2 */
 	// End Line: 15306
 
-void EVENT_RemoveStreamToInstanceList(_StreamUnit *stream)
+void STREAM_RemoveInstancesWithIDInInstanceList(_StreamUnit *stream)
 
 {
   short sVar1;
@@ -8705,20 +8710,20 @@ void EVENT_RemoveStreamToInstanceList(_StreamUnit *stream)
             if ((sVar1 == 5) || (sVar1 == 3)) {
 LAB_80068538:
               if (*(int *)(psVar4 + 2) == stream->StreamUnitID) {
-                *(undefined4 *)(psVar4 + 4) = 0;
+                *(u_char *)(psVar4 + 4) = 0;
               }
             }
             else {
               if (sVar1 == 4) {
                 if (*(int *)(psVar4 + 2) == stream->StreamUnitID) {
-                  *(undefined4 *)(psVar4 + 4) = 0;
-                  *(undefined4 *)(psVar4 + 6) = 0;
+                  *(u_char *)(psVar4 + 4) = 0;
+                  *(u_char *)(psVar4 + 6) = 0;
                 }
               }
               else {
                 if (sVar1 == 6) goto LAB_80068538;
                 if ((sVar1 == 1) && (*(int *)(psVar4 + 2) == stream->StreamUnitID)) {
-                  *(undefined4 *)(psVar4 + 8) = 0;
+                  *(u_char *)(psVar4 + 8) = 0;
                 }
               }
             }
@@ -8817,7 +8822,7 @@ LAB_80068538:
 	/* end block 4 */
 	// End Line: 15598
 
-void EVENT_RelocateInstanceList(Level *oldLevel,Level *newLevel,long sizeOfLevel)
+void OBTABLE_RelocateInstanceObject(Level *oldLevel,Level *newLevel,long sizeOfLevel)
 
 {
   short sVar1;
@@ -8978,16 +8983,16 @@ void EVENT_ExecuteActionCommand
   
   switch(operand1->id) {
   case 1:
-    EVENT_DoAreaAction((AreaObject *)operand1->data,operand2);
+    EVENT_DoAnimateAction((AreaObject *)operand1->data,operand2);
     break;
   case 2:
-    EVENT_DoInstanceAction((InstanceObject *)operand1->data,operand2,codeStream);
+    EVENT_DoCameraAction((InstanceObject *)operand1->data,operand2,codeStream);
     break;
   case 3:
     EVENT_DoGameAction((GameObject *)operand1->data,operand2);
     break;
   case 4:
-    EVENT_DoIntroAction((IntroObject *)operand1->data,operand2);
+    EVENT_DoTGroupAction((IntroObject *)operand1->data,operand2);
     break;
   case 10:
     lVar1 = EVENT_GetScalerValueFromOperand(operand2,&local_10,asStack12);
@@ -9002,35 +9007,35 @@ void EVENT_ExecuteActionCommand
     }
     break;
   case 0xf:
-    EVENT_DoSplineAction((InstanceSpline *)operand1->data,operand2);
+    EVENT_DoSoundMarkerAction((InstanceSpline *)operand1->data,operand2);
     break;
   case 0x11:
-    EVENT_DoSignalAction((SignalObject *)operand1->data,operand2);
+    EVENT_DoSubListAction((SignalObject *)operand1->data,operand2);
     break;
   case 0x13:
-    EVENT_DoAnimateAction((InstanceAnimate *)operand1->data,operand2);
+    EVENT_DoAreaAction((InstanceAnimate *)operand1->data,operand2);
     break;
   case 0x14:
     EVENT_DoInstanceAnimateTextureAction((InstanceAnimateTexture *)operand1->data,operand2);
     break;
   case 0x16:
-    EVENT_DoSubListAction((SubListObject *)operand1->data,operand2,stack,codeStream);
+    EVENT_DoVMObjectAction((SubListObject *)operand1->data,operand2,stack,codeStream);
     break;
   case 0x17:
-    EVENT_DoTGroupAction((TGroupObject *)operand1->data,operand2);
+    EVENT_DoSignalAction((TGroupObject *)operand1->data,operand2);
     break;
   case 0x19:
-    EVENT_DoCameraAction((CameraObject *)operand1->data,operand2,codeStream);
+    EVENT_DoSplineAction((CameraObject *)operand1->data,operand2,codeStream);
     break;
   case 0x1a:
-    EVENT_DoVMObjectAction((EventVmObject *)operand1->data,operand2);
+    EVENT_DoIntroAction((EventVmObject *)operand1->data,operand2);
     break;
   case 0x1b:
     if (*(short *)operand1->data == 1) {
-      EVENT_DoSoundMarkerAction((SoundObject *)operand1->data,operand2);
+      EVENT_DoObjectSoundAction((SoundObject *)operand1->data,operand2);
     }
     else {
-      EVENT_DoObjectSoundAction((SoundObject *)operand1->data,operand2);
+      EVENT_DoAction((SoundObject *)operand1->data,operand2);
     }
     break;
   case 0x1c:
@@ -9076,10 +9081,10 @@ long EVENT_GetScalerValueFromOperand(StackType *operand,long *error,short *flags
     uVar2 = *(u_int *)(operand->data + 8);
     break;
   case 2:
-    uVar2 = EVENT_GetInstanceValue((InstanceObject *)operand->data);
+    uVar2 = EVENT_GetVMObjectValue((InstanceObject *)operand->data);
     break;
   case 3:
-    uVar2 = EVENT_GetGameValue((GameObject *)operand->data);
+    uVar2 = EVENT_SetSplineLoop((GameObject *)operand->data);
     break;
   case 4:
     uVar2 = EVENT_GetIntroValue((IntroObject *)operand->data);
@@ -9095,26 +9100,26 @@ long EVENT_GetScalerValueFromOperand(StackType *operand,long *error,short *flags
     uVar2 = **(u_int **)operand->data;
     break;
   case 0xf:
-    uVar2 = EVENT_GetSplineValue((InstanceSpline *)operand->data);
+    uVar2 = EVENT_GetGameValue((InstanceSpline *)operand->data);
     break;
   case 0x13:
-    uVar2 = EVENT_GetAnimateValue((InstanceAnimate *)operand->data);
+    uVar2 = EVENT_GetSoundValue((InstanceAnimate *)operand->data);
     break;
   case 0x14:
     uVar2 = EVENT_GetAnimateTextureValue((InstanceAnimateTexture *)operand->data);
     break;
   case 0x17:
-    uVar2 = EVENT_GetTGroupValue((TGroupObject *)operand->data);
+    uVar2 = EVENT_GetIntroValue((TGroupObject *)operand->data);
     break;
   case 0x18:
     uVar2 = (u_int)((int)*(short *)(*(int *)operand->data + 0x16c) + 1U < 3) ^ 1;
     break;
   case 0x1a:
-    uVar2 = EVENT_GetVMObjectValue((EventVmObject *)operand->data);
+    uVar2 = EVENT_GetInstanceValue((EventVmObject *)operand->data);
     break;
   case 0x1b:
     if (*(short *)operand->data != 1) {
-      lVar1 = EVENT_GetSoundValue((SoundObject *)operand->data);
+      lVar1 = EVENT_GetTGroupValue((SoundObject *)operand->data);
       return lVar1;
     }
   case 0x15:
@@ -9146,23 +9151,24 @@ long EVENT_GetScalerValueFromOperand(StackType *operand,long *error,short *flags
 	/* end block 2 */
 	// End Line: 16385
 
-long EVENT_TransformOperand(StackType *stackObject,_PCodeStack *stack,long item,short *codeStream)
+long EVENT_TransformConstrictAttribute
+               (StackType *stackObject,_PCodeStack *stack,long item,short *codeStream)
 
 {
   long lVar1;
   
   switch(stackObject->id) {
   case 1:
-    lVar1 = EVENT_TransformAreaAttribute(stack,stackObject,item,codeStream);
+    lVar1 = EVENT_TransformRotation3dAttribute(stack,stackObject,item,codeStream);
     break;
   case 2:
-    lVar1 = EVENT_TransformInstanceAttribute(stack,stackObject,item,codeStream);
+    lVar1 = EVENT_TransformEventAttribute(stack,stackObject,item,codeStream);
     break;
   case 3:
-    lVar1 = EVENT_TransformGameAttribute(stack,stackObject,item,codeStream);
+    lVar1 = EVENT_TransformSavedEventAttribute(stack,stackObject,item,codeStream);
     break;
   case 4:
-    lVar1 = EVENT_TransformIntroAttribute(stack,stackObject,item);
+    lVar1 = EVENT_TransformInstanceAttribute(stack,stackObject,item);
     break;
   default:
     lVar1 = 0;
@@ -9172,22 +9178,22 @@ long EVENT_TransformOperand(StackType *stackObject,_PCodeStack *stack,long item,
     lVar1 = 1;
     break;
   case 9:
-    lVar1 = EVENT_TransformVector3dAttribute(stack,stackObject,item,codeStream);
+    lVar1 = EVENT_TransformListObjectAttribute(stack,stackObject,item,codeStream);
     break;
   case 0xe:
-    lVar1 = EVENT_TransformRotation3dAttribute(stack,stackObject,item,codeStream);
+    lVar1 = EVENT_TransformTGroupAttribute(stack,stackObject,item,codeStream);
     break;
   case 0xf:
     lVar1 = EVENT_TransformSplineAttribute(stack,stackObject,item,codeStream);
     break;
   case 0x10:
-    lVar1 = EVENT_TransformEventAttribute(stack,stackObject,item,codeStream);
+    lVar1 = EVENT_TransformIntroAttribute(stack,stackObject,item,codeStream);
     break;
   case 0x11:
-    lVar1 = EVENT_TransformSignalAttribute(stack,stackObject,item);
+    lVar1 = EVENT_TransformCameraObjectAttribute(stack,stackObject,item);
     break;
   case 0x12:
-    lVar1 = EVENT_TransformListObjectAttribute(stack,stackObject,item);
+    lVar1 = EVENT_TransformSoundObjectAttribute(stack,stackObject,item);
     break;
   case 0x13:
     lVar1 = 0;
@@ -9205,22 +9211,22 @@ long EVENT_TransformOperand(StackType *stackObject,_PCodeStack *stack,long item,
     lVar1 = 1;
     break;
   case 0x15:
-    lVar1 = EVENT_TransformSavedEventAttribute(stack,stackObject,item,codeStream);
+    lVar1 = EVENT_TransformIntroAttribute(stack,stackObject,item,codeStream);
     break;
   case 0x16:
-    lVar1 = EVENT_TransformSubListObjectAttribute(stack,stackObject,item);
+    lVar1 = EVENT_TransformGameAttribute(stack,stackObject,item);
     break;
   case 0x17:
-    lVar1 = EVENT_TransformTGroupAttribute(stack,stackObject,item,codeStream);
+    lVar1 = EVENT_TransformVector3dAttribute(stack,stackObject,item,codeStream);
     break;
   case 0x18:
-    lVar1 = EVENT_TransformConstrictAttribute(stack,stackObject,item);
+    lVar1 = EVENT_TransformSignalAttribute(stack,stackObject,item);
     break;
   case 0x19:
-    lVar1 = EVENT_TransformCameraObjectAttribute(stack,stackObject,item,codeStream);
+    lVar1 = EVENT_TransformAreaAttribute(stack,stackObject,item,codeStream);
     break;
   case 0x1b:
-    lVar1 = EVENT_TransformSoundObjectAttribute
+    lVar1 = EVENT_TransformSubListObjectAttribute
                       (stack,(SoundObject *)stackObject->data,item,codeStream);
   }
   return lVar1;

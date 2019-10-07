@@ -39,7 +39,7 @@ void PLANAPI_ConvertPlanIntoEnmyPlanDataFormat
     do {
       if (iVar4 < 8) {
         sVar2 = (goalNode->pos).z;
-        *(undefined4 *)(puVar5 + 0x10) = *(undefined4 *)&goalNode->pos;
+        *(u_char *)(puVar5 + 0x10) = *(u_char *)&goalNode->pos;
         *(short *)(puVar5 + 0x14) = sVar2;
         uVar1 = *(u_char *)&goalNode->nodeType;
         planData->nodeSkipArray[iVar4] = '\0';
@@ -86,7 +86,7 @@ int PLANAPI_FindPathBetweenNodes
   planningPool = gameTrackerX.planningPool;
   iVar1 = 0;
   if (((startNode != (PlanningNode *)0x0) && (goalNode != (PlanningNode *)0x0)) &&
-     (goalNode_00 = PLANSRCH_FindPathInGraph
+     (goalNode_00 = PLANAPI_FindPathInGraphToTarget
                               ((PlanningNode *)gameTrackerX.planningPool,startNode,goalNode,
                                validNodeTypes), goalNode_00 != (PlanningNode *)0x0)) {
     PLANAPI_ConvertPlanIntoEnmyPlanDataFormat(goalNode_00,planData,(PlanningNode *)planningPool);
@@ -261,7 +261,7 @@ int PLANAPI_AddNodeOfTypeToPool(_Position *pos,int type)
 	/* end block 3 */
 	// End Line: 627
 
-void PLANAPI_DeleteNodesFromPoolByType(int nodeSource)
+void PLANAPI_DeleteNodeFromPoolByUnit(int nodeSource)
 
 {
   void *planningPool;
@@ -274,7 +274,7 @@ void PLANAPI_DeleteNodesFromPoolByType(int nodeSource)
   if (*(char *)(poolManagementData + 1) != '\0') {
     do {
       if (((u_int)nodeToDelete->nodeType & 7) == nodeSource) {
-        PLANPOOL_DeleteNodeFromPool(nodeToDelete,(PlanningNode *)planningPool);
+        PLANAPI_DeleteNodesFromPoolByType(nodeToDelete,(PlanningNode *)planningPool);
       }
       else {
         iVar1 = iVar1 + 1;
@@ -312,7 +312,7 @@ void PLANAPI_DeleteNodesFromPoolByType(int nodeSource)
 	/* end block 3 */
 	// End Line: 689
 
-void PLANAPI_DeleteNodeFromPoolByUnit(long streamUnitID)
+void PLANPOOL_DeleteNodeFromPool(long streamUnitID)
 
 {
   void *planningPool;
@@ -325,7 +325,7 @@ void PLANAPI_DeleteNodeFromPoolByUnit(long streamUnitID)
   if (*(char *)(poolManagementData + 1) != '\0') {
     do {
       if (nodeToDelete->streamUnitID == streamUnitID) {
-        PLANPOOL_DeleteNodeFromPool(nodeToDelete,(PlanningNode *)planningPool);
+        PLANAPI_DeleteNodesFromPoolByType(nodeToDelete,(PlanningNode *)planningPool);
       }
       else {
         iVar1 = iVar1 + 1;
@@ -357,7 +357,7 @@ void PLANAPI_DeleteNodeFromPoolByUnit(long streamUnitID)
 	/* end block 2 */
 	// End Line: 828
 
-int PLANAPI_FindPathInGraphToTarget(_Position *startPos,EnemyPlanData *planData,int validNodeTypes)
+int PLANSRCH_FindPathInGraph(_Position *startPos,EnemyPlanData *planData,int validNodeTypes)
 
 {
   void *planningPool;
@@ -366,8 +366,8 @@ int PLANAPI_FindPathInGraphToTarget(_Position *startPos,EnemyPlanData *planData,
   int iVar1;
   
   planningPool = gameTrackerX.planningPool;
-  startNode = PLANPOOL_GetNodeByPosition(startPos,(PlanningNode *)gameTrackerX.planningPool);
-  goalNode = PLANPOOL_GetFirstNodeOfSource((PlanningNode *)planningPool,'\x03');
+  startNode = PLANPOOL_GetFirstNodeOfSource(startPos,(PlanningNode *)gameTrackerX.planningPool);
+  goalNode = PLANPOOL_GetClosestNode((PlanningNode *)planningPool,'\x03');
   iVar1 = PLANAPI_FindPathBetweenNodes(startNode,goalNode,planData,validNodeTypes);
   return iVar1;
 }
@@ -596,7 +596,7 @@ void PLANAPI_UpdatePlanningDatabase(GameTracker *gameTracker,_Instance *player)
   uVar6 = gameTimer << 0x10;
   bVar2 = *poolManagementData;
   if (bVar2 == 1) {
-    PLAN_AddOrRemoveNodes(planningPool,player);
+    PLAN_DeleteRandomNode(planningPool,player);
     bVar2 = 2;
   }
   else {
@@ -613,9 +613,9 @@ void PLANAPI_UpdatePlanningDatabase(GameTracker *gameTracker,_Instance *player)
         node2 = PLANPOOL_GetClosestUnexploredValidNeighbor(startNode,planningPool);
         *poolManagementData = 1;
         if ((startNode == (PlanningNode *)0x0) || (node2 == (PlanningNode *)0x0)) goto LAB_80097dfc;
-        lVar5 = MATH3D_LengthXYZ((int)(startNode->pos).x - (int)(node2->pos).x,
-                                 (int)(startNode->pos).y - (int)(node2->pos).y,
-                                 (int)(startNode->pos).z - (int)(node2->pos).z);
+        lVar5 = MATH3D_LengthXY((int)(startNode->pos).x - (int)(node2->pos).x,
+                                (int)(startNode->pos).y - (int)(node2->pos).y,
+                                (int)(startNode->pos).z - (int)(node2->pos).z);
         node1 = startNode;
         if (lVar5 < 6000) {
           uVar3 = PLANAPI_PairType(startNode,node2);
@@ -627,7 +627,7 @@ void PLANAPI_UpdatePlanningDatabase(GameTracker *gameTracker,_Instance *player)
             }
             passThroughHit = PLANAPI_PassThroughHit(node1,node2);
             passThroughHit =
-                 PLANCOLL_DoesWaterPathUpExist
+                 PLANCOLL_DoesStraightLinePathExist
                            ((_Position *)node1,(_Position *)node2,0,
                             (_Position *)(poolManagementData + 0x16),passThroughHit);
           }
@@ -935,7 +935,7 @@ int PLANAPI_GetFlags(int type)
 	/* end block 2 */
 	// End Line: 1593
 
-int PLANAPI_FindNodePositionInUnit(_StreamUnit *streamUnit,_Position *pos,int id,int type)
+int PLANAPI_FindClosestNodePositionInUnit(_StreamUnit *streamUnit,_Position *pos,int id,int type)
 
 {
   short sVar1;
@@ -1008,7 +1008,7 @@ int PLANAPI_FindNodePositionInUnit(_StreamUnit *streamUnit,_Position *pos,int id
 	/* end block 2 */
 	// End Line: 1650
 
-int PLANAPI_FindClosestNodePositionInUnit
+int PLANAPI_FindNodePositionInUnit
               (_StreamUnit *streamUnit,_Position *target,_Position *pos,int offset,int max,int type,
               int distanceCheck)
 
@@ -1035,13 +1035,13 @@ int PLANAPI_FindClosestNodePositionInUnit
   while (0 < iVar6) {
     if (((int)p_Var7->id & uVar3) != 0) {
       if (distanceCheck == 0) {
-        lVar4 = MATH3D_LengthXY((int)target->x - (int)(p_Var8->pos).x,
-                                (int)target->y - (int)(p_Var7->pos).y);
+        lVar4 = MATH3D_LengthXYZ((int)target->x - (int)(p_Var8->pos).x,
+                                 (int)target->y - (int)(p_Var7->pos).y);
       }
       else {
-        lVar4 = MATH3D_LengthXYZ((int)target->x - (int)(p_Var8->pos).x,
-                                 (int)target->y - (int)(p_Var7->pos).y,
-                                 (int)target->z - (int)(p_Var7->pos).z);
+        lVar4 = MATH3D_LengthXY((int)target->x - (int)(p_Var8->pos).x,
+                                (int)target->y - (int)(p_Var7->pos).y,
+                                (int)target->z - (int)(p_Var7->pos).z);
       }
       if (lVar4 < max) {
         iVar5 = lVar4 - offset;

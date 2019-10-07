@@ -6,19 +6,19 @@ extern unsigned long aadGetMemorySize(struct AadInitAttr *attributes); // 0x8005
 
 extern int aadInit(struct AadInitAttr *attributes, unsigned char *memoryPtr); // 0x80051D40
 
-//extern void aadInstallUpdateFunc(TDRFuncPtr_aadInstallUpdateFunc0updateFuncPtr updateFuncPtr, int hblanksPerUpdate); // 0x80051FEC
+extern void aadInstallUpdateFunc(TDRFuncPtr_aadInstallUpdateFunc0updateFuncPtr updateFuncPtr, int hblanksPerUpdate); // 0x80051FEC
 
 extern void aadInitVolume(); // 0x80052068
 
 extern void aadSetMasterVolume(int volume); // 0x8005209C
 
-//extern void aadStartMasterVolumeFade(int targetVolume, int volumeStep, TDRFuncPtr_aadStartMasterVolumeFade2fadeCompleteCallback fadeCompleteCallback); // 0x800520CC
+extern void aadStartMasterVolumeFade(int targetVolume, int volumeStep, TDRFuncPtr_aadStartMasterVolumeFade2fadeCompleteCallback fadeCompleteCallback); // 0x800520CC
 
 extern void aadSetSfxMasterVolume(int volume); // 0x800520E4
 
 extern void aadSetMusicMasterVolume(int volume); // 0x800520F4
 
-//extern void aadStartMusicMasterVolFade(int targetVolume, int volumeStep, TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback fadeCompleteCallback); // 0x80052158
+extern void aadStartMusicMasterVolFade(int targetVolume, int volumeStep, TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback fadeCompleteCallback); // 0x80052158
 
 extern void aadShutdown(); // 0x80052170
 
@@ -28,7 +28,7 @@ extern void aadSlotUpdate(); // 0x8005223C
 
 extern unsigned long aadCreateFourCharID(char a, char b, char c, char d); // 0x80052768
 
-//extern int aadLoadDynamicSoundBank(char *sndFileName, char *smpFileName, int dynamicBankIndex, int loadOption, TDRFuncPtr_aadLoadDynamicSoundBank4retProc retProc); // 0x80052790
+extern int aadLoadDynamicSoundBank(char *sndFileName, char *smpFileName, int dynamicBankIndex, int loadOption, TDRFuncPtr_aadLoadDynamicSoundBank4retProc retProc); // 0x80052790
 
 extern void aadLoadDynamicSoundBankReturn(void *loadedDataPtr, void *data, void *data2); // 0x800528E8
 
@@ -128,7 +128,7 @@ extern void aadMuteChannels(struct _AadSequenceSlot *slot, unsigned long channel
 
 extern void aadUnMuteChannels(struct _AadSequenceSlot *slot, unsigned long channelList); // 0x80054E80
 
-//extern TDRFuncPtr_aadInstallEndSequenceCallback aadInstallEndSequenceCallback(TDRFuncPtr_aadInstallEndSequenceCallback0callbackProc callbackProc, long data); // 0x80054EB8
+extern TDRFuncPtr_aadInstallEndSequenceCallback aadInstallEndSequenceCallback(TDRFuncPtr_aadInstallEndSequenceCallback0callbackProc callbackProc, long data); // 0x80054EB8
 
 extern void aadSetUserVariable(int variableNumber, int value); // 0x80054ED0
 

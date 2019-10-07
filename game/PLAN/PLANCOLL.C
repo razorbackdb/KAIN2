@@ -66,7 +66,7 @@ int PLANCOLL_DoesLOSExistFinal
   local_48.instance = (_Instance *)0x0;
   local_18.vz = startPos->z + (short)zoffset;
   local_10.vz = endPos->z + (short)zoffset;
-  COLLIDE_PointAndWorld(&local_48,(Level *)0x0);
+  COLLIDE_PointAndTerrain(&local_48,(Level *)0x0);
   if ((((passThroughHit == 0) || (local_48.type != 3)) ||
       (*(ushort *)((int)local_48.prim + 10) == 0xffff)) ||
      (uVar1 = 1,
@@ -134,17 +134,16 @@ int PLANCOLL_CheckUnderwaterPoint(_Position *position)
   ppLVar4 = &StreamTracker.StreamList[0].level;
   do {
     if ((*(short *)(ppLVar4 + -1) == 2) &&
-       (lVar1 = MEMPACK_MemoryValidFunc((char *)*ppLVar4), lVar1 != 0)) {
+       (lVar1 = MEMPACK_ReportMemory((char *)*ppLVar4), lVar1 != 0)) {
       pLVar5 = *ppLVar4;
       pBVar2 = pLVar5->terrain->BSPTreeArray;
       p_Var3 = pBVar2->bspRoot;
-      lVar1 = MATH3D_LengthXYZ((int)position->x -
-                               (int)(short)((p_Var3->sphere).position.x + (pBVar2->globalOffset).x),
-                               (int)position->y -
-                               (int)(short)((p_Var3->sphere).position.y + (pBVar2->globalOffset).y),
-                               (int)position->z -
-                               (int)(short)((p_Var3->sphere).position.z + (pBVar2->globalOffset).z))
-      ;
+      lVar1 = MATH3D_LengthXY((int)position->x -
+                              (int)(short)((p_Var3->sphere).position.x + (pBVar2->globalOffset).x),
+                              (int)position->y -
+                              (int)(short)((p_Var3->sphere).position.y + (pBVar2->globalOffset).y),
+                              (int)position->z -
+                              (int)(short)((p_Var3->sphere).position.z + (pBVar2->globalOffset).z));
       if ((lVar1 < (int)(u_int)(p_Var3->sphere).radius) && ((int)position->z < pLVar5->waterZLevel))
       {
         return pSVar7->StreamList[0].StreamUnitID;
@@ -239,7 +238,7 @@ int PLANCOLL_FindTerrainHitFinal(struct _PlanCollideInfo *pci, int *placement, i
 	/* end block 2 */
 	// End Line: 582
 
-int PLANCOLL_DoesStraightLinePathExist(_Position *startPos,_Position *endPos,int collideType)
+int PLANCOLL_DoesWaterPathUpExist(_Position *startPos,_Position *endPos,int collideType)
 
 {
   bool bVar1;
@@ -279,7 +278,7 @@ int PLANCOLL_DoesStraightLinePathExist(_Position *startPos,_Position *endPos,int
 	/* end block 2 */
 	// End Line: 620
 
-int PLANCOLL_DoesWaterPathUpExist
+int PLANCOLL_DoesStraightLinePathExist
               (_Position *startPos,_Position *endPos,int collideType,_Position *peakPos,
               int passThroughHit)
 

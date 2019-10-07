@@ -216,7 +216,7 @@ void LIGHT_PresetInstanceLight(_Instance *instance,short attenuate,MATRIX *lm)
 {
   short sVar1;
   Level *level;
-  undefined4 *puVar2;
+  u_char *puVar2;
   int iVar3;
   short sVar4;
   u_int uVar5;
@@ -230,13 +230,13 @@ void LIGHT_PresetInstanceLight(_Instance *instance,short attenuate,MATRIX *lm)
   void *pvVar13;
   MATRIX local_50;
   int local_30 [4];
-  undefined4 local_20;
+  u_char local_20;
   undefined2 local_1c;
   
   pvVar13 = instance->extraLight;
   local_20 = 0x10001000;
   local_1c = 0x1000;
-  level = STREAM_GetLevelWithID(instance->currentStreamUnitID);
+  level = STREAM_GetWaterZLevel(instance->currentStreamUnitID);
   LIGHT_GetLightMatrix(instance,level,lm,&local_50);
   uVar5 = instance->flags & 0x200000;
   local_30[0] = 0x1000;
@@ -259,7 +259,7 @@ void LIGHT_PresetInstanceLight(_Instance *instance,short attenuate,MATRIX *lm)
     local_30[2] = iVar7 + ((int)((int)instance->extraLightScale * (u_int)*(byte *)((int)pvVar13 + 10)
                                 ) >> 6);
   }
-  puVar2 = (undefined4 *)&level->TODRedScale;
+  puVar2 = (u_char *)&level->TODRedScale;
   if (level == (Level *)0x0) {
     puVar2 = &local_20;
   }
@@ -288,9 +288,9 @@ void LIGHT_PresetInstanceLight(_Instance *instance,short attenuate,MATRIX *lm)
     iVar7 = iVar7 + 6;
     piVar11 = piVar11 + 1;
     iVar12 = iVar12 + 1;
-    puVar2 = (undefined4 *)((int)puVar2 + 2);
+    puVar2 = (u_char *)((int)puVar2 + 2);
   } while (iVar12 < 3);
-  SetColorMatrix((undefined4 *)&local_50);
+  SetColorMatrix((u_char *)&local_50);
   return;
 }
 
@@ -764,10 +764,10 @@ void LIGHT_SetMatrixForLightGroupInstance(_Instance *instance,Level *level)
   LightGroup *pLVar3;
   u_int uVar4;
   u_int local_80;
-  undefined4 local_7c;
-  undefined4 local_78;
-  undefined4 local_74;
-  undefined4 local_70;
+  u_char local_7c;
+  u_char local_78;
+  u_char local_74;
+  u_char local_70;
   long local_6c;
   long local_68;
   long local_64;
@@ -781,14 +781,14 @@ void LIGHT_SetMatrixForLightGroupInstance(_Instance *instance,Level *level)
   undefined2 local_52;
   undefined2 local_50;
   int local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
-  undefined4 local_34;
+  u_char local_3c;
+  u_char local_38;
+  u_char local_34;
   u_int local_30;
-  undefined4 local_20;
-  undefined4 local_1c;
-  undefined4 local_18;
-  undefined4 local_14;
+  u_char local_20;
+  u_char local_1c;
+  u_char local_18;
+  u_char local_14;
   
   local_20 = 0x800;
   local_1c = 0x800;
@@ -821,15 +821,15 @@ LAB_8003617c:
   }
   if ((int)instance->lightMatrix == 0) {
     if ((instance->flags & 1U) == 0) {
-      RotMatrix((ushort *)&instance->rotation,&local_80);
+      RotMatrixY((ushort *)&instance->rotation,&local_80);
     }
     else {
       pMVar1 = instance->matrix;
       local_80 = *(u_int *)pMVar1->m;
-      local_7c = *(undefined4 *)(pMVar1->m + 2);
-      local_78 = *(undefined4 *)(pMVar1->m + 4);
-      local_74 = *(undefined4 *)(pMVar1->m + 6);
-      local_70 = *(undefined4 *)(pMVar1->m + 8);
+      local_7c = *(u_char *)(pMVar1->m + 2);
+      local_78 = *(u_char *)(pMVar1->m + 4);
+      local_74 = *(u_char *)(pMVar1->m + 6);
+      local_70 = *(u_char *)(pMVar1->m + 8);
       local_6c = pMVar1->t[0];
       local_68 = pMVar1->t[1];
       local_64 = pMVar1->t[2];
@@ -838,25 +838,25 @@ LAB_8003617c:
   else {
     pMVar1 = instance->matrix + (int)instance->lightMatrix;
     local_80 = *(u_int *)pMVar1->m;
-    local_7c = *(undefined4 *)(pMVar1->m + 2);
-    local_78 = *(undefined4 *)(pMVar1->m + 4);
-    local_74 = *(undefined4 *)(pMVar1->m + 6);
-    local_70 = *(undefined4 *)(pMVar1->m + 8);
+    local_7c = *(u_char *)(pMVar1->m + 2);
+    local_78 = *(u_char *)(pMVar1->m + 4);
+    local_74 = *(u_char *)(pMVar1->m + 6);
+    local_70 = *(u_char *)(pMVar1->m + 8);
     local_6c = pMVar1->t[0];
     local_68 = pMVar1->t[1];
     local_64 = pMVar1->t[2];
   }
   if (instance->extraLight == (void *)0x0) {
-    MulMatrix0((undefined4 *)pLVar3,(ushort *)&local_80,&local_80);
+    PopMatrix((u_char *)pLVar3,(ushort *)&local_80,&local_80);
     SetLightMatrix(&local_80);
     if ((instance->flags & 0x200000U) == 0) {
       pMVar1 = &pLVar3->colorMatrix;
     }
     else {
       local_40 = *(int *)(pLVar3->colorMatrix).m;
-      local_3c = *(undefined4 *)((pLVar3->colorMatrix).m + 2);
-      local_38 = *(undefined4 *)((pLVar3->colorMatrix).m + 4);
-      local_34 = *(undefined4 *)((pLVar3->colorMatrix).m + 6);
+      local_3c = *(u_char *)((pLVar3->colorMatrix).m + 2);
+      local_38 = *(u_char *)((pLVar3->colorMatrix).m + 4);
+      local_34 = *(u_char *)((pLVar3->colorMatrix).m + 6);
       local_30 = *(u_int *)((pLVar3->colorMatrix).m + 8);
       pMVar1 = (MATRIX *)&local_40;
       ScaleMatrix((int *)pMVar1,&local_20);
@@ -876,20 +876,20 @@ LAB_8003617c:
     local_50 = (undefined2)
                ((int)(instance->extraLightDir).z * (int)instance->extraLightScale >> 0xc);
     local_40 = *(int *)(pLVar3->colorMatrix).m;
-    local_34 = *(undefined4 *)((pLVar3->colorMatrix).m + 6);
+    local_34 = *(u_char *)((pLVar3->colorMatrix).m + 6);
     local_3c = CONCAT22((pLVar3->colorMatrix).m[3],
                         (ushort)*(byte *)((int)instance->extraLight + 8) << 4);
     local_38 = CONCAT22((ushort)*(byte *)((int)instance->extraLight + 9) << 4,
                         (pLVar3->colorMatrix).m[4]);
     local_30 = local_30 & 0xffff0000 | (u_int)*(byte *)((int)instance->extraLight + 10) << 4;
-    MulMatrix0((undefined4 *)&local_60,(ushort *)&local_80,&local_80);
+    PopMatrix((u_char *)&local_60,(ushort *)&local_80,&local_80);
     SetLightMatrix(&local_80);
     if ((instance->flags & 0x200000U) != 0) {
       ScaleMatrix((int *)&local_40,&local_20);
     }
     pMVar1 = (MATRIX *)&local_40;
   }
-  SetColorMatrix((undefined4 *)pMVar1);
+  SetColorMatrix((u_char *)pMVar1);
   return;
 }
 
@@ -920,14 +920,14 @@ LAB_8003617c:
 void LIGHT_DrawShadow(MATRIX *wcTransform,_Instance *instance,_PrimPool *primPool,u_long **ot)
 
 {
-  undefined4 in_at;
+  u_char in_at;
   short sVar1;
   int iVar2;
   long x;
   u_long *puVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
+  u_char uVar4;
+  u_char uVar5;
+  u_char uVar6;
   ushort local_70;
   short local_6e;
   short local_6c;
@@ -952,9 +952,9 @@ void LIGHT_DrawShadow(MATRIX *wcTransform,_Instance *instance,_PrimPool *primPoo
   undefined2 local_3c;
   undefined2 local_3a;
   undefined2 local_38;
-  undefined4 local_34;
-  undefined4 local_30;
-  undefined4 local_2c;
+  u_char local_34;
+  u_char local_30;
+  u_char local_2c;
   int local_28;
   int local_24;
   int local_20;
@@ -966,15 +966,15 @@ void LIGHT_DrawShadow(MATRIX *wcTransform,_Instance *instance,_PrimPool *primPoo
     x = MATH3D_FastSqrt0(0x1000000 - iVar2 * iVar2);
     local_6e = MATH3D_FastAtan2((int)(instance->wNormal).x,x);
     local_6c = (instance->rotation).z;
-    RotMatrix(&local_70,(u_int *)&local_68);
+    RotMatrixY(&local_70,(u_int *)&local_68);
     local_54 = (int)(instance->shadowPosition).x;
     local_50 = (int)(instance->shadowPosition).y;
     local_4c = (int)(instance->shadowPosition).z;
-    setCopControlWord(2,0,*(undefined4 *)wcTransform->m);
-    setCopControlWord(2,0x800,*(undefined4 *)(wcTransform->m + 2));
-    setCopControlWord(2,0x1000,*(undefined4 *)(wcTransform->m + 4));
-    setCopControlWord(2,0x1800,*(undefined4 *)(wcTransform->m + 6));
-    setCopControlWord(2,0x2000,*(undefined4 *)(wcTransform->m + 8));
+    setCopControlWord(2,0,*(u_char *)wcTransform->m);
+    setCopControlWord(2,0x800,*(u_char *)(wcTransform->m + 2));
+    setCopControlWord(2,0x1000,*(u_char *)(wcTransform->m + 4));
+    setCopControlWord(2,0x1800,*(u_char *)(wcTransform->m + 6));
+    setCopControlWord(2,0x2000,*(u_char *)(wcTransform->m + 8));
     setCopReg(2,0x4800,(u_int)local_68);
     setCopReg(2,0x5000,(u_int)local_62);
     setCopReg(2,0x5800,(u_int)local_5c);
@@ -1008,7 +1008,7 @@ void LIGHT_DrawShadow(MATRIX *wcTransform,_Instance *instance,_PrimPool *primPoo
     setCopControlWord(2,0x2800,wcTransform->t[0]);
     setCopControlWord(2,0x3000,wcTransform->t[1]);
     setCopControlWord(2,0x3800,wcTransform->t[2]);
-    setCopReg(2,0,*(undefined4 *)&instance->shadowPosition);
+    setCopReg(2,0,*(u_char *)&instance->shadowPosition);
     setCopReg(2,in_at,local_4c);
     copFunction(2,0x480012);
     local_34 = getCopReg(2,0x19);
@@ -1020,8 +1020,8 @@ void LIGHT_DrawShadow(MATRIX *wcTransform,_Instance *instance,_PrimPool *primPoo
     local_24 = local_28;
     local_20 = local_28;
     ScaleMatrix((int *)&local_48,&local_28);
-    SetRotMatrix((undefined4 *)&local_48);
-    SetTransMatrix((int)&local_48);
+    SetRotMatrix((u_char *)&local_48);
+    TransMatrix((int)&local_48);
     puVar3 = DRAW_DrawShadow(primPool,(_Model *)0x0,ot,(int)instance->fadeValue);
     primPool->nextPrim = puVar3;
   }
@@ -1064,9 +1064,9 @@ void LIGHT_CalcShadowPositions(GameTracker *gameTracker)
   _Terrain *terrain;
   _Instance *instance;
   _PCollideInfo local_48;
-  undefined4 local_18;
+  u_char local_18;
   short local_14;
-  undefined4 local_10;
+  u_char local_10;
   short local_c;
   
   instance = gameTracker->instanceList->first;
@@ -1093,9 +1093,9 @@ LAB_80036a24:
           goto LAB_80036a24;
         }
         if ((uVar3 & 0x10000000) == 0) {
-          local_18 = *(undefined4 *)&instance->position;
+          local_18 = *(u_char *)&instance->position;
           local_14 = (instance->position).z;
-          local_10 = *(undefined4 *)&instance->position;
+          local_10 = *(u_char *)&instance->position;
           local_c = (instance->position).z;
         }
         else {
@@ -1113,12 +1113,12 @@ LAB_80036a24:
         local_c = local_c + 0x100;
         instance->flags = instance->flags | 0x40;
         local_48.instance = instance;
-        level = STREAM_GetLevelWithID(instance->currentStreamUnitID);
+        level = STREAM_GetWaterZLevel(instance->currentStreamUnitID);
         if (level == (Level *)0x0) {
           local_48.type = 0;
         }
         else {
-          COLLIDE_PointAndWorld(&local_48,level);
+          COLLIDE_PointAndTerrain(&local_48,level);
         }
         instance->flags = instance->flags & 0xffffffbf;
         if (local_48.type == 3) {
@@ -1156,7 +1156,7 @@ LAB_800368f8:
             (instance->wNormal).z = local_48.wNormal.vz;
           }
         }
-        *(undefined4 *)&instance->shadowPosition = local_18;
+        *(u_char *)&instance->shadowPosition = local_18;
         (instance->shadowPosition).z = local_14;
       }
       else {
@@ -1191,7 +1191,7 @@ LAB_800368f8:
 	/* end block 2 */
 	// End Line: 1962
 
-void LIGHT_InitSources(LightInfo *lightInfo)
+void LIGHT_ActivateSources(LightInfo *lightInfo)
 
 {
   PointLight *node;
@@ -1205,7 +1205,7 @@ void LIGHT_InitSources(LightInfo *lightInfo)
   (lightInfo->activePointLightList).next = (NodeType *)0x0;
   (lightInfo->activePointLightList).prev = (NodeType *)0x0;
   while (node < (PointLight *)&lightInfo->usedPointLightList) {
-    LIST_InsertFunc(&lightInfo->freePointLightList,(NodeType *)node);
+    LIST_GetFunc(&lightInfo->freePointLightList,(NodeType *)node);
     node = node + 1;
   }
   node_00 = lightInfo->spotLightPool;
@@ -1216,7 +1216,7 @@ void LIGHT_InitSources(LightInfo *lightInfo)
   (lightInfo->activeSpotLightList).next = (NodeType *)0x0;
   (lightInfo->activeSpotLightList).prev = (NodeType *)0x0;
   while (node_00 < (SpotLight *)&lightInfo->usedSpotLightList) {
-    LIST_InsertFunc(&lightInfo->freeSpotLightList,(NodeType *)node_00);
+    LIST_GetFunc(&lightInfo->freeSpotLightList,(NodeType *)node_00);
     node_00 = node_00 + 1;
   }
   lightInfo->numSavedColors = 0;
@@ -1327,7 +1327,7 @@ void LIGHT_ActivateSources
       bVar1 = *(byte *)((int)&node[1].prev + 3);
       *(byte *)((int)&node[1].prev + 3) = bVar1 & 0xef;
       if ((bVar1 & 0x20) != 0) {
-        LIST_InsertFunc(&NStack32,node);
+        LIST_GetFunc(&NStack32,node);
       }
     }
   }
@@ -1337,7 +1337,7 @@ void LIGHT_ActivateSources
     if (((*(byte *)((int)&node[1].prev + 3) & 0x20) != 0) &&
        (iVar2 = BSP_SphereIntersectsViewVolume_S(&node[1].next,cameraCore), iVar2 != 0)) {
       LIST_DeleteFunc(node);
-      LIST_InsertFunc(activeLightList,node);
+      LIST_GetFunc(activeLightList,node);
       *(byte *)((int)&node[1].prev + 3) = *(byte *)((int)&node[1].prev + 3) | 0x10;
     }
   }
@@ -1375,8 +1375,7 @@ void LIGHT_ActivateSources
 	/* end block 4 */
 	// End Line: 3038
 
-void LIGHT_RelocatePointerInList
-               (Level *oldLevel,long sizeOfLevel,long offset,NodeType *currentLightList)
+void LIGHT_RelocateLights(Level *oldLevel,long sizeOfLevel,long offset,NodeType *currentLightList)
 
 {
   NodeType *pNVar1;
@@ -1427,13 +1426,13 @@ void LIGHT_RelocatePointerInList
 	/* end block 1 */
 	// End Line: 3083
 
-void LIGHT_RelocateLights(LightInfo *lightInfo,Level *oldLevel,long sizeOfLevel,long offset)
+void LIGHT_RelocatePointerInList(LightInfo *lightInfo,Level *oldLevel,long sizeOfLevel,long offset)
 
 {
-  LIGHT_RelocatePointerInList(oldLevel,sizeOfLevel,offset,&lightInfo->activeSpotLightList);
-  LIGHT_RelocatePointerInList(oldLevel,sizeOfLevel,offset,&lightInfo->usedSpotLightList);
-  LIGHT_RelocatePointerInList(oldLevel,sizeOfLevel,offset,&lightInfo->activePointLightList);
-  LIGHT_RelocatePointerInList(oldLevel,sizeOfLevel,offset,&lightInfo->usedPointLightList);
+  LIGHT_RelocateLights(oldLevel,sizeOfLevel,offset,&lightInfo->activeSpotLightList);
+  LIGHT_RelocateLights(oldLevel,sizeOfLevel,offset,&lightInfo->usedSpotLightList);
+  LIGHT_RelocateLights(oldLevel,sizeOfLevel,offset,&lightInfo->activePointLightList);
+  LIGHT_RelocateLights(oldLevel,sizeOfLevel,offset,&lightInfo->usedPointLightList);
   return;
 }
 
@@ -1448,7 +1447,7 @@ void LIGHT_RelocateLights(LightInfo *lightInfo,Level *oldLevel,long sizeOfLevel,
 	/* end block 1 */
 	// End Line: 3110
 
-void LIGHT_ClassifySources(_CameraCore_Type *cameraCore,Level *level,LightInfo *lightInfo)
+void LIGHT_InitSources(_CameraCore_Type *cameraCore,Level *level,LightInfo *lightInfo)
 
 {
   LIGHT_ActivateSources
@@ -1548,7 +1547,7 @@ void LIGHT_SourcesAndInstances(LightInfo *lightInfo,_InstanceList *instanceList)
         local_18.x = (instance->position).x - *(short *)&pNVar4[3].prev;
         local_18.y = (instance->position).y - *(short *)((int)&pNVar4[3].prev + 2);
         local_18.z = (instance->position).z - *(short *)&pNVar4[3].next;
-        MATH3D_Normalize(&local_18);
+        CAMERA_Initialize(&local_18);
         iVar3 = (int)local_18.x * (int)*(short *)((int)&pNVar4[3].next + 2) +
                 (int)local_18.y * (int)*(short *)&pNVar4[4].prev +
                 (int)local_18.z * (int)*(short *)((int)&pNVar4[4].prev + 2) >> 0xc;
@@ -1574,7 +1573,7 @@ void LIGHT_SourcesAndInstances(LightInfo *lightInfo,_InstanceList *instanceList)
         local_18.x = (instance->position).x - *(short *)&pNVar4[1].next;
         local_18.y = (instance->position).y - *(short *)((int)&pNVar4[1].next + 2);
         local_18.z = (instance->position).z - *(short *)&pNVar4[2].prev;
-        MATH3D_Normalize(&local_18);
+        CAMERA_Initialize(&local_18);
         *(NodeType **)&instance->extraLight = pNVar4;
         (instance->extraLightDir).x = -local_18.x;
         (instance->extraLightDir).y = -local_18.y;

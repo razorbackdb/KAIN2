@@ -161,14 +161,14 @@ int GetControllerInput(int *ZDirection,long *controlCommand)
 	/* end block 2 */
 	// End Line: 254
 
-int DecodeDirection(int Source,int Destination,short *Difference,short *Zone)
+int SetThrowDirection(int Source,int Destination,short *Difference,short *Zone)
 
 {
   short sVar1;
   short sVar2;
   int iVar3;
   
-  sVar1 = AngleDiff((short)Destination,(short)Source);
+  sVar1 = CAMERA_AngleDifference((short)Destination,(short)Source);
   *Difference = sVar1;
   if ((ushort)(sVar1 + 0x1ffU) < 0x3ff) {
     *Zone = 0;
@@ -352,7 +352,7 @@ LAB_800a17f8:
   if (rc != 0) {
     Raziel.LastBearing = (short)Raziel.ZDirection + theCamera.lagZ;
   }
-  Raziel.Bearing = AngleDiff((instance->rotation).z,Raziel.LastBearing);
+  Raziel.Bearing = CAMERA_AngleDifference((instance->rotation).z,Raziel.LastBearing);
   switch(Raziel.steeringMode) {
   case 0:
   case 0x10:
@@ -375,7 +375,7 @@ LAB_800a17f8:
       }
       instance->yVel = lVar2;
     }
-    G2Anim_SetController_Vector(&instance->anim,1,0xe,&local_28);
+    G2Anim_GetControllerCurrentInterpVector(&instance->anim,1,0xe,&local_28);
     break;
   case 5:
   case 9:
@@ -403,11 +403,11 @@ LAB_800a1a80:
       SteerSwim(instance);
     }
     anim = &instance->anim;
-    _Var3 = G2Anim_IsControllerActive(anim,1,0xe);
+    _Var3 = G2Anim_DetachControllerFromSeg(anim,1,0xe);
     if (_Var3 == G2FALSE) {
-      G2Anim_EnableController(anim,1,0xe);
+      G2Anim_DisableController(anim,1,0xe);
     }
-    G2Anim_SetController_Vector(anim,1,0xe,&Raziel.extraRot);
+    G2Anim_GetControllerCurrentInterpVector(anim,1,0xe,&Raziel.extraRot);
     break;
   case 7:
     SteerWallcrawling(instance);
@@ -427,11 +427,11 @@ LAB_800a1a80:
     goto LAB_800a1bb0;
   case 0xb:
     anim = &instance->anim;
-    _Var3 = G2Anim_IsControllerActive(anim,1,0xe);
+    _Var3 = G2Anim_DetachControllerFromSeg(anim,1,0xe);
     if (_Var3 == G2FALSE) {
-      G2Anim_EnableController(anim,1,0xe);
+      G2Anim_DisableController(anim,1,0xe);
     }
-    G2Anim_SetController_Vector(anim,1,0xe,&Raziel.extraRot);
+    G2Anim_GetControllerCurrentInterpVector(anim,1,0xe,&Raziel.extraRot);
     goto switchD_800a18b4_caseD_0;
   case 0xc:
     destination = MATH3D_AngleFromPosToPos(&instance->position,&Raziel.puppetRotToPoint);
@@ -485,7 +485,7 @@ switchD_800a18b4_caseD_0:
   }
   Zone = &sStack26;
 LAB_800a1b74:
-  rc = DecodeDirection((int)Raziel.Bearing,0,Difference,Zone);
+  rc = SetThrowDirection((int)Raziel.Bearing,0,Difference,Zone);
   return rc;
 }
 
@@ -622,7 +622,7 @@ int SteerAutoFace(_Instance *instance,long *controlCommand)
                       (&instance->position,&(Raziel.Senses.EngagedList[6].instance)->position);
   Raziel.autoFaceTrueAngle = (int)current;
   Raziel.autoFaceLastAnim = Raziel.autoFaceAnim;
-  sVar2 = AngleDiff(current,Raziel.LastBearing);
+  sVar2 = CAMERA_AngleDifference(current,Raziel.LastBearing);
   current = Raziel.LastBearing;
   iVar4 = (int)sVar2;
   bVar1 = iVar4 + 0x17fU < 0x2ff;
@@ -657,32 +657,32 @@ int SteerAutoFace(_Instance *instance,long *controlCommand)
     local_20.x = 0;
     local_20.y = 0;
     local_20.z = (short)Raziel.autoFaceRootAngle;
-    _Var3 = G2Anim_IsControllerActive(anim,1,10);
+    _Var3 = G2Anim_DetachControllerFromSeg(anim,1,10);
     if (_Var3 == G2FALSE) {
-      G2Anim_EnableController(anim,1,10);
+      G2Anim_DisableController(anim,1,10);
     }
     if (Raziel.input == Raziel.lastInput) {
       G2EmulationSetInterpController_Vector(instance,1,10,&local_20,4,3);
     }
     else {
-      G2Anim_SetController_Vector(anim,1,10,&local_20);
+      G2Anim_GetControllerCurrentInterpVector(anim,1,10,&local_20);
     }
   }
   anim = &instance->anim;
-  current = AngleDiff((instance->rotation).z,(short)Raziel.autoFaceTrueAngle);
-  _Var3 = G2Anim_IsControllerInterpolating(anim,1,10);
+  current = CAMERA_AngleDifference((instance->rotation).z,(short)Raziel.autoFaceTrueAngle);
+  _Var3 = G2Anim_SetControllerAngleOrder(anim,1,10);
   if (_Var3 == G2FALSE) {
     local_20.x = 0;
     local_20.y = 0;
     local_20.z = current - (short)Raziel.autoFaceRootAngle;
-    _Var3 = G2Anim_IsControllerActive(anim,0xe,0xe);
+    _Var3 = G2Anim_DetachControllerFromSeg(anim,0xe,0xe);
     if (_Var3 == G2FALSE) {
-      G2Anim_EnableController(anim,0xe,0xe);
+      G2Anim_DisableController(anim,0xe,0xe);
     }
-    G2Anim_SetController_Vector(anim,0xe,0xe,&local_20);
+    G2Anim_GetControllerCurrentInterpVector(anim,0xe,0xe,&local_20);
   }
   else {
-    _Var3 = G2Anim_IsControllerInterpolating(anim,0xe,0xe);
+    _Var3 = G2Anim_SetControllerAngleOrder(anim,0xe,0xe);
     if (_Var3 == G2FALSE) {
       local_20.x = 0;
       local_20.y = 0;
@@ -764,8 +764,9 @@ void SteerWallcrawling(_Instance *instance)
 
 {
   Raziel.Bearing =
-       AngleDiff((short)(((u_int)(ushort)ExtraRot->y - 0x800) * 0x10000 >> 0x10),
-                 (short)Raziel.ZDirection);
+       CAMERA_AngleDifference
+                 ((short)(((u_int)(ushort)ExtraRot->y - 0x800) * 0x10000 >> 0x10),
+                  (short)Raziel.ZDirection);
   return;
 }
 
@@ -787,13 +788,13 @@ void SteerDisableAutoFace(_Instance *instance)
   _G2Anim_Type *anim;
   
   anim = &instance->anim;
-  _Var1 = G2Anim_IsControllerActive(anim,1,10);
+  _Var1 = G2Anim_DetachControllerFromSeg(anim,1,10);
   if (_Var1 != G2FALSE) {
-    G2Anim_DisableController(anim,1,10);
+    _G2Anim_FindController(anim,1,10);
   }
-  _Var1 = G2Anim_IsControllerActive(anim,0xe,0xe);
+  _Var1 = G2Anim_DetachControllerFromSeg(anim,0xe,0xe);
   if (_Var1 != G2FALSE) {
-    G2Anim_DisableController(anim,0xe,0xe);
+    _G2Anim_FindController(anim,0xe,0xe);
   }
   (instance->rotation).z = (instance->rotation).z + (short)Raziel.autoFaceRootAngle;
   Raziel.autoFaceRootAngle = 0;
@@ -830,9 +831,9 @@ void SteerSwitchMode(_Instance *instance,int mode)
   case 4:
   case 8:
   case 0x12:
-    _Var2 = G2Anim_IsControllerActive(&instance->anim,1,0xe);
+    _Var2 = G2Anim_DetachControllerFromSeg(&instance->anim,1,0xe);
     if (_Var2 != G2FALSE) {
-      G2Anim_DisableController(&instance->anim,1,0xe);
+      _G2Anim_FindController(&instance->anim,1,0xe);
       (instance->rotation).z = (short)Raziel.steeringLockRotation;
       Raziel.LastBearing = (short)Raziel.steeringLockRotation;
     }
@@ -845,7 +846,7 @@ void SteerSwitchMode(_Instance *instance,int mode)
   case 6:
   case 0x11:
     if ((((mode != 6) && (mode != 0xb)) && (mode != 0x10)) && (mode != 0x11)) {
-      _Var2 = G2Anim_IsControllerActive(&instance->anim,1,0xe);
+      _Var2 = G2Anim_DetachControllerFromSeg(&instance->anim,1,0xe);
       if (_Var2 != G2FALSE) {
         G2Anim_InterpDisableController(&instance->anim,1,0xe,600);
       }
@@ -862,7 +863,7 @@ void SteerSwitchMode(_Instance *instance,int mode)
     break;
   case 0xb:
     CAMERA_EndSwimThrowMode(&theCamera);
-    CAMERA_SetLookRot(&theCamera,0,0);
+    CAMERA_SetLookFocusAndBase(&theCamera,0,0);
     Raziel.extraRot.x = (short)Raziel.throwReturnRot;
   }
   Raziel.RotationSegment = 0;
@@ -888,7 +889,7 @@ void SteerSwitchMode(_Instance *instance,int mode)
     Raziel.throwReturnRot = (int)Raziel.extraRot.x;
     Raziel.extraRot.x = 0x1000 - theCamera.core.rotation.x;
     CAMERA_StartSwimThrowMode(&theCamera);
-    CAMERA_SetLookRot(&theCamera,0x1000 - (int)Raziel.extraRot.x,0);
+    CAMERA_SetLookFocusAndBase(&theCamera,0x1000 - (int)Raziel.extraRot.x,0);
   case 6:
   case 0x11:
     Raziel.RotationSegment = 1;
@@ -930,7 +931,7 @@ void razInitWallCrawlSteering(_Instance *instance)
   _G2SVector3_Type local_18;
   
   anim = &instance->anim;
-  G2Anim_EnableController(anim,1,0x26);
+  G2Anim_DisableController(anim,1,0x26);
   local_18.x = 0;
   local_18.y = 0;
   local_18.z = -0x13e;
@@ -939,17 +940,17 @@ void razInitWallCrawlSteering(_Instance *instance)
   (instance->oldPos).z = (instance->oldPos).z + 0x13e;
   pMVar1->t[2] = pMVar1->t[2] + 0x13e;
   instance->oldMatrix->t[2] = instance->oldMatrix->t[2] + 0x13e;
-  G2Anim_SetController_Vector(anim,1,0x26,&local_18);
-  G2Anim_EnableController(anim,0,0xe);
+  G2Anim_GetControllerCurrentInterpVector(anim,1,0x26,&local_18);
+  G2Anim_DisableController(anim,0,0xe);
   local_18.x = (instance->rotation).x;
   local_18.y = (instance->rotation).y;
   local_18.z = (instance->rotation).z;
-  G2Anim_EnableController(anim,0,8);
-  G2Anim_SetControllerAngleOrder(anim,0,8,1);
-  G2Anim_SetController_Vector(anim,0,8,&local_18);
-  G2Anim_EnableController(anim,0xe,0xe);
-  G2Anim_EnableController(anim,0x32,0x4c);
-  G2Anim_EnableController(anim,0x3a,0x4c);
+  G2Anim_DisableController(anim,0,8);
+  _G2Anim_ApplyControllersToStoredFrame(anim,0,8,1);
+  G2Anim_GetControllerCurrentInterpVector(anim,0,8,&local_18);
+  G2Anim_DisableController(anim,0xe,0xe);
+  G2Anim_DisableController(anim,0x32,0x4c);
+  G2Anim_DisableController(anim,0x3a,0x4c);
   ExtraRotData.x = 0;
   ExtraRotData.y = 0;
   ExtraRotData.z = 0;
@@ -975,7 +976,7 @@ void razDeinitWallCrawlSteering(_Instance *instance)
   _G2Anim_Type *anim;
   
   anim = &instance->anim;
-  G2Anim_DisableController(anim,1,0x26);
+  _G2Anim_FindController(anim,1,0x26);
   (instance->position).z = (instance->position).z + -0x13e;
   pMVar1 = instance->matrix;
   (instance->oldPos).z = (instance->oldPos).z + -0x13e;

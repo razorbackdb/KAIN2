@@ -1,20 +1,5 @@
 #include "THISDUST.H"
 #include "MEMPACK.H"
-#include "STREAM.H"
-#include "DEBUG.H"
-#include "AADLIB.H"
-#include "SIGNAL.H"
-#include "EVENT.H"
-#include "LIGHT3D.H"
-#include "LOAD3D.H"
-
-#include "MEMORY.H"
-
-typedef enum
-{
-    FALSE,
-    TRUE
-} bool;
 
 
 // decompiled code
@@ -36,7 +21,7 @@ typedef enum
 void MEMPACK_Init(void)
 
 {
-/*   newMemTracker.rootNode = &DAT_800de9fc;
+  newMemTracker.rootNode = &DAT_800de9fc;
   newMemTracker.totalMemory = &DAT_00120604;
   newMemTracker.currentMemoryUsed = 0;
   newMemTracker.lastMemoryAddress = &DAT_801ff000;
@@ -44,7 +29,7 @@ void MEMPACK_Init(void)
   DAT_800de9fc = 0xbade;
   DAT_800de9fe = 0;
   DAT_800de9ff = 0;
-  DAT_800dea00 = &DAT_00120604; */
+  DAT_800dea00 = &DAT_00120604;
   return;
 }
 
@@ -95,7 +80,7 @@ MemHeader * MEMPACK_GetSmallestBlockTopBottom(long allocSize)
       if ((pMVar1->memStatus == '\0') && ((u_int)allocSize <= pMVar1->memSize)) {
         return pMVar1;
       }
-      pMVar1 = (MemHeader *)(&pMVar1->magicNumber + pMVar1->memSize);
+      pMVar1 = (MemHeader *)((int)&pMVar1->magicNumber + pMVar1->memSize);
     } while (pMVar1 != (MemHeader *)newMemTracker.lastMemoryAddress);
   }
   return (MemHeader *)0x0;
@@ -146,7 +131,7 @@ MemHeader * MEMPACK_GetSmallestBlockBottomTop(long allocSize)
          ((pMVar2 == (MemHeader *)0x0 || (pMVar2 < pMVar1)))) {
         pMVar2 = pMVar1;
       }
-      pMVar1 = (MemHeader *)(&pMVar1->magicNumber + pMVar1->memSize);
+      pMVar1 = (MemHeader *)((int)&pMVar1->magicNumber + pMVar1->memSize);
     } while (pMVar1 != (MemHeader *)newMemTracker.lastMemoryAddress);
   }
   return pMVar2;
@@ -168,7 +153,7 @@ MemHeader * MEMPACK_GetSmallestBlockBottomTop(long allocSize)
 	/* end block 2 */
 	// End Line: 676
 
-long MEMPACK_RelocatableType(long memType)
+long MEMPACK_RelocateAreaType(long memType)
 
 {
   if ((((1 < memType - 1U) && (memType != 0x2c)) && (memType != 0x2f)) && (memType != 4)) {
@@ -222,11 +207,11 @@ char * MEMPACK_Malloc(u_long allocSize,u_char memType)
   long lVar1;
   MemHeader *pMVar2;
   u_long uVar3;
-  //undefined2 *puVar4;
+  undefined2 *puVar4;
   MemHeader *pMVar5;
   u_int allocSize_00;
   
-  lVar1 = MEMPACK_RelocatableType((u_int)memType);
+  lVar1 = MEMPACK_RelocateAreaType((u_int)memType);
   if ((newMemTracker.doingGarbageCollection == 0) && (lVar1 != 0)) {
     MEMPACK_DoGarbageCollection();
   }
@@ -238,7 +223,7 @@ char * MEMPACK_Malloc(u_long allocSize,u_char memType)
     pMVar2 = MEMPACK_GetSmallestBlockTopBottom(allocSize_00);
   }
   if (pMVar2 == (MemHeader *)0x0) {
-    STREAM_DumpNonResidentObjects();
+    STREAM_TryAndDumpANonResidentObject();
     if (lVar1 == 0) {
       pMVar2 = MEMPACK_GetSmallestBlockBottomTop(allocSize_00);
     }
@@ -263,9 +248,9 @@ char * MEMPACK_Malloc(u_long allocSize,u_char memType)
     pMVar2->magicNumber = 0xbade;
   }
   else {
-    //puVar4 = (undefined2 *)(pMVar2->magicNumber + allocSize_00);
+    puVar4 = (undefined2 *)((int)&pMVar2->magicNumber + allocSize_00);
     if (lVar1 == 0) {
-      pMVar5 = (MemHeader *)(pMVar2 + (uVar3 - allocSize_00));
+      pMVar5 = (MemHeader *)((int)pMVar2 + (uVar3 - allocSize_00));
       pMVar5->magicNumber = 0xbade;
       pMVar5->memStatus = '\x01';
       pMVar5->memType = memType;
@@ -277,10 +262,10 @@ char * MEMPACK_Malloc(u_long allocSize,u_char memType)
       pMVar2->memSize = uVar3 - allocSize_00;
       goto LAB_80050618;
     }
-/*     *puVar4 = 0xbade;
+    *puVar4 = 0xbade;
     *(undefined *)(puVar4 + 1) = 0;
-    *(undefined *)(puVar4 + 3) = 0;
-    *(u_long *)(puVar4 + 2) = pMVar2->memSize - allocSize_00; */
+    *(undefined *)((int)puVar4 + 3) = 0;
+    *(u_long *)(puVar4 + 2) = pMVar2->memSize - allocSize_00;
     pMVar2->magicNumber = 0xbade;
   }
   pMVar2->memStatus = '\x01';
@@ -384,7 +369,7 @@ void MEMPACK_Return(char *address,long takeBackSize)
 	/* end block 2 */
 	// End Line: 1120
 
-void MEMPACK_Free(char *address)
+void MEMPACK_Init(char *address)
 
 {
   MemHeader *secondAddress;
@@ -395,7 +380,7 @@ void MEMPACK_Free(char *address)
   address[-6] = '\0';
   address[-5] = '\0';
   newMemTracker.currentMemoryUsed = newMemTracker.currentMemoryUsed - *(int *)(address + -4);
-  secondAddress = (MemHeader *)(&firstAddress->magicNumber + *(int *)(address + -4));
+  secondAddress = (MemHeader *)((int)&firstAddress->magicNumber + *(int *)(address + -4));
   secondAddress_00 = newMemTracker.rootNode;
   if (secondAddress != (MemHeader *)newMemTracker.lastMemoryAddress) {
     MEMORY_MergeAddresses(firstAddress,secondAddress);
@@ -406,7 +391,7 @@ void MEMPACK_Free(char *address)
     if (secondAddress == (MemHeader *)newMemTracker.lastMemoryAddress) {
       return;
     }
-    secondAddress_00 = (MemHeader *)(&secondAddress->magicNumber + secondAddress->memSize);
+    secondAddress_00 = (MemHeader *)((int)&secondAddress->magicNumber + secondAddress->memSize);
   } while (secondAddress_00 != firstAddress);
   MEMORY_MergeAddresses(secondAddress,secondAddress_00);
   return;
@@ -433,27 +418,27 @@ void MEMPACK_Free(char *address)
 	/* end block 2 */
 	// End Line: 1227
 
-void MEMPACK_FreeByType(u_char memType)
+void MEMPACK_Free(u_char memType)
 
 {
   bool bVar1;
   MemHeader *pMVar2;
   
   do {
-    bVar1 = FALSE;
+    bVar1 = false;
     pMVar2 = newMemTracker.rootNode;
     while (pMVar2 != (MemHeader *)newMemTracker.lastMemoryAddress) {
       if ((pMVar2->memStatus == '\x01') && (pMVar2->memType == memType)) {
-        bVar1 = TRUE;
-        MEMPACK_Free((char *)(pMVar2 + 1));
+        bVar1 = true;
+        MEMPACK_Init((char *)(pMVar2 + 1));
         break;
       }
-      pMVar2 = (MemHeader *)(&pMVar2->magicNumber + pMVar2->memSize);
+      pMVar2 = (MemHeader *)((int)&pMVar2->magicNumber + pMVar2->memSize);
     }
     if (!bVar1) {
       return;
     }
-  } while( TRUE );
+  } while( true );
 }
 
 
@@ -554,7 +539,7 @@ void MEMPACK_ReportMemory2(void)
   pMVar1 = newMemTracker.rootNode;
   if (newMemTracker.rootNode != (MemHeader *)newMemTracker.lastMemoryAddress) {
     do {
-      pMVar1 = (MemHeader *)(&pMVar1->magicNumber + pMVar1->memSize);
+      pMVar1 = (MemHeader *)((int)&pMVar1->magicNumber + pMVar1->memSize);
     } while (pMVar1 != (MemHeader *)newMemTracker.lastMemoryAddress);
   }
   return;
@@ -594,7 +579,7 @@ void MEMPACK_ReportMemory2(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void MEMPACK_ReportMemory(void)
+void MEMPACK_ReportFreeMemory(void)
 
 {
   bool bVar1;
@@ -604,19 +589,19 @@ void MEMPACK_ReportMemory(void)
   pMVar2 = newMemTracker.rootNode;
   if (newMemTracker.rootNode != (MemHeader *)newMemTracker.lastMemoryAddress) {
     do {
-      pMVar2 = (MemHeader *)(&pMVar2->magicNumber + pMVar2->memSize);
+      pMVar2 = (MemHeader *)((int)&pMVar2->magicNumber + pMVar2->memSize);
     } while (pMVar2 != (MemHeader *)newMemTracker.lastMemoryAddress);
   }
   uVar3 = 0;
   do {
-    bVar1 = TRUE;
+    bVar1 = true;
     pMVar2 = newMemTracker.rootNode;
     if (newMemTracker.rootNode != (MemHeader *)newMemTracker.lastMemoryAddress) {
       do {
         if (((pMVar2->memStatus != '\0') && ((u_int)pMVar2->memType == uVar3)) && (bVar1)) {
-          bVar1 = FALSE;
+          bVar1 = false;
         }
-        pMVar2 = (MemHeader *)(&pMVar2->magicNumber + pMVar2->memSize);
+        pMVar2 = (MemHeader *)((int)&pMVar2->magicNumber + pMVar2->memSize);
       } while (pMVar2 != (MemHeader *)newMemTracker.lastMemoryAddress);
     }
     uVar3 = uVar3 + 1;
@@ -722,7 +707,7 @@ void MEMPACK_SetMemoryDoneStreamed(char *address)
 	/* end block 4 */
 	// End Line: 1690
 
-long MEMPACK_MemoryValidFunc(char *address)
+long MEMPACK_ReportMemory(char *address)
 
 {
   if ((address != (char *)0xfafbfcfd) && (address != (char *)0x0)) {
@@ -761,13 +746,13 @@ char * MEMPACK_GarbageCollectMalloc(u_long *allocSize,u_char memType,u_long *fre
   *allocSize = allocSize_00;
   pMVar1 = MEMPACK_GetSmallestBlockTopBottom(allocSize_00);
   if (pMVar1 == (MemHeader *)0x0) {
-    STREAM_DumpNonResidentObjects();
+    STREAM_TryAndDumpANonResidentObject();
     pMVar1 = MEMPACK_GetSmallestBlockTopBottom(*allocSize);
     if (pMVar1 == (MemHeader *)0x0) {
       if (memType == '\x10') {
         return (char *)0x0;
       }
-      MEMPACK_ReportMemory();
+      MEMPACK_ReportFreeMemory();
       DEBUG_FatalError(
                       "Trying to fit memory size %d Type = %d\nAvalible memory : used = %d, free = %d\n"
                       );
@@ -827,18 +812,19 @@ char * MEMPACK_GarbageCollectMalloc(u_long *allocSize,u_char memType,u_long *fre
 	/* end block 3 */
 	// End Line: 1897
 
-void MEMPACK_GarbageSplitMemoryNow(u_long allocSize,MemHeader *bestAddress,long memType,u_long freeSize)
+void MEMPACK_GarbageSplitMemoryNow
+               (u_long allocSize,MemHeader *bestAddress,long memType,u_long freeSize)
 
 {
-/*   undefined2 *puVar1;
+  undefined2 *puVar1;
   
-  puVar1 = (undefined2 *)(bestAddress->magicNumber + allocSize);
+  puVar1 = (undefined2 *)((int)&bestAddress->magicNumber + allocSize);
   if (freeSize != 0) {
     *puVar1 = 0xbade;
     *(undefined *)(puVar1 + 1) = 0;
-    *(undefined *)(puVar1 + 3) = 0;
+    *(undefined *)((int)puVar1 + 3) = 0;
     *(u_long *)(puVar1 + 2) = freeSize;
-  } */
+  }
   return;
 }
 
@@ -862,7 +848,7 @@ void MEMPACK_GarbageSplitMemoryNow(u_long allocSize,MemHeader *bestAddress,long 
 	/* end block 2 */
 	// End Line: 1934
 
-void MEMPACK_GarbageCollectFree(MemHeader *memAddress)
+void VRAM_GarbageCollect(MemHeader *memAddress)
 
 {
   MemHeader *secondAddress;
@@ -871,7 +857,7 @@ void MEMPACK_GarbageCollectFree(MemHeader *memAddress)
   memAddress->memStatus = '\0';
   memAddress->memType = '\0';
   newMemTracker.currentMemoryUsed = newMemTracker.currentMemoryUsed - memAddress->memSize;
-  secondAddress = (MemHeader *)(&memAddress->magicNumber + memAddress->memSize);
+  secondAddress = (MemHeader *)((int)&memAddress->magicNumber + memAddress->memSize);
   secondAddress_00 = newMemTracker.rootNode;
   if (secondAddress != (MemHeader *)newMemTracker.lastMemoryAddress) {
     MEMORY_MergeAddresses(memAddress,secondAddress);
@@ -882,7 +868,7 @@ void MEMPACK_GarbageCollectFree(MemHeader *memAddress)
     if (secondAddress == (MemHeader *)newMemTracker.lastMemoryAddress) {
       return;
     }
-    secondAddress_00 = (MemHeader *)(&secondAddress->magicNumber + secondAddress->memSize);
+    secondAddress_00 = (MemHeader *)((int)&secondAddress->magicNumber + secondAddress->memSize);
   } while (secondAddress_00 != memAddress);
   MEMORY_MergeAddresses(secondAddress,secondAddress_00);
   return;
@@ -924,7 +910,7 @@ void MEMPACK_DoGarbageCollection(void)
   byte memType;
   bool bVar1;
   long lVar2;
-  HModel *newHModel;
+  _HModel *newHModel;
   MemHeader *memAddress;
   Level *level;
   int iVar3;
@@ -932,7 +918,7 @@ void MEMPACK_DoGarbageCollection(void)
   size_t local_28;
   u_long local_24;
   
-  bVar1 = FALSE;
+  bVar1 = false;
   local_24 = 0;
   newMemTracker.doingGarbageCollection = 1;
   do {
@@ -944,23 +930,23 @@ void MEMPACK_DoGarbageCollection(void)
           iVar3 = 1;
         }
         else {
-          lVar2 = MEMPACK_RelocatableType((u_int)memAddress->memType);
+          lVar2 = MEMPACK_RelocateAreaType((u_int)memAddress->memType);
           if (((lVar2 != 0) && (iVar3 == 1)) && (memAddress->memStatus != '\x02')) {
             iVar3 = 2;
             break;
           }
         }
-        memAddress = (MemHeader *)(&memAddress->magicNumber + memAddress->memSize);
+        memAddress = (MemHeader *)((int)&memAddress->magicNumber + memAddress->memSize);
       } while (memAddress != (MemHeader *)newMemTracker.lastMemoryAddress);
     }
     if (iVar3 == 2) {
       memType = memAddress->memType;
       __n = memAddress->memSize - 8;
-      MEMPACK_GarbageCollectFree(memAddress);
+      VRAM_GarbageCollect(memAddress);
       local_28 = __n;
-      //newHModel = (HModel *)MEMPACK_GarbageCollectMalloc(&local_28,memType,&local_24);
+      newHModel = (_HModel *)MEMPACK_GarbageCollectMalloc(&local_28,memType,&local_24);
       level = (Level *)(memAddress + 1);
-      if (newHModel != (HModel *)0x0) {
+      if (newHModel != (_HModel *)0x0) {
         if (memType == 2) {
           RemoveIntroducedLights(level);
         }
@@ -969,52 +955,52 @@ void MEMPACK_DoGarbageCollection(void)
             aadRelocateMusicMemoryBegin();
           }
         }
-        //memcpy(newHModel,level,__n);
-        /* if (memType == 2) {
-          MEMPACK_RelocateAreaType
-                    ((MemHeader *)(newHModel + -1),(long)(newHModel - (int)level),level);
+        memcpy(newHModel,level,__n);
+        if (memType == 2) {
+          MEMPACK_RelocatableType
+                    ((MemHeader *)(newHModel + -1),(long)((int)newHModel - (int)level),level);
         }
         else {
           if (memType == 1) {
-            MEMPACK_RelocateObjectType
-                      ((MemHeader *)(newHModel + -1),(long)(newHModel - (int)level),
+            MEMPACK_RelocateG2AnimKeylistType
+                      ((MemHeader *)(newHModel + -1),(long)((int)newHModel - (int)level),
                        (Object *)level);
           }
           else {
             if (memType == 0xe) {
-              STREAM_UpdateInstanceCollisionInfo((HModel *)level,newHModel);
+              STREAM_UpdateInstanceCollisionInfo((_HModel *)level,newHModel);
             }
             else {
               if (memType == 0x2c) {
-                MEMPACK_RelocateCDMemory
-                          ((MemHeader *)(newHModel + -1),(long)(newHModel - (int)level),
-                           (BigFileDir *)level);
+                MEMPACK_RelocateObjectType
+                          ((MemHeader *)(newHModel + -1),(long)((int)newHModel - (int)level),
+                           (_BigFileDir *)level);
               }
               else {
                 if (memType == 4) {
-                  aadRelocateMusicMemoryEnd(level,(int)(newHModel - (int)level));
+                  aadRelocateSfxMemory(level,(int)((int)newHModel - (int)level));
                 }
                 else {
                   if (memType == 0x2f) {
-                    aadRelocateSfxMemory(level,(int)(newHModel - (int)level));
+                    aadRelocateMusicMemoryEnd(level,(int)((int)newHModel - (int)level));
                   }
                 }
               }
             }
           }
-        }*/
+        }
         MEMPACK_GarbageSplitMemoryNow(local_28,(MemHeader *)(newHModel + -1),(u_int)memType,local_24)
         ;
       }
     }
     else {
-      bVar1 = TRUE;
+      bVar1 = true;
     }
     if (bVar1) {
       newMemTracker.doingGarbageCollection = 0;
       return;
     }
-  } while( TRUE );
+  } while( true );
 }
 
 
@@ -1028,7 +1014,7 @@ void MEMPACK_DoGarbageCollection(void)
 		// Start offset: 0x80050DF0
 		// Variables:
 	// 		struct Level *level; // $s0
-	// 		struct MultiSignal *msignal; // $a0
+	// 		struct _MultiSignal *msignal; // $a0
 	// 		long sizeOfLevel; // $s2
 	// 		long i; // $t0
 	// 		long d; // $a3
@@ -1037,7 +1023,7 @@ void MEMPACK_DoGarbageCollection(void)
 			// Start line: 1253
 			// Start offset: 0x80051110
 			// Variables:
-		// 		struct Terrain *terrain; // $t1
+		// 		struct _Terrain *terrain; // $t1
 
 			/* begin block 1.1.1 */
 				// Start line: 1281
@@ -1080,8 +1066,8 @@ void MEMPACK_DoGarbageCollection(void)
 				// Start offset: 0x80051540
 				// Variables:
 			// 		struct BSPTree *bsp; // $t2
-			// 		struct BSPNode *node; // $a2
-			// 		struct BSPLeaf *leaf; // $a1
+			// 		struct _BSPNode *node; // $a2
+			// 		struct _BSPLeaf *leaf; // $a1
 			/* end block 1.1.4 */
 			// End offset: 0x80051658
 			// End Line: 1425
@@ -1097,40 +1083,40 @@ void MEMPACK_DoGarbageCollection(void)
 	/* end block 2 */
 	// End Line: 2392
 
-void MEMPACK_RelocateAreaType(MemHeader *newAddress,long offset,Level *oldLevel)
+void MEMPACK_RelocatableType(MemHeader *newAddress,long offset,Level *oldLevel)
 
 {
   int iVar1;
-  Terrain *p_Var2;
+  _Terrain *p_Var2;
   char *pcVar3;
-  BSPNode *p_Var4;
-  BSPLeaf *p_Var5;
+  _BSPNode *p_Var4;
+  _BSPLeaf *p_Var5;
   u_long uVar6;
   u_long uVar7;
   int iVar8;
   Intro *pIVar9;
-  TFace *p_Var10;
+  _TFace *p_Var10;
   DrMoveAniTex *pDVar11;
   TextureFT3 *pTVar12;
-  MorphVertex *p_Var13;
+  _MorphVertex *p_Var13;
   BSPTree *pBVar14;
-  MultiSignal *multiSignal;
+  _MultiSignal *multiSignal;
   int **ppiVar15;
   int iVar16;
   int iVar17;
-  TVertex *p_Var18;
-  Normal *p_Var19;
+  _TVertex *p_Var18;
+  _Normal *p_Var19;
   void *pvVar20;
   TextureFT3 *pTVar21;
-  MorphColor *p_Var22;
+  _MorphColor *p_Var22;
   short *psVar23;
   int *piVar24;
   int iVar25;
-  BSPLeaf *p_Var26;
-  TFace **pp_Var27;
+  _BSPLeaf *p_Var26;
+  _TFace **pp_Var27;
   int iVar28;
   int *piVar29;
-  BSPLeaf **pp_Var30;
+  _BSPLeaf **pp_Var30;
   Level *newLevel;
   int sizeOfLevel;
   
@@ -1334,35 +1320,35 @@ void MEMPACK_RelocateAreaType(MemHeader *newAddress,long offset,Level *oldLevel)
   }
   p_Var2 = newLevel->terrain;
   newAddress[0xb].memSize = uVar7;
-  if (p_Var2 != (Terrain *)0x0) {
+  if (p_Var2 != (_Terrain *)0x0) {
     pIVar9 = (Intro *)0x0;
     if (p_Var2->introList != (Intro *)0x0) {
       pIVar9 = (Intro *)(p_Var2->introList->name + offset);
     }
-    p_Var18 = (TVertex *)0x0;
+    p_Var18 = (_TVertex *)0x0;
     p_Var2->introList = pIVar9;
-    if (p_Var2->vertexList != (TVertex *)0x0) {
-      p_Var18 = (TVertex *)((p_Var2->vertexList->vertex).x + offset);
+    if (p_Var2->vertexList != (_TVertex *)0x0) {
+      p_Var18 = (_TVertex *)((int)&(p_Var2->vertexList->vertex).x + offset);
     }
-    p_Var10 = (TFace *)0x0;
+    p_Var10 = (_TFace *)0x0;
     p_Var2->vertexList = p_Var18;
-    if (p_Var2->faceList != (TFace *)0x0) {
-      p_Var10 = (TFace *)((p_Var2->faceList->face).v0 + offset);
+    if (p_Var2->faceList != (_TFace *)0x0) {
+      p_Var10 = (_TFace *)((int)&(p_Var2->faceList->face).v0 + offset);
     }
-    p_Var19 = (Normal *)0x0;
+    p_Var19 = (_Normal *)0x0;
     p_Var2->faceList = p_Var10;
-    if (p_Var2->normalList != (Normal *)0x0) {
-      p_Var19 = (Normal *)(p_Var2->normalList->x + offset);
+    if (p_Var2->normalList != (_Normal *)0x0) {
+      p_Var19 = (_Normal *)((int)&p_Var2->normalList->x + offset);
     }
     pDVar11 = (DrMoveAniTex *)0x0;
     p_Var2->normalList = p_Var19;
     if (p_Var2->aniList != (DrMoveAniTex *)0x0) {
-      pDVar11 = (DrMoveAniTex *)(p_Var2->aniList->numAniTextues + offset);
+      pDVar11 = (DrMoveAniTex *)((int)&p_Var2->aniList->numAniTextues + offset);
     }
     pvVar20 = (void *)0x0;
     p_Var2->aniList = pDVar11;
     if (p_Var2->StreamUnits != (void *)0x0) {
-      pvVar20 = (void *)(p_Var2->StreamUnits + offset);
+      pvVar20 = (void *)((int)p_Var2->StreamUnits + offset);
     }
     pTVar12 = (TextureFT3 *)0x0;
     p_Var2->StreamUnits = pvVar20;
@@ -1374,30 +1360,30 @@ void MEMPACK_RelocateAreaType(MemHeader *newAddress,long offset,Level *oldLevel)
     if (p_Var2->EndTextureList != (TextureFT3 *)0x0) {
       pTVar21 = (TextureFT3 *)(&p_Var2->EndTextureList->u0 + offset);
     }
-    p_Var13 = (MorphVertex *)0x0;
+    p_Var13 = (_MorphVertex *)0x0;
     p_Var2->EndTextureList = pTVar21;
-    if (p_Var2->MorphDiffList != (MorphVertex *)0x0) {
-      p_Var13 = (MorphVertex *)(p_Var2->MorphDiffList->x + offset);
+    if (p_Var2->MorphDiffList != (_MorphVertex *)0x0) {
+      p_Var13 = (_MorphVertex *)((int)&p_Var2->MorphDiffList->x + offset);
     }
-    p_Var22 = (MorphColor *)0x0;
+    p_Var22 = (_MorphColor *)0x0;
     p_Var2->MorphDiffList = p_Var13;
-    if (p_Var2->MorphColorList != (MorphColor *)0x0) {
-      p_Var22 = (MorphColor *)(p_Var2->MorphColorList->morphColor15 + offset);
+    if (p_Var2->MorphColorList != (_MorphColor *)0x0) {
+      p_Var22 = (_MorphColor *)((int)&p_Var2->MorphColorList->morphColor15 + offset);
     }
     pBVar14 = (BSPTree *)0x0;
     p_Var2->MorphColorList = p_Var22;
     if (p_Var2->BSPTreeArray != (BSPTree *)0x0) {
-      pBVar14 = (BSPTree *)(p_Var2->BSPTreeArray->bspRoot + offset);
+      pBVar14 = (BSPTree *)((int)&p_Var2->BSPTreeArray->bspRoot + offset);
     }
     psVar23 = (short *)0x0;
     p_Var2->BSPTreeArray = pBVar14;
     if (p_Var2->morphNormalIdx != (short *)0x0) {
-      psVar23 = (short *)(p_Var2->morphNormalIdx + offset);
+      psVar23 = (short *)((int)p_Var2->morphNormalIdx + offset);
     }
-    multiSignal = (MultiSignal *)0x0;
+    multiSignal = (_MultiSignal *)0x0;
     p_Var2->morphNormalIdx = psVar23;
-    if (p_Var2->signals != (MultiSignal *)0x0) {
-      multiSignal = (MultiSignal *)(p_Var2->signals->numSignals + offset);
+    if (p_Var2->signals != (_MultiSignal *)0x0) {
+      multiSignal = (_MultiSignal *)((int)&p_Var2->signals->numSignals + offset);
     }
     iVar28 = 0;
     p_Var2->signals = multiSignal;
@@ -1418,22 +1404,22 @@ void MEMPACK_RelocateAreaType(MemHeader *newAddress,long offset,Level *oldLevel)
         if (ppiVar15 != (int **)0x0) {
           piVar24 = (int *)0x0;
           if (*ppiVar15 != (int *)0x0) {
-            piVar24 = (int *)(ppiVar15 + offset);
+            piVar24 = (int *)((int)*ppiVar15 + offset);
           }
           piVar29 = (int *)0x0;
           *ppiVar15 = piVar24;
           if (ppiVar15[1] != (int *)0x0) {
-            piVar29 = (int *)(ppiVar15[1] + offset);
+            piVar29 = (int *)((int)ppiVar15[1] + offset);
           }
           piVar24 = (int *)0x0;
           ppiVar15[1] = piVar29;
           if (ppiVar15[2] != (int *)0x0) {
-            piVar24 = (int *)(ppiVar15[2] + offset);
+            piVar24 = (int *)((int)ppiVar15[2] + offset);
           }
           piVar29 = (int *)0x0;
           ppiVar15[2] = piVar24;
           if (ppiVar15[3] != (int *)0x0) {
-            piVar29 = (int *)(ppiVar15[3] + offset);
+            piVar29 = (int *)((int)ppiVar15[3] + offset);
           }
           piVar24 = *ppiVar15;
           ppiVar15[3] = piVar29;
@@ -1562,22 +1548,22 @@ void MEMPACK_RelocateAreaType(MemHeader *newAddress,long offset,Level *oldLevel)
     if (0 < p_Var2->numBSPTrees) {
       pp_Var30 = &pBVar14->endLeaves;
       do {
-        p_Var4 = (BSPNode *)0x0;
-        if (pBVar14->bspRoot != (BSPNode *)0x0) {
-          p_Var4 = (BSPNode *)((pBVar14->bspRoot->sphere).position.x + offset);
+        p_Var4 = (_BSPNode *)0x0;
+        if (pBVar14->bspRoot != (_BSPNode *)0x0) {
+          p_Var4 = (_BSPNode *)((int)&(pBVar14->bspRoot->sphere).position.x + offset);
         }
         pBVar14->bspRoot = p_Var4;
-        p_Var26 = (BSPLeaf *)0x0;
-        if (pp_Var30[-1] != (BSPLeaf *)0x0) {
-          p_Var26 = (BSPLeaf *)((pp_Var30[-1]->sphere).position.x + offset);
+        p_Var26 = (_BSPLeaf *)0x0;
+        if (pp_Var30[-1] != (_BSPLeaf *)0x0) {
+          p_Var26 = (_BSPLeaf *)((int)&(pp_Var30[-1]->sphere).position.x + offset);
         }
-        p_Var5 = (BSPLeaf *)0x0;
+        p_Var5 = (_BSPLeaf *)0x0;
         pp_Var30[-1] = p_Var26;
-        if (*pp_Var30 != (BSPLeaf *)0x0) {
-          p_Var5 = (BSPLeaf *)(((*pp_Var30)->sphere).position.x + offset);
+        if (*pp_Var30 != (_BSPLeaf *)0x0) {
+          p_Var5 = (_BSPLeaf *)((int)&((*pp_Var30)->sphere).position.x + offset);
         }
         *pp_Var30 = p_Var5;
-        p_Var26 = (BSPLeaf *)pBVar14->bspRoot;
+        p_Var26 = (_BSPLeaf *)pBVar14->bspRoot;
         if (p_Var26 < pp_Var30[-1]) {
           piVar24 = (int *)&(p_Var26->box).maxY;
           do {
@@ -1591,7 +1577,7 @@ void MEMPACK_RelocateAreaType(MemHeader *newAddress,long offset,Level *oldLevel)
               iVar1 = *piVar24 + offset;
             }
             *piVar24 = iVar1;
-            p_Var26 = (BSPLeaf *)&(p_Var26->spectralSphere).position.z;
+            p_Var26 = (_BSPLeaf *)&(p_Var26->spectralSphere).position.z;
             piVar24 = piVar24 + 0xb;
           } while (p_Var26 < pp_Var30[-1]);
         }
@@ -1599,9 +1585,9 @@ void MEMPACK_RelocateAreaType(MemHeader *newAddress,long offset,Level *oldLevel)
         if (p_Var26 < *pp_Var30) {
           pp_Var27 = &p_Var26->faceList;
           do {
-            p_Var10 = (TFace *)0x0;
-            if (*pp_Var27 != (TFace *)0x0) {
-              p_Var10 = (TFace *)(&((*pp_Var27)->face).v0 + offset);
+            p_Var10 = (_TFace *)0x0;
+            if (*pp_Var27 != (_TFace *)0x0) {
+              p_Var10 = (_TFace *)((int)&((*pp_Var27)->face).v0 + offset);
             }
             *pp_Var27 = p_Var10;
             p_Var26 = p_Var26 + 1;
@@ -1614,16 +1600,16 @@ void MEMPACK_RelocateAreaType(MemHeader *newAddress,long offset,Level *oldLevel)
       } while (iVar28 < p_Var2->numBSPTrees);
     }
   }
-  multiSignal = *(MultiSignal **)(newAddress + 0x1b);
-  if (multiSignal < (MultiSignal *)newAddress[0x1b].memSize) {
+  multiSignal = *(_MultiSignal **)(newAddress + 0x1b);
+  if (multiSignal < (_MultiSignal *)newAddress[0x1b].memSize) {
     do {
-      multiSignal = SIGNAL_RelocateSignal(multiSignal,offset);
-    } while (multiSignal < (MultiSignal *)newAddress[0x1b].memSize);
+      multiSignal = SIGNAL_IsStreamSignal(multiSignal,offset);
+    } while (multiSignal < (_MultiSignal *)newAddress[0x1b].memSize);
   }
-  EVENT_UpdatePuzzlePointers((EventPointers *)newAddress[0x1c].memSize,offset);
+  FX_UpdateTexturePointers((EventPointers *)newAddress[0x1c].memSize,offset);
   STREAM_UpdateLevelPointer(oldLevel,newLevel,sizeOfLevel);
-  LIGHT_RelocateLights(gameTrackerX.lightInfo,oldLevel,sizeOfLevel,offset);
-  EVENT_RelocateInstanceList(oldLevel,newLevel,sizeOfLevel);
+  LIGHT_RelocatePointerInList(gameTrackerX.lightInfo,oldLevel,sizeOfLevel,offset);
+  OBTABLE_RelocateInstanceObject(oldLevel,newLevel,sizeOfLevel);
   return;
 }
 
@@ -1631,7 +1617,7 @@ void MEMPACK_RelocateAreaType(MemHeader *newAddress,long offset,Level *oldLevel)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ MEMPACK_RelocateG2AnimKeylistType(struct G2AnimKeylist **pKeylist /*$a0*/, int offset /*$a1*/, char *start /*$a2*/, char *end /*$a3*/)
+// void /*$ra*/ MEMPACK_RelocateG2AnimKeylistType(struct _G2AnimKeylist_Type **pKeylist /*$a0*/, int offset /*$a1*/, char *start /*$a2*/, char *end /*$a3*/)
  // line 1455, offset 0x800516e8
 	/* begin block 1 */
 		// Start line: 1456
@@ -1642,7 +1628,7 @@ void MEMPACK_RelocateAreaType(MemHeader *newAddress,long offset,Level *oldLevel)
 			// Start offset: 0x80051704
 			// Variables:
 		// 		int j; // $a2
-		// 		struct G2AnimKeylist *keylist; // $a3
+		// 		struct _G2AnimKeylist_Type *keylist; // $a3
 		/* end block 1.1 */
 		// End offset: 0x80051780
 		// End Line: 1475
@@ -1660,26 +1646,27 @@ void MEMPACK_RelocateAreaType(MemHeader *newAddress,long offset,Level *oldLevel)
 	/* end block 3 */
 	// End Line: 3077
 
-void MEMPACK_RelocateG2AnimKeylistType(G2AnimKeylist **pKeylist,int offset,char *start,char *end)
+void MEMPACK_RelocateG2AnimKeylistType
+               (_G2AnimKeylist_Type **pKeylist,int offset,char *start,char *end)
 
 {
-  G2AnimKeylist *p_Var1;
-  //_func_7 **pp_Var2;
-  G2AnimKeylist *p_Var3;
-  G2AnimFxHeader *p_Var4;
+  _G2AnimKeylist_Type *p_Var1;
+  _func_7 **pp_Var2;
+  _G2AnimKeylist_Type *p_Var3;
+  _G2AnimFxHeader_Type *p_Var4;
   int iVar5;
   
   p_Var3 = *pKeylist;
-  /* if ((start <= p_Var3) && (p_Var3 < end)) {
-    p_Var1 = (G2AnimKeylist *)0x0;
-    if (p_Var3 != (G2AnimKeylist *)0x0) {
-      p_Var1 = (G2AnimKeylist *)(&p_Var3->sectionCount + offset);
+  if ((start <= p_Var3) && (p_Var3 < end)) {
+    p_Var1 = (_G2AnimKeylist_Type *)0x0;
+    if (p_Var3 != (_G2AnimKeylist_Type *)0x0) {
+      p_Var1 = (_G2AnimKeylist_Type *)(&p_Var3->sectionCount + offset);
     }
     *pKeylist = p_Var1;
     if (*(int *)p_Var1 != 0xface0ff) {
-      p_Var4 = (G2AnimFxHeader *)0x0;
-      if (p_Var1->fxList != (G2AnimFxHeader *)0x0) {
-        p_Var4 = (G2AnimFxHeader *)(&p_Var1->fxList->sizeAndSection + offset);
+      p_Var4 = (_G2AnimFxHeader_Type *)0x0;
+      if (p_Var1->fxList != (_G2AnimFxHeader_Type *)0x0) {
+        p_Var4 = (_G2AnimFxHeader_Type *)(&p_Var1->fxList->sizeAndSection + offset);
       }
       iVar5 = 0;
       p_Var1->fxList = p_Var4;
@@ -1688,15 +1675,15 @@ void MEMPACK_RelocateG2AnimKeylistType(G2AnimKeylist **pKeylist,int offset,char 
         do {
           pp_Var2 = (_func_7 **)0x0;
           if (p_Var3->sectionData != (_func_7 **)0x0) {
-            pp_Var2 = (_func_7 **)(p_Var3->sectionData + offset);
+            pp_Var2 = (_func_7 **)((int)p_Var3->sectionData + offset);
           }
           p_Var3->sectionData = pp_Var2;
           iVar5 = iVar5 + 1;
-          p_Var3 = (G2AnimKeylist *)&p_Var3->keyCount;
+          p_Var3 = (_G2AnimKeylist_Type *)&p_Var3->keyCount;
         } while (iVar5 < (int)(u_int)p_Var1->sectionCount);
       }
     }
-  } */
+  }
   return;
 }
 
@@ -1710,13 +1697,13 @@ void MEMPACK_RelocateG2AnimKeylistType(G2AnimKeylist **pKeylist,int offset,char 
 		// Start line: 1479
 		// Start offset: 0x80051788
 		// Variables:
-	// 		struct Instance *instance; // $a1
+	// 		struct _Instance *instance; // $a1
 	// 		struct Object *object; // $s1
 	// 		int i; // $s2
 	// 		int j; // $a2
 	// 		int d; // $a3
 	// 		int sizeOfObject; // $s4
-	// 		struct Model *model; // $t0
+	// 		struct _Model *model; // $t0
 
 		/* begin block 1.1 */
 			// Start line: 1525
@@ -1771,7 +1758,7 @@ void MEMPACK_RelocateG2AnimKeylistType(G2AnimKeylist **pKeylist,int offset,char 
 	/* end block 2 */
 	// End Line: 3126
 
-void MEMPACK_RelocateObjectType(MemHeader *newAddress,long offset,Object *oldObject)
+void MEMPACK_RelocateG2AnimKeylistType(MemHeader *newAddress,long offset,Object *oldObject)
 
 {
   u_long uVar1;
@@ -1780,19 +1767,19 @@ void MEMPACK_RelocateObjectType(MemHeader *newAddress,long offset,Object *oldObj
   int iVar4;
   int *piVar5;
   int **ppiVar6;
-  Model *p_Var7;
-  G2AnimKeylist *p_Var8;
+  _Model *p_Var7;
+  _G2AnimKeylist_Type *p_Var8;
   int iVar9;
   u_long uVar10;
   int iVar11;
-  Model *p_Var12;
+  _Model *p_Var12;
   Object *pOVar13;
   int iVar14;
   int iVar15;
-  Instance *p_Var16;
+  _Instance *p_Var16;
   u_long uVar17;
   int *piVar18;
-  Instance *p_Var19;
+  _Instance *p_Var19;
   int iVar20;
   
   uVar17 = 0;
@@ -1969,22 +1956,22 @@ void MEMPACK_RelocateObjectType(MemHeader *newAddress,long offset,Object *oldObj
       if (ppiVar6 != (int **)0x0) {
         piVar5 = (int *)0x0;
         if (*ppiVar6 != (int *)0x0) {
-          piVar5 = (int *)(ppiVar6 + offset);
+          piVar5 = (int *)((int)*ppiVar6 + offset);
         }
         piVar18 = (int *)0x0;
         *ppiVar6 = piVar5;
         if (ppiVar6[1] != (int *)0x0) {
-          piVar18 = (int *)(ppiVar6[1] + offset);
+          piVar18 = (int *)((int)ppiVar6[1] + offset);
         }
         piVar5 = (int *)0x0;
         ppiVar6[1] = piVar18;
         if (ppiVar6[2] != (int *)0x0) {
-          piVar5 = (int *)(ppiVar6[2] + offset);
+          piVar5 = (int *)((int)ppiVar6[2] + offset);
         }
         piVar18 = (int *)0x0;
         ppiVar6[2] = piVar5;
         if (ppiVar6[3] != (int *)0x0) {
-          piVar18 = (int *)(ppiVar6[3] + offset);
+          piVar18 = (int *)((int)ppiVar6[3] + offset);
         }
         piVar5 = *ppiVar6;
         ppiVar6[3] = piVar18;
@@ -2028,19 +2015,19 @@ void MEMPACK_RelocateObjectType(MemHeader *newAddress,long offset,Object *oldObj
   if (0 < *(short *)&newAddress[2].memStatus) {
     do {
       MEMPACK_RelocateG2AnimKeylistType
-                ((G2AnimKeylist **)(*(int *)(newAddress + 3) + iVar2 * 4),offset,
-                 (char *)oldObject,(char *)(&oldObject[-1].vramSize.x + uVar1));
+                ((_G2AnimKeylist_Type **)(*(int *)(newAddress + 3) + iVar2 * 4),offset,
+                 (char *)oldObject,(char *)((int)&oldObject[-1].vramSize.x + uVar1));
       iVar2 = iVar2 + 1;
     } while (iVar2 < *(short *)&newAddress[2].memStatus);
   }
   if (*(int *)(newAddress + 3) != 0) {
     p_Var19 = (gameTrackerX.instanceList)->first;
-    while (p_Var19 != (Instance *)0x0) {
+    while (p_Var19 != (_Instance *)0x0) {
       if (p_Var19->object == oldObject) {
         p_Var12 = (p_Var19->anim).modelData;
-        p_Var7 = (Model *)0x0;
-        if (p_Var12 != (Model *)0x0) {
-          p_Var7 = (Model *)(&p_Var12->numVertices + offset);
+        p_Var7 = (_Model *)0x0;
+        if (p_Var12 != (_Model *)0x0) {
+          p_Var7 = (_Model *)((int)&p_Var12->numVertices + offset);
         }
         (p_Var19->anim).modelData = p_Var7;
       }
@@ -2050,15 +2037,15 @@ void MEMPACK_RelocateObjectType(MemHeader *newAddress,long offset,Object *oldObj
         do {
           pOVar13 = (Object *)(p_Var16->anim).section[0].keylist;
           if ((oldObject <= pOVar13) &&
-             (pOVar13 <= (Object *)(&oldObject[-1].vramSize.x + uVar1))) {
-            p_Var8 = (G2AnimKeylist *)0x0;
+             (pOVar13 <= (Object *)((int)&oldObject[-1].vramSize.x + uVar1))) {
+            p_Var8 = (_G2AnimKeylist_Type *)0x0;
             if (pOVar13 != (Object *)0x0) {
-              p_Var8 = (G2AnimKeylist *)(&pOVar13->oflags + offset);
+              p_Var8 = (_G2AnimKeylist_Type *)((int)&pOVar13->oflags + offset);
             }
             (p_Var16->anim).section[0].keylist = p_Var8;
           }
           iVar2 = iVar2 + 1;
-          p_Var16 = (Instance *)&p_Var16->introNum;
+          p_Var16 = (_Instance *)&p_Var16->introNum;
         } while (iVar2 < (int)(u_int)(p_Var19->anim).sectionCount);
       }
       p_Var19 = p_Var19->next;
@@ -2072,13 +2059,13 @@ void MEMPACK_RelocateObjectType(MemHeader *newAddress,long offset,Object *oldObj
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ MEMPACK_RelocateCDMemory(struct MemHeader *newAddress /*$a0*/, long offset /*$a1*/, struct BigFileDir *oldDir /*$a2*/)
+// void /*$ra*/ MEMPACK_RelocateCDMemory(struct MemHeader *newAddress /*$a0*/, long offset /*$a1*/, struct _BigFileDir *oldDir /*$a2*/)
  // line 1640, offset 0x80051cf8
 	/* begin block 1 */
 		// Start line: 1641
 		// Start offset: 0x80051CF8
 		// Variables:
-	// 		struct BigFileDir *newDir; // $a1
+	// 		struct _BigFileDir *newDir; // $a1
 	/* end block 1 */
 	// End offset: 0x80051CF8
 	// End Line: 1641
@@ -2088,10 +2075,10 @@ void MEMPACK_RelocateObjectType(MemHeader *newAddress,long offset,Object *oldObj
 	/* end block 2 */
 	// End Line: 3276
 
-void MEMPACK_RelocateCDMemory(MemHeader *newAddress,long offset,BigFileDir *oldDir)
+void MEMPACK_RelocateObjectType(MemHeader *newAddress,long offset,_BigFileDir *oldDir)
 
 {
-  LOAD_UpdateBigFilePointers(oldDir,(BigFileDir *)(newAddress + 1));
+  EVENT_UpdatePuzzlePointers(oldDir,(_BigFileDir *)(newAddress + 1));
   return;
 }
 

@@ -1,22 +1,5 @@
 #include "THISDUST.H"
 #include "LOAD3D.H"
-#include "MEMPACK.H"
-#include "SUPPORT.H"
-#include "TIMER.H"
-#include "FONT.H"
-#include "VOICEXA.H"
-#include "DEBUG.H"
-#include "RESOLVE.H"
-
-#include "LIBETC.H"
-#include "LIBCD.H"
-#include "LIBGPU.H"
-
-typedef enum
-{
-    FALSE,
-    TRUE
-} bool;
 
 
 // decompiled code
@@ -35,11 +18,11 @@ typedef enum
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void LOAD_InitCd(void)
+void LOAD_InitCdStreamMode(void)
 
 {
   CdInit();
-  ResetCallback();
+  G2Anim_SetCallback();
   CdSetDebug(0);
   return;
 }
@@ -63,7 +46,7 @@ void LOAD_CdSeekCallback(u_char intr,u_char *result)
   if (loadStatus.state == 1) {
     loadStatus.state = 2;
     uVar1 = GetRCnt(0xf2000000);
-    //crap1 = uVar1 & 0xffff | gameTimer << 0x10;
+    crap1 = uVar1 & 0xffff | gameTimer << 0x10;
   }
   return;
 }
@@ -121,7 +104,7 @@ void LOAD_CdDataReady(void)
            loadStatus.currentQueueFile.readCurSize + loadStatus.bytesTransferred;
       if (loadStatus.currentQueueFile.readStatus == 3) {
         loadStatus.currentQueueFile.readCurDest =
-             (void *)(loadStatus.currentQueueFile.readCurDest + loadStatus.bytesTransferred);
+             (void *)((int)loadStatus.currentQueueFile.readCurDest + loadStatus.bytesTransferred);
         if (loadStatus.currentQueueFile.readCurSize == loadStatus.currentQueueFile.readSize) {
           loadStatus.state = 5;
         }
@@ -135,12 +118,12 @@ void LOAD_CdDataReady(void)
           if (loadStatus.currentQueueFile.readCurSize == loadStatus.currentQueueFile.readSize) {
             iVar1 = 5;
           }
-/*           if (loadStatus.currentQueueFile.retFunc != (void *)0x0) {
+          if (loadStatus.currentQueueFile.retFunc != (void *)0x0) {
             (*(code *)loadStatus.currentQueueFile.retFunc)
                       (loadStatus.currentQueueFile.readCurDest,loadStatus.bytesTransferred,
                        (u_int)(iVar1 == 5),loadStatus.currentQueueFile.retData,
                        loadStatus.currentQueueFile.retData2);
-                       } */
+          }
           loadStatus.state = iVar1;
           if (loadStatus.currentQueueFile.readCurDest == loadStatus.buffer1) {
             loadStatus.currentQueueFile.readCurDest = loadStatus.buffer2;
@@ -210,17 +193,17 @@ void LOAD_CdReadReady(u_char intr,u_char *result)
       }
       loadStatus.state = 4;
       loadStatus.bytesTransferred = uVar1;
-      //CdGetSector((dword)abStack40,3);
+      CdGetSector2((dword)abStack40,3);
       iVar2 = CdPosToInt(abStack40);
       if (loadStatus.currentSector == iVar2) {
         loadStatus.currentSector = loadStatus.currentSector + 1;
-        //CdGetSector((dword)loadStatus.currentQueueFile.readCurDest,uVar1 >> 2);
+        CdGetSector2((dword)loadStatus.currentQueueFile.readCurDest,uVar1 >> 2);
         LOAD_CdDataReady();
       }
       else {
         loadStatus.state = (u_int)intr;
         CdIntToPos(loadStatus.currentSector,(char *)abStack24);
-        CdControl(6,abStack24, 0x0);
+        CdControlF(6,abStack24,(undefined *)0x0);
       }
     }
     else {
@@ -237,9 +220,9 @@ void LOAD_CdReadReady(u_char intr,u_char *result)
     loadStatus.seekTime = TIMER_TimeDiff(crap1);
     crap1 = 0;
   }
-  //loadStatus.sectorTime = TIMER_TimeDiff(crap_35);
+  loadStatus.sectorTime = TIMER_TimeDiff(crap_35);
   uVar1 = GetRCnt(0xf2000000);
-  //crap_35 = uVar1 & 0xffff | gameTimer << 0x10;
+  crap_35 = uVar1 & 0xffff | gameTimer << 0x10;
   return;
 }
 
@@ -348,7 +331,7 @@ void LOAD_DoCDReading(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void LOAD_DoCDBufferedReading(void)
+void LOAD_DoCDReading(void)
 
 {
   if (loadStatus.state == 5) {
@@ -386,7 +369,7 @@ void LOAD_DoCDBufferedReading(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void LOAD_SetupFileToDoCDReading(void)
+void LOAD_SetupFileToDoBufferedCDReading(void)
 
 {
   long lVar1;
@@ -404,7 +387,7 @@ void LOAD_SetupFileToDoCDReading(void)
   }
   loadStatus.currentSector = loadStatus.bigFile.bigfileBaseOffset + (lVar1 >> 0xb);
   CdIntToPos(loadStatus.currentSector,(char *)abStack16);
-  CdControl(6,abStack16,0x0);
+  CdControlF(6,abStack16,(undefined *)0x0);
   loadStatus.cdWaitTime = TIMER_GetTimeMS();
   return;
 }
@@ -438,7 +421,7 @@ void LOAD_SetupFileToDoCDReading(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void LOAD_SetupFileToDoBufferedCDReading(void)
+void LOAD_DoCDBufferedReading(void)
 
 {
   long lVar1;
@@ -454,7 +437,7 @@ void LOAD_SetupFileToDoBufferedCDReading(void)
   }
   loadStatus.currentSector = loadStatus.bigFile.bigfileBaseOffset + (lVar1 >> 0xb);
   CdIntToPos(loadStatus.currentSector,(char *)abStack16);
-  CdControl(6,abStack16,0x0);
+  CdControlF(6,abStack16,(undefined *)0x0);
   loadStatus.cdWaitTime = TIMER_GetTimeMS();
   return;
 }
@@ -518,16 +501,16 @@ void LOAD_ProcessReadQueue(void)
   else {
     if (loadStatus.currentQueueFile.readStatus < 4) {
       if (loadStatus.currentQueueFile.readStatus == 1) {
-        LOAD_SetupFileToDoCDReading();
+        LOAD_SetupFileToDoBufferedCDReading();
       }
     }
     else {
       if (loadStatus.currentQueueFile.readStatus == 5) {
-        LOAD_SetupFileToDoBufferedCDReading();
+        LOAD_DoCDBufferedReading();
       }
       else {
         if (loadStatus.currentQueueFile.readStatus == 6) {
-          LOAD_DoCDBufferedReading();
+          LOAD_DoCDReading();
         }
       }
     }
@@ -545,13 +528,13 @@ void LOAD_ProcessReadQueue(void)
         LOAD_InitCdStreamMode();
         loadStatus.state = 1;
         CdIntToPos(loadStatus.currentSector,(char *)abStack16);
-        CdControl(6,abStack16,0x0);
+        CdControlF(6,abStack16,(undefined *)0x0);
         loadStatus.cdWaitTime = TIMER_GetTimeMS();
       }
       else {
         iVar2 = VOICEXA_IsPlaying();
         if (iVar2 == 0) {
-          CdControlF(9,(byte *)0x0);
+          CdControl(9,(byte *)0x0);
         }
         loadStatus.cdWaitTime = 0;
       }
@@ -582,20 +565,20 @@ void LOAD_ProcessReadQueue(void)
 	/* end block 2 */
 	// End Line: 1223
 
-char * LOAD_ReadFileFromCD(char *filename,int memType)
+char * LOAD_ReadFile(char *filename,int memType)
 
 {
-  unsigned char *puVar1;
+  u_char *puVar1;
   char *pcVar2;
   char *pcVar3;
   int iVar4;
-  unsigned char uStack40;
+  u_char uStack40;
   u_long local_24;
   
   iVar4 = 0;
   do {
     puVar1 = CdSearchFile(&uStack40,filename);
-    if (puVar1 != (unsigned char *)0x0) break;
+    if (puVar1 != (u_char *)0x0) break;
     CdReset(0);
     iVar4 = iVar4 + 1;
   } while (iVar4 < 10);
@@ -615,9 +598,9 @@ char * LOAD_ReadFileFromCD(char *filename,int memType)
       loadStatus.currentQueueFile.readStartDest = pcVar2;
       do {
         LOAD_ProcessReadQueue();
-        iVar4 = LOAD_IsFileLoading();
+        iVar4 = LOAD_NonBlockingFileLoad();
       } while (iVar4 != 0);
-      CdControlF(9,(byte *)0x0);
+      CdControl(9,(byte *)0x0);
       pcVar3 = pcVar2;
     }
   }
@@ -653,13 +636,13 @@ void LOAD_CdReadFromBigFile
 
 // decompiled code
 // original method signature: 
-// struct BigFileDir * /*$ra*/ LOAD_ReadDirectory(struct BigFileDirEntry *dirEntry /*$s0*/)
+// struct _BigFileDir * /*$ra*/ LOAD_ReadDirectory(struct _BigFileDirEntry *dirEntry /*$s0*/)
  // line 702, offset 0x80037974
 	/* begin block 1 */
 		// Start line: 703
 		// Start offset: 0x80037974
 		// Variables:
-	// 		struct BigFileDir *dir; // $s2
+	// 		struct _BigFileDir *dir; // $s2
 	// 		long sizeOfDir; // $s1
 	/* end block 1 */
 	// End offset: 0x80037974
@@ -670,14 +653,14 @@ void LOAD_CdReadFromBigFile
 	/* end block 2 */
 	// End Line: 1366
 
-BigFileDir * LOAD_ReadDirectory(BigFileDirEntry *dirEntry)
+_BigFileDir * LOAD_ChangeDirectoryFlag(_BigFileDirEntry *dirEntry)
 
 {
-  BigFileDir *loadAddr;
+  _BigFileDir *loadAddr;
   u_long allocSize;
   
   allocSize = (int)dirEntry->numFiles * 0x10 + 4;
-  loadAddr = (BigFileDir *)MEMPACK_Malloc(allocSize,',');
+  loadAddr = (_BigFileDir *)MEMPACK_Malloc(allocSize,',');
   LOAD_CdReadFromBigFile(dirEntry->subDirOffset,(u_long *)loadAddr,allocSize,0,0);
   return loadAddr;
 }
@@ -715,17 +698,17 @@ BigFileDir * LOAD_ReadDirectory(BigFileDirEntry *dirEntry)
 void LOAD_InitCdLoader(char *bigFileName,char *voiceFileName)
 
 {
-  unsigned char *puVar1;
+  u_char *puVar1;
   u_long *loadAddr;
   int iVar2;
   u_long allocSize;
-  unsigned char auStack40 [6];
+  u_char auStack40 [6];
   
   iVar2 = 0;
   loadStatus.state = 0;
   do {
     puVar1 = CdSearchFile(auStack40,bigFileName);
-    if (puVar1 != (unsigned char *)0x0) break;
+    if (puVar1 != (u_char *)0x0) break;
     CdReset(0);
     iVar2 = iVar2 + 1;
   } while (iVar2 < 10);
@@ -734,30 +717,30 @@ void LOAD_InitCdLoader(char *bigFileName,char *voiceFileName)
     loadStatus.bigFile.bigfileBaseOffset = CdPosToInt((byte *)auStack40);
     loadStatus.cdWaitTime = 0;
     loadStatus.currentQueueFile.readStatus = 0;
-    loadStatus.bigFile.currentDir = (BigFileDir *)0x0;
+    loadStatus.bigFile.currentDir = (_BigFileDir *)0x0;
     loadStatus.bigFile.currentDirID = 0;
-    loadStatus.bigFile.cachedDir = (BigFileDir *)0x0;
+    loadStatus.bigFile.cachedDir = (_BigFileDir *)0x0;
     loadStatus.bigFile.cachedDirID = 0;
     loadStatus.bigFile.searchDirID = 0;
     LOAD_CdReadFromBigFile(0,(u_long *)&loadStatus.bigFile.numSubDirs,4,0,0);
     do {
       LOAD_ProcessReadQueue();
-      iVar2 = LOAD_IsFileLoading();
+      iVar2 = LOAD_NonBlockingFileLoad();
     } while (iVar2 != 0);
-    CdControlF(9,(byte *)0x0);
+    CdControl(9,(byte *)0x0);
     allocSize = loadStatus.bigFile.numSubDirs * 8 + 4;
     loadAddr = (u_long *)MEMPACK_Malloc(allocSize,'\b');
-    CdSync(0,0x0);
+    CdSync(0,(undefined *)0x0);
     LOAD_CdReadFromBigFile(0,loadAddr,allocSize,0,0);
-    loadStatus.bigFile.subDirList = (BigFileDirEntry *)(loadAddr + 1);
+    loadStatus.bigFile.subDirList = (_BigFileDirEntry *)(loadAddr + 1);
     do {
       LOAD_ProcessReadQueue();
-      iVar2 = LOAD_IsFileLoading();
+      iVar2 = LOAD_NonBlockingFileLoad();
     } while (iVar2 != 0);
-    loadStatus.bigFile.rootDir = LOAD_ReadDirectory(loadStatus.bigFile.subDirList);
+    loadStatus.bigFile.rootDir = LOAD_ChangeDirectoryFlag(loadStatus.bigFile.subDirList);
     do {
       LOAD_ProcessReadQueue();
-      iVar2 = LOAD_IsFileLoading();
+      iVar2 = LOAD_NonBlockingFileLoad();
     } while (iVar2 != 0);
   }
   return;
@@ -767,13 +750,13 @@ void LOAD_InitCdLoader(char *bigFileName,char *voiceFileName)
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ LOAD_SetupFileInfo(struct NonBlockLoadEntry *loadEntry /*$s0*/)
+// int /*$ra*/ LOAD_SetupFileInfo(struct _NonBlockLoadEntry *loadEntry /*$s0*/)
  // line 815, offset 0x80037b34
 	/* begin block 1 */
 		// Start line: 816
 		// Start offset: 0x80037B34
 		// Variables:
-	// 		struct BigFileEntry *fileInfo; // $v1
+	// 		struct _BigFileEntry *fileInfo; // $v1
 	/* end block 1 */
 	// End offset: 0x80037BAC
 	// End Line: 839
@@ -783,14 +766,14 @@ void LOAD_InitCdLoader(char *bigFileName,char *voiceFileName)
 	/* end block 2 */
 	// End Line: 1644
 
-int LOAD_SetupFileInfo(NonBlockLoadEntry *loadEntry)
+int LOAD_SetupFileToDoCDReading(_NonBlockLoadEntry *loadEntry)
 
 {
-  BigFileEntry *p_Var1;
+  _BigFileEntry *p_Var1;
   int iVar2;
   
-  p_Var1 = LOAD_GetBigFileEntryByHash(loadEntry->fileHash);
-  if (p_Var1 == (BigFileEntry *)0x0) {
+  p_Var1 = LOAD_GetBigFileEntry(loadEntry->fileHash);
+  if (p_Var1 == (_BigFileEntry *)0x0) {
     iVar2 = 0;
     if (loadEntry->dirHash == loadStatus.bigFile.currentDirID) {
       DEBUG_FatalError("CD ERROR: File %s does not exist\n");
@@ -810,20 +793,20 @@ int LOAD_SetupFileInfo(NonBlockLoadEntry *loadEntry)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ LOAD_NonBlockingReadFile(struct NonBlockLoadEntry *loadEntry /*$s0*/)
+// void /*$ra*/ LOAD_NonBlockingReadFile(struct _NonBlockLoadEntry *loadEntry /*$s0*/)
  // line 842, offset 0x80037bbc
 	/* begin block 1 */
 		// Start line: 1698
 	/* end block 1 */
 	// End Line: 1699
 
-void LOAD_NonBlockingReadFile(NonBlockLoadEntry *loadEntry)
+void LOAD_NonBlockingReadFile(_NonBlockLoadEntry *loadEntry)
 
 {
   int iVar1;
   long *plVar2;
   
-  iVar1 = LOAD_SetupFileInfo(loadEntry);
+  iVar1 = LOAD_SetupFileToDoCDReading(loadEntry);
   if (iVar1 == 0) {
     loadStatus.changeDir = 1;
   }
@@ -844,7 +827,7 @@ void LOAD_NonBlockingReadFile(NonBlockLoadEntry *loadEntry)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ LOAD_CD_ReadPartOfFile(struct NonBlockLoadEntry *loadEntry /*$s0*/)
+// void /*$ra*/ LOAD_CD_ReadPartOfFile(struct _NonBlockLoadEntry *loadEntry /*$s0*/)
  // line 862, offset 0x80037c40
 	/* begin block 1 */
 		// Start line: 863
@@ -860,12 +843,12 @@ void LOAD_NonBlockingReadFile(NonBlockLoadEntry *loadEntry)
 	/* end block 2 */
 	// End Line: 1739
 
-void LOAD_CD_ReadPartOfFile(NonBlockLoadEntry *loadEntry)
+void LOAD_CD_ReadPartOfFile(_NonBlockLoadEntry *loadEntry)
 
 {
   int iVar1;
   
-  iVar1 = LOAD_SetupFileInfo(loadEntry);
+  iVar1 = LOAD_SetupFileToDoCDReading(loadEntry);
   if (iVar1 != 0) {
     loadStatus.currentQueueFile.readSize = loadEntry->loadSize;
     loadStatus.currentQueueFile.readCurSize = 0;
@@ -879,7 +862,7 @@ void LOAD_CD_ReadPartOfFile(NonBlockLoadEntry *loadEntry)
     loadStatus.currentQueueFile.retData = loadEntry->retData;
     loadStatus.currentQueueFile.retData2 = loadEntry->retData2;
   }
-  //loadStatus.changeDir = ZEXT14(iVar1 == 0);
+  loadStatus.changeDir = ZEXT14(iVar1 == 0);
   return;
 }
 
@@ -937,7 +920,7 @@ long LOAD_HashName(char *string)
     uVar4 = 0;
     s2 = "drm";
     do {
-      iVar3 = strcmpi(pcVar2 + 1,s2);
+      iVar3 = strcpy(pcVar2 + 1,s2);
       uVar9 = uVar4;
       if (iVar3 == 0) break;
       uVar4 = uVar4 + 1;
@@ -1017,7 +1000,7 @@ long LOAD_HashUnit(char *name)
   iVar7 = 0;
   iVar8 = 0;
   bVar1 = *name;
-  bVar2 = FALSE;
+  bVar2 = false;
   uVar3 = 0;
   while (bVar1 != 0) {
     uVar5 = (u_int)(byte)*name;
@@ -1050,14 +1033,14 @@ long LOAD_HashUnit(char *name)
 
 // decompiled code
 // original method signature: 
-// struct BigFileEntry * /*$ra*/ LOAD_GetBigFileEntryByHash(long hash /*$a0*/)
+// struct _BigFileEntry * /*$ra*/ LOAD_GetBigFileEntryByHash(long hash /*$a0*/)
  // line 989, offset 0x80037ee0
 	/* begin block 1 */
 		// Start line: 991
 		// Start offset: 0x80037EE0
 		// Variables:
 	// 		int i; // $a1
-	// 		struct BigFileEntry *entry; // $v1
+	// 		struct _BigFileEntry *entry; // $v1
 	/* end block 1 */
 	// End offset: 0x80037F60
 	// End Line: 1010
@@ -1077,16 +1060,16 @@ long LOAD_HashUnit(char *name)
 	/* end block 4 */
 	// End Line: 2041
 
-BigFileEntry * LOAD_GetBigFileEntryByHash(long hash)
+_BigFileEntry * LOAD_GetBigFileEntry(long hash)
 
 {
-  BigFileEntry *p_Var1;
+  _BigFileEntry *p_Var1;
   int iVar2;
   
-  if ((loadStatus.bigFile.currentDir != (BigFileDir *)0x0) && (loadStatus.currentDirLoading == 0))
+  if ((loadStatus.bigFile.currentDir != (_BigFileDir *)0x0) && (loadStatus.currentDirLoading == 0))
   {
     iVar2 = (loadStatus.bigFile.currentDir)->numFiles;
-    p_Var1 = (BigFileEntry *)(loadStatus.bigFile.currentDir + 1);
+    p_Var1 = (_BigFileEntry *)(loadStatus.bigFile.currentDir + 1);
     while (iVar2 != 0) {
       iVar2 = iVar2 + -1;
       if (p_Var1->fileHash == hash) {
@@ -1096,10 +1079,10 @@ BigFileEntry * LOAD_GetBigFileEntryByHash(long hash)
     }
   }
   iVar2 = (loadStatus.bigFile.rootDir)->numFiles;
-  p_Var1 = (BigFileEntry *)(loadStatus.bigFile.rootDir + 1);
-  while( TRUE ) {
+  p_Var1 = (_BigFileEntry *)(loadStatus.bigFile.rootDir + 1);
+  while( true ) {
     if (iVar2 == 0) {
-      return (BigFileEntry *)0x0;
+      return (_BigFileEntry *)0x0;
     }
     iVar2 = iVar2 + -1;
     if (p_Var1->fileHash == hash) break;
@@ -1112,7 +1095,7 @@ BigFileEntry * LOAD_GetBigFileEntryByHash(long hash)
 
 // decompiled code
 // original method signature: 
-// struct BigFileEntry * /*$ra*/ LOAD_GetBigFileEntry(char *fileName /*$a0*/)
+// struct _BigFileEntry * /*$ra*/ LOAD_GetBigFileEntry(char *fileName /*$a0*/)
  // line 1012, offset 0x80037f68
 	/* begin block 1 */
 		// Start line: 1013
@@ -1126,14 +1109,14 @@ BigFileEntry * LOAD_GetBigFileEntryByHash(long hash)
 	/* end block 2 */
 	// End Line: 2088
 
-BigFileEntry * LOAD_GetBigFileEntry(char *fileName)
+_BigFileEntry * LOAD_GetBigFileEntryByHash(char *fileName)
 
 {
   long hash;
-  BigFileEntry *p_Var1;
+  _BigFileEntry *p_Var1;
   
   hash = LOAD_HashName(fileName);
-  p_Var1 = LOAD_GetBigFileEntryByHash(hash);
+  p_Var1 = LOAD_GetBigFileEntry(hash);
   return p_Var1;
 }
 
@@ -1147,7 +1130,7 @@ BigFileEntry * LOAD_GetBigFileEntry(char *fileName)
 		// Start line: 1069
 		// Start offset: 0x80037F90
 		// Variables:
-	// 		struct BigFileEntry *entry; // $v0
+	// 		struct _BigFileEntry *entry; // $v0
 	/* end block 1 */
 	// End offset: 0x80037FB4
 	// End Line: 1074
@@ -1160,12 +1143,12 @@ BigFileEntry * LOAD_GetBigFileEntry(char *fileName)
 long LOAD_DoesFileExist(char *fileName)
 
 {
-  BigFileEntry *p_Var1;
+  _BigFileEntry *p_Var1;
   u_int uVar2;
   
-  p_Var1 = LOAD_GetBigFileEntry(fileName);
+  p_Var1 = LOAD_GetBigFileEntryByHash(fileName);
   uVar2 = 0;
-  if (p_Var1 != (BigFileEntry *)0x0) {
+  if (p_Var1 != (_BigFileEntry *)0x0) {
     uVar2 = (u_int)(p_Var1->fileLen != 0);
   }
   return uVar2;
@@ -1192,15 +1175,15 @@ long LOAD_DoesFileExist(char *fileName)
 	/* end block 2 */
 	// End Line: 2172
 
-void LOAD_LoadTIM(long *addr,long x_pos,long y_pos,long clut_x,long clut_y)
+void LOAD_LoadToAddress(long *addr,long x_pos,long y_pos,long clut_x,long clut_y)
 
 {
   long *plVar1;
   long *plVar2;
-/*   undefined2 local_18;
+  undefined2 local_18;
   undefined2 local_16;
   undefined2 local_14;
-  undefined2 local_12; */
+  undefined2 local_12;
   
   plVar1 = addr + 2;
   plVar2 = (long *)0x0;
@@ -1208,19 +1191,19 @@ void LOAD_LoadTIM(long *addr,long x_pos,long y_pos,long clut_x,long clut_y)
     plVar2 = addr + 5;
     plVar1 = addr + 0xd;
   }
-/*   local_18 = (undefined2)x_pos;
+  local_18 = (undefined2)x_pos;
   local_16 = (undefined2)y_pos;
   local_14 = *(undefined2 *)(plVar1 + 2);
   local_12 = *(undefined2 *)((int)plVar1 + 10);
-  LoadImage((unsigned char *)&local_18,plVar1 + 3);
+  LoadImage((u_char *)&local_18,plVar1 + 3);
   if (plVar2 != (long *)0x0) {
     local_18 = (undefined2)clut_x;
     local_16 = (undefined2)clut_y;
     local_14 = 0x10;
     local_12 = 1;
     DrawSync(0);
-    LoadImage((unsigned char *)&local_18,plVar2);
-  } */
+    LoadImage((u_char *)&local_18,plVar2);
+  }
   return;
 }
 
@@ -1247,7 +1230,7 @@ void LOAD_LoadTIM(long *addr,long x_pos,long y_pos,long clut_x,long clut_y)
 void LOAD_LoadTIM2(long *addr,long x_pos,long y_pos,long width,long height)
 
 {
-/*   undefined2 local_10;
+  undefined2 local_10;
   undefined2 local_e;
   undefined2 local_c;
   undefined2 local_a;
@@ -1256,7 +1239,7 @@ void LOAD_LoadTIM2(long *addr,long x_pos,long y_pos,long width,long height)
   local_e = (undefined2)y_pos;
   local_c = *(undefined2 *)(addr + 4);
   local_a = *(undefined2 *)((int)addr + 0x12);
-  LoadImage((unsigned char *)&local_10,addr + 5); */
+  LoadImage((u_char *)&local_10,addr + 5);
   DrawSync(0);
   return;
 }
@@ -1334,11 +1317,11 @@ void LOAD_CleanUpBuffers(void)
 
 {
   if (loadStatus.buffer1 != (void *)0x0) {
-    MEMPACK_Free((char *)loadStatus.buffer1);
+    MEMPACK_Init((char *)loadStatus.buffer1);
     loadStatus.buffer1 = (void *)0x0;
   }
   if (loadStatus.buffer2 != (void *)0x0) {
-    MEMPACK_Free((char *)loadStatus.buffer2);
+    MEMPACK_Init((char *)loadStatus.buffer2);
     loadStatus.buffer2 = (void *)0x0;
   }
   return;
@@ -1395,7 +1378,7 @@ void LOAD_InitCdStreamMode(void)
   local_10[0] = 0xa0;
   CdReadyCallback(LOAD_CdReadReady);
   CdSyncCallback(LOAD_CdSeekCallback);
-  CdControl(0xe,local_10,0x0);
+  CdControlF(0xe,local_10,(undefined *)0x0);
   return;
 }
 
@@ -1420,14 +1403,14 @@ void LOAD_InitCdStreamMode(void)
 void LOAD_DumpCurrentDir(void)
 
 {
-  if (loadStatus.bigFile.currentDir != (BigFileDir *)0x0) {
-    MEMPACK_Free((char *)loadStatus.bigFile.currentDir);
-    loadStatus.bigFile.currentDir = (BigFileDir *)0x0;
+  if (loadStatus.bigFile.currentDir != (_BigFileDir *)0x0) {
+    MEMPACK_Init((char *)loadStatus.bigFile.currentDir);
+    loadStatus.bigFile.currentDir = (_BigFileDir *)0x0;
     loadStatus.bigFile.currentDirID = 0;
   }
-  if (loadStatus.bigFile.cachedDir != (BigFileDir *)0x0) {
-    MEMPACK_Free((char *)loadStatus.bigFile.cachedDir);
-    loadStatus.bigFile.cachedDir = (BigFileDir *)0x0;
+  if (loadStatus.bigFile.cachedDir != (_BigFileDir *)0x0) {
+    MEMPACK_Init((char *)loadStatus.bigFile.cachedDir);
+    loadStatus.bigFile.cachedDir = (_BigFileDir *)0x0;
     loadStatus.bigFile.cachedDirID = 0;
   }
   return;
@@ -1453,7 +1436,7 @@ void LOAD_DumpCurrentDir(void)
 				// Start line: 1304
 				// Start offset: 0x800382B8
 				// Variables:
-			// 		struct BigFileDir *dir; // $a0
+			// 		struct _BigFileDir *dir; // $a0
 			/* end block 1.1.1 */
 			// End offset: 0x800382D8
 			// End Line: 1310
@@ -1472,7 +1455,7 @@ void LOAD_DumpCurrentDir(void)
 int LOAD_ChangeDirectoryByID(int id)
 
 {
-  BigFileDir *p_Var1;
+  _BigFileDir *p_Var1;
   long lVar2;
   int iVar3;
   int iVar4;
@@ -1495,13 +1478,14 @@ int LOAD_ChangeDirectoryByID(int id)
       do {
         iVar4 = iVar3 + 1;
         if (id == (int)loadStatus.bigFile.subDirList[iVar3].streamUnitID) {
-          if (loadStatus.bigFile.cachedDir != (BigFileDir *)0x0) {
-            MEMPACK_Free((char *)loadStatus.bigFile.cachedDir);
+          if (loadStatus.bigFile.cachedDir != (_BigFileDir *)0x0) {
+            MEMPACK_Init((char *)loadStatus.bigFile.cachedDir);
           }
           loadStatus.currentDirLoading = 1;
           loadStatus.bigFile.cachedDirID = loadStatus.bigFile.currentDirID;
           loadStatus.bigFile.cachedDir = loadStatus.bigFile.currentDir;
-          loadStatus.bigFile.currentDir = LOAD_ReadDirectory(loadStatus.bigFile.subDirList + iVar3);
+          loadStatus.bigFile.currentDir =
+               LOAD_ChangeDirectoryFlag(loadStatus.bigFile.subDirList + iVar3);
           MEMPACK_SetMemoryBeingStreamed((char *)loadStatus.bigFile.currentDir);
           loadStatus.bigFile.currentDirID = id;
           return 1;
@@ -1578,7 +1562,7 @@ long LOAD_GetSearchDirectory(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-int LOAD_ChangeDirectoryFlag(void)
+int LOAD_ChangeDirectory(void)
 
 {
   return loadStatus.changeDir;
@@ -1588,7 +1572,7 @@ int LOAD_ChangeDirectoryFlag(void)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ LOAD_UpdateBigFilePointers(struct BigFileDir *oldDir /*$a0*/, struct BigFileDir *newDir /*$a1*/)
+// void /*$ra*/ LOAD_UpdateBigFilePointers(struct _BigFileDir *oldDir /*$a0*/, struct _BigFileDir *newDir /*$a1*/)
  // line 1354, offset 0x800383ac
 	/* begin block 1 */
 		// Start line: 2675
@@ -1600,7 +1584,7 @@ int LOAD_ChangeDirectoryFlag(void)
 	/* end block 2 */
 	// End Line: 2677
 
-void LOAD_UpdateBigFilePointers(BigFileDir *oldDir,BigFileDir *newDir)
+void EVENT_UpdatePuzzlePointers(_BigFileDir *oldDir,_BigFileDir *newDir)
 
 {
   if (loadStatus.bigFile.currentDir == oldDir) {
@@ -1630,7 +1614,7 @@ void LOAD_UpdateBigFilePointers(BigFileDir *oldDir,BigFileDir *newDir)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-int LOAD_IsFileLoading(void)
+int LOAD_NonBlockingFileLoad(void)
 
 {
   return (u_int)(loadStatus.currentQueueFile.readStatus != 0);

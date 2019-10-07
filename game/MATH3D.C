@@ -103,7 +103,7 @@ void MATH3D_Sort3VectorCoords(long *a,long *b,long *c)
 	/* end block 4 */
 	// End Line: 450
 
-long MATH3D_LengthXYZ(long x,long y,long z)
+long MATH3D_LengthXY(long x,long y,long z)
 
 {
   int iVar1;
@@ -155,7 +155,7 @@ long MATH3D_LengthXYZ(long x,long y,long z)
 	/* end block 2 */
 	// End Line: 557
 
-long MATH3D_LengthXY(long x,long y)
+long MATH3D_LengthXYZ(long x,long y)
 
 {
   int iVar1;
@@ -199,12 +199,12 @@ long MATH3D_LengthXY(long x,long y)
 	/* end block 2 */
 	// End Line: 654
 
-void MATH3D_Normalize(_Normal *normal)
+void CAMERA_Initialize(_Normal *normal)
 
 {
   long lVar1;
   
-  lVar1 = MATH3D_LengthXYZ((int)normal->x << 2,(int)normal->y << 2,(int)normal->z << 2);
+  lVar1 = MATH3D_LengthXY((int)normal->x << 2,(int)normal->y << 2,(int)normal->z << 2);
   if (lVar1 != 0) {
     normal->x = (short)(((int)normal->x << 0xe) / lVar1);
     normal->y = (short)(((int)normal->y << 0xe) / lVar1);
@@ -588,7 +588,7 @@ void MATH3D_RotMatAboutVec(_SVector *vec,MATRIX *mat,short angle)
   undefined2 local_5e;
   undefined2 local_5c;
   u_int auStack88 [8];
-  undefined4 auStack56 [8];
+  u_char auStack56 [8];
   
   if ((int)angle != 0) {
     uVar1 = MATH3D_SquareLength(0,(int)vec->y,(int)vec->z);
@@ -598,10 +598,10 @@ void MATH3D_RotMatAboutVec(_SVector *vec,MATRIX *mat,short angle)
     iVar3 = ratan2((int)vec->x,uVar2);
     local_5e = (undefined2)iVar3;
     local_5c = 0;
-    RotMatrix(&local_60,auStack88);
+    RotMatrixY(&local_60,auStack88);
     TransposeMatrix(auStack88,auStack56);
     MulMatrix2(auStack56,(u_int *)mat);
-    RotMatrixZ((int)angle,(u_int *)mat);
+    RotMatrixX((int)angle,(u_int *)mat);
     MulMatrix2(auStack88,(u_int *)mat);
   }
   return;
@@ -626,10 +626,10 @@ void MATH3D_RotMatAboutVec(_SVector *vec,MATRIX *mat,short angle)
 void MATH3D_SetUnityMatrix(MATRIX *mat)
 
 {
-  *(undefined4 *)mat->m = 0x1000;
-  *(undefined4 *)(mat->m + 2) = 0;
-  *(undefined4 *)(mat->m + 4) = 0x1000;
-  *(undefined4 *)(mat->m + 6) = 0;
+  *(u_char *)mat->m = 0x1000;
+  *(u_char *)(mat->m + 2) = 0;
+  *(u_char *)(mat->m + 4) = 0x1000;
+  *(u_char *)(mat->m + 6) = 0;
   mat->m[8] = 0x1000;
   return;
 }
@@ -664,7 +664,7 @@ void AngleMoveToward(short *current_ptr,short destination,short step)
   int iVar3;
   
   current = *current_ptr;
-  sVar1 = AngleDiff(current,destination);
+  sVar1 = CAMERA_AngleDifference(current,destination);
   iVar3 = (int)sVar1;
   if (iVar3 == 0) {
 LAB_8003a120:
@@ -714,7 +714,7 @@ LAB_8003a148:
 	/* end block 4 */
 	// End Line: 1288
 
-short AngleDiff(short current,short destination)
+short CAMERA_AngleDifference(short current,short destination)
 
 {
   ushort uVar1;
@@ -978,7 +978,7 @@ void MATH3D_RotateAxisToVector(MATRIX *dest,MATRIX *src,_SVector *vec,MATH3D_AXI
   iVar3 = rcos(uVar7);
   local_1a = (undefined2)iVar3;
   G2Quat_ToMatrix_S(&local_20,(short *)auStack64);
-  MulMatrix0((undefined4 *)src,auStack64,(u_int *)dest);
+  PopMatrix((u_char *)src,auStack64,(u_int *)dest);
   return;
 }
 
@@ -1027,7 +1027,7 @@ int MATH3D_ConeDetect(_SVector *pos,int arc,int elevation)
   }
   sVar1 = MATH3D_FastAtan2(y,-(int)sVar2);
   if (sVar1 < arc) {
-    x = MATH3D_LengthXY(x_00,-(int)sVar2);
+    x = MATH3D_LengthXYZ(x_00,-(int)sVar2);
     y = (int)pos->z;
     if (y < 0) {
       y = -y;

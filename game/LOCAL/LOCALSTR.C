@@ -51,7 +51,7 @@ void localstr_set_language(language_t lang)
   LocalizationHeader *pLVar2;
   int iVar3;
   
-  pLVar1 = (LocalizationHeader *)LOAD_ReadFileFromCD("\\LOCALS.TBL;1",6);
+  pLVar1 = (LocalizationHeader *)LOAD_ReadFile("\\LOCALS.TBL;1",6);
   pLVar2 = pLVar1 + 1;
   LocalizationTable = pLVar1;
   if (pLVar1 != (LocalizationHeader *)0x0) {

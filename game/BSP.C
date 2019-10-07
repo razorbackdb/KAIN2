@@ -36,7 +36,7 @@ void SBSP_IntroduceInstances(_Terrain *terrain,int unitID)
   intro = terrain->introList;
   while (iVar1 != 0) {
     if ((intro->flags & 0x4008U) == 0) {
-      INSTANCE_IntroduceInstance(intro,(short)unitID);
+      INSTANCE_InsertInstanceGroup(intro,(short)unitID);
     }
     iVar1 = iVar1 + -1;
     intro = intro + 1;
@@ -55,7 +55,7 @@ void SBSP_IntroduceInstances(_Terrain *terrain,int unitID)
 	/* end block 1 */
 	// End Line: 658
 
-void SBSP_IntroduceInstancesAndLights
+void INSTANCE_IntroduceSavedInstance
                (_Terrain *terrain,_CameraCore_Type *cameraCore,LightInfo *lightInfo,int unitID)
 
 {

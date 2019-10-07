@@ -80,9 +80,9 @@ void VWRAITH_Init(_Instance *instance)
     iVar2 = iVar2 + 0xfff;
   }
   local_18[0] = FX_GetHealthColor(iVar2 >> 0xc);
-  p_Var1 = FX_DoInstanceTwoSegmentGlow(instance,0x15,0x17,local_18,1,0x4b0,0x9c);
+  p_Var1 = FX_DoInstanceManySegmentGlow(instance,0x15,0x17,local_18,1,0x4b0,0x9c);
   *(_FXGlowEffect **)(puVar3 + 0x37) = p_Var1;
-  MON_DefaultInit(instance);
+  MON_SetDefaults(instance);
   *(undefined2 *)(puVar3 + 0x51) = 0x3000;
   puVar3[1] = puVar3[1] & 0xfffffffe;
   *puVar3 = *puVar3 | 0x10002800;
@@ -164,7 +164,7 @@ int VWRAITH_ShouldISwoop(_Instance *instance)
 	/* end block 2 */
 	// End Line: 311
 
-void VWRAITH_PursueEntry(_Instance *instance)
+void MON_PupateEntry(_Instance *instance)
 
 {
   int iVar1;
@@ -176,13 +176,13 @@ void VWRAITH_PursueEntry(_Instance *instance)
     *(u_int *)((int)pvVar2 + 4) = *(u_int *)((int)pvVar2 + 4) | 2;
   }
   if ((*(u_int *)((int)pvVar2 + 4) & 2) == 0) {
-    MON_PursueEntry(instance);
+    MON_HideEntry(instance);
   }
   else {
-    MON_PlayAnimFromList
+    MON_PlayAnimFromListIfNotPlaying
               (instance,*(char **)((int)instance->data + 8),
                (int)*(char *)(*(int *)((int)instance->data + 4) + 0xe),1);
-    *(undefined4 *)((int)pvVar2 + 0x108) = 4;
+    *(u_char *)((int)pvVar2 + 0x108) = 4;
     *(undefined2 *)((int)pvVar2 + 0x126) = 0;
   }
   return;
@@ -219,15 +219,15 @@ void VWRAITH_PursueEntry(_Instance *instance)
 	/* end block 2 */
 	// End Line: 357
 
-void VWRAITH_Pursue(_Instance *instance)
+void VWRAITH_PursueEntry(_Instance *instance)
 
 {
   char cVar1;
   int iVar2;
   _MonsterAnim *p_Var3;
-  undefined4 local_18;
+  u_char local_18;
   void *pvVar4;
-  undefined4 local_14;
+  u_char local_14;
   void *pvVar5;
   
   pvVar4 = instance->extraData;
@@ -253,7 +253,7 @@ void VWRAITH_Pursue(_Instance *instance)
     else {
       cVar1 = *(char *)(*(int *)((int)pvVar5 + 4) + 0x10);
       iVar2 = *(int *)((int)pvVar5 + 0x38);
-      MON_TurnToPosition(instance,(_Position *)(*(int *)(*(int *)((int)pvVar4 + 0xc4) + 4) + 0x5c),
+      MON_MoveToPosition(instance,(_Position *)(*(int *)(*(int *)((int)pvVar4 + 0xc4) + 4) + 0x5c),
                          *(short *)(*(int *)((int)pvVar4 + 0x164) + 0x20));
       if (*(short *)(*(int *)((int)pvVar4 + 0xc4) + 0x14) <
           *(short *)(*(int *)((int)pvVar5 + 4) + 10)) {
@@ -265,10 +265,10 @@ void VWRAITH_Pursue(_Instance *instance)
       }
       else {
         if ((instance->flags2 & 0x10U) != 0) {
-          p_Var3 = MON_GetAnim(instance,*(char **)((int)pvVar5 + 8),
+          p_Var3 = MON_GetTime(instance,*(char **)((int)pvVar5 + 8),
                                (int)*(char *)(*(int *)((int)pvVar5 + 4) + 0xf));
           *(ushort *)((int)pvVar4 + 0x126) = p_Var3->velocity;
-          MON_PlayAnimFromList
+          MON_PlayAnimFromListIfNotPlaying
                     (instance,*(char **)((int)pvVar5 + 8),
                      (int)*(char *)(*(int *)((int)pvVar5 + 4) + 0xf),2);
         }
@@ -281,7 +281,7 @@ void VWRAITH_Pursue(_Instance *instance)
         MON_MoveForward(instance);
       }
     }
-    MON_DefaultQueueHandler(instance);
+    MON_DefaultMessageHandler(instance);
   }
   return;
 }
@@ -320,8 +320,8 @@ void VWRAITH_VerticalMove(_Instance *instance)
 
 {
   int targetZ;
-  undefined4 local_10;
-  undefined4 local_c;
+  u_char local_10;
+  u_char local_c;
   
   targetZ = *(int *)((int)instance->extraData + 0xc4);
   if (targetZ != 0) {
@@ -363,10 +363,10 @@ void VWRAITH_CombatEntry(_Instance *instance)
 	/* end block 1 */
 	// End Line: 528
 
-void VWRAITH_Combat(_Instance *instance)
+void MON_CombatEntry(_Instance *instance)
 
 {
-  MON_Combat(instance);
+  wombat(instance);
   VWRAITH_VerticalMove(instance);
   return;
 }
@@ -382,10 +382,10 @@ void VWRAITH_Combat(_Instance *instance)
 	/* end block 1 */
 	// End Line: 548
 
-void VWRAITH_EmbraceEntry(_Instance *instance)
+void VWRAITH_Embrace(_Instance *instance)
 
 {
-  MON_EmbraceEntry(instance);
+  MON_Embrace(instance);
   return;
 }
 
@@ -400,10 +400,10 @@ void VWRAITH_EmbraceEntry(_Instance *instance)
 	/* end block 1 */
 	// End Line: 558
 
-void VWRAITH_Embrace(_Instance *instance)
+void VWRAITH_EmbraceEntry(_Instance *instance)
 
 {
-  MON_Embrace(instance);
+  MON_EmbraceEntry(instance);
   VWRAITH_VerticalMove(instance);
   return;
 }

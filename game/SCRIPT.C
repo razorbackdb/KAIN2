@@ -41,8 +41,8 @@ void SCRIPT_CombineEulerAngles
   u_int auStack56 [8];
   _G2EulerAngles_Type local_18;
   
-  RotMatrix((ushort *)inputRotation1,(u_int *)&_Stack88);
-  RotMatrix((ushort *)inputRotation2,auStack56);
+  RotMatrixY((ushort *)inputRotation1,(u_int *)&_Stack88);
+  RotMatrixY((ushort *)inputRotation2,auStack56);
   MulMatrix2(auStack56,(u_int *)&_Stack88);
   G2EulerAngles_FromMatrix(&local_18,&_Stack88,0x15);
   combinedRotation->x = local_18.x;
@@ -187,13 +187,13 @@ void SCRIPT_InstanceSplineInit(_Instance *instance)
         pMVar7 = &multi->curRotMatrix;
         G2Quat_ToMatrix_S((short *)quat,(short *)pMVar7);
         if (instance->intro != (Intro *)0x0) {
-          RotMatrix((ushort *)&instance->intro->rotation,(u_int *)local_48);
-          MulMatrix0((undefined4 *)pMVar7,(ushort *)local_48,(u_int *)pMVar7);
+          RotMatrixY((ushort *)&instance->intro->rotation,(u_int *)local_48);
+          PopMatrix((u_char *)pMVar7,(ushort *)local_48,(u_int *)pMVar7);
         }
         instance->flags = instance->flags | 1;
       }
       else {
-        G2Quat_ToEuler(quat,&local_50,0);
+        G2Quat_FromEuler_S(quat,&local_50,0);
         pIVar6 = instance->intro;
         (instance->rotation).x = local_50.x;
         (instance->rotation).y = local_50.y;
@@ -422,7 +422,7 @@ RSpline * ScriptGetRotSpline(_Instance *instance)
 	/* end block 1 */
 	// End Line: 624
 
-int SCRIPT_GetSplineFrameNumber(_Instance *instance,SplineDef *splineDef)
+int EVENT_GetSplineFrameNumber(_Instance *instance,SplineDef *splineDef)
 
 {
   ushort uVar1;
@@ -435,7 +435,7 @@ int SCRIPT_GetSplineFrameNumber(_Instance *instance,SplineDef *splineDef)
   else {
     spline = ScriptGetPosSpline(instance);
   }
-  uVar1 = SplineGetFrameNumber(spline,splineDef);
+  uVar1 = SCRIPT_GetSplineFrameNumber(spline,splineDef);
   return (u_int)uVar1;
 }
 
@@ -738,7 +738,7 @@ void SCRIPT_RelativisticSpline(_Instance *instance,_SVector *point)
     local_10 = point->x;
     local_e = point->y;
     local_c = point->z;
-    RotMatrix((ushort *)&instance->intro->rotation,(u_int *)&local_38);
+    RotMatrixY((ushort *)&instance->intro->rotation,(u_int *)&local_38);
     iVar7 = (int)local_10;
     iVar6 = (int)local_e;
     iVar8 = (int)local_c;
@@ -839,7 +839,7 @@ void SCRIPT_RelativisticSpline(_Instance *instance,_SVector *point)
 	/* end block 2 */
 	// End Line: 841
 
-void SCRIPT_InstanceSplineSet
+void SCRIPT_InstanceSplineProcess
                (_Instance *instance,short frameNum,SplineDef *splineDef,SplineDef *rsplineDef,
                SplineDef *ssplineDef)
 
@@ -876,7 +876,7 @@ void SCRIPT_InstanceSplineSet
     spline_01 = multi->scaling;
     if ((splineDef != (SplineDef *)0x0) && (spline != (Spline *)0x0)) {
       SplineSetDef2FrameNumber(spline,splineDef,frameNum);
-      SplineGetData(spline,splineDef,&local_60);
+      SplineGetNext(spline,splineDef,&local_60);
       if (local_2c == 0) {
         (instance->position).x = local_60.x;
         (instance->position).y = local_60.y;
@@ -889,7 +889,7 @@ void SCRIPT_InstanceSplineSet
     if ((rsplineDef != (SplineDef *)0x0) && (spline_00 != (Spline *)0x0)) {
       SplineSetDef2FrameNumber(spline_00,rsplineDef,frameNum);
       if ((instance->flags & 1U) == 0) {
-        uVar1 = SplineGetData(spline_00,rsplineDef,&local_58);
+        uVar1 = SplineGetNext(spline_00,rsplineDef,&local_58);
         if (uVar1 != 0) {
           pIVar2 = instance->intro;
           (instance->rotation).x = local_58;
@@ -907,15 +907,15 @@ void SCRIPT_InstanceSplineSet
           pMVar3 = &multi->curRotMatrix;
           G2Quat_ToMatrix_S(&local_58,(short *)pMVar3);
           if (instance->intro != (Intro *)0x0) {
-            RotMatrix((ushort *)&instance->intro->rotation,(u_int *)local_50);
-            MulMatrix0((undefined4 *)pMVar3,(ushort *)local_50,(u_int *)pMVar3);
+            RotMatrixY((ushort *)&instance->intro->rotation,(u_int *)local_50);
+            PopMatrix((u_char *)pMVar3,(ushort *)local_50,(u_int *)pMVar3);
           }
         }
       }
     }
     if ((ssplineDef != (SplineDef *)0x0) && (spline_01 != (Spline *)0x0)) {
       SplineSetDef2FrameNumber(spline_01,ssplineDef,frameNum);
-      SplineGetData(spline_01,ssplineDef,&local_58);
+      SplineGetNext(spline_01,ssplineDef,&local_58);
       (instance->scale).x = local_58;
       (instance->scale).y = local_54;
       (instance->scale).z = local_56;
@@ -1006,7 +1006,7 @@ void SCRIPT_InstanceSplineSet
 	/* end block 2 */
 	// End Line: 1108
 
-long SCRIPT_SplineProcess
+long CAMERA_SplineProcess
                (_Instance *instance,MultiSpline *multi,SplineDef *splineDef,SplineDef *rsplineDef,
                SplineDef *ssplineDef,int direction,int isClass)
 
@@ -1036,17 +1036,17 @@ long SCRIPT_SplineProcess
   if (spline != (Spline *)0x0) {
     if (direction < 1) {
       if (direction < 0) {
-        point = SplineGetPreviousPoint(spline,ssplineDef);
+        point = SplineGetOffsetPreviousPoint(spline,ssplineDef);
       }
       else {
-        uVar1 = SplineGetData(spline,ssplineDef,&_Stack88);
+        uVar1 = SplineGetNext(spline,ssplineDef,&_Stack88);
         if (uVar1 != 0) {
           point = &_Stack88;
         }
       }
     }
     else {
-      point = SplineGetNextPoint(spline,ssplineDef);
+      point = SplineGetOffsetNextPoint(spline,ssplineDef);
     }
     uVar4 = 0;
     if (point == (_SVector *)0x0) {
@@ -1062,17 +1062,17 @@ long SCRIPT_SplineProcess
     uVar4 = 0;
     if (direction < 1) {
       if ((direction < 0) &&
-         (uVar1 = SplineGetOffsetPrev(spline_00,rsplineDef,fracOffset), uVar1 == 0)) {
+         (uVar1 = SplineGetOffsetNext(spline_00,rsplineDef,fracOffset), uVar1 == 0)) {
         uVar4 = 1;
       }
     }
     else {
-      uVar1 = SplineGetOffsetNext(spline_00,rsplineDef,fracOffset);
+      uVar1 = SplineGetOffsetPrev(spline_00,rsplineDef,fracOffset);
       uVar4 = (u_int)(uVar1 == 0);
     }
     if (uVar4 == 0) {
       if ((instance->flags & 1U) == 0) {
-        uVar1 = SplineGetData(spline_00,rsplineDef,&local_60);
+        uVar1 = SplineGetNext(spline_00,rsplineDef,&local_60);
         if (uVar1 != 0) {
           pIVar2 = instance->intro;
           (instance->rotation).x = local_60;
@@ -1091,8 +1091,8 @@ long SCRIPT_SplineProcess
           pMVar3 = &multi->curRotMatrix;
           G2Quat_ToMatrix_S((short *)&_Stack80,(short *)pMVar3);
           if (instance->intro != (Intro *)0x0) {
-            RotMatrix((ushort *)&instance->intro->rotation,(u_int *)local_48);
-            MulMatrix0((undefined4 *)pMVar3,(ushort *)local_48,(u_int *)pMVar3);
+            RotMatrixY((ushort *)&instance->intro->rotation,(u_int *)local_48);
+            PopMatrix((u_char *)pMVar3,(ushort *)local_48,(u_int *)pMVar3);
           }
           goto LAB_8003defc;
         }
@@ -1104,17 +1104,17 @@ LAB_8003defc:
   if (spline_01 != (Spline *)0x0) {
     if (direction < 1) {
       if (direction < 0) {
-        point = SplineGetOffsetPreviousPoint(spline_01,splineDef,fracOffset);
+        point = SplineGetPrev(spline_01,splineDef,fracOffset);
       }
       else {
-        fracOffset = SplineGetData(spline_01,splineDef,&_Stack80);
+        fracOffset = SplineGetNext(spline_01,splineDef,&_Stack80);
         if (fracOffset != 0) {
           point = &_Stack80;
         }
       }
     }
     else {
-      point = SplineGetOffsetNextPoint(spline_01,splineDef,fracOffset);
+      point = SplineGetNextPoint(spline_01,splineDef,fracOffset);
     }
     uVar4 = 1;
     if (point != (_SVector *)0x0) {
@@ -1155,7 +1155,7 @@ LAB_8003defc:
 	/* end block 2 */
 	// End Line: 1467
 
-long SCRIPT_InstanceSplineProcess
+long SCRIPT_InstanceSplineSet
                (_Instance *instance,SplineDef *splineDef,SplineDef *rsplineDef,SplineDef *ssplineDef
                ,int direction)
 
@@ -1175,7 +1175,7 @@ long SCRIPT_InstanceSplineProcess
       rsplineDef = SCRIPT_GetRotSplineDef(instance,multi,local_20,local_1c);
       ssplineDef = SCRIPT_GetScaleSplineDef(instance,multi,local_20,local_1c);
     }
-    lVar1 = SCRIPT_SplineProcess(instance,multi,splineDef,rsplineDef,ssplineDef,direction,local_1c);
+    lVar1 = CAMERA_SplineProcess(instance,multi,splineDef,rsplineDef,ssplineDef,direction,local_1c);
   }
   return lVar1;
 }
@@ -1196,7 +1196,7 @@ long SCRIPT_InstanceSplineProcess
 	/* end block 2 */
 	// End Line: 1833
 
-void SCRIPT_FadeOutProcess(_Instance *instance)
+void SCRIPT_SplineProcess(_Instance *instance)
 
 {
   int iVar1;
@@ -1276,11 +1276,11 @@ void ScriptKillInstance(_Instance *instance,int effect)
   
   pOVar3 = instance->object;
   if ((pOVar3->oflags2 & 4U) != 0) {
-    SOUND_EndInstanceSounds(pOVar3->soundData,instance->soundInstanceTbl);
+    SOUND_StopInstanceSound(pOVar3->soundData,instance->soundInstanceTbl);
   }
   if ((((pOVar3->oflags & 0x40000000U) != 0) && ((int *)instance->introData != (int *)0x0)) &&
      (iVar2 = *(int *)instance->introData, iVar2 != 0)) {
-    SIGNAL_HandleSignal(instance,(Signal *)(iVar2 + 8),0);
+    SIGNAL_HandleFogNear(instance,(Signal *)(iVar2 + 8),0);
   }
   bVar1 = (u_int)effect < 8;
   if ((effect == 1) && (bVar1 = true, (instance->object->oflags & 0x8000U) != 0)) {

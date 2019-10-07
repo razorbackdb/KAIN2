@@ -20,7 +20,7 @@
 	/* end block 2 */
 	// End Line: 149
 
-void G2Quat_ToEuler(_G2Quat_Type *quat,_G2EulerAngles_Type *euler,int order)
+void G2Quat_FromEuler_S(_G2Quat_Type *quat,_G2EulerAngles_Type *euler,int order)
 
 {
   _G2Matrix_Type _Stack48;

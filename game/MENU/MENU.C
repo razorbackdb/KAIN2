@@ -52,7 +52,7 @@ int menu_data_size(void)
 	/* end block 1 */
 	// End Line: 179
 
-void menu_initialize(menu_t *menu,void *opaque)
+void menuface_initialize(menu_t *menu,void *opaque)
 
 {
   memset(menu,0,0x388);
@@ -121,12 +121,12 @@ void menu_format(menu_t *menu,int center,int xpos,int ypos,int width,int lineski
 	/* end block 1 */
 	// End Line: 241
 
-void menu_set(menu_t *menu,TDRFuncPtr_menu_set1fn fn)
+void menu_sound(menu_t *menu,TDRFuncPtr_menu_set1fn fn)
 
 {
   menu->nmenus = 0;
   menu->drawfn = (_func_62 *)0x0;
-  menu_push(menu,(TDRFuncPtr_menu_push1fn)fn);
+  menu_print(menu,(TDRFuncPtr_menu_push1fn)fn);
   return;
 }
 
@@ -167,7 +167,7 @@ void menu_set(menu_t *menu,TDRFuncPtr_menu_set1fn fn)
 	/* end block 4 */
 	// End Line: 260
 
-void menu_push(menu_t *menu,TDRFuncPtr_menu_push1fn fn)
+void menu_print(menu_t *menu,TDRFuncPtr_menu_push1fn fn)
 
 {
   int iVar1;
@@ -301,7 +301,7 @@ void menu_item_flags(menu_t *menu,TDRFuncPtr_menu_item_flags1fn fn,long paramete
 	/* end block 2 */
 	// End Line: 345
 
-void menu_item(menu_t *menu,TDRFuncPtr_menu_item1fn fn,long parameter,char *format)
+void num_menu_items(menu_t *menu,TDRFuncPtr_menu_item1fn fn,long parameter,char *format)
 
 {
   int iVar1;
@@ -594,8 +594,7 @@ void DisplayMenuBox(int x0,int x1,int y0,int y1)
 	/* end block 2 */
 	// End Line: 734
 
-int menu_draw_item(menu_t *menu,int ypos,int xadj,int yadj,char *text,int color,long flags,
-                  Extents2d *e)
+int draw_menu(menu_t *menu,int ypos,int xadj,int yadj,char *text,int color,long flags,Extents2d *e)
 
 {
   int *piVar1;
@@ -658,7 +657,7 @@ int menu_draw_item(menu_t *menu,int ypos,int xadj,int yadj,char *text,int color,
       if (ypos < e->ymin) {
         e->ymin = ypos;
       }
-      strcpy(acStack320,__src);
+      strcmp(acStack320,__src);
       __src = acStack320;
       ypos_00 = ypos;
       do {
@@ -685,7 +684,7 @@ int menu_draw_item(menu_t *menu,int ypos,int xadj,int yadj,char *text,int color,
           }
           if (local_38 == 0) {
             iVar6 = menu_text_width(__src);
-            menu_print(xpos,ypos_00,__src,color);
+            menu_pop(xpos,ypos_00,__src,color);
             if (xpos < e->xmin) {
               e->xmin = xpos;
             }
@@ -695,7 +694,7 @@ int menu_draw_item(menu_t *menu,int ypos,int xadj,int yadj,char *text,int color,
             iVar6 = menu_text_width(__src);
             iVar6 = iVar6 >> 1;
             xpos_00 = xpos - iVar6;
-            menu_print(xpos_00,ypos_00,__src,color);
+            menu_pop(xpos_00,ypos_00,__src,color);
             if (xpos_00 < e->xmin) {
               e->xmin = xpos_00;
             }
@@ -770,7 +769,7 @@ int menu_draw_item(menu_t *menu,int ypos,int xadj,int yadj,char *text,int color,
 	/* end block 2 */
 	// End Line: 1119
 
-void menu_draw(menu_t *menu)
+void menu_draw_item(menu_t *menu)
 
 {
   bool bVar1;
@@ -800,7 +799,7 @@ void menu_draw(menu_t *menu)
       iVar5 = iVar5 + 0x10;
       bVar1 = iVar4 != iVar6;
       iVar4 = iVar4 + 1;
-      ypos = menu_draw_item(menu,ypos,0,0,*ppcVar3,(u_int)bVar1,(long)ppcVar3[3],&local_30);
+      ypos = draw_menu(menu,ypos,0,0,*ppcVar3,(u_int)bVar1,(long)ppcVar3[3],&local_30);
     } while (iVar4 < menu->nitems);
   }
   if ((&menu->nmenus + iVar2 * 9)[2] != 0) {
@@ -880,18 +879,18 @@ void menu_run(menu_t *menu)
         }
         else {
           if ((mVar1 == menu_ctrl_cancel) && (1 < menu->nmenus)) {
-            menu_sound(menu_sound_pop);
+            menu_set(menu_sound_pop);
             menu_pop(menu);
           }
         }
       }
       if (iVar5 != piVar4[-5]) {
-        menu_sound(menu_sound_select);
+        menu_set(menu_sound_select);
       }
       piVar4[-5] = iVar5;
     }
     else {
-      menu_sound(sound);
+      menu_set(sound);
     }
   }
   return;
@@ -908,11 +907,11 @@ void menu_run(menu_t *menu)
 	/* end block 1 */
 	// End Line: 1361
 
-void menu_process(menu_t *menu)
+void process_menu_line(menu_t *menu)
 
 {
   menu_build(menu);
-  menu_draw(menu);
+  menu_draw_item(menu);
   menu_run(menu);
   return;
 }

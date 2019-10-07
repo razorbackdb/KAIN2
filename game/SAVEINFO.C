@@ -30,7 +30,7 @@ void SAVE_GetInstanceRotation(_Instance *instance,_SmallRotation *vector)
 {
   short *psVar1;
   
-  psVar1 = (short *)INSTANCE_Query(instance,7);
+  psVar1 = (short *)INSTANCE_Post(instance,7);
   if (psVar1 == (short *)0x0) {
     vector->x = (instance->rotation).x;
     vector->y = (instance->rotation).y;
@@ -107,7 +107,7 @@ void SAVE_ClearMemory(GameTracker *gameTracker)
 	/* end block 2 */
 	// End Line: 305
 
-void SAVE_Init(GameTracker *gt)
+void HUD_Init(GameTracker *gt)
 
 {
   char *buffer;
@@ -118,7 +118,7 @@ void SAVE_Init(GameTracker *gt)
   }
   else {
     gt->memcard = &gMemcard;
-    the_header_size = memcard_initialize(&gMemcard,gt,3,buffer,0x6000);
+    the_header_size = memcard_item(&gMemcard,gt,3,buffer,0x6000);
   }
   savedInfoTracker.MemoryCardBuffer = buffer;
   SAVE_ClearMemory(gt);
@@ -324,7 +324,7 @@ long SAVE_SaveableInstance(_Instance *instance)
 	// End Line: 925
 
 _SavedIntro *
-SAVE_UpdateSavedIntro
+SAVE_UpdateLevelWithSave
           (_Instance *instance,Level *level,_SavedIntro *savedIntro,evControlSaveDataData *extraData
           )
 
@@ -334,13 +334,13 @@ SAVE_UpdateSavedIntro
   short sVar3;
   short sVar4;
   BSPTree *pBVar5;
-  undefined4 uVar6;
+  u_char uVar6;
   
   pBVar5 = level->terrain->BSPTreeArray;
   if (savedIntro != (_SavedIntro *)0x0) {
-    uVar6 = *(undefined4 *)(instance->introName + 4);
-    *(undefined4 *)savedIntro->name = *(undefined4 *)instance->introName;
-    *(undefined4 *)(savedIntro->name + 4) = uVar6;
+    uVar6 = *(u_char *)(instance->introName + 4);
+    *(u_char *)savedIntro->name = *(u_char *)instance->introName;
+    *(u_char *)(savedIntro->name + 4) = uVar6;
     savedIntro->savedID = '\x01';
     savedIntro->introUniqueID = *(short *)&instance->introUniqueID;
     savedIntro->streamUnitID = *(short *)&instance->currentStreamUnitID;
@@ -470,7 +470,7 @@ SAVE_UpdateSavedIntroWithIntro
 	/* end block 4 */
 	// End Line: 1022
 
-SavedBasic * SAVE_GetSavedEvent(long areaID,long eventNumber)
+SavedBasic * SAVE_GetSavedNextEvent(long areaID,long eventNumber)
 
 {
   u_char uVar1;
@@ -521,7 +521,7 @@ void SAVE_DeleteSavedEvent(long areaID,long eventNumber)
 {
   SavedBasic *savedBlock;
   
-  savedBlock = SAVE_GetSavedEvent(areaID,eventNumber);
+  savedBlock = SAVE_GetSavedNextEvent(areaID,eventNumber);
   if (savedBlock != (SavedBasic *)0x0) {
     SAVE_DeleteBlock(savedBlock);
   }
@@ -544,7 +544,7 @@ void SAVE_DeleteSavedEvent(long areaID,long eventNumber)
 	/* end block 2 */
 	// End Line: 1090
 
-SavedBasic * SAVE_GetSavedNextEvent(long areaID,SavedBasic *curSave)
+SavedBasic * SAVE_GetSavedEvent(long areaID,SavedBasic *curSave)
 
 {
   SavedBasic *pSVar1;
@@ -686,7 +686,7 @@ void SAVE_IntroduceBufferIntros(void)
         if (savedIntro->savedID == '\x01') {
           streamUnit = STREAM_GetStreamUnitWithID((int)savedIntro->streamUnitID);
           if (streamUnit != (_StreamUnit *)0x0) {
-            p_Var1 = INSTANCE_IntroduceSavedInstance(savedIntro,streamUnit);
+            p_Var1 = INSTANCE_InstanceGroupNumber(savedIntro,streamUnit);
 LAB_800b4788:
             if (p_Var1 == (_Instance *)0x0) goto LAB_800b47a0;
           }
@@ -742,7 +742,7 @@ void SAVE_IntroForStreamID(_StreamUnit *streamUnit)
   if (savedInfoTracker.InfoStart < savedInfoTracker.InfoEnd) {
     do {
       if ((savedIntro->savedID == '\x01') && ((int)savedIntro->streamUnitID == iVar1)) {
-        INSTANCE_IntroduceSavedInstance(savedIntro,streamUnit);
+        INSTANCE_InstanceGroupNumber(savedIntro,streamUnit);
       }
       else {
         if ((savedIntro->savedID == '\a') && ((int)*(short *)(savedIntro->name + 2) == iVar1)) {
@@ -834,7 +834,7 @@ long SAVE_HasSavedIntro(Intro *intro,long currentStreamID)
 	/* end block 4 */
 	// End Line: 1584
 
-SavedLevel * SAVE_HasSavedLevel(long areaID)
+SavedLevel * SAVE_UpdateSavedIntro(long areaID)
 
 {
   SavedLevel *pSVar1;
@@ -892,7 +892,7 @@ void SAVE_UpdateLevelWithSave(_StreamUnit *streamUnit)
   _Terrain *p_Var12;
   
   sVar2 = (streamUnit->level->terrain->BSPTreeArray->globalOffset).z;
-  pSVar7 = SAVE_HasSavedLevel(streamUnit->StreamUnitID);
+  pSVar7 = SAVE_UpdateSavedIntro(streamUnit->StreamUnitID);
   if (pSVar7 != (SavedLevel *)0x0) {
     p_Var12 = streamUnit->level->terrain;
     iVar11 = 0;
@@ -902,7 +902,7 @@ void SAVE_UpdateLevelWithSave(_StreamUnit *streamUnit)
         iVar11 = iVar11 + 1;
         pBVar8 = p_Var12->BSPTreeArray + *(byte *)((int)&pSVar10[1].numberBSPTreesSaved + 1);
         sVar3 = pSVar10[1].waterZ;
-        *(undefined4 *)&pBVar8->localOffset = *(undefined4 *)(pSVar10 + 1);
+        *(u_char *)&pBVar8->localOffset = *(u_char *)(pSVar10 + 1);
         (pBVar8->localOffset).z = sVar3;
         sVar3 = (pBVar8->globalOffset).x;
         sVar4 = (pBVar8->localOffset).x;
@@ -971,7 +971,7 @@ void SAVE_UpdateLevelWithSave(_StreamUnit *streamUnit)
 	/* end block 2 */
 	// End Line: 1738
 
-SavedLevel * SAVE_CreatedSavedLevel(long areaID,Level *level)
+SavedLevel * SAVE_HasSavedLevel(long areaID,Level *level)
 
 {
   short sVar1;
@@ -994,7 +994,7 @@ SavedLevel * SAVE_CreatedSavedLevel(long areaID,Level *level)
     iVar8 = level->terrain->numBSPTrees + -2;
     savedBlock = (SavedLevel *)0x0;
     if ((0 < iVar8) &&
-       ((savedBlock = SAVE_HasSavedLevel(areaID), savedBlock != (SavedLevel *)0x0 ||
+       ((savedBlock = SAVE_UpdateSavedIntro(areaID), savedBlock != (SavedLevel *)0x0 ||
         (savedBlock = (SavedLevel *)SAVE_GetSavedBlock(3,iVar8 * 8), savedBlock != (SavedLevel *)0x0
         )))) {
       savedBlock->areaID = (short)areaID;
@@ -1015,7 +1015,7 @@ SavedLevel * SAVE_CreatedSavedLevel(long areaID,Level *level)
           if (1 < (ushort)(*(short *)(iVar5 + 0x1a) + 1U)) {
             *(undefined *)((int)&pSVar6[1].numberBSPTreesSaved + 1) = (char)iVar8;
             sVar1 = *(short *)(iVar5 + 0x18);
-            *(undefined4 *)(pSVar6 + 1) = *(undefined4 *)(iVar5 + 0x14);
+            *(u_char *)(pSVar6 + 1) = *(u_char *)(iVar5 + 0x14);
             pSVar6[1].waterZ = sVar1;
             *(undefined *)&pSVar6[1].numberBSPTreesSaved = *(undefined *)(iVar5 + 0x12);
             pSVar6 = pSVar6 + 1;
@@ -1028,7 +1028,7 @@ SavedLevel * SAVE_CreatedSavedLevel(long areaID,Level *level)
     }
   }
   else {
-    savedBlock = SAVE_HasSavedLevel(areaID);
+    savedBlock = SAVE_UpdateSavedIntro(areaID);
     if (savedBlock != (SavedLevel *)0x0) {
       SAVE_DeleteBlock((SavedBasic *)savedBlock);
     }
@@ -1165,7 +1165,7 @@ void SAVE_DeleteBlock(SavedBasic *savedBlock)
 	/* end block 2 */
 	// End Line: 2041
 
-void SAVE_Instance(_Instance *instance,Level *level)
+void COLLIDE_InstanceTerrain(_Instance *instance,Level *level)
 
 {
   long lVar1;
@@ -1184,20 +1184,20 @@ void SAVE_Instance(_Instance *instance,Level *level)
   if (lVar1 != 0) {
     if ((instance->flags2 & 4U) == 0) {
       if (lVar1 == 1) {
-        SAVE_DeleteInstance(instance);
-        extraData = (evControlSaveDataData *)INSTANCE_Query(instance,0x18);
+        SAVE_Instance(instance);
+        extraData = (evControlSaveDataData *)INSTANCE_Post(instance,0x18);
         if (extraData != (evControlSaveDataData *)0x0) {
           extraSize = extraData->length;
         }
         savedIntro = (_SavedIntro *)SAVE_GetSavedBlock(1,extraSize);
         if (savedIntro != (_SavedIntro *)0x0) {
-          SAVE_UpdateSavedIntro(instance,level,savedIntro,extraData);
+          SAVE_UpdateLevelWithSave(instance,level,savedIntro,extraData);
         }
       }
       else {
         if (lVar1 == 2) {
-          SAVE_DeleteInstance(instance);
-          extraData = (evControlSaveDataData *)INSTANCE_Query(instance,0x18);
+          SAVE_Instance(instance);
+          extraData = (evControlSaveDataData *)INSTANCE_Post(instance,0x18);
           if (extraData != (evControlSaveDataData *)0x0) {
             extraSize = extraData->length;
           }
@@ -1208,7 +1208,7 @@ void SAVE_Instance(_Instance *instance,Level *level)
         }
         else {
           if (lVar1 == 3) {
-            SAVE_DeleteInstance(instance);
+            SAVE_Instance(instance);
             puVar4 = (undefined *)SAVE_GetSavedBlock(8,0);
             if ((puVar4 != (undefined *)0x0) &&
                (spline = SCRIPT_GetMultiSpline(instance,(u_long *)0x0,(u_long *)0x0),
@@ -1224,7 +1224,7 @@ void SAVE_Instance(_Instance *instance,Level *level)
               *puVar4 = 8;
               *(undefined2 *)(puVar4 + 2) = *(undefined2 *)&instance->introUniqueID;
               *(short *)(puVar4 + 4) = instance->splineFlags;
-              lVar1 = INSTANCE_GetSplineFrameNumber(instance,spline);
+              lVar1 = SplineGetFrameNumber(instance,spline);
               *(short *)(puVar4 + 6) = (short)lVar1;
               *(short *)(puVar4 + 8) = instance->clipBeg;
               *(short *)(puVar4 + 10) = instance->clipEnd;
@@ -1234,8 +1234,8 @@ void SAVE_Instance(_Instance *instance,Level *level)
       }
     }
     else {
-      SAVE_DeleteInstance(instance);
-      psVar2 = (size_t *)INSTANCE_Query(instance,0x18);
+      SAVE_Instance(instance);
+      psVar2 = (size_t *)INSTANCE_Post(instance,0x18);
       if ((psVar2 != (size_t *)0x0) &&
          (pvVar3 = SAVE_GetSavedBlock(5,*psVar2), pvVar3 != (void *)0x0)) {
         *(undefined2 *)((int)pvVar3 + 2) = *(undefined2 *)&instance->introUniqueID;
@@ -1266,7 +1266,7 @@ void SAVE_Instance(_Instance *instance,Level *level)
 	/* end block 2 */
 	// End Line: 2270
 
-void SAVE_DeleteInstance(_Instance *instance)
+void SAVE_Instance(_Instance *instance)
 
 {
   u_char uVar1;
@@ -1515,7 +1515,7 @@ long SAVE_IsIntroDeadDead(Intro *intro)
 void SAVE_DoInstanceDeadDead(_Instance *instance)
 
 {
-  SAVE_DeleteInstance(instance);
+  SAVE_Instance(instance);
   SAVE_SetDeadDeadBit(instance,1);
   return;
 }
@@ -1554,7 +1554,7 @@ void SAVE_MarkDeadDead(_Instance *instance)
 	/* end block 1 */
 	// End Line: 2605
 
-void SAVE_UndestroyInstance(_Instance *instance)
+void SAVE_Init(_Instance *instance)
 
 {
   SAVE_SetDeadDeadBit(instance,0);
@@ -1683,7 +1683,7 @@ void SAVE_UpdateGlobalSaveTracker(void)
   _GlobalSaveTracker *p_Var1;
   u_long uVar2;
   u_long uVar3;
-  undefined4 uVar4;
+  u_char uVar4;
   ushort uVar5;
   int iVar6;
   
@@ -1696,7 +1696,7 @@ void SAVE_UpdateGlobalSaveTracker(void)
   (p_Var1->sound).gSfxVol = uVar3;
   uVar4 = gameTrackerX.sound._16_4_;
   (p_Var1->sound).gVoiceVol = gameTrackerX.sound.gVoiceVol;
-  *(undefined4 *)&(p_Var1->sound).gSfxOn = uVar4;
+  *(u_char *)&(p_Var1->sound).gSfxOn = uVar4;
   GlobalSave->saveVersion = 0x5514;
   iVar6 = GAMEPAD_DualShockEnabled();
   if (iVar6 == 0) {
@@ -1727,7 +1727,7 @@ void SAVE_UpdateGlobalSaveTracker(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void SAVE_RestoreGlobalSaveTracker(void)
+void SAVE_UpdateGlobalSaveTracker(void)
 
 {
   if (GlobalSave->saveVersion == 0x5514) {
@@ -1736,10 +1736,10 @@ void SAVE_RestoreGlobalSaveTracker(void)
     gameTrackerX.sound.gMusicVol = (GlobalSave->sound).gMusicVol;
     gameTrackerX.sound.gSfxVol = (GlobalSave->sound).gSfxVol;
     gameTrackerX.sound.gVoiceVol = (GlobalSave->sound).gVoiceVol;
-    gameTrackerX.sound._16_4_ = *(undefined4 *)&(GlobalSave->sound).gSfxOn;
-    SOUND_SetSfxVolume(gameTrackerX.sound.gSfxVol);
-    SOUND_SetMusicVolume(gameTrackerX.sound.gMusicVol);
-    SOUND_SetVoiceVolume(gameTrackerX.sound.gVoiceVol);
+    gameTrackerX.sound._16_4_ = *(u_char *)&(GlobalSave->sound).gSfxOn;
+    SOUND_SetInstanceSoundVolume(gameTrackerX.sound.gSfxVol);
+    SOUND_SetSfxVolume(gameTrackerX.sound.gMusicVol);
+    SpuSetVoiceVolume(gameTrackerX.sound.gVoiceVol);
     if ((GlobalSave->flags & 2U) == 0) {
       GAMEPAD_DisableDualShock();
     }
@@ -1803,9 +1803,9 @@ void SAVE_SaveEverythingInMemory(void)
   p_Var2 = (gameTrackerX.instanceList)->first;
   while (instance = p_Var2, instance != (_Instance *)0x0) {
     p_Var2 = instance->next;
-    level = STREAM_GetLevelWithID(instance->currentStreamUnitID);
+    level = STREAM_GetWaterZLevel(instance->currentStreamUnitID);
     if (level != (Level *)0x0) {
-      SAVE_Instance(instance,level);
+      COLLIDE_InstanceTerrain(instance,level);
     }
   }
   iVar3 = 0;
@@ -1813,7 +1813,7 @@ void SAVE_SaveEverythingInMemory(void)
   do {
     if (pSVar1->StreamList[0].used == 2) {
       EVENT_SaveEventsFromLevel(pSVar1->StreamList[0].StreamUnitID,pSVar1->StreamList[0].level);
-      SAVE_CreatedSavedLevel(pSVar1->StreamList[0].StreamUnitID,pSVar1->StreamList[0].level);
+      SAVE_HasSavedLevel(pSVar1->StreamList[0].StreamUnitID,pSVar1->StreamList[0].level);
     }
     iVar3 = iVar3 + 1;
     pSVar1 = (STracker *)(pSVar1->StreamList + 1);
@@ -1856,12 +1856,12 @@ void SAVE_SaveGame(void)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void SAVE_RestoreGame(void)
+void SAVE_RestoreGlobalSaveTracker(void)
 
 {
   gameTrackerX.streamFlags = gameTrackerX.streamFlags | 0x200000;
   SAVE_RestoreGlobalSavePointer();
-  SAVE_RestoreGlobalSaveTracker();
+  SAVE_UpdateGlobalSaveTracker();
   savedInfoTracker.InfoEnd = savedInfoTracker.InfoStart + GlobalSave->sizeUsedInBlock;
   GAMELOOP_RequestLevelChange("under",1,&gameTrackerX);
   return;

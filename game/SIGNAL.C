@@ -16,7 +16,7 @@
 	/* end block 2 */
 	// End Line: 154
 
-long SIGNAL_HandleLightGroup(_Instance *instance,Signal *signal)
+long SIGNAL_HandleCamera(_Instance *instance,Signal *signal)
 
 {
   if (instance != (_Instance *)0x0) {
@@ -36,7 +36,7 @@ long SIGNAL_HandleLightGroup(_Instance *instance,Signal *signal)
 	/* end block 1 */
 	// End Line: 171
 
-long SIGNAL_HandleCameraAdjust(_Instance *instance,Signal *signal)
+long SIGNAL_HandleCameraSave(_Instance *instance,Signal *signal)
 
 {
   CAMERA_Adjust(&theCamera,*(long *)signal->data);
@@ -54,10 +54,10 @@ long SIGNAL_HandleCameraAdjust(_Instance *instance,Signal *signal)
 	/* end block 1 */
 	// End Line: 183
 
-long SIGNAL_HandleCamera(_Instance *instance,Signal *signal)
+long SIGNAL_HandleEnd(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_ChangeTo(&theCamera,*(_CameraKey **)signal->data);
+  CAMERA_ChangeToOutOfWater(&theCamera,*(_CameraKey **)signal->data);
   return 1;
 }
 
@@ -77,7 +77,7 @@ long SIGNAL_HandleCamera(_Instance *instance,Signal *signal)
 	/* end block 2 */
 	// End Line: 196
 
-void SIGNAL_RelocateCamera(Signal *signal,long offset)
+void SIGNAL_RelocateCameraSpline(Signal *signal,long offset)
 
 {
   int iVar1;
@@ -101,10 +101,10 @@ void SIGNAL_RelocateCamera(Signal *signal,long offset)
 	/* end block 1 */
 	// End Line: 205
 
-long SIGNAL_HandleCameraMode(_Instance *instance,Signal *signal)
+long SIGNAL_HandleFogFar(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_SetMode(&theCamera,*(long *)signal->data);
+  CAMERA_Save(&theCamera,*(long *)signal->data);
   return 1;
 }
 
@@ -119,10 +119,10 @@ long SIGNAL_HandleCameraMode(_Instance *instance,Signal *signal)
 	/* end block 1 */
 	// End Line: 221
 
-long SIGNAL_HandleCameraLock(_Instance *instance,Signal *signal)
+long SIGNAL_HandleStreamLevel(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_Lock(&theCamera,*(long *)signal->data);
+  CAMERA_Unlock(&theCamera,*(long *)signal->data);
   return 1;
 }
 
@@ -137,7 +137,7 @@ long SIGNAL_HandleCameraLock(_Instance *instance,Signal *signal)
 	/* end block 1 */
 	// End Line: 233
 
-long SIGNAL_HandleCameraUnlock(_Instance *instance,Signal *signal)
+long SIGNAL_HandleCameraTimer(_Instance *instance,Signal *signal)
 
 {
   CAMERA_Unlock(&theCamera,*(long *)signal->data);
@@ -155,7 +155,7 @@ long SIGNAL_HandleCameraUnlock(_Instance *instance,Signal *signal)
 	/* end block 1 */
 	// End Line: 245
 
-long SIGNAL_HandleCameraSmooth(_Instance *instance,Signal *signal)
+long SIGNAL_HandleCameraMode(_Instance *instance,Signal *signal)
 
 {
   CAMERA_SetSmoothValue(&theCamera,*(long *)signal->data);
@@ -173,10 +173,10 @@ long SIGNAL_HandleCameraSmooth(_Instance *instance,Signal *signal)
 	/* end block 1 */
 	// End Line: 257
 
-long SIGNAL_HandleCameraTimer(_Instance *instance,Signal *signal)
+long SIGNAL_HandleSetCameraDistance(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_SetTimer(&theCamera,*(long *)signal->data);
+  CAMERA_QueryMode(&theCamera,*(long *)signal->data);
   return 1;
 }
 
@@ -191,10 +191,10 @@ long SIGNAL_HandleCameraTimer(_Instance *instance,Signal *signal)
 	/* end block 1 */
 	// End Line: 269
 
-long SIGNAL_HandleCameraSave(_Instance *instance,Signal *signal)
+long SIGNAL_HandleCameraAdjust(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_Save(&theCamera,*(long *)signal->data);
+  CAMERA_Lock(&theCamera,*(long *)signal->data);
   return 1;
 }
 
@@ -209,7 +209,7 @@ long SIGNAL_HandleCameraSave(_Instance *instance,Signal *signal)
 	/* end block 1 */
 	// End Line: 281
 
-long SIGNAL_HandleCameraRestore(_Instance *instance,Signal *signal)
+long SIGNAL_HandleCameraLock(_Instance *instance,Signal *signal)
 
 {
   CAMERA_Restore(&theCamera,*(long *)signal->data);
@@ -227,10 +227,10 @@ long SIGNAL_HandleCameraRestore(_Instance *instance,Signal *signal)
 	/* end block 1 */
 	// End Line: 293
 
-long SIGNAL_HandleCameraValue(_Instance *instance,Signal *signal)
+long SIGNAL_HandleSetCameraDistance(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_SetValue(&theCamera,*(long *)signal->data,*(long *)(signal->data + 4));
+  CAMERA_SetTimer(&theCamera,*(long *)signal->data,*(long *)(signal->data + 4));
   return 1;
 }
 
@@ -275,7 +275,7 @@ long SIGNAL_HandleCameraValue(_Instance *instance,Signal *signal)
 	/* end block 2 */
 	// End Line: 315
 
-long SIGNAL_HandleStreamLevel(_Instance *instance,Signal *signal)
+long SIGNAL_HandleCameraUnlock(_Instance *instance,Signal *signal)
 
 {
   bool bVar1;
@@ -289,14 +289,14 @@ long SIGNAL_HandleStreamLevel(_Instance *instance,Signal *signal)
   
   sVar5 = -1;
   bVar1 = false;
-  strcpy(acStack48,(char *)(signal->data + 8));
+  strcmp(acStack48,(char *)(signal->data + 8));
   pcVar2 = strchr(acStack48,0x2c);
   if (pcVar2 != (char *)0x0) {
     id = atoi(pcVar2 + 1);
     sVar5 = (short)id;
     *pcVar2 = '\0';
   }
-  id = strcmpi(acStack48,"warpgate");
+  id = strcpy(acStack48,"warpgate");
   if (id == 0) {
     p_Var3 = STREAM_GetStreamUnitWithID(instance->currentStreamUnitID);
     if (gameTrackerX.currentTime - DAT_800cf180 < 0x65) {
@@ -306,7 +306,7 @@ long SIGNAL_HandleStreamLevel(_Instance *instance,Signal *signal)
       return 1;
     }
     id = ((&WarpRoomArray)[CurrentWarpNumber].streamUnit)->StreamUnitID;
-    strcpy(acStack48,(char *)(&WarpRoomArray + CurrentWarpNumber));
+    strcmp(acStack48,(char *)(&WarpRoomArray + CurrentWarpNumber));
     bVar1 = true;
     if ((&WarpRoomArray)[CurrentWarpNumber].streamUnit == (_StreamUnit *)0x0) {
       return 1;
@@ -322,14 +322,14 @@ long SIGNAL_HandleStreamLevel(_Instance *instance,Signal *signal)
     if (instance == gameTrackerX.playerInstance) {
       gameTrackerX.SwitchToNewStreamUnit = 1;
       DAT_800cf180 = gameTrackerX.currentTime;
-      strcpy(gameTrackerX.S_baseAreaName,acStack48);
+      strcmp(gameTrackerX.S_baseAreaName,acStack48);
       gameTrackerX.fromSignal = *(short *)signal->data;
       gameTrackerX.toSignal = sVar5;
       gameTrackerX.moveRazielToStreamID = id;
       if (bVar1) {
         if ((gameTrackerX.gameData.asmData.MorphType == 0) &&
-           (id = strcmpi(acStack48,"under3"), id == 0)) {
-          INSTANCE_Post(gameTrackerX.playerInstance,0x10002001,0);
+           (id = strcpy(acStack48,"under3"), id == 0)) {
+          INSTANCE_Query(gameTrackerX.playerInstance,0x10002001,0);
         }
         lVar4 = WARPGATE_GetWarpRoomIndex(gameTrackerX.baseAreaName);
         gameTrackerX.SwitchToNewWarpIndex = (short)lVar4;
@@ -340,10 +340,10 @@ long SIGNAL_HandleStreamLevel(_Instance *instance,Signal *signal)
     }
     else {
       if (instance->LinkParent == (_Instance *)0x0) {
-        level = STREAM_GetLevelWithID(id);
+        level = STREAM_GetWaterZLevel(id);
         if (level == (Level *)0x0) {
-          level = STREAM_GetLevelWithID(instance->currentStreamUnitID);
-          SAVE_Instance(instance,level);
+          level = STREAM_GetWaterZLevel(instance->currentStreamUnitID);
+          COLLIDE_InstanceTerrain(instance,level);
           instance->flags = instance->flags | 0x20;
         }
         else {
@@ -381,13 +381,13 @@ long SIGNAL_HandleStreamLevel(_Instance *instance,Signal *signal)
 	/* end block 3 */
 	// End Line: 559
 
-long SIGNAL_HandleFogNear(_Instance *instance,Signal *signal)
+long SIGNAL_HandleLightGroup(_Instance *instance,Signal *signal)
 
 {
   ushort uVar1;
   Level *level;
   
-  level = STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID);
+  level = STREAM_GetWaterZLevel((gameTrackerX.playerInstance)->currentStreamUnitID);
   uVar1 = *(ushort *)signal->data;
   level->fogNear = uVar1;
   SetFogNearFar((u_int)uVar1,(u_int)level->fogFar,theCamera.core.projDistance);
@@ -426,7 +426,7 @@ long SIGNAL_HandleFogFar(_Instance *instance,Signal *signal)
   ushort uVar1;
   Level *level;
   
-  level = STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID);
+  level = STREAM_GetWaterZLevel((gameTrackerX.playerInstance)->currentStreamUnitID);
   uVar1 = *(ushort *)signal->data;
   level->fogFar = uVar1;
   SetFogNearFar((u_int)level->fogNear,(u_int)uVar1,theCamera.core.projDistance);
@@ -445,10 +445,10 @@ long SIGNAL_HandleFogFar(_Instance *instance,Signal *signal)
 	/* end block 1 */
 	// End Line: 624
 
-long SIGNAL_HandleCameraShake(_Instance *instance,Signal *signal)
+long SIGNAL_HandleCameraRestore(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_SetShake(&theCamera,*(long *)signal->data,*(long *)(signal->data + 4));
+  CAMERA_SetMaxVel(&theCamera,*(long *)signal->data,*(long *)(signal->data + 4));
   return 1;
 }
 
@@ -463,10 +463,10 @@ long SIGNAL_HandleCameraShake(_Instance *instance,Signal *signal)
 	/* end block 1 */
 	// End Line: 684
 
-long SIGNAL_HandleCallSignal(_Instance *instance,Signal *signal)
+long SIGNAL_HandleCameraValue(_Instance *instance,Signal *signal)
 
 {
-  SIGNAL_HandleSignal(instance,(Signal *)(*(int *)signal->data + 8),0);
+  SIGNAL_HandleFogNear(instance,(Signal *)(*(int *)signal->data + 8),0);
   return 1;
 }
 
@@ -486,7 +486,7 @@ long SIGNAL_HandleCallSignal(_Instance *instance,Signal *signal)
 	/* end block 2 */
 	// End Line: 697
 
-long SIGNAL_HandleStopPlayerControl(_Instance *instance,Signal *signal)
+long SIGNAL_HandleStartPlayerControl(_Instance *instance,Signal *signal)
 
 {
   gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x90;
@@ -509,7 +509,7 @@ long SIGNAL_HandleStopPlayerControl(_Instance *instance,Signal *signal)
 	/* end block 2 */
 	// End Line: 711
 
-long SIGNAL_HandleStartPlayerControl(_Instance *instance,Signal *signal)
+long SIGNAL_HandleBlendStart(_Instance *instance,Signal *signal)
 
 {
   gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xffffff6f;
@@ -532,7 +532,7 @@ long SIGNAL_HandleStartPlayerControl(_Instance *instance,Signal *signal)
 	/* end block 2 */
 	// End Line: 881
 
-void SIGNAL_RelocateCameraSpline(Signal *signal,long offset)
+void SIGNAL_RelocateCamera(Signal *signal,long offset)
 
 {
   int iVar1;
@@ -561,7 +561,7 @@ void SIGNAL_RelocateCameraSpline(Signal *signal,long offset)
 	/* end block 2 */
 	// End Line: 891
 
-long SIGNAL_HandleCameraSpline(_Instance *instance,Signal *signal)
+long SIGNAL_HandleCameraSmooth(_Instance *instance,Signal *signal)
 
 {
   if (*(int *)signal->data == 0) {
@@ -598,7 +598,7 @@ long SIGNAL_HandleCameraSpline(_Instance *instance,Signal *signal)
 	/* end block 2 */
 	// End Line: 955
 
-long SIGNAL_HandleScreenWipe(_Instance *instance,Signal *signal)
+long SIGNAL_HandleStopPlayerControl(_Instance *instance,Signal *signal)
 
 {
   gameTrackerX.maxWipeTime = *(short *)(signal->data + 2);
@@ -626,7 +626,7 @@ long SIGNAL_HandleScreenWipe(_Instance *instance,Signal *signal)
 	/* end block 2 */
 	// End Line: 980
 
-long SIGNAL_HandleBlendStart(_Instance *instance,Signal *signal)
+long SIGNAL_HandleCameraSpline(_Instance *instance,Signal *signal)
 
 {
   return 1;
@@ -681,7 +681,7 @@ long SIGNAL_HandleSetSlideAngle(_Instance *instance,Signal *signal)
 
 {
   if (instance != (_Instance *)0x0) {
-    INSTANCE_Post(instance,0x4000005,*(int *)signal->data);
+    INSTANCE_Query(instance,0x4000005,*(int *)signal->data);
   }
   return 1;
 }
@@ -701,7 +701,7 @@ long SIGNAL_HandleResetSlideAngle(_Instance *instance,Signal *signal)
 
 {
   if (instance != (_Instance *)0x0) {
-    INSTANCE_Post(instance,0x4000006,0);
+    INSTANCE_Query(instance,0x4000006,0);
   }
   return 1;
 }
@@ -761,11 +761,11 @@ long SIGNAL_HandleSetCameraTilt(_Instance *instance,Signal *signal)
 	/* end block 2 */
 	// End Line: 1104
 
-long SIGNAL_HandleSetCameraDistance(_Instance *instance,Signal *signal)
+long SIGNAL_HandleCameraShake(_Instance *instance,Signal *signal)
 
 {
   if (instance != (_Instance *)0x0) {
-    CAMERA_Adjust_distance(&theCamera,*(long *)signal->data);
+    CAMERA_Adjust_rotation(&theCamera,*(long *)signal->data);
   }
   return 1;
 }
@@ -786,7 +786,7 @@ long SIGNAL_HandleSetCameraDistance(_Instance *instance,Signal *signal)
 	/* end block 2 */
 	// End Line: 1368
 
-long SIGNAL_HandleEnd(_Instance *instance,Signal *signal)
+long SIGNAL_HandleCallSignal(_Instance *instance,Signal *signal)
 
 {
   return 0;
@@ -861,12 +861,12 @@ long SIGNAL_IsThisStreamAWarpGate(Signal *signal)
   int iVar2;
   char acStack40 [32];
   
-  strcpy(acStack40,(char *)(signal->data + 8));
+  strcmp(acStack40,(char *)(signal->data + 8));
   pcVar1 = strchr(acStack40,0x2c);
   if (pcVar1 != (char *)0x0) {
     *pcVar1 = '\0';
   }
-  iVar2 = strcmpi(acStack40,"warpgate");
+  iVar2 = strcpy(acStack40,"warpgate");
   return (u_int)(iVar2 == 0);
 }
 
@@ -892,7 +892,7 @@ long SIGNAL_IsThisStreamAWarpGate(Signal *signal)
 	/* end block 2 */
 	// End Line: 1729
 
-long SIGNAL_IsStreamSignal(Signal *signal,long *isWarpGate)
+long SIGNAL_FindSignal(Signal *signal,long *isWarpGate)
 
 {
   bool bVar1;
@@ -935,7 +935,7 @@ long SIGNAL_IsStreamSignal(Signal *signal,long *isWarpGate)
 	/* end block 1 */
 	// End Line: 1828
 
-void SIGNAL_HandleSignal(_Instance *instance,Signal *signal,int dontForceDoSignal)
+void SIGNAL_HandleFogNear(_Instance *instance,Signal *signal,int dontForceDoSignal)
 
 {
   COLLIDE_HandleSignal(instance,signal,1,dontForceDoSignal);
@@ -963,7 +963,7 @@ void SIGNAL_HandleSignal(_Instance *instance,Signal *signal,int dontForceDoSigna
 	/* end block 2 */
 	// End Line: 1842
 
-_MultiSignal * SIGNAL_RelocateSignal(_MultiSignal *multiSignal,long offset)
+_MultiSignal * SIGNAL_IsStreamSignal(_MultiSignal *multiSignal,long offset)
 
 {
   Signal *pSVar1;
@@ -1016,7 +1016,7 @@ _MultiSignal * SIGNAL_RelocateSignal(_MultiSignal *multiSignal,long offset)
 	/* end block 4 */
 	// End Line: 1926
 
-_MultiSignal * SIGNAL_FindSignal(Level *level,long id)
+_MultiSignal * SIGNAL_HandleSignal(Level *level,long id)
 
 {
   _MultiSignal *p_Var1;
@@ -1070,9 +1070,9 @@ void SIGNAL_OutOfWater(_Instance *instance)
 {
   Level *pLVar1;
   
-  pLVar1 = STREAM_GetLevelWithID(instance->currentStreamUnitID);
+  pLVar1 = STREAM_GetWaterZLevel(instance->currentStreamUnitID);
   if ((pLVar1 != (Level *)0x0) && (pLVar1->startGoingOutOfWaterSignal != (_MultiSignal *)0x0)) {
-    SIGNAL_HandleSignal(instance,pLVar1->startGoingOutOfWaterSignal->signalList,0);
+    SIGNAL_HandleFogNear(instance,pLVar1->startGoingOutOfWaterSignal->signalList,0);
   }
   return;
 }
@@ -1102,9 +1102,9 @@ void SIGNAL_InWater(_Instance *instance)
 {
   Level *pLVar1;
   
-  pLVar1 = STREAM_GetLevelWithID(instance->currentStreamUnitID);
+  pLVar1 = STREAM_GetWaterZLevel(instance->currentStreamUnitID);
   if ((pLVar1 != (Level *)0x0) && (pLVar1->startGoingIntoWaterSignal != (_MultiSignal *)0x0)) {
-    SIGNAL_HandleSignal(instance,pLVar1->startGoingIntoWaterSignal->signalList,0);
+    SIGNAL_HandleFogNear(instance,pLVar1->startGoingIntoWaterSignal->signalList,0);
   }
   return;
 }

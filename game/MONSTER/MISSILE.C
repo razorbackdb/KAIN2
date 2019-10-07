@@ -16,10 +16,10 @@ void MISSILE_Process(_Instance *instance,GameTracker *gameTracker)
 {
   u_long uVar1;
   
-  ProcessPhysicalObject(instance,gameTracker);
+  PhysicalObjectQuery(instance,gameTracker);
   if ((instance->LinkParent == (_Instance *)0x0) &&
-     (uVar1 = MON_GetTime(instance), (u_int)instance->work2 < uVar1)) {
-    INSTANCE_KillInstance(instance);
+     (uVar1 = MON_GetAnim(instance), (u_int)instance->work2 < uVar1)) {
+    INSTANCE_NewInstance(instance);
   }
   return;
 }
@@ -38,9 +38,9 @@ void MISSILE_Process(_Instance *instance,GameTracker *gameTracker)
 void MISSILE_Collide(_Instance *instance,GameTracker *gameTracker)
 
 {
-  CollidePhysicalObject(instance,gameTracker);
+  InitPhysicalObject(instance,gameTracker);
   if (instance->LinkParent == (_Instance *)0x0) {
-    INSTANCE_KillInstance(instance);
+    INSTANCE_NewInstance(instance);
   }
   return;
 }
@@ -124,7 +124,7 @@ _Instance * MISSILE_Find(_Instance *instance,_MonsterMissile *missiledef)
 	/* end block 2 */
 	// End Line: 182
 
-_Instance * MISSILE_Birth(_Instance *instance,_MonsterMissile *missiledef)
+_Instance * MISSILE_Process(_Instance *instance,_MonsterMissile *missiledef)
 
 {
   _Instance *p_Var1;
@@ -137,7 +137,7 @@ _Instance * MISSILE_Birth(_Instance *instance,_MonsterMissile *missiledef)
     p_Var1->collideFunc = MISSILE_Collide;
   }
   else {
-    peVar2 = PHYSOB_BirthProjectile(instance,(u_int)missiledef->segment,(u_int)missiledef->graphic);
+    peVar2 = PHYSOB_BirthCollectible(instance,(u_int)missiledef->segment,(u_int)missiledef->graphic);
     p_Var1 = peVar2->birthInstance;
     if (p_Var1 != (_Instance *)0x0) {
       p_Var1->processFunc = MISSILE_Process;
@@ -191,7 +191,7 @@ _Instance * MISSILE_Fire(_Instance *instance,_MonsterMissile *missiledef,void *t
   ushort spinType;
   _SVector local_20;
   
-  Inst = MISSILE_Birth(instance,missiledef);
+  Inst = MISSILE_Process(instance,missiledef);
   if (Inst != (_Instance *)0x0) {
     spinType = 1;
     if (missiledef->type == '\x03') {
@@ -200,9 +200,9 @@ _Instance * MISSILE_Fire(_Instance *instance,_MonsterMissile *missiledef,void *t
       local_20.y = 0;
       local_20.z = 0;
     }
-    Data = SetObjectThrowData(target,&local_20,(ushort)type,spinType,(u_int)missiledef->speed,0,0,0);
-    INSTANCE_Post(Inst,0x800010,Data);
-    uVar1 = MON_GetTime(Inst);
+    Data = SetObjectData(target,&local_20,(ushort)type,spinType,(u_int)missiledef->speed,0,0,0);
+    INSTANCE_Query(Inst,0x800010,Data);
+    uVar1 = MON_GetAnim(Inst);
     *(undefined **)&Inst->work2 = &DAT_00001388 + uVar1;
   }
   return Inst;
@@ -219,8 +219,7 @@ _Instance * MISSILE_Fire(_Instance *instance,_MonsterMissile *missiledef,void *t
 	/* end block 1 */
 	// End Line: 403
 
-_Instance *
-MISSILE_FireAtInstance(_Instance *instance,_MonsterMissile *missiledef,_Instance *target)
+_Instance * MISSILE_Birth(_Instance *instance,_MonsterMissile *missiledef,_Instance *target)
 
 {
   _Instance *p_Var1;

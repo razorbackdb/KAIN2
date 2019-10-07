@@ -61,7 +61,7 @@ u_long aadStopSfx(u_long handle)
 
 /* WARNING: Unknown calling convention yet parameter storage is locked */
 
-void aadStopAllSfx(void)
+void aadStopAllSlots(void)
 
 {
   aadPutSfxCommand(4,0,0,0,0);
@@ -99,7 +99,7 @@ void aadStopAllSfx(void)
 	/* end block 4 */
 	// End Line: 115
 
-int aadIsSfxPlaying(u_long handle)
+int aadIsSfxPlayingOrRequested(u_long handle)
 
 {
   int iVar1;
@@ -143,7 +143,7 @@ int aadIsSfxPlaying(u_long handle)
 	/* end block 2 */
 	// End Line: 155
 
-int aadIsSfxPlayingOrRequested(u_long handle)
+int SndTypeIsPlayingOrRequested(u_long handle)
 
 {
   ushort uVar1;
@@ -152,7 +152,7 @@ int aadIsSfxPlayingOrRequested(u_long handle)
   u_int uVar4;
   u_int uVar5;
   
-  EnterCriticalSection();
+  ExitCriticalSection();
   uVar1 = (aadMem->sfxSlot).commandsInQueue;
   uVar5 = (u_int)uVar1;
   uVar4 = (u_int)(aadMem->sfxSlot).commandOut;
@@ -161,7 +161,7 @@ int aadIsSfxPlayingOrRequested(u_long handle)
     do {
       pcVar2 = (char *)((int)&aadMem->updateCounter + iVar3);
       if ((*pcVar2 == '\0') && (*(u_long *)(pcVar2 + 4) == handle)) {
-        ExitCriticalSection();
+        EnterCriticalSection();
         return 1;
       }
       uVar4 = uVar4 + 1;
@@ -173,8 +173,8 @@ int aadIsSfxPlayingOrRequested(u_long handle)
       uVar5 = uVar5 - 1;
     } while (uVar5 != 0);
   }
-  ExitCriticalSection();
-  iVar3 = aadIsSfxPlaying(handle);
+  EnterCriticalSection();
+  iVar3 = aadIsSfxPlayingOrRequested(handle);
   return iVar3;
 }
 
@@ -252,7 +252,7 @@ int aadIsSfxTypePlaying(u_int toneID)
 	/* end block 2 */
 	// End Line: 245
 
-int aadIsSfxTypePlayingOrRequested(u_int sfxToneID)
+int aadIsSfxPlaying(u_int sfxToneID)
 
 {
   ushort uVar1;
@@ -261,7 +261,7 @@ int aadIsSfxTypePlayingOrRequested(u_int sfxToneID)
   u_int uVar4;
   u_int uVar5;
   
-  EnterCriticalSection();
+  ExitCriticalSection();
   uVar1 = (aadMem->sfxSlot).commandsInQueue;
   uVar5 = (u_int)uVar1;
   uVar4 = (u_int)(aadMem->sfxSlot).commandOut;
@@ -270,7 +270,7 @@ int aadIsSfxTypePlayingOrRequested(u_int sfxToneID)
     do {
       pcVar2 = (char *)((int)&aadMem->updateCounter + iVar3);
       if ((*pcVar2 == '\0') && ((u_int)*(ushort *)(pcVar2 + 4) == sfxToneID)) {
-        ExitCriticalSection();
+        EnterCriticalSection();
         return 1;
       }
       uVar4 = uVar4 + 1;
@@ -282,7 +282,7 @@ int aadIsSfxTypePlayingOrRequested(u_int sfxToneID)
       uVar5 = uVar5 - 1;
     } while (uVar5 != 0);
   }
-  ExitCriticalSection();
+  EnterCriticalSection();
   iVar3 = aadIsSfxTypePlaying(sfxToneID);
   return iVar3;
 }
@@ -374,7 +374,7 @@ void aadPutSfxCommand(int statusByte,int dataByte0,int dataByte1,u_long u_longPa
   uVar4 = (u_char)statusByte;
   uVar1 = (aadMem->sfxSlot).commandsInQueue;
   if ((uVar1 < 0x1e) || (uVar4 = '\x04', uVar1 < 0x1f)) {
-    EnterCriticalSection();
+    ExitCriticalSection();
     pAVar3 = (aadMem->sfxSlot).commandQueue + (aadMem->sfxSlot).commandIn;
     pAVar3->statusByte = uVar4;
     pAVar3->dataByte[0] = (u_char)dataByte0;
@@ -388,7 +388,7 @@ void aadPutSfxCommand(int statusByte,int dataByte0,int dataByte1,u_long u_longPa
       (aadMem->sfxSlot).commandIn = '\0';
     }
     (aadMem->sfxSlot).commandsInQueue = (aadMem->sfxSlot).commandsInQueue + 1;
-    ExitCriticalSection();
+    EnterCriticalSection();
   }
   return;
 }
@@ -404,7 +404,7 @@ void aadPutSfxCommand(int statusByte,int dataByte0,int dataByte1,u_long u_longPa
 	/* end block 1 */
 	// End Line: 464
 
-void aadExecuteSfxCommand(AadSfxCommand *sfxCmd)
+void aadExecuteEvent(AadSfxCommand *sfxCmd)
 
 {
   if (sfxCmd->statusByte < 9) {
@@ -693,7 +693,7 @@ void sfxCmdStopAllTones(AadSfxCommand *sfxCmd)
 	/* end block 2 */
 	// End Line: 882
 
-void sfxCmdSetToneVolumeAndPan(AadSfxCommand *sfxCmd)
+void sfxCmdSetToneVolPanPitch(AadSfxCommand *sfxCmd)
 
 {
   byte bVar1;
@@ -755,15 +755,14 @@ void sfxCmdSetToneVolumeAndPan(AadSfxCommand *sfxCmd)
   uVar2 = (u_int)(aadMem->sfxSlot).sfxVolume;
   iVar7 = uVar2 * uVar2;
   iVar8 = aadMem->sfxMasterVol * aadMem->sfxMasterVol;
-  SpuSetVoiceVolume((u_int)uVar4,
-                    (int)(short)((u_int)((short)((u_int)((short)((u_int)((short)((u_int)(local_10 *
-                                                                                    iVar5) >> 0xe) *
-                                                                     iVar6) >> 0xe) * iVar7) >> 0xe)
-                                       * iVar8) >> 0xe),
-                    (int)(short)((u_int)((short)((u_int)((short)((u_int)((short)((u_int)(local_e * iVar5
-                                                                                    ) >> 0xe) *
-                                                                     iVar6) >> 0xe) * iVar7) >> 0xe)
-                                       * iVar8) >> 0xe));
+  SpuSetVoiceADSR1ADSR2
+            ((u_int)uVar4,
+             (ushort)((u_int)((short)((u_int)((short)((u_int)((short)((u_int)(local_10 * iVar5) >> 0xe)
+                                                          * iVar6) >> 0xe) * iVar7) >> 0xe) * iVar8)
+                     >> 0xe),
+             (ushort)((u_int)((short)((u_int)((short)((u_int)((short)((u_int)(local_e * iVar5) >> 0xe) *
+                                                          iVar6) >> 0xe) * iVar7) >> 0xe) * iVar8)
+                     >> 0xe));
   return;
 }
 
@@ -856,7 +855,7 @@ void sfxCmdSetToneVolumeAndPan(AadSfxCommand *sfxCmd)
 	/* end block 2 */
 	// End Line: 1000
 
-void sfxCmdSetToneVolPanPitch(AadSfxCommand *sfxCmd)
+void sfxCmdSetToneVolumeAndPan(AadSfxCommand *sfxCmd)
 
 {
   byte bVar1;
@@ -920,15 +919,14 @@ void sfxCmdSetToneVolPanPitch(AadSfxCommand *sfxCmd)
   uVar2 = (u_int)(aadMem->sfxSlot).sfxVolume;
   iVar9 = uVar2 * uVar2;
   iVar10 = aadMem->sfxMasterVol * aadMem->sfxMasterVol;
-  SpuSetVoiceVolume((u_int)uVar6,
-                    (int)(short)((u_int)((short)((u_int)((short)((u_int)((short)((u_int)(local_18 *
-                                                                                    iVar7) >> 0xe) *
-                                                                     iVar8) >> 0xe) * iVar9) >> 0xe)
-                                       * iVar10) >> 0xe),
-                    (int)(short)((u_int)((short)((u_int)((short)((u_int)((short)((u_int)(local_16 *
-                                                                                    iVar7) >> 0xe) *
-                                                                     iVar8) >> 0xe) * iVar9) >> 0xe)
-                                       * iVar10) >> 0xe));
+  SpuSetVoiceADSR1ADSR2
+            ((u_int)uVar6,
+             (ushort)((u_int)((short)((u_int)((short)((u_int)((short)((u_int)(local_18 * iVar7) >> 0xe)
+                                                          * iVar8) >> 0xe) * iVar9) >> 0xe) * iVar10
+                            ) >> 0xe),
+             (ushort)((u_int)((short)((u_int)((short)((u_int)((short)((u_int)(local_16 * iVar7) >> 0xe)
+                                                          * iVar8) >> 0xe) * iVar9) >> 0xe) * iVar10
+                            ) >> 0xe));
   pAVar4 = pAVar5->toneAtr;
   uVar2 = (u_int)pAVar5->note - ((u_int)pAVar4->centerNote - 0x3c);
   if ((pAVar4->centerFine & 0x80U) == 0) {
@@ -942,7 +940,7 @@ void sfxCmdSetToneVolPanPitch(AadSfxCommand *sfxCmd)
             (ushort)((&aadStepsPerCent)[uVar2] * 100 *
                      (0x100 - (u_int)(byte)pAVar4->centerFine & 0xffff) >> 0x17);
   }
-  SpuSetVoicePitch((u_int)uVar6,sVar3 + sfxCmd->shortParam);
+  SpuSetVoiceStartAddr((u_int)uVar6,sVar3 + sfxCmd->shortParam);
   return;
 }
 
@@ -1007,7 +1005,7 @@ void sfxCmdLockVoice(AadSfxCommand *sfxCmd)
 	/* end block 2 */
 	// End Line: 1221
 
-void sfxCmdSetVoiceAttr(AadSfxCommand *sfxCmd)
+void sfxCmdSetVoiceKeyOff(AadSfxCommand *sfxCmd)
 
 {
   u_int uVar1;
@@ -1022,10 +1020,10 @@ void sfxCmdSetVoiceAttr(AadSfxCommand *sfxCmd)
     vNum = vNum + 1;
     uVar1 = uVar1 << 1;
   } while (vNum < 0x18);
-  SpuSetVoiceVolume(vNum,(int)*(short *)(puVar2 + 2),(int)*(short *)((int)puVar2 + 10));
-  SpuSetVoicePitch(vNum,*(word *)(puVar2 + 5));
-  SpuSetVoiceStartAddr(vNum,puVar2[7]);
-  SpuSetVoiceADSR1ADSR2(vNum,*(ushort *)((int)puVar2 + 0x3a),*(ushort *)(puVar2 + 0xf));
+  SpuSetVoiceADSR1ADSR2(vNum,*(ushort *)(puVar2 + 2),*(ushort *)((int)puVar2 + 10));
+  SpuSetVoiceStartAddr(vNum,*(word *)(puVar2 + 5));
+  SpuSetVoicePitch(vNum,puVar2[7]);
+  SOUND_SetVoiceVolume(vNum,*(ushort *)((int)puVar2 + 0x3a),*(ushort *)(puVar2 + 0xf));
   return;
 }
 

@@ -21,23 +21,24 @@
 	/* end block 2 */
 	// End Line: 161
 
-void SOUL_QueueHandler(_Instance *instance)
+void MON_GroundMoveQueueHandler(_Instance *instance)
 
 {
   __Event *message;
-  undefined4 local_18;
-  undefined4 local_14;
+  u_char local_18;
+  u_char local_14;
   void *pvVar1;
   
   pvVar1 = instance->extraData;
-  while (message = DeMessageQueue((__MessageQueue *)((int)pvVar1 + 8)), message != (__Event *)0x0) {
+  while (message = PurgeMessageQueue((__MessageQueue *)((int)pvVar1 + 8)), message != (__Event *)0x0
+        ) {
     if (message->ID == 0x100000d) {
       if (instance->currentMainState != 0x17) {
         MON_SwitchState(instance,(MonsterState)CONCAT44(local_14,local_18));
       }
     }
     else {
-      MON_DefaultMessageHandler(instance,message);
+      MON_PupateMessageHandler(instance,message);
     }
   }
   return;
@@ -77,7 +78,7 @@ void SOUL_Physics(_Instance *instance,long time)
   }
   instance->zAccl = instance->zAccl + iVar2;
   *(short *)((int)pvVar1 + 0x126) = *(short *)((int)pvVar1 + 0x126) + 1;
-  PhysicsMove(instance,&instance->position,time);
+  PhysicsDefaultLinkedMoveResponse(instance,&instance->position,time);
   return;
 }
 
@@ -102,7 +103,7 @@ void SOUL_Physics(_Instance *instance,long time)
 	/* end block 2 */
 	// End Line: 252
 
-void SOUL_Fade(_Instance *instance)
+void SOUL_Flee(_Instance *instance)
 
 {
   short sVar1;
@@ -110,7 +111,7 @@ void SOUL_Fade(_Instance *instance)
   void *pvVar3;
   
   pvVar3 = instance->extraData;
-  uVar2 = MON_GetTime(instance);
+  uVar2 = MON_GetAnim(instance);
   if ((gameTrackerX.gameFlags & 0x80U) == 0) {
     if (*(u_int *)((int)pvVar3 + 0x10c) < uVar2) {
       sVar1 = instance->fadeValue;
@@ -120,7 +121,7 @@ void SOUL_Fade(_Instance *instance)
       }
       if (0xfff < sVar1) {
         instance->flags2 = instance->flags2 | 0x8000000;
-        MORPH_SetupInstanceFlags(&gameTrackerX,instance);
+        MORPH_SetupInstanceListFlags(&gameTrackerX,instance);
         instance->fadeValue = 0;
       }
     }
@@ -211,23 +212,23 @@ void SOUL_MoveToDest(_Instance *instance,long maxAccel,long time)
 	/* end block 2 */
 	// End Line: 342
 
-void SOUL_Init(_Instance *instance)
+void SOUND_Init(_Instance *instance)
 
 {
   u_long uVar1;
-  undefined4 local_10;
-  undefined4 local_c;
+  u_char local_10;
+  u_char local_c;
   u_int *puVar2;
   
   puVar2 = (u_int *)instance->extraData;
-  MON_DefaultInit(instance);
+  MON_SetDefaults(instance);
   *puVar2 = *puVar2 | 0x200880;
   instance->maxXVel = 600;
   instance->maxYVel = 600;
   instance->maxZVel = 600;
   instance->flags2 = instance->flags2 | 0x20000;
   *(undefined2 *)((int)puVar2 + 0x126) = 0;
-  uVar1 = MON_GetTime(instance);
+  uVar1 = MON_GetAnim(instance);
   *(undefined **)(puVar2 + 0x43) = &DAT_00001964 + uVar1;
   if (instance->parent != (_Instance *)0x0) {
     puVar2[0x36] = instance->parent->introUniqueID;
@@ -253,7 +254,7 @@ void SOUL_Init(_Instance *instance)
 void SOUL_CleanUp(_Instance *instance)
 
 {
-  MON_CleanUp(instance);
+  HUMAN_CleanUp(instance);
   return;
 }
 
@@ -292,7 +293,7 @@ void SOUL_BirthEntry(_Instance *instance)
   instance->zAccl = 0;
   instance->zVel = 0;
   (instance->position).z = sVar1 + 0x78;
-  uVar2 = MON_GetTime(instance);
+  uVar2 = MON_GetAnim(instance);
   *(int *)((int)pvVar3 + 0x114) = uVar2 + 0x5dc;
   return;
 }
@@ -321,18 +322,18 @@ void SOUL_Birth(_Instance *instance)
 
 {
   u_long uVar1;
-  undefined4 local_10;
+  u_char local_10;
   void *pvVar2;
-  undefined4 local_c;
+  u_char local_c;
   
   instance->zAccl = 0;
   pvVar2 = instance->extraData;
   SOUL_Physics(instance,gameTrackerX.timeMult);
-  uVar1 = MON_GetTime(instance);
+  uVar1 = MON_GetAnim(instance);
   if (*(u_int *)((int)pvVar2 + 0x114) < uVar1) {
     MON_SwitchState(instance,(MonsterState)CONCAT44(local_c,local_10));
   }
-  SOUL_QueueHandler(instance);
+  MON_GroundMoveQueueHandler(instance);
   return;
 }
 
@@ -515,8 +516,8 @@ void SOUL_SoulSuck(_Instance *instance)
   u_int *puVar7;
   _Instance *Inst;
   _Instance *instance_00;
-  undefined4 local_38;
-  undefined4 in_stack_ffffffcc;
+  u_char local_38;
+  u_char in_stack_ffffffcc;
   undefined2 local_30;
   short local_2e;
   short local_2c;
@@ -527,10 +528,10 @@ void SOUL_SoulSuck(_Instance *instance)
   puVar7 = (u_int *)instance->extraData;
 LAB_8008da0c:
   while( true ) {
-    message = DeMessageQueue((__MessageQueue *)(puVar7 + 2));
+    message = PurgeMessageQueue((__MessageQueue *)(puVar7 + 2));
     if (message == (__Event *)0x0) {
       if ((*puVar7 & 0x800) == 0) {
-        PhysicsMove(instance,&instance->position,gameTrackerX.timeMult);
+        PhysicsDefaultLinkedMoveResponse(instance,&instance->position,gameTrackerX.timeMult);
       }
       else {
         SOUL_Physics(instance,gameTrackerX.timeMult);
@@ -544,19 +545,19 @@ LAB_8008da0c:
         }
       }
       else {
-        Data = SetMonsterSoulSuckData(instance,0,0,0);
-        INSTANCE_Post(Inst,0x1000009,Data);
-        INSTANCE_Post(Inst,0x1000016,(int)*(short *)(puVar7 + 0x51));
+        Data = SetMonsterHitData(instance,0,0,0);
+        INSTANCE_Query(Inst,0x1000009,Data);
+        INSTANCE_Query(Inst,0x1000016,(int)*(short *)(puVar7 + 0x51));
         SOUND_Play3dSound(&instance->position,8,-0x1c2,0x50,0xdac);
         if (Inst == gameTrackerX.playerInstance) {
-          GAMEPAD_Shock1(0x80,(int)&DAT_00005000);
+          GAMEPAD_HandleDualShock(0x80,(int)&DAT_00005000);
         }
         if (puVar7[0x36] != 0) {
-          instance_00 = INSTANCE_Find(puVar7[0x36]);
+          instance_00 = INSTANCE_Deactivate(puVar7[0x36]);
           if (instance_00 != (_Instance *)0x0) {
             MON_SoulSucked(instance_00);
           }
-          SAVE_DeleteInstance(instance);
+          SAVE_Instance(instance);
         }
         MON_KillMonster(instance);
       }
@@ -576,7 +577,7 @@ LAB_8008da0c:
     magnitude = MATH3D_DistanceBetweenPositions((_Position *)(puVar7 + 0x48),&instance->position);
     if (magnitude < 7000) {
       Inst = *(_Instance **)&p_Var6->node;
-      MONSENSE_SetEnemy(instance,Inst);
+      MONSENSE_See(instance,Inst);
       if ((*(char *)(*(int *)puVar7[0x59] + 0x2d) == -1) || (0x500 < magnitude)) {
         lVar3 = SOUL_CalcAccel((int)*(short *)(puVar7 + 0x48) - (int)(instance->position).x,
                                instance->xVel,magnitude);
@@ -609,7 +610,7 @@ LAB_8008da0c:
                                                   CONCAT44(in_stack_ffffffcc,local_38))))),0x2d);
             instance->flags2 = instance->flags2 | 0x20000000;
           }
-          p_Var4 = MON_GetAnim(instance,*(char **)puVar7[0x59],0x2d);
+          p_Var4 = MON_GetTime(instance,*(char **)puVar7[0x59],0x2d);
           sVar1 = G2AnimKeylist_GetDuration(instance->object->animList[p_Var4->index[0]]);
           sVar2 = G2Anim_GetElapsedTime(&instance->anim);
           Data = ((int)sVar1 * 0x1e000) / 3000 - ((int)sVar2 * 0x1e000) / 3000;
@@ -642,7 +643,7 @@ LAB_8008da0c:
   }
   if (0x1000009 < Data) goto LAB_8008da4c;
   if ((Data == 0x1000008) &&
-     ((p_Var4 = MON_GetAnim(instance,*(char **)puVar7[0x59],0x2d), p_Var4 == (_MonsterAnim *)0x0 ||
+     ((p_Var4 = MON_GetTime(instance,*(char **)puVar7[0x59],0x2d), p_Var4 == (_MonsterAnim *)0x0 ||
       ((*puVar7 & 0x4000000) == 0)))) {
     instance_00 = *(_Instance **)&((_Instance *)message->Data)->node;
   }
@@ -650,7 +651,7 @@ LAB_8008da0c:
 LAB_8008da4c:
   if (Data != 0x100000b) {
 LAB_8008dd8c:
-    MON_DefaultMessageHandler(instance,message);
+    MON_PupateMessageHandler(instance,message);
   }
   goto LAB_8008da0c;
 }
@@ -675,7 +676,7 @@ LAB_8008dd8c:
 	/* end block 2 */
 	// End Line: 894
 
-void SOUL_WanderEntry(_Instance *instance)
+void MON_WanderEntry(_Instance *instance)
 
 {
   _Position *in;
@@ -727,12 +728,12 @@ void SOUL_WanderEntry(_Instance *instance)
 	/* end block 2 */
 	// End Line: 924
 
-void SOUL_Wander(_Instance *instance)
+void SOUL_WanderEntry(_Instance *instance)
 
 {
   long lVar1;
-  undefined4 local_10;
-  undefined4 local_c;
+  u_char local_10;
+  u_char local_c;
   u_int *puVar2;
   
   puVar2 = (u_int *)instance->extraData;
@@ -748,8 +749,8 @@ void SOUL_Wander(_Instance *instance)
     }
   }
   else {
-    lVar1 = MATH3D_LengthXY((int)*(short *)(puVar2 + 0x48) - (int)(instance->position).x,
-                            (int)*(short *)((int)puVar2 + 0x122) - (int)(instance->position).y);
+    lVar1 = MATH3D_LengthXYZ((int)*(short *)(puVar2 + 0x48) - (int)(instance->position).x,
+                             (int)*(short *)((int)puVar2 + 0x122) - (int)(instance->position).y);
     if (lVar1 < 100) {
       MON_SwitchState(instance,(MonsterState)CONCAT44(local_c,local_10));
       instance->zAccl = 0;
@@ -773,13 +774,13 @@ void SOUL_Wander(_Instance *instance)
   SOUL_Physics(instance,gameTrackerX.timeMult);
   if ((*puVar2 & 4) == 0) {
     if ((instance->flags2 & 0x8000000U) == 0) {
-      SOUL_Fade(instance);
+      SOUL_Flee(instance);
     }
     if (puVar2[0x31] != 0) {
       MON_SwitchState(instance,(MonsterState)CONCAT44(local_c,local_10));
     }
   }
-  SOUL_QueueHandler(instance);
+  MON_GroundMoveQueueHandler(instance);
   return;
 }
 
@@ -794,13 +795,13 @@ void SOUL_Wander(_Instance *instance)
 	/* end block 1 */
 	// End Line: 1019
 
-void SOUL_FleeEntry(_Instance *instance)
+void MON_FleeEntry(_Instance *instance)
 
 {
   instance->maxXVel = 0xf;
   instance->maxYVel = 0xf;
   instance->maxZVel = 0x11;
-  MON_FleeEntry(instance);
+  MON_FallEntry(instance);
   return;
 }
 
@@ -835,15 +836,15 @@ void SOUL_FleeEntry(_Instance *instance)
 	/* end block 2 */
 	// End Line: 1034
 
-void SOUL_Flee(_Instance *instance)
+void SOUL_Fade(_Instance *instance)
 
 {
   short angle;
   int iVar1;
   int iVar2;
   long lVar3;
-  undefined4 unaff_s0;
-  undefined4 unaff_s1;
+  u_char unaff_s0;
+  u_char unaff_s1;
   
   iVar1 = *(int *)((int)instance->extraData + 0xc4);
   if (iVar1 == 0) {
@@ -851,7 +852,7 @@ void SOUL_Flee(_Instance *instance)
   }
   else {
     angle = MATH3D_AngleFromPosToPos((_Position *)(*(int *)(iVar1 + 4) + 0x5c),&instance->position);
-    angle = MONSENSE_GetClosestFreeDirection(instance,angle,500);
+    angle = MONSENSE_GetDistanceInDirection(instance,angle,500);
     iVar1 = rsin((int)angle);
     iVar1 = iVar1 * 2000;
     if (iVar1 < 0) {
@@ -875,9 +876,9 @@ void SOUL_Flee(_Instance *instance)
     instance->zAccl = 0;
   }
   SOUL_Physics(instance,gameTrackerX.timeMult);
-  SOUL_QueueHandler(instance);
+  MON_GroundMoveQueueHandler(instance);
   if ((instance->flags2 & 0x8000000U) == 0) {
-    SOUL_Fade(instance);
+    SOUL_Flee(instance);
   }
   return;
 }
@@ -902,7 +903,7 @@ void SOUL_Flee(_Instance *instance)
 	/* end block 2 */
 	// End Line: 1109
 
-void SOUL_IdleEntry(_Instance *instance)
+void SOUL_FleeEntry(_Instance *instance)
 
 {
   u_long uVar1;
@@ -913,7 +914,7 @@ void SOUL_IdleEntry(_Instance *instance)
   instance->maxXVel = 0xf;
   instance->maxYVel = 0xf;
   instance->maxZVel = 0x11;
-  uVar1 = MON_GetTime(instance);
+  uVar1 = MON_GetAnim(instance);
   iVar2 = rand();
   *puVar3 = *puVar3 & 0xfffbffff;
   puVar3[0x45] = uVar1 + iVar2 % 3000 + 3000;
@@ -942,15 +943,15 @@ void SOUL_IdleEntry(_Instance *instance)
 	/* end block 2 */
 	// End Line: 1126
 
-void SOUL_Idle(_Instance *instance)
+void SOUL_Init(_Instance *instance)
 
 {
   u_long uVar1;
   int iVar2;
   int iVar3;
   int iVar4;
-  undefined4 local_10;
-  undefined4 local_c;
+  u_char local_10;
+  u_char local_c;
   u_int *puVar5;
   
   iVar2 = instance->xVel;
@@ -969,14 +970,14 @@ void SOUL_Idle(_Instance *instance)
   instance->zAccl = 0;
   SOUL_Physics(instance,gameTrackerX.timeMult);
   if ((*puVar5 & 4) == 0) {
-    if ((puVar5[0x31] != 0) || (uVar1 = MON_GetTime(instance), puVar5[0x45] < uVar1)) {
+    if ((puVar5[0x31] != 0) || (uVar1 = MON_GetAnim(instance), puVar5[0x45] < uVar1)) {
       MON_SwitchState(instance,(MonsterState)CONCAT44(local_c,local_10));
     }
     if ((instance->flags2 & 0x8000000U) == 0) {
-      SOUL_Fade(instance);
+      SOUL_Flee(instance);
     }
   }
-  SOUL_QueueHandler(instance);
+  MON_GroundMoveQueueHandler(instance);
   return;
 }
 
@@ -1008,11 +1009,11 @@ void SOUL_ReanimateEntry(_Instance *instance)
   void *pvVar2;
   
   pvVar2 = instance->extraData;
-  p_Var1 = INSTANCE_Find(*(long *)((int)pvVar2 + 0xd8));
+  p_Var1 = INSTANCE_Deactivate(*(long *)((int)pvVar2 + 0xd8));
   *(short *)((int)pvVar2 + 0x120) = (p_Var1->position).x;
   *(short *)((int)pvVar2 + 0x122) = (p_Var1->position).y;
   *(short *)((int)pvVar2 + 0x124) = (p_Var1->position).z + 0xa0;
-  MON_TurnOffBodySpheres(instance);
+  MON_TurnOnBodySpheres(instance);
   return;
 }
 
@@ -1055,21 +1056,21 @@ void SOUL_Reanimate(_Instance *instance)
   
   pvVar3 = instance->extraData;
   SOUL_MoveToDest(instance,0x10,gameTrackerX.timeMult);
-  lVar1 = MATH3D_LengthXY((int)(instance->position).x - (int)*(short *)((int)pvVar3 + 0x120),
-                          (int)(instance->position).y - (int)*(short *)((int)pvVar3 + 0x122));
+  lVar1 = MATH3D_LengthXYZ((int)(instance->position).x - (int)*(short *)((int)pvVar3 + 0x120),
+                           (int)(instance->position).y - (int)*(short *)((int)pvVar3 + 0x122));
   if (lVar1 < 0xfa) {
     if (*(int *)((int)pvVar3 + 0xd8) != 0) {
-      Inst = INSTANCE_Find(*(int *)((int)pvVar3 + 0xd8));
+      Inst = INSTANCE_Deactivate(*(int *)((int)pvVar3 + 0xd8));
       if (Inst != (_Instance *)0x0) {
-        INSTANCE_Post(Inst,0x100000d,0);
+        INSTANCE_Query(Inst,0x100000d,0);
       }
-      SAVE_DeleteInstance(instance);
+      SAVE_Instance(instance);
     }
     MON_KillMonster(instance);
   }
   else {
     do {
-      p_Var2 = DeMessageQueue((__MessageQueue *)((int)pvVar3 + 8));
+      p_Var2 = PurgeMessageQueue((__MessageQueue *)((int)pvVar3 + 8));
     } while (p_Var2 != (__Event *)0x0);
   }
   return;

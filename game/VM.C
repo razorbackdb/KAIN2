@@ -106,7 +106,7 @@ void VM_Tick(long time)
 	/* end block 2 */
 	// End Line: 586
 
-void VM_UpdateMorph(Level *level,int initFlg)
+void VRAM_UpdateMorphPalettes(Level *level,int initFlg)
 
 {
   short *psVar1;
@@ -143,7 +143,7 @@ void VM_UpdateMorph(Level *level,int initFlg)
         if (gameTrackerX.gameData.asmData.MorphTime == 1000) {
           if (address != (_VMOffsetTable *)(&pp_Var17[-1]->numVMOffsets)[*(short *)(pp_Var17 + -7)])
           {
-            MEMPACK_Free((char *)address);
+            MEMPACK_Init((char *)address);
           }
           if (initFlg == 0) {
             if (gameTrackerX.gameData.asmData.MorphType == 0) goto LAB_8004ff78;
@@ -269,7 +269,7 @@ void VM_VMObjectSetTable(Level *level,_VMObject *vmobject,int table)
 
 {
   if (vmobject->curVMOffsetTable != vmobject->vmoffsetTableList[vmobject->currentIdx]) {
-    MEMPACK_Free((char *)vmobject->curVMOffsetTable);
+    MEMPACK_Init((char *)vmobject->curVMOffsetTable);
   }
   vmobject->currentIdx = (short)table;
   vmobject->curVMOffsetTable =

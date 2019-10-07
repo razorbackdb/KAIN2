@@ -29,7 +29,7 @@
 	/* end block 2 */
 	// End Line: 25
 
-void StateHandlerWallGrab(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerFall(__CharacterState *In,int CurrentSection,int Data)
 
 {
   undefined *puVar1;
@@ -52,11 +52,11 @@ void StateHandlerWallGrab(__CharacterState *In,int CurrentSection,int Data)
         ControlFlag = 0x80a1101;
         In->CharacterInstance->tface = (_TFace *)0x0;
         PhysicsMode = 3;
-        ResetPhysics(In->CharacterInstance,-0x10);
-        razReaverBladeOff();
+        PhysicsMove(In->CharacterInstance,-0x10);
+        FX_ReaverBladeInit();
       }
-      G2EmulationSwitchAnimation(In,CurrentSection,0x4b,0,3,1);
-      PurgeMessageQueue(In_00);
+      G2EmulatePlayAnimation(In,CurrentSection,0x4b,0,3,1);
+      EnMessageQueueData(In_00);
     }
     else {
       if ((int)puVar3 < 0x100002) {
@@ -64,7 +64,7 @@ void StateHandlerWallGrab(__CharacterState *In,int CurrentSection,int Data)
           if ((int)puVar3 < -0x7ffffff7) {
             if (puVar3 != (undefined *)0x80000000) {
 LAB_800a0394:
-              DefaultStateHandler(In,CurrentSection,Data);
+              StateHandlerDragObject(In,CurrentSection,Data);
             }
           }
           else {
@@ -86,7 +86,7 @@ joined_r0x800a0250:
               (In->CharacterInstance->rotation).y = 0;
               (In->CharacterInstance->rotation).z = 0;
               Data_00 = SetControlInitIdleData(0,0,3);
-              StateSwitchStateData(In,CurrentSection,StateHandlerIdle,Data_00);
+              StateSwitchStateData(In,CurrentSection,StateHandlerPickupObject,Data_00);
             }
             else {
               if (CurrentSection == 0) {
@@ -96,12 +96,12 @@ joined_r0x800a0250:
           }
           else {
             if (puVar3 != (undefined *)0x8000000) goto LAB_800a0394;
-            StateSwitchStateData(In,CurrentSection,StateHandlerWallIdle,0);
+            StateSwitchStateData(In,CurrentSection,StateHandlerSlide,0);
           }
         }
       }
     }
-    DeMessageQueue(&In->SectionList[CurrentSection].Event);
+    PurgeMessageQueue(&In->SectionList[CurrentSection].Event);
   } while( true );
 }
 
@@ -173,7 +173,7 @@ joined_r0x800a0250:
 	/* end block 2 */
 	// End Line: 204
 
-void StateHandlerWallIdle(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerSlide(__CharacterState *In,int CurrentSection,int Data)
 
 {
   _G2SVector3_Type *p_Var1;
@@ -197,7 +197,7 @@ void StateHandlerWallIdle(__CharacterState *In,int CurrentSection,int Data)
     puVar4 = (undefined *)p_Var2->ID;
     if (puVar4 == &DAT_00100004) {
       if (CurrentSection == 0) {
-        COLLIDE_SegmentCollisionOn(In->CharacterInstance,1);
+        COLLIDE_SegmentCollisionOff(In->CharacterInstance,1);
       }
     }
     else {
@@ -209,9 +209,9 @@ void StateHandlerWallIdle(__CharacterState *In,int CurrentSection,int Data)
 LAB_800a0644:
               Raziel.Mode = 8;
               ControlFlag = ControlFlag | 0x10;
-              SetPhysics(In->CharacterInstance,-0x10,0,0x28,0x9a);
-              G2EmulationSwitchAnimation(In,CurrentSection,0x23,0,0,1);
-              StateSwitchStateData(In,CurrentSection,StateHandlerWallDismount,0);
+              SetPhysicsGravityData(In->CharacterInstance,-0x10,0,0x28,0x9a);
+              G2EmulatePlayAnimation(In,CurrentSection,0x23,0,0,1);
+              StateSwitchStateData(In,CurrentSection,StateHandlerWarpGate,0);
               In->CharacterInstance->yVel = In->CharacterInstance->yVel * -2;
               In->CharacterInstance->zVel = 0;
               (In->CharacterInstance->rotation).x = 0;
@@ -236,7 +236,7 @@ LAB_800a0644:
                   local_34 = 2;
                   Data_01 = CurrentSection;
                 }
-                G2EmulationSwitchAnimation(In,Data_01,NewAnim,0,3,local_34);
+                G2EmulatePlayAnimation(In,Data_01,NewAnim,0,3,local_34);
                 p_Var1 = ExtraRot;
                 ExtraRot->x = 0;
                 p_Var1->y = 0;
@@ -247,7 +247,7 @@ LAB_800a0644:
                 ControlFlag = ControlFlag & 0xf7ffefff;
                 In->CharacterInstance->waterFace = (_TFace *)0x0;
                 if (CurrentSection == 0) {
-                  COLLIDE_SegmentCollisionOff(In->CharacterInstance,1);
+                  COLLIDE_SegmentCollisionOn(In->CharacterInstance,1);
                 }
               }
             }
@@ -262,7 +262,7 @@ LAB_800a0644:
             (In->CharacterInstance->rotation).y = 0;
             (In->CharacterInstance->rotation).z = 0;
             Data_01 = SetControlInitIdleData(0,0,3);
-            StateSwitchStateData(In,CurrentSection,StateHandlerIdle,Data_01);
+            StateSwitchStateData(In,CurrentSection,StateHandlerPickupObject,Data_01);
             razReaverBladeOn();
           }
           else {
@@ -276,7 +276,7 @@ LAB_800a0644:
               else {
                 SteerSwitchMode(In->CharacterInstance,0);
                 Data_01 = SetControlInitHangData((_Instance *)0x0,0,3);
-                StateSwitchStateCharacterData(In,StateHandlerHang,Data_01);
+                StateSwitchStateCharacterDataDefault(In,StateHandlerForcedGlide,Data_01);
                 razReaverBladeOn();
               }
             }
@@ -297,17 +297,17 @@ LAB_800a0644:
                 if (puVar4 == (undefined *)0x4000004) goto LAB_800a0a68;
               }
 LAB_800a0a60:
-              DefaultStateHandler(In,CurrentSection,Data);
+              StateHandlerDragObject(In,CurrentSection,Data);
             }
           }
           else {
             if (puVar4 == (undefined *)0x8000001) {
               if ((CurrentSection == 0) && (Data_00 == 0x68)) {
-                PHYSICS_GenericLineCheckSetup(0,0,0x140,&SStack48);
-                PHYSICS_GenericLineCheckSetup(0,-0x140,0x140,&SStack40);
-                uVar3 = PHYSICS_CheckForValidMove(In->CharacterInstance,&SStack48,&SStack40,0);
+                PHYSICS_GenericLineCheckMask(0,0,0x140,&SStack48);
+                PHYSICS_GenericLineCheckMask(0,-0x140,0x140,&SStack40);
+                uVar3 = PHYSOBS_CheckForValidMove(In->CharacterInstance,&SStack48,&SStack40,0);
                 if ((uVar3 & 1) == 0) {
-                  G2EmulationSwitchAnimationCharacter(In,0x6a,0,3,1);
+                  G2EmulationSwitchAnimationSync(In,0x6a,0,3,1);
                 }
               }
             }
@@ -315,11 +315,12 @@ LAB_800a0a60:
               if ((int)puVar4 < 0x8000002) {
                 if (puVar4 != (undefined *)0x8000000) goto LAB_800a0a60;
                 if (CurrentSection == 2) {
-                  G2EmulationSwitchAnimation(In,2,0,0,3,2);
-                  G2Anim_SetController_Vector(&In->CharacterInstance->anim,0,0xe,ExtraRot);
+                  G2EmulatePlayAnimation(In,2,0,0,3,2);
+                  G2Anim_GetControllerCurrentInterpVector
+                            (&In->CharacterInstance->anim,0,0xe,ExtraRot);
                 }
                 else {
-                  G2EmulationSwitchAnimation(In,CurrentSection,0x4c,0,3,2);
+                  G2EmulatePlayAnimation(In,CurrentSection,0x4c,0,3,2);
                 }
               }
               else {
@@ -334,15 +335,15 @@ LAB_800a0a60:
                       Data_01 = 0x92;
                       local_34 = 1;
 LAB_800a0a50:
-                      G2EmulationSwitchAnimationCharacterAlpha(In,Data_01,0,3,local_34,2);
+                      G2EmulationSwitchAnimationSync(In,Data_01,0,3,local_34,2);
                     }
                   }
                   else {
                     if (Data_01 < 0x10000003) {
                       if ((Data_01 == 0x10000001) && (Data_00 != 0x68)) {
-                        PHYSICS_GenericLineCheckSetup(0,0,0xa0,&SStack48);
-                        PHYSICS_GenericLineCheckSetup(0,-0x140,0xa0,&SStack40);
-                        uVar3 = PHYSICS_CheckForValidMove
+                        PHYSICS_GenericLineCheckMask(0,0,0xa0,&SStack48);
+                        PHYSICS_GenericLineCheckMask(0,-0x140,0xa0,&SStack40);
+                        uVar3 = PHYSOBS_CheckForValidMove
                                           (In->CharacterInstance,&SStack48,&SStack40,0);
                         if (((uVar3 & 1) != 0) || (uVar3 == 0)) {
                           Data_01 = 0x68;
@@ -355,9 +356,9 @@ LAB_800a0a44:
                     else {
                       if (Data_01 == 0x10000003) {
                         if (Data_00 != 0x95) {
-                          PHYSICS_GenericLineCheckSetup(0,0,-0x140,&SStack48);
-                          PHYSICS_GenericLineCheckSetup(0,-0x140,-0x140,&SStack40);
-                          uVar3 = PHYSICS_CheckForValidMove
+                          PHYSICS_GenericLineCheckMask(0,0,-0x140,&SStack48);
+                          PHYSICS_GenericLineCheckMask(0,-0x140,-0x140,&SStack40);
+                          uVar3 = PHYSOBS_CheckForValidMove
                                             (In->CharacterInstance,&SStack48,&SStack40,0);
                           if (((uVar3 & 1) != 0) || (uVar3 == 0)) {
                             Data_01 = 0x95;
@@ -384,10 +385,10 @@ LAB_800a0a44:
       }
     }
 LAB_800a0a68:
-    DeMessageQueue(&In->SectionList[CurrentSection].Event);
+    PurgeMessageQueue(&In->SectionList[CurrentSection].Event);
   }
   if (((*PadData & 0x8000000fU) == 0) && ((Raziel.passedMask & 1) != 0)) {
-    G2EmulationSwitchAnimationCharacter(In,0x6a,0,3,1);
+    G2EmulationSwitchAnimationSync(In,0x6a,0,3,1);
     Raziel.passedMask = 0;
   }
   if (CurrentSection != 0) {
@@ -401,9 +402,9 @@ LAB_800a0a68:
       if (Data_00 != 0x68) {
         return;
       }
-      PHYSICS_GenericLineCheckSetup(0,0,0xa0,&SStack48);
-      PHYSICS_GenericLineCheckSetup(0,-0x140,0xa0,&SStack40);
-      uVar3 = PHYSICS_CheckForValidMove(In->CharacterInstance,&SStack48,&SStack40,0);
+      PHYSICS_GenericLineCheckMask(0,0,0xa0,&SStack48);
+      PHYSICS_GenericLineCheckMask(0,-0x140,0xa0,&SStack40);
+      uVar3 = PHYSOBS_CheckForValidMove(In->CharacterInstance,&SStack48,&SStack40,0);
       if ((uVar3 & 1) != 0) {
         return;
       }
@@ -413,17 +414,17 @@ LAB_800a0a68:
         if (Data_00 != 0x95) {
           return;
         }
-        PHYSICS_GenericLineCheckSetup(0,0,0,&SStack48);
-        PHYSICS_GenericLineCheckSetup(0,0,-0x140,&SStack40);
-        Data_00 = PHYSICS_CheckForValidMove(In->CharacterInstance,&SStack48,&SStack40,0);
+        PHYSICS_GenericLineCheckMask(0,0,0,&SStack48);
+        PHYSICS_GenericLineCheckMask(0,0,-0x140,&SStack40);
+        Data_00 = PHYSOBS_CheckForValidMove(In->CharacterInstance,&SStack48,&SStack40,0);
         if ((Data_00 != 0) || (In->CharacterInstance->waterFace != (_TFace *)0x0)) {
           Data_00 = SetControlInitIdleData(0,0,3);
-          StateSwitchStateCharacterData(In,StateHandlerIdle,Data_00);
+          StateSwitchStateCharacterDataDefault(In,StateHandlerPickupObject,Data_00);
           return;
         }
-        PHYSICS_GenericLineCheckSetup(0,0,-0x140,&SStack48);
-        PHYSICS_GenericLineCheckSetup(0,-0x140,-0x140,&SStack40);
-        uVar3 = PHYSICS_CheckForValidMove(In->CharacterInstance,&SStack48,&SStack40,0);
+        PHYSICS_GenericLineCheckMask(0,0,-0x140,&SStack48);
+        PHYSICS_GenericLineCheckMask(0,-0x140,-0x140,&SStack40);
+        uVar3 = PHYSOBS_CheckForValidMove(In->CharacterInstance,&SStack48,&SStack40,0);
         if ((uVar3 & 1) != 0) {
           return;
         }
@@ -436,7 +437,7 @@ LAB_800a0a68:
     return;
   }
 LAB_800a0c64:
-  G2EmulationSwitchAnimationCharacter(In,0x6a,0,3,1);
+  G2EmulationSwitchAnimationSync(In,0x6a,0,3,1);
   return;
 }
 
@@ -461,7 +462,7 @@ LAB_800a0c64:
 	/* end block 2 */
 	// End Line: 871
 
-void StateHandlerWallDismount(__CharacterState *In,int CurrentSection,int Data)
+void StateHandlerWarpGate(__CharacterState *In,int CurrentSection,int Data)
 
 {
   __Event *p_Var1;
@@ -485,7 +486,7 @@ LAB_800a0e58:
           if ((int)puVar2 < -0x7ffffff7) {
             if (puVar2 != (undefined *)0x80000000) {
               if (puVar2 != (undefined *)0x80000001) goto LAB_800a0ec4;
-              EnMessageQueueData(&p_Var3->Defer,-0x7fffffff,0);
+              DeMessageQueue(&p_Var3->Defer,-0x7fffffff,0);
             }
           }
           else {
@@ -504,7 +505,7 @@ LAB_800a0e58:
                 goto LAB_800a0e58;
               }
 LAB_800a0ec4:
-              DefaultStateHandler(In,CurrentSection,Data);
+              StateHandlerDragObject(In,CurrentSection,Data);
             }
           }
         }
@@ -518,14 +519,14 @@ LAB_800a0ec4:
           else {
             if (puVar2 != (undefined *)0x4020000) {
               if (puVar2 != (undefined *)0x8000000) goto LAB_800a0ec4;
-              G2EmulationSwitchAnimation(In,CurrentSection,0x24,0,4,1);
-              StateSwitchStateData(In,CurrentSection,StateHandlerFall,0);
+              G2EmulatePlayAnimation(In,CurrentSection,0x24,0,4,1);
+              StateSwitchStateData(In,CurrentSection,StateHandlerGrab,0);
             }
           }
         }
       }
     }
-    DeMessageQueue(&p_Var3->Event);
+    PurgeMessageQueue(&p_Var3->Event);
   } while( true );
 }
 

@@ -140,7 +140,7 @@ _MonsterIR * MONSENSE_FindIR(_MonsterVars *mv,_Instance *instance)
 	/* end block 2 */
 	// End Line: 179
 
-int MONSENSE_See(_Instance *instance,evCollideInstanceStatsData *data)
+int MONSENSE_SetEnemy(_Instance *instance,evCollideInstanceStatsData *data)
 
 {
   short sVar1;
@@ -175,7 +175,7 @@ int MONSENSE_See(_Instance *instance,evCollideInstanceStatsData *data)
     }
     else {
       Inst = data->instance;
-      uVar2 = INSTANCE_Query(Inst,1);
+      uVar2 = INSTANCE_Post(Inst,1);
       arc = 1;
       if ((uVar2 & 1) != 0) {
         if (instance->matrix == (MATRIX *)0x0) {
@@ -200,7 +200,7 @@ int MONSENSE_See(_Instance *instance,evCollideInstanceStatsData *data)
           local_26 = *(short *)(pMVar3[1].t + 1);
           local_24 = *(short *)(pMVar3[1].t + 2);
         }
-        arc = PhysicsCheckLOS(instance,(int)&local_28,4);
+        arc = PhysicsCheckDropHeight(instance,(int)&local_28,4);
       }
     }
   }
@@ -237,7 +237,7 @@ int MONSENSE_Hear(_Instance *instance,evCollideInstanceStatsData *data)
   int iVar3;
   
   iVar3 = *(int *)(*(int *)((int)instance->extraData + 0x164) + 4);
-  uVar1 = INSTANCE_Query(data->instance,10);
+  uVar1 = INSTANCE_Post(data->instance,10);
   if ((((uVar1 & 0x10b0143) == 0) || (iVar2 = 0, (uVar1 & 0x200000) != 0)) &&
      (iVar2 = 0, data->distance < (u_int)(int)*(short *)(iVar3 + 8))) {
     iVar2 = MATH3D_ConeDetect(&data->relativePosition,(int)*(short *)(iVar3 + 6),
@@ -336,7 +336,7 @@ int MONSENSE_DetectPlayer(_Instance *instance)
 	/* end block 2 */
 	// End Line: 366
 
-_MonsterIR * MONSENSE_FirstSense(_Instance *instance,_Instance *sensed)
+_MonsterIR * MONSENSE_SenseInstance(_Instance *instance,_Instance *sensed)
 
 {
   ushort uVar1;
@@ -349,18 +349,18 @@ _MonsterIR * MONSENSE_FirstSense(_Instance *instance,_Instance *sensed)
   mv = (_MonsterVars *)instance->extraData;
   p_Var2 = MONSENSE_GetMonsterIR(mv);
   if (p_Var2 != (_MonsterIR *)0x0) {
-    uVar3 = INSTANCE_Query(sensed,1);
+    uVar3 = INSTANCE_Post(sensed,1);
     p_Var5 = mv->subAttr->allegiances;
     p_Var2->mirFlags = 0x100;
     p_Var2->instance = sensed;
     p_Var2->handle = sensed->instanceID;
-    uVar4 = MON_GetTime(instance);
+    uVar4 = MON_GetAnim(instance);
     p_Var2->forgetTimer = uVar4 + (int)mv->subAttr->forgetTime * 1000;
     p_Var2->next = mv->monsterIRList;
     mv->monsterIRList = p_Var2;
     p_Var2->mirConditions = 0;
     if (((uVar3 & p_Var5->enemies) != 0) &&
-       (uVar4 = INSTANCE_Query(sensed,0), (uVar4 & 0x44000000) == 0)) {
+       (uVar4 = INSTANCE_Post(sensed,0), (uVar4 & 0x44000000) == 0)) {
       p_Var2->mirFlags = p_Var2->mirFlags | 1;
     }
     if ((uVar3 & p_Var5->allies) != 0) {
@@ -447,12 +447,12 @@ void MONSENSE_SetupMIR(_Instance *instance,evCollideInstanceStatsData *data,int 
   p_Var5 = MONSENSE_FindIR(mv,data->instance);
   if (p_Var5 == (_MonsterIR *)0x0) {
     if (flags != 0) {
-      p_Var5 = MONSENSE_FirstSense(instance,data->instance);
+      p_Var5 = MONSENSE_SenseInstance(instance,data->instance);
     }
   }
   else {
     if (flags != 0) {
-      uVar7 = MON_GetTime(instance);
+      uVar7 = MON_GetAnim(instance);
       p_Var5->forgetTimer = uVar7 + (int)mv->subAttr->forgetTime * 1000;
     }
   }
@@ -482,7 +482,7 @@ void MONSENSE_SetupMIR(_Instance *instance,evCollideInstanceStatsData *data,int 
     uVar4 = p_Var5->mirConditions | 2;
   }
   p_Var5->mirConditions = uVar4;
-  uVar7 = INSTANCE_Query(p_Var5->instance,10);
+  uVar7 = INSTANCE_Post(p_Var5->instance,10);
   if ((uVar7 & 0x208000) == 0x208000) {
     uVar7 = uVar7 & 0xffdfffff;
   }
@@ -525,14 +525,14 @@ LAB_80085e0c:
   if ((uVar4 & 0x800) == 0) {
     if (uVar7 == 1) {
       p_Var5->mirFlags = uVar4 | 0x800;
-      uVar7 = MON_GetTime(instance);
+      uVar7 = MON_GetAnim(instance);
       *(undefined **)&p_Var5->idleTime = &DAT_00001356 + uVar7;
     }
   }
   else {
     if (uVar7 == 1) {
       if (((p_Var5->mirConditions & 0x10) == 0) &&
-         (uVar7 = MON_GetTime(instance), p_Var5->idleTime < uVar7)) {
+         (uVar7 = MON_GetAnim(instance), p_Var5->idleTime < uVar7)) {
         p_Var5->mirConditions = p_Var5->mirConditions | 0x10;
       }
     }
@@ -553,7 +553,7 @@ LAB_80085e0c:
   }
   else {
     if (((int)p_Var5->distance <= (int)mv->subAttr->combatAttributes->allyRange + 300) &&
-       (uVar7 = INSTANCE_Query(p_Var5->instance,0), (uVar7 & 0x44000000) == 0)) {
+       (uVar7 = INSTANCE_Post(p_Var5->instance,0), (uVar7 & 0x44000000) == 0)) {
       return;
     }
     uVar4 = p_Var5->mirFlags & 0xfdff;
@@ -600,7 +600,7 @@ LAB_80085e0c:
 	/* end block 2 */
 	// End Line: 717
 
-void MONSENSE_SenseInstance(_Instance *instance,evCollideInstanceStatsData *data)
+void MONSENSE_FirstSense(_Instance *instance,evCollideInstanceStatsData *data)
 
 {
   u_long uVar1;
@@ -611,7 +611,7 @@ void MONSENSE_SenseInstance(_Instance *instance,evCollideInstanceStatsData *data
   
   flags = 0;
   puVar4 = (u_int *)instance->extraData;
-  uVar1 = INSTANCE_Query(data->instance,1);
+  uVar1 = INSTANCE_Post(data->instance,1);
   if ((*puVar4 & 0x200) == 0) {
     if ((uVar1 & 0x20) == 0) {
       if (*(char *)((int)puVar4 + 0x15e) != '\0') {
@@ -619,7 +619,7 @@ void MONSENSE_SenseInstance(_Instance *instance,evCollideInstanceStatsData *data
         if (iVar2 != 0) {
           flags = 0x80;
         }
-        iVar2 = MONSENSE_See(instance,data);
+        iVar2 = MONSENSE_SetEnemy(instance,data);
         if (iVar2 != 0) {
           flags = flags | 0x20;
         }
@@ -641,13 +641,13 @@ void MONSENSE_SenseInstance(_Instance *instance,evCollideInstanceStatsData *data
           (data->zDelta < (int)*(short *)((int)pvVar3 + 0x22))) &&
          ((int)*(short *)((int)pvVar3 + 0x20) < data->zDelta)) {
         if ((*(ushort *)((int)pvVar3 + 8) & 0x40) != 0) {
-          INSTANCE_Post(instance,0x100000c,0x20);
+          INSTANCE_Query(instance,0x100000c,0x20);
         }
         if ((*(ushort *)((int)pvVar3 + 8) & 8) != 0) {
-          INSTANCE_Post(instance,0x100000c,0x40);
+          INSTANCE_Query(instance,0x100000c,0x40);
         }
         if ((*(ushort *)((int)pvVar3 + 8) & 0x10) != 0) {
-          INSTANCE_Post(instance,0x100000c,0x10);
+          INSTANCE_Query(instance,0x100000c,0x10);
         }
       }
     }
@@ -691,38 +691,38 @@ void MONSENSE_StartMonsterIRList(_Instance *instance)
 
 {
   bool bVar1;
-  undefined4 *puVar2;
-  undefined4 *puVar3;
+  u_char *puVar2;
+  u_char *puVar3;
   u_long uVar4;
   void *pvVar5;
-  undefined4 *puVar6;
+  u_char *puVar6;
   
   pvVar5 = instance->extraData;
   bVar1 = false;
   if (*(char *)((int)pvVar5 + 0x15e) != '\0') {
-    puVar2 = (undefined4 *)0;
-    puVar6 = *(undefined4 **)((int)pvVar5 + 0x90);
-    while (puVar3 = puVar6, puVar3 != (undefined4 *)0x0) {
-      puVar6 = (undefined4 *)*puVar3;
+    puVar2 = (u_char *)0;
+    puVar6 = *(u_char **)((int)pvVar5 + 0x90);
+    while (puVar3 = puVar6, puVar3 != (u_char *)0x0) {
+      puVar6 = (u_char *)*puVar3;
       if ((puVar3[2] == *(int *)(puVar3[1] + 0x10)) &&
          (((*(ushort *)((int)puVar3 + 0x16) & 0xe0) != 0 ||
-          (uVar4 = MON_GetTime(instance), uVar4 <= (u_int)puVar3[7])))) {
-        *(undefined4 **)puVar3 = puVar2;
+          (uVar4 = MON_GetAnim(instance), uVar4 <= (u_int)puVar3[7])))) {
+        *(u_char **)puVar3 = puVar2;
         *(ushort *)((int)puVar3 + 0x16) = *(ushort *)((int)puVar3 + 0x16) & 0xff1f;
         puVar2 = puVar3;
-        if (*(undefined4 **)((int)pvVar5 + 0xc4) == puVar3) {
+        if (*(u_char **)((int)pvVar5 + 0xc4) == puVar3) {
           bVar1 = true;
         }
       }
       else {
-        *puVar3 = *(undefined4 *)((int)pvVar5 + 0x168);
-        *(undefined4 **)((int)pvVar5 + 0x168) = puVar3;
+        *puVar3 = *(u_char *)((int)pvVar5 + 0x168);
+        *(u_char **)((int)pvVar5 + 0x168) = puVar3;
       }
     }
     if (!bVar1) {
-      *(undefined4 *)((int)pvVar5 + 0xc4) = 0;
+      *(u_char *)((int)pvVar5 + 0xc4) = 0;
     }
-    *(undefined4 **)((int)pvVar5 + 0x90) = puVar2;
+    *(u_char **)((int)pvVar5 + 0x90) = puVar2;
   }
   return;
 }
@@ -847,7 +847,7 @@ void MONSENSE_InitIRList(_MonsterVars *mv,_MonsterIR *list,int num)
 	/* end block 2 */
 	// End Line: 1031
 
-_MonsterIR * MONSENSE_SetEnemy(_Instance *instance,_Instance *newenemy)
+_MonsterIR * MONSENSE_See(_Instance *instance,_Instance *newenemy)
 
 {
   short sVar1;
@@ -860,13 +860,13 @@ _MonsterIR * MONSENSE_SetEnemy(_Instance *instance,_Instance *newenemy)
   mv = (_MonsterVars *)instance->extraData;
   p_Var2 = MONSENSE_FindIR(mv,newenemy);
   if (p_Var2 == (_MonsterIR *)0x0) {
-    p_Var2 = MONSENSE_FirstSense(instance,newenemy);
+    p_Var2 = MONSENSE_SenseInstance(instance,newenemy);
     if (p_Var2 == (_MonsterIR *)0x0) {
       p_Var2 = mv->monsterIRList;
       mv->monsterIRList = p_Var2->next;
       p_Var2->next = mv->freeIRs;
       mv->freeIRs = p_Var2;
-      p_Var2 = MONSENSE_FirstSense(instance,newenemy);
+      p_Var2 = MONSENSE_SenseInstance(instance,newenemy);
       if (p_Var2 == (_MonsterIR *)0x0) goto LAB_80086380;
     }
     uVar5 = (u_int)(ushort)(instance->rotation).z & 0xfff;
@@ -944,7 +944,7 @@ void MONSENSE_ProcessIRList(_Instance *instance)
   while (Data != (int *)0x0) {
     if (((_Instance *)Data[1])->instanceID == Data[2]) {
       if ((*(ushort *)((int)Data + 0x16) & 1) != 0) {
-        uVar1 = INSTANCE_Query((_Instance *)Data[1],1);
+        uVar1 = INSTANCE_Post((_Instance *)Data[1],1);
         if ((uVar1 & 1) != 0) {
           piVar7 = Data;
         }
@@ -958,7 +958,7 @@ void MONSENSE_ProcessIRList(_Instance *instance)
           else {
             Message = 0x100000e;
           }
-          INSTANCE_Post(instance,Message,(int)Data);
+          INSTANCE_Query(instance,Message,(int)Data);
         }
       }
       if (((*(ushort *)((int)Data + 0x16) & 0x10) != 0) &&
@@ -1036,7 +1036,7 @@ void MONSENSE_SetupSenses(_Instance *instance)
      (instance->currentStreamUnitID != instance->birthStreamUnitID)) {
     instance->flags = instance->flags | 0x20;
     instance->flags2 = instance->flags2 | 0x20000;
-    SAVE_DeleteInstance(instance);
+    SAVE_Instance(instance);
   }
   return;
 }
@@ -1160,8 +1160,8 @@ LAB_800868d4:
       *(undefined2 *)((int)pvVar3 + uVar4 * 2 + 0xe8) = 0;
       goto LAB_80086960;
     }
-    lVar2 = MATH3D_LengthXY((int)local_60.vx - (int)(instance->position).x,
-                            (int)local_60.vy - (int)(instance->position).y);
+    lVar2 = MATH3D_LengthXYZ((int)local_60.vx - (int)(instance->position).x,
+                             (int)local_60.vy - (int)(instance->position).y);
     uVar1 = (undefined2)lVar2;
   }
   *(undefined2 *)((int)pvVar3 + uVar4 * 2 + 0xe8) = uVar1;
@@ -1169,7 +1169,7 @@ LAB_80086960:
   uVar4 = *(int *)((int)pvVar3 + 0xe4) + 1;
   *(u_int *)((int)pvVar3 + 0xe4) = uVar4;
   if (7 < uVar4) {
-    *(undefined4 *)((int)pvVar3 + 0xe4) = 0;
+    *(u_char *)((int)pvVar3 + 0xe4) = 0;
   }
   return;
 }
@@ -1198,7 +1198,7 @@ LAB_80086960:
 
 /* WARNING: Removing unreachable block (ram,0x800869c4) */
 
-short MONSENSE_GetClosestFreeDirection(_Instance *instance,short angle,long range)
+short MONSENSE_GetDistanceInDirection(_Instance *instance,short angle,long range)
 
 {
   short sVar1;
@@ -1268,7 +1268,7 @@ short MONSENSE_GetClosestFreeDirection(_Instance *instance,short angle,long rang
 
 /* WARNING: Removing unreachable block (ram,0x80086acc) */
 
-int MONSENSE_GetDistanceInDirection(_Instance *instance,short angle)
+int MONSENSE_GetClosestFreeDirection(_Instance *instance,short angle)
 
 {
   return (int)*(short *)((int)instance->extraData +
@@ -1415,8 +1415,8 @@ void MONSENSE_AdjustRadarFromObjects(_Instance *instance)
         iVar3 = -iVar3;
       }
       if ((iVar3 < 400) &&
-         (x = MATH3D_LengthXY((int)(p_Var7->position).x - (int)(instance->position).x,
-                              (int)(p_Var7->position).y - (int)(instance->position).y),
+         (x = MATH3D_LengthXYZ((int)(p_Var7->position).x - (int)(instance->position).x,
+                               (int)(p_Var7->position).y - (int)(instance->position).y),
          x < (int)((u_int)*(ushort *)((int)pvVar6 + 0x1e) + 0x500))) {
         sVar1 = MATH3D_AngleFromPosToPos(&instance->position,&p_Var7->position);
         sVar2 = MATH3D_FastAtan2((u_int)*(ushort *)((int)pvVar6 + 0x1e),x);
