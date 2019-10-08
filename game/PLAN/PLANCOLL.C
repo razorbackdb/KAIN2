@@ -1,313 +1,151 @@
 #include "THISDUST.H"
 #include "PLANCOLL.H"
 
-
-// decompiled code
-// original method signature: 
-// int /*$ra*/ PLANCOLL_DoesLOSExistFinal(struct _Position *startPos /*$a0*/, struct _Position *endPos /*$a1*/, int collideType /*$a2*/, int passThroughHit /*$s0*/, int zoffset /*stack 16*/)
- // line 75, offset 0x800981f0
-	/* begin block 1 */
-		// Start line: 76
-		// Start offset: 0x800981F0
-		// Variables:
-	// 		struct _PCollideInfo pcollideinfo; // stack offset -72
-	// 		struct SVECTOR startPt; // stack offset -24
-	// 		struct SVECTOR endPt; // stack offset -16
-
-		/* begin block 1.1 */
-			// Start line: 76
-			// Start offset: 0x800981F0
-			// Variables:
-		// 		short _x1; // $v0
-		// 		short _y1; // $a2
-		// 		short _z1; // $a0
-		// 		struct _Position *_v0; // $v1
-		/* end block 1.1 */
-		// End offset: 0x800981F0
-		// End Line: 76
-
-		/* begin block 1.2 */
-			// Start line: 76
-			// Start offset: 0x800981F0
-			// Variables:
-		// 		short _x1; // $v0
-		// 		short _y1; // $a0
-		// 		short _z1; // $a1
-		// 		struct _Position *_v0; // $v0
-		/* end block 1.2 */
-		// End offset: 0x800981F0
-		// End Line: 76
-	/* end block 1 */
-	// End offset: 0x800982E4
-	// End Line: 98
-
-	/* begin block 2 */
-		// Start line: 150
-	/* end block 2 */
-	// End Line: 151
-
-int PLANCOLL_DoesLOSExistFinal
-              (_Position *startPos,_Position *endPos,int collideType,int passThroughHit,int zoffset)
+int PLANCOLL_DoesLOSExistFinal(_Position *startPos, _Position *endPos, int collideType, int passThroughHit, int zoffset)
 
 {
-  u_int uVar1;
-  _PCollideInfo local_48;
-  SVECTOR local_18;
-  SVECTOR local_10;
-  
-  local_18.vx = startPos->x;
-  local_18.vy = startPos->y;
-  local_48.oldPoint = &local_18;
-  local_10.vx = endPos->x;
-  local_10.vy = endPos->y;
-  local_48.newPoint = &local_10;
-  local_48.collideType = 0x127;
-  local_48.inst = (_Instance *)0x0;
-  local_48.instance = (_Instance *)0x0;
-  local_18.vz = startPos->z + (short)zoffset;
-  local_10.vz = endPos->z + (short)zoffset;
-  COLLIDE_PointAndTerrain(&local_48,(Level *)0x0);
-  if ((((passThroughHit == 0) || (local_48.type != 3)) ||
-      (*(ushort *)((int)local_48.prim + 10) == 0xffff)) ||
-     (uVar1 = 1,
-     (*(ushort *)
-       ((int)&((local_48.inst)->node).prev[6].next[1].prev +
-       (u_int)*(ushort *)((int)local_48.prim + 10) + 2) & 0x1000) == 0)) {
-    uVar1 = (u_int)(local_48.type == 0);
-  }
-  return uVar1;
+	u_int uVar1;
+	_PCollideInfo local_48;
+	SVECTOR local_18;
+	SVECTOR local_10;
+
+	local_18.vx = startPos->x;
+	local_18.vy = startPos->y;
+	local_48.oldPoint = &local_18;
+	local_10.vx = endPos->x;
+	local_10.vy = endPos->y;
+	local_48.newPoint = &local_10;
+	local_48.collideType = 0x127;
+	local_48.inst = (_Instance *)0x0;
+	local_48.instance = (_Instance *)0x0;
+	local_18.vz = startPos->z + (short)zoffset;
+	local_10.vz = endPos->z + (short)zoffset;
+	COLLIDE_PointAndTerrain(&local_48, (Level *)0x0);
+	if ((((passThroughHit == 0) || (local_48.type != 3)) ||
+		 (*(u_short *)((int)local_48.prim + 10) == 0xffff)) ||
+		(uVar1 = 1,
+		 (*(u_short *)((int)&((local_48.inst)->node).prev[6].next[1].prev +
+					   (u_int) * (u_short *)((int)local_48.prim + 10) + 2) &
+		  0x1000) == 0))
+	{
+		uVar1 = (u_int)(local_48.type == 0);
+	}
+	return uVar1;
 }
-
-
-
-// decompiled code
-// original method signature: 
-// int /*$ra*/ PLANCOLL_CheckUnderwaterPoint(struct _Position *position /*$s5*/)
- // line 108, offset 0x800982f4
-	/* begin block 1 */
-		// Start line: 109
-		// Start offset: 0x800982F4
-		// Variables:
-	// 		struct _StreamUnit *streamUnit; // $s4
-	// 		struct Level *level; // $s2
-	// 		struct BSPTree *tree; // $a3
-	// 		struct _Sphere_noSq *sphere; // $s0
-	// 		struct _Position *offset; // $a3
-	// 		int d; // $s3
-	// 		struct _Position center; // stack offset -40
-
-		/* begin block 1.1 */
-			// Start line: 124
-			// Start offset: 0x80098358
-			// Variables:
-		// 		short _x1; // $v1
-		// 		short _y1; // $v0
-		// 		short _z1; // $a0
-		// 		struct _Position *_v0; // $s6
-		/* end block 1.1 */
-		// End offset: 0x80098358
-		// End Line: 124
-	/* end block 1 */
-	// End offset: 0x80098440
-	// End Line: 146
-
-	/* begin block 2 */
-		// Start line: 241
-	/* end block 2 */
-	// End Line: 242
-
-/* WARNING: Type propagation algorithm not settling */
 
 int PLANCOLL_CheckUnderwaterPoint(_Position *position)
 
 {
-  long lVar1;
-  BSPTree *pBVar2;
-  _BSPNode *p_Var3;
-  Level **ppLVar4;
-  Level *pLVar5;
-  int iVar6;
-  STracker *pSVar7;
-  
-  pSVar7 = &StreamTracker;
-  iVar6 = 0x10;
-  ppLVar4 = &StreamTracker.StreamList[0].level;
-  do {
-    if ((*(short *)(ppLVar4 + -1) == 2) &&
-       (lVar1 = MEMPACK_ReportMemory((char *)*ppLVar4), lVar1 != 0)) {
-      pLVar5 = *ppLVar4;
-      pBVar2 = pLVar5->terrain->BSPTreeArray;
-      p_Var3 = pBVar2->bspRoot;
-      lVar1 = MATH3D_LengthXY((int)position->x -
-                              (int)(short)((p_Var3->sphere).position.x + (pBVar2->globalOffset).x),
-                              (int)position->y -
-                              (int)(short)((p_Var3->sphere).position.y + (pBVar2->globalOffset).y),
-                              (int)position->z -
-                              (int)(short)((p_Var3->sphere).position.z + (pBVar2->globalOffset).z));
-      if ((lVar1 < (int)(u_int)(p_Var3->sphere).radius) && ((int)position->z < pLVar5->waterZLevel))
-      {
-        return pSVar7->StreamList[0].StreamUnitID;
-      }
-    }
-    iVar6 = iVar6 + -1;
-    ppLVar4 = ppLVar4 + 0x10;
-    pSVar7 = (STracker *)(pSVar7->StreamList + 1);
-    if (iVar6 == 0) {
-      return -1;
-    }
-  } while( true );
+	long lVar1;
+	BSPTree *pBVar2;
+	_BSPNode *p_Var3;
+	Level **ppLVar4;
+	Level *pLVar5;
+	int iVar6;
+	STracker *pSVar7;
+
+	pSVar7 = &StreamTracker;
+	iVar6 = 0x10;
+	ppLVar4 = &StreamTracker.StreamList[0].level;
+	do
+	{
+		if ((*(short *)(ppLVar4 + -1) == 2) &&
+			(lVar1 = MEMPACK_ReportMemory((char *)*ppLVar4), lVar1 != 0))
+		{
+			pLVar5 = *ppLVar4;
+			pBVar2 = pLVar5->terrain->BSPTreeArray;
+			p_Var3 = pBVar2->bspRoot;
+			lVar1 = MATH3D_LengthXY((int)position->x -
+										(int)(short)((p_Var3->sphere).position.x + (pBVar2->globalOffset).x),
+									(int)position->y -
+										(int)(short)((p_Var3->sphere).position.y + (pBVar2->globalOffset).y),
+									(int)position->z -
+										(int)(short)((p_Var3->sphere).position.z + (pBVar2->globalOffset).z));
+			if ((lVar1 < (int)(u_int)(p_Var3->sphere).radius) && ((int)position->z < pLVar5->waterZLevel))
+			{
+				return pSVar7->StreamList[0].StreamUnitID;
+			}
+		}
+		iVar6 = iVar6 + -1;
+		ppLVar4 = ppLVar4 + 0x10;
+		pSVar7 = (STracker *)(pSVar7->StreamList + 1);
+		if (iVar6 == 0)
+		{
+			return -1;
+		}
+	} while (true);
 }
 
-
-
-// autogenerated function stub: 
-// int /*$ra*/ PLANCOLL_FindTerrainHitFinal(struct _PlanCollideInfo *pci /*$s5*/, int *placement /*$t0*/, int distBefore /*$s7*/, int distAfter /*$fp*/, int start /*stack 16*/, int end /*stack 20*/)
 int PLANCOLL_FindTerrainHitFinal(struct _PlanCollideInfo *pci, int *placement, int distBefore, int distAfter, int start, int end)
-{ // line 162, offset 0x80098468
-	/* begin block 1 */
-		// Start line: 163
-		// Start offset: 0x80098468
-		// Variables:
-			struct _PCollideInfo pcollideinfo; // stack offset -120
-			struct _fth *current; // $s1
-			struct _fth *last; // $s6
-			struct SVECTOR startPt; // stack offset -72
-			struct SVECTOR endPt; // stack offset -64
-			struct _SVector normal; // stack offset -56
+{
 
-		/* begin block 1.1 */
-			// Start line: 180
-			// Start offset: 0x80098504
-			// Variables:
-				short _x1; // $a0
-				short _y1; // $v0
-				short _z1; // $v1
-				struct _Position *_v0; // $s4
-				struct _Position *_v1; // $s2
-		/* end block 1.1 */
-		// End offset: 0x80098504
-		// End Line: 180
+	struct _PCollideInfo pcollideinfo;
+	struct _fth *current;
+	struct _fth *last;
+	struct SVECTOR startPt;
+	struct SVECTOR endPt;
+	struct _SVector normal;
 
-		/* begin block 1.2 */
-			// Start line: 180
-			// Start offset: 0x80098504
-			// Variables:
-				short _x1; // $a1
-				short _y1; // $v0
-				short _z1; // $v1
-				struct _Position *_v0; // $s3
-		/* end block 1.2 */
-		// End offset: 0x80098504
-		// End Line: 180
+	short _x1;
+	short _y1;
+	short _z1;
+	struct _Position *_v0;
+	struct _Position *_v1;
 
-		/* begin block 1.3 */
-			// Start line: 201
-			// Start offset: 0x800986C0
-			// Variables:
-				short _y1; // $v1
-				short _z1; // $a0
-		/* end block 1.3 */
-		// End offset: 0x800986C0
-		// End Line: 201
-	/* end block 1 */
-	// End offset: 0x80098700
-	// End Line: 208
+	short _x1;
+	short _y1;
+	short _z1;
+	struct _Position *_v0;
 
-	/* begin block 2 */
-		// Start line: 426
-	/* end block 2 */
-	// End Line: 427
+	short _y1;
+	short _z1;
 
 	return 0;
 }
 
-
-// decompiled code
-// original method signature: 
-// int /*$ra*/ PLANCOLL_DoesStraightLinePathExist(struct _Position *startPos /*$s2*/, struct _Position *endPos /*$s3*/, int collideType /*$s4*/)
- // line 214, offset 0x80098730
-	/* begin block 1 */
-		// Start line: 215
-		// Start offset: 0x80098730
-	/* end block 1 */
-	// End offset: 0x80098798
-	// End Line: 221
-
-	/* begin block 2 */
-		// Start line: 581
-	/* end block 2 */
-	// End Line: 582
-
-int PLANCOLL_DoesWaterPathUpExist(_Position *startPos,_Position *endPos,int collideType)
+int PLANCOLL_DoesWaterPathUpExist(_Position *startPos, _Position *endPos, int collideType)
 
 {
-  bool bVar1;
-  int iVar2;
-  u_int uVar3;
-  
-  uVar3 = 0;
-  bVar1 = gameTrackerX.gameFlags < 0;
-  iVar2 = PLANCOLL_DoesLOSExistFinal(startPos,endPos,collideType,(u_int)bVar1,0x100);
-  if (iVar2 != 0) {
-    iVar2 = PLANCOLL_DoesLOSExistFinal(startPos,endPos,collideType,(u_int)bVar1,0x3c0);
-    uVar3 = (u_int)(iVar2 != 0);
-  }
-  return uVar3;
+	bool bVar1;
+	int iVar2;
+	u_int uVar3;
+
+	uVar3 = 0;
+	bVar1 = gameTrackerX.gameFlags < 0;
+	iVar2 = PLANCOLL_DoesLOSExistFinal(startPos, endPos, collideType, (u_int)bVar1, 0x100);
+	if (iVar2 != 0)
+	{
+		iVar2 = PLANCOLL_DoesLOSExistFinal(startPos, endPos, collideType, (u_int)bVar1, 0x3c0);
+		uVar3 = (u_int)(iVar2 != 0);
+	}
+	return uVar3;
 }
 
-
-
-// decompiled code
-// original method signature: 
-// int /*$ra*/ PLANCOLL_DoesWaterPathUpExist(struct _Position *startPos /*$s2*/, struct _Position *endPos /*$s1*/, int collideType /*$s4*/, struct _Position *peakPos /*$s3*/, int passThroughHit /*stack 16*/)
- // line 227, offset 0x800987bc
-	/* begin block 1 */
-		// Start line: 228
-		// Start offset: 0x800987BC
-		// Variables:
-	// 		long time_ftop; // $s0
-	// 		long time_ptow; // $a0
-	// 		long time_tot; // $a1
-	// 		struct _Position diff; // stack offset -32
-	/* end block 1 */
-	// End offset: 0x80098838
-	// End Line: 246
-
-	/* begin block 2 */
-		// Start line: 619
-	/* end block 2 */
-	// End Line: 620
-
-int PLANCOLL_DoesStraightLinePathExist
-              (_Position *startPos,_Position *endPos,int collideType,_Position *peakPos,
-              int passThroughHit)
+int PLANCOLL_DoesStraightLinePathExist(_Position *startPos, _Position *endPos, int collideType, _Position *peakPos,
+									   int passThroughHit)
 
 {
-  short sVar1;
-  short sVar2;
-  long lVar3;
-  long lVar4;
-  int iVar5;
-  
-  lVar3 = MATH3D_FastSqrt(0x50000);
-  iVar5 = ((u_int)(ushort)startPos->z - (u_int)(ushort)endPos->z) + 0x280;
-  peakPos->z = (short)iVar5;
-  lVar4 = MATH3D_FastSqrt((iVar5 * 0x20000) / 3);
-  if (lVar4 < 0) {
-    lVar4 = lVar4 + 0xf;
-  }
-  iVar5 = lVar4 >> 4;
-  sVar1 = endPos->y;
-  sVar2 = startPos->y;
+	short sVar1;
+	short sVar2;
+	long lVar3;
+	long lVar4;
+	int iVar5;
+
+	lVar3 = MATH3D_FastSqrt(0x50000);
+	iVar5 = ((u_int)(u_short)startPos->z - (u_int)(u_short)endPos->z) + 0x280;
+	peakPos->z = (short)iVar5;
+ 3);
+ if (lVar4 < 0)
+ {
+	 lVar4 = lVar4 + 0xf;
+ }
+ iVar5 = lVar4 >> 4;
+ sVar1 = endPos->y;
+ sVar2 = startPos->y;
   peakPos->x = endPos->x +
-               (short)((((int)(((u_int)(ushort)startPos->x - (u_int)(ushort)endPos->x) * 0x10000) >>
-                        0x10) * iVar5) / (lVar3 + iVar5));
-  peakPos->y = endPos->y + (short)(((short)(sVar2 - sVar1) * iVar5) / (lVar3 + iVar5));
+               (short)((((int)(((u_int)(u_short)startPos->x - (u_int)(u_short)endPos->x) * 0x10000) >>
+ (lVar3 + iVar5));
+ (lVar3 + iVar5));
   iVar5 = PLANCOLL_DoesLOSExistFinal(startPos,peakPos,collideType,passThroughHit,0);
   return iVar5;
 }
-
-
-
-
-

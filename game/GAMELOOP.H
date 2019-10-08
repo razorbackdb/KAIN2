@@ -1,94 +1,348 @@
 #ifndef GAMELOOP_H
 #define GAMELOOP_H
 
+struct _Instance
+{
+	struct NodeType node;
+	struct _Instance *next;
+	struct _Instance *prev;
+	long instanceID;
+	long flags;
+	long flags2;
+	struct Object *object;
+	struct Intro *intro;
+	void *data;
+	void *introData;
+	struct _Instance *parent;
+	long introNum;
+	long birthStreamUnitID;
+	long currentStreamUnitID;
+	long introUniqueID;
+	struct MATRIX *matrix;
+	struct MATRIX *oldMatrix;
+	struct SoundInstance soundInstanceTbl[4];
+	unsigned long maxCheckDistance;
+	unsigned long checkMask;
+	struct _Position position;
+	unsigned char lightGroup;
+	struct _Position oldPos;
+	unsigned char spectralLightGroup;
+	short currentTextureAnimFrame;
+	struct _Position initialPos;
+	struct _Rotation rotation;
+	struct _Rotation oldRotation;
+	struct _SVector scale;
+	long attachedID;
+	long attachedSegment;
+	struct MATRIX relativeMatrix;
+	struct _TFace *tface;
+	struct _TFace *oldTFace;
+	void *tfaceLevel;
+	void *collideInfo;
+	long bspTree;
+	short cachedTFace;
+	short cachedBSPTree;
+	struct _Normal oldWNormal;
+	struct _Normal wNormal;
+	struct _SVector offset;
+	void *dsignal;
+	void *shadow0;
+	void *shadow1;
+	void *extraLight;
+	struct _Position extraLightDir;
+	short extraLightScale;
+	struct _HModel *hModelList;
+	short fadeValue;
+	short lightMatrix;
+	void (*processFunc)();
+	void (*collideFunc)();
+	void (*additionalCollideFunc)();
+	void *additionalDrawFunc;
+	unsigned long (*queryFunc)();
+	void (*messageFunc)();
+	struct _Position shadowPosition;
+	short currentModel;
+	struct _TFace *waterFace;
+	struct _TFace *oldWaterFace;
+	struct _Terrain *waterFaceTerrain;
+	struct _PlaneConstants halvePlane;
+	struct _SVector splitPoint;
+	struct _Instance *LinkParent;
+	struct _Instance *LinkChild;
+	struct _Instance *LinkSibling;
+	long ParentLinkNode;
+	void *InstanceState;
+	char introName[16];
+	void *extraData;
+	short constrictAngle;
+	short petrifyValue;
+	long xVel;
+	long yVel;
+	long zVel;
+	long xAccl;
+	long yAccl;
+	long zAccl;
+	long maxXVel;
+	long maxYVel;
+	long maxZVel;
+	long currentMainState;
+	long currentSubState;
+	long work0;
+	long work1;
+	long work2;
+	long work3;
+	long work4;
+	long work5;
+	long work6;
+	long work7;
+	long work8;
+	long work9;
+	struct _G2Anim_Type anim;
+	enum _G2Bool_Enum (*rebuildCallback)();
+	short splineFlags;
+	short targetFrame;
+	short clipBeg;
+	short clipEnd;
+	struct EventAliasCommandStruct aliasCommand;
+	long light_color;
+	struct CVECTOR *perVertexColor;
+};
 
-extern void GAMELOOP_AllocStaticMemory(); // 0x8002D6F8
+struct LightInstance
+{
+	struct _Instance *lightInstance;
+	long r;
+	long g;
+	long b;
+	short radius;
+	unsigned char segment;
+	unsigned char flags;
+};
 
-extern void GAMELOOP_InitGameTracker(); // 0x8002D7E8
+struct _GameTrackerASMData_Type
+{
+	long drawBackFaces;
+	long dispPage;
+	short MorphTime;
+	short MorphType;
+	struct LightInstance lightInstances[1];
+};
 
-extern void GAMELOOP_SystemInit(struct GameTracker *gameTracker); // 0x8002D8E8
+struct _GameData_Type
+{
+	struct _GameTrackerASMData_Type asmData;
+};
 
-extern void GAMELOOP_ResetGameStates(); // 0x8002D920
+struct GameTracker
+{
+	struct _GameData_Type gameData;
+	struct menu_t *menu;
+	struct memcard_t *memcard;
+	struct Level *level;
+	struct _Instance *playerInstance;
+	long drawPage;
+	struct _InstanceList *instanceList;
+	struct _InstancePool *instancePool;
+	struct _VertexPool *vertexPool;
+	struct _PrimPool *primPool;
+	struct _ObjectTracker *GlobalObjects;
+	long controlCommand[2][5];
+	long controlData[2][5];
+	long overrideData[2][5];
+	long debugFlags;
+	long debugFlags2;
+	struct CVECTOR wipeColor;
+	short wipeTime;
+	short maxWipeTime;
+	short wipeType;
+	short numGSignals;
+	void(*gSignal[16]);
+	struct LightInfo *lightInfo;
+	void *reqDisp;
+	long *drawTimerReturn;
+	long usecsStartDraw;
+	void *disp;
+	unsigned long displayFrameCount;
+	unsigned long frameCount;
+	unsigned long fps30Count;
+	unsigned long vblFrames;
+	unsigned long vblCount;
+	long numMatrices;
+	long gameFlags;
+	long streamFlags;
+	void *drawNonAnimatedSegmentFunc;
+	void *drawAnimatedModelFunc;
+	void *drawDisplayPolytopeListFunc;
+	void *drawBgFunc;
+	struct Level *mainDrawUnit;
+	char baseAreaName[16];
+	short levelDone;
+	short levelChange;
+	short hideBG;
+	short gameMode;
+	long currentHotSpot;
+	long StreamUnitID;
+	short SwitchToNewStreamUnit;
+	short SwitchToNewWarpIndex;
+	char S_baseAreaName[16];
+	short toSignal;
+	short fromSignal;
+	char LastSignal;
+	short StreamNormalA;
+	short StreamNormalB;
+	short StreamNormalC;
+	long StreamNormalD;
+	long moveRazielToStreamID;
+	struct _ColorType animObjLine;
+	struct _ColorType animObjShade;
+	long introFXTime;
+	long maxIntroFXTime;
+	struct gSoundData sound;
+	short controllerMode;
+	unsigned char plan_collide_override;
+	unsigned char cheatMode;
+	char currentLvl;
+	char lastLvl;
+	struct Object *introFX;
+	struct Intro *introFXIntro;
+	unsigned long **drawOT;
+	unsigned long **dispOT;
+	struct P_TAG *savedOTStart;
+	struct P_TAG *savedOTEnd;
+	long introWaitTime;
+	long mirrorZPush;
+	long defVVRemoveDist;
+	long defRemoveDist;
+	struct _Position forcedStartPosition;
+	short hudCollDisplay;
+	long primMemUsed;
+	char demoMode;
+	char setDemoMode;
+	char demoIndex;
+	char demoEnabled;
+	long cheatTimerCount;
+	long playerCheatFlags;
+	long savedPlayerCameraMode;
+	long debugDrawFlags;
+	void *planningPool;
+	void *enemyPlanPool;
+	unsigned char block_collide_override;
+	unsigned char raziel_collide_override;
+	short timeOfDay;
+	long decoupleGame;
+	long multGameTime;
+	short spectral_fadeValue;
+	short material_fadeValue;
+	unsigned long drawTime;
+	unsigned long currentTime;
+	unsigned long currentMaterialTime;
+	unsigned long currentSpectralTime;
+	unsigned long currentTimeOfDayTime;
+	unsigned long lastLoopTime;
+	unsigned long timeMult;
+	unsigned long globalTimeMult;
+	unsigned long spectralTimeMult;
+	unsigned long materialTimeMult;
+	unsigned long currentTicks;
+	unsigned long totalTime;
+	unsigned long idleTime;
+	long visibleInstances;
+	int gameFramePassed;
+	unsigned long timeSinceLastGameFrame;
+	long frameRateLock;
+	short frameRate24fps;
+};
 
-extern void GAMELOOP_ClearGameTracker(); // 0x8002D940
+static struct GameTracker *gameTracker;
 
-extern void GAMELOOP_CalcGameTime(); // 0x8002D970
+extern struct GameTracker gameTrackerX;
 
-extern void GAMELOOP_SetGameTime(long timeOfDay); // 0x8002DA1C
+extern void GAMELOOP_AllocStaticMemory();
 
-extern int GAMELOOP_GetTimeOfDay(); // 0x8002DAB0
+extern void GAMELOOP_InitGameTracker();
 
-extern int GAMELOOP_GetTimeOfDayIdx(int timeOfDay); // 0x8002DAFC
+extern void GAMELOOP_SystemInit(struct GameTracker *gameTracker);
 
-extern int GAMELOOP_WaitForLoad(); // 0x8002DB40
+extern void GAMELOOP_ResetGameStates();
 
-extern struct _StreamUnit * LoadLevels(char *baseAreaName, struct GameTracker *gameTracker); // 0x8002DB78
+extern void GAMELOOP_ClearGameTracker();
 
-extern void GAMELOOP_InitStandardObjects(); // 0x8002DD74
+extern void GAMELOOP_CalcGameTime();
 
-extern void GAMELOOP_LevelLoadAndInit(char *baseAreaName, struct GameTracker *gameTracker); // 0x8002DDCC
+extern void GAMELOOP_SetGameTime(long timeOfDay);
 
-extern void GAMELOOP_StreamLevelLoadAndInit(char *baseAreaName, struct GameTracker *gameTracker, int toSignalNum, int fromSignalNum); // 0x8002E0F0
+extern int GAMELOOP_GetTimeOfDay();
 
-extern void GAMELOOP_SetScreenWipe(int time, int maxTime, int type); // 0x8002E110
+extern int GAMELOOP_GetTimeOfDayIdx(int timeOfDay);
 
-extern void GAMELOOP_HandleScreenWipes(unsigned long **drawot); // 0x8002E124
+extern int GAMELOOP_WaitForLoad();
 
-extern void UpdateFogSettings(struct _StreamUnit *currentUnit, struct Level *level); // 0x8002E590
+extern struct _StreamUnit *LoadLevels(char *baseAreaName, struct GameTracker *gameTracker);
 
-extern int CheckForNoBlend(struct _ColorType *Color); // 0x8002E6B8
+extern void GAMELOOP_InitStandardObjects();
 
-extern void BlendToColor(struct _ColorType *target, struct _ColorType *current, struct _ColorType *dest); // 0x8002E700
+extern void GAMELOOP_LevelLoadAndInit(char *baseAreaName, struct GameTracker *gameTracker);
 
-extern void MainRenderLevel(struct _StreamUnit *currentUnit, unsigned long **drawot); // 0x8002E7F4
+extern void GAMELOOP_StreamLevelLoadAndInit(char *baseAreaName, struct GameTracker *gameTracker, int toSignalNum, int fromSignalNum);
 
-extern void StreamIntroInstancesForUnit(struct _StreamUnit *currentUnit); // 0x8002ED64
+extern void GAMELOOP_SetScreenWipe(int time, int maxTime, int type);
 
-extern long StreamRenderLevel(struct _StreamUnit *currentUnit, struct Level *mainLevel, unsigned long **drawot, long portalFogColor); // 0x8002EDA4
+extern void GAMELOOP_HandleScreenWipes(unsigned long **drawot);
 
-extern void GAMELOOP_FlipScreenAndDraw(struct GameTracker *gameTracker, unsigned long **drawot); // 0x8002F130
+extern void UpdateFogSettings(struct _StreamUnit *currentUnit, struct Level *level);
 
-extern void GAMELOOP_AddClearPrim(unsigned long **drawot); // 0x8002F1E8
+extern int CheckForNoBlend(struct _ColorType *Color);
 
-extern void GAMELOOP_SwitchTheDrawBuffer(unsigned long **drawot); // 0x8002F290
+extern void BlendToColor(struct _ColorType *target, struct _ColorType *current, struct _ColorType *dest);
 
-extern void GAMELOOP_SetupRenderFunction(struct GameTracker *gameTracker); // 0x8002F314
+extern void MainRenderLevel(struct _StreamUnit *currentUnit, unsigned long **drawot);
 
-extern struct _StreamUnit * GAMELOOP_GetMainRenderUnit(); // 0x8002F330
+extern void StreamIntroInstancesForUnit(struct _StreamUnit *currentUnit);
 
-extern void GAMELOOP_DisplayFrame(struct GameTracker *gameTracker); // 0x8002F3F4
+extern long StreamRenderLevel(struct _StreamUnit *currentUnit, struct Level *mainLevel, unsigned long **drawot, long portalFogColor);
 
-extern void GAMELOOP_DrawSavedOT(unsigned long **newOT); // 0x8002FA1C
+extern void GAMELOOP_FlipScreenAndDraw(struct GameTracker *gameTracker, unsigned long **drawot);
 
-extern void ResetPrimPool(); // 0x8002FB98
+extern void GAMELOOP_AddClearPrim(unsigned long **drawot);
 
-extern void SaveOT(); // 0x8002FC44
+extern void GAMELOOP_SwitchTheDrawBuffer(unsigned long **drawot);
 
-extern void ResetDrawPage(); // 0x8002FDE4
+extern void GAMELOOP_SetupRenderFunction(struct GameTracker *gameTracker);
 
-extern void GAMELOOP_Set24FPS(); // 0x8002FE24
+extern struct _StreamUnit *GAMELOOP_GetMainRenderUnit();
 
-extern void GAMELOOP_Reset24FPS(); // 0x8002FE34
+extern void GAMELOOP_DisplayFrame(struct GameTracker *gameTracker);
 
-extern void GAMELOOP_DoTimeProcess(); // 0x8002FE40
+extern void GAMELOOP_DrawSavedOT(unsigned long **newOT);
 
-extern void GAMELOOP_Process(struct GameTracker *gameTracker); // 0x80030044
+extern void ResetPrimPool();
 
-extern void GAMELOOP_ModeStartRunning(); // 0x80030708
+extern void SaveOT();
 
-extern void GAMELOOP_ModeStartPause(); // 0x800307E0
+extern void ResetDrawPage();
 
-extern void GAMELOOP_DemoSetup(); // 0x800308B4
+extern void GAMELOOP_Set24FPS();
 
-extern void GAMELOOP_ChangeMode(); // 0x800308CC
+extern void GAMELOOP_Reset24FPS();
 
-extern void GAMELOOP_RequestLevelChange(char *name, short number, struct GameTracker *gameTracker); // 0x80030C80
+extern void GAMELOOP_DoTimeProcess();
 
-extern void PSX_GameLoop(struct GameTracker *gameTracker); // 0x80030D00
+extern void GAMELOOP_Process(struct GameTracker *gameTracker);
 
-extern struct MATRIX * GAMELOOP_GetMatrices(int numMatrices); // 0x80030D2C
+extern void GAMELOOP_ModeStartRunning();
 
-extern struct GameTracker * GAMELOOP_GetGT(); // 0x80030D60
+extern void GAMELOOP_ModeStartPause();
 
+extern void GAMELOOP_DemoSetup();
+
+extern void GAMELOOP_ChangeMode();
+
+extern void GAMELOOP_RequestLevelChange(char *name, short number, struct GameTracker *gameTracker);
+
+extern void PSX_GameLoop(struct GameTracker *gameTracker);
+
+extern struct MATRIX *GAMELOOP_GetMatrices(int numMatrices);
+
+extern struct GameTracker *GAMELOOP_GetGT();
 
 #endif

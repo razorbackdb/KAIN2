@@ -1,42 +1,19 @@
 #include "THISDUST.H"
 #include "BSP.H"
 
-
-// decompiled code
-// original method signature: 
-// void /*$ra*/ SBSP_IntroduceInstances(struct _Terrain *terrain /*$a0*/, int unitID /*$a1*/)
- // line 527, offset 0x8003e48c
-	/* begin block 1 */
-		// Start line: 528
-		// Start offset: 0x8003E48C
-		// Variables:
-	// 		int i; // $s1
-	// 		struct Intro *intro; // $s0
-	/* end block 1 */
-	// End offset: 0x8003E4D8
-	// End Line: 561
-
-	/* begin block 2 */
-		// Start line: 580
-	/* end block 2 */
-	// End Line: 581
-
-	/* begin block 3 */
-		// Start line: 1049
-	/* end block 3 */
-	// End Line: 1050
-
-void SBSP_IntroduceInstances(_Terrain *terrain,int unitID)
+void SBSP_IntroduceInstances(_Terrain *terrain, int unitID)
 
 {
   Intro *intro;
   int iVar1;
-  
+
   iVar1 = terrain->numIntros;
   intro = terrain->introList;
-  while (iVar1 != 0) {
-    if ((intro->flags & 0x4008U) == 0) {
-      INSTANCE_InsertInstanceGroup(intro,(short)unitID);
+  while (iVar1 != 0)
+  {
+    if ((intro->flags & 0x4008U) == 0)
+    {
+      INSTANCE_InsertInstanceGroup(intro, (short)unitID);
     }
     iVar1 = iVar1 + -1;
     intro = intro + 1;
@@ -44,26 +21,9 @@ void SBSP_IntroduceInstances(_Terrain *terrain,int unitID)
   return;
 }
 
-
-
-// decompiled code
-// original method signature: 
-// void /*$ra*/ SBSP_IntroduceInstancesAndLights(struct _Terrain *terrain /*$a0*/, struct _CameraCore_Type *cameraCore /*$a1*/, struct LightInfo *lightInfo /*$a2*/, int unitID /*$a3*/)
- // line 563, offset 0x8003e4f0
-	/* begin block 1 */
-		// Start line: 657
-	/* end block 1 */
-	// End Line: 658
-
-void INSTANCE_IntroduceSavedInstance
-               (_Terrain *terrain,_CameraCore_Type *cameraCore,LightInfo *lightInfo,int unitID)
+void INSTANCE_IntroduceSavedInstance(_Terrain *terrain, _CameraCore_Type *cameraCore, LightInfo *lightInfo, int unitID)
 
 {
-  SBSP_IntroduceInstances(terrain,unitID);
+  SBSP_IntroduceInstances(terrain, unitID);
   return;
 }
-
-
-
-
-

@@ -1,20 +1,25 @@
 #ifndef SUPPORT_H
 #define SUPPORT_H
 
+extern int printf(char *fmt);
+t sprintf(char *string, char *fmt);
+t vsprintf(char *str, char *fmtstr, void *argptr);
+ar *my_itoa(unsigned long value, char *str, int radix);
+t atoi(char *str);
+t mytolower(int c);
+t strcmpi(char *s1, char *s2);
 
-extern int printf(char *fmt); // 0x80073C48
+extern int sprintf(char *string, char *fmt); 
 
-extern int sprintf(char *string, char *fmt); // 0x80073C98
+extern int vsprintf(char *str, char *fmtstr, void *argptr); 
 
-extern int vsprintf(char *str, char *fmtstr, void *argptr); // 0x80073CC8
+extern char * my_itoa(unsigned long value, char *str, int radix); 
 
-extern char * my_itoa(unsigned long value, char *str, int radix); // 0x80073F44
+extern int atoi(char *str); 
 
-extern int atoi(char *str); // 0x80074014
+extern int mytolower(int c); 
 
-extern int mytolower(int c); // 0x80074084
-
-extern int strcmpi(char *s1, char *s2); // 0x800740A0
+extern int strcmpi(char *s1, char *s2); 
 
 
 #endif

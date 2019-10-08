@@ -1,8 +1,15 @@
 #ifndef MAINVM_H
 #define MAINVM_H
 
+struct _G2AppDataVM_Type 
+{
+	int argc; 
+	int *argv; 
+};
 
-extern int main(); // 0x80095D00
+static struct _G2AppDataVM_Type _appDataVM;
+
+extern int main(); 
 
 
 #endif
