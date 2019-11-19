@@ -1,38 +1,40 @@
 #ifndef VOICEXA_H
 #define VOICEXA_H
 
-extern void VOICEXA_Init();
 
-extern void putCdCommand(struct XAVoiceTracker *vt, unsigned char cdCommand, int numParams, unsigned char *params);
+extern void VOICEXA_Init(); // 0x800B0F84
 
-extern void VOICEXA_CdSyncCallback(unsigned char status, unsigned char *result);
+extern void putCdCommand(struct XAVoiceTracker *vt, unsigned char cdCommand, int numParams, unsigned char *params); // 0x800B1054
 
-extern void processCdCommands(struct XAVoiceTracker *vt);
+extern void VOICEXA_CdSyncCallback(unsigned char status, unsigned char *result); // 0x800B10D8
 
-extern void putVoiceCommand(struct XAVoiceTracker *vt, unsigned char voiceCmd, unsigned char nextVoiceStatus, int voiceCmdParam);
+extern void processCdCommands(struct XAVoiceTracker *vt); // 0x800B1148
 
-extern void processVoiceCommands(struct XAVoiceTracker *vt);
+extern void putVoiceCommand(struct XAVoiceTracker *vt, unsigned char voiceCmd, unsigned char nextVoiceStatus, int voiceCmdParam); // 0x800B11F0
 
-extern void voiceCmdPlay(struct XAVoiceTracker *vt, short voiceIndex);
+extern void processVoiceCommands(struct XAVoiceTracker *vt); // 0x800B126C
 
-extern void voiceCmdStop(struct XAVoiceTracker *vt, short cmdParam);
+extern void voiceCmdPlay(struct XAVoiceTracker *vt, short voiceIndex); // 0x800B1320
 
-extern void voiceCmdPause(struct XAVoiceTracker *vt, short cmdParam);
+extern void voiceCmdStop(struct XAVoiceTracker *vt, short cmdParam); // 0x800B1490
 
-extern void voiceCmdResume(struct XAVoiceTracker *vt, short cmdParam);
+extern void voiceCmdPause(struct XAVoiceTracker *vt, short cmdParam); // 0x800B14EC
 
-extern void voiceCmdNull(struct XAVoiceTracker *vt, short cmdParam);
+extern void voiceCmdResume(struct XAVoiceTracker *vt, short cmdParam); // 0x800B1520
 
-extern void VOICEXA_Play(int voiceIndex, int queueRequests);
+extern void voiceCmdNull(struct XAVoiceTracker *vt, short cmdParam); // 0x800B1554
 
-extern int VOICEXA_FinalStatus(struct XAVoiceTracker *vt);
+extern void VOICEXA_Play(int voiceIndex, int queueRequests); // 0x800B155C
 
-extern void VOICEXA_Pause();
+extern int VOICEXA_FinalStatus(struct XAVoiceTracker *vt); // 0x800B1624
 
-extern void VOICEXA_Resume();
+extern void VOICEXA_Pause(); // 0x800B1668
 
-extern void VOICEXA_Tick();
+extern void VOICEXA_Resume(); // 0x800B16D8
 
-extern int VOICEXA_IsPlaying();
+extern void VOICEXA_Tick(); // 0x800B174C
+
+extern int VOICEXA_IsPlaying(); // 0x800B189C
+
 
 #endif

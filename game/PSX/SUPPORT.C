@@ -1,29 +1,102 @@
 #include "THISDUST.H"
 #include "SUPPORT.H"
 
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ printf(char *fmt /*stack 0*/)
+ // line 57, offset 0x8007395c
+	/* begin block 1 */
+		// Start line: 58
+		// Start offset: 0x8007395C
+		// Variables:
+	// 		int len; // $s0
+	// 		char string[256]; // stack offset -264
+	/* end block 1 */
+	// End offset: 0x8007395C
+	// End Line: 58
+
+	/* begin block 2 */
+		// Start line: 114
+	/* end block 2 */
+	// End Line: 115
+
 int printf(char *fmt)
 
 {
   int iVar1;
-  undefined local_res4[12];
-  char acStack264[256];
-
-  iVar1 = vsprintf(acStack264, fmt, local_res4);
+  undefined local_res4 [12];
+  char acStack264 [256];
+  
+  iVar1 = vsprintf(acStack264,fmt,local_res4);
   puts(acStack264);
   return iVar1;
 }
 
-int sprintf(char *string, char *fmt)
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ sprintf(char *string /*$a0*/, char *fmt /*stack 4*/)
+ // line 79, offset 0x800739ac
+	/* begin block 1 */
+		// Start line: 80
+		// Start offset: 0x800739AC
+	/* end block 1 */
+	// End offset: 0x800739AC
+	// End Line: 80
+
+	/* begin block 2 */
+		// Start line: 172
+	/* end block 2 */
+	// End Line: 173
+
+int sprintf(char *string,char *fmt)
 
 {
   int iVar1;
-  undefined local_res8[8];
-
-  iVar1 = vsprintf(string, fmt, local_res8);
+  undefined local_res8 [8];
+  
+  iVar1 = vsprintf(string,fmt,local_res8);
   return iVar1;
 }
 
-int vsprintf(char *str, char *fmtstr, void *argptr)
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ vsprintf(char *str /*$s7*/, char *fmtstr /*$a1*/, void *argptr /*$s5*/)
+ // line 110, offset 0x800739dc
+	/* begin block 1 */
+		// Start line: 111
+		// Start offset: 0x800739DC
+		// Variables:
+	// 		int scopy; // $s4
+	// 		char *fmt; // $s3
+
+		/* begin block 1.1 */
+			// Start line: 121
+			// Start offset: 0x80073A44
+			// Variables:
+		// 		int fsize; // $s0
+		// 		int pad; // $s6
+		// 		int left_just; // $fp
+		// 		int ts_len; // $s2
+		// 		char *temp_str; // $s1
+		// 		char buf[16]; // stack offset -56
+		/* end block 1.1 */
+		// End offset: 0x80073C0C
+		// End Line: 221
+	/* end block 1 */
+	// End offset: 0x80073C1C
+	// End Line: 223
+
+	/* begin block 2 */
+		// Start line: 213
+	/* end block 2 */
+	// End Line: 214
+
+int vsprintf(char *str,char *fmtstr,void *argptr)
 
 {
   byte bVar1;
@@ -40,169 +113,161 @@ int vsprintf(char *str, char *fmtstr, void *argptr)
   int __c;
   char local_38;
   undefined local_37;
-
+  
   bVar1 = *fmtstr;
   iVar8 = 0;
-  do
-  {
-    if (bVar1 == 0)
-    {
+  do {
+    if (bVar1 == 0) {
       str[iVar8] = '\0';
       return iVar8;
     }
-    if (bVar1 == 0x25)
-    {
+    if (bVar1 == 0x25) {
       pbVar6 = (byte *)fmtstr + 1;
       bVar1 = *pbVar6;
-      if (bVar1 == 0x25)
-      {
+      if (bVar1 == 0x25) {
         str[iVar8] = '%';
         iVar8 = iVar8 + 1;
         fmtstr = (char *)((byte *)fmtstr + 2);
       }
-      else
-      {
-        if (bVar1 == 0x2d)
-        {
+      else {
+        if (bVar1 == 0x2d) {
           pbVar6 = (byte *)fmtstr + 2;
         }
         __c = 0x20;
-        if (*pbVar6 == 0x30)
-        {
+        if (*pbVar6 == 0x30) {
           __c = 0x30;
           pbVar6 = pbVar6 + 1;
         }
         bVar2 = *pbVar6;
         iVar5 = 0;
-        while ((u_int)bVar2 - 0x30 < 10)
-        {
+        while ((uint)bVar2 - 0x30 < 10) {
           bVar3 = *pbVar6;
           pbVar6 = pbVar6 + 1;
           bVar2 = *pbVar6;
-          iVar5 = iVar5 * 10 + (u_int)bVar3 + -0x30;
+          iVar5 = iVar5 * 10 + (uint)bVar3 + -0x30;
         }
-        do
-        {
-          do
-          {
+        do {
+          do {
             pbVar7 = pbVar6;
             bVar2 = *pbVar7;
             pbVar6 = pbVar7 + 1;
           } while (bVar2 == 0x4e);
           pbVar6 = pbVar7 + 1;
         } while ((((bVar2 == 0x46) || (pbVar6 = pbVar7 + 1, bVar2 == 0x68)) ||
-                  (pbVar6 = pbVar7 + 1, bVar2 == 0x6c)) ||
-                 (pbVar6 = pbVar7 + 1, bVar2 == 0x4c));
+                 (pbVar6 = pbVar7 + 1, bVar2 == 0x6c)) || (pbVar6 = pbVar7 + 1, bVar2 == 0x4c));
         bVar2 = *pbVar7;
-        if (bVar2 == 99)
-        {
+        if (bVar2 == 99) {
           local_38 = *(char *)argptr;
           __s = &local_38;
           local_37 = 0;
         }
-        else
-        {
-          if (bVar2 == 0x73)
-          {
+        else {
+          if (bVar2 == 0x73) {
             __s = *(char **)argptr;
           }
-          else
-          {
-            if ((bVar2 == 0x78) || (bVar2 == 0x58))
-            {
+          else {
+            if ((bVar2 == 0x78) || (bVar2 == 0x58)) {
               __s = *(char **)argptr;
               radix = 0x10;
             }
-            else
-            {
+            else {
               __s = *(char **)argptr;
               radix = 10;
             }
-            __s = my_itoa((u_long)__s, &local_38, radix);
+            __s = my_itoa((ulong)__s,&local_38,radix);
           }
         }
         argptr = (char **)argptr + 1;
         fmtstr = (char *)(pbVar7 + 1);
         sVar4 = strlen(__s);
-        if (iVar5 == 0)
-        {
-        LAB_80073ee8:
+        if (iVar5 == 0) {
+LAB_80073bfc:
           __dest = str + iVar8;
         }
-        else
-        {
+        else {
           __dest = str + iVar8;
-          if ((int)sVar4 < iVar5)
-          {
-            if (bVar1 == 0x2d)
-            {
-              strcmp(__dest, __s);
-              memset(str + iVar8 + sVar4, __c, iVar5 - sVar4);
+          if ((int)sVar4 < iVar5) {
+            if (bVar1 == 0x2d) {
+              strcpy(__dest,__s);
+              memset(str + iVar8 + sVar4,__c,iVar5 - sVar4);
               iVar8 = iVar8 + sVar4 + (iVar5 - sVar4);
-              goto LAB_80073ef8;
+              goto LAB_80073c0c;
             }
-            memset(__dest, __c, iVar5 - sVar4);
+            memset(__dest,__c,iVar5 - sVar4);
             iVar8 = iVar8 + (iVar5 - sVar4);
-            goto LAB_80073ee8;
+            goto LAB_80073bfc;
           }
         }
-        strcmp(__dest, __s);
+        strcpy(__dest,__s);
         iVar8 = iVar8 + sVar4;
       }
     }
-    else
-    {
+    else {
       str[iVar8] = bVar1;
       fmtstr = (char *)((byte *)fmtstr + 1);
       iVar8 = iVar8 + 1;
     }
-  LAB_80073ef8:
+LAB_80073c0c:
     bVar1 = *fmtstr;
-  } while (true);
+  } while( true );
 }
 
-char *my_itoa(u_long value, char *str, int radix)
+
+
+// decompiled code
+// original method signature: 
+// char * /*$ra*/ my_itoa(unsigned long value /*$v1*/, char *str /*$a1*/, int radix /*$a2*/)
+ // line 231, offset 0x80073c58
+	/* begin block 1 */
+		// Start line: 232
+		// Start offset: 0x80073C58
+		// Variables:
+	// 		char *p; // $a0
+	// 		char *q; // $a3
+	// 		char digits[31]; // stack offset -32
+	/* end block 1 */
+	// End offset: 0x80073D20
+	// End Line: 272
+
+	/* begin block 2 */
+		// Start line: 466
+	/* end block 2 */
+	// End Line: 467
+
+char * my_itoa(ulong value,char *str,int radix)
 
 {
   char cVar1;
   byte *pbVar2;
   char *pcVar3;
-  byte local_20[32];
-
-  if (value == 0)
-  {
+  byte local_20 [32];
+  
+  if (value == 0) {
     *str = '0';
     str[1] = '\0';
   }
-  else
-  {
-    if (0x22 < radix - 2U)
-    {
+  else {
+    if (0x22 < radix - 2U) {
       radix = 10;
     }
     pbVar2 = local_20;
     pcVar3 = str;
-    if ((radix == 10) && (pbVar2 = local_20, (int)value < 0))
-    {
+    if ((radix == 10) && (pbVar2 = local_20, (int)value < 0)) {
       *str = '-';
       pcVar3 = str + 1;
       value = -value;
       pbVar2 = local_20;
     }
-    while (value != 0)
-    {
+    while (value != 0) {
       *pbVar2 = (char)(value % radix);
-      (u_int) radix;
+      value = value / (uint)radix;
       pbVar2 = pbVar2 + 1;
     }
     pbVar2 = pbVar2 + -1;
-    if (local_20 <= pbVar2)
-    {
-      do
-      {
+    if (local_20 <= pbVar2) {
+      do {
         cVar1 = '0';
-        if (9 < *pbVar2)
-        {
+        if (9 < *pbVar2) {
           cVar1 = 'W';
         }
         *pcVar3 = *pbVar2 + cVar1;
@@ -215,6 +280,27 @@ char *my_itoa(u_long value, char *str, int radix)
   return str;
 }
 
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ atoi(char *str /*$a1*/)
+ // line 295, offset 0x80073d28
+	/* begin block 1 */
+		// Start line: 296
+		// Start offset: 0x80073D28
+		// Variables:
+	// 		int val; // $a2
+	// 		int neg; // $a3
+	/* end block 1 */
+	// End offset: 0x80073D88
+	// End Line: 316
+
+	/* begin block 2 */
+		// Start line: 584
+	/* end block 2 */
+	// End Line: 585
+
 int atoi(char *str)
 
 {
@@ -222,57 +308,93 @@ int atoi(char *str)
   byte bVar2;
   byte bVar3;
   int iVar4;
-
+  
   iVar4 = 0;
   cVar1 = *str;
-  if (cVar1 == '-')
-  {
+  if (cVar1 == '-') {
     str = str + 1;
   }
   bVar2 = *str;
-  while (bVar2 != 0)
-  {
+  while (bVar2 != 0) {
     bVar3 = *str;
     str = (char *)((byte *)str + 1);
     bVar2 = *str;
-    iVar4 = iVar4 * 10 + -0x30 + (u_int)bVar3;
+    iVar4 = iVar4 * 10 + -0x30 + (uint)bVar3;
   }
-  if (cVar1 != '-')
-  {
+  if (cVar1 != '-') {
     return iVar4;
   }
   return -iVar4;
 }
 
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ mytolower(int c /*$a0*/)
+ // line 319, offset 0x80073d98
+	/* begin block 1 */
+		// Start line: 618
+	/* end block 1 */
+	// End Line: 619
+
+	/* begin block 2 */
+		// Start line: 619
+	/* end block 2 */
+	// End Line: 620
+
 int mytolower(int c)
 
 {
-  if (c - 0x41U < 0x1a)
-  {
+  if (c - 0x41U < 0x1a) {
     c = c + 0x20;
   }
   return c;
 }
 
-int strcpy(char *s1, char *s2)
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ strcmpi(char *s1 /*$s1*/, char *s2 /*$s2*/)
+ // line 325, offset 0x80073db4
+	/* begin block 1 */
+		// Start line: 327
+		// Start offset: 0x80073DD0
+		// Variables:
+	// 		int c1; // $s0
+	// 		int c2; // $v0
+	/* end block 1 */
+	// End offset: 0x80073DFC
+	// End Line: 338
+
+	/* begin block 2 */
+		// Start line: 630
+	/* end block 2 */
+	// End Line: 631
+
+int strcmpi(char *s1,char *s2)
 
 {
   byte bVar1;
   int iVar2;
   int iVar3;
-
-  do
-  {
+  
+  do {
     bVar1 = *s1;
     s1 = (char *)((byte *)s1 + 1);
-    iVar2 = mytolower((u_int)bVar1);
+    iVar2 = mytolower((uint)bVar1);
     bVar1 = *s2;
     s2 = (char *)((byte *)s2 + 1);
-    iVar3 = mytolower((u_int)bVar1);
-    if (iVar2 != iVar3)
-    {
+    iVar3 = mytolower((uint)bVar1);
+    if (iVar2 != iVar3) {
       return iVar2 - iVar3;
     }
   } while (iVar2 != 0);
   return 0;
 }
+
+
+
+
+

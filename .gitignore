@@ -6,3 +6,5 @@
 *.bat
 *.obj
 *.txt
+
+GAME/.vscode/settings.json

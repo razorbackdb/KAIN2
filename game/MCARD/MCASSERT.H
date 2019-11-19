@@ -1,6 +1,8 @@
 #ifndef MCASSERT_H
 #define MCASSERT_H
 
-extern void mcassert(char *exp, char *file, long line);
+
+extern void mcassert(char *exp, char *file, long line); // 0x800B40A0
+
 
 #endif

@@ -1,78 +1,46 @@
 #ifndef COLLIDES_H
 #define COLLIDES_H
 
-extern void COLLIDE_NearestPointOnLine_S();
 
-extern void COLLIDE_IntersectLineAndPlane_S();
+extern void COLLIDE_NearestPointOnLine_S() ; // 0x80077960
 
-extern void COLLIDE_NearestPointOnPlane_S();
+extern void COLLIDE_IntersectLineAndPlane_S() ; // 0x80077A70
 
-extern void VM_ProcessVMObjectSetColor_S();
+extern void COLLIDE_NearestPointOnPlane_S() ; // 0x80077B48
 
-extern void VM_ProcessVMObjectList_S();
+extern void VM_ProcessVMObjectSetColor_S() ; // 0x800780CC
 
-extern void BSP_SphereIntersectsViewVolume_S();
+extern void VM_ProcessVMObjectList_S() ; // 0x80078140
 
-extern void RotMatrixZYX();
+extern void BSP_SphereIntersectsViewVolume_S() ; // 0x80078204
 
-extern void rmzyx_1();
+extern void RotMatrixZYX() ; // 0x800782DC
 
-extern void rmzyx_2();
+extern void rmzyx_onlyz() ; // 0x80078420
 
-extern void rmzyx_3();
+extern void RotMatrix() ; // 0x80078450
 
-extern void rmzyx_onlyz();
+extern void ApplyMatrix_S() ; // 0x80078598
 
-extern void RotMatrix();
+extern void ScaleMatrix() ; // 0x800785E8
 
-extern void rm_1();
+extern void rsin() ; // 0x800786D0
 
-extern void rm_2();
+extern void rcos() ; // 0x800786F0
 
-extern void rm_3();
+extern void MATH3D_racos_S() ; // 0x80078710
 
-extern void RotMatrixX();
+extern void SetGp() ; // 0x80078770
 
-extern void RMX_0();
+extern void memcpy() ; // 0x80078778
 
-extern void RotMatrixY();
+extern void BSP_MarkVisibleLeaves_S() ; // 0x80078830
 
-extern void RMY_0();
+extern void G2Quat_FromMatrix_S() ; // 0x80078E00
 
-extern void RotMatrixZ();
+extern void G2Quat_ToMatrix_S() ; // 0x8007900C
 
-extern void RMZ_0();
+extern void G2Quat_FromEuler_S() ; // 0x800790FC
 
-extern void ApplyMatrix_S();
-
-extern void ScaleMatrix();
-
-extern void rsin();
-
-extern void rsin_exit();
-
-extern void rcos();
-
-extern void rcos_exit();
-
-extern void MATH3D_racos_S();
-
-extern void SetGp();
-
-extern void memcpy();
-
-extern void BSP_MarkVisibleLeaves_S();
-
-extern void G2Quat_FromMatrix_S();
-
-extern void G2Quat_ToMatrix_S();
-
-extern void G2Quat_FromEuler_S();
-
-extern void eul_1();
-
-extern void eul_2();
-
-extern void eul_3();
 
 #endif

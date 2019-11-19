@@ -1,22 +1,24 @@
 #ifndef UNDRWRLD_H
 #define UNDRWRLD_H
 
-extern void UNDERWORLD_StartProcess();
 
-extern long UNDERWORLD_RotateScreenStep(long time);
+extern void UNDERWORLD_StartProcess(); // 0x800AF1F8
 
-extern void UNDERWORLD_DoUV(unsigned char *uv, struct UW_ScreenXY *p0, int tx);
+extern long UNDERWORLD_RotateScreenStep(long time); // 0x800AF270
 
-extern struct POLY_GT3 *UNDERWORLD_Poly(struct POLY_GT3 *last, struct UW_ScreenXY *p0, struct UW_ScreenXY *p1, struct UW_ScreenXY *p2, int drawY);
+extern void UNDERWORLD_DoUV(unsigned char *uv, struct UW_ScreenXY *p0, int tx); // 0x800AF3DC
 
-extern void UNDERWORLD_DisplayFrame(long *primStart, long drawY);
+extern struct POLY_GT3 * UNDERWORLD_Poly(struct POLY_GT3 *last, struct UW_ScreenXY *p0, struct UW_ScreenXY *p1, struct UW_ScreenXY *p2, int drawY); // 0x800AF428
 
-extern void UNDERWORLD_SetupSource();
+extern void UNDERWORLD_DisplayFrame(long *primStart, long drawY); // 0x800AF5A0
 
-extern void UNDERWORLD_InitDisplayProcess();
+extern void UNDERWORLD_SetupSource(); // 0x800AF6F8
 
-extern struct _StreamUnit *UNDERWORLD_LoadLevel(char *baseAreaName, struct GameTracker *gameTracker);
+extern void UNDERWORLD_InitDisplayProcess(); // 0x800AF7A8
 
-extern void UNDERWORLD_UpdatePlayer(struct Intro *playerIntro, struct _Instance *instance);
+extern struct _StreamUnit * UNDERWORLD_LoadLevel(char *baseAreaName, struct GameTracker *gameTracker); // 0x800AF868
+
+extern void UNDERWORLD_UpdatePlayer(struct Intro *playerIntro, struct _Instance *instance); // 0x800AFB64
+
 
 #endif

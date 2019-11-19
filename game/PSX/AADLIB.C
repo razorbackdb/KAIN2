@@ -1,248 +1,412 @@
 #include "THISDUST.H"
 #include "AADLIB.H"
 
-u_long aadGetMemorySize(AadInitAttr *attributes)
+
+// decompiled code
+// original method signature: 
+// unsigned long /*$ra*/ aadGetMemorySize(struct AadInitAttr *attributes /*$a0*/)
+ // line 37, offset 0x80053164
+	/* begin block 1 */
+		// Start line: 74
+	/* end block 1 */
+	// End Line: 75
+
+	/* begin block 2 */
+		// Start line: 75
+	/* end block 2 */
+	// End Line: 76
+
+ulong aadGetMemorySize(AadInitAttr *attributes)
 
 {
-  return (u_long)(&DAT_00001c88 + attributes->numSlots * 0x5d0);
+  return (uint)*(ushort *)((int)&attributes->updateMode + 2) * 0x5d4 + 0x1bec;
 }
 
-int aadInit(AadInitAttr *attributes, u_char *memoryPtr)
+
+
+// decompiled code
+// original method signature: 
+// unsigned short /*$ra*/ aadInit(struct AadInitAttr *attributes /*$s1*/, unsigned char *memoryPtr /*$s0*/)
+ // line 43, offset 0x80053190
+	/* begin block 1 */
+		// Start line: 44
+		// Start offset: 0x80053190
+		// Variables:
+	// 		struct _AadSequenceSlot *slot; // $v1
+	// 		unsigned long size; // $v0
+	// 		int slotNumber; // $a2
+	// 		int i; // $a1
+	/* end block 1 */
+	// End offset: 0x80053460
+	// End Line: 181
+
+	/* begin block 2 */
+		// Start line: 86
+	/* end block 2 */
+	// End Line: 87
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+ushort aadInit(AadInitAttr *attributes,uchar *memoryPtr)
 
 {
-  byte bVar1;
-  AadMemoryStruct *pAVar2;
-  AadMemoryStruct *pAVar3;
-  u_long __n;
-  undefined *puVar4;
-  _func_36 *p_Var5;
-  _func_36 *p_Var6;
-  _func_36 *p_Var7;
-  int iVar8;
-  u_int uVar9;
-  int iVar10;
-
-  aadGp = (u_long)GetGp();
-  ExitCriticalSection();
+  ushort uVar1;
+  ulong __n;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  uint uVar5;
+  int iVar6;
+  int iVar7;
+  
+  aadGp = GetGp();
+  EnterCriticalSection();
   __n = aadGetMemorySize(attributes);
+                    /* WARNING: Read-only address (ram,0x800cf598) is written */
   aadMem = (AadMemoryStruct *)memoryPtr;
-  if (memoryPtr == (u_char *)0x0)
-  {
-    puVar4 = &DAT_00001009;
+  if (memoryPtr == (uchar *)0x0) {
+    uVar1 = 0x1009;
   }
-  else
-  {
-    memset(memoryPtr, 0, __n);
-    pAVar2 = aadMem;
-    puVar4 = &DAT_00001008;
-    if ((attributes->nonBlockLoadProc != (_func_32 *)0x0) &&
-        (puVar4 = &DAT_00001008, attributes->nonBlockBufferedLoadProc != (_func_33 *)0x0))
-    {
-      if (attributes->memoryMallocProc == (_func_34 *)0x0)
-      {
-        puVar4 = &DAT_00001008;
+  else {
+    memset(memoryPtr,0,__n);
+    uVar1 = 0x1008;
+    if ((attributes->numSlots != 0) &&
+       (uVar1 = 0x1008, attributes->nonBlockLoadProc != (_func_4504 *)0x0)) {
+      if (attributes->nonBlockBufferedLoadProc == (_func_4505 *)0x0) {
+        uVar1 = 0x1008;
       }
-      else
-      {
-        *(_func_32 **)&aadMem->nonBlockLoadProc = attributes->nonBlockLoadProc;
-        *(_func_33 **)&pAVar2->nonBlockBufferedLoadProc = attributes->nonBlockBufferedLoadProc;
-        *(_func_34 **)&pAVar2->memoryMallocProc = attributes->memoryMallocProc;
-        *(_func_35 **)&pAVar2->memoryFreeProc = attributes->memoryFreeProc;
-        memset(pAVar2->sfxToneMasterList, 0xff, 0x200);
-        memset(aadMem->sfxWaveMasterList, 0xff, 0x200);
-        pAVar2 = aadMem;
-        aadMem->sramDescriptorTbl[0].prevIndex = -1;
-        pAVar3 = aadMem;
-        pAVar2->nextSramDescIndex = 1;
-        pAVar2->sramDescriptorTbl[0].waveID = 0x8000;
-        pAVar2->sramDescriptorTbl[0].address = 0x202;
-        pAVar2->firstSramBlockDescIndex = 0;
-        pAVar2->sramDescriptorTbl[0].size = 0x91d8;
-        pAVar3->sramDescriptorTbl[0].nextIndex = -1;
+      else {
+        p_Ram000006d0 = attributes->nonBlockLoadProc;
+        p_Ram000006d4 = attributes->nonBlockBufferedLoadProc;
+        p_Ram000006d8 = attributes->memoryMallocProc;
+        uRam000006dc = *(undefined *)&attributes->memoryFreeProc;
+        iRam000006cc = attributes->numSlots;
+        memset((void *)0x770,0xff,0x200);
+        memset((void *)0x970,0xff,0x200);
+        uRam00001b56 = 0;
+        uRam0000175a = 0xff;
+        uRam00001b54 = 1;
+        uRam00001754 = 0x8000;
+        uRam00001756 = 0x202;
+        uRam00001758 = 0x8e5a;
+        uRam0000175b = 0xff;
         aadPurgeLoadQueue();
-        _SpuInit();
-        SpuSetCommonMasterVolume(0, 0);
-        iVar10 = 0;
-        if (0 < attributes->numSlots)
-        {
-          puVar4 = &DAT_00001c88;
-          do
-          {
-            iVar8 = 0;
-            p_Var6 = (_func_36 *)((int)&aadMem->updateCounter + (int)puVar4);
-            aadMem->sequenceSlots[iVar10] = p_Var6;
-            p_Var6[0x53f] = SUB41(iVar10, 0);
-            p_Var6[0x53e] = (_func_36)0xff;
-            p_Var6[0x551] = SUB41(iVar10 << 4, 0);
-            p_Var6[0x552] = (_func_36)0x7f;
-            p_Var6[0x553] = (_func_36)0x3f;
-            *(int **)(p_Var6 + 0x554) = &aadMem->musicMasterVol;
-            p_Var7 = p_Var6;
-            do
-            {
-              p_Var5 = p_Var6 + iVar8;
-              p_Var5[0x590] = (_func_36)0xff;
-              p_Var5[0x5a0] = (_func_36)0x7f;
-              p_Var5[0x5b0] = (_func_36)0x3f;
-              *(undefined2 *)(p_Var7 + 0x570) = 0x2000;
-              iVar8 = iVar8 + 1;
-              p_Var7 = p_Var7 + 2;
-            } while (iVar8 < 0x10);
-            *(_func_36 **)(p_Var6 + 0x538) = p_Var6;
-            p_Var6[0x53c] = SUB41(iVar10, 0);
-            iVar10 = iVar10 + 1;
-            puVar4 = puVar4 + 0x5d0;
-          } while (iVar10 < attributes->numSlots);
+        SpuInit();
+        SpuSetCommonMasterVolume(0,0);
+        iVar6 = 0;
+        if (*(short *)((int)&attributes->updateMode + 2) != 0) {
+          iVar7 = 0x1bec;
+          do {
+            iVar4 = 0;
+            *(int *)(iVar6 * 4 + 0x1c) = iVar7;
+            *(undefined *)(iVar7 + 0x53f) = (char)iVar6;
+            *(undefined *)(iVar7 + 0x53e) = 0xff;
+            *(undefined *)(iVar7 + 0x549) = (char)(iVar6 << 4);
+            *(undefined *)(iVar7 + 0x54a) = 0x7f;
+            *(undefined *)(iVar7 + 0x54b) = 0x3f;
+            *(undefined4 *)(iVar7 + 0x54c) = 0x11;
+            iVar3 = iVar7;
+            do {
+              iVar2 = iVar7 + iVar4;
+              *(undefined *)(iVar2 + 0x584) = 0xff;
+              *(undefined *)(iVar2 + 0x594) = 0;
+              *(undefined *)(iVar2 + 0x5a4) = 0x7f;
+              *(undefined *)(iVar2 + 0x5b4) = 0x3f;
+              *(undefined2 *)(iVar3 + 0x564) = 0x2000;
+              iVar4 = iVar4 + 1;
+              iVar3 = iVar3 + 2;
+            } while (iVar4 < 0x10);
+            *(int *)(iVar7 + 0x538) = iVar7;
+            *(undefined *)(iVar7 + 0x53c) = (char)iVar6;
+            iVar6 = iVar6 + 1;
+            iVar7 = iVar7 + 0x5d4;
+          } while (iVar6 < (int)(uint)*(ushort *)((int)&attributes->updateMode + 2));
         }
-        pAVar2 = aadMem;
-        uVar9 = 0;
-        (aadMem->sfxSlot).handleCounter = 0x3039;
-        (pAVar2->sfxSlot).sfxVolume = '\x7f';
-        pAVar2 = aadMem;
-        iVar10 = 0;
-        aadMem->numSlots = (u_int) * (byte *)&attributes->numSlots;
-        bVar1 = *(byte *)&attributes->updateMode;
-        pAVar2->sfxMasterVol = 0x7f;
-        pAVar2->musicMasterVol = 0x7f;
-        pAVar2->endSequenceCallback = (_func_49 *)0x0;
-        pAVar2->controller11Callback = (_func_48 *)0x0;
-        pAVar2->updateMode = (u_int)bVar1;
-        do
-        {
-          iVar8 = (int)&aadMem->updateCounter + iVar10;
-          *(undefined *)(iVar8 + 0x1e4) = 0xff;
-          pAVar2 = aadMem;
-          *(int *)(iVar8 + 0x1dc) = 1 << (uVar9 & 0x1f);
-          (&pAVar2->synthVoice[0].voiceNum)[iVar10] = (u_char)uVar9;
-          pAVar2 = aadMem;
-          uVar9 = uVar9 + 1;
-          iVar10 = iVar10 + 0x1c;
-        } while ((int)uVar9 < 0x18);
-        iVar10 = aadMem->updateMode;
-        aadMem->voiceKeyOffRequest = 0;
-        pAVar2->voiceKeyOnRequest = 0;
-        pAVar2->voiceReverbRequest = 0;
-        if (iVar10 < 4)
-        {
-          aadInstallUpdateFunc(aadSlotUpdateWrapper, (u_int)(&aadHblanksPerUpdate)[iVar10]);
+        uRam000001c0 = 0x3039;
+        uRam000001c2 = 0x7f;
+        mainMenuScreen = *(undefined *)((int)&attributes->updateMode + 2);
+        DAT_00000005 = *(byte *)&attributes->updateMode;
+        uVar5 = 0;
+        DAT_00000010 = 0x7f;
+        uRam00000011 = 0x7f;
+        iVar6 = 0;
+        uRam00001b60 = 0;
+        uRam00001b5c = 0;
+        do {
+          *(undefined *)(iVar6 + 0x1cc) = 0xff;
+          *(int *)(iVar6 + 0x1c4) = 1 << (uVar5 & 0x1f);
+          *(undefined *)(iVar6 + 0x1d5) = (char)uVar5;
+          uVar5 = uVar5 + 1;
+          iVar6 = iVar6 + 0x1c;
+        } while ((int)uVar5 < 0x18);
+        uRam000004ac = 0;
+        uRam000004b0 = 0;
+        uRam000004b4 = 0;
+        if (DAT_00000005 < 4) {
+          aadInstallUpdateFunc(aadSlotUpdateWrapper,(&aadHblanksPerUpdate)[DAT_00000005]);
         }
-        aadMem->flags = 0;
-        EnterCriticalSection();
-        puVar4 = (undefined *)0x0;
+        _DAT_00000012 = 0;
+        ExitCriticalSection();
+        uVar1 = 0;
       }
     }
   }
-  return (int)puVar4;
+  return uVar1;
 }
 
-void aadInstallUpdateFunc(TDRFuncPtr_aadInstallUpdateFunc0updateFuncPtr updateFuncPtr, int hblanksPerUpdate)
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadInstallUpdateFunc(TDRFuncPtr_aadInstallUpdateFunc0updateFuncPtr updateFuncPtr /*$s0*/, unsigned short hblanksPerUpdate /*$s1*/)
+ // line 184, offset 0x80053474
+	/* begin block 1 */
+		// Start line: 475
+	/* end block 1 */
+	// End Line: 476
+
+void aadInstallUpdateFunc
+               (TDRFuncPtr_aadInstallUpdateFunc0updateFuncPtr updateFuncPtr,ushort hblanksPerUpdate)
 
 {
-  ExitCriticalSection();
+  EnterCriticalSection();
   __hblankEvent = OpenEvent();
   EnableEvent();
-  SetRCnt(0xf2000001, (short)hblanksPerUpdate, 0x1000);
+  SetRCnt(0xf2000001,hblanksPerUpdate,0x1000);
   StartRCnt(0xf2000001);
-  EnterCriticalSection();
+  ExitCriticalSection();
   return;
 }
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadInitVolume()
+ // line 197, offset 0x800534f0
+	/* begin block 1 */
+		// Start line: 501
+	/* end block 1 */
+	// End Line: 502
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void aadInitVolume(void)
 
 {
-  aadMem->masterVolume = 0;
-  SpuSetCommonAttr(0);
-  SpuSetCommonMasterVolume(0, 0);
+  uRam00000006 = 0;
+  SpuSetCommonCDMix(0);
+  SpuSetCommonMasterVolume(0,0);
   return;
 }
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadSetMasterVolume(int volume /*$a0*/)
+ // line 208, offset 0x80053524
+	/* begin block 1 */
+		// Start line: 527
+	/* end block 1 */
+	// End Line: 528
+
+	/* begin block 2 */
+		// Start line: 529
+	/* end block 2 */
+	// End Line: 530
+
+void aadSetMasterVolume(int volume)
+
+{
+  sRam00000006 = (short)volume;
+  SpuSetCommonMasterVolume((int)sRam00000006,(int)sRam00000006);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadStartMasterVolumeFade(int targetVolume /*$a0*/, int volumeStep /*$a1*/, TDRFuncPtr_aadStartMasterVolumeFade2fadeCompleteCallback fadeCompleteCallback /*$a2*/)
+ // line 217, offset 0x80053554
+	/* begin block 1 */
+		// Start line: 547
+	/* end block 1 */
+	// End Line: 548
+
+	/* begin block 2 */
+		// Start line: 549
+	/* end block 2 */
+	// End Line: 550
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void aadStartMasterVolumeFade
+               (int targetVolume,int volumeStep,
+               TDRFuncPtr_aadStartMasterVolumeFade2fadeCompleteCallback fadeCompleteCallback)
+
+{
+  _DAT_00000008 = (short)volumeStep;
+  _DAT_0000000a = (short)targetVolume;
+  _DAT_0000000c = fadeCompleteCallback;
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadSetSfxMasterVolume(int volume /*$a0*/)
+ // line 227, offset 0x8005356c
+	/* begin block 1 */
+		// Start line: 567
+	/* end block 1 */
+	// End Line: 568
+
+	/* begin block 2 */
+		// Start line: 569
+	/* end block 2 */
+	// End Line: 570
+
+void aadSetSfxMasterVolume(int volume)
+
+{
+  DAT_00000010 = (char)volume;
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadSetMusicMasterVolume(int volume /*$a0*/)
+ // line 235, offset 0x80053578
+	/* begin block 1 */
+		// Start line: 236
+		// Start offset: 0x80053578
+		// Variables:
+	// 		int slotNumber; // $s0
+	/* end block 1 */
+	// End offset: 0x800535D4
+	// End Line: 245
+
+	/* begin block 2 */
+		// Start line: 583
+	/* end block 2 */
+	// End Line: 584
+
+	/* begin block 3 */
+		// Start line: 587
+	/* end block 3 */
+	// End Line: 588
 
 void aadSetMusicMasterVolume(int volume)
 
 {
   int iVar1;
-
-  iVar1 = (int)(short)volume;
-  aadMem->masterVolume = iVar1;
-  SpuSetCommonMasterVolume(iVar1, iVar1);
-  return;
-}
-
-void aadSetSfxMasterVolume(int targetVolume, int volumeStep,
-                           TDRFuncPtr_aadStartMasterVolumeFade2fadeCompleteCallback fadeCompleteCallback)
-
-{
-  AadMemoryStruct *pAVar1;
-
-  pAVar1 = aadMem;
-  (aadMem->masterVolFader).volumeStep = volumeStep;
-  (pAVar1->masterVolFader).targetVolume = targetVolume;
-  *(TDRFuncPtr_aadStartMasterVolumeFade2fadeCompleteCallback *)&(pAVar1->masterVolFader).fadeCompleteCallback = fadeCompleteCallback;
-  return;
-}
-
-void aadSetMasterVolume(int volume)
-
-{
-  aadMem->sfxMasterVol = volume & 0xff;
-  return;
-}
-
-void SOUND_SetMusicVolume(int volume)
-
-{
-  int *piVar1;
-  _AadSequenceSlot **pp_Var2;
-  int iVar3;
-
-  piVar1 = &aadMem->numSlots;
-  iVar3 = 0;
-  aadMem->musicMasterVol = volume;
-  if (0 < *piVar1)
-  {
-    do
-    {
-      pp_Var2 = (_AadSequenceSlot **)(aadMem->sequenceSlots + iVar3);
-      iVar3 = iVar3 + 1;
-      aadUpdateSlotVolPan(*pp_Var2);
-    } while (iVar3 < aadMem->numSlots);
+  int iVar2;
+  
+  uRam00000011 = (undefined)volume;
+  iVar2 = 0;
+  if (mainMenuScreen != 0) {
+    iVar1 = 0;
+    do {
+      iVar2 = iVar2 + 1;
+      aadUpdateSlotVolPan(*(_AadSequenceSlot **)(iVar1 + 0x1c));
+      iVar1 = iVar2 * 4;
+    } while (iVar2 < (int)(uint)mainMenuScreen);
   }
   return;
 }
 
-void aadStartMasterVolumeFade(int targetVolume, int volumeStep,
-                              TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback fadeCompleteCallback)
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadStartMusicMasterVolFade(int targetVolume /*$a0*/, int volumeStep /*$a1*/, TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback fadeCompleteCallback /*$a2*/)
+ // line 247, offset 0x800535e4
+	/* begin block 1 */
+		// Start line: 612
+	/* end block 1 */
+	// End Line: 613
+
+	/* begin block 2 */
+		// Start line: 614
+	/* end block 2 */
+	// End Line: 615
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void aadStartMusicMasterVolFade
+               (int targetVolume,int volumeStep,
+               TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback fadeCompleteCallback)
 
 {
-  AadMemoryStruct *pAVar1;
-
-  pAVar1 = aadMem;
-  (aadMem->musicMasterVolFader).volumeStep = volumeStep;
-  (pAVar1->musicMasterVolFader).targetVolume = targetVolume;
-  *(TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback *)&(pAVar1->musicMasterVolFader).fadeCompleteCallback = fadeCompleteCallback;
+  _DAT_00000014 = (short)volumeStep;
+  uRam00000016 = (short)targetVolume;
+  _mcardSaveMenu = fadeCompleteCallback;
   return;
 }
 
-void aadShutdownReverb(void)
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadShutdown()
+ // line 283, offset 0x800535fc
+	/* begin block 1 */
+		// Start line: 562
+	/* end block 1 */
+	// End Line: 563
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
+void aadShutdown(void)
 
 {
-  u_int uVar1;
-  u_char uVar2;
-  u_int in_a2;
-
-  ExitCriticalSection();
+  uint uVar1;
+  undefined4 uVar2;
+  uint in_a2;
+  
+  EnterCriticalSection();
   StopRCnt(0xf2000001);
   DisableEvent();
   CloseEvent();
-  aadMem->flags = aadMem->flags | 2;
-  EnterCriticalSection();
+  _DAT_00000012 = _DAT_00000012 | 2;
+  ExitCriticalSection();
   uVar2 = 0xffffff;
-  SpuSetKey(0, 0xffffff);
+  SpuSetKey(0,0xffffff);
   uVar1 = aadGetReverbMode();
-  SpuClearReverbWorkArea(uVar1, uVar2, in_a2);
+  SpuClearReverbWorkArea(uVar1,uVar2,in_a2);
   SpuQuit();
   aadMem = (AadMemoryStruct *)0x0;
+                    /* WARNING: Read-only address (ram,0x800cf598) is written */
   return;
 }
+
+
+
+// decompiled code
+// original method signature: 
+// long /*$ra*/ aadSlotUpdateWrapper()
+ // line 319, offset 0x80053684
+	/* begin block 1 */
+		// Start line: 320
+		// Start offset: 0x80053684
+		// Variables:
+	// 		unsigned long curGp; // $s0
+	/* end block 1 */
+	// End offset: 0x80053684
+	// End Line: 320
+
+	/* begin block 2 */
+		// Start line: 724
+	/* end block 2 */
+	// End Line: 725
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
 
 long aadSlotUpdateWrapper(void)
 
@@ -254,1092 +418,1219 @@ long aadSlotUpdateWrapper(void)
   return 0;
 }
 
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadSlotUpdate()
+ // line 336, offset 0x800536c8
+	/* begin block 1 */
+		// Start line: 337
+		// Start offset: 0x800536C8
+		// Variables:
+	// 		struct _AadSequenceSlot *slot; // $s1
+	// 		struct AadSeqEvent *seqEventPtr; // $a1
+	// 		int slotNumber; // $fp
+	// 		int i; // $a3
+	// 		int fadeComplete; // $v1
+	// 		int track; // $s4
+	// 		int newVol; // $s0
+
+		/* begin block 1.1 */
+			// Start line: 352
+			// Start offset: 0x80053710
+			// Variables:
+		// 		unsigned long vmask; // $a2
+		/* end block 1.1 */
+		// End offset: 0x80053788
+		// End Line: 367
+	/* end block 1 */
+	// End offset: 0x80053BC4
+	// End Line: 556
+
+	/* begin block 2 */
+		// Start line: 759
+	/* end block 2 */
+	// End Line: 760
+
+	/* begin block 3 */
+		// Start line: 768
+	/* end block 3 */
+	// End Line: 769
+
+/* WARNING: Removing unreachable block (ram,0x800536fc) */
+/* WARNING: Removing unreachable block (ram,0x80053710) */
+/* WARNING: Removing unreachable block (ram,0x8005372c) */
+/* WARNING: Removing unreachable block (ram,0x8005374c) */
+/* WARNING: Removing unreachable block (ram,0x80053760) */
+/* WARNING: Removing unreachable block (ram,0x80053768) */
+/* WARNING: Removing unreachable block (ram,0x80053770) */
+/* WARNING: Removing unreachable block (ram,0x80053740) */
+/* WARNING: Removing unreachable block (ram,0x80053774) */
+/* WARNING: Removing unreachable block (ram,0x80053778) */
+/* WARNING: Removing unreachable block (ram,0x80053788) */
+/* WARNING: Removing unreachable block (ram,0x800537a4) */
+/* WARNING: Removing unreachable block (ram,0x800537b4) */
+/* WARNING: Removing unreachable block (ram,0x800537b8) */
+/* WARNING: Removing unreachable block (ram,0x800537d8) */
+/* WARNING: Removing unreachable block (ram,0x800537ec) */
+/* WARNING: Removing unreachable block (ram,0x8005381c) */
+/* WARNING: Removing unreachable block (ram,0x80053830) */
+/* WARNING: Removing unreachable block (ram,0x8005383c) */
+/* WARNING: Removing unreachable block (ram,0x8005384c) */
+/* WARNING: Removing unreachable block (ram,0x80053860) */
+/* WARNING: Removing unreachable block (ram,0x80053864) */
+/* WARNING: Removing unreachable block (ram,0x80053874) */
+/* WARNING: Removing unreachable block (ram,0x80053888) */
+/* WARNING: Removing unreachable block (ram,0x8005389c) */
+/* WARNING: Removing unreachable block (ram,0x800538ac) */
+/* WARNING: Removing unreachable block (ram,0x800538bc) */
+/* WARNING: Removing unreachable block (ram,0x800538cc) */
+/* WARNING: Removing unreachable block (ram,0x800538d8) */
+/* WARNING: Removing unreachable block (ram,0x80053914) */
+/* WARNING: Removing unreachable block (ram,0x80053940) */
+/* WARNING: Removing unreachable block (ram,0x80053944) */
+/* WARNING: Removing unreachable block (ram,0x8005395c) */
+/* WARNING: Removing unreachable block (ram,0x80053974) */
+/* WARNING: Removing unreachable block (ram,0x80053990) */
+/* WARNING: Removing unreachable block (ram,0x80053998) */
+/* WARNING: Removing unreachable block (ram,0x800539a8) */
+/* WARNING: Removing unreachable block (ram,0x800539ac) */
+/* WARNING: Removing unreachable block (ram,0x800539f4) */
+/* WARNING: Removing unreachable block (ram,0x80053a00) */
+/* WARNING: Removing unreachable block (ram,0x80053a18) */
+/* WARNING: Removing unreachable block (ram,0x80053a38) */
+/* WARNING: Removing unreachable block (ram,0x80053a40) */
+/* WARNING: Removing unreachable block (ram,0x80053a84) */
+/* WARNING: Removing unreachable block (ram,0x80053a98) */
+/* WARNING: Removing unreachable block (ram,0x80053ab0) */
+/* WARNING: Removing unreachable block (ram,0x80053ac8) */
+/* WARNING: Removing unreachable block (ram,0x80053adc) */
+/* WARNING: Removing unreachable block (ram,0x80053abc) */
+/* WARNING: Removing unreachable block (ram,0x80053ae0) */
+/* WARNING: Removing unreachable block (ram,0x80053ae8) */
+/* WARNING: Removing unreachable block (ram,0x80053b04) */
+/* WARNING: Removing unreachable block (ram,0x80053b0c) */
+/* WARNING: Removing unreachable block (ram,0x80053b1c) */
+/* WARNING: Removing unreachable block (ram,0x80053b2c) */
+/* WARNING: Removing unreachable block (ram,0x80053b40) */
+/* WARNING: Removing unreachable block (ram,0x80053b60) */
+/* WARNING: Removing unreachable block (ram,0x80053b74) */
+/* WARNING: Removing unreachable block (ram,0x80053b4c) */
+/* WARNING: Removing unreachable block (ram,0x80053b78) */
+/* WARNING: Removing unreachable block (ram,0x80053b80) */
+/* WARNING: Removing unreachable block (ram,0x80053b9c) */
+/* WARNING: Removing unreachable block (ram,0x80053ba4) */
+/* WARNING: Removing unreachable block (ram,0x80053bac) */
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
 void aadSlotUpdate(void)
 
 {
-  char cVar1;
-  byte bVar2;
-  u_short uVar3;
-  bool bVar4;
-  AadSfxSlot *pAVar5;
-  AadMemoryStruct *pAVar6;
-  u_long uVar7;
-  int track;
-  int iVar8;
-  u_char uVar9;
-  _func_12 *p_Var10;
-  u_int uVar11;
-  AadSeqEvent *event;
-  u_int uVar12;
-  int iVar13;
-  _AadSequenceSlot *p_Var14;
-  _AadSequenceSlot *slot;
-  _AadSequenceSlot *p_Var15;
-
-  if (aadMem != (AadMemoryStruct *)0x0)
-  {
-    if ((aadMem->flags & 2U) == 0)
-    {
-      SpuGetAllKeysStatus(aadMem->voiceStatus);
-      pAVar6 = aadMem;
-      iVar13 = 0;
-      uVar12 = 1;
-      do
-      {
-        cVar1 = pAVar6->voiceStatus[iVar13];
-        if (cVar1 == '\x03')
-        {
-          uVar7 = pAVar6->voiceKeyOffRequest | uVar12;
-        LAB_800522e8:
-          pAVar6->voiceKeyOffRequest = uVar7;
-        }
-        else
-        {
-          if (((pAVar6->voiceKeyOffRequest & uVar12) != 0) && ((cVar1 == '\0' || (cVar1 == '\x02'))))
-          {
-            uVar7 = pAVar6->voiceKeyOffRequest & ~uVar12;
-            goto LAB_800522e8;
-          }
-        }
-        iVar13 = iVar13 + 1;
-        uVar12 = uVar12 << 1;
-      } while (iVar13 < 0x18);
-      if (((aadMem->flags & 4U) == 0) && (iVar13 = 0, 0 < aadMem->numSlots))
-      {
-        track = 0;
-        do
-        {
-          slot = *(_AadSequenceSlot **)((int)aadMem->sequenceSlots + track);
-          if (((slot->status & 1) != 0) && ((slot->slotFlags & 1) == 0))
-          {
-            (slot->tempo).currentTick =
-                (slot->tempo).currentTick + (u_int)(slot->tempo).ticksPerUpdate;
-            uVar11 = (slot->tempo).tickTimeFixed;
-            uVar12 = (slot->tempo).currentError + (slot->tempo).errorPerUpdate;
-            (slot->tempo).currentError = uVar12;
-            if (uVar11 <= uVar12)
-            {
-              (slot->tempo).currentError = uVar12 - uVar11;
-              (slot->tempo).currentTick = (slot->tempo).currentTick + 1;
-            }
-            track = 0;
-            p_Var14 = slot;
-            p_Var15 = slot;
-            do
-            {
-              if (p_Var15->sequencePosition[0] == (_func_9 *)0x0)
-                break;
-              bVar2 = p_Var14->eventsInQueue[0];
-              while ((bVar2 < 3 && (iVar8 = aadQueueNextEvent(slot, track), iVar8 == 0)))
-              {
-                bVar2 = p_Var14->eventsInQueue[0];
-              }
-              p_Var14 = (_AadSequenceSlot *)((int)&(p_Var14->tempo).currentTick + 1);
-              track = track + 1;
-              p_Var15 = (_AadSequenceSlot *)&(p_Var15->tempo).currentError;
-            } while (track < 0x10);
-            track = 0;
-            iVar8 = 0;
-            p_Var14 = slot;
-            p_Var15 = slot;
-            do
-            {
-              if (p_Var14->sequencePosition[0] == (_func_9 *)0x0)
-                break;
-              uVar9 = p_Var15->eventsInQueue[0];
-              while (uVar9 != '\0')
-              {
-                event = (AadSeqEvent *)((int)&slot->eventQueue[(u_int)p_Var15->eventOut[0] * 0x10].deltaTime + iVar8);
-                uVar12 = event->deltaTime + p_Var14->lastEventExecutedTime[0];
-                if ((slot->tempo).currentTick < uVar12)
-                  break;
-                p_Var14->lastEventExecutedTime[0] = uVar12;
-                uVar9 = p_Var15->eventOut[0] + '\x01';
-                p_Var15->eventOut[0] = uVar9;
-                p_Var15->eventsInQueue[0] = p_Var15->eventsInQueue[0] + -1;
-                if (uVar9 == '\x04')
-                {
-                  p_Var15->eventOut[0] = '\0';
-                }
-                aadExecuteSfxCommand(event, slot);
-                uVar9 = p_Var15->eventsInQueue[0];
-              }
-              p_Var14 = (_AadSequenceSlot *)&(p_Var14->tempo).currentError;
-              iVar8 = iVar8 + 0xc;
-              track = track + 1;
-              p_Var15 = (_AadSequenceSlot *)((int)&(p_Var15->tempo).currentTick + 1);
-            } while (track < 0x10);
-          }
-          iVar13 = iVar13 + 1;
-          track = iVar13 * 4;
-        } while (iVar13 < aadMem->numSlots);
-      }
-      uVar3 = (aadMem->sfxSlot).commandsInQueue;
-      while (uVar3 != 0)
-      {
-        aadExecuteEvent((aadMem->sfxSlot).commandQueue + (aadMem->sfxSlot).commandOut);
-        pAVar6 = aadMem;
-        pAVar5 = &aadMem->sfxSlot;
-        uVar9 = (aadMem->sfxSlot).commandOut + '\x01';
-        (aadMem->sfxSlot).commandOut = uVar9;
-        (pAVar6->sfxSlot).commandsInQueue = pAVar5->commandsInQueue - 1;
-        if (uVar9 == ' ')
-        {
-          (aadMem->sfxSlot).commandOut = '\0';
-        }
-        uVar3 = (aadMem->sfxSlot).commandsInQueue;
-      }
-      uVar12 = aadMem->voiceKeyOffRequest & ~aadMem->voiceKeyOnRequest;
-      aadMem->voiceKeyOffRequest = uVar12;
-      if (uVar12 != 0)
-      {
-        SpuSetKey(0, uVar12);
-      }
-      SpuSetReverbVoice(1, aadMem->voiceReverbRequest);
-      SpuSetReverbVoice(0, ~aadMem->voiceReverbRequest);
-      if (aadMem->voiceKeyOnRequest != 0)
-      {
-        SpuSetKey(1, aadMem->voiceKeyOnRequest);
-        aadMem->voiceKeyOnRequest = 0;
-      }
-    }
-    iVar13 = (aadMem->masterVolFader).volumeStep;
-    bVar4 = false;
-    if (iVar13 != 0)
-    {
-      track = aadMem->masterVolume + iVar13;
-      if (iVar13 < 0)
-      {
-        bVar4 = track < (aadMem->masterVolFader).targetVolume;
-      }
-      else
-      {
-        if ((aadMem->masterVolFader).targetVolume < track)
-        {
-          bVar4 = true;
-        }
-      }
-      if (bVar4)
-      {
-        track = (aadMem->masterVolFader).targetVolume;
-        p_Var10 = (aadMem->masterVolFader).fadeCompleteCallback;
-        (aadMem->masterVolFader).volumeStep = 0;
-        if (p_Var10 != (_func_12 *)0x0)
-        {
-          (*p_Var10)();
-        }
-      }
-      aadSetMusicMasterVolume(track);
-    }
-    iVar13 = (aadMem->musicMasterVolFader).volumeStep;
-    if ((iVar13 != 0) && (bVar4 = false, (aadMem->updateCounter & 1) == 0))
-    {
-      track = aadMem->musicMasterVol + iVar13;
-      if (iVar13 < 0)
-      {
-        bVar4 = track <= (aadMem->musicMasterVolFader).targetVolume;
-      }
-      else
-      {
-        if ((aadMem->musicMasterVolFader).targetVolume <= track)
-        {
-          bVar4 = true;
-        }
-      }
-      if (bVar4)
-      {
-        track = (aadMem->musicMasterVolFader).targetVolume;
-        p_Var10 = (aadMem->musicMasterVolFader).fadeCompleteCallback;
-        (aadMem->musicMasterVolFader).volumeStep = 0;
-        if (p_Var10 != (_func_12 *)0x0)
-        {
-          (*p_Var10)();
-        }
-      }
-      SOUND_SetMusicVolume(track);
-    }
-    aadMem->updateCounter = aadMem->updateCounter + 1;
-  }
   return;
 }
 
-u_long aadCreateFourCharID(char a, char b, char c, char d)
+
+
+// decompiled code
+// original method signature: 
+// unsigned long /*$ra*/ aadCreateFourCharID(char a /*$a0*/, char b /*$a1*/, char c /*$a2*/, char d /*$a3*/)
+ // line 600, offset 0x80053bf4
+	/* begin block 1 */
+		// Start line: 1381
+	/* end block 1 */
+	// End Line: 1382
+
+	/* begin block 2 */
+		// Start line: 1382
+	/* end block 2 */
+	// End Line: 1383
+
+ulong aadCreateFourCharID(char a,char b,char c,char d)
 
 {
-  return CONCAT13(a, CONCAT12(b, CONCAT11(c, d)));
+  return CONCAT13(a,CONCAT12(b,CONCAT11(c,d)));
 }
 
-int aadLoadDynamicSfxReturn(char *sndFileName, char *smpFileName, int dynamicBankIndex, int loadOption,
-                            TDRFuncPtr_aadLoadDynamicSoundBank4retProc retProc)
+
+
+// decompiled code
+// original method signature: 
+// unsigned short /*$ra*/ aadLoadDynamicSoundBank(char *sndFileName /*$s1*/, char *smpFileName /*$s2*/, int dynamicBankIndex /*$s0*/, int loadOption /*$s3*/, TDRFuncPtr_aadLoadDynamicSoundBank4retProc retProc /*stack 16*/)
+ // line 608, offset 0x80053c1c
+	/* begin block 1 */
+		// Start line: 609
+		// Start offset: 0x80053C1C
+		// Variables:
+	// 		int i; // $v1
+	/* end block 1 */
+	// End offset: 0x80053D34
+	// End Line: 661
+
+	/* begin block 2 */
+		// Start line: 1397
+	/* end block 2 */
+	// End Line: 1398
+
+ushort aadLoadDynamicSoundBank
+                 (char *sndFileName,char *smpFileName,int dynamicBankIndex,int loadOption,
+                 TDRFuncPtr_aadLoadDynamicSoundBank4retProc retProc)
 
 {
-  AadMemoryStruct *pAVar1;
-  undefined *puVar2;
-  AadMemoryStruct *pAVar3;
-  int iVar4;
-  AadDynamicBankLoadInfo *__dest;
-
-  pAVar1 = aadMem;
-  iVar4 = 0;
-  __dest = &aadMem->dynamicBankLoadInfo;
-  pAVar3 = aadMem;
-  do
-  {
-    iVar4 = iVar4 + 1;
-    if (pAVar3->dynamicBankStatus[0] == 1)
-    {
-      return (int)&DAT_00001006;
+  char *pcVar1;
+  ushort uVar2;
+  int iVar3;
+  
+  iVar3 = 0;
+  do {
+    pcVar1 = (char *)(iVar3 + 0x4e8);
+    iVar3 = iVar3 + 1;
+    if (*pcVar1 == '\x01') {
+      return 0x1006;
     }
-    pAVar3 = (AadMemoryStruct *)&pAVar3->numSlots;
-  } while (iVar4 < 2);
-  if (dynamicBankIndex < 2)
-  {
-    if (((&aadMem->updateCounter + dynamicBankIndex)[0x140] == 2) &&
-        ((&aadMem->updateCounter + dynamicBankIndex)[0x142] != 0))
-    {
+  } while (iVar3 < 2);
+  uVar2 = 0x1005;
+  if (dynamicBankIndex < 2) {
+    if ((*(char *)(dynamicBankIndex + 0x4e8) == '\x02') &&
+       (*(int *)(dynamicBankIndex * 4 + 0x4ec) != 0)) {
       aadFreeDynamicSoundBank(dynamicBankIndex);
     }
-    aadMem->dynamicBankStatus[dynamicBankIndex] = 1;
-    strncmp((char *)__dest, sndFileName, 0x1f);
-    strncmp((pAVar1->dynamicBankLoadInfo).smpFileName, smpFileName, 0x1f);
-    (pAVar1->dynamicBankLoadInfo).dynamicBankIndex = dynamicBankIndex;
-    (pAVar1->dynamicBankLoadInfo).loadOption = loadOption;
-    (pAVar1->dynamicBankLoadInfo).flags = 0;
-    *(TDRFuncPtr_aadLoadDynamicSoundBank4retProc *)&(pAVar1->dynamicBankLoadInfo).userCallbackProc =
-        retProc;
-    (*aadMem->nonBlockLoadProc)(sndFileName, aadLoadDynamicSoundBankReturn, __dest, 0,
-                                aadMem->dynamicSoundBankData + dynamicBankIndex, 4);
-    puVar2 = (undefined *)0x0;
+    *(undefined *)(dynamicBankIndex + 0x4e8) = 1;
+    uRam000006b0 = (undefined2)dynamicBankIndex;
+    uRam000006b2 = (undefined2)loadOption;
+    uRam000006c0 = 0;
+    pTRam000006b4 = retProc;
+    pcRam000006a8 = sndFileName;
+    pcRam000006ac = smpFileName;
+    (*pcRam000006cc)(sndFileName,aadLoadDynamicSoundBankReturn,0x6a8,0,dynamicBankIndex * 4 + 0x4ec,
+                     (uint)bRam000006dc);
+    uVar2 = 0;
   }
-  else
-  {
-    puVar2 = &DAT_00001005;
-  }
-  return (int)puVar2;
+  return uVar2;
 }
 
-void aadLoadDynamicSoundBankReturn(void *loadedDataPtr, void *data, void *data2)
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadLoadDynamicSoundBankReturn(void *loadedDataPtr /*$a0*/, void *data /*$s2*/, void *data2 /*$a2*/)
+ // line 666, offset 0x80053d50
+	/* begin block 1 */
+		// Start line: 667
+		// Start offset: 0x80053D50
+		// Variables:
+	// 		unsigned short error; // $v1
+	/* end block 1 */
+	// End offset: 0x80053E20
+	// End Line: 737
+
+	/* begin block 2 */
+		// Start line: 1565
+	/* end block 2 */
+	// End Line: 1566
+
+void aadLoadDynamicSoundBankReturn(void *loadedDataPtr,void *data,void *data2)
 
 {
-  u_long *puVar1;
-  AadMemoryStruct *pAVar2;
-  u_int uVar3;
-  u_int dynamicBankIndex;
-
-  dynamicBankIndex = *(u_int *)((int)data + 0x40);
-  uVar3 = aadOpenDynamicSoundBank((u_char *)loadedDataPtr, dynamicBankIndex);
-  pAVar2 = aadMem;
-  if (uVar3 == 0)
-  {
-    (*aadMem->nonBlockBufferedLoadProc)((int)data + 0x20, aadLoadDynamicSoundBank, data, 0);
+  ushort uVar1;
+  uint dynamicBankIndex;
+  
+  dynamicBankIndex = (uint)*(ushort *)((int)data + 8);
+  uVar1 = aadOpenDynamicSoundBank((uchar *)loadedDataPtr,dynamicBankIndex);
+  if (uVar1 == 0) {
+    uRam000006c4 = 0;
+    uRam000006c8 = 0;
+    (*pcRam000006d0)(*(undefined4 *)((int)data + 4),aadLoadDynamicSoundBankReturn2,data,0);
   }
-  else
-  {
-    puVar1 = &aadMem->updateCounter;
-    (puVar1 + dynamicBankIndex)[0x140] = uVar3 & 0xff | 0x80;
-    if ((puVar1 + dynamicBankIndex)[0x142] != 0)
-    {
-      (*pAVar2->memoryFreeProc)();
-      aadMem->dynamicSoundBankData[dynamicBankIndex] = (_func_43 *)0x0;
+  else {
+    *(byte *)(dynamicBankIndex + 0x4e8) = (byte)uVar1 | 0x80;
+    if (*(int *)(dynamicBankIndex * 4 + 0x4ec) != 0) {
+      (*pcRam000006d8)();
+      *(undefined4 *)(dynamicBankIndex * 4 + 0x4ec) = 0;
     }
-    if (*(code **)((int)data + 0x48) != (code *)0x0)
-    {
-      (**(code **)((int)data + 0x48))(dynamicBankIndex & 0xffff, uVar3);
+    if (*(code **)((int)data + 0xc) != (code *)0x0) {
+      (**(code **)((int)data + 0xc))(dynamicBankIndex,(uint)uVar1);
     }
   }
   return;
 }
 
-void aadLoadDynamicSoundBank(void *loadedDataPtr, long loadedDataSize, short status, void *data1, void *data2)
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadLoadDynamicSoundBankReturn2(void *loadedDataPtr /*$a0*/, long loadedDataSize /*$s2*/, short status /*$s5*/, void *data1 /*$a3*/, void *data2 /*stack 16*/)
+ // line 747, offset 0x80053e3c
+	/* begin block 1 */
+		// Start line: 748
+		// Start offset: 0x80053E3C
+		// Variables:
+	// 		unsigned char *dataPtr; // $s1
+	// 		struct AadDynamicBankLoadInfo *info; // $s0
+	// 		unsigned short dynamicBankIndex; // $s3
+
+		/* begin block 1.1 */
+			// Start line: 832
+			// Start offset: 0x80053FE8
+			// Variables:
+		// 		int i; // $a2
+		/* end block 1.1 */
+		// End offset: 0x8005407C
+		// End Line: 846
+	/* end block 1 */
+	// End offset: 0x8005407C
+	// End Line: 848
+
+	/* begin block 2 */
+		// Start line: 1735
+	/* end block 2 */
+	// End Line: 1736
+
+void aadLoadDynamicSoundBankReturn2
+               (void *loadedDataPtr,long loadedDataSize,short status,void *data1,void *data2)
 
 {
-  AadMemoryStruct *pAVar1;
-  u_long uVar2;
+  ulong uVar1;
+  int *piVar2;
   int iVar3;
-  u_long *puVar4;
-  u_int uVar5;
-  code *pcVar6;
-  u_char *puVar7;
-  u_int uVar8;
-  int iVar9;
-
-  uVar5 = (u_int)(u_short)status << 0x10;
-  iVar9 = (int)uVar5 >> 0x10;
-  uVar8 = *(u_int *)((int)data1 + 0x40);
-  if (iVar9 < 0x100)
-  {
-    if ((*(u_int *)((int)data1 + 0x54) & 1) == 0)
-    {
-      puVar7 = (u_char *)((int)loadedDataPtr + 4);
-      *(u_int *)((int)data1 + 0x54) = *(u_int *)((int)data1 + 0x54) | 1;
+  undefined2 in_register_0000001a;
+  uint uVar4;
+  code *pcVar5;
+  undefined4 *puVar6;
+  uint uVar7;
+  int iVar8;
+  
+  uVar4 = CONCAT22(in_register_0000001a,status);
+  iVar8 = (int)(uVar4 << 0x10) >> 0x10;
+  uVar7 = (uint)*(ushort *)((int)data1 + 8);
+  if (iVar8 < 0x100) {
+    if ((*(uint *)((int)data1 + 0x18) & 1) == 0) {
+      puVar6 = (undefined4 *)((int)loadedDataPtr + 4);
+      *(uint *)((int)data1 + 0x18) = *(uint *)((int)data1 + 0x18) | 1;
       loadedDataPtr = (void *)((int)loadedDataPtr + 8);
       loadedDataSize = loadedDataSize - 8;
-      *(u_char *)((int)data1 + 0x4c) = *puVar7;
-      if ((*(int *)((int)data1 + 0x44) == 0) || (*(int *)((int)data1 + 0x44) != 1))
-      {
-        *(u_char *)((int)data1 + 0x50) = 0x49ed0;
+      *(undefined4 *)((int)data1 + 0x10) = *puVar6;
+      if ((*(short *)((int)data1 + 10) == 0) || (*(short *)((int)data1 + 10) != 1)) {
+        *(undefined4 *)((int)data1 + 0x14) = 0x482e0;
       }
-      else
-      {
-        uVar2 = aadGetReverbDepth();
-        *(int *)((int)data1 + 0x50) = (0x80000 - *(int *)((int)data1 + 0x4c)) - uVar2;
+      else {
+        uVar1 = aadGetReverbSize();
+        *(int *)((int)data1 + 0x14) = (0x80000 - *(int *)((int)data1 + 0x10)) - uVar1;
       }
-      aadMem->dynamicSoundBankSramData[uVar8] = *(u_long *)((int)data1 + 0x50);
+      *(undefined4 *)(uVar7 * 4 + 0x4f4) = *(undefined4 *)((int)data1 + 0x14);
+      *(undefined4 *)(uVar7 * 4 + 0x4fc) = *(undefined4 *)((int)data1 + 0x10);
+      *(undefined *)(uVar7 + 0x504) = *(undefined *)((int)data1 + 10);
     }
-    aadWaitForSramTransferComplete();
-    SpuSetTransferCallback(*(u_int *)((int)data1 + 0x50));
-    SpuRead((word *)loadedDataPtr, loadedDataSize, uVar5);
-    *(int *)((int)data1 + 0x50) = *(int *)((int)data1 + 0x50) + loadedDataSize;
-    if (status != 1)
-    {
+    do {
+      iVar8 = SpuIsTransferCompleted(0);
+    } while (iVar8 == 0);
+    SpuSetTransferStartAddr(*(uint *)((int)data1 + 0x14));
+    SpuWrite((word *)loadedDataPtr,loadedDataSize,uVar4);
+    *(int *)((int)data1 + 0x14) = *(int *)((int)data1 + 0x14) + loadedDataSize;
+    if (status != 1) {
       return;
     }
-    iVar9 = 0;
-    if (0 < *(int *)(aadMem->dynamicSoundBankHdr[uVar8] + 0x14))
-    {
-      puVar4 = &aadMem->updateCounter + uVar8;
-      iVar3 = 0;
-      do
-      {
-        *(int *)(puVar4[0x13a] + iVar3) = *(int *)(puVar4[0x13a] + iVar3) + puVar4[0x144];
-        iVar9 = iVar9 + 1;
-        iVar3 = iVar9 * 4;
-      } while (iVar9 < *(int *)(puVar4[0x134] + 0x14));
+    iVar8 = 0;
+    if (*(short *)(*(int *)(uVar7 * 4 + 0x4b8) + 0xe) != 0) {
+      do {
+        iVar3 = uVar7 * 4;
+        piVar2 = (int *)(iVar8 * 4 + *(int *)(iVar3 + 0x4d0));
+        *piVar2 = *piVar2 + *(int *)(iVar3 + 0x4f4);
+        iVar8 = iVar8 + 1;
+      } while (iVar8 < (int)(uint)*(ushort *)(*(int *)(iVar3 + 0x4b8) + 0xe));
     }
-    aadMem->dynamicBankStatus[uVar8] = 2;
-    pcVar6 = *(code **)((int)data1 + 0x48);
-    uVar8 = uVar8 & 0xffff;
-    if (pcVar6 == (code *)0x0)
-    {
-      return;
-    }
-    iVar9 = 0;
+    *(undefined *)(uVar7 + 0x4e8) = 2;
+    pcVar5 = *(code **)((int)data1 + 0xc);
+    iVar8 = 0;
   }
-  else
-  {
-    if ((*(u_int *)((int)data1 + 0x54) & 2) != 0)
-    {
+  else {
+    if ((*(uint *)((int)data1 + 0x18) & 2) != 0) {
       return;
     }
-    *(u_int *)((int)data1 + 0x54) = *(u_int *)((int)data1 + 0x54) | 2;
-    pAVar1 = aadMem;
-    puVar4 = &aadMem->updateCounter;
-    (puVar4 + uVar8)[0x140] = uVar5 >> 0x18 | 0x80;
-    if ((puVar4 + uVar8)[0x142] != 0)
-    {
-      (*pAVar1->memoryFreeProc)();
-      aadMem->dynamicSoundBankData[uVar8] = (_func_43 *)0x0;
+    *(uint *)((int)data1 + 0x18) = *(uint *)((int)data1 + 0x18) | 2;
+    *(byte *)(uVar7 + 0x4e8) = (byte)((uVar4 << 0x10) >> 0x18) | 0x80;
+    if (*(int *)(uVar7 * 4 + 0x4ec) != 0) {
+      (*pcRam000006d8)();
+      *(undefined4 *)(uVar7 * 4 + 0x4ec) = 0;
     }
-    pcVar6 = *(code **)((int)data1 + 0x48);
-    if (pcVar6 == (code *)0x0)
-    {
-      return;
-    }
+    pcVar5 = *(code **)((int)data1 + 0xc);
   }
-  (*pcVar6)(uVar8, iVar9);
+  if (pcVar5 != (code *)0x0) {
+    (*pcVar5)(uVar7,iVar8);
+  }
   return;
 }
 
-int aadFreeDynamicSoundBank(int dynamicBankIndex)
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadFreeLoadBuffer()
+ // line 854, offset 0x800540a0
+	/* begin block 1 */
+		// Start line: 1982
+	/* end block 1 */
+	// End Line: 1983
+
+	/* begin block 2 */
+		// Start line: 1983
+	/* end block 2 */
+	// End Line: 1984
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
+void aadFreeLoadBuffer(void)
 
 {
-  AadMemoryStruct *pAVar1;
-  undefined *puVar2;
-  u_long *puVar3;
-
-  pAVar1 = aadMem;
-  if (dynamicBankIndex < 2)
-  {
-    puVar3 = &aadMem->updateCounter + dynamicBankIndex;
-    puVar2 = &DAT_00001007;
-    if ((puVar3[0x140] == 2) && (puVar2 = &DAT_00001007, puVar3[0x142] != 0))
-    {
-      puVar3[0x140] = 0;
-      (*pAVar1->memoryFreeProc)(puVar3[0x142]);
-      puVar2 = (undefined *)0x0;
-      aadMem->dynamicSoundBankData[dynamicBankIndex] = (_func_43 *)0x0;
-    }
+  if (iRam000006c4 != 0) {
+    (*pcRam000006d8)();
+    iRam000006c4 = 0;
   }
-  else
-  {
-    puVar2 = &DAT_00001005;
-  }
-  return (int)puVar2;
+  return;
 }
 
-int aadOpenDynamicSoundBank(u_char *soundBank, int dynamicBankIndex)
+
+
+// decompiled code
+// original method signature: 
+// unsigned short /*$ra*/ aadFreeDynamicSoundBank(int dynamicBankIndex /*$a0*/)
+ // line 864, offset 0x800540e8
+	/* begin block 1 */
+		// Start line: 2003
+	/* end block 1 */
+	// End Line: 2004
+
+ushort aadFreeDynamicSoundBank(int dynamicBankIndex)
 
 {
-  undefined *puVar1;
-  u_long uVar2;
-  u_char *puVar3;
-  u_long *puVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
-  int *piVar8;
-  int iVar9;
-  int iVar10;
-  int iVar11;
-  int iVar12;
-
-  if (dynamicBankIndex < 2)
-  {
-    uVar2 = aadCreateFourCharID('a', 'S', 'N', 'D');
-    puVar1 = &DAT_00001001;
-    if ((*(u_long *)soundBank == uVar2) && (puVar1 = &DAT_00001002, *(int *)(soundBank + 8) == 0x106))
-    {
-      iVar12 = 0;
-      iVar5 = *(int *)(soundBank + 0xc);
-      iVar9 = *(int *)(soundBank + 0x10);
-      iVar10 = *(int *)(soundBank + 0x14);
-      iVar6 = *(int *)(soundBank + 0x18);
-      iVar11 = *(int *)(soundBank + 0x1c);
-      puVar4 = &aadMem->updateCounter + dynamicBankIndex;
-      puVar3 = soundBank + *(int *)(soundBank + 4);
-      *(u_char **)(puVar4 + 0x136) = puVar3;
-      puVar3 = puVar3 + iVar5 * 8;
-      *(u_char **)(puVar4 + 0x138) = puVar3;
-      piVar8 = (int *)(puVar3 + iVar9 * 0x10 + iVar10 * 4);
-      piVar7 = piVar8 + iVar6;
-      *(u_char **)(puVar4 + 0x134) = soundBank;
-      *(u_char **)(puVar4 + 0x13a) = puVar3 + iVar9 * 0x10;
-      *(int **)(puVar4 + 0x13c) = piVar8;
-      *(int **)(puVar4 + 0x13e) = piVar7;
-      if (0 < *(int *)(soundBank + 0x18))
-      {
-        do
-        {
-          *(int *)(puVar4[0x13c] + iVar12 * 4) = (int)piVar7 + *piVar8 + iVar11 * 4;
-          iVar12 = iVar12 + 1;
-          piVar8 = piVar8 + 1;
-        } while (iVar12 < *(int *)(soundBank + 0x18));
+  ushort uVar1;
+  int iVar2;
+  
+  if (dynamicBankIndex < 2) {
+    iVar2 = dynamicBankIndex * 4;
+    if (*(char *)(dynamicBankIndex + 0x4e8) == '\x02') {
+      uVar1 = 0x1007;
+      if (*(int *)(iVar2 + 0x4ec) != 0) {
+        *(undefined *)(dynamicBankIndex + 0x4e8) = 0;
+        (*pcRam000006d8)(*(undefined4 *)(iVar2 + 0x4ec));
+        uVar1 = 0;
+        *(undefined4 *)(iVar2 + 0x4ec) = 0;
       }
-      puVar1 = (undefined *)0x0;
+    }
+    else {
+      uVar1 = 0x1007;
     }
   }
-  else
-  {
-    puVar1 = &DAT_00001005;
+  else {
+    uVar1 = 0x1005;
   }
-  return (int)puVar1;
+  return uVar1;
 }
 
-int aadLoadDynamicSoundBankReturn2(char *fileName, long directoryID, long flags)
+
+
+// decompiled code
+// original method signature: 
+// unsigned short /*$ra*/ aadOpenDynamicSoundBank(unsigned char *soundBank /*$a0*/, int dynamicBankIndex /*$s1*/)
+ // line 894, offset 0x8005417c
+	/* begin block 1 */
+		// Start line: 895
+		// Start offset: 0x8005417C
+		// Variables:
+	// 		struct AadSoundBankHdr *soundBankHdr; // $s0
+	// 		struct AadProgramAtr *programAtr; // $v0
+	// 		struct AadToneAtr *toneAtr; // $v0
+	// 		unsigned long *waveAddr; // $v0
+	// 		unsigned long *sequenceOffsetTbl; // $a0
+	// 		unsigned long *sequenceLabelOffsetTbl; // $a1
+	// 		unsigned char *sequenceBase; // $a3
+	// 		int i; // $t2
+	/* end block 1 */
+	// End offset: 0x80054288
+	// End Line: 943
+
+	/* begin block 2 */
+		// Start line: 2070
+	/* end block 2 */
+	// End Line: 2071
+
+ushort aadOpenDynamicSoundBank(uchar *soundBank,int dynamicBankIndex)
 
 {
-  int *piVar1;
-  AadMemoryStruct *pAVar2;
-  int iVar3;
-  u_int uVar4;
-  AadDynamicLoadRequest *pAVar5;
-
-  pAVar2 = aadMem;
-  iVar3 = 0;
-  if (aadMem->numLoadReqsQueued < 0x10)
-  {
-    pAVar5 = aadMem->loadRequestQueue + aadMem->nextLoadReqIn;
-    pAVar5->type = 0;
-    uVar4 = pAVar2->nextFileHandle;
-    pAVar5->handle = uVar4 & 0x3fff | 0x4000;
-    pAVar2->nextFileHandle = uVar4 + 1;
-    pAVar5->directoryID = directoryID;
-    pAVar5->flags = flags;
-    strncmp(pAVar5->fileName, fileName, 0xb);
-    pAVar2 = aadMem;
-    piVar1 = &aadMem->numLoadReqsQueued;
-    aadMem->nextLoadReqIn = aadMem->nextLoadReqIn + 1U & 0xf;
-    pAVar2->numLoadReqsQueued = *piVar1 + 1;
-    iVar3 = pAVar5->handle;
+  byte bVar1;
+  byte bVar2;
+  ushort uVar3;
+  ushort uVar4;
+  ushort uVar5;
+  ulong uVar6;
+  uchar *puVar7;
+  int *piVar8;
+  int *piVar9;
+  int iVar10;
+  
+  if (dynamicBankIndex < 2) {
+    uVar6 = aadCreateFourCharID('a','S','N','D');
+    uVar5 = 0x1001;
+    if ((*(ulong *)soundBank == uVar6) && (uVar5 = 0x1002, *(short *)(soundBank + 8) == 0x106)) {
+      iVar10 = 0;
+      dynamicBankIndex = dynamicBankIndex * 4;
+      bVar1 = soundBank[0xb];
+      uVar5 = *(ushort *)(soundBank + 0xc);
+      uVar3 = *(ushort *)(soundBank + 0xe);
+      bVar2 = soundBank[0x10];
+      uVar4 = *(ushort *)(soundBank + 0x12);
+      puVar7 = soundBank + *(int *)(soundBank + 4);
+      *(uchar **)(dynamicBankIndex + 0x4c0) = puVar7;
+      puVar7 = puVar7 + (uint)bVar1 * 8;
+      *(uchar **)(dynamicBankIndex + 0x4c8) = puVar7;
+      piVar9 = (int *)(puVar7 + (uint)uVar5 * 0x10 + (uint)uVar3 * 4);
+      piVar8 = piVar9 + bVar2;
+      *(uchar **)(dynamicBankIndex + 0x4b8) = soundBank;
+      *(uchar **)(dynamicBankIndex + 0x4d0) = puVar7 + (uint)uVar5 * 0x10;
+      *(int **)(dynamicBankIndex + 0x4d8) = piVar9;
+      *(int **)(dynamicBankIndex + 0x4e0) = piVar8;
+      if (soundBank[0x10] != '\0') {
+        do {
+          *(int *)(iVar10 * 4 + *(int *)(dynamicBankIndex + 0x4d8)) =
+               (int)piVar8 + *piVar9 + (uint)uVar4 * 4;
+          iVar10 = iVar10 + 1;
+          piVar9 = piVar9 + 1;
+        } while (iVar10 < (int)(uint)soundBank[0x10]);
+      }
+      uVar5 = 0;
+    }
   }
-  return iVar3;
+  else {
+    uVar5 = 0x1005;
+  }
+  return uVar5;
 }
 
-int aadFreeDynamicSfx(int handle)
+
+
+// decompiled code
+// original method signature: 
+// unsigned short /*$ra*/ aadLoadDynamicSfx(char *fileName /*$a3*/, unsigned long userData /*$s1*/, TDRFuncPtr_aadLoadDynamicSfx2userReturnProc userReturnProc /*$s2*/)
+ // line 960, offset 0x8005429c
+	/* begin block 1 */
+		// Start line: 961
+		// Start offset: 0x8005429C
+		// Variables:
+	// 		struct AadDynamicLoadRequest *loadReq; // $s0
+	/* end block 1 */
+	// End offset: 0x80054374
+	// End Line: 986
+
+	/* begin block 2 */
+		// Start line: 2274
+	/* end block 2 */
+	// End Line: 2275
+
+ushort aadLoadDynamicSfx(char *fileName,ulong userData,
+                        TDRFuncPtr_aadLoadDynamicSfx2userReturnProc userReturnProc)
 
 {
-  AadDynamicLoadRequest *pAVar1;
-  AadMemoryStruct *pAVar2;
-  int iVar3;
+  ushort uVar1;
+  int iVar2;
+  
+  if (bRam000006df < 8) {
+    iVar2 = (uint)bRam000006dd * 0x34;
+    *(undefined2 *)(iVar2 + 0x508) = 0;
+    uVar1 = uRam00001b5a & 0x3fff;
+    uRam00001b5a = uRam00001b5a + 1;
+    *(ushort *)(iVar2 + 0x50a) = uVar1 | 0x4000;
+    strncpy((char *)(iVar2 + 0x510),fileName,0x27);
+    *(ulong *)(iVar2 + 0x50c) = userData;
+    *(TDRFuncPtr_aadLoadDynamicSfx2userReturnProc *)(iVar2 + 0x538) = userReturnProc;
+    bRam000006dd = bRam000006dd + 1 & 7;
+    bRam000006df = bRam000006df + 1;
+    uVar1 = *(ushort *)(iVar2 + 0x50a);
+  }
+  else {
+    uVar1 = 0;
+  }
+  return uVar1;
+}
 
-  pAVar2 = aadMem;
-  if (aadMem->numLoadReqsQueued < 0x10)
-  {
-    iVar3 = aadMem->nextLoadReqIn;
-    pAVar1 = aadMem->loadRequestQueue;
-    pAVar1[iVar3].type = 1;
-    pAVar1[iVar3].handle = handle;
-    pAVar2->nextLoadReqIn = pAVar2->nextLoadReqIn + 1U & 0xf;
-    pAVar2->numLoadReqsQueued = pAVar2->numLoadReqsQueued + 1;
+
+
+// decompiled code
+// original method signature: 
+// unsigned short /*$ra*/ aadFreeDynamicSfx(unsigned short handle /*$a0*/)
+ // line 991, offset 0x8005438c
+	/* begin block 1 */
+		// Start line: 993
+		// Start offset: 0x8005438C
+		// Variables:
+	// 		struct AadDynamicLoadRequest *loadReq; // $v0
+	/* end block 1 */
+	// End offset: 0x80054414
+	// End Line: 1009
+
+	/* begin block 2 */
+		// Start line: 2364
+	/* end block 2 */
+	// End Line: 2365
+
+	/* begin block 3 */
+		// Start line: 2365
+	/* end block 3 */
+	// End Line: 2366
+
+	/* begin block 4 */
+		// Start line: 2370
+	/* end block 4 */
+	// End Line: 2371
+
+ushort aadFreeDynamicSfx(ushort handle)
+
+{
+  uint uVar1;
+  
+  if (bRam000006df < 8) {
+    uVar1 = (uint)bRam000006dd;
+    *(undefined2 *)(uVar1 * 0x34 + 0x508) = 1;
+    *(ushort *)(uVar1 * 0x34 + 0x50a) = handle;
+    bRam000006dd = bRam000006dd + 1 & 7;
+    bRam000006df = bRam000006df + 1;
     return 0;
   }
-  return (int)&DAT_0000100f;
+  return 0x100f;
 }
 
-void aadRelocateMusicMemoryBegin(void)
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadFreeAllSfx()
+ // line 1012, offset 0x80054424
+	/* begin block 1 */
+		// Start line: 1013
+		// Start offset: 0x80054424
+		// Variables:
+	// 		int i; // $s1
+	// 		struct _AadDynSfxFileHdr *snfFile; // $s2
+	// 		struct _AadDynSfxFileHdr *nextSnfFile; // $v1
+	// 		unsigned short *sfxIDListPtr; // $v1
+	/* end block 1 */
+	// End offset: 0x800544DC
+	// End Line: 1039
+
+	/* begin block 2 */
+		// Start line: 2407
+	/* end block 2 */
+	// End Line: 2408
+
+	/* begin block 3 */
+		// Start line: 2415
+	/* end block 3 */
+	// End Line: 2416
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
+void aadFreeAllSfx(void)
 
 {
-  aadMem->flags = aadMem->flags | 2;
-  return;
-}
-
-void aadRelocateSfxMemory(void *oldAddress, int offset)
-
-{
-  AadMemoryStruct *pAVar1;
-  _func_37 *p_Var2;
-  int iVar3;
+  bool bVar1;
+  ushort sfxID;
+  int iVar2;
+  ushort *puVar3;
   int iVar4;
-  int iVar5;
-  AadMemoryStruct *pAVar6;
-  _func_36 *p_Var7;
-  int iVar8;
-  _func_36 *p_Var9;
-  int iVar10;
-  int iVar11;
-
-  pAVar1 = aadMem;
-  iVar11 = 0;
-  pAVar6 = aadMem;
-  while ((_func_43 *)oldAddress != pAVar6->dynamicSoundBankData[0])
-  {
-    iVar11 = iVar11 + 1;
-    pAVar6 = (AadMemoryStruct *)&pAVar6->numSlots;
-    if (1 < iVar11)
-      goto LAB_80053050;
+  
+  bVar1 = cRam000006df != '\0';
+  while (iVar2 = iRam0000076c, bVar1) {
+    aadProcessLoadQueue();
+    bVar1 = cRam000006df != '\0';
   }
-  pAVar6->dynamicSoundBankData[0] = (_func_43 *)((int)oldAddress + offset);
-  pAVar6->dynamicProgramAtr[0] = pAVar6->dynamicProgramAtr[0] + offset;
-  pAVar6->dynamicToneAtr[0] = pAVar6->dynamicToneAtr[0] + offset;
-  p_Var2 = pAVar6->dynamicSoundBankHdr[0] + offset;
-  pAVar6->dynamicSoundBankHdr[0] = p_Var2;
-  pAVar6->dynamicWaveAddr[0] = pAVar6->dynamicWaveAddr[0] + offset;
-  pAVar6->dynamicSequenceAddressTbl[0] =
-      (_func_41 **)((int)pAVar6->dynamicSequenceAddressTbl[0] + offset);
-  iVar4 = 0;
-  if (0 < *(int *)(p_Var2 + 0x18))
-  {
-    do
-    {
-      pAVar6->dynamicSequenceAddressTbl[0][iVar4] =
-          pAVar6->dynamicSequenceAddressTbl[0][iVar4] + offset;
-      iVar4 = iVar4 + 1;
-    } while (iVar4 < *(int *)(p_Var2 + 0x18));
+  while (iVar2 != 0) {
+    iVar4 = 0;
+    puVar3 = (ushort *)(iVar2 + 0x14);
+    if (*(short *)(iVar2 + 10) != 0) {
+      do {
+        sfxID = *puVar3;
+        puVar3 = puVar3 + 1;
+        aadFreeSingleDynSfx(sfxID);
+        iVar4 = iVar4 + 1;
+      } while (iVar4 < (int)(uint)*(ushort *)(iVar2 + 10));
+    }
+    iVar2 = *(int *)(iVar2 + 0x10);
+    (*pcRam000006d8)();
   }
-  pAVar6->dynamicSequenceLabelOffsetTbl[0] = pAVar6->dynamicSequenceLabelOffsetTbl[0] + offset;
-  iVar4 = 0;
-  pAVar6 = pAVar1;
-  if (0 < pAVar1->numSlots)
-  {
-    do
-    {
-      p_Var9 = pAVar6->sequenceSlots[0];
-      if ((p_Var9[0x53e] != (_func_36)0xff) && (*(int *)(p_Var9 + 0x55c) == iVar11))
-      {
-        iVar8 = 0;
-        iVar10 = 0;
-        p_Var7 = p_Var9;
-        do
-        {
-          if (*(int *)(p_Var7 + 0x348) != 0)
-          {
-            *(int *)(p_Var7 + 0x348) = *(int *)(p_Var7 + 0x348) + offset;
-            iVar5 = 0;
-            iVar3 = iVar10;
-            if ((p_Var9 + iVar8)[0x4e8] != (_func_36)0x0)
-            {
-              do
-              {
-                *(int *)(p_Var9 + iVar3 + 1000) = *(int *)(p_Var9 + iVar3 + 1000) + offset;
-                iVar5 = iVar5 + 1;
-                iVar3 = iVar3 + 0x40;
-              } while (iVar5 < (int)(u_int)(byte)(p_Var9 + iVar8)[0x4e8]);
-            }
-          }
-          iVar10 = iVar10 + 4;
-          iVar8 = iVar8 + 1;
-          p_Var7 = p_Var7 + 4;
-        } while (iVar8 < 0x10);
-      }
-      iVar4 = iVar4 + 1;
-      pAVar6 = (AadMemoryStruct *)&pAVar6->numSlots;
-    } while (iVar4 < pAVar1->numSlots);
-  }
-LAB_80053050:
-  aadMem->flags = aadMem->flags & 0xfffffffd;
+  iRam0000076c = 0;
   return;
 }
 
-void aadRelocateMusicMemoryEnd(void *oldAddress, int offset)
 
-{
-  _AadDynSfxFileHdr *p_Var1;
 
-  p_Var1 = aadMem->firstDynSfxFile;
-  if ((_AadDynSfxFileHdr *)oldAddress == p_Var1)
-  {
-    p_Var1 = (_AadDynSfxFileHdr *)((int)&p_Var1->snfID + offset);
-    aadMem->firstDynSfxFile = p_Var1;
-  }
-  while (p_Var1 != (_AadDynSfxFileHdr *)0x0)
-  {
-    if ((_AadDynSfxFileHdr *)oldAddress == p_Var1->prevDynSfxFile)
-    {
-      p_Var1->prevDynSfxFile = (_AadDynSfxFileHdr *)((int)oldAddress + offset);
-    }
-    if ((_AadDynSfxFileHdr *)oldAddress == p_Var1->nextDynSfxFile)
-    {
-      p_Var1->nextDynSfxFile = (_AadDynSfxFileHdr *)((int)oldAddress + offset);
-    }
-    p_Var1 = p_Var1->nextDynSfxFile;
-  }
-  return;
-}
+// decompiled code
+// original method signature: 
+// int /*$ra*/ aadGetNumLoadsQueued()
+ // line 1044, offset 0x80054500
+	/* begin block 1 */
+		// Start line: 2482
+	/* end block 1 */
+	// End Line: 2483
+
+	/* begin block 2 */
+		// Start line: 2484
+	/* end block 2 */
+	// End Line: 2485
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
 
 int aadGetNumLoadsQueued(void)
 
 {
-  return aadMem->numLoadReqsQueued;
+  return (uint)bRam000006df;
 }
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadPurgeLoadQueue()
+ // line 1052, offset 0x80054514
+	/* begin block 1 */
+		// Start line: 2498
+	/* end block 1 */
+	// End Line: 2499
+
+	/* begin block 2 */
+		// Start line: 2500
+	/* end block 2 */
+	// End Line: 2501
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void aadPurgeLoadQueue(void)
 
 {
-  AadMemoryStruct *pAVar1;
-
-  pAVar1 = aadMem;
-  aadMem->nextLoadReqIn = 0;
-  pAVar1->nextLoadReqOut = 0;
-  pAVar1->numLoadReqsQueued = 0;
+  uRam000006dd = 0;
+  uRam000006de = 0;
+  uRam000006df = 0;
   return;
 }
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadProcessLoadQueue()
+ // line 1062, offset 0x80054538
+	/* begin block 1 */
+		// Start line: 1063
+		// Start offset: 0x80054538
+		// Variables:
+	// 		int i; // $v1
+	// 		struct AadDynamicLoadRequest *loadReq; // $s2
+
+		/* begin block 1.1 */
+			// Start line: 1071
+			// Start offset: 0x80054560
+			// Variables:
+		// 		struct AadDynamicSfxLoadInfo *info; // $s1
+
+			/* begin block 1.1.1 */
+				// Start line: 1125
+				// Start offset: 0x800546F8
+				// Variables:
+			// 		int i; // $s2
+			// 		struct _AadDynSfxFileHdr *snfFile; // $s1
+			// 		unsigned short *sfxIDListPtr; // $v1
+			/* end block 1.1.1 */
+			// End offset: 0x800547D4
+			// End Line: 1156
+		/* end block 1.1 */
+		// End offset: 0x800547D4
+		// End Line: 1161
+	/* end block 1 */
+	// End offset: 0x800547D4
+	// End Line: 1163
+
+	/* begin block 2 */
+		// Start line: 2518
+	/* end block 2 */
+	// End Line: 2519
+
+	/* begin block 3 */
+		// Start line: 2524
+	/* end block 3 */
+	// End Line: 2525
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void aadProcessLoadQueue(void)
 
 {
-  int *piVar1;
-  u_long *puVar2;
-  AadMemoryStruct *pAVar3;
-  char *fmt;
-  long lVar4;
-  AadMemoryStruct *pAVar5;
-  int id;
-  AadDynamicSfxLoadInfo *string;
-  _AadDynSfxFileHdr *p_Var6;
-  _AadDynSfxFileHdr *p_Var7;
-  AadDynamicLoadRequest *pAVar8;
-  char acStack32[16];
-
-  pAVar3 = aadMem;
-  string = &aadMem->dynamicSfxLoadInfo;
-  id = 0;
-  pAVar5 = aadMem;
-  if (((aadMem->dynamicSfxLoadInfo).flags & 1U) == 0)
-  {
-    do
-    {
-      id = id + 1;
-      if (pAVar5->dynamicBankStatus[0] == 1)
-      {
+  bool bVar1;
+  ushort sfxID;
+  size_t sVar2;
+  int iVar3;
+  uint uVar4;
+  char *__src;
+  ushort *puVar5;
+  int iVar6;
+  
+  if ((cRam000006df != '\0') && (iVar3 = 0, (uRam00000738 & 1) == 0)) {
+    do {
+      __src = (char *)(iVar3 + 0x4e8);
+      iVar3 = iVar3 + 1;
+      if (*__src == '\x01') {
         return;
       }
-      pAVar5 = (AadMemoryStruct *)&pAVar5->numSlots;
-    } while (id < 2);
-    if ((aadMem->numLoadReqsQueued == 0) || ((aadMem->sramDefragInfo).status != 0))
-    {
-      if (gSramCheckRequest == 0)
-      {
-        if (((gDfragRequest != 0) && ((aadMem->sramDefragInfo).status == 0)) &&
-            (musicLoadInProgress == 0))
-        {
-          (aadMem->sramDefragInfo).status = 1;
-          gDfragRequest = 0;
-        }
+    } while (iVar3 < 2);
+    uVar4 = (uint)bRam000006de;
+    bRam000006de = bRam000006de + 1 & 7;
+    cRam000006df = cRam000006df + -1;
+    iVar3 = uVar4 * 0x34;
+    if (*(short *)(iVar3 + 0x508) == 0) {
+      __src = (char *)(iVar3 + 0x510);
+      strncpy((char *)0x6e0,__src,0x27);
+      sVar2 = strlen(__src);
+      strncpy((char *)0x708,__src,sVar2 - 4);
+      sVar2 = strlen(__src);
+      *(undefined4 *)(sVar2 + 0x704) = 0x666d732e;
+      *(undefined *)(sVar2 + 0x708) = 0;
+      uRam0000074c = *(undefined2 *)(iVar3 + 0x50a);
+      iRam00000730 = *(int *)(iVar3 + 0x50c);
+      uRam00000734 = *(undefined4 *)(iVar3 + 0x538);
+      uRam00000738 = 1;
+      uRam00000750 = 0;
+      uRam00000742 = 0;
+      uRam00000748 = 0;
+      if (iRam00000730 != 0) {
+        LOAD_SetSearchDirectory(iRam00000730);
       }
-      else
-      {
-        gDfragRequest = aadCheckSramFragmented();
-        gSramCheckRequest = 0;
-      }
+      (*pcRam000006cc)(0x6e0,aadLoadDynamicSfxReturn,0x6e0,0,0x750,(uint)bRam000006dc);
     }
-    else
-    {
-      id = aadMem->nextLoadReqOut;
-      piVar1 = &aadMem->numLoadReqsQueued;
-      aadMem->nextLoadReqOut = id + 1U & 0xf;
-      pAVar8 = pAVar3->loadRequestQueue + id;
-      pAVar3->numLoadReqsQueued = *piVar1 + -1;
-      if (pAVar8->type == 0)
-      {
-        strcmp(acStack32, pAVar8->fileName);
-        fmt = strpbrk(acStack32, "0123456789");
-        if (fmt != (char *)0x0)
-        {
-          *fmt = '\0';
-        }
-        if ((pAVar8->flags & 1U) == 0)
-        {
-          sprintf((char *)string, "\\kain2\\sfx\\object\\%s\\%s.snf");
-          fmt = "\\kain2\\sfx\\object\\%s\\%s.smf";
-        }
-        else
-        {
-          sprintf((char *)string, "\\kain2\\area\\%s\\bin\\%s.snf");
-          fmt = "\\kain2\\area\\%s\\bin\\%s.smf";
-        }
-        sprintf((pAVar3->dynamicSfxLoadInfo).smfFileName, fmt);
-        (pAVar3->dynamicSfxLoadInfo).fileHandle = pAVar8->handle;
-        (pAVar3->dynamicSfxLoadInfo).directoryID = pAVar8->directoryID;
-        lVar4 = pAVar8->flags;
-        id = (pAVar3->dynamicSfxLoadInfo).directoryID;
-        gSramFullAlarm = 0;
-        (pAVar3->dynamicSfxLoadInfo).flags = 1;
-        (pAVar3->dynamicSfxLoadInfo).snfFile = (_AadDynSfxFileHdr *)0x0;
-        (pAVar3->dynamicSfxLoadInfo).error = 0;
-        (pAVar3->dynamicSfxLoadInfo).totalSramUsed = 0;
-        (pAVar3->dynamicSfxLoadInfo).loadFlags = lVar4;
-        if (id != 0)
-        {
-          LOAD_SetSearchDirectory(id);
-        }
-        (*aadMem->nonBlockLoadProc)(string, aadLoadDynamicSfx, string, 0, &(pAVar3->dynamicSfxLoadInfo).snfFile, 0x2f);
-        if ((pAVar3->dynamicSfxLoadInfo).directoryID != 0)
-        {
-          LOAD_SetSearchDirectory(0);
-        }
-        gSramCheckRequest = 1;
-      }
-      else
-      {
-        if (pAVar8->type == 1)
-        {
-          p_Var7 = pAVar3->firstDynSfxFile;
-          if (p_Var7 != (_AadDynSfxFileHdr *)0x0)
-          {
-          LAB_80053310:
-            if ((u_int)p_Var7->handle != pAVar8->handle)
-              goto LAB_800533c8;
-            id = 0;
-            p_Var6 = p_Var7 + 1;
-            if (p_Var7->numSfxInFile != 0)
-            {
-              do
-              {
-                puVar2 = &p_Var6->snfID;
-                p_Var6 = (_AadDynSfxFileHdr *)((int)&p_Var6->snfID + 2);
-                aadFreeSingleDynSfx((u_int) * (u_short *)puVar2);
-                id = id + 1;
-              } while (id < (int)(u_int)p_Var7->numSfxInFile);
+    else {
+      if (*(short *)(iVar3 + 0x508) == 1) {
+        bVar1 = iRam0000076c != 0;
+        iVar6 = iRam0000076c;
+        while (bVar1) {
+          if (*(short *)(iVar6 + 8) == *(short *)(iVar3 + 0x50a)) {
+            iVar3 = 0;
+            puVar5 = (ushort *)(iVar6 + 0x14);
+            if (*(short *)(iVar6 + 10) != 0) {
+              do {
+                sfxID = *puVar5;
+                puVar5 = puVar5 + 1;
+                aadFreeSingleDynSfx(sfxID);
+                iVar3 = iVar3 + 1;
+              } while (iVar3 < (int)(uint)*(ushort *)(iVar6 + 10));
             }
-            if (p_Var7->prevDynSfxFile == (_AadDynSfxFileHdr *)0x0)
-            {
-              aadMem->firstDynSfxFile = p_Var7->nextDynSfxFile;
+            if (*(int *)(iVar6 + 0xc) == 0) {
+              iRam0000076c = *(int *)(iVar6 + 0x10);
             }
-            else
-            {
-              p_Var7->prevDynSfxFile->nextDynSfxFile = p_Var7->nextDynSfxFile;
+            else {
+              *(undefined4 *)(*(int *)(iVar6 + 0xc) + 0x10) = *(undefined4 *)(iVar6 + 0x10);
             }
-            if (p_Var7->nextDynSfxFile != (_AadDynSfxFileHdr *)0x0)
-            {
-              p_Var7->nextDynSfxFile->prevDynSfxFile = p_Var7->prevDynSfxFile;
+            if (*(int *)(iVar6 + 0x10) != 0) {
+              *(undefined4 *)(*(int *)(iVar6 + 0x10) + 0xc) = *(undefined4 *)(iVar6 + 0xc);
             }
-            (*aadMem->memoryFreeProc)(p_Var7);
-            gSramFullAlarm = 0;
+            (*pcRam000006d8)(iVar6);
+            return;
           }
-        LAB_800533d8:
-          gSramCheckRequest = 1;
+          iVar6 = *(int *)(iVar6 + 0x10);
+          bVar1 = iVar6 != 0;
         }
       }
     }
-    aadProcessSramDefrag();
   }
   return;
-LAB_800533c8:
-  p_Var7 = p_Var7->nextDynSfxFile;
-  if (p_Var7 == (_AadDynSfxFileHdr *)0x0)
-    goto LAB_800533d8;
-  goto LAB_80053310;
 }
 
-void aadLoadDynamicSfxAbort(AadDynamicSfxLoadInfo *info, int error)
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadLoadDynamicSfxAbort(struct AadDynamicSfxLoadInfo *info /*$s0*/, unsigned short error /*$s1*/)
+ // line 1166, offset 0x800547ec
+	/* begin block 1 */
+		// Start line: 2748
+	/* end block 1 */
+	// End Line: 2749
+
+void aadLoadDynamicSfxAbort(AadDynamicSfxLoadInfo *info,ushort error)
 
 {
-  _AadDynSfxFileHdr *p_Var1;
-
-  if (info->snfFile != (_AadDynSfxFileHdr *)0x0)
-  {
-    if ((info->flags & 2U) != 0)
-    {
-      p_Var1 = info->snfFile->prevDynSfxFile;
-      if (p_Var1 == (_AadDynSfxFileHdr *)0x0)
-      {
-        aadMem->firstDynSfxFile = (_AadDynSfxFileHdr *)0x0;
+  int iVar1;
+  undefined2 in_register_00000016;
+  
+  if (info->waveTransferAddr != 0) {
+    if ((*(ushort *)&info->loadFlags & 2) != 0) {
+      iVar1 = *(int *)(info->waveTransferAddr + 0xc);
+      if (iVar1 == 0) {
+        uRam0000076c = 0;
       }
-      else
-      {
-        p_Var1->nextDynSfxFile = (_AadDynSfxFileHdr *)0x0;
+      else {
+        *(undefined4 *)(iVar1 + 0x10) = 0;
       }
     }
-    (*aadMem->memoryFreeProc)(info->snfFile);
+    (*pcRam000006d8)(info->waveTransferAddr,CONCAT22(in_register_00000016,error));
   }
-  info->flags = 0;
+  *(undefined2 *)&info->loadFlags = 0;
+  if ((code *)info->directoryID != (code *)0x0) {
+    (*(code *)info->directoryID)(0xffffffff,info->fileHandle,info->numSfxToLoad,(uint)error);
+  }
   return;
 }
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadLoadDynamicSfxDone(struct AadDynamicSfxLoadInfo *info /*$v1*/)
+ // line 1192, offset 0x80054898
+	/* begin block 1 */
+		// Start line: 2800
+	/* end block 1 */
+	// End Line: 2801
 
 void aadLoadDynamicSfxDone(AadDynamicSfxLoadInfo *info)
 
 {
-  info->flags = 0;
+  *(undefined2 *)&info->loadFlags = 0;
+  if ((code *)info->directoryID != (code *)0x0) {
+    (*(code *)info->directoryID)
+              ((int)*(short *)(info->waveTransferAddr + 6),info->fileHandle,info->numSfxToLoad,0);
+  }
   return;
 }
 
-void aadLoadDynamicSfx(void *loadedDataPtr, void *data, void *data2)
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadLoadDynamicSfxReturn(void *loadedDataPtr /*$a0*/, void *data /*$a1*/, void *data2 /*$a2*/)
+ // line 1207, offset 0x800548dc
+	/* begin block 1 */
+		// Start line: 1208
+		// Start offset: 0x800548DC
+		// Variables:
+	// 		struct _AadDynSfxFileHdr *p; // $v1
+	// 		struct AadDynamicSfxLoadInfo *info; // $s0
+	/* end block 1 */
+	// End offset: 0x80054A18
+	// End Line: 1287
+
+	/* begin block 2 */
+		// Start line: 2830
+	/* end block 2 */
+	// End Line: 2831
+
+void aadLoadDynamicSfxReturn(void *loadedDataPtr,void *data,void *data2)
 
 {
-  AadMemoryStruct *pAVar1;
-  u_long uVar2;
-  _AadDynSfxFileHdr *p_Var3;
-  _AadDynSfxFileHdr *p_Var4;
-  u_long *puVar5;
-
-  puVar5 = *(u_long **)((int)data + 0x78);
-  if ((puVar5 == (u_long *)0x0) || (puVar5 != (u_long *)loadedDataPtr))
-  {
-    aadLoadDynamicSfxAbort((AadDynamicSfxLoadInfo *)data, (int)&DAT_0000100e);
+  ulong uVar1;
+  int iVar2;
+  int iVar3;
+  ulong *puVar4;
+  
+  puVar4 = *(ulong **)((int)data + 0x70);
+  if ((puVar4 == (ulong *)0x0) || (puVar4 != (ulong *)loadedDataPtr)) {
+    aadLoadDynamicSfxAbort((AadDynamicSfxLoadInfo *)data,0x100e);
   }
-  else
-  {
-    uVar2 = aadCreateFourCharID('a', 'S', 'N', 'F');
-    pAVar1 = aadMem;
-    if ((*puVar5 == uVar2) && (*(short *)(*(int *)((int)data + 0x78) + 4) == 0x100))
-    {
-      *(undefined2 *)(*(int *)((int)data + 0x78) + 8) = *(undefined2 *)((int)data + 0x50);
-      p_Var4 = pAVar1->firstDynSfxFile;
-      if (p_Var4 == (_AadDynSfxFileHdr *)0x0)
-      {
-        pAVar1->firstDynSfxFile = *(_AadDynSfxFileHdr **)((int)data + 0x78);
-        *(u_char *)(*(int *)((int)data + 0x78) + 0xc) = 0;
+  else {
+    uVar1 = aadCreateFourCharID('a','S','N','F');
+    if ((*puVar4 == uVar1) && (*(short *)(*(int *)((int)data + 0x70) + 4) == 0x100)) {
+      *(undefined2 *)(*(int *)((int)data + 0x70) + 8) = *(undefined2 *)((int)data + 0x6c);
+      if (iRam0000076c == 0) {
+        iRam0000076c = *(int *)((int)data + 0x70);
+        *(undefined4 *)(*(int *)((int)data + 0x70) + 0xc) = 0;
       }
-      else
-      {
-        p_Var3 = p_Var4->nextDynSfxFile;
-        while (p_Var3 != (_AadDynSfxFileHdr *)0x0)
-        {
-          p_Var4 = p_Var4->nextDynSfxFile;
-          p_Var3 = p_Var4->nextDynSfxFile;
+      else {
+        iVar2 = *(int *)(iRam0000076c + 0x10);
+        iVar3 = iRam0000076c;
+        while (iVar2 != 0) {
+          iVar3 = *(int *)(iVar3 + 0x10);
+          iVar2 = *(int *)(iVar3 + 0x10);
         }
-        p_Var4->nextDynSfxFile = *(_AadDynSfxFileHdr **)((int)data + 0x78);
-        *(_AadDynSfxFileHdr **)(*(int *)((int)data + 0x78) + 0xc) = p_Var4;
+        *(undefined4 *)(iVar3 + 0x10) = *(undefined4 *)((int)data + 0x70);
+        *(int *)(*(int *)((int)data + 0x70) + 0xc) = iVar3;
       }
-      *(u_char *)(*(int *)((int)data + 0x78) + 0x10) = 0;
-      *(u_char *)((int)data + 0x60) = 0;
-      *(u_int *)((int)data + 0x5c) = *(u_int *)((int)data + 0x5c) | 2;
-      if (*(int *)((int)data + 0x54) != 0)
-      {
-        LOAD_SetSearchDirectory(*(int *)((int)data + 0x54));
-      }
-      (*aadMem->nonBlockBufferedLoadProc)((int)data + 0x28, aadLoadDynamicSfxReturn2, data, 0);
-      if (*(int *)((int)data + 0x54) != 0)
-      {
-        LOAD_SetSearchDirectory(0);
-      }
+      *(undefined4 *)(*(int *)((int)data + 0x70) + 0x10) = 0;
+      *(undefined2 *)((int)data + 0x5a) = 0;
+      *(ushort *)((int)data + 0x58) = *(ushort *)((int)data + 0x58) | 2;
+      (*pcRam000006d0)((int)data + 0x28,aadLoadDynamicSfxReturn2,data,0);
     }
-    else
-    {
-      aadLoadDynamicSfxAbort((AadDynamicSfxLoadInfo *)data, (int)&DAT_0000100b);
+    else {
+      aadLoadDynamicSfxAbort((AadDynamicSfxLoadInfo *)data,0x100b);
     }
   }
   return;
 }
 
-int aadWaveMalloc(u_short waveID, u_long waveSize)
+
+
+// decompiled code
+// original method signature: 
+// unsigned char /*$ra*/ aadWaveMalloc(unsigned short waveID /*$t6*/, unsigned long waveSize /*$a1*/)
+ // line 1298, offset 0x80054a2c
+	/* begin block 1 */
+		// Start line: 1299
+		// Start offset: 0x80054A2C
+		// Variables:
+	// 		struct AadNewSramBlockDesc *sramDesc; // $a2
+	// 		struct AadNewSramBlockDesc *bestFit; // $t2
+	// 		struct AadNewSramBlockDesc *next; // $a2
+	// 		struct AadNewSramBlockDesc *sramDescTbl; // $t3
+	// 		int i; // $t0
+	// 		int sramDescIndex; // $t1
+	// 		int bestFitIndex; // $t4
+	/* end block 1 */
+	// End offset: 0x80054C5C
+	// End Line: 1399
+
+	/* begin block 2 */
+		// Start line: 3036
+	/* end block 2 */
+	// End Line: 3037
+
+uchar aadWaveMalloc(ushort waveID,ulong waveSize)
 
 {
   byte bVar1;
-  u_short uVar2;
-  u_int uVar3;
-  u_short uVar4;
-  u_int uVar5;
-  AadNewSramBlockDesc *pAVar6;
+  ushort uVar2;
+  uint uVar3;
+  ushort uVar4;
+  uint uVar5;
+  ushort *puVar6;
   int iVar7;
-  u_char uVar8;
-  u_int uVar9;
-  AadNewSramBlockDesc *pAVar10;
-  AadNewSramBlockDesc *pAVar11;
-  u_int uVar12;
-
-  pAVar10 = (AadNewSramBlockDesc *)0x0;
-  uVar12 = 0xff;
-  uVar9 = aadMem->firstSramBlockDescIndex;
-  pAVar11 = aadMem->sramDescriptorTbl;
-  pAVar6 = pAVar11 + uVar9;
+  undefined uVar8;
+  uint uVar9;
+  ushort *puVar10;
+  uchar uVar11;
+  
+  puVar10 = (ushort *)0x0;
+  _uVar11 = 0xff;
+  uVar11 = -1;
+  uVar9 = (uint)bRam00001b56;
+  puVar6 = (ushort *)(uVar9 * 8 + 0x1754);
   uVar5 = waveSize >> 3;
-  if (pAVar6 != (AadNewSramBlockDesc *)0x0)
-  {
+  if (puVar6 != (ushort *)0x0) {
     iVar7 = 0x7f;
-    do
-    {
-      if (iVar7 == -1)
-        break;
-      if ((((pAVar6->waveID & 0x4000) == 0) && (uVar5 + 6 <= (u_int)pAVar6->size)) &&
-          ((pAVar10 == (AadNewSramBlockDesc *)0x0 ||
-            (((u_int)pAVar6->size - 6) - uVar5 < ((u_int)pAVar10->size - 6) - uVar5))))
-      {
-        pAVar10 = pAVar6;
-        uVar12 = uVar9;
+    do {
+      uVar11 = (uchar)_uVar11;
+      if (iVar7 == -1) break;
+      if ((((*puVar6 & 0x4000) == 0) && (uVar5 <= puVar6[2])) &&
+         ((puVar10 == (ushort *)0x0 || (puVar6[2] - uVar5 < puVar10[2] - uVar5)))) {
+        puVar10 = puVar6;
+        _uVar11 = uVar9;
       }
-      if ((char)pAVar6->nextIndex < '\0')
-      {
-        pAVar6 = (AadNewSramBlockDesc *)0x0;
+      uVar11 = (uchar)_uVar11;
+      if (*(char *)((int)puVar6 + 7) < '\0') {
+        puVar6 = (ushort *)0x0;
       }
-      else
-      {
-        uVar3 = (u_int)pAVar6->nextIndex;
-        pAVar6 = (AadNewSramBlockDesc *)0x0;
-        if (uVar3 != uVar9)
-        {
-          pAVar6 = pAVar11 + uVar3;
+      else {
+        uVar3 = (uint)*(byte *)((int)puVar6 + 7);
+        puVar6 = (ushort *)0x0;
+        if (uVar3 != uVar9) {
+          puVar6 = (ushort *)(uVar3 * 8 + 0x1754);
           uVar9 = uVar3;
         }
       }
       iVar7 = iVar7 + -1;
-    } while (pAVar6 != (AadNewSramBlockDesc *)0x0);
+    } while (puVar6 != (ushort *)0x0);
   }
-  if (pAVar10 == (AadNewSramBlockDesc *)0x0)
-  {
-    return 0xff;
+  if (puVar10 == (ushort *)0x0) {
+    return -1;
   }
-  pAVar10->waveID = waveID | 0xc000;
-  if (uVar5 < pAVar10->size)
-  {
-    uVar4 = (u_short)uVar5;
-    if (-1 < (char)pAVar10->nextIndex)
+  *puVar10 = waveID | 0xc000;
+  if (uVar5 < puVar10[2]) {
+    uVar4 = (ushort)uVar5;
+    if ((-1 < *(char *)((int)puVar10 + 7)) &&
+       (iVar7 = (uint)*(byte *)((int)puVar10 + 7) * 8, (*(ushort *)(iVar7 + 0x1754) & 0x4000) == 0))
     {
-      pAVar6 = pAVar11 + pAVar10->nextIndex;
-      if ((pAVar6->waveID & 0x4000) == 0)
-      {
-        pAVar6->address = pAVar6->address - (pAVar10->size - uVar4);
-        pAVar6->size = pAVar6->size + (pAVar10->size - uVar4);
-        pAVar10->size = uVar4;
-        return uVar12;
-      }
+      *(short *)(iVar7 + 0x1756) = *(short *)(iVar7 + 0x1756) - (puVar10[2] - uVar4);
+      *(short *)(iVar7 + 0x1758) = *(short *)(iVar7 + 0x1758) + (puVar10[2] - uVar4);
+      puVar10[2] = uVar4;
+      return uVar11;
     }
-    uVar5 = aadMem->nextSramDescIndex;
-    uVar8 = (u_char)uVar5;
-    pAVar6 = pAVar11 + uVar5;
-    uVar2 = pAVar6->waveID;
-    uVar9 = uVar5;
-    while ((uVar2 & 0x8000) != 0)
-    {
+    _uVar11 = (uint)uRam00001b54;
+    uVar8 = (undefined)uRam00001b54;
+    puVar6 = (ushort *)(_uVar11 * 8 + 0x1754);
+    uVar2 = *puVar6;
+    uVar9 = _uVar11;
+    while ((uVar2 & 0x8000) != 0) {
       uVar9 = uVar9 + 1 & 0x7f;
-      uVar8 = (u_char)uVar9;
-      if (uVar9 == uVar5)
-      {
-        return 0xff;
+      uVar8 = (undefined)uVar9;
+      if (uVar9 == _uVar11) {
+        return -1;
       }
-      pAVar6 = pAVar11 + uVar9;
-      uVar2 = pAVar6->waveID;
+      puVar6 = (ushort *)(uVar9 * 8 + 0x1754);
+      uVar2 = *puVar6;
     }
-    aadMem->nextSramDescIndex = aadMem->nextSramDescIndex + 8U & 0x7f;
-    pAVar6->waveID = 0x8000;
-    pAVar6->address = pAVar10->address + uVar4;
-    uVar2 = pAVar10->size;
-    pAVar6->prevIndex = (u_char)uVar12;
-    pAVar6->size = uVar2 - uVar4;
-    bVar1 = pAVar10->nextIndex;
-    pAVar6->nextIndex = bVar1;
-    if (-1 < (int)((u_int)bVar1 << 0x18))
-    {
-      pAVar11[pAVar6->nextIndex].prevIndex = uVar8;
+    uRam00001b54 = uRam00001b54 + 8 & 0x7f;
+    *puVar6 = 0x8000;
+    puVar6[1] = puVar10[1] + uVar4;
+    uVar2 = puVar10[2];
+    *(uchar *)(puVar6 + 3) = uVar11;
+    puVar6[2] = uVar2 - uVar4;
+    bVar1 = *(byte *)((int)puVar10 + 7);
+    *(byte *)((int)puVar6 + 7) = bVar1;
+    if (-1 < (int)((uint)bVar1 << 0x18)) {
+      *(undefined *)((uint)*(byte *)((int)puVar6 + 7) * 8 + 0x175a) = uVar8;
     }
-    pAVar10->size = uVar4;
-    pAVar10->nextIndex = uVar8;
+    puVar10[2] = uVar4;
+    *(undefined *)((int)puVar10 + 7) = uVar8;
   }
-  return uVar12;
+  return uVar11;
 }
 
-u_long aadGetSramBlockAddr(int handle)
+
+
+// decompiled code
+// original method signature: 
+// unsigned long /*$ra*/ aadGetSramBlockAddr(unsigned char handle /*$v0*/)
+ // line 1403, offset 0x80054c64
+	/* begin block 1 */
+		// Start line: 1404
+		// Start offset: 0x80054C64
+		// Variables:
+	// 		struct AadNewSramBlockDesc *sramDesc; // $v0
+	/* end block 1 */
+	// End offset: 0x80054C8C
+	// End Line: 1415
+
+	/* begin block 2 */
+		// Start line: 3280
+	/* end block 2 */
+	// End Line: 3281
+
+ulong aadGetSramBlockAddr(uchar handle)
 
 {
-  if (0x7f < handle)
-  {
+  if ((int)((uint)handle << 0x18) < 0) {
     return 0;
   }
-  return (u_int)aadMem->sramDescriptorTbl[handle].address << 3;
+  return (uint)*(ushort *)((uint)handle * 8 + 0x1756) << 3;
 }
 
-void aadWaveFree(int handle)
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadWaveFree(unsigned char handle /*$v1*/)
+ // line 1436, offset 0x80054c94
+	/* begin block 1 */
+		// Start line: 1437
+		// Start offset: 0x80054C94
+		// Variables:
+	// 		struct AadNewSramBlockDesc *sramDesc; // $a1
+	// 		struct AadNewSramBlockDesc *sramDescTbl; // $a3
+
+		/* begin block 1.1 */
+			// Start line: 1449
+			// Start offset: 0x80054CC8
+			// Variables:
+		// 		struct AadNewSramBlockDesc *next; // $a2
+		/* end block 1.1 */
+		// End offset: 0x80054D10
+		// End Line: 1458
+
+		/* begin block 1.2 */
+			// Start line: 1462
+			// Start offset: 0x80054D20
+			// Variables:
+		// 		struct AadNewSramBlockDesc *prev; // $a0
+		/* end block 1.2 */
+		// End offset: 0x80054D84
+		// End Line: 1471
+	/* end block 1 */
+	// End offset: 0x80054D84
+	// End Line: 1474
+
+	/* begin block 2 */
+		// Start line: 2865
+	/* end block 2 */
+	// End Line: 2866
+
+	/* begin block 3 */
+		// Start line: 3333
+	/* end block 3 */
+	// End Line: 3334
+
+void aadWaveFree(uchar handle)
 
 {
   byte bVar1;
-  AadNewSramBlockDesc *pAVar2;
-  AadNewSramBlockDesc *pAVar3;
-  AadNewSramBlockDesc *pAVar4;
-
-  if (handle < 0x80)
-  {
-    pAVar4 = aadMem->sramDescriptorTbl;
-    pAVar2 = pAVar4 + handle;
-    pAVar2->waveID = 0x8000;
-    if ((-1 < (char)pAVar2->nextIndex) &&
-        (pAVar3 = pAVar4 + pAVar2->nextIndex, (pAVar3->waveID & 0x4000) == 0))
-    {
-      pAVar2->size = pAVar2->size + pAVar3->size;
-      bVar1 = pAVar3->nextIndex;
-      pAVar3->waveID = 0;
-      pAVar2->nextIndex = bVar1;
-      if (-1 < (int)((u_int)bVar1 << 0x18))
-      {
-        pAVar4[pAVar2->nextIndex].prevIndex = (u_char)handle;
-      }
+  int iVar2;
+  int iVar3;
+  
+  if (-1 < (int)((uint)handle << 0x18)) {
+    iVar2 = (uint)handle * 8;
+    *(undefined2 *)(iVar2 + 0x1754) = 0x8000;
+    if ((-1 < *(char *)(iVar2 + 0x175b)) &&
+       (iVar3 = (uint)*(byte *)(iVar2 + 0x175b) * 8, (*(ushort *)(iVar3 + 0x1754) & 0x4000) == 0)) {
+      *(short *)(iVar2 + 0x1758) = *(short *)(iVar2 + 0x1758) + *(short *)(iVar3 + 0x1758);
+      *(ushort *)(iVar3 + 0x1754) = 0;
+      *(undefined *)(iVar2 + 0x175b) = *(undefined *)(iVar3 + 0x175b);
+      *(uchar *)(iVar3 + 0x175a) = handle;
     }
-    if ((-1 < (char)pAVar2->prevIndex) &&
-        (pAVar3 = pAVar4 + pAVar2->prevIndex, (pAVar3->waveID & 0x4000) == 0))
-    {
-      pAVar3->size = pAVar3->size + pAVar2->size;
-      bVar1 = pAVar2->nextIndex;
-      pAVar2->waveID = 0;
-      pAVar3->nextIndex = bVar1;
-      if (-1 < (int)((u_int)bVar1 << 0x18))
-      {
-        pAVar4[pAVar2->nextIndex].prevIndex = pAVar2->prevIndex;
+    if ((-1 < *(char *)(iVar2 + 0x175a)) &&
+       (iVar3 = (uint)*(byte *)(iVar2 + 0x175a) * 8, (*(ushort *)(iVar3 + 0x1754) & 0x4000) == 0)) {
+      *(short *)(iVar3 + 0x1758) = *(short *)(iVar3 + 0x1758) + *(short *)(iVar2 + 0x1758);
+      bVar1 = *(byte *)(iVar2 + 0x175b);
+      *(undefined2 *)(iVar2 + 0x1754) = 0;
+      *(byte *)(iVar3 + 0x175b) = bVar1;
+      if (-1 < (int)((uint)bVar1 << 0x18)) {
+        *(undefined *)((uint)*(byte *)(iVar2 + 0x175b) * 8 + 0x175a) =
+             *(undefined *)(iVar2 + 0x175a);
       }
     }
   }
   return;
 }
 
-void aadFreeSingleDynSfx(int sfxID)
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadFreeSingleDynSfx(unsigned short sfxID /*$a0*/)
+ // line 1478, offset 0x80054d8c
+	/* begin block 1 */
+		// Start line: 1479
+		// Start offset: 0x80054D8C
+		// Variables:
+	// 		int ti; // $v1
+	// 		int wi; // $v0
+	// 		struct AadLoadedSfxToneAttr *toneAttr; // $a1
+	// 		struct AadLoadedSfxWaveAttr *waveAttr; // $v1
+	/* end block 1 */
+	// End offset: 0x80054E40
+	// End Line: 1502
+
+	/* begin block 2 */
+		// Start line: 3417
+	/* end block 2 */
+	// End Line: 3418
+
+void aadFreeSingleDynSfx(ushort sfxID)
 
 {
   byte bVar1;
   short sVar2;
-  AadMemoryStruct *pAVar3;
-  u_short uVar4;
+  int iVar3;
+  int iVar4;
   short *psVar5;
-  AadLoadedSfxToneAttr *pAVar6;
-
-  sfxID = (int)&aadMem->updateCounter + sfxID;
-  bVar1 = *(byte *)(sfxID + 0x808);
-  if (bVar1 < 0xfe)
-  {
-    pAVar6 = aadMem->sfxToneAttrTbl + bVar1;
-    uVar4 = pAVar6->referenceCount - 1;
-    pAVar6->referenceCount = uVar4;
-    if (uVar4 == 0)
-    {
-      *(undefined *)(sfxID + 0x808) = 0xff;
-      pAVar3 = aadMem;
-      if (aadMem->sfxWaveMasterList[pAVar6->waveID] < 0xfe)
-      {
-        psVar5 = (short *)(&DAT_00001608 +
-                           (int)(&aadMem->updateCounter + aadMem->sfxWaveMasterList[pAVar6->waveID]));
-        sVar2 = *psVar5;
-        *psVar5 = sVar2 + -1;
-        if ((short)(sVar2 + -1) == 0)
-        {
-          pAVar3->sfxWaveMasterList[pAVar6->waveID] = -1;
-          aadWaveFree((u_int) * (byte *)((int)psVar5 + 3));
+  
+  bVar1 = *(byte *)((uint)sfxID + 0x770);
+  if (bVar1 != 0xff) {
+    iVar3 = (uint)bVar1 * 0x14;
+    sVar2 = *(short *)(iVar3 + 0xb70) + -1;
+    *(short *)(iVar3 + 0xb70) = sVar2;
+    if (sVar2 == 0) {
+      *(undefined *)((uint)sfxID + 0x770) = 0xff;
+      bVar1 = *(byte *)((uint)*(ushort *)(iVar3 + 0xb72) + 0x970);
+      iVar4 = (uint)bVar1 * 4;
+      if (bVar1 != 0xff) {
+        psVar5 = (short *)(iVar4 + 0x1570);
+        sVar2 = *psVar5 + -1;
+        *psVar5 = sVar2;
+        if (sVar2 == 0) {
+          *(undefined *)((uint)*(ushort *)(iVar3 + 0xb72) + 0x970) = 0xff;
+          aadWaveFree(*(uchar *)(iVar4 + 0x1573));
         }
       }
     }
@@ -1347,325 +1638,290 @@ void aadFreeSingleDynSfx(int sfxID)
   return;
 }
 
-void setSramFullAlarm(void)
 
-{
-  u_int uVar1;
-  AadNewSramBlockDesc *pAVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  u_int uVar6;
 
-  iVar4 = 0;
-  iVar5 = 0;
-  uVar6 = 0;
-  gSramFreeBlocks = 0;
-  gSramUsedBlocks = 0;
-  pAVar2 = aadMem->sramDescriptorTbl + aadMem->firstSramBlockDescIndex;
-  iVar3 = 0x80;
-  do
-  {
-    if (pAVar2 == (AadNewSramBlockDesc *)0x0)
-      break;
-    if ((pAVar2->waveID & 0x4000) == 0)
-    {
-      uVar1 = (u_int)pAVar2->size;
-      gSramFreeBlocks = gSramFreeBlocks + 1;
-      iVar5 = iVar5 + uVar1;
-      if (uVar6 < uVar1)
-      {
-        uVar6 = uVar1;
-      }
-    }
-    else
-    {
-      gSramUsedBlocks = gSramUsedBlocks + 1;
-      iVar4 = iVar4 + (u_int)pAVar2->size;
-    }
-    if ((char)pAVar2->nextIndex < '\0')
-    {
-      pAVar2 = (AadNewSramBlockDesc *)0x0;
-    }
-    else
-    {
-      pAVar2 = aadMem->sramDescriptorTbl + pAVar2->nextIndex;
-    }
-    iVar3 = iVar3 + -1;
-  } while (iVar3 != 0);
-  gSramFullAlarm = 1;
-  gSramLargestFree = uVar6 << 3;
-  gSramTotalUsed = iVar4 << 3;
-  gSramTotalFree = iVar5 << 3;
-  return;
-}
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadLoadSingleDynSfx(struct AadDynamicSfxLoadInfo *info /*$s3*/)
+ // line 1513, offset 0x80054e50
+	/* begin block 1 */
+		// Start line: 1514
+		// Start offset: 0x80054E50
+		// Variables:
+	// 		int i; // $s0
+	// 		struct AadLoadedSfxToneAttr *toneAttr; // $a0
+	// 		struct AadLoadedSfxWaveAttr *waveAttr; // $s1
+	// 		struct AadDynSfxAttr *attr; // $s2
+	/* end block 1 */
+	// End offset: 0x800550B4
+	// End Line: 1611
+
+	/* begin block 2 */
+		// Start line: 3492
+	/* end block 2 */
+	// End Line: 3493
+
+	/* begin block 3 */
+		// Start line: 3501
+	/* end block 3 */
+	// End Line: 3502
 
 void aadLoadSingleDynSfx(AadDynamicSfxLoadInfo *info)
 
 {
-  u_short uVar1;
-  AadMemoryStruct *pAVar2;
-  int iVar3;
-  u_long uVar4;
-  u_char uVar5;
-  u_int uVar6;
-  int iVar7;
-  AadLoadedSfxToneAttr *pAVar8;
-  int iVar9;
-  u_char uVar10;
-  u_char uVar11;
-  u_char uVar12;
-  short *psVar13;
-  AadDynSfxAttr *pAVar14;
-
-  pAVar2 = aadMem;
-  uVar1 = (info->attr).sfxID;
-  info->waveTransferAddr = 0;
-  iVar3 = (int)&pAVar2->updateCounter + (u_int)uVar1;
-  pAVar14 = &info->attr;
-  if (*(char *)(iVar3 + 0x808) == -2)
-  {
-    *(undefined *)(iVar3 + 0x808) = 0xff;
-  }
-  pAVar2 = aadMem;
-  if (aadMem->sfxToneMasterList[(info->attr).sfxID] == 0xff)
-  {
-    _uVar5 = aadMem->nextToneIndex;
-    uVar5 = (u_char)_uVar5;
-    pAVar8 = aadMem->sfxToneAttrTbl + _uVar5;
-    uVar1 = pAVar8->referenceCount;
-    uVar6 = _uVar5;
-    while (uVar1 != 0)
-    {
-      uVar6 = uVar6 + 1 & 0x7f;
-      uVar5 = (u_char)uVar6;
-      if (uVar6 == _uVar5)
-      {
-        info->smfLoadingState = 2;
-        iVar3 = (int)&pAVar2->updateCounter + (u_int)pAVar14->sfxID;
-        goto LAB_80053e3c;
-      }
-      pAVar8 = aadMem->sfxToneAttrTbl + uVar6;
-      uVar1 = pAVar8->referenceCount;
+  short sVar1;
+  ushort uVar2;
+  byte bVar3;
+  undefined2 uVar4;
+  short *psVar5;
+  int iVar6;
+  ulong uVar7;
+  undefined4 uVar8;
+  undefined4 uVar9;
+  undefined4 uVar10;
+  undefined uVar11;
+  uint uVar12;
+  
+  info->bytesToLoad = 0;
+  bVar3 = *(byte *)((uint)*(ushort *)&info->totalSramUsed + 0x770);
+  if (bVar3 == 0xff) {
+    _uVar11 = (uint)uRam00001750;
+    uVar11 = (undefined)uRam00001750;
+    psVar5 = (short *)(_uVar11 * 0x14 + 0xb70);
+    sVar1 = *psVar5;
+    uVar12 = _uVar11;
+    while (sVar1 != 0) {
+      uVar12 = uVar12 + 1 & 0x7f;
+      uVar11 = (undefined)uVar12;
+      if (uVar12 == _uVar11) goto LAB_800550ac;
+      psVar5 = (short *)(uVar12 * 0x14 + 0xb70);
+      sVar1 = *psVar5;
     }
-    aadMem->nextToneIndex = aadMem->nextToneIndex + 8U & 0x7f;
-    pAVar8->referenceCount = 1;
-    pAVar8->waveID = (info->attr).waveID;
-    pAVar2 = aadMem;
-    uVar10 = *(u_char *)&(info->attr).toneAttr.centerNote;
-    uVar11 = *(u_char *)&(info->attr).toneAttr.mode;
-    uVar12 = *(u_char *)&(info->attr).toneAttr.adsr2;
-    *(u_char *)&pAVar8->toneAttr = *(u_char *)&(info->attr).toneAttr;
-    *(u_char *)&(pAVar8->toneAttr).centerNote = uVar10;
-    *(u_char *)&(pAVar8->toneAttr).mode = uVar11;
-    *(u_char *)&(pAVar8->toneAttr).adsr2 = uVar12;
-    pAVar2->sfxToneMasterList[pAVar14->sfxID] = uVar5;
-    pAVar2 = aadMem;
-    if (aadMem->sfxWaveMasterList[(info->attr).waveID] == 0xff)
-    {
-      iVar3 = aadMem->nextWaveIndex;
-      do
-      {
-        psVar13 = (short *)(&DAT_00001608 + (int)(&aadMem->updateCounter + iVar3));
-        iVar7 = iVar3 + 1;
-        if (*psVar13 == 0)
-        {
-          iVar9 = aadMem->nextWaveIndex;
-          iVar7 = iVar9 + 8;
-          aadMem->nextWaveIndex = iVar7;
-          if (0x77 < iVar7)
-          {
-            pAVar2->nextWaveIndex = iVar9 + -0x70;
+    uRam00001750 = uRam00001750 + 8 & 0x7f;
+    *psVar5 = 1;
+    psVar5[1] = *(short *)((int)&info->totalSramUsed + 2);
+    uVar8 = *(undefined4 *)&info->attr;
+    uVar9 = *(undefined4 *)&(info->attr).toneAttr;
+    uVar10 = *(undefined4 *)&(info->attr).toneAttr.centerNote;
+    *(_AadDynSfxFileHdr **)(psVar5 + 2) = info->snfFile;
+    *(undefined4 *)(psVar5 + 4) = uVar8;
+    *(undefined4 *)(psVar5 + 6) = uVar9;
+    *(undefined4 *)(psVar5 + 8) = uVar10;
+    *(undefined *)((uint)*(ushort *)&info->totalSramUsed + 0x770) = uVar11;
+    bVar3 = *(byte *)((uint)*(ushort *)((int)&info->totalSramUsed + 2) + 0x970);
+    if (bVar3 == 0xff) {
+      uVar12 = (uint)uRam00001752;
+      do {
+        iVar6 = uVar12 * 4;
+        _uVar11 = uVar12 + 1;
+        if (*(short *)(iVar6 + 0x1570) == 0) {
+          uVar2 = uRam00001752 + 8;
+          if (0x77 < (ushort)(uRam00001752 + 8)) {
+            uVar2 = uRam00001752 - 0x70;
           }
-          *psVar13 = 1;
-          aadMem->sfxWaveMasterList[(info->attr).waveID] = (u_char)iVar3;
-          iVar3 = aadWaveMalloc((info->attr).waveID, (info->attr).waveSize);
-          *(undefined *)((int)psVar13 + 3) = (char)iVar3;
-          if (-1 < iVar3 << 0x18)
-          {
-            uVar4 = aadGetSramBlockAddr((u_int) * (byte *)((int)psVar13 + 3));
-            info->waveTransferAddr = uVar4;
-            info->smfLoadingState = 3;
-            return;
+          uRam00001752 = uVar2;
+          *(short *)(iVar6 + 0x1570) = 1;
+          bVar3 = aadWaveMalloc(*(ushort *)((int)&info->totalSramUsed + 2),
+                                *(ulong *)&(info->attr).toneAttr.mode);
+          *(byte *)(iVar6 + 0x1573) = bVar3;
+          if (-1 < (int)((uint)bVar3 << 0x18)) {
+            *(undefined *)((uint)*(ushort *)((int)&info->totalSramUsed + 2) + 0x970) = (char)uVar12;
+            uVar7 = aadGetSramBlockAddr(*(uchar *)(iVar6 + 0x1573));
+            info->bytesToLoad = uVar7;
+            uVar4 = 3;
+            goto LAB_800550b0;
           }
           break;
         }
-        if (0x77 < iVar7)
-        {
-          iVar7 = 0;
+        if (0x77 < (int)_uVar11) {
+          _uVar11 = 0;
         }
-        iVar3 = iVar7;
-      } while (iVar7 != aadMem->nextWaveIndex);
-      aadFreeSingleDynSfx((u_int)pAVar14->sfxID);
-      info->smfLoadingState = 2;
-      iVar3 = (int)&aadMem->updateCounter + (u_int)pAVar14->sfxID;
-    LAB_80053e3c:
-      *(undefined *)(iVar3 + 0x808) = 0xfe;
-      setSramFullAlarm();
-      return;
+        uVar12 = _uVar11;
+      } while (_uVar11 != (uint)uRam00001750);
+      aadFreeSingleDynSfx(*(ushort *)&info->totalSramUsed);
     }
-    *(short *)(&DAT_00001608 +
-               (int)(&aadMem->updateCounter + aadMem->sfxWaveMasterList[(info->attr).waveID])) =
-        *(short *)(&DAT_00001608 +
-                   (int)(&aadMem->updateCounter + aadMem->sfxWaveMasterList[(info->attr).waveID])) +
-        1;
+    else {
+      psVar5 = (short *)((uint)bVar3 * 4 + 0x1570);
+      *psVar5 = *psVar5 + 1;
+    }
   }
-  else
-  {
-    aadMem->sfxToneAttrTbl[aadMem->sfxToneMasterList[(info->attr).sfxID]].referenceCount =
-        aadMem->sfxToneAttrTbl[aadMem->sfxToneMasterList[(info->attr).sfxID]].referenceCount + 1;
+  else {
+    psVar5 = (short *)((uint)bVar3 * 0x14 + 0xb70);
+    *psVar5 = *psVar5 + 1;
   }
-  info->smfLoadingState = 2;
+LAB_800550ac:
+  uVar4 = 2;
+LAB_800550b0:
+  *(undefined2 *)((int)&info->loadFlags + 2) = uVar4;
   return;
 }
 
-void VSyncCallback(void)
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ HackCallback()
+ // line 1626, offset 0x800550d0
+	/* begin block 1 */
+		// Start line: 3785
+	/* end block 1 */
+	// End Line: 3786
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
+void HackCallback(void)
 
 {
-  SpuSetTransferStartAddr(0);
-  aadLoadDynamicSfxReturn2(smfDataPtr, smfBytesLeft, 0, smfInfo, (void *)0x0);
+  SpuSetTransferCallback(0);
+  aadLoadDynamicSfxReturn2(smfDataPtr,smfBytesLeft,0,smfInfo,(void *)0x0);
   return;
 }
 
-void aadLoadDynamicSfxReturn2(void *loadedDataPtr, long loadedDataSize, short status, void *data1, void *data2)
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadLoadDynamicSfxReturn2(void *loadedDataPtr /*$a0*/, long loadedDataSize /*$a1*/, short status /*$a2*/, void *data1 /*$a3*/, void *data2 /*stack 16*/)
+ // line 1635, offset 0x80055108
+	/* begin block 1 */
+		// Start line: 1636
+		// Start offset: 0x80055108
+		// Variables:
+	// 		unsigned char *dataPtr; // $s4
+	// 		unsigned long dataOffset; // $s3
+	// 		unsigned long bytesRemaining; // $s2
+	// 		struct AadDynamicSfxLoadInfo *info; // $s1
+	// 		unsigned long n; // $s0
+	/* end block 1 */
+	// End offset: 0x800553B0
+	// End Line: 1789
+
+	/* begin block 2 */
+		// Start line: 3803
+	/* end block 2 */
+	// End Line: 3804
+
+void aadLoadDynamicSfxReturn2
+               (void *loadedDataPtr,long loadedDataSize,short status,void *data1,void *data2)
 
 {
-  u_long uVar1;
-  u_int __n;
-  int iVar2;
+  ushort uVar1;
+  short sVar2;
+  ulong uVar3;
+  int iVar4;
   void *__src;
   undefined2 in_register_0000001a;
-  size_t sVar3;
-  int iVar4;
-
-  sVar3 = CONCAT22(in_register_0000001a, status);
-  iVar4 = 0;
-  if (loadedDataSize != 0)
-  {
-    do
-    {
-      iVar2 = *(int *)((int)data1 + 0x60);
-      if (iVar2 == 1)
-      {
-        __src = (void *)((int)loadedDataPtr + iVar4);
-        __n = *(u_int *)((int)data1 + 100);
-        if ((u_int)loadedDataSize < *(u_int *)((int)data1 + 100))
-        {
+  size_t sVar5;
+  uint __n;
+  int iVar6;
+  
+  sVar5 = CONCAT22(in_register_0000001a,status);
+  iVar6 = 0;
+  if (loadedDataSize != 0) {
+    do {
+      uVar1 = *(ushort *)((int)data1 + 0x5a);
+      if (uVar1 == 1) {
+        __src = (void *)((int)loadedDataPtr + iVar6);
+        __n = *(uint *)((int)data1 + 0x5c);
+        if ((uint)loadedDataSize < *(uint *)((int)data1 + 0x5c)) {
           __n = loadedDataSize;
         }
-        iVar4 = iVar4 + __n;
-        sVar3 = __n;
-        memcpy((void *)((int)data1 - (*(int *)((int)data1 + 100) + -0x94)), __src, __n);
+        iVar6 = iVar6 + __n;
+        sVar5 = __n;
+        memcpy((void *)((int)data1 - (*(int *)((int)data1 + 0x5c) + -0x8c)),__src,__n);
         loadedDataSize = loadedDataSize - __n;
-        iVar2 = *(int *)((int)data1 + 100) - __n;
-        *(int *)((int)data1 + 100) = iVar2;
-        if (iVar2 == 0)
-        {
+        iVar4 = *(int *)((int)data1 + 0x5c) - __n;
+        *(int *)((int)data1 + 0x5c) = iVar4;
+        if (iVar4 == 0) {
           aadLoadSingleDynSfx((AadDynamicSfxLoadInfo *)data1);
-          *(u_char *)((int)data1 + 100) = *(u_char *)((int)data1 + 0x90);
+          *(undefined4 *)((int)data1 + 0x5c) = *(undefined4 *)((int)data1 + 0x88);
         }
       }
-      else
-      {
-        if (iVar2 < 2)
-        {
-          if (iVar2 == 0)
-          {
-            sVar3 = 0x4d;
-            uVar1 = aadCreateFourCharID('a', 'S', 'M', 'F');
-            if (*(u_long *)loadedDataPtr != uVar1)
-            {
-              aadLoadDynamicSfxAbort((AadDynamicSfxLoadInfo *)data1, (int)&DAT_0000100b);
+      else {
+        if (uVar1 < 2) {
+          if (uVar1 == 0) {
+            sVar5 = 0x4d;
+            uVar3 = aadCreateFourCharID('a','S','M','F');
+            if (*(ulong *)loadedDataPtr != uVar3) {
+              aadLoadDynamicSfxAbort((AadDynamicSfxLoadInfo *)data1,0x100b);
               return;
             }
-            if (*(short *)((int)loadedDataPtr + 4) != 0x100)
-            {
-              aadLoadDynamicSfxAbort((AadDynamicSfxLoadInfo *)data1, (int)&DAT_0000100c);
+            if (*(short *)((int)loadedDataPtr + 4) != 0x100) {
+              aadLoadDynamicSfxAbort((AadDynamicSfxLoadInfo *)data1,0x100c);
               return;
             }
-            if (*(short *)((int)loadedDataPtr + 6) != *(short *)(*(int *)((int)data1 + 0x78) + 6))
-            {
-            LAB_80053f98:
-              aadLoadDynamicSfxAbort((AadDynamicSfxLoadInfo *)data1, (int)&DAT_0000100d);
+            if (*(short *)((int)loadedDataPtr + 6) != *(short *)(*(int *)((int)data1 + 0x70) + 6)) {
+LAB_80055208:
+              aadLoadDynamicSfxAbort((AadDynamicSfxLoadInfo *)data1,0x100d);
               return;
             }
-            __n = (u_int) * (u_short *)(*(int *)((int)data1 + 0x78) + 10);
-            iVar4 = iVar4 + 0x10;
-            if ((u_int) * (u_short *)((int)loadedDataPtr + 8) != __n)
-              goto LAB_80053f98;
+            sVar2 = *(short *)(*(int *)((int)data1 + 0x70) + 10);
+            iVar6 = iVar6 + 0x10;
+            if (*(short *)((int)loadedDataPtr + 8) != sVar2) goto LAB_80055208;
             loadedDataSize = loadedDataSize - 0x10;
-            *(u_char *)((int)data1 + 0x60) = 1;
-            *(u_char *)((int)data1 + 100) = 0x18;
-            *(u_int *)((int)data1 + 0x68) = __n;
+            *(short *)((int)data1 + 0x60) = sVar2;
+LAB_800552cc:
+            *(undefined2 *)((int)data1 + 0x5a) = 1;
+            *(undefined4 *)((int)data1 + 0x5c) = 0x18;
           }
         }
-        else
-        {
-          if (iVar2 == 2)
-          {
-            __n = *(u_int *)((int)data1 + 100);
-            if ((u_int)loadedDataSize < *(u_int *)((int)data1 + 100))
-            {
+        else {
+          if (uVar1 == 2) {
+            __n = *(uint *)((int)data1 + 0x5c);
+            if ((uint)loadedDataSize < *(uint *)((int)data1 + 0x5c)) {
               __n = loadedDataSize;
             }
-            iVar4 = iVar4 + __n;
+            iVar6 = iVar6 + __n;
             loadedDataSize = loadedDataSize - __n;
-            iVar2 = *(int *)((int)data1 + 100) - __n;
-            *(int *)((int)data1 + 100) = iVar2;
-            if (iVar2 == 0)
-            {
-              iVar2 = *(int *)((int)data1 + 0x68) + -1;
-              *(int *)((int)data1 + 0x68) = iVar2;
-              if (iVar2 == 0)
-              {
-              LAB_800540f4:
+            iVar4 = *(int *)((int)data1 + 0x5c) - __n;
+            *(int *)((int)data1 + 0x5c) = iVar4;
+            if (iVar4 == 0) {
+              sVar2 = *(short *)((int)data1 + 0x60) + -1;
+              *(short *)((int)data1 + 0x60) = sVar2;
+              if (sVar2 == 0) {
+LAB_8005536c:
                 aadLoadDynamicSfxDone((AadDynamicSfxLoadInfo *)data1);
                 return;
               }
-              *(u_char *)((int)data1 + 0x60) = 1;
-              *(u_char *)((int)data1 + 100) = 0x18;
+              goto LAB_800552cc;
             }
           }
-          else
-          {
-            if (iVar2 == 3)
-            {
-              __n = *(u_int *)((int)data1 + 100);
-              if ((u_int)loadedDataSize < *(u_int *)((int)data1 + 100))
-              {
+          else {
+            if (uVar1 == 3) {
+              __n = *(uint *)((int)data1 + 0x5c);
+              if ((uint)loadedDataSize < *(uint *)((int)data1 + 0x5c)) {
                 __n = loadedDataSize;
               }
+              do {
+                iVar4 = SpuIsTransferCompleted(0);
+              } while (iVar4 == 0);
+              SpuSetTransferCallback((int)HackCallback);
               loadedDataSize = loadedDataSize - __n;
-              aadWaitForSramTransferComplete();
-              SpuSetTransferStartAddr((int)VSyncCallback);
-              SpuSetTransferCallback(*(u_int *)((int)data1 + 0x70));
-              SpuRead((word *)((int)loadedDataPtr + iVar4), __n, sVar3);
-              iVar4 = iVar4 + __n;
-              iVar2 = *(int *)((int)data1 + 100) - __n;
-              *(int *)((int)data1 + 0x70) = *(int *)((int)data1 + 0x70) + __n;
-              *(int *)((int)data1 + 100) = iVar2;
-              if (iVar2 == 0)
-              {
-                iVar2 = *(int *)((int)data1 + 0x68) + -1;
-                *(int *)((int)data1 + 0x74) =
-                    *(int *)((int)data1 + 0x74) + *(int *)((int)data1 + 0x90);
-                *(int *)((int)data1 + 0x68) = iVar2;
-                if (iVar2 == 0)
-                {
-                  SpuSetTransferStartAddr(0);
-                  goto LAB_800540f4;
+              SpuSetTransferStartAddr(*(uint *)((int)data1 + 100));
+              SpuWrite((word *)((int)loadedDataPtr + iVar6),__n,sVar5);
+              iVar6 = iVar6 + __n;
+              iVar4 = *(int *)((int)data1 + 0x5c) - __n;
+              *(int *)((int)data1 + 100) = *(int *)((int)data1 + 100) + __n;
+              *(int *)((int)data1 + 0x5c) = iVar4;
+              if (iVar4 == 0) {
+                sVar2 = *(short *)((int)data1 + 0x60) + -1;
+                *(short *)((int)data1 + 0x60) = sVar2;
+                *(int *)((int)data1 + 0x68) =
+                     *(int *)((int)data1 + 0x68) + *(int *)((int)data1 + 0x88);
+                if (sVar2 == 0) {
+                  SpuSetTransferCallback(0);
+                  goto LAB_8005536c;
                 }
-                *(u_char *)((int)data1 + 0x60) = 1;
-                *(u_char *)((int)data1 + 100) = 0x18;
+                *(undefined2 *)((int)data1 + 0x5a) = 1;
+                *(undefined4 *)((int)data1 + 0x5c) = 0x18;
               }
-              if (loadedDataSize != 0)
-              {
-                smfDataPtr = (u_char *)((int)loadedDataPtr + iVar4);
+              if (loadedDataSize != 0) {
+                smfDataPtr = (uchar *)((int)loadedDataPtr + iVar6);
                 smfBytesLeft = loadedDataSize;
                 smfInfo = (AadDynamicSfxLoadInfo *)data1;
                 return;
               }
-              SpuSetTransferStartAddr(0);
+              SpuSetTransferCallback(0);
             }
           }
         }
@@ -1675,247 +1931,75 @@ void aadLoadDynamicSfxReturn2(void *loadedDataPtr, long loadedDataSize, short st
   return;
 }
 
-int aadCheckSramFragmented(void)
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ aadIsSfxLoaded(unsigned int toneID /*$a0*/)
+ // line 1798, offset 0x800553d8
+	/* begin block 1 */
+		// Start line: 3591
+	/* end block 1 */
+	// End Line: 3592
+
+	/* begin block 2 */
+		// Start line: 4173
+	/* end block 2 */
+	// End Line: 4174
+
+int aadIsSfxLoaded(uint toneID)
 
 {
-  u_int uVar1;
-  undefined *puVar2;
-  AadNewSramBlockDesc *pAVar3;
-  int iVar4;
-  int iVar5;
-  undefined *puVar6;
-  undefined *puVar7;
-
-  puVar6 = (undefined *)0x0;
-  puVar7 = &UNK_000f423f;
-  iVar5 = 0;
-  pAVar3 = aadMem->sramDescriptorTbl + aadMem->firstSramBlockDescIndex;
-  iVar4 = 0x80;
-  do
-  {
-    if (pAVar3 == (AadNewSramBlockDesc *)0x0)
-      break;
-    if ((pAVar3->waveID & 0x4000) == 0)
-    {
-      puVar2 = (undefined *)(u_int)pAVar3->size;
-      iVar5 = iVar5 + 1;
-      puVar6 = puVar2 + (int)puVar6;
-      if (puVar2 < puVar7)
-      {
-        puVar7 = puVar2;
-      }
-    }
-    if ((char)pAVar3->nextIndex < '\0')
-    {
-      pAVar3 = (AadNewSramBlockDesc *)0x0;
-    }
-    else
-    {
-      pAVar3 = aadMem->sramDescriptorTbl + pAVar3->nextIndex;
-    }
-    iVar4 = iVar4 + -1;
-  } while (iVar4 != 0);
-  uVar1 = 0;
-  if (2 < iVar5)
-  {
-    uVar1 = (u_int)((int)puVar7<(int)puVar6>> 2);
-  }
-  return uVar1;
+  return (uint)(*(char *)(toneID + 0x770) != -1);
 }
 
-void aadProcessSramDefrag(void)
 
-{
-  byte bVar1;
-  byte bVar2;
-  u_short uVar3;
-  AadMemoryStruct *pAVar4;
-  AadMemoryStruct *pAVar5;
-  u_char *puVar6;
-  int iVar7;
-  undefined *puVar8;
-  u_long uVar9;
-  u_int in_a2;
-  undefined *puVar10;
-  u_int uVar11;
-  AadNewSramBlockDesc *pAVar12;
-  AadNewSramBlockDesc *pAVar13;
-  AadSramDefragInfo *pAVar14;
-  byte bVar15;
-  AadNewSramBlockDesc *pAVar16;
 
-  pAVar4 = aadMem;
-  iVar7 = (aadMem->sramDefragInfo).status;
-  pAVar14 = &aadMem->sramDefragInfo;
-  if (iVar7 == 1)
-  {
-    uVar11 = aadMem->firstSramBlockDescIndex;
-    pAVar16 = aadMem->sramDescriptorTbl;
-    pAVar12 = pAVar16 + uVar11;
-    iVar7 = 0x80;
-    if (pAVar12 != (AadNewSramBlockDesc *)0x0)
-    {
-      do
-      {
-        bVar15 = (byte)uVar11;
-        if ((pAVar12->waveID & 0x4000) == 0)
-          break;
-        iVar7 = iVar7 + -1;
-        bVar15 = pAVar12->nextIndex;
-        uVar11 = (u_int)bVar15;
-        if ((iVar7 == 0) || (0x7f < bVar15))
-        {
-          pAVar12 = (AadNewSramBlockDesc *)0x0;
-        }
-        else
-        {
-          pAVar12 = pAVar16 + uVar11;
-        }
-      } while (pAVar12 != (AadNewSramBlockDesc *)0x0);
-      if ((pAVar12 != (AadNewSramBlockDesc *)0x0) && (-1 < (char)pAVar12->nextIndex))
-      {
-        bVar1 = pAVar12->nextIndex;
-        pAVar13 = pAVar16 + bVar1;
-        if ((pAVar13->waveID & 0x4000) != 0)
-        {
-          puVar6 = (u_char *)(*aadMem->memoryMallocProc)(0x1000, 0x30);
-          (pAVar4->sramDefragInfo).fragBuffer = puVar6;
-          pAVar5 = aadMem;
-          if (puVar6 != (u_char *)0x0)
-          {
-            uVar11 = (u_int)pAVar13->waveID & 0x3fff;
-            iVar7 = (int)&aadMem->updateCounter + uVar11;
-            bVar2 = *(byte *)(iVar7 + 0xa08);
-            (pAVar4->sramDefragInfo).masterListEntry = (u_int)bVar2;
-            if (bVar2 < 0xfe)
-            {
-              *(undefined *)(iVar7 + 0xa08) = 0xff;
-              (pAVar4->sramDefragInfo).waveID = uVar11;
-              (pAVar4->sramDefragInfo).destSramAddr = (u_int)pAVar12->address << 3;
-              (pAVar4->sramDefragInfo).srcSramAddr = (u_int)pAVar13->address << 3;
-              (pAVar4->sramDefragInfo).moveSize = (u_int)pAVar13->size << 3;
-              uVar3 = pAVar12->size;
-              pAVar12->size = pAVar13->size;
-              pAVar13->size = uVar3;
-              uVar3 = pAVar12->waveID;
-              pAVar12->waveID = pAVar13->waveID;
-              pAVar13->waveID = uVar3;
-              pAVar13->address = pAVar12->address + pAVar12->size;
-              if ((-1 < (char)pAVar13->nextIndex) &&
-                  (pAVar12 = pAVar16 + pAVar13->nextIndex, (pAVar12->waveID & 0x4000) == 0))
-              {
-                pAVar13->size = pAVar13->size + pAVar12->size;
-                bVar2 = pAVar12->nextIndex;
-                pAVar12->waveID = 0;
-                pAVar13->nextIndex = bVar2;
-                if (-1 < (int)((u_int)bVar2 << 0x18))
-                {
-                  pAVar16[pAVar13->nextIndex].prevIndex = bVar1;
-                }
-              }
-              aadMem->sfxWaveAttrTbl[(pAVar4->sramDefragInfo).masterListEntry].sramHandle = bVar15;
-              pAVar14->status = 2;
-              return;
-            }
-            (*pAVar5->memoryFreeProc)((pAVar4->sramDefragInfo).fragBuffer);
-          }
-        }
-      }
-    }
-    pAVar14->status = 0;
-  }
-  else
-  {
-    if (1 < iVar7)
-    {
-      if (iVar7 == 2)
-      {
-        iVar7 = SpuIsTransferCompleted(0);
-        if (iVar7 != 0)
-        {
-          puVar8 = (undefined *)(pAVar4->sramDefragInfo).moveSize;
-          puVar10 = (undefined *)0x1000;
-          if (puVar8 < &DAT_00001001)
-          {
-            puVar10 = puVar8;
-          }
-          SpuSetTransferCallback((pAVar4->sramDefragInfo).srcSramAddr);
-          SpuWrite((u_int)(pAVar4->sramDefragInfo).fragBuffer, (u_int)puVar10, in_a2);
-          *(undefined **)&(pAVar4->sramDefragInfo).readSize = puVar10;
-          (pAVar4->sramDefragInfo).status = 3;
-        }
-      }
-      else
-      {
-        if ((iVar7 == 3) && (iVar7 = SpuIsTransferCompleted(0), iVar7 != 0))
-        {
-          SpuSetTransferCallback((pAVar4->sramDefragInfo).destSramAddr);
-          uVar11 = (pAVar4->sramDefragInfo).readSize;
-          SpuRead((word *)(pAVar4->sramDefragInfo).fragBuffer, uVar11, in_a2);
-          (pAVar4->sramDefragInfo).srcSramAddr = (pAVar4->sramDefragInfo).srcSramAddr + uVar11;
-          uVar9 = (pAVar4->sramDefragInfo).moveSize - uVar11;
-          (pAVar4->sramDefragInfo).moveSize = uVar9;
-          (pAVar4->sramDefragInfo).destSramAddr = (pAVar4->sramDefragInfo).destSramAddr + uVar11;
-          if (uVar9 == 0)
-          {
-            (*aadMem->memoryFreeProc)((pAVar4->sramDefragInfo).fragBuffer);
-            aadMem->sfxWaveMasterList[(pAVar4->sramDefragInfo).waveID] =
-                *(u_char *)&(pAVar4->sramDefragInfo).masterListEntry;
-            (pAVar4->sramDefragInfo).status = 0;
-            gSramCheckRequest = 1;
-          }
-          else
-          {
-            (pAVar4->sramDefragInfo).status = 2;
-          }
-        }
-      }
-    }
-  }
-  return;
-}
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadInitSequenceSlot(struct _AadSequenceSlot *slot /*$a2*/)
+ // line 2027, offset 0x800553f8
+	/* begin block 1 */
+		// Start line: 2028
+		// Start offset: 0x800553F8
+		// Variables:
+	// 		struct AadSequenceHdr *seqHdr; // $t0
+	// 		unsigned long trackOffset; // $v0
+	// 		int i; // $a1
+	// 		int bank; // $a0
+	/* end block 1 */
+	// End offset: 0x800554EC
+	// End Line: 2086
 
-int aadIsSfxLoaded(u_int toneID)
-
-{
-  int iVar1;
-
-  iVar1 = 1;
-  if ((0xfd < aadMem->sfxToneMasterList[toneID]) &&
-      (iVar1 = -1, aadMem->sfxToneMasterList[toneID] != 0xfe))
-  {
-    return 0;
-  }
-  return iVar1;
-}
+	/* begin block 2 */
+		// Start line: 4628
+	/* end block 2 */
+	// End Line: 4629
 
 void aadInitSequenceSlot(_AadSequenceSlot *slot)
 
 {
-  undefined uVar1;
+  uchar uVar1;
   int iVar2;
   _AadSequenceSlot *p_Var3;
   int iVar4;
-  _func_41 *p_Var5;
-  _func_41 *p_Var6;
-
+  int iVar5;
+  int iVar6;
+  
   iVar4 = 0;
   slot->status = 0;
-  slot->selectedDynamicBank = slot->sequenceAssignedDynamicBank;
-  slot->slotFlags = slot->slotFlags & 1;
-  p_Var6 = aadMem->dynamicSequenceAddressTbl[slot->sequenceAssignedDynamicBank]
-                                            [slot->sequenceNumberAssigned];
+  slot->slotFlags = slot->slotID;
+  *(byte *)&slot->delayedUnMuteCmds = *(byte *)&slot->delayedUnMuteCmds & 1;
+  iVar6 = *(int *)((uint)slot->sequenceNumberAssigned * 4 + *(int *)((uint)slot->slotID * 4 + 0x4d8)
+                  );
   p_Var3 = slot;
-  p_Var5 = p_Var6;
-  do
-  {
-    if (iVar4 < (int)(u_int) * (u_short *)(p_Var6 + 0xc))
-    {
-      *(_func_41 **)p_Var3->sequencePosition = p_Var6 + *(int *)(p_Var5 + 0x10);
+  iVar5 = iVar6;
+  do {
+    if (iVar4 < (int)(uint)*(ushort *)(iVar6 + 0xc)) {
+      p_Var3->sequencePosition[0] = (_func_4397 *)(iVar6 + *(int *)(iVar5 + 0x10));
     }
-    else
-    {
-      p_Var3->sequencePosition[0] = (_func_9 *)0x0;
+    else {
+      p_Var3->sequencePosition[0] = (_func_4397 *)0x0;
     }
     p_Var3 = (_AadSequenceSlot *)&(p_Var3->tempo).currentError;
     iVar2 = (int)&(slot->tempo).currentTick + iVar4;
@@ -1926,42 +2010,59 @@ void aadInitSequenceSlot(_AadSequenceSlot *slot)
     *(undefined *)(iVar2 + 0x318) = 0;
     *(undefined *)(iVar2 + 0x328) = 0;
     *(byte *)(iVar2 + 0x3d8) = *(byte *)(iVar2 + 0x3d8) | 0x20;
-    p_Var5 = p_Var5 + 4;
+    iVar5 = iVar5 + 4;
   } while (iVar4 < 0x10);
-  iVar4 = 0;
+  iVar5 = 0;
   p_Var3 = slot;
-  do
-  {
-    iVar2 = (int)&(slot->tempo).currentTick + iVar4;
-    uVar1 = *(undefined *)&slot->sequenceAssignedDynamicBank;
-    iVar4 = iVar4 + 1;
-    *(undefined *)(iVar2 + 0x590) = 0xff;
-    *(undefined *)(iVar2 + 0x5a0) = 0x7f;
-    *(undefined *)(iVar2 + 0x5b0) = 0x3f;
-    *(undefined *)(iVar2 + 0x560) = uVar1;
-    p_Var3->pitchWheel[0] = 0x2000;
+  do {
+    iVar4 = (int)&(slot->tempo).currentTick + iVar5;
+    uVar1 = slot->slotID;
+    iVar5 = iVar5 + 1;
+    *(undefined *)(iVar4 + 0x584) = 0xff;
+    *(undefined *)(iVar4 + 0x594) = 0;
+    *(undefined *)(iVar4 + 0x5a4) = 0x7f;
+    *(undefined *)(iVar4 + 0x5b4) = 0x3f;
+    *(uchar *)(iVar4 + 0x554) = uVar1;
+    *(undefined2 *)(p_Var3->currentDynamicBank + 4) = 0x2000;
     p_Var3 = (_AadSequenceSlot *)((int)&(p_Var3->tempo).currentTick + 2);
-  } while (iVar4 < 0x10);
+  } while (iVar5 < 0x10);
   slot->selectedSlotPtr = slot;
-  slot->delayedMuteMode = 0;
-  slot->delayedMuteCmds = 0;
-  slot->delayedUnMuteCmds = 0;
   slot->selectedSlotNum = slot->thisSlotNumber;
   return;
 }
+
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ aadWaitForSramTransferComplete()
+ // line 2092, offset 0x800554fc
+	/* begin block 1 */
+		// Start line: 2093
+		// Start offset: 0x800554FC
+		// Variables:
+	// 		int n; // $s0
+	/* end block 1 */
+	// End offset: 0x80055528
+	// End Line: 2100
+
+	/* begin block 2 */
+		// Start line: 4843
+	/* end block 2 */
+	// End Line: 4844
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
 
 int aadWaitForSramTransferComplete(void)
 
 {
   int iVar1;
   int iVar2;
-
-  iVar2 = 100000;
-  do
-  {
+  
+  iVar2 = 10000;
+  do {
     iVar1 = SpuIsTransferCompleted(0);
-    if (iVar1 != 0)
-    {
+    if (iVar1 != 0) {
       return 1;
     }
     iVar2 = iVar2 + -1;
@@ -1969,48 +2070,90 @@ int aadWaitForSramTransferComplete(void)
   return 0;
 }
 
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadInitReverb()
+ // line 2103, offset 0x80055538
+	/* begin block 1 */
+		// Start line: 4866
+	/* end block 1 */
+	// End Line: 4867
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
 void aadInitReverb(void)
 
 {
-  u_int uVar1;
+  uint uVar1;
   int iVar2;
   int iVar3;
-  u_char uVar4;
-  u_int in_a2;
-
+  undefined4 uVar4;
+  uint in_a2;
+  
   uVar1 = aadGetReverbMode();
   SpuSetReverbModeType(uVar1);
   uVar4 = 0xffffff;
-  SpuSetReverbVoice(0, 0xffffff);
+  SpuSetReverbVoice(0,0xffffff);
   iVar2 = aadWaitForSramTransferComplete();
-  if (iVar2 != 0)
-  {
+  if (iVar2 != 0) {
     uVar1 = aadGetReverbMode();
-    SpuClearReverbWorkArea(uVar1, uVar4, in_a2);
+    SpuClearReverbWorkArea(uVar1,uVar4,in_a2);
   }
-  iVar2 = aadGetReverbSize();
-  iVar3 = aadGetReverbSize();
-  aadGetReverbDepth((word)iVar2, (word)iVar3);
-  SpuSetReverbModeDepth(1);
+  iVar2 = aadGetReverbDepth();
+  iVar3 = aadGetReverbDepth();
+  SpuSetReverbModeDepth((word)iVar2,(word)iVar3);
+  SpuSetReverb(1);
   return;
 }
 
-void aadShutdown(void)
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadShutdownReverb()
+ // line 2119, offset 0x800555bc
+	/* begin block 1 */
+		// Start line: 4898
+	/* end block 1 */
+	// End Line: 4899
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
+void aadShutdownReverb(void)
 
 {
   int iVar1;
-  u_int uVar2;
-  u_char in_a1;
-  u_int in_a2;
-
+  uint uVar2;
+  undefined4 in_a1;
+  uint in_a2;
+  
   iVar1 = aadWaitForSramTransferComplete();
-  if (iVar1 != 0)
-  {
+  if (iVar1 != 0) {
     uVar2 = aadGetReverbMode();
-    SpuClearReverbWorkArea(uVar2, in_a1, in_a2);
+    SpuClearReverbWorkArea(uVar2,in_a1,in_a2);
   }
   return;
 }
+
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ aadGetReverbMode()
+ // line 2133, offset 0x800555f4
+	/* begin block 1 */
+		// Start line: 4926
+	/* end block 1 */
+	// End Line: 4927
+
+	/* begin block 2 */
+		// Start line: 4927
+	/* end block 2 */
+	// End Line: 4928
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
 
 int aadGetReverbMode(void)
 
@@ -2018,140 +2161,328 @@ int aadGetReverbMode(void)
   return 3;
 }
 
-u_long aadGetReverbDepth(void)
+
+
+// decompiled code
+// original method signature: 
+// unsigned long /*$ra*/ aadGetReverbSize()
+ // line 2155, offset 0x800555fc
+	/* begin block 1 */
+		// Start line: 4970
+	/* end block 1 */
+	// End Line: 4971
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
+ulong aadGetReverbSize(void)
 
 {
   int iVar1;
-
+  
   iVar1 = aadGetReverbMode();
   return (&aadReverbModeSize)[iVar1] + 0x30;
 }
 
-int aadGetReverbSize(void)
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ aadGetReverbDepth()
+ // line 2160, offset 0x80055630
+	/* begin block 1 */
+		// Start line: 4980
+	/* end block 1 */
+	// End Line: 4981
+
+	/* begin block 2 */
+		// Start line: 4981
+	/* end block 2 */
+	// End Line: 4982
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
+int aadGetReverbDepth(void)
 
 {
-  return (int)&DAT_00002710;
+  return 10000;
 }
+
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ aadGetDynamicBankStatus(int bank /*$a0*/)
+ // line 2166, offset 0x80055638
+	/* begin block 1 */
+		// Start line: 4992
+	/* end block 1 */
+	// End Line: 4993
+
+	/* begin block 2 */
+		// Start line: 4995
+	/* end block 2 */
+	// End Line: 4996
 
 int aadGetDynamicBankStatus(int bank)
 
 {
-  return aadMem->dynamicBankStatus[bank];
+  return (uint)*(byte *)(bank + 0x4e8);
 }
 
-int aadGetTempoFromDynamicSequence(int bank)
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ aadGetNumDynamicSequences(int bank /*$a0*/)
+ // line 2173, offset 0x80055650
+	/* begin block 1 */
+		// Start line: 5006
+	/* end block 1 */
+	// End Line: 5007
+
+	/* begin block 2 */
+		// Start line: 5009
+	/* end block 2 */
+	// End Line: 5010
+
+int aadGetNumDynamicSequences(int bank)
 
 {
-  int iVar1;
-
-  iVar1 = 0;
-  if ((&aadMem->updateCounter + bank)[0x140] == 2)
-  {
-    iVar1 = *(int *)((&aadMem->updateCounter + bank)[0x134] + 0x18);
+  if (*(char *)(bank + 0x4e8) != '\x02') {
+    return 0;
   }
-  return iVar1;
+  return (uint)*(byte *)(*(int *)(bank * 4 + 0x4b8) + 0x10);
 }
 
-int aadGetNumDynamicSequences(int bank, int sequenceNumber, int slotNumber)
+
+
+// decompiled code
+// original method signature: 
+// unsigned short /*$ra*/ aadAssignDynamicSequence(int bank /*$s1*/, int sequenceNumber /*$s3*/, int slotNumber /*$s2*/)
+ // line 2190, offset 0x8005568c
+	/* begin block 1 */
+		// Start line: 2191
+		// Start offset: 0x8005568C
+		// Variables:
+	// 		struct AadTempo tempo; // stack offset -32
+	// 		struct _AadSequenceSlot *slot; // $s0
+	// 		int i; // $v1
+	/* end block 1 */
+	// End offset: 0x80055748
+	// End Line: 2237
+
+	/* begin block 2 */
+		// Start line: 5035
+	/* end block 2 */
+	// End Line: 5036
+
+	/* begin block 3 */
+		// Start line: 5043
+	/* end block 3 */
+	// End Line: 5044
+
+ushort aadAssignDynamicSequence(int bank,int sequenceNumber,int slotNumber)
 
 {
-  undefined *puVar1;
+  ushort uVar1;
   AadTempo *tempo;
   int iVar2;
   int iVar3;
   _AadSequenceSlot *slot;
   AadTempo AStack32;
-
-  if (aadMem->dynamicBankStatus[bank] == 2)
-  {
-    slot = (_AadSequenceSlot *)aadMem->sequenceSlots[slotNumber];
-    slot->sequenceNumberAssigned = (u_char)sequenceNumber;
-    slot->sequenceAssignedDynamicBank = bank;
+  
+  if (*(char *)(bank + 0x4e8) == '\x02') {
+    slot = *(_AadSequenceSlot **)(slotNumber * 4 + 0x1c);
+    slot->sequenceNumberAssigned = (uchar)sequenceNumber;
+    slot->slotID = (uchar)bank;
     aadInitSequenceSlot(slot);
     aadAllNotesOff(slotNumber);
-    if ((slot->tempo).ticksPerUpdate == 0)
-    {
-      tempo = metaCmdAssignSequence(bank, sequenceNumber, &AStack32);
-      aadSetSlotTempo(slotNumber, tempo);
+    if ((slot->tempo).ticksPerUpdate == 0) {
+      tempo = aadGetTempoFromDynamicSequence(bank,sequenceNumber,&AStack32);
+      aadSetSlotTempo(slotNumber,tempo);
     }
     iVar3 = 0xf;
     iVar2 = (int)&(slot->tempo).errorPerUpdate + 3;
     slot->channelMute = 0;
-    slot->enableSustainUpdate = 0;
-    slot->ignoreTranspose = 0;
-    do
-    {
-      *(undefined *)(iVar2 + 0x5c0) = 0;
+    slot->delayedMuteMode = 0;
+    slot->delayedMuteCmds = 0;
+    do {
+      *(undefined *)(iVar2 + 0x5c4) = 0;
       iVar3 = iVar3 + -1;
       iVar2 = iVar2 + -1;
     } while (-1 < iVar3);
-    puVar1 = (undefined *)0x0;
+    uVar1 = 0;
   }
-  else
-  {
-    puVar1 = &DAT_00001007;
+  else {
+    uVar1 = 0x1007;
   }
-  return (int)puVar1;
+  return uVar1;
 }
 
-AadTempo *metaCmdAssignSequence(int bank, int sequenceNumber, AadTempo *tempo)
+
+
+// decompiled code
+// original method signature: 
+// struct AadTempo * /*$ra*/ aadGetTempoFromDynamicSequence(int bank /*$a0*/, int sequenceNumber /*$a1*/, struct AadTempo *tempo /*$a2*/)
+ // line 2240, offset 0x80055764
+	/* begin block 1 */
+		// Start line: 2242
+		// Start offset: 0x80055764
+		// Variables:
+	// 		struct AadSequenceHdr *seqHdr; // $v1
+	/* end block 1 */
+	// End offset: 0x800557B0
+	// End Line: 2255
+
+	/* begin block 2 */
+		// Start line: 5173
+	/* end block 2 */
+	// End Line: 5174
+
+	/* begin block 3 */
+		// Start line: 5174
+	/* end block 3 */
+	// End Line: 5175
+
+	/* begin block 4 */
+		// Start line: 5181
+	/* end block 4 */
+	// End Line: 5182
+
+AadTempo * aadGetTempoFromDynamicSequence(int bank,int sequenceNumber,AadTempo *tempo)
 
 {
   int iVar1;
-
-  if ((&aadMem->updateCounter + bank)[0x140] == 2)
-  {
-    iVar1 = *(int *)((&aadMem->updateCounter + bank)[0x13c] + sequenceNumber * 4);
-    tempo->quarterNoteTime = *(u_long *)(iVar1 + 4);
-    tempo->ppqn = (u_int) * (u_short *)(iVar1 + 8);
+  
+  if (*(char *)(bank + 0x4e8) == '\x02') {
+    iVar1 = *(int *)(sequenceNumber * 4 + *(int *)(bank * 4 + 0x4d8));
+    tempo->quarterNoteTime = *(ulong *)(iVar1 + 4);
+    *(undefined2 *)&tempo->ppqn = *(undefined2 *)(iVar1 + 8);
   }
   return tempo;
 }
 
-void aadSetSlotTempo(int slotNumber, AadTempo *tempo)
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadSetSlotTempo(int slotNumber /*$a0*/, struct AadTempo *tempo /*$a1*/)
+ // line 2374, offset 0x800557b8
+	/* begin block 1 */
+		// Start line: 2376
+		// Start offset: 0x800557B8
+		// Variables:
+	// 		struct _AadSequenceSlot *slot; // $a0
+	// 		unsigned long tickTime; // $v1
+	// 		unsigned long tickTimeRemainder; // $a2
+	/* end block 1 */
+	// End offset: 0x800557B8
+	// End Line: 2382
+
+	/* begin block 2 */
+		// Start line: 5441
+	/* end block 2 */
+	// End Line: 5442
+
+	/* begin block 3 */
+		// Start line: 5442
+	/* end block 3 */
+	// End Line: 5443
+
+	/* begin block 4 */
+		// Start line: 5448
+	/* end block 4 */
+	// End Line: 5449
+
+void aadSetSlotTempo(int slotNumber,AadTempo *tempo)
 
 {
-  AadMemoryStruct *pAVar1;
-  u_int uVar2;
-  _func_36 *p_Var3;
-
-  pAVar1 = aadMem;
-  uVar2 = tempo->ppqn;
-  p_Var3 = aadMem->sequenceSlots[slotNumber];
- uVar2) * 0x10000 +
- uVar2;
- *(u_int *)(p_Var3 + 8) = uVar2;
- uVar2);
- *(u_int *)(p_Var3 + 0xc) = (&aadUpdateRate)[pAVar1->updateMode & 3] % *(u_int *)(p_Var3 + 8);
- *(u_long *)(p_Var3 + 0x14) = tempo->quarterNoteTime;
- *(undefined2 *)(p_Var3 + 0x12) = *(undefined2 *)&tempo->ppqn;
- return;
+  uint uVar1;
+  int iVar2;
+  
+  uVar1 = (uint)*(ushort *)&tempo->ppqn;
+  iVar2 = *(int *)(slotNumber * 4 + 0x1c);
+  uVar1 = (tempo->quarterNoteTime / uVar1) * 0x10000 +
+          (tempo->quarterNoteTime % uVar1 << 0x10) / uVar1;
+  *(uint *)(iVar2 + 8) = uVar1;
+  *(undefined2 *)(iVar2 + 0x10) = (short)((&aadUpdateRate)[(uint)DAT_00000005 & 3] / uVar1);
+  *(uint *)(iVar2 + 0xc) = (&aadUpdateRate)[(uint)DAT_00000005 & 3] % *(uint *)(iVar2 + 8);
+  *(ulong *)(iVar2 + 0x14) = tempo->quarterNoteTime;
+  *(undefined2 *)(iVar2 + 0x12) = *(undefined2 *)&tempo->ppqn;
+  return;
 }
 
-void PadStartCom(int slotNumber)
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadStartSlot(int slotNumber /*$a0*/)
+ // line 2395, offset 0x80055870
+	/* begin block 1 */
+		// Start line: 2396
+		// Start offset: 0x80055870
+		// Variables:
+	// 		struct _AadSequenceSlot *slot; // $s0
+	/* end block 1 */
+	// End offset: 0x800558DC
+	// End Line: 2409
+
+	/* begin block 2 */
+		// Start line: 5488
+	/* end block 2 */
+	// End Line: 5489
+
+	/* begin block 3 */
+		// Start line: 5491
+	/* end block 3 */
+	// End Line: 5492
+
+void aadStartSlot(int slotNumber)
 
 {
   _AadSequenceSlot *slot;
-
-  if (((slotNumber < aadMem->numSlots) &&
-       (slot = (_AadSequenceSlot *)aadMem->sequenceSlots[slotNumber], (slot->status & 1) == 0)) &&
-      (slot->sequenceNumberAssigned != -1))
-  {
+  
+  if (((slotNumber < (int)(uint)mainMenuScreen) &&
+      (slot = *(_AadSequenceSlot **)(slotNumber * 4 + 0x1c), (slot->status & 1) == 0)) &&
+     (slot->sequenceNumberAssigned != -1)) {
     aadInitSequenceSlot(slot);
     slot->status = slot->status | 1;
   }
   return;
 }
 
-void aadStopSfx(int slotNumber)
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadStopSlot(int slotNumber /*$s0*/)
+ // line 2412, offset 0x800558ec
+	/* begin block 1 */
+		// Start line: 2413
+		// Start offset: 0x800558EC
+		// Variables:
+	// 		struct _AadSequenceSlot *slot; // $a0
+	/* end block 1 */
+	// End offset: 0x80055948
+	// End Line: 2427
+
+	/* begin block 2 */
+		// Start line: 5525
+	/* end block 2 */
+	// End Line: 5526
+
+	/* begin block 3 */
+		// Start line: 5528
+	/* end block 3 */
+	// End Line: 5529
+
+void aadStopSlot(int slotNumber)
 
 {
   _AadSequenceSlot *slot;
-
-  if ((slotNumber < aadMem->numSlots) &&
-      (slot = (_AadSequenceSlot *)aadMem->sequenceSlots[slotNumber],
-       slot->sequenceNumberAssigned != -1))
-  {
+  
+  if ((slotNumber < (int)(uint)mainMenuScreen) &&
+     (slot = *(_AadSequenceSlot **)(slotNumber * 4 + 0x1c), slot->sequenceNumberAssigned != -1)) {
     slot->status = slot->status & 0xfffe;
     aadInitSequenceSlot(slot);
     aadAllNotesOff(slotNumber);
@@ -2159,290 +2490,671 @@ void aadStopSfx(int slotNumber)
   return;
 }
 
-void aadStopAllSfx(void)
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadStopAllSlots()
+ // line 2430, offset 0x80055958
+	/* begin block 1 */
+		// Start line: 2431
+		// Start offset: 0x80055958
+		// Variables:
+	// 		struct _AadSequenceSlot *slot; // $s1
+	// 		int slotNumber; // $s0
+	/* end block 1 */
+	// End offset: 0x800559D0
+	// End Line: 2445
+
+	/* begin block 2 */
+		// Start line: 5567
+	/* end block 2 */
+	// End Line: 5568
+
+	/* begin block 3 */
+		// Start line: 5572
+	/* end block 3 */
+	// End Line: 5573
+
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
+void aadStopAllSlots(void)
 
 {
   int iVar1;
   int slotNumber;
-
+  
   slotNumber = 0;
-  if (0 < aadMem->numSlots)
-  {
+  if (mainMenuScreen != 0) {
     iVar1 = 0;
-    do
-    {
-      iVar1 = *(int *)((int)aadMem->sequenceSlots + iVar1);
-      if ((*(u_short *)(iVar1 + 0x540) & 1) != 0)
-      {
-        aadStopSfx(slotNumber);
+    do {
+      iVar1 = *(int *)(iVar1 + 0x1c);
+      if ((*(ushort *)(iVar1 + 0x540) & 1) != 0) {
+        aadStopSlot(slotNumber);
       }
       *(undefined *)(iVar1 + 0x53e) = 0xff;
       slotNumber = slotNumber + 1;
       iVar1 = slotNumber * 4;
-    } while (slotNumber < aadMem->numSlots);
+    } while (slotNumber < (int)(uint)mainMenuScreen);
   }
   return;
 }
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadDisableSlot(int slotNumber /*$a0*/)
+ // line 2448, offset 0x800559e8
+	/* begin block 1 */
+		// Start line: 5614
+	/* end block 1 */
+	// End Line: 5615
+
+	/* begin block 2 */
+		// Start line: 5615
+	/* end block 2 */
+	// End Line: 5616
 
 void aadDisableSlot(int slotNumber)
 
 {
-  if (slotNumber < aadMem->numSlots)
-  {
-    *(byte *)(aadMem->sequenceSlots[slotNumber] + 0x550) =
-        (byte)aadMem->sequenceSlots[slotNumber][0x550] | 1;
+  int iVar1;
+  
+  if (slotNumber < (int)(uint)mainMenuScreen) {
+    iVar1 = *(int *)(slotNumber * 4 + 0x1c);
+    *(byte *)(iVar1 + 0x548) = *(byte *)(iVar1 + 0x548) | 1;
     aadAllNotesOff(slotNumber);
   }
   return;
 }
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadEnableSlot(int slotNumber /*$a0*/)
+ // line 2459, offset 0x80055a38
+	/* begin block 1 */
+		// Start line: 5637
+	/* end block 1 */
+	// End Line: 5638
+
+	/* begin block 2 */
+		// Start line: 5638
+	/* end block 2 */
+	// End Line: 5639
 
 void aadEnableSlot(int slotNumber)
 
 {
-  if (slotNumber < aadMem->numSlots)
-  {
-    *(byte *)(aadMem->sequenceSlots[slotNumber] + 0x550) =
-        (byte)aadMem->sequenceSlots[slotNumber][0x550] & 0xfe;
+  int iVar1;
+  
+  if (slotNumber < (int)(uint)mainMenuScreen) {
+    iVar1 = *(int *)(slotNumber * 4 + 0x1c);
+    *(byte *)(iVar1 + 0x548) = *(byte *)(iVar1 + 0x548) & 0xfe;
   }
   return;
 }
 
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadPauseSlot(int slotNumber /*$a0*/)
+ // line 2467, offset 0x80055a78
+	/* begin block 1 */
+		// Start line: 5653
+	/* end block 1 */
+	// End Line: 5654
+
+	/* begin block 2 */
+		// Start line: 5654
+	/* end block 2 */
+	// End Line: 5655
+
 void aadPauseSlot(int slotNumber)
 
 {
-  if (slotNumber < aadMem->numSlots)
-  {
-    *(u_short *)(aadMem->sequenceSlots[slotNumber] + 0x540) =
-        *(u_short *)(aadMem->sequenceSlots[slotNumber] + 0x540) & 0xfffe;
+  int iVar1;
+  
+  if (slotNumber < (int)(uint)mainMenuScreen) {
+    iVar1 = *(int *)(slotNumber * 4 + 0x1c);
+    *(ushort *)(iVar1 + 0x540) = *(ushort *)(iVar1 + 0x540) & 0xfffe;
     aadAllNotesOff(slotNumber);
   }
   return;
 }
 
-void metaCmdResumeSlot(int slotNumber)
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadResumeSlot(int slotNumber /*$a0*/)
+ // line 2478, offset 0x80055ac8
+	/* begin block 1 */
+		// Start line: 2480
+		// Start offset: 0x80055AC8
+		// Variables:
+	// 		struct _AadSequenceSlot *slot; // $a1
+	// 		int track; // $a0
+	/* end block 1 */
+	// End offset: 0x80055B30
+	// End Line: 2494
+
+	/* begin block 2 */
+		// Start line: 5676
+	/* end block 2 */
+	// End Line: 5677
+
+	/* begin block 3 */
+		// Start line: 5677
+	/* end block 3 */
+	// End Line: 5678
+
+	/* begin block 4 */
+		// Start line: 5680
+	/* end block 4 */
+	// End Line: 5681
+
+void aadResumeSlot(int slotNumber)
 
 {
-  _func_36 *p_Var1;
+  int iVar1;
   int iVar2;
-  _func_36 *p_Var3;
-
-  if (slotNumber < aadMem->numSlots)
-  {
-    p_Var3 = aadMem->sequenceSlots[slotNumber];
+  int iVar3;
+  
+  if (slotNumber < (int)(uint)mainMenuScreen) {
+    iVar3 = *(int *)(slotNumber * 4 + 0x1c);
     iVar2 = 0;
-    p_Var1 = p_Var3;
-    if (p_Var3[0x53e] != (_func_36)0xff)
-    {
-      do
-      {
+    iVar1 = iVar3;
+    if (*(char *)(iVar3 + 0x53e) != -1) {
+      do {
         iVar2 = iVar2 + 1;
-        *(byte *)(p_Var1 + 0x3d8) = (byte)p_Var1[0x3d8] | 0x20;
-        p_Var1 = p_Var3 + iVar2;
+        *(byte *)(iVar1 + 0x3d8) = *(byte *)(iVar1 + 0x3d8) | 0x20;
+        iVar1 = iVar3 + iVar2;
       } while (iVar2 < 0x10);
-      *(u_short *)(p_Var3 + 0x540) = *(u_short *)(p_Var3 + 0x540) | 1;
+      *(ushort *)(iVar3 + 0x540) = *(ushort *)(iVar3 + 0x540) | 1;
     }
   }
   return;
 }
+
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ aadGetSlotStatus(int slotNumber /*$a0*/)
+ // line 2497, offset 0x80055b38
+	/* begin block 1 */
+		// Start line: 5716
+	/* end block 1 */
+	// End Line: 5717
+
+	/* begin block 2 */
+		// Start line: 5717
+	/* end block 2 */
+	// End Line: 5718
 
 int aadGetSlotStatus(int slotNumber)
 
 {
-  return (u_int) * (u_short *)(aadMem->sequenceSlots[slotNumber] + 0x540);
+  return (uint)*(ushort *)(*(int *)(slotNumber * 4 + 0x1c) + 0x540);
 }
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadAllNotesOff(int slotNumber /*$a0*/)
+ // line 2523, offset 0x80055b58
+	/* begin block 1 */
+		// Start line: 2525
+		// Start offset: 0x80055B58
+		// Variables:
+	// 		struct AadSynthVoice *voice; // $a0
+	// 		unsigned long vmask; // $a1
+	// 		int i; // $a3
+	// 		struct _AadSequenceSlot *slot; // $t0
+	/* end block 1 */
+	// End offset: 0x80055BF0
+	// End Line: 2548
+
+	/* begin block 2 */
+		// Start line: 5042
+	/* end block 2 */
+	// End Line: 5043
+
+	/* begin block 3 */
+		// Start line: 5744
+	/* end block 3 */
+	// End Line: 5745
+
+	/* begin block 4 */
+		// Start line: 5750
+	/* end block 4 */
+	// End Line: 5751
 
 void aadAllNotesOff(int slotNumber)
 
 {
-  AadMemoryStruct *pAVar1;
-  u_int *puVar2;
-  u_int uVar3;
+  uint uVar1;
+  uint *puVar2;
+  int iVar3;
   int iVar4;
-  int iVar5;
-  _func_36 *p_Var6;
-
-  uVar3 = 0;
-  iVar5 = 0;
-  iVar4 = 0x1dc;
-  p_Var6 = aadMem->sequenceSlots[slotNumber];
-  do
-  {
-    puVar2 = (u_int *)((int)&aadMem->updateCounter + iVar4);
-    if ((_func_36)(*(byte *)(puVar2 + 2) & 0xf0) == p_Var6[0x551])
-    {
+  
+  uVar1 = 0;
+  iVar3 = 0;
+  puVar2 = (uint *)0x1c4;
+  iVar4 = *(int *)(slotNumber * 4 + 0x1c);
+  do {
+    if ((*(byte *)(puVar2 + 2) & 0xf0) == *(byte *)(iVar4 + 0x549)) {
       *(undefined *)(puVar2 + 2) = 0xff;
-      uVar3 = uVar3 | *puVar2;
-      *(u_short *)((int)puVar2 + 0x12) = *(u_short *)((int)puVar2 + 0x12) | 2;
+      uVar1 = uVar1 | *puVar2;
+      *(ushort *)((int)puVar2 + 0x12) = *(ushort *)((int)puVar2 + 0x12) | 2;
     }
-    pAVar1 = aadMem;
-    iVar5 = iVar5 + 1;
-    iVar4 = iVar4 + 0x1c;
-  } while (iVar5 < 0x18);
-  if (uVar3 != 0)
-  {
-    aadMem->voiceKeyOffRequest = aadMem->voiceKeyOffRequest | uVar3;
-    pAVar1->voiceKeyOnRequest = pAVar1->voiceKeyOnRequest & ~uVar3;
+    iVar3 = iVar3 + 1;
+    puVar2 = puVar2 + 7;
+  } while (iVar3 < 0x18);
+  if (uVar1 != 0) {
+    uRam000004ac = uRam000004ac | uVar1;
+    uRam000004b0 = uRam000004b0 & ~uVar1;
   }
   return;
 }
 
-void aadMuteChannels(_AadSequenceSlot *slot, u_long channelList)
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadGetVoiceStatus(char *voiceStatusArray /*$a0*/)
+ // line 2551, offset 0x80055bf8
+	/* begin block 1 */
+		// Start line: 5810
+	/* end block 1 */
+	// End Line: 5811
+
+	/* begin block 2 */
+		// Start line: 5811
+	/* end block 2 */
+	// End Line: 5812
+
+void aadGetVoiceStatus(char *voiceStatusArray)
 
 {
-  AadMemoryStruct *pAVar1;
-  u_int uVar2;
-  u_int *puVar3;
-  int iVar4;
-  int iVar5;
-  u_int uVar6;
-  u_int uVar7;
+  undefined4 uVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  
+  uVar3 = uRam00000470;
+  uVar2 = uRam0000046c;
+  uVar1 = uRam00000468;
+  *(undefined4 *)voiceStatusArray = uRam00000464;
+  *(undefined4 *)(voiceStatusArray + 4) = uVar1;
+  *(undefined4 *)(voiceStatusArray + 8) = uVar2;
+  *(undefined4 *)(voiceStatusArray + 0xc) = uVar3;
+  uVar1 = uRam00000478;
+  *(undefined4 *)(voiceStatusArray + 0x10) = uRam00000474;
+  *(undefined4 *)(voiceStatusArray + 0x14) = uVar1;
+  return;
+}
 
-  uVar2 = slot->delayedMuteMode & channelList;
-  if (uVar2 != 0)
-  {
-    channelList = channelList & ~uVar2;
-    slot->delayedMuteCmds = slot->delayedMuteCmds | (u_short)uVar2;
-  }
-  uVar7 = 0;
-  uVar6 = 0;
-  slot->channelMute = slot->channelMute | (u_short)channelList;
-  uVar2 = 1;
-  do
-  {
-    if ((channelList & uVar2) != 0)
-    {
-      iVar5 = 0;
-      iVar4 = 0x1dc;
-      do
-      {
-        puVar3 = (u_int *)((int)&aadMem->updateCounter + iVar4);
-        if ((u_int) * (byte *)(puVar3 + 2) == (slot->slotID | uVar6))
-        {
-          *(undefined *)(puVar3 + 2) = 0xff;
-          uVar7 = uVar7 | *puVar3;
+
+
+// decompiled code
+// original method signature: 
+// struct AadSynthVoice * /*$ra*/ aadGetVoicePointer(int voiceIndex /*$a0*/)
+ // line 2558, offset 0x80055c68
+	/* begin block 1 */
+		// Start line: 5824
+	/* end block 1 */
+	// End Line: 5825
+
+	/* begin block 2 */
+		// Start line: 5826
+	/* end block 2 */
+	// End Line: 5827
+
+AadSynthVoice * aadGetVoicePointer(int voiceIndex)
+
+{
+  return (AadSynthVoice *)(voiceIndex * 0x1c + 0x1c4);
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadMuteChannels(int slotNumber /*$a0*/, unsigned long channelList /*$a1*/)
+ // line 2565, offset 0x80055c84
+	/* begin block 1 */
+		// Start line: 2567
+		// Start offset: 0x80055C84
+		// Variables:
+	// 		struct AadSynthVoice *voice; // $a0
+	// 		unsigned long vmask; // $t1
+	// 		int channel; // $t0
+	// 		int i; // $a3
+	// 		struct _AadSequenceSlot *slot; // $t2
+	/* end block 1 */
+	// End offset: 0x80055D44
+	// End Line: 2598
+
+	/* begin block 2 */
+		// Start line: 5838
+	/* end block 2 */
+	// End Line: 5839
+
+	/* begin block 3 */
+		// Start line: 5839
+	/* end block 3 */
+	// End Line: 5840
+
+	/* begin block 4 */
+		// Start line: 5845
+	/* end block 4 */
+	// End Line: 5846
+
+void aadMuteChannels(int slotNumber,ulong channelList)
+
+{
+  uint uVar1;
+  uint *puVar2;
+  int iVar3;
+  uint uVar4;
+  uint uVar5;
+  int iVar6;
+  
+  uVar5 = 0;
+  uVar4 = 0;
+  iVar6 = *(int *)(slotNumber * 4 + 0x1c);
+  *(ushort *)(iVar6 + 0x542) = *(ushort *)(iVar6 + 0x542) | (ushort)channelList;
+  uVar1 = 1;
+  do {
+    if ((channelList & uVar1) != 0) {
+      iVar3 = 0;
+      puVar2 = (uint *)0x1c4;
+      do {
+        if ((uint)*(byte *)(puVar2 + 2) == (*(byte *)(iVar6 + 0x549) | uVar4)) {
+          *(undefined *)(puVar2 + 2) = 0xff;
+          uVar5 = uVar5 | *puVar2;
         }
-        iVar5 = iVar5 + 1;
-        iVar4 = iVar4 + 0x1c;
-      } while (iVar5 < 0x18);
+        iVar3 = iVar3 + 1;
+        puVar2 = puVar2 + 7;
+      } while (iVar3 < 0x18);
     }
-    pAVar1 = aadMem;
-    uVar6 = uVar6 + 1;
-    uVar2 = 1 << (uVar6 & 0x1f);
-  } while ((int)uVar6 < 0x10);
-  if (uVar7 != 0)
-  {
-    aadMem->voiceKeyOffRequest = aadMem->voiceKeyOffRequest | uVar7;
-    pAVar1->voiceKeyOnRequest = pAVar1->voiceKeyOnRequest & ~uVar7;
+    uVar4 = uVar4 + 1;
+    uVar1 = 1 << (uVar4 & 0x1f);
+  } while ((int)uVar4 < 0x10);
+  if (uVar5 != 0) {
+    uRam000004ac = uRam000004ac | uVar5;
+    uRam000004b0 = uRam000004b0 & ~uVar5;
   }
   return;
 }
 
-void metaCmdUnMuteChannel(_AadSequenceSlot *slot, u_long channelList)
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadUnMuteChannels(int slotNumber /*$a0*/, unsigned long channelList /*$a1*/)
+ // line 2601, offset 0x80055d4c
+	/* begin block 1 */
+		// Start line: 5926
+	/* end block 1 */
+	// End Line: 5927
+
+	/* begin block 2 */
+		// Start line: 5927
+	/* end block 2 */
+	// End Line: 5928
+
+void aadUnMuteChannels(int slotNumber,ulong channelList)
 
 {
-  u_short uVar1;
-  u_short uVar2;
-  u_int uVar3;
-
-  uVar2 = (u_short)channelList;
-  uVar3 = slot->delayedMuteMode & channelList;
-  uVar1 = (u_short)uVar3;
-  if (uVar3 != 0)
-  {
-    uVar2 = uVar2 & ~uVar1;
-    slot->delayedUnMuteCmds = slot->delayedUnMuteCmds | uVar1;
-  }
-  slot->channelMute = slot->channelMute & ~uVar2;
+  int iVar1;
+  
+  iVar1 = *(int *)(slotNumber * 4 + 0x1c);
+  *(ushort *)(iVar1 + 0x542) = *(ushort *)(iVar1 + 0x542) & ~(ushort)channelList;
   return;
 }
+
+
+
+// decompiled code
+// original method signature: 
+// TDRFuncPtr_aadInstallEndSequenceCallback /*$ra*/ aadInstallEndSequenceCallback(TDRFuncPtr_aadInstallEndSequenceCallback0callbackProc callbackProc /*$a0*/, long data /*$a1*/)
+ // line 2706, offset 0x80055d74
+	/* begin block 1 */
+		// Start line: 2708
+		// Start offset: 0x80055D74
+		// Variables:
+	// 		void (*previousCallbackProc)(); // $v0
+	/* end block 1 */
+	// End offset: 0x80055D74
+	// End Line: 2710
+
+	/* begin block 2 */
+		// Start line: 5408
+	/* end block 2 */
+	// End Line: 5409
+
+	/* begin block 3 */
+		// Start line: 6033
+	/* end block 3 */
+	// End Line: 6034
+
+	/* begin block 4 */
+		// Start line: 6035
+	/* end block 4 */
+	// End Line: 6036
 
 TDRFuncPtr_aadInstallEndSequenceCallback
-aadInstallEndSequenceCallback(TDRFuncPtr_aadInstallEndSequenceCallback0callbackProc callbackProc, long data)
+aadInstallEndSequenceCallback
+          (TDRFuncPtr_aadInstallEndSequenceCallback0callbackProc callbackProc,long data)
 
 {
-  AadMemoryStruct *pAVar1;
-  TDRFuncPtr_aadInstallEndSequenceCallback pTVar2;
-
-  pAVar1 = aadMem;
-  pTVar2 = (TDRFuncPtr_aadInstallEndSequenceCallback)aadMem->endSequenceCallback;
-  *(TDRFuncPtr_aadInstallEndSequenceCallback0callbackProc *)&aadMem->endSequenceCallback =
-      callbackProc;
-  pAVar1->endSequenceCallbackData = data;
-  return pTVar2;
+  TDRFuncPtr_aadInstallEndSequenceCallback pTVar1;
+  
+  pTVar1 = pTRam00001b60;
+  pTRam00001b60 = (TDRFuncPtr_aadInstallEndSequenceCallback)callbackProc;
+  lRam00001b68 = data;
+  return pTVar1;
 }
 
-void aadSetUserVariable(int variableNumber, int value)
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadSetUserVariable(int variableNumber /*$a0*/, int value /*$a1*/)
+ // line 2717, offset 0x80055d8c
+	/* begin block 1 */
+		// Start line: 6054
+	/* end block 1 */
+	// End Line: 6055
+
+	/* begin block 2 */
+		// Start line: 6056
+	/* end block 2 */
+	// End Line: 6057
+
+void aadSetUserVariable(int variableNumber,int value)
 
 {
-  (&DAT_00001c08)[(int)&aadMem->updateCounter + variableNumber] = (char)value;
+  *(undefined *)(variableNumber + 0x1b6c) = (char)value;
   return;
 }
+
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ aadGetUserVariable(int variableNumber /*$a0*/)
+ // line 2725, offset 0x80055da0
+	/* begin block 1 */
+		// Start line: 6070
+	/* end block 1 */
+	// End Line: 6071
+
+	/* begin block 2 */
+		// Start line: 6072
+	/* end block 2 */
+	// End Line: 6073
+
+int aadGetUserVariable(int variableNumber)
+
+{
+  return (uint)*(byte *)(variableNumber + 0x1b6c);
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadSetNoUpdateMode(int noUpdate /*$a0*/)
+ // line 2747, offset 0x80055db8
+	/* begin block 1 */
+		// Start line: 5486
+	/* end block 1 */
+	// End Line: 5487
+
+	/* begin block 2 */
+		// Start line: 6096
+	/* end block 2 */
+	// End Line: 6097
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void aadSetNoUpdateMode(int noUpdate)
 
 {
-  if (noUpdate != 0)
-  {
-    aadMem->flags = aadMem->flags | 2;
+  if (noUpdate != 0) {
+    _DAT_00000012 = _DAT_00000012 | 2;
     return;
   }
-  aadMem->flags = aadMem->flags & 0xfffffffd;
+  _DAT_00000012 = _DAT_00000012 & 0xfffd;
   return;
 }
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadPauseSound()
+ // line 2768, offset 0x80055df8
+	/* begin block 1 */
+		// Start line: 2769
+		// Start offset: 0x80055DF8
+		// Variables:
+	// 		int i; // $s0
+	/* end block 1 */
+	// End offset: 0x80055E78
+	// End Line: 2785
+
+	/* begin block 2 */
+		// Start line: 5524
+	/* end block 2 */
+	// End Line: 5525
+
+	/* begin block 3 */
+		// Start line: 6126
+	/* end block 3 */
+	// End Line: 6127
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void aadPauseSound(void)
 
 {
   int iVar1;
-  word *pwVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-
-  if ((aadMem->flags & 8U) == 0)
-  {
-    aadMem->flags = aadMem->flags | 0xc;
-    iVar3 = 0;
-    iVar5 = 0x494;
-    iVar4 = 0;
-    do
-    {
-      pwVar2 = (word *)((int)&aadMem->updateCounter + iVar5);
-      iVar5 = iVar5 + 2;
-      iVar1 = (int)&aadMem->updateCounter + iVar4;
-      iVar4 = iVar4 + 0x1c;
-      *(u_short *)(iVar1 + 0x1ee) = *(u_short *)(iVar1 + 0x1ee) & 0xfffd;
-      SpuGetVoicePitch(iVar3, pwVar2);
-      SpuSetVoiceStartAddr(iVar3, 0);
-      iVar3 = iVar3 + 1;
-    } while (iVar3 < 0x18);
+  int iVar2;
+  word *pwVar3;
+  
+  if ((_DAT_00000012 & 8) == 0) {
+    iVar1 = 0;
+    iVar2 = 0;
+    pwVar3 = (word *)0x47c;
+    _DAT_00000012 = _DAT_00000012 | 0xc;
+    do {
+      *(ushort *)(iVar2 + 0x1d6) = *(ushort *)(iVar2 + 0x1d6) & 0xfffd;
+      SpuGetVoicePitch(iVar1,pwVar3);
+      SpuSetVoicePitch(iVar1,0);
+      iVar1 = iVar1 + 1;
+      iVar2 = iVar2 + 0x1c;
+      pwVar3 = pwVar3 + 1;
+    } while (iVar1 < 0x18);
   }
   return;
 }
 
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadCancelPauseSound()
+ // line 2787, offset 0x80055e90
+	/* begin block 1 */
+		// Start line: 6176
+	/* end block 1 */
+	// End Line: 6177
+
+	/* begin block 2 */
+		// Start line: 6178
+	/* end block 2 */
+	// End Line: 6179
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* WARNING: Unknown calling convention yet parameter storage is locked */
+
 void aadCancelPauseSound(void)
 
 {
-  aadMem->flags = aadMem->flags & 0xfffffff3;
+  _DAT_00000012 = _DAT_00000012 & 0xfff3;
   return;
 }
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ aadResumeSound()
+ // line 2794, offset 0x80055eac
+	/* begin block 1 */
+		// Start line: 2795
+		// Start offset: 0x80055EAC
+		// Variables:
+	// 		int i; // $s0
+	/* end block 1 */
+	// End offset: 0x80055F20
+	// End Line: 2810
+
+	/* begin block 2 */
+		// Start line: 6190
+	/* end block 2 */
+	// End Line: 6191
+
+	/* begin block 3 */
+		// Start line: 6194
+	/* end block 3 */
+	// End Line: 6195
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* WARNING: Unknown calling convention yet parameter storage is locked */
 
 void aadResumeSound(void)
 
 {
   int iVar1;
   int iVar2;
-
-  if ((aadMem->flags & 8U) != 0)
-  {
-    aadMem->flags = aadMem->flags & 0xfffffff3;
+  
+  if ((_DAT_00000012 & 8) != 0) {
     iVar1 = 0;
     iVar2 = 0;
-    do
-    {
-      if ((*(u_short *)((int)&aadMem->synthVoice[0].flags + iVar2) & 2) == 0)
-      {
-        SpuSetVoiceStartAddr(iVar1, aadMem->voicePitchSave[iVar1]);
+    _DAT_00000012 = _DAT_00000012 & 0xfff3;
+    do {
+      if ((*(ushort *)(iVar2 + 0x1d6) & 2) == 0) {
+        SpuSetVoicePitch(iVar1,*(word *)(iVar1 * 2 + 0x47c));
       }
       iVar1 = iVar1 + 1;
       iVar2 = iVar2 + 0x1c;
@@ -2450,3 +3162,8 @@ void aadResumeSound(void)
   }
   return;
 }
+
+
+
+
+

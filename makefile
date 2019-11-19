@@ -28,7 +28,7 @@
 #---------------------------------------------------------------------------------
 TARGET      = MAIN
 PROGADDR	= 0x00010000
-SOURCES		= GAME/
+SOURCES		= GAME/PSX/
 INCLUDES	= GAME/
 DISC_ROOTFD	= DISC/
 
@@ -56,7 +56,8 @@ AS			= asmpsx
 #---------------------------------------------------------------------------------
 # Parse source directories for source files
 #---------------------------------------------------------------------------------
-CFILES		= $(foreach dir,$(SOURCES),$(wildcard $(dir)/*.C))
+#CFILES		= $(foreach dir,$(SOURCES),$(wildcard $(dir)/*.C))
+CFILES		= D:\Proyectos\KainSoul\KAIN2\GAME\PSX\MAIN.C
 AFILES		= $(foreach dir,$(SOURCES),$(wildcard $(dir)/*.MIP))
 
 #---------------------------------------------------------------------------------
