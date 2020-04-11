@@ -5,20 +5,22 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GlyphInit(struct _Instance *instance /*$s2*/, struct GameTracker *gameTracker /*$a1*/)
- // line 117, offset 0x80079b64
+ // line 121, offset 0x8007a22c
 	/* begin block 1 */
-		// Start line: 118
-		// Start offset: 0x80079B64
+		// Start line: 122
+		// Start offset: 0x8007A22C
 		// Variables:
 	// 		struct __GlyphData *data; // $s1
 	/* end block 1 */
-	// End offset: 0x80079C4C
-	// End Line: 160
+	// End offset: 0x8007A318
+	// End Line: 165
 
 	/* begin block 2 */
-		// Start line: 234
+		// Start line: 242
 	/* end block 2 */
-	// End Line: 235
+	// End Line: 243
+
+/* File: C:\kain2\game\GLYPH.C */
 
 void GlyphInit(_Instance *instance,GameTracker *gameTracker)
 
@@ -29,19 +31,20 @@ void GlyphInit(_Instance *instance,GameTracker *gameTracker)
     puVar1 = (undefined4 *)MEMPACK_Malloc(0x9c,'\x1d');
     *(undefined4 **)&instance->extraData = puVar1;
     InitMessageQueue((__MessageQueue *)(puVar1 + 1));
-    EnMessageQueueData((__MessageQueue *)(puVar1 + 1),0x100001,0);
-    *puVar1 = 0x8007a570;
-    puVar1[0x23] = 7;
+    EnMessageQueueData((__MessageQueue *)(puVar1 + 1),(int)&DAT_00100001,0);
+    *puVar1 = 0x8007ac68;
+    *(undefined2 *)(puVar1 + 0x23) = 7;
     *(undefined2 *)(puVar1 + 0x26) = 0xdb6;
     *(undefined2 *)(puVar1 + 0x24) = 0;
     glyph_time = 0;
     *(undefined2 *)((int)puVar1 + 0x92) = 0;
     *(undefined2 *)(puVar1 + 0x25) = 0;
     *(undefined2 *)((int)puVar1 + 0x9a) = 1;
+    *(undefined2 *)((int)puVar1 + 0x8e) = 0;
     glyph_trigger = 0;
-    fx_blastring = (_FXBlastringEffect *)0x0;
+    fx_blastring = 0;
     fx_going = 0;
-    *(short *)((int)puVar1 + 0x96) = ((short)puVar1[0x23] + -1) * 0x249;
+    *(short *)((int)puVar1 + 0x96) = (*(short *)(puVar1 + 0x23) + -1) * 0x249;
     glyph_cost = -1;
     instance->flags = instance->flags | 0x10800;
   }
@@ -51,6 +54,7 @@ void GlyphInit(_Instance *instance,GameTracker *gameTracker)
   HUD_Init();
   MANNA_Position = -0x40;
   MANNA_Pos_vel = 0;
+  MANNA_Pickup_Time = 0;
   return;
 }
 
@@ -59,16 +63,18 @@ void GlyphInit(_Instance *instance,GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GlyphCollide(struct _Instance *instance /*$a0*/, struct GameTracker *gameTracker /*$a1*/)
- // line 168, offset 0x80079c78
+ // line 174, offset 0x8007a348
 	/* begin block 1 */
-		// Start line: 373
+		// Start line: 388
 	/* end block 1 */
-	// End Line: 374
+	// End Line: 389
 
 	/* begin block 2 */
-		// Start line: 375
+		// Start line: 390
 	/* end block 2 */
-	// End Line: 376
+	// End Line: 391
+
+/* File: C:\kain2\game\GLYPH.C */
 
 void GlyphCollide(_Instance *instance,GameTracker *gameTracker)
 
@@ -81,20 +87,22 @@ void GlyphCollide(_Instance *instance,GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GlyphProcess(struct _Instance *instance /*$s0*/, struct GameTracker *gameTracker /*$a1*/)
- // line 175, offset 0x80079c80
+ // line 181, offset 0x8007a350
 	/* begin block 1 */
-		// Start line: 176
-		// Start offset: 0x80079C80
+		// Start line: 182
+		// Start offset: 0x8007A350
 		// Variables:
 	// 		struct __GlyphData *data; // $v0
 	/* end block 1 */
-	// End offset: 0x80079C80
-	// End Line: 176
+	// End offset: 0x8007A350
+	// End Line: 182
 
 	/* begin block 2 */
-		// Start line: 387
+		// Start line: 402
 	/* end block 2 */
-	// End Line: 388
+	// End Line: 403
+
+/* File: C:\kain2\game\GLYPH.C */
 
 void GlyphProcess(_Instance *instance,GameTracker *gameTracker)
 
@@ -104,7 +112,10 @@ void GlyphProcess(_Instance *instance,GameTracker *gameTracker)
   
   (**(code **)instance->extraData)(instance,0,0);
   sVar1 = (instance->parent->position).z;
-  *(undefined4 *)&instance->position = *(undefined4 *)&instance->parent->position;
+  *(undefined4 *)&instance->oldPos = *(undefined4 *)&instance->parent->position;
+  (instance->oldPos).z = sVar1;
+  sVar1 = (instance->oldPos).z;
+  *(undefined4 *)&instance->position = *(undefined4 *)&instance->oldPos;
   (instance->position).z = sVar1;
   lVar2 = instance->parent->currentStreamUnitID;
   instance->flags = instance->flags | 0xc00;
@@ -117,45 +128,23 @@ void GlyphProcess(_Instance *instance,GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // unsigned long /*$ra*/ GlyphQuery(struct _Instance *instance /*$a0*/, unsigned long query /*$a1*/)
- // line 204, offset 0x80079cf0
+ // line 211, offset 0x8007a3d8
 	/* begin block 1 */
-		// Start line: 205
-		// Start offset: 0x80079CF0
-
-		/* begin block 1.1 */
-			// Start line: 212
-			// Start offset: 0x80079D0C
-			// Variables:
-		// 		struct evControlSaveDataData *pdata; // $v0
-		/* end block 1.1 */
-		// End offset: 0x80079D2C
-		// End Line: 220
+		// Start line: 465
 	/* end block 1 */
-	// End offset: 0x80079D30
-	// End Line: 227
+	// End Line: 466
 
 	/* begin block 2 */
-		// Start line: 448
+		// Start line: 466
 	/* end block 2 */
-	// End Line: 449
+	// End Line: 467
+
+/* File: C:\kain2\game\GLYPH.C */
 
 ulong GlyphQuery(_Instance *instance,ulong query)
 
 {
-  undefined4 *puVar1;
-  
-  if (query == 1) {
-    puVar1 = (undefined4 *)0x0;
-  }
-  else {
-    puVar1 = (undefined4 *)0x0;
-    if (query == 0x18) {
-      puVar1 = (undefined4 *)CIRC_Alloc(8);
-      *puVar1 = 4;
-      puVar1[1] = 0x800d4d8c;
-    }
-  }
-  return (ulong)puVar1;
+  return 0;
 }
 
 
@@ -163,35 +152,27 @@ ulong GlyphQuery(_Instance *instance,ulong query)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GlyphPost(struct _Instance *instance /*$a0*/, unsigned long message /*$a1*/, unsigned long messageData /*$a2*/)
- // line 231, offset 0x80079d40
+ // line 228, offset 0x8007a3f8
 	/* begin block 1 */
-		// Start line: 232
-		// Start offset: 0x80079D40
+		// Start line: 229
+		// Start offset: 0x8007A3F8
 		// Variables:
 	// 		struct __GlyphData *data; // $a0
-
-		/* begin block 1.1 */
-			// Start line: 244
-			// Start offset: 0x80079D5C
-		/* end block 1.1 */
-		// End offset: 0x80079D80
-		// End Line: 249
 	/* end block 1 */
-	// End offset: 0x80079D88
-	// End Line: 255
+	// End offset: 0x8007A41C
+	// End Line: 246
 
 	/* begin block 2 */
-		// Start line: 502
+		// Start line: 499
 	/* end block 2 */
-	// End Line: 503
+	// End Line: 500
+
+/* File: C:\kain2\game\GLYPH.C */
 
 void GlyphPost(_Instance *instance,ulong message,ulong messageData)
 
 {
-  if (message == 0x100007) {
-    HudSave = **(undefined4 **)(messageData + 4);
-  }
-  else {
+  if ((undefined *)message != &DAT_00100007) {
     EnMessageQueueData((__MessageQueue *)((int)instance->extraData + 4),message,messageData);
   }
   return;
@@ -202,20 +183,22 @@ void GlyphPost(_Instance *instance,ulong message,ulong messageData)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _GlyphSwitchProcess(struct _Instance *instance /*$s1*/, TDRFuncPtr__GlyphSwitchProcess1process process /*$s3*/)
- // line 265, offset 0x80079d98
+ // line 256, offset 0x8007a42c
 	/* begin block 1 */
-		// Start line: 266
-		// Start offset: 0x80079D98
+		// Start line: 257
+		// Start offset: 0x8007A42C
 		// Variables:
 	// 		struct __GlyphData *data; // $s2
 	/* end block 1 */
-	// End offset: 0x80079D98
-	// End Line: 266
+	// End offset: 0x8007A42C
+	// End Line: 257
 
 	/* begin block 2 */
-		// Start line: 579
+		// Start line: 564
 	/* end block 2 */
-	// End Line: 580
+	// End Line: 565
+
+/* File: C:\kain2\game\GLYPH.C */
 
 void _GlyphSwitchProcess(_Instance *instance,TDRFuncPtr__GlyphSwitchProcess1process process)
 
@@ -226,9 +209,9 @@ void _GlyphSwitchProcess(_Instance *instance,TDRFuncPtr__GlyphSwitchProcess1proc
   ppTVar1 = (TDRFuncPtr__GlyphSwitchProcess1process *)instance->extraData;
   In = (__MessageQueue *)(ppTVar1 + 1);
   PurgeMessageQueue(In);
-  EnMessageQueueData(In,0x100004,0);
+  EnMessageQueueData(In,(int)&DAT_00100004,0);
   (**ppTVar1)(instance,0,0);
-  EnMessageQueueData(In,0x100001,0);
+  EnMessageQueueData(In,(int)&DAT_00100001,0);
   *ppTVar1 = process;
   (*process)(instance,0,0);
   return;
@@ -238,19 +221,59 @@ void _GlyphSwitchProcess(_Instance *instance,TDRFuncPtr__GlyphSwitchProcess1proc
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ _GlyphIsGlyphSet(int glyph /*$s0*/)
- // line 287, offset 0x80079e38
+// int /*$ra*/ GlyphIsGlyphOpen(struct _Instance *instance /*$a0*/)
+ // line 277, offset 0x8007a4cc
 	/* begin block 1 */
-		// Start line: 627
+		// Start line: 279
+		// Start offset: 0x8007A4CC
+		// Variables:
+	// 		struct __GlyphData *data; // $v0
 	/* end block 1 */
-	// End Line: 628
+	// End offset: 0x8007A4CC
+	// End Line: 282
+
+	/* begin block 2 */
+		// Start line: 610
+	/* end block 2 */
+	// End Line: 611
+
+	/* begin block 3 */
+		// Start line: 611
+	/* end block 3 */
+	// End Line: 612
+
+	/* begin block 4 */
+		// Start line: 614
+	/* end block 4 */
+	// End Line: 615
+
+/* File: C:\kain2\game\GLYPH.C */
+
+int GlyphIsGlyphOpen(_Instance *instance)
+
+{
+  return (int)*(short *)((int)instance->extraData + 0x8e);
+}
+
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ _GlyphIsGlyphSet(int glyph /*$s0*/)
+ // line 290, offset 0x8007a4e0
+	/* begin block 1 */
+		// Start line: 636
+	/* end block 1 */
+	// End Line: 637
+
+/* File: C:\kain2\game\GLYPH.C */
 
 int _GlyphIsGlyphSet(int glyph)
 
 {
   ulong uVar1;
   
-  uVar1 = INSTANCE_Query(gameTrackerX.playerInstance,0x24);
+  uVar1 = INSTANCE_Query(DAT_800d20f8,0x24);
   return 1 << (glyph + 0x11U & 0x1f) & uVar1;
 }
 
@@ -259,18 +282,20 @@ int _GlyphIsGlyphSet(int glyph)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ _GlyphIsGlyphUsable(int glyph /*$s0*/)
- // line 291, offset 0x80079e74
+ // line 294, offset 0x8007a51c
 	/* begin block 1 */
-		// Start line: 636
+		// Start line: 645
 	/* end block 1 */
-	// End Line: 637
+	// End Line: 646
+
+/* File: C:\kain2\game\GLYPH.C */
 
 int _GlyphIsGlyphUsable(int glyph)
 
 {
   ulong uVar1;
   
-  uVar1 = INSTANCE_Query(gameTrackerX.playerInstance,0x13);
+  uVar1 = INSTANCE_Query(DAT_800d20f8,0x13);
   return 1 << (glyph + 0x11U & 0x1f) & uVar1;
 }
 
@@ -279,21 +304,21 @@ int _GlyphIsGlyphUsable(int glyph)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ _GlyphIsAnyGlyphSet()
- // line 295, offset 0x80079eb0
+ // line 298, offset 0x8007a558
 	/* begin block 1 */
-		// Start line: 645
+		// Start line: 654
 	/* end block 1 */
-	// End Line: 646
+	// End Line: 655
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\GLYPH.C */
 
 int _GlyphIsAnyGlyphSet(void)
 
 {
   ulong uVar1;
   
-  uVar1 = INSTANCE_Query(gameTrackerX.playerInstance,0x24);
-  return uVar1 & 0x3fc0000;
+  uVar1 = INSTANCE_Query(DAT_800d20f8,0x24);
+  return uVar1 & 0x1fc0000;
 }
 
 
@@ -301,16 +326,18 @@ int _GlyphIsAnyGlyphSet(void)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ _GlyphCost(struct _GlyphTuneData *glyphtunedata /*$a0*/, int glyphNum /*$a1*/)
- // line 300, offset 0x80079ed8
+ // line 303, offset 0x8007a580
 	/* begin block 1 */
-		// Start line: 656
+		// Start line: 665
 	/* end block 1 */
-	// End Line: 657
+	// End Line: 666
 
 	/* begin block 2 */
-		// Start line: 657
+		// Start line: 666
 	/* end block 2 */
-	// End Line: 658
+	// End Line: 667
+
+/* File: C:\kain2\game\GLYPH.C */
 
 int _GlyphCost(_GlyphTuneData *glyphtunedata,int glyphNum)
 
@@ -323,21 +350,23 @@ int _GlyphCost(_GlyphTuneData *glyphtunedata,int glyphNum)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _GlyphDefaultProcess(struct _Instance *instance /*$s1*/, int data1 /*$a1*/, int data2 /*$a2*/)
- // line 313, offset 0x80079ee8
+ // line 316, offset 0x8007a590
 	/* begin block 1 */
-		// Start line: 314
-		// Start offset: 0x80079EE8
+		// Start line: 317
+		// Start offset: 0x8007A590
 		// Variables:
 	// 		struct __Event *Ptr; // $v0
 	// 		struct __GlyphData *data; // $v0
 	/* end block 1 */
-	// End offset: 0x80079F50
-	// End Line: 333
+	// End offset: 0x8007A60C
+	// End Line: 337
 
 	/* begin block 2 */
-		// Start line: 682
+		// Start line: 691
 	/* end block 2 */
-	// End Line: 683
+	// End Line: 692
+
+/* File: C:\kain2\game\GLYPH.C */
 
 void _GlyphDefaultProcess(_Instance *instance,int data1,int data2)
 
@@ -349,6 +378,7 @@ void _GlyphDefaultProcess(_Instance *instance,int data1,int data2)
   while (p_Var1 = PeekMessageQueue(In), p_Var1 != (__Event *)0x0) {
     if ((undefined *)p_Var1->ID == &DAT_80000010) {
       _GlyphSwitchProcess(instance,_GlyphSelectProcess);
+      SndPlayVolPan(0x11,0x7f,0x40,0);
     }
     DeMessageQueue(In);
   }
@@ -360,39 +390,41 @@ void _GlyphDefaultProcess(_Instance *instance,int data1,int data2)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HUD_GetPlayerScreenPt(struct DVECTOR *center /*$s0*/)
- // line 335, offset 0x80079f6c
+ // line 339, offset 0x8007a628
 	/* begin block 1 */
-		// Start line: 336
-		// Start offset: 0x80079F6C
+		// Start line: 340
+		// Start offset: 0x8007A628
 		// Variables:
 	// 		struct _Position position; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x80079F6C
-	// End Line: 336
+	// End offset: 0x8007A628
+	// End Line: 340
 
 	/* begin block 2 */
-		// Start line: 734
+		// Start line: 745
 	/* end block 2 */
-	// End Line: 735
+	// End Line: 746
 
-void HUD_GetPlayerScreenPt(DVECTOR *center)
+/* File: C:\kain2\game\GLYPH.C */
+
+void HUD_GetPlayerScreenPt(undefined center)
 
 {
-  DVECTOR DVar1;
+  undefined4 uVar1;
   undefined4 in_zero;
   undefined4 in_at;
+  undefined3 in_register_00000011;
   uint local_c;
   
   PushMatrix();
-  SetRotMatrix((undefined4 *)theCamera.core.wcTransform);
-  SetTransMatrix((int)theCamera.core.wcTransform);
-  local_c = local_c & 0xffff0000 |
-            (uint)(ushort)(((gameTrackerX.playerInstance)->position).z + 0x1c0);
-  setCopReg(2,in_zero,*(undefined4 *)&(gameTrackerX.playerInstance)->position);
+  SetRotMatrix(DAT_800d0ffc);
+  SetTransMatrix(DAT_800d0ffc);
+  local_c = local_c & 0xffff0000 | (uint)(ushort)(*(short *)(DAT_800d20f8 + 0x60) + 0x1c0);
+  setCopReg(2,in_zero,*(undefined4 *)(DAT_800d20f8 + 0x5c));
   setCopReg(2,in_at,local_c);
   copFunction(2,0x180001);
-  DVar1 = (DVECTOR)getCopReg(2,0xe);
-  *center = DVar1;
+  uVar1 = getCopReg(2,0xe);
+  *(undefined4 *)CONCAT31(in_register_00000011,center) = uVar1;
   PopMatrix();
   return;
 }
@@ -402,10 +434,10 @@ void HUD_GetPlayerScreenPt(DVECTOR *center)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GlyphDrawMenu(struct _Instance *instance /*stack 0*/)
- // line 353, offset 0x80079ffc
+ // line 357, offset 0x8007a6b8
 	/* begin block 1 */
-		// Start line: 354
-		// Start offset: 0x80079FFC
+		// Start line: 358
+		// Start offset: 0x8007A6B8
 		// Variables:
 	// 		struct _Position place; // stack offset -72
 	// 		struct DVECTOR center; // stack offset -64
@@ -413,87 +445,93 @@ void HUD_GetPlayerScreenPt(DVECTOR *center)
 	// 		int rot; // $s3
 	// 		int radius; // $s6
 	// 		int glyph_rotation_speed; // $s0
+	// 		int MANNA_Count; // $fp
 	// 		struct __GlyphData *data; // $s4
 	// 		struct _GlyphTuneData *glyphtunedata; // $s7
 
 		/* begin block 1.1 */
-			// Start line: 373
-			// Start offset: 0x8007A054
+			// Start line: 380
+			// Start offset: 0x8007A724
 			// Variables:
 		// 		int diff; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8007A0B8
-		// End Line: 389
+		// End offset: 0x8007A788
+		// End Line: 396
 
 		/* begin block 1.2 */
-			// Start line: 400
-			// Start offset: 0x8007A0EC
+			// Start line: 407
+			// Start offset: 0x8007A7B8
 			// Variables:
 		// 		int enabled; // $v1
 		// 		int scale_modify; // $s2
 		// 		int num; // $s1
 		/* end block 1.2 */
-		// End offset: 0x8007A22C
-		// End Line: 442
+		// End offset: 0x8007A8F8
+		// End Line: 449
 
 		/* begin block 1.3 */
-			// Start line: 451
-			// Start offset: 0x8007A29C
+			// Start line: 458
+			// Start offset: 0x8007A960
 			// Variables:
 		// 		struct _Vector f1; // stack offset -56
 		/* end block 1.3 */
-		// End offset: 0x8007A2F8
-		// End Line: 467
+		// End offset: 0x8007A9BC
+		// End Line: 474
 
 		/* begin block 1.4 */
-			// Start line: 472
-			// Start offset: 0x8007A2F8
+			// Start line: 479
+			// Start offset: 0x8007A9BC
 		/* end block 1.4 */
-		// End offset: 0x8007A2F8
-		// End Line: 474
+		// End offset: 0x8007A9BC
+		// End Line: 481
 	/* end block 1 */
-	// End offset: 0x8007A2F8
-	// End Line: 474
+	// End offset: 0x8007A9BC
+	// End Line: 481
 
 	/* begin block 2 */
-		// Start line: 770
+		// Start line: 781
 	/* end block 2 */
-	// End Line: 771
+	// End Line: 782
 
 	/* begin block 3 */
-		// Start line: 785
+		// Start line: 797
 	/* end block 3 */
-	// End Line: 786
+	// End Line: 798
+
+/* File: C:\kain2\game\GLYPH.C */
 
 void GlyphDrawMenu(_Instance *instance)
 
 {
   short current;
   ushort uVar1;
-  int iVar2;
+  ulong uVar2;
+  int iVar3;
   int glyphnum;
   uint enabled;
-  uint uVar3;
+  uint a;
   int glyph;
   int iVar4;
   void *pvVar5;
   int iVar6;
   _GlyphTuneData *glyphtunedata;
   _Position local_48;
-  DVECTOR local_40 [2];
+  short local_40;
+  short local_3e;
   _Vector local_38;
   
+  a = (uint)(DAT_800d2314 << 6) >> 0xc;
   pvVar5 = instance->extraData;
-  uVar3 = (gameTrackerX.idleTime << 6) >> 0xc;
   glyphtunedata = (_GlyphTuneData *)instance->object->data;
+  uVar2 = INSTANCE_Query(DAT_800d20f8,0x20);
   if (*(short *)((int)pvVar5 + 0x98) != *(short *)((int)pvVar5 + 0x96)) {
     current = AngleDiff(*(short *)((int)pvVar5 + 0x98),*(short *)((int)pvVar5 + 0x96));
-    iVar2 = (int)current;
-    if (iVar2 < 0) {
-      iVar2 = -iVar2;
+    iVar3 = (int)current;
+    if (iVar3 < 0) {
+      iVar3 = -iVar3;
     }
-    if ((int)uVar3 < iVar2) {
-      current = (short)uVar3;
+    if ((int)a < iVar3) {
+      current = (short)a;
       if (*(short *)((int)pvVar5 + 0x9a) < 1) {
         uVar1 = *(short *)((int)pvVar5 + 0x96) - current;
       }
@@ -506,16 +544,16 @@ void GlyphDrawMenu(_Instance *instance)
       *(undefined2 *)((int)pvVar5 + 0x96) = *(undefined2 *)((int)pvVar5 + 0x98);
     }
   }
-  HUD_GetPlayerScreenPt(local_40);
-  if (local_40[0].vy < 0x48) {
-    local_40[0].vy = 0x48;
+  HUD_GetPlayerScreenPt(0xc0);
+  if (local_3e < 0x48) {
+    local_3e = 0x48;
   }
   iVar6 = 0;
-  iVar2 = (int)*(short *)((int)pvVar5 + 0x92);
-  uVar3 = (int)*(short *)((int)pvVar5 + 0x96) + 0xc00;
+  iVar3 = (int)*(short *)((int)pvVar5 + 0x92);
+  a = (int)*(short *)((int)pvVar5 + 0x96) + 0xc00;
   do {
-    uVar3 = uVar3 & 0xfff;
-    current = (short)uVar3;
+    a = a & 0xfff;
+    current = (short)a;
     uVar1 = AngleDiff(current,0xc00);
     if ((int)((uint)uVar1 << 0x10) < 0) {
       uVar1 = AngleDiff(current,0xc00);
@@ -533,31 +571,31 @@ void GlyphDrawMenu(_Instance *instance)
     if (iVar4 < 0) {
       iVar4 = iVar4 + 0xfff;
     }
-    glyphnum = rcos(uVar3);
-    local_48.x = local_40[0].vx + (short)(glyphnum * iVar2 >> 0xc);
-    glyphnum = rsin(uVar3);
-    glyphnum = glyphnum * iVar2 >> 0xc;
+    glyphnum = rcos(a);
+    local_48.x = local_40 + (short)(glyphnum * iVar3 >> 0xc);
+    glyphnum = rsin(a);
+    glyphnum = glyphnum * iVar3 >> 0xc;
     glyph = iVar6 + 1;
     if (glyphnum < 0) {
       glyphnum = glyphnum + 7;
     }
-    local_48.y = local_40[0].vy - (short)(glyphnum >> 3);
+    local_48.y = local_3e - (short)(glyphnum >> 3);
     glyphnum = _GlyphIsGlyphSet(glyph);
     if (glyphnum == 0) {
       glyphnum = 7;
-      if (glyph == 7) goto LAB_8007a20c;
+      if (glyph == 7) goto LAB_8007a8d8;
       enabled = 1;
     }
     else {
       glyphnum = _GlyphIsGlyphUsable(glyph);
       if (glyphnum == 0) {
-LAB_8007a20c:
+LAB_8007a8d8:
         enabled = 0;
         glyphnum = iVar6;
       }
       else {
         glyphnum = _GlyphCost(glyphtunedata,glyph);
-        enabled = (uint)(HudSave.MANNA_Count < glyphnum) ^ 1;
+        enabled = (uint)((int)uVar2 < glyphnum) ^ 1;
         glyphnum = iVar6;
       }
     }
@@ -565,28 +603,27 @@ LAB_8007a20c:
     if (iVar4 < 0) {
       iVar4 = iVar4 + 0x1fff;
     }
-    uVar3 = uVar3 - 0x249;
+    a = a - 0x249;
     iVar6 = iVar6 + 1;
     FX_MakeGlyphIcon(&local_48,instance->object,iVar4 >> 0xd,glyphnum,enabled);
     if (6 < iVar6) {
       iVar6 = (int)*(short *)((int)pvVar5 + 0x90);
       if (iVar6 == 0x1000) {
         if ((*(short *)((int)pvVar5 + 0x98) == *(short *)((int)pvVar5 + 0x96)) &&
-           (iVar6 = _GlyphCost(glyphtunedata,*(int *)((int)pvVar5 + 0x8c)),
-           iVar6 <= HudSave.MANNA_Count)) {
-          local_38.x = (int)local_40[0].vx;
-          if (iVar2 < 0) {
-            iVar2 = iVar2 + 7;
+           (iVar6 = _GlyphCost(glyphtunedata,(int)*(short *)((int)pvVar5 + 0x8c)),
+           iVar6 <= (int)uVar2)) {
+          local_38.x = (int)local_40;
+          if (iVar3 < 0) {
+            iVar3 = iVar3 + 7;
           }
-          local_38.y = (int)local_40[0].vy + (iVar2 >> 3);
+          local_38.y = (int)local_3e + (iVar3 >> 3);
           DRAW_CreateAGlowingCircle
-                    (&local_38,0x140,gameTrackerX.primPool,(ulong **)gameTrackerX.defVVRemoveDist,5,
-                     0x1404040,0x1a,0x18,0);
+                    (&local_38,0x140,DAT_800d210c,DAT_800d22a4,5,0x1404040,0x1a,0x18,0);
         }
         iVar6 = (int)*(short *)((int)pvVar5 + 0x90);
       }
-      uVar3 = iVar6 / (int)glyphtunedata->glyph_darkness;
-      FX_DrawScreenPoly(2,uVar3 | uVar3 << 0x10 | uVar3 << 8,0x20);
+      a = iVar6 / (int)glyphtunedata->glyph_darkness;
+      FX_DrawScreenPoly(2,a | a << 0x10 | a << 8,0x20);
       return;
     }
   } while( true );
@@ -597,16 +634,18 @@ LAB_8007a20c:
 // decompiled code
 // original method signature: 
 // long /*$ra*/ GlyphTime(int time /*$a0*/)
- // line 480, offset 0x8007a358
+ // line 487, offset 0x8007aa1c
 	/* begin block 1 */
-		// Start line: 1143
+		// Start line: 1178
 	/* end block 1 */
-	// End Line: 1144
+	// End Line: 1179
 
 	/* begin block 2 */
-		// Start line: 1144
+		// Start line: 1179
 	/* end block 2 */
-	// End Line: 1145
+	// End Line: 1180
+
+/* File: C:\kain2\game\GLYPH.C */
 
 long GlyphTime(int time)
 
@@ -623,22 +662,24 @@ long GlyphTime(int time)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ ShrinkGlyphMenu(struct _Instance *instance /*$s1*/)
- // line 487, offset 0x8007a374
+ // line 494, offset 0x8007aa38
 	/* begin block 1 */
-		// Start line: 488
-		// Start offset: 0x8007A374
+		// Start line: 495
+		// Start offset: 0x8007AA38
 		// Variables:
 	// 		struct __GlyphData *data; // $s0
 	// 		int time; // $a0
 	// 		short accl; // stack offset -24
 	/* end block 1 */
-	// End offset: 0x8007A438
-	// End Line: 517
+	// End offset: 0x8007AB4C
+	// End Line: 533
 
 	/* begin block 2 */
-		// Start line: 1157
+		// Start line: 1192
 	/* end block 2 */
-	// End Line: 1158
+	// End Line: 1193
+
+/* File: C:\kain2\game\GLYPH.C */
 
 void ShrinkGlyphMenu(_Instance *instance)
 
@@ -649,12 +690,12 @@ void ShrinkGlyphMenu(_Instance *instance)
   short asStack24 [4];
   
   pvVar3 = instance->extraData;
-  gameTrackerX.streamFlags = gameTrackerX.streamFlags & 0xffefffff;
+  DAT_800d2210 = DAT_800d2210 & 0xffefffff;
   if (*(short *)((int)pvVar3 + 0x90) < 1) {
     glyph_cost = -1;
   }
   else {
-    iVar1 = (uint)*(ushort *)((int)pvVar3 + 0x90) - ((gameTrackerX.idleTime << 9) >> 0xc);
+    iVar1 = (uint)*(ushort *)((int)pvVar3 + 0x90) - ((uint)(DAT_800d2314 << 9) >> 0xc);
     *(undefined2 *)((int)pvVar3 + 0x90) = (short)iVar1;
     if (iVar1 * 0x10000 < 0) {
       *(undefined2 *)((int)pvVar3 + 0x90) = 0;
@@ -671,7 +712,14 @@ void ShrinkGlyphMenu(_Instance *instance)
       GlyphDrawMenu(instance);
     }
   }
-  CriticalDampValue(5,&MANNA_Position,-0x40,&MANNA_Pos_vel,asStack24,0xc);
+  if (MANNA_Pickup_Time < 1) {
+    CriticalDampValue(5,&MANNA_Position,-0x40,&MANNA_Pos_vel,asStack24,0xc);
+    *(undefined2 *)((int)pvVar3 + 0x8e) = 0;
+  }
+  else {
+    MANNA_Pickup_Time = MANNA_Pickup_Time - DAT_800d2314;
+    *(undefined2 *)((int)pvVar3 + 0x8e) = 0;
+  }
   return;
 }
 
@@ -680,22 +728,24 @@ void ShrinkGlyphMenu(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EnlargeGlyphMenu(struct _Instance *instance /*$s1*/)
- // line 520, offset 0x8007a478
+ // line 536, offset 0x8007ab64
 	/* begin block 1 */
-		// Start line: 521
-		// Start offset: 0x8007A478
+		// Start line: 537
+		// Start offset: 0x8007AB64
 		// Variables:
 	// 		struct __GlyphData *data; // $s0
 	// 		int time; // $a1
 	// 		short accl; // stack offset -24
 	/* end block 1 */
-	// End offset: 0x8007A520
-	// End Line: 544
+	// End offset: 0x8007AC0C
+	// End Line: 560
 
 	/* begin block 2 */
-		// Start line: 1238
+		// Start line: 1291
 	/* end block 2 */
-	// End Line: 1239
+	// End Line: 1292
+
+/* File: C:\kain2\game\GLYPH.C */
 
 void EnlargeGlyphMenu(_Instance *instance)
 
@@ -706,9 +756,9 @@ void EnlargeGlyphMenu(_Instance *instance)
   short asStack24 [4];
   
   pvVar3 = instance->extraData;
-  gameTrackerX.streamFlags = gameTrackerX.streamFlags | 0x100000;
+  DAT_800d2210 = DAT_800d2210 | 0x100000;
   if (*(short *)((int)pvVar3 + 0x90) < 0x1000) {
-    iVar1 = (uint)*(ushort *)((int)pvVar3 + 0x90) + ((gameTrackerX.idleTime << 9) >> 0xc);
+    iVar1 = (uint)*(ushort *)((int)pvVar3 + 0x90) + ((uint)(DAT_800d2314 << 9) >> 0xc);
     *(undefined2 *)((int)pvVar3 + 0x90) = (short)iVar1;
     if (0x1000 < iVar1 * 0x10000 >> 0x10) {
       *(undefined2 *)((int)pvVar3 + 0x90) = 0x1000;
@@ -723,7 +773,9 @@ void EnlargeGlyphMenu(_Instance *instance)
   *(undefined2 *)((int)pvVar3 + 0x92) = (short)(iVar1 >> 0xc);
   *(undefined2 *)((int)pvVar3 + 0x94) = (short)lVar2;
   GlyphDrawMenu(instance);
-  CriticalDampValue(5,&MANNA_Position,0x30,&MANNA_Pos_vel,asStack24,0xc);
+  MANNA_Pickup_Time = 0;
+  CriticalDampValue(5,&MANNA_Position,0x24,&MANNA_Pos_vel,asStack24,0xc);
+  *(undefined2 *)((int)pvVar3 + 0x8e) = 1;
   return;
 }
 
@@ -732,21 +784,23 @@ void EnlargeGlyphMenu(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _GlyphOffProcess(struct _Instance *instance /*$s0*/, int data1 /*$s3*/, int data2 /*$s4*/)
- // line 554, offset 0x8007a570
+ // line 573, offset 0x8007ac68
 	/* begin block 1 */
-		// Start line: 555
-		// Start offset: 0x8007A570
+		// Start line: 574
+		// Start offset: 0x8007AC68
 		// Variables:
 	// 		struct __Event *Ptr; // $v0
 	// 		struct __GlyphData *data; // $s2
 	/* end block 1 */
-	// End offset: 0x8007A640
-	// End Line: 582
+	// End offset: 0x8007AD38
+	// End Line: 601
 
 	/* begin block 2 */
-		// Start line: 1318
+		// Start line: 1378
 	/* end block 2 */
-	// End Line: 1319
+	// End Line: 1379
+
+/* File: C:\kain2\game\GLYPH.C */
 
 void _GlyphOffProcess(_Instance *instance,int data1,int data2)
 
@@ -764,19 +818,19 @@ void _GlyphOffProcess(_Instance *instance,int data1,int data2)
       return;
     }
     puVar2 = (undefined *)p_Var1->ID;
-    if (puVar2 != (undefined *)0x100001) {
+    if (puVar2 != &DAT_00100001) {
       if ((int)puVar2 < 0x100002) {
         if (puVar2 == &DAT_80000010) {
           _GlyphSwitchProcess(instance,_GlyphSelectProcess);
-          SndPlayVolPan(0x13,0x7f,0x40,0);
+          SndPlayVolPan(0x11,0x7f,0x40,0);
         }
         else {
-LAB_8007a628:
+LAB_8007ad20:
           _GlyphDefaultProcess(instance,data1,data2);
         }
       }
       else {
-        if (puVar2 != (undefined *)0x100004) goto LAB_8007a628;
+        if (puVar2 != &DAT_00100004) goto LAB_8007ad20;
       }
     }
     DeMessageQueue((__MessageQueue *)((int)pvVar3 + 4));
@@ -787,31 +841,35 @@ LAB_8007a628:
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ _GlyphSelectProcess(struct _Instance *instance /*$s4*/, int data1 /*$s7*/, int data2 /*$fp*/)
- // line 587, offset 0x8007a668
+// void /*$ra*/ _GlyphSelectProcess(struct _Instance *instance /*$s3*/, int data1 /*$s6*/, int data2 /*$s7*/)
+ // line 606, offset 0x8007ad60
 	/* begin block 1 */
-		// Start line: 588
-		// Start offset: 0x8007A668
+		// Start line: 607
+		// Start offset: 0x8007AD60
 		// Variables:
 	// 		struct __Event *Ptr; // $v0
-	// 		struct __GlyphData *data; // $s0
-	// 		struct _GlyphTuneData *glyphtunedata; // $s5
-	// 		int dontdraw_flag; // $s3
+	// 		struct __GlyphData *data; // $s1
+	// 		struct _GlyphTuneData *glyphtunedata; // $s4
+	// 		int dontdraw_flag; // $s2
 
 		/* begin block 1.1 */
-			// Start line: 671
-			// Start offset: 0x8007AAD4
+			// Start line: 678
+			// Start offset: 0x8007B148
+			// Variables:
+		// 		int MANNA_Count; // $s0
 		/* end block 1.1 */
-		// End offset: 0x8007AAD4
-		// End Line: 674
+		// End offset: 0x8007B19C
+		// End Line: 687
 	/* end block 1 */
-	// End offset: 0x8007AB0C
-	// End Line: 689
+	// End offset: 0x8007B1F4
+	// End Line: 710
 
 	/* begin block 2 */
-		// Start line: 1384
+		// Start line: 1444
 	/* end block 2 */
-	// End Line: 1385
+	// End Line: 1445
+
+/* File: C:\kain2\game\GLYPH.C */
 
 void _GlyphSelectProcess(_Instance *instance,int data1,int data2)
 
@@ -821,166 +879,164 @@ void _GlyphSelectProcess(_Instance *instance,int data1,int data2)
   short sVar2;
   __Event *p_Var3;
   int iVar4;
-  undefined *puVar5;
+  ulong uVar5;
+  undefined *puVar6;
   uint sample;
-  void *pvVar6;
+  void *pvVar7;
   _GlyphTuneData *glyphtunedata;
   
   bVar1 = false;
-  pvVar6 = instance->extraData;
+  pvVar7 = instance->extraData;
   glyphtunedata = (_GlyphTuneData *)instance->object->data;
   do {
-    p_Var3 = PeekMessageQueue((__MessageQueue *)((int)pvVar6 + 4));
+    p_Var3 = PeekMessageQueue((__MessageQueue *)((int)pvVar7 + 4));
     if (p_Var3 == (__Event *)0x0) {
       if (!bVar1) {
-        iVar4 = _GlyphCost(glyphtunedata,*(int *)((int)pvVar6 + 0x8c));
+        iVar4 = _GlyphCost(glyphtunedata,(int)*(short *)((int)pvVar7 + 0x8c));
         glyph_cost = (short)iVar4;
         EnlargeGlyphMenu(instance);
       }
       Glyph_DoFX(instance);
       return;
     }
-    puVar5 = (undefined *)p_Var3->ID;
-    if (puVar5 == (undefined *)0x100004) {
+    puVar6 = (undefined *)p_Var3->ID;
+    if (puVar6 == &DAT_00100001) {
       bVar1 = true;
-      goto LAB_8007aadc;
+      *(undefined2 *)((int)pvVar7 + 0x8c) = 7;
+      *(undefined2 *)((int)pvVar7 + 0x98) = 0xdb6;
+      *(short *)((int)pvVar7 + 0x96) = (*(short *)((int)pvVar7 + 0x8c) + -1) * 0x249;
+      *(undefined2 *)((int)pvVar7 + 0x96) = *(undefined2 *)((int)pvVar7 + 0x98);
+      goto LAB_8007b1c4;
     }
-    if ((int)puVar5 < 0x100005) {
-      if (puVar5 != &DAT_80000010) {
-        if ((int)puVar5 < -0x7fffffef) {
-          if (puVar5 == (undefined *)0x80000000) {
-            if ((fx_going != 0) ||
-               (iVar4 = _GlyphIsGlyphSet(*(int *)((int)pvVar6 + 0x8c)), iVar4 == 0))
-            goto LAB_8007aadc;
-            iVar4 = _GlyphCost(glyphtunedata,*(int *)((int)pvVar6 + 0x8c));
-            sample = 0x12;
-            if (iVar4 <= HudSave.MANNA_Count) {
-              iVar4 = _GlyphIsGlyphUsable(*(int *)((int)pvVar6 + 0x8c));
+    if ((int)puVar6 < 0x100002) {
+      if (puVar6 == (undefined *)0x80000000) {
+        sample = 0x10;
+        if (fx_going == 0) {
+          iVar4 = _GlyphIsGlyphSet((int)*(short *)((int)pvVar7 + 0x8c));
+          sample = 0x10;
+          if (iVar4 != 0) {
+            uVar5 = INSTANCE_Query(DAT_800d20f8,0x20);
+            iVar4 = _GlyphCost(glyphtunedata,(int)*(short *)((int)pvVar7 + 0x8c));
+            sample = 0x10;
+            if (iVar4 <= (int)uVar5) {
+              iVar4 = _GlyphIsGlyphUsable((int)*(short *)((int)pvVar7 + 0x8c));
               if (iVar4 != 0) {
                 bVar1 = true;
                 _GlyphSwitchProcess(instance,_GlyphGenericProcess);
-                goto LAB_8007aadc;
+                goto LAB_8007b1c4;
               }
-              sample = 0x12;
+              sample = 0x10;
             }
-LAB_8007aabc:
-            vol = 100;
-            goto LAB_8007aac0;
           }
         }
-        else {
-          if (puVar5 == (undefined *)0x100001) {
-            bVar1 = true;
-            *(undefined4 *)((int)pvVar6 + 0x8c) = 7;
-            *(undefined2 *)((int)pvVar6 + 0x98) = 0xdb6;
-            *(undefined2 *)((int)pvVar6 + 0x96) = 0xdb6;
-            *(undefined2 *)((int)pvVar6 + 0x96) = *(undefined2 *)((int)pvVar6 + 0x98);
-            goto LAB_8007aadc;
-          }
-        }
-        goto LAB_8007aad4;
+LAB_8007b1a0:
+        vol = 100;
       }
-      bVar1 = true;
-      _GlyphSwitchProcess(instance,_GlyphOffProcess);
-      sample = 0x11;
-      vol = 0x7f;
-LAB_8007aac0:
+      else {
+        if (puVar6 != &DAT_80000010) goto LAB_8007b1bc;
+        bVar1 = true;
+        _GlyphSwitchProcess(instance,_GlyphOffProcess);
+        sample = 0xf;
+        vol = 0x7f;
+      }
+LAB_8007b1a4:
       SndPlayVolPan(sample,vol,0x40,0);
     }
     else {
-      if (puVar5 == (undefined *)0x10000002) {
+      if (puVar6 == (undefined *)0x10000002) {
         iVar4 = _GlyphIsAnyGlyphSet();
         if (iVar4 != 0) {
-          vol = AngleDiff(*(short *)((int)pvVar6 + 0x96),*(short *)((int)pvVar6 + 0x98));
+          vol = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
           if ((int)((uint)vol << 0x10) < 0) {
-            sVar2 = AngleDiff(*(short *)((int)pvVar6 + 0x96),*(short *)((int)pvVar6 + 0x98));
-            if (-(int)sVar2 < 0x40) goto LAB_8007a980;
+            sVar2 = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
+            if (-(int)sVar2 < 0x40) goto LAB_8007b054;
           }
           else {
-            sVar2 = AngleDiff(*(short *)((int)pvVar6 + 0x96),*(short *)((int)pvVar6 + 0x98));
+            sVar2 = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
             if (sVar2 < 0x40) {
-LAB_8007a980:
+LAB_8007b054:
               do {
-                *(undefined2 *)((int)pvVar6 + 0x9a) = 1;
-                iVar4 = *(int *)((int)pvVar6 + 0x8c) + 1;
-                *(int *)((int)pvVar6 + 0x8c) = iVar4;
-                if (7 < iVar4) {
-                  *(undefined4 *)((int)pvVar6 + 0x8c) = 1;
+                *(short *)((int)pvVar7 + 0x8c) = *(short *)((int)pvVar7 + 0x8c) + 1;
+                *(undefined2 *)((int)pvVar7 + 0x9a) = 1;
+                if (7 < *(short *)((int)pvVar7 + 0x8c)) {
+                  *(undefined2 *)((int)pvVar7 + 0x8c) = 1;
                 }
-                *(short *)((int)pvVar6 + 0x98) = ((short)*(int *)((int)pvVar6 + 0x8c) + -1) * 0x249;
-                iVar4 = _GlyphIsGlyphSet(*(int *)((int)pvVar6 + 0x8c));
+                *(short *)((int)pvVar7 + 0x98) = (*(short *)((int)pvVar7 + 0x8c) + -1) * 0x249;
+                iVar4 = _GlyphIsGlyphSet((int)*(short *)((int)pvVar7 + 0x8c));
               } while (iVar4 == 0);
-              vol = AngleDiff(*(short *)((int)pvVar6 + 0x96),*(short *)((int)pvVar6 + 0x98));
+              vol = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
               if ((int)((uint)vol << 0x10) < 0) {
-                sVar2 = AngleDiff(*(short *)((int)pvVar6 + 0x96),*(short *)((int)pvVar6 + 0x98));
-                sample = 0x14;
+                sVar2 = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
+                sample = 0x12;
                 if (0x3f < -(int)sVar2) {
                   vol = 100;
-                  goto LAB_8007aac0;
+                  goto LAB_8007b1a4;
                 }
               }
               else {
-                sVar2 = AngleDiff(*(short *)((int)pvVar6 + 0x96),*(short *)((int)pvVar6 + 0x98));
-joined_r0x8007a8bc:
-                sample = 0x14;
-                if (0x3f < sVar2) goto LAB_8007aabc;
+                sVar2 = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
+joined_r0x8007b0e4:
+                sample = 0x12;
+                if (0x3f < sVar2) goto LAB_8007b1a0;
               }
             }
           }
         }
       }
       else {
-        if ((int)puVar5 < 0x10000003) {
-          if (puVar5 == (undefined *)0x200001) goto LAB_8007aadc;
+        if ((int)puVar6 < 0x10000003) {
+          if (puVar6 == &DAT_00100004) {
+            bVar1 = true;
+            goto LAB_8007b1c4;
+          }
         }
         else {
-          if (puVar5 == (undefined *)0x10000004) {
+          if (puVar6 == (undefined *)0x10000004) {
             iVar4 = _GlyphIsAnyGlyphSet();
             if (iVar4 != 0) {
-              vol = AngleDiff(*(short *)((int)pvVar6 + 0x96),*(short *)((int)pvVar6 + 0x98));
+              vol = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
               if ((int)((uint)vol << 0x10) < 0) {
-                sVar2 = AngleDiff(*(short *)((int)pvVar6 + 0x96),*(short *)((int)pvVar6 + 0x98));
-                if (-(int)sVar2 < 0x40) goto LAB_8007a83c;
+                sVar2 = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
+                if (-(int)sVar2 < 0x40) goto LAB_8007af0c;
               }
               else {
-                sVar2 = AngleDiff(*(short *)((int)pvVar6 + 0x96),*(short *)((int)pvVar6 + 0x98));
+                sVar2 = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
                 if (sVar2 < 0x40) {
-LAB_8007a83c:
+LAB_8007af0c:
                   do {
-                    *(undefined2 *)((int)pvVar6 + 0x9a) = 0xffff;
-                    iVar4 = *(int *)((int)pvVar6 + 0x8c) + -1;
-                    *(int *)((int)pvVar6 + 0x8c) = iVar4;
-                    if (iVar4 < 1) {
-                      *(undefined4 *)((int)pvVar6 + 0x8c) = 7;
+                    *(undefined2 *)((int)pvVar7 + 0x9a) = 0xffff;
+                    vol = *(short *)((int)pvVar7 + 0x8c) - 1;
+                    *(ushort *)((int)pvVar7 + 0x8c) = vol;
+                    if ((int)((uint)vol << 0x10) < 1) {
+                      *(undefined2 *)((int)pvVar7 + 0x8c) = 7;
                     }
-                    *(short *)((int)pvVar6 + 0x98) =
-                         ((short)*(int *)((int)pvVar6 + 0x8c) + -1) * 0x249;
-                    iVar4 = _GlyphIsGlyphSet(*(int *)((int)pvVar6 + 0x8c));
+                    *(short *)((int)pvVar7 + 0x98) = (*(short *)((int)pvVar7 + 0x8c) + -1) * 0x249;
+                    iVar4 = _GlyphIsGlyphSet((int)*(short *)((int)pvVar7 + 0x8c));
                   } while (iVar4 == 0);
-                  vol = AngleDiff(*(short *)((int)pvVar6 + 0x96),*(short *)((int)pvVar6 + 0x98));
+                  vol = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
                   if (-1 < (int)((uint)vol << 0x10)) {
-                    sVar2 = AngleDiff(*(short *)((int)pvVar6 + 0x96),*(short *)((int)pvVar6 + 0x98))
+                    sVar2 = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98))
                     ;
-                    goto joined_r0x8007a8bc;
+                    goto joined_r0x8007b0e4;
                   }
-                  sVar2 = AngleDiff(*(short *)((int)pvVar6 + 0x96),*(short *)((int)pvVar6 + 0x98));
-                  sample = 0x14;
+                  sVar2 = AngleDiff(*(short *)((int)pvVar7 + 0x96),*(short *)((int)pvVar7 + 0x98));
+                  sample = 0x12;
                   if (0x3f < -(int)sVar2) {
                     vol = 100;
-                    goto LAB_8007aac0;
+                    goto LAB_8007b1a4;
                   }
                 }
               }
             }
-            goto LAB_8007aadc;
+            goto LAB_8007b1c4;
           }
         }
-LAB_8007aad4:
+LAB_8007b1bc:
         _GlyphDefaultProcess(instance,data1,data2);
       }
     }
-LAB_8007aadc:
-    DeMessageQueue((__MessageQueue *)((int)pvVar6 + 4));
+LAB_8007b1c4:
+    DeMessageQueue((__MessageQueue *)((int)pvVar7 + 4));
   } while( true );
 }
 
@@ -989,50 +1045,52 @@ LAB_8007aadc:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ Glyph_StartSpell(struct _Instance *instance /*$a0*/, int glyphnum /*$a1*/)
- // line 695, offset 0x8007ab44
+ // line 716, offset 0x8007b228
 	/* begin block 1 */
-		// Start line: 696
-		// Start offset: 0x8007AB44
+		// Start line: 717
+		// Start offset: 0x8007B228
 		// Variables:
 	// 		int message; // $a2
 	/* end block 1 */
-	// End offset: 0x8007ABCC
-	// End Line: 729
+	// End offset: 0x8007B2B0
+	// End Line: 750
 
 	/* begin block 2 */
-		// Start line: 1633
+		// Start line: 1695
 	/* end block 2 */
-	// End Line: 1634
+	// End Line: 1696
+
+/* File: C:\kain2\game\GLYPH.C */
 
 void Glyph_StartSpell(_Instance *instance,int glyphnum)
 
 {
-  int Message;
+  undefined *Message;
   
-  Message = 0;
+  Message = (undefined *)0x0;
   switch(glyphnum) {
   case 1:
-    Message = 0x80001;
+    Message = &LAB_00080000_1;
     break;
   case 2:
-    Message = 0x80002;
+    Message = &LAB_00080000_2;
     break;
   case 3:
-    Message = 0x80003;
+    Message = &LAB_00080000_3;
     break;
   case 4:
-    Message = 0x80004;
+    Message = &DAT_00080004;
     break;
   case 5:
-    Message = 0x80005;
+    Message = &DAT_00080005;
     break;
   case 6:
-    Message = 0x80006;
+    Message = &DAT_00080006;
     break;
   case 7:
-    Message = 0x80007;
+    Message = &DAT_00080007;
   }
-  INSTANCE_Post(gameTrackerX.playerInstance,Message,0);
+  INSTANCE_Post(DAT_800d20f8,(int)Message,0);
   return;
 }
 
@@ -1041,10 +1099,10 @@ void Glyph_StartSpell(_Instance *instance,int glyphnum)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ Glyph_Broadcast(struct _Instance *sender /*$s5*/, int glyphnum /*$a1*/)
- // line 732, offset 0x8007abec
+ // line 753, offset 0x8007b2d0
 	/* begin block 1 */
-		// Start line: 733
-		// Start offset: 0x8007ABEC
+		// Start line: 754
+		// Start offset: 0x8007B2D0
 		// Variables:
 	// 		struct _Instance *instance; // $s0
 	// 		int plane; // $s6
@@ -1055,21 +1113,23 @@ void Glyph_StartSpell(_Instance *instance,int glyphnum)
 	// 		int fx_radius; // $s4
 
 		/* begin block 1.1 */
-			// Start line: 783
-			// Start offset: 0x8007ACD0
+			// Start line: 804
+			// Start offset: 0x8007B3B4
 			// Variables:
 		// 		long whatAmI; // $s1
 		/* end block 1.1 */
-		// End offset: 0x8007AD84
-		// End Line: 801
+		// End offset: 0x8007B468
+		// End Line: 822
 	/* end block 1 */
-	// End offset: 0x8007AD94
-	// End Line: 802
+	// End offset: 0x8007B478
+	// End Line: 823
 
 	/* begin block 2 */
-		// Start line: 1707
+		// Start line: 1769
 	/* end block 2 */
-	// End Line: 1708
+	// End Line: 1770
+
+/* File: C:\kain2\game\GLYPH.C */
 
 void Glyph_Broadcast(_Instance *sender,int glyphnum)
 
@@ -1077,44 +1137,44 @@ void Glyph_Broadcast(_Instance *sender,int glyphnum)
   ulong uVar1;
   int iVar2;
   _Instance *Inst;
-  int Message;
+  undefined *Message;
   uint uVar3;
   int iVar4;
   int plane;
   
   uVar3 = 0;
-  Message = 0;
-  plane = (int)gameTrackerX.gameData.asmData.MorphType;
-  iVar4 = fx_blastring->radius;
+  Message = (undefined *)0x0;
+  plane = (int)DAT_800d20d6;
+  iVar4 = *(int *)(fx_blastring + 0x3c);
   switch(glyphnum) {
   case 1:
-    uVar3 = 2;
-    Message = 0x80001;
+    uVar3 = 10;
+    Message = &LAB_00080000_1;
     break;
   case 2:
-    uVar3 = 2;
-    Message = 0x80002;
+    uVar3 = 10;
+    Message = &LAB_00080000_2;
     break;
   case 3:
-    uVar3 = 0x2a;
-    Message = 0x80003;
+    uVar3 = 10;
+    Message = &LAB_00080000_3;
     break;
   case 4:
     uVar3 = 10;
-    Message = 0x80004;
+    Message = &DAT_00080004;
     break;
   case 5:
-    uVar3 = 10;
-    Message = 0x80005;
+    uVar3 = 0x2a;
+    Message = &DAT_00080005;
     break;
   case 6:
-    uVar3 = 2;
-    Message = 0x80006;
+    uVar3 = 10;
+    Message = &DAT_00080006;
     break;
   case 7:
-    goto switchD_8007ac54_caseD_7;
+    goto switchD_8007b338_caseD_7;
   }
-  Inst = (gameTrackerX.instanceList)->first;
+  Inst = *(_Instance **)(DAT_800d2100 + 4);
   while (Inst != (_Instance *)0x0) {
     uVar1 = INSTANCE_Query(Inst,1);
     if ((((Inst != sender) && ((uVar1 & uVar3) != 0)) &&
@@ -1125,12 +1185,12 @@ void Glyph_Broadcast(_Instance *sender,int glyphnum)
       iVar2 = iVar2 << 0xc;
       if (((iVar2 <= iVar4) && (fx_radius_old <= iVar2)) ||
          ((iVar4 <= iVar2 && (iVar2 <= fx_radius_old)))) {
-        INSTANCE_Post(Inst,Message,0);
+        INSTANCE_Post(Inst,(int)Message,0);
       }
     }
     Inst = Inst->next;
   }
-switchD_8007ac54_caseD_7:
+switchD_8007b338_caseD_7:
   return;
 }
 
@@ -1139,10 +1199,10 @@ switchD_8007ac54_caseD_7:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ Glyph_DoSpell(struct _Instance *instance /*stack 0*/, int glyphnum /*$s1*/)
- // line 804, offset 0x8007adc0
+ // line 825, offset 0x8007b4a4
 	/* begin block 1 */
-		// Start line: 805
-		// Start offset: 0x8007ADC0
+		// Start line: 826
+		// Start offset: 0x8007B4A4
 		// Variables:
 	// 		int fx_radius; // $fp
 	// 		int fx_accl; // $v0
@@ -1158,13 +1218,15 @@ switchD_8007ac54_caseD_7:
 	// 		struct MATRIX mat; // stack offset -80
 	// 		struct _GlyphTuneData *glyphtunedata; // $s0
 	/* end block 1 */
-	// End offset: 0x8007B02C
-	// End Line: 904
+	// End offset: 0x8007B710
+	// End Line: 925
 
 	/* begin block 2 */
-		// Start line: 1900
+		// Start line: 1962
 	/* end block 2 */
-	// End Line: 1901
+	// End Line: 1963
+
+/* File: C:\kain2\game\GLYPH.C */
 
 void Glyph_DoSpell(_Instance *instance,int glyphnum)
 
@@ -1180,8 +1242,6 @@ void Glyph_DoSpell(_Instance *instance,int glyphnum)
   int height2;
   int height1;
   int radius;
-  MATRIX MStack80;
-  long local_30;
   
   radius = 0;
   vel = 0;
@@ -1192,8 +1252,8 @@ void Glyph_DoSpell(_Instance *instance,int glyphnum)
   size2 = 0;
   pvVar1 = instance->object->data;
   fx_going = 0;
-  local_30 = 0;
-  MATH3D_SetUnityMatrix(&MStack80);
+  MATH3D_SetUnityMatrix(0xb0);
+  startColor = 0;
   fx_radius_old = 0;
   blast_range = (int)*(short *)((int)pvVar1 + (glyphnum + -1) * 2 + 0xc);
   pred_offset = 0;
@@ -1202,54 +1262,8 @@ void Glyph_DoSpell(_Instance *instance,int glyphnum)
     colorChangeRadius = blast_range + 3;
   }
   colorChangeRadius = blast_range - (colorChangeRadius >> 2);
-  startColor = local_30;
   switch(glyphnum) {
   case 1:
-    radius = 1;
-    startColor = 0xffffff;
-    height1 = -0x200;
-    height2 = 0;
-    height3 = 0x200;
-    vel = 0x100000;
-    size1 = 0x280;
-    fx_going = 1;
-    size2 = 0x340;
-    break;
-  case 2:
-    radius = 1;
-    startColor = 0xff0000;
-    height1 = -0x200;
-    height2 = 0;
-    height3 = 0x200;
-    vel = 0x100000;
-    size1 = 0x280;
-    fx_going = 2;
-    size2 = 0x340;
-    break;
-  case 3:
-    radius = 1;
-    vel = 0x100000;
-    startColor = 0xff;
-    height1 = -0x200;
-    height2 = 0;
-    height3 = 0x200;
-    size1 = 0x280;
-    fx_going = 3;
-    size2 = 0x340;
-    break;
-  case 4:
-    CAMERA_SetShake(&theCamera,0x3c,0x800);
-    radius = 0x280;
-    vel = 0x140000;
-    startColor = 0xa0a0a0;
-    height3 = 0;
-    height2 = 0;
-    height1 = 0;
-    size1 = 0x280;
-    fx_going = 4;
-    size2 = 0x340;
-    break;
-  case 5:
     radius = 1;
     startColor = 0xc0c0c0;
     height1 = -0x100;
@@ -1257,10 +1271,22 @@ void Glyph_DoSpell(_Instance *instance,int glyphnum)
     height3 = 0x300;
     vel = 0x200000;
     size1 = -0x280;
-    fx_going = 5;
+    fx_going = 1;
     size2 = 0;
     break;
-  case 6:
+  case 2:
+    CAMERA_SetShake((Camera *)&theCamera,0x3c,0x800);
+    radius = 0x280;
+    vel = 0x140000;
+    startColor = 0xa0a0a0;
+    height3 = 0;
+    height2 = 0;
+    height1 = 0;
+    size1 = 0x280;
+    fx_going = 2;
+    size2 = 0x340;
+    break;
+  case 3:
     radius = 1;
     startColor = 0xffffff;
     height1 = 0;
@@ -1269,13 +1295,46 @@ void Glyph_DoSpell(_Instance *instance,int glyphnum)
     vel = 0x100000;
     size1 = 0x280;
     size2 = 0x340;
-    fx_going = 6;
+    fx_going = 3;
     pred_offset = 5;
+    break;
+  case 4:
+    radius = 1;
+    startColor = 0xff0000;
+    height1 = -0x200;
+    height2 = 0;
+    height3 = 0x200;
+    vel = 0x100000;
+    size1 = 0x280;
+    fx_going = 4;
+    size2 = 0x340;
+    break;
+  case 5:
+    radius = 1;
+    vel = 0x100000;
+    startColor = 0xff;
+    height1 = -0x200;
+    height2 = 0;
+    height3 = 0x200;
+    size1 = 0x280;
+    fx_going = 5;
+    size2 = 0x340;
+    break;
+  case 6:
+    radius = 1;
+    startColor = 0xffffff;
+    height1 = -0x200;
+    height2 = 0;
+    height3 = 0x200;
+    vel = 0x100000;
+    size1 = 0x280;
+    fx_going = 6;
+    size2 = 0x340;
   }
   if ((fx_going != 0) &&
-     (fx_blastring = FX_DoBlastRing((_Instance *)0x0,(_SVector *)&instance->position,&MStack80,-1,
-                                    radius,blast_range,colorChangeRadius,size1,size2,vel,-0x800,
-                                    height1,height2,height3,startColor,0,pred_offset,-99,0),
+     (fx_blastring = FX_DoBlastRing((_Instance *)0x0,(_SVector *)&instance->position,0xb0,-1,radius,
+                                    blast_range,colorChangeRadius,size1,size2,vel,-0x800,height1,
+                                    height2,height3,startColor,0,pred_offset,-99,0),
      fx_blastring == (_FXBlastringEffect *)0x0)) {
     fx_going = 0;
   }
@@ -1288,28 +1347,28 @@ void Glyph_DoSpell(_Instance *instance,int glyphnum)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ Glyph_EndFX()
- // line 907, offset 0x8007b068
+ // line 928, offset 0x8007b74c
 	/* begin block 1 */
-		// Start line: 2142
+		// Start line: 2204
 	/* end block 1 */
-	// End Line: 2143
+	// End Line: 2205
 
 	/* begin block 2 */
-		// Start line: 2143
+		// Start line: 2205
 	/* end block 2 */
-	// End Line: 2144
+	// End Line: 2206
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\GLYPH.C */
 
 void Glyph_EndFX(void)
 
 {
-  _FXBlastringEffect *p_Var1;
+  int iVar1;
   
-  p_Var1 = fx_blastring;
+  iVar1 = fx_blastring;
   fx_going = 0;
-  fx_blastring = (_FXBlastringEffect *)0x0;
-  p_Var1->lifeTime = 0;
+  fx_blastring = 0;
+  *(undefined2 *)(iVar1 + 0xe) = 0;
   return;
 }
 
@@ -1318,35 +1377,36 @@ void Glyph_EndFX(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ Glyph_DoFX(struct _Instance *instance /*$a0*/)
- // line 914, offset 0x8007b07c
+ // line 935, offset 0x8007b760
 	/* begin block 1 */
-		// Start line: 2154
+		// Start line: 2216
 	/* end block 1 */
-	// End Line: 2155
+	// End Line: 2217
 
 	/* begin block 2 */
-		// Start line: 2158
+		// Start line: 2220
 	/* end block 2 */
-	// End Line: 2159
+	// End Line: 2221
+
+/* File: C:\kain2\game\GLYPH.C */
 
 void Glyph_DoFX(_Instance *instance)
 
 {
   int *piVar1;
-  _FXBlastringEffect *p_Var2;
+  int iVar2;
   
-  if (((gameTrackerX.gameMode != 6) && ((gameTrackerX.streamFlags & 0x100000U) == 0)) &&
-     ((int)fx_going != 0)) {
+  if (((DAT_800d223e != 6) && ((DAT_800d2210 & 0x100000) == 0)) && ((int)fx_going != 0)) {
     Glyph_Broadcast(instance,(int)fx_going);
-    fx_radius_old = fx_blastring->radius;
+    fx_radius_old = *(int *)(fx_blastring + 0x3c);
     if (blast_range < fx_radius_old) {
       Glyph_EndFX();
     }
-    p_Var2 = fx_blastring;
-    if (fx_going == 3) {
-      piVar1 = &fx_blastring->height2;
-      fx_blastring->accl = fx_blastring->accl + -0x3c;
-      p_Var2->height2 = *piVar1 + 0x3c;
+    iVar2 = fx_blastring;
+    if (fx_going == 5) {
+      piVar1 = (int *)(fx_blastring + 100);
+      *(int *)(fx_blastring + 0x5c) = *(int *)(fx_blastring + 0x5c) + -0x3c;
+      *(int *)(iVar2 + 100) = *piVar1 + 0x3c;
     }
   }
   return;
@@ -1356,58 +1416,74 @@ void Glyph_DoFX(_Instance *instance)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ _GlyphGenericProcess(struct _Instance *instance /*$s1*/, int data1 /*$s3*/, int data2 /*$s4*/)
- // line 947, offset 0x8007b12c
+// void /*$ra*/ _GlyphGenericProcess(struct _Instance *instance /*$s2*/, int data1 /*$s3*/, int data2 /*$s4*/)
+ // line 968, offset 0x8007b810
 	/* begin block 1 */
-		// Start line: 948
-		// Start offset: 0x8007B12C
+		// Start line: 969
+		// Start offset: 0x8007B810
 		// Variables:
 	// 		struct __Event *Ptr; // $v0
-	// 		struct __GlyphData *data; // $s0
+	// 		struct __GlyphData *data; // $s1
+
+		/* begin block 1.1 */
+			// Start line: 998
+			// Start offset: 0x8007B8E8
+			// Variables:
+		// 		struct _GlyphTuneData *glyphtunedata; // $s0
+		/* end block 1.1 */
+		// End offset: 0x8007B920
+		// End Line: 1004
 	/* end block 1 */
-	// End offset: 0x8007B210
-	// End Line: 980
+	// End offset: 0x8007B920
+	// End Line: 1006
 
 	/* begin block 2 */
-		// Start line: 2228
+		// Start line: 2290
 	/* end block 2 */
-	// End Line: 2229
+	// End Line: 2291
+
+/* File: C:\kain2\game\GLYPH.C */
 
 void _GlyphGenericProcess(_Instance *instance,int data1,int data2)
 
 {
   __Event *p_Var1;
-  int iVar2;
+  int Data;
+  undefined *puVar2;
+  _GlyphTuneData *glyphtunedata;
   void *pvVar3;
   
   pvVar3 = instance->extraData;
+  ShrinkGlyphMenu(instance);
   do {
     p_Var1 = PeekMessageQueue((__MessageQueue *)((int)pvVar3 + 4));
     if (p_Var1 == (__Event *)0x0) {
       if (glyph_trigger != 0) {
-        Glyph_DoSpell(instance,*(int *)((int)pvVar3 + 0x8c));
+        glyphtunedata = (_GlyphTuneData *)instance->object->data;
+        Glyph_DoSpell(instance,(int)*(short *)((int)pvVar3 + 0x8c));
         glyph_trigger = 0;
+        Data = _GlyphCost(glyphtunedata,(int)*(short *)((int)pvVar3 + 0x8c));
+        INSTANCE_Post(DAT_800d20f8,0x40008,Data);
       }
       Glyph_DoFX(instance);
-      ShrinkGlyphMenu(instance);
       return;
     }
-    iVar2 = p_Var1->ID;
-    if (iVar2 == 0x100001) {
-      Glyph_StartSpell(instance,*(int *)((int)pvVar3 + 0x8c));
+    puVar2 = (undefined *)p_Var1->ID;
+    if (puVar2 == &DAT_00100001) {
+      Glyph_StartSpell(instance,(int)*(short *)((int)pvVar3 + 0x8c));
     }
     else {
-      if (iVar2 < 0x100002) {
-        if (iVar2 == -0x80000000) {
+      if ((int)puVar2 < 0x100002) {
+        if (puVar2 == (undefined *)0x80000000) {
           _GlyphSwitchProcess(instance,_GlyphOffProcess);
         }
         else {
-LAB_8007b1d8:
+LAB_8007b8c0:
           _GlyphDefaultProcess(instance,data1,data2);
         }
       }
       else {
-        if (iVar2 != 0x100004) goto LAB_8007b1d8;
+        if (puVar2 != &DAT_00100004) goto LAB_8007b8c0;
       }
     }
     DeMessageQueue((__MessageQueue *)((int)pvVar3 + 4));
@@ -1419,18 +1495,18 @@ LAB_8007b1d8:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GlyphTrigger()
- // line 985, offset 0x8007b240
+ // line 1009, offset 0x8007b948
 	/* begin block 1 */
-		// Start line: 2312
+		// Start line: 2374
 	/* end block 1 */
-	// End Line: 2313
+	// End Line: 2375
 
 	/* begin block 2 */
-		// Start line: 2313
+		// Start line: 2375
 	/* end block 2 */
-	// End Line: 2314
+	// End Line: 2376
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\GLYPH.C */
 
 void GlyphTrigger(void)
 
@@ -1445,23 +1521,25 @@ void GlyphTrigger(void)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ MANNA_Pickup(struct _Instance *instance /*$a0*/, int amount /*$a1*/)
- // line 1002, offset 0x8007b25c
+// void /*$ra*/ MANNA_Pickup()
+ // line 1026, offset 0x8007b964
 	/* begin block 1 */
-		// Start line: 2346
+		// Start line: 2408
 	/* end block 1 */
-	// End Line: 2347
+	// End Line: 2409
 
 	/* begin block 2 */
-		// Start line: 2347
+		// Start line: 2409
 	/* end block 2 */
-	// End Line: 2348
+	// End Line: 2410
 
-void MANNA_Pickup(_Instance *instance,int amount)
+/* File: C:\kain2\game\GLYPH.C */
+
+void MANNA_Pickup(void)
 
 {
-  HudSave.MANNA_Count = HudSave.MANNA_Count + (short)amount;
-  INSTANCE_KillInstance(instance);
+  MANNA_Position = 0x24;
+  MANNA_Pickup_Time = 0x1e000;
   return;
 }
 
@@ -1470,22 +1548,24 @@ void MANNA_Pickup(_Instance *instance,int amount)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HEALTHU_Pickup(struct _Instance *instance /*$s0*/)
- // line 1008, offset 0x8007b288
+ // line 1032, offset 0x8007b980
 	/* begin block 1 */
-		// Start line: 2359
+		// Start line: 2420
 	/* end block 1 */
-	// End Line: 2360
+	// End Line: 2421
+
+/* File: C:\kain2\game\GLYPH.C */
 
 void HEALTHU_Pickup(_Instance *instance)
 
 {
-  ApplyMatrixSV(theCamera.core.wcTransform2,&instance->position,&HUD_Cap_Pos);
-  HUD_Cap_Pos.x = HUD_Cap_Pos.x + *(short *)(theCamera.core.wcTransform2)->t;
-  HUD_Cap_Pos.y = HUD_Cap_Pos.y + *(short *)((theCamera.core.wcTransform2)->t + 1);
+  ApplyMatrixSV(DAT_800d100c,(SVECTOR *)&instance->position,(SVECTOR *)&HUD_Cap_Pos);
+  HUD_Cap_Pos.x = HUD_Cap_Pos.x + *(short *)DAT_800d100c->t;
+  HUD_Cap_Pos.y = HUD_Cap_Pos.y + *(short *)(DAT_800d100c->t + 1);
   HUD_Cap_Vel.z = 0;
   HUD_Cap_Vel.y = 0;
   HUD_Cap_Vel.x = 0;
-  HUD_Cap_Pos.z = HUD_Cap_Pos.z + *(short *)((theCamera.core.wcTransform2)->t + 2);
+  HUD_Cap_Pos.z = HUD_Cap_Pos.z + *(short *)(DAT_800d100c->t + 2);
   INSTANCE_KillInstance(instance);
   HUD_Captured = 1;
   HUD_State = 1;
@@ -1497,20 +1577,22 @@ void HEALTHU_Pickup(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HUD_Damp(short *val /*$v1*/, short target /*$a1*/, short *vel /*$a3*/, short max /*$a3*/)
- // line 1024, offset 0x8007b318
+ // line 1048, offset 0x8007ba10
 	/* begin block 1 */
-		// Start line: 1025
-		// Start offset: 0x8007B318
+		// Start line: 1049
+		// Start offset: 0x8007BA10
 		// Variables:
 	// 		short accl; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x8007B318
-	// End Line: 1025
+	// End offset: 0x8007BA10
+	// End Line: 1049
 
 	/* begin block 2 */
-		// Start line: 2394
+		// Start line: 2455
 	/* end block 2 */
-	// End Line: 2395
+	// End Line: 2456
+
+/* File: C:\kain2\game\GLYPH.C */
 
 void HUD_Damp(short *val,short target,short *vel,short max)
 
@@ -1526,24 +1608,23 @@ void HUD_Damp(short *val,short target,short *vel,short max)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HUD_Init()
- // line 1031, offset 0x8007b360
+ // line 1055, offset 0x8007ba58
 	/* begin block 1 */
-		// Start line: 2414
+		// Start line: 2475
 	/* end block 1 */
-	// End Line: 2415
+	// End Line: 2476
 
 	/* begin block 2 */
-		// Start line: 2420
+		// Start line: 2481
 	/* end block 2 */
-	// End Line: 2421
+	// End Line: 2482
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\GLYPH.C */
 
 void HUD_Init(void)
 
 {
-  HudSave.MANNA_Count = 0;
-  HudSave.HUD_Count = 0;
+  HUD_Count = 0;
   HUD_Rotation = 0;
   HUD_Rot_vel = 0;
   HUD_Position = -1000;
@@ -1560,23 +1641,48 @@ void HUD_Init(void)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ HUD_Update()
- // line 1046, offset 0x8007b398
+// void /*$ra*/ HUD_Setup_Chit_Count(int chits /*$a0*/)
+ // line 1069, offset 0x8007ba8c
 	/* begin block 1 */
-		// Start line: 1047
-		// Start offset: 0x8007B398
+		// Start line: 2508
+	/* end block 1 */
+	// End Line: 2509
+
+	/* begin block 2 */
+		// Start line: 2509
+	/* end block 2 */
+	// End Line: 2510
+
+/* File: C:\kain2\game\GLYPH.C */
+
+void HUD_Setup_Chit_Count(int chits)
+
+{
+  HUD_Count = chits % 5;
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ HUD_Update()
+ // line 1074, offset 0x8007bac0
+	/* begin block 1 */
+		// Start line: 1075
+		// Start offset: 0x8007BAC0
 		// Variables:
 	// 		short accl; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x8007B5A0
-	// End Line: 1127
+	// End offset: 0x8007BCF8
+	// End Line: 1159
 
 	/* begin block 2 */
-		// Start line: 2449
+		// Start line: 2518
 	/* end block 2 */
-	// End Line: 2450
+	// End Line: 2519
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\GLYPH.C */
 
 void HUD_Update(void)
 
@@ -1585,11 +1691,20 @@ void HUD_Update(void)
   short sVar2;
   short asStack16 [4];
   
-  if ((gameTrackerX.gameMode == 6) && (HUD_State == 0)) {
+  if ((DAT_800d223e == 6) && (HUD_State == 0)) {
     HUD_State = 10;
   }
-  if ((gameTrackerX.gameMode != 6) && ((uint)(ushort)HUD_State - 10 < 2)) {
-    HUD_State = 0xc;
+  else {
+    if (DAT_800d223e == 6) {
+      if ((1 < HUD_State) && (HUD_State < 7)) {
+        return;
+      }
+    }
+    else {
+      if ((uint)(ushort)HUD_State - 10 < 2) {
+        HUD_State = 0xc;
+      }
+    }
   }
   sVar2 = HUD_Wait + -1;
   if (HUD_Wait < 1) {
@@ -1600,8 +1715,8 @@ void HUD_Update(void)
       HUD_Rotation = 0;
       HUD_Rot_vel = 0;
       HUD_Pos_vel = 0;
-      if (HudSave.HUD_Count == 5) {
-        HudSave.HUD_Count = 0;
+      if (HUD_Count == 5) {
+        HUD_Count = 0;
       }
       break;
     case 1:
@@ -1611,13 +1726,14 @@ void HUD_Update(void)
         HUD_Position = 0;
         bVar1 = HUD_State != 10;
         HUD_State = 0xb;
-        if ((bVar1) && (HUD_State = 2, HudSave.HUD_Count < 1)) {
+        if ((bVar1) && (HUD_State = 2, HUD_Count < 1)) {
           HUD_State = 3;
         }
       }
       sVar2 = HUD_Wait;
       if (HUD_State == 10) {
-        CriticalDampValue(5,&MANNA_Position,0x30,&MANNA_Pos_vel,asStack16,0xc);
+        MANNA_Pickup_Time = 0;
+        CriticalDampValue(5,&MANNA_Position,0x24,&MANNA_Pos_vel,asStack16,0xc);
         sVar2 = HUD_Wait;
       }
       break;
@@ -1638,7 +1754,7 @@ void HUD_Update(void)
       HUD_Rotation = 0;
       HUD_Wait = 10;
       HUD_Captured = 0;
-      HudSave.HUD_Count = HudSave.HUD_Count + 1;
+      HUD_Count = HUD_Count + 1;
       sVar2 = HUD_Wait;
       break;
     case 6:
@@ -1659,87 +1775,104 @@ void HUD_Update(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HUD_Draw()
- // line 1136, offset 0x8007b5b0
+ // line 1170, offset 0x8007bd08
 	/* begin block 1 */
-		// Start line: 1137
-		// Start offset: 0x8007B5B0
+		// Start line: 1171
+		// Start offset: 0x8007BD08
 		// Variables:
-	// 		struct _SVector Rotation; // stack offset -72
-	// 		struct _SVector Pos; // stack offset -64
-	// 		struct _SVector offset; // stack offset -56
+	// 		struct _SVector Rotation; // stack offset -80
+	// 		struct _SVector Pos; // stack offset -72
+	// 		struct _SVector offset; // stack offset -64
 	// 		int n; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 1143
-			// Start offset: 0x8007B5E4
+			// Start line: 1177
+			// Start offset: 0x8007BD40
 			// Variables:
-		// 		struct DVECTOR center; // stack offset -48
+		// 		struct DVECTOR center; // stack offset -56
 		// 		int glow; // $a1
 		// 		int left; // $t0
 		// 		int right; // $s0
 		/* end block 1.1 */
-		// End offset: 0x8007B758
-		// End Line: 1181
+		// End offset: 0x8007BEB4
+		// End Line: 1215
 
 		/* begin block 1.2 */
-			// Start line: 1202
-			// Start offset: 0x8007B7F0
+			// Start line: 1223
+			// Start offset: 0x8007BED8
 			// Variables:
-		// 		struct _SVector targetPos; // stack offset -40
-		// 		struct _SVector accl; // stack offset -32
-		// 		struct _SVector HUD_Cap_Rot; // stack offset -24
+		// 		int oldx; // $s2
+		// 		int oldy; // $s3
+		// 		int MANNA_Count; // $s1
+		// 		int MANNA_Max; // $s0
 		/* end block 1.2 */
-		// End offset: 0x8007B8D4
-		// End Line: 1223
+		// End offset: 0x8007BF98
+		// End Line: 1246
 
 		/* begin block 1.3 */
-			// Start line: 1231
-			// Start offset: 0x8007B91C
+			// Start line: 1252
+			// Start offset: 0x8007BFCC
+			// Variables:
+		// 		struct _SVector targetPos; // stack offset -48
+		// 		struct _SVector accl; // stack offset -40
+		// 		struct _SVector HUD_Cap_Rot; // stack offset -32
 		/* end block 1.3 */
-		// End offset: 0x8007B960
-		// End Line: 1241
+		// End offset: 0x8007C0B0
+		// End Line: 1273
+
+		/* begin block 1.4 */
+			// Start line: 1281
+			// Start offset: 0x8007C0F8
+		/* end block 1.4 */
+		// End offset: 0x8007C13C
+		// End Line: 1291
 	/* end block 1 */
-	// End offset: 0x8007B9B4
-	// End Line: 1250
+	// End offset: 0x8007C190
+	// End Line: 1300
 
 	/* begin block 2 */
-		// Start line: 2641
+		// Start line: 2723
 	/* end block 2 */
-	// End Line: 2642
+	// End Line: 2724
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\GLYPH.C */
 
 void HUD_Draw(void)
 
 {
   bool bVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
   int fade;
-  int iVar2;
+  int iVar4;
+  ulong uVar5;
+  ulong uVar6;
   int fade_00;
-  uint uVar3;
-  undefined **ppuVar4;
+  uint uVar7;
+  undefined **ppuVar8;
+  _SVector local_50;
   _SVector local_48;
   _SVector local_40;
-  _SVector local_38;
-  DVECTOR local_30 [2];
-  _Position local_28;
-  _SVector _Stack32;
-  _SVector local_18;
+  short local_38;
+  short local_36;
+  _Position local_30;
+  _SVector _Stack40;
+  _SVector local_20;
   
-  if ((theCamera.instance_mode & 0x80000000) == 0) {
-    if (warpDraw == 0) goto LAB_8007b758;
-    warpDraw = warpDraw - (gameTrackerX.idleTime >> 4);
+  if ((DAT_800d1438 & 0x80000000) == 0) {
+    if (warpDraw == 0) goto LAB_8007beb4;
+    warpDraw = warpDraw - (DAT_800d2314 >> 4);
     if (warpDraw < 0) {
       warpDraw = 0;
     }
   }
   else {
-    warpDraw = warpDraw + (gameTrackerX.idleTime >> 4);
+    warpDraw = warpDraw + (DAT_800d2314 >> 4);
     if (0x1000 < warpDraw) {
       warpDraw = 0x1000;
     }
   }
-  HUD_GetPlayerScreenPt(local_30);
+  HUD_GetPlayerScreenPt(200);
   fade = rcos(glowdeg);
   fade = (warpDraw / 10) * fade;
   if (fade < 0) {
@@ -1749,56 +1882,69 @@ void HUD_Draw(void)
   if (fade < 0) {
     fade = 0;
   }
-  glowdeg = glowdeg + (gameTrackerX.idleTime >> 5);
+  glowdeg = glowdeg + (DAT_800d2314 >> 5);
   fade_00 = fade;
   if (hud_warp_arrow_flash < 1) {
-LAB_8007b6e4:
+LAB_8007be40:
     if (hud_warp_arrow_flash < 0) {
-      iVar2 = hud_warp_arrow_flash + (gameTrackerX.idleTime >> 3);
+      iVar4 = hud_warp_arrow_flash + (DAT_800d2314 >> 3);
       fade = fade - hud_warp_arrow_flash;
-      hud_warp_arrow_flash = iVar2;
-      if (0 < iVar2) {
+      hud_warp_arrow_flash = iVar4;
+      if (0 < iVar4) {
         hud_warp_arrow_flash = 0;
       }
     }
   }
   else {
-    iVar2 = hud_warp_arrow_flash - (gameTrackerX.idleTime >> 3);
+    iVar4 = hud_warp_arrow_flash - (DAT_800d2314 >> 3);
     fade_00 = fade + hud_warp_arrow_flash;
-    hud_warp_arrow_flash = iVar2;
-    if (iVar2 < 0) {
+    hud_warp_arrow_flash = iVar4;
+    if (iVar4 < 0) {
       hud_warp_arrow_flash = 0;
-      goto LAB_8007b6e4;
+      goto LAB_8007be40;
     }
   }
-  FX_MakeWarpArrow((int)local_30[0].vx + -0x40,(int)local_30[0].vy,-0x40,0x20,fade);
-  FX_MakeWarpArrow((int)local_30[0].vx + 0x40,(int)local_30[0].vy,0x40,0x20,fade_00);
-LAB_8007b758:
+  FX_MakeWarpArrow((int)local_38 + -0x40,(int)local_36,-0x40,0x20,fade);
+  FX_MakeWarpArrow((int)local_38 + 0x40,(int)local_36,0x40,0x20,fade_00);
+LAB_8007beb4:
   HUD_Update();
-  local_38.x = 0;
-  local_38.y = 0;
-  local_38.z = 0x87;
-  if (-0x40 < (int)MANNA_Position) {
-    FX_MakeMannaIcon((int)MANNA_Position,0x14,0x33,0x20);
-    FX_DrawNumber((int)MANNA_Position + 0x37,0x1c,(int)HudSave.MANNA_Count,0x808080);
-    if ((int)glyph_cost != -1) {
-      FX_DrawNumber((int)MANNA_Position + 0x11,0x1c,(int)glyph_cost,0x808080);
+  uVar3 = DAT_800d1cfc;
+  uVar2 = DAT_800d1cf8;
+  local_40.x = 0;
+  local_40.y = 0;
+  local_40.z = 0x87;
+  if (-0x40 < MANNA_Position) {
+    uVar5 = INSTANCE_Query(DAT_800d20f8,0x20);
+    uVar6 = INSTANCE_Query(DAT_800d20f8,0x2d);
+    FX_MakeMannaIcon((int)MANNA_Position,0x17,0x33,0x20);
+    FONT_Flush();
+    FONT_SetCursor((short)(((uint)(ushort)MANNA_Position + 0x3a) * 0x10000 >> 0x10),0x20);
+    if (glyph_cost != -1) {
+      FONT_Print((char *)&PTR_DAT_800d0820);
     }
+    if ((int)uVar6 <= (int)uVar5) {
+      FONT_SetColorIndex(2);
+    }
+    FONT_Print((char *)&PTR_DAT_800d0824);
+    FONT_SetColorIndex(0);
+    FONT_SetCursor((short)uVar2,(short)uVar3);
+    FONT_Flush();
   }
   if (-1000 < HUD_Position) {
-    if (HUD_Captured != 0) {
-      local_18.x = 0x400;
-      local_28.x = -0x600;
-      local_18.y = 0;
-      local_18.z = 0;
-      local_28.z = 0xa00;
+    if ((HUD_Captured != 0) && (DAT_800d223e != 6)) {
+      local_20.x = 0x400;
+      local_30.x = -0x600;
+      local_20.y = 0;
+      local_20.z = 0;
+      local_30.z = 0xa00;
       if (HUD_State < 4) {
-        local_28.y = 0x140;
+        local_30.y = 0x120;
       }
       else {
-        local_28.y = 0x280;
+        local_30.y = 0x260;
       }
-      CriticalDampPosition(1,(_Position *)&HUD_Cap_Pos,&local_28,&HUD_Cap_Vel,&_Stack32,0x80);
+      CriticalDampPosition
+                (1,(_Position *)&HUD_Cap_Pos,&local_30,(_SVector *)&HUD_Cap_Vel,&_Stack40,0x80);
       if (((HUD_Cap_Vel.x == 0) && (HUD_Cap_Vel.y == 0)) && (HUD_Cap_Vel.z == 0)) {
         if (HUD_State == 3) {
           HUD_State = 4;
@@ -1809,32 +1955,33 @@ LAB_8007b758:
           }
         }
       }
-      FX_DrawModel((Object *)(void *)0x0,0,&local_18,&HUD_Cap_Pos,&local_38,0);
+      FX_DrawModel((Object *)objectAccess[21].object,0,&local_20,(_SVector *)&HUD_Cap_Pos,&local_40,
+                   0);
     }
-    uVar3 = 0;
-    ppuVar4 = &PTR_LAB_80011c84;
-    local_48.x = 0x400;
-    local_40.y = 0x280;
-    local_48.y = 0;
-    local_40.z = 0xa00;
-    local_38.z = 0;
-    local_40.x = HUD_Position + -0x600;
-    local_48.z = HUD_Rotation;
+    uVar7 = 0;
+    ppuVar8 = &PTR_LAB_80011d6c;
+    local_50.x = 0x400;
+    local_48.y = 0x260;
+    local_50.y = 0;
+    local_48.z = 0xa00;
+    local_40.z = 0;
+    local_48.x = HUD_Position + -0x600;
+    local_50.z = HUD_Rotation;
     bVar1 = true;
     do {
       if (bVar1) {
-                    /* WARNING: Could not recover jumptable at 0x8007b930. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x8007c10c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-        (*(code *)*ppuVar4)();
+        (*(code *)*ppuVar8)();
         return;
       }
-      ppuVar4 = (code **)ppuVar4 + 1;
-      local_48.z = local_48.z - HUD_Rotation & 0xfff;
-      FX_DrawModel((Object *)(void *)0x0,0,&local_48,&local_40,&local_38,
-                   (uint)((int)uVar3 < (int)HudSave.HUD_Count) ^ 1);
-      uVar3 = uVar3 + 1;
-      bVar1 = uVar3 < 5;
-    } while ((int)uVar3 < 5);
+      ppuVar8 = (code **)ppuVar8 + 1;
+      local_50.z = local_50.z - HUD_Rotation & 0xfff;
+      FX_DrawModel((Object *)objectAccess[24].object,0,&local_50,&local_48,&local_40,
+                   (uint)((int)uVar7 < HUD_Count) ^ 1);
+      uVar7 = uVar7 + 1;
+      bVar1 = uVar7 < 5;
+    } while ((int)uVar7 < 5);
   }
   return;
 }

@@ -5,16 +5,18 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_SetGameTime(long *var /*$a0*/)
- // line 1190, offset 0x80012c2c
+ // line 1211, offset 0x80012d90
 	/* begin block 1 */
-		// Start line: 2161
+		// Start line: 2203
 	/* end block 1 */
-	// End Line: 2162
+	// End Line: 2204
 
 	/* begin block 2 */
-		// Start line: 2377
+		// Start line: 2419
 	/* end block 2 */
-	// End Line: 2378
+	// End Line: 2420
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_SetGameTime(long *var)
 
@@ -28,27 +30,29 @@ void DEBUG_SetGameTime(long *var)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_KeepGameTime(long *var /*$a0*/)
- // line 1195, offset 0x80012c50
+ // line 1216, offset 0x80012db4
 	/* begin block 1 */
-		// Start line: 1196
-		// Start offset: 0x80012C50
+		// Start line: 1217
+		// Start offset: 0x80012DB4
 		// Variables:
 	// 		long curTOD; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x80012C50
-	// End Line: 1196
+	// End offset: 0x80012DB4
+	// End Line: 1217
 
 	/* begin block 2 */
-		// Start line: 2171
+		// Start line: 2213
 	/* end block 2 */
-	// End Line: 2172
+	// End Line: 2214
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_KeepGameTime(long *var)
 
 {
   long local_10 [2];
   
-  local_10[0] = (int)gameTrackerX.currentMaterialTime._2_2_;
+  local_10[0] = (int)DAT_800d22ee;
   DEBUG_SetGameTime(local_10);
   return;
 }
@@ -58,25 +62,27 @@ void DEBUG_KeepGameTime(long *var)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_UpdateFog(long *var /*$a0*/)
- // line 1201, offset 0x80012c78
+ // line 1222, offset 0x80012ddc
 	/* begin block 1 */
-		// Start line: 1202
-		// Start offset: 0x80012C78
+		// Start line: 1223
+		// Start offset: 0x80012DDC
 		// Variables:
 	// 		struct _StreamUnit *currentUnit; // $v0
 	/* end block 1 */
-	// End offset: 0x80012C78
-	// End Line: 1202
+	// End offset: 0x80012DDC
+	// End Line: 1223
 
 	/* begin block 2 */
-		// Start line: 2185
+		// Start line: 2227
 	/* end block 2 */
-	// End Line: 2186
+	// End Line: 2228
 
 	/* begin block 3 */
-		// Start line: 2186
+		// Start line: 2228
 	/* end block 3 */
-	// End Line: 2187
+	// End Line: 2229
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_UpdateFog(long *var)
 
@@ -86,22 +92,22 @@ void DEBUG_UpdateFog(long *var)
   _StreamUnit *p_Var3;
   uint uVar4;
   
-  p_Var3 = FindStreamUnitFromLevel(gameTrackerX.level);
-  pLVar2 = gameTrackerX.level;
+  p_Var3 = FindStreamUnitFromLevel(DAT_800d20f4);
+  pLVar2 = DAT_800d20f4;
   uVar1 = (ushort)debugFogFar;
-  (gameTrackerX.level)->fogFar = (ushort)debugFogFar;
+  DAT_800d20f4->fogFar = (ushort)debugFogFar;
   p_Var3->TargetFogFar = uVar1;
   pLVar2->holdFogFar = uVar1;
-  pLVar2 = gameTrackerX.level;
+  pLVar2 = DAT_800d20f4;
   uVar1 = (ushort)debugFogNear;
-  (gameTrackerX.level)->fogNear = (ushort)debugFogNear;
+  DAT_800d20f4->fogNear = (ushort)debugFogNear;
   p_Var3->TargetFogNear = uVar1;
   pLVar2->holdFogNear = uVar1;
-  pLVar2 = gameTrackerX.level;
+  pLVar2 = DAT_800d20f4;
   uVar4 = debugFogBlu << 0x10 | debugFogGrn << 8 | debugFogRed;
   p_Var3->FogColor = uVar4;
   *(uint *)&pLVar2->backColorR = uVar4;
-  LIGHT_CalcDQPTable(gameTrackerX.level);
+  LIGHT_CalcDQPTable(DAT_800d20f4);
   return;
 }
 
@@ -110,28 +116,30 @@ void DEBUG_UpdateFog(long *var)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_UpdateHealth(long *var /*$a0*/)
- // line 1216, offset 0x80012d00
+ // line 1237, offset 0x80012e64
 	/* begin block 1 */
-		// Start line: 1217
-		// Start offset: 0x80012D00
+		// Start line: 1238
+		// Start offset: 0x80012E64
 	/* end block 1 */
-	// End offset: 0x80012D00
-	// End Line: 1217
+	// End offset: 0x80012E64
+	// End Line: 1238
 
 	/* begin block 2 */
-		// Start line: 2216
+		// Start line: 2258
 	/* end block 2 */
-	// End Line: 2217
+	// End Line: 2259
 
 	/* begin block 3 */
-		// Start line: 2217
+		// Start line: 2259
 	/* end block 3 */
-	// End Line: 2218
+	// End Line: 2260
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_UpdateHealth(long *var)
 
 {
-  RAZIEL_DebugHealthSetScale(1);
+  RAZIEL_DebugHealthSetScale(debugHealthLevel);
   return;
 }
 
@@ -140,23 +148,26 @@ void DEBUG_UpdateHealth(long *var)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_FillUpHealth(long *var /*$a0*/)
- // line 1222, offset 0x80012d24
+ // line 1245, offset 0x80012e88
 	/* begin block 1 */
-		// Start line: 1223
-		// Start offset: 0x80012D24
+		// Start line: 1246
+		// Start offset: 0x80012E88
 	/* end block 1 */
-	// End offset: 0x80012D24
-	// End Line: 1223
+	// End offset: 0x80012E88
+	// End Line: 1246
 
 	/* begin block 2 */
-		// Start line: 2229
+		// Start line: 2275
 	/* end block 2 */
-	// End Line: 2230
+	// End Line: 2276
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_FillUpHealth(long *var)
 
 {
   RAZIEL_DebugHealthFillUp();
+  RAZIEL_DebugManaFillUp();
   return;
 }
 
@@ -165,34 +176,34 @@ void DEBUG_FillUpHealth(long *var)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_FogLoad()
- // line 1228, offset 0x80012d44
+ // line 1251, offset 0x80012eb0
 	/* begin block 1 */
-		// Start line: 1229
-		// Start offset: 0x80012D44
+		// Start line: 1252
+		// Start offset: 0x80012EB0
 		// Variables:
 	// 		struct _StreamUnit *currentUnit; // $v0
 	/* end block 1 */
-	// End offset: 0x80012D44
-	// End Line: 1229
+	// End offset: 0x80012EB0
+	// End Line: 1252
 
 	/* begin block 2 */
-		// Start line: 2241
+		// Start line: 2287
 	/* end block 2 */
-	// End Line: 2242
+	// End Line: 2288
 
 	/* begin block 3 */
-		// Start line: 2242
+		// Start line: 2288
 	/* end block 3 */
-	// End Line: 2243
+	// End Line: 2289
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_FogLoad(void)
 
 {
   _StreamUnit *p_Var1;
   
-  p_Var1 = FindStreamUnitFromLevel(gameTrackerX.level);
+  p_Var1 = FindStreamUnitFromLevel(DAT_800d20f4);
   debugOrgFogBlu = *(byte *)((int)&p_Var1->FogColor + 2);
   debugOrgFogGrn = *(byte *)((int)&p_Var1->FogColor + 1);
   debugFogFar = (int)p_Var1->TargetFogFar;
@@ -211,18 +222,18 @@ void DEBUG_FogLoad(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_FogRestore()
- // line 1241, offset 0x80012dac
+ // line 1264, offset 0x80012f18
 	/* begin block 1 */
-		// Start line: 2275
+		// Start line: 2321
 	/* end block 1 */
-	// End Line: 2276
+	// End Line: 2322
 
 	/* begin block 2 */
-		// Start line: 2276
+		// Start line: 2322
 	/* end block 2 */
-	// End Line: 2277
+	// End Line: 2323
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_FogRestore(void)
 
@@ -241,24 +252,24 @@ void DEBUG_FogRestore(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_SendCinematicSwitch()
- // line 1256, offset 0x80012df4
+ // line 1279, offset 0x80012f60
 	/* begin block 1 */
-		// Start line: 2508
+		// Start line: 2554
 	/* end block 1 */
-	// End Line: 2509
+	// End Line: 2555
 
 	/* begin block 2 */
-		// Start line: 2304
+		// Start line: 2350
 	/* end block 2 */
-	// End Line: 2305
+	// End Line: 2351
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_SendCinematicSwitch(void)
 
 {
-  gameTrackerX.debugFlags2 = gameTrackerX.debugFlags2 ^ 0x200;
-  INSTANCE_Broadcast((_Instance *)0x0,0xe,0x4000e,(uint)((gameTrackerX.debugFlags2 & 0x200U) != 0));
+  DAT_800d2190 = DAT_800d2190 ^ 0x200;
+  INSTANCE_Broadcast((_Instance *)0x0,0xe,0x4000e,(uint)((DAT_800d2190 & 0x200) != 0));
   return;
 }
 
@@ -267,13 +278,13 @@ void DEBUG_SendCinematicSwitch(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_SendMoveTo()
- // line 1270, offset 0x80012e50
+ // line 1293, offset 0x80012fbc
 	/* begin block 1 */
-		// Start line: 2332
+		// Start line: 2378
 	/* end block 1 */
-	// End Line: 2333
+	// End Line: 2379
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_SendMoveTo(void)
 
@@ -284,11 +295,11 @@ void DEBUG_SendMoveTo(void)
   int Data;
   
   uVar2 = rand();
-  sVar1 = ((gameTrackerX.playerInstance)->position).x;
+  sVar1 = *(short *)(DAT_800d20f8 + 0x5c);
   uVar3 = rand();
   Data = SetPositionData((int)sVar1 + (uVar2 & 0x7ff) + -0x400,
-                         (int)((gameTrackerX.playerInstance)->position).y + (uVar3 & 0x7ff) + -0x400
-                         ,(int)((gameTrackerX.playerInstance)->position).z);
+                         (int)*(short *)(DAT_800d20f8 + 0x5e) + (uVar3 & 0x7ff) + -0x400,
+                         (int)*(short *)(DAT_800d20f8 + 0x60));
   INSTANCE_Broadcast((_Instance *)0x0,0xe,0x4000c,Data);
   return;
 }
@@ -298,29 +309,28 @@ void DEBUG_SendMoveTo(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ process_cheat_codes(struct GameTracker *gt /*$a0*/, long *ctrl /*$a1*/)
- // line 1338, offset 0x80012ec4
+ // line 1376, offset 0x80013030
 	/* begin block 1 */
-		// Start line: 2645
+		// Start line: 2706
 	/* end block 1 */
-	// End Line: 2646
+	// End Line: 2707
 
 	/* begin block 2 */
-		// Start line: 2402
+		// Start line: 2463
 	/* end block 2 */
-	// End Line: 2403
+	// End Line: 2464
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void process_cheat_codes(GameTracker *gt,long *ctrl)
 
 {
-  uint *puVar1;
-  
   if ((cheatCodeLastCommand == 0) && (ctrl[1] != 0)) {
-    puVar1 = (uint *)(&cheatCombo + cheatCodeStage);
-    cheatCodeStage = cheatCodeStage + 1;
-    if ((ctrl[1] & *puVar1) == 0) {
+    if (((ctrl[1] & cheatCombo[cheatCodeStage]) == 0) ||
+       (cheatCodeStage = cheatCodeStage + 1, (*ctrl & 0x300U) == 0)) {
       cheatCodeStage = 0;
     }
-    if (cheatCodeStage == 6) {
+    if (cheatCodeStage == 4) {
       cheatCodeStage = 0;
       gt->debugFlags = gt->debugFlags ^ 0x40000;
     }
@@ -334,22 +344,24 @@ void process_cheat_codes(GameTracker *gt,long *ctrl)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_Process(struct GameTracker *gameTracker /*$s0*/)
- // line 1358, offset 0x80012f50
+ // line 1410, offset 0x800130d0
 	/* begin block 1 */
-		// Start line: 1359
-		// Start offset: 0x80012F50
+		// Start line: 1411
+		// Start offset: 0x800130D0
 		// Variables:
 	// 		long *controlCommand; // $s3
 	// 		long oldFlags; // $s2
 	// 		long oldFlags2; // $s1
 	/* end block 1 */
-	// End offset: 0x800130D4
-	// End Line: 1418
+	// End offset: 0x80013260
+	// End Line: 1473
 
 	/* begin block 2 */
-		// Start line: 2442
+		// Start line: 2531
 	/* end block 2 */
-	// End Line: 2443
+	// End Line: 2532
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_Process(GameTracker *gameTracker)
 
@@ -365,13 +377,14 @@ void DEBUG_Process(GameTracker *gameTracker)
     if ((uVar3 & 8) != 0) {
       DEBUG_ProcessSecondController(gameTracker);
     }
-    if (*(short *)&gameTracker->plan_collide_override == 1) {
+    if (gameTracker->cheatMode == '\x01') {
       DEBUG_ProcessCheat(gameTracker);
     }
-    goto LAB_800130a4;
+    goto LAB_80013230;
   }
   if (sVar1 != 4) {
     if (sVar1 == 6) {
+      process_cheat_codes(gameTracker,gameTracker->controlCommand);
       DEBUG_Menu(gameTracker);
     }
     else {
@@ -379,11 +392,11 @@ void DEBUG_Process(GameTracker *gameTracker)
         DEBUG_ViewVram(gameTracker);
       }
     }
-    goto LAB_800130a4;
+    goto LAB_80013230;
   }
   DEBUG_Menu(gameTracker);
   if ((gameTracker->debugFlags2 & 0x40000U) == 0) {
-LAB_80013008:
+LAB_80013188:
     if ((uVar2 & 0x40000) != 0) {
       gameTracker->debugFlags = gameTracker->debugFlags & 0xfffffff7;
     }
@@ -392,42 +405,21 @@ LAB_80013008:
     if ((uVar2 & 0x40000) == 0) {
       gameTracker->debugFlags = gameTracker->debugFlags | 8;
     }
-    if ((gameTracker->debugFlags2 & 0x40000U) == 0) goto LAB_80013008;
+    if ((gameTracker->debugFlags2 & 0x40000U) == 0) goto LAB_80013188;
   }
   if (((gameTracker->debugFlags & 8U) != 0) && ((uVar3 & 8) == 0)) {
-    theCamera.core.debugPos.x = theCamera.core.position.x;
-    theCamera.core.debugPos.y = theCamera.core.position.y;
-    theCamera.core.debugPos.z = theCamera.core.position.z;
-    theCamera.core.debugRot.x = theCamera.core.rotation.x;
-    theCamera.core.debugRot.y = theCamera.core.rotation.y;
-    theCamera.core.debugRot.z = theCamera.core.rotation.z;
+    DAT_800d1060 = theCamera;
+    DAT_800d1062 = DAT_800d0f9e;
+    DAT_800d1064 = DAT_800d0fa0;
+    DAT_800d1068 = DAT_800d104c;
+    DAT_800d106a = DAT_800d104e;
+    DAT_800d106c = DAT_800d1050;
   }
-LAB_800130a4:
+LAB_80013230:
   if (((gameTracker->debugFlags & 0x4000U) != 0) && ((gameTracker->controlCommand[1] & 0x400U) != 0)
      ) {
     DEBUG_CaptureScreen(gameTracker);
   }
-  process_cheat_codes(gameTracker,gameTracker->controlCommand);
-  return;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// void /*$ra*/ DEBUG_VoiceTest()
- // line 1422, offset 0x800130fc
-	/* begin block 1 */
-		// Start line: 2577
-	/* end block 1 */
-	// End Line: 2578
-
-/* WARNING: Unknown calling convention yet parameter storage is locked */
-
-void DEBUG_VoiceTest(void)
-
-{
-  VOICEXA_Play(0,0);
   return;
 }
 
@@ -436,16 +428,18 @@ void DEBUG_VoiceTest(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_Draw(struct GameTracker *gameTracker /*$a0*/, unsigned long **ot /*$a1*/)
- // line 1429, offset 0x80013120
+ // line 1483, offset 0x8001327c
 	/* begin block 1 */
-		// Start line: 2592
+		// Start line: 2960
 	/* end block 1 */
-	// End Line: 2593
+	// End Line: 2961
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_Draw(GameTracker *gameTracker,ulong **ot)
 
 {
-  if (((gameTracker->gameMode == 0) || (*(short *)&gameTracker->plan_collide_override == 1)) ||
+  if (((gameTracker->gameMode == 0) || (gameTracker->cheatMode == '\x01')) ||
      (gameTracker->gameMode == 4)) {
     DEBUG_DisplayStatus(gameTracker);
   }
@@ -457,31 +451,33 @@ void DEBUG_Draw(GameTracker *gameTracker,ulong **ot)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ DEBUG_MenuCountLength(struct DebugMenuLine *menu /*$a0*/)
- // line 1452, offset 0x80013168
+ // line 1506, offset 0x800132c4
 	/* begin block 1 */
-		// Start line: 1454
-		// Start offset: 0x80013168
+		// Start line: 1508
+		// Start offset: 0x800132C4
 		// Variables:
 	// 		int length; // $v1
 	// 		struct DebugMenuLine *curLine; // $a0
 	/* end block 1 */
-	// End offset: 0x8001318C
-	// End Line: 1463
+	// End offset: 0x800132E8
+	// End Line: 1517
 
 	/* begin block 2 */
-		// Start line: 2638
+		// Start line: 2719
 	/* end block 2 */
-	// End Line: 2639
+	// End Line: 2720
 
 	/* begin block 3 */
-		// Start line: 2639
+		// Start line: 2720
 	/* end block 3 */
-	// End Line: 2640
+	// End Line: 2721
 
 	/* begin block 4 */
-		// Start line: 2641
+		// Start line: 2722
 	/* end block 4 */
-	// End Line: 2642
+	// End Line: 2723
+
+/* File: C:\kain2\game\DEBUG.C */
 
 long DEBUG_MenuCountLength(DebugMenuLine *menu)
 
@@ -508,25 +504,25 @@ long DEBUG_MenuCountLength(DebugMenuLine *menu)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_ExitMenus()
- // line 1466, offset 0x80013194
+ // line 1520, offset 0x800132f0
 	/* begin block 1 */
-		// Start line: 1467
-		// Start offset: 0x80013194
+		// Start line: 1521
+		// Start offset: 0x800132F0
 	/* end block 1 */
-	// End offset: 0x80013214
-	// End Line: 1491
+	// End offset: 0x80013378
+	// End Line: 1550
 
 	/* begin block 2 */
-		// Start line: 2666
+		// Start line: 2747
 	/* end block 2 */
-	// End Line: 2667
+	// End Line: 2748
 
 	/* begin block 3 */
-		// Start line: 2671
+		// Start line: 2752
 	/* end block 3 */
-	// End Line: 2672
+	// End Line: 2753
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_ExitMenus(void)
 
@@ -535,13 +531,14 @@ void DEBUG_ExitMenus(void)
   
   lVar1 = DEBUG_MenuCountLength(currentMenu);
   currentMenu[lVar1].lower = debugMenuChoice;
-  if (gameTrackerX.sound.gMusicOn == '\0') {
+  if (DAT_800d2291 == '\0') {
     SOUND_MusicOff();
+    SOUND_FreeDynamicMusic();
   }
   else {
     SOUND_MusicOn();
   }
-  if (gameTrackerX.sound.gSfxOn == '\0') {
+  if (DAT_800d2290 == '\0') {
     SOUND_SfxOff();
   }
   else {
@@ -555,16 +552,18 @@ void DEBUG_ExitMenus(void)
 // decompiled code
 // original method signature: 
 // struct DebugMenuLine * /*$ra*/ get_last_menu_line(struct DebugMenuLine *line /*$a0*/)
- // line 1497, offset 0x80013224
+ // line 1556, offset 0x80013388
 	/* begin block 1 */
-		// Start line: 2733
+		// Start line: 2824
 	/* end block 1 */
-	// End Line: 2734
+	// End Line: 2825
 
 	/* begin block 2 */
-		// Start line: 2734
+		// Start line: 2825
 	/* end block 2 */
-	// End Line: 2735
+	// End Line: 2826
+
+/* File: C:\kain2\game\DEBUG.C */
 
 DebugMenuLine * get_last_menu_line(DebugMenuLine *line)
 
@@ -586,30 +585,32 @@ DebugMenuLine * get_last_menu_line(DebugMenuLine *line)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ num_menu_items(struct DebugMenuLine *menu /*$a0*/)
- // line 1505, offset 0x80013254
+ // line 1564, offset 0x800133b8
 	/* begin block 1 */
-		// Start line: 1507
-		// Start offset: 0x80013254
+		// Start line: 1566
+		// Start offset: 0x800133B8
 		// Variables:
 	// 		int nitems; // $a1
 	/* end block 1 */
-	// End offset: 0x8001327C
-	// End Line: 1511
+	// End offset: 0x800133E0
+	// End Line: 1570
 
 	/* begin block 2 */
-		// Start line: 2749
+		// Start line: 2840
 	/* end block 2 */
-	// End Line: 2750
+	// End Line: 2841
 
 	/* begin block 3 */
-		// Start line: 2750
+		// Start line: 2841
 	/* end block 3 */
-	// End Line: 2751
+	// End Line: 2842
 
 	/* begin block 4 */
-		// Start line: 2751
+		// Start line: 2842
 	/* end block 4 */
-	// End Line: 2752
+	// End Line: 2843
+
+/* File: C:\kain2\game\DEBUG.C */
 
 int num_menu_items(DebugMenuLine *menu)
 
@@ -632,23 +633,25 @@ int num_menu_items(DebugMenuLine *menu)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ maybe_change_menu_choice(struct GameTracker *gt /*$a0*/, struct DebugMenuLine *menu /*$s2*/)
- // line 1514, offset 0x80013284
+ // line 1573, offset 0x800133e8
 	/* begin block 1 */
-		// Start line: 1515
-		// Start offset: 0x80013284
+		// Start line: 1574
+		// Start offset: 0x800133E8
 		// Variables:
 	// 		long *command; // $s0
 	// 		int choice; // $s1
 	// 		int nitems; // $a0
 	// 		int incr; // $v1
 	/* end block 1 */
-	// End offset: 0x80013334
-	// End Line: 1533
+	// End offset: 0x80013498
+	// End Line: 1592
 
 	/* begin block 2 */
-		// Start line: 2767
+		// Start line: 2858
 	/* end block 2 */
-	// End Line: 2768
+	// End Line: 2859
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void maybe_change_menu_choice(GameTracker *gt,DebugMenuLine *menu)
 
@@ -673,7 +676,7 @@ void maybe_change_menu_choice(GameTracker *gt,DebugMenuLine *menu)
       }
     } while (DEBUG_LINE_TYPE_ENDLIST < menu[iVar3].type);
     if (iVar3 != debugMenuChoice) {
-      SndPlay(6);
+      SndPlay(5);
       debugMenuChoice = iVar3;
     }
   }
@@ -685,29 +688,31 @@ void maybe_change_menu_choice(GameTracker *gt,DebugMenuLine *menu)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ handle_line_type_long(struct GameTracker *gt /*$a0*/, struct DebugMenuLine *line /*$a1*/)
- // line 1537, offset 0x8001334c
+ // line 1596, offset 0x800134b0
 	/* begin block 1 */
-		// Start line: 1538
-		// Start offset: 0x8001334C
+		// Start line: 1597
+		// Start offset: 0x800134B0
 		// Variables:
 	// 		long *command; // $v1
 
 		/* begin block 1.1 */
-			// Start line: 1542
-			// Start offset: 0x8001336C
+			// Start line: 1601
+			// Start offset: 0x800134D0
 			// Variables:
 		// 		int incr; // $a2
 		/* end block 1.1 */
-		// End offset: 0x80013428
-		// End Line: 1559
+		// End offset: 0x8001358C
+		// End Line: 1618
 	/* end block 1 */
-	// End offset: 0x80013428
-	// End Line: 1560
+	// End offset: 0x8001358C
+	// End Line: 1619
 
 	/* begin block 2 */
-		// Start line: 2818
+		// Start line: 2909
 	/* end block 2 */
-	// End Line: 2819
+	// End Line: 2910
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void handle_line_type_long(GameTracker *gt,DebugMenuLine *line)
 
@@ -747,28 +752,30 @@ void handle_line_type_long(GameTracker *gt,DebugMenuLine *line)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ handle_line_type_bit(struct GameTracker *gt /*$a0*/, struct DebugMenuLine *line /*$a1*/)
- // line 1562, offset 0x80013438
+ // line 1621, offset 0x8001359c
 	/* begin block 1 */
-		// Start line: 1564
-		// Start offset: 0x80013438
+		// Start line: 1623
+		// Start offset: 0x8001359C
 	/* end block 1 */
-	// End offset: 0x80013488
-	// End Line: 1571
+	// End offset: 0x800135EC
+	// End Line: 1630
 
 	/* begin block 2 */
-		// Start line: 2869
+		// Start line: 2960
 	/* end block 2 */
-	// End Line: 2870
+	// End Line: 2961
 
 	/* begin block 3 */
-		// Start line: 2870
+		// Start line: 2961
 	/* end block 3 */
-	// End Line: 2871
+	// End Line: 2962
 
 	/* begin block 4 */
-		// Start line: 2872
+		// Start line: 2963
 	/* end block 4 */
-	// End Line: 2873
+	// End Line: 2964
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void handle_line_type_bit(GameTracker *gt,DebugMenuLine *line)
 
@@ -788,20 +795,22 @@ void handle_line_type_bit(GameTracker *gt,DebugMenuLine *line)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ handle_line_type_action(struct GameTracker *gt /*$a0*/, struct DebugMenuLine *line /*$a1*/)
- // line 1573, offset 0x80013490
+ // line 1632, offset 0x800135f4
 	/* begin block 1 */
-		// Start line: 1574
-		// Start offset: 0x80013490
+		// Start line: 1633
+		// Start offset: 0x800135F4
 		// Variables:
 	// 		int ok; // $v0
 	/* end block 1 */
-	// End offset: 0x800134BC
-	// End Line: 1583
+	// End offset: 0x80013620
+	// End Line: 1642
 
 	/* begin block 2 */
-		// Start line: 2891
+		// Start line: 2982
 	/* end block 2 */
-	// End Line: 2892
+	// End Line: 2983
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void handle_line_type_action(GameTracker *gt,DebugMenuLine *line)
 
@@ -817,20 +826,22 @@ void handle_line_type_action(GameTracker *gt,DebugMenuLine *line)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ handle_line_type_action_with_line(struct GameTracker *gt /*$a0*/, struct DebugMenuLine *line /*$a1*/)
- // line 1585, offset 0x800134cc
+ // line 1644, offset 0x80013630
 	/* begin block 1 */
-		// Start line: 1586
-		// Start offset: 0x800134CC
+		// Start line: 1645
+		// Start offset: 0x80013630
 		// Variables:
 	// 		enum option_ctrl_t ctrl; // $a2
 	/* end block 1 */
-	// End offset: 0x80013520
-	// End Line: 1597
+	// End offset: 0x80013684
+	// End Line: 1656
 
 	/* begin block 2 */
-		// Start line: 2915
+		// Start line: 3006
 	/* end block 2 */
-	// End Line: 2916
+	// End Line: 3007
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void handle_line_type_action_with_line(GameTracker *gt,DebugMenuLine *line)
 
@@ -854,20 +865,22 @@ void handle_line_type_action_with_line(GameTracker *gt,DebugMenuLine *line)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ handle_line_type_menu(struct GameTracker *gt /*$a0*/, struct DebugMenuLine *line /*$s0*/)
- // line 1601, offset 0x80013530
+ // line 1660, offset 0x80013694
 	/* begin block 1 */
-		// Start line: 1602
-		// Start offset: 0x80013530
+		// Start line: 1661
+		// Start offset: 0x80013694
 		// Variables:
 	// 		int ok; // $v0
 	/* end block 1 */
-	// End offset: 0x800135A0
-	// End Line: 1618
+	// End offset: 0x80013704
+	// End Line: 1677
 
 	/* begin block 2 */
-		// Start line: 2947
+		// Start line: 3038
 	/* end block 2 */
-	// End Line: 2948
+	// End Line: 3039
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void handle_line_type_menu(GameTracker *gt,DebugMenuLine *line)
 
@@ -893,41 +906,43 @@ void handle_line_type_menu(GameTracker *gt,DebugMenuLine *line)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ process_menu_line(struct GameTracker *gt /*$a0*/, struct DebugMenuLine *menu /*$a1*/)
- // line 1637, offset 0x800135b0
+ // line 1696, offset 0x80013714
 	/* begin block 1 */
-		// Start line: 1638
-		// Start offset: 0x800135B0
+		// Start line: 1697
+		// Start offset: 0x80013714
 		// Variables:
 	// 		struct DebugMenuLine *line; // $a1
 
 		/* begin block 1.1 */
-			// Start line: 1641
-			// Start offset: 0x800135E0
+			// Start line: 1700
+			// Start offset: 0x80013744
 			// Variables:
 		// 		struct debug_dispatch_t *dispatch; // $v1
 		/* end block 1.1 */
-		// End offset: 0x80013604
-		// End Line: 1646
+		// End offset: 0x80013768
+		// End Line: 1705
 	/* end block 1 */
-	// End offset: 0x80013604
-	// End Line: 1647
+	// End offset: 0x80013768
+	// End Line: 1706
 
 	/* begin block 2 */
-		// Start line: 3020
+		// Start line: 3111
 	/* end block 2 */
-	// End Line: 3021
+	// End Line: 3112
 
 	/* begin block 3 */
-		// Start line: 3021
+		// Start line: 3112
 	/* end block 3 */
-	// End Line: 3022
+	// End Line: 3113
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void process_menu_line(GameTracker *gt,DebugMenuLine *menu)
 
 {
   if ((menu[debugMenuChoice].type < DEBUG_LINE_TYPE_ENDLIST) &&
-     ((&debug_dispatch_table)[menu[debugMenuChoice].type].fn != (_func_4439 *)0x0)) {
-    (*(&debug_dispatch_table)[menu[debugMenuChoice].type].fn)();
+     (debug_dispatch_table[menu[debugMenuChoice].type].fn != (_func_16 *)0x0)) {
+    (*debug_dispatch_table[menu[debugMenuChoice].type].fn)();
   }
   return;
 }
@@ -937,16 +952,18 @@ void process_menu_line(GameTracker *gt,DebugMenuLine *menu)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ pre_process_functions(struct GameTracker *gt /*$a0*/, struct DebugMenuLine *menu /*$a1*/)
- // line 1651, offset 0x80013614
+ // line 1710, offset 0x80013778
 	/* begin block 1 */
-		// Start line: 3049
+		// Start line: 3140
 	/* end block 1 */
-	// End Line: 3050
+	// End Line: 3141
 
 	/* begin block 2 */
-		// Start line: 3050
+		// Start line: 3141
 	/* end block 2 */
-	// End Line: 3051
+	// End Line: 3142
+
+/* File: C:\kain2\game\DEBUG.C */
 
 int pre_process_functions(GameTracker *gt,DebugMenuLine *menu)
 
@@ -965,11 +982,13 @@ int pre_process_functions(GameTracker *gt,DebugMenuLine *menu)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ post_process_functions(struct GameTracker *gt /*$s0*/, struct DebugMenuLine *menu /*$a1*/)
- // line 1659, offset 0x8001363c
+ // line 1718, offset 0x800137a0
 	/* begin block 1 */
-		// Start line: 3065
+		// Start line: 3156
 	/* end block 1 */
-	// End Line: 3066
+	// End Line: 3157
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void post_process_functions(GameTracker *gt,DebugMenuLine *menu)
 
@@ -1005,18 +1024,18 @@ void post_process_functions(GameTracker *gt,DebugMenuLine *menu)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ set_debug_leading()
- // line 1714, offset 0x800136e0
+ // line 1771, offset 0x80013844
 	/* begin block 1 */
-		// Start line: 3175
+		// Start line: 3262
 	/* end block 1 */
-	// End Line: 3176
+	// End Line: 3263
 
 	/* begin block 2 */
-		// Start line: 3176
+		// Start line: 3263
 	/* end block 2 */
-	// End Line: 3177
+	// End Line: 3264
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\DEBUG.C */
 
 void set_debug_leading(void)
 
@@ -1031,18 +1050,18 @@ void set_debug_leading(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ set_user_leading()
- // line 1720, offset 0x800136f8
+ // line 1777, offset 0x8001385c
 	/* begin block 1 */
-		// Start line: 3187
+		// Start line: 3274
 	/* end block 1 */
-	// End Line: 3188
+	// End Line: 3275
 
 	/* begin block 2 */
-		// Start line: 3189
+		// Start line: 3276
 	/* end block 2 */
-	// End Line: 3190
+	// End Line: 3277
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\DEBUG.C */
 
 void set_user_leading(void)
 
@@ -1057,16 +1076,18 @@ void set_user_leading(void)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ isdigit(char c /*$a0*/)
- // line 1740, offset 0x80013710
+ // line 1797, offset 0x80013874
 	/* begin block 1 */
-		// Start line: 3227
+		// Start line: 3314
 	/* end block 1 */
-	// End Line: 3228
+	// End Line: 3315
 
 	/* begin block 2 */
-		// Start line: 3228
+		// Start line: 3315
 	/* end block 2 */
-	// End Line: 3229
+	// End Line: 3316
+
+/* File: C:\kain2\game\DEBUG.C */
 
 int isdigit(char c)
 
@@ -1079,29 +1100,31 @@ int isdigit(char c)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ adjust_format(char *ctrl /*$s1*/, struct debug_format_t *fmt /*$s4*/)
- // line 1745, offset 0x80013720
+ // line 1802, offset 0x80013884
 	/* begin block 1 */
-		// Start line: 1746
-		// Start offset: 0x80013720
+		// Start line: 1803
+		// Start offset: 0x80013884
 
 		/* begin block 1.1 */
-			// Start line: 1750
-			// Start offset: 0x80013788
+			// Start line: 1807
+			// Start offset: 0x800138EC
 			// Variables:
 		// 		char *p; // $s0
 		// 		int x; // $s2
 		// 		int y; // $s3
 		/* end block 1.1 */
-		// End offset: 0x80013854
-		// End Line: 1764
+		// End offset: 0x800139B8
+		// End Line: 1821
 	/* end block 1 */
-	// End offset: 0x800138A4
-	// End Line: 1773
+	// End offset: 0x80013A08
+	// End Line: 1830
 
 	/* begin block 2 */
-		// Start line: 3237
+		// Start line: 3324
 	/* end block 2 */
-	// End Line: 3238
+	// End Line: 3325
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void adjust_format(char *ctrl,debug_format_t *fmt)
 
@@ -1117,8 +1140,8 @@ void adjust_format(char *ctrl,debug_format_t *fmt)
     if (bVar1 == 0) {
       return;
     }
-    iVar2 = strncmp(ctrl,"-abs ",5);
-    if ((iVar2 == 0) || (iVar2 = strncmp(ctrl,"-rel ",5), iVar2 == 0)) {
+    iVar2 = strncmp(ctrl,s__abs_800ceed4,5);
+    if ((iVar2 == 0) || (iVar2 = strncmp(ctrl,s__rel_800ceedc,5), iVar2 == 0)) {
       pbVar4 = (byte *)ctrl + 5;
       iVar2 = 0;
       iVar5 = 0;
@@ -1138,7 +1161,7 @@ void adjust_format(char *ctrl,debug_format_t *fmt)
       if (*pbVar4 != 0) {
         pbVar4 = pbVar4 + 1;
       }
-      iVar3 = strncmp(ctrl,"-abs ",5);
+      iVar3 = strncmp(ctrl,s__abs_800ceed4,5);
       if (iVar3 == 0) {
         fmt->xpos = iVar2;
         fmt->ypos = iVar5;
@@ -1149,9 +1172,9 @@ void adjust_format(char *ctrl,debug_format_t *fmt)
       }
     }
     else {
-      iVar2 = strncmp(ctrl,"-center",7);
+      iVar2 = strncmp(ctrl,s__center_800ceee4,7);
       if (iVar2 != 0) {
-        printf("unknown format control: %s\n");
+        printf(s_unknown_format_control___s_800ceeec,ctrl);
         return;
       }
       fmt->is_centered = 1;
@@ -1167,11 +1190,13 @@ void adjust_format(char *ctrl,debug_format_t *fmt)
 // decompiled code
 // original method signature: 
 // char * /*$ra*/ find_eol(char *text /*$v0*/)
- // line 1775, offset 0x800138c8
+ // line 1832, offset 0x80013a2c
 	/* begin block 1 */
-		// Start line: 3324
+		// Start line: 3411
 	/* end block 1 */
-	// End Line: 3325
+	// End Line: 3412
+
+/* File: C:\kain2\game\DEBUG.C */
 
 char * find_eol(char *text)
 
@@ -1191,35 +1216,37 @@ char * find_eol(char *text)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ draw_menu_item(struct GameTracker *gt /*$a0*/, struct debug_format_t *fmt /*$s2*/, char *text /*$s0*/)
- // line 1783, offset 0x80013900
+ // line 1840, offset 0x80013a64
 	/* begin block 1 */
-		// Start line: 1785
-		// Start offset: 0x80013920
+		// Start line: 1842
+		// Start offset: 0x80013A84
 
 		/* begin block 1.1 */
-			// Start line: 1786
-			// Start offset: 0x80013920
+			// Start line: 1843
+			// Start offset: 0x80013A84
 			// Variables:
 		// 		char *eol; // $s1
 		// 		char c; // $s3
 
 			/* begin block 1.1.1 */
-				// Start line: 1790
-				// Start offset: 0x80013944
+				// Start line: 1847
+				// Start offset: 0x80013AA8
 			/* end block 1.1.1 */
-			// End offset: 0x80013944
-			// End Line: 1790
+			// End offset: 0x80013AA8
+			// End Line: 1847
 		/* end block 1.1 */
-		// End offset: 0x800139B4
-		// End Line: 1806
+		// End offset: 0x80013B18
+		// End Line: 1863
 	/* end block 1 */
-	// End offset: 0x800139D0
-	// End Line: 1810
+	// End offset: 0x80013B34
+	// End Line: 1867
 
 	/* begin block 2 */
-		// Start line: 3340
+		// Start line: 3427
 	/* end block 2 */
-	// End Line: 3341
+	// End Line: 3428
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void draw_menu_item(GameTracker *gt,debug_format_t *fmt,char *text)
 
@@ -1264,103 +1291,107 @@ void draw_menu_item(GameTracker *gt,debug_format_t *fmt,char *text)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ draw_menu(struct GameTracker *gt /*$s4*/, struct DebugMenuLine *menu /*$s0*/)
- // line 1813, offset 0x80013a00
+ // line 1870, offset 0x80013b64
 	/* begin block 1 */
-		// Start line: 1814
-		// Start offset: 0x80013A00
+		// Start line: 1871
+		// Start offset: 0x80013B64
 		// Variables:
 	// 		struct debug_format_t fmt; // stack offset -56
 	// 		int i; // $s3
 
 		/* begin block 1.1 */
-			// Start line: 1827
-			// Start offset: 0x80013A80
+			// Start line: 1884
+			// Start offset: 0x80013BE4
 			// Variables:
 		// 		int xpos; // $s2
 		// 		int ypos; // $s1
 		/* end block 1.1 */
-		// End offset: 0x80013BD4
-		// End Line: 1871
+		// End offset: 0x80013D38
+		// End Line: 1928
 	/* end block 1 */
-	// End offset: 0x80013BEC
-	// End Line: 1872
+	// End offset: 0x80013D50
+	// End Line: 1929
 
 	/* begin block 2 */
-		// Start line: 3423
+		// Start line: 3510
 	/* end block 2 */
-	// End Line: 3424
+	// End Line: 3511
 
 	/* begin block 3 */
-		// Start line: 3424
+		// Start line: 3511
 	/* end block 3 */
-	// End Line: 3425
+	// End Line: 3512
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void draw_menu(GameTracker *gt,DebugMenuLine *menu)
 
 {
-  short sVar1;
-  int iVar2;
-  int iVar3;
+  int iVar1;
+  short x;
+  uint uVar2;
   short y;
-  int iVar4;
+  int iVar3;
   debug_format_t local_38;
   int local_28;
   int local_24;
   undefined4 local_20;
   
   local_20 = 0;
-  local_28 = 0x28;
-  local_24 = 0x14;
-  local_38.xpos = 0x28;
-  local_38.ypos = 0x14;
+  local_28 = cem_x_base;
+  local_24 = cem_y_base;
+  local_38.xpos = cem_x_base;
+  local_38.ypos = cem_y_base;
   local_38.is_centered = 0;
   if (menu->type == DEBUG_LINE_TYPE_FORMAT) {
-    menu->text = "-abs 160 40 -center";
+    menu->text = the_format_string;
     set_user_leading();
-    iVar4 = 0;
+    iVar3 = 0;
   }
   else {
     set_debug_leading();
-    iVar4 = 0;
+    iVar3 = 0;
   }
-  while (iVar2 = local_38.xpos, menu->type != DEBUG_LINE_TYPE_ENDLIST) {
+  while (iVar1 = local_38.xpos, menu->type != DEBUG_LINE_TYPE_ENDLIST) {
     if (menu->type == DEBUG_LINE_TYPE_FORMAT) {
       adjust_format(menu->text,&local_38);
     }
     else {
       y = (short)local_38.ypos;
-      if (debugMenuChoice == iVar4) {
-        sVar1 = (short)local_38.xpos;
-        if (local_38.is_centered != 0) {
-          sVar1 = sVar1 + -0x78;
+      if (debugMenuChoice == iVar3) {
+        if (local_38.is_centered == 0) {
+          x = (short)local_38.xpos - (short)cem_cursor_width;
         }
-        FONT_SetCursor(sVar1 + -0x14,y);
-        FONT_Print(">");
+        else {
+          x = ((short)local_38.xpos - (short)(cem_line_width >> 1)) - (short)cem_cursor_width;
+        }
+        FONT_SetCursor(x,y);
+        FONT_Print(&DAT_800cef08);
       }
       draw_menu_item(gt,&local_38,menu->text);
       if (local_38.is_centered == 0) {
-        iVar3 = 0xf0;
+        uVar2 = cem_line_width & 0xffff;
       }
       else {
-        iVar3 = 0x78;
+        uVar2 = cem_line_width >> 1;
       }
-      FONT_SetCursor((short)((uint)((iVar3 + iVar2) * 0x10000) >> 0x10),y);
+      FONT_SetCursor((short)((uVar2 + iVar1) * 0x10000 >> 0x10),y);
       if (menu->type == DEBUG_LINE_TYPE_BIT) {
         if ((*menu->var_address & menu->bit_mask) == menu->bit_mask) {
-          FONT_Print("YES");
+          FONT_Print((char *)&PTR_DAT_800cef0c);
         }
         else {
-          FONT_Print("NO");
+          FONT_Print((char *)&PTR_DAT_800cef10);
         }
       }
       else {
         if (menu->type == DEBUG_LINE_TYPE_LONG) {
-          FONT_Print("%d");
+          FONT_Print((char *)&PTR_DAT_800cef14);
         }
       }
     }
     menu = menu + 1;
-    iVar4 = iVar4 + 1;
+    iVar3 = iVar3 + 1;
   }
   return;
 }
@@ -1370,21 +1401,23 @@ void draw_menu(GameTracker *gt,DebugMenuLine *menu)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_Menu(struct GameTracker *gt /*$s1*/)
- // line 1874, offset 0x80013c0c
+ // line 1931, offset 0x80013d70
 	/* begin block 1 */
-		// Start line: 1875
-		// Start offset: 0x80013C0C
+		// Start line: 1932
+		// Start offset: 0x80013D70
 		// Variables:
 	// 		struct DebugMenuLine *menu; // $s0
 	// 		int choice; // $s2
 	/* end block 1 */
-	// End offset: 0x80013D08
-	// End Line: 1898
+	// End offset: 0x80013E6C
+	// End Line: 1955
 
 	/* begin block 2 */
-		// Start line: 3598
+		// Start line: 3685
 	/* end block 2 */
-	// End Line: 3599
+	// End Line: 3686
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_Menu(GameTracker *gt)
 
@@ -1396,7 +1429,7 @@ void DEBUG_Menu(GameTracker *gt)
   
   lVar1 = debugMenuChoice;
   menu = currentMenu;
-  if ((currentMenu == &mainMenu) || (currentMenu == &pauseMenu)) {
+  if ((currentMenu == mainMenu) || (currentMenu == pauseMenu)) {
     menu_process(gt->menu);
   }
   else {
@@ -1421,225 +1454,82 @@ void DEBUG_Menu(GameTracker *gt)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ DEBUG_DisplayStatus(struct GameTracker *gameTracker /*$s3*/)
- // line 1913, offset 0x80013d20
+// void /*$ra*/ DEBUG_DisplayStatus(struct GameTracker *gameTracker /*$s1*/)
+ // line 1970, offset 0x80013e84
 	/* begin block 1 */
-		// Start line: 1914
-		// Start offset: 0x80013D20
+		// Start line: 1971
+		// Start offset: 0x80013E84
 
 		/* begin block 1.1 */
-			// Start line: 1928
-			// Start offset: 0x80013D80
-			// Variables:
-		// 		short i; // $s1
-		/* end block 1.1 */
-		// End offset: 0x80013DCC
-		// End Line: 1934
-
-		/* begin block 1.2 */
-			// Start line: 1937
-			// Start offset: 0x80013DE0
-			// Variables:
-		// 		short i; // $s1
-		// 		struct AadSynthVoice *voice; // $s0
-		// 		unsigned char spuVoiceStatus[24]; // stack offset -56
-		/* end block 1.2 */
-		// End offset: 0x800142B4
-		// End Line: 2052
-
-		/* begin block 1.3 */
-			// Start line: 2165
-			// Start offset: 0x80014420
+			// Start line: 2224
+			// Start offset: 0x80014024
 			// Variables:
 		// 		int deg; // $a0
-		/* end block 1.3 */
-		// End offset: 0x800144A4
-		// End Line: 2178
+		/* end block 1.1 */
+		// End offset: 0x800140A8
+		// End Line: 2237
 
-		/* begin block 1.4 */
-			// Start line: 2184
-			// Start offset: 0x800144B4
+		/* begin block 1.2 */
+			// Start line: 2243
+			// Start offset: 0x800140B8
 			// Variables:
-		// 		long numberInQueue; // stack offset -32
-		/* end block 1.4 */
-		// End offset: 0x800144D4
-		// End Line: 2191
+		// 		long numberInQueue; // stack offset -24
+		/* end block 1.2 */
+		// End offset: 0x800140D8
+		// End Line: 2250
 	/* end block 1 */
-	// End offset: 0x800144D4
-	// End Line: 2228
+	// End offset: 0x800140D8
+	// End Line: 2287
 
 	/* begin block 2 */
-		// Start line: 3685
+		// Start line: 3772
 	/* end block 2 */
-	// End Line: 3686
+	// End Line: 3773
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_DisplayStatus(GameTracker *gameTracker)
 
 {
-  AadSynthVoice *pAVar1;
+  int iVar1;
   char *fmt;
-  int iVar2;
-  int iVar3;
-  char acStack32824 [32768];
-  char local_38 [8];
-  char local_30 [8];
-  char local_28 [8];
-  long local_20 [2];
+  long local_18 [2];
   
   STREAM_GetLevelWithID(gameTracker->playerInstance->currentStreamUnitID);
   if ((gameTracker->debugFlags & 0x40000000U) != 0) {
     EVENT_PrintVars();
   }
-  if ((gameTracker->debugFlags & 0x10000000U) != 0) {
-    FONT_Print("$@QE\n");
-    iVar3 = 0;
-    iVar2 = 0;
-    do {
-      aadGetUserVariable(iVar2 >> 0x10);
-      FONT_Print("  V%d=%d\n");
-      iVar3 = iVar3 + 1;
-      iVar2 = iVar3 * 0x10000;
-    } while (iVar3 * 0x10000 >> 0x10 < 0x10);
-  }
-  if ((gameTracker->debugFlags & 0x20000000U) != 0) {
-    aadGetVoiceStatus(local_38);
-    FONT_Print("$@R]");
-    FONT_Print("   id  pri  vol\n");
-    iVar3 = 0;
-    do {
-      pAVar1 = aadGetVoicePointer((int)(short)iVar3);
-      if ((local_38[(int)(short)iVar3] == '\0') || (pAVar1->handle == 0)) {
-        FONT_Print(" .");
-      }
-      else {
-        FONT_Print(" %d\r");
-        FONT_Print("   %d\r");
-        FONT_Print("        %d\r");
-        FONT_Print("             %d\r");
-      }
-      FONT_Print("\n");
-      iVar3 = iVar3 + 1;
-    } while (iVar3 * 0x10000 >> 0x10 < 8);
-    FONT_Print("$");
-    FONT_Print("\t\t\t\t\t   id  pri  vol\n");
-    iVar3 = 8;
-    do {
-      pAVar1 = aadGetVoicePointer((int)(short)iVar3);
-      if ((local_38[(int)(short)iVar3] == '\0') || (pAVar1->handle == 0)) {
-        FONT_Print("\t\t\t\t\t .");
-      }
-      else {
-        FONT_Print("\t\t\t\t\t %d\r");
-        FONT_Print("\t\t\t\t\t   %d\r");
-        FONT_Print("\t\t\t\t\t        %d\r");
-        FONT_Print("\t\t\t\t\t             %d\r");
-      }
-      FONT_Print("\n");
-      iVar3 = iVar3 + 1;
-    } while (iVar3 * 0x10000 >> 0x10 < 0x10);
-    FONT_Print("$");
-    FONT_Print("\t\t\t\t\t\t\t\t\t\t   id  pri  vol\n");
-    iVar3 = 0x10;
-    do {
-      pAVar1 = aadGetVoicePointer((int)(short)iVar3);
-      if ((local_38[(int)(short)iVar3] == '\0') || (pAVar1->handle == 0)) {
-        FONT_Print("\t\t\t\t\t\t\t\t\t\t .");
-      }
-      else {
-        FONT_Print("\t\t\t\t\t\t\t\t\t\t %d\r");
-        FONT_Print("\t\t\t\t\t\t\t\t\t\t   %d\r");
-        FONT_Print("\t\t\t\t\t\t\t\t\t\t        %d\r");
-        FONT_Print("\t\t\t\t\t\t\t\t\t\t             %d\r");
-      }
-      FONT_Print("\n");
-      iVar3 = iVar3 + 1;
-    } while (iVar3 * 0x10000 >> 0x10 < 0x18);
-    FONT_Print("$\n\n\n\n\n\n\n\n\n");
-    FONT_Print("   sl  chn  nte\n");
-    iVar3 = 0;
-    do {
-      pAVar1 = aadGetVoicePointer((int)(short)iVar3);
-      if ((local_38[(int)(short)iVar3] == '\0') || (pAVar1->handle != 0)) {
-        FONT_Print(" .");
-      }
-      else {
-        FONT_Print(" %d\r");
-        FONT_Print("   %x\r");
-        FONT_Print("        %d\r");
-        FONT_Print("             %d\r");
-      }
-      FONT_Print("\n");
-      iVar3 = iVar3 + 1;
-    } while (iVar3 * 0x10000 >> 0x10 < 8);
-    FONT_Print("$\n\n\n\n\n\n\n\n\n");
-    FONT_Print("\t\t\t\t\t   sl  chn  nte\n");
-    iVar3 = 8;
-    do {
-      pAVar1 = aadGetVoicePointer((int)(short)iVar3);
-      if ((local_38[(int)(short)iVar3] == '\0') || (pAVar1->handle != 0)) {
-        FONT_Print("\t\t\t\t\t .");
-      }
-      else {
-        FONT_Print("\t\t\t\t\t %d\r");
-        FONT_Print("\t\t\t\t\t   %x\r");
-        FONT_Print("\t\t\t\t\t        %d\r");
-        FONT_Print("\t\t\t\t\t             %d\r");
-      }
-      FONT_Print("\n");
-      iVar3 = iVar3 + 1;
-    } while (iVar3 * 0x10000 >> 0x10 < 0x10);
-    FONT_Print("$\n\n\n\n\n\n\n\n\n");
-    FONT_Print("\t\t\t\t\t\t\t\t\t\t   sl  chn  nte\n");
-    iVar3 = 0x10;
-    iVar2 = 0x100000;
-    do {
-      pAVar1 = aadGetVoicePointer(iVar2 >> 0x10);
-      if ((local_38[iVar2 >> 0x10] == '\0') || (pAVar1->handle != 0)) {
-        FONT_Print("\t\t\t\t\t\t\t\t\t\t .");
-      }
-      else {
-        FONT_Print("\t\t\t\t\t\t\t\t\t\t %d\r");
-        FONT_Print("\t\t\t\t\t\t\t\t\t\t   %x\r");
-        FONT_Print("\t\t\t\t\t\t\t\t\t\t        %d\r");
-        FONT_Print("\t\t\t\t\t\t\t\t\t\t             %d\r");
-      }
-      FONT_Print("\n");
-      iVar3 = iVar3 + 1;
-      iVar2 = iVar3 * 0x10000;
-    } while (iVar3 * 0x10000 >> 0x10 < 0x18);
-  }
   if ((gameTracker->debugFlags & 0x4000004U) != 0) {
     if ((gameTracker->debugFlags & 0x4000000U) == 0) {
-      fmt = "$@KG\n FRTE %d\n";
+      fmt = s___KG_FRTE__d_800cef28;
     }
     else {
-      FONT_Print("$@EF\n FRTE %d\n");
-      fmt = "Military Time %04d\n";
+      fmt = s___EF_FRTE__d_800cef18;
     }
     FONT_Print(fmt);
-    FONT_Print(" Focus XYZ(%d,%d,%d)\n");
+    FONT_Print(s__Focus_XYZ__d__d__d__800cef38);
     if ((gameTracker->debugFlags & 4U) != 0) {
-      if (gameTracker[1].gameData.asmData.drawBackFaces == 0) {
-        FONT_Print(" IDLE ZERO\n");
+      if (gameTracker->idleTime == 0) {
+        FONT_Print(s__IDLE_ZERO_800cef60);
       }
       else {
-        FONT_Print(" IDLE %d PCT\n");
+        FONT_Print(s__IDLE__d_PCT_800cef50);
       }
-      FONT_Print(" DRAW %d\n");
-      FONT_Print(" INS  %d");
-      FONT_Print("/%d\n");
-      FONT_Print(" Far Plane =%d\n");
-      FONT_Print(" Fog Near = %d Fog Far = %d\n");
-      FONT_Print("Military Time %04d\n");
+      FONT_Print(s__DRAW__d_800cef6c);
+      FONT_Print(s__INS__d_800cef78);
+      FONT_Print(&LAB_800cef84);
+      FONT_Print(s__Far_Plane___d_800cef8c);
+      FONT_Print(s__Fog_Near____d_Fog_Far____d_800cef9c);
+      FONT_Print(s_Military_Time__04d_800cefbc);
     }
     MEMPACK_ReportFreeMemory();
     SAVE_SizeOfFreeSpace();
-    FONT_Print(" FMEM %d  FreeSaveMem %d\n");
-    FONT_Print(" AREA DRM = %s\n");
-    FONT_Print(" CAM TILT %d DIST %d\n");
+    FONT_Print(s__FMEM__d_FreeSaveMem__d_800cefd0);
+    FONT_Print(s__AREA_DRM____s_800cefec);
+    FONT_Print(s__CAM_TILT__d_DIST__d_800ceffc);
   }
-  if ((gameTracker->debugFlags < 0) && (iVar3 = STREAM_IsCdBusy(local_20), iVar3 != 0)) {
-    FONT_Print("Loading From CD: In Queue(%d)\n");
+  if ((gameTracker->debugFlags < 0) && (iVar1 = STREAM_IsCdBusy(local_18), iVar1 != 0)) {
+    FONT_Print(s_Loading_From_CD__In_Queue__d__800cf014);
   }
   return;
 }
@@ -1649,16 +1539,18 @@ void DEBUG_DisplayStatus(GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_DrawShrinkCels(unsigned long **polyAddr /*$a0*/)
- // line 3304, offset 0x800144f0
+ // line 3363, offset 0x800140ec
 	/* begin block 1 */
-		// Start line: 6421
+		// Start line: 6539
 	/* end block 1 */
-	// End Line: 6422
+	// End Line: 6540
 
 	/* begin block 2 */
-		// Start line: 5595
+		// Start line: 5600
 	/* end block 2 */
-	// End Line: 5596
+	// End Line: 5601
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_DrawShrinkCels(ulong **polyAddr)
 
@@ -1671,18 +1563,23 @@ void DEBUG_DrawShrinkCels(ulong **polyAddr)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_ContinueGame()
- // line 3476, offset 0x800144f8
+ // line 3535, offset 0x800140f4
 	/* begin block 1 */
-		// Start line: 6949
+		// Start line: 7067
 	/* end block 1 */
-	// End Line: 6950
+	// End Line: 7068
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+	/* begin block 2 */
+		// Start line: 5774
+	/* end block 2 */
+	// End Line: 5775
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_ContinueGame(void)
 
 {
-  GAMELOOP_ModeStartRunning();
+  DAT_800d220c = DAT_800d220c | 0x40000000;
   return;
 }
 
@@ -1691,22 +1588,22 @@ void DEBUG_ContinueGame(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_ExitGame()
- // line 3496, offset 0x80014518
+ // line 3556, offset 0x8001410c
 	/* begin block 1 */
-		// Start line: 5807
+		// Start line: 5814
 	/* end block 1 */
-	// End Line: 5808
+	// End Line: 5815
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_ExitGame(void)
 
 {
   SOUND_StopAllSound();
-  SOUND_DumpAllSound();
-  gameTrackerX.levelDone = 3;
-  gameTrackerX.levelChange = 1;
-  gameTrackerX.gameMode = 0;
+  DAT_800d220c = DAT_800d220c | 1;
+  DAT_800d2238 = 2;
+  DAT_800d223a = 1;
+  DAT_800d223e = 0;
   return;
 }
 
@@ -1715,32 +1612,32 @@ void DEBUG_ExitGame(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_ReloadCurrentLevel()
- // line 3508, offset 0x80014550
+ // line 3567, offset 0x80014148
 	/* begin block 1 */
-		// Start line: 5834
+		// Start line: 5839
 	/* end block 1 */
-	// End Line: 5835
+	// End Line: 5840
 
 	/* begin block 2 */
-		// Start line: 5835
+		// Start line: 5840
 	/* end block 2 */
-	// End Line: 5836
+	// End Line: 5841
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_ReloadCurrentLevel(void)
 
 {
-  if (gameTrackerX.levelChange == 0) {
-    if ((gameTrackerX.streamFlags & 0x200000U) != 0) {
+  if (DAT_800d223a == 0) {
+    if ((DAT_800d2210 & 0x200000) != 0) {
       SAVE_SaveGame();
     }
-    gameTrackerX.gameFlags = gameTrackerX.gameFlags | 1;
+    DAT_800d220c = DAT_800d220c | 1;
     SOUND_ResetAllSound();
-    gameTrackerX.levelChange = 1;
-    gameTrackerX.levelDone = 1;
+    DAT_800d223a = 1;
+    DAT_800d2238 = 4;
   }
-  gameTrackerX.gameMode = 0;
+  DAT_800d223e = 0;
   return;
 }
 
@@ -1749,30 +1646,30 @@ void DEBUG_ReloadCurrentLevel(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_LevelSelectNew()
- // line 3528, offset 0x800145b0
+ // line 3587, offset 0x800141ac
 	/* begin block 1 */
-		// Start line: 3529
-		// Start offset: 0x800145B0
+		// Start line: 3588
+		// Start offset: 0x800141AC
 		// Variables:
 	// 		char *name; // $s3
 	// 		short number; // $s2
 	// 		char *p; // $s0
 	// 		char saveChar; // $s1
 	/* end block 1 */
-	// End offset: 0x80014688
-	// End Line: 3562
+	// End offset: 0x8001428C
+	// End Line: 3622
 
 	/* begin block 2 */
-		// Start line: 5875
+		// Start line: 5880
 	/* end block 2 */
-	// End Line: 5876
+	// End Line: 5881
 
 	/* begin block 3 */
-		// Start line: 5882
+		// Start line: 5887
 	/* end block 3 */
-	// End Line: 5883
+	// End Line: 5888
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_LevelSelectNew(void)
 
@@ -1790,146 +1687,26 @@ void DEBUG_LevelSelectNew(void)
   pcVar2 = name;
   do {
     if (cVar1 == '\0') {
-LAB_80014644:
-      if ((gameTrackerX.streamFlags & 0x200000U) != 0) {
+LAB_80014240:
+      if ((DAT_800d2210 & 0x200000) != 0) {
         SAVE_SaveGame();
       }
-      GAMELOOP_RequestLevelChange(name,number,&gameTrackerX);
+      GAMELOOP_RequestLevelChange(name,number,(GameTracker *)&gameTrackerX);
+      DAT_800d2238 = 4;
       if (cVar3 != '\0') {
         *pcVar2 = cVar3;
       }
-      gameTrackerX.gameMode = 0;
+      DAT_800d223e = 0;
       return;
     }
     if (((cVar1 == ' ') || (cVar1 == '\t')) || (cVar1 == '\n')) {
       cVar3 = *pcVar2;
       *pcVar2 = '\0';
-      goto LAB_80014644;
+      goto LAB_80014240;
     }
     pcVar2 = pcVar2 + 1;
     cVar1 = *pcVar2;
   } while( true );
-}
-
-
-
-// decompiled code
-// original method signature: 
-// void /*$ra*/ DEBUG_MusicSelect()
- // line 3566, offset 0x800146a8
-	/* begin block 1 */
-		// Start line: 3567
-		// Start offset: 0x800146A8
-		// Variables:
-	// 		char *name; // $s2
-	// 		char *p; // $s0
-	// 		char saveChar; // $s1
-	/* end block 1 */
-	// End offset: 0x80014760
-	// End Line: 3604
-
-	/* begin block 2 */
-		// Start line: 5971
-	/* end block 2 */
-	// End Line: 5972
-
-	/* begin block 3 */
-		// Start line: 5979
-	/* end block 3 */
-	// End Line: 5980
-
-/* WARNING: Unknown calling convention yet parameter storage is locked */
-
-void DEBUG_MusicSelect(void)
-
-{
-  char cVar1;
-  char *newMusicName;
-  char *pcVar2;
-  char cVar3;
-  
-  newMusicName = currentMenu[debugMenuChoice].text;
-  cVar3 = '\0';
-  cVar1 = *newMusicName;
-  pcVar2 = newMusicName;
-  do {
-    if (cVar1 == '\0') {
-LAB_80014734:
-      aadStopAllSlots();
-      aadCancelPauseSound();
-      SOUND_FreeDynamicMusic();
-      SOUND_LoadDynamicMusic(newMusicName);
-      if (cVar3 != '\0') {
-        *pcVar2 = cVar3;
-      }
-      gameTrackerX.gameMode = 0;
-      (gameTrackerX.playerInstance)->flags = (gameTrackerX.playerInstance)->flags & 0xfffffeff;
-      return;
-    }
-    if (((cVar1 == ' ') || (cVar1 == '\t')) || (cVar1 == '\n')) {
-      cVar3 = *pcVar2;
-      *pcVar2 = '\0';
-      goto LAB_80014734;
-    }
-    pcVar2 = pcVar2 + 1;
-    cVar1 = *pcVar2;
-  } while( true );
-}
-
-
-
-// decompiled code
-// original method signature: 
-// void /*$ra*/ DEBUG_PrintSramStatus()
- // line 3648, offset 0x80014790
-	/* begin block 1 */
-		// Start line: 3649
-		// Start offset: 0x80014790
-		// Variables:
-	// 		struct AadNewSramBlockDesc *sramDescTbl; // $s4
-	// 		struct AadNewSramBlockDesc *sramDesc; // $s0
-	// 		unsigned short largestFree; // $s1
-	// 		unsigned long numWaves; // $s2
-	// 		unsigned long totalFree; // $s3
-	/* end block 1 */
-	// End offset: 0x80014894
-	// End Line: 3684
-
-	/* begin block 2 */
-		// Start line: 6154
-	/* end block 2 */
-	// End Line: 6155
-
-/* WARNING: Unknown calling convention yet parameter storage is locked */
-
-void DEBUG_PrintSramStatus(void)
-
-{
-  ushort *puVar1;
-  ushort uVar2;
-  
-  printf("\nSound RAM usage...\n\n");
-  puVar1 = (ushort *)((uint)bRam00001b56 * 8 + 0x1754);
-  uVar2 = 0;
-  while (puVar1 != (ushort *)0x0) {
-    if ((*puVar1 & 0x4000) == 0) {
-      printf("%05lx-%05lx FREE     Size:%ld\n");
-      if (uVar2 < puVar1[2]) {
-        uVar2 = puVar1[2];
-      }
-    }
-    else {
-      printf("%05lx-%05lx WaveID:%d Size:%ld\n");
-    }
-    if (*(char *)((int)puVar1 + 7) < '\0') {
-      puVar1 = (ushort *)0x0;
-    }
-    else {
-      puVar1 = (ushort *)((uint)*(byte *)((int)puVar1 + 7) * 8 + 0x1754);
-    }
-  }
-  printf("\nTotal Wave Count:%ld  Free Sram:%ld  Largest Free Sram Block:%ld\n");
-  return;
 }
 
 
@@ -1937,23 +1714,23 @@ void DEBUG_PrintSramStatus(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_SetViewVram()
- // line 3690, offset 0x800148cc
+ // line 3739, offset 0x800142ac
 	/* begin block 1 */
-		// Start line: 6252
+		// Start line: 7473
 	/* end block 1 */
-	// End Line: 6253
+	// End Line: 7474
 
 	/* begin block 2 */
-		// Start line: 6253
+		// Start line: 6088
 	/* end block 2 */
-	// End Line: 6254
+	// End Line: 6089
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_SetViewVram(void)
 
 {
-  gameTrackerX.gameMode = 7;
+  DAT_800d223e = 7;
   return;
 }
 
@@ -1962,17 +1739,19 @@ void DEBUG_SetViewVram(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_EndViewVram(struct GameTracker *gameTracker /*$a0*/)
- // line 3695, offset 0x800148dc
+ // line 3744, offset 0x800142bc
 	/* begin block 1 */
-		// Start line: 6262
+		// Start line: 6097
 	/* end block 1 */
-	// End Line: 6263
+	// End Line: 6098
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_EndViewVram(GameTracker *gameTracker)
 
 {
-  SetDefDispEnv((undefined2 *)&disp,0,0,0x200,0xf0);
-  SetDefDispEnv((undefined2 *)&DISPENV_800d1e64,0,0x100,0x200,0xf0);
+  SetDefDispEnv(disp,0,0,0x200,0xf0);
+  SetDefDispEnv(disp + 1,0,0x100,0x200,0xf0);
   return;
 }
 
@@ -1981,40 +1760,42 @@ void DEBUG_EndViewVram(GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_ViewVram(struct GameTracker *gameTracker /*$s1*/)
- // line 3701, offset 0x80014934
+ // line 3750, offset 0x80014314
 	/* begin block 1 */
-		// Start line: 3702
-		// Start offset: 0x80014934
+		// Start line: 3751
+		// Start offset: 0x80014314
 		// Variables:
 	// 		long *controlCommand; // $a0
-	// 		static int xPos; // offset 0x11f0
-	// 		static int yPos; // offset 0x11f4
+	// 		static int xPos; // offset 0xe48
+	// 		static int yPos; // offset 0xe4c
 	/* end block 1 */
-	// End offset: 0x800149F4
-	// End Line: 3728
+	// End offset: 0x800143D4
+	// End Line: 3777
 
 	/* begin block 2 */
-		// Start line: 6276
+		// Start line: 6111
 	/* end block 2 */
-	// End Line: 6277
+	// End Line: 6112
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_ViewVram(GameTracker *gameTracker)
 
 {
-  if (((gameTracker->controlCommand[1] & 1U) != 0) && (-1 < DAT_800cdd4c)) {
-    DAT_800cdd4c = DAT_800cdd4c + -0x20;
+  if (((gameTracker->controlCommand[1] & 1U) != 0) && (-1 < DAT_800cf10c)) {
+    DAT_800cf10c = DAT_800cf10c + -0x20;
   }
-  if (((gameTracker->controlCommand[1] & 2U) != 0) && (DAT_800cdd4c < 0x110)) {
-    DAT_800cdd4c = DAT_800cdd4c + 0x20;
+  if (((gameTracker->controlCommand[1] & 2U) != 0) && (DAT_800cf10c < 0x110)) {
+    DAT_800cf10c = DAT_800cf10c + 0x20;
   }
-  if (((gameTracker->controlCommand[1] & 4U) != 0) && (-1 < DAT_800cdd48)) {
-    DAT_800cdd48 = DAT_800cdd48 + -0x20;
+  if (((gameTracker->controlCommand[1] & 4U) != 0) && (-1 < DAT_800cf108)) {
+    DAT_800cf108 = DAT_800cf108 + -0x20;
   }
-  if (((gameTracker->controlCommand[1] & 8U) != 0) && (DAT_800cdd48 < 0x200)) {
-    DAT_800cdd48 = DAT_800cdd48 + 0x20;
+  if (((gameTracker->controlCommand[1] & 8U) != 0) && (DAT_800cf108 < 0x200)) {
+    DAT_800cf108 = DAT_800cf108 + 0x20;
   }
-  SetDefDispEnv((undefined2 *)&disp,(short)DAT_800cdd48,(short)DAT_800cdd4c,0x200,0xf0);
-  SetDefDispEnv((undefined2 *)&DISPENV_800d1e64,(short)DAT_800cdd48,(short)DAT_800cdd4c,0x200,0xf0);
+  SetDefDispEnv(disp,DAT_800cf108,DAT_800cf10c,0x200,0xf0);
+  SetDefDispEnv(disp + 1,DAT_800cf108,DAT_800cf10c,0x200,0xf0);
   gameTracker->playerInstance->flags = gameTracker->playerInstance->flags | 0x100;
   return;
 }
@@ -2024,16 +1805,18 @@ void DEBUG_ViewVram(GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_CaptureScreen(struct GameTracker *gameTracker /*$a0*/)
- // line 3738, offset 0x80014a5c
+ // line 3787, offset 0x8001443c
 	/* begin block 1 */
-		// Start line: 6353
+		// Start line: 6188
 	/* end block 1 */
-	// End Line: 6354
+	// End Line: 6189
 
 	/* begin block 2 */
-		// Start line: 6397
+		// Start line: 6232
 	/* end block 2 */
-	// End Line: 6398
+	// End Line: 6233
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_CaptureScreen(GameTracker *gameTracker)
 
@@ -2046,34 +1829,34 @@ void DEBUG_CaptureScreen(GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_PageFlip()
- // line 3794, offset 0x80014a64
+ // line 3844, offset 0x80014444
 	/* begin block 1 */
-		// Start line: 3796
-		// Start offset: 0x80014A70
+		// Start line: 3846
+		// Start offset: 0x80014450
 		// Variables:
 	// 		struct POLY_F4 poly; // stack offset -32
 	// 		unsigned long **drawot; // $s0
 	/* end block 1 */
-	// End offset: 0x80014A98
-	// End Line: 3804
+	// End offset: 0x80014478
+	// End Line: 3854
 
 	/* begin block 2 */
-		// Start line: 7581
+		// Start line: 7681
 	/* end block 2 */
-	// End Line: 7582
+	// End Line: 7682
 
 	/* begin block 3 */
-		// Start line: 6459
+		// Start line: 6295
 	/* end block 3 */
-	// End Line: 6460
+	// End Line: 6296
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_PageFlip(void)
 
 {
-  long lVar1;
-  int iVar2;
+  u_long *ot;
+  int iVar1;
   undefined auStack32 [3];
   undefined local_1d;
   undefined local_1c;
@@ -2090,19 +1873,19 @@ void DEBUG_PageFlip(void)
   short local_a;
   
   do {
-    iVar2 = CheckVolatile(gameTrackerX.drawTimerReturn);
-  } while (iVar2 != 0);
+    iVar1 = CheckVolatile(DAT_800d21e8);
+  } while (iVar1 != 0);
   do {
-    iVar2 = CheckVolatile(gameTrackerX.reqDisp);
-  } while (iVar2 != 0);
+    iVar1 = CheckVolatile(DAT_800d21e4);
+  } while (iVar1 != 0);
   DrawSync(0);
-  DrawSyncCallback(0);
-  VSyncCallback(0);
+  DrawSyncCallback((func *)0x0);
+  VSyncCallback((f *)0x0);
   ResetPrimPool();
-  lVar1 = gameTrackerX.defVVRemoveDist;
-  gameTrackerX.drawPage = 0;
-  PutDrawEnv((undefined4 *)&draw);
-  ClearOTagR((undefined4 *)lVar1,0xc00);
+  ot = DAT_800d22a4;
+  DAT_800d20fc = 0;
+  PutDrawEnv(draw);
+  ClearOTagR(ot,0xc00);
   DrawSync(0);
   local_1d = 5;
   local_19 = 0x28;
@@ -2115,13 +1898,13 @@ void DEBUG_PageFlip(void)
   local_12 = 0xe;
   local_10 = 0;
   local_c = 0x1ff;
-  local_e = (short)fontTracker.font_ypos + -2;
+  local_e = (short)DAT_800d1cfc + -2;
   local_a = local_e;
-  DrawPrim((int)auStack32);
+  DrawPrim(auStack32);
   FONT_Flush();
-  DrawOTag((undefined4 *)lVar1);
+  DrawOTag(ot);
   DrawSync(0);
-  PutDispEnv((ushort *)gameTrackerX.disp);
+  PutDispEnv(DAT_800d21f0);
   return;
 }
 
@@ -2130,20 +1913,22 @@ void DEBUG_PageFlip(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_FatalError(char *fmt /*stack 0*/)
- // line 3833, offset 0x80014b70
+ // line 3883, offset 0x80014550
 	/* begin block 1 */
-		// Start line: 3834
-		// Start offset: 0x80014B70
+		// Start line: 3884
+		// Start offset: 0x80014550
 		// Variables:
 	// 		char msg[256]; // stack offset -264
 	/* end block 1 */
-	// End offset: 0x80014B70
-	// End Line: 3834
+	// End offset: 0x80014550
+	// End Line: 3884
 
 	/* begin block 2 */
-		// Start line: 7662
+		// Start line: 7762
 	/* end block 2 */
-	// End Line: 7663
+	// End Line: 7763
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_FatalError(char *fmt)
 
@@ -2153,7 +1938,6 @@ void DEBUG_FatalError(char *fmt)
   
   FONT_Flush();
   vsprintf(acStack264,fmt,local_res4);
-  GXFilePrint(acStack264);
   FONT_Print(acStack264);
   DEBUG_PageFlip();
   trap(0x407);
@@ -2165,16 +1949,18 @@ void DEBUG_FatalError(char *fmt)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_ProcessSecondController(struct GameTracker *gameTracker /*$a0*/)
- // line 4190, offset 0x80014bcc
+ // line 4240, offset 0x800145a4
 	/* begin block 1 */
-		// Start line: 7247
+		// Start line: 7083
 	/* end block 1 */
-	// End Line: 7248
+	// End Line: 7084
 
 	/* begin block 2 */
-		// Start line: 7333
+		// Start line: 7169
 	/* end block 2 */
-	// End Line: 7334
+	// End Line: 7170
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_ProcessSecondController(GameTracker *gameTracker)
 
@@ -2187,39 +1973,40 @@ void DEBUG_ProcessSecondController(GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DEBUG_ProcessCheat(struct GameTracker *gameTracker /*$s3*/)
- // line 4281, offset 0x80014bd4
+ // line 4331, offset 0x800145ac
 	/* begin block 1 */
-		// Start line: 4282
-		// Start offset: 0x80014BD4
+		// Start line: 4332
+		// Start offset: 0x800145AC
 		// Variables:
 	// 		long angleRelCamera; // $s2
 
 		/* begin block 1.1 */
-			// Start line: 4308
-			// Start offset: 0x80014CA8
+			// Start line: 4358
+			// Start offset: 0x80014680
 			// Variables:
 		// 		struct SVECTOR v; // stack offset -80
 		// 		struct VECTOR dv; // stack offset -72
 		// 		struct MATRIX rotate_mat; // stack offset -56
 		/* end block 1.1 */
-		// End offset: 0x80014D2C
-		// End Line: 4318
+		// End offset: 0x80014704
+		// End Line: 4368
 	/* end block 1 */
-	// End offset: 0x80014D2C
-	// End Line: 4319
+	// End offset: 0x80014704
+	// End Line: 4369
 
 	/* begin block 2 */
-		// Start line: 7429
+		// Start line: 7265
 	/* end block 2 */
-	// End Line: 7430
+	// End Line: 7266
+
+/* File: C:\kain2\game\DEBUG.C */
 
 void DEBUG_ProcessCheat(GameTracker *gameTracker)
 
 {
   uint uVar1;
   int iVar2;
-  undefined auStack80 [2];
-  undefined2 local_4e;
+  SVECTOR SStack80;
   short local_48 [2];
   short local_44;
   MATRIX MStack56;
@@ -2267,12 +2054,12 @@ void DEBUG_ProcessCheat(GameTracker *gameTracker)
     }
   }
   if (iVar2 != 0) {
-    memset(auStack80,0,8);
-    memset(local_48,0,0x10);
-    local_4e = 0xff00;
-    MATH3D_SetUnityMatrix(&MStack56);
-    RotMatrixZ(theCamera.core.rotation.z + iVar2,(short *)&MStack56);
-    ApplyMatrix(&MStack56,auStack80,local_48);
+    memset();
+    memset();
+    SStack80.vy = -0x100;
+    MATH3D_SetUnityMatrix((char)&MStack56);
+    RotMatrixZ(DAT_800d1050 + iVar2,&MStack56);
+    ApplyMatrix(&MStack56,&SStack80,(VECTOR *)local_48);
     (gameTracker->playerInstance->position).x =
          (gameTracker->playerInstance->position).x + local_48[0];
     (gameTracker->playerInstance->position).y = (gameTracker->playerInstance->position).y + local_44

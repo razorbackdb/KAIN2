@@ -5,21 +5,21 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ UNDERWORLD_StartProcess()
- // line 72, offset 0x800af1f8
+ // line 66, offset 0x800b34dc
 	/* begin block 1 */
-		// Start line: 144
+		// Start line: 132
 	/* end block 1 */
-	// End Line: 145
+	// End Line: 133
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\UNDRWRLD.C */
 
 void UNDERWORLD_StartProcess(void)
 
 {
-  INSTANCE_Post(gameTrackerX.playerInstance,0x40001,0);
-  STREAM_DumpAllLevels((gameTrackerX.playerInstance)->currentStreamUnitID);
+  INSTANCE_Post(DAT_800d20f8,0x40001,0);
+  STREAM_DumpAllLevels(DAT_800d20f8->currentStreamUnitID,1);
   UNDERWORLD_InitDisplayProcess();
-  UNDERWORLD_LoadLevel("under1",&gameTrackerX);
+  UNDERWORLD_LoadLevel(s_under1_800d0b8c,(GameTracker *)&gameTrackerX);
   if (ScreenMorphArray != (UW_ScreenXY *)0x0) {
     MEMPACK_Free((char *)ScreenMorphArray);
     ScreenMorphArray = (UW_ScreenXY *)0x0;
@@ -32,10 +32,10 @@ void UNDERWORLD_StartProcess(void)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ UNDERWORLD_RotateScreenStep(long time /*$s1*/)
- // line 92, offset 0x800af270
+ // line 86, offset 0x800b3554
 	/* begin block 1 */
-		// Start line: 93
-		// Start offset: 0x800AF270
+		// Start line: 87
+		// Start offset: 0x800B3554
 		// Variables:
 	// 		int row; // $t2
 	// 		int col; // $a3
@@ -45,33 +45,35 @@ void UNDERWORLD_StartProcess(void)
 	// 		int hy; // $v0
 
 		/* begin block 1.1 */
-			// Start line: 108
-			// Start offset: 0x800AF2D0
+			// Start line: 102
+			// Start offset: 0x800B35B4
 			// Variables:
 		// 		struct UW_ScreenXY *p; // $a0
 		// 		int scaleY; // $t0
 		/* end block 1.1 */
-		// End offset: 0x800AF2D0
-		// End Line: 108
+		// End offset: 0x800B35B4
+		// End Line: 102
 	/* end block 1 */
-	// End offset: 0x800AF3C4
-	// End Line: 131
+	// End offset: 0x800B36A8
+	// End Line: 125
 
 	/* begin block 2 */
-		// Start line: 189
+		// Start line: 177
 	/* end block 2 */
-	// End Line: 190
+	// End Line: 178
 
 	/* begin block 3 */
-		// Start line: 195
+		// Start line: 183
 	/* end block 3 */
-	// End Line: 196
+	// End Line: 184
+
+/* File: C:\kain2\game\UNDRWRLD.C */
 
 long UNDERWORLD_RotateScreenStep(long time)
 
 {
   UW_ScreenXY *pUVar1;
-  ulong uVar2;
+  int iVar2;
   long lVar3;
   int iVar4;
   int iVar5;
@@ -82,8 +84,8 @@ long UNDERWORLD_RotateScreenStep(long time)
   int iVar10;
   int iVar11;
   
-  uVar2 = gameTrackerX.vblCount;
-  if ((gameTrackerX.vblCount != time) && (UW_scalex != 0)) {
+  iVar2 = DAT_800d2204;
+  if ((DAT_800d2204 != time) && (UW_scalex != 0)) {
     iVar4 = rsin(UW_angle);
     iVar5 = rcos(UW_angle);
     lVar3 = UW_scalex;
@@ -110,10 +112,8 @@ long UNDERWORLD_RotateScreenStep(long time)
     if (UW_scalex < 0) {
       UW_scalex = 0;
     }
-    UNDERWORLD_DisplayFrame
-              ((long *)(gameTrackerX.primPool)->nextPrim,
-               (gameTrackerX.gameData.asmData.dispPage ^ 1U) << 8);
-    time = uVar2;
+    UNDERWORLD_DisplayFrame(*(long **)(DAT_800d210c + 4),(DAT_800d20d0 ^ 1) << 8);
+    time = iVar2;
   }
   return time;
 }
@@ -123,25 +123,27 @@ long UNDERWORLD_RotateScreenStep(long time)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ UNDERWORLD_DoUV(unsigned char *uv /*$a0*/, struct UW_ScreenXY *p0 /*$a1*/, int tx /*$a2*/)
- // line 167, offset 0x800af3dc
+ // line 161, offset 0x800b36c0
 	/* begin block 1 */
-		// Start line: 169
-		// Start offset: 0x800AF3DC
+		// Start line: 163
+		// Start offset: 0x800B36C0
 		// Variables:
 	// 		int u; // $v1
 	/* end block 1 */
-	// End offset: 0x800AF420
-	// End Line: 179
+	// End offset: 0x800B3704
+	// End Line: 173
 
 	/* begin block 2 */
-		// Start line: 374
+		// Start line: 362
 	/* end block 2 */
-	// End Line: 375
+	// End Line: 363
 
 	/* begin block 3 */
-		// Start line: 375
+		// Start line: 363
 	/* end block 3 */
-	// End Line: 376
+	// End Line: 364
+
+/* File: C:\kain2\game\UNDRWRLD.C */
 
 void UNDERWORLD_DoUV(uchar *uv,UW_ScreenXY *p0,int tx)
 
@@ -166,45 +168,48 @@ void UNDERWORLD_DoUV(uchar *uv,UW_ScreenXY *p0,int tx)
 // decompiled code
 // original method signature: 
 // struct POLY_GT3 * /*$ra*/ UNDERWORLD_Poly(struct POLY_GT3 *last /*$s4*/, struct UW_ScreenXY *p0 /*$a1*/, struct UW_ScreenXY *p1 /*$s3*/, struct UW_ScreenXY *p2 /*$s2*/, int drawY /*stack 16*/)
- // line 181, offset 0x800af428
+ // line 175, offset 0x800b370c
 	/* begin block 1 */
-		// Start line: 182
-		// Start offset: 0x800AF428
+		// Start line: 176
+		// Start offset: 0x800B370C
 		// Variables:
 	// 		int tx; // $s0
 	// 		struct POLY_GT3 *poly; // $s1
 	// 		int col; // $v1
 	/* end block 1 */
-	// End offset: 0x800AF4B0
-	// End Line: 187
+	// End offset: 0x800B3794
+	// End Line: 181
 
 	/* begin block 2 */
-		// Start line: 402
+		// Start line: 390
 	/* end block 2 */
-	// End Line: 403
+	// End Line: 391
+
+/* File: C:\kain2\game\UNDRWRLD.C */
 
 POLY_GT3 * UNDERWORLD_Poly(POLY_GT3 *last,UW_ScreenXY *p0,UW_ScreenXY *p1,UW_ScreenXY *p2,int drawY)
 
 {
   ushort uVar1;
-  int iVar2;
+  u_short uVar2;
+  int iVar3;
   uint tx;
-  POLY_GT3 *pPVar3;
+  POLY_GT3 *pPVar4;
   
   uVar1 = p0->sx;
-  pPVar3 = last + 1;
+  pPVar4 = last + 1;
   if ((int)p0->sx < (int)p1->sx) {
-    iVar2 = (int)p2->sx << 0x10;
-    if ((int)p2->sx <= (int)p0->sx) goto LAB_800af4ac;
+    iVar3 = (int)p2->sx << 0x10;
+    if ((int)p2->sx <= (int)p0->sx) goto LAB_800b3790;
   }
   else {
-    iVar2 = (int)p2->sx << 0x10;
+    iVar3 = (int)p2->sx << 0x10;
     uVar1 = p1->sx;
-    if ((int)p2->sx <= (int)p1->sx) goto LAB_800af4ac;
+    if ((int)p2->sx <= (int)p1->sx) goto LAB_800b3790;
   }
-  iVar2 = (uint)uVar1 << 0x10;
-LAB_800af4ac:
-  tx = iVar2 >> 0x10 & 0xffffffc0;
+  iVar3 = (uint)uVar1 << 0x10;
+LAB_800b3790:
+  tx = iVar3 >> 0x10 & 0xffffffc0;
   *(undefined *)((int)&last[1].tag + 3) = 9;
   last[1].code = '4';
   *(undefined4 *)&last[1].x0 = *(undefined4 *)&p0->dx;
@@ -213,8 +218,8 @@ LAB_800af4ac:
   UNDERWORLD_DoUV(&last[1].u0,p0,tx);
   UNDERWORLD_DoUV(&last[1].u1,p1,tx);
   UNDERWORLD_DoUV(&last[1].u2,p2,tx);
-  tx = GetTPage(2,1,tx,drawY);
-  last[1].tpage = (ushort)tx;
+  uVar2 = GetTPage(2,1,tx,drawY);
+  last[1].tpage = uVar2;
   last[1].r0 = '\x10';
   last[1].g0 = '\x10';
   last[1].b0 = '\x10';
@@ -224,9 +229,9 @@ LAB_800af4ac:
   last[1].r2 = '\x10';
   last[1].g2 = '\x10';
   last[1].b2 = '\x10';
-  pPVar3->tag = pPVar3->tag & 0xff000000 | (uint)last & 0xffffff;
+  pPVar4->tag = pPVar4->tag & 0xff000000 | (uint)last & 0xffffff;
   last[1].code = last[1].code | 2;
-  return pPVar3;
+  return pPVar4;
 }
 
 
@@ -234,10 +239,10 @@ LAB_800af4ac:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ UNDERWORLD_DisplayFrame(long *primStart /*$a0*/, long drawY /*$s7*/)
- // line 228, offset 0x800af5a0
+ // line 222, offset 0x800b3884
 	/* begin block 1 */
-		// Start line: 229
-		// Start offset: 0x800AF5A0
+		// Start line: 223
+		// Start offset: 0x800B3884
 		// Variables:
 	// 		long row; // $s5
 	// 		long col; // $s0
@@ -249,13 +254,15 @@ LAB_800af4ac:
 	// 		struct POLY_GT3 *poly; // $a1
 	// 		struct POLY_GT3 *terminator; // $fp
 	/* end block 1 */
-	// End offset: 0x800AF6AC
-	// End Line: 273
+	// End offset: 0x800B3990
+	// End Line: 267
 
 	/* begin block 2 */
-		// Start line: 538
+		// Start line: 526
 	/* end block 2 */
-	// End Line: 539
+	// End Line: 527
+
+/* File: C:\kain2\game\UNDRWRLD.C */
 
 void UNDERWORLD_DisplayFrame(long *primStart,long drawY)
 
@@ -279,10 +286,10 @@ void UNDERWORLD_DisplayFrame(long *primStart,long drawY)
     iVar2 = 0;
     iVar1 = iVar4;
     do {
-      p0 = ScreenMorphArray + iVar1;
-      p1 = ScreenMorphArray + iVar1 + 1;
-      p2 = ScreenMorphArray + iVar1 + 4;
-      p2_00 = ScreenMorphArray + iVar1 + 3;
+      p0 = (UW_ScreenXY *)(ScreenMorphArray + iVar1);
+      p1 = (UW_ScreenXY *)(ScreenMorphArray + iVar1 + 1);
+      p2 = (UW_ScreenXY *)(ScreenMorphArray + iVar1 + 4);
+      p2_00 = (UW_ScreenXY *)(ScreenMorphArray + iVar1 + 3);
       if (((iVar3 < 1) && (1 < iVar2)) || ((1 < iVar3 && (iVar2 < 1)))) {
         last = UNDERWORLD_Poly((POLY_GT3 *)primStart,p0,p1,p2_00,drawY);
         p0 = p1;
@@ -298,7 +305,7 @@ void UNDERWORLD_DisplayFrame(long *primStart,long drawY)
     iVar4 = iVar4 + 3;
   } while (iVar3 < 2);
   *puVar5 = *puVar5 | 0xffffff;
-  DrawOTag(primStart);
+  DrawOTag((u_long *)primStart);
   return;
 }
 
@@ -307,44 +314,41 @@ void UNDERWORLD_DisplayFrame(long *primStart,long drawY)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ UNDERWORLD_SetupSource()
- // line 278, offset 0x800af6f8
+ // line 272, offset 0x800b39dc
 	/* begin block 1 */
-		// Start line: 279
-		// Start offset: 0x800AF6F8
+		// Start line: 273
+		// Start offset: 0x800B39DC
 		// Variables:
 	// 		struct RECT rect; // stack offset -32
 	// 		struct DR_STP stp; // stack offset -24
 	/* end block 1 */
-	// End offset: 0x800AF6F8
-	// End Line: 279
+	// End offset: 0x800B39DC
+	// End Line: 273
 
 	/* begin block 2 */
-		// Start line: 703
+		// Start line: 691
 	/* end block 2 */
-	// End Line: 704
+	// End Line: 692
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\UNDRWRLD.C */
 
 void UNDERWORLD_SetupSource(void)
 
 {
-  undefined2 local_20;
-  undefined2 local_1e;
-  undefined2 local_1c;
-  undefined2 local_1a;
-  undefined auStack24 [16];
+  RECT local_20;
+  DR_STP DStack24;
   
-  SetDrawStp((int)auStack24,1);
-  DrawPrim((int)auStack24);
-  local_1c = 0x200;
-  local_20 = 0;
-  local_1a = 0xf0;
-  local_1e = (undefined2)(gameTrackerX.gameData.asmData.dispPage << 8);
-  MoveImage((undefined4 *)&local_20,0,(gameTrackerX.gameData.asmData.dispPage ^ 1U) << 8);
-  SetDrawStp((int)auStack24,0);
-  DrawPrim((int)auStack24);
+  SetDrawStp(&DStack24,1);
+  DrawPrim(&DStack24);
+  local_20.w = 0x200;
+  local_20.x = 0;
+  local_20.h = 0xf0;
+  local_20.y = (short)(DAT_800d20d0 << 8);
+  MoveImage(&local_20,0,(DAT_800d20d0 ^ 1) << 8);
+  SetDrawStp(&DStack24,0);
+  DrawPrim(&DStack24);
   DrawSync(0);
-  PutDrawEnv((undefined4 *)(&draw + gameTrackerX.gameData.asmData.dispPage));
+  PutDrawEnv(draw + DAT_800d20d0);
   return;
 }
 
@@ -353,32 +357,32 @@ void UNDERWORLD_SetupSource(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ UNDERWORLD_InitDisplayProcess()
- // line 301, offset 0x800af7a8
+ // line 295, offset 0x800b3a8c
 	/* begin block 1 */
-		// Start line: 303
-		// Start offset: 0x800AF7B0
+		// Start line: 297
+		// Start offset: 0x800B3A94
 		// Variables:
 	// 		int row; // $t0
 	// 		int col; // $a1
 
 		/* begin block 1.1 */
-			// Start line: 312
-			// Start offset: 0x800AF800
+			// Start line: 306
+			// Start offset: 0x800B3AE4
 			// Variables:
 		// 		struct UW_ScreenXY *p; // $v0
 		/* end block 1.1 */
-		// End offset: 0x800AF800
-		// End Line: 312
+		// End offset: 0x800B3AE4
+		// End Line: 306
 	/* end block 1 */
-	// End offset: 0x800AF834
-	// End Line: 320
+	// End offset: 0x800B3B18
+	// End Line: 314
 
 	/* begin block 2 */
-		// Start line: 757
+		// Start line: 745
 	/* end block 2 */
-	// End Line: 758
+	// End Line: 746
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\UNDRWRLD.C */
 
 void UNDERWORLD_InitDisplayProcess(void)
 
@@ -394,9 +398,9 @@ void UNDERWORLD_InitDisplayProcess(void)
   
   do {
     do {
-      iVar1 = CheckVolatile(gameTrackerX.drawTimerReturn);
+      iVar1 = CheckVolatile(DAT_800d21e8);
     } while (iVar1 != 0);
-    iVar1 = CheckVolatile(gameTrackerX.reqDisp);
+    iVar1 = CheckVolatile(DAT_800d21e4);
   } while (iVar1 != 0);
   pUVar2 = (UW_ScreenXY *)MEMPACK_Malloc(0x48,'\x18');
   iVar8 = 0;
@@ -432,10 +436,10 @@ void UNDERWORLD_InitDisplayProcess(void)
 // decompiled code
 // original method signature: 
 // struct _StreamUnit * /*$ra*/ UNDERWORLD_LoadLevel(char *baseAreaName /*$s0*/, struct GameTracker *gameTracker /*$s4*/)
- // line 330, offset 0x800af868
+ // line 324, offset 0x800b3b4c
 	/* begin block 1 */
-		// Start line: 331
-		// Start offset: 0x800AF868
+		// Start line: 325
+		// Start offset: 0x800B3B4C
 		// Variables:
 	// 		struct _SVector offset; // stack offset -72
 	// 		struct _StreamUnit *streamUnit; // $s3
@@ -443,8 +447,8 @@ void UNDERWORLD_InitDisplayProcess(void)
 	// 		long UW_time; // $s2
 
 		/* begin block 1.1 */
-			// Start line: 357
-			// Start offset: 0x800AF91C
+			// Start line: 351
+			// Start offset: 0x800B3C00
 			// Variables:
 		// 		short _x1; // $v1
 		// 		short _y1; // $a0
@@ -452,36 +456,37 @@ void UNDERWORLD_InitDisplayProcess(void)
 		// 		struct _SVector *_v0; // $v0
 		// 		struct _Position *_v1; // $v0
 		/* end block 1.1 */
-		// End offset: 0x800AF91C
-		// End Line: 357
+		// End offset: 0x800B3C00
+		// End Line: 351
 
 		/* begin block 1.2 */
-			// Start line: 406
-			// Start offset: 0x800AFAA8
+			// Start line: 400
+			// Start offset: 0x800B3D8C
 			// Variables:
 		// 		struct POLY_F4 poly; // stack offset -64
 		// 		struct DR_TPAGE tpage; // stack offset -40
 		/* end block 1.2 */
-		// End offset: 0x800AFB34
-		// End Line: 426
+		// End offset: 0x800B3E18
+		// End Line: 420
 	/* end block 1 */
-	// End offset: 0x800AFB34
-	// End Line: 439
+	// End offset: 0x800B3E18
+	// End Line: 433
 
 	/* begin block 2 */
-		// Start line: 833
+		// Start line: 821
 	/* end block 2 */
-	// End Line: 834
+	// End Line: 822
+
+/* File: C:\kain2\game\UNDRWRLD.C */
 
 _StreamUnit * UNDERWORLD_LoadLevel(char *baseAreaName,GameTracker *gameTracker)
 
 {
   int iVar1;
-  ulong time;
+  long time;
   _StreamUnit *streamUnit;
-  short *psVar2;
+  _BSPNode *p_Var2;
   int iVar3;
-  long time_00;
   Level *pLVar4;
   char *pcVar5;
   _MultiSignal *p_Var6;
@@ -505,7 +510,7 @@ _StreamUnit * UNDERWORLD_LoadLevel(char *baseAreaName,GameTracker *gameTracker)
   undefined local_25;
   undefined4 local_24;
   
-  time = gameTrackerX.vblCount;
+  time = DAT_800d2204;
   while (iVar1 = STREAM_PollLoadQueue(), iVar1 != 0) {
     time = UNDERWORLD_RotateScreenStep(time);
   }
@@ -518,18 +523,18 @@ _StreamUnit * UNDERWORLD_LoadLevel(char *baseAreaName,GameTracker *gameTracker)
   if (p_Var6 != (_MultiSignal *)0x0) {
     SIGNAL_HandleSignal(gameTracker->playerInstance,p_Var6->signalList,0);
   }
-  STREAM_LoadMainVram(gameTracker,"under1",streamUnit);
+  STREAM_LoadMainVram(gameTracker,s_under1_800d0b8c,streamUnit);
   INSTANCE_Post(gameTracker->playerInstance,0x40001,streamUnit->level->streamUnitID);
-  psVar2 = (short *)streamUnit->level->terrain->signals->numSignals;
-  local_48.x = -*psVar2;
-  local_48.y = -psVar2[1];
-  local_48.z = -psVar2[2];
+  p_Var2 = streamUnit->level->terrain->BSPTreeArray->bspRoot;
+  local_48.x = -(p_Var2->sphere).position.x;
+  local_48.y = -(p_Var2->sphere).position.y;
+  local_48.z = -(p_Var2->sphere).position.z;
   pLVar4 = streamUnit->level;
   iVar1 = 0;
   if (0 < pLVar4->numIntros) {
     iVar7 = 0;
     do {
-      iVar3 = strcmpi(pLVar4->introList->name + iVar7,"raziel");
+      iVar3 = strcmpi(pLVar4->introList->name + iVar7,s_raziel_800d0b94);
       if (iVar3 == 0) {
         pcVar5 = streamUnit->level->introList->name + iVar7;
         *(uint *)(pcVar5 + 0x2c) = *(uint *)(pcVar5 + 0x2c) | 8;
@@ -540,15 +545,15 @@ _StreamUnit * UNDERWORLD_LoadLevel(char *baseAreaName,GameTracker *gameTracker)
       iVar7 = iVar7 + 0x4c;
     } while (iVar1 < pLVar4->numIntros);
   }
-  (gameTrackerX.playerInstance)->currentStreamUnitID = gameTracker->StreamUnitID;
-  UNDERWORLD_UpdatePlayer(streamUnit->level->introList + iVar1,gameTrackerX.playerInstance);
-  time_00 = UNDERWORLD_RotateScreenStep(time);
+  DAT_800d20f8->currentStreamUnitID = gameTracker->StreamUnitID;
+  UNDERWORLD_UpdatePlayer(streamUnit->level->introList + iVar1,DAT_800d20f8);
+  time = UNDERWORLD_RotateScreenStep(time);
   PreloadAllConnectedUnits(gameTracker,streamUnit,&local_48);
-  RENDER_currentStreamUnitID = *(short *)&gameTracker->StreamUnitID;
+  RENDER_currentStreamUnitID = *(undefined2 *)&gameTracker->StreamUnitID;
   gameTracker->wipeType = 10;
   gameTracker->wipeTime = 0x1e;
   while (iVar1 = STREAM_PollLoadQueue(), iVar1 != 0) {
-    time_00 = UNDERWORLD_RotateScreenStep(time_00);
+    time = UNDERWORLD_RotateScreenStep(time);
   }
   iVar1 = 0;
   local_25 = 1;
@@ -568,8 +573,8 @@ _StreamUnit * UNDERWORLD_LoadLevel(char *baseAreaName,GameTracker *gameTracker)
   local_39 = 0x2a;
   do {
     VSync(0);
-    DrawPrim((int)auStack40);
-    DrawPrim((int)auStack64);
+    DrawPrim(auStack40);
+    DrawPrim(auStack64);
     iVar1 = iVar1 + 1;
   } while (iVar1 < 0x1e);
   DrawSync(0);
@@ -581,16 +586,16 @@ _StreamUnit * UNDERWORLD_LoadLevel(char *baseAreaName,GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ UNDERWORLD_UpdatePlayer(struct Intro *playerIntro /*$a0*/, struct _Instance *instance /*$a1*/)
- // line 444, offset 0x800afb64
+ // line 438, offset 0x800b3e48
 	/* begin block 1 */
-		// Start line: 445
-		// Start offset: 0x800AFB64
+		// Start line: 439
+		// Start offset: 0x800B3E48
 		// Variables:
 	// 		struct _SVector offset; // stack offset -16
 
 		/* begin block 1.1 */
-			// Start line: 445
-			// Start offset: 0x800AFB64
+			// Start line: 439
+			// Start offset: 0x800B3E48
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $v1
@@ -602,16 +607,18 @@ _StreamUnit * UNDERWORLD_LoadLevel(char *baseAreaName,GameTracker *gameTracker)
 		// 		struct _Position *_v0; // $a2
 		// 		struct _Position *_v1; // $a3
 		/* end block 1.1 */
-		// End offset: 0x800AFB64
-		// End Line: 445
+		// End offset: 0x800B3E48
+		// End Line: 439
 	/* end block 1 */
-	// End offset: 0x800AFB64
-	// End Line: 445
+	// End offset: 0x800B3E48
+	// End Line: 439
 
 	/* begin block 2 */
-		// Start line: 1097
+		// Start line: 1085
 	/* end block 2 */
-	// End Line: 1098
+	// End Line: 1086
+
+/* File: C:\kain2\game\UNDRWRLD.C */
 
 void UNDERWORLD_UpdatePlayer(Intro *playerIntro,_Instance *instance)
 
@@ -621,7 +628,7 @@ void UNDERWORLD_UpdatePlayer(Intro *playerIntro,_Instance *instance)
   local_10.x = (playerIntro->position).x - (instance->position).x;
   local_10.y = (playerIntro->position).y - (instance->position).y;
   local_10.z = (playerIntro->position).z - (instance->position).z;
-  STREAM_RelocateInstance(&gameTrackerX,instance,&local_10);
+  STREAM_RelocateInstance((GameTracker *)&gameTrackerX,instance,&local_10);
   return;
 }
 

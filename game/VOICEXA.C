@@ -5,62 +5,62 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VOICEXA_Init()
- // line 50, offset 0x800b0f84
+ // line 54, offset 0x800b5754
 	/* begin block 1 */
-		// Start line: 51
-		// Start offset: 0x800B0F84
+		// Start line: 55
+		// Start offset: 0x800B5754
 		// Variables:
 	// 		int i; // $s1
 	// 		struct CdlFILE fp; // stack offset -80
 	// 		struct XAVoiceTracker *vt; // $a0
 	// 		char fileName[32]; // stack offset -56
 	/* end block 1 */
-	// End offset: 0x800B1038
-	// End Line: 91
+	// End offset: 0x800B5808
+	// End Line: 95
 
 	/* begin block 2 */
-		// Start line: 100
+		// Start line: 108
 	/* end block 2 */
-	// End Line: 101
+	// End Line: 109
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\VOICEXA.C */
 
 void VOICEXA_Init(void)
 
 {
-  undefined4 *puVar1;
+  CdlFILE *pCVar1;
   int iVar2;
   XAVoiceTracker *pXVar3;
   int iVar4;
-  undefined4 auStack80 [6];
+  CdlFILE CStack80;
   char acStack56 [32];
   
   pXVar3 = &voiceTracker;
-  if ((gameTrackerX.debugFlags & 0x80000U) != 0) {
+  if ((DAT_800d218c & 0x80000) != 0) {
     iVar4 = 0;
-    voiceTracker.unused2._0_1_ = 0;
-    voiceTracker.unused2._1_1_ = 0;
-    voiceTracker.voiceCmdOut = '\0';
-    voiceTracker.voiceCmdsQueued = '\0';
-    voiceTracker.unused1 = '\0';
-    voiceTracker.reqOut = '\0';
-    voiceTracker.reqsQueued = '\0';
-    voiceTracker.voiceCmdIn = '\0';
     voiceTracker.voiceStatus = '\0';
     voiceTracker.cdStatus = '\0';
-    voiceTracker.fileNum._0_1_ = 0;
+    voiceTracker.reqIn = '\0';
+    voiceTracker.reqOut = '\0';
+    voiceTracker.reqsQueued = '\0';
+    voiceTracker.cdCmdIn = '\0';
+    voiceTracker.cdCmdOut = '\0';
+    voiceTracker.cdCmdsQueued = '\0';
+    voiceTracker.voiceCmdIn = '\0';
+    voiceTracker.voiceCmdOut = '\0';
+    voiceTracker.voiceCmdsQueued = '\0';
     do {
-      sprintf(acStack56,"\\VOICE\\VOICE%02d.XA;1");
-      puVar1 = CdSearchFile(auStack80,acStack56);
-      if (puVar1 == (undefined4 *)0x0) {
-        pXVar3->xaFileInfo[1].startPos = 0;
+      sprintf(acStack56,s__VOICE_VOICE_02d_XA_1_800d0c24,iVar4);
+      pCVar1 = CdSearchFile(&CStack80,acStack56);
+      if (pCVar1 == (CdlFILE *)0x0) {
+        pXVar3->xaFileInfo[0].startPos = 0;
       }
       else {
-        iVar2 = CdPosToInt((byte *)auStack80);
-        pXVar3->xaFileInfo[1].startPos = iVar2;
+        iVar2 = CdPosToInt((CdlLOC *)&CStack80);
+        pXVar3->xaFileInfo[0].startPos = iVar2;
       }
       iVar4 = iVar4 + 1;
-      pXVar3 = (XAVoiceTracker *)&pXVar3->endSector;
+      pXVar3 = (XAVoiceTracker *)&pXVar3->currentSector;
     } while (iVar4 < 0x1e);
   }
   return;
@@ -71,25 +71,27 @@ void VOICEXA_Init(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ putCdCommand(struct XAVoiceTracker *vt /*$a0*/, unsigned char cdCommand /*$a1*/, int numParams /*$a2*/, unsigned char *params /*$a3*/)
- // line 94, offset 0x800b1054
+ // line 98, offset 0x800b5824
 	/* begin block 1 */
-		// Start line: 95
-		// Start offset: 0x800B1054
+		// Start line: 99
+		// Start offset: 0x800B5824
 		// Variables:
 	// 		int i; // $t0
 	/* end block 1 */
-	// End offset: 0x800B10D0
-	// End Line: 108
+	// End offset: 0x800B58A0
+	// End Line: 112
 
 	/* begin block 2 */
-		// Start line: 217
+		// Start line: 225
 	/* end block 2 */
-	// End Line: 218
+	// End Line: 226
 
 	/* begin block 3 */
-		// Start line: 220
+		// Start line: 228
 	/* end block 3 */
-	// End Line: 221
+	// End Line: 229
+
+/* File: C:\kain2\game\VOICEXA.C */
 
 void putCdCommand(XAVoiceTracker *vt,uchar cdCommand,int numParams,uchar *params)
 
@@ -100,22 +102,22 @@ void putCdCommand(XAVoiceTracker *vt,uchar cdCommand,int numParams,uchar *params
   int iVar4;
   
   iVar3 = 0;
-  vt->cdCmdQueue[vt->reqOut].cdCmdParam[3] = cdCommand;
+  vt->cdCmdQueue[vt->cdCmdIn].cdCommand = cdCommand;
   puVar2 = params;
   if (0 < numParams) {
     do {
       iVar4 = iVar3 + 1;
-      *(uchar *)((int)&vt->cdCmdQueue[(uint)vt->reqOut + 1].flags + iVar3) = *puVar2;
+      vt->cdCmdQueue[vt->cdCmdIn].cdCmdParam[iVar3] = *puVar2;
       puVar2 = params + iVar4;
       iVar3 = iVar4;
     } while (iVar4 < numParams);
   }
-  if (vt->voiceCmdIn < 7) {
-    vt->voiceCmdIn = vt->voiceCmdIn + 1;
-    uVar1 = vt->reqOut + '\x01';
-    vt->reqOut = uVar1;
+  if (vt->cdCmdsQueued < 7) {
+    vt->cdCmdsQueued = vt->cdCmdsQueued + 1;
+    uVar1 = vt->cdCmdIn + '\x01';
+    vt->cdCmdIn = uVar1;
     if (uVar1 == '\b') {
-      vt->reqOut = '\0';
+      vt->cdCmdIn = '\0';
     }
   }
   return;
@@ -126,35 +128,37 @@ void putCdCommand(XAVoiceTracker *vt,uchar cdCommand,int numParams,uchar *params
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VOICEXA_CdSyncCallback(unsigned char status /*$a0*/, unsigned char *result /*$a1*/)
- // line 111, offset 0x800b10d8
+ // line 115, offset 0x800b58a8
 	/* begin block 1 */
-		// Start line: 112
-		// Start offset: 0x800B10D8
+		// Start line: 116
+		// Start offset: 0x800B58A8
 		// Variables:
 	// 		struct XAVoiceTracker *vt; // $a1
 	/* end block 1 */
-	// End offset: 0x800B1138
-	// End Line: 133
+	// End offset: 0x800B5908
+	// End Line: 137
 
 	/* begin block 2 */
-		// Start line: 255
+		// Start line: 263
 	/* end block 2 */
-	// End Line: 256
+	// End Line: 264
+
+/* File: C:\kain2\game\VOICEXA.C */
 
 void VOICEXA_CdSyncCallback(uchar status,uchar *result)
 
 {
   if (status == '\x02') {
-    voiceTracker.unused2._1_1_ = 0;
-    voiceTracker.reqsQueued = voiceTracker.reqsQueued + '\x01';
-    if (voiceTracker.reqsQueued == '\b') {
-      voiceTracker.reqsQueued = '\0';
+    voiceTracker.cdStatus = '\0';
+    voiceTracker.cdCmdOut = voiceTracker.cdCmdOut + '\x01';
+    if (voiceTracker.cdCmdOut == '\b') {
+      voiceTracker.cdCmdOut = '\0';
     }
-    voiceTracker.voiceCmdIn = voiceTracker.voiceCmdIn + -1;
-    CdSyncCallback(voiceTracker.cdResult._0_4_);
+    voiceTracker.cdCmdsQueued = voiceTracker.cdCmdsQueued + -1;
+    CdSyncCallback((CdlCB)voiceTracker.prevCallback);
   }
   else {
-    voiceTracker.unused2._1_1_ = 2;
+    voiceTracker.cdStatus = '\x02';
   }
   return;
 }
@@ -164,51 +168,49 @@ void VOICEXA_CdSyncCallback(uchar status,uchar *result)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ processCdCommands(struct XAVoiceTracker *vt /*$s1*/)
- // line 137, offset 0x800b1148
+ // line 141, offset 0x800b5918
 	/* begin block 1 */
-		// Start line: 138
-		// Start offset: 0x800B1148
+		// Start line: 142
+		// Start offset: 0x800B5918
 		// Variables:
 	// 		struct CdCommand *cmd; // $s0
 	/* end block 1 */
-	// End offset: 0x800B11DC
-	// End Line: 159
+	// End offset: 0x800B59AC
+	// End Line: 163
 
 	/* begin block 2 */
-		// Start line: 311
+		// Start line: 319
 	/* end block 2 */
-	// End Line: 312
+	// End Line: 320
+
+/* File: C:\kain2\game\VOICEXA.C */
 
 void processCdCommands(XAVoiceTracker *vt)
 
 {
-  char cVar1;
-  undefined4 uVar2;
-  byte bVar3;
-  uchar *puVar4;
+  CdlCB pCVar1;
+  u_char com;
+  CdCommand *pCVar2;
   
-  cVar1 = *(char *)((int)&vt->unused2 + 1);
-  if (cVar1 == '\x02') {
-    bVar3 = vt->reqsQueued;
-    *(undefined *)((int)&vt->unused2 + 1) = 1;
-    puVar4 = vt->cdCmdQueue[bVar3].cdCmdParam;
-    bVar3 = puVar4[3];
+  if (vt->cdStatus == '\x02') {
+    vt->cdStatus = '\x01';
+    pCVar2 = vt->cdCmdQueue + vt->cdCmdOut;
+    com = pCVar2->cdCommand;
   }
   else {
-    if (vt->voiceCmdIn == '\0') {
+    if (vt->cdCmdsQueued == '\0') {
       return;
     }
-    if (cVar1 == '\x01') {
+    if (vt->cdStatus == '\x01') {
       return;
     }
-    bVar3 = vt->reqsQueued;
-    *(undefined *)((int)&vt->unused2 + 1) = 1;
-    puVar4 = vt->cdCmdQueue[bVar3].cdCmdParam;
-    uVar2 = CdSyncCallback(VOICEXA_CdSyncCallback);
-    *(undefined4 *)vt->cdResult = uVar2;
-    bVar3 = puVar4[3];
+    vt->cdStatus = '\x01';
+    pCVar2 = vt->cdCmdQueue + vt->cdCmdOut;
+    pCVar1 = CdSyncCallback(VOICEXA_CdSyncCallback);
+    *(CdlCB *)&vt->prevCallback = pCVar1;
+    com = pCVar2->cdCommand;
   }
-  CdControl(bVar3,puVar4 + 4,vt->cdResult + 4);
+  CdControl(com,pCVar2->cdCmdParam,vt->cdResult);
   return;
 }
 
@@ -217,31 +219,33 @@ void processCdCommands(XAVoiceTracker *vt)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ putVoiceCommand(struct XAVoiceTracker *vt /*$a0*/, unsigned char voiceCmd /*$a1*/, unsigned char nextVoiceStatus /*$a2*/, int voiceCmdParam /*$a3*/)
- // line 182, offset 0x800b11f0
+ // line 186, offset 0x800b59c0
 	/* begin block 1 */
-		// Start line: 406
+		// Start line: 414
 	/* end block 1 */
-	// End Line: 407
+	// End Line: 415
 
 	/* begin block 2 */
-		// Start line: 407
+		// Start line: 415
 	/* end block 2 */
-	// End Line: 408
+	// End Line: 416
+
+/* File: C:\kain2\game\VOICEXA.C */
 
 void putVoiceCommand(XAVoiceTracker *vt,uchar voiceCmd,uchar nextVoiceStatus,int voiceCmdParam)
 
 {
   uchar uVar1;
   
-  vt->voiceCmdQueue[(uint)vt->voiceStatus + 1].voiceCmd = voiceCmd;
-  vt->voiceCmdQueue[(uint)vt->voiceStatus + 1].nextVoiceStatus = nextVoiceStatus;
-  vt->voiceCmdQueue[(uint)vt->voiceStatus + 1].voiceCmdParam = (ushort)voiceCmdParam;
-  if (*(byte *)&vt->fileNum < 0xf) {
-    *(byte *)&vt->fileNum = *(byte *)&vt->fileNum + 1;
-    uVar1 = vt->voiceStatus + '\x01';
-    vt->voiceStatus = uVar1;
+  vt->voiceCmdQueue[vt->voiceCmdIn].voiceCmd = voiceCmd;
+  vt->voiceCmdQueue[vt->voiceCmdIn].nextVoiceStatus = nextVoiceStatus;
+  vt->voiceCmdQueue[vt->voiceCmdIn].voiceCmdParam = (ushort)voiceCmdParam;
+  if (vt->voiceCmdsQueued < 0xf) {
+    vt->voiceCmdsQueued = vt->voiceCmdsQueued + 1;
+    uVar1 = vt->voiceCmdIn + '\x01';
+    vt->voiceCmdIn = uVar1;
     if (uVar1 == '\x10') {
-      vt->voiceStatus = '\0';
+      vt->voiceCmdIn = '\0';
     }
   }
   return;
@@ -252,20 +256,22 @@ void putVoiceCommand(XAVoiceTracker *vt,uchar voiceCmd,uchar nextVoiceStatus,int
 // decompiled code
 // original method signature: 
 // void /*$ra*/ processVoiceCommands(struct XAVoiceTracker *vt /*$s1*/)
- // line 199, offset 0x800b126c
+ // line 203, offset 0x800b5a3c
 	/* begin block 1 */
-		// Start line: 200
-		// Start offset: 0x800B126C
+		// Start line: 204
+		// Start offset: 0x800B5A3C
 		// Variables:
 	// 		struct VoiceCommand *cmd; // $s0
 	/* end block 1 */
-	// End offset: 0x800B130C
-	// End Line: 217
+	// End offset: 0x800B5ADC
+	// End Line: 221
 
 	/* begin block 2 */
-		// Start line: 441
+		// Start line: 449
 	/* end block 2 */
-	// End Line: 442
+	// End Line: 450
+
+/* File: C:\kain2\game\VOICEXA.C */
 
 void processVoiceCommands(XAVoiceTracker *vt)
 
@@ -273,17 +279,17 @@ void processVoiceCommands(XAVoiceTracker *vt)
   uint uVar1;
   VoiceCommand *pVVar2;
   
-  if (*(char *)&vt->fileNum != '\0') {
-    *(char *)&vt->fileNum = *(char *)&vt->fileNum + -1;
-    uVar1 = (uint)vt->cdStatus + 1;
-    pVVar2 = vt->voiceCmdQueue + (uint)vt->cdStatus + 1;
-    vt->cdStatus = (uchar)uVar1;
+  if (vt->voiceCmdsQueued != '\0') {
+    vt->voiceCmdsQueued = vt->voiceCmdsQueued + -1;
+    uVar1 = (uint)vt->voiceCmdOut + 1;
+    pVVar2 = vt->voiceCmdQueue + (uint)vt->voiceCmdOut;
+    vt->voiceCmdOut = (uchar)uVar1;
     if ((uVar1 & 0xff) == 0x10) {
-      vt->cdStatus = '\0';
+      vt->voiceCmdOut = '\0';
     }
     if (pVVar2->voiceCmd < 5) {
-      (*(code *)(&voiceCmdTbl)[pVVar2->voiceCmd])(vt,(int)(short)pVVar2->voiceCmdParam);
-      *(uchar *)&vt->unused2 = pVVar2->nextVoiceStatus;
+      (*(code *)voiceCmdTbl[pVVar2->voiceCmd])(vt,(int)(short)pVVar2->voiceCmdParam);
+      vt->voiceStatus = pVVar2->nextVoiceStatus;
     }
   }
   return;
@@ -294,10 +300,10 @@ void processVoiceCommands(XAVoiceTracker *vt)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ voiceCmdPlay(struct XAVoiceTracker *vt /*$s2*/, short voiceIndex /*$s3*/)
- // line 222, offset 0x800b1320
+ // line 226, offset 0x800b5af0
 	/* begin block 1 */
-		// Start line: 223
-		// Start offset: 0x800B1320
+		// Start line: 227
+		// Start offset: 0x800B5AF0
 		// Variables:
 	// 		struct CdlFILTER filter; // stack offset -88
 	// 		struct CdlLOC pos; // stack offset -80
@@ -306,18 +312,20 @@ void processVoiceCommands(XAVoiceTracker *vt)
 	// 		struct XAVoiceListEntry *voice; // $s1
 	// 		struct XAFileInfo *file; // $s0
 	/* end block 1 */
-	// End offset: 0x800B1474
-	// End Line: 295
+	// End offset: 0x800B5C44
+	// End Line: 299
 
 	/* begin block 2 */
-		// Start line: 491
+		// Start line: 499
 	/* end block 2 */
-	// End Line: 492
+	// End Line: 500
 
 	/* begin block 3 */
-		// Start line: 501
+		// Start line: 509
 	/* end block 3 */
-	// End Line: 502
+	// End Line: 510
+
+/* File: C:\kain2\game\VOICEXA.C */
 
 void voiceCmdPlay(XAVoiceTracker *vt,short voiceIndex)
 
@@ -326,55 +334,41 @@ void voiceCmdPlay(XAVoiceTracker *vt,short voiceIndex)
   XAFileInfo *pXVar2;
   uchar local_58;
   byte local_57;
-  uchar auStack80 [8];
-  uint local_48;
-  undefined2 local_44;
-  undefined2 local_42;
-  undefined2 local_40;
-  undefined2 local_3e;
-  short local_38;
-  short local_36;
-  undefined4 local_34;
-  undefined4 local_30;
-  undefined2 local_2c;
-  undefined2 local_2a;
-  undefined4 local_28;
-  undefined4 local_24;
+  CdlLOC aCStack80 [2];
+  SpuCommonAttr local_48;
   uchar local_20 [8];
   
   if (voiceList != (XAVoiceListEntry *)0x0) {
     puVar1 = &voiceList->length;
-    *(short *)&vt->xaFileInfo[0].startPos = voiceIndex >> 4;
-    pXVar2 = vt->xaFileInfo + ((int)((uint)(ushort)voiceIndex << 0x10) >> 0x14) + 1;
+    vt->fileNum = voiceIndex >> 4;
+    pXVar2 = vt->xaFileInfo + ((int)((uint)(ushort)voiceIndex << 0x10) >> 0x14);
     putCdCommand(vt,'\t',0,(uchar *)0x0);
     local_58 = '\x01';
     local_57 = (byte)voiceIndex & 0xf;
     putCdCommand(vt,'\r',4,&local_58);
     local_20[0] = -0x38;
     putCdCommand(vt,'\x0e',1,local_20);
-    CdIntToPos(pXVar2->startPos,(char *)vt);
-    vt->prevCallback =
-         (_func_4600 *)
-         (pXVar2->startPos +
-         ((uint)*(ushort *)((int)puVar1 + ((int)((uint)(ushort)voiceIndex << 0x10) >> 0xf)) - 0x96))
-    ;
-    CdIntToPos(pXVar2->startPos,(char *)auStack80);
-    putCdCommand(vt,'\x1b',4,auStack80);
-    local_48 = 0x3fcf;
-    local_44 = 0x3fff;
-    local_42 = 0x3fff;
-    local_40 = 0;
-    local_3e = 0;
-    local_34 = 0;
-    local_30 = 1;
-    local_2c = 0x7fff;
-    local_2a = 0x7fff;
-    local_28 = 0;
-    local_24 = 1;
-    local_38 = (short)gameTrackerX.sound.gVoiceVol << 8;
-    local_36 = local_38;
+    CdIntToPos(pXVar2->startPos,(CdlLOC *)vt);
+    vt->endSector =
+         pXVar2->startPos +
+         ((uint)*(ushort *)((int)puVar1 + ((int)((uint)(ushort)voiceIndex << 0x10) >> 0xf)) - 0x96);
+    CdIntToPos(pXVar2->startPos,aCStack80);
+    putCdCommand(vt,'\x1b',4,(uchar *)aCStack80);
+    local_48.mask = &DAT_00003fcf;
+    local_48.mvol.left = 0x3fff;
+    local_48.mvol.right = 0x3fff;
+    local_48.mvolmode.left = 0;
+    local_48.mvolmode.right = 0;
+    local_48.cd.reverb = 0;
+    local_48.cd.mix = 1;
+    local_48.ext.volume.left = 0x7fff;
+    local_48.ext.volume.right = 0x7fff;
+    local_48.ext.reverb = 0;
+    local_48.ext.mix = 1;
+    local_48.cd.volume.left = DAT_800d228c << 8;
+    local_48.cd.volume.right = local_48.cd.volume.left;
     SpuSetCommonAttr(&local_48);
-    if (0x3c < gameTrackerX.sound.gMusicVol) {
+    if (0x3c < DAT_800d2284) {
       aadStartMusicMasterVolFade
                 (0x3c,-1,(TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback)0x0);
     }
@@ -387,37 +381,36 @@ void voiceCmdPlay(XAVoiceTracker *vt,short voiceIndex)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ voiceCmdStop(struct XAVoiceTracker *vt /*$a0*/, short cmdParam /*$a1*/)
- // line 298, offset 0x800b1490
+ // line 302, offset 0x800b5c60
 	/* begin block 1 */
-		// Start line: 299
-		// Start offset: 0x800B1490
+		// Start line: 303
+		// Start offset: 0x800B5C60
 		// Variables:
 	// 		struct SpuCommonAttr spuattr; // stack offset -48
 	/* end block 1 */
-	// End offset: 0x800B14DC
-	// End Line: 314
+	// End offset: 0x800B5CAC
+	// End Line: 318
 
 	/* begin block 2 */
-		// Start line: 705
+		// Start line: 713
 	/* end block 2 */
-	// End Line: 706
+	// End Line: 714
+
+/* File: C:\kain2\game\VOICEXA.C */
 
 void voiceCmdStop(XAVoiceTracker *vt,short cmdParam)
 
 {
-  uint local_30 [6];
-  undefined4 local_18;
-  undefined4 local_c;
+  SpuCommonAttr local_30;
   
-  if (*(char *)&vt->unused2 != '\0') {
+  if (vt->voiceStatus != '\0') {
     putCdCommand(vt,'\t',0,(uchar *)0x0);
-    local_30[0] = 0x2200;
-    local_18 = 0;
-    local_c = 0;
-    SpuSetCommonAttr(local_30);
+    local_30.mask = &DAT_00002200;
+    local_30.cd.mix = 0;
+    local_30.ext.mix = 0;
+    SpuSetCommonAttr(&local_30);
     aadStartMusicMasterVolFade
-              (gameTrackerX.sound.gMusicVol,1,
-               (TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback)0x0);
+              (DAT_800d2284,1,(TDRFuncPtr_aadStartMusicMasterVolFade2fadeCompleteCallback)0x0);
   }
   return;
 }
@@ -427,16 +420,18 @@ void voiceCmdStop(XAVoiceTracker *vt,short cmdParam)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ voiceCmdPause(struct XAVoiceTracker *vt /*$a0*/, short cmdParam /*$a1*/)
- // line 317, offset 0x800b14ec
+ // line 321, offset 0x800b5cbc
 	/* begin block 1 */
-		// Start line: 746
+		// Start line: 754
 	/* end block 1 */
-	// End Line: 747
+	// End Line: 755
+
+/* File: C:\kain2\game\VOICEXA.C */
 
 void voiceCmdPause(XAVoiceTracker *vt,short cmdParam)
 
 {
-  if (*(char *)&vt->unused2 == '\x01') {
+  if ((uint)vt->voiceStatus - 1 < 2) {
     putCdCommand(vt,'\t',0,(uchar *)0x0);
   }
   return;
@@ -447,16 +442,18 @@ void voiceCmdPause(XAVoiceTracker *vt,short cmdParam)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ voiceCmdResume(struct XAVoiceTracker *vt /*$a0*/, short cmdParam /*$a1*/)
- // line 325, offset 0x800b1520
+ // line 329, offset 0x800b5cf8
 	/* begin block 1 */
-		// Start line: 762
+		// Start line: 770
 	/* end block 1 */
-	// End Line: 763
+	// End Line: 771
+
+/* File: C:\kain2\game\VOICEXA.C */
 
 void voiceCmdResume(XAVoiceTracker *vt,short cmdParam)
 
 {
-  if (*(char *)&vt->unused2 == '\x02') {
+  if (vt->voiceStatus == '\x03') {
     putCdCommand(vt,'\x1b',4,(uchar *)vt);
   }
   return;
@@ -467,16 +464,18 @@ void voiceCmdResume(XAVoiceTracker *vt,short cmdParam)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ voiceCmdNull(struct XAVoiceTracker *vt /*$a0*/, short cmdParam /*$a1*/)
- // line 332, offset 0x800b1554
+ // line 336, offset 0x800b5d2c
 	/* begin block 1 */
-		// Start line: 776
+		// Start line: 784
 	/* end block 1 */
-	// End Line: 777
+	// End Line: 785
 
 	/* begin block 2 */
-		// Start line: 777
+		// Start line: 785
 	/* end block 2 */
-	// End Line: 778
+	// End Line: 786
+
+/* File: C:\kain2\game\VOICEXA.C */
 
 void voiceCmdNull(XAVoiceTracker *vt,short cmdParam)
 
@@ -489,41 +488,42 @@ void voiceCmdNull(XAVoiceTracker *vt,short cmdParam)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VOICEXA_Play(int voiceIndex /*$a3*/, int queueRequests /*$a1*/)
- // line 337, offset 0x800b155c
+ // line 341, offset 0x800b5d34
 	/* begin block 1 */
-		// Start line: 338
-		// Start offset: 0x800B155C
+		// Start line: 342
+		// Start offset: 0x800B5D34
 		// Variables:
 	// 		struct XAVoiceTracker *vt; // $a0
 	// 		struct XAFileInfo *file; // $a2
 	/* end block 1 */
-	// End offset: 0x800B1614
-	// End Line: 364
+	// End offset: 0x800B5DEC
+	// End Line: 368
 
 	/* begin block 2 */
-		// Start line: 786
+		// Start line: 794
 	/* end block 2 */
-	// End Line: 787
+	// End Line: 795
+
+/* File: C:\kain2\game\VOICEXA.C */
 
 void VOICEXA_Play(int voiceIndex,int queueRequests)
 
 {
   uchar uVar1;
   
-  if ((((gameTrackerX.debugFlags & 0x80000U) != 0) &&
-      (voiceTracker.xaFileInfo[(voiceIndex >> 4) + 1].startPos != 0)) &&
-     (gameTrackerX.sound.gVoiceOn != '\0')) {
+  if ((((DAT_800d218c & 0x80000) != 0) && (voiceTracker.xaFileInfo[voiceIndex >> 4].startPos != 0))
+     && (DAT_800d2292 != '\0')) {
     if (queueRequests == 0) {
-      putVoiceCommand(&voiceTracker,'\0','\x01',voiceIndex);
+      putVoiceCommand((XAVoiceTracker *)&voiceTracker,'\0','\x01',voiceIndex);
     }
     else {
-      voiceTracker.requestQueue[(uint)voiceTracker.voiceCmdOut + 2] = (ushort)voiceIndex;
-      uVar1 = voiceTracker.unused1 + '\x01';
-      if (voiceTracker.unused1 < 3) {
-        voiceTracker.voiceCmdOut = voiceTracker.voiceCmdOut + '\x01';
-        voiceTracker.unused1 = uVar1;
-        if (voiceTracker.voiceCmdOut == '\x04') {
-          voiceTracker.voiceCmdOut = '\0';
+      voiceTracker.requestQueue[voiceTracker.reqIn] = (ushort)voiceIndex;
+      uVar1 = voiceTracker.reqsQueued + '\x01';
+      if (voiceTracker.reqsQueued < 3) {
+        voiceTracker.reqIn = voiceTracker.reqIn + '\x01';
+        voiceTracker.reqsQueued = uVar1;
+        if (voiceTracker.reqIn == '\x04') {
+          voiceTracker.reqIn = '\0';
         }
       }
     }
@@ -536,44 +536,46 @@ void VOICEXA_Play(int voiceIndex,int queueRequests)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ VOICEXA_FinalStatus(struct XAVoiceTracker *vt /*$a0*/)
- // line 383, offset 0x800b1624
+ // line 387, offset 0x800b5dfc
 	/* begin block 1 */
-		// Start line: 385
-		// Start offset: 0x800B1624
+		// Start line: 389
+		// Start offset: 0x800B5DFC
 		// Variables:
 	// 		int tailIndex; // $v0
 	/* end block 1 */
-	// End offset: 0x800B1660
-	// End Line: 400
+	// End offset: 0x800B5E38
+	// End Line: 404
 
 	/* begin block 2 */
-		// Start line: 761
+		// Start line: 769
 	/* end block 2 */
-	// End Line: 762
+	// End Line: 770
 
 	/* begin block 3 */
-		// Start line: 864
+		// Start line: 872
 	/* end block 3 */
-	// End Line: 865
+	// End Line: 873
 
 	/* begin block 4 */
-		// Start line: 867
+		// Start line: 875
 	/* end block 4 */
-	// End Line: 868
+	// End Line: 876
+
+/* File: C:\kain2\game\VOICEXA.C */
 
 int VOICEXA_FinalStatus(XAVoiceTracker *vt)
 
 {
   int iVar1;
   
-  if (*(char *)&vt->fileNum == '\0') {
-    return (uint)*(byte *)&vt->unused2;
+  if (vt->voiceCmdsQueued == '\0') {
+    return (uint)vt->voiceStatus;
   }
-  iVar1 = (uint)vt->voiceStatus - 1;
-  if (vt->voiceStatus == 0) {
+  iVar1 = (uint)vt->voiceCmdIn - 1;
+  if (vt->voiceCmdIn == 0) {
     iVar1 = 0xf;
   }
-  return (uint)vt->voiceCmdQueue[iVar1 + 1].nextVoiceStatus;
+  return (uint)vt->voiceCmdQueue[iVar1].nextVoiceStatus;
 }
 
 
@@ -581,23 +583,23 @@ int VOICEXA_FinalStatus(XAVoiceTracker *vt)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VOICEXA_Pause()
- // line 402, offset 0x800b1668
+ // line 406, offset 0x800b5e40
 	/* begin block 1 */
-		// Start line: 403
-		// Start offset: 0x800B1668
+		// Start line: 407
+		// Start offset: 0x800B5E40
 		// Variables:
 	// 		struct XAVoiceTracker *vt; // $s0
 	// 		int finalStatus; // $a0
 	/* end block 1 */
-	// End offset: 0x800B16C8
-	// End Line: 420
+	// End offset: 0x800B5EA4
+	// End Line: 424
 
 	/* begin block 2 */
-		// Start line: 901
+		// Start line: 909
 	/* end block 2 */
-	// End Line: 902
+	// End Line: 910
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\VOICEXA.C */
 
 void VOICEXA_Pause(void)
 
@@ -606,20 +608,20 @@ void VOICEXA_Pause(void)
   uchar voiceCmd;
   uchar nextVoiceStatus;
   
-  iVar1 = VOICEXA_FinalStatus(&voiceTracker);
-  if ((gameTrackerX.debugFlags & 0x80000U) != 0) {
+  iVar1 = VOICEXA_FinalStatus((XAVoiceTracker *)&voiceTracker);
+  if ((DAT_800d218c & 0x80000) != 0) {
     voiceCmd = '\x02';
-    if (iVar1 == 1) {
-      nextVoiceStatus = '\x02';
+    if (iVar1 - 1U < 2) {
+      nextVoiceStatus = '\x03';
     }
     else {
       if (iVar1 != 0) {
         return;
       }
       voiceCmd = '\x04';
-      nextVoiceStatus = '\x03';
+      nextVoiceStatus = '\x04';
     }
-    putVoiceCommand(&voiceTracker,voiceCmd,nextVoiceStatus,0);
+    putVoiceCommand((XAVoiceTracker *)&voiceTracker,voiceCmd,nextVoiceStatus,0);
   }
   return;
 }
@@ -629,23 +631,23 @@ void VOICEXA_Pause(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VOICEXA_Resume()
- // line 423, offset 0x800b16d8
+ // line 427, offset 0x800b5eb4
 	/* begin block 1 */
-		// Start line: 424
-		// Start offset: 0x800B16D8
+		// Start line: 428
+		// Start offset: 0x800B5EB4
 		// Variables:
 	// 		struct XAVoiceTracker *vt; // $s0
 	// 		int finalStatus; // $a0
 	/* end block 1 */
-	// End offset: 0x800B173C
-	// End Line: 441
+	// End offset: 0x800B5F18
+	// End Line: 445
 
 	/* begin block 2 */
-		// Start line: 944
+		// Start line: 952
 	/* end block 2 */
-	// End Line: 945
+	// End Line: 953
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\VOICEXA.C */
 
 void VOICEXA_Resume(void)
 
@@ -654,20 +656,20 @@ void VOICEXA_Resume(void)
   uchar voiceCmd;
   uchar nextVoiceStatus;
   
-  iVar1 = VOICEXA_FinalStatus(&voiceTracker);
-  if ((gameTrackerX.debugFlags & 0x80000U) != 0) {
-    if (iVar1 == 2) {
-      voiceCmd = '\x03';
+  iVar1 = VOICEXA_FinalStatus((XAVoiceTracker *)&voiceTracker);
+  if ((DAT_800d218c & 0x80000) != 0) {
+    voiceCmd = '\x03';
+    if (iVar1 == 3) {
       nextVoiceStatus = '\x01';
     }
     else {
-      if (iVar1 != 3) {
+      if (iVar1 != 4) {
         return;
       }
       voiceCmd = '\x04';
       nextVoiceStatus = '\0';
     }
-    putVoiceCommand(&voiceTracker,voiceCmd,nextVoiceStatus,0);
+    putVoiceCommand((XAVoiceTracker *)&voiceTracker,voiceCmd,nextVoiceStatus,0);
   }
   return;
 }
@@ -677,53 +679,54 @@ void VOICEXA_Resume(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VOICEXA_Tick()
- // line 459, offset 0x800b174c
+ // line 464, offset 0x800b5f28
 	/* begin block 1 */
-		// Start line: 460
-		// Start offset: 0x800B174C
+		// Start line: 465
+		// Start offset: 0x800B5F28
 		// Variables:
 	// 		struct XAVoiceTracker *vt; // $s0
 	/* end block 1 */
-	// End offset: 0x800B188C
-	// End Line: 522
+	// End offset: 0x800B6074
+	// End Line: 529
 
 	/* begin block 2 */
-		// Start line: 1017
+		// Start line: 1027
 	/* end block 2 */
-	// End Line: 1018
+	// End Line: 1028
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\VOICEXA.C */
 
 void VOICEXA_Tick(void)
 
 {
-  if ((gameTrackerX.debugFlags & 0x80000U) != 0) {
-    processVoiceCommands(&voiceTracker);
-    processCdCommands(&voiceTracker);
-    if ((voiceTracker.voiceCmdIn == '\0') && ((char)voiceTracker.fileNum == '\0')) {
-      if ((byte)voiceTracker.unused2 == 1) {
-        CdControlB(0x10,(byte *)0x0,voiceTracker.cdResult + 4);
-        if ((voiceTracker.cdResult[7] & 2) != 0) {
-          voiceTracker.currentSector._3_1_ = 0;
-          voiceTracker.currentSector._0_1_ = voiceTracker.cdResult[4];
-          voiceTracker.currentSector._1_1_ = voiceTracker.cdResult[5];
-          voiceTracker.currentSector._2_1_ = voiceTracker.cdResult[6];
-          voiceTracker.endSector = CdPosToInt((byte *)&voiceTracker);
-          voiceTracker.endSector = voiceTracker.endSector + -0x96;
-          if ((int)voiceTracker.prevCallback <= voiceTracker.endSector) {
-            putVoiceCommand(&voiceTracker,'\x01','\0',0);
+  if ((DAT_800d218c & 0x80000) != 0) {
+    processVoiceCommands((XAVoiceTracker *)&voiceTracker);
+    processCdCommands((XAVoiceTracker *)&voiceTracker);
+    if (((voiceTracker.cdCmdsQueued == '\0') && (voiceTracker.voiceCmdsQueued == '\0')) &&
+       (voiceTracker.voiceStatus < 3)) {
+      if (voiceTracker.voiceStatus == '\0') {
+        if (voiceTracker.reqsQueued != '\0') {
+          putVoiceCommand((XAVoiceTracker *)&voiceTracker,'\0','\x01',
+                          (uint)voiceTracker.requestQueue[voiceTracker.reqOut]);
+          voiceTracker.reqsQueued = voiceTracker.reqsQueued + -1;
+          voiceTracker.reqOut = voiceTracker.reqOut + '\x01';
+          if (voiceTracker.reqOut == '\x04') {
+            voiceTracker.reqOut = '\0';
           }
         }
       }
       else {
-        if ((((byte)voiceTracker.unused2 < 2) && ((byte)voiceTracker.unused2 == 0)) &&
-           (voiceTracker.unused1 != '\0')) {
-          putVoiceCommand(&voiceTracker,'\0','\x01',
-                          (uint)voiceTracker.requestQueue[(uint)voiceTracker.voiceCmdsQueued + 2]);
-          voiceTracker.unused1 = voiceTracker.unused1 + -1;
-          voiceTracker.voiceCmdsQueued = voiceTracker.voiceCmdsQueued + '\x01';
-          if (voiceTracker.voiceCmdsQueued == '\x04') {
-            voiceTracker.voiceCmdsQueued = '\0';
+        CdControlB('\x10',(u_char *)0x0,voiceTracker.cdResult);
+        if ((voiceTracker.cdResult[3] & 2) != 0) {
+          voiceTracker.voiceStatus = '\x02';
+          voiceTracker.currentPos.track = '\0';
+          voiceTracker.currentPos.minute = voiceTracker.cdResult[0];
+          voiceTracker.currentPos.second = voiceTracker.cdResult[1];
+          voiceTracker.currentPos.sector = voiceTracker.cdResult[2];
+          voiceTracker.currentSector = CdPosToInt((CdlLOC *)&voiceTracker);
+          voiceTracker.currentSector = voiceTracker.currentSector + -0x96;
+          if (voiceTracker.endSector <= voiceTracker.currentSector) {
+            putVoiceCommand((XAVoiceTracker *)&voiceTracker,'\x01','\0',0);
           }
         }
       }
@@ -737,36 +740,37 @@ void VOICEXA_Tick(void)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ VOICEXA_IsPlaying()
- // line 532, offset 0x800b189c
+ // line 546, offset 0x800b6084
 	/* begin block 1 */
-		// Start line: 534
-		// Start offset: 0x800B189C
+		// Start line: 548
+		// Start offset: 0x800B6084
 		// Variables:
-	// 		struct XAVoiceTracker *vt; // $a1
+	// 		struct XAVoiceTracker *vt; // $a0
 	/* end block 1 */
-	// End offset: 0x800B18C8
-	// End Line: 537
+	// End offset: 0x800B60C0
+	// End Line: 558
 
 	/* begin block 2 */
-		// Start line: 1061
+		// Start line: 1082
 	/* end block 2 */
-	// End Line: 1062
+	// End Line: 1083
 
 	/* begin block 3 */
-		// Start line: 1171
+		// Start line: 1196
 	/* end block 3 */
-	// End Line: 1172
+	// End Line: 1197
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\VOICEXA.C */
 
 int VOICEXA_IsPlaying(void)
 
 {
   int iVar1;
   
-  iVar1 = 0;
-  if (((char)voiceTracker.unused2 == '\x01') || (voiceTracker.unused2._1_1_ != '\0')) {
-    iVar1 = 1;
+  iVar1 = 2;
+  if ((voiceTracker.voiceStatus != '\x02') &&
+     ((voiceTracker.voiceStatus == '\x01' || (iVar1 = 0, voiceTracker.cdStatus != '\0')))) {
+    return 1;
   }
   return iVar1;
 }

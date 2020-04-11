@@ -5,14 +5,14 @@
 // decompiled code
 // original method signature: 
 // enum _G2Bool_Enum /*$ra*/ G2Anim_Install()
- // line 260, offset 0x800907f8
+ // line 260, offset 0x80092380
 	/* begin block 1 */
 		// Start line: 261
-		// Start offset: 0x800907F8
+		// Start offset: 0x80092380
 		// Variables:
 	// 		struct _G2AnimController_Type *dummyController; // $a0
 	/* end block 1 */
-	// End offset: 0x800907F8
+	// End offset: 0x80092380
 	// End Line: 261
 
 	/* begin block 2 */
@@ -20,7 +20,7 @@
 	/* end block 2 */
 	// End Line: 521
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 _G2Bool_Enum G2Anim_Install(void)
 
@@ -42,14 +42,14 @@ _G2Bool_Enum G2Anim_Install(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_ResetInternalState()
- // line 309, offset 0x80090870
+ // line 309, offset 0x800923f8
 	/* begin block 1 */
 		// Start line: 310
-		// Start offset: 0x80090870
+		// Start offset: 0x800923F8
 		// Variables:
 	// 		struct _G2AnimController_Type *dummyController; // $v0
 	/* end block 1 */
-	// End offset: 0x80090870
+	// End offset: 0x800923F8
 	// End Line: 310
 
 	/* begin block 2 */
@@ -57,7 +57,7 @@ _G2Bool_Enum G2Anim_Install(void)
 	/* end block 2 */
 	// End Line: 628
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 void G2Anim_ResetInternalState(void)
 
@@ -79,21 +79,23 @@ void G2Anim_ResetInternalState(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_Init(struct _G2Anim_Type *anim /*$s0*/, struct _Model *modelData /*$s1*/)
- // line 374, offset 0x800908d8
+ // line 374, offset 0x80092460
 	/* begin block 1 */
 		// Start line: 375
-		// Start offset: 0x800908D8
+		// Start offset: 0x80092460
 		// Variables:
 	// 		struct _G2AnimSection_Type *section; // $v0
 	// 		int sectionID; // $a0
 	/* end block 1 */
-	// End offset: 0x8009094C
+	// End offset: 0x800924D4
 	// End Line: 428
 
 	/* begin block 2 */
 		// Start line: 736
 	/* end block 2 */
 	// End Line: 737
+
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 void G2Anim_Init(_G2Anim_Type *anim,_Model *modelData)
 
@@ -108,7 +110,7 @@ void G2Anim_Init(_G2Anim_Type *anim,_Model *modelData)
   anim->disabledControllerList = 0;
   anim->segMatrices = (_G2Matrix_Type *)0x0;
   anim->modelData = modelData;
-  memset(anim->disabledBits,0,0x9c);
+  memset();
   iVar3 = 0;
   iVar2 = 0x24;
   do {
@@ -128,14 +130,14 @@ void G2Anim_Init(_G2Anim_Type *anim,_Model *modelData)
 // decompiled code
 // original method signature: 
 // struct _G2AnimSection_Type * /*$ra*/ G2Anim_AddSection(struct _G2Anim_Type *anim /*$s1*/, int firstSegID /*$s2*/, int segCount /*$s3*/)
- // line 439, offset 0x8009096c
+ // line 439, offset 0x800924f4
 	/* begin block 1 */
 		// Start line: 440
-		// Start offset: 0x8009096C
+		// Start offset: 0x800924F4
 		// Variables:
 	// 		struct _G2AnimSection_Type *section; // $s0
 	/* end block 1 */
-	// End offset: 0x8009096C
+	// End offset: 0x800924F4
 	// End Line: 440
 
 	/* begin block 2 */
@@ -143,23 +145,25 @@ void G2Anim_Init(_G2Anim_Type *anim,_Model *modelData)
 	/* end block 2 */
 	// End Line: 905
 
+/* File: C:\kain2\game\G2\ANIMG2.C */
+
 _G2AnimSection_Type * G2Anim_AddSection(_G2Anim_Type *anim,int firstSegID,int segCount)
 
 {
   uchar uVar1;
-  _G2AnimSection_Type *__s;
+  _G2AnimSection_Type *p_Var2;
   
-  __s = anim->section + anim->sectionCount;
-  memset(__s,0,0x30);
+  p_Var2 = anim->section + anim->sectionCount;
+  memset();
   uVar1 = anim->sectionCount;
-  __s->storedTime = -1;
-  __s->firstSeg = (uchar)firstSegID;
-  __s->segCount = (uchar)segCount;
-  __s->swAlarmTable = (short *)0x0;
-  __s->speedAdjustment = 0x1000;
-  __s->sectionID = uVar1;
+  p_Var2->storedTime = -1;
+  p_Var2->firstSeg = (uchar)firstSegID;
+  p_Var2->segCount = (uchar)segCount;
+  p_Var2->swAlarmTable = (short *)0x0;
+  p_Var2->speedAdjustment = 0x1000;
+  p_Var2->sectionID = uVar1;
   anim->sectionCount = anim->sectionCount + '\x01';
-  return __s;
+  return p_Var2;
 }
 
 
@@ -167,22 +171,24 @@ _G2AnimSection_Type * G2Anim_AddSection(_G2Anim_Type *anim,int firstSegID,int se
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_Free(struct _G2Anim_Type *anim /*$s4*/)
- // line 487, offset 0x80090a08
+ // line 487, offset 0x80092590
 	/* begin block 1 */
 		// Start line: 488
-		// Start offset: 0x80090A08
+		// Start offset: 0x80092590
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $s1
 	// 		int sectionID; // $s2
 	// 		struct _G2AnimInterpInfo_Type *interpInfo; // $s0
 	/* end block 1 */
-	// End offset: 0x80090AA4
+	// End offset: 0x8009262C
 	// End Line: 527
 
 	/* begin block 2 */
 		// Start line: 1048
 	/* end block 2 */
 	// End Line: 1049
+
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 void G2Anim_Free(_G2Anim_Type *anim)
 
@@ -221,21 +227,23 @@ void G2Anim_Free(_G2Anim_Type *anim)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_Restore(struct _G2Anim_Type *anim /*$s2*/)
- // line 531, offset 0x80090ac4
+ // line 531, offset 0x8009264c
 	/* begin block 1 */
 		// Start line: 532
-		// Start offset: 0x80090AC4
+		// Start offset: 0x8009264C
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $a0
 	// 		int sectionID; // $s0
 	/* end block 1 */
-	// End offset: 0x80090B2C
+	// End offset: 0x800926B4
 	// End Line: 553
 
 	/* begin block 2 */
 		// Start line: 1162
 	/* end block 2 */
 	// End Line: 1163
+
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 void G2Anim_Restore(_G2Anim_Type *anim)
 
@@ -265,49 +273,51 @@ void G2Anim_Restore(_G2Anim_Type *anim)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_BuildTransforms(struct _G2Anim_Type *anim /*$s0*/)
- // line 562, offset 0x80090b44
+ // line 562, offset 0x800926cc
 	/* begin block 1 */
 		// Start line: 563
-		// Start offset: 0x80090B44
+		// Start offset: 0x800926CC
 
 		/* begin block 1.1 */
 			// Start line: 574
-			// Start offset: 0x80090B6C
+			// Start offset: 0x800926F4
 		/* end block 1.1 */
-		// End offset: 0x80090B74
+		// End offset: 0x800926FC
 		// End Line: 574
 
 		/* begin block 1.2 */
 			// Start line: 586
-			// Start offset: 0x80090BAC
+			// Start offset: 0x80092734
 
 			/* begin block 1.2.1 */
 				// Start line: 586
-				// Start offset: 0x80090BAC
+				// Start offset: 0x80092734
 				// Variables:
 			// 		unsigned short z; // $v0
 			// 		unsigned long xy; // $v1
 			/* end block 1.2.1 */
-			// End offset: 0x80090BAC
+			// End offset: 0x80092734
 			// End Line: 586
 		/* end block 1.2 */
-		// End offset: 0x80090BAC
+		// End offset: 0x80092734
 		// End Line: 586
 
 		/* begin block 1.3 */
 			// Start line: 598
-			// Start offset: 0x80090BE0
+			// Start offset: 0x80092768
 		/* end block 1.3 */
-		// End offset: 0x80090BE0
+		// End offset: 0x80092768
 		// End Line: 598
 	/* end block 1 */
-	// End offset: 0x80090BE0
+	// End offset: 0x80092768
 	// End Line: 598
 
 	/* begin block 2 */
 		// Start line: 1238
 	/* end block 2 */
 	// End Line: 1239
+
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 void G2Anim_BuildTransforms(_G2Anim_Type *anim)
 
@@ -325,8 +335,8 @@ void G2Anim_BuildTransforms(_G2Anim_Type *anim)
     (anim->rootTrans).z = -(anim->rootTrans).z;
     (anim->rootTrans).y = -(anim->rootTrans).y;
   }
-  _segValues.trans.z = (anim->rootTrans).z;
-  _segValues.trans._0_4_ = *(undefined4 *)&anim->rootTrans;
+  DAT_800d4f20 = (anim->rootTrans).z;
+  DAT_800d4f1c = *(undefined4 *)&anim->rootTrans;
   if (anim->controllerList == 0) {
     _G2Anim_BuildTransformsNoControllers(anim);
   }
@@ -347,10 +357,10 @@ void G2Anim_BuildTransforms(_G2Anim_Type *anim)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_UpdateStoredFrame(struct _G2Anim_Type *anim /*$s2*/)
- // line 617, offset 0x80090c10
+ // line 617, offset 0x80092798
 	/* begin block 1 */
 		// Start line: 618
-		// Start offset: 0x80090C10
+		// Start offset: 0x80092798
 		// Variables:
 	// 		struct _G2AnimSection_Type *section; // $s0
 	// 		short storedTime; // $s3
@@ -361,14 +371,14 @@ void G2Anim_BuildTransforms(_G2Anim_Type *anim)
 
 		/* begin block 1.1 */
 			// Start line: 669
-			// Start offset: 0x80090C9C
+			// Start offset: 0x80092824
 			// Variables:
 		// 		struct _G2SVector3_Type *vector; // $a3
 		/* end block 1.1 */
-		// End offset: 0x80090C9C
+		// End offset: 0x80092824
 		// End Line: 669
 	/* end block 1 */
-	// End offset: 0x80090D6C
+	// End offset: 0x800928F4
 	// End Line: 703
 
 	/* begin block 2 */
@@ -377,6 +387,7 @@ void G2Anim_BuildTransforms(_G2Anim_Type *anim)
 	// End Line: 1354
 
 /* WARNING: Could not reconcile some variable overlaps */
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 void G2Anim_UpdateStoredFrame(_G2Anim_Type *anim)
 
@@ -437,10 +448,10 @@ void G2Anim_UpdateStoredFrame(_G2Anim_Type *anim)
 // decompiled code
 // original method signature: 
 // struct _G2AnimSection_Type * /*$ra*/ G2Anim_GetSectionWithSeg(struct _G2Anim_Type *anim /*$a0*/, int segNumber /*$a1*/)
- // line 712, offset 0x80090d8c
+ // line 712, offset 0x80092914
 	/* begin block 1 */
 		// Start line: 715
-		// Start offset: 0x80090D8C
+		// Start offset: 0x80092914
 		// Variables:
 	// 		struct _G2AnimSection_Type *section; // $a3
 	// 		struct _G2AnimSection_Type *tempSection; // $a2
@@ -448,7 +459,7 @@ void G2Anim_UpdateStoredFrame(_G2Anim_Type *anim)
 	// 		int firstSeg; // $v1
 	// 		int lastSeg; // $v0
 	/* end block 1 */
-	// End offset: 0x80090DF0
+	// End offset: 0x80092978
 	// End Line: 747
 
 	/* begin block 2 */
@@ -471,6 +482,8 @@ void G2Anim_UpdateStoredFrame(_G2Anim_Type *anim)
 	/* end block 5 */
 	// End Line: 1575
 
+/* File: C:\kain2\game\G2\ANIMG2.C */
+
 _G2AnimSection_Type * G2Anim_GetSectionWithSeg(_G2Anim_Type *anim,int segNumber)
 
 {
@@ -492,10 +505,10 @@ _G2AnimSection_Type * G2Anim_GetSectionWithSeg(_G2Anim_Type *anim,int segNumber)
 // decompiled code
 // original method signature: 
 // enum _G2Bool_Enum /*$ra*/ G2Anim_SegmentHasActiveChannels(struct _G2Anim_Type *anim /*$s0*/, int segNumber /*$s1*/, unsigned short chanMask /*$a2*/)
- // line 758, offset 0x80090df8
+ // line 758, offset 0x80092980
 	/* begin block 1 */
 		// Start line: 759
-		// Start offset: 0x80090DF8
+		// Start offset: 0x80092980
 		// Variables:
 	// 		struct _G2AnimSection_Type *section; // $a1
 	// 		unsigned char *segChanFlagStream; // $a0
@@ -504,13 +517,15 @@ _G2AnimSection_Type * G2Anim_GetSectionWithSeg(_G2Anim_Type *anim,int segNumber)
 	// 		unsigned short segFlagBits; // $a1
 	// 		int flagBytesPerSeg; // $t0
 	/* end block 1 */
-	// End offset: 0x80090F14
+	// End offset: 0x80092A9C
 	// End Line: 848
 
 	/* begin block 2 */
 		// Start line: 1650
 	/* end block 2 */
 	// End Line: 1651
+
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 _G2Bool_Enum G2Anim_SegmentHasActiveChannels(_G2Anim_Type *anim,int segNumber,ushort chanMask)
 
@@ -563,31 +578,31 @@ _G2Bool_Enum G2Anim_SegmentHasActiveChannels(_G2Anim_Type *anim,int segNumber,us
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_GetSegChannelValue(struct _G2Anim_Type *anim /*$s0*/, int segIndex /*$s1*/, unsigned short *valueTable /*$s3*/, unsigned short channelMask /*$s2*/)
- // line 866, offset 0x80090f38
+ // line 866, offset 0x80092ac0
 	/* begin block 1 */
 		// Start line: 867
-		// Start offset: 0x80090F38
+		// Start offset: 0x80092AC0
 		// Variables:
 	// 		unsigned short *chanFinalValue; // $v1
 
 		/* begin block 1.1 */
 			// Start line: 867
-			// Start offset: 0x80090F38
+			// Start offset: 0x80092AC0
 
 			/* begin block 1.1.1 */
 				// Start line: 867
-				// Start offset: 0x80090F38
+				// Start offset: 0x80092AC0
 				// Variables:
 			// 		unsigned short z; // $v1
 			// 		unsigned long xy; // $v0
 			/* end block 1.1.1 */
-			// End offset: 0x80090F38
+			// End offset: 0x80092AC0
 			// End Line: 867
 		/* end block 1.1 */
-		// End offset: 0x80090F38
+		// End offset: 0x80092AC0
 		// End Line: 867
 	/* end block 1 */
-	// End offset: 0x80090FCC
+	// End offset: 0x80092B54
 	// End Line: 905
 
 	/* begin block 2 */
@@ -595,27 +610,29 @@ _G2Bool_Enum G2Anim_SegmentHasActiveChannels(_G2Anim_Type *anim,int segNumber,us
 	/* end block 2 */
 	// End Line: 1903
 
+/* File: C:\kain2\game\G2\ANIMG2.C */
+
 void G2Anim_GetSegChannelValue
                (_G2Anim_Type *anim,int segIndex,ushort *valueTable,ushort channelMask)
 
 {
-  _G2AnimSegValue_Type *p_Var1;
+  ushort *puVar1;
   uint uVar2;
   
   uVar2 = (uint)channelMask;
   G2Anim_UpdateStoredFrame(anim);
-  _segValues.trans._0_4_ = *(undefined4 *)&anim->rootTrans;
-  _segValues.trans.z = (anim->rootTrans).z;
+  DAT_800d4f1c = *(undefined4 *)&anim->rootTrans;
+  DAT_800d4f20 = (anim->rootTrans).z;
   _G2Anim_ApplyControllersToStoredFrame(anim);
-  p_Var1 = &_segValues + segIndex;
+  puVar1 = (ushort *)(&_segValues + segIndex * 0x18);
   if (channelMask != 0) {
     do {
       if ((uVar2 & 1) != 0) {
-        *valueTable = *(ushort *)&p_Var1->rotQuat;
+        *valueTable = *puVar1;
         valueTable = valueTable + 1;
       }
       uVar2 = uVar2 >> 1;
-      p_Var1 = (_G2AnimSegValue_Type *)((int)&p_Var1->rotQuat + 2);
+      puVar1 = puVar1 + 1;
     } while (uVar2 != 0);
   }
   return;
@@ -626,10 +643,10 @@ void G2Anim_GetSegChannelValue
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_GetRootMotionFromTimeForDuration(struct _G2Anim_Type *anim /*$t0*/, short durationStart /*$s1*/, short duration /*$s3*/, struct _G2SVector3_Type *motionVector /*$s5*/)
- // line 922, offset 0x80090fe8
+ // line 922, offset 0x80092b70
 	/* begin block 1 */
 		// Start line: 923
-		// Start offset: 0x80090FE8
+		// Start offset: 0x80092B70
 		// Variables:
 	// 		struct _G2Anim_Type dummyAnim; // stack offset -216
 	// 		struct _G2AnimSection_Type *section; // $s2
@@ -642,43 +659,46 @@ void G2Anim_GetSegChannelValue
 
 		/* begin block 1.1 */
 			// Start line: 949
-			// Start offset: 0x80091040
+			// Start offset: 0x80092BC8
 			// Variables:
 		// 		struct _G2SVector3_Type *dest; // $s5
 		// 		struct _G2SVector3_Type *base; // $v0
 		// 		struct _G2SVector3_Type *offset; // $v1
 		// 		long alpha; // $a1
 		/* end block 1.1 */
-		// End offset: 0x80091040
+		// End offset: 0x80092BC8
 		// End Line: 949
 
 		/* begin block 1.2 */
 			// Start line: 965
-			// Start offset: 0x80091124
+			// Start offset: 0x80092CAC
 			// Variables:
 		// 		struct _G2SVector3_Type *vector; // $s5
 		/* end block 1.2 */
-		// End offset: 0x80091124
+		// End offset: 0x80092CAC
 		// End Line: 965
 
 		/* begin block 1.3 */
 			// Start line: 1001
-			// Start offset: 0x80091218
+			// Start offset: 0x80092DA0
 			// Variables:
 		// 		struct _G2SVector3_Type *dest; // $s5
 		// 		struct _G2SVector3_Type *base; // $s5
 		// 		long alpha; // $a1
 		/* end block 1.3 */
-		// End offset: 0x80091218
+		// End offset: 0x80092DA0
 		// End Line: 1001
 	/* end block 1 */
-	// End offset: 0x8009129C
+	// End offset: 0x80092E24
 	// End Line: 1015
 
 	/* begin block 2 */
 		// Start line: 2014
 	/* end block 2 */
 	// End Line: 2015
+
+/* WARNING: Type propagation algorithm not settling */
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 void G2Anim_GetRootMotionFromTimeForDuration
                (_G2Anim_Type *anim,short durationStart,short duration,_G2SVector3_Type *motionVector
@@ -766,9 +786,9 @@ void G2Anim_GetRootMotionFromTimeForDuration
       setCopReg(2,0xc800,(uint)(ushort)motionVector->x);
       setCopReg(2,0xd000,(uint)(ushort)motionVector->y);
       setCopReg(2,0xd800,(uint)(ushort)motionVector->z);
-      setCopReg(2,0x4800,(uint)(ushort)_segValues.trans.x);
-      setCopReg(2,0x5000,(uint)(ushort)_segValues.trans.y);
-      setCopReg(2,0x5800,(uint)(ushort)_segValues.trans.z);
+      setCopReg(2,0x4800,(uint)(ushort)DAT_800d4f1c);
+      setCopReg(2,0x5000,(uint)DAT_800d4f1c._2_2_);
+      setCopReg(2,0x5800,(uint)DAT_800d4f20);
       setCopReg(2,0x4000,iVar14);
       copFunction(2,0x1a8003e);
       uVar8 = getCopReg(2,0xc800);
@@ -791,10 +811,10 @@ void G2Anim_GetRootMotionFromTimeForDuration
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2AnimSection_SwitchToKeylistAtTime(struct _G2AnimSection_Type *section /*$s1*/, struct _G2AnimKeylist_Type *keylist /*$s4*/, int keylistID /*$s5*/, short targetTime /*$s3*/)
- // line 1121, offset 0x800912c4
+ // line 1121, offset 0x80092e4c
 	/* begin block 1 */
 		// Start line: 1122
-		// Start offset: 0x800912C4
+		// Start offset: 0x80092E4C
 		// Variables:
 	// 		struct _G2Anim_Type *anim; // $s2
 	// 		struct _G2SVector3_Type rootMotion; // stack offset -40
@@ -802,29 +822,29 @@ void G2Anim_GetRootMotionFromTimeForDuration
 
 		/* begin block 1.1 */
 			// Start line: 1144
-			// Start offset: 0x8009134C
+			// Start offset: 0x80092ED4
 		/* end block 1.1 */
-		// End offset: 0x80091354
+		// End offset: 0x80092EDC
 		// End Line: 1144
 
 		/* begin block 1.2 */
 			// Start line: 1197
-			// Start offset: 0x80091410
+			// Start offset: 0x80092F98
 
 			/* begin block 1.2.1 */
 				// Start line: 1197
-				// Start offset: 0x80091410
+				// Start offset: 0x80092F98
 				// Variables:
 			// 		unsigned short z; // $v1
 			// 		unsigned long xy; // $v0
 			/* end block 1.2.1 */
-			// End offset: 0x80091430
+			// End offset: 0x80092FB8
 			// End Line: 1197
 		/* end block 1.2 */
-		// End offset: 0x80091430
+		// End offset: 0x80092FB8
 		// End Line: 1197
 	/* end block 1 */
-	// End offset: 0x8009144C
+	// End offset: 0x80092FD4
 	// End Line: 1206
 
 	/* begin block 2 */
@@ -833,6 +853,7 @@ void G2Anim_GetRootMotionFromTimeForDuration
 	// End Line: 2235
 
 /* WARNING: Could not reconcile some variable overlaps */
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 void G2AnimSection_SwitchToKeylistAtTime
                (_G2AnimSection_Type *section,_G2AnimKeylist_Type *keylist,int keylistID,
@@ -890,27 +911,29 @@ void G2AnimSection_SwitchToKeylistAtTime
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2AnimSection_JumpToTime(struct _G2AnimSection_Type *section /*$s0*/, short targetTime /*$a1*/)
- // line 1225, offset 0x8009147c
+ // line 1225, offset 0x80093004
 	/* begin block 1 */
 		// Start line: 1226
-		// Start offset: 0x8009147C
+		// Start offset: 0x80093004
 		// Variables:
 	// 		struct _G2Anim_Type *anim; // $s1
 
 		/* begin block 1.1 */
 			// Start line: 1266
-			// Start offset: 0x800914FC
+			// Start offset: 0x80093084
 		/* end block 1.1 */
-		// End offset: 0x80091504
+		// End offset: 0x8009308C
 		// End Line: 1266
 	/* end block 1 */
-	// End offset: 0x80091504
+	// End offset: 0x8009308C
 	// End Line: 1268
 
 	/* begin block 2 */
 		// Start line: 2628
 	/* end block 2 */
 	// End Line: 2629
+
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 void G2AnimSection_JumpToTime(_G2AnimSection_Type *section,short targetTime)
 
@@ -937,10 +960,10 @@ void G2AnimSection_JumpToTime(_G2AnimSection_Type *section,short targetTime)
 // decompiled code
 // original method signature: 
 // short /*$ra*/ G2AnimSection_UpdateOverInterval(struct _G2AnimSection_Type *section /*$s0*/, short interval /*$a1*/)
- // line 1273, offset 0x8009151c
+ // line 1273, offset 0x800930a4
 	/* begin block 1 */
 		// Start line: 1274
-		// Start offset: 0x8009151C
+		// Start offset: 0x800930A4
 		// Variables:
 	// 		struct _G2Anim_Type *anim; // $s2
 	// 		struct _G2SVector3_Type motionVector; // stack offset -32
@@ -949,28 +972,30 @@ void G2AnimSection_JumpToTime(_G2AnimSection_Type *section,short targetTime)
 
 		/* begin block 1.1 */
 			// Start line: 1324
-			// Start offset: 0x80091604
+			// Start offset: 0x8009318C
 
 			/* begin block 1.1.1 */
 				// Start line: 1324
-				// Start offset: 0x80091604
+				// Start offset: 0x8009318C
 				// Variables:
 			// 		unsigned short z; // $v1
 			// 		unsigned long xy; // $v0
 			/* end block 1.1.1 */
-			// End offset: 0x80091604
+			// End offset: 0x8009318C
 			// End Line: 1324
 		/* end block 1.1 */
-		// End offset: 0x80091604
+		// End offset: 0x8009318C
 		// End Line: 1324
 	/* end block 1 */
-	// End offset: 0x800916F0
+	// End offset: 0x80093278
 	// End Line: 1361
 
 	/* begin block 2 */
 		// Start line: 2725
 	/* end block 2 */
 	// End Line: 2726
+
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 short G2AnimSection_UpdateOverInterval(_G2AnimSection_Type *section,short interval)
 
@@ -1022,7 +1047,7 @@ short G2AnimSection_UpdateOverInterval(_G2AnimSection_Type *section,short interv
           G2AnimSection_SetLoopRangeAll(section);
         }
         section->alarmFlags = section->alarmFlags | 0x10;
-        if (section->callback != (_func_4388 *)0x0) {
+        if (section->callback != (_func_8 *)0x0) {
           (*section->callback)(anim,(uint)section->sectionID,3,0,0,section->callbackData);
         }
       }
@@ -1039,10 +1064,10 @@ short G2AnimSection_UpdateOverInterval(_G2AnimSection_Type *section,short interv
 // decompiled code
 // original method signature: 
 // short /*$ra*/ G2AnimSection_AdvanceOverInterval(struct _G2AnimSection_Type *section /*$s1*/, short interval /*$s0*/)
- // line 1381, offset 0x80091710
+ // line 1381, offset 0x80093298
 	/* begin block 1 */
 		// Start line: 1382
-		// Start offset: 0x80091710
+		// Start offset: 0x80093298
 		// Variables:
 	// 		struct _G2AnimKeylist_Type *keylist; // $a0
 	// 		short newTime; // $s6
@@ -1058,35 +1083,37 @@ short G2AnimSection_UpdateOverInterval(_G2AnimSection_Type *section,short interv
 
 		/* begin block 1.1 */
 			// Start line: 1614
-			// Start offset: 0x80091A4C
+			// Start offset: 0x800935D4
 		/* end block 1.1 */
-		// End offset: 0x80091A54
+		// End offset: 0x800935DC
 		// End Line: 1614
 
 		/* begin block 1.2 */
 			// Start line: 1624
-			// Start offset: 0x80091A64
+			// Start offset: 0x800935EC
 
 			/* begin block 1.2.1 */
 				// Start line: 1624
-				// Start offset: 0x80091A64
+				// Start offset: 0x800935EC
 				// Variables:
 			// 		unsigned short z; // $v1
 			// 		unsigned long xy; // $v0
 			/* end block 1.2.1 */
-			// End offset: 0x80091A64
+			// End offset: 0x800935EC
 			// End Line: 1624
 		/* end block 1.2 */
-		// End offset: 0x80091A64
+		// End offset: 0x800935EC
 		// End Line: 1624
 	/* end block 1 */
-	// End offset: 0x80091AB8
+	// End offset: 0x80093640
 	// End Line: 1658
 
 	/* begin block 2 */
 		// Start line: 2959
 	/* end block 2 */
 	// End Line: 2960
+
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 short G2AnimSection_AdvanceOverInterval(_G2AnimSection_Type *section,short interval)
 
@@ -1139,8 +1166,8 @@ short G2AnimSection_AdvanceOverInterval(_G2AnimSection_Type *section,short inter
         do {
           if ((((iVar11 < iVar7) && (iVar7 <= iVar9)) ||
               ((section->storedTime < 1 && (iVar11 == iVar7)))) &&
-             (section->alarmFlags = section->alarmFlags | 0x20,
-             section->callback != (_func_4388 *)0x0)) {
+             (section->alarmFlags = section->alarmFlags | 0x20, section->callback != (_func_8 *)0x0)
+             ) {
             (*section->callback)(anim,(uint)section->sectionID,5,iVar11,iVar9,section->callbackData)
             ;
           }
@@ -1179,7 +1206,7 @@ short G2AnimSection_AdvanceOverInterval(_G2AnimSection_Type *section,short inter
         anim = _G2AnimSection_GetAnim(section);
         G2Anim_GetRootMotionOverInterval(anim,startTime,intervalEnd,(_G2SVector3_Type *)&local_38);
       }
-      if (section->callback != (_func_4388 *)0x0) {
+      if (section->callback != (_func_8 *)0x0) {
         p_Var5 = _G2AnimSection_GetAnim(section);
         lVar6 = (*section->callback)
                           (p_Var5,(uint)section->sectionID,uVar12,(int)(short)lVar8,(int)sVar3,
@@ -1206,13 +1233,13 @@ short G2AnimSection_AdvanceOverInterval(_G2AnimSection_Type *section,short inter
         (anim->rootTrans).z = local_34;
         section->flags = section->flags | 0x80;
       }
-      if ((section->flags & 2) == 0) goto LAB_80091aac;
+      if ((section->flags & 2) == 0) goto LAB_80093634;
       uVar13 = (uint)(ushort)section->loopEndTime;
       uVar10 = (uint)local_30;
       iVar7 = uVar10 << 0x10;
     }
     sVar3 = 0;
-LAB_80091aac:
+LAB_80093634:
     section->elapsedTime = intervalEnd;
   }
   else {
@@ -1226,10 +1253,10 @@ LAB_80091aac:
 // decompiled code
 // original method signature: 
 // short /*$ra*/ G2AnimSection_RewindOverInterval(struct _G2AnimSection_Type *section /*$s1*/, short interval /*$a1*/)
- // line 1671, offset 0x80091ae8
+ // line 1671, offset 0x80093670
 	/* begin block 1 */
 		// Start line: 1672
-		// Start offset: 0x80091AE8
+		// Start offset: 0x80093670
 		// Variables:
 	// 		short newTime; // $s3
 	// 		short extraTime; // $s6
@@ -1241,35 +1268,37 @@ LAB_80091aac:
 
 		/* begin block 1.1 */
 			// Start line: 1832
-			// Start offset: 0x80091CB0
+			// Start offset: 0x80093838
 		/* end block 1.1 */
-		// End offset: 0x80091CB8
+		// End offset: 0x80093840
 		// End Line: 1832
 
 		/* begin block 1.2 */
 			// Start line: 1841
-			// Start offset: 0x80091CC8
+			// Start offset: 0x80093850
 
 			/* begin block 1.2.1 */
 				// Start line: 1841
-				// Start offset: 0x80091CC8
+				// Start offset: 0x80093850
 				// Variables:
 			// 		unsigned short z; // $v1
 			// 		unsigned long xy; // $v0
 			/* end block 1.2.1 */
-			// End offset: 0x80091CC8
+			// End offset: 0x80093850
 			// End Line: 1841
 		/* end block 1.2 */
-		// End offset: 0x80091CC8
+		// End offset: 0x80093850
 		// End Line: 1841
 	/* end block 1 */
-	// End offset: 0x80091CFC
+	// End offset: 0x80093884
 	// End Line: 1867
 
 	/* begin block 2 */
 		// Start line: 3631
 	/* end block 2 */
 	// End Line: 3632
+
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 short G2AnimSection_RewindOverInterval(_G2AnimSection_Type *section,short interval)
 
@@ -1322,7 +1351,7 @@ short G2AnimSection_RewindOverInterval(_G2AnimSection_Type *section,short interv
         G2Anim_GetRootMotionOverInterval
                   (anim,intervalStart,(short)uVar6,(_G2SVector3_Type *)&local_30);
       }
-      if (section->callback != (_func_4388 *)0x0) {
+      if (section->callback != (_func_8 *)0x0) {
         p_Var4 = _G2AnimSection_GetAnim(section);
         lVar5 = (*section->callback)
                           (p_Var4,(uint)section->sectionID,uVar8,(int)sVar7,(int)sVar2,
@@ -1356,10 +1385,10 @@ short G2AnimSection_RewindOverInterval(_G2AnimSection_Type *section,short interv
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Anim_BuildTransformsNoControllers(struct _G2Anim_Type *anim /*$s4*/)
- // line 1876, offset 0x80091d28
+ // line 1876, offset 0x800938b0
 	/* begin block 1 */
 		// Start line: 1877
-		// Start offset: 0x80091D28
+		// Start offset: 0x800938B0
 		// Variables:
 	// 		struct _Segment *segment; // $a1
 	// 		struct _G2Matrix_Type *segMatrix; // $s5
@@ -1371,13 +1400,15 @@ short G2AnimSection_RewindOverInterval(_G2AnimSection_Type *section,short interv
 	// 		unsigned long parentMask; // $v1
 	// 		unsigned long parentIndex; // $v0
 	/* end block 1 */
-	// End offset: 0x80091E50
+	// End offset: 0x800939D8
 	// End Line: 1949
 
 	/* begin block 2 */
 		// Start line: 4114
 	/* end block 2 */
 	// End Line: 4115
+
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 void _G2Anim_BuildTransformsNoControllers(_G2Anim_Type *anim)
 
@@ -1433,25 +1464,25 @@ void _G2Anim_BuildTransformsNoControllers(_G2Anim_Type *anim)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Anim_BuildSegTransformNoControllers(struct _G2Matrix_Type *segMatrix /*$s0*/, struct _G2Matrix_Type *parentMatrix /*$s3*/, enum _G2Bool_Enum bRootTransUpdated /*$s4*/, int segIndex /*$a3*/)
- // line 1959, offset 0x80091e7c
+ // line 1959, offset 0x80093a04
 	/* begin block 1 */
 		// Start line: 1960
-		// Start offset: 0x80091E7C
+		// Start offset: 0x80093A04
 		// Variables:
 	// 		struct _G2AnimSegValue_Type *segValue; // $s1
 	// 		struct _G2LVector3_Type scale; // stack offset -40
 
 		/* begin block 1.1 */
 			// Start line: 2009
-			// Start offset: 0x80091F04
+			// Start offset: 0x80093A8C
 			// Variables:
 		// 		struct _G2SVector3_Type *svector; // $v0
 		// 		struct _G2LVector3_Type *lvector; // $v1
 		/* end block 1.1 */
-		// End offset: 0x80091F04
+		// End offset: 0x80093A8C
 		// End Line: 2009
 	/* end block 1 */
-	// End offset: 0x8009204C
+	// End offset: 0x80093BD4
 	// End Line: 2055
 
 	/* begin block 2 */
@@ -1459,37 +1490,35 @@ void _G2Anim_BuildTransformsNoControllers(_G2Anim_Type *anim)
 	/* end block 2 */
 	// End Line: 4370
 
+/* File: C:\kain2\game\G2\ANIMG2.C */
+
 void _G2Anim_BuildSegTransformNoControllers
                (_G2Matrix_Type *segMatrix,_G2Matrix_Type *parentMatrix,
                _G2Bool_Enum bRootTransUpdated,int segIndex)
 
 {
   ushort uVar1;
-  ushort uVar2;
-  ushort uVar3;
-  bool bVar4;
-  long lVar5;
+  bool bVar2;
+  long lVar3;
   undefined4 in_zero;
   undefined4 in_at;
+  int iVar4;
+  undefined4 uVar5;
   undefined4 uVar6;
   undefined4 uVar7;
   undefined4 uVar8;
-  undefined4 uVar9;
-  int local_28;
-  int local_24;
-  int local_20;
+  VECTOR local_28;
   
-  uVar1 = (&_segValues)[segIndex].scale.x;
-  local_28 = (int)(short)uVar1;
-  uVar2 = (&_segValues)[segIndex].scale.y;
-  local_24 = (int)(short)uVar2;
-  uVar3 = (&_segValues)[segIndex].scale.z;
-  local_20 = (int)(short)uVar3;
-  bVar4 = (ushort)(uVar1 | uVar2 | uVar3) != 0x1000;
-  _G2Anim_BuildSegLocalRotMatrix(&_segValues + segIndex,segMatrix);
-  if (bVar4) {
-    ScaleMatrix((int *)segMatrix,&local_28);
-    segMatrix->scaleFlag = (ushort)bVar4;
+  iVar4 = segIndex * 0x18;
+  local_28.vx = (int)(short)*(ushort *)(&DAT_800d4f14 + iVar4);
+  local_28.vy = (int)(short)*(ushort *)(&DAT_800d4f16 + iVar4);
+  local_28.vz = (int)(short)*(ushort *)(&DAT_800d4f18 + iVar4);
+  bVar2 = (ushort)(*(ushort *)(&DAT_800d4f14 + iVar4) | *(ushort *)(&DAT_800d4f16 + iVar4) |
+                  *(ushort *)(&DAT_800d4f18 + iVar4)) != 0x1000;
+  _G2Anim_BuildSegLocalRotMatrix((_G2AnimSegValue_Type *)(&_segValues + iVar4),segMatrix);
+  if (bVar2) {
+    ScaleMatrix((MATRIX *)segMatrix,&local_28);
+    segMatrix->scaleFlag = (ushort)bVar2;
   }
   setCopControlWord(2,0,*(undefined4 *)parentMatrix->rotScale);
   setCopControlWord(2,0x800,*(undefined4 *)(parentMatrix->rotScale + 2));
@@ -1501,41 +1530,41 @@ void _G2Anim_BuildSegTransformNoControllers
   setCopReg(2,0x5800,(uint)(ushort)segMatrix->rotScale[6]);
   copFunction(2,0x49e012);
   uVar1 = segMatrix->rotScale[2];
-  uVar7 = getCopReg(2,0x4800);
-  uVar8 = getCopReg(2,0x5000);
-  uVar9 = getCopReg(2,0x5800);
+  uVar6 = getCopReg(2,0x4800);
+  uVar7 = getCopReg(2,0x5000);
+  uVar8 = getCopReg(2,0x5800);
   setCopReg(2,0x4800,(uint)(ushort)segMatrix->rotScale[1]);
   setCopReg(2,0x5000,(uint)(ushort)segMatrix->rotScale[4]);
   setCopReg(2,0x5800,(uint)(ushort)segMatrix->rotScale[7]);
-  segMatrix->rotScale[0] = (short)uVar7;
-  segMatrix->rotScale[3] = (short)uVar8;
+  segMatrix->rotScale[0] = (short)uVar6;
+  segMatrix->rotScale[3] = (short)uVar7;
   copFunction(2,0x49e012);
-  uVar7 = getCopReg(2,0x4800);
-  uVar8 = getCopReg(2,0x5000);
-  uVar6 = getCopReg(2,0x5800);
+  uVar6 = getCopReg(2,0x4800);
+  uVar7 = getCopReg(2,0x5000);
+  uVar5 = getCopReg(2,0x5800);
   setCopReg(2,0x4800,(uint)uVar1);
   setCopReg(2,0x5000,(uint)(ushort)segMatrix->rotScale[5]);
   setCopReg(2,0x5800,(uint)(ushort)segMatrix->rotScale[8]);
-  segMatrix->rotScale[6] = (short)uVar9;
-  segMatrix->rotScale[1] = (short)uVar7;
+  segMatrix->rotScale[6] = (short)uVar8;
+  segMatrix->rotScale[1] = (short)uVar6;
   copFunction(2,0x49e012);
-  segMatrix->rotScale[4] = (short)uVar8;
-  segMatrix->rotScale[7] = (short)uVar6;
-  uVar7 = getCopReg(2,0x4800);
-  uVar8 = getCopReg(2,0x5000);
-  uVar6 = getCopReg(2,0x5800);
-  segMatrix->rotScale[2] = (short)uVar7;
-  segMatrix->rotScale[5] = (short)uVar8;
-  segMatrix->rotScale[8] = (short)uVar6;
-  setCopReg(2,in_zero,*(undefined4 *)&(&_segValues)[segIndex].trans);
-  setCopReg(2,in_at,*(undefined4 *)&(&_segValues)[segIndex].trans.z);
+  segMatrix->rotScale[4] = (short)uVar7;
+  segMatrix->rotScale[7] = (short)uVar5;
+  uVar6 = getCopReg(2,0x4800);
+  uVar7 = getCopReg(2,0x5000);
+  uVar5 = getCopReg(2,0x5800);
+  segMatrix->rotScale[2] = (short)uVar6;
+  segMatrix->rotScale[5] = (short)uVar7;
+  segMatrix->rotScale[8] = (short)uVar5;
+  setCopReg(2,in_zero,(&DAT_800d4f1c)[segIndex * 6]);
+  setCopReg(2,in_at,*(undefined4 *)(&DAT_800d4f20 + segIndex * 0xc));
   copFunction(2,0x486012);
-  lVar5 = getCopReg(2,0x19);
-  (segMatrix->trans).x = lVar5;
-  lVar5 = getCopReg(2,0x1a);
-  (segMatrix->trans).y = lVar5;
-  lVar5 = getCopReg(2,0x1b);
-  (segMatrix->trans).z = lVar5;
+  lVar3 = getCopReg(2,0x19);
+  (segMatrix->trans).x = lVar3;
+  lVar3 = getCopReg(2,0x1a);
+  (segMatrix->trans).y = lVar3;
+  lVar3 = getCopReg(2,0x1b);
+  (segMatrix->trans).z = lVar3;
   if (bRootTransUpdated != G2FALSE) {
     (parentMatrix->trans).x = (parentMatrix->trans).x + (segMatrix->trans).x;
     (parentMatrix->trans).y = (parentMatrix->trans).y + (segMatrix->trans).y;
@@ -1555,41 +1584,43 @@ void _G2Anim_BuildSegTransformNoControllers
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Anim_BuildSegLocalRotMatrix(struct _G2AnimSegValue_Type *segValue /*$v1*/, struct _G2Matrix_Type *segMatrix /*$a1*/)
- // line 2063, offset 0x800920a8
+ // line 2063, offset 0x80093c30
 	/* begin block 1 */
 		// Start line: 2064
-		// Start offset: 0x800920A8
+		// Start offset: 0x80093C30
 		// Variables:
 	// 		struct _G2SVector3_Type rot; // stack offset -16
 
 		/* begin block 1.1 */
 			// Start line: 2070
-			// Start offset: 0x800920D4
+			// Start offset: 0x80093C5C
 			// Variables:
 		// 		struct _G2SVector3_Type *source; // $v1
 		// 		struct _G2SVector3_Type *dest; // $a0
 
 			/* begin block 1.1.1 */
 				// Start line: 2070
-				// Start offset: 0x800920D4
+				// Start offset: 0x80093C5C
 				// Variables:
 			// 		unsigned long mask; // $a2
 			// 		unsigned short z; // $v0
 			// 		unsigned long xy; // $v1
 			/* end block 1.1.1 */
-			// End offset: 0x800920D4
+			// End offset: 0x80093C5C
 			// End Line: 2070
 		/* end block 1.1 */
-		// End offset: 0x800920D4
+		// End offset: 0x80093C5C
 		// End Line: 2070
 	/* end block 1 */
-	// End offset: 0x800920F8
+	// End offset: 0x80093C80
 	// End Line: 2074
 
 	/* begin block 2 */
 		// Start line: 4616
 	/* end block 2 */
 	// End Line: 4617
+
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 void _G2Anim_BuildSegLocalRotMatrix(_G2AnimSegValue_Type *segValue,_G2Matrix_Type *segMatrix)
 
@@ -1600,7 +1631,7 @@ void _G2Anim_BuildSegLocalRotMatrix(_G2AnimSegValue_Type *segValue,_G2Matrix_Typ
   if (segValue->bIsQuat == 0) {
     local_c = *(ushort *)((int)&segValue->rotQuat + 4) & 0xfff;
     local_10 = *(uint *)&segValue->rotQuat & 0xfff0fff;
-    RotMatrixZYX((short *)&local_10,(uint *)segMatrix);
+    RotMatrixZYX((SVECTOR *)&local_10,(MATRIX *)segMatrix);
   }
   else {
     G2Quat_ToMatrix_S((short *)segValue,(short *)segMatrix);
@@ -1613,15 +1644,15 @@ void _G2Anim_BuildSegLocalRotMatrix(_G2AnimSegValue_Type *segValue,_G2Matrix_Typ
 // decompiled code
 // original method signature: 
 // void /*$ra*/ wombat(unsigned char *segKeyList /*$a0*/, int flagBitOffset /*$a1*/, struct _G2AnimSegKeyflagInfo_Type *kfInfo /*$a2*/)
- // line 2113, offset 0x80092108
+ // line 2113, offset 0x80093c90
 	/* begin block 1 */
 		// Start line: 2116
-		// Start offset: 0x80092108
+		// Start offset: 0x80093C90
 		// Variables:
 	// 		int flagDWordOffset; // $a3
 	// 		int flagBitShift; // $a1
 	/* end block 1 */
-	// End offset: 0x80092108
+	// End offset: 0x80093C90
 	// End Line: 2118
 
 	/* begin block 2 */
@@ -1638,6 +1669,8 @@ void _G2Anim_BuildSegLocalRotMatrix(_G2AnimSegValue_Type *segValue,_G2Matrix_Typ
 		// Start line: 4720
 	/* end block 4 */
 	// End Line: 4721
+
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 void wombat(uchar *segKeyList,int flagBitOffset,_G2AnimSegKeyflagInfo_Type *kfInfo)
 
@@ -1656,15 +1689,15 @@ void wombat(uchar *segKeyList,int flagBitOffset,_G2AnimSegKeyflagInfo_Type *kfIn
 // decompiled code
 // original method signature: 
 // unsigned long /*$ra*/ kangaroo(struct _G2AnimSegKeyflagInfo_Type *kfInfo /*$a0*/)
- // line 2129, offset 0x80092140
+ // line 2129, offset 0x80093cc8
 	/* begin block 1 */
 		// Start line: 2132
-		// Start offset: 0x80092140
+		// Start offset: 0x80093CC8
 		// Variables:
 	// 		unsigned long keyflags; // $a2
 	// 		unsigned long tempFlags; // $v0
 	/* end block 1 */
-	// End offset: 0x800921C0
+	// End offset: 0x80093D48
 	// End Line: 2160
 
 	/* begin block 2 */
@@ -1681,6 +1714,8 @@ void wombat(uchar *segKeyList,int flagBitOffset,_G2AnimSegKeyflagInfo_Type *kfIn
 		// Start line: 4763
 	/* end block 4 */
 	// End Line: 4764
+
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 ulong kangaroo(_G2AnimSegKeyflagInfo_Type *kfInfo)
 
@@ -1717,47 +1752,47 @@ ulong kangaroo(_G2AnimSegKeyflagInfo_Type *kfInfo)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Anim_InitializeSegValue(struct _G2Anim_Type *anim /*$a0*/, struct _G2AnimSegValue_Type *segValue /*$a1*/, int segIndex /*$a2*/)
- // line 2167, offset 0x800921c8
+ // line 2167, offset 0x80093d50
 	/* begin block 1 */
 		// Start line: 2170
-		// Start offset: 0x800921C8
+		// Start offset: 0x80093D50
 		// Variables:
 	// 		struct _Segment *segment; // $v0
 
 		/* begin block 1.1 */
 			// Start line: 2170
-			// Start offset: 0x800921C8
+			// Start offset: 0x80093D50
 			// Variables:
 		// 		struct _G2Quat_Type *quat; // $a1
 		/* end block 1.1 */
-		// End offset: 0x800921C8
+		// End offset: 0x80093D50
 		// End Line: 2170
 
 		/* begin block 1.2 */
 			// Start line: 2170
-			// Start offset: 0x800921C8
+			// Start offset: 0x80093D50
 		/* end block 1.2 */
-		// End offset: 0x800921C8
+		// End offset: 0x80093D50
 		// End Line: 2170
 
 		/* begin block 1.3 */
 			// Start line: 2170
-			// Start offset: 0x800921C8
+			// Start offset: 0x80093D50
 
 			/* begin block 1.3.1 */
 				// Start line: 2170
-				// Start offset: 0x800921C8
+				// Start offset: 0x80093D50
 				// Variables:
 			// 		unsigned long zpad; // $v0
 			// 		unsigned long xy; // $v1
 			/* end block 1.3.1 */
-			// End offset: 0x800921C8
+			// End offset: 0x80093D50
 			// End Line: 2170
 		/* end block 1.3 */
-		// End offset: 0x800921C8
+		// End offset: 0x80093D50
 		// End Line: 2170
 	/* end block 1 */
-	// End offset: 0x800921C8
+	// End offset: 0x80093D50
 	// End Line: 2170
 
 	/* begin block 2 */
@@ -1769,6 +1804,8 @@ ulong kangaroo(_G2AnimSegKeyflagInfo_Type *kfInfo)
 		// Start line: 4840
 	/* end block 3 */
 	// End Line: 4841
+
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 void _G2Anim_InitializeSegValue(_G2Anim_Type *anim,_G2AnimSegValue_Type *segValue,int segIndex)
 
@@ -1792,10 +1829,10 @@ void _G2Anim_InitializeSegValue(_G2Anim_Type *anim,_G2AnimSegValue_Type *segValu
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2AnimSection_InitStatus(struct _G2AnimSection_Type *section /*$s7*/, struct _G2Anim_Type *anim /*stack 4*/)
- // line 2224, offset 0x8009221c
+ // line 2224, offset 0x80093da4
 	/* begin block 1 */
 		// Start line: 2225
-		// Start offset: 0x8009221C
+		// Start offset: 0x80093DA4
 		// Variables:
 	// 		struct _G2AnimDecompressChannelInfo_Type dcInfo; // stack offset -104
 	// 		struct _G2AnimSegValue_Type *segValue; // $s6
@@ -1813,44 +1850,46 @@ void _G2Anim_InitializeSegValue(_G2Anim_Type *anim,_G2AnimSegValue_Type *segValu
 
 		/* begin block 1.1 */
 			// Start line: 2225
-			// Start offset: 0x8009221C
+			// Start offset: 0x80093DA4
 			// Variables:
 		// 		struct _G2Anim_Type *anim; // stack offset 4
 		// 		struct _G2AnimSection_Type *section; // $s7
 
 			/* begin block 1.1.1 */
 				// Start line: 2225
-				// Start offset: 0x8009221C
+				// Start offset: 0x80093DA4
 				// Variables:
 			// 		int bitsPerFlagType; // $s2
 			// 		int flagBitOffset; // $s0
 			// 		unsigned long activeChanBits; // $s3
 			// 		unsigned char *segKeyList; // $s1
 			/* end block 1.1.1 */
-			// End offset: 0x800922F0
+			// End offset: 0x80093E78
 			// End Line: 2225
 		/* end block 1.1 */
-		// End offset: 0x800922F0
+		// End offset: 0x80093E78
 		// End Line: 2225
 	/* end block 1 */
-	// End offset: 0x80092488
-	// End Line: 2335
+	// End offset: 0x80094010
+	// End Line: 2336
 
 	/* begin block 2 */
 		// Start line: 4952
 	/* end block 2 */
 	// End Line: 4953
 
+/* File: C:\kain2\game\G2\ANIMG2.C */
+
 void _G2AnimSection_InitStatus(_G2AnimSection_Type *section,_G2Anim_Type *anim)
 
 {
-  _func_4395 **pp_Var1;
+  _func_7 **pp_Var1;
   uint uVar2;
   ulong uVar3;
   ulong uVar4;
   byte bVar5;
   int flagBitOffset;
-  _func_4395 ***segKeyList;
+  _func_7 ***segKeyList;
   uint uVar6;
   uint segIndex;
   _G2AnimChanStatus_Type *status;
@@ -1888,7 +1927,7 @@ void _G2AnimSection_InitStatus(_G2AnimSection_Type *section,_G2Anim_Type *anim)
   section->chanStatusBlockList = (_G2AnimChanStatusBlock_Type *)0x0;
   local_68.chanData = (&section->keylist->sectionData)[section->sectionID];
   segIndex = (uint)section->firstSeg;
-  segValue = &_segValues + segIndex;
+  segValue = (_G2AnimSegValue_Type *)(&_segValues + segIndex * 0x18);
   uVar9 = segIndex + section->segCount;
   p_Var8 = (_G2AnimChanStatusBlock_Type *)&section->chanStatusBlockList;
   if (segIndex < uVar9) {
@@ -1906,8 +1945,7 @@ void _G2AnimSection_InitStatus(_G2AnimSection_Type *section,_G2Anim_Type *anim)
             bVar5 = 0;
           }
           if (bVar5 == 0) {
-            pp_Var1 = (_func_4395 **)
-                      ((int)local_68.chanData + (uint)(local_68.keylist)->keyCount * 2);
+            pp_Var1 = (_func_7 **)((int)local_68.chanData + (uint)(local_68.keylist)->keyCount * 2);
           }
           else {
             pp_Var1 = local_68.chanData + 1;
@@ -1952,10 +1990,10 @@ void _G2AnimSection_InitStatus(_G2AnimSection_Type *section,_G2Anim_Type *anim)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FooBar(struct _G2AnimSection_Type *section /*$s6*/, struct _G2Anim_Type *anim /*stack 4*/, int decompressedKey /*$s4*/, int targetKey /*stack 12*/, long timeOffset /*stack 16*/)
- // line 2345, offset 0x800924d0
+ // line 2346, offset 0x80094058
 	/* begin block 1 */
-		// Start line: 2346
-		// Start offset: 0x800924D0
+		// Start line: 2347
+		// Start offset: 0x80094058
 		// Variables:
 	// 		struct _G2AnimDecompressChannelInfo_Type dcInfo; // stack offset -152
 	// 		struct _G2AnimSegValue_Type *segValue; // $s6
@@ -1975,34 +2013,36 @@ void _G2AnimSection_InitStatus(_G2AnimSection_Type *section,_G2Anim_Type *anim)
 	// 		struct _G2AnimChanStatus_Type nextChanStatus; // stack offset -56
 
 		/* begin block 1.1 */
-			// Start line: 2346
-			// Start offset: 0x800924D0
+			// Start line: 2347
+			// Start offset: 0x80094058
 			// Variables:
 		// 		struct _G2Anim_Type *anim; // stack offset 4
 		// 		struct _G2AnimSection_Type *section; // $s6
 
 			/* begin block 1.1.1 */
-				// Start line: 2346
-				// Start offset: 0x800924D0
+				// Start line: 2347
+				// Start offset: 0x80094058
 				// Variables:
 			// 		int bitsPerFlagType; // $s2
 			// 		int flagBitOffset; // $s0
 			// 		unsigned long activeChanBits; // $s3
 			// 		unsigned char *segKeyList; // $s1
 			/* end block 1.1.1 */
-			// End offset: 0x800925B0
-			// End Line: 2346
+			// End offset: 0x80094138
+			// End Line: 2347
 		/* end block 1.1 */
-		// End offset: 0x800925B0
-		// End Line: 2346
+		// End offset: 0x80094138
+		// End Line: 2347
 	/* end block 1 */
-	// End offset: 0x8009292C
-	// End Line: 2507
+	// End offset: 0x800944B4
+	// End Line: 2508
 
 	/* begin block 2 */
-		// Start line: 5211
+		// Start line: 5213
 	/* end block 2 */
-	// End Line: 5212
+	// End Line: 5214
+
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 void FooBar(_G2AnimSection_Type *section,_G2Anim_Type *anim,int decompressedKey,int targetKey,
            long timeOffset)
@@ -2012,11 +2052,11 @@ void FooBar(_G2AnimSection_Type *section,_G2Anim_Type *anim,int decompressedKey,
   ulong uVar2;
   ulong uVar3;
   ulong uVar4;
-  _func_4395 **pp_Var5;
+  _func_7 **pp_Var5;
   uint uVar6;
   byte bVar7;
   int flagBitOffset;
-  _func_4395 ***segKeyList;
+  _func_7 ***segKeyList;
   _G2AnimSegValue_Type *p_Var8;
   uint segIndex;
   uint uVar9;
@@ -2070,7 +2110,7 @@ void FooBar(_G2AnimSection_Type *section,_G2Anim_Type *anim,int decompressedKey,
     }
   }
   segIndex = (uint)section->firstSeg;
-  segValue = &_segValues + segIndex;
+  segValue = (_G2AnimSegValue_Type *)(&_segValues + segIndex * 0x18);
   local_30 = segIndex + section->segCount;
   local_98.storedKey = decompressedKey;
   local_98.targetKey = targetKey;
@@ -2092,7 +2132,7 @@ void FooBar(_G2AnimSection_Type *section,_G2Anim_Type *anim,int decompressedKey,
             *(undefined2 *)&p_Var8->rotQuat =
                  *(undefined2 *)((int)local_98.chanData + targetKey * 2);
             local_98.chanData =
-                 (_func_4395 **)((int)local_98.chanData + (uint)(local_98.keylist)->keyCount * 2);
+                 (_func_7 **)((int)local_98.chanData + (uint)(local_98.keylist)->keyCount * 2);
           }
           else {
             if (bVar7 == 0x20) {
@@ -2129,7 +2169,7 @@ void FooBar(_G2AnimSection_Type *section,_G2Anim_Type *anim,int decompressedKey,
             else {
               if (bVar7 < 0x41) {
                 if (bVar7 == 0) {
-                  pp_Var5 = (_func_4395 **)((int)local_58.chanData + local_58.targetKey * 2);
+                  pp_Var5 = (_func_7 **)((int)local_58.chanData + local_58.targetKey * 2);
                   local_58.chanData = local_98.chanData;
                   local_48.chanData = local_98.chanData;
                   local_38[0] = (_G2AnimChanStatus_Type)
@@ -2186,23 +2226,25 @@ void FooBar(_G2AnimSection_Type *section,_G2Anim_Type *anim,int decompressedKey,
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2AnimSection_UpdateStoredFrameFromData(struct _G2AnimSection_Type *section /*$s0*/, struct _G2Anim_Type *anim /*$s3*/)
- // line 2512, offset 0x8009295c
+ // line 2513, offset 0x800944e4
 	/* begin block 1 */
-		// Start line: 2513
-		// Start offset: 0x8009295C
+		// Start line: 2514
+		// Start offset: 0x800944E4
 		// Variables:
 	// 		short timePerKey; // $s2
 	// 		long storedKey; // $a2
 	// 		long targetKey; // $s1
 	// 		long timeOffset; // $v0
 	/* end block 1 */
-	// End offset: 0x800929C4
-	// End Line: 2545
+	// End offset: 0x8009454C
+	// End Line: 2546
 
 	/* begin block 2 */
-		// Start line: 5583
+		// Start line: 5585
 	/* end block 2 */
-	// End Line: 5584
+	// End Line: 5586
+
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 void _G2AnimSection_UpdateStoredFrameFromData(_G2AnimSection_Type *section,_G2Anim_Type *anim)
 
@@ -2233,28 +2275,30 @@ void _G2AnimSection_UpdateStoredFrameFromData(_G2AnimSection_Type *section,_G2An
 // decompiled code
 // original method signature: 
 // struct _G2Anim_Type * /*$ra*/ _G2AnimSection_GetAnim(struct _G2AnimSection_Type *section /*$a0*/)
- // line 2556, offset 0x80092a2c
+ // line 2557, offset 0x800945b4
 	/* begin block 1 */
-		// Start line: 2559
-		// Start offset: 0x80092A2C
+		// Start line: 2560
+		// Start offset: 0x800945B4
 	/* end block 1 */
-	// End offset: 0x80092A2C
-	// End Line: 2563
+	// End offset: 0x800945B4
+	// End Line: 2564
 
 	/* begin block 2 */
-		// Start line: 5692
-	/* end block 2 */
-	// End Line: 5693
-
-	/* begin block 3 */
 		// Start line: 5694
-	/* end block 3 */
+	/* end block 2 */
 	// End Line: 5695
 
+	/* begin block 3 */
+		// Start line: 5696
+	/* end block 3 */
+	// End Line: 5697
+
 	/* begin block 4 */
-		// Start line: 5698
+		// Start line: 5700
 	/* end block 4 */
-	// End Line: 5699
+	// End Line: 5701
+
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 _G2Anim_Type * _G2AnimSection_GetAnim(_G2AnimSection_Type *section)
 
@@ -2267,23 +2311,25 @@ _G2Anim_Type * _G2AnimSection_GetAnim(_G2AnimSection_Type *section)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2AnimSection_TriggerEffects(struct _G2AnimSection_Type *section /*$s1*/, short startTime /*$a1*/, short endTime /*$a2*/)
- // line 2575, offset 0x80092a4c
+ // line 2576, offset 0x800945d4
 	/* begin block 1 */
-		// Start line: 2576
-		// Start offset: 0x80092A4C
+		// Start line: 2577
+		// Start offset: 0x800945D4
 		// Variables:
 	// 		struct _G2AnimKeylist_Type *keylist; // $s4
 	// 		struct _G2AnimFxHeader_Type *fxHeader; // $s0
 	// 		int fxSectionID; // $a0
 	// 		unsigned long fxSize; // $s2
 	/* end block 1 */
-	// End offset: 0x80092B54
-	// End Line: 2616
+	// End offset: 0x800946DC
+	// End Line: 2617
 
 	/* begin block 2 */
-		// Start line: 5730
+		// Start line: 5732
 	/* end block 2 */
-	// End Line: 5731
+	// End Line: 5733
+
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 void _G2AnimSection_TriggerEffects(_G2AnimSection_Type *section,short startTime,short endTime)
 
@@ -2304,7 +2350,7 @@ void _G2AnimSection_TriggerEffects(_G2AnimSection_Type *section,short startTime,
       if (((((uint)bVar2 & 0xf) == (uint)section->sectionID) &&
           (((sVar3 = p_Var4->keyframeID * (ushort)p_Var6->s0TailTime, startTime < sVar3 ||
             ((sVar3 == 0 && (startTime <= sVar3)))) && (sVar3 <= endTime)))) &&
-         (section->callback != (_func_4388 *)0x0)) {
+         (section->callback != (_func_8 *)0x0)) {
         p_Var5 = _G2AnimSection_GetAnim(section);
         (*section->callback)
                   (p_Var5,(uint)section->sectionID,6,(int)p_Var4->type,p_Var4 + 1,
@@ -2322,20 +2368,22 @@ void _G2AnimSection_TriggerEffects(_G2AnimSection_Type *section,short startTime,
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Anim_FreeChanStatusBlockList(struct _G2AnimChanStatusBlock_Type *block /*$a1*/)
- // line 2620, offset 0x80092b78
+ // line 2621, offset 0x80094700
 	/* begin block 1 */
-		// Start line: 2621
-		// Start offset: 0x80092B78
+		// Start line: 2622
+		// Start offset: 0x80094700
 		// Variables:
 	// 		struct _G2AnimChanStatusBlock_Type *nextBlock; // $s0
 	/* end block 1 */
-	// End offset: 0x80092BAC
-	// End Line: 2632
+	// End offset: 0x80094734
+	// End Line: 2633
 
 	/* begin block 2 */
-		// Start line: 5823
+		// Start line: 5825
 	/* end block 2 */
-	// End Line: 5824
+	// End Line: 5826
+
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 void _G2Anim_FreeChanStatusBlockList(_G2AnimChanStatusBlock_Type *block)
 
@@ -2357,23 +2405,25 @@ void _G2Anim_FreeChanStatusBlockList(_G2AnimChanStatusBlock_Type *block)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ _G2AnimAlphaTable_GetValue(struct _G2AnimAlphaTable_Type *table /*$a2*/, long trueAlpha /*$v0*/)
- // line 2637, offset 0x80092bbc
+ // line 2638, offset 0x80094744
 	/* begin block 1 */
-		// Start line: 2638
-		// Start offset: 0x80092BBC
+		// Start line: 2639
+		// Start offset: 0x80094744
 		// Variables:
 	// 		long position; // $a0
 	// 		long positionInt; // $v1
 	// 		long positionFrac; // $a0
 	// 		long value; // $a1
 	/* end block 1 */
-	// End offset: 0x80092C18
-	// End Line: 2656
+	// End offset: 0x800947A0
+	// End Line: 2657
 
 	/* begin block 2 */
-		// Start line: 5857
+		// Start line: 5859
 	/* end block 2 */
-	// End Line: 5858
+	// End Line: 5860
+
+/* File: C:\kain2\game\G2\ANIMG2.C */
 
 long _G2AnimAlphaTable_GetValue(_G2AnimAlphaTable_Type *table,long trueAlpha)
 

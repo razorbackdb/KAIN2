@@ -5,18 +5,20 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_AttachControllerToSeg(struct _G2Anim_Type *anim /*$s0*/, int segNumber /*$a1*/, int type /*$a2*/)
- // line 235, offset 0x8008e190
+ // line 235, offset 0x8008fccc
 	/* begin block 1 */
 		// Start line: 236
-		// Start offset: 0x8008E190
+		// Start offset: 0x8008FCCC
 	/* end block 1 */
-	// End offset: 0x8008E190
+	// End offset: 0x8008FCCC
 	// End Line: 236
 
 	/* begin block 2 */
 		// Start line: 470
 	/* end block 2 */
 	// End Line: 471
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 void G2Anim_AttachControllerToSeg(_G2Anim_Type *anim,int segNumber,int type)
 
@@ -33,21 +35,23 @@ void G2Anim_AttachControllerToSeg(_G2Anim_Type *anim,int segNumber,int type)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_DetachControllerFromSeg(struct _G2Anim_Type *anim /*$s1*/, int segNumber /*$s2*/, int type /*$s3*/)
- // line 260, offset 0x8008e1c8
+ // line 260, offset 0x8008fd04
 	/* begin block 1 */
 		// Start line: 261
-		// Start offset: 0x8008E1C8
+		// Start offset: 0x8008FD04
 		// Variables:
 	// 		struct _G2AnimController_Type *controller; // $v0
 	// 		unsigned short *controllerNextPtr; // stack offset -32
 	/* end block 1 */
-	// End offset: 0x8008E224
-	// End Line: 286
+	// End offset: 0x8008FDB0
+	// End Line: 291
 
 	/* begin block 2 */
 		// Start line: 530
 	/* end block 2 */
 	// End Line: 531
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 void G2Anim_DetachControllerFromSeg(_G2Anim_Type *anim,int segNumber,int type)
 
@@ -60,10 +64,12 @@ void G2Anim_DetachControllerFromSeg(_G2Anim_Type *anim,int segNumber,int type)
   if (controller == (_G2AnimController_Type *)0x0) {
     local_20[0] = &anim->disabledControllerList;
     controller = _G2AnimControllerST_FindPtrInList(segNumber,type,local_20);
+    if (controller == (_G2AnimController_Type *)0x0) {
+      return;
+    }
   }
   controller = _G2AnimController_Destroy(controller);
-  *local_20[0] = (ushort)((int)((int)controller - (int)_controllerPool.blockPool) * 0x38e38e39 >> 2)
-  ;
+  *local_20[0] = (ushort)((int)((int)controller - DAT_800d5698) * 0x38e38e39 >> 2);
   return;
 }
 
@@ -72,21 +78,23 @@ void G2Anim_DetachControllerFromSeg(_G2Anim_Type *anim,int segNumber,int type)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_EnableController(struct _G2Anim_Type *anim /*$s2*/, int segNumber /*$s1*/, int type /*$a2*/)
- // line 339, offset 0x8008e288
+ // line 342, offset 0x8008fdcc
 	/* begin block 1 */
-		// Start line: 340
-		// Start offset: 0x8008E288
+		// Start line: 343
+		// Start offset: 0x8008FDCC
 		// Variables:
 	// 		struct _G2AnimController_Type *controller; // $s0
 	// 		struct _G2Matrix_Type *segMatrix; // $v1
 	/* end block 1 */
-	// End offset: 0x8008E34C
-	// End Line: 375
+	// End offset: 0x8008FE90
+	// End Line: 378
 
 	/* begin block 2 */
-		// Start line: 669
+		// Start line: 675
 	/* end block 2 */
-	// End Line: 670
+	// End Line: 676
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 void G2Anim_EnableController(_G2Anim_Type *anim,int segNumber,int type)
 
@@ -111,7 +119,7 @@ void G2Anim_EnableController(_G2Anim_Type *anim,int segNumber,int type)
         *(undefined2 *)(controller->data + 4) = *(undefined2 *)&(p_Var1->trans).z;
       }
       else {
-        memset(controller->data,0,0x10);
+        memset();
       }
     }
     _G2AnimController_InsertIntoList(controller,&anim->controllerList);
@@ -124,20 +132,22 @@ void G2Anim_EnableController(_G2Anim_Type *anim,int segNumber,int type)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_DisableController(struct _G2Anim_Type *anim /*$s0*/, int segNumber /*$a1*/, int type /*$a2*/)
- // line 394, offset 0x8008e364
+ // line 397, offset 0x8008fea8
 	/* begin block 1 */
-		// Start line: 395
-		// Start offset: 0x8008E364
+		// Start line: 398
+		// Start offset: 0x8008FEA8
 		// Variables:
 	// 		struct _G2AnimController_Type *controller; // $v0
 	/* end block 1 */
-	// End offset: 0x8008E394
-	// End Line: 408
+	// End offset: 0x8008FED8
+	// End Line: 411
 
 	/* begin block 2 */
-		// Start line: 780
+		// Start line: 786
 	/* end block 2 */
-	// End Line: 781
+	// End Line: 787
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 void G2Anim_DisableController(_G2Anim_Type *anim,int segNumber,int type)
 
@@ -156,22 +166,24 @@ void G2Anim_DisableController(_G2Anim_Type *anim,int segNumber,int type)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_InterpDisableController(struct _G2Anim_Type *anim /*$s2*/, int segNumber /*$s4*/, int type /*$s3*/, short duration /*$s5*/)
- // line 427, offset 0x8008e3a4
+ // line 430, offset 0x8008fee8
 	/* begin block 1 */
-		// Start line: 428
-		// Start offset: 0x8008E3A4
+		// Start line: 431
+		// Start offset: 0x8008FEE8
 		// Variables:
 	// 		struct _G2AnimController_Type *controller; // $s1
 	// 		struct _G2SVector3_Type zeroVector; // stack offset -48
 	// 		struct _G2Quat_Type targetQuat; // stack offset -40
 	/* end block 1 */
-	// End offset: 0x8008E4A0
-	// End Line: 472
+	// End offset: 0x8008FFE4
+	// End Line: 475
 
 	/* begin block 2 */
-		// Start line: 845
+		// Start line: 851
 	/* end block 2 */
-	// End Line: 846
+	// End Line: 852
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 void G2Anim_InterpDisableController(_G2Anim_Type *anim,int segNumber,int type,short duration)
 
@@ -180,7 +192,7 @@ void G2Anim_InterpDisableController(_G2Anim_Type *anim,int segNumber,int type,sh
   _G2SVector3_Type _Stack48;
   _G2Quat_Type _Stack40;
   
-  memset(&_Stack48,0,6);
+  memset();
   if ((duration == 0) || (type == 0x20)) {
     G2Anim_DisableController(anim,segNumber,type);
   }
@@ -203,20 +215,22 @@ void G2Anim_InterpDisableController(_G2Anim_Type *anim,int segNumber,int type,sh
 // decompiled code
 // original method signature: 
 // enum _G2Bool_Enum /*$ra*/ G2Anim_IsControllerActive(struct _G2Anim_Type *anim /*$a0*/, int segNumber /*$a1*/, int type /*$a2*/)
- // line 493, offset 0x8008e4c4
+ // line 496, offset 0x80090008
 	/* begin block 1 */
-		// Start line: 494
-		// Start offset: 0x8008E4C4
+		// Start line: 497
+		// Start offset: 0x80090008
 		// Variables:
 	// 		struct _G2AnimController_Type *controller; // $v0
 	/* end block 1 */
-	// End offset: 0x8008E500
-	// End Line: 510
+	// End offset: 0x80090044
+	// End Line: 513
 
 	/* begin block 2 */
-		// Start line: 975
+		// Start line: 981
 	/* end block 2 */
-	// End Line: 976
+	// End Line: 982
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 _G2Bool_Enum G2Anim_IsControllerActive(_G2Anim_Type *anim,int segNumber,int type)
 
@@ -239,20 +253,22 @@ _G2Bool_Enum G2Anim_IsControllerActive(_G2Anim_Type *anim,int segNumber,int type
 // decompiled code
 // original method signature: 
 // enum _G2Bool_Enum /*$ra*/ G2Anim_IsControllerInterpolating(struct _G2Anim_Type *anim /*$a0*/, int segNumber /*$a1*/, int type /*$a2*/)
- // line 516, offset 0x8008e510
+ // line 519, offset 0x80090054
 	/* begin block 1 */
-		// Start line: 517
-		// Start offset: 0x8008E510
+		// Start line: 520
+		// Start offset: 0x80090054
 		// Variables:
 	// 		struct _G2AnimController_Type *controller; // $v0
 	/* end block 1 */
-	// End offset: 0x8008E554
-	// End Line: 537
+	// End offset: 0x80090098
+	// End Line: 540
 
 	/* begin block 2 */
-		// Start line: 981
+		// Start line: 987
 	/* end block 2 */
-	// End Line: 982
+	// End Line: 988
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 _G2Bool_Enum G2Anim_IsControllerInterpolating(_G2Anim_Type *anim,int segNumber,int type)
 
@@ -275,10 +291,10 @@ _G2Bool_Enum G2Anim_IsControllerInterpolating(_G2Anim_Type *anim,int segNumber,i
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_GetControllerCurrentInterpVector(struct _G2Anim_Type *anim /*$s1*/, int segNumber /*$a1*/, int type /*$a2*/, struct _G2SVector3_Type *vector /*$s0*/)
- // line 555, offset 0x8008e564
+ // line 558, offset 0x800900a8
 	/* begin block 1 */
-		// Start line: 556
-		// Start offset: 0x8008E564
+		// Start line: 559
+		// Start offset: 0x800900A8
 		// Variables:
 	// 		struct _G2AnimController_Type *controller; // $v1
 	// 		struct _G2SVector3_Type *base; // $a0
@@ -286,44 +302,46 @@ _G2Bool_Enum G2Anim_IsControllerInterpolating(_G2Anim_Type *anim,int segNumber,i
 	// 		struct _G2Matrix_Type *segMatrix; // $v1
 
 		/* begin block 1.1 */
-			// Start line: 576
-			// Start offset: 0x8008E5A8
+			// Start line: 579
+			// Start offset: 0x800900EC
 			// Variables:
 		// 		struct _G2SVector3_Type *source; // $a0
 		// 		struct _G2SVector3_Type *dest; // $s0
 
 			/* begin block 1.1.1 */
-				// Start line: 576
-				// Start offset: 0x8008E5A8
+				// Start line: 579
+				// Start offset: 0x800900EC
 				// Variables:
 			// 		unsigned short z; // $v1
 			// 		unsigned long xy; // $v0
 			/* end block 1.1.1 */
-			// End offset: 0x8008E5A8
-			// End Line: 576
+			// End offset: 0x800900EC
+			// End Line: 579
 		/* end block 1.1 */
-		// End offset: 0x8008E5A8
-		// End Line: 576
+		// End offset: 0x800900EC
+		// End Line: 579
 
 		/* begin block 1.2 */
-			// Start line: 577
-			// Start offset: 0x8008E5BC
+			// Start line: 580
+			// Start offset: 0x80090100
 			// Variables:
 		// 		struct _G2SVector3_Type *dest; // $s0
 		// 		struct _G2SVector3_Type *base; // $a0
 		// 		struct _G2SVector3_Type *offset; // $a1
 		// 		long alpha; // $v0
 		/* end block 1.2 */
-		// End offset: 0x8008E5BC
-		// End Line: 577
+		// End offset: 0x80090100
+		// End Line: 580
 	/* end block 1 */
-	// End offset: 0x8008E6B0
-	// End Line: 600
+	// End offset: 0x800901F4
+	// End Line: 603
 
 	/* begin block 2 */
-		// Start line: 1101
+		// Start line: 1107
 	/* end block 2 */
-	// End Line: 1102
+	// End Line: 1108
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 void G2Anim_GetControllerCurrentInterpVector
                (_G2Anim_Type *anim,int segNumber,int type,_G2SVector3_Type *vector)
@@ -388,18 +406,20 @@ void G2Anim_GetControllerCurrentInterpVector
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_SetControllerCallbackData(struct _G2Anim_Type *anim /*$a0*/, int segNumber /*$a1*/, int type /*$a2*/, void *callbackData /*$s0*/)
- // line 626, offset 0x8008e6c4
+ // line 629, offset 0x80090208
 	/* begin block 1 */
-		// Start line: 627
-		// Start offset: 0x8008E6C4
+		// Start line: 630
+		// Start offset: 0x80090208
 	/* end block 1 */
-	// End offset: 0x8008E6C4
-	// End Line: 627
+	// End offset: 0x80090208
+	// End Line: 630
 
 	/* begin block 2 */
-		// Start line: 1235
+		// Start line: 1241
 	/* end block 2 */
-	// End Line: 1236
+	// End Line: 1242
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 void G2Anim_SetControllerCallbackData(_G2Anim_Type *anim,int segNumber,int type,void *callbackData)
 
@@ -416,20 +436,22 @@ void G2Anim_SetControllerCallbackData(_G2Anim_Type *anim,int segNumber,int type,
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_SetControllerAngleOrder(struct _G2Anim_Type *anim /*$a0*/, int segNumber /*$a1*/, int type /*$a2*/, int order /*$s0*/)
- // line 645, offset 0x8008e6ec
+ // line 648, offset 0x80090230
 	/* begin block 1 */
-		// Start line: 646
-		// Start offset: 0x8008E6EC
+		// Start line: 649
+		// Start offset: 0x80090230
 		// Variables:
 	// 		struct _G2AnimController_Type *controller; // $v0
 	/* end block 1 */
-	// End offset: 0x8008E6EC
-	// End Line: 646
+	// End offset: 0x80090230
+	// End Line: 649
 
 	/* begin block 2 */
-		// Start line: 1199
+		// Start line: 1205
 	/* end block 2 */
-	// End Line: 1200
+	// End Line: 1206
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 void G2Anim_SetControllerAngleOrder(_G2Anim_Type *anim,int segNumber,int type,int order)
 
@@ -446,20 +468,22 @@ void G2Anim_SetControllerAngleOrder(_G2Anim_Type *anim,int segNumber,int type,in
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_SetController_Vector(struct _G2Anim_Type *anim /*$a0*/, int segNumber /*$a1*/, int type /*$a2*/, struct _G2SVector3_Type *vector /*$s0*/)
- // line 665, offset 0x8008e724
+ // line 668, offset 0x80090268
 	/* begin block 1 */
-		// Start line: 666
-		// Start offset: 0x8008E724
+		// Start line: 669
+		// Start offset: 0x80090268
 		// Variables:
 	// 		struct _G2AnimController_Type *controller; // $v0
 	/* end block 1 */
-	// End offset: 0x8008E724
-	// End Line: 666
+	// End offset: 0x80090268
+	// End Line: 669
 
 	/* begin block 2 */
-		// Start line: 1239
+		// Start line: 1245
 	/* end block 2 */
-	// End Line: 1240
+	// End Line: 1246
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 void G2Anim_SetController_Vector(_G2Anim_Type *anim,int segNumber,int type,_G2SVector3_Type *vector)
 
@@ -480,10 +504,10 @@ void G2Anim_SetController_Vector(_G2Anim_Type *anim,int segNumber,int type,_G2SV
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_SetInterpController_Vector(struct _G2Anim_Type *anim /*$s2*/, int segNumber /*$s3*/, int type /*$s4*/, struct _G2SVector3_Type *vector /*$s6*/, int duration /*stack 16*/)
- // line 708, offset 0x8008e76c
+ // line 711, offset 0x800902b0
 	/* begin block 1 */
-		// Start line: 709
-		// Start offset: 0x8008E76C
+		// Start line: 712
+		// Start offset: 0x800902B0
 		// Variables:
 	// 		struct _G2AnimController_Type *controller; // $s1
 	// 		struct _G2EulerAngles_Type eulerVector; // stack offset -48
@@ -491,13 +515,15 @@ void G2Anim_SetController_Vector(_G2Anim_Type *anim,int segNumber,int type,_G2SV
 	// 		struct _G2SVector3_Type *offset; // $a1
 	// 		struct _G2Quat_Type quat; // stack offset -40
 	/* end block 1 */
-	// End offset: 0x8008E8A8
-	// End Line: 750
+	// End offset: 0x800903EC
+	// End Line: 753
 
 	/* begin block 2 */
-		// Start line: 1390
+		// Start line: 1396
 	/* end block 2 */
-	// End Line: 1391
+	// End Line: 1397
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 void G2Anim_SetInterpController_Vector
                (_G2Anim_Type *anim,int segNumber,int type,_G2SVector3_Type *vector,int duration)
@@ -537,39 +563,41 @@ void G2Anim_SetInterpController_Vector
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_SetInterpController_Quat(struct _G2Anim_Type *anim /*$s1*/, int segNumber /*$a1*/, int type /*$a2*/, struct _G2Quat_Type *quat /*$s2*/, int duration /*stack 16*/)
- // line 777, offset 0x8008e8d0
+ // line 780, offset 0x80090414
 	/* begin block 1 */
-		// Start line: 778
-		// Start offset: 0x8008E8D0
+		// Start line: 781
+		// Start offset: 0x80090414
 		// Variables:
 	// 		struct _G2AnimController_Type *controller; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 778
-			// Start offset: 0x8008E8D0
+			// Start line: 781
+			// Start offset: 0x80090414
 			// Variables:
 		// 		struct _G2Quat_Type *source; // $s2
 
 			/* begin block 1.1.1 */
-				// Start line: 778
-				// Start offset: 0x8008E8D0
+				// Start line: 781
+				// Start offset: 0x80090414
 				// Variables:
 			// 		unsigned long zw; // $a0
 			// 		unsigned long xy; // $v1
 			/* end block 1.1.1 */
-			// End offset: 0x8008E8D0
-			// End Line: 778
+			// End offset: 0x80090414
+			// End Line: 781
 		/* end block 1.1 */
-		// End offset: 0x8008E8D0
-		// End Line: 778
+		// End offset: 0x80090414
+		// End Line: 781
 	/* end block 1 */
-	// End offset: 0x8008E8D0
-	// End Line: 778
+	// End offset: 0x80090414
+	// End Line: 781
 
 	/* begin block 2 */
-		// Start line: 1545
+		// Start line: 1551
 	/* end block 2 */
-	// End Line: 1546
+	// End Line: 1552
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 void G2Anim_SetInterpController_Quat
                (_G2Anim_Type *anim,int segNumber,int type,_G2Quat_Type *quat,int duration)
@@ -598,20 +626,22 @@ void G2Anim_SetInterpController_Quat
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Anim_ApplyControllersToStoredFrame(struct _G2Anim_Type *anim /*$s2*/)
- // line 807, offset 0x8008e94c
+ // line 810, offset 0x80090490
 	/* begin block 1 */
-		// Start line: 808
-		// Start offset: 0x8008E94C
+		// Start line: 811
+		// Start offset: 0x80090490
 		// Variables:
 	// 		int i; // $s0
 	/* end block 1 */
-	// End offset: 0x8008E994
-	// End Line: 817
+	// End offset: 0x800904D8
+	// End Line: 820
 
 	/* begin block 2 */
-		// Start line: 1481
+		// Start line: 1487
 	/* end block 2 */
-	// End Line: 1482
+	// End Line: 1488
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 void _G2Anim_ApplyControllersToStoredFrame(_G2Anim_Type *anim)
 
@@ -637,10 +667,10 @@ void _G2Anim_ApplyControllersToStoredFrame(_G2Anim_Type *anim)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Anim_BuildTransformsWithControllers(struct _G2Anim_Type *anim /*$s6*/)
- // line 821, offset 0x8008e9ac
+ // line 824, offset 0x800904f0
 	/* begin block 1 */
-		// Start line: 822
-		// Start offset: 0x8008E9AC
+		// Start line: 825
+		// Start offset: 0x800904F0
 		// Variables:
 	// 		struct _Segment *segment; // $a1
 	// 		struct _G2AnimController_Type *controller; // $s0
@@ -654,13 +684,15 @@ void _G2Anim_ApplyControllersToStoredFrame(_G2Anim_Type *anim)
 	// 		unsigned long parentMask; // $v1
 	// 		unsigned long parentIndex; // $v0
 	/* end block 1 */
-	// End offset: 0x8008EB54
-	// End Line: 907
+	// End offset: 0x80090698
+	// End Line: 910
 
 	/* begin block 2 */
-		// Start line: 1510
+		// Start line: 1516
 	/* end block 2 */
-	// End Line: 1511
+	// End Line: 1517
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 void _G2Anim_BuildTransformsWithControllers(_G2Anim_Type *anim)
 
@@ -687,7 +719,7 @@ void _G2Anim_BuildTransformsWithControllers(_G2Anim_Type *anim)
   bRootTransUpdated = (_G2Bool_Enum)((anim->section[0].flags & 0x88) == 0x80);
   local_30 = anim->disabledBits[2];
   iVar6 = anim->modelData->numSegments;
-  controller = _controllerPool.blockPool + anim->controllerList;
+  controller = (_G2AnimController_Type *)(DAT_800d5698 + (uint)anim->controllerList * 0x24);
   if (0 < iVar6) {
     puVar5 = (ushort *)&anim->modelData->segmentList->parent;
     puVar3 = &local_38;
@@ -703,7 +735,7 @@ void _G2Anim_BuildTransformsWithControllers(_G2Anim_Type *anim)
                      segIndex);
           bVar1 = controller->segNumber;
           while ((uint)bVar1 == segIndex) {
-            controller = _controllerPool.blockPool + controller->next;
+            controller = (_G2AnimController_Type *)(DAT_800d5698 + (uint)controller->next * 0x24);
             bVar1 = controller->segNumber;
           }
         }
@@ -732,32 +764,34 @@ void _G2Anim_BuildTransformsWithControllers(_G2Anim_Type *anim)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Anim_BuildSegTransformWithControllers(struct _G2Matrix_Type *segMatrix /*$s2*/, struct _G2Matrix_Type *parentMatrix /*$s4*/, struct _G2AnimController_Type *controller /*$s0*/, enum _G2Bool_Enum bRootTransUpdated /*$s6*/, int segIndex /*stack 16*/)
- // line 916, offset 0x8008eb8c
+ // line 919, offset 0x800906d0
 	/* begin block 1 */
-		// Start line: 917
-		// Start offset: 0x8008EB8C
+		// Start line: 920
+		// Start offset: 0x800906D0
 		// Variables:
 	// 		struct _G2AnimSegValue_Type *segValue; // $s1
 	// 		struct _G2LVector3_Type scale; // stack offset -48
 	// 		unsigned long flags; // $s3
 
 		/* begin block 1.1 */
-			// Start line: 974
-			// Start offset: 0x8008ED94
+			// Start line: 977
+			// Start offset: 0x800908D8
 			// Variables:
 		// 		struct _G2SVector3_Type *svector; // $v0
 		// 		struct _G2LVector3_Type *lvector; // $v1
 		/* end block 1.1 */
-		// End offset: 0x8008ED94
-		// End Line: 974
+		// End offset: 0x800908D8
+		// End Line: 977
 	/* end block 1 */
-	// End offset: 0x8008EE38
-	// End Line: 1001
+	// End offset: 0x8009097C
+	// End Line: 1004
 
 	/* begin block 2 */
-		// Start line: 1879
+		// Start line: 1885
 	/* end block 2 */
-	// End Line: 1880
+	// End Line: 1886
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 void _G2Anim_BuildSegTransformWithControllers
                (_G2Matrix_Type *segMatrix,_G2Matrix_Type *parentMatrix,
@@ -766,85 +800,80 @@ void _G2Anim_BuildSegTransformWithControllers
 {
   byte bVar1;
   ushort uVar2;
-  ushort uVar3;
-  ushort uVar4;
-  long lVar5;
+  long lVar3;
   undefined4 in_zero;
   undefined4 in_at;
-  ulong uVar6;
+  int iVar4;
+  ulong uVar5;
+  undefined4 uVar6;
   undefined4 uVar7;
   undefined4 uVar8;
   undefined4 uVar9;
-  undefined4 uVar10;
-  uint uVar11;
-  int local_30;
-  int local_2c;
-  int local_28;
+  uint uVar10;
+  VECTOR local_30;
   
-  _G2Anim_BuildSegLocalRotMatrix(&_segValues + segIndex,segMatrix);
+  iVar4 = segIndex * 0x18;
+  _G2Anim_BuildSegLocalRotMatrix((_G2AnimSegValue_Type *)(&_segValues + iVar4),segMatrix);
   bVar1 = controller->segNumber;
-  uVar11 = 7;
+  uVar10 = 7;
   while ((uint)bVar1 == segIndex) {
-                    /* WARNING: Read-only address (ram,0x800d55b0) is written */
-    uVar6 = _G2AnimController_ApplyToSegValue
-                      (controller,&_segValues + segIndex,segMatrix,parentMatrix);
-    controller = _controllerPool.blockPool + controller->next;
+    uVar5 = _G2AnimController_ApplyToSegValue
+                      (controller,(_G2AnimSegValue_Type *)(&_segValues + iVar4),segMatrix,
+                       parentMatrix);
+    controller = (_G2AnimController_Type *)(DAT_800d5698 + (uint)controller->next * 0x24);
     bVar1 = controller->segNumber;
-    uVar11 = uVar11 & uVar6;
+    uVar10 = uVar10 & uVar5;
   }
-                    /* WARNING: Read-only address (ram,0x800d55b0) is written */
   setCopControlWord(2,0,*(undefined4 *)parentMatrix->rotScale);
   setCopControlWord(2,0x800,*(undefined4 *)(parentMatrix->rotScale + 2));
   setCopControlWord(2,0x1000,*(undefined4 *)(parentMatrix->rotScale + 4));
   setCopControlWord(2,0x1800,*(undefined4 *)(parentMatrix->rotScale + 6));
   setCopControlWord(2,0x2000,*(undefined4 *)(parentMatrix->rotScale + 8));
-  uVar2 = (&_segValues)[segIndex].scale.x;
-  local_30 = (int)(short)uVar2;
-  uVar3 = (&_segValues)[segIndex].scale.y;
-  local_2c = (int)(short)uVar3;
-  uVar4 = (&_segValues)[segIndex].scale.z;
-  local_28 = (int)(short)uVar4;
-  if ((ushort)(uVar2 | uVar3 | uVar4) != 0x1000) {
-    ScaleMatrix((int *)segMatrix,&local_30);
+  local_30.vx = (int)(short)*(ushort *)(&DAT_800d4f14 + iVar4);
+  local_30.vy = (int)(short)*(ushort *)(&DAT_800d4f16 + iVar4);
+  local_30.vz = (int)(short)*(ushort *)(&DAT_800d4f18 + iVar4);
+  if ((ushort)(*(ushort *)(&DAT_800d4f14 + iVar4) | *(ushort *)(&DAT_800d4f16 + iVar4) |
+              *(ushort *)(&DAT_800d4f18 + iVar4)) != 0x1000) {
+    ScaleMatrix((MATRIX *)segMatrix,&local_30);
     segMatrix->scaleFlag = 1;
   }
-  if ((uVar11 & 1) != 0) {
+  if ((uVar10 & 1) != 0) {
     setCopReg(2,0x4800,(uint)(ushort)segMatrix->rotScale[0]);
     setCopReg(2,0x5000,(uint)(ushort)segMatrix->rotScale[3]);
     setCopReg(2,0x5800,(uint)(ushort)segMatrix->rotScale[6]);
     copFunction(2,0x49e012);
     uVar2 = segMatrix->rotScale[2];
-    uVar8 = getCopReg(2,0x4800);
-    uVar9 = getCopReg(2,0x5000);
-    uVar10 = getCopReg(2,0x5800);
+    uVar7 = getCopReg(2,0x4800);
+    uVar8 = getCopReg(2,0x5000);
+    uVar9 = getCopReg(2,0x5800);
     setCopReg(2,0x4800,(uint)(ushort)segMatrix->rotScale[1]);
     setCopReg(2,0x5000,(uint)(ushort)segMatrix->rotScale[4]);
     setCopReg(2,0x5800,(uint)(ushort)segMatrix->rotScale[7]);
-    segMatrix->rotScale[0] = (short)uVar8;
-    segMatrix->rotScale[3] = (short)uVar9;
+    segMatrix->rotScale[0] = (short)uVar7;
+    segMatrix->rotScale[3] = (short)uVar8;
     copFunction(2,0x49e012);
-    uVar8 = getCopReg(2,0x4800);
-    uVar9 = getCopReg(2,0x5000);
-    uVar7 = getCopReg(2,0x5800);
+    uVar7 = getCopReg(2,0x4800);
+    uVar8 = getCopReg(2,0x5000);
+    uVar6 = getCopReg(2,0x5800);
     setCopReg(2,0x4800,(uint)uVar2);
     setCopReg(2,0x5000,(uint)(ushort)segMatrix->rotScale[5]);
     setCopReg(2,0x5800,(uint)(ushort)segMatrix->rotScale[8]);
-    segMatrix->rotScale[6] = (short)uVar10;
-    segMatrix->rotScale[1] = (short)uVar8;
+    segMatrix->rotScale[6] = (short)uVar9;
+    segMatrix->rotScale[1] = (short)uVar7;
     copFunction(2,0x49e012);
-    segMatrix->rotScale[4] = (short)uVar9;
-    segMatrix->rotScale[7] = (short)uVar7;
-    uVar8 = getCopReg(2,0x4800);
-    uVar9 = getCopReg(2,0x5000);
-    uVar7 = getCopReg(2,0x5800);
-    segMatrix->rotScale[2] = (short)uVar8;
-    segMatrix->rotScale[5] = (short)uVar9;
-    segMatrix->rotScale[8] = (short)uVar7;
+    segMatrix->rotScale[4] = (short)uVar8;
+    segMatrix->rotScale[7] = (short)uVar6;
+    uVar7 = getCopReg(2,0x4800);
+    uVar8 = getCopReg(2,0x5000);
+    uVar6 = getCopReg(2,0x5800);
+    segMatrix->rotScale[2] = (short)uVar7;
+    segMatrix->rotScale[5] = (short)uVar8;
+    segMatrix->rotScale[8] = (short)uVar6;
   }
-  if ((uVar11 & 4) == 0) {
-    (segMatrix->trans).x = (int)(&_segValues)[segIndex].trans.x;
-    (segMatrix->trans).y = (int)(&_segValues)[segIndex].trans.y;
-    (segMatrix->trans).z = (int)(&_segValues)[segIndex].trans.z;
+  if ((uVar10 & 4) == 0) {
+    (segMatrix->trans).x = (int)*(short *)(&DAT_800d4f1c + segIndex * 6);
+    (segMatrix->trans).y = (int)*(short *)((int)&DAT_800d4f1c + iVar4 + 2);
+    (segMatrix->trans).z = (int)(short)(&DAT_800d4f20)[segIndex * 0xc];
   }
   else {
     if (segIndex == 0) {
@@ -854,15 +883,15 @@ void _G2Anim_BuildSegTransformWithControllers
       setCopControlWord(2,0x1800,*(undefined4 *)(segMatrix->rotScale + 6));
       setCopControlWord(2,0x2000,*(undefined4 *)(segMatrix->rotScale + 8));
     }
-    setCopReg(2,in_zero,*(undefined4 *)&(&_segValues)[segIndex].trans);
-    setCopReg(2,in_at,*(undefined4 *)&(&_segValues)[segIndex].trans.z);
+    setCopReg(2,in_zero,(&DAT_800d4f1c)[segIndex * 6]);
+    setCopReg(2,in_at,*(undefined4 *)(&DAT_800d4f20 + segIndex * 0xc));
     copFunction(2,0x486012);
-    lVar5 = getCopReg(2,0x19);
-    (segMatrix->trans).x = lVar5;
-    lVar5 = getCopReg(2,0x1a);
-    (segMatrix->trans).y = lVar5;
-    lVar5 = getCopReg(2,0x1b);
-    (segMatrix->trans).z = lVar5;
+    lVar3 = getCopReg(2,0x19);
+    (segMatrix->trans).x = lVar3;
+    lVar3 = getCopReg(2,0x1a);
+    (segMatrix->trans).y = lVar3;
+    lVar3 = getCopReg(2,0x1b);
+    (segMatrix->trans).z = lVar3;
   }
   if (bRootTransUpdated != G2FALSE) {
     (parentMatrix->trans).x = (parentMatrix->trans).x + (segMatrix->trans).x;
@@ -883,58 +912,59 @@ void _G2Anim_BuildSegTransformWithControllers
 // decompiled code
 // original method signature: 
 // unsigned long /*$ra*/ _G2AnimController_ApplyToSegValue(struct _G2AnimController_Type *controller /*$a0*/, struct _G2AnimSegValue_Type *segValue /*$s0*/, struct _G2Matrix_Type *segMatrix /*$s3*/, struct _G2Matrix_Type *parentMatrix /*$s2*/)
- // line 1011, offset 0x8008ee9c
+ // line 1014, offset 0x800909e0
 	/* begin block 1 */
-		// Start line: 1012
-		// Start offset: 0x8008EE9C
+		// Start line: 1015
+		// Start offset: 0x800909E0
 		// Variables:
 	// 		struct _G2Matrix_Type tempMatrix; // stack offset -64
 	// 		struct _G2SVector3_Type tempVector; // stack offset -32
 	// 		unsigned long flags; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 1060
-			// Start offset: 0x8008F118
+			// Start line: 1063
+			// Start offset: 0x80090C5C
 
 			/* begin block 1.1.1 */
-				// Start line: 1060
-				// Start offset: 0x8008F118
+				// Start line: 1063
+				// Start offset: 0x80090C5C
 				// Variables:
 			// 		unsigned short z; // $v1
 			// 		unsigned long xy; // $v0
 			/* end block 1.1.1 */
-			// End offset: 0x8008F118
-			// End Line: 1060
+			// End offset: 0x80090C5C
+			// End Line: 1063
 		/* end block 1.1 */
-		// End offset: 0x8008F118
-		// End Line: 1060
+		// End offset: 0x80090C5C
+		// End Line: 1063
 
 		/* begin block 1.2 */
-			// Start line: 1078
-			// Start offset: 0x8008F1C4
+			// Start line: 1081
+			// Start offset: 0x80090D08
 
 			/* begin block 1.2.1 */
-				// Start line: 1078
-				// Start offset: 0x8008F1C4
+				// Start line: 1081
+				// Start offset: 0x80090D08
 				// Variables:
 			// 		unsigned short z; // $v1
 			// 		unsigned long xy; // $v0
 			/* end block 1.2.1 */
-			// End offset: 0x8008F1C4
-			// End Line: 1078
+			// End offset: 0x80090D08
+			// End Line: 1081
 		/* end block 1.2 */
-		// End offset: 0x8008F1C4
-		// End Line: 1078
+		// End offset: 0x80090D08
+		// End Line: 1081
 	/* end block 1 */
-	// End offset: 0x8008F228
-	// End Line: 1094
+	// End offset: 0x80090D6C
+	// End Line: 1097
 
 	/* begin block 2 */
-		// Start line: 2091
+		// Start line: 2097
 	/* end block 2 */
-	// End Line: 2092
+	// End Line: 2098
 
 /* WARNING: Could not reconcile some variable overlaps */
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 ulong _G2AnimController_ApplyToSegValue
                 (_G2AnimController_Type *controller,_G2AnimSegValue_Type *segValue,
@@ -990,7 +1020,7 @@ ulong _G2AnimController_ApplyToSegValue
     (segValue->trans).x = (short)local_20 - *(short *)&(parentMatrix->trans).x;
     (segValue->trans).y = local_20._2_2_ - *(short *)&(parentMatrix->trans).y;
     local_1c = local_1c - *(short *)&(parentMatrix->trans).z;
-    goto LAB_8008f220;
+    goto LAB_80090d64;
   case '\"':
     _G2AnimController_GetVector(controller,(_G2SVector3_Type *)&local_20);
     *(undefined4 *)&segValue->trans = local_20;
@@ -1001,7 +1031,7 @@ ulong _G2AnimController_ApplyToSegValue
     (segValue->trans).x = (segValue->trans).x + (short)local_20;
     (segValue->trans).y = (segValue->trans).y + local_20._2_2_;
     local_1c = (segValue->trans).z + local_1c;
-LAB_8008f220:
+LAB_80090d64:
     (segValue->trans).z = local_1c;
     break;
   case 'L':
@@ -1089,22 +1119,24 @@ LAB_8008f220:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Anim_UpdateControllers(struct _G2Anim_Type *anim /*$s1*/)
- // line 1098, offset 0x8008f244
+ // line 1101, offset 0x80090d88
 	/* begin block 1 */
-		// Start line: 1099
-		// Start offset: 0x8008F244
+		// Start line: 1102
+		// Start offset: 0x80090D88
 		// Variables:
 	// 		struct _G2AnimController_Type *controller; // $s0
 	// 		struct _G2AnimSection_Type *section; // $v1
 	// 		short elapsedTime; // $s2
 	/* end block 1 */
-	// End offset: 0x8008F3B8
-	// End Line: 1148
+	// End offset: 0x80090EFC
+	// End Line: 1151
 
 	/* begin block 2 */
-		// Start line: 2265
+		// Start line: 2271
 	/* end block 2 */
-	// End Line: 2266
+	// End Line: 2272
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 void _G2Anim_UpdateControllers(_G2Anim_Type *anim)
 
@@ -1117,8 +1149,8 @@ void _G2Anim_UpdateControllers(_G2Anim_Type *anim)
   
   if (anim->controllerList != 0) {
     sVar2 = G2Timer_GetFrameTime();
-    controller = _controllerPool.blockPool + anim->controllerList;
-    if (_controllerPool.blockPool < controller) {
+    controller = DAT_800d5698 + anim->controllerList;
+    if (DAT_800d5698 < controller) {
       do {
         uVar1 = controller->flags;
         if ((uVar1 & 0x4000) != 0) {
@@ -1134,8 +1166,8 @@ void _G2Anim_UpdateControllers(_G2Anim_Type *anim)
               if ((uVar1 & 0x2000) == 0) {
                 controller->flags = uVar1 | 0x2000;
                 p_Var4 = G2Anim_GetSectionWithSeg(anim,(uint)controller->segNumber);
-                if ((p_Var4 != (_G2AnimSection_Type *)0x0) &&
-                   (p_Var4->callback != (_func_4388 *)0x0)) {
+                if ((p_Var4 != (_G2AnimSection_Type *)0x0) && (p_Var4->callback != (_func_8 *)0x0))
+                {
                   (*p_Var4->callback)(anim,(uint)p_Var4->sectionID,4,(uint)controller->type,
                                       (uint)controller->segNumber,controller->callbackData);
                 }
@@ -1149,8 +1181,8 @@ void _G2Anim_UpdateControllers(_G2Anim_Type *anim)
             }
           }
         }
-        controller = _controllerPool.blockPool + controller->next;
-      } while (_controllerPool.blockPool < controller);
+        controller = DAT_800d5698 + controller->next;
+      } while (DAT_800d5698 < controller);
     }
   }
   return;
@@ -1161,16 +1193,18 @@ void _G2Anim_UpdateControllers(_G2Anim_Type *anim)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Anim_CopyVectorWithOrder(struct _G2SVector3_Type *sourceVector /*$a0*/, struct _G2EulerAngles_Type *destVector /*$a1*/, int order /*$a2*/)
- // line 1154, offset 0x8008f3d0
+ // line 1157, offset 0x80090f14
 	/* begin block 1 */
-		// Start line: 2381
+		// Start line: 2387
 	/* end block 1 */
-	// End Line: 2382
+	// End Line: 2388
 
 	/* begin block 2 */
-		// Start line: 2384
+		// Start line: 2390
 	/* end block 2 */
-	// End Line: 2385
+	// End Line: 2391
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 void _G2Anim_CopyVectorWithOrder
                (_G2SVector3_Type *sourceVector,_G2EulerAngles_Type *destVector,int order)
@@ -1202,10 +1236,10 @@ void _G2Anim_CopyVectorWithOrder
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2AnimSection_ApplyControllersToStoredFrame(struct _G2AnimSection_Type *section /*$s3*/)
- // line 1178, offset 0x8008f434
+ // line 1181, offset 0x80090f78
 	/* begin block 1 */
-		// Start line: 1179
-		// Start offset: 0x8008F434
+		// Start line: 1182
+		// Start offset: 0x80090F78
 		// Variables:
 	// 		struct _G2Anim_Type *anim; // $s7
 	// 		struct _G2AnimController_Type *controller; // $s0
@@ -1219,60 +1253,62 @@ void _G2Anim_CopyVectorWithOrder
 	// 		int segCount; // $fp
 
 		/* begin block 1.1 */
-			// Start line: 1234
-			// Start offset: 0x8008F5D8
+			// Start line: 1237
+			// Start offset: 0x8009111C
 			// Variables:
 		// 		struct _G2Quat_Type tempQuat; // stack offset -48
 
 			/* begin block 1.1.1 */
-				// Start line: 1236
-				// Start offset: 0x8008F5D8
+				// Start line: 1239
+				// Start offset: 0x8009111C
 				// Variables:
 			// 		struct _G2Quat_Type *dest; // $s1
 
 				/* begin block 1.1.1.1 */
-					// Start line: 1236
-					// Start offset: 0x8008F5D8
+					// Start line: 1239
+					// Start offset: 0x8009111C
 					// Variables:
 				// 		unsigned long zw; // $v1
 				// 		unsigned long xy; // $v0
 				/* end block 1.1.1.1 */
-				// End offset: 0x8008F5D8
-				// End Line: 1236
+				// End offset: 0x8009111C
+				// End Line: 1239
 			/* end block 1.1.1 */
-			// End offset: 0x8008F5D8
-			// End Line: 1236
+			// End offset: 0x8009111C
+			// End Line: 1239
 		/* end block 1.1 */
-		// End offset: 0x8008F5D8
-		// End Line: 1236
+		// End offset: 0x8009111C
+		// End Line: 1239
 
 		/* begin block 1.2 */
-			// Start line: 1239
-			// Start offset: 0x8008F5F4
+			// Start line: 1242
+			// Start offset: 0x80091138
 			// Variables:
 		// 		struct _G2SVector3_Type *dest; // $s1
 
 			/* begin block 1.2.1 */
-				// Start line: 1239
-				// Start offset: 0x8008F5F4
+				// Start line: 1242
+				// Start offset: 0x80091138
 				// Variables:
 			// 		unsigned long mask; // $v0
 			// 		unsigned short z; // $v1
 			// 		unsigned long xy; // $a0
 			/* end block 1.2.1 */
-			// End offset: 0x8008F5F4
-			// End Line: 1239
+			// End offset: 0x80091138
+			// End Line: 1242
 		/* end block 1.2 */
-		// End offset: 0x8008F5F4
-		// End Line: 1239
+		// End offset: 0x80091138
+		// End Line: 1242
 	/* end block 1 */
-	// End offset: 0x8008F67C
-	// End Line: 1257
+	// End offset: 0x800911C0
+	// End Line: 1260
 
 	/* begin block 2 */
-		// Start line: 2430
+		// Start line: 2436
 	/* end block 2 */
-	// End Line: 2431
+	// End Line: 2437
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 void _G2AnimSection_ApplyControllersToStoredFrame(_G2AnimSection_Type *section)
 
@@ -1294,7 +1330,7 @@ void _G2AnimSection_ApplyControllersToStoredFrame(_G2AnimSection_Type *section)
   long local_64;
   long local_60;
   long local_5c;
-  undefined4 auStack88 [8];
+  MATRIX MStack88;
   uint local_38;
   ushort local_34;
   undefined4 local_30;
@@ -1303,17 +1339,17 @@ void _G2AnimSection_ApplyControllersToStoredFrame(_G2AnimSection_Type *section)
   p_Var1 = _G2AnimSection_GetAnim(section);
   if (p_Var1->controllerList != 0) {
     uVar3 = (uint)section->firstSeg;
-    controller = _controllerPool.blockPool + p_Var1->controllerList;
-    segValue = &_segValues + uVar3;
+    controller = (_G2AnimController_Type *)(DAT_800d5698 + (uint)p_Var1->controllerList * 0x24);
+    segValue = (_G2AnimSegValue_Type *)(&_segValues + uVar3 * 0x18);
     uVar6 = uVar3 + section->segCount;
     p_Var5 = p_Var1->modelData->segmentList;
     if (uVar3 < uVar6) {
-      puVar4 = (undefined4 *)((int)&(&_segValues)[uVar3].rotQuat + 4);
+      puVar4 = (undefined4 *)(&DAT_800d4f10 + uVar3 * 0x18);
       do {
         if ((uint)controller->segNumber == uVar3) {
           _G2Anim_BuildSegLocalRotMatrix(segValue,&_Stack152);
           if (p_Var1->segMatrices == (_G2Matrix_Type *)0x0) {
-            MATH3D_SetUnityMatrix((MATRIX *)&local_78);
+            MATH3D_SetUnityMatrix(0x88);
           }
           else {
             p_Var2 = p_Var1->segMatrices + p_Var5->parent;
@@ -1332,8 +1368,8 @@ void _G2AnimSection_ApplyControllersToStoredFrame(_G2AnimSection_Type *section)
                 _G2AnimController_ApplyToSegValue
                           (controller,segValue,&_Stack152,(_G2Matrix_Type *)&local_78);
                 if ((controller->type & 2) == 0) {
-                  TransposeMatrix((undefined4 *)(_G2Matrix_Type *)&local_78,auStack88);
-                  MulMatrix2(auStack88,(uint *)&_Stack152);
+                  TransposeMatrix((MATRIX *)(_G2Matrix_Type *)&local_78,&MStack88);
+                  MulMatrix2(&MStack88,(MATRIX *)&_Stack152);
                 }
                 if (*(ushort *)((int)puVar4 + 0x12) == 0) {
                   G2EulerAngles_FromMatrix((_G2EulerAngles_Type *)&local_38,&_Stack152,0);
@@ -1351,7 +1387,7 @@ void _G2AnimSection_ApplyControllersToStoredFrame(_G2AnimSection_Type *section)
                           (controller,segValue,&_Stack152,(_G2Matrix_Type *)&local_78);
               }
             }
-            controller = _controllerPool.blockPool + controller->next;
+            controller = (_G2AnimController_Type *)(DAT_800d5698 + (uint)controller->next * 0x24);
           }
         }
         p_Var5 = p_Var5 + 1;
@@ -1369,22 +1405,24 @@ void _G2AnimSection_ApplyControllersToStoredFrame(_G2AnimSection_Type *section)
 // decompiled code
 // original method signature: 
 // unsigned long /*$ra*/ _G2AnimController_ApplyWorldToParentMatrix(struct _G2AnimController_Type *controller /*$a0*/, struct _G2Matrix_Type *parentMatrix /*$s0*/)
- // line 1262, offset 0x8008f6ac
+ // line 1265, offset 0x800911f0
 	/* begin block 1 */
-		// Start line: 1263
-		// Start offset: 0x8008F6AC
+		// Start line: 1266
+		// Start offset: 0x800911F0
 		// Variables:
 	// 		struct _G2Matrix_Type tempMatrix; // stack offset -64
 	// 		struct _G2SVector3_Type tempSVector; // stack offset -32
 	// 		struct _G2LVector3_Type tempLVector; // stack offset -24
 	/* end block 1 */
-	// End offset: 0x8008F7EC
-	// End Line: 1314
+	// End offset: 0x80091330
+	// End Line: 1317
 
 	/* begin block 2 */
-		// Start line: 2612
+		// Start line: 2618
 	/* end block 2 */
-	// End Line: 2613
+	// End Line: 2619
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 ulong _G2AnimController_ApplyWorldToParentMatrix
                 (_G2AnimController_Type *controller,_G2Matrix_Type *parentMatrix)
@@ -1393,9 +1431,7 @@ ulong _G2AnimController_ApplyWorldToParentMatrix
   byte bVar1;
   _G2Matrix_Type _Stack64;
   _G2SVector3_Type local_20;
-  int local_18;
-  int local_14;
-  int local_10;
+  VECTOR local_18;
   
   bVar1 = controller->type;
   if (bVar1 == 0x20) {
@@ -1413,16 +1449,16 @@ ulong _G2AnimController_ApplyWorldToParentMatrix
     else {
       if (bVar1 == 0x54) {
         _G2AnimController_GetVector(controller,&local_20);
-        local_18 = (int)local_20.x;
-        local_14 = (int)local_20.y;
-        local_10 = (int)local_20.z;
-        ScaleMatrix((int *)parentMatrix,&local_18);
+        local_18.vx = (int)local_20.x;
+        local_18.vy = (int)local_20.y;
+        local_18.vz = (int)local_20.z;
+        ScaleMatrix((MATRIX *)parentMatrix,&local_18);
       }
       else {
         if (bVar1 < 0x55) {
           if (bVar1 == 0x4c) {
             _G2AnimController_GetMatrix(controller,&_Stack64);
-            MulMatrix2((undefined4 *)&_Stack64,(uint *)parentMatrix);
+            MulMatrix2((MATRIX *)&_Stack64,(MATRIX *)parentMatrix);
           }
         }
         else {
@@ -1444,20 +1480,22 @@ ulong _G2AnimController_ApplyWorldToParentMatrix
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2AnimController_GetMatrix(struct _G2AnimController_Type *controller /*$s0*/, struct _G2Matrix_Type *matrix /*$s1*/)
- // line 1322, offset 0x8008f800
+ // line 1325, offset 0x80091344
 	/* begin block 1 */
-		// Start line: 1323
-		// Start offset: 0x8008F800
+		// Start line: 1326
+		// Start offset: 0x80091344
 		// Variables:
 	// 		struct _G2Quat_Type tempQuat; // stack offset -24
 	/* end block 1 */
-	// End offset: 0x8008F8C4
-	// End Line: 1373
+	// End offset: 0x80091408
+	// End Line: 1376
 
 	/* begin block 2 */
-		// Start line: 2741
+		// Start line: 2747
 	/* end block 2 */
-	// End Line: 2742
+	// End Line: 2748
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 void _G2AnimController_GetMatrix(_G2AnimController_Type *controller,_G2Matrix_Type *matrix)
 
@@ -1469,11 +1507,11 @@ void _G2AnimController_GetMatrix(_G2AnimController_Type *controller,_G2Matrix_Ty
   uVar1 = controller->flags;
   if ((uVar1 & 0x4000) == 0) {
     if ((uVar1 & 0xff) == 1) {
-      RotMatrixZYX((short *)controller->data,(uint *)matrix);
+      RotMatrixZYX((SVECTOR *)controller->data,(MATRIX *)matrix);
     }
     else {
       if ((uVar1 & 0xff) == 0x15) {
-        RotMatrix((short *)controller->data,(uint *)matrix);
+        RotMatrix((SVECTOR *)controller->data,(MATRIX *)matrix);
       }
     }
   }
@@ -1498,54 +1536,56 @@ void _G2AnimController_GetMatrix(_G2AnimController_Type *controller,_G2Matrix_Ty
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2AnimController_GetVector(struct _G2AnimController_Type *controller /*$a0*/, struct _G2SVector3_Type *vector /*$a1*/)
- // line 1378, offset 0x8008f8d8
+ // line 1381, offset 0x8009141c
 	/* begin block 1 */
-		// Start line: 1381
-		// Start offset: 0x8008F8D8
+		// Start line: 1384
+		// Start offset: 0x8009141C
 
 		/* begin block 1.1 */
-			// Start line: 1381
-			// Start offset: 0x8008F8D8
+			// Start line: 1384
+			// Start offset: 0x8009141C
 			// Variables:
 		// 		struct _G2SVector3_Type *dest; // $a1
 
 			/* begin block 1.1.1 */
-				// Start line: 1381
-				// Start offset: 0x8008F8D8
+				// Start line: 1384
+				// Start offset: 0x8009141C
 				// Variables:
 			// 		unsigned short z; // $v1
 			// 		unsigned long xy; // $v0
 			/* end block 1.1.1 */
-			// End offset: 0x8008F8D8
-			// End Line: 1381
+			// End offset: 0x8009141C
+			// End Line: 1384
 		/* end block 1.1 */
-		// End offset: 0x8008F8D8
-		// End Line: 1381
+		// End offset: 0x8009141C
+		// End Line: 1384
 
 		/* begin block 1.2 */
-			// Start line: 1386
-			// Start offset: 0x8008F8FC
+			// Start line: 1389
+			// Start offset: 0x80091440
 			// Variables:
 		// 		struct _G2SVector3_Type *dest; // $a1
 		// 		struct _G2SVector3_Type *base; // $a1
 		// 		struct _G2SVector3_Type *offset; // $v0
 		// 		long alpha; // $v1
 		/* end block 1.2 */
-		// End offset: 0x8008F958
-		// End Line: 1386
+		// End offset: 0x8009149C
+		// End Line: 1389
 	/* end block 1 */
-	// End offset: 0x8008F958
-	// End Line: 1391
+	// End offset: 0x8009149C
+	// End Line: 1394
 
 	/* begin block 2 */
-		// Start line: 2853
+		// Start line: 2859
 	/* end block 2 */
-	// End Line: 2854
+	// End Line: 2860
 
 	/* begin block 3 */
-		// Start line: 2855
+		// Start line: 2861
 	/* end block 3 */
-	// End Line: 2856
+	// End Line: 2862
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 void _G2AnimController_GetVector(_G2AnimController_Type *controller,_G2SVector3_Type *vector)
 
@@ -1582,20 +1622,22 @@ void _G2AnimController_GetVector(_G2AnimController_Type *controller,_G2SVector3_
 // decompiled code
 // original method signature: 
 // struct _G2AnimController_Type * /*$ra*/ _G2Anim_FindController(struct _G2Anim_Type *anim /*$s2*/, int segNumber /*$s0*/, int type /*$s1*/)
- // line 1397, offset 0x8008f960
+ // line 1400, offset 0x800914a4
 	/* begin block 1 */
-		// Start line: 1398
-		// Start offset: 0x8008F960
+		// Start line: 1401
+		// Start offset: 0x800914A4
 		// Variables:
 	// 		struct _G2AnimController_Type *controller; // $v0
 	/* end block 1 */
-	// End offset: 0x8008F9A4
-	// End Line: 1412
+	// End offset: 0x800914E8
+	// End Line: 1415
 
 	/* begin block 2 */
-		// Start line: 2891
+		// Start line: 2897
 	/* end block 2 */
-	// End Line: 2892
+	// End Line: 2898
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 _G2AnimController_Type * _G2Anim_FindController(_G2Anim_Type *anim,int segNumber,int type)
 
@@ -1614,33 +1656,35 @@ _G2AnimController_Type * _G2Anim_FindController(_G2Anim_Type *anim,int segNumber
 // decompiled code
 // original method signature: 
 // struct _G2AnimController_Type * /*$ra*/ _G2AnimController_Create(int segNumber /*$s1*/, int type /*$s2*/)
- // line 1476, offset 0x8008f9bc
+ // line 1479, offset 0x80091500
 	/* begin block 1 */
-		// Start line: 1477
-		// Start offset: 0x8008F9BC
+		// Start line: 1480
+		// Start offset: 0x80091500
 		// Variables:
 	// 		struct _G2AnimController_Type *controller; // $s0
 	/* end block 1 */
-	// End offset: 0x8008F9BC
-	// End Line: 1477
+	// End offset: 0x80091500
+	// End Line: 1480
 
 	/* begin block 2 */
-		// Start line: 2946
+		// Start line: 2952
 	/* end block 2 */
-	// End Line: 2947
+	// End Line: 2953
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 _G2AnimController_Type * _G2AnimController_Create(int segNumber,int type)
 
 {
-  _G2AnimController_Type *__s;
+  _G2AnimController_Type *p_Var1;
   
-  __s = (_G2AnimController_Type *)G2PoolMem_Allocate(&_controllerPool);
-  memset(__s,0,0x24);
-  __s->next = 0;
-  __s->segNumber = (uchar)segNumber;
-  __s->type = (uchar)type;
-  __s->flags = 0x15;
-  return __s;
+  p_Var1 = (_G2AnimController_Type *)G2PoolMem_Allocate(&_controllerPool);
+  memset();
+  p_Var1->next = 0;
+  p_Var1->segNumber = (uchar)segNumber;
+  p_Var1->type = (uchar)type;
+  p_Var1->flags = 0x15;
+  return p_Var1;
 }
 
 
@@ -1648,20 +1692,22 @@ _G2AnimController_Type * _G2AnimController_Create(int segNumber,int type)
 // decompiled code
 // original method signature: 
 // struct _G2AnimController_Type * /*$ra*/ _G2AnimController_Destroy(struct _G2AnimController_Type *controller /*$a1*/)
- // line 1495, offset 0x8008fa28
+ // line 1499, offset 0x8009156c
 	/* begin block 1 */
-		// Start line: 1498
-		// Start offset: 0x8008FA38
+		// Start line: 1502
+		// Start offset: 0x8009157C
 		// Variables:
 	// 		int nextControllerIndex; // $s0
 	/* end block 1 */
-	// End offset: 0x8008FA7C
-	// End Line: 1511
+	// End offset: 0x800915C0
+	// End Line: 1515
 
 	/* begin block 2 */
-		// Start line: 3038
+		// Start line: 3046
 	/* end block 2 */
-	// End Line: 3039
+	// End Line: 3047
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 _G2AnimController_Type * _G2AnimController_Destroy(_G2AnimController_Type *controller)
 
@@ -1671,8 +1717,8 @@ _G2AnimController_Type * _G2AnimController_Destroy(_G2AnimController_Type *contr
   do {
     uVar1 = controller->next;
     G2PoolMem_Free(&_controllerPool,controller);
-    controller = _controllerPool.blockPool + uVar1;
-    if (controller <= _controllerPool.blockPool) {
+    controller = DAT_800d5698 + uVar1;
+    if (controller <= DAT_800d5698) {
       return controller;
     }
   } while (controller->type == '\0');
@@ -1684,20 +1730,22 @@ _G2AnimController_Type * _G2AnimController_Destroy(_G2AnimController_Type *contr
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2AnimController_InsertIntoList(struct _G2AnimController_Type *controller /*$a3*/, unsigned short *listPtr /*$a1*/)
- // line 1517, offset 0x8008fa90
+ // line 1521, offset 0x800915d4
 	/* begin block 1 */
-		// Start line: 1518
-		// Start offset: 0x8008FA90
+		// Start line: 1522
+		// Start offset: 0x800915D4
 		// Variables:
 	// 		struct _G2AnimController_Type *testController; // $a2
 	/* end block 1 */
-	// End offset: 0x8008FB80
-	// End Line: 1549
+	// End offset: 0x800916C4
+	// End Line: 1553
 
 	/* begin block 2 */
-		// Start line: 3084
+		// Start line: 3092
 	/* end block 2 */
-	// End Line: 3085
+	// End Line: 3093
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 void _G2AnimController_InsertIntoList(_G2AnimController_Type *controller,ushort *listPtr)
 
@@ -1705,22 +1753,22 @@ void _G2AnimController_InsertIntoList(_G2AnimController_Type *controller,ushort 
   _G2AnimController_Type *p_Var1;
   _G2AnimController_Type *p_Var2;
   
-  p_Var2 = _controllerPool.blockPool + *listPtr;
-  if (_controllerPool.blockPool < p_Var2) {
+  p_Var2 = DAT_800d5698 + *listPtr;
+  if (DAT_800d5698 < p_Var2) {
     p_Var1 = p_Var2;
     while (p_Var2 = p_Var1, p_Var1->segNumber <= controller->segNumber) {
       if (((p_Var1->segNumber == controller->segNumber) && (controller->type < p_Var1->type)) ||
-         (p_Var2 = _controllerPool.blockPool + p_Var1->next, listPtr = (ushort *)p_Var1,
-         p_Var1 = p_Var2, p_Var2 <= _controllerPool.blockPool)) break;
+         (p_Var2 = DAT_800d5698 + p_Var1->next, listPtr = (ushort *)p_Var1, p_Var1 = p_Var2,
+         p_Var2 <= DAT_800d5698)) break;
     }
   }
   ((_G2AnimController_Type *)listPtr)->next =
-       (ushort)((int)((int)controller - (int)_controllerPool.blockPool) * 0x38e38e39 >> 2);
+       (ushort)((int)((int)controller - (int)DAT_800d5698) * 0x38e38e39 >> 2);
   do {
     p_Var1 = controller;
-    controller = _controllerPool.blockPool + p_Var1->next;
-  } while (_controllerPool.blockPool < _controllerPool.blockPool + p_Var1->next);
-  p_Var1->next = (ushort)((int)((int)p_Var2 - (int)_controllerPool.blockPool) * 0x38e38e39 >> 2);
+    controller = DAT_800d5698 + p_Var1->next;
+  } while (DAT_800d5698 < DAT_800d5698 + p_Var1->next);
+  p_Var1->next = (ushort)((int)((int)p_Var2 - (int)DAT_800d5698) * 0x38e38e39 >> 2);
   return;
 }
 
@@ -1729,29 +1777,31 @@ void _G2AnimController_InsertIntoList(_G2AnimController_Type *controller,ushort 
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2AnimController_GetCurrentInterpQuat(struct _G2AnimController_Type *controller /*$s0*/, struct _G2Anim_Type *anim /*$a3*/, struct _G2Quat_Type *quat /*$s1*/)
- // line 1556, offset 0x8008fbc0
+ // line 1560, offset 0x80091704
 	/* begin block 1 */
-		// Start line: 1557
-		// Start offset: 0x8008FBC0
+		// Start line: 1561
+		// Start offset: 0x80091704
 		// Variables:
 	// 		struct _G2EulerAngles_Type eulerVector; // stack offset -24
 
 		/* begin block 1.1 */
-			// Start line: 1587
-			// Start offset: 0x8008FC98
+			// Start line: 1591
+			// Start offset: 0x800917DC
 			// Variables:
 		// 		struct _G2Quat_Type *quat; // $s1
 		/* end block 1.1 */
-		// End offset: 0x8008FC98
-		// End Line: 1587
+		// End offset: 0x800917DC
+		// End Line: 1591
 	/* end block 1 */
-	// End offset: 0x8008FCE8
-	// End Line: 1605
+	// End offset: 0x8009182C
+	// End Line: 1609
 
 	/* begin block 2 */
-		// Start line: 3162
+		// Start line: 3170
 	/* end block 2 */
-	// End Line: 3163
+	// End Line: 3171
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 void _G2AnimController_GetCurrentInterpQuat
                (_G2AnimController_Type *controller,_G2Anim_Type *anim,_G2Quat_Type *quat)
@@ -1810,23 +1860,25 @@ void _G2AnimController_GetCurrentInterpQuat
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2AnimController_GetSimpleWorldRotQuat(struct _G2AnimController_Type *controller /*$a0*/, struct _G2Anim_Type *anim /*$a3*/, struct _G2Quat_Type *quat /*$s1*/)
- // line 1611, offset 0x8008fcfc
+ // line 1615, offset 0x80091840
 	/* begin block 1 */
-		// Start line: 1612
-		// Start offset: 0x8008FCFC
+		// Start line: 1616
+		// Start offset: 0x80091840
 		// Variables:
 	// 		struct _Segment *segment; // $v0
 	// 		struct _G2Matrix_Type *parentMatrix; // $s0
 	// 		struct _G2Matrix_Type segMatrix; // stack offset -48
 	// 		int segNumber; // $v0
 	/* end block 1 */
-	// End offset: 0x8008FCFC
-	// End Line: 1612
+	// End offset: 0x80091840
+	// End Line: 1616
 
 	/* begin block 2 */
-		// Start line: 3272
+		// Start line: 3280
 	/* end block 2 */
-	// End Line: 3273
+	// End Line: 3281
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 void _G2AnimController_GetSimpleWorldRotQuat
                (_G2AnimController_Type *controller,_G2Anim_Type *anim,_G2Quat_Type *quat)
@@ -1837,9 +1889,10 @@ void _G2AnimController_GetSimpleWorldRotQuat
   _G2Matrix_Type _Stack48;
   
   p_Var2 = anim->segMatrices;
-  sVar1 = anim->modelData->segmentList[controller->segNumber].parent;
-  _G2Anim_BuildSegLocalRotMatrix(&_segValues + controller->segNumber,&_Stack48);
-  MulMatrix2((undefined4 *)(p_Var2 + sVar1),(uint *)&_Stack48);
+  sVar1 = anim->modelData->segmentList[(uint)controller->segNumber].parent;
+  _G2Anim_BuildSegLocalRotMatrix
+            ((_G2AnimSegValue_Type *)(&_segValues + (uint)controller->segNumber * 0x18),&_Stack48);
+  MulMatrix2((MATRIX *)(p_Var2 + sVar1),(MATRIX *)&_Stack48);
   G2EulerAngles_ToMatrix_S((undefined2 *)quat,(short *)&_Stack48);
   return;
 }
@@ -1849,30 +1902,32 @@ void _G2AnimController_GetSimpleWorldRotQuat
 // decompiled code
 // original method signature: 
 // struct _G2AnimController_Type * /*$ra*/ _G2AnimControllerST_FindInList(int segNumber /*$a0*/, int type /*$a1*/, unsigned short *listPtr /*$a2*/)
- // line 1641, offset 0x8008fd80
+ // line 1645, offset 0x800918c4
 	/* begin block 1 */
-		// Start line: 1644
-		// Start offset: 0x8008FD80
+		// Start line: 1648
+		// Start offset: 0x800918C4
 		// Variables:
 	// 		struct _G2AnimController_Type *controller; // $a2
 	/* end block 1 */
-	// End offset: 0x8008FDE8
-	// End Line: 1659
+	// End offset: 0x8009192C
+	// End Line: 1663
 
 	/* begin block 2 */
-		// Start line: 3360
+		// Start line: 3368
 	/* end block 2 */
-	// End Line: 3361
+	// End Line: 3369
 
 	/* begin block 3 */
-		// Start line: 3362
+		// Start line: 3370
 	/* end block 3 */
-	// End Line: 3363
+	// End Line: 3371
 
 	/* begin block 4 */
-		// Start line: 3364
+		// Start line: 3372
 	/* end block 4 */
-	// End Line: 3365
+	// End Line: 3373
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 _G2AnimController_Type * _G2AnimControllerST_FindInList(int segNumber,int type,ushort *listPtr)
 
@@ -1882,12 +1937,12 @@ _G2AnimController_Type * _G2AnimControllerST_FindInList(int segNumber,int type,u
   _G2AnimController_Type *p_Var3;
   
   uVar1 = *listPtr;
-  while ((p_Var3 = _controllerPool.blockPool + uVar1, _controllerPool.blockPool < p_Var3 &&
+  while ((p_Var3 = DAT_800d5698 + uVar1, DAT_800d5698 < p_Var3 &&
          (((uint)p_Var3->segNumber != segNumber || ((uint)p_Var3->type != type))))) {
     uVar1 = p_Var3->next;
   }
   p_Var2 = (_G2AnimController_Type *)0x0;
-  if (p_Var3 != _controllerPool.blockPool) {
+  if (p_Var3 != DAT_800d5698) {
     p_Var2 = p_Var3;
   }
   return p_Var2;
@@ -1898,30 +1953,32 @@ _G2AnimController_Type * _G2AnimControllerST_FindInList(int segNumber,int type,u
 // decompiled code
 // original method signature: 
 // struct _G2AnimController_Type * /*$ra*/ _G2AnimControllerST_FindPtrInList(int segNumber /*$a0*/, int type /*$a1*/, unsigned short **listPtrPtr /*$a2*/)
- // line 1665, offset 0x8008fdf0
+ // line 1669, offset 0x80091934
 	/* begin block 1 */
-		// Start line: 1668
-		// Start offset: 0x8008FDF0
+		// Start line: 1672
+		// Start offset: 0x80091934
 		// Variables:
 	// 		struct _G2AnimController_Type *controller; // $a3
 	/* end block 1 */
-	// End offset: 0x8008FE80
-	// End Line: 1689
+	// End offset: 0x800919C4
+	// End Line: 1693
 
 	/* begin block 2 */
-		// Start line: 3408
+		// Start line: 3416
 	/* end block 2 */
-	// End Line: 3409
+	// End Line: 3417
 
 	/* begin block 3 */
-		// Start line: 3410
+		// Start line: 3418
 	/* end block 3 */
-	// End Line: 3411
+	// End Line: 3419
 
 	/* begin block 4 */
-		// Start line: 3415
+		// Start line: 3423
 	/* end block 4 */
-	// End Line: 3416
+	// End Line: 3424
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 _G2AnimController_Type *
 _G2AnimControllerST_FindPtrInList(int segNumber,int type,ushort **listPtrPtr)
@@ -1929,15 +1986,15 @@ _G2AnimControllerST_FindPtrInList(int segNumber,int type,ushort **listPtrPtr)
 {
   _G2AnimController_Type *p_Var1;
   
-  p_Var1 = _controllerPool.blockPool + **listPtrPtr;
-  if (_controllerPool.blockPool < p_Var1) {
+  p_Var1 = DAT_800d5698 + **listPtrPtr;
+  if (DAT_800d5698 < p_Var1) {
     do {
       if (((uint)p_Var1->segNumber == segNumber) && ((uint)p_Var1->type == type)) break;
       *(_G2AnimController_Type **)listPtrPtr = p_Var1;
-      p_Var1 = _controllerPool.blockPool + p_Var1->next;
-    } while (_controllerPool.blockPool < p_Var1);
+      p_Var1 = DAT_800d5698 + p_Var1->next;
+    } while (DAT_800d5698 < p_Var1);
   }
-  if (p_Var1 == _controllerPool.blockPool) {
+  if (p_Var1 == DAT_800d5698) {
     *listPtrPtr = (ushort *)0x0;
     return (_G2AnimController_Type *)0x0;
   }
@@ -1949,32 +2006,34 @@ _G2AnimControllerST_FindPtrInList(int segNumber,int type,ushort **listPtrPtr)
 // decompiled code
 // original method signature: 
 // struct _G2AnimController_Type * /*$ra*/ _G2AnimControllerST_RemoveFromList(int segNumber /*$a0*/, int type /*$a1*/, unsigned short *listPtr /*$a2*/)
- // line 1726, offset 0x8008fe90
+ // line 1730, offset 0x800919d4
 	/* begin block 1 */
-		// Start line: 1729
-		// Start offset: 0x8008FE90
+		// Start line: 1733
+		// Start offset: 0x800919D4
 		// Variables:
 	// 		struct _G2AnimController_Type *controller; // $a3
 	// 		struct _G2AnimController_Type *stepController; // $a1
 	// 		struct _G2AnimController_Type *nextController; // $a0
 	/* end block 1 */
-	// End offset: 0x8008FF58
-	// End Line: 1758
+	// End offset: 0x80091A9C
+	// End Line: 1762
 
 	/* begin block 2 */
-		// Start line: 3445
+		// Start line: 3453
 	/* end block 2 */
-	// End Line: 3446
+	// End Line: 3454
 
 	/* begin block 3 */
-		// Start line: 3494
+		// Start line: 3502
 	/* end block 3 */
-	// End Line: 3495
+	// End Line: 3503
 
 	/* begin block 4 */
-		// Start line: 3498
+		// Start line: 3506
 	/* end block 4 */
-	// End Line: 3499
+	// End Line: 3507
+
+/* File: C:\kain2\game\G2\ANMCTRLR.C */
 
 _G2AnimController_Type * _G2AnimControllerST_RemoveFromList(int segNumber,int type,ushort *listPtr)
 
@@ -1984,24 +2043,24 @@ _G2AnimController_Type * _G2AnimControllerST_RemoveFromList(int segNumber,int ty
   _G2AnimController_Type *p_Var3;
   _G2AnimController_Type *p_Var4;
   
-  p_Var3 = _controllerPool.blockPool + *listPtr;
-  if (_controllerPool.blockPool < _controllerPool.blockPool + *listPtr) {
+  p_Var3 = DAT_800d5698 + *listPtr;
+  if (DAT_800d5698 < DAT_800d5698 + *listPtr) {
     do {
       if (((uint)p_Var3->segNumber == segNumber) && (p_Var4 = p_Var3, (uint)p_Var3->type == type))
       break;
-      p_Var4 = _controllerPool.blockPool + p_Var3->next;
+      p_Var4 = DAT_800d5698 + p_Var3->next;
       listPtr = (ushort *)p_Var3;
       p_Var3 = p_Var4;
-    } while (_controllerPool.blockPool < p_Var4);
+    } while (DAT_800d5698 < p_Var4);
     p_Var3 = p_Var4;
-    if (_controllerPool.blockPool < p_Var4) {
+    if (DAT_800d5698 < p_Var4) {
       do {
         p_Var2 = p_Var3;
-        p_Var3 = _controllerPool.blockPool;
+        p_Var3 = DAT_800d5698;
         uVar1 = p_Var2->next;
         ((_G2AnimController_Type *)listPtr)->next = uVar1;
         p_Var3 = p_Var3 + uVar1;
-        if (p_Var3 <= _controllerPool.blockPool) break;
+        if (p_Var3 <= DAT_800d5698) break;
       } while (p_Var3->type == '\0');
       p_Var2->next = 0;
       return p_Var4;

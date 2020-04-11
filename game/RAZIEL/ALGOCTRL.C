@@ -5,15 +5,15 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ InitAlgorithmicWings(struct _Instance *instance /*$s2*/)
- // line 24, offset 0x8009e7d8
+ // line 24, offset 0x800a0f00
 	/* begin block 1 */
 		// Start line: 25
-		// Start offset: 0x8009E7D8
+		// Start offset: 0x800A0F00
 		// Variables:
 	// 		struct _G2EulerAngles_Type Rot; // stack offset -24
 	// 		unsigned char i; // $s1
 	/* end block 1 */
-	// End offset: 0x8009E958
+	// End offset: 0x800A1080
 	// End Line: 91
 
 	/* begin block 2 */
@@ -25,6 +25,8 @@
 		// Start line: 59
 	/* end block 3 */
 	// End Line: 60
+
+/* File: C:\kain2\game\RAZIEL\ALGOCTRL.C */
 
 void InitAlgorithmicWings(_Instance *instance)
 
@@ -38,7 +40,7 @@ void InitAlgorithmicWings(_Instance *instance)
     pMVar1 = instance->matrix;
     bVar2 = 0x33;
     if (pMVar1 == (MATRIX *)0x0) {
-      INSTANCE_Post(instance,0x100006,0);
+      INSTANCE_Post(instance,(int)&DAT_00100006,0);
     }
     else {
       while( true ) {
@@ -85,14 +87,14 @@ void InitAlgorithmicWings(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DeInitAlgorithmicWings(struct _Instance *instance /*$s1*/)
- // line 94, offset 0x8009e970
+ // line 94, offset 0x800a1098
 	/* begin block 1 */
 		// Start line: 95
-		// Start offset: 0x8009E970
+		// Start offset: 0x800A1098
 		// Variables:
 	// 		unsigned char i; // $s0
 	/* end block 1 */
-	// End offset: 0x8009E9EC
+	// End offset: 0x800A1114
 	// End Line: 114
 
 	/* begin block 2 */
@@ -104,6 +106,8 @@ void InitAlgorithmicWings(_Instance *instance)
 		// Start line: 225
 	/* end block 3 */
 	// End Line: 226
+
+/* File: C:\kain2\game\RAZIEL\ALGOCTRL.C */
 
 void DeInitAlgorithmicWings(_Instance *instance)
 
@@ -131,20 +135,22 @@ void DeInitAlgorithmicWings(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ AlgorithmicWings(struct _Instance *instance /*$s0*/, struct evAnimationControllerDoneData *ControllerData /*$s1*/)
- // line 117, offset 0x8009ea00
+ // line 117, offset 0x800a1128
 	/* begin block 1 */
 		// Start line: 118
-		// Start offset: 0x8009EA00
+		// Start offset: 0x800A1128
 		// Variables:
 	// 		struct _G2EulerAngles_Type Rot; // stack offset -24
 	/* end block 1 */
-	// End offset: 0x8009EA5C
+	// End offset: 0x800A1184
 	// End Line: 143
 
 	/* begin block 2 */
 		// Start line: 273
 	/* end block 2 */
 	// End Line: 274
+
+/* File: C:\kain2\game\RAZIEL\ALGOCTRL.C */
 
 void AlgorithmicWings(_Instance *instance,evAnimationControllerDoneData *ControllerData)
 
@@ -164,10 +170,10 @@ void AlgorithmicWings(_Instance *instance,evAnimationControllerDoneData *Control
 // decompiled code
 // original method signature: 
 // void /*$ra*/ AlgorithmicNeck(struct _Instance *Player /*$s1*/, struct _Instance *Target /*$s2*/)
- // line 150, offset 0x8009ea70
+ // line 150, offset 0x800a1198
 	/* begin block 1 */
 		// Start line: 151
-		// Start offset: 0x8009EA70
+		// Start offset: 0x800A1198
 		// Variables:
 	// 		struct _Position From; // stack offset -96
 	// 		struct _Position To; // stack offset -88
@@ -177,29 +183,31 @@ void AlgorithmicWings(_Instance *instance,evAnimationControllerDoneData *Control
 
 		/* begin block 1.1 */
 			// Start line: 162
-			// Start offset: 0x8009EAA4
+			// Start offset: 0x800A11CC
 			// Variables:
 		// 		struct evCollideInstanceStatsData data; // stack offset -40
 		/* end block 1.1 */
-		// End offset: 0x8009EB10
+		// End offset: 0x800A1238
 		// End Line: 183
 
 		/* begin block 1.2 */
 			// Start line: 208
-			// Start offset: 0x8009EBB4
+			// Start offset: 0x800A12DC
 			// Variables:
-		// 		struct MATRIX *matrix; // $v0
+		// 		struct MATRIX *matrix; // $v1
 		/* end block 1.2 */
-		// End offset: 0x8009EBE0
-		// End Line: 227
+		// End offset: 0x800A1314
+		// End Line: 223
 	/* end block 1 */
-	// End offset: 0x8009ECD0
-	// End Line: 260
+	// End offset: 0x800A1404
+	// End Line: 256
 
 	/* begin block 2 */
 		// Start line: 345
 	/* end block 2 */
 	// End Line: 346
+
+/* File: C:\kain2\game\RAZIEL\ALGOCTRL.C */
 
 void AlgorithmicNeck(_Instance *Player,_Instance *Target)
 
@@ -216,19 +224,19 @@ void AlgorithmicNeck(_Instance *Player,_Instance *Target)
   MATRIX MStack72;
   evCollideInstanceStatsData eStack40;
   
-  uVar2 = Raziel.Senses.Flags & 0xfffffff7;
-  uVar6 = Raziel.Senses.Flags & 0x10;
-  Raziel.Senses.Flags = uVar2;
+  uVar2 = DAT_800d5ae0 & 0xfffffff7;
+  uVar6 = DAT_800d5ae0 & 0x10;
+  DAT_800d5ae0 = uVar2;
   if (uVar6 != 0) {
-    TransposeMatrix((undefined4 *)Player->oldMatrix,(undefined4 *)&MStack72);
+    TransposeMatrix(Player->oldMatrix,&MStack72);
     iVar3 = INSTANCE_SetStatsData
-                      (Player,(_Instance *)0x0,&Raziel.Senses.lookAtPoint,&eStack40,&MStack72);
+                      (Player,(_Instance *)0x0,(_Vector *)&DAT_800d5b20,&eStack40,(char)&MStack72);
     if (((iVar3 != 0) && (eStack40.distance < 0xc80)) &&
        (iVar3 = MATH3D_ConeDetect(&eStack40.relativePosition,0x3c7,0x3c7), iVar3 != 0)) {
-      Raziel.Senses.Flags = Raziel.Senses.Flags | 8;
+      DAT_800d5ae0 = DAT_800d5ae0 | 8;
     }
   }
-  if ((Target == (_Instance *)0x0) && ((Raziel.Senses.Flags & 8U) == 0)) {
+  if ((Target == (_Instance *)0x0) && ((DAT_800d5ae0 & 8) == 0)) {
     _Var4 = G2Anim_IsControllerActive(&Player->anim,0x11,8);
     if (_Var4 != G2FALSE) {
       G2Anim_InterpDisableController(&Player->anim,0x11,8,900);
@@ -239,16 +247,19 @@ void AlgorithmicNeck(_Instance *Player,_Instance *Target)
     if (_Var4 == G2FALSE) {
       G2Anim_EnableController(&Player->anim,0x11,8);
     }
-    if ((Raziel.Senses.Flags & 8U) == 0) {
+    if ((DAT_800d5ae0 & 8) == 0) {
       uVar5 = INSTANCE_Query(Target,0xc);
+      if (uVar5 == 0) {
+        return;
+      }
       local_58.x = *(short *)(uVar5 + 0x14);
       local_58.y = *(short *)(uVar5 + 0x18);
       local_58.z = *(short *)(uVar5 + 0x1c);
     }
     else {
-      local_58.x = (short)Raziel.Senses.lookAtPoint.x;
-      local_58.y = (short)Raziel.Senses.lookAtPoint.y;
-      local_58.z = (short)Raziel.Senses.lookAtPoint.z;
+      local_58.x = DAT_800d5b20;
+      local_58.y = DAT_800d5b24;
+      local_58.z = DAT_800d5b28;
     }
     local_60.x = *(short *)Player->matrix[0x11].t;
     local_60.y = *(short *)(Player->matrix[0x11].t + 1);
@@ -268,7 +279,7 @@ void AlgorithmicNeck(_Instance *Player,_Instance *Target)
       local_50.x = 0xd6e;
     }
     MATH3D_ZYXtoXYZ(&local_50);
-    G2EmulationSetInterpController_Vector(Player,0x11,8,(_G2SVector3_Type *)&local_50,6,0);
+    G2EmulationSetInterpController_Vector(Player,0x11,8,(_G2SVector3_Type *)&local_50,3,0);
   }
   return;
 }

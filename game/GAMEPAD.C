@@ -5,39 +5,40 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GAMEPAD_Commands(long (*command)[5] /*$t4*/, long (*data)[5] /*$t3*/, long pad /*$a2*/)
- // line 102, offset 0x80031e5c
+ // line 102, offset 0x80030d70
 	/* begin block 1 */
 		// Start line: 103
-		// Start offset: 0x80031E5C
+		// Start offset: 0x80030D70
 		// Variables:
 	// 		long analogX; // $t2
 	// 		long analogY; // $t1
 	// 		static short lastPad[2]; // offset 0x0
 	/* end block 1 */
-	// End offset: 0x800321F8
-	// End Line: 275
+	// End offset: 0x80031130
+	// End Line: 280
 
 	/* begin block 2 */
 		// Start line: 204
 	/* end block 2 */
 	// End Line: 205
 
+/* File: C:\kain2\game\GAMEPAD.C */
+
 void GAMEPAD_Commands(long (*command) [5],long (*data) [5],long pad)
 
 {
   long (*palVar1) [5];
   int iVar2;
-  int iVar3;
-  uint uVar4;
+  uint uVar3;
+  uint *puVar4;
   uint *puVar5;
-  uint *puVar6;
+  int iVar6;
   uint uVar7;
-  int iVar8;
-  uint uVar9;
+  uint uVar8;
   
   palVar1 = data + pad;
   (command + pad)[2] = (command + pad)[0] & ~(*palVar1)[0];
-  uVar9 = (*palVar1)[3];
+  uVar8 = (*palVar1)[3];
   uVar7 = (*palVar1)[4];
   if (((*palVar1)[0] & 1U) == 0) {
     if (((*palVar1)[0] & 2U) != 0) {
@@ -49,60 +50,59 @@ void GAMEPAD_Commands(long (*command) [5],long (*data) [5],long pad)
   }
   if (((data + pad)[0] & 4U) == 0) {
     if (((data + pad)[0] & 8U) != 0) {
-      uVar9 = 0x80;
+      uVar8 = 0x80;
     }
   }
   else {
-    uVar9 = 0xffffff80;
+    uVar8 = 0xffffff80;
   }
   if ((int)uVar7 < -0x37) {
-    uVar4 = (data + pad)[0] | 1;
-LAB_80031f44:
-    (data + pad)[0] = uVar4;
+    uVar3 = (data + pad)[0] | 1;
+LAB_80030e58:
+    (data + pad)[0] = uVar3;
   }
   else {
     if (0x37 < (int)uVar7) {
-      uVar4 = (data + pad)[0] | 2;
-      goto LAB_80031f44;
+      uVar3 = (data + pad)[0] | 2;
+      goto LAB_80030e58;
     }
   }
-  if ((int)uVar9 < -0x37) {
-    uVar4 = (data + pad)[0] | 4;
-LAB_80031f90:
-    (data + pad)[0] = uVar4;
-    iVar2 = pad << 2;
+  if ((int)uVar8 < -0x37) {
+    uVar3 = (data + pad)[0] | 4;
   }
   else {
     iVar2 = pad * 4;
-    if (0x37 < (int)uVar9) {
-      uVar4 = (data + pad)[0] | 8;
-      goto LAB_80031f90;
-    }
+    if ((int)uVar8 < 0x38) goto LAB_80030eac;
+    uVar3 = (data + pad)[0] | 8;
   }
+  (data + pad)[0] = uVar3;
+  iVar2 = pad << 2;
+LAB_80030eac:
   iVar2 = iVar2 + pad;
-  puVar6 = (uint *)(*data + iVar2);
-  puVar6[1] = ~(int)*(short *)(&lastPad_24 + pad * 2) & *puVar6;
-  *(short *)(&lastPad_24 + pad * 2) = *(short *)puVar6;
-  puVar5 = (uint *)(*command + iVar2);
-  puVar5[3] = uVar9;
-  puVar5[4] = uVar7;
-  if ((gameTrackerX.gameFlags & 0x10U) == 0) {
+  iVar6 = iVar2 * 4;
+  puVar5 = (uint *)(*data + iVar2);
+  puVar5[1] = ~(int)*(short *)(&lastPad_24 + pad * 2) & *puVar5;
+  *(short *)(&lastPad_24 + pad * 2) = *(short *)puVar5;
+  puVar4 = (uint *)(*command + iVar2);
+  puVar4[3] = uVar8;
+  puVar4[4] = uVar7;
+  if ((DAT_800d220c & 0x10) == 0) {
     iVar2 = 0;
-    if ((gameTrackerX.gameFlags & 1U) != 0) {
-      memset(gameTrackerX.controlCommand,0,0x28);
-      memset(gameTrackerX.controlData,0,0x28);
+    if ((DAT_800d220c & 1) != 0) {
+      memset();
+      memset();
       return;
     }
-    puVar5[1] = ~*puVar5 & *puVar6;
-    *puVar5 = *puVar6;
-    iVar8 = 0;
-    if ((*puVar6 & 1) == 0) {
-      if ((*puVar6 & 2) != 0) {
-        iVar8 = 0x80;
+    puVar4[1] = ~*puVar4 & *puVar5;
+    *puVar4 = *puVar5;
+    iVar6 = 0;
+    if ((*puVar5 & 1) == 0) {
+      if ((*puVar5 & 2) != 0) {
+        iVar6 = 0x80;
       }
     }
     else {
-      iVar8 = -0x80;
+      iVar6 = -0x80;
     }
     if (((data + pad)[0] & 4U) == 0) {
       if (((data + pad)[0] & 8U) != 0) {
@@ -112,23 +112,23 @@ LAB_80031f90:
     else {
       iVar2 = -0x80;
     }
-    iVar3 = pad * 4;
-    if ((iVar2 == 0) && (iVar8 == 0)) goto LAB_80032190;
-    (data + pad)[3] = iVar2;
-    (data + pad)[4] = iVar8;
+    if ((iVar2 != 0) || (iVar6 != 0)) {
+      (data + pad)[3] = iVar2;
+      (data + pad)[4] = iVar6;
+    }
   }
   else {
-    puVar5[1] = ~*puVar5 & gameTrackerX.overrideData[iVar2];
-    *puVar5 = gameTrackerX.overrideData[iVar2];
-    puVar6[3] = gameTrackerX.overrideData[iVar2 + 3];
-    puVar6[4] = gameTrackerX.overrideData[iVar2 + 4];
+    puVar4[1] = ~*puVar4 & *(uint *)(&DAT_800d2164 + iVar6);
+    *puVar4 = *(uint *)(&DAT_800d2164 + iVar6);
+    puVar5[3] = *(uint *)(&DAT_800d2170 + iVar6);
+    puVar5[4] = *(uint *)(&DAT_800d2174 + iVar6);
     uVar7 = 0xffffff80;
-    if (((gameTrackerX.overrideData[iVar2] & 1U) != 0) ||
-       (uVar7 = 0x80, (gameTrackerX.overrideData[iVar2] & 2U) != 0)) {
-      puVar6[4] = uVar7;
+    if (((*(uint *)(&DAT_800d2164 + iVar6) & 1) != 0) ||
+       (uVar7 = 0x80, (*(uint *)(&DAT_800d2164 + iVar6) & 2) != 0)) {
+      puVar5[4] = uVar7;
     }
-    if ((gameTrackerX.overrideData[pad * 5] & 4U) == 0) {
-      if ((gameTrackerX.overrideData[pad * 5] & 8U) != 0) {
+    if ((*(uint *)(&DAT_800d2164 + pad * 0x14) & 4) == 0) {
+      if ((*(uint *)(&DAT_800d2164 + pad * 0x14) & 8) != 0) {
         (data + pad)[3] = 0x80;
       }
     }
@@ -136,15 +136,14 @@ LAB_80031f90:
       (data + pad)[3] = -0x80;
     }
   }
-  iVar3 = pad << 2;
-LAB_80032190:
-  puVar5 = (uint *)(*command + iVar3 + pad);
-  if (((*data)[iVar3 + pad] & 0x300U) == 0x300) {
-    *puVar5 = *puVar5 & 0xfffff3ff | 0x40000000;
-    if ((puVar5[1] & 0xc00) != 0) {
-      puVar5[1] = puVar5[1] | 0x40000000;
+  if ((((DAT_800d218c & 0x40000) == 0) && ((DAT_800d2190 & 0x2000000) != 0)) &&
+     (command = command + pad, ((data + pad)[0] & 0x300U) == 0x300)) {
+    uVar7 = (*command)[1];
+    (*command)[0] = (*command)[0] & 0xfffff3ffU | 0x40000000;
+    if ((uVar7 & 0xc00) != 0) {
+      (*command)[1] = uVar7 | 0x40000000;
     }
-    puVar5[1] = puVar5[1] & 0xfffff3ff;
+    (*command)[1] = (*command)[1] & 0xfffff3ff;
   }
   return;
 }
@@ -153,19 +152,43 @@ LAB_80032190:
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ GAMEPAD_DualShockEnabled()
- // line 299, offset 0x80032208
+// int /*$ra*/ GAMEPAD_ControllerIsDualShock()
+ // line 305, offset 0x80031140
 	/* begin block 1 */
-		// Start line: 614
+		// Start line: 626
 	/* end block 1 */
-	// End Line: 615
+	// End Line: 627
 
 	/* begin block 2 */
-		// Start line: 615
+		// Start line: 627
 	/* end block 2 */
-	// End Line: 616
+	// End Line: 628
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\GAMEPAD.C */
+
+int GAMEPAD_ControllerIsDualShock(void)
+
+{
+  return dualShock;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ GAMEPAD_DualShockEnabled()
+ // line 310, offset 0x8003114c
+	/* begin block 1 */
+		// Start line: 636
+	/* end block 1 */
+	// End Line: 637
+
+	/* begin block 2 */
+		// Start line: 637
+	/* end block 2 */
+	// End Line: 638
+
+/* File: C:\kain2\game\GAMEPAD.C */
 
 int GAMEPAD_DualShockEnabled(void)
 
@@ -178,23 +201,23 @@ int GAMEPAD_DualShockEnabled(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GAMEPAD_DisableDualShock()
- // line 304, offset 0x80032214
+ // line 315, offset 0x80031158
 	/* begin block 1 */
-		// Start line: 624
+		// Start line: 646
 	/* end block 1 */
-	// End Line: 625
+	// End Line: 647
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\GAMEPAD.C */
 
 void GAMEPAD_DisableDualShock(void)
 
 {
   dualshock_onflag = 0;
-  UCHAR_00h_800c4f5d = '\0';
-  dualshock_motors = '\0';
+  dualshock_motors[1] = '\0';
+  dualshock_motors[0] = '\0';
   dualshock1_time = 0;
   dualshock0_time = 0;
-  PadSetAct(0,&dualshock_motors,2);
+  PadSetAct(0,dualshock_motors,2);
   return;
 }
 
@@ -203,18 +226,18 @@ void GAMEPAD_DisableDualShock(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GAMEPAD_EnableDualShock()
- // line 314, offset 0x80032254
+ // line 325, offset 0x80031198
 	/* begin block 1 */
-		// Start line: 649
+		// Start line: 671
 	/* end block 1 */
-	// End Line: 650
+	// End Line: 672
 
 	/* begin block 2 */
-		// Start line: 650
+		// Start line: 672
 	/* end block 2 */
-	// End Line: 651
+	// End Line: 673
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\GAMEPAD.C */
 
 void GAMEPAD_EnableDualShock(void)
 
@@ -228,71 +251,67 @@ void GAMEPAD_EnableDualShock(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GAMEPAD_HandleDualShock()
- // line 320, offset 0x80032264
+ // line 331, offset 0x800311a8
 	/* begin block 1 */
-		// Start line: 321
-		// Start offset: 0x80032264
+		// Start line: 332
+		// Start offset: 0x800311A8
 		// Variables:
 	// 		int decrement_amount; // $s3
 
 		/* begin block 1.1 */
-			// Start line: 328
-			// Start offset: 0x8003229C
+			// Start line: 341
+			// Start offset: 0x800311EC
 			// Variables:
 		// 		int timeout; // $s0
 		/* end block 1.1 */
-		// End offset: 0x800322D8
-		// End Line: 335
+		// End offset: 0x80031228
+		// End Line: 348
 	/* end block 1 */
-	// End offset: 0x80032334
-	// End Line: 360
+	// End offset: 0x80031284
+	// End Line: 373
 
 	/* begin block 2 */
-		// Start line: 661
+		// Start line: 683
 	/* end block 2 */
-	// End Line: 662
+	// End Line: 684
 
-	/* begin block 3 */
-		// Start line: 664
-	/* end block 3 */
-	// End Line: 665
-
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\GAMEPAD.C */
 
 void GAMEPAD_HandleDualShock(void)
 
 {
   bool bVar1;
-  ulong uVar2;
+  int iVar2;
   int iVar3;
   int iVar4;
   
-  uVar2 = gameTrackerX.idleTime;
-  if (controllerType == 's') {
-    iVar4 = 0;
+  iVar4 = DAT_800d2314;
+  iVar2 = PadInfoMode(0,2,0);
+  if (iVar2 == 0) {
+    align_flag = 0;
+  }
+  else {
+    iVar2 = 0;
     if (align_flag == 0) {
-      PadSetAct(0,&dualshock_motors,2);
+      PadSetAct(0,dualshock_motors,2);
       do {
-        iVar3 = PadSetActAlign(0,"");
-        bVar1 = iVar4 < 100000;
+        iVar3 = PadSetActAlign(0,dualshock_align);
+        bVar1 = iVar2 < 100000;
         if (iVar3 != 0) break;
-        iVar4 = iVar4 + 1;
+        iVar2 = iVar2 + 1;
       } while (bVar1);
       align_flag = 1;
     }
   }
-  else {
-    align_flag = 0;
-  }
-  iVar4 = dualshock0_time - uVar2;
-  if ((0 < dualshock0_time) && (dualshock0_time = iVar4, iVar4 < 1)) {
+  iVar2 = dualshock0_time - iVar4;
+  if ((0 < dualshock0_time) && (dualshock0_time = iVar2, iVar2 < 1)) {
     dualshock0_time = 0;
-    dualshock_motors = '\0';
+    dualshock_motors[0] = '\0';
   }
-  iVar4 = dualshock1_time - uVar2;
+  iVar4 = dualshock1_time - iVar4;
   if ((0 < dualshock1_time) && (dualshock1_time = iVar4, iVar4 < 1)) {
     dualshock1_time = 0;
-    UCHAR_00h_800c4f5d = '\0';
+    dualshock_motors[1] = '\0';
   }
   return;
 }
@@ -302,26 +321,28 @@ void GAMEPAD_HandleDualShock(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GAMEPAD_Shock(int motor0_speed /*$a0*/, int motor0_time /*$a1*/, int motor1_speed /*$a2*/, int motor1_time /*$a3*/)
- // line 366, offset 0x80032350
+ // line 379, offset 0x800312a0
 	/* begin block 1 */
-		// Start line: 759
+		// Start line: 789
 	/* end block 1 */
-	// End Line: 760
+	// End Line: 790
 
 	/* begin block 2 */
-		// Start line: 761
+		// Start line: 791
 	/* end block 2 */
-	// End Line: 762
+	// End Line: 792
+
+/* File: C:\kain2\game\GAMEPAD.C */
 
 void GAMEPAD_Shock(int motor0_speed,int motor0_time,int motor1_speed,int motor1_time)
 
 {
   if (dualshock_onflag != 0) {
-    dualshock_motors = (uchar)motor0_speed;
-    UCHAR_00h_800c4f5d = (uchar)motor1_speed;
+    dualshock_motors[0] = (uchar)motor0_speed;
+    dualshock_motors[1] = (uchar)motor1_speed;
     dualshock0_time = motor0_time;
     dualshock1_time = motor1_time;
-    PadSetAct(0,&dualshock_motors,2);
+    PadSetAct(0,dualshock_motors,2);
   }
   return;
 }
@@ -331,34 +352,7 @@ void GAMEPAD_Shock(int motor0_speed,int motor0_time,int motor1_speed,int motor1_
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GAMEPAD_Shock0(int motor0_speed /*$a0*/, int motor0_time /*$a1*/)
- // line 382, offset 0x80032394
-	/* begin block 1 */
-		// Start line: 798
-	/* end block 1 */
-	// End Line: 799
-
-	/* begin block 2 */
-		// Start line: 800
-	/* end block 2 */
-	// End Line: 801
-
-void GAMEPAD_Shock0(int motor0_speed,int motor0_time)
-
-{
-  if (dualshock_onflag != 0) {
-    dualshock_motors = (uchar)motor0_speed;
-    dualshock0_time = motor0_time;
-    PadSetAct(0,&dualshock_motors,2);
-  }
-  return;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// void /*$ra*/ GAMEPAD_Shock1(int motor1_speed /*$a0*/, int motor1_time /*$a1*/)
- // line 396, offset 0x800323d0
+ // line 395, offset 0x800312e4
 	/* begin block 1 */
 		// Start line: 828
 	/* end block 1 */
@@ -369,13 +363,44 @@ void GAMEPAD_Shock0(int motor0_speed,int motor0_time)
 	/* end block 2 */
 	// End Line: 831
 
+/* File: C:\kain2\game\GAMEPAD.C */
+
+void GAMEPAD_Shock0(int motor0_speed,int motor0_time)
+
+{
+  if (dualshock_onflag != 0) {
+    dualshock_motors[0] = (uchar)motor0_speed;
+    dualshock0_time = motor0_time;
+    PadSetAct(0,dualshock_motors,2);
+  }
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ GAMEPAD_Shock1(int motor1_speed /*$a0*/, int motor1_time /*$a1*/)
+ // line 409, offset 0x80031320
+	/* begin block 1 */
+		// Start line: 858
+	/* end block 1 */
+	// End Line: 859
+
+	/* begin block 2 */
+		// Start line: 860
+	/* end block 2 */
+	// End Line: 861
+
+/* File: C:\kain2\game\GAMEPAD.C */
+
 void GAMEPAD_Shock1(int motor1_speed,int motor1_time)
 
 {
   if (dualshock_onflag != 0) {
-    UCHAR_00h_800c4f5d = (uchar)motor1_speed;
+    dualshock_motors[1] = (uchar)motor1_speed;
     dualshock1_time = motor1_time;
-    PadSetAct(0,&dualshock_motors,2);
+    PadSetAct(0,dualshock_motors,2);
   }
   return;
 }
@@ -385,70 +410,68 @@ void GAMEPAD_Shock1(int motor1_speed,int motor1_time)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GAMEPAD_Detect()
- // line 410, offset 0x8003240c
+ // line 423, offset 0x8003135c
 	/* begin block 1 */
-		// Start line: 411
-		// Start offset: 0x8003240C
+		// Start line: 424
+		// Start offset: 0x8003135C
 		// Variables:
-	// 		int dualShock; // $s1
 	// 		int padState; // $v1
 	// 		int count; // $s0
 	/* end block 1 */
-	// End offset: 0x800324C8
-	// End Line: 457
+	// End offset: 0x8003141C
+	// End Line: 469
 
 	/* begin block 2 */
-		// Start line: 858
+		// Start line: 888
 	/* end block 2 */
-	// End Line: 859
+	// End Line: 889
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\GAMEPAD.C */
 
 void GAMEPAD_Detect(void)
 
 {
-  bool bVar1;
-  uint uVar2;
-  int iVar3;
+  int iVar1;
+  int iVar2;
   
-  bVar1 = false;
   dualshock0_time = 0;
   dualshock1_time = 0;
   align_flag = 0;
   dualshock_onflag = 0;
-LAB_80032448:
-  iVar3 = 0;
-LAB_8003244c:
+  dualShock = 0;
+LAB_80031394:
+  iVar2 = 0;
+LAB_80031398:
   VSync(0);
-  uVar2 = PadGetState();
-  if (uVar2 == 0) goto code_r0x80032468;
-  goto LAB_80032478;
-code_r0x80032468:
-  iVar3 = iVar3 + 1;
-  if (4 < iVar3) {
-LAB_80032478:
-    if (uVar2 == 4) {
-      bVar1 = true;
+  iVar1 = PadGetState(0);
+  if (iVar1 == 0) goto code_r0x800313b4;
+  goto LAB_800313c4;
+code_r0x800313b4:
+  iVar2 = iVar2 + 1;
+  if (4 < iVar2) {
+LAB_800313c4:
+    if (iVar1 == 4) {
+      dualShock = 1;
     }
-    if (uVar2 != 1) {
-      iVar3 = 0;
-      if ((uVar2 != 4) && (uVar2 != 5)) {
-        if (bVar1) goto LAB_800324a4;
-        goto LAB_800324c8;
+    if (iVar1 != 1) {
+      iVar2 = 0;
+      if ((iVar1 != 4) && (iVar1 != 5)) {
+        if (dualShock != 0) goto LAB_800313f8;
+        goto LAB_8003141c;
       }
-      goto LAB_8003244c;
+      goto LAB_80031398;
     }
-    goto LAB_80032448;
+    goto LAB_80031394;
   }
-  goto LAB_8003244c;
-  while (iVar3 < 0x1e) {
-LAB_800324a4:
+  goto LAB_80031398;
+  while (iVar2 < 0x1e) {
+LAB_800313f8:
     VSync(0);
-    uVar2 = PadGetState();
-    iVar3 = iVar3 + 1;
-    if (uVar2 == 6) break;
+    iVar1 = PadGetState(0);
+    iVar2 = iVar2 + 1;
+    if (iVar1 == 6) break;
   }
-LAB_800324c8:
+LAB_8003141c:
   VSync(3);
   return;
 }
@@ -458,13 +481,13 @@ LAB_800324c8:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GAMEPAD_Init()
- // line 461, offset 0x800324f0
+ // line 473, offset 0x80031440
 	/* begin block 1 */
-		// Start line: 1006
+		// Start line: 1029
 	/* end block 1 */
-	// End Line: 1007
+	// End Line: 1030
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\GAMEPAD.C */
 
 void GAMEPAD_Init(void)
 
@@ -472,17 +495,17 @@ void GAMEPAD_Init(void)
   PadInitDirect(&readGPBuffer1,&readGPBuffer2);
   PadStartCom();
   GAMEPAD_Detect();
-  memset(&gDummyCommand,0,0x10);
-  memset(&readGPBuffer1,0,0x22);
-  memset(&readGPBuffer2,0,0x22);
-  gpbuffer1.transStatus = '\0';
-  gpbuffer1.data._0_2_ = 0xffff;
-  readGPBuffer1.transStatus = '\0';
-  readGPBuffer1.data._0_2_ = 0xffff;
-  gpbuffer2.transStatus = '\0';
-  gpbuffer2.data._0_2_ = 0xffff;
-  readGPBuffer2.transStatus = '\0';
-  readGPBuffer2.data._0_2_ = 0xffff;
+  memset();
+  memset();
+  memset();
+  gpbuffer1 = 0;
+  DAT_800d1dd6 = 0xffff;
+  readGPBuffer1 = 0;
+  DAT_800d1dfa = 0xffff;
+  gpbuffer2 = 0;
+  DAT_800d1e1e = 0xffff;
+  readGPBuffer2 = 0;
+  DAT_800d1e42 = 0xffff;
   return;
 }
 
@@ -491,21 +514,23 @@ void GAMEPAD_Init(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GAMEPAD_FillOutDemoNames(char *baseAreaName /*$s0*/, char *demoName /*$s1*/)
- // line 501, offset 0x8003258c
+ // line 513, offset 0x800314dc
 	/* begin block 1 */
-		// Start line: 502
-		// Start offset: 0x8003258C
+		// Start line: 514
+		// Start offset: 0x800314DC
 		// Variables:
 	// 		char text[16]; // stack offset -32
 	// 		char *number; // $v0
 	/* end block 1 */
-	// End offset: 0x800325CC
-	// End Line: 511
+	// End offset: 0x8003151C
+	// End Line: 523
 
 	/* begin block 2 */
-		// Start line: 1099
+		// Start line: 1122
 	/* end block 2 */
-	// End Line: 1100
+	// End Line: 1123
+
+/* File: C:\kain2\game\GAMEPAD.C */
 
 void GAMEPAD_FillOutDemoNames(char *baseAreaName,char *demoName)
 
@@ -513,12 +538,12 @@ void GAMEPAD_FillOutDemoNames(char *baseAreaName,char *demoName)
   char *pcVar1;
   char acStack32 [16];
   
-  strcpy(acStack32,baseAreaName);
-  pcVar1 = strpbrk(acStack32,"0123456789");
+  strcpy();
+  pcVar1 = strpbrk(acStack32,s_0123456789_800cf50c);
   if (pcVar1 != (char *)0x0) {
     *pcVar1 = '\0';
   }
-  sprintf(demoName,"\\kain2\\area\\%s\\bin\\%s.dat");
+  sprintf(demoName,s__kain2_area__s_bin__s_dat_800cf518,acStack32,baseAreaName);
   return;
 }
 
@@ -527,41 +552,41 @@ void GAMEPAD_FillOutDemoNames(char *baseAreaName,char *demoName)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GAMEPAD_LoadDemo()
- // line 515, offset 0x800325f4
+ // line 527, offset 0x80031544
 	/* begin block 1 */
-		// Start line: 516
-		// Start offset: 0x800325F4
+		// Start line: 528
+		// Start offset: 0x80031544
 		// Variables:
 	// 		char demoFileName[80]; // stack offset -88
 	/* end block 1 */
-	// End offset: 0x80032650
-	// End Line: 542
+	// End offset: 0x800315A0
+	// End Line: 554
 
 	/* begin block 2 */
-		// Start line: 1130
+		// Start line: 1153
 	/* end block 2 */
-	// End Line: 1131
+	// End Line: 1154
 
 	/* begin block 3 */
-		// Start line: 1139
+		// Start line: 1162
 	/* end block 3 */
-	// End Line: 1140
+	// End Line: 1163
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\GAMEPAD.C */
 
 void GAMEPAD_LoadDemo(void)
 
 {
   char acStack88 [80];
   
-  gameTrackerX.enemyPlanPool._0_1_ = 0;
-  if (gameTrackerX.enemyPlanPool._1_1_ != '\0') {
-    GAMEPAD_FillOutDemoNames(gameTrackerX.baseAreaName,acStack88);
+  LAB_800d22d0 = 0;
+  if (DAT_800d22d1 != '\0') {
+    GAMEPAD_FillOutDemoNames(&DAT_800d2228,acStack88);
     __demoBufferStart = (ushort *)LOAD_ReadFile(acStack88,'\x11');
     __currentData = 0xffff;
     __dataCount = 0;
-    gameTrackerX.enemyPlanPool._0_1_ = 1;
-    gameTrackerX.enemyPlanPool._1_1_ = '\0';
+    LAB_800d22d0 = 1;
+    DAT_800d22d1 = '\0';
     __demoBuffer = __demoBufferStart;
     GAMELOOP_DemoSetup();
   }
@@ -573,65 +598,66 @@ void GAMEPAD_LoadDemo(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PSXPAD_TranslateData(long *data /*$a0*/, unsigned short padData /*$a1*/, unsigned short lastData /*$a2*/)
- // line 544, offset 0x80032660
+ // line 556, offset 0x800315b0
 	/* begin block 1 */
-		// Start line: 545
-		// Start offset: 0x80032660
+		// Start line: 557
+		// Start offset: 0x800315B0
 		// Variables:
 	// 		int i; // $t1
 	// 		struct JoypadMappingStruct table[16]; // stack offset -64
 
 		/* begin block 1.1 */
-			// Start line: 599
-			// Start offset: 0x80032708
+			// Start line: 611
+			// Start offset: 0x80031658
 			// Variables:
 		// 		unsigned short padButton; // $a3
 		// 		unsigned short logicalButton; // $v1
 		/* end block 1.1 */
-		// End offset: 0x8003276C
-		// End Line: 615
+		// End offset: 0x800316BC
+		// End Line: 627
 	/* end block 1 */
-	// End offset: 0x8003277C
-	// End Line: 616
+	// End offset: 0x800316CC
+	// End Line: 628
 
 	/* begin block 2 */
-		// Start line: 1199
+		// Start line: 1222
 	/* end block 2 */
-	// End Line: 1200
+	// End Line: 1223
 
-/* WARNING: Removing unreachable block (ram,0x80032678) */
-/* WARNING: Removing unreachable block (ram,0x8003267c) */
-/* WARNING: Removing unreachable block (ram,0x800326c8) */
+/* WARNING: Removing unreachable block (ram,0x800315c8) */
+/* WARNING: Removing unreachable block (ram,0x800315cc) */
+/* WARNING: Removing unreachable block (ram,0x80031618) */
+/* File: C:\kain2\game\GAMEPAD.C */
 
 void PSXPAD_TranslateData(long *data,ushort padData,ushort lastData)
 
 {
   ushort uVar1;
-  undefined4 *puVar2;
+  undefined **ppuVar2;
   uint uVar3;
   undefined4 *puVar4;
   undefined4 *puVar5;
   int iVar6;
-  undefined4 uVar7;
-  undefined4 uVar8;
-  undefined4 uVar9;
+  undefined *puVar7;
+  undefined *puVar8;
+  undefined *puVar9;
   undefined4 local_40;
-  undefined4 local_3c [15];
+  undefined *local_3c [15];
   
   puVar4 = &local_40;
   puVar5 = &local_40;
-  puVar2 = &DAT_800ce5d4;
+  ppuVar2 = &PTR_PTR_800cf534;
   do {
-    uVar7 = puVar2[1];
-    uVar8 = puVar2[2];
-    uVar9 = puVar2[3];
-    *puVar4 = *puVar2;
-    puVar4[1] = uVar7;
-    puVar4[2] = uVar8;
-    puVar4[3] = uVar9;
-    puVar2 = puVar2 + 4;
+    puVar7 = ppuVar2[1];
+    puVar8 = ppuVar2[2];
+    puVar9 = ppuVar2[3];
+    *(undefined **)puVar4 = *ppuVar2;
+    *(undefined **)(puVar4 + 1) = puVar7;
+    *(undefined **)(puVar4 + 2) = puVar8;
+    *(undefined **)(puVar4 + 3) = puVar9;
+    ppuVar2 = ppuVar2 + 4;
     puVar4 = puVar4 + 4;
-  } while (puVar2 != (undefined4 *)&lastData);
+  } while (ppuVar2 != (undefined **)lastData);
   iVar6 = 0;
   do {
     uVar1 = *(ushort *)puVar5;
@@ -658,28 +684,30 @@ void PSXPAD_TranslateData(long *data,ushort padData,ushort lastData)
 // decompiled code
 // original method signature: 
 // unsigned short /*$ra*/ GAMEPAD_RemapAnalogueButtons(unsigned short in /*$a0*/)
- // line 621, offset 0x80032784
+ // line 633, offset 0x800316d4
 	/* begin block 1 */
-		// Start line: 623
-		// Start offset: 0x80032784
+		// Start line: 635
+		// Start offset: 0x800316D4
 	/* end block 1 */
-	// End offset: 0x80032784
-	// End Line: 625
+	// End offset: 0x800316D4
+	// End Line: 637
 
 	/* begin block 2 */
-		// Start line: 1371
+		// Start line: 1394
 	/* end block 2 */
-	// End Line: 1372
+	// End Line: 1395
 
 	/* begin block 3 */
-		// Start line: 1372
+		// Start line: 1395
 	/* end block 3 */
-	// End Line: 1373
+	// End Line: 1396
 
 	/* begin block 4 */
-		// Start line: 1374
+		// Start line: 1397
 	/* end block 4 */
-	// End Line: 1375
+	// End Line: 1398
+
+/* File: C:\kain2\game\GAMEPAD.C */
 
 ushort GAMEPAD_RemapAnalogueButtons(ushort in)
 
@@ -698,37 +726,37 @@ ushort GAMEPAD_RemapAnalogueButtons(ushort in)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GAMEPAD_GetData(long (*data)[5] /*$s0*/)
- // line 635, offset 0x800327d0
+ // line 647, offset 0x80031720
 	/* begin block 1 */
-		// Start line: 636
-		// Start offset: 0x800327D0
+		// Start line: 648
+		// Start offset: 0x80031720
 		// Variables:
 	// 		long analogue_x; // $a0
 	// 		long analogue_y; // $v1
 	/* end block 1 */
-	// End offset: 0x80032B98
-	// End Line: 914
+	// End offset: 0x800319EC
+	// End Line: 935
 
 	/* begin block 2 */
-		// Start line: 1399
+		// Start line: 1422
 	/* end block 2 */
-	// End Line: 1400
+	// End Line: 1423
 
-/* WARNING: Removing unreachable block (ram,0x80032858) */
-/* WARNING: Removing unreachable block (ram,0x80032860) */
-/* WARNING: Removing unreachable block (ram,0x800328ac) */
-/* WARNING: Removing unreachable block (ram,0x80032914) */
-/* WARNING: Removing unreachable block (ram,0x8003291c) */
-/* WARNING: Removing unreachable block (ram,0x80032968) */
+/* WARNING: Removing unreachable block (ram,0x800317a8) */
+/* WARNING: Removing unreachable block (ram,0x800317b0) */
+/* WARNING: Removing unreachable block (ram,0x800317fc) */
+/* WARNING: Removing unreachable block (ram,0x80031864) */
+/* WARNING: Removing unreachable block (ram,0x8003186c) */
+/* WARNING: Removing unreachable block (ram,0x800318b8) */
+/* File: C:\kain2\game\GAMEPAD.C */
 
 void GAMEPAD_GetData(long (*data) [5])
 
 {
   int iVar1;
-  char *str;
-  ControllerPacket *pCVar2;
+  undefined4 *puVar2;
   uint uVar3;
-  ControllerPacket *pCVar4;
+  undefined4 *puVar4;
   uint uVar5;
   undefined4 uVar6;
   undefined4 uVar7;
@@ -740,110 +768,117 @@ void GAMEPAD_GetData(long (*data) [5])
   (data + 1)[2] = 0;
   (data + 1)[1] = 0;
   (data + 1)[0] = 0;
-  psxData = 0;
-  USHORT_800d1cc6 = 0;
+  psxData[0] = 0;
+  psxData[1] = 0;
   (*data)[3] = 0;
   (*data)[4] = 0;
   (data + 1)[3] = 0;
   (data + 1)[4] = 0;
   GAMEPAD_HandleDualShock();
-  if (((char)gameTrackerX.enemyPlanPool != '\0') && (0 < gameTrackerX.introFXTime)) {
+  if ((LAB_800d22d0 != '\0') && (0 < DAT_800d2278)) {
     return;
   }
-  pCVar4 = &gpbuffer1;
-  pCVar2 = &readGPBuffer1;
+  puVar4 = (undefined4 *)&gpbuffer1;
+  puVar2 = (undefined4 *)&readGPBuffer1;
   do {
-    uVar6 = *(undefined4 *)(pCVar2->data + 2);
-    uVar7 = *(undefined4 *)(pCVar2->data + 6);
-    uVar8 = *(undefined4 *)(pCVar2->data + 10);
-    *(undefined4 *)pCVar4 = *(undefined4 *)pCVar2;
-    *(undefined4 *)(pCVar4->data + 2) = uVar6;
-    *(undefined4 *)(pCVar4->data + 6) = uVar7;
-    *(undefined4 *)(pCVar4->data + 10) = uVar8;
-    pCVar2 = (ControllerPacket *)(pCVar2->data + 0xe);
-    pCVar4 = (ControllerPacket *)(pCVar4->data + 0xe);
-  } while (pCVar2 != (ControllerPacket *)(readGPBuffer1.data + 0x1e));
-  *(undefined2 *)pCVar4 = readGPBuffer1.data._30_2_;
-  pCVar4 = &gpbuffer2;
-  pCVar2 = &readGPBuffer2;
+    uVar6 = puVar2[1];
+    uVar7 = puVar2[2];
+    uVar8 = puVar2[3];
+    *puVar4 = *puVar2;
+    puVar4[1] = uVar6;
+    puVar4[2] = uVar7;
+    puVar4[3] = uVar8;
+    puVar2 = puVar2 + 4;
+    puVar4 = puVar4 + 4;
+  } while (puVar2 != (undefined4 *)0x800d1e18);
+  *(undefined2 *)puVar4 = uRam800d1e18;
+  puVar4 = (undefined4 *)&gpbuffer2;
+  puVar2 = (undefined4 *)&readGPBuffer2;
   do {
-    uVar6 = *(undefined4 *)(pCVar2->data + 2);
-    uVar7 = *(undefined4 *)(pCVar2->data + 6);
-    uVar8 = *(undefined4 *)(pCVar2->data + 10);
-    *(undefined4 *)pCVar4 = *(undefined4 *)pCVar2;
-    *(undefined4 *)(pCVar4->data + 2) = uVar6;
-    *(undefined4 *)(pCVar4->data + 6) = uVar7;
-    *(undefined4 *)(pCVar4->data + 10) = uVar8;
-    pCVar2 = (ControllerPacket *)(pCVar2->data + 0xe);
-    pCVar4 = (ControllerPacket *)(pCVar4->data + 0xe);
-  } while (pCVar2 != (ControllerPacket *)(readGPBuffer2.data + 0x1e));
-  *(undefined2 *)pCVar4 = readGPBuffer2.data._30_2_;
-  if (gpbuffer1.transStatus == -1) {
-    if ((gameTrackerX.gameMode == 0) || (gameTrackerX.gameMode == 6)) {
-      gamePadControllerOut = gamePadControllerOut + 1;
-      if (((gameTrackerX.gameFlags & 0x80U) == 0) && (5 < gamePadControllerOut)) {
-        str = localstr_get(LOCALSTR_no_controller);
-        FONT_CenterString(str,0x100,0x96);
-      }
-    }
-  }
-  else {
-    if (5 < gamePadControllerOut) {
-      GAMEPAD_Detect();
-    }
-    psxData = gpbuffer1.data._0_2_;
-    gamePadControllerOut = 0;
-    if (controllerType == 'S') {
-      psxData = GAMEPAD_RemapAnalogueButtons(gpbuffer1.data._0_2_);
-    }
-    PSXPAD_TranslateData((long *)data,psxData,lastData);
-    controllerType = gpbuffer1.dataFormat;
-    lastData = psxData;
-    if ((gpbuffer1.dataFormat == 's') || (gpbuffer1.dataFormat == 'S')) {
-      uVar5 = (uint)gpbuffer1.data[4];
-      uVar3 = (uint)gpbuffer1.data[5];
-      if (uVar5 - 0x4a < 0x6d) {
-        iVar1 = uVar5 - 0x80;
-        if ((0x49 < gpbuffer1.data[5]) && (iVar1 = uVar5 - 0x80, gpbuffer1.data[5] < 0xb7)) {
-          uVar5 = 0x80;
-          uVar3 = 0x80;
-          goto LAB_80032a78;
-        }
-      }
-      else {
-LAB_80032a78:
-        iVar1 = uVar5 - 0x80;
-      }
-      (*data)[3] = iVar1;
-      (*data)[4] = uVar3 - 0x80;
-    }
-  }
-  if (gpbuffer2.transStatus == -1) {
+    uVar6 = puVar2[1];
+    uVar7 = puVar2[2];
+    uVar8 = puVar2[3];
+    *puVar4 = *puVar2;
+    puVar4[1] = uVar6;
+    puVar4[2] = uVar7;
+    puVar4[3] = uVar8;
+    puVar2 = puVar2 + 4;
+    puVar4 = puVar4 + 4;
+  } while (puVar2 != (undefined4 *)0x800d1e60);
+  *(undefined2 *)puVar4 = uRam800d1e60;
+  if (gpbuffer1 == -1) {
+    gamePadControllerOut = gamePadControllerOut + 1;
     return;
   }
-  USHORT_800d1cc6 = gpbuffer2.data._0_2_;
-  if (UCHAR____800d1cc1 == 'S') {
-    USHORT_800d1cc6 = GAMEPAD_RemapAnalogueButtons(gpbuffer2.data._0_2_);
+  if (5 < gamePadControllerOut) {
+    GAMEPAD_Detect();
   }
-  PSXPAD_TranslateData((long *)(data + 1),USHORT_800d1cc6,USHORT_800ce616);
-  UCHAR____800d1cc1 = gpbuffer2.dataFormat;
-  USHORT_800ce616 = USHORT_800d1cc6;
-  if ((gpbuffer2.dataFormat != 's') && (gpbuffer2.dataFormat != 'S')) {
+  psxData[0] = DAT_800d1dd6;
+  gamePadControllerOut = 0;
+  if (controllerType[0] == 'S') {
+    psxData[0] = GAMEPAD_RemapAnalogueButtons(DAT_800d1dd6);
+  }
+  PSXPAD_TranslateData((long *)data,psxData[0],lastData[0]);
+  controllerType[0] = DAT_800d1dd5;
+  lastData[0] = psxData[0];
+  if ((DAT_800d1dd5 != 's') && (DAT_800d1dd5 != 'S')) {
     return;
   }
-  uVar5 = (uint)gpbuffer2.data[4];
-  uVar3 = (uint)gpbuffer2.data[5];
+  uVar5 = (uint)DAT_800d1dd8._2_1_;
+  uVar3 = (uint)DAT_800d1dd8._3_1_;
   if (uVar5 - 0x4a < 0x6d) {
     iVar1 = uVar5 - 0x80;
-    if ((gpbuffer2.data[5] < 0x4a) || (iVar1 = uVar5 - 0x80, 0xb6 < gpbuffer2.data[5]))
-    goto LAB_80032b8c;
+    if ((DAT_800d1dd8._3_1_ < 0x4a) || (iVar1 = uVar5 - 0x80, 0xb6 < DAT_800d1dd8._3_1_))
+    goto LAB_800319cc;
     uVar5 = 0x80;
     uVar3 = 0x80;
   }
   iVar1 = uVar5 - 0x80;
-LAB_80032b8c:
-  (data + 1)[3] = iVar1;
-  (data + 1)[4] = uVar3 - 0x80;
+LAB_800319cc:
+  (*data)[3] = iVar1;
+  (*data)[4] = uVar3 - 0x80;
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ GAMEPAD_DisplayControllerStatus(int msgY /*$s1*/)
+ // line 937, offset 0x80031a00
+	/* begin block 1 */
+		// Start line: 938
+		// Start offset: 0x80031A00
+		// Variables:
+	// 		char *noCtrlStr; // $s0
+	/* end block 1 */
+	// End offset: 0x80031A4C
+	// End Line: 946
+
+	/* begin block 2 */
+		// Start line: 2009
+	/* end block 2 */
+	// End Line: 2010
+
+	/* begin block 3 */
+		// Start line: 2011
+	/* end block 3 */
+	// End Line: 2012
+
+/* File: C:\kain2\game\GAMEPAD.C */
+
+void GAMEPAD_DisplayControllerStatus(int msgY)
+
+{
+  char *text;
+  int len;
+  
+  if (5 < gamePadControllerOut) {
+    text = localstr_get(LOCALSTR_no_controller);
+    FONT_FontPrintCentered(text,msgY);
+    len = FONT_GetStringWidth(text);
+    DisplayHintBox(len,msgY);
+  }
   return;
 }
 
@@ -852,25 +887,27 @@ LAB_80032b8c:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GAMEPAD_Process(struct GameTracker *gameTracker /*$s1*/)
- // line 925, offset 0x80032bac
+ // line 957, offset 0x80031a60
 	/* begin block 1 */
-		// Start line: 926
-		// Start offset: 0x80032BAC
+		// Start line: 958
+		// Start offset: 0x80031A60
 
 		/* begin block 1.1 */
-			// Start line: 929
-			// Start offset: 0x80032BD0
+			// Start line: 961
+			// Start offset: 0x80031A84
 		/* end block 1.1 */
-		// End offset: 0x80032C04
-		// End Line: 933
+		// End offset: 0x80031AB8
+		// End Line: 965
 	/* end block 1 */
-	// End offset: 0x80032C04
-	// End Line: 936
+	// End offset: 0x80031AB8
+	// End Line: 968
 
 	/* begin block 2 */
-		// Start line: 1992
+		// Start line: 2051
 	/* end block 2 */
-	// End Line: 1993
+	// End Line: 2052
+
+/* File: C:\kain2\game\GAMEPAD.C */
 
 void GAMEPAD_Process(GameTracker *gameTracker)
 
@@ -878,16 +915,157 @@ void GAMEPAD_Process(GameTracker *gameTracker)
   int iVar1;
   long (*data) [5];
   
-  if (*(char *)&gameTracker->enemyPlanPool != '\0') {
-    iVar1 = FONT_GetStringWidth("DEMO MODE");
-    fontTracker.font_xpos = (0x200 - iVar1) / 2;
-    fontTracker.font_ypos = 0xd8;
-    FONT_Print("DEMO MODE");
+  if (gameTracker->demoMode != '\0') {
+    iVar1 = FONT_GetStringWidth(s_DEMO_MODE_800cf578);
+    DAT_800d1cf8 = (0x200 - iVar1) / 2;
+    DAT_800d1cfc = 0xd8;
+    FONT_Print(s_DEMO_MODE_800cf578);
   }
   data = (long (*) [5])gameTracker->controlData;
   GAMEPAD_GetData(data);
   GAMEPAD_Commands((long (*) [5])gameTracker->controlCommand,data,0);
   GAMEPAD_Commands((long (*) [5])gameTracker->controlCommand,data,1);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ GAMEPAD_SaveControllers()
+ // line 1028, offset 0x80031afc
+	/* begin block 1 */
+		// Start line: 2194
+	/* end block 1 */
+	// End Line: 2195
+
+	/* begin block 2 */
+		// Start line: 2195
+	/* end block 2 */
+	// End Line: 2196
+
+/* File: C:\kain2\game\GAMEPAD.C */
+
+void GAMEPAD_SaveControllers(void)
+
+{
+  long *plVar1;
+  long *plVar2;
+  long *plVar3;
+  long *plVar4;
+  long lVar5;
+  long lVar6;
+  long lVar7;
+  
+  gpSaved = 1;
+  plVar1 = &DAT_800d2114;
+  plVar2 = overrideCommand;
+  do {
+    plVar4 = plVar2;
+    plVar3 = plVar1;
+    lVar5 = plVar3[1];
+    lVar6 = plVar3[2];
+    lVar7 = plVar3[3];
+    *plVar4 = *plVar3;
+    plVar4[1] = lVar5;
+    plVar4[2] = lVar6;
+    plVar4[3] = lVar7;
+    plVar1 = plVar3 + 4;
+    plVar2 = plVar4 + 4;
+  } while (plVar3 + 4 != (long *)0x800d2134);
+  lVar5 = plVar3[5];
+  plVar4[4] = lRam800d2134;
+  plVar4[5] = lVar5;
+  plVar1 = &DAT_800d213c;
+  plVar2 = overrideData;
+  do {
+    plVar4 = plVar2;
+    plVar3 = plVar1;
+    lVar5 = plVar3[1];
+    lVar6 = plVar3[2];
+    lVar7 = plVar3[3];
+    *plVar4 = *plVar3;
+    plVar4[1] = lVar5;
+    plVar4[2] = lVar6;
+    plVar4[3] = lVar7;
+    plVar1 = plVar3 + 4;
+    plVar2 = plVar4 + 4;
+  } while (plVar3 + 4 != (long *)0x800d215c);
+  lVar5 = plVar3[5];
+  plVar4[4] = lRam800d215c;
+  plVar4[5] = lVar5;
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ GAMEPAD_RestoreControllers()
+ // line 1035, offset 0x80031bb0
+	/* begin block 1 */
+		// Start line: 2208
+	/* end block 1 */
+	// End Line: 2209
+
+	/* begin block 2 */
+		// Start line: 2209
+	/* end block 2 */
+	// End Line: 2210
+
+/* File: C:\kain2\game\GAMEPAD.C */
+
+void GAMEPAD_RestoreControllers(void)
+
+{
+  long *plVar1;
+  long *plVar2;
+  long *plVar3;
+  long *plVar4;
+  long lVar5;
+  long lVar6;
+  long lVar7;
+  
+  if (gpSaved != 0) {
+    gpSaved = 0;
+    plVar1 = overrideData;
+    plVar2 = &DAT_800d213c;
+    do {
+      plVar4 = plVar2;
+      plVar3 = plVar1;
+      lVar5 = plVar3[1];
+      lVar6 = plVar3[2];
+      lVar7 = plVar3[3];
+      *plVar4 = *plVar3;
+      plVar4[1] = lVar5;
+      plVar4[2] = lVar6;
+      plVar4[3] = lVar7;
+      plVar1 = plVar3 + 4;
+      plVar2 = plVar4 + 4;
+    } while (plVar3 + 4 != overrideData + 8);
+    lVar5 = plVar3[5];
+    plVar4[4] = overrideData[1][3];
+    plVar4[5] = lVar5;
+    plVar1 = overrideCommand;
+    plVar2 = &DAT_800d2114;
+    do {
+      plVar4 = plVar2;
+      plVar3 = plVar1;
+      lVar5 = plVar3[1];
+      lVar6 = plVar3[2];
+      lVar7 = plVar3[3];
+      *plVar4 = *plVar3;
+      plVar4[1] = lVar5;
+      plVar4[2] = lVar6;
+      plVar4[3] = lVar7;
+      plVar1 = plVar3 + 4;
+      plVar2 = plVar4 + 4;
+    } while (plVar3 + 4 != overrideCommand + 8);
+    lVar5 = plVar3[5];
+    plVar4[4] = overrideCommand[1][3];
+    plVar4[5] = lVar5;
+    DAT_800d2114 = DAT_800d2114 | 0x80;
+  }
   return;
 }
 

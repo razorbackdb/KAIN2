@@ -5,21 +5,23 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SOUL_QueueHandler(struct _Instance *instance /*$s0*/)
- // line 79, offset 0x8008bd4c
+ // line 80, offset 0x8008d504
 	/* begin block 1 */
-		// Start line: 80
-		// Start offset: 0x8008BD4C
+		// Start line: 81
+		// Start offset: 0x8008D504
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s2
 	// 		struct __Event *message; // $a1
 	/* end block 1 */
-	// End offset: 0x8008BDCC
-	// End Line: 94
+	// End offset: 0x8008D584
+	// End Line: 95
 
 	/* begin block 2 */
-		// Start line: 158
+		// Start line: 160
 	/* end block 2 */
-	// End Line: 159
+	// End Line: 161
+
+/* File: C:\kain2\game\MONSTER\SOUL.C */
 
 void SOUL_QueueHandler(_Instance *instance)
 
@@ -48,21 +50,23 @@ void SOUL_QueueHandler(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SOUL_Physics(struct _Instance *instance /*$a0*/, long time /*$a2*/)
- // line 99, offset 0x8008bde8
+ // line 100, offset 0x8008d5a0
 	/* begin block 1 */
-		// Start line: 100
-		// Start offset: 0x8008BDE8
+		// Start line: 101
+		// Start offset: 0x8008D5A0
 		// Variables:
 	// 		struct _MonsterVars *mv; // $v1
 	// 		int a; // $a1
 	/* end block 1 */
-	// End offset: 0x8008BE14
-	// End Line: 113
+	// End offset: 0x8008D5CC
+	// End Line: 114
 
 	/* begin block 2 */
-		// Start line: 206
+		// Start line: 208
 	/* end block 2 */
-	// End Line: 207
+	// End Line: 209
+
+/* File: C:\kain2\game\MONSTER\SOUL.C */
 
 void SOUL_Physics(_Instance *instance,long time)
 
@@ -86,21 +90,23 @@ void SOUL_Physics(_Instance *instance,long time)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SOUL_Fade(struct _Instance *instance /*$s0*/)
- // line 119, offset 0x8008be48
+ // line 120, offset 0x8008d600
 	/* begin block 1 */
-		// Start line: 120
-		// Start offset: 0x8008BE48
+		// Start line: 121
+		// Start offset: 0x8008D600
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s1
 	// 		unsigned long time; // $a0
 	/* end block 1 */
-	// End offset: 0x8008BEF0
-	// End Line: 144
+	// End offset: 0x8008D6A8
+	// End Line: 145
 
 	/* begin block 2 */
-		// Start line: 249
+		// Start line: 251
 	/* end block 2 */
-	// End Line: 250
+	// End Line: 252
+
+/* File: C:\kain2\game\MONSTER\SOUL.C */
 
 void SOUL_Fade(_Instance *instance)
 
@@ -111,7 +117,7 @@ void SOUL_Fade(_Instance *instance)
   
   pvVar3 = instance->extraData;
   uVar2 = MON_GetTime(instance);
-  if ((gameTrackerX.gameFlags & 0x80U) == 0) {
+  if ((DAT_800d220c & 0x80) == 0) {
     if (*(uint *)((int)pvVar3 + 0x10c) < uVar2) {
       sVar1 = instance->fadeValue;
       if (sVar1 == 0) {
@@ -120,13 +126,13 @@ void SOUL_Fade(_Instance *instance)
       }
       if (0xfff < sVar1) {
         instance->flags2 = instance->flags2 | 0x8000000;
-        MORPH_SetupInstanceFlags(&gameTrackerX,instance);
+        MORPH_SetupInstanceFlags((GameTracker *)&gameTrackerX,instance);
         instance->fadeValue = 0;
       }
     }
   }
   else {
-    *(int *)((int)pvVar3 + 0x10c) = uVar2 + 0x1964;
+    *(undefined **)((int)pvVar3 + 0x10c) = &DAT_00001964 + uVar2;
   }
   return;
 }
@@ -136,20 +142,22 @@ void SOUL_Fade(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SOUL_MoveToDest(struct _Instance *instance /*$a3*/, long maxAccel /*$t0*/, long time /*$a2*/)
- // line 146, offset 0x8008bf04
+ // line 147, offset 0x8008d6bc
 	/* begin block 1 */
-		// Start line: 147
-		// Start offset: 0x8008BF04
+		// Start line: 148
+		// Start offset: 0x8008D6BC
 		// Variables:
 	// 		struct _MonsterVars *mv; // $a1
 	/* end block 1 */
-	// End offset: 0x8008BFD8
-	// End Line: 157
+	// End offset: 0x8008D790
+	// End Line: 158
 
 	/* begin block 2 */
-		// Start line: 304
+		// Start line: 306
 	/* end block 2 */
-	// End Line: 305
+	// End Line: 307
+
+/* File: C:\kain2\game\MONSTER\SOUL.C */
 
 void SOUL_MoveToDest(_Instance *instance,long maxAccel,long time)
 
@@ -195,29 +203,31 @@ void SOUL_MoveToDest(_Instance *instance,long maxAccel,long time)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ SOUL_Init(struct _Instance *instance /*$s1*/)
- // line 163, offset 0x8008bff4
+// void /*$ra*/ SOUL_Init(struct _Instance *instance /*$s0*/)
+ // line 164, offset 0x8008d7ac
 	/* begin block 1 */
-		// Start line: 164
-		// Start offset: 0x8008BFF4
+		// Start line: 165
+		// Start offset: 0x8008D7AC
 		// Variables:
-	// 		struct _MonsterVars *mv; // $s0
+	// 		struct _MonsterVars *mv; // $s1
 	/* end block 1 */
-	// End offset: 0x8008C0A0
-	// End Line: 187
+	// End offset: 0x8008D868
+	// End Line: 189
 
 	/* begin block 2 */
-		// Start line: 339
+		// Start line: 341
 	/* end block 2 */
-	// End Line: 340
+	// End Line: 342
+
+/* File: C:\kain2\game\MONSTER\SOUL.C */
 
 void SOUL_Init(_Instance *instance)
 
 {
   ulong uVar1;
   undefined4 local_10;
-  uint *puVar2;
   undefined4 local_c;
+  uint *puVar2;
   
   puVar2 = (uint *)instance->extraData;
   MON_DefaultInit(instance);
@@ -225,9 +235,10 @@ void SOUL_Init(_Instance *instance)
   instance->maxXVel = 600;
   instance->maxYVel = 600;
   instance->maxZVel = 600;
+  instance->flags2 = instance->flags2 | 0x20000;
   *(undefined2 *)((int)puVar2 + 0x126) = 0;
   uVar1 = MON_GetTime(instance);
-  puVar2[0x43] = uVar1 + 0x1964;
+  *(undefined **)(puVar2 + 0x43) = &DAT_00001964 + uVar1;
   if (instance->parent != (_Instance *)0x0) {
     puVar2[0x36] = instance->parent->introUniqueID;
   }
@@ -243,11 +254,13 @@ void SOUL_Init(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SOUL_CleanUp(struct _Instance *instance /*$a0*/)
- // line 193, offset 0x8008c0b4
+ // line 195, offset 0x8008d87c
 	/* begin block 1 */
-		// Start line: 407
+		// Start line: 414
 	/* end block 1 */
-	// End Line: 408
+	// End Line: 415
+
+/* File: C:\kain2\game\MONSTER\SOUL.C */
 
 void SOUL_CleanUp(_Instance *instance)
 
@@ -261,20 +274,22 @@ void SOUL_CleanUp(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SOUL_BirthEntry(struct _Instance *instance /*$a0*/)
- // line 203, offset 0x8008c0d4
+ // line 205, offset 0x8008d89c
 	/* begin block 1 */
-		// Start line: 204
-		// Start offset: 0x8008C0D4
+		// Start line: 206
+		// Start offset: 0x8008D89C
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	/* end block 1 */
-	// End offset: 0x8008C0D4
-	// End Line: 204
+	// End offset: 0x8008D89C
+	// End Line: 206
 
 	/* begin block 2 */
-		// Start line: 427
+		// Start line: 434
 	/* end block 2 */
-	// End Line: 428
+	// End Line: 435
+
+/* File: C:\kain2\game\MONSTER\SOUL.C */
 
 void SOUL_BirthEntry(_Instance *instance)
 
@@ -301,20 +316,22 @@ void SOUL_BirthEntry(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SOUL_Birth(struct _Instance *instance /*$s1*/)
- // line 214, offset 0x8008c128
+ // line 216, offset 0x8008d8f0
 	/* begin block 1 */
-		// Start line: 215
-		// Start offset: 0x8008C128
+		// Start line: 217
+		// Start offset: 0x8008D8F0
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	/* end block 1 */
-	// End offset: 0x8008C174
-	// End Line: 226
+	// End offset: 0x8008D93C
+	// End Line: 228
 
 	/* begin block 2 */
-		// Start line: 453
+		// Start line: 460
 	/* end block 2 */
-	// End Line: 454
+	// End Line: 461
+
+/* File: C:\kain2\game\MONSTER\SOUL.C */
 
 void SOUL_Birth(_Instance *instance)
 
@@ -326,7 +343,7 @@ void SOUL_Birth(_Instance *instance)
   
   instance->zAccl = 0;
   pvVar2 = instance->extraData;
-  SOUL_Physics(instance,gameTrackerX.idleTime);
+  SOUL_Physics(instance,DAT_800d2314);
   uVar1 = MON_GetTime(instance);
   if (*(uint *)((int)pvVar2 + 0x114) < uVar1) {
     MON_SwitchState(instance,(MonsterState)CONCAT44(local_c,local_10));
@@ -340,16 +357,18 @@ void SOUL_Birth(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SOUL_SoulSuckEntry(struct _Instance *instance /*$a0*/)
- // line 232, offset 0x8008c190
+ // line 234, offset 0x8008d958
 	/* begin block 1 */
-		// Start line: 492
+		// Start line: 499
 	/* end block 1 */
-	// End Line: 493
+	// End Line: 500
 
 	/* begin block 2 */
-		// Start line: 495
+		// Start line: 502
 	/* end block 2 */
-	// End Line: 496
+	// End Line: 503
+
+/* File: C:\kain2\game\MONSTER\SOUL.C */
 
 void SOUL_SoulSuckEntry(_Instance *instance)
 
@@ -366,35 +385,37 @@ void SOUL_SoulSuckEntry(_Instance *instance)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SOUL_CalcAccel(long delta /*$a0*/, long vel /*$a1*/, long magnitude /*$a2*/)
- // line 240, offset 0x8008c1b8
+ // line 242, offset 0x8008d980
 	/* begin block 1 */
-		// Start line: 242
-		// Start offset: 0x8008C1B8
+		// Start line: 244
+		// Start offset: 0x8008D980
 		// Variables:
 	// 		long rv; // $a2
 	/* end block 1 */
-	// End offset: 0x8008C1F0
-	// End Line: 267
+	// End offset: 0x8008D9B8
+	// End Line: 269
 
 	/* begin block 2 */
-		// Start line: 505
+		// Start line: 512
 	/* end block 2 */
-	// End Line: 506
+	// End Line: 513
 
 	/* begin block 3 */
-		// Start line: 510
+		// Start line: 517
 	/* end block 3 */
-	// End Line: 511
+	// End Line: 518
 
 	/* begin block 4 */
-		// Start line: 511
+		// Start line: 518
 	/* end block 4 */
-	// End Line: 512
+	// End Line: 519
 
 	/* begin block 5 */
-		// Start line: 517
+		// Start line: 524
 	/* end block 5 */
-	// End Line: 518
+	// End Line: 525
+
+/* File: C:\kain2\game\MONSTER\SOUL.C */
 
 long SOUL_CalcAccel(long delta,long vel,long magnitude)
 
@@ -404,17 +425,17 @@ long SOUL_CalcAccel(long delta,long vel,long magnitude)
   if (delta < 1) {
     if (0 < vel) {
       iVar1 = delta << 4;
-      goto LAB_8008c1e8;
+      goto LAB_8008d9b0;
     }
   }
   else {
     if (vel < 0) {
       iVar1 = delta << 4;
-      goto LAB_8008c1e8;
+      goto LAB_8008d9b0;
     }
   }
   iVar1 = delta * 5;
-LAB_8008c1e8:
+LAB_8008d9b0:
   return iVar1 / magnitude;
 }
 
@@ -423,10 +444,10 @@ LAB_8008c1e8:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SOUL_SoulSuck(struct _Instance *instance /*$s2*/)
- // line 270, offset 0x8008c1f8
+ // line 272, offset 0x8008d9c0
 	/* begin block 1 */
-		// Start line: 271
-		// Start offset: 0x8008C1F8
+		// Start line: 273
+		// Start offset: 0x8008D9C0
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s3
 	// 		struct __Event *message; // $s0
@@ -435,28 +456,28 @@ LAB_8008c1e8:
 	// 		struct _Instance *collidedWith; // $s5
 
 		/* begin block 1.1 */
-			// Start line: 286
-			// Start offset: 0x8008C298
+			// Start line: 288
+			// Start offset: 0x8008DA60
 			// Variables:
 		// 		long distance; // $s1
 		// 		struct evMonsterSoulSuckData *suckData; // $s0
 
 			/* begin block 1.1.1 */
-				// Start line: 313
-				// Start offset: 0x8008C394
+				// Start line: 315
+				// Start offset: 0x8008DB84
 				// Variables:
 			// 		struct _SVector dir; // stack offset -48
 
 				/* begin block 1.1.1.1 */
-					// Start line: 324
-					// Start offset: 0x8008C3C8
+					// Start line: 326
+					// Start offset: 0x8008DBB8
 					// Variables:
 				// 		long animLen; // $s0
 				// 		long curTim; // $v0
 
 					/* begin block 1.1.1.1.1 */
-						// Start line: 335
-						// Start offset: 0x8008C460
+						// Start line: 337
+						// Start offset: 0x8008DC50
 						// Variables:
 					// 		short _x0; // $a3
 					// 		short _y0; // $a0
@@ -468,36 +489,37 @@ LAB_8008c1e8:
 					// 		struct _Position *_v0; // $v1
 					// 		struct _Position *_v1; // $a1
 					/* end block 1.1.1.1.1 */
-					// End offset: 0x8008C460
-					// End Line: 335
+					// End offset: 0x8008DC50
+					// End Line: 337
 				/* end block 1.1.1.1 */
-				// End offset: 0x8008C514
-				// End Line: 345
+				// End offset: 0x8008DD04
+				// End Line: 347
 			/* end block 1.1.1 */
-			// End offset: 0x8008C514
-			// End Line: 345
+			// End offset: 0x8008DD04
+			// End Line: 347
 		/* end block 1.1 */
-		// End offset: 0x8008C54C
-		// End Line: 354
+		// End offset: 0x8008DD3C
+		// End Line: 356
 
 		/* begin block 1.2 */
-			// Start line: 385
-			// Start offset: 0x8008C654
+			// Start line: 389
+			// Start offset: 0x8008DE5C
 			// Variables:
 		// 		struct _Instance *body; // $v0
 		/* end block 1.2 */
-		// End offset: 0x8008C674
-		// End Line: 389
+		// End offset: 0x8008DE7C
+		// End Line: 393
 	/* end block 1 */
-	// End offset: 0x8008C6D0
-	// End Line: 402
+	// End offset: 0x8008DED8
+	// End Line: 406
 
 	/* begin block 2 */
-		// Start line: 570
+		// Start line: 577
 	/* end block 2 */
-	// End Line: 571
+	// End Line: 578
 
 /* WARNING: Type propagation algorithm not settling */
+/* File: C:\kain2\game\MONSTER\SOUL.C */
 
 void SOUL_SoulSuck(_Instance *instance)
 
@@ -524,15 +546,15 @@ void SOUL_SoulSuck(_Instance *instance)
   Inst = (_Instance *)0x0;
   instance_00 = (_Instance *)0x0;
   puVar7 = (uint *)instance->extraData;
-LAB_8008c244:
+LAB_8008da0c:
   while( true ) {
     message = DeMessageQueue((__MessageQueue *)(puVar7 + 2));
     if (message == (__Event *)0x0) {
       if ((*puVar7 & 0x800) == 0) {
-        PhysicsMove(instance,&instance->position,gameTrackerX.idleTime);
+        PhysicsMove(instance,&instance->position,DAT_800d2314);
       }
       else {
-        SOUL_Physics(instance,gameTrackerX.idleTime);
+        SOUL_Physics(instance,DAT_800d2314);
       }
       if ((instance_00 == (_Instance *)0x0) || (instance_00 != Inst)) {
         if (Inst == (_Instance *)0x0) {
@@ -546,7 +568,10 @@ LAB_8008c244:
         Data = SetMonsterSoulSuckData(instance,0,0,0);
         INSTANCE_Post(Inst,0x1000009,Data);
         INSTANCE_Post(Inst,0x1000016,(int)*(short *)(puVar7 + 0x51));
-        SOUND_Play3dSound(&instance->position,9,-0x1c2,0x50,0xdac);
+        SOUND_Play3dSound(&instance->position,8,-0x1c2,0x50,0xdac);
+        if (Inst == DAT_800d20f8) {
+          GAMEPAD_Shock1(0x80,(int)&DAT_00005000);
+        }
         if (puVar7[0x36] != 0) {
           instance_00 = INSTANCE_Find(puVar7[0x36]);
           if (instance_00 != (_Instance *)0x0) {
@@ -588,40 +613,46 @@ LAB_8008c244:
         instance->maxZVel = 0x11;
       }
       else {
-        Data = MON_AnimPlaying(instance,(MonsterAnim)
-                                        CONCAT214(in_stack_ffffffd6,
-                                                  CONCAT212(local_2c,CONCAT210(local_2e,CONCAT28(
+        Data = (int)(instance->position).z - (int)*(short *)(puVar7 + 0x49);
+        if (Data < 0) {
+          Data = -Data;
+        }
+        if (Data < 200) {
+          Data = MON_AnimPlaying(instance,(MonsterAnim)
+                                          CONCAT214(in_stack_ffffffd6,
+                                                    CONCAT212(local_2c,CONCAT210(local_2e,CONCAT28(
                                                   local_30,CONCAT44(in_stack_ffffffcc,local_38))))))
-        ;
-        if ((Data == 0) && (0x32 < magnitude)) {
-          MON_PlayAnim(instance,(MonsterAnim)
-                                CONCAT214(in_stack_ffffffd6,
-                                          CONCAT212(local_2c,CONCAT210(local_2e,CONCAT28(local_30,
+          ;
+          if ((Data == 0) && (0x32 < magnitude)) {
+            MON_PlayAnim(instance,(MonsterAnim)
+                                  CONCAT214(in_stack_ffffffd6,
+                                            CONCAT212(local_2c,CONCAT210(local_2e,CONCAT28(local_30,
                                                   CONCAT44(in_stack_ffffffcc,local_38))))),0x2d);
-          instance->flags2 = instance->flags2 | 0x20000000;
+            instance->flags2 = instance->flags2 | 0x20000000;
+          }
+          p_Var4 = MON_GetAnim(instance,*(char **)puVar7[0x59],0x2d);
+          sVar1 = G2AnimKeylist_GetDuration(instance->object->animList[p_Var4->index[0]]);
+          sVar2 = G2Anim_GetElapsedTime(&instance->anim);
+          Data = ((int)sVar1 * 0x1e000) / 3000 - ((int)sVar2 * 0x1e000) / 3000;
+          if (0 < Data) {
+            iVar5 = (uint)*(ushort *)(puVar7 + 0x48) - (uint)(ushort)(instance->position).x;
+            local_30 = (undefined2)iVar5;
+            local_2e = *(short *)((int)puVar7 + 0x122) - (instance->position).y;
+            local_2c = *(short *)(puVar7 + 0x49) - (instance->position).z;
+            instance->xVel = (int)(short)((iVar5 * 0x10000 >> 4) / Data);
+            instance->yVel = (int)(short)(((int)local_2e << 0xc) / Data);
+            instance->zVel = (int)(short)(((int)local_2c << 0xc) / Data);
+          }
+          if ((*puVar7 & 0x4000000) == 0) {
+            instance_00 = Inst;
+          }
+          instance->zAccl = 0;
+          instance->yAccl = 0;
+          instance->xAccl = 0;
+          sVar1 = MON_FacingOffset(Inst,instance);
+          (instance->rotation).z = (instance->rotation).z + sVar1;
+          *puVar7 = *puVar7 & 0xfffff7ff;
         }
-        p_Var4 = MON_GetAnim(instance,*(char **)puVar7[0x59],0x2d);
-        sVar1 = G2AnimKeylist_GetDuration(instance->object->animList[p_Var4->index[0]]);
-        sVar2 = G2Anim_GetElapsedTime(&instance->anim);
-        Data = ((int)sVar1 * 0x1e000) / 3000 - ((int)sVar2 * 0x1e000) / 3000;
-        if (0 < Data) {
-          iVar5 = (uint)*(ushort *)(puVar7 + 0x48) - (uint)(ushort)(instance->position).x;
-          local_30 = (undefined2)iVar5;
-          local_2e = *(short *)((int)puVar7 + 0x122) - (instance->position).y;
-          local_2c = *(short *)(puVar7 + 0x49) - (instance->position).z;
-          instance->xVel = (int)(short)((iVar5 * 0x10000 >> 4) / Data);
-          instance->yVel = (int)(short)(((int)local_2e << 0xc) / Data);
-          instance->zVel = (int)(short)(((int)local_2c << 0xc) / Data);
-        }
-        if ((*puVar7 & 0x4000000) == 0) {
-          instance_00 = Inst;
-        }
-        instance->zAccl = 0;
-        instance->yAccl = 0;
-        instance->xAccl = 0;
-        sVar1 = MON_FacingOffset(Inst,instance);
-        (instance->rotation).z = (instance->rotation).z + sVar1;
-        *puVar7 = *puVar7 & 0xfffff7ff;
       }
     }
     else {
@@ -630,19 +661,19 @@ LAB_8008c244:
       instance->xAccl = 0;
     }
   }
-  if (0x1000009 < Data) goto LAB_8008c284;
+  if (0x1000009 < Data) goto LAB_8008da4c;
   if ((Data == 0x1000008) &&
      ((p_Var4 = MON_GetAnim(instance,*(char **)puVar7[0x59],0x2d), p_Var4 == (_MonsterAnim *)0x0 ||
       ((*puVar7 & 0x4000000) == 0)))) {
     instance_00 = *(_Instance **)&((_Instance *)message->Data)->node;
   }
-  goto LAB_8008c59c;
-LAB_8008c284:
+  goto LAB_8008dd8c;
+LAB_8008da4c:
   if (Data != 0x100000b) {
-LAB_8008c59c:
+LAB_8008dd8c:
     MON_DefaultMessageHandler(instance,message);
   }
-  goto LAB_8008c244;
+  goto LAB_8008da0c;
 }
 
 
@@ -650,20 +681,22 @@ LAB_8008c59c:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SOUL_WanderEntry(struct _Instance *instance /*$a0*/)
- // line 407, offset 0x8008c700
+ // line 411, offset 0x8008df08
 	/* begin block 1 */
-		// Start line: 408
-		// Start offset: 0x8008C700
+		// Start line: 412
+		// Start offset: 0x8008DF08
 		// Variables:
 	// 		struct _MonsterVars *mv; // $a2
 	/* end block 1 */
-	// End offset: 0x8008C760
-	// End Line: 420
+	// End offset: 0x8008DF68
+	// End Line: 424
 
 	/* begin block 2 */
-		// Start line: 882
+		// Start line: 893
 	/* end block 2 */
-	// End Line: 883
+	// End Line: 894
+
+/* File: C:\kain2\game\MONSTER\SOUL.C */
 
 void SOUL_WanderEntry(_Instance *instance)
 
@@ -695,27 +728,29 @@ void SOUL_WanderEntry(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SOUL_Wander(struct _Instance *instance /*$s0*/)
- // line 422, offset 0x8008c770
+ // line 426, offset 0x8008df78
 	/* begin block 1 */
-		// Start line: 423
-		// Start offset: 0x8008C770
+		// Start line: 427
+		// Start offset: 0x8008DF78
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 435
-			// Start offset: 0x8008C7DC
+			// Start line: 439
+			// Start offset: 0x8008DFE4
 		/* end block 1.1 */
-		// End offset: 0x8008C88C
-		// End Line: 448
+		// End offset: 0x8008E094
+		// End Line: 452
 	/* end block 1 */
-	// End offset: 0x8008C8E4
-	// End Line: 463
+	// End offset: 0x8008E0EC
+	// End Line: 467
 
 	/* begin block 2 */
-		// Start line: 912
+		// Start line: 923
 	/* end block 2 */
-	// End Line: 913
+	// End Line: 924
+
+/* File: C:\kain2\game\MONSTER\SOUL.C */
 
 void SOUL_Wander(_Instance *instance)
 
@@ -760,7 +795,7 @@ void SOUL_Wander(_Instance *instance)
       instance->zAccl = 0;
     }
   }
-  SOUL_Physics(instance,gameTrackerX.idleTime);
+  SOUL_Physics(instance,DAT_800d2314);
   if ((*puVar2 & 4) == 0) {
     if ((instance->flags2 & 0x8000000U) == 0) {
       SOUL_Fade(instance);
@@ -778,11 +813,13 @@ void SOUL_Wander(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SOUL_FleeEntry(struct _Instance *instance /*$a0*/)
- // line 469, offset 0x8008c900
+ // line 473, offset 0x8008e108
 	/* begin block 1 */
-		// Start line: 1007
+		// Start line: 1018
 	/* end block 1 */
-	// End Line: 1008
+	// End Line: 1019
+
+/* File: C:\kain2\game\MONSTER\SOUL.C */
 
 void SOUL_FleeEntry(_Instance *instance)
 
@@ -799,31 +836,33 @@ void SOUL_FleeEntry(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SOUL_Flee(struct _Instance *instance /*$s0*/)
- // line 476, offset 0x8008c930
+ // line 480, offset 0x8008e138
 	/* begin block 1 */
-		// Start line: 477
-		// Start offset: 0x8008C930
+		// Start line: 481
+		// Start offset: 0x8008E138
 		// Variables:
 	// 		struct _MonsterVars *mv; // $v0
 
 		/* begin block 1.1 */
-			// Start line: 486
-			// Start offset: 0x8008C96C
+			// Start line: 490
+			// Start offset: 0x8008E174
 			// Variables:
 		// 		struct _Instance *enemy; // $a0
 		// 		int dx; // $s1
 		// 		int dy; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8008CA50
-		// End Line: 501
+		// End offset: 0x8008E258
+		// End Line: 505
 	/* end block 1 */
-	// End offset: 0x8008CA80
-	// End Line: 507
+	// End offset: 0x8008E288
+	// End Line: 511
 
 	/* begin block 2 */
-		// Start line: 1022
+		// Start line: 1033
 	/* end block 2 */
-	// End Line: 1023
+	// End Line: 1034
+
+/* File: C:\kain2\game\MONSTER\SOUL.C */
 
 void SOUL_Flee(_Instance *instance)
 
@@ -864,7 +903,7 @@ void SOUL_Flee(_Instance *instance)
     }
     instance->zAccl = 0;
   }
-  SOUL_Physics(instance,gameTrackerX.idleTime);
+  SOUL_Physics(instance,DAT_800d2314);
   SOUL_QueueHandler(instance);
   if ((instance->flags2 & 0x8000000U) == 0) {
     SOUL_Fade(instance);
@@ -877,20 +916,22 @@ void SOUL_Flee(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SOUL_IdleEntry(struct _Instance *instance /*$a0*/)
- // line 512, offset 0x8008ca94
+ // line 516, offset 0x8008e29c
 	/* begin block 1 */
-		// Start line: 513
-		// Start offset: 0x8008CA94
+		// Start line: 517
+		// Start offset: 0x8008E29C
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s1
 	/* end block 1 */
-	// End offset: 0x8008CA94
-	// End Line: 513
+	// End offset: 0x8008E29C
+	// End Line: 517
 
 	/* begin block 2 */
-		// Start line: 1097
+		// Start line: 1108
 	/* end block 2 */
-	// End Line: 1098
+	// End Line: 1109
+
+/* File: C:\kain2\game\MONSTER\SOUL.C */
 
 void SOUL_IdleEntry(_Instance *instance)
 
@@ -915,22 +956,24 @@ void SOUL_IdleEntry(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SOUL_Idle(struct _Instance *instance /*$s0*/)
- // line 520, offset 0x8008cb38
+ // line 524, offset 0x8008e340
 	/* begin block 1 */
-		// Start line: 521
-		// Start offset: 0x8008CB38
+		// Start line: 525
+		// Start offset: 0x8008E340
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s1
 	// 		long xAccl; // $a1
 	// 		long yAccl; // $a0
 	/* end block 1 */
-	// End offset: 0x8008CC1C
-	// End Line: 556
+	// End offset: 0x8008E424
+	// End Line: 560
 
 	/* begin block 2 */
-		// Start line: 1114
+		// Start line: 1125
 	/* end block 2 */
-	// End Line: 1115
+	// End Line: 1126
+
+/* File: C:\kain2\game\MONSTER\SOUL.C */
 
 void SOUL_Idle(_Instance *instance)
 
@@ -957,7 +1000,7 @@ void SOUL_Idle(_Instance *instance)
   instance->xAccl = iVar4;
   instance->yAccl = iVar2;
   instance->zAccl = 0;
-  SOUL_Physics(instance,gameTrackerX.idleTime);
+  SOUL_Physics(instance,DAT_800d2314);
   if ((*puVar5 & 4) == 0) {
     if ((puVar5[0x31] != 0) || (uVar1 = MON_GetTime(instance), puVar5[0x45] < uVar1)) {
       MON_SwitchState(instance,(MonsterState)CONCAT44(local_c,local_10));
@@ -975,21 +1018,23 @@ void SOUL_Idle(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SOUL_ReanimateEntry(struct _Instance *instance /*$s1*/)
- // line 562, offset 0x8008cc38
+ // line 566, offset 0x8008e440
 	/* begin block 1 */
-		// Start line: 563
-		// Start offset: 0x8008CC38
+		// Start line: 567
+		// Start offset: 0x8008E440
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	// 		struct _Instance *body; // $v0
 	/* end block 1 */
-	// End offset: 0x8008CC38
-	// End Line: 563
+	// End offset: 0x8008E440
+	// End Line: 567
 
 	/* begin block 2 */
-		// Start line: 1201
+		// Start line: 1212
 	/* end block 2 */
-	// End Line: 1202
+	// End Line: 1213
+
+/* File: C:\kain2\game\MONSTER\SOUL.C */
 
 void SOUL_ReanimateEntry(_Instance *instance)
 
@@ -1011,29 +1056,31 @@ void SOUL_ReanimateEntry(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SOUL_Reanimate(struct _Instance *instance /*$s1*/)
- // line 579, offset 0x8008cca0
+ // line 583, offset 0x8008e4a8
 	/* begin block 1 */
-		// Start line: 580
-		// Start offset: 0x8008CCA0
+		// Start line: 584
+		// Start offset: 0x8008E4A8
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 592
-			// Start offset: 0x8008CCFC
+			// Start line: 596
+			// Start offset: 0x8008E504
 			// Variables:
 		// 		struct _Instance *body; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8008CD24
-		// End Line: 596
+		// End offset: 0x8008E52C
+		// End Line: 600
 	/* end block 1 */
-	// End offset: 0x8008CD44
-	// End Line: 604
+	// End offset: 0x8008E54C
+	// End Line: 608
 
 	/* begin block 2 */
-		// Start line: 1237
+		// Start line: 1248
 	/* end block 2 */
-	// End Line: 1238
+	// End Line: 1249
+
+/* File: C:\kain2\game\MONSTER\SOUL.C */
 
 void SOUL_Reanimate(_Instance *instance)
 
@@ -1044,7 +1091,7 @@ void SOUL_Reanimate(_Instance *instance)
   void *pvVar3;
   
   pvVar3 = instance->extraData;
-  SOUL_MoveToDest(instance,0x10,gameTrackerX.idleTime);
+  SOUL_MoveToDest(instance,0x10,DAT_800d2314);
   lVar1 = MATH3D_LengthXY((int)(instance->position).x - (int)*(short *)((int)pvVar3 + 0x120),
                           (int)(instance->position).y - (int)*(short *)((int)pvVar3 + 0x122));
   if (lVar1 < 0xfa) {
@@ -1070,16 +1117,18 @@ void SOUL_Reanimate(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SOUL_Effect(struct _Instance *instance /*$a0*/, struct evFXHitData *data /*$a1*/)
- // line 609, offset 0x8008cd58
+ // line 613, offset 0x8008e560
 	/* begin block 1 */
-		// Start line: 1301
+		// Start line: 1312
 	/* end block 1 */
-	// End Line: 1302
+	// End Line: 1313
 
 	/* begin block 2 */
-		// Start line: 1303
+		// Start line: 1314
 	/* end block 2 */
-	// End Line: 1304
+	// End Line: 1315
+
+/* File: C:\kain2\game\MONSTER\SOUL.C */
 
 void SOUL_Effect(_Instance *instance,evFXHitData *data)
 

@@ -5,7 +5,7 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ InitMessageQueue(struct __MessageQueue *In /*$a0*/)
- // line 88, offset 0x80070024
+ // line 88, offset 0x80070538
 	/* begin block 1 */
 		// Start line: 117
 	/* end block 1 */
@@ -21,6 +21,8 @@
 	/* end block 3 */
 	// End Line: 119
 
+/* File: C:\kain2\game\STATE.C */
+
 void InitMessageQueue(__MessageQueue *In)
 
 {
@@ -34,12 +36,12 @@ void InitMessageQueue(__MessageQueue *In)
 // decompiled code
 // original method signature: 
 // struct __Event * /*$ra*/ DeMessageQueue(struct __MessageQueue *In /*$a0*/)
- // line 95, offset 0x80070030
+ // line 95, offset 0x80070544
 	/* begin block 1 */
 		// Start line: 97
-		// Start offset: 0x80070030
+		// Start offset: 0x80070544
 	/* end block 1 */
-	// End offset: 0x80070064
+	// End offset: 0x80070578
 	// End Line: 109
 
 	/* begin block 2 */
@@ -56,6 +58,8 @@ void InitMessageQueue(__MessageQueue *In)
 		// Start line: 135
 	/* end block 4 */
 	// End Line: 136
+
+/* File: C:\kain2\game\STATE.C */
 
 __Event * DeMessageQueue(__MessageQueue *In)
 
@@ -78,16 +82,18 @@ __Event * DeMessageQueue(__MessageQueue *In)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PurgeMessageQueue(struct __MessageQueue *In /*$a0*/)
- // line 113, offset 0x8007006c
+ // line 157, offset 0x80070580
 	/* begin block 1 */
-		// Start line: 167
+		// Start line: 300
 	/* end block 1 */
-	// End Line: 168
+	// End Line: 301
 
 	/* begin block 2 */
-		// Start line: 168
+		// Start line: 207
 	/* end block 2 */
-	// End Line: 169
+	// End Line: 208
+
+/* File: C:\kain2\game\STATE.C */
 
 void PurgeMessageQueue(__MessageQueue *In)
 
@@ -102,16 +108,18 @@ void PurgeMessageQueue(__MessageQueue *In)
 // decompiled code
 // original method signature: 
 // struct __Event * /*$ra*/ PeekMessageQueue(struct __MessageQueue *In /*$a0*/)
- // line 120, offset 0x80070078
+ // line 164, offset 0x8007058c
 	/* begin block 1 */
-		// Start line: 181
+		// Start line: 220
 	/* end block 1 */
-	// End Line: 182
+	// End Line: 221
 
 	/* begin block 2 */
-		// Start line: 183
+		// Start line: 222
 	/* end block 2 */
-	// End Line: 184
+	// End Line: 223
+
+/* File: C:\kain2\game\STATE.C */
 
 __Event * PeekMessageQueue(__MessageQueue *In)
 
@@ -127,16 +135,18 @@ __Event * PeekMessageQueue(__MessageQueue *In)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EnMessageQueue(struct __MessageQueue *In /*$a0*/, struct __Event *Element /*$v0*/)
- // line 153, offset 0x800700a0
+ // line 197, offset 0x800705b4
 	/* begin block 1 */
-		// Start line: 223
+		// Start line: 262
 	/* end block 1 */
-	// End Line: 224
+	// End Line: 263
 
 	/* begin block 2 */
-		// Start line: 250
+		// Start line: 289
 	/* end block 2 */
-	// End Line: 251
+	// End Line: 290
+
+/* File: C:\kain2\game\STATE.C */
 
 void EnMessageQueue(__MessageQueue *In,__Event *Element)
 
@@ -150,30 +160,32 @@ void EnMessageQueue(__MessageQueue *In,__Event *Element)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EnMessageQueueData(struct __MessageQueue *In /*$a0*/, int ID /*$a1*/, int Data /*$a2*/)
- // line 160, offset 0x800700cc
+ // line 204, offset 0x800705e0
 	/* begin block 1 */
-		// Start line: 162
-		// Start offset: 0x800700CC
+		// Start line: 206
+		// Start offset: 0x800705E0
 		// Variables:
 	// 		int i; // $v1
 	/* end block 1 */
-	// End offset: 0x80070140
-	// End Line: 207
+	// End offset: 0x80070654
+	// End Line: 251
 
 	/* begin block 2 */
-		// Start line: 264
+		// Start line: 303
 	/* end block 2 */
-	// End Line: 265
+	// End Line: 304
 
 	/* begin block 3 */
-		// Start line: 265
+		// Start line: 304
 	/* end block 3 */
-	// End Line: 266
+	// End Line: 305
 
 	/* begin block 4 */
-		// Start line: 269
+		// Start line: 308
 	/* end block 4 */
-	// End Line: 270
+	// End Line: 309
+
+/* File: C:\kain2\game\STATE.C */
 
 void EnMessageQueueData(__MessageQueue *In,int ID,int Data)
 
@@ -204,46 +216,48 @@ void EnMessageQueueData(__MessageQueue *In,int ID,int Data)
 // decompiled code
 // original method signature: 
 // void * /*$ra*/ CIRC_Alloc(int size /*$a0*/)
- // line 224, offset 0x80070148
+ // line 268, offset 0x8007065c
 	/* begin block 1 */
-		// Start line: 226
-		// Start offset: 0x80070148
+		// Start line: 270
+		// Start offset: 0x8007065C
 		// Variables:
 	// 		void *ret; // $v1
 	/* end block 1 */
-	// End offset: 0x80070188
-	// End Line: 243
+	// End offset: 0x8007069C
+	// End Line: 287
 
 	/* begin block 2 */
-		// Start line: 393
+		// Start line: 432
 	/* end block 2 */
-	// End Line: 394
+	// End Line: 433
 
 	/* begin block 3 */
-		// Start line: 394
+		// Start line: 433
 	/* end block 3 */
-	// End Line: 395
+	// End Line: 434
 
 	/* begin block 4 */
-		// Start line: 398
+		// Start line: 437
 	/* end block 4 */
-	// End Line: 399
+	// End Line: 438
+
+/* File: C:\kain2\game\STATE.C */
 
 void * CIRC_Alloc(int size)
 
 {
   void *pvVar1;
   uint uVar2;
-  _BlockVramEntry *p_Var3;
+  undefined *puVar3;
   
   uVar2 = size + 3U & 0xfffffffc;
-  p_Var3 = (_BlockVramEntry *)((int)circWhere + uVar2);
+  puVar3 = (undefined *)((int)circWhere + uVar2);
   pvVar1 = circWhere;
-  if (&vramBlockList < p_Var3) {
-    circWhere = &circBuf + uVar2;
-    return &circBuf;
+  if (&vramBlockList < puVar3) {
+    circWhere = circBuf + uVar2;
+    return circBuf;
   }
-  circWhere = p_Var3;
+  circWhere = puVar3;
   return pvVar1;
 }
 
@@ -252,20 +266,22 @@ void * CIRC_Alloc(int size)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetCollideInfoData(struct _CollideInfo *srcCI /*$s0*/)
- // line 254, offset 0x80070190
+ // line 298, offset 0x800706a4
 	/* begin block 1 */
-		// Start line: 255
-		// Start offset: 0x80070190
+		// Start line: 299
+		// Start offset: 0x800706A4
 		// Variables:
 	// 		struct _CollideInfo *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x800701DC
-	// End Line: 261
+	// End offset: 0x800706F0
+	// End Line: 305
 
 	/* begin block 2 */
-		// Start line: 455
+		// Start line: 494
 	/* end block 2 */
-	// End Line: 456
+	// End Line: 495
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetCollideInfoData(_CollideInfo *srcCI)
 
@@ -299,20 +315,22 @@ int SetCollideInfoData(_CollideInfo *srcCI)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetMonsterHitData(struct _Instance *Sender /*$s1*/, struct _Instance *lastHit /*$s2*/, int Power /*$s3*/, int knockBackDistance /*$s4*/, int knockBackFrames /*stack 16*/)
- // line 271, offset 0x800701ec
+ // line 315, offset 0x80070700
 	/* begin block 1 */
-		// Start line: 272
-		// Start offset: 0x800701EC
+		// Start line: 316
+		// Start offset: 0x80070700
 		// Variables:
 	// 		struct evMonsterHitData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x800701EC
-	// End Line: 272
+	// End offset: 0x80070700
+	// End Line: 316
 
 	/* begin block 2 */
-		// Start line: 489
+		// Start line: 528
 	/* end block 2 */
-	// End Line: 490
+	// End Line: 529
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetMonsterHitData(_Instance *Sender,_Instance *lastHit,int Power,int knockBackDistance,
                      int knockBackFrames)
@@ -334,20 +352,22 @@ int SetMonsterHitData(_Instance *Sender,_Instance *lastHit,int Power,int knockBa
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetMonsterThrownData(struct _Instance *Sender /*$s1*/, struct _Rotation *Direction /*$s0*/, int Power /*$s2*/)
- // line 288, offset 0x80070258
+ // line 332, offset 0x8007076c
 	/* begin block 1 */
-		// Start line: 289
-		// Start offset: 0x80070258
+		// Start line: 333
+		// Start offset: 0x8007076C
 		// Variables:
 	// 		struct evMonsterThrownData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070258
-	// End Line: 289
+	// End offset: 0x8007076C
+	// End Line: 333
 
 	/* begin block 2 */
-		// Start line: 523
+		// Start line: 562
 	/* end block 2 */
-	// End Line: 524
+	// End Line: 563
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetMonsterThrownData(_Instance *Sender,_Rotation *Direction,int Power)
 
@@ -370,20 +390,22 @@ int SetMonsterThrownData(_Instance *Sender,_Rotation *Direction,int Power)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetMonsterAlarmData(struct _Instance *sender /*$s1*/, struct _Position *position /*$s0*/, int type /*$s2*/)
- // line 304, offset 0x800702c0
+ // line 348, offset 0x800707d4
 	/* begin block 1 */
-		// Start line: 305
-		// Start offset: 0x800702C0
+		// Start line: 349
+		// Start offset: 0x800707D4
 		// Variables:
 	// 		struct evMonsterAlarmData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x800702C0
-	// End Line: 305
+	// End offset: 0x800707D4
+	// End Line: 349
 
 	/* begin block 2 */
-		// Start line: 556
+		// Start line: 595
 	/* end block 2 */
-	// End Line: 557
+	// End Line: 596
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetMonsterAlarmData(_Instance *sender,_Position *position,int type)
 
@@ -406,20 +428,22 @@ int SetMonsterAlarmData(_Instance *sender,_Position *position,int type)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetMonsterSoulSuckData(struct _Instance *Sender /*$s0*/, int x /*$s1*/, int y /*$s2*/, int z /*$s3*/)
- // line 321, offset 0x80070328
+ // line 365, offset 0x8007083c
 	/* begin block 1 */
-		// Start line: 322
-		// Start offset: 0x80070328
+		// Start line: 366
+		// Start offset: 0x8007083C
 		// Variables:
 	// 		struct evMonsterSoulSuckData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070328
-	// End Line: 322
+	// End offset: 0x8007083C
+	// End Line: 366
 
 	/* begin block 2 */
-		// Start line: 591
+		// Start line: 630
 	/* end block 2 */
-	// End Line: 592
+	// End Line: 631
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetMonsterSoulSuckData(_Instance *Sender,int x,int y,int z)
 
@@ -439,20 +463,22 @@ int SetMonsterSoulSuckData(_Instance *Sender,int x,int y,int z)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetMonsterImpaleData(struct _Instance *weapon /*$s2*/, struct _Rotation *direction /*$s0*/, struct _Position *position /*$s1*/, int distance /*$s3*/)
- // line 338, offset 0x80070384
+ // line 382, offset 0x80070898
 	/* begin block 1 */
-		// Start line: 339
-		// Start offset: 0x80070384
+		// Start line: 383
+		// Start offset: 0x80070898
 		// Variables:
 	// 		struct evMonsterImpaleData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070384
-	// End Line: 339
+	// End offset: 0x80070898
+	// End Line: 383
 
 	/* begin block 2 */
-		// Start line: 625
+		// Start line: 664
 	/* end block 2 */
-	// End Line: 626
+	// End Line: 665
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetMonsterImpaleData(_Instance *weapon,_Rotation *direction,_Position *position,int distance)
 
@@ -478,20 +504,22 @@ int SetMonsterImpaleData(_Instance *weapon,_Rotation *direction,_Position *posit
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetObjectData(int x /*$s1*/, int y /*$s2*/, int PathNumber /*$s3*/, struct _Instance *Force /*$s4*/, int node /*stack 16*/)
- // line 359, offset 0x8007041c
+ // line 403, offset 0x80070930
 	/* begin block 1 */
-		// Start line: 360
-		// Start offset: 0x8007041C
+		// Start line: 404
+		// Start offset: 0x80070930
 		// Variables:
 	// 		struct evObjectData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x8007041C
-	// End Line: 360
+	// End offset: 0x80070930
+	// End Line: 404
 
 	/* begin block 2 */
-		// Start line: 668
+		// Start line: 707
 	/* end block 2 */
-	// End Line: 669
+	// End Line: 708
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetObjectData(int x,int y,int PathNumber,_Instance *Force,int node)
 
@@ -512,20 +540,22 @@ int SetObjectData(int x,int y,int PathNumber,_Instance *Force,int node)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetPositionData(int x /*$s0*/, int y /*$s1*/, int z /*$s2*/)
- // line 376, offset 0x80070488
+ // line 420, offset 0x8007099c
 	/* begin block 1 */
-		// Start line: 377
-		// Start offset: 0x80070488
+		// Start line: 421
+		// Start offset: 0x8007099C
 		// Variables:
 	// 		struct evPositionData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070488
-	// End Line: 377
+	// End offset: 0x8007099C
+	// End Line: 421
 
 	/* begin block 2 */
-		// Start line: 702
+		// Start line: 741
 	/* end block 2 */
-	// End Line: 703
+	// End Line: 742
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetPositionData(int x,int y,int z)
 
@@ -544,20 +574,22 @@ int SetPositionData(int x,int y,int z)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetPhysicsGravityData(int UpperOffset /*$s2*/, int LowerOffset /*$s3*/, int x /*$s4*/, int y /*$s5*/, int z /*stack 16*/, int slope /*stack 20*/)
- // line 394, offset 0x800704d4
+ // line 438, offset 0x800709e8
 	/* begin block 1 */
-		// Start line: 395
-		// Start offset: 0x800704D4
+		// Start line: 439
+		// Start offset: 0x800709E8
 		// Variables:
 	// 		struct evPhysicsGravityData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x800704D4
-	// End Line: 395
+	// End offset: 0x800709E8
+	// End Line: 439
 
 	/* begin block 2 */
-		// Start line: 738
+		// Start line: 777
 	/* end block 2 */
-	// End Line: 739
+	// End Line: 778
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetPhysicsGravityData(int UpperOffset,int LowerOffset,int x,int y,int z,int slope)
 
@@ -579,20 +611,22 @@ int SetPhysicsGravityData(int UpperOffset,int LowerOffset,int x,int y,int z,int 
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetPhysicsEdgeData(int UpperOffset /*$s5*/, int ForwardOffset /*$s6*/, int AboveOffset /*$s7*/, int x /*$fp*/, int y /*stack 16*/, int z /*stack 20*/, struct _SVector *Normal1 /*stack 24*/, struct _SVector *Normal2 /*stack 28*/, struct _SVector *Delta /*stack 32*/)
- // line 418, offset 0x80070550
+ // line 462, offset 0x80070a64
 	/* begin block 1 */
-		// Start line: 419
-		// Start offset: 0x80070550
+		// Start line: 463
+		// Start offset: 0x80070A64
 		// Variables:
 	// 		struct evPhysicsEdgeData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070550
-	// End Line: 419
+	// End offset: 0x80070A64
+	// End Line: 463
 
 	/* begin block 2 */
-		// Start line: 786
+		// Start line: 825
 	/* end block 2 */
-	// End Line: 787
+	// End Line: 826
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetPhysicsEdgeData(int UpperOffset,int ForwardOffset,int AboveOffset,int x,int y,int z,
                       _SVector *Normal1,_SVector *Normal2,_SVector *Delta)
@@ -618,20 +652,22 @@ int SetPhysicsEdgeData(int UpperOffset,int ForwardOffset,int AboveOffset,int x,i
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetPhysicsSwimData(int CheckDepth /*$s1*/, struct _SVector *iVelocity /*$s2*/, int SwimDepth /*$s3*/, int WadeDepth /*$s4*/, int TreadDepth /*stack 16*/)
- // line 441, offset 0x800705fc
+ // line 485, offset 0x80070b10
 	/* begin block 1 */
-		// Start line: 442
-		// Start offset: 0x800705FC
+		// Start line: 486
+		// Start offset: 0x80070B10
 		// Variables:
 	// 		struct evPhysicsSwimData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x800705FC
-	// End Line: 442
+	// End offset: 0x80070B10
+	// End Line: 486
 
 	/* begin block 2 */
-		// Start line: 832
+		// Start line: 871
 	/* end block 2 */
-	// End Line: 833
+	// End Line: 872
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetPhysicsSwimData(int CheckDepth,_SVector *iVelocity,int SwimDepth,int WadeDepth,int TreadDepth
                       )
@@ -652,32 +688,35 @@ int SetPhysicsSwimData(int CheckDepth,_SVector *iVelocity,int SwimDepth,int Wade
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ SetPhysicsDropOffData(int xOffset /*$s0*/, int yOffset /*$s1*/, int DropOffset /*$s2*/, int slipSlope /*$s3*/)
- // line 459, offset 0x80070668
+// int /*$ra*/ SetPhysicsDropOffData(int xOffset /*$s1*/, int yOffset /*$s2*/, int DropOffset /*$s3*/, int slipSlope /*$s4*/, int UpperOffset /*stack 16*/)
+ // line 503, offset 0x80070b7c
 	/* begin block 1 */
-		// Start line: 460
-		// Start offset: 0x80070668
+		// Start line: 504
+		// Start offset: 0x80070B7C
 		// Variables:
 	// 		struct evPhysicsDropOffData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070668
-	// End Line: 460
+	// End offset: 0x80070B7C
+	// End Line: 504
 
 	/* begin block 2 */
-		// Start line: 868
+		// Start line: 907
 	/* end block 2 */
-	// End Line: 869
+	// End Line: 908
 
-int SetPhysicsDropOffData(int xOffset,int yOffset,int DropOffset,int slipSlope)
+/* File: C:\kain2\game\STATE.C */
+
+int SetPhysicsDropOffData(int xOffset,int yOffset,int DropOffset,int slipSlope,int UpperOffset)
 
 {
   undefined2 *puVar1;
   
-  puVar1 = (undefined2 *)CIRC_Alloc(8);
+  puVar1 = (undefined2 *)CIRC_Alloc(0xc);
   *puVar1 = (short)xOffset;
   puVar1[1] = (short)yOffset;
   puVar1[2] = (short)DropOffset;
   puVar1[3] = (short)slipSlope;
+  *(int *)(puVar1 + 4) = UpperOffset;
   return (int)puVar1;
 }
 
@@ -686,20 +725,22 @@ int SetPhysicsDropOffData(int xOffset,int yOffset,int DropOffset,int slipSlope)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetPhysicsSlideData(int Segment /*$s3*/, int ForwardVectorX /*$s4*/, int ForwardVectorY /*$s5*/, int ForwardVectorZ /*$s6*/, int DropOffset /*stack 16*/, int UpperOffset /*stack 20*/, int Height /*stack 24*/)
- // line 478, offset 0x800706c4
+ // line 523, offset 0x80070be8
 	/* begin block 1 */
-		// Start line: 479
-		// Start offset: 0x800706C4
+		// Start line: 524
+		// Start offset: 0x80070BE8
 		// Variables:
 	// 		struct evPhysicsSlideData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x800706C4
-	// End Line: 479
+	// End offset: 0x80070BE8
+	// End Line: 524
 
 	/* begin block 2 */
-		// Start line: 906
+		// Start line: 947
 	/* end block 2 */
-	// End Line: 907
+	// End Line: 948
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetPhysicsSlideData(int Segment,int ForwardVectorX,int ForwardVectorY,int ForwardVectorZ,
                        int DropOffset,int UpperOffset,int Height)
@@ -723,20 +764,22 @@ int SetPhysicsSlideData(int Segment,int ForwardVectorX,int ForwardVectorY,int Fo
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetPhysicsWallCrawlData(int Segment /*$s0*/, int Length /*$s1*/, int ForwardOffset /*$s2*/, int NormalDistance /*$s3*/)
- // line 499, offset 0x80070750
+ // line 544, offset 0x80070c74
 	/* begin block 1 */
-		// Start line: 500
-		// Start offset: 0x80070750
+		// Start line: 545
+		// Start offset: 0x80070C74
 		// Variables:
 	// 		struct evPhysicsWallCrawlData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070750
-	// End Line: 500
+	// End offset: 0x80070C74
+	// End Line: 545
 
 	/* begin block 2 */
-		// Start line: 948
+		// Start line: 989
 	/* end block 2 */
-	// End Line: 949
+	// End Line: 990
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetPhysicsWallCrawlData(int Segment,int Length,int ForwardOffset,int NormalDistance)
 
@@ -756,20 +799,22 @@ int SetPhysicsWallCrawlData(int Segment,int Length,int ForwardOffset,int NormalD
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetPhysicsLinkedMoveData(struct _Instance *instance /*$s1*/, int segment /*$s0*/, struct _SVector *posDelta /*$s2*/, struct _SVector *rotDelta /*$s3*/)
- // line 516, offset 0x800707ac
+ // line 561, offset 0x80070cd0
 	/* begin block 1 */
-		// Start line: 517
-		// Start offset: 0x800707AC
+		// Start line: 562
+		// Start offset: 0x80070CD0
 		// Variables:
 	// 		struct evPhysicsLinkedMoveData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070830
-	// End Line: 529
+	// End offset: 0x80070D54
+	// End Line: 574
 
 	/* begin block 2 */
-		// Start line: 982
+		// Start line: 1023
 	/* end block 2 */
-	// End Line: 983
+	// End Line: 1024
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetPhysicsLinkedMoveData(_Instance *instance,int segment,_SVector *posDelta,_SVector *rotDelta)
 
@@ -798,20 +843,22 @@ int SetPhysicsLinkedMoveData(_Instance *instance,int segment,_SVector *posDelta,
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetPhysicsDropHeightData(struct _Position *offset /*$s0*/, int dropOffset /*$s1*/, int mode /*$s2*/)
- // line 537, offset 0x8007084c
+ // line 582, offset 0x80070d70
 	/* begin block 1 */
-		// Start line: 538
-		// Start offset: 0x8007084C
+		// Start line: 583
+		// Start offset: 0x80070D70
 		// Variables:
 	// 		struct evPhysicsDropHeightData *ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x8007084C
-	// End Line: 538
+	// End offset: 0x80070D70
+	// End Line: 583
 
 	/* begin block 2 */
-		// Start line: 1024
+		// Start line: 1065
 	/* end block 2 */
-	// End Line: 1025
+	// End Line: 1066
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetPhysicsDropHeightData(_Position *offset,int dropOffset,int mode)
 
@@ -832,20 +879,22 @@ int SetPhysicsDropHeightData(_Position *offset,int dropOffset,int mode)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetAnimationControllerDoneData(struct _Instance *instance /*$s0*/, long segment /*$s1*/, long type /*$s2*/, int data /*$s3*/)
- // line 557, offset 0x800708bc
+ // line 602, offset 0x80070de0
 	/* begin block 1 */
-		// Start line: 558
-		// Start offset: 0x800708BC
+		// Start line: 603
+		// Start offset: 0x80070DE0
 		// Variables:
 	// 		struct evAnimationControllerDoneData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x800708BC
-	// End Line: 558
+	// End offset: 0x80070DE0
+	// End Line: 603
 
 	/* begin block 2 */
-		// Start line: 1064
+		// Start line: 1105
 	/* end block 2 */
-	// End Line: 1065
+	// End Line: 1106
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetAnimationControllerDoneData(_Instance *instance,long segment,long type,int data)
 
@@ -865,20 +914,22 @@ int SetAnimationControllerDoneData(_Instance *instance,long segment,long type,in
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetAnimationInstanceSwitchData(struct _Instance *instance /*$s1*/, int anim /*$s2*/, int frame /*$s3*/, int frames /*$s4*/, int mode /*stack 16*/)
- // line 575, offset 0x80070918
+ // line 620, offset 0x80070e3c
 	/* begin block 1 */
-		// Start line: 576
-		// Start offset: 0x80070918
+		// Start line: 621
+		// Start offset: 0x80070E3C
 		// Variables:
 	// 		struct evAnimationInstanceSwitchData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070918
-	// End Line: 576
+	// End offset: 0x80070E3C
+	// End Line: 621
 
 	/* begin block 2 */
-		// Start line: 1100
+		// Start line: 1141
 	/* end block 2 */
-	// End Line: 1101
+	// End Line: 1142
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetAnimationInstanceSwitchData(_Instance *instance,int anim,int frame,int frames,int mode)
 
@@ -899,20 +950,22 @@ int SetAnimationInstanceSwitchData(_Instance *instance,int anim,int frame,int fr
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetFXHitData(struct _Instance *hitter /*$s2*/, int segment /*$s3*/, int amount /*$s0*/, int type /*$s1*/)
- // line 594, offset 0x80070984
+ // line 639, offset 0x80070ea8
 	/* begin block 1 */
-		// Start line: 595
-		// Start offset: 0x80070984
+		// Start line: 640
+		// Start offset: 0x80070EA8
 		// Variables:
 	// 		struct evFXHitData *Ptr; // $a1
 	/* end block 1 */
-	// End offset: 0x80070A60
-	// End Line: 611
+	// End offset: 0x80070F84
+	// End Line: 656
 
 	/* begin block 2 */
-		// Start line: 1138
+		// Start line: 1179
 	/* end block 2 */
-	// End Line: 1139
+	// End Line: 1180
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetFXHitData(_Instance *hitter,int segment,int amount,int type)
 
@@ -942,20 +995,22 @@ int SetFXHitData(_Instance *hitter,int segment,int amount,int type)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetObjectThrowData(void *target /*$s2*/, struct _SVector *angularVel /*$s7*/, unsigned short type /*$s0*/, unsigned short spinType /*$s1*/, int speed /*stack 16*/, int gravity /*stack 20*/, int zVel /*stack 24*/, int initialXRot /*stack 28*/)
- // line 648, offset 0x80070a80
+ // line 693, offset 0x80070fa4
 	/* begin block 1 */
-		// Start line: 649
-		// Start offset: 0x80070A80
+		// Start line: 694
+		// Start offset: 0x80070FA4
 		// Variables:
 	// 		struct evObjectThrowData *Ptr; // $a0
 	/* end block 1 */
-	// End offset: 0x80070BAC
-	// End Line: 701
+	// End offset: 0x800710D0
+	// End Line: 746
 
 	/* begin block 2 */
-		// Start line: 1278
+		// Start line: 1368
 	/* end block 2 */
-	// End Line: 1279
+	// End Line: 1369
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetObjectThrowData(void *target,_SVector *angularVel,ushort type,ushort spinType,int speed,
                       int gravity,int zVel,int initialXRot)
@@ -1010,20 +1065,22 @@ int SetObjectThrowData(void *target,_SVector *angularVel,ushort type,ushort spin
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetObjectBreakOffData(struct _Instance *force /*$s3*/, short node /*$a1*/, short distance /*$a2*/, short animation /*$a3*/, int frame /*stack 16*/, int type /*stack 20*/, int action /*stack 24*/)
- // line 705, offset 0x80070bec
+ // line 750, offset 0x80071110
 	/* begin block 1 */
-		// Start line: 706
-		// Start offset: 0x80070BEC
+		// Start line: 751
+		// Start offset: 0x80071110
 		// Variables:
 	// 		struct evObjectBreakOffData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070BEC
-	// End Line: 706
+	// End offset: 0x80071110
+	// End Line: 751
 
 	/* begin block 2 */
-		// Start line: 1328
+		// Start line: 1369
 	/* end block 2 */
-	// End Line: 1329
+	// End Line: 1370
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetObjectBreakOffData
               (_Instance *force,short node,short distance,short animation,int frame,int type,
@@ -1048,20 +1105,22 @@ int SetObjectBreakOffData
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetControlInitHangData(struct _Instance *instance /*$s0*/, long frame /*$s1*/, long frames /*$s2*/)
- // line 722, offset 0x80070c78
+ // line 767, offset 0x8007119c
 	/* begin block 1 */
-		// Start line: 723
-		// Start offset: 0x80070C78
+		// Start line: 768
+		// Start offset: 0x8007119C
 		// Variables:
 	// 		struct evControlInitHangData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070C78
-	// End Line: 723
+	// End offset: 0x8007119C
+	// End Line: 768
 
 	/* begin block 2 */
-		// Start line: 1362
+		// Start line: 1403
 	/* end block 2 */
-	// End Line: 1363
+	// End Line: 1404
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetControlInitHangData(_Instance *instance,long frame,long frames)
 
@@ -1080,20 +1139,22 @@ int SetControlInitHangData(_Instance *instance,long frame,long frames)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetControlInitIdleData(int mode /*$s0*/, long frame /*$s1*/, long frames /*$s2*/)
- // line 736, offset 0x80070cc4
+ // line 781, offset 0x800711e8
 	/* begin block 1 */
-		// Start line: 737
-		// Start offset: 0x80070CC4
+		// Start line: 782
+		// Start offset: 0x800711E8
 		// Variables:
 	// 		struct evControlInitIdleData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070CC4
-	// End Line: 737
+	// End offset: 0x800711E8
+	// End Line: 782
 
 	/* begin block 2 */
-		// Start line: 1390
+		// Start line: 1431
 	/* end block 2 */
-	// End Line: 1391
+	// End Line: 1432
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetControlInitIdleData(int mode,long frame,long frames)
 
@@ -1112,20 +1173,22 @@ int SetControlInitIdleData(int mode,long frame,long frames)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetObjectDraftData(short force /*$a0*/, unsigned short radius /*$a1*/, unsigned short radiusCoef /*$a2*/, unsigned short height /*$a3*/, int maxVelocity /*stack 16*/)
- // line 750, offset 0x80070d10
+ // line 795, offset 0x80071234
 	/* begin block 1 */
-		// Start line: 751
-		// Start offset: 0x80070D10
+		// Start line: 796
+		// Start offset: 0x80071234
 		// Variables:
 	// 		struct evObjectDraftData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070D10
-	// End Line: 751
+	// End offset: 0x80071234
+	// End Line: 796
 
 	/* begin block 2 */
-		// Start line: 1418
+		// Start line: 1459
 	/* end block 2 */
-	// End Line: 1419
+	// End Line: 1460
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetObjectDraftData(short force,ushort radius,ushort radiusCoef,ushort height,int maxVelocity)
 
@@ -1146,20 +1209,22 @@ int SetObjectDraftData(short force,ushort radius,ushort radiusCoef,ushort height
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetObjectAbsorbData(struct _Instance *force /*$s0*/, unsigned short node /*$a1*/, unsigned short steps /*$a2*/)
- // line 766, offset 0x80070d7c
+ // line 811, offset 0x800712a0
 	/* begin block 1 */
-		// Start line: 767
-		// Start offset: 0x80070D7C
+		// Start line: 812
+		// Start offset: 0x800712A0
 		// Variables:
 	// 		struct evObjectAbsorbData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070D7C
-	// End Line: 767
+	// End offset: 0x800712A0
+	// End Line: 812
 
 	/* begin block 2 */
-		// Start line: 1450
+		// Start line: 1491
 	/* end block 2 */
-	// End Line: 1451
+	// End Line: 1492
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetObjectAbsorbData(_Instance *force,ushort node,ushort steps)
 
@@ -1178,20 +1243,22 @@ int SetObjectAbsorbData(_Instance *force,ushort node,ushort steps)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetControlSaveDataData(long length /*$s0*/, void *data /*$s1*/)
- // line 782, offset 0x80070dc8
+ // line 827, offset 0x800712ec
 	/* begin block 1 */
-		// Start line: 783
-		// Start offset: 0x80070DC8
+		// Start line: 828
+		// Start offset: 0x800712EC
 		// Variables:
 	// 		struct evControlSaveDataData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070DC8
-	// End Line: 783
+	// End offset: 0x800712EC
+	// End Line: 828
 
 	/* begin block 2 */
-		// Start line: 1482
+		// Start line: 1523
 	/* end block 2 */
-	// End Line: 1483
+	// End Line: 1524
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetControlSaveDataData(long length,void *data)
 
@@ -1209,20 +1276,22 @@ int SetControlSaveDataData(long length,void *data)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetObjectIdleData(long mode /*$s0*/, struct _Instance *instance /*$s1*/)
- // line 795, offset 0x80070e04
+ // line 840, offset 0x80071328
 	/* begin block 1 */
-		// Start line: 796
-		// Start offset: 0x80070E04
+		// Start line: 841
+		// Start offset: 0x80071328
 		// Variables:
 	// 		struct evObjectIdleData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070E04
-	// End Line: 796
+	// End offset: 0x80071328
+	// End Line: 841
 
 	/* begin block 2 */
-		// Start line: 1508
+		// Start line: 1549
 	/* end block 2 */
-	// End Line: 1509
+	// End Line: 1550
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetObjectIdleData(long mode,_Instance *instance)
 
@@ -1240,20 +1309,22 @@ int SetObjectIdleData(long mode,_Instance *instance)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetActionPlayHostAnimationData(struct _Instance *instance /*$s2*/, struct _Instance *host /*$s3*/, int newAnim /*$s4*/, int newFrame /*$s5*/, int frames /*stack 16*/, int mode /*stack 20*/)
- // line 824, offset 0x80070e40
+ // line 869, offset 0x80071364
 	/* begin block 1 */
-		// Start line: 825
-		// Start offset: 0x80070E40
+		// Start line: 870
+		// Start offset: 0x80071364
 		// Variables:
 	// 		struct evActionPlayHostAnimationData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070E40
-	// End Line: 825
+	// End offset: 0x80071364
+	// End Line: 870
 
 	/* begin block 2 */
-		// Start line: 1644
+		// Start line: 1734
 	/* end block 2 */
-	// End Line: 1645
+	// End Line: 1735
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetActionPlayHostAnimationData
               (_Instance *instance,_Instance *host,int newAnim,int newFrame,int frames,int mode)
@@ -1276,20 +1347,22 @@ int SetActionPlayHostAnimationData
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetObjectBirthProjectileData(struct _Instance *instance /*$s0*/, int joint /*$s1*/, int type /*$s2*/)
- // line 843, offset 0x80070ebc
+ // line 888, offset 0x800713e0
 	/* begin block 1 */
-		// Start line: 844
-		// Start offset: 0x80070EBC
+		// Start line: 889
+		// Start offset: 0x800713E0
 		// Variables:
 	// 		struct evObjectBirthProjectileData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070EBC
-	// End Line: 844
+	// End offset: 0x800713E0
+	// End Line: 889
 
 	/* begin block 2 */
-		// Start line: 1584
+		// Start line: 1625
 	/* end block 2 */
-	// End Line: 1585
+	// End Line: 1626
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetObjectBirthProjectileData(_Instance *instance,int joint,int type)
 
@@ -1309,20 +1382,22 @@ int SetObjectBirthProjectileData(_Instance *instance,int joint,int type)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SetShadowSegmentData(unsigned long total /*$s0*/)
- // line 862, offset 0x80070f0c
+ // line 907, offset 0x80071430
 	/* begin block 1 */
-		// Start line: 863
-		// Start offset: 0x80070F0C
+		// Start line: 908
+		// Start offset: 0x80071430
 		// Variables:
 	// 		struct evShadowSegmentData *Ptr; // $v0
 	/* end block 1 */
-	// End offset: 0x80070F0C
-	// End Line: 863
+	// End offset: 0x80071430
+	// End Line: 908
 
 	/* begin block 2 */
-		// Start line: 1622
+		// Start line: 1663
 	/* end block 2 */
-	// End Line: 1623
+	// End Line: 1664
+
+/* File: C:\kain2\game\STATE.C */
 
 int SetShadowSegmentData(ulong total)
 
@@ -1339,67 +1414,67 @@ int SetShadowSegmentData(ulong total)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInit()
- // line 876, offset 0x80070f38
+ // line 921, offset 0x8007145c
 	/* begin block 1 */
-		// Start line: 1650
+		// Start line: 1691
 	/* end block 1 */
-	// End Line: 1651
+	// End Line: 1692
 
 	/* begin block 2 */
-		// Start line: 1654
+		// Start line: 1695
 	/* end block 2 */
-	// End Line: 1655
+	// End Line: 1696
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\STATE.C */
 
 void G2EmulationInit(void)
 
 {
-  G2AlphaTables7 = (_G2AnimAlphaTable_Type *)0x0;
-  if (PTR_800d0160 == (_G2AnimAlphaTable_Type *)0x0) {
-    PTR_800d0160 = (_G2AnimAlphaTable_Type *)MEMPACK_Malloc(0x12,'\x19');
-    PTR_800d0160->size = 4;
-    PTR_800d0160[1] = (_G2AnimAlphaTable_Type)0x0;
-    PTR_800d0160[2] = (_G2AnimAlphaTable_Type)0x100;
-    PTR_800d0160[3] = (_G2AnimAlphaTable_Type)0x400;
-    PTR_800d0160[4] = (_G2AnimAlphaTable_Type)0x1000;
+  G2AlphaTables[0] = (_G2AnimAlphaTable_Type *)0x0;
+  if (G2AlphaTables[1] == (_G2AnimAlphaTable_Type *)0x0) {
+    G2AlphaTables[1] = (_G2AnimAlphaTable_Type *)MEMPACK_Malloc(0x12,'\x19');
+    G2AlphaTables[1]->size = 4;
+    G2AlphaTables[1]->data[0] = 0;
+    *(undefined4 *)(G2AlphaTables[1] + 1) = 0x100;
+    G2AlphaTables[1][1].data[0] = 0x400;
+    *(undefined4 *)(G2AlphaTables[1] + 2) = 0x1000;
   }
-  if (PTR_800d0164 == (_G2AnimAlphaTable_Type *)0x0) {
-    PTR_800d0164 = (_G2AnimAlphaTable_Type *)MEMPACK_Malloc(0x12,'\x19');
-    PTR_800d0164->size = 4;
-    PTR_800d0164[1] = (_G2AnimAlphaTable_Type)0x0;
-    PTR_800d0164[2] = (_G2AnimAlphaTable_Type)0xc00;
-    PTR_800d0164[3] = (_G2AnimAlphaTable_Type)0xf00;
-    PTR_800d0164[4] = (_G2AnimAlphaTable_Type)0x1000;
+  if (G2AlphaTables[2] == (_G2AnimAlphaTable_Type *)0x0) {
+    G2AlphaTables[2] = (_G2AnimAlphaTable_Type *)MEMPACK_Malloc(0x12,'\x19');
+    G2AlphaTables[2]->size = 4;
+    G2AlphaTables[2]->data[0] = 0;
+    *(undefined4 *)(G2AlphaTables[2] + 1) = 0xc00;
+    G2AlphaTables[2][1].data[0] = 0xf00;
+    *(undefined4 *)(G2AlphaTables[2] + 2) = 0x1000;
   }
-  if (PTR_800d0168 == (_G2AnimAlphaTable_Type *)0x0) {
-    PTR_800d0168 = (_G2AnimAlphaTable_Type *)MEMPACK_Malloc(6,'\x19');
-    PTR_800d0168->size = 1;
-    PTR_800d0168[1] = (_G2AnimAlphaTable_Type)0x1000;
+  if (G2AlphaTables[3] == (_G2AnimAlphaTable_Type *)0x0) {
+    G2AlphaTables[3] = (_G2AnimAlphaTable_Type *)MEMPACK_Malloc(6,'\x19');
+    G2AlphaTables[3]->size = 1;
+    G2AlphaTables[3]->data[0] = 0x1000;
   }
-  if (PTR_800d016c == (_G2AnimAlphaTable_Type *)0x0) {
-    PTR_800d016c = (_G2AnimAlphaTable_Type *)MEMPACK_Malloc(0x12,'\x19');
-    PTR_800d016c->size = 4;
-    PTR_800d016c[1] = (_G2AnimAlphaTable_Type)0x0;
-    PTR_800d016c[2] = (_G2AnimAlphaTable_Type)0x100;
-    PTR_800d016c[3] = (_G2AnimAlphaTable_Type)0xf00;
-    PTR_800d016c[4] = (_G2AnimAlphaTable_Type)0x1000;
+  if (G2AlphaTables[4] == (_G2AnimAlphaTable_Type *)0x0) {
+    G2AlphaTables[4] = (_G2AnimAlphaTable_Type *)MEMPACK_Malloc(0x12,'\x19');
+    G2AlphaTables[4]->size = 4;
+    G2AlphaTables[4]->data[0] = 0;
+    *(undefined4 *)(G2AlphaTables[4] + 1) = 0x100;
+    G2AlphaTables[4][1].data[0] = 0xf00;
+    *(undefined4 *)(G2AlphaTables[4] + 2) = 0x1000;
   }
-  if (PTR_800d0170 == (_G2AnimAlphaTable_Type *)0x0) {
-    PTR_800d0170 = (_G2AnimAlphaTable_Type *)MEMPACK_Malloc(0x12,'\x19');
-    PTR_800d0170->size = 4;
-    PTR_800d0170[1] = (_G2AnimAlphaTable_Type)0x0;
-    PTR_800d0170[2] = (_G2AnimAlphaTable_Type)0x80;
-    PTR_800d0170[3] = (_G2AnimAlphaTable_Type)0x200;
-    PTR_800d0170[4] = (_G2AnimAlphaTable_Type)0x1000;
+  if (G2AlphaTables[5] == (_G2AnimAlphaTable_Type *)0x0) {
+    G2AlphaTables[5] = (_G2AnimAlphaTable_Type *)MEMPACK_Malloc(0x12,'\x19');
+    G2AlphaTables[5]->size = 4;
+    G2AlphaTables[5]->data[0] = 0;
+    *(undefined4 *)(G2AlphaTables[5] + 1) = 0x80;
+    G2AlphaTables[5][1].data[0] = 0x200;
+    *(undefined4 *)(G2AlphaTables[5] + 2) = 0x1000;
   }
-  if (PTR_800d0174 == (_G2AnimAlphaTable_Type *)0x0) {
-    PTR_800d0174 = (_G2AnimAlphaTable_Type *)MEMPACK_Malloc(0x12,'\x19');
-    PTR_800d0174->size = 4;
-    PTR_800d0174[1] = (_G2AnimAlphaTable_Type)0x0;
-    PTR_800d0174[2] = (_G2AnimAlphaTable_Type)0xe00;
-    PTR_800d0174[3] = (_G2AnimAlphaTable_Type)0xf80;
-    PTR_800d0174[4] = (_G2AnimAlphaTable_Type)0x1000;
+  if (G2AlphaTables[6] == (_G2AnimAlphaTable_Type *)0x0) {
+    G2AlphaTables[6] = (_G2AnimAlphaTable_Type *)MEMPACK_Malloc(0x12,'\x19');
+    G2AlphaTables[6]->size = 4;
+    G2AlphaTables[6]->data[0] = 0;
+    *(undefined4 *)(G2AlphaTables[6] + 1) = 0xe00;
+    G2AlphaTables[6][1].data[0] = 0xf80;
+    *(undefined4 *)(G2AlphaTables[6] + 2) = 0x1000;
   }
   return;
 }
@@ -1409,21 +1484,23 @@ void G2EmulationInit(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInstancePlayAnimation(struct _Instance *instance /*$a0*/)
- // line 933, offset 0x80071124
+ // line 978, offset 0x80071648
 	/* begin block 1 */
-		// Start line: 934
-		// Start offset: 0x80071124
+		// Start line: 979
+		// Start offset: 0x80071648
 		// Variables:
 	// 		int i; // $s0
 	// 		struct _G2Anim_Type *anim; // $s1
 	/* end block 1 */
-	// End offset: 0x80071178
-	// End Line: 945
+	// End offset: 0x8007169C
+	// End Line: 990
 
 	/* begin block 2 */
-		// Start line: 1774
+		// Start line: 1815
 	/* end block 2 */
-	// End Line: 1775
+	// End Line: 1816
+
+/* File: C:\kain2\game\STATE.C */
 
 void G2EmulationInstancePlayAnimation(_Instance *instance)
 
@@ -1448,11 +1525,13 @@ void G2EmulationInstancePlayAnimation(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulatePlayAnimation(struct __CharacterState *In /*$a0*/)
- // line 950, offset 0x8007118c
+ // line 995, offset 0x800716b0
 	/* begin block 1 */
-		// Start line: 1817
+		// Start line: 1858
 	/* end block 1 */
-	// End Line: 1818
+	// End Line: 1859
+
+/* File: C:\kain2\game\STATE.C */
 
 void G2EmulatePlayAnimation(__CharacterState *In)
 
@@ -1466,21 +1545,23 @@ void G2EmulatePlayAnimation(__CharacterState *In)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInstanceToInstanceSwitchAnimation(struct _Instance *instance /*$a0*/, struct _Instance *host /*$a1*/, int CurrentSection /*$a2*/, int NewAnim /*$s2*/, int NewFrame /*stack 16*/, int Frames /*stack 20*/, int Mode /*stack 24*/)
- // line 961, offset 0x800711b0
+ // line 1006, offset 0x800716d4
 	/* begin block 1 */
-		// Start line: 962
-		// Start offset: 0x800711B0
+		// Start line: 1007
+		// Start offset: 0x800716D4
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $s4
 	// 		struct _G2AnimKeylist_Type *keylist; // $s1
 	/* end block 1 */
-	// End offset: 0x80071284
-	// End Line: 983
+	// End offset: 0x800717A8
+	// End Line: 1028
 
 	/* begin block 2 */
-		// Start line: 1839
+		// Start line: 1880
 	/* end block 2 */
-	// End Line: 1840
+	// End Line: 1881
+
+/* File: C:\kain2\game\STATE.C */
 
 void G2EmulationInstanceToInstanceSwitchAnimation
                (_Instance *instance,_Instance *host,int CurrentSection,int NewAnim,int NewFrame,
@@ -1514,21 +1595,23 @@ void G2EmulationInstanceToInstanceSwitchAnimation
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInstanceSwitchAnimation(struct _Instance *instance /*$a0*/, int CurrentSection /*$a1*/, int NewAnim /*$s2*/, int NewFrame /*$s3*/, int Frames /*stack 16*/, int Mode /*stack 20*/)
- // line 987, offset 0x800712a8
+ // line 1032, offset 0x800717cc
 	/* begin block 1 */
-		// Start line: 988
-		// Start offset: 0x800712A8
+		// Start line: 1033
+		// Start offset: 0x800717CC
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $s4
 	// 		struct _G2AnimKeylist_Type *keylist; // $s1
 	/* end block 1 */
-	// End offset: 0x80071378
-	// End Line: 1009
+	// End offset: 0x8007189C
+	// End Line: 1054
 
 	/* begin block 2 */
-		// Start line: 1913
+		// Start line: 1954
 	/* end block 2 */
-	// End Line: 1914
+	// End Line: 1955
+
+/* File: C:\kain2\game\STATE.C */
 
 void G2EmulationInstanceSwitchAnimation
                (_Instance *instance,int CurrentSection,int NewAnim,int NewFrame,int Frames,int Mode)
@@ -1561,20 +1644,22 @@ void G2EmulationInstanceSwitchAnimation
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInstanceSwitchAnimationAlpha(struct _Instance *instance /*$a0*/, int CurrentSection /*$a1*/, int NewAnim /*$a2*/, int NewFrame /*$a3*/, int Frames /*stack 16*/, int Mode /*stack 20*/, int AlphaTable /*stack 24*/)
- // line 1012, offset 0x8007139c
+ // line 1057, offset 0x800718c0
 	/* begin block 1 */
-		// Start line: 1013
-		// Start offset: 0x8007139C
+		// Start line: 1058
+		// Start offset: 0x800718C0
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $s1
 	/* end block 1 */
-	// End offset: 0x8007139C
-	// End Line: 1013
+	// End offset: 0x800718C0
+	// End Line: 1058
 
 	/* begin block 2 */
-		// Start line: 1980
+		// Start line: 2021
 	/* end block 2 */
-	// End Line: 1981
+	// End Line: 2022
+
+/* File: C:\kain2\game\STATE.C */
 
 void G2EmulationInstanceSwitchAnimationAlpha
                (_Instance *instance,int CurrentSection,int NewAnim,int NewFrame,int Frames,int Mode,
@@ -1583,7 +1668,8 @@ void G2EmulationInstanceSwitchAnimationAlpha
 {
   G2EmulationInstanceSwitchAnimation(instance,CurrentSection,NewAnim,NewFrame,Frames,Mode);
   G2AnimSection_SetAlphaTable
-            ((instance->anim).section + (CurrentSection & 0xff),(&G2AlphaTables7)[AlphaTable]);
+            ((instance->anim).section + (CurrentSection & 0xff),
+             (_G2AnimAlphaTable_Type *)G2AlphaTables[AlphaTable]);
   return;
 }
 
@@ -1592,11 +1678,13 @@ void G2EmulationInstanceSwitchAnimationAlpha
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationSwitchAnimation(struct __CharacterState *In /*$a0*/, int CurrentSection /*$a1*/, int NewAnim /*$a2*/, int NewFrame /*$a3*/, int Frames /*stack 16*/, int Mode /*stack 20*/)
- // line 1022, offset 0x8007140c
+ // line 1067, offset 0x80071930
 	/* begin block 1 */
-		// Start line: 2002
+		// Start line: 2043
 	/* end block 1 */
-	// End Line: 2003
+	// End Line: 2044
+
+/* File: C:\kain2\game\STATE.C */
 
 void G2EmulationSwitchAnimation
                (__CharacterState *In,int CurrentSection,int NewAnim,int NewFrame,int Frames,int Mode
@@ -1616,20 +1704,22 @@ void G2EmulationSwitchAnimation
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationSwitchAnimationAlpha(struct __CharacterState *In /*$a0*/, int CurrentSection /*$a1*/, int NewAnim /*$a2*/, int NewFrame /*$a3*/, int Frames /*stack 16*/, int Mode /*stack 20*/, int AlphaTable /*stack 24*/)
- // line 1036, offset 0x80071450
+ // line 1081, offset 0x80071974
 	/* begin block 1 */
-		// Start line: 1037
-		// Start offset: 0x80071450
+		// Start line: 1082
+		// Start offset: 0x80071974
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $s1
 	/* end block 1 */
-	// End offset: 0x80071450
-	// End Line: 1037
+	// End offset: 0x80071974
+	// End Line: 1082
 
 	/* begin block 2 */
-		// Start line: 2030
+		// Start line: 2071
 	/* end block 2 */
-	// End Line: 2031
+	// End Line: 2072
+
+/* File: C:\kain2\game\STATE.C */
 
 void G2EmulationSwitchAnimationAlpha
                (__CharacterState *In,int CurrentSection,int NewAnim,int NewFrame,int Frames,int Mode
@@ -1642,7 +1732,8 @@ void G2EmulationSwitchAnimationAlpha
   G2EmulationInstanceSwitchAnimation
             (In->CharacterInstance,CurrentSection,NewAnim,NewFrame,Frames,Mode);
   G2AnimSection_SetAlphaTable
-            ((p_Var1->anim).section + (CurrentSection & 0xff),(&G2AlphaTables7)[AlphaTable]);
+            ((p_Var1->anim).section + (CurrentSection & 0xff),
+             (_G2AnimAlphaTable_Type *)G2AlphaTables[AlphaTable]);
   return;
 }
 
@@ -1651,10 +1742,10 @@ void G2EmulationSwitchAnimationAlpha
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationSwitchAnimationSync(struct __CharacterState *In /*stack 0*/, int SlaveSectionID /*$fp*/, int MasterSectionID /*$a2*/, int Frames /*stack 12*/)
- // line 1048, offset 0x800714c8
+ // line 1093, offset 0x800719ec
 	/* begin block 1 */
-		// Start line: 1049
-		// Start offset: 0x800714C8
+		// Start line: 1094
+		// Start offset: 0x800719EC
 		// Variables:
 	// 		struct _Instance *instance; // $a1
 	// 		struct _G2AnimSection_Type *masterAnimSection; // $s6
@@ -1664,13 +1755,15 @@ void G2EmulationSwitchAnimationAlpha
 	// 		struct __State *masterSection; // $s7
 	// 		struct __State *slaveSection; // $s2
 	/* end block 1 */
-	// End offset: 0x80071638
-	// End Line: 1085
+	// End offset: 0x80071B5C
+	// End Line: 1130
 
 	/* begin block 2 */
-		// Start line: 2056
+		// Start line: 2097
 	/* end block 2 */
-	// End Line: 2057
+	// End Line: 2098
+
+/* File: C:\kain2\game\STATE.C */
 
 void G2EmulationSwitchAnimationSync
                (__CharacterState *In,int SlaveSectionID,int MasterSectionID,int Frames)
@@ -1718,20 +1811,22 @@ void G2EmulationSwitchAnimationSync
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInstanceToInstanceSwitchAnimationCharacter(struct _Instance *instance /*$s0*/, struct _Instance *host /*$a1*/, int NewAnim /*$s2*/, int NewFrame /*$s3*/, int Frames /*stack 16*/, int Mode /*stack 20*/)
- // line 1092, offset 0x80071694
+ // line 1137, offset 0x80071bb8
 	/* begin block 1 */
-		// Start line: 1093
-		// Start offset: 0x80071694
+		// Start line: 1138
+		// Start offset: 0x80071BB8
 		// Variables:
 	// 		struct _G2AnimKeylist_Type *keylist1; // $s0
 	/* end block 1 */
-	// End offset: 0x8007175C
-	// End Line: 1115
+	// End offset: 0x80071C80
+	// End Line: 1160
 
 	/* begin block 2 */
-		// Start line: 2167
+		// Start line: 2208
 	/* end block 2 */
-	// End Line: 2168
+	// End Line: 2209
+
+/* File: C:\kain2\game\STATE.C */
 
 void G2EmulationInstanceToInstanceSwitchAnimationCharacter
                (_Instance *instance,_Instance *host,int NewAnim,int NewFrame,int Frames,int Mode)
@@ -1764,21 +1859,23 @@ void G2EmulationInstanceToInstanceSwitchAnimationCharacter
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationSwitchAnimationCharacter(struct __CharacterState *In /*$a0*/, int NewAnim /*$s2*/, int NewFrame /*$s5*/, int Frames /*$s3*/, int Mode /*stack 16*/)
- // line 1119, offset 0x80071780
+ // line 1164, offset 0x80071ca4
 	/* begin block 1 */
-		// Start line: 1120
-		// Start offset: 0x80071780
+		// Start line: 1165
+		// Start offset: 0x80071CA4
 		// Variables:
 	// 		struct _Instance *instance; // $s0
 	// 		struct _G2AnimKeylist_Type *keylist; // $s0
 	/* end block 1 */
-	// End offset: 0x80071850
-	// End Line: 1147
+	// End offset: 0x80071D74
+	// End Line: 1192
 
 	/* begin block 2 */
-		// Start line: 2229
+		// Start line: 2270
 	/* end block 2 */
-	// End Line: 2230
+	// End Line: 2271
+
+/* File: C:\kain2\game\STATE.C */
 
 void G2EmulationSwitchAnimationCharacter
                (__CharacterState *In,int NewAnim,int NewFrame,int Frames,int Mode)
@@ -1816,18 +1913,21 @@ void G2EmulationSwitchAnimationCharacter
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationSwitchAnimationCharacterAlpha(struct __CharacterState *In /*$s1*/, int NewAnim /*$a1*/, int NewFrame /*$a2*/, int Frames /*$a3*/, int Mode /*stack 16*/, int AlphaTable /*stack 20*/)
- // line 1150, offset 0x80071874
+ // line 1195, offset 0x80071d98
 	/* begin block 1 */
-		// Start line: 2291
+		// Start line: 2332
 	/* end block 1 */
-	// End Line: 2292
+	// End Line: 2333
+
+/* File: C:\kain2\game\STATE.C */
 
 void G2EmulationSwitchAnimationCharacterAlpha
                (__CharacterState *In,int NewAnim,int NewFrame,int Frames,int Mode,int AlphaTable)
 
 {
   G2EmulationSwitchAnimationCharacter(In,NewAnim,NewFrame,Frames,Mode);
-  G2Anim_SetAlphaTable(&In->CharacterInstance->anim,(&G2AlphaTables7)[AlphaTable]);
+  G2Anim_SetAlphaTable
+            (&In->CharacterInstance->anim,(_G2AnimAlphaTable_Type *)G2AlphaTables[AlphaTable]);
   return;
 }
 
@@ -1836,21 +1936,23 @@ void G2EmulationSwitchAnimationCharacterAlpha
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInstanceSetAnimation(struct _Instance *instance /*$a0*/, int CurrentSection /*$a1*/, int NewAnim /*$s3*/, int NewFrame /*$s4*/, int Frames /*stack 16*/)
- // line 1158, offset 0x800718cc
+ // line 1203, offset 0x80071df0
 	/* begin block 1 */
-		// Start line: 1159
-		// Start offset: 0x800718CC
+		// Start line: 1204
+		// Start offset: 0x80071DF0
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $s2
 	// 		struct _G2AnimKeylist_Type *keylist; // $s1
 	/* end block 1 */
-	// End offset: 0x800718CC
-	// End Line: 1159
+	// End offset: 0x80071DF0
+	// End Line: 1204
 
 	/* begin block 2 */
-		// Start line: 2307
+		// Start line: 2348
 	/* end block 2 */
-	// End Line: 2308
+	// End Line: 2349
+
+/* File: C:\kain2\game\STATE.C */
 
 void G2EmulationInstanceSetAnimation
                (_Instance *instance,int CurrentSection,int NewAnim,int NewFrame,int Frames)
@@ -1871,11 +1973,13 @@ void G2EmulationInstanceSetAnimation
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationSetAnimation(struct __CharacterState *In /*$a0*/, int CurrentSection /*$a1*/, int NewAnim /*$a2*/, int NewFrame /*$a3*/, int Frames /*stack 16*/)
- // line 1172, offset 0x80071974
+ // line 1217, offset 0x80071e98
 	/* begin block 1 */
-		// Start line: 2356
+		// Start line: 2397
 	/* end block 1 */
-	// End Line: 2357
+	// End Line: 2398
+
+/* File: C:\kain2\game\STATE.C */
 
 void G2EmulationSetAnimation
                (__CharacterState *In,int CurrentSection,int NewAnim,int NewFrame,int Frames)
@@ -1893,20 +1997,22 @@ void G2EmulationSetAnimation
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInstanceSetMode(struct _Instance *instance /*$a0*/, int CurrentSection /*$a1*/, int Mode /*$s1*/)
- // line 1187, offset 0x800719ac
+ // line 1232, offset 0x80071ed0
 	/* begin block 1 */
-		// Start line: 1188
-		// Start offset: 0x800719AC
+		// Start line: 1233
+		// Start offset: 0x80071ED0
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $s0
 	/* end block 1 */
-	// End offset: 0x80071A18
-	// End Line: 1204
+	// End offset: 0x80071F3C
+	// End Line: 1249
 
 	/* begin block 2 */
-		// Start line: 2386
+		// Start line: 2427
 	/* end block 2 */
-	// End Line: 2387
+	// End Line: 2428
+
+/* File: C:\kain2\game\STATE.C */
 
 void G2EmulationInstanceSetMode(_Instance *instance,int CurrentSection,int Mode)
 
@@ -1934,11 +2040,13 @@ void G2EmulationInstanceSetMode(_Instance *instance,int CurrentSection,int Mode)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationSetMode(struct __CharacterState *In /*$a0*/, int CurrentSection /*$a1*/, int Mode /*$a2*/)
- // line 1208, offset 0x80071a2c
+ // line 1253, offset 0x80071f50
 	/* begin block 1 */
-		// Start line: 2436
+		// Start line: 2477
 	/* end block 1 */
-	// End Line: 2437
+	// End Line: 2478
+
+/* File: C:\kain2\game\STATE.C */
 
 void G2EmulationSetMode(__CharacterState *In,int CurrentSection,int Mode)
 
@@ -1952,30 +2060,32 @@ void G2EmulationSetMode(__CharacterState *In,int CurrentSection,int Mode)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInstanceSetAnimSpeed(struct _Instance *instance /*$a0*/, int CurrentSection /*$a1*/, int speed /*$a2*/)
- // line 1217, offset 0x80071a50
+ // line 1262, offset 0x80071f74
 	/* begin block 1 */
-		// Start line: 1219
-		// Start offset: 0x80071A50
+		// Start line: 1264
+		// Start offset: 0x80071F74
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $v0
 	/* end block 1 */
-	// End offset: 0x80071A50
-	// End Line: 1221
+	// End offset: 0x80071F74
+	// End Line: 1266
 
 	/* begin block 2 */
-		// Start line: 2454
+		// Start line: 2495
 	/* end block 2 */
-	// End Line: 2455
+	// End Line: 2496
 
 	/* begin block 3 */
-		// Start line: 2455
+		// Start line: 2496
 	/* end block 3 */
-	// End Line: 2456
+	// End Line: 2497
 
 	/* begin block 4 */
-		// Start line: 2457
+		// Start line: 2498
 	/* end block 4 */
-	// End Line: 2458
+	// End Line: 2499
+
+/* File: C:\kain2\game\STATE.C */
 
 void G2EmulationInstanceSetAnimSpeed(_Instance *instance,int CurrentSection,int speed)
 
@@ -1989,30 +2099,32 @@ void G2EmulationInstanceSetAnimSpeed(_Instance *instance,int CurrentSection,int 
 // decompiled code
 // original method signature: 
 // int /*$ra*/ G2EmulationInstanceQueryAnimation(struct _Instance *instance /*$a0*/, int CurrentSection /*$a1*/)
- // line 1227, offset 0x80071a6c
+ // line 1272, offset 0x80071f90
 	/* begin block 1 */
-		// Start line: 1230
-		// Start offset: 0x80071A6C
+		// Start line: 1275
+		// Start offset: 0x80071F90
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $v0
 	/* end block 1 */
-	// End offset: 0x80071A6C
-	// End Line: 1232
+	// End offset: 0x80071F90
+	// End Line: 1277
 
 	/* begin block 2 */
-		// Start line: 2474
+		// Start line: 2515
 	/* end block 2 */
-	// End Line: 2475
+	// End Line: 2516
 
 	/* begin block 3 */
-		// Start line: 2476
+		// Start line: 2517
 	/* end block 3 */
-	// End Line: 2477
+	// End Line: 2518
 
 	/* begin block 4 */
-		// Start line: 2478
+		// Start line: 2519
 	/* end block 4 */
-	// End Line: 2479
+	// End Line: 2520
+
+/* File: C:\kain2\game\STATE.C */
 
 int G2EmulationInstanceQueryAnimation(_Instance *instance,int CurrentSection)
 
@@ -2025,11 +2137,13 @@ int G2EmulationInstanceQueryAnimation(_Instance *instance,int CurrentSection)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ G2EmulationQueryAnimation(struct __CharacterState *In /*$a0*/, int CurrentSection /*$a1*/)
- // line 1238, offset 0x80071a8c
+ // line 1283, offset 0x80071fb0
 	/* begin block 1 */
-		// Start line: 2496
+		// Start line: 2537
 	/* end block 1 */
-	// End Line: 2497
+	// End Line: 2538
+
+/* File: C:\kain2\game\STATE.C */
 
 int G2EmulationQueryAnimation(__CharacterState *In,int CurrentSection)
 
@@ -2045,18 +2159,20 @@ int G2EmulationQueryAnimation(__CharacterState *In,int CurrentSection)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ G2EmulationInstanceQueryFrame(struct _Instance *instance /*$a0*/, int CurrentSection /*$a1*/)
- // line 1246, offset 0x80071ab0
+ // line 1291, offset 0x80071fd4
 	/* begin block 1 */
-		// Start line: 1247
-		// Start offset: 0x80071AB0
+		// Start line: 1292
+		// Start offset: 0x80071FD4
 	/* end block 1 */
-	// End offset: 0x80071AB0
-	// End Line: 1247
+	// End offset: 0x80071FD4
+	// End Line: 1292
 
 	/* begin block 2 */
-		// Start line: 2512
+		// Start line: 2553
 	/* end block 2 */
-	// End Line: 2513
+	// End Line: 2554
+
+/* File: C:\kain2\game\STATE.C */
 
 int G2EmulationInstanceQueryFrame(_Instance *instance,int CurrentSection)
 
@@ -2072,18 +2188,20 @@ int G2EmulationInstanceQueryFrame(_Instance *instance,int CurrentSection)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ G2EmulationInstanceQueryLastFrame(struct _Instance *instance /*$a0*/, int CurrentSection /*$a1*/)
- // line 1258, offset 0x80071ae4
+ // line 1303, offset 0x80072008
 	/* begin block 1 */
-		// Start line: 1259
-		// Start offset: 0x80071AE4
+		// Start line: 1304
+		// Start offset: 0x80072008
 	/* end block 1 */
-	// End offset: 0x80071AE4
-	// End Line: 1259
+	// End offset: 0x80072008
+	// End Line: 1304
 
 	/* begin block 2 */
-		// Start line: 2540
+		// Start line: 2581
 	/* end block 2 */
-	// End Line: 2541
+	// End Line: 2582
+
+/* File: C:\kain2\game\STATE.C */
 
 int G2EmulationInstanceQueryLastFrame(_Instance *instance,int CurrentSection)
 
@@ -2099,20 +2217,22 @@ int G2EmulationInstanceQueryLastFrame(_Instance *instance,int CurrentSection)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ G2EmulationInstanceQueryPassedFrame(struct _Instance *instance /*$s2*/, int CurrentSection /*$a1*/, int frame /*$s1*/)
- // line 1269, offset 0x80071b18
+ // line 1314, offset 0x8007203c
 	/* begin block 1 */
-		// Start line: 1270
-		// Start offset: 0x80071B18
+		// Start line: 1315
+		// Start offset: 0x8007203C
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $s0
 	/* end block 1 */
-	// End offset: 0x80071BA8
-	// End Line: 1284
+	// End offset: 0x800720CC
+	// End Line: 1329
 
 	/* begin block 2 */
-		// Start line: 2565
+		// Start line: 2606
 	/* end block 2 */
-	// End Line: 2566
+	// End Line: 2607
+
+/* File: C:\kain2\game\STATE.C */
 
 int G2EmulationInstanceQueryPassedFrame(_Instance *instance,int CurrentSection,int frame)
 
@@ -2142,11 +2262,13 @@ int G2EmulationInstanceQueryPassedFrame(_Instance *instance,int CurrentSection,i
 // decompiled code
 // original method signature: 
 // int /*$ra*/ G2EmulationQueryFrame(struct __CharacterState *In /*$a0*/, int CurrentSection /*$a1*/)
- // line 1288, offset 0x80071bc0
+ // line 1333, offset 0x800720e4
 	/* begin block 1 */
-		// Start line: 2611
+		// Start line: 2652
 	/* end block 1 */
-	// End Line: 2612
+	// End Line: 2653
+
+/* File: C:\kain2\game\STATE.C */
 
 int G2EmulationQueryFrame(__CharacterState *In,int CurrentSection)
 
@@ -2162,30 +2284,32 @@ int G2EmulationQueryFrame(__CharacterState *In,int CurrentSection)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ G2EmulationInstanceQueryMode(struct _Instance *instance /*$a0*/, int CurrentSection /*$a1*/)
- // line 1296, offset 0x80071be4
+ // line 1341, offset 0x80072108
 	/* begin block 1 */
-		// Start line: 1299
-		// Start offset: 0x80071BE4
+		// Start line: 1344
+		// Start offset: 0x80072108
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $v0
 	/* end block 1 */
-	// End offset: 0x80071C24
-	// End Line: 1311
+	// End offset: 0x80072148
+	// End Line: 1356
 
 	/* begin block 2 */
-		// Start line: 2627
+		// Start line: 2668
 	/* end block 2 */
-	// End Line: 2628
+	// End Line: 2669
 
 	/* begin block 3 */
-		// Start line: 2629
+		// Start line: 2670
 	/* end block 3 */
-	// End Line: 2630
+	// End Line: 2671
 
 	/* begin block 4 */
-		// Start line: 2631
+		// Start line: 2672
 	/* end block 4 */
-	// End Line: 2632
+	// End Line: 2673
+
+/* File: C:\kain2\game\STATE.C */
 
 int G2EmulationInstanceQueryMode(_Instance *instance,int CurrentSection)
 
@@ -2206,11 +2330,13 @@ int G2EmulationInstanceQueryMode(_Instance *instance,int CurrentSection)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ G2EmulationQueryMode(struct __CharacterState *In /*$a0*/, int CurrentSection /*$a1*/)
- // line 1315, offset 0x80071c2c
+ // line 1360, offset 0x80072150
 	/* begin block 1 */
-		// Start line: 2671
+		// Start line: 2712
 	/* end block 1 */
-	// End Line: 2672
+	// End Line: 2713
+
+/* File: C:\kain2\game\STATE.C */
 
 int G2EmulationQueryMode(__CharacterState *In,int CurrentSection)
 
@@ -2226,30 +2352,32 @@ int G2EmulationQueryMode(__CharacterState *In,int CurrentSection)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInstanceSetStartAndEndSegment(struct _Instance *instance /*$a0*/, int CurrentSection /*$a1*/, short Start /*$a2*/, short End /*$a3*/)
- // line 1323, offset 0x80071c50
+ // line 1368, offset 0x80072174
 	/* begin block 1 */
-		// Start line: 1326
-		// Start offset: 0x80071C50
+		// Start line: 1371
+		// Start offset: 0x80072174
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $a0
 	/* end block 1 */
-	// End offset: 0x80071C50
-	// End Line: 1328
+	// End offset: 0x80072174
+	// End Line: 1373
 
 	/* begin block 2 */
-		// Start line: 2687
+		// Start line: 2728
 	/* end block 2 */
-	// End Line: 2688
+	// End Line: 2729
 
 	/* begin block 3 */
-		// Start line: 2689
+		// Start line: 2730
 	/* end block 3 */
-	// End Line: 2690
+	// End Line: 2731
 
 	/* begin block 4 */
-		// Start line: 2691
+		// Start line: 2732
 	/* end block 4 */
-	// End Line: 2692
+	// End Line: 2733
+
+/* File: C:\kain2\game\STATE.C */
 
 void G2EmulationInstanceSetStartAndEndSegment
                (_Instance *instance,int CurrentSection,short Start,short End)
@@ -2268,11 +2396,13 @@ void G2EmulationInstanceSetStartAndEndSegment
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationSetStartAndEndSegment(struct __CharacterState *In /*$a0*/, int CurrentSection /*$a1*/, short Start /*$a2*/, short End /*$a3*/)
- // line 1334, offset 0x80071c7c
+ // line 1379, offset 0x800721a0
 	/* begin block 1 */
-		// Start line: 2709
+		// Start line: 2750
 	/* end block 1 */
-	// End Line: 2710
+	// End Line: 2751
+
+/* File: C:\kain2\game\STATE.C */
 
 void G2EmulationSetStartAndEndSegment(__CharacterState *In,int CurrentSection,short Start,short End)
 
@@ -2286,20 +2416,22 @@ void G2EmulationSetStartAndEndSegment(__CharacterState *In,int CurrentSection,sh
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInstanceSetTotalSections(struct _Instance *instance /*$s2*/, short Total /*$a1*/)
- // line 1342, offset 0x80071cac
+ // line 1387, offset 0x800721d0
 	/* begin block 1 */
-		// Start line: 1343
-		// Start offset: 0x80071CAC
+		// Start line: 1388
+		// Start offset: 0x800721D0
 		// Variables:
 	// 		struct _G2Anim_Type *anim; // $s0
 	/* end block 1 */
-	// End offset: 0x80071D04
-	// End Line: 1352
+	// End offset: 0x80072228
+	// End Line: 1397
 
 	/* begin block 2 */
-		// Start line: 2727
+		// Start line: 2768
 	/* end block 2 */
-	// End Line: 2728
+	// End Line: 2769
+
+/* File: C:\kain2\game\STATE.C */
 
 void G2EmulationInstanceSetTotalSections(_Instance *instance,short Total)
 
@@ -2322,11 +2454,13 @@ void G2EmulationInstanceSetTotalSections(_Instance *instance,short Total)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationSetTotalSections(struct __CharacterState *In /*$a0*/, short Total /*$a1*/)
- // line 1359, offset 0x80071d30
+ // line 1404, offset 0x80072254
 	/* begin block 1 */
-		// Start line: 2767
+		// Start line: 2808
 	/* end block 1 */
-	// End Line: 2768
+	// End Line: 2809
+
+/* File: C:\kain2\game\STATE.C */
 
 void G2EmulationSetTotalSections(__CharacterState *In,short Total)
 
@@ -2341,30 +2475,32 @@ void G2EmulationSetTotalSections(__CharacterState *In,short Total)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationInstanceInitSection(struct _Instance *instance /*$a0*/, int CurrentSection /*$a1*/, void *callback /*$a2*/, void *data /*$a3*/)
- // line 1369, offset 0x80071d60
+ // line 1414, offset 0x80072284
 	/* begin block 1 */
-		// Start line: 1372
-		// Start offset: 0x80071D60
+		// Start line: 1417
+		// Start offset: 0x80072284
 		// Variables:
 	// 		struct _G2AnimSection_Type *animSection; // $a0
 	/* end block 1 */
-	// End offset: 0x80071D60
-	// End Line: 1374
+	// End offset: 0x80072284
+	// End Line: 1419
 
 	/* begin block 2 */
-		// Start line: 2789
+		// Start line: 2830
 	/* end block 2 */
-	// End Line: 2790
+	// End Line: 2831
 
 	/* begin block 3 */
-		// Start line: 2791
+		// Start line: 2832
 	/* end block 3 */
-	// End Line: 2792
+	// End Line: 2833
 
 	/* begin block 4 */
-		// Start line: 2793
+		// Start line: 2834
 	/* end block 4 */
-	// End Line: 2794
+	// End Line: 2835
+
+/* File: C:\kain2\game\STATE.C */
 
 void G2EmulationInstanceInitSection
                (_Instance *instance,int CurrentSection,void *callback,void *data)
@@ -2383,11 +2519,13 @@ void G2EmulationInstanceInitSection
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2EmulationSetInterpController_Vector(struct _Instance *instance /*$a0*/, long segment /*$a1*/, long type /*$a2*/, struct _G2SVector3_Type *vec /*$a3*/, int Frames /*stack 16*/, int Data /*stack 20*/)
- // line 1395, offset 0x80071d84
+ // line 1440, offset 0x800722a8
 	/* begin block 1 */
-		// Start line: 2784
+		// Start line: 2874
 	/* end block 1 */
-	// End Line: 2785
+	// End Line: 2875
+
+/* File: C:\kain2\game\STATE.C */
 
 void G2EmulationSetInterpController_Vector
                (_Instance *instance,long segment,long type,_G2SVector3_Type *vec,int Frames,int Data
@@ -2404,12 +2542,91 @@ void G2EmulationSetInterpController_Vector
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ StateSwitchStateData(struct __CharacterState *In /*$s3*/, int CurrentSection /*$s2*/, TDRFuncPtr_StateSwitchStateData2NewProcess NewProcess /*$s5*/, int Data /*$s4*/)
- // line 1412, offset 0x80071e0c
+// void /*$ra*/ StateSwitchStateDataDefault(struct __CharacterState *In /*$s1*/, int CurrentSection /*$s0*/, TDRFuncPtr_StateSwitchStateDataDefault2NewProcess NewProcess /*$a2*/, int Data /*$a3*/)
+ // line 1456, offset 0x80072330
 	/* begin block 1 */
-		// Start line: 2880
+		// Start line: 1457
+		// Start offset: 0x80072330
+		// Variables:
+	// 		void (*process)(); // $s2
 	/* end block 1 */
-	// End Line: 2881
+	// End offset: 0x80072330
+	// End Line: 1457
+
+	/* begin block 2 */
+		// Start line: 2919
+	/* end block 2 */
+	// End Line: 2920
+
+/* File: C:\kain2\game\STATE.C */
+
+void StateSwitchStateDataDefault
+               (__CharacterState *In,int CurrentSection,
+               TDRFuncPtr_StateSwitchStateDataDefault2NewProcess NewProcess,int Data)
+
+{
+  _func_14 *p_Var1;
+  
+  p_Var1 = In->SectionList[CurrentSection].Process;
+  StateSwitchStateData
+            (In,CurrentSection,(TDRFuncPtr_StateSwitchStateData2NewProcess)NewProcess,Data);
+  (*p_Var1)(In,CurrentSection,0);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ StateSwitchStateCharacterDataDefault(struct __CharacterState *In /*$s1*/, TDRFuncPtr_StateSwitchStateCharacterDataDefault1NewProcess NewProcess /*$s2*/, int Data /*$s3*/)
+ // line 1465, offset 0x80072398
+	/* begin block 1 */
+		// Start line: 1466
+		// Start offset: 0x80072398
+		// Variables:
+	// 		int i; // $s0
+	/* end block 1 */
+	// End offset: 0x800723F4
+	// End Line: 1474
+
+	/* begin block 2 */
+		// Start line: 2940
+	/* end block 2 */
+	// End Line: 2941
+
+/* File: C:\kain2\game\STATE.C */
+
+void StateSwitchStateCharacterDataDefault
+               (__CharacterState *In,
+               TDRFuncPtr_StateSwitchStateCharacterDataDefault1NewProcess NewProcess,int Data)
+
+{
+  int CurrentSection;
+  
+  CurrentSection = 0;
+  if (0 < In->TotalSections) {
+    do {
+      StateSwitchStateDataDefault
+                (In,CurrentSection,(TDRFuncPtr_StateSwitchStateDataDefault2NewProcess)NewProcess,
+                 Data);
+      CurrentSection = CurrentSection + 1;
+    } while (CurrentSection < In->TotalSections);
+  }
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ StateSwitchStateData(struct __CharacterState *In /*$s3*/, int CurrentSection /*$s2*/, TDRFuncPtr_StateSwitchStateData2NewProcess NewProcess /*$s5*/, int Data /*$s4*/)
+ // line 1478, offset 0x80072410
+	/* begin block 1 */
+		// Start line: 2967
+	/* end block 1 */
+	// End Line: 2968
+
+/* File: C:\kain2\game\STATE.C */
 
 void StateSwitchStateData
                (__CharacterState *In,int CurrentSection,
@@ -2420,12 +2637,12 @@ void StateSwitchStateData
   
   In_00 = &In->SectionList[CurrentSection].Event;
   PurgeMessageQueue(In_00);
-  EnMessageQueueData(In_00,0x100001,Data);
+  EnMessageQueueData(In_00,(int)&DAT_00100001,Data);
   *(TDRFuncPtr_StateSwitchStateData2NewProcess *)&In->SectionList[CurrentSection].Process =
        NewProcess;
   (*NewProcess)(In,CurrentSection,0);
-  EnMessageQueueData(In_00,0x100004,0);
-  EnMessageQueueData(In_00,0x100004,0);
+  EnMessageQueueData(In_00,(int)&DAT_00100004,0);
+  EnMessageQueueData(In_00,(int)&DAT_00100004,0);
   return;
 }
 
@@ -2434,20 +2651,22 @@ void StateSwitchStateData
 // decompiled code
 // original method signature: 
 // void /*$ra*/ StateSwitchStateCharacterData(struct __CharacterState *In /*$s1*/, TDRFuncPtr_StateSwitchStateCharacterData1NewProcess NewProcess /*$s2*/, int Data /*$s3*/)
- // line 1426, offset 0x80071ed8
+ // line 1492, offset 0x800724dc
 	/* begin block 1 */
-		// Start line: 1427
-		// Start offset: 0x80071ED8
+		// Start line: 1493
+		// Start offset: 0x800724DC
 		// Variables:
 	// 		int i; // $s0
 	/* end block 1 */
-	// End offset: 0x80071F34
-	// End Line: 1435
+	// End offset: 0x80072538
+	// End Line: 1501
 
 	/* begin block 2 */
-		// Start line: 2912
+		// Start line: 2999
 	/* end block 2 */
-	// End Line: 2913
+	// End Line: 3000
+
+/* File: C:\kain2\game\STATE.C */
 
 void StateSwitchStateCharacterData
                (__CharacterState *In,TDRFuncPtr_StateSwitchStateCharacterData1NewProcess NewProcess,
@@ -2472,10 +2691,10 @@ void StateSwitchStateCharacterData
 // decompiled code
 // original method signature: 
 // void /*$ra*/ StateGovernState(struct __CharacterState *In /*$s7*/, int Frames /*$fp*/)
- // line 1439, offset 0x80071f50
+ // line 1505, offset 0x80072554
 	/* begin block 1 */
-		// Start line: 1440
-		// Start offset: 0x80071F50
+		// Start line: 1506
+		// Start offset: 0x80072554
 		// Variables:
 	// 		struct __State *pSectionA; // $v0
 	// 		struct __State *pSectionB; // $v1
@@ -2485,13 +2704,15 @@ void StateSwitchStateCharacterData
 	// 		int keylistID; // $s2
 	// 		int i; // $s4
 	/* end block 1 */
-	// End offset: 0x800720A0
-	// End Line: 1489
+	// End offset: 0x800726A4
+	// End Line: 1555
 
 	/* begin block 2 */
-		// Start line: 2939
+		// Start line: 3026
 	/* end block 2 */
-	// End Line: 2940
+	// End Line: 3027
+
+/* File: C:\kain2\game\STATE.C */
 
 void StateGovernState(__CharacterState *In,int Frames)
 

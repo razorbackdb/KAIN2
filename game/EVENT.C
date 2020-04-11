@@ -4,50 +4,117 @@
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ EVENT_ResetAllOneTimeVariables()
- // line 133, offset 0x800619e4
+// void /*$ra*/ EVENT_UpdateResetSignalArray(struct Level *oldLevel /*$a0*/, struct Level *newLevel /*$a1*/, long sizeOfLevel /*$a2*/)
+ // line 149, offset 0x80060c74
 	/* begin block 1 */
-		// Start line: 135
-		// Start offset: 0x800619E4
+		// Start line: 151
+		// Start offset: 0x80060C74
 		// Variables:
-	// 		int i; // $a0
+	// 		long offset; // $a1
+	// 		long i; // $t0
 	/* end block 1 */
-	// End offset: 0x80061A24
-	// End Line: 142
+	// End offset: 0x80060CE0
+	// End Line: 170
 
 	/* begin block 2 */
-		// Start line: 266
+		// Start line: 298
 	/* end block 2 */
-	// End Line: 267
+	// End Line: 299
 
 	/* begin block 3 */
-		// Start line: 267
+		// Start line: 299
 	/* end block 3 */
-	// End Line: 268
+	// End Line: 300
 
 	/* begin block 4 */
-		// Start line: 270
+		// Start line: 301
 	/* end block 4 */
-	// End Line: 271
+	// End Line: 302
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\EVENT.C */
+
+void EVENT_UpdateResetSignalArray(Level *oldLevel,Level *newLevel,long sizeOfLevel)
+
+{
+  Level *pLVar1;
+  Level *pLVar2;
+  Level **ppLVar3;
+  int iVar4;
+  
+  if (NumSignalsToReset != 0) {
+    iVar4 = 0;
+    ppLVar3 = (Level **)&ResetSignalArray;
+    do {
+      if (0 < (int)ppLVar3[1]) {
+        pLVar2 = *ppLVar3;
+        if ((oldLevel <= pLVar2) && (pLVar2 <= (Level *)((int)&oldLevel->terrain + sizeOfLevel))) {
+          pLVar1 = (Level *)0x0;
+          if (pLVar2 != (Level *)0x0) {
+            pLVar1 = (Level *)((int)pLVar2 + (int)((int)newLevel - (int)oldLevel));
+          }
+          *ppLVar3 = pLVar1;
+        }
+      }
+      iVar4 = iVar4 + 1;
+      ppLVar3 = ppLVar3 + 2;
+    } while (iVar4 < 0x10);
+  }
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ EVENT_ResetAllOneTimeVariables()
+ // line 173, offset 0x80060ce8
+	/* begin block 1 */
+		// Start line: 175
+		// Start offset: 0x80060CE8
+		// Variables:
+	// 		int i; // $a2
+	/* end block 1 */
+	// End offset: 0x80060D4C
+	// End Line: 195
+
+	/* begin block 2 */
+		// Start line: 353
+	/* end block 2 */
+	// End Line: 354
+
+	/* begin block 3 */
+		// Start line: 354
+	/* end block 3 */
+	// End Line: 355
+
+	/* begin block 4 */
+		// Start line: 357
+	/* end block 4 */
+	// End Line: 358
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_ResetAllOneTimeVariables(void)
 
 {
   int iVar1;
-  _MultiSignal **pp_Var2;
+  int *piVar2;
+  int iVar3;
   
-  iVar1 = 0;
-  if (0 < NumSignalsToReset) {
-    pp_Var2 = &ResetSignalArray16;
+  iVar3 = 0;
+  if (NumSignalsToReset != 0) {
+    piVar2 = &ResetSignalArray;
     do {
-      iVar1 = iVar1 + 1;
-      (*pp_Var2)->flags = (*pp_Var2)->flags & 0xfffe;
-      pp_Var2 = pp_Var2 + 1;
-    } while (iVar1 < NumSignalsToReset);
+      iVar1 = piVar2[1] + -1;
+      if ((0 < piVar2[1]) && (piVar2[1] = iVar1, iVar1 == 0)) {
+        NumSignalsToReset = NumSignalsToReset + -1;
+        *(ushort *)(*piVar2 + 6) = *(ushort *)(*piVar2 + 6) & 0xfffe;
+        piVar2[1] = 0;
+      }
+      iVar3 = iVar3 + 1;
+      piVar2 = piVar2 + 2;
+    } while (iVar3 < 0x10);
   }
-  NumSignalsToReset = 0;
   return;
 }
 
@@ -56,22 +123,50 @@ void EVENT_ResetAllOneTimeVariables(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_AddSignalToReset(struct _MultiSignal *mSignal /*$a0*/)
- // line 146, offset 0x80061a30
+ // line 197, offset 0x80060d54
 	/* begin block 1 */
-		// Start line: 296
+		// Start line: 199
+		// Start offset: 0x80060D54
+		// Variables:
+	// 		int i; // $a1
 	/* end block 1 */
-	// End Line: 297
+	// End offset: 0x80060DAC
+	// End Line: 222
 
 	/* begin block 2 */
-		// Start line: 297
+		// Start line: 413
 	/* end block 2 */
-	// End Line: 298
+	// End Line: 414
+
+	/* begin block 3 */
+		// Start line: 414
+	/* end block 3 */
+	// End Line: 415
+
+	/* begin block 4 */
+		// Start line: 416
+	/* end block 4 */
+	// End Line: 417
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_AddSignalToReset(_MultiSignal *mSignal)
 
 {
+  _MultiSignal **pp_Var1;
+  int iVar2;
+  
+  iVar2 = 0;
   if (NumSignalsToReset < 0x10) {
-    (&ResetSignalArray16)[NumSignalsToReset] = mSignal;
+    pp_Var1 = (_MultiSignal **)&ResetSignalArray;
+    while (iVar2 = iVar2 + 1, pp_Var1[1] != (_MultiSignal *)0x0) {
+      pp_Var1 = pp_Var1 + 2;
+      if (0xf < iVar2) {
+        return;
+      }
+    }
+    pp_Var1[1] = (_MultiSignal *)0x1;
+    *pp_Var1 = mSignal;
     NumSignalsToReset = NumSignalsToReset + 1;
   }
   return;
@@ -81,43 +176,65 @@ void EVENT_AddSignalToReset(_MultiSignal *mSignal)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ HINT_StartHint(short hintNumber /*$a0*/)
- // line 173, offset 0x80061a64
+// void /*$ra*/ HINT_ResetHint()
+ // line 244, offset 0x80060db4
 	/* begin block 1 */
-		// Start line: 175
-		// Start offset: 0x80061A64
+		// Start line: 516
+	/* end block 1 */
+	// End Line: 517
+
+/* File: C:\kain2\game\EVENT.C */
+
+void HINT_ResetHint(void)
+
+{
+  memset();
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ HINT_StartHint(short hintNumber /*$a0*/)
+ // line 249, offset 0x80060de0
+	/* begin block 1 */
+		// Start line: 251
+		// Start offset: 0x80060DE0
 		// Variables:
 	// 		int h; // $a1
 	/* end block 1 */
-	// End offset: 0x80061A8C
-	// End Line: 190
+	// End offset: 0x80060E08
+	// End Line: 266
 
 	/* begin block 2 */
-		// Start line: 350
+		// Start line: 527
 	/* end block 2 */
-	// End Line: 351
+	// End Line: 528
 
 	/* begin block 3 */
-		// Start line: 351
+		// Start line: 528
 	/* end block 3 */
-	// End Line: 352
+	// End Line: 529
 
 	/* begin block 4 */
-		// Start line: 358
+		// Start line: 535
 	/* end block 4 */
-	// End Line: 359
+	// End Line: 536
+
+/* File: C:\kain2\game\EVENT.C */
 
 void HINT_StartHint(short hintNumber)
 
 {
-  gHintSystem.stringNumber = hintNumber + 0x36;
-  if (0x34 < (ushort)hintNumber) {
-    gHintSystem.stringNumber = 0x6a;
+  gHintSystem.stringNumber = hintNumber + 0x37;
+  if (0x35 < (ushort)hintNumber) {
+    gHintSystem.stringNumber = 0x6c;
   }
   gHintSystem.flags = 3;
   gHintSystem.hintNumber = hintNumber;
   gHintSystem.fadeTimer = 0x1e000;
-  gHintSystem.spawningUnitID = (gameTrackerX.playerInstance)->currentStreamUnitID;
+  gHintSystem.spawningUnitID = *(long *)(DAT_800d20f8 + 0x38);
   return;
 }
 
@@ -126,29 +243,35 @@ void HINT_StartHint(short hintNumber)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HINT_StopHint()
- // line 196, offset 0x80061ab0
+ // line 272, offset 0x80060e2c
 	/* begin block 1 */
-		// Start line: 411
+		// Start line: 588
 	/* end block 1 */
-	// End Line: 412
+	// End Line: 589
 
 	/* begin block 2 */
-		// Start line: 415
+		// Start line: 593
 	/* end block 2 */
-	// End Line: 416
+	// End Line: 594
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\EVENT.C */
 
 void HINT_StopHint(void)
 
 {
-  if (((gHintSystem.flags & 1U) != 0) && ((gHintSystem.flags & 4U) == 0)) {
-    if ((gHintSystem.flags & 2U) == 0) {
-      gHintSystem.flags = gHintSystem.flags | 4;
+  uint uVar1;
+  
+  uVar1 = gHintSystem._0_4_;
+  if ((gHintSystem._0_4_ & 1) == 0) {
+    return;
+  }
+  if ((gHintSystem._0_4_ & 6) == 0) {
+    gHintSystem._0_4_ = gHintSystem._0_4_ | 4;
+    if ((uVar1 & 2) == 0) {
       gHintSystem.fadeTimer = 0x1e000;
       return;
     }
-    gHintSystem.flags = gHintSystem.flags & 0xfffdU | 4;
+    gHintSystem._0_4_ = uVar1 & 0xfffffffd | 4;
     gHintSystem.fadeTimer = 0x1e000 - gHintSystem.fadeTimer;
   }
   return;
@@ -159,11 +282,13 @@ void HINT_StopHint(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HINT_KillSpecificHint(short hintNumber /*$a0*/)
- // line 219, offset 0x80061b0c
+ // line 297, offset 0x80060e94
 	/* begin block 1 */
-		// Start line: 458
+		// Start line: 639
 	/* end block 1 */
-	// End Line: 459
+	// End Line: 640
+
+/* File: C:\kain2\game\EVENT.C */
 
 void HINT_KillSpecificHint(short hintNumber)
 
@@ -179,18 +304,18 @@ void HINT_KillSpecificHint(short hintNumber)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ HINT_GetCurrentHint()
- // line 227, offset 0x80061b3c
+ // line 305, offset 0x80060ec4
 	/* begin block 1 */
-		// Start line: 474
+		// Start line: 655
 	/* end block 1 */
-	// End Line: 475
+	// End Line: 656
 
 	/* begin block 2 */
-		// Start line: 475
+		// Start line: 656
 	/* end block 2 */
-	// End Line: 476
+	// End Line: 657
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\EVENT.C */
 
 long HINT_GetCurrentHint(void)
 
@@ -209,94 +334,123 @@ long HINT_GetCurrentHint(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_ProcessTimers()
- // line 239, offset 0x80061b5c
+ // line 317, offset 0x80060ee4
 	/* begin block 1 */
-		// Start line: 240
-		// Start offset: 0x80061B5C
+		// Start line: 318
+		// Start offset: 0x80060EE4
 		// Variables:
-	// 		int i; // $s1
+	// 		int i; // $s2
 	// 		struct EventTimer *eventTimer; // $s0
-
-		/* begin block 1.1 */
-			// Start line: 297
-			// Start offset: 0x80061CCC
-			// Variables:
-		// 		char string[128]; // stack offset -144
-		// 		long y; // $s0
-		/* end block 1.1 */
-		// End offset: 0x80061E4C
-		// End Line: 357
 	/* end block 1 */
-	// End offset: 0x80061E4C
-	// End Line: 358
+	// End offset: 0x80060FEC
+	// End Line: 371
 
 	/* begin block 2 */
-		// Start line: 498
+		// Start line: 679
 	/* end block 2 */
-	// End Line: 499
+	// End Line: 680
 
 	/* begin block 3 */
-		// Start line: 503
+		// Start line: 689
 	/* end block 3 */
-	// End Line: 504
+	// End Line: 690
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_ProcessTimers(void)
 
 {
-  bool bVar1;
-  long y;
+  long lVar1;
   uint uVar2;
   int iVar3;
   EventTimer *timer;
-  int len;
   int iVar4;
-  char acStack144 [128];
+  int iVar5;
   
-  if ((gameTrackerX.debugFlags2 & 0x100U) != 0) {
-    FONT_Print("Number of Active Event Timers %d\n");
-  }
   if (numActiveEventTimers != 0) {
-    len = 0;
+    iVar5 = 0;
     iVar4 = 0;
     do {
-      timer = (EventTimer *)((int)&eventTimerArray.flags + iVar4);
-      if ((timer->flags & 1U) != 0) {
-        if ((gameTrackerX.debugFlags2 & 0x100U) != 0) {
-          FONT_Print("Event timer %d unit %d time left=%d\n");
-        }
-        uVar2 = timer->flags;
-        if ((uint)((int)uVar2 >> 1) < gameTrackerX.idleTime) {
+      timer = (EventTimer *)((int)&eventTimerArray + iVar4);
+      uVar2 = timer->flags;
+      if ((uVar2 & 1) != 0) {
+        if ((uint)((int)uVar2 >> 1) < DAT_800d2314) {
           timer->flags = uVar2 & 1;
         }
         else {
-          timer->flags = uVar2 & 1 | (((int)uVar2 >> 1) - gameTrackerX.idleTime) * 2;
+          timer->flags = uVar2 & 1 | (((int)uVar2 >> 1) - DAT_800d2314) * 2;
         }
         if (timer->flags >> 1 < 1) {
-          iVar3 = *(int *)((int)&eventTimerArray.event + iVar4);
-          currentEventInstance = *(Event **)((int)&eventTimerArray.time + iVar4);
+          iVar3 = *(int *)((int)&DAT_800d2ec8 + iVar4);
+          currentEventInstance = *(Event **)((int)&DAT_800d2ec4 + iVar4);
           timer->flags = timer->flags & 1;
           *(ushort *)(iVar3 + 2) = *(ushort *)(iVar3 + 2) & 0xfffe;
           EVENT_RemoveTimer(timer);
-          CurrentPuzzleLevel = *(Level **)((int)&eventTimerArray.scriptPos + iVar4);
-          EventCurrentEventIndex = *(long *)((int)&eventTimerArray.level + iVar4);
+          CurrentPuzzleLevel = *(undefined4 *)((int)&DAT_800d2ed0 + iVar4);
+          EventCurrentEventIndex = *(long *)((int)&DAT_800d2ed4 + iVar4);
           EventAbortLine = 0;
-          y = EVENT_DoAction(*(Event **)((int)&eventTimerArray.time + iVar4),
-                             *(ScriptPCode **)((int)&eventTimerArray.event + iVar4),
-                             *(short **)((int)&eventTimerArray.actionScript + iVar4));
-          if ((y != 0) && (EventCurrentEventIndex != -1)) {
-            EVENT_Process(*(Event **)((int)&eventTimerArray.time + iVar4),EventCurrentEventIndex);
+          lVar1 = EVENT_DoAction(*(Event **)((int)&DAT_800d2ec4 + iVar4),
+                                 *(ScriptPCode **)((int)&DAT_800d2ec8 + iVar4),
+                                 *(short **)((int)&DAT_800d2ecc + iVar4));
+          if ((lVar1 != 0) && (EventCurrentEventIndex != -1)) {
+            EVENT_Process(*(Event **)((int)&DAT_800d2ec4 + iVar4),EventCurrentEventIndex);
           }
         }
       }
-      len = len + 1;
+      iVar5 = iVar5 + 1;
       iVar4 = iVar4 + 0x18;
-    } while (len < 0x10);
+    } while (iVar5 < 0x18);
   }
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ EVENT_ProcessHints()
+ // line 372, offset 0x80061004
+	/* begin block 1 */
+		// Start line: 373
+		// Start offset: 0x80061004
+
+		/* begin block 1.1 */
+			// Start line: 378
+			// Start offset: 0x8006101C
+			// Variables:
+		// 		char string[128]; // stack offset -136
+		// 		long y; // $s0
+		/* end block 1.1 */
+		// End offset: 0x800611B8
+		// End Line: 445
+	/* end block 1 */
+	// End offset: 0x800611B8
+	// End Line: 446
+
+	/* begin block 2 */
+		// Start line: 842
+	/* end block 2 */
+	// End Line: 843
+
+	/* begin block 3 */
+		// Start line: 845
+	/* end block 3 */
+	// End Line: 846
+
+/* File: C:\kain2\game\EVENT.C */
+
+void EVENT_ProcessHints(void)
+
+{
+  bool bVar1;
+  char *pcVar2;
+  int len;
+  long y;
+  char acStack136 [128];
+  
   if ((gHintSystem.flags & 1U) != 0) {
-    localstr_get((int)gHintSystem.stringNumber);
-    sprintf(acStack144,"%s\n");
+    pcVar2 = localstr_get((int)gHintSystem.stringNumber);
+    sprintf(acStack136,(char *)&PTR_LAB_000a7324_1_800d0794,pcVar2);
     if ((gHintSystem.flags & 2U) == 0) {
       y = 200;
       if ((gHintSystem.flags & 4U) != 0) {
@@ -306,13 +460,13 @@ void EVENT_ProcessTimers(void)
     else {
       y = (gHintSystem.fadeTimer * 0x34) / 0x1e000 + 200;
     }
-    FONT_FontPrintCentered(acStack144,y);
-    FONT_FontPrintCentered("$\n",y);
-    len = FONT_GetStringWidth(acStack144);
+    FONT_FontPrintCentered(acStack136,y);
+    FONT_FontPrintCentered(&DAT_800d0798,y);
+    len = FONT_GetStringWidth(acStack136);
     DisplayHintBox(len,y);
     if ((gHintSystem.fadeTimer != 0) &&
-       (bVar1 = (uint)gHintSystem.fadeTimer <= gameTrackerX.idleTime,
-       gHintSystem.fadeTimer = gHintSystem.fadeTimer - gameTrackerX.idleTime, bVar1)) {
+       (bVar1 = (uint)gHintSystem.fadeTimer <= DAT_800d2314,
+       gHintSystem.fadeTimer = gHintSystem.fadeTimer - DAT_800d2314, bVar1)) {
       gHintSystem.fadeTimer = 0;
       if ((gHintSystem.flags & 2U) == 0) {
         if ((gHintSystem.flags & 4U) != 0) {
@@ -325,7 +479,10 @@ void EVENT_ProcessTimers(void)
         gHintSystem.flags = gHintSystem.flags & 0xfffd;
       }
     }
-    if (gHintSystem.spawningUnitID != (gameTrackerX.playerInstance)->currentStreamUnitID) {
+    if (gHintSystem.spawningUnitID != *(int *)(DAT_800d20f8 + 0x38)) {
+      HINT_StopHint();
+    }
+    if ((DAT_800d220c & 0x10) != 0) {
       HINT_StopHint();
     }
   }
@@ -337,36 +494,36 @@ void EVENT_ProcessTimers(void)
 // decompiled code
 // original method signature: 
 // struct EventTimer * /*$ra*/ EVENT_GetNextTimer()
- // line 360, offset 0x80061e64
+ // line 448, offset 0x800611c8
 	/* begin block 1 */
-		// Start line: 361
-		// Start offset: 0x80061E64
+		// Start line: 449
+		// Start offset: 0x800611C8
 		// Variables:
 	// 		int i; // $a0
 
 		/* begin block 1.1 */
-			// Start line: 366
-			// Start offset: 0x80061E78
+			// Start line: 454
+			// Start offset: 0x800611DC
 			// Variables:
 		// 		struct EventTimer *eventTimer; // $v1
 		/* end block 1.1 */
-		// End offset: 0x80061EC8
-		// End Line: 378
+		// End offset: 0x8006122C
+		// End Line: 466
 	/* end block 1 */
-	// End offset: 0x80061ECC
-	// End Line: 380
+	// End offset: 0x80061230
+	// End Line: 468
 
 	/* begin block 2 */
-		// Start line: 789
+		// Start line: 999
 	/* end block 2 */
-	// End Line: 790
+	// End Line: 1000
 
 	/* begin block 3 */
-		// Start line: 792
+		// Start line: 1002
 	/* end block 3 */
-	// End Line: 793
+	// End Line: 1003
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\EVENT.C */
 
 EventTimer * EVENT_GetNextTimer(void)
 
@@ -374,9 +531,9 @@ EventTimer * EVENT_GetNextTimer(void)
   EventTimer *pEVar1;
   int iVar2;
   
-  if (numActiveEventTimers < 0x10) {
-    pEVar1 = &eventTimerArray;
-    iVar2 = 0x10;
+  if (numActiveEventTimers < 0x18) {
+    pEVar1 = (EventTimer *)&eventTimerArray;
+    iVar2 = 0x18;
     do {
       iVar2 = iVar2 + -1;
       if ((pEVar1->flags & 1U) == 0) {
@@ -395,16 +552,18 @@ EventTimer * EVENT_GetNextTimer(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_RemoveTimer(struct EventTimer *timer /*$a0*/)
- // line 382, offset 0x80061ed4
+ // line 470, offset 0x80061238
 	/* begin block 1 */
-		// Start line: 842
+		// Start line: 1052
 	/* end block 1 */
-	// End Line: 843
+	// End Line: 1053
 
 	/* begin block 2 */
-		// Start line: 843
+		// Start line: 1053
 	/* end block 2 */
-	// End Line: 844
+	// End Line: 1054
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_RemoveTimer(EventTimer *timer)
 
@@ -421,19 +580,19 @@ void EVENT_RemoveTimer(EventTimer *timer)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_InitTimers()
- // line 392, offset 0x80061f04
+ // line 480, offset 0x80061268
 	/* begin block 1 */
-		// Start line: 862
+		// Start line: 1072
 	/* end block 1 */
-	// End Line: 863
+	// End Line: 1073
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_InitTimers(void)
 
 {
   numActiveEventTimers = 0;
-  memset(&eventTimerArray,0,0x180);
+  memset();
   return;
 }
 
@@ -442,35 +601,32 @@ void EVENT_InitTimers(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_InitTerrainMovement()
- // line 398, offset 0x80061f34
+ // line 486, offset 0x80061298
 	/* begin block 1 */
-		// Start line: 399
-		// Start offset: 0x80061F34
+		// Start line: 487
+		// Start offset: 0x80061298
 		// Variables:
 	// 		long i; // $s1
 	/* end block 1 */
-	// End offset: 0x80061F70
-	// End Line: 406
+	// End offset: 0x800612D4
+	// End Line: 494
 
 	/* begin block 2 */
-		// Start line: 876
+		// Start line: 1086
 	/* end block 2 */
-	// End Line: 877
+	// End Line: 1087
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_InitTerrainMovement(void)
 
 {
-  WaterLevelProcess *__s;
   int iVar1;
   
   iVar1 = 0;
-  __s = &WaterLevelArray;
   do {
-    memset(__s,0x1c,0);
+    memset();
     iVar1 = iVar1 + 1;
-    __s = __s + 1;
   } while (iVar1 < 5);
   WaterInUse = 0;
   return;
@@ -481,19 +637,22 @@ void EVENT_InitTerrainMovement(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_Init()
- // line 409, offset 0x80061f88
+ // line 497, offset 0x800612ec
 	/* begin block 1 */
-		// Start line: 907
+		// Start line: 1117
 	/* end block 1 */
-	// End Line: 908
+	// End Line: 1118
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_Init(void)
 
 {
   EVENT_InitTerrainMovement();
   EVENT_InitTimers();
+  HINT_ResetHint();
+  WaitingForVoiceNumber = -1;
+  WaitingToLoadSound = 0x96000;
   return;
 }
 
@@ -502,32 +661,32 @@ void EVENT_Init(void)
 // decompiled code
 // original method signature: 
 // struct WaterLevelProcess * /*$ra*/ EVENT_GetNextTerrainMove()
- // line 415, offset 0x80061fb0
+ // line 506, offset 0x8006132c
 	/* begin block 1 */
-		// Start line: 417
-		// Start offset: 0x80061FB0
+		// Start line: 508
+		// Start offset: 0x8006132C
 		// Variables:
 	// 		int i; // $a0
 	/* end block 1 */
-	// End offset: 0x80061FE4
-	// End Line: 431
+	// End offset: 0x80061360
+	// End Line: 522
 
 	/* begin block 2 */
-		// Start line: 919
+		// Start line: 1136
 	/* end block 2 */
-	// End Line: 920
+	// End Line: 1137
 
 	/* begin block 3 */
-		// Start line: 920
+		// Start line: 1137
 	/* end block 3 */
-	// End Line: 921
+	// End Line: 1138
 
 	/* begin block 4 */
-		// Start line: 923
+		// Start line: 1140
 	/* end block 4 */
-	// End Line: 924
+	// End Line: 1141
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\EVENT.C */
 
 WaterLevelProcess * EVENT_GetNextTerrainMove(void)
 
@@ -536,7 +695,7 @@ WaterLevelProcess * EVENT_GetNextTerrainMove(void)
   int iVar2;
   
   iVar2 = 0;
-  pWVar1 = &WaterLevelArray;
+  pWVar1 = (WaterLevelProcess *)&WaterLevelArray;
   do {
     iVar2 = iVar2 + 1;
     if ((pWVar1->flags & 1U) == 0) {
@@ -552,42 +711,42 @@ WaterLevelProcess * EVENT_GetNextTerrainMove(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_ProcessMovingWater()
- // line 450, offset 0x80061fec
+ // line 541, offset 0x80061368
 	/* begin block 1 */
-		// Start line: 452
-		// Start offset: 0x80061FEC
+		// Start line: 543
+		// Start offset: 0x80061368
 		// Variables:
 	// 		long i; // $a3
 	// 		long inUse; // $t0
 
 		/* begin block 1.1 */
-			// Start line: 457
-			// Start offset: 0x80061FFC
+			// Start line: 548
+			// Start offset: 0x80061378
 			// Variables:
 		// 		struct WaterLevelProcess *curWater; // $a2
 		/* end block 1.1 */
-		// End offset: 0x80062110
-		// End Line: 486
+		// End offset: 0x8006148C
+		// End Line: 577
 	/* end block 1 */
-	// End offset: 0x8006211C
-	// End Line: 492
+	// End offset: 0x80061498
+	// End Line: 583
 
 	/* begin block 2 */
-		// Start line: 896
+		// Start line: 1078
 	/* end block 2 */
-	// End Line: 897
+	// End Line: 1079
 
 	/* begin block 3 */
-		// Start line: 976
+		// Start line: 1193
 	/* end block 3 */
-	// End Line: 977
+	// End Line: 1194
 
 	/* begin block 4 */
-		// Start line: 979
+		// Start line: 1196
 	/* end block 4 */
-	// End Line: 980
+	// End Line: 1197
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_ProcessMovingWater(void)
 
@@ -595,39 +754,39 @@ void EVENT_ProcessMovingWater(void)
   short sVar1;
   bool bVar2;
   int iVar3;
-  long *plVar4;
-  WaterLevelProcess *pWVar5;
+  int *piVar4;
+  uint *puVar5;
   int iVar6;
   
   bVar2 = false;
   if (WaterInUse != 0) {
-    pWVar5 = &WaterLevelArray;
+    puVar5 = &WaterLevelArray;
     iVar6 = 5;
-    plVar4 = &WaterLevelArray.maxSteps;
+    piVar4 = &DAT_800d2e44;
     do {
-      if ((pWVar5->flags & 1U) != 0) {
-        iVar3 = plVar4[1] + gameTrackerX.idleTime;
-        plVar4[1] = iVar3;
+      if ((*puVar5 & 1) != 0) {
+        iVar3 = piVar4[1] + DAT_800d2314;
+        piVar4[1] = iVar3;
         bVar2 = true;
-        if (*plVar4 < iVar3) {
-          plVar4[1] = *plVar4;
+        if (*piVar4 < iVar3) {
+          piVar4[1] = *piVar4;
         }
-        iVar3 = (((int)*(short *)((int)plVar4 + -2) - (int)*(short *)(plVar4 + -1)) *
-                (plVar4[1] >> 0xc)) / (*plVar4 >> 0xc);
+        iVar3 = (((int)*(short *)((int)piVar4 + -2) - (int)*(short *)(piVar4 + -1)) *
+                (piVar4[1] >> 0xc)) / (*piVar4 >> 0xc);
         sVar1 = (short)iVar3;
-        *(short *)(plVar4[-4] + 0x10) = *(short *)((int)plVar4 + -6) + sVar1;
-        *(short *)(plVar4[-4] + 0x18) = *(short *)(plVar4 + -1) + sVar1;
-        if ((pWVar5->flags & 2U) != 0) {
-          *(int *)(*(int *)(plVar4[-3] + 8) + 0x38) = *(short *)(plVar4 + -2) + iVar3;
-          ***(ushort ***)(plVar4[-3] + 8) = ***(ushort ***)(plVar4[-3] + 8) | 1;
+        *(short *)(piVar4[-4] + 0x10) = *(short *)((int)piVar4 + -6) + sVar1;
+        *(short *)(piVar4[-4] + 0x18) = *(short *)(piVar4 + -1) + sVar1;
+        if ((*puVar5 & 2) != 0) {
+          *(int *)(*(int *)(piVar4[-3] + 8) + 0x38) = *(short *)(piVar4 + -2) + iVar3;
+          ***(ushort ***)(piVar4[-3] + 8) = ***(ushort ***)(piVar4[-3] + 8) | 1;
         }
-        if (plVar4[1] == *plVar4) {
-          pWVar5->flags = 0;
+        if (piVar4[1] == *piVar4) {
+          *puVar5 = 0;
         }
       }
       iVar6 = iVar6 + -1;
-      plVar4 = plVar4 + 7;
-      pWVar5 = pWVar5 + 1;
+      piVar4 = piVar4 + 7;
+      puVar5 = puVar5 + 7;
     } while (0 < iVar6);
   }
   if (!bVar2) {
@@ -641,13 +800,13 @@ void EVENT_ProcessMovingWater(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_DoProcess()
- // line 494, offset 0x80062124
+ // line 585, offset 0x800614a0
 	/* begin block 1 */
-		// Start line: 1087
+		// Start line: 1304
 	/* end block 1 */
-	// End Line: 1088
+	// End Line: 1305
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_DoProcess(void)
 
@@ -661,111 +820,127 @@ void EVENT_DoProcess(void)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ EVENT_BSPProcess(struct Level *level /*$a0*/)
- // line 500, offset 0x8006214c
+// void /*$ra*/ EVENT_BSPProcess(struct _StreamUnit *streamUnit /*$fp*/)
+ // line 591, offset 0x800614c8
 	/* begin block 1 */
-		// Start line: 502
-		// Start offset: 0x8006214C
+		// Start line: 592
+		// Start offset: 0x800614C8
 		// Variables:
-	// 		long curTree; // $t3
-	// 		struct _Terrain *terrain; // $t2
+	// 		long curTree; // $s5
+	// 		struct Level *level; // $v0
+	// 		struct _Terrain *terrain; // $s6
 
 		/* begin block 1.1 */
-			// Start line: 508
-			// Start offset: 0x80062168
+			// Start line: 604
+			// Start offset: 0x8006151C
 			// Variables:
-		// 		struct BSPTree *bspTree; // $t0
+		// 		struct BSPTree *bspTree; // $a3
 
 			/* begin block 1.1.1 */
-				// Start line: 516
-				// Start offset: 0x80062184
+				// Start line: 612
+				// Start offset: 0x80061538
 				// Variables:
-			// 		struct _Instance *instance; // $a2
+			// 		struct _Instance *instance; // $s1
 
 				/* begin block 1.1.1.1 */
-					// Start line: 520
-					// Start offset: 0x80062194
+					// Start line: 616
+					// Start offset: 0x80061548
 					// Variables:
-				// 		short dx; // $t1
-				// 		short dy; // $a1
-				// 		short dz; // $a0
+				// 		short dx; // $s4
+				// 		short dy; // $s3
+				// 		short dz; // $s2
+
+					/* begin block 1.1.1.1.1 */
+						// Start line: 633
+						// Start offset: 0x800615CC
+						// Variables:
+					// 		struct _Instance *attachedInstance; // $s0
+					// 		struct SVECTOR offset; // stack offset -48
+					/* end block 1.1.1.1.1 */
+					// End offset: 0x800616B4
+					// End Line: 664
 				/* end block 1.1.1.1 */
-				// End offset: 0x80062270
-				// End Line: 545
+				// End offset: 0x800616B4
+				// End Line: 667
 			/* end block 1.1.1 */
-			// End offset: 0x80062270
-			// End Line: 546
+			// End offset: 0x800616B4
+			// End Line: 668
 		/* end block 1.1 */
-		// End offset: 0x80062270
-		// End Line: 547
+		// End offset: 0x800616B4
+		// End Line: 669
 	/* end block 1 */
-	// End offset: 0x80062284
-	// End Line: 549
+	// End offset: 0x800616C8
+	// End Line: 671
 
 	/* begin block 2 */
-		// Start line: 1099
+		// Start line: 1316
 	/* end block 2 */
-	// End Line: 1100
+	// End Line: 1317
 
-	/* begin block 3 */
-		// Start line: 1100
-	/* end block 3 */
-	// End Line: 1101
+/* File: C:\kain2\game\EVENT.C */
 
-	/* begin block 4 */
-		// Start line: 1103
-	/* end block 4 */
-	// End Line: 1104
-
-void EVENT_BSPProcess(Level *level)
+void EVENT_BSPProcess(_StreamUnit *streamUnit)
 
 {
   short sVar1;
-  short sVar2;
+  int iVar2;
   int iVar3;
-  short sVar4;
+  int iVar4;
+  _Instance *instance;
   int iVar5;
-  int iVar6;
-  int iVar7;
+  short sVar6;
+  short sVar7;
   short sVar8;
-  _Terrain *p_Var9;
-  int iVar10;
+  int iVar9;
+  _Terrain *p_Var10;
   int iVar11;
   
-  p_Var9 = level->terrain;
-  iVar10 = 0;
-  if (0 < (int)p_Var9->morphNormalIdx) {
+  p_Var10 = streamUnit->level->terrain;
+  iVar9 = 0;
+  if (0 < p_Var10->numBSPTrees) {
     iVar11 = 0;
     do {
-      iVar7 = (int)&p_Var9->signals->numSignals + iVar11;
-      if ((-1 < *(short *)(iVar7 + 0x1a)) && (iVar5 = *(int *)(iVar7 + 0x20), iVar5 != 0)) {
-        iVar3 = *(int *)(iVar5 + 0x40);
-        if ((iVar3 == 0) || (iVar6 = *(int *)(iVar5 + 0x44), iVar6 == 0)) {
-          sVar2 = *(short *)(iVar5 + 0x60);
+      iVar4 = (int)&p_Var10->BSPTreeArray->bspRoot + iVar11;
+      if ((-1 < *(short *)(iVar4 + 0x1a)) && (iVar5 = *(int *)(iVar4 + 0x20), iVar5 != 0)) {
+        iVar2 = *(int *)(iVar5 + 0x40);
+        if ((iVar2 == 0) || (iVar3 = *(int *)(iVar5 + 0x44), iVar3 == 0)) {
+          sVar6 = *(short *)(iVar5 + 0x60);
           sVar8 = *(short *)(iVar5 + 0x5c) - *(short *)(iVar5 + 100);
           sVar1 = *(short *)(iVar5 + 0x68);
-          sVar4 = *(short *)(iVar5 + 0x5e) - *(short *)(iVar5 + 0x66);
+          sVar7 = *(short *)(iVar5 + 0x5e) - *(short *)(iVar5 + 0x66);
         }
         else {
-          sVar2 = *(short *)(iVar3 + 0x1c);
-          sVar8 = *(short *)(iVar3 + 0x14) - *(short *)(iVar6 + 0x14);
-          sVar1 = *(short *)(iVar6 + 0x1c);
-          sVar4 = *(short *)(iVar3 + 0x18) - *(short *)(iVar6 + 0x18);
+          sVar6 = *(short *)(iVar2 + 0x1c);
+          sVar8 = *(short *)(iVar2 + 0x14) - *(short *)(iVar3 + 0x14);
+          sVar1 = *(short *)(iVar3 + 0x1c);
+          sVar7 = *(short *)(iVar2 + 0x18) - *(short *)(iVar3 + 0x18);
         }
-        sVar2 = sVar2 - sVar1;
-        if (((sVar8 != 0) || (sVar4 != 0)) || (sVar2 != 0)) {
-          *(short *)(iVar7 + 0xc) = *(short *)(iVar7 + 0xc) + sVar8;
-          *(short *)(iVar7 + 0xe) = *(short *)(iVar7 + 0xe) + sVar4;
-          *(short *)(iVar7 + 0x10) = *(short *)(iVar7 + 0x10) + sVar2;
-          *(short *)(iVar7 + 0x14) = *(short *)(iVar7 + 0x14) + sVar8;
-          *(short *)(iVar7 + 0x16) = *(short *)(iVar7 + 0x16) + sVar4;
-          *(short *)(iVar7 + 0x18) = *(short *)(iVar7 + 0x18) + sVar2;
-          p_Var9->UnitChangeFlags = p_Var9->UnitChangeFlags | 2;
+        sVar6 = sVar6 - sVar1;
+        if (((sVar8 != 0) || (sVar7 != 0)) || (sVar6 != 0)) {
+          *(short *)(iVar4 + 0xc) = *(short *)(iVar4 + 0xc) + sVar8;
+          *(short *)(iVar4 + 0xe) = *(short *)(iVar4 + 0xe) + sVar7;
+          *(short *)(iVar4 + 0x10) = *(short *)(iVar4 + 0x10) + sVar6;
+          *(short *)(iVar4 + 0x14) = *(short *)(iVar4 + 0x14) + sVar8;
+          *(short *)(iVar4 + 0x16) = *(short *)(iVar4 + 0x16) + sVar7;
+          *(short *)(iVar4 + 0x18) = *(short *)(iVar4 + 0x18) + sVar6;
+          p_Var10->UnitChangeFlags = p_Var10->UnitChangeFlags | 2;
+          instance = *(_Instance **)(DAT_800d2100 + 4);
+          while (instance != (_Instance *)0x0) {
+            if (((*(int *)(iVar5 + 0x8c) == 0) &&
+                (instance->currentStreamUnitID == streamUnit->StreamUnitID)) &&
+               (instance->bspTree == iVar9)) {
+              (instance->position).x = (instance->position).x + sVar8;
+              (instance->position).z = (instance->position).z + sVar6;
+              (instance->position).y = (instance->position).y + sVar7;
+              COLLIDE_UpdateAllTransforms(instance,0xd0);
+            }
+            instance = instance->next;
+          }
         }
       }
-      iVar10 = iVar10 + 1;
+      iVar9 = iVar9 + 1;
       iVar11 = iVar11 + 0x24;
-    } while (iVar10 < (int)p_Var9->morphNormalIdx);
+    } while (iVar9 < p_Var10->numBSPTrees);
   }
   return;
 }
@@ -775,33 +950,33 @@ void EVENT_BSPProcess(Level *level)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_Process(struct Event *eventInstance /*$s2*/, long startIndex /*$a1*/)
- // line 551, offset 0x8006228c
+ // line 673, offset 0x800616f8
 	/* begin block 1 */
-		// Start line: 552
-		// Start offset: 0x8006228C
+		// Start line: 674
+		// Start offset: 0x800616F8
 		// Variables:
-	// 		long i; // $s0
-	// 		long savei; // $a1
+	// 		long i; // $s1
 	/* end block 1 */
-	// End offset: 0x80062448
-	// End Line: 602
+	// End offset: 0x80061840
+	// End Line: 763
 
 	/* begin block 2 */
-		// Start line: 1253
+		// Start line: 1578
 	/* end block 2 */
-	// End Line: 1254
+	// End Line: 1579
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_Process(Event *eventInstance,long startIndex)
 
 {
   long lVar1;
   ScriptPCode **ppSVar2;
-  char *fmt;
   ScriptPCode *actionScript;
   int iVar3;
   
   iVar3 = startIndex << 2;
-  currentEventInstance = eventInstance;
+  currentEventInstance = (Event *)eventInstance;
   if (startIndex < (int)(uint)eventInstance->numActions) {
     do {
       EventCurrentEventIndex = startIndex + 1;
@@ -809,13 +984,8 @@ void EVENT_Process(Event *eventInstance,long startIndex)
         EventCurrentEventIndex = -1;
       }
       if (*(int *)(iVar3 + (int)eventInstance->conditionalList) == 0) {
+LAB_800617e0:
         if ((*(ushort *)(*(int *)(iVar3 + (int)eventInstance->actionList) + 2) & 2) == 0) {
-          if ((gameTrackerX.debugFlags2 & 0x100U) != 0) {
-            fmt = "NULL Condition(%d) is satisfied for event %d. do Action!!!!!!!\n";
-LAB_80062408:
-            FONT_Print(fmt);
-          }
-LAB_80062410:
           actionScript = *(ScriptPCode **)(iVar3 + (int)eventInstance->actionList);
           EventAbortLine = 0;
           EVENT_DoAction(eventInstance,actionScript,actionScript->data);
@@ -832,22 +1002,15 @@ LAB_80062410:
             ppSVar2 = eventInstance->actionList + startIndex;
             do {
               ppSVar2 = ppSVar2 + 1;
-              if ((int)(uint)eventInstance->numActions <= startIndex) goto LAB_80062434;
+              if ((int)(uint)eventInstance->numActions <= startIndex) goto LAB_8006182c;
               iVar3 = iVar3 + 4;
               startIndex = startIndex + 1;
             } while (*ppSVar2 == (ScriptPCode *)0x0);
           }
-          if ((startIndex < (int)(uint)eventInstance->numActions) &&
-             ((*(ushort *)(*(int *)(iVar3 + (int)eventInstance->actionList) + 2) & 2) == 0)) {
-            if ((gameTrackerX.debugFlags2 & 0x100U) != 0) {
-              fmt = "Condition(%d) is satisfied for event %d. do Action!!!!!!!\n";
-              goto LAB_80062408;
-            }
-            goto LAB_80062410;
-          }
+          if (startIndex < (int)(uint)eventInstance->numActions) goto LAB_800617e0;
         }
       }
-LAB_80062434:
+LAB_8006182c:
       startIndex = startIndex + 1;
       iVar3 = iVar3 + 4;
     } while (startIndex < (int)(uint)eventInstance->numActions);
@@ -860,22 +1023,23 @@ LAB_80062434:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_ProcessPuppetShow(struct Event *eventInstance /*$s1*/, long startIndex /*$a1*/)
- // line 604, offset 0x80062460
+ // line 765, offset 0x80061858
 	/* begin block 1 */
-		// Start line: 605
-		// Start offset: 0x80062460
+		// Start line: 766
+		// Start offset: 0x80061858
 		// Variables:
 	// 		long i; // $s0
-	// 		long savei; // $a1
 	// 		long conditionIsStatisfied; // $s3
 	/* end block 1 */
-	// End offset: 0x80062660
-	// End Line: 668
+	// End offset: 0x80061A14
+	// End Line: 829
 
 	/* begin block 2 */
-		// Start line: 1402
+		// Start line: 1820
 	/* end block 2 */
-	// End Line: 1403
+	// End Line: 1821
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_ProcessPuppetShow(Event *eventInstance,long startIndex)
 
@@ -891,19 +1055,16 @@ void EVENT_ProcessPuppetShow(Event *eventInstance,long startIndex)
   bVar1 = true;
   if ((eventInstance->actionList[startIndex]->conditionBits & 2) != 0) {
     EventJustRecievedTimer = 0;
-    currentEventInstance = eventInstance;
+    currentEventInstance = (Event *)eventInstance;
     return;
   }
   EventCurrentEventIndex = startIndex + 1;
   if (EventCurrentEventIndex == (uint)eventInstance->numActions) {
     EventCurrentEventIndex = -1;
   }
-  currentEventInstance = eventInstance;
+  currentEventInstance = (Event *)eventInstance;
   if (eventInstance->conditionalList[startIndex] == (ScriptPCode *)0x0) {
-    if ((eventInstance->actionList[startIndex]->conditionBits & 2) != 0) goto LAB_80062614;
-    if ((gameTrackerX.debugFlags2 & 0x100U) != 0) {
-      FONT_Print("Condition(%d) is satisfied for event %d. do Action!!!!!!!\n");
-    }
+    if ((eventInstance->actionList[startIndex]->conditionBits & 2) != 0) goto LAB_800619c8;
     actionScript = eventInstance->actionList[startIndex];
   }
   else {
@@ -912,27 +1073,24 @@ void EVENT_ProcessPuppetShow(Event *eventInstance,long startIndex)
     lVar2 = EVENT_IsConditionTrue(eventInstance,eventInstance->conditionalList[startIndex]);
     if (lVar2 == 0) {
       bVar1 = false;
-      goto LAB_80062614;
+      goto LAB_800619c8;
     }
     ppSVar3 = eventInstance->actionList + startIndex;
     if (*ppSVar3 == (ScriptPCode *)0x0) {
       do {
         cVar4 = (char)startIndex;
         ppSVar3 = ppSVar3 + 1;
-        if ((int)(uint)eventInstance->numActions <= startIndex) goto LAB_80062614;
+        if ((int)(uint)eventInstance->numActions <= startIndex) goto LAB_800619c8;
         startIndex = startIndex + 1;
       } while (*ppSVar3 == (ScriptPCode *)0x0);
     }
     cVar4 = (char)startIndex;
-    if ((int)(uint)eventInstance->numActions <= startIndex) goto LAB_80062614;
-    if ((gameTrackerX.debugFlags2 & 0x100U) != 0) {
-      FONT_Print("Condition(%d) is satisfied for event %d. do Action!!!!!!!\n");
-    }
+    if ((int)(uint)eventInstance->numActions <= startIndex) goto LAB_800619c8;
     actionScript = eventInstance->actionList[startIndex];
   }
   EventAbortLine = 0;
   EVENT_DoAction(eventInstance,actionScript,actionScript->data);
-LAB_80062614:
+LAB_800619c8:
   if ((((EventAbortLine == 0) || (EventJustRecievedTimer == 1)) && (bVar1)) &&
      (eventInstance->processingPuppetShow = cVar4 + '\x02',
      (uint)eventInstance->numActions + 1 <= (uint)eventInstance->processingPuppetShow)) {
@@ -946,20 +1104,22 @@ LAB_80062614:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_ProcessEvents(struct EventPointers *eventPointers /*$s2*/, struct Level *level /*$a1*/)
- // line 670, offset 0x8006267c
+ // line 831, offset 0x80061a30
 	/* begin block 1 */
-		// Start line: 671
-		// Start offset: 0x8006267C
+		// Start line: 832
+		// Start offset: 0x80061A30
 		// Variables:
 	// 		long i; // $s0
 	/* end block 1 */
-	// End offset: 0x80062704
-	// End Line: 692
+	// End offset: 0x80061AB8
+	// End Line: 853
 
 	/* begin block 2 */
-		// Start line: 1545
+		// Start line: 1963
 	/* end block 2 */
-	// End Line: 1546
+	// End Line: 1964
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_ProcessEvents(EventPointers *eventPointers,Level *level)
 
@@ -994,75 +1154,76 @@ void EVENT_ProcessEvents(EventPointers *eventPointers,Level *level)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_DoAction(struct Event *eventInstance /*$s4*/, struct ScriptPCode *actionScript /*$s1*/, short *scriptData /*$s0*/)
- // line 694, offset 0x8006271c
+ // line 855, offset 0x80061ad0
 	/* begin block 1 */
-		// Start line: 695
-		// Start offset: 0x8006271C
+		// Start line: 856
+		// Start offset: 0x80061AD0
 		// Variables:
 	// 		long retValue; // $s3
 	// 		long operateOnStack; // stack offset -32
 	// 		struct _PCodeStack stack; // stack offset -1192
 
 		/* begin block 1.1 */
-			// Start line: 711
-			// Start offset: 0x800627B0
+			// Start line: 872
+			// Start offset: 0x80061B64
 			// Variables:
 		// 		struct EventTimer *timer; // $a1
 		/* end block 1.1 */
-		// End offset: 0x80062800
-		// End Line: 731
+		// End offset: 0x80061BB4
+		// End Line: 892
 	/* end block 1 */
-	// End offset: 0x80062870
-	// End Line: 744
+	// End offset: 0x80061C24
+	// End Line: 905
 
 	/* begin block 2 */
-		// Start line: 1605
+		// Start line: 2023
 	/* end block 2 */
-	// End Line: 1606
+	// End Line: 2024
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_DoAction(Event *eventInstance,ScriptPCode *actionScript,short *scriptData)
 
 {
   long lVar1;
   short *psVar2;
-  Level *pLVar3;
-  EventTimer *pEVar4;
-  int iVar5;
-  long lVar6;
+  EventTimer *pEVar3;
+  int iVar4;
+  long lVar5;
   _PCodeStack local_4a8;
   long local_20 [2];
   
   local_4a8.topOfStack = 0;
   EventJustRecievedTimer = 0;
-  lVar6 = 1;
-  currentActionScript = actionScript;
+  lVar5 = 1;
+  currentActionScript = (ScriptPCode *)actionScript;
   EventAbortedPosition = scriptData;
-  if ((((actionScript->conditionBits & 1) == 0) && (lVar6 = 1, scriptData != (short *)0x0)) &&
-     (lVar6 = 1, EventAbortLine == 0)) {
-    lVar6 = 1;
+  if ((((actionScript->conditionBits & 1) == 0) && (lVar5 = 1, scriptData != (short *)0x0)) &&
+     (lVar5 = 1, EventAbortLine == 0)) {
+    lVar5 = 1;
     do {
       scriptData = EVENT_ParseOpcode(&local_4a8,scriptData,local_20);
       if (((EventAbortLine != 0) && (EventJustRecievedTimer == 0)) &&
-         (pEVar4 = EVENT_GetNextTimer(), psVar2 = EventAbortedPosition,
-         lVar1 = EventCurrentEventIndex, pEVar4 != (EventTimer *)0x0)) {
-        lVar6 = 0;
-        *(Event **)&pEVar4->time = eventInstance;
-        *(ScriptPCode **)&pEVar4->event = actionScript;
-        pEVar4->flags = pEVar4->flags & 1;
-        *(short **)&pEVar4->actionScript = psVar2;
-        pLVar3 = CurrentPuzzleLevel;
+         (pEVar3 = EVENT_GetNextTimer(), psVar2 = EventAbortedPosition,
+         lVar1 = EventCurrentEventIndex, pEVar3 != (EventTimer *)0x0)) {
+        lVar5 = 0;
+        *(Event **)&pEVar3->time = eventInstance;
+        *(ScriptPCode **)&pEVar3->event = actionScript;
+        pEVar3->flags = pEVar3->flags & 1;
+        *(short **)&pEVar3->actionScript = psVar2;
+        psVar2 = CurrentPuzzleLevel;
         actionScript->conditionBits = actionScript->conditionBits | 1;
-        *(Level **)&pEVar4->scriptPos = pLVar3;
-        *(long *)&pEVar4->level = lVar1;
+        pEVar3->scriptPos = psVar2;
+        *(long *)&pEVar3->level = lVar1;
       }
       if (((local_20[0] != 0) && (EventAbortLine == 0)) &&
-         (iVar5 = local_4a8.topOfStack + -1, 0 < local_4a8.topOfStack)) {
-        local_4a8.topOfStack = iVar5;
-        EVENT_ExecuteActionCommand(local_4a8.stack + iVar5,(StackType *)0x0,&local_4a8,scriptData);
+         (iVar4 = local_4a8.topOfStack + -1, 0 < local_4a8.topOfStack)) {
+        local_4a8.topOfStack = iVar4;
+        EVENT_ExecuteActionCommand(local_4a8.stack + iVar4,(StackType *)0x0,&local_4a8,scriptData);
       }
     } while ((scriptData != (short *)0x0) && (EventAbortLine == 0));
   }
-  return lVar6;
+  return lVar5;
 }
 
 
@@ -1070,10 +1231,10 @@ long EVENT_DoAction(Event *eventInstance,ScriptPCode *actionScript,short *script
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_IsConditionTrue(struct Event *eventInstance /*$a0*/, struct ScriptPCode *conditionScript /*$a1*/)
- // line 748, offset 0x80062894
+ // line 909, offset 0x80061c48
 	/* begin block 1 */
-		// Start line: 749
-		// Start offset: 0x80062894
+		// Start line: 910
+		// Start offset: 0x80061C48
 		// Variables:
 	// 		long retValue; // $s0
 	// 		long error; // stack offset -28
@@ -1082,13 +1243,15 @@ long EVENT_DoAction(Event *eventInstance,ScriptPCode *actionScript,short *script
 	// 		struct _PCodeStack stack; // stack offset -1192
 	// 		short *scriptData; // $s1
 	/* end block 1 */
-	// End offset: 0x8006296C
-	// End Line: 804
+	// End offset: 0x80061D20
+	// End Line: 965
 
 	/* begin block 2 */
-		// Start line: 1731
+		// Start line: 2149
 	/* end block 2 */
-	// End Line: 1732
+	// End Line: 2150
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_IsConditionTrue(Event *eventInstance,ScriptPCode *conditionScript)
 
@@ -1108,7 +1271,7 @@ long EVENT_IsConditionTrue(Event *eventInstance,ScriptPCode *conditionScript)
   while( true ) {
     do {
       do {
-        if ((codeStream == (short *)0x0) || (EventAbortLine != 0)) goto LAB_80062958;
+        if ((codeStream == (short *)0x0) || (EventAbortLine != 0)) goto LAB_80061d0c;
         codeStream = EVENT_ParseOpcode(&local_4a8,codeStream,&local_20);
       } while ((local_20 == 0) || (EventAbortLine != 0));
       CurrentEventLine = CurrentEventLine + 1;
@@ -1118,7 +1281,7 @@ long EVENT_IsConditionTrue(Event *eventInstance,ScriptPCode *conditionScript)
     lVar2 = EVENT_GetScalerValueFromOperand(local_4a8.stack + iVar1,&local_1c,asStack24);
     if (local_1c != 0) break;
     if (lVar2 == 0) {
-LAB_80062958:
+LAB_80061d0c:
       if (EventAbortLine == 1) {
         lVar2 = 0;
       }
@@ -1126,7 +1289,7 @@ LAB_80062958:
     }
   }
   lVar2 = 0;
-  goto LAB_80062958;
+  goto LAB_80061d0c;
 }
 
 
@@ -1134,39 +1297,49 @@ LAB_80062958:
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_WriteEventObject(struct StackType *stackEntry /*$s0*/, long areaID /*$s1*/, struct Event *event /*$a2*/, long number /*$s2*/)
- // line 807, offset 0x80062984
+ // line 968, offset 0x80061d38
 	/* begin block 1 */
-		// Start line: 808
-		// Start offset: 0x80062984
+		// Start line: 969
+		// Start offset: 0x80061D38
 		// Variables:
 	// 		long retValue; // $a0
-	// 		struct SavedEvent *savedEvent; // $v1
+
+		/* begin block 1.1 */
+			// Start line: 984
+			// Start offset: 0x80061D74
+			// Variables:
+		// 		struct SavedBasic *savedEvent; // $v1
+		/* end block 1.1 */
+		// End offset: 0x80061DCC
+		// End Line: 1008
 	/* end block 1 */
-	// End offset: 0x80062A18
-	// End Line: 849
+	// End offset: 0x80061DCC
+	// End Line: 1011
 
 	/* begin block 2 */
-		// Start line: 1870
+		// Start line: 2288
 	/* end block 2 */
-	// End Line: 1871
+	// End Line: 2289
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_WriteEventObject(StackType *stackEntry,long areaID,Event *event,long number)
 
 {
-  SavedEvent *pSVar1;
+  SavedBasic *pSVar1;
   long lVar2;
   
   lVar2 = 0;
   if (event == (Event *)0x0) {
     pSVar1 = SAVE_GetSavedEvent(areaID,number);
-    if (pSVar1 == (SavedEvent *)0x0) {
+    if (pSVar1 == (SavedBasic *)0x0) {
       stackEntry->id = 0x15;
       pSVar1 = EVENT_CreateSaveEvent(areaID,number);
-      *(SavedEvent **)stackEntry->data = pSVar1;
+      *(SavedBasic **)stackEntry->data = pSVar1;
     }
     else {
       stackEntry->id = 0x15;
-      *(SavedEvent **)stackEntry->data = pSVar1;
+      *(SavedBasic **)stackEntry->data = pSVar1;
     }
     lVar2 = 1;
     *(long *)(stackEntry->data + 8) = areaID;
@@ -1185,21 +1358,23 @@ long EVENT_WriteEventObject(StackType *stackEntry,long areaID,Event *event,long 
 // decompiled code
 // original method signature: 
 // struct _MultiSignal * /*$ra*/ EVENT_ResolveObjectSignal(struct _StreamUnit *stream /*$a0*/, long signalNumber /*$a1*/)
- // line 852, offset 0x80062a34
+ // line 1014, offset 0x80061de8
 	/* begin block 1 */
-		// Start line: 853
-		// Start offset: 0x80062A34
+		// Start line: 1015
+		// Start offset: 0x80061DE8
 		// Variables:
 	// 		struct _MultiSignal *retValue; // $a2
 	// 		struct Level *level; // $a0
 	/* end block 1 */
-	// End offset: 0x80062ABC
-	// End Line: 908
+	// End offset: 0x80061E70
+	// End Line: 1070
 
 	/* begin block 2 */
-		// Start line: 1969
+		// Start line: 2389
 	/* end block 2 */
-	// End Line: 1970
+	// End Line: 2390
+
+/* File: C:\kain2\game\EVENT.C */
 
 _MultiSignal * EVENT_ResolveObjectSignal(_StreamUnit *stream,long signalNumber)
 
@@ -1238,18 +1413,20 @@ _MultiSignal * EVENT_ResolveObjectSignal(_StreamUnit *stream,long signalNumber)
 // decompiled code
 // original method signature: 
 // struct Intro * /*$ra*/ EVENT_ResolveObjectIntro(struct EventInstanceObject *instanceObject /*$v0*/)
- // line 911, offset 0x80062acc
+ // line 1073, offset 0x80061e80
 	/* begin block 1 */
-		// Start line: 912
-		// Start offset: 0x80062ACC
+		// Start line: 1074
+		// Start offset: 0x80061E80
 	/* end block 1 */
-	// End offset: 0x80062ACC
-	// End Line: 912
+	// End offset: 0x80061E80
+	// End Line: 1074
 
 	/* begin block 2 */
-		// Start line: 2088
+		// Start line: 2508
 	/* end block 2 */
-	// End Line: 2089
+	// End Line: 2509
+
+/* File: C:\kain2\game\EVENT.C */
 
 Intro * EVENT_ResolveObjectIntro(EventInstanceObject *instanceObject)
 
@@ -1265,32 +1442,34 @@ Intro * EVENT_ResolveObjectIntro(EventInstanceObject *instanceObject)
 // decompiled code
 // original method signature: 
 // struct _SFXMkr * /*$ra*/ EVENT_ResolveSFXMarker(struct _StreamUnit *stream /*$a0*/, struct EventInstanceObject *instanceObject /*$a1*/)
- // line 922, offset 0x80062af8
+ // line 1084, offset 0x80061eac
 	/* begin block 1 */
-		// Start line: 924
-		// Start offset: 0x80062AF8
+		// Start line: 1086
+		// Start offset: 0x80061EAC
 		// Variables:
 	// 		int i; // $a0
 	// 		struct Level *level; // $t0
 	// 		struct _SFXMkr *result; // $a2
 	/* end block 1 */
-	// End offset: 0x80062B50
-	// End Line: 942
+	// End offset: 0x80061F04
+	// End Line: 1104
 
 	/* begin block 2 */
-		// Start line: 2110
+		// Start line: 2530
 	/* end block 2 */
-	// End Line: 2111
+	// End Line: 2531
 
 	/* begin block 3 */
-		// Start line: 2111
+		// Start line: 2531
 	/* end block 3 */
-	// End Line: 2112
+	// End Line: 2532
 
 	/* begin block 4 */
-		// Start line: 2115
+		// Start line: 2535
 	/* end block 4 */
-	// End Line: 2116
+	// End Line: 2536
+
+/* File: C:\kain2\game\EVENT.C */
 
 _SFXMkr * EVENT_ResolveSFXMarker(_StreamUnit *stream,EventInstanceObject *instanceObject)
 
@@ -1318,32 +1497,34 @@ _SFXMkr * EVENT_ResolveSFXMarker(_StreamUnit *stream,EventInstanceObject *instan
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_AddGameObjectToStack(struct _PCodeStack *stack /*$a0*/)
- // line 945, offset 0x80062b58
+ // line 1107, offset 0x80061f0c
 	/* begin block 1 */
-		// Start line: 947
-		// Start offset: 0x80062B58
+		// Start line: 1109
+		// Start offset: 0x80061F0C
 
 		/* begin block 1.1 */
-			// Start line: 949
-			// Start offset: 0x80062B6C
+			// Start line: 1111
+			// Start offset: 0x80061F20
 			// Variables:
 		// 		struct StackType *stackEntry; // $v0
 		/* end block 1.1 */
-		// End offset: 0x80062B9C
-		// End Line: 953
+		// End offset: 0x80061F50
+		// End Line: 1115
 	/* end block 1 */
-	// End offset: 0x80062B9C
-	// End Line: 959
+	// End offset: 0x80061F50
+	// End Line: 1121
 
 	/* begin block 2 */
-		// Start line: 2166
+		// Start line: 2586
 	/* end block 2 */
-	// End Line: 2167
+	// End Line: 2587
 
 	/* begin block 3 */
-		// Start line: 2167
+		// Start line: 2587
 	/* end block 3 */
-	// End Line: 2168
+	// End Line: 2588
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_AddGameObjectToStack(_PCodeStack *stack)
 
@@ -1364,40 +1545,42 @@ void EVENT_AddGameObjectToStack(_PCodeStack *stack)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_AddPlayerObjectToStack(struct _PCodeStack *stack /*$a1*/)
- // line 961, offset 0x80062ba4
+ // line 1123, offset 0x80061f58
 	/* begin block 1 */
-		// Start line: 962
-		// Start offset: 0x80062BA4
+		// Start line: 1124
+		// Start offset: 0x80061F58
 
 		/* begin block 1.1 */
-			// Start line: 965
-			// Start offset: 0x80062BBC
+			// Start line: 1127
+			// Start offset: 0x80061F70
 			// Variables:
 		// 		struct StackType *stackEntry; // $v0
 		/* end block 1.1 */
-		// End offset: 0x80062BF4
-		// End Line: 970
+		// End offset: 0x80061FA8
+		// End Line: 1132
 	/* end block 1 */
-	// End offset: 0x80062BF4
-	// End Line: 976
+	// End offset: 0x80061FA8
+	// End Line: 1138
 
 	/* begin block 2 */
-		// Start line: 2198
+		// Start line: 2618
 	/* end block 2 */
-	// End Line: 2199
+	// End Line: 2619
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_AddPlayerObjectToStack(_PCodeStack *stack)
 
 {
-  _Instance *p_Var1;
+  undefined4 uVar1;
   StackType *pSVar2;
   
   if (stack->topOfStack < 0x20) {
     pSVar2 = stack->stack + stack->topOfStack;
     pSVar2->id = 2;
-    p_Var1 = gameTrackerX.playerInstance;
+    uVar1 = DAT_800d20f8;
     *(undefined4 *)(pSVar2->data + 4) = 0xffffffff;
-    *(_Instance **)pSVar2->data = p_Var1;
+    *(undefined4 *)pSVar2->data = uVar1;
     stack->topOfStack = stack->topOfStack + 1;
   }
   return;
@@ -1407,114 +1590,116 @@ void EVENT_AddPlayerObjectToStack(_PCodeStack *stack)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ EVENT_AddObjectToStack(struct _PCodeStack *stack /*$s3*/, long item /*$s2*/)
- // line 978, offset 0x80062bfc
+// void /*$ra*/ EVENT_AddObjectToStack(struct _PCodeStack *stack /*$s2*/, long item /*$a1*/)
+ // line 1140, offset 0x80061fb0
 	/* begin block 1 */
-		// Start line: 979
-		// Start offset: 0x80062BFC
+		// Start line: 1141
+		// Start offset: 0x80061FB0
 		// Variables:
-	// 		struct EventBasicObject *basicObject; // $a3
+	// 		struct EventBasicObject *basicObject; // $a0
 	// 		int topOfStack; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 991
-			// Start offset: 0x80062C2C
+			// Start line: 1153
+			// Start offset: 0x80061FDC
 			// Variables:
 		// 		struct StackType *stackEntry; // $s0
 
 			/* begin block 1.1.1 */
-				// Start line: 997
-				// Start offset: 0x80062C8C
+				// Start line: 1159
+				// Start offset: 0x80062038
 			/* end block 1.1.1 */
-			// End offset: 0x80062CD0
-			// End Line: 1013
+			// End offset: 0x80062058
+			// End Line: 1175
 
 			/* begin block 1.1.2 */
-				// Start line: 1021
-				// Start offset: 0x80062CD8
+				// Start line: 1183
+				// Start offset: 0x80062058
 			/* end block 1.1.2 */
-			// End offset: 0x80062D30
-			// End Line: 1038
+			// End offset: 0x8006208C
+			// End Line: 1200
 
 			/* begin block 1.1.3 */
-				// Start line: 1053
-				// Start offset: 0x80062D54
+				// Start line: 1215
+				// Start offset: 0x800620A8
 			/* end block 1.1.3 */
-			// End offset: 0x80062D54
-			// End Line: 1055
+			// End offset: 0x800620A8
+			// End Line: 1217
 
 			/* begin block 1.1.4 */
-				// Start line: 1063
-				// Start offset: 0x80062D70
+				// Start line: 1225
+				// Start offset: 0x800620C4
 			/* end block 1.1.4 */
-			// End offset: 0x80062D70
-			// End Line: 1065
+			// End offset: 0x800620C4
+			// End Line: 1227
 
 			/* begin block 1.1.5 */
-				// Start line: 1073
-				// Start offset: 0x80062D94
+				// Start line: 1235
+				// Start offset: 0x800620E8
 			/* end block 1.1.5 */
-			// End offset: 0x80062E20
-			// End Line: 1123
+			// End offset: 0x80062174
+			// End Line: 1285
 
 			/* begin block 1.1.6 */
-				// Start line: 1135
-				// Start offset: 0x80062E20
+				// Start line: 1297
+				// Start offset: 0x80062174
 			/* end block 1.1.6 */
-			// End offset: 0x80062E90
-			// End Line: 1157
+			// End offset: 0x800621C4
+			// End Line: 1319
 		/* end block 1.1 */
-		// End offset: 0x80062E94
-		// End Line: 1165
+		// End offset: 0x800621C8
+		// End Line: 1327
 	/* end block 1 */
-	// End offset: 0x80062E94
-	// End Line: 1171
+	// End offset: 0x800621C8
+	// End Line: 1333
 
 	/* begin block 2 */
-		// Start line: 2233
+		// Start line: 2653
 	/* end block 2 */
-	// End Line: 2234
+	// End Line: 2654
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_AddObjectToStack(_PCodeStack *stack,long item)
 
 {
   long lVar1;
   Level *pLVar2;
-  undefined4 uVar3;
+  EventBasicObject EVar3;
   EventBasicObject *pEVar4;
   StackType *stackEntry;
   long lVar5;
   
   lVar1 = CurrentEventLine;
   lVar5 = stack->topOfStack;
-  if (0x1f < lVar5) goto LAB_80062e94;
+  if (0x1f < lVar5) goto LAB_800621c8;
   pEVar4 = currentEventInstance->instanceList[item];
   stackEntry = stack->stack + lVar5;
   switch((int)(((uint)(ushort)pEVar4->id - 1) * 0x10000) >> 0x10) {
   case 0:
-    if ((pEVar4[1].id & 1U) == 0) {
-      if (*(int *)(pEVar4 + 6) == 0) {
-        if (*(int *)(pEVar4 + 8) == 0) goto LAB_80062e80;
+    if ((*(ushort *)&pEVar4->field_0x2 & 1) == 0) {
+      if (pEVar4[3] == (EventBasicObject)0x0) {
+        if (pEVar4[4] == (EventBasicObject)0x0) goto LAB_800621b0;
         stackEntry->id = 4;
-        uVar3 = *(undefined4 *)(pEVar4 + 8);
+        EVar3 = pEVar4[4];
       }
       else {
         stackEntry->id = 2;
-        uVar3 = *(undefined4 *)(pEVar4 + 6);
+        EVar3 = pEVar4[3];
       }
-LAB_80062e14:
+LAB_80062168:
       *(undefined4 *)(stackEntry->data + 4) = 0xffffffff;
-      *(undefined4 *)stackEntry->data = uVar3;
+      *(EventBasicObject *)stackEntry->data = EVar3;
     }
     else {
       stackEntry->id = 0x1b;
       *(undefined2 *)stackEntry->data = 1;
-      uVar3 = *(undefined4 *)(pEVar4 + 8);
+      EVar3 = pEVar4[4];
       *(undefined2 *)(stackEntry->data + 2) = 0xffff;
       *(undefined4 *)(stackEntry->data + 4) = 0xffffffff;
       *(undefined4 *)(stackEntry->data + 8) = 0xffffffff;
       *(undefined4 *)(stackEntry->data + 0xc) = 0xffffffff;
-      *(undefined4 *)(stackEntry->data + 0x10) = uVar3;
+      *(EventBasicObject *)(stackEntry->data + 0x10) = EVar3;
     }
     break;
   case 1:
@@ -1525,59 +1710,48 @@ LAB_80062e14:
     break;
   case 2:
     EVENT_WriteEventObject
-              (stackEntry,*(long *)(pEVar4 + 2),*(Event **)(pEVar4 + 4),(int)pEVar4[1].id);
+              (stackEntry,(long)pEVar4[1],(Event *)pEVar4[2],(int)*(short *)&pEVar4->field_0x2);
     lVar5 = lVar5 + 1;
-    goto LAB_80062e94;
+    goto LAB_800621c8;
   case 3:
-    if (*(int *)(pEVar4 + 4) == 0) {
-      if ((gameTrackerX.debugFlags2 & 0x100U) != 0) {
-        FONT_Print("Could not resolve tgroup area %d, tgroup number %d\n");
-      }
-      goto LAB_80062e80;
-    }
+    if (pEVar4[2] == (EventBasicObject)0x0) goto LAB_800621b0;
     stackEntry->id = 0x17;
-    *(undefined4 *)stackEntry->data = *(undefined4 *)(pEVar4 + 4);
-    uVar3 = *(undefined4 *)(pEVar4 + 6);
+    *(EventBasicObject *)stackEntry->data = pEVar4[2];
+    EVar3 = pEVar4[3];
     *(undefined4 *)(stackEntry->data + 8) = 0xffffffff;
-    *(undefined4 *)(stackEntry->data + 4) = uVar3;
+    *(EventBasicObject *)(stackEntry->data + 4) = EVar3;
     break;
   case 4:
     stackEntry->id = 1;
-    uVar3 = *(undefined4 *)(pEVar4 + 4);
+    EVar3 = pEVar4[2];
     *(undefined4 *)(stackEntry->data + 4) = 0xffffffff;
-    *(undefined4 *)stackEntry->data = uVar3;
-    *(undefined4 *)(stackEntry->data + 8) = *(undefined4 *)(pEVar4 + 2);
+    *(EventBasicObject *)stackEntry->data = EVar3;
+    *(EventBasicObject *)(stackEntry->data + 8) = pEVar4[1];
     break;
   case 5:
-    if (*(int *)(pEVar4 + 4) != 0) {
+    if (pEVar4[2] != (EventBasicObject)0x0) {
       stackEntry->id = 0x11;
-      uVar3 = *(undefined4 *)(pEVar4 + 4);
-      goto LAB_80062e14;
+      EVar3 = pEVar4[2];
+      goto LAB_80062168;
     }
-    if ((gameTrackerX.debugFlags2 & 0x100U) != 0) {
-      FONT_Print("Could not resolve signal %d:signal%d\n");
-    }
-    goto LAB_80062e80;
+    goto LAB_800621b0;
   case 6:
-    if (*(int *)(pEVar4 + 10) != 0) {
+    if (pEVar4[5] != (EventBasicObject)0x0) {
       stackEntry->id = 0x1a;
-      *(undefined4 *)stackEntry->data = *(undefined4 *)(pEVar4 + 10);
+      *(EventBasicObject *)stackEntry->data = pEVar4[5];
       lVar5 = lVar5 + 1;
-      pLVar2 = STREAM_GetLevelWithID(*(long *)(pEVar4 + 2));
+      pLVar2 = STREAM_GetLevelWithID((long)pEVar4[1]);
       *(Level **)(stackEntry->data + 4) = pLVar2;
       *(undefined4 *)(stackEntry->data + 8) = 0xffffffff;
-      goto LAB_80062e94;
+      goto LAB_800621c8;
     }
-    if ((gameTrackerX.debugFlags2 & 0x100U) != 0) {
-      FONT_Print("Could not find VMO object %s\n");
-    }
-LAB_80062e80:
+LAB_800621b0:
     stackEntry->id = 6;
     *(long *)stackEntry->data = item;
     *(undefined4 *)(stackEntry->data + 4) = 0xffffffff;
   }
   lVar5 = lVar5 + 1;
-LAB_80062e94:
+LAB_800621c8:
   stack->topOfStack = lVar5;
   return;
 }
@@ -1586,33 +1760,83 @@ LAB_80062e94:
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ EVENT_AddShortPointerToStack(struct _PCodeStack *stack /*$a0*/, short *pointer /*$a1*/)
- // line 1178, offset 0x80062eb4
+// void /*$ra*/ EVENT_AddCharPointerToStack(struct _PCodeStack *stack /*$a0*/, char *pointer /*$a1*/)
+ // line 1340, offset 0x800621e4
 	/* begin block 1 */
-		// Start line: 1180
-		// Start offset: 0x80062EB4
+		// Start line: 1342
+		// Start offset: 0x800621E4
 
 		/* begin block 1.1 */
-			// Start line: 1182
-			// Start offset: 0x80062EC8
+			// Start line: 1344
+			// Start offset: 0x800621F8
 			// Variables:
 		// 		struct StackType *stackEntry; // $v0
 		/* end block 1.1 */
-		// End offset: 0x80062EF4
-		// End Line: 1186
+		// End offset: 0x80062224
+		// End Line: 1348
 	/* end block 1 */
-	// End offset: 0x80062EF4
-	// End Line: 1192
+	// End offset: 0x80062224
+	// End Line: 1354
 
 	/* begin block 2 */
-		// Start line: 2650
+		// Start line: 3068
 	/* end block 2 */
-	// End Line: 2651
+	// End Line: 3069
 
 	/* begin block 3 */
-		// Start line: 2651
+		// Start line: 3069
 	/* end block 3 */
-	// End Line: 2652
+	// End Line: 3070
+
+/* File: C:\kain2\game\EVENT.C */
+
+void EVENT_AddCharPointerToStack(_PCodeStack *stack,char *pointer)
+
+{
+  int iVar1;
+  
+  iVar1 = stack->topOfStack;
+  if (iVar1 < 0x20) {
+    stack->stack[iVar1].id = 0x1c;
+    *(char **)stack->stack[iVar1].data = pointer;
+    stack->topOfStack = stack->topOfStack + 1;
+  }
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ EVENT_AddShortPointerToStack(struct _PCodeStack *stack /*$a0*/, short *pointer /*$a1*/)
+ // line 1356, offset 0x8006222c
+	/* begin block 1 */
+		// Start line: 1358
+		// Start offset: 0x8006222C
+
+		/* begin block 1.1 */
+			// Start line: 1360
+			// Start offset: 0x80062240
+			// Variables:
+		// 		struct StackType *stackEntry; // $v0
+		/* end block 1.1 */
+		// End offset: 0x8006226C
+		// End Line: 1364
+	/* end block 1 */
+	// End offset: 0x8006226C
+	// End Line: 1370
+
+	/* begin block 2 */
+		// Start line: 3100
+	/* end block 2 */
+	// End Line: 3101
+
+	/* begin block 3 */
+		// Start line: 3101
+	/* end block 3 */
+	// End Line: 3102
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_AddShortPointerToStack(_PCodeStack *stack,short *pointer)
 
@@ -1633,32 +1857,34 @@ void EVENT_AddShortPointerToStack(_PCodeStack *stack,short *pointer)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_AddNumberToStack(struct _PCodeStack *stack /*$a0*/, long item /*$a1*/, long flags /*$a2*/)
- // line 1194, offset 0x80062efc
+ // line 1372, offset 0x80062274
 	/* begin block 1 */
-		// Start line: 1196
-		// Start offset: 0x80062EFC
+		// Start line: 1374
+		// Start offset: 0x80062274
 
 		/* begin block 1.1 */
-			// Start line: 1198
-			// Start offset: 0x80062F10
+			// Start line: 1376
+			// Start offset: 0x80062288
 			// Variables:
 		// 		struct StackType *stackEntry; // $v0
 		/* end block 1.1 */
-		// End offset: 0x80062F44
-		// End Line: 1204
+		// End offset: 0x800622BC
+		// End Line: 1382
 	/* end block 1 */
-	// End offset: 0x80062F44
-	// End Line: 1210
+	// End offset: 0x800622BC
+	// End Line: 1388
 
 	/* begin block 2 */
-		// Start line: 2682
+		// Start line: 3132
 	/* end block 2 */
-	// End Line: 2683
+	// End Line: 3133
 
 	/* begin block 3 */
-		// Start line: 2683
+		// Start line: 3133
 	/* end block 3 */
-	// End Line: 2684
+	// End Line: 3134
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_AddNumberToStack(_PCodeStack *stack,long item,long flags)
 
@@ -1681,16 +1907,18 @@ void EVENT_AddNumberToStack(_PCodeStack *stack,long item,long flags)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_ChangeOperandToNumber(struct StackType *operand /*$a0*/, long item /*$a1*/, long flags /*$a2*/)
- // line 1212, offset 0x80062f4c
+ // line 1390, offset 0x800622c4
 	/* begin block 1 */
-		// Start line: 2718
+		// Start line: 3168
 	/* end block 1 */
-	// End Line: 2719
+	// End Line: 3169
 
 	/* begin block 2 */
-		// Start line: 2719
+		// Start line: 3169
 	/* end block 2 */
-	// End Line: 2720
+	// End Line: 3170
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_ChangeOperandToNumber(StackType *operand,long item,long flags)
 
@@ -1706,19 +1934,21 @@ void EVENT_ChangeOperandToNumber(StackType *operand,long item,long flags)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ EVENT_ChangeOperandVector3d(struct StackType *operand /*$a0*/, short x /*$a1*/, short y /*$a2*/, short z /*$a3*/)
- // line 1220, offset 0x80062f64
+// void /*$ra*/ EVENT_ChangeOperandVector3d(struct StackType *operand /*$a0*/, short x /*$a1*/, short y /*$a2*/, short z /*$a3*/, long streamUnitID /*stack 16*/)
+ // line 1398, offset 0x800622dc
 	/* begin block 1 */
-		// Start line: 2734
+		// Start line: 3184
 	/* end block 1 */
-	// End Line: 2735
+	// End Line: 3185
 
 	/* begin block 2 */
-		// Start line: 2735
+		// Start line: 3185
 	/* end block 2 */
-	// End Line: 2736
+	// End Line: 3186
 
-void EVENT_ChangeOperandVector3d(StackType *operand,short x,short y,short z)
+/* File: C:\kain2\game\EVENT.C */
+
+void EVENT_ChangeOperandVector3d(StackType *operand,short x,short y,short z,long streamUnitID)
 
 {
   operand->id = 9;
@@ -1728,6 +1958,7 @@ void EVENT_ChangeOperandVector3d(StackType *operand,short x,short y,short z)
   *(undefined2 *)(operand->data + 8) = 0xa0;
   *(undefined2 *)(operand->data + 10) = 0xa0;
   *(undefined2 *)(operand->data + 0xc) = 0xa0;
+  *(long *)(operand->data + 0x10) = streamUnitID;
   return;
 }
 
@@ -1735,18 +1966,20 @@ void EVENT_ChangeOperandVector3d(StackType *operand,short x,short y,short z)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ EVENT_Addvector3dToStack(struct _PCodeStack *stack /*$s0*/, short x /*$a1*/, short y /*$a2*/, short z /*$a3*/)
- // line 1231, offset 0x80062f8c
+// void /*$ra*/ EVENT_Addvector3dToStack(struct _PCodeStack *stack /*$s0*/, short x /*$a1*/, short y /*$a2*/, short z /*$a3*/, long streamUnitID /*stack 16*/)
+ // line 1410, offset 0x8006230c
 	/* begin block 1 */
-		// Start line: 2759
+		// Start line: 3212
 	/* end block 1 */
-	// End Line: 2760
+	// End Line: 3213
 
-void EVENT_Addvector3dToStack(_PCodeStack *stack,short x,short y,short z)
+/* File: C:\kain2\game\EVENT.C */
+
+void EVENT_Addvector3dToStack(_PCodeStack *stack,short x,short y,short z,long streamUnitID)
 
 {
   if (stack->topOfStack < 0x20) {
-    EVENT_ChangeOperandVector3d(stack->stack + stack->topOfStack,x,y,z);
+    EVENT_ChangeOperandVector3d(stack->stack + stack->topOfStack,x,y,z,streamUnitID);
     stack->topOfStack = stack->topOfStack + 1;
   }
   return;
@@ -1757,16 +1990,18 @@ void EVENT_Addvector3dToStack(_PCodeStack *stack,short x,short y,short z)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_ChangeOperandRotation3d(struct StackType *operand /*$a0*/, struct Rotation3d *rotation /*$a1*/)
- // line 1246, offset 0x80062ffc
+ // line 1425, offset 0x80062384
 	/* begin block 1 */
-		// Start line: 2789
+		// Start line: 3242
 	/* end block 1 */
-	// End Line: 2790
+	// End Line: 3243
 
 	/* begin block 2 */
-		// Start line: 2790
+		// Start line: 3243
 	/* end block 2 */
-	// End Line: 2791
+	// End Line: 3244
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_ChangeOperandRotation3d(StackType *operand,Rotation3d *rotation)
 
@@ -1790,37 +2025,39 @@ void EVENT_ChangeOperandRotation3d(StackType *operand,Rotation3d *rotation)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_AddSubListObjectToStack(struct _PCodeStack *stack /*$a0*/, long listNumber /*$a1*/)
- // line 1272, offset 0x80063054
+ // line 1451, offset 0x800623dc
 	/* begin block 1 */
-		// Start line: 1274
-		// Start offset: 0x80063054
+		// Start line: 1453
+		// Start offset: 0x800623DC
 
 		/* begin block 1.1 */
-			// Start line: 1281
-			// Start offset: 0x80063068
+			// Start line: 1460
+			// Start offset: 0x800623F0
 			// Variables:
 		// 		struct StackType *stackEntry; // $a3
 		/* end block 1.1 */
-		// End offset: 0x800630E0
-		// End Line: 1295
+		// End offset: 0x80062468
+		// End Line: 1474
 	/* end block 1 */
-	// End offset: 0x800630E0
-	// End Line: 1301
+	// End offset: 0x80062468
+	// End Line: 1480
 
 	/* begin block 2 */
-		// Start line: 2540
+		// Start line: 2898
 	/* end block 2 */
-	// End Line: 2541
+	// End Line: 2899
 
 	/* begin block 3 */
-		// Start line: 2824
+		// Start line: 3277
 	/* end block 3 */
-	// End Line: 2825
+	// End Line: 3278
 
 	/* begin block 4 */
-		// Start line: 2829
+		// Start line: 3282
 	/* end block 4 */
-	// End Line: 2830
+	// End Line: 3283
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_AddSubListObjectToStack(_PCodeStack *stack,long listNumber)
 
@@ -1830,13 +2067,13 @@ long EVENT_AddSubListObjectToStack(_PCodeStack *stack,long listNumber)
   if (stack->topOfStack < 0x20) {
     pSVar1 = stack->stack + stack->topOfStack;
     pSVar1->id = 0x16;
-    if (*(int *)(&eventListNumInstances + listNumber * 4) < 1) {
+    if (eventListNumInstances[listNumber] < 1) {
       *(undefined4 *)pSVar1->data = 0;
     }
     else {
-      *(_Instance **)pSVar1->data = (_Instance *)(&eventListArray2010 + listNumber * 10);
+      *(undefined **)pSVar1->data = &eventListArray + listNumber * 0x28;
     }
-    *(int *)(pSVar1->data + 4) = *(int *)(&eventListNumInstances + listNumber * 4);
+    *(long *)(pSVar1->data + 4) = eventListNumInstances[listNumber];
     *(undefined4 *)(pSVar1->data + 8) = 0;
     stack->topOfStack = stack->topOfStack + 1;
   }
@@ -1848,16 +2085,18 @@ long EVENT_AddSubListObjectToStack(_PCodeStack *stack,long listNumber)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_StackDuplicate(struct _PCodeStack *stack /*$a0*/)
- // line 1351, offset 0x800630e8
+ // line 1530, offset 0x80062470
 	/* begin block 1 */
-		// Start line: 2698
+		// Start line: 3056
 	/* end block 1 */
-	// End Line: 2699
+	// End Line: 3057
 
 	/* begin block 2 */
-		// Start line: 2933
+		// Start line: 3386
 	/* end block 2 */
-	// End Line: 2934
+	// End Line: 3387
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_StackDuplicate(_PCodeStack *stack)
 
@@ -1895,30 +2134,32 @@ void EVENT_StackDuplicate(_PCodeStack *stack)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_TransformTGroupAttribute(struct _PCodeStack *stack /*$a0*/, struct StackType *stackObject /*$a1*/, long item /*$a2*/, short *codeStream /*$a3*/)
- // line 1373, offset 0x80063180
+ // line 1552, offset 0x80062508
 	/* begin block 1 */
-		// Start line: 1375
-		// Start offset: 0x80063180
+		// Start line: 1554
+		// Start offset: 0x80062508
 		// Variables:
 	// 		long retValue; // $a0
 	/* end block 1 */
-	// End offset: 0x80063208
-	// End Line: 1420
+	// End offset: 0x80062590
+	// End Line: 1599
 
 	/* begin block 2 */
-		// Start line: 2976
+		// Start line: 3429
 	/* end block 2 */
-	// End Line: 2977
+	// End Line: 3430
 
 	/* begin block 3 */
-		// Start line: 2977
+		// Start line: 3430
 	/* end block 3 */
-	// End Line: 2978
+	// End Line: 3431
 
 	/* begin block 4 */
-		// Start line: 2978
+		// Start line: 3431
 	/* end block 4 */
-	// End Line: 2979
+	// End Line: 3432
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_TransformTGroupAttribute
                (_PCodeStack *stack,StackType *stackObject,long item,short *codeStream)
@@ -1932,7 +2173,7 @@ long EVENT_TransformTGroupAttribute
     lVar1 = 1;
     switch(item) {
     default:
-      goto switchD_800631bc_caseD_5;
+      goto switchD_80062544_caseD_5;
     case 0x2c:
     case 0x2e:
       if (codeStream != (short *)0x0) {
@@ -1950,7 +2191,7 @@ long EVENT_TransformTGroupAttribute
     }
     lVar1 = 1;
   }
-switchD_800631bc_caseD_5:
+switchD_80062544_caseD_5:
   return lVar1;
 }
 
@@ -1959,35 +2200,37 @@ switchD_800631bc_caseD_5:
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_TransformConstrictAttribute(struct _PCodeStack *stack /*$a0*/, struct StackType *stackObject /*$a0*/, long item /*$a2*/)
- // line 1423, offset 0x80063210
+ // line 1602, offset 0x80062598
 	/* begin block 1 */
-		// Start line: 1424
-		// Start offset: 0x80063210
+		// Start line: 1603
+		// Start offset: 0x80062598
 		// Variables:
 	// 		long retValue; // $v1
 	// 		struct _Instance *instance; // $a1
 
 		/* begin block 1.1 */
-			// Start line: 1434
-			// Start offset: 0x80063240
+			// Start line: 1613
+			// Start offset: 0x800625C8
 		/* end block 1.1 */
-		// End offset: 0x80063240
-		// End Line: 1437
+		// End offset: 0x800625C8
+		// End Line: 1616
 
 		/* begin block 1.2 */
-			// Start line: 1448
-			// Start offset: 0x80063250
+			// Start line: 1627
+			// Start offset: 0x800625D8
 		/* end block 1.2 */
-		// End offset: 0x8006326C
-		// End Line: 1457
+		// End offset: 0x800625F4
+		// End Line: 1636
 	/* end block 1 */
-	// End offset: 0x8006326C
-	// End Line: 1469
+	// End offset: 0x800625F4
+	// End Line: 1648
 
 	/* begin block 2 */
-		// Start line: 3076
+		// Start line: 3529
 	/* end block 2 */
-	// End Line: 3077
+	// End Line: 3530
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_TransformConstrictAttribute(_PCodeStack *stack,StackType *stackObject,long item)
 
@@ -2012,10 +2255,10 @@ long EVENT_TransformConstrictAttribute(_PCodeStack *stack,StackType *stackObject
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_TransformInstanceAttribute(struct _PCodeStack *stack /*$a0*/, struct StackType *stackObject /*$s1*/, long item /*$a2*/, short *codeStream /*$a3*/)
- // line 1475, offset 0x8006327c
+ // line 1654, offset 0x80062604
 	/* begin block 1 */
-		// Start line: 1476
-		// Start offset: 0x8006327C
+		// Start line: 1655
+		// Start offset: 0x80062604
 		// Variables:
 	// 		long retValue; // $a0
 	// 		long x; // $a1
@@ -2024,142 +2267,185 @@ long EVENT_TransformConstrictAttribute(_PCodeStack *stack,StackType *stackObject
 	// 		struct _Instance *instance; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 1487
-			// Start offset: 0x800632C4
+			// Start line: 1666
+			// Start offset: 0x80062650
 			// Variables:
 		// 		struct evPositionData *position; // $v0
 		/* end block 1.1 */
-		// End offset: 0x800632F8
-		// End Line: 1502
+		// End offset: 0x80062684
+		// End Line: 1681
 
 		/* begin block 1.2 */
-			// Start line: 1508
-			// Start offset: 0x80063308
+			// Start line: 1687
+			// Start offset: 0x8006269C
 			// Variables:
 		// 		struct evPositionData *rotation; // $v1
 		// 		struct Rotation3d vector; // stack offset -40
 		/* end block 1.2 */
-		// End offset: 0x80063368
-		// End Line: 1527
+		// End offset: 0x800626FC
+		// End Line: 1706
 
 		/* begin block 1.3 */
-			// Start line: 1555
-			// Start offset: 0x800633C0
+			// Start line: 1734
+			// Start offset: 0x80062754
+			// Variables:
+		// 		int status; // $v1
 		/* end block 1.3 */
-		// End offset: 0x800633EC
-		// End Line: 1569
+		// End offset: 0x800627DC
+		// End Line: 1771
 
 		/* begin block 1.4 */
-			// Start line: 1600
-			// Start offset: 0x80063428
+			// Start line: 1793
+			// Start offset: 0x80062804
 		/* end block 1.4 */
-		// End offset: 0x80063428
-		// End Line: 1602
+		// End offset: 0x80062804
+		// End Line: 1795
 
 		/* begin block 1.5 */
-			// Start line: 1613
-			// Start offset: 0x8006344C
+			// Start line: 1806
+			// Start offset: 0x80062828
 		/* end block 1.5 */
-		// End offset: 0x8006344C
-		// End Line: 1613
+		// End offset: 0x80062828
+		// End Line: 1806
 
 		/* begin block 1.6 */
-			// Start line: 1620
-			// Start offset: 0x80063470
+			// Start line: 1813
+			// Start offset: 0x8006284C
+		/* end block 1.6 */
+		// End offset: 0x8006284C
+		// End Line: 1813
+
+		/* begin block 1.7 */
+			// Start line: 1820
+			// Start offset: 0x80062870
+		/* end block 1.7 */
+		// End offset: 0x80062870
+		// End Line: 1820
+
+		/* begin block 1.8 */
+			// Start line: 1827
+			// Start offset: 0x80062894
 			// Variables:
 		// 		struct _Instance *tmpI; // $s0
 		// 		long value; // $a1
 
-			/* begin block 1.6.1 */
-				// Start line: 1632
-				// Start offset: 0x800634A4
-			/* end block 1.6.1 */
-			// End offset: 0x800634C0
-			// End Line: 1641
-		/* end block 1.6 */
-		// End offset: 0x800634C4
-		// End Line: 1647
-
-		/* begin block 1.7 */
-			// Start line: 1653
-			// Start offset: 0x800634D8
-		/* end block 1.7 */
-		// End offset: 0x800634D8
-		// End Line: 1655
-
-		/* begin block 1.8 */
-			// Start line: 1664
-			// Start offset: 0x80063500
+			/* begin block 1.8.1 */
+				// Start line: 1839
+				// Start offset: 0x800628C8
+			/* end block 1.8.1 */
+			// End offset: 0x800628E4
+			// End Line: 1848
 		/* end block 1.8 */
-		// End offset: 0x80063500
-		// End Line: 1666
+		// End offset: 0x800628E8
+		// End Line: 1854
 
 		/* begin block 1.9 */
-			// Start line: 1693
-			// Start offset: 0x80063528
+			// Start line: 1863
+			// Start offset: 0x800628FC
 		/* end block 1.9 */
-		// End offset: 0x80063528
-		// End Line: 1695
+		// End offset: 0x800628FC
+		// End Line: 1865
 
 		/* begin block 1.10 */
-			// Start line: 1703
-			// Start offset: 0x8006354C
+			// Start line: 1876
+			// Start offset: 0x80062924
 		/* end block 1.10 */
-		// End offset: 0x8006354C
-		// End Line: 1706
+		// End offset: 0x80062924
+		// End Line: 1878
 
 		/* begin block 1.11 */
-			// Start line: 1758
-			// Start offset: 0x80063664
-			// Variables:
-		// 		long value; // $a1
+			// Start line: 1887
+			// Start offset: 0x8006294C
 		/* end block 1.11 */
-		// End offset: 0x80063688
-		// End Line: 1765
+		// End offset: 0x8006294C
+		// End Line: 1889
 
 		/* begin block 1.12 */
-			// Start line: 1771
-			// Start offset: 0x8006369C
-			// Variables:
-		// 		long value; // $a1
+			// Start line: 1916
+			// Start offset: 0x80062974
 		/* end block 1.12 */
-		// End offset: 0x800636C0
-		// End Line: 1778
+		// End offset: 0x80062974
+		// End Line: 1918
 
 		/* begin block 1.13 */
-			// Start line: 1784
-			// Start offset: 0x800636D4
-			// Variables:
-		// 		long value; // $a1
+			// Start line: 1926
+			// Start offset: 0x80062998
 		/* end block 1.13 */
-		// End offset: 0x800636F8
-		// End Line: 1792
+		// End offset: 0x80062998
+		// End Line: 1929
 
 		/* begin block 1.14 */
-			// Start line: 1798
-			// Start offset: 0x8006370C
+			// Start line: 1952
+			// Start offset: 0x80062A10
 			// Variables:
-		// 		long value; // $a1
+		// 		long value; // $s2
+
+			/* begin block 1.14.1 */
+				// Start line: 1955
+				// Start offset: 0x80062A20
+				// Variables:
+			// 		struct _StreamUnit *streamUnit; // $v0
+			/* end block 1.14.1 */
+			// End offset: 0x80062A58
+			// End Line: 1962
 		/* end block 1.14 */
-		// End offset: 0x80063730
-		// End Line: 1806
+		// End offset: 0x80062A84
+		// End Line: 1972
 
 		/* begin block 1.15 */
-			// Start line: 1812
-			// Start offset: 0x80063744
+			// Start line: 1996
+			// Start offset: 0x80062B04
 			// Variables:
 		// 		long value; // $a1
 		/* end block 1.15 */
-		// End offset: 0x8006376C
-		// End Line: 1820
+		// End offset: 0x80062B28
+		// End Line: 2003
+
+		/* begin block 1.16 */
+			// Start line: 2009
+			// Start offset: 0x80062B3C
+			// Variables:
+		// 		long value; // $a1
+		/* end block 1.16 */
+		// End offset: 0x80062B60
+		// End Line: 2016
+
+		/* begin block 1.17 */
+			// Start line: 2022
+			// Start offset: 0x80062B74
+			// Variables:
+		// 		long value; // $a1
+		/* end block 1.17 */
+		// End offset: 0x80062B98
+		// End Line: 2030
+
+		/* begin block 1.18 */
+			// Start line: 2036
+			// Start offset: 0x80062BAC
+			// Variables:
+		// 		long value; // $a1
+		/* end block 1.18 */
+		// End offset: 0x80062BD0
+		// End Line: 2044
+
+		/* begin block 1.19 */
+			// Start line: 2050
+			// Start offset: 0x80062BE4
+			// Variables:
+		// 		long value; // $a1
+		/* end block 1.19 */
+		// End offset: 0x80062C0C
+		// End Line: 2058
 	/* end block 1 */
-	// End offset: 0x800637B0
-	// End Line: 1889
+	// End offset: 0x80062C50
+	// End Line: 2128
 
 	/* begin block 2 */
-		// Start line: 3187
+		// Start line: 3640
 	/* end block 2 */
-	// End Line: 3188
+	// End Line: 3641
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_TransformInstanceAttribute
                (_PCodeStack *stack,StackType *stackObject,long item,short *codeStream)
@@ -2168,20 +2454,22 @@ long EVENT_TransformInstanceAttribute
   bool bVar1;
   short *psVar2;
   MultiSpline *pMVar3;
-  ulong item_00;
-  long lVar4;
-  AniTex *pAVar5;
-  uint uVar6;
-  long item_01;
+  int item_00;
+  ulong item_01;
+  _StreamUnit *p_Var4;
+  long lVar5;
+  AniTex *pAVar6;
+  uint uVar7;
+  long item_02;
+  _Terrain *p_Var8;
   short x;
-  int item_02;
   short y;
   short z;
   _Instance *Inst;
   Rotation3d local_28;
   
   Inst = *(_Instance **)stackObject->data;
-  item_01 = 0;
+  item_02 = 0;
   switch(item) {
   case 4:
   case 10:
@@ -2229,8 +2517,9 @@ long EVENT_TransformInstanceAttribute
   case 0x90:
   case 0xa3:
   case 0xa4:
+  case 0xa5:
     *(long *)(stackObject->data + 4) = item;
-    item_01 = 1;
+    item_02 = 1;
     break;
   case 5:
     psVar2 = (short *)INSTANCE_Query(Inst,6);
@@ -2244,8 +2533,8 @@ long EVENT_TransformInstanceAttribute
       y = psVar2[1];
       z = psVar2[2];
     }
-    EVENT_ChangeOperandVector3d(stackObject,x,y,z);
-    item_01 = 1;
+    EVENT_ChangeOperandVector3d(stackObject,x,y,z,Inst->currentStreamUnitID);
+    item_02 = 1;
     break;
   case 9:
     psVar2 = (short *)INSTANCE_Query(Inst,7);
@@ -2263,7 +2552,7 @@ long EVENT_TransformInstanceAttribute
     local_28.errorz = 0x200;
     local_28.errory = 0x200;
     EVENT_ChangeOperandRotation3d(stackObject,&local_28);
-    item_01 = 1;
+    item_02 = 1;
     break;
   case 0xc:
     stackObject->id = 0xf;
@@ -2271,55 +2560,59 @@ long EVENT_TransformInstanceAttribute
     pMVar3 = SCRIPT_GetMultiSpline
                        (Inst,(ulong *)(stackObject->data + 0xc),(ulong *)(stackObject->data + 0x10))
     ;
-    item_01 = 1;
+    item_02 = 1;
     *(MultiSpline **)(stackObject->data + 4) = pMVar3;
     *(undefined4 *)(stackObject->data + 0x14) = 0;
     *(undefined4 *)(stackObject->data + 8) = 0xffffffff;
     break;
   case 0x12:
-    item_00 = INSTANCE_Query(Inst,9);
-    EVENT_ChangeOperandToNumber(stackObject,item_00,1);
-    item_01 = 1;
+    item_01 = INSTANCE_Query(Inst,9);
+    EVENT_ChangeOperandToNumber(stackObject,item_01,1);
+    item_02 = 1;
     break;
   case 0x13:
-    item_00 = INSTANCE_Query(Inst,10);
-    EVENT_ChangeOperandToNumber(stackObject,item_00,3);
-    item_01 = 1;
+    item_01 = INSTANCE_Query(Inst,10);
+    EVENT_ChangeOperandToNumber(stackObject,item_01,3);
+    item_02 = 1;
     break;
   case 0x1d:
-    lVar4 = 0x13;
+    lVar5 = 0x13;
     if (Inst->object->animList == (_G2AnimKeylist_Type **)0x0) {
       return 0;
     }
-    goto LAB_80063650;
+    goto LAB_80062af0;
   case 0x21:
     stackObject->id = 0x14;
     *(_Instance **)stackObject->data = Inst;
-    item_01 = 1;
-    pAVar5 = Inst->object->modelList[Inst->currentModel]->aniTextures;
+    item_02 = 1;
+    pAVar6 = Inst->object->modelList[Inst->currentModel]->aniTextures;
     *(undefined4 *)(stackObject->data + 8) = 0xffffffff;
-    *(AniTex **)(stackObject->data + 4) = pAVar5;
+    *(AniTex **)(stackObject->data + 4) = pAVar6;
     break;
   case 0x2b:
-    if (Inst->tface == (_TFace *)0x0) {
-      item_02 = Inst->attachedID;
+    item_00 = Inst->attachedID;
+    if ((item_00 == 0) &&
+       (p_Var4 = STREAM_GetStreamUnitWithID(Inst->currentStreamUnitID), item_00 = 0,
+       p_Var4 != (_StreamUnit *)0x0)) {
+      p_Var8 = p_Var4->level->terrain;
+      if (Inst->bspTree < p_Var8->numBSPTrees) {
+        item_00 = -(Inst->currentStreamUnitID * 0x100 + (int)p_Var8->BSPTreeArray[Inst->bspTree].ID)
+        ;
+      }
     }
-    else {
-      item_02 = -Inst->bspTree;
-    }
-    EVENT_ChangeOperandToNumber(stackObject,item_02,0);
-    item_01 = 1;
+    EVENT_ChangeOperandToNumber(stackObject,item_00,0);
+    item_02 = 1;
     break;
   case 0x38:
-    item_00 = INSTANCE_Query(Inst,0x1e);
-    EVENT_ChangeOperandToNumber(stackObject,item_00,0);
-    item_01 = 1;
+    item_01 = INSTANCE_Query(Inst,0x1e);
+    EVENT_ChangeOperandToNumber(stackObject,item_01,0);
+    item_02 = 1;
     break;
   case 0x39:
-    lVar4 = 0x18;
-LAB_80063650:
-    item_01 = 1;
-    stackObject->id = lVar4;
+    lVar5 = 0x18;
+LAB_80062af0:
+    item_02 = 1;
+    stackObject->id = lVar5;
     *(_Instance **)stackObject->data = Inst;
     *(undefined4 *)(stackObject->data + 4) = 0xffffffff;
     break;
@@ -2329,19 +2622,19 @@ LAB_80063650:
       Inst->flags = Inst->flags & 0xfffffffb;
     }
     EVENT_ChangeOperandToNumber(stackObject,(uint)bVar1,0);
-    item_01 = 1;
+    item_02 = 1;
     break;
   case 0x3f:
     EVENT_ChangeOperandToNumber(stackObject,1,0);
-    item_01 = 1;
+    item_02 = 1;
     break;
   case 0x6a:
-    uVar6 = Inst->flags;
-    if ((int)uVar6 < 0) {
-      Inst->flags = uVar6 & 0x7fffffff;
+    uVar7 = Inst->flags;
+    if ((int)uVar7 < 0) {
+      Inst->flags = uVar7 & 0x7fffffff;
     }
-    EVENT_ChangeOperandToNumber(stackObject,(uint)((int)uVar6 < 0),0);
-    item_01 = 1;
+    EVENT_ChangeOperandToNumber(stackObject,(uint)((int)uVar7 < 0),0);
+    item_02 = 1;
     break;
   case 0x79:
     bVar1 = (Inst->flags & 8U) != 0;
@@ -2349,7 +2642,7 @@ LAB_80063650:
       Inst->flags = Inst->flags & 0xfffffff7;
     }
     EVENT_ChangeOperandToNumber(stackObject,(uint)bVar1,0);
-    item_01 = 1;
+    item_02 = 1;
     break;
   case 0x7a:
     bVar1 = (Inst->flags & 0x10U) != 0;
@@ -2357,7 +2650,7 @@ LAB_80063650:
       Inst->flags = Inst->flags & 0xffffffef;
     }
     EVENT_ChangeOperandToNumber(stackObject,(uint)bVar1,0);
-    item_01 = 1;
+    item_02 = 1;
     break;
   case 0x7d:
     bVar1 = (Inst->flags2 & 0x10000U) != 0;
@@ -2365,7 +2658,7 @@ LAB_80063650:
       Inst->flags2 = Inst->flags2 & 0xfffeffff;
     }
     EVENT_ChangeOperandToNumber(stackObject,(uint)bVar1,0);
-    item_01 = 1;
+    item_02 = 1;
     break;
   case 0x7e:
     stackObject->id = 0x1b;
@@ -2375,61 +2668,90 @@ LAB_80063650:
       MoveCodeStreamExtra = 1;
       *(int *)(stackObject->data + 4) = (int)codeStream[1];
     }
-    SOUND_IsInstanceSoundLoaded(Inst->object->soundData,*(long *)(stackObject->data + 4));
-    item_01 = 1;
+    item_00 = SOUND_IsInstanceSoundLoaded(Inst->object->soundData,*(long *)(stackObject->data + 4));
+    if (item_00 == 0) {
+      if (0 < WaitingToLoadSound - DAT_800d2314) {
+        WaitingToLoadSound = WaitingToLoadSound - DAT_800d2314;
+        EventAbortLine = 1;
+        return 1;
+      }
+    }
+    else {
+      if (item_00 == -1) {
+        return 1;
+      }
+    }
+    WaitingToLoadSound = 0x96000;
+    item_02 = 1;
     break;
   case 0x89:
-    item_00 = INSTANCE_Query(Inst,2);
-    EVENT_ChangeOperandToNumber(stackObject,item_00,3);
-    item_01 = 1;
+    item_01 = INSTANCE_Query(Inst,0x24);
+    EVENT_ChangeOperandToNumber(stackObject,item_01,3);
+    item_02 = 1;
     break;
   case 0x8b:
-    item_00 = INSTANCE_Query(Inst,0);
-    EVENT_ChangeOperandToNumber(stackObject,item_00 >> 0x1e & 1,0);
-    item_01 = 1;
+  case 0xa6:
+    item_01 = INSTANCE_Query(Inst,0);
+    EVENT_ChangeOperandToNumber(stackObject,item_01 >> 0x1e & 1,0);
+    item_02 = 1;
     break;
   case 0x92:
     EVENT_ChangeOperandToNumber(stackObject,0,0);
-    item_01 = 1;
+    item_02 = 1;
     break;
   case 0x97:
     EVENT_ChangeOperandToNumber(stackObject,Inst->currentStreamUnitID,0);
-    item_01 = 1;
+    item_02 = 1;
     break;
   case 0x99:
     EVENT_ChangeOperandToNumber(stackObject,(uint)(Inst->tface != (_TFace *)0x0),0);
-    item_01 = 1;
+    item_02 = 1;
     break;
   case 0x9f:
-    item_00 = INSTANCE_Query(Inst,0x2b);
-    EVENT_ChangeOperandToNumber(stackObject,item_00,0);
-    item_01 = 1;
+    item_01 = INSTANCE_Query(Inst,0x2b);
+    EVENT_ChangeOperandToNumber(stackObject,item_01,0);
+    item_02 = 1;
     break;
   case 0xa0:
-    item_00 = INSTANCE_Query(Inst,1);
-    EVENT_ChangeOperandToNumber(stackObject,(uint)((item_00 & 4) != 0),0);
-    item_01 = 1;
+    item_01 = INSTANCE_Query(Inst,1);
+    EVENT_ChangeOperandToNumber(stackObject,(uint)((item_01 & 4) != 0),0);
+    item_02 = 1;
     break;
   case 0xa1:
     Inst = (_Instance *)INSTANCE_Query(Inst,0x2c);
     if (Inst == (_Instance *)0x0) {
-      item_01 = 0;
+      item_02 = 0;
     }
     else {
-      item_00 = INSTANCE_Query(Inst,1);
-      if ((item_00 & 0x20) != 0) {
-        item_00 = INSTANCE_Query(Inst,4);
-        if ((item_00 & 3) != 0) {
+      item_01 = INSTANCE_Query(Inst,1);
+      if ((item_01 & 0x20) != 0) {
+        item_01 = INSTANCE_Query(Inst,4);
+        if ((item_01 & 3) != 0) {
           return 1;
         }
         return 2;
       }
-      item_01 = 3;
+      item_02 = 3;
     }
+    EVENT_ChangeOperandToNumber(stackObject,item_02,0);
+    item_02 = 1;
+    break;
+  case 0xa7:
+    item_01 = INSTANCE_Query(Inst,0);
+    EVENT_ChangeOperandToNumber(stackObject,item_01 >> 0x1a & 1,0);
+    item_02 = 1;
+    break;
+  case 0xa9:
+    item_01 = INSTANCE_Query(Inst,0x1f);
     EVENT_ChangeOperandToNumber(stackObject,item_01,0);
-    item_01 = 1;
+    item_02 = 1;
+    break;
+  case 0xaa:
+    item_01 = INSTANCE_Query(Inst,0x20);
+    EVENT_ChangeOperandToNumber(stackObject,item_01,0);
+    item_02 = 1;
   }
-  return item_01;
+  return item_02;
 }
 
 
@@ -2437,27 +2759,29 @@ LAB_80063650:
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_TransformSoundObjectAttribute(struct _PCodeStack *stack /*$a0*/, struct SoundObject *soundObject /*$a1*/, long item /*$a2*/, short *codeStream /*$a3*/)
- // line 1891, offset 0x800637c4
+ // line 2130, offset 0x80062c68
 	/* begin block 1 */
-		// Start line: 1892
-		// Start offset: 0x800637C4
+		// Start line: 2131
+		// Start offset: 0x80062C68
 		// Variables:
 	// 		long retValue; // $v1
 
 		/* begin block 1.1 */
-			// Start line: 1900
-			// Start offset: 0x80063818
+			// Start line: 2139
+			// Start offset: 0x80062CBC
 		/* end block 1.1 */
-		// End offset: 0x80063854
-		// End Line: 1916
+		// End offset: 0x80062CF8
+		// End Line: 2159
 	/* end block 1 */
-	// End offset: 0x80063894
-	// End Line: 1962
+	// End offset: 0x80062D38
+	// End Line: 2205
 
 	/* begin block 2 */
-		// Start line: 4061
+		// Start line: 4636
 	/* end block 2 */
-	// End Line: 4062
+	// End Line: 4637
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_TransformSoundObjectAttribute
                (_PCodeStack *stack,SoundObject *soundObject,long item,short *codeStream)
@@ -2505,20 +2829,22 @@ long EVENT_TransformSoundObjectAttribute
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_GetGameValue(struct GameObject *gameObject /*$a0*/)
- // line 1965, offset 0x800638a4
+ // line 2208, offset 0x80062d48
 	/* begin block 1 */
-		// Start line: 1966
-		// Start offset: 0x800638A4
+		// Start line: 2209
+		// Start offset: 0x80062D48
 		// Variables:
 	// 		long value; // $v1
 	/* end block 1 */
-	// End offset: 0x80063930
-	// End Line: 1998
+	// End offset: 0x80062DD4
+	// End Line: 2241
 
 	/* begin block 2 */
-		// Start line: 4211
+		// Start line: 4794
 	/* end block 2 */
-	// End Line: 4212
+	// End Line: 4795
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_GetGameValue(GameObject *gameObject)
 
@@ -2554,93 +2880,95 @@ long EVENT_GetGameValue(GameObject *gameObject)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_TransformGameAttribute(struct _PCodeStack *stack /*$s1*/, struct StackType *stackObject /*$s2*/, long item /*$a2*/, short *codeStream /*$s0*/)
- // line 2001, offset 0x80063940
+ // line 2245, offset 0x80062de4
 	/* begin block 1 */
-		// Start line: 2002
-		// Start offset: 0x80063940
+		// Start line: 2246
+		// Start offset: 0x80062DE4
 		// Variables:
 	// 		long value; // $s0
 	// 		long retValue; // $a0
 
 		/* begin block 1.1 */
-			// Start line: 2057
-			// Start offset: 0x80063AA4
+			// Start line: 2309
+			// Start offset: 0x80062F74
 			// Variables:
 		// 		struct EventTimer *timer; // $a2
 		// 		short time; // $v1
 		/* end block 1.1 */
-		// End offset: 0x80063B1C
-		// End Line: 2085
+		// End offset: 0x80062FEC
+		// End Line: 2337
 
 		/* begin block 1.2 */
-			// Start line: 2104
-			// Start offset: 0x80063B74
+			// Start line: 2356
+			// Start offset: 0x80063044
 			// Variables:
 		// 		long wipeType; // $v1
 		// 		long wipeTime; // $a0
 		/* end block 1.2 */
-		// End offset: 0x80063BDC
-		// End Line: 2126
+		// End offset: 0x800630AC
+		// End Line: 2378
 
 		/* begin block 1.3 */
-			// Start line: 2132
-			// Start offset: 0x80063BEC
+			// Start line: 2384
+			// Start offset: 0x800630BC
 			// Variables:
 		// 		long motor0Time; // $a1
 		// 		long motor0Speed; // $a0
 		// 		long motor1Time; // $a3
 		// 		long motor1Speed; // $a2
 		/* end block 1.3 */
-		// End offset: 0x80063C24
-		// End Line: 2154
+		// End offset: 0x800630F4
+		// End Line: 2408
 
 		/* begin block 1.4 */
-			// Start line: 2169
-			// Start offset: 0x80063C74
+			// Start line: 2423
+			// Start offset: 0x80063144
 			// Variables:
 		// 		short rand1; // $s1
 		// 		short rand2; // $s0
 		/* end block 1.4 */
-		// End offset: 0x80063CBC
-		// End Line: 2182
+		// End offset: 0x8006318C
+		// End Line: 2436
 
 		/* begin block 1.5 */
-			// Start line: 2187
-			// Start offset: 0x80063CC4
+			// Start line: 2441
+			// Start offset: 0x80063194
 		/* end block 1.5 */
-		// End offset: 0x80063CC4
-		// End Line: 2189
+		// End offset: 0x80063194
+		// End Line: 2443
 
 		/* begin block 1.6 */
-			// Start line: 2197
-			// Start offset: 0x80063CE4
+			// Start line: 2451
+			// Start offset: 0x800631B4
 			// Variables:
 		// 		int number; // $a1
 		/* end block 1.6 */
-		// End offset: 0x80063CE4
-		// End Line: 2199
+		// End offset: 0x800631B4
+		// End Line: 2453
 
 		/* begin block 1.7 */
-			// Start line: 2207
-			// Start offset: 0x80063D04
+			// Start line: 2461
+			// Start offset: 0x800631D4
 		/* end block 1.7 */
-		// End offset: 0x80063D04
-		// End Line: 2209
+		// End offset: 0x800631D4
+		// End Line: 2463
 
 		/* begin block 1.8 */
-			// Start line: 2216
-			// Start offset: 0x80063D28
+			// Start line: 2470
+			// Start offset: 0x800631F8
 		/* end block 1.8 */
-		// End offset: 0x80063D28
-		// End Line: 2218
+		// End offset: 0x800631F8
+		// End Line: 2472
 	/* end block 1 */
-	// End offset: 0x80063D54
-	// End Line: 2254
+	// End offset: 0x8006326C
+	// End Line: 2521
 
 	/* begin block 2 */
-		// Start line: 4284
+		// Start line: 4869
 	/* end block 2 */
-	// End Line: 4285
+	// End Line: 4870
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_TransformGameAttribute
                (_PCodeStack *stack,StackType *stackObject,long item,short *codeStream)
@@ -2649,20 +2977,21 @@ long EVENT_TransformGameAttribute
   short sVar1;
   short sVar2;
   short sVar3;
-  ushort uVar4;
-  Event *pEVar5;
-  ScriptPCode *pSVar6;
-  Level *pLVar7;
-  EventTimer *pEVar8;
-  int Data;
+  short sVar4;
+  ushort uVar5;
+  Event *pEVar6;
+  ScriptPCode *pSVar7;
+  short *psVar8;
+  EventTimer *pEVar9;
   ulong item_00;
+  int Data;
   long item_01;
   uint item_02;
   
   item_01 = 0;
   switch(item) {
   case 1:
-    EVENT_ChangeOperandToNumber(stackObject,(gameTrackerX.globalTimeMult * 0x1e) / 1000,0);
+    EVENT_ChangeOperandToNumber(stackObject,(uint)(DAT_800d2300 * 0x1e) / 1000,0);
     item_01 = 1;
     break;
   case 2:
@@ -2683,9 +3012,9 @@ long EVENT_TransformGameAttribute
   case 0x96:
   case 0x9c:
     *(long *)stackObject->data = item;
-    goto LAB_80063d50;
+    goto LAB_80063268;
   case 0x14:
-    item_00 = INSTANCE_Query(gameTrackerX.playerInstance,0xb);
+    item_00 = INSTANCE_Query(DAT_800d20f8,0xb);
     item_02 = item_00 >> 1 & 1;
     Data = STREAM_IsMorphInProgress();
     if (Data != 0) {
@@ -2695,7 +3024,7 @@ long EVENT_TransformGameAttribute
     item_01 = 1;
     break;
   case 0x15:
-    item_00 = INSTANCE_Query(gameTrackerX.playerInstance,0xb);
+    item_00 = INSTANCE_Query(DAT_800d20f8,0xb);
     item_02 = item_00 & 1;
     Data = STREAM_IsMorphInProgress();
     if (Data != 0) {
@@ -2705,69 +3034,73 @@ long EVENT_TransformGameAttribute
     item_01 = 1;
     break;
   case 0x1b:
-    EVENT_ChangeOperandToNumber(stackObject,gameTrackerX.controlCommand[0][0],1);
+    item_02 = DAT_800d2114;
+    if (((DAT_800d218c & 0x40000) != 0) && ((DAT_800d2114 & 0x90) == 0x90)) {
+      item_02 = DAT_800d2114 & 0xffffff6f;
+    }
+    EVENT_ChangeOperandToNumber(stackObject,item_02,1);
     item_01 = 1;
     break;
   case 0x31:
-    pEVar8 = EVENT_GetNextTimer();
-    pLVar7 = CurrentPuzzleLevel;
-    pSVar6 = currentActionScript;
-    pEVar5 = currentEventInstance;
-    if (pEVar8 == (EventTimer *)0x0) {
+    pEVar9 = EVENT_GetNextTimer();
+    psVar8 = CurrentPuzzleLevel;
+    pSVar7 = currentActionScript;
+    pEVar6 = currentEventInstance;
+    if (pEVar9 == (EventTimer *)0x0) {
       return 1;
     }
     if (codeStream == (short *)0x0) {
       return 1;
     }
     MoveCodeStreamExtra = 1;
-    uVar4 = codeStream[1];
+    uVar5 = codeStream[1];
     EventAbortLine = 1;
     EventJustRecievedTimer = 1;
-    pEVar8->actionScript = (ScriptPCode *)(codeStream + 2);
-    pEVar8->flags = pEVar8->flags & 1U | (int)((uint)uVar4 << 0x10) >> 3;
-    *(ScriptPCode **)&pEVar8->event = pSVar6;
-    *(Event **)&pEVar8->time = pEVar5;
+    pEVar9->actionScript = (ScriptPCode *)(codeStream + 2);
+    pEVar9->flags = pEVar9->flags & 1U | (int)((uint)uVar5 << 0x10) >> 3;
+    *(ScriptPCode **)&pEVar9->event = pSVar7;
+    *(Event **)&pEVar9->time = pEVar6;
     item_01 = EventCurrentEventIndex;
-    pSVar6->conditionBits = pSVar6->conditionBits | 1;
-    *(Level **)&pEVar8->scriptPos = pLVar7;
-    *(long *)&pEVar8->level = item_01;
-    goto LAB_80063d50;
+    pSVar7->conditionBits = pSVar7->conditionBits | 1;
+    pEVar9->scriptPos = psVar8;
+    *(long *)&pEVar9->level = item_01;
+    goto LAB_80063268;
   case 0x3d:
-    EVENT_ChangeOperandToNumber(stackObject,(int)gameTrackerX.currentMaterialTime._2_2_,0);
+    EVENT_ChangeOperandToNumber(stackObject,(int)DAT_800d22ee,0);
     item_01 = 1;
     break;
   case 0x42:
     item_01 = 1;
     stackObject->id = 0x19;
-    *(undefined4 *)stackObject->data = 0x800d0ef0;
+    *(undefined4 *)stackObject->data = 0x800d0f9c;
     *(undefined4 *)(stackObject->data + 8) = 0xffffffff;
     break;
   case 0x4a:
     if (codeStream != (short *)0x0) {
       MoveCodeStreamExtra = 2;
-      gameTrackerX.wipeTime = codeStream[2];
-      gameTrackerX.wipeType = codeStream[1];
-      gameTrackerX.maxWipeTime = gameTrackerX.wipeTime;
-      if (gameTrackerX.wipeTime < 0) {
-        gameTrackerX.maxWipeTime = -gameTrackerX.wipeTime;
+      DAT_800d2198 = codeStream[2];
+      LAB_800d219c = codeStream[1];
+      DAT_800d219a = DAT_800d2198;
+      if (DAT_800d2198 < 0) {
+        DAT_800d219a = -DAT_800d2198;
       }
-      if (gameTrackerX.wipeType == 0xb) {
-        if (gameTrackerX.wipeTime < 0) {
-          gameTrackerX.streamFlags = gameTrackerX.streamFlags | 0x2000000;
+      if (LAB_800d219c == 0xb) {
+        if (DAT_800d2198 < 0) {
+          DAT_800d2210 = DAT_800d2210 | 0x2000000;
         }
         else {
-          gameTrackerX.streamFlags = gameTrackerX.streamFlags & 0xfdffffff;
+          DAT_800d2210 = DAT_800d2210 & 0xfdffffff;
         }
       }
       stack->topOfStack = stack->topOfStack + -1;
     }
-    goto LAB_80063d50;
+    goto LAB_80063268;
   case 0x51:
     Data = 0;
-    goto LAB_80063c58;
+    goto LAB_80063128;
   case 0x52:
     Data = 1;
-LAB_80063c58:
+LAB_80063128:
     INSTANCE_Broadcast((_Instance *)0x0,10,0x4000e,Data);
     item_01 = 1;
     stack->topOfStack = stack->topOfStack + -1;
@@ -2781,14 +3114,14 @@ LAB_80063c58:
       EVENT_ChangeOperandToNumber(stackObject,Data % ((int)sVar2 - (int)sVar1) + (int)sVar1,0);
       return 1;
     }
-    goto LAB_80063d50;
+    goto LAB_80063268;
   case 0x78:
     Data = LOAD_IsXAInQueue();
     EVENT_ChangeOperandToNumber(stackObject,(uint)(Data == 0),0);
     item_01 = 1;
     break;
   case 0x86:
-    EVENT_ChangeOperandToNumber(stackObject,(uint)gameTrackerX.streamFlags >> 0x17 & 1,0);
+    EVENT_ChangeOperandToNumber(stackObject,DAT_800d2210 >> 0x17 & 1,0);
     item_01 = 1;
     break;
   case 0x91:
@@ -2797,12 +3130,12 @@ LAB_80063c58:
     item_01 = 1;
     break;
   case 0x9a:
-    item_00 = INSTANCE_Query(gameTrackerX.playerInstance,0x29);
+    item_00 = INSTANCE_Query(DAT_800d20f8,0x29);
     EVENT_ChangeOperandToNumber(stackObject,item_00,3);
     item_01 = 1;
     break;
   case 0x9b:
-    item_00 = INSTANCE_Query(gameTrackerX.playerInstance,0x2a);
+    item_00 = INSTANCE_Query(DAT_800d20f8,0x2a);
     EVENT_ChangeOperandToNumber(stackObject,item_00,3);
     item_01 = 1;
     break;
@@ -2812,7 +3145,7 @@ LAB_80063c58:
     item_01 = 1;
     break;
   case 0x9e:
-    EVENT_ChangeOperandToNumber(stackObject,gameTrackerX.streamFlags & 0x100000,0);
+    EVENT_ChangeOperandToNumber(stackObject,DAT_800d2210 & 0x100000,0);
     item_01 = 1;
     break;
   case 0xa2:
@@ -2820,13 +3153,25 @@ LAB_80063c58:
       MoveCodeStreamExtra = 4;
       sVar1 = codeStream[1];
       sVar2 = codeStream[2];
-      sVar3 = codeStream[3];
+      sVar3 = codeStream[4];
+      sVar4 = codeStream[3];
       stack->topOfStack = stack->topOfStack + -1;
-      GAMEPAD_Shock((int)sVar1,(int)sVar2 << 0xc,(int)sVar3,(int)codeStream[3] << 0xc);
+      GAMEPAD_Shock((int)sVar1,(int)sVar2 << 0xc,(int)sVar4,(int)sVar3 << 0xc);
       return 1;
     }
-LAB_80063d50:
+LAB_80063268:
     item_01 = 1;
+    break;
+  case 0xa8:
+    stack->topOfStack = stack->topOfStack + -1;
+    item_01 = 1;
+    if ((DAT_800d218c & 0x80000) != 0) {
+      Data = VOICEXA_IsPlaying();
+      item_01 = 1;
+      if (Data == 2) {
+        EventAbortLine = 1;
+      }
+    }
   }
   return item_01;
 }
@@ -2836,22 +3181,24 @@ LAB_80063d50:
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_TransformAreaAttribute(struct _PCodeStack *stack /*$a0*/, struct StackType *stackObject /*$a1*/, long item /*$a2*/, short *codeStream /*$a3*/)
- // line 2258, offset 0x80063d70
+ // line 2525, offset 0x80063288
 	/* begin block 1 */
-		// Start line: 2259
-		// Start offset: 0x80063D70
+		// Start line: 2526
+		// Start offset: 0x80063288
 		// Variables:
 	// 		long retValue; // $v1
 	// 		long offset; // $a1
 	// 		struct _StreamUnit *streamUnit; // $t0
 	/* end block 1 */
-	// End offset: 0x80063E3C
-	// End Line: 2313
+	// End offset: 0x80063354
+	// End Line: 2580
 
 	/* begin block 2 */
-		// Start line: 4841
+		// Start line: 5482
 	/* end block 2 */
-	// End Line: 4842
+	// End Line: 5483
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_TransformAreaAttribute
                (_PCodeStack *stack,StackType *stackObject,long item,short *codeStream)
@@ -2901,22 +3248,24 @@ long EVENT_TransformAreaAttribute
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_TransformEventAttribute(struct _PCodeStack *stack /*$a0*/, struct StackType *stackObject /*$a1*/, long item /*$a2*/, short *codeStream /*$a3*/)
- // line 2317, offset 0x80063e4c
+ // line 2584, offset 0x80063364
 	/* begin block 1 */
-		// Start line: 2318
-		// Start offset: 0x80063E4C
+		// Start line: 2585
+		// Start offset: 0x80063364
 		// Variables:
 	// 		long retValue; // $v1
 	// 		long offset; // $a1
 	// 		struct Event *event; // $t0
 	/* end block 1 */
-	// End offset: 0x80063EE0
-	// End Line: 2369
+	// End offset: 0x800633E4
+	// End Line: 2636
 
 	/* begin block 2 */
-		// Start line: 4965
+		// Start line: 5606
 	/* end block 2 */
-	// End Line: 4966
+	// End Line: 5607
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_TransformEventAttribute
                (_PCodeStack *stack,StackType *stackObject,long item,short *codeStream)
@@ -2938,8 +3287,7 @@ long EVENT_TransformEventAttribute
     }
   }
   else {
-    if (((item == 0x1a) && (lVar2 = 1, *(char *)(iVar3 + 5) == '\0')) &&
-       (lVar2 = 1, (gameTrackerX.debugFlags2 & 0x800000U) == 0)) {
+    if ((item == 0x1a) && (lVar2 = 1, *(char *)(iVar3 + 5) == '\0')) {
       *(undefined *)(iVar3 + 5) = 1;
     }
   }
@@ -2951,48 +3299,71 @@ long EVENT_TransformEventAttribute
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_TransformSavedEventAttribute(struct _PCodeStack *stack /*$t0*/, struct StackType *stackObject /*$a0*/, long item /*$a2*/, short *codeStream /*$a3*/)
- // line 2372, offset 0x80063ef0
+ // line 2639, offset 0x800633f4
 	/* begin block 1 */
-		// Start line: 2373
-		// Start offset: 0x80063EF0
+		// Start line: 2640
+		// Start offset: 0x800633F4
 		// Variables:
 	// 		long retValue; // $v1
 	// 		long offset; // $a1
+
+		/* begin block 1.1 */
+			// Start line: 2658
+			// Start offset: 0x8006344C
+		/* end block 1.1 */
+		// End offset: 0x8006344C
+		// End Line: 2660
+
+		/* begin block 1.2 */
+			// Start line: 2667
+			// Start offset: 0x80063470
+		/* end block 1.2 */
+		// End offset: 0x80063470
+		// End Line: 2669
 	/* end block 1 */
-	// End offset: 0x80063F6C
-	// End Line: 2427
+	// End offset: 0x800634A0
+	// End Line: 2698
 
 	/* begin block 2 */
-		// Start line: 5086
+		// Start line: 5727
 	/* end block 2 */
-	// End Line: 5087
+	// End Line: 5728
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_TransformSavedEventAttribute
                (_PCodeStack *stack,StackType *stackObject,long item,short *codeStream)
 
 {
-  short sVar1;
-  long lVar2;
-  int iVar3;
+  long lVar1;
+  uint uVar2;
+  char *pcVar3;
   
-  lVar2 = 0;
+  lVar1 = 0;
   if (item == 3) {
     MoveCodeStreamExtra = 1;
-    sVar1 = codeStream[1];
-    if ((uint)(int)sVar1 < 6) {
-      iVar3 = *(int *)stackObject->data;
-      if (iVar3 == 0) {
+    uVar2 = SEXT24(codeStream[1]);
+    if (uVar2 < 6) {
+      pcVar3 = *(char **)stackObject->data;
+      if (pcVar3 == (char *)0x0) {
         EVENT_ChangeOperandToNumber(stackObject,0,0);
-        lVar2 = 1;
+        lVar1 = 1;
       }
       else {
-        stack->topOfStack = stack->topOfStack + -1;
-        EVENT_AddShortPointerToStack(stack,(short *)(iVar3 + (int)sVar1 * 2 + 10));
-        lVar2 = 1;
+        if (*pcVar3 == '\x02') {
+          stack->topOfStack = stack->topOfStack + -1;
+          EVENT_AddShortPointerToStack(stack,(short *)(pcVar3 + uVar2 * 2 + 6));
+          lVar1 = 1;
+        }
+        else {
+          stack->topOfStack = stack->topOfStack + -1;
+          EVENT_AddCharPointerToStack(stack,pcVar3 + uVar2 + 5);
+          lVar1 = 1;
+        }
       }
     }
   }
-  return lVar2;
+  return lVar1;
 }
 
 
@@ -3000,30 +3371,32 @@ long EVENT_TransformSavedEventAttribute
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_TransformSubListObjectAttribute(struct _PCodeStack *stack /*$a0*/, struct StackType *stackObject /*$a1*/, long item /*$a2*/)
- // line 2430, offset 0x80063f7c
+ // line 2701, offset 0x800634b0
 	/* begin block 1 */
-		// Start line: 2432
-		// Start offset: 0x80063F7C
+		// Start line: 2703
+		// Start offset: 0x800634B0
 		// Variables:
 	// 		long retValue; // $a0
 	/* end block 1 */
-	// End offset: 0x80063FA8
-	// End Line: 2451
+	// End offset: 0x800634DC
+	// End Line: 2722
 
 	/* begin block 2 */
-		// Start line: 5215
+		// Start line: 5854
 	/* end block 2 */
-	// End Line: 5216
+	// End Line: 5855
 
 	/* begin block 3 */
-		// Start line: 5216
+		// Start line: 5855
 	/* end block 3 */
-	// End Line: 5217
+	// End Line: 5856
 
 	/* begin block 4 */
-		// Start line: 5222
+		// Start line: 5861
 	/* end block 4 */
-	// End Line: 5223
+	// End Line: 5862
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_TransformSubListObjectAttribute(_PCodeStack *stack,StackType *stackObject,long item)
 
@@ -3043,30 +3416,32 @@ long EVENT_TransformSubListObjectAttribute(_PCodeStack *stack,StackType *stackOb
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_TransformListObjectAttribute(struct _PCodeStack *stack /*$a0*/, struct StackType *stackObject /*$a1*/, long item /*$a2*/)
- // line 2454, offset 0x80063fb0
+ // line 2725, offset 0x800634e4
 	/* begin block 1 */
-		// Start line: 2456
-		// Start offset: 0x80063FB0
+		// Start line: 2727
+		// Start offset: 0x800634E4
 		// Variables:
 	// 		long retValue; // $a0
 	/* end block 1 */
-	// End offset: 0x80063FDC
-	// End Line: 2475
+	// End offset: 0x80063510
+	// End Line: 2746
 
 	/* begin block 2 */
-		// Start line: 5264
+		// Start line: 5903
 	/* end block 2 */
-	// End Line: 5265
+	// End Line: 5904
 
 	/* begin block 3 */
-		// Start line: 5265
+		// Start line: 5904
 	/* end block 3 */
-	// End Line: 5266
+	// End Line: 5905
 
 	/* begin block 4 */
-		// Start line: 5271
+		// Start line: 5910
 	/* end block 4 */
-	// End Line: 5272
+	// End Line: 5911
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_TransformListObjectAttribute(_PCodeStack *stack,StackType *stackObject,long item)
 
@@ -3086,37 +3461,39 @@ long EVENT_TransformListObjectAttribute(_PCodeStack *stack,StackType *stackObjec
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_TransformCameraObjectAttribute(struct _PCodeStack *stack /*$s0*/, struct StackType *stackObject /*$a0*/, long item /*$a2*/, short *codeStream /*$a3*/)
- // line 2478, offset 0x80063fe4
+ // line 2749, offset 0x80063518
 	/* begin block 1 */
-		// Start line: 2479
-		// Start offset: 0x80063FE4
+		// Start line: 2750
+		// Start offset: 0x80063518
 		// Variables:
 	// 		long retValue; // $v1
 	// 		struct Camera *camera; // $t0
 
 		/* begin block 1.1 */
-			// Start line: 2490
-			// Start offset: 0x8006406C
+			// Start line: 2761
+			// Start offset: 0x800635A0
 			// Variables:
 		// 		short time; // $a1
 		/* end block 1.1 */
-		// End offset: 0x800640C0
-		// End Line: 2504
+		// End offset: 0x800635F4
+		// End Line: 2775
 
 		/* begin block 1.2 */
-			// Start line: 2520
-			// Start offset: 0x800640E0
+			// Start line: 2791
+			// Start offset: 0x80063614
 		/* end block 1.2 */
-		// End offset: 0x800640E0
-		// End Line: 2522
+		// End offset: 0x80063614
+		// End Line: 2793
 	/* end block 1 */
-	// End offset: 0x800640FC
-	// End Line: 2551
+	// End offset: 0x80063630
+	// End Line: 2822
 
 	/* begin block 2 */
-		// Start line: 5313
+		// Start line: 5952
 	/* end block 2 */
-	// End Line: 5314
+	// End Line: 5953
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_TransformCameraObjectAttribute
                (_PCodeStack *stack,StackType *stackObject,long item,short *codeStream)
@@ -3166,30 +3543,32 @@ long EVENT_TransformCameraObjectAttribute
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_TransformSplineAttribute(struct _PCodeStack *stack /*$a0*/, struct StackType *stackObject /*$a1*/, long item /*$a2*/, short *codeStream /*$a3*/)
- // line 2554, offset 0x80064110
+ // line 2825, offset 0x80063644
 	/* begin block 1 */
-		// Start line: 2555
-		// Start offset: 0x80064110
+		// Start line: 2826
+		// Start offset: 0x80063644
 		// Variables:
 	// 		long retValue; // $v1
 	// 		struct _Instance *instance; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 2577
-			// Start offset: 0x80064198
+			// Start line: 2848
+			// Start offset: 0x800636CC
 			// Variables:
 		// 		long maxKeyFrames; // $v0
 		/* end block 1.1 */
-		// End offset: 0x800641CC
-		// End Line: 2588
+		// End offset: 0x80063700
+		// End Line: 2859
 	/* end block 1 */
-	// End offset: 0x80064200
-	// End Line: 2606
+	// End offset: 0x80063734
+	// End Line: 2877
 
 	/* begin block 2 */
-		// Start line: 5485
+		// Start line: 6124
 	/* end block 2 */
-	// End Line: 5486
+	// End Line: 6125
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_TransformSplineAttribute
                (_PCodeStack *stack,StackType *stackObject,long item,short *codeStream)
@@ -3244,59 +3623,82 @@ long EVENT_TransformSplineAttribute
 
 // decompiled code
 // original method signature: 
-// long /*$ra*/ EVENT_TransformIntroAttribute(struct _PCodeStack *stack /*$a0*/, struct StackType *stackObject /*$a0*/, long item /*$a2*/)
- // line 2609, offset 0x80064214
+// long /*$ra*/ EVENT_TransformIntroAttribute(struct _PCodeStack *stack /*$a0*/, struct StackType *stackObject /*$s3*/, long item /*$a2*/)
+ // line 2880, offset 0x80063748
 	/* begin block 1 */
-		// Start line: 2610
-		// Start offset: 0x80064214
+		// Start line: 2881
+		// Start offset: 0x80063748
 		// Variables:
 	// 		long retValue; // $v0
+	// 		long x; // $s0
+	// 		long y; // $s1
+	// 		long z; // $s2
+	// 		struct Intro *intro; // $a3
 
 		/* begin block 1.1 */
-			// Start line: 2627
-			// Start offset: 0x80064270
-			// Variables:
-		// 		struct Rotation3d vector; // stack offset -32
+			// Start line: 2892
+			// Start offset: 0x80063794
 		/* end block 1.1 */
-		// End offset: 0x80064270
-		// End Line: 2630
+		// End offset: 0x800637E0
+		// End Line: 2907
+
+		/* begin block 1.2 */
+			// Start line: 2914
+			// Start offset: 0x800637E0
+			// Variables:
+		// 		struct Rotation3d vector; // stack offset -48
+		/* end block 1.2 */
+		// End offset: 0x800637E0
+		// End Line: 2917
 	/* end block 1 */
-	// End offset: 0x800642EC
-	// End Line: 2693
+	// End offset: 0x80063848
+	// End Line: 2983
 
 	/* begin block 2 */
-		// Start line: 5608
+		// Start line: 6247
 	/* end block 2 */
-	// End Line: 5609
+	// End Line: 6248
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_TransformIntroAttribute(_PCodeStack *stack,StackType *stackObject,long item)
 
 {
-  int iVar1;
-  Rotation3d local_20;
+  short x;
+  short y;
+  short z;
+  _StreamUnit *p_Var1;
+  void *pointer;
+  Rotation3d local_30;
   
+  pointer = *(void **)stackObject->data;
   switch(item) {
   case 5:
-    iVar1 = *(int *)stackObject->data;
-    EVENT_ChangeOperandVector3d
-              (stackObject,*(short *)(iVar1 + 0x20),*(short *)(iVar1 + 0x22),
-               *(short *)(iVar1 + 0x24));
-    break;
+    if ((*(uint *)((int)pointer + 0x2c) & 0x4000) != 0) {
+      x = *(short *)((int)pointer + 0x20);
+      y = *(short *)((int)pointer + 0x22);
+      z = *(short *)((int)pointer + 0x24);
+      p_Var1 = STREAM_WhichUnitPointerIsIn(pointer);
+      EVENT_ChangeOperandVector3d(stackObject,x,y,z,p_Var1->StreamUnitID);
+      return 1;
+    }
   default:
     EventAbortLine = 1;
     break;
   case 9:
-    local_20.vx = *(short *)(*(int *)stackObject->data + 0x18);
-    local_20.vy = *(short *)(*(int *)stackObject->data + 0x1a);
-    local_20.vz = *(short *)(*(int *)stackObject->data + 0x1c);
-    local_20.errorx = 0x200;
-    local_20.errorz = 0x200;
-    local_20.errory = 0x200;
-    EVENT_ChangeOperandRotation3d(stackObject,&local_20);
+    local_30.vx = *(short *)((int)pointer + 0x18);
+    local_30.vy = *(short *)((int)pointer + 0x1a);
+    local_30.vz = *(short *)((int)pointer + 0x1c);
+    local_30.errorx = 0x200;
+    local_30.errorz = 0x200;
+    local_30.errory = 0x200;
+    EVENT_ChangeOperandRotation3d(stackObject,&local_30);
     break;
   case 0x3e:
   case 0x8a:
   case 0x92:
+  case 0xa0:
+  case 0xa6:
     *(long *)(stackObject->data + 4) = item;
     break;
   case 0x3f:
@@ -3310,29 +3712,31 @@ long EVENT_TransformIntroAttribute(_PCodeStack *stack,StackType *stackObject,lon
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_ParseOperand2(struct StackType *operand2 /*$a0*/, long *error /*$s0*/, long *trueValue /*$s1*/)
- // line 2695, offset 0x800642fc
+ // line 2985, offset 0x80063864
 	/* begin block 1 */
-		// Start line: 2696
-		// Start offset: 0x800642FC
+		// Start line: 2986
+		// Start offset: 0x80063864
 		// Variables:
 	// 		long number; // $v0
 
 		/* begin block 1.1 */
-			// Start line: 2701
-			// Start offset: 0x8006431C
+			// Start line: 2991
+			// Start offset: 0x80063884
 			// Variables:
 		// 		short flags; // stack offset -24
 		/* end block 1.1 */
-		// End offset: 0x80064340
-		// End Line: 2709
+		// End offset: 0x800638A8
+		// End Line: 2999
 	/* end block 1 */
-	// End offset: 0x80064340
-	// End Line: 2711
+	// End offset: 0x800638A8
+	// End Line: 3001
 
 	/* begin block 2 */
-		// Start line: 5800
+		// Start line: 6498
 	/* end block 2 */
-	// End Line: 5801
+	// End Line: 6499
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_ParseOperand2(StackType *operand2,long *error,long *trueValue)
 
@@ -3354,23 +3758,25 @@ long EVENT_ParseOperand2(StackType *operand2,long *error,long *trueValue)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_DoVMObjectAction(struct EventVmObject *vmobject /*$s0*/, struct StackType *operand2 /*$a0*/)
- // line 2713, offset 0x80064354
+ // line 3003, offset 0x800638bc
 	/* begin block 1 */
-		// Start line: 2714
-		// Start offset: 0x80064354
+		// Start line: 3004
+		// Start offset: 0x800638BC
 		// Variables:
 	// 		long result; // $s1
 	// 		long trueValue; // stack offset -20
 	// 		long number; // $a2
 	// 		long error; // stack offset -24
 	/* end block 1 */
-	// End offset: 0x800644F8
-	// End Line: 2788
+	// End offset: 0x80063A60
+	// End Line: 3078
 
 	/* begin block 2 */
-		// Start line: 5837
+		// Start line: 6535
 	/* end block 2 */
-	// End Line: 5838
+	// End Line: 6536
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_DoVMObjectAction(EventVmObject *vmobject,StackType *operand2)
 
@@ -3451,26 +3857,28 @@ long EVENT_DoVMObjectAction(EventVmObject *vmobject,StackType *operand2)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_GetVMObjectValue(struct EventVmObject *vmobject /*$a0*/)
- // line 2791, offset 0x80064514
+ // line 3081, offset 0x80063a7c
 	/* begin block 1 */
-		// Start line: 2793
-		// Start offset: 0x80064514
+		// Start line: 3083
+		// Start offset: 0x80063A7C
 		// Variables:
 	// 		long value; // $a1
 	// 		long trueValue; // $a2
 	/* end block 1 */
-	// End offset: 0x800645CC
-	// End Line: 2821
+	// End offset: 0x80063B34
+	// End Line: 3111
 
 	/* begin block 2 */
-		// Start line: 5995
+		// Start line: 6693
 	/* end block 2 */
-	// End Line: 5996
+	// End Line: 6694
 
 	/* begin block 3 */
-		// Start line: 5996
+		// Start line: 6694
 	/* end block 3 */
-	// End Line: 5997
+	// End Line: 6695
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_GetVMObjectValue(EventVmObject *vmobject)
 
@@ -3510,36 +3918,38 @@ long EVENT_GetVMObjectValue(EventVmObject *vmobject)
 
 // decompiled code
 // original method signature: 
-// long /*$ra*/ EVENT_DoGameAction(struct GameObject *gameObject /*$s1*/, struct StackType *operand2 /*$a0*/)
- // line 2824, offset 0x800645dc
+// long /*$ra*/ EVENT_DoGameAction(struct GameObject *gameObject /*$s2*/, struct StackType *operand2 /*$a0*/)
+ // line 3114, offset 0x80063b44
 	/* begin block 1 */
-		// Start line: 2825
-		// Start offset: 0x800645DC
+		// Start line: 3115
+		// Start offset: 0x80063B44
 		// Variables:
-	// 		long error; // stack offset -24
-	// 		long number; // $a0
-	// 		long trueValue; // stack offset -20
+	// 		long error; // stack offset -32
+	// 		long number; // $s0
+	// 		long trueValue; // stack offset -28
 	/* end block 1 */
-	// End offset: 0x8006480C
-	// End Line: 2921
+	// End offset: 0x80063E00
+	// End Line: 3239
 
 	/* begin block 2 */
-		// Start line: 6061
+		// Start line: 6759
 	/* end block 2 */
-	// End Line: 6062
+	// End Line: 6760
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_DoGameAction(GameObject *gameObject,StackType *operand2)
 
 {
   long modifier;
   int iVar1;
-  long local_18;
-  long local_14;
+  long local_20;
+  long local_1c;
   
-  local_18 = 1;
-  local_14 = 1;
+  local_20 = 1;
+  local_1c = 1;
   if (gameObject->attribute != -1) {
-    modifier = EVENT_ParseOperand2(operand2,&local_18,&local_14);
+    modifier = EVENT_ParseOperand2(operand2,&local_20,&local_1c);
     iVar1 = gameObject->attribute;
     if (iVar1 == 0x87) {
       SOUND_SetMusicModifier(modifier);
@@ -3547,10 +3957,12 @@ long EVENT_DoGameAction(GameObject *gameObject,StackType *operand2)
     else {
       if (iVar1 < 0x88) {
         if (iVar1 == 0x59) {
-          if (local_18 != 0) {
-            modifier = 100;
+          if (local_20 == 0) {
+            FX_Start_Rain(modifier);
           }
-          FX_Start_Rain(modifier);
+          else {
+            FX_Start_Rain(100);
+          }
         }
         else {
           if (iVar1 < 0x5a) {
@@ -3578,17 +3990,35 @@ long EVENT_DoGameAction(GameObject *gameObject,StackType *operand2)
             }
             else {
               if (iVar1 == 0x58) {
-                if (local_18 != 0) {
-                  modifier = 100;
+                if (local_20 == 0) {
+                  FX_Start_Snow(modifier);
                 }
-                FX_Start_Snow(modifier);
+                else {
+                  FX_Start_Snow(100);
+                }
               }
             }
           }
           else {
             if (iVar1 == 0x76) {
-              if (-1 < modifier) {
-                LOAD_PlayXA(modifier);
+              if ((-1 < modifier) && ((DAT_800d218c & 0x80000) != 0)) {
+                if (WaitingForVoiceNumber == modifier) {
+                  iVar1 = VOICEXA_IsPlaying();
+                  if (iVar1 == 2) {
+                    WaitingForVoiceNumber = -1;
+                    return 1;
+                  }
+                }
+                else {
+                  iVar1 = VOICEXA_IsPlaying();
+                  if (iVar1 != 2) {
+                    LOAD_PlayXA(modifier);
+                    WaitingForVoiceNumber = modifier;
+                    EventAbortLine = 1;
+                    return 1;
+                  }
+                }
+                EventAbortLine = 1;
               }
             }
             else {
@@ -3636,22 +4066,24 @@ long EVENT_DoGameAction(GameObject *gameObject,StackType *operand2)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_DoSignalAction(struct SignalObject *signalObject /*$s0*/, struct StackType *operand2 /*$a0*/)
- // line 2924, offset 0x80064824
+ // line 3242, offset 0x80063e20
 	/* begin block 1 */
-		// Start line: 2925
-		// Start offset: 0x80064824
+		// Start line: 3243
+		// Start offset: 0x80063E20
 		// Variables:
 	// 		long trueValue; // stack offset -12
 	// 		long number; // $v1
 	// 		long error; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x8006488C
-	// End Line: 2957
+	// End offset: 0x80063E88
+	// End Line: 3275
 
 	/* begin block 2 */
-		// Start line: 6263
+		// Start line: 7017
 	/* end block 2 */
-	// End Line: 6264
+	// End Line: 7018
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_DoSignalAction(SignalObject *signalObject,StackType *operand2)
 
@@ -3664,8 +4096,7 @@ long EVENT_DoSignalAction(SignalObject *signalObject,StackType *operand2)
       (EVENT_ParseOperand2(operand2,&lStack16,&local_c), signalObject->attribute == 0x1a)) &&
      (local_c != 0)) {
     COLLIDE_HandleSignal
-              (gameTrackerX.playerInstance,signalObject->msignal->signalList,
-               signalObject->msignal->numSignals,0);
+              (DAT_800d20f8,signalObject->msignal->signalList,signalObject->msignal->numSignals,0);
   }
   return 0;
 }
@@ -3675,28 +4106,27 @@ long EVENT_DoSignalAction(SignalObject *signalObject,StackType *operand2)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_TransformSignalAttribute(struct _PCodeStack *stack /*$a0*/, struct StackType *stackObject /*$a0*/, long item /*$a2*/)
- // line 2960, offset 0x800648a0
+ // line 3278, offset 0x80063e9c
 	/* begin block 1 */
-		// Start line: 2961
-		// Start offset: 0x800648A0
+		// Start line: 3279
+		// Start offset: 0x80063E9C
 		// Variables:
-	// 		long retValue; // $s0
-	// 		struct _MultiSignal *msignal; // $s1
+	// 		long retValue; // $v1
+	// 		struct _MultiSignal *msignal; // $a1
 	/* end block 1 */
-	// End offset: 0x80064900
-	// End Line: 2989
+	// End offset: 0x80063EE4
+	// End Line: 3307
 
 	/* begin block 2 */
-		// Start line: 6340
+		// Start line: 7094
 	/* end block 2 */
-	// End Line: 6341
+	// End Line: 7095
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_TransformSignalAttribute(_PCodeStack *stack,StackType *stackObject,long item)
 
 {
-  _MultiSignal *mSignal;
-  
-  mSignal = *(_MultiSignal **)stackObject->data;
   if (item == 0x1a) {
     *(undefined4 *)(stackObject->data + 4) = 0x1a;
   }
@@ -3704,8 +4134,7 @@ long EVENT_TransformSignalAttribute(_PCodeStack *stack,StackType *stackObject,lo
     if (item != 0x32) {
       return 0;
     }
-    EVENT_ChangeOperandToNumber(stackObject,(uint)(ushort)mSignal->flags & 1,0);
-    EVENT_AddSignalToReset(mSignal);
+    EVENT_ChangeOperandToNumber(stackObject,(uint)*(ushort *)(*(int *)stackObject->data + 6) & 1,0);
   }
   return 1;
 }
@@ -3715,30 +4144,32 @@ long EVENT_TransformSignalAttribute(_PCodeStack *stack,StackType *stackObject,lo
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_TransformRotation3dAttribute(struct _PCodeStack *stack /*$a0*/, struct StackType *stackObject /*$a1*/, long item /*$a2*/, short *codeStream /*$a3*/)
- // line 2993, offset 0x80064918
+ // line 3311, offset 0x80063ef4
 	/* begin block 1 */
-		// Start line: 2995
-		// Start offset: 0x80064918
+		// Start line: 3313
+		// Start offset: 0x80063EF4
 		// Variables:
 	// 		long retValue; // $v0
 	/* end block 1 */
-	// End offset: 0x80064948
-	// End Line: 3015
+	// End offset: 0x80063F24
+	// End Line: 3333
 
 	/* begin block 2 */
-		// Start line: 6414
+		// Start line: 7168
 	/* end block 2 */
-	// End Line: 6415
+	// End Line: 7169
 
 	/* begin block 3 */
-		// Start line: 6415
+		// Start line: 7169
 	/* end block 3 */
-	// End Line: 6416
+	// End Line: 7170
 
 	/* begin block 4 */
-		// Start line: 6417
+		// Start line: 7171
 	/* end block 4 */
-	// End Line: 6418
+	// End Line: 7172
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_TransformRotation3dAttribute
                (_PCodeStack *stack,StackType *stackObject,long item,short *codeStream)
@@ -3756,20 +4187,22 @@ long EVENT_TransformRotation3dAttribute
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_TransformVector3dAttribute(struct _PCodeStack *stack /*$a0*/, struct StackType *stackObject /*$a0*/, long item /*$a2*/, short *codeStream /*$a3*/)
- // line 3017, offset 0x80064950
+ // line 3335, offset 0x80063f2c
 	/* begin block 1 */
-		// Start line: 3018
-		// Start offset: 0x80064950
+		// Start line: 3336
+		// Start offset: 0x80063F2C
 		// Variables:
 	// 		long retValue; // $a2
 	/* end block 1 */
-	// End offset: 0x80064A3C
-	// End Line: 3070
+	// End offset: 0x80064018
+	// End Line: 3388
 
 	/* begin block 2 */
-		// Start line: 6462
+		// Start line: 7216
 	/* end block 2 */
-	// End Line: 6463
+	// End Line: 7217
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_TransformVector3dAttribute
                (_PCodeStack *stack,StackType *stackObject,long item,short *codeStream)
@@ -3781,13 +4214,13 @@ long EVENT_TransformVector3dAttribute
   switch(item) {
   case 6:
     item_00 = (long)*(short *)stackObject->data;
-    goto LAB_800649a4;
+    goto LAB_80063f80;
   case 7:
     item_00 = (long)*(short *)(stackObject->data + 2);
-    goto LAB_800649a4;
+    goto LAB_80063f80;
   case 8:
     item_00 = (long)*(short *)(stackObject->data + 4);
-LAB_800649a4:
+LAB_80063f80:
     EVENT_ChangeOperandToNumber(stackObject,item_00,0);
     item_00 = 1;
     break;
@@ -3825,11 +4258,13 @@ LAB_800649a4:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_ModifyObjectToStackWithAttribute(struct _PCodeStack *stack /*$a0*/, long item /*$a1*/, short *codeStream /*$a2*/)
- // line 3073, offset 0x80064a4c
+ // line 3391, offset 0x80064028
 	/* begin block 1 */
-		// Start line: 6591
+		// Start line: 7345
 	/* end block 1 */
-	// End Line: 6592
+	// End Line: 7346
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_ModifyObjectToStackWithAttribute(_PCodeStack *stack,long item,short *codeStream)
 
@@ -3845,23 +4280,25 @@ void EVENT_ModifyObjectToStackWithAttribute(_PCodeStack *stack,long item,short *
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_DoInstanceAnimateTextureAction(struct InstanceAnimateTexture *instanceAniTexture /*$s1*/, struct StackType *operand2 /*$a0*/)
- // line 3096, offset 0x80064a7c
+ // line 3414, offset 0x80064058
 	/* begin block 1 */
-		// Start line: 3097
-		// Start offset: 0x80064A7C
+		// Start line: 3415
+		// Start offset: 0x80064058
 		// Variables:
 	// 		long trueValue; // stack offset -20
 	// 		long number; // $a2
 	// 		long result; // $s0
 	// 		long error; // stack offset -24
 	/* end block 1 */
-	// End offset: 0x80064B6C
-	// End Line: 3150
+	// End offset: 0x80064148
+	// End Line: 3468
 
 	/* begin block 2 */
-		// Start line: 6637
+		// Start line: 7391
 	/* end block 2 */
-	// End Line: 6638
+	// End Line: 7392
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_DoInstanceAnimateTextureAction
                (InstanceAnimateTexture *instanceAniTexture,StackType *operand2)
@@ -3910,16 +4347,18 @@ long EVENT_DoInstanceAnimateTextureAction
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_ResetAllSplineFlags(struct MultiSpline *spline /*$a0*/)
- // line 3153, offset 0x80064b84
+ // line 3471, offset 0x80064160
 	/* begin block 1 */
-		// Start line: 6762
+		// Start line: 7516
 	/* end block 1 */
-	// End Line: 6763
+	// End Line: 7517
 
 	/* begin block 2 */
-		// Start line: 6763
+		// Start line: 7517
 	/* end block 2 */
-	// End Line: 6764
+	// End Line: 7518
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_ResetAllSplineFlags(MultiSpline *spline)
 
@@ -3951,16 +4390,18 @@ void EVENT_ResetAllSplineFlags(MultiSpline *spline)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_SetSplineLoop(struct MultiSpline *spline /*$a0*/)
- // line 3161, offset 0x80064c0c
+ // line 3479, offset 0x800641e8
 	/* begin block 1 */
-		// Start line: 6778
+		// Start line: 7532
 	/* end block 1 */
-	// End Line: 6779
+	// End Line: 7533
 
 	/* begin block 2 */
-		// Start line: 6779
+		// Start line: 7533
 	/* end block 2 */
-	// End Line: 6780
+	// End Line: 7534
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_SetSplineLoop(MultiSpline *spline)
 
@@ -3992,10 +4433,10 @@ void EVENT_SetSplineLoop(MultiSpline *spline)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_DoSplineAction(struct InstanceSpline *instanceSpline /*$s3*/, struct StackType *operand2 /*$a0*/)
- // line 3169, offset 0x80064c94
+ // line 3487, offset 0x80064270
 	/* begin block 1 */
-		// Start line: 3170
-		// Start offset: 0x80064C94
+		// Start line: 3488
+		// Start offset: 0x80064270
 		// Variables:
 	// 		long trueValue; // stack offset -28
 	// 		long number; // $s0
@@ -4003,40 +4444,42 @@ void EVENT_SetSplineLoop(MultiSpline *spline)
 	// 		long error; // stack offset -32
 
 		/* begin block 1.1 */
-			// Start line: 3181
-			// Start offset: 0x80064CD8
+			// Start line: 3499
+			// Start offset: 0x800642B4
 			// Variables:
 		// 		struct _Instance *instance; // $s1
 		// 		struct MultiSpline *spline; // $s2
 
 			/* begin block 1.1.1 */
-				// Start line: 3233
-				// Start offset: 0x80064D98
+				// Start line: 3551
+				// Start offset: 0x80064374
 				// Variables:
 			// 		long curKeyFrame; // $a0
 
 				/* begin block 1.1.1.1 */
-					// Start line: 3241
-					// Start offset: 0x80064DA8
+					// Start line: 3559
+					// Start offset: 0x80064384
 					// Variables:
 				// 		long maxKeyFrames; // $v1
 				/* end block 1.1.1.1 */
-				// End offset: 0x80064DC8
-				// End Line: 3249
+				// End offset: 0x800643A4
+				// End Line: 3567
 			/* end block 1.1.1 */
-			// End offset: 0x80064EBC
-			// End Line: 3293
+			// End offset: 0x80064498
+			// End Line: 3611
 		/* end block 1.1 */
-		// End offset: 0x8006503C
-		// End Line: 3333
+		// End offset: 0x80064618
+		// End Line: 3651
 	/* end block 1 */
-	// End offset: 0x8006503C
-	// End Line: 3335
+	// End offset: 0x80064618
+	// End Line: 3653
 
 	/* begin block 2 */
-		// Start line: 6794
+		// Start line: 7548
 	/* end block 2 */
-	// End Line: 6795
+	// End Line: 7549
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_DoSplineAction(InstanceSpline *instanceSpline,StackType *operand2)
 
@@ -4066,24 +4509,24 @@ long EVENT_DoSplineAction(InstanceSpline *instanceSpline,StackType *operand2)
   switch(instanceSpline->attribute) {
   case 0xd:
   case 0x29:
-    goto switchD_80064d18_caseD_d;
+    goto switchD_800642f4_caseD_d;
   case 0xe:
     local_1c = local_1c ^ 1;
-switchD_80064d18_caseD_d:
+switchD_800642f4_caseD_d:
     lVar9 = 1;
     if (local_1c == 0) {
       uVar6 = instance->flags;
       uVar4 = 0xfdffffff;
-LAB_80064ec8:
+LAB_800644a4:
       instance->flags = uVar6 & uVar4;
     }
     else {
       uVar4 = instance->flags;
       uVar6 = 0x2000000;
-LAB_80064eb0:
+LAB_8006448c:
       instance->flags = uVar4 | uVar6;
     }
-switchD_80064d18_caseD_12:
+switchD_800642f4_caseD_12:
     return lVar9;
   case 0xf:
   case 0x28:
@@ -4093,7 +4536,7 @@ switchD_80064d18_caseD_12:
     SCRIPT_InstanceSplineSet
               (instance,(short)iVar3,(SplineDef *)0x0,(SplineDef *)0x0,(SplineDef *)0x0);
     uVar4 = 0xfdff0000;
-    goto LAB_80064ec0;
+    goto LAB_8006449c;
   case 0x10:
     EVENT_ResetAllSplineFlags(spline);
     instance->splineFlags = instance->splineFlags & 0xff8f;
@@ -4145,13 +4588,13 @@ switchD_80064d18_caseD_12:
     return 0;
   case 0x11:
     uVar4 = 0xfeff0000;
-    if (iVar3 < 1) goto LAB_80064ea8;
-LAB_80064ec0:
+    if (iVar3 < 1) goto LAB_80064484;
+LAB_8006449c:
     uVar6 = instance->flags;
     uVar4 = uVar4 | 0xffff;
-    goto LAB_80064ec8;
+    goto LAB_800644a4;
   default:
-    goto switchD_80064d18_caseD_12;
+    goto switchD_800642f4_caseD_12;
   case 0x1c:
     if (iVar3 < 0) {
       iVar3 = 0;
@@ -4167,7 +4610,7 @@ LAB_80064ec0:
       SCRIPT_InstanceSplineSet
                 (instance,(short)iVar3,(SplineDef *)0x0,(SplineDef *)0x0,(SplineDef *)0x0);
       uVar4 = 0xfdff0000;
-      goto LAB_80064ec0;
+      goto LAB_8006449c;
     }
     instance->splineFlags = instance->splineFlags | 1;
     instance->targetFrame = (short)iVar3;
@@ -4188,16 +4631,16 @@ LAB_80064ec0:
       instanceSpline->splineFlags = uVar4;
       if (uVar4 == 0) {
         uVar4 = 0xfeff0000;
-        goto LAB_80064ec0;
+        goto LAB_8006449c;
       }
       EVENT_ResetAllSplineFlags(spline);
       EVENT_SetSplineLoop(spline);
       instance->splineFlags = instance->splineFlags | 0x20;
     }
-LAB_80064ea8:
+LAB_80064484:
     uVar4 = instance->flags;
     uVar6 = 0x1000000;
-    goto LAB_80064eb0;
+    goto LAB_8006448c;
   }
 }
 
@@ -4206,10 +4649,10 @@ LAB_80064ea8:
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_DoAnimateAction(struct InstanceAnimate *instanceAnimate /*$s1*/, struct StackType *operand2 /*$s3*/)
- // line 3338, offset 0x80065060
+ // line 3656, offset 0x8006463c
 	/* begin block 1 */
-		// Start line: 3339
-		// Start offset: 0x80065060
+		// Start line: 3657
+		// Start offset: 0x8006463C
 		// Variables:
 	// 		long trueValue; // stack offset -28
 	// 		long number; // $a0
@@ -4218,28 +4661,30 @@ LAB_80064ea8:
 	// 		struct _Instance *instance; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 3404
-			// Start offset: 0x8006513C
+			// Start line: 3722
+			// Start offset: 0x80064718
 			// Variables:
 		// 		struct _Instance *hostInstance; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8006513C
-		// End Line: 3405
+		// End offset: 0x80064718
+		// End Line: 3723
 	/* end block 1 */
-	// End offset: 0x80065314
-	// End Line: 3559
+	// End offset: 0x800648F0
+	// End Line: 3877
 
 	/* begin block 2 */
-		// Start line: 7155
+		// Start line: 7909
 	/* end block 2 */
-	// End Line: 7156
+	// End Line: 7910
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_DoAnimateAction(InstanceAnimate *instanceAnimate,StackType *operand2)
 
 {
   long lVar1;
   int Data;
-  undefined2 uVar2;
+  short sVar2;
   int Message;
   _Instance *instance;
   long lVar3;
@@ -4253,7 +4698,7 @@ long EVENT_DoAnimateAction(InstanceAnimate *instanceAnimate,StackType *operand2)
   }
   instance = instanceAnimate->instance;
   lVar1 = EVENT_ParseOperand2(operand2,&lStack32,(long *)&local_1c);
-  uVar2 = (undefined2)lVar1;
+  sVar2 = (short)lVar1;
   switch(instanceAnimate->attribute) {
   case 0xe:
     local_1c = local_1c ^ 1;
@@ -4264,62 +4709,61 @@ long EVENT_DoAnimateAction(InstanceAnimate *instanceAnimate,StackType *operand2)
       Data = 0;
     }
     else {
-      if (instance->light_color == 0) {
+      if ((instance->aliasCommand).hostInstance == (_Instance *)0x0) {
         Data = SetAnimationInstanceSwitchData
-                         (instance,(int)*(short *)&instance->perVertexColor,
-                          (int)*(short *)((int)&instance->perVertexColor + 2),
-                          (int)*(short *)&instance[1].node.prev,1);
+                         (instance,(int)(instance->aliasCommand).newanim,
+                          (int)(instance->aliasCommand).newframe,
+                          (int)(instance->aliasCommand).interpframes,1);
         Message = 0x8000008;
       }
       else {
         Data = SetActionPlayHostAnimationData
-                         (instance,(_Instance *)instance->light_color,
-                          (int)*(short *)&instance->perVertexColor,
-                          (int)*(short *)((int)&instance->perVertexColor + 2),
-                          (int)*(short *)&instance[1].node.prev,1);
+                         (instance,(instance->aliasCommand).hostInstance,
+                          (int)(instance->aliasCommand).newanim,
+                          (int)(instance->aliasCommand).newframe,
+                          (int)(instance->aliasCommand).interpframes,1);
         Message = 0x40003;
       }
     }
     INSTANCE_Post(instance,Message,Data);
-    memset(&instance->light_color,0,0xc);
+    memset();
     lVar3 = 1;
     break;
   case 0xf:
   case 0x28:
     lVar3 = 0;
     if (lVar1 != -1) {
-      *(undefined2 *)((int)&instance->perVertexColor + 2) = uVar2;
+      (instance->aliasCommand).newframe = sVar2;
     }
     break;
   case 0x1e:
     lVar3 = 1;
     if (lVar1 != -1) {
-      *(undefined2 *)&instance->perVertexColor = uVar2;
+      (instance->aliasCommand).newanim = sVar2;
     }
     break;
   case 0x2a:
-    if (instance->light_color == 0) {
+    if ((instance->aliasCommand).hostInstance == (_Instance *)0x0) {
       Data = SetAnimationInstanceSwitchData
-                       (instance,(int)*(short *)&instance->perVertexColor,
-                        (int)*(short *)((int)&instance->perVertexColor + 2),
-                        (int)*(short *)&instance[1].node.prev,2);
+                       (instance,(int)(instance->aliasCommand).newanim,
+                        (int)(instance->aliasCommand).newframe,
+                        (int)(instance->aliasCommand).interpframes,2);
       Message = 0x8000008;
     }
     else {
       Data = SetActionPlayHostAnimationData
-                       (instance,(_Instance *)instance->light_color,
-                        (int)*(short *)&instance->perVertexColor,
-                        (int)*(short *)((int)&instance->perVertexColor + 2),
-                        (int)*(short *)&instance[1].node.prev,2);
+                       (instance,(instance->aliasCommand).hostInstance,
+                        (int)(instance->aliasCommand).newanim,(int)(instance->aliasCommand).newframe
+                        ,(int)(instance->aliasCommand).interpframes,2);
       Message = 0x40003;
     }
-LAB_800652f8:
+LAB_800648d4:
     INSTANCE_Post(instance,Message,Data);
-    goto LAB_80065300;
+    goto LAB_800648dc;
   case 0x65:
     if (operand2 != (StackType *)0x0) {
       if (operand2->id == 2) {
-        instance->light_color = *(long *)operand2->data;
+        (instance->aliasCommand).hostInstance = *(_Instance **)operand2->data;
       }
       else {
         EventAbortLine = 1;
@@ -4330,37 +4774,36 @@ LAB_800652f8:
   case 0x66:
     lVar3 = 0;
     if (lVar1 != -1) {
-      *(undefined2 *)&instance[1].node.prev = uVar2;
+      (instance->aliasCommand).interpframes = sVar2;
     }
     break;
   case 0x6b:
-    if (instance->light_color == 0) {
+    if ((instance->aliasCommand).hostInstance == (_Instance *)0x0) {
       Data = SetAnimationInstanceSwitchData
-                       (instance,(int)*(short *)&instance->perVertexColor,
-                        (int)*(short *)((int)&instance->perVertexColor + 2),
-                        (int)*(short *)&instance[1].node.prev,0);
+                       (instance,(int)(instance->aliasCommand).newanim,
+                        (int)(instance->aliasCommand).newframe,
+                        (int)(instance->aliasCommand).interpframes,0);
       Message = 0x8000008;
     }
     else {
       Data = SetActionPlayHostAnimationData
-                       (instance,(_Instance *)instance->light_color,
-                        (int)*(short *)&instance->perVertexColor,
-                        (int)*(short *)((int)&instance->perVertexColor + 2),
-                        (int)*(short *)&instance[1].node.prev,0);
+                       (instance,(instance->aliasCommand).hostInstance,
+                        (int)(instance->aliasCommand).newanim,(int)(instance->aliasCommand).newframe
+                        ,(int)(instance->aliasCommand).interpframes,0);
       Message = 0x40003;
     }
     INSTANCE_Post(instance,Message,Data);
-    Data = (int)*(short *)((int)&instance[1].node.prev + 2);
+    Data = (int)(instance->aliasCommand).speed;
     if (0 < Data) {
       Message = 0x40020;
-      goto LAB_800652f8;
+      goto LAB_800648d4;
     }
-LAB_80065300:
-    memset(&instance->light_color,0,0xc);
+LAB_800648dc:
+    memset();
     lVar3 = 1;
     break;
   case 0x84:
-    *(undefined2 *)((int)&instance[1].node.prev + 2) = uVar2;
+    (instance->aliasCommand).speed = sVar2;
   }
   return lVar3;
 }
@@ -4370,10 +4813,10 @@ LAB_80065300:
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_DoInstanceAction(struct InstanceObject *instanceObject /*$s3*/, struct StackType *operand2 /*$s2*/, short *codeStream /*$s5*/)
- // line 3563, offset 0x80065334
+ // line 3881, offset 0x80064910
 	/* begin block 1 */
-		// Start line: 3564
-		// Start offset: 0x80065334
+		// Start line: 3882
+		// Start offset: 0x80064910
 		// Variables:
 	// 		long trueValue; // stack offset -36
 	// 		long number; // $s0
@@ -4382,106 +4825,110 @@ LAB_80065300:
 	// 		struct _Instance *instance; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 3691
-			// Start offset: 0x80065680
+			// Start line: 4013
+			// Start offset: 0x80064CA4
 			// Variables:
 		// 		int x; // $a0
 		// 		int y; // $a1
 		/* end block 1.1 */
-		// End offset: 0x800656E0
-		// End Line: 3709
+		// End offset: 0x80064D04
+		// End Line: 4031
 
 		/* begin block 1.2 */
-			// Start line: 3716
-			// Start offset: 0x80065700
+			// Start line: 4038
+			// Start offset: 0x80064D20
 			// Variables:
 		// 		struct Object *object; // $s2
 		// 		int i; // $s0
 		/* end block 1.2 */
-		// End offset: 0x80065764
-		// End Line: 3735
+		// End offset: 0x80064D84
+		// End Line: 4057
 
 		/* begin block 1.3 */
-			// Start line: 3756
-			// Start offset: 0x800657BC
+			// Start line: 4078
+			// Start offset: 0x80064DD4
 			// Variables:
 		// 		struct Intro *intro; // $a0
 		/* end block 1.3 */
-		// End offset: 0x800657F0
-		// End Line: 3767
+		// End offset: 0x80064E08
+		// End Line: 4089
 
 		/* begin block 1.4 */
-			// Start line: 3799
-			// Start offset: 0x80065870
+			// Start line: 4121
+			// Start offset: 0x80064E90
+			// Variables:
+		// 		struct Vector3d *vector3d; // $s0
 		/* end block 1.4 */
-		// End offset: 0x80065870
-		// End Line: 3805
+		// End offset: 0x80064E90
+		// End Line: 4124
 
 		/* begin block 1.5 */
-			// Start line: 3811
-			// Start offset: 0x800658B0
+			// Start line: 4139
+			// Start offset: 0x80064EE0
 		/* end block 1.5 */
-		// End offset: 0x800658B0
-		// End Line: 3817
+		// End offset: 0x80064EE0
+		// End Line: 4145
 
 		/* begin block 1.6 */
-			// Start line: 3823
-			// Start offset: 0x800658F0
+			// Start line: 4151
+			// Start offset: 0x80064F1C
 		/* end block 1.6 */
-		// End offset: 0x800658F0
-		// End Line: 3829
+		// End offset: 0x80064F1C
+		// End Line: 4157
 
 		/* begin block 1.7 */
-			// Start line: 3838
-			// Start offset: 0x80065944
+			// Start line: 4166
+			// Start offset: 0x80064F68
 		/* end block 1.7 */
-		// End offset: 0x80065944
-		// End Line: 3843
+		// End offset: 0x80064F68
+		// End Line: 4171
 
 		/* begin block 1.8 */
-			// Start line: 3849
-			// Start offset: 0x80065984
+			// Start line: 4177
+			// Start offset: 0x80064FA4
 		/* end block 1.8 */
-		// End offset: 0x80065984
-		// End Line: 3855
+		// End offset: 0x80064FA4
+		// End Line: 4183
 
 		/* begin block 1.9 */
-			// Start line: 3861
-			// Start offset: 0x800659C4
+			// Start line: 4189
+			// Start offset: 0x80064FE0
 		/* end block 1.9 */
-		// End offset: 0x800659C4
-		// End Line: 3867
+		// End offset: 0x80064FE0
+		// End Line: 4195
 
 		/* begin block 1.10 */
-			// Start line: 3889
-			// Start offset: 0x80065A60
+			// Start line: 4217
+			// Start offset: 0x80065078
 			// Variables:
 		// 		struct EventTimer *timer; // $a2
 		/* end block 1.10 */
-		// End offset: 0x80065A74
-		// End Line: 3894
+		// End offset: 0x8006508C
+		// End Line: 4222
 
 		/* begin block 1.11 */
-			// Start line: 3928
-			// Start offset: 0x80065B1C
+			// Start line: 4256
+			// Start offset: 0x8006513C
 		/* end block 1.11 */
-		// End offset: 0x80065B1C
-		// End Line: 3933
+		// End offset: 0x8006513C
+		// End Line: 4261
 
 		/* begin block 1.12 */
-			// Start line: 3981
-			// Start offset: 0x80065BF8
+			// Start line: 4309
+			// Start offset: 0x8006521C
 		/* end block 1.12 */
-		// End offset: 0x80065C3C
-		// End Line: 3986
+		// End offset: 0x80065260
+		// End Line: 4314
 	/* end block 1 */
-	// End offset: 0x80065D00
-	// End Line: 4023
+	// End offset: 0x8006538C
+	// End Line: 4367
 
 	/* begin block 2 */
-		// Start line: 7620
+		// Start line: 8374
 	/* end block 2 */
-	// End Line: 7621
+	// End Line: 8375
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_DoInstanceAction(InstanceObject *instanceObject,StackType *operand2,short *codeStream)
 
@@ -4489,14 +4936,14 @@ long EVENT_DoInstanceAction(InstanceObject *instanceObject,StackType *operand2,s
   long lVar1;
   Event *pEVar2;
   ScriptPCode *pSVar3;
-  Level *pLVar4;
+  short *psVar4;
   uint type;
   ulong uVar5;
   EventTimer *pEVar6;
   int Data;
   Intro *pIVar7;
-  uint Message;
   int y;
+  uint Message;
   _Instance *sender;
   Object *pOVar8;
   long lStack40;
@@ -4510,27 +4957,53 @@ long EVENT_DoInstanceAction(InstanceObject *instanceObject,StackType *operand2,s
   type = EVENT_ParseOperand2(operand2,&lStack40,(long *)&local_24);
   switch(instanceObject->attribute) {
   case 4:
-    if ((int)type < 0x100) {
-      if (type - 1 < 7) {
-        ScriptKillInstance(sender,type);
-        return 0;
-      }
-      if (type != 0) {
-        return 0;
-      }
-      SAVE_UndestroyInstance(sender);
+    if (0xff < (int)type) {
+      INSTANCE_Post(sender,0x40017,type - 0x100);
       return 0;
     }
-    Message = 0x40017;
-    type = type - 0x100;
-    break;
-  default:
-    goto switchD_800653b8_caseD_5;
+    if (type - 1 < 7) {
+      ScriptKillInstance(sender,type);
+      return 0;
+    }
+    if (type != 0) {
+      return 0;
+    }
+    SAVE_UndestroyInstance(sender);
+    return 0;
   case 10:
-    goto switchD_800653b8_caseD_a;
+    goto switchD_80064994_caseD_a;
   case 0xb:
     local_24 = local_24 ^ 1;
-    goto switchD_800653b8_caseD_a;
+switchD_80064994_caseD_a:
+    if (local_24 == 0) {
+      type = sender->flags;
+      sender->flags2 = sender->flags2 & 0xdfffffff;
+      sender->flags = type & 0xfffff7ff;
+      sender->flags = type & 0xfffbf7ff;
+      if ((sender->object->oflags2 & 0x80000U) != 0) {
+        type = sender->flags2 & 0xefffffff;
+        goto LAB_80064bd8;
+      }
+    }
+    else {
+      sender->flags = sender->flags | 0x800;
+      sender->flags2 = sender->flags2 | 0x20000000;
+      sender->flags = sender->flags | 0x40000;
+      if ((sender->object->oflags2 & 0x80000U) != 0) {
+        type = sender->flags2 | 0x10000000;
+LAB_80064bd8:
+        sender->flags2 = type;
+      }
+    }
+    uVar5 = INSTANCE_Query(sender,1);
+    if ((uVar5 & 0xe) == 0) {
+      return 1;
+    }
+    Data = 0x40013;
+    type = local_24;
+LAB_80064c00:
+    INSTANCE_Post(sender,Data,type);
+    return 1;
   case 0x14:
     local_24 = local_24 ^ 1;
   case 0x15:
@@ -4542,54 +5015,68 @@ long EVENT_DoInstanceAction(InstanceObject *instanceObject,StackType *operand2,s
       Data = 0x10002002;
       type = 0;
     }
-    goto LAB_800655e4;
+    goto LAB_80064c00;
   case 0x20:
     if (type == 2) {
-      Message = 0x40012;
+      type = 0x40012;
     }
     else {
       if ((int)type < 3) {
         if (type != 1) {
           return 0;
         }
-        Message = 0x40000;
+        type = 0x40000;
       }
       else {
         if (type != 3) {
           if (type != 4) {
             return 0;
           }
-          Message = 0x40005;
-          type = 0xa000;
-          break;
+          INSTANCE_Post(sender,0x40005,(int)&DAT_0000a000);
+          return 0;
         }
-        Message = 0x40014;
+        type = 0x40014;
       }
     }
-    goto LAB_80065cf4;
+    goto LAB_80065338;
   case 0x24:
-    goto switchD_800653b8_caseD_24;
+    goto switchD_80064994_caseD_24;
   case 0x25:
     local_24 = local_24 ^ 1;
-    goto switchD_800653b8_caseD_24;
+switchD_80064994_caseD_24:
+    if (local_24 == 0) {
+      uVar5 = INSTANCE_Query(instanceObject->instance,5);
+      if ((uVar5 & 1) == 0) {
+        return 0;
+      }
+      type = 0x800020;
+    }
+    else {
+      uVar5 = INSTANCE_Query(instanceObject->instance,5);
+      if ((uVar5 & 1) != 0) {
+        return 0;
+      }
+      type = 0x800020;
+    }
+    goto LAB_80065338;
   case 0x26:
     local_24 = local_24 ^ 1;
   case 0x27:
     if (local_24 == 0) {
-      Message = 0x800000;
-LAB_80065cf0:
-      Message = Message | 0x22;
+      type = 0x800000;
+LAB_80065334:
+      type = type | 0x22;
     }
     else {
-      Message = 0x800021;
+      type = 0x800021;
     }
-    goto LAB_80065cf4;
+    goto LAB_80065338;
   case 0x33:
     if (type == 0xffffffff) {
       type = 0;
     }
     Message = 0x1000017;
-    break;
+    goto LAB_8006531c;
   case 0x34:
     if (local_24 == 0) {
       type = sender->flags & 0xfffff7ff;
@@ -4597,7 +5084,7 @@ LAB_80065cf0:
     else {
       type = sender->flags | 0x800;
     }
-    goto LAB_800654c8;
+    goto LAB_80064aa4;
   case 0x35:
     if (local_24 == 0) {
       sender->flags2 = sender->flags2 & 0xdfffffff;
@@ -4606,137 +5093,163 @@ LAB_80065cf0:
     }
     sender->flags2 = sender->flags2 | 0x20000000;
     type = sender->flags | 0x40000;
-LAB_800654c8:
+LAB_80064aa4:
     sender->flags = type;
     return 1;
   case 0x36:
     Data = 0;
-    if (3 < type) {
-      return 0;
-    }
-    y = 0;
-    if (type == 1) {
-      Data = 1;
-    }
-    else {
-      if ((int)type < 2) {
-        if (type == 0) {
-          y = 1;
-        }
+    if (type < 4) {
+      y = 0;
+      if (type == 1) {
+        Data = 1;
       }
       else {
-        if (type == 2) {
-          Data = 0;
-          y = -1;
+        if ((int)type < 2) {
+          if (type == 0) {
+            y = 1;
+          }
         }
         else {
-          if (type == 3) {
-            Data = -1;
+          if (type == 2) {
+            Data = 0;
+            y = -1;
+          }
+          else {
+            if (type == 3) {
+              Data = -1;
+            }
           }
         }
       }
+      Data = SetObjectData(Data,y,6,(_Instance *)0x0,0);
+      y = 0x800000;
+      goto LAB_8006528c;
     }
-    type = SetObjectData(Data,y,6,(_Instance *)0x0,0);
-    Message = 0x800000;
     break;
   case 0x37:
     pOVar8 = sender->object;
     Data = (int)pOVar8->numberOfEffects;
-    if (Data == 0) {
-      return 0;
-    }
-    if (type == 0xffffffff) {
-      y = 0;
-      if (Data < 1) {
-        return 0;
+    if (Data != 0) {
+      if (type == 0xffffffff) {
+        y = 0;
+        if (0 < Data) {
+          do {
+            FX_StartInstanceEffect(sender,pOVar8->effectList + y,0);
+            y = y + 1;
+          } while (y < pOVar8->numberOfEffects);
+          return 0;
+        }
       }
-      do {
-        FX_StartInstanceEffect(sender,pOVar8->effectList + y,0);
-        y = y + 1;
-      } while (y < pOVar8->numberOfEffects);
-      return 0;
+      else {
+        if ((int)type < Data) {
+          FX_StartInstanceEffect(sender,pOVar8->effectList + type,0);
+          return 0;
+        }
+      }
     }
-    if (Data <= (int)type) {
-      return 0;
-    }
-    FX_StartInstanceEffect(sender,pOVar8->effectList + type,0);
-    return 0;
+    break;
   case 0x40:
     if (type != 0) {
       type = 1;
     }
     Message = 0x100001a;
-    break;
+    goto LAB_8006531c;
   case 0x4b:
-    if (operand2 == (StackType *)0x0) {
-      return 0;
+    if (operand2 != (StackType *)0x0) {
+      if (operand2->id != 9) {
+        return 0;
+      }
+      Data = SetPositionData((int)*(short *)operand2->data,(int)*(short *)(operand2->data + 2),
+                             (int)*(short *)(operand2->data + 4));
+      y = 0x40016;
+      goto LAB_8006528c;
     }
-    if (operand2->id != 9) {
-      return 0;
-    }
-    type = SetPositionData((int)*(short *)operand2->data,(int)*(short *)(operand2->data + 2),
-                           (int)*(short *)(operand2->data + 4));
-    Message = 0x40016;
     break;
   case 0x4c:
-    if (operand2 == (StackType *)0x0) {
-      return 0;
+    if (operand2 != (StackType *)0x0) {
+      if (operand2->id != 9) {
+        return 0;
+      }
+      Data = SetPositionData((int)*(short *)operand2->data,(int)*(short *)(operand2->data + 2),
+                             (int)*(short *)(operand2->data + 4));
+      INSTANCE_Post(sender,0x4000a,Data);
+      sender->currentStreamUnitID = *(long *)(operand2->data + 0x10);
     }
-    if (operand2->id != 9) {
-      return 0;
-    }
-    type = SetPositionData((int)*(short *)operand2->data,(int)*(short *)(operand2->data + 2),
-                           (int)*(short *)(operand2->data + 4));
-    Message = 0x4000a;
     break;
   case 0x4d:
-    if (operand2 == (StackType *)0x0) {
-      return 0;
+    if (operand2 != (StackType *)0x0) {
+      if (operand2->id != 0xe) {
+        return 0;
+      }
+      Data = SetPositionData((int)*(short *)operand2->data,(int)*(short *)(operand2->data + 2),
+                             (int)*(short *)(operand2->data + 4));
+      y = 0x4000b;
+      goto LAB_8006528c;
     }
-    if (operand2->id != 0xe) {
-      return 0;
-    }
-    type = SetPositionData((int)*(short *)operand2->data,(int)*(short *)(operand2->data + 2),
-                           (int)*(short *)(operand2->data + 4));
-    Message = 0x4000b;
     break;
   case 0x4e:
-    goto switchD_800653b8_caseD_4e;
+    goto switchD_80064994_caseD_4e;
   case 0x4f:
     local_24 = (uint)(local_24 == 0);
-    goto switchD_800653b8_caseD_4e;
+switchD_80064994_caseD_4e:
+    if (sender != DAT_800d20f8) {
+      INSTANCE_Post(sender,0x4000e,local_24);
+      return 0;
+    }
+    INSTANCE_Post(sender,0x4000e,local_24);
+    if (local_24 == 0) {
+      DAT_800d220c = DAT_800d220c & 0xffffff6f;
+      return 0;
+    }
+    DAT_800d220c = DAT_800d220c | 0x90;
+    pEVar6 = EVENT_GetNextTimer();
+    pSVar3 = currentActionScript;
+    pEVar2 = currentEventInstance;
+    lVar1 = EventCurrentEventIndex;
+    if (pEVar6 != (EventTimer *)0x0) {
+      EventAbortLine = 1;
+      EventJustRecievedTimer = 1;
+      *(short **)&pEVar6->actionScript = codeStream;
+      pEVar6->flags = pEVar6->flags & 1U | 0x2000;
+      *(Event **)&pEVar6->time = pEVar2;
+      *(ScriptPCode **)&pEVar6->event = pSVar3;
+      psVar4 = CurrentPuzzleLevel;
+      pSVar3->conditionBits = pSVar3->conditionBits | 1;
+      pEVar6->scriptPos = psVar4;
+      *(long *)&pEVar6->level = lVar1;
+    }
+    break;
   case 0x50:
-    if (operand2 == (StackType *)0x0) {
-      return 0;
+    if (operand2 != (StackType *)0x0) {
+      if (operand2->id != 0xe) {
+        return 0;
+      }
+      Data = SetPositionData((int)*(short *)operand2->data,(int)*(short *)(operand2->data + 2),
+                             (int)*(short *)(operand2->data + 4));
+      y = 0x4000d;
+      goto LAB_8006528c;
     }
-    if (operand2->id != 0xe) {
-      return 0;
-    }
-    type = SetPositionData((int)*(short *)operand2->data,(int)*(short *)(operand2->data + 2),
-                           (int)*(short *)(operand2->data + 4));
-    Message = 0x4000d;
     break;
   case 0x53:
-    if (operand2 == (StackType *)0x0) {
-      return 0;
+    if (operand2 != (StackType *)0x0) {
+      if (operand2->id != 9) {
+        return 0;
+      }
+      Data = SetPositionData((int)*(short *)operand2->data,(int)*(short *)(operand2->data + 2),
+                             (int)*(short *)(operand2->data + 4));
+      y = 0x4000f;
+      goto LAB_8006528c;
     }
-    if (operand2->id != 9) {
-      return 0;
-    }
-    type = SetPositionData((int)*(short *)operand2->data,(int)*(short *)(operand2->data + 2),
-                           (int)*(short *)(operand2->data + 4));
-    Message = 0x4000f;
     break;
   case 0x54:
-    if (local_24 == 0) {
-      return 0;
+    if (local_24 != 0) {
+      type = 0x40010;
+      goto LAB_80065338;
     }
-    Message = 0x40010;
-    goto LAB_80065cf4;
-  case 0x55:
-    Message = 0x800027;
-    type = local_24;
     break;
+  case 0x55:
+    INSTANCE_Post(sender,0x800027,local_24);
+    return 0;
   case 0x5b:
     if ((int)type < 0) {
       return 0;
@@ -4750,170 +5263,115 @@ LAB_800654c8:
     sender->spectralLightGroup = (uchar)type;
     return 0;
   case 0x5e:
-    goto switchD_800653b8_caseD_5e;
+    goto switchD_80064994_caseD_5e;
   case 0x5f:
     local_24 = 0;
-    goto switchD_800653b8_caseD_5e;
-  case 0x67:
-    if (local_24 != 0) {
-      sender->flags = sender->flags & 0xffbfffff;
-      return 0;
-    }
-    sender->flags = sender->flags | 0x400000;
+switchD_80064994_caseD_5e:
+    INSTANCE_Post(sender,0x800029,local_24);
     return 0;
+  case 0x67:
+    if (local_24 == 0) {
+      sender->flags = sender->flags | 0x400000;
+    }
+    else {
+      sender->flags = sender->flags & 0xffbfffff;
+    }
+    break;
   case 0x6c:
     Data = (int)type % 0x168;
     if (Data < 0) {
       Data = Data + 0x168;
     }
-    type = rcos((Data * 0x1000) / 0x168);
-    Message = 0x4000005;
-    break;
+    Data = rcos((Data * 0x1000) / 0x168);
+    y = 0x4000005;
+LAB_8006528c:
+    INSTANCE_Post(sender,y,Data);
+    return 0;
   case 0x6d:
-    Message = 0x4000006;
-    goto LAB_80065cf4;
+    type = 0x4000006;
+    goto LAB_80065338;
   case 0x6e:
-    Message = 0x40011;
-LAB_80065cf4:
-    type = 0;
-    break;
+    type = 0x40011;
+LAB_80065338:
+    INSTANCE_Post(sender,type,0);
+    return 0;
   case 0x6f:
-    Message = 0x40015;
-    type = 1 << (type & 0x1f);
-    break;
+    INSTANCE_Post(sender,0x40015,1 << (type & 0x1f));
+    return 0;
   case 0x72:
-    if (operand2 == (StackType *)0x0) {
-      return 0;
+    if (operand2 != (StackType *)0x0) {
+      if (operand2->id != 9) {
+        return 0;
+      }
+      Data = SetPositionData((int)*(short *)operand2->data,(int)*(short *)(operand2->data + 2),
+                             (int)*(short *)(operand2->data + 4));
+      y = 0x4000c;
+      goto LAB_8006528c;
     }
-    if (operand2->id != 9) {
-      return 0;
-    }
-    type = SetPositionData((int)*(short *)operand2->data,(int)*(short *)(operand2->data + 2),
-                           (int)*(short *)(operand2->data + 4));
-    Message = 0x4000c;
     break;
   case 0x74:
-    Message = 0x40006;
-    type = type << 0xc;
-    break;
+    INSTANCE_Post(sender,0x40006,type << 0xc);
+    return 0;
   case 0x7b:
-    if (operand2 == (StackType *)0x0) {
-      return 0;
+    if (operand2 != (StackType *)0x0) {
+      if (operand2->id != 9) {
+        return 0;
+      }
+      Data = SetPositionData((int)*(short *)operand2->data,(int)*(short *)(operand2->data + 2),
+                             (int)*(short *)(operand2->data + 4));
+      y = 0x40018;
+      goto LAB_8006528c;
     }
-    if (operand2->id != 9) {
-      return 0;
-    }
-    type = SetPositionData((int)*(short *)operand2->data,(int)*(short *)(operand2->data + 2),
-                           (int)*(short *)(operand2->data + 4));
-    Message = 0x40018;
     break;
   case 0x7c:
     type = type << 0xc;
     INSTANCE_Post(sender,0x40019,type);
   case 0xa3:
-    Message = 0x1000022;
-    break;
+    Message = 0x1000000;
+LAB_80065318:
+    Message = Message | 0x22;
+LAB_8006531c:
+    INSTANCE_Post(sender,Message,type);
+    return 0;
   case 0x85:
     Message = 0x40021;
-    break;
+    goto LAB_8006531c;
   case 0x8a:
     pIVar7 = sender->intro;
     if (pIVar7 == (Intro *)0x0) {
       return 0;
     }
-    if (local_24 != 0) {
-      pIVar7->flags = pIVar7->flags | 0x400;
-      return 0;
-    }
-    pIVar7->flags = pIVar7->flags & 0xfffffbff;
-    return 0;
-  case 0x8c:
-    Message = 0x40022;
-    break;
-  case 0x8d:
-    if ((int)type < 0) {
-      return 0;
-    }
-    Data = SetMonsterAlarmData(sender,(_Position *)0x0,type);
-    INSTANCE_Broadcast((_Instance *)0x0,10,0x1000011,Data);
-    return 0;
-  case 0xa4:
-    Message = 0x1000000;
-    goto LAB_80065cf0;
-  }
-  goto LAB_80065cf8;
-switchD_800653b8_caseD_4e:
-  if (sender == gameTrackerX.playerInstance) {
-    INSTANCE_Post(sender,0x4000e,local_24);
     if (local_24 == 0) {
-      gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xffffff6f;
+      pIVar7->flags = pIVar7->flags & 0xfffffbff;
+    }
+    else {
+      pIVar7->flags = pIVar7->flags | 0x400;
+    }
+    break;
+  case 0x8c:
+    Message = 0x40000;
+    goto LAB_80065318;
+  case 0x8d:
+    if (-1 < (int)type) {
+      Data = SetMonsterAlarmData(sender,(_Position *)0x0,type);
+      INSTANCE_Broadcast((_Instance *)0x0,10,0x1000011,Data);
       return 0;
     }
-    gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x90;
-    pEVar6 = EVENT_GetNextTimer();
-    pSVar3 = currentActionScript;
-    pEVar2 = currentEventInstance;
-    lVar1 = EventCurrentEventIndex;
-    if (pEVar6 == (EventTimer *)0x0) {
+    break;
+  case 0xa4:
+    type = 0x1000000;
+    goto LAB_80065334;
+  case 0xa5:
+    if (sender != DAT_800d20f8) {
       return 0;
     }
-    EventAbortLine = 1;
-    EventJustRecievedTimer = 1;
-    *(short **)&pEVar6->actionScript = codeStream;
-    pEVar6->flags = pEVar6->flags & 1U | 0x2000;
-    *(Event **)&pEVar6->time = pEVar2;
-    *(ScriptPCode **)&pEVar6->event = pSVar3;
-    pLVar4 = CurrentPuzzleLevel;
-    pSVar3->conditionBits = pSVar3->conditionBits | 1;
-    *(Level **)&pEVar6->scriptPos = pLVar4;
-    *(long *)&pEVar6->level = lVar1;
-    return 0;
-  }
-  Message = 0x4000e;
-  type = local_24;
-  goto LAB_80065cf8;
-switchD_800653b8_caseD_24:
-  if (local_24 == 0) {
-    uVar5 = INSTANCE_Query(instanceObject->instance,5);
-    if ((uVar5 & 1) == 0) {
-      return 0;
+    if (local_24 == 0) {
+      DAT_800d220c = DAT_800d220c & 0xffffff6f;
     }
-    Message = 0x800020;
-  }
-  else {
-    uVar5 = INSTANCE_Query(instanceObject->instance,5);
-    if ((uVar5 & 1) != 0) {
-      return 0;
+    else {
+      DAT_800d220c = DAT_800d220c | 0x90;
     }
-    Message = 0x800020;
   }
-  goto LAB_80065cf4;
-switchD_800653b8_caseD_a:
-  if (local_24 == 0) {
-    sender->flags = sender->flags & 0xfffff7ff;
-    sender->flags2 = sender->flags2 & 0xdfffffff;
-    sender->flags = sender->flags & 0xfffbffff;
-  }
-  else {
-    sender->flags = sender->flags | 0x800;
-    sender->flags2 = sender->flags2 | 0x20000000;
-    sender->flags = sender->flags | 0x40000;
-  }
-  uVar5 = INSTANCE_Query(sender,1);
-  if ((uVar5 & 0xe) == 0) {
-    return 1;
-  }
-  Data = 0x40013;
-  type = local_24;
-LAB_800655e4:
-  INSTANCE_Post(sender,Data,type);
-  return 1;
-switchD_800653b8_caseD_5e:
-  Message = 0x800029;
-  type = local_24;
-LAB_80065cf8:
-  INSTANCE_Post(sender,Message,type);
-switchD_800653b8_caseD_5:
   return 0;
 }
 
@@ -4922,27 +5380,29 @@ switchD_800653b8_caseD_5:
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_GetTGroupValue(struct TGroupObject *terrainGroup /*$a0*/)
- // line 4026, offset 0x80065d28
+ // line 4370, offset 0x800653b4
 	/* begin block 1 */
-		// Start line: 4028
-		// Start offset: 0x80065D28
+		// Start line: 4372
+		// Start offset: 0x800653B4
 		// Variables:
-	// 		long value; // $a1
-	// 		long trueValue; // $a2
-	// 		struct BSPTree *bspTree; // $a0
+	// 		long value; // $a2
+	// 		long trueValue; // $a3
+	// 		struct BSPTree *bspTree; // $a1
 	/* end block 1 */
-	// End offset: 0x80065E94
-	// End Line: 4129
+	// End offset: 0x80065534
+	// End Line: 4473
 
 	/* begin block 2 */
-		// Start line: 8573
+		// Start line: 9383
 	/* end block 2 */
-	// End Line: 8574
+	// End Line: 9384
 
 	/* begin block 3 */
-		// Start line: 8574
+		// Start line: 9384
 	/* end block 3 */
-	// End Line: 8575
+	// End Line: 9385
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_GetTGroupValue(TGroupObject *terrainGroup)
 
@@ -4965,7 +5425,7 @@ long EVENT_GetTGroupValue(TGroupObject *terrainGroup)
           if (iVar2 != -1) {
             return 0;
           }
-          return -(int)pBVar3->ID;
+          return -(terrainGroup->streamUnit->StreamUnitID * 0x100 + (int)pBVar3->ID);
         }
         if (iVar2 != 0xb) {
           if (iVar2 != 0x34) {
@@ -5022,10 +5482,10 @@ long EVENT_GetTGroupValue(TGroupObject *terrainGroup)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_DoTGroupAction(struct TGroupObject *terrainGroup /*$s1*/, struct StackType *operand2 /*$a0*/)
- // line 4132, offset 0x80065ea0
+ // line 4476, offset 0x80065540
 	/* begin block 1 */
-		// Start line: 4133
-		// Start offset: 0x80065EA0
+		// Start line: 4477
+		// Start offset: 0x80065540
 		// Variables:
 	// 		long trueValue; // stack offset -20
 	// 		long number; // $v0
@@ -5033,39 +5493,41 @@ long EVENT_GetTGroupValue(TGroupObject *terrainGroup)
 	// 		long result; // $s2
 
 		/* begin block 1.1 */
-			// Start line: 4144
-			// Start offset: 0x80065ED4
+			// Start line: 4488
+			// Start offset: 0x80065574
 			// Variables:
 		// 		struct BSPTree *bspTree; // $s0
 
 			/* begin block 1.1.1 */
-				// Start line: 4152
-				// Start offset: 0x80065F7C
+				// Start line: 4496
+				// Start offset: 0x8006561C
 				// Variables:
 			// 		struct WaterLevelProcess *curWater; // $a0
 			/* end block 1.1.1 */
-			// End offset: 0x80066008
-			// End Line: 4168
+			// End offset: 0x800656A8
+			// End Line: 4512
 
 			/* begin block 1.1.2 */
-				// Start line: 4176
-				// Start offset: 0x8006601C
+				// Start line: 4520
+				// Start offset: 0x800656BC
 				// Variables:
 			// 		long offsetz; // $a0
 			/* end block 1.1.2 */
-			// End offset: 0x800660A0
-			// End Line: 4189
+			// End offset: 0x80065740
+			// End Line: 4533
 		/* end block 1.1 */
-		// End offset: 0x80066188
-		// End Line: 4259
+		// End offset: 0x80065828
+		// End Line: 4603
 	/* end block 1 */
-	// End offset: 0x80066188
-	// End Line: 4261
+	// End offset: 0x80065828
+	// End Line: 4605
 
 	/* begin block 2 */
-		// Start line: 8789
+		// Start line: 9599
 	/* end block 2 */
-	// End Line: 8790
+	// End Line: 9600
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_DoTGroupAction(TGroupObject *terrainGroup,StackType *operand2)
 
@@ -5199,10 +5661,10 @@ long EVENT_DoTGroupAction(TGroupObject *terrainGroup,StackType *operand2)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_DoCameraAction(struct CameraObject *cameraObject /*$s2*/, struct StackType *operand2 /*$s0*/, short *codeStream /*$a2*/)
- // line 4264, offset 0x800661a4
+ // line 4608, offset 0x80065844
 	/* begin block 1 */
-		// Start line: 4265
-		// Start offset: 0x800661A4
+		// Start line: 4609
+		// Start offset: 0x80065844
 		// Variables:
 	// 		long trueValue; // stack offset -20
 	// 		long number; // $a1
@@ -5210,55 +5672,57 @@ long EVENT_DoTGroupAction(TGroupObject *terrainGroup,StackType *operand2)
 	// 		struct Camera *camera; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 4298
-			// Start offset: 0x80066240
+			// Start line: 4642
+			// Start offset: 0x800658E0
 			// Variables:
 		// 		struct Intro *intro; // $a0
 		/* end block 1.1 */
-		// End offset: 0x800662A8
-		// End Line: 4328
+		// End offset: 0x80065948
+		// End Line: 4672
 
 		/* begin block 1.2 */
-			// Start line: 4337
-			// Start offset: 0x800662C4
+			// Start line: 4681
+			// Start offset: 0x80065964
 			// Variables:
 		// 		long angle; // $a1
 		/* end block 1.2 */
-		// End offset: 0x80066388
-		// End Line: 4358
+		// End offset: 0x80065A28
+		// End Line: 4702
 
 		/* begin block 1.3 */
-			// Start line: 4370
-			// Start offset: 0x800663B4
+			// Start line: 4714
+			// Start offset: 0x80065A54
 			// Variables:
 		// 		long angle; // $v0
 		/* end block 1.3 */
-		// End offset: 0x80066404
-		// End Line: 4380
+		// End offset: 0x80065AA4
+		// End Line: 4724
 
 		/* begin block 1.4 */
-			// Start line: 4394
-			// Start offset: 0x80066424
+			// Start line: 4738
+			// Start offset: 0x80065AC4
 			// Variables:
 		// 		long angle; // $v0
 		/* end block 1.4 */
-		// End offset: 0x80066464
-		// End Line: 4403
+		// End offset: 0x80065B04
+		// End Line: 4747
 
 		/* begin block 1.5 */
-			// Start line: 4431
-			// Start offset: 0x800664DC
+			// Start line: 4775
+			// Start offset: 0x80065B7C
 		/* end block 1.5 */
-		// End offset: 0x800664DC
-		// End Line: 4435
+		// End offset: 0x80065B7C
+		// End Line: 4779
 	/* end block 1 */
-	// End offset: 0x80066508
-	// End Line: 4465
+	// End offset: 0x80065BA8
+	// End Line: 4809
 
 	/* begin block 2 */
-		// Start line: 9063
+		// Start line: 9873
 	/* end block 2 */
-	// End Line: 9064
+	// End Line: 9874
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_DoCameraAction(CameraObject *cameraObject,StackType *operand2,short *codeStream)
 
@@ -5354,7 +5818,7 @@ long EVENT_DoCameraAction(CameraObject *cameraObject,StackType *operand2,short *
     iVar1 = iVar1 << 0xc;
     iVar2 = (int)((ulonglong)((longlong)iVar1 * -0x49f49f49) >> 0x20);
     frames = 0;
-    goto LAB_80066470;
+    goto LAB_80065b10;
   case 0x69:
     if (local_18 != 0) {
       return 0;
@@ -5366,7 +5830,7 @@ long EVENT_DoCameraAction(CameraObject *cameraObject,StackType *operand2,short *
     iVar1 = iVar1 << 0xc;
     frames = cameraObject->frames;
     iVar2 = (int)((ulonglong)((longlong)iVar1 * -0x49f49f49) >> 0x20);
-LAB_80066470:
+LAB_80065b10:
     CAMERA_Adjust_roll((iVar2 + iVar1 >> 8) - (iVar1 >> 0x1f),frames);
   }
   return 0;
@@ -5377,10 +5841,10 @@ LAB_80066470:
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_DoObjectSoundAction(struct SoundObject *soundObject /*$s0*/, struct StackType *operand2 /*$a0*/)
- // line 4468, offset 0x80066524
+ // line 4812, offset 0x80065bc4
 	/* begin block 1 */
-		// Start line: 4469
-		// Start offset: 0x80066524
+		// Start line: 4813
+		// Start offset: 0x80065BC4
 		// Variables:
 	// 		long trueValue; // stack offset -20
 	// 		long number; // $v1
@@ -5389,21 +5853,23 @@ LAB_80066470:
 	// 		struct _Instance *instance; // $a3
 
 		/* begin block 1.1 */
-			// Start line: 4484
-			// Start offset: 0x8006655C
+			// Start line: 4828
+			// Start offset: 0x80065BFC
 			// Variables:
 		// 		struct SoundInstance *soundInstance; // $s1
 		/* end block 1.1 */
-		// End offset: 0x8006663C
-		// End Line: 4522
+		// End offset: 0x80065CDC
+		// End Line: 4866
 	/* end block 1 */
-	// End offset: 0x8006663C
-	// End Line: 4523
+	// End offset: 0x80065CDC
+	// End Line: 4867
 
 	/* begin block 2 */
-		// Start line: 9479
+		// Start line: 10289
 	/* end block 2 */
-	// End Line: 9480
+	// End Line: 10290
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_DoObjectSoundAction(SoundObject *soundObject,StackType *operand2)
 
@@ -5463,10 +5929,10 @@ long EVENT_DoObjectSoundAction(SoundObject *soundObject,StackType *operand2)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_DoSoundMarkerAction(struct SoundObject *soundObject /*$s0*/, struct StackType *operand2 /*$a0*/)
- // line 4526, offset 0x80066658
+ // line 4870, offset 0x80065cf8
 	/* begin block 1 */
-		// Start line: 4527
-		// Start offset: 0x80066658
+		// Start line: 4871
+		// Start offset: 0x80065CF8
 		// Variables:
 	// 		long trueValue; // stack offset -20
 	// 		long number; // $v1
@@ -5475,21 +5941,23 @@ long EVENT_DoObjectSoundAction(SoundObject *soundObject,StackType *operand2)
 	// 		struct _SFXMkr *sfxMarker; // $a3
 
 		/* begin block 1.1 */
-			// Start line: 4542
-			// Start offset: 0x80066690
+			// Start line: 4886
+			// Start offset: 0x80065D30
 			// Variables:
 		// 		struct SoundInstance *soundInstance; // $s1
 		/* end block 1.1 */
-		// End offset: 0x80066770
-		// End Line: 4580
+		// End offset: 0x80065E10
+		// End Line: 4924
 	/* end block 1 */
-	// End offset: 0x80066770
-	// End Line: 4581
+	// End offset: 0x80065E10
+	// End Line: 4925
 
 	/* begin block 2 */
-		// Start line: 9604
+		// Start line: 10414
 	/* end block 2 */
-	// End Line: 9605
+	// End Line: 10415
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_DoSoundMarkerAction(SoundObject *soundObject,StackType *operand2)
 
@@ -5549,33 +6017,35 @@ long EVENT_DoSoundMarkerAction(SoundObject *soundObject,StackType *operand2)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_GetSoundValue(struct SoundObject *soundObject /*$a0*/)
- // line 4584, offset 0x8006678c
+ // line 4928, offset 0x80065e2c
 	/* begin block 1 */
-		// Start line: 4586
-		// Start offset: 0x8006678C
+		// Start line: 4930
+		// Start offset: 0x80065E2C
 	/* end block 1 */
-	// End offset: 0x8006678C
-	// End Line: 4618
+	// End offset: 0x80065E2C
+	// End Line: 4962
 
 	/* begin block 2 */
-		// Start line: 9729
+		// Start line: 10539
 	/* end block 2 */
-	// End Line: 9730
+	// End Line: 10540
 
 	/* begin block 3 */
-		// Start line: 9730
+		// Start line: 10540
 	/* end block 3 */
-	// End Line: 9731
+	// End Line: 10541
 
 	/* begin block 4 */
-		// Start line: 9762
+		// Start line: 10572
 	/* end block 4 */
-	// End Line: 9763
+	// End Line: 10573
 
 	/* begin block 5 */
-		// Start line: 9763
+		// Start line: 10573
 	/* end block 5 */
-	// End Line: 9764
+	// End Line: 10574
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_GetSoundValue(SoundObject *soundObject)
 
@@ -5587,45 +6057,51 @@ long EVENT_GetSoundValue(SoundObject *soundObject)
 
 // decompiled code
 // original method signature: 
-// long /*$ra*/ EVENT_DoAreaAction(struct AreaObject *areaObject /*$s0*/, struct StackType *operand2 /*$a0*/)
- // line 4621, offset 0x80066794
+// long /*$ra*/ EVENT_DoAreaAction(struct AreaObject *areaObject /*$s1*/, struct StackType *operand2 /*$a0*/)
+ // line 4965, offset 0x80065e34
 	/* begin block 1 */
-		// Start line: 4622
-		// Start offset: 0x80066794
+		// Start line: 4966
+		// Start offset: 0x80065E34
 		// Variables:
 	// 		long trueValue; // stack offset -20
 	// 		long number; // $v1
 	// 		long error; // stack offset -24
-	// 		struct _StreamUnit *streamUnit; // $s1
+	// 		struct _StreamUnit *streamUnit; // $s0
 	/* end block 1 */
-	// End offset: 0x80066818
-	// End Line: 4663
+	// End offset: 0x80065EC8
+	// End Line: 5009
 
 	/* begin block 2 */
-		// Start line: 9803
+		// Start line: 10613
 	/* end block 2 */
-	// End Line: 9804
+	// End Line: 10614
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_DoAreaAction(AreaObject *areaObject,StackType *operand2)
 
 {
   long lVar1;
-  _StreamUnit *p_Var2;
+  ushort uVar2;
+  _StreamUnit *p_Var3;
   long local_18;
   long local_14;
   
   local_14 = 1;
-  p_Var2 = areaObject->streamUnit;
+  p_Var3 = areaObject->streamUnit;
   if (areaObject->attribute != -1) {
     lVar1 = EVENT_ParseOperand2(operand2,&local_18,&local_14);
+    uVar2 = (ushort)lVar1;
     if (areaObject->attribute == 0x70) {
       if (local_18 == 0) {
-        p_Var2->TargetFogFar = (short)lVar1;
+        p_Var3->TargetFogFar = uVar2;
+        p_Var3->level->fogFar = uVar2;
       }
     }
     else {
       if ((areaObject->attribute == 0x71) && (local_18 == 0)) {
-        p_Var2->TargetFogNear = (short)lVar1;
+        p_Var3->TargetFogNear = uVar2;
+        p_Var3->level->fogNear = uVar2;
       }
     }
   }
@@ -5637,10 +6113,10 @@ long EVENT_DoAreaAction(AreaObject *areaObject,StackType *operand2)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_DoIntroAction(struct IntroObject *introObject /*$s1*/, struct StackType *operand2 /*$a0*/)
- // line 4666, offset 0x80066830
+ // line 5012, offset 0x80065ee0
 	/* begin block 1 */
-		// Start line: 4667
-		// Start offset: 0x80066830
+		// Start line: 5013
+		// Start offset: 0x80065EE0
 		// Variables:
 	// 		long trueValue; // stack offset -20
 	// 		long number; // $v0
@@ -5648,61 +6124,63 @@ long EVENT_DoAreaAction(AreaObject *areaObject,StackType *operand2)
 	// 		long result; // $s2
 
 		/* begin block 1.1 */
-			// Start line: 4678
-			// Start offset: 0x80066864
+			// Start line: 5024
+			// Start offset: 0x80065F14
 			// Variables:
 		// 		struct Intro *intro; // $s0
 
 			/* begin block 1.1.1 */
-				// Start line: 4722
-				// Start offset: 0x8006695C
+				// Start line: 5068
+				// Start offset: 0x8006600C
 				// Variables:
 			// 		int i; // $a2
 			// 		int j; // $v1
 			// 		int id; // $a1
 
 				/* begin block 1.1.1.1 */
-					// Start line: 4725
-					// Start offset: 0x80066970
+					// Start line: 5071
+					// Start offset: 0x80066020
 
 					/* begin block 1.1.1.1.1 */
-						// Start line: 4728
-						// Start offset: 0x80066980
+						// Start line: 5074
+						// Start offset: 0x80066030
 						// Variables:
 					// 		struct Intro *intro1; // $v0
 					/* end block 1.1.1.1.1 */
-					// End offset: 0x800669B8
-					// End Line: 4737
+					// End offset: 0x80066068
+					// End Line: 5083
 				/* end block 1.1.1.1 */
-				// End offset: 0x800669B8
-				// End Line: 4738
+				// End offset: 0x80066068
+				// End Line: 5084
 			/* end block 1.1.1 */
-			// End offset: 0x800669EC
-			// End Line: 4741
+			// End offset: 0x8006609C
+			// End Line: 5087
 		/* end block 1.1 */
-		// End offset: 0x800669EC
-		// End Line: 4748
+		// End offset: 0x8006609C
+		// End Line: 5094
 	/* end block 1 */
-	// End offset: 0x800669EC
-	// End Line: 4750
+	// End offset: 0x8006609C
+	// End Line: 5096
 
 	/* begin block 2 */
-		// Start line: 9899
+		// Start line: 10715
 	/* end block 2 */
-	// End Line: 9900
+	// End Line: 10716
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_DoIntroAction(IntroObject *introObject,StackType *operand2)
 
 {
   uint uVar1;
-  Level *pLVar2;
-  Intro *pIVar3;
-  _Instance *p_Var4;
+  Intro *pIVar2;
+  _Instance *p_Var3;
+  long lVar4;
   uint uVar5;
   int iVar6;
   int iVar7;
-  STracker *pSVar8;
-  long lVar9;
+  undefined4 *puVar8;
+  undefined4 uVar9;
   Intro *intro;
   long lVar10;
   long lStack24;
@@ -5710,7 +6188,7 @@ long EVENT_DoIntroAction(IntroObject *introObject,StackType *operand2)
   
   local_14 = 1;
   lVar10 = 0;
-  lVar9 = lVar10;
+  lVar4 = lVar10;
   if (introObject->attribute != -1) {
     intro = introObject->intro;
     EVENT_ParseOperand2(operand2,&lStack24,(long *)&local_14);
@@ -5732,54 +6210,53 @@ long EVENT_DoIntroAction(IntroObject *introObject,StackType *operand2)
           uVar1 = intro->flags | 0x80;
         }
         intro->flags = uVar1 & uVar5;
-        lVar9 = 1;
+        lVar4 = 1;
       }
       else {
         if (iVar7 == 0x3e) {
-          lVar9 = 0;
+          uVar9 = 0;
           iVar7 = 0;
-          pSVar8 = &StreamTracker;
+          puVar8 = &StreamTracker;
           do {
-            if (pSVar8->StreamList[0].used == 2) {
-              pLVar2 = pSVar8->StreamList[0].level;
-              iVar6 = pLVar2->numIntros;
-              pIVar3 = pLVar2->introList;
+            if (*(short *)(puVar8 + 1) == 2) {
+              iVar6 = *(int *)(puVar8[2] + 0x78);
+              pIVar2 = *(Intro **)(puVar8[2] + 0x7c);
               while (iVar6 != 0) {
-                if (pIVar3 == intro) {
-                  lVar9 = pSVar8->StreamList[0].StreamUnitID;
+                if (pIVar2 == intro) {
+                  uVar9 = *puVar8;
                   break;
                 }
                 iVar6 = iVar6 + -1;
-                pIVar3 = pIVar3 + 1;
+                pIVar2 = pIVar2 + 1;
               }
             }
-            pSVar8 = (STracker *)(pSVar8->StreamList + 1);
+            puVar8 = puVar8 + 0x10;
             iVar7 = iVar7 + 1;
           } while (iVar7 < 0x10);
-          p_Var4 = INSTANCE_IntroduceInstance(intro,(short)lVar9);
-          lVar9 = 0;
-          if (p_Var4 == (_Instance *)0x0) {
+          p_Var3 = INSTANCE_IntroduceInstance(intro,(short)uVar9);
+          lVar4 = 0;
+          if (p_Var3 == (_Instance *)0x0) {
             EventAbortLine = 1;
-            lVar9 = lVar10;
+            lVar4 = lVar10;
           }
         }
         else {
-          lVar9 = 0;
-          if ((0x3e < iVar7) && (lVar9 = 0, iVar7 == 0x8a)) {
+          lVar4 = 0;
+          if ((0x3e < iVar7) && (lVar4 = 0, iVar7 == 0x8a)) {
             if (local_14 == 0) {
               intro->flags = intro->flags & 0xfffffbff;
-              lVar9 = lVar10;
+              lVar4 = lVar10;
             }
             else {
               intro->flags = intro->flags | 0x400;
-              lVar9 = lVar10;
+              lVar4 = lVar10;
             }
           }
         }
       }
     }
   }
-  return lVar9;
+  return lVar4;
 }
 
 
@@ -5787,21 +6264,23 @@ long EVENT_DoIntroAction(IntroObject *introObject,StackType *operand2)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_DoStackOperationEquals(struct _PCodeStack *stack /*$a2*/, short *codeStream /*$a3*/)
- // line 4767, offset 0x80066a08
+ // line 5113, offset 0x800660b8
 	/* begin block 1 */
-		// Start line: 4768
-		// Start offset: 0x80066A08
+		// Start line: 5114
+		// Start offset: 0x800660B8
 		// Variables:
 	// 		struct StackType operand1; // stack offset -88
 	// 		struct StackType operand2; // stack offset -48
 	/* end block 1 */
-	// End offset: 0x80066ACC
-	// End Line: 4782
+	// End offset: 0x8006617C
+	// End Line: 5128
 
 	/* begin block 2 */
-		// Start line: 9527
+		// Start line: 10219
 	/* end block 2 */
-	// End Line: 9528
+	// End Line: 10220
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_DoStackOperationEquals(_PCodeStack *stack,short *codeStream)
 
@@ -5856,48 +6335,50 @@ void EVENT_DoStackOperationEquals(_PCodeStack *stack,short *codeStream)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_CompareVector3d(struct Vector3d *vector1 /*$a0*/, struct Vector3d *vector2 /*$a1*/)
- // line 4787, offset 0x80066af4
+ // line 5133, offset 0x800661a4
 	/* begin block 1 */
-		// Start line: 4789
-		// Start offset: 0x80066AF4
+		// Start line: 5135
+		// Start offset: 0x800661A4
 		// Variables:
 	// 		long retValue; // $t2
 
 		/* begin block 1.1 */
-			// Start line: 4812
-			// Start offset: 0x80066B98
+			// Start line: 5164
+			// Start offset: 0x8006625C
 			// Variables:
 		// 		long dist; // $v0
 		/* end block 1.1 */
-		// End offset: 0x80066C18
-		// End Line: 4822
+		// End offset: 0x800662DC
+		// End Line: 5174
 
 		/* begin block 1.2 */
-			// Start line: 4828
-			// Start offset: 0x80066C20
+			// Start line: 5180
+			// Start offset: 0x800662E4
 			// Variables:
 		// 		long dist; // $v0
 		/* end block 1.2 */
-		// End offset: 0x80066C90
-		// End Line: 4838
+		// End offset: 0x80066354
+		// End Line: 5190
 	/* end block 1 */
-	// End offset: 0x80066C90
-	// End Line: 4841
+	// End offset: 0x80066354
+	// End Line: 5194
 
 	/* begin block 2 */
-		// Start line: 10155
+		// Start line: 10971
 	/* end block 2 */
-	// End Line: 10156
+	// End Line: 10972
 
 	/* begin block 3 */
-		// Start line: 10156
+		// Start line: 10972
 	/* end block 3 */
-	// End Line: 10157
+	// End Line: 10973
 
 	/* begin block 4 */
-		// Start line: 10159
+		// Start line: 10974
 	/* end block 4 */
-	// End Line: 10160
+	// End Line: 10975
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_CompareVector3d(Vector3d *vector1,Vector3d *vector2)
 
@@ -5907,6 +6388,9 @@ long EVENT_CompareVector3d(Vector3d *vector1,Vector3d *vector2)
   int iVar3;
   int iVar4;
   
+  if (vector1->streamUnitID != vector2->streamUnitID) {
+    return 0;
+  }
   iVar4 = (int)vector1->errory;
   if (iVar4 != -1) {
     iVar3 = (int)vector1->errorz;
@@ -5942,7 +6426,7 @@ long EVENT_CompareVector3d(Vector3d *vector1,Vector3d *vector2)
         return 0;
       }
       bVar1 = (int)vector1->vz - (int)vector2->vz < iVar4;
-      goto LAB_80066c84;
+      goto LAB_80066348;
     }
   }
   iVar4 = (int)vector2->vx - (int)vector1->vx;
@@ -5950,7 +6434,7 @@ long EVENT_CompareVector3d(Vector3d *vector1,Vector3d *vector2)
   iVar2 = (int)vector2->vz - (int)vector1->vz;
   bVar1 = iVar4 * iVar4 + iVar3 * iVar3 + iVar2 * iVar2 <
           (int)vector1->errorx * (int)vector1->errorx;
-LAB_80066c84:
+LAB_80066348:
   if (bVar1) {
     return 1;
   }
@@ -5962,10 +6446,10 @@ LAB_80066c84:
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_CompareRotationVectors(struct Rotation3d *rot1 /*$a0*/, struct Rotation3d *rot2 /*$s1*/, long trueValue /*$s6*/)
- // line 4850, offset 0x80066c9c
+ // line 5203, offset 0x80066360
 	/* begin block 1 */
-		// Start line: 4851
-		// Start offset: 0x80066C9C
+		// Start line: 5204
+		// Start offset: 0x80066360
 		// Variables:
 	// 		struct MATRIX matrix1; // stack offset -104
 	// 		struct MATRIX matrix2; // stack offset -72
@@ -5975,19 +6459,22 @@ LAB_80066c84:
 	// 		struct _SVector axis; // stack offset -40
 	// 		long doSoft; // $s4
 	/* end block 1 */
-	// End offset: 0x80066E68
-	// End Line: 4948
+	// End offset: 0x8006652C
+	// End Line: 5301
 
 	/* begin block 2 */
-		// Start line: 10287
+		// Start line: 11117
 	/* end block 2 */
-	// End Line: 10288
+	// End Line: 11118
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_CompareRotationVectors(Rotation3d *rot1,Rotation3d *rot2,long trueValue)
 
 {
   bool bVar1;
   int iVar2;
+  undefined m1;
   int iVar3;
   uint uVar4;
   MATRIX MStack104;
@@ -6000,64 +6487,65 @@ long EVENT_CompareRotationVectors(Rotation3d *rot1,Rotation3d *rot2,long trueVal
   if (iVar3 == -1) {
     iVar3 = rot2->attribute;
   }
-  RotMatrixZYX((short *)rot1,(uint *)&MStack104);
-  RotMatrixZYX((short *)rot2,(uint *)&MStack72);
+  RotMatrixZYX((SVECTOR *)rot1,&MStack104);
+  RotMatrixZYX((SVECTOR *)rot2,&MStack72);
   if (iVar3 == 8) {
-LAB_80066dfc:
+LAB_800664c0:
     local_28.x = 0;
     local_28.y = 0;
     local_28.z = 0x1000;
-    goto LAB_80066e10;
+    goto LAB_800664d4;
   }
   if (iVar3 < 9) {
     if (iVar3 == 6) {
-LAB_80066dcc:
+LAB_80066490:
       local_28.x = 0x1000;
       local_28.y = 0;
       local_28.z = 0;
-      goto LAB_80066e10;
+      goto LAB_800664d4;
     }
     if (iVar3 < 7) {
       if (iVar3 == -1) {
         local_28.x = 0x1000;
         local_28.y = 0;
         local_28.z = 0;
-        iVar2 = PHYSOBS_CheckObjectAxisAlignment(&MStack104,&MStack72,&local_28);
+        m1 = SUB41(&MStack72,0);
+        iVar2 = PHYSOBS_CheckObjectAxisAlignment(0x98,m1,&local_28);
         if (iVar2 - 0xf80U < 0x101) {
           local_28.x = 0;
           local_28.y = 0x1000;
           local_28.z = 0;
-          iVar2 = PHYSOBS_CheckObjectAxisAlignment(&MStack104,&MStack72,&local_28);
+          iVar2 = PHYSOBS_CheckObjectAxisAlignment(0x98,m1,&local_28);
           if (iVar2 - 0xf80U < 0x101) {
             uVar4 = trueValue;
           }
         }
       }
-      goto LAB_80066e10;
+      goto LAB_800664d4;
     }
   }
   else {
     if (iVar3 != 0x61) {
       if (0x61 < iVar3) {
-        if (iVar3 != 0x62) goto LAB_80066e10;
+        if (iVar3 != 0x62) goto LAB_800664d4;
         bVar1 = true;
-        goto LAB_80066dfc;
+        goto LAB_800664c0;
       }
-      if (iVar3 != 0x60) goto LAB_80066e10;
+      if (iVar3 != 0x60) goto LAB_800664d4;
       bVar1 = true;
-      goto LAB_80066dcc;
+      goto LAB_80066490;
     }
     bVar1 = true;
   }
   local_28.x = 0;
   local_28.y = 0x1000;
   local_28.z = 0;
-LAB_80066e10:
+LAB_800664d4:
   if (iVar3 != -1) {
-    iVar3 = PHYSOBS_CheckObjectAxisAlignment(&MStack104,&MStack72,&local_28);
+    iVar3 = PHYSOBS_CheckObjectAxisAlignment(0x98,0xb8,&local_28);
     if (bVar1) {
       uVar4 = trueValue;
-      if ((0x100 < iVar3 - 0xf80U) && (0x100 < iVar3 + 0x1080U)) {
+      if ((0x100 < iVar3 - 0xf80U) && (&DAT_00000100 < &DAT_00001080 + iVar3)) {
         uVar4 = (uint)(trueValue == 0);
       }
     }
@@ -6076,10 +6564,10 @@ LAB_80066e10:
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_CompareListWithOperation(struct _PCodeStack *stack /*$s7*/, struct ListObject *listObject /*$s3*/, struct StackType *operand2 /*stack 8*/, long operation /*$fp*/)
- // line 4965, offset 0x80066e94
+ // line 5318, offset 0x80066558
 	/* begin block 1 */
-		// Start line: 4966
-		// Start offset: 0x80066E94
+		// Start line: 5319
+		// Start offset: 0x80066558
 		// Variables:
 	// 		long retValue; // $s4
 	// 		long d; // $s0
@@ -6089,18 +6577,20 @@ LAB_80066e10:
 	// 		struct _Instance *instance; // $s2
 	// 		long areaID; // $s5
 	/* end block 1 */
-	// End offset: 0x80067060
-	// End Line: 5031
+	// End offset: 0x80066724
+	// End Line: 5384
 
 	/* begin block 2 */
-		// Start line: 10521
+		// Start line: 11351
 	/* end block 2 */
-	// End Line: 10522
+	// End Line: 11352
 
 	/* begin block 3 */
-		// Start line: 10528
+		// Start line: 11358
 	/* end block 3 */
-	// End Line: 10529
+	// End Line: 11359
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_CompareListWithOperation
                (_PCodeStack *stack,ListObject *listObject,StackType *operand2,long operation)
@@ -6108,7 +6598,7 @@ long EVENT_CompareListWithOperation
 {
   char *pcVar1;
   long lVar2;
-  int iVar3;
+  long *plVar3;
   int iVar4;
   ListObject *pLVar5;
   _Instance *startInstance;
@@ -6121,10 +6611,10 @@ long EVENT_CompareListWithOperation
   
   lVar6 = 0;
   if (CurrentEventLine < 0x14) {
-    *(undefined4 *)(&eventListNumInstances + CurrentEventLine * 4) = 0;
+    eventListNumInstances[CurrentEventLine] = 0;
   }
-  strcpy(acStack56,listObject->eventInstance->objectName);
-  pcVar1 = strchr(acStack56,0x3f);
+  strcpy();
+  pcVar1 = strchr(acStack56,'?');
   if (pcVar1 != (char *)0x0) {
     *pcVar1 = '\0';
   }
@@ -6153,20 +6643,20 @@ long EVENT_CompareListWithOperation
     lVar2 = EVENT_CompareOperandsWithOperation(stack,(StackType *)&local_60,operand2,operation);
     if (lVar2 == 0) {
       if (operation == 0xb) {
-        if (9 < *(int *)(&eventListNumInstances + CurrentEventLine * 4)) {
+        if (9 < eventListNumInstances[CurrentEventLine]) {
           return 0;
         }
-        *(int *)(&eventListNumInstances + CurrentEventLine * 4) = 0;
+        eventListNumInstances[CurrentEventLine] = 0;
         return 0;
       }
     }
     else {
-      iVar4 = CurrentEventLine * 4;
       if (CurrentEventLine < 0x14) {
-        iVar3 = *(int *)(&eventListNumInstances + iVar4);
-        if (iVar3 < 10) {
-          (&eventListArray2010)[CurrentEventLine * 10 + iVar3] = startInstance;
-          *(int *)(&eventListNumInstances + iVar4) = iVar3 + 1;
+        plVar3 = eventListNumInstances + CurrentEventLine;
+        iVar4 = *plVar3;
+        if (iVar4 < 10) {
+          *(_Instance **)(&eventListArray + iVar4 * 4 + CurrentEventLine * 0x28) = startInstance;
+          *plVar3 = iVar4 + 1;
         }
       }
       lVar6 = 1;
@@ -6180,35 +6670,37 @@ long EVENT_CompareListWithOperation
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_CompareSubListWithOperation(struct _PCodeStack *stack /*$s6*/, struct SubListObject *subListObject /*$s3*/, struct StackType *operand2 /*$s7*/, long operation /*$fp*/)
- // line 5035, offset 0x80067094
+ // line 5388, offset 0x80066758
 	/* begin block 1 */
-		// Start line: 5036
-		// Start offset: 0x80067094
+		// Start line: 5389
+		// Start offset: 0x80066758
 		// Variables:
 	// 		long i; // $s4
 	// 		long retValue; // $s5
 	// 		long d; // $s0
 	// 		struct StackType operand1; // stack offset -80
 	/* end block 1 */
-	// End offset: 0x80067208
-	// End Line: 5069
+	// End offset: 0x800668CC
+	// End Line: 5422
 
 	/* begin block 2 */
-		// Start line: 10672
+		// Start line: 11502
 	/* end block 2 */
-	// End Line: 10673
+	// End Line: 11503
 
 	/* begin block 3 */
-		// Start line: 10676
+		// Start line: 11506
 	/* end block 3 */
-	// End Line: 10677
+	// End Line: 11507
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_CompareSubListWithOperation
                (_PCodeStack *stack,SubListObject *subListObject,StackType *operand2,long operation)
 
 {
   long lVar1;
-  int iVar2;
+  long *plVar2;
   int iVar3;
   SubListObject *pSVar4;
   int iVar5;
@@ -6220,7 +6712,7 @@ long EVENT_CompareSubListWithOperation
   
   lVar7 = 0;
   if (CurrentEventLine < 0x14) {
-    *(undefined4 *)(&eventListNumInstances + CurrentEventLine * 4) = 0;
+    eventListNumInstances[CurrentEventLine] = 0;
   }
   iVar6 = 0;
   if (0 < subListObject->numberOfInstances) {
@@ -6240,13 +6732,13 @@ long EVENT_CompareSubListWithOperation
       }
       lVar1 = EVENT_CompareOperandsWithOperation(stack,(StackType *)&local_50,operand2,operation);
       if (lVar1 != 0) {
-        iVar3 = CurrentEventLine * 4;
         if (CurrentEventLine < 0x14) {
-          iVar2 = *(int *)(&eventListNumInstances + iVar3);
-          if (iVar2 < 10) {
-            (&eventListArray2010)[CurrentEventLine * 10 + iVar2] =
-                 *(_Instance **)(iVar5 + (int)subListObject->instanceList);
-            *(int *)(&eventListNumInstances + iVar3) = iVar2 + 1;
+          plVar2 = eventListNumInstances + CurrentEventLine;
+          iVar3 = *plVar2;
+          if (iVar3 < 10) {
+            *(undefined4 *)(&eventListArray + iVar3 * 4 + CurrentEventLine * 0x28) =
+                 *(undefined4 *)(iVar5 + (int)subListObject->instanceList);
+            *plVar2 = iVar3 + 1;
           }
         }
         lVar7 = 1;
@@ -6262,11 +6754,11 @@ long EVENT_CompareSubListWithOperation
 
 // decompiled code
 // original method signature: 
-// long /*$ra*/ EVENT_CompareOperandsWithOperation(struct _PCodeStack *stack /*$a0*/, struct StackType *operand1 /*$t0*/, struct StackType *operand2 /*$s4*/, long operation /*$s3*/)
- // line 5072, offset 0x8006723c
+// long /*$ra*/ EVENT_CompareOperandsWithOperation(struct _PCodeStack *stack /*$a0*/, struct StackType *operand1 /*$t0*/, struct StackType *operand2 /*$s3*/, long operation /*$s4*/)
+ // line 5425, offset 0x80066900
 	/* begin block 1 */
-		// Start line: 5073
-		// Start offset: 0x8006723C
+		// Start line: 5426
+		// Start offset: 0x80066900
 		// Variables:
 	// 		long number; // $s1
 	// 		long number1; // $s0
@@ -6276,13 +6768,15 @@ long EVENT_CompareSubListWithOperation
 	// 		short flags1; // stack offset -28
 	// 		short flags2; // stack offset -26
 	/* end block 1 */
-	// End offset: 0x80067548
-	// End Line: 5276
+	// End offset: 0x80066C14
+	// End Line: 5631
 
 	/* begin block 2 */
-		// Start line: 10775
+		// Start line: 11605
 	/* end block 2 */
-	// End Line: 10776
+	// End Line: 11606
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_CompareOperandsWithOperation
                (_PCodeStack *stack,StackType *operand1,StackType *operand2,long operation)
@@ -6323,7 +6817,7 @@ long EVENT_CompareOperandsWithOperation
           uVar5 = 0;
         }
         trueValue = EVENT_CompareVector3d((Vector3d *)operand1->data,(Vector3d *)operand2->data);
-        goto LAB_800674c8;
+        goto LAB_80066b94;
       }
       if (operation != 1) {
         return 0;
@@ -6334,7 +6828,7 @@ long EVENT_CompareOperandsWithOperation
     }
     EVENT_Addvector3dToStack
               (stack,(short)((uint)(iVar3 * 0x10000) >> 0x10),
-               (short)((uint)(iVar4 * 0x10000) >> 0x10),z);
+               (short)((uint)(iVar4 * 0x10000) >> 0x10),z,0);
     uVar5 = 0xffffffff;
     break;
   default:
@@ -6363,23 +6857,23 @@ long EVENT_CompareOperandsWithOperation
       }
       break;
     case 6:
-switchD_80067450_caseD_6:
+switchD_80066b1c_caseD_6:
       uVar5 = trueValue;
       trueValue = (uint)((int)uVar2 < (int)uVar1);
-      goto LAB_800674c8;
+      goto LAB_80066b94;
     case 7:
-switchD_80067450_caseD_7:
+switchD_80066b1c_caseD_7:
       uVar5 = trueValue;
       trueValue = (uint)((int)uVar1 < (int)uVar2);
-      goto LAB_800674c8;
+      goto LAB_80066b94;
     case 8:
       trueValue = 0;
-      goto switchD_80067450_caseD_7;
+      goto switchD_80066b1c_caseD_7;
     case 9:
       trueValue = 0;
-      goto switchD_80067450_caseD_6;
+      goto switchD_80066b1c_caseD_6;
     case 10:
-switchD_80067450_caseD_a:
+switchD_80066b1c_caseD_a:
       uVar5 = trueValue;
       if (((local_1c & 1) == 0) && ((local_1a & 1) == 0)) {
         if (uVar1 != uVar2) {
@@ -6397,7 +6891,7 @@ switchD_80067450_caseD_a:
       break;
     case 0xb:
       trueValue = 0;
-      goto switchD_80067450_caseD_a;
+      goto switchD_80066b1c_caseD_a;
     case 0xc:
       uVar5 = (uint)((uVar1 & uVar2) != 0);
     }
@@ -6419,12 +6913,12 @@ switchD_80067450_caseD_a:
     trueValue = EVENT_CompareListWithOperation
                           (stack,(ListObject *)operand1->data,operand2,operation);
     uVar5 = 1;
-    goto LAB_800674c8;
+    goto LAB_80066b94;
   case 0x16:
     trueValue = EVENT_CompareSubListWithOperation
                           (stack,(SubListObject *)operand1->data,operand2,operation);
     uVar5 = 1;
-LAB_800674c8:
+LAB_80066b94:
     if (trueValue == 0) {
       uVar5 = uVar5 ^ 1;
     }
@@ -6437,30 +6931,32 @@ LAB_800674c8:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_DoStackMathOperation(struct _PCodeStack *stack /*$s0*/, long operation /*$a3*/)
- // line 5282, offset 0x8006756c
+ // line 5637, offset 0x80066c38
 	/* begin block 1 */
-		// Start line: 5283
-		// Start offset: 0x8006756C
+		// Start line: 5638
+		// Start offset: 0x80066C38
 		// Variables:
 	// 		struct StackType operand1; // stack offset -128
 	// 		struct StackType operand2; // stack offset -88
 
 		/* begin block 1.1 */
-			// Start line: 5301
-			// Start offset: 0x80067658
+			// Start line: 5656
+			// Start offset: 0x80066D24
 			// Variables:
 		// 		struct StackType holdOperand; // stack offset -48
 		/* end block 1.1 */
-		// End offset: 0x80067724
-		// End Line: 5306
+		// End offset: 0x80066DF0
+		// End Line: 5661
 	/* end block 1 */
-	// End offset: 0x80067724
-	// End Line: 5308
+	// End offset: 0x80066DF0
+	// End Line: 5663
 
 	/* begin block 2 */
-		// Start line: 11208
+		// Start line: 12044
 	/* end block 2 */
-	// End Line: 11209
+	// End Line: 12045
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_DoStackMathOperation(_PCodeStack *stack,long operation)
 
@@ -6570,20 +7066,22 @@ void EVENT_DoStackMathOperation(_PCodeStack *stack,long operation)
 // decompiled code
 // original method signature: 
 // short * /*$ra*/ EVENT_ParseOpcode(struct _PCodeStack *stack /*$s0*/, short *codeStream /*$s1*/, long *operateOnStack /*$a2*/)
- // line 5312, offset 0x80067754
+ // line 5667, offset 0x80066e20
 	/* begin block 1 */
-		// Start line: 5313
-		// Start offset: 0x80067754
+		// Start line: 5668
+		// Start offset: 0x80066E20
 		// Variables:
 	// 		short pcode; // $v0
 	/* end block 1 */
-	// End offset: 0x800679B0
-	// End Line: 5429
+	// End offset: 0x8006707C
+	// End Line: 5784
 
 	/* begin block 2 */
-		// Start line: 11272
+		// Start line: 12108
 	/* end block 2 */
-	// End Line: 11273
+	// End Line: 12109
+
+/* File: C:\kain2\game\EVENT.C */
 
 short * EVENT_ParseOpcode(_PCodeStack *stack,short *codeStream,long *operateOnStack)
 
@@ -6606,7 +7104,7 @@ short * EVENT_ParseOpcode(_PCodeStack *stack,short *codeStream,long *operateOnSt
     codeStream_00 = codeStream + 2;
     break;
   case 2:
-    goto switchD_800677a8_caseD_2;
+    goto switchD_80066e74_caseD_2;
   case 3:
     EVENT_DoStackMathOperation(stack,10);
     break;
@@ -6639,14 +7137,14 @@ short * EVENT_ParseOpcode(_PCodeStack *stack,short *codeStream,long *operateOnSt
     EVENT_StackDuplicate(stack);
     EVENT_AddNumberToStack(stack,1,0);
     operation = 1;
-    goto LAB_800678e8;
+    goto LAB_80066fb4;
   case 0x11:
     EVENT_StackDuplicate(stack);
     EVENT_AddNumberToStack(stack,1,0);
     operation = 2;
-LAB_800678e8:
+LAB_80066fb4:
     EVENT_DoStackMathOperation(stack,operation);
-switchD_800677a8_caseD_2:
+switchD_80066e74_caseD_2:
     EVENT_DoStackOperationEquals(stack,codeStream_00);
     break;
   case 0x12:
@@ -6693,31 +7191,33 @@ switchD_800677a8_caseD_2:
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_GetIntroValue(struct IntroObject *introObject /*$a0*/)
- // line 5433, offset 0x800679d0
+ // line 5788, offset 0x8006709c
 	/* begin block 1 */
-		// Start line: 5435
-		// Start offset: 0x800679D0
+		// Start line: 5790
+		// Start offset: 0x8006709C
 		// Variables:
 	// 		long value; // $a1
 	// 		long trueValue; // $a2
 	/* end block 1 */
-	// End offset: 0x80067A5C
-	// End Line: 5504
+	// End offset: 0x80067128
+	// End Line: 5867
 
 	/* begin block 2 */
-		// Start line: 11520
+		// Start line: 12356
 	/* end block 2 */
-	// End Line: 11521
+	// End Line: 12357
 
 	/* begin block 3 */
-		// Start line: 11521
+		// Start line: 12357
 	/* end block 3 */
-	// End Line: 11522
+	// End Line: 12358
 
 	/* begin block 4 */
-		// Start line: 11526
+		// Start line: 12362
 	/* end block 4 */
-	// End Line: 11527
+	// End Line: 12363
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_GetIntroValue(IntroObject *introObject)
 
@@ -6738,6 +7238,7 @@ long EVENT_GetIntroValue(IntroObject *introObject)
   case 0x7e:
   case 0x8f:
   case 0x90:
+  case 0xa0:
     uVar2 = 0;
     break;
   case 0xb:
@@ -6745,15 +7246,16 @@ long EVENT_GetIntroValue(IntroObject *introObject)
   case 10:
     uVar2 = uVar1;
     uVar1 = introObject->intro->flags & 0x80;
-    goto LAB_80067a48;
+    goto LAB_80067114;
   case 0x14:
   case 0x15:
     uVar2 = 0xffffffff;
     break;
   case 0x92:
+  case 0xa6:
     uVar2 = 1;
     uVar1 = introObject->intro->flags & 8;
-LAB_80067a48:
+LAB_80067114:
     if (uVar1 == 0) {
       uVar2 = uVar2 ^ 1;
     }
@@ -6769,22 +7271,24 @@ LAB_80067a48:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_DoSubListAction(struct SubListObject *subListObject /*$s3*/, struct StackType *operand2 /*$s5*/, struct _PCodeStack *stack /*$s4*/, short *codeStream /*$s6*/)
- // line 5507, offset 0x80067a64
+ // line 5870, offset 0x80067130
 	/* begin block 1 */
-		// Start line: 5508
-		// Start offset: 0x80067A64
+		// Start line: 5871
+		// Start offset: 0x80067130
 		// Variables:
 	// 		long i; // $s2
 	// 		long d; // $s0
 	// 		struct StackType operand1; // stack offset -72
 	/* end block 1 */
-	// End offset: 0x80067B34
-	// End Line: 5527
+	// End offset: 0x80067200
+	// End Line: 5890
 
 	/* begin block 2 */
-		// Start line: 11676
+		// Start line: 12528
 	/* end block 2 */
-	// End Line: 11677
+	// End Line: 12529
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_DoSubListAction
                (SubListObject *subListObject,StackType *operand2,_PCodeStack *stack,
@@ -6825,21 +7329,23 @@ void EVENT_DoSubListAction
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_GetInstanceValue(struct InstanceObject *instanceObject /*$a0*/)
- // line 5530, offset 0x80067b5c
+ // line 5893, offset 0x80067228
 	/* begin block 1 */
-		// Start line: 5531
-		// Start offset: 0x80067B5C
+		// Start line: 5894
+		// Start offset: 0x80067228
 		// Variables:
 	// 		long value; // $s0
 	// 		struct _Instance *instance; // $a0
 	/* end block 1 */
-	// End offset: 0x80067CBC
-	// End Line: 5665
+	// End offset: 0x80067388
+	// End Line: 6028
 
 	/* begin block 2 */
-		// Start line: 11737
+		// Start line: 12589
 	/* end block 2 */
-	// End Line: 11738
+	// End Line: 12590
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_GetInstanceValue(InstanceObject *instanceObject)
 
@@ -6861,7 +7367,7 @@ long EVENT_GetInstanceValue(InstanceObject *instanceObject)
   case 0x5e:
   case 0x5f:
   case 0x7e:
-    goto switchD_80067b98_caseD_5;
+    goto switchD_80067264_caseD_5;
   case 10:
   case 0x34:
     uVar2 = (ulong)((Inst->flags & 0x800U) != 0);
@@ -6871,18 +7377,18 @@ long EVENT_GetInstanceValue(InstanceObject *instanceObject)
     break;
   case 0x10:
     Query = 10;
-    goto LAB_80067c88;
+    goto LAB_80067354;
   case 0x14:
     uVar2 = INSTANCE_Query(Inst,0xb);
     uVar1 = uVar2 >> 1;
-    goto LAB_80067bcc;
+    goto LAB_80067298;
   case 0x15:
     uVar1 = INSTANCE_Query(Inst,0xb);
-LAB_80067bcc:
+LAB_80067298:
     uVar2 = uVar1 & 1;
     Query = STREAM_IsMorphInProgress();
     if (Query != 0) {
-switchD_80067b98_caseD_5:
+switchD_80067264_caseD_5:
       uVar2 = 0;
     }
     break;
@@ -6896,10 +7402,10 @@ switchD_80067b98_caseD_5:
     break;
   case 0x26:
     Query = 0x1b;
-    goto LAB_80067c88;
+    goto LAB_80067354;
   case 0x27:
     Query = 0x1a;
-LAB_80067c88:
+LAB_80067354:
     uVar2 = INSTANCE_Query(Inst,Query);
     break;
   case 0x35:
@@ -6933,18 +7439,20 @@ LAB_80067c88:
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_GetSplineFrameNumber(struct InstanceSpline *instanceSpline /*$s0*/)
- // line 5668, offset 0x80067cd4
+ // line 6031, offset 0x800673a0
 	/* begin block 1 */
-		// Start line: 5669
-		// Start offset: 0x80067CD4
+		// Start line: 6032
+		// Start offset: 0x800673A0
 	/* end block 1 */
-	// End offset: 0x80067CD4
-	// End Line: 5669
+	// End offset: 0x800673A0
+	// End Line: 6032
 
 	/* begin block 2 */
-		// Start line: 12016
+		// Start line: 12868
 	/* end block 2 */
-	// End Line: 12017
+	// End Line: 12869
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_GetSplineFrameNumber(InstanceSpline *instanceSpline)
 
@@ -6964,30 +7472,32 @@ long EVENT_GetSplineFrameNumber(InstanceSpline *instanceSpline)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_GetSplineValue(struct InstanceSpline *instanceSpline /*$a2*/)
- // line 5681, offset 0x80067d18
+ // line 6044, offset 0x800673e4
 	/* begin block 1 */
-		// Start line: 5682
-		// Start offset: 0x80067D18
+		// Start line: 6045
+		// Start offset: 0x800673E4
 		// Variables:
 	// 		long value; // $a1
 	// 		struct _Instance *instance; // $a0
 
 		/* begin block 1.1 */
-			// Start line: 5731
-			// Start offset: 0x80067DC4
+			// Start line: 6094
+			// Start offset: 0x80067490
 			// Variables:
 		// 		struct MultiSpline *spline; // $v0
 		/* end block 1.1 */
-		// End offset: 0x80067E04
-		// End Line: 5750
+		// End offset: 0x800674D0
+		// End Line: 6113
 	/* end block 1 */
-	// End offset: 0x80067E04
-	// End Line: 5757
+	// End offset: 0x800674D0
+	// End Line: 6120
 
 	/* begin block 2 */
-		// Start line: 12042
+		// Start line: 12894
 	/* end block 2 */
-	// End Line: 12043
+	// End Line: 12895
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_GetSplineValue(InstanceSpline *instanceSpline)
 
@@ -7046,36 +7556,38 @@ long EVENT_GetSplineValue(InstanceSpline *instanceSpline)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_GetAnimateTextureValue(struct InstanceAnimateTexture *instanceAniTexture /*$a0*/)
- // line 5761, offset 0x80067e14
+ // line 6124, offset 0x800674e0
 	/* begin block 1 */
-		// Start line: 5763
-		// Start offset: 0x80067E14
+		// Start line: 6126
+		// Start offset: 0x800674E0
 		// Variables:
 	// 		long value; // $a1
 	// 		long trueValue; // $a2
 	// 		struct _Instance *instance; // $a3
 
 		/* begin block 1.1 */
-			// Start line: 5791
-			// Start offset: 0x80067E80
+			// Start line: 6154
+			// Start offset: 0x8006754C
 			// Variables:
 		// 		struct AniTexInfo *ani_tex_info; // $a0
 		/* end block 1.1 */
-		// End offset: 0x80067E80
-		// End Line: 5792
+		// End offset: 0x8006754C
+		// End Line: 6155
 	/* end block 1 */
-	// End offset: 0x80067EB8
-	// End Line: 5810
+	// End offset: 0x80067584
+	// End Line: 6173
 
 	/* begin block 2 */
-		// Start line: 12205
+		// Start line: 13057
 	/* end block 2 */
-	// End Line: 12206
+	// End Line: 13058
 
 	/* begin block 3 */
-		// Start line: 12206
+		// Start line: 13058
 	/* end block 3 */
-	// End Line: 12207
+	// End Line: 13059
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_GetAnimateTextureValue(InstanceAnimateTexture *instanceAniTexture)
 
@@ -7117,21 +7629,23 @@ long EVENT_GetAnimateTextureValue(InstanceAnimateTexture *instanceAniTexture)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_GetAnimateValue(struct InstanceAnimate *instanceAnimate /*$a0*/)
- // line 5814, offset 0x80067ec4
+ // line 6177, offset 0x80067590
 	/* begin block 1 */
-		// Start line: 5815
-		// Start offset: 0x80067EC4
+		// Start line: 6178
+		// Start offset: 0x80067590
 		// Variables:
 	// 		long value; // $a1
 	// 		struct _Instance *instance; // $a0
 	/* end block 1 */
-	// End offset: 0x80067F2C
-	// End Line: 5854
+	// End offset: 0x800675F8
+	// End Line: 6217
 
 	/* begin block 2 */
-		// Start line: 12314
+		// Start line: 13166
 	/* end block 2 */
-	// End Line: 12315
+	// End Line: 13167
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_GetAnimateValue(InstanceAnimate *instanceAnimate)
 
@@ -7148,10 +7662,10 @@ long EVENT_GetAnimateValue(InstanceAnimate *instanceAnimate)
   case 0xf:
   case 0x28:
     Query = 0x12;
-    goto LAB_80067f20;
+    goto LAB_800675ec;
   case 0x1e:
     Query = 0x11;
-LAB_80067f20:
+LAB_800675ec:
     uVar1 = INSTANCE_Query(instanceAnimate->instance,Query);
     break;
   case -1:
@@ -7166,20 +7680,22 @@ LAB_80067f20:
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_TransformObjectOnStack(struct _PCodeStack *stack /*$t0*/, long item /*$t1*/, short *codeStream /*$a3*/)
- // line 5859, offset 0x80067f3c
+ // line 6222, offset 0x80067608
 	/* begin block 1 */
-		// Start line: 5860
-		// Start offset: 0x80067F3C
+		// Start line: 6223
+		// Start offset: 0x80067608
 		// Variables:
 	// 		long retValue; // $v0
 	/* end block 1 */
-	// End offset: 0x80067F80
-	// End Line: 5875
+	// End offset: 0x8006764C
+	// End Line: 6238
 
 	/* begin block 2 */
-		// Start line: 12408
+		// Start line: 13260
 	/* end block 2 */
-	// End Line: 12409
+	// End Line: 13261
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_TransformObjectOnStack(_PCodeStack *stack,long item,short *codeStream)
 
@@ -7200,37 +7716,39 @@ long EVENT_TransformObjectOnStack(_PCodeStack *stack,long item,short *codeStream
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_UpdatePuzzlePointers(struct EventPointers *events /*$a0*/, long offset /*$a1*/)
- // line 5879, offset 0x80067f90
+ // line 6242, offset 0x8006765c
 	/* begin block 1 */
-		// Start line: 5881
-		// Start offset: 0x80067F90
+		// Start line: 6244
+		// Start offset: 0x8006765C
 		// Variables:
 	// 		long d; // $t3
 	// 		long d2; // $t1
 	// 		struct Event *curEvent; // $a3
 	/* end block 1 */
-	// End offset: 0x80068164
-	// End Line: 5920
+	// End offset: 0x80067830
+	// End Line: 6283
 
 	/* begin block 2 */
-		// Start line: 12448
+		// Start line: 13300
 	/* end block 2 */
-	// End Line: 12449
+	// End Line: 13301
 
 	/* begin block 3 */
-		// Start line: 12449
+		// Start line: 13301
 	/* end block 3 */
-	// End Line: 12450
+	// End Line: 13302
 
 	/* begin block 4 */
-		// Start line: 12452
+		// Start line: 13304
 	/* end block 4 */
-	// End Line: 12453
+	// End Line: 13305
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_UpdatePuzzlePointers(EventPointers *events,long offset)
 
 {
-  _func_4438 *p_Var1;
+  _func_15 *p_Var1;
   int iVar2;
   int iVar3;
   int iVar4;
@@ -7241,8 +7759,8 @@ void EVENT_UpdatePuzzlePointers(EventPointers *events,long offset)
   
   if ((events != (EventPointers *)0x0) && (iVar8 = 0, pEVar7 = events, 0 < events->numPuzzles)) {
     do {
-      p_Var1 = (_func_4438 *)0x0;
-      if (pEVar7->eventInstances[0] != (_func_4438 *)0x0) {
+      p_Var1 = (_func_15 *)0x0;
+      if (pEVar7->eventInstances[0] != (_func_15 *)0x0) {
         p_Var1 = pEVar7->eventInstances[0] + offset;
       }
       pEVar7->eventInstances[0] = p_Var1;
@@ -7284,7 +7802,7 @@ void EVENT_UpdatePuzzlePointers(EventPointers *events,long offset)
         } while (iVar5 < *(short *)(p_Var1 + 2));
       }
       iVar3 = 0;
-      if (p_Var1[4] != (_func_4438)0x0) {
+      if (p_Var1[4] != (_func_15)0x0) {
         iVar5 = 0;
         do {
           iVar2 = *(int *)(iVar5 + *(int *)(p_Var1 + 0x14));
@@ -7322,78 +7840,115 @@ void EVENT_UpdatePuzzlePointers(EventPointers *events,long offset)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ EVENT_SaveEventsFromLevel(long levelID /*$s3*/, struct Level *level /*$a1*/)
- // line 5924, offset 0x8006816c
+// void /*$ra*/ EVENT_SaveEventsFromLevel(long levelID /*$s5*/, struct Level *level /*$a1*/)
+ // line 6287, offset 0x80067838
 	/* begin block 1 */
-		// Start line: 5925
-		// Start offset: 0x8006816C
+		// Start line: 6288
+		// Start offset: 0x80067838
 		// Variables:
-	// 		struct EventPointers *eventPointers; // $s2
+	// 		struct EventPointers *eventPointers; // $s4
 	// 		struct Event *eventInstance; // $s0
-	// 		long i; // $s1
+	// 		long i; // $s3
 	// 		long d; // $a1
-	// 		long saveEvent; // $a0
-	// 		struct SavedEvent *savedEvent; // $a0
+	// 		long saveEvent; // $s1
+
+		/* begin block 1.1 */
+			// Start line: 6301
+			// Start offset: 0x80067878
+			// Variables:
+		// 		long useBigSave; // $s2
+
+			/* begin block 1.1.1 */
+				// Start line: 6327
+				// Start offset: 0x800678E4
+				// Variables:
+			// 		struct SavedEvent *savedEvent; // $v0
+			/* end block 1.1.1 */
+			// End offset: 0x8006792C
+			// End Line: 6337
+
+			/* begin block 1.1.2 */
+				// Start line: 6340
+				// Start offset: 0x80067934
+				// Variables:
+			// 		struct SavedEventSmallVars *savedEvent; // $a2
+			/* end block 1.1.2 */
+			// End offset: 0x8006797C
+			// End Line: 6350
+		/* end block 1.1 */
+		// End offset: 0x8006797C
+		// End Line: 6352
 	/* end block 1 */
-	// End offset: 0x80068284
-	// End Line: 5980
+	// End offset: 0x80067990
+	// End Line: 6354
 
 	/* begin block 2 */
-		// Start line: 12573
+		// Start line: 13425
 	/* end block 2 */
-	// End Line: 12574
+	// End Line: 13426
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_SaveEventsFromLevel(long levelID,Level *level)
 
 {
   bool bVar1;
-  SavedEvent *savedBlock;
-  short *psVar2;
+  bool bVar2;
   short *psVar3;
-  int iVar4;
-  int iVar5;
-  EventPointers *pEVar6;
+  undefined *puVar4;
+  short *psVar5;
+  int iVar6;
+  int iVar7;
+  int iVar8;
+  EventPointers *pEVar9;
   
-  pEVar6 = level->PuzzleInstances;
-  if ((pEVar6 != (EventPointers *)0x0) && (iVar5 = 0, 0 < pEVar6->numPuzzles)) {
+  pEVar9 = level->PuzzleInstances;
+  if ((pEVar9 != (EventPointers *)0x0) && (iVar8 = 0, 0 < pEVar9->numPuzzles)) {
     do {
       bVar1 = false;
-      psVar3 = (short *)pEVar6->eventInstances[iVar5];
-      iVar4 = 0;
-      psVar2 = psVar3;
+      psVar5 = (short *)pEVar9->eventInstances[iVar8];
+      iVar6 = 0;
+      psVar3 = psVar5;
+      bVar2 = bVar1;
       do {
-        iVar4 = iVar4 + 1;
-        if (psVar2[3] != 0) {
-          bVar1 = true;
-          break;
+        if ((psVar3[3] != 0) && (bVar1 = true, 0xfe < (ushort)(psVar3[3] + 0x7fU))) {
+          bVar2 = true;
         }
-        psVar2 = psVar2 + 1;
-      } while (iVar4 < 5);
+        iVar6 = iVar6 + 1;
+        psVar3 = psVar3 + 1;
+      } while (iVar6 < 5);
+      SAVE_DeleteSavedEvent(levelID,(int)*psVar5);
       if (bVar1) {
-        savedBlock = SAVE_GetSavedEvent(levelID,(int)*psVar3);
-        if (savedBlock == (SavedEvent *)0x0) {
-          savedBlock = (SavedEvent *)SAVE_GetSavedBlock(2,0);
+        if (bVar2) {
+          puVar4 = (undefined *)SAVE_GetSavedBlock(2,0);
+          iVar6 = 0;
+          *puVar4 = 2;
+          *(short *)(puVar4 + 2) = (short)levelID;
+          *(short *)(puVar4 + 4) = *psVar5;
+          do {
+            psVar3 = psVar5 + 3;
+            psVar5 = psVar5 + 1;
+            iVar6 = iVar6 + 1;
+            *(short *)(puVar4 + 6) = *psVar3;
+            puVar4 = puVar4 + 2;
+          } while (iVar6 < 5);
         }
-        *(undefined2 *)savedBlock = 2;
-        *(long *)&savedBlock->eventNumber = levelID;
-        iVar4 = 0;
-        savedBlock->eventVariables[1] = *psVar3;
-        do {
-          psVar2 = psVar3 + 3;
-          psVar3 = psVar3 + 1;
-          iVar4 = iVar4 + 1;
-          savedBlock->eventVariables[2] = *psVar2;
-          savedBlock = (SavedEvent *)&savedBlock->areaID;
-        } while (iVar4 < 5);
-      }
-      else {
-        savedBlock = SAVE_GetSavedEvent(levelID,(int)*psVar3);
-        if (savedBlock != (SavedEvent *)0x0) {
-          SAVE_DeleteBlock((SavedBasic *)savedBlock);
+        else {
+          puVar4 = (undefined *)SAVE_GetSavedBlock(9,0);
+          *puVar4 = 9;
+          *(short *)(puVar4 + 2) = (short)levelID;
+          puVar4[4] = *(undefined *)psVar5;
+          iVar6 = 0;
+          do {
+            iVar7 = iVar6 + 1;
+            puVar4[iVar6 + 5] = *(undefined *)(psVar5 + 3);
+            psVar5 = psVar5 + 1;
+            iVar6 = iVar7;
+          } while (iVar7 < 5);
         }
       }
-      iVar5 = iVar5 + 1;
-    } while (iVar5 < pEVar6->numPuzzles);
+      iVar8 = iVar8 + 1;
+    } while (iVar8 < pEVar9->numPuzzles);
   }
   return;
 }
@@ -7402,66 +7957,93 @@ void EVENT_SaveEventsFromLevel(long levelID,Level *level)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ EVENT_LoadEventsForLevel(long levelID /*$s1*/, struct Level *level /*$a1*/)
- // line 5983, offset 0x800682a0
+// void /*$ra*/ EVENT_LoadEventsForLevel(long levelID /*$s2*/, struct Level *level /*$a1*/)
+ // line 6357, offset 0x800679b4
 	/* begin block 1 */
-		// Start line: 5984
-		// Start offset: 0x800682A0
+		// Start line: 6358
+		// Start offset: 0x800679B4
 		// Variables:
-	// 		long d; // $a0
+	// 		long d; // $v1
 	// 		struct EventPointers *eventPointers; // $s0
-	// 		struct Event *eventInstance; // $a3
-	// 		struct SavedEvent *savedEvent; // $a1
+	// 		struct Event *eventInstance; // $t0
+	// 		struct SavedBasic *savedEvent; // $a1
+
+		/* begin block 1.1 */
+			// Start line: 6372
+			// Start offset: 0x800679FC
+			// Variables:
+		// 		long eventNumber; // $t1
+		/* end block 1.1 */
+		// End offset: 0x80067AC4
+		// End Line: 6412
 	/* end block 1 */
-	// End offset: 0x8006835C
-	// End Line: 6028
+	// End offset: 0x80067AD8
+	// End Line: 6420
 
 	/* begin block 2 */
-		// Start line: 12767
+		// Start line: 13650
 	/* end block 2 */
-	// End Line: 12768
+	// End Line: 13651
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_LoadEventsForLevel(long levelID,Level *level)
 
 {
-  int iVar1;
-  short *psVar2;
-  int iVar3;
-  SavedEvent *curSave;
+  byte *pbVar1;
+  SavedBasic *curSave;
+  int iVar2;
+  short *psVar3;
   EventPointers *pEVar4;
-  SavedEvent *pSVar5;
-  EventPointers *pEVar6;
+  SavedBasic *pSVar5;
+  uint uVar6;
+  EventPointers *pEVar7;
   
-  pEVar6 = level->PuzzleInstances;
-  if (pEVar6 != (EventPointers *)0x0) {
-    curSave = (SavedEvent *)0x0;
-    while (curSave = SAVE_GetSavedNextEvent(levelID,(SavedBasic *)curSave),
-          curSave != (SavedEvent *)0x0) {
-      iVar1 = pEVar6->numPuzzles;
-      if (iVar1 != 0) {
-        iVar3 = 0;
-        psVar2 = (short *)0x0;
-        if (0 < iVar1) {
-          pEVar4 = pEVar6;
-          do {
-            psVar2 = (short *)pEVar4->eventInstances[0];
-            iVar3 = iVar3 + 1;
-            if (*psVar2 == curSave->eventVariables[1]) break;
-            pEVar4 = (EventPointers *)pEVar4->eventInstances;
-            psVar2 = (short *)0x0;
-          } while (iVar3 < iVar1);
+  pEVar7 = level->PuzzleInstances;
+  if (pEVar7 != (EventPointers *)0x0) {
+    curSave = SAVE_GetSavedNextEvent(levelID,(SavedBasic *)0x0);
+    while (curSave != (SavedBasic *)0x0) {
+      if (pEVar7->numPuzzles != 0) {
+        if (curSave->savedID == '\x02') {
+          uVar6 = SEXT24((short)curSave[2]);
         }
-        iVar1 = 0;
-        pSVar5 = curSave;
-        if (psVar2 != (short *)0x0) {
+        else {
+          uVar6 = (uint)curSave[2].savedID;
+        }
+        iVar2 = 0;
+        pEVar4 = pEVar7;
+        psVar3 = (short *)0x0;
+        if (0 < pEVar7->numPuzzles) {
           do {
-            iVar1 = iVar1 + 1;
-            psVar2[3] = pSVar5->eventVariables[2];
-            psVar2 = psVar2 + 1;
-            pSVar5 = (SavedEvent *)&pSVar5->areaID;
-          } while (iVar1 < 5);
+            psVar3 = (short *)pEVar4->eventInstances[0];
+            iVar2 = iVar2 + 1;
+            if ((int)*psVar3 == uVar6) break;
+            pEVar4 = (EventPointers *)pEVar4->eventInstances;
+            psVar3 = (short *)0x0;
+          } while (iVar2 < pEVar7->numPuzzles);
+        }
+        if (psVar3 != (short *)0x0) {
+          iVar2 = 0;
+          pSVar5 = curSave;
+          if (curSave->savedID == '\x02') {
+            do {
+              iVar2 = iVar2 + 1;
+              *(SavedBasic *)(psVar3 + 3) = pSVar5[3];
+              psVar3 = psVar3 + 1;
+              pSVar5 = pSVar5 + 1;
+            } while (iVar2 < 5);
+          }
+          else {
+            do {
+              pbVar1 = &curSave[2].shiftedSaveSize + iVar2;
+              iVar2 = iVar2 + 1;
+              psVar3[3] = (ushort)*pbVar1;
+              psVar3 = psVar3 + 1;
+            } while (iVar2 < 5);
+          }
         }
       }
+      curSave = SAVE_GetSavedNextEvent(levelID,curSave);
     }
   }
   return;
@@ -7471,41 +8053,43 @@ void EVENT_LoadEventsForLevel(long levelID,Level *level)
 
 // decompiled code
 // original method signature: 
-// struct SavedEvent * /*$ra*/ EVENT_CreateSaveEvent(long levelID /*$s0*/, long eventNumber /*$s1*/)
- // line 6031, offset 0x80068370
+// struct SavedBasic * /*$ra*/ EVENT_CreateSaveEvent(long levelID /*$s0*/, long eventNumber /*$s1*/)
+ // line 6423, offset 0x80067af0
 	/* begin block 1 */
-		// Start line: 6032
-		// Start offset: 0x80068370
+		// Start line: 6424
+		// Start offset: 0x80067AF0
 		// Variables:
-	// 		struct SavedEvent *savedEvent; // $a1
+	// 		struct SavedEventSmallVars *savedEvent; // $a1
 	// 		long d; // $a0
 	/* end block 1 */
-	// End offset: 0x800683C4
-	// End Line: 6053
+	// End offset: 0x80067B44
+	// End Line: 6446
 
 	/* begin block 2 */
-		// Start line: 12878
+		// Start line: 13806
 	/* end block 2 */
-	// End Line: 12879
+	// End Line: 13807
 
-SavedEvent * EVENT_CreateSaveEvent(long levelID,long eventNumber)
+/* File: C:\kain2\game\EVENT.C */
+
+SavedBasic * EVENT_CreateSaveEvent(long levelID,long eventNumber)
 
 {
-  SavedEvent *pSVar1;
-  short *psVar2;
+  SavedBasic *pSVar1;
+  SavedBasic *pSVar2;
   int iVar3;
   
-  pSVar1 = (SavedEvent *)SAVE_GetSavedBlock(2,0);
-  if (pSVar1 != (SavedEvent *)0x0) {
+  pSVar1 = (SavedBasic *)SAVE_GetSavedBlock(9,0);
+  if (pSVar1 != (SavedBasic *)0x0) {
     iVar3 = 4;
-    psVar2 = pSVar1->eventVariables + 1;
-    *(undefined2 *)pSVar1 = 2;
-    *(long *)&pSVar1->eventNumber = levelID;
-    pSVar1->eventVariables[1] = (short)eventNumber;
+    pSVar2 = pSVar1 + 2;
+    pSVar1->savedID = '\t';
+    pSVar1[1] = SUB42(levelID,0);
+    pSVar1[2].savedID = (uchar)eventNumber;
     do {
-      psVar2[5] = 0;
+      pSVar2[2].shiftedSaveSize = '\0';
       iVar3 = iVar3 + -1;
-      psVar2 = psVar2 + -1;
+      pSVar2 = (SavedBasic *)&pSVar2[-1].shiftedSaveSize;
     } while (-1 < iVar3);
   }
   return pSVar1;
@@ -7516,10 +8100,10 @@ SavedEvent * EVENT_CreateSaveEvent(long levelID,long eventNumber)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_RemoveInstanceFromInstanceList(struct _Instance *instance /*$a0*/)
- // line 6057, offset 0x800683dc
+ // line 6450, offset 0x80067b5c
 	/* begin block 1 */
-		// Start line: 6059
-		// Start offset: 0x800683DC
+		// Start line: 6452
+		// Start offset: 0x80067B5C
 		// Variables:
 	// 		int d; // $t3
 	// 		int i; // $t0
@@ -7527,23 +8111,25 @@ SavedEvent * EVENT_CreateSaveEvent(long levelID,long eventNumber)
 	// 		struct EventPointers *puzzle; // $t2
 	// 		struct EventBasicObject **basicEventObject; // $v0
 	/* end block 1 */
-	// End offset: 0x800684C0
-	// End Line: 6090
+	// End offset: 0x80067C40
+	// End Line: 6483
 
 	/* begin block 2 */
-		// Start line: 12940
+		// Start line: 13871
 	/* end block 2 */
-	// End Line: 12941
+	// End Line: 13872
 
 	/* begin block 3 */
-		// Start line: 12941
+		// Start line: 13872
 	/* end block 3 */
-	// End Line: 12942
+	// End Line: 13873
 
 	/* begin block 4 */
-		// Start line: 12946
+		// Start line: 13877
 	/* end block 4 */
-	// End Line: 12947
+	// End Line: 13878
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_RemoveInstanceFromInstanceList(_Instance *instance)
 
@@ -7559,9 +8145,9 @@ void EVENT_RemoveInstanceFromInstanceList(_Instance *instance)
   iVar7 = 0;
   iVar2 = 0;
   do {
-    if (((*(short *)((int)&StreamTracker.StreamList[0].used + iVar2) == 2) &&
-        (piVar6 = *(int **)(*(int *)((int)&StreamTracker.StreamList[0].level + iVar2) + 0xdc),
-        piVar6 != (int *)0x0)) && (iVar2 = 0, piVar5 = piVar6, 0 < *piVar6)) {
+    if (((*(short *)((int)&DAT_800d2a10 + iVar2) == 2) &&
+        (piVar6 = *(int **)(*(int *)((int)&DAT_800d2a14 + iVar2) + 0xdc), piVar6 != (int *)0x0)) &&
+       (iVar2 = 0, piVar5 = piVar6, 0 < *piVar6)) {
       do {
         ppsVar1 = *(short ***)(piVar5[1] + 0x10);
         iVar4 = 0;
@@ -7593,32 +8179,34 @@ void EVENT_RemoveInstanceFromInstanceList(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_UpdatePuzzleWithInstance(struct EventPointers *puzzle /*$a0*/, struct _Instance *instance /*$a1*/)
- // line 6093, offset 0x800684c8
+ // line 6486, offset 0x80067c48
 	/* begin block 1 */
-		// Start line: 6095
-		// Start offset: 0x800684C8
+		// Start line: 6488
+		// Start offset: 0x80067C48
 		// Variables:
 	// 		int i; // $t2
 	// 		int i2; // $t0
 	// 		struct EventBasicObject **basicEventObject; // $v0
 	/* end block 1 */
-	// End offset: 0x80068564
-	// End Line: 6117
+	// End offset: 0x80067CE4
+	// End Line: 6510
 
 	/* begin block 2 */
-		// Start line: 13031
+		// Start line: 13962
 	/* end block 2 */
-	// End Line: 13032
+	// End Line: 13963
 
 	/* begin block 3 */
-		// Start line: 13032
+		// Start line: 13963
 	/* end block 3 */
-	// End Line: 13033
+	// End Line: 13964
 
 	/* begin block 4 */
-		// Start line: 13036
+		// Start line: 13967
 	/* end block 4 */
-	// End Line: 13037
+	// End Line: 13968
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_UpdatePuzzleWithInstance(EventPointers *puzzle,_Instance *instance)
 
@@ -7658,10 +8246,10 @@ void EVENT_UpdatePuzzleWithInstance(EventPointers *puzzle,_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_AddInstanceToInstanceList(struct _Instance *instance /*$s2*/)
- // line 6119, offset 0x8006856c
+ // line 6512, offset 0x80067cec
 	/* begin block 1 */
-		// Start line: 6120
-		// Start offset: 0x8006856C
+		// Start line: 6513
+		// Start offset: 0x80067CEC
 		// Variables:
 	// 		int d; // $s1
 	// 		int curTree; // $a1
@@ -7669,57 +8257,58 @@ void EVENT_UpdatePuzzleWithInstance(EventPointers *puzzle,_Instance *instance)
 	// 		struct Level *level; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 6139
-			// Start offset: 0x800685E4
+			// Start line: 6532
+			// Start offset: 0x80067D64
 			// Variables:
 		// 		struct BSPTree *bspTree; // $a0
 		/* end block 1.1 */
-		// End offset: 0x80068618
-		// End Line: 6149
+		// End offset: 0x80067D98
+		// End Line: 6542
 	/* end block 1 */
-	// End offset: 0x80068644
-	// End Line: 6152
+	// End offset: 0x80067DC4
+	// End Line: 6545
 
 	/* begin block 2 */
-		// Start line: 13097
+		// Start line: 14028
 	/* end block 2 */
-	// End Line: 13098
+	// End Line: 14029
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_AddInstanceToInstanceList(_Instance *instance)
 
 {
-  _Terrain *p_Var1;
+  int iVar1;
   int iVar2;
   int iVar3;
-  int iVar4;
-  Level *pLVar5;
-  int iVar6;
+  int *piVar4;
+  int iVar5;
   
-  iVar6 = 0;
+  iVar5 = 0;
   do {
-    if (StreamTracker.StreamList[iVar6].used == 2) {
-      pLVar5 = StreamTracker.StreamList[iVar6].level;
-      if (pLVar5->PuzzleInstances != (EventPointers *)0x0) {
-        EVENT_UpdatePuzzleWithInstance(pLVar5->PuzzleInstances,instance);
+    if ((&DAT_800d2a10)[iVar5 * 0x20] == 2) {
+      piVar4 = (int *)(&DAT_800d2a14)[iVar5 * 0x10];
+      if ((EventPointers *)piVar4[0x37] != (EventPointers *)0x0) {
+        EVENT_UpdatePuzzleWithInstance((EventPointers *)piVar4[0x37],instance);
       }
-      p_Var1 = pLVar5->terrain;
-      iVar3 = 0;
-      if (0 < (int)p_Var1->morphNormalIdx) {
-        iVar4 = 0;
+      iVar1 = *piVar4;
+      iVar2 = 0;
+      if (0 < *(int *)(iVar1 + 0x44)) {
+        iVar3 = 0;
         do {
-          iVar2 = (int)&p_Var1->signals->numSignals + iVar4;
-          if ((-1 < *(short *)(iVar2 + 0x1a)) && (*(int *)(iVar2 + 0x1c) == instance->introUniqueID)
+          iVar1 = *(int *)(iVar1 + 0x48) + iVar3;
+          if ((-1 < *(short *)(iVar1 + 0x1a)) && (*(int *)(iVar1 + 0x1c) == instance->introUniqueID)
              ) {
-            *(_Instance **)(iVar2 + 0x20) = instance;
+            *(_Instance **)(iVar1 + 0x20) = instance;
           }
-          p_Var1 = pLVar5->terrain;
-          iVar3 = iVar3 + 1;
-          iVar4 = iVar4 + 0x24;
-        } while (iVar3 < (int)p_Var1->morphNormalIdx);
+          iVar1 = *piVar4;
+          iVar2 = iVar2 + 1;
+          iVar3 = iVar3 + 0x24;
+        } while (iVar2 < *(int *)(iVar1 + 0x44));
       }
     }
-    iVar6 = iVar6 + 1;
-  } while (iVar6 < 0x10);
+    iVar5 = iVar5 + 1;
+  } while (iVar5 < 0x10);
   return;
 }
 
@@ -7728,22 +8317,24 @@ void EVENT_AddInstanceToInstanceList(_Instance *instance)
 // decompiled code
 // original method signature: 
 // struct _VMObject * /*$ra*/ EVENT_FindVMObject(struct _StreamUnit *stream /*$a0*/, char *vmoName /*$s4*/)
- // line 6154, offset 0x8006865c
+ // line 6547, offset 0x80067ddc
 	/* begin block 1 */
-		// Start line: 6155
-		// Start offset: 0x8006865C
+		// Start line: 6548
+		// Start offset: 0x80067DDC
 		// Variables:
 	// 		int i; // $s2
 	// 		struct _VMObject *vmObject; // $s3
 	// 		struct Level *level; // $s1
 	/* end block 1 */
-	// End offset: 0x800686D8
-	// End Line: 6174
+	// End offset: 0x80067E58
+	// End Line: 6567
 
 	/* begin block 2 */
-		// Start line: 13196
+		// Start line: 14127
 	/* end block 2 */
-	// End Line: 13197
+	// End Line: 14128
+
+/* File: C:\kain2\game\EVENT.C */
 
 _VMObject * EVENT_FindVMObject(_StreamUnit *stream,char *vmoName)
 
@@ -7774,10 +8365,10 @@ _VMObject * EVENT_FindVMObject(_StreamUnit *stream,char *vmoName)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_FixPuzzlesForStream(struct _StreamUnit *stream /*$s7*/)
- // line 6177, offset 0x800686fc
+ // line 6570, offset 0x80067e7c
 	/* begin block 1 */
-		// Start line: 6178
-		// Start offset: 0x800686FC
+		// Start line: 6571
+		// Start offset: 0x80067E7C
 		// Variables:
 	// 		struct EventPointers *puzzle; // $s5
 	// 		struct EventBasicObject **basicEventObject; // $s6
@@ -7788,95 +8379,97 @@ _VMObject * EVENT_FindVMObject(_StreamUnit *stream,char *vmoName)
 	// 		int p; // $a2
 
 		/* begin block 1.1 */
-			// Start line: 6205
-			// Start offset: 0x800687AC
+			// Start line: 6598
+			// Start offset: 0x80067F2C
 			// Variables:
 		// 		struct _StreamUnit *newStream; // $v0
 		/* end block 1.1 */
-		// End offset: 0x800687C0
-		// End Line: 6213
+		// End offset: 0x80067F40
+		// End Line: 6606
 
 		/* begin block 1.2 */
-			// Start line: 6220
-			// Start offset: 0x800687D0
+			// Start line: 6613
+			// Start offset: 0x80067F50
 			// Variables:
 		// 		struct EventEventObject *eventEventObject; // $s1
 		// 		struct _StreamUnit *newStream; // $v0
 
 			/* begin block 1.2.1 */
-				// Start line: 6227
-				// Start offset: 0x800687E4
+				// Start line: 6620
+				// Start offset: 0x80067F64
 				// Variables:
 			// 		struct EventPointers *puzzleInstances; // $v1
 			/* end block 1.2.1 */
-			// End offset: 0x8006883C
-			// End Line: 6244
+			// End offset: 0x80067FBC
+			// End Line: 6637
 		/* end block 1.2 */
-		// End offset: 0x8006883C
-		// End Line: 6245
+		// End offset: 0x80067FBC
+		// End Line: 6638
 
 		/* begin block 1.3 */
-			// Start line: 6250
-			// Start offset: 0x8006884C
+			// Start line: 6643
+			// Start offset: 0x80067FCC
 			// Variables:
 		// 		struct EventTGroupObject *tgroupEventObject; // $s1
 		// 		struct _StreamUnit *newStream; // $v0
 
 			/* begin block 1.3.1 */
-				// Start line: 6255
-				// Start offset: 0x80068860
+				// Start line: 6648
+				// Start offset: 0x80067FE0
 				// Variables:
 			// 		struct _Terrain *terrain; // $v0
 			/* end block 1.3.1 */
-			// End offset: 0x800688B0
-			// End Line: 6277
+			// End offset: 0x80068030
+			// End Line: 6670
 		/* end block 1.3 */
-		// End offset: 0x800688B0
-		// End Line: 6278
+		// End offset: 0x80068030
+		// End Line: 6671
 
 		/* begin block 1.4 */
-			// Start line: 6283
-			// Start offset: 0x800688C0
+			// Start line: 6676
+			// Start offset: 0x80068040
 			// Variables:
 		// 		struct _StreamUnit *newStream; // $v0
 		/* end block 1.4 */
-		// End offset: 0x800688D4
-		// End Line: 6291
+		// End offset: 0x80068054
+		// End Line: 6684
 
 		/* begin block 1.5 */
-			// Start line: 6300
-			// Start offset: 0x800688F0
+			// Start line: 6693
+			// Start offset: 0x80068070
 			// Variables:
 		// 		void *pointer; // $v1
 
 			/* begin block 1.5.1 */
-				// Start line: 6310
-				// Start offset: 0x8006890C
+				// Start line: 6703
+				// Start offset: 0x8006808C
 				// Variables:
 			// 		struct _StreamUnit *stream2; // $v0
 			/* end block 1.5.1 */
-			// End offset: 0x80068934
-			// End Line: 6318
+			// End offset: 0x800680B4
+			// End Line: 6711
 		/* end block 1.5 */
-		// End offset: 0x80068934
-		// End Line: 6318
+		// End offset: 0x800680B4
+		// End Line: 6711
 
 		/* begin block 1.6 */
-			// Start line: 6328
-			// Start offset: 0x80068964
+			// Start line: 6721
+			// Start offset: 0x800680E4
 			// Variables:
 		// 		struct _StreamUnit *newStream; // $v0
 		/* end block 1.6 */
-		// End offset: 0x80068984
-		// End Line: 6339
+		// End offset: 0x80068104
+		// End Line: 6732
 	/* end block 1 */
-	// End offset: 0x800689B4
-	// End Line: 6348
+	// End offset: 0x80068134
+	// End Line: 6741
 
 	/* begin block 2 */
-		// Start line: 13247
+		// Start line: 14178
 	/* end block 2 */
-	// End Line: 13248
+	// End Line: 14179
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_FixPuzzlesForStream(_StreamUnit *stream)
 
@@ -7886,39 +8479,40 @@ void EVENT_FixPuzzlesForStream(_StreamUnit *stream)
   int iVar3;
   _StreamUnit *stream_00;
   _Terrain *p_Var4;
-  Intro *pIVar5;
-  _SFXMkr *p_Var6;
-  _VMObject *p_Var7;
-  EventPointers *pEVar8;
-  short *psVar9;
+  _MultiSignal *p_Var5;
+  Intro *pIVar6;
+  _SFXMkr *p_Var7;
+  _VMObject *p_Var8;
+  EventPointers *pEVar9;
   _Instance *instance;
-  _MultiSignal *p_Var10;
-  _Instance *p_Var11;
+  int iVar10;
+  BSPTree *pBVar11;
+  _Instance *p_Var12;
   EventInstanceObject *instanceObject;
-  int iVar12;
-  EventPointers *pEVar13;
-  int iVar14;
-  EventPointers *puzzle;
+  int iVar13;
+  EventPointers *pEVar14;
   int iVar15;
+  EventPointers *puzzle;
+  int iVar16;
   
   puzzle = stream->level->PuzzleInstances;
-  instance = (gameTrackerX.instanceList)->first;
+  instance = *(_Instance **)(DAT_800d2100 + 4);
   if (puzzle != (EventPointers *)0x0) {
     while (instance != (_Instance *)0x0) {
-      p_Var11 = instance->next;
+      p_Var12 = instance->next;
       EVENT_UpdatePuzzleWithInstance(puzzle,instance);
-      instance = p_Var11;
+      instance = p_Var12;
     }
-    iVar14 = 0;
-    pEVar13 = puzzle;
+    iVar15 = 0;
+    pEVar14 = puzzle;
     if (0 < puzzle->numPuzzles) {
       do {
-        iVar15 = *(int *)(pEVar13->eventInstances[0] + 0x10);
-        iVar12 = 0;
-        if (0 < *(short *)(pEVar13->eventInstances[0] + 2)) {
+        iVar16 = *(int *)(pEVar14->eventInstances[0] + 0x10);
+        iVar13 = 0;
+        if (0 < *(short *)(pEVar14->eventInstances[0] + 2)) {
           iVar3 = 0;
           do {
-            instanceObject = *(EventInstanceObject **)(iVar3 + iVar15);
+            instanceObject = *(EventInstanceObject **)(iVar3 + iVar16);
             sVar1 = instanceObject->id;
             if (sVar1 == 5) {
               stream_00 = STREAM_GetStreamUnitWithID(instanceObject->unitID);
@@ -7930,17 +8524,17 @@ void EVENT_FixPuzzlesForStream(_StreamUnit *stream)
               if (sVar1 == 3) {
                 stream_00 = STREAM_GetStreamUnitWithID(instanceObject->unitID);
                 if ((stream_00 != (_StreamUnit *)0x0) &&
-                   (pEVar8 = stream_00->level->PuzzleInstances, pEVar8 != (EventPointers *)0x0)) {
-                  plVar2 = &pEVar8->numPuzzles;
+                   (pEVar9 = stream_00->level->PuzzleInstances, pEVar9 != (EventPointers *)0x0)) {
+                  plVar2 = &pEVar9->numPuzzles;
                   iVar3 = 0;
                   if (0 < *plVar2) {
                     do {
                       iVar3 = iVar3 + 1;
-                      if (*(short *)pEVar8->eventInstances[0] == instanceObject->flags) {
-                        *(_func_4438 **)&instanceObject->introUniqueID = pEVar8->eventInstances[0];
+                      if (*(short *)pEVar9->eventInstances[0] == instanceObject->flags) {
+                        *(_func_15 **)&instanceObject->introUniqueID = pEVar9->eventInstances[0];
                         break;
                       }
-                      pEVar8 = (EventPointers *)pEVar8->eventInstances;
+                      pEVar9 = (EventPointers *)pEVar9->eventInstances;
                     } while (iVar3 < *plVar2);
                   }
                 }
@@ -7950,20 +8544,19 @@ void EVENT_FixPuzzlesForStream(_StreamUnit *stream)
                   stream_00 = STREAM_GetStreamUnitWithID(instanceObject->unitID);
                   if (stream_00 != (_StreamUnit *)0x0) {
                     p_Var4 = stream_00->level->terrain;
-                    psVar9 = p_Var4->morphNormalIdx;
-                    iVar3 = 0;
-                    if (0 < (int)psVar9) {
-                      p_Var10 = p_Var4->signals;
+                    iVar3 = p_Var4->numBSPTrees;
+                    iVar10 = 0;
+                    if (0 < iVar3) {
+                      pBVar11 = p_Var4->BSPTreeArray;
                       do {
-                        iVar3 = iVar3 + 1;
-                        if (*(short *)(p_Var10->signalList[0].data + 0xe) == instanceObject->flags)
-                        {
-                          *(_MultiSignal **)&instanceObject->introUniqueID = p_Var10;
+                        iVar10 = iVar10 + 1;
+                        if (pBVar11->ID == instanceObject->flags) {
+                          *(BSPTree **)&instanceObject->introUniqueID = pBVar11;
                           *(_StreamUnit **)&instanceObject->instance = stream;
                           break;
                         }
-                        p_Var10 = (_MultiSignal *)(p_Var10->signalList + 1);
-                      } while (iVar3 < (int)psVar9);
+                        pBVar11 = pBVar11 + 1;
+                      } while (iVar10 < iVar3);
                     }
                   }
                 }
@@ -7971,46 +8564,46 @@ void EVENT_FixPuzzlesForStream(_StreamUnit *stream)
                   if (sVar1 == 6) {
                     stream_00 = STREAM_GetStreamUnitWithID(instanceObject->unitID);
                     if (stream_00 != (_StreamUnit *)0x0) {
-                      p_Var10 = EVENT_ResolveObjectSignal(stream_00,(int)instanceObject->flags);
-                      *(_MultiSignal **)&instanceObject->introUniqueID = p_Var10;
+                      p_Var5 = EVENT_ResolveObjectSignal(stream_00,(int)instanceObject->flags);
+                      *(_MultiSignal **)&instanceObject->introUniqueID = p_Var5;
                     }
                   }
                   else {
                     if (sVar1 == 1) {
-                      pIVar5 = EVENT_ResolveObjectIntro(instanceObject);
-                      if (pIVar5 == (Intro *)0x0) {
+                      pIVar6 = EVENT_ResolveObjectIntro(instanceObject);
+                      if (pIVar6 == (Intro *)0x0) {
                         stream_00 = STREAM_GetStreamUnitWithID(instanceObject->unitID);
                         if ((stream_00 != (_StreamUnit *)0x0) &&
-                           (p_Var6 = EVENT_ResolveSFXMarker(stream_00,instanceObject),
-                           p_Var6 != (_SFXMkr *)0x0)) {
-                          *(_SFXMkr **)&instanceObject->data = p_Var6;
+                           (p_Var7 = EVENT_ResolveSFXMarker(stream_00,instanceObject),
+                           p_Var7 != (_SFXMkr *)0x0)) {
+                          *(_SFXMkr **)&instanceObject->data = p_Var7;
                           instanceObject->flags = instanceObject->flags | 1;
                         }
                       }
                       else {
-                        *(Intro **)&instanceObject->data = pIVar5;
+                        *(Intro **)&instanceObject->data = pIVar6;
                       }
                     }
                     else {
                       if ((sVar1 == 7) &&
                          (stream_00 = STREAM_GetStreamUnitWithID(instanceObject->unitID),
                          stream_00 != (_StreamUnit *)0x0)) {
-                        p_Var7 = EVENT_FindVMObject(stream_00,(char *)&instanceObject->introUniqueID
+                        p_Var8 = EVENT_FindVMObject(stream_00,(char *)&instanceObject->introUniqueID
                                                    );
-                        *(_VMObject **)(instanceObject + 1) = p_Var7;
+                        *(_VMObject **)(instanceObject + 1) = p_Var8;
                       }
                     }
                   }
                 }
               }
             }
-            iVar12 = iVar12 + 1;
-            iVar3 = iVar12 * 4;
-          } while (iVar12 < *(short *)(pEVar13->eventInstances[0] + 2));
+            iVar13 = iVar13 + 1;
+            iVar3 = iVar13 * 4;
+          } while (iVar13 < *(short *)(pEVar14->eventInstances[0] + 2));
         }
-        iVar14 = iVar14 + 1;
-        pEVar13 = (EventPointers *)pEVar13->eventInstances;
-      } while (iVar14 < puzzle->numPuzzles);
+        iVar15 = iVar15 + 1;
+        pEVar14 = (EventPointers *)pEVar14->eventInstances;
+      } while (iVar15 < puzzle->numPuzzles);
     }
   }
   return;
@@ -8021,10 +8614,10 @@ void EVENT_FixPuzzlesForStream(_StreamUnit *stream)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_AddStreamToInstanceList(struct _StreamUnit *stream /*$s1*/)
- // line 6350, offset 0x800689e0
+ // line 6743, offset 0x80068160
 	/* begin block 1 */
-		// Start line: 6351
-		// Start offset: 0x800689E0
+		// Start line: 6744
+		// Start offset: 0x80068160
 		// Variables:
 	// 		int d; // $s6
 	// 		int i; // $s4
@@ -8036,53 +8629,55 @@ void EVENT_FixPuzzlesForStream(_StreamUnit *stream)
 	// 		struct EventTGroupObject *tgroupEventObject; // $t0
 
 		/* begin block 1.1 */
-			// Start line: 6388
-			// Start offset: 0x80068ACC
+			// Start line: 6781
+			// Start offset: 0x8006824C
 			// Variables:
 		// 		struct EventPointers *puzzleInstances; // $v1
 		/* end block 1.1 */
-		// End offset: 0x80068B24
-		// End Line: 6406
+		// End offset: 0x800682A4
+		// End Line: 6799
 
 		/* begin block 1.2 */
-			// Start line: 6413
-			// Start offset: 0x80068B48
+			// Start line: 6806
+			// Start offset: 0x800682C8
 			// Variables:
 		// 		struct _Terrain *terrain; // $v0
 		/* end block 1.2 */
-		// End offset: 0x80068B98
-		// End Line: 6437
+		// End offset: 0x80068318
+		// End Line: 6830
 
 		/* begin block 1.3 */
-			// Start line: 6443
-			// Start offset: 0x80068BA8
+			// Start line: 6836
+			// Start offset: 0x80068328
 		/* end block 1.3 */
-		// End offset: 0x80068BBC
-		// End Line: 6448
+		// End offset: 0x8006833C
+		// End Line: 6841
 
 		/* begin block 1.4 */
-			// Start line: 6457
-			// Start offset: 0x80068BD8
+			// Start line: 6850
+			// Start offset: 0x80068358
 			// Variables:
 		// 		void *pointer; // $v1
 		/* end block 1.4 */
-		// End offset: 0x80068C08
-		// End Line: 6471
+		// End offset: 0x80068388
+		// End Line: 6864
 
 		/* begin block 1.5 */
-			// Start line: 6480
-			// Start offset: 0x80068C38
+			// Start line: 6873
+			// Start offset: 0x800683B8
 		/* end block 1.5 */
-		// End offset: 0x80068C58
-		// End Line: 6489
+		// End offset: 0x800683D8
+		// End Line: 6882
 	/* end block 1 */
-	// End offset: 0x80068C98
-	// End Line: 6501
+	// End offset: 0x80068418
+	// End Line: 6894
 
 	/* begin block 2 */
-		// Start line: 13842
+		// Start line: 14773
 	/* end block 2 */
-	// End Line: 13843
+	// End Line: 14774
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_AddStreamToInstanceList(_StreamUnit *stream)
 
@@ -8091,33 +8686,34 @@ void EVENT_AddStreamToInstanceList(_StreamUnit *stream)
   int *piVar2;
   int iVar3;
   _Terrain *p_Var4;
-  Intro *pIVar5;
-  _SFXMkr *p_Var6;
-  _VMObject *p_Var7;
-  int iVar8;
-  EventPointers *pEVar9;
-  short *psVar10;
-  _MultiSignal *p_Var11;
+  _MultiSignal *p_Var5;
+  Intro *pIVar6;
+  _SFXMkr *p_Var7;
+  _VMObject *p_Var8;
+  int iVar9;
+  EventPointers *pEVar10;
+  int iVar11;
+  BSPTree *pBVar12;
   EventInstanceObject *instanceObject;
-  int iVar12;
-  int *piVar13;
+  int iVar13;
   int *piVar14;
-  int iVar15;
+  int *piVar15;
   int iVar16;
+  int iVar17;
   
-  iVar15 = 0;
-  iVar8 = 0;
+  iVar16 = 0;
+  iVar9 = 0;
   do {
-    if (((*(short *)((int)&StreamTracker.StreamList[0].used + iVar8) == 2) &&
-        (piVar14 = *(int **)(*(int *)((int)&StreamTracker.StreamList[0].level + iVar8) + 0xdc),
-        piVar14 != (int *)0x0)) && (iVar8 = 0, piVar13 = piVar14, 0 < *piVar14)) {
+    if (((*(short *)((int)&DAT_800d2a10 + iVar9) == 2) &&
+        (piVar15 = *(int **)(*(int *)((int)&DAT_800d2a14 + iVar9) + 0xdc), piVar15 != (int *)0x0))
+       && (iVar9 = 0, piVar14 = piVar15, 0 < *piVar15)) {
       do {
-        iVar16 = *(int *)(piVar13[1] + 0x10);
-        iVar12 = 0;
-        if (0 < *(short *)(piVar13[1] + 2)) {
+        iVar17 = *(int *)(piVar14[1] + 0x10);
+        iVar13 = 0;
+        if (0 < *(short *)(piVar14[1] + 2)) {
           iVar3 = 0;
           do {
-            instanceObject = *(EventInstanceObject **)(iVar3 + iVar16);
+            instanceObject = *(EventInstanceObject **)(iVar3 + iVar17);
             sVar1 = instanceObject->id;
             if (sVar1 == 5) {
               if (instanceObject->unitID == stream->StreamUnitID) {
@@ -8127,17 +8723,17 @@ void EVENT_AddStreamToInstanceList(_StreamUnit *stream)
             else {
               if (sVar1 == 3) {
                 if ((instanceObject->unitID == stream->StreamUnitID) &&
-                   (pEVar9 = stream->level->PuzzleInstances, pEVar9 != (EventPointers *)0x0)) {
-                  piVar2 = &pEVar9->numPuzzles;
+                   (pEVar10 = stream->level->PuzzleInstances, pEVar10 != (EventPointers *)0x0)) {
+                  piVar2 = &pEVar10->numPuzzles;
                   iVar3 = 0;
                   if (0 < *piVar2) {
                     do {
                       iVar3 = iVar3 + 1;
-                      if (*(short *)pEVar9->eventInstances[0] == instanceObject->flags) {
-                        *(_func_4438 **)&instanceObject->introUniqueID = pEVar9->eventInstances[0];
+                      if (*(short *)pEVar10->eventInstances[0] == instanceObject->flags) {
+                        *(_func_15 **)&instanceObject->introUniqueID = pEVar10->eventInstances[0];
                         break;
                       }
-                      pEVar9 = (EventPointers *)pEVar9->eventInstances;
+                      pEVar10 = (EventPointers *)pEVar10->eventInstances;
                     } while (iVar3 < *piVar2);
                   }
                 }
@@ -8146,65 +8742,64 @@ void EVENT_AddStreamToInstanceList(_StreamUnit *stream)
                 if (sVar1 == 4) {
                   if (instanceObject->unitID == stream->StreamUnitID) {
                     p_Var4 = stream->level->terrain;
-                    psVar10 = p_Var4->morphNormalIdx;
-                    iVar3 = 0;
-                    if (0 < (int)psVar10) {
-                      p_Var11 = p_Var4->signals;
+                    iVar3 = p_Var4->numBSPTrees;
+                    iVar11 = 0;
+                    if (0 < iVar3) {
+                      pBVar12 = p_Var4->BSPTreeArray;
                       do {
-                        iVar3 = iVar3 + 1;
-                        if (*(short *)(p_Var11->signalList[0].data + 0xe) == instanceObject->flags)
-                        {
-                          *(_MultiSignal **)&instanceObject->introUniqueID = p_Var11;
+                        iVar11 = iVar11 + 1;
+                        if (pBVar12->ID == instanceObject->flags) {
+                          *(BSPTree **)&instanceObject->introUniqueID = pBVar12;
                           *(_StreamUnit **)&instanceObject->instance = stream;
                           break;
                         }
-                        p_Var11 = (_MultiSignal *)(p_Var11->signalList + 1);
-                      } while (iVar3 < (int)psVar10);
+                        pBVar12 = pBVar12 + 1;
+                      } while (iVar11 < iVar3);
                     }
                   }
                 }
                 else {
                   if (sVar1 == 6) {
                     if (instanceObject->unitID == stream->StreamUnitID) {
-                      p_Var11 = EVENT_ResolveObjectSignal(stream,(int)instanceObject->flags);
-                      *(_MultiSignal **)&instanceObject->introUniqueID = p_Var11;
+                      p_Var5 = EVENT_ResolveObjectSignal(stream,(int)instanceObject->flags);
+                      *(_MultiSignal **)&instanceObject->introUniqueID = p_Var5;
                     }
                   }
                   else {
                     if (sVar1 == 1) {
-                      pIVar5 = EVENT_ResolveObjectIntro(instanceObject);
-                      if (pIVar5 == (Intro *)0x0) {
-                        p_Var6 = EVENT_ResolveSFXMarker(stream,instanceObject);
-                        if (p_Var6 != (_SFXMkr *)0x0) {
-                          *(_SFXMkr **)&instanceObject->data = p_Var6;
+                      pIVar6 = EVENT_ResolveObjectIntro(instanceObject);
+                      if (pIVar6 == (Intro *)0x0) {
+                        p_Var7 = EVENT_ResolveSFXMarker(stream,instanceObject);
+                        if (p_Var7 != (_SFXMkr *)0x0) {
+                          *(_SFXMkr **)&instanceObject->data = p_Var7;
                           instanceObject->flags = instanceObject->flags | 1;
                         }
                       }
                       else {
-                        *(Intro **)&instanceObject->data = pIVar5;
+                        *(Intro **)&instanceObject->data = pIVar6;
                       }
                     }
                     else {
                       if ((sVar1 == 7) && (stream->StreamUnitID == instanceObject->unitID)) {
-                        p_Var7 = EVENT_FindVMObject(stream,(char *)&instanceObject->introUniqueID);
-                        *(_VMObject **)(instanceObject + 1) = p_Var7;
+                        p_Var8 = EVENT_FindVMObject(stream,(char *)&instanceObject->introUniqueID);
+                        *(_VMObject **)(instanceObject + 1) = p_Var8;
                       }
                     }
                   }
                 }
               }
             }
-            iVar12 = iVar12 + 1;
-            iVar3 = iVar12 * 4;
-          } while (iVar12 < *(short *)(piVar13[1] + 2));
+            iVar13 = iVar13 + 1;
+            iVar3 = iVar13 * 4;
+          } while (iVar13 < *(short *)(piVar14[1] + 2));
         }
-        iVar8 = iVar8 + 1;
-        piVar13 = piVar13 + 1;
-      } while (iVar8 < *piVar14);
+        iVar9 = iVar9 + 1;
+        piVar14 = piVar14 + 1;
+      } while (iVar9 < *piVar15);
     }
-    iVar15 = iVar15 + 1;
-    iVar8 = iVar15 * 0x40;
-    if (0xf < iVar15) {
+    iVar16 = iVar16 + 1;
+    iVar9 = iVar16 * 0x40;
+    if (0xf < iVar16) {
       EVENT_FixPuzzlesForStream(stream);
       return;
     }
@@ -8216,10 +8811,10 @@ void EVENT_AddStreamToInstanceList(_StreamUnit *stream)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_RemoveStreamToInstanceList(struct _StreamUnit *stream /*$s2*/)
- // line 6505, offset 0x80068ccc
+ // line 6898, offset 0x8006844c
 	/* begin block 1 */
-		// Start line: 6506
-		// Start offset: 0x80068CCC
+		// Start line: 6899
+		// Start offset: 0x8006844C
 		// Variables:
 	// 		int d; // $t1
 	// 		int i; // $s1
@@ -8228,26 +8823,28 @@ void EVENT_AddStreamToInstanceList(_StreamUnit *stream)
 	// 		struct EventBasicObject **basicEventObject; // $v0
 
 		/* begin block 1.1 */
-			// Start line: 6561
-			// Start offset: 0x80068DB8
+			// Start line: 6954
+			// Start offset: 0x80068538
 		/* end block 1.1 */
-		// End offset: 0x80068DCC
-		// End Line: 6566
+		// End offset: 0x8006854C
+		// End Line: 6959
 
 		/* begin block 1.2 */
-			// Start line: 6573
-			// Start offset: 0x80068DDC
+			// Start line: 6966
+			// Start offset: 0x8006855C
 		/* end block 1.2 */
-		// End offset: 0x80068DF4
-		// End Line: 6582
+		// End offset: 0x80068574
+		// End Line: 6975
 	/* end block 1 */
-	// End offset: 0x80068E80
-	// End Line: 6603
+	// End offset: 0x80068600
+	// End Line: 6996
 
 	/* begin block 2 */
-		// Start line: 14374
+		// Start line: 15305
 	/* end block 2 */
-	// End Line: 14375
+	// End Line: 15306
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_RemoveStreamToInstanceList(_StreamUnit *stream)
 
@@ -8265,10 +8862,10 @@ void EVENT_RemoveStreamToInstanceList(_StreamUnit *stream)
   iVar8 = 0;
   iVar3 = 0;
   do {
-    if ((((*(short *)((int)&StreamTracker.StreamList[0].used + iVar3) == 2) &&
-         ((_StreamUnit *)((int)&StreamTracker.StreamList[0].StreamUnitID + iVar3) != stream)) &&
-        (piVar7 = *(int **)(*(int *)((int)&StreamTracker.StreamList[0].level + iVar3) + 0xdc),
-        piVar7 != (int *)0x0)) && (iVar3 = 0, piVar6 = piVar7, 0 < *piVar7)) {
+    if ((((*(short *)((int)&DAT_800d2a10 + iVar3) == 2) &&
+         ((_StreamUnit *)((int)&StreamTracker + iVar3) != stream)) &&
+        (piVar7 = *(int **)(*(int *)((int)&DAT_800d2a14 + iVar3) + 0xdc), piVar7 != (int *)0x0)) &&
+       (iVar3 = 0, piVar6 = piVar7, 0 < *piVar7)) {
       do {
         ppsVar2 = *(short ***)(piVar6[1] + 0x10);
         iVar5 = 0;
@@ -8277,7 +8874,7 @@ void EVENT_RemoveStreamToInstanceList(_StreamUnit *stream)
             psVar4 = *ppsVar2;
             sVar1 = *psVar4;
             if ((sVar1 == 5) || (sVar1 == 3)) {
-LAB_80068db8:
+LAB_80068538:
               if (*(int *)(psVar4 + 2) == stream->StreamUnitID) {
                 *(undefined4 *)(psVar4 + 4) = 0;
               }
@@ -8290,7 +8887,7 @@ LAB_80068db8:
                 }
               }
               else {
-                if (sVar1 == 6) goto LAB_80068db8;
+                if (sVar1 == 6) goto LAB_80068538;
                 if ((sVar1 == 1) && (*(int *)(psVar4 + 2) == stream->StreamUnitID)) {
                   *(undefined4 *)(psVar4 + 8) = 0;
                 }
@@ -8308,14 +8905,14 @@ LAB_80068db8:
     iVar3 = iVar8 * 0x40;
     if (0xf < iVar8) {
       iVar3 = 0;
-      timer = &eventTimerArray;
+      timer = (EventTimer *)&eventTimerArray;
       do {
         if (((timer->flags & 1U) != 0) && ((Level *)timer->scriptPos == stream->level)) {
           EVENT_RemoveTimer(timer);
         }
         iVar3 = iVar3 + 1;
         timer = (EventTimer *)&timer->nextEventIndex;
-      } while (iVar3 < 0x10);
+      } while (iVar3 < 0x18);
       return;
     }
   } while( true );
@@ -8326,10 +8923,10 @@ LAB_80068db8:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_RelocateInstanceList(struct Level *oldLevel /*$a0*/, struct Level *newLevel /*$a1*/, long sizeOfLevel /*$a2*/)
- // line 6607, offset 0x80068e98
+ // line 7000, offset 0x80068618
 	/* begin block 1 */
-		// Start line: 6609
-		// Start offset: 0x80068E98
+		// Start line: 7002
+		// Start offset: 0x80068618
 		// Variables:
 	// 		int d; // $t6
 	// 		int i; // $t4
@@ -8339,57 +8936,59 @@ LAB_80068db8:
 	// 		long offset; // $t0
 
 		/* begin block 1.1 */
-			// Start line: 6629
-			// Start offset: 0x80068F28
+			// Start line: 7022
+			// Start offset: 0x800686A8
 		/* end block 1.1 */
-		// End offset: 0x80068F28
-		// End Line: 6634
+		// End offset: 0x800686A8
+		// End Line: 7027
 
 		/* begin block 1.2 */
-			// Start line: 6641
-			// Start offset: 0x80068F30
+			// Start line: 7034
+			// Start offset: 0x800686B0
 		/* end block 1.2 */
-		// End offset: 0x80068F30
-		// End Line: 6646
+		// End offset: 0x800686B0
+		// End Line: 7039
 
 		/* begin block 1.3 */
-			// Start line: 6653
-			// Start offset: 0x80068F38
+			// Start line: 7046
+			// Start offset: 0x800686B8
 		/* end block 1.3 */
-		// End offset: 0x80068F60
-		// End Line: 6658
+		// End offset: 0x800686E0
+		// End Line: 7051
 
 		/* begin block 1.4 */
-			// Start line: 6665
-			// Start offset: 0x80068F70
+			// Start line: 7058
+			// Start offset: 0x800686F0
 		/* end block 1.4 */
-		// End offset: 0x80068F98
-		// End Line: 6671
+		// End offset: 0x80068718
+		// End Line: 7064
 
 		/* begin block 1.5 */
-			// Start line: 6678
-			// Start offset: 0x80068FA8
+			// Start line: 7071
+			// Start offset: 0x80068728
 		/* end block 1.5 */
-		// End offset: 0x80068FD4
-		// End Line: 6686
+		// End offset: 0x80068754
+		// End Line: 7079
 	/* end block 1 */
-	// End offset: 0x8006909C
-	// End Line: 6708
+	// End offset: 0x8006881C
+	// End Line: 7101
 
 	/* begin block 2 */
-		// Start line: 14660
+		// Start line: 15591
 	/* end block 2 */
-	// End Line: 14661
+	// End Line: 15592
 
 	/* begin block 3 */
-		// Start line: 14661
+		// Start line: 15592
 	/* end block 3 */
-	// End Line: 14662
+	// End Line: 15593
 
 	/* begin block 4 */
-		// Start line: 14666
+		// Start line: 15597
 	/* end block 4 */
-	// End Line: 14667
+	// End Line: 15598
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_RelocateInstanceList(Level *oldLevel,Level *newLevel,long sizeOfLevel)
 
@@ -8397,102 +8996,101 @@ void EVENT_RelocateInstanceList(Level *oldLevel,Level *newLevel,long sizeOfLevel
   short sVar1;
   short **ppsVar2;
   int iVar3;
-  ScriptPCode *pSVar4;
-  int iVar5;
-  Level *pLVar6;
-  EventTimer *pEVar7;
-  short *psVar8;
-  long lVar9;
-  int iVar10;
-  Event *pEVar11;
+  int iVar4;
+  Level *pLVar5;
+  uint *puVar6;
+  short *psVar7;
+  uint uVar8;
+  int iVar9;
+  uint uVar10;
+  Level *pLVar11;
   Level *pLVar12;
-  Level *pLVar13;
+  int *piVar13;
   int *piVar14;
-  int *piVar15;
-  int iVar16;
+  int iVar15;
   
-  pLVar12 = (Level *)((int)newLevel - (int)oldLevel);
-  iVar16 = 0;
-  pLVar13 = (Level *)((int)&oldLevel->terrain + sizeOfLevel);
-  iVar5 = 0;
+  pLVar11 = (Level *)((int)newLevel - (int)oldLevel);
+  iVar15 = 0;
+  pLVar12 = (Level *)((int)&oldLevel->terrain + sizeOfLevel);
+  iVar4 = 0;
   do {
-    if (((*(short *)((int)&StreamTracker.StreamList[0].used + iVar5) == 2) &&
-        (piVar15 = *(int **)(*(int *)((int)&StreamTracker.StreamList[0].level + iVar5) + 0xdc),
-        piVar15 != (int *)0x0)) && (iVar5 = 0, piVar14 = piVar15, 0 < *piVar15)) {
+    if (((*(short *)((int)&DAT_800d2a10 + iVar4) == 2) &&
+        (piVar14 = *(int **)(*(int *)((int)&DAT_800d2a14 + iVar4) + 0xdc), piVar14 != (int *)0x0))
+       && (iVar4 = 0, piVar13 = piVar14, 0 < *piVar14)) {
       do {
-        ppsVar2 = *(short ***)(piVar14[1] + 0x10);
-        iVar10 = 0;
-        if (0 < *(short *)(piVar14[1] + 2)) {
+        ppsVar2 = *(short ***)(piVar13[1] + 0x10);
+        iVar9 = 0;
+        if (0 < *(short *)(piVar13[1] + 2)) {
           do {
-            psVar8 = *ppsVar2;
-            sVar1 = *psVar8;
+            psVar7 = *ppsVar2;
+            sVar1 = *psVar7;
             if (((sVar1 == 3) || (sVar1 == 4)) || (sVar1 == 6)) {
-              pLVar6 = *(Level **)(psVar8 + 4);
-              if ((oldLevel <= pLVar6) && (pLVar6 <= pLVar13)) {
+              pLVar5 = *(Level **)(psVar7 + 4);
+              if ((oldLevel <= pLVar5) && (pLVar5 <= pLVar12)) {
                 iVar3 = 0;
-                if (pLVar6 != (Level *)0x0) {
-                  iVar3 = (int)pLVar6 + (int)pLVar12;
+                if (pLVar5 != (Level *)0x0) {
+                  iVar3 = (int)pLVar5 + (int)pLVar11;
                 }
-                *(int *)(psVar8 + 4) = iVar3;
+                *(int *)(psVar7 + 4) = iVar3;
               }
             }
             else {
               if (sVar1 == 1) {
-                pLVar6 = *(Level **)(psVar8 + 8);
-                if ((oldLevel <= pLVar6) && (pLVar6 <= pLVar13)) {
+                pLVar5 = *(Level **)(psVar7 + 8);
+                if ((oldLevel <= pLVar5) && (pLVar5 <= pLVar12)) {
                   iVar3 = 0;
-                  if (pLVar6 != (Level *)0x0) {
-                    iVar3 = (int)pLVar6 + (int)pLVar12;
+                  if (pLVar5 != (Level *)0x0) {
+                    iVar3 = (int)pLVar5 + (int)pLVar11;
                   }
-                  *(int *)(psVar8 + 8) = iVar3;
+                  *(int *)(psVar7 + 8) = iVar3;
                 }
               }
               else {
                 if (sVar1 == 7) {
-                  pLVar6 = *(Level **)(psVar8 + 10);
-                  if ((oldLevel <= pLVar6) && (pLVar6 <= pLVar13)) {
+                  pLVar5 = *(Level **)(psVar7 + 10);
+                  if ((oldLevel <= pLVar5) && (pLVar5 <= pLVar12)) {
                     iVar3 = 0;
-                    if (pLVar6 != (Level *)0x0) {
-                      iVar3 = (int)pLVar6 + (int)pLVar12;
+                    if (pLVar5 != (Level *)0x0) {
+                      iVar3 = (int)pLVar5 + (int)pLVar11;
                     }
-                    *(int *)(psVar8 + 10) = iVar3;
+                    *(int *)(psVar7 + 10) = iVar3;
                   }
                 }
               }
             }
-            iVar10 = iVar10 + 1;
+            iVar9 = iVar9 + 1;
             ppsVar2 = ppsVar2 + 1;
-          } while (iVar10 < *(short *)(piVar14[1] + 2));
+          } while (iVar9 < *(short *)(piVar13[1] + 2));
         }
-        iVar5 = iVar5 + 1;
-        piVar14 = piVar14 + 1;
-      } while (iVar5 < *piVar15);
+        iVar4 = iVar4 + 1;
+        piVar13 = piVar13 + 1;
+      } while (iVar4 < *piVar14);
     }
-    iVar16 = iVar16 + 1;
-    iVar5 = iVar16 * 0x40;
-  } while (iVar16 < 0x10);
-  pEVar7 = &eventTimerArray;
+    iVar15 = iVar15 + 1;
+    iVar4 = iVar15 * 0x40;
+  } while (iVar15 < 0x10);
+  puVar6 = &eventTimerArray;
   do {
-    if (((pEVar7->flags & 1U) != 0) && ((Level *)pEVar7->scriptPos == oldLevel)) {
-      lVar9 = 0;
-      if (pEVar7->time != 0) {
-        lVar9 = (int)&pLVar12->terrain + pEVar7->time;
+    if (((*puVar6 & 1) != 0) && ((Level *)puVar6[4] == oldLevel)) {
+      uVar8 = 0;
+      if (puVar6[1] != 0) {
+        uVar8 = (int)&pLVar11->terrain + puVar6[1];
       }
-      pEVar11 = (Event *)0x0;
-      pEVar7->time = lVar9;
-      if (pEVar7->event != (Event *)0x0) {
-        pEVar11 = (Event *)((int)&pLVar12->terrain + (int)pEVar7->event);
+      uVar10 = 0;
+      puVar6[1] = uVar8;
+      if (puVar6[2] != 0) {
+        uVar10 = (int)&pLVar11->terrain + puVar6[2];
       }
-      pSVar4 = (ScriptPCode *)0x0;
-      pEVar7->event = pEVar11;
-      if (pEVar7->actionScript != (ScriptPCode *)0x0) {
-        pSVar4 = (ScriptPCode *)((int)&pLVar12->terrain + (int)pEVar7->actionScript);
+      uVar8 = 0;
+      puVar6[2] = uVar10;
+      if (puVar6[3] != 0) {
+        uVar8 = (int)&pLVar11->terrain + puVar6[3];
       }
-      pEVar7->actionScript = pSVar4;
-      *(Level **)&pEVar7->scriptPos = newLevel;
+      puVar6[3] = uVar8;
+      *(Level **)(puVar6 + 4) = newLevel;
     }
-    pEVar7 = (EventTimer *)&pEVar7->nextEventIndex;
-  } while ((int)pEVar7 < -0x7ff2cf74);
+    puVar6 = puVar6 + 6;
+  } while ((int)puVar6 < -0x7ff2cf00);
   return;
 }
 
@@ -8501,60 +9099,22 @@ void EVENT_RelocateInstanceList(Level *oldLevel,Level *newLevel,long sizeOfLevel
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_PrintVars()
- // line 6710, offset 0x800690a4
+ // line 7103, offset 0x80068824
 	/* begin block 1 */
-		// Start line: 6711
-		// Start offset: 0x800690A4
-		// Variables:
-	// 		int d; // $s5
-	// 		int i; // $s2
-	// 		int i2; // $s1
-	// 		struct EventPointers *eventPointers; // $s4
-	// 		struct Event *event; // $v0
+		// Start line: 15877
 	/* end block 1 */
-	// End offset: 0x800691B0
-	// End Line: 6740
+	// End Line: 15878
 
 	/* begin block 2 */
-		// Start line: 14946
+		// Start line: 15906
 	/* end block 2 */
-	// End Line: 14947
+	// End Line: 15907
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_PrintVars(void)
 
 {
-  int iVar1;
-  int iVar2;
-  int *piVar3;
-  int iVar4;
-  
-  FONT_Print("Event\tvar0\tvar1\t\tvar2\tvar3\tvar4\n");
-  iVar4 = 0;
-  iVar1 = 0;
-  do {
-    if ((*(short *)((int)&StreamTracker.StreamList[0].used + iVar1) == 2) &&
-       (*(int *)(*(int *)((int)&StreamTracker.StreamList[0].level + iVar1) + 0xdc) != 0)) {
-      FONT_Print("level %s\n");
-      piVar3 = *(int **)(*(int *)((int)&StreamTracker.StreamList[0].level + iVar1) + 0xdc);
-      iVar1 = 0;
-      if (0 < *piVar3) {
-        do {
-          iVar2 = 0;
-          FONT_Print("%02d)\t\t");
-          do {
-            iVar2 = iVar2 + 1;
-            FONT_Print("%d\t\t");
-          } while (iVar2 < 5);
-          FONT_Print("\n");
-          iVar1 = iVar1 + 1;
-        } while (iVar1 < *piVar3);
-      }
-    }
-    iVar4 = iVar4 + 1;
-    iVar1 = iVar4 * 0x40;
-  } while (iVar4 < 0x10);
   return;
 }
 
@@ -8563,22 +9123,24 @@ void EVENT_PrintVars(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ EVENT_ExecuteActionCommand(struct StackType *operand1 /*$s0*/, struct StackType *operand2 /*$a1*/, struct _PCodeStack *stack /*$a2*/, short *codeStream /*$a3*/)
- // line 6744, offset 0x800691d8
+ // line 7137, offset 0x8006882c
 	/* begin block 1 */
-		// Start line: 6745
-		// Start offset: 0x800691D8
+		// Start line: 7138
+		// Start offset: 0x8006882C
 		// Variables:
 	// 		long error; // stack offset -16
 	// 		long value; // $a0
 	// 		short flags; // stack offset -12
 	/* end block 1 */
-	// End offset: 0x80069364
-	// End Line: 6842
+	// End offset: 0x800689E4
+	// End Line: 7247
 
 	/* begin block 2 */
-		// Start line: 15042
+		// Start line: 15945
 	/* end block 2 */
-	// End Line: 15043
+	// End Line: 15946
+
+/* File: C:\kain2\game\EVENT.C */
 
 void EVENT_ExecuteActionCommand
                (StackType *operand1,StackType *operand2,_PCodeStack *stack,short *codeStream)
@@ -8644,6 +9206,12 @@ void EVENT_ExecuteActionCommand
     else {
       EVENT_DoObjectSoundAction((SoundObject *)operand1->data,operand2);
     }
+    break;
+  case 0x1c:
+    lVar1 = EVENT_GetScalerValueFromOperand(operand2,&local_10,asStack12);
+    if (local_10 == 0) {
+      **(undefined **)operand1->data = (char)lVar1;
+    }
   }
   return;
 }
@@ -8653,20 +9221,22 @@ void EVENT_ExecuteActionCommand
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_GetScalerValueFromOperand(struct StackType *operand /*$a0*/, long *error /*$a1*/, short *flags /*$a2*/)
- // line 6845, offset 0x80069374
+ // line 7250, offset 0x800689f4
 	/* begin block 1 */
-		// Start line: 6846
-		// Start offset: 0x80069374
+		// Start line: 7251
+		// Start offset: 0x800689F4
 		// Variables:
 	// 		long value; // $a1
 	/* end block 1 */
-	// End offset: 0x800694C0
-	// End Line: 6939
+	// End offset: 0x80068B54
+	// End Line: 7347
 
 	/* begin block 2 */
-		// Start line: 15244
+		// Start line: 16171
 	/* end block 2 */
-	// End Line: 15245
+	// End Line: 16172
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_GetScalerValueFromOperand(StackType *operand,long *error,short *flags)
 
@@ -8725,6 +9295,9 @@ long EVENT_GetScalerValueFromOperand(StackType *operand,long *error,short *flags
     }
   case 0x15:
     uVar2 = 0;
+    break;
+  case 0x1c:
+    uVar2 = (uint)**(byte **)operand->data;
   }
   return uVar2;
 }
@@ -8734,20 +9307,22 @@ long EVENT_GetScalerValueFromOperand(StackType *operand,long *error,short *flags
 // decompiled code
 // original method signature: 
 // long /*$ra*/ EVENT_TransformOperand(struct StackType *stackObject /*$t0*/, struct _PCodeStack *stack /*$a0*/, long item /*$a2*/, short *codeStream /*$a3*/)
- // line 6945, offset 0x800694d0
+ // line 7353, offset 0x80068b64
 	/* begin block 1 */
-		// Start line: 6946
-		// Start offset: 0x800694D0
+		// Start line: 7354
+		// Start offset: 0x80068B64
 		// Variables:
 	// 		long retValue; // $v0
 	/* end block 1 */
-	// End offset: 0x80069668
-	// End Line: 7038
+	// End offset: 0x80068CFC
+	// End Line: 7447
 
 	/* begin block 2 */
-		// Start line: 15451
+		// Start line: 16384
 	/* end block 2 */
-	// End Line: 15452
+	// End Line: 16385
+
+/* File: C:\kain2\game\EVENT.C */
 
 long EVENT_TransformOperand(StackType *stackObject,_PCodeStack *stack,long item,short *codeStream)
 

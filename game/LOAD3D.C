@@ -5,7 +5,7 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_InitCd()
- // line 226, offset 0x80037c64
+ // line 226, offset 0x800371cc
 	/* begin block 1 */
 		// Start line: 269
 	/* end block 1 */
@@ -16,7 +16,7 @@
 	/* end block 2 */
 	// End Line: 392
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\LOAD3D.C */
 
 void LOAD_InitCd(void)
 
@@ -32,11 +32,13 @@ void LOAD_InitCd(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_CdSeekCallback(unsigned char intr /*$a0*/, unsigned char *result /*$a1*/)
- // line 250, offset 0x80037c94
+ // line 250, offset 0x800371fc
 	/* begin block 1 */
 		// Start line: 317
 	/* end block 1 */
 	// End Line: 318
+
+/* File: C:\kain2\game\LOAD3D.C */
 
 void LOAD_CdSeekCallback(uchar intr,uchar *result)
 
@@ -56,31 +58,31 @@ void LOAD_CdSeekCallback(uchar intr,uchar *result)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_CdDataReady()
- // line 262, offset 0x80037ce0
+ // line 262, offset 0x80037248
 	/* begin block 1 */
 		// Start line: 263
-		// Start offset: 0x80037CE0
+		// Start offset: 0x80037248
 
 		/* begin block 1.1 */
 			// Start line: 270
-			// Start offset: 0x80037D1C
+			// Start offset: 0x80037284
 			// Variables:
 		// 		struct _ReadQueueEntry *currentQueueFile; // $s0
 		// 		long actualReadSize; // $a1
 
 			/* begin block 1.1.1 */
 				// Start line: 287
-				// Start offset: 0x80037D84
+				// Start offset: 0x800372EC
 				// Variables:
 			// 		int status; // $s1
 			/* end block 1.1.1 */
-			// End offset: 0x80037DF0
+			// End offset: 0x80037358
 			// End Line: 319
 		/* end block 1.1 */
-		// End offset: 0x80037DF0
+		// End offset: 0x80037358
 		// End Line: 320
 	/* end block 1 */
-	// End offset: 0x80037DF0
+	// End offset: 0x80037358
 	// End Line: 325
 
 	/* begin block 2 */
@@ -88,7 +90,7 @@ void LOAD_CdSeekCallback(uchar intr,uchar *result)
 	/* end block 2 */
 	// End Line: 344
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\LOAD3D.C */
 
 void LOAD_CdDataReady(void)
 
@@ -143,33 +145,33 @@ void LOAD_CdDataReady(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_CdReadReady(unsigned char intr /*$a0*/, unsigned char *result /*$a1*/)
- // line 328, offset 0x80037e04
+ // line 328, offset 0x8003736c
 	/* begin block 1 */
 		// Start line: 329
-		// Start offset: 0x80037E04
+		// Start offset: 0x8003736C
 		// Variables:
 	// 		static int crap; // offset 0x0
 
 		/* begin block 1.1 */
 			// Start line: 339
-			// Start offset: 0x80037E30
+			// Start offset: 0x80037398
 			// Variables:
 		// 		long crap[3]; // stack offset -40
 		// 		int bytes; // $s0
 
 			/* begin block 1.1.1 */
 				// Start line: 361
-				// Start offset: 0x80037EA4
+				// Start offset: 0x8003740C
 				// Variables:
 			// 		struct CdlLOC loc; // stack offset -24
 			/* end block 1.1.1 */
-			// End offset: 0x80037EA4
+			// End offset: 0x8003740C
 			// End Line: 364
 		/* end block 1.1 */
-		// End offset: 0x80037EA4
+		// End offset: 0x8003740C
 		// End Line: 364
 	/* end block 1 */
-	// End offset: 0x80037F1C
+	// End offset: 0x80037484
 	// End Line: 386
 
 	/* begin block 2 */
@@ -177,13 +179,15 @@ void LOAD_CdDataReady(void)
 	/* end block 2 */
 	// End Line: 481
 
+/* File: C:\kain2\game\LOAD3D.C */
+
 void LOAD_CdReadReady(uchar intr,uchar *result)
 
 {
   uint uVar1;
   int iVar2;
-  byte abStack40 [16];
-  byte abStack24 [8];
+  CdlLOC aCStack40 [4];
+  CdlLOC aCStack24 [2];
   
   if (loadStatus.state == 2) {
     if (intr == '\x01') {
@@ -193,17 +197,17 @@ void LOAD_CdReadReady(uchar intr,uchar *result)
       }
       loadStatus.state = 4;
       loadStatus.bytesTransferred = uVar1;
-      CdGetSector((dword)abStack40,3);
-      iVar2 = CdPosToInt(abStack40);
+      CdGetSector(aCStack40,3);
+      iVar2 = CdPosToInt(aCStack40);
       if (loadStatus.currentSector == iVar2) {
         loadStatus.currentSector = loadStatus.currentSector + 1;
-        CdGetSector((dword)loadStatus.currentQueueFile.readCurDest,uVar1 >> 2);
+        CdGetSector(loadStatus.currentQueueFile.readCurDest,uVar1 >> 2);
         LOAD_CdDataReady();
       }
       else {
         loadStatus.state = (uint)intr;
-        CdIntToPos(loadStatus.currentSector,(char *)abStack24);
-        CdControl(6,abStack24,(undefined *)0x0);
+        CdIntToPos(loadStatus.currentSector,aCStack24);
+        CdControl('\x06',(u_char *)aCStack24,(u_char *)0x0);
       }
     }
     else {
@@ -212,7 +216,7 @@ void LOAD_CdReadReady(uchar intr,uchar *result)
         loadStatus.currentQueueFile.readStatus = 4;
       }
       else {
-        printf("something %x\n");
+        printf(s_something__x_800cf69c,(uint)intr);
       }
     }
   }
@@ -231,7 +235,7 @@ void LOAD_CdReadReady(uchar intr,uchar *result)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_UpdateCheckSum(long bytes /*$a1*/)
- // line 391, offset 0x80037f60
+ // line 391, offset 0x800374c8
 	/* begin block 1 */
 		// Start line: 623
 	/* end block 1 */
@@ -241,6 +245,8 @@ void LOAD_CdReadReady(uchar intr,uchar *result)
 		// Start line: 626
 	/* end block 2 */
 	// End Line: 627
+
+/* File: C:\kain2\game\LOAD3D.C */
 
 void LOAD_UpdateCheckSum(long bytes)
 
@@ -266,24 +272,24 @@ void LOAD_UpdateCheckSum(long bytes)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_DoCDReading()
- // line 406, offset 0x80037fa4
+ // line 406, offset 0x8003750c
 	/* begin block 1 */
 		// Start line: 407
-		// Start offset: 0x80037FA4
+		// Start offset: 0x8003750C
 		// Variables:
 	// 		long bytesLoaded; // $a0
 	// 		long readSoFar; // $v0
 	// 		long state; // $s0
 	/* end block 1 */
-	// End offset: 0x80038040
-	// End Line: 443
+	// End offset: 0x800375A8
+	// End Line: 446
 
 	/* begin block 2 */
 		// Start line: 656
 	/* end block 2 */
 	// End Line: 657
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\LOAD3D.C */
 
 void LOAD_DoCDReading(void)
 
@@ -303,10 +309,10 @@ void LOAD_DoCDReading(void)
       loadStatus.currentQueueFile.readStatus = 0;
       if (loadStatus.currentDirLoading != 0) {
         loadStatus.currentDirLoading = 0;
+        MEMPACK_SetMemoryDoneStreamed((char *)loadStatus.bigFile.currentDir);
       }
     }
     else {
-      GXFilePrint("CD ERROR: checksum error\n");
       loadStatus.currentQueueFile.readStatus = 7;
     }
   }
@@ -318,18 +324,18 @@ void LOAD_DoCDReading(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_DoCDBufferedReading()
- // line 450, offset 0x80038050
+ // line 453, offset 0x800375b8
 	/* begin block 1 */
-		// Start line: 752
+		// Start line: 759
 	/* end block 1 */
-	// End Line: 753
+	// End Line: 760
 
 	/* begin block 2 */
-		// Start line: 754
+		// Start line: 761
 	/* end block 2 */
-	// End Line: 755
+	// End Line: 762
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\LOAD3D.C */
 
 void LOAD_DoCDBufferedReading(void)
 
@@ -345,35 +351,35 @@ void LOAD_DoCDBufferedReading(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_SetupFileToDoCDReading()
- // line 461, offset 0x8003806c
+ // line 464, offset 0x800375d4
 	/* begin block 1 */
-		// Start line: 462
-		// Start offset: 0x8003806C
+		// Start line: 465
+		// Start offset: 0x800375D4
 
 		/* begin block 1.1 */
-			// Start line: 462
-			// Start offset: 0x8003806C
+			// Start line: 465
+			// Start offset: 0x800375D4
 			// Variables:
 		// 		struct CdlLOC loc; // stack offset -16
 		/* end block 1.1 */
-		// End offset: 0x800380A8
-		// End Line: 477
+		// End offset: 0x80037610
+		// End Line: 480
 	/* end block 1 */
-	// End offset: 0x800380A8
-	// End Line: 478
+	// End offset: 0x80037610
+	// End Line: 481
 
 	/* begin block 2 */
-		// Start line: 774
+		// Start line: 781
 	/* end block 2 */
-	// End Line: 775
+	// End Line: 782
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\LOAD3D.C */
 
 void LOAD_SetupFileToDoCDReading(void)
 
 {
   long lVar1;
-  byte abStack16 [8];
+  CdlLOC aCStack16 [2];
   
   loadStatus.currentQueueFile.readStatus = 3;
   loadStatus.checksum = 0;
@@ -386,8 +392,8 @@ void LOAD_SetupFileToDoCDReading(void)
     lVar1 = loadStatus.currentQueueFile.readStartPos + 0x7ff;
   }
   loadStatus.currentSector = loadStatus.bigFile.bigfileBaseOffset + (lVar1 >> 0xb);
-  CdIntToPos(loadStatus.currentSector,(char *)abStack16);
-  CdControl(6,abStack16,(undefined *)0x0);
+  CdIntToPos(loadStatus.currentSector,aCStack16);
+  CdControl('\x06',(u_char *)aCStack16,(u_char *)0x0);
   loadStatus.cdWaitTime = TIMER_GetTimeMS();
   return;
 }
@@ -397,35 +403,35 @@ void LOAD_SetupFileToDoCDReading(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_SetupFileToDoBufferedCDReading()
- // line 536, offset 0x800380e8
+ // line 539, offset 0x80037650
 	/* begin block 1 */
-		// Start line: 537
-		// Start offset: 0x800380E8
+		// Start line: 540
+		// Start offset: 0x80037650
 
 		/* begin block 1.1 */
-			// Start line: 537
-			// Start offset: 0x800380E8
+			// Start line: 540
+			// Start offset: 0x80037650
 			// Variables:
 		// 		struct CdlLOC loc; // stack offset -16
 		/* end block 1.1 */
-		// End offset: 0x8003811C
-		// End Line: 553
+		// End offset: 0x80037684
+		// End Line: 556
 	/* end block 1 */
-	// End offset: 0x8003811C
-	// End Line: 554
+	// End offset: 0x80037684
+	// End Line: 557
 
 	/* begin block 2 */
-		// Start line: 966
+		// Start line: 973
 	/* end block 2 */
-	// End Line: 967
+	// End Line: 974
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\LOAD3D.C */
 
 void LOAD_SetupFileToDoBufferedCDReading(void)
 
 {
   long lVar1;
-  byte abStack16 [8];
+  CdlLOC aCStack16 [2];
   
   loadStatus.currentQueueFile.readStatus = 6;
   loadStatus.checksum = 0;
@@ -436,8 +442,8 @@ void LOAD_SetupFileToDoBufferedCDReading(void)
     lVar1 = loadStatus.currentQueueFile.readStartPos + 0x7ff;
   }
   loadStatus.currentSector = loadStatus.bigFile.bigfileBaseOffset + (lVar1 >> 0xb);
-  CdIntToPos(loadStatus.currentSector,(char *)abStack16);
-  CdControl(6,abStack16,(undefined *)0x0);
+  CdIntToPos(loadStatus.currentSector,aCStack16);
+  CdControl('\x06',(u_char *)aCStack16,(u_char *)0x0);
   loadStatus.cdWaitTime = TIMER_GetTimeMS();
   return;
 }
@@ -447,53 +453,53 @@ void LOAD_SetupFileToDoBufferedCDReading(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_ProcessReadQueue()
- // line 561, offset 0x8003815c
+ // line 564, offset 0x800376c4
 	/* begin block 1 */
-		// Start line: 562
-		// Start offset: 0x8003815C
+		// Start line: 565
+		// Start offset: 0x800376C4
 
 		/* begin block 1.1 */
-			// Start line: 602
-			// Start offset: 0x80038254
+			// Start line: 605
+			// Start offset: 0x800377AC
 			// Variables:
-		// 		long cdWaitTimeDiff; // $s0
+		// 		long cdWaitTimeDiff; // $v0
 
 			/* begin block 1.1.1 */
-				// Start line: 608
-				// Start offset: 0x80038294
+				// Start line: 611
+				// Start offset: 0x800377EC
 				// Variables:
 			// 		struct CdlLOC loc; // stack offset -16
 			/* end block 1.1.1 */
-			// End offset: 0x80038294
-			// End Line: 609
+			// End offset: 0x800377EC
+			// End Line: 612
 		/* end block 1.1 */
-		// End offset: 0x80038320
-		// End Line: 633
+		// End offset: 0x80037858
+		// End Line: 636
 	/* end block 1 */
-	// End offset: 0x80038320
-	// End Line: 635
+	// End offset: 0x80037858
+	// End Line: 638
 
 	/* begin block 2 */
-		// Start line: 1052
+		// Start line: 1059
 	/* end block 2 */
-	// End Line: 1053
+	// End Line: 1060
 
 	/* begin block 3 */
-		// Start line: 1058
+		// Start line: 1065
 	/* end block 3 */
-	// End Line: 1059
+	// End Line: 1066
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\LOAD3D.C */
 
 void LOAD_ProcessReadQueue(void)
 
 {
   ulong uVar1;
   int iVar2;
-  byte abStack16 [8];
+  CdlLOC aCStack16 [2];
   
-  if (gameTrackerX.debugFlags < 0) {
-    FONT_Print("CD St %d LS %d sk %d tm %d rd %d cs %d\n");
+  if (DAT_800d218c < 0) {
+    FONT_Print(s_CD_St__d_LS__d_sk__d_tm__d_rd__d_800cf6ac);
   }
   if (loadStatus.currentQueueFile.readStatus == 3) {
     LOAD_DoCDReading();
@@ -516,7 +522,6 @@ void LOAD_ProcessReadQueue(void)
     }
   }
   if (loadStatus.currentQueueFile.readStatus == 7) {
-    GXFilePrint("CD ERROR: checksum error\n");
     loadStatus.currentQueueFile.readStatus = 1;
   }
   else {
@@ -528,16 +533,14 @@ void LOAD_ProcessReadQueue(void)
         CdReset(0);
         LOAD_InitCdStreamMode();
         loadStatus.state = 1;
-        CdIntToPos(loadStatus.currentSector,(char *)abStack16);
-        CdControl(6,abStack16,(undefined *)0x0);
-        TIMER_GetTimeMS();
-        GXFilePrint("CD ERROR: timeout after %d mS, %8d %8d try again\n");
+        CdIntToPos(loadStatus.currentSector,aCStack16);
+        CdControl('\x06',(u_char *)aCStack16,(u_char *)0x0);
         loadStatus.cdWaitTime = TIMER_GetTimeMS();
       }
       else {
         iVar2 = VOICEXA_IsPlaying();
         if (iVar2 == 0) {
-          CdControlF(9,(byte *)0x0);
+          CdControlF('\t',(u_char *)0x0);
         }
         loadStatus.cdWaitTime = 0;
       }
@@ -551,65 +554,64 @@ void LOAD_ProcessReadQueue(void)
 // decompiled code
 // original method signature: 
 // char * /*$ra*/ LOAD_ReadFileFromCD(char *filename /*$s1*/, int memType /*$s2*/)
- // line 639, offset 0x80038330
+ // line 642, offset 0x80037868
 	/* begin block 1 */
-		// Start line: 640
-		// Start offset: 0x80038330
+		// Start line: 643
+		// Start offset: 0x80037868
 		// Variables:
 	// 		struct CdlFILE fp; // stack offset -40
 	// 		int i; // $s0
 	// 		char *readBuffer; // $s0
 	/* end block 1 */
-	// End offset: 0x80038414
-	// End Line: 684
+	// End offset: 0x80037930
+	// End Line: 687
 
 	/* begin block 2 */
-		// Start line: 1215
+		// Start line: 1222
 	/* end block 2 */
-	// End Line: 1216
+	// End Line: 1223
+
+/* File: C:\kain2\game\LOAD3D.C */
 
 char * LOAD_ReadFileFromCD(char *filename,int memType)
 
 {
-  undefined4 *puVar1;
-  char *fmt;
-  int iVar2;
-  undefined4 uStack40;
-  ulong local_24;
+  CdlFILE *pCVar1;
+  char *pcVar2;
+  char *pcVar3;
+  int iVar4;
+  CdlFILE CStack40;
   
-  iVar2 = 0;
+  iVar4 = 0;
   do {
-    puVar1 = CdSearchFile(&uStack40,filename);
-    if (puVar1 != (undefined4 *)0x0) break;
+    pCVar1 = CdSearchFile(&CStack40,filename);
+    if (pCVar1 != (CdlFILE *)0x0) break;
     CdReset(0);
-    iVar2 = iVar2 + 1;
-  } while (iVar2 < 10);
-  if (iVar2 == 10) {
-    fmt = "CD ERROR: localization file not found\n";
-  }
-  else {
-    fmt = MEMPACK_Malloc(local_24,(uchar)memType);
-    if (fmt != (char *)0x0) {
-      iVar2 = CdPosToInt((byte *)&uStack40);
+    iVar4 = iVar4 + 1;
+  } while (iVar4 < 10);
+  pcVar3 = (char *)0x0;
+  if (iVar4 != 10) {
+    pcVar2 = MEMPACK_Malloc(CStack40.size,(uchar)memType);
+    pcVar3 = (char *)0x0;
+    if (pcVar2 != (char *)0x0) {
+      iVar4 = CdPosToInt((CdlLOC *)&CStack40);
       loadStatus.currentQueueFile.readCurSize = 0;
       loadStatus.currentQueueFile.readStatus = 1;
       loadStatus.currentQueueFile.checksumType = 0;
       loadStatus.currentQueueFile.checksum = 0;
       loadStatus.currentQueueFile.readStartPos =
-           (iVar2 - loadStatus.bigFile.bigfileBaseOffset) * 0x800;
-      loadStatus.currentQueueFile.readSize = local_24;
-      loadStatus.currentQueueFile.readStartDest = fmt;
+           (iVar4 - loadStatus.bigFile.bigfileBaseOffset) * 0x800;
+      loadStatus.currentQueueFile.readSize = CStack40.size;
+      loadStatus.currentQueueFile.readStartDest = pcVar2;
       do {
         LOAD_ProcessReadQueue();
-        iVar2 = LOAD_IsFileLoading();
-      } while (iVar2 != 0);
-      CdControlF(9,(byte *)0x0);
-      return fmt;
+        iVar4 = LOAD_IsFileLoading();
+      } while (iVar4 != 0);
+      CdControlF('\t',(u_char *)0x0);
+      pcVar3 = pcVar2;
     }
-    fmt = "CD ERROR: could not allocate read buffer\n";
   }
-  GXFilePrint(fmt);
-  return (char *)0x0;
+  return pcVar3;
 }
 
 
@@ -617,11 +619,13 @@ char * LOAD_ReadFileFromCD(char *filename,int memType)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_CdReadFromBigFile(long fileOffset /*$a0*/, unsigned long *loadAddr /*$a1*/, long bytes /*$a2*/, long chksumLevel /*$a3*/, long checksum /*stack 16*/)
- // line 686, offset 0x8003842c
+ // line 689, offset 0x80037948
 	/* begin block 1 */
-		// Start line: 1328
+		// Start line: 1335
 	/* end block 1 */
-	// End Line: 1329
+	// End Line: 1336
+
+/* File: C:\kain2\game\LOAD3D.C */
 
 void LOAD_CdReadFromBigFile
                (long fileOffset,ulong *loadAddr,long bytes,long chksumLevel,long checksum)
@@ -641,27 +645,24 @@ void LOAD_CdReadFromBigFile
 
 // decompiled code
 // original method signature: 
-// struct _BigFileDir * /*$ra*/ LOAD_ReadDirectory(struct _BigFileDirEntry *dirEntry /*$s2*/)
- // line 699, offset 0x80038458
+// struct _BigFileDir * /*$ra*/ LOAD_ReadDirectory(struct _BigFileDirEntry *dirEntry /*$s0*/)
+ // line 702, offset 0x80037974
 	/* begin block 1 */
-		// Start line: 700
-		// Start offset: 0x80038458
+		// Start line: 703
+		// Start offset: 0x80037974
 		// Variables:
-	// 		struct _BigFileDir *dir; // $s1
-	// 		long sizeOfDir; // $s0
+	// 		struct _BigFileDir *dir; // $s2
+	// 		long sizeOfDir; // $s1
 	/* end block 1 */
-	// End offset: 0x8003848C
-	// End Line: 708
+	// End offset: 0x80037974
+	// End Line: 703
 
 	/* begin block 2 */
-		// Start line: 1358
+		// Start line: 1365
 	/* end block 2 */
-	// End Line: 1359
+	// End Line: 1366
 
-	/* begin block 3 */
-		// Start line: 1362
-	/* end block 3 */
-	// End Line: 1363
+/* File: C:\kain2\game\LOAD3D.C */
 
 _BigFileDir * LOAD_ReadDirectory(_BigFileDirEntry *dirEntry)
 
@@ -669,9 +670,6 @@ _BigFileDir * LOAD_ReadDirectory(_BigFileDirEntry *dirEntry)
   _BigFileDir *loadAddr;
   ulong allocSize;
   
-  if (gameTrackerX.debugFlags < 0) {
-    GXFilePrint("Reading directory %d with %d files\n");
-  }
   allocSize = (int)dirEntry->numFiles * 0x10 + 4;
   loadAddr = (_BigFileDir *)MEMPACK_Malloc(allocSize,',');
   LOAD_CdReadFromBigFile(dirEntry->subDirOffset,(ulong *)loadAddr,allocSize,0,0);
@@ -683,54 +681,53 @@ _BigFileDir * LOAD_ReadDirectory(_BigFileDirEntry *dirEntry)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_InitCdLoader(char *bigFileName /*$s0*/, char *voiceFileName /*$a1*/)
- // line 715, offset 0x800384dc
+ // line 718, offset 0x800379dc
 	/* begin block 1 */
-		// Start line: 716
-		// Start offset: 0x800384DC
+		// Start line: 719
+		// Start offset: 0x800379DC
 		// Variables:
 	// 		struct CdlFILE fp; // stack offset -40
 	// 		long i; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 783
-			// Start offset: 0x800385B0
+			// Start line: 786
+			// Start offset: 0x80037A90
 			// Variables:
 		// 		char *ptr; // $s0
 		/* end block 1.1 */
-		// End offset: 0x80038628
-		// End Line: 798
+		// End offset: 0x80037AF8
+		// End Line: 801
 	/* end block 1 */
-	// End offset: 0x80038664
-	// End Line: 810
+	// End offset: 0x80037B20
+	// End Line: 813
 
 	/* begin block 2 */
-		// Start line: 1396
+		// Start line: 1399
 	/* end block 2 */
-	// End Line: 1397
+	// End Line: 1400
+
+/* File: C:\kain2\game\LOAD3D.C */
 
 void LOAD_InitCdLoader(char *bigFileName,char *voiceFileName)
 
 {
-  undefined4 *puVar1;
+  CdlFILE *pCVar1;
   ulong *loadAddr;
   int iVar2;
   ulong allocSize;
-  undefined4 auStack40 [6];
+  CdlFILE CStack40;
   
   iVar2 = 0;
   loadStatus.state = 0;
   do {
-    puVar1 = CdSearchFile(auStack40,bigFileName);
-    if (puVar1 != (undefined4 *)0x0) break;
+    pCVar1 = CdSearchFile(&CStack40,bigFileName);
+    if (pCVar1 != (CdlFILE *)0x0) break;
     CdReset(0);
     iVar2 = iVar2 + 1;
   } while (iVar2 < 10);
-  if (iVar2 == 10) {
-    GXFilePrint("CD ERROR: bigfile not found\n");
-  }
-  else {
+  if (iVar2 != 10) {
     LOAD_InitCdStreamMode();
-    loadStatus.bigFile.bigfileBaseOffset = CdPosToInt((byte *)auStack40);
+    loadStatus.bigFile.bigfileBaseOffset = CdPosToInt((CdlLOC *)&CStack40);
     loadStatus.cdWaitTime = 0;
     loadStatus.currentQueueFile.readStatus = 0;
     loadStatus.bigFile.currentDir = (_BigFileDir *)0x0;
@@ -738,29 +735,27 @@ void LOAD_InitCdLoader(char *bigFileName,char *voiceFileName)
     loadStatus.bigFile.cachedDir = (_BigFileDir *)0x0;
     loadStatus.bigFile.cachedDirID = 0;
     loadStatus.bigFile.searchDirID = 0;
-    GXFilePrint("Found bigfile at %d\n");
     LOAD_CdReadFromBigFile(0,(ulong *)&loadStatus.bigFile.numSubDirs,4,0,0);
     do {
       LOAD_ProcessReadQueue();
       iVar2 = LOAD_IsFileLoading();
     } while (iVar2 != 0);
-    CdControlF(9,(byte *)0x0);
-    GXFilePrint("Num of directories %d\n");
+    CdControlF('\t',(u_char *)0x0);
     allocSize = loadStatus.bigFile.numSubDirs * 8 + 4;
     loadAddr = (ulong *)MEMPACK_Malloc(allocSize,'\b');
-    CdSync(0,(undefined *)0x0);
+    CdSync(0,(u_char *)0x0);
     LOAD_CdReadFromBigFile(0,loadAddr,allocSize,0,0);
     loadStatus.bigFile.subDirList = (_BigFileDirEntry *)(loadAddr + 1);
     do {
       LOAD_ProcessReadQueue();
       iVar2 = LOAD_IsFileLoading();
     } while (iVar2 != 0);
-    loadStatus.bigFile.rootDir = LOAD_ReadDirectory(loadStatus.bigFile.subDirList);
+    loadStatus.bigFile.rootDir =
+         (_BigFileDir *)LOAD_ReadDirectory((_BigFileDirEntry *)loadStatus.bigFile.subDirList);
     do {
       LOAD_ProcessReadQueue();
       iVar2 = LOAD_IsFileLoading();
     } while (iVar2 != 0);
-    GXFilePrint("Num of files in root %d\n");
   }
   return;
 }
@@ -770,20 +765,22 @@ void LOAD_InitCdLoader(char *bigFileName,char *voiceFileName)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ LOAD_SetupFileInfo(struct _NonBlockLoadEntry *loadEntry /*$s0*/)
- // line 812, offset 0x80038678
+ // line 815, offset 0x80037b34
 	/* begin block 1 */
-		// Start line: 813
-		// Start offset: 0x80038678
+		// Start line: 816
+		// Start offset: 0x80037B34
 		// Variables:
 	// 		struct _BigFileEntry *fileInfo; // $v1
 	/* end block 1 */
-	// End offset: 0x800386EC
-	// End Line: 836
+	// End offset: 0x80037BAC
+	// End Line: 839
 
 	/* begin block 2 */
-		// Start line: 1613
+		// Start line: 1643
 	/* end block 2 */
-	// End Line: 1614
+	// End Line: 1644
+
+/* File: C:\kain2\game\LOAD3D.C */
 
 int LOAD_SetupFileInfo(_NonBlockLoadEntry *loadEntry)
 
@@ -794,8 +791,8 @@ int LOAD_SetupFileInfo(_NonBlockLoadEntry *loadEntry)
   p_Var1 = LOAD_GetBigFileEntryByHash(loadEntry->fileHash);
   if (p_Var1 == (_BigFileEntry *)0x0) {
     iVar2 = 0;
-    if (loadEntry->dirHash == 0) {
-      DEBUG_FatalError("CD ERROR: File %s does not exist\n");
+    if (loadEntry->dirHash == loadStatus.bigFile.currentDirID) {
+      DEBUG_FatalError(s_CD_ERROR__File__s_does_not_exist_800cf6d4);
       iVar2 = 0;
     }
   }
@@ -813,11 +810,13 @@ int LOAD_SetupFileInfo(_NonBlockLoadEntry *loadEntry)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_NonBlockingReadFile(struct _NonBlockLoadEntry *loadEntry /*$s0*/)
- // line 839, offset 0x800386fc
+ // line 842, offset 0x80037bbc
 	/* begin block 1 */
-		// Start line: 1668
+		// Start line: 1698
 	/* end block 1 */
-	// End Line: 1669
+	// End Line: 1699
+
+/* File: C:\kain2\game\LOAD3D.C */
 
 void LOAD_NonBlockingReadFile(_NonBlockLoadEntry *loadEntry)
 
@@ -847,20 +846,22 @@ void LOAD_NonBlockingReadFile(_NonBlockLoadEntry *loadEntry)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_CD_ReadPartOfFile(struct _NonBlockLoadEntry *loadEntry /*$s0*/)
- // line 859, offset 0x80038780
+ // line 862, offset 0x80037c40
 	/* begin block 1 */
-		// Start line: 860
-		// Start offset: 0x80038780
+		// Start line: 863
+		// Start offset: 0x80037C40
 		// Variables:
 	// 		struct _ReadQueueEntry *currentQueueReq; // $v1
 	/* end block 1 */
-	// End offset: 0x80038814
-	// End Line: 885
+	// End offset: 0x80037CD4
+	// End Line: 888
 
 	/* begin block 2 */
-		// Start line: 1708
+		// Start line: 1738
 	/* end block 2 */
-	// End Line: 1709
+	// End Line: 1739
+
+/* File: C:\kain2\game\LOAD3D.C */
 
 void LOAD_CD_ReadPartOfFile(_NonBlockLoadEntry *loadEntry)
 
@@ -890,10 +891,10 @@ void LOAD_CD_ReadPartOfFile(_NonBlockLoadEntry *loadEntry)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ LOAD_HashName(char *string /*stack 0*/)
- // line 898, offset 0x80038824
+ // line 901, offset 0x80037ce4
 	/* begin block 1 */
-		// Start line: 899
-		// Start offset: 0x80038824
+		// Start line: 902
+		// Start offset: 0x80037CE4
 		// Variables:
 	// 		long sum; // $s5
 	// 		long xor; // $s6
@@ -905,18 +906,20 @@ void LOAD_CD_ReadPartOfFile(_NonBlockLoadEntry *loadEntry)
 	// 		long i; // $s0
 	// 		char *pos; // $s3
 	/* end block 1 */
-	// End offset: 0x80038938
-	// End Line: 942
+	// End offset: 0x80037DF8
+	// End Line: 945
 
 	/* begin block 2 */
-		// Start line: 1794
+		// Start line: 1824
 	/* end block 2 */
-	// End Line: 1795
+	// End Line: 1825
+
+/* File: C:\kain2\game\LOAD3D.C */
 
 long LOAD_HashName(char *string)
 
 {
-  size_t sVar1;
+  int iVar1;
   char *pcVar2;
   int iVar3;
   uint uVar4;
@@ -931,13 +934,13 @@ long LOAD_HashName(char *string)
   iVar7 = 0;
   uVar8 = 0;
   iVar6 = 0;
-  sVar1 = strlen(string);
-  iVar5 = sVar1 - 1;
-  pcVar2 = strchr(string,0x2e);
+  iVar1 = strlen();
+  iVar5 = iVar1 + -1;
+  pcVar2 = strchr(string,'.');
   uVar9 = 0;
   if (pcVar2 != (char *)0x0) {
     uVar4 = 0;
-    s2 = "drm";
+    s2 = HashExtensions;
     do {
       iVar3 = strcmpi(pcVar2 + 1,s2);
       uVar9 = uVar4;
@@ -947,7 +950,7 @@ long LOAD_HashName(char *string)
       uVar9 = 0;
     } while ((int)uVar4 < 7);
     if ((int)uVar4 < 7) {
-      iVar5 = sVar1 - 5;
+      iVar5 = iVar1 + -5;
     }
   }
   uVar4 = 0;
@@ -974,10 +977,10 @@ long LOAD_HashName(char *string)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ LOAD_HashUnit(char *name /*$a0*/)
- // line 945, offset 0x8003897c
+ // line 948, offset 0x80037e3c
 	/* begin block 1 */
-		// Start line: 947
-		// Start offset: 0x8003897C
+		// Start line: 950
+		// Start offset: 0x80037E3C
 		// Variables:
 	// 		int val; // $v1
 	// 		int last; // $t0
@@ -986,23 +989,25 @@ long LOAD_HashName(char *string)
 	// 		int flag; // $t1
 	// 		char *c; // $a0
 	/* end block 1 */
-	// End offset: 0x80038A10
-	// End Line: 981
+	// End offset: 0x80037ED0
+	// End Line: 984
 
 	/* begin block 2 */
-		// Start line: 1901
+		// Start line: 1931
 	/* end block 2 */
-	// End Line: 1902
+	// End Line: 1932
 
 	/* begin block 3 */
-		// Start line: 1902
+		// Start line: 1932
 	/* end block 3 */
-	// End Line: 1903
+	// End Line: 1933
 
 	/* begin block 4 */
-		// Start line: 1903
+		// Start line: 1933
 	/* end block 4 */
-	// End Line: 1904
+	// End Line: 1934
+
+/* File: C:\kain2\game\LOAD3D.C */
 
 long LOAD_HashUnit(char *name)
 
@@ -1053,31 +1058,33 @@ long LOAD_HashUnit(char *name)
 // decompiled code
 // original method signature: 
 // struct _BigFileEntry * /*$ra*/ LOAD_GetBigFileEntryByHash(long hash /*$a0*/)
- // line 986, offset 0x80038a20
+ // line 989, offset 0x80037ee0
 	/* begin block 1 */
-		// Start line: 988
-		// Start offset: 0x80038A20
+		// Start line: 991
+		// Start offset: 0x80037EE0
 		// Variables:
 	// 		int i; // $a1
 	// 		struct _BigFileEntry *entry; // $v1
 	/* end block 1 */
-	// End offset: 0x80038AA0
-	// End Line: 1007
+	// End offset: 0x80037F60
+	// End Line: 1010
 
 	/* begin block 2 */
-		// Start line: 2006
+		// Start line: 2036
 	/* end block 2 */
-	// End Line: 2007
+	// End Line: 2037
 
 	/* begin block 3 */
-		// Start line: 2007
+		// Start line: 2037
 	/* end block 3 */
-	// End Line: 2008
+	// End Line: 2038
 
 	/* begin block 4 */
-		// Start line: 2010
+		// Start line: 2040
 	/* end block 4 */
-	// End Line: 2011
+	// End Line: 2041
+
+/* File: C:\kain2\game\LOAD3D.C */
 
 _BigFileEntry * LOAD_GetBigFileEntryByHash(long hash)
 
@@ -1088,17 +1095,17 @@ _BigFileEntry * LOAD_GetBigFileEntryByHash(long hash)
   if ((loadStatus.bigFile.currentDir != (_BigFileDir *)0x0) && (loadStatus.currentDirLoading == 0))
   {
     iVar2 = (loadStatus.bigFile.currentDir)->numFiles;
-    p_Var1 = (_BigFileEntry *)(loadStatus.bigFile.currentDir + 1);
+    p_Var1 = (loadStatus.bigFile.currentDir)->fileList;
     while (iVar2 != 0) {
       iVar2 = iVar2 + -1;
       if (p_Var1->fileHash == hash) {
-        return p_Var1;
+        return (_BigFileEntry *)p_Var1;
       }
       p_Var1 = p_Var1 + 1;
     }
   }
   iVar2 = (loadStatus.bigFile.rootDir)->numFiles;
-  p_Var1 = (_BigFileEntry *)(loadStatus.bigFile.rootDir + 1);
+  p_Var1 = (loadStatus.bigFile.rootDir)->fileList;
   while( true ) {
     if (iVar2 == 0) {
       return (_BigFileEntry *)0x0;
@@ -1107,7 +1114,7 @@ _BigFileEntry * LOAD_GetBigFileEntryByHash(long hash)
     if (p_Var1->fileHash == hash) break;
     p_Var1 = p_Var1 + 1;
   }
-  return p_Var1;
+  return (_BigFileEntry *)p_Var1;
 }
 
 
@@ -1115,18 +1122,20 @@ _BigFileEntry * LOAD_GetBigFileEntryByHash(long hash)
 // decompiled code
 // original method signature: 
 // struct _BigFileEntry * /*$ra*/ LOAD_GetBigFileEntry(char *fileName /*$a0*/)
- // line 1009, offset 0x80038aa8
+ // line 1012, offset 0x80037f68
 	/* begin block 1 */
-		// Start line: 1010
-		// Start offset: 0x80038AA8
+		// Start line: 1013
+		// Start offset: 0x80037F68
 	/* end block 1 */
-	// End offset: 0x80038AA8
-	// End Line: 1010
+	// End offset: 0x80037F68
+	// End Line: 1013
 
 	/* begin block 2 */
-		// Start line: 2057
+		// Start line: 2087
 	/* end block 2 */
-	// End Line: 2058
+	// End Line: 2088
+
+/* File: C:\kain2\game\LOAD3D.C */
 
 _BigFileEntry * LOAD_GetBigFileEntry(char *fileName)
 
@@ -1144,20 +1153,22 @@ _BigFileEntry * LOAD_GetBigFileEntry(char *fileName)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ LOAD_DoesFileExist(char *fileName /*$a0*/)
- // line 1065, offset 0x80038ad0
+ // line 1068, offset 0x80037f90
 	/* begin block 1 */
-		// Start line: 1066
-		// Start offset: 0x80038AD0
+		// Start line: 1069
+		// Start offset: 0x80037F90
 		// Variables:
 	// 		struct _BigFileEntry *entry; // $v0
 	/* end block 1 */
-	// End offset: 0x80038AF4
-	// End Line: 1071
+	// End offset: 0x80037FB4
+	// End Line: 1074
 
 	/* begin block 2 */
-		// Start line: 2127
+		// Start line: 2133
 	/* end block 2 */
-	// End Line: 2128
+	// End Line: 2134
+
+/* File: C:\kain2\game\LOAD3D.C */
 
 long LOAD_DoesFileExist(char *fileName)
 
@@ -1178,50 +1189,49 @@ long LOAD_DoesFileExist(char *fileName)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_LoadTIM(long *addr /*$a1*/, long x_pos /*$t0*/, long y_pos /*$a2*/, long clut_x /*$s1*/, long clut_y /*stack 16*/)
- // line 1076, offset 0x80038b04
+ // line 1079, offset 0x80037fc4
 	/* begin block 1 */
-		// Start line: 1077
-		// Start offset: 0x80038B04
+		// Start line: 1080
+		// Start offset: 0x80037FC4
 		// Variables:
 	// 		struct RECT rect; // stack offset -24
 	// 		long *clutAddr; // $s0
 	/* end block 1 */
-	// End offset: 0x80038B90
-	// End Line: 1106
+	// End offset: 0x80038050
+	// End Line: 1109
 
 	/* begin block 2 */
-		// Start line: 2141
+		// Start line: 2171
 	/* end block 2 */
-	// End Line: 2142
+	// End Line: 2172
+
+/* File: C:\kain2\game\LOAD3D.C */
 
 void LOAD_LoadTIM(long *addr,long x_pos,long y_pos,long clut_x,long clut_y)
 
 {
   long *plVar1;
-  long *plVar2;
-  undefined2 local_18;
-  undefined2 local_16;
-  undefined2 local_14;
-  undefined2 local_12;
+  u_long *p;
+  RECT local_18;
   
   plVar1 = addr + 2;
-  plVar2 = (long *)0x0;
+  p = (u_long *)0x0;
   if (addr[1] == 8) {
-    plVar2 = addr + 5;
+    p = (u_long *)(addr + 5);
     plVar1 = addr + 0xd;
   }
-  local_18 = (undefined2)x_pos;
-  local_16 = (undefined2)y_pos;
-  local_14 = *(undefined2 *)(plVar1 + 2);
-  local_12 = *(undefined2 *)((int)plVar1 + 10);
-  LoadImage((undefined4 *)&local_18,plVar1 + 3);
-  if (plVar2 != (long *)0x0) {
-    local_18 = (undefined2)clut_x;
-    local_16 = (undefined2)clut_y;
-    local_14 = 0x10;
-    local_12 = 1;
+  local_18.x = (short)x_pos;
+  local_18.y = (short)y_pos;
+  local_18.w = *(short *)(plVar1 + 2);
+  local_18.h = *(short *)((int)plVar1 + 10);
+  LoadImage(&local_18,(u_long *)(plVar1 + 3));
+  if (p != (u_long *)0x0) {
+    local_18.x = (short)clut_x;
+    local_18.y = (short)clut_y;
+    local_18.w = 0x10;
+    local_18.h = 1;
     DrawSync(0);
-    LoadImage((undefined4 *)&local_18,plVar2);
+    LoadImage(&local_18,p);
   }
   return;
 }
@@ -1231,34 +1241,33 @@ void LOAD_LoadTIM(long *addr,long x_pos,long y_pos,long clut_x,long clut_y)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_LoadTIM2(long *addr /*$a1*/, long x_pos /*$a1*/, long y_pos /*$a2*/, long width /*$a3*/, long height /*stack 16*/)
- // line 1108, offset 0x80038ba4
+ // line 1111, offset 0x80038064
 	/* begin block 1 */
-		// Start line: 1109
-		// Start offset: 0x80038BA4
+		// Start line: 1112
+		// Start offset: 0x80038064
 		// Variables:
 	// 		struct RECT rect; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x80038BA4
-	// End Line: 1109
+	// End offset: 0x80038064
+	// End Line: 1112
 
 	/* begin block 2 */
-		// Start line: 2213
+		// Start line: 2243
 	/* end block 2 */
-	// End Line: 2214
+	// End Line: 2244
+
+/* File: C:\kain2\game\LOAD3D.C */
 
 void LOAD_LoadTIM2(long *addr,long x_pos,long y_pos,long width,long height)
 
 {
-  undefined2 local_10;
-  undefined2 local_e;
-  undefined2 local_c;
-  undefined2 local_a;
+  RECT local_10;
   
-  local_10 = (undefined2)x_pos;
-  local_e = (undefined2)y_pos;
-  local_c = *(undefined2 *)(addr + 4);
-  local_a = *(undefined2 *)((int)addr + 0x12);
-  LoadImage((undefined4 *)&local_10,addr + 5);
+  local_10.x = (short)x_pos;
+  local_10.y = (short)y_pos;
+  local_10.w = *(short *)(addr + 4);
+  local_10.h = *(short *)((int)addr + 0x12);
+  LoadImage(&local_10,(u_long *)(addr + 5));
   DrawSync(0);
   return;
 }
@@ -1268,23 +1277,25 @@ void LOAD_LoadTIM2(long *addr,long x_pos,long y_pos,long width,long height)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ LOAD_RelocBinaryData(long *data /*$s0*/, long fileSize /*$s1*/)
- // line 1146, offset 0x80038bec
+ // line 1149, offset 0x800380ac
 	/* begin block 1 */
-		// Start line: 1147
-		// Start offset: 0x80038BEC
+		// Start line: 1150
+		// Start offset: 0x800380AC
 		// Variables:
 	// 		long *lastMoveDest; // $v1
 	// 		long tableSize; // $s3
 	// 		struct RedirectList redirectListX; // stack offset -32
 	// 		struct RedirectList *redirectList; // $a0
 	/* end block 1 */
-	// End offset: 0x80038C84
-	// End Line: 1167
+	// End offset: 0x80038144
+	// End Line: 1170
 
 	/* begin block 2 */
-		// Start line: 2271
+		// Start line: 2277
 	/* end block 2 */
-	// End Line: 2272
+	// End Line: 2278
+
+/* File: C:\kain2\game\LOAD3D.C */
 
 long LOAD_RelocBinaryData(long *data,long fileSize)
 
@@ -1319,18 +1330,18 @@ long LOAD_RelocBinaryData(long *data,long fileSize)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_CleanUpBuffers()
- // line 1239, offset 0x80038ca4
+ // line 1242, offset 0x80038164
 	/* begin block 1 */
-		// Start line: 2475
+		// Start line: 2481
 	/* end block 1 */
-	// End Line: 2476
+	// End Line: 2482
 
 	/* begin block 2 */
-		// Start line: 2399
+		// Start line: 2429
 	/* end block 2 */
-	// End Line: 2400
+	// End Line: 2430
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\LOAD3D.C */
 
 void LOAD_CleanUpBuffers(void)
 
@@ -1351,13 +1362,13 @@ void LOAD_CleanUpBuffers(void)
 // decompiled code
 // original method signature: 
 // void * /*$ra*/ LOAD_InitBuffers()
- // line 1253, offset 0x80038cec
+ // line 1256, offset 0x800381ac
 	/* begin block 1 */
-		// Start line: 2427
+		// Start line: 2457
 	/* end block 1 */
-	// End Line: 2428
+	// End Line: 2458
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\LOAD3D.C */
 
 void * LOAD_InitBuffers(void)
 
@@ -1372,32 +1383,66 @@ void * LOAD_InitBuffers(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_InitCdStreamMode()
- // line 1263, offset 0x80038d28
+ // line 1266, offset 0x800381e8
 	/* begin block 1 */
-		// Start line: 1264
-		// Start offset: 0x80038D28
+		// Start line: 1267
+		// Start offset: 0x800381E8
 		// Variables:
 	// 		unsigned char cdMode; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x80038D28
-	// End Line: 1264
+	// End offset: 0x800381E8
+	// End Line: 1267
 
 	/* begin block 2 */
-		// Start line: 2451
+		// Start line: 2481
 	/* end block 2 */
-	// End Line: 2452
+	// End Line: 2482
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\LOAD3D.C */
 
 void LOAD_InitCdStreamMode(void)
 
 {
-  byte local_10 [8];
+  u_char local_10 [8];
   
-  local_10[0] = 0xa0;
+  local_10[0] = -0x60;
   CdReadyCallback(LOAD_CdReadReady);
   CdSyncCallback(LOAD_CdSeekCallback);
-  CdControl(0xe,local_10,(undefined *)0x0);
+  CdControl('\x0e',local_10,(u_char *)0x0);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ LOAD_DumpCurrentDir()
+ // line 1276, offset 0x80038230
+	/* begin block 1 */
+		// Start line: 2504
+	/* end block 1 */
+	// End Line: 2505
+
+	/* begin block 2 */
+		// Start line: 2505
+	/* end block 2 */
+	// End Line: 2506
+
+/* File: C:\kain2\game\LOAD3D.C */
+
+void LOAD_DumpCurrentDir(void)
+
+{
+  if (loadStatus.bigFile.currentDir != (_BigFileDir *)0x0) {
+    MEMPACK_Free((char *)loadStatus.bigFile.currentDir);
+    loadStatus.bigFile.currentDir = (_BigFileDir *)0x0;
+    loadStatus.bigFile.currentDirID = 0;
+  }
+  if (loadStatus.bigFile.cachedDir != (_BigFileDir *)0x0) {
+    MEMPACK_Free((char *)loadStatus.bigFile.cachedDir);
+    loadStatus.bigFile.cachedDir = (_BigFileDir *)0x0;
+    loadStatus.bigFile.cachedDirID = 0;
+  }
   return;
 }
 
@@ -1406,36 +1451,38 @@ void LOAD_InitCdStreamMode(void)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ LOAD_ChangeDirectoryByID(int id /*$s1*/)
- // line 1273, offset 0x80038d70
+ // line 1292, offset 0x80038280
 	/* begin block 1 */
-		// Start line: 1274
-		// Start offset: 0x80038D70
+		// Start line: 1293
+		// Start offset: 0x80038280
 
 		/* begin block 1.1 */
-			// Start line: 1278
-			// Start offset: 0x80038D88
+			// Start line: 1297
+			// Start offset: 0x80038298
 			// Variables:
 		// 		int i; // $v1
 
 			/* begin block 1.1.1 */
-				// Start line: 1285
-				// Start offset: 0x80038DA8
+				// Start line: 1304
+				// Start offset: 0x800382B8
 				// Variables:
 			// 		struct _BigFileDir *dir; // $a0
 			/* end block 1.1.1 */
-			// End offset: 0x80038DC8
-			// End Line: 1291
+			// End offset: 0x800382D8
+			// End Line: 1310
 		/* end block 1.1 */
-		// End offset: 0x80038E54
-		// End Line: 1309
+		// End offset: 0x80038370
+		// End Line: 1329
 	/* end block 1 */
-	// End offset: 0x80038E58
-	// End Line: 1312
+	// End offset: 0x80038374
+	// End Line: 1332
 
 	/* begin block 2 */
-		// Start line: 2474
+		// Start line: 2537
 	/* end block 2 */
-	// End Line: 2475
+	// End Line: 2538
+
+/* File: C:\kain2\game\LOAD3D.C */
 
 int LOAD_ChangeDirectoryByID(int id)
 
@@ -1469,7 +1516,10 @@ int LOAD_ChangeDirectoryByID(int id)
           loadStatus.currentDirLoading = 1;
           loadStatus.bigFile.cachedDirID = loadStatus.bigFile.currentDirID;
           loadStatus.bigFile.cachedDir = loadStatus.bigFile.currentDir;
-          loadStatus.bigFile.currentDir = LOAD_ReadDirectory(loadStatus.bigFile.subDirList + iVar3);
+          loadStatus.bigFile.currentDir =
+               (_BigFileDir *)
+               LOAD_ReadDirectory((_BigFileDirEntry *)(loadStatus.bigFile.subDirList + iVar3));
+          MEMPACK_SetMemoryBeingStreamed((char *)loadStatus.bigFile.currentDir);
           loadStatus.bigFile.currentDirID = id;
           return 1;
         }
@@ -1485,16 +1535,18 @@ int LOAD_ChangeDirectoryByID(int id)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_SetSearchDirectory(long id /*$a0*/)
- // line 1319, offset 0x80038e6c
+ // line 1339, offset 0x80038388
 	/* begin block 1 */
-		// Start line: 2634
+		// Start line: 2674
 	/* end block 1 */
-	// End Line: 2635
+	// End Line: 2675
 
 	/* begin block 2 */
-		// Start line: 2579
+		// Start line: 2646
 	/* end block 2 */
-	// End Line: 2580
+	// End Line: 2647
+
+/* File: C:\kain2\game\LOAD3D.C */
 
 void LOAD_SetSearchDirectory(long id)
 
@@ -1508,18 +1560,18 @@ void LOAD_SetSearchDirectory(long id)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ LOAD_GetSearchDirectory()
- // line 1324, offset 0x80038e78
+ // line 1344, offset 0x80038394
 	/* begin block 1 */
-		// Start line: 2588
+		// Start line: 2655
 	/* end block 1 */
-	// End Line: 2589
+	// End Line: 2656
 
 	/* begin block 2 */
-		// Start line: 2589
+		// Start line: 2656
 	/* end block 2 */
-	// End Line: 2590
+	// End Line: 2657
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\LOAD3D.C */
 
 long LOAD_GetSearchDirectory(void)
 
@@ -1532,18 +1584,18 @@ long LOAD_GetSearchDirectory(void)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ LOAD_ChangeDirectoryFlag()
- // line 1329, offset 0x80038e84
+ // line 1349, offset 0x800383a0
 	/* begin block 1 */
-		// Start line: 2598
+		// Start line: 2665
 	/* end block 1 */
-	// End Line: 2599
+	// End Line: 2666
 
 	/* begin block 2 */
-		// Start line: 2599
+		// Start line: 2666
 	/* end block 2 */
-	// End Line: 2600
+	// End Line: 2667
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\LOAD3D.C */
 
 int LOAD_ChangeDirectoryFlag(void)
 
@@ -1556,25 +1608,27 @@ int LOAD_ChangeDirectoryFlag(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_UpdateBigFilePointers(struct _BigFileDir *oldDir /*$a0*/, struct _BigFileDir *newDir /*$a1*/)
- // line 1334, offset 0x80038e90
+ // line 1354, offset 0x800383ac
 	/* begin block 1 */
-		// Start line: 2608
+		// Start line: 2675
 	/* end block 1 */
-	// End Line: 2609
+	// End Line: 2676
 
 	/* begin block 2 */
-		// Start line: 2609
+		// Start line: 2676
 	/* end block 2 */
-	// End Line: 2610
+	// End Line: 2677
+
+/* File: C:\kain2\game\LOAD3D.C */
 
 void LOAD_UpdateBigFilePointers(_BigFileDir *oldDir,_BigFileDir *newDir)
 
 {
-  if (loadStatus.bigFile.currentDir == oldDir) {
-    loadStatus.bigFile.currentDir = newDir;
+  if (loadStatus.bigFile.currentDir == (_BigFileDir *)oldDir) {
+    loadStatus.bigFile.currentDir = (_BigFileDir *)newDir;
   }
-  if (loadStatus.bigFile.cachedDir == oldDir) {
-    loadStatus.bigFile.cachedDir = newDir;
+  if (loadStatus.bigFile.cachedDir == (_BigFileDir *)oldDir) {
+    loadStatus.bigFile.cachedDir = (_BigFileDir *)newDir;
   }
   return;
 }
@@ -1584,18 +1638,18 @@ void LOAD_UpdateBigFilePointers(_BigFileDir *oldDir,_BigFileDir *newDir)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ LOAD_IsFileLoading()
- // line 1349, offset 0x80038ec0
+ // line 1369, offset 0x800383dc
 	/* begin block 1 */
-		// Start line: 2638
+		// Start line: 2705
 	/* end block 1 */
-	// End Line: 2639
+	// End Line: 2706
 
 	/* begin block 2 */
-		// Start line: 2644
+		// Start line: 2711
 	/* end block 2 */
-	// End Line: 2645
+	// End Line: 2712
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\LOAD3D.C */
 
 int LOAD_IsFileLoading(void)
 
@@ -1608,18 +1662,18 @@ int LOAD_IsFileLoading(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_StopLoad()
- // line 1391, offset 0x80038ecc
+ // line 1411, offset 0x800383e8
 	/* begin block 1 */
-		// Start line: 2775
+		// Start line: 2815
 	/* end block 1 */
-	// End Line: 2776
+	// End Line: 2816
 
 	/* begin block 2 */
-		// Start line: 2690
+		// Start line: 2757
 	/* end block 2 */
-	// End Line: 2691
+	// End Line: 2758
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\LOAD3D.C */
 
 void LOAD_StopLoad(void)
 

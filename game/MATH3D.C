@@ -5,16 +5,16 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MATH3D_Sort3VectorCoords(long *a /*$a0*/, long *b /*$a1*/, long *c /*$a2*/)
- // line 220, offset 0x8003a26c
+ // line 220, offset 0x800399c8
 	/* begin block 1 */
 		// Start line: 222
-		// Start offset: 0x8003A26C
+		// Start offset: 0x800399C8
 		// Variables:
 	// 		long a1; // $t0
 	// 		long b1; // $v1
 	// 		long c1; // $a3
 	/* end block 1 */
-	// End offset: 0x8003A2E8
+	// End offset: 0x80039A44
 	// End Line: 256
 
 	/* begin block 2 */
@@ -31,6 +31,8 @@
 		// Start line: 372
 	/* end block 4 */
 	// End Line: 373
+
+/* File: C:\kain2\game\MATH3D.C */
 
 void MATH3D_Sort3VectorCoords(long *a,long *b,long *c)
 
@@ -78,14 +80,14 @@ void MATH3D_Sort3VectorCoords(long *a,long *b,long *c)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ MATH3D_LengthXYZ(long x /*$a0*/, long y /*$a1*/, long z /*$a2*/)
- // line 258, offset 0x8003a2f0
+ // line 258, offset 0x80039a4c
 	/* begin block 1 */
 		// Start line: 260
-		// Start offset: 0x8003A2F0
+		// Start offset: 0x80039A4C
 		// Variables:
 	// 		long t; // $v0
 	/* end block 1 */
-	// End offset: 0x8003A3B8
+	// End offset: 0x80039B14
 	// End Line: 309
 
 	/* begin block 2 */
@@ -102,6 +104,8 @@ void MATH3D_Sort3VectorCoords(long *a,long *b,long *c)
 		// Start line: 449
 	/* end block 4 */
 	// End Line: 450
+
+/* File: C:\kain2\game\MATH3D.C */
 
 long MATH3D_LengthXYZ(long x,long y,long z)
 
@@ -144,7 +148,7 @@ long MATH3D_LengthXYZ(long x,long y,long z)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ MATH3D_LengthXY(long x /*$a0*/, long y /*$a1*/)
- // line 312, offset 0x8003a3c0
+ // line 312, offset 0x80039b1c
 	/* begin block 1 */
 		// Start line: 555
 	/* end block 1 */
@@ -154,6 +158,8 @@ long MATH3D_LengthXYZ(long x,long y,long z)
 		// Start line: 556
 	/* end block 2 */
 	// End Line: 557
+
+/* File: C:\kain2\game\MATH3D.C */
 
 long MATH3D_LengthXY(long x,long y)
 
@@ -184,20 +190,22 @@ long MATH3D_LengthXY(long x,long y)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MATH3D_Normalize(struct _Normal *normal /*$s0*/)
- // line 328, offset 0x8003a420
+ // line 328, offset 0x80039b7c
 	/* begin block 1 */
 		// Start line: 329
-		// Start offset: 0x8003A420
+		// Start offset: 0x80039B7C
 		// Variables:
 	// 		long length; // $a1
 	/* end block 1 */
-	// End offset: 0x8003A4A0
+	// End offset: 0x80039BFC
 	// End Line: 345
 
 	/* begin block 2 */
 		// Start line: 653
 	/* end block 2 */
 	// End Line: 654
+
+/* File: C:\kain2\game\MATH3D.C */
 
 void MATH3D_Normalize(_Normal *normal)
 
@@ -218,15 +226,15 @@ void MATH3D_Normalize(_Normal *normal)
 // decompiled code
 // original method signature: 
 // short /*$ra*/ MATH3D_FastAtan2(long y /*$a0*/, long x /*$a1*/)
- // line 349, offset 0x8003a4b0
+ // line 349, offset 0x80039c0c
 	/* begin block 1 */
 		// Start line: 351
-		// Start offset: 0x8003A4B0
+		// Start offset: 0x80039C0C
 		// Variables:
 	// 		long ax; // $a3
 	// 		long ay; // $a2
 	/* end block 1 */
-	// End offset: 0x8003A5C4
+	// End offset: 0x80039D20
 	// End Line: 401
 
 	/* begin block 2 */
@@ -243,6 +251,8 @@ void MATH3D_Normalize(_Normal *normal)
 		// Start line: 623
 	/* end block 4 */
 	// End Line: 624
+
+/* File: C:\kain2\game\MATH3D.C */
 
 short MATH3D_FastAtan2(long y,long x)
 
@@ -306,14 +316,14 @@ short MATH3D_FastAtan2(long y,long x)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ MATH3D_FastSqrt(long square /*$a0*/)
- // line 456, offset 0x8003a5cc
+ // line 456, offset 0x80039d28
 	/* begin block 1 */
 		// Start line: 458
-		// Start offset: 0x8003A5CC
+		// Start offset: 0x80039D28
 
 		/* begin block 1.1 */
 			// Start line: 458
-			// Start offset: 0x8003A5D4
+			// Start offset: 0x80039D30
 			// Variables:
 		// 		unsigned long result; // $t0
 		// 		long remainder; // $v0
@@ -322,10 +332,10 @@ short MATH3D_FastAtan2(long y,long x)
 		// 		long mask_squared; // $a3
 		// 		long result_shift; // $v1
 		/* end block 1.1 */
-		// End offset: 0x8003A6A4
+		// End offset: 0x80039E00
 		// End Line: 504
 	/* end block 1 */
-	// End offset: 0x8003A6A4
+	// End offset: 0x80039E00
 	// End Line: 506
 
 	/* begin block 2 */
@@ -337,6 +347,8 @@ short MATH3D_FastAtan2(long y,long x)
 		// Start line: 836
 	/* end block 3 */
 	// End Line: 837
+
+/* File: C:\kain2\game\MATH3D.C */
 
 long MATH3D_FastSqrt(long square)
 
@@ -400,14 +412,14 @@ long MATH3D_FastSqrt(long square)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ MATH3D_FastSqrt0(long square /*$a0*/)
- // line 511, offset 0x8003a6ac
+ // line 511, offset 0x80039e08
 	/* begin block 1 */
 		// Start line: 513
-		// Start offset: 0x8003A6AC
+		// Start offset: 0x80039E08
 
 		/* begin block 1.1 */
 			// Start line: 513
-			// Start offset: 0x8003A6B4
+			// Start offset: 0x80039E10
 			// Variables:
 		// 		unsigned long result; // $t0
 		// 		long remainder; // $v0
@@ -416,10 +428,10 @@ long MATH3D_FastSqrt(long square)
 		// 		long mask_squared; // $a3
 		// 		long result_shift; // $v1
 		/* end block 1.1 */
-		// End offset: 0x8003A734
+		// End offset: 0x80039E90
 		// End Line: 546
 	/* end block 1 */
-	// End offset: 0x8003A734
+	// End offset: 0x80039E90
 	// End Line: 548
 
 	/* begin block 2 */
@@ -431,6 +443,8 @@ long MATH3D_FastSqrt(long square)
 		// Start line: 946
 	/* end block 3 */
 	// End Line: 947
+
+/* File: C:\kain2\game\MATH3D.C */
 
 long MATH3D_FastSqrt0(long square)
 
@@ -479,18 +493,20 @@ long MATH3D_FastSqrt0(long square)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ MATH3D_DistanceBetweenPositions(struct _Position *pos1 /*$v0*/, struct _Position *pos2 /*$a1*/)
- // line 607, offset 0x8003a73c
+ // line 607, offset 0x80039e98
 	/* begin block 1 */
 		// Start line: 608
-		// Start offset: 0x8003A73C
+		// Start offset: 0x80039E98
 	/* end block 1 */
-	// End offset: 0x8003A73C
+	// End offset: 0x80039E98
 	// End Line: 608
 
 	/* begin block 2 */
 		// Start line: 1208
 	/* end block 2 */
 	// End Line: 1209
+
+/* File: C:\kain2\game\MATH3D.C */
 
 long MATH3D_DistanceBetweenPositions(_Position *pos1,_Position *pos2)
 
@@ -509,14 +525,14 @@ long MATH3D_DistanceBetweenPositions(_Position *pos1,_Position *pos2)
 // decompiled code
 // original method signature: 
 // short /*$ra*/ MATH3D_AngleBetweenVectors(struct _SVector *vector1 /*$a0*/, struct _SVector *vector2 /*$a1*/)
- // line 616, offset 0x8003a788
+ // line 616, offset 0x80039ee4
 	/* begin block 1 */
 		// Start line: 617
-		// Start offset: 0x8003A788
+		// Start offset: 0x80039EE4
 		// Variables:
 	// 		long projection_length; // $s0
 	/* end block 1 */
-	// End offset: 0x8003A864
+	// End offset: 0x80039FC0
 	// End Line: 636
 
 	/* begin block 2 */
@@ -524,35 +540,36 @@ long MATH3D_DistanceBetweenPositions(_Position *pos1,_Position *pos2)
 	/* end block 2 */
 	// End Line: 1099
 
+/* File: C:\kain2\game\MATH3D.C */
+
 short MATH3D_AngleBetweenVectors(_SVector *vector1,_SVector *vector2)
 
 {
-  uint uVar1;
-  uint uVar2;
-  int iVar3;
+  long y;
+  long x;
+  int iVar1;
   
-  iVar3 = (int)vector1->x * (int)vector2->x;
+  iVar1 = (int)vector1->x * (int)vector2->x;
   if ((int)vector1->x == (int)vector2->x) {
     if ((vector1->y == vector2->y) && (vector1->z == vector2->z)) {
       return 0;
     }
-    iVar3 = (int)vector1->x * (int)vector2->x;
+    iVar1 = (int)vector1->x * (int)vector2->x;
   }
-  uVar2 = iVar3 + (int)vector1->y * (int)vector2->y + (int)vector1->z * (int)vector2->z + 0x800 >>
-          0xc;
-  if ((int)uVar2 < 0x1001) {
-    iVar3 = uVar2 * uVar2;
-    if (-0x1001 < (int)uVar2) goto LAB_8003a840;
-    uVar2 = 0xfffff000;
+  x = iVar1 + (int)vector1->y * (int)vector2->y + (int)vector1->z * (int)vector2->z + 0x800 >> 0xc;
+  if (x < 0x1001) {
+    iVar1 = x * x;
+    if (-0x1001 < x) goto LAB_80039f9c;
+    x = -0x1000;
   }
   else {
-    uVar2 = 0x1000;
+    x = 0x1000;
   }
-  iVar3 = uVar2 * uVar2;
-LAB_8003a840:
-  uVar1 = MATH3D_FastSqrt0(0x1000000 - iVar3);
-  iVar3 = ratan2(uVar1,uVar2);
-  return (short)iVar3;
+  iVar1 = x * x;
+LAB_80039f9c:
+  y = MATH3D_FastSqrt0(0x1000000 - iVar1);
+  x = ratan2(y,x);
+  return (short)x;
 }
 
 
@@ -560,17 +577,17 @@ LAB_8003a840:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MATH3D_RotMatAboutVec(struct _SVector *vec /*$s1*/, struct MATRIX *mat /*$s2*/, short angle /*$a2*/)
- // line 638, offset 0x8003a874
+ // line 638, offset 0x80039fd0
 	/* begin block 1 */
 		// Start line: 639
-		// Start offset: 0x8003A874
+		// Start offset: 0x80039FD0
 		// Variables:
 	// 		long length; // $s0
 	// 		struct SVECTOR rot_angs; // stack offset -96
 	// 		struct MATRIX mat1; // stack offset -88
 	// 		struct MATRIX mat2; // stack offset -56
 	/* end block 1 */
-	// End offset: 0x8003A928
+	// End offset: 0x8003A084
 	// End Line: 657
 
 	/* begin block 2 */
@@ -578,31 +595,34 @@ LAB_8003a840:
 	/* end block 2 */
 	// End Line: 1143
 
-void MATH3D_RotMatAboutVec(_SVector *vec,MATRIX *mat,short angle)
+/* File: C:\kain2\game\MATH3D.C */
+
+void MATH3D_RotMatAboutVec(_SVector *vec,undefined mat,short angle)
 
 {
   ulong uVar1;
-  uint uVar2;
-  int iVar3;
-  short local_60;
-  undefined2 local_5e;
-  undefined2 local_5c;
-  uint auStack88 [8];
-  undefined4 auStack56 [8];
+  long x;
+  long lVar2;
+  undefined3 in_register_00000015;
+  MATRIX *m1;
+  SVECTOR local_60;
+  MATRIX MStack88;
+  MATRIX MStack56;
   
+  m1 = (MATRIX *)CONCAT31(in_register_00000015,mat);
   if ((int)angle != 0) {
     uVar1 = MATH3D_SquareLength(0,(int)vec->y,(int)vec->z);
-    uVar2 = MATH3D_FastSqrt0(uVar1 + 0x800);
-    iVar3 = ratan2((int)vec->y,(int)vec->z);
-    local_60 = -(short)iVar3;
-    iVar3 = ratan2((int)vec->x,uVar2);
-    local_5e = (undefined2)iVar3;
-    local_5c = 0;
-    RotMatrix(&local_60,auStack88);
-    TransposeMatrix(auStack88,auStack56);
-    MulMatrix2(auStack56,(uint *)mat);
-    RotMatrixZ((int)angle,(short *)mat);
-    MulMatrix2(auStack88,(uint *)mat);
+    x = MATH3D_FastSqrt0(uVar1 + 0x800);
+    lVar2 = ratan2((int)vec->y,(int)vec->z);
+    local_60.vx = -(short)lVar2;
+    x = ratan2((int)vec->x,x);
+    local_60.vy = (short)x;
+    local_60.vz = 0;
+    RotMatrix(&local_60,&MStack88);
+    TransposeMatrix(&MStack88,&MStack56);
+    MulMatrix2(&MStack56,m1);
+    RotMatrixZ((int)angle,m1);
+    MulMatrix2(&MStack88,m1);
   }
   return;
 }
@@ -612,7 +632,7 @@ void MATH3D_RotMatAboutVec(_SVector *vec,MATRIX *mat,short angle)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MATH3D_SetUnityMatrix(struct MATRIX *mat /*$a0*/)
- // line 659, offset 0x8003a944
+ // line 659, offset 0x8003a0a0
 	/* begin block 1 */
 		// Start line: 1198
 	/* end block 1 */
@@ -623,14 +643,20 @@ void MATH3D_RotMatAboutVec(_SVector *vec,MATRIX *mat,short angle)
 	/* end block 2 */
 	// End Line: 1200
 
-void MATH3D_SetUnityMatrix(MATRIX *mat)
+/* File: C:\kain2\game\MATH3D.C */
+
+void MATH3D_SetUnityMatrix(undefined mat)
 
 {
-  *(undefined4 *)mat->m = 0x1000;
-  *(undefined4 *)(mat->m + 2) = 0;
-  *(undefined4 *)(mat->m + 4) = 0x1000;
-  *(undefined4 *)(mat->m + 6) = 0;
-  mat->m[8] = 0x1000;
+  undefined3 in_register_00000011;
+  undefined4 *puVar1;
+  
+  puVar1 = (undefined4 *)CONCAT31(in_register_00000011,mat);
+  *puVar1 = 0x1000;
+  puVar1[1] = 0;
+  puVar1[2] = 0x1000;
+  puVar1[3] = 0;
+  *(undefined2 *)(puVar1 + 4) = 0x1000;
   return;
 }
 
@@ -639,21 +665,23 @@ void MATH3D_SetUnityMatrix(MATRIX *mat)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ AngleMoveToward(short *current_ptr /*$s3*/, short destination /*$a1*/, short step /*$a2*/)
- // line 675, offset 0x8003a960
+ // line 675, offset 0x8003a0bc
 	/* begin block 1 */
 		// Start line: 676
-		// Start offset: 0x8003A960
+		// Start offset: 0x8003A0BC
 		// Variables:
 	// 		long diff; // $a0
 	// 		short current; // $s0
 	/* end block 1 */
-	// End offset: 0x8003A9F0
+	// End offset: 0x8003A14C
 	// End Line: 695
 
 	/* begin block 2 */
 		// Start line: 1230
 	/* end block 2 */
 	// End Line: 1231
+
+/* File: C:\kain2\game\MATH3D.C */
 
 void AngleMoveToward(short *current_ptr,short destination,short step)
 
@@ -667,7 +695,7 @@ void AngleMoveToward(short *current_ptr,short destination,short step)
   sVar1 = AngleDiff(current,destination);
   iVar3 = (int)sVar1;
   if (iVar3 == 0) {
-LAB_8003a9c4:
+LAB_8003a120:
     *current_ptr = destination;
     return;
   }
@@ -675,13 +703,13 @@ LAB_8003a9c4:
   if (iVar3 < 0) {
     iVar2 = -iVar3;
   }
-  if (iVar2 < step) goto LAB_8003a9c4;
+  if (iVar2 < step) goto LAB_8003a120;
   if (iVar3 < 1) {
-    if (-1 < iVar3) goto LAB_8003a9ec;
+    if (-1 < iVar3) goto LAB_8003a148;
     step = -step;
   }
   current = current + step;
-LAB_8003a9ec:
+LAB_8003a148:
   *current_ptr = current & 0xfff;
   return;
 }
@@ -691,12 +719,12 @@ LAB_8003a9ec:
 // decompiled code
 // original method signature: 
 // short /*$ra*/ AngleDiff(short current /*$a0*/, short destination /*$a1*/)
- // line 700, offset 0x8003aa0c
+ // line 700, offset 0x8003a168
 	/* begin block 1 */
 		// Start line: 702
-		// Start offset: 0x8003AA0C
+		// Start offset: 0x8003A168
 	/* end block 1 */
-	// End offset: 0x8003AA24
+	// End offset: 0x8003A180
 	// End Line: 706
 
 	/* begin block 2 */
@@ -713,6 +741,8 @@ LAB_8003a9ec:
 		// Start line: 1287
 	/* end block 4 */
 	// End Line: 1288
+
+/* File: C:\kain2\game\MATH3D.C */
 
 short AngleDiff(short current,short destination)
 
@@ -731,12 +761,12 @@ short AngleDiff(short current,short destination)
 // decompiled code
 // original method signature: 
 // short /*$ra*/ MATH3D_AngleFromPosToPos(struct _Position *from /*$a0*/, struct _Position *to /*$a1*/)
- // line 712, offset 0x8003aa30
+ // line 712, offset 0x8003a18c
 	/* begin block 1 */
 		// Start line: 713
-		// Start offset: 0x8003AA30
+		// Start offset: 0x8003A18C
 	/* end block 1 */
-	// End offset: 0x8003AA30
+	// End offset: 0x8003A18C
 	// End Line: 713
 
 	/* begin block 2 */
@@ -744,13 +774,15 @@ short AngleDiff(short current,short destination)
 	/* end block 2 */
 	// End Line: 1309
 
+/* File: C:\kain2\game\MATH3D.C */
+
 short MATH3D_AngleFromPosToPos(_Position *from,_Position *to)
 
 {
-  int iVar1;
+  long lVar1;
   
-  iVar1 = ratan2((int)from->y - (int)to->y,(int)from->x - (int)to->x);
-  return (short)((short)iVar1 + 0xc00U & 0xfff);
+  lVar1 = ratan2((int)from->y - (int)to->y,(int)from->x - (int)to->x);
+  return (short)((short)lVar1 + 0xc00U & 0xfff);
 }
 
 
@@ -758,15 +790,15 @@ short MATH3D_AngleFromPosToPos(_Position *from,_Position *to)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MATH3D_ZYXtoXYZ(struct _Rotation *rot /*$s0*/)
- // line 723, offset 0x8003aa68
+ // line 723, offset 0x8003a1c4
 	/* begin block 1 */
 		// Start line: 724
-		// Start offset: 0x8003AA68
+		// Start offset: 0x8003A1C4
 		// Variables:
 	// 		struct MATRIX tempMat; // stack offset -48
 	// 		struct _G2EulerAngles_Type ea; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x8003AA68
+	// End offset: 0x8003A1C4
 	// End Line: 724
 
 	/* begin block 2 */
@@ -774,13 +806,15 @@ short MATH3D_AngleFromPosToPos(_Position *from,_Position *to)
 	/* end block 2 */
 	// End Line: 1332
 
+/* File: C:\kain2\game\MATH3D.C */
+
 void MATH3D_ZYXtoXYZ(_Rotation *rot)
 
 {
   _G2Matrix_Type _Stack48;
   _G2EulerAngles_Type local_10;
   
-  RotMatrixZYX((short *)rot,(uint *)&_Stack48);
+  RotMatrixZYX((SVECTOR *)rot,(MATRIX *)&_Stack48);
   G2EulerAngles_FromMatrix(&local_10,&_Stack48,0x15);
   rot->x = local_10.x;
   rot->y = local_10.y;
@@ -793,18 +827,20 @@ void MATH3D_ZYXtoXYZ(_Rotation *rot)
 // decompiled code
 // original method signature: 
 // short /*$ra*/ MATH3D_ElevationFromPosToPos(struct _Position *from /*$s1*/, struct _Position *to /*$s0*/)
- // line 738, offset 0x8003aac4
+ // line 738, offset 0x8003a220
 	/* begin block 1 */
 		// Start line: 739
-		// Start offset: 0x8003AAC4
+		// Start offset: 0x8003A220
 	/* end block 1 */
-	// End offset: 0x8003AAC4
+	// End offset: 0x8003A220
 	// End Line: 739
 
 	/* begin block 2 */
 		// Start line: 1361
 	/* end block 2 */
 	// End Line: 1362
+
+/* File: C:\kain2\game\MATH3D.C */
 
 short MATH3D_ElevationFromPosToPos(_Position *from,_Position *to)
 
@@ -816,8 +852,8 @@ short MATH3D_ElevationFromPosToPos(_Position *from,_Position *to)
   iVar1 = (int)from->x - (int)to->x;
   iVar2 = (int)from->y - (int)to->y;
   lVar3 = MATH3D_FastSqrt0(iVar1 * iVar1 + iVar2 * iVar2);
-  iVar1 = ratan2((int)to->z - (int)from->z,(int)(short)lVar3);
-  return (short)(-(short)iVar1 & 0xfff);
+  lVar3 = ratan2((int)to->z - (int)from->z,(int)(short)lVar3);
+  return (short)(-(short)lVar3 & 0xfff);
 }
 
 
@@ -825,11 +861,13 @@ short MATH3D_ElevationFromPosToPos(_Position *from,_Position *to)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MATH3D_RotationFromPosToPos(struct _Position *from /*$s0*/, struct _Position *to /*$s2*/, struct _Rotation *rot /*$s1*/)
- // line 754, offset 0x8003ab48
+ // line 754, offset 0x8003a2a4
 	/* begin block 1 */
 		// Start line: 1394
 	/* end block 1 */
 	// End Line: 1395
+
+/* File: C:\kain2\game\MATH3D.C */
 
 void MATH3D_RotationFromPosToPos(_Position *from,_Position *to,_Rotation *rot)
 
@@ -849,20 +887,22 @@ void MATH3D_RotationFromPosToPos(_Position *from,_Position *to,_Rotation *rot)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MATH3D_veclen2(int ix /*$v1*/, int iy /*$a1*/)
- // line 762, offset 0x8003ab9c
+ // line 762, offset 0x8003a2f8
 	/* begin block 1 */
 		// Start line: 763
-		// Start offset: 0x8003AB9C
+		// Start offset: 0x8003A2F8
 		// Variables:
 	// 		int t; // $a0
 	/* end block 1 */
-	// End offset: 0x8003ABD0
+	// End offset: 0x8003A32C
 	// End Line: 776
 
 	/* begin block 2 */
 		// Start line: 1412
 	/* end block 2 */
 	// End Line: 1413
+
+/* File: C:\kain2\game\MATH3D.C */
 
 int MATH3D_veclen2(int ix,int iy)
 
@@ -892,10 +932,10 @@ int MATH3D_veclen2(int ix,int iy)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MATH3D_RotateAxisToVector(struct MATRIX *dest /*$s3*/, struct MATRIX *src /*$s2*/, struct _SVector *vec /*$a2*/, enum MATH3D_AXIS axis /*$a3*/)
- // line 784, offset 0x8003abfc
+ // line 784, offset 0x8003a358
 	/* begin block 1 */
 		// Start line: 785
-		// Start offset: 0x8003ABFC
+		// Start offset: 0x8003A358
 		// Variables:
 	// 		struct MATRIX xform; // stack offset -64
 	// 		struct _G2Quat_Type rot; // stack offset -32
@@ -906,7 +946,7 @@ int MATH3D_veclen2(int ix,int iy)
 	// 		int py; // $v1
 	// 		int pz; // $a1
 	/* end block 1 */
-	// End offset: 0x8003AD9C
+	// End offset: 0x8003A4F8
 	// End Line: 820
 
 	/* begin block 2 */
@@ -914,71 +954,76 @@ int MATH3D_veclen2(int ix,int iy)
 	/* end block 2 */
 	// End Line: 1457
 
-void MATH3D_RotateAxisToVector(MATRIX *dest,MATRIX *src,_SVector *vec,MATH3D_AXIS axis)
+/* File: C:\kain2\game\MATH3D.C */
+
+void MATH3D_RotateAxisToVector(undefined dest,undefined src,_SVector *vec,MATH3D_AXIS axis)
 
 {
   short *psVar1;
   int iVar2;
-  int iVar3;
+  int a;
   ulong square;
+  int iVar3;
+  undefined3 in_register_00000011;
+  undefined3 in_register_00000015;
+  MATRIX *m0;
   int iVar4;
-  int iVar5;
-  long lVar6;
-  uint uVar7;
-  ushort auStack64 [16];
+  long lVar5;
+  MATRIX MStack64;
   short local_20;
   short local_1e;
   short local_1c;
   undefined2 local_1a;
   
+  m0 = (MATRIX *)CONCAT31(in_register_00000015,src);
   if (axis < AXIS_NEG_X) {
-    psVar1 = src->m + axis;
-    iVar3 = (int)*psVar1;
-    iVar4 = (int)psVar1[3];
-    iVar5 = (int)psVar1[6];
+    psVar1 = m0->m + axis;
+    a = (int)*psVar1;
+    iVar3 = (int)psVar1[3];
+    iVar4 = (int)psVar1[6];
   }
   else {
-    psVar1 = src->m + axis + ~AXIS_Z;
-    iVar3 = -(int)*psVar1;
-    iVar4 = -(int)psVar1[3];
-    iVar5 = -(int)psVar1[6];
+    psVar1 = m0->m + axis + ~AXIS_Z;
+    a = -(int)*psVar1;
+    iVar3 = -(int)psVar1[3];
+    iVar4 = -(int)psVar1[6];
   }
-  iVar2 = iVar4 * vec->z - iVar5 * vec->y;
+  iVar2 = iVar3 * vec->z - iVar4 * vec->y;
   if (iVar2 < 0) {
     iVar2 = iVar2 + 0xfff;
   }
   local_20 = (short)(iVar2 >> 0xc);
-  iVar2 = iVar5 * vec->x - iVar3 * vec->z;
+  iVar2 = iVar4 * vec->x - a * vec->z;
   if (iVar2 < 0) {
     iVar2 = iVar2 + 0xfff;
   }
   local_1e = (short)(iVar2 >> 0xc);
-  iVar2 = iVar3 * vec->y - iVar4 * vec->x;
+  iVar2 = a * vec->y - iVar3 * vec->x;
   if (iVar2 < 0) {
     iVar2 = iVar2 + 0xfff;
   }
   local_1c = (short)(iVar2 >> 0xc);
-  iVar3 = iVar3 * vec->x + iVar4 * vec->y + iVar5 * vec->z;
-  if (iVar3 < 0) {
-    iVar3 = iVar3 + 0xfff;
+  a = a * vec->x + iVar3 * vec->y + iVar4 * vec->z;
+  if (a < 0) {
+    a = a + 0xfff;
   }
-  iVar3 = MATH3D_racos_S(iVar3 >> 0xc);
-  uVar7 = ((iVar3 << 0x10) >> 0x10) - ((iVar3 << 0x10) >> 0x1f) >> 1;
+  a = MATH3D_racos_S(a >> 0xc);
+  a = ((a << 0x10) >> 0x10) - ((a << 0x10) >> 0x1f) >> 1;
   square = MATH3D_SquareLength((int)local_20,(int)local_1e,(int)local_1c);
   if ((int)square < 1) {
-    lVar6 = 0x1000;
+    lVar5 = 0x1000;
   }
   else {
-    lVar6 = MATH3D_FastSqrt0(square);
+    lVar5 = MATH3D_FastSqrt0(square);
   }
-  iVar3 = rsin(uVar7);
-  local_20 = (short)((local_20 * iVar3) / lVar6);
-  local_1e = (short)((local_1e * iVar3) / lVar6);
-  local_1c = (short)((local_1c * iVar3) / lVar6);
-  iVar3 = rcos(uVar7);
-  local_1a = (undefined2)iVar3;
-  G2Quat_ToMatrix_S(&local_20,(short *)auStack64);
-  MulMatrix0((undefined4 *)src,auStack64,(uint *)dest);
+  iVar3 = rsin(a);
+  local_20 = (short)((local_20 * iVar3) / lVar5);
+  local_1e = (short)((local_1e * iVar3) / lVar5);
+  local_1c = (short)((local_1c * iVar3) / lVar5);
+  a = rcos(a);
+  local_1a = (undefined2)a;
+  G2Quat_ToMatrix_S(&local_20,(short *)&MStack64);
+  MulMatrix0(m0,&MStack64,(MATRIX *)CONCAT31(in_register_00000011,dest));
   return;
 }
 
@@ -987,28 +1032,30 @@ void MATH3D_RotateAxisToVector(MATRIX *dest,MATRIX *src,_SVector *vec,MATH3D_AXI
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MATH3D_ConeDetect(struct _SVector *pos /*$s2*/, int arc /*$s0*/, int elevation /*$s4*/)
- // line 859, offset 0x8003ae54
+ // line 859, offset 0x8003a5b0
 	/* begin block 1 */
 		// Start line: 860
-		// Start offset: 0x8003AE54
+		// Start offset: 0x8003A5B0
 		// Variables:
 	// 		long y; // $s1
 	// 		long x; // $s3
 
 		/* begin block 1.1 */
 			// Start line: 866
-			// Start offset: 0x8003AEB0
+			// Start offset: 0x8003A60C
 		/* end block 1.1 */
-		// End offset: 0x8003AEE8
+		// End offset: 0x8003A644
 		// End Line: 872
 	/* end block 1 */
-	// End offset: 0x8003AEEC
+	// End offset: 0x8003A648
 	// End Line: 874
 
 	/* begin block 2 */
 		// Start line: 1709
 	/* end block 2 */
 	// End Line: 1710
+
+/* File: C:\kain2\game\MATH3D.C */
 
 int MATH3D_ConeDetect(_SVector *pos,int arc,int elevation)
 
@@ -1044,12 +1091,41 @@ int MATH3D_ConeDetect(_SVector *pos,int arc,int elevation)
 
 // decompiled code
 // original method signature: 
-// unsigned long /*$ra*/ MATH3D_SquareLength(long x /*$v0*/, long y /*$a1*/, long z /*$a2*/)
- // line 989, offset 0x8003af0c
+// void /*$ra*/ MATH3D_CrossProduct(struct _SVector *t /*$a0*/, struct _SVector *r /*$a1*/, struct _SVector *s /*$a2*/)
+ // line 976, offset 0x8003a668
 	/* begin block 1 */
-		// Start line: 1973
+		// Start line: 1950
 	/* end block 1 */
-	// End Line: 1974
+	// End Line: 1951
+
+	/* begin block 2 */
+		// Start line: 1728
+	/* end block 2 */
+	// End Line: 1729
+
+/* File: C:\kain2\game\MATH3D.C */
+
+void MATH3D_CrossProduct(_SVector *t,_SVector *r,_SVector *s)
+
+{
+  t->x = (short)((int)r->y * (int)s->z - (int)r->z * (int)s->y >> 0xc);
+  t->y = -(short)((int)r->x * (int)s->z - (int)r->z * (int)s->x >> 0xc);
+  t->z = (short)((int)r->x * (int)s->y - (int)r->y * (int)s->x >> 0xc);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// unsigned long /*$ra*/ MATH3D_SquareLength(long x /*$v0*/, long y /*$a1*/, long z /*$a2*/)
+ // line 989, offset 0x8003a70c
+	/* begin block 1 */
+		// Start line: 1748
+	/* end block 1 */
+	// End Line: 1749
+
+/* File: C:\kain2\game\MATH3D.C */
 
 ulong MATH3D_SquareLength(long x,long y,long z)
 

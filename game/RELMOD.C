@@ -5,14 +5,14 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ RELMOD_InitModulePointers(int baseaddr /*$a0*/, int *relocs /*$a1*/)
- // line 11, offset 0x8007b9cc
+ // line 11, offset 0x8007c1ac
 	/* begin block 1 */
 		// Start line: 13
-		// Start offset: 0x8007B9CC
+		// Start offset: 0x8007C1AC
 		// Variables:
 	// 		unsigned int *rel_addr; // $a2
 	/* end block 1 */
-	// End offset: 0x8007BAA8
+	// End offset: 0x8007C288
 	// End Line: 38
 
 	/* begin block 2 */
@@ -29,6 +29,8 @@
 		// Start line: 25
 	/* end block 4 */
 	// End Line: 26
+
+/* File: C:\kain2\game\RELMOD.C */
 
 void RELMOD_InitModulePointers(int baseaddr,int *relocs)
 
@@ -78,15 +80,15 @@ void RELMOD_InitModulePointers(int baseaddr,int *relocs)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ RELMOD_RelocModulePointers(int baseaddr /*$a0*/, int offset /*$a1*/, int *relocs /*$a2*/)
- // line 42, offset 0x8007bab0
+ // line 42, offset 0x8007c290
 	/* begin block 1 */
 		// Start line: 44
-		// Start offset: 0x8007BAB0
+		// Start offset: 0x8007C290
 		// Variables:
 	// 		int oldbaseaddr; // $v0
 	// 		int *rel_addr; // $a3
 	/* end block 1 */
-	// End offset: 0x8007BB90
+	// End offset: 0x8007C370
 	// End Line: 69
 
 	/* begin block 2 */
@@ -103,6 +105,8 @@ void RELMOD_InitModulePointers(int baseaddr,int *relocs)
 		// Start line: 90
 	/* end block 4 */
 	// End Line: 91
+
+/* File: C:\kain2\game\RELMOD.C */
 
 void RELMOD_RelocModulePointers(int baseaddr,int offset,int *relocs)
 
@@ -128,7 +132,7 @@ void RELMOD_RelocModulePointers(int baseaddr,int offset,int *relocs)
         if (uVar3 < 2) {
           if (uVar3 == 0) {
             iVar1 = *piVar5 + offset;
-LAB_8007bb7c:
+LAB_8007c35c:
             *piVar5 = iVar1;
           }
         }
@@ -140,7 +144,7 @@ LAB_8007bb7c:
             if (uVar3 == 3) {
               iVar1 = (*piVar5 - ((uint)((baseaddr - offset) * 0x10) >> 6)) +
                       ((uint)(baseaddr << 4) >> 6);
-              goto LAB_8007bb7c;
+              goto LAB_8007c35c;
             }
           }
         }

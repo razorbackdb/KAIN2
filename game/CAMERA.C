@@ -5,10 +5,10 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_CalculateViewVolumeNormals(struct Camera *camera /*$s0*/)
- // line 227, offset 0x80014d48
+ // line 229, offset 0x80014720
 	/* begin block 1 */
-		// Start line: 228
-		// Start offset: 0x80014D48
+		// Start line: 230
+		// Start offset: 0x80014720
 		// Variables:
 	// 		short projDistance; // $v0
 	// 		struct _Normal n0; // stack offset -40
@@ -20,13 +20,15 @@
 	// 		int y1; // $v1
 	// 		int y2; // $a1
 	/* end block 1 */
-	// End offset: 0x80014D48
-	// End Line: 228
+	// End offset: 0x80014720
+	// End Line: 230
 
 	/* begin block 2 */
-		// Start line: 454
+		// Start line: 458
 	/* end block 2 */
-	// End Line: 455
+	// End Line: 459
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_CalculateViewVolumeNormals(Camera *camera)
 
@@ -81,11 +83,13 @@ void CAMERA_CalculateViewVolumeNormals(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_CalcVVClipInfo(struct Camera *camera /*$s0*/)
- // line 260, offset 0x80015084
+ // line 262, offset 0x80014a5c
 	/* begin block 1 */
-		// Start line: 547
+		// Start line: 551
 	/* end block 1 */
-	// End Line: 548
+	// End Line: 552
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_CalcVVClipInfo(Camera *camera)
 
@@ -93,20 +97,22 @@ void CAMERA_CalcVVClipInfo(Camera *camera)
   long lVar1;
   undefined4 in_zero;
   undefined4 in_at;
-  MATRIX *pMVar2;
-  MATRIX *pMVar3;
+  MATRIX *v1;
+  MATRIX *v1_00;
   
-  pMVar3 = (camera->core).vvNormalWorVecMat;
-  ApplyMatrixSV((camera->core).cwTransform2,(camera->core).viewVolumeNormal,pMVar3);
-  ApplyMatrixSV((camera->core).cwTransform2,(camera->core).viewVolumeNormal + 1,
-                (camera->core).vvNormalWorVecMat[0].m + 3);
-  ApplyMatrixSV((camera->core).cwTransform2,(camera->core).viewVolumeNormal + 2,
-                (camera->core).vvNormalWorVecMat[0].m + 6);
-  pMVar2 = (camera->core).vvNormalWorVecMat + 1;
-  ApplyMatrixSV((camera->core).cwTransform2,(camera->core).viewVolumeNormal + 3,pMVar2);
-  ApplyMatrixSV((camera->core).cwTransform2,(camera->core).viewVolumeNormal + 4,
-                (camera->core).vvNormalWorVecMat[1].m + 3);
-  setCopControlWord(2,0,*(undefined4 *)pMVar3->m);
+  v1_00 = (camera->core).vvNormalWorVecMat;
+  ApplyMatrixSV((camera->core).cwTransform2,(SVECTOR *)(camera->core).viewVolumeNormal,
+                (SVECTOR *)v1_00);
+  ApplyMatrixSV((camera->core).cwTransform2,(SVECTOR *)((camera->core).viewVolumeNormal + 1),
+                (SVECTOR *)((camera->core).vvNormalWorVecMat[0].m + 3));
+  ApplyMatrixSV((camera->core).cwTransform2,(SVECTOR *)((camera->core).viewVolumeNormal + 2),
+                (SVECTOR *)((camera->core).vvNormalWorVecMat[0].m + 6));
+  v1 = (camera->core).vvNormalWorVecMat + 1;
+  ApplyMatrixSV((camera->core).cwTransform2,(SVECTOR *)((camera->core).viewVolumeNormal + 3),
+                (SVECTOR *)v1);
+  ApplyMatrixSV((camera->core).cwTransform2,(SVECTOR *)((camera->core).viewVolumeNormal + 4),
+                (SVECTOR *)((camera->core).vvNormalWorVecMat[1].m + 3));
+  setCopControlWord(2,0,*(undefined4 *)v1_00->m);
   setCopControlWord(2,0x800,*(undefined4 *)((camera->core).vvNormalWorVecMat[0].m + 2));
   setCopControlWord(2,0x1000,*(undefined4 *)((camera->core).vvNormalWorVecMat[0].m + 4));
   setCopControlWord(2,0x1800,*(undefined4 *)((camera->core).vvNormalWorVecMat[0].m + 6));
@@ -120,7 +126,7 @@ void CAMERA_CalcVVClipInfo(Camera *camera)
   (camera->core).vvPlaneConsts[1] = lVar1;
   lVar1 = getCopReg(2,0x1b);
   (camera->core).vvPlaneConsts[2] = lVar1;
-  setCopControlWord(2,0,*(undefined4 *)pMVar2->m);
+  setCopControlWord(2,0,*(undefined4 *)v1->m);
   setCopControlWord(2,0x800,*(undefined4 *)((camera->core).vvNormalWorVecMat[1].m + 2));
   setCopControlWord(2,0x1000,*(undefined4 *)((camera->core).vvNormalWorVecMat[1].m + 4));
   setCopControlWord(2,0x1800,*(undefined4 *)((camera->core).vvNormalWorVecMat[1].m + 6));
@@ -142,11 +148,13 @@ void CAMERA_CalcVVClipInfo(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_SetViewVolume(struct Camera *camera /*$s0*/)
- // line 271, offset 0x800151a4
+ // line 273, offset 0x80014b7c
 	/* begin block 1 */
-		// Start line: 571
+		// Start line: 575
 	/* end block 1 */
-	// End Line: 572
+	// End Line: 576
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_SetViewVolume(Camera *camera)
 
@@ -161,42 +169,44 @@ void CAMERA_SetViewVolume(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_SetProjDistance(struct Camera *camera /*$s3*/, long distance /*$s0*/)
- // line 277, offset 0x800151d0
+ // line 279, offset 0x80014ba8
 	/* begin block 1 */
-		// Start line: 278
-		// Start offset: 0x800151D0
+		// Start line: 280
+		// Start offset: 0x80014BA8
 		// Variables:
 	// 		struct Level *level; // $s0
 	// 		int i; // $s2
 	/* end block 1 */
-	// End offset: 0x80015258
-	// End Line: 297
+	// End offset: 0x80014C30
+	// End Line: 299
 
 	/* begin block 2 */
-		// Start line: 583
+		// Start line: 587
 	/* end block 2 */
-	// End Line: 584
+	// End Line: 588
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_SetProjDistance(Camera *camera,long distance)
 
 {
   Level *level;
-  STracker *pSVar1;
+  undefined4 *puVar1;
   int iVar2;
   
   SetGeomScreen(distance);
   (camera->core).projDistance = distance;
   CAMERA_CalculateViewVolumeNormals(camera);
   iVar2 = 0;
-  pSVar1 = &StreamTracker;
+  puVar1 = &StreamTracker;
   do {
-    if (pSVar1->StreamList[0].used == 2) {
-      level = pSVar1->StreamList[0].level;
+    if (*(short *)(puVar1 + 1) == 2) {
+      level = (Level *)puVar1[2];
       SetFogNearFar((uint)level->fogNear,(uint)level->fogFar,(camera->core).projDistance);
       LIGHT_CalcDQPTable(level);
     }
     iVar2 = iVar2 + 1;
-    pSVar1 = (STracker *)(pSVar1->StreamList + 1);
+    puVar1 = puVar1 + 0x10;
   } while (iVar2 < 0x10);
   return;
 }
@@ -206,16 +216,16 @@ void CAMERA_SetProjDistance(Camera *camera,long distance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_CreateNewFocuspoint(struct Camera *camera /*$s0*/)
- // line 299, offset 0x80015278
+ // line 301, offset 0x80014c50
 	/* begin block 1 */
-		// Start line: 300
-		// Start offset: 0x80015278
+		// Start line: 302
+		// Start offset: 0x80014C50
 		// Variables:
 	// 		struct _SVector sv; // stack offset -24
 
 		/* begin block 1.1 */
-			// Start line: 300
-			// Start offset: 0x80015278
+			// Start line: 302
+			// Start offset: 0x80014C50
 			// Variables:
 		// 		short _x0; // $v1
 		// 		short _y0; // $a0
@@ -225,28 +235,30 @@ void CAMERA_SetProjDistance(Camera *camera,long distance)
 		// 		short _z1; // $a3
 		// 		struct _SVector *_v; // $v0
 		/* end block 1.1 */
-		// End offset: 0x80015278
-		// End Line: 300
+		// End offset: 0x80014C50
+		// End Line: 302
 
 		/* begin block 1.2 */
-			// Start line: 300
-			// Start offset: 0x80015278
+			// Start line: 302
+			// Start offset: 0x80014C50
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $v0
 		// 		short _z0; // $v1
 		// 		struct _Position *_v; // $a2
 		/* end block 1.2 */
-		// End offset: 0x80015278
-		// End Line: 300
+		// End offset: 0x80014C50
+		// End Line: 302
 	/* end block 1 */
-	// End offset: 0x80015278
-	// End Line: 300
+	// End offset: 0x80014C50
+	// End Line: 302
 
 	/* begin block 2 */
-		// Start line: 638
+		// Start line: 642
 	/* end block 2 */
-	// End Line: 639
+	// End Line: 643
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_CreateNewFocuspoint(Camera *camera)
 
@@ -277,30 +289,32 @@ void CAMERA_CreateNewFocuspoint(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_SaveMode(struct Camera *camera /*$a0*/, long mode /*$a1*/)
- // line 312, offset 0x8001531c
+ // line 314, offset 0x80014cf4
 	/* begin block 1 */
-		// Start line: 314
-		// Start offset: 0x8001531C
+		// Start line: 316
+		// Start offset: 0x80014CF4
 		// Variables:
 	// 		long i; // $t4
 	/* end block 1 */
-	// End offset: 0x8001564C
-	// End Line: 354
+	// End offset: 0x80015024
+	// End Line: 356
 
 	/* begin block 2 */
-		// Start line: 668
+		// Start line: 672
 	/* end block 2 */
-	// End Line: 669
+	// End Line: 673
 
 	/* begin block 3 */
-		// Start line: 669
+		// Start line: 673
 	/* end block 3 */
-	// End Line: 670
+	// End Line: 674
 
 	/* begin block 4 */
-		// Start line: 671
+		// Start line: 675
 	/* end block 4 */
-	// End Line: 672
+	// End Line: 676
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_SaveMode(Camera *camera,long mode)
 
@@ -390,7 +404,7 @@ void CAMERA_SaveMode(Camera *camera,long mode)
     camera->savedCinematic[camera->stack].targetFocusDistance = camera->targetFocusDistance;
     camera->savedCinematic[camera->stack].posSpline = (camera->data).Cinematic.posSpline;
     camera->savedCinematic[camera->stack].targetSpline = (camera->data).Cinematic.targetSpline;
-    camera->savedCinematic[camera->stack].level = gameTrackerX.level;
+    camera->savedCinematic[camera->stack].level = DAT_800d20f4;
   }
   return;
 }
@@ -400,35 +414,38 @@ void CAMERA_SaveMode(Camera *camera,long mode)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_RestoreMode(struct Camera *camera /*$s0*/)
- // line 356, offset 0x80015654
+ // line 358, offset 0x8001502c
 	/* begin block 1 */
-		// Start line: 357
-		// Start offset: 0x80015654
+		// Start line: 359
+		// Start offset: 0x8001502C
 
 		/* begin block 1.1 */
-			// Start line: 367
-			// Start offset: 0x80015678
+			// Start line: 371
+			// Start offset: 0x80015050
 			// Variables:
 		// 		long mode; // $s1
 		/* end block 1.1 */
-		// End offset: 0x80015A9C
-		// End Line: 463
+		// End offset: 0x800154C4
+		// End Line: 484
 	/* end block 1 */
-	// End offset: 0x80015A9C
-	// End Line: 464
+	// End offset: 0x800154C4
+	// End Line: 485
 
 	/* begin block 2 */
-		// Start line: 764
+		// Start line: 768
 	/* end block 2 */
-	// End Line: 765
+	// End Line: 769
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_RestoreMode(Camera *camera)
 
 {
   short sVar1;
-  _Instance *p_Var2;
-  _Position *p_Var3;
-  MultiSpline *pMVar4;
+  _Position *p_Var2;
+  MultiSpline *pMVar3;
+  ulong uVar4;
+  _Instance *Inst;
   undefined4 uVar5;
   short sVar6;
   int iVar7;
@@ -448,29 +465,36 @@ void CAMERA_RestoreMode(Camera *camera)
     case 0:
     case 0xc:
     case 0xd:
+    case 0x10:
       CAMERA_SetProjDistance(camera,0x140);
-      p_Var2 = gameTrackerX.playerInstance;
+      Inst = DAT_800d20f8;
       if (camera->mode == 5) {
         (camera->focusOffset).x = 0;
         (camera->focusOffset).y = 0;
         (camera->focusOffset).z = 0x160;
-        camera->focusInstance = p_Var2;
+        camera->focusInstance = Inst;
         CAMERA_Restore(camera,7);
       }
       if (iVar7 == 0xc) {
-        gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xffffffbf;
+        DAT_800d220c = DAT_800d220c & 0xffffffbf;
       }
       else {
-        gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x40;
+        DAT_800d220c = DAT_800d220c | 0x40;
       }
       cameraMode = iVar7;
       camera->mode = sVar6;
       sVar6 = *(short *)(camera->focusDistanceList +
-                        *(int *)((int)&camera_modeToIndex + ((iVar7 << 0x10) >> 0xe)) * 3 +
+                        *(int *)((int)camera_modeToIndex + ((iVar7 << 0x10) >> 0xe)) * 3 +
                         (int)camera->presetIndex);
       (camera->data).Follow.stopTimer = -0x1a5e0000;
       (camera->focusRotVel).z = 0;
       camera->targetFocusDistance = sVar6;
+      if (iVar7 == 0x10) {
+        camera->flags = camera->flags | 0x2000;
+      }
+      else {
+        camera->flags = camera->flags & 0xffffdfff;
+      }
       break;
     default:
       camera->mode = sVar6;
@@ -479,51 +503,56 @@ void CAMERA_RestoreMode(Camera *camera)
     case 4:
     case 5:
       CAMERA_SetProjDistance(camera,0x140);
-      p_Var3 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
-      sVar1 = p_Var3[0x70].z;
-      *(undefined4 *)&(camera->core).position = *(undefined4 *)(p_Var3 + 0x70);
+      p_Var2 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
+      sVar1 = p_Var2[0x70].z;
+      *(undefined4 *)&(camera->core).position = *(undefined4 *)(p_Var2 + 0x70);
       (camera->core).position.z = sVar1;
-      p_Var3 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
-      sVar1 = p_Var3[0x71].z;
-      *(undefined4 *)&camera->focusPoint = *(undefined4 *)(p_Var3 + 0x71);
+      p_Var2 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
+      sVar1 = p_Var2[0x71].z;
+      *(undefined4 *)&camera->focusPoint = *(undefined4 *)(p_Var2 + 0x71);
       (camera->focusPoint).z = sVar1;
-      p_Var3 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
-      sVar1 = p_Var3[0x73].z;
-      *(undefined4 *)&camera->targetPos = *(undefined4 *)(p_Var3 + 0x73);
+      p_Var2 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
+      sVar1 = p_Var2[0x73].z;
+      *(undefined4 *)&camera->targetPos = *(undefined4 *)(p_Var2 + 0x73);
       (camera->targetPos).z = sVar1;
-      p_Var3 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
-      sVar1 = p_Var3[0x74].z;
-      *(undefined4 *)&camera->targetFocusPoint = *(undefined4 *)(p_Var3 + 0x74);
+      p_Var2 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
+      sVar1 = p_Var2[0x74].z;
+      *(undefined4 *)&camera->targetFocusPoint = *(undefined4 *)(p_Var2 + 0x74);
       (camera->targetFocusPoint).z = sVar1;
       camera->targetFocusDistance = camera->savedCinematic[(int)camera->stack].targetFocusDistance;
-      p_Var3 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
-      uVar5 = *(undefined4 *)&p_Var3[0x79].y;
-      *(undefined4 *)&camera->targetFocusRotation = *(undefined4 *)&p_Var3[0x78].z;
+      p_Var2 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
+      uVar5 = *(undefined4 *)&p_Var2[0x79].y;
+      *(undefined4 *)&camera->targetFocusRotation = *(undefined4 *)&p_Var2[0x78].z;
       *(undefined4 *)&(camera->targetFocusRotation).z = uVar5;
       if ((camera->smooth == 0) && (camera->mode != 6)) {
         camera->focusDistance = camera->savedCinematic[(int)camera->stack].focusDistance;
-        p_Var3 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
-        uVar5 = *(undefined4 *)(p_Var3 + 0x78);
-        *(undefined4 *)&camera->focusRotation = *(undefined4 *)&p_Var3[0x77].y;
+        p_Var2 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
+        uVar5 = *(undefined4 *)(p_Var2 + 0x78);
+        *(undefined4 *)&camera->focusRotation = *(undefined4 *)&p_Var2[0x77].y;
         *(undefined4 *)&(camera->focusRotation).z = uVar5;
       }
       else {
         camera->always_rotate_flag = 1;
       }
-      p_Var3 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
-      uVar5 = *(undefined4 *)&p_Var3[0x7b].y;
-      *(undefined4 *)&camera->focusPointVel = *(undefined4 *)&p_Var3[0x7a].z;
+      p_Var2 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
+      uVar5 = *(undefined4 *)&p_Var2[0x7b].y;
+      *(undefined4 *)&camera->focusPointVel = *(undefined4 *)&p_Var2[0x7a].z;
       *(undefined4 *)&(camera->focusPointVel).z = uVar5;
-      p_Var3 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
-      uVar5 = *(undefined4 *)&p_Var3[0x7c].z;
-      *(undefined4 *)&camera->focusPointAccl = *(undefined4 *)(p_Var3 + 0x7c);
+      p_Var2 = (_Position *)((int)&(camera->core).position + (int)camera->stack * 0x70);
+      uVar5 = *(undefined4 *)&p_Var2[0x7c].z;
+      *(undefined4 *)&camera->focusPointAccl = *(undefined4 *)(p_Var2 + 0x7c);
       *(undefined4 *)&(camera->focusPointAccl).z = uVar5;
       iVar7 = (int)camera->stack;
+      Inst = camera->focusInstance;
       camera->maxVel = *(short *)&camera->savedCinematic[iVar7].maxVel;
       (camera->data).Cinematic.posSpline = camera->savedCinematic[iVar7].posSpline;
-      pMVar4 = camera->savedCinematic[iVar7].targetSpline;
+      pMVar3 = camera->savedCinematic[iVar7].targetSpline;
       camera->mode = sVar6;
-      (camera->data).Cinematic.targetSpline = pMVar4;
+      (camera->data).Cinematic.targetSpline = pMVar3;
+      uVar4 = INSTANCE_Query(Inst,9);
+      if ((uVar4 & 0x50) != 0) {
+        CAMERA_ChangeToUnderWater(camera,camera->focusInstance);
+      }
       break;
     case 6:
       if (((uint)(ushort)camera->mode - 4 < 2) || (camera->mode == 2)) {
@@ -549,27 +578,29 @@ void CAMERA_RestoreMode(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_Save(struct Camera *camera /*$a0*/, long save /*$a1*/)
- // line 467, offset 0x80015ab0
+ // line 488, offset 0x800154d8
 	/* begin block 1 */
-		// Start line: 468
-		// Start offset: 0x80015AB0
+		// Start line: 489
+		// Start offset: 0x800154D8
 
 		/* begin block 1.1 */
-			// Start line: 471
-			// Start offset: 0x80015AC0
+			// Start line: 492
+			// Start offset: 0x800154E8
 			// Variables:
 		// 		int i; // $a2
 		/* end block 1.1 */
-		// End offset: 0x80015B28
-		// End Line: 483
+		// End offset: 0x80015550
+		// End Line: 504
 	/* end block 1 */
-	// End offset: 0x80015B70
-	// End Line: 498
+	// End offset: 0x80015598
+	// End Line: 519
 
 	/* begin block 2 */
-		// Start line: 1005
+		// Start line: 1058
 	/* end block 2 */
-	// End Line: 1006
+	// End Line: 1059
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_Save(Camera *camera,long save)
 
@@ -611,11 +642,13 @@ void CAMERA_Save(Camera *camera,long save)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_Restore(struct Camera *camera /*$a0*/, long restore /*$a1*/)
- // line 502, offset 0x80015b80
+ // line 523, offset 0x800155a8
 	/* begin block 1 */
-		// Start line: 1078
+		// Start line: 1131
 	/* end block 1 */
-	// End Line: 1079
+	// End Line: 1132
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_Restore(Camera *camera,long restore)
 
@@ -656,27 +689,29 @@ void CAMERA_Restore(Camera *camera,long restore)
 // decompiled code
 // original method signature: 
 // struct _SVector * /*$ra*/ SplineGetNextPointDC(struct Spline *spline /*$s0*/, struct SplineDef *def /*$s1*/)
- // line 542, offset 0x80015c3c
+ // line 563, offset 0x80015664
 	/* begin block 1 */
-		// Start line: 543
-		// Start offset: 0x80015C3C
+		// Start line: 564
+		// Start offset: 0x80015664
 		// Variables:
 	// 		static struct _SVector point; // offset 0x0
 	/* end block 1 */
-	// End offset: 0x80015C8C
-	// End Line: 554
+	// End offset: 0x800156B4
+	// End Line: 575
 
 	/* begin block 2 */
-		// Start line: 1164
+		// Start line: 1217
 	/* end block 2 */
-	// End Line: 1165
+	// End Line: 1218
+
+/* File: C:\kain2\game\CAMERA.C */
 
 _SVector * SplineGetNextPointDC(Spline *spline,SplineDef *def)
 
 {
   ulong uVar1;
   
-  uVar1 = SplineGetOffsetNext(spline,def,gameTrackerX.idleTime);
+  uVar1 = SplineGetOffsetNext(spline,def,DAT_800d2314);
   if ((uVar1 != 0) && (uVar1 = SplineGetData(spline,def,&point_42), uVar1 != 0)) {
     return (_SVector *)&point_42;
   }
@@ -688,18 +723,18 @@ _SVector * SplineGetNextPointDC(Spline *spline,SplineDef *def)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_SetMode(struct Camera *camera /*$s2*/, long mode /*$s3*/)
- // line 556, offset 0x80015ca0
+ // line 577, offset 0x800156c8
 	/* begin block 1 */
-		// Start line: 557
-		// Start offset: 0x80015CA0
+		// Start line: 578
+		// Start offset: 0x800156C8
 		// Variables:
 	// 		int oldMode; // $s0
 	// 		struct SplineDef curPositional; // stack offset -56
 	// 		struct _SVector sv; // stack offset -48
 
 		/* begin block 1.1 */
-			// Start line: 599
-			// Start offset: 0x80015D44
+			// Start line: 620
+			// Start offset: 0x8001576C
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $a0
@@ -707,24 +742,24 @@ _SVector * SplineGetNextPointDC(Spline *spline,SplineDef *def)
 		// 		struct _Rotation *_v0; // $v0
 		// 		struct _Rotation *_v1; // $v1
 		/* end block 1.1 */
-		// End offset: 0x80015D44
-		// End Line: 599
+		// End offset: 0x8001576C
+		// End Line: 620
 
 		/* begin block 1.2 */
-			// Start line: 599
-			// Start offset: 0x80015D44
+			// Start line: 620
+			// Start offset: 0x8001576C
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $a0
 		// 		short _z1; // $v1
 		// 		struct _Rotation *_v0; // $v0
 		/* end block 1.2 */
-		// End offset: 0x80015D44
-		// End Line: 599
+		// End offset: 0x8001576C
+		// End Line: 620
 
 		/* begin block 1.3 */
-			// Start line: 599
-			// Start offset: 0x80015D44
+			// Start line: 620
+			// Start offset: 0x8001576C
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $a1
@@ -735,72 +770,74 @@ _SVector * SplineGetNextPointDC(Spline *spline,SplineDef *def)
 		// 		struct _SVector *_v; // $a0
 		// 		struct _Position *_v0; // $v1
 		/* end block 1.3 */
-		// End offset: 0x80015D44
-		// End Line: 599
+		// End offset: 0x8001576C
+		// End Line: 620
 
 		/* begin block 1.4 */
-			// Start line: 665
-			// Start offset: 0x80015EC8
+			// Start line: 680
+			// Start offset: 0x800158C8
 			// Variables:
 		// 		struct _SVector *camPos; // stack offset -32
 		// 		struct _SVector *targetPos; // $a0
 
 			/* begin block 1.4.1 */
-				// Start line: 670
-				// Start offset: 0x80015EDC
+				// Start line: 685
+				// Start offset: 0x800158DC
 				// Variables:
 			// 		struct _Position pos; // stack offset -40
 			/* end block 1.4.1 */
-			// End offset: 0x80015EDC
-			// End Line: 672
+			// End offset: 0x800158DC
+			// End Line: 687
 
 			/* begin block 1.4.2 */
-				// Start line: 686
-				// Start offset: 0x80015F8C
+				// Start line: 701
+				// Start offset: 0x8001598C
 				// Variables:
 			// 		short _x1; // $v0
 			// 		short _y1; // $v1
 			// 		short _z1; // $a0
 			// 		struct _Position *_v0; // $v0
 			/* end block 1.4.2 */
-			// End offset: 0x80015F8C
-			// End Line: 686
+			// End offset: 0x8001598C
+			// End Line: 701
 
 			/* begin block 1.4.3 */
-				// Start line: 696
-				// Start offset: 0x80015FE0
+				// Start line: 711
+				// Start offset: 0x800159E0
 				// Variables:
 			// 		short _x1; // $v0
 			// 		short _y1; // $v1
 			// 		short _z1; // $a0
 			// 		struct _Position *_v0; // $v0
 			/* end block 1.4.3 */
-			// End offset: 0x80015FFC
-			// End Line: 696
+			// End offset: 0x800159FC
+			// End Line: 711
 		/* end block 1.4 */
-		// End offset: 0x80015FFC
-		// End Line: 700
+		// End offset: 0x800159FC
+		// End Line: 715
 	/* end block 1 */
-	// End offset: 0x800161A0
-	// End Line: 751
+	// End offset: 0x80015B2C
+	// End Line: 766
 
 	/* begin block 2 */
-		// Start line: 1197
+		// Start line: 1250
 	/* end block 2 */
-	// End Line: 1198
+	// End Line: 1251
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_SetMode(Camera *camera,long mode)
 
 {
   short sVar1;
   short sVar2;
-  long lVar3;
-  MultiSpline *pMVar4;
-  _SVector *p_Var5;
-  uint uVar6;
-  MultiSpline *pMVar7;
-  undefined4 uVar8;
-  short sVar9;
+  short sVar3;
+  long lVar4;
+  MultiSpline *pMVar5;
+  _SVector *p_Var6;
+  uint uVar7;
+  MultiSpline *pMVar8;
+  undefined4 uVar9;
   SplineDef local_38;
   _SVector local_30;
   _SVector _Stack40;
@@ -814,15 +851,15 @@ void CAMERA_SetMode(Camera *camera,long mode)
   case 5:
     if (mode != 5) {
       CAMERA_SaveMode(camera,(int)camera->mode);
-      sVar9 = (camera->core).rotation.y;
+      sVar3 = (camera->core).rotation.y;
       sVar2 = (camera->core).rotation.z;
       (camera->targetFocusRotation).x = (camera->core).rotation.x;
-      (camera->targetFocusRotation).y = sVar9;
+      (camera->targetFocusRotation).y = sVar3;
       (camera->targetFocusRotation).z = sVar2;
-      sVar9 = (camera->core).rotation.y;
+      sVar3 = (camera->core).rotation.y;
       sVar2 = (camera->core).rotation.z;
       (camera->focusRotation).x = (camera->core).rotation.x;
-      (camera->focusRotation).y = sVar9;
+      (camera->focusRotation).y = sVar3;
       (camera->focusRotation).z = sVar2;
       local_30.x = (camera->core).position.x;
       local_30.y = (camera->core).position.y;
@@ -831,8 +868,8 @@ void CAMERA_SetMode(Camera *camera,long mode)
       local_30.x = (camera->focusPoint).x - local_30.x;
       local_30.y = (camera->focusPoint).y - local_30.y;
       local_30.z = (camera->focusPoint).z - local_30.z;
-      lVar3 = CAMERA_LengthSVector(&local_30);
-      camera->focusDistance = (short)lVar3;
+      lVar4 = CAMERA_LengthSVector(&local_30);
+      camera->focusDistance = (short)lVar4;
       roll_target = 0;
       current_roll_amount = 0;
       roll_inc = 0;
@@ -847,135 +884,121 @@ void CAMERA_SetMode(Camera *camera,long mode)
     break;
   case 0xc:
   case 0xd:
-    if (camera->mode == 0xd) {
-      CAMERA_SetProjDistance(camera,0x140);
-    }
-    if (((1 < mode - 10U) && (mode != 0xf)) &&
-       (CAMERA_SaveMode(camera,(int)camera->mode), mode == 5)) {
+    CAMERA_SaveMode(camera,(int)camera->mode);
+    if (mode == 5) {
       CAMERA_Save(camera,7);
     }
     CAMERA_CreateNewFocuspoint(camera);
   }
-  sVar9 = (short)mode;
   switch(mode) {
   case 0:
-    cameraMode = mode;
-    CAMERA_SetProjDistance(camera,0x140);
-    gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x40;
-    camera->mode = sVar9;
-    sVar1 = *(short *)(camera->focusDistanceList +
-                      *(int *)((int)&camera_modeToIndex + ((mode << 0x10) >> 0xe)) * 3 +
-                      (int)camera->presetIndex);
-    camera->smooth = 8;
-    camera->flags = camera->flags & 0xffffdfff;
-    camera->targetFocusDistance = sVar1;
+  case 10:
+  case 0xb:
     break;
   default:
-    camera->mode = sVar9;
+    camera->mode = (short)mode;
     break;
   case 2:
   case 4:
   case 5:
+    CAMERA_SetProjDistance(camera,0x140);
     (camera->data).Cinematic.posSpline = camera->Spline00;
-    pMVar4 = camera->Spline01;
-    pMVar7 = (camera->data).Cinematic.posSpline;
+    pMVar5 = camera->Spline01;
+    pMVar8 = (camera->data).Cinematic.posSpline;
     (camera->data).Cinematic.cinema_done = 0;
     camera->Spline00 = (MultiSpline *)0x0;
     (camera->data).Cinematic.lastSplinePos.z = 0;
     (camera->data).Cinematic.lastSplinePos.y = 0;
     (camera->data).Cinematic.lastSplinePos.x = 0;
     camera->Spline01 = (MultiSpline *)0x0;
-    (camera->data).Cinematic.targetSpline = pMVar4;
-    if (pMVar7 != (MultiSpline *)0x0) {
-      *(undefined4 *)&pMVar7->curPositional = 0;
+    (camera->data).Cinematic.targetSpline = pMVar5;
+    if (pMVar8 != (MultiSpline *)0x0) {
+      *(undefined4 *)&pMVar8->curPositional = 0;
     }
-    pMVar4 = (camera->data).Cinematic.targetSpline;
-    if (pMVar4 != (MultiSpline *)0x0) {
-      *(undefined4 *)&pMVar4->curPositional = 0;
+    pMVar5 = (camera->data).Cinematic.targetSpline;
+    if (pMVar5 != (MultiSpline *)0x0) {
+      *(undefined4 *)&pMVar5->curPositional = 0;
     }
-    pMVar4 = (camera->data).Cinematic.posSpline;
-    camera->mode = sVar9;
-    if (pMVar4 != (MultiSpline *)0x0) {
+    pMVar5 = (camera->data).Cinematic.posSpline;
+    camera->mode = (short)mode;
+    if (pMVar5 != (MultiSpline *)0x0) {
       if ((mode == 4) || (mode == 2)) {
         splinecam_helprot.x = (camera->focusRotation).x;
         splinecam_helprot.z = (camera->focusRotation).z + 0x800U & 0xfff;
-        CAMERA_CalcPosition((_Position *)&_Stack40,&camera->targetFocusPoint,&splinecam_helprot,
-                            camera->targetFocusDistance);
+        CAMERA_CalcPosition((_Position *)&_Stack40,&camera->targetFocusPoint,
+                            (_Rotation *)&splinecam_helprot,camera->targetFocusDistance);
         local_20[0] = SplineGetNearestPoint
                                 (((camera->data).Cinematic.posSpline)->positional,&_Stack40,
                                  &local_38);
-        CAMERA_CalcRotation(&splinecam_helprot,&camera->focusInstance->position,
+        CAMERA_CalcRotation((_Rotation *)&splinecam_helprot,&camera->focusInstance->position,
                             (_Position *)local_20);
-        pMVar4 = (camera->data).Cinematic.posSpline;
+        pMVar5 = (camera->data).Cinematic.posSpline;
         (camera->data).Cinematic.splinecam_helpkey = (int)local_38.currkey;
-        local_20[0] = SplineGetNearestPoint(pMVar4->positional,(_SVector *)camera,&local_38);
+        local_20[0] = SplineGetNearestPoint(pMVar5->positional,(_SVector *)camera,&local_38);
         (camera->data).Cinematic.splinecam_currkey = (int)local_38.currkey;
       }
       else {
-        local_20[0] = SplineGetFirstPoint(pMVar4->positional,&pMVar4->curPositional);
+        local_20[0] = SplineGetFirstPoint(pMVar5->positional,&pMVar5->curPositional);
       }
       if (local_20[0] != (_SVector *)0x0) {
         sVar1 = local_20[0]->y;
-        sVar9 = local_20[0]->z;
+        sVar3 = local_20[0]->z;
         (camera->targetPos).x = local_20[0]->x;
         (camera->targetPos).y = sVar1;
-        (camera->targetPos).z = sVar9;
+        (camera->targetPos).z = sVar3;
         if (mode == 5) {
           camera->posState = 3;
         }
-        pMVar4 = (camera->data).Cinematic.targetSpline;
-        if ((pMVar4 != (MultiSpline *)0x0) &&
-           (p_Var5 = SplineGetFirstPoint(pMVar4->positional,&pMVar4->curPositional),
-           p_Var5 != (_SVector *)0x0)) {
-          sVar1 = p_Var5->y;
-          sVar9 = p_Var5->z;
-          (camera->targetFocusPoint).x = p_Var5->x;
+        pMVar5 = (camera->data).Cinematic.targetSpline;
+        if ((pMVar5 != (MultiSpline *)0x0) &&
+           (p_Var6 = SplineGetFirstPoint(pMVar5->positional,&pMVar5->curPositional),
+           p_Var6 != (_SVector *)0x0)) {
+          sVar1 = p_Var6->y;
+          sVar3 = p_Var6->z;
+          (camera->targetFocusPoint).x = p_Var6->x;
           (camera->targetFocusPoint).y = sVar1;
-          (camera->targetFocusPoint).z = sVar9;
+          (camera->targetFocusPoint).z = sVar3;
         }
       }
     }
-    uVar8 = *(undefined4 *)&(camera->focusRotation).z;
+    uVar9 = *(undefined4 *)&(camera->focusRotation).z;
     *(undefined4 *)&camera->targetRotation = *(undefined4 *)&camera->focusRotation;
-    *(undefined4 *)&(camera->targetRotation).z = uVar8;
+    *(undefined4 *)&(camera->targetRotation).z = uVar9;
     camera->tiltState = 0;
     camera->lead_angle = 0;
     camera->flags = camera->flags & 0xffffdfff;
     break;
-  case 10:
-  case 0xb:
-    break;
   case 0xc:
   case 0xd:
   case 0x10:
+    CAMERA_SetProjDistance(camera,0x140);
     if (mode == 0x10) {
       mode = 0xc;
-      uVar6 = camera->flags | 0x2000;
+      uVar7 = camera->flags | 0x2000;
     }
     else {
-      uVar6 = camera->flags & 0xffffdfff;
+      uVar7 = camera->flags & 0xffffdfff;
     }
-    camera->flags = uVar6;
+    camera->flags = uVar7;
+    DAT_800d220c = DAT_800d220c & 0xffffffbf;
     cameraMode = mode;
-    CAMERA_SetProjDistance(camera,0x140);
-    gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xffffffbf;
     camera->mode = (short)mode;
-    sVar9 = *(short *)(camera->focusDistanceList +
-                      *(int *)((int)&camera_modeToIndex + ((mode << 0x10) >> 0xe)) * 3 +
+    sVar3 = *(short *)(camera->focusDistanceList +
+                      *(int *)((int)camera_modeToIndex + ((mode << 0x10) >> 0xe)) * 3 +
                       (int)camera->presetIndex);
     camera->smooth = 8;
     (camera->data).Follow.stopTimer = -0x1a5e0000;
     (camera->focusRotVel).z = 0;
-    camera->targetFocusDistance = sVar9;
+    camera->targetFocusDistance = sVar3;
     if (((int)sVar1 == 5) && (camera->focusInstance != (_Instance *)0x0)) {
       CAMERA_SetFocus(camera,&camera->targetFocusPoint);
     }
   }
   camera->collisionTargetFocusDistance = camera->targetFocusDistance;
-  uVar8 = *(undefined4 *)&(camera->targetFocusRotation).z;
+  uVar9 = *(undefined4 *)&(camera->targetFocusRotation).z;
   *(undefined4 *)&camera->collisionTargetFocusRotation = *(undefined4 *)&camera->targetFocusRotation
   ;
-  *(undefined4 *)&(camera->collisionTargetFocusRotation).z = uVar8;
+  *(undefined4 *)&(camera->collisionTargetFocusRotation).z = uVar9;
   return;
 }
 
@@ -984,20 +1007,22 @@ void CAMERA_SetMode(Camera *camera,long mode)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_Initialize(struct Camera *camera /*$s1*/)
- // line 753, offset 0x800161bc
+ // line 768, offset 0x80015b48
 	/* begin block 1 */
-		// Start line: 754
-		// Start offset: 0x800161BC
+		// Start line: 769
+		// Start offset: 0x80015B48
 		// Variables:
 	// 		long i; // $s2
 	/* end block 1 */
-	// End offset: 0x80016454
-	// End Line: 972
+	// End offset: 0x80015DE0
+	// End Line: 987
 
 	/* begin block 2 */
-		// Start line: 1636
+		// Start line: 1671
 	/* end block 2 */
-	// End Line: 1637
+	// End Line: 1672
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_Initialize(Camera *camera)
 
@@ -1008,7 +1033,7 @@ void CAMERA_Initialize(Camera *camera)
   uint uVar3;
   int iVar4;
   
-  memset(camera,0,0x4c4);
+  memset();
   iVar4 = 0;
   do {
     iVar2 = rand();
@@ -1016,19 +1041,19 @@ void CAMERA_Initialize(Camera *camera)
     if (iVar2 < 0) {
       iVar2._1_2_ = (short)((uint)(iVar2 + 0xff) >> 8);
     }
-    (&camera_shakeOffset)[iVar4].x = (short)iVar2 + iVar2._1_2_ * -0x100 + -0x80;
+    camera_shakeOffset[iVar4].x = (short)iVar2 + iVar2._1_2_ * -0x100 + -0x80;
     iVar2 = rand();
     iVar2._1_2_ = (short)((uint)iVar2 >> 8);
     if (iVar2 < 0) {
       iVar2._1_2_ = (short)((uint)(iVar2 + 0xff) >> 8);
     }
-    (&camera_shakeOffset)[iVar4].y = (short)iVar2 + iVar2._1_2_ * -0x100 + -0x80;
+    camera_shakeOffset[iVar4].y = (short)iVar2 + iVar2._1_2_ * -0x100 + -0x80;
     iVar2 = rand();
     iVar2._1_2_ = (short)((uint)iVar2 >> 8);
     if (iVar2 < 0) {
       iVar2._1_2_ = (short)((uint)(iVar2 + 0xff) >> 8);
     }
-    (&camera_shakeOffset)[iVar4].z = (short)iVar2 + iVar2._1_2_ * -0x100 + -0x80;
+    camera_shakeOffset[iVar4].z = (short)iVar2 + iVar2._1_2_ * -0x100 + -0x80;
     iVar4 = iVar4 + 1;
   } while (iVar4 < 0x10);
   (camera->core).rotation.x = 0xfc7;
@@ -1066,9 +1091,9 @@ void CAMERA_Initialize(Camera *camera)
   camera->focusDistance = iVar2._1_2_;
   (camera->core).farPlane = 12000;
   (camera->core).bottomY = 0xf0;
-  *(MATRIX **)&(camera->core).wcTransform = &wcTransformX;
-  *(MATRIX **)&(camera->core).wcTransform2 = &wcTransform2X;
-  *(MATRIX **)&(camera->core).cwTransform2 = &cwTransform2X;
+  (camera->core).wcTransform = &wcTransformX;
+  (camera->core).wcTransform2 = &wcTransform2X;
+  (camera->core).cwTransform2 = &cwTransform2X;
   camera->smooth = 0x10;
   (camera->core).leftX = 0;
   (camera->core).rightX = 0x140;
@@ -1118,6 +1143,10 @@ void CAMERA_Initialize(Camera *camera)
   roll_target = 0;
   current_roll_amount = 0;
   roll_inc = 0;
+  combat_cam_distance = 3000;
+  combat_cam_angle = 0;
+  combat_cam_weight = 0x1000;
+  combat_cam_debounce = 0;
   Camera_lookHeight = 0x200;
   Camera_lookDist = 0x28a;
   CameraCenterDelay = 10;
@@ -1129,16 +1158,18 @@ void CAMERA_Initialize(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_SetInstanceFocus(struct Camera *camera /*$a0*/, struct _Instance *instance /*$a1*/)
- // line 989, offset 0x800164ac
+ // line 1010, offset 0x80015e50
 	/* begin block 1 */
-		// Start line: 2397
+		// Start line: 2454
 	/* end block 1 */
-	// End Line: 2398
+	// End Line: 2455
 
 	/* begin block 2 */
-		// Start line: 2401
+		// Start line: 2458
 	/* end block 2 */
-	// End Line: 2402
+	// End Line: 2459
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_SetInstanceFocus(Camera *camera,_Instance *instance)
 
@@ -1147,9 +1178,12 @@ void CAMERA_SetInstanceFocus(Camera *camera,_Instance *instance)
   
   camera->focusInstance = instance;
   camera->flags = camera->flags | 0x800;
+  sVar1 = (instance->position).z;
+  *(undefined4 *)&camera->newFocusInstancePos = *(undefined4 *)&instance->position;
+  (camera->newFocusInstancePos).z = sVar1;
   if (instance->object != (Object *)0x0) {
     sVar1 = 0x200;
-    if (instance == gameTrackerX.playerInstance) {
+    if (instance == DAT_800d20f8) {
       sVar1 = 0x160;
     }
     (camera->focusOffset).x = 0;
@@ -1164,16 +1198,18 @@ void CAMERA_SetInstanceFocus(Camera *camera,_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_SetZRotation(struct Camera *camera /*$a0*/, short zrot /*$a1*/)
- // line 1022, offset 0x800164f4
+ // line 1044, offset 0x80015eb0
 	/* begin block 1 */
-		// Start line: 2464
+		// Start line: 2523
 	/* end block 1 */
-	// End Line: 2465
+	// End Line: 2524
 
 	/* begin block 2 */
-		// Start line: 2465
+		// Start line: 2524
 	/* end block 2 */
-	// End Line: 2466
+	// End Line: 2525
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_SetZRotation(Camera *camera,short zrot)
 
@@ -1194,11 +1230,13 @@ void CAMERA_SetZRotation(Camera *camera,short zrot)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ CAMERA_LengthSVector(struct _SVector *sv /*$a0*/)
- // line 1077, offset 0x80016518
+ // line 1099, offset 0x80015ed4
 	/* begin block 1 */
-		// Start line: 2574
+		// Start line: 2633
 	/* end block 1 */
-	// End Line: 2575
+	// End Line: 2634
+
+/* File: C:\kain2\game\CAMERA.C */
 
 long CAMERA_LengthSVector(_SVector *sv)
 
@@ -1215,246 +1253,250 @@ long CAMERA_LengthSVector(_SVector *sv)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_SetValue(struct Camera *camera /*$a0*/, long index /*$a1*/, long value /*$a2*/)
- // line 1086, offset 0x8001656c
+ // line 1108, offset 0x80015f28
 	/* begin block 1 */
-		// Start line: 1088
-		// Start offset: 0x8001656C
+		// Start line: 1110
+		// Start offset: 0x80015F28
 		// Variables:
 	// 		long min; // $t1
 	// 		long max; // $t0
 	// 		long minTilt; // $a3
 	// 		long maxTilt; // $a1
 	/* end block 1 */
-	// End offset: 0x80016990
-	// End Line: 1140
+	// End offset: 0x8001634C
+	// End Line: 1162
 
 	/* begin block 2 */
-		// Start line: 2592
+		// Start line: 2651
 	/* end block 2 */
-	// End Line: 2593
+	// End Line: 2652
 
 	/* begin block 3 */
-		// Start line: 2593
+		// Start line: 2652
 	/* end block 3 */
-	// End Line: 2594
+	// End Line: 2653
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_SetValue(Camera *camera,long index,long value)
 
 {
   short sVar1;
   bool bVar2;
-  int iVar3;
+  undefined *puVar3;
   int iVar4;
   int iVar5;
-  int iVar6;
+  undefined *puVar6;
   int iVar7;
   int iVar8;
+  undefined *puVar9;
+  undefined *puVar10;
   
-  iVar8 = 0;
-  iVar7 = 16000;
-  iVar6 = -0x1000;
+  puVar10 = (undefined *)0x0;
+  puVar9 = &DAT_00003e80;
+  iVar8 = -0x1000;
   (&camera->minFocusDistance)[index] = value;
-  iVar3 = 0x1000;
+  iVar5 = 0x1000;
   if (camera->cineControl == 0) {
-    gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xffffff7f;
+    DAT_800d220c = DAT_800d220c & 0xffffff7f;
   }
   else {
-    gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x80;
+    DAT_800d220c = DAT_800d220c | 0x80;
   }
   sVar1 = camera->mode;
   if (sVar1 == 0xc) {
-    iVar6 = camera->focusDistanceList[3];
-    iVar3 = camera->focusDistanceList[4];
-    if (iVar6 < iVar3) {
-      bVar2 = iVar3 < iVar6;
-      iVar8 = camera->focusDistanceList[5];
-      if (iVar6 < camera->focusDistanceList[5]) {
-        iVar8 = iVar6;
+    puVar6 = (undefined *)camera->focusDistanceList[3];
+    puVar3 = (undefined *)camera->focusDistanceList[4];
+    if ((int)puVar6 < (int)puVar3) {
+      bVar2 = (int)puVar3 < (int)puVar6;
+      puVar10 = (undefined *)camera->focusDistanceList[5];
+      if ((int)puVar6 < (int)(undefined *)camera->focusDistanceList[5]) {
+        puVar10 = puVar6;
       }
     }
     else {
-      iVar8 = camera->focusDistanceList[5];
-      if (iVar3 < camera->focusDistanceList[5]) {
-        iVar8 = iVar3;
+      puVar10 = (undefined *)camera->focusDistanceList[5];
+      if ((int)puVar3 < (int)(undefined *)camera->focusDistanceList[5]) {
+        puVar10 = puVar3;
       }
-      iVar6 = camera->focusDistanceList[3];
-      iVar3 = camera->focusDistanceList[4];
-      bVar2 = iVar3 < iVar6;
+      puVar6 = (undefined *)camera->focusDistanceList[3];
+      puVar3 = (undefined *)camera->focusDistanceList[4];
+      bVar2 = (int)puVar3 < (int)puVar6;
     }
     if (bVar2) {
-      iVar7 = camera->focusDistanceList[5];
-      if (camera->focusDistanceList[5] < iVar6) {
-        iVar7 = iVar6;
+      puVar9 = (undefined *)camera->focusDistanceList[5];
+      if ((int)(undefined *)camera->focusDistanceList[5] < (int)puVar6) {
+        puVar9 = puVar6;
       }
     }
     else {
-      iVar7 = camera->focusDistanceList[5];
-      if (camera->focusDistanceList[5] < iVar3) {
-        iVar7 = iVar3;
+      puVar9 = (undefined *)camera->focusDistanceList[5];
+      if ((int)(undefined *)camera->focusDistanceList[5] < (int)puVar3) {
+        puVar9 = puVar3;
       }
     }
     iVar4 = camera->tiltList[3];
-    iVar3 = camera->tiltList[4];
-    if (iVar4 < iVar3) {
-      iVar6 = camera->tiltList[5];
+    iVar5 = camera->tiltList[4];
+    if (iVar4 < iVar5) {
+      iVar8 = camera->tiltList[5];
       if (iVar4 < camera->tiltList[5]) {
-        iVar6 = iVar4;
+        iVar8 = iVar4;
       }
     }
     else {
-      iVar6 = camera->tiltList[5];
-      if (iVar3 < camera->tiltList[5]) {
-        iVar6 = iVar3;
+      iVar8 = camera->tiltList[5];
+      if (iVar5 < camera->tiltList[5]) {
+        iVar8 = iVar5;
       }
     }
-    iVar5 = camera->tiltList[3];
+    iVar7 = camera->tiltList[3];
     iVar4 = camera->tiltList[4];
-    if (iVar5 <= iVar4) {
-      iVar3 = camera->tiltList[5];
-      bVar2 = iVar3 < iVar4;
-LAB_80016934:
+    if (iVar7 <= iVar4) {
+      iVar5 = camera->tiltList[5];
+      bVar2 = iVar5 < iVar4;
+LAB_800162f0:
       if (bVar2) {
-        iVar3 = iVar4;
+        iVar5 = iVar4;
       }
-      goto LAB_80016940;
+      goto LAB_800162fc;
     }
-    iVar3 = camera->tiltList[5];
-    bVar2 = iVar3 < iVar5;
+    iVar5 = camera->tiltList[5];
+    bVar2 = iVar5 < iVar7;
   }
   else {
     if (sVar1 < 0xd) {
-      if (sVar1 != 0) goto LAB_80016940;
-      iVar6 = camera->focusDistanceList[0];
-      iVar3 = camera->focusDistanceList[1];
-      if (iVar6 < iVar3) {
-        bVar2 = iVar3 < iVar6;
-        iVar8 = camera->focusDistanceList[2];
-        if (iVar6 < camera->focusDistanceList[2]) {
-          iVar8 = iVar6;
+      if (sVar1 != 0) goto LAB_800162fc;
+      puVar6 = (undefined *)camera->focusDistanceList[0];
+      puVar3 = (undefined *)camera->focusDistanceList[1];
+      if ((int)puVar6 < (int)puVar3) {
+        bVar2 = (int)puVar3 < (int)puVar6;
+        puVar10 = (undefined *)camera->focusDistanceList[2];
+        if ((int)puVar6 < (int)(undefined *)camera->focusDistanceList[2]) {
+          puVar10 = puVar6;
         }
       }
       else {
-        iVar8 = camera->focusDistanceList[2];
-        if (iVar3 < camera->focusDistanceList[2]) {
-          iVar8 = iVar3;
+        puVar10 = (undefined *)camera->focusDistanceList[2];
+        if ((int)puVar3 < (int)(undefined *)camera->focusDistanceList[2]) {
+          puVar10 = puVar3;
         }
-        iVar6 = camera->focusDistanceList[0];
-        iVar3 = camera->focusDistanceList[1];
-        bVar2 = iVar3 < iVar6;
+        puVar6 = (undefined *)camera->focusDistanceList[0];
+        puVar3 = (undefined *)camera->focusDistanceList[1];
+        bVar2 = (int)puVar3 < (int)puVar6;
       }
       if (bVar2) {
-        iVar7 = camera->focusDistanceList[2];
-        if (camera->focusDistanceList[2] < iVar6) {
-          iVar7 = iVar6;
+        puVar9 = (undefined *)camera->focusDistanceList[2];
+        if ((int)(undefined *)camera->focusDistanceList[2] < (int)puVar6) {
+          puVar9 = puVar6;
         }
       }
       else {
-        iVar7 = camera->focusDistanceList[2];
-        if (camera->focusDistanceList[2] < iVar3) {
-          iVar7 = iVar3;
+        puVar9 = (undefined *)camera->focusDistanceList[2];
+        if ((int)(undefined *)camera->focusDistanceList[2] < (int)puVar3) {
+          puVar9 = puVar3;
         }
       }
       iVar4 = camera->tiltList[0];
-      iVar3 = camera->tiltList[1];
-      if (iVar4 < iVar3) {
-        iVar6 = camera->tiltList[2];
+      iVar5 = camera->tiltList[1];
+      if (iVar4 < iVar5) {
+        iVar8 = camera->tiltList[2];
         if (iVar4 < camera->tiltList[2]) {
-          iVar6 = iVar4;
+          iVar8 = iVar4;
         }
       }
       else {
-        iVar6 = camera->tiltList[2];
-        if (iVar3 < camera->tiltList[2]) {
-          iVar6 = iVar3;
+        iVar8 = camera->tiltList[2];
+        if (iVar5 < camera->tiltList[2]) {
+          iVar8 = iVar5;
         }
       }
-      iVar5 = camera->tiltList[0];
+      iVar7 = camera->tiltList[0];
       iVar4 = camera->tiltList[1];
-      if (iVar5 <= iVar4) {
-        iVar3 = camera->tiltList[2];
-        bVar2 = iVar3 < iVar4;
-        goto LAB_80016934;
+      if (iVar7 <= iVar4) {
+        iVar5 = camera->tiltList[2];
+        bVar2 = iVar5 < iVar4;
+        goto LAB_800162f0;
       }
-      iVar3 = camera->tiltList[2];
-      bVar2 = iVar3 < iVar5;
+      iVar5 = camera->tiltList[2];
+      bVar2 = iVar5 < iVar7;
     }
     else {
-      if (sVar1 != 0xd) goto LAB_80016940;
-      iVar6 = camera->focusDistanceList[6];
-      iVar3 = camera->focusDistanceList[7];
-      if (iVar6 < iVar3) {
-        bVar2 = iVar3 < iVar6;
-        iVar8 = camera->focusDistanceList[8];
-        if (iVar6 < camera->focusDistanceList[8]) {
-          iVar8 = iVar6;
+      if (sVar1 != 0xd) goto LAB_800162fc;
+      puVar6 = (undefined *)camera->focusDistanceList[6];
+      puVar3 = (undefined *)camera->focusDistanceList[7];
+      if ((int)puVar6 < (int)puVar3) {
+        bVar2 = (int)puVar3 < (int)puVar6;
+        puVar10 = (undefined *)camera->focusDistanceList[8];
+        if ((int)puVar6 < (int)(undefined *)camera->focusDistanceList[8]) {
+          puVar10 = puVar6;
         }
       }
       else {
-        iVar8 = camera->focusDistanceList[8];
-        if (iVar3 < camera->focusDistanceList[8]) {
-          iVar8 = iVar3;
+        puVar10 = (undefined *)camera->focusDistanceList[8];
+        if ((int)puVar3 < (int)(undefined *)camera->focusDistanceList[8]) {
+          puVar10 = puVar3;
         }
-        iVar6 = camera->focusDistanceList[6];
-        iVar3 = camera->focusDistanceList[7];
-        bVar2 = iVar3 < iVar6;
+        puVar6 = (undefined *)camera->focusDistanceList[6];
+        puVar3 = (undefined *)camera->focusDistanceList[7];
+        bVar2 = (int)puVar3 < (int)puVar6;
       }
       if (bVar2) {
-        iVar7 = camera->focusDistanceList[8];
-        if (camera->focusDistanceList[8] < iVar6) {
-          iVar7 = iVar6;
+        puVar9 = (undefined *)camera->focusDistanceList[8];
+        if ((int)(undefined *)camera->focusDistanceList[8] < (int)puVar6) {
+          puVar9 = puVar6;
         }
       }
       else {
-        iVar7 = camera->focusDistanceList[8];
-        if (camera->focusDistanceList[8] < iVar3) {
-          iVar7 = iVar3;
+        puVar9 = (undefined *)camera->focusDistanceList[8];
+        if ((int)(undefined *)camera->focusDistanceList[8] < (int)puVar3) {
+          puVar9 = puVar3;
         }
       }
       iVar4 = camera->tiltList[6];
-      iVar3 = camera->tiltList[7];
-      if (iVar4 < iVar3) {
-        iVar6 = camera->tiltList[8];
+      iVar5 = camera->tiltList[7];
+      if (iVar4 < iVar5) {
+        iVar8 = camera->tiltList[8];
         if (iVar4 < camera->tiltList[8]) {
-          iVar6 = iVar4;
+          iVar8 = iVar4;
         }
       }
       else {
-        iVar6 = camera->tiltList[8];
-        if (iVar3 < camera->tiltList[8]) {
-          iVar6 = iVar3;
+        iVar8 = camera->tiltList[8];
+        if (iVar5 < camera->tiltList[8]) {
+          iVar8 = iVar5;
         }
       }
-      iVar5 = camera->tiltList[6];
+      iVar7 = camera->tiltList[6];
       iVar4 = camera->tiltList[7];
-      if (iVar5 <= iVar4) {
-        iVar3 = camera->tiltList[8];
-        bVar2 = iVar3 < iVar4;
-        goto LAB_80016934;
+      if (iVar7 <= iVar4) {
+        iVar5 = camera->tiltList[8];
+        bVar2 = iVar5 < iVar4;
+        goto LAB_800162f0;
       }
-      iVar3 = camera->tiltList[8];
-      bVar2 = iVar3 < iVar5;
+      iVar5 = camera->tiltList[8];
+      bVar2 = iVar5 < iVar7;
     }
   }
   if (bVar2) {
-    iVar3 = iVar5;
+    iVar5 = iVar7;
   }
-LAB_80016940:
-  if (camera->targetFocusDistance < iVar8) {
-    camera->targetFocusDistance = (short)iVar8;
+LAB_800162fc:
+  if ((int)camera->targetFocusDistance < (int)puVar10) {
+    camera->targetFocusDistance = (short)puVar10;
   }
   else {
-    if (iVar7 < camera->targetFocusDistance) {
-      camera->targetFocusDistance = (short)iVar7;
+    if ((int)puVar9 < (int)camera->targetFocusDistance) {
+      camera->targetFocusDistance = (short)puVar9;
     }
   }
-  iVar7 = (int)(camera->targetFocusRotation).x;
-  if (iVar6 <= iVar7) {
-    if (iVar3 < iVar7) {
-      (camera->targetFocusRotation).x = (short)iVar3;
+  iVar4 = (int)(camera->targetFocusRotation).x;
+  if (iVar8 <= iVar4) {
+    if (iVar5 < iVar4) {
+      (camera->targetFocusRotation).x = (short)iVar5;
     }
     return;
   }
-  (camera->targetFocusRotation).x = (short)iVar6;
+  (camera->targetFocusRotation).x = (short)iVar8;
   return;
 }
 
@@ -1463,16 +1505,18 @@ LAB_80016940:
 // decompiled code
 // original method signature: 
 // short /*$ra*/ CAMERA_AngleDifference(short angle0 /*$t0*/, short angle1 /*$a3*/)
- // line 1143, offset 0x80016998
+ // line 1165, offset 0x80016354
 	/* begin block 1 */
-		// Start line: 2710
+		// Start line: 2769
 	/* end block 1 */
-	// End Line: 2711
+	// End Line: 2770
 
 	/* begin block 2 */
-		// Start line: 2711
+		// Start line: 2770
 	/* end block 2 */
-	// End Line: 2712
+	// End Line: 2771
+
+/* File: C:\kain2\game\CAMERA.C */
 
 short CAMERA_AngleDifference(short angle0,short angle1)
 
@@ -1506,11 +1550,13 @@ short CAMERA_AngleDifference(short angle0,short angle1)
 // decompiled code
 // original method signature: 
 // short /*$ra*/ CAMERA_SignedAngleDifference(short angle0 /*$a0*/, short angle1 /*$a1*/)
- // line 1160, offset 0x80016a10
+ // line 1182, offset 0x800163cc
 	/* begin block 1 */
-		// Start line: 2744
+		// Start line: 2803
 	/* end block 1 */
-	// End Line: 2745
+	// End Line: 2804
+
+/* File: C:\kain2\game\CAMERA.C */
 
 short CAMERA_SignedAngleDifference(short angle0,short angle1)
 
@@ -1525,26 +1571,49 @@ short CAMERA_SignedAngleDifference(short angle0,short angle1)
 
 // decompiled code
 // original method signature: 
-// unsigned long /*$ra*/ CAMERA_QueryMode(struct Camera *camera /*$a0*/)
- // line 1179, offset 0x80016a40
+// unsigned long /*$ra*/ CAMERA_QueryMode(struct Camera *camera /*$s0*/)
+ // line 1201, offset 0x800163fc
 	/* begin block 1 */
-		// Start line: 1180
-		// Start offset: 0x80016A40
+		// Start line: 1202
+		// Start offset: 0x800163FC
+		// Variables:
+	// 		unsigned long mode; // $s0
 	/* end block 1 */
-	// End offset: 0x80016A40
-	// End Line: 1180
+	// End offset: 0x80016484
+	// End Line: 1220
 
 	/* begin block 2 */
-		// Start line: 2783
+		// Start line: 2842
 	/* end block 2 */
-	// End Line: 2784
+	// End Line: 2843
+
+/* File: C:\kain2\game\CAMERA.C */
 
 ulong CAMERA_QueryMode(Camera *camera)
 
 {
   ulong uVar1;
+  int iVar2;
   
   uVar1 = INSTANCE_Query(camera->focusInstance,10);
+  if (camera->focusInstance == DAT_800d20f8) {
+    if ((uVar1 & 0x2000000) == 0) {
+      if (0 < combat_cam_debounce) {
+        uVar1 = uVar1 | 0x2000000;
+        combat_cam_debounce = combat_cam_debounce + -1;
+      }
+    }
+    else {
+      combat_cam_debounce = 1;
+    }
+  }
+  else {
+    uVar1 = uVar1 & 0xfdffffff;
+  }
+  iVar2 = WARPGATE_IsWarpgateActive();
+  if (iVar2 != 0) {
+    uVar1 = uVar1 | 0x80000000;
+  }
   return uVar1;
 }
 
@@ -1553,10 +1622,10 @@ ulong CAMERA_QueryMode(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_SetMaxVel(struct Camera *camera /*$s1*/)
- // line 1189, offset 0x80016a64
+ // line 1225, offset 0x80016498
 	/* begin block 1 */
-		// Start line: 1190
-		// Start offset: 0x80016A64
+		// Start line: 1226
+		// Start offset: 0x80016498
 		// Variables:
 	// 		long extraVel; // $s0
 	// 		long targetMaxVel; // $v0
@@ -1565,8 +1634,8 @@ ulong CAMERA_QueryMode(Camera *camera)
 	// 		static long maxVelVel; // offset 0xc
 
 		/* begin block 1.1 */
-			// Start line: 1190
-			// Start offset: 0x80016A64
+			// Start line: 1226
+			// Start offset: 0x80016498
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $v1
@@ -1578,16 +1647,18 @@ ulong CAMERA_QueryMode(Camera *camera)
 		// 		struct _Position *_v0; // $a0
 		// 		struct _Position *_v1; // $a2
 		/* end block 1.1 */
-		// End offset: 0x80016A64
-		// End Line: 1190
+		// End offset: 0x80016498
+		// End Line: 1226
 	/* end block 1 */
-	// End offset: 0x80016B5C
-	// End Line: 1222
+	// End offset: 0x80016590
+	// End Line: 1258
 
 	/* begin block 2 */
-		// Start line: 2803
+		// Start line: 2890
 	/* end block 2 */
-	// End Line: 2804
+	// End Line: 2891
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_SetMaxVel(Camera *camera)
 
@@ -1623,16 +1694,16 @@ void CAMERA_SetMaxVel(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_SetTarget(struct Camera *camera /*$s0*/, struct _Position *pos /*$s1*/)
- // line 1224, offset 0x80016b70
+ // line 1260, offset 0x800165a4
 	/* begin block 1 */
-		// Start line: 1225
-		// Start offset: 0x80016B70
+		// Start line: 1261
+		// Start offset: 0x800165A4
 		// Variables:
 	// 		struct _SVector sv; // stack offset -24
 
 		/* begin block 1.1 */
-			// Start line: 1225
-			// Start offset: 0x80016B70
+			// Start line: 1261
+			// Start offset: 0x800165A4
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $v1
@@ -1642,16 +1713,18 @@ void CAMERA_SetMaxVel(Camera *camera)
 		// 		short _z1; // $t0
 		// 		struct _SVector *_v; // $a0
 		/* end block 1.1 */
-		// End offset: 0x80016B70
-		// End Line: 1225
+		// End offset: 0x800165A4
+		// End Line: 1261
 	/* end block 1 */
-	// End offset: 0x80016B70
-	// End Line: 1225
+	// End offset: 0x800165A4
+	// End Line: 1261
 
 	/* begin block 2 */
-		// Start line: 2891
+		// Start line: 2978
 	/* end block 2 */
-	// End Line: 2892
+	// End Line: 2979
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_SetTarget(Camera *camera,_Position *pos)
 
@@ -1677,10 +1750,10 @@ void CAMERA_SetTarget(Camera *camera,_Position *pos)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_CalcPosition(struct _Position *position /*$s3*/, struct _Position *base /*$s2*/, struct _Rotation *rotation /*$s1*/, short distance /*$a3*/)
- // line 1235, offset 0x80016bec
+ // line 1271, offset 0x80016620
 	/* begin block 1 */
-		// Start line: 1236
-		// Start offset: 0x80016BEC
+		// Start line: 1272
+		// Start offset: 0x80016620
 		// Variables:
 	// 		struct SVECTOR sv; // stack offset -96
 	// 		struct VECTOR v; // stack offset -88
@@ -1688,24 +1761,26 @@ void CAMERA_SetTarget(Camera *camera,_Position *pos)
 	// 		struct _Vector vectorPos; // stack offset -40
 
 		/* begin block 1.1 */
-			// Start line: 1236
-			// Start offset: 0x80016BEC
+			// Start line: 1272
+			// Start offset: 0x80016620
 			// Variables:
 		// 		short _x1; // $v1
 		// 		short _y1; // $a0
 		// 		short _z1; // $v0
 		// 		struct _Vector *_v1; // $v0
 		/* end block 1.1 */
-		// End offset: 0x80016BEC
-		// End Line: 1236
+		// End offset: 0x80016620
+		// End Line: 1272
 	/* end block 1 */
-	// End offset: 0x80016BEC
-	// End Line: 1236
+	// End offset: 0x80016620
+	// End Line: 1272
 
 	/* begin block 2 */
-		// Start line: 2916
+		// Start line: 3003
 	/* end block 2 */
-	// End Line: 2917
+	// End Line: 3004
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_CalcPosition(_Position *position,_Position *base,_Rotation *rotation,short distance)
 
@@ -1728,10 +1803,10 @@ void CAMERA_CalcPosition(_Position *position,_Position *base,_Rotation *rotation
   
   local_60 = (uint)(ushort)-distance << 0x10;
   local_5c = local_5c & 0xffff0000;
-  MATH3D_SetUnityMatrix((MATRIX *)&local_48);
-  RotMatrixX((int)rotation->x,(int)(MATRIX *)&local_48);
-  RotMatrixY((int)rotation->y,(short *)(MATRIX *)&local_48);
-  RotMatrixZ((int)rotation->z,(short *)(MATRIX *)&local_48);
+  MATH3D_SetUnityMatrix((char)(MATRIX *)&local_48);
+  RotMatrixX((int)rotation->x,(MATRIX *)&local_48);
+  RotMatrixY((int)rotation->y,(MATRIX *)&local_48);
+  RotMatrixZ((int)rotation->z,(MATRIX *)&local_48);
   setCopControlWord(2,0,local_48);
   setCopControlWord(2,0x800,local_44);
   setCopControlWord(2,0x1000,local_40);
@@ -1757,10 +1832,10 @@ void CAMERA_CalcPosition(_Position *position,_Position *base,_Rotation *rotation
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_SetFocus(struct Camera *camera /*$s3*/, struct _Position *targetfocusPoint /*$s1*/)
- // line 1276, offset 0x80016d14
+ // line 1312, offset 0x80016748
 	/* begin block 1 */
-		// Start line: 1277
-		// Start offset: 0x80016D14
+		// Start line: 1313
+		// Start offset: 0x80016748
 		// Variables:
 	// 		struct _Instance *focusInstance; // $s0
 	// 		struct _Model *model; // $v0
@@ -1770,36 +1845,36 @@ void CAMERA_CalcPosition(_Position *position,_Position *base,_Rotation *rotation
 	// 		struct _Vector temp2; // stack offset -48
 
 		/* begin block 1.1 */
-			// Start line: 1292
-			// Start offset: 0x80016D60
+			// Start line: 1328
+			// Start offset: 0x80016794
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $a0
 		// 		short _z1; // $v1
 		// 		struct _SVector *_v0; // $s2
 		/* end block 1.1 */
-		// End offset: 0x80016D60
-		// End Line: 1292
+		// End offset: 0x80016794
+		// End Line: 1328
 
 		/* begin block 1.2 */
-			// Start line: 1292
-			// Start offset: 0x80016D60
+			// Start line: 1328
+			// Start offset: 0x80016794
 			// Variables:
 		// 		short _x1; // $v1
 		// 		short _y1; // $a0
 		// 		short _z1; // $t1
 		// 		struct _Position *_v1; // $v0
 		/* end block 1.2 */
-		// End offset: 0x80016D60
-		// End Line: 1292
+		// End offset: 0x80016794
+		// End Line: 1328
 
 		/* begin block 1.3 */
-			// Start line: 1302
-			// Start offset: 0x80016DE4
+			// Start line: 1338
+			// Start offset: 0x80016818
 
 			/* begin block 1.3.1 */
-				// Start line: 1304
-				// Start offset: 0x80016DE4
+				// Start line: 1340
+				// Start offset: 0x80016818
 				// Variables:
 			// 		short _x0; // $v0
 			// 		short _y0; // $a2
@@ -1807,60 +1882,60 @@ void CAMERA_CalcPosition(_Position *position,_Position *base,_Rotation *rotation
 			// 		short _y1; // $t0
 			// 		short _z1; // $v1
 			/* end block 1.3.1 */
-			// End offset: 0x80016DE4
-			// End Line: 1304
+			// End offset: 0x80016818
+			// End Line: 1340
 		/* end block 1.3 */
-		// End offset: 0x80016E34
-		// End Line: 1312
+		// End offset: 0x80016868
+		// End Line: 1348
 
 		/* begin block 1.4 */
-			// Start line: 1324
-			// Start offset: 0x80016E78
+			// Start line: 1360
+			// Start offset: 0x800168AC
 			// Variables:
 		// 		struct _Instance *instance; // $v0
 		// 		struct _SVector output; // stack offset -32
 
 			/* begin block 1.4.1 */
-				// Start line: 1330
-				// Start offset: 0x80016E88
+				// Start line: 1366
+				// Start offset: 0x800168BC
 				// Variables:
 			// 		short _x1; // $v0
 			// 		short _y1; // $v1
 			// 		short _z1; // $a0
 			/* end block 1.4.1 */
-			// End offset: 0x80016E88
-			// End Line: 1330
+			// End offset: 0x800168BC
+			// End Line: 1366
 
 			/* begin block 1.4.2 */
-				// Start line: 1337
-				// Start offset: 0x80016EC0
+				// Start line: 1373
+				// Start offset: 0x800168F4
 				// Variables:
 			// 		short _x1; // $v1
 			// 		short _y1; // $a0
 			// 		short _z1; // $v0
 			// 		struct _Position *_v1; // $v0
 			/* end block 1.4.2 */
-			// End offset: 0x80016EC0
-			// End Line: 1337
+			// End offset: 0x800168F4
+			// End Line: 1373
 		/* end block 1.4 */
-		// End offset: 0x80016EC0
-		// End Line: 1337
+		// End offset: 0x800168F4
+		// End Line: 1373
 
 		/* begin block 1.5 */
-			// Start line: 1342
-			// Start offset: 0x80016EC0
+			// Start line: 1378
+			// Start offset: 0x800168F4
 			// Variables:
 		// 		short _x1; // $v1
 		// 		short _y1; // $a0
 		// 		short _z1; // $v0
 		// 		struct _Position *_v1; // $v0
 		/* end block 1.5 */
-		// End offset: 0x80016EDC
-		// End Line: 1342
+		// End offset: 0x80016910
+		// End Line: 1378
 
 		/* begin block 1.6 */
-			// Start line: 1345
-			// Start offset: 0x80016EDC
+			// Start line: 1381
+			// Start offset: 0x80016910
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $v0
@@ -1869,16 +1944,18 @@ void CAMERA_CalcPosition(_Position *position,_Position *base,_Rotation *rotation
 		// 		short _y1; // $a0
 		// 		short _z1; // $a1
 		/* end block 1.6 */
-		// End offset: 0x80016EDC
-		// End Line: 1345
+		// End offset: 0x80016910
+		// End Line: 1381
 	/* end block 1 */
-	// End offset: 0x80016F70
-	// End Line: 1382
+	// End offset: 0x800169A4
+	// End Line: 1418
 
 	/* begin block 2 */
-		// Start line: 3011
+		// Start line: 3098
 	/* end block 2 */
-	// End Line: 3012
+	// End Line: 3099
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_SetFocus(Camera *camera,_Position *targetfocusPoint)
 
@@ -1889,22 +1966,18 @@ void CAMERA_SetFocus(Camera *camera,_Position *targetfocusPoint)
   _Segment *p_Var4;
   ulong uVar5;
   _Instance *Inst;
-  short local_40;
-  short local_3e;
-  short local_3c;
+  SVECTOR local_40;
   _SVector local_38;
-  undefined auStack48 [16];
-  short local_20;
-  short local_1e;
-  short local_1c;
+  VECTOR VStack48;
+  SVECTOR local_20;
   
   Inst = camera->focusInstance;
   if (((camera->flags & 0x10000U) != 0) || ((camera->instance_mode & 0x4000000) != 0)) {
     p_Var4 = Inst->object->modelList[Inst->currentModel]->segmentList;
-    local_40 = p_Var4[1].px;
-    local_3e = p_Var4[1].py;
-    local_3c = p_Var4[1].pz;
-    ApplyMatrix(Inst->matrix + 1,&local_40,auStack48);
+    local_40.vx = p_Var4[1].px;
+    local_40.vy = p_Var4[1].py;
+    local_40.vz = p_Var4[1].pz;
+    ApplyMatrix(Inst->matrix + 1,&local_40,&VStack48);
     sVar1 = (Inst->position).x;
     sVar2 = (Inst->position).y;
     sVar3 = (Inst->position).z;
@@ -1912,9 +1985,9 @@ void CAMERA_SetFocus(Camera *camera,_Position *targetfocusPoint)
     targetfocusPoint->y = sVar2;
     targetfocusPoint->z = sVar3;
     if ((camera->flags & 0x10000U) != 0) {
-      targetfocusPoint->x = sVar1 + local_40;
-      targetfocusPoint->y = targetfocusPoint->y + local_3e;
-      targetfocusPoint->z = sVar3 + local_3c;
+      targetfocusPoint->x = sVar1 + local_40.vx;
+      targetfocusPoint->y = targetfocusPoint->y + local_40.vy;
+      targetfocusPoint->z = sVar3 + local_40.vz;
       uVar5 = INSTANCE_Query(Inst,9);
       if ((uVar5 & 0x40) != 0) {
         targetfocusPoint->z = targetfocusPoint->z + 0xc0;
@@ -1923,10 +1996,10 @@ void CAMERA_SetFocus(Camera *camera,_Position *targetfocusPoint)
     sVar1 = targetfocusPoint->z;
     *(undefined4 *)&camera->real_focuspoint = *(undefined4 *)targetfocusPoint;
     (camera->real_focuspoint).z = sVar1;
-    goto LAB_80016f64;
+    goto LAB_80016998;
   }
   if (((camera->instance_mode & 0x2000000) == 0) || (1 < (uint)(ushort)camera->mode - 0xc)) {
-LAB_80016ec4:
+LAB_800168f8:
     sVar1 = (Inst->position).y;
     sVar2 = (Inst->position).z;
     targetfocusPoint->x = (Inst->position).x;
@@ -1935,12 +2008,12 @@ LAB_80016ec4:
   }
   else {
     uVar5 = INSTANCE_Query(Inst,0x22);
-    if (uVar5 == 0) goto LAB_80016ec4;
-    LoadAverageShort12((uint *)(uVar5 + 0x5c),(uint *)&Inst->position,
-                       0x1000 - (int)combat_cam_weight,(int)combat_cam_weight,(uint *)&local_20);
-    targetfocusPoint->x = local_20;
-    targetfocusPoint->y = local_1e;
-    targetfocusPoint->z = local_1c;
+    if (uVar5 == 0) goto LAB_800168f8;
+    LoadAverageShort12((SVECTOR *)(uVar5 + 0x5c),(SVECTOR *)&Inst->position,
+                       0x1000 - (int)combat_cam_weight,(int)combat_cam_weight,&local_20);
+    targetfocusPoint->x = local_20.vx;
+    targetfocusPoint->y = local_20.vy;
+    targetfocusPoint->z = local_20.vz;
   }
   CAMERA_CalcFocusOffset(&local_38,camera);
   targetfocusPoint->x = targetfocusPoint->x + local_38.x;
@@ -1957,7 +2030,7 @@ LAB_80016ec4:
       return;
     }
   }
-LAB_80016f64:
+LAB_80016998:
   camera->focuspoint_fallz = targetfocusPoint->z;
   return;
 }
@@ -1967,16 +2040,18 @@ LAB_80016f64:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_Lock(struct Camera *camera /*$a0*/, long lock /*$a1*/)
- // line 1384, offset 0x80016f90
+ // line 1420, offset 0x800169c4
 	/* begin block 1 */
-		// Start line: 3258
+		// Start line: 3345
 	/* end block 1 */
-	// End Line: 3259
+	// End Line: 3346
 
 	/* begin block 2 */
-		// Start line: 3259
+		// Start line: 3346
 	/* end block 2 */
-	// End Line: 3260
+	// End Line: 3347
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_Lock(Camera *camera,long lock)
 
@@ -1990,16 +2065,18 @@ void CAMERA_Lock(Camera *camera,long lock)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_Unlock(struct Camera *camera /*$a0*/, long unlock /*$a1*/)
- // line 1389, offset 0x80016fa4
+ // line 1425, offset 0x800169d8
 	/* begin block 1 */
-		// Start line: 3268
+		// Start line: 3355
 	/* end block 1 */
-	// End Line: 3269
+	// End Line: 3356
 
 	/* begin block 2 */
-		// Start line: 3269
+		// Start line: 3356
 	/* end block 2 */
-	// End Line: 3270
+	// End Line: 3357
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_Unlock(Camera *camera,long unlock)
 
@@ -2013,16 +2090,18 @@ void CAMERA_Unlock(Camera *camera,long unlock)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_SetSmoothValue(struct Camera *camera /*$a0*/, long smooth /*$a1*/)
- // line 1394, offset 0x80016fb8
+ // line 1430, offset 0x800169ec
 	/* begin block 1 */
-		// Start line: 3278
+		// Start line: 3365
 	/* end block 1 */
-	// End Line: 3279
+	// End Line: 3366
 
 	/* begin block 2 */
-		// Start line: 3280
+		// Start line: 3367
 	/* end block 2 */
-	// End Line: 3281
+	// End Line: 3368
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_SetSmoothValue(Camera *camera,long smooth)
 
@@ -2043,11 +2122,13 @@ void CAMERA_SetSmoothValue(Camera *camera,long smooth)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_SetTimer(struct Camera *camera /*$a0*/, long time /*$a1*/)
- // line 1407, offset 0x80017008
+ // line 1443, offset 0x80016a3c
 	/* begin block 1 */
-		// Start line: 3304
+		// Start line: 3391
 	/* end block 1 */
-	// End Line: 3305
+	// End Line: 3392
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_SetTimer(Camera *camera,long time)
 
@@ -2061,16 +2142,18 @@ void CAMERA_SetTimer(Camera *camera,long time)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_Adjust_tilt(struct Camera *camera /*$a0*/, long tilt /*$a1*/)
- // line 1413, offset 0x80017028
+ // line 1449, offset 0x80016a5c
 	/* begin block 1 */
-		// Start line: 3316
+		// Start line: 3403
 	/* end block 1 */
-	// End Line: 3317
+	// End Line: 3404
 
 	/* begin block 2 */
-		// Start line: 3317
+		// Start line: 3404
 	/* end block 2 */
-	// End Line: 3318
+	// End Line: 3405
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_Adjust_tilt(Camera *camera,long tilt)
 
@@ -2098,16 +2181,18 @@ void CAMERA_Adjust_tilt(Camera *camera,long tilt)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_Adjust_distance(struct Camera *camera /*$a0*/, long dist /*$a1*/)
- // line 1431, offset 0x80017064
+ // line 1467, offset 0x80016a98
 	/* begin block 1 */
-		// Start line: 3355
+		// Start line: 3442
 	/* end block 1 */
-	// End Line: 3356
+	// End Line: 3443
 
 	/* begin block 2 */
-		// Start line: 3356
+		// Start line: 3443
 	/* end block 2 */
-	// End Line: 3357
+	// End Line: 3444
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_Adjust_distance(Camera *camera,long dist)
 
@@ -2139,11 +2224,13 @@ void CAMERA_Adjust_distance(Camera *camera,long dist)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_Adjust_rotation(struct Camera *camera /*$s0*/, long rotation /*$s1*/)
- // line 1449, offset 0x800170e0
+ // line 1485, offset 0x80016b14
 	/* begin block 1 */
-		// Start line: 3393
+		// Start line: 3480
 	/* end block 1 */
-	// End Line: 3394
+	// End Line: 3481
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_Adjust_rotation(Camera *camera,long rotation)
 
@@ -2165,7 +2252,7 @@ void CAMERA_Adjust_rotation(Camera *camera,long rotation)
       camera->teleportZRot = uVar3;
       (camera->collisionTargetFocusRotation).z = uVar3;
     }
-    uVar1 = gameTrackerX.frameCount;
+    uVar1 = DAT_800d21f8;
     camera->always_rotate_flag = 1;
     camera->lastModTime = uVar1;
   }
@@ -2177,11 +2264,13 @@ void CAMERA_Adjust_rotation(Camera *camera,long rotation)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_Adjust_roll(long roll_degrees /*$s0*/, int frames /*$s1*/)
- // line 1468, offset 0x80017164
+ // line 1504, offset 0x80016b98
 	/* begin block 1 */
-		// Start line: 3439
+		// Start line: 3526
 	/* end block 1 */
-	// End Line: 3440
+	// End Line: 3527
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_Adjust_roll(long roll_degrees,int frames)
 
@@ -2212,24 +2301,24 @@ void CAMERA_Adjust_roll(long roll_degrees,int frames)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_Adjust(struct Camera *camera /*$s1*/, long adjust /*$s2*/)
- // line 1484, offset 0x800171e8
+ // line 1520, offset 0x80016c1c
 	/* begin block 1 */
-		// Start line: 1485
-		// Start offset: 0x800171E8
+		// Start line: 1521
+		// Start offset: 0x80016C1C
 
 		/* begin block 1.1 */
-			// Start line: 1489
-			// Start offset: 0x80017210
+			// Start line: 1525
+			// Start offset: 0x80016C44
 
 			/* begin block 1.1.1 */
-				// Start line: 1492
-				// Start offset: 0x8001721C
+				// Start line: 1528
+				// Start offset: 0x80016C50
 				// Variables:
 			// 		struct _SVector dv; // stack offset -24
 
 				/* begin block 1.1.1.1 */
-					// Start line: 1493
-					// Start offset: 0x8001721C
+					// Start line: 1529
+					// Start offset: 0x80016C50
 					// Variables:
 				// 		short _x0; // $v0
 				// 		short _y0; // $v1
@@ -2240,22 +2329,24 @@ void CAMERA_Adjust_roll(long roll_degrees,int frames)
 				// 		struct _SVector *_v; // $a0
 				// 		struct _SVector *_v1; // $a3
 				/* end block 1.1.1.1 */
-				// End offset: 0x8001721C
-				// End Line: 1493
+				// End offset: 0x80016C50
+				// End Line: 1529
 			/* end block 1.1.1 */
-			// End offset: 0x80017260
-			// End Line: 1508
+			// End offset: 0x80016C94
+			// End Line: 1544
 		/* end block 1.1 */
-		// End offset: 0x80017290
-		// End Line: 1539
+		// End offset: 0x80016CC4
+		// End Line: 1575
 	/* end block 1 */
-	// End offset: 0x80017290
-	// End Line: 1544
+	// End offset: 0x80016CC4
+	// End Line: 1580
 
 	/* begin block 2 */
-		// Start line: 3473
+		// Start line: 3560
 	/* end block 2 */
-	// End Line: 3474
+	// End Line: 3561
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_Adjust(Camera *camera,long adjust)
 
@@ -2288,16 +2379,18 @@ void CAMERA_Adjust(Camera *camera,long adjust)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_ChangeTo(struct Camera *camera /*$a0*/, struct _CameraKey *cameraKey /*$a1*/)
- // line 1547, offset 0x800172a8
+ // line 1583, offset 0x80016cdc
 	/* begin block 1 */
-		// Start line: 3599
+		// Start line: 3686
 	/* end block 1 */
-	// End Line: 3600
+	// End Line: 3687
 
 	/* begin block 2 */
-		// Start line: 3600
+		// Start line: 3687
 	/* end block 2 */
-	// End Line: 3601
+	// End Line: 3688
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_ChangeTo(Camera *camera,_CameraKey *cameraKey)
 
@@ -2310,46 +2403,58 @@ void CAMERA_ChangeTo(Camera *camera,_CameraKey *cameraKey)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ CAMERA_SetShake(struct Camera *camera /*$a0*/, long shake /*$a1*/, long scale /*$a2*/)
- // line 1552, offset 0x800172b0
+// void /*$ra*/ CAMERA_SetShake(struct Camera *camera /*$t0*/, long shake /*$a1*/, long scale /*$a2*/)
+ // line 1588, offset 0x80016ce4
 	/* begin block 1 */
-		// Start line: 3609
+		// Start line: 1589
+		// Start offset: 0x80016CE4
+		// Variables:
+	// 		int shock; // $a0
+	// 		int duration; // $a1
 	/* end block 1 */
-	// End Line: 3610
+	// End offset: 0x80016D7C
+	// End Line: 1608
+
+	/* begin block 2 */
+		// Start line: 3696
+	/* end block 2 */
+	// End Line: 3697
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_SetShake(Camera *camera,long shake,long scale)
 
 {
-  ushort uVar1;
+  int motor1_speed;
+  short sVar1;
   int motor1_time;
-  short sVar2;
   
-  motor1_time = camera->shake;
+  motor1_speed = camera->shake;
   camera->shakeFrame = 0;
-  if (motor1_time == 0) {
+  if (motor1_speed == 0) {
     camera->shake = shake << 0xc;
     camera->shakeScale = (short)scale;
   }
   else {
-    if (motor1_time < shake << 0xc) {
-      motor1_time = shake << 0xc;
+    if (motor1_speed < shake << 0xc) {
+      motor1_speed = shake << 0xc;
     }
-    camera->shake = motor1_time;
-    sVar2 = camera->shakeScale;
+    camera->shake = motor1_speed;
+    sVar1 = camera->shakeScale;
     if (camera->shakeScale < scale) {
-      sVar2 = (short)scale;
+      sVar1 = (short)scale;
     }
-    camera->shakeScale = sVar2;
+    camera->shakeScale = sVar1;
+  }
+  motor1_speed = (int)((uint)(ushort)camera->shakeScale << 0x10) >> 0x11;
+  if (0xff < motor1_speed) {
+    motor1_speed = 0xff;
   }
   motor1_time = camera->shake;
-  if (motor1_time < 0x2000) {
-    uVar1 = camera->shakeScale;
-    motor1_time = 0x2000;
+  if (motor1_time < 0x4000) {
+    motor1_time = 0x4000;
   }
-  else {
-    uVar1 = camera->shakeScale;
-  }
-  GAMEPAD_Shock1((int)((uint)uVar1 << 0x10) >> 0x11,motor1_time);
+  GAMEPAD_Shock1(motor1_speed,motor1_time);
   return;
 }
 
@@ -2358,17 +2463,19 @@ void CAMERA_SetShake(Camera *camera,long shake,long scale)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ Decouple_AngleMoveToward(short *current_ptr /*$a0*/, short destination /*$a1*/, short step /*$a3*/)
- // line 1572, offset 0x80017350
+ // line 1611, offset 0x80016d94
 	/* begin block 1 */
-		// Start line: 3649
+		// Start line: 3742
 	/* end block 1 */
-	// End Line: 3650
+	// End Line: 3743
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void Decouple_AngleMoveToward(short *current_ptr,short destination,short step)
 
 {
-  if (gameTrackerX.idleTime != 0x1000) {
-    step = (short)((int)step * gameTrackerX.idleTime >> 0xc);
+  if (DAT_800d2314 != 0x1000) {
+    step = (short)((uint)(step * DAT_800d2314) >> 0xc);
   }
   AngleMoveToward(current_ptr,destination,step);
   return;
@@ -2379,21 +2486,23 @@ void Decouple_AngleMoveToward(short *current_ptr,short destination,short step)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CriticalDampValue(long dampMode /*$a0*/, short *sourceVal /*$a1*/, short targetVal /*$t2*/, short *vel /*$a3*/, short *accl /*stack 16*/, int smooth /*stack 20*/)
- // line 1580, offset 0x800173a0
+ // line 1619, offset 0x80016de4
 	/* begin block 1 */
-		// Start line: 1581
-		// Start offset: 0x800173A0
+		// Start line: 1620
+		// Start offset: 0x80016DE4
 		// Variables:
 	// 		short maxVel; // $t0
 	// 		short useVel; // $a0
 	/* end block 1 */
-	// End offset: 0x8001754C
-	// End Line: 1639
+	// End offset: 0x80016F90
+	// End Line: 1678
 
 	/* begin block 2 */
-		// Start line: 3665
+		// Start line: 3758
 	/* end block 2 */
-	// End Line: 3666
+	// End Line: 3759
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CriticalDampValue(long dampMode,short *sourceVal,short targetVal,short *vel,short *accl,
                       int smooth)
@@ -2415,7 +2524,7 @@ void CriticalDampValue(long dampMode,short *sourceVal,short targetVal,short *vel
     smooth._0_2_ = (short)(-0x1000 / iVar5);
   }
   if (dampMode == 1) {
-LAB_80017448:
+LAB_80016e8c:
     iVar5 = (uint)(ushort)targetVal - (uint)(ushort)*sourceVal;
     if (dampMode == 5) {
       sVar4 = *vel;
@@ -2442,16 +2551,16 @@ LAB_80017448:
     if (iVar6 < iVar5) {
       *vel = (short)smooth;
       sVar3 = (short)smooth;
-      if (gameTrackerX.idleTime != 0x1000) {
-        sVar3 = (short)(iVar6 * gameTrackerX.idleTime >> 0xc);
+      if (DAT_800d2314 != 0x1000) {
+        sVar3 = (short)((uint)(iVar6 * DAT_800d2314) >> 0xc);
       }
     }
     else {
       if (iVar5 < -iVar6) {
         *vel = -(short)smooth;
         sVar3 = -(short)smooth;
-        if (gameTrackerX.idleTime != 0x1000) {
-          sVar3 = (short)(-(iVar6 * gameTrackerX.idleTime) >> 0xc);
+        if (DAT_800d2314 != 0x1000) {
+          sVar3 = (short)((uint)-(iVar6 * DAT_800d2314) >> 0xc);
         }
       }
     }
@@ -2459,10 +2568,10 @@ LAB_80017448:
   }
   else {
     if (1 < dampMode) {
-      if ((6 < dampMode) || (dampMode < 5)) goto LAB_80017530;
-      goto LAB_80017448;
+      if ((6 < dampMode) || (dampMode < 5)) goto LAB_80016f74;
+      goto LAB_80016e8c;
     }
-    if (dampMode != 0) goto LAB_80017530;
+    if (dampMode != 0) goto LAB_80016f74;
     sVar3 = (short)((int)(((uint)(ushort)targetVal - (uint)(ushort)*sourceVal) * 0x10000) >> 0x12) -
             *vel;
     *accl = sVar3;
@@ -2471,7 +2580,7 @@ LAB_80017448:
     sVar3 = *sourceVal + sVar3;
   }
   *sourceVal = sVar3;
-LAB_80017530:
+LAB_80016f74:
   if (*vel != 0) {
     return;
   }
@@ -2484,10 +2593,10 @@ LAB_80017530:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CriticalDampPosition(long dampMode /*$a0*/, struct _Position *position /*$s1*/, struct _Position *targetPos /*$s3*/, struct _SVector *vel /*$s2*/, struct _SVector *accl /*stack 16*/, int smooth /*stack 20*/)
- // line 1692, offset 0x80017554
+ // line 1731, offset 0x80016f98
 	/* begin block 1 */
-		// Start line: 1693
-		// Start offset: 0x80017554
+		// Start line: 1732
+		// Start offset: 0x80016F98
 		// Variables:
 	// 		long length; // $s0
 	// 		struct _Vector vector; // stack offset -48
@@ -2496,8 +2605,8 @@ LAB_80017530:
 	// 		int shift; // $a3
 
 		/* begin block 1.1 */
-			// Start line: 1714
-			// Start offset: 0x800175D0
+			// Start line: 1753
+			// Start offset: 0x80017014
 			// Variables:
 		// 		long _x0; // $v0
 		// 		long _y0; // $a2
@@ -2507,12 +2616,12 @@ LAB_80017530:
 		// 		long _z1; // $a0
 		// 		struct _Vector *_v; // $v1
 		/* end block 1.1 */
-		// End offset: 0x800175D0
-		// End Line: 1714
+		// End offset: 0x80017014
+		// End Line: 1753
 
 		/* begin block 1.2 */
-			// Start line: 1729
-			// Start offset: 0x8001768C
+			// Start line: 1768
+			// Start offset: 0x800170D0
 			// Variables:
 		// 		long _x0; // $v0
 		// 		long _y0; // $a2
@@ -2522,12 +2631,12 @@ LAB_80017530:
 		// 		long _z1; // $a0
 		// 		struct _Vector *_v; // $v1
 		/* end block 1.2 */
-		// End offset: 0x8001768C
-		// End Line: 1729
+		// End offset: 0x800170D0
+		// End Line: 1768
 
 		/* begin block 1.3 */
-			// Start line: 1763
-			// Start offset: 0x80017830
+			// Start line: 1802
+			// Start offset: 0x80017274
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $v1
@@ -2537,23 +2646,23 @@ LAB_80017530:
 		// 		short _z1; // $t0
 		// 		struct _SVector *_v; // $s2
 		/* end block 1.3 */
-		// End offset: 0x80017830
-		// End Line: 1763
+		// End offset: 0x80017274
+		// End Line: 1802
 
 		/* begin block 1.4 */
-			// Start line: 1767
-			// Start offset: 0x80017884
+			// Start line: 1806
+			// Start offset: 0x800172C8
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a0
 		/* end block 1.4 */
-		// End offset: 0x80017884
-		// End Line: 1767
+		// End offset: 0x800172C8
+		// End Line: 1806
 
 		/* begin block 1.5 */
-			// Start line: 1771
-			// Start offset: 0x80017884
+			// Start line: 1810
+			// Start offset: 0x800172C8
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $v0
@@ -2561,12 +2670,12 @@ LAB_80017530:
 		// 		short _y1; // $a0
 		// 		short _z1; // $a1
 		/* end block 1.5 */
-		// End offset: 0x80017884
-		// End Line: 1771
+		// End offset: 0x800172C8
+		// End Line: 1810
 
 		/* begin block 1.6 */
-			// Start line: 1778
-			// Start offset: 0x80017920
+			// Start line: 1817
+			// Start offset: 0x80017364
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $v1
@@ -2576,38 +2685,40 @@ LAB_80017530:
 		// 		short _z1; // $a3
 		// 		struct _SVector *_v; // $a1
 		/* end block 1.6 */
-		// End offset: 0x80017920
-		// End Line: 1778
+		// End offset: 0x80017364
+		// End Line: 1817
 
 		/* begin block 1.7 */
-			// Start line: 1792
-			// Start offset: 0x80017AB0
+			// Start line: 1831
+			// Start offset: 0x800174F4
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a0
 		/* end block 1.7 */
-		// End offset: 0x80017AB0
-		// End Line: 1792
+		// End offset: 0x800174F4
+		// End Line: 1831
 
 		/* begin block 1.8 */
-			// Start line: 1823
-			// Start offset: 0x80017BE0
+			// Start line: 1862
+			// Start offset: 0x80017624
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a0
 		/* end block 1.8 */
-		// End offset: 0x80017BF8
-		// End Line: 1823
+		// End offset: 0x8001763C
+		// End Line: 1862
 	/* end block 1 */
-	// End offset: 0x80017BF8
-	// End Line: 1825
+	// End offset: 0x8001763C
+	// End Line: 1864
 
 	/* begin block 2 */
-		// Start line: 3891
+		// Start line: 3984
 	/* end block 2 */
-	// End Line: 3892
+	// End Line: 3985
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CriticalDampPosition
                (long dampMode,_Position *position,_Position *targetPos,_SVector *vel,_SVector *accl,
@@ -2625,7 +2736,7 @@ void CriticalDampPosition
   
   iVar7 = (int)(short)smooth;
   if (iVar7 == 0) {
-LAB_80017be0:
+LAB_80017624:
     sVar6 = targetPos->y;
     sVar5 = targetPos->z;
     position->x = targetPos->x;
@@ -2671,14 +2782,14 @@ LAB_80017be0:
     vel->x = (short)((vel->x * iVar7) / lVar3);
     vel->y = (short)((vel->y * iVar7) / lVar3);
     vel->z = (short)((vel->z * iVar7) / lVar3);
-    if (gameTrackerX.idleTime == 0x1000) break;
-    position->x = position->x + (short)((int)vel->x * gameTrackerX.idleTime >> 0xc);
-    position->y = position->y + (short)((int)vel->y * gameTrackerX.idleTime >> 0xc);
+    if (DAT_800d2314 == 0x1000) break;
+    position->x = position->x + (short)((uint)(vel->x * DAT_800d2314) >> 0xc);
+    position->y = position->y + (short)((uint)(vel->y * DAT_800d2314) >> 0xc);
     sVar6 = position->z;
-    sVar5 = (short)((int)vel->z * gameTrackerX.idleTime >> 0xc);
-    goto code_r0x80017bd4;
+    sVar5 = (short)((uint)(vel->z * DAT_800d2314) >> 0xc);
+    goto code_r0x80017618;
   default:
-    goto switchD_800175c8_caseD_2;
+    goto switchD_8001700c_caseD_2;
   case 3:
     local_20.x = targetPos->x - position->x;
     local_20.y = targetPos->y - position->y;
@@ -2691,7 +2802,7 @@ LAB_80017be0:
       position->y = position->y + (short)((local_20.y * iVar7) / lVar3);
       return;
     }
-    goto LAB_80017be0;
+    goto LAB_80017624;
   case 4:
     iVar7 = (uint)(ushort)targetPos->x - (uint)(ushort)position->x;
     local_20.y = targetPos->y - position->y;
@@ -2744,18 +2855,18 @@ LAB_80017be0:
     vel->z = vel->z + accl->z;
     lVar3 = CAMERA_LengthSVector(vel);
     lVar4 = CAMERA_LengthSVector(&local_20);
-    if (lVar4 < lVar3) goto LAB_80017be0;
+    if (lVar4 < lVar3) goto LAB_80017624;
     iVar7 = (int)(short)smooth;
     if (iVar7 <= lVar3) {
       vel->x = (short)((vel->x * iVar7) / lVar3);
       vel->y = (short)((vel->y * iVar7) / lVar3);
       vel->z = (short)((vel->z * iVar7) / lVar3);
-      if (gameTrackerX.idleTime != 0x1000) {
-        position->x = position->x + (short)((int)vel->x * gameTrackerX.idleTime >> 0xc);
-        position->y = position->y + (short)((int)vel->y * gameTrackerX.idleTime >> 0xc);
+      if (DAT_800d2314 != 0x1000) {
+        position->x = position->x + (short)((uint)(vel->x * DAT_800d2314) >> 0xc);
+        position->y = position->y + (short)((uint)(vel->y * DAT_800d2314) >> 0xc);
         sVar6 = position->z;
-        sVar5 = (short)((int)vel->z * gameTrackerX.idleTime >> 0xc);
-        goto code_r0x80017bd4;
+        sVar5 = (short)((uint)(vel->z * DAT_800d2314) >> 0xc);
+        goto code_r0x80017618;
       }
     }
   }
@@ -2763,9 +2874,9 @@ LAB_80017be0:
   position->y = position->y + vel->y;
   sVar6 = position->z;
   sVar5 = vel->z;
-code_r0x80017bd4:
+code_r0x80017618:
   position->z = sVar6 + sVar5;
-switchD_800175c8_caseD_2:
+switchD_8001700c_caseD_2:
   return;
 }
 
@@ -2774,20 +2885,22 @@ switchD_800175c8_caseD_2:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CriticalDampAngle(long dampMode /*$a0*/, short *currentVal /*$s0*/, short target /*$t1*/, short *vel /*$a3*/, short *accl /*stack 16*/, int smooth /*stack 20*/)
- // line 1827, offset 0x80017c18
+ // line 1866, offset 0x8001765c
 	/* begin block 1 */
-		// Start line: 1828
-		// Start offset: 0x80017C18
+		// Start line: 1867
+		// Start offset: 0x8001765C
 		// Variables:
 	// 		short current; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x80017C74
-	// End Line: 1843
+	// End offset: 0x800176B8
+	// End Line: 1882
 
 	/* begin block 2 */
-		// Start line: 4179
+		// Start line: 4272
 	/* end block 2 */
-	// End Line: 4180
+	// End Line: 4273
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CriticalDampAngle(long dampMode,short *currentVal,short target,short *vel,short *accl,
                       int smooth)
@@ -2820,17 +2933,17 @@ void CriticalDampAngle(long dampMode,short *currentVal,short target,short *vel,s
 // decompiled code
 // original method signature: 
 // short /*$ra*/ CAMERA_CalcZRotation(struct _Position *target /*$a0*/, struct _Position *position /*$a1*/)
- // line 1848, offset 0x80017cb8
+ // line 1887, offset 0x800176fc
 	/* begin block 1 */
-		// Start line: 1849
-		// Start offset: 0x80017CB8
+		// Start line: 1888
+		// Start offset: 0x800176FC
 		// Variables:
 	// 		struct _SVector sv; // stack offset -24
 	// 		struct _SVector onPlane; // stack offset -16
 
 		/* begin block 1.1 */
-			// Start line: 1849
-			// Start offset: 0x80017CB8
+			// Start line: 1888
+			// Start offset: 0x800176FC
 			// Variables:
 		// 		short _x0; // $a2
 		// 		short _y0; // $v0
@@ -2840,22 +2953,24 @@ void CriticalDampAngle(long dampMode,short *currentVal,short target,short *vel,s
 		// 		short _z1; // $t0
 		// 		struct _SVector *_v; // $a0
 		/* end block 1.1 */
-		// End offset: 0x80017CB8
-		// End Line: 1849
+		// End offset: 0x800176FC
+		// End Line: 1888
 	/* end block 1 */
-	// End offset: 0x80017CB8
-	// End Line: 1849
+	// End offset: 0x800176FC
+	// End Line: 1888
 
 	/* begin block 2 */
-		// Start line: 4231
+		// Start line: 4324
 	/* end block 2 */
-	// End Line: 4232
+	// End Line: 4325
+
+/* File: C:\kain2\game\CAMERA.C */
 
 short CAMERA_CalcZRotation(_Position *target,_Position *position)
 
 {
   short sVar1;
-  int iVar2;
+  long lVar2;
   short sVar3;
   _SVector local_10;
   
@@ -2865,8 +2980,8 @@ short CAMERA_CalcZRotation(_Position *target,_Position *position)
   local_10.x = sVar3;
   local_10.y = sVar1;
   CAMERA_LengthSVector(&local_10);
-  iVar2 = ratan2((int)sVar1,(int)sVar3);
-  return (short)((short)iVar2 + 0x400U & 0xfff);
+  lVar2 = ratan2((int)sVar1,(int)sVar3);
+  return (short)((short)lVar2 + 0x400U & 0xfff);
 }
 
 
@@ -2874,17 +2989,17 @@ short CAMERA_CalcZRotation(_Position *target,_Position *position)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_CalcRotation(struct _Rotation *rotation /*$s0*/, struct _Position *target /*$a1*/, struct _Position *position /*$a2*/)
- // line 1865, offset 0x80017d30
+ // line 1904, offset 0x80017774
 	/* begin block 1 */
-		// Start line: 1866
-		// Start offset: 0x80017D30
+		// Start line: 1905
+		// Start offset: 0x80017774
 		// Variables:
 	// 		struct _SVector sv; // stack offset -24
 	// 		struct _SVector onPlane; // stack offset -16
 
 		/* begin block 1.1 */
-			// Start line: 1866
-			// Start offset: 0x80017D30
+			// Start line: 1905
+			// Start offset: 0x80017774
 			// Variables:
 		// 		short _x0; // $a3
 		// 		short _y0; // $v0
@@ -2894,16 +3009,18 @@ short CAMERA_CalcZRotation(_Position *target,_Position *position)
 		// 		short _z1; // $a1
 		// 		struct _SVector *_v; // $a0
 		/* end block 1.1 */
-		// End offset: 0x80017D30
-		// End Line: 1866
+		// End offset: 0x80017774
+		// End Line: 1905
 	/* end block 1 */
-	// End offset: 0x80017D30
-	// End Line: 1866
+	// End offset: 0x80017774
+	// End Line: 1905
 
 	/* begin block 2 */
-		// Start line: 4270
+		// Start line: 4363
 	/* end block 2 */
-	// End Line: 4271
+	// End Line: 4364
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_CalcRotation(_Rotation *rotation,_Position *target,_Position *position)
 
@@ -2911,24 +3028,23 @@ void CAMERA_CalcRotation(_Rotation *rotation,_Position *target,_Position *positi
   short sVar1;
   short sVar2;
   short sVar3;
-  uint uVar4;
-  int iVar5;
-  short sVar6;
+  long x;
+  short sVar4;
   _SVector local_10;
   
   sVar1 = position->z;
   sVar2 = target->z;
-  sVar6 = position->x - target->x;
+  sVar4 = position->x - target->x;
   sVar3 = position->y - target->y;
   local_10.z = 0;
-  local_10.x = sVar6;
+  local_10.x = sVar4;
   local_10.y = sVar3;
-  uVar4 = CAMERA_LengthSVector(&local_10);
-  iVar5 = ratan2((int)(short)(sVar1 - sVar2),uVar4);
-  rotation->x = -(short)iVar5;
+  x = CAMERA_LengthSVector(&local_10);
+  x = ratan2((int)(short)(sVar1 - sVar2),x);
+  rotation->x = -(short)x;
   rotation->y = 0;
-  iVar5 = ratan2((int)sVar3,(int)sVar6);
-  rotation->z = (short)iVar5 + 0x400;
+  x = ratan2((int)sVar3,(int)sVar4);
+  rotation->z = (short)x + 0x400;
   return;
 }
 
@@ -2937,18 +3053,18 @@ void CAMERA_CalcRotation(_Rotation *rotation,_Position *target,_Position *positi
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_CalcFSRotation(struct Camera *camera /*$a0*/, struct _Rotation *rotation /*$s0*/, struct _Position *target /*$a2*/, struct _Position *position /*$a3*/)
- // line 1882, offset 0x80017dcc
+ // line 1921, offset 0x80017810
 	/* begin block 1 */
-		// Start line: 1883
-		// Start offset: 0x80017DCC
+		// Start line: 1922
+		// Start offset: 0x80017810
 		// Variables:
 	// 		struct _SVector sv; // stack offset -32
 	// 		struct _SVector onPlane; // stack offset -24
 	// 		struct _SVector sv2; // stack offset -16
 
 		/* begin block 1.1 */
-			// Start line: 1883
-			// Start offset: 0x80017DCC
+			// Start line: 1922
+			// Start offset: 0x80017810
 			// Variables:
 		// 		short _x0; // $a1
 		// 		short _y0; // $v1
@@ -2958,31 +3074,32 @@ void CAMERA_CalcRotation(_Rotation *rotation,_Position *target,_Position *positi
 		// 		short _z1; // $a2
 		// 		struct _SVector *_v; // $v0
 		/* end block 1.1 */
-		// End offset: 0x80017DCC
-		// End Line: 1883
+		// End offset: 0x80017810
+		// End Line: 1922
 
 		/* begin block 1.2 */
-			// Start line: 1883
-			// Start offset: 0x80017DCC
+			// Start line: 1922
+			// Start offset: 0x80017810
 			// Variables:
 		// 		struct _SVector *_v0; // $v0
 		/* end block 1.2 */
-		// End offset: 0x80017DCC
-		// End Line: 1883
+		// End offset: 0x80017810
+		// End Line: 1922
 	/* end block 1 */
-	// End offset: 0x80017DCC
-	// End Line: 1883
+	// End offset: 0x80017810
+	// End Line: 1922
 
 	/* begin block 2 */
-		// Start line: 4308
+		// Start line: 4401
 	/* end block 2 */
-	// End Line: 4309
+	// End Line: 4402
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_CalcFSRotation(Camera *camera,_Rotation *rotation,_Position *target,_Position *position)
 
 {
-  uint uVar1;
-  int iVar2;
+  long x;
   _SVector local_18;
   short local_10;
   short local_e;
@@ -2994,12 +3111,12 @@ void CAMERA_CalcFSRotation(Camera *camera,_Rotation *rotation,_Position *target,
   local_18.z = 0;
   local_10 = local_18.x;
   local_e = local_18.y;
-  uVar1 = CAMERA_LengthSVector(&local_18);
-  iVar2 = ratan2((int)local_c,uVar1);
-  rotation->x = -(short)iVar2;
+  x = CAMERA_LengthSVector(&local_18);
+  x = ratan2((int)local_c,x);
+  rotation->x = -(short)x;
   rotation->y = 0;
-  iVar2 = ratan2((int)local_e,(int)local_10);
-  rotation->z = (short)iVar2 + 0x400;
+  x = ratan2((int)local_e,(int)local_10);
+  rotation->z = (short)x + 0x400;
   return;
 }
 
@@ -3008,16 +3125,18 @@ void CAMERA_CalcFSRotation(Camera *camera,_Rotation *rotation,_Position *target,
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_Relocate(struct Camera *camera /*$a0*/, struct _SVector *offset /*$a1*/, int streamSignalFlag /*$a2*/)
- // line 1902, offset 0x80017e78
+ // line 1941, offset 0x800178bc
 	/* begin block 1 */
-		// Start line: 4352
+		// Start line: 4445
 	/* end block 1 */
-	// End Line: 4353
+	// End Line: 4446
 
 	/* begin block 2 */
-		// Start line: 4357
+		// Start line: 4450
 	/* end block 2 */
-	// End Line: 4358
+	// End Line: 4451
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_Relocate(Camera *camera,_SVector *offset,int streamSignalFlag)
 
@@ -3035,6 +3154,9 @@ void CAMERA_Relocate(Camera *camera,_SVector *offset,int streamSignalFlag)
     (camera->targetFocusPoint).x = (camera->targetFocusPoint).x + offset->x;
     (camera->targetFocusPoint).y = (camera->targetFocusPoint).y + offset->y;
     (camera->targetFocusPoint).z = (camera->targetFocusPoint).z + offset->z;
+    (camera->newFocusInstancePos).x = (camera->newFocusInstancePos).x + offset->x;
+    (camera->newFocusInstancePos).y = (camera->newFocusInstancePos).y + offset->y;
+    (camera->newFocusInstancePos).z = (camera->newFocusInstancePos).z + offset->z;
   }
   return;
 }
@@ -3043,36 +3165,36 @@ void CAMERA_Relocate(Camera *camera,_SVector *offset,int streamSignalFlag)
 
 // decompiled code
 // original method signature: 
-// struct _TFace * /*$ra*/ CAMERA_SphereToSphereWithLines(struct Camera *camera /*$s7*/, struct CameraCollisionInfo *colInfo /*stack 4*/, int secondcheck_flag /*stack 8*/)
- // line 1968, offset 0x80017f88
+// struct _TFace * /*$ra*/ CAMERA_SphereToSphereWithLines(struct Camera *camera /*$s6*/, struct CameraCollisionInfo *colInfo /*stack 4*/, int secondcheck_flag /*stack 8*/)
+ // line 2010, offset 0x80017a08
 	/* begin block 1 */
-		// Start line: 1969
-		// Start offset: 0x80017F88
+		// Start line: 2011
+		// Start offset: 0x80017A08
 		// Variables:
-	// 		long minLength; // stack offset -84
-	// 		struct _SVector sv; // stack offset -312
-	// 		struct _SVector startPt[5]; // stack offset -304
-	// 		struct _SVector endPt[5]; // stack offset -264
-	// 		struct _SVector startLine; // stack offset -224
-	// 		struct _Vector adjStartLine; // stack offset -216
-	// 		struct _SVector endLine; // stack offset -200
-	// 		struct _Vector adjEndLine; // stack offset -192
-	// 		struct _Vector CamLineNormalized; // stack offset -176
-	// 		struct _Rotation rotation; // stack offset -160
-	// 		struct MATRIX matrix; // stack offset -152
-	// 		struct _TFace *result; // stack offset -80
-	// 		long i; // stack offset -76
-	// 		long init; // stack offset -72
-	// 		struct Level *level; // stack offset -68
+	// 		long minLength; // stack offset -68
+	// 		struct _SVector sv; // stack offset -344
+	// 		struct _SVector startPt[5]; // stack offset -336
+	// 		struct _SVector endPt[5]; // stack offset -296
+	// 		struct _SVector startLine; // stack offset -256
+	// 		struct _Vector adjStartLine; // stack offset -248
+	// 		struct _SVector endLine; // stack offset -232
+	// 		struct _Vector adjEndLine; // stack offset -224
+	// 		struct _Vector CamLineNormalized; // stack offset -208
+	// 		struct _Rotation rotation; // stack offset -192
+	// 		struct MATRIX matrix; // stack offset -184
+	// 		struct _TFace *result; // stack offset -64
+	// 		long i; // stack offset -60
+	// 		long init; // stack offset -56
+	// 		struct Level *level; // stack offset -52
 	// 		struct _Instance *focusInstance; // $v0
-	// 		struct _Vector ACE_vect; // stack offset -120
-	// 		struct _LCollideInfo lcol; // stack offset -104
+	// 		struct _Vector ACE_vect; // stack offset -152
+	// 		struct _LCollideInfo lcol; // stack offset -136
 	// 		int ACE_force; // $s2
-	// 		int in_warpRoom; // stack offset -64
+	// 		int in_warpRoom; // stack offset -48
 
 		/* begin block 1.1 */
-			// Start line: 2084
-			// Start offset: 0x80018294
+			// Start line: 2126
+			// Start offset: 0x80017D14
 			// Variables:
 		// 		short _x0; // $v1
 		// 		short _y0; // $a0
@@ -3083,12 +3205,12 @@ void CAMERA_Relocate(Camera *camera,_SVector *offset,int streamSignalFlag)
 		// 		struct _SVector *_v; // $v1
 		// 		struct _Position *_v0; // $v0
 		/* end block 1.1 */
-		// End offset: 0x80018294
-		// End Line: 2084
+		// End offset: 0x80017D14
+		// End Line: 2126
 
 		/* begin block 1.2 */
-			// Start line: 2084
-			// Start offset: 0x80018294
+			// Start line: 2126
+			// Start offset: 0x80017D14
 			// Variables:
 		// 		short _x0; // $v1
 		// 		short _y0; // $a0
@@ -3099,12 +3221,12 @@ void CAMERA_Relocate(Camera *camera,_SVector *offset,int streamSignalFlag)
 		// 		struct _SVector *_v; // $v1
 		// 		struct _Position *_v0; // $v0
 		/* end block 1.2 */
-		// End offset: 0x80018294
-		// End Line: 2084
+		// End offset: 0x80017D14
+		// End Line: 2126
 
 		/* begin block 1.3 */
-			// Start line: 2097
-			// Start offset: 0x800183A0
+			// Start line: 2139
+			// Start offset: 0x80017E20
 			// Variables:
 		// 		short _x0; // $v1
 		// 		short _y0; // $a0
@@ -3115,12 +3237,12 @@ void CAMERA_Relocate(Camera *camera,_SVector *offset,int streamSignalFlag)
 		// 		struct _SVector *_v; // $s3
 		// 		struct _Position *_v0; // $v0
 		/* end block 1.3 */
-		// End offset: 0x800183A0
-		// End Line: 2097
+		// End offset: 0x80017E20
+		// End Line: 2139
 
 		/* begin block 1.4 */
-			// Start line: 2097
-			// Start offset: 0x800183A0
+			// Start line: 2139
+			// Start offset: 0x80017E20
 			// Variables:
 		// 		short _x0; // $v1
 		// 		short _y0; // $a1
@@ -3131,12 +3253,12 @@ void CAMERA_Relocate(Camera *camera,_SVector *offset,int streamSignalFlag)
 		// 		struct _SVector *_v; // $v1
 		// 		struct _Position *_v0; // $v0
 		/* end block 1.4 */
-		// End offset: 0x800183A0
-		// End Line: 2097
+		// End offset: 0x80017E20
+		// End Line: 2139
 
 		/* begin block 1.5 */
-			// Start line: 2097
-			// Start offset: 0x800183A0
+			// Start line: 2139
+			// Start offset: 0x80017E20
 			// Variables:
 		// 		short _x0; // $v1
 		// 		short _y0; // $a1
@@ -3147,12 +3269,12 @@ void CAMERA_Relocate(Camera *camera,_SVector *offset,int streamSignalFlag)
 		// 		struct _SVector *_v; // $v0
 		// 		struct _Position *_v1; // $v0
 		/* end block 1.5 */
-		// End offset: 0x800183A0
-		// End Line: 2097
+		// End offset: 0x80017E20
+		// End Line: 2139
 
 		/* begin block 1.6 */
-			// Start line: 2097
-			// Start offset: 0x800183A0
+			// Start line: 2139
+			// Start offset: 0x80017E20
 			// Variables:
 		// 		short _x0; // $v1
 		// 		short _y0; // $a1
@@ -3163,12 +3285,12 @@ void CAMERA_Relocate(Camera *camera,_SVector *offset,int streamSignalFlag)
 		// 		struct _SVector *_v; // $v0
 		// 		struct _Position *_v1; // $v0
 		/* end block 1.6 */
-		// End offset: 0x800183A0
-		// End Line: 2097
+		// End offset: 0x80017E20
+		// End Line: 2139
 
 		/* begin block 1.7 */
-			// Start line: 2097
-			// Start offset: 0x800183A0
+			// Start line: 2139
+			// Start offset: 0x80017E20
 			// Variables:
 		// 		short _x0; // $v1
 		// 		short _y0; // $a2
@@ -3179,12 +3301,12 @@ void CAMERA_Relocate(Camera *camera,_SVector *offset,int streamSignalFlag)
 		// 		struct _SVector *_v; // $v1
 		// 		struct _Position *_v0; // $v0
 		/* end block 1.7 */
-		// End offset: 0x800183A0
-		// End Line: 2097
+		// End offset: 0x80017E20
+		// End Line: 2139
 
 		/* begin block 1.8 */
-			// Start line: 2097
-			// Start offset: 0x800183A0
+			// Start line: 2139
+			// Start offset: 0x80017E20
 			// Variables:
 		// 		short _x0; // $v1
 		// 		short _y0; // $a3
@@ -3195,12 +3317,12 @@ void CAMERA_Relocate(Camera *camera,_SVector *offset,int streamSignalFlag)
 		// 		struct _SVector *_v; // $v1
 		// 		struct _Position *_v0; // $v0
 		/* end block 1.8 */
-		// End offset: 0x800183A0
-		// End Line: 2097
+		// End offset: 0x80017E20
+		// End Line: 2139
 
 		/* begin block 1.9 */
-			// Start line: 2097
-			// Start offset: 0x800183A0
+			// Start line: 2139
+			// Start offset: 0x80017E20
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $v1
@@ -3212,12 +3334,12 @@ void CAMERA_Relocate(Camera *camera,_SVector *offset,int streamSignalFlag)
 		// 		struct _SVector *_v0; // $a3
 		// 		struct _SVector *_v1; // $t1
 		/* end block 1.9 */
-		// End offset: 0x800183A0
-		// End Line: 2097
+		// End offset: 0x80017E20
+		// End Line: 2139
 
 		/* begin block 1.10 */
-			// Start line: 2097
-			// Start offset: 0x800183A0
+			// Start line: 2139
+			// Start offset: 0x80017E20
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $v1
@@ -3227,61 +3349,62 @@ void CAMERA_Relocate(Camera *camera,_SVector *offset,int streamSignalFlag)
 		// 		short _z1; // $t1
 		// 		struct _SVector *_v; // $v0
 		/* end block 1.10 */
-		// End offset: 0x800183A0
-		// End Line: 2097
+		// End offset: 0x80017E20
+		// End Line: 2139
 
 		/* begin block 1.11 */
-			// Start line: 2097
-			// Start offset: 0x800183A0
+			// Start line: 2139
+			// Start offset: 0x80017E20
 			// Variables:
 		// 		short _x1; // $v1
-		// 		short _y1; // $a1
+		// 		short _y1; // $a0
 		// 		short _z1; // $v0
 		// 		struct _Position *_v1; // $v0
 		/* end block 1.11 */
-		// End offset: 0x800183A0
-		// End Line: 2097
+		// End offset: 0x80017E20
+		// End Line: 2139
 
 		/* begin block 1.12 */
-			// Start line: 2097
-			// Start offset: 0x800183A0
+			// Start line: 2139
+			// Start offset: 0x80017E20
 			// Variables:
 		// 		short _x1; // $v1
-		// 		short _y1; // $a1
-		// 		short _z1; // $v0
+		// 		short _y1; // $a0
+		// 		short _z1; // $a2
 		// 		struct _Position *_v1; // $v0
 		/* end block 1.12 */
-		// End offset: 0x800183A0
-		// End Line: 2097
+		// End offset: 0x80017E20
+		// End Line: 2139
 
 		/* begin block 1.13 */
-			// Start line: 2183
-			// Start offset: 0x800186FC
+			// Start line: 2225
+			// Start offset: 0x80018170
 			// Variables:
-		// 		int flag; // stack offset -60
-		// 		short backface_flag; // stack offset -88
+		// 		int flag; // $fp
+		// 		short backface_flag; // stack offset -72
+		// 		struct _PCollideInfo pCollideInfo; // stack offset -120
 
 			/* begin block 1.13.1 */
-				// Start line: 2203
-				// Start offset: 0x8001875C
+				// Start line: 2250
+				// Start offset: 0x800181D0
 				// Variables:
 			// 		int n; // $s2
 
 				/* begin block 1.13.1.1 */
-					// Start line: 2208
-					// Start offset: 0x80018770
+					// Start line: 2255
+					// Start offset: 0x800181E0
 					// Variables:
 				// 		struct Level *thislevel; // $s1
 				/* end block 1.13.1.1 */
-				// End offset: 0x80018810
-				// End Line: 2225
+				// End offset: 0x80018268
+				// End Line: 2272
 			/* end block 1.13.1 */
-			// End offset: 0x80018820
-			// End Line: 2226
+			// End offset: 0x80018278
+			// End Line: 2273
 
 			/* begin block 1.13.2 */
-				// Start line: 2251
-				// Start offset: 0x80018860
+				// Start line: 2298
+				// Start offset: 0x800182B8
 				// Variables:
 			// 		short _x0; // $v0
 			// 		short _y0; // $v1
@@ -3289,14 +3412,14 @@ void CAMERA_Relocate(Camera *camera,_SVector *offset,int streamSignalFlag)
 			// 		short _x1; // $a1
 			// 		short _y1; // $a2
 			// 		short _z1; // $a3
-			// 		struct _SVector *_v; // stack offset -48
+			// 		struct _SVector *_v; // stack offset -44
 			/* end block 1.13.2 */
-			// End offset: 0x80018860
-			// End Line: 2251
+			// End offset: 0x800182B8
+			// End Line: 2298
 
 			/* begin block 1.13.3 */
-				// Start line: 2282
-				// Start offset: 0x800189AC
+				// Start line: 2329
+				// Start offset: 0x8001840C
 				// Variables:
 			// 		short _x0; // $v0
 			// 		short _y0; // $v1
@@ -3305,19 +3428,21 @@ void CAMERA_Relocate(Camera *camera,_SVector *offset,int streamSignalFlag)
 			// 		short _y1; // $a2
 			// 		short _z1; // $a3
 			/* end block 1.13.3 */
-			// End offset: 0x800189AC
-			// End Line: 2282
+			// End offset: 0x8001840C
+			// End Line: 2329
 		/* end block 1.13 */
-		// End offset: 0x80018A2C
-		// End Line: 2307
+		// End offset: 0x8001848C
+		// End Line: 2354
 	/* end block 1 */
-	// End offset: 0x80018ACC
-	// End Line: 2326
+	// End offset: 0x80018520
+	// End Line: 2373
 
 	/* begin block 2 */
-		// Start line: 4484
+		// Start line: 4583
 	/* end block 2 */
-	// End Line: 4485
+	// End Line: 4584
+
+/* File: C:\kain2\game\CAMERA.C */
 
 _TFace * CAMERA_SphereToSphereWithLines
                    (Camera *camera,CameraCollisionInfo *colInfo,int secondcheck_flag)
@@ -3335,87 +3460,76 @@ _TFace * CAMERA_SphereToSphereWithLines
   ushort *puVar8;
   Level *address;
   int iVar9;
-  int iVar10;
-  CameraCollisionInfo *pCVar11;
-  _SVector *OldPos;
-  _SVector *NewPos;
-  CameraCollisionInfo *pCVar12;
-  undefined2 local_138;
+  CameraCollisionInfo *pCVar10;
+  SVECTOR *pSVar11;
+  SVECTOR *pSVar12;
+  CameraCollisionInfo *pCVar13;
+  uint Flags;
+  undefined2 local_158;
+  short local_156;
+  short local_154;
+  SVECTOR local_150;
+  _Position local_148;
+  _Position local_140;
+  short local_138;
   short local_136;
   short local_134;
-  _SVector local_130;
-  _Position local_128;
+  short local_130;
+  short local_12e;
+  short local_12c;
+  SVECTOR local_128;
   _Position local_120;
-  short local_118;
-  short local_116;
-  short local_114;
+  _Position local_118;
   short local_110;
   short local_10e;
   short local_10c;
-  _SVector local_108;
-  _Position local_100;
-  _Position local_f8;
+  short local_108;
+  short local_106;
+  short local_104;
+  SVECTOR local_100;
+  short local_f8 [2];
+  short local_f4;
   short local_f0;
-  short local_ee;
-  short local_ec;
-  short local_e8;
-  short local_e6;
-  short local_e4;
-  undefined2 local_e0;
-  short local_de;
-  undefined2 local_dc;
-  short local_d8 [2];
-  short local_d4;
-  short local_d0;
-  undefined2 local_c8;
-  short local_c6;
-  undefined2 local_c4;
-  short local_c0 [2];
-  short local_bc;
-  short local_b8;
-  int local_b0;
-  int local_ac;
-  int local_a8;
-  _Rotation local_a0;
-  MATRIX MStack152;
-  int local_78;
-  int local_74;
-  int local_70;
-  undefined auStack104 [8];
-  short local_60;
-  short local_58 [2];
-  int local_54;
-  _TFace *local_50;
-  uint local_4c;
-  int local_48;
-  Level *local_44;
-  uint local_40;
+  SVECTOR local_e8;
+  short local_e0 [2];
+  short local_dc;
+  short local_d8;
+  VECTOR local_d0;
+  _Rotation local_c0;
+  MATRIX MStack184;
+  VECTOR local_98;
+  undefined auStack136 [8];
+  short local_80;
+  _PCollideInfo _Stack120;
+  short local_48 [2];
+  int local_44;
+  _TFace *local_40;
   uint local_3c;
-  _SVector *local_38;
-  _SVector *local_34;
-  undefined2 *local_30;
-  int local_2c;
+  int local_38;
+  Level *local_34;
+  uint local_30;
+  undefined2 *local_2c;
   
-  local_54 = 0;
-  local_50 = (_TFace *)0x0;
-  local_48 = 1;
+  local_44 = 0;
+  local_40 = (_TFace *)0x0;
+  local_38 = 1;
   iVar9 = 0;
-  local_44 = STREAM_GetLevelWithID(camera->focusInstance->currentStreamUnitID);
-  if (local_44 == (Level *)0x0) {
-    return local_50;
+  local_34 = STREAM_GetLevelWithID(camera->focusInstance->currentStreamUnitID);
+  if (local_34 == (Level *)0x0) {
+    return local_40;
   }
-  lVar3 = MEMPACK_MemoryValidFunc((char *)local_44);
+  lVar3 = MEMPACK_MemoryValidFunc((char *)local_34);
   if (lVar3 == 0) {
-    return local_50;
+    return local_40;
   }
   colInfo->line = -1;
   colInfo->flags = 0;
   colInfo->numCollided = 0;
-  local_e0 = 0;
-  local_dc = 0;
-  local_c8 = 0;
-  local_c4 = 0;
-  CAMERA_CalcFSRotation(camera,&local_a0,(_Position *)colInfo->end,(_Position *)colInfo->start);
+  local_100.vx = 0;
+  local_100.vz = 0;
+  local_e8.vx = 0;
+  local_e8.vz = 0;
+  CAMERA_CalcFSRotation(camera,&local_c0,(_Position *)colInfo->end,(_Position *)colInfo->start);
   if ((camera->flags & 0x10000U) != 0) {
     p_Var7 = colInfo->start;
     (p_Var7->position).x =
@@ -3430,21 +3544,21 @@ _TFace * CAMERA_SphereToSphereWithLines
          (p_Var7->position).z +
          (short)((int)(colInfo->end->position).z - (int)(p_Var7->position).z >> 5);
   }
-  MATH3D_SetUnityMatrix(&MStack152);
-  RotMatrixZ((int)local_a0.z + 0x400,(short *)&MStack152);
+  MATH3D_SetUnityMatrix((char)&MStack184);
+  RotMatrixZ((int)local_c0.z + 0x400,&MStack184);
   if ((((camera->flags & 0x10000U) == 0) && ((camera->instance_mode & 0x4000000) == 0)) &&
      (camera->mode != 6)) {
-    local_de = 0x1000;
-    ApplyMatrix(&MStack152,&local_e0,&local_78);
-    ACE_amount = local_78 * (camera->focusInstanceVelVec).x +
-                 local_74 * (camera->focusInstanceVelVec).y +
-                 local_70 * (camera->focusInstanceVelVec).z >> 0xc;
+    local_100.vy = 0x1000;
+    ApplyMatrix(&MStack184,&local_100,&local_98);
+    ACE_amount = local_98.vx * (camera->focusInstanceVelVec).x +
+                 local_98.vy * (camera->focusInstanceVelVec).y +
+                 local_98.vz * (camera->focusInstanceVelVec).z >> 0xc;
     if ((camera->always_rotate_flag != 0) || (camera->forced_movement != 0)) {
       if (camera->forced_movement == 0) {
         iVar9 = -0x48;
         uVar2 = CAMERA_SignedAngleDifference
                           ((camera->focusRotation).z,(camera->targetFocusRotation).z);
-        if ((int)((uint)uVar2 << 0x10) < 0) goto LAB_800181d8;
+        if ((int)((uint)uVar2 << 0x10) < 0) goto LAB_80017c58;
       }
       else {
         if (camera->rotDirection < 1) {
@@ -3453,7 +3567,7 @@ _TFace * CAMERA_SphereToSphereWithLines
           }
         }
         else {
-LAB_800181d8:
+LAB_80017c58:
           iVar9 = 0x48;
         }
       }
@@ -3472,212 +3586,210 @@ LAB_800181d8:
   else {
     ACE_amount = 0;
   }
-  local_c6 = 0x122;
-  local_de = (short)ACE_amount;
+  local_e8.vy = 0x122;
+  local_100.vy = (short)ACE_amount;
   if (ACE_amount < 1) {
-    local_de = local_de * -2;
+    local_100.vy = local_100.vy * -2;
   }
   else {
-    local_c6 = local_de * 5 + (short)(ACE_amount / 2) + 0x122;
+    local_e8.vy = local_100.vy * 5 + (short)(ACE_amount / 2) + 0x122;
   }
-  local_de = local_de + 0x20;
+  local_100.vy = local_100.vy + 0x20;
   if (0 < iVar9) {
-    local_c6 = local_c6 + (short)iVar9 * 5;
+    local_e8.vy = local_e8.vy + (short)iVar9 * 5;
   }
-  ApplyMatrix(&MStack152,&local_e0,local_d8);
-  ApplyMatrix(&MStack152,&local_c8,local_c0);
+  ApplyMatrix(&MStack184,&local_100,(VECTOR *)local_f8);
+  ApplyMatrix(&MStack184,&local_e8,(VECTOR *)local_e0);
   p_Var7 = colInfo->start;
-  local_128.x = (p_Var7->position).x + local_d8[0];
-  local_128.y = (p_Var7->position).y + local_d4;
-  local_128.z = (p_Var7->position).z + local_d0;
+  local_148.x = (p_Var7->position).x + local_f8[0];
+  local_148.y = (p_Var7->position).y + local_f4;
+  local_148.z = (p_Var7->position).z + local_f0;
   p_Var7 = colInfo->end;
-  local_100.x = (p_Var7->position).x + local_c0[0];
-  local_100.y = (p_Var7->position).y + local_bc;
-  local_100.z = (p_Var7->position).z + local_b8;
-  local_c6 = 0x122;
-  local_de = (short)ACE_amount;
+  local_120.x = (p_Var7->position).x + local_e0[0];
+  local_120.y = (p_Var7->position).y + local_dc;
+  local_120.z = (p_Var7->position).z + local_d8;
+  local_e8.vy = 0x122;
+  local_100.vy = (short)ACE_amount;
   if (ACE_amount < 0) {
-    local_c6 = 0x122 - (local_de * 5 + (short)(ACE_amount / 2));
-    local_de = -local_de;
+    local_e8.vy = 0x122 - (local_100.vy * 5 + (short)(ACE_amount / 2));
+    local_100.vy = -local_100.vy;
   }
   else {
-    local_de = local_de * 2;
+    local_100.vy = local_100.vy * 2;
   }
-  local_de = local_de + 0x20;
+  local_100.vy = local_100.vy + 0x20;
   if (iVar9 < 0) {
-    local_c6 = local_c6 + (short)iVar9 * -5;
+    local_e8.vy = local_e8.vy + (short)iVar9 * -5;
   }
-  ApplyMatrix(&MStack152,&local_e0,local_d8);
-  ApplyMatrix(&MStack152,&local_c8,local_c0);
+  ApplyMatrix(&MStack184,&local_100,(VECTOR *)local_f8);
+  ApplyMatrix(&MStack184,&local_e8,(VECTOR *)local_e0);
   p_Var7 = colInfo->start;
-  local_120.x = (p_Var7->position).x - local_d8[0];
-  local_120.y = (p_Var7->position).y - local_d4;
-  local_120.z = (p_Var7->position).z - local_d0;
+  local_140.x = (p_Var7->position).x - local_f8[0];
+  local_140.y = (p_Var7->position).y - local_f4;
+  local_140.z = (p_Var7->position).z - local_f0;
   p_Var7 = colInfo->end;
-  local_f8.x = (p_Var7->position).x - local_c0[0];
-  local_f8.y = (p_Var7->position).y - local_bc;
-  local_f8.z = (p_Var7->position).z - local_b8;
-  local_c6 = 0xb4;
-  local_de = 0x20;
-  MATH3D_SetUnityMatrix(&MStack152);
-  RotMatrixX((int)local_a0.x + 0x400,(int)&MStack152);
-  RotMatrixZ((int)local_a0.z,(short *)&MStack152);
-  ApplyMatrix(&MStack152,&local_e0,local_d8);
-  ApplyMatrix(&MStack152,&local_c8,local_c0);
+  local_118.x = (p_Var7->position).x - local_e0[0];
+  local_118.y = (p_Var7->position).y - local_dc;
+  local_118.z = (p_Var7->position).z - local_d8;
+  local_e8.vy = 0xb4;
+  local_100.vy = 0x20;
+  MATH3D_SetUnityMatrix((char)&MStack184);
+  RotMatrixX((int)local_c0.x + 0x400,&MStack184);
+  RotMatrixZ((int)local_c0.z,&MStack184);
+  ApplyMatrix(&MStack184,&local_100,(VECTOR *)local_f8);
+  ApplyMatrix(&MStack184,&local_e8,(VECTOR *)local_e0);
   p_Var7 = colInfo->start;
-  local_118 = local_d8[0] + (p_Var7->position).x;
-  local_116 = local_d4 + (p_Var7->position).y;
-  local_114 = local_d0 + (p_Var7->position).z;
+  local_138 = local_f8[0] + (p_Var7->position).x;
+  local_136 = local_f4 + (p_Var7->position).y;
+  local_134 = local_f0 + (p_Var7->position).z;
   p_Var7 = colInfo->end;
-  local_f0 = local_c0[0] + (p_Var7->position).x;
-  local_ee = local_bc + (p_Var7->position).y;
-  local_ec = local_b8 + (p_Var7->position).z;
+  local_110 = local_e0[0] + (p_Var7->position).x;
+  local_10e = local_dc + (p_Var7->position).y;
+  local_10c = local_d8 + (p_Var7->position).z;
   p_Var7 = colInfo->start;
-  local_110 = (p_Var7->position).x - local_d8[0];
-  local_10e = (p_Var7->position).y - local_d4;
-  local_10c = (p_Var7->position).z - local_d0;
+  local_130 = (p_Var7->position).x - local_f8[0];
+  local_12e = (p_Var7->position).y - local_f4;
+  local_12c = (p_Var7->position).z - local_f0;
   p_Var7 = colInfo->end;
-  local_e8 = (p_Var7->position).x - local_c0[0];
-  local_e6 = (p_Var7->position).y - local_bc;
-  local_e4 = (p_Var7->position).z - local_b8;
-  right_point.x = local_128.x + (camera->focusInstanceVelVec).x;
-  right_point.y = local_128.y + (camera->focusInstanceVelVec).y;
-  right_point.z = local_128.z + (camera->focusInstanceVelVec).z;
-  local_de = 0x1000;
-  left_point.x = local_120.x + (camera->focusInstanceVelVec).x;
-  left_point.y = local_120.y + (camera->focusInstanceVelVec).y;
-  left_point.z = local_120.z + (camera->focusInstanceVelVec).z;
-  ApplyMatrix(&MStack152,&local_e0,local_d8);
-  local_de = 0;
-  local_dc = 0x1000;
-  camera_plane.x = local_d8[0];
-  camera_plane.y = local_d4;
-  camera_plane.z = local_d0;
-  ApplyMatrix(&MStack152,&local_e0,&local_b0);
+  local_108 = (p_Var7->position).x - local_e0[0];
+  local_106 = (p_Var7->position).y - local_dc;
+  local_104 = (p_Var7->position).z - local_d8;
+  right_point.x = local_148.x + (camera->focusInstanceVelVec).x;
+  right_point.y = local_148.y + (camera->focusInstanceVelVec).y;
+  right_point.z = local_148.z + (camera->focusInstanceVelVec).z;
+  local_100.vy = 0x1000;
+  left_point.x = local_140.x + (camera->focusInstanceVelVec).x;
+  left_point.y = local_140.y + (camera->focusInstanceVelVec).y;
+  left_point.z = local_140.z + (camera->focusInstanceVelVec).z;
+  ApplyMatrix(&MStack184,&local_100,(VECTOR *)local_f8);
+  local_100.vy = 0;
+  local_100.vz = 0x1000;
+  camera_plane.x = local_f8[0];
+  camera_plane.y = local_f4;
+  camera_plane.z = local_f0;
+  ApplyMatrix(&MStack184,&local_100,&local_d0);
   p_Var7 = colInfo->start;
-  local_30 = &local_138;
-  local_4c = 0;
-  local_130.x = (p_Var7->position).x;
-  local_130.y = (p_Var7->position).y;
-  local_130.z = (p_Var7->position).z;
-  OldPos = &local_130;
+  local_150.vx = (p_Var7->position).x;
+  local_150.vy = (p_Var7->position).y;
+  local_150.vz = (p_Var7->position).z;
+  pSVar11 = &local_150;
+  local_3c = 0;
   p_Var7 = colInfo->end;
-  NewPos = &local_108;
-  local_108.x = (p_Var7->position).x;
-  local_108.y = (p_Var7->position).y;
-  local_108.z = (p_Var7->position).z;
+  local_2c = &local_158;
+  local_128.vx = (p_Var7->position).x;
+  local_128.vy = (p_Var7->position).y;
+  local_128.vz = (p_Var7->position).z;
+  pSVar12 = &local_128;
   colInfo->lenCenterToExtend = (int)camera->targetFocusDistance;
-  local_2c = 0;
-  local_38 = NewPos;
-  local_34 = OldPos;
-  p_Var4 = STREAM_GetStreamUnitWithID(local_44->streamUnitID);
-  local_40 = (uint)(ushort)p_Var4->flags & 1;
-  pCVar11 = colInfo;
-  pCVar12 = colInfo;
+  p_Var4 = STREAM_GetStreamUnitWithID(local_34->streamUnitID);
+  local_30 = (uint)(ushort)p_Var4->flags & 1;
+  pCVar10 = colInfo;
+  pCVar13 = colInfo;
   do {
-    if ((colInfo->cldLines & 1 << (local_4c & 0x1f)) != 0) {
-      local_58[0] = 0;
-      local_3c = (uint)(local_4c - 1 < 2);
+    if ((colInfo->cldLines & 1 << (local_3c & 0x1f)) != 0) {
+      Flags = (uint)(local_3c - 1 < 2);
+      local_48[0] = 0;
+      _Stack120.instance = (_Instance *)0x0;
+      _Stack120.collideType = 1;
+      _Stack120.newPoint = pSVar12;
+      _Stack120.oldPoint = pSVar11;
       p_Var5 = COLLIDE_PointAndTerrainFunc
-                         (local_44->terrain,NewPos,OldPos,local_3c,local_58,(_Instance *)0x0,0x10d0,
-                          0x20,(_LCollideInfo *)auStack104);
-      iVar9 = local_2c;
-      *(_TFace **)pCVar12->tfaceList = p_Var5;
-      *(_Terrain **)pCVar12->tfaceTerrain = local_44->terrain;
-      if (pCVar12->tfaceList[0] == (_func_4457 *)0x0) {
-        iVar10 = 0;
-        puVar8 = (ushort *)&StreamTracker.StreamList[0].flags;
+                         (local_34->terrain,&_Stack120,Flags,local_48,(long)&DAT_000010d0,0x20,
+                          (_LCollideInfo *)auStack136);
+      *(_TFace **)pCVar13->tfaceList = p_Var5;
+      *(_Terrain **)pCVar13->tfaceTerrain = local_34->terrain;
+      if (pCVar13->tfaceList[0] == (_func_18 *)0x0) {
+        iVar9 = 0;
+        puVar8 = &DAT_800d2a12;
         do {
           address = *(Level **)(puVar8 + 1);
-          if ((((puVar8[-1] == 2) && (address != local_44)) &&
+          if ((((puVar8[-1] == 2) && (address != local_34)) &&
               (lVar3 = MEMPACK_MemoryValidFunc((char *)address), lVar3 != 0)) &&
-             ((local_40 == 0 || ((*puVar8 & 1) == 0)))) {
+             ((local_30 == 0 || ((*puVar8 & 1) == 0)))) {
             p_Var5 = COLLIDE_PointAndTerrainFunc
-                               (address->terrain,(_SVector *)((int)&local_38->x + iVar9),
-                                (_SVector *)((int)&local_34->x + iVar9),local_3c,local_58,
-                                (_Instance *)0x0,0x10d0,0x20,(_LCollideInfo *)auStack104);
-            *(_TFace **)pCVar12->tfaceList = p_Var5;
+                               (address->terrain,&_Stack120,Flags,local_48,(long)&DAT_000010d0,0x20,
+                                (_LCollideInfo *)auStack136);
+            *(_TFace **)pCVar13->tfaceList = p_Var5;
             if (p_Var5 != (_TFace *)0x0) {
-              *(_Terrain **)pCVar12->tfaceTerrain = address->terrain;
+              *(_Terrain **)pCVar13->tfaceTerrain = address->terrain;
               break;
             }
           }
-          iVar10 = iVar10 + 1;
+          iVar9 = iVar9 + 1;
           puVar8 = puVar8 + 0x20;
-        } while (iVar10 < 0x10);
+        } while (iVar9 < 0x10);
       }
-      pCVar11->bspTree[0] = local_60;
-      if ((_TFace *)pCVar12->tfaceList[0] == (_TFace *)0x0) {
-        sVar6 = OldPos->z;
-        sVar1 = NewPos->z;
-        iVar9 = (uint)(ushort)OldPos->x - (uint)(ushort)NewPos->x;
-        local_138 = (undefined2)iVar9;
-        local_30[1] = OldPos->y - NewPos->y;
-        local_30[2] = sVar6 - sVar1;
-        pCVar11->lengthList[0] =
-             (short)((iVar9 * 0x10000 >> 0x10) * local_b0 + local_136 * local_ac +
-                     local_134 * local_a8 >> 0xc);
+      pCVar10->bspTree[0] = local_80;
+      if ((_TFace *)pCVar13->tfaceList[0] == (_TFace *)0x0) {
+        sVar6 = pSVar11->vz;
+        sVar1 = pSVar12->vz;
+        iVar9 = (uint)(ushort)pSVar11->vx - (uint)(ushort)pSVar12->vx;
+        local_158 = (undefined2)iVar9;
+        local_2c[1] = pSVar11->vy - pSVar12->vy;
+        local_2c[2] = sVar6 - sVar1;
+        pCVar10->lengthList[0] =
+             (short)((iVar9 * 0x10000 >> 0x10) * local_d0.vx + local_156 * local_d0.vy +
+                     local_154 * local_d0.vz >> 0xc);
       }
       else {
         if (secondcheck_flag != 0) {
-          return (_TFace *)pCVar12->tfaceList[0];
+          return (_TFace *)pCVar13->tfaceList[0];
         }
         colInfo->numCollided = colInfo->numCollided + 1;
-        sVar6 = OldPos->z;
-        sVar1 = NewPos->z;
-        iVar9 = (uint)(ushort)OldPos->x - (uint)(ushort)NewPos->x;
-        local_138 = (undefined2)iVar9;
-        local_30[1] = OldPos->y - NewPos->y;
-        local_30[2] = sVar6 - sVar1;
-        iVar9 = (iVar9 * 0x10000 >> 0x10) * local_b0 + local_136 * local_ac + local_134 * local_a8
-                >> 0xc;
+        sVar6 = pSVar11->vz;
+        sVar1 = pSVar12->vz;
+        iVar9 = (uint)(ushort)pSVar11->vx - (uint)(ushort)pSVar12->vx;
+        local_158 = (undefined2)iVar9;
+        local_2c[1] = pSVar11->vy - pSVar12->vy;
+        local_2c[2] = sVar6 - sVar1;
+        iVar9 = (iVar9 * 0x10000 >> 0x10) * local_d0.vx + local_156 * local_d0.vy +
+                local_154 * local_d0.vz >> 0xc;
         sVar6 = (short)iVar9;
-        pCVar11->lengthList[0] = sVar6;
-        if ((local_58[0] == 0) || (99 < sVar6)) {
+        pCVar10->lengthList[0] = sVar6;
+        if ((local_48[0] == 0) || (99 < sVar6)) {
           iVar9 = iVar9 + -100;
-          pCVar11->lengthList[0] = (short)iVar9;
+          pCVar10->lengthList[0] = (short)iVar9;
           if (iVar9 * 0x10000 >> 0x10 < 0xdc) {
-            pCVar11->lengthList[0] = 0xdc;
+            pCVar10->lengthList[0] = 0xdc;
           }
-          if ((local_48 != 0) || (pCVar11->lengthList[0] < local_54)) {
-            colInfo->line = local_4c;
-            local_54 = (int)pCVar11->lengthList[0];
-            local_48 = 0;
-            colInfo->lenCenterToExtend = local_54;
-            local_50 = (_TFace *)pCVar12->tfaceList[0];
+          if ((local_38 != 0) || (pCVar10->lengthList[0] < local_44)) {
+            colInfo->line = local_3c;
+            local_44 = (int)pCVar10->lengthList[0];
+            local_38 = 0;
+            colInfo->lenCenterToExtend = local_44;
+            local_40 = (_TFace *)pCVar13->tfaceList[0];
           }
-          colInfo->flags = colInfo->flags | 1 << (local_4c & 0x1f);
+          colInfo->flags = colInfo->flags | 1 << (local_3c & 0x1f);
         }
       }
     }
-    NewPos = NewPos + 1;
-    OldPos = OldPos + 1;
-    pCVar12 = (CameraCollisionInfo *)(pCVar12->tfaceList + 1);
-    pCVar11 = (CameraCollisionInfo *)((int)pCVar11->tfaceList + 2);
-    local_2c = local_2c + 8;
-    local_4c = local_4c + 1;
-  } while ((int)local_4c < 5);
+    pSVar12 = pSVar12 + 1;
+    pSVar11 = pSVar11 + 1;
+    pCVar13 = (CameraCollisionInfo *)(pCVar13->tfaceList + 1);
+    pCVar10 = (CameraCollisionInfo *)((int)pCVar10->tfaceList + 2);
+    local_3c = local_3c + 1;
+  } while ((int)local_3c < 5);
   if (colInfo->line == 2) {
-    target = &local_120;
-    position = &local_f8;
+    target = &local_140;
+    position = &local_118;
   }
   else {
     if (colInfo->line != 1) {
-      target = &local_120;
+      target = &local_140;
       if ((colInfo->flags & 4U) != 0) {
-        position = &local_f8;
-        goto LAB_80018abc;
+        position = &local_118;
+        goto LAB_80018510;
       }
       if ((colInfo->flags & 2U) == 0) {
-        return local_50;
+        return local_40;
       }
     }
-    target = &local_128;
-    position = &local_100;
+    target = &local_148;
+    position = &local_120;
   }
-LAB_80018abc:
+LAB_80018510:
   hitline_rot = CAMERA_CalcZRotation(target,position);
-  return local_50;
+  return local_40;
 }
 
 
@@ -3685,36 +3797,36 @@ LAB_80018abc:
 // decompiled code
 // original method signature: 
 // long /*$ra*/ CAMERA_CalcTilt(struct _Normal *normal /*$s1*/, short zRot /*$a1*/)
- // line 2328, offset 0x80018afc
+ // line 2375, offset 0x80018550
 	/* begin block 1 */
-		// Start line: 2329
-		// Start offset: 0x80018AFC
+		// Start line: 2376
+		// Start offset: 0x80018550
 		// Variables:
 	// 		struct MATRIX matrix; // stack offset -64
 	// 		struct VECTOR newNormal; // stack offset -32
 	/* end block 1 */
-	// End offset: 0x80018AFC
-	// End Line: 2329
+	// End offset: 0x80018550
+	// End Line: 2376
 
 	/* begin block 2 */
-		// Start line: 5703
+		// Start line: 5809
 	/* end block 2 */
-	// End Line: 5704
+	// End Line: 5810
+
+/* File: C:\kain2\game\CAMERA.C */
 
 long CAMERA_CalcTilt(_Normal *normal,short zRot)
 
 {
-  int iVar1;
+  long lVar1;
   MATRIX MStack64;
-  undefined auStack32 [4];
-  uint local_1c;
-  uint local_18;
+  VECTOR VStack32;
   
-  MATH3D_SetUnityMatrix(&MStack64);
-  RotMatrixZ(-(int)zRot,(short *)&MStack64);
-  ApplyMatrix(&MStack64,normal,auStack32);
-  iVar1 = ratan2(local_1c,local_18);
-  return -(int)(short)iVar1;
+  MATH3D_SetUnityMatrix(0xc0);
+  RotMatrixZ(-(int)zRot,&MStack64);
+  ApplyMatrix(&MStack64,(SVECTOR *)normal,&VStack32);
+  lVar1 = ratan2(VStack32.vy,VStack32.vz);
+  return -(int)(short)lVar1;
 }
 
 
@@ -3722,25 +3834,27 @@ long CAMERA_CalcTilt(_Normal *normal,short zRot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_SetLookFocusAndBase(struct _Instance *focusInstance /*$a0*/, struct _Position *focusPoint /*$a1*/)
- // line 2345, offset 0x80018b70
+ // line 2392, offset 0x800185c4
 	/* begin block 1 */
-		// Start line: 2346
-		// Start offset: 0x80018B70
+		// Start line: 2393
+		// Start offset: 0x800185C4
 		// Variables:
 	// 		struct _Position lookFocus; // stack offset -8
 	/* end block 1 */
-	// End offset: 0x80018B70
-	// End Line: 2346
+	// End offset: 0x800185C4
+	// End Line: 2393
 
 	/* begin block 2 */
-		// Start line: 5738
+		// Start line: 5844
 	/* end block 2 */
-	// End Line: 5739
+	// End Line: 5845
 
 	/* begin block 3 */
-		// Start line: 5743
+		// Start line: 5849
 	/* end block 3 */
-	// End Line: 5744
+	// End Line: 5850
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_SetLookFocusAndBase(_Instance *focusInstance,_Position *focusPoint)
 
@@ -3758,24 +3872,30 @@ void CAMERA_SetLookFocusAndBase(_Instance *focusInstance,_Position *focusPoint)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_SetLookFocusAndDistance(struct Camera *camera /*$a0*/, struct VECTOR *focuspoint /*$a1*/, int distance /*$a2*/)
- // line 2358, offset 0x80018bb8
+ // line 2405, offset 0x8001860c
 	/* begin block 1 */
-		// Start line: 5769
+		// Start line: 5875
 	/* end block 1 */
-	// End Line: 5770
+	// End Line: 5876
 
 	/* begin block 2 */
-		// Start line: 5770
+		// Start line: 5876
 	/* end block 2 */
-	// End Line: 5771
+	// End Line: 5877
 
-void CAMERA_SetLookFocusAndDistance(Camera *camera,VECTOR *focuspoint,int distance)
+/* File: C:\kain2\game\CAMERA.C */
+
+void CAMERA_SetLookFocusAndDistance(Camera *camera,undefined focuspoint,int distance)
 
 {
-  (camera->targetFocusPoint).x = *(short *)&focuspoint->vx;
-  (camera->targetFocusPoint).y = *(short *)&focuspoint->vy;
+  undefined3 in_register_00000015;
+  short *psVar1;
+  
+  psVar1 = (short *)CONCAT31(in_register_00000015,focuspoint);
+  (camera->targetFocusPoint).x = *psVar1;
+  (camera->targetFocusPoint).y = psVar1[2];
   Camera_lookDist = (short)distance;
-  (camera->targetFocusPoint).z = *(short *)&focuspoint->vz;
+  (camera->targetFocusPoint).z = psVar1[4];
   return;
 }
 
@@ -3784,10 +3904,10 @@ void CAMERA_SetLookFocusAndDistance(Camera *camera,VECTOR *focuspoint,int distan
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_LookProcess(struct Camera *camera /*$s2*/)
- // line 2366, offset 0x80018be0
+ // line 2413, offset 0x80018634
 	/* begin block 1 */
-		// Start line: 2367
-		// Start offset: 0x80018BE0
+		// Start line: 2414
+		// Start offset: 0x80018634
 		// Variables:
 	// 		struct _Instance *focusInstance; // $s1
 	// 		int smooth; // $t0
@@ -3795,8 +3915,8 @@ void CAMERA_SetLookFocusAndDistance(Camera *camera,VECTOR *focuspoint,int distan
 	// 		long dampMode; // $a0
 
 		/* begin block 1.1 */
-			// Start line: 2407
-			// Start offset: 0x80018CB0
+			// Start line: 2459
+			// Start offset: 0x80018724
 			// Variables:
 		// 		short _x1; // $v1
 		// 		short _y1; // $a0
@@ -3804,55 +3924,57 @@ void CAMERA_SetLookFocusAndDistance(Camera *camera,VECTOR *focuspoint,int distan
 		// 		struct _Position *_v0; // $v0
 		// 		struct _Position *_v1; // $v0
 		/* end block 1.1 */
-		// End offset: 0x80018CB0
-		// End Line: 2407
+		// End offset: 0x80018724
+		// End Line: 2459
 
 		/* begin block 1.2 */
-			// Start line: 2428
-			// Start offset: 0x80018D18
+			// Start line: 2480
+			// Start offset: 0x8001878C
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a0
 		/* end block 1.2 */
-		// End offset: 0x80018D18
-		// End Line: 2428
+		// End offset: 0x8001878C
+		// End Line: 2480
 
 		/* begin block 1.3 */
-			// Start line: 2428
-			// Start offset: 0x80018D18
+			// Start line: 2480
+			// Start offset: 0x8001878C
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a1
 		// 		struct _Rotation *_v0; // $v0
 		/* end block 1.3 */
-		// End offset: 0x80018D18
-		// End Line: 2428
+		// End offset: 0x8001878C
+		// End Line: 2480
 
 		/* begin block 1.4 */
-			// Start line: 2428
-			// Start offset: 0x80018D18
+			// Start line: 2480
+			// Start offset: 0x8001878C
 			// Variables:
 		// 		short _x1; // $v1
 		// 		short _y1; // $a0
 		// 		struct _Rotation *_v0; // $v0
 		/* end block 1.4 */
-		// End offset: 0x80018D18
-		// End Line: 2428
+		// End offset: 0x8001878C
+		// End Line: 2480
 	/* end block 1 */
-	// End offset: 0x80018D18
-	// End Line: 2434
+	// End offset: 0x8001878C
+	// End Line: 2486
 
 	/* begin block 2 */
-		// Start line: 5782
+		// Start line: 5888
 	/* end block 2 */
-	// End Line: 5783
+	// End Line: 5889
 
 	/* begin block 3 */
-		// Start line: 5786
+		// Start line: 5892
 	/* end block 3 */
-	// End Line: 5787
+	// End Line: 5893
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_LookProcess(Camera *camera)
 
@@ -3890,6 +4012,9 @@ void CAMERA_LookProcess(Camera *camera)
     if (Camera_lookDist < camera->collisionTargetFocusDistance) {
       distance = Camera_lookDist;
     }
+  }
+  if (((camera->instance_mode & 0x20000) != 0) && (distance < 400)) {
+    distance = 400;
   }
   if ((camera->flags & 0x800U) == 0) {
     CriticalDampValue(dampMode,&camera->focusDistance,distance,&camera->focusDistanceVel,
@@ -3946,20 +4071,22 @@ void CAMERA_LookProcess(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_Normalize(struct _SVector *svector /*$s0*/)
- // line 2487, offset 0x80018e14
+ // line 2539, offset 0x80018888
 	/* begin block 1 */
-		// Start line: 2488
-		// Start offset: 0x80018E14
+		// Start line: 2540
+		// Start offset: 0x80018888
 		// Variables:
 	// 		long len; // $a1
 	/* end block 1 */
-	// End offset: 0x80018E7C
-	// End Line: 2496
+	// End offset: 0x800188F0
+	// End Line: 2548
 
 	/* begin block 2 */
-		// Start line: 6071
+		// Start line: 6187
 	/* end block 2 */
-	// End Line: 6072
+	// End Line: 6188
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_Normalize(_SVector *svector)
 
@@ -3980,18 +4107,20 @@ void CAMERA_Normalize(_SVector *svector)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_HandleTransitions(struct Camera *camera /*$s0*/)
- // line 2498, offset 0x80018e8c
+ // line 2550, offset 0x80018900
 	/* begin block 1 */
-		// Start line: 2499
-		// Start offset: 0x80018E8C
+		// Start line: 2551
+		// Start offset: 0x80018900
 	/* end block 1 */
-	// End offset: 0x80019030
-	// End Line: 2610
+	// End offset: 0x80018AA4
+	// End Line: 2662
 
 	/* begin block 2 */
-		// Start line: 6095
+		// Start line: 6211
 	/* end block 2 */
-	// End Line: 6096
+	// End Line: 6212
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_HandleTransitions(Camera *camera)
 
@@ -4022,11 +4151,11 @@ void CAMERA_HandleTransitions(Camera *camera)
     (camera->focusRotVel).x = 0;
     (camera->focusRotAccl).x = 0;
   }
-  if (camera->distanceState != 3) goto LAB_80018ff8;
+  if (camera->distanceState != 3) goto LAB_80018a6c;
   if ((camera->forced_movement == 2) && ((camera->lock & 1U) == 0)) {
-LAB_80018fe0:
+LAB_80018a54:
     camera->distanceState = 0;
-LAB_80018fe4:
+LAB_80018a58:
     camera->focusDistanceVel = 0;
     camera->focusDistanceAccl = 0;
   }
@@ -4034,17 +4163,17 @@ LAB_80018fe4:
     iVar3 = (int)camera->targetFocusDistance - (int)camera->signalFocusDistance;
     if (iVar3 < 0) {
       if ((int)camera->signalFocusDistance - (int)camera->targetFocusDistance < 4)
-      goto LAB_80018fe0;
+      goto LAB_80018a54;
     }
     else {
       if (iVar3 < 4) {
         camera->distanceState = 0;
-        goto LAB_80018fe4;
+        goto LAB_80018a58;
       }
     }
   }
   camera->targetFocusDistance = camera->signalFocusDistance;
-LAB_80018ff8:
+LAB_80018a6c:
   if ((camera->posState == 3) && ((camera->mode != 5 || ((camera->flags & 0x1000U) != 0)))) {
     camera->posState = 0;
   }
@@ -4056,33 +4185,35 @@ LAB_80018ff8:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_CalcFocusOffset(struct _SVector *offset /*$a2*/, struct Camera *camera /*$a1*/)
- // line 2614, offset 0x80019040
+ // line 2666, offset 0x80018ab4
 	/* begin block 1 */
-		// Start line: 2615
-		// Start offset: 0x80019040
+		// Start line: 2667
+		// Start offset: 0x80018AB4
 		// Variables:
 	// 		struct _Vector adjustedOffset; // stack offset -24
 	// 		struct _SVector temp; // stack offset -8
 	// 		struct _Instance *focusInstance; // $a0
 
 		/* begin block 1.1 */
-			// Start line: 2631
-			// Start offset: 0x80019080
+			// Start line: 2691
+			// Start offset: 0x80018AF4
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a0
 		/* end block 1.1 */
-		// End offset: 0x80019080
-		// End Line: 2631
+		// End offset: 0x80018AF4
+		// End Line: 2691
 	/* end block 1 */
-	// End offset: 0x80019080
-	// End Line: 2631
+	// End offset: 0x80018AF4
+	// End Line: 2691
 
 	/* begin block 2 */
-		// Start line: 6329
+		// Start line: 6445
 	/* end block 2 */
-	// End Line: 6330
+	// End Line: 6446
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_CalcFocusOffset(_SVector *offset,Camera *camera)
 
@@ -4130,34 +4261,36 @@ void CAMERA_CalcFocusOffset(_SVector *offset,Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_CalcFocusOffsetForSwim(struct _SVector *offset /*$s0*/, struct Camera *camera /*$a1*/)
- // line 2636, offset 0x800190f4
+ // line 2696, offset 0x80018b68
 	/* begin block 1 */
-		// Start line: 2637
-		// Start offset: 0x800190F4
+		// Start line: 2697
+		// Start offset: 0x80018B68
 		// Variables:
 	// 		struct _Vector adjustedOffset; // stack offset -32
 	// 		struct _SVector temp; // stack offset -16
 	// 		struct _Instance *focusInstance; // $v1
 
 		/* begin block 1.1 */
-			// Start line: 2637
-			// Start offset: 0x800190F4
+			// Start line: 2697
+			// Start offset: 0x80018B68
 			// Variables:
 		// 		short _x1; // $v1
 		// 		short _y1; // $a0
 		// 		short _z1; // $v0
 		// 		struct _Vector *_v1; // $v0
 		/* end block 1.1 */
-		// End offset: 0x800190F4
-		// End Line: 2637
+		// End offset: 0x80018B68
+		// End Line: 2697
 	/* end block 1 */
-	// End offset: 0x800190F4
-	// End Line: 2637
+	// End offset: 0x80018B68
+	// End Line: 2697
 
 	/* begin block 2 */
-		// Start line: 6381
+		// Start line: 6513
 	/* end block 2 */
-	// End Line: 6382
+	// End Line: 6514
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_CalcFocusOffsetForSwim(_SVector *offset,Camera *camera)
 
@@ -4165,14 +4298,12 @@ void CAMERA_CalcFocusOffsetForSwim(_SVector *offset,Camera *camera)
   short local_20 [2];
   short local_1c;
   short local_18;
-  short local_10;
-  short local_e;
-  short local_c;
+  SVECTOR local_10;
   
-  local_10 = (camera->focusOffset).x;
-  local_e = (camera->focusOffset).y;
-  local_c = (camera->focusOffset).z;
-  ApplyMatrix(camera->focusInstance->matrix + 1,&local_10,local_20);
+  local_10.vx = (camera->focusOffset).x;
+  local_10.vy = (camera->focusOffset).y;
+  local_10.vz = (camera->focusOffset).z;
+  ApplyMatrix(camera->focusInstance->matrix + 1,&local_10,(VECTOR *)local_20);
   offset->x = local_20[0];
   offset->y = local_1c;
   offset->z = local_18;
@@ -4184,27 +4315,29 @@ void CAMERA_CalcFocusOffsetForSwim(_SVector *offset,Camera *camera)
 // decompiled code
 // original method signature: 
 // short /*$ra*/ CAMERA_CalcIntersectAngle(struct _SVector *linept /*$s0*/, struct _SVector *vertex0 /*$a1*/, struct _SVector *vertex1 /*$a2*/, short *high /*$s2*/, short *low /*stack 16*/)
- // line 2680, offset 0x80019160
+ // line 2720, offset 0x80018bd4
 	/* begin block 1 */
-		// Start line: 2681
-		// Start offset: 0x80019160
+		// Start line: 2721
+		// Start offset: 0x80018BD4
 		// Variables:
 	// 		struct _SVector point; // stack offset -24
 	// 		short zrot; // $a0
 	// 		long camera_plane_d; // $v0
 	/* end block 1 */
-	// End offset: 0x8001923C
-	// End Line: 2700
+	// End offset: 0x80018CB0
+	// End Line: 2740
 
 	/* begin block 2 */
-		// Start line: 6487
+		// Start line: 6579
 	/* end block 2 */
-	// End Line: 6488
+	// End Line: 6580
 
 	/* begin block 3 */
-		// Start line: 6492
+		// Start line: 6584
 	/* end block 3 */
-	// End Line: 6493
+	// End Line: 6585
+
+/* File: C:\kain2\game\CAMERA.C */
 
 short CAMERA_CalcIntersectAngle
                 (_SVector *linept,_SVector *vertex0,_SVector *vertex1,short *high,short *low)
@@ -4239,10 +4372,10 @@ short CAMERA_CalcIntersectAngle
 // decompiled code
 // original method signature: 
 // short /*$ra*/ CAMERA_GetLineAngle(struct Camera *camera /*$a0*/, struct CameraCollisionInfo *colInfo /*$a1*/, struct _SVector *linept /*$a2*/, int line /*$s5*/)
- // line 2702, offset 0x80019254
+ // line 2742, offset 0x80018cc8
 	/* begin block 1 */
-		// Start line: 2703
-		// Start offset: 0x80019254
+		// Start line: 2743
+		// Start offset: 0x80018CC8
 		// Variables:
 	// 		struct _Terrain *terrain; // $t1
 	// 		struct _SVector *vertex0; // $s1
@@ -4252,13 +4385,15 @@ short CAMERA_CalcIntersectAngle
 	// 		short high; // stack offset -40
 	// 		short low; // stack offset -38
 	/* end block 1 */
-	// End offset: 0x800193F8
-	// End Line: 2732
+	// End offset: 0x80018E6C
+	// End Line: 2772
 
 	/* begin block 2 */
-		// Start line: 6554
+		// Start line: 6646
 	/* end block 2 */
-	// End Line: 6555
+	// End Line: 6647
+
+/* File: C:\kain2\game\CAMERA.C */
 
 short CAMERA_GetLineAngle(Camera *camera,CameraCollisionInfo *colInfo,_SVector *linept,int line)
 
@@ -4281,10 +4416,10 @@ short CAMERA_GetLineAngle(Camera *camera,CameraCollisionInfo *colInfo,_SVector *
   iVar2 = (int)colInfo->bspTree[line] * 0x24;
   iVar4 = *(int *)(puVar3 + 0xe);
   vertex0 = (_SVector *)(iVar4 + (uint)*puVar1 * 0xc);
-  local_30.x = linept->x - *(short *)(iVar2 + *(int *)(puVar3 + 0x28) + 0xc);
-  local_30.y = linept->y - *(short *)(iVar2 + *(int *)(puVar3 + 0x28) + 0xe);
+  local_30.x = linept->x - *(short *)(iVar2 + *(int *)(puVar3 + 0x24) + 0xc);
+  local_30.y = linept->y - *(short *)(iVar2 + *(int *)(puVar3 + 0x24) + 0xe);
   vertex1 = (_SVector *)(iVar4 + (uint)puVar1[1] * 0xc);
-  local_30.z = linept->z - *(short *)(iVar2 + *(int *)(puVar3 + 0x28) + 0x10);
+  local_30.z = linept->z - *(short *)(iVar2 + *(int *)(puVar3 + 0x24) + 0x10);
   vertex1_00 = (_SVector *)(iVar4 + (uint)puVar1[2] * 0xc);
   CAMERA_CalcIntersectAngle(&local_30,vertex0,vertex1,&local_28,local_26);
   CAMERA_CalcIntersectAngle(&local_30,vertex1,vertex1_00,&local_28,local_26);
@@ -4312,18 +4447,18 @@ short CAMERA_GetLineAngle(Camera *camera,CameraCollisionInfo *colInfo,_SVector *
 // decompiled code
 // original method signature: 
 // long /*$ra*/ CAMERA_ACForcedMovement(struct Camera *camera /*$s1*/, struct CameraCollisionInfo *colInfo /*$s0*/)
- // line 2746, offset 0x8001941c
+ // line 2786, offset 0x80018e90
 	/* begin block 1 */
-		// Start line: 2747
-		// Start offset: 0x8001941C
+		// Start line: 2787
+		// Start offset: 0x80018E90
 		// Variables:
 	// 		long dp; // $v0
 	// 		struct _Normal normal; // stack offset -32
 	// 		struct _SVector sv; // stack offset -24
 
 		/* begin block 1.1 */
-			// Start line: 2747
-			// Start offset: 0x8001941C
+			// Start line: 2787
+			// Start offset: 0x80018E90
 			// Variables:
 		// 		short _x0; // $a1
 		// 		short _y0; // $a2
@@ -4335,16 +4470,18 @@ short CAMERA_GetLineAngle(Camera *camera,CameraCollisionInfo *colInfo,_SVector *
 		// 		struct _Position *_v0; // $v0
 		// 		struct _Position *_v1; // $v1
 		/* end block 1.1 */
-		// End offset: 0x8001941C
-		// End Line: 2747
+		// End offset: 0x80018E90
+		// End Line: 2787
 	/* end block 1 */
-	// End offset: 0x800194D4
-	// End Line: 2785
+	// End offset: 0x80018F48
+	// End Line: 2825
 
 	/* begin block 2 */
-		// Start line: 6762
+		// Start line: 6854
 	/* end block 2 */
-	// End Line: 6763
+	// End Line: 6855
+
+/* File: C:\kain2\game\CAMERA.C */
 
 long CAMERA_ACForcedMovement(Camera *camera,CameraCollisionInfo *colInfo)
 
@@ -4370,25 +4507,29 @@ long CAMERA_ACForcedMovement(Camera *camera,CameraCollisionInfo *colInfo)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ CAMERA_update_dist_debounced(struct Camera *camera /*$a0*/, short dist /*$a1*/)
- // line 2788, offset 0x800194ec
+// void /*$ra*/ CAMERA_update_dist_debounced(struct Camera *camera /*$a0*/, short dist /*$a2*/)
+ // line 2828, offset 0x80018f60
 	/* begin block 1 */
-		// Start line: 6853
+		// Start line: 6945
 	/* end block 1 */
-	// End Line: 6854
+	// End Line: 6946
 
 	/* begin block 2 */
-		// Start line: 6855
+		// Start line: 6946
 	/* end block 2 */
-	// End Line: 6856
+	// End Line: 6947
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_update_dist_debounced(Camera *camera,short dist)
 
 {
-  shorten_flag = 1;
-  shorten_count = shorten_count + 1;
-  if (2 < shorten_count) {
-    camera->collisionTargetFocusDistance = dist;
+  if ((((camera->instance_mode & 0x2000000) == 0) || (599 < dist)) || (0xfc7 < combat_cam_weight)) {
+    shorten_flag = 1;
+    shorten_count = shorten_count + 1;
+    if (2 < shorten_count) {
+      camera->collisionTargetFocusDistance = dist;
+    }
   }
   return;
 }
@@ -4398,22 +4539,24 @@ void CAMERA_update_dist_debounced(Camera *camera,short dist)
 // decompiled code
 // original method signature: 
 // short /*$ra*/ CAMERA_dampgetline(short angle /*$a0*/)
- // line 2795, offset 0x80019520
+ // line 2840, offset 0x80018fd0
 	/* begin block 1 */
-		// Start line: 2796
-		// Start offset: 0x80019520
+		// Start line: 2841
+		// Start offset: 0x80018FD0
 		// Variables:
-	// 		static short target_angle; // offset 0x54
-	// 		static short angle_vel; // offset 0x56
-	// 		static short angle_accl; // offset 0x58
+	// 		static short target_angle; // offset 0x50
+	// 		static short angle_vel; // offset 0x52
+	// 		static short angle_accl; // offset 0x54
 	/* end block 1 */
-	// End offset: 0x800195C4
-	// End Line: 2813
+	// End offset: 0x80019074
+	// End Line: 2858
 
 	/* begin block 2 */
-		// Start line: 6868
+		// Start line: 6970
 	/* end block 2 */
-	// End Line: 6869
+	// End Line: 6971
+
+/* File: C:\kain2\game\CAMERA.C */
 
 short CAMERA_dampgetline(short angle)
 
@@ -4422,11 +4565,11 @@ short CAMERA_dampgetline(short angle)
   int iVar2;
   
   iVar2 = (int)angle;
-  CriticalDampAngle(1,&DAT_800cdda4,angle,(short *)&LAB_800cdda6,(short *)&LAB_800cdda6_2,0x400);
-  if (0x800 < DAT_800cdda4) {
-    DAT_800cdda4 = DAT_800cdda4 + -0x1000;
+  CriticalDampAngle(1,&DAT_800cf160,angle,(short *)&DAT_800cf162,(short *)&DAT_800cf164,0x400);
+  if (0x800 < DAT_800cf160) {
+    DAT_800cf160 = DAT_800cf160 + -0x1000;
   }
-  iVar1 = (int)DAT_800cdda4;
+  iVar1 = (int)DAT_800cf160;
   if (iVar1 < 0) {
     iVar1 = -iVar1;
   }
@@ -4435,11 +4578,11 @@ short CAMERA_dampgetline(short angle)
     if (iVar2 < 0) {
       iVar1 = -iVar2;
     }
-    if ((0x1f < iVar1) && (DAT_800cdda4 = 0x20, iVar2 < 0)) {
-      DAT_800cdda4 = -0x20;
+    if ((0x1f < iVar1) && (DAT_800cf160 = 0x20, iVar2 < 0)) {
+      DAT_800cf160 = -0x20;
     }
   }
-  return DAT_800cdda4;
+  return DAT_800cf160;
 }
 
 
@@ -4447,39 +4590,41 @@ short CAMERA_dampgetline(short angle)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ CAMERA_ACNoForcedMovement(struct Camera *camera /*$s0*/, struct CameraCollisionInfo *colInfo /*$s1*/)
- // line 2821, offset 0x800195d8
+ // line 2866, offset 0x80019088
 	/* begin block 1 */
-		// Start line: 2822
-		// Start offset: 0x800195D8
+		// Start line: 2867
+		// Start offset: 0x80019088
 		// Variables:
 	// 		long hit; // $s2
 	// 		short playerSamePos; // $s3
 	// 		short angle; // $a0
 
 		/* begin block 1.1 */
-			// Start line: 2848
-			// Start offset: 0x80019650
+			// Start line: 2893
+			// Start offset: 0x80019100
 			// Variables:
 		// 		int n; // $a0
 		// 		int flag; // $t1
 		// 		short dist; // $a1
 		/* end block 1.1 */
-		// End offset: 0x80019804
-		// End Line: 2904
+		// End offset: 0x800192B4
+		// End Line: 2949
 	/* end block 1 */
-	// End offset: 0x80019AC8
-	// End Line: 3072
+	// End offset: 0x80019578
+	// End Line: 3117
 
 	/* begin block 2 */
-		// Start line: 6928
+		// Start line: 7030
 	/* end block 2 */
-	// End Line: 6929
+	// End Line: 7031
+
+/* File: C:\kain2\game\CAMERA.C */
 
 long CAMERA_ACNoForcedMovement(Camera *camera,CameraCollisionInfo *colInfo)
 
 {
   bool bVar1;
-  _func_4457 **pp_Var2;
+  _func_18 **pp_Var2;
   short dist;
   ushort uVar3;
   int iVar4;
@@ -4532,7 +4677,7 @@ long CAMERA_ACNoForcedMovement(Camera *camera,CameraCollisionInfo *colInfo)
         }
       }
       iVar7 = iVar7 + 1;
-      pp_Var2 = (_func_4457 **)((int)pp_Var2 + 2);
+      pp_Var2 = (_func_18 **)((int)pp_Var2 + 2);
     } while (iVar7 < 5);
     if (bVar1) {
       colInfo->numCollided = 1;
@@ -4543,7 +4688,7 @@ long CAMERA_ACNoForcedMovement(Camera *camera,CameraCollisionInfo *colInfo)
       else {
         CAMERA_update_dist_debounced(camera,*(short *)&colInfo->lenCenterToExtend);
       }
-      goto LAB_80019804;
+      goto LAB_800192b4;
     }
     if (colInfo->numCollided == 4) {
       if ((camera->collision_lastPush != 0) && (colInfo->lenCenterToExtend < 400)) {
@@ -4557,17 +4702,17 @@ long CAMERA_ACNoForcedMovement(Camera *camera,CameraCollisionInfo *colInfo)
           colInfo->flags = 4;
         }
       }
-      goto LAB_80019804;
+      goto LAB_800192b4;
     }
   }
   else {
-LAB_80019804:
+LAB_800192b4:
     if ((colInfo->numCollided == 4) && ((camera->lock & 1U) == 0)) {
       dist = (camera->targetFocusRotation).z;
       lVar9 = 1;
       camera->collisionTargetFocusDistance = *(short *)&colInfo->lenCenterToExtend;
       (camera->collisionTargetFocusRotation).z = dist;
-      goto LAB_80019abc;
+      goto LAB_8001956c;
     }
   }
   uVar8 = colInfo->flags;
@@ -4580,15 +4725,15 @@ LAB_80019804:
         CAMERA_update_dist_debounced(camera,*(short *)&colInfo->lenCenterToExtend);
         lVar9 = 1;
       }
-LAB_80019abc:
+LAB_8001956c:
       CAMERA_dampgetline(0);
       return lVar9;
     }
-    if ((uVar8 & 2) != 0) goto LAB_800199cc;
+    if ((uVar8 & 2) != 0) goto LAB_8001947c;
     camera->collideRotControl = 1;
     camera->collision_lastPush = 1;
     if ((camera->mode != 0xd) || (ACE_amount < 0xb)) {
-      dist = CAMERA_GetLineAngle(camera,colInfo,&left_point,2);
+      dist = CAMERA_GetLineAngle(camera,colInfo,(_SVector *)&left_point,2);
       uVar3 = CAMERA_dampgetline(dist);
       iVar4 = ACE_amount;
       if (ACE_amount < 0) {
@@ -4597,7 +4742,7 @@ LAB_80019abc:
       if (iVar4 < 6) {
         if (0x3f < (short)uVar3) {
           dist = (camera->collisionTargetFocusRotation).z + 0x40;
-          goto LAB_80019a60;
+          goto LAB_80019510;
         }
       }
       else {
@@ -4606,15 +4751,15 @@ LAB_80019abc:
         }
       }
       dist = (camera->focusRotation).z + 4;
-      goto LAB_80019a5c;
+      goto LAB_8001950c;
     }
   }
   else {
-    if ((uVar8 & 4) != 0) goto LAB_800199cc;
+    if ((uVar8 & 4) != 0) goto LAB_8001947c;
     camera->collideRotControl = 1;
     camera->collision_lastPush = 2;
     if ((camera->mode != 0xd) || (-0xb < ACE_amount)) {
-      dist = CAMERA_GetLineAngle(camera,colInfo,&right_point,1);
+      dist = CAMERA_GetLineAngle(camera,colInfo,(_SVector *)&right_point,1);
       uVar3 = CAMERA_dampgetline(dist);
       iVar4 = ACE_amount;
       if (ACE_amount < 0) {
@@ -4629,18 +4774,18 @@ LAB_80019abc:
       }
       if ((short)uVar3 < -0x3f) {
         dist = (camera->collisionTargetFocusRotation).z + -0x40;
-        goto LAB_80019a60;
+        goto LAB_80019510;
       }
       dist = (camera->focusRotation).z + -4;
-LAB_80019a5c:
+LAB_8001950c:
       dist = uVar3 + dist;
-LAB_80019a60:
+LAB_80019510:
       (camera->collisionTargetFocusRotation).z = dist;
       return 1;
     }
   }
   (camera->collisionTargetFocusRotation).z = (camera->targetFocusRotation).z;
-LAB_800199cc:
+LAB_8001947c:
   CAMERA_update_dist_debounced(camera,*(short *)&colInfo->lenCenterToExtend);
   return 1;
 }
@@ -4650,20 +4795,22 @@ LAB_800199cc:
 // decompiled code
 // original method signature: 
 // long /*$ra*/ CAMERA_AbsoluteCollision(struct Camera *camera /*$a0*/, struct CameraCollisionInfo *colInfo /*$a1*/)
- // line 3078, offset 0x80019ae4
+ // line 3123, offset 0x80019594
 	/* begin block 1 */
-		// Start line: 3079
-		// Start offset: 0x80019AE4
+		// Start line: 3124
+		// Start offset: 0x80019594
 		// Variables:
 	// 		long hit; // $a3
 	/* end block 1 */
-	// End offset: 0x80019BFC
-	// End Line: 3148
+	// End offset: 0x800196AC
+	// End Line: 3193
 
 	/* begin block 2 */
-		// Start line: 7461
+		// Start line: 7563
 	/* end block 2 */
-	// End Line: 7462
+	// End Line: 7564
+
+/* File: C:\kain2\game\CAMERA.C */
 
 long CAMERA_AbsoluteCollision(Camera *camera,CameraCollisionInfo *colInfo)
 
@@ -4672,7 +4819,7 @@ long CAMERA_AbsoluteCollision(Camera *camera,CameraCollisionInfo *colInfo)
   long lVar2;
   uint uVar3;
   
-  if ((gameTrackerX.debugFlags & 0x10000U) != 0) {
+  if ((DAT_800d218c & 0x10000) != 0) {
     return 0;
   }
   uVar3 = camera->flags;
@@ -4709,23 +4856,25 @@ long CAMERA_AbsoluteCollision(Camera *camera,CameraCollisionInfo *colInfo)
 // decompiled code
 // original method signature: 
 // short /*$ra*/ CAMERA_update_z_damped(struct Camera *camera /*$a0*/, short current /*$a3*/, short target /*$t0*/)
- // line 3153, offset 0x80019c0c
+ // line 3198, offset 0x800196bc
 	/* begin block 1 */
-		// Start line: 3154
-		// Start offset: 0x80019C0C
+		// Start line: 3199
+		// Start offset: 0x800196BC
 		// Variables:
-	// 		static short upvel; // offset 0x5a
-	// 		static short upaccl; // offset 0x5c
-	// 		static short upmaxVel; // offset 0x5e
+	// 		static short upvel; // offset 0x56
+	// 		static short upaccl; // offset 0x58
+	// 		static short upmaxVel; // offset 0x5a
 	// 		short current_tmp; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x80019E74
-	// End Line: 3198
+	// End offset: 0x80019924
+	// End Line: 3243
 
 	/* begin block 2 */
-		// Start line: 7621
+		// Start line: 7723
 	/* end block 2 */
-	// End Line: 7622
+	// End Line: 7724
+
+/* File: C:\kain2\game\CAMERA.C */
 
 short CAMERA_update_z_damped(Camera *camera,short current,short target)
 
@@ -4746,26 +4895,26 @@ short CAMERA_update_z_damped(Camera *camera,short current,short target)
       if (iVar3 < 0) {
         iVar3 = (int)target - (int)current;
       }
-      DAT_800cddae = (short)(iVar3 << 1);
+      DAT_800cf16a = (short)(iVar3 << 1);
     }
     else {
       if (iVar3 - iVar4 < 0) {
-        DAT_800cddae = (short)((iVar4 - iVar3) / 6);
+        DAT_800cf16a = (short)((iVar4 - iVar3) / 6);
       }
       else {
-        DAT_800cddae = (short)((iVar3 - iVar4) / 6);
+        DAT_800cf16a = (short)((iVar3 - iVar4) / 6);
       }
     }
-    goto LAB_80019e28;
+    goto LAB_800198d8;
   }
   iVar1 = iVar3 - iVar4;
   if (iVar1 < 0) {
     iVar1 = iVar4 - iVar3;
   }
   if (iVar1 < 5) {
-    DAT_800cddaa = 0;
-    DAT_800cddac = 0;
-    DAT_800cddae = 0;
+    DAT_800cf166 = 0;
+    DAT_800cf168 = 0;
+    DAT_800cf16a = 0;
     return current;
   }
   iVar3 = (int)current;
@@ -4781,8 +4930,8 @@ short CAMERA_update_z_damped(Camera *camera,short current,short target)
       sVar5 = (short)(iVar4 / 6) + (sVar2 >> 0xf);
     }
     sVar5 = sVar5 - (sVar2 >> 0xf);
-LAB_80019dc0:
-    DAT_800cddae = sVar5;
+LAB_80019870:
+    DAT_800cf16a = sVar5;
   }
   else {
     iVar4 = iVar3 - target;
@@ -4790,25 +4939,25 @@ LAB_80019dc0:
     if (iVar4 < 0) {
       iVar3 = target - iVar3;
       sVar2 = (short)((uint)iVar3 >> 0x10);
-      DAT_800cddae = (short)(iVar3 / 6) + (sVar2 >> 0xf);
+      DAT_800cf16a = (short)(iVar3 / 6) + (sVar2 >> 0xf);
     }
     else {
-      DAT_800cddae = (short)(iVar4 / 6) + (sVar2 >> 0xf);
+      DAT_800cf16a = (short)(iVar4 / 6) + (sVar2 >> 0xf);
     }
-    DAT_800cddae = DAT_800cddae - (sVar2 >> 0xf);
+    DAT_800cf16a = DAT_800cf16a - (sVar2 >> 0xf);
     sVar5 = 0x32;
-    if (DAT_800cddae < 0x32) goto LAB_80019dc0;
+    if (DAT_800cf16a < 0x32) goto LAB_80019870;
   }
   iVar3 = (int)current - (int)target;
   if (iVar3 < 0) {
     iVar3 = (int)target - (int)current;
   }
-  if ((iVar3 < DAT_800cddae) && (DAT_800cddae = current - target, (int)current - (int)target < 0)) {
-    DAT_800cddae = target - current;
+  if ((iVar3 < DAT_800cf16a) && (DAT_800cf16a = current - target, (int)current - (int)target < 0)) {
+    DAT_800cf16a = target - current;
   }
-LAB_80019e28:
+LAB_800198d8:
   local_10[0] = current;
-  CriticalDampValue(1,local_10,target,&DAT_800cddaa,&DAT_800cddac,(int)DAT_800cddae);
+  CriticalDampValue(1,local_10,target,&DAT_800cf166,&DAT_800cf168,(int)DAT_800cf16a);
   return local_10[0];
 }
 
@@ -4817,10 +4966,10 @@ LAB_80019e28:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_CombatCamDist(struct Camera *camera /*$s0*/)
- // line 3258, offset 0x80019e84
+ // line 3303, offset 0x80019934
 	/* begin block 1 */
-		// Start line: 3259
-		// Start offset: 0x80019E84
+		// Start line: 3304
+		// Start offset: 0x80019934
 		// Variables:
 	// 		struct DVECTOR xy; // stack offset -48
 	// 		struct DVECTOR xy2; // stack offset -40
@@ -4828,13 +4977,15 @@ LAB_80019e28:
 	// 		long z; // stack offset -24
 	// 		struct _Instance *instance; // $s1
 	/* end block 1 */
-	// End offset: 0x8001A134
-	// End Line: 3340
+	// End offset: 0x80019BE4
+	// End Line: 3385
 
 	/* begin block 2 */
-		// Start line: 7835
+		// Start line: 7937
 	/* end block 2 */
-	// End Line: 7836
+	// End Line: 7938
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_CombatCamDist(Camera *camera)
 
@@ -4846,7 +4997,8 @@ void CAMERA_CombatCamDist(Camera *camera)
   short sVar3;
   ulong uVar4;
   int iVar5;
-  int iVar6;
+  long lVar6;
+  int iVar7;
   short local_30;
   short sStack46;
   short local_28;
@@ -4860,8 +5012,8 @@ void CAMERA_CombatCamDist(Camera *camera)
     combat_cam_weight = 0x1000;
     return;
   }
-  SetRotMatrix((undefined4 *)(camera->core).wcTransform);
-  SetTransMatrix((int)(camera->core).wcTransform);
+  SetRotMatrix((camera->core).wcTransform);
+  SetTransMatrix((camera->core).wcTransform);
   local_20 = CONCAT22((camera->focusInstance->position).y,(camera->focusInstance->position).x);
   uVar2 = local_1c & 0xffff0000;
   local_1c = uVar2 | (ushort)(camera->focusInstance->position).z;
@@ -4869,18 +5021,18 @@ void CAMERA_CombatCamDist(Camera *camera)
   setCopReg(2,in_at,local_1c);
   copFunction(2,0x180001);
   uVar1 = getCopReg(2,0xe);
-  iVar6 = getCopReg(2,0x13);
+  iVar7 = getCopReg(2,0x13);
   local_30 = (short)uVar1;
   iVar5 = (int)local_30 + -0x100;
   if ((int)local_30 < 0x100) {
-    iVar5 = iVar5 * iVar6;
+    iVar5 = iVar5 * iVar7;
     if (iVar5 < 0) {
       iVar5 = iVar5 + 0x7f;
     }
     combat_cam_distance = -(short)(iVar5 >> 7);
   }
   else {
-    iVar5 = iVar5 * iVar6;
+    iVar5 = iVar5 * iVar7;
     if (iVar5 < 0) {
       iVar5 = iVar5 + 0x7f;
     }
@@ -4894,18 +5046,18 @@ void CAMERA_CombatCamDist(Camera *camera)
   }
   sStack46 = (short)((uint)uVar1 >> 0x10);
   if (sStack46 < 0xf1) {
-    if (0xd1 < sStack46) goto LAB_8001a044;
+    if (0xd1 < sStack46) goto LAB_80019af4;
     combat_cam_weight = combat_cam_weight + -0x30;
     sVar3 = 0x800;
-    if (0x7ff < combat_cam_weight) goto LAB_8001a044;
+    if (0x7ff < combat_cam_weight) goto LAB_80019af4;
   }
   else {
     combat_cam_weight = combat_cam_weight + 0x30;
     sVar3 = 0x1000;
-    if (combat_cam_weight < 0x1001) goto LAB_8001a044;
+    if (combat_cam_weight < 0x1001) goto LAB_80019af4;
   }
   combat_cam_weight = sVar3;
-LAB_8001a044:
+LAB_80019af4:
   local_1c = uVar2 | *(ushort *)(uVar4 + 0x60);
   setCopReg(2,in_zero,*(undefined4 *)(uVar4 + 0x5c));
   setCopReg(2,in_at,local_1c);
@@ -4913,23 +5065,23 @@ LAB_8001a044:
   uVar1 = getCopReg(2,0xe);
   sStack38 = (short)((uint)uVar1 >> 0x10);
   local_28 = (short)uVar1;
-  iVar6 = ratan2((int)sStack38 - (int)sStack46,(int)local_28 - (int)local_30);
-  if (iVar6 < 0) {
-    iVar6 = ratan2((int)sStack38 - (int)sStack46,(int)local_28 - (int)local_30);
-    combat_cam_angle = -(short)iVar6;
+  lVar6 = ratan2((int)sStack38 - (int)sStack46,(int)local_28 - (int)local_30);
+  if (lVar6 < 0) {
+    lVar6 = ratan2((int)sStack38 - (int)sStack46,(int)local_28 - (int)local_30);
+    combat_cam_angle = -(short)lVar6;
   }
   else {
-    iVar6 = ratan2((int)sStack38 - (int)sStack46,(int)local_28 - (int)local_30);
-    combat_cam_angle = (short)iVar6;
+    lVar6 = ratan2((int)sStack38 - (int)sStack46,(int)local_28 - (int)local_30);
+    combat_cam_angle = (short)lVar6;
   }
   if (0x400 < combat_cam_angle) {
     combat_cam_angle = 0x800 - combat_cam_angle;
   }
-  iVar6 = (int)combat_cam_angle;
-  if (iVar6 < 0) {
-    iVar6 = iVar6 + 7;
+  iVar7 = (int)combat_cam_angle;
+  if (iVar7 < 0) {
+    iVar7 = iVar7 + 7;
   }
-  combat_cam_angle = -0xaa - (short)(iVar6 >> 3);
+  combat_cam_angle = -0xaa - (short)(iVar7 >> 3);
   return;
 }
 
@@ -4938,54 +5090,55 @@ LAB_8001a044:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_GenericCameraProcess(struct Camera *camera /*$s0*/)
- // line 3343, offset 0x8001a148
+ // line 3388, offset 0x80019bf8
 	/* begin block 1 */
-		// Start line: 3344
-		// Start offset: 0x8001A148
+		// Start line: 3389
+		// Start offset: 0x80019BF8
 		// Variables:
 	// 		struct _Instance *focusInstance; // $s1
 	// 		struct _Position targetCamPos; // stack offset -32
 
 		/* begin block 1.1 */
-			// Start line: 3396
-			// Start offset: 0x8001A25C
+			// Start line: 3441
+			// Start offset: 0x80019D1C
 			// Variables:
 		// 		short angle; // $a0
 		// 		struct _Rotation test_rot; // stack offset -24
 		/* end block 1.1 */
-		// End offset: 0x8001A2BC
-		// End Line: 3414
+		// End offset: 0x80019D7C
+		// End Line: 3459
 
 		/* begin block 1.2 */
-			// Start line: 3422
-			// Start offset: 0x8001A2CC
+			// Start line: 3467
+			// Start offset: 0x80019D8C
 			// Variables:
+		// 		struct _Instance *warpInstance; // $v0
 		// 		int tmp; // $v0
 		/* end block 1.2 */
-		// End offset: 0x8001A2CC
-		// End Line: 3422
+		// End offset: 0x80019D9C
+		// End Line: 3473
 
 		/* begin block 1.3 */
-			// Start line: 3453
-			// Start offset: 0x8001A380
+			// Start line: 3505
+			// Start offset: 0x80019E4C
 			// Variables:
 		// 		int mod; // $v1
 		/* end block 1.3 */
-		// End offset: 0x8001A400
-		// End Line: 3468
+		// End offset: 0x80019ECC
+		// End Line: 3520
 
 		/* begin block 1.4 */
-			// Start line: 3476
-			// Start offset: 0x8001A41C
+			// Start line: 3528
+			// Start offset: 0x80019EE8
 			// Variables:
 		// 		int dist; // $a3
 		/* end block 1.4 */
-		// End offset: 0x8001A470
-		// End Line: 3494
+		// End offset: 0x80019F3C
+		// End Line: 3546
 
 		/* begin block 1.5 */
-			// Start line: 3508
-			// Start offset: 0x8001A4B0
+			// Start line: 3560
+			// Start offset: 0x80019F7C
 			// Variables:
 		// 		short _x1; // $v1
 		// 		short _y1; // $a0
@@ -4993,25 +5146,27 @@ LAB_8001a044:
 		// 		struct _Position *_v0; // $v0
 		// 		struct _Position *_v1; // $v0
 		/* end block 1.5 */
-		// End offset: 0x8001A4B0
-		// End Line: 3508
+		// End offset: 0x80019F7C
+		// End Line: 3560
 
 		/* begin block 1.6 */
-			// Start line: 3517
-			// Start offset: 0x8001A4F4
+			// Start line: 3569
+			// Start offset: 0x80019FC0
 			// Variables:
 		// 		struct _Position target; // stack offset -24
 		/* end block 1.6 */
-		// End offset: 0x8001A574
-		// End Line: 3537
+		// End offset: 0x8001A040
+		// End Line: 3589
 	/* end block 1 */
-	// End offset: 0x8001A574
-	// End Line: 3540
+	// End offset: 0x8001A040
+	// End Line: 3592
 
 	/* begin block 2 */
-		// Start line: 8006
+		// Start line: 8108
 	/* end block 2 */
-	// End Line: 8007
+	// End Line: 8109
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_GenericCameraProcess(Camera *camera)
 
@@ -5041,7 +5196,7 @@ void CAMERA_GenericCameraProcess(Camera *camera)
     if (((((camera->mode == 0xd) && (0 < camera->instance_xyvel)) &&
          ((camera->instance_mode & 0x82000400) == 0)) &&
         ((camera->always_rotate_flag == 0 && (camera->rotState != 3)))) &&
-       ((camera->instance_mode & 0x2000) == 0)) {
+       (((camera->instance_mode & 0x2000) == 0 && (DAT_800d2297 != '\x01')))) {
       CAMERA_CalcRotation((_Rotation *)&local_18,&camera->targetFocusPoint,(_Position *)camera);
       sVar2 = CAMERA_SignedAngleDifference(local_14,(camera->focusRotation).z);
       if ((camera->instance_mode & 2) == 0) {
@@ -5058,14 +5213,18 @@ void CAMERA_GenericCameraProcess(Camera *camera)
   }
   uVar5 = camera->instance_mode;
   if ((int)uVar5 < 0) {
-    sVar2 = (camera->focusInstance->rotation).z;
-    camera->tfaceTilt = 0xf94;
-    (camera->rotationVel).z = 0x20;
-    camera->always_rotate_flag = 1;
-    camera->forced_movement = 0;
-    sVar2 = (short)(((uint)(((int)sVar2 & 0xfffU) - 0x401 < 0x7ff) ^ 1) << 0xb);
-    (camera->collisionTargetFocusRotation).z = sVar2;
-    (camera->targetFocusRotation).z = sVar2;
+    focusInstance = RAZIEL_QueryEngagedInstance(0xe);
+    if (focusInstance != (_Instance *)0x0) {
+      sVar2 = (focusInstance->rotation).z;
+      camera->tfaceTilt = 0xf94;
+      (camera->rotationVel).z = 0x40;
+      camera->smooth = 8;
+      camera->always_rotate_flag = 1;
+      camera->forced_movement = 0;
+      sVar2 = (short)(((uint)(((int)sVar2 & 0xfffU) - 0x401 < 0x7ff) ^ 1) << 0xb);
+      (camera->collisionTargetFocusRotation).z = sVar2;
+      (camera->targetFocusRotation).z = sVar2;
+    }
   }
   else {
     if (((camera->flags & 0x2000U) == 0) && ((uVar5 & 0x20000000) == 0)) {
@@ -5092,16 +5251,16 @@ void CAMERA_GenericCameraProcess(Camera *camera)
           }
         }
         CAMERA_FollowGoBehindPlayerWithTimer(camera);
-        goto LAB_8001a408;
+        goto LAB_80019ed4;
       }
     }
     else {
-      if ((uVar5 & 0x2000000) != 0) goto LAB_8001a408;
+      if ((uVar5 & 0x2000000) != 0) goto LAB_80019ed4;
       (camera->rotationVel).z = 0x40;
     }
     CAMERA_FollowGoBehindPlayer(camera);
   }
-LAB_8001a408:
+LAB_80019ed4:
   if ((camera->flags & 0x1800U) == 0) {
     if ((camera->instance_mode & 0x2000000) == 0) {
       combat_cam_distance = camera->targetFocusDistance;
@@ -5155,10 +5314,10 @@ LAB_8001a408:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_CinematicProcess(struct Camera *camera /*$s2*/)
- // line 3548, offset 0x8001a5a8
+ // line 3600, offset 0x8001a074
 	/* begin block 1 */
-		// Start line: 3549
-		// Start offset: 0x8001A5A8
+		// Start line: 3601
+		// Start offset: 0x8001A074
 		// Variables:
 	// 		struct _SVector *camPos; // $s0
 	// 		struct _SVector *camTarget; // $s3
@@ -5166,90 +5325,92 @@ LAB_8001a408:
 	// 		struct MultiSpline *targetSpline; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 3572
-			// Start offset: 0x8001A620
+			// Start line: 3624
+			// Start offset: 0x8001A0EC
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a0
 		/* end block 1.1 */
-		// End offset: 0x8001A620
-		// End Line: 3572
+		// End offset: 0x8001A0EC
+		// End Line: 3624
 
 		/* begin block 1.2 */
-			// Start line: 3576
-			// Start offset: 0x8001A63C
+			// Start line: 3628
+			// Start offset: 0x8001A108
 			// Variables:
 		// 		short _x1; // $v1
 		// 		short _y1; // $a0
 		// 		short _z1; // $v0
 		// 		struct _SVector *_v1; // $v0
 		/* end block 1.2 */
-		// End offset: 0x8001A654
-		// End Line: 3576
+		// End offset: 0x8001A120
+		// End Line: 3628
 
 		/* begin block 1.3 */
-			// Start line: 3581
-			// Start offset: 0x8001A664
+			// Start line: 3633
+			// Start offset: 0x8001A130
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a0
 		// 		struct _SVector *_v0; // $v0
 		/* end block 1.3 */
-		// End offset: 0x8001A664
-		// End Line: 3581
+		// End offset: 0x8001A130
+		// End Line: 3633
 
 		/* begin block 1.4 */
-			// Start line: 3589
-			// Start offset: 0x8001A6AC
+			// Start line: 3641
+			// Start offset: 0x8001A178
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a2
 		// 		struct _Position *_v0; // $v0
 		/* end block 1.4 */
-		// End offset: 0x8001A6AC
-		// End Line: 3589
+		// End offset: 0x8001A178
+		// End Line: 3641
 
 		/* begin block 1.5 */
-			// Start line: 3602
-			// Start offset: 0x8001A70C
+			// Start line: 3654
+			// Start offset: 0x8001A1D8
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a0
 		// 		struct _Position *_v0; // $v0
 		/* end block 1.5 */
-		// End offset: 0x8001A70C
-		// End Line: 3602
+		// End offset: 0x8001A1D8
+		// End Line: 3654
 
 		/* begin block 1.6 */
-			// Start line: 3650
-			// Start offset: 0x8001A960
+			// Start line: 3702
+			// Start offset: 0x8001A42C
 		/* end block 1.6 */
-		// End offset: 0x8001AA5C
-		// End Line: 3667
+		// End offset: 0x8001A528
+		// End Line: 3719
 
 		/* begin block 1.7 */
-			// Start line: 3670
-			// Start offset: 0x8001AA5C
+			// Start line: 3722
+			// Start offset: 0x8001A528
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a0
 		// 		struct _Rotation *_v0; // $v0
 		/* end block 1.7 */
-		// End offset: 0x8001AA5C
-		// End Line: 3670
+		// End offset: 0x8001A528
+		// End Line: 3722
 	/* end block 1 */
-	// End offset: 0x8001AA5C
-	// End Line: 3670
+	// End offset: 0x8001A528
+	// End Line: 3722
 
 	/* begin block 2 */
-		// Start line: 8436
+		// Start line: 8553
 	/* end block 2 */
-	// End Line: 8437
+	// End Line: 8554
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_CinematicProcess(Camera *camera)
 
@@ -5335,7 +5496,7 @@ void CAMERA_CinematicProcess(Camera *camera)
     if (pos == (_SVector *)0x0 && pos_00 == (_SVector *)0x0) {
       (camera->data).Cinematic.cinema_done = 1;
     }
-    goto LAB_8001aa64;
+    goto LAB_8001a530;
   }
   CriticalDampPosition
             (4,(_Position *)camera,&camera->targetPos,&camera->positionVel,&camera->positionAccl,
@@ -5352,14 +5513,14 @@ void CAMERA_CinematicProcess(Camera *camera)
     if (iVar3 < 0) {
       iVar3 = iVar4 - iVar5;
     }
-    if (8 < iVar3) goto LAB_8001aa64;
+    if (8 < iVar3) goto LAB_8001a530;
     iVar5 = (int)(camera->core).position.y;
     iVar4 = (int)(camera->targetPos).y;
     iVar3 = iVar5 - iVar4;
     if (iVar3 < 0) {
       iVar3 = iVar4 - iVar5;
     }
-    if (8 < iVar3) goto LAB_8001aa64;
+    if (8 < iVar3) goto LAB_8001a530;
     iVar5 = (int)(camera->core).position.z;
     iVar4 = (int)(camera->targetPos).z;
     iVar3 = iVar5 - iVar4;
@@ -5378,35 +5539,35 @@ void CAMERA_CinematicProcess(Camera *camera)
     if (iVar3 < 0) {
       iVar3 = iVar4 - iVar5;
     }
-    if (8 < iVar3) goto LAB_8001aa64;
+    if (8 < iVar3) goto LAB_8001a530;
     iVar5 = (int)(camera->core).position.y;
     iVar4 = (int)(camera->targetPos).y;
     iVar3 = iVar5 - iVar4;
     if (iVar3 < 0) {
       iVar3 = iVar4 - iVar5;
     }
-    if (8 < iVar3) goto LAB_8001aa64;
+    if (8 < iVar3) goto LAB_8001a530;
     iVar5 = (int)(camera->core).position.z;
     iVar4 = (int)(camera->targetPos).z;
     iVar3 = iVar5 - iVar4;
     if (iVar3 < 0) {
       iVar3 = iVar4 - iVar5;
     }
-    if (8 < iVar3) goto LAB_8001aa64;
+    if (8 < iVar3) goto LAB_8001a530;
     iVar5 = (int)(camera->focusPoint).x;
     iVar4 = (int)(camera->targetFocusPoint).x;
     iVar3 = iVar5 - iVar4;
     if (iVar3 < 0) {
       iVar3 = iVar4 - iVar5;
     }
-    if (8 < iVar3) goto LAB_8001aa64;
+    if (8 < iVar3) goto LAB_8001a530;
     iVar5 = (int)(camera->focusPoint).y;
     iVar4 = (int)(camera->targetFocusPoint).y;
     iVar3 = iVar5 - iVar4;
     if (iVar3 < 0) {
       iVar3 = iVar4 - iVar5;
     }
-    if (8 < iVar3) goto LAB_8001aa64;
+    if (8 < iVar3) goto LAB_8001a530;
     iVar5 = (int)(camera->focusPoint).z;
     iVar4 = (int)(camera->targetFocusPoint).z;
     iVar3 = iVar5 - iVar4;
@@ -5417,7 +5578,7 @@ void CAMERA_CinematicProcess(Camera *camera)
   if (iVar3 < 9) {
     camera->posState = 0;
   }
-LAB_8001aa64:
+LAB_8001a530:
   CAMERA_CalcRotation(&camera->targetRotation,&camera->focusPoint,(_Position *)camera);
   sVar1 = (camera->targetRotation).y;
   sVar2 = (camera->targetRotation).z;
@@ -5436,25 +5597,27 @@ LAB_8001aa64:
 // decompiled code
 // original method signature: 
 // int /*$ra*/ CAMERA_GetDistSq(struct _SVector *point1 /*$a0*/, struct _SVector *point2 /*$a1*/)
- // line 3684, offset 0x8001aac4
+ // line 3736, offset 0x8001a590
 	/* begin block 1 */
-		// Start line: 3685
-		// Start offset: 0x8001AAC4
+		// Start line: 3737
+		// Start offset: 0x8001A590
 		// Variables:
 	// 		struct _Vector d; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x8001AAC4
-	// End Line: 3685
+	// End offset: 0x8001A590
+	// End Line: 3737
 
 	/* begin block 2 */
-		// Start line: 8721
+		// Start line: 8838
 	/* end block 2 */
-	// End Line: 8722
+	// End Line: 8839
 
 	/* begin block 3 */
-		// Start line: 8725
+		// Start line: 8842
 	/* end block 3 */
-	// End Line: 8726
+	// End Line: 8843
+
+/* File: C:\kain2\game\CAMERA.C */
 
 int CAMERA_GetDistSq(_SVector *point1,_SVector *point2)
 
@@ -5481,54 +5644,46 @@ int CAMERA_GetDistSq(_SVector *point1,_SVector *point2)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_NearestPointOnLineVec(struct _SVector *linePoint /*$s2*/, struct _SVector *start /*$s1*/, struct _SVector *line /*$s0*/, struct _Position *point /*$a3*/)
- // line 3699, offset 0x8001ab40
+ // line 3751, offset 0x8001a60c
 	/* begin block 1 */
-		// Start line: 3700
-		// Start offset: 0x8001AB40
+		// Start line: 3752
+		// Start offset: 0x8001A60C
 		// Variables:
 	// 		struct MATRIX nmat; // stack offset -64
 	// 		struct _Vector dpv; // stack offset -32
 	// 		long t; // $a0
 	/* end block 1 */
-	// End offset: 0x8001ABF4
-	// End Line: 3718
+	// End offset: 0x8001A6C0
+	// End Line: 3770
 
 	/* begin block 2 */
-		// Start line: 8755
+		// Start line: 8872
 	/* end block 2 */
-	// End Line: 8756
+	// End Line: 8873
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_NearestPointOnLineVec
                (_SVector *linePoint,_SVector *start,_SVector *line,_Position *point)
 
 {
   int iVar1;
-  short local_40;
-  short local_3e;
-  short local_3c;
-  short local_3a;
-  short local_38;
-  short local_36;
-  short local_34;
-  short local_32;
-  short local_30;
-  int local_20;
-  int local_1c;
-  int local_18;
+  MATRIX local_40;
+  VECTOR local_20;
   
-  local_40 = line->x;
-  local_3e = line->y;
-  local_3c = line->z;
-  local_3a = start->x;
-  local_38 = start->y;
-  local_36 = start->z;
-  local_34 = point->x;
-  local_32 = point->y;
-  local_30 = point->z;
-  ApplyMatrix(&local_40,line,&local_20);
-  iVar1 = (local_1c - local_18) * 0x1000;
-  if (local_20 != 0) {
-    iVar1 = ((local_1c - local_18) * -0x1000) / local_20;
+  local_40.m[0][0] = line->x;
+  local_40.m[0][1] = line->y;
+  local_40.m[0][2] = line->z;
+  local_40.m[1][0] = start->x;
+  local_40.m[1][1] = start->y;
+  local_40.m[1][2] = start->z;
+  local_40.m[2][0] = point->x;
+  local_40.m[2][1] = point->y;
+  local_40.m[2][2] = point->z;
+  ApplyMatrix(&local_40,(SVECTOR *)line,&local_20);
+  iVar1 = (local_20.vy - local_20.vz) * 0x1000;
+  if (local_20.vx != 0) {
+    iVar1 = ((local_20.vy - local_20.vz) * -0x1000) / local_20.vx;
   }
   linePoint->x = start->x + (short)(line->x * iVar1 >> 0xc);
   linePoint->y = start->y + (short)(line->y * iVar1 >> 0xc);
@@ -5541,16 +5696,18 @@ void CAMERA_NearestPointOnLineVec
 // decompiled code
 // original method signature: 
 // int /*$ra*/ CAMERA_CheckPoint(int linePoint /*$a0*/, int linept1 /*$a1*/, int linept2 /*$a2*/)
- // line 3724, offset 0x8001ac6c
+ // line 3776, offset 0x8001a738
 	/* begin block 1 */
-		// Start line: 8818
+		// Start line: 8935
 	/* end block 1 */
-	// End Line: 8819
+	// End Line: 8936
 
 	/* begin block 2 */
-		// Start line: 8819
+		// Start line: 8936
 	/* end block 2 */
-	// End Line: 8820
+	// End Line: 8937
+
+/* File: C:\kain2\game\CAMERA.C */
 
 int CAMERA_CheckPoint(int linePoint,int linept1,int linept2)
 
@@ -5571,11 +5728,13 @@ int CAMERA_CheckPoint(int linePoint,int linept1,int linept2)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ CAMERA_CheckIfPointOnLine(struct _SVector *linePoint /*$s0*/, struct _SVector *linept1 /*$s1*/, struct _SVector *linept2 /*$s2*/)
- // line 3730, offset 0x8001acb0
+ // line 3782, offset 0x8001a77c
 	/* begin block 1 */
-		// Start line: 8830
+		// Start line: 8947
 	/* end block 1 */
-	// End Line: 8831
+	// End Line: 8948
+
+/* File: C:\kain2\game\CAMERA.C */
 
 int CAMERA_CheckIfPointOnLine(_SVector *linePoint,_SVector *linept1,_SVector *linept2)
 
@@ -5603,10 +5762,10 @@ int CAMERA_CheckIfPointOnLine(_SVector *linePoint,_SVector *linept1,_SVector *li
 // decompiled code
 // original method signature: 
 // int /*$ra*/ CAMERA_FindLinePoint(struct _Position *point /*$s0*/, struct _SVector *linept1 /*$s5*/, struct _SVector *linept2 /*$s6*/, int target_dist_sq /*$s1*/, struct _SVector *results /*stack 16*/)
- // line 3738, offset 0x8001ad40
+ // line 3790, offset 0x8001a80c
 	/* begin block 1 */
-		// Start line: 3739
-		// Start offset: 0x8001AD40
+		// Start line: 3791
+		// Start offset: 0x8001A80C
 		// Variables:
 	// 		struct _SVector outPoint; // stack offset -56
 	// 		struct _SVector line; // stack offset -48
@@ -5614,8 +5773,8 @@ int CAMERA_CheckIfPointOnLine(_SVector *linePoint,_SVector *linept1,_SVector *li
 	// 		int hits; // $s4
 
 		/* begin block 1.1 */
-			// Start line: 3739
-			// Start offset: 0x8001AD40
+			// Start line: 3791
+			// Start offset: 0x8001A80C
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $v1
@@ -5625,37 +5784,39 @@ int CAMERA_CheckIfPointOnLine(_SVector *linePoint,_SVector *linept1,_SVector *li
 		// 		short _z1; // $t2
 		// 		struct _SVector *_v; // $s2
 		/* end block 1.1 */
-		// End offset: 0x8001AD40
-		// End Line: 3739
+		// End offset: 0x8001A80C
+		// End Line: 3791
 
 		/* begin block 1.2 */
-			// Start line: 3753
-			// Start offset: 0x8001ADD4
+			// Start line: 3805
+			// Start offset: 0x8001A8A0
 			// Variables:
 		// 		struct _SVector linePoint; // stack offset -40
 		// 		int n; // $s3
 
 			/* begin block 1.2.1 */
-				// Start line: 3767
-				// Start offset: 0x8001AE88
+				// Start line: 3819
+				// Start offset: 0x8001A954
 				// Variables:
 			// 		short _x1; // $v0
 			// 		short _y1; // $v1
 			// 		short _z1; // $a0
 			/* end block 1.2.1 */
-			// End offset: 0x8001AE88
-			// End Line: 3767
+			// End offset: 0x8001A954
+			// End Line: 3819
 		/* end block 1.2 */
-		// End offset: 0x8001AEDC
-		// End Line: 3773
+		// End offset: 0x8001A9A8
+		// End Line: 3825
 	/* end block 1 */
-	// End offset: 0x8001AEDC
-	// End Line: 3775
+	// End offset: 0x8001A9A8
+	// End Line: 3827
 
 	/* begin block 2 */
-		// Start line: 8846
+		// Start line: 8963
 	/* end block 2 */
-	// End Line: 8847
+	// End Line: 8964
+
+/* File: C:\kain2\game\CAMERA.C */
 
 int CAMERA_FindLinePoint
               (_Position *point,_SVector *linept1,_SVector *linept2,int target_dist_sq,
@@ -5720,10 +5881,10 @@ int CAMERA_FindLinePoint
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_SplineGetNearestPoint2(struct Camera *camera /*stack 0*/, struct Spline *spline /*stack 4*/, struct _SVector *point /*stack 8*/, int *currkey /*stack 12*/, struct _SVector *ret_dpoint /*stack 16*/)
- // line 3778, offset 0x8001af04
+ // line 3830, offset 0x8001a9d0
 	/* begin block 1 */
-		// Start line: 3779
-		// Start offset: 0x8001AF04
+		// Start line: 3831
+		// Start offset: 0x8001A9D0
 		// Variables:
 	// 		struct SplineKey *key; // stack offset -56
 	// 		int n; // $s2
@@ -5731,19 +5892,19 @@ int CAMERA_FindLinePoint
 	// 		long dist; // $fp
 
 		/* begin block 1.1 */
-			// Start line: 3779
-			// Start offset: 0x8001AF04
+			// Start line: 3831
+			// Start offset: 0x8001A9D0
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a0
 		/* end block 1.1 */
-		// End offset: 0x8001AF04
-		// End Line: 3779
+		// End offset: 0x8001A9D0
+		// End Line: 3831
 
 		/* begin block 1.2 */
-			// Start line: 3798
-			// Start offset: 0x8001AFB8
+			// Start line: 3850
+			// Start offset: 0x8001AA84
 			// Variables:
 		// 		struct _SVector point1; // stack offset -88
 		// 		struct _SVector point2; // stack offset -80
@@ -5752,8 +5913,8 @@ int CAMERA_FindLinePoint
 		// 		int hits; // $s3
 
 			/* begin block 1.2.1 */
-				// Start line: 3802
-				// Start offset: 0x8001AFD4
+				// Start line: 3854
+				// Start offset: 0x8001AAA0
 				// Variables:
 			// 		short _x1; // $v1
 			// 		short _y1; // $a2
@@ -5761,12 +5922,12 @@ int CAMERA_FindLinePoint
 			// 		struct _SVector *_v0; // $s7
 			// 		struct vecS *_v1; // $v0
 			/* end block 1.2.1 */
-			// End offset: 0x8001AFD4
-			// End Line: 3802
+			// End offset: 0x8001AAA0
+			// End Line: 3854
 
 			/* begin block 1.2.2 */
-				// Start line: 3802
-				// Start offset: 0x8001AFD4
+				// Start line: 3854
+				// Start offset: 0x8001AAA0
 				// Variables:
 			// 		short _x1; // $v0
 			// 		short _y1; // $a2
@@ -5774,39 +5935,41 @@ int CAMERA_FindLinePoint
 			// 		struct _SVector *_v0; // $s6
 			// 		struct vecS *_v1; // $v1
 			/* end block 1.2.2 */
-			// End offset: 0x8001AFD4
-			// End Line: 3802
+			// End offset: 0x8001AAA0
+			// End Line: 3854
 
 			/* begin block 1.2.3 */
-				// Start line: 3809
-				// Start offset: 0x8001B04C
+				// Start line: 3861
+				// Start offset: 0x8001AB18
 				// Variables:
 			// 		int tmpdist; // $a1
 
 				/* begin block 1.2.3.1 */
-					// Start line: 3820
-					// Start offset: 0x8001B068
+					// Start line: 3872
+					// Start offset: 0x8001AB34
 					// Variables:
 				// 		short _x1; // $v0
 				// 		short _y1; // $v1
 				// 		short _z1; // $a0
 				/* end block 1.2.3.1 */
-				// End offset: 0x8001B068
-				// End Line: 3820
+				// End offset: 0x8001AB34
+				// End Line: 3872
 			/* end block 1.2.3 */
-			// End offset: 0x8001B08C
-			// End Line: 3824
+			// End offset: 0x8001AB58
+			// End Line: 3876
 		/* end block 1.2 */
-		// End offset: 0x8001B09C
-		// End Line: 3832
+		// End offset: 0x8001AB68
+		// End Line: 3884
 	/* end block 1 */
-	// End offset: 0x8001B0BC
-	// End Line: 3833
+	// End offset: 0x8001AB88
+	// End Line: 3885
 
 	/* begin block 2 */
-		// Start line: 8963
+		// Start line: 9080
 	/* end block 2 */
-	// End Line: 8964
+	// End Line: 9081
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_SplineGetNearestPoint2
                (Camera *camera,Spline *spline,_SVector *point,int *currkey,_SVector *ret_dpoint)
@@ -5885,10 +6048,10 @@ void CAMERA_SplineGetNearestPoint2
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_SplineGetNearestPoint(struct Spline *spline /*$s4*/, struct _SVector *point /*$s6*/, int *currkey /*$s7*/, struct _SVector *ret_dpoint /*stack 12*/)
- // line 3835, offset 0x8001b0ec
+ // line 3887, offset 0x8001abb8
 	/* begin block 1 */
-		// Start line: 3836
-		// Start offset: 0x8001B0EC
+		// Start line: 3888
+		// Start offset: 0x8001ABB8
 		// Variables:
 	// 		struct _SVector dpoint; // stack offset -96
 	// 		struct _SVector dpoint2; // stack offset -88
@@ -5908,8 +6071,8 @@ void CAMERA_SplineGetNearestPoint2
 	// 		int next_key; // $s3
 
 		/* begin block 1.1 */
-			// Start line: 3861
-			// Start offset: 0x8001B218
+			// Start line: 3913
+			// Start offset: 0x8001ACE4
 			// Variables:
 		// 		short _x1; // $v1
 		// 		short _y1; // $t0
@@ -5917,12 +6080,12 @@ void CAMERA_SplineGetNearestPoint2
 		// 		struct _SVector *_v0; // $a1
 		// 		struct vecS *_v1; // $a3
 		/* end block 1.1 */
-		// End offset: 0x8001B218
-		// End Line: 3861
+		// End offset: 0x8001ACE4
+		// End Line: 3913
 
 		/* begin block 1.2 */
-			// Start line: 3861
-			// Start offset: 0x8001B218
+			// Start line: 3913
+			// Start offset: 0x8001ACE4
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $t0
@@ -5930,12 +6093,12 @@ void CAMERA_SplineGetNearestPoint2
 		// 		struct _SVector *_v0; // $a2
 		// 		struct vecS *_v1; // $v1
 		/* end block 1.2 */
-		// End offset: 0x8001B218
-		// End Line: 3861
+		// End offset: 0x8001ACE4
+		// End Line: 3913
 
 		/* begin block 1.3 */
-			// Start line: 3876
-			// Start offset: 0x8001B2E0
+			// Start line: 3928
+			// Start offset: 0x8001ADAC
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $t0
@@ -5943,12 +6106,12 @@ void CAMERA_SplineGetNearestPoint2
 		// 		struct _SVector *_v0; // $a2
 		// 		struct vecS *_v1; // $v1
 		/* end block 1.3 */
-		// End offset: 0x8001B2E0
-		// End Line: 3876
+		// End offset: 0x8001ADAC
+		// End Line: 3928
 
 		/* begin block 1.4 */
-			// Start line: 3889
-			// Start offset: 0x8001B340
+			// Start line: 3941
+			// Start offset: 0x8001AE0C
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $t0
@@ -5956,18 +6119,19 @@ void CAMERA_SplineGetNearestPoint2
 		// 		struct _SVector *_v0; // $a1
 		// 		struct vecS *_v1; // $v1
 		/* end block 1.4 */
-		// End offset: 0x8001B340
-		// End Line: 3889
+		// End offset: 0x8001AE0C
+		// End Line: 3941
 	/* end block 1 */
-	// End offset: 0x8001B454
-	// End Line: 3915
+	// End offset: 0x8001AF20
+	// End Line: 3967
 
 	/* begin block 2 */
-		// Start line: 9156
+		// Start line: 9273
 	/* end block 2 */
-	// End Line: 9157
+	// End Line: 9274
 
 /* WARNING: Type propagation algorithm not settling */
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_SplineGetNearestPoint(Spline *spline,_SVector *point,int *currkey,_SVector *ret_dpoint)
 
@@ -6071,14 +6235,14 @@ void CAMERA_SplineGetNearestPoint(Spline *spline,_SVector *point,int *currkey,_S
   }
   if (iVar7 == -1) {
     iVar2 = -1;
-LAB_8001b338:
+LAB_8001ae04:
     if (iVar9 == -1) {
       iVar3 = -1;
-LAB_8001b388:
+LAB_8001ae54:
       if ((iVar2 - 1U < 0xfff) &&
          (iVar4 = CAMERA_GetDistSq((_SVector *)&local_58,point), iVar4 < iVar5)) {
         *currkey = iVar7;
-        goto LAB_8001b3b0;
+        goto LAB_8001ae7c;
       }
       if ((0xffe < iVar3 - 1U) ||
          (iVar4 = CAMERA_GetDistSq((_SVector *)&local_50,point), iVar5 <= iVar4)) {
@@ -6095,7 +6259,7 @@ LAB_8001b388:
       local_44 = (pSVar8->point).z;
       iVar3 = COLLIDE_NearestPointOnLine_S
                         ((uint *)&local_50,(uint *)&local_48,(uint *)&local_40,(uint *)point);
-      if (0 < iVar4) goto LAB_8001b388;
+      if (0 < iVar4) goto LAB_8001ae54;
       *currkey = iVar9;
     }
     *(uint *)ret_dpoint = local_50;
@@ -6108,9 +6272,9 @@ LAB_8001b388:
     local_2c = (pSVar6->point).z;
     iVar2 = COLLIDE_NearestPointOnLine_S
                       ((uint *)&local_58,(uint *)&local_38,(uint *)&local_30,(uint *)point);
-    if (iVar4 < 0x1000) goto LAB_8001b338;
+    if (iVar4 < 0x1000) goto LAB_8001ae04;
     *currkey = iVar7;
-LAB_8001b3b0:
+LAB_8001ae7c:
     *(uint *)ret_dpoint = local_58;
     *(undefined4 *)&ret_dpoint->z = local_54;
   }
@@ -6122,10 +6286,10 @@ LAB_8001b3b0:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_SplineHelpMove(struct Camera *camera /*$s1*/)
- // line 3921, offset 0x8001b484
+ // line 3973, offset 0x8001af50
 	/* begin block 1 */
-		// Start line: 3922
-		// Start offset: 0x8001B484
+		// Start line: 3974
+		// Start offset: 0x8001AF50
 		// Variables:
 	// 		struct _SVector camPos; // stack offset -48
 	// 		struct _Position pos; // stack offset -40
@@ -6133,13 +6297,15 @@ LAB_8001b3b0:
 	// 		struct _Instance *focusInstance; // $s3
 	// 		struct MultiSpline *posSpline; // $s2
 	/* end block 1 */
-	// End offset: 0x8001B5DC
-	// End Line: 3966
+	// End offset: 0x8001B0A8
+	// End Line: 4018
 
 	/* begin block 2 */
-		// Start line: 9341
+		// Start line: 9458
 	/* end block 2 */
-	// End Line: 9342
+	// End Line: 9459
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_SplineHelpMove(Camera *camera)
 
@@ -6160,8 +6326,8 @@ void CAMERA_SplineHelpMove(Camera *camera)
     splinecam_helprot.z = (camera->targetFocusRotation).z + 0x800;
     (camera->targetFocusRotation).z = (camera->targetFocusRotation).z & 0xfff;
   }
-  CAMERA_CalcPosition((_Position *)&_Stack40,&camera->targetFocusPoint,&splinecam_helprot,
-                      camera->targetFocusDistance);
+  CAMERA_CalcPosition((_Position *)&_Stack40,&camera->targetFocusPoint,
+                      (_Rotation *)&splinecam_helprot,camera->targetFocusDistance);
   CAMERA_SplineGetNearestPoint2
             (camera,pMVar4->positional,&_Stack40,&(camera->data).Cinematic.splinecam_helpkey,
              &_Stack48);
@@ -6191,10 +6357,10 @@ void CAMERA_SplineHelpMove(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_SplineProcess(struct Camera *camera /*$s1*/)
- // line 3968, offset 0x8001b5f8
+ // line 4020, offset 0x8001b0c4
 	/* begin block 1 */
-		// Start line: 3969
-		// Start offset: 0x8001B5F8
+		// Start line: 4021
+		// Start offset: 0x8001B0C4
 		// Variables:
 	// 		struct _SVector camPos; // stack offset -48
 	// 		struct _SVector sv; // stack offset -40
@@ -6202,12 +6368,12 @@ void CAMERA_SplineHelpMove(Camera *camera)
 	// 		struct MultiSpline *posSpline; // $s3
 	// 		short smooth; // $s0
 	// 		short dist_smooth; // $s2
-	// 		static short hold_flag; // offset 0x60
+	// 		static short hold_flag; // offset 0x5c
 	// 		struct _Rotation targetFocusRotation; // stack offset -32
 
 		/* begin block 1.1 */
-			// Start line: 4054
-			// Start offset: 0x8001B744
+			// Start line: 4106
+			// Start offset: 0x8001B210
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $a1
@@ -6218,16 +6384,18 @@ void CAMERA_SplineHelpMove(Camera *camera)
 		// 		struct _SVector *_v; // $a0
 		// 		struct _SVector *_v1; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8001B744
-		// End Line: 4054
+		// End offset: 0x8001B210
+		// End Line: 4106
 	/* end block 1 */
-	// End offset: 0x8001B92C
-	// End Line: 4117
+	// End offset: 0x8001B3F8
+	// End Line: 4169
 
 	/* begin block 2 */
-		// Start line: 9454
+		// Start line: 9571
 	/* end block 2 */
-	// End Line: 9455
+	// End Line: 9572
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_SplineProcess(Camera *camera)
 
@@ -6266,18 +6434,18 @@ void CAMERA_SplineProcess(Camera *camera)
               (5,&camera->focusPoint,&camera->targetFocusPoint,&camera->focusPointVel,
                &camera->focusPointAccl,(int)camera->maxVel);
     if (camera->forced_movement == 1) {
-      DAT_800cddb0 = 1;
+      DAT_800cf16c = 1;
     }
     else {
       smooth = CAMERA_FocusInstanceMoved(camera);
       if (smooth != 0) {
-        if (DAT_800cddb0 != 0) {
+        if (DAT_800cf16c != 0) {
           camera->always_rotate_flag = 1;
         }
-        DAT_800cddb0 = 0;
+        DAT_800cf16c = 0;
       }
     }
-    if (((camera->forced_movement != 1) && (DAT_800cddb0 == 0)) && (camera->rotState != 3)) {
+    if (((camera->forced_movement != 1) && (DAT_800cf16c == 0)) && (camera->rotState != 3)) {
       CAMERA_CalcRotation(&local_20,&camera->focusPoint,(_Position *)&local_30);
       local_28.x = (camera->focusPoint).x - local_30.x;
       local_28.y = (camera->focusPoint).y - local_30.y;
@@ -6288,7 +6456,7 @@ void CAMERA_SplineProcess(Camera *camera)
     }
     smooth = 0x40;
     if (camera->always_rotate_flag == 0) {
-      smooth = 0x28;
+      smooth = 0x50;
       smooth_00 = 0x40;
     }
     else {
@@ -6305,7 +6473,7 @@ void CAMERA_SplineProcess(Camera *camera)
     }
     CriticalDampAngle(5,&(camera->focusRotation).z,local_20.z,&(camera->focusRotVel).z,
                       &(camera->focusRotAccl).z,smooth);
-    if (((camera->forced_movement == 1) || (camera->always_rotate_flag != 0)) || (DAT_800cddb0 != 0)
+    if (((camera->forced_movement == 1) || (camera->always_rotate_flag != 0)) || (DAT_800cf16c != 0)
        ) {
       CAMERA_CalcPosition(&camera->targetPos,&camera->focusPoint,&camera->focusRotation,
                           camera->targetFocusDistance);
@@ -6336,11 +6504,13 @@ void CAMERA_SplineProcess(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_ShakeCamera(struct Camera *camera /*$a2*/)
- // line 4141, offset 0x8001b94c
+ // line 4193, offset 0x8001b418
 	/* begin block 1 */
-		// Start line: 9819
+		// Start line: 9936
 	/* end block 1 */
-	// End Line: 9820
+	// End Line: 9937
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_ShakeCamera(Camera *camera)
 
@@ -6353,16 +6523,16 @@ void CAMERA_ShakeCamera(Camera *camera)
     uVar1 = camera->shakeFrame;
     (camera->core).position.x =
          (camera->core).position.x +
-         (short)((int)(&camera_shakeOffset)[(uint)(ushort)camera->shakeFrame & 0xf].x *
+         (short)((int)camera_shakeOffset[(uint)(ushort)camera->shakeFrame & 0xf].x *
                  (int)camera->shakeScale >> 0xc);
     uVar2 = camera->shakeFrame;
     (camera->core).position.y =
          (camera->core).position.y +
-         (short)((int)(&camera_shakeOffset)[(uint)uVar1 & 0xf].y * (int)camera->shakeScale >> 0xc);
+         (short)((int)camera_shakeOffset[(uint)uVar1 & 0xf].y * (int)camera->shakeScale >> 0xc);
     (camera->core).position.z =
          (camera->core).position.z +
-         (short)((int)(&camera_shakeOffset)[(uint)uVar2 & 0xf].z * (int)camera->shakeScale >> 0xc);
-    iVar3 = camera->shake - gameTrackerX.idleTime;
+         (short)((int)camera_shakeOffset[(uint)uVar2 & 0xf].z * (int)camera->shakeScale >> 0xc);
+    iVar3 = camera->shake - DAT_800d2314;
     camera->shake = iVar3;
     if (iVar3 < 0) {
       camera->shake = 0;
@@ -6377,16 +6547,16 @@ void CAMERA_ShakeCamera(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_Process(struct Camera *camera /*$s0*/)
- // line 4160, offset 0x8001ba38
+ // line 4212, offset 0x8001b504
 	/* begin block 1 */
-		// Start line: 4161
-		// Start offset: 0x8001BA38
+		// Start line: 4213
+		// Start offset: 0x8001B504
 		// Variables:
-	// 		struct _Instance *focusInstance; // $a0
+	// 		struct _Instance *focusInstance; // $a1
 
 		/* begin block 1.1 */
-			// Start line: 4220
-			// Start offset: 0x8001BB0C
+			// Start line: 4272
+			// Start offset: 0x8001B5D8
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $v1
@@ -6398,16 +6568,18 @@ void CAMERA_ShakeCamera(Camera *camera)
 		// 		struct _Position *_v0; // $a0
 		// 		struct _Position *_v1; // $a2
 		/* end block 1.1 */
-		// End offset: 0x8001BB0C
-		// End Line: 4220
+		// End offset: 0x8001B5D8
+		// End Line: 4272
 	/* end block 1 */
-	// End offset: 0x8001BC74
-	// End Line: 4323
+	// End offset: 0x8001B740
+	// End Line: 4375
 
 	/* begin block 2 */
-		// Start line: 9861
+		// Start line: 9978
 	/* end block 2 */
-	// End Line: 9862
+	// End Line: 9979
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_Process(Camera *camera)
 
@@ -6427,8 +6599,8 @@ void CAMERA_Process(Camera *camera)
   p_Var10 = camera->focusInstance;
   camera->focuspoint_fallz =
        camera->focuspoint_fallz - ((camera->newFocusInstancePos).z - (p_Var10->oldPos).z);
-  sVar1 = (p_Var10->oldPos).z;
-  *(undefined4 *)&camera->oldFocusInstancePos = *(undefined4 *)&p_Var10->oldPos;
+  sVar1 = (camera->newFocusInstancePos).z;
+  *(undefined4 *)&camera->oldFocusInstancePos = *(undefined4 *)&camera->newFocusInstancePos;
   (camera->oldFocusInstancePos).z = sVar1;
   sVar1 = (p_Var10->position).z;
   *(undefined4 *)&camera->newFocusInstancePos = *(undefined4 *)&p_Var10->position;
@@ -6479,9 +6651,9 @@ void CAMERA_Process(Camera *camera)
     uVar9 = SEXT24(camera->mode);
   }
   if (uVar9 < 0x10) {
-                    /* WARNING: Could not recover jumptable at 0x8001bc14. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x8001b6e0. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (*(code *)(&PTR_LAB_800100c8)[uVar9])();
+    (*(code *)(&PTR_LAB_800100d8)[uVar9])();
     return;
   }
   camera->flags = camera->flags & 0xffffe7ff;
@@ -6494,28 +6666,30 @@ void CAMERA_Process(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_CenterCamera(struct Camera *camera /*$s1*/)
- // line 4345, offset 0x8001bc84
+ // line 4397, offset 0x8001b750
 	/* begin block 1 */
-		// Start line: 4346
-		// Start offset: 0x8001BC84
+		// Start line: 4398
+		// Start offset: 0x8001B750
 
 		/* begin block 1.1 */
-			// Start line: 4350
-			// Start offset: 0x8001BCAC
+			// Start line: 4402
+			// Start offset: 0x8001B778
 			// Variables:
 		// 		int tmp1; // $s0
 		// 		int tmp2; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8001BD18
-		// End Line: 4354
+		// End offset: 0x8001B7E4
+		// End Line: 4406
 	/* end block 1 */
-	// End offset: 0x8001BD44
-	// End Line: 4361
+	// End offset: 0x8001B810
+	// End Line: 4413
 
 	/* begin block 2 */
-		// Start line: 10242
+		// Start line: 10359
 	/* end block 2 */
-	// End Line: 10243
+	// End Line: 10360
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_CenterCamera(Camera *camera)
 
@@ -6554,16 +6728,18 @@ void CAMERA_CenterCamera(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_SetLookRot(struct Camera *camera /*$a0*/, int x_rotation /*$a1*/, int z_rotation /*$a2*/)
- // line 4377, offset 0x8001bd6c
+ // line 4429, offset 0x8001b838
 	/* begin block 1 */
-		// Start line: 8749
+		// Start line: 8853
 	/* end block 1 */
-	// End Line: 8750
+	// End Line: 8854
 
 	/* begin block 2 */
-		// Start line: 10295
+		// Start line: 10412
 	/* end block 2 */
-	// End Line: 10296
+	// End Line: 10413
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_SetLookRot(Camera *camera,int x_rotation,int z_rotation)
 
@@ -6578,11 +6754,13 @@ void CAMERA_SetLookRot(Camera *camera,int x_rotation,int z_rotation)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_StartLookaroundMode(struct Camera *camera /*$s0*/)
- // line 4383, offset 0x8001bd78
+ // line 4435, offset 0x8001b844
 	/* begin block 1 */
-		// Start line: 10306
+		// Start line: 10423
 	/* end block 1 */
-	// End Line: 10307
+	// End Line: 10424
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_StartLookaroundMode(Camera *camera)
 
@@ -6612,11 +6790,13 @@ void CAMERA_StartLookaroundMode(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_StartSwimThrowMode(struct Camera *camera /*$s0*/)
- // line 4401, offset 0x8001be08
+ // line 4453, offset 0x8001b8d4
 	/* begin block 1 */
-		// Start line: 10352
+		// Start line: 10469
 	/* end block 1 */
-	// End Line: 10353
+	// End Line: 10470
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_StartSwimThrowMode(Camera *camera)
 
@@ -6633,11 +6813,13 @@ void CAMERA_StartSwimThrowMode(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_EndSwimThrowMode(struct Camera *camera /*$a0*/)
- // line 4409, offset 0x8001be48
+ // line 4461, offset 0x8001b914
 	/* begin block 1 */
-		// Start line: 10369
+		// Start line: 10486
 	/* end block 1 */
-	// End Line: 10370
+	// End Line: 10487
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_EndSwimThrowMode(Camera *camera)
 
@@ -6652,11 +6834,13 @@ void CAMERA_EndSwimThrowMode(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_ForceEndLookaroundMode(struct Camera *camera /*$s0*/)
- // line 4415, offset 0x8001be6c
+ // line 4467, offset 0x8001b938
 	/* begin block 1 */
-		// Start line: 10381
+		// Start line: 10498
 	/* end block 1 */
-	// End Line: 10382
+	// End Line: 10499
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_ForceEndLookaroundMode(Camera *camera)
 
@@ -6672,28 +6856,30 @@ void CAMERA_ForceEndLookaroundMode(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_Control(struct Camera *camera /*$s0*/, struct _Instance *playerInstance /*$s5*/)
- // line 4424, offset 0x8001bea8
+ // line 4476, offset 0x8001b974
 	/* begin block 1 */
-		// Start line: 4425
-		// Start offset: 0x8001BEA8
+		// Start line: 4477
+		// Start offset: 0x8001B974
 		// Variables:
-	// 		long *controlCommand; // $s3
+	// 		long *controlCommand; // $s2
 	// 		int lookmode; // $s1
 	// 		struct _Instance *focusInstance; // $s4
 	/* end block 1 */
-	// End offset: 0x8001C394
-	// End Line: 4655
+	// End offset: 0x8001BEA0
+	// End Line: 4711
 
 	/* begin block 2 */
-		// Start line: 10399
+		// Start line: 10516
 	/* end block 2 */
-	// End Line: 10400
+	// End Line: 10517
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_Control(Camera *camera,_Instance *playerInstance)
 
 {
   bool bVar1;
-  short target;
+  short angle1;
   ulong uVar2;
   short sVar3;
   long lVar4;
@@ -6701,134 +6887,138 @@ void CAMERA_Control(Camera *camera,_Instance *playerInstance)
   _Instance *instance;
   
   instance = camera->focusInstance;
-  if ((gameTrackerX.streamFlags & 0x100000U) == 0) {
+  if ((DAT_800d2210 & 0x100000) == 0) {
     bVar1 = true;
     if (CameraLookStickyFlag == 0) {
-      bVar1 = (gameTrackerX.controlCommand[0][0] & 0xc00U) == 0xc00;
+      bVar1 = (DAT_800d2114 & 0xc00) == 0xc00;
     }
     camera->last_forced_movement = camera->forced_movement;
-    if ((camera->instance_xyvel != 0) || (camera->forced_movement != 1)) {
+    if (((camera->instance_xyvel != 0) || (camera->forced_movement != 1)) ||
+       ((camera->instance_mode & 0x2000000) != 0)) {
       camera->forced_movement = 0;
     }
-    target = CenterFlag;
     sVar3 = camera->mode;
     if ((sVar3 != 8) && (-1 < (int)camera->instance_mode)) {
       if (CenterFlag == -1) {
-        if (((((camera->lock & 4U) == 0) && ((camera->flags & 0x10000U) == 0)) &&
-            ((sVar3 == 0 || ((((sVar3 == 0xc || (sVar3 == 4)) || (sVar3 == 0xd)) || (sVar3 == 2)))))
-            ) && ((playerInstance->flags & 0x100U) == 0)) {
-          if (((gameTrackerX.controlCommand[0][0] & 0x400U) == 0) || (bVar1)) {
-            if (((uint)(ushort)camera->leftTimer - 1 < 3) && (!bVar1)) {
-              CAMERA_CenterCamera(camera);
-            }
-            camera->leftTimer = 0;
-          }
-          else {
-            sVar3 = camera->leftTimer + 1;
-            camera->leftTimer = sVar3;
-            if (2 < sVar3) {
-              camera->rotDirection = -1;
-              uVar5 = (camera->focusRotation).z - (short)((gameTrackerX.idleTime << 5) >> 0xc) &
-                      0xfff;
-              (camera->focusRotation).z = uVar5;
-              uVar2 = gameTrackerX.frameCount;
-              camera->forced_movement = 1;
-              (camera->data).Follow.stopTimer = -0x1a5e0000;
-              (camera->focusRotation).z = uVar5;
-              (camera->collisionTargetFocusRotation).z = uVar5;
-              (camera->targetFocusRotation).z = uVar5;
-              camera->lastModTime = uVar2;
-            }
-          }
-          if (((gameTrackerX.controlCommand[0][0] & 0xa00U) != 0x800) || (bVar1)) {
-            if (((uint)(ushort)camera->rightTimer - 1 < 3) && (!bVar1)) {
-              CAMERA_CenterCamera(camera);
-            }
-            camera->rightTimer = 0;
-          }
-          else {
-            sVar3 = camera->rightTimer + 1;
-            camera->rightTimer = sVar3;
-            if (2 < sVar3) {
-              camera->rotDirection = 1;
-              camera->forced_movement = 1;
-              uVar5 = (camera->focusRotation).z + (short)((gameTrackerX.idleTime << 5) >> 0xc) &
-                      0xfff;
-              (camera->focusRotation).z = uVar5;
-              uVar2 = gameTrackerX.frameCount;
-              (camera->data).Follow.stopTimer = -0x1a5e0000;
-              (camera->focusRotation).z = uVar5;
-              (camera->collisionTargetFocusRotation).z = uVar5;
-              (camera->targetFocusRotation).z = uVar5;
-              camera->lastModTime = uVar2;
-            }
-          }
-        }
-        else {
-          camera->rightTimer = 0;
-          camera->leftTimer = 0;
-        }
-        if ((gameTrackerX.debugFlags2 & 0x2000000U) != 0) {
-          if ((camera->lock & 1U) == 0) {
-            if (((gameTrackerX.controlCommand[0][0] & 0x40000008U) == 0x40000008) &&
-               (sVar3 = camera->targetFocusDistance + -0x14, camera->targetFocusDistance = sVar3,
-               sVar3 < 200)) {
-              camera->targetFocusDistance = 200;
-            }
-            if (((gameTrackerX.controlCommand[0][0] & 0x40000004U) == 0x40000004) &&
-               (sVar3 = camera->targetFocusDistance + 0x14, camera->targetFocusDistance = sVar3,
-               0x1000 < sVar3)) {
-              camera->targetFocusDistance = 0x1000;
-            }
-          }
-          if ((camera->lock & 2U) == 0) {
-            if ((gameTrackerX.controlCommand[0][0] & 0x40000002U) == 0x40000002) {
-              camera->extraXRot = camera->extraXRot + 0x10;
-            }
-            if ((gameTrackerX.controlCommand[0][0] & 0x40000001U) == 0x40000001) {
-              camera->extraXRot = camera->extraXRot + -0x10;
-            }
-          }
-        }
-        if ((bVar1) && ((playerInstance->flags & 0x100U) == 0)) {
-          if (((camera->flags & 0x20000U) != 0) && (camera->mode != 5)) {
-            sVar3 = camera->lookTimer + 1;
-            camera->lookTimer = sVar3;
-            if (sVar3 == 2) {
-              lVar4 = PLAYER_OkToLookAround(instance);
-              if ((lVar4 != 0) && ((camera->lock & 0x200U) == 0)) {
-                CAMERA_StartLookaroundMode(camera);
-                PLAYER_SetLookAround(instance);
-                camera->collideRotControl = 0;
-                return;
+        if ((DAT_800d2297 != '\x01') || ((DAT_800d2114 & 0xf) == 0)) {
+          if ((((camera->lock & 4U) == 0) && ((camera->flags & 0x10000U) == 0)) &&
+             (((((sVar3 == 0 || (sVar3 == 0xc)) || (sVar3 == 4)) || (sVar3 == 0xd)) &&
+              ((playerInstance->flags & 0x100U) == 0)))) {
+            if (((DAT_800d2114 & 0x400) == 0) || (bVar1)) {
+              if (((uint)(ushort)camera->leftTimer - 1 < 3) && (!bVar1)) {
+                CAMERA_CenterCamera(camera);
               }
-              camera->lookTimer = 0;
+              camera->leftTimer = 0;
             }
             else {
-              if ((2 < sVar3) && (camera->mode == 6)) {
-                PLAYER_TurnHead(instance,(short *)&camera->lookRot,&(camera->lookRot).z,
-                                &gameTrackerX);
-                camera->collideRotControl = 0;
-                return;
+              sVar3 = camera->leftTimer + 1;
+              camera->leftTimer = sVar3;
+              if (2 < sVar3) {
+                camera->rotDirection = -1;
+                uVar5 = (camera->focusRotation).z - (short)((uint)(DAT_800d2314 << 5) >> 0xc) &
+                        0xfff;
+                (camera->focusRotation).z = uVar5;
+                uVar2 = DAT_800d21f8;
+                camera->forced_movement = 1;
+                (camera->data).Follow.stopTimer = -0x1a5e0000;
+                (camera->focusRotation).z = uVar5;
+                (camera->collisionTargetFocusRotation).z = uVar5;
+                (camera->targetFocusRotation).z = uVar5;
+                camera->lastModTime = uVar2;
+              }
+            }
+            if (((DAT_800d2114 & 0x800) == 0) || (bVar1)) {
+              if (((uint)(ushort)camera->rightTimer - 1 < 3) && (!bVar1)) {
+                CAMERA_CenterCamera(camera);
+              }
+              camera->rightTimer = 0;
+            }
+            else {
+              sVar3 = camera->rightTimer + 1;
+              camera->rightTimer = sVar3;
+              if (2 < sVar3) {
+                camera->rotDirection = 1;
+                camera->forced_movement = 1;
+                uVar5 = (camera->focusRotation).z + (short)((uint)(DAT_800d2314 << 5) >> 0xc) &
+                        0xfff;
+                (camera->focusRotation).z = uVar5;
+                uVar2 = DAT_800d21f8;
+                (camera->data).Follow.stopTimer = -0x1a5e0000;
+                (camera->focusRotation).z = uVar5;
+                (camera->collisionTargetFocusRotation).z = uVar5;
+                (camera->targetFocusRotation).z = uVar5;
+                camera->lastModTime = uVar2;
               }
             }
           }
+          else {
+            camera->rightTimer = 0;
+            camera->leftTimer = 0;
+          }
+          if ((DAT_800d2190 & 0x2000000) != 0) {
+            if ((camera->lock & 1U) == 0) {
+              if (((DAT_800d2114 & 0x40000008) == 0x40000008) &&
+                 (sVar3 = camera->targetFocusDistance + -0x14, camera->targetFocusDistance = sVar3,
+                 sVar3 < 200)) {
+                camera->targetFocusDistance = 200;
+              }
+              if (((DAT_800d2114 & 0x40000004) == 0x40000004) &&
+                 (sVar3 = camera->targetFocusDistance + 0x14, camera->targetFocusDistance = sVar3,
+                 0x1000 < sVar3)) {
+                camera->targetFocusDistance = 0x1000;
+              }
+            }
+            if ((camera->lock & 2U) == 0) {
+              if ((DAT_800d2114 & 0x40000002) == 0x40000002) {
+                camera->extraXRot = camera->extraXRot + 0x10;
+              }
+              if ((DAT_800d2114 & 0x40000001) == 0x40000001) {
+                camera->extraXRot = camera->extraXRot + -0x10;
+              }
+            }
+          }
+          if ((bVar1) && ((playerInstance->flags & 0x100U) == 0)) {
+            if (((camera->flags & 0x20000U) != 0) && (camera->mode != 5)) {
+              sVar3 = camera->lookTimer + 1;
+              camera->lookTimer = sVar3;
+              if (sVar3 == 2) {
+                lVar4 = PLAYER_OkToLookAround(instance);
+                if ((lVar4 != 0) && ((camera->lock & 0x200U) == 0)) {
+                  CAMERA_StartLookaroundMode(camera);
+                  PLAYER_SetLookAround(instance);
+                  camera->collideRotControl = 0;
+                  return;
+                }
+                camera->lookTimer = 0;
+              }
+              else {
+                if ((2 < sVar3) && (camera->mode == 6)) {
+                  PLAYER_TurnHead(instance,(short *)&camera->lookRot,&(camera->lookRot).z,
+                                  (GameTracker *)&gameTrackerX);
+                  camera->collideRotControl = 0;
+                  return;
+                }
+              }
+            }
+          }
+          else {
+            camera->flags = camera->flags | 0x20000;
+            CAMERA_EndLook(camera);
+          }
+          camera->collideRotControl = 0;
         }
-        else {
-          camera->flags = camera->flags | 0x20000;
-          CAMERA_EndLook(camera);
-        }
-        camera->collideRotControl = 0;
       }
       else {
-        camera->forced_movement = 1;
-        CriticalDampAngle(5,&(camera->focusRotation).z,target,&(camera->focusRotVel).z,
-                          &(camera->focusRotAccl).z,0x80);
-        target = CenterFlag;
+        if ((camera->instance_mode & 0x2000000) == 0) {
+          camera->forced_movement = 1;
+        }
+        CriticalDampAngle(1,&(camera->focusRotation).z,CenterFlag,&(camera->focusRotVel).z,
+                          &(camera->focusRotAccl).z,0x90);
+        angle1 = CenterFlag;
         sVar3 = (camera->focusRotation).z;
         (camera->collisionTargetFocusRotation).z = sVar3;
         (camera->targetFocusRotation).z = sVar3;
-        sVar3 = CAMERA_AngleDifference((camera->focusRotation).z,target);
+        sVar3 = CAMERA_AngleDifference((camera->focusRotation).z,angle1);
         if (sVar3 < 8) {
           CenterFlag = -1;
         }
@@ -6843,20 +7033,22 @@ void CAMERA_Control(Camera *camera,_Instance *playerInstance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_EndLook(struct Camera *camera /*$s0*/)
- // line 4658, offset 0x8001c3b8
+ // line 4714, offset 0x8001bec4
 	/* begin block 1 */
-		// Start line: 4659
-		// Start offset: 0x8001C3B8
+		// Start line: 4715
+		// Start offset: 0x8001BEC4
 		// Variables:
 	// 		struct _Instance *focusInstance; // $s1
 	/* end block 1 */
-	// End offset: 0x8001C460
-	// End Line: 4714
+	// End offset: 0x8001BF6C
+	// End Line: 4770
 
 	/* begin block 2 */
-		// Start line: 10898
+		// Start line: 11022
 	/* end block 2 */
-	// End Line: 10899
+	// End Line: 11023
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_EndLook(Camera *camera)
 
@@ -6893,11 +7085,13 @@ void CAMERA_EndLook(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_ChangeToUnderWater(struct Camera *camera /*$s0*/, struct _Instance *instance /*$a1*/)
- // line 4718, offset 0x8001c478
+ // line 4774, offset 0x8001bf84
 	/* begin block 1 */
-		// Start line: 11058
+		// Start line: 11182
 	/* end block 1 */
-	// End Line: 11059
+	// End Line: 11183
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_ChangeToUnderWater(Camera *camera,_Instance *instance)
 
@@ -6935,11 +7129,13 @@ void CAMERA_ChangeToUnderWater(Camera *camera,_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_ChangeToOutOfWater(struct Camera *camera /*$s0*/, struct _Instance *instance /*$a1*/)
- // line 4745, offset 0x8001c524
+ // line 4801, offset 0x8001c030
 	/* begin block 1 */
-		// Start line: 11112
+		// Start line: 11236
 	/* end block 1 */
-	// End Line: 11113
+	// End Line: 11237
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_ChangeToOutOfWater(Camera *camera,_Instance *instance)
 
@@ -6962,46 +7158,24 @@ void CAMERA_ChangeToOutOfWater(Camera *camera,_Instance *instance)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ CAMERA_DebugMoveToNewFocusInstance()
- // line 4842, offset 0x8001c598
-	/* begin block 1 */
-		// Start line: 11306
-	/* end block 1 */
-	// End Line: 11307
-
-	/* begin block 2 */
-		// Start line: 11307
-	/* end block 2 */
-	// End Line: 11308
-
-/* WARNING: Unknown calling convention yet parameter storage is locked */
-
-void CAMERA_DebugMoveToNewFocusInstance(void)
-
-{
-  return;
-}
-
-
-
-// decompiled code
-// original method signature: 
 // void /*$ra*/ CAMERA_UpdateFocusDistance(struct Camera *camera /*$a3*/)
- // line 4861, offset 0x8001c5a0
+ // line 4917, offset 0x8001c0a4
 	/* begin block 1 */
-		// Start line: 4862
-		// Start offset: 0x8001C5A0
+		// Start line: 4918
+		// Start offset: 0x8001C0A4
 		// Variables:
 	// 		int smooth; // $v1
 	// 		long dampMode; // $a0
 	/* end block 1 */
-	// End offset: 0x8001C660
-	// End Line: 4909
+	// End offset: 0x8001C164
+	// End Line: 4965
 
 	/* begin block 2 */
-		// Start line: 11344
+		// Start line: 9816
 	/* end block 2 */
-	// End Line: 11345
+	// End Line: 9817
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_UpdateFocusDistance(Camera *camera)
 
@@ -7039,11 +7213,13 @@ void CAMERA_UpdateFocusDistance(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_UpdateFocusTilt(struct Camera *camera /*$s0*/)
- // line 4911, offset 0x8001c670
+ // line 4967, offset 0x8001c174
 	/* begin block 1 */
-		// Start line: 11444
+		// Start line: 11467
 	/* end block 1 */
-	// End Line: 11445
+	// End Line: 11468
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_UpdateFocusTilt(Camera *camera)
 
@@ -7075,25 +7251,27 @@ void CAMERA_UpdateFocusTilt(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_UpdateFocusRoll(struct Camera *camera /*$s1*/)
- // line 4945, offset 0x8001c73c
+ // line 5001, offset 0x8001c240
 	/* begin block 1 */
-		// Start line: 4946
-		// Start offset: 0x8001C73C
+		// Start line: 5002
+		// Start offset: 0x8001C240
 		// Variables:
 	// 		long tmp_inc; // $s0
 	/* end block 1 */
-	// End offset: 0x8001C83C
-	// End Line: 4963
+	// End offset: 0x8001C340
+	// End Line: 5019
 
 	/* begin block 2 */
-		// Start line: 11515
+		// Start line: 11538
 	/* end block 2 */
-	// End Line: 11516
+	// End Line: 11539
 
 	/* begin block 3 */
-		// Start line: 11518
+		// Start line: 11541
 	/* end block 3 */
-	// End Line: 11519
+	// End Line: 11542
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_UpdateFocusRoll(Camera *camera)
 
@@ -7107,11 +7285,11 @@ void CAMERA_UpdateFocusRoll(Camera *camera)
   
   if (roll_inc != 0) {
     iVar2 = roll_inc;
-    if (gameTrackerX.idleTime != 0x1000) {
+    if (DAT_800d2314 != 0x1000) {
       if (roll_inc < 0) {
         iVar2 = roll_inc + 0x1f;
       }
-      iVar6 = (iVar2 >> 5) * gameTrackerX.idleTime;
+      iVar6 = (iVar2 >> 5) * DAT_800d2314;
       iVar2 = iVar6 >> 7;
       if (iVar6 < 0) {
         iVar2 = iVar6 + 0x7f >> 7;
@@ -7157,28 +7335,30 @@ void CAMERA_UpdateFocusRoll(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_UpdateFocusRotate(struct Camera *camera /*$s0*/)
- // line 4969, offset 0x8001c858
+ // line 5025, offset 0x8001c35c
 	/* begin block 1 */
-		// Start line: 4970
-		// Start offset: 0x8001C858
+		// Start line: 5026
+		// Start offset: 0x8001C35C
 
 		/* begin block 1.1 */
-			// Start line: 4973
-			// Start offset: 0x8001C88C
+			// Start line: 5029
+			// Start offset: 0x8001C390
 			// Variables:
 		// 		int dampspeed; // $v1
 		// 		long dampmode; // $a0
 		/* end block 1.1 */
-		// End offset: 0x8001C90C
-		// End Line: 4998
+		// End offset: 0x8001C410
+		// End Line: 5054
 	/* end block 1 */
-	// End offset: 0x8001C934
-	// End Line: 5005
+	// End offset: 0x8001C438
+	// End Line: 5061
 
 	/* begin block 2 */
-		// Start line: 11567
+		// Start line: 11590
 	/* end block 2 */
-	// End Line: 11568
+	// End Line: 11591
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_UpdateFocusRotate(Camera *camera)
 
@@ -7223,58 +7403,61 @@ void CAMERA_UpdateFocusRotate(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_UpdateFocusRotationX(struct Camera *camera /*$s0*/, struct _Instance *focusInstance /*$a1*/)
- // line 5011, offset 0x8001c944
+ // line 5067, offset 0x8001c448
 	/* begin block 1 */
-		// Start line: 5012
-		// Start offset: 0x8001C944
+		// Start line: 5068
+		// Start offset: 0x8001C448
 		// Variables:
 	// 		short cameraPlayerRotX; // $a1
 	// 		short dist; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 5025
-			// Start offset: 0x8001C9B8
+			// Start line: 5088
+			// Start offset: 0x8001C4C4
 			// Variables:
 		// 		struct _Normal normal; // stack offset -24
 		// 		int mult; // $v1
 		/* end block 1.1 */
-		// End offset: 0x8001CA7C
-		// End Line: 5050
+		// End offset: 0x8001C588
+		// End Line: 5113
 
 		/* begin block 1.2 */
-			// Start line: 5055
-			// Start offset: 0x8001CAA0
+			// Start line: 5118
+			// Start offset: 0x8001C5AC
 			// Variables:
 		// 		int tmpsmooth; // $t0
 		/* end block 1.2 */
-		// End offset: 0x8001CB10
-		// End Line: 5070
+		// End offset: 0x8001C61C
+		// End Line: 5133
 	/* end block 1 */
-	// End offset: 0x8001CBA0
-	// End Line: 5096
+	// End offset: 0x8001C6AC
+	// End Line: 5159
 
 	/* begin block 2 */
-		// Start line: 11651
+		// Start line: 11674
 	/* end block 2 */
-	// End Line: 11652
+	// End Line: 11675
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_UpdateFocusRotationX(Camera *camera,_Instance *focusInstance)
 
 {
   short sVar1;
   long lVar2;
-  int local_1c;
   uint uVar3;
   _TFace *p_Var4;
   ushort uVar5;
+  int local_1c;
   short target;
   _Normal _Stack24;
   
   p_Var4 = focusInstance->tface;
   target = camera->targetFocusDistance;
-  if ((((p_Var4 == (_TFace *)0x0) || (p_Var4->textoff == 0xffff)) ||
-      ((*(ushort *)(*(int *)(*(int *)focusInstance->tfaceLevel + 0x34) + (uint)p_Var4->textoff + 10)
-       & 0x8000) == 0)) || (0xb5f < target)) {
+  if ((((p_Var4 == (_TFace *)0x0) || (local_1c = *(int *)focusInstance->tfaceLevel, local_1c == 0))
+      || (p_Var4->textoff == 0xffff)) ||
+     (((*(ushort *)(*(int *)(local_1c + 0x34) + (uint)p_Var4->textoff + 10) & 0x8000) == 0 ||
+      (0xb5f < target)))) {
     local_1c = 0x18;
     if ((camera->instance_mode & 0x38) == 0) {
       camera->targetTilt = 0;
@@ -7287,8 +7470,7 @@ void CAMERA_UpdateFocusRotationX(Camera *camera,_Instance *focusInstance)
     target = camera->targetTilt;
   }
   else {
-    COLLIDE_GetNormal(p_Var4->normal,*(short **)(*(int *)focusInstance->tfaceLevel + 0x24),
-                      (_SVector *)&_Stack24);
+    COLLIDE_GetNormal(p_Var4->normal,*(short **)(local_1c + 0x24),(_SVector *)&_Stack24);
     if (_Stack24.z < 0xffa) {
       lVar2 = CAMERA_CalcTilt(&_Stack24,(camera->focusRotation).z);
       local_1c = lVar2 * 9;
@@ -7327,11 +7509,11 @@ void CAMERA_UpdateFocusRotationX(Camera *camera,_Instance *focusInstance)
     uVar3 = 0x300;
   }
   else {
-    if (0x4ff < uVar3 - 0x800) goto LAB_8001cb58;
+    if (0x4ff < uVar3 - 0x800) goto LAB_8001c664;
     uVar3 = 0xfffffd00;
   }
   uVar3 = uVar3 & 0xfff;
-LAB_8001cb58:
+LAB_8001c664:
   uVar5 = (ushort)uVar3;
   camera->tfaceTilt = uVar5;
   if ((camera->instance_mode & 0x2000000) != 0) {
@@ -7350,51 +7532,53 @@ LAB_8001cb58:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_FollowPlayerTilt(struct Camera *camera /*$s1*/, struct _Instance *focusInstance /*$a1*/)
- // line 5101, offset 0x8001cbb4
+ // line 5164, offset 0x8001c6c0
 	/* begin block 1 */
-		// Start line: 5102
-		// Start offset: 0x8001CBB4
+		// Start line: 5165
+		// Start offset: 0x8001C6C0
 		// Variables:
 	// 		int speed; // $s2
 	// 		long focusInstanceStatus; // $a0
 
 		/* begin block 1.1 */
-			// Start line: 5123
-			// Start offset: 0x8001CC1C
+			// Start line: 5186
+			// Start offset: 0x8001C728
 			// Variables:
 		// 		struct _SVector offset; // stack offset -32
 		// 		struct _Normal normal; // stack offset -24
 
 			/* begin block 1.1.1 */
-				// Start line: 5147
-				// Start offset: 0x8001CCD4
+				// Start line: 5210
+				// Start offset: 0x8001C7E0
 				// Variables:
 			// 		int waterZ; // $v0
 			// 		int target; // $v0
 			// 		int height; // $s0
 
 				/* begin block 1.1.1.1 */
-					// Start line: 5155
-					// Start offset: 0x8001CD14
+					// Start line: 5218
+					// Start offset: 0x8001C820
 					// Variables:
 				// 		int fdsq; // $v0
 				/* end block 1.1.1.1 */
-				// End offset: 0x8001CD54
-				// End Line: 5163
+				// End offset: 0x8001C860
+				// End Line: 5226
 			/* end block 1.1.1 */
-			// End offset: 0x8001CD54
-			// End Line: 5164
+			// End offset: 0x8001C860
+			// End Line: 5227
 		/* end block 1.1 */
-		// End offset: 0x8001CD54
-		// End Line: 5165
+		// End offset: 0x8001C860
+		// End Line: 5228
 	/* end block 1 */
-	// End offset: 0x8001CD54
-	// End Line: 5170
+	// End offset: 0x8001C860
+	// End Line: 5233
 
 	/* begin block 2 */
-		// Start line: 11835
+		// Start line: 11872
 	/* end block 2 */
-	// End Line: 11836
+	// End Line: 11873
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_FollowPlayerTilt(Camera *camera,_Instance *focusInstance)
 
@@ -7403,11 +7587,11 @@ void CAMERA_FollowPlayerTilt(Camera *camera,_Instance *focusInstance)
   ushort uVar2;
   short current;
   ulong uVar3;
-  long lVar4;
-  int iVar5;
-  Level *pLVar6;
-  uint uVar7;
-  uint uVar8;
+  long x;
+  int iVar4;
+  Level *pLVar5;
+  int iVar6;
+  int y;
   _SVector local_20;
   _Normal local_18;
   
@@ -7417,50 +7601,50 @@ void CAMERA_FollowPlayerTilt(Camera *camera,_Instance *focusInstance)
     if ((uVar3 & 0x40) != 0) {
       camera->targetTilt = -0xab;
       current = 0x20;
-      goto LAB_8001cd58;
+      goto LAB_8001c864;
     }
     CAMERA_CalcFocusOffsetForSwim(&local_20,camera);
     local_18.z = local_20.z;
     local_18.x = local_20.x;
     local_18.y = local_20.y;
-    lVar4 = CAMERA_CalcTilt(&local_18,(camera->targetFocusRotation).z);
-    camera->targetTilt = (short)lVar4 + 0x400;
+    x = CAMERA_CalcTilt(&local_18,(camera->targetFocusRotation).z);
+    camera->targetTilt = (short)x + 0x400;
     current = camera->targetTilt + -0x80;
     camera->targetTilt = current;
     uVar2 = AngleDiff(current,camera->tilt);
     if ((int)((uint)uVar2 << 0x10) < 0) {
       current = AngleDiff(camera->targetTilt,camera->tilt);
-      iVar5 = -(int)current;
+      iVar4 = -(int)current;
     }
     else {
       current = AngleDiff(camera->targetTilt,camera->tilt);
-      iVar5 = (int)current;
+      iVar4 = (int)current;
     }
-    if (iVar5 < 0) {
-      iVar5 = iVar5 + 0xf;
+    if (iVar4 < 0) {
+      iVar4 = iVar4 + 0xf;
     }
-    current = (short)(iVar5 >> 4);
-    if (0x20 < iVar5 >> 4) {
+    current = (short)(iVar4 >> 4);
+    if (0x20 < iVar4 >> 4) {
       current = 0x20;
     }
-    pLVar6 = STREAM_GetLevelWithID(camera->focusInstance->currentStreamUnitID);
-    iVar5 = (int)camera->focusDistance;
-    uVar8 = (int)(camera->focusPoint).z - (pLVar6->waterZLevel + -0xa0);
-    uVar7 = uVar8;
-    if ((int)uVar8 < 0) {
-      uVar7 = -uVar8;
+    pLVar5 = STREAM_GetLevelWithID(camera->focusInstance->currentStreamUnitID);
+    iVar6 = (int)camera->focusDistance;
+    y = (int)(camera->focusPoint).z - (pLVar5->waterZLevel + -0xa0);
+    iVar4 = y;
+    if (y < 0) {
+      iVar4 = -y;
     }
-    if (iVar5 <= (int)uVar7) goto LAB_8001cd58;
-    uVar7 = MATH3D_FastSqrt0(iVar5 * iVar5 - uVar8 * uVar8);
-    iVar5 = ratan2(uVar8,uVar7);
-    sVar1 = (short)iVar5;
-    if (iVar5 <= camera->targetTilt) goto LAB_8001cd58;
+    if (iVar6 <= iVar4) goto LAB_8001c864;
+    x = MATH3D_FastSqrt0(iVar6 * iVar6 - y * y);
+    x = ratan2(y,x);
+    sVar1 = (short)x;
+    if (x <= camera->targetTilt) goto LAB_8001c864;
   }
   else {
     sVar1 = -(camera->focusInstance->rotation).x;
   }
   camera->targetTilt = sVar1;
-LAB_8001cd58:
+LAB_8001c864:
   CriticalDampAngle(1,&camera->tilt,camera->targetTilt,&camera->tiltVel,&camera->tiltAccl,
                     (int)current);
   camera->tfaceTilt = camera->tilt & 0xfff;
@@ -7472,20 +7656,22 @@ LAB_8001cd58:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_FollowGoBehindPlayerWithTimer(struct Camera *camera /*$s0*/)
- // line 5179, offset 0x8001cda4
+ // line 5242, offset 0x8001c8b0
 	/* begin block 1 */
-		// Start line: 5180
-		// Start offset: 0x8001CDA4
+		// Start line: 5243
+		// Start offset: 0x8001C8B0
 		// Variables:
 	// 		struct _Instance *focusInstance; // $s1
 	/* end block 1 */
-	// End offset: 0x8001CE78
-	// End Line: 5218
+	// End offset: 0x8001C998
+	// End Line: 5281
 
 	/* begin block 2 */
-		// Start line: 12002
+		// Start line: 12039
 	/* end block 2 */
-	// End Line: 12003
+	// End Line: 12040
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_FollowGoBehindPlayerWithTimer(Camera *camera)
 
@@ -7499,12 +7685,14 @@ void CAMERA_FollowGoBehindPlayerWithTimer(Camera *camera)
   }
   iVar1 = CAMERA_FocusInstanceMoved(camera);
   if (iVar1 == 0) {
-    iVar1 = (camera->data).Follow.stopTimer + gameTrackerX.idleTime;
+    if ((DAT_800d2210 & 0x100000) != 0) goto LAB_8001c928;
+    iVar1 = (camera->data).Follow.stopTimer + DAT_800d2314;
   }
   else {
     iVar1 = CameraCenterDelay * -0x1e000;
   }
   (camera->data).Follow.stopTimer = iVar1;
+LAB_8001c928:
   if (0 < (camera->data).Follow.stopTimer) {
     Decouple_AngleMoveToward
               (&(camera->targetFocusRotation).z,
@@ -7524,20 +7712,22 @@ void CAMERA_FollowGoBehindPlayerWithTimer(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_FollowGoBehindPlayer(struct Camera *camera /*$v1*/)
- // line 5221, offset 0x8001ce8c
+ // line 5284, offset 0x8001c9ac
 	/* begin block 1 */
-		// Start line: 5222
-		// Start offset: 0x8001CE8C
+		// Start line: 5285
+		// Start offset: 0x8001C9AC
 		// Variables:
 	// 		struct _Instance *focusInstance; // $v0
 	/* end block 1 */
-	// End offset: 0x8001CE8C
-	// End Line: 5222
+	// End offset: 0x8001C9AC
+	// End Line: 5285
 
 	/* begin block 2 */
-		// Start line: 12094
+		// Start line: 12131
 	/* end block 2 */
-	// End Line: 12095
+	// End Line: 12132
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_FollowGoBehindPlayer(Camera *camera)
 
@@ -7554,40 +7744,42 @@ void CAMERA_FollowGoBehindPlayer(Camera *camera)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_CalculateLead(struct Camera *camera /*$s1*/)
- // line 5233, offset 0x8001cec8
+ // line 5296, offset 0x8001c9e8
 	/* begin block 1 */
-		// Start line: 5234
-		// Start offset: 0x8001CEC8
+		// Start line: 5297
+		// Start offset: 0x8001C9E8
 		// Variables:
 	// 		short lead_target; // $s0
 	// 		short lead_smooth; // $v1
 
 		/* begin block 1.1 */
-			// Start line: 5240
-			// Start offset: 0x8001CF04
+			// Start line: 5303
+			// Start offset: 0x8001CA34
 			// Variables:
 		// 		int speedxy; // $s0
 		// 		short angle; // $a0
 
 			/* begin block 1.1.1 */
-				// Start line: 5252
-				// Start offset: 0x8001CF8C
+				// Start line: 5315
+				// Start offset: 0x8001CABC
 				// Variables:
 			// 		int calc; // $v1
 			/* end block 1.1.1 */
-			// End offset: 0x8001CFFC
-			// End Line: 5269
+			// End offset: 0x8001CB2C
+			// End Line: 5332
 		/* end block 1.1 */
-		// End offset: 0x8001D004
-		// End Line: 5274
+		// End offset: 0x8001CB34
+		// End Line: 5337
 	/* end block 1 */
-	// End offset: 0x8001D010
-	// End Line: 5288
+	// End offset: 0x8001CB40
+	// End Line: 5351
 
 	/* begin block 2 */
-		// Start line: 12118
+		// Start line: 12155
 	/* end block 2 */
-	// End Line: 12119
+	// End Line: 12156
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_CalculateLead(Camera *camera)
 
@@ -7598,7 +7790,8 @@ void CAMERA_CalculateLead(Camera *camera)
   short angle0;
   int iVar3;
   
-  if (((camera->flags & 0x10000U) == 0) && ((camera->instance_mode & 0x3002043) == 0)) {
+  if ((((camera->flags & 0x10000U) == 0) && (camera->mode != 6)) &&
+     ((camera->instance_mode & 0x3002043) == 0)) {
     iVar3 = camera->instance_xyvel;
     uVar1 = CAMERA_SignedAngleDifference
                       ((short)(((uint)(ushort)(camera->focusInstance->rotation).z + 0x800) * 0x10000
@@ -7641,7 +7834,7 @@ void CAMERA_CalculateLead(Camera *camera)
           smooth = 0xc;
         }
       }
-      goto LAB_8001d010;
+      goto LAB_8001cb40;
     }
   }
   else {
@@ -7649,7 +7842,7 @@ void CAMERA_CalculateLead(Camera *camera)
   }
   angle0 = 0;
   smooth = 3;
-LAB_8001d010:
+LAB_8001cb40:
   CriticalDampAngle(1,&camera->lead_angle,angle0,&camera->lead_vel,&camera->lead_accl,smooth);
   (camera->core).rotation.z = (camera->core).rotation.z + camera->lead_angle & 0xfff;
   return;
@@ -7660,26 +7853,26 @@ LAB_8001d010:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_CalcFollowPosition(struct Camera *camera /*$s1*/, struct _Rotation *rotation /*$s0*/)
- // line 5304, offset 0x8001d060
+ // line 5367, offset 0x8001cb90
 	/* begin block 1 */
-		// Start line: 5305
-		// Start offset: 0x8001D060
+		// Start line: 5368
+		// Start offset: 0x8001CB90
 
 		/* begin block 1.1 */
-			// Start line: 5305
-			// Start offset: 0x8001D060
+			// Start line: 5368
+			// Start offset: 0x8001CB90
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a0
 		// 		struct _Rotation *_v0; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8001D060
-		// End Line: 5305
+		// End offset: 0x8001CB90
+		// End Line: 5368
 
 		/* begin block 1.2 */
-			// Start line: 5322
-			// Start offset: 0x8001D0D8
+			// Start line: 5385
+			// Start offset: 0x8001CC08
 			// Variables:
 		// 		short target_rotx; // $s0
 		// 		int hypotXY; // $s2
@@ -7689,34 +7882,36 @@ LAB_8001d010:
 		// 		int zdiff; // $a0
 
 			/* begin block 1.2.1 */
-				// Start line: 5343
-				// Start offset: 0x8001D174
+				// Start line: 5406
+				// Start offset: 0x8001CCA4
 				// Variables:
 			// 		int velz; // $a1
 
 				/* begin block 1.2.1.1 */
-					// Start line: 5351
-					// Start offset: 0x8001D18C
+					// Start line: 5414
+					// Start offset: 0x8001CCBC
 					// Variables:
 				// 		int ground; // $a0
 				// 		int pos; // $v1
 				/* end block 1.2.1.1 */
-				// End offset: 0x8001D20C
-				// End Line: 5366
+				// End offset: 0x8001CD3C
+				// End Line: 5429
 			/* end block 1.2.1 */
-			// End offset: 0x8001D20C
-			// End Line: 5366
+			// End offset: 0x8001CD3C
+			// End Line: 5429
 		/* end block 1.2 */
-		// End offset: 0x8001D318
-		// End Line: 5413
+		// End offset: 0x8001CE48
+		// End Line: 5476
 	/* end block 1 */
-	// End offset: 0x8001D330
-	// End Line: 5418
+	// End offset: 0x8001CE60
+	// End Line: 5481
 
 	/* begin block 2 */
-		// Start line: 12262
+		// Start line: 12299
 	/* end block 2 */
-	// End Line: 12263
+	// End Line: 12300
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_CalcFollowPosition(Camera *camera,_Rotation *rotation)
 
@@ -7725,10 +7920,10 @@ void CAMERA_CalcFollowPosition(Camera *camera,_Rotation *rotation)
   short angle0;
   ushort uVar2;
   short sVar3;
-  uint uVar4;
+  long x;
+  long y;
+  int iVar4;
   int iVar5;
-  int iVar6;
-  uint uVar7;
   undefined4 in_t2;
   undefined4 in_t3;
   
@@ -7743,7 +7938,7 @@ void CAMERA_CalcFollowPosition(Camera *camera,_Rotation *rotation)
   (camera->core).rotation.z = sVar1;
   if ((camera->flags & 0x10000U) != 0) {
     camera->actual_x_rot = (camera->core).rotation.x;
-    goto LAB_8001d330;
+    goto LAB_8001ce60;
   }
   sVar3 = (camera->real_focuspoint).x;
   sVar1 = (camera->targetPos).x;
@@ -7753,14 +7948,14 @@ void CAMERA_CalcFollowPosition(Camera *camera,_Rotation *rotation)
   setCopReg(2,in_t3,0);
   copFunction(2,0xa00428);
   iVar5 = getCopReg(2,0x19);
-  iVar6 = getCopReg(2,0x1a);
+  iVar4 = getCopReg(2,0x1a);
   getCopReg(2,0x1b);
-  uVar4 = MATH3D_FastSqrt0(iVar5 + iVar6);
-  iVar5 = ratan2((int)(camera->real_focuspoint).z - (int)(camera->targetPos).z,uVar4);
-  angle0 = (short)iVar5;
+  x = MATH3D_FastSqrt0(iVar5 + iVar4);
+  y = ratan2((int)(camera->real_focuspoint).z - (int)(camera->targetPos).z,x);
+  angle0 = (short)y;
   if ((camera->instance_mode & 0x1038) == 0) {
     sVar3 = CAMERA_AngleDifference(angle0,(camera->core).rotation.x);
-    if (sVar3 < 4) goto LAB_8001d23c;
+    if (sVar3 < 4) goto LAB_8001cd6c;
   }
   else {
     iVar5 = (int)(camera->focusInstanceVelVec).z;
@@ -7769,16 +7964,16 @@ void CAMERA_CalcFollowPosition(Camera *camera,_Rotation *rotation)
         if ((iVar5 < -0x104) && (iVar5 = -0x208 - iVar5, 0 < iVar5)) {
           iVar5 = 0;
         }
-        iVar6 = (int)(camera->focusInstance->shadowPosition).z + 0x160;
+        iVar4 = (int)(camera->focusInstance->shadowPosition).z + 0x160;
         iVar5 = (int)(camera->real_focuspoint).z + iVar5 * 2;
-        if (iVar5 < iVar6) {
-          uVar7 = iVar6 - (camera->targetPos).z;
+        if (iVar5 < iVar4) {
+          y = iVar4 - (camera->targetPos).z;
         }
         else {
-          uVar7 = iVar5 - (camera->targetPos).z;
+          y = iVar5 - (camera->targetPos).z;
         }
-        iVar5 = ratan2(uVar7,uVar4);
-        angle0 = (short)iVar5;
+        x = ratan2(y,x);
+        angle0 = (short)x;
         uVar2 = CAMERA_SignedAngleDifference(angle0,camera->actual_x_rot);
         if (0 < (int)((uint)uVar2 << 0x10)) {
           angle0 = camera->actual_x_rot;
@@ -7786,7 +7981,7 @@ void CAMERA_CalcFollowPosition(Camera *camera,_Rotation *rotation)
       }
     }
     else {
-LAB_8001d23c:
+LAB_8001cd6c:
       angle0 = (camera->core).rotation.x;
     }
   }
@@ -7797,36 +7992,36 @@ LAB_8001d23c:
   sVar3 = CAMERA_SignedAngleDifference(angle0,camera->actual_x_rot);
   iVar5 = (int)sVar3;
   if ((camera->instance_mode & 0x2000) == 0) {
-    iVar6 = 0x18;
+    iVar4 = 0x18;
   }
   else {
     if (iVar5 < 0x51) {
-      iVar6 = 0x18;
-      if (0 < iVar5) goto LAB_8001d2cc;
+      iVar4 = 0x18;
+      if (0 < iVar5) goto LAB_8001cdfc;
     }
     else {
-      iVar6 = (iVar5 + -0x50) / 3;
-      if (iVar6 < 4) {
-LAB_8001d2cc:
-        iVar6 = 4;
+      iVar4 = (iVar5 + -0x50) / 3;
+      if (iVar4 < 4) {
+LAB_8001cdfc:
+        iVar4 = 4;
       }
       else {
-        if (0x18 < iVar6) {
-          iVar6 = 0x18;
+        if (0x18 < iVar4) {
+          iVar4 = 0x18;
         }
       }
     }
   }
-  if (iVar6 == 0) {
+  if (iVar4 == 0) {
     camera->actual_acc_x = 0;
     camera->actual_vel_x = 0;
   }
   else {
     CriticalDampAngle(1,&camera->actual_x_rot,angle0,&camera->actual_vel_x,&camera->actual_acc_x,
-                      (int)(short)iVar6);
+                      (int)(short)iVar4);
   }
   (camera->core).rotation.x = camera->actual_x_rot;
-LAB_8001d330:
+LAB_8001ce60:
   camera->lagZ = (camera->core).rotation.z;
   return;
 }
@@ -7836,16 +8031,16 @@ LAB_8001d330:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_SetupColInfo(struct Camera *camera /*$a3*/, struct CameraCollisionInfo *colInfo /*$t0*/, struct _Position *targetCamPos /*$a2*/)
- // line 5422, offset 0x8001d354
+ // line 5485, offset 0x8001ce84
 	/* begin block 1 */
-		// Start line: 5423
-		// Start offset: 0x8001D354
+		// Start line: 5486
+		// Start offset: 0x8001CE84
 		// Variables:
-	// 		static short toggle; // offset 0x66
+	// 		static short toggle; // offset 0x62
 
 		/* begin block 1.1 */
-			// Start line: 5428
-			// Start offset: 0x8001D368
+			// Start line: 5491
+			// Start offset: 0x8001CE98
 			// Variables:
 		// 		short _x1; // $v1
 		// 		short _y1; // $a0
@@ -7853,12 +8048,12 @@ LAB_8001d330:
 		// 		struct _Position *_v0; // $v0
 		// 		struct _Position *_v1; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8001D368
-		// End Line: 5428
+		// End offset: 0x8001CE98
+		// End Line: 5491
 
 		/* begin block 1.2 */
-			// Start line: 5432
-			// Start offset: 0x8001D374
+			// Start line: 5495
+			// Start offset: 0x8001CEA4
 			// Variables:
 		// 		short _x1; // $v1
 		// 		short _y1; // $a0
@@ -7866,28 +8061,30 @@ LAB_8001d330:
 		// 		struct _Position *_v0; // $v0
 		// 		struct _Position *_v1; // $v0
 		/* end block 1.2 */
-		// End offset: 0x8001D394
-		// End Line: 5432
+		// End offset: 0x8001CEC4
+		// End Line: 5495
 
 		/* begin block 1.3 */
-			// Start line: 5434
-			// Start offset: 0x8001D394
+			// Start line: 5497
+			// Start offset: 0x8001CEC4
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $a0
 		// 		short _z1; // $a1
 		// 		struct _Position *_v0; // $v1
 		/* end block 1.3 */
-		// End offset: 0x8001D394
-		// End Line: 5434
+		// End offset: 0x8001CEC4
+		// End Line: 5497
 	/* end block 1 */
-	// End offset: 0x8001D40C
-	// End Line: 5455
+	// End offset: 0x8001CF3C
+	// End Line: 5518
 
 	/* begin block 2 */
-		// Start line: 12510
+		// Start line: 12547
 	/* end block 2 */
-	// End Line: 12511
+	// End Line: 12548
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_SetupColInfo(Camera *camera,CameraCollisionInfo *colInfo,_Position *targetCamPos)
 
@@ -7921,7 +8118,7 @@ void CAMERA_SetupColInfo(Camera *camera,CameraCollisionInfo *colInfo,_Position *
   colInfo->end = &camera->posSphere;
   lVar5 = 0x1e;
   if ((camera->data).Follow.tface == (_TFace *)0x0) {
-    bVar1 = DAT_800cddb6 == 0;
+    bVar1 = DAT_800cf172 == 0;
     colInfo->cldLines = 6;
     if (bVar1) {
       lVar5 = 0x16;
@@ -7931,11 +8128,11 @@ void CAMERA_SetupColInfo(Camera *camera,CameraCollisionInfo *colInfo,_Position *
     }
   }
   colInfo->cldLines = lVar5;
-  if (DAT_800cddb6 != 0) {
-    DAT_800cddb6 = 0;
+  if (DAT_800cf172 != 0) {
+    DAT_800cf172 = 0;
     return;
   }
-  DAT_800cddb6 = 1;
+  DAT_800cf172 = 1;
   return;
 }
 
@@ -7944,16 +8141,16 @@ void CAMERA_SetupColInfo(Camera *camera,CameraCollisionInfo *colInfo,_Position *
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_DoPanicCheck(struct Camera *camera /*$s0*/, struct CameraCollisionInfo *tmpcolInfo /*$s1*/, struct _Rotation *rotation /*$s3*/, short *best_z /*$s4*/, short *max_dist /*stack 16*/)
- // line 5463, offset 0x8001d414
+ // line 5526, offset 0x8001cf44
 	/* begin block 1 */
-		// Start line: 5464
-		// Start offset: 0x8001D414
+		// Start line: 5527
+		// Start offset: 0x8001CF44
 		// Variables:
 	// 		struct _Position targetCamPos; // stack offset -32
 
 		/* begin block 1.1 */
-			// Start line: 5464
-			// Start offset: 0x8001D414
+			// Start line: 5527
+			// Start offset: 0x8001CF44
 			// Variables:
 		// 		short _x1; // $v1
 		// 		short _y1; // $a3
@@ -7961,16 +8158,18 @@ void CAMERA_SetupColInfo(Camera *camera,CameraCollisionInfo *colInfo,_Position *
 		// 		struct _Position *_v0; // $v0
 		// 		struct _Position *_v1; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8001D414
-		// End Line: 5464
+		// End offset: 0x8001CF44
+		// End Line: 5527
 	/* end block 1 */
-	// End offset: 0x8001D4C4
-	// End Line: 5476
+	// End offset: 0x8001CFF4
+	// End Line: 5539
 
 	/* begin block 2 */
-		// Start line: 12595
+		// Start line: 12632
 	/* end block 2 */
-	// End Line: 12596
+	// End Line: 12633
+
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_DoPanicCheck(Camera *camera,CameraCollisionInfo *tmpcolInfo,_Rotation *rotation,
                         short *best_z,short *max_dist)
@@ -7995,10 +8194,10 @@ void CAMERA_DoPanicCheck(Camera *camera,CameraCollisionInfo *tmpcolInfo,_Rotatio
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CAMERA_Panic(struct Camera *camera /*$s2*/, short min_dist /*$fp*/)
- // line 5478, offset 0x8001d4e4
+ // line 5541, offset 0x8001d014
 	/* begin block 1 */
-		// Start line: 5479
-		// Start offset: 0x8001D4E4
+		// Start line: 5542
+		// Start offset: 0x8001D014
 		// Variables:
 	// 		struct _Position targetCamPos; // stack offset -160
 	// 		struct _Rotation rotation; // stack offset -152
@@ -8009,15 +8208,16 @@ void CAMERA_DoPanicCheck(Camera *camera,CameraCollisionInfo *tmpcolInfo,_Rotatio
 	// 		short free_count1; // $s7
 	// 		short free_count2; // $s6
 	/* end block 1 */
-	// End offset: 0x8001D664
-	// End Line: 5528
+	// End offset: 0x8001D194
+	// End Line: 5591
 
 	/* begin block 2 */
-		// Start line: 12633
+		// Start line: 12670
 	/* end block 2 */
-	// End Line: 12634
+	// End Line: 12671
 
 /* WARNING: Could not reconcile some variable overlaps */
+/* File: C:\kain2\game\CAMERA.C */
 
 void CAMERA_Panic(Camera *camera,short min_dist)
 
@@ -8070,19 +8270,19 @@ void CAMERA_Panic(Camera *camera,short min_dist)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ CAMERA_DoCameraCollision2(struct Camera *camera /*$s1*/, struct _Position *targetCamPos /*$v0*/, int simpleflag /*$s3*/)
- // line 5532, offset 0x8001d694
+ // line 5595, offset 0x8001d1c4
 	/* begin block 1 */
-		// Start line: 5533
-		// Start offset: 0x8001D694
+		// Start line: 5596
+		// Start offset: 0x8001D1C4
 		// Variables:
 	// 		int secondcheck_flag; // $s0
 	// 		long hit; // $s2
 	// 		struct CameraCollisionInfo colInfo; // stack offset -120
-	// 		static long collisiontimeDown; // offset 0x6c
+	// 		static long collisiontimeDown; // offset 0x68
 
 		/* begin block 1.1 */
-			// Start line: 5605
-			// Start offset: 0x8001D828
+			// Start line: 5685
+			// Start offset: 0x8001D3F0
 			// Variables:
 		// 		short _x1; // $v1
 		// 		short _y1; // $a3
@@ -8090,37 +8290,38 @@ void CAMERA_Panic(Camera *camera,short min_dist)
 		// 		struct _Position *_v0; // $v0
 		// 		struct _Position *_v1; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8001D828
-		// End Line: 5605
+		// End offset: 0x8001D3F0
+		// End Line: 5685
 
 		/* begin block 1.2 */
-			// Start line: 5661
-			// Start offset: 0x8001D984
+			// Start line: 5741
+			// Start offset: 0x8001D53C
 			// Variables:
 		// 		int speed; // $s0
 		/* end block 1.2 */
-		// End offset: 0x8001DA4C
-		// End Line: 5681
+		// End offset: 0x8001D604
+		// End Line: 5761
 
 		/* begin block 1.3 */
-			// Start line: 5711
-			// Start offset: 0x8001DAD4
+			// Start line: 5791
+			// Start offset: 0x8001D68C
 			// Variables:
 		// 		int angle1; // $s0
 		// 		int angle2; // $v0
 		/* end block 1.3 */
-		// End offset: 0x8001DB80
-		// End Line: 5727
+		// End offset: 0x8001D738
+		// End Line: 5807
 	/* end block 1 */
-	// End offset: 0x8001DBDC
-	// End Line: 5765
+	// End offset: 0x8001D798
+	// End Line: 5846
 
 	/* begin block 2 */
-		// Start line: 12791
+		// Start line: 12828
 	/* end block 2 */
-	// End Line: 12792
+	// End Line: 12829
 
 /* WARNING: Could not reconcile some variable overlaps */
+/* File: C:\kain2\game\CAMERA.C */
 
 long CAMERA_DoCameraCollision2(Camera *camera,_Position *targetCamPos,int simpleflag)
 
@@ -8131,10 +8332,9 @@ long CAMERA_DoCameraCollision2(Camera *camera,_Position *targetCamPos,int simple
   short step;
   int iVar4;
   _TFace *p_Var5;
-  uint uVar6;
-  int iVar7;
+  int iVar6;
   int secondcheck_flag;
-  long lVar8;
+  long lVar7;
   undefined auStack120 [52];
   undefined auStack68 [12];
   uint local_38;
@@ -8142,15 +8342,15 @@ long CAMERA_DoCameraCollision2(Camera *camera,_Position *targetCamPos,int simple
   int local_30;
   int local_2c;
   
-  lVar8 = 0;
+  lVar7 = 0;
   CAMERA_SetupColInfo(camera,(CameraCollisionInfo *)auStack120,targetCamPos);
   secondcheck_flag = 0;
   if ((camera->flags & 0x10000U) == 0) {
-    iVar7 = (int)(camera->real_focuspoint).z;
+    iVar6 = (int)(camera->real_focuspoint).z;
     secondcheck_flag = (int)(camera->targetFocusPoint).z;
-    iVar4 = iVar7 - secondcheck_flag;
+    iVar4 = iVar6 - secondcheck_flag;
     if (iVar4 < 0) {
-      iVar4 = secondcheck_flag - iVar7;
+      iVar4 = secondcheck_flag - iVar6;
     }
     secondcheck_flag = 0;
     if (4 < iVar4) {
@@ -8159,24 +8359,34 @@ long CAMERA_DoCameraCollision2(Camera *camera,_Position *targetCamPos,int simple
   }
   p_Var5 = CAMERA_SphereToSphereWithLines(camera,(CameraCollisionInfo *)auStack120,secondcheck_flag)
   ;
-  uVar6 = camera->flags;
   (camera->data).Follow.tface = p_Var5;
-  if ((((((uVar6 & 0x12000) == 0) && (camera->instance_xyvel == 0)) && (secondcheck_flag == 0)) &&
-      (((camera->always_rotate_flag == 0 && (camera->forced_movement == 0)) &&
-       ((0 < local_30 && ((local_30 == 4 || (camera_still != 0)))))))) && (local_2c < 400)) {
+  if (((((camera->instance_mode & 0x2000000) != 0) && (0 < local_30)) && (local_2c < 600)) &&
+     (((CenterFlag = -1, local_30 != 1 || ((local_38 & 6) == 0)) && (combat_cam_weight < 0x1000))))
+  {
+    if ((short)(combat_cam_weight + 0x90) < 0x1000) {
+      CenterFlag = -1;
+      combat_cam_weight = combat_cam_weight + 0x90;
+      return 1;
+    }
+    combat_cam_weight = 0x1000;
+  }
+  if ((((camera->flags & 0x12000U) == 0) && (camera->instance_xyvel == 0)) &&
+     ((((secondcheck_flag == 0 &&
+        (((camera->always_rotate_flag == 0 && (camera->forced_movement == 0)) && (0 < local_30))))
+       && ((local_30 == 4 || (camera_still != 0)))) && (local_2c < 400)))) {
     panic_count = panic_count + 1;
-    if ((gameTrackerX.controlCommand[0][0] & 1U) == 0) {
-      if (panic_count < 2) goto LAB_8001d810;
+    if ((DAT_800d2114 & 1) == 0) {
+      if (panic_count < 2) goto LAB_8001d3d8;
     }
     else {
-      if (panic_count < 0xb) goto LAB_8001d810;
+      if (panic_count < 0xb) goto LAB_8001d3d8;
     }
     CAMERA_Panic(camera,(short)local_2c);
   }
   else {
     panic_count = 0;
   }
-LAB_8001d810:
+LAB_8001d3d8:
   if (((camera->data).Follow.tface != (_TFace *)0x0) && (secondcheck_flag != 0)) {
     step = (camera->targetFocusPoint).y;
     sVar2 = (camera->targetFocusPoint).z;
@@ -8187,8 +8397,8 @@ LAB_8001d810:
     (camera->data).Follow.tface = p_Var5;
   }
   if (simpleflag == 0) {
-    if (0 < DAT_800cddbc) {
-      DAT_800cddbc = DAT_800cddbc + -1;
+    if (0 < DAT_800cf178) {
+      DAT_800cf178 = DAT_800cf178 + -1;
     }
     if (camera->always_rotate_flag != 0) {
       local_30 = 4;
@@ -8198,17 +8408,17 @@ LAB_8001d810:
          ((((camera->flags & 0x2000U) == 0 || ((camera->instance_mode & 0x2000000) != 0)) &&
           (camera->always_rotate_flag == 0)))) {
         if ((camera->data).Follow.tface != (_TFace *)0x0) {
-          lVar8 = CAMERA_AbsoluteCollision(camera,(CameraCollisionInfo *)auStack120);
-          DAT_800cddbc = 0x1e;
+          lVar7 = CAMERA_AbsoluteCollision(camera,(CameraCollisionInfo *)auStack120);
+          DAT_800cf178 = 0x1e;
           (camera->targetFocusRotation).z = (camera->collisionTargetFocusRotation).z;
-          return lVar8;
+          return lVar7;
         }
         CAMERA_dampgetline(0);
         if ((camera->mode == 0xd) && (0 < camera->instance_xyvel)) {
           step = CAMERA_AngleDifference
                            ((camera->collisionTargetFocusRotation).z,(camera->focusRotation).z);
           if (step < 5) {
-            bVar1 = DAT_800cddbc == 0;
+            bVar1 = DAT_800cf178 == 0;
             (camera->collisionTargetFocusRotation).z = (camera->targetFocusRotation).z;
             if (bVar1) {
               camera->collision_lastPush = 0;
@@ -8236,18 +8446,19 @@ LAB_8001d810:
           }
         }
         else {
-          if (DAT_800cddbc == 0) {
+          if (DAT_800cf178 == 0) {
             Decouple_AngleMoveToward
                       (&(camera->collisionTargetFocusRotation).z,(camera->targetFocusRotation).z,
                        0x40);
             camera->collision_lastPush = 0;
           }
         }
-        if ((camera->instance_mode & 0x2000000) != 0) {
-          camera->collisionTargetFocusDistance = combat_cam_distance;
+        if ((camera->instance_mode & 0x2000000) == 0) {
+          camera->collisionTargetFocusDistance = camera->targetFocusDistance;
           return 0;
         }
-        camera->collisionTargetFocusDistance = camera->targetFocusDistance;
+        DAT_800cf178 = 0;
+        camera->collisionTargetFocusDistance = combat_cam_distance;
         return 0;
       }
     }
@@ -8255,59 +8466,55 @@ LAB_8001d810:
       camera->collisionTargetFocusDistance = camera->targetFocusDistance;
     }
     else {
-      lVar8 = CAMERA_AbsoluteCollision(camera,(CameraCollisionInfo *)auStack120);
-      DAT_800cddbc = 0x1e;
+      lVar7 = CAMERA_AbsoluteCollision(camera,(CameraCollisionInfo *)auStack120);
+      DAT_800cf178 = 0x1e;
     }
     if ((camera->flags & 0x10000U) == 0) {
       Decouple_AngleMoveToward
                 (&(camera->collisionTargetFocusRotation).z,(camera->targetFocusRotation).z,0x40);
+      return lVar7;
+    }
+    uVar3 = AngleDiff((camera->collisionTargetFocusRotation).z,(camera->targetFocusRotation).z);
+    if ((int)((uint)uVar3 << 0x10) < 0) {
+      step = AngleDiff((camera->collisionTargetFocusRotation).z,(camera->targetFocusRotation).z);
+      secondcheck_flag = -(int)step;
     }
     else {
-      uVar3 = AngleDiff((camera->collisionTargetFocusRotation).z,(camera->targetFocusRotation).z);
-      if ((int)((uint)uVar3 << 0x10) < 0) {
-        step = AngleDiff((camera->collisionTargetFocusRotation).z,(camera->targetFocusRotation).z);
-        secondcheck_flag = -(int)step;
-      }
-      else {
-        step = AngleDiff((camera->collisionTargetFocusRotation).z,(camera->targetFocusRotation).z);
-        secondcheck_flag = (int)step;
-      }
-      if ((local_38 & 6) == 0) {
-        CAMERA_dampgetline(0);
-      }
-      if ((secondcheck_flag < 0x400) || ((local_38 & 6) != 0)) {
-        if (secondcheck_flag < 0) {
-          secondcheck_flag = secondcheck_flag + 0xf;
-        }
-        secondcheck_flag = secondcheck_flag >> 4;
-        step = (short)secondcheck_flag;
-        if (secondcheck_flag < 8) {
-          step = 8;
-        }
-        if (0x20 < secondcheck_flag) {
-          step = 0x20;
-        }
-      }
-      else {
-        step = 0x40;
-      }
-      Decouple_AngleMoveToward
-                (&(camera->collisionTargetFocusRotation).z,(camera->targetFocusRotation).z,step);
+      step = AngleDiff((camera->collisionTargetFocusRotation).z,(camera->targetFocusRotation).z);
+      secondcheck_flag = (int)step;
     }
-  }
-  else {
-    if ((camera->data).Follow.tface == (_TFace *)0x0) {
-      lVar8 = 0;
+    if ((local_38 & 6) == 0) {
+      CAMERA_dampgetline(0);
+    }
+    if ((secondcheck_flag < 0x400) || ((local_38 & 6) != 0)) {
+      if (secondcheck_flag < 0) {
+        secondcheck_flag = secondcheck_flag + 0xf;
+      }
+      secondcheck_flag = secondcheck_flag >> 4;
+      step = (short)secondcheck_flag;
+      if (secondcheck_flag < 8) {
+        step = 8;
+      }
+      if (0x20 < secondcheck_flag) {
+        step = 0x20;
+      }
     }
     else {
-      step = camera->mode;
-      if (((step == 4) || (step == 2)) || (step == 6)) {
-        camera->collisionTargetFocusDistance = *(short *)(auStack120 + local_34 * 2 + 0x34);
-      }
-      lVar8 = 1;
+      step = 0x40;
     }
+    Decouple_AngleMoveToward
+              (&(camera->collisionTargetFocusRotation).z,(camera->targetFocusRotation).z,step);
+    return lVar7;
   }
-  return lVar8;
+  if ((camera->data).Follow.tface == (_TFace *)0x0) {
+    return 0;
+  }
+  step = camera->mode;
+  if (((step != 4) && (step != 2)) && (step != 6)) {
+    return 1;
+  }
+  camera->collisionTargetFocusDistance = *(short *)(auStack120 + local_34 * 2 + 0x34);
+  return 1;
 }
 
 
@@ -8315,16 +8522,18 @@ LAB_8001d810:
 // decompiled code
 // original method signature: 
 // int /*$ra*/ CAMERA_FocusInstanceMoved(struct Camera *camera /*$a0*/)
- // line 5770, offset 0x8001dbf8
+ // line 5851, offset 0x8001d7b4
 	/* begin block 1 */
-		// Start line: 13305
+		// Start line: 13382
 	/* end block 1 */
-	// End Line: 13306
+	// End Line: 13383
 
 	/* begin block 2 */
-		// Start line: 13306
+		// Start line: 13383
 	/* end block 2 */
-	// End Line: 13307
+	// End Line: 13384
+
+/* File: C:\kain2\game\CAMERA.C */
 
 int CAMERA_FocusInstanceMoved(Camera *camera)
 

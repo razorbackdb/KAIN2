@@ -2,163 +2,167 @@
 #define AADSQCMD_H
 
 
-extern void aadSubstituteVariables(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057008
+extern void aadSubstituteVariables(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056074
 
-extern void metaCmdSelectChannel(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800570C0
+extern void metaCmdSelectChannel(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005612C
 
-extern void metaCmdSelectSlot(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800570E0
+extern void metaCmdSelectSlot(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005614C
 
-extern void metaCmdAssignSequence(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057130
+extern void metaCmdAssignSequence(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005619C
 
-extern void metaCmdUsePrimaryTempo(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800571A0
+extern void metaCmdUsePrimaryTempo(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056210
 
-extern void metaCmdUseSecondaryTempo(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800571A8
+extern void metaCmdUseSecondaryTempo(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056218
 
-extern void metaCmdSetTempo(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800571B0
+extern void metaCmdSetTempo(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056220
 
-extern void metaCmdChangeTempo(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005721C
+extern void metaCmdChangeTempo(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005628C
 
-extern void metaCmdSetTempoFromSequence(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005728C
+extern void metaCmdSetTempoFromSequence(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800562FC
 
-extern void metaCmdStartSlot(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057308
+extern void metaCmdStartSlot(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005637C
 
-extern void metaCmdStopSlot(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005732C
+extern void metaCmdStopSlot(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800563A0
 
-extern void metaCmdPauseSlot(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057350
+extern void metaCmdPauseSlot(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800563C4
 
-extern void metaCmdResumeSlot(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057374
+extern void metaCmdResumeSlot(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800563E8
 
-extern void metaCmdSetSlotBendRange(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057398
+extern void metaCmdSetSlotBendRange(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005640C
 
-extern void metaCmdSetChannelBendRange(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800573A0
+extern void metaCmdSetChannelBendRange(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056414
 
-extern void metaCmdSetSlotVolume(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800573A8
+extern void metaCmdSetSlotVolume(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005641C
 
-extern void metaCmdSetSlotPan(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800573DC
+extern void metaCmdSetSlotPan(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056450
 
-extern void metaCmdSetChannelVolume(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057410
+extern void metaCmdSetChannelVolume(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056484
 
-extern void metaCmdSetChannelPan(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005744C
+extern void metaCmdSetChannelPan(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800564C0
 
-extern void metaCmdEnableSustainUpdate(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057488
+extern void metaCmdEnableSustainUpdate(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800564FC
 
-extern void metaCmdDisableSustainUpdate(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800574A8
+extern void metaCmdDisableSustainUpdate(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005651C
 
-extern void metaCmdMuteChannel(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800574CC
+extern void metaCmdMuteChannel(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056540
 
-extern void metaCmdUnMuteChannel(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800574FC
+extern void metaCmdUnMuteChannel(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005656C
 
-extern void metaCmdMuteChannelList(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005752C
+extern void metaCmdMuteChannelList(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056598
 
-extern void metaCmdSetChannelMute(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005755C
+extern void metaCmdUnMuteChannelList(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800565C8
 
-extern void metaCmdUnMuteChannelList(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800575D4
+extern void metaCmdSetChannelMute(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800565F8
 
-extern void metaCmdChannelVolumeFade(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057604
+extern void metaCmdDelayMute(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005664C
 
-extern void metaCmdChannelPanFade(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005760C
+extern void metaCmdUpdateMute(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056670
 
-extern void metaCmdSlotVolumeFade(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057614
+extern void metaCmdChannelVolumeFade(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056704
 
-extern void metaCmdSlotPanFade(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005761C
+extern void metaCmdChannelPanFade(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005670C
 
-extern void metaCmdSetChannelProgram(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057624
+extern void metaCmdSlotVolumeFade(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056714
 
-extern void metaCmdSetChannelBasePriority(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005763C
+extern void metaCmdSlotPanFade(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005671C
 
-extern void metaCmdSetChannelTranspose(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057644
+extern void metaCmdSetChannelProgram(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056724
 
-extern void metaCmdIgnoreChannelTranspose(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005765C
+extern void metaCmdSetChannelBasePriority(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005673C
 
-extern void metaCmdRespectChannelTranspose(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005767C
+extern void metaCmdSetChannelTranspose(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056744
 
-extern void metaCmdSetChannelPitchMap(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800576A0
+extern void metaCmdIgnoreChannelTranspose(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005675C
 
-extern void metaCmdIgnoreChannelPitchMap(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800576A8
+extern void metaCmdRespectChannelTranspose(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005677C
 
-extern void metaCmdRespectChannelPitchMap(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800576B0
+extern void metaCmdSetChannelPitchMap(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800567A0
 
-extern void metaCmdGetSequenceAssigned(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800576B8
+extern void metaCmdIgnoreChannelPitchMap(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800567A8
 
-extern void metaCmdGetTempo(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800576E8
+extern void metaCmdRespectChannelPitchMap(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800567B0
 
-extern void metaCmdGetSlotStatus(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005774C
+extern void metaCmdGetSequenceAssigned(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800567B8
 
-extern void metaCmdGetChannelMute(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005777C
+extern void metaCmdGetTempo(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800567E8
 
-extern void metaCmdGetChannelVolume(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800577CC
+extern void metaCmdGetSlotStatus(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005684C
 
-extern void metaCmdGetChannelPan(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057804
+extern void metaCmdGetChannelMute(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005687C
 
-extern void metaCmdGetChannelTranspose(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005783C
+extern void metaCmdGetChannelVolume(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800568CC
 
-extern void metaCmdGetChannelProgram(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057844
+extern void metaCmdGetChannelPan(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056904
 
-extern void metaCmdGetChannelBasePriority(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005787C
+extern void metaCmdGetChannelTranspose(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005693C
 
-extern void metaCmdGetChannelBendRange(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057884
+extern void metaCmdGetChannelProgram(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056944
 
-extern void metaCmdGetSlotVolume(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005788C
+extern void metaCmdGetChannelBasePriority(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005697C
 
-extern void metaCmdGetSlotPan(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800578BC
+extern void metaCmdGetChannelBendRange(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056984
 
-extern void metaCmdSetVariable(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800578EC
+extern void metaCmdGetSlotVolume(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005698C
 
-extern void metaCmdCopyVariable(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057918
+extern void metaCmdGetSlotPan(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800569BC
 
-extern void metaCmdAddVariable(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057954
+extern void metaCmdSetVariable(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800569EC
 
-extern void metaCmdSubtractVariable(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005798C
+extern void metaCmdCopyVariable(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056A18
 
-extern void metaCmdSetVariableBits(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800579C4
+extern void metaCmdAddVariable(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056A54
 
-extern void metaCmdClearVariableBits(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800579FC
+extern void metaCmdSubtractVariable(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056A8C
 
-extern void aadGotoSequencePosition(struct _AadSequenceSlot *slot, int track, unsigned char *newPosition); // 0x80057A34
+extern void metaCmdSetVariableBits(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056AC4
 
-extern void aadGotoSequenceLabel(struct _AadSequenceSlot *slot, int track, int labelNumber); // 0x80057AA0
+extern void metaCmdClearVariableBits(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056AFC
 
-extern void metaCmdLoopStart(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057B58
+extern void aadGotoSequencePosition(struct _AadSequenceSlot *slot, int track, unsigned char *newPosition); // 0x80056B34
 
-extern void metaCmdLoopEnd(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057BC8
+extern void aadGotoSequenceLabel(struct _AadSequenceSlot *slot, int track, int labelNumber); // 0x80056BA0
 
-extern void metaCmdLoopBreak(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057C58
+extern void metaCmdLoopStart(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056C58
 
-extern void metaCmdDefineLabel(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057C60
+extern void metaCmdLoopEnd(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056CC8
 
-extern void metaCmdGotoLabel(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057C68
+extern void metaCmdLoopBreak(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056D58
 
-extern void metaCmdSetSequencePosition(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057C98
+extern void metaCmdDefineLabel(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056D60
 
-extern void metaCmdBranchIfVarEqual(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057CC8
+extern void metaCmdGotoLabel(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056D68
 
-extern void metaCmdBranchIfVarNotEqual(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057D14
+extern void metaCmdSetSequencePosition(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056D98
 
-extern void metaCmdBranchIfVarLess(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057D60
+extern void metaCmdBranchIfVarEqual(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056DC8
 
-extern void metaCmdBranchIfVarGreater(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057DB0
+extern void metaCmdBranchIfVarNotEqual(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056E14
 
-extern void metaCmdBranchIfVarLessOrEqual(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057E00
+extern void metaCmdBranchIfVarLess(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056E60
 
-extern void metaCmdBranchIfVarGreaterOrEqual(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057E50
+extern void metaCmdBranchIfVarGreater(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056EB0
 
-extern void metaCmdBranchIfVarBitsSet(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057EA0
+extern void metaCmdBranchIfVarLessOrEqual(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056F00
 
-extern void metaCmdBranchIfVarBitsClear(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057EF0
+extern void metaCmdBranchIfVarGreaterOrEqual(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056F50
 
-extern void metaCmdSubstituteVariableParam1(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057F40
+extern void metaCmdBranchIfVarBitsSet(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056FA0
 
-extern void metaCmdSubstituteVariableParam2(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057F60
+extern void metaCmdBranchIfVarBitsClear(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80056FF0
 
-extern void metaCmdSubstituteVariableParam3(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057F80
+extern void metaCmdSubstituteVariableParam1(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057040
 
-extern void metaCmdEndSequence(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057FA0
+extern void metaCmdSubstituteVariableParam2(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057060
 
-extern void metaCmdPlaySoundEffect(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057FFC
+extern void metaCmdSubstituteVariableParam3(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057080
 
-extern void metaCmdStopSoundEffect(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80058004
+extern void metaCmdEndSequence(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800570A0
 
-extern void metaCmdSetSoundEffectVolumePan(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005800C
+extern void metaCmdPlaySoundEffect(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x800570FC
+
+extern void metaCmdStopSoundEffect(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x80057104
+
+extern void metaCmdSetSoundEffectVolumePan(struct AadSeqEvent *event, struct _AadSequenceSlot *slot); // 0x8005710C
 
 
 #endif

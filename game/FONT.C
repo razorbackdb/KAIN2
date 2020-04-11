@@ -5,16 +5,16 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FONT_MakeSpecialFogClut(int x /*$a3*/, int y /*$a1*/)
- // line 58, offset 0x8002ce04
+ // line 58, offset 0x8002ca94
 	/* begin block 1 */
 		// Start line: 59
-		// Start offset: 0x8002CE04
+		// Start offset: 0x8002CA94
 		// Variables:
 	// 		int n; // $a0
 	// 		unsigned short cl[16]; // stack offset -48
 	// 		struct RECT myrect; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x8002CE2C
+	// End offset: 0x8002CABC
 	// End Line: 69
 
 	/* begin block 2 */
@@ -22,32 +22,32 @@
 	/* end block 2 */
 	// End Line: 117
 
+/* File: C:\kain2\game\FONT.C */
+
 void FONT_MakeSpecialFogClut(int x,int y)
 
 {
-  undefined2 *puVar1;
+  short *psVar1;
   int iVar2;
   undefined2 local_30 [15];
-  undefined2 local_12;
-  undefined4 local_10;
-  undefined2 local_c;
-  undefined2 local_a;
+  short local_12;
+  RECT local_10;
   
   iVar2 = 0xf;
-  puVar1 = &local_12;
+  psVar1 = &local_12;
   do {
-    *puVar1 = 0x4210;
+    *psVar1 = 0x4210;
     iVar2 = iVar2 + -1;
-    puVar1 = puVar1 + -1;
+    psVar1 = psVar1 + -1;
   } while (-1 < iVar2);
-  local_c = 0x10;
-  local_a = 1;
+  local_10.w = 0x10;
+  local_10.h = 1;
   SpecialFogClut = (ushort)(y << 6) | (ushort)(x >> 4) & 0x3f;
   local_30[0] = 0;
-  local_10._0_2_ = (undefined2)x;
-  local_10._2_2_ = (undefined2)y;
+  local_10.x = (short)x;
+  local_10.y = (short)y;
   DrawSync(0);
-  LoadImage(&local_10,local_30);
+  LoadImage(&local_10,(u_long *)local_30);
   DrawSync(0);
   return;
 }
@@ -57,24 +57,24 @@ void FONT_MakeSpecialFogClut(int x,int y)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FONT_Init()
- // line 88, offset 0x8002ce88
+ // line 89, offset 0x8002cb18
 	/* begin block 1 */
-		// Start line: 89
-		// Start offset: 0x8002CE88
+		// Start line: 90
+		// Start offset: 0x8002CB18
 		// Variables:
 	// 		unsigned long *timAddr; // $s0
 	// 		short x; // stack offset -16
 	// 		short y; // stack offset -14
 	/* end block 1 */
-	// End offset: 0x8002CF78
-	// End Line: 123
+	// End offset: 0x8002CC08
+	// End Line: 124
 
 	/* begin block 2 */
-		// Start line: 182
+		// Start line: 184
 	/* end block 2 */
-	// End Line: 183
+	// End Line: 185
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\FONT.C */
 
 void FONT_Init(void)
 
@@ -85,27 +85,26 @@ void FONT_Init(void)
   
   FONT_vramBlock = VRAM_CheckVramSlot((short *)&local_10,(short *)local_e,0x10,0x80,3,-1);
   if (FONT_vramBlock != (_BlockVramEntry *)0x0) {
-    addr = LOAD_ReadFile("\\kain2\\game\\font.tim",'\x05');
+    addr = LOAD_ReadFile(s__kain2_game_font_tim_800cf3ac,'\x05');
     LOAD_LoadTIM(addr,(int)(short)local_10,(int)(short)local_e[0],(int)(short)local_10,
                  (int)(short)local_e[0] + 0x7e);
     MEMPACK_Free((char *)addr);
-    fontTracker.sprite_sort_push = 0;
-    fontTracker.font_tpage =
-         (short)(local_e[0] & 0x100) >> 4 | (ushort)(((uint)local_10 & 0x3ff) >> 6) |
-         (ushort)(((uint)local_e[0] & 0x200) << 2);
-    fontTracker.font_clut = (local_e[0] + 0x7e) * 0x40 | (short)local_10 >> 4 & 0x3fU;
-    fontTracker.font_vramX = local_10;
-    fontTracker.font_vramY = local_e[0];
-    fontTracker.font_vramV = local_e[0] & 0xff;
-    fontTracker.font_vramU = (short)(((uint)local_10 & 0x3f) << 2);
+    DAT_800d1d0e = 0;
+    DAT_800d1d04 = (short)(local_e[0] & 0x100) >> 4 | (ushort)(((uint)local_10 & 0x3ff) >> 6) |
+                   (ushort)(((uint)local_e[0] & 0x200) << 2);
+    DAT_800d1d06 = (local_e[0] + 0x7e) * 0x40 | (short)local_10 >> 4 & 0x3fU;
+    DAT_800d1d10 = local_10;
+    DAT_800d1d12 = local_e[0];
+    DAT_800d1d0a = local_e[0] & 0xff;
+    DAT_800d1d08 = (undefined2)(((uint)local_10 & 0x3f) << 2);
     FONT_MakeSpecialFogClut((int)(short)local_10,(int)(short)local_e[0] + 0x7f);
   }
-  fontTracker.font_xpos = 10;
-  fontTracker.font_ypos = 0x10;
-  fontTracker.font_buffIndex = 0;
-  fontTracker.sprite_sort_push = 0;
-  fontTracker.color_global = '\0';
-  fontTracker.color_local = '\0';
+  DAT_800d1cf8 = 10;
+  DAT_800d1cfc = 0x10;
+  DAT_800d1d00 = 0;
+  DAT_800d1d0e = 0;
+  DAT_800d1d14 = 0;
+  DAT_800d1d15 = 0;
   return;
 }
 
@@ -114,33 +113,32 @@ void FONT_Init(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FONT_ReloadFont()
- // line 134, offset 0x8002cfa8
+ // line 135, offset 0x8002cc38
 	/* begin block 1 */
-		// Start line: 135
-		// Start offset: 0x8002CFA8
+		// Start line: 136
+		// Start offset: 0x8002CC38
 		// Variables:
 	// 		unsigned long *timAddr; // $s0
 	/* end block 1 */
-	// End offset: 0x8002CFA8
-	// End Line: 135
+	// End offset: 0x8002CC38
+	// End Line: 136
 
 	/* begin block 2 */
-		// Start line: 312
+		// Start line: 314
 	/* end block 2 */
-	// End Line: 313
+	// End Line: 315
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\FONT.C */
 
 void FONT_ReloadFont(void)
 
 {
   long *addr;
   
-  addr = LOAD_ReadFile("\\kain2\\game\\font.tim",'\x05');
-  LOAD_LoadTIM(addr,(int)fontTracker.font_vramX,(int)fontTracker.font_vramY,
-               (int)fontTracker.font_vramX,(int)fontTracker.font_vramY + 0x7e);
+  addr = LOAD_ReadFile(s__kain2_game_font_tim_800cf3ac,'\x05');
+  LOAD_LoadTIM(addr,(int)DAT_800d1d10,(int)DAT_800d1d12,(int)DAT_800d1d10,(int)DAT_800d1d12 + 0x7e);
   MEMPACK_Free((char *)addr);
-  FONT_MakeSpecialFogClut((int)fontTracker.font_vramX,(int)fontTracker.font_vramY + 0x7f);
+  FONT_MakeSpecialFogClut((int)DAT_800d1d10,(int)DAT_800d1d12 + 0x7f);
   return;
 }
 
@@ -149,27 +147,29 @@ void FONT_ReloadFont(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FONT_DrawChar(struct FontChar *fontChar /*$a0*/)
- // line 146, offset 0x8002d00c
+ // line 147, offset 0x8002cc9c
 	/* begin block 1 */
-		// Start line: 147
-		// Start offset: 0x8002D00C
+		// Start line: 148
+		// Start offset: 0x8002CC9C
 		// Variables:
 	// 		char c; // $v1
 	// 		long x; // $a1
 	// 		long y; // $a2
 	/* end block 1 */
-	// End offset: 0x8002D00C
-	// End Line: 147
+	// End offset: 0x8002CC9C
+	// End Line: 148
 
 	/* begin block 2 */
-		// Start line: 340
+		// Start line: 342
 	/* end block 2 */
-	// End Line: 341
+	// End Line: 343
+
+/* File: C:\kain2\game\FONT.C */
 
 void FONT_DrawChar(FontChar *fontChar)
 
 {
-  fontTracker.color_local = fontChar->color;
+  DAT_800d1d15 = fontChar->color;
   FONT_DrawChar2D(fontChar->c,(int)fontChar->x,(int)fontChar->y);
   return;
 }
@@ -179,23 +179,23 @@ void FONT_DrawChar(FontChar *fontChar)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ FONT_Get2DImageIndex(unsigned char c /*$a0*/)
- // line 440, offset 0x8002d040
+ // line 469, offset 0x8002ccd0
 	/* begin block 1 */
-		// Start line: 932
+		// Start line: 990
 	/* end block 1 */
-	// End Line: 933
+	// End Line: 991
 
 	/* begin block 2 */
-		// Start line: 997
+		// Start line: 1055
 	/* end block 2 */
-	// End Line: 998
+	// End Line: 1056
+
+/* File: C:\kain2\game\FONT.C */
 
 long FONT_Get2DImageIndex(uchar c)
 
 {
-  return (uint)
-               "$$$$$$$$$$$$$$$$$VWXYZ[$$$$$$$$$$%($$)$3+,/-2\'$&\x1a\x1b\x1c\x1d\x1e\x1f !\"#*$U.T0$456789:;<=>?@ABCDEFGHIJKLMN$OR$$"
-               [c];
+  return (uint)fontTransTable[c];
 }
 
 
@@ -203,10 +203,10 @@ long FONT_Get2DImageIndex(uchar c)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ drawChar2DPoly(long fpi /*$a0*/, long x /*$s1*/, long y /*$s0*/)
- // line 527, offset 0x8002d05c
+ // line 556, offset 0x8002ccec
 	/* begin block 1 */
-		// Start line: 528
-		// Start offset: 0x8002D05C
+		// Start line: 557
+		// Start offset: 0x8002CCEC
 		// Variables:
 	// 		unsigned long **drawOT; // $s2
 	// 		struct POLY_FT4 *textPoly; // $a3
@@ -228,38 +228,40 @@ long FONT_Get2DImageIndex(uchar c)
 	// 		int v3; // $t4
 
 		/* begin block 1.1 */
-			// Start line: 575
-			// Start offset: 0x8002D110
+			// Start line: 604
+			// Start offset: 0x8002CDA0
 		/* end block 1.1 */
-		// End offset: 0x8002D120
-		// End Line: 584
+		// End offset: 0x8002CDB0
+		// End Line: 613
 
 		/* begin block 1.2 */
-			// Start line: 587
-			// Start offset: 0x8002D128
+			// Start line: 616
+			// Start offset: 0x8002CDB8
 			// Variables:
 		// 		int holdu; // $v0
 		// 		int holdv; // $v1
 		/* end block 1.2 */
-		// End offset: 0x8002D158
-		// End Line: 596
+		// End offset: 0x8002CDE8
+		// End Line: 625
 
 		/* begin block 1.3 */
-			// Start line: 605
-			// Start offset: 0x8002D184
+			// Start line: 634
+			// Start offset: 0x8002CE14
 			// Variables:
 		// 		struct font_color_t *color; // $v1
 		/* end block 1.3 */
-		// End offset: 0x8002D1C8
-		// End Line: 608
+		// End offset: 0x8002CE58
+		// End Line: 637
 	/* end block 1 */
-	// End offset: 0x8002D1C8
-	// End Line: 609
+	// End offset: 0x8002CE58
+	// End Line: 638
 
 	/* begin block 2 */
-		// Start line: 1049
+		// Start line: 1107
 	/* end block 2 */
-	// End Line: 1050
+	// End Line: 1108
+
+/* File: C:\kain2\game\FONT.C */
 
 void drawChar2DPoly(long fpi,long x,long y)
 
@@ -267,10 +269,10 @@ void drawChar2DPoly(long fpi,long x,long y)
   char cVar1;
   char cVar2;
   short sVar3;
-  long lVar4;
+  uint *puVar4;
   uint uVar5;
   short sVar6;
-  ulong *puVar7;
+  uint *puVar7;
   char cVar8;
   char cVar9;
   char cVar10;
@@ -279,21 +281,21 @@ void drawChar2DPoly(long fpi,long x,long y)
   short sVar13;
   short sVar14;
   
-  lVar4 = gameTrackerX.defVVRemoveDist;
-  cVar11 = (&fontPos)[fpi].x;
+  puVar4 = DAT_800d22a4;
+  cVar11 = fontPos[fpi].x;
   if (cVar11 < '\0') {
     cVar11 = -cVar11;
   }
-  cVar10 = (&fontPos)[fpi].y;
+  cVar10 = fontPos[fpi].y;
   if (cVar10 < '\0') {
     cVar10 = -cVar10;
   }
-  cVar1 = (&fontPos)[fpi].w;
+  cVar1 = fontPos[fpi].w;
   sVar14 = (short)cVar1;
-  cVar2 = (&fontPos)[fpi].h;
+  cVar2 = fontPos[fpi].h;
   sVar6 = (short)cVar2;
-  cVar11 = cVar11 + (char)fontTracker.font_vramU;
-  cVar10 = cVar10 + (char)fontTracker.font_vramV;
+  cVar11 = cVar11 + (char)DAT_800d1d08;
+  cVar10 = cVar10 + (char)DAT_800d1d0a;
   if (cVar1 < '\0') {
     sVar14 = -(short)cVar1;
   }
@@ -304,7 +306,7 @@ void drawChar2DPoly(long fpi,long x,long y)
   cVar8 = cVar10 + (char)sVar6;
   sVar3 = (short)x;
   sVar6 = (short)y - (sVar6 + -0xc);
-  puVar7 = (gameTrackerX.primPool)->nextPrim;
+  puVar7 = *(uint **)(DAT_800d210c + 4);
   sVar13 = (short)y + 0xc;
   cVar9 = cVar10;
   if (cVar2 < '\0') {
@@ -318,15 +320,15 @@ void drawChar2DPoly(long fpi,long x,long y)
   }
   *(undefined *)((int)puVar7 + 3) = 9;
   *(undefined *)((int)puVar7 + 7) = 0x2c;
-  if (fontTracker.color_local == '\0') {
+  if (DAT_800d1d15 == 0) {
     *(undefined *)((int)puVar7 + 7) = 0x2d;
   }
   else {
-    uVar5 = (uint)(byte)fontTracker.color_local;
+    uVar5 = (uint)DAT_800d1d15;
     *(undefined *)((int)puVar7 + 7) = 0x2c;
-    *(undefined *)(puVar7 + 1) = *(undefined *)&(&the_font_color_table)[uVar5].r;
-    *(undefined *)((int)puVar7 + 5) = *(undefined *)&(&the_font_color_table)[uVar5].g;
-    *(undefined *)((int)puVar7 + 6) = *(undefined *)&(&the_font_color_table)[uVar5].b;
+    *(undefined *)(puVar7 + 1) = *(undefined *)&the_font_color_table[uVar5].r;
+    *(undefined *)((int)puVar7 + 5) = *(undefined *)&the_font_color_table[uVar5].g;
+    *(undefined *)((int)puVar7 + 6) = *(undefined *)&the_font_color_table[uVar5].b;
   }
   *(char *)(puVar7 + 3) = cVar10;
   *(char *)((int)puVar7 + 0xd) = cVar9;
@@ -345,11 +347,11 @@ void drawChar2DPoly(long fpi,long x,long y)
   *(short *)(puVar7 + 8) = sVar3 + sVar14;
   *(short *)((int)puVar7 + 0x22) = sVar13;
   *(byte *)((int)puVar7 + 7) = *(byte *)((int)puVar7 + 7) & 0xfd;
-  *(short *)((int)puVar7 + 0x16) = fontTracker.font_tpage;
-  *(short *)((int)puVar7 + 0xe) = fontTracker.font_clut;
-  *puVar7 = *(uint *)lVar4 & 0xffffff | 0x9000000;
-  *(uint *)lVar4 = (uint)puVar7 & 0xffffff;
-  (gameTrackerX.primPool)->nextPrim = puVar7 + 10;
+  *(undefined2 *)((int)puVar7 + 0x16) = DAT_800d1d04;
+  *(undefined2 *)((int)puVar7 + 0xe) = DAT_800d1d06;
+  *puVar7 = *puVar4 & 0xffffff | 0x9000000;
+  *puVar4 = (uint)puVar7 & 0xffffff;
+  *(uint **)(DAT_800d210c + 4) = puVar7 + 10;
   return;
 }
 
@@ -358,10 +360,10 @@ void drawChar2DPoly(long fpi,long x,long y)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FONT_DrawChar2D(unsigned char c /*$fp*/, long x /*$s7*/, long y /*$s3*/)
- // line 629, offset 0x8002d268
+ // line 658, offset 0x8002cef8
 	/* begin block 1 */
-		// Start line: 630
-		// Start offset: 0x8002D268
+		// Start line: 659
+		// Start offset: 0x8002CEF8
 		// Variables:
 	// 		long w; // $s0
 	// 		long h; // $s6
@@ -374,18 +376,20 @@ void drawChar2DPoly(long fpi,long x,long y)
 	// 		int i2; // $s4
 	// 		int i3; // $s5
 	/* end block 1 */
-	// End offset: 0x8002D46C
-	// End Line: 671
+	// End offset: 0x8002D0FC
+	// End Line: 700
 
 	/* begin block 2 */
-		// Start line: 1376
+		// Start line: 1434
 	/* end block 2 */
-	// End Line: 1377
+	// End Line: 1435
 
 	/* begin block 3 */
-		// Start line: 1381
+		// Start line: 1439
 	/* end block 3 */
-	// End Line: 1382
+	// End Line: 1440
+
+/* File: C:\kain2\game\FONT.C */
 
 void FONT_DrawChar2D(uchar c,long x,long y)
 
@@ -400,27 +404,27 @@ void FONT_DrawChar2D(uchar c,long x,long y)
   int fpi_00;
   int fpi_01;
   
-  if ((gameTrackerX.primPool)->nextPrim <= (gameTrackerX.primPool)->lastPrim + -0xc) {
+  if (*(uint *)(DAT_800d210c + 4) <= *(int *)(DAT_800d210c + 8) - 0x30U) {
     y_00 = FONT_Get2DImageIndex(c);
     fpi_01 = y_00 * 3;
-    fpi = (int)""[fpi_01];
-    fpi_00 = (int)(&CHAR_FFh_800c4e49)[fpi_01];
-    fpi_01 = (int)(&CHAR_FFh_800c4e4a)[fpi_01];
+    fpi = (int)charMap[fpi_01];
+    fpi_00 = (int)charMap[fpi_01 + 1];
+    fpi_01 = (int)charMap[fpi_01 + 2];
     if (fpi < 0) {
       iVar1 = 8;
     }
     else {
-      iVar1 = (int)(&fontPos)[fpi].w;
+      iVar1 = (int)fontPos[fpi].w;
       if (iVar1 < 0) {
         iVar1 = -iVar1;
       }
     }
     iVar2 = iVar1;
-    if ((-1 < fpi_00) && (iVar2 = (int)(&fontPos)[fpi_00].w, iVar2 < 0)) {
+    if ((-1 < fpi_00) && (iVar2 = (int)fontPos[fpi_00].w, iVar2 < 0)) {
       iVar2 = -iVar2;
     }
     iVar3 = iVar1;
-    if ((-1 < fpi_01) && (iVar3 = (int)(&fontPos)[fpi_01].w, iVar3 < 0)) {
+    if ((-1 < fpi_01) && (iVar3 = (int)fontPos[fpi_01].w, iVar3 < 0)) {
       iVar3 = -iVar3;
     }
     iVar5 = iVar3;
@@ -438,7 +442,7 @@ void FONT_DrawChar2D(uchar c,long x,long y)
       iVar4 = 0xc;
     }
     else {
-      iVar4 = (int)(&fontPos)[fpi].h;
+      iVar4 = (int)fontPos[fpi].h;
       if (iVar4 < 0) {
         iVar4 = -iVar4;
       }
@@ -468,10 +472,10 @@ void FONT_DrawChar2D(uchar c,long x,long y)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ FONT_CharSpacing(char c /*$a0*/, long fontXSize /*$s0*/)
- // line 673, offset 0x8002d49c
+ // line 702, offset 0x8002d12c
 	/* begin block 1 */
-		// Start line: 674
-		// Start offset: 0x8002D49C
+		// Start line: 703
+		// Start offset: 0x8002D12C
 		// Variables:
 	// 		long index; // $a0
 	// 		long w; // $v1
@@ -483,22 +487,24 @@ void FONT_DrawChar2D(uchar c,long x,long y)
 	// 		char i3; // $t1
 
 		/* begin block 1.1 */
-			// Start line: 686
-			// Start offset: 0x8002D4D0
+			// Start line: 715
+			// Start offset: 0x8002D160
 			// Variables:
 		// 		int holdw; // $a0
 		// 		int holdw2; // $a0
 		/* end block 1.1 */
-		// End offset: 0x8002D5CC
-		// End Line: 710
+		// End offset: 0x8002D25C
+		// End Line: 739
 	/* end block 1 */
-	// End offset: 0x8002D5D0
-	// End Line: 715
+	// End offset: 0x8002D260
+	// End Line: 744
 
 	/* begin block 2 */
-		// Start line: 1469
+		// Start line: 1527
 	/* end block 2 */
-	// End Line: 1470
+	// End Line: 1528
+
+/* File: C:\kain2\game\FONT.C */
 
 long FONT_CharSpacing(char c,long fontXSize)
 
@@ -512,32 +518,32 @@ long FONT_CharSpacing(char c,long fontXSize)
   
   if ((c != ' ') && (lVar2 = FONT_Get2DImageIndex(c), lVar2 != -1)) {
     iVar1 = lVar2 * 3;
-    iVar3 = (int)""[iVar1];
-    iVar5 = (int)(&fontPos)[iVar3].w;
+    iVar3 = (int)charMap[iVar1];
+    iVar5 = (int)fontPos[iVar3].w;
     if (iVar5 < 0) {
       iVar5 = -iVar5;
     }
-    if ((&fontPos)[iVar3].x < '\0') {
-      iVar5 = (int)(&fontPos)[iVar3].h;
+    if (fontPos[iVar3].x < '\0') {
+      iVar5 = (int)fontPos[iVar3].h;
     }
     iVar3 = 8;
-    if (-1 < (int)((uint)(byte)""[iVar1] << 0x18)) {
+    if (-1 < (int)((uint)(byte)charMap[iVar1] << 0x18)) {
       iVar3 = iVar5;
     }
-    iVar5 = (int)(&fontPos)[(int)(&CHAR_FFh_800c4e49)[iVar1]].w;
+    iVar5 = (int)fontPos[(int)charMap[iVar1 + 1]].w;
     if (iVar5 < 0) {
       iVar5 = -iVar5;
     }
     iVar6 = iVar3;
-    if (-1 < (int)(&CHAR_FFh_800c4e49)[iVar1]) {
+    if (-1 < (int)charMap[iVar1 + 1]) {
       iVar6 = iVar5;
     }
-    iVar5 = (int)(&fontPos)[(int)(&CHAR_FFh_800c4e4a)[iVar1]].w;
+    iVar5 = (int)fontPos[(int)charMap[iVar1 + 2]].w;
     if (iVar5 < 0) {
       iVar5 = -iVar5;
     }
     iVar4 = iVar3;
-    if (-1 < (int)(&CHAR_FFh_800c4e4a)[iVar1]) {
+    if (-1 < (int)charMap[iVar1 + 2]) {
       iVar4 = iVar5;
     }
     if (iVar6 < iVar3) {
@@ -556,39 +562,41 @@ long FONT_CharSpacing(char c,long fontXSize)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FONT_AddCharToBuffer(char c /*$a3*/, long x /*$a1*/, long y /*$a2*/)
- // line 1028, offset 0x8002d5e0
+ // line 1057, offset 0x8002d270
 	/* begin block 1 */
-		// Start line: 1029
-		// Start offset: 0x8002D5E0
+		// Start line: 1058
+		// Start offset: 0x8002D270
 		// Variables:
 	// 		struct FontChar *fontChar; // $a0
 	/* end block 1 */
-	// End offset: 0x8002D648
-	// End Line: 1048
+	// End offset: 0x8002D2D8
+	// End Line: 1077
 
 	/* begin block 2 */
-		// Start line: 2053
+		// Start line: 2111
 	/* end block 2 */
-	// End Line: 2054
+	// End Line: 2112
+
+/* File: C:\kain2\game\FONT.C */
 
 void FONT_AddCharToBuffer(char c,long x,long y)
 
 {
-  long lVar1;
+  int iVar1;
   
-  lVar1 = fontTracker.font_buffIndex;
-  if (fontTracker.font_buffIndex < 0xff) {
+  iVar1 = DAT_800d1d00 * 6;
+  if (DAT_800d1d00 < 0xff) {
     if (c == '@') {
-      fontTracker.font_buffer[fontTracker.font_buffIndex].x = (ushort)x & 0xff;
-      fontTracker.font_buffer[lVar1].y = (ushort)y & 0xff;
+      *(ushort *)(&fontTracker + iVar1) = (ushort)x & 0xff;
+      *(ushort *)(&DAT_800d16fa + iVar1) = (ushort)y & 0xff;
     }
     else {
-      fontTracker.font_buffer[fontTracker.font_buffIndex].x = (ushort)x;
-      fontTracker.font_buffer[lVar1].y = (ushort)y;
+      *(ushort *)(&fontTracker + iVar1) = (ushort)x;
+      *(ushort *)(&DAT_800d16fa + iVar1) = (ushort)y;
     }
-    fontTracker.font_buffer[lVar1].c = c;
-    fontTracker.font_buffIndex = fontTracker.font_buffIndex + 1;
-    fontTracker.font_buffer[lVar1].color = fontTracker.color_global;
+    (&DAT_800d16fc)[iVar1] = c;
+    DAT_800d1d00 = DAT_800d1d00 + 1;
+    (&DAT_800d16fd)[iVar1] = DAT_800d1d14;
   }
   return;
 }
@@ -598,21 +606,23 @@ void FONT_AddCharToBuffer(char c,long x,long y)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FONT_Print(char *fmt /*stack 0*/)
- // line 1065, offset 0x8002d650
+ // line 1094, offset 0x8002d2e0
 	/* begin block 1 */
-		// Start line: 1066
-		// Start offset: 0x8002D650
+		// Start line: 1095
+		// Start offset: 0x8002D2E0
 		// Variables:
 	// 		char *hold; // $v1
 	// 		void *ap; // $s0
 	/* end block 1 */
-	// End offset: 0x8002D6CC
-	// End Line: 1080
+	// End offset: 0x8002D35C
+	// End Line: 1109
 
 	/* begin block 2 */
-		// Start line: 1945
+		// Start line: 2003
 	/* end block 2 */
-	// End Line: 1946
+	// End Line: 2004
+
+/* File: C:\kain2\game\FONT.C */
 
 void FONT_Print(char *fmt)
 
@@ -621,9 +631,9 @@ void FONT_Print(char *fmt)
   char *pcVar2;
   undefined local_res4 [12];
   
-  vsprintf(&fp_str,fmt,local_res4);
-  pcVar2 = &fp_str;
-  bVar1 = fp_str;
+  vsprintf(fp_str,fmt,local_res4);
+  pcVar2 = fp_str;
+  bVar1 = fp_str[0];
   while (bVar1 != 0) {
     if ((uint)(byte)*pcVar2 - 0x41 < 0x1a) {
       *pcVar2 = *pcVar2 + 0x20;
@@ -631,7 +641,7 @@ void FONT_Print(char *fmt)
     pcVar2 = (char *)((byte *)pcVar2 + 1);
     bVar1 = *pcVar2;
   }
-  FONT_VaReallyPrint(&fp_str,local_res4);
+  FONT_VaReallyPrint(fp_str,local_res4);
   return;
 }
 
@@ -640,28 +650,30 @@ void FONT_Print(char *fmt)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FONT_Print2(char *fmt /*stack 0*/)
- // line 1084, offset 0x8002d6ec
+ // line 1113, offset 0x8002d37c
 	/* begin block 1 */
-		// Start line: 1085
-		// Start offset: 0x8002D6EC
+		// Start line: 1114
+		// Start offset: 0x8002D37C
 		// Variables:
 	// 		void *ap; // $s0
 	/* end block 1 */
-	// End offset: 0x8002D6EC
-	// End Line: 1085
+	// End offset: 0x8002D37C
+	// End Line: 1114
 
 	/* begin block 2 */
-		// Start line: 1998
+		// Start line: 2056
 	/* end block 2 */
-	// End Line: 1999
+	// End Line: 2057
+
+/* File: C:\kain2\game\FONT.C */
 
 void FONT_Print2(char *fmt)
 
 {
   undefined local_res4 [12];
   
-  vsprintf(&fp_str,fmt,local_res4);
-  FONT_VaReallyPrint(&fp_str,local_res4);
+  vsprintf(fp_str,fmt,local_res4);
+  FONT_VaReallyPrint(fp_str,local_res4);
   return;
 }
 
@@ -670,43 +682,45 @@ void FONT_Print2(char *fmt)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ FONT_GetStringWidth(char *str /*$s3*/)
- // line 1137, offset 0x8002d744
+ // line 1166, offset 0x8002d3d4
 	/* begin block 1 */
-		// Start line: 1138
-		// Start offset: 0x8002D744
+		// Start line: 1167
+		// Start offset: 0x8002D3D4
 		// Variables:
 	// 		int w; // $s1
 	// 		int len; // $s2
 	// 		int i; // $s0
 	/* end block 1 */
-	// End offset: 0x8002D798
-	// End Line: 1145
+	// End offset: 0x8002D428
+	// End Line: 1174
 
 	/* begin block 2 */
-		// Start line: 2271
+		// Start line: 2329
 	/* end block 2 */
-	// End Line: 2272
+	// End Line: 2330
+
+/* File: C:\kain2\game\FONT.C */
 
 int FONT_GetStringWidth(char *str)
 
 {
-  size_t sVar1;
+  int iVar1;
   char *pcVar2;
   long lVar3;
   int iVar4;
   int iVar5;
   
-  sVar1 = strlen(str);
+  iVar1 = strlen();
   iVar4 = 0;
   iVar5 = 0;
   pcVar2 = str;
-  if (0 < (int)sVar1) {
+  if (0 < iVar1) {
     do {
       iVar4 = iVar4 + 1;
       lVar3 = FONT_CharSpacing(*pcVar2,8);
       iVar5 = iVar5 + lVar3;
       pcVar2 = str + iVar4;
-    } while (iVar4 < (int)sVar1);
+    } while (iVar4 < iVar1);
   }
   return iVar5;
 }
@@ -715,110 +729,44 @@ int FONT_GetStringWidth(char *str)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ FONT_CenterString(char *str /*$v0*/, int posX /*$s5*/, int posY /*$a2*/)
- // line 1149, offset 0x8002d7b8
-	/* begin block 1 */
-		// Start line: 1150
-		// Start offset: 0x8002D7B8
-		// Variables:
-	// 		int x; // $a0
-	// 		int y; // $s2
-	// 		char *lineStart; // $s1
-	// 		char *lineEnd; // $s0
-	// 		char lineEndWas; // $s3
-	// 		char s[40]; // stack offset -72
-	/* end block 1 */
-	// End offset: 0x8002D888
-	// End Line: 1178
-
-	/* begin block 2 */
-		// Start line: 2094
-	/* end block 2 */
-	// End Line: 2095
-
-void FONT_CenterString(char *str,int posX,int posY)
-
-{
-  char cVar1;
-  int iVar2;
-  short x;
-  char *pcVar3;
-  char *str_00;
-  char local_48;
-  char local_47 [39];
-  
-  strcpy(&local_48,str);
-  str_00 = &local_48;
-  do {
-    pcVar3 = str_00;
-    if (*str_00 != '\0') {
-      cVar1 = *str_00;
-      do {
-        if (cVar1 == '\n') break;
-        pcVar3 = pcVar3 + 1;
-        cVar1 = *pcVar3;
-      } while (cVar1 != '\0');
-    }
-    cVar1 = *pcVar3;
-    *pcVar3 = '\0';
-    iVar2 = FONT_GetStringWidth(str_00);
-    iVar2 = posX - iVar2 / 2;
-    x = (short)iVar2;
-    if (iVar2 < 10) {
-      x = 10;
-    }
-    FONT_SetCursor(x,(short)posY);
-    FONT_Print(str_00);
-    str_00 = pcVar3 + 1;
-    posY = posY + 0xc;
-    if (cVar1 == '\0') {
-      return;
-    }
-  } while( true );
-}
-
-
-
-// decompiled code
-// original method signature: 
 // void /*$ra*/ FONT_Flush()
- // line 1181, offset 0x8002d8ac
+ // line 1210, offset 0x8002d448
 	/* begin block 1 */
-		// Start line: 1182
-		// Start offset: 0x8002D8AC
+		// Start line: 1211
+		// Start offset: 0x8002D448
 		// Variables:
 	// 		long i; // $s1
 	// 		struct FontChar *fontChar; // $s0
 	/* end block 1 */
-	// End offset: 0x8002D924
-	// End Line: 1208
+	// End offset: 0x8002D4C0
+	// End Line: 1237
 
 	/* begin block 2 */
-		// Start line: 2164
+		// Start line: 2416
 	/* end block 2 */
-	// End Line: 2165
+	// End Line: 2417
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\FONT.C */
 
 void FONT_Flush(void)
 
 {
-  FontTracker *fontChar;
-  long lVar1;
+  FontChar *fontChar;
+  int iVar1;
   
-  fontTracker.font_xpos = 10;
-  fontTracker.font_ypos = 0x10;
-  if (fontTracker.font_buffIndex != 0) {
-    fontChar = &fontTracker;
-    lVar1 = fontTracker.font_buffIndex;
+  DAT_800d1cf8 = 10;
+  DAT_800d1cfc = 0x10;
+  if (DAT_800d1d00 != 0) {
+    fontChar = (FontChar *)&fontTracker;
+    iVar1 = DAT_800d1d00;
     do {
-      if ((*(char *)fontChar->font_buffer != ' ') && (*(char *)fontChar->font_buffer != '@')) {
-        FONT_DrawChar((FontChar *)fontChar);
+      if ((fontChar->c != ' ') && (fontChar->c != '@')) {
+        FONT_DrawChar(fontChar);
       }
-      lVar1 = lVar1 + -1;
-      fontChar = (FontTracker *)(fontChar->font_buffer + 1);
-    } while (lVar1 != 0);
-    fontTracker.font_buffIndex = 0;
+      iVar1 = iVar1 + -1;
+      fontChar = fontChar + 1;
+    } while (iVar1 != 0);
+    DAT_800d1d00 = 0;
   }
   return;
 }
@@ -828,26 +776,24 @@ void FONT_Flush(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FONT_SetCursor(short x /*$a0*/, short y /*$a1*/)
- // line 1210, offset 0x8002d940
+ // line 1239, offset 0x8002d4dc
 	/* begin block 1 */
-		// Start line: 2243
+		// Start line: 2259
 	/* end block 1 */
-	// End Line: 2244
+	// End Line: 2260
 
 	/* begin block 2 */
-		// Start line: 2244
+		// Start line: 2263
 	/* end block 2 */
-	// End Line: 2245
+	// End Line: 2264
+
+/* File: C:\kain2\game\FONT.C */
 
 void FONT_SetCursor(short x,short y)
 
 {
-  if (0 < (int)x) {
-    fontTracker.font_xpos = (int)x;
-  }
-  if (0 < (int)y) {
-    fontTracker.font_ypos = (int)y;
-  }
+  DAT_800d1cf8 = (int)x;
+  DAT_800d1cfc = (int)y;
   return;
 }
 
@@ -856,32 +802,34 @@ void FONT_SetCursor(short x,short y)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FONT_VaReallyPrint(char *fmt /*$a0*/, void *ap /*$a1*/)
- // line 1244, offset 0x8002d96c
+ // line 1278, offset 0x8002d4fc
 	/* begin block 1 */
-		// Start line: 1245
-		// Start offset: 0x8002D96C
+		// Start line: 1279
+		// Start offset: 0x8002D4FC
 		// Variables:
 	// 		char *p; // $s2
 	// 		long *xpos; // $s3
 	// 		long *ypos; // $s4
 
 		/* begin block 1.1 */
-			// Start line: 1266
-			// Start offset: 0x8002D9EC
+			// Start line: 1300
+			// Start offset: 0x8002D57C
 			// Variables:
 		// 		unsigned char w; // $s0
 		// 		unsigned char h; // $s1
 		/* end block 1.1 */
-		// End offset: 0x8002D9EC
-		// End Line: 1268
+		// End offset: 0x8002D57C
+		// End Line: 1302
 	/* end block 1 */
-	// End offset: 0x8002DAD4
-	// End Line: 1298
+	// End offset: 0x8002D664
+	// End Line: 1332
 
 	/* begin block 2 */
-		// Start line: 2484
+		// Start line: 2552
 	/* end block 2 */
-	// End Line: 2485
+	// End Line: 2553
+
+/* File: C:\kain2\game\FONT.C */
 
 void FONT_VaReallyPrint(char *fmt,void *ap)
 
@@ -896,42 +844,42 @@ void FONT_VaReallyPrint(char *fmt,void *ap)
       return;
     }
     if (bVar1 == 10) {
-      fontTracker.font_ypos = fontTracker.font_ypos + 0xc;
-      fontTracker.font_xpos = (uint)bVar1;
-LAB_8002dac0:
+      DAT_800d1cfc = DAT_800d1cfc + 0xc;
+      DAT_800d1cf8 = (uint)bVar1;
+LAB_8002d650:
       fmt = (char *)((byte *)fmt + 1);
     }
     else {
       if (bVar1 != 0x40) {
         if (bVar1 == 0x24) {
-          fontTracker.font_xpos = 10;
-          fontTracker.font_ypos = 0x10;
+          DAT_800d1cf8 = 10;
+          DAT_800d1cfc = 0x10;
         }
         else {
           if (bVar1 == 0xd) {
-            fontTracker.font_xpos = 10;
+            DAT_800d1cf8 = 10;
           }
           else {
             if (bVar1 == 9) {
-              fontTracker.font_xpos = fontTracker.font_xpos + 0x20;
+              DAT_800d1cf8 = DAT_800d1cf8 + 0x20;
             }
             else {
               if ((bVar1 == 0x20) || (bVar1 == 0x5f)) {
-                fontTracker.font_xpos = fontTracker.font_xpos + 8;
+                DAT_800d1cf8 = DAT_800d1cf8 + 8;
               }
               else {
-                FONT_AddCharToBuffer(*fmt,fontTracker.font_xpos,fontTracker.font_ypos);
+                FONT_AddCharToBuffer(*fmt,DAT_800d1cf8,DAT_800d1cfc);
                 lVar3 = FONT_CharSpacing(*fmt,8);
-                fontTracker.font_xpos = fontTracker.font_xpos + lVar3;
+                DAT_800d1cf8 = DAT_800d1cf8 + lVar3;
               }
             }
           }
         }
-        goto LAB_8002dac0;
+        goto LAB_8002d650;
       }
       bVar1 = ((byte *)fmt)[1];
       bVar2 = ((byte *)fmt)[2];
-      FONT_AddCharToBuffer('@',fontTracker.font_xpos,fontTracker.font_ypos);
+      FONT_AddCharToBuffer('@',DAT_800d1cf8,DAT_800d1cfc);
       FONT_AddCharToBuffer('@',(uint)bVar2 - 0x40 & 0xff,(uint)bVar1 - 0x40 & 0xff);
       fmt = (char *)((byte *)fmt + 3);
     }
@@ -944,11 +892,13 @@ LAB_8002dac0:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FONT_FontPrintCentered(char *text /*$s1*/, long y /*$s0*/)
- // line 1300, offset 0x8002db04
+ // line 1334, offset 0x8002d694
 	/* begin block 1 */
-		// Start line: 2460
+		// Start line: 2491
 	/* end block 1 */
-	// End Line: 2461
+	// End Line: 2492
+
+/* File: C:\kain2\game\FONT.C */
 
 void FONT_FontPrintCentered(char *text,long y)
 
@@ -957,7 +907,7 @@ void FONT_FontPrintCentered(char *text,long y)
   
   iVar1 = FONT_GetStringWidth(text);
   FONT_SetCursor((short)((uint)((0x100 - (iVar1 >> 1)) * 0x10000) >> 0x10),(short)y);
-  FONT_Print(text);
+  FONT_Print2(text);
   return;
 }
 
@@ -966,21 +916,23 @@ void FONT_FontPrintCentered(char *text,long y)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FONT_SetColorIndex(int color /*$a0*/)
- // line 1307, offset 0x8002db5c
+ // line 1341, offset 0x8002d6ec
 	/* begin block 1 */
-		// Start line: 2474
+		// Start line: 2505
 	/* end block 1 */
-	// End Line: 2475
+	// End Line: 2506
 
 	/* begin block 2 */
-		// Start line: 2476
+		// Start line: 2507
 	/* end block 2 */
-	// End Line: 2477
+	// End Line: 2508
+
+/* File: C:\kain2\game\FONT.C */
 
 void FONT_SetColorIndex(int color)
 
 {
-  fontTracker.color_global = (char)color;
+  DAT_800d1d14 = (char)color;
   return;
 }
 

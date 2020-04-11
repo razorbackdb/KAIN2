@@ -5,21 +5,23 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_FillOutFileNames(char *baseAreaName /*$s0*/, char *dramName /*$s1*/, char *vramName /*$s2*/, char *sfxName /*$s3*/)
- // line 155, offset 0x80059ad0
+ // line 161, offset 0x80058bd8
 	/* begin block 1 */
-		// Start line: 156
-		// Start offset: 0x80059AD0
+		// Start line: 162
+		// Start offset: 0x80058BD8
 		// Variables:
 	// 		char text[16]; // stack offset -40
 	// 		char *number; // $v0
 	/* end block 1 */
-	// End offset: 0x80059B74
-	// End Line: 180
+	// End offset: 0x80058C7C
+	// End Line: 186
 
 	/* begin block 2 */
-		// Start line: 310
+		// Start line: 322
 	/* end block 2 */
-	// End Line: 311
+	// End Line: 323
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_FillOutFileNames(char *baseAreaName,char *dramName,char *vramName,char *sfxName)
 
@@ -27,19 +29,19 @@ void STREAM_FillOutFileNames(char *baseAreaName,char *dramName,char *vramName,ch
   char *pcVar1;
   char acStack40 [16];
   
-  strcpy(acStack40,baseAreaName);
-  pcVar1 = strpbrk(acStack40,"0123456789");
+  strcpy();
+  pcVar1 = strpbrk(acStack40,s_0123456789_800d0528);
   if (pcVar1 != (char *)0x0) {
     *pcVar1 = '\0';
   }
   if (dramName != (char *)0x0) {
-    sprintf(dramName,"\\kain2\\area\\%s\\bin\\%s.drm");
+    sprintf(dramName,s__kain2_area__s_bin__s_drm_800d0534,acStack40,baseAreaName);
   }
   if (vramName != (char *)0x0) {
-    sprintf(vramName,"\\kain2\\area\\%s\\bin\\%s.crm");
+    sprintf(vramName,s__kain2_area__s_bin__s_crm_800d0550,acStack40,baseAreaName);
   }
   if (sfxName != (char *)0x0) {
-    sprintf(sfxName,"\\kain2\\area\\%s\\bin\\%s.snf");
+    sprintf(sfxName,s__kain2_area__s_bin__s_snf_800d056c,acStack40,baseAreaName);
   }
   return;
 }
@@ -49,20 +51,22 @@ void STREAM_FillOutFileNames(char *baseAreaName,char *dramName,char *vramName,ch
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_AbortAreaLoad(char *baseAreaName /*$a0*/)
- // line 185, offset 0x80059b90
+ // line 191, offset 0x80058c98
 	/* begin block 1 */
-		// Start line: 186
-		// Start offset: 0x80059B90
+		// Start line: 192
+		// Start offset: 0x80058C98
 		// Variables:
 	// 		char vramName[80]; // stack offset -88
 	/* end block 1 */
-	// End offset: 0x80059B90
-	// End Line: 186
+	// End offset: 0x80058C98
+	// End Line: 192
 
 	/* begin block 2 */
-		// Start line: 373
+		// Start line: 385
 	/* end block 2 */
-	// End Line: 374
+	// End Line: 386
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_AbortAreaLoad(char *baseAreaName)
 
@@ -70,7 +74,7 @@ void STREAM_AbortAreaLoad(char *baseAreaName)
   char acStack88 [80];
   
   STREAM_FillOutFileNames(baseAreaName,(char *)0x0,acStack88,(char *)0x0);
-  LOAD_AbortFileLoad(acStack88,VRAM_AbortLoad);
+  LOAD_AbortFileLoad(acStack88,VRAM_LoadReturn);
   return;
 }
 
@@ -79,32 +83,32 @@ void STREAM_AbortAreaLoad(char *baseAreaName)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_Init()
- // line 233, offset 0x80059bc8
+ // line 239, offset 0x80058cd0
 	/* begin block 1 */
-		// Start line: 235
-		// Start offset: 0x80059BC8
+		// Start line: 241
+		// Start offset: 0x80058CD0
 		// Variables:
 	// 		int i; // $v1
 	/* end block 1 */
-	// End offset: 0x80059BE4
-	// End Line: 241
+	// End offset: 0x80058CEC
+	// End Line: 247
 
 	/* begin block 2 */
-		// Start line: 472
+		// Start line: 484
 	/* end block 2 */
-	// End Line: 473
+	// End Line: 485
 
 	/* begin block 3 */
-		// Start line: 473
+		// Start line: 485
 	/* end block 3 */
-	// End Line: 474
+	// End Line: 486
 
 	/* begin block 4 */
-		// Start line: 475
+		// Start line: 487
 	/* end block 4 */
-	// End Line: 476
+	// End Line: 488
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_Init(void)
 
@@ -113,7 +117,7 @@ void STREAM_Init(void)
   int iVar2;
   
   iVar2 = 0xf;
-  iVar1 = -0x7ff2d1e8;
+  iVar1 = -0x7ff2d234;
   do {
     *(undefined2 *)(iVar1 + 4) = 0;
     iVar2 = iVar2 + -1;
@@ -127,34 +131,36 @@ void STREAM_Init(void)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ FindObjectName(char *name /*$s2*/)
- // line 243, offset 0x80059bec
+ // line 249, offset 0x80058cf4
 	/* begin block 1 */
-		// Start line: 244
-		// Start offset: 0x80059BEC
+		// Start line: 250
+		// Start offset: 0x80058CF4
 		// Variables:
 	// 		int i; // $s0
 	// 		struct _ObjectTracker *otr; // $s1
 	/* end block 1 */
-	// End offset: 0x80059C40
-	// End Line: 255
+	// End offset: 0x80058D48
+	// End Line: 261
 
 	/* begin block 2 */
-		// Start line: 494
+		// Start line: 506
 	/* end block 2 */
-	// End Line: 495
+	// End Line: 507
+
+/* File: C:\kain2\game\STREAM.C */
 
 int FindObjectName(char *name)
 
 {
   int iVar1;
   int iVar2;
-  _ObjectTracker *s1;
+  char *s1;
   
   iVar2 = 0;
-  s1 = gameTrackerX.GlobalObjects;
-  while ((s1->objectStatus == 0 || (iVar1 = strcmpi((char *)s1,name), iVar1 != 0))) {
+  s1 = DAT_800d2110;
+  while ((*(short *)(s1 + 0x14) == 0 || (iVar1 = strcmpi(s1,name), iVar1 != 0))) {
     iVar2 = iVar2 + 1;
-    s1 = s1 + 1;
+    s1 = s1 + 0x24;
     if (0x2f < iVar2) {
       return -1;
     }
@@ -167,31 +173,33 @@ int FindObjectName(char *name)
 // decompiled code
 // original method signature: 
 // struct _ObjectTracker * /*$ra*/ FindObjectInTracker(struct Object *object /*$a0*/)
- // line 257, offset 0x80059c58
+ // line 263, offset 0x80058d60
 	/* begin block 1 */
-		// Start line: 259
-		// Start offset: 0x80059C58
+		// Start line: 265
+		// Start offset: 0x80058D60
 		// Variables:
 	// 		int i; // $a2
 	// 		struct _ObjectTracker *otr; // $a1
 	/* end block 1 */
-	// End offset: 0x80059CA0
-	// End Line: 267
+	// End offset: 0x80058DA8
+	// End Line: 273
 
 	/* begin block 2 */
-		// Start line: 532
+		// Start line: 544
 	/* end block 2 */
-	// End Line: 533
+	// End Line: 545
 
 	/* begin block 3 */
-		// Start line: 533
+		// Start line: 545
 	/* end block 3 */
-	// End Line: 534
+	// End Line: 546
 
 	/* begin block 4 */
-		// Start line: 536
+		// Start line: 548
 	/* end block 4 */
-	// End Line: 537
+	// End Line: 549
+
+/* File: C:\kain2\game\STREAM.C */
 
 _ObjectTracker * FindObjectInTracker(Object *object)
 
@@ -201,8 +209,8 @@ _ObjectTracker * FindObjectInTracker(Object *object)
   int iVar3;
   
   iVar3 = 0;
-  ppOVar1 = &(gameTrackerX.GlobalObjects)->object;
-  p_Var2 = gameTrackerX.GlobalObjects;
+  ppOVar1 = &DAT_800d2110->object;
+  p_Var2 = DAT_800d2110;
   while ((*(short *)(ppOVar1 + 1) == 0 || (*ppOVar1 != object))) {
     iVar3 = iVar3 + 1;
     ppOVar1 = ppOVar1 + 9;
@@ -219,43 +227,45 @@ _ObjectTracker * FindObjectInTracker(Object *object)
 // decompiled code
 // original method signature: 
 // struct _StreamUnit * /*$ra*/ FindStreamUnitFromLevel(struct Level *level /*$a0*/)
- // line 285, offset 0x80059ca8
+ // line 291, offset 0x80058db0
 	/* begin block 1 */
-		// Start line: 287
-		// Start offset: 0x80059CA8
+		// Start line: 293
+		// Start offset: 0x80058DB0
 		// Variables:
 	// 		struct _StreamUnit *ret; // $a2
 	// 		long i; // $a1
 	/* end block 1 */
-	// End offset: 0x80059CF4
-	// End Line: 299
+	// End offset: 0x80058DFC
+	// End Line: 305
 
 	/* begin block 2 */
-		// Start line: 567
+		// Start line: 579
 	/* end block 2 */
-	// End Line: 568
+	// End Line: 580
 
 	/* begin block 3 */
-		// Start line: 572
+		// Start line: 584
 	/* end block 3 */
-	// End Line: 573
+	// End Line: 585
+
+/* File: C:\kain2\game\STREAM.C */
 
 _StreamUnit * FindStreamUnitFromLevel(Level *level)
 
 {
-  STracker *pSVar1;
+  _StreamUnit *p_Var1;
   int iVar2;
   
   iVar2 = 0;
-  pSVar1 = &StreamTracker;
-  while ((*(short *)pSVar1->StreamList != 2 || (*(Level **)pSVar1->StreamList != level))) {
+  p_Var1 = (_StreamUnit *)&StreamTracker;
+  while ((p_Var1->used != 2 || (p_Var1->level != level))) {
     iVar2 = iVar2 + 1;
-    pSVar1 = (STracker *)(pSVar1->StreamList + 1);
+    p_Var1 = p_Var1 + 1;
     if (0xf < iVar2) {
       return (_StreamUnit *)0x0;
     }
   }
-  return (_StreamUnit *)pSVar1;
+  return p_Var1;
 }
 
 
@@ -263,36 +273,38 @@ _StreamUnit * FindStreamUnitFromLevel(Level *level)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_LoadObjectReturn(void *loadData /*$s0*/, void *data /*$s1*/, void *data2 /*$a2*/)
- // line 355, offset 0x80059cfc
+ // line 361, offset 0x80058e04
 	/* begin block 1 */
-		// Start line: 356
-		// Start offset: 0x80059CFC
+		// Start line: 362
+		// Start offset: 0x80058E04
 		// Variables:
 	// 		struct Object *object; // $s0
 	// 		struct _ObjectTracker *objectTracker; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 394
-			// Start offset: 0x80059D88
+			// Start line: 400
+			// Start offset: 0x80058E90
 			// Variables:
 		// 		char objDsfxFileName[64]; // stack offset -80
 		/* end block 1.1 */
-		// End offset: 0x80059DD8
-		// End Line: 406
+		// End offset: 0x80058EC8
+		// End Line: 412
 	/* end block 1 */
-	// End offset: 0x80059DD8
-	// End Line: 407
+	// End offset: 0x80058EC8
+	// End Line: 413
 
 	/* begin block 2 */
-		// Start line: 716
+		// Start line: 728
 	/* end block 2 */
-	// End Line: 717
+	// End Line: 729
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_LoadObjectReturn(void *loadData,void *data,void *data2)
 
 {
-  ushort uVar1;
-  long lVar2;
+  long lVar1;
+  int iVar2;
   char acStack80 [64];
   
   GetRCnt(0xf2000000);
@@ -300,17 +312,16 @@ void STREAM_LoadObjectReturn(void *loadData,void *data,void *data2)
      (*(int *)((int)loadData + 0x40) != 0)) {
     RELMOD_InitModulePointers(*(int *)((int)loadData + 0x40),*(int **)((int)loadData + 0x3c));
   }
+  STREAM_PackVRAMObject((_ObjectTracker *)data);
   OBTABLE_InitAnimPointers((_ObjectTracker *)data);
   OBTABLE_InitObjectWithID((Object *)loadData);
-  STREAM_PackVRAMObject((_ObjectTracker *)data);
   if ((*(uint *)((int)loadData + 0x2c) & 0x800000) != 0) {
-    sprintf(acStack80,"\\kain2\\sfx\\object\\%s\\%s.snf");
+    sprintf(acStack80,s__kain2_sfx_object__s__s_snf_800d0588,data,data);
     *(undefined2 *)((int)loadData + 6) = 0;
-    lVar2 = LOAD_DoesFileExist(acStack80);
-    if (lVar2 != 0) {
-      uVar1 = aadLoadDynamicSfx(acStack80,0,(TDRFuncPtr_aadLoadDynamicSfx2userReturnProc)0x0);
-      *(ushort *)((int)loadData + 6) = uVar1;
-      GXFilePrint("Loading object %s sfx. Handle=%x\n");
+    lVar1 = LOAD_DoesFileExist(acStack80);
+    if (lVar1 != 0) {
+      iVar2 = aadLoadDynamicSfx((char *)data,0,0);
+      *(undefined2 *)((int)loadData + 6) = (short)iVar2;
     }
   }
   *(undefined2 *)((int)data + 0x14) = 2;
@@ -322,30 +333,32 @@ void STREAM_LoadObjectReturn(void *loadData,void *data,void *data2)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_DumpMonster(struct _ObjectTracker *dumpee /*$s2*/)
- // line 414, offset 0x80059df4
+ // line 420, offset 0x80058ee4
 	/* begin block 1 */
-		// Start line: 415
-		// Start offset: 0x80059DF4
+		// Start line: 421
+		// Start offset: 0x80058EE4
 		// Variables:
 	// 		struct Object *object; // $s1
 	// 		struct _Instance *instance; // $a1
 
 		/* begin block 1.1 */
-			// Start line: 435
-			// Start offset: 0x80059E74
+			// Start line: 441
+			// Start offset: 0x80058F60
 			// Variables:
 		// 		struct _Instance *next; // $s0
 		/* end block 1.1 */
-		// End offset: 0x80059E90
-		// End Line: 442
+		// End offset: 0x80058F7C
+		// End Line: 448
 	/* end block 1 */
-	// End offset: 0x80059E9C
-	// End Line: 445
+	// End offset: 0x80058F88
+	// End Line: 451
 
 	/* begin block 2 */
-		// Start line: 834
+		// Start line: 846
 	/* end block 2 */
-	// End Line: 835
+	// End Line: 847
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_DumpMonster(_ObjectTracker *dumpee)
 
@@ -359,14 +372,14 @@ void STREAM_DumpMonster(_ObjectTracker *dumpee)
     VRAM_ClearVramBlock((_BlockVramEntry *)dumpee->vramBlock);
   }
   OBTABLE_RemoveObjectEntry(object);
-  if (((object->oflags2 & 0x800000U) != 0) && (object->sfxFileHandle != 0)) {
-    aadFreeDynamicSfx(object->sfxFileHandle);
+  if (((object->oflags2 & 0x800000U) != 0) && ((int)object->sfxFileHandle != 0)) {
+    aadFreeDynamicSfx((int)object->sfxFileHandle);
   }
-  p_Var1 = (gameTrackerX.instanceList)->first;
+  p_Var1 = *(_Instance **)((int)DAT_800d2100 + 4);
   while (instance = p_Var1, instance != (_Instance *)0x0) {
     p_Var1 = instance->next;
     if (object == instance->object) {
-      INSTANCE_ReallyRemoveInstance(gameTrackerX.instanceList,instance,0);
+      INSTANCE_ReallyRemoveInstance(DAT_800d2100,instance,0);
     }
   }
   MEMPACK_Free((char *)object);
@@ -379,20 +392,22 @@ void STREAM_DumpMonster(_ObjectTracker *dumpee)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ STREAM_InList(char *name /*$s1*/, char **nameList /*$a1*/)
- // line 454, offset 0x80059ec0
+ // line 460, offset 0x80058fac
 	/* begin block 1 */
-		// Start line: 455
-		// Start offset: 0x80059EC0
+		// Start line: 461
+		// Start offset: 0x80058FAC
 		// Variables:
 	// 		char **mon; // $s0
 	/* end block 1 */
-	// End offset: 0x80059F14
-	// End Line: 463
+	// End offset: 0x80059000
+	// End Line: 469
 
 	/* begin block 2 */
-		// Start line: 929
+		// Start line: 941
 	/* end block 2 */
-	// End Line: 930
+	// End Line: 942
+
+/* File: C:\kain2\game\STREAM.C */
 
 int STREAM_InList(char *name,char **nameList)
 
@@ -418,27 +433,29 @@ int STREAM_InList(char *name,char **nameList)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ STREAM_IsSpecialMonster(char *name /*$a0*/)
- // line 465, offset 0x80059f28
+ // line 471, offset 0x80059014
 	/* begin block 1 */
-		// Start line: 466
-		// Start offset: 0x80059F28
+		// Start line: 472
+		// Start offset: 0x80059014
 		// Variables:
 	// 		static char (*mon[6]); // offset 0x0
 	/* end block 1 */
-	// End offset: 0x80059F28
-	// End Line: 466
+	// End offset: 0x80059014
+	// End Line: 472
 
 	/* begin block 2 */
-		// Start line: 953
+		// Start line: 965
 	/* end block 2 */
-	// End Line: 954
+	// End Line: 966
+
+/* File: C:\kain2\game\STREAM.C */
 
 int STREAM_IsSpecialMonster(char *name)
 
 {
   int iVar1;
   
-  iVar1 = STREAM_InList(name,&PTR_s_wallcr_800c5950);
+  iVar1 = STREAM_InList(name,&PTR_s_wallcr_800cb098);
   return iVar1;
 }
 
@@ -447,23 +464,23 @@ int STREAM_IsSpecialMonster(char *name)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_DumpSomeMonsters()
- // line 473, offset 0x80059f4c
+ // line 479, offset 0x80059038
 	/* begin block 1 */
-		// Start line: 474
-		// Start offset: 0x80059F4C
+		// Start line: 480
+		// Start offset: 0x80059038
 		// Variables:
 	// 		struct _ObjectTracker *otr; // $s0
 	// 		int i; // $s2
 	/* end block 1 */
-	// End offset: 0x80059FD4
-	// End Line: 489
+	// End offset: 0x800590C0
+	// End Line: 495
 
 	/* begin block 2 */
-		// Start line: 973
+		// Start line: 985
 	/* end block 2 */
-	// End Line: 974
+	// End Line: 986
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_DumpSomeMonsters(void)
 
@@ -474,12 +491,12 @@ void STREAM_DumpSomeMonsters(void)
   int iVar3;
   
   iVar3 = 0;
-  ppOVar2 = &(gameTrackerX.GlobalObjects)->object;
-  dumpee = gameTrackerX.GlobalObjects;
+  ppOVar2 = &DAT_800d2110->object;
+  dumpee = DAT_800d2110;
   do {
     if (((*(short *)(ppOVar2 + 1) == 2) && (*ppOVar2 != (Object *)0x0)) &&
        (iVar1 = STREAM_IsSpecialMonster((char *)dumpee), iVar1 != 0)) {
-      printf("NO INTRODUCE MONSTER FLAG: Dumping monster %s\n");
+      printf(s_NO_INTRODUCE_MONSTER_FLAG__Dumpi_800d05cc,dumpee);
       STREAM_DumpMonster(dumpee);
     }
     iVar3 = iVar3 + 1;
@@ -494,18 +511,18 @@ void STREAM_DumpSomeMonsters(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_NoMonsters()
- // line 490, offset 0x80059ff4
+ // line 496, offset 0x800590e0
 	/* begin block 1 */
-		// Start line: 1030
+		// Start line: 1042
 	/* end block 1 */
-	// End Line: 1031
+	// End Line: 1043
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_NoMonsters(void)
 
 {
-  gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x4000000;
+  DAT_800d220c = DAT_800d220c | 0x4000000;
   STREAM_DumpSomeMonsters();
   return;
 }
@@ -515,23 +532,23 @@ void STREAM_NoMonsters(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_YesMonsters()
- // line 496, offset 0x8005a024
+ // line 502, offset 0x80059110
 	/* begin block 1 */
-		// Start line: 1044
+		// Start line: 1056
 	/* end block 1 */
-	// End Line: 1045
+	// End Line: 1057
 
 	/* begin block 2 */
-		// Start line: 1046
+		// Start line: 1058
 	/* end block 2 */
-	// End Line: 1047
+	// End Line: 1059
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_YesMonsters(void)
 
 {
-  gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xfbffffff;
+  DAT_800d220c = DAT_800d220c & 0xfbffffff;
   return;
 }
 
@@ -540,27 +557,29 @@ void STREAM_YesMonsters(void)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ STREAM_IsMonster(char *name /*$a0*/)
- // line 503, offset 0x8005a040
+ // line 509, offset 0x8005912c
 	/* begin block 1 */
-		// Start line: 504
-		// Start offset: 0x8005A040
+		// Start line: 510
+		// Start offset: 0x8005912C
 		// Variables:
 	// 		static char (*monnames[19]); // offset 0x18
 	/* end block 1 */
-	// End offset: 0x8005A040
-	// End Line: 504
+	// End offset: 0x8005912C
+	// End Line: 510
 
 	/* begin block 2 */
-		// Start line: 1058
+		// Start line: 1070
 	/* end block 2 */
-	// End Line: 1059
+	// End Line: 1071
+
+/* File: C:\kain2\game\STREAM.C */
 
 int STREAM_IsMonster(char *name)
 
 {
   int iVar1;
   
-  iVar1 = STREAM_InList(name,&PTR_s_skinner_800c5968);
+  iVar1 = STREAM_InList(name,&PTR_s_skinner_800cb0b0);
   return iVar1;
 }
 
@@ -568,136 +587,78 @@ int STREAM_IsMonster(char *name)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ STREAM_DumpAMonster(int needed /*$s6*/)
- // line 512, offset 0x8005a064
-	/* begin block 1 */
-		// Start line: 513
-		// Start offset: 0x8005A064
-
-		/* begin block 1.1 */
-			// Start line: 516
-			// Start offset: 0x8005A0A8
-			// Variables:
-		// 		struct _ObjectTracker *dumpee; // $s4
-		// 		struct _ObjectTracker *otr; // $s1
-		// 		int biggest; // $s3
-		// 		int i; // $s2
-		/* end block 1.1 */
-		// End offset: 0x8005A12C
-		// End Line: 536
-	/* end block 1 */
-	// End offset: 0x8005A148
-	// End Line: 542
-
-	/* begin block 2 */
-		// Start line: 1081
-	/* end block 2 */
-	// End Line: 1082
-
-void STREAM_DumpAMonster(int needed)
-
-{
-  int iVar1;
-  int iVar2;
-  ulong uVar3;
-  _ObjectTracker *p_Var4;
-  _ObjectTracker *name;
-  ulong uVar5;
-  _ObjectTracker *dumpee;
-  
-  while( true ) {
-    iVar1 = MEMPACK_AvailableMemory();
-    dumpee = (_ObjectTracker *)0x0;
-    if (needed + 0x2000 <= iVar1) break;
-    uVar5 = 0;
-    iVar1 = 0;
-    p_Var4 = gameTrackerX.GlobalObjects;
-    name = gameTrackerX.GlobalObjects;
-    do {
-      if ((((p_Var4->objectStatus == 2) && (p_Var4->object != (Object *)0x0)) &&
-          (iVar2 = STREAM_IsMonster((char *)name), iVar2 != 0)) &&
-         (uVar3 = MEMPACK_Size((char *)p_Var4->object), uVar5 < uVar3)) {
-        uVar5 = MEMPACK_Size((char *)p_Var4->object);
-        dumpee = p_Var4;
-      }
-      iVar1 = iVar1 + 1;
-      p_Var4 = p_Var4 + 1;
-      name = name + 1;
-    } while (iVar1 < 0x30);
-    if (dumpee == (_ObjectTracker *)0x0) break;
-    printf("LOW MEMORY: Dumping monster %s\n");
-    STREAM_DumpMonster(dumpee);
-  }
-  MEMPACK_DoGarbageCollection();
-  return;
-}
-
-
-
-// decompiled code
-// original method signature: 
 // int /*$ra*/ InsertGlobalObject(char *name /*$s2*/, struct GameTracker *gameTracker /*$s3*/)
- // line 546, offset 0x8005a178
+ // line 552, offset 0x80059150
 	/* begin block 1 */
-		// Start line: 547
-		// Start offset: 0x8005A178
+		// Start line: 553
+		// Start offset: 0x80059150
 		// Variables:
 	// 		char string[64]; // stack offset -152
 	// 		char vramname[64]; // stack offset -88
 	// 		int i; // $s1
 	// 		struct _ObjectTracker *otr; // $s0
 	/* end block 1 */
-	// End offset: 0x8005A2E0
-	// End Line: 627
+	// End offset: 0x800592EC
+	// End Line: 652
 
 	/* begin block 2 */
-		// Start line: 1158
+		// Start line: 1100
 	/* end block 2 */
-	// End Line: 1159
+	// End Line: 1101
+
+/* File: C:\kain2\game\STREAM.C */
 
 int InsertGlobalObject(char *name,GameTracker *gameTracker)
 
 {
   int iVar1;
   int iVar2;
-  _ObjectTracker *retData;
+  _ObjectTracker *otr;
   char acStack152 [64];
   char acStack88 [64];
   
-  if (((gameTrackerX.gameFlags & 0x4000000U) != 0) &&
-     (iVar1 = STREAM_IsSpecialMonster(name), iVar1 != 0)) {
+  if (((DAT_800d220c & 0x4000000) != 0) && (iVar1 = STREAM_IsSpecialMonster(name), iVar1 != 0)) {
     return -1;
   }
   if (((gameTracker->debugFlags2 & 0x8000U) != 0) && (iVar1 = STREAM_IsMonster(name), iVar1 != 0)) {
     return -1;
   }
-  retData = gameTracker->GlobalObjects;
+  otr = gameTracker->GlobalObjects;
   iVar1 = 0;
   do {
-    if ((retData->objectStatus != 0) && (iVar2 = strcmpi((char *)retData,name), iVar2 == 0)) break;
+    if ((otr->objectStatus != 0) && (iVar2 = strcmpi((char *)otr,name), iVar2 == 0)) break;
     iVar1 = iVar1 + 1;
-    retData = retData + 1;
+    otr = otr + 1;
   } while (iVar1 < 0x30);
   if (iVar1 == 0x30) {
-    retData = gameTracker->GlobalObjects;
+    otr = gameTracker->GlobalObjects;
     iVar1 = 0;
     do {
-      if (retData->objectStatus == 0) break;
+      if (otr->objectStatus == 0) break;
       iVar1 = iVar1 + 1;
-      retData = retData + 1;
+      otr = otr + 1;
     } while (iVar1 < 0x30);
     if (iVar1 == 0x30) {
-      DEBUG_FatalError("The Object tracker is full MAX_OBJECTS=%d.\n");
-      iVar1 = -1;
+      otr = gameTracker->GlobalObjects;
+      iVar1 = 0;
+      do {
+        iVar2 = STREAM_TryAndDumpNonResident(otr);
+        if (iVar2 != 0) break;
+        iVar1 = iVar1 + 1;
+        otr = otr + 1;
+      } while (iVar1 < 0x30);
+      if (iVar1 == 0x30) {
+        DEBUG_FatalError(s_The_Object_tracker_is_full_MAX_O_800d068c);
+        iVar1 = -1;
+      }
     }
-    sprintf(acStack152,"\\kain2\\object\\%s\\%s.drm");
-    sprintf(acStack88,"\\kain2\\object\\%s\\%s.crm");
-    strcpy((char *)retData,name);
-    retData->objectStatus = 1;
-    LOAD_NonBlockingBinaryLoad
-              (acStack152,STREAM_LoadObjectReturn,retData,(void *)0x0,&retData->object,1);
-    retData->numInUse = 0;
-    retData->numObjectsUsing = '\0';
+    sprintf(acStack152,s__kain2_object__s__s_drm_800d06b8,name,name);
+    sprintf(acStack88,s__kain2_object__s__s_crm_800d06d0,name,name);
+    strcpy();
+    otr->objectStatus = 1;
+    LOAD_NonBlockingBinaryLoad(acStack152,STREAM_LoadObjectReturn,otr,(void *)0x0,&otr->object,1);
+    otr->numInUse = 0;
+    otr->numObjectsUsing = '\0';
   }
   return iVar1;
 }
@@ -707,20 +668,22 @@ int InsertGlobalObject(char *name,GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // struct _ObjectTracker * /*$ra*/ STREAM_GetObjectTracker(char *name /*$a0*/)
- // line 638, offset 0x8005a300
+ // line 663, offset 0x8005930c
 	/* begin block 1 */
-		// Start line: 639
-		// Start offset: 0x8005A300
+		// Start line: 664
+		// Start offset: 0x8005930C
 		// Variables:
 	// 		int i; // $v1
 	/* end block 1 */
-	// End offset: 0x8005A340
-	// End Line: 644
+	// End offset: 0x8005934C
+	// End Line: 669
 
 	/* begin block 2 */
-		// Start line: 1273
+		// Start line: 1323
 	/* end block 2 */
-	// End Line: 1274
+	// End Line: 1324
+
+/* File: C:\kain2\game\STREAM.C */
 
 _ObjectTracker * STREAM_GetObjectTracker(char *name)
 
@@ -728,12 +691,12 @@ _ObjectTracker * STREAM_GetObjectTracker(char *name)
   int iVar1;
   _ObjectTracker *p_Var2;
   
-  iVar1 = InsertGlobalObject(name,&gameTrackerX);
+  iVar1 = InsertGlobalObject(name,(GameTracker *)&gameTrackerX);
   if (iVar1 == -1) {
     p_Var2 = (_ObjectTracker *)0x0;
   }
   else {
-    p_Var2 = gameTrackerX.GlobalObjects + iVar1;
+    p_Var2 = (_ObjectTracker *)(DAT_800d2110 + iVar1 * 0x24);
   }
   return p_Var2;
 }
@@ -743,29 +706,31 @@ _ObjectTracker * STREAM_GetObjectTracker(char *name)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LoadLevelObjects(struct Level *level /*$s2*/, struct GameTracker *gameTracker /*$s3*/)
- // line 646, offset 0x8005a350
+ // line 671, offset 0x8005935c
 	/* begin block 1 */
-		// Start line: 647
-		// Start offset: 0x8005A350
+		// Start line: 672
+		// Start offset: 0x8005935C
 		// Variables:
 	// 		unsigned char *objlist; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 659
-			// Start offset: 0x8005A3A8
+			// Start line: 684
+			// Start offset: 0x800593B4
 			// Variables:
 		// 		int i; // $s1
 		/* end block 1.1 */
-		// End offset: 0x8005A424
-		// End Line: 677
+		// End offset: 0x80059430
+		// End Line: 702
 	/* end block 1 */
-	// End offset: 0x8005A424
-	// End Line: 678
+	// End offset: 0x80059430
+	// End Line: 703
 
 	/* begin block 2 */
-		// Start line: 1367
+		// Start line: 1374
 	/* end block 2 */
-	// End Line: 1368
+	// End Line: 1375
+
+/* File: C:\kain2\game\STREAM.C */
 
 void LoadLevelObjects(Level *level,GameTracker *gameTracker)
 
@@ -808,41 +773,43 @@ void LoadLevelObjects(Level *level,GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ STREAM_IsAnInstanceUsingObject(struct Object *object /*$a0*/)
- // line 681, offset 0x8005a440
+ // line 706, offset 0x8005944c
 	/* begin block 1 */
-		// Start line: 683
-		// Start offset: 0x8005A440
+		// Start line: 708
+		// Start offset: 0x8005944C
 		// Variables:
 	// 		struct _Instance *instance; // $v1
 	// 		struct _Instance *next; // $v1
 	// 		long ret; // $a1
 	/* end block 1 */
-	// End offset: 0x8005A478
-	// End Line: 699
+	// End offset: 0x80059484
+	// End Line: 724
 
 	/* begin block 2 */
-		// Start line: 1452
+		// Start line: 1459
 	/* end block 2 */
-	// End Line: 1453
+	// End Line: 1460
 
 	/* begin block 3 */
-		// Start line: 1453
+		// Start line: 1460
 	/* end block 3 */
-	// End Line: 1454
+	// End Line: 1461
+
+/* File: C:\kain2\game\STREAM.C */
 
 long STREAM_IsAnInstanceUsingObject(Object *object)
 
 {
   Object **ppOVar1;
-  _Instance *p_Var2;
+  int iVar2;
   
-  p_Var2 = (gameTrackerX.instanceList)->first;
+  iVar2 = *(int *)(DAT_800d2100 + 4);
   do {
-    if (p_Var2 == (_Instance *)0x0) {
+    if (iVar2 == 0) {
       return 0;
     }
-    ppOVar1 = &p_Var2->object;
-    p_Var2 = p_Var2->next;
+    ppOVar1 = (Object **)(iVar2 + 0x1c);
+    iVar2 = *(int *)(iVar2 + 8);
   } while (*ppOVar1 != object);
   return 1;
 }
@@ -852,20 +819,22 @@ long STREAM_IsAnInstanceUsingObject(Object *object)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_StreamLoadObjectAbort(void *loadData /*$a0*/, void *data /*$a1*/, void *data2 /*$a2*/)
- // line 702, offset 0x8005a480
+ // line 727, offset 0x8005948c
 	/* begin block 1 */
-		// Start line: 703
-		// Start offset: 0x8005A480
+		// Start line: 728
+		// Start offset: 0x8005948C
 		// Variables:
 	// 		struct _ObjectTracker *objectTracker; // $s0
 	/* end block 1 */
-	// End offset: 0x8005A49C
-	// End Line: 707
+	// End offset: 0x800594A8
+	// End Line: 732
 
 	/* begin block 2 */
-		// Start line: 1496
+		// Start line: 1503
 	/* end block 2 */
-	// End Line: 1497
+	// End Line: 1504
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_StreamLoadObjectAbort(void *loadData,void *data,void *data2)
 
@@ -882,29 +851,31 @@ void STREAM_StreamLoadObjectAbort(void *loadData,void *data,void *data2)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_DumpObject(struct _ObjectTracker *objectTracker /*$s1*/)
- // line 713, offset 0x8005a4b0
+ // line 738, offset 0x800594bc
 	/* begin block 1 */
-		// Start line: 714
-		// Start offset: 0x8005A4B0
+		// Start line: 739
+		// Start offset: 0x800594BC
 		// Variables:
 	// 		struct Object *object; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 721
-			// Start offset: 0x8005A4D8
+			// Start line: 745
+			// Start offset: 0x800594E4
 			// Variables:
 		// 		char dramName[64]; // stack offset -80
 		/* end block 1.1 */
-		// End offset: 0x8005A504
-		// End Line: 725
+		// End offset: 0x80059510
+		// End Line: 749
 	/* end block 1 */
-	// End offset: 0x8005A588
-	// End Line: 757
+	// End offset: 0x80059590
+	// End Line: 782
 
 	/* begin block 2 */
-		// Start line: 1519
+		// Start line: 1526
 	/* end block 2 */
-	// End Line: 1520
+	// End Line: 1527
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_DumpObject(_ObjectTracker *objectTracker)
 
@@ -914,7 +885,7 @@ void STREAM_DumpObject(_ObjectTracker *objectTracker)
   
   object = objectTracker->object;
   if (objectTracker->objectStatus == 1) {
-    sprintf(acStack80,"\\kain2\\object\\%s\\%s.drm");
+    sprintf(acStack80,s__kain2_object__s__s_drm_800d06b8,objectTracker,objectTracker);
     LOAD_AbortFileLoad(acStack80,STREAM_StreamLoadObjectAbort);
   }
   else {
@@ -923,8 +894,8 @@ void STREAM_DumpObject(_ObjectTracker *objectTracker)
         if ((_BlockVramEntry *)objectTracker->vramBlock != (_BlockVramEntry *)0x0) {
           VRAM_ClearVramBlock((_BlockVramEntry *)objectTracker->vramBlock);
         }
-        if (((object->oflags2 & 0x800000U) != 0) && (object->sfxFileHandle != 0)) {
-          aadFreeDynamicSfx(object->sfxFileHandle);
+        if (((object->oflags2 & 0x800000U) != 0) && ((int)object->sfxFileHandle != 0)) {
+          aadFreeDynamicSfx((int)object->sfxFileHandle);
         }
         OBTABLE_RemoveObjectEntry(object);
         MEMPACK_Free((char *)object);
@@ -944,29 +915,31 @@ void STREAM_DumpObject(_ObjectTracker *objectTracker)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ STREAM_IsObjectInAnyUnit(struct _ObjectTracker *tracker /*$s3*/)
- // line 760, offset 0x8005a59c
+ // line 785, offset 0x800595a4
 	/* begin block 1 */
-		// Start line: 761
-		// Start offset: 0x8005A59C
+		// Start line: 786
+		// Start offset: 0x800595A4
 		// Variables:
 	// 		int d; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 768
-			// Start offset: 0x8005A5EC
+			// Start line: 793
+			// Start offset: 0x800595F4
 			// Variables:
 		// 		unsigned char *objlist; // $s0
 		/* end block 1.1 */
-		// End offset: 0x8005A630
-		// End Line: 778
+		// End offset: 0x80059638
+		// End Line: 803
 	/* end block 1 */
-	// End offset: 0x8005A644
-	// End Line: 781
+	// End offset: 0x8005964C
+	// End Line: 806
 
 	/* begin block 2 */
-		// Start line: 1622
+		// Start line: 1627
 	/* end block 2 */
-	// End Line: 1623
+	// End Line: 1628
+
+/* File: C:\kain2\game\STREAM.C */
 
 int STREAM_IsObjectInAnyUnit(_ObjectTracker *tracker)
 
@@ -979,9 +952,9 @@ int STREAM_IsObjectInAnyUnit(_ObjectTracker *tracker)
   iVar3 = 0;
   iVar2 = 0;
   do {
-    if ((*(short *)((int)&StreamTracker.StreamList[0].used + iVar2) == 2) &&
-       (iVar2 = *(int *)((int)&StreamTracker.StreamList[0].level + iVar2), iVar2 != 0)) {
-      s2 = *(char **)(iVar2 + 0x8c);
+    if ((*(short *)((int)&DAT_800d2a10 + iVar2) == 2) && (*(int *)((int)&DAT_800d2a14 + iVar2) != 0)
+       ) {
+      s2 = *(char **)(*(int *)((int)&DAT_800d2a14 + iVar2) + 0x8c);
       cVar1 = *s2;
       while (cVar1 != -1) {
         iVar2 = strcmpi((char *)tracker,s2);
@@ -1003,10 +976,10 @@ int STREAM_IsObjectInAnyUnit(_ObjectTracker *tracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_RemoveAllObjectsNotInUse(struct GameTracker *gameTracker /*$a0*/)
- // line 783, offset 0x8005a660
+ // line 808, offset 0x80059668
 	/* begin block 1 */
-		// Start line: 784
-		// Start offset: 0x8005A660
+		// Start line: 809
+		// Start offset: 0x80059668
 		// Variables:
 	// 		int i; // $s3
 	// 		int abort; // $a3
@@ -1014,58 +987,60 @@ int STREAM_IsObjectInAnyUnit(_ObjectTracker *tracker)
 	// 		struct _ObjectTracker *trackerList; // $s4
 
 		/* begin block 1.1 */
-			// Start line: 793
-			// Start offset: 0x8005A6AC
+			// Start line: 818
+			// Start offset: 0x800596B4
 			// Variables:
 		// 		struct Object *object; // $s2
 		/* end block 1.1 */
-		// End offset: 0x8005A6EC
-		// End Line: 808
+		// End offset: 0x800596F4
+		// End Line: 833
 
 		/* begin block 1.2 */
-			// Start line: 816
-			// Start offset: 0x8005A728
+			// Start line: 841
+			// Start offset: 0x80059730
 			// Variables:
 		// 		int j; // $a0
 		/* end block 1.2 */
-		// End offset: 0x8005A784
-		// End Line: 829
+		// End offset: 0x8005978C
+		// End Line: 854
 
 		/* begin block 1.3 */
-			// Start line: 837
-			// Start offset: 0x8005A7B8
+			// Start line: 862
+			// Start offset: 0x800597C0
 			// Variables:
 		// 		int j; // $t0
 		// 		struct _ObjectTracker *otr; // $a3
 
 			/* begin block 1.3.1 */
-				// Start line: 841
-				// Start offset: 0x8005A7D8
+				// Start line: 866
+				// Start offset: 0x800597E0
 				// Variables:
 			// 		int k; // $a0
 
 				/* begin block 1.3.1.1 */
-					// Start line: 848
-					// Start offset: 0x8005A7FC
+					// Start line: 873
+					// Start offset: 0x80059804
 					// Variables:
 				// 		int l; // $a1
 				/* end block 1.3.1.1 */
-				// End offset: 0x8005A848
-				// End Line: 855
+				// End offset: 0x80059850
+				// End Line: 880
 			/* end block 1.3.1 */
-			// End offset: 0x8005A860
-			// End Line: 857
+			// End offset: 0x80059868
+			// End Line: 882
 		/* end block 1.3 */
-		// End offset: 0x8005A87C
-		// End Line: 860
+		// End offset: 0x80059884
+		// End Line: 885
 	/* end block 1 */
-	// End offset: 0x8005A8E8
-	// End Line: 878
+	// End offset: 0x800598F0
+	// End Line: 903
 
 	/* begin block 2 */
-		// Start line: 1685
+		// Start line: 1690
 	/* end block 2 */
-	// End Line: 1686
+	// End Line: 1691
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_RemoveAllObjectsNotInUse(GameTracker *gameTracker)
 
@@ -1186,21 +1161,23 @@ void STREAM_RemoveAllObjectsNotInUse(GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ RemoveAllObjects(struct GameTracker *gameTracker /*$a0*/)
- // line 881, offset 0x8005a910
+ // line 906, offset 0x80059918
 	/* begin block 1 */
-		// Start line: 882
-		// Start offset: 0x8005A910
+		// Start line: 907
+		// Start offset: 0x80059918
 		// Variables:
 	// 		int i; // $s1
 	// 		struct _ObjectTracker *tracker; // $s0
 	/* end block 1 */
-	// End offset: 0x8005A954
-	// End Line: 892
+	// End offset: 0x8005995C
+	// End Line: 917
 
 	/* begin block 2 */
-		// Start line: 1999
+		// Start line: 2004
 	/* end block 2 */
-	// End Line: 2000
+	// End Line: 2005
+
+/* File: C:\kain2\game\STREAM.C */
 
 void RemoveAllObjects(GameTracker *gameTracker)
 
@@ -1225,43 +1202,45 @@ void RemoveAllObjects(GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // struct Level * /*$ra*/ STREAM_GetLevelWithID(long id /*$a0*/)
- // line 897, offset 0x8005a968
+ // line 922, offset 0x80059970
 	/* begin block 1 */
-		// Start line: 899
-		// Start offset: 0x8005A968
+		// Start line: 924
+		// Start offset: 0x80059970
 		// Variables:
 	// 		struct Level *retLevel; // $a2
 	// 		long i; // $a1
 	/* end block 1 */
-	// End offset: 0x8005A9B8
-	// End Line: 913
+	// End offset: 0x800599C0
+	// End Line: 938
 
 	/* begin block 2 */
-		// Start line: 2039
+		// Start line: 2044
 	/* end block 2 */
-	// End Line: 2040
+	// End Line: 2045
 
 	/* begin block 3 */
-		// Start line: 2040
+		// Start line: 2045
 	/* end block 3 */
-	// End Line: 2041
+	// End Line: 2046
+
+/* File: C:\kain2\game\STREAM.C */
 
 Level * STREAM_GetLevelWithID(long id)
 
 {
-  STracker *pSVar1;
+  int *piVar1;
   int iVar2;
   
   iVar2 = 0;
-  pSVar1 = &StreamTracker;
-  while ((pSVar1->StreamList[0].used != 2 || (pSVar1->StreamList[0].StreamUnitID != id))) {
+  piVar1 = &StreamTracker;
+  while ((*(short *)(piVar1 + 1) != 2 || (*piVar1 != id))) {
     iVar2 = iVar2 + 1;
-    pSVar1 = (STracker *)(pSVar1->StreamList + 1);
+    piVar1 = piVar1 + 0x10;
     if (0xf < iVar2) {
       return (Level *)0x0;
     }
   }
-  return pSVar1->StreamList[0].level;
+  return (Level *)piVar1[2];
 }
 
 
@@ -1269,43 +1248,45 @@ Level * STREAM_GetLevelWithID(long id)
 // decompiled code
 // original method signature: 
 // struct _StreamUnit * /*$ra*/ STREAM_GetStreamUnitWithID(long id /*$a0*/)
- // line 916, offset 0x8005a9c4
+ // line 941, offset 0x800599cc
 	/* begin block 1 */
-		// Start line: 918
-		// Start offset: 0x8005A9C4
+		// Start line: 943
+		// Start offset: 0x800599CC
 		// Variables:
 	// 		struct _StreamUnit *retUnit; // $a2
 	// 		long i; // $a1
 	/* end block 1 */
-	// End offset: 0x8005AA10
-	// End Line: 930
+	// End offset: 0x80059A18
+	// End Line: 955
 
 	/* begin block 2 */
-		// Start line: 2084
+		// Start line: 2089
 	/* end block 2 */
-	// End Line: 2085
+	// End Line: 2090
 
 	/* begin block 3 */
-		// Start line: 2085
+		// Start line: 2090
 	/* end block 3 */
-	// End Line: 2086
+	// End Line: 2091
+
+/* File: C:\kain2\game\STREAM.C */
 
 _StreamUnit * STREAM_GetStreamUnitWithID(long id)
 
 {
-  STracker *pSVar1;
+  _StreamUnit *p_Var1;
   int iVar2;
   
   iVar2 = 0;
-  pSVar1 = &StreamTracker;
-  while ((*(short *)pSVar1->StreamList != 2 || (pSVar1->StreamList[0].StreamUnitID != id))) {
+  p_Var1 = (_StreamUnit *)&StreamTracker;
+  while ((p_Var1->used != 2 || (p_Var1->StreamUnitID != id))) {
     iVar2 = iVar2 + 1;
-    pSVar1 = (STracker *)(pSVar1->StreamList + 1);
+    p_Var1 = p_Var1 + 1;
     if (0xf < iVar2) {
       return (_StreamUnit *)0x0;
     }
   }
-  return (_StreamUnit *)pSVar1;
+  return p_Var1;
 }
 
 
@@ -1313,23 +1294,25 @@ _StreamUnit * STREAM_GetStreamUnitWithID(long id)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_CalculateWaterLevel(struct Level *level /*$t3*/)
- // line 933, offset 0x8005aa18
+ // line 958, offset 0x80059a20
 	/* begin block 1 */
-		// Start line: 934
-		// Start offset: 0x8005AA18
+		// Start line: 959
+		// Start offset: 0x80059A20
 		// Variables:
 	// 		struct _Terrain *terrain; // $t2
 	// 		int i; // $t0
 	// 		struct _TFace *tface; // $a3
 	// 		long waterZLevel; // $t1
 	/* end block 1 */
-	// End offset: 0x8005AB40
-	// End Line: 987
+	// End offset: 0x80059B48
+	// End Line: 1012
 
 	/* begin block 2 */
-		// Start line: 2124
+		// Start line: 2129
 	/* end block 2 */
-	// End Line: 2125
+	// End Line: 2130
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_CalculateWaterLevel(Level *level)
 
@@ -1359,7 +1342,7 @@ void STREAM_CalculateWaterLevel(Level *level)
         iVar7 = iVar6;
         if ((*(byte *)(puVar3 + 1) & 8) != 0) {
           p_Var2 = p_Var8->vertexList;
-          iVar1 = (int)p_Var2[(p_Var4->face)._2].vertex.z;
+          iVar1 = (int)p_Var2[(p_Var4->face).v0].vertex.z;
           if ((((iVar1 == (int)p_Var2[puVar3[-1]].vertex.z) &&
                (iVar1 == (int)p_Var2[*puVar3].vertex.z)) && (iVar7 = iVar1, iVar6 != -0x7fff)) &&
              (iVar7 = iVar6, iVar6 != iVar1)) break;
@@ -1374,7 +1357,7 @@ void STREAM_CalculateWaterLevel(Level *level)
       level->waterZLevel = -0x7fff;
       return;
     }
-    level->waterZLevel = iVar7 + *(short *)(level->terrain->signals->signalList[0].data + 4);
+    level->waterZLevel = iVar7 + (level->terrain->BSPTreeArray->globalOffset).z;
   }
   return;
 }
@@ -1384,23 +1367,23 @@ void STREAM_CalculateWaterLevel(Level *level)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ STREAM_IsMorphInProgress()
- // line 992, offset 0x8005ab48
+ // line 1017, offset 0x80059b50
 	/* begin block 1 */
-		// Start line: 2258
+		// Start line: 2263
 	/* end block 1 */
-	// End Line: 2259
+	// End Line: 2264
 
 	/* begin block 2 */
-		// Start line: 2259
+		// Start line: 2264
 	/* end block 2 */
-	// End Line: 2260
+	// End Line: 2265
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\STREAM.C */
 
 int STREAM_IsMorphInProgress(void)
 
 {
-  return (uint)(gameTrackerX.gameData.asmData.MorphTime != 1000);
+  return (uint)(DAT_800d20d4 != 1000);
 }
 
 
@@ -1408,37 +1391,38 @@ int STREAM_IsMorphInProgress(void)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ STREAM_GetWaterZLevel(struct Level *level /*$a0*/, struct _Instance *instance /*$a1*/)
- // line 998, offset 0x8005ab5c
+ // line 1023, offset 0x80059b64
 	/* begin block 1 */
-		// Start line: 1000
-		// Start offset: 0x8005AB5C
+		// Start line: 1025
+		// Start offset: 0x80059B64
 		// Variables:
 	// 		long waterZLevel; // $a1
 	/* end block 1 */
-	// End offset: 0x8005ABD4
-	// End Line: 1025
+	// End offset: 0x80059BDC
+	// End Line: 1050
 
 	/* begin block 2 */
-		// Start line: 2270
+		// Start line: 2275
 	/* end block 2 */
-	// End Line: 2271
+	// End Line: 2276
 
 	/* begin block 3 */
-		// Start line: 2271
+		// Start line: 2276
 	/* end block 3 */
-	// End Line: 2272
+	// End Line: 2277
 
 	/* begin block 4 */
-		// Start line: 2273
+		// Start line: 2278
 	/* end block 4 */
-	// End Line: 2274
+	// End Line: 2279
+
+/* File: C:\kain2\game\STREAM.C */
 
 long STREAM_GetWaterZLevel(Level *level,_Instance *instance)
 
 {
   if ((instance->flags2 & 0x8000000U) == 0) {
-    if (((instance->object->oflags2 & 0x2000000U) == 0) &&
-       (gameTrackerX.gameData.asmData.MorphTime != 1000)) {
+    if (((instance->object->oflags2 & 0x2000000U) == 0) && (DAT_800d20d4 != 1000)) {
       return -0x7fff;
     }
   }
@@ -1446,7 +1430,7 @@ long STREAM_GetWaterZLevel(Level *level,_Instance *instance)
     if ((instance->object->oflags2 & 0x2000000U) != 0) {
       return -0x7fff;
     }
-    if (gameTrackerX.gameData.asmData.MorphTime == 1000) {
+    if (DAT_800d20d4 == 1000) {
       return -0x7fff;
     }
   }
@@ -1458,30 +1442,32 @@ long STREAM_GetWaterZLevel(Level *level,_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_SetMainFog(struct _StreamUnit *streamUnit /*$a0*/)
- // line 1028, offset 0x8005abdc
+ // line 1053, offset 0x80059be4
 	/* begin block 1 */
-		// Start line: 1030
-		// Start offset: 0x8005ABDC
+		// Start line: 1055
+		// Start offset: 0x80059BE4
 		// Variables:
 	// 		struct Level *level; // $v1
 	/* end block 1 */
-	// End offset: 0x8005AC1C
-	// End Line: 1045
+	// End offset: 0x80059C24
+	// End Line: 1070
 
 	/* begin block 2 */
-		// Start line: 2330
+		// Start line: 2335
 	/* end block 2 */
-	// End Line: 2331
+	// End Line: 2336
 
 	/* begin block 3 */
-		// Start line: 2331
+		// Start line: 2336
 	/* end block 3 */
-	// End Line: 2332
+	// End Line: 2337
 
 	/* begin block 4 */
-		// Start line: 2335
+		// Start line: 2340
 	/* end block 4 */
-	// End Line: 2336
+	// End Line: 2341
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_SetMainFog(_StreamUnit *streamUnit)
 
@@ -1489,7 +1475,7 @@ void STREAM_SetMainFog(_StreamUnit *streamUnit)
   Level *pLVar1;
   
   pLVar1 = streamUnit->level;
-  if (gameTrackerX.gameData.asmData.MorphType == 0) {
+  if (DAT_800d20d6 == 0) {
     streamUnit->UnitFogNear = pLVar1->holdFogNear;
     streamUnit->UnitFogFar = pLVar1->holdFogFar;
   }
@@ -1507,18 +1493,20 @@ void STREAM_SetMainFog(_StreamUnit *streamUnit)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_SetStreamFog(struct _StreamUnit *streamUnit /*$s1*/, short fogNear /*$a1*/, short fogFar /*$a2*/)
- // line 1049, offset 0x8005ac30
+ // line 1074, offset 0x80059c38
 	/* begin block 1 */
-		// Start line: 1050
-		// Start offset: 0x8005AC30
+		// Start line: 1075
+		// Start offset: 0x80059C38
 	/* end block 1 */
-	// End offset: 0x8005ACA0
-	// End Line: 1062
+	// End offset: 0x80059CA8
+	// End Line: 1087
 
 	/* begin block 2 */
-		// Start line: 2375
+		// Start line: 2380
 	/* end block 2 */
-	// End Line: 2376
+	// End Line: 2381
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_SetStreamFog(_StreamUnit *streamUnit,short fogNear,short fogFar)
 
@@ -1527,7 +1515,7 @@ void STREAM_SetStreamFog(_StreamUnit *streamUnit,short fogNear,short fogFar)
   short sVar2;
   short sVar3;
   
-  p_Var1 = FindStreamUnitFromLevel(gameTrackerX.level);
+  p_Var1 = FindStreamUnitFromLevel(DAT_800d20f4);
   sVar3 = p_Var1->UnitFogFar;
   if (fogFar < p_Var1->UnitFogFar) {
     sVar3 = fogFar;
@@ -1547,132 +1535,218 @@ void STREAM_SetStreamFog(_StreamUnit *streamUnit,short fogNear,short fogFar)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ STREAM_ConnectStream(struct _StreamUnit *streamUnit /*$s3*/)
- // line 1106, offset 0x8005acc0
+// void /*$ra*/ STREAM_ConnectStream(struct _StreamUnit *streamUnit /*$s6*/)
+ // line 1131, offset 0x80059cc8
 	/* begin block 1 */
-		// Start line: 1107
-		// Start offset: 0x8005ACC0
+		// Start line: 1132
+		// Start offset: 0x80059CC8
 		// Variables:
-	// 		struct _StreamUnit *mainUnit; // $s7
+	// 		struct _StreamUnit *mainUnit; // stack offset -48
 	// 		struct StreamUnitPortal *streamPortal; // $a0
 	// 		int numportals; // $v1
-	// 		struct StreamUnitPortal *streamPortal2; // $s5
-	// 		int numportals2; // $s6
+	// 		struct StreamUnitPortal *streamPortal2; // $s4
+	// 		int numportals2; // $fp
 	// 		int i; // $s0
-	// 		int j; // $s4
-	// 		int connect_to_main; // $s0
-	// 		char text[16]; // stack offset -64
+	// 		int j; // $s3
+	// 		char text[16]; // stack offset -72
 	// 		char *commapos; // $v0
 	// 		int signalID; // $s2
 
 		/* begin block 1.1 */
-			// Start line: 1172
-			// Start offset: 0x8005AE5C
+			// Start line: 1156
+			// Start offset: 0x80059D44
 			// Variables:
-		// 		struct _SVector offset; // stack offset -48
+		// 		struct _StreamUnit *connectStream; // $s0
+
+			/* begin block 1.1.1 */
+				// Start line: 1190
+				// Start offset: 0x80059E5C
+				// Variables:
+			// 		struct _SVector offset; // stack offset -56
+			/* end block 1.1.1 */
+			// End offset: 0x80059E5C
+			// End Line: 1201
 		/* end block 1.1 */
-		// End offset: 0x8005AE5C
-		// End Line: 1186
+		// End offset: 0x80059E68
+		// End Line: 1210
+
+		/* begin block 1.2 */
+			// Start line: 1215
+			// Start offset: 0x80059E7C
+			// Variables:
+		// 		long d; // stack offset -44
+		// 		struct _StreamUnit *connectStream; // $s5
+
+			/* begin block 1.2.1 */
+				// Start line: 1230
+				// Start offset: 0x80059ED4
+				// Variables:
+			// 		long hookedUp; // $s0
+
+				/* begin block 1.2.1.1 */
+					// Start line: 1270
+					// Start offset: 0x80059FF4
+					// Variables:
+				// 		struct _SVector offset; // stack offset -56
+				/* end block 1.2.1.1 */
+				// End offset: 0x80059FF4
+				// End Line: 1281
+			/* end block 1.2.1 */
+			// End offset: 0x8005A000
+			// End Line: 1290
+		/* end block 1.2 */
+		// End offset: 0x8005A030
+		// End Line: 1290
 	/* end block 1 */
-	// End offset: 0x8005AEF8
-	// End Line: 1201
+	// End offset: 0x8005A0AC
+	// End Line: 1304
 
 	/* begin block 2 */
-		// Start line: 2499
+		// Start line: 2504
 	/* end block 2 */
-	// End Line: 2500
+	// End Line: 2505
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_ConnectStream(_StreamUnit *streamUnit)
 
 {
   bool bVar1;
-  _StreamUnit *p_Var2;
-  char *pcVar3;
+  char *pcVar2;
+  _StreamUnit *p_Var3;
   int iVar4;
-  int iVar5;
-  long lVar6;
-  Level *pLVar7;
-  int *piVar8;
-  int iVar9;
-  int *piVar10;
+  long lVar5;
+  Level *pLVar6;
+  int *piVar7;
+  int iVar8;
+  _StreamUnit **pp_Var9;
+  int iVar10;
   int iVar11;
-  int *__src;
-  int iVar12;
-  char acStack64 [16];
-  _SVector local_30;
+  int **ppiVar12;
+  int iVar13;
+  char acStack72 [16];
+  _SVector local_38;
+  _StreamUnit *local_30;
+  int local_2c;
   
   WARPGATE_UpdateAddToArray(streamUnit);
-  if (gameTrackerX.StreamUnitID != streamUnit->StreamUnitID) {
+  if (DAT_800d2244 != streamUnit->StreamUnitID) {
     iVar11 = 0;
-    p_Var2 = STREAM_GetStreamUnitWithID(gameTrackerX.StreamUnitID);
-    piVar10 = (int *)p_Var2->level->terrain->StreamUnits;
-    iVar12 = *piVar10;
-    __src = piVar10 + 1;
-    if (0 < iVar12) {
-      piVar10 = piVar10 + 8;
+    local_30 = STREAM_GetStreamUnitWithID(DAT_800d2244);
+    piVar7 = (int *)streamUnit->level->terrain->StreamUnits;
+    iVar13 = *piVar7;
+    if (0 < iVar13) {
+      pp_Var9 = (_StreamUnit **)(piVar7 + 0xb);
       do {
-        bVar1 = false;
-        strcpy(acStack64,(char *)__src);
-        pcVar3 = strchr(acStack64,0x2c);
-        if (pcVar3 == (char *)0x0) {
-          GXFilePrint("Couldn\'t find signalnumber.");
-          iVar4 = 0;
+        strcpy();
+        pcVar2 = strchr(acStack72,',');
+        iVar10 = 0;
+        if (pcVar2 != (char *)0x0) {
+          *pcVar2 = '\0';
+          iVar10 = atoi(pcVar2 + 1);
         }
-        else {
-          *pcVar3 = '\0';
-          iVar4 = atoi(pcVar3 + 1);
+        p_Var3 = STREAM_GetStreamUnitWithID((long)pp_Var9[-5]);
+        iVar4 = strcmpi(acStack72,s_warpgate_800d06e8);
+        if ((iVar4 == 0) && (lVar5 = WARPGATE_IsUnitWarpRoom(local_30), lVar5 != 0)) {
+          p_Var3 = local_30;
         }
-        iVar5 = strcmpi(acStack64,streamUnit->baseAreaName);
-        if (iVar5 == 0) {
-          bVar1 = true;
-        }
-        else {
-          iVar5 = strcmpi(acStack64,"warpgate");
-          if ((iVar5 == 0) && (lVar6 = WARPGATE_IsUnitWarpRoom(streamUnit), lVar6 != 0)) {
-            bVar1 = true;
-          }
-        }
-        if (bVar1) {
-          piVar8 = (int *)streamUnit->level->terrain->StreamUnits;
-          iVar9 = 0;
-          iVar5 = *piVar8;
-          piVar8 = piVar8 + 1;
-          if (0 < iVar5) {
+        *pp_Var9 = p_Var3;
+        if ((p_Var3 != (_StreamUnit *)0x0) && (p_Var3 == local_30)) {
+          piVar7 = (int *)local_30->level->terrain->StreamUnits;
+          iVar8 = 0;
+          iVar4 = *piVar7;
+          piVar7 = piVar7 + 1;
+          if (0 < iVar4) {
             do {
-              iVar9 = iVar9 + 1;
-              if (iVar4 == piVar8[4]) {
-                *(_StreamUnit **)(piVar10 + 3) = streamUnit;
-                *(_StreamUnit **)(piVar8 + 10) = p_Var2;
-                local_30.x = *(short *)(piVar10 + -1) - *(short *)(piVar8 + 6);
-                local_30.y = *(short *)((int)piVar10 + -2) - *(short *)((int)piVar8 + 0x1a);
-                local_30.z = *(short *)piVar10 - *(short *)(piVar8 + 7);
-                RelocateLevel(streamUnit->level,&local_30);
+              iVar8 = iVar8 + 1;
+              if (iVar10 == piVar7[4]) {
+                local_38.x = *(short *)(piVar7 + 6) - *(short *)(pp_Var9 + -4);
+                local_38.y = *(short *)((int)piVar7 + 0x1a) - *(short *)((int)pp_Var9 + -0xe);
+                local_38.z = *(short *)(piVar7 + 7) - *(short *)(pp_Var9 + -3);
+                RelocateLevel(streamUnit->level,&local_38);
                 break;
               }
-              piVar8 = piVar8 + 0x17;
-            } while (iVar9 < iVar5);
+              piVar7 = piVar7 + 0x17;
+            } while (iVar8 < iVar4);
           }
         }
-        piVar10 = piVar10 + 0x17;
         iVar11 = iVar11 + 1;
-        __src = __src + 0x17;
-      } while (iVar11 < iVar12);
+        pp_Var9 = pp_Var9 + 0x17;
+      } while (iVar11 < iVar13);
     }
-    pLVar7 = streamUnit->level;
+    p_Var3 = (_StreamUnit *)&StreamTracker;
+    local_2c = 0;
+    ppiVar12 = (int **)&DAT_800d2a14;
+    do {
+      if ((*(short *)(ppiVar12 + -1) == 2) && (p_Var3 != streamUnit)) {
+        iVar11 = 0;
+        iVar13 = **(int **)(**ppiVar12 + 0x30);
+        if (0 < iVar13) {
+          pp_Var9 = (_StreamUnit **)(*(int **)(**ppiVar12 + 0x30) + 0xb);
+          do {
+            bVar1 = false;
+            strcpy();
+            pcVar2 = strchr(acStack72,',');
+            iVar10 = 0;
+            if (pcVar2 != (char *)0x0) {
+              *pcVar2 = '\0';
+              iVar10 = atoi(pcVar2 + 1);
+            }
+            if (pp_Var9[-5] == (_StreamUnit *)streamUnit->StreamUnitID) {
+              *pp_Var9 = streamUnit;
+LAB_80059f9c:
+              bVar1 = true;
+            }
+            else {
+              iVar4 = strcmpi(acStack72,s_warpgate_800d06e8);
+              if ((iVar4 == 0) && (lVar5 = WARPGATE_IsUnitWarpRoom(streamUnit), lVar5 != 0)) {
+                *pp_Var9 = streamUnit;
+                goto LAB_80059f9c;
+              }
+            }
+            if ((bVar1) && (p_Var3 == local_30)) {
+              piVar7 = (int *)streamUnit->level->terrain->StreamUnits;
+              iVar8 = 0;
+              iVar4 = *piVar7;
+              piVar7 = piVar7 + 1;
+              if (0 < iVar4) {
+                do {
+                  iVar8 = iVar8 + 1;
+                  if (iVar10 == piVar7[4]) {
+                    local_38.x = *(short *)(pp_Var9 + -4) - *(short *)(piVar7 + 6);
+                    local_38.y = *(short *)((int)pp_Var9 + -0xe) - *(short *)((int)piVar7 + 0x1a);
+                    local_38.z = *(short *)(pp_Var9 + -3) - *(short *)(piVar7 + 7);
+                    RelocateLevel(streamUnit->level,&local_38);
+                    break;
+                  }
+                  piVar7 = piVar7 + 0x17;
+                } while (iVar8 < iVar4);
+              }
+            }
+            iVar11 = iVar11 + 1;
+            pp_Var9 = pp_Var9 + 0x17;
+          } while (iVar11 < iVar13);
+        }
+      }
+      ppiVar12 = ppiVar12 + 0x10;
+      p_Var3 = p_Var3 + 1;
+      local_2c = local_2c + 1;
+    } while (local_2c < 0x10);
+    pLVar6 = streamUnit->level;
     iVar11 = 0;
-    if (0 < pLVar7->numIntros) {
-      iVar12 = 0;
+    if (0 < pLVar6->numIntros) {
+      iVar13 = 0;
       do {
-        iVar4 = strcmpi(pLVar7->introList->name + iVar12,"raziel");
+        iVar10 = strcmpi(pLVar6->introList->name + iVar13,s_raziel_800d06f4);
         iVar11 = iVar11 + 1;
-        if (iVar4 == 0) {
-          pcVar3 = streamUnit->level->introList->name + iVar12;
-          *(uint *)(pcVar3 + 0x2c) = *(uint *)(pcVar3 + 0x2c) | 8;
+        if (iVar10 == 0) {
+          pcVar2 = streamUnit->level->introList->name + iVar13;
+          *(uint *)(pcVar2 + 0x2c) = *(uint *)(pcVar2 + 0x2c) | 8;
           return;
         }
-        pLVar7 = streamUnit->level;
-        iVar12 = iVar12 + 0x4c;
-      } while (iVar11 < pLVar7->numIntros);
+        pLVar6 = streamUnit->level;
+        iVar13 = iVar13 + 0x4c;
+      } while (iVar11 < pLVar6->numIntros);
     }
   }
   return;
@@ -1683,20 +1757,22 @@ void STREAM_ConnectStream(_StreamUnit *streamUnit)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_StreamLoadLevelAbort(void *loadData /*$a0*/, void *data /*$a1*/, void *data2 /*$a2*/)
- // line 1203, offset 0x8005af24
+ // line 1306, offset 0x8005a0dc
 	/* begin block 1 */
-		// Start line: 1204
-		// Start offset: 0x8005AF24
+		// Start line: 1307
+		// Start offset: 0x8005A0DC
 		// Variables:
 	// 		struct _StreamUnit *streamUnit; // $s0
 	/* end block 1 */
-	// End offset: 0x8005AF40
-	// End Line: 1208
+	// End offset: 0x8005A0F8
+	// End Line: 1311
 
 	/* begin block 2 */
-		// Start line: 2815
+		// Start line: 3091
 	/* end block 2 */
-	// End Line: 2816
+	// End Line: 3092
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_StreamLoadLevelAbort(void *loadData,void *data,void *data2)
 
@@ -1714,27 +1790,29 @@ void STREAM_StreamLoadLevelAbort(void *loadData,void *data,void *data2)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_FinishLoad(struct _StreamUnit *streamUnit /*$s1*/)
- // line 1212, offset 0x8005af58
+ // line 1317, offset 0x8005a110
 	/* begin block 1 */
-		// Start line: 1213
-		// Start offset: 0x8005AF58
+		// Start line: 1318
+		// Start offset: 0x8005A110
 		// Variables:
 	// 		struct Level *level; // $s0
 	// 		char sfxName[80]; // stack offset -96
 	/* end block 1 */
-	// End offset: 0x8005B058
-	// End Line: 1275
+	// End offset: 0x8005A224
+	// End Line: 1380
 
 	/* begin block 2 */
-		// Start line: 2834
+		// Start line: 3114
 	/* end block 2 */
-	// End Line: 2835
+	// End Line: 3115
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_FinishLoad(_StreamUnit *streamUnit)
 
 {
-  ushort uVar1;
-  long lVar2;
+  long lVar1;
+  int iVar2;
   _MultiSignal *p_Var3;
   Level *level;
   char acStack96 [80];
@@ -1743,19 +1821,18 @@ void STREAM_FinishLoad(_StreamUnit *streamUnit)
   level = streamUnit->level;
   level->morphLastStep = -1;
   streamUnit->sfxFileHandle = 0;
-  lVar2 = LOAD_DoesFileExist(acStack96);
-  if (lVar2 != 0) {
-    uVar1 = aadLoadDynamicSfx(acStack96,streamUnit->StreamUnitID,
-                              (TDRFuncPtr_aadLoadDynamicSfx2userReturnProc)0x0);
-    streamUnit->sfxFileHandle = uVar1;
+  lVar1 = LOAD_DoesFileExist(acStack96);
+  if (lVar1 != 0) {
+    iVar2 = aadLoadDynamicSfx(streamUnit->baseAreaName,streamUnit->StreamUnitID,1);
+    streamUnit->sfxFileHandle = (short)iVar2;
   }
-  LoadLevelObjects(level,&gameTrackerX);
+  LoadLevelObjects(level,(GameTracker *)&gameTrackerX);
   streamUnit->FogColor = *(long *)&level->backColorR;
   level->fogFar = streamUnit->TargetFogFar;
   level->fogNear = streamUnit->TargetFogNear;
   LIGHT_CalcDQPTable(level);
   STREAM_CalculateWaterLevel(level);
-  if (gameTrackerX.gameData.asmData.MorphType == 1) {
+  if (DAT_800d20d6 == 1) {
     MORPH_UpdateNormals(level);
   }
   STREAM_ConnectStream(streamUnit);
@@ -1765,9 +1842,10 @@ void STREAM_FinishLoad(_StreamUnit *streamUnit)
   p_Var3 = level->startUnitLoadedSignal;
   if (p_Var3 != (_MultiSignal *)0x0) {
     p_Var3->flags = p_Var3->flags | 1;
-    SIGNAL_HandleSignal(gameTrackerX.playerInstance,level->startUnitLoadedSignal->signalList,0);
+    SIGNAL_HandleSignal(DAT_800d20f8,level->startUnitLoadedSignal->signalList,0);
+    EVENT_AddSignalToReset(level->startUnitLoadedSignal);
   }
-  SAVE_IntroForStreamID(streamUnit->StreamUnitID,streamUnit->level);
+  SAVE_IntroForStreamID(streamUnit);
   SAVE_UpdateLevelWithSave(streamUnit);
   EVENT_AddStreamToInstanceList(streamUnit);
   WARPGATE_FixUnit(streamUnit);
@@ -1779,30 +1857,28 @@ void STREAM_FinishLoad(_StreamUnit *streamUnit)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_LoadLevelReturn(void *loadData /*$s0*/, void *data /*$a1*/, void *data2 /*$s1*/)
- // line 1289, offset 0x8005b094
+ // line 1394, offset 0x8005a25c
 	/* begin block 1 */
-		// Start line: 1290
-		// Start offset: 0x8005B094
+		// Start line: 1395
+		// Start offset: 0x8005A25C
 	/* end block 1 */
-	// End offset: 0x8005B0DC
-	// End Line: 1308
+	// End offset: 0x8005A25C
+	// End Line: 1395
 
 	/* begin block 2 */
-		// Start line: 3002
+		// Start line: 3282
 	/* end block 2 */
-	// End Line: 3003
+	// End Line: 3283
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_LoadLevelReturn(void *loadData,void *data,void *data2)
 
 {
   GetRCnt(0xf2000000);
-  if (*(int *)((int)loadData + 0xf0) != 0x3c204139) {
-    GXFilePrint("Wrong version number %x for level %s.\n");
-  }
   *(undefined4 *)data2 = *(undefined4 *)((int)loadData + 0xf8);
-  gameTrackerX.StreamUnitID = *(long *)((int)loadData + 0xf8);
-  gameTrackerX.level = (Level *)loadData;
-  GAMELOOP_InitLevelTimeOfDay((Level *)loadData);
+  DAT_800d2244 = *(undefined4 *)((int)loadData + 0xf8);
+  DAT_800d20f4 = loadData;
   STREAM_SetMainFog((_StreamUnit *)data2);
   STREAM_FinishLoad((_StreamUnit *)data2);
   return;
@@ -1813,21 +1889,23 @@ void STREAM_LoadLevelReturn(void *loadData,void *data,void *data2)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_StreamLoadLevelReturn(void *loadData /*$s0*/, void *data /*$a1*/, void *data2 /*$s1*/)
- // line 1322, offset 0x8005b124
+ // line 1429, offset 0x8005a2bc
 	/* begin block 1 */
-		// Start line: 1323
-		// Start offset: 0x8005B124
+		// Start line: 1430
+		// Start offset: 0x8005A2BC
 		// Variables:
 	// 		struct Level *level; // $s0
 	// 		struct _StreamUnit *streamUnit; // $s1
 	/* end block 1 */
-	// End offset: 0x8005B220
-	// End Line: 1417
+	// End offset: 0x8005A390
+	// End Line: 1526
 
 	/* begin block 2 */
-		// Start line: 3077
+		// Start line: 3353
 	/* end block 2 */
-	// End Line: 3078
+	// End Line: 3354
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_StreamLoadLevelReturn(void *loadData,void *data,void *data2)
 
@@ -1836,9 +1914,6 @@ void STREAM_StreamLoadLevelReturn(void *loadData,void *data,void *data2)
   short fogFar;
   
   GetRCnt(0xf2000000);
-  if (*(int *)((int)loadData + 0xf0) != 0x3c204139) {
-    GXFilePrint("Wrong version number for level %s.\n");
-  }
   *(undefined4 *)data2 = *(undefined4 *)((int)loadData + 0xf8);
   if (*(short *)((int)data2 + 4) == 3) {
     *(undefined2 *)((int)data2 + 4) = 0;
@@ -1846,8 +1921,7 @@ void STREAM_StreamLoadLevelReturn(void *loadData,void *data,void *data2)
     *(undefined4 *)((int)data2 + 8) = 0;
   }
   else {
-    GAMELOOP_InitLevelTimeOfDay((Level *)loadData);
-    if (gameTrackerX.gameData.asmData.MorphType == 0) {
+    if (DAT_800d20d6 == 0) {
       fogNear = *(short *)((int)loadData + 0xa6);
       fogFar = *(short *)((int)loadData + 0xa4);
     }
@@ -1857,12 +1931,11 @@ void STREAM_StreamLoadLevelReturn(void *loadData,void *data,void *data2)
     }
     STREAM_SetStreamFog((_StreamUnit *)data2,fogNear,fogFar);
     STREAM_FinishLoad((_StreamUnit *)data2);
-    if ((gameTrackerX.playerInstance != (_Instance *)0x0) &&
-       (*(int *)((int)loadData + 0xf8) == (gameTrackerX.playerInstance)->currentStreamUnitID)) {
-      strcpy(gameTrackerX.baseAreaName,*(char **)((int)loadData + 0x98));
+    if ((DAT_800d20f8 != 0) && (*(int *)((int)loadData + 0xf8) == *(int *)(DAT_800d20f8 + 0x38))) {
+      strcpy();
       STREAM_SetMainFog((_StreamUnit *)data2);
-      gameTrackerX.StreamUnitID = *(long *)((int)loadData + 0xf8);
-      gameTrackerX.level = (Level *)loadData;
+      DAT_800d2244 = *(undefined4 *)((int)loadData + 0xf8);
+      DAT_800d20f4 = loadData;
     }
   }
   return;
@@ -1873,179 +1946,164 @@ void STREAM_StreamLoadLevelReturn(void *loadData,void *data,void *data2)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_UpdateLevelPointer(struct Level *oldLevel /*$a0*/, struct Level *newLevel /*$a1*/, long sizeOfLevel /*$a2*/)
- // line 1444, offset 0x8005b234
+ // line 1553, offset 0x8005a3a4
 	/* begin block 1 */
-		// Start line: 1446
-		// Start offset: 0x8005B234
+		// Start line: 1554
+		// Start offset: 0x8005A3A4
 		// Variables:
-	// 		long i; // $a3
-	// 		long offset; // $t0
+	// 		long i; // $t0
+	// 		long offset; // $t1
 	// 		struct GameTracker *gameTracker; // $v0
 
 		/* begin block 1.1 */
-			// Start line: 1473
-			// Start offset: 0x8005B294
+			// Start line: 1582
+			// Start offset: 0x8005A40C
 			// Variables:
-		// 		struct _Instance *instance; // $a1
+		// 		struct _Instance *instance; // $a3
 		/* end block 1.1 */
-		// End offset: 0x8005B3FC
-		// End Line: 1509
+		// End offset: 0x8005A574
+		// End Line: 1618
 	/* end block 1 */
-	// End offset: 0x8005B4E4
-	// End Line: 1531
+	// End offset: 0x8005A65C
+	// End Line: 1640
 
 	/* begin block 2 */
-		// Start line: 2885
+		// Start line: 3103
 	/* end block 2 */
-	// End Line: 2886
+	// End Line: 3104
 
-	/* begin block 3 */
-		// Start line: 3303
-	/* end block 3 */
-	// End Line: 3304
-
-	/* begin block 4 */
-		// Start line: 3307
-	/* end block 4 */
-	// End Line: 3308
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_UpdateLevelPointer(Level *oldLevel,Level *newLevel,long sizeOfLevel)
 
 {
-  Intro *pIVar1;
-  void *pvVar2;
-  _TFace *p_Var3;
-  _Terrain *p_Var4;
-  MultiSpline *pMVar5;
-  STracker *pSVar6;
+  int iVar1;
+  undefined4 *puVar2;
+  Level *pLVar3;
+  undefined2 *puVar4;
+  int iVar5;
+  Level *pLVar6;
   Level *pLVar7;
-  _Instance *p_Var8;
-  Camera *pCVar9;
-  int iVar10;
-  Level *pLVar11;
-  Level *pLVar12;
   
-  pLVar12 = (Level *)((int)newLevel - (int)oldLevel);
-  iVar10 = 0;
-  pSVar6 = &StreamTracker;
-  while ((pSVar6->StreamList[0].used != 2 || (pSVar6->StreamList[0].level != oldLevel))) {
-    iVar10 = iVar10 + 1;
-    pSVar6 = (STracker *)(pSVar6->StreamList + 1);
-    if (0xf < iVar10) {
-LAB_8005b280:
-      if (gameTrackerX.level == oldLevel) {
-        gameTrackerX.level = newLevel;
+  pLVar7 = (Level *)((int)newLevel - (int)oldLevel);
+  iVar5 = 0;
+  puVar2 = &StreamTracker;
+  while ((*(short *)(puVar2 + 1) != 2 || ((Level *)puVar2[2] != oldLevel))) {
+    iVar5 = iVar5 + 1;
+    puVar2 = puVar2 + 0x10;
+    if (0xf < iVar5) {
+LAB_8005a3f8:
+      if (DAT_800d20f4 == oldLevel) {
+        DAT_800d20f4 = newLevel;
       }
-      p_Var8 = (gameTrackerX.instanceList)->first;
-      if (p_Var8 != (_Instance *)0x0) {
-        pLVar11 = (Level *)((int)&oldLevel->terrain + sizeOfLevel);
+      iVar5 = *(int *)(DAT_800d2100 + 4);
+      if (iVar5 != 0) {
+        pLVar6 = (Level *)((int)&oldLevel->terrain + sizeOfLevel);
         do {
-          pLVar7 = (Level *)p_Var8->intro;
-          if ((oldLevel <= pLVar7) && (pLVar7 <= pLVar11)) {
-            pIVar1 = (Intro *)0x0;
-            if (pLVar7 != (Level *)0x0) {
-              pIVar1 = (Intro *)((int)pLVar7 + (int)pLVar12);
+          pLVar3 = *(Level **)(iVar5 + 0x20);
+          if ((oldLevel <= pLVar3) && (pLVar3 <= pLVar6)) {
+            iVar1 = 0;
+            if (pLVar3 != (Level *)0x0) {
+              iVar1 = (int)pLVar3 + (int)pLVar7;
             }
-            p_Var8->intro = pIVar1;
+            *(int *)(iVar5 + 0x20) = iVar1;
           }
-          pLVar7 = (Level *)p_Var8->introData;
-          if ((oldLevel <= pLVar7) && (pLVar7 <= pLVar11)) {
-            pvVar2 = (void *)0x0;
-            if (pLVar7 != (Level *)0x0) {
-              pvVar2 = (void *)((int)pLVar7 + (int)pLVar12);
+          pLVar3 = *(Level **)(iVar5 + 0x28);
+          if ((oldLevel <= pLVar3) && (pLVar3 <= pLVar6)) {
+            iVar1 = 0;
+            if (pLVar3 != (Level *)0x0) {
+              iVar1 = (int)pLVar3 + (int)pLVar7;
             }
-            p_Var8->introData = pvVar2;
+            *(int *)(iVar5 + 0x28) = iVar1;
           }
-          pLVar7 = (Level *)p_Var8->tface;
-          if ((oldLevel <= pLVar7) && (pLVar7 <= pLVar11)) {
-            p_Var3 = (_TFace *)0x0;
-            if (pLVar7 != (Level *)0x0) {
-              p_Var3 = (_TFace *)((int)pLVar7 + (int)pLVar12);
+          pLVar3 = *(Level **)(iVar5 + 0xb4);
+          if ((oldLevel <= pLVar3) && (pLVar3 <= pLVar6)) {
+            iVar1 = 0;
+            if (pLVar3 != (Level *)0x0) {
+              iVar1 = (int)pLVar3 + (int)pLVar7;
             }
-            p_Var8->tface = p_Var3;
+            *(int *)(iVar5 + 0xb4) = iVar1;
           }
-          pLVar7 = (Level *)p_Var8->waterFace;
-          if ((oldLevel <= pLVar7) && (pLVar7 <= pLVar11)) {
-            p_Var3 = (_TFace *)0x0;
-            if (pLVar7 != (Level *)0x0) {
-              p_Var3 = (_TFace *)((int)pLVar7 + (int)pLVar12);
+          pLVar3 = *(Level **)(iVar5 + 0x124);
+          if ((oldLevel <= pLVar3) && (pLVar3 <= pLVar6)) {
+            iVar1 = 0;
+            if (pLVar3 != (Level *)0x0) {
+              iVar1 = (int)pLVar3 + (int)pLVar7;
             }
-            p_Var8->waterFace = p_Var3;
+            *(int *)(iVar5 + 0x124) = iVar1;
           }
-          pLVar7 = (Level *)p_Var8->waterFaceTerrain;
-          if ((oldLevel <= pLVar7) && (pLVar7 <= pLVar11)) {
-            p_Var4 = (_Terrain *)0x0;
-            if (pLVar7 != (Level *)0x0) {
-              p_Var4 = (_Terrain *)((int)pLVar7 + (int)pLVar12);
+          pLVar3 = *(Level **)(iVar5 + 300);
+          if ((oldLevel <= pLVar3) && (pLVar3 <= pLVar6)) {
+            iVar1 = 0;
+            if (pLVar3 != (Level *)0x0) {
+              iVar1 = (int)pLVar3 + (int)pLVar7;
             }
-            p_Var8->waterFaceTerrain = p_Var4;
+            *(int *)(iVar5 + 300) = iVar1;
           }
-          pLVar7 = (Level *)p_Var8->oldTFace;
-          if ((oldLevel <= pLVar7) && (pLVar7 <= pLVar11)) {
-            p_Var3 = (_TFace *)0x0;
-            if (pLVar7 != (Level *)0x0) {
-              p_Var3 = (_TFace *)((int)pLVar7 + (int)pLVar12);
+          pLVar3 = *(Level **)(iVar5 + 0xb8);
+          if ((oldLevel <= pLVar3) && (pLVar3 <= pLVar6)) {
+            iVar1 = 0;
+            if (pLVar3 != (Level *)0x0) {
+              iVar1 = (int)pLVar3 + (int)pLVar7;
             }
-            p_Var8->oldTFace = p_Var3;
+            *(int *)(iVar5 + 0xb8) = iVar1;
           }
-          pLVar7 = (Level *)p_Var8->tfaceLevel;
-          if ((oldLevel <= pLVar7) && (pLVar7 <= pLVar11)) {
-            pvVar2 = (void *)0x0;
-            if (pLVar7 != (Level *)0x0) {
-              pvVar2 = (void *)((int)pLVar7 + (int)pLVar12);
+          pLVar3 = *(Level **)(iVar5 + 0xbc);
+          if ((oldLevel <= pLVar3) && (pLVar3 <= pLVar6)) {
+            iVar1 = 0;
+            if (pLVar3 != (Level *)0x0) {
+              iVar1 = (int)pLVar3 + (int)pLVar7;
             }
-            p_Var8->tfaceLevel = pvVar2;
+            *(int *)(iVar5 + 0xbc) = iVar1;
           }
-          p_Var8 = p_Var8->next;
-        } while (p_Var8 != (_Instance *)0x0);
+          iVar5 = *(int *)(iVar5 + 8);
+        } while (iVar5 != 0);
       }
-      pMVar5 = theCamera.data.Cinematic.posSpline;
-      if (((oldLevel <= theCamera.data.Cinematic.posSpline) &&
-          (theCamera.data.Cinematic.posSpline <=
-           (MultiSpline *)((int)&oldLevel->terrain + sizeOfLevel))) &&
-         (pMVar5 = (MultiSpline *)0x0, theCamera.data.Cinematic.posSpline != (MultiSpline *)0x0)) {
-        pMVar5 = (MultiSpline *)((int)theCamera.data.Cinematic.posSpline + (int)pLVar12);
+      pLVar6 = DAT_800d13c0;
+      if (((oldLevel <= DAT_800d13c0) &&
+          (DAT_800d13c0 <= (Level *)((int)&oldLevel->terrain + sizeOfLevel))) &&
+         (pLVar6 = (Level *)0x0, DAT_800d13c0 != (Level *)0x0)) {
+        pLVar6 = (Level *)((int)DAT_800d13c0 + (int)pLVar7);
       }
-      theCamera.data.Cinematic.posSpline = pMVar5;
-      pMVar5 = theCamera.data.Cinematic.targetSpline;
-      if (((oldLevel <= theCamera.data.Cinematic.targetSpline) &&
-          (theCamera.data.Cinematic.targetSpline <=
-           (MultiSpline *)((int)&oldLevel->terrain + sizeOfLevel))) &&
-         (pMVar5 = (MultiSpline *)0x0, theCamera.data.Cinematic.targetSpline != (MultiSpline *)0x0))
-      {
-        pMVar5 = (MultiSpline *)((int)theCamera.data.Cinematic.targetSpline + (int)pLVar12);
+      DAT_800d13c0 = pLVar6;
+      pLVar6 = DAT_800d13c4;
+      if (((oldLevel <= DAT_800d13c4) &&
+          (DAT_800d13c4 <= (Level *)((int)&oldLevel->terrain + sizeOfLevel))) &&
+         (pLVar6 = (Level *)0x0, DAT_800d13c4 != (Level *)0x0)) {
+        pLVar6 = (Level *)((int)DAT_800d13c4 + (int)pLVar7);
       }
-      theCamera.data.Cinematic.targetSpline = pMVar5;
-      iVar10 = 0;
-      if (-1 < theCamera.stack) {
-        pLVar11 = (Level *)((int)&oldLevel->terrain + sizeOfLevel);
-        pCVar9 = &theCamera;
+      DAT_800d13c4 = pLVar6;
+      iVar5 = 0;
+      if (-1 < DAT_800d1214) {
+        pLVar6 = (Level *)((int)&oldLevel->terrain + sizeOfLevel);
+        puVar4 = &theCamera;
         do {
-          pLVar7 = (Level *)pCVar9->savedCinematic[0].posSpline;
-          if ((oldLevel <= pLVar7) && (pLVar7 <= pLVar11)) {
-            pMVar5 = (MultiSpline *)0x0;
-            if (pLVar7 != (Level *)0x0) {
-              pMVar5 = (MultiSpline *)((int)pLVar7 + (int)pLVar12);
+          pLVar3 = *(Level **)(puVar4 + 0x182);
+          if ((oldLevel <= pLVar3) && (pLVar3 <= pLVar6)) {
+            iVar1 = 0;
+            if (pLVar3 != (Level *)0x0) {
+              iVar1 = (int)pLVar3 + (int)pLVar7;
             }
-            pCVar9->savedCinematic[0].posSpline = pMVar5;
+            *(int *)(puVar4 + 0x182) = iVar1;
           }
-          pLVar7 = (Level *)pCVar9->savedCinematic[0].targetSpline;
-          if ((oldLevel <= pLVar7) && (pLVar7 <= pLVar11)) {
-            pMVar5 = (MultiSpline *)0x0;
-            if (pLVar7 != (Level *)0x0) {
-              pMVar5 = (MultiSpline *)((int)pLVar7 + (int)pLVar12);
+          pLVar3 = *(Level **)(puVar4 + 0x184);
+          if ((oldLevel <= pLVar3) && (pLVar3 <= pLVar6)) {
+            iVar1 = 0;
+            if (pLVar3 != (Level *)0x0) {
+              iVar1 = (int)pLVar3 + (int)pLVar7;
             }
-            pCVar9->savedCinematic[0].targetSpline = pMVar5;
+            *(int *)(puVar4 + 0x184) = iVar1;
           }
-          iVar10 = iVar10 + 1;
-          pCVar9 = (Camera *)&(pCVar9->core).wcTransform2;
-        } while (iVar10 <= theCamera.stack);
+          iVar5 = iVar5 + 1;
+          puVar4 = puVar4 + 0x38;
+        } while (iVar5 <= DAT_800d1214);
       }
+      EVENT_UpdateResetSignalArray(oldLevel,newLevel,sizeOfLevel);
       return;
     }
   }
-  pSVar6->StreamList[0].level = newLevel;
-  goto LAB_8005b280;
+  *(Level **)(puVar2 + 2) = newLevel;
+  goto LAB_8005a3f8;
 }
 
 
@@ -2053,43 +2111,44 @@ LAB_8005b280:
 // decompiled code
 // original method signature: 
 // struct _StreamUnit * /*$ra*/ STREAM_WhichUnitPointerIsIn(void *pointer /*$s3*/)
- // line 1534, offset 0x8005b4ec
+ // line 1645, offset 0x8005a674
 	/* begin block 1 */
-		// Start line: 1535
-		// Start offset: 0x8005B4EC
+		// Start line: 1646
+		// Start offset: 0x8005A674
 		// Variables:
 	// 		int i; // $s2
 	// 		int size; // $v1
 	// 		struct Level *level; // $s0
 	/* end block 1 */
-	// End offset: 0x8005B57C
-	// End Line: 1555
+	// End offset: 0x8005A704
+	// End Line: 1666
 
 	/* begin block 2 */
-		// Start line: 3497
+		// Start line: 3776
 	/* end block 2 */
-	// End Line: 3498
+	// End Line: 3777
+
+/* File: C:\kain2\game\STREAM.C */
 
 _StreamUnit * STREAM_WhichUnitPointerIsIn(void *pointer)
 
 {
   ulong uVar1;
   Level *address;
-  STracker *pSVar2;
+  _StreamUnit *p_Var2;
   int iVar3;
   
   iVar3 = 0;
-  pSVar2 = &StreamTracker;
+  p_Var2 = (_StreamUnit *)&StreamTracker;
   do {
-    if ((*(short *)pSVar2->StreamList == 2) &&
-       (address = *(Level **)pSVar2->StreamList, address != (Level *)0x0)) {
+    if ((p_Var2->used == 2) && (address = p_Var2->level, address != (Level *)0x0)) {
       uVar1 = MEMPACK_Size((char *)address);
       if ((address <= pointer) && (pointer <= (void *)((int)&address->terrain + uVar1))) {
-        return (_StreamUnit *)pSVar2;
+        return p_Var2;
       }
     }
     iVar3 = iVar3 + 1;
-    pSVar2 = (STracker *)(pSVar2->StreamList + 1);
+    p_Var2 = p_Var2 + 1;
     if (0xf < iVar3) {
       return (_StreamUnit *)0x0;
     }
@@ -2101,10 +2160,10 @@ _StreamUnit * STREAM_WhichUnitPointerIsIn(void *pointer)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_UpdateObjectPointer(struct Object *oldObject /*$s2*/, struct Object *newObject /*$s3*/, long sizeOfObject /*$s4*/)
- // line 1557, offset 0x8005b59c
+ // line 1668, offset 0x8005a724
 	/* begin block 1 */
-		// Start line: 1558
-		// Start offset: 0x8005B59C
+		// Start line: 1669
+		// Start offset: 0x8005A724
 		// Variables:
 	// 		long i; // $a3
 	// 		long d; // $a1
@@ -2113,31 +2172,33 @@ _StreamUnit * STREAM_WhichUnitPointerIsIn(void *pointer)
 	// 		struct _ObjectTracker *otr; // $t0
 
 		/* begin block 1.1 */
-			// Start line: 1578
-			// Start offset: 0x8005B5F4
+			// Start line: 1689
+			// Start offset: 0x8005A77C
 			// Variables:
 		// 		int j; // $a1
 		// 		struct Object *object; // $a2
 		/* end block 1.1 */
-		// End offset: 0x8005B680
-		// End Line: 1588
+		// End offset: 0x8005A808
+		// End Line: 1699
 
 		/* begin block 1.2 */
-			// Start line: 1606
-			// Start offset: 0x8005B6DC
+			// Start line: 1717
+			// Start offset: 0x8005A864
 			// Variables:
 		// 		struct _Instance *instance; // $s0
 		/* end block 1.2 */
-		// End offset: 0x8005B7F4
-		// End Line: 1635
+		// End offset: 0x8005A97C
+		// End Line: 1746
 	/* end block 1 */
-	// End offset: 0x8005B820
-	// End Line: 1643
+	// End offset: 0x8005A9A8
+	// End Line: 1754
 
 	/* begin block 2 */
-		// Start line: 3565
+		// Start line: 3844
 	/* end block 2 */
-	// End Line: 3566
+	// End Line: 3845
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_UpdateObjectPointer(Object *oldObject,Object *newObject,long sizeOfObject)
 
@@ -2147,13 +2208,13 @@ void STREAM_UpdateObjectPointer(Object *oldObject,Object *newObject,long sizeOfO
   Object *pOVar3;
   int iVar4;
   void *pvVar5;
-  _HModel *p_Var6;
-  int iVar7;
-  Object *pOVar8;
-  int iVar9;
+  Object **ppOVar6;
+  _HModel *p_Var7;
+  int iVar8;
+  Object *pOVar9;
   int iVar10;
   int iVar11;
-  Object *pOVar12;
+  int iVar12;
   int iVar13;
   _Instance *instance;
   Object *offset;
@@ -2166,20 +2227,21 @@ void STREAM_UpdateObjectPointer(Object *oldObject,Object *newObject,long sizeOfO
     if ('\0' < p_Var1->numObjectsUsing) {
       p_Var2 = p_Var1;
       do {
-        pOVar12 = gameTrackerX.GlobalObjects[p_Var2->objectsUsing[0]].object;
-        if ((pOVar12 != (Object *)0x0) && (iVar10 = 0, 0 < pOVar12->numAnims)) {
+        iVar12 = *(int *)((int)p_Var2->objectsUsing[0] * 0x24 + DAT_800d2110 + 0x10);
+        if ((iVar12 != 0) && (iVar11 = 0, 0 < *(short *)(iVar12 + 10))) {
           do {
-            pOVar8 = (Object *)pOVar12->animList[iVar10];
-            if ((oldObject <= pOVar8) &&
-               (pOVar8 <= (Object *)((int)&oldObject->oflags + sizeOfObject))) {
+            ppOVar6 = (Object **)(iVar11 * 4 + *(int *)(iVar12 + 0x10));
+            pOVar9 = *ppOVar6;
+            if ((oldObject <= pOVar9) &&
+               (pOVar9 <= (Object *)((int)&oldObject->oflags + sizeOfObject))) {
               pOVar3 = (Object *)0x0;
-              if (pOVar8 != (Object *)0x0) {
-                pOVar3 = (Object *)((int)pOVar8 + (int)offset);
+              if (pOVar9 != (Object *)0x0) {
+                pOVar3 = (Object *)((int)pOVar9 + (int)offset);
               }
-              *(Object **)(pOVar12->animList + iVar10) = pOVar3;
+              *ppOVar6 = pOVar3;
             }
-            iVar10 = iVar10 + 1;
-          } while (iVar10 < pOVar12->numAnims);
+            iVar11 = iVar11 + 1;
+          } while (iVar11 < *(short *)(iVar12 + 10));
         }
         iVar13 = iVar13 + 1;
         p_Var2 = (_ObjectTracker *)(p_Var1->name + iVar13);
@@ -2191,40 +2253,39 @@ void STREAM_UpdateObjectPointer(Object *oldObject,Object *newObject,long sizeOfO
       RELMOD_RelocModulePointers
                 ((int)newObject->relocModule,(int)offset,(int *)newObject->relocList);
     }
-    instance = (gameTrackerX.instanceList)->first;
+    instance = *(_Instance **)(DAT_800d2100 + 4);
     while (instance != (_Instance *)0x0) {
       if (instance->object == oldObject) {
         instance->object = newObject;
         if ((instance->hModelList != (_HModel *)0x0) && (iVar13 = 0, 0 < newObject->numModels)) {
-          iVar10 = 0;
+          iVar12 = 0;
           do {
-            p_Var6 = instance->hModelList;
+            p_Var7 = instance->hModelList;
             iVar11 = 0;
-            if (0 < *(int *)((int)&p_Var6->numHPrims + iVar10)) {
+            if (0 < *(int *)((int)&p_Var7->numHPrims + iVar12)) {
               do {
-                iVar4 = iVar11 * 8 + *(int *)((int)&p_Var6->hPrimList + iVar10);
-                iVar9 = *(int *)(iVar4 + 4);
-                iVar7 = 0;
-                if (iVar9 != 0) {
-                  iVar7 = (int)&offset->oflags + iVar9;
+                iVar4 = iVar11 * 8 + *(int *)((int)&p_Var7->hPrimList + iVar12);
+                iVar10 = *(int *)(iVar4 + 4);
+                iVar8 = 0;
+                if (iVar10 != 0) {
+                  iVar8 = (int)&offset->oflags + iVar10;
                 }
-                *(int *)(iVar4 + 4) = iVar7;
-                p_Var6 = instance->hModelList;
+                *(int *)(iVar4 + 4) = iVar8;
+                p_Var7 = instance->hModelList;
                 iVar11 = iVar11 + 1;
-              } while (iVar11 < p_Var6[iVar13].numHPrims);
+              } while (iVar11 < p_Var7[iVar13].numHPrims);
             }
             iVar13 = iVar13 + 1;
-            iVar10 = iVar10 + 8;
+            iVar12 = iVar12 + 8;
           } while (iVar13 < instance->object->numModels);
         }
         OBTABLE_RelocateInstanceObject(instance,(long)offset);
       }
-      pOVar12 = (Object *)instance->data;
-      if ((oldObject <= pOVar12) && (pOVar12 <= (Object *)((int)&oldObject->oflags + sizeOfObject)))
-      {
+      pOVar9 = (Object *)instance->data;
+      if ((oldObject <= pOVar9) && (pOVar9 <= (Object *)((int)&oldObject->oflags + sizeOfObject))) {
         pvVar5 = (void *)0x0;
-        if (pOVar12 != (Object *)0x0) {
-          pvVar5 = (void *)((int)pOVar12 + (int)offset);
+        if (pOVar9 != (Object *)0x0) {
+          pvVar5 = (void *)((int)pOVar9 + (int)offset);
         }
         instance->data = pvVar5;
       }
@@ -2243,37 +2304,39 @@ void STREAM_UpdateObjectPointer(Object *oldObject,Object *newObject,long sizeOfO
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_UpdateInstanceCollisionInfo(struct _HModel *oldHModel /*$a0*/, struct _HModel *newHModel /*$a1*/)
- // line 1645, offset 0x8005b840
+ // line 1756, offset 0x8005a9c8
 	/* begin block 1 */
-		// Start line: 1647
-		// Start offset: 0x8005B840
+		// Start line: 1758
+		// Start offset: 0x8005A9C8
 		// Variables:
 	// 		struct _Instance *instance; // $v1
 	/* end block 1 */
-	// End offset: 0x8005B87C
-	// End Line: 1660
+	// End offset: 0x8005AA04
+	// End Line: 1771
 
 	/* begin block 2 */
-		// Start line: 3763
+		// Start line: 4042
 	/* end block 2 */
-	// End Line: 3764
+	// End Line: 4043
 
 	/* begin block 3 */
-		// Start line: 3764
+		// Start line: 4043
 	/* end block 3 */
-	// End Line: 3765
+	// End Line: 4044
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_UpdateInstanceCollisionInfo(_HModel *oldHModel,_HModel *newHModel)
 
 {
-  _Instance *p_Var1;
+  int iVar1;
   
-  p_Var1 = (gameTrackerX.instanceList)->first;
-  while (p_Var1 != (_Instance *)0x0) {
-    if (p_Var1->hModelList == oldHModel) {
-      p_Var1->hModelList = newHModel;
+  iVar1 = *(int *)(DAT_800d2100 + 4);
+  while (iVar1 != 0) {
+    if (*(_HModel **)(iVar1 + 0xfc) == oldHModel) {
+      *(_HModel **)(iVar1 + 0xfc) = newHModel;
     }
-    p_Var1 = p_Var1->next;
+    iVar1 = *(int *)(iVar1 + 8);
   }
   return;
 }
@@ -2283,23 +2346,25 @@ void STREAM_UpdateInstanceCollisionInfo(_HModel *oldHModel,_HModel *newHModel)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_LoadMainVram(struct GameTracker *gameTracker /*$a0*/, char *baseAreaName /*$a1*/, struct _StreamUnit *streamUnit /*$s2*/)
- // line 1700, offset 0x8005b884
+ // line 1811, offset 0x8005aa0c
 	/* begin block 1 */
-		// Start line: 1701
-		// Start offset: 0x8005B884
+		// Start line: 1812
+		// Start offset: 0x8005AA0C
 		// Variables:
 	// 		char dramName[80]; // stack offset -176
 	// 		char vramName[80]; // stack offset -96
 	// 		struct VramBuffer *vramBuffer; // $v0
 	// 		struct Level *level; // $s0
 	/* end block 1 */
-	// End offset: 0x8005B884
-	// End Line: 1701
+	// End offset: 0x8005AA0C
+	// End Line: 1812
 
 	/* begin block 2 */
-		// Start line: 3395
+		// Start line: 3617
 	/* end block 2 */
-	// End Line: 3396
+	// End Line: 3618
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_LoadMainVram(GameTracker *gameTracker,char *baseAreaName,_StreamUnit *streamUnit)
 
@@ -2332,31 +2397,31 @@ void STREAM_LoadMainVram(GameTracker *gameTracker,char *baseAreaName,_StreamUnit
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_MoveIntoNewStreamUnit()
- // line 1747, offset 0x8005b938
+ // line 1858, offset 0x8005aac0
 	/* begin block 1 */
-		// Start line: 3984
+		// Start line: 4263
 	/* end block 1 */
-	// End Line: 3985
+	// End Line: 4264
 
 	/* begin block 2 */
-		// Start line: 3985
+		// Start line: 4264
 	/* end block 2 */
-	// End Line: 3986
+	// End Line: 4265
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_MoveIntoNewStreamUnit(void)
 
 {
-  (gameTrackerX.playerInstance)->currentStreamUnitID = gameTrackerX.moveRazielToStreamID;
-  INSTANCE_UpdateFamilyStreamUnitID(gameTrackerX.playerInstance);
+  DAT_800d20f8->currentStreamUnitID = DAT_800d226c;
+  INSTANCE_UpdateFamilyStreamUnitID(DAT_800d20f8);
   GAMELOOP_StreamLevelLoadAndInit
-            (gameTrackerX.S_baseAreaName,&gameTrackerX,(int)gameTrackerX.toSignal,
-             (int)gameTrackerX.fromSignal);
-  if ((int)gameTrackerX.SwitchToNewWarpIndex != -1) {
-    CurrentWarpNumber = (int)gameTrackerX.SwitchToNewWarpIndex;
+            (&DAT_800d224c,(GameTracker *)&gameTrackerX,(int)DAT_800d225c,(int)DAT_800d225e);
+  DAT_800d2248 = 0;
+  if (DAT_800d224a != -1) {
+    SndPlayVolPan(0x184,0x7f,0x40,0);
+    CurrentWarpNumber = (long)DAT_800d224a;
   }
-  gameTrackerX.SwitchToNewStreamUnit = 0;
   return;
 }
 
@@ -2365,47 +2430,49 @@ void STREAM_MoveIntoNewStreamUnit(void)
 // decompiled code
 // original method signature: 
 // struct _StreamUnit * /*$ra*/ STREAM_LoadLevel(struct GameTracker *gameTracker /*$s4*/, char *baseAreaName /*$s3*/, struct StreamUnitPortal *streamPortal /*$s5*/, int loadnext /*$a3*/)
- // line 1764, offset 0x8005b9a0
+ // line 1876, offset 0x8005ab40
 	/* begin block 1 */
-		// Start line: 1765
-		// Start offset: 0x8005B9A0
+		// Start line: 1877
+		// Start offset: 0x8005AB40
 		// Variables:
 	// 		int i; // $s2
 	// 		long streamID; // $s6
 	// 		struct _StreamUnit *streamUnit; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 1806
-			// Start offset: 0x8005BA3C
+			// Start line: 1918
+			// Start offset: 0x8005ABDC
 		/* end block 1.1 */
-		// End offset: 0x8005BA3C
-		// End Line: 1809
+		// End offset: 0x8005ABDC
+		// End Line: 1921
 
 		/* begin block 1.2 */
-			// Start line: 1818
-			// Start offset: 0x8005BA68
+			// Start line: 1930
+			// Start offset: 0x8005AC08
 			// Variables:
 		// 		struct Level *level; // $s0
 		/* end block 1.2 */
-		// End offset: 0x8005BA94
-		// End Line: 1828
+		// End offset: 0x8005AC34
+		// End Line: 1940
 
 		/* begin block 1.3 */
-			// Start line: 1890
-			// Start offset: 0x8005BAF0
+			// Start line: 2002
+			// Start offset: 0x8005AC90
 			// Variables:
 		// 		char dramName[80]; // stack offset -112
 		/* end block 1.3 */
-		// End offset: 0x8005BB88
-		// End Line: 1947
+		// End offset: 0x8005AD28
+		// End Line: 2059
 	/* end block 1 */
-	// End offset: 0x8005BB94
-	// End Line: 1950
+	// End offset: 0x8005AD34
+	// End Line: 2062
 
 	/* begin block 2 */
-		// Start line: 4020
+		// Start line: 4301
 	/* end block 2 */
-	// End Line: 4021
+	// End Line: 4302
+
+/* File: C:\kain2\game\STREAM.C */
 
 _StreamUnit *
 STREAM_LoadLevel(GameTracker *gameTracker,char *baseAreaName,StreamUnitPortal *streamPortal,
@@ -2429,29 +2496,28 @@ STREAM_LoadLevel(GameTracker *gameTracker,char *baseAreaName,StreamUnitPortal *s
   iVar3 = 0;
   iVar1 = 0;
   while( true ) {
-    streamUnit = (_StreamUnit *)((int)&StreamTracker.StreamList[0].StreamUnitID + iVar1);
-    if ((*(short *)((int)&StreamTracker.StreamList[0].used + iVar1) != 0) &&
-       (iVar2 = strcmpi(StreamTracker.StreamList[0].baseAreaName + iVar1,baseAreaName), iVar2 == 0))
-    break;
+    streamUnit = (_StreamUnit *)((int)&StreamTracker + iVar1);
+    if ((*(short *)((int)&DAT_800d2a10 + iVar1) != 0) &&
+       (iVar2 = strcmpi(&DAT_800d2a18 + iVar1,baseAreaName), iVar2 == 0)) break;
     iVar3 = iVar3 + 1;
     iVar1 = iVar3 * 0x40;
     if (0xf < iVar3) {
-LAB_8005bac0:
+LAB_8005ac60:
       if (iVar3 == 0x10) {
         iVar3 = 0;
         iVar1 = 0;
         do {
-          streamUnit = (_StreamUnit *)((int)&StreamTracker.StreamList[0].StreamUnitID + iVar1);
+          streamUnit = (_StreamUnit *)((int)&StreamTracker + iVar1);
           iVar3 = iVar3 + 1;
-          if (*(short *)((int)&StreamTracker.StreamList[0].used + iVar1) == 0) {
+          if (*(short *)((int)&DAT_800d2a10 + iVar1) == 0) {
             STREAM_FillOutFileNames(baseAreaName,acStack112,(char *)0x0,(char *)0x0);
-            *(undefined2 *)((int)&StreamTracker.StreamList[0].used + iVar1) = 1;
-            strcpy(StreamTracker.StreamList[0].baseAreaName + iVar1,baseAreaName);
+            *(undefined2 *)((int)&DAT_800d2a10 + iVar1) = 1;
+            strcpy();
             streamUnit->StreamUnitID = lVar4;
-            *(undefined4 *)((int)&StreamTracker.StreamList[0].FrameCount + iVar1) = 0;
-            *(undefined2 *)((int)&StreamTracker.StreamList[0].flags + iVar1) = 0;
+            *(undefined4 *)((int)&DAT_800d2a2c + iVar1) = 0;
+            *(undefined2 *)((int)&DAT_800d2a12 + iVar1) = 0;
             if (streamPortal == (StreamUnitPortal *)0x0) {
-              strcpy(gameTracker->baseAreaName,baseAreaName);
+              strcpy();
               retFunc = STREAM_LoadLevelReturn;
               gameTracker->StreamUnitID = streamUnit->StreamUnitID;
             }
@@ -2461,7 +2527,7 @@ LAB_8005bac0:
             }
             LOAD_NonBlockingBinaryLoad
                       (acStack112,retFunc,(void *)0x0,streamUnit,
-                       (void **)((int)&StreamTracker.StreamList[0].level + iVar1),2);
+                       (void **)((int)&DAT_800d2a14 + iVar1),2);
             return streamUnit;
           }
           iVar1 = iVar3 * 0x40;
@@ -2470,23 +2536,22 @@ LAB_8005bac0:
       return streamUnit;
     }
   }
-  fogNear = *(short *)((int)&StreamTracker.StreamList[0].used + iVar1);
-  if (fogNear == 3) {
-    *(undefined2 *)((int)&StreamTracker.StreamList[0].used + iVar1) = 1;
+  if (*(short *)((int)&DAT_800d2a10 + iVar1) == 3) {
+    *(undefined2 *)((int)&DAT_800d2a10 + iVar1) = 1;
   }
   else {
-    if (fogNear != 1) {
-      *(undefined4 *)((int)&StreamTracker.StreamList[0].FrameCount + iVar1) = 0;
+    if (*(short *)((int)&DAT_800d2a10 + iVar1) != 1) {
+      *(undefined4 *)((int)&DAT_800d2a2c + iVar1) = 0;
       if (streamPortal == (StreamUnitPortal *)0x0) {
-        strcpy(gameTracker->baseAreaName,baseAreaName);
+        strcpy();
         STREAM_SetMainFog(streamUnit);
         gameTracker->StreamUnitID = streamUnit->StreamUnitID;
-        gameTracker->level = *(Level **)((int)&StreamTracker.StreamList[0].level + iVar1);
+        gameTracker->level = *(Level **)((int)&DAT_800d2a14 + iVar1);
       }
       else {
-        iVar1 = *(int *)((int)&StreamTracker.StreamList[0].level + iVar1);
+        iVar1 = *(int *)((int)&DAT_800d2a14 + iVar1);
         STREAM_ConnectStream(streamUnit);
-        if (gameTrackerX.gameData.asmData.MorphType == 0) {
+        if (DAT_800d20d6 == 0) {
           fogNear = *(short *)(iVar1 + 0xa6);
           fogFar = *(short *)(iVar1 + 0xa4);
         }
@@ -2498,7 +2563,7 @@ LAB_8005bac0:
       }
     }
   }
-  goto LAB_8005bac0;
+  goto LAB_8005ac60;
 }
 
 
@@ -2506,20 +2571,22 @@ LAB_8005bac0:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ RemoveIntroducedLights(struct Level *level /*$s2*/)
- // line 1955, offset 0x8005bbc0
+ // line 2067, offset 0x8005ad60
 	/* begin block 1 */
-		// Start line: 1956
-		// Start offset: 0x8005BBC0
+		// Start line: 2068
+		// Start offset: 0x8005AD60
 		// Variables:
 	// 		int i; // $s0
 	/* end block 1 */
-	// End offset: 0x8005BC8C
-	// End Line: 1977
+	// End offset: 0x8005AE2C
+	// End Line: 2089
 
 	/* begin block 2 */
-		// Start line: 4575
+		// Start line: 4856
 	/* end block 2 */
-	// End Line: 4576
+	// End Line: 4857
+
+/* File: C:\kain2\game\STREAM.C */
 
 void RemoveIntroducedLights(Level *level)
 
@@ -2528,8 +2595,8 @@ void RemoveIntroducedLights(Level *level)
   int iVar1;
   int iVar2;
   
-  LIGHT_Restore(gameTrackerX.lightInfo);
-  (gameTrackerX.lightInfo)->numSavedColors = 0;
+  LIGHT_Restore(DAT_800d21e0);
+  DAT_800d21e0->numSavedColors = 0;
   iVar1 = 0;
   if (0 < level->numSpotLights) {
     iVar2 = 0;
@@ -2562,21 +2629,23 @@ void RemoveIntroducedLights(Level *level)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_RemoveInstancesWithIDInInstanceList(struct _InstanceList *list /*$s4*/, long id /*$s2*/, struct Level *level /*$s3*/)
- // line 1979, offset 0x8005bca4
+ // line 2091, offset 0x8005ae44
 	/* begin block 1 */
-		// Start line: 1980
-		// Start offset: 0x8005BCA4
+		// Start line: 2092
+		// Start offset: 0x8005AE44
 		// Variables:
 	// 		struct _Instance *instance; // $s0
 	// 		struct _Instance *next; // $s1
 	/* end block 1 */
-	// End offset: 0x8005BD30
-	// End Line: 2008
+	// End offset: 0x8005AED0
+	// End Line: 2120
 
 	/* begin block 2 */
-		// Start line: 4634
+		// Start line: 4915
 	/* end block 2 */
-	// End Line: 4635
+	// End Line: 4916
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_RemoveInstancesWithIDInInstanceList(_InstanceList *list,long id,Level *level)
 
@@ -2606,47 +2675,49 @@ void STREAM_RemoveInstancesWithIDInInstanceList(_InstanceList *list,long id,Leve
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_MarkUnitNeeded(long streamID /*$a0*/)
- // line 2010, offset 0x8005bd50
+ // line 2122, offset 0x8005aef0
 	/* begin block 1 */
-		// Start line: 2012
-		// Start offset: 0x8005BD50
+		// Start line: 2124
+		// Start offset: 0x8005AEF0
 		// Variables:
 	// 		int i; // $a1
 	/* end block 1 */
-	// End offset: 0x8005BD98
-	// End Line: 2028
+	// End offset: 0x8005AF38
+	// End Line: 2140
 
 	/* begin block 2 */
-		// Start line: 4699
+		// Start line: 4980
 	/* end block 2 */
-	// End Line: 4700
+	// End Line: 4981
 
 	/* begin block 3 */
-		// Start line: 4700
+		// Start line: 4981
 	/* end block 3 */
-	// End Line: 4701
+	// End Line: 4982
 
 	/* begin block 4 */
-		// Start line: 4703
+		// Start line: 4984
 	/* end block 4 */
-	// End Line: 4704
+	// End Line: 4985
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_MarkUnitNeeded(long streamID)
 
 {
-  STracker *pSVar1;
+  int *piVar1;
   int iVar2;
   
   iVar2 = 0;
-  pSVar1 = &StreamTracker;
-  while ((pSVar1->StreamList[0].used == 0 || (streamID != pSVar1->StreamList[0].StreamUnitID))) {
+  piVar1 = &StreamTracker;
+  while ((*(short *)(piVar1 + 1) == 0 || (streamID != *piVar1))) {
     iVar2 = iVar2 + 1;
-    pSVar1 = (STracker *)(pSVar1->StreamList + 1);
+    piVar1 = piVar1 + 0x10;
     if (0xf < iVar2) {
       return;
     }
   }
-  pSVar1->StreamList[0].FrameCount = gameTrackerX.displayFrameCount;
+  piVar1[8] = DAT_800d21f4;
   return;
 }
 
@@ -2655,106 +2726,106 @@ void STREAM_MarkUnitNeeded(long streamID)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_DumpUnit(struct _StreamUnit *streamUnit /*$s2*/, long doSave /*$s3*/)
- // line 2030, offset 0x8005bda0
+ // line 2142, offset 0x8005af40
 	/* begin block 1 */
-		// Start line: 2031
-		// Start offset: 0x8005BDA0
+		// Start line: 2143
+		// Start offset: 0x8005AF40
 		// Variables:
 	// 		int i; // $s0
 	// 		int j; // $a0
 	// 		int numportals; // $a1
 
 		/* begin block 1.1 */
-			// Start line: 2060
-			// Start offset: 0x8005BE58
+			// Start line: 2172
+			// Start offset: 0x8005AFF8
 			// Variables:
 		// 		char dramName[80]; // stack offset -104
 		/* end block 1.1 */
-		// End offset: 0x8005BE84
-		// End Line: 2070
+		// End offset: 0x8005B024
+		// End Line: 2182
 
 		/* begin block 1.2 */
-			// Start line: 2087
-			// Start offset: 0x8005BEC0
+			// Start line: 2199
+			// Start offset: 0x8005B060
 			// Variables:
 		// 		struct _SFXMkr *sfxMkr; // $a1
 		/* end block 1.2 */
-		// End offset: 0x8005BEC0
-		// End Line: 2087
+		// End offset: 0x8005B060
+		// End Line: 2199
 	/* end block 1 */
-	// End offset: 0x8005BF78
-	// End Line: 2118
+	// End offset: 0x8005B114
+	// End Line: 2230
 
 	/* begin block 2 */
-		// Start line: 4748
+		// Start line: 5029
 	/* end block 2 */
-	// End Line: 4749
+	// End Line: 5030
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_DumpUnit(_StreamUnit *streamUnit,long doSave)
 
 {
-  int *piVar1;
-  long lVar2;
-  _StreamUnit **pp_Var3;
-  Level *pLVar4;
+  long lVar1;
+  _StreamUnit **pp_Var2;
+  Level *pLVar3;
+  int iVar4;
   int iVar5;
-  int iVar6;
-  uchar **ppuVar7;
-  STracker *pSVar8;
-  int iVar9;
+  uchar **ppuVar6;
+  undefined4 *puVar7;
+  int iVar8;
   char acStack104 [80];
   
-  iVar9 = 0;
-  pSVar8 = &StreamTracker;
+  iVar8 = 0;
+  puVar7 = &StreamTracker;
   do {
-    if (pSVar8->StreamList[0].used == 2) {
-      piVar1 = (int *)(pSVar8->StreamList[0].level)->terrain->StreamUnits;
-      iVar6 = *piVar1;
-      iVar5 = 0;
-      if (0 < iVar6) {
-        pp_Var3 = (_StreamUnit **)(piVar1 + 0xb);
+    if (*(short *)(puVar7 + 1) == 2) {
+      iVar5 = **(int **)(*(int *)puVar7[2] + 0x30);
+      iVar4 = 0;
+      if (0 < iVar5) {
+        pp_Var2 = (_StreamUnit **)(*(int **)(*(int *)puVar7[2] + 0x30) + 0xb);
         do {
-          if (*pp_Var3 == streamUnit) {
-            *pp_Var3 = (_StreamUnit *)0x0;
+          if (*pp_Var2 == streamUnit) {
+            *pp_Var2 = (_StreamUnit *)0x0;
           }
-          iVar5 = iVar5 + 1;
-          pp_Var3 = pp_Var3 + 0x17;
-        } while (iVar5 < iVar6);
+          iVar4 = iVar4 + 1;
+          pp_Var2 = pp_Var2 + 0x17;
+        } while (iVar4 < iVar5);
       }
     }
-    iVar9 = iVar9 + 1;
-    pSVar8 = (STracker *)(pSVar8->StreamList + 1);
-  } while (iVar9 < 0x10);
+    iVar8 = iVar8 + 1;
+    puVar7 = puVar7 + 0x10;
+  } while (iVar8 < 0x10);
   if ((streamUnit->used == 1) || (streamUnit->used == 3)) {
     STREAM_FillOutFileNames(streamUnit->baseAreaName,acStack104,(char *)0x0,(char *)0x0);
     LOAD_AbortFileLoad(acStack104,STREAM_StreamLoadLevelAbort);
     streamUnit->used = 0;
   }
   else {
-    lVar2 = WARPGATE_IsUnitWarpRoom(streamUnit);
-    if (lVar2 != 0) {
+    lVar1 = WARPGATE_IsUnitWarpRoom(streamUnit);
+    if (lVar1 != 0) {
       WARPGATE_RemoveFromArray(streamUnit);
     }
     EVENT_RemoveStreamToInstanceList(streamUnit);
-    pLVar4 = streamUnit->level;
-    iVar9 = 0;
-    if (0 < pLVar4->NumberOfSFXMarkers) {
-      iVar5 = 0;
+    pLVar3 = streamUnit->level;
+    iVar8 = 0;
+    if (0 < pLVar3->NumberOfSFXMarkers) {
+      iVar4 = 0;
       do {
-        ppuVar7 = (uchar **)((int)&pLVar4->SFXMarkerList->soundData + iVar5);
-        SOUND_EndInstanceSounds(*ppuVar7,(SoundInstance *)(ppuVar7 + 2));
-        pLVar4 = streamUnit->level;
-        iVar9 = iVar9 + 1;
-        iVar5 = iVar5 + 0x24;
-      } while (iVar9 < pLVar4->NumberOfSFXMarkers);
+        ppuVar6 = (uchar **)((int)&pLVar3->SFXMarkerList->soundData + iVar4);
+        SOUND_EndInstanceSounds(*ppuVar6,(SoundInstance *)(ppuVar6 + 2));
+        pLVar3 = streamUnit->level;
+        iVar8 = iVar8 + 1;
+        iVar4 = iVar4 + 0x24;
+      } while (iVar8 < pLVar3->NumberOfSFXMarkers);
     }
-    if (streamUnit->sfxFileHandle != 0) {
-      aadFreeDynamicSfx(streamUnit->sfxFileHandle);
+    if ((int)streamUnit->sfxFileHandle != 0) {
+      aadFreeDynamicSfx((int)streamUnit->sfxFileHandle);
     }
     RemoveIntroducedLights(streamUnit->level);
     PLANAPI_DeleteNodeFromPoolByUnit(streamUnit->StreamUnitID);
     STREAM_RemoveInstancesWithIDInInstanceList
-              (gameTrackerX.instanceList,streamUnit->StreamUnitID,streamUnit->level);
+              (DAT_800d2100,streamUnit->StreamUnitID,streamUnit->level);
     if (doSave != 0) {
       EVENT_SaveEventsFromLevel(streamUnit->StreamUnitID,streamUnit->level);
       SAVE_CreatedSavedLevel(streamUnit->StreamUnitID,streamUnit->level);
@@ -2771,36 +2842,37 @@ void STREAM_DumpUnit(_StreamUnit *streamUnit,long doSave)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_DumpAllUnitsNotNeeded(struct GameTracker *gameTracker /*$s2*/)
- // line 2120, offset 0x8005bf94
+ // line 2232, offset 0x8005b130
 	/* begin block 1 */
-		// Start line: 2121
-		// Start offset: 0x8005BF94
+		// Start line: 2233
+		// Start offset: 0x8005B130
 		// Variables:
 	// 		int i; // $s1
 	/* end block 1 */
-	// End offset: 0x8005BFF4
-	// End Line: 2133
+	// End offset: 0x8005B190
+	// End Line: 2245
 
 	/* begin block 2 */
-		// Start line: 4949
+		// Start line: 5230
 	/* end block 2 */
-	// End Line: 4950
+	// End Line: 5231
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_DumpAllUnitsNotNeeded(GameTracker *gameTracker)
 
 {
-  STracker *streamUnit;
+  _StreamUnit *streamUnit;
   int iVar1;
   
   iVar1 = 0;
-  streamUnit = &StreamTracker;
+  streamUnit = (_StreamUnit *)&StreamTracker;
   do {
-    if ((*(short *)streamUnit->StreamList != 0) &&
-       (*(ulong *)streamUnit->StreamList != gameTracker->displayFrameCount)) {
-      STREAM_DumpUnit((_StreamUnit *)streamUnit,1);
+    if ((streamUnit->used != 0) && (streamUnit->FrameCount != gameTracker->displayFrameCount)) {
+      STREAM_DumpUnit(streamUnit,1);
     }
     iVar1 = iVar1 + 1;
-    streamUnit = (STracker *)(streamUnit->StreamList + 1);
+    streamUnit = streamUnit + 1;
   } while (iVar1 < 0x10);
   return;
 }
@@ -2809,37 +2881,38 @@ void STREAM_DumpAllUnitsNotNeeded(GameTracker *gameTracker)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ STREAM_DumpAllLevels(long IDNoRemove /*$s2*/)
- // line 2135, offset 0x8005c00c
+// void /*$ra*/ STREAM_DumpAllLevels(long IDNoRemove /*$s2*/, int DoSave /*$s3*/)
+ // line 2247, offset 0x8005b1a8
 	/* begin block 1 */
-		// Start line: 2136
-		// Start offset: 0x8005C00C
+		// Start line: 2248
+		// Start offset: 0x8005B1A8
 		// Variables:
 	// 		int i; // $s1
 	/* end block 1 */
-	// End offset: 0x8005C068
-	// End Line: 2149
+	// End offset: 0x8005B20C
+	// End Line: 2261
 
 	/* begin block 2 */
-		// Start line: 4990
+		// Start line: 5271
 	/* end block 2 */
-	// End Line: 4991
+	// End Line: 5272
 
-void STREAM_DumpAllLevels(long IDNoRemove)
+/* File: C:\kain2\game\STREAM.C */
+
+void STREAM_DumpAllLevels(long IDNoRemove,int DoSave)
 
 {
-  STracker *streamUnit;
+  _StreamUnit *streamUnit;
   int iVar1;
   
   iVar1 = 0;
-  streamUnit = &StreamTracker;
+  streamUnit = (_StreamUnit *)&StreamTracker;
   do {
-    if ((*(short *)streamUnit->StreamList != 0) &&
-       (streamUnit->StreamList[0].StreamUnitID != IDNoRemove)) {
-      STREAM_DumpUnit((_StreamUnit *)streamUnit,0);
+    if ((streamUnit->used != 0) && (streamUnit->StreamUnitID != IDNoRemove)) {
+      STREAM_DumpUnit(streamUnit,DoSave);
     }
     iVar1 = iVar1 + 1;
-    streamUnit = (STracker *)(streamUnit->StreamList + 1);
+    streamUnit = streamUnit + 1;
   } while (iVar1 < 0x10);
   return;
 }
@@ -2849,35 +2922,38 @@ void STREAM_DumpAllLevels(long IDNoRemove)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_LoadCurrentWarpRoom(struct StreamUnitPortal *streamPortal /*$s1*/, struct _StreamUnit *mainStreamUnit /*$a1*/)
- // line 2152, offset 0x8005c080
+ // line 2264, offset 0x8005b228
 	/* begin block 1 */
-		// Start line: 5037
+		// Start line: 5318
 	/* end block 1 */
-	// End Line: 5038
+	// End Line: 5319
 
 	/* begin block 2 */
-		// Start line: 5039
+		// Start line: 5319
 	/* end block 2 */
-	// End Line: 5040
+	// End Line: 5320
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_LoadCurrentWarpRoom(StreamUnitPortal *streamPortal,_StreamUnit *mainStreamUnit)
 
 {
-  long lVar1;
-  int iVar2;
-  _StreamUnit *p_Var3;
+  int iVar1;
+  _StreamUnit *p_Var2;
   
-  iVar2 = strcmpi(mainStreamUnit->level->worldName,(char *)(&WarpRoomArray + CurrentWarpNumber));
-  if (iVar2 == 0) {
-    CurrentWarpNumber = (CurrentWarpNumber + 1) % 0xe;
+  iVar1 = strcmpi(mainStreamUnit->level->worldName,WarpRoomArray + CurrentWarpNumber * 0x14);
+  if (iVar1 == 0) {
+    DAT_800d29ec = 3;
+    DAT_800d29f0 = DAT_800d29f4;
   }
-  p_Var3 = STREAM_LoadLevel(&gameTrackerX,(char *)(&WarpRoomArray + CurrentWarpNumber),streamPortal,
-                            0);
-  lVar1 = CurrentWarpNumber;
-  (&WarpRoomArray)[CurrentWarpNumber].streamUnit = p_Var3;
-  if (p_Var3 != (_StreamUnit *)0x0) {
-    streamPortal->toStreamUnit = p_Var3;
-    ((&WarpRoomArray)[lVar1].streamUnit)->flags = ((&WarpRoomArray)[lVar1].streamUnit)->flags | 1;
+  p_Var2 = STREAM_LoadLevel((GameTracker *)&gameTrackerX,WarpRoomArray + CurrentWarpNumber * 0x14,
+                            streamPortal,0);
+  iVar1 = CurrentWarpNumber * 0x14;
+  *(_StreamUnit **)(&LAB_800d0420 + iVar1) = p_Var2;
+  if (p_Var2 != (_StreamUnit *)0x0) {
+    streamPortal->toStreamUnit = p_Var2;
+    *(ushort *)(*(int *)(&LAB_800d0420 + iVar1) + 6) =
+         *(ushort *)(*(int *)(&LAB_800d0420 + iVar1) + 6) | 1;
   }
   return;
 }
@@ -2887,38 +2963,40 @@ void STREAM_LoadCurrentWarpRoom(StreamUnitPortal *streamPortal,_StreamUnit *main
 // decompiled code
 // original method signature: 
 // void /*$ra*/ WARPGATE_RelocateLoadedWarpRooms(struct _StreamUnit *mainUnit /*$s3*/, struct StreamUnitPortal *streamPortal /*$s4*/)
- // line 2169, offset 0x8005c174
+ // line 2281, offset 0x8005b2f0
 	/* begin block 1 */
-		// Start line: 2170
-		// Start offset: 0x8005C174
+		// Start line: 2282
+		// Start offset: 0x8005B2F0
 		// Variables:
 	// 		int i; // $s2
 	/* end block 1 */
-	// End offset: 0x8005C1F0
-	// End Line: 2182
+	// End offset: 0x8005B36C
+	// End Line: 2294
 
 	/* begin block 2 */
-		// Start line: 5075
+		// Start line: 5355
 	/* end block 2 */
-	// End Line: 5076
+	// End Line: 5356
+
+/* File: C:\kain2\game\STREAM.C */
 
 void WARPGATE_RelocateLoadedWarpRooms(_StreamUnit *mainUnit,StreamUnitPortal *streamPortal)
 
 {
-  STracker *pSVar1;
+  _StreamUnit *p_Var1;
   char *baseAreaName;
   int iVar2;
   
   iVar2 = 0;
-  baseAreaName = StreamTracker.StreamList[0].baseAreaName;
-  pSVar1 = &StreamTracker;
+  baseAreaName = &DAT_800d2a18;
+  p_Var1 = (_StreamUnit *)&StreamTracker;
   do {
-    if ((pSVar1 != (STracker *)mainUnit) && ((*(ushort *)pSVar1->StreamList & 1) != 0)) {
-      STREAM_LoadLevel(&gameTrackerX,baseAreaName,streamPortal,0);
+    if ((p_Var1 != mainUnit) && ((p_Var1->flags & 1U) != 0)) {
+      STREAM_LoadLevel((GameTracker *)&gameTrackerX,baseAreaName,streamPortal,0);
     }
     baseAreaName = baseAreaName + 0x40;
     iVar2 = iVar2 + 1;
-    pSVar1 = (STracker *)(pSVar1->StreamList + 1);
+    p_Var1 = p_Var1 + 1;
   } while (iVar2 < 0x10);
   return;
 }
@@ -2928,37 +3006,39 @@ void WARPGATE_RelocateLoadedWarpRooms(_StreamUnit *mainUnit,StreamUnitPortal *st
 // decompiled code
 // original method signature: 
 // long /*$ra*/ WARPGATE_GetWarpRoomIndex(char *name /*$s2*/)
- // line 2185, offset 0x8005c210
+ // line 2297, offset 0x8005b38c
 	/* begin block 1 */
-		// Start line: 2186
-		// Start offset: 0x8005C210
+		// Start line: 2298
+		// Start offset: 0x8005B38C
 		// Variables:
 	// 		int i; // $s0
 	/* end block 1 */
-	// End offset: 0x8005C25C
-	// End Line: 2198
+	// End offset: 0x8005B3D8
+	// End Line: 2310
 
 	/* begin block 2 */
-		// Start line: 5122
+		// Start line: 5402
 	/* end block 2 */
-	// End Line: 5123
+	// End Line: 5403
+
+/* File: C:\kain2\game\STREAM.C */
 
 long WARPGATE_GetWarpRoomIndex(char *name)
 
 {
   int iVar1;
   int iVar2;
-  WarpRoom *s1;
+  char *s1;
   
   iVar2 = 0;
-  s1 = &WarpRoomArray;
+  s1 = WarpRoomArray;
   do {
-    iVar1 = strcmpi((char *)s1,name);
+    iVar1 = strcmpi(s1,name);
     if (iVar1 == 0) {
       return iVar2;
     }
     iVar2 = iVar2 + 1;
-    s1 = s1 + 1;
+    s1 = s1 + 0x14;
   } while (iVar2 < 0xe);
   return -1;
 }
@@ -2968,20 +3048,22 @@ long WARPGATE_GetWarpRoomIndex(char *name)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ WARPGATE_UpdateAddToArray(struct _StreamUnit *streamUnit /*$s0*/)
- // line 2200, offset 0x8005c274
+ // line 2312, offset 0x8005b3f0
 	/* begin block 1 */
-		// Start line: 2201
-		// Start offset: 0x8005C274
+		// Start line: 2313
+		// Start offset: 0x8005B3F0
 		// Variables:
 	// 		int i; // $v1
 	/* end block 1 */
-	// End offset: 0x8005C2B4
-	// End Line: 2209
+	// End offset: 0x8005B430
+	// End Line: 2321
 
 	/* begin block 2 */
-		// Start line: 5160
+		// Start line: 5440
 	/* end block 2 */
-	// End Line: 5161
+	// End Line: 5441
+
+/* File: C:\kain2\game\STREAM.C */
 
 void WARPGATE_UpdateAddToArray(_StreamUnit *streamUnit)
 
@@ -2990,7 +3072,7 @@ void WARPGATE_UpdateAddToArray(_StreamUnit *streamUnit)
   
   lVar1 = WARPGATE_GetWarpRoomIndex(streamUnit->baseAreaName);
   if (lVar1 != -1) {
-    (&WarpRoomArray)[lVar1].streamUnit = streamUnit;
+    *(_StreamUnit **)(&LAB_800d0420 + lVar1 * 0x14) = streamUnit;
   }
   return;
 }
@@ -3000,18 +3082,20 @@ void WARPGATE_UpdateAddToArray(_StreamUnit *streamUnit)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ WARPGATE_RemoveFromArray(struct _StreamUnit *streamUnit /*$a0*/)
- // line 2211, offset 0x8005c2c4
+ // line 2323, offset 0x8005b440
 	/* begin block 1 */
-		// Start line: 2212
-		// Start offset: 0x8005C2C4
+		// Start line: 2324
+		// Start offset: 0x8005B440
 	/* end block 1 */
-	// End offset: 0x8005C2E4
-	// End Line: 2219
+	// End offset: 0x8005B460
+	// End Line: 2331
 
 	/* begin block 2 */
-		// Start line: 5182
+		// Start line: 5462
 	/* end block 2 */
-	// End Line: 5183
+	// End Line: 5463
+
+/* File: C:\kain2\game\STREAM.C */
 
 void WARPGATE_RemoveFromArray(_StreamUnit *streamUnit)
 
@@ -3029,32 +3113,212 @@ void WARPGATE_RemoveFromArray(_StreamUnit *streamUnit)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ WARPGATE_IsItActive(struct _StreamUnit *streamUnit /*$a0*/)
- // line 2222, offset 0x8005c2f4
+// void /*$ra*/ WARPGATE_Init()
+ // line 2334, offset 0x8005b470
 	/* begin block 1 */
-		// Start line: 2224
-		// Start offset: 0x8005C2F4
+		// Start line: 5484
+	/* end block 1 */
+	// End Line: 5485
+
+	/* begin block 2 */
+		// Start line: 5488
+	/* end block 2 */
+	// End Line: 5489
+
+/* File: C:\kain2\game\STREAM.C */
+
+void WARPGATE_Init(void)
+
+{
+  CurrentWarpNumber = 0;
+  WarpGateLoadInfo = 0;
+  DAT_800d29ec = 0;
+  DAT_800d29ed = 0;
+  DAT_800d29ee = 0x1000;
+  DAT_800d29f0 = 0;
+  DAT_800d29f4 = 0xf000;
+  DAT_800d29f8 = 0;
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ WARPGATE_StartUsingWarpgate()
+ // line 2348, offset 0x8005b4a0
+	/* begin block 1 */
+		// Start line: 5517
+	/* end block 1 */
+	// End Line: 5518
+
+	/* begin block 2 */
+		// Start line: 5518
+	/* end block 2 */
+	// End Line: 5519
+
+/* File: C:\kain2\game\STREAM.C */
+
+void WARPGATE_StartUsingWarpgate(void)
+
+{
+  if (WarpGateLoadInfo == 0) {
+    SndPlayVolPan(0x16f,0x7f,0x40,0);
+  }
+  WarpGateLoadInfo = 1;
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ WARPGATE_EndUsingWarpgate()
+ // line 2355, offset 0x8005b4d8
+	/* begin block 1 */
+		// Start line: 5532
+	/* end block 1 */
+	// End Line: 5533
+
+/* File: C:\kain2\game\STREAM.C */
+
+void WARPGATE_EndUsingWarpgate(void)
+
+{
+  if (WarpGateLoadInfo == 1) {
+    SndPlayVolPan(0x182,0x7f,0x40,0);
+  }
+  WarpGateLoadInfo = 0;
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ WARPGATE_IsWarpgateInUse()
+ // line 2362, offset 0x8005b510
+	/* begin block 1 */
+		// Start line: 5546
+	/* end block 1 */
+	// End Line: 5547
+
+	/* begin block 2 */
+		// Start line: 5547
+	/* end block 2 */
+	// End Line: 5548
+
+/* File: C:\kain2\game\STREAM.C */
+
+int WARPGATE_IsWarpgateInUse(void)
+
+{
+  return WarpGateLoadInfo;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ WARPGATE_IsWarpgateActive()
+ // line 2368, offset 0x8005b51c
+	/* begin block 1 */
+		// Start line: 5558
+	/* end block 1 */
+	// End Line: 5559
+
+	/* begin block 2 */
+		// Start line: 5559
+	/* end block 2 */
+	// End Line: 5560
+
+/* File: C:\kain2\game\STREAM.C */
+
+int WARPGATE_IsWarpgateActive(void)
+
+{
+  return (uint)(DAT_800d29ec != '\0');
+}
+
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ WARPGATE_IsWarpgateUsable()
+ // line 2375, offset 0x8005b528
+	/* begin block 1 */
+		// Start line: 5572
+	/* end block 1 */
+	// End Line: 5573
+
+	/* begin block 2 */
+		// Start line: 5573
+	/* end block 2 */
+	// End Line: 5574
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* File: C:\kain2\game\STREAM.C */
+
+int WARPGATE_IsWarpgateUsable(void)
+
+{
+  return (uint)(_DAT_800d29ec == 4);
+}
+
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ WARPGATE_IsWarpgateSpectral()
+ // line 2382, offset 0x8005b53c
+	/* begin block 1 */
+		// Start line: 5586
+	/* end block 1 */
+	// End Line: 5587
+
+/* File: C:\kain2\game\STREAM.C */
+
+int WARPGATE_IsWarpgateSpectral(void)
+
+{
+  int iVar1;
+  
+  iVar1 = strcmpi(WarpRoomArray + CurrentWarpNumber * 0x14,s_under3_800d06fc);
+  return (uint)(iVar1 == 0);
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ WARPGATE_IsItActive(struct _StreamUnit *streamUnit /*$a0*/)
+ // line 2390, offset 0x8005b57c
+	/* begin block 1 */
+		// Start line: 2392
+		// Start offset: 0x8005B57C
 		// Variables:
 	// 		struct Level *level; // $t1
 	// 		int d; // $a1
 	/* end block 1 */
-	// End offset: 0x8005C3B4
-	// End Line: 2246
+	// End offset: 0x8005B63C
+	// End Line: 2414
 
 	/* begin block 2 */
-		// Start line: 5204
+		// Start line: 5603
 	/* end block 2 */
-	// End Line: 5205
+	// End Line: 5604
 
 	/* begin block 3 */
-		// Start line: 5205
+		// Start line: 5604
 	/* end block 3 */
-	// End Line: 5206
+	// End Line: 5605
 
 	/* begin block 4 */
-		// Start line: 5208
+		// Start line: 5607
 	/* end block 4 */
-	// End Line: 5209
+	// End Line: 5608
+
+/* File: C:\kain2\game\STREAM.C */
 
 void WARPGATE_IsItActive(_StreamUnit *streamUnit)
 
@@ -3070,7 +3334,7 @@ void WARPGATE_IsItActive(_StreamUnit *streamUnit)
     do {
       psVar2 = (short *)pLVar3->PuzzleInstances->eventInstances[iVar1];
       if (*psVar2 == 1) {
-        if ((gameTrackerX.streamFlags & 0x400000U) != 0) {
+        if ((DAT_800d2210 & 0x400000) != 0) {
           psVar2[3] = 1;
         }
         if (*(short *)(pLVar3->PuzzleInstances->eventInstances[iVar1] + 6) != 1) {
@@ -3090,10 +3354,10 @@ void WARPGATE_IsItActive(_StreamUnit *streamUnit)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ WARPGATE_IsUnitWarpRoom(struct _StreamUnit *streamUnit /*$a0*/)
- // line 2248, offset 0x8005c3bc
+ // line 2416, offset 0x8005b644
 	/* begin block 1 */
-		// Start line: 2250
-		// Start offset: 0x8005C3BC
+		// Start line: 2418
+		// Start offset: 0x8005B644
 		// Variables:
 	// 		struct Level *level; // $v0
 	// 		long isWarpRoom; // $a1
@@ -3101,23 +3365,25 @@ void WARPGATE_IsItActive(_StreamUnit *streamUnit)
 	// 		long numPortals; // $a2
 	// 		long d; // $a0
 	/* end block 1 */
-	// End offset: 0x8005C40C
-	// End Line: 2268
+	// End offset: 0x8005B694
+	// End Line: 2436
 
 	/* begin block 2 */
-		// Start line: 5271
+		// Start line: 5670
 	/* end block 2 */
-	// End Line: 5272
+	// End Line: 5671
 
 	/* begin block 3 */
-		// Start line: 5272
+		// Start line: 5671
 	/* end block 3 */
-	// End Line: 5273
+	// End Line: 5672
 
 	/* begin block 4 */
-		// Start line: 5277
+		// Start line: 5676
 	/* end block 4 */
-	// End Line: 5278
+	// End Line: 5677
+
+/* File: C:\kain2\game\STREAM.C */
 
 long WARPGATE_IsUnitWarpRoom(_StreamUnit *streamUnit)
 
@@ -3149,18 +3415,20 @@ long WARPGATE_IsUnitWarpRoom(_StreamUnit *streamUnit)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ WARPGATE_FixUnit(struct _StreamUnit *streamUnit /*$s0*/)
- // line 2271, offset 0x8005c414
+ // line 2439, offset 0x8005b69c
 	/* begin block 1 */
-		// Start line: 2272
-		// Start offset: 0x8005C414
+		// Start line: 2440
+		// Start offset: 0x8005B69C
 	/* end block 1 */
-	// End offset: 0x8005C438
-	// End Line: 2284
+	// End offset: 0x8005B6C0
+	// End Line: 2452
 
 	/* begin block 2 */
-		// Start line: 5325
+		// Start line: 5724
 	/* end block 2 */
-	// End Line: 5326
+	// End Line: 5725
+
+/* File: C:\kain2\game\STREAM.C */
 
 void WARPGATE_FixUnit(_StreamUnit *streamUnit)
 
@@ -3179,47 +3447,47 @@ void WARPGATE_FixUnit(_StreamUnit *streamUnit)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_MarkWarpUnitsNeeded()
- // line 2287, offset 0x8005c448
+ // line 2455, offset 0x8005b6d0
 	/* begin block 1 */
-		// Start line: 2289
-		// Start offset: 0x8005C448
+		// Start line: 2457
+		// Start offset: 0x8005B6D0
 		// Variables:
 	// 		int i; // $a0
 	/* end block 1 */
-	// End offset: 0x8005C484
-	// End Line: 2298
+	// End offset: 0x8005B70C
+	// End Line: 2466
 
 	/* begin block 2 */
-		// Start line: 5357
+		// Start line: 5756
 	/* end block 2 */
-	// End Line: 5358
+	// End Line: 5757
 
 	/* begin block 3 */
-		// Start line: 5358
+		// Start line: 5757
 	/* end block 3 */
-	// End Line: 5359
+	// End Line: 5758
 
 	/* begin block 4 */
-		// Start line: 5360
+		// Start line: 5759
 	/* end block 4 */
-	// End Line: 5361
+	// End Line: 5760
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_MarkWarpUnitsNeeded(void)
 
 {
-  STracker *pSVar1;
+  undefined4 *puVar1;
   int iVar2;
   
   iVar2 = 0;
-  pSVar1 = &StreamTracker;
+  puVar1 = &StreamTracker;
   do {
-    if ((pSVar1->StreamList[0].flags & 1U) != 0) {
-      pSVar1->StreamList[0].FrameCount = gameTrackerX.displayFrameCount;
+    if ((*(ushort *)((int)puVar1 + 6) & 1) != 0) {
+      puVar1[8] = DAT_800d21f4;
     }
     iVar2 = iVar2 + 1;
-    pSVar1 = (STracker *)(pSVar1->StreamList + 1);
+    puVar1 = puVar1 + 0x10;
   } while (iVar2 < 0x10);
   return;
 }
@@ -3229,41 +3497,37 @@ void STREAM_MarkWarpUnitsNeeded(void)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ WARPGATE_IncrementIndex()
- // line 2303, offset 0x8005c48c
+ // line 2471, offset 0x8005b714
 	/* begin block 1 */
-		// Start line: 2304
-		// Start offset: 0x8005C48C
+		// Start line: 2472
+		// Start offset: 0x8005B714
 		// Variables:
 	// 		long result; // $s1
 	/* end block 1 */
-	// End offset: 0x8005C57C
-	// End Line: 2328
+	// End offset: 0x8005B81C
+	// End Line: 2497
 
 	/* begin block 2 */
-		// Start line: 5393
+		// Start line: 5792
 	/* end block 2 */
-	// End Line: 5394
+	// End Line: 5793
 
-	/* begin block 3 */
-		// Start line: 5398
-	/* end block 3 */
-	// End Line: 5399
-
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\STREAM.C */
 
 long WARPGATE_IncrementIndex(void)
 
 {
   int iVar1;
   
-  if (WarpGateLoadInfo.loading == 0) {
-    WarpGateLoadInfo.loading = 1;
-    WarpGateLoadInfo.curTime = 0;
-    (WarpGateLoadInfo.warpFaceInstance)->fadeValue = 0x1000;
-    WarpGateLoadInfo.warpFaceInstance = (_Instance *)0x0;
-    (&WarpRoomArray)[CurrentWarpNumber].streamUnit = (_StreamUnit *)0x0;
+  if (DAT_800d29ec == '\x04') {
+    SndPlayVolPan(0x183,0x7f,0x40,0);
+    DAT_800d29ec = '\x01';
+    DAT_800d29f0 = 0;
+    *(undefined2 *)(DAT_800d29f8 + 0x100) = 0x1000;
+    DAT_800d29f8 = 0;
+    *(undefined4 *)(&LAB_800d0420 + CurrentWarpNumber * 0x14) = 0;
     CurrentWarpNumber = (CurrentWarpNumber + 1) % 0xe;
-    iVar1 = strcmpi(gameTrackerX.baseAreaName,(char *)(&WarpRoomArray + CurrentWarpNumber));
+    iVar1 = strcmpi(&DAT_800d2228,WarpRoomArray + CurrentWarpNumber * 0x14);
     if (iVar1 == 0) {
       CurrentWarpNumber = (CurrentWarpNumber + 1) % 0xe;
     }
@@ -3277,32 +3541,34 @@ long WARPGATE_IncrementIndex(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ WARPGATE_CalcWarpFade(int timeInc /*$a0*/)
- // line 2331, offset 0x8005c594
+ // line 2500, offset 0x8005b834
 	/* begin block 1 */
-		// Start line: 5475
+		// Start line: 5876
 	/* end block 1 */
-	// End Line: 5476
+	// End Line: 5877
 
 	/* begin block 2 */
-		// Start line: 5476
+		// Start line: 5877
 	/* end block 2 */
-	// End Line: 5477
+	// End Line: 5878
+
+/* File: C:\kain2\game\STREAM.C */
 
 void WARPGATE_CalcWarpFade(int timeInc)
 
 {
   int iVar1;
   
-  (WarpGateLoadInfo.warpFaceInstance)->fadeValue = WarpGateLoadInfo.fadeValue;
-  iVar1 = 0x1000 - ((WarpGateLoadInfo.curTime + timeInc) * 0x1000) / WarpGateLoadInfo.maxTime;
-  WarpGateLoadInfo.fadeValue = (short)iVar1;
+  *(undefined2 *)(DAT_800d29f8 + 0x100) = DAT_800d29ee;
+  iVar1 = 0x1000 - ((DAT_800d29f0 + timeInc) * 0x1000) / DAT_800d29f4;
+  DAT_800d29ee = (short)iVar1;
   if (0x1000 < iVar1 * 0x10000 >> 0x10) {
-    WarpGateLoadInfo.fadeValue = 0x1000;
+    DAT_800d29ee = 0x1000;
   }
-  if (WarpGateLoadInfo.fadeValue < 0) {
-    WarpGateLoadInfo.fadeValue = 0;
+  if (DAT_800d29ee < 0) {
+    DAT_800d29ee = 0;
   }
-  WarpGateLoadInfo.curTime = WarpGateLoadInfo.curTime + timeInc;
+  DAT_800d29f0 = DAT_800d29f0 + timeInc;
   return;
 }
 
@@ -3311,45 +3577,41 @@ void WARPGATE_CalcWarpFade(int timeInc)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ WARPGATE_DecrementIndex()
- // line 2340, offset 0x8005c604
+ // line 2509, offset 0x8005b8a4
 	/* begin block 1 */
-		// Start line: 2341
-		// Start offset: 0x8005C604
+		// Start line: 2510
+		// Start offset: 0x8005B8A4
 		// Variables:
 	// 		long result; // $s0
 	/* end block 1 */
-	// End offset: 0x8005C6B8
-	// End Line: 2367
+	// End offset: 0x8005B970
+	// End Line: 2537
 
 	/* begin block 2 */
-		// Start line: 5494
+		// Start line: 5895
 	/* end block 2 */
-	// End Line: 5495
+	// End Line: 5896
 
-	/* begin block 3 */
-		// Start line: 5499
-	/* end block 3 */
-	// End Line: 5500
-
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\STREAM.C */
 
 long WARPGATE_DecrementIndex(void)
 
 {
   int iVar1;
   
-  if (WarpGateLoadInfo.loading == 0) {
-    WarpGateLoadInfo.loading = 1;
-    WarpGateLoadInfo.curTime = 0;
-    (WarpGateLoadInfo.warpFaceInstance)->fadeValue = 0x1000;
-    iVar1 = CurrentWarpNumber + -1;
-    WarpGateLoadInfo.warpFaceInstance = (_Instance *)0x0;
-    (&WarpRoomArray)[CurrentWarpNumber].streamUnit = (_StreamUnit *)0x0;
-    CurrentWarpNumber = iVar1;
-    if (iVar1 < 0) {
+  if (DAT_800d29ec == '\x04') {
+    SndPlayVolPan(0x183,0x7f,0x40,0);
+    DAT_800d29ec = '\x01';
+    DAT_800d29f0 = 0;
+    *(undefined2 *)(DAT_800d29f8 + 0x100) = 0x1000;
+    iVar1 = CurrentWarpNumber * 0x14;
+    CurrentWarpNumber = CurrentWarpNumber + -1;
+    DAT_800d29f8 = 0;
+    *(undefined4 *)(&LAB_800d0420 + iVar1) = 0;
+    if (CurrentWarpNumber < 0) {
       CurrentWarpNumber = 0xd;
     }
-    iVar1 = strcmpi(gameTrackerX.baseAreaName,(char *)(&WarpRoomArray + CurrentWarpNumber));
+    iVar1 = strcmpi(&DAT_800d2228,WarpRoomArray + CurrentWarpNumber * 0x14);
     if ((iVar1 == 0) && (CurrentWarpNumber = CurrentWarpNumber + -1, CurrentWarpNumber < 0)) {
       CurrentWarpNumber = 0xd;
     }
@@ -3363,10 +3625,10 @@ long WARPGATE_DecrementIndex(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PreloadAllConnectedUnits(struct GameTracker *gameTracker /*$s4*/, struct _StreamUnit *streamUnit /*$s5*/, struct _SVector *offset /*$s6*/)
- // line 2371, offset 0x8005c6cc
+ // line 2541, offset 0x8005b984
 	/* begin block 1 */
-		// Start line: 2372
-		// Start offset: 0x8005C6CC
+		// Start line: 2542
+		// Start offset: 0x8005B984
 		// Variables:
 	// 		int i; // $s1
 	// 		char text[16]; // stack offset -48
@@ -3374,82 +3636,81 @@ long WARPGATE_DecrementIndex(void)
 	// 		char *commapos; // $v0
 	// 		struct StreamUnitPortal *stream; // $s0
 	/* end block 1 */
-	// End offset: 0x8005C888
-	// End Line: 2505
+	// End offset: 0x8005BB24
+	// End Line: 2675
 
 	/* begin block 2 */
-		// Start line: 5570
+		// Start line: 5972
 	/* end block 2 */
-	// End Line: 5571
+	// End Line: 5973
+
+/* File: C:\kain2\game\STREAM.C */
 
 void PreloadAllConnectedUnits(GameTracker *gameTracker,_StreamUnit *streamUnit,_SVector *offset)
 
 {
   char *pcVar1;
   int iVar2;
-  int *__src;
+  int *piVar3;
   StreamUnitPortal *streamPortal;
-  int iVar3;
-  ushort *puVar4;
-  int iVar5;
+  int iVar4;
+  ushort *puVar5;
+  int iVar6;
   char acStack48 [16];
   
   gameTracker->displayFrameCount = gameTracker->displayFrameCount + 1;
-  __src = (int *)streamUnit->level->terrain->StreamUnits;
-  iVar3 = 0;
-  iVar5 = *__src;
-  __src = __src + 1;
-  if (0 < iVar5) {
+  piVar3 = (int *)streamUnit->level->terrain->StreamUnits;
+  iVar4 = 0;
+  iVar6 = *piVar3;
+  piVar3 = piVar3 + 1;
+  if (0 < iVar6) {
     do {
-      strcpy(acStack48,(char *)__src);
-      pcVar1 = strchr(acStack48,0x2c);
+      strcpy();
+      pcVar1 = strchr(acStack48,',');
       if (pcVar1 != (char *)0x0) {
         *pcVar1 = '\0';
       }
-      iVar2 = strcmpi(acStack48,"warpgate");
+      iVar2 = strcmpi(acStack48,s_warpgate_800d06e8);
       if (iVar2 == 0) {
         STREAM_MarkWarpUnitsNeeded();
       }
       else {
-        STREAM_MarkUnitNeeded(__src[5]);
+        STREAM_MarkUnitNeeded(piVar3[5]);
       }
-      iVar3 = iVar3 + 1;
-      __src = __src + 0x17;
-    } while (iVar3 < iVar5);
+      iVar4 = iVar4 + 1;
+      piVar3 = piVar3 + 0x17;
+    } while (iVar4 < iVar6);
   }
-  iVar3 = 0;
+  iVar4 = 0;
   STREAM_MarkUnitNeeded(streamUnit->StreamUnitID);
   STREAM_DumpAllUnitsNotNeeded(gameTracker);
   STREAM_RemoveAllObjectsNotInUse(gameTracker);
   RelocateLevelWithInstances(streamUnit->level,offset);
   MEMPACK_DoGarbageCollection();
-  __src = (int *)streamUnit->level->terrain->StreamUnits;
-  iVar5 = *__src;
-  streamPortal = (StreamUnitPortal *)(__src + 1);
-  if (0 < iVar5) {
-    puVar4 = (ushort *)((int)__src + 0x22);
+  piVar3 = (int *)streamUnit->level->terrain->StreamUnits;
+  iVar6 = *piVar3;
+  streamPortal = (StreamUnitPortal *)(piVar3 + 1);
+  if (0 < iVar6) {
+    puVar5 = (ushort *)((int)piVar3 + 0x22);
     do {
-      strcpy(acStack48,(char *)streamPortal);
-      pcVar1 = strchr(acStack48,0x2c);
-      if (pcVar1 == (char *)0x0) {
-        GXFilePrint("i=%d No signal num specified for signal in level %s\n");
-      }
-      else {
+      strcpy();
+      pcVar1 = strchr(acStack48,',');
+      if (pcVar1 != (char *)0x0) {
         *pcVar1 = '\0';
-        iVar2 = strcmpi(acStack48,"warpgate");
+        iVar2 = strcmpi(acStack48,s_warpgate_800d06e8);
         if (iVar2 == 0) {
-          *(undefined4 *)(puVar4 + 5) = 0;
-          *puVar4 = *puVar4 | 1;
+          *(undefined4 *)(puVar5 + 5) = 0;
+          *puVar5 = *puVar5 | 1;
           WARPGATE_RelocateLoadedWarpRooms(streamUnit,streamPortal);
         }
         else {
           STREAM_LoadLevel(gameTracker,acStack48,streamPortal,1);
         }
       }
-      iVar3 = iVar3 + 1;
-      puVar4 = puVar4 + 0x2e;
+      iVar4 = iVar4 + 1;
+      puVar5 = puVar5 + 0x2e;
       streamPortal = streamPortal + 1;
-    } while (iVar3 < iVar5);
+    } while (iVar4 < iVar6);
   }
   return;
 }
@@ -3459,16 +3720,16 @@ void PreloadAllConnectedUnits(GameTracker *gameTracker,_StreamUnit *streamUnit,_
 // decompiled code
 // original method signature: 
 // void /*$ra*/ RelocateLevel(struct Level *level /*$s0*/, struct _SVector *offset /*$s1*/)
- // line 2570, offset 0x8005c8b0
+ // line 2740, offset 0x8005bb4c
 	/* begin block 1 */
-		// Start line: 2571
-		// Start offset: 0x8005C8B0
+		// Start line: 2741
+		// Start offset: 0x8005BB4C
 		// Variables:
 	// 		int curTree; // $t2
 
 		/* begin block 1.1 */
-			// Start line: 2594
-			// Start offset: 0x8005C9A8
+			// Start line: 2764
+			// Start offset: 0x8005BC44
 			// Variables:
 		// 		short _x0; // $v1
 		// 		short _y0; // $a0
@@ -3478,16 +3739,18 @@ void PreloadAllConnectedUnits(GameTracker *gameTracker,_StreamUnit *streamUnit,_
 		// 		short _z1; // $t1
 		// 		struct _Position *_v; // $a3
 		/* end block 1.1 */
-		// End offset: 0x8005C9A8
-		// End Line: 2596
+		// End offset: 0x8005BC44
+		// End Line: 2766
 	/* end block 1 */
-	// End offset: 0x8005CA00
-	// End Line: 2603
+	// End offset: 0x8005BC9C
+	// End Line: 2773
 
 	/* begin block 2 */
-		// Start line: 5135
+		// Start line: 5475
 	/* end block 2 */
-	// End Line: 5136
+	// End Line: 5476
+
+/* File: C:\kain2\game\STREAM.C */
 
 void RelocateLevel(Level *level,_SVector *offset)
 
@@ -3505,7 +3768,7 @@ void RelocateLevel(Level *level,_SVector *offset)
   RelocatePointLights(level->pointLightList,level->numPointLights,offset);
   RelocateBGObjects(level->bgObjectList,level->numBGObjects,offset);
   RelocateCameras((_CameraKey *)level->cameraList,level->numCameras,offset);
-  RelocateSavedCameras(&theCamera,level,offset);
+  RelocateSavedCameras((Camera *)&theCamera,level,offset);
   level->deathZ = level->deathZ + (int)offset->z;
   RelocatePlanMarkers(level->PlanMarkerList,level->NumberOfPlanMarkers,offset);
   RelocateSFXMarkers(level->SFXMarkerList,level->NumberOfSFXMarkers,offset);
@@ -3515,19 +3778,19 @@ void RelocateLevel(Level *level,_SVector *offset)
   }
   p_Var5 = level->terrain;
   iVar4 = 0;
-  if (0 < (int)p_Var5->morphNormalIdx) {
+  if (0 < p_Var5->numBSPTrees) {
     iVar6 = 0;
     do {
       sVar1 = offset->y;
       sVar2 = offset->z;
-      iVar3 = (int)&p_Var5->signals->numSignals + iVar6;
+      iVar3 = (int)&p_Var5->BSPTreeArray->bspRoot + iVar6;
       *(short *)(iVar3 + 0xc) = *(short *)(iVar3 + 0xc) + offset->x;
       *(short *)(iVar3 + 0xe) = *(short *)(iVar3 + 0xe) + sVar1;
       *(short *)(iVar3 + 0x10) = *(short *)(iVar3 + 0x10) + sVar2;
       p_Var5 = level->terrain;
       iVar4 = iVar4 + 1;
       iVar6 = iVar6 + 0x24;
-    } while (iVar4 < (int)p_Var5->morphNormalIdx);
+    } while (iVar4 < p_Var5->numBSPTrees);
   }
   return;
 }
@@ -3537,30 +3800,32 @@ void RelocateLevel(Level *level,_SVector *offset)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ RelocateCameras(struct _CameraKey *cameraList /*$a0*/, long numCameras /*$a1*/, struct _SVector *offset /*$a2*/)
- // line 2605, offset 0x8005ca14
+ // line 2775, offset 0x8005bcb0
 	/* begin block 1 */
-		// Start line: 2607
-		// Start offset: 0x8005CA14
+		// Start line: 2777
+		// Start offset: 0x8005BCB0
 		// Variables:
 	// 		int i; // $a3
 	/* end block 1 */
-	// End offset: 0x8005CAA0
-	// End Line: 2619
+	// End offset: 0x8005BD3C
+	// End Line: 2789
 
 	/* begin block 2 */
-		// Start line: 6060
+		// Start line: 6457
 	/* end block 2 */
-	// End Line: 6061
+	// End Line: 6458
 
 	/* begin block 3 */
-		// Start line: 6061
+		// Start line: 6458
 	/* end block 3 */
-	// End Line: 6062
+	// End Line: 6459
 
 	/* begin block 4 */
-		// Start line: 6063
+		// Start line: 6460
 	/* end block 4 */
-	// End Line: 6064
+	// End Line: 6461
+
+/* File: C:\kain2\game\STREAM.C */
 
 void RelocateCameras(_CameraKey *cameraList,long numCameras,_SVector *offset)
 
@@ -3588,16 +3853,16 @@ void RelocateCameras(_CameraKey *cameraList,long numCameras,_SVector *offset)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ RelocateSavedCameras(struct Camera *camera /*$t7*/, struct Level *level /*$t8*/, struct _SVector *offset /*$t2*/)
- // line 2621, offset 0x8005caa8
+ // line 2791, offset 0x8005bd44
 	/* begin block 1 */
-		// Start line: 2622
-		// Start offset: 0x8005CAA8
+		// Start line: 2792
+		// Start offset: 0x8005BD44
 		// Variables:
 	// 		int i; // $t6
 
 		/* begin block 1.1 */
-			// Start line: 2632
-			// Start offset: 0x8005CAF0
+			// Start line: 2802
+			// Start offset: 0x8005BD8C
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $v0
@@ -3607,12 +3872,12 @@ void RelocateCameras(_CameraKey *cameraList,long numCameras,_SVector *offset)
 		// 		short _z1; // $a2
 		// 		struct _Position *_v; // $a0
 		/* end block 1.1 */
-		// End offset: 0x8005CAF0
-		// End Line: 2634
+		// End offset: 0x8005BD8C
+		// End Line: 2804
 
 		/* begin block 1.2 */
-			// Start line: 2634
-			// Start offset: 0x8005CAF0
+			// Start line: 2804
+			// Start offset: 0x8005BD8C
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $v1
@@ -3622,12 +3887,12 @@ void RelocateCameras(_CameraKey *cameraList,long numCameras,_SVector *offset)
 		// 		short _z1; // $t1
 		// 		struct _Position *_v; // $a3
 		/* end block 1.2 */
-		// End offset: 0x8005CAF0
-		// End Line: 2634
+		// End offset: 0x8005BD8C
+		// End Line: 2804
 
 		/* begin block 1.3 */
-			// Start line: 2634
-			// Start offset: 0x8005CAF0
+			// Start line: 2804
+			// Start offset: 0x8005BD8C
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $v1
@@ -3637,12 +3902,12 @@ void RelocateCameras(_CameraKey *cameraList,long numCameras,_SVector *offset)
 		// 		short _z1; // $t1
 		// 		struct _Position *_v; // $a3
 		/* end block 1.3 */
-		// End offset: 0x8005CAF0
-		// End Line: 2634
+		// End offset: 0x8005BD8C
+		// End Line: 2804
 
 		/* begin block 1.4 */
-			// Start line: 2634
-			// Start offset: 0x8005CAF0
+			// Start line: 2804
+			// Start offset: 0x8005BD8C
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $v1
@@ -3652,16 +3917,18 @@ void RelocateCameras(_CameraKey *cameraList,long numCameras,_SVector *offset)
 		// 		short _z1; // $t1
 		// 		struct _Position *_v; // $a3
 		/* end block 1.4 */
-		// End offset: 0x8005CBBC
-		// End Line: 2643
+		// End offset: 0x8005BE58
+		// End Line: 2813
 	/* end block 1 */
-	// End offset: 0x8005CBD8
-	// End Line: 2650
+	// End offset: 0x8005BE74
+	// End Line: 2820
 
 	/* begin block 2 */
-		// Start line: 6108
+		// Start line: 6505
 	/* end block 2 */
-	// End Line: 6109
+	// End Line: 6506
+
+/* File: C:\kain2\game\STREAM.C */
 
 void RelocateSavedCameras(Camera *camera,Level *level,_SVector *offset)
 
@@ -3718,18 +3985,20 @@ void RelocateSavedCameras(Camera *camera,Level *level,_SVector *offset)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ RelocateLevelWithInstances(struct Level *level /*$a0*/, struct _SVector *offset /*$s0*/)
- // line 2652, offset 0x8005cbe0
+ // line 2822, offset 0x8005be7c
 	/* begin block 1 */
-		// Start line: 6193
+		// Start line: 6590
 	/* end block 1 */
-	// End Line: 6194
+	// End Line: 6591
+
+/* File: C:\kain2\game\STREAM.C */
 
 void RelocateLevelWithInstances(Level *level,_SVector *offset)
 
 {
   RelocateLevel(level,offset);
-  RelocateInstances(&gameTrackerX,offset,gameTrackerX.StreamUnitID);
-  RelocatePlanPool((PlanningNode *)gameTrackerX.drawTime,offset);
+  RelocateInstances((GameTracker *)&gameTrackerX,offset,DAT_800d2244);
+  RelocatePlanPool(DAT_800d22e4,offset);
   return;
 }
 
@@ -3737,80 +4006,49 @@ void RelocateLevelWithInstances(Level *level,_SVector *offset)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ RelocateTerrain(struct _Terrain *terrain /*$s3*/, struct _SVector *offset /*$s2*/)
- // line 2663, offset 0x8005cc24
+// void /*$ra*/ RelocateTerrain(struct _Terrain *terrain /*$s2*/, struct _SVector *offset /*$s3*/)
+ // line 2833, offset 0x8005bec0
 	/* begin block 1 */
-		// Start line: 2664
-		// Start offset: 0x8005CC24
+		// Start line: 2834
+		// Start offset: 0x8005BEC0
 		// Variables:
 	// 		int i; // $s1
-	// 		struct _BSPNode *snode; // $a2
-	// 		struct _SBSPLeaf *sleaf; // $a1
-	// 		long hx; // $a3
-	// 		long hy; // $a1
-	// 		long hz; // $v1
 	/* end block 1 */
-	// End offset: 0x8005CE0C
-	// End Line: 2791
+	// End offset: 0x8005BF80
+	// End Line: 2961
 
 	/* begin block 2 */
-		// Start line: 6215
+		// Start line: 6612
 	/* end block 2 */
-	// End Line: 6216
+	// End Line: 6613
+
+/* File: C:\kain2\game\STREAM.C */
 
 void RelocateTerrain(_Terrain *terrain,_SVector *offset)
 
 {
-  int *piVar1;
-  short *psVar2;
-  char *pcVar3;
+  char *pcVar1;
   MultiSpline *multi;
-  _MorphVertex *p_Var4;
-  int iVar5;
-  int iVar6;
+  int iVar2;
+  int iVar3;
   
-  p_Var4 = (_MorphVertex *)terrain->pad;
-  if (p_Var4 < terrain->MorphDiffList) {
-    piVar1 = (int *)&p_Var4[1].y;
-    do {
-      p_Var4->x = p_Var4->x + offset->x;
-      *(short *)((int)piVar1 + -0xe) = *(short *)((int)piVar1 + -0xe) + offset->y;
-      *(short *)(piVar1 + -3) = *(short *)(piVar1 + -3) + offset->z;
-      p_Var4 = (_MorphVertex *)&p_Var4[3].y;
-      *piVar1 = *piVar1 + ((int)*(short *)(piVar1 + -2) * (int)offset->x +
-                           (int)*(short *)((int)piVar1 + -6) * (int)offset->y +
-                           (int)*(short *)(piVar1 + -1) * (int)offset->z >> 0xc);
-      piVar1 = piVar1 + 0xb;
-    } while (p_Var4 < terrain->MorphDiffList);
-  }
-  p_Var4 = terrain->MorphDiffList;
-  psVar2 = &p_Var4->z;
-  if (p_Var4 < (_MorphVertex *)terrain->MorphColorList) {
-    do {
-      p_Var4->x = p_Var4->x + offset->x;
-      psVar2[-1] = psVar2[-1] + offset->y;
-      p_Var4 = (_MorphVertex *)&p_Var4[1].hy;
-      *psVar2 = *psVar2 + offset->z;
-      psVar2 = psVar2 + 0xc;
-    } while (p_Var4 < (_MorphVertex *)terrain->MorphColorList);
-  }
-  iVar6 = 0;
+  iVar3 = 0;
   if (0 < terrain->numIntros) {
-    iVar5 = 0;
+    iVar2 = 0;
     do {
-      pcVar3 = terrain->introList->name + iVar5;
-      *(short *)(pcVar3 + 0x20) = *(short *)(pcVar3 + 0x20) + offset->x;
-      pcVar3 = terrain->introList->name + iVar5;
-      *(short *)(pcVar3 + 0x22) = *(short *)(pcVar3 + 0x22) + offset->y;
-      pcVar3 = terrain->introList->name + iVar5;
-      *(short *)(pcVar3 + 0x24) = *(short *)(pcVar3 + 0x24) + offset->z;
-      multi = *(MultiSpline **)((int)&terrain->introList->multiSpline + iVar5);
+      pcVar1 = terrain->introList->name + iVar2;
+      *(short *)(pcVar1 + 0x20) = *(short *)(pcVar1 + 0x20) + offset->x;
+      pcVar1 = terrain->introList->name + iVar2;
+      *(short *)(pcVar1 + 0x22) = *(short *)(pcVar1 + 0x22) + offset->y;
+      pcVar1 = terrain->introList->name + iVar2;
+      *(short *)(pcVar1 + 0x24) = *(short *)(pcVar1 + 0x24) + offset->z;
+      multi = *(MultiSpline **)((int)&terrain->introList->multiSpline + iVar2);
       if (multi != (MultiSpline *)0x0) {
         STREAM_AdjustMultiSpline(multi,offset);
       }
-      iVar6 = iVar6 + 1;
-      iVar5 = iVar5 + 0x4c;
-    } while (iVar6 < terrain->numIntros);
+      iVar3 = iVar3 + 1;
+      iVar2 = iVar2 + 0x4c;
+    } while (iVar3 < terrain->numIntros);
   }
   RelocateStreamPortals
             ((StreamUnitPortal *)(terrain->StreamUnits + 1),*(int *)terrain->StreamUnits,offset);
@@ -3822,30 +4060,32 @@ void RelocateTerrain(_Terrain *terrain,_SVector *offset)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ RelocateVMObjects(struct _VMObject *vobjectlist /*$a0*/, long numvmobjs /*$a1*/, struct _SVector *offset /*$a2*/)
- // line 2797, offset 0x8005ce3c
+ // line 2967, offset 0x8005bfb0
 	/* begin block 1 */
-		// Start line: 2799
-		// Start offset: 0x8005CE3C
+		// Start line: 2969
+		// Start offset: 0x8005BFB0
 		// Variables:
 	// 		int i; // $a3
 	/* end block 1 */
-	// End offset: 0x8005CE8C
-	// End Line: 2821
+	// End offset: 0x8005C000
+	// End Line: 2991
 
 	/* begin block 2 */
-		// Start line: 6522
+		// Start line: 6889
 	/* end block 2 */
-	// End Line: 6523
+	// End Line: 6890
 
 	/* begin block 3 */
-		// Start line: 6523
+		// Start line: 6890
 	/* end block 3 */
-	// End Line: 6524
+	// End Line: 6891
 
 	/* begin block 4 */
-		// Start line: 6526
+		// Start line: 6893
 	/* end block 4 */
-	// End Line: 6527
+	// End Line: 6894
+
+/* File: C:\kain2\game\STREAM.C */
 
 void RelocateVMObjects(_VMObject *vobjectlist,long numvmobjs,_SVector *offset)
 
@@ -3870,30 +4110,32 @@ void RelocateVMObjects(_VMObject *vobjectlist,long numvmobjs,_SVector *offset)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ RelocateSpotLights(struct SpotLight *spotLightList /*$a0*/, long numSpotLights /*$a1*/, struct _SVector *offset /*$a2*/)
- // line 2823, offset 0x8005ce94
+ // line 2993, offset 0x8005c008
 	/* begin block 1 */
-		// Start line: 2825
-		// Start offset: 0x8005CE94
+		// Start line: 2995
+		// Start offset: 0x8005C008
 		// Variables:
 	// 		int i; // $a3
 	/* end block 1 */
-	// End offset: 0x8005CF20
-	// End Line: 2838
+	// End offset: 0x8005C094
+	// End Line: 3008
 
 	/* begin block 2 */
-		// Start line: 6582
+		// Start line: 6949
 	/* end block 2 */
-	// End Line: 6583
+	// End Line: 6950
 
 	/* begin block 3 */
-		// Start line: 6583
+		// Start line: 6950
 	/* end block 3 */
-	// End Line: 6584
+	// End Line: 6951
 
 	/* begin block 4 */
-		// Start line: 6585
+		// Start line: 6952
 	/* end block 4 */
-	// End Line: 6586
+	// End Line: 6953
+
+/* File: C:\kain2\game\STREAM.C */
 
 void RelocateSpotLights(SpotLight *spotLightList,long numSpotLights,_SVector *offset)
 
@@ -3921,30 +4163,32 @@ void RelocateSpotLights(SpotLight *spotLightList,long numSpotLights,_SVector *of
 // decompiled code
 // original method signature: 
 // void /*$ra*/ RelocatePointLights(struct PointLight *PLightList /*$a0*/, long numPLights /*$a1*/, struct _SVector *offset /*$a2*/)
- // line 2840, offset 0x8005cf28
+ // line 3010, offset 0x8005c09c
 	/* begin block 1 */
-		// Start line: 2842
-		// Start offset: 0x8005CF28
+		// Start line: 3012
+		// Start offset: 0x8005C09C
 		// Variables:
 	// 		int i; // $a3
 	/* end block 1 */
-	// End offset: 0x8005CF78
-	// End Line: 2850
+	// End offset: 0x8005C0EC
+	// End Line: 3020
 
 	/* begin block 2 */
-		// Start line: 6632
+		// Start line: 6999
 	/* end block 2 */
-	// End Line: 6633
+	// End Line: 7000
 
 	/* begin block 3 */
-		// Start line: 6633
+		// Start line: 7000
 	/* end block 3 */
-	// End Line: 6634
+	// End Line: 7001
 
 	/* begin block 4 */
-		// Start line: 6635
+		// Start line: 7002
 	/* end block 4 */
-	// End Line: 6636
+	// End Line: 7003
+
+/* File: C:\kain2\game\STREAM.C */
 
 void RelocatePointLights(PointLight *PLightList,long numPLights,_SVector *offset)
 
@@ -3969,21 +4213,23 @@ void RelocatePointLights(PointLight *PLightList,long numPLights,_SVector *offset
 // decompiled code
 // original method signature: 
 // void /*$ra*/ RelocateBGObjects(struct _BGObject *BGObjList /*$a0*/, long numBGObjs /*$t2*/, struct _SVector *offset /*$a2*/)
- // line 2852, offset 0x8005cf80
+ // line 3022, offset 0x8005c0f4
 	/* begin block 1 */
-		// Start line: 2853
-		// Start offset: 0x8005CF80
+		// Start line: 3023
+		// Start offset: 0x8005C0F4
 		// Variables:
 	// 		int i; // $t1
 	// 		int d; // $a3
 	/* end block 1 */
-	// End offset: 0x8005D01C
-	// End Line: 2865
+	// End offset: 0x8005C190
+	// End Line: 3035
 
 	/* begin block 2 */
-		// Start line: 6664
+		// Start line: 7031
 	/* end block 2 */
-	// End Line: 6665
+	// End Line: 7032
+
+/* File: C:\kain2\game\STREAM.C */
 
 void RelocateBGObjects(_BGObject *BGObjList,long numBGObjs,_SVector *offset)
 
@@ -4023,23 +4269,25 @@ void RelocateBGObjects(_BGObject *BGObjList,long numBGObjs,_SVector *offset)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ RelocatePlanPool(struct PlanningNode *planPool /*$s0*/, struct _SVector *offset /*$a1*/)
- // line 2867, offset 0x8005d024
+ // line 3037, offset 0x8005c198
 	/* begin block 1 */
-		// Start line: 2868
-		// Start offset: 0x8005D024
+		// Start line: 3038
+		// Start offset: 0x8005C198
 		// Variables:
 	// 		int i; // $a1
 	// 		short ox; // $s1
 	// 		short oy; // $s2
 	// 		short oz; // $s3
 	/* end block 1 */
-	// End offset: 0x8005D090
-	// End Line: 2883
+	// End offset: 0x8005C204
+	// End Line: 3053
 
 	/* begin block 2 */
-		// Start line: 6700
+		// Start line: 7067
 	/* end block 2 */
-	// End Line: 6701
+	// End Line: 7068
+
+/* File: C:\kain2\game\STREAM.C */
 
 void RelocatePlanPool(PlanningNode *planPool,_SVector *offset)
 
@@ -4047,7 +4295,7 @@ void RelocatePlanPool(PlanningNode *planPool,_SVector *offset)
   short sVar1;
   short sVar2;
   short sVar3;
-  int iVar4;
+  PoolManagementData *pPVar4;
   int iVar5;
   short *psVar6;
   
@@ -4056,19 +4304,19 @@ void RelocatePlanPool(PlanningNode *planPool,_SVector *offset)
   sVar3 = offset->z;
   iVar5 = PLANAPI_NumNodesInPool(planPool);
   psVar6 = &(planPool->pos).z;
-  iVar4 = poolManagementData;
-  while (poolManagementData = iVar4, iVar5 != 0) {
+  pPVar4 = poolManagementData;
+  while (poolManagementData = pPVar4, iVar5 != 0) {
     iVar5 = iVar5 + -1;
     (planPool->pos).x = (planPool->pos).x + sVar1;
     planPool = planPool + 1;
     psVar6[-1] = psVar6[-1] + sVar2;
     *psVar6 = *psVar6 + sVar3;
     psVar6 = psVar6 + 0xe;
-    iVar4 = poolManagementData;
+    pPVar4 = poolManagementData;
   }
-  *(short *)(iVar4 + 2) = *(short *)(iVar4 + 2) + sVar1;
-  *(short *)(iVar4 + 6) = *(short *)(iVar4 + 6) + sVar3;
-  *(short *)(iVar4 + 4) = *(short *)(iVar4 + 4) + sVar2;
+  *(short *)&pPVar4->field_0x2 = *(short *)&pPVar4->field_0x2 + sVar1;
+  (pPVar4->playerPosAtLastPlanMkrUpdate).y = (pPVar4->playerPosAtLastPlanMkrUpdate).y + sVar3;
+  (pPVar4->playerPosAtLastPlanMkrUpdate).x = (pPVar4->playerPosAtLastPlanMkrUpdate).x + sVar2;
   return;
 }
 
@@ -4077,28 +4325,30 @@ void RelocatePlanPool(PlanningNode *planPool,_SVector *offset)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ RelocatePlanMarkers(struct _PlanMkr *planMkrList /*$a3*/, int numPlanMkrs /*$a1*/, struct _SVector *offset /*$a2*/)
- // line 2888, offset 0x8005d0d8
+ // line 3058, offset 0x8005c24c
 	/* begin block 1 */
-		// Start line: 2889
-		// Start offset: 0x8005D0D8
+		// Start line: 3059
+		// Start offset: 0x8005C24C
 		// Variables:
 	// 		int i; // $a1
 	// 		short ox; // $t1
 	// 		short oy; // $t0
 	// 		short oz; // $a2
 	/* end block 1 */
-	// End offset: 0x8005D124
-	// End Line: 2903
+	// End offset: 0x8005C298
+	// End Line: 3073
 
 	/* begin block 2 */
-		// Start line: 6755
+		// Start line: 7122
 	/* end block 2 */
-	// End Line: 6756
+	// End Line: 7123
 
 	/* begin block 3 */
-		// Start line: 6759
+		// Start line: 7126
 	/* end block 3 */
-	// End Line: 6760
+	// End Line: 7127
+
+/* File: C:\kain2\game\STREAM.C */
 
 void RelocatePlanMarkers(_PlanMkr *planMkrList,int numPlanMkrs,_SVector *offset)
 
@@ -4130,33 +4380,35 @@ void RelocatePlanMarkers(_PlanMkr *planMkrList,int numPlanMkrs,_SVector *offset)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ RelocateSFXMarkers(struct _SFXMkr *sfxMkrList /*$a0*/, int numSFXMkrs /*$a1*/, struct _SVector *offset /*$a2*/)
- // line 2905, offset 0x8005d12c
+ // line 3075, offset 0x8005c2a0
 	/* begin block 1 */
-		// Start line: 2907
-		// Start offset: 0x8005D12C
+		// Start line: 3077
+		// Start offset: 0x8005C2A0
 		// Variables:
 	// 		int i; // $a1
 	// 		short ox; // $t0
 	// 		short oy; // $a3
 	// 		short oz; // $a2
 	/* end block 1 */
-	// End offset: 0x8005D170
-	// End Line: 2920
+	// End offset: 0x8005C2E4
+	// End Line: 3090
 
 	/* begin block 2 */
-		// Start line: 6799
+		// Start line: 7166
 	/* end block 2 */
-	// End Line: 6800
+	// End Line: 7167
 
 	/* begin block 3 */
-		// Start line: 6800
+		// Start line: 7167
 	/* end block 3 */
-	// End Line: 6801
+	// End Line: 7168
 
 	/* begin block 4 */
-		// Start line: 6803
+		// Start line: 7170
 	/* end block 4 */
-	// End Line: 6804
+	// End Line: 7171
+
+/* File: C:\kain2\game\STREAM.C */
 
 void RelocateSFXMarkers(_SFXMkr *sfxMkrList,int numSFXMkrs,_SVector *offset)
 
@@ -4187,20 +4439,22 @@ void RelocateSFXMarkers(_SFXMkr *sfxMkrList,int numSFXMkrs,_SVector *offset)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_AdjustMultiSpline(struct MultiSpline *multi /*$a3*/, struct _SVector *offset /*$t0*/)
- // line 2922, offset 0x8005d178
+ // line 3092, offset 0x8005c2ec
 	/* begin block 1 */
-		// Start line: 2923
-		// Start offset: 0x8005D178
+		// Start line: 3093
+		// Start offset: 0x8005C2EC
 		// Variables:
 	// 		int i; // $a2
 	/* end block 1 */
-	// End offset: 0x8005D220
-	// End Line: 2944
+	// End offset: 0x8005C394
+	// End Line: 3114
 
 	/* begin block 2 */
-		// Start line: 6839
+		// Start line: 7206
 	/* end block 2 */
-	// End Line: 6840
+	// End Line: 7207
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_AdjustMultiSpline(MultiSpline *multi,_SVector *offset)
 
@@ -4233,17 +4487,19 @@ void STREAM_AdjustMultiSpline(MultiSpline *multi,_SVector *offset)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_RelocateInstance(struct GameTracker *gameTracker /*$a0*/, struct _Instance *instance /*$s0*/, struct _SVector *offset /*$s1*/)
- // line 2946, offset 0x8005d228
+ // line 3116, offset 0x8005c39c
 	/* begin block 1 */
-		// Start line: 6891
+		// Start line: 7258
 	/* end block 1 */
-	// End Line: 6892
+	// End Line: 7259
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_RelocateInstance(GameTracker *gameTracker,_Instance *instance,_SVector *offset)
 
 {
   STREAM_OffsetInstancePosition(gameTracker,instance,offset,1);
-  INSTANCE_Post(instance,0x100008,(int)offset);
+  INSTANCE_Post(instance,(int)&DAT_00100008,(int)offset);
   return;
 }
 
@@ -4252,11 +4508,13 @@ void STREAM_RelocateInstance(GameTracker *gameTracker,_Instance *instance,_SVect
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_OffsetInstancePosition(struct GameTracker *gameTracker /*$a0*/, struct _Instance *instance /*$s0*/, struct _SVector *offset /*$s1*/, int streamSignalFlag /*$s2*/)
- // line 2954, offset 0x8005d270
+ // line 3124, offset 0x8005c3e4
 	/* begin block 1 */
-		// Start line: 6907
+		// Start line: 7274
 	/* end block 1 */
-	// End Line: 6908
+	// End Line: 7275
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_OffsetInstancePosition
                (GameTracker *gameTracker,_Instance *instance,_SVector *offset,int streamSignalFlag)
@@ -4271,10 +4529,10 @@ void STREAM_OffsetInstancePosition
   (instance->shadowPosition).x = (instance->shadowPosition).x + offset->x;
   (instance->shadowPosition).y = (instance->shadowPosition).y + offset->y;
   (instance->shadowPosition).z = (instance->shadowPosition).z + offset->z;
-  COLLIDE_UpdateAllTransforms(instance,(SVECTOR *)offset);
+  COLLIDE_UpdateAllTransforms(instance,(char)offset);
   COLLIDE_MoveAllTransforms(instance,(_Position *)offset);
-  if (instance == theCamera.focusInstance) {
-    CAMERA_Relocate(&theCamera,offset,streamSignalFlag);
+  if (instance == DAT_800d10a4) {
+    CAMERA_Relocate((Camera *)&theCamera,offset,streamSignalFlag);
   }
   return;
 }
@@ -4284,20 +4542,22 @@ void STREAM_OffsetInstancePosition
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_SetInstancePosition(struct GameTracker *gameTracker /*$a0*/, struct _Instance *instance /*$a1*/, struct evPositionData *data /*$a2*/)
- // line 2981, offset 0x8005d38c
+ // line 3151, offset 0x8005c500
 	/* begin block 1 */
-		// Start line: 2982
-		// Start offset: 0x8005D38C
+		// Start line: 3152
+		// Start offset: 0x8005C500
 		// Variables:
 	// 		struct _SVector offset; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x8005D38C
-	// End Line: 2982
+	// End offset: 0x8005C500
+	// End Line: 3152
 
 	/* begin block 2 */
-		// Start line: 6977
+		// Start line: 7344
 	/* end block 2 */
-	// End Line: 6978
+	// End Line: 7345
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_SetInstancePosition(GameTracker *gameTracker,_Instance *instance,evPositionData *data)
 
@@ -4316,21 +4576,23 @@ void STREAM_SetInstancePosition(GameTracker *gameTracker,_Instance *instance,evP
 // decompiled code
 // original method signature: 
 // void /*$ra*/ RelocateInstances(struct GameTracker *gameTracker /*$s1*/, struct _SVector *offset /*$s2*/, long StreamUnitID /*$a2*/)
- // line 2992, offset 0x8005d3e4
+ // line 3162, offset 0x8005c558
 	/* begin block 1 */
-		// Start line: 2993
-		// Start offset: 0x8005D3E4
+		// Start line: 3163
+		// Start offset: 0x8005C558
 		// Variables:
 	// 		struct _InstanceList *instanceList; // $v0
 	// 		struct _Instance *instance; // $s0
 	/* end block 1 */
-	// End offset: 0x8005D434
-	// End Line: 3009
+	// End offset: 0x8005C5A8
+	// End Line: 3179
 
 	/* begin block 2 */
-		// Start line: 7004
+		// Start line: 7371
 	/* end block 2 */
-	// End Line: 7005
+	// End Line: 7372
+
+/* File: C:\kain2\game\STREAM.C */
 
 void RelocateInstances(GameTracker *gameTracker,_SVector *offset,long StreamUnitID)
 
@@ -4351,31 +4613,33 @@ void RelocateInstances(GameTracker *gameTracker,_SVector *offset,long StreamUnit
 // decompiled code
 // original method signature: 
 // void /*$ra*/ RelocateStreamPortals(struct StreamUnitPortal *StreamUnitList /*$a0*/, int NumStreamUnits /*$a1*/, struct _SVector *offset /*$a2*/)
- // line 3012, offset 0x8005d454
+ // line 3182, offset 0x8005c5c8
 	/* begin block 1 */
-		// Start line: 3014
-		// Start offset: 0x8005D454
+		// Start line: 3184
+		// Start offset: 0x8005C5C8
 		// Variables:
 	// 		int i; // $t1
 	// 		int d; // $t0
 	/* end block 1 */
-	// End offset: 0x8005D57C
-	// End Line: 3039
+	// End offset: 0x8005C6F0
+	// End Line: 3209
 
 	/* begin block 2 */
-		// Start line: 7046
+		// Start line: 7413
 	/* end block 2 */
-	// End Line: 7047
+	// End Line: 7414
 
 	/* begin block 3 */
-		// Start line: 7047
+		// Start line: 7414
 	/* end block 3 */
-	// End Line: 7048
+	// End Line: 7415
 
 	/* begin block 4 */
-		// Start line: 7049
+		// Start line: 7416
 	/* end block 4 */
-	// End Line: 7050
+	// End Line: 7417
+
+/* File: C:\kain2\game\STREAM.C */
 
 void RelocateStreamPortals(StreamUnitPortal *StreamUnitList,int NumStreamUnits,_SVector *offset)
 
@@ -4396,19 +4660,19 @@ void RelocateStreamPortals(StreamUnitPortal *StreamUnitList,int NumStreamUnits,_
       StreamUnitList->minz = StreamUnitList->minz + offset->z;
       pSVar1 = StreamUnitList;
       do {
-        pSVar1->_9[0].x = pSVar1->_9[0].x + offset->x;
-        pSVar1->_9[0].y = pSVar1->_9[0].y + offset->y;
+        pSVar1->t1[0].x = pSVar1->t1[0].x + offset->x;
+        pSVar1->t1[0].y = pSVar1->t1[0].y + offset->y;
         iVar2 = iVar2 + 1;
-        pSVar1->_9[0].z = pSVar1->_9[0].z + offset->z;
+        pSVar1->t1[0].z = pSVar1->t1[0].z + offset->z;
         pSVar1 = (StreamUnitPortal *)(pSVar1->tolevelname + 8);
       } while (iVar2 < 3);
       iVar2 = 0;
       pSVar1 = StreamUnitList;
       do {
-        pSVar1->_10[0].x = pSVar1->_10[0].x + offset->x;
-        pSVar1->_10[0].y = pSVar1->_10[0].y + offset->y;
+        pSVar1->t2[0].x = pSVar1->t2[0].x + offset->x;
+        pSVar1->t2[0].y = pSVar1->t2[0].y + offset->y;
         iVar2 = iVar2 + 1;
-        pSVar1->_10[0].z = pSVar1->_10[0].z + offset->z;
+        pSVar1->t2[0].z = pSVar1->t2[0].z + offset->z;
         pSVar1 = (StreamUnitPortal *)(pSVar1->tolevelname + 8);
       } while (iVar2 < 3);
       iVar3 = iVar3 + 1;
@@ -4423,39 +4687,41 @@ void RelocateStreamPortals(StreamUnitPortal *StreamUnitList,int NumStreamUnits,_
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_PackVRAMObject(struct _ObjectTracker *objectTracker /*$s1*/)
- // line 3049, offset 0x8005d584
+ // line 3219, offset 0x8005c6f8
 	/* begin block 1 */
-		// Start line: 3050
-		// Start offset: 0x8005D584
+		// Start line: 3220
+		// Start offset: 0x8005C6F8
 		// Variables:
 	// 		struct VramSize *vramSize; // $a0
 
 		/* begin block 1.1 */
-			// Start line: 3059
-			// Start offset: 0x8005D5B4
+			// Start line: 3229
+			// Start offset: 0x8005C728
 			// Variables:
 		// 		struct VramBuffer *vramBuffer; // $v0
 
 			/* begin block 1.1.1 */
-				// Start line: 3067
-				// Start offset: 0x8005D5C4
+				// Start line: 3237
+				// Start offset: 0x8005C738
 				// Variables:
 			// 		char fileName[64]; // stack offset -80
 			// 		struct _BlockVramEntry *vramBlock; // $s0
 			/* end block 1.1.1 */
-			// End offset: 0x8005D5EC
-			// End Line: 3077
+			// End offset: 0x8005C760
+			// End Line: 3247
 		/* end block 1.1 */
-		// End offset: 0x8005D66C
-		// End Line: 3096
+		// End offset: 0x8005C7E0
+		// End Line: 3266
 	/* end block 1 */
-	// End offset: 0x8005D670
-	// End Line: 3104
+	// End offset: 0x8005C7E4
+	// End Line: 3274
 
 	/* begin block 2 */
-		// Start line: 7157
+		// Start line: 7524
 	/* end block 2 */
-	// End Line: 7158
+	// End Line: 7525
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_PackVRAMObject(_ObjectTracker *objectTracker)
 
@@ -4478,7 +4744,7 @@ void STREAM_PackVRAMObject(_ObjectTracker *objectTracker)
                 (0x200,0,(int)*(short *)((int)pvVar3 + 0xc),(int)*(short *)((int)pvVar3 + 0xe),
                  objectTracker->object);
     }
-    sprintf(acStack80,"\\kain2\\object\\%s\\%s.crm");
+    sprintf(acStack80,s__kain2_object__s__s_crm_800d06d0,objectTracker,objectTracker);
     retData = (undefined4 *)MEMPACK_Malloc((int)*(short *)((int)pvVar3 + 0x10) * 2 + 0x14,'#');
     *(undefined4 **)(retData + 4) = retData + 5;
     *retData = 0;
@@ -4499,11 +4765,13 @@ void STREAM_PackVRAMObject(_ObjectTracker *objectTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MORPH_SetupInstanceFlags(struct GameTracker *gameTracker /*$a0*/, struct _Instance *instance /*$s0*/)
- // line 3132, offset 0x8005d684
+ // line 3303, offset 0x8005c7f8
 	/* begin block 1 */
-		// Start line: 7356
+		// Start line: 7725
 	/* end block 1 */
-	// End Line: 7357
+	// End Line: 7726
+
+/* File: C:\kain2\game\STREAM.C */
 
 void MORPH_SetupInstanceFlags(GameTracker *gameTracker,_Instance *instance)
 
@@ -4518,14 +4786,14 @@ void MORPH_SetupInstanceFlags(GameTracker *gameTracker,_Instance *instance)
     uVar2 = instance->flags2;
     if ((uVar2 & 0x8000000) == 0) {
       uVar2 = uVar2 & 0xebffffff;
-      goto LAB_8005d788;
+      goto LAB_8005c8fc;
     }
   }
   else {
     uVar2 = instance->flags2;
     if ((uVar2 & 0x8000000) != 0) {
       uVar2 = uVar2 & 0xebffffff;
-      goto LAB_8005d788;
+      goto LAB_8005c8fc;
     }
   }
   instance->flags2 = uVar2 | 0x10000000;
@@ -4542,7 +4810,7 @@ void MORPH_SetupInstanceFlags(GameTracker *gameTracker,_Instance *instance)
     }
   }
   uVar2 = instance->flags2 | 0x4000000;
-LAB_8005d788:
+LAB_8005c8fc:
   instance->flags2 = uVar2;
   return;
 }
@@ -4552,20 +4820,22 @@ LAB_8005d788:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MORPH_SetupInstanceListFlags(struct GameTracker *gameTracker /*$s1*/)
- // line 3179, offset 0x8005d79c
+ // line 3350, offset 0x8005c910
 	/* begin block 1 */
-		// Start line: 3180
-		// Start offset: 0x8005D79C
+		// Start line: 3351
+		// Start offset: 0x8005C910
 		// Variables:
 	// 		struct _Instance *instance; // $s0
 	/* end block 1 */
-	// End offset: 0x8005D7E0
-	// End Line: 3191
+	// End offset: 0x8005C954
+	// End Line: 3362
 
 	/* begin block 2 */
-		// Start line: 7453
+		// Start line: 7822
 	/* end block 2 */
-	// End Line: 7454
+	// End Line: 7823
+
+/* File: C:\kain2\game\STREAM.C */
 
 void MORPH_SetupInstanceListFlags(GameTracker *gameTracker)
 
@@ -4585,30 +4855,32 @@ void MORPH_SetupInstanceListFlags(GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MORPH_InMorphInstanceListFlags(struct GameTracker *gameTracker /*$a0*/)
- // line 3193, offset 0x8005d7f4
+ // line 3364, offset 0x8005c968
 	/* begin block 1 */
-		// Start line: 3195
-		// Start offset: 0x8005D7F4
+		// Start line: 3366
+		// Start offset: 0x8005C968
 		// Variables:
 	// 		struct _Instance *instance; // $v1
 	/* end block 1 */
-	// End offset: 0x8005D854
-	// End Line: 3218
+	// End offset: 0x8005C9C8
+	// End Line: 3389
 
 	/* begin block 2 */
-		// Start line: 7481
+		// Start line: 7850
 	/* end block 2 */
-	// End Line: 7482
+	// End Line: 7851
 
 	/* begin block 3 */
-		// Start line: 7482
+		// Start line: 7851
 	/* end block 3 */
-	// End Line: 7483
+	// End Line: 7852
 
 	/* begin block 4 */
-		// Start line: 7486
+		// Start line: 7855
 	/* end block 4 */
-	// End Line: 7487
+	// End Line: 7856
+
+/* File: C:\kain2\game\STREAM.C */
 
 void MORPH_InMorphInstanceListFlags(GameTracker *gameTracker)
 
@@ -4631,31 +4903,33 @@ void MORPH_InMorphInstanceListFlags(GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MORPH_InMorphDoFadeValues(struct GameTracker *gameTracker /*$a0*/)
- // line 3220, offset 0x8005d85c
+ // line 3391, offset 0x8005c9d0
 	/* begin block 1 */
-		// Start line: 3222
-		// Start offset: 0x8005D85C
+		// Start line: 3393
+		// Start offset: 0x8005C9D0
 		// Variables:
 	// 		int fade1; // $a1
 	// 		int fade2; // $v0
 	/* end block 1 */
-	// End offset: 0x8005D8A4
-	// End Line: 3236
+	// End offset: 0x8005CA18
+	// End Line: 3407
 
 	/* begin block 2 */
-		// Start line: 7535
+		// Start line: 7904
 	/* end block 2 */
-	// End Line: 7536
+	// End Line: 7905
 
 	/* begin block 3 */
-		// Start line: 7536
+		// Start line: 7905
 	/* end block 3 */
-	// End Line: 7537
+	// End Line: 7906
 
 	/* begin block 4 */
-		// Start line: 7538
+		// Start line: 7907
 	/* end block 4 */
-	// End Line: 7539
+	// End Line: 7908
+
+/* File: C:\kain2\game\STREAM.C */
 
 void MORPH_InMorphDoFadeValues(GameTracker *gameTracker)
 
@@ -4664,12 +4938,12 @@ void MORPH_InMorphDoFadeValues(GameTracker *gameTracker)
   
   sVar1 = (short)(((int)(gameTracker->gameData).asmData.MorphTime << 0xc) / 1000);
   if ((gameTracker->gameData).asmData.MorphType == 0) {
-    *(short *)&gameTracker->lastLoopTime = sVar1;
-    *(short *)((int)&gameTracker->lastLoopTime + 2) = 0x1000 - sVar1;
+    gameTracker->spectral_fadeValue = sVar1;
+    gameTracker->material_fadeValue = 0x1000 - sVar1;
     return;
   }
-  *(short *)&gameTracker->lastLoopTime = 0x1000 - sVar1;
-  *(short *)((int)&gameTracker->lastLoopTime + 2) = sVar1;
+  gameTracker->spectral_fadeValue = 0x1000 - sVar1;
+  gameTracker->material_fadeValue = sVar1;
   return;
 }
 
@@ -4678,34 +4952,34 @@ void MORPH_InMorphDoFadeValues(GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MORPH_UpdateTimeMult()
- // line 3242, offset 0x8005d8ac
+ // line 3413, offset 0x8005ca20
 	/* begin block 1 */
-		// Start line: 3245
-		// Start offset: 0x8005D8AC
+		// Start line: 3416
+		// Start offset: 0x8005CA20
 
 		/* begin block 1.1 */
-			// Start line: 3248
-			// Start offset: 0x8005D8C0
+			// Start line: 3419
+			// Start offset: 0x8005CA34
 			// Variables:
 		// 		short ratio; // $v1
 		/* end block 1.1 */
-		// End offset: 0x8005D9DC
-		// End Line: 3286
+		// End offset: 0x8005CB50
+		// End Line: 3457
 	/* end block 1 */
-	// End offset: 0x8005DA18
-	// End Line: 3302
+	// End offset: 0x8005CB8C
+	// End Line: 3473
 
 	/* begin block 2 */
-		// Start line: 7579
+		// Start line: 7948
 	/* end block 2 */
-	// End Line: 7580
+	// End Line: 7949
 
 	/* begin block 3 */
-		// Start line: 7581
+		// Start line: 7950
 	/* end block 3 */
-	// End Line: 7582
+	// End Line: 7951
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\STREAM.C */
 
 void MORPH_UpdateTimeMult(void)
 
@@ -4713,11 +4987,11 @@ void MORPH_UpdateTimeMult(void)
   int iVar1;
   uint uVar2;
   
-  uVar2 = (uint)(ushort)gameTrackerX.gameData.asmData.MorphTime;
-  if (gameTrackerX.gameData.asmData.MorphTime != 1000) {
+  uVar2 = (uint)DAT_800d20d4;
+  if (DAT_800d20d4 != 1000) {
     iVar1 = uVar2 - 0x2ee;
-    if (gameTrackerX.gameData.asmData.MorphType == 0) {
-      if (0xfa < gameTrackerX.gameData.asmData.MorphTime) {
+    if (DAT_800d20d6 == 0) {
+      if (0xfa < (short)DAT_800d20d4) {
         uVar2 = 0xfa;
       }
       iVar1 = 0xfa - uVar2;
@@ -4727,40 +5001,38 @@ void MORPH_UpdateTimeMult(void)
         iVar1 = 0;
       }
     }
-    gameTrackerX.timeSinceLastGameFrame =
-         gameTrackerX.visibleInstances * ((((iVar1 << 0x10) >> 4) / 0xfa) * 0x10000 >> 0x10) * 0x10
-         >> 0x10;
-    if (gameTrackerX.timeSinceLastGameFrame == 0) {
-      gameTrackerX.timeSinceLastGameFrame = 1;
+    DAT_800d2320 = DAT_800d2318 * ((((iVar1 << 0x10) >> 4) / 0xfa) * 0x10000 >> 0x10) * 0x10 >> 0x10
+    ;
+    if (DAT_800d2320 == 0) {
+      DAT_800d2320 = 1;
     }
-    uVar2 = (uint)(ushort)gameTrackerX.gameData.asmData.MorphTime;
-    if (gameTrackerX.gameData.asmData.MorphType == 0) {
+    uVar2 = (uint)DAT_800d20d4;
+    if (DAT_800d20d6 == 0) {
       iVar1 = uVar2 - 0x2ee;
       if (iVar1 * 0x10000 < 0) {
         iVar1 = 0;
       }
     }
     else {
-      if (0xfa < gameTrackerX.gameData.asmData.MorphTime) {
+      if (0xfa < (short)DAT_800d20d4) {
         uVar2 = 0xfa;
       }
       iVar1 = 0xfa - uVar2;
     }
-    gameTrackerX.gameFramePassed =
-         gameTrackerX.visibleInstances * ((((iVar1 << 0x10) >> 4) / 0xfa) * 0x10000 >> 0x10) * 0x10
-         >> 0x10;
-    if (gameTrackerX.gameFramePassed == 0) {
-      gameTrackerX.gameFramePassed = 1;
+    DAT_800d231c = DAT_800d2318 * ((((iVar1 << 0x10) >> 4) / 0xfa) * 0x10000 >> 0x10) * 0x10 >> 0x10
+    ;
+    if (DAT_800d231c == 0) {
+      DAT_800d231c = 1;
     }
     return;
   }
-  if (gameTrackerX.gameData.asmData.MorphType == 0) {
-    gameTrackerX.gameFramePassed = 0;
-    gameTrackerX.timeSinceLastGameFrame = gameTrackerX.visibleInstances;
+  if (DAT_800d20d6 == 0) {
+    DAT_800d231c = 0;
+    DAT_800d2320 = DAT_800d2318;
     return;
   }
-  gameTrackerX.gameFramePassed = gameTrackerX.visibleInstances;
-  gameTrackerX.timeSinceLastGameFrame = 0;
+  DAT_800d231c = DAT_800d2318;
+  DAT_800d2320 = 0;
   return;
 }
 
@@ -4769,10 +5041,10 @@ void MORPH_UpdateTimeMult(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MORPH_UpdateNormals(struct Level *BaseLevel /*$s0*/)
- // line 3306, offset 0x8005da20
+ // line 3477, offset 0x8005cb94
 	/* begin block 1 */
-		// Start line: 3307
-		// Start offset: 0x8005DA20
+		// Start line: 3478
+		// Start offset: 0x8005CB94
 		// Variables:
 	// 		struct _TFace *face; // $v1
 	// 		long faceCount; // $a2
@@ -4785,17 +5057,17 @@ void MORPH_UpdateTimeMult(void)
 	// 		short *morphNormals; // $a1
 
 		/* begin block 1.1 */
-			// Start line: 3356
-			// Start offset: 0x8005DB18
+			// Start line: 3527
+			// Start offset: 0x8005CC8C
 			// Variables:
 		// 		struct _TVertex *endv; // $a2
 		/* end block 1.1 */
-		// End offset: 0x8005DB88
-		// End Line: 3377
+		// End offset: 0x8005CCFC
+		// End Line: 3548
 
 		/* begin block 1.2 */
-			// Start line: 3377
-			// Start offset: 0x8005DB88
+			// Start line: 3548
+			// Start offset: 0x8005CCFC
 			// Variables:
 		// 		struct _BSPNode *node; // $v1
 		// 		struct _BSPLeaf *leaf; // $a0
@@ -4804,35 +5076,37 @@ void MORPH_UpdateTimeMult(void)
 		// 		struct _Terrain *terrain; // $a3
 		// 		long curTree; // $t0
 		/* end block 1.2 */
-		// End offset: 0x8005DDE0
-		// End Line: 3428
+		// End offset: 0x8005CF54
+		// End Line: 3599
 
 		/* begin block 1.3 */
-			// Start line: 3430
-			// Start offset: 0x8005DDE0
+			// Start line: 3601
+			// Start offset: 0x8005CF54
 			// Variables:
 		// 		struct _Instance *instance; // $s0
 
 			/* begin block 1.3.1 */
-				// Start line: 3436
-				// Start offset: 0x8005DE08
+				// Start line: 3607
+				// Start offset: 0x8005CF7C
 				// Variables:
 			// 		struct SVECTOR realDiff; // stack offset -32
 			// 		struct _Position oldPos; // stack offset -24
 			/* end block 1.3.1 */
-			// End offset: 0x8005DEDC
-			// End Line: 3459
+			// End offset: 0x8005D064
+			// End Line: 3631
 		/* end block 1.3 */
-		// End offset: 0x8005DEEC
-		// End Line: 3462
+		// End offset: 0x8005D074
+		// End Line: 3634
 	/* end block 1 */
-	// End offset: 0x8005DEEC
-	// End Line: 3463
+	// End offset: 0x8005D074
+	// End Line: 3635
 
 	/* begin block 2 */
-		// Start line: 7711
+		// Start line: 8080
 	/* end block 2 */
-	// End Line: 7712
+	// End Line: 8081
+
+/* File: C:\kain2\game\STREAM.C */
 
 void MORPH_UpdateNormals(Level *BaseLevel)
 
@@ -4842,169 +5116,159 @@ void MORPH_UpdateNormals(Level *BaseLevel)
   short sVar3;
   ushort uVar4;
   short sVar5;
-  _BSPNode **pp_Var6;
-  _Terrain *p_Var7;
-  _TVertex *p_Var8;
-  uint *puVar9;
-  int iVar10;
-  byte *pbVar11;
-  undefined4 *puVar12;
-  uint uVar13;
-  ushort *puVar14;
-  BSPTree *pBVar15;
-  SpotLight *pSVar16;
-  undefined4 *puVar17;
-  Intro *pIVar18;
-  ushort *puVar19;
-  long lVar20;
-  int iVar21;
-  uint uVar22;
-  int iVar23;
-  short *psVar24;
-  _TVertex *p_Var25;
-  PointLight *pPVar26;
-  short *psVar27;
-  long lVar28;
+  _Terrain *p_Var6;
+  _TVertex *p_Var7;
+  uint *puVar8;
+  int iVar9;
+  byte *pbVar10;
+  undefined4 *puVar11;
+  ushort *puVar12;
+  _MorphColor *p_Var13;
+  SpotLight *pSVar14;
+  undefined4 *puVar15;
+  Intro *pIVar16;
+  ushort *puVar17;
+  long lVar18;
+  int iVar19;
+  int iVar20;
+  short *psVar21;
+  _TVertex *p_Var22;
+  PointLight *pPVar23;
+  _MorphVertex *p_Var24;
+  long lVar25;
+  undefined4 uVar26;
+  uint uVar27;
+  undefined4 uVar28;
   undefined4 uVar29;
-  undefined4 uVar30;
   _Instance *instance;
-  uint local_20;
-  uint local_1c;
-  uint local_18;
-  uint local_14;
-  undefined4 local_10;
   
-  p_Var7 = BaseLevel->terrain;
-  puVar19 = *(ushort **)(p_Var7 + 1);
-  iVar23 = p_Var7->numFaces;
-  if (0 < iVar23) {
-    puVar14 = &p_Var7->faceList->normal;
+  p_Var6 = BaseLevel->terrain;
+  puVar17 = (ushort *)p_Var6->morphNormalIdx;
+  iVar20 = p_Var6->numFaces;
+  if (0 < iVar20) {
+    puVar12 = &p_Var6->faceList->normal;
     do {
-      uVar4 = *puVar14;
-      iVar23 = iVar23 + -1;
-      *puVar14 = *puVar19;
-      *puVar19 = uVar4;
-      puVar19 = puVar19 + 1;
-      puVar14 = puVar14 + 6;
-    } while (0 < iVar23);
-    p_Var7 = BaseLevel->terrain;
+      uVar4 = *puVar12;
+      iVar20 = iVar20 + -1;
+      *puVar12 = *puVar17;
+      *puVar17 = uVar4;
+      puVar17 = puVar17 + 1;
+      puVar12 = puVar12 + 6;
+    } while (0 < iVar20);
+    p_Var6 = BaseLevel->terrain;
   }
-  psVar27 = (short *)p_Var7->numBSPTrees;
-  if (psVar27 != (short *)0x0) {
-    sVar3 = psVar27[3];
-    sVar5 = psVar27[3];
-    psVar24 = psVar27 + 3;
+  p_Var24 = p_Var6->MorphDiffList;
+  if (p_Var24 != (_MorphVertex *)0x0) {
+    sVar3 = p_Var24->vindex;
+    sVar5 = p_Var24->vindex;
+    psVar21 = &p_Var24->vindex;
     while (-1 < sVar3) {
-      p_Var8 = BaseLevel->terrain->vertexList + sVar5;
-      (p_Var8->vertex).x = psVar24[1] + *psVar27;
-      (p_Var8->vertex).y = psVar24[2] + psVar24[-2];
-      psVar1 = psVar24 + 3;
-      psVar2 = psVar24 + -1;
-      psVar24 = psVar24 + 7;
-      (p_Var8->vertex).z = *psVar1 + *psVar2;
-      sVar3 = *psVar24;
-      sVar5 = *psVar24;
-      psVar27 = psVar27 + 7;
+      p_Var7 = BaseLevel->terrain->vertexList + sVar5;
+      (p_Var7->vertex).x = psVar21[1] + p_Var24->x;
+      (p_Var7->vertex).y = psVar21[2] + psVar21[-2];
+      psVar1 = psVar21 + 3;
+      psVar2 = psVar21 + -1;
+      psVar21 = psVar21 + 7;
+      (p_Var7->vertex).z = *psVar1 + *psVar2;
+      sVar3 = *psVar21;
+      sVar5 = *psVar21;
+      p_Var24 = p_Var24 + 1;
     }
   }
-  p_Var7 = BaseLevel->terrain;
-  pBVar15 = p_Var7->BSPTreeArray;
-  if (pBVar15 != (BSPTree *)0x0) {
-    p_Var8 = p_Var7->vertexList;
-    p_Var25 = p_Var8 + p_Var7->numVertices;
-    pbVar11 = &p_Var8->b0;
-    while (p_Var8 < p_Var25) {
-      pbVar11[-2] = (byte)(((uint)*(byte *)&pBVar15->bspRoot & 0x1f) << 3);
-      p_Var8 = p_Var8 + 1;
-      pbVar11[-1] = (byte)(*(ushort *)&pBVar15->bspRoot >> 2) & 0xf8;
-      pp_Var6 = &pBVar15->bspRoot;
-      pBVar15 = (BSPTree *)((int)&pBVar15->bspRoot + 2);
-      *pbVar11 = (byte)(*(ushort *)pp_Var6 >> 7) & 0xf8;
-      pbVar11 = pbVar11 + 0xc;
+  p_Var6 = BaseLevel->terrain;
+  p_Var13 = p_Var6->MorphColorList;
+  if (p_Var13 != (_MorphColor *)0x0) {
+    p_Var7 = p_Var6->vertexList;
+    p_Var22 = p_Var7 + p_Var6->numVertices;
+    pbVar10 = &p_Var7->b0;
+    while (p_Var7 < p_Var22) {
+      pbVar10[-2] = (byte)(((uint)*(byte *)&p_Var13->morphColor15 & 0x1f) << 3);
+      p_Var7 = p_Var7 + 1;
+      pbVar10[-1] = (byte)((ushort)p_Var13->morphColor15 >> 2) & 0xf8;
+      puVar17 = (ushort *)&p_Var13->morphColor15;
+      p_Var13 = p_Var13 + 1;
+      *pbVar10 = (byte)(*puVar17 >> 7) & 0xf8;
+      pbVar10 = pbVar10 + 0xc;
     }
   }
   RemoveIntroducedLights(BaseLevel);
-  lVar20 = BaseLevel->numSpotSpecturalLights;
-  pSVar16 = BaseLevel->spotSpecturalLightList;
-  p_Var7 = BaseLevel->terrain;
+  lVar18 = BaseLevel->numSpotSpecturalLights;
+  pSVar14 = BaseLevel->spotSpecturalLightList;
+  p_Var6 = BaseLevel->terrain;
   BaseLevel->numSpotSpecturalLights = BaseLevel->numSpotLights;
-  lVar28 = BaseLevel->numPointLights;
+  lVar25 = BaseLevel->numPointLights;
   BaseLevel->spotSpecturalLightList = BaseLevel->spotLightList;
-  pPVar26 = BaseLevel->pointLightList;
-  BaseLevel->numSpotLights = lVar20;
-  BaseLevel->spotLightList = pSVar16;
+  pPVar23 = BaseLevel->pointLightList;
+  BaseLevel->numSpotLights = lVar18;
+  BaseLevel->spotLightList = pSVar14;
   BaseLevel->numPointLights = BaseLevel->numPointSpecturalLights;
   BaseLevel->pointLightList = BaseLevel->pointSpecturalLightList;
-  BaseLevel->numPointSpecturalLights = lVar28;
-  BaseLevel->pointSpecturalLightList = pPVar26;
-  iVar23 = 0;
-  if (0 < (int)p_Var7->morphNormalIdx) {
-    iVar21 = 0;
+  BaseLevel->numPointSpecturalLights = lVar25;
+  BaseLevel->pointSpecturalLightList = pPVar23;
+  iVar20 = 0;
+  if (0 < p_Var6->numBSPTrees) {
+    iVar19 = 0;
     do {
-      puVar9 = (uint *)((int)&p_Var7->signals->numSignals + iVar21);
-      puVar17 = (undefined4 *)*puVar9;
-      puVar12 = puVar17 + 7;
-      if (puVar17 < (undefined4 *)puVar9[1]) {
+      puVar8 = (uint *)((int)&p_Var6->BSPTreeArray->bspRoot + iVar19);
+      puVar15 = (undefined4 *)*puVar8;
+      puVar11 = puVar15 + 7;
+      if (puVar15 < (undefined4 *)puVar8[1]) {
         do {
-          uVar29 = *puVar17;
-          local_1c = puVar17[1];
-          uVar30 = puVar12[1];
-          *puVar17 = *puVar12;
-          puVar17[1] = uVar30;
-          *puVar12 = uVar29;
-          puVar12[1] = local_1c;
-          puVar17 = puVar17 + 0xb;
-          puVar12 = puVar12 + 0xb;
-        } while (puVar17 < *(undefined4 **)((int)&p_Var7->signals->signalNum + iVar21));
+          uVar26 = *puVar15;
+          uVar28 = puVar15[1];
+          uVar29 = puVar11[1];
+          *puVar15 = *puVar11;
+          puVar15[1] = uVar29;
+          *puVar11 = uVar26;
+          puVar11[1] = uVar28;
+          puVar15 = puVar15 + 0xb;
+          puVar11 = puVar11 + 0xb;
+        } while (puVar15 < *(undefined4 **)((int)&p_Var6->BSPTreeArray->startLeaves + iVar19));
       }
-      iVar10 = (int)&p_Var7->signals->numSignals + iVar21;
-      puVar17 = *(undefined4 **)(iVar10 + 4);
-      if (puVar17 < *(undefined4 **)(iVar10 + 8)) {
-        puVar12 = puVar17 + 7;
+      iVar9 = (int)&p_Var6->BSPTreeArray->bspRoot + iVar19;
+      puVar15 = *(undefined4 **)(iVar9 + 4);
+      if (puVar15 < *(undefined4 **)(iVar9 + 8)) {
+        puVar11 = puVar15 + 7;
         do {
-          uVar29 = *puVar17;
-          local_1c = puVar17[1];
-          uVar30 = puVar12[4];
-          *puVar17 = puVar12[3];
-          puVar17[1] = uVar30;
-          puVar12[3] = uVar29;
-          puVar12[4] = local_1c;
-          uVar29 = puVar12[-3];
-          local_14 = puVar12[-2];
-          local_10 = puVar12[-1];
-          puVar12[-3] = *puVar12;
-          puVar12[-2] = puVar12[1];
-          puVar12[-1] = puVar12[2];
-          *puVar12 = uVar29;
-          puVar12[1] = local_14;
-          puVar12[2] = local_10;
-          puVar17 = puVar17 + 0xc;
-          puVar12 = puVar12 + 0xc;
-        } while (puVar17 < *(undefined4 **)((int)&p_Var7->signals->signalList[0].id + iVar21));
+          uVar26 = *puVar15;
+          uVar28 = puVar15[1];
+          uVar29 = puVar11[4];
+          *puVar15 = puVar11[3];
+          puVar15[1] = uVar29;
+          puVar11[3] = uVar26;
+          puVar11[4] = uVar28;
+          uVar26 = puVar11[-3];
+          uVar28 = puVar11[-2];
+          uVar29 = puVar11[-1];
+          puVar11[-3] = *puVar11;
+          puVar11[-2] = puVar11[1];
+          puVar11[-1] = puVar11[2];
+          *puVar11 = uVar26;
+          puVar11[1] = uVar28;
+          puVar11[2] = uVar29;
+          puVar15 = puVar15 + 0xc;
+          puVar11 = puVar11 + 0xc;
+        } while (puVar15 < *(undefined4 **)((int)&p_Var6->BSPTreeArray->endLeaves + iVar19));
       }
-      iVar23 = iVar23 + 1;
-      iVar21 = iVar21 + 0x24;
-    } while (iVar23 < (int)p_Var7->morphNormalIdx);
+      iVar20 = iVar20 + 1;
+      iVar19 = iVar19 + 0x24;
+    } while (iVar20 < p_Var6->numBSPTrees);
   }
-  instance = (gameTrackerX.instanceList)->first;
+  instance = *(_Instance **)(DAT_800d2100 + 4);
   while (instance != (_Instance *)0x0) {
-    pIVar18 = instance->intro;
-    if ((pIVar18 != (Intro *)0x0) &&
-       ((*(int *)&pIVar18->spectralPosition != 0 || ((pIVar18->spectralPosition).z != 0)))) {
-      local_18 = *(uint *)&instance->position;
-      uVar13 = (uint)(ushort)(instance->position).z;
-      local_14 = local_14 & 0xffff0000 | uVar13;
-      (instance->position).x = (pIVar18->position).x + (pIVar18->spectralPosition).x;
-      (instance->position).y = (pIVar18->position).y + (pIVar18->spectralPosition).y;
-      (instance->position).z = (pIVar18->position).z + (pIVar18->spectralPosition).z;
-      uVar22 = (uint)(ushort)(instance->position).x - (local_18 & 0xffff);
-      iVar23 = (uint)(ushort)(instance->position).y - (local_18 >> 0x10);
-      local_20 = uVar22 & 0xffff | iVar23 * 0x10000;
-      uVar13 = (ushort)(instance->position).z - uVar13;
-      local_1c = local_1c & 0xffff0000 | uVar13 & 0xffff;
-      if (((int)(uVar22 * 0x10000) >> 0x10) + (iVar23 * 0x10000 >> 0x10) +
-          ((int)(uVar13 * 0x10000) >> 0x10) != 0) {
-        COLLIDE_UpdateAllTransforms(instance,(SVECTOR *)&local_20);
+    pIVar16 = instance->intro;
+    if ((pIVar16 != (Intro *)0x0) &&
+       (((*(int *)&pIVar16->spectralPosition != 0 || ((pIVar16->spectralPosition).z != 0)) &&
+        ((instance->flags2 & 8U) == 0)))) {
+      uVar27 = *(uint *)&instance->position;
+      uVar4 = (instance->position).z;
+      (instance->position).x = (pIVar16->position).x + (pIVar16->spectralPosition).x;
+      (instance->position).y = (pIVar16->position).y + (pIVar16->spectralPosition).y;
+      (instance->position).z = (pIVar16->position).z + (pIVar16->spectralPosition).z;
+      if (((int)(((uint)(ushort)(instance->position).x - (uVar27 & 0xffff)) * 0x10000) >> 0x10) +
+          ((int)(((uint)(ushort)(instance->position).y - (uVar27 >> 0x10)) * 0x10000) >> 0x10) +
+          ((int)(((uint)(ushort)(instance->position).z - (uint)uVar4) * 0x10000) >> 0x10) != 0) {
+        COLLIDE_UpdateAllTransforms(instance,0xe0);
       }
     }
     instance = instance->next;
@@ -5017,14 +5281,14 @@ void MORPH_UpdateNormals(Level *BaseLevel)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MORPH_BringBackNormals(struct Level *BaseLevel /*$s0*/)
- // line 3465, offset 0x8005defc
+ // line 3637, offset 0x8005d084
 	/* begin block 1 */
-		// Start line: 3466
-		// Start offset: 0x8005DEFC
+		// Start line: 3638
+		// Start offset: 0x8005D084
 		// Variables:
 	// 		struct _TFace *face; // $v1
 	// 		long faceCount; // $a2
-	// 		struct _TVertex *v; // $a2
+	// 		struct _TVertex *v; // $a1
 	// 		struct _MorphVertex *mv; // $a0
 	// 		struct _MorphColor *mc; // $v0
 	// 		void *hldptr; // $a2
@@ -5033,65 +5297,56 @@ void MORPH_UpdateNormals(Level *BaseLevel)
 	// 		short *morphNormals; // $a1
 
 		/* begin block 1.1 */
-			// Start line: 3513
-			// Start offset: 0x8005DFD8
+			// Start line: 3693
+			// Start offset: 0x8005D160
 			// Variables:
-		// 		short tr; // stack offset -16
-		// 		short tg; // stack offset -14
-		// 		short tb; // stack offset -12
-
-			/* begin block 1.1.1 */
-				// Start line: 3515
-				// Start offset: 0x8005DFD8
-				// Variables:
-			// 		struct _TVertex *endv; // $a1
-			/* end block 1.1.1 */
-			// End offset: 0x8005E0C4
-			// End Line: 3528
+		// 		struct _TVertex *endv; // $a2
 		/* end block 1.1 */
-		// End offset: 0x8005E0C4
-		// End Line: 3543
+		// End offset: 0x8005D1C8
+		// End Line: 3704
 
 		/* begin block 1.2 */
-			// Start line: 3543
-			// Start offset: 0x8005E0C4
+			// Start line: 3719
+			// Start offset: 0x8005D1C8
 			// Variables:
 		// 		struct _BSPNode *node; // $v1
 		// 		struct _BSPLeaf *leaf; // $a0
-		// 		struct _Sphere_noSq hsphere; // stack offset -40
-		// 		struct _BoundingBox hbox; // stack offset -32
+		// 		struct _Sphere_noSq hsphere; // stack offset -32
+		// 		struct _BoundingBox hbox; // stack offset -24
 		// 		struct _Terrain *terrain; // $a3
 		// 		long curTree; // $t0
 		/* end block 1.2 */
-		// End offset: 0x8005E31C
-		// End Line: 3593
+		// End offset: 0x8005D420
+		// End Line: 3769
 
 		/* begin block 1.3 */
-			// Start line: 3596
-			// Start offset: 0x8005E31C
+			// Start line: 3772
+			// Start offset: 0x8005D420
 			// Variables:
 		// 		struct _Instance *instance; // $s0
 
 			/* begin block 1.3.1 */
-				// Start line: 3602
-				// Start offset: 0x8005E344
+				// Start line: 3778
+				// Start offset: 0x8005D448
 				// Variables:
-			// 		struct SVECTOR realDiff; // stack offset -40
-			// 		struct _Position oldPos; // stack offset -32
+			// 		struct SVECTOR realDiff; // stack offset -32
+			// 		struct _Position oldPos; // stack offset -24
 			/* end block 1.3.1 */
-			// End offset: 0x8005E400
-			// End Line: 3625
+			// End offset: 0x8005D518
+			// End Line: 3802
 		/* end block 1.3 */
-		// End offset: 0x8005E410
-		// End Line: 3628
+		// End offset: 0x8005D528
+		// End Line: 3805
 	/* end block 1 */
-	// End offset: 0x8005E410
-	// End Line: 3629
+	// End offset: 0x8005D528
+	// End Line: 3806
 
 	/* begin block 2 */
-		// Start line: 8129
+		// Start line: 8500
 	/* end block 2 */
-	// End Line: 8130
+	// End Line: 8501
+
+/* File: C:\kain2\game\STREAM.C */
 
 void MORPH_BringBackNormals(Level *BaseLevel)
 
@@ -5101,169 +5356,152 @@ void MORPH_BringBackNormals(Level *BaseLevel)
   ushort uVar3;
   short sVar4;
   _Terrain *p_Var5;
-  uint *puVar6;
-  int iVar7;
-  _TVertex *p_Var8;
+  _TVertex *p_Var6;
+  uint *puVar7;
+  int iVar8;
   undefined4 *puVar9;
   Intro *pIVar10;
-  uint uVar11;
-  ushort *puVar12;
+  ushort *puVar11;
+  _MorphVertex *p_Var12;
   byte *pbVar13;
   SpotLight *pSVar14;
   undefined4 *puVar15;
   ushort *puVar16;
-  short *psVar17;
-  _TVertex *p_Var18;
-  long lVar19;
-  int iVar20;
-  uint uVar21;
-  int iVar22;
-  PointLight *pPVar23;
-  long lVar24;
-  undefined4 uVar25;
+  long lVar17;
+  int iVar18;
+  int iVar19;
+  short *psVar20;
+  _TVertex *p_Var21;
+  PointLight *pPVar22;
+  long lVar23;
+  undefined4 uVar24;
+  uint uVar25;
   undefined4 uVar26;
+  undefined4 uVar27;
   _Instance *instance;
-  uint local_28;
-  uint local_24;
-  uint local_20;
-  uint local_1c;
-  undefined4 local_18;
-  short local_10;
-  short local_e;
-  short local_c [2];
   
   p_Var5 = BaseLevel->terrain;
-  puVar16 = *(ushort **)(p_Var5 + 1);
-  iVar22 = p_Var5->numFaces;
-  puVar12 = &p_Var5->faceList->normal;
-  if (0 < iVar22) {
+  puVar16 = (ushort *)p_Var5->morphNormalIdx;
+  iVar19 = p_Var5->numFaces;
+  puVar11 = &p_Var5->faceList->normal;
+  if (0 < iVar19) {
     do {
-      uVar3 = *puVar12;
-      iVar22 = iVar22 + -1;
-      *puVar12 = *puVar16;
+      uVar3 = *puVar11;
+      iVar19 = iVar19 + -1;
+      *puVar11 = *puVar16;
       *puVar16 = uVar3;
       puVar16 = puVar16 + 1;
-      puVar12 = puVar12 + 6;
-    } while (0 < iVar22);
+      puVar11 = puVar11 + 6;
+    } while (0 < iVar19);
     p_Var5 = BaseLevel->terrain;
   }
-  iVar22 = p_Var5->numBSPTrees;
-  if (iVar22 != 0) {
-    sVar2 = *(short *)(iVar22 + 6);
-    sVar4 = *(short *)(iVar22 + 6);
-    psVar17 = (short *)(iVar22 + 6);
+  p_Var12 = p_Var5->MorphDiffList;
+  if (p_Var12 != (_MorphVertex *)0x0) {
+    sVar2 = p_Var12->vindex;
+    sVar4 = p_Var12->vindex;
+    psVar20 = &p_Var12->vindex;
     while (-1 < sVar2) {
-      p_Var8 = BaseLevel->terrain->vertexList + sVar4;
-      (p_Var8->vertex).x = psVar17[1];
-      (p_Var8->vertex).y = psVar17[2];
-      psVar1 = psVar17 + 3;
-      psVar17 = psVar17 + 7;
-      (p_Var8->vertex).z = *psVar1;
-      sVar2 = *psVar17;
-      sVar4 = *psVar17;
+      p_Var6 = BaseLevel->terrain->vertexList + sVar4;
+      (p_Var6->vertex).x = psVar20[1];
+      (p_Var6->vertex).y = psVar20[2];
+      psVar1 = psVar20 + 3;
+      psVar20 = psVar20 + 7;
+      (p_Var6->vertex).z = *psVar1;
+      sVar2 = *psVar20;
+      sVar4 = *psVar20;
     }
-    p_Var5 = BaseLevel->terrain;
   }
-  if (p_Var5->BSPTreeArray != (BSPTree *)0x0) {
-    GAMELOOP_GetTimeOfDayLighting
-              (BaseLevel,&local_10,&local_e,local_c,&BaseLevel->backColorR,&BaseLevel->holdFogNear,
-               &BaseLevel->holdFogFar);
-    p_Var8 = BaseLevel->terrain->vertexList;
-    p_Var18 = p_Var8 + BaseLevel->terrain->numVertices;
-    pbVar13 = &p_Var8->b0;
-    while (p_Var8 < p_Var18) {
+  p_Var5 = BaseLevel->terrain;
+  if (p_Var5->MorphColorList != (_MorphColor *)0x0) {
+    p_Var6 = p_Var5->vertexList;
+    p_Var21 = p_Var6 + p_Var5->numVertices;
+    pbVar13 = &p_Var6->b0;
+    while (p_Var6 < p_Var21) {
+      p_Var6 = p_Var6 + 1;
       pbVar13[-2] = (byte)(((uint)pbVar13[-4] & 0x1f) << 3);
       pbVar13[-1] = (byte)(*(ushort *)(pbVar13 + -4) >> 2) & 0xf8;
       *pbVar13 = (byte)(*(ushort *)(pbVar13 + -4) >> 7) & 0xf8;
-      pbVar13[-2] = (byte)((int)((int)local_10 * (uint)pbVar13[-2]) >> 0xc);
-      pbVar13[-1] = (byte)((int)((int)local_e * (uint)pbVar13[-1]) >> 0xc);
-      p_Var8 = p_Var8 + 1;
-      *pbVar13 = (byte)((int)((int)local_c[0] * (uint)*pbVar13) >> 0xc);
       pbVar13 = pbVar13 + 0xc;
     }
   }
   RemoveIntroducedLights(BaseLevel);
-  lVar19 = BaseLevel->numSpotSpecturalLights;
+  lVar17 = BaseLevel->numSpotSpecturalLights;
   pSVar14 = BaseLevel->spotSpecturalLightList;
   p_Var5 = BaseLevel->terrain;
   BaseLevel->numSpotSpecturalLights = BaseLevel->numSpotLights;
-  lVar24 = BaseLevel->numPointLights;
+  lVar23 = BaseLevel->numPointLights;
   BaseLevel->spotSpecturalLightList = BaseLevel->spotLightList;
-  pPVar23 = BaseLevel->pointLightList;
-  BaseLevel->numSpotLights = lVar19;
+  pPVar22 = BaseLevel->pointLightList;
+  BaseLevel->numSpotLights = lVar17;
   BaseLevel->spotLightList = pSVar14;
   BaseLevel->numPointLights = BaseLevel->numPointSpecturalLights;
   BaseLevel->pointLightList = BaseLevel->pointSpecturalLightList;
-  BaseLevel->numPointSpecturalLights = lVar24;
-  BaseLevel->pointSpecturalLightList = pPVar23;
-  iVar22 = 0;
-  if (0 < (int)p_Var5->morphNormalIdx) {
-    iVar20 = 0;
+  BaseLevel->numPointSpecturalLights = lVar23;
+  BaseLevel->pointSpecturalLightList = pPVar22;
+  iVar19 = 0;
+  if (0 < p_Var5->numBSPTrees) {
+    iVar18 = 0;
     do {
-      puVar6 = (uint *)((int)&p_Var5->signals->numSignals + iVar20);
-      puVar15 = (undefined4 *)*puVar6;
+      puVar7 = (uint *)((int)&p_Var5->BSPTreeArray->bspRoot + iVar18);
+      puVar15 = (undefined4 *)*puVar7;
       puVar9 = puVar15 + 7;
-      if (puVar15 < (undefined4 *)puVar6[1]) {
+      if (puVar15 < (undefined4 *)puVar7[1]) {
         do {
-          uVar25 = *puVar15;
-          local_24 = puVar15[1];
-          uVar26 = puVar9[1];
+          uVar24 = *puVar15;
+          uVar26 = puVar15[1];
+          uVar27 = puVar9[1];
           *puVar15 = *puVar9;
-          puVar15[1] = uVar26;
-          *puVar9 = uVar25;
-          puVar9[1] = local_24;
+          puVar15[1] = uVar27;
+          *puVar9 = uVar24;
+          puVar9[1] = uVar26;
           puVar15 = puVar15 + 0xb;
           puVar9 = puVar9 + 0xb;
-        } while (puVar15 < *(undefined4 **)((int)&p_Var5->signals->signalNum + iVar20));
+        } while (puVar15 < *(undefined4 **)((int)&p_Var5->BSPTreeArray->startLeaves + iVar18));
       }
-      iVar7 = (int)&p_Var5->signals->numSignals + iVar20;
-      puVar15 = *(undefined4 **)(iVar7 + 4);
-      if (puVar15 < *(undefined4 **)(iVar7 + 8)) {
+      iVar8 = (int)&p_Var5->BSPTreeArray->bspRoot + iVar18;
+      puVar15 = *(undefined4 **)(iVar8 + 4);
+      if (puVar15 < *(undefined4 **)(iVar8 + 8)) {
         puVar9 = puVar15 + 7;
         do {
-          uVar25 = *puVar15;
-          local_24 = puVar15[1];
-          uVar26 = puVar9[4];
+          uVar24 = *puVar15;
+          uVar26 = puVar15[1];
+          uVar27 = puVar9[4];
           *puVar15 = puVar9[3];
-          puVar15[1] = uVar26;
-          puVar9[3] = uVar25;
-          puVar9[4] = local_24;
-          uVar25 = puVar9[-3];
-          local_1c = puVar9[-2];
-          local_18 = puVar9[-1];
+          puVar15[1] = uVar27;
+          puVar9[3] = uVar24;
+          puVar9[4] = uVar26;
+          uVar24 = puVar9[-3];
+          uVar26 = puVar9[-2];
+          uVar27 = puVar9[-1];
           puVar9[-3] = *puVar9;
           puVar9[-2] = puVar9[1];
           puVar9[-1] = puVar9[2];
-          *puVar9 = uVar25;
-          puVar9[1] = local_1c;
-          puVar9[2] = local_18;
+          *puVar9 = uVar24;
+          puVar9[1] = uVar26;
+          puVar9[2] = uVar27;
           puVar15 = puVar15 + 0xc;
           puVar9 = puVar9 + 0xc;
-        } while (puVar15 < *(undefined4 **)((int)&p_Var5->signals->signalList[0].id + iVar20));
+        } while (puVar15 < *(undefined4 **)((int)&p_Var5->BSPTreeArray->endLeaves + iVar18));
       }
-      iVar22 = iVar22 + 1;
-      iVar20 = iVar20 + 0x24;
-    } while (iVar22 < (int)p_Var5->morphNormalIdx);
+      iVar19 = iVar19 + 1;
+      iVar18 = iVar18 + 0x24;
+    } while (iVar19 < p_Var5->numBSPTrees);
   }
-  instance = (gameTrackerX.instanceList)->first;
+  instance = *(_Instance **)(DAT_800d2100 + 4);
   while (instance != (_Instance *)0x0) {
     pIVar10 = instance->intro;
     if ((pIVar10 != (Intro *)0x0) &&
-       ((*(int *)&pIVar10->spectralPosition != 0 || ((pIVar10->spectralPosition).z != 0)))) {
-      local_20 = *(uint *)&instance->position;
-      uVar11 = (uint)(ushort)(instance->position).z;
-      local_1c = local_1c & 0xffff0000 | uVar11;
+       (((*(int *)&pIVar10->spectralPosition != 0 || ((pIVar10->spectralPosition).z != 0)) &&
+        ((instance->flags2 & 8U) == 0)))) {
+      uVar25 = *(uint *)&instance->position;
+      uVar3 = (instance->position).z;
       (instance->position).x = (pIVar10->position).x;
       (instance->position).y = (pIVar10->position).y;
       (instance->position).z = (pIVar10->position).z;
-      uVar21 = (uint)(ushort)(instance->position).x - (local_20 & 0xffff);
-      iVar22 = (uint)(ushort)(instance->position).y - (local_20 >> 0x10);
-      local_28 = uVar21 & 0xffff | iVar22 * 0x10000;
-      uVar11 = (ushort)(instance->position).z - uVar11;
-      local_24 = local_24 & 0xffff0000 | uVar11 & 0xffff;
-      if (((int)(uVar21 * 0x10000) >> 0x10) + (iVar22 * 0x10000 >> 0x10) +
-          ((int)(uVar11 * 0x10000) >> 0x10) != 0) {
-        COLLIDE_UpdateAllTransforms(instance,(SVECTOR *)&local_28);
+      if (((int)(((uint)(ushort)(instance->position).x - (uVar25 & 0xffff)) * 0x10000) >> 0x10) +
+          ((int)(((uint)(ushort)(instance->position).y - (uVar25 >> 0x10)) * 0x10000) >> 0x10) +
+          ((int)(((uint)(ushort)(instance->position).z - (uint)uVar3) * 0x10000) >> 0x10) != 0) {
+        COLLIDE_UpdateAllTransforms(instance,0xe0);
       }
     }
     instance = instance->next;
@@ -5276,32 +5514,32 @@ void MORPH_BringBackNormals(Level *BaseLevel)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MORPH_AddOffsets(struct Level *BaseLevel /*$s2*/, int time /*$a1*/)
- // line 3631, offset 0x8005e420
+ // line 3808, offset 0x8005d538
 	/* begin block 1 */
-		// Start line: 3632
-		// Start offset: 0x8005E420
+		// Start line: 3809
+		// Start offset: 0x8005D538
 		// Variables:
 	// 		struct _TVertex *v; // $a3
 	// 		struct _MorphVertex *mv; // $a2
-	// 		struct _MorphColor *mc; // $s0
+	// 		struct _MorphColor *mc; // $t2
 	// 		long m; // $v0
 	// 		long fixed_time; // $s1
 	// 		struct _Instance *instance; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 3679
-			// Start offset: 0x8005E5D4
+			// Start line: 3857
+			// Start offset: 0x8005D700
 			// Variables:
-		// 		struct SVECTOR diff; // stack offset -48
-		// 		struct SVECTOR realDiff; // stack offset -40
-		// 		struct _Position oldPos; // stack offset -32
+		// 		struct SVECTOR diff; // stack offset -40
+		// 		struct SVECTOR realDiff; // stack offset -32
+		// 		struct _Position oldPos; // stack offset -24
 		/* end block 1.1 */
-		// End offset: 0x8005E6D0
-		// End Line: 3698
+		// End offset: 0x8005D7FC
+		// End Line: 3876
 
 		/* begin block 1.2 */
-			// Start line: 3707
-			// Start offset: 0x8005E6F8
+			// Start line: 3885
+			// Start offset: 0x8005D824
 			// Variables:
 		// 		long r0; // $a2
 		// 		long g0; // $a1
@@ -5309,34 +5547,33 @@ void MORPH_BringBackNormals(Level *BaseLevel)
 		// 		long r1; // $v0
 		// 		long g1; // $v0
 		// 		long b1; // $v1
-		// 		short tr; // stack offset -24
-		// 		short tg; // stack offset -22
-		// 		short tb; // stack offset -20
 
 			/* begin block 1.2.1 */
-				// Start line: 3711
-				// Start offset: 0x8005E6F8
+				// Start line: 3895
+				// Start offset: 0x8005D824
 				// Variables:
-			// 		struct _TVertex *endv; // $t3
+			// 		struct _TVertex *endv; // $t4
 			/* end block 1.2.1 */
-			// End offset: 0x8005E828
-			// End Line: 3727
+			// End offset: 0x8005D8EC
+			// End Line: 3910
 		/* end block 1.2 */
-		// End offset: 0x8005E828
-		// End Line: 3750
+		// End offset: 0x8005D8EC
+		// End Line: 3933
 	/* end block 1 */
-	// End offset: 0x8005E828
-	// End Line: 3752
+	// End offset: 0x8005D8EC
+	// End Line: 3935
 
 	/* begin block 2 */
-		// Start line: 8558
+		// Start line: 8931
 	/* end block 2 */
-	// End Line: 8559
+	// End Line: 8932
 
 	/* begin block 3 */
-		// Start line: 8564
+		// Start line: 8937
 	/* end block 3 */
-	// End Line: 8565
+	// End Line: 8938
+
+/* File: C:\kain2\game\STREAM.C */
 
 void MORPH_AddOffsets(Level *BaseLevel,int time)
 
@@ -5344,30 +5581,24 @@ void MORPH_AddOffsets(Level *BaseLevel,int time)
   short *psVar1;
   short *psVar2;
   short sVar3;
-  short sVar4;
-  ushort uVar5;
-  _BSPNode **pp_Var6;
+  ushort uVar4;
+  short sVar5;
+  ushort *puVar6;
   int iVar7;
-  int iVar8;
-  _TVertex *p_Var9;
+  _TVertex *p_Var8;
+  int iVar9;
   Intro *pIVar10;
-  int iVar11;
-  int iVar12;
-  short *psVar13;
-  int iVar14;
-  short *psVar15;
-  uchar *puVar16;
+  _Terrain *p_Var11;
+  short *psVar12;
+  uint uVar13;
+  _MorphVertex *p_Var14;
+  uchar *puVar15;
+  _MorphColor *p_Var16;
   _TVertex *p_Var17;
+  uint uVar18;
   _Instance *instance;
-  BSPTree *pBVar18;
-  SVECTOR local_28;
-  uint local_20;
-  ushort local_1c;
-  short local_18;
-  short local_16;
-  short local_14 [2];
   
-  instance = (gameTrackerX.instanceList)->first;
+  instance = *(_Instance **)(DAT_800d2100 + 4);
   if (time < 0x1f5) {
     time = time * 2;
     iVar7 = (time * time * time) / 2000000;
@@ -5376,73 +5607,66 @@ void MORPH_AddOffsets(Level *BaseLevel,int time)
     iVar7 = (1000 - time) * 2;
     iVar7 = 1000 - (iVar7 * iVar7 * iVar7) / 2000000;
   }
-  psVar15 = (short *)BaseLevel->terrain->numBSPTrees;
+  p_Var14 = BaseLevel->terrain->MorphDiffList;
   iVar7 = (iVar7 << 0xc) / 1000;
-  if ((psVar15 != (short *)0x0) && (sVar4 = psVar15[3], -1 < psVar15[3])) {
-    psVar13 = psVar15 + 3;
+  if ((p_Var14 != (_MorphVertex *)0x0) && (sVar5 = p_Var14->vindex, -1 < p_Var14->vindex)) {
+    psVar12 = &p_Var14->vindex;
     do {
-      p_Var9 = BaseLevel->terrain->vertexList + sVar4;
-      (p_Var9->vertex).x = psVar13[1] + (short)(*psVar15 * iVar7 >> 0xc);
-      (p_Var9->vertex).y = psVar13[2] + (short)(psVar13[-2] * iVar7 >> 0xc);
-      psVar1 = psVar13 + -1;
-      psVar2 = psVar13 + 3;
-      psVar13 = psVar13 + 7;
-      (p_Var9->vertex).z = *psVar2 + (short)(*psVar1 * iVar7 >> 0xc);
-      sVar4 = *psVar13;
-      psVar15 = psVar15 + 7;
-    } while (-1 < *psVar13);
+      p_Var8 = BaseLevel->terrain->vertexList + sVar5;
+      (p_Var8->vertex).x = psVar12[1] + (short)(p_Var14->x * iVar7 >> 0xc);
+      (p_Var8->vertex).y = psVar12[2] + (short)(psVar12[-2] * iVar7 >> 0xc);
+      psVar1 = psVar12 + -1;
+      psVar2 = psVar12 + 3;
+      psVar12 = psVar12 + 7;
+      (p_Var8->vertex).z = *psVar2 + (short)(*psVar1 * iVar7 >> 0xc);
+      sVar5 = *psVar12;
+      p_Var14 = p_Var14 + 1;
+    } while (-1 < *psVar12);
   }
   while (instance != (_Instance *)0x0) {
     pIVar10 = instance->intro;
     if ((pIVar10 != (Intro *)0x0) &&
-       ((*(int *)&pIVar10->spectralPosition != 0 || ((pIVar10->spectralPosition).z != 0)))) {
-      sVar4 = (pIVar10->spectralPosition).y;
+       (((*(int *)&pIVar10->spectralPosition != 0 || ((pIVar10->spectralPosition).z != 0)) &&
+        ((instance->flags2 & 8U) == 0)))) {
+      sVar5 = (pIVar10->spectralPosition).y;
       sVar3 = (pIVar10->spectralPosition).z;
-      local_20 = *(uint *)&instance->position;
-      local_1c = (instance->position).z;
+      uVar18 = *(uint *)&instance->position;
+      uVar4 = (instance->position).z;
       (instance->position).x =
            (pIVar10->position).x + (short)((pIVar10->spectralPosition).x * iVar7 >> 0xc);
-      (instance->position).y = (pIVar10->position).y + (short)(sVar4 * iVar7 >> 0xc);
+      (instance->position).y = (pIVar10->position).y + (short)(sVar5 * iVar7 >> 0xc);
       (instance->position).z = (pIVar10->position).z + (short)(sVar3 * iVar7 >> 0xc);
-      iVar14 = (uint)(ushort)(instance->position).x - (local_20 & 0xffff);
-      local_28.vx = (short)iVar14;
-      iVar11 = (uint)(ushort)(instance->position).y - (local_20 >> 0x10);
-      local_28.vy = (short)iVar11;
-      iVar8 = (uint)(ushort)(instance->position).z - (uint)local_1c;
-      local_28.vz = (short)iVar8;
-      if ((iVar14 * 0x10000 >> 0x10) + (iVar11 * 0x10000 >> 0x10) + (iVar8 * 0x10000 >> 0x10) != 0)
-      {
-        COLLIDE_UpdateAllTransforms(instance,&local_28);
+      if (((int)(((uint)(ushort)(instance->position).x - (uVar18 & 0xffff)) * 0x10000) >> 0x10) +
+          ((int)(((uint)(ushort)(instance->position).y - (uVar18 >> 0x10)) * 0x10000) >> 0x10) +
+          ((int)(((uint)(ushort)(instance->position).z - (uint)uVar4) * 0x10000) >> 0x10) != 0) {
+        COLLIDE_UpdateAllTransforms(instance,0xe0);
       }
     }
     instance = instance->next;
   }
-  pBVar18 = BaseLevel->terrain->BSPTreeArray;
-  if (pBVar18 != (BSPTree *)0x0) {
-    GAMELOOP_GetTimeOfDayLighting
-              (BaseLevel,&local_18,&local_16,local_14,&BaseLevel->backColorR,&BaseLevel->holdFogNear
-               ,&BaseLevel->holdFogFar);
-    p_Var9 = BaseLevel->terrain->vertexList;
-    p_Var17 = p_Var9 + BaseLevel->terrain->numVertices;
-    if (p_Var9 < p_Var17) {
-      puVar16 = &p_Var9->b0;
+  p_Var11 = BaseLevel->terrain;
+  p_Var16 = p_Var11->MorphColorList;
+  if (p_Var16 != (_MorphColor *)0x0) {
+    p_Var8 = p_Var11->vertexList;
+    p_Var17 = p_Var8 + p_Var11->numVertices;
+    if (p_Var8 < p_Var17) {
+      puVar15 = &p_Var8->b0;
       do {
-        uVar5 = *(ushort *)(puVar16 + -4);
-        iVar8 = (int)local_18 * ((uint)uVar5 & 0x1f) * 8 * 0x10;
-        pp_Var6 = &pBVar18->bspRoot;
-        iVar14 = (uint)*(ushort *)pp_Var6 << 0x10;
-        iVar11 = (int)local_16 * ((uint)(uVar5 >> 2) & 0xf8) * 0x10;
-        iVar12 = (int)((int)local_14[0] * ((uint)(uVar5 >> 7) & 0xf8)) >> 0xc;
-        p_Var9 = p_Var9 + 1;
-        pBVar18 = (BSPTree *)((int)&pBVar18->bspRoot + 2);
-        puVar16[-2] = (char)((uint)iVar8 >> 0x10) +
-                      (char)((int)((((uint)*(ushort *)pp_Var6 & 0x1f) * 8 - (iVar8 >> 0x10)) * iVar7
-                                  ) >> 0xc);
-        puVar16[-1] = (char)((uint)iVar11 >> 0x10) +
-                      (char)((int)(((iVar14 >> 0x12 & 0xf8U) - (iVar11 >> 0x10)) * iVar7) >> 0xc);
-        *puVar16 = (char)iVar12 + (char)((int)(((iVar14 >> 0x17 & 0xf8U) - iVar12) * iVar7) >> 0xc);
-        puVar16 = puVar16 + 0xc;
-      } while (p_Var9 < p_Var17);
+        uVar4 = *(ushort *)(puVar15 + -4);
+        puVar6 = (ushort *)&p_Var16->morphColor15;
+        uVar13 = (uint)(uVar4 >> 2) & 0xf8;
+        iVar9 = (uint)*puVar6 << 0x10;
+        uVar18 = (uint)(uVar4 >> 7) & 0xf8;
+        p_Var8 = p_Var8 + 1;
+        p_Var16 = p_Var16 + 1;
+        puVar15[-2] = (char)((uint)uVar4 & 0x1f) * '\b' +
+                      (char)((int)((((uint)*puVar6 & 0x1f) * 8 + ((uint)uVar4 & 0x1f) * -8) * iVar7)
+                            >> 0xc);
+        puVar15[-1] = (char)uVar13 +
+                      (char)((int)(((iVar9 >> 0x12 & 0xf8U) - uVar13) * iVar7) >> 0xc);
+        *puVar15 = (char)uVar18 + (char)((int)(((iVar9 >> 0x17 & 0xf8U) - uVar18) * iVar7) >> 0xc);
+        puVar15 = puVar15 + 0xc;
+      } while (p_Var8 < p_Var17);
     }
   }
   return;
@@ -5453,32 +5677,32 @@ void MORPH_AddOffsets(Level *BaseLevel,int time)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MORPH_SubtractOffsets(struct Level *BaseLevel /*$s2*/, int time /*$a1*/)
- // line 3754, offset 0x8005e840
+ // line 3937, offset 0x8005d904
 	/* begin block 1 */
-		// Start line: 3755
-		// Start offset: 0x8005E840
+		// Start line: 3938
+		// Start offset: 0x8005D904
 		// Variables:
 	// 		struct _TVertex *v; // $a3
 	// 		struct _MorphVertex *mv; // $a2
-	// 		struct _MorphColor *mc; // $s0
+	// 		struct _MorphColor *mc; // $t2
 	// 		long m; // $v0
 	// 		long fixed_time; // $s1
 	// 		struct _Instance *instance; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 3800
-			// Start offset: 0x8005E9FC
+			// Start line: 3984
+			// Start offset: 0x8005DAD4
 			// Variables:
-		// 		struct SVECTOR diff; // stack offset -48
-		// 		struct SVECTOR realDiff; // stack offset -40
-		// 		struct _Position oldPos; // stack offset -32
+		// 		struct SVECTOR diff; // stack offset -40
+		// 		struct SVECTOR realDiff; // stack offset -32
+		// 		struct _Position oldPos; // stack offset -24
 		/* end block 1.1 */
-		// End offset: 0x8005EAF8
-		// End Line: 3820
+		// End offset: 0x8005DBD0
+		// End Line: 4004
 
 		/* begin block 1.2 */
-			// Start line: 3829
-			// Start offset: 0x8005EB20
+			// Start line: 4013
+			// Start offset: 0x8005DBF8
 			// Variables:
 		// 		long r0; // $a2
 		// 		long g0; // $a1
@@ -5486,34 +5710,33 @@ void MORPH_AddOffsets(Level *BaseLevel,int time)
 		// 		long r1; // $v0
 		// 		long g1; // $v0
 		// 		long b1; // $v1
-		// 		short tr; // stack offset -24
-		// 		short tg; // stack offset -22
-		// 		short tb; // stack offset -20
 
 			/* begin block 1.2.1 */
-				// Start line: 3833
-				// Start offset: 0x8005EB20
+				// Start line: 4022
+				// Start offset: 0x8005DBF8
 				// Variables:
-			// 		struct _TVertex *endv; // $t3
+			// 		struct _TVertex *endv; // $t4
 			/* end block 1.2.1 */
-			// End offset: 0x8005EC50
-			// End Line: 3850
+			// End offset: 0x8005DCC0
+			// End Line: 4037
 		/* end block 1.2 */
-		// End offset: 0x8005EC50
-		// End Line: 3873
+		// End offset: 0x8005DCC0
+		// End Line: 4060
 	/* end block 1 */
-	// End offset: 0x8005EC50
-	// End Line: 3875
+	// End offset: 0x8005DCC0
+	// End Line: 4062
 
 	/* begin block 2 */
-		// Start line: 8884
+		// Start line: 9273
 	/* end block 2 */
-	// End Line: 8885
+	// End Line: 9274
 
 	/* begin block 3 */
-		// Start line: 8890
+		// Start line: 9279
 	/* end block 3 */
-	// End Line: 8891
+	// End Line: 9280
+
+/* File: C:\kain2\game\STREAM.C */
 
 void MORPH_SubtractOffsets(Level *BaseLevel,int time)
 
@@ -5521,30 +5744,24 @@ void MORPH_SubtractOffsets(Level *BaseLevel,int time)
   short *psVar1;
   short *psVar2;
   short sVar3;
-  short sVar4;
-  ushort uVar5;
-  _BSPNode **pp_Var6;
+  ushort uVar4;
+  short sVar5;
+  ushort *puVar6;
   int iVar7;
-  int iVar8;
-  _TVertex *p_Var9;
-  Intro *pIVar10;
-  int iVar11;
-  int iVar12;
-  short *psVar13;
-  int iVar14;
-  short *psVar15;
-  uchar *puVar16;
+  _TVertex *p_Var8;
+  _Terrain *p_Var9;
+  int iVar10;
+  Intro *pIVar11;
+  short *psVar12;
+  uint uVar13;
+  _MorphVertex *p_Var14;
+  uchar *puVar15;
+  _MorphColor *p_Var16;
   _TVertex *p_Var17;
+  uint uVar18;
   _Instance *instance;
-  BSPTree *pBVar18;
-  SVECTOR local_28;
-  uint local_20;
-  ushort local_1c;
-  short local_18;
-  short local_16;
-  short local_14 [2];
   
-  instance = (gameTrackerX.instanceList)->first;
+  instance = *(_Instance **)(DAT_800d2100 + 4);
   if (time < 0x1f5) {
     time = time * 2;
     iVar7 = (time * time * time) / 2000000;
@@ -5553,73 +5770,66 @@ void MORPH_SubtractOffsets(Level *BaseLevel,int time)
     iVar7 = (1000 - time) * 2;
     iVar7 = 1000 - (iVar7 * iVar7 * iVar7) / 2000000;
   }
-  psVar15 = (short *)BaseLevel->terrain->numBSPTrees;
+  p_Var14 = BaseLevel->terrain->MorphDiffList;
   iVar7 = ((1000 - iVar7) * 0x1000) / 1000;
-  if ((psVar15 != (short *)0x0) && (sVar4 = psVar15[3], -1 < psVar15[3])) {
-    psVar13 = psVar15 + 3;
+  if ((p_Var14 != (_MorphVertex *)0x0) && (sVar5 = p_Var14->vindex, -1 < p_Var14->vindex)) {
+    psVar12 = &p_Var14->vindex;
     do {
-      p_Var9 = BaseLevel->terrain->vertexList + sVar4;
-      (p_Var9->vertex).x = psVar13[1] + (short)(*psVar15 * iVar7 >> 0xc);
-      (p_Var9->vertex).y = psVar13[2] + (short)(psVar13[-2] * iVar7 >> 0xc);
-      psVar1 = psVar13 + -1;
-      psVar2 = psVar13 + 3;
-      psVar13 = psVar13 + 7;
-      (p_Var9->vertex).z = *psVar2 + (short)(*psVar1 * iVar7 >> 0xc);
-      sVar4 = *psVar13;
-      psVar15 = psVar15 + 7;
-    } while (-1 < *psVar13);
+      p_Var8 = BaseLevel->terrain->vertexList + sVar5;
+      (p_Var8->vertex).x = psVar12[1] + (short)(p_Var14->x * iVar7 >> 0xc);
+      (p_Var8->vertex).y = psVar12[2] + (short)(psVar12[-2] * iVar7 >> 0xc);
+      psVar1 = psVar12 + -1;
+      psVar2 = psVar12 + 3;
+      psVar12 = psVar12 + 7;
+      (p_Var8->vertex).z = *psVar2 + (short)(*psVar1 * iVar7 >> 0xc);
+      sVar5 = *psVar12;
+      p_Var14 = p_Var14 + 1;
+    } while (-1 < *psVar12);
   }
   while (instance != (_Instance *)0x0) {
-    pIVar10 = instance->intro;
-    if ((pIVar10 != (Intro *)0x0) &&
-       ((*(int *)&pIVar10->spectralPosition != 0 || ((pIVar10->spectralPosition).z != 0)))) {
-      sVar4 = (pIVar10->spectralPosition).y;
-      sVar3 = (pIVar10->spectralPosition).z;
-      local_20 = *(uint *)&instance->position;
-      local_1c = (instance->position).z;
+    pIVar11 = instance->intro;
+    if ((pIVar11 != (Intro *)0x0) &&
+       (((*(int *)&pIVar11->spectralPosition != 0 || ((pIVar11->spectralPosition).z != 0)) &&
+        ((instance->flags2 & 8U) == 0)))) {
+      sVar5 = (pIVar11->spectralPosition).y;
+      sVar3 = (pIVar11->spectralPosition).z;
+      uVar18 = *(uint *)&instance->position;
+      uVar4 = (instance->position).z;
       (instance->position).x =
-           (pIVar10->position).x + (short)((pIVar10->spectralPosition).x * iVar7 >> 0xc);
-      (instance->position).y = (pIVar10->position).y + (short)(sVar4 * iVar7 >> 0xc);
-      (instance->position).z = (pIVar10->position).z + (short)(sVar3 * iVar7 >> 0xc);
-      iVar14 = (uint)(ushort)(instance->position).x - (local_20 & 0xffff);
-      local_28.vx = (short)iVar14;
-      iVar11 = (uint)(ushort)(instance->position).y - (local_20 >> 0x10);
-      local_28.vy = (short)iVar11;
-      iVar8 = (uint)(ushort)(instance->position).z - (uint)local_1c;
-      local_28.vz = (short)iVar8;
-      if ((iVar14 * 0x10000 >> 0x10) + (iVar11 * 0x10000 >> 0x10) + (iVar8 * 0x10000 >> 0x10) != 0)
-      {
-        COLLIDE_UpdateAllTransforms(instance,&local_28);
+           (pIVar11->position).x + (short)((pIVar11->spectralPosition).x * iVar7 >> 0xc);
+      (instance->position).y = (pIVar11->position).y + (short)(sVar5 * iVar7 >> 0xc);
+      (instance->position).z = (pIVar11->position).z + (short)(sVar3 * iVar7 >> 0xc);
+      if (((int)(((uint)(ushort)(instance->position).x - (uVar18 & 0xffff)) * 0x10000) >> 0x10) +
+          ((int)(((uint)(ushort)(instance->position).y - (uVar18 >> 0x10)) * 0x10000) >> 0x10) +
+          ((int)(((uint)(ushort)(instance->position).z - (uint)uVar4) * 0x10000) >> 0x10) != 0) {
+        COLLIDE_UpdateAllTransforms(instance,0xe0);
       }
     }
     instance = instance->next;
   }
-  pBVar18 = BaseLevel->terrain->BSPTreeArray;
-  if (pBVar18 != (BSPTree *)0x0) {
-    GAMELOOP_GetTimeOfDayLighting
-              (BaseLevel,&local_18,&local_16,local_14,&BaseLevel->backColorR,&BaseLevel->holdFogNear
-               ,&BaseLevel->holdFogFar);
-    p_Var9 = BaseLevel->terrain->vertexList;
-    p_Var17 = p_Var9 + BaseLevel->terrain->numVertices;
-    if (p_Var9 < p_Var17) {
-      puVar16 = &p_Var9->b0;
+  p_Var9 = BaseLevel->terrain;
+  p_Var16 = p_Var9->MorphColorList;
+  if (p_Var16 != (_MorphColor *)0x0) {
+    p_Var8 = p_Var9->vertexList;
+    p_Var17 = p_Var8 + p_Var9->numVertices;
+    if (p_Var8 < p_Var17) {
+      puVar15 = &p_Var8->b0;
       do {
-        uVar5 = *(ushort *)(puVar16 + -4);
-        iVar8 = (int)local_18 * ((uint)uVar5 & 0x1f) * 8 * 0x10;
-        pp_Var6 = &pBVar18->bspRoot;
-        iVar14 = (uint)*(ushort *)pp_Var6 << 0x10;
-        iVar11 = (int)local_16 * ((uint)(uVar5 >> 2) & 0xf8) * 0x10;
-        iVar12 = (int)((int)local_14[0] * ((uint)(uVar5 >> 7) & 0xf8)) >> 0xc;
-        p_Var9 = p_Var9 + 1;
-        pBVar18 = (BSPTree *)((int)&pBVar18->bspRoot + 2);
-        puVar16[-2] = (char)((uint)iVar8 >> 0x10) +
-                      (char)((int)((((uint)*(ushort *)pp_Var6 & 0x1f) * 8 - (iVar8 >> 0x10)) * iVar7
-                                  ) >> 0xc);
-        puVar16[-1] = (char)((uint)iVar11 >> 0x10) +
-                      (char)((int)(((iVar14 >> 0x12 & 0xf8U) - (iVar11 >> 0x10)) * iVar7) >> 0xc);
-        *puVar16 = (char)iVar12 + (char)((int)(((iVar14 >> 0x17 & 0xf8U) - iVar12) * iVar7) >> 0xc);
-        puVar16 = puVar16 + 0xc;
-      } while (p_Var9 < p_Var17);
+        uVar4 = *(ushort *)(puVar15 + -4);
+        puVar6 = (ushort *)&p_Var16->morphColor15;
+        uVar13 = (uint)(uVar4 >> 2) & 0xf8;
+        iVar10 = (uint)*puVar6 << 0x10;
+        uVar18 = (uint)(uVar4 >> 7) & 0xf8;
+        p_Var8 = p_Var8 + 1;
+        p_Var16 = p_Var16 + 1;
+        puVar15[-2] = (char)((uint)uVar4 & 0x1f) * '\b' +
+                      (char)((int)((((uint)*puVar6 & 0x1f) * 8 + ((uint)uVar4 & 0x1f) * -8) * iVar7)
+                            >> 0xc);
+        puVar15[-1] = (char)uVar13 +
+                      (char)((int)(((iVar10 >> 0x12 & 0xf8U) - uVar13) * iVar7) >> 0xc);
+        *puVar15 = (char)uVar18 + (char)((int)(((iVar10 >> 0x17 & 0xf8U) - uVar18) * iVar7) >> 0xc);
+        puVar15 = puVar15 + 0xc;
+      } while (p_Var8 < p_Var17);
     }
   }
   return;
@@ -5629,148 +5839,162 @@ void MORPH_SubtractOffsets(Level *BaseLevel,int time)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ MORPH_GetComponentsForTrackingPoint(struct _TFace *face /*$s1*/)
- // line 3880, offset 0x8005ec68
+// void /*$ra*/ MORPH_GetComponentsForTrackingPoint(struct _TFace *face /*$a2*/, struct Level *level /*$a3*/)
+ // line 4067, offset 0x8005dcd8
 	/* begin block 1 */
-		// Start line: 3881
-		// Start offset: 0x8005EC68
+		// Start line: 4068
+		// Start offset: 0x8005DCD8
 		// Variables:
-	// 		struct _Vector v1; // stack offset -64
-	// 		struct _Vector v2; // stack offset -48
-	// 		struct _Vector p1; // stack offset -32
-	// 		long lv1; // $s2
-	// 		long lv2; // $a1
-	// 		struct Level *level; // $s0
+	// 		struct _SVector (*v[3]); // stack offset -32
+	// 		struct _Position *offset; // $a2
+	// 		struct _Position player; // stack offset -16
+	// 		int n; // $a1
+	// 		int saved_div; // $t0
+	// 		int next; // $a0
+	// 		int side; // $t1
+	// 		int track; // $t3
+	// 		int x[2]; // stack offset -8
+	// 		struct _TVertex *vertexList; // $a0
 
 		/* begin block 1.1 */
-			// Start line: 3891
-			// Start offset: 0x8005EC8C
+			// Start line: 4080
+			// Start offset: 0x8005DCF8
 			// Variables:
-		// 		long _x0; // $a0
-		// 		long _y0; // $a3
-		// 		long _z0; // $a2
-		// 		long _x1; // $v0
-		// 		long _y1; // $v0
-		// 		long _z1; // $v1
-		// 		struct _Vector *_v; // $v0
-		// 		struct _Vertex *_v0; // $v1
-		// 		struct _Vertex *_v1; // $a1
+		// 		short _x0; // $v0
+		// 		short _y0; // $a1
+		// 		short _z0; // $a0
+		// 		short _x1; // $v1
+		// 		short _y1; // $a3
+		// 		short _z1; // $a2
+		// 		struct _Position *_v; // $v0
+		// 		struct _Position *_v0; // $a0
 		/* end block 1.1 */
-		// End offset: 0x8005EC8C
-		// End Line: 3891
+		// End offset: 0x8005DCF8
+		// End Line: 4080
 
 		/* begin block 1.2 */
-			// Start line: 3891
-			// Start offset: 0x8005EC8C
+			// Start line: 4096
+			// Start offset: 0x8005DDCC
 			// Variables:
-		// 		long _x0; // $a0
-		// 		long _y0; // $t0
-		// 		long _z0; // $a3
-		// 		long _x1; // $v1
-		// 		long _y1; // $v1
-		// 		long _z1; // $a1
-		// 		struct _Vector *_v; // $v1
-		// 		struct _Vertex *_v0; // $a1
-		// 		struct _Vertex *_v1; // $a2
+		// 		int next; // $v1
+
+			/* begin block 1.2.1 */
+				// Start line: 4103
+				// Start offset: 0x8005DE54
+				// Variables:
+			// 		int div; // $a0
+			/* end block 1.2.1 */
+			// End offset: 0x8005DEA0
+			// End Line: 4108
 		/* end block 1.2 */
-		// End offset: 0x8005EC8C
-		// End Line: 3891
-
-		/* begin block 1.3 */
-			// Start line: 3891
-			// Start offset: 0x8005EC8C
-			// Variables:
-		// 		long _x0; // $t2
-		// 		long _y0; // $t0
-		// 		long _z0; // $a2
-		// 		long _x1; // $v1
-		// 		long _y1; // $v1
-		// 		long _z1; // $a0
-		// 		struct _Vector *_v; // $a3
-		// 		struct _Position *_v0; // $a2
-		// 		struct _Vertex *_v1; // $a0
-		/* end block 1.3 */
-		// End offset: 0x8005EC8C
-		// End Line: 3891
-
-		/* begin block 1.4 */
-			// Start line: 3891
-			// Start offset: 0x8005EC8C
-			// Variables:
-		// 		long _x0; // $t2
-		// 		long _y0; // $t0
-		// 		long _z0; // $a2
-		// 		long _x1; // $v1
-		// 		long _y1; // $a1
-		// 		long _z1; // $a0
-		// 		struct _Position *_v1; // $a0
-		/* end block 1.4 */
-		// End offset: 0x8005EC8C
-		// End Line: 3891
+		// End offset: 0x8005DEA0
+		// End Line: 4109
 	/* end block 1 */
-	// End offset: 0x8005EF1C
-	// End Line: 3919
+	// End offset: 0x8005DFB8
+	// End Line: 4135
 
 	/* begin block 2 */
-		// Start line: 9213
+		// Start line: 9614
 	/* end block 2 */
-	// End Line: 9214
+	// End Line: 9615
 
-void MORPH_GetComponentsForTrackingPoint(_TFace *face)
+/* File: C:\kain2\game\STREAM.C */
+
+void MORPH_GetComponentsForTrackingPoint(_TFace *face,Level *level)
 
 {
-  Level *pLVar1;
-  long lVar2;
-  long lVar3;
-  _TVertex *p_Var4;
-  long *plVar5;
-  int x;
-  int x_00;
-  _TVertex *p_Var6;
-  int z;
-  int iVar7;
-  int y;
-  int z_00;
-  int y_00;
+  int iVar1;
+  int iVar2;
+  BSPTree *pBVar3;
+  int iVar4;
+  _TVertex *p_Var5;
+  int iVar6;
+  _TVertex **pp_Var7;
   int iVar8;
   int iVar9;
+  int iVar10;
+  int iVar11;
+  short *psVar12;
+  _TVertex *local_20 [4];
+  short local_10;
+  short local_e;
+  short local_c;
+  int local_8 [2];
   
-  MORPH_SavedFace = face;
-  if (face != (_TFace *)0x0) {
-    pLVar1 = STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID);
-    p_Var6 = pLVar1->terrain->vertexList;
-    p_Var4 = p_Var6 + (face->face)._3;
-    p_Var6 = p_Var6 + (face->face)._2;
-    x = (int)(p_Var4->vertex).x - (int)(p_Var6->vertex).x;
-    z = (int)(p_Var4->vertex).z - (int)(p_Var6->vertex).z;
-    y = (int)(p_Var4->vertex).y - (int)(p_Var6->vertex).y;
-    lVar2 = MATH3D_LengthXYZ(x,y,z);
-    p_Var6 = pLVar1->terrain->vertexList;
-    p_Var4 = p_Var6 + (face->face).v2;
-    p_Var6 = p_Var6 + (face->face)._2;
-    x_00 = (int)(p_Var4->vertex).x - (int)(p_Var6->vertex).x;
-    z_00 = (int)(p_Var4->vertex).z - (int)(p_Var6->vertex).z;
-    y_00 = (int)(p_Var4->vertex).y - (int)(p_Var6->vertex).y;
-    lVar3 = MATH3D_LengthXYZ(x_00,y_00,z_00);
-    p_Var4 = pLVar1->terrain->vertexList + (face->face)._2;
-    plVar5 = &pLVar1->terrain->signals->numSignals + (gameTrackerX.playerInstance)->bspTree * 9;
-    iVar9 = ((int)((gameTrackerX.playerInstance)->position).x - (int)(p_Var4->vertex).x) -
-            (int)*(short *)(plVar5 + 3);
-    iVar8 = ((int)((gameTrackerX.playerInstance)->position).y - (int)(p_Var4->vertex).y) -
-            (int)*(short *)((int)plVar5 + 0xe);
-    iVar7 = ((int)((gameTrackerX.playerInstance)->position).z - (int)(p_Var4->vertex).z) -
-            (int)*(short *)(plVar5 + 4);
-    if (lVar2 == 0) {
-      MORPH_A_Component = 0;
+  MORPH_SavedLevel = level;
+  MORPH_SavedFace = (_TFace *)face;
+  if ((face != (_TFace *)0x0) && (iVar11 = 0, level != (Level *)0x0)) {
+    psVar12 = MORPH_Component;
+    p_Var5 = level->terrain->vertexList;
+    local_20[0] = p_Var5 + (face->face).v0;
+    iVar10 = 0;
+    local_20[1] = p_Var5 + (face->face).v1;
+    local_20[2] = p_Var5 + (face->face).v2;
+    pBVar3 = level->terrain->BSPTreeArray + *(int *)(DAT_800d20f8 + 0xc4);
+    local_10 = *(short *)(DAT_800d20f8 + 0x5c) - (pBVar3->globalOffset).x;
+    local_e = *(short *)(DAT_800d20f8 + 0x5e) - (pBVar3->globalOffset).y;
+    local_c = *(short *)(DAT_800d20f8 + 0x60) - (pBVar3->globalOffset).z;
+    do {
+      iVar8 = 0;
+      iVar9 = 0;
+      iVar6 = 0;
+      pp_Var7 = local_20;
+      do {
+        iVar4 = iVar6 + 1;
+        if (2 < iVar4) {
+          iVar4 = 0;
+        }
+        if ((iVar11 != 1) || (iVar6 != (int)MORPH_Track[0])) {
+          iVar1 = iVar4 * 4;
+          if (((*(short *)((int)*pp_Var7 + 2) <= local_e) &&
+              (iVar1 = iVar4 << 2, local_e <= (local_20[iVar4]->vertex).y)) ||
+             ((*(short *)(*(int *)((int)local_20 + iVar1) + 2) <= local_e &&
+              (local_e <= *(short *)((int)*pp_Var7 + 2))))) {
+            iVar1 = (int)(local_20[iVar4]->vertex).y - (int)*(short *)((int)*pp_Var7 + 2);
+            iVar4 = iVar1;
+            if (iVar1 < 0) {
+              iVar4 = -iVar1;
+            }
+            iVar2 = iVar8;
+            if (iVar8 < 0) {
+              iVar2 = -iVar8;
+            }
+            if (iVar2 < iVar4) {
+              iVar8 = iVar1;
+              iVar9 = iVar6;
+            }
+          }
+        }
+        iVar6 = iVar6 + 1;
+        pp_Var7 = (_TVertex **)((int *)pp_Var7 + 1);
+      } while (iVar6 < 3);
+      *(undefined2 *)((int)MORPH_Track + iVar10) = (short)iVar9;
+      iVar6 = iVar9 + 1;
+      if (2 < iVar6) {
+        iVar6 = 0;
+      }
+      if (iVar8 == 0) {
+        *(undefined2 *)((int)MORPH_Component + iVar10) = 0;
+      }
+      else {
+        *(undefined2 *)((int)MORPH_Component + iVar10) =
+             (short)((((int)local_e - (int)(local_20[iVar9]->vertex).y) * 0x1000) / iVar8);
+      }
+      iVar9 = (int)(local_20[iVar9]->vertex).x;
+      iVar8 = (int)*psVar12 * ((local_20[iVar6]->vertex).x - iVar9);
+      if (iVar8 < 0) {
+        iVar8 = iVar8 + 0xfff;
+      }
+      local_8[iVar11] = iVar9 + (iVar8 >> 0xc);
+      psVar12 = psVar12 + 1;
+      iVar11 = iVar11 + 1;
+      iVar10 = iVar10 + 2;
+    } while (iVar11 < 2);
+    if (local_8[0] == local_8[1]) {
+      MORPH_Component[2] = 0;
     }
     else {
-      MORPH_A_Component = ((iVar9 * x + iVar8 * y + iVar7 * z) * 0x1000) / (lVar2 * lVar2);
-    }
-    if (lVar3 == 0) {
-      MORPH_B_Component = 0;
-    }
-    else {
-      MORPH_B_Component = ((iVar9 * x_00 + iVar8 * y_00 + iVar7 * z_00) * 0x1000) / (lVar3 * lVar3);
+      MORPH_Component[2] = (short)(((local_10 - local_8[0]) * 0x1000) / (local_8[1] - local_8[0]));
     }
   }
   return;
@@ -5780,100 +6004,125 @@ void MORPH_GetComponentsForTrackingPoint(_TFace *face)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ MORPH_UpdateTrackingPoint(struct _Vector *point /*$s1*/, struct _TFace *face /*$s0*/)
- // line 3921, offset 0x8005ef34
+// void /*$ra*/ MORPH_AveragePoint(struct _SVector *start /*$v1*/, struct _SVector *end /*$a1*/, int interp /*$v0*/, struct _SVector *out /*$a3*/)
+ // line 4137, offset 0x8005dfc0
 	/* begin block 1 */
-		// Start line: 3922
-		// Start offset: 0x8005EF34
+		// Start line: 9819
+	/* end block 1 */
+	// End Line: 9820
+
+/* File: C:\kain2\game\STREAM.C */
+
+void MORPH_AveragePoint(_SVector *start,_SVector *end,int interp,_SVector *out)
+
+{
+  SVECTOR *v0;
+  undefined *p0;
+  
+  if (interp < 0) {
+    p0 = &DAT_0000132a + interp;
+    interp = -interp;
+    v0 = (SVECTOR *)end;
+  }
+  else {
+    p0 = (undefined *)(0x1000 - interp);
+    v0 = (SVECTOR *)start;
+    start = end;
+  }
+  LoadAverageShort12(v0,(SVECTOR *)start,(long)p0,interp,(SVECTOR *)out);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ MORPH_UpdateTrackingPoint(struct _TFace *face /*$a2*/, struct Level *level /*$s2*/)
+ // line 4151, offset 0x8005e014
+	/* begin block 1 */
+		// Start line: 4152
+		// Start offset: 0x8005E014
 		// Variables:
-	// 		struct _Vector v1; // stack offset -48
-	// 		struct _Vector v2; // stack offset -32
-	// 		struct Level *level; // $v0
+	// 		struct _SVector (*v[3]); // stack offset -56
+	// 		struct _SVector p1; // stack offset -40
+	// 		struct _SVector p2; // stack offset -32
+	// 		struct _SVector p3; // stack offset -24
+	// 		struct _Position *offset; // $a3
+	// 		int next; // $a1
+	// 		struct _TVertex *vertexList; // $a0
 
 		/* begin block 1.1 */
-			// Start line: 3931
-			// Start offset: 0x8005EF50
+			// Start line: 4172
+			// Start offset: 0x8005E0E8
 			// Variables:
-		// 		long _x0; // $t0
-		// 		long _y0; // $a3
-		// 		long _z0; // $a2
-		// 		long _x1; // $v1
-		// 		long _y1; // $v1
-		// 		long _z1; // $a0
-		// 		struct _Vector *_v; // $v1
-		// 		struct _Vertex *_v0; // $a0
-		// 		struct _Vertex *_v1; // $a1
+		// 		short _x0; // $v0
+		// 		short _y0; // $a0
+		// 		short _z0; // $a1
+		// 		short _x1; // $v1
+		// 		short _y1; // $t0
+		// 		short _z1; // $a3
 		/* end block 1.1 */
-		// End offset: 0x8005EF50
-		// End Line: 3931
+		// End offset: 0x8005E0E8
+		// End Line: 4172
 
 		/* begin block 1.2 */
-			// Start line: 3931
-			// Start offset: 0x8005EF50
+			// Start line: 4172
+			// Start offset: 0x8005E0E8
 			// Variables:
-		// 		long _x0; // $a2
-		// 		long _y0; // $t0
-		// 		long _z0; // $a3
-		// 		long _x1; // $a0
-		// 		long _y1; // $v1
-		// 		long _z1; // $a0
-		// 		struct _Vector *_v; // $v1
-		// 		struct _Vertex *_v0; // $v1
-		// 		struct _Vertex *_v1; // $a1
+		// 		struct _Position *_v0; // $a2
 		/* end block 1.2 */
-		// End offset: 0x8005EF50
-		// End Line: 3931
+		// End offset: 0x8005E0E8
+		// End Line: 4172
 	/* end block 1 */
-	// End offset: 0x8005F130
-	// End Line: 3964
+	// End offset: 0x8005E194
+	// End Line: 4184
 
 	/* begin block 2 */
-		// Start line: 9305
+		// Start line: 9847
 	/* end block 2 */
-	// End Line: 9306
+	// End Line: 9848
 
-void MORPH_UpdateTrackingPoint(_Vector *point,_TFace *face)
+/* File: C:\kain2\game\STREAM.C */
+
+void MORPH_UpdateTrackingPoint(_TFace *face,Level *level)
 
 {
   short sVar1;
   short sVar2;
-  short sVar3;
-  short sVar4;
-  long lVar5;
-  long lVar6;
-  Level *pLVar7;
-  _TVertex *p_Var8;
-  _TVertex *p_Var9;
-  _TVertex *p_Var10;
-  _TVertex *p_Var11;
-  int iVar12;
-  int iVar13;
+  BSPTree *pBVar3;
+  _TVertex *p_Var4;
+  int iVar5;
+  _TVertex *local_38 [4];
+  _SVector _Stack40;
+  _SVector _Stack32;
+  _SVector local_18;
   
-  if (face != (_TFace *)0x0) {
-    pLVar7 = STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID);
-    lVar6 = MORPH_B_Component;
-    lVar5 = MORPH_A_Component;
-    p_Var10 = pLVar7->terrain->vertexList;
-    p_Var9 = p_Var10 + (face->face)._3;
-    p_Var10 = p_Var10 + (face->face)._2;
-    sVar1 = (p_Var9->vertex).z;
-    sVar2 = (p_Var10->vertex).z;
-    p_Var11 = pLVar7->terrain->vertexList;
-    p_Var8 = p_Var11 + (face->face).v2;
-    sVar3 = (p_Var8->vertex).z;
-    p_Var11 = p_Var11 + (face->face)._2;
-    iVar12 = MORPH_A_Component * ((int)(p_Var9->vertex).y - (int)(p_Var10->vertex).y);
-    sVar4 = (p_Var11->vertex).z;
-    iVar13 = MORPH_B_Component * ((int)(p_Var8->vertex).y - (int)(p_Var11->vertex).y);
-    point->x = (int)pLVar7->terrain->vertexList[(face->face)._2].vertex.x +
-               (MORPH_A_Component * ((int)(p_Var9->vertex).x - (int)(p_Var10->vertex).x) * 0x10 >>
-               0x10) + (MORPH_B_Component * ((int)(p_Var8->vertex).x - (int)(p_Var11->vertex).x) *
-                        0x10 >> 0x10);
-    point->y = (int)pLVar7->terrain->vertexList[(face->face)._2].vertex.y + (iVar12 * 0x10 >> 0x10)
-               + (iVar13 * 0x10 >> 0x10);
-    point->z = (int)pLVar7->terrain->vertexList[(face->face)._2].vertex.z +
-               (lVar5 * ((int)sVar1 - (int)sVar2) * 0x10 >> 0x10) +
-               (lVar6 * ((int)sVar3 - (int)sVar4) * 0x10 >> 0x10);
+  if ((face != (_TFace *)0x0) && (level != (Level *)0x0)) {
+    p_Var4 = level->terrain->vertexList;
+    local_38[0] = p_Var4 + (face->face).v0;
+    local_38[1] = p_Var4 + (face->face).v1;
+    iVar5 = (int)MORPH_Track[0] + 1;
+    local_38[2] = p_Var4 + (face->face).v2;
+    if (2 < iVar5) {
+      iVar5 = 0;
+    }
+    MORPH_AveragePoint((_SVector *)local_38[(int)MORPH_Track[0]],(_SVector *)local_38[iVar5],
+                       (int)MORPH_Component[0],&_Stack40);
+    iVar5 = (int)MORPH_Track[1] + 1;
+    if (2 < iVar5) {
+      iVar5 = 0;
+    }
+    MORPH_AveragePoint((_SVector *)local_38[(int)MORPH_Track[1]],(_SVector *)local_38[iVar5],
+                       (int)MORPH_Component[1],&_Stack32);
+    MORPH_AveragePoint(&_Stack40,&_Stack32,(int)MORPH_Component[2],&local_18);
+    iVar5 = DAT_800d20f8;
+    pBVar3 = level->terrain->BSPTreeArray + *(int *)(DAT_800d20f8 + 0xc4);
+    sVar1 = (pBVar3->globalOffset).y;
+    sVar2 = (pBVar3->globalOffset).z;
+    *(short *)(DAT_800d20f8 + 0x5c) = local_18.x + (pBVar3->globalOffset).x;
+    *(short *)(iVar5 + 0x5e) = local_18.y + sVar1;
+    *(short *)(iVar5 + 0x60) = local_18.z + sVar2;
+    *(undefined2 *)(DAT_800d20f8 + 200) = 0xffff;
   }
   return;
 }
@@ -5883,69 +6132,78 @@ void MORPH_UpdateTrackingPoint(_Vector *point,_TFace *face)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MORPH_ToggleMorph()
- // line 3966, offset 0x8005f144
+ // line 4186, offset 0x8005e1ac
 	/* begin block 1 */
-		// Start line: 3967
-		// Start offset: 0x8005F144
+		// Start line: 4187
+		// Start offset: 0x8005E1AC
 
 		/* begin block 1.1 */
-			// Start line: 3983
-			// Start offset: 0x8005F1A0
+			// Start line: 4205
+			// Start offset: 0x8005E218
 			// Variables:
-		// 		struct Level *level; // $a0
-		// 		int i; // $s1
+		// 		struct Level *level; // $s0
+		// 		int i; // $s2
 		/* end block 1.1 */
-		// End offset: 0x8005F250
-		// End Line: 4016
+		// End offset: 0x8005E2E4
+		// End Line: 4241
 	/* end block 1 */
-	// End offset: 0x8005F250
-	// End Line: 4018
+	// End offset: 0x8005E2E4
+	// End Line: 4243
 
 	/* begin block 2 */
-		// Start line: 9557
+		// Start line: 9928
 	/* end block 2 */
-	// End Line: 9558
+	// End Line: 9929
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+	/* begin block 3 */
+		// Start line: 9930
+	/* end block 3 */
+	// End Line: 9931
+
+/* File: C:\kain2\game\STREAM.C */
 
 void MORPH_ToggleMorph(void)
 
 {
-  _MultiSignal *p_Var1;
-  Level *pLVar2;
-  Level **ppLVar3;
+  int iVar1;
+  _MultiSignal *mSignal;
+  int iVar2;
+  int *piVar3;
   int iVar4;
   
-  INSTANCE_Broadcast((_Instance *)0x0,10,0x1000020,(int)gameTrackerX.gameData.asmData.MorphType);
+  SOUND_PlaneShift((uint)(DAT_800d20d6 == 0));
+  INSTANCE_Broadcast((_Instance *)0x0,10,0x1000020,(int)DAT_800d20d6);
   iVar4 = 0x10;
-  MORPH_GetComponentsForTrackingPoint((gameTrackerX.playerInstance)->tface);
-  MORPH_UpdateTrackingPoint(&MORPH_BasePoint,(gameTrackerX.playerInstance)->tface);
-  gameTrackerX.gameData.asmData.MorphTime = 0;
-  ppLVar3 = &StreamTracker.StreamList[0].level;
-  SOUND_Play3dSound(&(gameTrackerX.playerInstance)->position,0x1b,-0x15e,0x7f,0x7fff);
+  MORPH_GetComponentsForTrackingPoint(DAT_800d20f8->tface,(Level *)DAT_800d20f8->tfaceLevel);
+  MORPH_UpdateTrackingPoint(DAT_800d20f8->tface,(Level *)DAT_800d20f8->tfaceLevel);
+  DAT_800d20d4 = 0;
+  piVar3 = &DAT_800d2a14;
+  SOUND_Play3dSound(&DAT_800d20f8->position,0x1a,-0x15e,0x7f,0x7fff);
   do {
-    if (*(short *)(ppLVar3 + -1) == 2) {
-      pLVar2 = *ppLVar3;
-      if (gameTrackerX.gameData.asmData.MorphType == 1) {
-        p_Var1 = pLVar2->materialSignal;
-        if (p_Var1 != (_MultiSignal *)0x0) {
-          p_Var1->flags = p_Var1->flags | 1;
-          p_Var1 = pLVar2->materialSignal;
-LAB_8005f238:
-          SIGNAL_HandleSignal(gameTrackerX.playerInstance,p_Var1->signalList,0);
+    if (*(short *)(piVar3 + -1) == 2) {
+      iVar2 = *piVar3;
+      if (DAT_800d20d6 == 1) {
+        iVar1 = *(int *)(iVar2 + 0xb8);
+        if (iVar1 != 0) {
+          *(ushort *)(iVar1 + 6) = *(ushort *)(iVar1 + 6) | 1;
+          SIGNAL_HandleSignal(DAT_800d20f8,(Signal *)(*(int *)(iVar2 + 0xb8) + 8),0);
+          mSignal = *(_MultiSignal **)(iVar2 + 0xb8);
+LAB_8005e2d0:
+          EVENT_AddSignalToReset(mSignal);
         }
       }
       else {
-        p_Var1 = pLVar2->spectralSignal;
-        if (p_Var1 != (_MultiSignal *)0x0) {
-          p_Var1->flags = p_Var1->flags | 1;
-          p_Var1 = pLVar2->spectralSignal;
-          goto LAB_8005f238;
+        iVar1 = *(int *)(iVar2 + 0xb4);
+        if (iVar1 != 0) {
+          *(ushort *)(iVar1 + 6) = *(ushort *)(iVar1 + 6) | 1;
+          SIGNAL_HandleSignal(DAT_800d20f8,(Signal *)(*(int *)(iVar2 + 0xb4) + 8),0);
+          mSignal = *(_MultiSignal **)(iVar2 + 0xb4);
+          goto LAB_8005e2d0;
         }
       }
     }
     iVar4 = iVar4 + -1;
-    ppLVar3 = ppLVar3 + 0x10;
+    piVar3 = piVar3 + 0x10;
     if (iVar4 < 1) {
       return;
     }
@@ -5957,172 +6215,49 @@ LAB_8005f238:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MORPH_DoStep(struct _StreamUnit *streamUnit /*$s0*/, char *baseAreaName /*$a1*/)
- // line 4020, offset 0x8005f264
+ // line 4245, offset 0x8005e2fc
 	/* begin block 1 */
-		// Start line: 4021
-		// Start offset: 0x8005F264
+		// Start line: 4246
+		// Start offset: 0x8005E2FC
 		// Variables:
-	// 		struct _Vector vpoint; // stack offset -40
-	// 		struct _Vector hpoint; // stack offset -24
 	// 		struct Level *level; // $s0
-
-		/* begin block 1.1 */
-			// Start line: 4046
-			// Start offset: 0x8005F2D8
-			// Variables:
-		// 		long _x1; // $a0
-		// 		long _y1; // $v1
-		// 		long _z1; // $a1
-		// 		struct _Vector *_v0; // $t2
-		// 		struct _Vector *_v1; // $t0
-		/* end block 1.1 */
-		// End offset: 0x8005F2D8
-		// End Line: 4046
-
-		/* begin block 1.2 */
-			// Start line: 4046
-			// Start offset: 0x8005F2D8
-			// Variables:
-		// 		long _x0; // $a0
-		// 		long _y0; // $v1
-		// 		long _z0; // $a1
-		// 		long _x1; // $v0
-		// 		long _y1; // $a2
-		// 		long _z1; // $v0
-		// 		struct _Vector *_v1; // $t3
-		/* end block 1.2 */
-		// End offset: 0x8005F2D8
-		// End Line: 4046
-
-		/* begin block 1.3 */
-			// Start line: 4046
-			// Start offset: 0x8005F2D8
-			// Variables:
-		// 		short _x0; // $v0
-		// 		short _y0; // $v1
-		// 		short _z0; // $a0
-		// 		short _x1; // $a3
-		// 		short _y1; // $t1
-		// 		short _z1; // $t0
-		// 		struct _Position *_v; // $a1
-		/* end block 1.3 */
-		// End offset: 0x8005F2D8
-		// End Line: 4046
-
-		/* begin block 1.4 */
-			// Start line: 4046
-			// Start offset: 0x8005F2D8
-			// Variables:
-		// 		short _x1; // $a0
-		// 		short _y1; // $a1
-		// 		short _z1; // $v1
-		// 		struct _Position *_v0; // $v0
-		// 		struct _Position *_v1; // $v1
-		/* end block 1.4 */
-		// End offset: 0x8005F2D8
-		// End Line: 4046
-
-		/* begin block 1.5 */
-			// Start line: 4046
-			// Start offset: 0x8005F2D8
-			// Variables:
-		// 		long _x1; // $v0
-		// 		long _y1; // $v1
-		// 		long _z1; // $a0
-		/* end block 1.5 */
-		// End offset: 0x8005F2D8
-		// End Line: 4046
 	/* end block 1 */
-	// End offset: 0x8005F488
-	// End Line: 4094
+	// End offset: 0x8005E3C8
+	// End Line: 4303
 
 	/* begin block 2 */
-		// Start line: 9698
+		// Start line: 10082
 	/* end block 2 */
-	// End Line: 9699
+	// End Line: 10083
 
-/* WARNING: Could not reconcile some variable overlaps */
+/* File: C:\kain2\game\STREAM.C */
 
 void MORPH_DoStep(_StreamUnit *streamUnit,char *baseAreaName)
 
 {
   bool bVar1;
-  short sVar2;
-  short sVar3;
-  _Position *p_Var4;
-  _Instance *p_Var5;
   int time;
-  int iVar6;
-  _TFace *face;
-  int iVar7;
   Level *level;
-  int local_28;
-  int local_24;
-  int local_20;
-  int local_18;
-  int local_14;
-  int local_10;
   
   GAMEPAD_Shock1(0x40,0xf000);
   level = streamUnit->level;
-  if (level->terrain->numBSPTrees != 0) {
-    face = (gameTrackerX.playerInstance)->tface;
-    if ((face != (_TFace *)0x0) && (level == (Level *)(gameTrackerX.playerInstance)->tfaceLevel)) {
-      if (MORPH_SavedFace == face) {
-        MORPH_UpdateTrackingPoint((_Vector *)&local_28,face);
-        p_Var5 = gameTrackerX.playerInstance;
-        local_18 = local_28;
-        local_14 = local_24;
-        local_10 = local_20;
-        iVar6 = local_28 - MORPH_BasePoint.x;
-        time = local_24 - MORPH_BasePoint.y;
-        local_24._0_2_ = (short)time;
-        iVar7 = local_20 - MORPH_BasePoint.z;
-        p_Var4 = &(gameTrackerX.playerInstance)->position;
-        sVar2 = ((gameTrackerX.playerInstance)->position).z;
-        local_28._0_2_ = (short)iVar6;
-        local_20._0_2_ = (short)iVar7;
-        ((gameTrackerX.playerInstance)->position).x =
-             ((gameTrackerX.playerInstance)->position).x + (short)local_28;
-        (p_Var5->position).y = p_Var4->y + (short)local_24;
-        (p_Var5->position).z = sVar2 + (short)local_20;
-        p_Var5 = gameTrackerX.playerInstance;
-        sVar2 = ((gameTrackerX.playerInstance)->position).y;
-        sVar3 = ((gameTrackerX.playerInstance)->position).z;
-        ((gameTrackerX.playerInstance)->oldPos).x = ((gameTrackerX.playerInstance)->position).x;
-        (p_Var5->oldPos).y = sVar2;
-        (p_Var5->oldPos).z = sVar3;
-        MORPH_BasePoint.x = local_28;
-        MORPH_BasePoint.y = local_24;
-        MORPH_BasePoint.z = local_20;
-        local_28 = iVar6;
-        local_24 = time;
-        local_20 = iVar7;
-      }
-      else {
-        MORPH_GetComponentsForTrackingPoint(face);
-        MORPH_UpdateTrackingPoint(&MORPH_BasePoint,(gameTrackerX.playerInstance)->tface);
-        MORPH_SavedFace = (gameTrackerX.playerInstance)->tface;
-      }
-    }
-    GAMELOOP_UpdateWorldInstTimeOfDay((int)gameTrackerX.currentMaterialTime._2_2_);
+  if (level->terrain->MorphDiffList != (_MorphVertex *)0x0) {
     VM_UpdateMorph(level,0);
-    time = (int)gameTrackerX.gameData.asmData.MorphTime;
+    time = (int)DAT_800d20d4;
     if (time == 1000) {
-      bVar1 = gameTrackerX.gameData.asmData.MorphType == 0;
-      gameTrackerX.gameData.asmData.MorphType = gameTrackerX.gameData.asmData.MorphType ^ 1;
+      bVar1 = DAT_800d20d6 == 0;
+      DAT_800d20d6 = DAT_800d20d6 ^ 1;
       if (bVar1) {
         MORPH_UpdateNormals(level);
       }
       else {
         MORPH_BringBackNormals(level);
       }
-      GAMELOOP_UpdateWorldInstTimeOfDay((int)gameTrackerX.currentMaterialTime._2_2_);
-      gameTrackerX.gameData.asmData.MorphType = gameTrackerX.gameData.asmData.MorphType ^ 1;
+      DAT_800d20d6 = DAT_800d20d6 ^ 1;
       level->morphLastStep = -1;
     }
     else {
-      if (gameTrackerX.gameData.asmData.MorphType == 0) {
+      if (DAT_800d20d6 == 0) {
         MORPH_AddOffsets(level,time);
       }
       else {
@@ -6138,28 +6273,30 @@ void MORPH_DoStep(_StreamUnit *streamUnit,char *baseAreaName)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MORPH_SetFog(struct _StreamUnit *streamUnit /*$a0*/, int mainUnitFlag /*$t0*/)
- // line 4096, offset 0x8005f498
+ // line 4305, offset 0x8005e3d8
 	/* begin block 1 */
-		// Start line: 4097
-		// Start offset: 0x8005F498
+		// Start line: 4306
+		// Start offset: 0x8005E3D8
 		// Variables:
 	// 		long time; // $v1
 	// 		struct Level *level; // $a2
 	// 		int fogNear; // $a1
 	// 		int fogFar; // $v0
 	/* end block 1 */
-	// End offset: 0x8005F55C
-	// End Line: 4119
+	// End offset: 0x8005E49C
+	// End Line: 4328
 
 	/* begin block 2 */
-		// Start line: 9856
+		// Start line: 10205
 	/* end block 2 */
-	// End Line: 9857
+	// End Line: 10206
 
 	/* begin block 3 */
-		// Start line: 9862
+		// Start line: 10211
 	/* end block 3 */
-	// End Line: 9863
+	// End Line: 10212
+
+/* File: C:\kain2\game\STREAM.C */
 
 void MORPH_SetFog(_StreamUnit *streamUnit,int mainUnitFlag)
 
@@ -6169,9 +6306,9 @@ void MORPH_SetFog(_StreamUnit *streamUnit,int mainUnitFlag)
   Level *pLVar3;
   int iVar4;
   
-  iVar2 = ((int)gameTrackerX.gameData.asmData.MorphTime << 0xc) / 1000;
+  iVar2 = ((int)DAT_800d20d4 << 0xc) / 1000;
   pLVar3 = streamUnit->level;
-  if (gameTrackerX.gameData.asmData.MorphType == 0) {
+  if (DAT_800d20d6 == 0) {
     iVar2 = 0x1000 - iVar2;
   }
   iVar4 = ((uint)pLVar3->holdFogNear - (uint)pLVar3->spectralFogNear) * iVar2;
@@ -6204,35 +6341,35 @@ void MORPH_SetFog(_StreamUnit *streamUnit,int mainUnitFlag)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MORPH_UpdateTextures()
- // line 4121, offset 0x8005f56c
+ // line 4330, offset 0x8005e4ac
 	/* begin block 1 */
-		// Start line: 4122
-		// Start offset: 0x8005F56C
+		// Start line: 4331
+		// Start offset: 0x8005E4AC
 		// Variables:
 	// 		long time; // $a0
 	/* end block 1 */
-	// End offset: 0x8005F5AC
-	// End Line: 4132
+	// End offset: 0x8005E4EC
+	// End Line: 4341
 
 	/* begin block 2 */
-		// Start line: 9916
+		// Start line: 10265
 	/* end block 2 */
-	// End Line: 9917
+	// End Line: 10266
 
 	/* begin block 3 */
-		// Start line: 9919
+		// Start line: 10268
 	/* end block 3 */
-	// End Line: 9920
+	// End Line: 10269
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\STREAM.C */
 
 void MORPH_UpdateTextures(void)
 
 {
   int time;
   
-  time = ((int)gameTrackerX.gameData.asmData.MorphTime << 0xc) / 1000;
-  if (gameTrackerX.gameData.asmData.MorphType == 1) {
+  time = ((int)DAT_800d20d4 << 0xc) / 1000;
+  if (DAT_800d20d6 == 1) {
     time = 0x1000 - time;
   }
   MORPH_ChangeAreaPalettes(time);
@@ -6244,62 +6381,77 @@ void MORPH_UpdateTextures(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MORPH_Continue()
- // line 4136, offset 0x8005f5c4
+ // line 4345, offset 0x8005e504
 	/* begin block 1 */
-		// Start line: 4137
-		// Start offset: 0x8005F5C4
+		// Start line: 4346
+		// Start offset: 0x8005E504
 		// Variables:
 	// 		int i; // $s2
+	// 		long mode; // $v0
 	/* end block 1 */
-	// End offset: 0x8005F6CC
-	// End Line: 4179
+	// End offset: 0x8005E678
+	// End Line: 4404
 
 	/* begin block 2 */
-		// Start line: 9949
+		// Start line: 10298
 	/* end block 2 */
-	// End Line: 9950
+	// End Line: 10299
 
 	/* begin block 3 */
-		// Start line: 9953
+		// Start line: 10303
 	/* end block 3 */
-	// End Line: 9954
+	// End Line: 10304
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\STREAM.C */
 
 void MORPH_Continue(void)
 
 {
-  STracker *streamUnit;
+  ulong uVar1;
+  _TFace *face;
+  Level *level;
+  _StreamUnit *streamUnit;
   char *baseAreaName;
-  int iVar1;
+  int iVar2;
   
-  if (gameTrackerX.gameData.asmData.MorphTime == 0) {
-    MORPH_InMorphInstanceListFlags(&gameTrackerX);
+  if (DAT_800d20d4 == 0) {
+    MORPH_InMorphInstanceListFlags((GameTracker *)&gameTrackerX);
   }
-  iVar1 = 0;
-  baseAreaName = StreamTracker.StreamList[0].baseAreaName;
-  streamUnit = &StreamTracker;
-  gameTrackerX.gameData.asmData.MorphTime = gameTrackerX.gameData.asmData.MorphTime + 0x14;
-  MORPH_InMorphDoFadeValues(&gameTrackerX);
+  iVar2 = 0;
+  baseAreaName = &DAT_800d2a18;
+  streamUnit = (_StreamUnit *)&StreamTracker;
+  DAT_800d20d4 = DAT_800d20d4 + 0x14;
+  MORPH_InMorphDoFadeValues((GameTracker *)&gameTrackerX);
   do {
-    if (*(short *)streamUnit->StreamList == 2) {
-      MORPH_DoStep((_StreamUnit *)streamUnit,baseAreaName);
-      MORPH_SetFog((_StreamUnit *)streamUnit,0);
+    if (streamUnit->used == 2) {
+      MORPH_DoStep(streamUnit,baseAreaName);
+      MORPH_SetFog(streamUnit,0);
     }
     baseAreaName = baseAreaName + 0x40;
-    iVar1 = iVar1 + 1;
-    streamUnit = (STracker *)(streamUnit->StreamList + 1);
-  } while (iVar1 < 0x10);
+    iVar2 = iVar2 + 1;
+    streamUnit = streamUnit + 1;
+  } while (iVar2 < 0x10);
+  uVar1 = INSTANCE_Query(DAT_800d20f8,10);
+  face = (_TFace *)DAT_800d20f8->tface;
+  if ((face != (_TFace *)0x0) && (-1 < (int)uVar1)) {
+    level = MORPH_SavedLevel;
+    if (MORPH_SavedFace != face) {
+      MORPH_GetComponentsForTrackingPoint((_TFace *)face,(Level *)DAT_800d20f8->tfaceLevel);
+      face = (_TFace *)DAT_800d20f8->tface;
+      level = (Level *)DAT_800d20f8->tfaceLevel;
+    }
+    MORPH_UpdateTrackingPoint((_TFace *)face,level);
+  }
   MORPH_UpdateTextures();
-  if (gameTrackerX.gameData.asmData.MorphTime == 1000) {
-    gameTrackerX.gameData.asmData.MorphType = gameTrackerX.gameData.asmData.MorphType ^ 1;
-    if (gameTrackerX.gameData.asmData.MorphType == 0) {
-      (gameTrackerX.playerInstance)->flags2 = (gameTrackerX.playerInstance)->flags2 & 0xf7ffffff;
+  if (DAT_800d20d4 == 1000) {
+    DAT_800d20d6 = DAT_800d20d6 ^ 1;
+    if (DAT_800d20d6 == 0) {
+      DAT_800d20f8->flags2 = DAT_800d20f8->flags2 & 0xf7ffffff;
     }
     else {
-      (gameTrackerX.playerInstance)->flags2 = (gameTrackerX.playerInstance)->flags2 | 0x8000000;
+      DAT_800d20f8->flags2 = DAT_800d20f8->flags2 | 0x8000000;
     }
-    MORPH_SetupInstanceListFlags(&gameTrackerX);
+    MORPH_SetupInstanceListFlags((GameTracker *)&gameTrackerX);
   }
   return;
 }
@@ -6309,22 +6461,23 @@ void MORPH_Continue(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_MORPH_Relocate()
- // line 4180, offset 0x8005f6e8
+ // line 4405, offset 0x8005e694
 	/* begin block 1 */
-		// Start line: 10060
+		// Start line: 10443
 	/* end block 1 */
-	// End Line: 10061
+	// End Line: 10444
 
 	/* begin block 2 */
-		// Start line: 10061
+		// Start line: 10444
 	/* end block 2 */
-	// End Line: 10062
+	// End Line: 10445
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_MORPH_Relocate(void)
 
 {
+  MORPH_SavedLevel = 0;
   MORPH_SavedFace = (_TFace *)0x0;
   return;
 }
@@ -6334,10 +6487,10 @@ void STREAM_MORPH_Relocate(void)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ AddVertex(struct VECTOR *v0 /*$a0*/, struct RECT *rect /*$t0*/)
- // line 4342, offset 0x8005f6f4
+ // line 4568, offset 0x8005e6a4
 	/* begin block 1 */
-		// Start line: 4343
-		// Start offset: 0x8005F6F4
+		// Start line: 4569
+		// Start offset: 0x8005E6A4
 		// Variables:
 	// 		struct SVECTOR v; // stack offset -8
 	// 		int x; // $v0
@@ -6346,85 +6499,93 @@ void STREAM_MORPH_Relocate(void)
 	// 		int scr_x; // $a0
 	// 		int scr_y; // $a1
 	/* end block 1 */
-	// End offset: 0x8005F878
-	// End Line: 4379
+	// End offset: 0x8005E828
+	// End Line: 4605
 
 	/* begin block 2 */
-		// Start line: 10384
+		// Start line: 10769
 	/* end block 2 */
-	// End Line: 10385
+	// End Line: 10770
 
-int AddVertex(VECTOR *v0,RECT *rect)
+/* File: C:\kain2\game\STREAM.C */
+
+int AddVertex(undefined v0,undefined rect)
 
 {
   undefined4 in_zero;
   undefined4 in_at;
   int iVar1;
   int iVar2;
-  int iVar3;
-  short sVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
+  undefined3 in_register_00000011;
+  int *piVar3;
+  undefined3 in_register_00000015;
+  short *psVar4;
+  int iVar5;
+  short sVar6;
   undefined4 uVar7;
+  undefined4 uVar8;
+  undefined4 uVar9;
   undefined4 local_8;
   uint local_4;
   
-  iVar2 = v0->vx;
+  psVar4 = (short *)CONCAT31(in_register_00000015,rect);
+  piVar3 = (int *)CONCAT31(in_register_00000011,v0);
+  iVar2 = *piVar3;
   if (iVar2 < 0) {
     iVar1 = -0x8000;
-LAB_8005f718:
-    v0->vx = iVar2 + iVar1;
+LAB_8005e6c8:
+    *piVar3 = iVar2 + iVar1;
   }
   else {
     iVar1 = 0x8000;
-    if (0 < iVar2) goto LAB_8005f718;
+    if (0 < iVar2) goto LAB_8005e6c8;
   }
-  iVar1 = v0->vy;
+  iVar1 = piVar3[1];
   iVar2 = -0x8000;
   if ((iVar1 < 0) || (iVar2 = 0x8000, 0 < iVar1)) {
-    v0->vy = iVar1 + iVar2;
+    piVar3[1] = iVar1 + iVar2;
   }
-  iVar1 = v0->vz;
+  iVar1 = piVar3[2];
   iVar2 = -0x8000;
   if (-1 < iVar1) {
-    if (iVar1 < 1) goto LAB_8005f764;
+    if (iVar1 < 1) goto LAB_8005e714;
     iVar2 = 0x8000;
   }
-  v0->vz = iVar1 + iVar2;
-LAB_8005f764:
-  local_8 = CONCAT22(*(undefined2 *)((int)&v0->vy + 2),*(undefined2 *)((int)&v0->vx + 2));
-  local_4 = local_4 & 0xffff0000 | (uint)*(ushort *)((int)&v0->vz + 2);
+  piVar3[2] = iVar1 + iVar2;
+LAB_8005e714:
+  local_8 = CONCAT22(*(undefined2 *)((int)piVar3 + 6),*(undefined2 *)((int)piVar3 + 2));
+  local_4 = local_4 & 0xffff0000 | (uint)*(ushort *)((int)piVar3 + 10);
   setCopReg(2,in_zero,local_8);
   setCopReg(2,in_at,local_4);
   copFunction(2,0x480012);
-  uVar5 = getCopReg(2,0x4800);
-  uVar6 = getCopReg(2,0x5000);
-  uVar7 = getCopReg(2,0x5800);
-  iVar1 = (int)(short)uVar7;
+  uVar7 = getCopReg(2,0x4800);
+  uVar8 = getCopReg(2,0x5000);
+  uVar9 = getCopReg(2,0x5800);
+  iVar1 = (int)(short)uVar9;
   iVar2 = -1;
   if (0 < iVar1) {
-    iVar2 = ((int)(short)uVar5 * 0x140) / iVar1 + 0x100;
-    iVar3 = ((int)(short)uVar6 * 0x140) / iVar1 + 0x78;
-    sVar4 = (short)iVar2;
-    if (rect->x < iVar2) {
-      sVar4 = rect->x;
+    iVar2 = ((int)(short)uVar7 * 0x140) / iVar1 + 0x100;
+    iVar5 = ((int)(short)uVar8 * 0x140) / iVar1 + 0x78;
+    sVar6 = (short)iVar2;
+    if (*psVar4 < iVar2) {
+      sVar6 = *psVar4;
     }
-    rect->x = sVar4;
-    sVar4 = (short)iVar2;
-    if (iVar2 < rect->w) {
-      sVar4 = rect->w;
+    *psVar4 = sVar6;
+    sVar6 = (short)iVar2;
+    if (iVar2 < psVar4[2]) {
+      sVar6 = psVar4[2];
     }
-    rect->w = sVar4;
-    sVar4 = (short)iVar3;
-    if (rect->y < iVar3) {
-      sVar4 = rect->y;
+    psVar4[2] = sVar6;
+    sVar6 = (short)iVar5;
+    if (psVar4[1] < iVar5) {
+      sVar6 = psVar4[1];
     }
-    rect->y = sVar4;
-    sVar4 = (short)iVar3;
-    if (iVar3 < rect->h) {
-      sVar4 = rect->h;
+    psVar4[1] = sVar6;
+    sVar6 = (short)iVar5;
+    if (iVar5 < psVar4[3]) {
+      sVar6 = psVar4[3];
     }
-    rect->h = sVar4;
+    psVar4[3] = sVar6;
     iVar2 = iVar1;
   }
   return iVar2;
@@ -6435,26 +6596,32 @@ LAB_8005f764:
 // decompiled code
 // original method signature: 
 // int /*$ra*/ GetPlaneDist(int k /*$a0*/, int j /*$a1*/, int i /*$a2*/, struct VECTOR *v /*$a3*/)
- // line 4381, offset 0x8005f880
+ // line 4607, offset 0x8005e830
 	/* begin block 1 */
-		// Start line: 10467
+		// Start line: 10852
 	/* end block 1 */
-	// End Line: 10468
+	// End Line: 10853
 
 	/* begin block 2 */
-		// Start line: 10468
+		// Start line: 10853
 	/* end block 2 */
-	// End Line: 10469
+	// End Line: 10854
 
-int GetPlaneDist(int k,int j,int i,VECTOR *v)
+/* File: C:\kain2\game\STREAM.C */
+
+int GetPlaneDist(int k,int j,int i,undefined v)
 
 {
-  return ((v->vx >> 0xc) + (int)theCamera.core.position.x * -0x10) *
-         (int)theCamera.core.vvNormalWorVecMat[k].m[j * 3] +
-         ((v->vy >> 0xc) + (int)theCamera.core.position.y * -0x10) *
-         (int)theCamera.core.vvNormalWorVecMat[k].m[j * 3 + 1] +
-         ((v->vz >> 0xc) + (int)theCamera.core.position.z * -0x10) *
-         (int)theCamera.core.vvNormalWorVecMat[k].m[j * 3 + 2];
+  int iVar1;
+  undefined3 in_register_0000001d;
+  int *piVar2;
+  
+  piVar2 = (int *)CONCAT31(in_register_0000001d,v);
+  iVar1 = j * 6 + k * 0x20;
+  return ((*piVar2 >> 0xc) + (int)theCamera * -0x10) * (int)*(short *)(&LAB_800d0fa4 + iVar1) +
+         ((piVar2[1] >> 0xc) + (int)DAT_800d0f9e * -0x10) * (int)*(short *)(&LAB_800d0fa4_2 + iVar1)
+         + ((piVar2[2] >> 0xc) + (int)DAT_800d0fa0 * -0x10) * (int)*(short *)(&LAB_800d0fa8 + iVar1)
+  ;
 }
 
 
@@ -6462,28 +6629,40 @@ int GetPlaneDist(int k,int j,int i,VECTOR *v)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CalcVert(struct VECTOR *v /*$a0*/, struct VECTOR *v1 /*$a1*/, struct VECTOR *v2 /*$a2*/, int dist1 /*$a3*/, int dist2 /*stack 16*/, int k /*stack 20*/, int j /*stack 24*/)
- // line 4390, offset 0x8005f910
+ // line 4616, offset 0x8005e8c0
 	/* begin block 1 */
-		// Start line: 4391
-		// Start offset: 0x8005F910
+		// Start line: 4617
+		// Start offset: 0x8005E8C0
 		// Variables:
 	// 		int diff; // $a3
 	/* end block 1 */
-	// End offset: 0x8005F910
-	// End Line: 4391
+	// End offset: 0x8005E8C0
+	// End Line: 4617
 
 	/* begin block 2 */
-		// Start line: 10485
+		// Start line: 10870
 	/* end block 2 */
-	// End Line: 10486
+	// End Line: 10871
 
-void CalcVert(VECTOR *v,VECTOR *v1,VECTOR *v2,int dist1,int dist2,int k,int j)
+/* File: C:\kain2\game\STREAM.C */
+
+void CalcVert(undefined v,undefined v1,undefined v2,int dist1,int dist2,int k,int j)
 
 {
+  undefined3 in_register_00000011;
+  int *piVar1;
+  undefined3 in_register_00000015;
+  int *piVar2;
+  undefined3 in_register_00000019;
+  int *piVar3;
+  
+  piVar3 = (int *)CONCAT31(in_register_00000019,v2);
+  piVar2 = (int *)CONCAT31(in_register_00000015,v1);
+  piVar1 = (int *)CONCAT31(in_register_00000011,v);
   dist2 = dist2 / (dist1 - dist2 >> 0xc);
-  v->vx = (v2->vx - v1->vx >> 0xc) * dist2 + v2->vx;
-  v->vy = (v2->vy - v1->vy >> 0xc) * dist2 + v2->vy;
-  v->vz = (v2->vz - v1->vz >> 0xc) * dist2 + v2->vz;
+  *piVar1 = (*piVar3 - *piVar2 >> 0xc) * dist2 + *piVar3;
+  piVar1[1] = (piVar3[1] - piVar2[1] >> 0xc) * dist2 + piVar3[1];
+  piVar1[2] = (piVar3[2] - piVar2[2] >> 0xc) * dist2 + piVar3[2];
   return;
 }
 
@@ -6492,10 +6671,10 @@ void CalcVert(VECTOR *v,VECTOR *v1,VECTOR *v2,int dist1,int dist2,int k,int j)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ AddClippedTri(struct SVECTOR *iv /*$a0*/, struct RECT *cliprect /*stack 4*/, int *minz /*stack 8*/)
- // line 4404, offset 0x8005f998
+ // line 4630, offset 0x8005e948
 	/* begin block 1 */
-		// Start line: 4405
-		// Start offset: 0x8005F998
+		// Start line: 4631
+		// Start offset: 0x8005E948
 		// Variables:
 	// 		int clip0; // $s7
 	// 		int clip1; // $s2
@@ -6513,143 +6692,148 @@ void CalcVert(VECTOR *v,VECTOR *v1,VECTOR *v2,int dist1,int dist2,int k,int j)
 	// 		struct VECTOR *tmp; // $v0
 
 		/* begin block 1.1 */
-			// Start line: 4481
-			// Start offset: 0x8005FBD0
+			// Start line: 4707
+			// Start offset: 0x8005EB80
 			// Variables:
 		// 		int z; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8005FBFC
-		// End Line: 4485
+		// End offset: 0x8005EBAC
+		// End Line: 4711
 	/* end block 1 */
-	// End offset: 0x8005FC10
-	// End Line: 4487
+	// End offset: 0x8005EBC0
+	// End Line: 4713
 
 	/* begin block 2 */
-		// Start line: 10513
+		// Start line: 10898
 	/* end block 2 */
-	// End Line: 10514
+	// End Line: 10899
 
-int AddClippedTri(SVECTOR *iv,RECT *cliprect,int *minz)
+/* File: C:\kain2\game\STREAM.C */
+
+int AddClippedTri(undefined iv,undefined1 cliprect,int *minz)
 
 {
   short *psVar1;
   bool bVar2;
   int dist1;
   int dist2;
-  VECTOR *v1;
-  long lVar3;
-  long lVar4;
-  VECTOR *v;
-  long lVar5;
-  VECTOR *v_00;
+  int *piVar3;
+  undefined3 in_register_00000011;
+  short *psVar4;
+  char v;
+  int iVar5;
   int iVar6;
-  int iVar7;
-  int i;
+  int *piVar7;
   int iVar8;
-  VECTOR local_240 [16];
-  VECTOR aVStack320 [16];
+  int iVar9;
+  int iVar10;
+  int i;
+  int iVar11;
+  int local_240 [64];
+  int aiStack320 [64];
   int local_40;
   uint local_3c;
   int local_38;
-  VECTOR *local_34;
-  VECTOR *local_30;
+  int *local_34;
+  int *local_30;
   
-  v = local_240;
-  local_30 = aVStack320;
-  iVar7 = 0;
+  psVar4 = (short *)CONCAT31(in_register_00000011,iv);
+  piVar7 = local_240;
+  local_30 = aiStack320;
+  iVar10 = 0;
   *minz = 0xffff;
-  local_34 = v;
+  local_34 = piVar7;
   do {
-    v->vx = (int)iv->vx << 0x10;
-    iVar7 = iVar7 + 1;
-    v->vy = (int)iv->vy << 0x10;
-    psVar1 = &iv->vz;
-    iv = iv + 1;
-    v->vz = (int)*psVar1 << 0x10;
-    v = v + 1;
-  } while (iVar7 < 3);
+    *piVar7 = (int)*psVar4 << 0x10;
+    iVar10 = iVar10 + 1;
+    piVar7[1] = (int)psVar4[1] << 0x10;
+    psVar1 = psVar4 + 2;
+    psVar4 = psVar4 + 4;
+    piVar7[2] = (int)*psVar1 << 0x10;
+    piVar7 = piVar7 + 4;
+  } while (iVar10 < 3);
   i = 0;
   bVar2 = true;
-  iVar7 = 3;
+  iVar10 = 3;
   do {
     local_40 = i;
     if (!bVar2) {
       local_40 = i + -3;
     }
     local_3c = (uint)!bVar2;
-    dist1 = GetPlaneDist(local_3c,local_40,i,local_34);
-    iVar8 = 1;
-    iVar6 = 0;
+    dist1 = GetPlaneDist(local_3c,local_40,i,(char)local_34);
+    iVar11 = 1;
+    iVar9 = 0;
     local_38 = 0;
-    v = local_30;
-    v1 = local_34;
-    if (0 < iVar7) {
+    piVar7 = local_30;
+    piVar3 = local_34;
+    if (0 < iVar10) {
       do {
-        if (iVar7 <= iVar8) {
-          iVar8 = 0;
+        if (iVar10 <= iVar11) {
+          iVar11 = 0;
         }
-        v_00 = local_34 + iVar8;
-        dist2 = GetPlaneDist(local_3c,local_40,i,v_00);
+        v = (char)local_34 + (char)iVar11 * '\x10';
+        dist2 = GetPlaneDist(local_3c,local_40,i,v);
         if (dist1 < 1) {
           if (0 < dist2) {
-            CalcVert(v,v1,v_00,dist1,dist2,local_3c,local_40);
-            v = v + 1;
-            goto LAB_8005fb6c;
+            CalcVert((char)piVar7,(char)piVar3,v,dist1,dist2,local_3c,local_40);
+            piVar7 = piVar7 + 4;
+            goto LAB_8005eb1c;
           }
         }
         else {
           if (dist2 < 1) {
-            lVar4 = v1->vy;
-            lVar5 = v1->vz;
-            lVar3 = v1->pad;
-            v->vx = v1->vx;
-            v->vy = lVar4;
-            v->vz = lVar5;
-            v->pad = lVar3;
-            iVar6 = iVar6 + 1;
-            CalcVert(v + 1,v_00,v1,dist2,dist1,local_3c,local_40);
-            v = v + 2;
+            iVar6 = piVar3[1];
+            iVar8 = piVar3[2];
+            iVar5 = piVar3[3];
+            *piVar7 = *piVar3;
+            piVar7[1] = iVar6;
+            piVar7[2] = iVar8;
+            piVar7[3] = iVar5;
+            iVar9 = iVar9 + 1;
+            CalcVert((char)piVar7 + '\x10',v,(char)piVar3,dist2,dist1,local_3c,local_40);
+            piVar7 = piVar7 + 8;
           }
           else {
-            lVar4 = v1->vy;
-            lVar5 = v1->vz;
-            lVar3 = v1->pad;
-            v->vx = v1->vx;
-            v->vy = lVar4;
-            v->vz = lVar5;
-            v->pad = lVar3;
-            v = v + 1;
+            iVar5 = piVar3[1];
+            iVar6 = piVar3[2];
+            dist1 = piVar3[3];
+            *piVar7 = *piVar3;
+            piVar7[1] = iVar5;
+            piVar7[2] = iVar6;
+            piVar7[3] = dist1;
+            piVar7 = piVar7 + 4;
           }
-LAB_8005fb6c:
-          iVar6 = iVar6 + 1;
+LAB_8005eb1c:
+          iVar9 = iVar9 + 1;
         }
-        iVar8 = iVar8 + 1;
+        iVar11 = iVar11 + 1;
         local_38 = local_38 + 1;
-        v1 = v1 + 1;
+        piVar3 = piVar3 + 4;
         dist1 = dist2;
-      } while (local_38 < iVar7);
+      } while (local_38 < iVar10);
     }
-    v1 = local_30;
-    v = local_34;
+    piVar3 = local_30;
+    piVar7 = local_34;
     local_34 = local_30;
-    local_30 = v;
-    if (iVar6 < 3) {
-      return (uint)(iVar6 != 0);
+    local_30 = piVar7;
+    if (iVar9 < 3) {
+      return (uint)(iVar9 != 0);
     }
     i = i + 1;
     bVar2 = i < 3;
-    iVar7 = iVar6;
+    iVar10 = iVar9;
     if (4 < i) {
-      iVar7 = 0;
-      if (0 < iVar6) {
+      iVar10 = 0;
+      if (0 < iVar9) {
         do {
-          i = AddVertex(v1,cliprect);
+          i = AddVertex((char)piVar3,cliprect);
           if (i < *minz) {
             *minz = i;
           }
-          iVar7 = iVar7 + 1;
-          v1 = v1 + 1;
-        } while (iVar7 < iVar6);
+          iVar10 = iVar10 + 1;
+          piVar3 = piVar3 + 4;
+        } while (iVar10 < iVar9);
       }
       return 1;
     }
@@ -6661,10 +6845,10 @@ LAB_8005fb6c:
 // decompiled code
 // original method signature: 
 // int /*$ra*/ STREAM_GetClipRect(struct StreamUnitPortal *portal /*$s5*/, struct RECT *rect /*$s3*/)
- // line 4489, offset 0x8005fc40
+ // line 4715, offset 0x8005ebf0
 	/* begin block 1 */
-		// Start line: 4490
-		// Start offset: 0x8005FC40
+		// Start line: 4716
+		// Start offset: 0x8005EBF0
 		// Variables:
 	// 		int v1x; // $v0
 	// 		int v1y; // $t2
@@ -6688,23 +6872,25 @@ LAB_8005fb6c:
 	// 		int minz2; // stack offset -60
 
 		/* begin block 1.1 */
-			// Start line: 4578
-			// Start offset: 0x8005FF34
+			// Start line: 4804
+			// Start offset: 0x8005EEE4
 			// Variables:
 		// 		int dot; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8005FFB4
-		// End Line: 4588
+		// End offset: 0x8005EF64
+		// End Line: 4814
 	/* end block 1 */
-	// End offset: 0x800601DC
-	// End Line: 4655
+	// End offset: 0x8005F18C
+	// End Line: 4881
 
 	/* begin block 2 */
-		// Start line: 10800
+		// Start line: 11185
 	/* end block 2 */
-	// End Line: 10801
+	// End Line: 11186
 
-int STREAM_GetClipRect(StreamUnitPortal *portal,RECT *rect)
+/* File: C:\kain2\game\STREAM.C */
+
+int STREAM_GetClipRect(StreamUnitPortal *portal,undefined rect)
 
 {
   short sVar1;
@@ -6714,8 +6900,9 @@ int STREAM_GetClipRect(StreamUnitPortal *portal,RECT *rect)
   uint uVar5;
   int iVar6;
   int iVar7;
-  MATRIX *pMVar8;
-  short sVar9;
+  short sVar8;
+  undefined3 in_register_00000015;
+  short *psVar9;
   int iVar10;
   int iVar11;
   int iVar12;
@@ -6733,28 +6920,28 @@ int STREAM_GetClipRect(StreamUnitPortal *portal,RECT *rect)
   uint local_30;
   int local_2c;
   
+  psVar9 = (short *)CONCAT31(in_register_00000015,rect);
   local_2c = 0;
-  sVar9 = portal->_9[0].z;
-  iVar17 = (int)sVar9;
-  iVar11 = (int)portal->_9[1].z;
+  sVar8 = portal->t1[0].z;
+  iVar17 = (int)sVar8;
+  iVar11 = (int)portal->t1[1].z;
   local_30 = 0;
   if (iVar17 == iVar11) {
-    local_30 = (uint)(sVar9 == portal->_9[2].z);
+    local_30 = (uint)(sVar8 == portal->t1[2].z);
   }
-  iVar10 = (int)portal->_9[0].y;
-  iVar15 = iVar10 - portal->_9[1].y;
-  iVar13 = iVar17 - portal->_9[2].z;
+  iVar10 = (int)portal->t1[0].y;
+  iVar15 = iVar10 - portal->t1[1].y;
+  iVar13 = iVar17 - portal->t1[2].z;
   iVar11 = iVar17 - iVar11;
-  iVar6 = iVar10 - portal->_9[2].y;
-  iVar7 = (int)portal->_9[0].x;
-  iVar12 = iVar7 - portal->_9[2].x;
-  iVar2 = iVar7 - portal->_9[1].x;
+  iVar6 = iVar10 - portal->t1[2].y;
+  iVar7 = (int)portal->t1[0].x;
+  iVar12 = iVar7 - portal->t1[2].x;
+  iVar2 = iVar7 - portal->t1[1].x;
   iVar19 = iVar15 * iVar13 - iVar6 * iVar11 >> 0xc;
   iVar13 = iVar12 * iVar11 - iVar2 * iVar13 >> 0xc;
   local_38 = iVar2 * iVar6 - iVar12 * iVar15 >> 0xc;
-  iVar2 = (iVar7 - theCamera.core.position.x) * iVar19 +
-          (iVar10 - theCamera.core.position.y) * iVar13 +
-          (iVar17 - theCamera.core.position.z) * local_38;
+  iVar2 = (iVar7 - theCamera) * iVar19 + (iVar10 - DAT_800d0f9e) * iVar13 +
+          (iVar17 - DAT_800d0fa0) * local_38;
   iVar11 = -iVar2;
   local_34 = MATH3D_FastSqrt(iVar19 * iVar19 + iVar13 * iVar13 + local_38 * local_38);
   iVar17 = iVar11;
@@ -6762,21 +6949,20 @@ int STREAM_GetClipRect(StreamUnitPortal *portal,RECT *rect)
     iVar17 = iVar2;
   }
   if (iVar17 < local_34) {
-    iVar7 = (int)portal->_10[0].y;
-    iVar10 = (int)portal->_10[0].z;
-    iVar16 = iVar7 - portal->_10[1].y;
-    iVar14 = iVar10 - portal->_10[2].z;
-    iVar12 = iVar10 - portal->_10[1].z;
-    iVar2 = iVar7 - portal->_10[2].y;
-    iVar6 = (int)portal->_10[0].x;
-    iVar15 = iVar6 - portal->_10[2].x;
-    iVar17 = iVar6 - portal->_10[1].x;
+    iVar7 = (int)portal->t2[0].y;
+    iVar10 = (int)portal->t2[0].z;
+    iVar16 = iVar7 - portal->t2[1].y;
+    iVar14 = iVar10 - portal->t2[2].z;
+    iVar12 = iVar10 - portal->t2[1].z;
+    iVar2 = iVar7 - portal->t2[2].y;
+    iVar6 = (int)portal->t2[0].x;
+    iVar15 = iVar6 - portal->t2[2].x;
+    iVar17 = iVar6 - portal->t2[1].x;
     iVar18 = iVar16 * iVar14 - iVar2 * iVar12 >> 0xc;
     iVar12 = iVar15 * iVar12 - iVar17 * iVar14 >> 0xc;
     iVar2 = iVar17 * iVar2 - iVar15 * iVar16 >> 0xc;
-    iVar17 = -((iVar6 - theCamera.core.position.x) * iVar18 +
-               (iVar7 - theCamera.core.position.y) * iVar12 +
-              (iVar10 - theCamera.core.position.z) * iVar2);
+    iVar17 = -((iVar6 - theCamera) * iVar18 + (iVar7 - DAT_800d0f9e) * iVar12 +
+              (iVar10 - DAT_800d0fa0) * iVar2);
     MATH3D_FastSqrt(iVar18 * iVar18 + iVar12 * iVar12 + iVar2 * iVar2);
     if (iVar11 < iVar17) {
       iVar13 = iVar12;
@@ -6785,86 +6971,86 @@ int STREAM_GetClipRect(StreamUnitPortal *portal,RECT *rect)
       local_38 = iVar2;
     }
   }
-  iVar17 = memcmp((byte *)portal,(byte *)"warpgate",8);
+  iVar17 = memcmp((byte *)portal,(byte *)s_warpgate_800d06e8,8);
   if (iVar17 != 0) {
     iVar17 = iVar11;
     if (iVar11 < 0) {
       iVar17 = -iVar11;
     }
     if (((iVar17 < local_34) &&
-        (pMVar8 = (theCamera.focusInstance)->matrix,
-        (pMVar8[1].t[0] - (int)theCamera.core.position.x) * iVar19 +
-        (pMVar8[1].t[1] - (int)theCamera.core.position.y) * iVar13 +
-        (pMVar8[1].t[2] - (int)theCamera.core.position.z) * local_38 < 0)) && (local_30 == 0)) {
+        (iVar17 = *(int *)(DAT_800d10a4 + 0x40),
+        (*(int *)(iVar17 + 0x34) - (int)theCamera) * iVar19 +
+        (*(int *)(iVar17 + 0x38) - (int)DAT_800d0f9e) * iVar13 +
+        (*(int *)(iVar17 + 0x3c) - (int)DAT_800d0fa0) * local_38 < 0)) && (local_30 == 0)) {
       local_2c = 1;
     }
   }
   if ((-0x401 < iVar11) || (uVar3 = 0, local_2c != 0)) {
-    rect->w = rect->w + rect->x;
-    rect->h = rect->h + rect->y;
-    setCopControlWord(2,0,*(undefined4 *)(theCamera.core.wcTransform)->m);
-    setCopControlWord(2,0x800,*(undefined4 *)((theCamera.core.wcTransform)->m + 2));
-    setCopControlWord(2,0x1000,*(undefined4 *)((theCamera.core.wcTransform)->m + 4));
-    setCopControlWord(2,0x1800,*(undefined4 *)((theCamera.core.wcTransform)->m + 6));
-    setCopControlWord(2,0x2000,*(undefined4 *)((theCamera.core.wcTransform)->m + 8));
-    setCopControlWord(2,0x2800,(theCamera.core.wcTransform)->t[0]);
-    setCopControlWord(2,0x3000,(theCamera.core.wcTransform)->t[1]);
-    setCopControlWord(2,0x3800,(theCamera.core.wcTransform)->t[2]);
-    uVar4 = AddClippedTri((SVECTOR *)portal->_9,rect,&local_40);
-    uVar5 = AddClippedTri((SVECTOR *)portal->_10,rect,&local_3c);
+    psVar9[2] = psVar9[2] + *psVar9;
+    psVar9[3] = psVar9[3] + psVar9[1];
+    setCopControlWord(2,0,*DAT_800d0ffc);
+    setCopControlWord(2,0x800,DAT_800d0ffc[1]);
+    setCopControlWord(2,0x1000,DAT_800d0ffc[2]);
+    setCopControlWord(2,0x1800,DAT_800d0ffc[3]);
+    setCopControlWord(2,0x2000,DAT_800d0ffc[4]);
+    setCopControlWord(2,0x2800,DAT_800d0ffc[5]);
+    setCopControlWord(2,0x3000,DAT_800d0ffc[6]);
+    setCopControlWord(2,0x3800,DAT_800d0ffc[7]);
+    uVar4 = AddClippedTri((char)portal + ',',rect,&local_40);
+    uVar5 = AddClippedTri((char)portal + 'D',rect,&local_3c);
     uVar3 = 0;
     if ((uVar4 | uVar5) == 0) {
-      rect->w = rect->w - rect->x;
-      rect->h = rect->h - rect->y;
+      psVar9[2] = psVar9[2] - *psVar9;
+      psVar9[3] = psVar9[3] - psVar9[1];
     }
     else {
       if (local_3c < local_40) {
         local_40 = local_3c;
       }
       if ((local_2c == 0) || (uVar3 = 1, 0x3f < local_40)) {
-        if (rect->x < 0) {
-          rect->x = 0;
+        if (*psVar9 < 0) {
+          *psVar9 = 0;
         }
-        if (rect->y < 0) {
-          rect->y = 0;
+        if (psVar9[1] < 0) {
+          psVar9[1] = 0;
         }
-        if (0x200 < rect->w) {
-          rect->w = 0x200;
+        if (0x200 < psVar9[2]) {
+          psVar9[2] = 0x200;
         }
-        if (0xf0 < rect->h) {
-          rect->h = 0xf0;
+        if (0xf0 < psVar9[3]) {
+          psVar9[3] = 0xf0;
         }
-        sVar9 = rect->h - rect->y;
-        rect->w = rect->w - rect->x;
-        rect->h = sVar9;
+        sVar8 = psVar9[3] - psVar9[1];
+        psVar9[2] = psVar9[2] - *psVar9;
+        psVar9[3] = sVar8;
         if (local_30 != 0) {
           if (iVar11 < 0) {
             iVar11 = -iVar11;
           }
           if (iVar11 < local_34) {
             if (local_38 < 1) {
-              sVar1 = rect->y;
-              rect->y = 0;
-              sVar1 = sVar1 + sVar9;
+              sVar1 = psVar9[1];
+              psVar9[1] = 0;
+              sVar1 = sVar1 + sVar8;
             }
             else {
-              sVar1 = 0xf0 - rect->y;
+              sVar1 = 0xf0 - psVar9[1];
             }
-            rect->h = sVar1;
+            psVar9[3] = sVar1;
           }
         }
-        if (rect->w < 1) {
+        if (psVar9[2] < 1) {
           uVar3 = 0;
         }
         else {
-          uVar3 = (uint)(0 < rect->h);
+          uVar3 = (uint)(0 < psVar9[3]);
         }
       }
       else {
-        rect->w = 0x200;
-        rect->x = 0;
-        rect->y = 0;
-        rect->h = 0xf0;
+        psVar9[2] = 0x200;
+        *psVar9 = 0;
+        psVar9[1] = 0;
+        psVar9[3] = 0xf0;
       }
     }
   }
@@ -6876,10 +7062,10 @@ int STREAM_GetClipRect(StreamUnitPortal *portal,RECT *rect)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ GetFogColor(struct StreamUnitPortal *portal /*$s0*/, struct _StreamUnit *mainStreamUnit /*$a1*/, struct Level *mainLevel /*$s1*/)
- // line 4658, offset 0x8006020c
+ // line 4884, offset 0x8005f1bc
 	/* begin block 1 */
-		// Start line: 4659
-		// Start offset: 0x8006020C
+		// Start line: 4885
+		// Start offset: 0x8005F1BC
 		// Variables:
 	// 		long z1; // stack offset -36
 	// 		long z2; // stack offset -32
@@ -6893,21 +7079,23 @@ int STREAM_GetClipRect(StreamUnitPortal *portal,RECT *rect)
 	// 		struct Level *level; // $a1
 
 		/* begin block 1.1 */
-			// Start line: 4671
-			// Start offset: 0x80060240
+			// Start line: 4897
+			// Start offset: 0x8005F1F0
 			// Variables:
 		// 		int time; // $a2
 		/* end block 1.1 */
-		// End offset: 0x80060278
-		// End Line: 4677
+		// End offset: 0x8005F228
+		// End Line: 4903
 	/* end block 1 */
-	// End offset: 0x8006051C
-	// End Line: 4765
+	// End offset: 0x8005F4CC
+	// End Line: 4991
 
 	/* begin block 2 */
-		// Start line: 11309
+		// Start line: 11694
 	/* end block 2 */
-	// End Line: 11310
+	// End Line: 11695
+
+/* File: C:\kain2\game\STREAM.C */
 
 long GetFogColor(StreamUnitPortal *portal,_StreamUnit *mainStreamUnit,Level *mainLevel)
 
@@ -6915,11 +7103,11 @@ long GetFogColor(StreamUnitPortal *portal,_StreamUnit *mainStreamUnit,Level *mai
   undefined4 in_zero;
   undefined4 in_at;
   uint uVar1;
-  byte *pbVar2;
-  Level *pLVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
+  u_char *v0;
+  Level *v1;
+  int iVar2;
+  int p0;
+  int iVar3;
   uint local_28;
   int local_24;
   int local_20;
@@ -6928,70 +7116,70 @@ long GetFogColor(StreamUnitPortal *portal,_StreamUnit *mainStreamUnit,Level *mai
   uint local_14;
   
   local_18 = mainStreamUnit->FogColor;
-  pLVar3 = portal->toStreamUnit->level;
-  if ((int)gameTrackerX.gameData.asmData.MorphTime == 1000) {
-    if (gameTrackerX.gameData.asmData.MorphType == 1) {
-      local_28 = *(uint *)&pLVar3->specturalColorR;
+  v1 = portal->toStreamUnit->level;
+  if ((int)DAT_800d20d4 == 1000) {
+    if (DAT_800d20d6 == 1) {
+      local_28 = *(uint *)&v1->specturalColorR;
     }
     else {
-      local_28 = *(uint *)&pLVar3->backColorR;
+      local_28 = *(uint *)&v1->backColorR;
     }
   }
   else {
-    iVar5 = ((int)gameTrackerX.gameData.asmData.MorphTime << 0xc) / 1000;
-    pbVar2 = &pLVar3->specturalColorR;
-    if (gameTrackerX.gameData.asmData.MorphType == 1) {
-      iVar5 = 0x1000 - iVar5;
+    p0 = ((int)DAT_800d20d4 << 0xc) / 1000;
+    v0 = &v1->specturalColorR;
+    if (DAT_800d20d6 == 1) {
+      p0 = 0x1000 - p0;
     }
-    pLVar3 = (Level *)&pLVar3->backColorR;
-    LoadAverageCol(pbVar2,(byte *)pLVar3,iVar5,0x1000 - iVar5,(undefined *)&local_28);
+    v1 = (Level *)&v1->backColorR;
+    LoadAverageCol(v0,(u_char *)v1,p0,0x1000 - p0,(u_char *)&local_28);
     local_28 = local_28 & 0xffffff;
   }
-  setCopReg(2,in_zero,*(undefined4 *)portal->_9);
-  setCopReg(2,in_at,*(undefined4 *)&portal->_9[0].z);
-  setCopReg(2,portal->_9 + 2,*(undefined4 *)(portal->_9 + 1));
-  setCopReg(2,portal->_9 + 1,*(undefined4 *)&portal->_9[1].z);
-  setCopReg(2,portal->_9,*(undefined4 *)(portal->_9 + 2));
-  setCopReg(2,pLVar3,*(undefined4 *)&portal->_9[2].z);
+  setCopReg(2,in_zero,*(undefined4 *)portal->t1);
+  setCopReg(2,in_at,*(undefined4 *)&portal->t1[0].z);
+  setCopReg(2,portal->t1 + 2,*(undefined4 *)(portal->t1 + 1));
+  setCopReg(2,portal->t1 + 1,*(undefined4 *)&portal->t1[1].z);
+  setCopReg(2,portal->t1,*(undefined4 *)(portal->t1 + 2));
+  setCopReg(2,v1,*(undefined4 *)&portal->t1[2].z);
   copFunction(2,0x280030);
-  iVar5 = getCopReg(2,0x11);
-  iVar6 = getCopReg(2,0x12);
-  iVar4 = getCopReg(2,0x13);
-  if (iVar6 < iVar5) {
-    iVar6 = iVar4;
-    if (iVar4 < iVar5) {
-      iVar6 = iVar5;
+  p0 = getCopReg(2,0x11);
+  iVar3 = getCopReg(2,0x12);
+  iVar2 = getCopReg(2,0x13);
+  if (iVar3 < p0) {
+    iVar3 = iVar2;
+    if (iVar2 < p0) {
+      iVar3 = p0;
     }
   }
   else {
-    if (iVar6 <= iVar4) goto LAB_80060364;
+    if (iVar3 <= iVar2) goto LAB_8005f314;
   }
-  iVar4 = iVar6;
-LAB_80060364:
-  setCopReg(2,in_zero,*(undefined4 *)portal->_10);
-  setCopReg(2,in_at,*(undefined4 *)&portal->_10[0].z);
-  setCopReg(2,portal->_10 + 2,*(undefined4 *)(portal->_10 + 1));
-  setCopReg(2,portal->_10 + 1,*(undefined4 *)&portal->_10[1].z);
-  setCopReg(2,portal->_10,*(undefined4 *)(portal->_10 + 2));
-  setCopReg(2,iVar4,*(undefined4 *)&portal->_10[2].z);
+  iVar2 = iVar3;
+LAB_8005f314:
+  setCopReg(2,in_zero,*(undefined4 *)portal->t2);
+  setCopReg(2,in_at,*(undefined4 *)&portal->t2[0].z);
+  setCopReg(2,portal->t2 + 2,*(undefined4 *)(portal->t2 + 1));
+  setCopReg(2,portal->t2 + 1,*(undefined4 *)&portal->t2[1].z);
+  setCopReg(2,portal->t2,*(undefined4 *)(portal->t2 + 2));
+  setCopReg(2,iVar2,*(undefined4 *)&portal->t2[2].z);
   copFunction(2,0x280030);
   local_24 = getCopReg(2,0x11);
   local_20 = getCopReg(2,0x12);
   local_1c = getCopReg(2,0x13);
-  iVar5 = local_20;
+  p0 = local_20;
   if (local_20 < local_24) {
-    iVar5 = local_24;
+    p0 = local_24;
   }
-  iVar6 = local_1c;
-  if (local_1c < iVar5) {
-    iVar6 = iVar5;
+  iVar3 = local_1c;
+  if (local_1c < p0) {
+    iVar3 = p0;
   }
-  if (iVar4 < iVar6) {
-    iVar4 = iVar6;
+  if (iVar2 < iVar3) {
+    iVar2 = iVar3;
   }
   uVar1 = (uint)mainLevel->fogFar;
-  if ((int)(iVar4 + 0x40U) < (int)(uint)mainLevel->fogFar) {
-    uVar1 = iVar4 + 0x40U;
+  if ((int)(iVar2 + 0x80U) < (int)(uint)mainLevel->fogFar) {
+    uVar1 = iVar2 + 0x80U;
   }
   s_zval = (int)uVar1 >> 2;
   if (local_18 == local_28) {
@@ -7001,19 +7189,18 @@ LAB_80060364:
     }
   }
   else {
-    iVar5 = uVar1 - (uint)mainLevel->fogNear;
-    if (-1 < iVar5) {
-      iVar6 = (iVar5 * 0x10000) / (int)((uint)mainLevel->fogFar - (uint)mainLevel->fogNear) >> 4;
-      iVar5 = iVar6;
-      if (iVar6 < 0) {
-        iVar5 = 0;
+    p0 = uVar1 - (uint)mainLevel->fogNear;
+    if (-1 < p0) {
+      iVar3 = (p0 * 0x10000) / (int)((uint)mainLevel->fogFar - (uint)mainLevel->fogNear) >> 4;
+      p0 = iVar3;
+      if (iVar3 < 0) {
+        p0 = 0;
       }
-      if (0x1000 < iVar6) {
-        iVar5 = 0x1000;
+      if (0x1000 < iVar3) {
+        p0 = 0x1000;
       }
-      LoadAverageCol((byte *)&local_18,(byte *)&local_28,iVar5,0x1000 - iVar5,(undefined *)&local_14
-                    );
-      if ((0xffa < iVar5) && (local_14 = local_14 & 0xfff8f8f8, local_14 != 0)) {
+      LoadAverageCol((u_char *)&local_18,(u_char *)&local_28,p0,0x1000 - p0,(u_char *)&local_14);
+      if ((0xffa < p0) && (local_14 = local_14 & 0xfff8f8f8, local_14 != 0)) {
         local_14 = local_14 | 0x40404;
       }
       local_28 = local_14 & 0xffffff;
@@ -7027,53 +7214,60 @@ LAB_80060364:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DrawFogRectangle(struct RECT *cliprect /*$a0*/, struct _PrimPool *primPool /*$a1*/, int otzpos /*$a2*/, unsigned long **drawot /*$a3*/, long color /*stack 16*/)
- // line 4767, offset 0x80060530
+ // line 4993, offset 0x8005f4e0
 	/* begin block 1 */
-		// Start line: 4768
-		// Start offset: 0x80060530
+		// Start line: 4994
+		// Start offset: 0x8005F4E0
 		// Variables:
-	// 		struct POLY_G4 *polyg4; // $a1
+	// 		struct POLY_G4 *polyg4; // $t0
 	/* end block 1 */
-	// End offset: 0x80060530
-	// End Line: 4771
+	// End offset: 0x8005F5C4
+	// End Line: 5035
 
 	/* begin block 2 */
-		// Start line: 11539
+		// Start line: 11924
 	/* end block 2 */
-	// End Line: 11540
+	// End Line: 11925
 
 	/* begin block 3 */
-		// Start line: 11542
+		// Start line: 11927
 	/* end block 3 */
-	// End Line: 11543
+	// End Line: 11928
 
-void DrawFogRectangle(RECT *cliprect,_PrimPool *primPool,int otzpos,ulong **drawot,long color)
+/* File: C:\kain2\game\STREAM.C */
+
+void DrawFogRectangle(undefined cliprect,_PrimPool *primPool,int otzpos,ulong **drawot,long color)
 
 {
   short sVar1;
   short sVar2;
-  ulong *puVar3;
+  undefined3 in_register_00000011;
+  short *psVar3;
+  uint *puVar4;
   
-  puVar3 = (gameTrackerX.primPool)->nextPrim;
-  (gameTrackerX.primPool)->nextPrim = puVar3 + 9;
-  *(short *)(puVar3 + 2) = cliprect->x;
-  *(short *)((int)puVar3 + 10) = cliprect->y;
-  *(short *)(puVar3 + 4) = cliprect->x + cliprect->w;
-  *(short *)((int)puVar3 + 0x12) = cliprect->y;
-  *(short *)(puVar3 + 6) = cliprect->x;
-  *(short *)((int)puVar3 + 0x1a) = cliprect->y + cliprect->h;
-  *(short *)(puVar3 + 8) = cliprect->x + cliprect->w;
-  sVar1 = cliprect->y;
-  sVar2 = cliprect->h;
-  puVar3[1] = color;
-  puVar3[3] = color;
-  puVar3[5] = color;
-  puVar3[7] = color;
-  *(undefined *)((int)puVar3 + 3) = 8;
-  *(undefined *)((int)puVar3 + 7) = 0x38;
-  *(short *)((int)puVar3 + 0x22) = sVar1 + sVar2;
-  *puVar3 = (uint)drawot[otzpos] & 0xffffff | 0x8000000;
-  drawot[otzpos] = (ulong *)((uint)puVar3 & 0xffffff);
+  psVar3 = (short *)CONCAT31(in_register_00000011,cliprect);
+  puVar4 = *(uint **)(DAT_800d210c + 4);
+  if (puVar4 + 9 < *(uint **)(DAT_800d210c + 8)) {
+    *(uint **)(DAT_800d210c + 4) = puVar4 + 9;
+    *(short *)(puVar4 + 2) = *psVar3;
+    *(short *)((int)puVar4 + 10) = psVar3[1];
+    *(short *)(puVar4 + 4) = *psVar3 + psVar3[2];
+    *(short *)((int)puVar4 + 0x12) = psVar3[1];
+    *(short *)(puVar4 + 6) = *psVar3;
+    *(short *)((int)puVar4 + 0x1a) = psVar3[1] + psVar3[3];
+    *(short *)(puVar4 + 8) = *psVar3 + psVar3[2];
+    sVar1 = psVar3[1];
+    sVar2 = psVar3[3];
+    *(undefined *)((int)puVar4 + 3) = 8;
+    puVar4[1] = color;
+    puVar4[3] = color;
+    puVar4[5] = color;
+    puVar4[7] = color;
+    *(undefined *)((int)puVar4 + 7) = 0x38;
+    *(short *)((int)puVar4 + 0x22) = sVar1 + sVar2;
+    *puVar4 = (uint)drawot[otzpos] & 0xffffff | 0x8000000;
+    drawot[otzpos] = (ulong *)((uint)puVar4 & 0xffffff);
+  }
   return;
 }
 
@@ -7082,40 +7276,42 @@ void DrawFogRectangle(RECT *cliprect,_PrimPool *primPool,int otzpos,ulong **draw
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_RenderAdjacantUnit(unsigned long **curOT /*$s3*/, struct StreamUnitPortal *curStreamPortal /*$s0*/, struct _StreamUnit *toStreamUnit /*$s1*/, struct _StreamUnit *mainStreamUnit /*$s2*/, struct RECT *cliprect /*stack 16*/)
- // line 4811, offset 0x8006060c
+ // line 5041, offset 0x8005f5cc
 	/* begin block 1 */
-		// Start line: 4812
-		// Start offset: 0x8006060C
+		// Start line: 5042
+		// Start offset: 0x8005F5CC
 
 		/* begin block 1.1 */
-			// Start line: 4816
-			// Start offset: 0x80060644
+			// Start line: 5046
+			// Start offset: 0x8005F604
 			// Variables:
 		// 		long portalFogColor; // $s0
 		/* end block 1.1 */
-		// End offset: 0x8006069C
-		// End Line: 4828
+		// End offset: 0x8005F65C
+		// End Line: 5058
 	/* end block 1 */
-	// End offset: 0x8006069C
-	// End Line: 4829
+	// End offset: 0x8005F65C
+	// End Line: 5059
 
 	/* begin block 2 */
-		// Start line: 11744
+		// Start line: 12106
 	/* end block 2 */
-	// End Line: 11745
+	// End Line: 12107
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_RenderAdjacantUnit
                (ulong **curOT,StreamUnitPortal *curStreamPortal,_StreamUnit *toStreamUnit,
-               _StreamUnit *mainStreamUnit,RECT *cliprect)
+               _StreamUnit *mainStreamUnit,undefined1 cliprect)
 
 {
   long color;
   
   color = MEMPACK_MemoryValidFunc((char *)toStreamUnit->level);
   if (color != 0) {
-    RENDER_currentStreamUnitID = *(short *)&toStreamUnit->StreamUnitID;
+    RENDER_currentStreamUnitID = *(undefined2 *)&toStreamUnit->StreamUnitID;
     color = GetFogColor(curStreamPortal,mainStreamUnit,mainStreamUnit->level);
-    DrawFogRectangle(cliprect,gameTrackerX.primPool,0xbff,curOT,color);
+    DrawFogRectangle(cliprect,DAT_800d210c,0xbff,curOT,color);
     PushMatrix();
     StreamRenderLevel(toStreamUnit,mainStreamUnit->level,curOT,color);
     PopMatrix();
@@ -7128,47 +7324,49 @@ void STREAM_RenderAdjacantUnit
 // decompiled code
 // original method signature: 
 // struct BSPTree * /*$ra*/ STREAM_GetBspTree(struct _StreamUnit *streamUnit /*$a0*/, long bspNumber /*$a1*/)
- // line 4831, offset 0x800606b8
+ // line 5061, offset 0x8005f678
 	/* begin block 1 */
-		// Start line: 4833
-		// Start offset: 0x800606B8
+		// Start line: 5063
+		// Start offset: 0x8005F678
 		// Variables:
 	// 		struct Level *level; // $v0
 	// 		struct _Terrain *terrain; // $v0
 	// 		int d; // $a0
 	/* end block 1 */
-	// End offset: 0x80060710
-	// End Line: 4853
+	// End offset: 0x8005F6D0
+	// End Line: 5083
 
 	/* begin block 2 */
-		// Start line: 11790
+		// Start line: 12152
 	/* end block 2 */
-	// End Line: 11791
+	// End Line: 12153
 
 	/* begin block 3 */
-		// Start line: 11791
+		// Start line: 12153
 	/* end block 3 */
-	// End Line: 11792
+	// End Line: 12154
+
+/* File: C:\kain2\game\STREAM.C */
 
 BSPTree * STREAM_GetBspTree(_StreamUnit *streamUnit,long bspNumber)
 
 {
   _Terrain *p_Var1;
-  short *psVar2;
-  _MultiSignal *p_Var3;
+  int iVar2;
+  BSPTree *pBVar3;
   int iVar4;
   
   p_Var1 = streamUnit->level->terrain;
-  psVar2 = p_Var1->morphNormalIdx;
-  if ((psVar2 != (short *)0x0) && (iVar4 = 0, 0 < (int)psVar2)) {
-    p_Var3 = p_Var1->signals;
+  iVar2 = p_Var1->numBSPTrees;
+  if ((iVar2 != 0) && (iVar4 = 0, 0 < iVar2)) {
+    pBVar3 = p_Var1->BSPTreeArray;
     do {
       iVar4 = iVar4 + 1;
-      if ((int)*(short *)p_Var3->signalList == bspNumber) {
-        return (BSPTree *)p_Var3;
+      if ((int)pBVar3->ID == bspNumber) {
+        return pBVar3;
       }
-      p_Var3 = (_MultiSignal *)(p_Var3->signalList + 1);
-    } while (iVar4 < (int)psVar2);
+      pBVar3 = pBVar3 + 1;
+    } while (iVar4 < iVar2);
   }
   return (BSPTree *)0x0;
 }
@@ -7178,36 +7376,38 @@ BSPTree * STREAM_GetBspTree(_StreamUnit *streamUnit,long bspNumber)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ WARPGATE_BlockWarpGateEntrance(struct _StreamUnit *streamUnit /*$a0*/, long collideOn /*$s0*/)
- // line 4856, offset 0x80060718
+ // line 5086, offset 0x8005f6d8
 	/* begin block 1 */
-		// Start line: 4857
-		// Start offset: 0x80060718
+		// Start line: 5087
+		// Start offset: 0x8005F6D8
 		// Variables:
 	// 		struct BSPTree *bspTree; // $v1
 	/* end block 1 */
-	// End offset: 0x80060760
-	// End Line: 4872
+	// End offset: 0x8005F738
+	// End Line: 5104
 
 	/* begin block 2 */
-		// Start line: 11844
+		// Start line: 12206
 	/* end block 2 */
-	// End Line: 11845
+	// End Line: 12207
+
+/* File: C:\kain2\game\STREAM.C */
 
 void WARPGATE_BlockWarpGateEntrance(_StreamUnit *streamUnit,long collideOn)
 
 {
-  ushort uVar1;
-  BSPTree *pBVar2;
+  BSPTree *pBVar1;
   
-  pBVar2 = STREAM_GetBspTree(streamUnit,7);
-  if (pBVar2 != (BSPTree *)0x0) {
+  pBVar1 = STREAM_GetBspTree(streamUnit,7);
+  if (pBVar1 != (BSPTree *)0x0) {
     if (collideOn == 0) {
-      uVar1 = pBVar2->flags & 0xfffd;
+      pBVar1->flags = pBVar1->flags & 0xfffd;
+      DAT_800d29ed = 1;
     }
     else {
-      uVar1 = pBVar2->flags | 2;
+      pBVar1->flags = pBVar1->flags | 2;
+      DAT_800d29ed = 0;
     }
-    pBVar2->flags = uVar1;
   }
   return;
 }
@@ -7217,20 +7417,22 @@ void WARPGATE_BlockWarpGateEntrance(_StreamUnit *streamUnit,long collideOn)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ WARPGATE_DrawWarpGateRim(struct _StreamUnit *streamUnit /*$a0*/, long drawOn /*$s0*/)
- // line 4875, offset 0x80060770
+ // line 5107, offset 0x8005f748
 	/* begin block 1 */
-		// Start line: 4876
-		// Start offset: 0x80060770
+		// Start line: 5108
+		// Start offset: 0x8005F748
 		// Variables:
 	// 		struct BSPTree *bspTree; // $v1
 	/* end block 1 */
-	// End offset: 0x800607CC
-	// End Line: 4896
+	// End offset: 0x8005F790
+	// End Line: 5128
 
 	/* begin block 2 */
-		// Start line: 11882
+		// Start line: 12248
 	/* end block 2 */
-	// End Line: 11883
+	// End Line: 12249
+
+/* File: C:\kain2\game\STREAM.C */
 
 void WARPGATE_DrawWarpGateRim(_StreamUnit *streamUnit,long drawOn)
 
@@ -7240,19 +7442,17 @@ void WARPGATE_DrawWarpGateRim(_StreamUnit *streamUnit,long drawOn)
   BSPTree *pBVar3;
   
   pBVar3 = STREAM_GetBspTree(streamUnit,3);
-  if (pBVar3 == (BSPTree *)0x0) {
-    GXFilePrint("Can not found bsptree number %d\n");
-  }
-  else {
+  if (pBVar3 != (BSPTree *)0x0) {
     uVar1 = pBVar3->flags;
     uVar2 = uVar1 & 0xfffd;
     pBVar3->flags = uVar2;
     if (drawOn == 0) {
-      pBVar3->flags = uVar2 | 1;
+      uVar2 = uVar2 | 1;
     }
     else {
-      pBVar3->flags = uVar1 & 0xfffc;
+      uVar2 = uVar1 & 0xfffc;
     }
+    pBVar3->flags = uVar2;
   }
   return;
 }
@@ -7262,50 +7462,60 @@ void WARPGATE_DrawWarpGateRim(_StreamUnit *streamUnit,long drawOn)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ WARPGATE_HideAllCloudCovers()
- // line 4898, offset 0x800607dc
+ // line 5130, offset 0x8005f7a0
 	/* begin block 1 */
-		// Start line: 4900
-		// Start offset: 0x800607DC
+		// Start line: 5132
+		// Start offset: 0x8005F7A0
 		// Variables:
 	// 		struct Object *warpFaceObject; // $a1
 
 		/* begin block 1.1 */
-			// Start line: 4906
-			// Start offset: 0x800607F0
+			// Start line: 5138
+			// Start offset: 0x8005F7B4
 			// Variables:
 		// 		struct _Instance *instance; // $v1
 		// 		struct _Instance *next; // $a0
 		/* end block 1.1 */
-		// End offset: 0x80060834
-		// End Line: 4921
+		// End offset: 0x8005F7F8
+		// End Line: 5153
 	/* end block 1 */
-	// End offset: 0x80060834
-	// End Line: 4923
+	// End offset: 0x8005F7F8
+	// End Line: 5155
 
 	/* begin block 2 */
-		// Start line: 11928
+		// Start line: 12294
 	/* end block 2 */
-	// End Line: 11929
+	// End Line: 12295
 
 	/* begin block 3 */
-		// Start line: 11929
+		// Start line: 12295
 	/* end block 3 */
-	// End Line: 11930
+	// End Line: 12296
 
 	/* begin block 4 */
-		// Start line: 11932
+		// Start line: 12298
 	/* end block 4 */
-	// End Line: 11933
+	// End Line: 12299
 
-/* WARNING: Removing unreachable block (ram,0x800607f0) */
-/* WARNING: Removing unreachable block (ram,0x80060808) */
-/* WARNING: Removing unreachable block (ram,0x80060818) */
-/* WARNING: Removing unreachable block (ram,0x80060828) */
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\STREAM.C */
 
 void WARPGATE_HideAllCloudCovers(void)
 
 {
+  int iVar1;
+  void *pvVar2;
+  int iVar3;
+  
+  pvVar2 = objectAccess[23].object;
+  if (objectAccess[23].object != (void *)0x0) {
+    iVar3 = *(int *)(DAT_800d2100 + 4);
+    while (iVar1 = iVar3, iVar1 != 0) {
+      iVar3 = *(int *)(iVar1 + 8);
+      if (*(void **)(iVar1 + 0x1c) == pvVar2) {
+        *(uint *)(iVar1 + 0x14) = *(uint *)(iVar1 + 0x14) | 0x800;
+      }
+    }
+  }
   return;
 }
 
@@ -7314,52 +7524,64 @@ void WARPGATE_HideAllCloudCovers(void)
 // decompiled code
 // original method signature: 
 // struct _Instance * /*$ra*/ WARPGATE_UnHideCloudCoverInUnit(long streamUnitID /*$a0*/)
- // line 4925, offset 0x8006083c
+ // line 5157, offset 0x8005f800
 	/* begin block 1 */
-		// Start line: 4927
-		// Start offset: 0x8006083C
+		// Start line: 5159
+		// Start offset: 0x8005F800
 		// Variables:
 	// 		struct Object *warpFaceObject; // $a3
 	// 		struct _Instance *result; // $a2
 
 		/* begin block 1.1 */
-			// Start line: 4934
-			// Start offset: 0x80060850
+			// Start line: 5166
+			// Start offset: 0x8005F814
 			// Variables:
 		// 		struct _Instance *instance; // $v1
 		// 		struct _Instance *next; // $a1
 		/* end block 1.1 */
-		// End offset: 0x800608AC
-		// End Line: 4952
+		// End offset: 0x8005F870
+		// End Line: 5184
 	/* end block 1 */
-	// End offset: 0x800608AC
-	// End Line: 4954
+	// End offset: 0x8005F870
+	// End Line: 5186
 
 	/* begin block 2 */
-		// Start line: 11984
+		// Start line: 12350
 	/* end block 2 */
-	// End Line: 11985
+	// End Line: 12351
 
 	/* begin block 3 */
-		// Start line: 11985
+		// Start line: 12351
 	/* end block 3 */
-	// End Line: 11986
+	// End Line: 12352
 
 	/* begin block 4 */
-		// Start line: 11989
+		// Start line: 12355
 	/* end block 4 */
-	// End Line: 11990
+	// End Line: 12356
 
-/* WARNING: Removing unreachable block (ram,0x80060850) */
-/* WARNING: Removing unreachable block (ram,0x80060868) */
-/* WARNING: Removing unreachable block (ram,0x80060878) */
-/* WARNING: Removing unreachable block (ram,0x80060888) */
-/* WARNING: Removing unreachable block (ram,0x800608a0) */
+/* File: C:\kain2\game\STREAM.C */
 
 _Instance * WARPGATE_UnHideCloudCoverInUnit(long streamUnitID)
 
 {
-  return (_Instance *)0x0;
+  _Instance *p_Var1;
+  _Instance *p_Var2;
+  
+  p_Var2 = (_Instance *)0x0;
+  if (objectAccess[23].object != (void *)0x0) {
+    p_Var1 = *(_Instance **)(DAT_800d2100 + 4);
+    do {
+      p_Var2 = p_Var1;
+      if (p_Var2 == (_Instance *)0x0) {
+        return (_Instance *)0x0;
+      }
+      p_Var1 = p_Var2->next;
+    } while ((p_Var2->object != (Object *)objectAccess[23].object) ||
+            (p_Var2->currentStreamUnitID != streamUnitID));
+    p_Var2->flags = p_Var2->flags & 0xfffff7ff;
+  }
+  return p_Var2;
 }
 
 
@@ -7367,81 +7589,107 @@ _Instance * WARPGATE_UnHideCloudCoverInUnit(long streamUnitID)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_RenderWarpGate(unsigned long **mainOT /*$s3*/, struct StreamUnitPortal *curStreamPortal /*$s2*/, struct _StreamUnit *mainStreamUnit /*$s1*/, struct RECT *cliprect /*$s4*/)
- // line 4958, offset 0x800608b4
+ // line 5190, offset 0x8005f878
 	/* begin block 1 */
-		// Start line: 4959
-		// Start offset: 0x800608B4
+		// Start line: 5191
+		// Start offset: 0x8005F878
 		// Variables:
 	// 		struct _StreamUnit *toStreamUnit; // $s0
 	/* end block 1 */
-	// End offset: 0x80060A40
-	// End Line: 5036
+	// End offset: 0x8005FBA4
+	// End Line: 5300
 
 	/* begin block 2 */
-		// Start line: 12055
+		// Start line: 12421
 	/* end block 2 */
-	// End Line: 12056
+	// End Line: 12422
+
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_RenderWarpGate
                (ulong **mainOT,StreamUnitPortal *curStreamPortal,_StreamUnit *mainStreamUnit,
-               RECT *cliprect)
+               undefined1 cliprect)
 
 {
+  int iVar1;
   _StreamUnit *streamUnit;
   
   WARPGATE_DrawWarpGateRim(mainStreamUnit,1);
   streamUnit = curStreamPortal->toStreamUnit;
-  if (WarpGateLoadInfo.loading == 1) {
-    if (WarpGateLoadInfo.maxTime < WarpGateLoadInfo.curTime) {
+  if (DAT_800d29ec == '\x01') {
+    if (DAT_800d29f4 < DAT_800d29f0) {
       if (streamUnit != (_StreamUnit *)0x0) {
         STREAM_DumpUnit(streamUnit,1);
-        streamUnit = (_StreamUnit *)0x0;
       }
-      WarpGateLoadInfo.loading = 2;
+      DAT_800d29ec = 2;
       STREAM_LoadCurrentWarpRoom(curStreamPortal,mainStreamUnit);
-      (WarpGateLoadInfo.warpFaceInstance)->fadeValue = 0;
+      DAT_800d29f8->fadeValue = 0;
+      return;
+    }
+    if (DAT_800d29f8 == (_Instance *)0x0) {
+      WARPGATE_HideAllCloudCovers();
+      DAT_800d29f8 = WARPGATE_UnHideCloudCoverInUnit(mainStreamUnit->StreamUnitID);
+      DAT_800d29ee = 0x1000;
+    }
+    WARPGATE_CalcWarpFade(DAT_800d2314);
+  }
+  else {
+    if (DAT_800d29ec == '\x02') {
+      DAT_800d29ee = 0;
+      if ((streamUnit != (_StreamUnit *)0x0) && (streamUnit->used == 2)) {
+        DAT_800d29ec = '\x03';
+        DAT_800d29f0 = DAT_800d29f4;
+      }
     }
     else {
-      if (WarpGateLoadInfo.warpFaceInstance == (_Instance *)0x0) {
-        WARPGATE_HideAllCloudCovers();
-        WarpGateLoadInfo.warpFaceInstance =
-             WARPGATE_UnHideCloudCoverInUnit(mainStreamUnit->StreamUnitID);
+      if (DAT_800d29ec == '\x03') {
+        if (DAT_800d29f0 < 0) {
+          WARPGATE_HideAllCloudCovers();
+          iVar1 = WARPGATE_IsWarpgateInUse();
+          if ((iVar1 == 0) &&
+             (iVar1 = strcmpi(&DAT_800d2228,WarpRoomArray + CurrentWarpNumber * 0x14), iVar1 == 0))
+          {
+            DAT_800d29ec = '\0';
+            CurrentWarpNumber = 0;
+          }
+          else {
+            DAT_800d29ec = '\x04';
+          }
+        }
+        else {
+          WARPGATE_CalcWarpFade(-DAT_800d2314);
+        }
       }
-      WARPGATE_CalcWarpFade(gameTrackerX.idleTime);
+    }
+  }
+  if (DAT_800d29ec == '\0') {
+    iVar1 = WARPGATE_IsWarpgateInUse();
+    if (iVar1 == 0) {
+      WARPGATE_BlockWarpGateEntrance(mainStreamUnit,1);
+    }
+    else {
+      iVar1 = strcmpi(mainStreamUnit->level->worldName,WarpRoomArray + CurrentWarpNumber * 0x14);
+      if (iVar1 == 0) {
+        CurrentWarpNumber = (CurrentWarpNumber + 1) % 0xe;
+      }
+      DAT_800d29ec = '\x01';
+      DAT_800d29f8 = (_Instance *)0x0;
+      DAT_800d29f0 = 0;
     }
   }
   else {
-    if (WarpGateLoadInfo.loading == 2) {
-      WarpGateLoadInfo.fadeValue = 0;
-      if (streamUnit == (_StreamUnit *)0x0) goto LAB_80060a28;
-      if (streamUnit->used == 2) {
-        WarpGateLoadInfo.loading = 3;
-        WarpGateLoadInfo.curTime = WarpGateLoadInfo.maxTime;
+    if ((streamUnit != (_StreamUnit *)0x0) && (streamUnit->used == 2)) {
+      WARPGATE_RenderWarpUnit(mainOT,curStreamPortal,mainStreamUnit,cliprect);
+    }
+    if ((DAT_800d29ec == '\x04') && (iVar1 = WARPGATE_IsWarpgateInUse(), iVar1 == 0)) {
+      DAT_800d29ec = '\x01';
+      DAT_800d29f0 = 0;
+      DAT_800d29f8 = (_Instance *)0x0;
+      *(undefined4 *)(&LAB_800d0420 + CurrentWarpNumber * 0x14) = 0;
+      while (iVar1 = strcmpi(&DAT_800d2228,WarpRoomArray + CurrentWarpNumber * 0x14), iVar1 != 0) {
+        CurrentWarpNumber = (CurrentWarpNumber + 1) % 0xe;
       }
     }
-    else {
-      if (WarpGateLoadInfo.loading == 3) {
-        if (WarpGateLoadInfo.curTime < 0) {
-          WARPGATE_HideAllCloudCovers();
-          WarpGateLoadInfo.loading = 0;
-        }
-        else {
-          WARPGATE_CalcWarpFade(-gameTrackerX.idleTime);
-        }
-      }
-    }
-  }
-  if (streamUnit != (_StreamUnit *)0x0) {
-    if (streamUnit->used != 2) {
-      return;
-    }
-    WARPGATE_RenderWarpUnit(mainOT,curStreamPortal,mainStreamUnit,cliprect);
-    return;
-  }
-LAB_80060a28:
-  if (WarpGateLoadInfo.loading == 0) {
-    WarpGateLoadInfo.loading = 1;
-    WarpGateLoadInfo.curTime = 0;
   }
   return;
 }
@@ -7450,105 +7698,118 @@ LAB_80060a28:
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ WARPGATE_RenderWarpUnit(unsigned long **mainOT /*$fp*/, struct StreamUnitPortal *curStreamPortal /*$s0*/, struct _StreamUnit *mainStreamUnit /*$s4*/, struct RECT *cliprect /*$s3*/)
- // line 5039, offset 0x80060a60
+// void /*$ra*/ WARPGATE_RenderWarpUnit(unsigned long **mainOT /*$fp*/, struct StreamUnitPortal *curStreamPortal /*$s0*/, struct _StreamUnit *mainStreamUnit /*$s4*/, struct RECT *cliprect /*$s2*/)
+ // line 5303, offset 0x8005fbc4
 	/* begin block 1 */
-		// Start line: 5040
-		// Start offset: 0x80060A60
+		// Start line: 5304
+		// Start offset: 0x8005FBC4
 		// Variables:
-	// 		unsigned long **curOT; // $s2
+	// 		unsigned long **curOT; // $s3
 	// 		struct DR_AREA *PortalClip; // $s0
 	// 		struct _StreamUnit *toStreamUnit; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 5073
-			// Start offset: 0x80060B28
+			// Start line: 5337
+			// Start offset: 0x8005FC8C
 			// Variables:
 		// 		struct RECT PortalRect; // stack offset -48
 		// 		long portalFogColor; // $s0
 
 			/* begin block 1.1.1 */
-				// Start line: 5127
-				// Start offset: 0x80060CEC
+				// Start line: 5406
+				// Start offset: 0x8005FED8
 				// Variables:
 			// 		unsigned long *hld; // $a0
 			/* end block 1.1.1 */
-			// End offset: 0x80060D84
-			// End Line: 5145
+			// End offset: 0x8005FF70
+			// End Line: 5424
 		/* end block 1.1 */
-		// End offset: 0x80060D84
-		// End Line: 5146
+		// End offset: 0x8005FF70
+		// End Line: 5425
 	/* end block 1 */
-	// End offset: 0x80060D84
-	// End Line: 5148
+	// End offset: 0x8005FF70
+	// End Line: 5427
 
 	/* begin block 2 */
-		// Start line: 12224
+		// Start line: 12658
 	/* end block 2 */
-	// End Line: 12225
+	// End Line: 12659
 
 /* WARNING: Could not reconcile some variable overlaps */
+/* File: C:\kain2\game\STREAM.C */
 
 void WARPGATE_RenderWarpUnit
                (ulong **mainOT,StreamUnitPortal *curStreamPortal,_StreamUnit *mainStreamUnit,
-               RECT *cliprect)
+               undefined cliprect)
 
 {
   int iVar1;
   long color;
   ulong *puVar2;
+  undefined3 in_register_0000001d;
+  undefined4 *puVar3;
+  DR_AREA *p;
   _StreamUnit *streamUnit;
   ulong **drawot;
   undefined4 local_30;
   undefined4 local_2c;
   
+  puVar3 = (undefined4 *)CONCAT31(in_register_0000001d,cliprect);
   streamUnit = curStreamPortal->toStreamUnit;
-  if ((gameTrackerX.debugFlags2 & 0x1000000U) != 0) {
-    FONT_Print("Looking at warp unit =%s\n");
+  if ((DAT_800d2190 & 0x1000000) != 0) {
+    FONT_Print(s_Looking_at_warp_unit___s_800d0704);
   }
   WARPGATE_BlockWarpGateEntrance(mainStreamUnit,(uint)((streamUnit->flags & 8U) != 0));
   WARPGATE_DrawWarpGateRim(streamUnit,1);
   color = MEMPACK_MemoryValidFunc((char *)streamUnit->level);
   if ((color != 0) &&
-     (drawot = (ulong **)(gameTrackerX.primPool)->nextPrim,
-     drawot < (gameTrackerX.primPool)->lastPrim + -0xc00)) {
-    *(ulong ***)&(gameTrackerX.primPool)->nextPrim = drawot + 0xc00;
-    ClearOTagR(drawot,0xc00);
-    RENDER_currentStreamUnitID = *(short *)&streamUnit->StreamUnitID;
+     (drawot = (ulong **)DAT_800d210c->nextPrim, drawot < DAT_800d210c->lastPrim + -0xc00)) {
+    *(ulong ***)&DAT_800d210c->nextPrim = drawot + 0xc00;
+    ClearOTagR((u_long *)drawot,0xc00);
+    RENDER_currentStreamUnitID = *(undefined2 *)&streamUnit->StreamUnitID;
     curStreamPortal->toStreamUnit = streamUnit;
     color = GetFogColor(curStreamPortal,mainStreamUnit,mainStreamUnit->level);
-    DrawFogRectangle(cliprect,gameTrackerX.primPool,0xbff,drawot,color);
+    DrawFogRectangle(cliprect,DAT_800d210c,0xbff,drawot,color);
     PushMatrix();
     StreamRenderLevel(streamUnit,mainStreamUnit->level,drawot,color);
     PopMatrix();
-    puVar2 = (gameTrackerX.primPool)->nextPrim;
-    (gameTrackerX.primPool)->nextPrim = puVar2 + 3;
-    local_2c = *(undefined4 *)&cliprect->w;
-    local_30._0_2_ = (short)*(undefined4 *)cliprect;
-    local_30 = CONCAT22((short)((uint)*(undefined4 *)cliprect >> 0x10) +
-                        (&draw)[gameTrackerX.drawPage].ofs[1],
-                        (short)local_30 + (&draw)[gameTrackerX.drawPage].ofs[0]);
-    SetDrawArea((int)puVar2,(ushort *)&local_30);
-    *puVar2 = (uint)drawot[0xbfe] & 0xffffff | 0x2000000;
-    drawot[0xbfe] = (ulong *)((uint)puVar2 & 0xffffff);
+    p = (DR_AREA *)DAT_800d210c->nextPrim;
+    *(DR_AREA **)&DAT_800d210c->nextPrim = p + 1;
+    local_2c = puVar3[1];
+    local_30._0_2_ = (short)*puVar3;
+    local_30 = CONCAT22((short)((uint)*puVar3 >> 0x10) + draw[DAT_800d20fc].ofs[1],
+                        (short)local_30 + draw[DAT_800d20fc].ofs[0]);
+    SetDrawArea(p,(RECT *)&local_30);
+    p->tag = (uint)drawot[0xbfe] & 0xffffff | 0x2000000;
+    drawot[0xbfe] = (ulong *)((uint)p & 0xffffff);
     if ((streamUnit->flags & 8U) == 0) {
       DRAW_TranslucentQuad
-                (cliprect->x,cliprect->y,
-                 (short)(((uint)(ushort)cliprect->x + (uint)(ushort)cliprect->w) * 0x10000 >> 0x10),
-                 cliprect->y,(int)cliprect->x,
-                 (int)(((uint)(ushort)cliprect->y + (uint)(ushort)cliprect->h) * 0x10000) >> 0x10,
-                 (int)(((uint)(ushort)cliprect->x + (uint)(ushort)cliprect->w) * 0x10000) >> 0x10,
-                 (int)(((uint)(ushort)cliprect->y + (uint)(ushort)cliprect->h) * 0x10000) >> 0x10,
-                 0x28,0x28,0x23,1,gameTrackerX.primPool,drawot + 1);
+                (*(ushort *)puVar3,*(ushort *)((int)puVar3 + 2),
+                 (short)(((uint)*(ushort *)puVar3 + (uint)*(ushort *)(puVar3 + 1)) * 0x10000 >> 0x10
+                        ),*(ushort *)((int)puVar3 + 2),(int)(short)*(ushort *)puVar3,
+                 (int)(((uint)*(ushort *)((int)puVar3 + 2) + (uint)*(ushort *)((int)puVar3 + 6)) *
+                      0x10000) >> 0x10,
+                 (int)(((uint)*(ushort *)puVar3 + (uint)*(ushort *)(puVar3 + 1)) * 0x10000) >> 0x10,
+                 (int)(((uint)*(ushort *)((int)puVar3 + 2) + (uint)*(ushort *)((int)puVar3 + 6)) *
+                      0x10000) >> 0x10,0x32,0x32,0x32,1,DAT_800d210c,drawot + 1);
+      DRAW_TranslucentQuad
+                (*(ushort *)puVar3,*(ushort *)((int)puVar3 + 2),
+                 (short)(((uint)*(ushort *)puVar3 + (uint)*(ushort *)(puVar3 + 1)) * 0x10000 >> 0x10
+                        ),*(ushort *)((int)puVar3 + 2),(int)(short)*(ushort *)puVar3,
+                 (int)(((uint)*(ushort *)((int)puVar3 + 2) + (uint)*(ushort *)((int)puVar3 + 6)) *
+                      0x10000) >> 0x10,
+                 (int)(((uint)*(ushort *)puVar3 + (uint)*(ushort *)(puVar3 + 1)) * 0x10000) >> 0x10,
+                 (int)(((uint)*(ushort *)((int)puVar3 + 2) + (uint)*(ushort *)((int)puVar3 + 6)) *
+                      0x10000) >> 0x10,0x32,0x32,0x32,2,DAT_800d210c,drawot + 1);
     }
-    puVar2 = (gameTrackerX.primPool)->nextPrim;
-    (gameTrackerX.primPool)->nextPrim = puVar2 + 3;
-    local_30 = *(undefined4 *)(&draw)[gameTrackerX.drawPage].ofs;
+    p = (DR_AREA *)DAT_800d210c->nextPrim;
+    *(DR_AREA **)&DAT_800d210c->nextPrim = p + 1;
+    local_30 = *(undefined4 *)draw[DAT_800d20fc].ofs;
     local_2c = 0xf00200;
-    SetDrawArea((int)puVar2,(ushort *)&local_30);
-    *puVar2 = (uint)drawot[1] & 0xffffff | 0x2000000;
+    SetDrawArea(p,(RECT *)&local_30);
+    p->tag = (uint)drawot[1] & 0xffffff | 0x2000000;
     iVar1 = s_zval;
-    drawot[1] = (ulong *)((uint)puVar2 & 0xffffff);
+    drawot[1] = (ulong *)((uint)p & 0xffffff);
     puVar2 = mainOT[iVar1];
     mainOT[iVar1] = drawot[0xbff];
     *drawot = puVar2;
@@ -7561,37 +7822,37 @@ void WARPGATE_RenderWarpUnit
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_DumpNonResidentObjects()
- // line 5206, offset 0x80060db4
+ // line 5485, offset 0x8005ffa0
 	/* begin block 1 */
-		// Start line: 5207
-		// Start offset: 0x80060DB4
+		// Start line: 5486
+		// Start offset: 0x8005FFA0
 		// Variables:
 	// 		struct _Instance *instance; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 5214
-			// Start offset: 0x80060DE0
+			// Start line: 5493
+			// Start offset: 0x8005FFCC
 			// Variables:
 		// 		struct _Instance *next; // $s2
 		// 		struct Object *object; // $s1
 		/* end block 1.1 */
-		// End offset: 0x80060E34
-		// End Line: 5229
+		// End offset: 0x80060020
+		// End Line: 5508
 	/* end block 1 */
-	// End offset: 0x80060E40
-	// End Line: 5232
+	// End offset: 0x8006002C
+	// End Line: 5511
 
 	/* begin block 2 */
-		// Start line: 12601
+		// Start line: 13065
 	/* end block 2 */
-	// End Line: 12602
+	// End Line: 13066
 
 	/* begin block 3 */
-		// Start line: 12606
+		// Start line: 13070
 	/* end block 3 */
-	// End Line: 12607
+	// End Line: 13071
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\STREAM.C */
 
 void STREAM_DumpNonResidentObjects(void)
 
@@ -7603,7 +7864,7 @@ void STREAM_DumpNonResidentObjects(void)
   Object *object;
   _Instance *p_Var3;
   
-  p_Var3 = (gameTrackerX.instanceList)->first;
+  p_Var3 = *(_Instance **)((int)DAT_800d2100 + 4);
   while (instance = p_Var3, instance != (_Instance *)0x0) {
     object = instance->object;
     p_Var3 = instance->next;
@@ -7613,12 +7874,82 @@ void STREAM_DumpNonResidentObjects(void)
       tracker = FindObjectInTracker(object);
       iVar2 = STREAM_IsObjectInAnyUnit(tracker);
       if (iVar2 == 0) {
-        INSTANCE_ReallyRemoveInstance(gameTrackerX.instanceList,instance,0);
+        INSTANCE_ReallyRemoveInstance(DAT_800d2100,instance,0);
       }
     }
   }
-  STREAM_RemoveAllObjectsNotInUse(&gameTrackerX);
+  STREAM_RemoveAllObjectsNotInUse((GameTracker *)&gameTrackerX);
   return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ STREAM_TryAndDumpNonResident(struct _ObjectTracker *otr /*$s2*/)
+ // line 5517, offset 0x80060058
+	/* begin block 1 */
+		// Start line: 5518
+		// Start offset: 0x80060058
+		// Variables:
+	// 		struct _Instance *instance; // $s0
+	// 		struct _Instance *next; // $s1
+	/* end block 1 */
+	// End offset: 0x80060180
+	// End Line: 5572
+
+	/* begin block 2 */
+		// Start line: 13154
+	/* end block 2 */
+	// End Line: 13155
+
+/* File: C:\kain2\game\STREAM.C */
+
+int STREAM_TryAndDumpNonResident(_ObjectTracker *otr)
+
+{
+  _Instance **pp_Var1;
+  _Instance *instance;
+  uint uVar2;
+  int iVar3;
+  _Instance *p_Var4;
+  
+  uVar2 = 0;
+  if ((otr->objectStatus == 2) && (uVar2 = 0, (otr->object->oflags & 0x2000000U) == 0)) {
+    iVar3 = STREAM_IsObjectInAnyUnit(otr);
+    uVar2 = 0;
+    if (iVar3 == 0) {
+      p_Var4 = DAT_800d2100->first;
+      if (p_Var4 != (_Instance *)0x0) {
+        do {
+          pp_Var1 = &p_Var4->next;
+          if (p_Var4->object == otr->object) {
+            if (p_Var4->LinkParent != (_Instance *)0x0) {
+              return 0;
+            }
+            if (p_Var4->LinkChild != (_Instance *)0x0) {
+              return 0;
+            }
+            if (p_Var4->LinkSibling != (_Instance *)0x0) {
+              return 0;
+            }
+          }
+          p_Var4 = *pp_Var1;
+        } while (*pp_Var1 != (_Instance *)0x0);
+        p_Var4 = DAT_800d2100->first;
+      }
+      while (instance = p_Var4, instance != (_Instance *)0x0) {
+        p_Var4 = instance->next;
+        if (instance->object == otr->object) {
+          SAVE_DeleteInstance(instance);
+          INSTANCE_ReallyRemoveInstance(DAT_800d2100,instance,0);
+        }
+      }
+      STREAM_RemoveAllObjectsNotInUse((GameTracker *)&gameTrackerX);
+      uVar2 = (uint)(otr->objectStatus == 0);
+    }
+  }
+  return uVar2;
 }
 
 

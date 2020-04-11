@@ -5,28 +5,27 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ ClearDisplay()
- // line 131, offset 0x80038ef0
+ // line 136, offset 0x8003840c
 	/* begin block 1 */
-		// Start line: 262
+		// Start line: 272
 	/* end block 1 */
-	// End Line: 263
+	// End Line: 273
 
 	/* begin block 2 */
-		// Start line: 264
+		// Start line: 274
 	/* end block 2 */
-	// End Line: 265
+	// End Line: 275
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\PSX\MAIN.C */
 
 void ClearDisplay(void)
 
 {
-  PutDrawEnv((undefined4 *)(&draw + gameTrackerX.gameData.asmData.dispPage));
-  DrawPrim((int)(&clearRect + gameTrackerX.gameData.asmData.dispPage));
+  PutDrawEnv(draw + DAT_800d20d0);
+  DrawPrim(clearRect + DAT_800d20d0);
   DrawSync(0);
-  PutDispEnv((ushort *)(&disp + gameTrackerX.gameData.asmData.dispPage));
+  PutDispEnv(disp + DAT_800d20d0);
   SetDispMask(1);
-  printf("ClearDisplay()\n");
   return;
 }
 
@@ -35,20 +34,22 @@ void ClearDisplay(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ show_screen(char *name /*$a0*/)
- // line 144, offset 0x80038f88
+ // line 149, offset 0x80038498
 	/* begin block 1 */
-		// Start line: 145
-		// Start offset: 0x80038F88
+		// Start line: 150
+		// Start offset: 0x80038498
 		// Variables:
 	// 		long *screen; // $s0
 	/* end block 1 */
-	// End offset: 0x80038FCC
-	// End Line: 151
+	// End offset: 0x800384DC
+	// End Line: 156
 
 	/* begin block 2 */
-		// Start line: 290
+		// Start line: 300
 	/* end block 2 */
-	// End Line: 291
+	// End Line: 301
+
+/* File: C:\kain2\game\PSX\MAIN.C */
 
 void show_screen(char *name)
 
@@ -57,7 +58,7 @@ void show_screen(char *name)
   
   addr = LOAD_ReadFile(name,'\v');
   if (addr != (long *)0x0) {
-    LOAD_LoadTIM2(addr,0,gameTrackerX.gameData.asmData.dispPage << 8,0x200,0x100);
+    LOAD_LoadTIM2(addr,0,DAT_800d20d0 << 8,0x200,0x100);
     MEMPACK_Free((char *)addr);
   }
   return;
@@ -67,50 +68,21 @@ void show_screen(char *name)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ DoCinematicStuff(struct GameTracker *gameTracker /*$a0*/, struct MainTracker *mainTracker /*$a1*/)
- // line 186, offset 0x80038fdc
+// void /*$ra*/ play_movie(char *name /*$s0*/)
+ // line 188, offset 0x800384ec
 	/* begin block 1 */
-		// Start line: 375
+		// Start line: 379
 	/* end block 1 */
-	// End Line: 376
+	// End Line: 380
 
-void DoCinematicStuff(GameTracker *gameTracker,MainTracker *mainTracker)
+void play_movie(char *name)
 
 {
   int iVar1;
   
   iVar1 = CINE_Load();
   if (iVar1 != 0) {
-    CINE_Play("\\PUBLOGO.STR;1",0x4001,2);
-    ClearDisplay();
-    CINE_Play("\\CRYLOGO.STR;1",0x4001,2);
-    ClearDisplay();
-    CINE_Unload();
-  }
-  return;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// void /*$ra*/ play_intro_movie()
- // line 214, offset 0x80039040
-	/* begin block 1 */
-		// Start line: 431
-	/* end block 1 */
-	// End Line: 432
-
-/* WARNING: Unknown calling convention yet parameter storage is locked */
-
-void play_intro_movie(void)
-
-{
-  int iVar1;
-  
-  iVar1 = CINE_Load();
-  if (iVar1 != 0) {
-    CINE_Play("\\KAININT.STR;1",0x4001,2);
+    CINE_Play(name,0xffff,2);
     ClearDisplay();
     CINE_Unload();
   }
@@ -122,16 +94,18 @@ void play_intro_movie(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ InitMainTracker(struct MainTracker *mainTracker /*$a0*/)
- // line 238, offset 0x80039088
+ // line 206, offset 0x80038534
 	/* begin block 1 */
-		// Start line: 479
+		// Start line: 415
 	/* end block 1 */
-	// End Line: 480
+	// End Line: 416
 
 	/* begin block 2 */
-		// Start line: 480
+		// Start line: 416
 	/* end block 2 */
-	// End Line: 481
+	// End Line: 417
+
+/* File: C:\kain2\game\PSX\MAIN.C */
 
 void InitMainTracker(MainTracker *mainTracker)
 
@@ -147,30 +121,32 @@ void InitMainTracker(MainTracker *mainTracker)
 // decompiled code
 // original method signature: 
 // char * /*$ra*/ FindTextInLine(char *search_match /*$a0*/, char *search_str /*$a1*/)
- // line 245, offset 0x80039098
+ // line 213, offset 0x80038544
 	/* begin block 1 */
-		// Start line: 247
-		// Start offset: 0x80039098
+		// Start line: 215
+		// Start offset: 0x80038544
 		// Variables:
 	// 		char *match_pos; // $a2
 	/* end block 1 */
-	// End offset: 0x80039110
-	// End Line: 261
+	// End offset: 0x800385BC
+	// End Line: 229
 
 	/* begin block 2 */
-		// Start line: 493
+		// Start line: 429
 	/* end block 2 */
-	// End Line: 494
+	// End Line: 430
 
 	/* begin block 3 */
-		// Start line: 494
+		// Start line: 430
 	/* end block 3 */
-	// End Line: 495
+	// End Line: 431
 
 	/* begin block 4 */
-		// Start line: 496
+		// Start line: 432
 	/* end block 4 */
-	// End Line: 497
+	// End Line: 433
+
+/* File: C:\kain2\game\PSX\MAIN.C */
 
 char * FindTextInLine(char *search_match,char *search_str)
 
@@ -208,16 +184,18 @@ char * FindTextInLine(char *search_match,char *search_str)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ ExtractWorldName(char *worldName /*$a0*/, char *levelName /*$a1*/)
- // line 263, offset 0x80039120
+ // line 231, offset 0x800385cc
 	/* begin block 1 */
-		// Start line: 529
+		// Start line: 465
 	/* end block 1 */
-	// End Line: 530
+	// End Line: 466
 
 	/* begin block 2 */
-		// Start line: 530
+		// Start line: 466
 	/* end block 2 */
-	// End Line: 531
+	// End Line: 467
+
+/* File: C:\kain2\game\PSX\MAIN.C */
 
 void ExtractWorldName(char *worldName,char *levelName)
 
@@ -240,16 +218,18 @@ void ExtractWorldName(char *worldName,char *levelName)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ ExtractLevelNum(char *levelNum /*$a0*/, char *levelName /*$a1*/)
- // line 272, offset 0x8003916c
+ // line 240, offset 0x80038618
 	/* begin block 1 */
-		// Start line: 547
+		// Start line: 483
 	/* end block 1 */
-	// End Line: 548
+	// End Line: 484
 
 	/* begin block 2 */
-		// Start line: 548
+		// Start line: 484
 	/* end block 2 */
-	// End Line: 549
+	// End Line: 485
+
+/* File: C:\kain2\game\PSX\MAIN.C */
 
 void ExtractLevelNum(char *levelNum,char *levelName)
 
@@ -258,13 +238,13 @@ void ExtractLevelNum(char *levelNum,char *levelName)
   
   bVar1 = *levelName;
   while (bVar1 != 0x2d) {
-    if ((uint)bVar1 - 0x30 < 10) goto LAB_800391ac;
+    if ((uint)bVar1 - 0x30 < 10) goto LAB_80038658;
     levelName = (char *)((byte *)levelName + 1);
     bVar1 = *levelName;
   }
   bVar1 = *levelName;
   while ((uint)bVar1 - 0x30 < 10) {
-LAB_800391ac:
+LAB_80038658:
     bVar1 = *levelName;
     levelName = (char *)((byte *)levelName + 1);
     *levelNum = bVar1;
@@ -279,86 +259,95 @@ LAB_800391ac:
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ ProcessArgs(char *argFileName /*$a0*/, char *baseAreaName /*$s3*/, struct GameTracker *gameTracker /*$s2*/)
- // line 369, offset 0x800391d8
+// void /*$ra*/ ProcessArgs(char *baseAreaName /*$s3*/, struct GameTracker *gameTracker /*$s2*/)
+ // line 338, offset 0x80038684
 	/* begin block 1 */
-		// Start line: 370
-		// Start offset: 0x800391D8
+		// Start line: 339
+		// Start offset: 0x80038684
 		// Variables:
 	// 		char levelNum[32]; // stack offset -88
 	// 		char worldName[32]; // stack offset -56
 	// 		long *argData; // $s1
 	/* end block 1 */
-	// End offset: 0x80039400
-	// End Line: 589
+	// End offset: 0x800388A4
+	// End Line: 565
 
 	/* begin block 2 */
-		// Start line: 695
+		// Start line: 632
 	/* end block 2 */
-	// End Line: 696
+	// End Line: 633
 
-void ProcessArgs(char *argFileName,char *baseAreaName,GameTracker *gameTracker)
+/* File: C:\kain2\game\PSX\MAIN.C */
+
+void ProcessArgs(char *baseAreaName,GameTracker *gameTracker)
 
 {
+  char cVar1;
+  char cVar2;
   long *levelName;
-  char *pcVar1;
+  char *pcVar3;
   char acStack88 [32];
   char acStack56 [32];
   
-  levelName = LOAD_ReadFile(argFileName,'\n');
+  levelName = LOAD_ReadFile(s__kain2_game_psx_kain2_arg_800cf8a0,'\n');
+  cVar2 = DAT_800cf939;
+  cVar1 = DAT_800cf938;
   if (levelName == (long *)0x0) {
-    *(undefined4 *)baseAreaName = 0x65646e75;
-    baseAreaName[4] = 'r';
-    baseAreaName[5] = '1';
-    baseAreaName[6] = '\0';
+    *(undefined4 *)baseAreaName = DAT_800cf934;
+    baseAreaName[4] = cVar1;
+    baseAreaName[5] = cVar2;
+    baseAreaName[6] = DAT_800cf93a;
   }
   else {
     ExtractWorldName(acStack56,(char *)levelName);
     ExtractLevelNum(acStack88,(char *)levelName);
-    sprintf(baseAreaName,"%s%s");
-    pcVar1 = FindTextInLine("-TIMEOUT",(char *)levelName);
-    if (pcVar1 != (char *)0x0) {
+    sprintf(baseAreaName,&LAB_800cf8bc,acStack56,acStack88);
+    pcVar3 = FindTextInLine(s__NOSOUND_800cf8c4,(char *)levelName);
+    if (pcVar3 != (char *)0x0) {
+      nosound = 1;
+      nomusic = 1;
+    }
+    pcVar3 = FindTextInLine(s__NOMUSIC_800cf8d0,(char *)levelName);
+    if (pcVar3 != (char *)0x0) {
+      nomusic = 1;
+    }
+    pcVar3 = FindTextInLine(s__TIMEOUT_800cf8dc,(char *)levelName);
+    if (pcVar3 != (char *)0x0) {
       gameTracker->debugFlags = gameTracker->debugFlags | 0x20000;
     }
-    pcVar1 = FindTextInLine("-DEMO",(char *)levelName);
-    if (pcVar1 != (char *)0x0) {
-      gameTrackerX.enemyPlanPool._1_1_ = 1;
+    pcVar3 = FindTextInLine(s__DEMO_800cf8e8,(char *)levelName);
+    if (pcVar3 != (char *)0x0) {
+      DAT_800d22d1 = 1;
     }
-    pcVar1 = FindTextInLine("-MAINMENU",(char *)levelName);
-    if (pcVar1 != (char *)0x0) {
+    pcVar3 = FindTextInLine(s__MAINMENU_800cf8f0,(char *)levelName);
+    if (pcVar3 != (char *)0x0) {
       DoMainMenu = 1;
     }
-    pcVar1 = FindTextInLine("-INSPECTRAL",(char *)levelName);
-    if (pcVar1 != (char *)0x0) {
-      gameTrackerX.gameData.asmData.MorphType = 1;
+    pcVar3 = FindTextInLine(s__INSPECTRAL_800cf8fc,(char *)levelName);
+    if (pcVar3 != (char *)0x0) {
+      DAT_800d20d6 = 1;
     }
-    pcVar1 = FindTextInLine("-VOICE",(char *)levelName);
-    if (pcVar1 != (char *)0x0) {
+    pcVar3 = FindTextInLine(s__VOICE_800cf908,(char *)levelName);
+    if (pcVar3 != (char *)0x0) {
       gameTracker->debugFlags = gameTracker->debugFlags | 0x80000;
     }
-    pcVar1 = FindTextInLine("-DEBUG_CD",(char *)levelName);
-    if (pcVar1 != (char *)0x0) {
+    pcVar3 = FindTextInLine(s__DEBUG_CD_800cf910,(char *)levelName);
+    if (pcVar3 != (char *)0x0) {
       gameTracker->debugFlags = gameTracker->debugFlags | 0x80000000;
     }
-    pcVar1 = FindTextInLine("-LOADGAME",(char *)levelName);
-    if (pcVar1 != (char *)0x0) {
-      gameTrackerX.streamFlags = gameTrackerX.streamFlags | 0x200000;
+    pcVar3 = FindTextInLine(s__LOADGAME_800cf91c,(char *)levelName);
+    if (pcVar3 != (char *)0x0) {
+      DAT_800d2210 = DAT_800d2210 | 0x200000;
     }
-    pcVar1 = FindTextInLine("-ALLWARP",(char *)levelName);
-    if (pcVar1 != (char *)0x0) {
-      gameTrackerX.streamFlags = gameTrackerX.streamFlags | 0x400000;
+    pcVar3 = FindTextInLine(s__ALLWARP_800cf928,(char *)levelName);
+    if (pcVar3 != (char *)0x0) {
+      DAT_800d2210 = DAT_800d2210 | 0x400000;
     }
-    *(undefined *)((int)&gameTracker->enemyPlanPool + 3) = 1;
+    gameTracker->demoEnabled = '\x01';
     gameTracker->debugFlags = gameTracker->debugFlags | 0x80000;
     MEMPACK_Free((char *)levelName);
   }
-  if ((gameTrackerX.streamFlags & 0x200000U) != 0) {
-    *(undefined4 *)baseAreaName = 0x65646e75;
-    baseAreaName[4] = 'r';
-    baseAreaName[5] = '1';
-    baseAreaName[6] = '\0';
-    gameTrackerX.gameData.asmData.MorphType = 1;
-  }
+  DAT_800d218c = DAT_800d218c | 0x40000;
   return;
 }
 
@@ -367,23 +356,23 @@ void ProcessArgs(char *argFileName,char *baseAreaName,GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ InitDisplay()
- // line 591, offset 0x8003941c
+ // line 569, offset 0x800388d0
 	/* begin block 1 */
-		// Start line: 592
-		// Start offset: 0x8003941C
+		// Start line: 570
+		// Start offset: 0x800388D0
 		// Variables:
 	// 		int i; // $a1
 	// 		struct RECT r; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x8003956C
-	// End Line: 649
+	// End offset: 0x80038A20
+	// End Line: 627
 
 	/* begin block 2 */
-		// Start line: 1144
+		// Start line: 1100
 	/* end block 2 */
-	// End Line: 1145
+	// End Line: 1101
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\PSX\MAIN.C */
 
 void InitDisplay(void)
 
@@ -393,40 +382,28 @@ void InitDisplay(void)
   undefined4 local_10;
   undefined4 local_c;
   
-  local_10 = 0x200;
-  local_c = 0x2000200;
+  local_10 = DAT_800cf93c;
+  local_c = DAT_800cf940;
   ResetGraph(3);
-  SetGraphDebug('\0');
-  SetDefDrawEnv((undefined2 *)&draw,0,0,0x200,0xf0);
-  SetDefDispEnv((undefined2 *)&disp,0,0,0x200,0xf0);
-  SetDefDrawEnv((undefined2 *)&DRAWENV_800d1ed8,0,0x100,0x200,0xf0);
-  SetDefDispEnv((undefined2 *)&DISPENV_800d1e64,0,0x100,0x200,0xf0);
+  SetGraphDebug(0);
+  SetDefDrawEnv(draw,0,0,0x200,0xf0);
+  SetDefDispEnv(disp,0,0,0x200,0xf0);
+  SetDefDrawEnv(draw + 1,0,0x100,0x200,0xf0);
+  SetDefDispEnv(disp + 1,0,0x100,0x200,0xf0);
   iVar2 = 0;
-  pBVar1 = &clearRect;
-                    /* WARNING: Read-only address (ram,0x800d1eee) is written */
-  DRAWENV_800d1ed8.dtd = '\x01';
-                    /* WARNING: Read-only address (ram,0x800d1e92) is written */
-  draw.dtd = '\x01';
-                    /* WARNING: Read-only address (ram,0x800d1eef) is written */
-  DRAWENV_800d1ed8.dfe = '\x01';
-                    /* WARNING: Read-only address (ram,0x800d1e93) is written */
-  draw.dfe = '\x01';
-                    /* WARNING: Read-only address (ram,0x800d1ef0) is written */
-  DRAWENV_800d1ed8.isbg = '\0';
-                    /* WARNING: Read-only address (ram,0x800d1e94) is written */
-  draw.isbg = '\0';
-                    /* WARNING: Read-only address (ram,0x800d1e95) is written */
-  draw.r0 = '\0';
-                    /* WARNING: Read-only address (ram,0x800d1e96) is written */
-  draw.g0 = '\0';
-                    /* WARNING: Read-only address (ram,0x800d1e97) is written */
-  draw.b0 = '\0';
-                    /* WARNING: Read-only address (ram,0x800d1ef1) is written */
-  DRAWENV_800d1ed8.r0 = '\0';
-                    /* WARNING: Read-only address (ram,0x800d1ef2) is written */
-  DRAWENV_800d1ed8.g0 = '\0';
-                    /* WARNING: Read-only address (ram,0x800d1ef3) is written */
-  DRAWENV_800d1ed8.b0 = '\0';
+  pBVar1 = clearRect;
+  draw[1].dtd = '\x01';
+  draw[0].dtd = '\x01';
+  draw[1].dfe = '\x01';
+  draw[0].dfe = '\x01';
+  draw[1].isbg = '\0';
+  draw[0].isbg = '\0';
+  draw[0].r0 = '\0';
+  draw[0].g0 = '\0';
+  draw[0].b0 = '\0';
+  draw[1].r0 = '\0';
+  draw[1].g0 = '\0';
+  draw[1].b0 = '\0';
   do {
     *(undefined *)((int)&pBVar1->tag + 3) = 3;
     pBVar1->code = '\x02';
@@ -441,9 +418,9 @@ void InitDisplay(void)
     pBVar1 = pBVar1 + 1;
   } while (iVar2 < 2);
   ClearDisplay();
-  ClearOTagR((undefined4 *)gameTrackerX.defVVRemoveDist,0xc00);
-  ClearOTagR((undefined4 *)gameTrackerX.defRemoveDist,0xc00);
-  ClearImage(&local_10,0,0xff,0);
+  ClearOTagR(DAT_800d22a4,0xc00);
+  ClearOTagR(DAT_800d22a8,0xc00);
+  ClearImage((RECT *)&local_10,'\0',-1,'\0');
   return;
 }
 
@@ -452,21 +429,21 @@ void InitDisplay(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ StartTimer()
- // line 660, offset 0x800395b0
+ // line 638, offset 0x80038a64
 	/* begin block 1 */
-		// Start line: 1318
+		// Start line: 1274
 	/* end block 1 */
-	// End Line: 1319
+	// End Line: 1275
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\PSX\MAIN.C */
 
 void StartTimer(void)
 
 {
   EnterCriticalSection();
-  __timerEvent = OpenEvent();
-  EnableEvent();
-  SetRCnt(0xf2000000,0xffff,0x1001);
+  __timerEvent = OpenEvent(0xf2000000,2,0x1000,TimerTick);
+  EnableEvent(__timerEvent);
+  SetRCnt(0xf2000000,0xffff,(long)&DAT_00001001);
   StartRCnt(0xf2000000);
   ExitCriticalSection();
   gTimerEnabled = 1;
@@ -478,18 +455,18 @@ void StartTimer(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VblTick()
- // line 734, offset 0x8003961c
+ // line 712, offset 0x80038ad0
 	/* begin block 1 */
-		// Start line: 1467
+		// Start line: 1423
 	/* end block 1 */
-	// End Line: 1468
+	// End Line: 1424
 
 	/* begin block 2 */
-		// Start line: 1469
+		// Start line: 1425
 	/* end block 2 */
-	// End Line: 1470
+	// End Line: 1426
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\PSX\MAIN.C */
 
 void VblTick(void)
 
@@ -497,12 +474,12 @@ void VblTick(void)
   if (devstation != 0) {
     trap(0x400);
   }
-  gameTrackerX.vblFrames = gameTrackerX.vblFrames + 1;
-  gameTrackerX.vblCount = gameTrackerX.vblCount + 1;
-  if ((gameTrackerX.reqDisp != (void *)0x0) && (DAT_800d223c < gameTrackerX.vblFrames)) {
-    PutDispEnv((ushort *)gameTrackerX.reqDisp);
-    gameTrackerX.reqDisp = (void *)0x0;
-    gameTrackerX.vblFrames = 0;
+  DAT_800d2200 = DAT_800d2200 + 1;
+  DAT_800d2204 = DAT_800d2204 + 1;
+  if ((DAT_800d21e4 != (DISPENV *)0x0) && (DAT_800d233c < DAT_800d2200)) {
+    PutDispEnv(DAT_800d21e4);
+    DAT_800d21e4 = (DISPENV *)0x0;
+    DAT_800d2200 = 0;
   }
   return;
 }
@@ -512,30 +489,29 @@ void VblTick(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DrawCallback()
- // line 752, offset 0x80039688
+ // line 730, offset 0x80038b3c
 	/* begin block 1 */
-		// Start line: 1509
+		// Start line: 1465
 	/* end block 1 */
-	// End Line: 1510
+	// End Line: 1466
 
 	/* begin block 2 */
-		// Start line: 1510
+		// Start line: 1466
 	/* end block 2 */
-	// End Line: 1511
+	// End Line: 1467
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\PSX\MAIN.C */
 
 void DrawCallback(void)
 
 {
   ulong uVar1;
   
-  if (gameTrackerX.drawTimerReturn != (long *)0x0) {
-    uVar1 = TIMER_TimeDiff(gameTrackerX.usecsStartDraw);
-    *gameTrackerX.drawTimerReturn = uVar1;
-    gameTrackerX.drawTimerReturn = (long *)0x0;
-    gameTrackerX.reqDisp =
-         (void *)((int)gameTrackerX.disp + gameTrackerX.gameData.asmData.dispPage * 0x14);
+  if (DAT_800d21e8 != (ulong *)0x0) {
+    uVar1 = TIMER_TimeDiff(DAT_800d21ec);
+    *DAT_800d21e8 = uVar1;
+    DAT_800d21e8 = (ulong *)0x0;
+    DAT_800d21e4 = DAT_800d21f0 + DAT_800d20d0 * 0x14;
   }
   return;
 }
@@ -544,58 +520,65 @@ void DrawCallback(void)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ FadeOutSayingLoading(struct GameTracker *gameTracker /*$s0*/)
- // line 802, offset 0x800396e0
+// void /*$ra*/ FadeOutSayingLoading(struct GameTracker *gameTracker /*$s1*/)
+ // line 780, offset 0x80038b94
 	/* begin block 1 */
-		// Start line: 803
-		// Start offset: 0x800396E0
+		// Start line: 781
+		// Start offset: 0x80038B94
 		// Variables:
 	// 		struct POLY_F4_SEMITRANS *transPrim; // $s2
 	// 		unsigned long **drawot; // $s3
-	// 		long fadeTime; // $s1
+	// 		long fadeTime; // $s0
 	/* end block 1 */
-	// End offset: 0x80039804
-	// End Line: 831
+	// End offset: 0x80038CC8
+	// End Line: 814
 
 	/* begin block 2 */
-		// Start line: 1600
+		// Start line: 1556
 	/* end block 2 */
-	// End Line: 1601
+	// End Line: 1557
+
+/* File: C:\kain2\game\PSX\MAIN.C */
 
 void FadeOutSayingLoading(GameTracker *gameTracker)
 
 {
-  int iVar1;
-  undefined uVar2;
-  int iVar3;
-  ulong *puVar4;
-  int iVar5;
+  bool bVar1;
+  int iVar2;
+  undefined uVar3;
+  int iVar4;
+  ulong *puVar5;
+  ulong **ot;
   
-  iVar3 = 0;
-  iVar5 = gameTracker->defVVRemoveDist;
-  puVar4 = gameTracker->primPool->nextPrim;
-  DRAW_TranslucentQuad
-            (0,0,0x200,0,0,0xf0,0x200,0xf0,0,0,0,2,gameTracker->primPool,(ulong **)(iVar5 + 4));
+  ot = gameTracker->drawOT;
+  puVar5 = gameTracker->primPool->nextPrim;
+  DRAW_TranslucentQuad(0,0,0x200,0,0,0xf0,0x200,0xf0,0,0,0,2,gameTracker->primPool,ot);
+  iVar4 = 0x10;
   FONT_Flush();
   do {
+    if (0xff < iVar4) {
+      iVar4 = 0xff;
+    }
     gameTracker->drawPage = 1 - gameTracker->drawPage;
-    uVar2 = (undefined)iVar3;
-    *(undefined *)(puVar4 + 2) = uVar2;
-    *(undefined *)((int)puVar4 + 9) = uVar2;
-    *(undefined *)((int)puVar4 + 10) = uVar2;
+    uVar3 = (undefined)iVar4;
+    *(undefined *)(puVar5 + 2) = uVar3;
+    *(undefined *)((int)puVar5 + 9) = uVar3;
+    *(undefined *)((int)puVar5 + 10) = uVar3;
     do {
-      iVar1 = CheckVolatile(gameTracker->drawTimerReturn);
-    } while (iVar1 != 0);
-    PutDrawEnv((undefined4 *)(&draw + gameTracker->drawPage));
+      iVar2 = CheckVolatile(gameTracker->drawTimerReturn);
+    } while (iVar2 != 0);
+    PutDrawEnv(draw + gameTracker->drawPage);
     do {
-      iVar1 = CheckVolatile(gameTracker->reqDisp);
-    } while (iVar1 != 0);
-    iVar3 = iVar3 + 0x20;
-    iVar1 = (gameTracker->gameData).asmData.dispPage;
-    *(ulong **)&gameTracker->drawTimerReturn = &gameTracker->timeMult;
-    (gameTracker->gameData).asmData.dispPage = 1 - iVar1;
-    DrawOTag((undefined4 *)(iVar5 + 0x2ffc));
-  } while (iVar3 < 0xff);
+      iVar2 = CheckVolatile(gameTracker->reqDisp);
+    } while (iVar2 != 0);
+    iVar2 = (gameTracker->gameData).asmData.dispPage;
+    *(ulong **)&gameTracker->drawTimerReturn = &gameTracker->drawTime;
+    (gameTracker->gameData).asmData.dispPage = 1 - iVar2;
+    VSync(0);
+    DrawOTag((u_long *)(ot + 0xbff));
+    bVar1 = iVar4 != 0xff;
+    iVar4 = iVar4 + 0x10;
+  } while (bVar1);
   return;
 }
 
@@ -604,33 +587,32 @@ void FadeOutSayingLoading(GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ CheckForDevStation()
- // line 833, offset 0x80039824
+ // line 816, offset 0x80038ce8
 	/* begin block 1 */
-		// Start line: 834
-		// Start offset: 0x80039824
+		// Start line: 817
+		// Start offset: 0x80038CE8
 		// Variables:
-	// 		long *a1; // stack offset -16
-	// 		long *a2; // stack offset -12
+	// 		long *a1; // stack offset -8
+	// 		long *a2; // stack offset -4
 	/* end block 1 */
-	// End offset: 0x80039894
-	// End Line: 860
+	// End offset: 0x80038D40
+	// End Line: 843
 
 	/* begin block 2 */
-		// Start line: 1655
+		// Start line: 1618
 	/* end block 2 */
-	// End Line: 1656
+	// End Line: 1619
 
-/* WARNING: Removing unreachable block (ram,0x80039870) */
+/* WARNING: Removing unreachable block (ram,0x80038d30) */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\PSX\MAIN.C */
 
 void CheckForDevStation(void)
 
 {
+  devstation = 1;
   DAT_80180000 = 0;
   _DAT_80380000 = 0x12345678;
-  devstation = 1;
-  GXFilePrint("This is a dev station\n");
   return;
 }
 
@@ -639,32 +621,59 @@ void CheckForDevStation(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MAIN_ShowLoadingScreen()
- // line 862, offset 0x800398a4
+ // line 845, offset 0x80038d48
 	/* begin block 1 */
-		// Start line: 863
-		// Start offset: 0x800398A4
+		// Start line: 846
+		// Start offset: 0x80038D48
 		// Variables:
 	// 		long *loadingScreen; // $s0
+	// 		char langChar[5]; // stack offset -88
+	// 		int lang; // $v0
+
+		/* begin block 1.1 */
+			// Start line: 854
+			// Start offset: 0x80038D90
+			// Variables:
+		// 		char filename[64]; // stack offset -80
+		/* end block 1.1 */
+		// End offset: 0x80038D90
+		// End Line: 855
 	/* end block 1 */
-	// End offset: 0x800398F8
-	// End Line: 875
+	// End offset: 0x80038DF4
+	// End Line: 872
 
 	/* begin block 2 */
-		// Start line: 1728
+		// Start line: 1677
 	/* end block 2 */
-	// End Line: 1729
+	// End Line: 1678
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\PSX\MAIN.C */
 
 void MAIN_ShowLoadingScreen(void)
 
 {
+  language_t lVar1;
   long *addr;
+  char *buffer;
+  byte bStack89;
+  undefined4 local_58;
+  undefined local_54;
+  char acStack80 [64];
   
+  local_58 = DAT_800cf944;
+  local_54 = DAT_800cf948;
   VSync(0);
-  addr = LOAD_ReadFile("\\kain2\\game\\psx\\loading.tim",'\v');
+  lVar1 = localstr_get_language();
+  if (lVar1 == language_english) {
+    buffer = s__kain2_game_psx_loading_tim_800cf96c;
+  }
+  else {
+    buffer = acStack80;
+    sprintf(buffer,s__kain2_game_psx_loading_c_tim_800cf94c,(uint)(&bStack89)[lVar1]);
+  }
+  addr = LOAD_ReadFile(buffer,'\v');
   if (addr != (long *)0x0) {
-    LOAD_LoadTIM2(addr,0,gameTrackerX.gameData.asmData.dispPage << 8,0x200,0x100);
+    LOAD_LoadTIM2(addr,0,DAT_800d20d0 << 8,0x200,0x100);
     MEMPACK_Free((char *)addr);
   }
   return;
@@ -675,18 +684,20 @@ void MAIN_ShowLoadingScreen(void)
 // decompiled code
 // original method signature: 
 // long * /*$ra*/ MAIN_LoadTim(char *name /*$a0*/)
- // line 877, offset 0x80039908
+ // line 874, offset 0x80038e08
 	/* begin block 1 */
-		// Start line: 878
-		// Start offset: 0x80039908
+		// Start line: 875
+		// Start offset: 0x80038E08
 	/* end block 1 */
-	// End offset: 0x80039908
-	// End Line: 878
+	// End offset: 0x80038E08
+	// End Line: 875
 
 	/* begin block 2 */
-		// Start line: 1761
+		// Start line: 1741
 	/* end block 2 */
-	// End Line: 1762
+	// End Line: 1742
+
+/* File: C:\kain2\game\PSX\MAIN.C */
 
 long * MAIN_LoadTim(char *name)
 
@@ -702,20 +713,22 @@ long * MAIN_LoadTim(char *name)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ init_menus(struct GameTracker *gt /*$s1*/)
- // line 888, offset 0x80039928
+ // line 885, offset 0x80038e28
 	/* begin block 1 */
-		// Start line: 889
-		// Start offset: 0x80039928
+		// Start line: 886
+		// Start offset: 0x80038E28
 		// Variables:
 	// 		struct menu_t *menu; // $s0
 	/* end block 1 */
-	// End offset: 0x80039928
-	// End Line: 889
+	// End offset: 0x80038E28
+	// End Line: 886
 
 	/* begin block 2 */
-		// Start line: 1783
+		// Start line: 1763
 	/* end block 2 */
-	// End Line: 1784
+	// End Line: 1764
+
+/* File: C:\kain2\game\PSX\MAIN.C */
 
 void init_menus(GameTracker *gt)
 
@@ -735,15 +748,13 @@ void init_menus(GameTracker *gt)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MAIN_DoMainInit()
- // line 900, offset 0x80039974
+ // line 897, offset 0x80038e74
 	/* begin block 1 */
-		// Start line: 1807
+		// Start line: 1787
 	/* end block 1 */
-	// End Line: 1808
+	// End Line: 1788
 
-/* WARNING: Removing unreachable block (ram,0x800399f4) */
-/* WARNING: Removing unreachable block (ram,0x80039a14) */
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\PSX\MAIN.C */
 
 void MAIN_DoMainInit(void)
 
@@ -754,14 +765,26 @@ void MAIN_DoMainInit(void)
   SetGeomScreen(0x140);
   VRAM_InitVramBlockCache();
   FONT_Init();
-  gameTrackerX.reqDisp = (void *)0x0;
+  DAT_800d21e4 = 0;
   VSyncCallback(VblTick);
   DrawSyncCallback(DrawCallback);
   GAMEPAD_Init();
   SOUND_Init();
   VOICEXA_Init();
-  init_menus(&gameTrackerX);
-  SAVE_Init(&gameTrackerX);
+  if (nosound != 0) {
+    SOUND_SfxOff();
+    DAT_800d2290 = 0;
+    DAT_800d2292 = 0;
+  }
+  if (nomusic != 0) {
+    SOUND_MusicOff();
+    DAT_800d2291 = 0;
+  }
+  if ((DAT_800d218c & 0x80000) == 0) {
+    DAT_800d2292 = 0;
+  }
+  init_menus((GameTracker *)&gameTrackerX);
+  SAVE_Init((GameTracker *)&gameTrackerX);
   srand(0);
   return;
 }
@@ -771,27 +794,29 @@ void MAIN_DoMainInit(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MAIN_ShowPalWarningScreen(struct GameTracker *gameTracker /*$s1*/)
- // line 936, offset 0x80039a58
+ // line 932, offset 0x80038f70
 	/* begin block 1 */
-		// Start line: 937
-		// Start offset: 0x80039A58
+		// Start line: 933
+		// Start offset: 0x80038F70
 		// Variables:
 	// 		long *warningScreen; // $s0
 	/* end block 1 */
-	// End offset: 0x80039AA8
-	// End Line: 946
+	// End offset: 0x80038FC0
+	// End Line: 942
 
 	/* begin block 2 */
-		// Start line: 1880
+		// Start line: 1858
 	/* end block 2 */
-	// End Line: 1881
+	// End Line: 1859
+
+/* File: C:\kain2\game\PSX\MAIN.C */
 
 void MAIN_ShowPalWarningScreen(GameTracker *gameTracker)
 
 {
   long *addr;
   
-  addr = LOAD_ReadFile("\\kain2\\game\\psx\\warning.tim",'\v');
+  addr = LOAD_ReadFile(s__kain2_game_psx_warning_tim_800cf988,'\v');
   if (addr != (long *)0x0) {
     LOAD_LoadTIM(addr,0,(gameTracker->gameData).asmData.dispPage << 8,0,0);
     MEMPACK_Free((char *)addr);
@@ -803,25 +828,129 @@ void MAIN_ShowPalWarningScreen(GameTracker *gameTracker)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ MAIN_MainMenuInit()
- // line 1011, offset 0x80039abc
+// void /*$ra*/ MAIN_InitVolume()
+ // line 956, offset 0x80038fd4
 	/* begin block 1 */
-		// Start line: 2014
+		// Start line: 1909
 	/* end block 1 */
-	// End Line: 2015
+	// End Line: 1910
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\PSX\MAIN.C */
+
+void MAIN_InitVolume(void)
+
+{
+  aadInitVolume();
+  aadStartMasterVolumeFade
+            (DAT_800d2280,0x100,(TDRFuncPtr_aadStartMasterVolumeFade2fadeCompleteCallback)0x0);
+  DAT_800d2293 = 1;
+  aadSetNoUpdateMode(0);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ MAIN_ResetGame()
+ // line 964, offset 0x80039014
+	/* begin block 1 */
+		// Start line: 1910
+	/* end block 1 */
+	// End Line: 1911
+
+/* File: C:\kain2\game\PSX\MAIN.C */
+
+void MAIN_ResetGame(void)
+
+{
+  GAMELOOP_SetScreenWipe(0,0,-1);
+  DAT_800d220c = DAT_800d220c & 0xffffff6e;
+  RAZIEL_StartNewGame();
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ MAIN_MainMenuInit()
+ // line 974, offset 0x80039064
+	/* begin block 1 */
+		// Start line: 975
+		// Start offset: 0x80039064
+
+		/* begin block 1.1 */
+			// Start line: 975
+			// Start offset: 0x80039064
+			// Variables:
+		// 		char sfxFileName[64]; // stack offset -72
+		/* end block 1.1 */
+		// End offset: 0x80039188
+		// End Line: 995
+	/* end block 1 */
+	// End offset: 0x80039188
+	// End Line: 997
+
+	/* begin block 2 */
+		// Start line: 1931
+	/* end block 2 */
+	// End Line: 1932
+
+/* WARNING: Removing unreachable block (ram,0x80039088) */
+/* WARNING: Removing unreachable block (ram,0x8003908c) */
+/* WARNING: Removing unreachable block (ram,0x800390d8) */
+/* File: C:\kain2\game\PSX\MAIN.C */
 
 void MAIN_MainMenuInit(void)
 
 {
+  undefined4 *puVar1;
+  undefined4 *puVar2;
+  long lVar3;
+  int iVar4;
+  undefined4 *puVar5;
+  undefined4 *puVar6;
+  undefined4 uVar7;
+  undefined4 uVar8;
+  undefined4 uVar9;
+  undefined4 local_48 [16];
+  
   mainMenuMode = 0;
   mainMenuTimeOut = 0;
-  mainMenuScreen = MAIN_LoadTim("\\kain2\\game\\psx\\frontend\\title1.tim");
+  puVar1 = &DAT_800cf9c0;
+  puVar2 = local_48;
+  do {
+    puVar6 = puVar2;
+    puVar5 = puVar1;
+    uVar7 = puVar5[1];
+    uVar8 = puVar5[2];
+    uVar9 = puVar5[3];
+    *puVar6 = *puVar5;
+    puVar6[1] = uVar7;
+    puVar6[2] = uVar8;
+    puVar6[3] = uVar9;
+    puVar1 = puVar5 + 4;
+    puVar2 = puVar6 + 4;
+  } while (puVar5 + 4 != (undefined4 *)(s_ainmenu_snf_800cf9dc + 4));
+  uVar7 = puVar5[5];
+  puVar6[4] = s_ainmenu_snf_800cf9dc._4_4_;
+  puVar6[5] = uVar7;
+  memset();
+  mainMenuSfx = 0;
+  lVar3 = LOAD_DoesFileExist((char *)local_48);
+  if (lVar3 != 0) {
+    mainMenuSfx = aadLoadDynamicSfx(s_mainmenu_800cf9e8,0,0);
+    while (iVar4 = aadGetNumLoadsQueued(), iVar4 != 0) {
+      aadProcessLoadQueue();
+    }
+  }
+  mainMenuScreen = MAIN_LoadTim(s__kain2_game_psx_frontend_title1__800cf9f4);
+  VRAM_EnableTerrainArea();
   menuface_initialize();
-  currentMenu = &mainMenu;
-  gameTrackerX.gameMode = 4;
-  menu_set(gameTrackerX.menu,menudefs_main_menu);
+  currentMenu = mainMenu;
+  DAT_800d223e = 4;
+  menu_set(DAT_800d20ec,menudefs_main_menu);
   return;
 }
 
@@ -830,21 +959,28 @@ void MAIN_MainMenuInit(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MAIN_FreeMainMenuStuff()
- // line 1032, offset 0x80039b18
+ // line 1011, offset 0x800391dc
 	/* begin block 1 */
-		// Start line: 2017
+		// Start line: 2020
 	/* end block 1 */
-	// End Line: 2018
+	// End Line: 2021
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\PSX\MAIN.C */
 
 void MAIN_FreeMainMenuStuff(void)
 
 {
+  int iVar1;
+  
   menuface_terminate();
-  if (mainMenuScreen != (long *)0x0) {
-    MEMPACK_Free((char *)mainMenuScreen);
-    mainMenuScreen = (long *)0x0;
+  VRAM_DisableTerrainArea();
+  if (mainMenuScreen != (char *)0x0) {
+    MEMPACK_Free(mainMenuScreen);
+    mainMenuScreen = (char *)0x0;
+  }
+  aadFreeDynamicSfx(mainMenuSfx);
+  while (iVar1 = aadGetNumLoadsQueued(), iVar1 != 0) {
+    aadProcessLoadQueue();
   }
   return;
 }
@@ -854,22 +990,35 @@ void MAIN_FreeMainMenuStuff(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MAIN_StartGame()
- // line 1063, offset 0x80039b54
+ // line 1046, offset 0x8003924c
 	/* begin block 1 */
-		// Start line: 2079
+		// Start line: 2090
 	/* end block 1 */
-	// End Line: 2080
+	// End Line: 2091
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+	/* begin block 2 */
+		// Start line: 2091
+	/* end block 2 */
+	// End Line: 2092
+
+/* File: C:\kain2\game\PSX\MAIN.C */
 
 void MAIN_StartGame(void)
 
 {
-  mainTrackerX.mainState = 2;
-  MAIN_FreeMainMenuStuff();
-  currentMenu = &standardMenu;
-  gEndGameNow = 0;
-  gameTrackerX.gameMode = 0;
+  if (mainMenuFading == 0) {
+    DAT_800d223e = 0;
+    currentMenu = (DebugMenuLine *)0x0;
+    mainMenuFading = 1;
+    GAMELOOP_SetScreenWipe(-0x1e,0x1e,10);
+  }
+  else {
+    mainTrackerX.mainState = 2;
+    MAIN_FreeMainMenuStuff();
+    gEndGameNow = 0;
+    mainMenuFading = 0;
+    currentMenu = standardMenu;
+  }
   return;
 }
 
@@ -878,37 +1027,43 @@ void MAIN_StartGame(void)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ MAIN_DoMainMenu(struct GameTracker *gameTracker /*$s0*/, struct MainTracker *mainTracker /*$a1*/, long menuPos /*$a2*/)
- // line 1083, offset 0x80039b8c
+ // line 1076, offset 0x800392b8
 	/* begin block 1 */
-		// Start line: 1084
-		// Start offset: 0x80039B8C
+		// Start line: 1077
+		// Start offset: 0x800392B8
 		// Variables:
 	// 		unsigned long **drawot; // $s1
 	/* end block 1 */
-	// End offset: 0x80039BEC
-	// End Line: 1153
+	// End offset: 0x8003937C
+	// End Line: 1161
 
 	/* begin block 2 */
-		// Start line: 2122
+		// Start line: 2156
 	/* end block 2 */
-	// End Line: 2123
+	// End Line: 2157
+
+/* File: C:\kain2\game\PSX\MAIN.C */
 
 long MAIN_DoMainMenu(GameTracker *gameTracker,MainTracker *mainTracker,long menuPos)
 
 {
   ulong **drawot;
   
-  drawot = (ulong **)gameTracker->defVVRemoveDist;
-  DrawPrim((int)(&clearRect + gameTracker->drawPage));
+  drawot = gameTracker->drawOT;
+  DrawPrim(clearRect + gameTracker->drawPage);
   GAMEPAD_Process(gameTracker);
+  DEBUG_Process(gameTracker);
   if (mainMenuScreen != (long *)0x0) {
     LOAD_LoadTIM2(mainMenuScreen,0,gameTracker->drawPage << 8,0x200,0x100);
   }
-  DEBUG_Process(gameTracker);
+  GAMELOOP_HandleScreenWipes(drawot);
   MENUFACE_RefreshFaces();
   FONT_Flush();
   mainMenuTimeOut = mainMenuTimeOut + 1;
   GAMELOOP_FlipScreenAndDraw(gameTracker,drawot);
+  if ((mainMenuFading != 0) && (gameTracker->wipeTime == -1)) {
+    MAIN_StartGame();
+  }
   return 0;
 }
 
@@ -916,84 +1071,63 @@ long MAIN_DoMainMenu(GameTracker *gameTracker,MainTracker *mainTracker,long menu
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ MAIN_ShowFeaturesInit()
- // line 1164, offset 0x80039c38
-	/* begin block 1 */
-		// Start line: 2312
-	/* end block 1 */
-	// End Line: 2313
-
-/* WARNING: Unknown calling convention yet parameter storage is locked */
-
-void MAIN_ShowFeaturesInit(void)
-
-{
-  mainMenuMode = 2;
-  mainMenuTimeOut = 0;
-  mainMenuFadeInTime = 0x1e;
-  mainMenuScreen = MAIN_LoadTim("\\kain2\\game\\psx\\mainmenu\\features.tim");
-  return;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// int /*$ra*/ MainG2(void *appData /*$fp*/)
- // line 1178, offset 0x80039c70
+// int /*$ra*/ MainG2(void *appData /*$s7*/)
+ // line 1178, offset 0x80039394
 	/* begin block 1 */
 		// Start line: 1179
-		// Start offset: 0x80039C70
+		// Start offset: 0x80039394
 		// Variables:
-	// 		struct MainTracker *mainTracker; // $s3
-	// 		struct GameTracker *gameTracker; // $s2
-	// 		long menuPos; // $s4
+	// 		struct MainTracker *mainTracker; // $s2
+	// 		struct GameTracker *gameTracker; // $s3
+	// 		long menuPos; // $s6
 		// Labels:
-		//		0x00001548	exit
+		//		0x0000175C	exit
 
 		/* begin block 1.1 */
-			// Start line: 1341
-			// Start offset: 0x80039E48
+			// Start line: 1365
+			// Start offset: 0x800395D8
 			// Variables:
-		// 		struct FullScreenItem *item; // $s1
+		// 		struct InterfaceItem *item; // $s1
 		// 		int timer; // $s0
 		/* end block 1.1 */
-		// End offset: 0x80039EC4
-		// End Line: 1383
+		// End offset: 0x80039660
+		// End Line: 1411
 	/* end block 1 */
-	// End offset: 0x8003A230
-	// End Line: 1669
+	// End offset: 0x80039990
+	// End Line: 1697
 
 	/* begin block 2 */
-		// Start line: 2344
+		// Start line: 2346
 	/* end block 2 */
-	// End Line: 2345
+	// End Line: 2347
+
+/* File: C:\kain2\game\PSX\MAIN.C */
 
 int MainG2(void *appData)
 
 {
   bool bVar1;
-  _G2Bool_Enum _Var2;
-  int iVar3;
+  long lVar2;
+  _G2Bool_Enum _Var3;
+  int iVar4;
   long menuPos;
   
   menuPos = 0;
-  GXFilePrint("Starting \"kain2\" built at %s on %s\n");
   CheckForDevStation();
   mainOptionsInit = '\0';
-  _Var2 = MainG2_InitEngine(appData,0x200,0xf0,(char *)0x0);
-  if (_Var2 != G2FALSE) {
+  _Var3 = MainG2_InitEngine(appData,0x200,0xf0,(char *)0x0);
+  if (_Var3 != G2FALSE) {
     MEMPACK_Init();
     LOAD_InitCd();
     StartTimer();
-    STREAM_InitLoader("\\BIGFILE.DAT;1","");
+    STREAM_InitLoader(s__BIGFILE_DAT_1_800cfa40,&LAB_800cfa50);
     localstr_set_language(~language_english);
-    GAMELOOP_SystemInit(&gameTrackerX);
-    gameTrackerX.dispOT._1_1_ = 0xff;
-    gameTrackerX.dispOT._0_1_ = 0xff;
-    gameTrackerX.disp = &disp;
-    ProcessArgs("\\kain2\\game\\psx\\kain2.arg",gameTrackerX.baseAreaName,&gameTrackerX);
-    InitMainTracker(&mainTrackerX);
+    GAMELOOP_SystemInit((GameTracker *)&gameTrackerX);
+    DAT_800d2299 = 0xff;
+    DAT_800d2298 = 0xff;
+    DAT_800d21f0 = disp;
+    ProcessArgs(&DAT_800d2228,(GameTracker *)&gameTrackerX);
+    InitMainTracker((MainTracker *)&mainTrackerX);
     MAIN_DoMainInit();
     mainTrackerX.mainState = 6;
     mainTrackerX.movieNum = 0;
@@ -1002,135 +1136,144 @@ int MainG2(void *appData)
       switch(mainTrackerX.mainState) {
       case 1:
         SOUND_UpdateSound();
-        if ((gameTrackerX.debugFlags & 0x80000U) != 0) {
+        if ((DAT_800d218c & 0x80000) != 0) {
           VOICEXA_Tick();
         }
-        PSX_GameLoop(&gameTrackerX);
-        if (gameTrackerX.levelDone != 0) {
-          FadeOutSayingLoading(&gameTrackerX);
+        PSX_GameLoop((GameTracker *)&gameTrackerX);
+        if (DAT_800d2238 != 0) {
+          FadeOutSayingLoading((GameTracker *)&gameTrackerX);
           SOUND_StopAllSound();
           SOUND_FreeDynamicMusic();
-          STREAM_DumpAllLevels(0);
-          RemoveAllObjects(&gameTrackerX);
-          while (iVar3 = aadGetNumLoadsQueued(), iVar3 != 0) {
+          STREAM_DumpAllLevels(0,0);
+          RemoveAllObjects((GameTracker *)&gameTrackerX);
+          while (iVar4 = aadGetNumLoadsQueued(), iVar4 != 0) {
             aadProcessLoadQueue();
           }
-          aadFreeLoadBuffer();
           MEMPACK_FreeByType('\x0e');
-          MEMPACK_FreeByType('\x16');
           GAMELOOP_ResetGameStates();
           MEMPACK_DoGarbageCollection();
-          if (gameTrackerX.levelDone != 2) {
-            if ((gameTrackerX.levelDone != 3) && (gameTrackerX.levelDone != 10)) goto LAB_80039f00;
-            goto LAB_8003a180;
+          iVar4 = (int)DAT_800d2238;
+          if (iVar4 == 2) {
+LAB_80039890:
+            mainTrackerX.mainState = 8;
           }
-          mainTrackerX.mainState = 6;
-          mainTrackerX.movieNum = 3;
+          else {
+            if (iVar4 == 3) {
+              mainTrackerX.mainState = 6;
+              mainTrackerX.movieNum = iVar4;
+            }
+            else {
+              if (iVar4 != 4) goto LAB_80039688;
+              mainTrackerX.mainState = 2;
+              if ((DAT_800d2210 & 0x200000) == 0) {
+                SAVE_ClearMemory((GameTracker *)&gameTrackerX);
+              }
+            }
+          }
         }
         break;
       case 2:
       case 0xb:
-        if ((gameTrackerX.streamFlags & 0x1000000U) != 0) {
-          play_intro_movie();
-          gameTrackerX.streamFlags = gameTrackerX.streamFlags & 0xfeffffff;
+        if ((DAT_800d2210 & 0x1000000) != 0) {
+          play_movie((char *)(InterfaceItems + 2));
+          DAT_800d2210 = DAT_800d2210 & 0xfeffffff;
         }
-        if ((gameTrackerX.streamFlags & 0x200000U) == 0) {
-          SAVE_ClearMemory(&gameTrackerX);
+        if ((DAT_800d2210 & 0x200000) != 0) {
+          DAT_800d2210 = DAT_800d2210 & 0xffdfffff;
         }
-        else {
-          gameTrackerX.streamFlags = gameTrackerX.streamFlags & 0xffdfffff;
+        if (nosound == 0) {
+          MAIN_InitVolume();
         }
-        aadInitVolume();
-        aadStartMasterVolumeFade
-                  (gameTrackerX.sound.gMasterVol,0x100,
-                   (TDRFuncPtr_aadStartMasterVolumeFade2fadeCompleteCallback)0x0);
-        gameTrackerX.sound.soundsLoaded = '\x01';
-        aadSetNoUpdateMode(0);
         MAIN_ShowLoadingScreen();
         FONT_ReloadFont();
         DrawSync(0);
-        gameTrackerX.frameCount = 0;
+        DAT_800d21f8 = 0;
         STREAM_Init();
         GAMEPAD_LoadDemo();
-        GAMELOOP_LevelLoadAndInit(gameTrackerX.baseAreaName,&gameTrackerX);
-        if (gameTrackerX.levelDone == 2) {
-          gameTrackerX.gameMode = 9;
-          gameTrackerX.gameFlags = gameTrackerX.gameFlags | 1;
-        }
-        gameTrackerX.levelDone = 0;
+        GAMELOOP_LevelLoadAndInit(&DAT_800d2228,(GameTracker *)&gameTrackerX);
+        DAT_800d2238 = 0;
         mainTrackerX.mainState = 1;
-        gameTrackerX.currentLvl = '\0';
         do {
-          iVar3 = STREAM_PollLoadQueue();
-        } while (iVar3 != 0);
-        gameTrackerX.vblFrames = 0;
+          iVar4 = STREAM_PollLoadQueue();
+        } while (iVar4 != 0);
+        DAT_800d2200 = 0;
         break;
       case 3:
         DrawSync(0);
-        MAIN_ShowPalWarningScreen(&gameTrackerX);
-        gameTrackerX.vblCount = 0;
+        MAIN_ShowPalWarningScreen((GameTracker *)&gameTrackerX);
+        DAT_800d2204 = 0;
         mainTrackerX.mainState = 5;
         break;
       case 4:
-        while (mainTrackerX.movieNum == 0) {
-          show_screen((char *)&FullScreenItems);
-          iVar3 = 1;
+        LOAD_ChangeDirectory(s_Menustuff_800cfa54);
+        lVar2 = mainTrackerX.movieNum;
+        show_screen((char *)(InterfaceItems + mainTrackerX.movieNum));
+        iVar4 = 1;
+        if (InterfaceItems[lVar2].timeout != 0) {
           do {
-            GAMEPAD_Process(&gameTrackerX);
-            if ((300 < iVar3) && ((gameTrackerX.controlCommand[0][1] & 0x80U) != 0)) break;
+            GAMEPAD_Process((GameTracker *)&gameTrackerX);
+            if (((int)(uint)InterfaceItems[lVar2].buttonTimeout < iVar4) &&
+               ((DAT_800d2118 & 0x80) != 0)) break;
             VSync(0);
-            bVar1 = iVar3 < 300;
-            iVar3 = iVar3 + 1;
+            bVar1 = iVar4 < (int)(uint)InterfaceItems[lVar2].timeout;
+            iVar4 = iVar4 + 1;
           } while (bVar1);
-          mainTrackerX.movieNum = -1;
         }
         FONT_ReloadFont();
-        if ((DoMainMenu == 0) || (gameTrackerX.enemyPlanPool._1_1_ != '\0')) {
-LAB_80039f00:
+        if (DoMainMenu == 0) {
+          MAIN_ResetGame();
           mainTrackerX.mainState = 2;
         }
         else {
-LAB_8003a180:
-          mainTrackerX.mainState = 8;
+          if (DAT_800d22d1 == '\0') goto LAB_80039890;
+LAB_80039688:
+          mainTrackerX.mainState = 2;
         }
         break;
       case 5:
-        if (0x1e < gameTrackerX.vblCount) {
+        if (0x1e < DAT_800d2204) {
           mainTrackerX.mainState = 6;
           mainTrackerX.movieNum = 0;
         }
         break;
       case 6:
-        DoCinematicStuff(&gameTrackerX,&mainTrackerX);
-        SOUND_StopAllSound();
-        mainTrackerX.movieNum = 0;
+        CINE_Load();
+        do {
+          if (mainTrackerX.movieNum < 0) goto LAB_8003959c;
+          iVar4 = CINE_Loaded();
+          if (iVar4 != 0) {
+            CINE_Play((char *)(InterfaceItems + mainTrackerX.movieNum),0xffff,2);
+            ClearDisplay();
+          }
+          mainTrackerX.movieNum = (long)InterfaceItems[mainTrackerX.movieNum].nextItem;
+        } while (InterfaceItems[mainTrackerX.movieNum].itemType == 0);
         mainTrackerX.mainState = 4;
+LAB_8003959c:
+        CINE_Unload();
+        if (mainTrackerX.movieNum < 0) {
+          mainTrackerX.mainState = 8;
+        }
+        if (nosound == 0) {
+          SOUND_StopAllSound();
+        }
         break;
       case 7:
         mainTrackerX.done = 1;
         break;
       case 8:
-        gameTrackerX.gameData.asmData.MorphType = 0;
-        ProcessArgs("\\kain2\\game\\psx\\kain2.arg",gameTrackerX.baseAreaName,&gameTrackerX);
+        DAT_800d20d6 = 0;
+        ProcessArgs(&DAT_800d2228,(GameTracker *)&gameTrackerX);
+        MAIN_ResetGame();
+        LOAD_ChangeDirectory(s_Menustuff_800cfa54);
         MAIN_MainMenuInit();
+        MAIN_InitVolume();
+        SAVE_ClearMemory((GameTracker *)&gameTrackerX);
         mainTrackerX.mainState = 9;
         FONT_ReloadFont();
         break;
       case 9:
-      case 0xd:
-        menuPos = MAIN_DoMainMenu(&gameTrackerX,&mainTrackerX,menuPos);
-        break;
-      case 0xc:
-        MAIN_ShowFeaturesInit();
-        mainTrackerX.mainState = 0xd;
-        break;
-      case 0xe:
-        if (gameTrackerX.levelDone == 10) {
-          mainTrackerX.mainState = 7;
-        }
-        else {
-          mainTrackerX.mainState = 6;
-        }
+        menuPos = MAIN_DoMainMenu((GameTracker *)&gameTrackerX,(MainTracker *)&mainTrackerX,menuPos)
+        ;
       }
       STREAM_PollLoadQueue();
     } while (mainTrackerX.done == 0);
@@ -1139,12 +1282,12 @@ LAB_8003a180:
     SetDispMask(0);
     DrawSync(0);
     VSync(0);
-    DrawSyncCallback(0);
-    VSyncCallback(0);
+    DrawSyncCallback((func *)0x0);
+    VSyncCallback((f *)0x0);
     EnterCriticalSection();
     StopRCnt(0xf2000000);
-    DisableEvent();
-    CloseEvent();
+    DisableEvent(__timerEvent);
+    CloseEvent(__timerEvent);
     ExitCriticalSection();
     VSync(5);
     StopCallback();

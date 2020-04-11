@@ -5,95 +5,97 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ menuface_initialize()
- // line 39, offset 0x800b3600
+ // line 45, offset 0x800b7d3c
 	/* begin block 1 */
-		// Start line: 40
-		// Start offset: 0x800B3600
+		// Start line: 46
+		// Start offset: 0x800B7D3C
 		// Variables:
-	// 		char facename[128]; // stack offset -224
-	// 		int i; // $s2
-	// 		int j; // $s1
-	// 		char prefix[8][4]; // stack offset -96
-	// 		char postfix[3][8]; // stack offset -64
+	// 		char prefix[8][4]; // stack offset -224
+	// 		char postfix[3][8]; // stack offset -192
+	// 		char facename[128]; // stack offset -168
+	// 		int i; // $s3
+	// 		int j; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 58
-			// Start offset: 0x800B3794
+			// Start line: 65
+			// Start offset: 0x800B7EA4
 		/* end block 1.1 */
-		// End offset: 0x800B3794
-		// End Line: 58
+		// End offset: 0x800B7EA4
+		// End Line: 65
 	/* end block 1 */
-	// End offset: 0x800B37F4
-	// End Line: 65
+	// End offset: 0x800B7F18
+	// End Line: 76
 
 	/* begin block 2 */
-		// Start line: 78
+		// Start line: 90
 	/* end block 2 */
-	// End Line: 79
+	// End Line: 91
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\MENU\MENUFACE.C */
 
 void menuface_initialize(void)
 
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  menuface_t *pmVar5;
-  char acStack224 [128];
-  undefined4 local_60;
-  undefined4 local_5c;
-  undefined4 local_58;
-  undefined4 local_54;
-  undefined4 local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
-  undefined4 local_34;
-  undefined4 local_30;
-  undefined4 local_2c;
+  uint uVar1;
+  uint uVar2;
+  menuface_t *pmVar3;
+  undefined4 *puVar4;
+  int iVar5;
+  int iVar6;
+  undefined *local_e0 [4];
+  undefined *local_d0;
+  undefined *local_cc;
+  undefined *local_c8;
+  undefined *local_c4;
+  undefined4 local_c0;
+  undefined4 local_bc;
+  undefined4 local_b8;
+  undefined4 local_b4;
+  undefined *local_b0;
+  undefined4 local_ac;
+  char acStack168 [128];
   
-  local_60 = 0x4131;
-  local_5c = 0x4231;
-  local_58 = 0x4331;
-  local_54 = 0x4132;
-  local_50 = 0x4232;
-  local_4c = 0x4133;
-  local_48 = 0x4233;
-  local_44 = 0x4333;
-  local_40 = 0x3164696d;
-  local_3c = 0;
-  local_38 = 0x3264696d;
-  local_34 = 0;
-  local_30 = 0x706d76;
-  local_2c = 0;
+  local_e0[0] = PTR_DAT_800d0dc8;
+  local_e0[1] = PTR_DAT_800d0dcc;
+  local_e0[2] = PTR_DAT_800d0dd0;
+  local_e0[3] = PTR_DAT_800d0dd4;
+  local_d0 = PTR_DAT_800d0dd8;
+  local_cc = PTR_DAT_800d0ddc;
+  local_c8 = PTR_DAT_800d0de0;
+  local_c4 = PTR_DAT_800d0de4;
+  local_c0 = DAT_800d0de8;
+  local_bc = DAT_800d0dec;
+  local_b8 = DAT_800d0df0;
+  local_b4 = DAT_800d0df4;
+  local_b0 = PTR_DAT_800d0df8;
+  local_ac = DAT_800d0dfc;
   if (hack_initialized == 0) {
-    FaceState = MEMPACK_Malloc(8,'-');
-    FaceStateDir = MEMPACK_Malloc(8,'-');
-    FaceButtons = (_ButtonTexture *)MEMPACK_Malloc(0x180,'-');
-    iVar3 = 0;
-    pmVar5 = &the_faces;
-    iVar4 = 0;
-    do {
-      iVar2 = 0;
-      FaceState[iVar3] = -1;
-      FaceStateDir[iVar3] = '\x01';
+    FaceButtons = MEMPACK_Malloc(0x180,'-');
+    iVar5 = 0;
+    if (FaceButtons != (char *)0x0) {
+      pmVar3 = MenuFaces;
+      iVar6 = 0;
       do {
-        sprintf(acStack224,"\\kain2\\game\\psx\\frontend\\%s_%s.tim");
-        iVar1 = iVar4 + iVar2;
-        iVar2 = iVar2 + 1;
-        DRAW_LoadButtonByName(acStack224,FaceButtons + iVar1);
-        *(undefined4 *)&pmVar5[1].w = 1;
-      } while (iVar2 < 3);
-      pmVar5 = (menuface_t *)&pmVar5[1].transitionDir;
-      iVar3 = iVar3 + 1;
-      iVar4 = iVar4 + 3;
-    } while (iVar3 < 8);
-    hack_initialized = 1;
+        uVar2 = 0;
+        pmVar3->curFrame = -1;
+        pmVar3->transitionDir = '\0';
+        pmVar3->loaded = '\0';
+        puVar4 = &local_c0;
+        do {
+          sprintf(acStack168,s__kain2_game_psx_frontend__s__s_t_800d0e00,local_e0 + iVar5,puVar4);
+          puVar4 = puVar4 + 2;
+          DRAW_LoadButtonByName(acStack168,(_ButtonTexture *)(FaceButtons + (iVar6 + uVar2) * 0x10))
+          ;
+          uVar1 = uVar2 & 0x1f;
+          uVar2 = uVar2 + 1;
+          pmVar3->loaded = pmVar3->loaded | (byte)(1 << uVar1);
+        } while ((int)uVar2 < 3);
+        pmVar3 = pmVar3 + 1;
+        iVar5 = iVar5 + 1;
+        iVar6 = iVar6 + 3;
+      } while (iVar5 < 8);
+      hack_initialized = 1;
+    }
   }
   return;
 }
@@ -103,65 +105,54 @@ void menuface_initialize(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ menuface_terminate()
- // line 67, offset 0x800b3820
+ // line 78, offset 0x800b7f44
 	/* begin block 1 */
-		// Start line: 68
-		// Start offset: 0x800B3820
+		// Start line: 79
+		// Start offset: 0x800B7F44
 		// Variables:
-	// 		int i; // $s4
+	// 		int i; // $s3
 	// 		int j; // $s0
 	/* end block 1 */
-	// End offset: 0x800B38F4
-	// End Line: 89
+	// End offset: 0x800B7FD8
+	// End Line: 95
 
 	/* begin block 2 */
-		// Start line: 162
+		// Start line: 181
 	/* end block 2 */
-	// End Line: 163
+	// End Line: 182
 
 	/* begin block 3 */
-		// Start line: 165
+		// Start line: 184
 	/* end block 3 */
-	// End Line: 166
+	// End Line: 185
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\MENU\MENUFACE.C */
 
 void menuface_terminate(void)
 
 {
-  int iVar1;
+  uint uVar1;
   int iVar2;
   menuface_t *pmVar3;
   int iVar4;
-  int iVar5;
   
   if (hack_initialized != 0) {
-    iVar5 = 0;
-    pmVar3 = &the_faces;
     iVar4 = 0;
+    pmVar3 = MenuFaces;
+    iVar2 = 0;
     do {
-      if (*(int *)&pmVar3[1].w != 0) {
-        iVar2 = 0;
-        do {
-          iVar1 = iVar4 + iVar2;
-          iVar2 = iVar2 + 1;
-          DRAW_FreeButton(FaceButtons + iVar1);
-        } while (iVar2 < 3);
-        *(undefined4 *)&pmVar3[1].w = 0;
-      }
-      pmVar3 = (menuface_t *)&pmVar3[1].transitionDir;
-      iVar5 = iVar5 + 1;
-      iVar4 = iVar4 + 3;
-    } while (iVar5 < 8);
-    if (FaceState != (char *)0x0) {
-      MEMPACK_Free(FaceState);
-    }
-    if (FaceStateDir != (char *)0x0) {
-      MEMPACK_Free(FaceStateDir);
-    }
-    if (FaceButtons != (_ButtonTexture *)0x0) {
-      MEMPACK_Free((char *)FaceButtons);
-    }
+      uVar1 = 0;
+      do {
+        if (((int)(uint)pmVar3->loaded >> (uVar1 & 0x1f) & 1U) != 0) {
+          DRAW_FreeButton((_ButtonTexture *)(FaceButtons + (iVar2 + uVar1) * 0x10));
+        }
+        uVar1 = uVar1 + 1;
+      } while ((int)uVar1 < 3);
+      pmVar3 = pmVar3 + 1;
+      iVar4 = iVar4 + 1;
+      iVar2 = iVar2 + 3;
+    } while (iVar4 < 8);
+    MEMPACK_Free(FaceButtons);
     hack_initialized = 0;
   }
   return;
@@ -172,96 +163,79 @@ void menuface_terminate(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MENUFACE_ChangeStateRandomly(int index /*$a0*/)
- // line 94, offset 0x800b3914
+ // line 100, offset 0x800b7ff4
 	/* begin block 1 */
-		// Start line: 95
-		// Start offset: 0x800B3914
+		// Start line: 101
+		// Start offset: 0x800B7FF4
 		// Variables:
-	// 		int i; // $s0
-	// 		int inMorph; // $v1
-	// 		static int oldIndex; // offset 0x100
+	// 		struct menuface_t *face; // $s1
+	// 		struct menuface_t *lastFace; // $s3
 
 		/* begin block 1.1 */
 			// Start line: 114
-			// Start offset: 0x800B3970
-			// Variables:
-		// 		int j; // $a0
-
-			/* begin block 1.1.1 */
-				// Start line: 118
-				// Start offset: 0x800B3970
-			/* end block 1.1.1 */
-			// End offset: 0x800B3988
-			// End Line: 118
-
-			/* begin block 1.1.2 */
-				// Start line: 123
-				// Start offset: 0x800B39B0
-			/* end block 1.1.2 */
-			// End offset: 0x800B39C8
-			// End Line: 123
+			// Start offset: 0x800B8050
 		/* end block 1.1 */
-		// End offset: 0x800B3A6C
-		// End Line: 138
+		// End offset: 0x800B80A8
+		// End Line: 119
 	/* end block 1 */
-	// End offset: 0x800B3A6C
-	// End Line: 140
+	// End offset: 0x800B8100
+	// End Line: 132
 
 	/* begin block 2 */
-		// Start line: 231
+		// Start line: 233
 	/* end block 2 */
-	// End Line: 232
+	// End Line: 234
+
+	/* begin block 3 */
+		// Start line: 236
+	/* end block 3 */
+	// End Line: 237
+
+/* File: C:\kain2\game\MENU\MENUFACE.C */
 
 void MENUFACE_ChangeStateRandomly(int index)
 
 {
-  bool bVar1;
-  byte *pbVar2;
+  uchar uVar1;
+  uchar uVar2;
   int iVar3;
-  int iVar4;
-  int iVar5;
+  uchar *puVar4;
+  menuface_t *pmVar5;
   
-  bVar1 = false;
-  if (DAT_800d0d9c != index) {
-    iVar5 = 0;
-    pbVar2 = (byte *)FaceState;
+  if (hack_initialized != 0) {
+    pmVar5 = MenuFaces;
+    puVar4 = &MenuFaces[0].delay;
     do {
-      if (*pbVar2 < 0xe) {
-        bVar1 = true;
+      uVar1 = *puVar4 + -1;
+      if (*puVar4 == '\0') {
+        if (puVar4[-1] == '\0') {
+          iVar3 = rand();
+          if (iVar3 == (iVar3 / 0x96) * 0x96) {
+            if (puVar4[-2] == -1) {
+              puVar4[-1] = '\x01';
+            }
+            else {
+              puVar4[-1] = -1;
+            }
+          }
+        }
+        else {
+          uVar2 = puVar4[-2] + puVar4[-1];
+          puVar4[-2] = uVar2;
+          uVar1 = 'd';
+          if (((int)(char)uVar2 == (uint)puVar4[-3] * 3 + -1) || ((int)(char)uVar2 == -1)) {
+            puVar4[-1] = '\0';
+            goto LAB_800b80ec;
+          }
+        }
       }
-      iVar5 = iVar5 + 1;
-      pbVar2 = (byte *)(FaceState + iVar5);
-    } while (iVar5 < 8);
-    DAT_800d0d9c = index;
-    if (!bVar1) {
-      do {
-        iVar3 = rand();
-        iVar5 = iVar3;
-        if (iVar3 < 0) {
-          iVar5 = iVar3 + 7;
-        }
-        iVar3 = iVar3 + (iVar5 >> 3) * -8;
-      } while (FaceState[iVar3] == '\x0e');
-      do {
-        iVar4 = rand();
-        iVar5 = iVar4;
-        if (iVar4 < 0) {
-          iVar5 = iVar4 + 7;
-        }
-        iVar4 = iVar4 + (iVar5 >> 3) * -8;
-      } while ((iVar4 == iVar3) || (FaceState[iVar4] == '\x0e'));
-      FaceState[iVar3] = '\0';
-      FaceStateDir[iVar3] = '\x01';
-      FaceState[iVar4] = '\0';
-      iVar5 = 0;
-      FaceStateDir[iVar4] = '\x01';
-      do {
-        if (FaceState[iVar5] == '\x0e') {
-          FaceStateDir[iVar5] = -1;
-        }
-        iVar5 = iVar5 + 1;
-      } while (iVar5 < 8);
-    }
+      else {
+LAB_800b80ec:
+        *puVar4 = uVar1;
+      }
+      pmVar5 = pmVar5 + 1;
+      puVar4 = puVar4 + 0xc;
+    } while (pmVar5 < &hack_initialized);
   }
   return;
 }
@@ -271,58 +245,55 @@ void MENUFACE_ChangeStateRandomly(int index)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MENUFACE_RefreshFaces()
- // line 142, offset 0x800b3a80
+ // line 135, offset 0x800b811c
 	/* begin block 1 */
-		// Start line: 143
-		// Start offset: 0x800B3A80
+		// Start line: 136
+		// Start offset: 0x800B811C
 		// Variables:
-	// 		int i; // $s0
-	// 		struct menuface_t *face; // $a2
+	// 		int i; // $s3
+	// 		struct menuface_t *face; // $s2
 	/* end block 1 */
-	// End offset: 0x800B3BAC
-	// End Line: 165
+	// End offset: 0x800B81B0
+	// End Line: 153
 
 	/* begin block 2 */
-		// Start line: 353
+		// Start line: 326
 	/* end block 2 */
-	// End Line: 354
+	// End Line: 327
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+	/* begin block 3 */
+		// Start line: 330
+	/* end block 3 */
+	// End Line: 331
+
+/* File: C:\kain2\game\MENU\MENUFACE.C */
 
 void MENUFACE_RefreshFaces(void)
 
 {
-  char *pcVar1;
+  short *psVar1;
   int iVar2;
-  int iVar3;
+  menuface_t *pmVar3;
   int iVar4;
   
-  iVar2 = 0;
-  iVar4 = 0;
-  iVar3 = 0;
-  do {
-    pcVar1 = FaceState + iVar2;
-    if (*pcVar1 != -1) {
-      if (FaceStateDir[iVar2] < '\x01') {
-        *pcVar1 = *pcVar1 + -1;
-        if (FaceState[iVar2] < -1) {
-          FaceState[iVar2] = -1;
-        }
+  if (hack_initialized != 0) {
+    iVar4 = 0;
+    pmVar3 = MenuFaces;
+    psVar1 = &MenuFaces[0].y;
+    iVar2 = 0;
+    do {
+      if (-1 < (int)*(char *)((int)psVar1 + 5)) {
+        DRAW_DrawButton((_ButtonTexture *)
+                        (FaceButtons +
+                        (iVar2 + (int)*(char *)((int)psVar1 + 5) / (int)(uint)*(byte *)(psVar1 + 2))
+                        * 0x10),pmVar3->x,*psVar1,(ulong **)(DAT_800d22a4 + 4));
       }
-      else {
-        *pcVar1 = *pcVar1 + '\x01';
-        if ('\x0e' < FaceState[iVar2]) {
-          FaceState[iVar2] = '\x0e';
-        }
-      }
-      DRAW_DrawButton(FaceButtons + iVar4 + (((int)FaceState[iVar2] / 5) * 0x1000000 >> 0x18),
-                      *(short *)((int)&the_faces.x + iVar3),*(short *)(&the_faces.w + iVar3),
-                      (ulong **)gameTrackerX.defVVRemoveDist);
-    }
-    iVar4 = iVar4 + 3;
-    iVar2 = iVar2 + 1;
-    iVar3 = iVar3 + 0x14;
-  } while (iVar2 < 8);
+      iVar2 = iVar2 + 3;
+      iVar4 = iVar4 + 1;
+      psVar1 = psVar1 + 6;
+      pmVar3 = pmVar3 + 1;
+    } while (iVar4 < 8);
+  }
   return;
 }
 

@@ -5,11 +5,13 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MISSILE_Process(struct _Instance *instance /*$s0*/, struct GameTracker *gameTracker /*$a1*/)
- // line 53, offset 0x8007cd60
+ // line 53, offset 0x8007d7ac
 	/* begin block 1 */
 		// Start line: 106
 	/* end block 1 */
 	// End Line: 107
+
+/* File: C:\kain2\game\MONSTER\MISSILE.C */
 
 void MISSILE_Process(_Instance *instance,GameTracker *gameTracker)
 
@@ -29,11 +31,13 @@ void MISSILE_Process(_Instance *instance,GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MISSILE_Collide(struct _Instance *instance /*$s0*/, struct GameTracker *gameTracker /*$a1*/)
- // line 65, offset 0x8007cdb8
+ // line 65, offset 0x8007d804
 	/* begin block 1 */
 		// Start line: 130
 	/* end block 1 */
 	// End Line: 131
+
+/* File: C:\kain2\game\MONSTER\MISSILE.C */
 
 void MISSILE_Collide(_Instance *instance,GameTracker *gameTracker)
 
@@ -50,15 +54,15 @@ void MISSILE_Collide(_Instance *instance,GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // struct _Instance * /*$ra*/ MISSILE_Find(struct _Instance *instance /*$a0*/, struct _MonsterMissile *missiledef /*$a1*/)
- // line 73, offset 0x8007cdf4
+ // line 73, offset 0x8007d840
 	/* begin block 1 */
 		// Start line: 75
-		// Start offset: 0x8007CDF4
+		// Start offset: 0x8007D840
 		// Variables:
 	// 		struct Object *ob; // $v1
 	// 		struct _Instance *missile; // $a2
 	/* end block 1 */
-	// End offset: 0x8007CE60
+	// End offset: 0x8007D8AC
 	// End Line: 87
 
 	/* begin block 2 */
@@ -76,6 +80,8 @@ void MISSILE_Collide(_Instance *instance,GameTracker *gameTracker)
 	/* end block 4 */
 	// End Line: 155
 
+/* File: C:\kain2\game\MONSTER\MISSILE.C */
+
 _Instance * MISSILE_Find(_Instance *instance,_MonsterMissile *missiledef)
 
 {
@@ -86,7 +92,8 @@ _Instance * MISSILE_Find(_Instance *instance,_MonsterMissile *missiledef)
     do {
       if ((p_Var1->ParentLinkNode == (uint)missiledef->segment) &&
          (p_Var1->object ==
-          (Object *)(&objectAccess)[(&MISSILE_objectTable)[missiledef->graphic].object].object)) {
+          (Object *)
+          objectAccess[(&MISSILE_objectTable[0].object)[(uint)missiledef->graphic * 2]].object)) {
         return p_Var1;
       }
       p_Var1 = p_Var1->LinkSibling;
@@ -100,26 +107,38 @@ _Instance * MISSILE_Find(_Instance *instance,_MonsterMissile *missiledef)
 // decompiled code
 // original method signature: 
 // struct _Instance * /*$ra*/ MISSILE_Birth(struct _Instance *instance /*$s1*/, struct _MonsterMissile *missiledef /*$s0*/)
- // line 89, offset 0x8007ce70
+ // line 89, offset 0x8007d8bc
 	/* begin block 1 */
 		// Start line: 90
-		// Start offset: 0x8007CE70
+		// Start offset: 0x8007D8BC
 		// Variables:
-	// 		struct _Instance *missile; // $v1
+	// 		struct _Instance *missile; // $a1
+
+		/* begin block 1.1 */
+			// Start line: 122
+			// Start offset: 0x8007D944
+			// Variables:
+		// 		struct MATRIX *matrix; // $v0
+		/* end block 1.1 */
+		// End offset: 0x8007D978
+		// End Line: 126
 	/* end block 1 */
-	// End offset: 0x8007CEEC
-	// End Line: 150
+	// End offset: 0x8007D97C
+	// End Line: 157
 
 	/* begin block 2 */
 		// Start line: 181
 	/* end block 2 */
 	// End Line: 182
 
+/* File: C:\kain2\game\MONSTER\MISSILE.C */
+
 _Instance * MISSILE_Birth(_Instance *instance,_MonsterMissile *missiledef)
 
 {
   _Instance *p_Var1;
   evObjectBirthProjectileData *peVar2;
+  MATRIX *pMVar3;
   
   if ((missiledef->type == '\x03') &&
      (p_Var1 = MISSILE_Find(instance,missiledef), p_Var1 != (_Instance *)0x0)) {
@@ -131,6 +150,12 @@ _Instance * MISSILE_Birth(_Instance *instance,_MonsterMissile *missiledef)
     p_Var1 = peVar2->birthInstance;
     if (p_Var1 != (_Instance *)0x0) {
       p_Var1->processFunc = MISSILE_Process;
+      if (instance->matrix != (MATRIX *)0x0) {
+        pMVar3 = instance->matrix + missiledef->segment;
+        (p_Var1->position).x = *(short *)pMVar3->t;
+        (p_Var1->position).y = *(short *)(pMVar3->t + 1);
+        (p_Var1->position).z = *(short *)(pMVar3->t + 2);
+      }
     }
   }
   return p_Var1;
@@ -140,31 +165,33 @@ _Instance * MISSILE_Birth(_Instance *instance,_MonsterMissile *missiledef)
 
 // decompiled code
 // original method signature: 
-// struct _Instance * /*$ra*/ MISSILE_Fire(struct _Instance *instance /*$s4*/, struct _MonsterMissile *missiledef /*$s1*/, void *target /*$s2*/, int type /*$s3*/)
- // line 152, offset 0x8007cf00
+// struct _Instance * /*$ra*/ MISSILE_Fire(struct _Instance *instance /*$a0*/, struct _MonsterMissile *missiledef /*$s1*/, void *target /*$s2*/, int type /*$s3*/)
+ // line 159, offset 0x8007d990
 	/* begin block 1 */
-		// Start line: 153
-		// Start offset: 0x8007CF00
+		// Start line: 160
+		// Start offset: 0x8007D990
 		// Variables:
 	// 		struct _Instance *miss; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 160
-			// Start offset: 0x8007CF3C
+			// Start line: 167
+			// Start offset: 0x8007D9C4
 			// Variables:
 		// 		int spin; // $a3
 		// 		struct _SVector rotVel; // stack offset -32
 		/* end block 1.1 */
-		// End offset: 0x8007CFA8
-		// End Line: 181
+		// End offset: 0x8007DA30
+		// End Line: 188
 	/* end block 1 */
-	// End offset: 0x8007CFA8
-	// End Line: 183
+	// End offset: 0x8007DA30
+	// End Line: 190
 
 	/* begin block 2 */
-		// Start line: 307
+		// Start line: 321
 	/* end block 2 */
-	// End Line: 308
+	// End Line: 322
+
+/* File: C:\kain2\game\MONSTER\MISSILE.C */
 
 _Instance * MISSILE_Fire(_Instance *instance,_MonsterMissile *missiledef,void *target,int type)
 
@@ -186,8 +213,8 @@ _Instance * MISSILE_Fire(_Instance *instance,_MonsterMissile *missiledef,void *t
     }
     Data = SetObjectThrowData(target,&local_20,(ushort)type,spinType,(uint)missiledef->speed,0,0,0);
     INSTANCE_Post(Inst,0x800010,Data);
-    uVar1 = MON_GetTime(instance);
-    Inst->work2 = uVar1 + 5000;
+    uVar1 = MON_GetTime(Inst);
+    *(undefined **)&Inst->work2 = &DAT_00001388 + uVar1;
   }
   return Inst;
 }
@@ -197,11 +224,13 @@ _Instance * MISSILE_Fire(_Instance *instance,_MonsterMissile *missiledef,void *t
 // decompiled code
 // original method signature: 
 // struct _Instance * /*$ra*/ MISSILE_FireAtInstance(struct _Instance *instance /*$a0*/, struct _MonsterMissile *missiledef /*$a1*/, struct _Instance *target /*$a2*/)
- // line 191, offset 0x8007cfcc
+ // line 198, offset 0x8007da50
 	/* begin block 1 */
-		// Start line: 388
+		// Start line: 402
 	/* end block 1 */
-	// End Line: 389
+	// End Line: 403
+
+/* File: C:\kain2\game\MONSTER\MISSILE.C */
 
 _Instance *
 MISSILE_FireAtInstance(_Instance *instance,_MonsterMissile *missiledef,_Instance *target)

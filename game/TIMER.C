@@ -5,15 +5,15 @@
 // decompiled code
 // original method signature: 
 // unsigned long /*$ra*/ TIMER_GetTimeMS()
- // line 41, offset 0x8003ea34
+ // line 41, offset 0x8003e314
 	/* begin block 1 */
 		// Start line: 42
-		// Start offset: 0x8003EA34
+		// Start offset: 0x8003E314
 		// Variables:
 	// 		unsigned long ticks; // $s1
 	// 		unsigned long mticks; // $s0
 	/* end block 1 */
-	// End offset: 0x8003EA34
+	// End offset: 0x8003E314
 	// End Line: 42
 
 	/* begin block 2 */
@@ -21,7 +21,7 @@
 	/* end block 2 */
 	// End Line: 83
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\TIMER.C */
 
 ulong TIMER_GetTimeMS(void)
 
@@ -41,10 +41,10 @@ ulong TIMER_GetTimeMS(void)
 // decompiled code
 // original method signature: 
 // unsigned long /*$ra*/ TIMER_TimeDiff(unsigned long x /*$s0*/)
- // line 72, offset 0x8003eac4
+ // line 72, offset 0x8003e3a4
 	/* begin block 1 */
 		// Start line: 73
-		// Start offset: 0x8003EAC4
+		// Start offset: 0x8003E3A4
 		// Variables:
 	// 		unsigned long intrs; // $v1
 	// 		unsigned long ticks; // $a2
@@ -54,7 +54,7 @@ ulong TIMER_GetTimeMS(void)
 	// 		unsigned long diffTicks; // $s0
 	// 		unsigned long timeDiff; // $v1
 	/* end block 1 */
-	// End offset: 0x8003EB98
+	// End offset: 0x8003E478
 	// End Line: 122
 
 	/* begin block 2 */
@@ -62,12 +62,14 @@ ulong TIMER_GetTimeMS(void)
 	/* end block 2 */
 	// End Line: 155
 
+/* File: C:\kain2\game\TIMER.C */
+
 ulong TIMER_TimeDiff(ulong x)
 
 {
   uint uVar1;
   uint uVar2;
-  ulong uVar3;
+  undefined *puVar3;
   uint uVar4;
   uint uVar5;
   int iVar6;
@@ -91,15 +93,15 @@ ulong TIMER_TimeDiff(ulong x)
     iVar6 = uVar1 - uVar4;
   }
   if (uVar5 < 0x8d3) {
-    uVar3 = (iVar6 * 0x1d + uVar5 * 0x1cffe3) / 1000;
+    puVar3 = (undefined *)((iVar6 * 0x1d + uVar5 * 0x1cffe3) / 1000);
   }
   else {
-    uVar3 = 0x41828f;
+    puVar3 = &DAT_0041828f;
   }
   if (gTimerEnabled == 0) {
-    uVar3 = 0;
+    puVar3 = (undefined *)0x0;
   }
-  return uVar3;
+  return (ulong)puVar3;
 }
 
 

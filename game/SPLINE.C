@@ -5,10 +5,10 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _SplineS2Pos(struct vecS *p /*$t6*/, long s /*$t1*/, struct SplineKey *key /*$t2*/, struct SplineKey *key2 /*$t5*/)
- // line 70, offset 0x80042178
+ // line 70, offset 0x800415e8
 	/* begin block 1 */
 		// Start line: 71
-		// Start offset: 0x80042178
+		// Start offset: 0x800415E8
 		// Variables:
 	// 		long s2; // $a3
 	// 		long s3; // $t0
@@ -17,13 +17,15 @@
 	// 		long h2; // $a0
 	// 		long h3; // $t0
 	/* end block 1 */
-	// End offset: 0x800422E0
+	// End offset: 0x80041750
 	// End Line: 96
 
 	/* begin block 2 */
 		// Start line: 140
 	/* end block 2 */
 	// End Line: 141
+
+/* File: C:\kain2\game\SPLINE.C */
 
 void _SplineS2Pos(vecS *p,long s,SplineKey *key,SplineKey *key2)
 
@@ -60,14 +62,14 @@ void _SplineS2Pos(vecS *p,long s,SplineKey *key,SplineKey *key2)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SplineSetDefDenom(struct Spline *spline /*$a0*/, struct SplineDef *def /*$a1*/, int denomFlag /*$a2*/)
- // line 132, offset 0x800422e8
+ // line 132, offset 0x80041758
 	/* begin block 1 */
 		// Start line: 140
-		// Start offset: 0x800422E8
+		// Start offset: 0x80041758
 		// Variables:
 	// 		unsigned long denom; // $v1
 	/* end block 1 */
-	// End offset: 0x800423A4
+	// End offset: 0x80041814
 	// End Line: 165
 
 	/* begin block 2 */
@@ -84,6 +86,8 @@ void _SplineS2Pos(vecS *p,long s,SplineKey *key,SplineKey *key2)
 		// Start line: 263
 	/* end block 4 */
 	// End Line: 264
+
+/* File: C:\kain2\game\SPLINE.C */
 
 void SplineSetDefDenom(Spline *spline,SplineDef *def,int denomFlag)
 
@@ -121,23 +125,25 @@ void SplineSetDefDenom(Spline *spline,SplineDef *def,int denomFlag)
 // decompiled code
 // original method signature: 
 // unsigned short /*$ra*/ SplineGetFrameNumber(struct Spline *spline /*$a0*/, struct SplineDef *def /*$a1*/)
- // line 248, offset 0x800423ac
+ // line 248, offset 0x8004181c
 	/* begin block 1 */
 		// Start line: 249
-		// Start offset: 0x800423AC
+		// Start offset: 0x8004181C
 		// Variables:
 	// 		unsigned short frame; // $s0
 	// 		unsigned int i; // $v1
 	// 		struct SplineKey *key; // $a2
 	// 		struct SplineDef temp; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x8004242C
+	// End offset: 0x8004189C
 	// End Line: 285
 
 	/* begin block 2 */
 		// Start line: 492
 	/* end block 2 */
 	// End Line: 493
+
+/* File: C:\kain2\game\SPLINE.C */
 
 ushort SplineGetFrameNumber(Spline *spline,SplineDef *def)
 
@@ -179,10 +185,10 @@ ushort SplineGetFrameNumber(Spline *spline,SplineDef *def)
 // decompiled code
 // original method signature: 
 // short /*$ra*/ SplineSetDef2FrameNumber(struct Spline *spline /*$a0*/, struct SplineDef *def /*$a1*/, unsigned short frame_number /*$a2*/)
- // line 288, offset 0x80042440
+ // line 288, offset 0x800418b0
 	/* begin block 1 */
 		// Start line: 289
-		// Start offset: 0x80042440
+		// Start offset: 0x800418B0
 		// Variables:
 	// 		unsigned long isRot; // $t3
 	// 		short status; // $t4
@@ -191,7 +197,7 @@ ushort SplineGetFrameNumber(Spline *spline,SplineDef *def)
 	// 		unsigned short frame; // $t2
 	// 		short deltaFrame; // $t1
 	/* end block 1 */
-	// End offset: 0x80042564
+	// End offset: 0x800419D4
 	// End Line: 347
 
 	/* begin block 2 */
@@ -203,6 +209,8 @@ ushort SplineGetFrameNumber(Spline *spline,SplineDef *def)
 		// Start line: 493
 	/* end block 3 */
 	// End Line: 494
+
+/* File: C:\kain2\game\SPLINE.C */
 
 short SplineSetDef2FrameNumber(Spline *spline,SplineDef *def,ushort frame_number)
 
@@ -268,14 +276,14 @@ short SplineSetDef2FrameNumber(Spline *spline,SplineDef *def,ushort frame_number
 // decompiled code
 // original method signature: 
 // short /*$ra*/ SplineIsWhere(struct Spline *spline /*$a0*/, struct SplineDef *def /*$a1*/)
- // line 355, offset 0x80042570
+ // line 355, offset 0x800419e0
 	/* begin block 1 */
 		// Start line: 357
-		// Start offset: 0x80042570
+		// Start offset: 0x800419E0
 		// Variables:
 	// 		short curr; // $v1
 	/* end block 1 */
-	// End offset: 0x800425D0
+	// End offset: 0x80041A40
 	// End Line: 367
 
 	/* begin block 2 */
@@ -287,6 +295,8 @@ short SplineSetDef2FrameNumber(Spline *spline,SplineDef *def,ushort frame_number
 		// Start line: 619
 	/* end block 3 */
 	// End Line: 620
+
+/* File: C:\kain2\game\SPLINE.C */
 
 short SplineIsWhere(Spline *spline,SplineDef *def)
 
@@ -310,20 +320,22 @@ short SplineIsWhere(Spline *spline,SplineDef *def)
 // decompiled code
 // original method signature: 
 // short /*$ra*/ SplineMultiIsWhere(struct MultiSpline *multi /*$s0*/)
- // line 368, offset 0x800425d8
+ // line 368, offset 0x80041a48
 	/* begin block 1 */
 		// Start line: 369
-		// Start offset: 0x800425D8
+		// Start offset: 0x80041A48
 		// Variables:
 	// 		short where; // $v1
 	/* end block 1 */
-	// End offset: 0x8004264C
+	// End offset: 0x80041ABC
 	// End Line: 384
 
 	/* begin block 2 */
 		// Start line: 644
 	/* end block 2 */
 	// End Line: 645
+
+/* File: C:\kain2\game\SPLINE.C */
 
 short SplineMultiIsWhere(MultiSpline *multi)
 
@@ -348,7 +360,7 @@ short SplineMultiIsWhere(MultiSpline *multi)
 // decompiled code
 // original method signature: 
 // struct _G2Quat_Type * /*$ra*/ SplineGetFirstRot(struct RSpline *rspline /*$a0*/, struct SplineDef *def /*$a1*/)
- // line 423, offset 0x80042664
+ // line 423, offset 0x80041ad4
 	/* begin block 1 */
 		// Start line: 819
 	/* end block 1 */
@@ -358,6 +370,8 @@ short SplineMultiIsWhere(MultiSpline *multi)
 		// Start line: 718
 	/* end block 2 */
 	// End Line: 719
+
+/* File: C:\kain2\game\SPLINE.C */
 
 _G2Quat_Type * SplineGetFirstRot(RSpline *rspline,SplineDef *def)
 
@@ -376,7 +390,7 @@ _G2Quat_Type * SplineGetFirstRot(RSpline *rspline,SplineDef *def)
 // decompiled code
 // original method signature: 
 // struct _SVector * /*$ra*/ SplineGetFirstPoint(struct Spline *spline /*$a0*/, struct SplineDef *def /*$a1*/)
- // line 435, offset 0x8004268c
+ // line 435, offset 0x80041afc
 	/* begin block 1 */
 		// Start line: 741
 	/* end block 1 */
@@ -391,6 +405,8 @@ _G2Quat_Type * SplineGetFirstRot(RSpline *rspline,SplineDef *def)
 		// Start line: 746
 	/* end block 3 */
 	// End Line: 747
+
+/* File: C:\kain2\game\SPLINE.C */
 
 _SVector * SplineGetFirstPoint(Spline *spline,SplineDef *def)
 
@@ -409,20 +425,22 @@ _SVector * SplineGetFirstPoint(Spline *spline,SplineDef *def)
 // decompiled code
 // original method signature: 
 // struct _SVector * /*$ra*/ SplineGetNextPoint(struct Spline *spline /*$s0*/, struct SplineDef *def /*$s1*/)
- // line 499, offset 0x800426b4
+ // line 499, offset 0x80041b24
 	/* begin block 1 */
 		// Start line: 500
-		// Start offset: 0x800426B4
+		// Start offset: 0x80041B24
 		// Variables:
 	// 		static struct _SVector point; // offset 0x8
 	/* end block 1 */
-	// End offset: 0x80042700
+	// End offset: 0x80041B70
 	// End Line: 511
 
 	/* begin block 2 */
 		// Start line: 995
 	/* end block 2 */
 	// End Line: 996
+
+/* File: C:\kain2\game\SPLINE.C */
 
 _SVector * SplineGetNextPoint(Spline *spline,SplineDef *def)
 
@@ -441,20 +459,22 @@ _SVector * SplineGetNextPoint(Spline *spline,SplineDef *def)
 // decompiled code
 // original method signature: 
 // struct _SVector * /*$ra*/ SplineGetPreviousPoint(struct Spline *spline /*$s0*/, struct SplineDef *def /*$s1*/)
- // line 513, offset 0x80042714
+ // line 513, offset 0x80041b84
 	/* begin block 1 */
 		// Start line: 514
-		// Start offset: 0x80042714
+		// Start offset: 0x80041B84
 		// Variables:
 	// 		static struct _SVector point; // offset 0x10
 	/* end block 1 */
-	// End offset: 0x80042760
+	// End offset: 0x80041BD0
 	// End Line: 525
 
 	/* begin block 2 */
 		// Start line: 846
 	/* end block 2 */
 	// End Line: 847
+
+/* File: C:\kain2\game\SPLINE.C */
 
 _SVector * SplineGetPreviousPoint(Spline *spline,SplineDef *def)
 
@@ -473,10 +493,10 @@ _SVector * SplineGetPreviousPoint(Spline *spline,SplineDef *def)
 // decompiled code
 // original method signature: 
 // struct _SVector * /*$ra*/ SplineGetNearestPoint(struct Spline *spline /*$fp*/, struct _SVector *point /*$s4*/, struct SplineDef *def /*$t1*/)
- // line 539, offset 0x80042774
+ // line 539, offset 0x80041be4
 	/* begin block 1 */
 		// Start line: 540
-		// Start offset: 0x80042774
+		// Start offset: 0x80041BE4
 		// Variables:
 	// 		static struct _SVector dpoint; // offset 0x18
 	// 		long dist; // $a1
@@ -493,13 +513,15 @@ _SVector * SplineGetPreviousPoint(Spline *spline,SplineDef *def)
 	// 		struct _Vector d; // stack offset -80
 	// 		struct SplineDef tempdef; // stack offset -64
 	/* end block 1 */
-	// End offset: 0x80042AEC
+	// End offset: 0x80041F5C
 	// End Line: 681
 
 	/* begin block 2 */
 		// Start line: 900
 	/* end block 2 */
 	// End Line: 901
+
+/* File: C:\kain2\game\SPLINE.C */
 
 _SVector * SplineGetNearestPoint(Spline *spline,_SVector *point,SplineDef *def)
 
@@ -595,8 +617,8 @@ _SVector * SplineGetNearestPoint(Spline *spline,_SVector *point,SplineDef *def)
       SplineGetData(spline,&local_40,&dpoint_59);
       local_40.fracCurr = local_40.fracCurr + 0x1000;
       setCopReg(2,def,(int)point->x - (int)dpoint_59);
-      setCopReg(2,uVar7,(int)point->y - (int)DAT_800d25ce);
-      setCopReg(2,in_t3,(int)point->z - (int)DAT_800d25d0);
+      setCopReg(2,uVar7,(int)point->y - (int)DAT_800d2662);
+      setCopReg(2,in_t3,(int)point->z - (int)DAT_800d2664);
       copFunction(2,0xa00428);
       iVar1 = getCopReg(2,0x19);
       iVar4 = getCopReg(2,0x1a);
@@ -617,12 +639,12 @@ _SVector * SplineGetNearestPoint(Spline *spline,_SVector *point,SplineDef *def)
     if (local_38 <= iVar12) {
       def->currkey = sVar9;
       def->fracCurr = 0;
-      goto LAB_80042aec;
+      goto LAB_80041f5c;
     }
     def->currkey = (short)iVar11;
   }
   def->fracCurr = iVar10 << 0xc;
-LAB_80042aec:
+LAB_80041f5c:
   def->denomFlag = 0;
   SplineGetData(spline,def,&dpoint_59);
   return (_SVector *)&dpoint_59;
@@ -633,10 +655,10 @@ LAB_80042aec:
 // decompiled code
 // original method signature: 
 // unsigned long /*$ra*/ SplineGetData(struct Spline *spline /*$s1*/, struct SplineDef *def /*$s0*/, void *p /*$s4*/)
- // line 933, offset 0x80042b3c
+ // line 933, offset 0x80041fac
 	/* begin block 1 */
 		// Start line: 934
-		// Start offset: 0x80042B3C
+		// Start offset: 0x80041FAC
 		// Variables:
 	// 		unsigned long gotDataOk; // $s3
 	// 		unsigned long isRot; // $s2
@@ -646,37 +668,39 @@ LAB_80042aec:
 
 		/* begin block 1.1 */
 			// Start line: 965
-			// Start offset: 0x80042C10
+			// Start offset: 0x80042080
 		/* end block 1.1 */
-		// End offset: 0x80042C10
+		// End offset: 0x80042080
 		// End Line: 966
 
 		/* begin block 1.2 */
 			// Start line: 976
-			// Start offset: 0x80042C4C
+			// Start offset: 0x800420BC
 		/* end block 1.2 */
-		// End offset: 0x80042C4C
+		// End offset: 0x800420BC
 		// End Line: 977
 
 		/* begin block 1.3 */
 			// Start line: 990
-			// Start offset: 0x80042CC8
+			// Start offset: 0x80042138
 			// Variables:
 		// 		short _x1; // $v1
 		// 		short _y1; // $a0
 		// 		short _z1; // $v0
 		// 		struct vecS *_v1; // $v0
 		/* end block 1.3 */
-		// End offset: 0x80042CF4
+		// End offset: 0x80042164
 		// End Line: 990
 	/* end block 1 */
-	// End offset: 0x80042D28
+	// End offset: 0x80042198
 	// End Line: 1000
 
 	/* begin block 2 */
 		// Start line: 1852
 	/* end block 2 */
 	// End Line: 1853
+
+/* File: C:\kain2\game\SPLINE.C */
 
 ulong SplineGetData(Spline *spline,SplineDef *def,void *p)
 
@@ -753,10 +777,10 @@ ulong SplineGetData(Spline *spline,SplineDef *def,void *p)
 // decompiled code
 // original method signature: 
 // unsigned long /*$ra*/ SplineGetQuatData(struct Spline *spline /*$s1*/, struct SplineDef *def /*$s0*/, void *p /*$s3*/)
- // line 1003, offset 0x80042d4c
+ // line 1003, offset 0x800421bc
 	/* begin block 1 */
 		// Start line: 1004
-		// Start offset: 0x80042D4C
+		// Start offset: 0x800421BC
 		// Variables:
 	// 		unsigned long gotDataOk; // $s2
 	// 		int count; // $a0
@@ -764,18 +788,20 @@ ulong SplineGetData(Spline *spline,SplineDef *def,void *p)
 
 		/* begin block 1.1 */
 			// Start line: 1023
-			// Start offset: 0x80042DE4
+			// Start offset: 0x80042254
 		/* end block 1.1 */
-		// End offset: 0x80042DE4
+		// End offset: 0x80042254
 		// End Line: 1024
 	/* end block 1 */
-	// End offset: 0x80042E60
+	// End offset: 0x800422D0
 	// End Line: 1039
 
 	/* begin block 2 */
 		// Start line: 1703
 	/* end block 2 */
 	// End Line: 1704
+
+/* File: C:\kain2\game\SPLINE.C */
 
 ulong SplineGetQuatData(Spline *spline,SplineDef *def,void *p)
 
@@ -802,13 +828,13 @@ ulong SplineGetQuatData(Spline *spline,SplineDef *def,void *p)
     if (def->fracCurr != 0) {
       G2Quat_Slerp_VM(def->fracCurr / (int)*psVar1,(_G2Quat_Type *)(psVar1 + 1),
                       (_G2Quat_Type *)(psVar1 + 6),(_G2Quat_Type *)&local_20,0);
-      goto LAB_80042e40;
+      goto LAB_800422b0;
     }
   }
   psVar1 = &spline->key->count + (int)def->currkey * 5;
   local_20 = *(undefined4 *)(psVar1 + 1);
   local_1c = *(undefined4 *)(psVar1 + 3);
-LAB_80042e40:
+LAB_800422b0:
   *(undefined4 *)p = local_20;
   *(undefined4 *)((int)p + 4) = local_1c;
   return 1;
@@ -819,21 +845,23 @@ LAB_80042e40:
 // decompiled code
 // original method signature: 
 // unsigned long /*$ra*/ SplineGetNext(struct Spline *spline /*$s1*/, struct SplineDef *def /*$s0*/)
- // line 1052, offset 0x80042e80
+ // line 1052, offset 0x800422f0
 	/* begin block 1 */
 		// Start line: 1053
-		// Start offset: 0x80042E80
+		// Start offset: 0x800422F0
 		// Variables:
 	// 		unsigned long movedSplineOk; // $s3
 	// 		int count; // $s2
 	/* end block 1 */
-	// End offset: 0x80042F7C
+	// End offset: 0x800423EC
 	// End Line: 1106
 
 	/* begin block 2 */
 		// Start line: 1805
 	/* end block 2 */
 	// End Line: 1806
+
+/* File: C:\kain2\game\SPLINE.C */
 
 ulong SplineGetNext(Spline *spline,SplineDef *def)
 
@@ -885,22 +913,24 @@ ulong SplineGetNext(Spline *spline,SplineDef *def)
 // decompiled code
 // original method signature: 
 // unsigned long /*$ra*/ SplineGetPrev(struct Spline *spline /*$s0*/, struct SplineDef *def /*$s1*/)
- // line 1118, offset 0x80042f9c
+ // line 1118, offset 0x8004240c
 	/* begin block 1 */
 		// Start line: 1119
-		// Start offset: 0x80042F9C
+		// Start offset: 0x8004240C
 		// Variables:
 	// 		unsigned long movedSplineOk; // $s2
 	// 		unsigned long isRot; // $a1
 	// 		int count; // $v0
 	/* end block 1 */
-	// End offset: 0x800430AC
+	// End offset: 0x8004251C
 	// End Line: 1184
 
 	/* begin block 2 */
 		// Start line: 1941
 	/* end block 2 */
 	// End Line: 1942
+
+/* File: C:\kain2\game\SPLINE.C */
 
 ulong SplineGetPrev(Spline *spline,SplineDef *def)
 
@@ -923,7 +953,7 @@ ulong SplineGetPrev(Spline *spline,SplineDef *def)
   }
   if (0x1000 < def->fracCurr) {
     iVar4 = def->fracCurr + -0x1000;
-    goto LAB_800430a8;
+    goto LAB_80042518;
   }
   uVar3 = def->currkey - 1;
   if (def->currkey < 1) {
@@ -934,18 +964,18 @@ ulong SplineGetPrev(Spline *spline,SplineDef *def)
     }
     uVar3 = spline->numkeys - 2;
     def->currkey = uVar3;
-    if (bVar2) goto LAB_8004308c;
-LAB_80043060:
+    if (bVar2) goto LAB_800424fc;
+LAB_800424d0:
     sVar1 = (&spline->key->count)[(int)(short)uVar3 * 5];
   }
   else {
     def->currkey = uVar3;
-    if (!bVar2) goto LAB_80043060;
-LAB_8004308c:
+    if (!bVar2) goto LAB_800424d0;
+LAB_800424fc:
     sVar1 = *(short *)((int)&spline->key->count + ((int)((uint)uVar3 << 0x10) >> 0xb));
   }
   iVar4 = ((int)sVar1 + -1) * 0x1000;
-LAB_800430a8:
+LAB_80042518:
   def->fracCurr = iVar4;
   return 1;
 }
@@ -955,22 +985,24 @@ LAB_800430a8:
 // decompiled code
 // original method signature: 
 // unsigned long /*$ra*/ SplineGetOffsetNext(struct Spline *spline /*$s2*/, struct SplineDef *def /*$s1*/, long fracOffset /*$s5*/)
- // line 1205, offset 0x800430c8
+ // line 1205, offset 0x80042538
 	/* begin block 1 */
 		// Start line: 1206
-		// Start offset: 0x800430C8
+		// Start offset: 0x80042538
 		// Variables:
 	// 		unsigned long movedSplineOk; // $s3
 	// 		unsigned long isRot; // $s4
 	// 		int count; // $s0
 	/* end block 1 */
-	// End offset: 0x80043284
+	// End offset: 0x800426F4
 	// End Line: 1271
 
 	/* begin block 2 */
 		// Start line: 2119
 	/* end block 2 */
 	// End Line: 2120
+
+/* File: C:\kain2\game\SPLINE.C */
 
 ulong SplineGetOffsetNext(Spline *spline,SplineDef *def,long fracOffset)
 
@@ -1019,10 +1051,10 @@ ulong SplineGetOffsetNext(Spline *spline,SplineDef *def,long fracOffset)
           else {
             def->currkey = 0;
           }
-          if ((int)def->currkey <= (int)spline->numkeys + -1) goto LAB_80043204;
+          if ((int)def->currkey <= (int)spline->numkeys + -1) goto LAB_80042674;
         }
         else {
-LAB_80043204:
+LAB_80042674:
           if (bVar2) {
             sVar1 = spline->key[def->currkey].count;
           }
@@ -1039,7 +1071,7 @@ LAB_80043204:
         }
       } while( true );
     }
-    printf("def->currkey=%d spline->numkeys=%d\n");
+    printf(s_def__currkey__d_spline__numkeys__800cfd50);
   }
   return 0;
 }
@@ -1049,22 +1081,24 @@ LAB_80043204:
 // decompiled code
 // original method signature: 
 // unsigned long /*$ra*/ SplineGetOffsetPrev(struct Spline *spline /*$s1*/, struct SplineDef *def /*$s0*/, long fracOffset /*$s3*/)
- // line 1284, offset 0x800432ac
+ // line 1284, offset 0x8004271c
 	/* begin block 1 */
 		// Start line: 1285
-		// Start offset: 0x800432AC
+		// Start offset: 0x8004271C
 		// Variables:
 	// 		unsigned long movedSplineOk; // $s2
 	// 		unsigned long isRot; // $a1
 	// 		int count; // $v1
 	/* end block 1 */
-	// End offset: 0x80043400
+	// End offset: 0x80042870
 	// End Line: 1350
 
 	/* begin block 2 */
 		// Start line: 2280
 	/* end block 2 */
 	// End Line: 2281
+
+/* File: C:\kain2\game\SPLINE.C */
 
 ulong SplineGetOffsetPrev(Spline *spline,SplineDef *def,long fracOffset)
 
@@ -1090,10 +1124,10 @@ ulong SplineGetOffsetPrev(Spline *spline,SplineDef *def,long fracOffset)
           if ((*(uint *)&spline->numkeys & 0x6000000) != 0) {
             uVar3 = spline->numkeys - 1;
             def->currkey = uVar3;
-            if (bVar2) goto LAB_80043394;
-LAB_800433c0:
+            if (bVar2) goto LAB_80042804;
+LAB_80042830:
             sVar1 = *(short *)((int)&spline->key->count + ((int)((uint)uVar3 << 0x10) >> 0xb));
-            goto code_r0x800433d4;
+            goto code_r0x80042844;
           }
           uVar5 = 0;
           def->currkey = 0;
@@ -1101,10 +1135,10 @@ LAB_800433c0:
         }
         else {
           def->currkey = uVar3;
-          if (!bVar2) goto LAB_800433c0;
-LAB_80043394:
+          if (!bVar2) goto LAB_80042830;
+LAB_80042804:
           sVar1 = (&spline->key->count)[(int)(short)uVar3 * 5];
-code_r0x800433d4:
+code_r0x80042844:
           iVar4 = (int)sVar1;
           if (iVar4 < 1) {
             iVar4 = 1;
@@ -1123,20 +1157,22 @@ code_r0x800433d4:
 // decompiled code
 // original method signature: 
 // struct _SVector * /*$ra*/ SplineGetOffsetNextPoint(struct Spline *spline /*$s0*/, struct SplineDef *def /*$s1*/, long offset /*$a2*/)
- // line 1354, offset 0x80043420
+ // line 1354, offset 0x80042890
 	/* begin block 1 */
 		// Start line: 1355
-		// Start offset: 0x80043420
+		// Start offset: 0x80042890
 		// Variables:
 	// 		static struct _SVector point; // offset 0x28
 	/* end block 1 */
-	// End offset: 0x8004346C
+	// End offset: 0x800428DC
 	// End Line: 1366
 
 	/* begin block 2 */
 		// Start line: 2425
 	/* end block 2 */
 	// End Line: 2426
+
+/* File: C:\kain2\game\SPLINE.C */
 
 _SVector * SplineGetOffsetNextPoint(Spline *spline,SplineDef *def,long offset)
 
@@ -1155,20 +1191,22 @@ _SVector * SplineGetOffsetNextPoint(Spline *spline,SplineDef *def,long offset)
 // decompiled code
 // original method signature: 
 // struct _SVector * /*$ra*/ SplineGetOffsetPreviousPoint(struct Spline *spline /*$s0*/, struct SplineDef *def /*$s1*/, long offset /*$a2*/)
- // line 1368, offset 0x80043480
+ // line 1368, offset 0x800428f0
 	/* begin block 1 */
 		// Start line: 1369
-		// Start offset: 0x80043480
+		// Start offset: 0x800428F0
 		// Variables:
 	// 		static struct _SVector point; // offset 0x30
 	/* end block 1 */
-	// End offset: 0x800434CC
+	// End offset: 0x8004293C
 	// End Line: 1380
 
 	/* begin block 2 */
 		// Start line: 2455
 	/* end block 2 */
 	// End Line: 2456
+
+/* File: C:\kain2\game\SPLINE.C */
 
 _SVector * SplineGetOffsetPreviousPoint(Spline *spline,SplineDef *def,long offset)
 

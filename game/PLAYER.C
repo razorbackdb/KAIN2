@@ -5,11 +5,13 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLAYER_TurnHead(struct _Instance *instance /*$s0*/, short *rotx /*$s1*/, short *rotz /*$s2*/, struct GameTracker *gameTracker /*$s3*/)
- // line 25, offset 0x80012ac8
+ // line 25, offset 0x80012c2c
 	/* begin block 1 */
 		// Start line: 50
 	/* end block 1 */
 	// End Line: 51
+
+/* File: C:\kain2\game\PLAYER.C */
 
 void PLAYER_TurnHead(_Instance *instance,short *rotx,short *rotz,GameTracker *gameTracker)
 
@@ -31,11 +33,13 @@ void PLAYER_TurnHead(_Instance *instance,short *rotx,short *rotz,GameTracker *ga
 // decompiled code
 // original method signature: 
 // long /*$ra*/ PLAYER_OkToLookAround(struct _Instance *instance /*$s0*/)
- // line 33, offset 0x80012b48
+ // line 33, offset 0x80012cac
 	/* begin block 1 */
 		// Start line: 66
 	/* end block 1 */
 	// End Line: 67
+
+/* File: C:\kain2\game\PLAYER.C */
 
 long PLAYER_OkToLookAround(_Instance *instance)
 
@@ -58,7 +62,7 @@ long PLAYER_OkToLookAround(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLAYER_SetLookAround(struct _Instance *instance /*$s0*/)
- // line 41, offset 0x80012b94
+ // line 41, offset 0x80012cf8
 	/* begin block 1 */
 		// Start line: 80
 	/* end block 1 */
@@ -68,6 +72,8 @@ long PLAYER_OkToLookAround(_Instance *instance)
 		// Start line: 84
 	/* end block 2 */
 	// End Line: 85
+
+/* File: C:\kain2\game\PLAYER.C */
 
 void PLAYER_SetLookAround(_Instance *instance)
 
@@ -89,11 +95,13 @@ void PLAYER_SetLookAround(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLAYER_ReSetLookAround(struct _Instance *instance /*$s0*/)
- // line 49, offset 0x80012be0
+ // line 49, offset 0x80012d44
 	/* begin block 1 */
 		// Start line: 100
 	/* end block 1 */
 	// End Line: 101
+
+/* File: C:\kain2\game\PLAYER.C */
 
 void PLAYER_ReSetLookAround(_Instance *instance)
 

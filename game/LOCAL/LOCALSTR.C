@@ -4,26 +4,47 @@
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ localstr_set_language(enum language_t lang /*$a0*/)
- // line 50, offset 0x800b1abc
+// enum language_t /*$ra*/ localstr_get_language()
+ // line 46, offset 0x800b62c4
 	/* begin block 1 */
-		// Start line: 51
-		// Start offset: 0x800B1ABC
+		// Start line: 92
+	/* end block 1 */
+	// End Line: 93
+
+	/* begin block 2 */
+		// Start line: 93
+	/* end block 2 */
+	// End Line: 94
+
+/* File: C:\kain2\game\LOCAL\LOCALSTR.C */
+
+language_t localstr_get_language(void)
+
+{
+  return the_language;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ localstr_set_language(enum language_t lang /*$a0*/)
+ // line 51, offset 0x800b62d0
+	/* begin block 1 */
+		// Start line: 52
+		// Start offset: 0x800B62D0
 		// Variables:
 	// 		int i; // $a1
 	/* end block 1 */
-	// End offset: 0x800B1B3C
-	// End Line: 79
+	// End offset: 0x800B6350
+	// End Line: 88
 
 	/* begin block 2 */
-		// Start line: 95
+		// Start line: 102
 	/* end block 2 */
-	// End Line: 96
+	// End Line: 103
 
-	/* begin block 3 */
-		// Start line: 96
-	/* end block 3 */
-	// End Line: 97
+/* File: C:\kain2\game\LOCAL\LOCALSTR.C */
 
 void localstr_set_language(language_t lang)
 
@@ -32,7 +53,7 @@ void localstr_set_language(language_t lang)
   LocalizationHeader *pLVar2;
   int iVar3;
   
-  pLVar1 = (LocalizationHeader *)LOAD_ReadFileFromCD("\\LOCALS.TBL;1",6);
+  pLVar1 = (LocalizationHeader *)LOAD_ReadFileFromCD(s__LOCALS_TBL_1_800d0c5c,6);
   pLVar2 = pLVar1 + 1;
   LocalizationTable = pLVar1;
   if (pLVar1 != (LocalizationHeader *)0x0) {
@@ -56,36 +77,38 @@ void localstr_set_language(language_t lang)
 // decompiled code
 // original method signature: 
 // char * /*$ra*/ localstr_get(enum localstr_t id /*$a0*/)
- // line 83, offset 0x800b1b4c
+ // line 92, offset 0x800b6360
 	/* begin block 1 */
-		// Start line: 85
-		// Start offset: 0x800B1B4C
+		// Start line: 94
+		// Start offset: 0x800B6360
 		// Variables:
 	// 		static char BlankStr[2]; // offset 0x1c
 	/* end block 1 */
-	// End offset: 0x800B1B74
-	// End Line: 93
+	// End offset: 0x800B6388
+	// End Line: 102
 
 	/* begin block 2 */
-		// Start line: 176
+		// Start line: 206
 	/* end block 2 */
-	// End Line: 177
+	// End Line: 207
 
 	/* begin block 3 */
-		// Start line: 177
+		// Start line: 207
 	/* end block 3 */
-	// End Line: 178
+	// End Line: 208
 
 	/* begin block 4 */
-		// Start line: 178
+		// Start line: 208
 	/* end block 4 */
-	// End Line: 179
+	// End Line: 209
+
+/* File: C:\kain2\game\LOCAL\LOCALSTR.C */
 
 char * localstr_get(localstr_t id)
 
 {
   if (LocalStrings == (char **)0x0) {
-    return ".";
+    return &DAT_800d0c6c;
   }
   return LocalStrings[id];
 }

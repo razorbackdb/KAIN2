@@ -12,31 +12,31 @@
 // decompiled code
 // original method signature: 
 // void COLLIDE_NearestPointOnLine_S() /* COLLIDE_NearestPointOnLine_S method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
- // line 29, offset 0x80077960
+ // line 32, offset 0x80077924
 	/* begin block 1 */
-		// Start line: 59
+		// Start line: 65
 	/* end block 1 */
-	// End Line: 60
+	// End Line: 66
 
 	/* begin block 2 */
-		// Start line: 60
+		// Start line: 66
 	/* end block 2 */
-	// End Line: 61
+	// End Line: 67
 
 	/* begin block 3 */
-		// Start line: 61
+		// Start line: 67
 	/* end block 3 */
-	// End Line: 62
+	// End Line: 68
 
 	/* begin block 4 */
-		// Start line: 62
+		// Start line: 68
 	/* end block 4 */
-	// End Line: 63
+	// End Line: 69
 
 	/* begin block 5 */
-		// Start line: 63
+		// Start line: 69
 	/* end block 5 */
-	// End Line: 64
+	// End Line: 70
 
 void COLLIDE_NearestPointOnLine_S(uint *param_1,uint *param_2,uint *param_3,uint *param_4)
 
@@ -107,26 +107,26 @@ void COLLIDE_NearestPointOnLine_S(uint *param_1,uint *param_2,uint *param_3,uint
 // decompiled code
 // original method signature: 
 // void COLLIDE_IntersectLineAndPlane_S() /* COLLIDE_IntersectLineAndPlane_S method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
- // line 121, offset 0x80077a70
+ // line 124, offset 0x80077a34
 	/* begin block 1 */
-		// Start line: 243
+		// Start line: 249
 	/* end block 1 */
-	// End Line: 244
+	// End Line: 250
 
 	/* begin block 2 */
-		// Start line: 244
+		// Start line: 250
 	/* end block 2 */
-	// End Line: 245
+	// End Line: 251
 
 	/* begin block 3 */
-		// Start line: 245
+		// Start line: 251
 	/* end block 3 */
-	// End Line: 246
+	// End Line: 252
 
 	/* begin block 4 */
-		// Start line: 246
+		// Start line: 252
 	/* end block 4 */
-	// End Line: 247
+	// End Line: 253
 
 undefined4
 COLLIDE_IntersectLineAndPlane_S
@@ -145,7 +145,7 @@ COLLIDE_IntersectLineAndPlane_S
   undefined4 uVar8;
   int iVar9;
   undefined4 uVar10;
-  uint uVar11;
+  undefined *puVar11;
   
   uVar2 = *param_2;
   uVar1 = *(ushort *)(param_2 + 1);
@@ -161,12 +161,12 @@ COLLIDE_IntersectLineAndPlane_S
   iVar3 = getCopReg(2,0xc800);
   iVar4 = getCopReg(2,0xd000);
   if (iVar4 != 0) {
-    uVar11 = ((iVar3 - param_5) * -0x1000) / iVar4;
+    puVar11 = (undefined *)(((iVar3 - param_5) * -0x1000) / iVar4);
     setCopReg(2,0x4800,iVar5);
     setCopReg(2,0x5000,uVar7);
     setCopReg(2,0x5800,iVar9);
-    if (uVar11 < 0x1001) {
-      setCopReg(2,0x4000,uVar11);
+    if (puVar11 < &DAT_00001001) {
+      setCopReg(2,0x4000,puVar11);
       copFunction(2,0x198003d);
       uVar6 = getCopReg(2,0x4800);
       uVar8 = getCopReg(2,0x5000);
@@ -185,41 +185,41 @@ COLLIDE_IntersectLineAndPlane_S
 // decompiled code
 // original method signature: 
 // void COLLIDE_NearestPointOnPlane_S() /* COLLIDE_NearestPointOnPlane_S method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
- // line 179, offset 0x80077b48
+ // line 182, offset 0x80077b0c
 	/* begin block 1 */
-		// Start line: 359
+		// Start line: 365
 	/* end block 1 */
-	// End Line: 360
+	// End Line: 366
 
 	/* begin block 2 */
-		// Start line: 360
+		// Start line: 366
 	/* end block 2 */
-	// End Line: 361
+	// End Line: 367
 
 	/* begin block 3 */
-		// Start line: 361
+		// Start line: 367
 	/* end block 3 */
-	// End Line: 362
+	// End Line: 368
 
 	/* begin block 4 */
-		// Start line: 362
+		// Start line: 368
 	/* end block 4 */
-	// End Line: 363
+	// End Line: 369
 
 	/* begin block 5 */
-		// Start line: 363
+		// Start line: 369
 	/* end block 5 */
-	// End Line: 364
+	// End Line: 370
 
 	/* begin block 6 */
-		// Start line: 364
+		// Start line: 370
 	/* end block 6 */
-	// End Line: 365
+	// End Line: 371
 
 	/* begin block 7 */
-		// Start line: 365
+		// Start line: 371
 	/* end block 7 */
-	// End Line: 366
+	// End Line: 372
 
 void COLLIDE_NearestPointOnPlane_S(short *param_1,int *param_2,int param_3,undefined4 *param_4)
 
@@ -260,26 +260,26 @@ void COLLIDE_NearestPointOnPlane_S(short *param_1,int *param_2,int param_3,undef
 // decompiled code
 // original method signature: 
 // void VM_ProcessVMObjectSetColor_S() /* VM_ProcessVMObjectSetColor_S method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
- // line 625, offset 0x800780cc
+ // line 628, offset 0x80078090
 	/* begin block 1 */
-		// Start line: 1251
+		// Start line: 1257
 	/* end block 1 */
-	// End Line: 1252
+	// End Line: 1258
 
 	/* begin block 2 */
-		// Start line: 1252
+		// Start line: 1258
 	/* end block 2 */
-	// End Line: 1253
+	// End Line: 1259
 
 	/* begin block 3 */
-		// Start line: 1253
+		// Start line: 1259
 	/* end block 3 */
-	// End Line: 1254
+	// End Line: 1260
 
 	/* begin block 4 */
-		// Start line: 1254
+		// Start line: 1260
 	/* end block 4 */
-	// End Line: 1255
+	// End Line: 1261
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
@@ -297,17 +297,17 @@ void VM_ProcessVMObjectSetColor_S(void)
   undefined4 unaff_s8;
   undefined4 unaff_retaddr;
   
-  _DAT_1f800000 = unaff_retaddr;
-  _DAT_1f800004 = unaff_s0;
-  _DAT_1f800008 = unaff_s1;
-  _DAT_1f80000c = unaff_s2;
+  DAT_1f800000 = unaff_retaddr;
+  DAT_1f800004 = unaff_s0;
+  DAT_1f800008 = unaff_s1;
+  DAT_1f80000c = unaff_s2;
   _DAT_1f800010 = unaff_s3;
-  _DAT_1f800014 = unaff_s4;
+  DAT_1f800014 = unaff_s4;
   DAT_1f800018 = unaff_s5;
   DAT_1f80001c = unaff_s6;
   DAT_1f800020 = unaff_s7;
   DAT_1f800024 = unaff_s8;
-  FUN_80077bd4();
+  FUN_80077b98();
   return;
 }
 
@@ -316,56 +316,56 @@ void VM_ProcessVMObjectSetColor_S(void)
 // decompiled code
 // original method signature: 
 // void VM_ProcessVMObjectList_S() /* VM_ProcessVMObjectList_S method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
- // line 661, offset 0x80078140
+ // line 664, offset 0x80078104
 	/* begin block 1 */
-		// Start line: 1323
-	/* end block 1 */
-	// End Line: 1324
-
-	/* begin block 2 */
-		// Start line: 1324
-	/* end block 2 */
-	// End Line: 1325
-
-	/* begin block 3 */
-		// Start line: 1325
-	/* end block 3 */
-	// End Line: 1326
-
-	/* begin block 4 */
-		// Start line: 1326
-	/* end block 4 */
-	// End Line: 1327
-
-	/* begin block 5 */
-		// Start line: 1327
-	/* end block 5 */
-	// End Line: 1328
-
-	/* begin block 6 */
-		// Start line: 1328
-	/* end block 6 */
-	// End Line: 1329
-
-	/* begin block 7 */
 		// Start line: 1329
-	/* end block 7 */
+	/* end block 1 */
 	// End Line: 1330
 
-	/* begin block 8 */
+	/* begin block 2 */
 		// Start line: 1330
-	/* end block 8 */
+	/* end block 2 */
 	// End Line: 1331
 
-	/* begin block 9 */
+	/* begin block 3 */
 		// Start line: 1331
-	/* end block 9 */
+	/* end block 3 */
 	// End Line: 1332
 
-	/* begin block 10 */
+	/* begin block 4 */
 		// Start line: 1332
-	/* end block 10 */
+	/* end block 4 */
 	// End Line: 1333
+
+	/* begin block 5 */
+		// Start line: 1333
+	/* end block 5 */
+	// End Line: 1334
+
+	/* begin block 6 */
+		// Start line: 1334
+	/* end block 6 */
+	// End Line: 1335
+
+	/* begin block 7 */
+		// Start line: 1335
+	/* end block 7 */
+	// End Line: 1336
+
+	/* begin block 8 */
+		// Start line: 1336
+	/* end block 8 */
+	// End Line: 1337
+
+	/* begin block 9 */
+		// Start line: 1337
+	/* end block 9 */
+	// End Line: 1338
+
+	/* begin block 10 */
+		// Start line: 1338
+	/* end block 10 */
+	// End Line: 1339
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
@@ -389,12 +389,12 @@ void VM_ProcessVMObjectList_S(int param_1)
   
   iVar3 = *(int *)(param_1 + 8);
   puVar2 = *(uint **)(param_1 + 0xc);
-  _DAT_1f800000 = unaff_retaddr;
-  _DAT_1f800004 = unaff_s0;
-  _DAT_1f800008 = unaff_s1;
-  _DAT_1f80000c = unaff_s2;
+  DAT_1f800000 = unaff_retaddr;
+  DAT_1f800004 = unaff_s0;
+  DAT_1f800008 = unaff_s1;
+  DAT_1f80000c = unaff_s2;
   _DAT_1f800010 = unaff_s3;
-  _DAT_1f800014 = unaff_s4;
+  DAT_1f800014 = unaff_s4;
   DAT_1f800018 = unaff_s5;
   DAT_1f80001c = unaff_s6;
   DAT_1f800020 = unaff_s7;
@@ -408,7 +408,7 @@ void VM_ProcessVMObjectList_S(int param_1)
       iVar1 = BSP_SphereIntersectsViewVolume_S(puVar2 + 4);
       puVar2[3] = uVar4;
       if (iVar1 != 0) {
-        FUN_80077bd4();
+        FUN_80077b98();
       }
     }
     iVar3 = iVar3 + -1;
@@ -422,36 +422,36 @@ void VM_ProcessVMObjectList_S(int param_1)
 // decompiled code
 // original method signature: 
 // void BSP_SphereIntersectsViewVolume_S() /* BSP_SphereIntersectsViewVolume_S method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
- // line 732, offset 0x80078204
+ // line 735, offset 0x800781c8
 	/* begin block 1 */
-		// Start line: 1465
+		// Start line: 1471
 	/* end block 1 */
-	// End Line: 1466
+	// End Line: 1472
 
 	/* begin block 2 */
-		// Start line: 1466
+		// Start line: 1472
 	/* end block 2 */
-	// End Line: 1467
+	// End Line: 1473
 
 	/* begin block 3 */
-		// Start line: 1467
+		// Start line: 1473
 	/* end block 3 */
-	// End Line: 1468
+	// End Line: 1474
 
 	/* begin block 4 */
-		// Start line: 1468
+		// Start line: 1474
 	/* end block 4 */
-	// End Line: 1469
+	// End Line: 1475
 
 	/* begin block 5 */
-		// Start line: 1469
+		// Start line: 1475
 	/* end block 5 */
-	// End Line: 1470
+	// End Line: 1476
 
 	/* begin block 6 */
-		// Start line: 1470
+		// Start line: 1476
 	/* end block 6 */
-	// End Line: 1471
+	// End Line: 1477
 
 uint BSP_SphereIntersectsViewVolume_S(undefined4 *param_1,int param_2)
 
@@ -509,117 +509,210 @@ uint BSP_SphereIntersectsViewVolume_S(undefined4 *param_1,int param_2)
 // decompiled code
 // original method signature: 
 // void RotMatrixZYX() /* RotMatrixZYX method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
- // line 793, offset 0x800782dc
+ // line 796, offset 0x800782a0
 	/* begin block 1 */
-		// Start line: 1587
+		// Start line: 1593
 	/* end block 1 */
-	// End Line: 1588
+	// End Line: 1594
 
 	/* begin block 2 */
-		// Start line: 1588
+		// Start line: 1594
 	/* end block 2 */
-	// End Line: 1589
+	// End Line: 1595
 
 	/* begin block 3 */
-		// Start line: 1589
+		// Start line: 1595
 	/* end block 3 */
-	// End Line: 1590
+	// End Line: 1596
 
 	/* begin block 4 */
-		// Start line: 1590
+		// Start line: 1596
 	/* end block 4 */
-	// End Line: 1591
+	// End Line: 1597
 
 	/* begin block 5 */
-		// Start line: 1591
+		// Start line: 1597
 	/* end block 5 */
-	// End Line: 1592
+	// End Line: 1598
 
-void RotMatrixZYX(short *param_1,uint *param_2)
+	/* begin block 6 */
+		// Start line: 1598
+	/* end block 6 */
+	// End Line: 1599
+
+MATRIX * RotMatrixZYX(SVECTOR *r,MATRIX *m)
 
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  uint uVar4;
-  short sVar5;
-  int iVar6;
-  undefined4 uVar7;
-  int iVar8;
-  undefined4 uVar9;
+  ushort uVar1;
+  ushort uVar2;
+  MATRIX *in_v0;
+  MATRIX *pMVar3;
+  undefined4 uVar4;
+  uint uVar5;
+  uint uVar6;
+  int iVar7;
+  undefined4 uVar8;
+  int iVar9;
   undefined4 uVar10;
   int iVar11;
+  int iVar12;
+  int iVar13;
+  undefined4 uVar14;
+  undefined4 uVar15;
+  undefined4 uVar16;
   
-  iVar11 = *(int *)(&rcossin_tbl + ((int)param_1[2] & 0xfffU) * 4);
-  uVar4 = iVar11 >> 0x10;
-  if (((int)param_1[1] & 0xfffU | (int)*param_1 & 0xfffU) != 0) {
-    iVar8 = *(int *)(&rcossin_tbl + ((int)*param_1 & 0xfffU) * 4);
-    iVar6 = (int)(short)iVar11;
-    iVar11 = *(int *)(&rcossin_tbl + ((int)param_1[1] & 0xfffU) * 4) >> 0x10;
-    sVar5 = (short)*(int *)(&rcossin_tbl + ((int)param_1[1] & 0xfffU) * 4);
-    setCopReg(2,0x4800,iVar11);
-    setCopReg(2,0x5000,uVar4);
-    setCopReg(2,0x5800,iVar6);
-    setCopReg(2,0x4000,iVar8 >> 0x10);
-    copFunction(2,0x198003d);
-    *(short *)(param_2 + 3) = -sVar5;
-    uVar7 = getCopReg(2,0x5000);
-    uVar1 = getCopReg(2,0x4800);
-    uVar9 = getCopReg(2,0x5800);
-    *(short *)(param_2 + 4) = (short)uVar1;
-    setCopReg(2,0x4800,iVar11);
-    setCopReg(2,0x5000,uVar4);
-    setCopReg(2,0x5800,iVar6);
-    setCopReg(2,0x4000,(int)(short)iVar8);
-    copFunction(2,0x198003d);
-    *(short *)param_2 = (short)((int)(iVar11 * uVar4) >> 0xc);
-    uVar1 = getCopReg(2,0x4800);
-    uVar10 = getCopReg(2,0x5000);
-    iVar8 = getCopReg(2,0x5800);
-    *(undefined2 *)((int)param_2 + 0xe) = (short)uVar1;
-    setCopReg(2,0x4800,uVar7);
-    setCopReg(2,0x5000,uVar9);
-    setCopReg(2,0x5800,uVar10);
-    setCopReg(2,0x4000,(int)sVar5);
-    copFunction(2,0x198003d);
-    *(undefined2 *)((int)param_2 + 6) = (short)(iVar11 * iVar6 >> 0xc);
-    uVar1 = getCopReg(2,0x4800);
-    uVar2 = getCopReg(2,0x5000);
-    uVar3 = getCopReg(2,0x5800);
-    *(short *)((int)param_2 + 2) = (short)uVar3 - (short)uVar9;
-    *(short *)(param_2 + 1) = (short)uVar1 + (short)iVar8;
-    *(short *)(param_2 + 2) = (short)(iVar8 * (int)sVar5 >> 0xc) + (short)uVar7;
-    *(short *)((int)param_2 + 10) = (short)uVar2 - (short)uVar10;
-    return;
+  uVar1 = r->vy;
+  uVar2 = r->vx;
+  uVar5 = (int)r->vz & 0x7ff;
+  iVar13 = (int)ecostable[uVar5];
+  uVar5 = SEXT24(ecostable[uVar5 + 0x400]);
+  if (((int)r->vz & 0x800U) != 0) {
+    iVar13 = -iVar13;
+    uVar5 = -uVar5;
   }
-  *param_2 = iVar11 * -0x10000 | uVar4 & 0xffff;
-  param_2[1] = iVar11 * 0x10000;
-  param_2[2] = uVar4 & 0xffff;
-  param_2[3] = 0;
-  *(undefined2 *)(param_2 + 4) = 0x1000;
-  return;
+  if ((uVar1 | uVar2) != 0) {
+    uVar6 = (int)(short)uVar1 & 0x7ff;
+    iVar12 = (int)ecostable[uVar6];
+    iVar9 = (int)ecostable[uVar6 + 0x400];
+    if (((int)(short)uVar1 & 0x800U) != 0) {
+      iVar9 = -iVar9;
+      iVar12 = -iVar12;
+    }
+    uVar6 = (int)(short)uVar2 & 0x7ff;
+    iVar11 = (int)ecostable[uVar6];
+    iVar7 = (int)ecostable[uVar6 + 0x400];
+    if (((int)(short)uVar2 & 0x800U) != 0) {
+      iVar11 = -iVar11;
+      iVar7 = -iVar7;
+    }
+    setCopReg(2,0x4800,iVar9);
+    setCopReg(2,0x5000,uVar5);
+    setCopReg(2,0x5800,iVar13);
+    setCopReg(2,0x4000,iVar7);
+    copFunction(2,0x198003d);
+    m->m[6] = -(short)iVar12;
+    uVar14 = getCopReg(2,0x5000);
+    uVar4 = getCopReg(2,0x4800);
+    uVar15 = getCopReg(2,0x5800);
+    m->m[8] = (short)uVar4;
+    setCopReg(2,0x4800,iVar9);
+    setCopReg(2,0x5000,uVar5);
+    setCopReg(2,0x5800,iVar13);
+    setCopReg(2,0x4000,iVar11);
+    copFunction(2,0x198003d);
+    m->m[0] = (short)((int)(iVar9 * uVar5) >> 0xc);
+    uVar4 = getCopReg(2,0x4800);
+    uVar16 = getCopReg(2,0x5000);
+    iVar11 = getCopReg(2,0x5800);
+    m->m[7] = (short)uVar4;
+    setCopReg(2,0x4800,uVar14);
+    setCopReg(2,0x5000,uVar15);
+    setCopReg(2,0x5800,uVar16);
+    setCopReg(2,0x4000,iVar12);
+    copFunction(2,0x198003d);
+    m->m[3] = (short)(iVar9 * iVar13 >> 0xc);
+    uVar4 = getCopReg(2,0x4800);
+    uVar8 = getCopReg(2,0x5000);
+    uVar10 = getCopReg(2,0x5800);
+    pMVar3 = (MATRIX *)(iVar11 * iVar12 >> 0xc);
+    m->m[1] = (short)uVar10 - (short)uVar15;
+    m->m[2] = (short)uVar4 + (short)iVar11;
+    m->m[4] = (short)pMVar3 + (short)uVar14;
+    m->m[5] = (short)uVar8 - (short)uVar16;
+    return pMVar3;
+  }
+  *(uint *)m->m = iVar13 * -0x10000 | uVar5 & 0xffff;
+  *(int *)(m->m + 2) = iVar13 * 0x10000;
+  *(uint *)(m->m + 4) = uVar5 & 0xffff;
+  *(undefined4 *)(m->m + 6) = 0;
+  m->m[8] = 0x1000;
+  return in_v0;
 }
 
 
 
 // autogenerated function stub: 
-// void rmzyx_onlyz() /* rmzyx_onlyz method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
-void rmzyx_onlyz() 
-{ // line 891, offset 0x80078420
+// void rmzyx_1() /* rmzyx_1 method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
+void rmzyx_1() 
+{ // line 818, offset 0x800782dc
 	/* begin block 1 */
-		// Start line: 1783
+		// Start line: 1637
 	/* end block 1 */
-	// End Line: 1784
+	// End Line: 1638
 
 	/* begin block 2 */
-		// Start line: 1784
+		// Start line: 1638
 	/* end block 2 */
-	// End Line: 1785
+	// End Line: 1639
+
+	return null;
+}
+
+
+// autogenerated function stub: 
+// void rmzyx_2() /* rmzyx_2 method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
+void rmzyx_2() 
+{ // line 834, offset 0x80078310
+	/* begin block 1 */
+		// Start line: 1669
+	/* end block 1 */
+	// End Line: 1670
+
+	/* begin block 2 */
+		// Start line: 1670
+	/* end block 2 */
+	// End Line: 1671
+
+	return null;
+}
+
+
+// autogenerated function stub: 
+// void rmzyx_3() /* rmzyx_3 method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
+void rmzyx_3() 
+{ // line 846, offset 0x80078338
+	/* begin block 1 */
+		// Start line: 1693
+	/* end block 1 */
+	// End Line: 1694
+
+	/* begin block 2 */
+		// Start line: 1694
+	/* end block 2 */
+	// End Line: 1695
 
 	/* begin block 3 */
-		// Start line: 1785
+		// Start line: 1695
 	/* end block 3 */
-	// End Line: 1786
+	// End Line: 1696
+
+	/* begin block 4 */
+		// Start line: 1696
+	/* end block 4 */
+	// End Line: 1697
+
+	return null;
+}
+
+
+// autogenerated function stub: 
+// void rmzyx_onlyz() /* rmzyx_onlyz method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
+void rmzyx_onlyz() 
+{ // line 903, offset 0x80078408
+	/* begin block 1 */
+		// Start line: 1807
+	/* end block 1 */
+	// End Line: 1808
+
+	/* begin block 2 */
+		// Start line: 1808
+	/* end block 2 */
+	// End Line: 1809
+
+	/* begin block 3 */
+		// Start line: 1809
+	/* end block 3 */
+	// End Line: 1810
 
 	return null;
 }
@@ -628,102 +721,172 @@ void rmzyx_onlyz()
 // decompiled code
 // original method signature: 
 // void RotMatrix() /* RotMatrix method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
- // line 907, offset 0x80078450
+ // line 918, offset 0x80078434
 	/* begin block 1 */
-		// Start line: 1815
+		// Start line: 1837
 	/* end block 1 */
-	// End Line: 1816
+	// End Line: 1838
 
 	/* begin block 2 */
-		// Start line: 1816
+		// Start line: 1838
 	/* end block 2 */
-	// End Line: 1817
+	// End Line: 1839
 
 	/* begin block 3 */
-		// Start line: 1817
+		// Start line: 1839
 	/* end block 3 */
-	// End Line: 1818
+	// End Line: 1840
 
-void RotMatrix(short *param_1,uint *param_2)
+MATRIX * RotMatrix(SVECTOR *r,MATRIX *m)
 
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  uint uVar4;
-  short sVar5;
-  int iVar6;
-  undefined4 uVar7;
-  int iVar8;
-  undefined4 uVar9;
+  ushort uVar1;
+  ushort uVar2;
+  MATRIX *in_v0;
+  MATRIX *pMVar3;
+  undefined4 uVar4;
+  uint uVar5;
+  uint uVar6;
+  int iVar7;
+  undefined4 uVar8;
+  int iVar9;
   undefined4 uVar10;
   int iVar11;
+  int iVar12;
+  int iVar13;
+  undefined4 uVar14;
+  undefined4 uVar15;
+  undefined4 uVar16;
   
-  iVar11 = *(int *)(&rcossin_tbl + ((int)param_1[2] & 0xfffU) * 4);
-  uVar4 = iVar11 >> 0x10;
-  if (((int)param_1[1] & 0xfffU | (int)*param_1 & 0xfffU) != 0) {
-    iVar8 = *(int *)(&rcossin_tbl + ((int)*param_1 & 0xfffU) * 4);
-    iVar6 = (int)(short)iVar11;
-    iVar11 = *(int *)(&rcossin_tbl + ((int)param_1[1] & 0xfffU) * 4) >> 0x10;
-    sVar5 = (short)*(int *)(&rcossin_tbl + ((int)param_1[1] & 0xfffU) * 4);
-    setCopReg(2,0x4800,iVar11);
-    setCopReg(2,0x5000,uVar4);
-    setCopReg(2,0x5800,iVar6);
-    setCopReg(2,0x4000,iVar8 >> 0x10);
-    copFunction(2,0x198003d);
-    *(short *)(param_2 + 1) = sVar5;
-    uVar7 = getCopReg(2,0x5000);
-    uVar1 = getCopReg(2,0x4800);
-    uVar9 = getCopReg(2,0x5800);
-    *(short *)(param_2 + 4) = (short)uVar1;
-    setCopReg(2,0x4800,iVar11);
-    setCopReg(2,0x5000,uVar4);
-    setCopReg(2,0x5800,iVar6);
-    setCopReg(2,0x4000,(int)(short)iVar8);
-    copFunction(2,0x198003d);
-    *(short *)param_2 = (short)((int)(iVar11 * uVar4) >> 0xc);
-    uVar1 = getCopReg(2,0x4800);
-    uVar10 = getCopReg(2,0x5000);
-    iVar8 = getCopReg(2,0x5800);
-    *(short *)((int)param_2 + 10) = -(short)uVar1;
-    setCopReg(2,0x4800,uVar7);
-    setCopReg(2,0x5000,uVar9);
-    setCopReg(2,0x5800,uVar10);
-    setCopReg(2,0x4000,(int)sVar5);
-    copFunction(2,0x198003d);
-    *(short *)((int)param_2 + 2) = -(short)(iVar11 * iVar6 >> 0xc);
-    uVar1 = getCopReg(2,0x4800);
-    uVar2 = getCopReg(2,0x5000);
-    uVar3 = getCopReg(2,0x5800);
-    *(short *)((int)param_2 + 6) = (short)uVar3 + (short)uVar9;
-    *(short *)(param_2 + 3) = (short)iVar8 - (short)uVar1;
-    *(short *)(param_2 + 2) = (short)uVar7 - (short)(iVar8 * (int)sVar5 >> 0xc);
-    *(short *)((int)param_2 + 0xe) = (short)uVar2 + (short)uVar10;
-    return;
+  uVar1 = r->vy;
+  uVar2 = r->vx;
+  uVar5 = (int)r->vz & 0x7ff;
+  iVar13 = (int)ecostable[uVar5];
+  uVar5 = SEXT24(ecostable[uVar5 + 0x400]);
+  if (((int)r->vz & 0x800U) != 0) {
+    iVar13 = -iVar13;
+    uVar5 = -uVar5;
   }
-  *param_2 = iVar11 * -0x10000 | uVar4 & 0xffff;
-  param_2[1] = iVar11 * 0x10000;
-  param_2[2] = uVar4 & 0xffff;
-  param_2[3] = 0;
-  *(undefined2 *)(param_2 + 4) = 0x1000;
-  return;
+  if ((uVar1 | uVar2) != 0) {
+    uVar6 = (int)(short)uVar1 & 0x7ff;
+    iVar12 = (int)ecostable[uVar6];
+    iVar9 = (int)ecostable[uVar6 + 0x400];
+    if (((int)(short)uVar1 & 0x800U) != 0) {
+      iVar9 = -iVar9;
+      iVar12 = -iVar12;
+    }
+    uVar6 = (int)(short)uVar2 & 0x7ff;
+    iVar11 = (int)ecostable[uVar6];
+    iVar7 = (int)ecostable[uVar6 + 0x400];
+    if (((int)(short)uVar2 & 0x800U) != 0) {
+      iVar11 = -iVar11;
+      iVar7 = -iVar7;
+    }
+    setCopReg(2,0x4800,iVar9);
+    setCopReg(2,0x5000,uVar5);
+    setCopReg(2,0x5800,iVar13);
+    setCopReg(2,0x4000,iVar7);
+    copFunction(2,0x198003d);
+    m->m[2] = (short)iVar12;
+    uVar14 = getCopReg(2,0x5000);
+    uVar4 = getCopReg(2,0x4800);
+    uVar15 = getCopReg(2,0x5800);
+    m->m[8] = (short)uVar4;
+    setCopReg(2,0x4800,iVar9);
+    setCopReg(2,0x5000,uVar5);
+    setCopReg(2,0x5800,iVar13);
+    setCopReg(2,0x4000,iVar11);
+    copFunction(2,0x198003d);
+    m->m[0] = (short)((int)(iVar9 * uVar5) >> 0xc);
+    uVar4 = getCopReg(2,0x4800);
+    uVar16 = getCopReg(2,0x5000);
+    iVar11 = getCopReg(2,0x5800);
+    m->m[5] = -(short)uVar4;
+    setCopReg(2,0x4800,uVar14);
+    setCopReg(2,0x5000,uVar15);
+    setCopReg(2,0x5800,uVar16);
+    setCopReg(2,0x4000,iVar12);
+    copFunction(2,0x198003d);
+    m->m[1] = -(short)(iVar9 * iVar13 >> 0xc);
+    uVar4 = getCopReg(2,0x4800);
+    uVar8 = getCopReg(2,0x5000);
+    uVar10 = getCopReg(2,0x5800);
+    pMVar3 = (MATRIX *)(iVar11 * iVar12 >> 0xc);
+    m->m[3] = (short)uVar10 + (short)uVar15;
+    m->m[6] = (short)iVar11 - (short)uVar4;
+    m->m[4] = (short)uVar14 - (short)pMVar3;
+    m->m[7] = (short)uVar8 + (short)uVar16;
+    return pMVar3;
+  }
+  *(uint *)m->m = iVar13 * -0x10000 | uVar5 & 0xffff;
+  *(int *)(m->m + 2) = iVar13 * 0x10000;
+  *(uint *)(m->m + 4) = uVar5 & 0xffff;
+  *(undefined4 *)(m->m + 6) = 0;
+  m->m[8] = 0x1000;
+  return in_v0;
 }
 
 
 
 // autogenerated function stub: 
-// void ApplyMatrix_S() /* ApplyMatrix_S method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
-void ApplyMatrix_S() 
-{ // line 1004, offset 0x80078598
+// void rm_1() /* rm_1 method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
+void rm_1() 
+{ // line 937, offset 0x80078470
 	/* begin block 1 */
-		// Start line: 2009
+		// Start line: 1875
 	/* end block 1 */
-	// End Line: 2010
+	// End Line: 1876
 
 	/* begin block 2 */
-		// Start line: 2010
+		// Start line: 1876
 	/* end block 2 */
-	// End Line: 2011
+	// End Line: 1877
+
+	return null;
+}
+
+
+// autogenerated function stub: 
+// void rm_2() /* rm_2 method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
+void rm_2() 
+{ // line 953, offset 0x800784a4
+	/* begin block 1 */
+		// Start line: 1907
+	/* end block 1 */
+	// End Line: 1908
+
+	/* begin block 2 */
+		// Start line: 1908
+	/* end block 2 */
+	// End Line: 1909
+
+	return null;
+}
+
+
+// autogenerated function stub: 
+// void rm_3() /* rm_3 method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
+void rm_3() 
+{ // line 965, offset 0x800784cc
+	/* begin block 1 */
+		// Start line: 1931
+	/* end block 1 */
+	// End Line: 1932
+
+	/* begin block 2 */
+		// Start line: 1932
+	/* end block 2 */
+	// End Line: 1933
+
+	/* begin block 3 */
+		// Start line: 1933
+	/* end block 3 */
+	// End Line: 1934
+
+	/* begin block 4 */
+		// Start line: 1934
+	/* end block 4 */
+	// End Line: 1935
 
 	return null;
 }
@@ -731,154 +894,116 @@ void ApplyMatrix_S()
 
 // decompiled code
 // original method signature: 
-// void ScaleMatrix() /* ScaleMatrix method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
- // line 1025, offset 0x800785e8
+// void RotMatrixX() /* RotMatrixX method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
+ // line 1023, offset 0x800785a0
 	/* begin block 1 */
-		// Start line: 2051
+		// Start line: 2047
 	/* end block 1 */
-	// End Line: 2052
+	// End Line: 2048
 
 	/* begin block 2 */
-		// Start line: 2052
+		// Start line: 2048
 	/* end block 2 */
-	// End Line: 2053
+	// End Line: 2049
 
 	/* begin block 3 */
-		// Start line: 2053
+		// Start line: 2049
 	/* end block 3 */
-	// End Line: 2054
+	// End Line: 2050
 
 	/* begin block 4 */
-		// Start line: 2054
+		// Start line: 2050
 	/* end block 4 */
-	// End Line: 2055
+	// End Line: 2051
 
-	/* begin block 5 */
-		// Start line: 2055
-	/* end block 5 */
-	// End Line: 2056
-
-	/* begin block 6 */
-		// Start line: 2056
-	/* end block 6 */
-	// End Line: 2057
-
-int * ScaleMatrix(int *param_1,undefined4 *param_2)
+MATRIX * RotMatrixX(long r,MATRIX *m)
 
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  MATRIX *pMVar1;
+  int iVar2;
   undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
+  int iVar4;
+  int iVar5;
+  int iVar6;
+  undefined4 uVar7;
+  int iVar8;
+  int iVar9;
+  undefined4 uVar10;
+  int iVar11;
+  int iVar12;
   
-  setCopReg(2,0x4800,(int)(short)*param_1);
-  setCopReg(2,0x5000,param_1[1] >> 0x10);
-  setCopReg(2,0x5800,(int)(short)param_1[3]);
-  setCopReg(2,0x4000,*param_2);
+  pMVar1 = (MATRIX *)(int)ecostable[(r & 0x7ffU) + 0x400];
+  iVar2 = (int)ecostable[r & 0x7ffU];
+  if ((r & 0x800U) != 0) {
+    pMVar1 = (MATRIX *)-(int)pMVar1;
+    iVar2 = -iVar2;
+  }
+  setCopReg(2,0x4000,pMVar1);
+  setCopReg(2,0x4800,(int)m->m[3]);
+  iVar6 = *(int *)(m->m + 4) >> 0x10;
+  iVar5 = (int)(short)*(int *)(m->m + 4);
+  setCopReg(2,0x5000,iVar5);
+  setCopReg(2,0x5800,iVar6);
   copFunction(2,0x198003d);
-  uVar1 = getCopReg(2,0x4800);
-  uVar2 = getCopReg(2,0x5000);
-  uVar4 = getCopReg(2,0x5800);
-  setCopReg(2,0x4000,param_2[1]);
-  setCopReg(2,0x4800,*param_1 >> 0x10);
-  setCopReg(2,0x5000,(int)(short)param_1[2]);
-  setCopReg(2,0x5800,param_1[3] >> 0x10);
-  *(short *)param_1 = (short)uVar1;
+  iVar9 = *(int *)(m->m + 6) >> 0x10;
+  iVar8 = (int)(short)*(int *)(m->m + 6);
+  uVar10 = getCopReg(2,0x4800);
+  iVar11 = getCopReg(2,0x5000);
+  iVar12 = getCopReg(2,0x5800);
+  setCopReg(2,0x4000,iVar2);
+  setCopReg(2,0x4800,iVar8);
+  setCopReg(2,0x5000,iVar9);
+  setCopReg(2,0x5800,(int)m->m[8]);
   copFunction(2,0x198003d);
-  uVar1 = param_2[2];
-  *(undefined2 *)((int)param_1 + 6) = (short)uVar2;
-  uVar2 = getCopReg(2,0x4800);
-  uVar3 = getCopReg(2,0x5000);
-  uVar5 = getCopReg(2,0x5800);
-  setCopReg(2,0x4000,uVar1);
-  setCopReg(2,0x4800,(int)(short)param_1[1]);
-  setCopReg(2,0x5000,param_1[2] >> 0x10);
-  setCopReg(2,0x5800,(int)*(short *)(param_1 + 4));
+  uVar3 = getCopReg(2,0x4800);
+  iVar2 = getCopReg(2,0x5000);
+  iVar4 = getCopReg(2,0x5800);
+  setCopReg(2,0x4800,(int)m->m[3]);
+  setCopReg(2,0x5000,iVar5);
+  setCopReg(2,0x5800,iVar6);
   copFunction(2,0x198003d);
-  *(short *)(param_1 + 3) = (short)uVar4;
-  *(undefined2 *)((int)param_1 + 2) = (short)uVar2;
-  *(short *)(param_1 + 2) = (short)uVar3;
-  *(undefined2 *)((int)param_1 + 0xe) = (short)uVar5;
-  uVar1 = getCopReg(2,0x4800);
-  uVar2 = getCopReg(2,0x5000);
+  iVar5 = getCopReg(2,0x4800);
+  iVar6 = getCopReg(2,0x5000);
+  uVar7 = getCopReg(2,0x5800);
+  setCopReg(2,0x4000,pMVar1);
+  setCopReg(2,0x4800,iVar8);
+  setCopReg(2,0x5000,iVar9);
+  setCopReg(2,0x5800,(int)m->m[8]);
+  copFunction(2,0x198003d);
+  m->m[3] = (short)uVar10 - (short)uVar3;
+  *(uint *)(m->m + 4) = iVar11 - iVar2 & 0xffffU | (iVar12 - iVar4) * 0x10000;
+  iVar2 = getCopReg(2,0x4800);
+  iVar4 = getCopReg(2,0x5000);
   uVar3 = getCopReg(2,0x5800);
-  *(short *)(param_1 + 1) = (short)uVar1;
-  *(undefined2 *)((int)param_1 + 10) = (short)uVar2;
-  *(short *)(param_1 + 4) = (short)uVar3;
-  return param_1;
+  *(uint *)(m->m + 6) = iVar5 + iVar2 & 0xffffU | (iVar6 + iVar4) * 0x10000;
+  m->m[8] = (short)uVar7 + (short)uVar3;
+  return pMVar1;
 }
 
 
 
-// decompiled code
-// original method signature: 
-// void rsin() /* rsin method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
- // line 1090, offset 0x800786d0
+// autogenerated function stub: 
+// void RMX_0() /* RMX_0 method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
+void RMX_0() 
+{ // line 1039, offset 0x800785d0
 	/* begin block 1 */
-		// Start line: 2181
+		// Start line: 2079
 	/* end block 1 */
-	// End Line: 2182
+	// End Line: 2080
 
 	/* begin block 2 */
-		// Start line: 2182
+		// Start line: 2080
 	/* end block 2 */
-	// End Line: 2183
+	// End Line: 2081
 
-	/* begin block 3 */
-		// Start line: 2183
-	/* end block 3 */
-	// End Line: 2184
-
-	/* begin block 4 */
-		// Start line: 2184
-	/* end block 4 */
-	// End Line: 2185
-
-	/* begin block 5 */
-		// Start line: 2185
-	/* end block 5 */
-	// End Line: 2186
-
-	/* begin block 6 */
-		// Start line: 2186
-	/* end block 6 */
-	// End Line: 2187
-
-int rsin(uint param_1)
-
-{
-  return (int)*(short *)(&rcossin_tbl + (param_1 & 0xfff) * 4);
+	return null;
 }
-
 
 
 // decompiled code
 // original method signature: 
-// void rcos() /* rcos method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
- // line 1104, offset 0x800786f0
-	/* begin block 1 */
-		// Start line: 2209
-	/* end block 1 */
-	// End Line: 2210
-
-	/* begin block 2 */
-		// Start line: 2210
-	/* end block 2 */
-	// End Line: 2211
-
-int rcos(uint param_1)
-
-{
-  return (int)*(short *)(&LAB_800c7d8a + (param_1 & 0xfff) * 4);
-}
-
-
-
-// decompiled code
-// original method signature: 
-// void MATH3D_racos_S() /* MATH3D_racos_S method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
- // line 1114, offset 0x80078710
+// void RotMatrixY() /* RotMatrixY method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
+ // line 1114, offset 0x800786d4
 	/* begin block 1 */
 		// Start line: 2229
 	/* end block 1 */
@@ -894,10 +1019,429 @@ int rcos(uint param_1)
 	/* end block 3 */
 	// End Line: 2232
 
+MATRIX * RotMatrixY(long r,MATRIX *m)
+
+{
+  MATRIX *pMVar1;
+  int iVar2;
+  int iVar3;
+  undefined4 uVar4;
+  int iVar5;
+  int iVar6;
+  undefined4 uVar7;
+  int iVar8;
+  int iVar9;
+  int iVar10;
+  int iVar11;
+  undefined4 uVar12;
+  
+  pMVar1 = (MATRIX *)(int)ecostable[(r & 0x7ffU) + 0x400];
+  iVar2 = (int)ecostable[r & 0x7ffU];
+  if ((r & 0x800U) != 0) {
+    pMVar1 = (MATRIX *)-(int)pMVar1;
+    iVar2 = -iVar2;
+  }
+  setCopReg(2,0x4000,pMVar1);
+  setCopReg(2,0x5800,(int)m->m[2]);
+  iVar6 = *(int *)m->m >> 0x10;
+  iVar5 = (int)(short)*(int *)m->m;
+  setCopReg(2,0x4800,iVar5);
+  setCopReg(2,0x5000,iVar6);
+  copFunction(2,0x198003d);
+  iVar9 = *(int *)(m->m + 6) >> 0x10;
+  iVar8 = (int)(short)*(int *)(m->m + 6);
+  iVar10 = getCopReg(2,0x4800);
+  iVar11 = getCopReg(2,0x5000);
+  uVar12 = getCopReg(2,0x5800);
+  setCopReg(2,0x4000,iVar2);
+  setCopReg(2,0x4800,iVar8);
+  setCopReg(2,0x5000,iVar9);
+  setCopReg(2,0x5800,(int)m->m[8]);
+  copFunction(2,0x198003d);
+  iVar3 = getCopReg(2,0x4800);
+  iVar2 = getCopReg(2,0x5000);
+  uVar4 = getCopReg(2,0x5800);
+  setCopReg(2,0x4800,iVar5);
+  setCopReg(2,0x5000,iVar6);
+  setCopReg(2,0x5800,(int)m->m[2]);
+  copFunction(2,0x198003d);
+  iVar5 = getCopReg(2,0x4800);
+  iVar6 = getCopReg(2,0x5000);
+  uVar7 = getCopReg(2,0x5800);
+  setCopReg(2,0x4000,pMVar1);
+  setCopReg(2,0x4800,iVar8);
+  setCopReg(2,0x5000,iVar9);
+  setCopReg(2,0x5800,(int)m->m[8]);
+  copFunction(2,0x198003d);
+  *(uint *)m->m = iVar10 + iVar3 & 0xffffU | (iVar11 + iVar2) * 0x10000;
+  m->m[2] = (short)uVar12 + (short)uVar4;
+  iVar2 = getCopReg(2,0x4800);
+  iVar3 = getCopReg(2,0x5000);
+  uVar4 = getCopReg(2,0x5800);
+  *(uint *)(m->m + 6) = iVar2 - iVar5 & 0xffffU | (iVar3 - iVar6) * 0x10000;
+  m->m[8] = (short)uVar4 - (short)uVar7;
+  return pMVar1;
+}
+
+
+
+// autogenerated function stub: 
+// void RMY_0() /* RMY_0 method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
+void RMY_0() 
+{ // line 1129, offset 0x80078704
+	/* begin block 1 */
+		// Start line: 2259
+	/* end block 1 */
+	// End Line: 2260
+
+	/* begin block 2 */
+		// Start line: 2260
+	/* end block 2 */
+	// End Line: 2261
+
+	return null;
+}
+
+
+// decompiled code
+// original method signature: 
+// void RotMatrixZ() /* RotMatrixZ method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
+ // line 1200, offset 0x80078808
+	/* begin block 1 */
+		// Start line: 2401
+	/* end block 1 */
+	// End Line: 2402
+
+	/* begin block 2 */
+		// Start line: 2402
+	/* end block 2 */
+	// End Line: 2403
+
+MATRIX * RotMatrixZ(long r,MATRIX *m)
+
+{
+  MATRIX *pMVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  int iVar5;
+  int iVar6;
+  int iVar7;
+  int iVar8;
+  int iVar9;
+  int iVar10;
+  int iVar11;
+  int iVar12;
+  int iVar13;
+  
+  pMVar1 = (MATRIX *)(int)ecostable[(r & 0x7ffU) + 0x400];
+  iVar2 = (int)ecostable[r & 0x7ffU];
+  if ((r & 0x800U) != 0) {
+    pMVar1 = (MATRIX *)-(int)pMVar1;
+    iVar2 = -iVar2;
+  }
+  iVar6 = *(int *)m->m >> 0x10;
+  iVar5 = (int)(short)*(int *)m->m;
+  iVar8 = *(int *)(m->m + 2) >> 0x10;
+  iVar7 = (int)(short)*(int *)(m->m + 2);
+  setCopReg(2,0x4000,pMVar1);
+  setCopReg(2,0x4800,iVar5);
+  setCopReg(2,0x5000,iVar6);
+  setCopReg(2,0x5800,iVar7);
+  copFunction(2,0x198003d);
+  iVar10 = *(int *)(m->m + 4) >> 0x10;
+  iVar9 = (int)(short)*(int *)(m->m + 4);
+  iVar11 = getCopReg(2,0x4800);
+  iVar12 = getCopReg(2,0x5000);
+  iVar13 = getCopReg(2,0x5800);
+  setCopReg(2,0x4000,iVar2);
+  setCopReg(2,0x4800,iVar8);
+  setCopReg(2,0x5000,iVar9);
+  setCopReg(2,0x5800,iVar10);
+  copFunction(2,0x198003d);
+  iVar3 = getCopReg(2,0x4800);
+  iVar2 = getCopReg(2,0x5000);
+  iVar4 = getCopReg(2,0x5800);
+  setCopReg(2,0x4800,iVar5);
+  setCopReg(2,0x5000,iVar6);
+  setCopReg(2,0x5800,iVar7);
+  copFunction(2,0x198003d);
+  iVar5 = getCopReg(2,0x4800);
+  iVar6 = getCopReg(2,0x5000);
+  iVar7 = getCopReg(2,0x5800);
+  setCopReg(2,0x4000,pMVar1);
+  setCopReg(2,0x4800,iVar8);
+  setCopReg(2,0x5000,iVar9);
+  setCopReg(2,0x5800,iVar10);
+  copFunction(2,0x198003d);
+  *(uint *)m->m = iVar11 - iVar3 & 0xffffU | (iVar12 - iVar2) * 0x10000;
+  iVar2 = getCopReg(2,0x4800);
+  iVar3 = getCopReg(2,0x5000);
+  iVar8 = getCopReg(2,0x5800);
+  *(uint *)(m->m + 2) = iVar13 - iVar4 & 0xffffU | (iVar5 + iVar2) * 0x10000;
+  *(uint *)(m->m + 4) = iVar6 + iVar3 & 0xffffU | (iVar7 + iVar8) * 0x10000;
+  return pMVar1;
+}
+
+
+
+// autogenerated function stub: 
+// void RMZ_0() /* RMZ_0 method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
+void RMZ_0() 
+{ // line 1214, offset 0x80078838
+	/* begin block 1 */
+		// Start line: 2429
+	/* end block 1 */
+	// End Line: 2430
+
+	/* begin block 2 */
+		// Start line: 2430
+	/* end block 2 */
+	// End Line: 2431
+
+	return null;
+}
+
+
+// autogenerated function stub: 
+// void ApplyMatrix_S() /* ApplyMatrix_S method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
+void ApplyMatrix_S() 
+{ // line 1295, offset 0x80078948
+	/* begin block 1 */
+		// Start line: 2591
+	/* end block 1 */
+	// End Line: 2592
+
+	/* begin block 2 */
+		// Start line: 2592
+	/* end block 2 */
+	// End Line: 2593
+
+	/* begin block 3 */
+		// Start line: 2593
+	/* end block 3 */
+	// End Line: 2594
+
 	/* begin block 4 */
-		// Start line: 2232
+		// Start line: 2594
 	/* end block 4 */
-	// End Line: 2233
+	// End Line: 2595
+
+	return null;
+}
+
+
+// decompiled code
+// original method signature: 
+// void ScaleMatrix() /* ScaleMatrix method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
+ // line 1318, offset 0x80078998
+	/* begin block 1 */
+		// Start line: 2637
+	/* end block 1 */
+	// End Line: 2638
+
+	/* begin block 2 */
+		// Start line: 2638
+	/* end block 2 */
+	// End Line: 2639
+
+	/* begin block 3 */
+		// Start line: 2639
+	/* end block 3 */
+	// End Line: 2640
+
+	/* begin block 4 */
+		// Start line: 2640
+	/* end block 4 */
+	// End Line: 2641
+
+	/* begin block 5 */
+		// Start line: 2641
+	/* end block 5 */
+	// End Line: 2642
+
+	/* begin block 6 */
+		// Start line: 2642
+	/* end block 6 */
+	// End Line: 2643
+
+MATRIX * ScaleMatrix(MATRIX *m,VECTOR *v)
+
+{
+  long lVar1;
+  undefined4 uVar2;
+  int iVar3;
+  undefined4 uVar4;
+  int iVar5;
+  undefined4 uVar6;
+  undefined4 uVar7;
+  
+  iVar3 = *(int *)(m->m + 2);
+  iVar5 = *(int *)(m->m + 4);
+  setCopReg(2,0x4800,(int)(short)*(int *)m->m);
+  setCopReg(2,0x5000,iVar3 >> 0x10);
+  setCopReg(2,0x5800,(int)(short)*(int *)(m->m + 6));
+  setCopReg(2,0x4000,v->vx);
+  copFunction(2,0x198003d);
+  uVar2 = getCopReg(2,0x4800);
+  uVar4 = getCopReg(2,0x5000);
+  uVar6 = getCopReg(2,0x5800);
+  setCopReg(2,0x4000,v->vy);
+  setCopReg(2,0x4800,*(int *)m->m >> 0x10);
+  setCopReg(2,0x5000,(int)(short)iVar5);
+  setCopReg(2,0x5800,*(int *)(m->m + 6) >> 0x10);
+  m->m[0] = (short)uVar2;
+  copFunction(2,0x198003d);
+  lVar1 = v->vz;
+  m->m[3] = (short)uVar4;
+  uVar2 = getCopReg(2,0x4800);
+  uVar4 = getCopReg(2,0x5000);
+  uVar7 = getCopReg(2,0x5800);
+  setCopReg(2,0x4000,lVar1);
+  setCopReg(2,0x4800,(int)(short)iVar3);
+  setCopReg(2,0x5000,iVar5 >> 0x10);
+  setCopReg(2,0x5800,(int)m->m[8]);
+  copFunction(2,0x198003d);
+  m->m[6] = (short)uVar6;
+  m->m[1] = (short)uVar2;
+  m->m[4] = (short)uVar4;
+  m->m[7] = (short)uVar7;
+  uVar2 = getCopReg(2,0x4800);
+  uVar4 = getCopReg(2,0x5000);
+  uVar6 = getCopReg(2,0x5800);
+  m->m[2] = (short)uVar2;
+  m->m[5] = (short)uVar4;
+  m->m[8] = (short)uVar6;
+  return m;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void rsin() /* rsin method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
+ // line 1383, offset 0x80078a80
+	/* begin block 1 */
+		// Start line: 2767
+	/* end block 1 */
+	// End Line: 2768
+
+	/* begin block 2 */
+		// Start line: 2768
+	/* end block 2 */
+	// End Line: 2769
+
+	/* begin block 3 */
+		// Start line: 2769
+	/* end block 3 */
+	// End Line: 2770
+
+	/* begin block 4 */
+		// Start line: 2770
+	/* end block 4 */
+	// End Line: 2771
+
+int rsin(int a)
+
+{
+  int iVar1;
+  
+  iVar1 = (int)ecostable[a & 0x7ff];
+  if ((a & 0x800U) != 0) {
+    iVar1 = -iVar1;
+  }
+  return iVar1;
+}
+
+
+
+// autogenerated function stub: 
+// void rsin_exit() /* rsin_exit method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
+void rsin_exit() 
+{ // line 1397, offset 0x80078aa8
+	/* begin block 1 */
+		// Start line: 2795
+	/* end block 1 */
+	// End Line: 2796
+
+	return null;
+}
+
+
+// decompiled code
+// original method signature: 
+// void rcos() /* rcos method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
+ // line 1400, offset 0x80078ab0
+	/* begin block 1 */
+		// Start line: 2801
+	/* end block 1 */
+	// End Line: 2802
+
+	/* begin block 2 */
+		// Start line: 2802
+	/* end block 2 */
+	// End Line: 2803
+
+int rcos(int a)
+
+{
+  int iVar1;
+  
+  iVar1 = (int)ecostable[(a & 0x7ffU) + 0x400];
+  if ((a & 0x800U) != 0) {
+    iVar1 = -iVar1;
+  }
+  return iVar1;
+}
+
+
+
+// autogenerated function stub: 
+// void rcos_exit() /* rcos_exit method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
+void rcos_exit() 
+{ // line 1412, offset 0x80078ad8
+	/* begin block 1 */
+		// Start line: 2825
+	/* end block 1 */
+	// End Line: 2826
+
+	return null;
+}
+
+
+// decompiled code
+// original method signature: 
+// void MATH3D_racos_S() /* MATH3D_racos_S method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
+ // line 1415, offset 0x80078ae0
+	/* begin block 1 */
+		// Start line: 2831
+	/* end block 1 */
+	// End Line: 2832
+
+	/* begin block 2 */
+		// Start line: 2852
+	/* end block 2 */
+	// End Line: 2853
+
+	/* begin block 3 */
+		// Start line: 2853
+	/* end block 3 */
+	// End Line: 2854
+
+	/* begin block 4 */
+		// Start line: 2854
+	/* end block 4 */
+	// End Line: 2855
+
+	/* begin block 5 */
+		// Start line: 2855
+	/* end block 5 */
+	// End Line: 2856
+
+	/* begin block 6 */
+		// Start line: 2856
+	/* end block 6 */
+	// End Line: 2857
 
 int MATH3D_racos_S(int param_1)
 
@@ -914,9 +1458,9 @@ int MATH3D_racos_S(int param_1)
     iVar4 = -param_1;
   }
   do {
-    if ((int)*(short *)(&LAB_800c7d8a + iVar1 * 4) == iVar4) break;
+    if ((int)ecostable[iVar1 + 0x400] == iVar4) break;
     iVar3 = iVar2 >> 1;
-    if ((int)*(short *)(&LAB_800c7d8a + iVar1 * 4) - iVar4 < 0) {
+    if ((int)ecostable[iVar1 + 0x400] - iVar4 < 0) {
       iVar2 = -iVar2;
     }
     iVar1 = iVar1 + iVar2;
@@ -933,46 +1477,46 @@ int MATH3D_racos_S(int param_1)
 // decompiled code
 // original method signature: 
 // void SetGp() /* SetGp method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
- // line 1159, offset 0x80078770
+ // line 1482, offset 0x80078b40
 	/* begin block 1 */
-		// Start line: 2319
+		// Start line: 2965
 	/* end block 1 */
-	// End Line: 2320
+	// End Line: 2966
 
 	/* begin block 2 */
-		// Start line: 2320
+		// Start line: 2966
 	/* end block 2 */
-	// End Line: 2321
+	// End Line: 2967
 
 	/* begin block 3 */
-		// Start line: 2321
+		// Start line: 2967
 	/* end block 3 */
-	// End Line: 2322
+	// End Line: 2968
 
 	/* begin block 4 */
-		// Start line: 2322
+		// Start line: 2968
 	/* end block 4 */
-	// End Line: 2323
+	// End Line: 2969
 
 	/* begin block 5 */
-		// Start line: 2323
+		// Start line: 2969
 	/* end block 5 */
-	// End Line: 2324
+	// End Line: 2970
 
 	/* begin block 6 */
-		// Start line: 2324
+		// Start line: 2970
 	/* end block 6 */
-	// End Line: 2325
+	// End Line: 2971
 
 	/* begin block 7 */
-		// Start line: 2325
+		// Start line: 2971
 	/* end block 7 */
-	// End Line: 2326
+	// End Line: 2972
 
 	/* begin block 8 */
-		// Start line: 2326
+		// Start line: 2972
 	/* end block 8 */
-	// End Line: 2327
+	// End Line: 2973
 
 void SetGp(void)
 
@@ -985,49 +1529,52 @@ void SetGp(void)
 // decompiled code
 // original method signature: 
 // void memcpy() /* memcpy method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
- // line 1169, offset 0x80078778
+ // line 1492, offset 0x80078b48
 	/* begin block 1 */
-		// Start line: 2339
+		// Start line: 2985
 	/* end block 1 */
-	// End Line: 2340
+	// End Line: 2986
 
 	/* begin block 2 */
-		// Start line: 2340
+		// Start line: 2986
 	/* end block 2 */
-	// End Line: 2341
+	// End Line: 2987
 
 	/* begin block 3 */
-		// Start line: 2341
+		// Start line: 2987
 	/* end block 3 */
-	// End Line: 2342
+	// End Line: 2988
 
 	/* begin block 4 */
-		// Start line: 2342
+		// Start line: 2988
 	/* end block 4 */
-	// End Line: 2343
+	// End Line: 2989
 
 	/* begin block 5 */
-		// Start line: 2343
+		// Start line: 2989
 	/* end block 5 */
-	// End Line: 2344
+	// End Line: 2990
 
 	/* begin block 6 */
-		// Start line: 2344
+		// Start line: 2990
 	/* end block 6 */
-	// End Line: 2345
+	// End Line: 2991
 
 	/* begin block 7 */
-		// Start line: 2345
+		// Start line: 2991
 	/* end block 7 */
-	// End Line: 2346
+	// End Line: 2992
 
-void * memcpy(void *__dest,void *__src,size_t __n)
+void * memcpy(void)
 
 {
   undefined uVar1;
+  undefined4 *in_a0;
   undefined4 *puVar2;
   undefined4 *puVar3;
-  undefined *puVar4;
+  undefined4 *in_a1;
+  uint in_a2;
+  undefined4 uVar4;
   undefined4 uVar5;
   undefined4 uVar6;
   undefined4 uVar7;
@@ -1035,56 +1582,54 @@ void * memcpy(void *__dest,void *__src,size_t __n)
   undefined4 uVar9;
   undefined4 uVar10;
   undefined4 uVar11;
-  undefined4 uVar12;
   
-  if (__n != 0) {
-    puVar4 = (undefined *)__dest;
-    puVar2 = (undefined4 *)__dest;
-    if ((((uint)__dest | (uint)__src | __n) & 3) == 0) {
+  if (in_a2 != 0) {
+    puVar3 = in_a0;
+    if ((((uint)in_a0 | (uint)in_a1 | in_a2) & 3) == 0) {
       do {
-        uVar5 = *(undefined4 *)__src;
-        __src = (undefined4 *)__src + 1;
-        puVar3 = puVar2 + 1;
-        __n = __n - 4;
-        *puVar2 = uVar5;
-        puVar2 = puVar3;
-      } while ((__n & 0x1f) != 0);
-      if (__n != 0) {
+        uVar4 = *in_a1;
+        in_a1 = in_a1 + 1;
+        puVar2 = puVar3 + 1;
+        in_a2 = in_a2 - 4;
+        *puVar3 = uVar4;
+        puVar3 = puVar2;
+      } while ((in_a2 & 0x1f) != 0);
+      if (in_a2 != 0) {
         do {
-          uVar5 = *(undefined4 *)__src;
-          uVar6 = ((undefined4 *)__src)[1];
-          uVar7 = ((undefined4 *)__src)[2];
-          uVar8 = ((undefined4 *)__src)[3];
-          uVar9 = ((undefined4 *)__src)[4];
-          uVar10 = ((undefined4 *)__src)[5];
-          uVar11 = ((undefined4 *)__src)[6];
-          uVar12 = ((undefined4 *)__src)[7];
-          __n = __n - 0x20;
-          __src = (undefined4 *)__src + 8;
-          *puVar3 = uVar5;
-          puVar3[1] = uVar6;
-          puVar3[2] = uVar7;
-          puVar3[3] = uVar8;
-          puVar3[4] = uVar9;
-          puVar3[5] = uVar10;
-          puVar3[6] = uVar11;
-          puVar3[7] = uVar12;
-          puVar3 = puVar3 + 8;
-        } while (__n != 0);
-        return __dest;
+          uVar4 = *in_a1;
+          uVar5 = in_a1[1];
+          uVar6 = in_a1[2];
+          uVar7 = in_a1[3];
+          uVar8 = in_a1[4];
+          uVar9 = in_a1[5];
+          uVar10 = in_a1[6];
+          uVar11 = in_a1[7];
+          in_a2 = in_a2 - 0x20;
+          in_a1 = in_a1 + 8;
+          *puVar2 = uVar4;
+          puVar2[1] = uVar5;
+          puVar2[2] = uVar6;
+          puVar2[3] = uVar7;
+          puVar2[4] = uVar8;
+          puVar2[5] = uVar9;
+          puVar2[6] = uVar10;
+          puVar2[7] = uVar11;
+          puVar2 = puVar2 + 8;
+        } while (in_a2 != 0);
+        return in_a0;
       }
     }
     else {
       do {
-        uVar1 = *(undefined *)__src;
-        __src = (undefined *)__src + 1;
-        __n = __n - 1;
-        *puVar4 = uVar1;
-        puVar4 = puVar4 + 1;
-      } while (__n != 0);
+        uVar1 = *(undefined *)in_a1;
+        in_a1 = (undefined4 *)((int)in_a1 + 1);
+        in_a2 = in_a2 - 1;
+        *(undefined *)puVar3 = uVar1;
+        puVar3 = (undefined4 *)((int)puVar3 + 1);
+      } while (in_a2 != 0);
     }
   }
-  return __dest;
+  return in_a0;
 }
 
 
@@ -1092,336 +1637,336 @@ void * memcpy(void *__dest,void *__src,size_t __n)
 // decompiled code
 // original method signature: 
 // void BSP_MarkVisibleLeaves_S() /* BSP_MarkVisibleLeaves_S method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
- // line 1232, offset 0x80078830
+ // line 1555, offset 0x80078c00
 	/* begin block 1 */
-		// Start line: 2465
+		// Start line: 3111
 	/* end block 1 */
-	// End Line: 2466
+	// End Line: 3112
 
 	/* begin block 2 */
-		// Start line: 2466
+		// Start line: 3112
 	/* end block 2 */
-	// End Line: 2467
+	// End Line: 3113
 
 	/* begin block 3 */
-		// Start line: 2467
+		// Start line: 3113
 	/* end block 3 */
-	// End Line: 2468
+	// End Line: 3114
 
 	/* begin block 4 */
-		// Start line: 2468
+		// Start line: 3114
 	/* end block 4 */
-	// End Line: 2469
+	// End Line: 3115
 
 	/* begin block 5 */
-		// Start line: 2469
+		// Start line: 3115
 	/* end block 5 */
-	// End Line: 2470
+	// End Line: 3116
 
 	/* begin block 6 */
-		// Start line: 2470
+		// Start line: 3116
 	/* end block 6 */
-	// End Line: 2471
+	// End Line: 3117
 
 	/* begin block 7 */
-		// Start line: 2471
+		// Start line: 3117
 	/* end block 7 */
-	// End Line: 2472
+	// End Line: 3118
 
 	/* begin block 8 */
-		// Start line: 2472
+		// Start line: 3118
 	/* end block 8 */
-	// End Line: 2473
+	// End Line: 3119
 
 	/* begin block 9 */
-		// Start line: 2473
+		// Start line: 3119
 	/* end block 9 */
-	// End Line: 2474
+	// End Line: 3120
 
 	/* begin block 10 */
-		// Start line: 2474
+		// Start line: 3120
 	/* end block 10 */
-	// End Line: 2475
+	// End Line: 3121
 
 	/* begin block 11 */
-		// Start line: 2475
+		// Start line: 3121
 	/* end block 11 */
-	// End Line: 2476
+	// End Line: 3122
 
 	/* begin block 12 */
-		// Start line: 2476
+		// Start line: 3122
 	/* end block 12 */
-	// End Line: 2477
+	// End Line: 3123
 
 	/* begin block 13 */
-		// Start line: 2477
+		// Start line: 3123
 	/* end block 13 */
-	// End Line: 2478
+	// End Line: 3124
 
 	/* begin block 14 */
-		// Start line: 2478
+		// Start line: 3124
 	/* end block 14 */
-	// End Line: 2479
+	// End Line: 3125
 
 	/* begin block 15 */
-		// Start line: 2479
+		// Start line: 3125
 	/* end block 15 */
-	// End Line: 2480
+	// End Line: 3126
 
 	/* begin block 16 */
-		// Start line: 2480
+		// Start line: 3126
 	/* end block 16 */
-	// End Line: 2481
+	// End Line: 3127
 
 	/* begin block 17 */
-		// Start line: 2481
+		// Start line: 3127
 	/* end block 17 */
-	// End Line: 2482
+	// End Line: 3128
 
 	/* begin block 18 */
-		// Start line: 2482
+		// Start line: 3128
 	/* end block 18 */
-	// End Line: 2483
+	// End Line: 3129
 
 	/* begin block 19 */
-		// Start line: 2483
+		// Start line: 3129
 	/* end block 19 */
-	// End Line: 2484
+	// End Line: 3130
 
 	/* begin block 20 */
-		// Start line: 2484
+		// Start line: 3130
 	/* end block 20 */
-	// End Line: 2485
+	// End Line: 3131
 
 	/* begin block 21 */
-		// Start line: 2485
+		// Start line: 3131
 	/* end block 21 */
-	// End Line: 2486
+	// End Line: 3132
 
 	/* begin block 22 */
-		// Start line: 2486
+		// Start line: 3132
 	/* end block 22 */
-	// End Line: 2487
+	// End Line: 3133
 
 	/* begin block 23 */
-		// Start line: 2487
+		// Start line: 3133
 	/* end block 23 */
-	// End Line: 2488
+	// End Line: 3134
 
 	/* begin block 24 */
-		// Start line: 2488
+		// Start line: 3134
 	/* end block 24 */
-	// End Line: 2489
+	// End Line: 3135
 
 	/* begin block 25 */
-		// Start line: 2489
+		// Start line: 3135
 	/* end block 25 */
-	// End Line: 2490
+	// End Line: 3136
 
 	/* begin block 26 */
-		// Start line: 2490
+		// Start line: 3136
 	/* end block 26 */
-	// End Line: 2491
+	// End Line: 3137
 
 	/* begin block 27 */
-		// Start line: 2491
+		// Start line: 3137
 	/* end block 27 */
-	// End Line: 2492
+	// End Line: 3138
 
 	/* begin block 28 */
-		// Start line: 2492
+		// Start line: 3138
 	/* end block 28 */
-	// End Line: 2493
+	// End Line: 3139
 
 	/* begin block 29 */
-		// Start line: 2493
+		// Start line: 3139
 	/* end block 29 */
-	// End Line: 2494
+	// End Line: 3140
 
 	/* begin block 30 */
-		// Start line: 2494
+		// Start line: 3140
 	/* end block 30 */
-	// End Line: 2495
+	// End Line: 3141
 
 	/* begin block 31 */
-		// Start line: 2495
+		// Start line: 3141
 	/* end block 31 */
-	// End Line: 2496
+	// End Line: 3142
 
 	/* begin block 32 */
-		// Start line: 2496
+		// Start line: 3142
 	/* end block 32 */
-	// End Line: 2497
+	// End Line: 3143
 
 	/* begin block 33 */
-		// Start line: 2497
+		// Start line: 3143
 	/* end block 33 */
-	// End Line: 2498
+	// End Line: 3144
 
 	/* begin block 34 */
-		// Start line: 2498
+		// Start line: 3144
 	/* end block 34 */
-	// End Line: 2499
+	// End Line: 3145
 
 	/* begin block 35 */
-		// Start line: 2499
+		// Start line: 3145
 	/* end block 35 */
-	// End Line: 2500
+	// End Line: 3146
 
 	/* begin block 36 */
-		// Start line: 2500
+		// Start line: 3146
 	/* end block 36 */
-	// End Line: 2501
+	// End Line: 3147
 
 	/* begin block 37 */
-		// Start line: 2501
+		// Start line: 3147
 	/* end block 37 */
-	// End Line: 2502
+	// End Line: 3148
 
 	/* begin block 38 */
-		// Start line: 2502
+		// Start line: 3148
 	/* end block 38 */
-	// End Line: 2503
+	// End Line: 3149
 
 	/* begin block 39 */
-		// Start line: 2503
+		// Start line: 3149
 	/* end block 39 */
-	// End Line: 2504
+	// End Line: 3150
 
 	/* begin block 40 */
-		// Start line: 2504
+		// Start line: 3150
 	/* end block 40 */
-	// End Line: 2505
+	// End Line: 3151
 
 	/* begin block 41 */
-		// Start line: 2505
+		// Start line: 3151
 	/* end block 41 */
-	// End Line: 2506
+	// End Line: 3152
 
 	/* begin block 42 */
-		// Start line: 2506
+		// Start line: 3152
 	/* end block 42 */
-	// End Line: 2507
+	// End Line: 3153
 
 	/* begin block 43 */
-		// Start line: 2507
+		// Start line: 3153
 	/* end block 43 */
-	// End Line: 2508
+	// End Line: 3154
 
 	/* begin block 44 */
-		// Start line: 2508
+		// Start line: 3154
 	/* end block 44 */
-	// End Line: 2509
+	// End Line: 3155
 
 	/* begin block 45 */
-		// Start line: 2509
+		// Start line: 3155
 	/* end block 45 */
-	// End Line: 2510
+	// End Line: 3156
 
 	/* begin block 46 */
-		// Start line: 2510
+		// Start line: 3156
 	/* end block 46 */
-	// End Line: 2511
+	// End Line: 3157
 
 	/* begin block 47 */
-		// Start line: 2511
+		// Start line: 3157
 	/* end block 47 */
-	// End Line: 2512
+	// End Line: 3158
 
 	/* begin block 48 */
-		// Start line: 2512
+		// Start line: 3158
 	/* end block 48 */
-	// End Line: 2513
+	// End Line: 3159
 
 	/* begin block 49 */
-		// Start line: 2513
+		// Start line: 3159
 	/* end block 49 */
-	// End Line: 2514
+	// End Line: 3160
 
 	/* begin block 50 */
-		// Start line: 2514
+		// Start line: 3160
 	/* end block 50 */
-	// End Line: 2515
+	// End Line: 3161
 
 	/* begin block 51 */
-		// Start line: 2515
+		// Start line: 3161
 	/* end block 51 */
-	// End Line: 2516
+	// End Line: 3162
 
 	/* begin block 52 */
-		// Start line: 2516
+		// Start line: 3162
 	/* end block 52 */
-	// End Line: 2517
+	// End Line: 3163
 
 	/* begin block 53 */
-		// Start line: 2517
+		// Start line: 3163
 	/* end block 53 */
-	// End Line: 2518
+	// End Line: 3164
 
 	/* begin block 54 */
-		// Start line: 2518
+		// Start line: 3164
 	/* end block 54 */
-	// End Line: 2519
+	// End Line: 3165
 
 	/* begin block 55 */
-		// Start line: 2519
+		// Start line: 3165
 	/* end block 55 */
-	// End Line: 2520
+	// End Line: 3166
 
 	/* begin block 56 */
-		// Start line: 2520
+		// Start line: 3166
 	/* end block 56 */
-	// End Line: 2521
+	// End Line: 3167
 
 	/* begin block 57 */
-		// Start line: 2521
+		// Start line: 3167
 	/* end block 57 */
-	// End Line: 2522
+	// End Line: 3168
 
 	/* begin block 58 */
-		// Start line: 2522
+		// Start line: 3168
 	/* end block 58 */
-	// End Line: 2523
+	// End Line: 3169
 
 	/* begin block 59 */
-		// Start line: 2523
+		// Start line: 3169
 	/* end block 59 */
-	// End Line: 2524
+	// End Line: 3170
 
 	/* begin block 60 */
-		// Start line: 2524
+		// Start line: 3170
 	/* end block 60 */
-	// End Line: 2525
+	// End Line: 3171
 
 	/* begin block 61 */
-		// Start line: 2525
+		// Start line: 3171
 	/* end block 61 */
-	// End Line: 2526
+	// End Line: 3172
 
 	/* begin block 62 */
-		// Start line: 2526
+		// Start line: 3172
 	/* end block 62 */
-	// End Line: 2527
+	// End Line: 3173
 
 	/* begin block 63 */
-		// Start line: 2527
+		// Start line: 3173
 	/* end block 63 */
-	// End Line: 2528
+	// End Line: 3174
 
 	/* begin block 64 */
-		// Start line: 2528
+		// Start line: 3174
 	/* end block 64 */
-	// End Line: 2529
+	// End Line: 3175
 
 	/* begin block 65 */
-		// Start line: 2529
+		// Start line: 3175
 	/* end block 65 */
-	// End Line: 2530
+	// End Line: 3176
 
 	/* begin block 66 */
-		// Start line: 2530
+		// Start line: 3176
 	/* end block 66 */
-	// End Line: 2531
+	// End Line: 3177
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
@@ -1468,17 +2013,17 @@ void BSP_MarkVisibleLeaves_S(int **param_1,undefined4 *param_2,int *param_3)
     iVar15 = param_2[0x19];
   }
   puVar1 = param_2 + 2;
-  puVar2 = (undefined4 *)&DAT_1f800000;
+  puVar2 = &DAT_1f800000;
   iVar4 = 0x40;
   DAT_1f800098 = unaff_s0;
   DAT_1f80009c = unaff_s1;
   DAT_1f8000a0 = unaff_s2;
-  _DAT_1f8000a4 = unaff_s3;
-  _DAT_1f8000a8 = unaff_s4;
+  DAT_1f8000a4 = unaff_s3;
+  DAT_1f8000a8 = unaff_s4;
   DAT_1f8000ac = unaff_s5;
-  DAT_1f8000b0 = unaff_s6;
+  _DAT_1f8000b0 = unaff_s6;
   DAT_1f8000b4 = unaff_s7;
-  _DAT_1f8000b8 = unaff_s8;
+  DAT_1f8000b8 = unaff_s8;
   DAT_1f8000bc = unaff_retaddr;
   do {
     uVar16 = puVar1[1];
@@ -1493,10 +2038,10 @@ void BSP_MarkVisibleLeaves_S(int **param_1,undefined4 *param_2,int *param_3)
     puVar2 = puVar2 + 4;
   } while (iVar4 != 0);
   _DAT_1f800040 = *param_2;
-  setCopControlWord(2,0,_DAT_1f800000);
-  setCopControlWord(2,0x800,_DAT_1f800004);
-  setCopControlWord(2,0x1000,_DAT_1f800008);
-  setCopControlWord(2,0x1800,_DAT_1f80000c);
+  setCopControlWord(2,0,DAT_1f800000);
+  setCopControlWord(2,0x800,DAT_1f800004);
+  setCopControlWord(2,0x1000,DAT_1f800008);
+  setCopControlWord(2,0x1800,DAT_1f80000c);
   setCopControlWord(2,0x2000,(uint)DAT_1f800010);
   setCopReg(2,0,_DAT_1f800040);
   setCopReg(2,0x800,(int)*(short *)(param_2 + 1));
@@ -1509,8 +2054,8 @@ void BSP_MarkVisibleLeaves_S(int **param_1,undefined4 *param_2,int *param_3)
   setCopControlWord(2,0x1000,DAT_1f800028);
   copFunction(2,0x486012);
   puVar1 = (undefined4 *)param_2[0x1d];
-  DAT_1f80006c = getCopReg(2,0x19);
-  DAT_1f800070 = getCopReg(2,0x1a);
+  _DAT_1f80006c = getCopReg(2,0x19);
+  _DAT_1f800070 = getCopReg(2,0x1a);
   iVar4 = (iVar15 << 0xf) / (int)param_2[0x1a];
   setCopReg(2,0x800,iVar15);
   setCopControlWord(2,0,*puVar1);
@@ -1542,22 +2087,21 @@ void BSP_MarkVisibleLeaves_S(int **param_1,undefined4 *param_2,int *param_3)
   iVar15 = getCopReg(2,0x5000);
   uVar8 = getCopReg(2,0x5800);
   setCopReg(2,0,uVar5 | uVar10);
-  DAT_1f800074 = uVar6 & 0xffff | iVar15 << 0x10;
+  _DAT_1f800074 = uVar6 & 0xffff | iVar15 << 0x10;
   copFunction(2,0x486012);
   iVar15 = getCopReg(2,0x4800);
   uVar5 = getCopReg(2,0x5000);
   iVar4 = getCopReg(2,0x5800);
-  DAT_1f800078 = uVar8 & 0xffff | iVar15 << 0x10;
+  _DAT_1f800078 = uVar8 & 0xffff | iVar15 << 0x10;
   _DAT_1f80007c = uVar5 & 0xffff | iVar4 << 0x10;
   iVar15 = 2;
-  if ((gameTrackerX.gameData.asmData.MorphTime == 1000) &&
-     (iVar15 = 0, gameTrackerX.gameData.asmData.MorphType != 0)) {
+  if ((DAT_800d20d4 == 1000) && (iVar15 = 0, DAT_800d20d6 != 0)) {
     iVar15 = 1;
   }
-  setCopControlWord(2,0,_DAT_1f800000);
-  setCopControlWord(2,0x800,_DAT_1f800004);
-  setCopControlWord(2,0x1000,_DAT_1f800008);
-  setCopControlWord(2,0x1800,_DAT_1f80000c);
+  setCopControlWord(2,0,DAT_1f800000);
+  setCopControlWord(2,0x800,DAT_1f800004);
+  setCopControlWord(2,0x1000,DAT_1f800008);
+  setCopControlWord(2,0x1800,DAT_1f80000c);
   setCopControlWord(2,0x2000,(uint)DAT_1f800010);
   param_1 = (int **)*param_1;
   ppiVar17 = (int **)&DAT_1f8000c4;
@@ -1581,7 +2125,7 @@ void BSP_MarkVisibleLeaves_S(int **param_1,undefined4 *param_2,int *param_3)
       copFunction(2,0x486012);
       iVar7 = getCopReg(2,0xc800);
       iVar9 = getCopReg(2,0xd000);
-      if ((iVar4 < iVar7 - DAT_1f80006c) && (iVar4 < iVar9 - DAT_1f800070)) {
+      if ((iVar4 < iVar7 - _DAT_1f80006c) && (iVar4 < iVar9 - _DAT_1f800070)) {
         if ((*(ushort *)((int)param_1 + 0xe) & 1) == 0) {
           *(int ***)ppiVar19 = param_1;
           ppiVar19 = ppiVar19 + 1;
@@ -1610,18 +2154,18 @@ void BSP_MarkVisibleLeaves_S(int **param_1,undefined4 *param_2,int *param_3)
           if (iVar4 < 0) {
             if (piVar3 != (int *)0x0) {
               if (((iVar4 < iVar14) && (iVar7 + iVar4 < iVar14)) && (iVar9 + iVar4 < iVar14)) {
-                setCopControlWord(2,0,DAT_1f800074);
-                setCopControlWord(2,0x800,DAT_1f800078);
+                setCopControlWord(2,0,_DAT_1f800074);
+                setCopControlWord(2,0x800,_DAT_1f800078);
                 setCopControlWord(2,0x1000,_DAT_1f80007c);
                 copFunction(2,0x486012);
                 iVar7 = getCopReg(2,0xc800);
                 iVar9 = getCopReg(2,0xd000);
-                if ((iVar7 + iVar4 < iVar14) && (iVar9 + iVar4 < iVar14)) goto LAB_80078d68;
+                if ((iVar7 + iVar4 < iVar14) && (iVar9 + iVar4 < iVar14)) goto LAB_80079138;
               }
               *ppiVar17 = piVar3;
               ppiVar18 = ppiVar17;
             }
-LAB_80078d68:
+LAB_80079138:
             if (piVar22 != (int *)0x0) {
               ppiVar18[1] = piVar22;
               ppiVar18 = ppiVar18 + 1;
@@ -1630,18 +2174,18 @@ LAB_80078d68:
           else {
             if (piVar22 != (int *)0x0) {
               if (((iVar11 < iVar4) && (iVar11 < iVar7 + iVar4)) && (iVar11 < iVar9 + iVar4)) {
-                setCopControlWord(2,0,DAT_1f800074);
-                setCopControlWord(2,0x800,DAT_1f800078);
+                setCopControlWord(2,0,_DAT_1f800074);
+                setCopControlWord(2,0x800,_DAT_1f800078);
                 setCopControlWord(2,0x1000,_DAT_1f80007c);
                 copFunction(2,0x486012);
                 iVar7 = getCopReg(2,0xc800);
                 iVar9 = getCopReg(2,0xd000);
-                if ((iVar11 < iVar7 + iVar4) && (iVar11 < iVar9 + iVar4)) goto LAB_80078cd8;
+                if ((iVar11 < iVar7 + iVar4) && (iVar11 < iVar9 + iVar4)) goto LAB_800790a8;
               }
               *ppiVar17 = piVar22;
               ppiVar18 = ppiVar17;
             }
-LAB_80078cd8:
+LAB_800790a8:
             if (piVar3 != (int *)0x0) {
               ppiVar18[1] = piVar3;
               ppiVar18 = ppiVar18 + 1;
@@ -1649,10 +2193,10 @@ LAB_80078cd8:
           }
         }
       }
-      setCopControlWord(2,0,_DAT_1f800000);
-      setCopControlWord(2,0x800,_DAT_1f800004);
-      setCopControlWord(2,0x1000,_DAT_1f800008);
-      setCopControlWord(2,0x1800,_DAT_1f80000c);
+      setCopControlWord(2,0,DAT_1f800000);
+      setCopControlWord(2,0x800,DAT_1f800004);
+      setCopControlWord(2,0x1000,DAT_1f800008);
+      setCopControlWord(2,0x1800,DAT_1f80000c);
       setCopControlWord(2,0x2000,(uint)DAT_1f800010);
     }
     param_1 = (int **)*ppiVar18;
@@ -1669,71 +2213,71 @@ LAB_80078cd8:
 // decompiled code
 // original method signature: 
 // void G2Quat_FromMatrix_S() /* G2Quat_FromMatrix_S method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
- // line 1857, offset 0x80078e00
+ // line 2180, offset 0x800791d0
 	/* begin block 1 */
-		// Start line: 3715
+		// Start line: 4361
 	/* end block 1 */
-	// End Line: 3716
+	// End Line: 4362
 
 	/* begin block 2 */
-		// Start line: 3716
+		// Start line: 4362
 	/* end block 2 */
-	// End Line: 3717
+	// End Line: 4363
 
 	/* begin block 3 */
-		// Start line: 3717
+		// Start line: 4363
 	/* end block 3 */
-	// End Line: 3718
+	// End Line: 4364
 
 	/* begin block 4 */
-		// Start line: 3718
+		// Start line: 4364
 	/* end block 4 */
-	// End Line: 3719
+	// End Line: 4365
 
 	/* begin block 5 */
-		// Start line: 3719
+		// Start line: 4365
 	/* end block 5 */
-	// End Line: 3720
+	// End Line: 4366
 
 	/* begin block 6 */
-		// Start line: 3720
+		// Start line: 4366
 	/* end block 6 */
-	// End Line: 3721
+	// End Line: 4367
 
 	/* begin block 7 */
-		// Start line: 3721
+		// Start line: 4367
 	/* end block 7 */
-	// End Line: 3722
+	// End Line: 4368
 
 	/* begin block 8 */
-		// Start line: 3722
+		// Start line: 4368
 	/* end block 8 */
-	// End Line: 3723
+	// End Line: 4369
 
 	/* begin block 9 */
-		// Start line: 3723
+		// Start line: 4369
 	/* end block 9 */
-	// End Line: 3724
+	// End Line: 4370
 
 	/* begin block 10 */
-		// Start line: 3724
+		// Start line: 4370
 	/* end block 10 */
-	// End Line: 3725
+	// End Line: 4371
 
 	/* begin block 11 */
-		// Start line: 3725
+		// Start line: 4371
 	/* end block 11 */
-	// End Line: 3726
+	// End Line: 4372
 
 	/* begin block 12 */
-		// Start line: 3726
+		// Start line: 4372
 	/* end block 12 */
-	// End Line: 3727
+	// End Line: 4373
 
 	/* begin block 13 */
-		// Start line: 3727
+		// Start line: 4373
 	/* end block 13 */
-	// End Line: 3728
+	// End Line: 4374
 
 int G2EulerAngles_ToMatrix_S(undefined2 *param_1,short *param_2)
 
@@ -1835,31 +2379,31 @@ int G2EulerAngles_ToMatrix_S(undefined2 *param_1,short *param_2)
 // decompiled code
 // original method signature: 
 // void G2Quat_ToMatrix_S() /* G2Quat_ToMatrix_S method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
- // line 2035, offset 0x8007900c
+ // line 2358, offset 0x800793dc
 	/* begin block 1 */
-		// Start line: 4071
+		// Start line: 4717
 	/* end block 1 */
-	// End Line: 4072
+	// End Line: 4718
 
 	/* begin block 2 */
-		// Start line: 4072
+		// Start line: 4718
 	/* end block 2 */
-	// End Line: 4073
+	// End Line: 4719
 
 	/* begin block 3 */
-		// Start line: 4073
+		// Start line: 4719
 	/* end block 3 */
-	// End Line: 4074
+	// End Line: 4720
 
 	/* begin block 4 */
-		// Start line: 4074
+		// Start line: 4720
 	/* end block 4 */
-	// End Line: 4075
+	// End Line: 4721
 
 	/* begin block 5 */
-		// Start line: 4075
+		// Start line: 4721
 	/* end block 5 */
-	// End Line: 4076
+	// End Line: 4722
 
 void G2Quat_ToMatrix_S(short *param_1,short *param_2)
 
@@ -1923,51 +2467,51 @@ void G2Quat_ToMatrix_S(short *param_1,short *param_2)
 // decompiled code
 // original method signature: 
 // void G2Quat_FromEuler_S() /* G2Quat_FromEuler_S method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
- // line 2116, offset 0x800790fc
+ // line 2439, offset 0x800794cc
 	/* begin block 1 */
-		// Start line: 4233
+		// Start line: 4879
 	/* end block 1 */
-	// End Line: 4234
+	// End Line: 4880
 
 	/* begin block 2 */
-		// Start line: 4234
+		// Start line: 4880
 	/* end block 2 */
-	// End Line: 4235
+	// End Line: 4881
 
 	/* begin block 3 */
-		// Start line: 4235
+		// Start line: 4881
 	/* end block 3 */
-	// End Line: 4236
+	// End Line: 4882
 
 	/* begin block 4 */
-		// Start line: 4236
+		// Start line: 4882
 	/* end block 4 */
-	// End Line: 4237
+	// End Line: 4883
 
 	/* begin block 5 */
-		// Start line: 4237
+		// Start line: 4883
 	/* end block 5 */
-	// End Line: 4238
+	// End Line: 4884
 
 	/* begin block 6 */
-		// Start line: 4238
+		// Start line: 4884
 	/* end block 6 */
-	// End Line: 4239
+	// End Line: 4885
 
 	/* begin block 7 */
-		// Start line: 4239
+		// Start line: 4885
 	/* end block 7 */
-	// End Line: 4240
+	// End Line: 4886
 
 	/* begin block 8 */
-		// Start line: 4240
+		// Start line: 4886
 	/* end block 8 */
-	// End Line: 4241
+	// End Line: 4887
 
 	/* begin block 9 */
-		// Start line: 4241
+		// Start line: 4887
 	/* end block 9 */
-	// End Line: 4242
+	// End Line: 4888
 
 void G2Quat_FromEuler_S(int param_1,short *param_2)
 
@@ -1976,117 +2520,209 @@ void G2Quat_FromEuler_S(int param_1,short *param_2)
   int iVar2;
   undefined2 uVar3;
   int iVar4;
-  short sVar5;
-  int iVar6;
-  int iVar7;
+  int iVar5;
+  short sVar6;
+  uint uVar7;
   int iVar8;
   int iVar9;
   int iVar10;
-  undefined2 uVar11;
+  int iVar11;
   int iVar12;
-  undefined2 uVar13;
-  int iVar14;
+  int iVar13;
+  undefined2 uVar14;
   int iVar15;
-  int iVar16;
+  undefined2 uVar16;
   int iVar17;
   int iVar18;
+  int iVar19;
   
-  iVar7 = (int)param_2[1];
+  iVar10 = (int)param_2[1];
   uVar1 = SEXT24(param_2[3]);
-  iVar18 = (int)*param_2;
-  iVar15 = (int)param_2[2];
+  iVar11 = (int)*param_2;
+  iVar18 = (int)param_2[2];
   if ((uVar1 & 1) != 0) {
-    iVar18 = (int)param_2[2];
-    iVar15 = (int)*param_2;
+    iVar11 = (int)param_2[2];
+    iVar18 = (int)*param_2;
   }
   if ((uVar1 & 4) != 0) {
-    iVar7 = -iVar7;
+    iVar10 = -iVar10;
   }
-  iVar9 = *(int *)(&rcossin_tbl + (iVar7 >> 1 & 0xfffU) * 4) >> 0x10;
-  iVar8 = (int)(short)*(int *)(&rcossin_tbl + (iVar7 >> 1 & 0xfffU) * 4);
-  iVar14 = *(int *)(&rcossin_tbl + (iVar15 >> 1 & 0xfffU) * 4) >> 0x10;
-  iVar7 = (int)(short)*(int *)(&rcossin_tbl + (iVar15 >> 1 & 0xfffU) * 4);
-  setCopReg(2,0x4000,*(int *)(&rcossin_tbl + (iVar18 >> 1 & 0xfffU) * 4) >> 0x10);
-  setCopReg(2,0x4800,iVar14);
-  setCopReg(2,0x5000,iVar7);
+  uVar7 = iVar11 >> 1 & 0x7ff;
+  iVar4 = (int)ecostable[uVar7];
+  iVar8 = (int)ecostable[uVar7 + 0x400];
+  if ((iVar11 >> 1 & 0x800U) != 0) {
+    iVar4 = -iVar4;
+    iVar8 = -iVar8;
+  }
+  uVar7 = iVar10 >> 1 & 0x7ff;
+  iVar11 = (int)ecostable[uVar7];
+  iVar12 = (int)ecostable[uVar7 + 0x400];
+  if ((iVar10 >> 1 & 0x800U) != 0) {
+    iVar11 = -iVar11;
+    iVar12 = -iVar12;
+  }
+  uVar7 = iVar18 >> 1 & 0x7ff;
+  iVar10 = (int)ecostable[uVar7];
+  iVar17 = (int)ecostable[uVar7 + 0x400];
+  if ((iVar18 >> 1 & 0x800U) != 0) {
+    iVar10 = -iVar10;
+    iVar17 = -iVar17;
+  }
+  setCopReg(2,0x4000,iVar8);
+  setCopReg(2,0x4800,iVar17);
+  setCopReg(2,0x5000,iVar10);
   copFunction(2,0x198003d);
-  iVar15 = getCopReg(2,0x4800);
-  iVar17 = getCopReg(2,0x5000);
-  setCopReg(2,0x4000,(int)(short)*(int *)(&rcossin_tbl + (iVar18 >> 1 & 0xfffU) * 4));
-  setCopReg(2,0x4800,iVar14);
-  setCopReg(2,0x5000,iVar7);
-  copFunction(2,0x198003d);
-  iVar7 = (int)(uVar1 & 0x18) >> 2;
   iVar18 = getCopReg(2,0x4800);
-  iVar14 = getCopReg(2,0x5000);
+  iVar8 = getCopReg(2,0x5000);
+  setCopReg(2,0x4000,iVar4);
+  setCopReg(2,0x4800,iVar17);
+  setCopReg(2,0x5000,iVar10);
+  copFunction(2,0x198003d);
+  iVar10 = (int)(uVar1 & 0x18) >> 2;
+  iVar4 = getCopReg(2,0x4800);
+  iVar17 = getCopReg(2,0x5000);
   if ((uVar1 & 2) == 0) {
-    setCopReg(2,0x4000,iVar9);
-    setCopReg(2,0x4800,iVar18);
-    setCopReg(2,0x5000,iVar14);
-    setCopReg(2,0x5800,iVar17);
+    setCopReg(2,0x4000,iVar12);
+    setCopReg(2,0x4800,iVar4);
+    setCopReg(2,0x5000,iVar17);
+    setCopReg(2,0x5800,iVar8);
     copFunction(2,0x190003d);
     iVar2 = (int)(uVar1 & 4) >> 1;
-    iVar4 = getCopReg(2,0xc800);
-    iVar6 = getCopReg(2,0xd000);
-    iVar12 = getCopReg(2,0xd800);
-    setCopReg(2,0x4000,iVar8);
-    setCopReg(2,0x4800,iVar17);
-    setCopReg(2,0x5000,iVar15);
-    setCopReg(2,0x5800,iVar18);
+    iVar5 = getCopReg(2,0xc800);
+    iVar9 = getCopReg(2,0xd000);
+    iVar15 = getCopReg(2,0xd800);
+    setCopReg(2,0x4000,iVar11);
+    setCopReg(2,0x4800,iVar8);
+    setCopReg(2,0x5000,iVar18);
+    setCopReg(2,0x5800,iVar4);
     copFunction(2,0x190003d);
-    uVar1 = iVar7 + iVar2 + 2;
+    uVar1 = iVar10 + iVar2 + 2;
     if (4 < uVar1) {
-      uVar1 = (iVar7 + iVar2) - 4;
+      uVar1 = (iVar10 + iVar2) - 4;
     }
-    iVar18 = (iVar7 - iVar2) + 4;
-    iVar17 = getCopReg(2,0xc800);
-    if (4 < iVar18) {
-      iVar18 = (iVar7 - iVar2) + -2;
+    iVar4 = (iVar10 - iVar2) + 4;
+    iVar8 = getCopReg(2,0xc800);
+    if (4 < iVar4) {
+      iVar4 = (iVar10 - iVar2) + -2;
     }
-    iVar10 = getCopReg(2,0xd000);
-    iVar16 = getCopReg(2,0xd800);
-    uVar3 = (undefined2)(iVar4 - iVar17 >> 0xc);
-    sVar5 = (short)(iVar6 + iVar10 >> 0xc);
-    uVar11 = (undefined2)(iVar12 - iVar16 >> 0xc);
-    uVar13 = (undefined2)(iVar9 * iVar15 + iVar8 * iVar14 >> 0xc);
+    iVar13 = getCopReg(2,0xd000);
+    iVar19 = getCopReg(2,0xd800);
+    uVar3 = (undefined2)(iVar5 - iVar8 >> 0xc);
+    sVar6 = (short)(iVar9 + iVar13 >> 0xc);
+    uVar14 = (undefined2)(iVar15 - iVar19 >> 0xc);
+    uVar16 = (undefined2)(iVar12 * iVar18 + iVar11 * iVar17 >> 0xc);
   }
   else {
-    setCopReg(2,0x4000,iVar9);
-    setCopReg(2,0x4800,iVar17 + iVar18);
-    setCopReg(2,0x5000,iVar15 - iVar14);
+    setCopReg(2,0x4000,iVar12);
+    setCopReg(2,0x4800,iVar8 + iVar4);
+    setCopReg(2,0x5000,iVar18 - iVar17);
     copFunction(2,0x198003d);
     iVar2 = (int)(uVar1 & 4) >> 1;
     _uVar3 = getCopReg(2,0x4800);
     uVar3 = (undefined2)_uVar3;
     _uVar3 = getCopReg(2,0x5000);
-    uVar13 = (undefined2)_uVar3;
-    setCopReg(2,0x4000,iVar8);
-    setCopReg(2,0x4800,iVar15 + iVar14);
-    setCopReg(2,0x5000,iVar17 - iVar18);
+    uVar16 = (undefined2)_uVar3;
+    setCopReg(2,0x4000,iVar11);
+    setCopReg(2,0x4800,iVar18 + iVar17);
+    setCopReg(2,0x5000,iVar8 - iVar4);
     copFunction(2,0x198003d);
-    uVar1 = iVar7 + iVar2 + 2;
+    uVar1 = iVar10 + iVar2 + 2;
     if (4 < uVar1) {
-      uVar1 = (iVar7 + iVar2) - 4;
+      uVar1 = (iVar10 + iVar2) - 4;
     }
-    iVar18 = (iVar7 - iVar2) + 4;
+    iVar4 = (iVar10 - iVar2) + 4;
     _uVar3 = getCopReg(2,0x4800);
-    sVar5 = (short)_uVar3;
-    if (4 < iVar18) {
-      iVar18 = (iVar7 - iVar2) + -2;
+    sVar6 = (short)_uVar3;
+    if (4 < iVar4) {
+      iVar4 = (iVar10 - iVar2) + -2;
     }
     _uVar3 = getCopReg(2,0x5000);
-    uVar11 = (undefined2)_uVar3;
+    uVar14 = (undefined2)_uVar3;
   }
   if (iVar2 != 0) {
-    sVar5 = -sVar5;
+    sVar6 = -sVar6;
   }
-  *(undefined2 *)(iVar7 + param_1) = uVar3;
-  *(short *)(uVar1 + param_1) = sVar5;
-  *(undefined2 *)(iVar18 + param_1) = uVar11;
-  *(undefined2 *)(param_1 + 6) = uVar13;
+  *(undefined2 *)(iVar10 + param_1) = uVar3;
+  *(short *)(uVar1 + param_1) = sVar6;
+  *(undefined2 *)(iVar4 + param_1) = uVar14;
+  *(undefined2 *)(param_1 + 6) = uVar16;
   return;
 }
 
+
+
+// autogenerated function stub: 
+// void eul_1() /* eul_1 method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
+void eul_1() 
+{ // line 2491, offset 0x80079538
+	/* begin block 1 */
+		// Start line: 4983
+	/* end block 1 */
+	// End Line: 4984
+
+	/* begin block 2 */
+		// Start line: 4984
+	/* end block 2 */
+	// End Line: 4985
+
+	return null;
+}
+
+
+// autogenerated function stub: 
+// void eul_2() /* eul_2 method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
+void eul_2() 
+{ // line 2503, offset 0x80079560
+	/* begin block 1 */
+		// Start line: 5007
+	/* end block 1 */
+	// End Line: 5008
+
+	/* begin block 2 */
+		// Start line: 5008
+	/* end block 2 */
+	// End Line: 5009
+
+	return null;
+}
+
+
+// autogenerated function stub: 
+// void eul_3() /* eul_3 method signature is not contained in the debug symbol data. This is likely either a library function or the game was compiled without debug symbols. Please refer to the TDR documentation for additional guidance. */
+void eul_3() 
+{ // line 2515, offset 0x80079588
+	/* begin block 1 */
+		// Start line: 5031
+	/* end block 1 */
+	// End Line: 5032
+
+	/* begin block 2 */
+		// Start line: 5032
+	/* end block 2 */
+	// End Line: 5033
+
+	/* begin block 3 */
+		// Start line: 5033
+	/* end block 3 */
+	// End Line: 5034
+
+	/* begin block 4 */
+		// Start line: 5034
+	/* end block 4 */
+	// End Line: 5035
+
+	/* begin block 5 */
+		// Start line: 5035
+	/* end block 5 */
+	// End Line: 5036
+
+	/* begin block 6 */
+		// Start line: 5036
+	/* end block 6 */
+	// End Line: 5037
+
+	return null;
+}
 
 
 

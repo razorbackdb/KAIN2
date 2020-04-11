@@ -4,44 +4,71 @@
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ STREAM_InitLoader(char *bigFileName /*$a0*/, char *voiceFileName /*$a1*/)
- // line 32, offset 0x80060e6c
+// void /*$ra*/ STREAM_NextLoadFromHead()
+ // line 36, offset 0x80060198
 	/* begin block 1 */
-		// Start line: 33
-		// Start offset: 0x80060E6C
+		// Start line: 72
+	/* end block 1 */
+	// End Line: 73
+
+	/* begin block 2 */
+		// Start line: 73
+	/* end block 2 */
+	// End Line: 74
+
+/* File: C:\kain2\game\STRMLOAD.C */
+
+void STREAM_NextLoadFromHead(void)
+
+{
+  loadBufferedFromHead = 1;
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ STREAM_InitLoader(char *bigFileName /*$a0*/, char *voiceFileName /*$a1*/)
+ // line 41, offset 0x800601a8
+	/* begin block 1 */
+		// Start line: 42
+		// Start offset: 0x800601A8
 		// Variables:
 	// 		int i; // $a1
 	/* end block 1 */
-	// End offset: 0x80060EB4
-	// End Line: 48
+	// End offset: 0x800601F0
+	// End Line: 57
 
 	/* begin block 2 */
-		// Start line: 64
+		// Start line: 82
 	/* end block 2 */
-	// End Line: 65
+	// End Line: 83
+
+/* File: C:\kain2\game\STRMLOAD.C */
 
 void STREAM_InitLoader(char *bigFileName,char *voiceFileName)
 
 {
-  _LoadQueueEntry *p_Var1;
-  _LoadQueueEntry *p_Var2;
+  undefined4 *puVar1;
+  undefined4 *puVar2;
   int iVar3;
   
   LOAD_InitCdLoader(bigFileName,voiceFileName);
-  iVar3 = 0x3e;
-  p_Var2 = &_LoadQueueEntry_800db1c0;
-  p_Var1 = &_LoadQueueEntry_800db240;
+  iVar3 = 0x26;
+  puVar2 = &DAT_800da5a0;
+  puVar1 = &DAT_800da610;
   loadFree = &LoadQueue;
-  loadHead = (_LoadQueueEntry *)0x0;
-  loadTail = (_LoadQueueEntry *)0x0;
+  loadHead = 0;
+  loadTail = 0;
   numLoads = 0;
   do {
-    p_Var2->next = p_Var1;
-    p_Var2 = (_LoadQueueEntry *)(p_Var2[-2].loadEntry.fileName + 0x24);
+    *(undefined4 **)puVar2 = puVar1;
+    puVar2 = puVar2 + -0x1c;
     iVar3 = iVar3 + -1;
-    p_Var1 = (_LoadQueueEntry *)(p_Var1[-2].loadEntry.fileName + 0x24);
+    puVar1 = puVar1 + -0x1c;
   } while (-1 < iVar3);
-  _LoadQueueEntry_800db240.next = (_LoadQueueEntry *)0x0;
+  DAT_800da610 = 0;
   return;
 }
 
@@ -50,47 +77,47 @@ void STREAM_InitLoader(char *bigFileName,char *voiceFileName)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_RemoveQueueHead()
- // line 52, offset 0x80060ec8
+ // line 61, offset 0x80060204
 	/* begin block 1 */
-		// Start line: 54
-		// Start offset: 0x80060EC8
+		// Start line: 63
+		// Start offset: 0x80060204
 		// Variables:
 	// 		struct _LoadQueueEntry *entry; // $a0
 	/* end block 1 */
-	// End offset: 0x80060EE8
-	// End Line: 59
+	// End offset: 0x80060224
+	// End Line: 68
 
 	/* begin block 2 */
-		// Start line: 117
+		// Start line: 135
 	/* end block 2 */
-	// End Line: 118
+	// End Line: 136
 
 	/* begin block 3 */
-		// Start line: 118
+		// Start line: 136
 	/* end block 3 */
-	// End Line: 119
+	// End Line: 137
 
 	/* begin block 4 */
-		// Start line: 119
+		// Start line: 137
 	/* end block 4 */
-	// End Line: 120
+	// End Line: 138
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\STRMLOAD.C */
 
 void STREAM_RemoveQueueHead(void)
 
 {
-  _LoadQueueEntry **pp_Var1;
-  _LoadQueueEntry *p_Var2;
+  int iVar1;
+  int iVar2;
   
-  p_Var2 = loadFree;
-  if (loadHead->next == (_LoadQueueEntry *)0x0) {
-    loadTail = (_LoadQueueEntry *)0x0;
+  iVar1 = (int)loadFree;
+  if (*loadHead == 0) {
+    loadTail = 0;
   }
   loadFree = loadHead;
-  pp_Var1 = &loadHead->next;
-  loadHead = loadHead->next;
-  *pp_Var1 = p_Var2;
+  iVar2 = *loadHead;
+  *loadHead = iVar1;
+  loadHead = (int *)iVar2;
   numLoads = numLoads + -1;
   return;
 }
@@ -100,16 +127,18 @@ void STREAM_RemoveQueueHead(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_RemoveQueueEntry(struct _LoadQueueEntry *entry /*$a0*/, struct _LoadQueueEntry *prev /*$a1*/)
- // line 64, offset 0x80060f08
+ // line 73, offset 0x80060244
 	/* begin block 1 */
-		// Start line: 144
+		// Start line: 162
 	/* end block 1 */
-	// End Line: 145
+	// End Line: 163
 
 	/* begin block 2 */
-		// Start line: 145
+		// Start line: 163
 	/* end block 2 */
-	// End Line: 146
+	// End Line: 164
+
+/* File: C:\kain2\game\STRMLOAD.C */
 
 void STREAM_RemoveQueueEntry(_LoadQueueEntry *entry,_LoadQueueEntry *prev)
 
@@ -137,32 +166,32 @@ void STREAM_RemoveQueueEntry(_LoadQueueEntry *entry,_LoadQueueEntry *prev)
 // decompiled code
 // original method signature: 
 // struct _LoadQueueEntry * /*$ra*/ STREAM_AddQueueEntryToTail()
- // line 81, offset 0x80060f64
+ // line 90, offset 0x800602a0
 	/* begin block 1 */
-		// Start line: 83
-		// Start offset: 0x80060F64
+		// Start line: 92
+		// Start offset: 0x800602A0
 		// Variables:
 	// 		struct _LoadQueueEntry *entry; // $v1
 	/* end block 1 */
-	// End offset: 0x80060F8C
-	// End Line: 95
+	// End offset: 0x800602C8
+	// End Line: 104
 
 	/* begin block 2 */
-		// Start line: 181
+		// Start line: 199
 	/* end block 2 */
-	// End Line: 182
+	// End Line: 200
 
 	/* begin block 3 */
-		// Start line: 182
+		// Start line: 200
 	/* end block 3 */
-	// End Line: 183
+	// End Line: 201
 
 	/* begin block 4 */
-		// Start line: 183
+		// Start line: 201
 	/* end block 4 */
-	// End Line: 184
+	// End Line: 202
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\STRMLOAD.C */
 
 _LoadQueueEntry * STREAM_AddQueueEntryToTail(void)
 
@@ -178,7 +207,7 @@ _LoadQueueEntry * STREAM_AddQueueEntryToTail(void)
     loadFree = p_Var2;
   }
   else {
-    loadTail->next = loadFree;
+    *(_LoadQueueEntry **)loadTail = loadFree;
     loadFree = p_Var2;
   }
   loadTail = p_Var1;
@@ -191,51 +220,61 @@ _LoadQueueEntry * STREAM_AddQueueEntryToTail(void)
 // decompiled code
 // original method signature: 
 // struct _LoadQueueEntry * /*$ra*/ STREAM_AddQueueEntryToHead()
- // line 100, offset 0x80060fa4
+ // line 109, offset 0x800602e0
 	/* begin block 1 */
-		// Start line: 102
-		// Start offset: 0x80060FA4
+		// Start line: 111
+		// Start offset: 0x800602E0
 		// Variables:
-	// 		struct _LoadQueueEntry *entry; // $a1
+	// 		struct _LoadQueueEntry *entry; // $a0
 	/* end block 1 */
-	// End offset: 0x80060FCC
-	// End Line: 110
+	// End offset: 0x80060358
+	// End Line: 132
 
 	/* begin block 2 */
-		// Start line: 223
+		// Start line: 241
 	/* end block 2 */
-	// End Line: 224
+	// End Line: 242
 
 	/* begin block 3 */
-		// Start line: 224
+		// Start line: 242
 	/* end block 3 */
-	// End Line: 225
+	// End Line: 243
 
 	/* begin block 4 */
-		// Start line: 225
+		// Start line: 243
 	/* end block 4 */
-	// End Line: 226
+	// End Line: 244
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\STRMLOAD.C */
 
 _LoadQueueEntry * STREAM_AddQueueEntryToHead(void)
 
 {
-  _LoadQueueEntry *p_Var1;
-  _LoadQueueEntry *p_Var2;
+  short sVar1;
+  _LoadQueueEntry **pp_Var2;
   _LoadQueueEntry *p_Var3;
+  _LoadQueueEntry *p_Var4;
   
-  p_Var1 = loadTail;
-  p_Var2 = loadFree;
-  p_Var3 = loadFree->next;
-  loadFree->next = loadHead;
-  if (p_Var1 == (_LoadQueueEntry *)0x0) {
-    loadTail = loadFree;
+  p_Var4 = loadHead;
+  p_Var3 = loadFree;
+  if ((((loadHead == (_LoadQueueEntry *)0x0) || (sVar1 = loadHead->status, sVar1 == 1)) ||
+      (sVar1 == 5)) || ((sVar1 == 10 || (sVar1 == 8)))) {
+    loadHead = loadFree;
+    pp_Var2 = &loadFree->next;
+    loadFree = loadFree->next;
+    *pp_Var2 = p_Var4;
   }
-  loadFree = p_Var3;
-  loadHead = p_Var2;
+  else {
+    pp_Var2 = &loadFree->next;
+    loadFree = loadFree->next;
+    *pp_Var2 = loadHead->next;
+    p_Var4->next = p_Var3;
+  }
+  if (loadTail == (_LoadQueueEntry *)0x0) {
+    loadTail = p_Var3;
+  }
   numLoads = numLoads + 1;
-  return p_Var2;
+  return p_Var3;
 }
 
 
@@ -243,16 +282,18 @@ _LoadQueueEntry * STREAM_AddQueueEntryToHead(void)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ STREAM_IsCdBusy(long *numberInQueue /*$a0*/)
- // line 119, offset 0x80060fe4
+ // line 141, offset 0x80060370
 	/* begin block 1 */
-		// Start line: 266
+		// Start line: 307
 	/* end block 1 */
-	// End Line: 267
+	// End Line: 308
 
 	/* begin block 2 */
-		// Start line: 267
+		// Start line: 308
 	/* end block 2 */
-	// End Line: 268
+	// End Line: 309
+
+/* File: C:\kain2\game\STRMLOAD.C */
 
 int STREAM_IsCdBusy(long *numberInQueue)
 
@@ -260,7 +301,7 @@ int STREAM_IsCdBusy(long *numberInQueue)
   if (numberInQueue != (long *)0x0) {
     *numberInQueue = numLoads;
   }
-  return (uint)(loadHead != (_LoadQueueEntry *)0x0);
+  return numLoads;
 }
 
 
@@ -268,234 +309,221 @@ int STREAM_IsCdBusy(long *numberInQueue)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ STREAM_PollLoadQueue()
- // line 136, offset 0x80061004
+ // line 158, offset 0x80060390
 	/* begin block 1 */
-		// Start line: 137
-		// Start offset: 0x80061004
+		// Start line: 159
+		// Start offset: 0x80060390
 
 		/* begin block 1.1 */
-			// Start line: 142
-			// Start offset: 0x80061024
+			// Start line: 164
+			// Start offset: 0x800603B4
 			// Variables:
-		// 		struct _LoadQueueEntry *queueEntry; // $s0
+		// 		struct _LoadQueueEntry *queueEntry; // $s1
 
 			/* begin block 1.1.1 */
-				// Start line: 160
-				// Start offset: 0x80061108
+				// Start line: 182
+				// Start offset: 0x80060440
 				// Variables:
 			// 		long size; // $v0
 			/* end block 1.1.1 */
-			// End offset: 0x80061138
-			// End Line: 166
+			// End offset: 0x80060470
+			// End Line: 188
 
 			/* begin block 1.1.2 */
-				// Start line: 208
-				// Start offset: 0x80061214
+				// Start line: 229
+				// Start offset: 0x8006052C
 				// Variables:
-			// 		struct _LoadQueueEntry *newQueue; // $v0
+			// 		struct _LoadQueueEntry *newQueue; // $s0
 			/* end block 1.1.2 */
-			// End offset: 0x80061214
-			// End Line: 208
+			// End offset: 0x8006052C
+			// End Line: 229
 
 			/* begin block 1.1.3 */
-				// Start line: 236
-				// Start offset: 0x800612B4
+				// Start line: 260
+				// Start offset: 0x800605C4
 				// Variables:
-			// 		struct _LoadQueueEntry *newQueue; // $v0
+			// 		struct _LoadQueueEntry *newQueue; // $s0
 			/* end block 1.1.3 */
-			// End offset: 0x800612B4
-			// End Line: 236
+			// End offset: 0x800605C4
+			// End Line: 260
 		/* end block 1.1 */
-		// End offset: 0x80061474
-		// End Line: 337
+		// End offset: 0x80060718
+		// End Line: 374
 	/* end block 1 */
-	// End offset: 0x80061474
-	// End Line: 339
+	// End offset: 0x80060718
+	// End Line: 376
 
 	/* begin block 2 */
-		// Start line: 300
+		// Start line: 341
 	/* end block 2 */
-	// End Line: 301
+	// End Line: 342
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\STRMLOAD.C */
 
 int STREAM_PollLoadQueue(void)
 
 {
-  _LoadQueueEntry *p_Var1;
-  long *plVar2;
-  _LoadQueueEntry *p_Var3;
-  int voiceIndex;
-  ulong uVar4;
-  code *pcVar5;
-  long **pplVar6;
+  void *pvVar1;
+  _LoadQueueEntry *p_Var2;
+  int iVar3;
+  int iVar4;
+  ulong uVar5;
   long takeBackSize;
   
   LOAD_ProcessReadQueue();
-  p_Var1 = loadHead;
-  if (loadHead == (_LoadQueueEntry *)0x0) goto LAB_80061474;
-  if (gameTrackerX.debugFlags < 0) {
-    FONT_Print("%s status %d\n");
+  iVar3 = loadHead;
+  if (loadHead == 0) {
+    return numLoads;
   }
-  switch((int)(((uint)(ushort)p_Var1->status - 1) * 0x10000) >> 0x10) {
+  if (DAT_800d218c < 0) {
+    FONT_Print(s__s_status__d_800d0728);
+  }
+  switch((int)(((uint)*(ushort *)(iVar3 + 4) - 1) * 0x10000) >> 0x10) {
   case 0:
-    if (gameTrackerX.debugFlags < 0) {
-      GXFilePrint("Load %s %x\n");
-    }
-    uVar4 = TIMER_GetTimeMS();
-    p_Var1[1].loadEntry.dirHash = uVar4;
-    LOAD_NonBlockingReadFile(&p_Var1->loadEntry);
-    voiceIndex = LOAD_ChangeDirectoryFlag();
-    if (voiceIndex == 0) {
-      p_Var1->status = 2;
-      if (p_Var1->mempackUsed != '\0') {
-        MEMPACK_SetMemoryBeingStreamed((char *)(p_Var1->loadEntry).loadAddr);
+    uVar5 = TIMER_GetTimeMS();
+    *(ulong *)(iVar3 + 0x6c) = uVar5;
+    LOAD_NonBlockingReadFile((_NonBlockLoadEntry *)(iVar3 + 8));
+    iVar4 = LOAD_ChangeDirectoryFlag();
+    if (iVar4 == 0) {
+      *(undefined2 *)(iVar3 + 4) = 2;
+      if (*(char *)(iVar3 + 7) != '\0') {
+        MEMPACK_SetMemoryBeingStreamed(*(char **)(iVar3 + 0x14));
       }
-      pplVar6 = (long **)(p_Var1->loadEntry).retPointer;
-      if (pplVar6 != (long **)0x0) {
-        *pplVar6 = (p_Var1->loadEntry).loadAddr;
+      if (*(undefined4 **)(iVar3 + 0x38) != (undefined4 *)0x0) {
+        **(undefined4 **)(iVar3 + 0x38) = *(undefined4 *)(iVar3 + 0x14);
       }
     }
     else {
-      p_Var3 = STREAM_AddQueueEntryToHead();
-      takeBackSize = (p_Var1->loadEntry).dirHash;
-      p_Var3->status = 10;
-      (p_Var3->loadEntry).dirHash = takeBackSize;
+      p_Var2 = STREAM_AddQueueEntryToHead();
+      sprintf((p_Var2->loadEntry).fileName,&LAB_800d0738,*(undefined4 *)(iVar3 + 0xc));
+      takeBackSize = *(long *)(iVar3 + 0xc);
+      p_Var2->status = 10;
+      (p_Var2->loadEntry).dirHash = takeBackSize;
     }
     break;
   case 1:
-    voiceIndex = LOAD_IsFileLoading();
-    if (voiceIndex != 0) break;
-    uVar4 = TIMER_GetTimeMS();
-    p_Var1[1].loadEntry.dirHash = uVar4 - p_Var1[1].loadEntry.dirHash;
-    if (gameTrackerX.debugFlags < 0) {
-      GXFilePrint("Took %d ms to load %s size %d (%d b/s)\n");
+    iVar4 = LOAD_IsFileLoading();
+    if (iVar4 != 0) {
+      return numLoads;
     }
-    if (p_Var1->relocateBinary != '\0') {
-      takeBackSize = LOAD_RelocBinaryData((p_Var1->loadEntry).loadAddr,(p_Var1->loadEntry).loadSize)
-      ;
-      if (p_Var1->mempackUsed != '\0') {
-        MEMPACK_Return((char *)(p_Var1->loadEntry).loadAddr,takeBackSize);
+    uVar5 = TIMER_GetTimeMS();
+    *(int *)(iVar3 + 0x6c) = uVar5 - *(int *)(iVar3 + 0x6c);
+    if (*(char *)(iVar3 + 6) != '\0') {
+      takeBackSize = LOAD_RelocBinaryData(*(long **)(iVar3 + 0x14),*(long *)(iVar3 + 0x18));
+      if (*(char *)(iVar3 + 7) != '\0') {
+        MEMPACK_Return(*(char **)(iVar3 + 0x14),takeBackSize);
       }
-      p_Var1->relocateBinary = '\0';
+      *(undefined *)(iVar3 + 6) = 0;
     }
-    if ((p_Var1->loadEntry).retFunc != (void *)0x0) {
-      p_Var1->status = 7;
-      break;
+    if (*(int *)(iVar3 + 0x2c) != 0) {
+      *(undefined2 *)(iVar3 + 4) = 7;
+      return numLoads;
     }
-    p_Var1->status = 4;
-    if (p_Var1->mempackUsed != '\0') {
-      MEMPACK_SetMemoryDoneStreamed((char *)(p_Var1->loadEntry).loadAddr);
+    *(undefined2 *)(iVar3 + 4) = 4;
+    if (*(char *)(iVar3 + 7) != '\0') {
+      MEMPACK_SetMemoryDoneStreamed(*(char **)(iVar3 + 0x14));
     }
-    goto LAB_800613ac;
-  default:
-    GXFilePrint("Don\'t understand status number %d\n");
-    break;
+    goto LAB_80060710;
   case 4:
-    plVar2 = (long *)LOAD_InitBuffers();
-    (p_Var1->loadEntry).loadAddr = plVar2;
-    uVar4 = TIMER_GetTimeMS();
-    p_Var1[1].loadEntry.dirHash = uVar4;
-    if (gameTrackerX.debugFlags < 0) {
-      GXFilePrint("Buffer Load %s at %d\n");
-    }
-    LOAD_CD_ReadPartOfFile(&p_Var1->loadEntry);
-    voiceIndex = LOAD_ChangeDirectoryFlag();
-    if (voiceIndex == 0) {
-      p_Var1->status = 6;
-      (p_Var1->loadEntry).posInFile = 0;
+    pvVar1 = LOAD_InitBuffers();
+    *(void **)(iVar3 + 0x14) = pvVar1;
+    uVar5 = TIMER_GetTimeMS();
+    *(ulong *)(iVar3 + 0x6c) = uVar5;
+    LOAD_CD_ReadPartOfFile((_NonBlockLoadEntry *)(iVar3 + 8));
+    iVar4 = LOAD_ChangeDirectoryFlag();
+    if (iVar4 == 0) {
+      *(undefined2 *)(iVar3 + 4) = 6;
+      *(undefined4 *)(iVar3 + 0x28) = 0;
     }
     else {
-      p_Var3 = STREAM_AddQueueEntryToHead();
-      takeBackSize = (p_Var1->loadEntry).dirHash;
-      p_Var3->status = 10;
-      (p_Var3->loadEntry).dirHash = takeBackSize;
+      p_Var2 = STREAM_AddQueueEntryToHead();
+      sprintf((p_Var2->loadEntry).fileName,&LAB_800d0738,*(undefined4 *)(iVar3 + 0xc));
+      takeBackSize = *(long *)(iVar3 + 0xc);
+      p_Var2->status = 10;
+      (p_Var2->loadEntry).dirHash = takeBackSize;
       LOAD_CleanUpBuffers();
     }
     break;
   case 5:
-    voiceIndex = LOAD_IsFileLoading();
-    if (voiceIndex == 0) {
-      uVar4 = TIMER_GetTimeMS();
-      p_Var1[1].loadEntry.dirHash = uVar4 - p_Var1[1].loadEntry.dirHash;
-      if (gameTrackerX.debugFlags < 0) {
-        GXFilePrint("Took %d ms to load %s size %d (%d b/s)\n");
-      }
-      p_Var1->status = 4;
+    iVar4 = LOAD_IsFileLoading();
+    if (iVar4 == 0) {
+      uVar5 = TIMER_GetTimeMS();
+      *(undefined2 *)(iVar3 + 4) = 4;
+      *(int *)(iVar3 + 0x6c) = uVar5 - *(int *)(iVar3 + 0x6c);
       STREAM_RemoveQueueHead();
       LOAD_CleanUpBuffers();
+      if (*(code **)(iVar3 + 0x2c) == VRAM_TransferBufferToVram) {
+        VRAM_LoadReturn(*(void **)(iVar3 + 0x14),*(void **)(iVar3 + 0x30),*(void **)(iVar3 + 0x34));
+      }
     }
     break;
   case 6:
-    p_Var1->status = 4;
+    *(undefined2 *)(iVar3 + 4) = 4;
     STREAM_RemoveQueueHead();
-    if (p_Var1->mempackUsed != '\0') {
-      MEMPACK_SetMemoryDoneStreamed((char *)(p_Var1->loadEntry).loadAddr);
+    if (*(char *)(iVar3 + 7) != '\0') {
+      MEMPACK_SetMemoryDoneStreamed(*(char **)(iVar3 + 0x14));
     }
-    pcVar5 = (code *)(p_Var1->loadEntry).retFunc;
-    loadBufferedFromHead = 1;
-    if (pcVar5 != (code *)0x0) {
-      (*pcVar5)((p_Var1->loadEntry).loadAddr,(p_Var1->loadEntry).retData,
-                (p_Var1->loadEntry).retData2);
+    STREAM_NextLoadFromHead();
+    if (*(code **)(iVar3 + 0x2c) != (code *)0x0) {
+      (**(code **)(iVar3 + 0x2c))
+                (*(undefined4 *)(iVar3 + 0x14),*(undefined4 *)(iVar3 + 0x30),
+                 *(undefined4 *)(iVar3 + 0x34));
     }
-    loadBufferedFromHead = 0;
     break;
   case 7:
-    voiceIndex = (p_Var1->loadEntry).fileHash;
-    p_Var1->status = 9;
-    VOICEXA_Play(voiceIndex,0);
+    *(undefined2 *)(iVar3 + 4) = 9;
+    VOICEXA_Play(*(int *)(iVar3 + 8),0);
     break;
   case 8:
-    voiceIndex = VOICEXA_IsPlaying();
-    if (voiceIndex != 0) break;
+    iVar3 = VOICEXA_IsPlaying();
+    if (iVar3 != 0) {
+      return numLoads;
+    }
     LOAD_InitCdStreamMode();
-    goto LAB_800613ac;
+    goto LAB_80060710;
   case 9:
-    uVar4 = TIMER_GetTimeMS();
-    p_Var1[1].loadEntry.dirHash = uVar4;
-    if (gameTrackerX.debugFlags < 0) {
-      GXFilePrint("Directory change %s at %d\n");
+    uVar5 = TIMER_GetTimeMS();
+    *(ulong *)(iVar3 + 0x6c) = uVar5;
+    iVar4 = LOAD_ChangeDirectoryByID(*(int *)(iVar3 + 0xc));
+    if (iVar4 == 0) {
+      DEBUG_FatalError(s_Could_not_read_directory_hash__d_800d0740);
     }
-    voiceIndex = LOAD_ChangeDirectoryByID((p_Var1->loadEntry).dirHash);
-    if (voiceIndex == 0) {
-      DEBUG_FatalError("Could not read directory hash %d\n");
-    }
-    p_Var1->status = 0xb;
+    *(undefined2 *)(iVar3 + 4) = 0xb;
     break;
   case 10:
-    voiceIndex = LOAD_IsFileLoading();
-    if (voiceIndex != 0) break;
-    uVar4 = TIMER_GetTimeMS();
-    p_Var1[1].loadEntry.dirHash = uVar4 - p_Var1[1].loadEntry.dirHash;
-    if (gameTrackerX.debugFlags < 0) {
-      GXFilePrint("Took %d ms to load %s\n");
+    iVar4 = LOAD_IsFileLoading();
+    if (iVar4 != 0) {
+      return numLoads;
     }
-LAB_800613ac:
+    uVar5 = TIMER_GetTimeMS();
+    *(int *)(iVar3 + 0x6c) = uVar5 - *(int *)(iVar3 + 0x6c);
+LAB_80060710:
     STREAM_RemoveQueueHead();
   }
-LAB_80061474:
-  return (uint)(loadHead != (_LoadQueueEntry *)0x0);
+  return numLoads;
 }
 
 
 
 // decompiled code
 // original method signature: 
-// struct _LoadQueueEntry * /*$ra*/ STREAM_SetUpQueueEntry(char *fileName /*$s2*/, void *retFunc /*$s3*/, void *retData /*$s4*/, void *retData2 /*$s5*/, void **retPointer /*stack 16*/, int fromhead /*stack 20*/)
- // line 342, offset 0x8006148c
+// struct _LoadQueueEntry * /*$ra*/ STREAM_SetUpQueueEntry(char *fileName /*$s1*/, void *retFunc /*$s3*/, void *retData /*$s4*/, void *retData2 /*$s5*/, void **retPointer /*stack 16*/, int fromhead /*stack 20*/)
+ // line 379, offset 0x80060730
 	/* begin block 1 */
-		// Start line: 343
-		// Start offset: 0x8006148C
+		// Start line: 380
+		// Start offset: 0x80060730
 		// Variables:
 	// 		struct _LoadQueueEntry *currentEntry; // $s0
 	/* end block 1 */
-	// End offset: 0x80061540
-	// End Line: 372
+	// End offset: 0x80060808
+	// End Line: 414
 
 	/* begin block 2 */
-		// Start line: 718
+		// Start line: 796
 	/* end block 2 */
-	// End Line: 719
+	// End Line: 797
+
+/* File: C:\kain2\game\STRMLOAD.C */
 
 _LoadQueueEntry *
 STREAM_SetUpQueueEntry
@@ -511,7 +539,7 @@ STREAM_SetUpQueueEntry
   else {
     p_Var1 = STREAM_AddQueueEntryToHead();
   }
-  strcpy((p_Var1->loadEntry).fileName,fileName);
+  strcpy();
   lVar2 = LOAD_HashName(fileName);
   (p_Var1->loadEntry).fileHash = lVar2;
   lVar2 = LOAD_GetSearchDirectory();
@@ -519,9 +547,16 @@ STREAM_SetUpQueueEntry
   (p_Var1->loadEntry).posInFile = 0;
   (p_Var1->loadEntry).checksumType = 1;
   lVar2 = LOAD_GetSearchDirectory();
-  (p_Var1->loadEntry).dirHash = lVar2;
-  LOAD_SetSearchDirectory(0);
-  (p_Var1->loadEntry).retFunc = retFunc;
+  if (lVar2 == 0) {
+    (p_Var1->loadEntry).dirHash = gCurDir;
+    (p_Var1->loadEntry).retFunc = retFunc;
+  }
+  else {
+    lVar2 = LOAD_GetSearchDirectory();
+    (p_Var1->loadEntry).dirHash = lVar2;
+    LOAD_SetSearchDirectory(0);
+    (p_Var1->loadEntry).retFunc = retFunc;
+  }
   (p_Var1->loadEntry).retData = retData;
   (p_Var1->loadEntry).retData2 = retData2;
   (p_Var1->loadEntry).retPointer = retPointer;
@@ -536,21 +571,23 @@ STREAM_SetUpQueueEntry
 // decompiled code
 // original method signature: 
 // void /*$ra*/ STREAM_QueueNonblockingLoads(char *fileName /*$a0*/, unsigned char memType /*$s0*/, void *retFunc /*$a2*/, void *retData /*$a3*/, void *retData2 /*stack 16*/, void **retPointer /*stack 20*/, long relocateBinary /*stack 24*/)
- // line 376, offset 0x80061568
+ // line 418, offset 0x80060830
 	/* begin block 1 */
-		// Start line: 377
-		// Start offset: 0x80061568
+		// Start line: 419
+		// Start offset: 0x80060830
 		// Variables:
 	// 		struct _LoadQueueEntry *currentEntry; // $a0
 	// 		int fromhead; // $v1
 	/* end block 1 */
-	// End offset: 0x800615DC
-	// End Line: 393
+	// End offset: 0x800608A8
+	// End Line: 436
 
 	/* begin block 2 */
-		// Start line: 788
+		// Start line: 876
 	/* end block 2 */
-	// End Line: 789
+	// End Line: 877
+
+/* File: C:\kain2\game\STRMLOAD.C */
 
 void STREAM_QueueNonblockingLoads
                (char *fileName,uchar memType,void *retFunc,void *retData,void *retData2,
@@ -565,6 +602,7 @@ void STREAM_QueueNonblockingLoads
   if (loadBufferedFromHead != 0) {
     fromhead = (uint)(memType == '\0');
   }
+  loadBufferedFromHead = 0;
   p_Var2 = STREAM_SetUpQueueEntry(fileName,retFunc,retData,retData2,retPointer,fromhead);
   (p_Var2->loadEntry).loadAddr = (long *)0x0;
   p_Var2->mempackUsed = '\x01';
@@ -585,20 +623,22 @@ void STREAM_QueueNonblockingLoads
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_LoadToAddress(char *fileName /*$a0*/, void *loadAddr /*$s0*/, long relocateBinary /*$s1*/)
- // line 396, offset 0x800615ec
+ // line 439, offset 0x800608b8
 	/* begin block 1 */
-		// Start line: 397
-		// Start offset: 0x800615EC
+		// Start line: 440
+		// Start offset: 0x800608B8
 		// Variables:
 	// 		struct _LoadQueueEntry *currentEntry; // $v0
 	/* end block 1 */
-	// End offset: 0x80061640
-	// End Line: 406
+	// End offset: 0x8006090C
+	// End Line: 449
 
 	/* begin block 2 */
-		// Start line: 834
+		// Start line: 926
 	/* end block 2 */
-	// End Line: 835
+	// End Line: 927
+
+/* File: C:\kain2\game\STRMLOAD.C */
 
 void LOAD_LoadToAddress(char *fileName,void *loadAddr,long relocateBinary)
 
@@ -622,11 +662,13 @@ void LOAD_LoadToAddress(char *fileName,void *loadAddr,long relocateBinary)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_NonBlockingBinaryLoad(char *fileName /*$a0*/, void *retFunc /*$t0*/, void *retData /*$t1*/, void *retData2 /*$a3*/, void **retPointer /*stack 16*/, int memType /*stack 20*/)
- // line 419, offset 0x80061654
+ // line 462, offset 0x80060920
 	/* begin block 1 */
-		// Start line: 883
+		// Start line: 975
 	/* end block 1 */
-	// End Line: 884
+	// End Line: 976
+
+/* File: C:\kain2\game\STRMLOAD.C */
 
 void LOAD_NonBlockingBinaryLoad
                (char *fileName,void *retFunc,void *retData,void *retData2,void **retPointer,
@@ -642,11 +684,13 @@ void LOAD_NonBlockingBinaryLoad
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_NonBlockingFileLoad(char *fileName /*$a0*/, void *retFunc /*$v1*/, void *retData /*$t0*/, void *retData2 /*$a3*/, void **retPointer /*stack 16*/, int memType /*stack 20*/)
- // line 426, offset 0x80061698
+ // line 469, offset 0x80060964
 	/* begin block 1 */
-		// Start line: 901
+		// Start line: 993
 	/* end block 1 */
-	// End Line: 902
+	// End Line: 994
+
+/* File: C:\kain2\game\STRMLOAD.C */
 
 void LOAD_NonBlockingFileLoad
                (char *fileName,void *retFunc,void *retData,void *retData2,void **retPointer,
@@ -662,11 +706,13 @@ void LOAD_NonBlockingFileLoad
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_NonBlockingBufferedLoad(char *fileName /*$a0*/, void *retFunc /*$v0*/, void *retData /*$v1*/, void *retData2 /*$a3*/)
- // line 432, offset 0x800616d8
+ // line 475, offset 0x800609a4
 	/* begin block 1 */
-		// Start line: 915
+		// Start line: 1007
 	/* end block 1 */
-	// End Line: 916
+	// End Line: 1008
+
+/* File: C:\kain2\game\STRMLOAD.C */
 
 void LOAD_NonBlockingBufferedLoad(char *fileName,void *retFunc,void *retData,void *retData2)
 
@@ -680,48 +726,48 @@ void LOAD_NonBlockingBufferedLoad(char *fileName,void *retFunc,void *retData,voi
 // decompiled code
 // original method signature: 
 // int /*$ra*/ LOAD_IsXAInQueue()
- // line 437, offset 0x80061714
+ // line 480, offset 0x800609e0
 	/* begin block 1 */
-		// Start line: 439
-		// Start offset: 0x80061714
+		// Start line: 482
+		// Start offset: 0x800609E0
 		// Variables:
 	// 		int i; // $a0
 	/* end block 1 */
-	// End offset: 0x8006174C
-	// End Line: 448
+	// End offset: 0x80060A18
+	// End Line: 491
 
 	/* begin block 2 */
-		// Start line: 926
+		// Start line: 1018
 	/* end block 2 */
-	// End Line: 927
+	// End Line: 1019
 
 	/* begin block 3 */
-		// Start line: 927
+		// Start line: 1019
 	/* end block 3 */
-	// End Line: 928
+	// End Line: 1020
 
 	/* begin block 4 */
-		// Start line: 929
+		// Start line: 1021
 	/* end block 4 */
-	// End Line: 930
+	// End Line: 1022
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\STRMLOAD.C */
 
 int LOAD_IsXAInQueue(void)
 
 {
-  _LoadQueueEntry *p_Var1;
+  undefined *puVar1;
   int iVar2;
   
   iVar2 = 0;
-  p_Var1 = &LoadQueue;
+  puVar1 = &LoadQueue;
   do {
     iVar2 = iVar2 + 1;
-    if ((uint)(ushort)p_Var1->status - 8 < 2) {
+    if ((uint)*(ushort *)(puVar1 + 4) - 8 < 2) {
       return 1;
     }
-    p_Var1 = (_LoadQueueEntry *)&p_Var1[1].loadEntry.filePos;
-  } while (iVar2 < 0x40);
+    puVar1 = puVar1 + 0x70;
+  } while (iVar2 < 0x28);
   return 0;
 }
 
@@ -730,31 +776,35 @@ int LOAD_IsXAInQueue(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_PlayXA(int number /*$s0*/)
- // line 450, offset 0x80061754
+ // line 493, offset 0x80060a20
 	/* begin block 1 */
-		// Start line: 451
-		// Start offset: 0x80061754
+		// Start line: 494
+		// Start offset: 0x80060A20
 		// Variables:
 	// 		struct _LoadQueueEntry *currentEntry; // $v0
 	/* end block 1 */
-	// End offset: 0x80061754
-	// End Line: 451
+	// End offset: 0x80060A20
+	// End Line: 494
 
 	/* begin block 2 */
-		// Start line: 955
+		// Start line: 1047
 	/* end block 2 */
-	// End Line: 956
+	// End Line: 1048
+
+/* File: C:\kain2\game\STRMLOAD.C */
 
 void LOAD_PlayXA(int number)
 
 {
-  _LoadQueueEntry *p_Var1;
+  undefined2 uVar1;
+  _LoadQueueEntry *p_Var2;
   
-  p_Var1 = STREAM_AddQueueEntryToTail();
-  p_Var1->status = 8;
-  (p_Var1->loadEntry).fileHash = number;
-  *(undefined4 *)(p_Var1->loadEntry).fileName = 0x63696f76;
-  *(undefined2 *)((p_Var1->loadEntry).fileName + 4) = 0x65;
+  p_Var2 = STREAM_AddQueueEntryToTail();
+  p_Var2->status = 8;
+  (p_Var2->loadEntry).fileHash = number;
+  uVar1 = DAT_800d0768;
+  *(undefined4 *)(p_Var2->loadEntry).fileName = DAT_800d0764;
+  *(undefined2 *)((p_Var2->loadEntry).fileName + 4) = uVar1;
   return;
 }
 
@@ -763,20 +813,22 @@ void LOAD_PlayXA(int number)
 // decompiled code
 // original method signature: 
 // long * /*$ra*/ LOAD_ReadFile(char *fileName /*$a0*/, unsigned char memType /*$a1*/)
- // line 463, offset 0x8006179c
+ // line 506, offset 0x80060a68
 	/* begin block 1 */
-		// Start line: 464
-		// Start offset: 0x8006179C
+		// Start line: 507
+		// Start offset: 0x80060A68
 		// Variables:
 	// 		void *loadAddr; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x800617D4
-	// End Line: 471
+	// End offset: 0x80060AA0
+	// End Line: 514
 
 	/* begin block 2 */
-		// Start line: 984
+		// Start line: 1076
 	/* end block 2 */
-	// End Line: 985
+	// End Line: 1077
+
+/* File: C:\kain2\game\STRMLOAD.C */
 
 long * LOAD_ReadFile(char *fileName,uchar memType)
 
@@ -796,33 +848,34 @@ long * LOAD_ReadFile(char *fileName,uchar memType)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LOAD_ChangeDirectory(char *name /*$s1*/)
- // line 474, offset 0x800617e8
+ // line 517, offset 0x80060ab4
 	/* begin block 1 */
-		// Start line: 475
-		// Start offset: 0x800617E8
+		// Start line: 518
+		// Start offset: 0x80060AB4
 		// Variables:
 	// 		struct _LoadQueueEntry *currentEntry; // $s0
 	/* end block 1 */
-	// End offset: 0x800617E8
-	// End Line: 475
+	// End offset: 0x80060AB4
+	// End Line: 518
 
 	/* begin block 2 */
-		// Start line: 1009
+		// Start line: 1101
 	/* end block 2 */
-	// End Line: 1010
+	// End Line: 1102
+
+/* File: C:\kain2\game\STRMLOAD.C */
 
 void LOAD_ChangeDirectory(char *name)
 
 {
   _LoadQueueEntry *p_Var1;
-  long lVar2;
   
   p_Var1 = STREAM_AddQueueEntryToTail();
-  lVar2 = LOAD_HashUnit(name);
-  (p_Var1->loadEntry).dirHash = lVar2;
+  gCurDir = LOAD_HashUnit(name);
+  (p_Var1->loadEntry).dirHash = gCurDir;
   (p_Var1->loadEntry).fileHash = 0;
   p_Var1->status = 10;
-  sprintf((p_Var1->loadEntry).fileName,"dir %s");
+  sprintf((p_Var1->loadEntry).fileName,s_dir__s_800d076c,name);
   return;
 }
 
@@ -830,35 +883,37 @@ void LOAD_ChangeDirectory(char *name)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ LOAD_AbortFileLoad(char *fileName /*$s2*/, void *retFunc /*$s3*/)
- // line 488, offset 0x80061844
+// void /*$ra*/ LOAD_AbortFileLoad(char *fileName /*$a0*/, void *retFunc /*$s3*/)
+ // line 533, offset 0x80060b14
 	/* begin block 1 */
-		// Start line: 489
-		// Start offset: 0x80061844
+		// Start line: 534
+		// Start offset: 0x80060B14
 
 		/* begin block 1.1 */
-			// Start line: 492
-			// Start offset: 0x8006186C
+			// Start line: 537
+			// Start offset: 0x80060B38
 			// Variables:
 		// 		struct _LoadQueueEntry *entry; // $s0
 		// 		struct _LoadQueueEntry *prev; // $s1
 		// 		long hash; // $v1
 		/* end block 1.1 */
-		// End offset: 0x80061914
-		// End Line: 518
+		// End offset: 0x80060BC8
+		// End Line: 563
 	/* end block 1 */
-	// End offset: 0x80061914
-	// End Line: 519
+	// End offset: 0x80060BC8
+	// End Line: 564
 
 	/* begin block 2 */
-		// Start line: 1044
+		// Start line: 1143
 	/* end block 2 */
-	// End Line: 1045
+	// End Line: 1144
 
 	/* begin block 3 */
-		// Start line: 1045
+		// Start line: 1144
 	/* end block 3 */
-	// End Line: 1046
+	// End Line: 1145
+
+/* File: C:\kain2\game\STRMLOAD.C */
 
 void LOAD_AbortFileLoad(char *fileName,void *retFunc)
 
@@ -873,7 +928,6 @@ void LOAD_AbortFileLoad(char *fileName,void *retFunc)
     entry = loadHead;
     while (entry != (_LoadQueueEntry *)0x0) {
       if ((entry->loadEntry).fileHash == lVar1) {
-        GXFilePrint("Aborting file load %s %x %x %x\n");
         if (prev == (_LoadQueueEntry *)0x0) {
           LOAD_StopLoad();
         }

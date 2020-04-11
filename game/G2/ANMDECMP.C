@@ -5,10 +5,10 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Anim_DecompressChannel_AdaptiveDelta(struct _G2AnimDecompressChannelInfo_Type *dcInfo /*$a0*/, struct _G2AnimChanStatus_Type *status /*$a1*/)
- // line 135, offset 0x8008df6c
+ // line 135, offset 0x8008faa8
 	/* begin block 1 */
 		// Start line: 136
-		// Start offset: 0x8008DF6C
+		// Start offset: 0x8008FAA8
 		// Variables:
 	// 		unsigned short *chanData; // $t7
 	// 		int index; // $t2
@@ -19,13 +19,15 @@
 	// 		int storedKey; // $t4
 	// 		int keyCount; // $t8
 	/* end block 1 */
-	// End offset: 0x8008E074
+	// End offset: 0x8008FBB0
 	// End Line: 189
 
 	/* begin block 2 */
 		// Start line: 270
 	/* end block 2 */
 	// End Line: 271
+
+/* File: C:\kain2\game\G2\ANMDECMP.C */
 
 void _G2Anim_DecompressChannel_AdaptiveDelta
                (_G2AnimDecompressChannelInfo_Type *dcInfo,_G2AnimChanStatus_Type *status)
@@ -51,8 +53,8 @@ void _G2Anim_DecompressChannel_AdaptiveDelta
   while ((int)uVar9 < dcInfo->targetKey) {
     uVar9 = uVar9 + 1;
     uVar5 = (int)(uint)(puVar3 + 2)[(int)uVar9 >> 2] >> ((uVar9 & 3) << 2);
-    uVar2 = *(ushort *)(&_stepSizeTable + iVar7);
-    iVar8 = iVar7 + (&_indexTable)[uVar5 & 0xf];
+    uVar2 = *(ushort *)(_stepSizeTable + iVar7);
+    iVar8 = iVar7 + _indexTable[uVar5 & 0xf];
     iVar7 = iVar8;
     if (iVar8 < 0) {
       iVar7 = 0;
@@ -87,10 +89,10 @@ void _G2Anim_DecompressChannel_AdaptiveDelta
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Anim_DecompressChannel_Linear(struct _G2AnimDecompressChannelInfo_Type *dcInfo /*$a0*/, struct _G2AnimChanStatus_Type *status /*$a1*/)
- // line 198, offset 0x8008e098
+ // line 198, offset 0x8008fbd4
 	/* begin block 1 */
 		// Start line: 201
-		// Start offset: 0x8008E098
+		// Start offset: 0x8008FBD4
 		// Variables:
 	// 		unsigned short *chanData; // $a2
 	// 		short rangeBase; // $t0
@@ -99,7 +101,7 @@ void _G2Anim_DecompressChannel_AdaptiveDelta
 	// 		int rangeOffset; // $a0
 	// 		int targetKey; // $a3
 	/* end block 1 */
-	// End offset: 0x8008E100
+	// End offset: 0x8008FC3C
 	// End Line: 232
 
 	/* begin block 2 */
@@ -116,6 +118,8 @@ void _G2Anim_DecompressChannel_AdaptiveDelta
 		// Start line: 423
 	/* end block 4 */
 	// End Line: 424
+
+/* File: C:\kain2\game\G2\ANMDECMP.C */
 
 void _G2Anim_DecompressChannel_Linear
                (_G2AnimDecompressChannelInfo_Type *dcInfo,_G2AnimChanStatus_Type *status)
@@ -151,15 +155,15 @@ void _G2Anim_DecompressChannel_Linear
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Anim_InitializeChannel_AdaptiveDelta(struct _G2AnimDecompressChannelInfo_Type *dcInfo /*$a0*/, struct _G2AnimChanStatus_Type *status /*$a1*/)
- // line 271, offset 0x8008e12c
+ // line 271, offset 0x8008fc68
 	/* begin block 1 */
 		// Start line: 274
-		// Start offset: 0x8008E12C
+		// Start offset: 0x8008FC68
 		// Variables:
 	// 		unsigned short *chanData; // $v1
 	// 		int keyCount; // $v0
 	/* end block 1 */
-	// End offset: 0x8008E12C
+	// End offset: 0x8008FC68
 	// End Line: 277
 
 	/* begin block 2 */
@@ -182,6 +186,8 @@ void _G2Anim_DecompressChannel_Linear
 	/* end block 5 */
 	// End Line: 568
 
+/* File: C:\kain2\game\G2\ANMDECMP.C */
+
 void _G2Anim_InitializeChannel_AdaptiveDelta
                (_G2AnimDecompressChannelInfo_Type *dcInfo,_G2AnimChanStatus_Type *status)
 
@@ -202,15 +208,15 @@ void _G2Anim_InitializeChannel_AdaptiveDelta
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Anim_InitializeChannel_Linear(struct _G2AnimDecompressChannelInfo_Type *dcInfo /*$a0*/, struct _G2AnimChanStatus_Type *status /*$a1*/)
- // line 289, offset 0x8008e164
+ // line 289, offset 0x8008fca0
 	/* begin block 1 */
 		// Start line: 292
-		// Start offset: 0x8008E164
+		// Start offset: 0x8008FCA0
 		// Variables:
 	// 		unsigned short *chanData; // $v1
 	// 		int chanLength; // $v0
 	/* end block 1 */
-	// End offset: 0x8008E164
+	// End offset: 0x8008FCA0
 	// End Line: 295
 
 	/* begin block 2 */
@@ -227,6 +233,8 @@ void _G2Anim_InitializeChannel_AdaptiveDelta
 		// Start line: 608
 	/* end block 4 */
 	// End Line: 609
+
+/* File: C:\kain2\game\G2\ANMDECMP.C */
 
 void _G2Anim_InitializeChannel_Linear
                (_G2AnimDecompressChannelInfo_Type *dcInfo,_G2AnimChanStatus_Type *status)

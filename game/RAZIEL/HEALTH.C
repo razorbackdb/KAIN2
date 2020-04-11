@@ -5,36 +5,39 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ InitHealthSystem()
- // line 4, offset 0x800a0f5c
+ // line 4, offset 0x800a3730
 	/* begin block 1 */
 		// Start line: 8
 	/* end block 1 */
 	// End Line: 9
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\RAZIEL\HEALTH.C */
 
 void InitHealthSystem(void)
 
 {
   int iVar1;
   
-  Raziel.DamageFrequency = 0;
-  Raziel.HealthScale = 1;
-  Raziel.HealthBalls = 0;
-  Raziel.GlyphManaBalls = 0;
-  if (gameTrackerX.gameData.asmData.MorphType == 0) {
-    Raziel.CurrentPlane = 2;
-    Raziel.HitPoints = 100000;
+  DAT_800d5b40 = 0;
+  DAT_800d5b38 = 1;
+  DAT_800d5b3a = 0;
+  DAT_800d5b50 = 0;
+  if (DAT_800d20d6 == 0) {
+    DAT_800d5b78 = 2;
+    DAT_800d5b3c = 100000;
     razMaterialShift();
   }
   else {
-    Raziel.CurrentPlane = 1;
-    Raziel.HitPoints = GetMaxHealth();
+    DAT_800d5b78 = 1;
+    DAT_800d5b3c = GetMaxHealth();
     razSpectralShift();
   }
-  iVar1 = strcmp("under1",gameTrackerX.baseAreaName);
+  iVar1 = razInBaseArea(s_under_800d0ae0,5);
   if (iVar1 == 0) {
-    Raziel.HitPoints = 50000;
+    razSetPlayerEventHistory(0x1000);
+  }
+  else {
+    DAT_800d5b3c = 100;
   }
   return;
 }
@@ -44,11 +47,13 @@ void InitHealthSystem(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GainHealth(int data /*$a0*/)
- // line 27, offset 0x800a0ff0
+ // line 32, offset 0x800a37d0
 	/* begin block 1 */
-		// Start line: 61
+		// Start line: 71
 	/* end block 1 */
-	// End Line: 62
+	// End Line: 72
+
+/* File: C:\kain2\game\RAZIEL\HEALTH.C */
 
 void GainHealth(int data)
 
@@ -59,10 +64,10 @@ void GainHealth(int data)
   if (data < 0) {
     data = data + 0xfff;
   }
-  Raziel.HitPoints = Raziel.HitPoints + (data >> 0xc);
+  DAT_800d5b3c = DAT_800d5b3c + (data >> 0xc);
   iVar1 = GetMaxHealth();
-  if ((iVar1 <= Raziel.HitPoints) && (Raziel.CurrentPlane == 1)) {
-    Raziel.HitPoints = GetMaxHealth();
+  if ((iVar1 <= DAT_800d5b3c) && (DAT_800d5b78 == 1)) {
+    DAT_800d5b3c = GetMaxHealth();
     razReaverOn();
   }
   return;
@@ -73,33 +78,30 @@ void GainHealth(int data)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ LoseHealth(int amount /*$a0*/)
- // line 40, offset 0x800a107c
+ // line 47, offset 0x800a385c
 	/* begin block 1 */
-		// Start line: 87
+		// Start line: 101
 	/* end block 1 */
-	// End Line: 88
+	// End Line: 102
 
-	/* begin block 2 */
-		// Start line: 88
-	/* end block 2 */
-	// End Line: 89
+/* File: C:\kain2\game\RAZIEL\HEALTH.C */
 
 void LoseHealth(int amount)
 
 {
-  if (Raziel.invincibleTimer == 0) {
+  if ((((ControlFlag & 0x1000000U) == 0) && (DAT_800d5b44 == 0)) && (0x20d < DAT_800d5b3c)) {
     amount = amount * 20000;
     if (amount < 0) {
       amount = amount + 0xfff;
     }
-    Raziel.HitPoints = Raziel.HitPoints - (amount >> 0xc);
-    Raziel.DamageFrequency = Raziel.DamageFrequency - (amount >> 0xc);
-    Raziel.invincibleTimer = (int)*(short *)(Raziel.padCommands.Queue[13].ID + 0x34) * 0x1e000;
-    if (Raziel.CurrentPlane == 1) {
+    DAT_800d5b3c = DAT_800d5b3c - (amount >> 0xc);
+    DAT_800d5b40 = DAT_800d5b40 - (amount >> 0xc);
+    DAT_800d5b44 = (int)*(short *)(PlayerData + 0x34) * 0x1e000;
+    if (DAT_800d5b78 == 1) {
       razReaverOff();
     }
-    if ((gameTrackerX.gameFlags & 0x80U) == 0) {
-      GAMEPAD_Shock0(1,9000);
+    if ((DAT_800d220c & 0x80) == 0) {
+      GAMEPAD_Shock0(1,(int)&DAT_00002328);
     }
   }
   return;
@@ -110,33 +112,52 @@ void LoseHealth(int amount)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DrainHealth(int amount /*$a0*/)
- // line 56, offset 0x800a1130
+ // line 67, offset 0x800a3934
 	/* begin block 1 */
-		// Start line: 122
+		// Start line: 143
 	/* end block 1 */
-	// End Line: 123
+	// End Line: 144
 
 	/* begin block 2 */
-		// Start line: 127
+		// Start line: 145
 	/* end block 2 */
-	// End Line: 128
+	// End Line: 146
+
+/* File: C:\kain2\game\RAZIEL\HEALTH.C */
 
 void DrainHealth(int amount)
 
 {
   int iVar1;
+  int iVar2;
   
-  if (Raziel.CurrentPlane == 1) {
-    iVar1 = (int)*(short *)(Raziel.padCommands.Queue[13].ID + 0x30);
+  if ((ControlFlag & 0x1000000U) == 0) {
+    if (amount < 0) {
+      amount = amount + 0xfff;
+    }
+    if (DAT_800d5b78 == 1) {
+      iVar1 = (int)*(short *)(PlayerData + 0x30) * (amount >> 0xc) * DAT_800d2314;
+      if (iVar1 < 0) {
+        iVar1 = iVar1 + 0xfff;
+      }
+      iVar2 = DAT_800d5b3c;
+      DAT_800d5b3c = iVar1 >> 0xc;
+    }
+    else {
+      if (DAT_800d5b44 != 0) {
+        return;
+      }
+      if (DAT_800d5b3c < 0x20e) {
+        return;
+      }
+      iVar2 = -(int)*(short *)(PlayerData + 0x32) * (amount >> 0xc) * DAT_800d2314;
+      if (iVar2 < 0) {
+        iVar2 = iVar2 + 0xfff;
+      }
+      iVar2 = iVar2 >> 0xc;
+    }
+    DAT_800d5b3c = DAT_800d5b3c + iVar2;
   }
-  else {
-    iVar1 = -(int)*(short *)(Raziel.padCommands.Queue[13].ID + 0x32);
-  }
-  iVar1 = iVar1 * amount * gameTrackerX.idleTime;
-  if (iVar1 < 0) {
-    iVar1 = iVar1 + 0xffffff;
-  }
-  Raziel.HitPoints = Raziel.HitPoints + (iVar1 >> 0x18);
   return;
 }
 
@@ -145,28 +166,24 @@ void DrainHealth(int amount)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ BumpUpHealth()
- // line 73, offset 0x800a11a8
+ // line 88, offset 0x800a3a18
 	/* begin block 1 */
-		// Start line: 156
+		// Start line: 185
 	/* end block 1 */
-	// End Line: 157
+	// End Line: 186
 
 	/* begin block 2 */
-		// Start line: 157
+		// Start line: 194
 	/* end block 2 */
-	// End Line: 158
+	// End Line: 195
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\RAZIEL\HEALTH.C */
 
 void BumpUpHealth(void)
 
 {
-  if (Raziel.CurrentPlane == 1) {
-    Raziel.HealthScale = Raziel.HealthScale + 1;
-    Raziel.HitPoints =
-         ((Raziel.HitPoints + -100000) * (int)Raziel.HealthScale) / ((int)Raziel.HealthScale + -1) +
-         100000;
-  }
+  DAT_800d5b38 = DAT_800d5b38 + 1;
+  DAT_800d5b3c = GetMaxHealth();
   return;
 }
 
@@ -175,24 +192,24 @@ void BumpUpHealth(void)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ GetMaxHealth()
- // line 84, offset 0x800a1208
+ // line 104, offset 0x800a3a44
 	/* begin block 1 */
-		// Start line: 182
+		// Start line: 226
 	/* end block 1 */
-	// End Line: 183
+	// End Line: 227
 
 	/* begin block 2 */
-		// Start line: 183
+		// Start line: 227
 	/* end block 2 */
-	// End Line: 184
+	// End Line: 228
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\RAZIEL\HEALTH.C */
 
 int GetMaxHealth(void)
 
 {
-  if (Raziel.CurrentPlane != 2) {
-    return ((int)Raziel.HealthScale + 1) * 100000;
+  if (DAT_800d5b78 != 2) {
+    return ((int)DAT_800d5b38 + 1) * 100000;
   }
   return 100000;
 }
@@ -202,120 +219,148 @@ int GetMaxHealth(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ ProcessHealth(struct _Instance *instance /*$s0*/)
- // line 101, offset 0x800a1258
+ // line 121, offset 0x800a3a94
 	/* begin block 1 */
-		// Start line: 102
-		// Start offset: 0x800A1258
+		// Start line: 122
+		// Start offset: 0x800A3A94
 
 		/* begin block 1.1 */
-			// Start line: 183
-			// Start offset: 0x800A1420
+			// Start line: 217
+			// Start offset: 0x800A3CC0
 		/* end block 1.1 */
-		// End offset: 0x800A14B4
-		// End Line: 196
+		// End offset: 0x800A3D54
+		// End Line: 230
 	/* end block 1 */
-	// End offset: 0x800A1590
-	// End Line: 242
+	// End offset: 0x800A3F3C
+	// End Line: 278
 
 	/* begin block 2 */
-		// Start line: 196
+		// Start line: 236
 	/* end block 2 */
-	// End Line: 197
+	// End Line: 237
 
 	/* begin block 3 */
-		// Start line: 246
+		// Start line: 294
 	/* end block 3 */
-	// End Line: 247
+	// End Line: 295
+
+/* File: C:\kain2\game\RAZIEL\HEALTH.C */
 
 void ProcessHealth(_Instance *instance)
 
 {
-  int current_health;
-  int number;
+  int Data;
+  undefined *current_health;
   int max_health;
   
-  if (Raziel.invincibleTimer == 0) {
-    current_health = GetMaxHealth();
-    if ((Raziel.HitPoints == current_health) || (Raziel.CurrentPlane == 2)) {
+  if ((DAT_800d5b44 == 0) && ((DAT_800d5cec & 0x1000) != 0)) {
+    current_health = (undefined *)GetMaxHealth();
+    if ((DAT_800d5b3c == current_health) || (DAT_800d5b78 == 2)) {
       razReaverOn();
     }
     else {
       razReaverOff();
     }
-    if (Raziel.CurrentPlane == 1) {
-      if ((Raziel.soulReaver == (_Instance *)0x0) ||
-         (current_health = GetMaxHealth(), Raziel.HitPoints != current_health)) {
-        current_health =
-             (int)*(short *)(Raziel.padCommands.Queue[13].ID + 0x30) * gameTrackerX.idleTime;
-        if (current_health < 0) {
-          current_health = current_health + 0xfff;
-        }
-        Raziel.HitPoints = Raziel.HitPoints + (current_health >> 0xc);
+    if (DAT_800d5b78 == 1) {
+      if ((instance->waterFace != (_TFace *)0x0) && ((DAT_800d5b48 & 0x10) == 0)) {
+        DrainHealth((int)&DAT_0000a000);
       }
-      if (Raziel.HitPoints < 100000) {
+      if ((DAT_800d5b70 == (_Instance *)0x0) ||
+         (current_health = (undefined *)GetMaxHealth(), DAT_800d5b3c != current_health)) {
+        Data = *(short *)(PlayerData + 0x30) * DAT_800d2314;
+        if (Data < 0) {
+          Data = Data + 0xfff;
+        }
+        DAT_800d5b3c = DAT_800d5b3c + (Data >> 0xc);
+      }
+      if ((int)DAT_800d5b3c < 100000) {
         razPlaneShift(instance);
-        Raziel.invincibleTimer = (int)*(short *)(Raziel.padCommands.Queue[13].ID + 0x36) * 0x1e000;
+        DAT_800d5b44 = (int)*(short *)(PlayerData + 0x36) * 0x1e000;
+        if ((DAT_800d5aa4 & 0x40000) != 0) {
+          CAMERA_ChangeToOutOfWater((Camera *)&theCamera,instance);
+        }
       }
       else {
-        if (Raziel.HitPoints < 150000) {
-          current_health = gameTrackerX.idleTime * 1000;
-          if (current_health < 0) {
-            current_health = current_health + 0xfff;
+        if ((int)DAT_800d5b3c < 150000) {
+          Data = DAT_800d2314 * 1000;
+          if (Data < 0) {
+            Data = Data + 0xfff;
           }
-          Raziel.DamageFrequency = Raziel.DamageFrequency - (current_health >> 0xc);
-          if (Raziel.DamageFrequency < 0) {
-            Raziel.DamageFrequency = Raziel.HitPoints + -100000;
-            if (Raziel.DamageFrequency < 0x493e) {
-              Raziel.DamageFrequency = 0x493e;
+          DAT_800d5b40 = DAT_800d5b40 + -(Data >> 0xc);
+          if ((int)DAT_800d5b40 < 0) {
+            DAT_800d5b40 = DAT_800d5b3c + -100000;
+            if ((int)DAT_800d5b40 < 0x493e) {
+              DAT_800d5b40 = &DAT_0000493e;
             }
             FX_DoInstancePowerRing
-                      (instance,0x2ee - ((50000 - Raziel.DamageFrequency) * 300) / 0x7a12,
+                      (instance,0x2ee - ((int)(&DAT_0000c350 + -(int)DAT_800d5b40) * 300) / 0x7a12,
                        (long *)0x0,0,0);
-            if ((gameTrackerX.gameFlags & 0x80U) == 0) {
-              GAMEPAD_Shock1(0x80,0x5000);
+            if ((DAT_800d220c & 0x80) == 0) {
+              GAMEPAD_Shock1(0x80,(int)&DAT_00005000);
             }
           }
         }
       }
-      number = (int)Raziel.HealthScale;
-      current_health = Raziel.HitPoints + -100000;
-      max_health = number * 100000;
-      goto LAB_800a1588;
+      Data = (int)DAT_800d5b38;
+      current_health = DAT_800d5b3c + -100000;
+      max_health = Data * 100000;
+      goto LAB_800a3f34;
     }
-    if (Raziel.HitPoints < 100000) {
-      current_health =
-           (int)*(short *)(Raziel.padCommands.Queue[13].ID + 0x32) * gameTrackerX.idleTime;
-      if (current_health < 0) {
-        current_health = current_health + 0xfff;
+    if ((int)DAT_800d5b3c < 0x20e) {
+      Data = *(short *)(PlayerData + 0x32) * DAT_800d2314;
+      if (Data < 0) {
+        Data = Data + 0xfff;
       }
-      Raziel.HitPoints = Raziel.HitPoints + (current_health >> 0xc);
+      DAT_800d5b3c = DAT_800d5b3c + -(Data >> 0xc);
     }
     else {
-      Raziel.HitPoints = 100000;
+      if ((int)DAT_800d5b3c < 100000) {
+        Data = *(short *)(PlayerData + 0x32) * DAT_800d2314;
+        if (Data < 0) {
+          Data = Data + 0xfff;
+        }
+        DAT_800d5b3c = DAT_800d5b3c + (Data >> 0xc);
+      }
+      else {
+        DAT_800d5b3c = (undefined *)0x186a0;
+      }
     }
-    if (Raziel.HitPoints < 0) {
-      gameTracker->streamFlags = gameTracker->streamFlags | 0x80000;
-      Raziel.HitPoints = 50000;
-      gameTrackerX.gameData.asmData.MorphType = 1;
+    if (((ControlFlag & 0x800000U) == 0) && ((int)DAT_800d5b3c < 0x20d)) {
+      Data = SetControlInitIdleData(0,0,3);
+      StateSwitchStateCharacterData((__CharacterState *)&DAT_800d5748,StateHandlerIdle,Data);
+      G2EmulationSwitchAnimationCharacter((__CharacterState *)&DAT_800d5748,0xd6,0,3,1);
+      DAT_800d5b3c = (undefined *)0x20d;
+      ControlFlag = ControlFlag | 0x804000;
+    }
+    if ((int)DAT_800d5b3c < 0) {
+      *(uint *)(gameTracker + 0x144) = *(uint *)(gameTracker + 0x144) | 0x80000;
+      if (DAT_800d5b70 != (_Instance *)0x0) {
+        INSTANCE_Post(DAT_800d5b70,0x800105,0);
+      }
+      razSetPlayerEventHistory(0x8000);
+      DAT_800d5b3c = &DAT_0000c350;
+      DAT_800d20d6 = 1;
+      DAT_800d5ce8 = DAT_800d5ce8 | 0x8000;
+      razPlayUnderworldSounds(DAT_800d20f8);
     }
   }
   else {
-    Raziel.invincibleTimer = Raziel.invincibleTimer - gameTrackerX.idleTime;
-    if (Raziel.invincibleTimer < 0) {
-      Raziel.invincibleTimer = 0;
+    DAT_800d5b44 = DAT_800d5b44 - DAT_800d2314;
+    if (DAT_800d5b44 < 0) {
+      DAT_800d5b44 = 0;
     }
-    if (Raziel.CurrentPlane == 1) {
-      number = (int)Raziel.HealthScale;
-      max_health = number * 100000;
-      current_health = Raziel.HitPoints + -100000;
-      goto LAB_800a1588;
+    if (DAT_800d5b78 == 1) {
+      Data = (int)DAT_800d5b38;
+      max_health = Data * 100000;
+      current_health = DAT_800d5b3c + -100000;
+      goto LAB_800a3f34;
     }
   }
-  number = 0;
+  Data = 0;
   max_health = 100000;
-  current_health = Raziel.HitPoints;
-LAB_800a1588:
-  FX_Health_Spiral(number,current_health,max_health);
+  current_health = DAT_800d5b3c;
+LAB_800a3f34:
+  FX_Health_Spiral(Data,(int)current_health,max_health);
   return;
 }
 
@@ -324,13 +369,13 @@ LAB_800a1588:
 // decompiled code
 // original method signature: 
 // int /*$ra*/ HealthCheckForLowHealth()
- // line 245, offset 0x800a15a0
+ // line 281, offset 0x800a3f4c
 	/* begin block 1 */
-		// Start line: 538
+		// Start line: 624
 	/* end block 1 */
-	// End Line: 539
+	// End Line: 625
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\RAZIEL\HEALTH.C */
 
 int HealthCheckForLowHealth(void)
 
@@ -341,15 +386,15 @@ int HealthCheckForLowHealth(void)
   iVar1 = STREAM_IsMorphInProgress();
   iVar2 = 1;
   if (iVar1 == 0) {
-    if (Raziel.CurrentPlane == 1) {
+    if (DAT_800d5b78 == 1) {
       iVar2 = 0;
-      if (Raziel.HitPoints < 0x18704) {
+      if (DAT_800d5b3c < 0x18704) {
         iVar2 = 1;
       }
     }
     else {
       iVar2 = 1;
-      if (99 < Raziel.HitPoints) {
+      if (99 < DAT_800d5b3c) {
         iVar2 = 0;
       }
     }
@@ -362,29 +407,31 @@ int HealthCheckForLowHealth(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ DrainMana(int amount /*$a0*/)
- // line 267, offset 0x800a160c
+ // line 303, offset 0x800a3fb8
 	/* begin block 1 */
-		// Start line: 582
+		// Start line: 668
 	/* end block 1 */
-	// End Line: 583
+	// End Line: 669
 
 	/* begin block 2 */
-		// Start line: 583
+		// Start line: 669
 	/* end block 2 */
-	// End Line: 584
+	// End Line: 670
+
+/* File: C:\kain2\game\RAZIEL\HEALTH.C */
 
 void DrainMana(int amount)
 
 {
   uint uVar1;
   
-  uVar1 = (uint)Raziel.GlyphManaBalls;
-  Raziel.GlyphManaBalls = (ushort)(uVar1 - amount);
+  uVar1 = (uint)DAT_800d5b50;
+  DAT_800d5b50 = (ushort)(uVar1 - amount);
   if ((uVar1 - amount & 0xffff) == 0) {
-    Raziel.GlyphManaBalls = 0;
+    DAT_800d5b50 = 0;
   }
-  if (Raziel.GlyphManaMax < Raziel.GlyphManaBalls) {
-    Raziel.GlyphManaBalls = Raziel.GlyphManaMax;
+  if (DAT_800d5b52 < DAT_800d5b50) {
+    DAT_800d5b50 = DAT_800d5b52;
   }
   return;
 }
@@ -394,25 +441,27 @@ void DrainMana(int amount)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SetMana(int amount /*$a0*/)
- // line 277, offset 0x800a1650
+ // line 313, offset 0x800a3ffc
 	/* begin block 1 */
-		// Start line: 602
+		// Start line: 688
 	/* end block 1 */
-	// End Line: 603
+	// End Line: 689
 
 	/* begin block 2 */
-		// Start line: 603
+		// Start line: 689
 	/* end block 2 */
-	// End Line: 604
+	// End Line: 690
+
+/* File: C:\kain2\game\RAZIEL\HEALTH.C */
 
 void SetMana(int amount)
 
 {
   if (amount < 1) {
-    Raziel.GlyphManaBalls = 0;
+    DAT_800d5b50 = 0;
     return;
   }
-  Raziel.GlyphManaBalls = Raziel.GlyphManaMax;
+  DAT_800d5b50 = DAT_800d5b52;
   return;
 }
 
@@ -421,19 +470,27 @@ void SetMana(int amount)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ HealthInstantDeath(struct _Instance *instance /*$a0*/)
- // line 286, offset 0x800a1678
+ // line 322, offset 0x800a4024
 	/* begin block 1 */
-		// Start line: 620
+		// Start line: 706
 	/* end block 1 */
-	// End Line: 621
+	// End Line: 707
+
+/* File: C:\kain2\game\RAZIEL\HEALTH.C */
 
 void HealthInstantDeath(_Instance *instance)
 
 {
-  gameTrackerX.gameData.asmData.MorphType = 1;
+  DAT_800d20d6 = 1;
   razSpectralShift();
-  Raziel.HitPoints = 50000;
-  gameTracker->streamFlags = gameTracker->streamFlags | 0x80000;
+  DAT_800d5b3c = &DAT_0000c350;
+  *(uint *)(gameTracker + 0x144) = *(uint *)(gameTracker + 0x144) | 0x80000;
+  if (DAT_800d5b70 != (_Instance *)0x0) {
+    INSTANCE_Post(DAT_800d5b70,0x800105,0);
+  }
+  razSetPlayerEventHistory(0x8000);
+  DAT_800d5ce8 = DAT_800d5ce8 | 0x8000;
+  razPlayUnderworldSounds(DAT_800d20f8);
   return;
 }
 
@@ -442,23 +499,25 @@ void HealthInstantDeath(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ RAZIEL_DebugHealthSetScale(long healthScale /*$a0*/)
- // line 300, offset 0x800a16bc
+ // line 341, offset 0x800a40a4
 	/* begin block 1 */
-		// Start line: 651
+		// Start line: 748
 	/* end block 1 */
-	// End Line: 652
+	// End Line: 749
 
 	/* begin block 2 */
-		// Start line: 656
+		// Start line: 753
 	/* end block 2 */
-	// End Line: 657
+	// End Line: 754
+
+/* File: C:\kain2\game\RAZIEL\HEALTH.C */
 
 void RAZIEL_DebugHealthSetScale(long healthScale)
 
 {
-  Raziel.HealthScale = (short)healthScale;
-  Raziel.HealthBalls = (Raziel.HealthScale + -1) * 5;
-  Raziel.HitPoints = (int)Raziel.HealthScale * 100000 + 100000;
+  DAT_800d5b38 = (short)healthScale;
+  DAT_800d5b3a = (DAT_800d5b38 + -1) * 5;
+  DAT_800d5b3c = (int)DAT_800d5b38 * 100000 + 100000;
   return;
 }
 
@@ -467,27 +526,70 @@ void RAZIEL_DebugHealthSetScale(long healthScale)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ RAZIEL_DebugHealthFillUp()
- // line 311, offset 0x800a1714
+ // line 352, offset 0x800a40fc
 	/* begin block 1 */
-		// Start line: 678
+		// Start line: 775
 	/* end block 1 */
-	// End Line: 679
+	// End Line: 776
 
 	/* begin block 2 */
-		// Start line: 679
+		// Start line: 776
 	/* end block 2 */
-	// End Line: 680
+	// End Line: 777
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\RAZIEL\HEALTH.C */
 
 void RAZIEL_DebugHealthFillUp(void)
 
 {
-  if (Raziel.CurrentPlane == 1) {
-    Raziel.HitPoints = (int)Raziel.HealthScale * 100000 + 100000;
+  if (DAT_800d5b78 == 1) {
+    DAT_800d5b3c = (int)DAT_800d5b38 * 100000 + 100000;
     return;
   }
-  Raziel.HitPoints = 100000;
+  DAT_800d5b3c = 100000;
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ RAZIEL_DebugManaFillUp()
+ // line 364, offset 0x800a415c
+	/* begin block 1 */
+		// Start line: 799
+	/* end block 1 */
+	// End Line: 800
+
+/* File: C:\kain2\game\RAZIEL\HEALTH.C */
+
+void RAZIEL_DebugManaFillUp(void)
+
+{
+  SetMana(1);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ razPlayUnderworldSounds(struct _Instance *instance /*$s2*/)
+ // line 372, offset 0x800a417c
+	/* begin block 1 */
+		// Start line: 815
+	/* end block 1 */
+	// End Line: 816
+
+/* File: C:\kain2\game\RAZIEL\HEALTH.C */
+
+void razPlayUnderworldSounds(_Instance *instance)
+
+{
+  razSetupSoundRamp(instance,(_SoundRamp *)&DAT_800d5ca0,0x1a,-0xfa,-0xfa,0x78,0x78,0,0xdac);
+  razSetupSoundRamp(instance,(_SoundRamp *)&DAT_800d5ca0,0x1a,-300,-300,0x78,0x78,0,0xdac);
+  razSetupSoundRamp(instance,(_SoundRamp *)&DAT_800d5ca0,0x12,-0xdc,-0xdc,0x78,0x78,0,0xdac);
+  razSetupSoundRamp(instance,(_SoundRamp *)&DAT_800d5ca0,0x1a,-0xfa,-0xfa,0x78,0x78,0,0xdac);
   return;
 }
 

@@ -5,10 +5,10 @@
 // decompiled code
 // original method signature: 
 // struct PlanningNode * /*$ra*/ PLANSRCH_FindNodeToExpand(struct PlanningNode *planningPool /*$a0*/, struct PlanningNode *goalNode /*$s5*/, int validNodeTypes /*$s6*/)
- // line 78, offset 0x80097824
+ // line 78, offset 0x80099534
 	/* begin block 1 */
 		// Start line: 79
-		// Start offset: 0x80097824
+		// Start offset: 0x80099534
 		// Variables:
 	// 		int i; // $s2
 	// 		struct PlanningNode *nodeToExpand; // $s3
@@ -16,7 +16,7 @@
 	// 		unsigned long valueForCurrentNode; // $v1
 	// 		struct PlanningNode *currentNode; // $s1
 	/* end block 1 */
-	// End offset: 0x80097910
+	// End offset: 0x80099620
 	// End Line: 102
 
 	/* begin block 2 */
@@ -28,6 +28,8 @@
 		// Start line: 162
 	/* end block 3 */
 	// End Line: 163
+
+/* File: C:\kain2\game\PLAN\PLANSRCH.C */
 
 PlanningNode *
 PLANSRCH_FindNodeToExpand(PlanningNode *planningPool,PlanningNode *goalNode,int validNodeTypes)
@@ -44,7 +46,7 @@ PLANSRCH_FindNodeToExpand(PlanningNode *planningPool,PlanningNode *goalNode,int 
   iVar4 = 0;
   pPVar5 = (PlanningNode *)0x0;
   pPVar3 = planningPool;
-  if (*(char *)(poolManagementData + 1) != '\0') {
+  if (poolManagementData->numNodesInPool != '\0') {
     do {
       if ((((validNodeTypes >> ((uint)planningPool->nodeType & 0x1f) & 1U) != 0) &&
           ((planningPool->flags & 1) != 0)) && ((planningPool->flags & 2) == 0)) {
@@ -60,7 +62,7 @@ PLANSRCH_FindNodeToExpand(PlanningNode *planningPool,PlanningNode *goalNode,int 
       planningPool = planningPool + 1;
       iVar4 = iVar4 + 1;
       pPVar3 = pPVar3 + 1;
-    } while (iVar4 < (int)(uint)*(byte *)(poolManagementData + 1));
+    } while (iVar4 < (int)(uint)poolManagementData->numNodesInPool);
   }
   return pPVar5;
 }
@@ -70,10 +72,10 @@ PLANSRCH_FindNodeToExpand(PlanningNode *planningPool,PlanningNode *goalNode,int 
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLANSRCH_ExpandNode(struct PlanningNode *planningPool /*$a2*/, struct PlanningNode *nodeToExpand /*$a1*/)
- // line 109, offset 0x8009793c
+ // line 109, offset 0x8009964c
 	/* begin block 1 */
 		// Start line: 110
-		// Start offset: 0x8009793C
+		// Start offset: 0x8009964C
 		// Variables:
 	// 		int i; // $t0
 	// 		int nodeToExpandIndex; // $t2
@@ -81,14 +83,14 @@ PLANSRCH_FindNodeToExpand(PlanningNode *planningPool,PlanningNode *goalNode,int 
 
 		/* begin block 1.1 */
 			// Start line: 125
-			// Start offset: 0x800979D0
+			// Start offset: 0x800996E0
 			// Variables:
 		// 		long newCost; // $a0
 		/* end block 1.1 */
-		// End offset: 0x80097A48
+		// End offset: 0x80099758
 		// End Line: 140
 	/* end block 1 */
-	// End offset: 0x80097A64
+	// End offset: 0x80099774
 	// End Line: 144
 
 	/* begin block 2 */
@@ -96,28 +98,30 @@ PLANSRCH_FindNodeToExpand(PlanningNode *planningPool,PlanningNode *goalNode,int 
 	/* end block 2 */
 	// End Line: 252
 
+/* File: C:\kain2\game\PLAN\PLANSRCH.C */
+
 void PLANSRCH_ExpandNode(PlanningNode *planningPool,PlanningNode *nodeToExpand)
 
 {
   ushort uVar1;
   int iVar2;
-  int iVar3;
-  uint uVar4;
+  PoolManagementData *pPVar3;
+  int iVar4;
   uint uVar5;
+  uint uVar6;
   
-  iVar2 = poolManagementData;
-  iVar3 = 0;
+  pPVar3 = poolManagementData;
+  iVar4 = 0;
   nodeToExpand->flags = nodeToExpand->flags | 2;
-  uVar5 = (int)((int)nodeToExpand - (int)planningPool) * -0x49249249 >> 2;
-  uVar4 = 1 << (uVar5 & 0x1f);
-  if (*(char *)(iVar2 + 1) != '\0') {
+  uVar6 = (int)((int)nodeToExpand - (int)planningPool) * -0x49249249 >> 2;
+  uVar5 = 1 << (uVar6 & 0x1f);
+  if (pPVar3->numNodesInPool != '\0') {
     do {
-      if (((((planningPool->connectionStatus & uVar4) != 0) &&
-           ((planningPool->connections & uVar4) != 0)) && (planningPool != nodeToExpand)) &&
-         ((iVar2 = (uint)nodeToExpand->cost +
-                   (int)*(short *)(iVar3 * 2 + uVar5 * 0x40 + *(int *)(iVar2 + 0x10)),
-          (planningPool->flags & 1) == 0 || (iVar2 < (int)(uint)planningPool->cost)))) {
-        planningPool->parent = (ushort)uVar5;
+      if (((((planningPool->connectionStatus & uVar5) != 0) &&
+           ((planningPool->connections & uVar5) != 0)) && (planningPool != nodeToExpand)) &&
+         ((iVar2 = (uint)nodeToExpand->cost + (int)(&pPVar3->expansionNode2[uVar6 * 2].pos.x)[iVar4]
+          , (planningPool->flags & 1) == 0 || (iVar2 < (int)(uint)planningPool->cost)))) {
+        planningPool->parent = (ushort)uVar6;
         if (iVar2 < -0x7fff) {
           iVar2 = -0x7fff;
         }
@@ -128,10 +132,10 @@ void PLANSRCH_ExpandNode(PlanningNode *planningPool,PlanningNode *nodeToExpand)
         planningPool->cost = uVar1;
         planningPool->flags = planningPool->flags | 1;
       }
-      iVar3 = iVar3 + 1;
+      iVar4 = iVar4 + 1;
       planningPool = planningPool + 1;
-      iVar2 = poolManagementData;
-    } while (iVar3 < (int)(uint)*(byte *)(poolManagementData + 1));
+      pPVar3 = poolManagementData;
+    } while (iVar4 < (int)(uint)poolManagementData->numNodesInPool);
   }
   return;
 }
@@ -141,14 +145,14 @@ void PLANSRCH_ExpandNode(PlanningNode *planningPool,PlanningNode *nodeToExpand)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLANSRCH_InitNodesForSearch(struct PlanningNode *planningPool /*$a0*/)
- // line 148, offset 0x80097a6c
+ // line 148, offset 0x8009977c
 	/* begin block 1 */
 		// Start line: 150
-		// Start offset: 0x80097A6C
+		// Start offset: 0x8009977C
 		// Variables:
 	// 		int i; // $v1
 	/* end block 1 */
-	// End offset: 0x80097AB0
+	// End offset: 0x800997C0
 	// End Line: 158
 
 	/* begin block 2 */
@@ -166,22 +170,24 @@ void PLANSRCH_ExpandNode(PlanningNode *planningPool,PlanningNode *nodeToExpand)
 	/* end block 4 */
 	// End Line: 372
 
+/* File: C:\kain2\game\PLAN\PLANSRCH.C */
+
 void PLANSRCH_InitNodesForSearch(PlanningNode *planningPool)
 
 {
-  int iVar1;
+  PoolManagementData *pPVar1;
   int iVar2;
   
-  iVar1 = poolManagementData;
+  pPVar1 = poolManagementData;
   iVar2 = 0;
-  if (*(char *)(poolManagementData + 1) != '\0') {
+  if (poolManagementData->numNodesInPool != '\0') {
     do {
       iVar2 = iVar2 + 1;
       planningPool->cost = 0;
       planningPool->parent = 0;
       planningPool->flags = planningPool->flags & 0xfffc;
       planningPool = planningPool + 1;
-    } while (iVar2 < (int)(uint)*(byte *)(iVar1 + 1));
+    } while (iVar2 < (int)(uint)pPVar1->numNodesInPool);
   }
   return;
 }
@@ -191,20 +197,22 @@ void PLANSRCH_InitNodesForSearch(PlanningNode *planningPool)
 // decompiled code
 // original method signature: 
 // struct PlanningNode * /*$ra*/ PLANSRCH_FindPathInGraph(struct PlanningNode *planningPool /*$s2*/, struct PlanningNode *startNode /*$s0*/, struct PlanningNode *goalNode /*$s1*/, int validNodeTypes /*$s3*/)
- // line 169, offset 0x80097ab8
+ // line 169, offset 0x800997c8
 	/* begin block 1 */
 		// Start line: 170
-		// Start offset: 0x80097AB8
+		// Start offset: 0x800997C8
 		// Variables:
 	// 		struct PlanningNode *nodeToExpand; // $v0
 	/* end block 1 */
-	// End offset: 0x80097BD4
+	// End offset: 0x800998E4
 	// End Line: 203
 
 	/* begin block 2 */
 		// Start line: 415
 	/* end block 2 */
 	// End Line: 416
+
+/* File: C:\kain2\game\PLAN\PLANSRCH.C */
 
 PlanningNode *
 PLANSRCH_FindPathInGraph

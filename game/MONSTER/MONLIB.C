@@ -5,40 +5,42 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_TurnOffWeaponSpheres(struct _Instance *instance /*$s1*/)
- // line 147, offset 0x8007e848
+ // line 148, offset 0x8007f2dc
 	/* begin block 1 */
-		// Start line: 148
-		// Start offset: 0x8007E848
+		// Start line: 149
+		// Start offset: 0x8007F2DC
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s2
 
 		/* begin block 1.1 */
-			// Start line: 152
-			// Start offset: 0x8007E870
+			// Start line: 153
+			// Start offset: 0x8007F304
 			// Variables:
 		// 		struct _Instance *weapon; // $s0
 		/* end block 1.1 */
-		// End offset: 0x8007E890
-		// End Line: 156
+		// End offset: 0x8007F324
+		// End Line: 157
 
 		/* begin block 1.2 */
-			// Start line: 159
-			// Start offset: 0x8007E8A4
+			// Start line: 160
+			// Start offset: 0x8007F338
 			// Variables:
 		// 		int i; // $a1
 		// 		struct _HPrim *hprim; // $v1
 		// 		struct _HModel *hmodel; // $v1
 		/* end block 1.2 */
-		// End offset: 0x8007E928
-		// End Line: 167
+		// End offset: 0x8007F3BC
+		// End Line: 168
 	/* end block 1 */
-	// End offset: 0x8007E928
-	// End Line: 168
+	// End offset: 0x8007F3BC
+	// End Line: 169
 
 	/* begin block 2 */
-		// Start line: 294
+		// Start line: 296
 	/* end block 2 */
-	// End Line: 295
+	// End Line: 297
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_TurnOffWeaponSpheres(_Instance *instance)
 
@@ -79,36 +81,38 @@ void MON_TurnOffWeaponSpheres(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_TurnOnWeaponSpheres(struct _Instance *instance /*$a0*/)
- // line 173, offset 0x8007e940
+ // line 174, offset 0x8007f3d4
 	/* begin block 1 */
-		// Start line: 175
-		// Start offset: 0x8007E940
+		// Start line: 176
+		// Start offset: 0x8007F3D4
 		// Variables:
 	// 		struct _MonsterVars *mv; // $a2
 
 		/* begin block 1.1 */
-			// Start line: 178
-			// Start offset: 0x8007E96C
+			// Start line: 179
+			// Start offset: 0x8007F400
 			// Variables:
 		// 		int i; // $a1
 		// 		struct _HPrim *hprim; // $a0
 		// 		struct _HModel *hmodel; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8007E9F0
-		// End Line: 190
+		// End offset: 0x8007F484
+		// End Line: 191
 	/* end block 1 */
-	// End offset: 0x8007E9F0
-	// End Line: 191
+	// End offset: 0x8007F484
+	// End Line: 192
 
 	/* begin block 2 */
-		// Start line: 350
+		// Start line: 352
 	/* end block 2 */
-	// End Line: 351
+	// End Line: 353
 
 	/* begin block 3 */
-		// Start line: 351
+		// Start line: 353
 	/* end block 3 */
-	// End Line: 352
+	// End Line: 354
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_TurnOnWeaponSpheres(_Instance *instance)
 
@@ -146,40 +150,42 @@ void MON_TurnOnWeaponSpheres(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_TurnOnWeaponSphere(struct _Instance *instance /*$a0*/, int segment /*$a1*/)
- // line 197, offset 0x8007e9f8
+ // line 198, offset 0x8007f48c
 	/* begin block 1 */
-		// Start line: 198
-		// Start offset: 0x8007E9F8
+		// Start line: 199
+		// Start offset: 0x8007F48C
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 203
-			// Start offset: 0x8007EA14
+			// Start line: 204
+			// Start offset: 0x8007F4A8
 			// Variables:
 		// 		struct _Instance *weapon; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8007EA24
-		// End Line: 207
+		// End offset: 0x8007F4B8
+		// End Line: 208
 
 		/* begin block 1.2 */
-			// Start line: 213
-			// Start offset: 0x8007EA5C
+			// Start line: 214
+			// Start offset: 0x8007F4F0
 			// Variables:
 		// 		int i; // $a2
 		// 		struct _HPrim *hprim; // $a0
 		// 		struct _HModel *hmodel; // $v0
 		/* end block 1.2 */
-		// End offset: 0x8007EAF0
-		// End Line: 222
+		// End offset: 0x8007F584
+		// End Line: 223
 	/* end block 1 */
-	// End offset: 0x8007EAF0
-	// End Line: 223
+	// End offset: 0x8007F584
+	// End Line: 224
 
 	/* begin block 2 */
-		// Start line: 402
+		// Start line: 404
 	/* end block 2 */
-	// End Line: 403
+	// End Line: 405
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_TurnOnWeaponSphere(_Instance *instance,int segment)
 
@@ -231,36 +237,38 @@ void MON_TurnOnWeaponSphere(_Instance *instance,int segment)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_TurnOffBodySpheres(struct _Instance *instance /*$a0*/)
- // line 228, offset 0x8007eb00
+ // line 229, offset 0x8007f594
 	/* begin block 1 */
-		// Start line: 230
-		// Start offset: 0x8007EB00
+		// Start line: 231
+		// Start offset: 0x8007F594
 		// Variables:
 	// 		struct _MonsterVars *mv; // $a2
 
 		/* begin block 1.1 */
-			// Start line: 233
-			// Start offset: 0x8007EB1C
+			// Start line: 234
+			// Start offset: 0x8007F5B0
 			// Variables:
 		// 		int i; // $a1
 		// 		struct _HPrim *hprim; // $v1
 		// 		struct _HModel *hmodel; // $v1
 		/* end block 1.1 */
-		// End offset: 0x8007EBA0
-		// End Line: 241
+		// End offset: 0x8007F634
+		// End Line: 242
 	/* end block 1 */
-	// End offset: 0x8007EBA0
-	// End Line: 242
+	// End offset: 0x8007F634
+	// End Line: 243
 
 	/* begin block 2 */
-		// Start line: 468
+		// Start line: 470
 	/* end block 2 */
-	// End Line: 469
+	// End Line: 471
 
 	/* begin block 3 */
-		// Start line: 469
+		// Start line: 471
 	/* end block 3 */
-	// End Line: 470
+	// End Line: 472
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_TurnOffBodySpheres(_Instance *instance)
 
@@ -295,36 +303,38 @@ void MON_TurnOffBodySpheres(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_TurnOnBodySpheres(struct _Instance *instance /*$a0*/)
- // line 247, offset 0x8007eba8
+ // line 248, offset 0x8007f63c
 	/* begin block 1 */
-		// Start line: 249
-		// Start offset: 0x8007EBA8
+		// Start line: 250
+		// Start offset: 0x8007F63C
 		// Variables:
 	// 		struct _MonsterVars *mv; // $a2
 
 		/* begin block 1.1 */
-			// Start line: 252
-			// Start offset: 0x8007EBD4
+			// Start line: 253
+			// Start offset: 0x8007F668
 			// Variables:
 		// 		int i; // $a1
 		// 		struct _HPrim *hprim; // $a0
 		// 		struct _HModel *hmodel; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8007EC54
-		// End Line: 260
+		// End offset: 0x8007F6E8
+		// End Line: 261
 	/* end block 1 */
-	// End offset: 0x8007EC54
-	// End Line: 261
+	// End offset: 0x8007F6E8
+	// End Line: 262
 
 	/* begin block 2 */
-		// Start line: 508
+		// Start line: 510
 	/* end block 2 */
-	// End Line: 509
+	// End Line: 511
 
 	/* begin block 3 */
-		// Start line: 509
+		// Start line: 511
 	/* end block 3 */
-	// End Line: 510
+	// End Line: 512
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_TurnOnBodySpheres(_Instance *instance)
 
@@ -361,11 +371,13 @@ void MON_TurnOnBodySpheres(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_TurnOffAllSpheres(struct _Instance *instance /*$s0*/)
- // line 266, offset 0x8007ec5c
+ // line 267, offset 0x8007f6f0
 	/* begin block 1 */
-		// Start line: 548
+		// Start line: 550
 	/* end block 1 */
-	// End Line: 549
+	// End Line: 551
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_TurnOffAllSpheres(_Instance *instance)
 
@@ -380,11 +392,13 @@ void MON_TurnOffAllSpheres(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_TurnOnAllSpheres(struct _Instance *instance /*$s0*/)
- // line 275, offset 0x8007ec88
+ // line 276, offset 0x8007f71c
 	/* begin block 1 */
-		// Start line: 566
+		// Start line: 568
 	/* end block 1 */
-	// End Line: 567
+	// End Line: 569
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_TurnOnAllSpheres(_Instance *instance)
 
@@ -398,26 +412,28 @@ void MON_TurnOnAllSpheres(_Instance *instance)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ MON_SwitchState(struct _Instance *instance /*$s1*/, enum MonsterState state /*$s2*/)
- // line 317, offset 0x8007ecb4
+// void /*$ra*/ MON_SwitchState(struct _Instance *instance /*$s2*/, enum MonsterState state /*$s1*/)
+ // line 318, offset 0x8007f748
 	/* begin block 1 */
-		// Start line: 318
-		// Start offset: 0x8007ECB4
+		// Start line: 319
+		// Start offset: 0x8007F748
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	/* end block 1 */
-	// End offset: 0x8007ED60
-	// End Line: 344
+	// End offset: 0x8007F82C
+	// End Line: 357
 
 	/* begin block 2 */
-		// Start line: 628
+		// Start line: 630
 	/* end block 2 */
-	// End Line: 629
+	// End Line: 631
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_SwitchState(_Instance *instance,MonsterState state)
 
 {
-  long in_a1;
+  int in_a1;
   uint *puVar1;
   
   puVar1 = (uint *)instance->extraData;
@@ -426,6 +442,9 @@ void MON_SwitchState(_Instance *instance,MonsterState state)
   }
   if ((*puVar1 & 1) == 0) {
     *(undefined *)((int)puVar1 + 0x155) = *(undefined *)&instance->currentMainState;
+  }
+  if ((((in_a1 == 0x10) || (in_a1 == 0x17)) || (in_a1 == 7)) || ((in_a1 == 10 || (in_a1 == 3)))) {
+    PurgeMessageQueue((__MessageQueue *)(puVar1 + 2));
   }
   instance->currentMainState = in_a1;
   *puVar1 = *puVar1 & 0xbbfdefff | 1;
@@ -441,20 +460,22 @@ void MON_SwitchState(_Instance *instance,MonsterState state)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_SwitchStateDoEntry(struct _Instance *instance /*$s1*/, enum MonsterState state /*$a1*/)
- // line 347, offset 0x8007ed78
+ // line 360, offset 0x8007f844
 	/* begin block 1 */
-		// Start line: 348
-		// Start offset: 0x8007ED78
+		// Start line: 361
+		// Start offset: 0x8007F844
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	/* end block 1 */
-	// End offset: 0x8007EDCC
-	// End Line: 363
+	// End offset: 0x8007F898
+	// End Line: 376
 
 	/* begin block 2 */
-		// Start line: 681
+		// Start line: 707
 	/* end block 2 */
-	// End Line: 682
+	// End Line: 708
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_SwitchStateDoEntry(_Instance *instance,MonsterState state)
 
@@ -479,11 +500,13 @@ void MON_SwitchStateDoEntry(_Instance *instance,MonsterState state)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MON_TransNodeAnimation(struct _Instance *instance /*$a0*/)
- // line 375, offset 0x8007ede0
+ // line 388, offset 0x8007f8ac
 	/* begin block 1 */
-		// Start line: 737
+		// Start line: 763
 	/* end block 1 */
-	// End Line: 738
+	// End Line: 764
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_TransNodeAnimation(_Instance *instance)
 
@@ -499,31 +522,33 @@ int MON_TransNodeAnimation(_Instance *instance)
 // decompiled code
 // original method signature: 
 // struct _MonsterAnim * /*$ra*/ MON_GetAnim(struct _Instance *instance /*$a0*/, char *animList /*$a1*/, int index /*$a2*/)
- // line 384, offset 0x8007ee08
+ // line 397, offset 0x8007f8d4
 	/* begin block 1 */
-		// Start line: 386
-		// Start offset: 0x8007EE08
+		// Start line: 399
+		// Start offset: 0x8007F8D4
 		// Variables:
 	// 		int whichAnim; // $a1
 	/* end block 1 */
-	// End offset: 0x8007EE34
-	// End Line: 391
+	// End offset: 0x8007F900
+	// End Line: 404
 
 	/* begin block 2 */
-		// Start line: 756
+		// Start line: 782
 	/* end block 2 */
-	// End Line: 757
+	// End Line: 783
 
 	/* begin block 3 */
-		// Start line: 757
+		// Start line: 783
 	/* end block 3 */
-	// End Line: 758
+	// End Line: 784
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 _MonsterAnim * MON_GetAnim(_Instance *instance,char *animList,int index)
 
 {
   if ((int)animList[index] != -1) {
-    return (_MonsterAnim *)(*(int *)((int)instance->data + 0x44) + (int)animList[index] * 0x10);
+    return (_MonsterAnim *)(*(int *)((int)instance->data + 0x40) + (int)animList[index] * 0x10);
   }
   return (_MonsterAnim *)0x0;
 }
@@ -532,36 +557,30 @@ _MonsterAnim * MON_GetAnim(_Instance *instance,char *animList,int index)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ MON_PlayAnimID(struct _Instance *instance /*$s3*/, int index /*$a1*/, int mode /*$s5*/)
- // line 396, offset 0x8007ee3c
+// void /*$ra*/ MON_PlayAnimID(struct _Instance *instance /*$s3*/, int index /*$a1*/, int mode /*$fp*/)
+ // line 409, offset 0x8007f908
 	/* begin block 1 */
-		// Start line: 397
-		// Start offset: 0x8007EE3C
+		// Start line: 410
+		// Start offset: 0x8007F908
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s2
 	// 		struct _MonsterAnim *manim; // $s1
 	// 		struct _MonsterAttributes *ma; // $v0
 	// 		int anim; // $a2
-	// 		int anim0; // $s4
+	// 		int anim0; // $s6
 	// 		int i; // $s0
-
-		/* begin block 1.1 */
-			// Start line: 432
-			// Start offset: 0x8007EED0
-			// Variables:
-		// 		int interpFrames; // $v0
-		// 		int alphaTable; // $v1
-		/* end block 1.1 */
-		// End offset: 0x8007EF1C
-		// End Line: 447
+	// 		int interpFrames; // $s5
+	// 		int alphaTable; // $s4
 	/* end block 1 */
-	// End offset: 0x8007EF64
-	// End Line: 452
+	// End offset: 0x8007FA3C
+	// End Line: 466
 
 	/* begin block 2 */
-		// Start line: 782
+		// Start line: 808
 	/* end block 2 */
-	// End Line: 783
+	// End Line: 809
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_PlayAnimID(_Instance *instance,int index,int mode)
 
@@ -575,13 +594,21 @@ void MON_PlayAnimID(_Instance *instance,int index,int mode)
   uint *puVar5;
   int iVar6;
   
-  uVar4 = *(int *)((int)instance->data + 0x44) + index * 0x10;
+  uVar4 = *(int *)((int)instance->data + 0x40) + index * 0x10;
   iVar6 = (int)*(char *)(uVar4 + 0xc);
   puVar5 = (uint *)instance->extraData;
   if ((iVar6 < 0) || (instance->object->numAnims <= iVar6)) {
     iVar6 = 0;
   }
   G2Anim_SetCallback(&instance->anim,INSTANCE_DefaultAnimCallback,instance);
+  uVar3 = puVar5[0x2f];
+  if ((uVar3 == 0) || (bVar1 = *(byte *)(uVar3 + 8), bVar1 == 0)) {
+    bVar1 = *(byte *)(uVar4 + 6);
+    bVar2 = *(byte *)(uVar4 + 9);
+  }
+  else {
+    bVar2 = *(byte *)(uVar3 + 10);
+  }
   CurrentSection = 0;
   uVar3 = uVar4;
   if (*(char *)(puVar5[0x59] + 0x2a) != '\0') {
@@ -589,14 +616,6 @@ void MON_PlayAnimID(_Instance *instance,int index,int mode)
       NewAnim = (int)*(char *)(uVar3 + 0xc);
       if ((int)*(char *)(uVar3 + 0xc) == -1) {
         NewAnim = iVar6;
-      }
-      uVar3 = puVar5[0x2f];
-      if ((uVar3 == 0) || (bVar1 = *(byte *)(uVar3 + 8), bVar1 == 0)) {
-        bVar1 = *(byte *)(uVar4 + 6);
-        bVar2 = *(byte *)(uVar4 + 9);
-      }
-      else {
-        bVar2 = *(byte *)(uVar3 + 10);
       }
       G2EmulationInstanceSwitchAnimationAlpha
                 (instance,CurrentSection,NewAnim,(uint)*(byte *)(uVar4 + 7),(uint)bVar1,mode,
@@ -618,11 +637,13 @@ void MON_PlayAnimID(_Instance *instance,int index,int mode)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_PlayAnimFromList(struct _Instance *instance /*$a0*/, char *animList /*$a1*/, int animtype /*$a2*/, int mode /*$a3*/)
- // line 456, offset 0x8007efdc
+ // line 470, offset 0x8007fac0
 	/* begin block 1 */
-		// Start line: 958
+		// Start line: 977
 	/* end block 1 */
-	// End Line: 959
+	// End Line: 978
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_PlayAnimFromList(_Instance *instance,char *animList,int animtype,int mode)
 
@@ -636,36 +657,38 @@ void MON_PlayAnimFromList(_Instance *instance,char *animList,int animtype,int mo
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MON_AnimIDPlaying(struct _Instance *instance /*$a0*/, int index /*$a1*/)
- // line 461, offset 0x8007f004
+ // line 475, offset 0x8007fae8
 	/* begin block 1 */
-		// Start line: 463
-		// Start offset: 0x8007F004
+		// Start line: 477
+		// Start offset: 0x8007FAE8
 		// Variables:
 	// 		struct _MonsterAttributes *ma; // $v0
 	/* end block 1 */
-	// End offset: 0x8007F004
-	// End Line: 465
+	// End offset: 0x8007FAE8
+	// End Line: 479
 
 	/* begin block 2 */
-		// Start line: 969
+		// Start line: 988
 	/* end block 2 */
-	// End Line: 970
+	// End Line: 989
 
 	/* begin block 3 */
-		// Start line: 970
+		// Start line: 989
 	/* end block 3 */
-	// End Line: 971
+	// End Line: 990
 
 	/* begin block 4 */
-		// Start line: 972
+		// Start line: 991
 	/* end block 4 */
-	// End Line: 973
+	// End Line: 992
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_AnimIDPlaying(_Instance *instance,int index)
 
 {
   return (uint)(*(int *)((int)instance->extraData + 0xbc) ==
-               *(int *)((int)instance->data + 0x44) + index * 0x10);
+               *(int *)((int)instance->data + 0x40) + index * 0x10);
 }
 
 
@@ -673,11 +696,13 @@ int MON_AnimIDPlaying(_Instance *instance,int index)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_PlayAnimIDIfNotPlaying(struct _Instance *instance /*$s0*/, int index /*$s1*/, int mode /*$s2*/)
- // line 468, offset 0x8007f028
+ // line 482, offset 0x8007fb0c
 	/* begin block 1 */
-		// Start line: 985
+		// Start line: 1004
 	/* end block 1 */
-	// End Line: 986
+	// End Line: 1005
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_PlayAnimIDIfNotPlaying(_Instance *instance,int index,int mode)
 
@@ -696,11 +721,13 @@ void MON_PlayAnimIDIfNotPlaying(_Instance *instance,int index,int mode)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MON_AnimPlayingFromList(struct _Instance *instance /*$a0*/, char *animList /*$a1*/, int animtype /*$a2*/)
- // line 477, offset 0x8007f078
+ // line 491, offset 0x8007fb5c
 	/* begin block 1 */
-		// Start line: 1003
+		// Start line: 1022
 	/* end block 1 */
-	// End Line: 1004
+	// End Line: 1023
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_AnimPlayingFromList(_Instance *instance,char *animList,int animtype)
 
@@ -716,20 +743,22 @@ int MON_AnimPlayingFromList(_Instance *instance,char *animList,int animtype)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_PlayAnimFromListIfNotPlaying(struct _Instance *instance /*$s1*/, char *animList /*$a1*/, int animtype /*$a2*/, int mode /*$s2*/)
- // line 482, offset 0x8007f0a0
+ // line 496, offset 0x8007fb84
 	/* begin block 1 */
-		// Start line: 483
-		// Start offset: 0x8007F0A0
+		// Start line: 497
+		// Start offset: 0x8007FB84
 		// Variables:
 	// 		int index; // $s0
 	/* end block 1 */
-	// End offset: 0x8007F0E0
-	// End Line: 488
+	// End offset: 0x8007FBC4
+	// End Line: 502
 
 	/* begin block 2 */
-		// Start line: 1014
+		// Start line: 1033
 	/* end block 2 */
-	// End Line: 1015
+	// End Line: 1034
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_PlayAnimFromListIfNotPlaying(_Instance *instance,char *animList,int animtype,int mode)
 
@@ -750,11 +779,13 @@ void MON_PlayAnimFromListIfNotPlaying(_Instance *instance,char *animList,int ani
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_PlayAnim(struct _Instance *instance /*$a0*/, enum MonsterAnim animtype /*$a1*/, int mode /*$a3*/)
- // line 494, offset 0x8007f0f8
+ // line 508, offset 0x8007fbdc
 	/* begin block 1 */
-		// Start line: 1040
+		// Start line: 1059
 	/* end block 1 */
-	// End Line: 1041
+	// End Line: 1060
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_PlayAnim(_Instance *instance,MonsterAnim animtype,int mode)
 
@@ -770,11 +801,13 @@ void MON_PlayAnim(_Instance *instance,MonsterAnim animtype,int mode)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MON_AnimPlaying(struct _Instance *instance /*$a0*/, enum MonsterAnim animtype /*$a2*/)
- // line 502, offset 0x8007f12c
+ // line 516, offset 0x8007fc10
 	/* begin block 1 */
-		// Start line: 1057
+		// Start line: 1076
 	/* end block 1 */
-	// End Line: 1058
+	// End Line: 1077
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_AnimPlaying(_Instance *instance,MonsterAnim animtype)
 
@@ -791,11 +824,13 @@ int MON_AnimPlaying(_Instance *instance,MonsterAnim animtype)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_PlayAnimIfNotPlaying(struct _Instance *instance /*$a0*/, enum MonsterAnim animtype /*$a1*/, int mode /*$a3*/)
- // line 510, offset 0x8007f160
+ // line 524, offset 0x8007fc44
 	/* begin block 1 */
-		// Start line: 1074
+		// Start line: 1093
 	/* end block 1 */
-	// End Line: 1075
+	// End Line: 1094
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_PlayAnimIfNotPlaying(_Instance *instance,MonsterAnim animtype,int mode)
 
@@ -812,21 +847,23 @@ void MON_PlayAnimIfNotPlaying(_Instance *instance,MonsterAnim animtype,int mode)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ MON_AnimCallback(struct _G2Anim_Type *anim /*$a0*/, int sectionID /*$a1*/, enum _G2AnimCallbackMsg_Enum message /*$a2*/, long messageDataA /*$s0*/, long messageDataB /*stack 16*/, void *data /*stack 20*/)
- // line 552, offset 0x8007f194
+ // line 566, offset 0x8007fc78
 	/* begin block 1 */
-		// Start line: 553
-		// Start offset: 0x8007F194
+		// Start line: 567
+		// Start offset: 0x8007FC78
 		// Variables:
 	// 		struct _Instance *instance; // $a3
 	// 		struct _MonsterVars *mv; // $t0
 	/* end block 1 */
-	// End offset: 0x8007F230
-	// End Line: 577
+	// End offset: 0x8007FD14
+	// End Line: 591
 
 	/* begin block 2 */
-		// Start line: 1084
+		// Start line: 1112
 	/* end block 2 */
-	// End Line: 1085
+	// End Line: 1113
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 long MON_AnimCallback(_G2Anim_Type *anim,int sectionID,_G2AnimCallbackMsg_Enum message,
                      long messageDataA,long messageDataB,void *data)
@@ -859,10 +896,10 @@ long MON_AnimCallback(_G2Anim_Type *anim,int sectionID,_G2AnimCallbackMsg_Enum m
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_AnimInit(struct _Instance *instance /*$s1*/)
- // line 583, offset 0x8007f244
+ // line 597, offset 0x8007fd28
 	/* begin block 1 */
-		// Start line: 584
-		// Start offset: 0x8007F244
+		// Start line: 598
+		// Start offset: 0x8007FD28
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s2
 	// 		struct _G2AnimSection_Type *animSection; // $s3
@@ -871,21 +908,23 @@ long MON_AnimCallback(_G2Anim_Type *anim,int sectionID,_G2AnimCallbackMsg_Enum m
 	// 		int numSections; // $s7
 
 		/* begin block 1.1 */
-			// Start line: 597
-			// Start offset: 0x8007F2A0
+			// Start line: 611
+			// Start offset: 0x8007FD84
 			// Variables:
 		// 		int sectionEnd; // $a3
 		/* end block 1.1 */
-		// End offset: 0x8007F324
-		// End Line: 607
+		// End offset: 0x8007FE08
+		// End Line: 621
 	/* end block 1 */
-	// End offset: 0x8007F36C
-	// End Line: 612
+	// End offset: 0x8007FE50
+	// End Line: 626
 
 	/* begin block 2 */
-		// Start line: 1184
+		// Start line: 1203
 	/* end block 2 */
-	// End Line: 1185
+	// End Line: 1204
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_AnimInit(_Instance *instance)
 
@@ -932,6 +971,7 @@ void MON_AnimInit(_Instance *instance)
     } while (CurrentSection < (int)(uint)bVar1);
   }
   G2EmulationInstanceInitSection(instance,0,MON_AnimCallback,instance);
+  MON_PlayRandomIdle(instance,2);
   return;
 }
 
@@ -940,18 +980,20 @@ void MON_AnimInit(_Instance *instance)
 // decompiled code
 // original method signature: 
 // short /*$ra*/ MON_FacingOffset(struct _Instance *instance /*$a0*/, struct _Instance *target /*$s0*/)
- // line 622, offset 0x8007f3b0
+ // line 638, offset 0x8007fea0
 	/* begin block 1 */
-		// Start line: 623
-		// Start offset: 0x8007F3B0
+		// Start line: 639
+		// Start offset: 0x8007FEA0
 	/* end block 1 */
-	// End offset: 0x8007F3B0
-	// End Line: 623
+	// End offset: 0x8007FEA0
+	// End Line: 639
 
 	/* begin block 2 */
-		// Start line: 1286
+		// Start line: 1309
 	/* end block 2 */
-	// End Line: 1287
+	// End Line: 1310
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 short MON_FacingOffset(_Instance *instance,_Instance *target)
 
@@ -967,10 +1009,10 @@ short MON_FacingOffset(_Instance *instance,_Instance *target)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MON_CheckConditions(struct _Instance *instance /*$a0*/, struct _MonsterIR *mir /*$a1*/, char *probArray /*$a2*/)
- // line 635, offset 0x8007f3ec
+ // line 651, offset 0x8007fedc
 	/* begin block 1 */
-		// Start line: 637
-		// Start offset: 0x8007F3EC
+		// Start line: 653
+		// Start offset: 0x8007FEDC
 		// Variables:
 	// 		struct _MonsterVars *mv; // $v0
 	// 		char *probability; // $a2
@@ -980,31 +1022,33 @@ short MON_FacingOffset(_Instance *instance,_Instance *target)
 	// 		int nprob; // $t0
 
 		/* begin block 1.1 */
-			// Start line: 647
-			// Start offset: 0x8007F41C
+			// Start line: 663
+			// Start offset: 0x8007FF0C
 			// Variables:
 		// 		int conditionProb; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8007F480
-		// End Line: 658
+		// End offset: 0x8007FF70
+		// End Line: 674
 	/* end block 1 */
-	// End offset: 0x8007F490
-	// End Line: 661
+	// End offset: 0x8007FF80
+	// End Line: 677
 
 	/* begin block 2 */
-		// Start line: 1318
+		// Start line: 1341
 	/* end block 2 */
-	// End Line: 1319
+	// End Line: 1342
 
 	/* begin block 3 */
-		// Start line: 1319
+		// Start line: 1342
 	/* end block 3 */
-	// End Line: 1320
+	// End Line: 1343
 
 	/* begin block 4 */
-		// Start line: 1323
+		// Start line: 1346
 	/* end block 4 */
-	// End Line: 1324
+	// End Line: 1347
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_CheckConditions(_Instance *instance,_MonsterIR *mir,char *probArray)
 
@@ -1037,102 +1081,125 @@ int MON_CheckConditions(_Instance *instance,_MonsterIR *mir,char *probArray)
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ MON_ShouldIAttack(struct _Instance *instance /*$s2*/, struct _MonsterIR *enemy /*$s1*/, struct _MonsterAttackAttributes *attack /*$s3*/)
- // line 682, offset 0x8007f4c4
+// int /*$ra*/ MON_ShouldIAttack(struct _Instance *instance /*$s4*/, struct _MonsterIR *enemy /*$s2*/, struct _MonsterAttackAttributes *attack /*$s3*/)
+ // line 698, offset 0x8007ffb4
 	/* begin block 1 */
-		// Start line: 683
-		// Start offset: 0x8007F4C4
+		// Start line: 699
+		// Start offset: 0x8007FFB4
 		// Variables:
-	// 		struct _MonsterVars *mv; // $s4
+	// 		struct _MonsterVars *mv; // $s5
 	// 		int rv; // $a0
+	// 		struct _Instance *ei; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 683
-			// Start offset: 0x8007F4C4
+			// Start line: 709
+			// Start offset: 0x8007FFF0
 			// Variables:
 		// 		struct _Instance *enemyAttackee; // $s0
 		// 		long mode; // $v1
 		/* end block 1.1 */
-		// End offset: 0x8007F528
-		// End Line: 701
+		// End offset: 0x80080058
+		// End Line: 719
 
 		/* begin block 1.2 */
-			// Start line: 711
-			// Start offset: 0x8007F55C
+			// Start line: 729
+			// Start offset: 0x80080084
 			// Variables:
 		// 		long distance; // $v1
 		/* end block 1.2 */
-		// End offset: 0x8007F62C
-		// End Line: 757
+		// End offset: 0x80080188
+		// End Line: 780
 	/* end block 1 */
-	// End offset: 0x8007F630
-	// End Line: 763
+	// End offset: 0x8008018C
+	// End Line: 786
 
 	/* begin block 2 */
-		// Start line: 1437
+		// Start line: 1460
 	/* end block 2 */
-	// End Line: 1438
+	// End Line: 1461
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_ShouldIAttack(_Instance *instance,_MonsterIR *enemy,_MonsterAttackAttributes *attack)
 
 {
+  short angle;
   _Instance *p_Var1;
   ulong uVar2;
   int iVar3;
   int iVar4;
+  _Instance *Inst;
   void *pvVar5;
   
+  Inst = enemy->instance;
   pvVar5 = instance->extraData;
-  p_Var1 = (_Instance *)INSTANCE_Query(enemy->instance,0x22);
-  uVar2 = INSTANCE_Query(enemy->instance,10);
-  if ((((p_Var1 == (_Instance *)0x0) || (p_Var1 == instance)) ||
-      (iVar3 = 0, (uVar2 & 0x2000000) == 0)) &&
-     (iVar3 = 0, attack != (_MonsterAttackAttributes *)0x0)) {
-    uVar2 = INSTANCE_Query(enemy->instance,1);
-    if (((uVar2 & 1) != 0) &&
-       (iVar3 = MON_CheckConditions(instance,enemy,attack->attackProbability), iVar3 == 0)) {
-      return 0;
-    }
-    iVar4 = (int)attack->attackRange - (int)enemy->distance;
-    if ((enemy->mirFlags & 8) == 0) {
-      if (iVar4 < -0x96) {
-        iVar3 = 5;
+  if (Inst == DAT_800d20f8) {
+    p_Var1 = (_Instance *)INSTANCE_Query(Inst,0x22);
+    uVar2 = INSTANCE_Query(Inst,10);
+    if ((uVar2 & 0x20010000) == 0) {
+      if (((p_Var1 != (_Instance *)0x0) && (p_Var1 != instance)) && ((uVar2 & 0x2000000) != 0)) {
+        return 0;
       }
-      else {
-        if (iVar4 < 0x97) {
-          iVar3 = (int)(enemy->relativePosition).y;
-          if (iVar3 < 1) {
-            iVar4 = (int)(enemy->relativePosition).x;
-            if (iVar4 < 0) {
-              iVar4 = -iVar4;
-            }
-            if (iVar4 <= -iVar3) {
-              if ((enemy->mirFlags & 0x20) == 0) {
-                return 3;
-              }
-              iVar3 = *(int *)((int)pvVar5 + 0xcc);
-              if ((iVar3 != 0) &&
-                 (uVar2 = INSTANCE_Query(*(_Instance **)(iVar3 + 4),10), (uVar2 & 0x200000) != 0)) {
-                return 7;
-              }
-              enemy->mirConditions = 0;
-              return 1;
-            }
-          }
-          iVar3 = 6;
+      uVar2 = INSTANCE_Query(Inst,0x2e);
+      if (uVar2 == 0) goto LAB_80080058;
+    }
+    iVar3 = 0;
+  }
+  else {
+LAB_80080058:
+    iVar3 = 0;
+    if (attack != (_MonsterAttackAttributes *)0x0) {
+      if ((Inst == DAT_800d20f8) &&
+         (iVar3 = MON_CheckConditions(instance,enemy,attack->attackProbability), iVar3 == 0)) {
+        return 0;
+      }
+      iVar4 = (int)attack->attackRange - (int)enemy->distance;
+      if ((enemy->mirFlags & 8) == 0) {
+        if (iVar4 < -0x96) {
+          iVar3 = 5;
         }
         else {
-          iVar3 = 4;
+          if (iVar4 < 0x97) {
+            iVar3 = (int)(enemy->relativePosition).y;
+            if (iVar3 < 1) {
+              iVar4 = (int)(enemy->relativePosition).x;
+              if (iVar4 < 0) {
+                iVar4 = -iVar4;
+              }
+              if (iVar4 <= -iVar3) {
+                if ((enemy->mirFlags & 0x20) == 0) {
+                  return 3;
+                }
+                iVar3 = *(int *)((int)pvVar5 + 0xcc);
+                if ((iVar3 != 0) &&
+                   (uVar2 = INSTANCE_Query(*(_Instance **)(iVar3 + 4),10), (uVar2 & 0x200000) != 0))
+                {
+                  return 7;
+                }
+                angle = MATH3D_AngleFromPosToPos(&instance->position,&Inst->position);
+                iVar3 = MONSENSE_GetDistanceInDirection(instance,angle);
+                if (enemy->distance < iVar3) {
+                  enemy->mirConditions = 0;
+                  return 1;
+                }
+                return 0;
+              }
+            }
+            iVar3 = 6;
+          }
+          else {
+            iVar3 = 4;
+          }
         }
       }
-    }
-    else {
-      if (iVar4 < 0) {
-        iVar4 = -iVar4;
-      }
-      iVar3 = 5;
-      if (iVar4 < 1000) {
-        iVar3 = 1;
+      else {
+        if (iVar4 < 0) {
+          iVar4 = -iVar4;
+        }
+        iVar3 = 5;
+        if (iVar4 < 1000) {
+          iVar3 = 1;
+        }
       }
     }
   }
@@ -1144,10 +1211,10 @@ int MON_ShouldIAttack(_Instance *instance,_MonsterIR *enemy,_MonsterAttackAttrib
 // decompiled code
 // original method signature: 
 // struct _MonsterAttackAttributes * /*$ra*/ MON_ChooseAttack(struct _Instance *instance /*$a0*/, struct _MonsterIR *enemy /*$a1*/)
- // line 772, offset 0x8007f650
+ // line 795, offset 0x800801b0
 	/* begin block 1 */
-		// Start line: 774
-		// Start offset: 0x8007F650
+		// Start line: 797
+		// Start offset: 0x800801B0
 		// Variables:
 	// 		struct _MonsterVars *mv; // $t1
 	// 		struct _MonsterAttackAttributes *bestAttack; // $t5
@@ -1160,32 +1227,34 @@ int MON_ShouldIAttack(_Instance *instance,_MonsterIR *enemy,_MonsterAttackAttrib
 	// 		char *attackIndex; // $t0
 
 		/* begin block 1.1 */
-			// Start line: 804
-			// Start offset: 0x8007F6F4
+			// Start line: 827
+			// Start offset: 0x80080254
 			// Variables:
 		// 		struct _MonsterAttackAttributes *attack; // $a2
 		// 		long delta; // $a0
 		/* end block 1.1 */
-		// End offset: 0x8007F794
-		// End Line: 818
+		// End offset: 0x800802F4
+		// End Line: 841
 	/* end block 1 */
-	// End offset: 0x8007F7A0
-	// End Line: 823
+	// End offset: 0x80080300
+	// End Line: 846
 
 	/* begin block 2 */
-		// Start line: 1628
+		// Start line: 1663
 	/* end block 2 */
-	// End Line: 1629
+	// End Line: 1664
 
 	/* begin block 3 */
-		// Start line: 1629
+		// Start line: 1664
 	/* end block 3 */
-	// End Line: 1630
+	// End Line: 1665
 
 	/* begin block 4 */
-		// Start line: 1630
+		// Start line: 1665
 	/* end block 4 */
-	// End Line: 1631
+	// End Line: 1666
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 _MonsterAttackAttributes * MON_ChooseAttack(_Instance *instance,_MonsterIR *enemy)
 
@@ -1211,7 +1280,7 @@ _MonsterAttackAttributes * MON_ChooseAttack(_Instance *instance,_MonsterIR *enem
     pMVar4 = enemy->instance->matrix;
     iVar10 = (int)enemy->distance;
     if (pMVar4 != (MATRIX *)0x0) {
-      if (enemy->instance == gameTrackerX.playerInstance) {
+      if (enemy->instance == DAT_800d20f8) {
         iVar9 = pMVar4[0xe].t[2] - (int)(instance->position).z;
       }
       else {
@@ -1222,12 +1291,12 @@ _MonsterAttackAttributes * MON_ChooseAttack(_Instance *instance,_MonsterIR *enem
   else {
     iVar10 = 0;
   }
-  iVar6 = (int)*(char *)(*(int *)(puVar8[0x59] + 8) + 0x17);
-  pcVar7 = (char *)(*(int *)(puVar8[0x59] + 8) + 0x26);
+  iVar6 = (int)*(char *)(*(int *)(puVar8[0x59] + 8) + 0x19);
+  pcVar7 = (char *)(*(int *)(puVar8[0x59] + 8) + 0x28);
   if (iVar6 != 0) {
     do {
       p_Var5 = (_MonsterAttackAttributes *)
-               (*(int *)((int)instance->data + 0x3c) + (int)*pcVar7 * 0x20);
+               (*(int *)((int)instance->data + 0x38) + (int)*pcVar7 * 0x20);
       iVar2 = iVar9 - p_Var5->attackHeight;
       if (iVar2 < 0) {
         iVar2 = -iVar2;
@@ -1265,30 +1334,32 @@ _MonsterAttackAttributes * MON_ChooseAttack(_Instance *instance,_MonsterIR *enem
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MON_ShouldIEvade(struct _Instance *instance /*$s1*/)
- // line 832, offset 0x8007f7b0
+ // line 855, offset 0x80080310
 	/* begin block 1 */
-		// Start line: 833
-		// Start offset: 0x8007F7B0
+		// Start line: 856
+		// Start offset: 0x80080310
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	// 		int rv; // $s3
 
 		/* begin block 1.1 */
-			// Start line: 840
-			// Start offset: 0x8007F7E8
+			// Start line: 863
+			// Start offset: 0x80080348
 			// Variables:
 		// 		struct _MonsterIR *enemy; // $s2
 		/* end block 1.1 */
-		// End offset: 0x8007F83C
-		// End Line: 853
+		// End offset: 0x8008039C
+		// End Line: 876
 	/* end block 1 */
-	// End offset: 0x8007F83C
-	// End Line: 857
+	// End offset: 0x8008039C
+	// End Line: 880
 
 	/* begin block 2 */
-		// Start line: 1792
+		// Start line: 1827
 	/* end block 2 */
-	// End Line: 1793
+	// End Line: 1828
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_ShouldIEvade(_Instance *instance)
 
@@ -1305,7 +1376,7 @@ int MON_ShouldIEvade(_Instance *instance)
     mir = (_MonsterIR *)puVar3[0x31];
     sVar1 = MON_FacingOffset(instance,mir->instance);
     if ((ushort)(sVar1 + 0x2a9U) < 0x553) {
-      iVar2 = MON_CheckConditions(instance,mir,(char *)(*(int *)(puVar3[0x59] + 8) + 0x1a));
+      iVar2 = MON_CheckConditions(instance,mir,(char *)(*(int *)(puVar3[0x59] + 8) + 0x1c));
       iVar4 = 0;
       if (iVar2 != 0) {
         iVar4 = 1;
@@ -1321,28 +1392,30 @@ int MON_ShouldIEvade(_Instance *instance)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MON_ChooseLeftOrRight(struct _Instance *instance /*$s0*/, struct _MonsterIR *enemy /*$a1*/)
- // line 867, offset 0x8007f85c
+ // line 890, offset 0x800803bc
 	/* begin block 1 */
-		// Start line: 868
-		// Start offset: 0x8007F85C
+		// Start line: 891
+		// Start offset: 0x800803BC
 
 		/* begin block 1.1 */
-			// Start line: 877
-			// Start offset: 0x8007F89C
+			// Start line: 900
+			// Start offset: 0x800803FC
 			// Variables:
 		// 		int leftDist; // $s0
 		// 		int rightDist; // $v1
 		/* end block 1.1 */
-		// End offset: 0x8007F8F0
-		// End Line: 886
+		// End offset: 0x80080450
+		// End Line: 909
 	/* end block 1 */
-	// End offset: 0x8007F8F0
-	// End Line: 887
+	// End offset: 0x80080450
+	// End Line: 910
 
 	/* begin block 2 */
-		// Start line: 1863
+		// Start line: 1898
 	/* end block 2 */
-	// End Line: 1864
+	// End Line: 1899
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_ChooseLeftOrRight(_Instance *instance,_MonsterIR *enemy)
 
@@ -1383,136 +1456,100 @@ int MON_ChooseLeftOrRight(_Instance *instance,_MonsterIR *enemy)
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ MON_ChooseEvadeMove(struct _Instance *instance /*$s1*/)
- // line 889, offset 0x8007f900
+// int /*$ra*/ MON_ChooseEvadeMove(struct _Instance *instance /*$a0*/)
+ // line 912, offset 0x80080460
 	/* begin block 1 */
-		// Start line: 890
-		// Start offset: 0x8007F900
+		// Start line: 913
+		// Start offset: 0x80080460
 		// Variables:
-	// 		int anim; // $s2
-	// 		struct _MonsterVars *mv; // $s0
+	// 		int anim; // $v0
+	// 		struct _MonsterVars *mv; // $v0
 	// 		int leftOrRight; // $v1
 	/* end block 1 */
-	// End offset: 0x8007FA74
-	// End Line: 929
+	// End offset: 0x800804AC
+	// End Line: 941
 
 	/* begin block 2 */
-		// Start line: 1912
+		// Start line: 1947
 	/* end block 2 */
-	// End Line: 1913
+	// End Line: 1948
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_ChooseEvadeMove(_Instance *instance)
 
 {
-  short sVar1;
-  int iVar2;
-  uint uVar3;
-  void *pvVar4;
-  int iVar5;
+  int iVar1;
+  uint uVar2;
+  int iVar3;
   
-  pvVar4 = instance->extraData;
-  iVar5 = 0;
-  iVar2 = MON_ChooseLeftOrRight(instance,*(_MonsterIR **)((int)pvVar4 + 0xc4));
-  if (iVar2 == 0) {
-    uVar3 = rand();
-    iVar2 = -1;
-    if ((uVar3 & 1) != 0) {
-      iVar2 = 1;
+  iVar1 = MON_ChooseLeftOrRight(instance,*(_MonsterIR **)((int)instance->extraData + 0xc4));
+  if (iVar1 == 0) {
+    uVar2 = rand();
+    iVar1 = -1;
+    if ((uVar2 & 1) != 0) {
+      iVar1 = 1;
     }
   }
-  if (iVar2 < 0) {
-    if (*(char *)(**(int **)((int)pvVar4 + 0x164) + 0x28) == -1) {
-      iVar2 = rcos((int)(instance->rotation).z);
-      iVar2 = iVar2 * 0x140;
-      if (iVar2 < 0) {
-        iVar2 = iVar2 + 0xfff;
-      }
-      sVar1 = (instance->rotation).z;
-      (instance->position).x = (instance->position).x + (short)(iVar2 >> 0xc);
-      iVar2 = rsin((int)sVar1);
-      iVar2 = iVar2 * 0x140;
-      if (iVar2 < 0) {
-        iVar2 = iVar2 + 0xfff;
-      }
-      (instance->position).y = (instance->position).y + (short)(iVar2 >> 0xc);
-    }
-    else {
-      iVar5 = 0x28;
-    }
+  iVar3 = 0x29;
+  if (iVar1 < 0) {
+    iVar3 = 0x28;
   }
-  else {
-    if (*(char *)(**(int **)((int)pvVar4 + 0x164) + 0x29) == -1) {
-      iVar2 = rcos((int)(instance->rotation).z);
-      iVar2 = iVar2 * 0x140;
-      if (iVar2 < 0) {
-        iVar2 = iVar2 + 0xfff;
-      }
-      sVar1 = (instance->rotation).z;
-      (instance->position).x = (instance->position).x - (short)(iVar2 >> 0xc);
-      iVar2 = rsin((int)sVar1);
-      iVar2 = iVar2 * 0x140;
-      if (iVar2 < 0) {
-        iVar2 = iVar2 + 0xfff;
-      }
-      (instance->position).y = (instance->position).y - (short)(iVar2 >> 0xc);
-    }
-    else {
-      iVar5 = 0x29;
-    }
-  }
-  return iVar5;
+  return iVar3;
 }
 
 
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ MON_ChooseCombatMove(struct _Instance *instance /*$s1*/, int reason /*$a1*/)
- // line 935, offset 0x8007fa90
+// int /*$ra*/ MON_ChooseCombatMove(struct _Instance *instance /*$s2*/, int reason /*$a1*/)
+ // line 946, offset 0x800804bc
 	/* begin block 1 */
-		// Start line: 936
-		// Start offset: 0x8007FA90
+		// Start line: 947
+		// Start offset: 0x800804BC
 		// Variables:
-	// 		struct _MonsterVars *mv; // $s2
-	// 		struct _MonsterSubAttributes *subAttr; // $s3
-	// 		int anim; // $s0
+	// 		struct _MonsterVars *mv; // $s3
+	// 		struct _MonsterSubAttributes *subAttr; // $s4
+	// 		int anim; // $s1
 	// 		int data; // $v0
 	// 		struct _MonsterIR *enemy; // $s0
 	// 		int infront; // $a0
 	// 		struct _MonsterAnim *manim; // $v1
 
 		/* begin block 1.1 */
-			// Start line: 998
-			// Start offset: 0x8007FB48
+			// Start line: 1009
+			// Start offset: 0x80080570
 
 			/* begin block 1.1.1 */
-				// Start line: 1002
-				// Start offset: 0x8007FB68
+				// Start line: 1013
+				// Start offset: 0x80080590
 				// Variables:
 			// 		int dir; // $v0
 			/* end block 1.1.1 */
-			// End offset: 0x8007FBB0
-			// End Line: 1011
+			// End offset: 0x800805D8
+			// End Line: 1022
 		/* end block 1.1 */
-		// End offset: 0x8007FBC8
-		// End Line: 1034
+		// End offset: 0x800805F0
+		// End Line: 1045
 
 		/* begin block 1.2 */
-			// Start line: 1038
-			// Start offset: 0x8007FBD0
+			// Start line: 1049
+			// Start offset: 0x800805F8
 			// Variables:
-		// 		short zrot; // $a1
+		// 		short zrot; // $s0
 		/* end block 1.2 */
-		// End offset: 0x8007FD40
-		// End Line: 1097
+		// End offset: 0x80080790
+		// End Line: 1110
 	/* end block 1 */
-	// End offset: 0x8007FD40
-	// End Line: 1099
+	// End offset: 0x80080790
+	// End Line: 1112
 
 	/* begin block 2 */
-		// Start line: 2007
+		// Start line: 2015
 	/* end block 2 */
-	// End Line: 2008
+	// End Line: 2016
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_ChooseCombatMove(_Instance *instance,int reason)
 
@@ -1522,8 +1559,8 @@ int MON_ChooseCombatMove(_Instance *instance,int reason)
   int Data;
   uint xOffset;
   uint yOffset;
-  char cVar2;
   _MonsterIR *enemy;
+  char cVar2;
   uint uVar3;
   void *pvVar4;
   int *piVar5;
@@ -1534,21 +1571,18 @@ int MON_ChooseCombatMove(_Instance *instance,int reason)
   piVar5 = *(int **)((int)pvVar4 + 0x164);
   if ((Data == 0) || (699 < *(short *)(Data + 0x14))) {
     if (reason == 4) {
-LAB_8007fb40:
+LAB_80080568:
       cVar2 = '\a';
     }
     else {
-      if (reason == 5) {
-        cVar2 = '\x06';
-      }
-      else {
+      cVar2 = '\x06';
+      if (reason != 5) {
         Data = (int)(enemy->relativePosition).y;
         if (Data < 0) {
           Data = -Data;
         }
         if (Data < *(short *)(piVar5[2] + 0x10)) {
-          cVar2 = '\x06';
-          if ((enemy->relativePosition).y < 0) goto LAB_8007fb40;
+          if ((enemy->relativePosition).y < 0) goto LAB_80080568;
         }
         else {
           angle = MON_FacingOffset(instance,enemy->instance);
@@ -1604,37 +1638,38 @@ LAB_8007fb40:
       }
     }
   }
-  angle = MONSENSE_GetClosestFreeDirection(instance,angle,500);
+  MONSENSE_AdjustRadarFromObjects(instance);
+  angle = MONSENSE_GetClosestFreeDirection(instance,angle,0x2ee);
   uVar1 = (angle - (instance->rotation).z) + 0x200U & 0xfff;
   uVar3 = 6;
   if (((0x3ff < uVar1) && (uVar3 = 8, 0x7ff < uVar1)) && (uVar3 = 9, uVar1 < 0xc00)) {
     uVar3 = 7;
   }
-  Data = *(int *)((int)instance->data + 0x44) + (int)*(char *)(*piVar5 + uVar3) * 0x10;
+  Data = *(int *)((int)instance->data + 0x40) + (int)*(char *)(*piVar5 + uVar3) * 0x10;
   if (uVar3 == 8) {
-    xOffset = (uint)*(ushort *)(Data + 2);
     yOffset = 0;
+    xOffset = (uint)*(ushort *)(Data + 2);
   }
   else {
     if (uVar3 < 9) {
       xOffset = 0;
       if (uVar3 == 7) {
         yOffset = (uint)*(ushort *)(Data + 2);
-        goto LAB_8007fd08;
+        goto LAB_80080758;
       }
     }
     else {
       yOffset = 0;
       if (uVar3 == 9) {
         xOffset = -(uint)*(ushort *)(Data + 2);
-        goto LAB_8007fd08;
+        goto LAB_80080758;
       }
     }
     xOffset = 0;
     yOffset = -(uint)*(ushort *)(Data + 2);
   }
-LAB_8007fd08:
-  Data = SetPhysicsDropOffData(xOffset,yOffset,200,0x800);
+LAB_80080758:
+  Data = SetPhysicsDropOffData(xOffset,yOffset,200,0x800,400);
   Data = PhysicsCheckDropOff(instance,Data,4);
   if (Data == 0) {
     if (uVar3 - 8 < 2) {
@@ -1652,10 +1687,10 @@ LAB_8007fd08:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_PlayRandomIdle(struct _Instance *instance /*$s4*/, int mode /*$s5*/)
- // line 1107, offset 0x8007fd60
+ // line 1120, offset 0x800807b4
 	/* begin block 1 */
-		// Start line: 1108
-		// Start offset: 0x8007FD60
+		// Start line: 1121
+		// Start offset: 0x800807B4
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s3
 	// 		struct _MonsterAttributes *ma; // $s2
@@ -1665,13 +1700,15 @@ LAB_8007fd08:
 	// 		int i; // $a0
 	// 		char *idleIndex; // $a1
 	/* end block 1 */
-	// End offset: 0x8007FED8
-	// End Line: 1163
+	// End offset: 0x80080934
+	// End Line: 1179
 
 	/* begin block 2 */
-		// Start line: 2382
+		// Start line: 2394
 	/* end block 2 */
-	// End Line: 2383
+	// End Line: 2395
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_PlayRandomIdle(_Instance *instance,int mode)
 
@@ -1696,33 +1733,31 @@ void MON_PlayRandomIdle(_Instance *instance,int mode)
       iVar3 = (int)*(char *)(*(int *)(puVar8[0x59] + 0x10) + (uint)*(byte *)((int)puVar8 + 0x156));
     }
     if (iVar3 == -1) {
-      puVar5 = *(undefined **)((int)pvVar7 + 0x4c);
+      puVar5 = *(undefined **)((int)pvVar7 + 0x48);
     }
     else {
-      puVar5 = (undefined *)(*(int *)((int)pvVar7 + 0x4c) + iVar3 * 8);
+      puVar5 = (undefined *)(*(int *)((int)pvVar7 + 0x48) + iVar3 * 8);
     }
     if (*(char *)((int)puVar8 + 0x156) != '\0') {
       iVar3 = (int)(char)puVar5[2];
       pcVar4 = puVar5 + 3;
-      if (iVar3 != 0) {
-        do {
-          pcVar6 = (char *)(*(int *)((int)pvVar7 + 0x48) + (int)*pcVar4 * 4);
-          iVar3 = iVar3 + -1;
-          if (iVar2 < pcVar6[2]) break;
-          iVar2 = iVar2 - pcVar6[2];
-          pcVar4 = pcVar4 + 1;
-        } while (iVar3 != 0);
+      while ((iVar3 != 0 && (-1 < (int)*pcVar4))) {
+        pcVar6 = (char *)(*(int *)((int)pvVar7 + 0x44) + (int)*pcVar4 * 4);
+        iVar3 = iVar3 + -1;
+        if (iVar2 < pcVar6[2]) break;
+        iVar2 = iVar2 - pcVar6[2];
+        pcVar4 = pcVar4 + 1;
       }
-      goto LAB_8007feb8;
+      goto LAB_80080914;
     }
     cVar1 = puVar5[(uint)*(byte *)(puVar8 + 0x57) + 3];
   }
   else {
-    puVar5 = *(undefined **)((int)pvVar7 + 0x4c);
+    puVar5 = *(undefined **)((int)pvVar7 + 0x48);
     cVar1 = puVar5[3];
   }
-  pcVar6 = (char *)(*(int *)((int)pvVar7 + 0x48) + (int)cVar1 * 4);
-LAB_8007feb8:
+  pcVar6 = (char *)(*(int *)((int)pvVar7 + 0x44) + (int)cVar1 * 4);
+LAB_80080914:
   if (pcVar6 != (char *)0x0) {
     MON_PlayAnimIDIfNotPlaying(instance,(int)*pcVar6,mode);
     *(undefined *)((int)puVar8 + 0x15d) = *puVar5;
@@ -1735,20 +1770,20 @@ LAB_8007feb8:
 // autogenerated function stub: 
 // void /*$ra*/ MON_PlayCombatIdle(struct _Instance *instance /*$a0*/, int mode /*$a2*/)
 void MON_PlayCombatIdle(struct _Instance *instance, int mode)
-{ // line 1168, offset 0x8007fefc
+{ // line 1184, offset 0x80080958
 	/* begin block 1 */
-		// Start line: 1169
-		// Start offset: 0x8007FEFC
+		// Start line: 1185
+		// Start offset: 0x80080958
 		// Variables:
 			int anim; // $a1
 	/* end block 1 */
-	// End offset: 0x8007FF24
-	// End Line: 1177
+	// End offset: 0x80080980
+	// End Line: 1193
 
 	/* begin block 2 */
-		// Start line: 2510
+		// Start line: 2531
 	/* end block 2 */
-	// End Line: 2511
+	// End Line: 2532
 
 }
 
@@ -1756,34 +1791,36 @@ void MON_PlayCombatIdle(struct _Instance *instance, int mode)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_GetRandomPoint(struct _Position *out /*$s2*/, struct _Position *in /*$s1*/, short r /*$a2*/)
- // line 1209, offset 0x8007ff3c
+ // line 1225, offset 0x80080998
 	/* begin block 1 */
-		// Start line: 1210
-		// Start offset: 0x8007FF3C
+		// Start line: 1226
+		// Start offset: 0x80080998
 		// Variables:
 	// 		int ang; // $s0
 	/* end block 1 */
-	// End offset: 0x8007FF3C
-	// End Line: 1210
+	// End offset: 0x80080998
+	// End Line: 1226
 
 	/* begin block 2 */
-		// Start line: 2412
+		// Start line: 2444
 	/* end block 2 */
-	// End Line: 2413
+	// End Line: 2445
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_GetRandomPoint(_Position *out,_Position *in,short r)
 
 {
   int iVar1;
-  uint uVar2;
-  int iVar3;
+  int a;
+  int iVar2;
   
   iVar1 = rand();
-  uVar2 = rand();
-  iVar3 = rcos(uVar2);
-  out->x = in->x + (short)((iVar1 % (int)r) * iVar3 >> 0xc);
-  iVar3 = rsin(uVar2);
-  out->y = in->y + (short)((iVar1 % (int)r) * iVar3 >> 0xc);
+  a = rand();
+  iVar2 = rcos(a);
+  out->x = in->x + (short)((iVar1 % (int)r) * iVar2 >> 0xc);
+  a = rsin(a);
+  out->y = in->y + (short)((iVar1 % (int)r) * a >> 0xc);
   out->z = in->z;
   return;
 }
@@ -1793,10 +1830,10 @@ void MON_GetRandomPoint(_Position *out,_Position *in,short r)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MON_GetRandomGroundPoint(struct _Instance *instance /*$s2*/, struct _Position *out /*stack 4*/, struct _Position *in /*$s6*/, short r0 /*$a3*/, int r1 /*stack 16*/, int theta0 /*stack 20*/, int theta1 /*stack 24*/, int h /*stack 28*/)
- // line 1229, offset 0x8007ffe8
+ // line 1245, offset 0x80080a44
 	/* begin block 1 */
-		// Start line: 1230
-		// Start offset: 0x8007FFE8
+		// Start line: 1246
+		// Start offset: 0x80080A44
 		// Variables:
 	// 		int rad; // $s1
 	// 		int ang; // $s0
@@ -1807,21 +1844,23 @@ void MON_GetRandomPoint(_Position *out,_Position *in,short r)
 	// 		struct Level *level; // $s3
 
 		/* begin block 1.1 */
-			// Start line: 1252
-			// Start offset: 0x80080174
+			// Start line: 1268
+			// Start offset: 0x80080BC8
 			// Variables:
 		// 		struct Level *newlevel; // $v0
 		/* end block 1.1 */
-		// End offset: 0x800801D8
-		// End Line: 1267
+		// End offset: 0x80080C2C
+		// End Line: 1283
 	/* end block 1 */
-	// End offset: 0x800801D8
-	// End Line: 1269
+	// End offset: 0x80080C2C
+	// End Line: 1285
 
 	/* begin block 2 */
-		// Start line: 2604
+		// Start line: 2625
 	/* end block 2 */
-	// End Line: 2605
+	// End Line: 2626
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_GetRandomGroundPoint
               (_Instance *instance,_Position *out,_Position *in,short r0,int r1,int theta0,
@@ -1830,8 +1869,8 @@ int MON_GetRandomGroundPoint
 {
   _Instance *level;
   int iVar1;
-  uint uVar2;
-  int iVar3;
+  int a;
+  int iVar2;
   SVECTOR local_68;
   SVECTOR local_60;
   _PCollideInfo _Stack88;
@@ -1842,18 +1881,18 @@ int MON_GetRandomGroundPoint
   if (iVar1 < 0) {
     iVar1 = iVar1 + 0x7fff;
   }
-  iVar3 = (int)r0 + (iVar1 >> 0xf);
+  iVar2 = (int)r0 + (iVar1 >> 0xf);
   iVar1 = rand();
   iVar1 = iVar1 * ((int)(short)theta1 - (int)(short)theta0);
   if (iVar1 < 0) {
     iVar1 = iVar1 + 0x7fff;
   }
-  uVar2 = (int)(short)theta0 + (iVar1 >> 0xf);
-  iVar1 = rcos(uVar2);
-  local_68.vx = in->x + (short)(iVar3 * iVar1 >> 0xc);
+  a = (int)(short)theta0 + (iVar1 >> 0xf);
+  iVar1 = rcos(a);
+  local_68.vx = in->x + (short)(iVar2 * iVar1 >> 0xc);
   local_60.vx = local_68.vx;
-  iVar1 = rsin(uVar2);
-  local_68.vy = in->y + (short)(iVar3 * iVar1 >> 0xc);
+  iVar1 = rsin(a);
+  local_68.vy = in->y + (short)(iVar2 * iVar1 >> 0xc);
   local_60.vz = (short)(((h << 0x10) >> 0x10) - ((h << 0x10) >> 0x1f) >> 1);
   local_68.vz = in->z + local_60.vz;
   _Stack88.collideType = 1;
@@ -1863,7 +1902,7 @@ int MON_GetRandomGroundPoint
   _Stack88.inst = (_Instance *)0x0;
   local_60.vz = in->z - local_60.vz;
   local_60.vy = local_68.vy;
-  COLLIDE_PointAndWorld(&_Stack88,&gameTrackerX,(Level *)level);
+  COLLIDE_PointAndWorld(&_Stack88,(Level *)level);
   iVar1 = 0;
   if ((((_Stack88.collideType & 1) != 0) && (iVar1 = 0, _Stack88.prim != (_TFace *)0x0)) &&
      (iVar1 = 0, level == _Stack88.inst)) {
@@ -1886,14 +1925,14 @@ int MON_GetRandomGroundPoint
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MON_GetRandomDestinationInWorld(struct _Instance *instance /*$s2*/, struct _Position *in /*$s0*/, short r /*$s4*/)
- // line 1275, offset 0x8008020c
+ // line 1291, offset 0x80080c60
 	/* begin block 1 */
-		// Start line: 1276
-		// Start offset: 0x8008020C
+		// Start line: 1292
+		// Start offset: 0x80080C60
 
 		/* begin block 1.1 */
-			// Start line: 1279
-			// Start offset: 0x80080240
+			// Start line: 1295
+			// Start offset: 0x80080C94
 			// Variables:
 		// 		struct _MonsterVars *mv; // $s1
 		// 		struct evPhysicsLOSData data; // stack offset -48
@@ -1901,31 +1940,32 @@ int MON_GetRandomGroundPoint
 		// 		int avoidEnemy; // $s3
 
 			/* begin block 1.1.1 */
-				// Start line: 1290
-				// Start offset: 0x8008027C
+				// Start line: 1306
+				// Start offset: 0x80080CD0
 			/* end block 1.1.1 */
-			// End offset: 0x800802CC
-			// End Line: 1296
+			// End offset: 0x80080D20
+			// End Line: 1312
 
 			/* begin block 1.1.2 */
-				// Start line: 1310
-				// Start offset: 0x80080348
+				// Start line: 1326
+				// Start offset: 0x80080D9C
 			/* end block 1.1.2 */
-			// End offset: 0x80080398
-			// End Line: 1316
+			// End offset: 0x80080DEC
+			// End Line: 1332
 		/* end block 1.1 */
-		// End offset: 0x800803D0
-		// End Line: 1325
+		// End offset: 0x80080E24
+		// End Line: 1341
 	/* end block 1 */
-	// End offset: 0x800803D4
-	// End Line: 1328
+	// End offset: 0x80080E28
+	// End Line: 1344
 
 	/* begin block 2 */
-		// Start line: 2724
+		// Start line: 2745
 	/* end block 2 */
-	// End Line: 2725
+	// End Line: 2746
 
 /* WARNING: Could not reconcile some variable overlaps */
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_GetRandomDestinationInWorld(_Instance *instance,_Position *in,short r)
 
@@ -1948,15 +1988,15 @@ int MON_GetRandomDestinationInWorld(_Instance *instance,_Position *in,short r)
     bVar1 = puVar5[0x31] != 0;
   }
   if (in != (_Position *)0x0) {
-    if (!bVar1) goto LAB_800802cc;
+    if (!bVar1) goto LAB_80080d20;
     iVar2 = *(int *)(puVar5[0x31] + 4);
     lVar3 = MATH3D_LengthXYZ((int)in->x - (int)*(short *)(iVar2 + 0x5c),
                              (int)in->y - (int)*(short *)(iVar2 + 0x5e),
                              (int)in->z - (int)*(short *)(iVar2 + 0x60));
-    if (*(short *)(puVar5[0x59] + 0x1a) <= lVar3) goto LAB_800802cc;
+    if (*(short *)(puVar5[0x59] + 0x1a) <= lVar3) goto LAB_80080d20;
   }
   in = &instance->position;
-LAB_800802cc:
+LAB_80080d20:
   local_28[0].x = *(short *)instance->matrix[1].t;
   local_28[0].y = *(short *)(instance->matrix[1].t + 1);
   local_28[0].z = *(short *)(instance->matrix[1].t + 2);
@@ -1987,20 +2027,22 @@ LAB_800802cc:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_MoveForward(struct _Instance *instance /*$s0*/)
- // line 1421, offset 0x800803f4
+ // line 1437, offset 0x80080e48
 	/* begin block 1 */
-		// Start line: 1422
-		// Start offset: 0x800803F4
+		// Start line: 1438
+		// Start offset: 0x80080E48
 		// Variables:
 	// 		struct _MonsterVars *mv; // $v0
 	/* end block 1 */
-	// End offset: 0x800803F4
-	// End Line: 1422
+	// End offset: 0x80080E48
+	// End Line: 1438
 
 	/* begin block 2 */
-		// Start line: 2836
+		// Start line: 2868
 	/* end block 2 */
-	// End Line: 2837
+	// End Line: 2869
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_MoveForward(_Instance *instance)
 
@@ -2010,7 +2052,7 @@ void MON_MoveForward(_Instance *instance)
   instance->xAccl = 0;
   instance->yAccl = 0;
   instance->zAccl = 0;
-  PhysicsMove(instance,&instance->position,gameTrackerX.idleTime);
+  PhysicsMove(instance,&instance->position,DAT_800d2314);
   return;
 }
 
@@ -2019,18 +2061,20 @@ void MON_MoveForward(_Instance *instance)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MON_TurnToPosition(struct _Instance *instance /*$s1*/, struct _Position *position /*$a1*/, short turnspeed /*$a2*/)
- // line 1436, offset 0x80080444
+ // line 1452, offset 0x80080e98
 	/* begin block 1 */
-		// Start line: 1437
-		// Start offset: 0x80080444
+		// Start line: 1453
+		// Start offset: 0x80080E98
 	/* end block 1 */
-	// End offset: 0x80080444
-	// End Line: 1437
+	// End offset: 0x80080E98
+	// End Line: 1453
 
 	/* begin block 2 */
-		// Start line: 2961
+		// Start line: 2982
 	/* end block 2 */
-	// End Line: 2962
+	// End Line: 2983
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_TurnToPosition(_Instance *instance,_Position *position,short turnspeed)
 
@@ -2039,7 +2083,7 @@ int MON_TurnToPosition(_Instance *instance,_Position *position,short turnspeed)
   
   destination = MATH3D_AngleFromPosToPos(&instance->position,position);
   AngleMoveToward(&(instance->rotation).z,destination,
-                  (short)((int)turnspeed * gameTrackerX.idleTime * 0x10 >> 0x10));
+                  (short)((uint)(turnspeed * DAT_800d2314 * 0x10) >> 0x10));
   return (uint)((instance->rotation).z == destination);
 }
 
@@ -2048,11 +2092,13 @@ int MON_TurnToPosition(_Instance *instance,_Position *position,short turnspeed)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_MoveToPosition(struct _Instance *instance /*$s0*/, struct _Position *position /*$a1*/, short turnSpeed /*$a2*/)
- // line 1453, offset 0x800804b4
+ // line 1469, offset 0x80080f08
 	/* begin block 1 */
-		// Start line: 3001
+		// Start line: 3022
 	/* end block 1 */
-	// End Line: 3002
+	// End Line: 3023
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_MoveToPosition(_Instance *instance,_Position *position,short turnSpeed)
 
@@ -2072,23 +2118,25 @@ void MON_MoveToPosition(_Instance *instance,_Position *position,short turnSpeed)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MON_OnGround(struct _Instance *instance /*$s0*/)
- // line 1472, offset 0x800804f8
+ // line 1488, offset 0x80080f4c
 	/* begin block 1 */
-		// Start line: 1473
-		// Start offset: 0x800804F8
+		// Start line: 1489
+		// Start offset: 0x80080F4C
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s1
 	// 		struct evPhysicsGravityData data; // stack offset -32
 	// 		int minUpper; // $v1
 	// 		long xyDist; // $a1
 	/* end block 1 */
-	// End offset: 0x800805A4
-	// End Line: 1498
+	// End offset: 0x80080FF8
+	// End Line: 1514
 
 	/* begin block 2 */
-		// Start line: 3041
+		// Start line: 3062
 	/* end block 2 */
-	// End Line: 3042
+	// End Line: 3063
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_OnGround(_Instance *instance)
 
@@ -2121,9 +2169,9 @@ int MON_OnGround(_Instance *instance)
   if ((int)local_1e < iVar2 >> 2) {
     local_1e = (short)(iVar2 >> 2);
   }
-  local_20 = local_20 + *(short *)(puVar4[0x59] + 0x4c);
+  local_20 = local_20 + *(short *)(puVar4[0x59] + 0x4e);
   local_16 = 0xc80;
-  local_1e = local_1e + *(short *)(puVar4[0x59] + 0x4e);
+  local_1e = local_1e + *(short *)(puVar4[0x59] + 0x50);
   iVar2 = PhysicsCheckGravity(instance,(int)&local_20,(ushort)((*puVar4 & 0x800) == 0) << 2);
   return iVar2;
 }
@@ -2133,16 +2181,18 @@ int MON_OnGround(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_ApplyPhysics(struct _Instance *instance /*$a0*/)
- // line 1515, offset 0x80080604
+ // line 1531, offset 0x80081058
 	/* begin block 1 */
-		// Start line: 3156
+		// Start line: 3177
 	/* end block 1 */
-	// End Line: 3157
+	// End Line: 3178
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_ApplyPhysics(_Instance *instance)
 
 {
-  PhysicsMove(instance,&instance->position,gameTrackerX.idleTime);
+  PhysicsMove(instance,&instance->position,DAT_800d2314);
   return;
 }
 
@@ -2151,28 +2201,30 @@ void MON_ApplyPhysics(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_ChangeBehavior(struct _Instance *instance /*$a0*/, int behavior /*$s0*/)
- // line 1525, offset 0x80080628
+ // line 1541, offset 0x8008107c
 	/* begin block 1 */
-		// Start line: 1526
-		// Start offset: 0x80080628
+		// Start line: 1542
+		// Start offset: 0x8008107C
 
 		/* begin block 1.1 */
-			// Start line: 1529
-			// Start offset: 0x80080644
+			// Start line: 1545
+			// Start offset: 0x80081098
 			// Variables:
 		// 		struct _MonsterVars *mv; // $s1
 		// 		enum MonsterState state; // $a1
 		/* end block 1.1 */
-		// End offset: 0x8008069C
-		// End Line: 1556
+		// End offset: 0x800810F0
+		// End Line: 1572
 	/* end block 1 */
-	// End offset: 0x8008069C
-	// End Line: 1557
+	// End offset: 0x800810F0
+	// End Line: 1573
 
 	/* begin block 2 */
-		// Start line: 3177
+		// Start line: 3198
 	/* end block 2 */
-	// End Line: 3178
+	// End Line: 3199
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_ChangeBehavior(_Instance *instance,int behavior)
 
@@ -2202,61 +2254,65 @@ void MON_ChangeBehavior(_Instance *instance,int behavior)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_CheckEnvironment(struct _Instance *instance /*$s1*/)
- // line 1562, offset 0x800806b0
+ // line 1578, offset 0x80081104
 	/* begin block 1 */
-		// Start line: 1563
-		// Start offset: 0x800806B0
+		// Start line: 1579
+		// Start offset: 0x80081104
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
+	// 		struct _MonsterAttributes *ma; // $v0
+	// 		int inwater; // $v0
 	// 		struct _SVector Hack; // stack offset -40
 
 		/* begin block 1.1 */
-			// Start line: 1592
-			// Start offset: 0x80080798
+			// Start line: 1616
+			// Start offset: 0x80081220
 			// Variables:
 		// 		int moveback; // $s2
 		// 		int onground; // $s3
 
 			/* begin block 1.1.1 */
-				// Start line: 1619
-				// Start offset: 0x80080844
+				// Start line: 1643
+				// Start offset: 0x800812CC
 				// Variables:
 			// 		int offset; // $a1
 			// 		int result; // $v0
 			// 		struct _Position pos; // stack offset -32
 			/* end block 1.1.1 */
-			// End offset: 0x800808EC
-			// End Line: 1639
+			// End offset: 0x80081374
+			// End Line: 1663
 
 			/* begin block 1.1.2 */
-				// Start line: 1651
-				// Start offset: 0x80080928
+				// Start line: 1675
+				// Start offset: 0x800813B0
 				// Variables:
 			// 		int result; // $v0
 			// 		int offset; // $a1
 			/* end block 1.1.2 */
-			// End offset: 0x80080988
-			// End Line: 1667
+			// End offset: 0x80081410
+			// End Line: 1691
 
 			/* begin block 1.1.3 */
-				// Start line: 1674
-				// Start offset: 0x80080990
+				// Start line: 1698
+				// Start offset: 0x80081418
 				// Variables:
 			// 		int result; // $v1
 			/* end block 1.1.3 */
-			// End offset: 0x800809F4
-			// End Line: 1703
+			// End offset: 0x8008147C
+			// End Line: 1727
 		/* end block 1.1 */
-		// End offset: 0x80080A5C
-		// End Line: 1716
+		// End offset: 0x800814E4
+		// End Line: 1740
 	/* end block 1 */
-	// End offset: 0x80080A5C
-	// End Line: 1717
+	// End offset: 0x800814E4
+	// End Line: 1741
 
 	/* begin block 2 */
-		// Start line: 3252
+		// Start line: 3273
 	/* end block 2 */
-	// End Line: 3253
+	// End Line: 3274
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_CheckEnvironment(_Instance *instance)
 
@@ -2274,9 +2330,17 @@ void MON_CheckEnvironment(_Instance *instance)
   local_28.z = 0;
   local_28.y = 0;
   local_28.x = 0;
-  Data = SetPhysicsSwimData(0,&local_28,0x100,0xa0,0x40);
-  uVar3 = PhysicsCheckSwim(instance,Data,1);
-  if ((uVar3 & 0x20) == 0) {
+  if ((*(uint *)((int)instance->data + 0x10) & 4) == 0) {
+    Data = SetPhysicsSwimData(0,&local_28,0x100,0xa0,0x40);
+    uVar3 = PhysicsCheckSwim(instance,Data,1);
+    uVar3 = uVar3 & 0x20;
+  }
+  else {
+    uVar3 = 0x20;
+  }
+  instance->tface = (_TFace *)0x0;
+  instance->tfaceLevel = (void *)0x0;
+  if (uVar3 == 0) {
     if ((*puVar4 & 0x400) == 0) {
       *puVar4 = *puVar4 & 0xffbfffff | 0x400;
       instance->maxXVel = 0x14;
@@ -2284,8 +2348,10 @@ void MON_CheckEnvironment(_Instance *instance)
       instance->maxZVel = 0x14;
       instance->xVel = 0;
       instance->yVel = 0;
-      SOUND_Play3dSound(&instance->position,1,0,0x78,10000);
+      SOUND_Play3dSound(&instance->position,1,-200,0x78,(int)&DAT_00002710);
       instance->flags2 = instance->flags2 & 0xffffffbf;
+    }
+    if ((*(ushort *)((int)puVar4 + 0x14e) & 0x10) != 0) {
       INSTANCE_Post(instance,0x100000c,0x10);
     }
   }
@@ -2359,7 +2425,7 @@ void MON_CheckEnvironment(_Instance *instance)
     if ((int *)instance->tfaceLevel != (int *)0x0) {
       MON_CheckTerrainAndRespond
                 (instance,(BSPTree *)
-                          (*(int *)(*(int *)instance->tfaceLevel + 0x50) + instance->bspTree * 0x24)
+                          (*(int *)(*(int *)instance->tfaceLevel + 0x48) + instance->bspTree * 0x24)
                  ,instance->tface);
     }
   }
@@ -2371,20 +2437,22 @@ void MON_CheckEnvironment(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_CheckTerrainAndRespond(struct _Instance *instance /*$s1*/, struct BSPTree *bsp /*$a1*/, struct _TFace *tface /*$a2*/)
- // line 1719, offset 0x80080a78
+ // line 1743, offset 0x80081500
 	/* begin block 1 */
-		// Start line: 1720
-		// Start offset: 0x80080A78
+		// Start line: 1744
+		// Start offset: 0x80081500
 		// Variables:
 	// 		unsigned long results; // $s0
 	/* end block 1 */
-	// End offset: 0x80080AE8
-	// End Line: 1731
+	// End offset: 0x80081570
+	// End Line: 1755
 
 	/* begin block 2 */
-		// Start line: 3580
+		// Start line: 3607
 	/* end block 2 */
-	// End Line: 3581
+	// End Line: 3608
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_CheckTerrainAndRespond(_Instance *instance,BSPTree *bsp,_TFace *tface)
 
@@ -2409,29 +2477,31 @@ void MON_CheckTerrainAndRespond(_Instance *instance,BSPTree *bsp,_TFace *tface)
 // decompiled code
 // original method signature: 
 // unsigned long /*$ra*/ MON_CheckTerrain(struct _Instance *instance /*$s2*/, struct BSPTree *bsp /*$s1*/, struct _TFace *tface /*$a2*/)
- // line 1736, offset 0x80080afc
+ // line 1760, offset 0x80081584
 	/* begin block 1 */
-		// Start line: 1737
-		// Start offset: 0x80080AFC
+		// Start line: 1761
+		// Start offset: 0x80081584
 		// Variables:
 	// 		unsigned long rv; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 1743
-			// Start offset: 0x80080B20
+			// Start line: 1767
+			// Start offset: 0x800815A8
 			// Variables:
 		// 		struct Level *level; // $v1
 		/* end block 1.1 */
-		// End offset: 0x80080BA0
-		// End Line: 1763
+		// End offset: 0x80081628
+		// End Line: 1787
 	/* end block 1 */
-	// End offset: 0x80080BA0
-	// End Line: 1765
+	// End offset: 0x80081628
+	// End Line: 1789
 
 	/* begin block 2 */
-		// Start line: 3614
+		// Start line: 3641
 	/* end block 2 */
-	// End Line: 3615
+	// End Line: 3642
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 ulong MON_CheckTerrain(_Instance *instance,BSPTree *bsp,_TFace *tface)
 
@@ -2461,23 +2531,25 @@ ulong MON_CheckTerrain(_Instance *instance,BSPTree *bsp,_TFace *tface)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MON_CheckPointSuitability(struct _Instance *instance /*$s2*/, struct _Position *origin /*$a1*/, struct _Position *destination /*$s4*/)
- // line 1774, offset 0x80080bbc
+ // line 1798, offset 0x80081644
 	/* begin block 1 */
-		// Start line: 1775
-		// Start offset: 0x80080BBC
+		// Start line: 1799
+		// Start offset: 0x80081644
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s1
 	// 		int rc; // $s3
 	// 		int result; // $a0
 	// 		struct evPhysicsDropHeightData *data; // $s0
 	/* end block 1 */
-	// End offset: 0x80080C70
-	// End Line: 1801
+	// End offset: 0x800816F8
+	// End Line: 1825
 
 	/* begin block 2 */
-		// Start line: 3696
+		// Start line: 3723
 	/* end block 2 */
-	// End Line: 3697
+	// End Line: 3724
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_CheckPointSuitability(_Instance *instance,_Position *origin,_Position *destination)
 
@@ -2508,27 +2580,29 @@ int MON_CheckPointSuitability(_Instance *instance,_Position *origin,_Position *d
 // decompiled code
 // original method signature: 
 // unsigned long /*$ra*/ MON_GetTime(struct _Instance *instance /*$a0*/)
- // line 1876, offset 0x80080c94
+ // line 1900, offset 0x8008171c
 	/* begin block 1 */
-		// Start line: 3745
+		// Start line: 3793
 	/* end block 1 */
-	// End Line: 3746
+	// End Line: 3794
 
 	/* begin block 2 */
-		// Start line: 3831
+		// Start line: 3858
 	/* end block 2 */
-	// End Line: 3832
+	// End Line: 3859
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 ulong MON_GetTime(_Instance *instance)
 
 {
   if ((instance->object->oflags & 0x80000U) != 0) {
-    return gameTrackerX.globalTimeMult;
+    return DAT_800d2300;
   }
   if ((instance->flags2 & 0x8000000U) == 0) {
-    return gameTrackerX.spectralTimeMult;
+    return DAT_800d2304;
   }
-  return gameTrackerX.materialTimeMult;
+  return DAT_800d2308;
 }
 
 
@@ -2536,85 +2610,107 @@ ulong MON_GetTime(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_BirthSoul(struct _Instance *instance /*$s0*/, int link /*$s2*/)
- // line 1894, offset 0x80080ce8
+ // line 1918, offset 0x80081770
 	/* begin block 1 */
-		// Start line: 1895
-		// Start offset: 0x80080CE8
+		// Start line: 1919
+		// Start offset: 0x80081770
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 1902
-			// Start offset: 0x80080D30
+			// Start line: 1926
+			// Start offset: 0x800817B8
 			// Variables:
 		// 		struct Object *soulob; // $a1
 
 			/* begin block 1.1.1 */
-				// Start line: 1909
-				// Start offset: 0x80080D40
+				// Start line: 1933
+				// Start offset: 0x800817CC
 				// Variables:
-			// 		struct _Instance *isoul; // $a0
+			// 		struct _Instance *isoul; // $a1
 
 				/* begin block 1.1.1.1 */
-					// Start line: 1924
-					// Start offset: 0x80080D7C
+					// Start line: 1953
+					// Start offset: 0x8008182C
 					// Variables:
 				// 		struct MATRIX *matrix; // $v1
 				/* end block 1.1.1.1 */
-				// End offset: 0x80080D98
-				// End Line: 1928
+				// End offset: 0x80081850
+				// End Line: 1957
 			/* end block 1.1.1 */
-			// End offset: 0x80080D98
-			// End Line: 1933
+			// End offset: 0x80081858
+			// End Line: 1963
 		/* end block 1.1 */
-		// End offset: 0x80080D98
-		// End Line: 1936
+		// End offset: 0x80081858
+		// End Line: 1966
 
 		/* begin block 1.2 */
-			// Start line: 1939
-			// Start offset: 0x80080DA0
+			// Start line: 1969
+			// Start offset: 0x80081860
 			// Variables:
 		// 		struct _Instance *isoul; // $a0
 		/* end block 1.2 */
-		// End offset: 0x80080DF0
-		// End Line: 1953
+		// End offset: 0x800818B0
+		// End Line: 1983
 	/* end block 1 */
-	// End offset: 0x80080DF0
-	// End Line: 1955
+	// End offset: 0x800818B0
+	// End Line: 1985
 
 	/* begin block 2 */
-		// Start line: 3858
+		// Start line: 3885
 	/* end block 2 */
-	// End Line: 3859
+	// End Line: 3886
 
 	/* begin block 3 */
-		// Start line: 3866
+		// Start line: 3893
 	/* end block 3 */
-	// End Line: 3867
+	// End Line: 3894
 
-/* WARNING: Removing unreachable block (ram,0x80080d40) */
-/* WARNING: Removing unreachable block (ram,0x80080d54) */
-/* WARNING: Removing unreachable block (ram,0x80080d68) */
-/* WARNING: Removing unreachable block (ram,0x80080d5c) */
-/* WARNING: Removing unreachable block (ram,0x80080d6c) */
-/* WARNING: Removing unreachable block (ram,0x80080d7c) */
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_BirthSoul(_Instance *instance,int link)
 
 {
   _Instance *p_Var1;
-  void *pvVar2;
+  MATRIX *pMVar2;
+  int introUniqueID;
+  void *pvVar3;
   
-  pvVar2 = instance->extraData;
-  if ((*(short *)((int)pvVar2 + 0x144) != 0) && (1 < *(int *)((int)pvVar2 + 0xd8) + 1U)) {
-    p_Var1 = INSTANCE_Find(*(int *)((int)pvVar2 + 0xd8));
-    if (p_Var1 == (_Instance *)0x0) {
-      instance->flags2 = instance->flags2 | 0x80;
+  pvVar3 = instance->extraData;
+  if (*(short *)((int)pvVar3 + 0x144) != 0) {
+    introUniqueID = *(int *)((int)pvVar3 + 0xd8);
+    if ((introUniqueID == 0) || (0x1fff < introUniqueID)) {
+      if ((objectAccess[9].object != (void *)0x0) &&
+         (p_Var1 = INSTANCE_BirthObject(instance,(Object *)objectAccess[9].object,0),
+         p_Var1 != (_Instance *)0x0)) {
+        if (0x1fff < *(int *)((int)pvVar3 + 0xd8)) {
+          p_Var1->flags2 = p_Var1->flags2 | 0x8000000;
+        }
+        if (link == 0) {
+          p_Var1->parent = (_Instance *)0x0;
+        }
+        else {
+          *(long *)((int)pvVar3 + 0xd8) = p_Var1->introUniqueID;
+        }
+        pMVar2 = instance->matrix;
+        if (pMVar2 != (MATRIX *)0x0) {
+          (p_Var1->position).x = *(short *)pMVar2[1].t;
+          (p_Var1->position).y = *(short *)(pMVar2[1].t + 1);
+          (p_Var1->position).z = *(short *)(pMVar2[1].t + 2);
+        }
+        *(undefined2 *)((int)p_Var1->extraData + 0x144) = *(undefined2 *)((int)pvVar3 + 0x144);
+      }
     }
     else {
-      instance->flags2 = instance->flags2 & 0xffffff7f;
-      *(long *)((int)pvVar2 + 0xd8) = p_Var1->introUniqueID;
-      *(long *)((int)p_Var1->extraData + 0xd8) = instance->introUniqueID;
+      p_Var1 = INSTANCE_Find(introUniqueID);
+      if (p_Var1 == (_Instance *)0x0) {
+        instance->flags2 = instance->flags2 | 0x80;
+      }
+      else {
+        instance->flags2 = instance->flags2 & 0xffffff7f;
+        *(long *)((int)pvVar3 + 0xd8) = p_Var1->introUniqueID;
+        *(long *)((int)p_Var1->extraData + 0xd8) = instance->introUniqueID;
+      }
     }
   }
   return;
@@ -2625,10 +2721,10 @@ void MON_BirthSoul(_Instance *instance,int link)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_ProcessIntro(struct _Instance *instance /*$s2*/)
- // line 1961, offset 0x80080e08
+ // line 1991, offset 0x800818c8
 	/* begin block 1 */
-		// Start line: 1962
-		// Start offset: 0x80080E08
+		// Start line: 1992
+		// Start offset: 0x800818C8
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	// 		long initialBehavior; // $s3
@@ -2636,49 +2732,51 @@ void MON_BirthSoul(_Instance *instance,int link)
 	// 		long activeBehavior; // $s6
 	// 		long guardRange; // $s7
 	// 		long wanderRange; // $fp
-	// 		long ambushRange; // $t0
+	// 		long ambushRange; // $t1
 	// 		long hitPoints; // $s4
 	// 		int spectral; // stack offset -56
 	// 		long flags; // $s1
 	// 		struct _MonsterAttributes *ma; // $v0
 
 		/* begin block 1.1 */
-			// Start line: 1982
-			// Start offset: 0x80080EAC
+			// Start line: 2012
+			// Start offset: 0x8008196C
 			// Variables:
 		// 		struct INICommand *command; // $a2
 
 			/* begin block 1.1.1 */
-				// Start line: 2032
-				// Start offset: 0x800810F4
+				// Start line: 2063
+				// Start offset: 0x80081BCC
 				// Variables:
 			// 		short *pmarker; // $a0
 			// 		int i; // $a1
 			// 		long *param; // $v1
 			/* end block 1.1.1 */
-			// End offset: 0x8008111C
-			// End Line: 2047
+			// End offset: 0x80081BF4
+			// End Line: 2078
 
 			/* begin block 1.1.2 */
-				// Start line: 2056
-				// Start offset: 0x80081144
+				// Start line: 2087
+				// Start offset: 0x80081C1C
 				// Variables:
 			// 		int i; // $a0
 			// 		short *unit; // $a1
 			/* end block 1.1.2 */
-			// End offset: 0x8008117C
-			// End Line: 2066
+			// End offset: 0x80081C54
+			// End Line: 2097
 		/* end block 1.1 */
-		// End offset: 0x800811F8
-		// End Line: 2096
+		// End offset: 0x80081CCC
+		// End Line: 2127
 	/* end block 1 */
-	// End offset: 0x800812AC
-	// End Line: 2130
+	// End offset: 0x80081DB0
+	// End Line: 2168
 
 	/* begin block 2 */
-		// Start line: 4003
+		// Start line: 4042
 	/* end block 2 */
-	// End Line: 4004
+	// End Line: 4043
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_ProcessIntro(_Instance *instance)
 
@@ -2759,6 +2857,7 @@ void MON_ProcessIntro(_Instance *instance)
             }
             else {
               if (sVar3 == 9) {
+                instance->flags2 = instance->flags2 | 0x20000;
                 uVar11 = uVar11 | 0x1000000;
                 *(short *)((int)puVar10 + 0x146) = psVar8[2];
               }
@@ -2832,7 +2931,7 @@ void MON_ProcessIntro(_Instance *instance)
                   if (sVar3 == 0x10) {
                     *(undefined *)(puVar10 + 0x55) = *(undefined *)(psVar8 + 2);
                     if (puVar10[0x36] == 0) {
-                      puVar10[0x36] = 0xffffffff;
+                      puVar10[0x36] = 0x7fffffff;
                     }
                   }
                   else {
@@ -2912,6 +3011,11 @@ void MON_ProcessIntro(_Instance *instance)
   if (iVar9 != 0) {
     *(undefined2 *)((int)puVar10 + 0x13a) = (short)iVar9;
   }
+  if (((*(char *)(puVar10 + 0x56) == '\b') && (*(char *)((int)puVar10 + 0x157) != '\x04')) &&
+     (*(char *)((int)puVar10 + 0x157) != '\x10')) {
+    *(undefined *)((int)puVar10 + 0x157) = 4;
+    *(undefined *)((int)puVar10 + 0x156) = 4;
+  }
   return;
 }
 
@@ -2920,27 +3024,29 @@ void MON_ProcessIntro(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_SetDefaults(struct _Instance *instance /*$a0*/)
- // line 2135, offset 0x800812dc
+ // line 2173, offset 0x80081de0
 	/* begin block 1 */
-		// Start line: 2137
-		// Start offset: 0x800812DC
+		// Start line: 2175
+		// Start offset: 0x80081DE0
 		// Variables:
 	// 		struct _MonsterVars *mv; // $a1
 	// 		struct _MonsterAttributes *ma; // $a3
 	// 		struct _MonsterSubAttributes *subAttr; // $a2
 	/* end block 1 */
-	// End offset: 0x800814D4
-	// End Line: 2193
+	// End offset: 0x80081FD8
+	// End Line: 2231
 
 	/* begin block 2 */
-		// Start line: 4513
+		// Start line: 4571
 	/* end block 2 */
-	// End Line: 4514
+	// End Line: 4572
 
 	/* begin block 3 */
-		// Start line: 4514
+		// Start line: 4572
 	/* end block 3 */
-	// End Line: 4515
+	// End Line: 4573
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_SetDefaults(_Instance *instance)
 
@@ -2953,10 +3059,10 @@ void MON_SetDefaults(_Instance *instance)
   
   puVar3 = (uint *)instance->extraData;
   pvVar5 = instance->data;
-  if ((int)*(char *)((int)pvVar5 + 0x2b) <= (int)(uint)*(byte *)((int)puVar3 + 0x15a)) {
-    *(char *)((int)puVar3 + 0x15a) = *(char *)((int)pvVar5 + 0x2b) + -1;
+  if ((int)*(char *)((int)pvVar5 + 0x28) <= (int)(uint)*(byte *)((int)puVar3 + 0x15a)) {
+    *(char *)((int)puVar3 + 0x15a) = *(char *)((int)pvVar5 + 0x28) + -1;
   }
-  uVar4 = *(uint *)((uint)*(byte *)((int)puVar3 + 0x15a) * 4 + *(int *)((int)pvVar5 + 0x34));
+  uVar4 = *(uint *)((uint)*(byte *)((int)puVar3 + 0x15a) * 4 + *(int *)((int)pvVar5 + 0x30));
   puVar3[0x59] = uVar4;
   instance->currentModel = (ushort)*(byte *)(uVar4 + 0x26);
   sVar1 = *(short *)(uVar4 + 0x14);
@@ -2974,8 +3080,8 @@ void MON_SetDefaults(_Instance *instance)
   *(undefined *)(puVar3 + 0x58) = 8;
   *(undefined2 *)((int)puVar3 + 0x13a) = uVar2;
   if ((*(int *)(uVar4 + 8) != 0) &&
-     (*(short *)(puVar3 + 0x50) = (short)((int)*(char *)(*(int *)(uVar4 + 8) + 0x16) << 8),
-     *(char *)(*(int *)(uVar4 + 8) + 0x18) != -1)) {
+     (*(short *)(puVar3 + 0x50) = (short)((int)*(char *)(*(int *)(uVar4 + 8) + 0x18) << 8),
+     *(char *)(*(int *)(uVar4 + 8) + 0x1a) != -1)) {
     *puVar3 = *puVar3 | 0x20;
   }
   if ((*(char *)((int)puVar3 + 0x15a) == '\x02') && ((*(uint *)((int)pvVar5 + 0x10) & 2) != 0)) {
@@ -3008,11 +3114,13 @@ void MON_SetDefaults(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_GetPlanSlot(struct _MonsterVars *mv /*$s0*/)
- // line 2215, offset 0x800814dc
+ // line 2236, offset 0x80081fe0
 	/* begin block 1 */
-		// Start line: 4423
+		// Start line: 4700
 	/* end block 1 */
-	// End Line: 4424
+	// End Line: 4701
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_GetPlanSlot(_MonsterVars *mv)
 
@@ -3032,10 +3140,10 @@ void MON_GetPlanSlot(_MonsterVars *mv)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MON_DefaultPlanMovement(struct _Instance *instance /*$s2*/, int anim /*$s4*/, long distance /*$s5*/)
- // line 2226, offset 0x80081520
+ // line 2247, offset 0x80082024
 	/* begin block 1 */
-		// Start line: 2227
-		// Start offset: 0x80081520
+		// Start line: 2248
+		// Start offset: 0x80082024
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	// 		int rc; // $s1
@@ -3044,31 +3152,33 @@ void MON_GetPlanSlot(_MonsterVars *mv)
 	// 		struct _MonsterAnim *manim; // $s6
 
 		/* begin block 1.1 */
-			// Start line: 2256
-			// Start offset: 0x80081614
+			// Start line: 2277
+			// Start offset: 0x80082118
 			// Variables:
 		// 		struct _Position pos; // stack offset -40
 		// 		int planresult; // $v1
 
 			/* begin block 1.1.1 */
-				// Start line: 2296
-				// Start offset: 0x800816F4
+				// Start line: 2317
+				// Start offset: 0x800821F8
 				// Variables:
 			// 		short turnSpeed; // $a2
 			/* end block 1.1.1 */
-			// End offset: 0x80081770
-			// End Line: 2313
+			// End offset: 0x80082274
+			// End Line: 2334
 		/* end block 1.1 */
-		// End offset: 0x80081770
-		// End Line: 2313
+		// End offset: 0x80082274
+		// End Line: 2334
 	/* end block 1 */
-	// End offset: 0x800817C0
-	// End Line: 2337
+	// End offset: 0x800822C4
+	// End Line: 2358
 
 	/* begin block 2 */
-		// Start line: 4675
+		// Start line: 4722
 	/* end block 2 */
-	// End Line: 4676
+	// End Line: 4723
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_DefaultPlanMovement(_Instance *instance,int anim,long distance)
 
@@ -3136,13 +3246,13 @@ int MON_DefaultPlanMovement(_Instance *instance,int anim,long distance)
       }
       else {
         iVar3 = 0;
-        if ((instance->flags2 & 2U) == 0) goto LAB_800816e0;
+        if ((instance->flags2 & 2U) == 0) goto LAB_800821e4;
       }
       MON_PlayAnimIfNotPlaying(instance,(MonsterAnim)CONCAT124(in_stack_ffffffd4,uVar5),anim);
       iVar3 = 0;
     }
   }
-LAB_800816e0:
+LAB_800821e4:
   if ((*puVar4 & 0x20000) != 0) {
     if (anim == 2) {
       turnSpeed = *(short *)(puVar4[0x59] + 0x1e);
@@ -3168,40 +3278,49 @@ LAB_800816e0:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_DropAllObjects(struct _Instance *instance /*$a0*/)
- // line 2367, offset 0x800817e8
+ // line 2388, offset 0x800822ec
 	/* begin block 1 */
-		// Start line: 2368
-		// Start offset: 0x800817E8
+		// Start line: 2389
+		// Start offset: 0x800822EC
 		// Variables:
 	// 		struct _Instance *child; // $a0
 
 		/* begin block 1.1 */
-			// Start line: 2373
-			// Start offset: 0x80081804
+			// Start line: 2394
+			// Start offset: 0x8008230C
 			// Variables:
 		// 		struct _Instance *next; // $s0
 		/* end block 1.1 */
-		// End offset: 0x80081804
-		// End Line: 2373
+		// End offset: 0x8008233C
+		// End Line: 2400
 	/* end block 1 */
-	// End offset: 0x80081820
-	// End Line: 2377
+	// End offset: 0x80082348
+	// End Line: 2402
 
 	/* begin block 2 */
-		// Start line: 4960
+		// Start line: 5007
 	/* end block 2 */
-	// End Line: 4961
+	// End Line: 5008
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_DropAllObjects(_Instance *instance)
 
 {
   _Instance *Inst;
+  int Data;
   _Instance *p_Var1;
   
   Inst = instance->LinkChild;
   while (Inst != (_Instance *)0x0) {
     p_Var1 = Inst->LinkSibling;
-    INSTANCE_Post(Inst,0x800008,0);
+    if (Inst->ParentLinkNode == 3) {
+      Data = 2;
+    }
+    else {
+      Data = 1;
+    }
+    INSTANCE_Post(Inst,0x800008,Data);
     Inst = p_Var1;
   }
   return;
@@ -3212,20 +3331,22 @@ void MON_DropAllObjects(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_EnableHeadMove(struct _Instance *instance /*$a0*/)
- // line 2379, offset 0x80081830
+ // line 2404, offset 0x8008235c
 	/* begin block 1 */
-		// Start line: 2380
-		// Start offset: 0x80081830
+		// Start line: 2405
+		// Start offset: 0x8008235C
 		// Variables:
 	// 		struct _MonsterAttributes *ma; // $s0
 	/* end block 1 */
-	// End offset: 0x800818C4
-	// End Line: 2399
+	// End offset: 0x800823F0
+	// End Line: 2424
 
 	/* begin block 2 */
-		// Start line: 4989
+		// Start line: 5047
 	/* end block 2 */
-	// End Line: 4990
+	// End Line: 5048
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_EnableHeadMove(_Instance *instance)
 
@@ -3254,20 +3375,22 @@ void MON_EnableHeadMove(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_DisableHeadMove(struct _Instance *instance /*$a0*/)
- // line 2401, offset 0x800818d8
+ // line 2426, offset 0x80082404
 	/* begin block 1 */
-		// Start line: 2402
-		// Start offset: 0x800818D8
+		// Start line: 2427
+		// Start offset: 0x80082404
 		// Variables:
 	// 		struct _MonsterAttributes *ma; // $s0
 	/* end block 1 */
-	// End offset: 0x80081950
-	// End Line: 2414
+	// End offset: 0x8008247C
+	// End Line: 2439
 
 	/* begin block 2 */
-		// Start line: 5033
+		// Start line: 5091
 	/* end block 2 */
-	// End Line: 5034
+	// End Line: 5092
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_DisableHeadMove(_Instance *instance)
 
@@ -3296,21 +3419,23 @@ void MON_DisableHeadMove(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_LookInDirection(struct _Instance *instance /*$a0*/, short tx /*$a1*/, short tz /*$a2*/)
- // line 2419, offset 0x80081964
+ // line 2444, offset 0x80082490
 	/* begin block 1 */
-		// Start line: 2420
-		// Start offset: 0x80081964
+		// Start line: 2445
+		// Start offset: 0x80082490
 		// Variables:
 	// 		struct _G2SVector3_Type Rot; // stack offset -32
 	// 		struct _MonsterAttributes *ma; // $s3
 	/* end block 1 */
-	// End offset: 0x80081AB8
-	// End Line: 2443
+	// End offset: 0x800825E4
+	// End Line: 2468
 
 	/* begin block 2 */
-		// Start line: 5069
+		// Start line: 5127
 	/* end block 2 */
-	// End Line: 5070
+	// End Line: 5128
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_LookInDirection(_Instance *instance,short tx,short tz)
 
@@ -3350,21 +3475,23 @@ void MON_LookInDirection(_Instance *instance,short tx,short tz)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_LookAtPos(struct _Instance *instance /*$s1*/, struct _Position *position /*$a1*/)
- // line 2450, offset 0x80081ad8
+ // line 2475, offset 0x80082604
 	/* begin block 1 */
-		// Start line: 2451
-		// Start offset: 0x80081AD8
+		// Start line: 2476
+		// Start offset: 0x80082604
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	// 		short z; // $a0
 	/* end block 1 */
-	// End offset: 0x80081B8C
-	// End Line: 2479
+	// End offset: 0x800826B8
+	// End Line: 2504
 
 	/* begin block 2 */
-		// Start line: 5138
+		// Start line: 5196
 	/* end block 2 */
-	// End Line: 5139
+	// End Line: 5197
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_LookAtPos(_Instance *instance,_Position *position)
 
@@ -3392,14 +3519,14 @@ void MON_LookAtPos(_Instance *instance,_Position *position)
   }
   else {
     sVar2 = *(short *)((int)pvVar3 + 0x14c) + 0x111;
-    if (destination <= *(short *)((int)pvVar3 + 0x14c)) goto LAB_80081b8c;
+    if (destination <= *(short *)((int)pvVar3 + 0x14c)) goto LAB_800826b8;
     *(short *)((int)pvVar3 + 0x14c) = sVar2;
     bVar1 = destination < sVar2;
   }
   if (bVar1) {
     *(short *)((int)pvVar3 + 0x14c) = destination;
   }
-LAB_80081b8c:
+LAB_800826b8:
   *(undefined2 *)((int)pvVar3 + 0x14a) = 0;
   MON_LookInDirection(instance,0,*(short *)((int)pvVar3 + 0x14c));
   return;
@@ -3410,20 +3537,22 @@ LAB_80081b8c:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_ProcessLookAt(struct _Instance *instance /*$s1*/)
- // line 2483, offset 0x80081bb4
+ // line 2508, offset 0x800826e0
 	/* begin block 1 */
-		// Start line: 2484
-		// Start offset: 0x80081BB4
+		// Start line: 2509
+		// Start offset: 0x800826E0
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	/* end block 1 */
-	// End offset: 0x80081C94
-	// End Line: 2512
+	// End offset: 0x800827C0
+	// End Line: 2537
 
 	/* begin block 2 */
-		// Start line: 5204
+		// Start line: 5262
 	/* end block 2 */
-	// End Line: 5205
+	// End Line: 5263
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_ProcessLookAt(_Instance *instance)
 
@@ -3462,29 +3591,31 @@ void MON_ProcessLookAt(_Instance *instance)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MON_TakeDamage(struct _Instance *instance /*$a0*/, int damage /*$s2*/, int type /*$s1*/)
- // line 2517, offset 0x80081ca8
+ // line 2542, offset 0x800827d4
 	/* begin block 1 */
-		// Start line: 2518
-		// Start offset: 0x80081CA8
+		// Start line: 2543
+		// Start offset: 0x800827D4
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 2525
-			// Start offset: 0x80081CEC
+			// Start line: 2550
+			// Start offset: 0x80082818
 			// Variables:
 		// 		long whatAmI; // $v1
 		/* end block 1.1 */
-		// End offset: 0x80081D34
-		// End Line: 2544
+		// End offset: 0x80082860
+		// End Line: 2569
 	/* end block 1 */
-	// End offset: 0x80081D38
-	// End Line: 2548
+	// End offset: 0x80082864
+	// End Line: 2573
 
 	/* begin block 2 */
-		// Start line: 5272
+		// Start line: 5330
 	/* end block 2 */
-	// End Line: 5273
+	// End Line: 5331
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_TakeDamage(_Instance *instance,int damage,int type)
 
@@ -3501,7 +3632,7 @@ int MON_TakeDamage(_Instance *instance,int damage,int type)
   }
   else {
     iVar2 = 0;
-    if (*(char *)(iVar1 + 0x16) != '\0') {
+    if (*(char *)(iVar1 + 0x18) != '\0') {
       uVar3 = INSTANCE_Query(instance,1);
       if ((type != 0x40000) || (iVar2 = 0, (uVar3 & 8) != 0)) {
         damage = (uint)*(ushort *)((int)pvVar4 + 0x140) - damage;
@@ -3522,21 +3653,23 @@ int MON_TakeDamage(_Instance *instance,int damage,int type)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_SetUpSaveInfo(struct _Instance *instance /*$a0*/, struct _MonsterSaveInfo *saveData /*$t0*/)
- // line 2553, offset 0x80081d50
+ // line 2578, offset 0x8008287c
 	/* begin block 1 */
-		// Start line: 2554
-		// Start offset: 0x80081D50
+		// Start line: 2579
+		// Start offset: 0x8008287C
 		// Variables:
-	// 		struct _MonsterVars *mv; // $a2
+	// 		struct _MonsterVars *mv; // $a3
 	// 		struct _MonsterAttributes *ma; // $t1
 	/* end block 1 */
-	// End offset: 0x80081E60
-	// End Line: 2575
+	// End offset: 0x800829B0
+	// End Line: 2604
 
 	/* begin block 2 */
-		// Start line: 5350
+		// Start line: 5408
 	/* end block 2 */
-	// End Line: 5351
+	// End Line: 5409
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_SetUpSaveInfo(_Instance *instance,_MonsterSaveInfo *saveData)
 
@@ -3550,8 +3683,7 @@ void MON_SetUpSaveInfo(_Instance *instance,_MonsterSaveInfo *saveData)
   
   puVar5 = (uint *)instance->extraData;
   pvVar6 = instance->data;
-  *(undefined *)((int)&saveData->age + 3) = 1;
-  saveData->mvFlags = *puVar5 & 0xffbbffff;
+  saveData->mvFlags = *puVar5 & 0xffbbfffb;
   saveData->auxFlags = puVar5[1] & 0xf7ffffff;
   uVar1 = saveData->age;
   uVar2 = (uint)*(byte *)((int)puVar5 + 0x15a) & 7;
@@ -3562,15 +3694,20 @@ void MON_SetUpSaveInfo(_Instance *instance,_MonsterSaveInfo *saveData)
   saveData->age = uVar1 & 0xffffc000 | uVar2 | uVar3 | uVar4;
   saveData->age =
        uVar1 & 0xff8fc000 | uVar2 | uVar3 | uVar4 | ((uint)*(byte *)(puVar5 + 0x55) & 7) << 0x14;
-  saveData->soulJuice = *(short *)(puVar5 + 0x51);
+  if ((instance->currentMainState == 0x17) && (*(char *)(puVar5 + 0x55) == '\0')) {
+    saveData->soulJuice = *(short *)(puVar5 + 0x35);
+  }
+  else {
+    saveData->soulJuice = *(short *)(puVar5 + 0x51);
+  }
   saveData->soulID = *(short *)(puVar5 + 0x36);
   if (puVar5[0x2f] == 0) {
     uVar2 = saveData->age;
-    uVar1 = SEXT14(*(char *)((int)pvVar6 + 0x2f));
+    uVar1 = SEXT14(*(char *)((int)pvVar6 + 0x2c));
   }
   else {
     uVar2 = saveData->age;
-    uVar1 = (int)(puVar5[0x2f] - *(int *)((int)pvVar6 + 0x44)) >> 4;
+    uVar1 = (int)(puVar5[0x2f] - *(int *)((int)pvVar6 + 0x40)) >> 4;
   }
   saveData->age = uVar2 & 0xfff03fff | (uVar1 & 0x3f) << 0xe;
   return;
@@ -3581,41 +3718,51 @@ void MON_SetUpSaveInfo(_Instance *instance,_MonsterSaveInfo *saveData)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_GetSaveInfo(struct _Instance *instance /*$s2*/, struct _MonsterSaveInfo *saveData /*$s1*/)
- // line 2580, offset 0x80081e68
+ // line 2609, offset 0x800829b8
 	/* begin block 1 */
-		// Start line: 2581
-		// Start offset: 0x80081E68
+		// Start line: 2610
+		// Start offset: 0x800829B8
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	// 		struct _MonsterAttributes *ma; // $s3
 	/* end block 1 */
-	// End offset: 0x80081FA4
-	// End Line: 2616
+	// End offset: 0x80082B5C
+	// End Line: 2661
 
 	/* begin block 2 */
-		// Start line: 5422
+		// Start line: 5488
 	/* end block 2 */
-	// End Line: 5423
+	// End Line: 5489
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_GetSaveInfo(_Instance *instance,_MonsterSaveInfo *saveData)
 
 {
+  short sVar1;
   uint index;
-  uint *puVar1;
-  void *pvVar2;
+  undefined4 local_18;
+  uint *puVar2;
+  undefined4 local_14;
+  undefined4 local_10;
+  undefined4 local_c;
+  void *pvVar3;
   
-  puVar1 = (uint *)instance->extraData;
-  pvVar2 = instance->data;
-  *puVar1 = saveData->mvFlags | *puVar1 & 0xc000;
+  puVar2 = (uint *)instance->extraData;
+  pvVar3 = instance->data;
   if ((saveData->mvFlags & 0x8000U) == 0) {
     MON_TurnOffBodySpheres(instance);
   }
-  puVar1[1] = saveData->auxFlags | puVar1[1] & 0x8000000;
-  *(byte *)((int)puVar1 + 0x15a) = (byte)saveData->age & 7;
-  *(byte *)((int)puVar1 + 0x156) = (byte)(saveData->age >> 9) & 0x1f;
-  *(byte *)(puVar1 + 0x55) = (byte)(saveData->age >> 0x14) & 7;
-  puVar1[0x36] = (int)saveData->soulID;
-  *(short *)(puVar1 + 0x51) = saveData->soulJuice;
+  else {
+    MON_TurnOnBodySpheres(instance);
+  }
+  *puVar2 = saveData->mvFlags | *puVar2 & 0xc000;
+  puVar2[1] = saveData->auxFlags | puVar2[1] & 0x8000000;
+  *(byte *)((int)puVar2 + 0x15a) = (byte)saveData->age & 7;
+  *(byte *)((int)puVar2 + 0x156) = (byte)(saveData->age >> 9) & 0x1f;
+  *(byte *)(puVar2 + 0x55) = (byte)(saveData->age >> 0x14) & 7;
+  puVar2[0x36] = (int)saveData->soulID;
+  *(short *)(puVar2 + 0x51) = saveData->soulJuice;
   switch(saveData->age >> 3 & 0x3f) {
   case 6:
   case 8:
@@ -3626,11 +3773,27 @@ void MON_GetSaveInfo(_Instance *instance,_MonsterSaveInfo *saveData)
     break;
   default:
     index = saveData->age >> 3 & 0x3f;
+    break;
+  case 0x10:
+  case 0x17:
+    if (*(char *)(puVar2 + 0x55) == '\0') {
+      sVar1 = *(short *)(puVar2 + 0x51);
+      *(undefined2 *)(puVar2 + 0x51) = 0x1000;
+      puVar2[0x35] = (int)sVar1;
+      instance->flags2 = instance->flags2 | 0x80;
+    }
+    index = 0x17;
   }
   instance->currentMainState = index;
   index = saveData->age >> 0xe & 0x3f;
-  if ((int)index < (int)*(char *)((int)pvVar2 + 0x2f)) {
-    MON_PlayAnimID(instance,index,1);
+  if ((int)index < (int)*(char *)((int)pvVar3 + 0x2c)) {
+    if (instance->currentMainState == 0x17) {
+      MON_PlayAnim(instance,(MonsterAnim)
+                            CONCAT412(local_c,CONCAT48(local_10,CONCAT44(local_14,local_18))),0x18);
+    }
+    else {
+      MON_PlayAnimID(instance,index,1);
+    }
   }
   return;
 }
@@ -3640,30 +3803,32 @@ void MON_GetSaveInfo(_Instance *instance,_MonsterSaveInfo *saveData)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_KillMonster(struct _Instance *instance /*$s0*/)
- // line 2621, offset 0x80081fc0
+ // line 2666, offset 0x80082b78
 	/* begin block 1 */
-		// Start line: 2622
-		// Start offset: 0x80081FC0
+		// Start line: 2667
+		// Start offset: 0x80082B78
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 2626
-			// Start offset: 0x80081FF4
+			// Start line: 2672
+			// Start offset: 0x80082BB0
 			// Variables:
 		// 		struct _MonsterAttributes *attr; // $v0
 		// 		struct FXSplinter *splintDef; // $v1
 		/* end block 1.1 */
-		// End offset: 0x8008202C
-		// End Line: 2632
+		// End offset: 0x80082BE8
+		// End Line: 2678
 	/* end block 1 */
-	// End offset: 0x80082094
-	// End Line: 2646
+	// End offset: 0x80082C50
+	// End Line: 2692
 
 	/* begin block 2 */
-		// Start line: 5506
+		// Start line: 5606
 	/* end block 2 */
-	// End Line: 5507
+	// End Line: 5607
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_KillMonster(_Instance *instance)
 
@@ -3671,9 +3836,9 @@ void MON_KillMonster(_Instance *instance)
   uint *puVar1;
   
   puVar1 = (uint *)instance->extraData;
+  MON_DropAllObjects(instance);
   if ((*(char *)(puVar1 + 0x55) == '\x04') || (*(char *)(puVar1 + 0x55) == '\x06')) {
-    _FX_BuildSplinters(instance,(SVECTOR *)0x0,(SVECTOR *)0x0,(SVECTOR *)0x0,
-                       *(FXSplinter **)((int)instance->data + 0x50),gFXT,
+    _FX_BuildSplinters(instance,0,0,0,*(FXSplinter **)((int)instance->data + 0x4c),gFXT,
                        (TDRFuncPtr__FX_BuildSplinters6fxSetup)0x0,
                        (TDRFuncPtr__FX_BuildSplinters7fxProcess)0x0,8);
   }
@@ -3696,31 +3861,33 @@ void MON_KillMonster(_Instance *instance)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MON_ShouldIAmbushEnemy(struct _Instance *instance /*$s3*/)
- // line 2652, offset 0x800820b8
+ // line 2698, offset 0x80082c74
 	/* begin block 1 */
-		// Start line: 2653
-		// Start offset: 0x800820B8
+		// Start line: 2699
+		// Start offset: 0x80082C74
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
-	// 		struct _MonsterIR *enemy; // $s1
+	// 		struct _MonsterIR *enemy; // $s2
 
 		/* begin block 1.1 */
-			// Start line: 2659
-			// Start offset: 0x800820FC
+			// Start line: 2705
+			// Start offset: 0x80082CC8
 			// Variables:
-		// 		struct _Instance *inst; // $s2
+		// 		struct _Instance *inst; // $s1
 		// 		struct _Position pos; // stack offset -32
 		/* end block 1.1 */
-		// End offset: 0x80082170
-		// End Line: 2675
+		// End offset: 0x80082D44
+		// End Line: 2722
 	/* end block 1 */
-	// End offset: 0x800821F0
-	// End Line: 2693
+	// End offset: 0x80082DC4
+	// End Line: 2740
 
 	/* begin block 2 */
-		// Start line: 5577
+		// Start line: 5679
 	/* end block 2 */
-	// End Line: 5578
+	// End Line: 5680
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_ShouldIAmbushEnemy(_Instance *instance)
 
@@ -3731,39 +3898,41 @@ int MON_ShouldIAmbushEnemy(_Instance *instance)
   uint uVar3;
   void *pvVar4;
   int iVar5;
-  _Instance *p_Var6;
+  int iVar6;
   _Position local_20;
   
   pvVar4 = instance->extraData;
-  iVar5 = *(int *)((int)pvVar4 + 0xc4);
-  if ((*(char *)((int)pvVar4 + 0x152) != '\0') && (*(int *)((int)pvVar4 + 0x13c) == 0x4000800)) {
-    p_Var6 = gameTrackerX.playerInstance;
-    if (iVar5 != 0) {
-      p_Var6 = *(_Instance **)(iVar5 + 4);
+  iVar6 = *(int *)((int)pvVar4 + 0xc4);
+  if (((instance->currentStreamUnitID == instance->birthStreamUnitID) &&
+      (*(char *)((int)pvVar4 + 0x152) != '\0')) && (*(int *)((int)pvVar4 + 0x13c) == 0x4000800)) {
+    iVar5 = DAT_800d20f8;
+    if (iVar6 != 0) {
+      iVar5 = *(int *)(iVar6 + 4);
     }
     streamUnit = STREAM_GetStreamUnitWithID(instance->birthStreamUnitID);
     iVar1 = PLANAPI_FindNodePositionInUnit
                       (streamUnit,&local_20,(int)*(char *)((int)pvVar4 + 0x152),4);
-    if (iVar1 != 0) {
-      lVar2 = MATH3D_LengthXYZ((int)(p_Var6->position).x - (int)local_20.x,
-                               (int)(p_Var6->position).y - (int)local_20.y,
-                               (int)(p_Var6->position).z - (int)local_20.z);
-      return (uint)(lVar2 < *(short *)((int)pvVar4 + 0x13a));
+    if ((iVar1 != 0) &&
+       (lVar2 = MATH3D_LengthXYZ((int)*(short *)(iVar5 + 0x5c) - (int)local_20.x,
+                                 (int)*(short *)(iVar5 + 0x5e) - (int)local_20.y,
+                                 (int)*(short *)(iVar5 + 0x60) - (int)local_20.z),
+       lVar2 < *(short *)((int)pvVar4 + 0x13a))) {
+      return 1;
     }
   }
-  if (iVar5 == 0) {
+  if (iVar6 == 0) {
     uVar3 = 0;
   }
   else {
-    if ((instance->currentMainState != 0x1a) || (uVar3 = 0, (*(ushort *)(iVar5 + 0x16) & 0x40) != 0)
+    if ((instance->currentMainState != 0x1a) || (uVar3 = 0, (*(ushort *)(iVar6 + 0x16) & 0x40) != 0)
        ) {
       if (*(int *)((int)pvVar4 + 0x13c) == 0x4000800) {
-        uVar3 = (uint)(*(short *)(iVar5 + 0x14) < *(short *)((int)pvVar4 + 0x13a));
+        uVar3 = (uint)(*(short *)(iVar6 + 0x14) < *(short *)((int)pvVar4 + 0x13a));
       }
       else {
         uVar3 = 0;
-        if (*(short *)(iVar5 + 0x14) < *(short *)((int)pvVar4 + 0x13a)) {
-          uVar3 = MATH3D_ConeDetect((_SVector *)(iVar5 + 0xc),(int)*(short *)((int)pvVar4 + 0x13c),
+        if (*(short *)(iVar6 + 0x14) < *(short *)((int)pvVar4 + 0x13a)) {
+          uVar3 = MATH3D_ConeDetect((_SVector *)(iVar6 + 0xc),(int)*(short *)((int)pvVar4 + 0x13c),
                                     (int)*(short *)((int)pvVar4 + 0x13e));
         }
       }
@@ -3777,53 +3946,55 @@ int MON_ShouldIAmbushEnemy(_Instance *instance)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MON_ShouldIFireAtTarget(struct _Instance *instance /*$a0*/, struct _MonsterIR *target /*$a1*/)
- // line 2698, offset 0x8008220c
+ // line 2745, offset 0x80082de0
 	/* begin block 1 */
-		// Start line: 2700
-		// Start offset: 0x8008220C
+		// Start line: 2747
+		// Start offset: 0x80082DE0
 		// Variables:
 	// 		struct _MonsterVars *mv; // $a2
 
 		/* begin block 1.1 */
-			// Start line: 2706
-			// Start offset: 0x8008223C
+			// Start line: 2753
+			// Start offset: 0x80082E10
 			// Variables:
 		// 		struct _MonsterAttributes *ma; // $v1
 		// 		struct _MonsterMissile *missileAttack; // $a0
 
 			/* begin block 1.1.1 */
-				// Start line: 2711
-				// Start offset: 0x80082274
+				// Start line: 2758
+				// Start offset: 0x80082E48
 				// Variables:
 			// 		long distance; // $a1
 
 				/* begin block 1.1.1.1 */
-					// Start line: 2715
-					// Start offset: 0x8008228C
+					// Start line: 2762
+					// Start offset: 0x80082E60
 					// Variables:
 				// 		struct _MonsterIR *known; // $v1
 				/* end block 1.1.1.1 */
-				// End offset: 0x800822F4
-				// End Line: 2732
+				// End offset: 0x80082EC8
+				// End Line: 2779
 			/* end block 1.1.1 */
-			// End offset: 0x800822F4
-			// End Line: 2733
+			// End offset: 0x80082EC8
+			// End Line: 2780
 		/* end block 1.1 */
-		// End offset: 0x800822F4
-		// End Line: 2734
+		// End offset: 0x80082EC8
+		// End Line: 2781
 	/* end block 1 */
-	// End offset: 0x800822F4
-	// End Line: 2738
+	// End offset: 0x80082EC8
+	// End Line: 2785
 
 	/* begin block 2 */
-		// Start line: 5671
+		// Start line: 5775
 	/* end block 2 */
-	// End Line: 5672
+	// End Line: 5776
 
 	/* begin block 3 */
-		// Start line: 5672
+		// Start line: 5776
 	/* end block 3 */
-	// End Line: 5673
+	// End Line: 5777
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_ShouldIFireAtTarget(_Instance *instance,_MonsterIR *target)
 
@@ -3834,8 +4005,8 @@ int MON_ShouldIFireAtTarget(_Instance *instance,_MonsterIR *target)
   
   puVar3 = (uint *)instance->extraData;
   if (((((*puVar3 & 0x20) != 0) && ((target->mirFlags & 0x20) != 0)) &&
-      (iVar2 = *(int *)((int)instance->data + 0x40) +
-               (int)*(char *)(*(int *)(puVar3[0x59] + 8) + 0x18) * 0x10,
+      (iVar2 = *(int *)((int)instance->data + 0x3c) +
+               (int)*(char *)(*(int *)(puVar3[0x59] + 8) + 0x1a) * 0x10,
       *(char *)((int)puVar3 + 0x161) < *(char *)(iVar2 + 0xc))) &&
      ((int)target->distance < (int)(uint)*(ushort *)(iVar2 + 2))) {
     piVar1 = (int *)puVar3[0x24];
@@ -3857,21 +4028,23 @@ int MON_ShouldIFireAtTarget(_Instance *instance,_MonsterIR *target)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MON_ShouldIFlee(struct _Instance *instance /*$a0*/)
- // line 2743, offset 0x800822fc
+ // line 2790, offset 0x80082ed0
 	/* begin block 1 */
-		// Start line: 2744
-		// Start offset: 0x800822FC
+		// Start line: 2791
+		// Start offset: 0x80082ED0
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	// 		struct _MonsterIR *enemy; // $v1
 	/* end block 1 */
-	// End offset: 0x800823D8
-	// End Line: 2768
+	// End offset: 0x80082FAC
+	// End Line: 2815
 
 	/* begin block 2 */
-		// Start line: 5774
+		// Start line: 5878
 	/* end block 2 */
-	// End Line: 5775
+	// End Line: 5879
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_ShouldIFlee(_Instance *instance)
 
@@ -3913,28 +4086,30 @@ int MON_ShouldIFlee(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_RelocateCoords(struct _Instance *instance /*$a0*/, struct _SVector *offset /*$a1*/)
- // line 2773, offset 0x800823e8
+ // line 2820, offset 0x80082fbc
 	/* begin block 1 */
-		// Start line: 2775
-		// Start offset: 0x800823E8
+		// Start line: 2822
+		// Start offset: 0x80082FBC
 		// Variables:
 	// 		struct _MonsterVars *mv; // $a0
 	// 		int ox; // $a2
 	// 		int oy; // $a3
 	// 		int oz; // $a1
 	/* end block 1 */
-	// End offset: 0x800823E8
-	// End Line: 2775
+	// End offset: 0x80082FBC
+	// End Line: 2822
 
 	/* begin block 2 */
-		// Start line: 5834
+		// Start line: 5938
 	/* end block 2 */
-	// End Line: 5835
+	// End Line: 5939
 
 	/* begin block 3 */
-		// Start line: 5835
+		// Start line: 5939
 	/* end block 3 */
-	// End Line: 5836
+	// End Line: 5940
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_RelocateCoords(_Instance *instance,_SVector *offset)
 
@@ -3962,26 +4137,28 @@ void MON_RelocateCoords(_Instance *instance,_SVector *offset)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MON_ValidUnit(struct _Instance *instance /*$a0*/, unsigned long unitId /*$a1*/)
- // line 2791, offset 0x80082444
+ // line 2838, offset 0x80083018
 	/* begin block 1 */
-		// Start line: 2793
-		// Start offset: 0x80082444
+		// Start line: 2840
+		// Start offset: 0x80083018
 		// Variables:
 	// 		struct _MonsterVars *mv; // $v0
 	// 		short *unit; // $a0
 	/* end block 1 */
-	// End offset: 0x80082488
-	// End Line: 2808
+	// End offset: 0x8008305C
+	// End Line: 2855
 
 	/* begin block 2 */
-		// Start line: 5876
+		// Start line: 5980
 	/* end block 2 */
-	// End Line: 5877
+	// End Line: 5981
 
 	/* begin block 3 */
-		// Start line: 5877
+		// Start line: 5981
 	/* end block 3 */
-	// End Line: 5878
+	// End Line: 5982
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_ValidUnit(_Instance *instance,ulong unitId)
 
@@ -4005,11 +4182,13 @@ int MON_ValidUnit(_Instance *instance,ulong unitId)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MON_ValidPosition(struct _Instance *instance /*$s0*/)
- // line 2813, offset 0x80082490
+ // line 2860, offset 0x80083064
 	/* begin block 1 */
-		// Start line: 5922
+		// Start line: 6026
 	/* end block 1 */
-	// End Line: 5923
+	// End Line: 6027
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_ValidPosition(_Instance *instance)
 
@@ -4033,24 +4212,30 @@ int MON_ValidPosition(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_SphereWorldPos(struct MATRIX *mat /*$s1*/, struct _HSphere *sphere /*$a1*/, struct _Position *ret /*$s0*/)
- // line 2827, offset 0x800824e8
+ // line 2874, offset 0x800830bc
 	/* begin block 1 */
-		// Start line: 5949
+		// Start line: 6053
 	/* end block 1 */
-	// End Line: 5950
+	// End Line: 6054
 
 	/* begin block 2 */
-		// Start line: 5955
+		// Start line: 6059
 	/* end block 2 */
-	// End Line: 5956
+	// End Line: 6060
 
-void MON_SphereWorldPos(MATRIX *mat,_HSphere *sphere,_Position *ret)
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
+
+void MON_SphereWorldPos(undefined mat,_HSphere *sphere,_Position *ret)
 
 {
-  ApplyMatrixSV(mat,&sphere->position);
-  ret->x = ret->x + *(short *)mat->t;
-  ret->y = ret->y + *(short *)(mat->t + 1);
-  ret->z = ret->z + *(short *)(mat->t + 2);
+  undefined3 in_register_00000011;
+  MATRIX *m;
+  
+  m = (MATRIX *)CONCAT31(in_register_00000011,mat);
+  ApplyMatrixSV(m,(SVECTOR *)&sphere->position,(SVECTOR *)ret);
+  ret->x = ret->x + *(short *)m->t;
+  ret->y = ret->y + *(short *)(m->t + 1);
+  ret->z = ret->z + *(short *)(m->t + 2);
   return;
 }
 
@@ -4059,10 +4244,10 @@ void MON_SphereWorldPos(MATRIX *mat,_HSphere *sphere,_Position *ret)
 // decompiled code
 // original method signature: 
 // struct _HPrim * /*$ra*/ MON_FindSphereForTerrain(struct _Instance *instance /*$a0*/)
- // line 2836, offset 0x80082558
+ // line 2883, offset 0x8008312c
 	/* begin block 1 */
-		// Start line: 2838
-		// Start offset: 0x80082558
+		// Start line: 2885
+		// Start offset: 0x8008312C
 		// Variables:
 	// 		struct _HModel *hmodel; // $v0
 	// 		struct _HPrim *usePrim; // $a3
@@ -4071,23 +4256,25 @@ void MON_SphereWorldPos(MATRIX *mat,_HSphere *sphere,_Position *ret)
 	// 		int maxRad; // $a2
 	// 		int i; // $a1
 	/* end block 1 */
-	// End offset: 0x800825DC
-	// End Line: 2866
+	// End offset: 0x800831B0
+	// End Line: 2913
 
 	/* begin block 2 */
-		// Start line: 5973
+		// Start line: 6077
 	/* end block 2 */
-	// End Line: 5974
+	// End Line: 6078
 
 	/* begin block 3 */
-		// Start line: 5974
+		// Start line: 6078
 	/* end block 3 */
-	// End Line: 5975
+	// End Line: 6079
 
 	/* begin block 4 */
-		// Start line: 5975
+		// Start line: 6079
 	/* end block 4 */
-	// End Line: 5976
+	// End Line: 6080
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 _HPrim * MON_FindSphereForTerrain(_Instance *instance)
 
@@ -4106,7 +4293,7 @@ _HPrim * MON_FindSphereForTerrain(_Instance *instance)
     iVar4 = p_Var2->numHPrims;
     p_Var3 = p_Var2->hPrimList;
     while (iVar4 != 0) {
-      if (((*(uint *)p_Var3 & 0xff0200) == 0x10200) &&
+      if (((undefined **)(*(uint *)p_Var3 & 0xff0200) == &PTR_00010200) &&
          (uVar1 = *(ushort *)(p_Var3->data + 0xe), uVar5 < uVar1)) {
         p_Var6 = p_Var3;
         uVar5 = uVar1;
@@ -4123,10 +4310,10 @@ _HPrim * MON_FindSphereForTerrain(_Instance *instance)
 // decompiled code
 // original method signature: 
 // struct Intro * /*$ra*/ MON_FindNearestImpalingIntro(int unitID /*$a0*/, struct _Position *position /*$s4*/)
- // line 2870, offset 0x800825e4
+ // line 2917, offset 0x800831b8
 	/* begin block 1 */
-		// Start line: 2871
-		// Start offset: 0x800825E4
+		// Start line: 2918
+		// Start offset: 0x800831B8
 		// Variables:
 	// 		struct Intro *current; // $v1
 	// 		struct Intro *res; // $s2
@@ -4135,13 +4322,15 @@ _HPrim * MON_FindSphereForTerrain(_Instance *instance)
 	// 		int dist; // $v1
 	// 		int i; // $s1
 	/* end block 1 */
-	// End offset: 0x800826F0
-	// End Line: 2914
+	// End offset: 0x800832C4
+	// End Line: 2961
 
 	/* begin block 2 */
-		// Start line: 6051
+		// Start line: 6155
 	/* end block 2 */
-	// End Line: 6052
+	// End Line: 6156
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 Intro * MON_FindNearestImpalingIntro(int unitID,_Position *position)
 
@@ -4193,10 +4382,10 @@ Intro * MON_FindNearestImpalingIntro(int unitID,_Position *position)
 // decompiled code
 // original method signature: 
 // struct Intro * /*$ra*/ MON_TestForTerrainImpale(struct _Instance *instance /*$s0*/, struct _Terrain *terrain /*$s1*/)
- // line 2918, offset 0x80082714
+ // line 2965, offset 0x800832e8
 	/* begin block 1 */
-		// Start line: 2919
-		// Start offset: 0x80082714
+		// Start line: 2966
+		// Start offset: 0x800832E8
 		// Variables:
 	// 		struct _MonsterVars *mv; // $v0
 	// 		struct Intro *current; // $s1
@@ -4206,13 +4395,15 @@ Intro * MON_FindNearestImpalingIntro(int unitID,_Position *position)
 	// 		int radius; // $s3
 	// 		struct _Position spherePos; // stack offset -32
 	/* end block 1 */
-	// End offset: 0x800827F4
-	// End Line: 2961
+	// End offset: 0x800833C8
+	// End Line: 3008
 
 	/* begin block 2 */
-		// Start line: 6165
+		// Start line: 6269
 	/* end block 2 */
-	// End Line: 6166
+	// End Line: 6270
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 Intro * MON_TestForTerrainImpale(_Instance *instance,_Terrain *terrain)
 
@@ -4229,7 +4420,7 @@ Intro * MON_TestForTerrainImpale(_Instance *instance,_Terrain *terrain)
     p_Var2 = MON_FindSphereForTerrain(instance);
     if (p_Var2 != (_HPrim *)0x0) {
       uVar1 = ((_HSphere *)p_Var2->data)->radius;
-      MON_SphereWorldPos((MATRIX *)(instance->matrix + p_Var2->segment),(_HSphere *)p_Var2->data,
+      MON_SphereWorldPos((char)instance->matrix + p_Var2->segment * ' ',(_HSphere *)p_Var2->data,
                          &local_20);
       iVar6 = terrain->numIntros;
       pIVar5 = terrain->introList;
@@ -4255,96 +4446,81 @@ Intro * MON_TestForTerrainImpale(_Instance *instance,_Terrain *terrain)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ MON_MoveInstanceToImpalePoint(struct _Instance *instance /*$s2*/)
- // line 2963, offset 0x80082810
+// void /*$ra*/ MON_MoveInstanceToImpalePoint(struct _Instance *instance /*$s0*/)
+ // line 3010, offset 0x800833e4
 	/* begin block 1 */
-		// Start line: 2964
-		// Start offset: 0x80082810
+		// Start line: 3011
+		// Start offset: 0x800833E4
 		// Variables:
-	// 		struct _MonsterVars *mv; // $s1
-	// 		struct Intro *impaler; // $s1
-	// 		struct _HPrim *prim; // $s0
-	// 		struct _Position spherePos; // stack offset -32
-	// 		struct _Position offset; // stack offset -24
+	// 		struct _MonsterVars *mv; // $v1
+	// 		struct Intro *impaler; // $t3
+	// 		struct _Position offset; // stack offset -16
 
 		/* begin block 1.1 */
-			// Start line: 2984
-			// Start offset: 0x8008285C
-			// Variables:
-		// 		short _x0; // $a2
-		// 		short _y0; // $a3
-		// 		short _z0; // $t0
-		// 		short _x1; // $v0
-		// 		short _y1; // $v1
-		// 		short _z1; // $v0
-		// 		struct _Position *_v; // $a0
-		// 		struct _Position *_v0; // $v1
-		// 		struct _Position *_v1; // $v0
-		/* end block 1.1 */
-		// End offset: 0x8008285C
-		// End Line: 2984
-
-		/* begin block 1.2 */
-			// Start line: 2984
-			// Start offset: 0x8008285C
+			// Start line: 3035
+			// Start offset: 0x80083420
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $v1
-		// 		short _z0; // $a0
-		// 		struct _Position *_v; // $a1
-		/* end block 1.2 */
-		// End offset: 0x8008285C
-		// End Line: 2984
+		// 		short _z0; // $a2
+		// 		short _y1; // $t0
+		// 		short _z1; // $t2
+		// 		struct _Position *_v; // $a3
+		// 		struct _Position *_v1; // $a1
+		/* end block 1.1 */
+		// End offset: 0x80083420
+		// End Line: 3035
 
-		/* begin block 1.3 */
-			// Start line: 2984
-			// Start offset: 0x8008285C
+		/* begin block 1.2 */
+			// Start line: 3035
+			// Start offset: 0x80083420
 			// Variables:
 		// 		short _x1; // $v1
-		// 		short _y1; // $a0
-		// 		short _z1; // $a1
+		// 		short _y1; // $a2
+		// 		short _z1; // $a3
 		// 		struct _Rotation *_v0; // $v0
 		// 		struct _Rotation *_v1; // $v0
-		/* end block 1.3 */
-		// End offset: 0x800828F8
-		// End Line: 2989
+		/* end block 1.2 */
+		// End offset: 0x80083420
+		// End Line: 3035
 	/* end block 1 */
-	// End offset: 0x800828F8
-	// End Line: 2992
+	// End offset: 0x800834B8
+	// End Line: 3045
 
 	/* begin block 2 */
-		// Start line: 6271
+		// Start line: 6375
 	/* end block 2 */
-	// End Line: 6272
+	// End Line: 6376
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_MoveInstanceToImpalePoint(_Instance *instance)
 
 {
   short sVar1;
   short sVar2;
-  _HPrim *p_Var3;
-  Intro *pIVar4;
-  void *pvVar5;
-  _Position local_20 [2];
+  short sVar3;
+  short sVar4;
+  Intro *pIVar5;
   
-  pvVar5 = instance->extraData;
-  p_Var3 = MON_FindSphereForTerrain(instance);
-  if (p_Var3 != (_HPrim *)0x0) {
-    pIVar4 = INSTANCE_FindIntro(instance->currentStreamUnitID,*(long *)((int)pvVar5 + 0x1a0));
-    if (pIVar4 != (Intro *)0x0) {
-      MON_SphereWorldPos((MATRIX *)(instance->matrix + p_Var3->segment),(_HSphere *)p_Var3->data,
-                         local_20);
-      sVar1 = (pIVar4->position).y;
-      sVar2 = (pIVar4->position).z;
-      (instance->position).x = (instance->position).x + ((pIVar4->position).x - local_20[0].x);
-      (instance->position).y = (instance->position).y + (sVar1 - local_20[0].y);
-      (instance->position).z = (instance->position).z + (sVar2 - local_20[0].z);
-      sVar1 = (pIVar4->rotation).y;
-      sVar2 = (pIVar4->rotation).z;
-      (instance->rotation).x = (pIVar4->rotation).x;
-      (instance->rotation).y = sVar1;
-      (instance->rotation).z = sVar2;
-    }
+  if ((instance->matrix != (MATRIX *)0x0) &&
+     (pIVar5 = INSTANCE_FindIntro(instance->currentStreamUnitID,
+                                  *(long *)((int)instance->extraData + 0x1a0)),
+     pIVar5 != (Intro *)0x0)) {
+    sVar1 = (pIVar5->position).y;
+    sVar2 = *(short *)(instance->matrix[3].t + 1);
+    sVar3 = (pIVar5->position).z;
+    sVar4 = *(short *)(instance->matrix[3].t + 2);
+    (instance->position).x =
+         (instance->position).x + ((pIVar5->position).x - *(short *)instance->matrix[3].t);
+    (instance->position).y = (instance->position).y + (sVar1 - sVar2);
+    (instance->position).z = (instance->position).z + (sVar3 - sVar4);
+    sVar1 = (pIVar5->rotation).y;
+    sVar2 = (pIVar5->rotation).z;
+    (instance->rotation).x = (pIVar5->rotation).x;
+    (instance->rotation).y = sVar1;
+    (instance->rotation).z = sVar2;
+    COLLIDE_UpdateAllTransforms(instance,0xf0);
   }
   return;
 }
@@ -4354,10 +4530,10 @@ void MON_MoveInstanceToImpalePoint(_Instance *instance)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MON_ReachableIntro(struct _Instance *instance /*stack 0*/, struct _Position *pos /*$t0*/, struct _Position *introPos /*$fp*/, struct _Rotation *introRot /*$s7*/, int checkOrientation /*stack 16*/)
- // line 3006, offset 0x80082910
+ // line 3059, offset 0x800834c8
 	/* begin block 1 */
-		// Start line: 3007
-		// Start offset: 0x80082910
+		// Start line: 3060
+		// Start offset: 0x800834C8
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s2
 	// 		int angle; // $s5
@@ -4374,15 +4550,16 @@ void MON_MoveInstanceToImpalePoint(_Instance *instance)
 	// 		int maxForwardVel; // $s1
 	// 		int res; // $s3
 	/* end block 1 */
-	// End offset: 0x80082CA8
-	// End Line: 3123
+	// End offset: 0x80083860
+	// End Line: 3176
 
 	/* begin block 2 */
-		// Start line: 6360
+		// Start line: 6489
 	/* end block 2 */
-	// End Line: 6361
+	// End Line: 6490
 
-/* WARNING: Removing unreachable block (ram,0x80082aac) */
+/* WARNING: Removing unreachable block (ram,0x80083664) */
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_ReachableIntro(_Instance *instance,_Position *pos,_Position *introPos,_Rotation *introRot,
                       int checkOrientation)
@@ -4405,18 +4582,18 @@ int MON_ReachableIntro(_Instance *instance,_Position *pos,_Position *introPos,_R
   iVar2 = (int)pos->y - (int)introPos->y;
   iVar3 = (int)pos->z - (int)introPos->z;
   pvVar8 = instance->extraData;
-  square_00 = (int)*(short *)(*(int *)((int)pvVar8 + 0x164) + 0x42);
+  square_00 = (int)*(short *)(*(int *)((int)pvVar8 + 0x164) + 0x44);
   angle = 0;
   sVar9 = 0;
   lVar7 = 0;
   square = square * square + iVar2 * iVar2 + iVar3 * iVar3;
   bVar1 = false;
   if ((square < square_00 * square_00) &&
-     (iVar2 = (int)*(short *)(*(int *)((int)pvVar8 + 0x164) + 0x40), iVar2 * iVar2 < square)) {
+     (iVar2 = (int)*(short *)(*(int *)((int)pvVar8 + 0x164) + 0x42), iVar2 * iVar2 < square)) {
     angle = MATH3D_AngleFromPosToPos(pos,introPos);
     if (checkOrientation != 0) {
       uVar6 = ((int)(instance->rotation).z + 0x800U & 0xfff) - (int)angle & 0xfff;
-      iVar2 = (int)*(short *)(*(int *)((int)pvVar8 + 0x164) + 0x44);
+      iVar2 = (int)*(short *)(*(int *)((int)pvVar8 + 0x164) + 0x46);
       if (uVar6 < 0x801) {
         if ((int)uVar6 < iVar2) {
           checkOrientation = 0;
@@ -4431,7 +4608,7 @@ int MON_ReachableIntro(_Instance *instance,_Position *pos,_Position *introPos,_R
           checkOrientation = 0;
         }
       }
-      if (checkOrientation != 0) goto LAB_80082bac;
+      if (checkOrientation != 0) goto LAB_80083764;
     }
     if (introRot != (_Rotation *)0x0) {
       uVar6 = (int)introRot->x + 0x400U & 0xfff;
@@ -4446,28 +4623,28 @@ int MON_ReachableIntro(_Instance *instance,_Position *pos,_Position *introPos,_R
         if ((0x800 < uVar6) && (uVar6 = uVar6 - 0x1000, (int)uVar6 < 0)) {
           uVar6 = -uVar6;
         }
-        if ((int)uVar6 < (int)*(short *)(*(int *)((int)pvVar8 + 0x164) + 0x44)) {
+        if ((int)uVar6 < (int)*(short *)(*(int *)((int)pvVar8 + 0x164) + 0x46)) {
           uVar6 = (uint)(ushort)introRot->x & 0xfff;
           if (0x800 < uVar6) {
             uVar6 = uVar6 - 0x1000;
           }
           bVar1 = true;
           if ((int)uVar6 < 1) {
-            iVar2 = (int)*(short *)(*(int *)((int)pvVar8 + 0x164) + 0x48);
-            lVar7 = iVar2 - (int)((iVar2 - *(short *)(*(int *)((int)pvVar8 + 0x164) + 0x46)) *
+            iVar2 = (int)*(short *)(*(int *)((int)pvVar8 + 0x164) + 0x4a);
+            lVar7 = iVar2 - (int)((iVar2 - *(short *)(*(int *)((int)pvVar8 + 0x164) + 0x48)) *
                                  -uVar6) / 0x380;
           }
           else {
-            lVar7 = (long)*(short *)(*(int *)((int)pvVar8 + 0x164) + 0x48);
+            lVar7 = (long)*(short *)(*(int *)((int)pvVar8 + 0x164) + 0x4a);
           }
         }
-        goto LAB_80082bac;
+        goto LAB_80083764;
       }
     }
     bVar1 = true;
-    lVar7 = (long)*(short *)(*(int *)((int)pvVar8 + 0x164) + 0x46);
+    lVar7 = (long)*(short *)(*(int *)((int)pvVar8 + 0x164) + 0x48);
   }
-LAB_80082bac:
+LAB_80083764:
   if (bVar1) {
     iVar2 = (int)introPos->z - (int)pos->z;
     iVar3 = instance->zAccl;
@@ -4486,7 +4663,7 @@ LAB_80082bac:
     if (iVar2 < 0) {
       square = -iVar2;
     }
-    if (square < *(short *)(*(int *)((int)pvVar8 + 0x164) + 0x4a)) {
+    if (square < *(short *)(*(int *)((int)pvVar8 + 0x164) + 0x4c)) {
       (instance->rotation).z = sVar9;
       PhysicsSetVelFromZRot(instance,angle,lVar7 + 1);
       instance->zVel = iVar2;
@@ -4501,10 +4678,10 @@ LAB_80082bac:
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MON_SetVelocityTowardsImpalingObject(struct _Instance *instance /*$s3*/, int checkOrientation /*$s4*/)
- // line 3126, offset 0x80082cd8
+ // line 3179, offset 0x80083890
 	/* begin block 1 */
-		// Start line: 3127
-		// Start offset: 0x80082CD8
+		// Start line: 3180
+		// Start offset: 0x80083890
 		// Variables:
 	// 		struct Level *level; // $s0
 	// 		struct Intro *currentI; // $s1
@@ -4513,37 +4690,39 @@ LAB_80082bac:
 	// 		struct _Position spherePos; // stack offset -32
 
 		/* begin block 1.1 */
-			// Start line: 3139
-			// Start offset: 0x80082D18
+			// Start line: 3194
+			// Start offset: 0x800838E8
 			// Variables:
 		// 		struct _Instance *target; // $s0
 
 			/* begin block 1.1.1 */
-				// Start line: 3164
-				// Start offset: 0x80082DB8
+				// Start line: 3219
+				// Start offset: 0x80083988
 				// Variables:
 			// 		struct PhysObProperties *prop; // $v1
 
 				/* begin block 1.1.1.1 */
-					// Start line: 3167
-					// Start offset: 0x80082DD0
+					// Start line: 3222
+					// Start offset: 0x800839A0
 				/* end block 1.1.1.1 */
-				// End offset: 0x80082E00
-				// End Line: 3172
+				// End offset: 0x800839D0
+				// End Line: 3227
 			/* end block 1.1.1 */
-			// End offset: 0x80082E00
-			// End Line: 3173
+			// End offset: 0x800839D0
+			// End Line: 3228
 		/* end block 1.1 */
-		// End offset: 0x80082E10
-		// End Line: 3175
+		// End offset: 0x800839E0
+		// End Line: 3230
 	/* end block 1 */
-	// End offset: 0x80082E14
-	// End Line: 3178
+	// End offset: 0x800839E4
+	// End Line: 3234
 
 	/* begin block 2 */
-		// Start line: 6656
+		// Start line: 6785
 	/* end block 2 */
-	// End Line: 6657
+	// End Line: 6786
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_SetVelocityTowardsImpalingObject(_Instance *instance,int checkOrientation)
 
@@ -4559,33 +4738,35 @@ int MON_SetVelocityTowardsImpalingObject(_Instance *instance,int checkOrientatio
   _Position _Stack32;
   
   pLVar1 = STREAM_GetLevelWithID(instance->currentStreamUnitID);
-  p_Var2 = MON_FindSphereForTerrain(instance);
-  if (p_Var2 != (_HPrim *)0x0) {
-    MON_SphereWorldPos((MATRIX *)(instance->matrix + p_Var2->segment),(_HSphere *)p_Var2->data,
-                       &_Stack32);
-    iVar6 = pLVar1->terrain->numIntros;
-    pIVar5 = pLVar1->terrain->introList;
-    introRot = &pIVar5->rotation;
-    while (iVar6 != 0) {
-      if (((*(uint *)&introRot[2].z & 0x8000) != 0) &&
-         (iVar3 = MON_ReachableIntro(instance,&_Stack32,&pIVar5->position,introRot,checkOrientation)
-         , iVar3 != 0)) {
-        return 1;
+  if ((*(uint *)((int)instance->data + 0x10) & 8) == 0) {
+    p_Var2 = MON_FindSphereForTerrain(instance);
+    if (p_Var2 != (_HPrim *)0x0) {
+      MON_SphereWorldPos((char)instance->matrix + p_Var2->segment * ' ',(_HSphere *)p_Var2->data,
+                         &_Stack32);
+      iVar6 = pLVar1->terrain->numIntros;
+      pIVar5 = pLVar1->terrain->introList;
+      introRot = &pIVar5->rotation;
+      while (iVar6 != 0) {
+        if (((*(uint *)&introRot[2].z & 0x8000) != 0) &&
+           (iVar3 = MON_ReachableIntro(instance,&_Stack32,&pIVar5->position,introRot,
+                                       checkOrientation), iVar3 != 0)) {
+          return 1;
+        }
+        iVar6 = iVar6 + -1;
+        introRot = (_Rotation *)&introRot[9].z;
+        pIVar5 = pIVar5 + 1;
       }
-      iVar6 = iVar6 + -1;
-      introRot = (_Rotation *)&introRot[9].z;
-      pIVar5 = pIVar5 + 1;
-    }
-    Inst = (gameTrackerX.instanceList)->first;
-    while (Inst != (_Instance *)0x0) {
-      uVar4 = INSTANCE_Query(Inst,1);
-      if (((((uVar4 & 0x20) != 0) && (*(short *)((int)Inst->data + 2) == 3)) &&
-          ((*(ushort *)((int)Inst->data + 8) & 0x58) != 0)) &&
-         (iVar6 = MON_ReachableIntro(instance,&_Stack32,&Inst->position,(_Rotation *)0x0,
-                                     checkOrientation), iVar6 != 0)) {
-        return 1;
+      Inst = *(_Instance **)(DAT_800d2100 + 4);
+      while (Inst != (_Instance *)0x0) {
+        uVar4 = INSTANCE_Query(Inst,1);
+        if (((((uVar4 & 0x20) != 0) && (*(short *)((int)Inst->data + 2) == 3)) &&
+            ((*(ushort *)((int)Inst->data + 8) & 0x58) != 0)) &&
+           (iVar6 = MON_ReachableIntro(instance,&_Stack32,&Inst->position,(_Rotation *)0x0,
+                                       checkOrientation), iVar6 != 0)) {
+          return 1;
+        }
+        Inst = Inst->next;
       }
-      Inst = Inst->next;
     }
   }
   return 0;
@@ -4596,32 +4777,34 @@ int MON_SetVelocityTowardsImpalingObject(_Instance *instance,int checkOrientatio
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_TurnOffSphereCollisions(struct _Instance *instance /*$a0*/)
- // line 3187, offset 0x80082e34
+ // line 3243, offset 0x80083a04
 	/* begin block 1 */
-		// Start line: 3189
-		// Start offset: 0x80082E34
+		// Start line: 3245
+		// Start offset: 0x80083A04
 		// Variables:
 	// 		int i; // $a0
 	// 		struct _HPrim *hprim; // $v1
 	// 		struct _HModel *hmodel; // $v1
 	/* end block 1 */
-	// End offset: 0x80082E88
-	// End Line: 3205
+	// End offset: 0x80083A58
+	// End Line: 3261
 
 	/* begin block 2 */
-		// Start line: 6797
+		// Start line: 6932
 	/* end block 2 */
-	// End Line: 6798
+	// End Line: 6933
 
 	/* begin block 3 */
-		// Start line: 6798
+		// Start line: 6933
 	/* end block 3 */
-	// End Line: 6799
+	// End Line: 6934
 
 	/* begin block 4 */
-		// Start line: 6800
+		// Start line: 6935
 	/* end block 4 */
-	// End Line: 6801
+	// End Line: 6936
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_TurnOffSphereCollisions(_Instance *instance)
 
@@ -4648,32 +4831,34 @@ void MON_TurnOffSphereCollisions(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_TurnOnSphereCollisions(struct _Instance *instance /*$a0*/)
- // line 3207, offset 0x80082e90
+ // line 3263, offset 0x80083a60
 	/* begin block 1 */
-		// Start line: 3209
-		// Start offset: 0x80082E90
+		// Start line: 3265
+		// Start offset: 0x80083A60
 		// Variables:
 	// 		int i; // $a0
 	// 		struct _HPrim *hprim; // $v1
 	// 		struct _HModel *hmodel; // $v1
 	/* end block 1 */
-	// End offset: 0x80082EE4
-	// End Line: 3225
+	// End offset: 0x80083AB4
+	// End Line: 3281
 
 	/* begin block 2 */
-		// Start line: 6839
+		// Start line: 6974
 	/* end block 2 */
-	// End Line: 6840
+	// End Line: 6975
 
 	/* begin block 3 */
-		// Start line: 6840
+		// Start line: 6975
 	/* end block 3 */
-	// End Line: 6841
+	// End Line: 6976
 
 	/* begin block 4 */
-		// Start line: 6842
+		// Start line: 6977
 	/* end block 4 */
-	// End Line: 6843
+	// End Line: 6978
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_TurnOnSphereCollisions(_Instance *instance)
 
@@ -4700,10 +4885,10 @@ void MON_TurnOnSphereCollisions(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_ProcessSpecialFade(struct _Instance *instance /*$s0*/)
- // line 3227, offset 0x80082eec
+ // line 3283, offset 0x80083abc
 	/* begin block 1 */
-		// Start line: 3228
-		// Start offset: 0x80082EEC
+		// Start line: 3284
+		// Start offset: 0x80083ABC
 		// Variables:
 	// 		struct _MonsterVars *mv; // $a0
 	// 		int currentFadeValue; // $a1
@@ -4711,13 +4896,16 @@ void MON_TurnOnSphereCollisions(_Instance *instance)
 	// 		int fadeRate; // $a3
 	// 		struct _Instance *child; // $v1
 	/* end block 1 */
-	// End offset: 0x80083100
-	// End Line: 3318
+	// End offset: 0x80083CE8
+	// End Line: 3378
 
 	/* begin block 2 */
-		// Start line: 6881
+		// Start line: 7016
 	/* end block 2 */
-	// End Line: 6882
+	// End Line: 7017
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_ProcessSpecialFade(_Instance *instance)
 
@@ -4734,7 +4922,7 @@ void MON_ProcessSpecialFade(_Instance *instance)
   pvVar5 = instance->extraData;
   if ((instance->object->oflags & 0x80000U) == 0) {
     if ((*(uint *)((int)pvVar5 + 4) & 0x8000000) != 0) {
-      iVar3 = (int)*(short *)((int)pvVar5 + 0x1a6) * gameTrackerX.idleTime;
+      iVar3 = (int)*(short *)((int)pvVar5 + 0x1a6) * DAT_800d2314;
       sVar2 = *(short *)((int)pvVar5 + 0x1a4);
       if (iVar3 < 0) {
         iVar3 = iVar3 + 0xfff;
@@ -4755,48 +4943,49 @@ void MON_ProcessSpecialFade(_Instance *instance)
     }
   }
   else {
-    if ((gameTrackerX.gameData.asmData._8_4_ == 1000) ||
-       ((gameTrackerX.gameData.asmData.MorphType == 1 &&
-        (gameTrackerX.gameData.asmData.MorphTime != 1000)))) {
-      iVar3 = (int)*(short *)((int)pvVar5 + 0x1a4);
-      iVar8 = 0x1000 - iVar3;
-    }
-    else {
-      iVar8 = (int)*(short *)((int)pvVar5 + 0x1a4);
-      iVar3 = 0x1000 - iVar8;
-    }
-    iVar6 = (int)gameTrackerX.gameData.asmData.MorphTime;
-    if (iVar6 < 0x14d) {
-      iVar6 = (0x1000 - iVar8) * iVar6;
-      sVar2 = (short)iVar8 +
-              ((short)((ulonglong)((longlong)iVar6 * 0xc4ce07b1) >> 0x28) - (short)(iVar6 >> 0x1f));
-    }
-    else {
-      if (iVar6 < 0x29b) {
-        sVar2 = 0x1000;
+    if ((instance->currentMainState != 0x17) && (instance->currentMainState != 0x10)) {
+      if ((_DAT_800d20d4 == 1000) || ((DAT_800d20d6 == 1 && (DAT_800d20d4 != 1000)))) {
+        iVar3 = (int)*(short *)((int)pvVar5 + 0x1a4);
+        iVar8 = 0x1000 - iVar3;
       }
       else {
-        iVar3 = (iVar3 + -0x1000) * (iVar6 + -0x29a);
-        sVar2 = ((short)((ulonglong)((longlong)iVar3 * 0xc4ce07b1) >> 0x28) - (short)(iVar3 >> 0x1f)
-                ) + 0x1000;
+        iVar8 = (int)*(short *)((int)pvVar5 + 0x1a4);
+        iVar3 = 0x1000 - iVar8;
       }
-    }
-    instance->fadeValue = sVar2;
-    if (instance->fadeValue < 0) {
-      instance->fadeValue = 0;
-    }
-    else {
-      if (0x1000 < instance->fadeValue) {
-        instance->fadeValue = 0x1000;
+      iVar6 = (int)DAT_800d20d4;
+      if (iVar6 < 0x14d) {
+        iVar6 = (0x1000 - iVar8) * iVar6;
+        sVar2 = (short)iVar8 +
+                ((short)((ulonglong)((longlong)iVar6 * 0xc4ce07b1) >> 0x28) - (short)(iVar6 >> 0x1f)
+                );
       }
-    }
-    if (instance->fadeValue == 0x1000) {
-      MON_TurnOffSphereCollisions(instance);
-      instance->flags = instance->flags | 0x800;
-    }
-    else {
-      MON_TurnOnSphereCollisions(instance);
-      instance->flags = instance->flags & 0xfffff7ff;
+      else {
+        if (iVar6 < 0x29b) {
+          sVar2 = 0x1000;
+        }
+        else {
+          iVar3 = (iVar3 + -0x1000) * (iVar6 + -0x29a);
+          sVar2 = ((short)((ulonglong)((longlong)iVar3 * 0xc4ce07b1) >> 0x28) -
+                  (short)(iVar3 >> 0x1f)) + 0x1000;
+        }
+      }
+      instance->fadeValue = sVar2;
+      if (instance->fadeValue < 0) {
+        instance->fadeValue = 0;
+      }
+      else {
+        if (0x1000 < instance->fadeValue) {
+          instance->fadeValue = 0x1000;
+        }
+      }
+      if (instance->fadeValue == 0x1000) {
+        MON_TurnOffSphereCollisions(instance);
+        instance->flags = instance->flags | 0x800;
+      }
+      else {
+        MON_TurnOnSphereCollisions(instance);
+        instance->flags = instance->flags & 0xfffff7ff;
+      }
     }
   }
   p_Var4 = instance->LinkChild;
@@ -4812,26 +5001,28 @@ void MON_ProcessSpecialFade(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_StartSpecialFade(struct _Instance *instance /*$a0*/, int fadeLevel /*$a1*/, int fadeTime /*$a2*/)
- // line 3320, offset 0x80083110
+ // line 3380, offset 0x80083cf8
 	/* begin block 1 */
-		// Start line: 3322
-		// Start offset: 0x80083110
+		// Start line: 3382
+		// Start offset: 0x80083CF8
 		// Variables:
 	// 		struct _MonsterVars *mv; // $a3
 	// 		int diff; // $a1
 	/* end block 1 */
-	// End offset: 0x80083170
-	// End Line: 3335
+	// End offset: 0x80083D58
+	// End Line: 3395
 
 	/* begin block 2 */
-		// Start line: 7076
+		// Start line: 7219
 	/* end block 2 */
-	// End Line: 7077
+	// End Line: 7220
 
 	/* begin block 3 */
-		// Start line: 7077
+		// Start line: 7220
 	/* end block 3 */
-	// End Line: 7078
+	// End Line: 7221
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_StartSpecialFade(_Instance *instance,int fadeLevel,int fadeTime)
 
@@ -4863,23 +5054,25 @@ void MON_StartSpecialFade(_Instance *instance,int fadeLevel,int fadeTime)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_UnlinkFromRaziel(struct _Instance *instance /*$s0*/)
- // line 3337, offset 0x80083178
+ // line 3397, offset 0x80083d60
 	/* begin block 1 */
-		// Start line: 3338
-		// Start offset: 0x80083178
+		// Start line: 3398
+		// Start offset: 0x80083D60
 		// Variables:
 	// 		struct _MonsterVars *mv; // $v0
 	// 		struct evPositionData *data; // $v1
 	// 		struct _Instance *enemy; // $s1
 	// 		struct _MonsterAttributes *ma; // $s2
 	/* end block 1 */
-	// End offset: 0x800831F8
-	// End Line: 3357
+	// End offset: 0x80083DE0
+	// End Line: 3417
 
 	/* begin block 2 */
-		// Start line: 7111
+		// Start line: 7254
 	/* end block 2 */
-	// End Line: 7112
+	// End Line: 7255
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_UnlinkFromRaziel(_Instance *instance)
 
@@ -4909,38 +5102,83 @@ void MON_UnlinkFromRaziel(_Instance *instance)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ MON_BirthMana(struct _Instance *instance /*$s0*/)
- // line 3362, offset 0x80083230
+// void /*$ra*/ MON_BurnInAir(struct _Instance *instance /*$s1*/, int currentState /*$s2*/)
+ // line 3424, offset 0x80083e18
 	/* begin block 1 */
-		// Start line: 3363
-		// Start offset: 0x80083230
+		// Start line: 3425
+		// Start offset: 0x80083E18
+		// Variables:
+	// 		struct _MonsterVars *mv; // $s0
+	/* end block 1 */
+	// End offset: 0x80083E98
+	// End Line: 3435
+
+	/* begin block 2 */
+		// Start line: 7309
+	/* end block 2 */
+	// End Line: 7310
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
+
+void MON_BurnInAir(_Instance *instance,int currentState)
+
+{
+  ulong uVar1;
+  int Data;
+  uint *puVar2;
+  
+  puVar2 = (uint *)instance->extraData;
+  if ((*puVar2 & 0x400000) == 0) {
+    *puVar2 = *puVar2 | 0x400000;
+    uVar1 = MON_GetTime(instance);
+    *(undefined **)(puVar2 + 0x46) = &DAT_00002710 + uVar1;
+    MON_MonsterGlow(instance,(long)&DAT_00004960,-1,0,0);
+    Data = SetFXHitData((_Instance *)0x0,0,0,0x20);
+    INSTANCE_Post(instance,0x400000,Data);
+  }
+  instance->currentMainState = currentState;
+  *puVar2 = *puVar2 & 0xfffffffe;
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ MON_BirthMana(struct _Instance *instance /*$s0*/)
+ // line 3440, offset 0x80083ec4
+	/* begin block 1 */
+		// Start line: 3441
+		// Start offset: 0x80083EC4
 
 		/* begin block 1.1 */
-			// Start line: 3366
-			// Start offset: 0x80083250
+			// Start line: 3444
+			// Start offset: 0x80083EE4
 			// Variables:
 		// 		struct _MonsterVars *mv; // $v0
 
 			/* begin block 1.1.1 */
-				// Start line: 3370
-				// Start offset: 0x8008326C
+				// Start line: 3448
+				// Start offset: 0x80083F00
 				// Variables:
 			// 		int type; // $a0
 			// 		struct MATRIX *mat; // $a3
 			/* end block 1.1.1 */
-			// End offset: 0x800832D8
-			// End Line: 3373
+			// End offset: 0x80083F6C
+			// End Line: 3451
 		/* end block 1.1 */
-		// End offset: 0x800832D8
-		// End Line: 3374
+		// End offset: 0x80083F6C
+		// End Line: 3452
 	/* end block 1 */
-	// End offset: 0x800832D8
-	// End Line: 3375
+	// End offset: 0x80083F6C
+	// End Line: 3453
 
 	/* begin block 2 */
-		// Start line: 7162
+		// Start line: 7343
 	/* end block 2 */
-	// End Line: 7163
+	// End Line: 7344
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_BirthMana(_Instance *instance)
 
@@ -4964,20 +5202,22 @@ void MON_BirthMana(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_SoulSucked(struct _Instance *instance /*$s1*/)
- // line 3377, offset 0x800832e8
+ // line 3455, offset 0x80083f7c
 	/* begin block 1 */
-		// Start line: 3378
-		// Start offset: 0x800832E8
+		// Start line: 3456
+		// Start offset: 0x80083F7C
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	/* end block 1 */
-	// End offset: 0x80083354
-	// End Line: 3389
+	// End offset: 0x80083FE0
+	// End Line: 3467
 
 	/* begin block 2 */
-		// Start line: 7195
+		// Start line: 7376
 	/* end block 2 */
-	// End Line: 7196
+	// End Line: 7377
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_SoulSucked(_Instance *instance)
 
@@ -4992,7 +5232,6 @@ void MON_SoulSucked(_Instance *instance)
       puVar2[0x43] = uVar1;
     }
     puVar2[0x36] = 0;
-    MON_DropAllObjects(instance);
     MON_BirthMana(instance);
   }
   return;
@@ -5003,10 +5242,10 @@ void MON_SoulSucked(_Instance *instance)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ MON_SetUpKnockBack(struct _Instance *instance /*$s2*/, struct _Instance *enemy /*$s1*/, struct evMonsterHitData *data /*$a2*/)
- // line 3394, offset 0x80083368
+ // line 3472, offset 0x80083ff4
 	/* begin block 1 */
-		// Start line: 3395
-		// Start offset: 0x80083368
+		// Start line: 3473
+		// Start offset: 0x80083FF4
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s5
 	// 		long d; // $s0
@@ -5015,13 +5254,15 @@ void MON_SoulSucked(_Instance *instance)
 	// 		long v; // $s0
 	// 		int front; // $s0
 	/* end block 1 */
-	// End offset: 0x8008342C
-	// End Line: 3424
+	// End offset: 0x800840B8
+	// End Line: 3502
 
 	/* begin block 2 */
-		// Start line: 7229
+		// Start line: 7410
 	/* end block 2 */
-	// End Line: 7230
+	// End Line: 7411
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 int MON_SetUpKnockBack(_Instance *instance,_Instance *enemy,evMonsterHitData *data)
 
@@ -5058,10 +5299,10 @@ int MON_SetUpKnockBack(_Instance *instance,_Instance *enemy,evMonsterHitData *da
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MON_DoDrainEffects(struct _Instance *instance /*$s1*/, struct _Instance *ei /*$s0*/)
- // line 3429, offset 0x8008346c
+ // line 3507, offset 0x800840f8
 	/* begin block 1 */
-		// Start line: 3430
-		// Start offset: 0x8008346C
+		// Start line: 3508
+		// Start offset: 0x800840F8
 		// Variables:
 	// 		struct _MonsterAttributes *ma; // $s3
 	// 		struct _MonsterVars *mv; // $s2
@@ -5071,13 +5312,15 @@ int MON_SetUpKnockBack(_Instance *instance,_Instance *enemy,evMonsterHitData *da
 	// 		struct _SVector vel; // stack offset -40
 	// 		struct _SVector accel; // stack offset -32
 	/* end block 1 */
-	// End offset: 0x800836DC
-	// End Line: 3475
+	// End offset: 0x80084368
+	// End Line: 3553
 
 	/* begin block 2 */
-		// Start line: 7300
+		// Start line: 7481
 	/* end block 2 */
-	// End Line: 7301
+	// End Line: 7482
+
+/* File: C:\kain2\game\MONSTER\MONLIB.C */
 
 void MON_DoDrainEffects(_Instance *instance,_Instance *ei)
 
@@ -5093,8 +5336,8 @@ void MON_DoDrainEffects(_Instance *instance,_Instance *ei)
   
   pvVar4 = instance->data;
   pvVar3 = instance->extraData;
-  memset(&_Stack32,0,8);
-  if (ei == gameTrackerX.playerInstance) {
+  memset();
+  if (ei == DAT_800d20f8) {
     iVar1 = rand();
     pMVar2 = ei->matrix;
     iVar1 = (iVar1 % (ei->object->modelList[ei->currentModel]->numSegments + -0x10)) * 0x20 + 0x1c0;
@@ -5119,16 +5362,15 @@ void MON_DoDrainEffects(_Instance *instance,_Instance *ei)
   local_30.y = *(short *)(pMVar2->t + 1);
   local_30.z = *(short *)(pMVar2->t + 2);
   FX_Dot(&local_38,&local_28,&_Stack32,0,0xff6060,0x18,0x14,0);
-  if (ei == gameTrackerX.playerInstance) {
+  if (ei == DAT_800d20f8) {
     pMVar2 = ei->matrix;
     local_38.x = *(short *)pMVar2[0xe].t;
     local_38.y = *(short *)(pMVar2[0xe].t + 1);
     local_38.z = *(short *)(pMVar2[0xe].t + 2);
     *(uint *)((int)pvVar3 + 0x118) =
-         *(int *)((int)pvVar3 + 0x118) + (gameTrackerX.idleTime * 0x50 >> 0xc) & 0xfff;
-    FX_Lightning((MATRIX *)theCamera.core.wcTransform,(ulong **)gameTrackerX.defVVRemoveDist,
-                 (MATRIX *)0x0,*(short *)((int)pvVar3 + 0x118),&local_30,&local_38,0,0x60,0x18,0x50,
-                 1,0xd06060,0xff6400);
+         *(int *)((int)pvVar3 + 0x118) + ((uint)(DAT_800d2314 * 0x50) >> 0xc) & 0xfff;
+    FX_Lightning((char)DAT_800d0ffc,DAT_800d22a4,0,*(short *)((int)pvVar3 + 0x118),&local_30,
+                 &local_38,0,0x60,0x18,0x50,1,0xd06060,0xff6400);
   }
   return;
 }

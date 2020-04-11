@@ -5,41 +5,43 @@
 // decompiled code
 // original method signature: 
 // unsigned long /*$ra*/ SLUAGH_Query(struct _Instance *instance /*$a0*/, unsigned long query /*$a1*/)
- // line 47, offset 0x8008b780
+ // line 48, offset 0x8008cee0
 	/* begin block 1 */
-		// Start line: 48
-		// Start offset: 0x8008B780
+		// Start line: 49
+		// Start offset: 0x8008CEE0
 		// Variables:
 	// 		struct _MonsterVars *mv; // $v1
 	// 		struct _MonsterAttributes *ma; // $a2
 	// 		unsigned long ret; // $v0
 	/* end block 1 */
-	// End offset: 0x8008B7FC
-	// End Line: 78
+	// End offset: 0x8008CF64
+	// End Line: 79
 
 	/* begin block 2 */
-		// Start line: 94
+		// Start line: 96
 	/* end block 2 */
-	// End Line: 95
+	// End Line: 97
+
+/* File: C:\kain2\game\MONSTER\SLUAGH.C */
 
 ulong SLUAGH_Query(_Instance *instance,ulong query)
 
 {
   ulong uVar1;
-  uint uVar2;
+  void *pvVar2;
   
+  pvVar2 = instance->extraData;
   if (query == 0) {
-    uVar2 = *(uint *)instance->extraData;
-    if ((uVar2 & 0x200) == 0) {
-      uVar1 = (uint)((uVar2 & 0x100) != 0) << 0x1d;
+    if ((*(uint *)((int)pvVar2 + 4) & 1) == 0) {
+      uVar1 = ((uint)*(byte *)((int)pvVar2 + 1) & 1) << 0x1d;
     }
     else {
-      uVar1 = 0x40000000;
+      uVar1 = 0x4000000;
     }
   }
   else {
     if (query == 1) {
-      if ((*(uint *)(instance->extraData + 1) & 1) == 0) {
+      if ((*(uint *)((int)pvVar2 + 4) & 1) == 0) {
         uVar1 = *(ulong *)((int)instance->data + 0x10);
       }
       else {
@@ -58,58 +60,59 @@ ulong SLUAGH_Query(_Instance *instance,ulong query)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SLUAGH_DamageEffect(struct _Instance *instance /*$s2*/, struct evFXHitData *data /*$s0*/)
- // line 83, offset 0x8008b80c
+ // line 84, offset 0x8008cf74
 	/* begin block 1 */
-		// Start line: 84
-		// Start offset: 0x8008B80C
+		// Start line: 85
+		// Start offset: 0x8008CF74
 
 		/* begin block 1.1 */
-			// Start line: 87
-			// Start offset: 0x8008B82C
+			// Start line: 88
+			// Start offset: 0x8008CF94
 			// Variables:
 		// 		struct _SVector accel; // stack offset -48
 		/* end block 1.1 */
-		// End offset: 0x8008B82C
-		// End Line: 87
+		// End offset: 0x8008CF94
+		// End Line: 88
 
 		/* begin block 1.2 */
-			// Start line: 93
-			// Start offset: 0x8008B88C
+			// Start line: 94
+			// Start offset: 0x8008CFF4
 			// Variables:
 		// 		struct _MonsterVars *mv; // $s0
 		// 		struct _FXGlowEffect *fx; // $s1
 
 			/* begin block 1.2.1 */
-				// Start line: 99
-				// Start offset: 0x8008B8A4
+				// Start line: 100
+				// Start offset: 0x8008D00C
 				// Variables:
 			// 		long color; // stack offset -24
 
 				/* begin block 1.2.1.1 */
-					// Start line: 103
-					// Start offset: 0x8008B8D0
+					// Start line: 104
+					// Start offset: 0x8008D038
 					// Variables:
 				// 		struct _ColorType current; // stack offset -40
 				// 		struct _ColorType target; // stack offset -32
 				/* end block 1.2.1.1 */
-				// End offset: 0x8008B97C
-				// End Line: 122
+				// End offset: 0x8008D0E4
+				// End Line: 123
 			/* end block 1.2.1 */
-			// End offset: 0x8008B97C
-			// End Line: 123
+			// End offset: 0x8008D0E4
+			// End Line: 124
 		/* end block 1.2 */
-		// End offset: 0x8008B9D8
-		// End Line: 133
+		// End offset: 0x8008D140
+		// End Line: 134
 	/* end block 1 */
-	// End offset: 0x8008B9D8
-	// End Line: 134
+	// End offset: 0x8008D140
+	// End Line: 135
 
 	/* begin block 2 */
-		// Start line: 166
+		// Start line: 168
 	/* end block 2 */
-	// End Line: 167
+	// End Line: 169
 
 /* WARNING: Could not reconcile some variable overlaps */
+/* File: C:\kain2\game\MONSTER\SLUAGH.C */
 
 void SLUAGH_DamageEffect(_Instance *instance,evFXHitData *data)
 
@@ -120,7 +123,7 @@ void SLUAGH_DamageEffect(_Instance *instance,evFXHitData *data)
   uint *puVar4;
   uint uVar5;
   undefined4 local_30;
-  undefined4 local_2c;
+  undefined *local_2c;
   undefined4 local_28;
   undefined4 local_20;
   uint local_18;
@@ -167,9 +170,10 @@ void SLUAGH_DamageEffect(_Instance *instance,evFXHitData *data)
     }
   }
   else {
-    local_30 = 0;
-    local_2c = 0xfffe;
-    FX_Blood((_SVector *)data,&data->velocity,(_SVector *)&local_30,(int)data->amount,0x308000,8);
+    local_30 = DAT_800d094c;
+    local_2c = PTR_DAT_800d0950;
+    FX_Blood((_SVector *)data,&data->velocity,(_SVector *)&local_30,(int)data->amount,
+             (long)&DAT_00308000,8);
     FX_MakeHitFX((_SVector *)data);
   }
   return;
@@ -179,23 +183,25 @@ void SLUAGH_DamageEffect(_Instance *instance,evFXHitData *data)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ SLUAGH_Init(struct _Instance *instance /*$s1*/)
- // line 140, offset 0x8008b9f0
+// void /*$ra*/ SLUAGH_Init(struct _Instance *instance /*$s2*/)
+ // line 141, offset 0x8008d158
 	/* begin block 1 */
-		// Start line: 141
-		// Start offset: 0x8008B9F0
+		// Start line: 142
+		// Start offset: 0x8008D158
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
-	// 		struct _MonsterAttributes *ma; // $s2
+	// 		struct _MonsterAttributes *ma; // $s1
 	// 		long color; // stack offset -24
 	/* end block 1 */
-	// End offset: 0x8008BA24
-	// End Line: 144
+	// End offset: 0x8008D18C
+	// End Line: 145
 
 	/* begin block 2 */
-		// Start line: 288
+		// Start line: 290
 	/* end block 2 */
-	// End Line: 289
+	// End Line: 291
+
+/* File: C:\kain2\game\MONSTER\SLUAGH.C */
 
 void SLUAGH_Init(_Instance *instance)
 
@@ -214,7 +220,7 @@ void SLUAGH_Init(_Instance *instance)
   }
   local_18[0] = FX_GetHealthColor(iVar2 >> 0xc);
   p_Var1 = FX_DoInstanceOneSegmentGlow
-                     (instance,(uint)*(byte *)((int)pvVar4 + 0x19),local_18,1,0x4b0,0x96,0x96);
+                     (instance,(uint)*(byte *)((int)pvVar4 + 0x19),local_18,1,0x4b0,0x68,0x70);
   *(_FXGlowEffect **)(puVar3 + 0x37) = p_Var1;
   MON_DefaultInit(instance);
   *(undefined2 *)(puVar3 + 0x51) = 0x2000;
@@ -228,42 +234,49 @@ void SLUAGH_Init(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SLUAGH_DeathEntry(struct _Instance *instance /*$s1*/)
- // line 162, offset 0x8008baa8
+ // line 166, offset 0x8008d214
 	/* begin block 1 */
-		// Start line: 163
-		// Start offset: 0x8008BAA8
+		// Start line: 167
+		// Start offset: 0x8008D214
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	/* end block 1 */
-	// End offset: 0x8008BB10
-	// End Line: 177
+	// End offset: 0x8008D2A4
+	// End Line: 188
 
 	/* begin block 2 */
-		// Start line: 349
+		// Start line: 357
 	/* end block 2 */
-	// End Line: 350
+	// End Line: 358
+
+/* File: C:\kain2\game\MONSTER\SLUAGH.C */
 
 void SLUAGH_DeathEntry(_Instance *instance)
 
 {
+  int iVar1;
   undefined4 local_10;
-  uint *puVar1;
+  uint *puVar2;
   undefined4 local_c;
   undefined4 local_8;
   undefined4 in_stack_fffffffc;
   
-  puVar1 = (uint *)instance->extraData;
-  FX_StopGlowEffect((_FXGlowEffect *)puVar1[0x37],0);
-  puVar1[0x37] = 0;
-  MON_PlayAnim(instance,(MonsterAnim)
-                        CONCAT412(in_stack_fffffffc,CONCAT48(local_8,CONCAT44(local_c,local_10))),
-               0x18);
-  *(undefined *)((int)puVar1 + 0x156) = 9;
-  if ((puVar1[1] & 1) == 0) {
-    MON_BirthMana(instance);
-    puVar1[1] = puVar1[1] | 1;
+  puVar2 = (uint *)instance->extraData;
+  FX_StopGlowEffect((_FXGlowEffect *)puVar2[0x37],0);
+  puVar2[0x37] = 0;
+  if (puVar2[0x31] != 0) {
+    iVar1 = MON_SetUpKnockBack(instance,*(_Instance **)(puVar2[0x31] + 4),
+                               (evMonsterHitData *)puVar2[0x30]);
+    MON_PlayAnim(instance,(MonsterAnim)
+                          CONCAT412(in_stack_fffffffc,CONCAT48(local_8,CONCAT44(local_c,local_10))),
+                 (uint)(iVar1 == 0));
   }
-  *puVar1 = *puVar1 | 0x200000;
+  *(undefined *)((int)puVar2 + 0x156) = 9;
+  if ((puVar2[1] & 1) == 0) {
+    MON_BirthMana(instance);
+    puVar2[1] = puVar2[1] | 1;
+  }
+  *puVar2 = *puVar2 | 0x200000;
   MON_StartSpecialFade(instance,0x800,0x14);
   return;
 }
@@ -273,36 +286,43 @@ void SLUAGH_DeathEntry(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SLUAGH_Death(struct _Instance *instance /*$s0*/)
- // line 180, offset 0x8008bb44
+ // line 191, offset 0x8008d2d8
 	/* begin block 1 */
-		// Start line: 181
-		// Start offset: 0x8008BB44
+		// Start line: 192
+		// Start offset: 0x8008D2D8
 
 		/* begin block 1.1 */
-			// Start line: 184
-			// Start offset: 0x8008BB68
+			// Start line: 198
+			// Start offset: 0x8008D318
 			// Variables:
 		// 		struct _MonsterVars *mv; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8008BB90
-		// End Line: 189
+		// End offset: 0x8008D348
+		// End Line: 203
 	/* end block 1 */
-	// End offset: 0x8008BB90
-	// End Line: 191
+	// End offset: 0x8008D348
+	// End Line: 205
 
 	/* begin block 2 */
-		// Start line: 387
+		// Start line: 409
 	/* end block 2 */
-	// End Line: 388
+	// End Line: 410
+
+/* WARNING: Restarted to delay deadcode elimination for space: stack */
+/* File: C:\kain2\game\MONSTER\SLUAGH.C */
 
 void SLUAGH_Death(_Instance *instance)
 
 {
-  undefined4 unaff_s0;
-  undefined4 unaff_retaddr;
+  undefined4 local_8;
+  undefined4 local_4;
+  undefined8 uStackX0;
   
   if ((instance->flags2 & 0x10U) != 0) {
-    MON_SwitchState(instance,(MonsterState)CONCAT44(unaff_retaddr,unaff_s0));
+    MON_PlayAnim(instance,(MonsterAnim)CONCAT88(uStackX0,CONCAT44(local_4,local_8)),0x18);
+  }
+  if ((instance->flags2 & 2U) != 0) {
+    MON_SwitchState(instance,(MonsterState)CONCAT44(local_4,local_8));
   }
   MON_DefaultQueueHandler(instance);
   return;
@@ -313,22 +333,23 @@ void SLUAGH_Death(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SLUAGH_AttackEntry(struct _Instance *instance /*$a0*/)
- // line 199, offset 0x8008bba8
+ // line 213, offset 0x8008d360
 	/* begin block 1 */
-		// Start line: 200
-		// Start offset: 0x8008BBA8
+		// Start line: 214
+		// Start offset: 0x8008D360
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 	/* end block 1 */
-	// End offset: 0x8008BBFC
-	// End Line: 211
+	// End offset: 0x8008D3B4
+	// End Line: 225
 
 	/* begin block 2 */
-		// Start line: 425
+		// Start line: 453
 	/* end block 2 */
-	// End Line: 426
+	// End Line: 454
 
 /* WARNING: Restarted to delay deadcode elimination for space: stack */
+/* File: C:\kain2\game\MONSTER\SLUAGH.C */
 
 void SLUAGH_AttackEntry(_Instance *instance)
 
@@ -354,31 +375,31 @@ void SLUAGH_AttackEntry(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SLUAGH_Attack(struct _Instance *instance /*$s0*/)
- // line 213, offset 0x8008bc0c
+ // line 227, offset 0x8008d3c4
 	/* begin block 1 */
-		// Start line: 214
-		// Start offset: 0x8008BC0C
+		// Start line: 228
+		// Start offset: 0x8008D3C4
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 219
-			// Start offset: 0x8008BC40
+			// Start line: 233
+			// Start offset: 0x8008D3F8
 			// Variables:
 		// 		struct __Event *mess; // $a1
 		/* end block 1.1 */
-		// End offset: 0x8008BCF8
-		// End Line: 241
+		// End offset: 0x8008D4B0
+		// End Line: 255
 	/* end block 1 */
-	// End offset: 0x8008BD34
-	// End Line: 247
+	// End offset: 0x8008D4EC
+	// End Line: 261
 
 	/* begin block 2 */
-		// Start line: 453
+		// Start line: 481
 	/* end block 2 */
-	// End Line: 454
+	// End Line: 482
 
-/* WARNING: Type propagation algorithm not settling */
+/* File: C:\kain2\game\MONSTER\SLUAGH.C */
 
 void SLUAGH_Attack(_Instance *instance)
 
@@ -400,7 +421,7 @@ void SLUAGH_Attack(_Instance *instance)
     while (message = DeMessageQueue((__MessageQueue *)((int)pvVar1 + 8)), message != (__Event *)0x0)
     {
       if (message->ID == 0x1000009) {
-        if (*(_Instance **)&((_Instance *)message->Data)->node != gameTrackerX.playerInstance) {
+        if (*(int *)message->Data != DAT_800d20f8) {
           MON_SwitchState(instance,(MonsterState)CONCAT44(local_c,local_10));
         }
       }

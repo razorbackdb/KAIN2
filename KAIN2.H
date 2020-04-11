@@ -3,12 +3,12 @@
 
 /* Begin enums */
 
-enum _G2Bool_Enum // Hashcode: 0xFDD7E4E7 (dec: -36182809)
+enum _G2Bool_Enum // Hashcode: 0x6B6BC2D2 (dec: 1802224338)
 {
 	G2FALSE = 0,
 };
 
-enum DEBUG_LINE_TYPE // Hashcode: 0xC0FB4779 (dec: -1057273991)
+enum DEBUG_LINE_TYPE // Hashcode: 0x48268EA1 (dec: 1210486433)
 {
 	DEBUG_LINE_TYPE_BIT = 0,
 	DEBUG_LINE_TYPE_LONG = 1,
@@ -20,7 +20,7 @@ enum DEBUG_LINE_TYPE // Hashcode: 0xC0FB4779 (dec: -1057273991)
 	DEBUG_LINE_TYPE_INFO = 7,
 };
 
-enum option_ctrl_t // Hashcode: 0x7CF7344B (dec: 2096575563)
+enum option_ctrl_t // Hashcode: 0xD9B3C651 (dec: -642529711)
 {
 	option_ctrl_bogus = 0,
 	option_ctrl_none = 1,
@@ -30,7 +30,7 @@ enum option_ctrl_t // Hashcode: 0x7CF7344B (dec: 2096575563)
 	option_ctrl_num_states = 5,
 };
 
-enum _G2AnimCallbackMsg_Enum // Hashcode: 0x53E4976B (dec: 1407489899)
+enum _G2AnimCallbackMsg_Enum // Hashcode: 0x2CDF3E2D (dec: 752827949)
 {
 	G2ANIM_MSG_DONE = 1,
 	G2ANIM_MSG_LOOPPOINT = 2,
@@ -40,7 +40,7 @@ enum _G2AnimCallbackMsg_Enum // Hashcode: 0x53E4976B (dec: 1407489899)
 	G2ANIM_MSG_PLAYEFFECT = 6,
 };
 
-enum MATH3D_AXIS // Hashcode: 0x49D572F5 (dec: 1238725365)
+enum MATH3D_AXIS // Hashcode: 0x977BA192 (dec: -1753505390)
 {
 	AXIS_X = 0,
 	AXIS_Y = 1,
@@ -50,7 +50,7 @@ enum MATH3D_AXIS // Hashcode: 0x49D572F5 (dec: 1238725365)
 	AXIS_NEG_Z = 5,
 };
 
-enum MonsterAnim // Hashcode: 0x36ADC593 (dec: 917357971)
+enum MonsterAnim // Hashcode: 0x83186B1F (dec: -2095551713)
 {
 	MONSTER_ANIM_HIT1 = 0,
 	MONSTER_ANIM_HIT2 = 1,
@@ -101,7 +101,7 @@ enum MonsterAnim // Hashcode: 0x36ADC593 (dec: 917357971)
 	MONSTER_NUM_ANIMS = 46,
 };
 
-enum MonsterState // Hashcode: 0x70638545 (dec: 1885570373)
+enum MonsterState // Hashcode: 0xE3AB5DCC (dec: -475308596)
 {
 	MONSTER_STATE_BIRTH = 0,
 	MONSTER_STATE_PURSUE = 1,
@@ -133,10 +133,11 @@ enum MonsterState // Hashcode: 0x70638545 (dec: 1885570373)
 	MONSTER_STATE_EMBRACE = 27,
 	MONSTER_STATE_PROJECTILE = 28,
 	MONSTER_STATE_TERRAINIMPALEDEATH = 29,
-	MONSTER_NUM_STATES = 30,
+	MONSTER_STATE_PETRIFIED = 30,
+	MONSTER_NUM_STATES = 31,
 };
 
-enum language_t // Hashcode: 0xB438CA3E (dec: -1271346626)
+enum language_t // Hashcode: 0x27BB4D8F (dec: 666586511)
 {
 	language_default = -1,
 	language_english = 0,
@@ -147,7 +148,7 @@ enum language_t // Hashcode: 0xB438CA3E (dec: -1271346626)
 	language_num_states = 5,
 };
 
-enum localstr_t // Hashcode: 0x0DBA27A9 (dec: 230303657)
+enum localstr_t // Hashcode: 0x72299945 (dec: 1915328837)
 {
 	LOCALSTR_BOGUS = 0,
 	LOCALSTR_format_card = 1,
@@ -177,90 +178,92 @@ enum localstr_t // Hashcode: 0x0DBA27A9 (dec: 230303657)
 	LOCALSTR_new_game = 25,
 	LOCALSTR_no = 26,
 	LOCALSTR_no_card = 27,
-	LOCALSTR_no_room = 28,
-	LOCALSTR_ok = 29,
-	LOCALSTR_options = 30,
-	LOCALSTR_overwrite_game = 31,
-	LOCALSTR_paused = 32,
-	LOCALSTR_press_start = 33,
-	LOCALSTR_query_format_card = 34,
-	LOCALSTR_query_overwrite = 35,
-	LOCALSTR_query_quit = 36,
-	LOCALSTR_quit_game = 37,
-	LOCALSTR_resume_game = 38,
-	LOCALSTR_save_failed = 39,
-	LOCALSTR_save_game = 40,
-	LOCALSTR_save_ok = 41,
-	LOCALSTR_saving = 42,
-	LOCALSTR_sound = 43,
-	LOCALSTR_start_game = 44,
-	LOCALSTR_start_new_game = 45,
-	LOCALSTR_try_card_again = 46,
-	LOCALSTR_unformatted_card = 47,
-	LOCALSTR_vibration_off = 48,
-	LOCALSTR_vibration_on = 49,
-	LOCALSTR_voice = 50,
-	LOCALSTR_warning_one = 51,
-	LOCALSTR_warning_two = 52,
-	LOCALSTR_yes = 53,
-	LOCALSTR_Hint0 = 54,
-	LOCALSTR_Hint1 = 55,
-	LOCALSTR_Hint2 = 56,
-	LOCALSTR_Hint3 = 57,
-	LOCALSTR_Hint4 = 58,
-	LOCALSTR_Hint5 = 59,
-	LOCALSTR_Hint6 = 60,
-	LOCALSTR_Hint7 = 61,
-	LOCALSTR_Hint8 = 62,
-	LOCALSTR_Hint9 = 63,
-	LOCALSTR_Hint10 = 64,
-	LOCALSTR_Hint11 = 65,
-	LOCALSTR_Hint12 = 66,
-	LOCALSTR_Hint13 = 67,
-	LOCALSTR_Hint14 = 68,
-	LOCALSTR_Hint15 = 69,
-	LOCALSTR_Hint16 = 70,
-	LOCALSTR_Hint17 = 71,
-	LOCALSTR_Hint18 = 72,
-	LOCALSTR_Hint19 = 73,
-	LOCALSTR_Hint20 = 74,
-	LOCALSTR_Hint21 = 75,
-	LOCALSTR_Hint22 = 76,
-	LOCALSTR_Hint23 = 77,
-	LOCALSTR_Hint24 = 78,
-	LOCALSTR_Hint25 = 79,
-	LOCALSTR_Hint26 = 80,
-	LOCALSTR_Hint27 = 81,
-	LOCALSTR_Hint28 = 82,
-	LOCALSTR_Hint29 = 83,
-	LOCALSTR_Hint30 = 84,
-	LOCALSTR_Hint31 = 85,
-	LOCALSTR_Hint32 = 86,
-	LOCALSTR_Hint33 = 87,
-	LOCALSTR_Hint34 = 88,
-	LOCALSTR_Hint35 = 89,
-	LOCALSTR_Hint36 = 90,
-	LOCALSTR_Hint37 = 91,
-	LOCALSTR_Hint38 = 92,
-	LOCALSTR_Hint39 = 93,
-	LOCALSTR_Hint40 = 94,
-	LOCALSTR_Hint41 = 95,
-	LOCALSTR_Hint42 = 96,
-	LOCALSTR_Hint43 = 97,
-	LOCALSTR_Hint44 = 98,
-	LOCALSTR_Hint45 = 99,
-	LOCALSTR_Hint46 = 100,
-	LOCALSTR_Hint47 = 101,
-	LOCALSTR_Hint48 = 102,
-	LOCALSTR_Hint49 = 103,
-	LOCALSTR_Hint50 = 104,
-	LOCALSTR_Hint51 = 105,
-	LOCALSTR_EndOfHintStrings = 106,
-	LOCALSTR_no_controller = 107,
-	LOCALSTR_NUM_ITEMS = 108,
+	LOCALSTR_card_full = 28,
+	LOCALSTR_card_not_enough_blocks = 29,
+	LOCALSTR_ok = 30,
+	LOCALSTR_options = 31,
+	LOCALSTR_overwrite_game = 32,
+	LOCALSTR_paused = 33,
+	LOCALSTR_press_start = 34,
+	LOCALSTR_query_format_card = 35,
+	LOCALSTR_query_overwrite = 36,
+	LOCALSTR_query_quit = 37,
+	LOCALSTR_quit_game = 38,
+	LOCALSTR_resume_game = 39,
+	LOCALSTR_save_failed = 40,
+	LOCALSTR_save_game = 41,
+	LOCALSTR_save_ok = 42,
+	LOCALSTR_saving = 43,
+	LOCALSTR_sound = 44,
+	LOCALSTR_start_game = 45,
+	LOCALSTR_start_new_game = 46,
+	LOCALSTR_try_card_again = 47,
+	LOCALSTR_unformatted_card = 48,
+	LOCALSTR_vibration_off = 49,
+	LOCALSTR_vibration_on = 50,
+	LOCALSTR_voice = 51,
+	LOCALSTR_warning_one = 52,
+	LOCALSTR_warning_two = 53,
+	LOCALSTR_yes = 54,
+	LOCALSTR_Hint0 = 55,
+	LOCALSTR_Hint1 = 56,
+	LOCALSTR_Hint2 = 57,
+	LOCALSTR_Hint3 = 58,
+	LOCALSTR_Hint4 = 59,
+	LOCALSTR_Hint5 = 60,
+	LOCALSTR_Hint6 = 61,
+	LOCALSTR_Hint7 = 62,
+	LOCALSTR_Hint8 = 63,
+	LOCALSTR_Hint9 = 64,
+	LOCALSTR_Hint10 = 65,
+	LOCALSTR_Hint11 = 66,
+	LOCALSTR_Hint12 = 67,
+	LOCALSTR_Hint13 = 68,
+	LOCALSTR_Hint14 = 69,
+	LOCALSTR_Hint15 = 70,
+	LOCALSTR_Hint16 = 71,
+	LOCALSTR_Hint17 = 72,
+	LOCALSTR_Hint18 = 73,
+	LOCALSTR_Hint19 = 74,
+	LOCALSTR_Hint20 = 75,
+	LOCALSTR_Hint21 = 76,
+	LOCALSTR_Hint22 = 77,
+	LOCALSTR_Hint23 = 78,
+	LOCALSTR_Hint24 = 79,
+	LOCALSTR_Hint25 = 80,
+	LOCALSTR_Hint26 = 81,
+	LOCALSTR_Hint27 = 82,
+	LOCALSTR_Hint28 = 83,
+	LOCALSTR_Hint29 = 84,
+	LOCALSTR_Hint30 = 85,
+	LOCALSTR_Hint31 = 86,
+	LOCALSTR_Hint32 = 87,
+	LOCALSTR_Hint33 = 88,
+	LOCALSTR_Hint34 = 89,
+	LOCALSTR_Hint35 = 90,
+	LOCALSTR_Hint36 = 91,
+	LOCALSTR_Hint37 = 92,
+	LOCALSTR_Hint38 = 93,
+	LOCALSTR_Hint39 = 94,
+	LOCALSTR_Hint40 = 95,
+	LOCALSTR_Hint41 = 96,
+	LOCALSTR_Hint42 = 97,
+	LOCALSTR_Hint43 = 98,
+	LOCALSTR_Hint44 = 99,
+	LOCALSTR_Hint45 = 100,
+	LOCALSTR_Hint46 = 101,
+	LOCALSTR_Hint47 = 102,
+	LOCALSTR_Hint48 = 103,
+	LOCALSTR_Hint49 = 104,
+	LOCALSTR_Hint50 = 105,
+	LOCALSTR_Hint51 = 106,
+	LOCALSTR_Hint52 = 107,
+	LOCALSTR_EndOfHintStrings = 108,
+	LOCALSTR_no_controller = 109,
+	LOCALSTR_NUM_ITEMS = 110,
 };
 
-enum menu_ctrl_t // Hashcode: 0x2C5050CB (dec: 743461067)
+enum menu_ctrl_t // Hashcode: 0x75DFBC77 (dec: 1977597047)
 {
 	menu_ctrl_none = 0,
 	menu_ctrl_up = 1,
@@ -273,7 +276,7 @@ enum menu_ctrl_t // Hashcode: 0x2C5050CB (dec: 743461067)
 	menu_ctrl_num_items = 8,
 };
 
-enum menu_sound_t // Hashcode: 0xE07891FA (dec: -528969222)
+enum menu_sound_t // Hashcode: 0x54A9956B (dec: 1420399979)
 {
 	menu_sound_none = 0,
 	menu_sound_default = 1,
@@ -283,12 +286,107 @@ enum menu_sound_t // Hashcode: 0xE07891FA (dec: -528969222)
 	menu_sound_pop = 5,
 };
 
-enum sfx_t // Hashcode: 0x865BE503 (dec: -2040797949)
+enum sfx_t // Hashcode: 0x31566481 (dec: 827745409)
 {
 	sfx_sound = 0,
 	sfx_music = 1,
 	sfx_voice = 2,
 	sfx_error = 3,
+};
+
+enum mcpsx_err_t // Hashcode: 0xC2F69F4D (dec: -1024024755)
+{
+	mcpsx_err_none = 0,
+	mcpsx_err_card_not_exist = 1,
+	mcpsx_err_card_invalid = 2,
+	mcpsx_err_new_card = 3,
+	mcpsx_err_not_format = 4,
+	mcpsx_err_file_not_exist = 5,
+	mcpsx_err_already_exists = 6,
+	mcpsx_err_block_full = 7,
+	mcpsx_err_busy = 8,
+	mcpsx_err_num_items = 9,
+};
+
+enum mcpsx_func_t // Hashcode: 0x77941B5D (dec: 2006195037)
+{
+	func_none = 0,
+	func_exist = 1,
+	func_accept = 2,
+	func_read_file = 3,
+	func_write_file = 4,
+	func_create_file = 5,
+	func_delete_file = 6,
+	func_format = 7,
+	func_unformat = 8,
+	func_directory = 9,
+	func_num_items = 10,
+};
+
+enum mcpsx_sync_t // Hashcode: 0x3FD7A182 (dec: 1071096194)
+{
+	sync_idle = -1,
+	sync_busy = 0,
+	sync_done = 1,
+	sync_func = 2,
+	sync_num_items = 3,
+};
+
+enum mcpsx_mode_t // Hashcode: 0xD6CC679E (dec: -691247202)
+{
+	mode_bogus = 0,
+	mode_initialized = 1,
+	mode_running = 2,
+	mode_terminated = 3,
+	mode_num_items = 4,
+};
+
+enum state_t // Hashcode: 0x02A3BAF4 (dec: 44284660)
+{
+	fsmcard_card_not_exist = 0,
+	fsmcard_card_invalid = 1,
+	fsmcard_not_format = 2,
+	fsmcard_new_card = 3,
+	fsmcard_directory = 4,
+	fsmcard_ready = 5,
+	fsmcard_format = 6,
+	fsmcard_unformat = 7,
+	fsmcard_delete = 8,
+	fsmcard_create = 9,
+	fsmcard_write = 10,
+	fsmcard_read = 11,
+	fsmcard_error = 12,
+	fsmcard_num_items = 13,
+};
+
+enum mcard_status_t // Hashcode: 0x4476947B (dec: 1148621947)
+{
+	mcard_status_card_not_exist = 0,
+	mcard_status_card_invalid = 1,
+	mcard_status_not_format = 2,
+	mcard_status_new_card = 3,
+	mcard_status_ready = 4,
+	mcard_status_accessing = 5,
+	mcard_status_error = 6,
+	mcard_status_num_items = 7,
+};
+
+enum fsm_t // Hashcode: 0x4CB15FCA (dec: 1286692810)
+{
+	fsm_card_not_exist = 0,
+	fsm_card_invalid = 1,
+	fsm_not_format = 2,
+	fsm_new_card = 3,
+	fsm_ready = 4,
+	fsm_format = 5,
+	fsm_start = 6,
+	fsm_loading = 7,
+	fsm_query_overwrite = 8,
+	fsm_overwrite = 9,
+	fsm_saving = 10,
+	fsm_create = 11,
+	fsm_save_complete = 12,
+	fsm_num_items = 13,
 };
 /* End enums */
 
@@ -1331,18 +1429,16 @@ struct _Terrain // hashcode: 0x5D541B4E (dec: 1565793102)
 	struct _TFace *faceList; // size=12, offset=32
 	struct _Normal *normalList; // size=8, offset=36
 	struct DrMoveAniTex *aniList; // size=8, offset=40
-	struct _BSPNode *sbspRoot; // size=44, offset=44
+	long pad; // size=0, offset=44
 	void *StreamUnits; // size=0, offset=48
 	struct TextureFT3 *StartTextureList; // size=12, offset=52
 	struct TextureFT3 *EndTextureList; // size=12, offset=56
-	struct _SBSPLeaf *sbspStartLeaves; // size=24, offset=60
-	struct _SBSPLeaf *sbspEndLeaves; // size=24, offset=64
-	struct _MorphVertex *MorphDiffList; // size=14, offset=68
-	struct _MorphColor *MorphColorList; // size=2, offset=72
-	long numBSPTrees; // size=0, offset=76
-	struct BSPTree *BSPTreeArray; // size=36, offset=80
-	short *morphNormalIdx; // size=0, offset=84
-	struct _MultiSignal *signals; // size=904, offset=88
+	struct _MorphVertex *MorphDiffList; // size=14, offset=60
+	struct _MorphColor *MorphColorList; // size=2, offset=64
+	long numBSPTrees; // size=0, offset=68
+	struct BSPTree *BSPTreeArray; // size=36, offset=72
+	short *morphNormalIdx; // size=0, offset=76
+	struct _MultiSignal *signals; // size=904, offset=80
 };
 
 struct _InstancePool // hashcode: 0xC591AB92 (dec: -980309102)
@@ -1420,18 +1516,7 @@ struct _BSPLeaf // hashcode: 0xB2C1AC71 (dec: -1295930255)
 	struct _Sphere_noSq spectralSphere; // size=8, offset=40
 };
 
-struct _SBSPLeaf // hashcode: 0xE9662C63 (dec: -379179933)
-{
-	struct _Sphere_noSq sphere; // size=8, offset=0
-	struct Intro **introList; // size=76, offset=8
-	short numIntros; // size=0, offset=12
-	short flags; // size=0, offset=14
-	struct CDLight **lightList; // size=24, offset=16
-	short numLights; // size=0, offset=20
-	short pad; // size=0, offset=22
-};
-
-struct _MorphVertex // hashcode: 0xD1AD5FA6 (dec: -777166938)
+struct _MorphVertex // hashcode: 0xAAB8DABE (dec: -1430725954)
 {
 	short x; // size=0, offset=0
 	short y; // size=0, offset=2
@@ -1442,14 +1527,14 @@ struct _MorphVertex // hashcode: 0xD1AD5FA6 (dec: -777166938)
 	short hz; // size=0, offset=12
 };
 
-struct _MorphColor // hashcode: 0xE6E25EA7 (dec: -421372249)
+struct _MorphColor // hashcode: 0xA6BA0326 (dec: -1497758938)
 {
 	short morphColor15; // size=0, offset=0
 };
 
-struct Level // hashcode: 0xC3AE5FD0 (dec: -1011982384)
+struct Level // hashcode: 0x012B0198 (dec: 19595672)
 {
-	struct _Terrain *terrain; // size=92, offset=0
+	struct _Terrain *terrain; // size=84, offset=0
 	struct LightList *lightList; // size=12, offset=4
 	long numVMObjects; // size=0, offset=8
 	struct _VMObject *vmobjectList; // size=60, offset=12
@@ -1539,7 +1624,7 @@ struct Level // hashcode: 0xC3AE5FD0 (dec: -1011982384)
 	struct LightGroup *razielSpectralLightGroup; // size=64, offset=388
 };
 
-struct _SavedCinematic // hashcode: 0xD17952AA (dec: -780578134)
+struct _SavedCinematic // hashcode: 0x1E29151B (dec: 506008859)
 {
 	struct _Position position; // size=6, offset=0
 	struct _Position focusPoint; // size=6, offset=6
@@ -1562,7 +1647,7 @@ struct _SavedCinematic // hashcode: 0xD17952AA (dec: -780578134)
 	struct Level *level; // size=0, offset=108
 };
 
-struct BSPTree // hashcode: 0x6BB6F4D3 (dec: 1807152339)
+struct BSPTree // hashcode: 0x17800192 (dec: 394264978)
 {
 	struct _BSPNode *bspRoot; // size=44, offset=0
 	struct _BSPLeaf *startLeaves; // size=48, offset=4
@@ -1575,20 +1660,20 @@ struct BSPTree // hashcode: 0x6BB6F4D3 (dec: 1807152339)
 	struct _Instance *instanceSpline; // size=664, offset=32
 };
 
-struct LightGroup // hashcode: 0x69AA5FCD (dec: 1772773325)
+struct LightGroup // hashcode: 0xBB5FF847 (dec: -1151338425)
 {
 	struct MATRIX lightMatrix; // size=32, offset=0
 	struct MATRIX colorMatrix; // size=32, offset=32
 };
 
-struct LightList // hashcode: 0xC683766C (dec: -964462996)
+struct LightList // hashcode: 0xC8448BB7 (dec: -935031881)
 {
 	struct CVECTOR ambient; // size=4, offset=0
 	long numLightGroups; // size=0, offset=4
 	struct LightGroup *lightGroupList; // size=64, offset=8
 };
 
-struct PointLight // hashcode: 0x7AFA283C (dec: 2063214652)
+struct PointLight // hashcode: 0xFEFDD2F2 (dec: -16919822)
 {
 	struct NodeType node; // size=8, offset=0
 	unsigned char r; // size=0, offset=8
@@ -1600,7 +1685,7 @@ struct PointLight // hashcode: 0x7AFA283C (dec: 2063214652)
 	long radiusSquared; // size=0, offset=20
 };
 
-struct SpotLight // hashcode: 0x83CCA3D6 (dec: -2083740714)
+struct SpotLight // hashcode: 0xEF8B4C2E (dec: -276083666)
 {
 	struct NodeType node; // size=8, offset=0
 	unsigned char r; // size=0, offset=8
@@ -1616,7 +1701,7 @@ struct SpotLight // hashcode: 0x83CCA3D6 (dec: -2083740714)
 	short attenuationScale; // size=0, offset=38
 };
 
-struct LightInfo // hashcode: 0x78922521 (dec: 2022843681)
+struct LightInfo // hashcode: 0x2A95530E (dec: 714429198)
 {
 	long numPointLights; // size=0, offset=0
 	struct PointLight pointLightPool[32]; // size=768, offset=4
@@ -1631,21 +1716,21 @@ struct LightInfo // hashcode: 0x78922521 (dec: 2022843681)
 	long numSavedColors; // size=0, offset=1144
 };
 
-struct _VMOffset // hashcode: 0xF7C87D30 (dec: -137855696)
+struct _VMOffset // hashcode: 0x680AC445 (dec: 1745536069)
 {
 	short dx; // size=0, offset=0
 	short dy; // size=0, offset=2
 	short dz; // size=0, offset=4
 };
 
-struct _VMColorOffset // hashcode: 0x55170A20 (dec: 1427573280)
+struct _VMColorOffset // hashcode: 0xFD3FB530 (dec: -46156496)
 {
 	char dr; // size=0, offset=0
 	char dg; // size=0, offset=1
 	char db; // size=0, offset=2
 };
 
-struct _VMInterpolated // hashcode: 0x89F7E225 (dec: -1980243419)
+struct _VMInterpolated // hashcode: 0x3A40B5C0 (dec: 977319360)
 {
 	short tvIdx; // size=0, offset=0
 	short startIdx; // size=0, offset=2
@@ -1653,7 +1738,7 @@ struct _VMInterpolated // hashcode: 0x89F7E225 (dec: -1980243419)
 	short time; // size=0, offset=6
 };
 
-struct _VMOffsetTable // hashcode: 0xF8DA9021 (dec: -119893983)
+struct _VMOffsetTable // hashcode: 0xE4A13881 (dec: -459196287)
 {
 	long numVMOffsets; // size=0, offset=0
 	union {
@@ -1662,7 +1747,7 @@ struct _VMOffsetTable // hashcode: 0xF8DA9021 (dec: -119893983)
 	} offsets; // size=6, offset=4, found in object files: player.o, player.o
 };
 
-struct _VMObject // hashcode: 0xEF326061 (dec: -281911199)
+struct _VMObject // hashcode: 0x436E75EB (dec: 1131312619)
 {
 	unsigned short flags; // size=0, offset=0
 	short bspIdx; // size=0, offset=2
@@ -1684,14 +1769,14 @@ struct _VMObject // hashcode: 0xEF326061 (dec: -281911199)
 	char *name; // size=0, offset=56
 };
 
-struct _VGroup // hashcode: 0xB57433BB (dec: -1250675781)
+struct _VGroup // hashcode: 0x4421FB39 (dec: 1143077689)
 {
 	long id; // size=0, offset=0
 	long numVertices; // size=0, offset=4
 	struct _TVertex **vertexList; // size=12, offset=8
 };
 
-struct _HotSpot // hashcode: 0x46C1F2C3 (dec: 1187115715)
+struct _HotSpot // hashcode: 0x6EC4F776 (dec: 1858402166)
 {
 	short x; // size=0, offset=0
 	short y; // size=0, offset=2
@@ -1699,13 +1784,13 @@ struct _HotSpot // hashcode: 0x46C1F2C3 (dec: 1187115715)
 	short id; // size=0, offset=6
 };
 
-struct _PlanMkr // hashcode: 0x0C3AB7E6 (dec: 205174758)
+struct _PlanMkr // hashcode: 0xBC0DD043 (dec: -1139945405)
 {
 	struct _Position pos; // size=6, offset=0
 	short id; // size=0, offset=6
 };
 
-struct _SFXMkr // hashcode: 0x35415AA9 (dec: 893475497)
+struct _SFXMkr // hashcode: 0x74BB4848 (dec: 1958430792)
 {
 	unsigned char *soundData; // size=0, offset=0
 	long uniqueID; // size=0, offset=4
@@ -1716,13 +1801,13 @@ struct _SFXMkr // hashcode: 0x35415AA9 (dec: 893475497)
 	long inSpectral; // size=0, offset=32
 };
 
-struct TClassAttr // hashcode: 0x7807BF4D (dec: 2013773645)
+struct TClassAttr // hashcode: 0x4DC02369 (dec: 1304437609)
 {
 	short flags; // size=0, offset=0
 	unsigned short sound; // size=0, offset=2
 };
 
-struct _ColorType // hashcode: 0xAC51C547 (dec: -1403927225)
+struct _ColorType // hashcode: 0x440E837C (dec: 1141801852)
 {
 	unsigned char r; // size=0, offset=0
 	unsigned char g; // size=0, offset=1
@@ -1730,7 +1815,7 @@ struct _ColorType // hashcode: 0xAC51C547 (dec: -1403927225)
 	unsigned char code; // size=0, offset=3
 };
 
-struct _CameraCore_Type // hashcode: 0x581965E4 (dec: 1478059492)
+struct _CameraCore_Type // hashcode: 0xD341D51C (dec: -750660324)
 {
 	struct _Position position; // size=6, offset=0
 	short pad1; // size=0, offset=6
@@ -1759,7 +1844,7 @@ struct _CameraCore_Type // hashcode: 0x581965E4 (dec: 1478059492)
 	short pad6; // size=0, offset=220
 };
 
-struct PLAYER_114fake // hashcode: 0xCB9D3D9A (dec: -878887526)
+struct PLAYER_114fake // hashcode: 0x5A1E67AD (dec: 1511942061)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -1791,20 +1876,20 @@ struct PLAYER_114fake // hashcode: 0xCB9D3D9A (dec: -878887526)
 	} Follow; // size=20, offset=76, found in object files: player.o, player.o
 };
 
-struct SpuVolume // hashcode: 0xED294644 (dec: -316062140)
+struct SpuVolume // hashcode: 0x1BD13981 (dec: 466696577)
 {
 	short left; // size=0, offset=0
 	short right; // size=0, offset=2
 };
 
-struct SpuExtAttr // hashcode: 0x58B0F474 (dec: 1487991924)
+struct SpuExtAttr // hashcode: 0x0A5C9682 (dec: 173840002)
 {
 	struct SpuVolume volume; // size=4, offset=0
 	long reverb; // size=0, offset=4
 	long mix; // size=0, offset=8
 };
 
-struct SpuStVoiceAttr // hashcode: 0xAFDFBA7E (dec: -1344292226)
+struct SpuStVoiceAttr // hashcode: 0xACA70F9A (dec: -1398337638)
 {
 	char status; // size=0, offset=0
 	char pad1; // size=0, offset=1
@@ -1815,41 +1900,21 @@ struct SpuStVoiceAttr // hashcode: 0xAFDFBA7E (dec: -1344292226)
 	unsigned long data_addr; // size=0, offset=12
 };
 
-struct AadSoundBankHdr // hashcode: 0x453DB83F (dec: 1161672767)
+struct AadSoundBankHdr // hashcode: 0xC23EC82F (dec: -1036072913)
 {
 	unsigned long bankID; // size=0, offset=0
 	unsigned long headerSize; // size=0, offset=4
-	unsigned short bankVersion; // size=0, offset=8
-	unsigned char numBanks; // size=0, offset=10
-	unsigned char numPrograms; // size=0, offset=11
-	unsigned short numTones; // size=0, offset=12
-	unsigned short numWaves; // size=0, offset=14
-	unsigned char numSequences; // size=0, offset=16
-	unsigned char numPitchMaps; // size=0, offset=17
-	unsigned short numLabels; // size=0, offset=18
-	unsigned char reverbMode; // size=0, offset=20
-	unsigned char unused1; // size=0, offset=21
-	short reverbDepth; // size=0, offset=22
-	unsigned short objectID; // size=0, offset=24
-	unsigned short unused2; // size=0, offset=26
-	unsigned long unused3; // size=0, offset=28
-	unsigned long unused4; // size=0, offset=32
-	unsigned long unused5; // size=0, offset=36
-	unsigned long unused6; // size=0, offset=40
-	unsigned long unused7; // size=0, offset=44
-	unsigned long unused8; // size=0, offset=48
-	unsigned long unused9; // size=0, offset=52
-	unsigned long unused10; // size=0, offset=56
-	unsigned long unused11; // size=0, offset=60
-	unsigned long unused12; // size=0, offset=64
-	unsigned long unused13; // size=0, offset=68
-	unsigned long unused14; // size=0, offset=72
-	unsigned long unused15; // size=0, offset=76
-	unsigned char baseProgramTbl[16]; // size=16, offset=80
-	unsigned short baseToneTbl[16]; // size=32, offset=96
+	int bankVersion; // size=0, offset=8
+	int numPrograms; // size=0, offset=12
+	int numTones; // size=0, offset=16
+	int numWaves; // size=0, offset=20
+	int numSequences; // size=0, offset=24
+	int numLabels; // size=0, offset=28
+	int reverbMode; // size=0, offset=32
+	int reverbDepth; // size=0, offset=36
 };
 
-struct AadProgramAtr // hashcode: 0x13FC0BEF (dec: 335285231)
+struct AadProgramAtr // hashcode: 0x6EE3A213 (dec: 1860411923)
 {
 	unsigned short numTones; // size=0, offset=0
 	unsigned short firstTone; // size=0, offset=2
@@ -1858,7 +1923,7 @@ struct AadProgramAtr // hashcode: 0x13FC0BEF (dec: 335285231)
 	unsigned short unused; // size=0, offset=6
 };
 
-struct AadToneAtr // hashcode: 0x990CD685 (dec: -1727211899)
+struct AadToneAtr // hashcode: 0xD710C19D (dec: -686767715)
 {
 	unsigned char priority; // size=0, offset=0
 	unsigned char parentProgram; // size=0, offset=1
@@ -1875,7 +1940,7 @@ struct AadToneAtr // hashcode: 0x990CD685 (dec: -1727211899)
 	short waveIndex; // size=0, offset=14
 };
 
-struct _AadDynSfxFileHdr // hashcode: 0xB9609773 (dec: -1184852109)
+struct _AadDynSfxFileHdr // hashcode: 0xE665347E (dec: -429575042)
 {
 	unsigned long snfID; // size=0, offset=0
 	unsigned short snfVersion; // size=0, offset=4
@@ -1886,7 +1951,7 @@ struct _AadDynSfxFileHdr // hashcode: 0xB9609773 (dec: -1184852109)
 	struct _AadDynSfxFileHdr *nextDynSfxFile; // size=20, offset=16
 };
 
-struct AadDynSfxAttr // hashcode: 0x20751E4B (dec: 544546379)
+struct AadDynSfxAttr // hashcode: 0x0D1EC8D5 (dec: 220121301)
 {
 	unsigned short sfxID; // size=0, offset=0
 	unsigned short waveID; // size=0, offset=2
@@ -1894,7 +1959,7 @@ struct AadDynSfxAttr // hashcode: 0x20751E4B (dec: 544546379)
 	unsigned long waveSize; // size=0, offset=20
 };
 
-struct AadTempoCounter // hashcode: 0x15707CC0 (dec: 359693504)
+struct AadTempoCounter // hashcode: 0x4FFB42C2 (dec: 1341866690)
 {
 	unsigned long currentTick; // size=0, offset=0
 	unsigned long currentError; // size=0, offset=4
@@ -1905,7 +1970,7 @@ struct AadTempoCounter // hashcode: 0x15707CC0 (dec: 359693504)
 	unsigned long quarterNoteTime; // size=0, offset=20
 };
 
-struct AadSeqEvent // hashcode: 0x3E306185 (dec: 1043358085)
+struct AadSeqEvent // hashcode: 0xAC01768D (dec: -1409190259)
 {
 	unsigned long deltaTime; // size=0, offset=0
 	unsigned char track; // size=0, offset=4
@@ -1913,7 +1978,7 @@ struct AadSeqEvent // hashcode: 0x3E306185 (dec: 1043358085)
 	char dataByte[6]; // size=6, offset=6
 };
 
-struct _AadSequenceSlot // hashcode: 0xD7421DD6 (dec: -683532842)
+struct _AadSequenceSlot // hashcode: 0xBB2DC343 (dec: -1154628797)
 {
 	struct AadTempoCounter tempo; // size=24, offset=0
 	struct AadSeqEvent eventQueue[4][16]; // size=768, offset=24
@@ -1927,33 +1992,35 @@ struct _AadSequenceSlot // hashcode: 0xD7421DD6 (dec: -683532842)
 	unsigned char (*loopSequencePosition[4][16]); // size=256, offset=1000
 	unsigned char loopCurrentNestLevel[16]; // size=16, offset=1256
 	unsigned char loopCounter[4][16]; // size=64, offset=1272
-	struct _AadSequenceSlot *selectedSlotPtr; // size=1492, offset=1336
+	struct _AadSequenceSlot *selectedSlotPtr; // size=1488, offset=1336
 	unsigned char selectedSlotNum; // size=0, offset=1340
 	unsigned char selectedChannel; // size=0, offset=1341
 	unsigned char sequenceNumberAssigned; // size=0, offset=1342
 	unsigned char thisSlotNumber; // size=0, offset=1343
 	unsigned short status; // size=0, offset=1344
 	unsigned short channelMute; // size=0, offset=1346
-	unsigned short enableSustainUpdate; // size=0, offset=1348
-	unsigned short ignoreTranspose; // size=0, offset=1350
-	unsigned char slotFlags; // size=0, offset=1352
-	unsigned char slotID; // size=0, offset=1353
-	unsigned char slotVolume; // size=0, offset=1354
-	unsigned char slotPan; // size=0, offset=1355
-	unsigned char *masterVolPtr; // size=0, offset=1356
-	unsigned char selectedDynamicBank; // size=0, offset=1360
-	unsigned char sequenceAssignedDynamicBank; // size=0, offset=1361
-	unsigned short unused1; // size=0, offset=1362
-	unsigned char currentDynamicBank[16]; // size=16, offset=1364
-	unsigned short pitchWheel[16]; // size=32, offset=1380
-	unsigned char currentProgram[16]; // size=16, offset=1412
-	unsigned char baseProgram[16]; // size=16, offset=1428
-	unsigned char volume[16]; // size=16, offset=1444
-	unsigned char panPosition[16]; // size=16, offset=1460
-	char transpose[16]; // size=16, offset=1476
+	unsigned short delayedMuteMode; // size=0, offset=1348
+	unsigned short delayedMuteCmds; // size=0, offset=1350
+	unsigned short delayedUnMuteCmds; // size=0, offset=1352
+	unsigned short unused; // size=0, offset=1354
+	unsigned short enableSustainUpdate; // size=0, offset=1356
+	unsigned short ignoreTranspose; // size=0, offset=1358
+	unsigned char slotFlags; // size=0, offset=1360
+	unsigned char slotID; // size=0, offset=1361
+	unsigned char slotVolume; // size=0, offset=1362
+	unsigned char slotPan; // size=0, offset=1363
+	int *masterVolPtr; // size=0, offset=1364
+	int selectedDynamicBank; // size=0, offset=1368
+	int sequenceAssignedDynamicBank; // size=0, offset=1372
+	unsigned char currentDynamicBank[16]; // size=16, offset=1376
+	unsigned short pitchWheel[16]; // size=32, offset=1392
+	unsigned char currentProgram[16]; // size=16, offset=1424
+	unsigned char volume[16]; // size=16, offset=1440
+	unsigned char panPosition[16]; // size=16, offset=1456
+	char transpose[16]; // size=16, offset=1472
 };
 
-struct AadSfxCommand // hashcode: 0xD8F832F6 (dec: -654822666)
+struct AadSfxCommand // hashcode: 0x3310EEED (dec: 856747757)
 {
 	unsigned char statusByte; // size=0, offset=0
 	unsigned char dataByte[3]; // size=3, offset=1
@@ -1962,7 +2029,7 @@ struct AadSfxCommand // hashcode: 0xD8F832F6 (dec: -654822666)
 	unsigned short unused; // size=0, offset=10
 };
 
-struct AadSfxSlot // hashcode: 0x6E655A78 (dec: 1852136056)
+struct AadSfxSlot // hashcode: 0xC604B7C8 (dec: -972769336)
 {
 	struct AadSfxCommand commandQueue[32]; // size=384, offset=0
 	unsigned char commandIn; // size=0, offset=384
@@ -1973,7 +2040,7 @@ struct AadSfxSlot // hashcode: 0x6E655A78 (dec: 1852136056)
 	unsigned char sfxPan; // size=0, offset=391
 };
 
-struct AadSynthVoice // hashcode: 0x12E02CA2 (dec: 316681378)
+struct AadSynthVoice // hashcode: 0x9E515E00 (dec: -1638834688)
 {
 	unsigned long voiceMask; // size=0, offset=0
 	unsigned long handle; // size=0, offset=4
@@ -1992,50 +2059,46 @@ struct AadSynthVoice // hashcode: 0x12E02CA2 (dec: 316681378)
 	struct AadProgramAtr *progAtr; // size=8, offset=24
 };
 
-struct AadDynamicLoadRequest // hashcode: 0xB68D12F8 (dec: -1232268552)
+struct AadDynamicLoadRequest // hashcode: 0x0D83C683 (dec: 226739843)
 {
-	unsigned short type; // size=0, offset=0
-	unsigned short handle; // size=0, offset=2
-	unsigned long userData; // size=0, offset=4
-	char fileName[40]; // size=40, offset=8
-	union {
-		void (*dynSfxReturnProc)(); // size=0, offset=0
-		void (*dynMusReturnProc)(); // size=0, offset=0
-	} u; // size=4, offset=48, found in object files: player.o, player.o
+	int type; // size=0, offset=0
+	int handle; // size=0, offset=4
+	long directoryID; // size=0, offset=8
+	long flags; // size=0, offset=12
+	char fileName[12]; // size=12, offset=16
 };
 
-struct AadDynamicBankLoadInfo // hashcode: 0xBC8E127A (dec: -1131539846)
+struct AadDynamicBankLoadInfo // hashcode: 0x602A9BB4 (dec: 1613405108)
 {
-	char *sndFileName; // size=0, offset=0
-	char *smpFileName; // size=0, offset=4
-	unsigned short dynamicBankIndex; // size=0, offset=8
-	unsigned short loadOption; // size=0, offset=10
-	void (*userCallbackProc)(); // size=0, offset=12
-	unsigned long sramDataSize; // size=0, offset=16
-	unsigned long nextSramAddr; // size=0, offset=20
-	unsigned long flags; // size=0, offset=24
+	char sndFileName[32]; // size=32, offset=0
+	char smpFileName[32]; // size=32, offset=32
+	int dynamicBankIndex; // size=0, offset=64
+	int loadOption; // size=0, offset=68
+	void (*userCallbackProc)(); // size=0, offset=72
+	unsigned long sramDataSize; // size=0, offset=76
+	unsigned long nextSramAddr; // size=0, offset=80
+	unsigned long flags; // size=0, offset=84
 };
 
-struct AadDynamicSfxLoadInfo // hashcode: 0x19283748 (dec: 422065992)
+struct AadDynamicSfxLoadInfo // hashcode: 0x3B60E6CD (dec: 996206285)
 {
 	char snfFileName[40]; // size=40, offset=0
 	char smfFileName[40]; // size=40, offset=40
-	unsigned long userData; // size=0, offset=80
-	void (*userCallbackProc)(); // size=0, offset=84
-	unsigned short flags; // size=0, offset=88
-	unsigned short smfLoadingState; // size=0, offset=90
-	unsigned long bytesToLoad; // size=0, offset=92
-	unsigned short numSfxToLoad; // size=0, offset=96
-	unsigned short error; // size=0, offset=98
-	unsigned long waveTransferAddr; // size=0, offset=100
-	unsigned long totalSramUsed; // size=0, offset=104
-	unsigned short fileHandle; // size=0, offset=108
-	unsigned short unused; // size=0, offset=110
-	struct _AadDynSfxFileHdr *snfFile; // size=20, offset=112
-	struct AadDynSfxAttr attr; // size=24, offset=116
+	int fileHandle; // size=0, offset=80
+	long directoryID; // size=0, offset=84
+	long loadFlags; // size=0, offset=88
+	long flags; // size=0, offset=92
+	int smfLoadingState; // size=0, offset=96
+	unsigned long bytesToLoad; // size=0, offset=100
+	int numSfxToLoad; // size=0, offset=104
+	int error; // size=0, offset=108
+	unsigned long waveTransferAddr; // size=0, offset=112
+	unsigned long totalSramUsed; // size=0, offset=116
+	struct _AadDynSfxFileHdr *snfFile; // size=20, offset=120
+	struct AadDynSfxAttr attr; // size=24, offset=124
 };
 
-struct AadNewSramBlockDesc // hashcode: 0xCD1D2552 (dec: -853727918)
+struct AadNewSramBlockDesc // hashcode: 0xB90B8C61 (dec: -1190425503)
 {
 	unsigned short waveID; // size=0, offset=0
 	unsigned short address; // size=0, offset=2
@@ -2044,35 +2107,40 @@ struct AadNewSramBlockDesc // hashcode: 0xCD1D2552 (dec: -853727918)
 	unsigned char nextIndex; // size=0, offset=7
 };
 
-struct AadLoadedSfxToneAttr // hashcode: 0xFD77D066 (dec: -42479514)
+struct AadLoadedSfxToneAttr // hashcode: 0x411CE706 (dec: 1092413190)
 {
 	unsigned short referenceCount; // size=0, offset=0
 	unsigned short waveID; // size=0, offset=2
 	struct AadToneAtr toneAttr; // size=16, offset=4
 };
 
-struct AadLoadedSfxWaveAttr // hashcode: 0xF1726163 (dec: -244162205)
+struct AadLoadedSfxWaveAttr // hashcode: 0x027C2776 (dec: 41690998)
 {
 	unsigned short referenceCount; // size=0, offset=0
 	unsigned char unused; // size=0, offset=2
 	unsigned char sramHandle; // size=0, offset=3
 };
 
-struct AadMasterVolFader // hashcode: 0xDED3738B (dec: -556567669)
+struct AadSramDefragInfo // hashcode: 0x7F0485FB (dec: 2131002875)
 {
-	short volumeStep; // size=0, offset=0
-	short targetVolume; // size=0, offset=2
-	void (*fadeCompleteCallback)(); // size=0, offset=4
+	int status; // size=0, offset=0
+	unsigned char *fragBuffer; // size=0, offset=4
+	int masterListEntry; // size=0, offset=8
+	int waveID; // size=0, offset=12
+	unsigned long destSramAddr; // size=0, offset=16
+	unsigned long srcSramAddr; // size=0, offset=20
+	unsigned long moveSize; // size=0, offset=24
+	unsigned long readSize; // size=0, offset=28
 };
 
-struct AadVolFader // hashcode: 0x154D2357 (dec: 357376855)
+struct AadVolFader // hashcode: 0x25336B83 (dec: 624126851)
 {
-	short volumeStep; // size=0, offset=0
-	short targetVolume; // size=0, offset=2
-	void (*fadeCompleteCallback)(); // size=0, offset=4
+	int volumeStep; // size=0, offset=0
+	int targetVolume; // size=0, offset=4
+	void (*fadeCompleteCallback)(); // size=0, offset=8
 };
 
-struct gSoundData // hashcode: 0x100090FC (dec: 268472572)
+struct gSoundData // hashcode: 0x5C7065D7 (dec: 1550869975)
 {
 	unsigned long gMasterVol; // size=0, offset=0
 	unsigned long gMusicVol; // size=0, offset=4
@@ -2084,7 +2152,7 @@ struct gSoundData // hashcode: 0x100090FC (dec: 268472572)
 	char soundsLoaded; // size=0, offset=19
 };
 
-struct GameTracker // hashcode: 0x4EB3EFC5 (dec: 1320415173)
+struct GameTracker // hashcode: 0x1AD7FFD8 (dec: 450363352)
 {
 	struct _GameData_Type gameData; // size=32, offset=0
 	struct menu_t *menu; // size=0, offset=32
@@ -2150,61 +2218,61 @@ struct GameTracker // hashcode: 0x4EB3EFC5 (dec: 1320415173)
 	long maxIntroFXTime; // size=0, offset=432
 	struct gSoundData sound; // size=20, offset=436
 	short controllerMode; // size=0, offset=456
-	short cheatMode; // size=0, offset=458
-	char curDynamicSoundName[16]; // size=16, offset=460
-	char currentLvl; // size=0, offset=476
-	char lastLvl; // size=0, offset=477
-	struct Object *introFX; // size=76, offset=480
-	struct Intro *introFXIntro; // size=76, offset=484
-	unsigned long **drawOT; // size=0, offset=488
-	unsigned long **dispOT; // size=0, offset=492
-	struct P_TAG *savedOTStart; // size=8, offset=496
-	struct P_TAG *savedOTEnd; // size=8, offset=500
-	long introWaitTime; // size=0, offset=504
-	long mirrorZPush; // size=0, offset=508
-	long defVVRemoveDist; // size=0, offset=512
-	long defRemoveDist; // size=0, offset=516
-	struct _Position forcedStartPosition; // size=6, offset=520
-	short hudCollDisplay; // size=0, offset=526
-	long primMemUsed; // size=0, offset=528
-	char demoMode; // size=0, offset=532
-	char setDemoMode; // size=0, offset=533
-	char demoIndex; // size=0, offset=534
-	char demoEnabled; // size=0, offset=535
-	long cheatTimerCount; // size=0, offset=536
-	long playerCheatFlags; // size=0, offset=540
-	long savedPlayerCameraMode; // size=0, offset=544
-	long debugDrawFlags; // size=0, offset=548
-	void *planningPool; // size=0, offset=552
-	void *enemyPlanPool; // size=0, offset=556
-	unsigned char block_collide_override; // size=0, offset=560
-	unsigned char raziel_collide_override; // size=0, offset=561
-	short timeOfDay; // size=0, offset=562
-	long decoupleGame; // size=0, offset=564
-	long multGameTime; // size=0, offset=568
-	short spectral_fadeValue; // size=0, offset=572
-	short material_fadeValue; // size=0, offset=574
-	unsigned long drawTime; // size=0, offset=576
-	unsigned long currentTime; // size=0, offset=580
-	unsigned long currentMaterialTime; // size=0, offset=584
-	unsigned long currentSpectralTime; // size=0, offset=588
-	unsigned long currentTimeOfDayTime; // size=0, offset=592
-	unsigned long lastLoopTime; // size=0, offset=596
-	unsigned long timeMult; // size=0, offset=600
-	unsigned long globalTimeMult; // size=0, offset=604
-	unsigned long spectralTimeMult; // size=0, offset=608
-	unsigned long materialTimeMult; // size=0, offset=612
-	unsigned long currentTicks; // size=0, offset=616
-	unsigned long totalTime; // size=0, offset=620
-	unsigned long idleTime; // size=0, offset=624
-	long visibleInstances; // size=0, offset=628
-	int gameFramePassed; // size=0, offset=632
-	unsigned long timeSinceLastGameFrame; // size=0, offset=636
-	long frameRateLock; // size=0, offset=640
-	short frameRate24fps; // size=0, offset=644
+	unsigned char plan_collide_override; // size=0, offset=458
+	unsigned char cheatMode; // size=0, offset=459
+	char currentLvl; // size=0, offset=460
+	char lastLvl; // size=0, offset=461
+	struct Object *introFX; // size=76, offset=464
+	struct Intro *introFXIntro; // size=76, offset=468
+	unsigned long **drawOT; // size=0, offset=472
+	unsigned long **dispOT; // size=0, offset=476
+	struct P_TAG *savedOTStart; // size=8, offset=480
+	struct P_TAG *savedOTEnd; // size=8, offset=484
+	long introWaitTime; // size=0, offset=488
+	long mirrorZPush; // size=0, offset=492
+	long defVVRemoveDist; // size=0, offset=496
+	long defRemoveDist; // size=0, offset=500
+	struct _Position forcedStartPosition; // size=6, offset=504
+	short hudCollDisplay; // size=0, offset=510
+	long primMemUsed; // size=0, offset=512
+	char demoMode; // size=0, offset=516
+	char setDemoMode; // size=0, offset=517
+	char demoIndex; // size=0, offset=518
+	char demoEnabled; // size=0, offset=519
+	long cheatTimerCount; // size=0, offset=520
+	long playerCheatFlags; // size=0, offset=524
+	long savedPlayerCameraMode; // size=0, offset=528
+	long debugDrawFlags; // size=0, offset=532
+	void *planningPool; // size=0, offset=536
+	void *enemyPlanPool; // size=0, offset=540
+	unsigned char block_collide_override; // size=0, offset=544
+	unsigned char raziel_collide_override; // size=0, offset=545
+	short timeOfDay; // size=0, offset=546
+	long decoupleGame; // size=0, offset=548
+	long multGameTime; // size=0, offset=552
+	short spectral_fadeValue; // size=0, offset=556
+	short material_fadeValue; // size=0, offset=558
+	unsigned long drawTime; // size=0, offset=560
+	unsigned long currentTime; // size=0, offset=564
+	unsigned long currentMaterialTime; // size=0, offset=568
+	unsigned long currentSpectralTime; // size=0, offset=572
+	unsigned long currentTimeOfDayTime; // size=0, offset=576
+	unsigned long lastLoopTime; // size=0, offset=580
+	unsigned long timeMult; // size=0, offset=584
+	unsigned long globalTimeMult; // size=0, offset=588
+	unsigned long spectralTimeMult; // size=0, offset=592
+	unsigned long materialTimeMult; // size=0, offset=596
+	unsigned long currentTicks; // size=0, offset=600
+	unsigned long totalTime; // size=0, offset=604
+	unsigned long idleTime; // size=0, offset=608
+	long visibleInstances; // size=0, offset=612
+	int gameFramePassed; // size=0, offset=616
+	unsigned long timeSinceLastGameFrame; // size=0, offset=620
+	long frameRateLock; // size=0, offset=624
+	short frameRate24fps; // size=0, offset=628
 };
 
-struct Spline // hashcode: 0xA7B8D53F (dec: -1481059009)
+struct Spline // hashcode: 0xFB3D5813 (dec: -79865837)
 {
 	struct SplineKey *key; // size=32, offset=0
 	short numkeys; // size=0, offset=4
@@ -2212,27 +2280,27 @@ struct Spline // hashcode: 0xA7B8D53F (dec: -1481059009)
 	unsigned char flags; // size=0, offset=7
 };
 
-struct vecS // hashcode: 0xEADB8F3A (dec: -354709702)
+struct vecS // hashcode: 0xE2BAF7F0 (dec: -491063312)
 {
 	short x; // size=0, offset=0
 	short y; // size=0, offset=2
 	short z; // size=0, offset=4
 };
 
-struct vecL // hashcode: 0x7575CB14 (dec: 1970653972)
+struct vecL // hashcode: 0x25DC6B01 (dec: 635202305)
 {
 	long x; // size=0, offset=0
 	long y; // size=0, offset=4
 	long z; // size=0, offset=8
 };
 
-struct SplineRotKey // hashcode: 0xD2E3A87E (dec: -756832130)
+struct SplineRotKey // hashcode: 0x89B84640 (dec: -1984412096)
 {
 	short count; // size=0, offset=0
 	struct _G2Quat_Type q; // size=8, offset=2
 };
 
-struct RSpline // hashcode: 0xD9C500BD (dec: -641400643)
+struct RSpline // hashcode: 0x89BF98FB (dec: -1983932165)
 {
 	struct SplineRotKey *key; // size=10, offset=0
 	short numkeys; // size=0, offset=4
@@ -2240,7 +2308,7 @@ struct RSpline // hashcode: 0xD9C500BD (dec: -641400643)
 	unsigned char flags; // size=0, offset=7
 };
 
-struct SplineKey // hashcode: 0x5D3D994D (dec: 1564318029)
+struct SplineKey // hashcode: 0x5B2BCE9C (dec: 1529597596)
 {
 	short count; // size=0, offset=0
 	struct vecS point; // size=6, offset=2
@@ -2248,14 +2316,14 @@ struct SplineKey // hashcode: 0x5D3D994D (dec: 1564318029)
 	struct vecL ds; // size=12, offset=20
 };
 
-struct SplineDef // hashcode: 0x04DD5459 (dec: 81613913)
+struct SplineDef // hashcode: 0xAFF0503D (dec: -1343205315)
 {
 	short currkey; // size=0, offset=0
 	unsigned short denomFlag; // size=0, offset=2
 	long fracCurr; // size=0, offset=4
 };
 
-struct _HVertex // hashcode: 0xC488A83D (dec: -997676995)
+struct _HVertex // hashcode: 0x94027FD2 (dec: -1811775534)
 {
 	short x; // size=0, offset=0
 	short y; // size=0, offset=2
@@ -2264,27 +2332,27 @@ struct _HVertex // hashcode: 0xC488A83D (dec: -997676995)
 	long pad; // size=0, offset=8
 };
 
-struct _MONAPI_Regenerator // hashcode: 0x37E0AA1B (dec: 937470491)
+struct _MONAPI_Regenerator // hashcode: 0x1A0CA094 (dec: 437035156)
 {
 	unsigned long regenTime; // size=0, offset=0
 	short introUniqueID; // size=0, offset=4
 	short streamUnitID; // size=0, offset=6
 };
 
-struct __Event // hashcode: 0xBC16D673 (dec: -1139353997)
+struct __Event // hashcode: 0x8E99005C (dec: -1902575524)
 {
 	int ID; // size=0, offset=0
 	int Data; // size=0, offset=4
 };
 
-struct __MessageQueue // hashcode: 0x473062B5 (dec: 1194353333)
+struct __MessageQueue // hashcode: 0x29211D95 (dec: 690036117)
 {
 	int Head; // size=0, offset=0
 	int Tail; // size=0, offset=4
 	struct __Event Queue[16]; // size=128, offset=8
 };
 
-struct __State // hashcode: 0xA27CC1F7 (dec: -1568882185)
+struct __State // hashcode: 0xFBE6882E (dec: -68777938)
 {
 	void (*Process)(); // size=0, offset=0
 	struct __MessageQueue Event; // size=136, offset=4
@@ -2293,7 +2361,7 @@ struct __State // hashcode: 0xA27CC1F7 (dec: -1568882185)
 	int Data2; // size=0, offset=280
 };
 
-struct POLY_F4 // hashcode: 0xE2AC295D (dec: -492033699)
+struct POLY_F4 // hashcode: 0x4777CA51 (dec: 1199032913)
 {
 	unsigned long tag; // size=0, offset=0
 	unsigned char r0; // size=0, offset=4
@@ -2310,13 +2378,20 @@ struct POLY_F4 // hashcode: 0xE2AC295D (dec: -492033699)
 	short y3; // size=0, offset=22
 };
 
-struct EventPointers // hashcode: 0x3787E212 (dec: 931652114)
+struct _SmallRotation // hashcode: 0xD53F9CB5 (dec: -717251403)
+{
+	short x; // size=0, offset=0
+	short y; // size=0, offset=2
+	short z; // size=0, offset=4
+};
+
+struct EventPointers // hashcode: 0x8D42C18A (dec: -1925004918)
 {
 	long numPuzzles; // size=0, offset=0
 	struct Event (*eventInstances[1]); // size=4, offset=4
 };
 
-struct Camera // hashcode: 0x0670C20F (dec: 108053007)
+struct Camera // hashcode: 0x71DC3ACD (dec: 1910258381)
 {
 	struct _CameraCore_Type core; // size=224, offset=0
 	long shake; // size=0, offset=224
@@ -2465,7 +2540,7 @@ struct Camera // hashcode: 0x0670C20F (dec: 108053007)
 	short lead_timer; // size=0, offset=1218
 };
 
-struct DebugMenuLine // hashcode: 0xB294890C (dec: -1298888436)
+struct DebugMenuLine // hashcode: 0xA95B3709 (dec: -1453639927)
 {
 	enum DEBUG_LINE_TYPE type; // size=4, offset=0
 	long lower; // size=0, offset=4
@@ -2475,7 +2550,7 @@ struct DebugMenuLine // hashcode: 0xB294890C (dec: -1298888436)
 	long bit_mask; // size=0, offset=20
 };
 
-struct _ButtonTexture // hashcode: 0x36C27A0D (dec: 918714893)
+struct _ButtonTexture // hashcode: 0xF98FC03F (dec: -108019649)
 {
 	short tpage; // size=0, offset=0
 	short clut; // size=0, offset=2
@@ -2485,7 +2560,7 @@ struct _ButtonTexture // hashcode: 0x36C27A0D (dec: 918714893)
 	long xshift; // size=0, offset=12
 };
 
-struct _BlockVramEntry // hashcode: 0xD1D970C9 (dec: -774278967)
+struct _BlockVramEntry // hashcode: 0x13235498 (dec: 321082520)
 {
 	struct _BlockVramEntry *next; // size=28, offset=0
 	unsigned char type; // size=0, offset=4
@@ -2504,7 +2579,7 @@ struct _BlockVramEntry // hashcode: 0xD1D970C9 (dec: -774278967)
 	} udata; // size=4, offset=24, found in object files: debug.o, debug.o
 };
 
-struct FontChar // hashcode: 0x2FA2E9BF (dec: 799205823)
+struct FontChar // hashcode: 0xDB3B12BF (dec: -616885569)
 {
 	short x; // size=0, offset=0
 	short y; // size=0, offset=2
@@ -2512,7 +2587,7 @@ struct FontChar // hashcode: 0x2FA2E9BF (dec: 799205823)
 	char color; // size=0, offset=5
 };
 
-struct _BigFileEntry // hashcode: 0x6A105923 (dec: 1779456291)
+struct _BigFileEntry // hashcode: 0x1CD70C00 (dec: 483855360)
 {
 	long fileHash; // size=0, offset=0
 	long fileLen; // size=0, offset=4
@@ -2520,20 +2595,20 @@ struct _BigFileEntry // hashcode: 0x6A105923 (dec: 1779456291)
 	long checkSumFull; // size=0, offset=12
 };
 
-struct _BigFileDirEntry // hashcode: 0x292FD76D (dec: 691001197)
+struct _BigFileDirEntry // hashcode: 0x6997130A (dec: 1771508490)
 {
 	short streamUnitID; // size=0, offset=0
 	short numFiles; // size=0, offset=2
 	long subDirOffset; // size=0, offset=4
 };
 
-struct _BigFileDir // hashcode: 0xD1645829 (dec: -781952983)
+struct _BigFileDir // hashcode: 0xB00EFBC4 (dec: -1341195324)
 {
 	long numFiles; // size=0, offset=0
 	struct _BigFileEntry fileList[0]; // size=0, offset=4
 };
 
-struct _BigFile // hashcode: 0x88AA68E7 (dec: -2002097945)
+struct _BigFile // hashcode: 0x80BCE80A (dec: -2135103478)
 {
 	long bigfileBaseOffset; // size=0, offset=0
 	struct _BigFileDir *rootDir; // size=4, offset=4
@@ -2546,7 +2621,7 @@ struct _BigFile // hashcode: 0x88AA68E7 (dec: -2002097945)
 	struct _BigFileDirEntry *subDirList; // size=8, offset=32
 };
 
-struct _NonBlockLoadEntry // hashcode: 0x133F5082 (dec: 322916482)
+struct _NonBlockLoadEntry // hashcode: 0x0055D133 (dec: 5624115)
 {
 	long fileHash; // size=0, offset=0
 	long dirHash; // size=0, offset=4
@@ -2561,10 +2636,10 @@ struct _NonBlockLoadEntry // hashcode: 0x133F5082 (dec: 322916482)
 	void *retData; // size=0, offset=40
 	void *retData2; // size=0, offset=44
 	void **retPointer; // size=0, offset=48
-	char fileName[64]; // size=64, offset=52
+	char fileName[48]; // size=48, offset=52
 };
 
-struct _ReadQueueEntry // hashcode: 0xEB400E05 (dec: -348123643)
+struct _ReadQueueEntry // hashcode: 0xCD6A97EC (dec: -848652308)
 {
 	long readStartPos; // size=0, offset=0
 	long readSize; // size=0, offset=4
@@ -2579,14 +2654,14 @@ struct _ReadQueueEntry // hashcode: 0xEB400E05 (dec: -348123643)
 	void *retData2; // size=0, offset=40
 };
 
-struct _FX_MATRIX // hashcode: 0x2EB85885 (dec: 783833221)
+struct _FX_MATRIX // hashcode: 0x835750F4 (dec: -2091429644)
 {
 	struct NodeType node; // size=8, offset=0
 	long flags; // size=0, offset=8
 	struct MATRIX lwTransform; // size=32, offset=12
 };
 
-struct _FX_PRIM // hashcode: 0x16BF818E (dec: 381649294)
+struct _FX_PRIM // hashcode: 0x3BC7DC27 (dec: 1002953767)
 {
 	struct NodeType node; // size=8, offset=0
 	struct TextureMT3 *texture; // size=16, offset=8
@@ -2631,7 +2706,7 @@ struct _FX_PRIM // hashcode: 0x16BF818E (dec: 381649294)
 	} ani; // size=12, offset=104, found in object files: debug.o, debug.o
 };
 
-struct BASIC_LINE_G2 // hashcode: 0x684545B2 (dec: 1749370290)
+struct BASIC_LINE_G2 // hashcode: 0x790F383C (dec: 2031040572)
 {
 	unsigned char r0; // size=0, offset=0
 	unsigned char g0; // size=0, offset=1
@@ -2647,7 +2722,7 @@ struct BASIC_LINE_G2 // hashcode: 0x684545B2 (dec: 1749370290)
 	short y1; // size=0, offset=14
 };
 
-struct _BASIC_G4 // hashcode: 0xC15AD9EF (dec: -1051010577)
+struct _BASIC_G4 // hashcode: 0x4AEC9AD6 (dec: 1257020118)
 {
 	unsigned char r0; // size=0, offset=0
 	unsigned char g0; // size=0, offset=1
@@ -2675,7 +2750,7 @@ struct _BASIC_G4 // hashcode: 0xC15AD9EF (dec: -1051010577)
 	short y3; // size=0, offset=30
 };
 
-struct _BASIC_F4 // hashcode: 0x2871008E (dec: 678494350)
+struct _BASIC_F4 // hashcode: 0x49753F54 (dec: 1232420692)
 {
 	unsigned char r0; // size=0, offset=0
 	unsigned char g0; // size=0, offset=1
@@ -2691,7 +2766,7 @@ struct _BASIC_F4 // hashcode: 0x2871008E (dec: 678494350)
 	short y3; // size=0, offset=18
 };
 
-struct __BubbleParams // hashcode: 0xE483C494 (dec: -461126508)
+struct __BubbleParams // hashcode: 0x95A48FCE (dec: -1784377394)
 {
 	short DisperseFrames; // size=0, offset=0
 	short KillScale; // size=0, offset=2
@@ -2705,109 +2780,120 @@ struct __BubbleParams // hashcode: 0xE483C494 (dec: -461126508)
 	short UniqueBubbles; // size=0, offset=18
 };
 
-struct _GenericParticleParams // hashcode: 0x7A6370AD (dec: 2053337261)
+struct _GenericParticleParams // hashcode: 0x1C1255FF (dec: 470963711)
 {
-	short model; // size=0, offset=0
-	short texture; // size=0, offset=2
-	short size; // size=0, offset=4
-	unsigned char StartOnInit; // size=0, offset=6
-	unsigned char type; // size=0, offset=7
-	short birthRadius; // size=0, offset=8
-	char startSegment; // size=0, offset=10
-	char endSegment; // size=0, offset=11
-	struct _Position direction; // size=6, offset=12
-	unsigned char spectral_colorize; // size=0, offset=18
-	unsigned char absolute_direction; // size=0, offset=19
-	struct _Position acceleration; // size=6, offset=20
-	short useInstanceModel; // size=0, offset=26
-	long startColor; // size=0, offset=28
-	long endColor; // size=0, offset=32
-	short lifeTime; // size=0, offset=36
-	short primLifeTime; // size=0, offset=38
-	short startFadeValue; // size=0, offset=40
-	short fadeStep; // size=0, offset=42
-	char numberBirthParticles; // size=0, offset=44
-	char z_undulation_mode; // size=0, offset=45
-	short scaleSpeed; // size=0, offset=46
-	struct _Position offset; // size=6, offset=48
-	short startScale; // size=0, offset=54
+	short size; // size=0, offset=0
+	unsigned char StartOnInit; // size=0, offset=2
+	unsigned char type; // size=0, offset=3
+	short birthRadius; // size=0, offset=4
+	char startSegment; // size=0, offset=6
+	char endSegment; // size=0, offset=7
+	struct _Position direction; // size=6, offset=8
+	unsigned char spectral_colorize; // size=0, offset=14
+	unsigned char absolute_direction; // size=0, offset=15
+	char accx; // size=0, offset=16
+	char accy; // size=0, offset=17
+	char accz; // size=0, offset=18
+	char useInstanceModel; // size=0, offset=19
+	unsigned char startColor_red; // size=0, offset=20
+	unsigned char startColor_green; // size=0, offset=21
+	unsigned char startColor_blue; // size=0, offset=22
+	char model; // size=0, offset=23
+	unsigned char endColor_red; // size=0, offset=24
+	unsigned char endColor_green; // size=0, offset=25
+	unsigned char endColor_blue; // size=0, offset=26
+	char texture; // size=0, offset=27
+	short lifeTime; // size=0, offset=28
+	unsigned char primLifeTime; // size=0, offset=30
+	char use_child; // size=0, offset=31
+	short startFadeValue; // size=0, offset=32
+	short fadeStep; // size=0, offset=34
+	char numberBirthParticles; // size=0, offset=36
+	char z_undulation_mode; // size=0, offset=37
+	short scaleSpeed; // size=0, offset=38
+	struct _Position offset; // size=6, offset=40
+	short startScale; // size=0, offset=46
 };
 
-struct _GenericRibbonParams // hashcode: 0xD243E3C9 (dec: -767302711)
+struct _GenericRibbonParams // hashcode: 0x8D0DEAF5 (dec: -1928467723)
 {
-	short id; // size=0, offset=0
-	short StartOnInit; // size=0, offset=2
-	short startSegment; // size=0, offset=4
-	short endSegment; // size=0, offset=6
-	short type; // size=0, offset=8
-	short ribbonLifeTime; // size=0, offset=10
-	short faceLifeTime; // size=0, offset=12
-	short startFadeValue; // size=0, offset=14
-	long startColor; // size=0, offset=16
-	long endColor; // size=0, offset=20
+	char id; // size=0, offset=0
+	char StartOnInit; // size=0, offset=1
+	char startSegment; // size=0, offset=2
+	char endSegment; // size=0, offset=3
+	char type; // size=0, offset=4
+	char use_child; // size=0, offset=5
+	short ribbonLifeTime; // size=0, offset=6
+	short faceLifeTime; // size=0, offset=8
+	short startFadeValue; // size=0, offset=10
+	long startColor; // size=0, offset=12
+	long endColor; // size=0, offset=16
 };
 
-struct _GenericGlowParams // hashcode: 0xF67692B8 (dec: -160001352)
+struct _GenericGlowParams // hashcode: 0xCB7D507A (dec: -880979846)
 {
-	short id; // size=0, offset=0
-	short StartOnInit; // size=0, offset=2
-	unsigned char segment; // size=0, offset=4
-	unsigned char segmentEnd; // size=0, offset=5
-	short numSegments; // size=0, offset=6
-	short color_num; // size=0, offset=8
-	short numColors; // size=0, offset=10
-	long atuColorCycleRate; // size=0, offset=12
-	short width; // size=0, offset=16
-	short height; // size=0, offset=18
-	long lifetime; // size=0, offset=20
-	short fadein_time; // size=0, offset=24
-	short fadeout_time; // size=0, offset=26
+	char StartOnInit; // size=0, offset=0
+	unsigned char segment; // size=0, offset=1
+	unsigned char segmentEnd; // size=0, offset=2
+	char numSegments; // size=0, offset=3
+	unsigned char color_num; // size=0, offset=4
+	char use_child; // size=0, offset=5
+	unsigned char numColors; // size=0, offset=6
+	char id; // size=0, offset=7
+	long atuColorCycleRate; // size=0, offset=8
+	short width; // size=0, offset=12
+	short height; // size=0, offset=14
+	long lifetime; // size=0, offset=16
+	short fadein_time; // size=0, offset=20
+	short fadeout_time; // size=0, offset=22
 };
 
-struct _GenericLightningParams // hashcode: 0x226C68CF (dec: 577530063)
+struct _GenericLightningParams // hashcode: 0x2D05BEC5 (dec: 755351237)
 {
-	short type; // size=0, offset=0
+	char type; // size=0, offset=0
+	char use_child; // size=0, offset=1
 	short lifeTime; // size=0, offset=2
 	short deg; // size=0, offset=4
 	short deg_inc; // size=0, offset=6
 	struct _Position start_offset; // size=6, offset=8
-	short startSeg; // size=0, offset=14
+	char startSeg; // size=0, offset=14
+	char endSeg; // size=0, offset=15
 	struct _Position end_offset; // size=6, offset=16
-	short endSeg; // size=0, offset=22
-	short matrixSeg; // size=0, offset=24
-	short width; // size=0, offset=26
-	short small_width; // size=0, offset=28
-	short segs; // size=0, offset=30
-	short sine_size; // size=0, offset=32
-	short variation; // size=0, offset=34
-	long color; // size=0, offset=36
-	long glow_color; // size=0, offset=40
+	char matrixSeg; // size=0, offset=22
+	unsigned char segs; // size=0, offset=23
+	short width; // size=0, offset=24
+	short small_width; // size=0, offset=26
+	short sine_size; // size=0, offset=28
+	short variation; // size=0, offset=30
+	long color; // size=0, offset=32
+	long glow_color; // size=0, offset=36
 };
 
-struct _GenericBlastringParams // hashcode: 0xAB3B2462 (dec: -1422187422)
+struct _GenericBlastringParams // hashcode: 0x40C5E9AC (dec: 1086712236)
 {
-	short type; // size=0, offset=0
+	char type; // size=0, offset=0
+	char use_child; // size=0, offset=1
 	short lifeTime; // size=0, offset=2
-	short matrixSeg; // size=0, offset=4
-	short segment; // size=0, offset=6
-	struct _SVector offset; // size=8, offset=8
-	short sortInWorld; // size=0, offset=16
-	short radius; // size=0, offset=18
-	short size1; // size=0, offset=20
-	short size2; // size=0, offset=22
-	short endRadius; // size=0, offset=24
-	short colorchange_radius; // size=0, offset=26
-	int vel; // size=0, offset=28
-	int accl; // size=0, offset=32
-	short height1; // size=0, offset=36
-	short height2; // size=0, offset=38
-	short height3; // size=0, offset=40
-	short predator_offset; // size=0, offset=42
-	long startColor; // size=0, offset=44
-	long endColor; // size=0, offset=48
+	struct _Position offset; // size=6, offset=4
+	short matrixSeg; // size=0, offset=10
+	char segment; // size=0, offset=12
+	char sortInWorld; // size=0, offset=13
+	short radius; // size=0, offset=14
+	short size1; // size=0, offset=16
+	short size2; // size=0, offset=18
+	short endRadius; // size=0, offset=20
+	short colorchange_radius; // size=0, offset=22
+	int vel; // size=0, offset=24
+	int accl; // size=0, offset=28
+	short height1; // size=0, offset=32
+	short height2; // size=0, offset=34
+	short height3; // size=0, offset=36
+	short predator_offset; // size=0, offset=38
+	long startColor; // size=0, offset=40
+	long endColor; // size=0, offset=44
 };
 
-struct _GenericFlashParams // hashcode: 0x06D8DB60 (dec: 114875232)
+struct _GenericFlashParams // hashcode: 0xD1187CAC (dec: -786924372)
 {
 	short type; // size=0, offset=0
 	short timeToColor; // size=0, offset=2
@@ -2816,27 +2902,7 @@ struct _GenericFlashParams // hashcode: 0x06D8DB60 (dec: 114875232)
 	short timeFromColor; // size=0, offset=10
 };
 
-struct XAFileInfo // hashcode: 0xD20CF9DB (dec: -770901541)
-{
-	int startPos; // size=0, offset=0
-};
-
-struct CdCommand // hashcode: 0x5AFC9D1E (dec: 1526504734)
-{
-	unsigned short flags; // size=0, offset=0
-	unsigned char unused; // size=0, offset=2
-	unsigned char cdCommand; // size=0, offset=3
-	unsigned char cdCmdParam[4]; // size=4, offset=4
-};
-
-struct VoiceCommand // hashcode: 0xBF82A118 (dec: -1081958120)
-{
-	unsigned char voiceCmd; // size=0, offset=0
-	unsigned char nextVoiceStatus; // size=0, offset=1
-	unsigned short voiceCmdParam; // size=0, offset=2
-};
-
-struct _StreamUnit // hashcode: 0x1D5D5061 (dec: 492654689)
+struct _StreamUnit // hashcode: 0x8DBD8F8C (dec: -1916956788)
 {
 	long StreamUnitID; // size=0, offset=0
 	short used; // size=0, offset=4
@@ -2856,59 +2922,81 @@ struct _StreamUnit // hashcode: 0x1D5D5061 (dec: 492654689)
 	short pad; // size=0, offset=62
 };
 
-struct _LoadQueueEntry // hashcode: 0xFEE70962 (dec: -18413214)
+struct XAFileInfo // hashcode: 0x146DFE7F (dec: 342752895)
 {
-	struct _LoadQueueEntry *next; // size=128, offset=0
+	int startPos; // size=0, offset=0
+};
+
+struct CdCommand // hashcode: 0xA5C7C0A4 (dec: -1513635676)
+{
+	unsigned short flags; // size=0, offset=0
+	unsigned char unused; // size=0, offset=2
+	unsigned char cdCommand; // size=0, offset=3
+	unsigned char cdCmdParam[4]; // size=4, offset=4
+};
+
+struct VoiceCommand // hashcode: 0x5FD3C645 (dec: 1607714373)
+{
+	unsigned char voiceCmd; // size=0, offset=0
+	unsigned char nextVoiceStatus; // size=0, offset=1
+	unsigned short voiceCmdParam; // size=0, offset=2
+};
+
+struct _LoadQueueEntry // hashcode: 0xFCC91BD2 (dec: -53929006)
+{
+	struct _LoadQueueEntry *next; // size=112, offset=0
 	short status; // size=0, offset=4
 	char relocateBinary; // size=0, offset=6
 	char mempackUsed; // size=0, offset=7
-	struct _NonBlockLoadEntry loadEntry; // size=116, offset=8
-	long endLoadTime; // size=0, offset=124
+	struct _NonBlockLoadEntry loadEntry; // size=100, offset=8
+	long endLoadTime; // size=0, offset=108
 };
 
-struct _SavedIntro // hashcode: 0x743E92B6 (dec: 1950257846)
+struct SavedBasic // hashcode: 0x029C9345 (dec: 43815749)
 {
-	short savedID; // size=0, offset=0
-	short saveSize; // size=0, offset=2
-	char name[12]; // size=12, offset=4
-	short introUniqueID; // size=0, offset=16
-	short streamUnitID; // size=0, offset=18
-	short birthUnitID; // size=0, offset=20
-	unsigned char lightGroup; // size=0, offset=22
-	unsigned char specturalLightGroup; // size=0, offset=23
-	struct _Rotation rotation; // size=8, offset=24
-	struct _Position position; // size=6, offset=32
-	long flags; // size=0, offset=40
-	long flags2; // size=0, offset=44
-	short extraDataSize; // size=0, offset=48
-	unsigned short attachedUniqueID; // size=0, offset=50
-	short splineFlags; // size=0, offset=52
-	short splineKeyFrame; // size=0, offset=54
-	short splineClipBeg; // size=0, offset=56
-	short splineClipEnd; // size=0, offset=58
+	unsigned char savedID; // size=0, offset=0
+	unsigned char shiftedSaveSize; // size=0, offset=1
 };
 
-struct SavedEvent // hashcode: 0x4773A235 (dec: 1198760501)
+struct _SavedIntro // hashcode: 0xBA6B9291 (dec: -1167355247)
 {
-	short savedID; // size=0, offset=0
-	short saveSize; // size=0, offset=2
-	long areaID; // size=0, offset=4
-	short eventNumber; // size=0, offset=8
-	short eventVariables[5]; // size=10, offset=10
+	unsigned char savedID; // size=0, offset=0
+	unsigned char shiftedSaveSize; // size=0, offset=1
+	unsigned char lightGroup; // size=0, offset=2
+	unsigned char specturalLightGroup; // size=0, offset=3
+	char name[8]; // size=8, offset=4
+	short introUniqueID; // size=0, offset=12
+	short streamUnitID; // size=0, offset=14
+	short birthUnitID; // size=0, offset=16
+	unsigned short attachedUniqueID; // size=0, offset=18
+	struct _SmallRotation smallRotation; // size=6, offset=20
+	struct _Position position; // size=6, offset=26
+	long flags; // size=0, offset=32
+	long flags2; // size=0, offset=36
 };
 
-struct SavedBspTree // hashcode: 0x329673FB (dec: 848720891)
+struct SavedEvent // hashcode: 0xAAD4BDF2 (dec: -1428898318)
+{
+	unsigned char savedID; // size=0, offset=0
+	unsigned char shiftedSaveSize; // size=0, offset=1
+	short areaID; // size=0, offset=2
+	short eventNumber; // size=0, offset=4
+	short eventVariables[5]; // size=10, offset=6
+};
+
+struct SavedBspTree // hashcode: 0xC0C9F01C (dec: -1060507620)
 {
 	struct _Position localOffset; // size=6, offset=0
-	short flags; // size=0, offset=6
+	unsigned char importantFlagsSaved; // size=0, offset=6
+	unsigned char bspIndex; // size=0, offset=7
 };
 
-struct EventBasicObject // hashcode: 0x4FDD9FC4 (dec: 1339924420)
+struct EventBasicObject // hashcode: 0x02440FE4 (dec: 38014948)
 {
 	short id; // size=0, offset=0
 };
 
-struct EventWildCardObject // hashcode: 0x74046471 (dec: 1946444913)
+struct EventWildCardObject // hashcode: 0xBF1E373D (dec: -1088538819)
 {
 	short id; // size=0, offset=0
 	short spad; // size=0, offset=2
@@ -2916,7 +3004,7 @@ struct EventWildCardObject // hashcode: 0x74046471 (dec: 1946444913)
 	char *objectName; // size=0, offset=8
 };
 
-struct Event // hashcode: 0x4BE0FA04 (dec: 1273035268)
+struct Event // hashcode: 0x001DBFE7 (dec: 1949671)
 {
 	short eventNumber; // size=0, offset=0
 	short numInstances; // size=0, offset=2
@@ -2928,14 +3016,14 @@ struct Event // hashcode: 0x4BE0FA04 (dec: 1273035268)
 	struct ScriptPCode **actionList; // size=8, offset=24
 };
 
-struct ScriptPCode // hashcode: 0x76385939 (dec: 1983404345)
+struct ScriptPCode // hashcode: 0x05D75C5A (dec: 97999962)
 {
 	unsigned short sizeOfPcodeStream; // size=0, offset=0
 	unsigned short conditionBits; // size=0, offset=2
 	short *data; // size=0, offset=4
 };
 
-struct InstanceSpline // hashcode: 0x94835ECF (dec: -1803329841)
+struct InstanceSpline // hashcode: 0x5B28EE39 (dec: 1529409081)
 {
 	struct _Instance *instance; // size=664, offset=0
 	struct MultiSpline *spline; // size=80, offset=4
@@ -2945,7 +3033,7 @@ struct InstanceSpline // hashcode: 0x94835ECF (dec: -1803329841)
 	long splineFlags; // size=0, offset=20
 };
 
-struct Vector3d // hashcode: 0xCF00F1CB (dec: -822021685)
+struct Vector3d // hashcode: 0xAB88D964 (dec: -1417094812)
 {
 	short vx; // size=0, offset=0
 	short vy; // size=0, offset=2
@@ -2955,9 +3043,10 @@ struct Vector3d // hashcode: 0xCF00F1CB (dec: -822021685)
 	short errory; // size=0, offset=10
 	short errorz; // size=0, offset=12
 	short pad2; // size=0, offset=14
+	long streamUnitID; // size=0, offset=16
 };
 
-struct Rotation3d // hashcode: 0xD1DEA474 (dec: -773938060)
+struct Rotation3d // hashcode: 0x120185DB (dec: 302089691)
 {
 	short vx; // size=0, offset=0
 	short vy; // size=0, offset=2
@@ -2970,57 +3059,57 @@ struct Rotation3d // hashcode: 0xD1DEA474 (dec: -773938060)
 	long attribute; // size=0, offset=16
 };
 
-struct InstanceObject // hashcode: 0xFFFDD125 (dec: -143067)
+struct InstanceObject // hashcode: 0x95FDE2A2 (dec: -1778523486)
 {
 	struct _Instance *instance; // size=664, offset=0
 	long attribute; // size=0, offset=4
 };
 
-struct EventObject // hashcode: 0xA118721F (dec: -1592233441)
+struct EventObject // hashcode: 0x4F1FAC97 (dec: 1327475863)
 {
 	struct Event *event; // size=28, offset=0
 	long attribute; // size=0, offset=4
 };
 
-struct SavedEventObject // hashcode: 0x9ABD1A18 (dec: -1698883048)
+struct SavedEventObject // hashcode: 0x58ADC702 (dec: 1487783682)
 {
-	struct SavedEvent *savedEvent; // size=20, offset=0
+	struct SavedBasic *savedEvent; // size=2, offset=0
 	long attribute; // size=0, offset=4
 	long areaID; // size=0, offset=8
 	long eventNumber; // size=0, offset=12
 };
 
-struct GameObject // hashcode: 0x8102C17E (dec: -2130525826)
+struct GameObject // hashcode: 0x448B3FF6 (dec: 1149976566)
 {
 	long attribute; // size=0, offset=0
 };
 
-struct SignalObject // hashcode: 0x7CFF5F95 (dec: 2097110933)
+struct SignalObject // hashcode: 0x5BC697E8 (dec: 1539741672)
 {
 	struct _MultiSignal *msignal; // size=904, offset=0
 	long attribute; // size=0, offset=4
 };
 
-struct IntroObject // hashcode: 0x17A7AB97 (dec: 396864407)
+struct IntroObject // hashcode: 0x528FAC37 (dec: 1385147447)
 {
 	struct Intro *intro; // size=76, offset=0
 	long attribute; // size=0, offset=4
 };
 
-struct InstanceAnimate // hashcode: 0xD71AE6DE (dec: -686102818)
+struct InstanceAnimate // hashcode: 0xED4107B2 (dec: -314505294)
 {
 	struct _Instance *instance; // size=664, offset=0
 	long attribute; // size=0, offset=4
 };
 
-struct InstanceAnimateTexture // hashcode: 0x2EE83E97 (dec: 786972311)
+struct InstanceAnimateTexture // hashcode: 0xDD936D48 (dec: -577540792)
 {
 	struct _Instance *instance; // size=664, offset=0
 	struct AniTex *aniTextures; // size=16, offset=4
 	long attribute; // size=0, offset=8
 };
 
-struct ListObject // hashcode: 0x97253D02 (dec: -1759167230)
+struct ListObject // hashcode: 0x1CBB87EA (dec: 482052074)
 {
 	struct EventWildCardObject *eventInstance; // size=12, offset=0
 	long attribute[5]; // size=20, offset=4
@@ -3028,7 +3117,7 @@ struct ListObject // hashcode: 0x97253D02 (dec: -1759167230)
 	long lineID; // size=0, offset=28
 };
 
-struct SubListObject // hashcode: 0x91F2E4A5 (dec: -1846352731)
+struct SubListObject // hashcode: 0x697AE038 (dec: 1769660472)
 {
 	struct _Instance **instanceList; // size=664, offset=0
 	long numberOfInstances; // size=0, offset=4
@@ -3036,7 +3125,7 @@ struct SubListObject // hashcode: 0x91F2E4A5 (dec: -1846352731)
 	long attribute[5]; // size=20, offset=12
 };
 
-struct TGroupObject // hashcode: 0x345F62D1 (dec: 878666449)
+struct TGroupObject // hashcode: 0xDC675420 (dec: -597208032)
 {
 	struct BSPTree *bspTree; // size=36, offset=0
 	struct _StreamUnit *streamUnit; // size=64, offset=4
@@ -3044,34 +3133,34 @@ struct TGroupObject // hashcode: 0x345F62D1 (dec: 878666449)
 	short arg[2]; // size=4, offset=12
 };
 
-struct ConstrictInfo // hashcode: 0x3D981F77 (dec: 1033379703)
+struct ConstrictInfo // hashcode: 0x0362FA81 (dec: 56818305)
 {
 	struct _Instance *instance; // size=664, offset=0
 	long attribute; // size=0, offset=4
 };
 
-struct CameraObject // hashcode: 0x64AF783A (dec: 1689221178)
+struct CameraObject // hashcode: 0xAE75F471 (dec: -1368001423)
 {
 	struct Camera *camera; // size=1220, offset=0
 	long frames; // size=0, offset=4
 	long attribute; // size=0, offset=8
 };
 
-struct EventVmObject // hashcode: 0x01933B22 (dec: 26426146)
+struct EventVmObject // hashcode: 0x2E9DDC2B (dec: 782097451)
 {
 	struct _VMObject *vmObjectPtr; // size=60, offset=0
 	struct Level *level; // size=392, offset=4
 	long attribute; // size=0, offset=8
 };
 
-struct AreaObject // hashcode: 0xE8811A72 (dec: -394192270)
+struct AreaObject // hashcode: 0xC3E7BB5C (dec: -1008223396)
 {
 	struct _StreamUnit *streamUnit; // size=64, offset=0
 	long attribute; // size=0, offset=4
 	long unitID; // size=0, offset=8
 };
 
-struct SoundObject // hashcode: 0xF99EA31D (dec: -107044067)
+struct SoundObject // hashcode: 0x12E32363 (dec: 316875619)
 {
 	short flags; // size=0, offset=0
 	short attribute; // size=0, offset=2
@@ -3084,7 +3173,7 @@ struct SoundObject // hashcode: 0xF99EA31D (dec: -107044067)
 	} data; // size=4, offset=16, found in object files: debug.o, debug.o
 };
 
-struct StackType // hashcode: 0x2F5F50E2 (dec: 794775778)
+struct StackType // hashcode: 0xFD471538 (dec: -45673160)
 {
 	long id; // size=0, offset=0
 	union {
@@ -3093,7 +3182,7 @@ struct StackType // hashcode: 0x2F5F50E2 (dec: 794775778)
 			long attribute; // size=0, offset=4
 		} Object; // size=8, offset=0, found in object files: debug.o, debug.o
 		struct {
-			struct _SavedIntro *intro; // size=60, offset=0
+			struct _SavedIntro *intro; // size=40, offset=0
 			long attribute; // size=0, offset=4
 		} SavedIntroObject; // size=8, offset=0, found in object files: debug.o, debug.o
 		struct InstanceSpline instanceSpline; // size=24, offset=0
@@ -3107,6 +3196,9 @@ struct StackType // hashcode: 0x2F5F50E2 (dec: 794775778)
 			short vy; // size=0, offset=2
 		} Vector2d; // size=4, offset=0, found in object files: debug.o, debug.o
 		struct {
+			char *pointer; // size=0, offset=0
+		} CharPointer; // size=4, offset=0, found in object files: debug.o, debug.o
+		struct {
 			short *pointer; // size=0, offset=0
 		} ShortPointer; // size=4, offset=0, found in object files: debug.o, debug.o
 		struct {
@@ -3114,7 +3206,7 @@ struct StackType // hashcode: 0x2F5F50E2 (dec: 794775778)
 		} LongPointer; // size=4, offset=0, found in object files: debug.o, debug.o
 		struct AreaObject areaObject; // size=12, offset=0
 		struct InstanceObject instanceObject; // size=8, offset=0
-		struct Vector3d vector3d; // size=16, offset=0
+		struct Vector3d vector3d; // size=20, offset=0
 		struct Rotation3d rotation3d; // size=20, offset=0
 		struct SignalObject signalObject; // size=8, offset=0
 		struct EventObject eventObject; // size=8, offset=0
@@ -3133,25 +3225,25 @@ struct StackType // hashcode: 0x2F5F50E2 (dec: 794775778)
 	} data; // size=32, offset=4, found in object files: debug.o, debug.o
 };
 
-struct __ReaverSaveDat // hashcode: 0x29690AA7 (dec: 694749863)
+struct __ReaverSaveDat // hashcode: 0x6C072417 (dec: 1812407319)
 {
 	unsigned long pad; // size=0, offset=0
 };
 
-struct debug_dispatch_t // hashcode: 0xD1295757 (dec: -785819817)
+struct debug_dispatch_t // hashcode: 0x27FCED60 (dec: 670887264)
 {
 	enum DEBUG_LINE_TYPE type; // size=4, offset=0
 	void (*fn)(); // size=0, offset=4
 };
 
-struct debug_format_t // hashcode: 0xA92B8A65 (dec: -1456764315)
+struct debug_format_t // hashcode: 0x6E2CC554 (dec: 1848427860)
 {
 	int xpos; // size=0, offset=0
 	int ypos; // size=0, offset=4
 	int is_centered; // size=0, offset=8
 };
 
-struct POLY_GT3 // hashcode: 0x3999F1FF (dec: 966390271)
+struct POLY_GT3 // hashcode: 0xD669B49A (dec: -697715558)
 {
 	unsigned long tag; // size=0, offset=0
 	unsigned char r0; // size=0, offset=4
@@ -3183,7 +3275,7 @@ struct POLY_GT3 // hashcode: 0x3999F1FF (dec: 966390271)
 	unsigned short pad2; // size=0, offset=38
 };
 
-struct POLY_GT4 // hashcode: 0xB2900D85 (dec: -1299182203)
+struct POLY_GT4 // hashcode: 0xF09EF1FF (dec: -258018817)
 {
 	unsigned long tag; // size=0, offset=0
 	unsigned char r0; // size=0, offset=4
@@ -3224,14 +3316,14 @@ struct POLY_GT4 // hashcode: 0xB2900D85 (dec: -1299182203)
 	unsigned short pad3; // size=0, offset=50
 };
 
-struct _Vector // hashcode: 0xB0A1B5AB (dec: -1331579477)
+struct _Vector // hashcode: 0x185ABB69 (dec: 408599401)
 {
 	long x; // size=0, offset=0
 	long y; // size=0, offset=4
 	long z; // size=0, offset=8
 };
 
-struct _PFace // hashcode: 0xE00ABD34 (dec: -536167116)
+struct _PFace // hashcode: 0xB584310A (dec: -1249627894)
 {
 	unsigned long *tag; // size=0, offset=0
 	unsigned char r0; // size=0, offset=4
@@ -3257,13 +3349,13 @@ struct _PFace // hashcode: 0xE00ABD34 (dec: -536167116)
 	long pad3; // size=0, offset=36
 };
 
-struct _PolytopeList // hashcode: 0x0E6C33C5 (dec: 241972165)
+struct _PolytopeList // hashcode: 0x29C18E10 (dec: 700550672)
 {
 	long numPolytopes; // size=0, offset=0
 	void (*polytope[1024]); // size=4096, offset=4
 };
 
-struct DRAW_109fake // hashcode: 0xC960285E (dec: -916445090)
+struct DRAW_109fake // hashcode: 0x6C06A294 (dec: 1812374164)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -3295,14 +3387,14 @@ struct DRAW_109fake // hashcode: 0xC960285E (dec: -916445090)
 	} Follow; // size=20, offset=76, found in object files: draw.o, draw.o
 };
 
-struct UVTYPE // hashcode: 0x9F5B71F3 (dec: -1621397005)
+struct UVTYPE // hashcode: 0xF3221407 (dec: -215870457)
 {
 	unsigned char u; // size=0, offset=0
 	unsigned char v; // size=0, offset=1
 	short pad; // size=0, offset=2
 };
 
-struct POLY_G3_SEMITRANS // hashcode: 0xA2D25D65 (dec: -1563271835)
+struct POLY_G3_SEMITRANS // hashcode: 0xF5BC152A (dec: -172223190)
 {
 	unsigned long tag; // size=0, offset=0
 	unsigned long dr_tpage; // size=0, offset=4
@@ -3326,14 +3418,14 @@ struct POLY_G3_SEMITRANS // hashcode: 0xA2D25D65 (dec: -1563271835)
 	short y2; // size=0, offset=30
 };
 
-struct _POLY_NG4 // hashcode: 0x3F211518 (dec: 1059132696)
+struct _POLY_NG4 // hashcode: 0x3EC03DC8 (dec: 1052786120)
 {
 	unsigned long tag; // size=0, offset=0
 	unsigned long drawTPage1; // size=0, offset=4
 	struct _BASIC_G4 p1; // size=32, offset=8
 };
 
-struct _GT3ZVertexD3D_Type // hashcode: 0x1BBE2E68 (dec: 465448552)
+struct _GT3ZVertexD3D_Type // hashcode: 0x83E63288 (dec: -2082065784)
 {
 	float x; // size=0, offset=0
 	float y; // size=0, offset=4
@@ -3344,7 +3436,7 @@ struct _GT3ZVertexD3D_Type // hashcode: 0x1BBE2E68 (dec: 465448552)
 	float v; // size=0, offset=24
 };
 
-struct SP_SUBDIV_STRUCT // hashcode: 0x4D2189BB (dec: 1294043579)
+struct SP_SUBDIV_STRUCT // hashcode: 0x409957AF (dec: 1083791279)
 {
 	struct _SVector vertex0; // size=8, offset=0
 	struct _SVector vertex1; // size=8, offset=8
@@ -3373,7 +3465,7 @@ struct SP_SUBDIV_STRUCT // hashcode: 0x4D2189BB (dec: 1294043579)
 	struct DVECTOR sxy[4]; // size=16, offset=196
 };
 
-struct POLY_FT4 // hashcode: 0xE80A6EF5 (dec: -401969419)
+struct POLY_FT4 // hashcode: 0xF9F847B2 (dec: -101169230)
 {
 	unsigned long tag; // size=0, offset=0
 	unsigned char r0; // size=0, offset=4
@@ -3402,7 +3494,7 @@ struct POLY_FT4 // hashcode: 0xE80A6EF5 (dec: -401969419)
 	unsigned short pad2; // size=0, offset=38
 };
 
-struct FontTracker // hashcode: 0xF3EACAD7 (dec: -202716457)
+struct FontTracker // hashcode: 0x22F7B28C (dec: 586658444)
 {
 	struct FontChar font_buffer[256]; // size=1536, offset=0
 	long font_xpos; // size=0, offset=1536
@@ -3420,7 +3512,7 @@ struct FontTracker // hashcode: 0xF3EACAD7 (dec: -202716457)
 	char color_local; // size=0, offset=1565
 };
 
-struct FONT_117fake // hashcode: 0xD31E71DD (dec: -752979491)
+struct FONT_117fake // hashcode: 0x6359F658 (dec: 1666840152)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -3452,14 +3544,14 @@ struct FONT_117fake // hashcode: 0xD31E71DD (dec: -752979491)
 	} Follow; // size=20, offset=76, found in object files: font.o, font.o
 };
 
-struct font_color_t // hashcode: 0x444C2095 (dec: 1145839765)
+struct font_color_t // hashcode: 0x4612A44B (dec: 1175626827)
 {
 	int r; // size=0, offset=0
 	int g; // size=0, offset=4
 	int b; // size=0, offset=8
 };
 
-struct FontPos // hashcode: 0xD28D6F4B (dec: -762482869)
+struct FontPos // hashcode: 0x5BE713A2 (dec: 1541870498)
 {
 	char x; // size=0, offset=0
 	char y; // size=0, offset=1
@@ -3467,7 +3559,7 @@ struct FontPos // hashcode: 0xD28D6F4B (dec: -762482869)
 	char h; // size=0, offset=3
 };
 
-struct GAMEPAD_114fake // hashcode: 0x9DB41AFD (dec: -1649140995)
+struct GAMEPAD_114fake // hashcode: 0x085EF045 (dec: 140439621)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -3499,13 +3591,13 @@ struct GAMEPAD_114fake // hashcode: 0x9DB41AFD (dec: -1649140995)
 	} Follow; // size=20, offset=76, found in object files: gamepad.o, gamepad.o
 };
 
-struct JoypadMappingStruct // hashcode: 0xFBD1C09A (dec: -70139750)
+struct JoypadMappingStruct // hashcode: 0x2D052501 (dec: 755311873)
 {
 	unsigned short psxData; // size=0, offset=0
 	unsigned short translation; // size=0, offset=2
 };
 
-struct AnalogueData // hashcode: 0xAA926500 (dec: -1433246464)
+struct AnalogueData // hashcode: 0xBA98F400 (dec: -1164381184)
 {
 	unsigned short pad; // size=0, offset=0
 	unsigned char xR; // size=0, offset=2
@@ -3514,7 +3606,7 @@ struct AnalogueData // hashcode: 0xAA926500 (dec: -1433246464)
 	unsigned char yL; // size=0, offset=5
 };
 
-struct ControllerPacket // hashcode: 0xEA7D8F3D (dec: -360870083)
+struct ControllerPacket // hashcode: 0x786834C5 (dec: 2020095173)
 {
 	unsigned char transStatus; // size=0, offset=0
 	unsigned char dataFormat; // size=0, offset=1
@@ -3527,7 +3619,7 @@ struct ControllerPacket // hashcode: 0xEA7D8F3D (dec: -360870083)
 	} data; // size=32, offset=2, found in object files: gamepad.o, gamepad.o
 };
 
-struct _G2EulerAngles_Type // hashcode: 0x7B78521B (dec: 2071482907)
+struct _G2EulerAngles_Type // hashcode: 0x3AA6C799 (dec: 984008601)
 {
 	short x; // size=0, offset=0
 	short y; // size=0, offset=2
@@ -3535,13 +3627,13 @@ struct _G2EulerAngles_Type // hashcode: 0x7B78521B (dec: 2071482907)
 	short order; // size=0, offset=6
 };
 
-struct _InstanceHandle // hashcode: 0x6CCD5C02 (dec: 1825397762)
+struct _InstanceHandle // hashcode: 0xB737FB0B (dec: -1221068021)
 {
 	struct _Instance *instance; // size=664, offset=0
 	long instanceID; // size=0, offset=4
 };
 
-struct evCollideInstanceStatsData // hashcode: 0xB47C627B (dec: -1266916741)
+struct evCollideInstanceStatsData // hashcode: 0x72E441C9 (dec: 1927561673)
 {
 	struct _Instance *instance; // size=664, offset=0
 	unsigned long distance; // size=0, offset=4
@@ -3550,14 +3642,14 @@ struct evCollideInstanceStatsData // hashcode: 0xB47C627B (dec: -1266916741)
 	long zDelta; // size=0, offset=20
 };
 
-struct INICommand // hashcode: 0x1F5BD226 (dec: 526111270)
+struct INICommand // hashcode: 0x8BE1B64A (dec: -1948142006)
 {
 	short command; // size=0, offset=0
 	short numParameters; // size=0, offset=2
 	long parameter[0]; // size=0, offset=4
 };
 
-struct PhysObProperties // hashcode: 0xF5D09A10 (dec: -170878448)
+struct PhysObProperties // hashcode: 0x9B19BD7B (dec: -1692811909)
 {
 	unsigned short version; // size=0, offset=0
 	unsigned short family; // size=0, offset=2
@@ -3565,13 +3657,13 @@ struct PhysObProperties // hashcode: 0xF5D09A10 (dec: -170878448)
 	unsigned short Type; // size=0, offset=6
 };
 
-struct PhysObSplinter // hashcode: 0xC0FCEF99 (dec: -1057165415)
+struct PhysObSplinter // hashcode: 0x778EFC18 (dec: 2005859352)
 {
 	long numSplintData; // size=0, offset=0
 	void *splinterData; // size=0, offset=4
 };
 
-struct PhysObWeaponAttributes // hashcode: 0xA4F6F91F (dec: -1527318241)
+struct PhysObWeaponAttributes // hashcode: 0xC7D41523 (dec: -942402269)
 {
 	long Damage; // size=0, offset=0
 	long AltDamage; // size=0, offset=4
@@ -3586,7 +3678,7 @@ struct PhysObWeaponAttributes // hashcode: 0xA4F6F91F (dec: -1527318241)
 	struct PhysObSplinter splinter; // size=8, offset=20
 };
 
-struct _PhysObLight // hashcode: 0x5300709A (dec: 1392537754)
+struct _PhysObLight // hashcode: 0x9539F3EC (dec: -1791364116)
 {
 	unsigned char length; // size=0, offset=0
 	unsigned char segment; // size=0, offset=1
@@ -3594,7 +3686,7 @@ struct _PhysObLight // hashcode: 0x5300709A (dec: 1392537754)
 	struct LightTableEntry *lightTable; // size=8, offset=4
 };
 
-struct __PhysObProjectileData // hashcode: 0x40B34E2E (dec: 1085492782)
+struct __PhysObProjectileData // hashcode: 0x78BFDD35 (dec: 2025839925)
 {
 	char model; // size=0, offset=0
 	char startAnim; // size=0, offset=1
@@ -3604,7 +3696,13 @@ struct __PhysObProjectileData // hashcode: 0x40B34E2E (dec: 1085492782)
 	struct PhysObWeaponAttributes *weapon; // size=28, offset=8
 };
 
-struct LightTableEntry // hashcode: 0xB084076C (dec: -1333524628)
+struct SwitchData // hashcode: 0x55A03B27 (dec: 1436564263)
+{
+	short state; // size=0, offset=0
+	short accumulator; // size=0, offset=2
+};
+
+struct LightTableEntry // hashcode: 0x2683A29E (dec: 646161054)
 {
 	short r; // size=0, offset=0
 	short g; // size=0, offset=2
@@ -3612,15 +3710,55 @@ struct LightTableEntry // hashcode: 0xB084076C (dec: -1333524628)
 	short radius; // size=0, offset=6
 };
 
-struct SavedIntroSmall // hashcode: 0x6F798336 (dec: 1870234422)
+struct SavedIntroSmall // hashcode: 0x06694D7D (dec: 107564413)
 {
-	short savedID; // size=0, offset=0
-	short saveSize; // size=0, offset=2
-	short introUniqueID; // size=0, offset=4
-	short extraDataSize; // size=0, offset=6
+	unsigned char savedID; // size=0, offset=0
+	unsigned char shiftedSaveSize; // size=0, offset=1
+	short introUniqueID; // size=0, offset=2
 };
 
-struct CameraCollisionInfo // hashcode: 0xC0691B43 (dec: -1066853565)
+struct SavedIntroSpline // hashcode: 0x9450836D (dec: -1806662803)
+{
+	unsigned char savedID; // size=0, offset=0
+	unsigned char shiftedSaveSize; // size=0, offset=1
+	short introUniqueID; // size=0, offset=2
+	short splineFlags; // size=0, offset=4
+	short splineKeyFrame; // size=0, offset=6
+	short splineClipBeg; // size=0, offset=8
+	short splineClipEnd; // size=0, offset=10
+};
+
+struct _SavedIntroWithIntro // hashcode: 0x576A504B (dec: 1466585163)
+{
+	unsigned char savedID; // size=0, offset=0
+	unsigned char shiftedSaveSize; // size=0, offset=1
+	unsigned short attachedUniqueID; // size=0, offset=2
+	short introOffset; // size=0, offset=4
+	short birthUnitID; // size=0, offset=6
+	short introUniqueID; // size=0, offset=8
+	unsigned char lightGroup; // size=0, offset=10
+	unsigned char specturalLightGroup; // size=0, offset=11
+	long flags; // size=0, offset=12
+	long flags2; // size=0, offset=16
+	struct _SmallRotation smallRotation; // size=6, offset=20
+	struct _Position position; // size=6, offset=26
+};
+
+struct _PCollideInfo // hashcode: 0x79A03A2A (dec: 2040543786)
+{
+	short type; // size=0, offset=0
+	short segment; // size=0, offset=2
+	void *prim; // size=0, offset=4
+	struct _Instance *inst; // size=0, offset=8
+	struct SVECTOR wNormal; // size=8, offset=12
+	struct SVECTOR *newPoint; // size=8, offset=20
+	struct SVECTOR *oldPoint; // size=8, offset=24
+	struct SVECTOR cldPoint; // size=8, offset=28
+	long collideType; // size=0, offset=36
+	struct _Instance *instance; // size=0, offset=40
+};
+
+struct CameraCollisionInfo // hashcode: 0x846E2C79 (dec: -2073154439)
 {
 	struct _TFace (*tfaceList[5]); // size=20, offset=0
 	struct _Terrain (*tfaceTerrain[5]); // size=20, offset=20
@@ -3635,28 +3773,14 @@ struct CameraCollisionInfo // hashcode: 0xC0691B43 (dec: -1066853565)
 	long cldLines; // size=0, offset=88
 };
 
-struct _LCollideInfo // hashcode: 0x59317F55 (dec: 1496416085)
+struct _LCollideInfo // hashcode: 0x61DF7B43 (dec: 1642036035)
 {
 	struct _TFace *tface; // size=12, offset=0
-	struct _Terrain *terrain; // size=92, offset=4
+	struct _Terrain *terrain; // size=84, offset=4
 	int curTree; // size=0, offset=8
 };
 
-struct _PCollideInfo // hashcode: 0x0EA8C99E (dec: 245942686)
-{
-	short type; // size=0, offset=0
-	short segment; // size=0, offset=2
-	void *prim; // size=0, offset=4
-	struct _Instance *inst; // size=0, offset=8
-	struct SVECTOR wNormal; // size=8, offset=12
-	struct SVECTOR *newPoint; // size=8, offset=20
-	struct SVECTOR *oldPoint; // size=8, offset=24
-	struct SVECTOR cldPoint; // size=8, offset=28
-	long collideType; // size=0, offset=36
-	struct _Instance *instance; // size=0, offset=40
-};
-
-struct LIGHT3D_109fake // hashcode: 0x7353679E (dec: 1934845854)
+struct LIGHT3D_109fake // hashcode: 0x728B1A96 (dec: 1921718934)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -3688,19 +3812,19 @@ struct LIGHT3D_109fake // hashcode: 0x7353679E (dec: 1934845854)
 	} Follow; // size=20, offset=76, found in object files: light3d.o, light3d.o
 };
 
-struct LIGHT3D_224fake // hashcode: 0xA3512640 (dec: -1554962880)
+struct LIGHT3D_224fake // hashcode: 0xD1FB8CE9 (dec: -772043543)
 {
 	long m[5]; // size=20, offset=0
 };
 
-struct CdlFILE // hashcode: 0x759BDCAF (dec: 1973148847)
+struct CdlFILE // hashcode: 0x93E9031B (dec: -1813445861)
 {
 	struct CdlLOC pos; // size=4, offset=0
 	unsigned long size; // size=0, offset=4
 	char name[16]; // size=16, offset=8
 };
 
-struct LOAD3D_114fake // hashcode: 0x79896BBE (dec: 2039049150)
+struct LOAD3D_114fake // hashcode: 0xEA575137 (dec: -363376329)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -3732,7 +3856,7 @@ struct LOAD3D_114fake // hashcode: 0x79896BBE (dec: 2039049150)
 	} Follow; // size=20, offset=76, found in object files: load3d.o, load3d.o
 };
 
-struct _LoadStatus // hashcode: 0xE16450FD (dec: -513519363)
+struct _LoadStatus // hashcode: 0xB5ACA7CD (dec: -1246976051)
 {
 	struct _ReadQueueEntry currentQueueFile; // size=44, offset=0
 	long state; // size=0, offset=44
@@ -3758,13 +3882,13 @@ struct _LoadStatus // hashcode: 0xE16450FD (dec: -513519363)
 	long seekTime; // size=0, offset=156
 };
 
-struct RedirectList // hashcode: 0x2A55578C (dec: 710236044)
+struct RedirectList // hashcode: 0x638D8352 (dec: 1670218578)
 {
 	long numPointers; // size=0, offset=0
 	long *data; // size=0, offset=4
 };
 
-struct DRAWENV // hashcode: 0x16100ADC (dec: 370150108)
+struct DRAWENV // hashcode: 0x6012ACC1 (dec: 1611836609)
 {
 	struct RECT clip; // size=8, offset=0
 	short ofs[2]; // size=4, offset=8
@@ -3779,7 +3903,7 @@ struct DRAWENV // hashcode: 0x16100ADC (dec: 370150108)
 	struct DR_ENV dr_env; // size=64, offset=28
 };
 
-struct DISPENV // hashcode: 0x2FE28827 (dec: 803375143)
+struct DISPENV // hashcode: 0xF5F0EB6A (dec: -168760470)
 {
 	struct RECT disp; // size=8, offset=0
 	struct RECT screen; // size=8, offset=8
@@ -3789,7 +3913,7 @@ struct DISPENV // hashcode: 0x2FE28827 (dec: 803375143)
 	unsigned char pad1; // size=0, offset=19
 };
 
-struct BLK_FILL // hashcode: 0xB175B1A2 (dec: -1317686878)
+struct BLK_FILL // hashcode: 0x17977E9C (dec: 395804316)
 {
 	unsigned long tag; // size=0, offset=0
 	unsigned char r0; // size=0, offset=4
@@ -3802,7 +3926,7 @@ struct BLK_FILL // hashcode: 0xB175B1A2 (dec: -1317686878)
 	unsigned short h; // size=0, offset=14
 };
 
-struct MAIN_114fake // hashcode: 0xFCD71962 (dec: -53012126)
+struct MAIN_114fake // hashcode: 0x56DB6050 (dec: 1457217616)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -3834,7 +3958,7 @@ struct MAIN_114fake // hashcode: 0xFCD71962 (dec: -53012126)
 	} Follow; // size=20, offset=76, found in object files: main.o, main.o
 };
 
-struct MainTracker // hashcode: 0x4DA4AE2D (dec: 1302638125)
+struct MainTracker // hashcode: 0x17FC94E6 (dec: 402429158)
 {
 	long mainState; // size=0, offset=0
 	long previousState; // size=0, offset=4
@@ -3842,7 +3966,7 @@ struct MainTracker // hashcode: 0x4DA4AE2D (dec: 1302638125)
 	long done; // size=0, offset=12
 };
 
-struct POLY_F4_SEMITRANS // hashcode: 0xF864E0C5 (dec: -127606587)
+struct POLY_F4_SEMITRANS // hashcode: 0x21569974 (dec: 559323508)
 {
 	unsigned long tag; // size=0, offset=0
 	unsigned long dr_tpage; // size=0, offset=4
@@ -3860,15 +3984,16 @@ struct POLY_F4_SEMITRANS // hashcode: 0xF864E0C5 (dec: -127606587)
 	short y3; // size=0, offset=26
 };
 
-struct FullScreenItem // hashcode: 0x62EB9D24 (dec: 1659608356)
+struct InterfaceItem // hashcode: 0xE1D09348 (dec: -506424504)
 {
 	char name[48]; // size=48, offset=0
-	int timeout; // size=0, offset=48
-	int buttonTimeout; // size=0, offset=52
-	int nextItem; // size=0, offset=56
+	unsigned short timeout; // size=0, offset=48
+	unsigned short buttonTimeout; // size=0, offset=50
+	short itemType; // size=0, offset=52
+	short nextItem; // size=0, offset=54
 };
 
-struct _FXTracker // hashcode: 0x19DF49A8 (dec: 434063784)
+struct _FXTracker // hashcode: 0x0266917A (dec: 40276346)
 {
 	struct _FX_MATRIX matrixPool[32]; // size=1408, offset=0
 	struct NodeType usedMatrixList; // size=8, offset=1408
@@ -3879,7 +4004,7 @@ struct _FXTracker // hashcode: 0x19DF49A8 (dec: 434063784)
 	struct NodeType freePrimList; // size=8, offset=31136
 };
 
-struct StreamUnitPortal // hashcode: 0x3C2EA24A (dec: 1009689162)
+struct StreamUnitPortal // hashcode: 0x0043F5F1 (dec: 4453873)
 {
 	char tolevelname[16]; // size=16, offset=0
 	long MSignalID; // size=0, offset=16
@@ -3897,7 +4022,7 @@ struct StreamUnitPortal // hashcode: 0x3C2EA24A (dec: 1009689162)
 	struct _SVector t2[3]; // size=24, offset=68
 };
 
-struct SIGNAL_109fake // hashcode: 0xC48F5300 (dec: -997240064)
+struct SIGNAL_109fake // hashcode: 0x06600965 (dec: 106957157)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -3929,7 +4054,7 @@ struct SIGNAL_109fake // hashcode: 0xC48F5300 (dec: -997240064)
 	} Follow; // size=20, offset=76, found in object files: signal.o, signal.o
 };
 
-struct SignalInfo // hashcode: 0xA082A240 (dec: -1602051520)
+struct SignalInfo // hashcode: 0xDE5780B2 (dec: -564690766)
 {
 	long (*signalHandleFunc)(); // size=0, offset=0
 	short length; // size=0, offset=4
@@ -3937,7 +4062,7 @@ struct SignalInfo // hashcode: 0xA082A240 (dec: -1602051520)
 	void (*signalRelocateFunc)(); // size=0, offset=8
 };
 
-struct _Triangle2D // hashcode: 0x65119702 (dec: 1695651586)
+struct _Triangle2D // hashcode: 0xA03A8106 (dec: -1606778618)
 {
 	short x0; // size=0, offset=0
 	short y0; // size=0, offset=2
@@ -3947,7 +4072,7 @@ struct _Triangle2D // hashcode: 0x65119702 (dec: 1695651586)
 	short y2; // size=0, offset=10
 };
 
-struct _HNormal // hashcode: 0x7FA79C4C (dec: 2141690956)
+struct _HNormal // hashcode: 0xCBA3A7F2 (dec: -878467086)
 {
 	short x; // size=0, offset=0
 	short y; // size=0, offset=2
@@ -3955,7 +4080,7 @@ struct _HNormal // hashcode: 0x7FA79C4C (dec: 2141690956)
 	short pad; // size=0, offset=6
 };
 
-struct _HFaceInfo // hashcode: 0xF9D750FD (dec: -103329539)
+struct _HFaceInfo // hashcode: 0x2DFC4DF4 (dec: 771509748)
 {
 	long flags; // size=0, offset=0
 	long attr; // size=0, offset=4
@@ -3966,7 +4091,7 @@ struct _HFaceInfo // hashcode: 0xF9D750FD (dec: -103329539)
 	struct _HVertex *vertex2; // size=12, offset=28
 };
 
-struct _CollideInfo // hashcode: 0x1039D452 (dec: 272225362)
+struct _CollideInfo // hashcode: 0x3975D4B8 (dec: 964023480)
 {
 	void *level; // size=0, offset=0
 	char flags; // size=0, offset=4
@@ -3983,7 +4108,7 @@ struct _CollideInfo // hashcode: 0x1039D452 (dec: 272225362)
 	short bspID; // size=0, offset=46
 };
 
-struct SCollideInfo // hashcode: 0x4BB0D6E5 (dec: 1269880549)
+struct SCollideInfo // hashcode: 0x54CCE757 (dec: 1422714711)
 {
 	struct _Sphere *sphere; // size=12, offset=0
 	struct SVECTOR *oldPos; // size=8, offset=4
@@ -3994,7 +4119,7 @@ struct SCollideInfo // hashcode: 0x4BB0D6E5 (dec: 1269880549)
 	void *prim; // size=0, offset=24
 };
 
-struct PandTScratch // hashcode: 0x9609B610 (dec: -1777748464)
+struct PandTScratch // hashcode: 0xD20EDCFF (dec: -770777857)
 {
 	struct MATRIX posMatrix; // size=32, offset=0
 	struct _SVector normal; // size=8, offset=32
@@ -4015,12 +4140,12 @@ struct PandTScratch // hashcode: 0x9609B610 (dec: -1777748464)
 	struct _SVector line; // size=8, offset=116
 };
 
-struct COLLIDE_239fake // hashcode: 0xC1DBC6F7 (dec: -1042561289)
+struct COLLIDE_253fake // hashcode: 0x078F5C54 (dec: 126835796)
 {
 	long m[3]; // size=12, offset=0
 };
 
-struct SandHFScratch // hashcode: 0xADF2919E (dec: -1376611938)
+struct SandHFScratch // hashcode: 0x60F11A33 (dec: 1626413619)
 {
 	struct _SVector normal; // size=8, offset=0
 	struct MATRIX posMatrix; // size=32, offset=8
@@ -4029,7 +4154,7 @@ struct SandHFScratch // hashcode: 0xADF2919E (dec: -1376611938)
 	struct _SVector planePoint; // size=8, offset=60
 };
 
-struct SandTScratch // hashcode: 0x3D095FBA (dec: 1024024506)
+struct SandTScratch // hashcode: 0xE4056CC1 (dec: -469406527)
 {
 	struct MATRIX posMatrix; // size=32, offset=0
 	struct _Vector dpv; // size=12, offset=32
@@ -4054,7 +4179,7 @@ struct SandTScratch // hashcode: 0x3D095FBA (dec: 1024024506)
 	struct _TVertex *vertexList; // size=12, offset=208
 };
 
-struct IandTScratch // hashcode: 0x8958027F (dec: -1990720897)
+struct IandTScratch // hashcode: 0x4C35D3C8 (dec: 1278596040)
 {
 	struct MATRIX posMatrix; // size=32, offset=0
 	struct _SVector normal; // size=8, offset=32
@@ -4069,7 +4194,7 @@ struct IandTScratch // hashcode: 0x8958027F (dec: -1990720897)
 	struct _TVertex *vertexList; // size=12, offset=96
 };
 
-struct PandTFScratch // hashcode: 0x9B3A4ECC (dec: -1690677556)
+struct PandTFScratch // hashcode: 0x0AE02FA7 (dec: 182464423)
 {
 	struct MATRIX posMatrix; // size=32, offset=0
 	struct _SVector planePoint; // size=8, offset=32
@@ -4079,927 +4204,7 @@ struct PandTFScratch // hashcode: 0x9B3A4ECC (dec: -1690677556)
 	struct _Vector dpv; // size=12, offset=64
 };
 
-struct TIMER_109fake // hashcode: 0x71B7A8DF (dec: 1907861727)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: timer.o, timer.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: timer.o, timer.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: timer.o, timer.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: timer.o, timer.o
-};
-
-struct BSP_109fake // hashcode: 0x3228DEB2 (dec: 841539250)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: bsp.o, bsp.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: bsp.o, bsp.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: bsp.o, bsp.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: bsp.o, bsp.o
-};
-
-struct BSPScratch // hashcode: 0xA7753475 (dec: -1485491083)
-{
-	struct MATRIX vv[2]; // size=64, offset=0
-	struct MATRIX camMatrix; // size=32, offset=64
-	struct VECTOR dpv[3]; // size=48, offset=96
-	long d[6]; // size=24, offset=144
-	struct MATRIX boundMatrix; // size=32, offset=168
-	long in_spectral; // size=0, offset=200
-};
-
-struct _ObjectOwnerInfo // hashcode: 0x6198BBF6 (dec: 1637399542)
-{
-	long magicnum; // size=0, offset=0
-	short animID; // size=0, offset=4
-	char objectName[0]; // size=0, offset=6
-};
-
-struct OBTABLE_114fake // hashcode: 0x4745AD9E (dec: 1195748766)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: obtable.o, obtable.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: obtable.o, obtable.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: obtable.o, obtable.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: obtable.o, obtable.o
-};
-
-struct ObjectAccess // hashcode: 0xBD2BD58C (dec: -1121200756)
-{
-	char *objectName; // size=0, offset=0
-	void *object; // size=0, offset=4
-};
-
-struct POLY_FT3 // hashcode: 0x689EE460 (dec: 1755243616)
-{
-	unsigned long tag; // size=0, offset=0
-	unsigned char r0; // size=0, offset=4
-	unsigned char g0; // size=0, offset=5
-	unsigned char b0; // size=0, offset=6
-	unsigned char code; // size=0, offset=7
-	short x0; // size=0, offset=8
-	short y0; // size=0, offset=10
-	unsigned char u0; // size=0, offset=12
-	unsigned char v0; // size=0, offset=13
-	unsigned short clut; // size=0, offset=14
-	short x1; // size=0, offset=16
-	short y1; // size=0, offset=18
-	unsigned char u1; // size=0, offset=20
-	unsigned char v1; // size=0, offset=21
-	unsigned short tpage; // size=0, offset=22
-	short x2; // size=0, offset=24
-	short y2; // size=0, offset=26
-	unsigned char u2; // size=0, offset=28
-	unsigned char v2; // size=0, offset=29
-	unsigned short pad1; // size=0, offset=30
-};
-
-struct _Mirror // hashcode: 0x1B2B4DFD (dec: 455822845)
-{
-	short a; // size=0, offset=0
-	short b; // size=0, offset=2
-	short c; // size=0, offset=4
-	short d; // size=0, offset=6
-};
-
-struct PIPE3D_109fake // hashcode: 0x0CB302E8 (dec: 213058280)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: pipe3d.o, pipe3d.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: pipe3d.o, pipe3d.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: pipe3d.o, pipe3d.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: pipe3d.o, pipe3d.o
-};
-
-struct _FXHalvePlane // hashcode: 0xBA4E20A8 (dec: -1169284952)
-{
-	void *next; // size=0, offset=0
-	void *continue_process; // size=0, offset=4
-	struct _Instance *instance; // size=664, offset=8
-	unsigned char effectType; // size=0, offset=12
-	unsigned char type; // size=0, offset=13
-	short lifeTime; // size=0, offset=14
-	long diffTime; // size=0, offset=16
-	struct _PlaneConstants ringPlane; // size=12, offset=20
-	long currentColor; // size=0, offset=32
-	long *colorArray; // size=0, offset=36
-	short numColors; // size=0, offset=40
-	short colorBlendLife; // size=0, offset=42
-};
-
-struct _FXGlowEffect // hashcode: 0xC183A1B1 (dec: -1048337999)
-{
-	void *next; // size=0, offset=0
-	void *continue_process; // size=0, offset=4
-	struct _Instance *instance; // size=664, offset=8
-	unsigned char effectType; // size=0, offset=12
-	unsigned char type; // size=0, offset=13
-	short lifeTime; // size=0, offset=14
-	unsigned long diffTime; // size=0, offset=16
-	long *colorArray; // size=0, offset=20
-	long currentColor; // size=0, offset=24
-	short numColors; // size=0, offset=28
-	short colorBlendCycle; // size=0, offset=30
-	short width; // size=0, offset=32
-	short height; // size=0, offset=34
-	unsigned char numSegments; // size=0, offset=36
-	unsigned char SegmentInc; // size=0, offset=37
-	short segment; // size=0, offset=38
-	short fadein_time; // size=0, offset=40
-	short fadeout_time; // size=0, offset=42
-};
-
-struct PIPE3D_234fake // hashcode: 0x8E2640D1 (dec: -1910095663)
-{
-	long m[3]; // size=12, offset=0
-};
-
-struct PIPE3D_235fake // hashcode: 0xD78796BC (dec: -678979908)
-{
-	long m[5]; // size=20, offset=0
-};
-
-struct TransformAnimatedInstanceVerticesWork_t // hashcode: 0x1916DCEE (dec: 420928750)
-{
-	struct MATRIX scTransform; // size=32, offset=0
-	struct MATRIX mirrorMatrix; // size=32, offset=32
-	struct MATRIX llm; // size=32, offset=64
-	struct _Vector vector; // size=12, offset=96
-};
-
-struct SCRIPT_114fake // hashcode: 0x07F19899 (dec: 133273753)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: script.o, script.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: script.o, script.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: script.o, script.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: script.o, script.o
-};
-
-struct GenericTune // hashcode: 0x09E33D5D (dec: 165887325)
-{
-	long flags; // size=0, offset=0
-	void *shatterData; // size=0, offset=4
-};
-
-struct FXSplinter // hashcode: 0xA1CAB3DA (dec: -1580551206)
-{
-	short flags; // size=0, offset=0
-	short soundFx; // size=0, offset=2
-	short chunkVelXY; // size=0, offset=4
-	short chunkVelZ; // size=0, offset=6
-	short chunkVelRng; // size=0, offset=8
-	short triVelRng; // size=0, offset=10
-	short lifetime; // size=0, offset=12
-	short faceLimit; // size=0, offset=14
-	short rotRateRng; // size=0, offset=16
-	short gravityZ; // size=0, offset=18
-};
-
-struct DR_TPAGE // hashcode: 0xC8B03788 (dec: -927975544)
-{
-	unsigned long tag; // size=0, offset=0
-	unsigned long code[1]; // size=4, offset=4
-};
-
-struct FX_109fake // hashcode: 0xBBADB4D2 (dec: -1146243886)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: fx.o, fx.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: fx.o, fx.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: fx.o, fx.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: fx.o, fx.o
-};
-
-struct _POLY_SG4 // hashcode: 0x9BC50268 (dec: -1681587608)
-{
-	unsigned long tag; // size=0, offset=0
-	unsigned long drawTPage1; // size=0, offset=4
-	struct _BASIC_G4 p1; // size=32, offset=8
-	unsigned long drawTPage2; // size=0, offset=40
-	struct _BASIC_F4 p2; // size=20, offset=44
-};
-
-struct __GenericBubbleParams // hashcode: 0x56A8B0D6 (dec: 1453895894)
-{
-	struct __BubbleParams BP; // size=20, offset=0
-	short number; // size=0, offset=20
-	short birthradius; // size=0, offset=22
-	short velx; // size=0, offset=24
-	short vely; // size=0, offset=26
-	short velz; // size=0, offset=28
-	short velxrange; // size=0, offset=30
-	short velyrange; // size=0, offset=32
-	short velzrange; // size=0, offset=34
-	short accx; // size=0, offset=36
-	short accy; // size=0, offset=38
-	short accz; // size=0, offset=40
-	short accxrange; // size=0, offset=42
-	short accyrange; // size=0, offset=44
-	short acczrange; // size=0, offset=46
-};
-
-struct _FXGeneralEffect // hashcode: 0x42F7AAD9 (dec: 1123527385)
-{
-	void *next; // size=0, offset=0
-	void *continue_process; // size=0, offset=4
-	struct _Instance *instance; // size=664, offset=8
-	unsigned char effectType; // size=0, offset=12
-	unsigned char type; // size=0, offset=13
-	short lifeTime; // size=0, offset=14
-};
-
-struct _FXRibbon // hashcode: 0x969CC159 (dec: -1768111783)
-{
-	void *next; // size=0, offset=0
-	void *continue_process; // size=0, offset=4
-	struct _Instance *instance; // size=664, offset=8
-	unsigned char effectType; // size=0, offset=12
-	unsigned char type; // size=0, offset=13
-	short lifeTime; // size=0, offset=14
-	short numberVerts; // size=0, offset=16
-	short endIndex; // size=0, offset=18
-	struct SVECTOR *vertexPool; // size=8, offset=20
-	short startSegment; // size=0, offset=24
-	short endSegment; // size=0, offset=26
-	long startColor; // size=0, offset=28
-	long endColor; // size=0, offset=32
-	short colorStepValue; // size=0, offset=36
-	short faceLifeTime; // size=0, offset=38
-	short startFadeValue; // size=0, offset=40
-	short fadeStep; // size=0, offset=42
-};
-
-struct _FXParticle // hashcode: 0xF0C66D33 (dec: -255431373)
-{
-	void *next; // size=0, offset=0
-	void *continue_process; // size=0, offset=4
-	struct _Instance *instance; // size=664, offset=8
-	unsigned char effectType; // size=0, offset=12
-	unsigned char type; // size=0, offset=13
-	short lifeTime; // size=0, offset=14
-	struct TextureMT3 *texture; // size=16, offset=16
-	void *fxprim_modify_process; // size=0, offset=20
-	void *fxprim_process; // size=0, offset=24
-	short size; // size=0, offset=28
-	short primLifeTime; // size=0, offset=30
-	short birthRadius; // size=0, offset=32
-	short scaleSpeed; // size=0, offset=34
-	struct _Position direction; // size=6, offset=36
-	unsigned short flag_bits; // size=0, offset=42
-	struct _Position acceleration; // size=6, offset=44
-	short startScale; // size=0, offset=50
-	struct _Position offset; // size=6, offset=52
-	char startSegment; // size=0, offset=58
-	char z_undulate; // size=0, offset=59
-	long startColor; // size=0, offset=60
-	long endColor; // size=0, offset=64
-	short colorStepValue; // size=0, offset=68
-	char numberBirthParticles; // size=0, offset=70
-	char endSegment; // size=0, offset=71
-	short startFadeValue; // size=0, offset=72
-	short fadeStep; // size=0, offset=74
-};
-
-struct _FXLightBeam // hashcode: 0x09210877 (dec: 153159799)
-{
-	void *next; // size=0, offset=0
-	void *continue_process; // size=0, offset=4
-	struct _Instance *instance; // size=664, offset=8
-	unsigned char effectType; // size=0, offset=12
-	unsigned char type; // size=0, offset=13
-	short lifeTime; // size=0, offset=14
-	short startSeg; // size=0, offset=16
-	short endSeg; // size=0, offset=18
-	long color; // size=0, offset=20
-};
-
-struct _FXBlastringEffect // hashcode: 0x77A4372F (dec: 2007250735)
-{
-	void *next; // size=0, offset=0
-	void *continue_process; // size=0, offset=4
-	struct _Instance *instance; // size=664, offset=8
-	unsigned char effectType; // size=0, offset=12
-	unsigned char type; // size=0, offset=13
-	short lifeTime; // size=0, offset=14
-	struct _SVector position; // size=8, offset=16
-	struct MATRIX matrix; // size=32, offset=24
-	short segment; // size=0, offset=56
-	short pad; // size=0, offset=58
-	int radius; // size=0, offset=60
-	int size1; // size=0, offset=64
-	int size2; // size=0, offset=68
-	int endRadius; // size=0, offset=72
-	int colorchange_radius; // size=0, offset=76
-	int vel; // size=0, offset=80
-	int accl; // size=0, offset=84
-	int height1; // size=0, offset=88
-	int height2; // size=0, offset=92
-	int height3; // size=0, offset=96
-	short predator_offset; // size=0, offset=100
-	short sortInWorld; // size=0, offset=102
-	long color; // size=0, offset=104
-	long startColor; // size=0, offset=108
-	long endColor; // size=0, offset=112
-};
-
-struct _FXForceFieldEffect // hashcode: 0xC5F122A7 (dec: -974052697)
-{
-	void *next; // size=0, offset=0
-	void *continue_process; // size=0, offset=4
-	struct _Instance *instance; // size=664, offset=8
-	unsigned char effectType; // size=0, offset=12
-	unsigned char type; // size=0, offset=13
-	short lifeTime; // size=0, offset=14
-	struct _SVector offset; // size=8, offset=16
-	short size; // size=0, offset=24
-	short size_diff; // size=0, offset=26
-	short size_change; // size=0, offset=28
-	short deg; // size=0, offset=30
-	short deg_change; // size=0, offset=32
-	short start_fade; // size=0, offset=34
-	short end_fade; // size=0, offset=36
-	long color; // size=0, offset=40
-};
-
-struct _FXLightning // hashcode: 0xD5591AF3 (dec: -715580685)
-{
-	void *next; // size=0, offset=0
-	void *continue_process; // size=0, offset=4
-	struct _Instance *instance; // size=664, offset=8
-	unsigned char effectType; // size=0, offset=12
-	unsigned char type; // size=0, offset=13
-	short lifeTime; // size=0, offset=14
-	short deg; // size=0, offset=16
-	short deg_inc; // size=0, offset=18
-	struct _Position start_offset; // size=6, offset=20
-	short startSeg; // size=0, offset=26
-	struct _Instance *end_instance; // size=664, offset=28
-	struct _Position end_offset; // size=6, offset=32
-	short endSeg; // size=0, offset=38
-	short matrixSeg; // size=0, offset=40
-	short width; // size=0, offset=42
-	short small_width; // size=0, offset=44
-	short segs; // size=0, offset=46
-	short sine_size; // size=0, offset=48
-	short variation; // size=0, offset=50
-	long color; // size=0, offset=52
-	long glow_color; // size=0, offset=56
-};
-
-struct _FXFlash // hashcode: 0x5E4997AC (dec: 1581881260)
-{
-	void *next; // size=0, offset=0
-	void *continue_process; // size=0, offset=4
-	struct _Instance *instance; // size=664, offset=8
-	unsigned char effectType; // size=0, offset=12
-	unsigned char type; // size=0, offset=13
-	short lifeTime; // size=0, offset=14
-	long timeToColor; // size=0, offset=16
-	long timeAtColor; // size=0, offset=20
-	long timeFromColor; // size=0, offset=24
-	long currentTime; // size=0, offset=28
-	long color; // size=0, offset=32
-};
-
-struct GenericFXObject // hashcode: 0xEF654A2A (dec: -278574550)
-{
-	struct _GenericParticleParams *ParticleList; // size=56, offset=0
-	struct _GenericRibbonParams *RibbonList; // size=24, offset=4
-	struct _GenericGlowParams *GlowList; // size=28, offset=8
-	struct _GenericLightningParams *LightningList; // size=44, offset=12
-	struct _GenericBlastringParams *BlastList; // size=52, offset=16
-	struct _GenericFlashParams *FlashList; // size=12, offset=20
-	long *ColorList; // size=0, offset=24
-};
-
-struct evObjectDraftData // hashcode: 0xAB2C029A (dec: -1423179110)
-{
-	short force; // size=0, offset=0
-	unsigned short radius; // size=0, offset=2
-	unsigned short radiusCoef; // size=0, offset=4
-	unsigned short height; // size=0, offset=6
-	unsigned short maxVelocity; // size=0, offset=8
-};
-
-struct _GlyphTuneData // hashcode: 0x5F8AD12F (dec: 1602933039)
-{
-	short glyph_size; // size=0, offset=0
-	short glyph_darkness; // size=0, offset=2
-	char glyph_costs[8]; // size=8, offset=4
-	short glyph_range[8]; // size=16, offset=12
-	long color_array[28]; // size=112, offset=28
-};
-
-struct __ReaverData // hashcode: 0xDF72C1BB (dec: -546127429)
-{
-	char ReaverPickedUp; // size=0, offset=0
-	char ReaverOn; // size=0, offset=1
-	short ReaverSize; // size=0, offset=2
-	short CurrentReaver; // size=0, offset=4
-	short ReaverDeg; // size=0, offset=6
-	long ReaverImbueTime; // size=0, offset=8
-	long ReaverGlowColor; // size=0, offset=12
-	long ReaverBladeColor; // size=0, offset=16
-	long ReaverBladeGlowColor; // size=0, offset=20
-	short ReaverScale; // size=0, offset=24
-	short ReaverTargetScale; // size=0, offset=26
-	struct __ReaverSaveDat saveData; // size=4, offset=28
-};
-
-struct __ReaverTuneData // hashcode: 0x7544F4D5 (dec: 1967453397)
-{
-	unsigned long spectralGlowColor; // size=0, offset=0
-	unsigned long materialGlowColor; // size=0, offset=4
-	unsigned long sunlightGlowColor; // size=0, offset=8
-	unsigned long waterGlowColor; // size=0, offset=12
-	unsigned long stoneGlowColor; // size=0, offset=16
-	unsigned long fireGlowColor; // size=0, offset=20
-	unsigned long spiritGlowColor; // size=0, offset=24
-	unsigned long soundGlowColor; // size=0, offset=28
-	unsigned long spectralInnerColor; // size=0, offset=32
-	unsigned long materialInnerColor; // size=0, offset=36
-	unsigned long sunlightInnerColor; // size=0, offset=40
-	unsigned long waterInnerColor; // size=0, offset=44
-	unsigned long stoneInnerColor; // size=0, offset=48
-	unsigned long fireInnerColor; // size=0, offset=52
-	unsigned long spiritInnerColor; // size=0, offset=56
-	unsigned long soundInnerColor; // size=0, offset=60
-	unsigned long spectralInnerGlowColor; // size=0, offset=64
-	unsigned long materialInnerGlowColor; // size=0, offset=68
-	unsigned long sunlightInnerGlowColor; // size=0, offset=72
-	unsigned long waterInnerGlowColor; // size=0, offset=76
-	unsigned long stoneInnerGlowColor; // size=0, offset=80
-	unsigned long fireInnerGlowColor; // size=0, offset=84
-	unsigned long spiritInnerGlowColor; // size=0, offset=88
-	unsigned long soundInnerGlowColor; // size=0, offset=92
-	unsigned long icon_colors[24]; // size=96, offset=96
-};
-
-struct _POLY_TF4 // hashcode: 0xC4A7AB5D (dec: -995644579)
-{
-	unsigned long tag; // size=0, offset=0
-	unsigned long drawTPage; // size=0, offset=4
-	struct _BASIC_F4 p1; // size=20, offset=8
-};
-
-struct _POLY_2G4 // hashcode: 0x7A5D0AE3 (dec: 2052917987)
-{
-	unsigned long tag; // size=0, offset=0
-	struct _BASIC_G4 p1; // size=32, offset=4
-	struct _BASIC_G4 p2; // size=32, offset=36
-};
-
-struct _POLY_2G4T // hashcode: 0x6BFD6813 (dec: 1811769363)
-{
-	unsigned long tag; // size=0, offset=0
-	unsigned long drawTPage1; // size=0, offset=4
-	struct _BASIC_G4 p1; // size=32, offset=8
-	struct _BASIC_G4 p2; // size=32, offset=40
-};
-
-struct OBTABLE2_114fake // hashcode: 0xE2840E26 (dec: -494662106)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: obtable2.o, obtable2.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: obtable2.o, obtable2.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: obtable2.o, obtable2.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: obtable2.o, obtable2.o
-};
-
-struct ObjectFunc // hashcode: 0xA268CEB6 (dec: -1570189642)
-{
-	char *scriptName; // size=0, offset=0
-	void (*initFunc)(); // size=0, offset=4
-	void (*processFunc)(); // size=0, offset=8
-	void (*collideFunc)(); // size=0, offset=12
-	unsigned long (*queryFunc)(); // size=0, offset=16
-	void (*messageFunc)(); // size=0, offset=20
-	void (*additionalCollideFunc)(); // size=0, offset=24
-	void (*relocateTuneFunc)(); // size=0, offset=28
-	void (*relocateInstObFunc)(); // size=0, offset=32
-};
-
-struct GENERIC_114fake // hashcode: 0xE19B175E (dec: -509929634)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: generic.o, generic.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: generic.o, generic.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: generic.o, generic.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: generic.o, generic.o
-};
-
-struct evAnimationInstanceSwitchData // hashcode: 0xE6D47736 (dec: -422283466)
-{
-	struct _Instance *instance; // size=664, offset=0
-	int anim; // size=0, offset=4
-	int frame; // size=0, offset=8
-	int frames; // size=0, offset=12
-	int mode; // size=0, offset=16
-};
-
-struct evControlSaveDataData // hashcode: 0x87180C7A (dec: -2028467078)
-{
-	long length; // size=0, offset=0
-	void *data; // size=0, offset=4
-};
-
-struct SOUND_114fake // hashcode: 0x894DC33F (dec: -1991392449)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: sound.o, sound.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: sound.o, sound.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: sound.o, sound.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: sound.o, sound.o
-};
-
-struct AadInitAttr // hashcode: 0x44FDABE1 (dec: 1157475297)
-{
-	unsigned short updateMode; // size=0, offset=0
-	unsigned short numSlots; // size=0, offset=2
-	void (*nonBlockLoadProc)(); // size=0, offset=4
-	void (*nonBlockBufferedLoadProc)(); // size=0, offset=8
-	void (**memoryMallocProc)(); // size=0, offset=12
-	void (*memoryFreeProc)(); // size=0, offset=16
-	unsigned char memMallocType; // size=0, offset=20
-	unsigned char unused1; // size=0, offset=21
-	unsigned short unused2; // size=0, offset=22
-};
-
-struct ObjectPeriodicSound // hashcode: 0x20119A4E (dec: 538024526)
-{
-	unsigned char type; // size=0, offset=0
-	unsigned char numSfxIDs; // size=0, offset=1
-	unsigned char soundInst; // size=0, offset=2
-	unsigned char flags; // size=0, offset=3
-	unsigned short minVolDistance; // size=0, offset=4
-	short pitch; // size=0, offset=6
-	unsigned short pitchVariation; // size=0, offset=8
-	unsigned char maxVolume; // size=0, offset=10
-	unsigned char maxVolVariation; // size=0, offset=11
-	unsigned char initialDelay; // size=0, offset=12
-	unsigned char initialDelayVariation; // size=0, offset=13
-	unsigned char onTime; // size=0, offset=14
-	unsigned char onTimeVariation; // size=0, offset=15
-	unsigned char offTime; // size=0, offset=16
-	unsigned char offTimeVariation; // size=0, offset=17
-};
-
-struct ObjectEventSound // hashcode: 0xFC3D5C69 (dec: -63087511)
-{
-	unsigned char type; // size=0, offset=0
-	unsigned char numSfxIDs; // size=0, offset=1
-	unsigned char soundInst; // size=0, offset=2
-	unsigned char flags; // size=0, offset=3
-	unsigned short minVolDistance; // size=0, offset=4
-	short pitch; // size=0, offset=6
-	unsigned short pitchVariation; // size=0, offset=8
-	unsigned char maxVolume; // size=0, offset=10
-	unsigned char maxVolVariation; // size=0, offset=11
-	unsigned char initialDelay; // size=0, offset=12
-	unsigned char initialDelayVariation; // size=0, offset=13
-};
-
-struct ObjectOneShotSound // hashcode: 0xB059B6AF (dec: -1336297809)
-{
-	unsigned char type; // size=0, offset=0
-	unsigned char numSfxIDs; // size=0, offset=1
-	unsigned char soundInst; // size=0, offset=2
-	unsigned char flags; // size=0, offset=3
-	unsigned short minVolDistance; // size=0, offset=4
-	short pitch; // size=0, offset=6
-	unsigned short pitchVariation; // size=0, offset=8
-	unsigned char maxVolume; // size=0, offset=10
-	unsigned char maxVolVariation; // size=0, offset=11
-	unsigned char initialDelay; // size=0, offset=12
-	unsigned char initialDelayVariation; // size=0, offset=13
-};
-
-struct SoundEffectChannel // hashcode: 0x7A1E0979 (dec: 2048788857)
-{
-	unsigned char inUse; // size=0, offset=0
-	unsigned char unused; // size=0, offset=1
-	unsigned short unused1; // size=0, offset=2
-	unsigned long handle; // size=0, offset=4
-	short volume; // size=0, offset=8
-	short volumeChangeTime; // size=0, offset=10
-	short volumeChangeTimeSave; // size=0, offset=12
-	short volumeChangePerUpdate; // size=0, offset=14
-	short volumeChangeSign; // size=0, offset=16
-	short volumeChangeErrPerUpdate; // size=0, offset=18
-	short volumeChangeError; // size=0, offset=20
-	short pitch; // size=0, offset=22
-	short pitchChangeTime; // size=0, offset=24
-	short pitchChangeTimeSave; // size=0, offset=26
-	short pitchChangePerUpdate; // size=0, offset=28
-	short pitchChangeSign; // size=0, offset=30
-	short pitchChangeErrPerUpdate; // size=0, offset=32
-	short pitchChangeError; // size=0, offset=34
-};
-
-struct AadVolume // hashcode: 0x9222ACDA (dec: -1843221286)
-{
-	short left; // size=0, offset=0
-	short right; // size=0, offset=2
-};
-
-struct AadSequenceHdr // hashcode: 0x29887C25 (dec: 696810533)
-{
-	unsigned long sequenceID; // size=0, offset=0
-	unsigned long quarterNoteTime; // size=0, offset=4
-	unsigned short ppqn; // size=0, offset=8
-	unsigned short version; // size=0, offset=10
-	unsigned short numTracks; // size=0, offset=12
-	unsigned short unused; // size=0, offset=14
-};
-
-struct AadTempo // hashcode: 0x93159870 (dec: -1827301264)
-{
-	unsigned long quarterNoteTime; // size=0, offset=0
-	unsigned short ppqn; // size=0, offset=4
-};
-
-struct AadMemoryStruct // hashcode: 0xAF233074 (dec: -1356648332)
-{
-	unsigned long updateCounter; // size=0, offset=0
-	unsigned char numSlots; // size=0, offset=4
-	unsigned char updateMode; // size=0, offset=5
-	short masterVolume; // size=0, offset=6
-	struct AadMasterVolFader masterVolFader; // size=8, offset=8
-	unsigned char sfxMasterVol; // size=0, offset=16
-	unsigned char musicMasterVol; // size=0, offset=17
-	unsigned short flags; // size=0, offset=18
-	struct AadVolFader musicMasterVolFader; // size=8, offset=20
-	struct _AadSequenceSlot (*sequenceSlots[8]); // size=32, offset=28
-	struct AadSfxSlot sfxSlot; // size=392, offset=60
-	struct AadSynthVoice synthVoice[24]; // size=672, offset=452
-	char voiceStatus[24]; // size=24, offset=1124
-	unsigned short voicePitchSave[24]; // size=48, offset=1148
-	unsigned long voiceKeyOffRequest; // size=0, offset=1196
-	unsigned long voiceKeyOnRequest; // size=0, offset=1200
-	unsigned long voiceReverbRequest; // size=0, offset=1204
-	struct AadSoundBankHdr (*dynamicSoundBankHdr[2]); // size=8, offset=1208
-	struct AadProgramAtr (*dynamicProgramAtr[2]); // size=8, offset=1216
-	struct AadToneAtr (*dynamicToneAtr[2]); // size=8, offset=1224
-	unsigned long (*dynamicWaveAddr[2]); // size=8, offset=1232
-	unsigned char (**dynamicSequenceAddressTbl[2]); // size=8, offset=1240
-	unsigned long (*dynamicSequenceLabelOffsetTbl[2]); // size=8, offset=1248
-	unsigned char dynamicBankStatus[2]; // size=2, offset=1256
-	unsigned char (*dynamicSoundBankData[2]); // size=8, offset=1260
-	unsigned long dynamicSoundBankSramData[2]; // size=8, offset=1268
-	unsigned long dynamicSoundBankSramDataSize[2]; // size=8, offset=1276
-	unsigned char dynamicSoundBankLoadOption[2]; // size=2, offset=1284
-	struct AadDynamicLoadRequest loadRequestQueue[8]; // size=416, offset=1288
-	struct AadDynamicBankLoadInfo dynamicBankLoadInfo; // size=28, offset=1704
-	unsigned char *loadBufferAddress; // size=0, offset=1732
-	unsigned long loadBufferSize; // size=0, offset=1736
-	void (*nonBlockLoadProc)(); // size=0, offset=1740
-	void (*nonBlockBufferedLoadProc)(); // size=0, offset=1744
-	void (**memoryMallocProc)(); // size=0, offset=1748
-	void (*memoryFreeProc)(); // size=0, offset=1752
-	unsigned char memMallocType; // size=0, offset=1756
-	unsigned char nextLoadReqIn; // size=0, offset=1757
-	unsigned char nextLoadReqOut; // size=0, offset=1758
-	unsigned char numLoadReqsQueued; // size=0, offset=1759
-	struct AadDynamicSfxLoadInfo dynamicSfxLoadInfo; // size=140, offset=1760
-	struct _AadDynSfxFileHdr *firstDynSfxFile; // size=20, offset=1900
-	unsigned char sfxToneMasterList[512]; // size=512, offset=1904
-	unsigned char sfxWaveMasterList[512]; // size=512, offset=2416
-	struct AadLoadedSfxToneAttr sfxToneAttrTbl[128]; // size=2560, offset=2928
-	struct AadLoadedSfxWaveAttr sfxWaveAttrTbl[120]; // size=480, offset=5488
-	unsigned short nextToneIndex; // size=0, offset=5968
-	unsigned short nextWaveIndex; // size=0, offset=5970
-	struct AadNewSramBlockDesc sramDescriptorTbl[128]; // size=1024, offset=5972
-	unsigned short nextSramDescIndex; // size=0, offset=6996
-	unsigned char firstSramBlockDescIndex; // size=0, offset=6998
-	unsigned char unused; // size=0, offset=6999
-	unsigned short unused1; // size=0, offset=7000
-	unsigned short nextFileHandle; // size=0, offset=7002
-	void (*controller11Callback)(); // size=0, offset=7004
-	void (*endSequenceCallback)(); // size=0, offset=7008
-	long controller11CallbackData; // size=0, offset=7012
-	long endSequenceCallbackData; // size=0, offset=7016
-	unsigned char userVariables[128]; // size=128, offset=7020
-};
-
-struct AadSlotAttributes // hashcode: 0x0D6866B0 (dec: 224945840)
-{
-	unsigned short sequenceNumberAssigned; // size=0, offset=0
-	unsigned short sequenceAssignedDynamicBank; // size=0, offset=2
-	unsigned short playingStatus; // size=0, offset=4
-	unsigned short channelMute; // size=0, offset=6
-	unsigned char slotVolume; // size=0, offset=8
-	unsigned char slotPan; // size=0, offset=9
-	unsigned short eventsInQueue[16]; // size=32, offset=10
-};
-
-struct VM_109fake // hashcode: 0x714C8672 (dec: 1900840562)
+struct VM_109fake // hashcode: 0x06890A7C (dec: 109644412)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -5031,7 +4236,828 @@ struct VM_109fake // hashcode: 0x714C8672 (dec: 1900840562)
 	} Follow; // size=20, offset=76, found in object files: vm.o, vm.o
 };
 
-struct NewMemTracker // hashcode: 0x84C0F863 (dec: -2067728285)
+struct POLY_FT3 // hashcode: 0x0A08FE0D (dec: 168361485)
+{
+	unsigned long tag; // size=0, offset=0
+	unsigned char r0; // size=0, offset=4
+	unsigned char g0; // size=0, offset=5
+	unsigned char b0; // size=0, offset=6
+	unsigned char code; // size=0, offset=7
+	short x0; // size=0, offset=8
+	short y0; // size=0, offset=10
+	unsigned char u0; // size=0, offset=12
+	unsigned char v0; // size=0, offset=13
+	unsigned short clut; // size=0, offset=14
+	short x1; // size=0, offset=16
+	short y1; // size=0, offset=18
+	unsigned char u1; // size=0, offset=20
+	unsigned char v1; // size=0, offset=21
+	unsigned short tpage; // size=0, offset=22
+	short x2; // size=0, offset=24
+	short y2; // size=0, offset=26
+	unsigned char u2; // size=0, offset=28
+	unsigned char v2; // size=0, offset=29
+	unsigned short pad1; // size=0, offset=30
+};
+
+struct _Mirror // hashcode: 0x4826C54C (dec: 1210500428)
+{
+	short a; // size=0, offset=0
+	short b; // size=0, offset=2
+	short c; // size=0, offset=4
+	short d; // size=0, offset=6
+};
+
+struct PIPE3D_109fake // hashcode: 0x45605C15 (dec: 1163942933)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: pipe3d.o, pipe3d.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: pipe3d.o, pipe3d.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: pipe3d.o, pipe3d.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: pipe3d.o, pipe3d.o
+};
+
+struct _FXHalvePlane // hashcode: 0x4C43EE4C (dec: 1279520332)
+{
+	void *next; // size=0, offset=0
+	void *continue_process; // size=0, offset=4
+	struct _Instance *instance; // size=664, offset=8
+	unsigned char effectType; // size=0, offset=12
+	unsigned char type; // size=0, offset=13
+	short lifeTime; // size=0, offset=14
+	long diffTime; // size=0, offset=16
+	struct _PlaneConstants ringPlane; // size=12, offset=20
+	long currentColor; // size=0, offset=32
+	long *colorArray; // size=0, offset=36
+	short numColors; // size=0, offset=40
+	short colorBlendLife; // size=0, offset=42
+};
+
+struct _FXGlowEffect // hashcode: 0xE65C96B4 (dec: -430139724)
+{
+	void *next; // size=0, offset=0
+	void *continue_process; // size=0, offset=4
+	struct _Instance *instance; // size=664, offset=8
+	unsigned char effectType; // size=0, offset=12
+	unsigned char type; // size=0, offset=13
+	short lifeTime; // size=0, offset=14
+	unsigned long diffTime; // size=0, offset=16
+	long *colorArray; // size=0, offset=20
+	long currentColor; // size=0, offset=24
+	short numColors; // size=0, offset=28
+	short colorBlendCycle; // size=0, offset=30
+	short width; // size=0, offset=32
+	short height; // size=0, offset=34
+	unsigned char numSegments; // size=0, offset=36
+	unsigned char SegmentInc; // size=0, offset=37
+	short segment; // size=0, offset=38
+	short fadein_time; // size=0, offset=40
+	short fadeout_time; // size=0, offset=42
+};
+
+struct PIPE3D_234fake // hashcode: 0x4EE49282 (dec: 1323602562)
+{
+	long m[3]; // size=12, offset=0
+};
+
+struct PIPE3D_235fake // hashcode: 0x0036719D (dec: 3568029)
+{
+	long m[5]; // size=20, offset=0
+};
+
+struct TransformAnimatedInstanceVerticesWork_t // hashcode: 0x182E453B (dec: 405685563)
+{
+	struct MATRIX scTransform; // size=32, offset=0
+	struct MATRIX mirrorMatrix; // size=32, offset=32
+	struct MATRIX llm; // size=32, offset=64
+	struct _Vector vector; // size=12, offset=96
+};
+
+struct SCRIPT_114fake // hashcode: 0x91F9F0D6 (dec: -1845890858)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: script.o, script.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: script.o, script.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: script.o, script.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: script.o, script.o
+};
+
+struct GenericTune // hashcode: 0x31A613AD (dec: 832967597)
+{
+	long flags; // size=0, offset=0
+	void *shatterData; // size=0, offset=4
+};
+
+struct FXSplinter // hashcode: 0x08C79190 (dec: 147296656)
+{
+	short flags; // size=0, offset=0
+	short soundFx; // size=0, offset=2
+	short chunkVelXY; // size=0, offset=4
+	short chunkVelZ; // size=0, offset=6
+	short chunkVelRng; // size=0, offset=8
+	short triVelRng; // size=0, offset=10
+	short lifetime; // size=0, offset=12
+	short faceLimit; // size=0, offset=14
+	short rotRateRng; // size=0, offset=16
+	short gravityZ; // size=0, offset=18
+};
+
+struct TIMER_109fake // hashcode: 0x57CEB965 (dec: 1473165669)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: timer.o, timer.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: timer.o, timer.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: timer.o, timer.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: timer.o, timer.o
+};
+
+struct _SBSPLeaf // hashcode: 0x52632806 (dec: 1382230022)
+{
+	struct _Sphere_noSq sphere; // size=8, offset=0
+	struct Intro **introList; // size=76, offset=8
+	short numIntros; // size=0, offset=12
+	short flags; // size=0, offset=14
+	struct CDLight **lightList; // size=24, offset=16
+	short numLights; // size=0, offset=20
+	short pad; // size=0, offset=22
+};
+
+struct BSP_109fake // hashcode: 0x4DD8B406 (dec: 1306047494)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: bsp.o, bsp.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: bsp.o, bsp.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: bsp.o, bsp.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: bsp.o, bsp.o
+};
+
+struct BSPScratch // hashcode: 0x4C6E5656 (dec: 1282299478)
+{
+	struct MATRIX vv[2]; // size=64, offset=0
+	struct MATRIX camMatrix; // size=32, offset=64
+	struct VECTOR dpv[3]; // size=48, offset=96
+	long d[6]; // size=24, offset=144
+	struct MATRIX boundMatrix; // size=32, offset=168
+	long in_spectral; // size=0, offset=200
+};
+
+struct _ObjectOwnerInfo // hashcode: 0xC8D6F6EF (dec: -925436177)
+{
+	long magicnum; // size=0, offset=0
+	short animID; // size=0, offset=4
+	char objectName[0]; // size=0, offset=6
+};
+
+struct OBTABLE_114fake // hashcode: 0x59F65C69 (dec: 1509317737)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: obtable.o, obtable.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: obtable.o, obtable.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: obtable.o, obtable.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: obtable.o, obtable.o
+};
+
+struct ObjectAccess // hashcode: 0x5B1D3792 (dec: 1528641426)
+{
+	char *objectName; // size=0, offset=0
+	void *object; // size=0, offset=4
+};
+
+struct OBTABLE2_114fake // hashcode: 0xB85923E0 (dec: -1202117664)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: obtable2.o, obtable2.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: obtable2.o, obtable2.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: obtable2.o, obtable2.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: obtable2.o, obtable2.o
+};
+
+struct ObjectFunc // hashcode: 0x482CB050 (dec: 1210888272)
+{
+	char *scriptName; // size=0, offset=0
+	void (*initFunc)(); // size=0, offset=4
+	void (*processFunc)(); // size=0, offset=8
+	void (*collideFunc)(); // size=0, offset=12
+	unsigned long (*queryFunc)(); // size=0, offset=16
+	void (*messageFunc)(); // size=0, offset=20
+	void (*additionalCollideFunc)(); // size=0, offset=24
+	void (*relocateTuneFunc)(); // size=0, offset=28
+	void (*relocateInstObFunc)(); // size=0, offset=32
+};
+
+struct GENERIC_114fake // hashcode: 0x1E3C81CA (dec: 507281866)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: generic.o, generic.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: generic.o, generic.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: generic.o, generic.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: generic.o, generic.o
+};
+
+struct evAnimationInstanceSwitchData // hashcode: 0x76923567 (dec: 1989293415)
+{
+	struct _Instance *instance; // size=664, offset=0
+	int anim; // size=0, offset=4
+	int frame; // size=0, offset=8
+	int frames; // size=0, offset=12
+	int mode; // size=0, offset=16
+};
+
+struct evControlSaveDataData // hashcode: 0xF536CC5D (dec: -180958115)
+{
+	long length; // size=0, offset=0
+	void *data; // size=0, offset=4
+};
+
+struct SOUND_114fake // hashcode: 0x2F8A9789 (dec: 797611913)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: sound.o, sound.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: sound.o, sound.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: sound.o, sound.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: sound.o, sound.o
+};
+
+struct AadInitAttr // hashcode: 0x1ECF2844 (dec: 516892740)
+{
+	int updateMode; // size=0, offset=0
+	int numSlots; // size=0, offset=4
+	void (*nonBlockLoadProc)(); // size=0, offset=8
+	void (*nonBlockBufferedLoadProc)(); // size=0, offset=12
+	void (**memoryMallocProc)(); // size=0, offset=16
+	void (*memoryFreeProc)(); // size=0, offset=20
+};
+
+struct ObjectPeriodicSound // hashcode: 0xECB7125A (dec: -323546534)
+{
+	unsigned char type; // size=0, offset=0
+	unsigned char numSfxIDs; // size=0, offset=1
+	unsigned char soundInst; // size=0, offset=2
+	unsigned char flags; // size=0, offset=3
+	unsigned short minVolDistance; // size=0, offset=4
+	short pitch; // size=0, offset=6
+	unsigned short pitchVariation; // size=0, offset=8
+	unsigned char maxVolume; // size=0, offset=10
+	unsigned char maxVolVariation; // size=0, offset=11
+	unsigned char initialDelay; // size=0, offset=12
+	unsigned char initialDelayVariation; // size=0, offset=13
+	unsigned char onTime; // size=0, offset=14
+	unsigned char onTimeVariation; // size=0, offset=15
+	unsigned char offTime; // size=0, offset=16
+	unsigned char offTimeVariation; // size=0, offset=17
+};
+
+struct ObjectEventSound // hashcode: 0x98471ED6 (dec: -1740169514)
+{
+	unsigned char type; // size=0, offset=0
+	unsigned char numSfxIDs; // size=0, offset=1
+	unsigned char soundInst; // size=0, offset=2
+	unsigned char flags; // size=0, offset=3
+	unsigned short minVolDistance; // size=0, offset=4
+	short pitch; // size=0, offset=6
+	unsigned short pitchVariation; // size=0, offset=8
+	unsigned char maxVolume; // size=0, offset=10
+	unsigned char maxVolVariation; // size=0, offset=11
+	unsigned char initialDelay; // size=0, offset=12
+	unsigned char initialDelayVariation; // size=0, offset=13
+};
+
+struct ObjectOneShotSound // hashcode: 0xF0C5CF7C (dec: -255471748)
+{
+	unsigned char type; // size=0, offset=0
+	unsigned char numSfxIDs; // size=0, offset=1
+	unsigned char soundInst; // size=0, offset=2
+	unsigned char flags; // size=0, offset=3
+	unsigned short minVolDistance; // size=0, offset=4
+	short pitch; // size=0, offset=6
+	unsigned short pitchVariation; // size=0, offset=8
+	unsigned char maxVolume; // size=0, offset=10
+	unsigned char maxVolVariation; // size=0, offset=11
+	unsigned char initialDelay; // size=0, offset=12
+	unsigned char initialDelayVariation; // size=0, offset=13
+};
+
+struct SoundEffectChannel // hashcode: 0x46536DE6 (dec: 1179872742)
+{
+	unsigned char inUse; // size=0, offset=0
+	unsigned char unused; // size=0, offset=1
+	unsigned short unused1; // size=0, offset=2
+	unsigned long handle; // size=0, offset=4
+	short volume; // size=0, offset=8
+	short volumeChangeTime; // size=0, offset=10
+	short volumeChangeTimeSave; // size=0, offset=12
+	short volumeChangePerUpdate; // size=0, offset=14
+	short volumeChangeSign; // size=0, offset=16
+	short volumeChangeErrPerUpdate; // size=0, offset=18
+	short volumeChangeError; // size=0, offset=20
+	short pitch; // size=0, offset=22
+	short pitchChangeTime; // size=0, offset=24
+	short pitchChangeTimeSave; // size=0, offset=26
+	short pitchChangePerUpdate; // size=0, offset=28
+	short pitchChangeSign; // size=0, offset=30
+	short pitchChangeErrPerUpdate; // size=0, offset=32
+	short pitchChangeError; // size=0, offset=34
+};
+
+struct DR_TPAGE // hashcode: 0xE20E8F38 (dec: -502362312)
+{
+	unsigned long tag; // size=0, offset=0
+	unsigned long code[1]; // size=4, offset=4
+};
+
+struct FX_109fake // hashcode: 0x270E0770 (dec: 655230832)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: fx.o, fx.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: fx.o, fx.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: fx.o, fx.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: fx.o, fx.o
+};
+
+struct _POLY_SG4 // hashcode: 0x280B941B (dec: 671847451)
+{
+	unsigned long tag; // size=0, offset=0
+	unsigned long drawTPage1; // size=0, offset=4
+	struct _BASIC_G4 p1; // size=32, offset=8
+	unsigned long drawTPage2; // size=0, offset=40
+	struct _BASIC_F4 p2; // size=20, offset=44
+};
+
+struct _FXGeneralEffect // hashcode: 0xD9E1BDC0 (dec: -639517248)
+{
+	void *next; // size=0, offset=0
+	void *continue_process; // size=0, offset=4
+	struct _Instance *instance; // size=664, offset=8
+	unsigned char effectType; // size=0, offset=12
+	unsigned char type; // size=0, offset=13
+	short lifeTime; // size=0, offset=14
+};
+
+struct _FXRibbon // hashcode: 0x59C68DE1 (dec: 1506184673)
+{
+	void *next; // size=0, offset=0
+	void *continue_process; // size=0, offset=4
+	struct _Instance *instance; // size=664, offset=8
+	unsigned char effectType; // size=0, offset=12
+	unsigned char type; // size=0, offset=13
+	short lifeTime; // size=0, offset=14
+	short numberVerts; // size=0, offset=16
+	short endIndex; // size=0, offset=18
+	struct SVECTOR *vertexPool; // size=8, offset=20
+	short startSegment; // size=0, offset=24
+	short endSegment; // size=0, offset=26
+	long startColor; // size=0, offset=28
+	long endColor; // size=0, offset=32
+	short colorStepValue; // size=0, offset=36
+	short faceLifeTime; // size=0, offset=38
+	short startFadeValue; // size=0, offset=40
+	short fadeStep; // size=0, offset=42
+};
+
+struct _FXParticle // hashcode: 0x48F39FD8 (dec: 1223925720)
+{
+	void *next; // size=0, offset=0
+	void *continue_process; // size=0, offset=4
+	struct _Instance *instance; // size=664, offset=8
+	unsigned char effectType; // size=0, offset=12
+	unsigned char type; // size=0, offset=13
+	short lifeTime; // size=0, offset=14
+	struct TextureMT3 *texture; // size=16, offset=16
+	void *fxprim_modify_process; // size=0, offset=20
+	void *fxprim_process; // size=0, offset=24
+	short size; // size=0, offset=28
+	short primLifeTime; // size=0, offset=30
+	short birthRadius; // size=0, offset=32
+	short scaleSpeed; // size=0, offset=34
+	struct _Position direction; // size=6, offset=36
+	unsigned short flag_bits; // size=0, offset=42
+	struct _Position acceleration; // size=6, offset=44
+	short startScale; // size=0, offset=50
+	struct _Position offset; // size=6, offset=52
+	char startSegment; // size=0, offset=58
+	char z_undulate; // size=0, offset=59
+	long startColor; // size=0, offset=60
+	long endColor; // size=0, offset=64
+	short colorStepValue; // size=0, offset=68
+	char numberBirthParticles; // size=0, offset=70
+	char endSegment; // size=0, offset=71
+	short startFadeValue; // size=0, offset=72
+	short fadeStep; // size=0, offset=74
+};
+
+struct _FXLightBeam // hashcode: 0xD46629B3 (dec: -731502157)
+{
+	void *next; // size=0, offset=0
+	void *continue_process; // size=0, offset=4
+	struct _Instance *instance; // size=664, offset=8
+	unsigned char effectType; // size=0, offset=12
+	unsigned char type; // size=0, offset=13
+	short lifeTime; // size=0, offset=14
+	short startSeg; // size=0, offset=16
+	short endSeg; // size=0, offset=18
+	long color; // size=0, offset=20
+};
+
+struct _FXBlastringEffect // hashcode: 0x412A2A17 (dec: 1093282327)
+{
+	void *next; // size=0, offset=0
+	void *continue_process; // size=0, offset=4
+	struct _Instance *instance; // size=664, offset=8
+	unsigned char effectType; // size=0, offset=12
+	unsigned char type; // size=0, offset=13
+	short lifeTime; // size=0, offset=14
+	struct _SVector position; // size=8, offset=16
+	struct MATRIX matrix; // size=32, offset=24
+	short segment; // size=0, offset=56
+	short pad; // size=0, offset=58
+	int radius; // size=0, offset=60
+	int size1; // size=0, offset=64
+	int size2; // size=0, offset=68
+	int startRadius; // size=0, offset=72
+	int endRadius; // size=0, offset=76
+	int colorchange_radius; // size=0, offset=80
+	int vel; // size=0, offset=84
+	int accl; // size=0, offset=88
+	int height1; // size=0, offset=92
+	int height2; // size=0, offset=96
+	int height3; // size=0, offset=100
+	short predator_offset; // size=0, offset=104
+	short sortInWorld; // size=0, offset=106
+	long color; // size=0, offset=108
+	long startColor; // size=0, offset=112
+	long endColor; // size=0, offset=116
+};
+
+struct _FXForceFieldEffect // hashcode: 0xDC625742 (dec: -597534910)
+{
+	void *next; // size=0, offset=0
+	void *continue_process; // size=0, offset=4
+	struct _Instance *instance; // size=664, offset=8
+	unsigned char effectType; // size=0, offset=12
+	unsigned char type; // size=0, offset=13
+	short lifeTime; // size=0, offset=14
+	struct _SVector offset; // size=8, offset=16
+	short size; // size=0, offset=24
+	short size_diff; // size=0, offset=26
+	short size_change; // size=0, offset=28
+	short deg; // size=0, offset=30
+	short deg_change; // size=0, offset=32
+	short start_fade; // size=0, offset=34
+	short end_fade; // size=0, offset=36
+	long color; // size=0, offset=40
+};
+
+struct _FXLightning // hashcode: 0xB826B760 (dec: -1205422240)
+{
+	void *next; // size=0, offset=0
+	void *continue_process; // size=0, offset=4
+	struct _Instance *instance; // size=664, offset=8
+	unsigned char effectType; // size=0, offset=12
+	unsigned char type; // size=0, offset=13
+	short lifeTime; // size=0, offset=14
+	short deg; // size=0, offset=16
+	short deg_inc; // size=0, offset=18
+	struct _Position start_offset; // size=6, offset=20
+	short startSeg; // size=0, offset=26
+	struct _Instance *end_instance; // size=664, offset=28
+	struct _Position end_offset; // size=6, offset=32
+	short endSeg; // size=0, offset=38
+	short matrixSeg; // size=0, offset=40
+	short width; // size=0, offset=42
+	short small_width; // size=0, offset=44
+	short segs; // size=0, offset=46
+	short sine_size; // size=0, offset=48
+	short variation; // size=0, offset=50
+	long color; // size=0, offset=52
+	long glow_color; // size=0, offset=56
+};
+
+struct _FXFlash // hashcode: 0x9AC817EF (dec: -1698162705)
+{
+	void *next; // size=0, offset=0
+	void *continue_process; // size=0, offset=4
+	struct _Instance *instance; // size=664, offset=8
+	unsigned char effectType; // size=0, offset=12
+	unsigned char type; // size=0, offset=13
+	short lifeTime; // size=0, offset=14
+	long timeToColor; // size=0, offset=16
+	long timeAtColor; // size=0, offset=20
+	long timeFromColor; // size=0, offset=24
+	long currentTime; // size=0, offset=28
+	long color; // size=0, offset=32
+};
+
+struct GenericFXObject // hashcode: 0x47E9C847 (dec: 1206503495)
+{
+	struct _GenericParticleParams *ParticleList; // size=48, offset=0
+	struct _GenericRibbonParams *RibbonList; // size=20, offset=4
+	struct _GenericGlowParams *GlowList; // size=24, offset=8
+	struct _GenericLightningParams *LightningList; // size=40, offset=12
+	struct _GenericBlastringParams *BlastList; // size=48, offset=16
+	struct _GenericFlashParams *FlashList; // size=12, offset=20
+	long *ColorList; // size=0, offset=24
+};
+
+struct evObjectDraftData // hashcode: 0xBDF4464C (dec: -1108064692)
+{
+	short force; // size=0, offset=0
+	unsigned short radius; // size=0, offset=2
+	unsigned short radiusCoef; // size=0, offset=4
+	unsigned short height; // size=0, offset=6
+	unsigned short maxVelocity; // size=0, offset=8
+};
+
+struct _GlyphTuneData // hashcode: 0xF890CE90 (dec: -124727664)
+{
+	short glyph_size; // size=0, offset=0
+	short glyph_darkness; // size=0, offset=2
+	char glyph_costs[8]; // size=8, offset=4
+	short glyph_range[8]; // size=16, offset=12
+	long color_array[28]; // size=112, offset=28
+};
+
+struct __ReaverData // hashcode: 0xBB4372C7 (dec: -1153207609)
+{
+	char ReaverPickedUp; // size=0, offset=0
+	char ReaverOn; // size=0, offset=1
+	short ReaverSize; // size=0, offset=2
+	short CurrentReaver; // size=0, offset=4
+	short ReaverDeg; // size=0, offset=6
+	long ReaverChargeTime; // size=0, offset=8
+	long ReaverShockAmount; // size=0, offset=12
+	long ReaverGlowColor; // size=0, offset=16
+	long ReaverBladeColor; // size=0, offset=20
+	long ReaverBladeGlowColor; // size=0, offset=24
+	short ReaverScale; // size=0, offset=28
+	short ReaverTargetScale; // size=0, offset=30
+	struct __ReaverSaveDat saveData; // size=4, offset=32
+};
+
+struct __ReaverTuneData // hashcode: 0xD790EF64 (dec: -678367388)
+{
+	unsigned long spectralGlowColor; // size=0, offset=0
+	unsigned long materialGlowColor; // size=0, offset=4
+	unsigned long sunlightGlowColor; // size=0, offset=8
+	unsigned long waterGlowColor; // size=0, offset=12
+	unsigned long stoneGlowColor; // size=0, offset=16
+	unsigned long fireGlowColor; // size=0, offset=20
+	unsigned long spiritGlowColor; // size=0, offset=24
+	unsigned long soundGlowColor; // size=0, offset=28
+	unsigned long spectralInnerColor; // size=0, offset=32
+	unsigned long materialInnerColor; // size=0, offset=36
+	unsigned long sunlightInnerColor; // size=0, offset=40
+	unsigned long waterInnerColor; // size=0, offset=44
+	unsigned long stoneInnerColor; // size=0, offset=48
+	unsigned long fireInnerColor; // size=0, offset=52
+	unsigned long spiritInnerColor; // size=0, offset=56
+	unsigned long soundInnerColor; // size=0, offset=60
+	unsigned long spectralInnerGlowColor; // size=0, offset=64
+	unsigned long materialInnerGlowColor; // size=0, offset=68
+	unsigned long sunlightInnerGlowColor; // size=0, offset=72
+	unsigned long waterInnerGlowColor; // size=0, offset=76
+	unsigned long stoneInnerGlowColor; // size=0, offset=80
+	unsigned long fireInnerGlowColor; // size=0, offset=84
+	unsigned long spiritInnerGlowColor; // size=0, offset=88
+	unsigned long soundInnerGlowColor; // size=0, offset=92
+	unsigned long icon_colors[24]; // size=96, offset=96
+};
+
+struct _POLY_TF4 // hashcode: 0x7EF8BC11 (dec: 2130230289)
+{
+	unsigned long tag; // size=0, offset=0
+	unsigned long drawTPage; // size=0, offset=4
+	struct _BASIC_F4 p1; // size=20, offset=8
+};
+
+struct _POLY_2G4 // hashcode: 0x0EC3C00F (dec: 247709711)
+{
+	unsigned long tag; // size=0, offset=0
+	struct _BASIC_G4 p1; // size=32, offset=4
+	struct _BASIC_G4 p2; // size=32, offset=36
+};
+
+struct _POLY_2G4T // hashcode: 0xC66905DE (dec: -966195746)
+{
+	unsigned long tag; // size=0, offset=0
+	unsigned long drawTPage1; // size=0, offset=4
+	struct _BASIC_G4 p1; // size=32, offset=8
+	struct _BASIC_G4 p2; // size=32, offset=40
+};
+
+struct AadVolume // hashcode: 0xAF7F90F1 (dec: -1350594319)
+{
+	short left; // size=0, offset=0
+	short right; // size=0, offset=2
+};
+
+struct NewMemTracker // hashcode: 0x07472B56 (dec: 122104662)
 {
 	struct MemHeader *rootNode; // size=8, offset=0
 	unsigned long totalMemory; // size=0, offset=4
@@ -5040,7 +5066,123 @@ struct NewMemTracker // hashcode: 0x84C0F863 (dec: -2067728285)
 	long doingGarbageCollection; // size=0, offset=16
 };
 
-struct SpuVoiceAttr // hashcode: 0x4C2AB4B6 (dec: 1277867190)
+struct AadSequenceHdr // hashcode: 0x9C79F48E (dec: -1669729138)
+{
+	unsigned long sequenceID; // size=0, offset=0
+	unsigned long quarterNoteTime; // size=0, offset=4
+	unsigned short ppqn; // size=0, offset=8
+	unsigned short version; // size=0, offset=10
+	unsigned short numTracks; // size=0, offset=12
+	unsigned short unused; // size=0, offset=14
+};
+
+struct AadMemoryStruct // hashcode: 0xCE12B6A3 (dec: -837634397)
+{
+	unsigned long updateCounter; // size=0, offset=0
+	int numSlots; // size=0, offset=4
+	int updateMode; // size=0, offset=8
+	int masterVolume; // size=0, offset=12
+	struct AadVolFader masterVolFader; // size=12, offset=16
+	int sfxMasterVol; // size=0, offset=28
+	int musicMasterVol; // size=0, offset=32
+	int flags; // size=0, offset=36
+	struct AadVolFader musicMasterVolFader; // size=12, offset=40
+	struct _AadSequenceSlot (*sequenceSlots[8]); // size=32, offset=52
+	struct AadSfxSlot sfxSlot; // size=392, offset=84
+	struct AadSynthVoice synthVoice[24]; // size=672, offset=476
+	char voiceStatus[24]; // size=24, offset=1148
+	unsigned short voicePitchSave[24]; // size=48, offset=1172
+	unsigned long voiceKeyOffRequest; // size=0, offset=1220
+	unsigned long voiceKeyOnRequest; // size=0, offset=1224
+	unsigned long voiceReverbRequest; // size=0, offset=1228
+	struct AadSoundBankHdr (*dynamicSoundBankHdr[2]); // size=8, offset=1232
+	struct AadProgramAtr (*dynamicProgramAtr[2]); // size=8, offset=1240
+	struct AadToneAtr (*dynamicToneAtr[2]); // size=8, offset=1248
+	unsigned long (*dynamicWaveAddr[2]); // size=8, offset=1256
+	unsigned char (**dynamicSequenceAddressTbl[2]); // size=8, offset=1264
+	unsigned long (*dynamicSequenceLabelOffsetTbl[2]); // size=8, offset=1272
+	int dynamicBankStatus[2]; // size=8, offset=1280
+	unsigned char (*dynamicSoundBankData[2]); // size=8, offset=1288
+	unsigned long dynamicSoundBankSramData[2]; // size=8, offset=1296
+	struct AadDynamicLoadRequest loadRequestQueue[16]; // size=448, offset=1304
+	struct AadDynamicBankLoadInfo dynamicBankLoadInfo; // size=88, offset=1752
+	void (*nonBlockLoadProc)(); // size=0, offset=1840
+	void (*nonBlockBufferedLoadProc)(); // size=0, offset=1844
+	void (**memoryMallocProc)(); // size=0, offset=1848
+	void (*memoryFreeProc)(); // size=0, offset=1852
+	int nextLoadReqIn; // size=0, offset=1856
+	int nextLoadReqOut; // size=0, offset=1860
+	int numLoadReqsQueued; // size=0, offset=1864
+	struct AadDynamicSfxLoadInfo dynamicSfxLoadInfo; // size=148, offset=1868
+	struct _AadDynSfxFileHdr *firstDynSfxFile; // size=20, offset=2016
+	int nextFileHandle; // size=0, offset=2020
+	struct AadSramDefragInfo sramDefragInfo; // size=32, offset=2024
+	unsigned char sfxToneMasterList[512]; // size=512, offset=2056
+	unsigned char sfxWaveMasterList[512]; // size=512, offset=2568
+	struct AadLoadedSfxToneAttr sfxToneAttrTbl[128]; // size=2560, offset=3080
+	struct AadLoadedSfxWaveAttr sfxWaveAttrTbl[120]; // size=480, offset=5640
+	int nextToneIndex; // size=0, offset=6120
+	int nextWaveIndex; // size=0, offset=6124
+	struct AadNewSramBlockDesc sramDescriptorTbl[128]; // size=1024, offset=6128
+	int nextSramDescIndex; // size=0, offset=7152
+	int firstSramBlockDescIndex; // size=0, offset=7156
+	void (*controller11Callback)(); // size=0, offset=7160
+	void (*endSequenceCallback)(); // size=0, offset=7164
+	long controller11CallbackData; // size=0, offset=7168
+	long endSequenceCallbackData; // size=0, offset=7172
+	unsigned char userVariables[128]; // size=128, offset=7176
+};
+
+struct AadTempo // hashcode: 0x6D23769D (dec: 1831040669)
+{
+	unsigned long quarterNoteTime; // size=0, offset=0
+	int ppqn; // size=0, offset=4
+};
+
+struct AadSlotAttributes // hashcode: 0x454AA01E (dec: 1162518558)
+{
+	int sequenceNumberAssigned; // size=0, offset=0
+	int sequenceAssignedDynamicBank; // size=0, offset=4
+	int playingStatus; // size=0, offset=8
+	int channelMute; // size=0, offset=12
+	int slotVolume; // size=0, offset=16
+	int slotPan; // size=0, offset=20
+	int eventsInQueue[16]; // size=64, offset=24
+};
+
+struct AADLIB_152fake // hashcode: 0xBFBF34F1 (dec: -1077988111)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: aadlib.o, aadlib.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: aadlib.o, aadlib.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: aadlib.o, aadlib.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: aadlib.o, aadlib.o
+};
+
+struct SpuVoiceAttr // hashcode: 0x72F4027F (dec: 1928594047)
 {
 	unsigned long voice; // size=0, offset=0
 	unsigned long mask; // size=0, offset=4
@@ -5065,7 +5207,7 @@ struct SpuVoiceAttr // hashcode: 0x4C2AB4B6 (dec: 1277867190)
 	unsigned short adsr2; // size=0, offset=60
 };
 
-struct POLY_G4 // hashcode: 0xC602E7AA (dec: -972888150)
+struct POLY_G4 // hashcode: 0xC4DFE412 (dec: -991960046)
 {
 	unsigned long tag; // size=0, offset=0
 	unsigned char r0; // size=0, offset=4
@@ -5094,13 +5236,13 @@ struct POLY_G4 // hashcode: 0xC602E7AA (dec: -972888150)
 	short y3; // size=0, offset=34
 };
 
-struct DR_AREA // hashcode: 0xC8AB7091 (dec: -928288623)
+struct DR_AREA // hashcode: 0x89605187 (dec: -1990176377)
 {
 	unsigned long tag; // size=0, offset=0
 	unsigned long code[2]; // size=8, offset=4
 };
 
-struct evPositionData // hashcode: 0x8B586211 (dec: -1957141999)
+struct evPositionData // hashcode: 0x30848F46 (dec: 813993798)
 {
 	short x; // size=0, offset=0
 	short y; // size=0, offset=2
@@ -5108,12 +5250,12 @@ struct evPositionData // hashcode: 0x8B586211 (dec: -1957141999)
 	short pad; // size=0, offset=6
 };
 
-struct STracker // hashcode: 0xBA6DA077 (dec: -1167220617)
+struct STracker // hashcode: 0xC37622E2 (dec: -1015667998)
 {
 	struct _StreamUnit StreamList[16]; // size=1024, offset=0
 };
 
-struct FaceExtents // hashcode: 0x81F54A5F (dec: -2114631073)
+struct FaceExtents // hashcode: 0x33048CD4 (dec: 855936212)
 {
 	long smallx; // size=0, offset=0
 	long bigx; // size=0, offset=4
@@ -5123,13 +5265,13 @@ struct FaceExtents // hashcode: 0x81F54A5F (dec: -2114631073)
 	long bigz; // size=0, offset=20
 };
 
-struct WarpRoom // hashcode: 0xCE515662 (dec: -833530270)
+struct WarpRoom // hashcode: 0x8963873E (dec: -1989966018)
 {
 	char name[16]; // size=16, offset=0
 	struct _StreamUnit *streamUnit; // size=64, offset=16
 };
 
-struct PlanningNode // hashcode: 0xEA32DC84 (dec: -365765500)
+struct PlanningNode // hashcode: 0x22DBD3C1 (dec: 584831937)
 {
 	struct _Position pos; // size=6, offset=0
 	unsigned short flags; // size=0, offset=6
@@ -5142,7 +5284,7 @@ struct PlanningNode // hashcode: 0xEA32DC84 (dec: -365765500)
 	long streamUnitID; // size=0, offset=24
 };
 
-struct VramBuffer // hashcode: 0xED8172BA (dec: -310283590)
+struct VramBuffer // hashcode: 0xF0C9293E (dec: -255252162)
 {
 	long flags; // size=0, offset=0
 	short x; // size=0, offset=4
@@ -5154,16 +5296,18 @@ struct VramBuffer // hashcode: 0xED8172BA (dec: -310283590)
 	short *lineOverFlow; // size=0, offset=16
 };
 
-struct STREAM_288fake // hashcode: 0x2611F8B3 (dec: 638711987)
+struct STREAM_289fake // hashcode: 0xE57F8529 (dec: -444627671)
 {
-	short loading; // size=0, offset=0
-	short fadeValue; // size=0, offset=2
-	long curTime; // size=0, offset=4
-	long maxTime; // size=0, offset=8
-	struct _Instance *warpFaceInstance; // size=664, offset=12
+	int warpgate_in_use; // size=0, offset=0
+	char loading; // size=0, offset=4
+	char blocked; // size=0, offset=5
+	short fadeValue; // size=0, offset=6
+	long curTime; // size=0, offset=8
+	long maxTime; // size=0, offset=12
+	struct _Instance *warpFaceInstance; // size=664, offset=16
 };
 
-struct PHYSOBS_109fake // hashcode: 0xEE95CCE3 (dec: -292172573)
+struct PHYSOBS_109fake // hashcode: 0xAC62A192 (dec: -1402822254)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -5195,7 +5339,7 @@ struct PHYSOBS_109fake // hashcode: 0xEE95CCE3 (dec: -292172573)
 	} Follow; // size=20, offset=76, found in object files: PhysObs.o, PhysObs.o
 };
 
-struct evObjectData // hashcode: 0x4F0DD970 (dec: 1326307696)
+struct evObjectData // hashcode: 0xD31AB4FF (dec: -753224449)
 {
 	short x; // size=0, offset=0
 	short y; // size=0, offset=2
@@ -5205,7 +5349,17 @@ struct evObjectData // hashcode: 0x4F0DD970 (dec: 1326307696)
 	int rc; // size=0, offset=12
 };
 
-struct evPhysicsSlideData // hashcode: 0xDB552464 (dec: -615177116)
+struct evPhysicsGravityData // hashcode: 0x21646503 (dec: 560227587)
+{
+	short UpperOffset; // size=0, offset=0
+	short LowerOffset; // size=0, offset=2
+	short x; // size=0, offset=4
+	short y; // size=0, offset=6
+	short z; // size=0, offset=8
+	short slipSlope; // size=0, offset=10
+};
+
+struct evPhysicsSlideData // hashcode: 0x77FBC416 (dec: 2012988438)
 {
 	struct _SVector ForwardVector; // size=8, offset=0
 	struct _SVector ForwardNormal; // size=8, offset=8
@@ -5218,7 +5372,7 @@ struct evPhysicsSlideData // hashcode: 0xDB552464 (dec: -615177116)
 	int Dot; // size=0, offset=36
 };
 
-struct evObjectThrowData // hashcode: 0x24DB0DBC (dec: 618335676)
+struct evObjectThrowData // hashcode: 0x4D2643FB (dec: 1294353403)
 {
 	short type; // size=0, offset=0
 	short spinType; // size=0, offset=2
@@ -5235,7 +5389,7 @@ struct evObjectThrowData // hashcode: 0x24DB0DBC (dec: 618335676)
 	short zVel; // size=0, offset=26
 };
 
-struct evObjectBirthProjectileData // hashcode: 0xD0E2D162 (dec: -790441630)
+struct evObjectBirthProjectileData // hashcode: 0x7ED94533 (dec: 2128168243)
 {
 	struct _Instance *instance; // size=664, offset=0
 	int joint; // size=0, offset=4
@@ -5243,13 +5397,13 @@ struct evObjectBirthProjectileData // hashcode: 0xD0E2D162 (dec: -790441630)
 	struct _Instance *birthInstance; // size=664, offset=12
 };
 
-struct PhysObWeaponProperties // hashcode: 0xB082F6F5 (dec: -1333594379)
+struct PhysObWeaponProperties // hashcode: 0xE4A47141 (dec: -458985151)
 {
 	struct PhysObProperties Properties; // size=8, offset=0
 	struct PhysObWeaponAttributes WeaponAttributes; // size=28, offset=8
 };
 
-struct PhysObInteractProperties // hashcode: 0xA5543975 (dec: -1521206923)
+struct PhysObInteractProperties // hashcode: 0x5CAA78AA (dec: 1554675882)
 {
 	struct PhysObProperties Properties; // size=8, offset=0
 	unsigned short conditions; // size=0, offset=8
@@ -5275,14 +5429,14 @@ struct PhysObInteractProperties // hashcode: 0xA5543975 (dec: -1521206923)
 	struct PhysObWeaponAttributes *weapon; // size=28, offset=40
 };
 
-struct __PhysObProjectileProperties // hashcode: 0xB1F990D3 (dec: -1309044525)
+struct __PhysObProjectileProperties // hashcode: 0x245F8F39 (dec: 610242361)
 {
 	struct PhysObProperties Properties; // size=8, offset=0
 	long totalProjectiles; // size=0, offset=8
 	struct __PhysObProjectileData *data; // size=12, offset=12
 };
 
-struct PhysObDraftProperties // hashcode: 0x94602C47 (dec: -1805636537)
+struct PhysObDraftProperties // hashcode: 0x6B9FEB6D (dec: 1805642605)
 {
 	struct PhysObProperties Properties; // size=8, offset=0
 	short force; // size=0, offset=8
@@ -5292,7 +5446,7 @@ struct PhysObDraftProperties // hashcode: 0x94602C47 (dec: -1805636537)
 	unsigned long height; // size=0, offset=16
 };
 
-struct PhysObSwitchProperties // hashcode: 0x65265E7B (dec: 1697013371)
+struct PhysObSwitchProperties // hashcode: 0xCADB5288 (dec: -891596152)
 {
 	struct PhysObProperties Properties; // size=8, offset=0
 	short Distance; // size=0, offset=8
@@ -5318,7 +5472,7 @@ struct PhysObSwitchProperties // hashcode: 0x65265E7B (dec: 1697013371)
 	unsigned char engageZCone; // size=0, offset=31
 };
 
-struct PhysObCollectibleProperties // hashcode: 0x173595BD (dec: 389387709)
+struct PhysObCollectibleProperties // hashcode: 0x0CD8F6CF (dec: 215545551)
 {
 	struct PhysObProperties Properties; // size=8, offset=0
 	short collectClass; // size=0, offset=8
@@ -5329,14 +5483,14 @@ struct PhysObCollectibleProperties // hashcode: 0x173595BD (dec: 389387709)
 	unsigned short spatialNode; // size=0, offset=18
 };
 
-struct PhysObAnimatedProperties // hashcode: 0x9BAE907D (dec: -1683058563)
+struct PhysObAnimatedProperties // hashcode: 0xA33AEFDC (dec: -1556418596)
 {
 	struct PhysObProperties Properties; // size=8, offset=0
 	unsigned short flags; // size=0, offset=8
 	unsigned short pad; // size=0, offset=10
 };
 
-struct PhysObData // hashcode: 0x0D644D12 (dec: 224677138)
+struct PhysObData // hashcode: 0x3CB62FFA (dec: 1018572794)
 {
 	long Mode; // size=0, offset=0
 	short xForce; // size=0, offset=4
@@ -5370,125 +5524,24 @@ struct PhysObData // hashcode: 0x0D644D12 (dec: 224677138)
 	int physObTimer; // size=0, offset=68
 };
 
-struct SwitchData // hashcode: 0xEC701AED (dec: -328197395)
-{
-	short state; // size=0, offset=0
-	short accumulator; // size=0, offset=2
-};
-
-struct BreakOffData // hashcode: 0x38A19561 (dec: 950113633)
+struct BreakOffData // hashcode: 0x505ED2BD (dec: 1348391613)
 {
 	short NewType; // size=0, offset=0
 	short NewClass; // size=0, offset=2
 };
 
-struct ProjectileData // hashcode: 0x9DC04551 (dec: -1648343727)
+struct ProjectileData // hashcode: 0x3D394AEE (dec: 1027164910)
 {
 	int Type; // size=0, offset=0
 };
 
-struct WaterLevelProcess // hashcode: 0x87B8A7A6 (dec: -2017941594)
+struct _PhysObSaveData // hashcode: 0x68509DE4 (dec: 1750113764)
 {
-	long flags; // size=0, offset=0
-	struct BSPTree *bspTree; // size=36, offset=4
-	struct _StreamUnit *streamUnit; // size=0, offset=8
-	short oldWaterZ; // size=0, offset=12
-	short oldGlobalOffset; // size=0, offset=14
-	short zValueFrom; // size=0, offset=16
-	short zValueTo; // size=0, offset=18
-	long maxSteps; // size=0, offset=20
-	long curStep; // size=0, offset=24
+	struct SwitchData switchData; // size=4, offset=0
+	long Mode; // size=0, offset=4
 };
 
-struct EventInstanceObject // hashcode: 0xF9BF7B16 (dec: -104891626)
-{
-	short id; // size=0, offset=0
-	short flags; // size=0, offset=2
-	long unitID; // size=0, offset=4
-	long introUniqueID; // size=0, offset=8
-	struct _Instance *instance; // size=664, offset=12
-	union {
-		struct Intro *intro; // size=76, offset=0
-		struct _SFXMkr *sfxMarker; // size=36, offset=0
-	} data; // size=4, offset=16, found in object files: event.o, event.o
-};
-
-struct EventEventObject // hashcode: 0x99F832F3 (dec: -1711787277)
-{
-	short id; // size=0, offset=0
-	short eventNumber; // size=0, offset=2
-	long unitID; // size=0, offset=4
-	struct Event *event; // size=0, offset=8
-};
-
-struct EventTGroupObject // hashcode: 0xDE337D53 (dec: -567050925)
-{
-	short id; // size=0, offset=0
-	short tgroupNumber; // size=0, offset=2
-	long unitID; // size=0, offset=4
-	struct BSPTree *bspTree; // size=36, offset=8
-	struct _StreamUnit *stream; // size=0, offset=12
-};
-
-struct _PCodeStack // hashcode: 0xCDC22647 (dec: -842914233)
-{
-	long topOfStack; // size=0, offset=0
-	struct StackType stack[32]; // size=1152, offset=4
-};
-
-struct EventTimer // hashcode: 0x6428D219 (dec: 1680396825)
-{
-	long flags; // size=1, offset=0
-	long time; // size=31, offset=1
-	struct Event *event; // size=28, offset=4
-	struct ScriptPCode *actionScript; // size=8, offset=8
-	short *scriptPos; // size=0, offset=12
-	struct Level *level; // size=392, offset=16
-	long nextEventIndex; // size=0, offset=20
-};
-
-struct HintSystemStruct // hashcode: 0x6396612B (dec: 1670799659)
-{
-	short flags; // size=0, offset=0
-	short hintNumber; // size=0, offset=2
-	short stringNumber; // size=0, offset=4
-	long fadeTimer; // size=0, offset=8
-	long spawningUnitID; // size=0, offset=12
-};
-
-struct STRMLOAD_116fake // hashcode: 0x64E8AA3B (dec: 1692969531)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: strmload.o, strmload.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: strmload.o, strmload.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: strmload.o, strmload.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: strmload.o, strmload.o
-};
-
-struct SCRIPT2_114fake // hashcode: 0x94366133 (dec: -1808375501)
+struct SCRIPT2_114fake // hashcode: 0x543A9F47 (dec: 1413128007)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=80, offset=0
@@ -5520,13 +5573,130 @@ struct SCRIPT2_114fake // hashcode: 0x94366133 (dec: -1808375501)
 	} Follow; // size=20, offset=76, found in object files: script2.o, script2.o
 };
 
-struct LitShaftProperties // hashcode: 0xABEDB0DC (dec: -1410486052)
+struct LitShaftProperties // hashcode: 0xEB854ABA (dec: -343586118)
 {
 	short fadeValue; // size=0, offset=0
 	short pad; // size=0, offset=2
 };
 
-struct PHYSICS_109fake // hashcode: 0x5DACEA60 (dec: 1571613280)
+struct SavedEventSmallVars // hashcode: 0x4F21E3CB (dec: 1327621067)
+{
+	unsigned char savedID; // size=0, offset=0
+	unsigned char shiftedSaveSize; // size=0, offset=1
+	short areaID; // size=0, offset=2
+	char eventNumber; // size=0, offset=4
+	char eventVariables[5]; // size=5, offset=5
+};
+
+struct WaterLevelProcess // hashcode: 0xDBFF4FF7 (dec: -604024841)
+{
+	long flags; // size=0, offset=0
+	struct BSPTree *bspTree; // size=36, offset=4
+	struct _StreamUnit *streamUnit; // size=0, offset=8
+	short oldWaterZ; // size=0, offset=12
+	short oldGlobalOffset; // size=0, offset=14
+	short zValueFrom; // size=0, offset=16
+	short zValueTo; // size=0, offset=18
+	long maxSteps; // size=0, offset=20
+	long curStep; // size=0, offset=24
+};
+
+struct EventInstanceObject // hashcode: 0x31AB53D9 (dec: 833311705)
+{
+	short id; // size=0, offset=0
+	short flags; // size=0, offset=2
+	long unitID; // size=0, offset=4
+	long introUniqueID; // size=0, offset=8
+	struct _Instance *instance; // size=664, offset=12
+	union {
+		struct Intro *intro; // size=76, offset=0
+		struct _SFXMkr *sfxMarker; // size=36, offset=0
+	} data; // size=4, offset=16, found in object files: event.o, event.o
+};
+
+struct EventEventObject // hashcode: 0x3259585A (dec: 844716122)
+{
+	short id; // size=0, offset=0
+	short eventNumber; // size=0, offset=2
+	long unitID; // size=0, offset=4
+	struct Event *event; // size=0, offset=8
+};
+
+struct EventTGroupObject // hashcode: 0xF6A4A3D3 (dec: -156982317)
+{
+	short id; // size=0, offset=0
+	short tgroupNumber; // size=0, offset=2
+	long unitID; // size=0, offset=4
+	struct BSPTree *bspTree; // size=36, offset=8
+	struct _StreamUnit *stream; // size=0, offset=12
+};
+
+struct _PCodeStack // hashcode: 0x792404F9 (dec: 2032403705)
+{
+	long topOfStack; // size=0, offset=0
+	struct StackType stack[32]; // size=1152, offset=4
+};
+
+struct EventTimer // hashcode: 0x49CEB070 (dec: 1238282352)
+{
+	long flags; // size=1, offset=0
+	long time; // size=31, offset=1
+	struct Event *event; // size=28, offset=4
+	struct ScriptPCode *actionScript; // size=8, offset=8
+	short *scriptPos; // size=0, offset=12
+	struct Level *level; // size=392, offset=16
+	long nextEventIndex; // size=0, offset=20
+};
+
+struct SignalResetStruct // hashcode: 0xF7BB5F2D (dec: -138715347)
+{
+	struct _MultiSignal *mSignal; // size=904, offset=0
+	long timeLeft; // size=0, offset=4
+};
+
+struct HintSystemStruct // hashcode: 0xAE4602C6 (dec: -1371143482)
+{
+	short flags; // size=0, offset=0
+	short hintNumber; // size=0, offset=2
+	short stringNumber; // size=0, offset=4
+	short pad; // size=0, offset=6
+	long fadeTimer; // size=0, offset=8
+	long spawningUnitID; // size=0, offset=12
+};
+
+struct STRMLOAD_116fake // hashcode: 0x5BA51FED (dec: 1537548269)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: strmload.o, strmload.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: strmload.o, strmload.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: strmload.o, strmload.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: strmload.o, strmload.o
+};
+
+struct PHYSICS_109fake // hashcode: 0x5EA21869 (dec: 1587681385)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -5558,25 +5728,16 @@ struct PHYSICS_109fake // hashcode: 0x5DACEA60 (dec: 1571613280)
 	} Follow; // size=20, offset=76, found in object files: physics.o, physics.o
 };
 
-struct evPhysicsGravityData // hashcode: 0xFD3A4285 (dec: -46513531)
-{
-	short UpperOffset; // size=0, offset=0
-	short LowerOffset; // size=0, offset=2
-	short x; // size=0, offset=4
-	short y; // size=0, offset=6
-	short z; // size=0, offset=8
-	short slipSlope; // size=0, offset=10
-};
-
-struct evPhysicsDropOffData // hashcode: 0x85B95E3E (dec: -2051449282)
+struct evPhysicsDropOffData // hashcode: 0x35127EA8 (dec: 890404520)
 {
 	short xOffset; // size=0, offset=0
 	short yOffset; // size=0, offset=2
 	short DropOffset; // size=0, offset=4
 	short slipSlope; // size=0, offset=6
+	int UpperOffset; // size=0, offset=8
 };
 
-struct evPhysicsEdgeData // hashcode: 0x09C258F2 (dec: 163731698)
+struct evPhysicsEdgeData // hashcode: 0x323073DA (dec: 842036186)
 {
 	short UpperOffset; // size=0, offset=0
 	short ForwardOffset; // size=0, offset=2
@@ -5592,7 +5753,7 @@ struct evPhysicsEdgeData // hashcode: 0x09C258F2 (dec: 163731698)
 	int rc; // size=0, offset=32
 };
 
-struct evPhysicsWallCrawlData // hashcode: 0xB2FCB4EA (dec: -1292061462)
+struct evPhysicsWallCrawlData // hashcode: 0x3F532F62 (dec: 1062416226)
 {
 	short Segment; // size=0, offset=0
 	short Length; // size=0, offset=2
@@ -5606,7 +5767,7 @@ struct evPhysicsWallCrawlData // hashcode: 0xB2FCB4EA (dec: -1292061462)
 	int rc; // size=0, offset=40
 };
 
-struct evPhysicsSwimData // hashcode: 0xCE6688EE (dec: -832141074)
+struct evPhysicsSwimData // hashcode: 0x04C82589 (dec: 80225673)
 {
 	short CheckDepth; // size=0, offset=0
 	short SwimDepth; // size=0, offset=2
@@ -5620,7 +5781,7 @@ struct evPhysicsSwimData // hashcode: 0xCE6688EE (dec: -832141074)
 	int WaterLevel; // size=0, offset=20
 };
 
-struct evPhysicsDropHeightData // hashcode: 0x1C82CF3E (dec: 478334782)
+struct evPhysicsDropHeightData // hashcode: 0xC6B94AD5 (dec: -960935211)
 {
 	struct _Position origin; // size=6, offset=0
 	short mode; // size=0, offset=6
@@ -5630,7 +5791,7 @@ struct evPhysicsDropHeightData // hashcode: 0x1C82CF3E (dec: 478334782)
 	struct _TFace *tface; // size=12, offset=16
 };
 
-struct evPhysicsLinkedMoveData // hashcode: 0x5A2EDF33 (dec: 1513021235)
+struct evPhysicsLinkedMoveData // hashcode: 0xCF7D1718 (dec: -813885672)
 {
 	struct _Instance *instance; // size=664, offset=0
 	int segment; // size=0, offset=4
@@ -5638,7 +5799,7 @@ struct evPhysicsLinkedMoveData // hashcode: 0x5A2EDF33 (dec: 1513021235)
 	struct _SVector rotDelta; // size=8, offset=16
 };
 
-struct RAZCNTRL_109fake // hashcode: 0xFD097EFC (dec: -49709316)
+struct REAVER_114fake // hashcode: 0xCC1F1DCE (dec: -870375986)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -5648,29 +5809,29 @@ struct RAZCNTRL_109fake // hashcode: 0xFD097EFC (dec: -49709316)
 		short cinema_done; // size=0, offset=18
 		int splinecam_currkey; // size=0, offset=20
 		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: razcntrl.o, razcntrl.o
+	} Cinematic; // size=28, offset=0, found in object files: reaver.o, reaver.o
 	struct {
 		struct _Position offset; // size=6, offset=0
 		struct _Rotation rotation; // size=8, offset=6
 		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: razcntrl.o, razcntrl.o
+	} Idle; // size=20, offset=28, found in object files: reaver.o, reaver.o
 	struct {
 		struct _TFace *tface; // size=12, offset=0
 		struct _TFace *oldTFace; // size=12, offset=4
 		struct _SVector oldTargetRot; // size=8, offset=8
 		long timer; // size=0, offset=16
 		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: razcntrl.o, razcntrl.o
+	} Behind; // size=28, offset=48, found in object files: reaver.o, reaver.o
 	struct {
 		long stopTimer; // size=0, offset=0
 		long stopHit; // size=0, offset=4
 		struct _TFace *tface; // size=12, offset=8
 		struct _TFace *oldTFace; // size=12, offset=12
 		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: razcntrl.o, razcntrl.o
+	} Follow; // size=20, offset=76, found in object files: reaver.o, reaver.o
 };
 
-struct STATE_109fake // hashcode: 0xBCEFCE7D (dec: -1125134723)
+struct HUNTER_114fake // hashcode: 0x7F88C438 (dec: 2139669560)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -5680,217 +5841,29 @@ struct STATE_109fake // hashcode: 0xBCEFCE7D (dec: -1125134723)
 		short cinema_done; // size=0, offset=18
 		int splinecam_currkey; // size=0, offset=20
 		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: state.o, state.o
+	} Cinematic; // size=28, offset=0, found in object files: hunter.o, hunter.o
 	struct {
 		struct _Position offset; // size=6, offset=0
 		struct _Rotation rotation; // size=8, offset=6
 		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: state.o, state.o
+	} Idle; // size=20, offset=28, found in object files: hunter.o, hunter.o
 	struct {
 		struct _TFace *tface; // size=12, offset=0
 		struct _TFace *oldTFace; // size=12, offset=4
 		struct _SVector oldTargetRot; // size=8, offset=8
 		long timer; // size=0, offset=16
 		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: state.o, state.o
+	} Behind; // size=28, offset=48, found in object files: hunter.o, hunter.o
 	struct {
 		long stopTimer; // size=0, offset=0
 		long stopHit; // size=0, offset=4
 		struct _TFace *tface; // size=12, offset=8
 		struct _TFace *oldTFace; // size=12, offset=12
 		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: state.o, state.o
+	} Follow; // size=20, offset=76, found in object files: hunter.o, hunter.o
 };
 
-struct __CharacterState // hashcode: 0x765BDE09 (dec: 1985732105)
-{
-	struct _Instance *CharacterInstance; // size=664, offset=0
-	int TotalSections; // size=0, offset=4
-	struct __State SectionList[3]; // size=852, offset=8
-};
-
-struct evMonsterHitData // hashcode: 0xA70C5467 (dec: -1492364185)
-{
-	struct _Instance *sender; // size=664, offset=0
-	struct _Instance *lastHit; // size=664, offset=4
-	short knockBackDistance; // size=0, offset=8
-	short knockBackDuration; // size=0, offset=10
-	long power; // size=0, offset=12
-};
-
-struct evMonsterThrownData // hashcode: 0x902A9E9A (dec: -1876255078)
-{
-	struct _Instance *sender; // size=664, offset=0
-	struct _Rotation direction; // size=8, offset=4
-	short power; // size=0, offset=12
-};
-
-struct evMonsterAlarmData // hashcode: 0xDEB0B984 (dec: -558843516)
-{
-	struct _Instance *sender; // size=664, offset=0
-	struct _Position position; // size=6, offset=4
-	short type; // size=0, offset=10
-};
-
-struct evMonsterSoulSuckData // hashcode: 0x522C2FD4 (dec: 1378627540)
-{
-	struct _Instance *sender; // size=664, offset=0
-	struct _Position Destination; // size=6, offset=4
-};
-
-struct evFXHitData // hashcode: 0xD39E05E9 (dec: -744618519)
-{
-	struct _SVector location; // size=8, offset=0
-	struct _SVector velocity; // size=8, offset=8
-	short amount; // size=0, offset=16
-	short type; // size=0, offset=18
-};
-
-struct evAnimationControllerDoneData // hashcode: 0xC039DD39 (dec: -1069949639)
-{
-	struct _Instance *instance; // size=664, offset=0
-	long segment; // size=0, offset=4
-	long type; // size=0, offset=8
-	int data; // size=0, offset=12
-};
-
-struct evMonsterImpaleData // hashcode: 0x5F304C39 (dec: 1597000761)
-{
-	struct _Instance *weapon; // size=664, offset=0
-	struct _Rotation direction; // size=8, offset=4
-	struct _Position position; // size=6, offset=12
-	short distance; // size=0, offset=18
-};
-
-struct evObjectBreakOffData // hashcode: 0x8FBEEADA (dec: -1883313446)
-{
-	struct _Instance *force; // size=664, offset=0
-	unsigned short node; // size=0, offset=4
-	short distance; // size=0, offset=6
-	unsigned short animation; // size=0, offset=8
-	unsigned short frame; // size=0, offset=10
-	unsigned short type; // size=0, offset=12
-	unsigned short action; // size=0, offset=14
-};
-
-struct evObjectAbsorbData // hashcode: 0x05BCBE59 (dec: 96255577)
-{
-	struct _Instance *force; // size=664, offset=0
-	unsigned short node; // size=0, offset=4
-	unsigned short steps; // size=0, offset=6
-};
-
-struct evObjectIdleData // hashcode: 0x8FA2B908 (dec: -1885161208)
-{
-	long mode; // size=0, offset=0
-	struct _Instance *instance; // size=664, offset=4
-};
-
-struct evControlInitHangData // hashcode: 0x314E13CA (dec: 827200458)
-{
-	struct _Instance *instance; // size=664, offset=0
-	int frame; // size=0, offset=4
-	int frames; // size=0, offset=8
-};
-
-struct evControlInitIdleData // hashcode: 0x9436AF5A (dec: -1808355494)
-{
-	int mode; // size=0, offset=0
-	int frame; // size=0, offset=4
-	int frames; // size=0, offset=8
-};
-
-struct evActionLookAroundData // hashcode: 0x9293C9EB (dec: -1835808277)
-{
-	short *rotx; // size=0, offset=0
-	short *rotz; // size=0, offset=4
-	short minx; // size=0, offset=8
-	short maxx; // size=0, offset=10
-	short minz; // size=0, offset=12
-	short maxz; // size=0, offset=14
-};
-
-struct evActionPlayHostAnimationData // hashcode: 0xC5EC5248 (dec: -974368184)
-{
-	struct _Instance *instance; // size=664, offset=0
-	struct _Instance *host; // size=664, offset=4
-	int newAnim; // size=0, offset=8
-	int newFrame; // size=0, offset=12
-	int frames; // size=0, offset=16
-	int mode; // size=0, offset=20
-};
-
-struct evShadowSegmentData // hashcode: 0x223B434B (dec: 574309195)
-{
-	unsigned long totalShadowSegments; // size=0, offset=0
-	unsigned short shadowSegments[4]; // size=8, offset=4
-};
-
-struct VRAM_114fake // hashcode: 0x4E7C0E6B (dec: 1316753003)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: vram.o, vram.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: vram.o, vram.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: vram.o, vram.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: vram.o, vram.o
-};
-
-struct MONMSG_114fake // hashcode: 0x592BAF87 (dec: 1496035207)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: monmsg.o, monmsg.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: monmsg.o, monmsg.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: monmsg.o, monmsg.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: monmsg.o, monmsg.o
-};
-
-struct _MonsterAnim // hashcode: 0x0634BB96 (dec: 104119190)
+struct _MonsterAnim // hashcode: 0x1F91FAC1 (dec: 529660609)
 {
 	unsigned short velocity; // size=0, offset=0
 	unsigned short distance; // size=0, offset=2
@@ -5905,7 +5878,7 @@ struct _MonsterAnim // hashcode: 0x0634BB96 (dec: 104119190)
 	char pad; // size=0, offset=15
 };
 
-struct _MonsterIdle // hashcode: 0xA90F0257 (dec: -1458634153)
+struct _MonsterIdle // hashcode: 0xB6F7C2C9 (dec: -1225276727)
 {
 	char anim; // size=0, offset=0
 	char alertMod; // size=0, offset=1
@@ -5913,7 +5886,7 @@ struct _MonsterIdle // hashcode: 0xA90F0257 (dec: -1458634153)
 	char pad; // size=0, offset=3
 };
 
-struct _MonsterBehavior // hashcode: 0xD5258491 (dec: -718961519)
+struct _MonsterBehavior // hashcode: 0x6A9AC6A2 (dec: 1788528290)
 {
 	char alertness; // size=0, offset=0
 	char idleFreq; // size=0, offset=1
@@ -5921,7 +5894,7 @@ struct _MonsterBehavior // hashcode: 0xD5258491 (dec: -718961519)
 	char idleList[5]; // size=5, offset=3
 };
 
-struct _MonsterSenses // hashcode: 0xAFC3C0D7 (dec: -1346125609)
+struct _MonsterSenses // hashcode: 0x0E788F78 (dec: 242782072)
 {
 	short sightArc; // size=0, offset=0
 	short sightRadius; // size=0, offset=2
@@ -5934,7 +5907,7 @@ struct _MonsterSenses // hashcode: 0xAFC3C0D7 (dec: -1346125609)
 	unsigned short allyRadius; // size=0, offset=16
 };
 
-struct _MonsterAllegiances // hashcode: 0xBE9F67ED (dec: -1096849427)
+struct _MonsterAllegiances // hashcode: 0x2480BBC8 (dec: 612416456)
 {
 	unsigned long enemies; // size=0, offset=0
 	unsigned long allies; // size=0, offset=4
@@ -5942,7 +5915,7 @@ struct _MonsterAllegiances // hashcode: 0xBE9F67ED (dec: -1096849427)
 	unsigned long gods; // size=0, offset=12
 };
 
-struct _MonsterAttackAttributes // hashcode: 0xBA522505 (dec: -1169021691)
+struct _MonsterAttackAttributes // hashcode: 0x174EF7FB (dec: 391051259)
 {
 	short attackRange; // size=0, offset=0
 	short attackHeight; // size=0, offset=2
@@ -5960,7 +5933,7 @@ struct _MonsterAttackAttributes // hashcode: 0xBA522505 (dec: -1169021691)
 	char animList[5]; // size=5, offset=27
 };
 
-struct _MonsterMissile // hashcode: 0x51F61C82 (dec: 1375083650)
+struct _MonsterMissile // hashcode: 0xE8135188 (dec: -401387128)
 {
 	unsigned short speed; // size=0, offset=0
 	unsigned short range; // size=0, offset=2
@@ -5977,7 +5950,7 @@ struct _MonsterMissile // hashcode: 0x51F61C82 (dec: 1375083650)
 	char animList[2]; // size=2, offset=14
 };
 
-struct _MonsterCombatAttributes // hashcode: 0x93C3BF22 (dec: -1815888094)
+struct _MonsterCombatAttributes // hashcode: 0x43748B8B (dec: 1131711371)
 {
 	short stunTime; // size=0, offset=0
 	short damageTime; // size=0, offset=2
@@ -5990,19 +5963,20 @@ struct _MonsterCombatAttributes // hashcode: 0x93C3BF22 (dec: -1815888094)
 	short enemyAttackRange; // size=0, offset=16
 	short suckPower; // size=0, offset=18
 	short suckRange; // size=0, offset=20
-	char hitPoints; // size=0, offset=22
-	char numAttacks; // size=0, offset=23
-	char missileAttack; // size=0, offset=24
-	char ambushAttack; // size=0, offset=25
-	char evadeProbability[12]; // size=12, offset=26
-	char attackList[1]; // size=1, offset=38
+	short suckTime; // size=0, offset=22
+	char hitPoints; // size=0, offset=24
+	char numAttacks; // size=0, offset=25
+	char missileAttack; // size=0, offset=26
+	char ambushAttack; // size=0, offset=27
+	char evadeProbability[12]; // size=12, offset=28
+	char attackList[1]; // size=1, offset=40
 };
 
-struct _MonsterSubAttributes // hashcode: 0x903F2950 (dec: -1874908848)
+struct _MonsterSubAttributes // hashcode: 0x20DEB0B2 (dec: 551465138)
 {
 	char *animList; // size=0, offset=0
 	struct _MonsterSenses *senses; // size=18, offset=4
-	struct _MonsterCombatAttributes *combatAttributes; // size=40, offset=8
+	struct _MonsterCombatAttributes *combatAttributes; // size=42, offset=8
 	struct _MonsterAllegiances *allegiances; // size=16, offset=12
 	char *behaviorList; // size=0, offset=16
 	short scale; // size=0, offset=20
@@ -6034,17 +6008,65 @@ struct _MonsterSubAttributes // hashcode: 0x903F2950 (dec: -1874908848)
 	unsigned char soundVuln; // size=0, offset=60
 	unsigned char weaponVuln; // size=0, offset=61
 	unsigned char missileVuln; // size=0, offset=62
-	short minSpikeRange; // size=0, offset=64
-	short maxSpikeRange; // size=0, offset=66
-	short maxSpikeAngle; // size=0, offset=68
-	short minSpikeHorzSpeed; // size=0, offset=70
-	short maxSpikeHorzSpeed; // size=0, offset=72
-	short maxSpikeVertSpeed; // size=0, offset=74
-	short upOnGroundOffset; // size=0, offset=76
-	short downOnGroundOffset; // size=0, offset=78
+	unsigned char bruiseRed; // size=0, offset=63
+	unsigned char bruiseGreen; // size=0, offset=64
+	unsigned char bruiseBlue; // size=0, offset=65
+	short minSpikeRange; // size=0, offset=66
+	short maxSpikeRange; // size=0, offset=68
+	short maxSpikeAngle; // size=0, offset=70
+	short minSpikeHorzSpeed; // size=0, offset=72
+	short maxSpikeHorzSpeed; // size=0, offset=74
+	short maxSpikeVertSpeed; // size=0, offset=76
+	short upOnGroundOffset; // size=0, offset=78
+	short downOnGroundOffset; // size=0, offset=80
 };
 
-struct _MonsterVars // hashcode: 0xE3366FA4 (dec: -482971740)
+struct _MonsterAttributes // hashcode: 0x022282CE (dec: 35816142)
+{
+	unsigned long magicnum; // size=0, offset=0
+	void *tunData; // size=0, offset=4
+	char *auxAnimList; // size=0, offset=8
+	char *ambientAnimList; // size=0, offset=12
+	long whatAmI; // size=0, offset=16
+	char numAuxAnims; // size=0, offset=20
+	char numAmbientAnims; // size=0, offset=21
+	unsigned char defaultAge; // size=0, offset=22
+	char pupateObject; // size=0, offset=23
+	unsigned char damageFXSegment; // size=0, offset=24
+	unsigned char headSegment; // size=0, offset=25
+	unsigned char neckSegment; // size=0, offset=26
+	unsigned char leftShoulderSegment; // size=0, offset=27
+	unsigned char rightShoulderSegment; // size=0, offset=28
+	unsigned char waistSegment; // size=0, offset=29
+	unsigned char leftKneeSegment; // size=0, offset=30
+	unsigned char rightKneeSegment; // size=0, offset=31
+	unsigned char leftFootSegment; // size=0, offset=32
+	unsigned char rightFootSegment; // size=0, offset=33
+	unsigned char spineSegment; // size=0, offset=34
+	unsigned char leftWeaponSegment; // size=0, offset=35
+	unsigned char rightWeaponSegment; // size=0, offset=36
+	unsigned char grabSegment; // size=0, offset=37
+	unsigned char bloodImpaleFrame; // size=0, offset=38
+	unsigned char bloodConeFrame; // size=0, offset=39
+	char numSubAttributes; // size=0, offset=40
+	char numCombatAttributes; // size=0, offset=41
+	char numAttackAttributes; // size=0, offset=42
+	char numMissiles; // size=0, offset=43
+	char numAnims; // size=0, offset=44
+	char numIdles; // size=0, offset=45
+	char numBehaviors; // size=0, offset=46
+	char numShatters; // size=0, offset=47
+	struct _MonsterSubAttributes **subAttributesList; // size=84, offset=48
+	struct _MonsterCombatAttributes **combatAttributesList; // size=42, offset=52
+	struct _MonsterAttackAttributes *attackAttributesList; // size=32, offset=56
+	struct _MonsterMissile *missileList; // size=16, offset=60
+	struct _MonsterAnim *animList; // size=16, offset=64
+	struct _MonsterIdle *idleList; // size=4, offset=68
+	struct _MonsterBehavior *behaviorList; // size=8, offset=72
+	void *shatterList; // size=0, offset=76
+};
+
+struct _MonsterVars // hashcode: 0x889ABAF8 (dec: -2003125512)
 {
 	unsigned long mvFlags; // size=0, offset=0
 	unsigned long auxFlags; // size=0, offset=4
@@ -6106,7 +6128,7 @@ struct _MonsterVars // hashcode: 0xE3366FA4 (dec: -482971740)
 	char lastSideMove; // size=0, offset=352
 	char chance; // size=0, offset=353
 	char pathSlotID; // size=0, offset=354
-	struct _MonsterSubAttributes *subAttr; // size=80, offset=356
+	struct _MonsterSubAttributes *subAttr; // size=84, offset=356
 	struct _MonsterIR *freeIRs; // size=0, offset=360
 	void *extraVars; // size=0, offset=364
 	short validUnits[10]; // size=20, offset=368
@@ -6117,7 +6139,7 @@ struct _MonsterVars // hashcode: 0xE3366FA4 (dec: -482971740)
 	short fadeRate; // size=0, offset=422
 };
 
-struct _MonsterIR // hashcode: 0x9BD91DB3 (dec: -1680269901)
+struct _MonsterIR // hashcode: 0xBA5CB169 (dec: -1168330391)
 {
 	struct _MonsterIR *next; // size=36, offset=0
 	struct _Instance *instance; // size=664, offset=4
@@ -6130,188 +6152,25 @@ struct _MonsterIR // hashcode: 0x9BD91DB3 (dec: -1680269901)
 	unsigned long idleTime; // size=0, offset=32
 };
 
-struct burntTuneType // hashcode: 0x67AAA348 (dec: 1739236168)
+struct burntTuneType // hashcode: 0xC8EEBBAF (dec: -923878481)
 {
 	int burntDist; // size=0, offset=0
 	int fadeDelta; // size=0, offset=4
 };
 
-struct _MonsterState // hashcode: 0x23738AC4 (dec: 594774724)
+struct _MonsterState // hashcode: 0x63242942 (dec: 1663314242)
 {
 	void (*entryFunction)(); // size=0, offset=0
 	void (*stateFunction)(); // size=0, offset=4
 };
 
-struct _MonsterStateChoice // hashcode: 0x0841A8E9 (dec: 138520809)
+struct _MonsterStateChoice // hashcode: 0x4DA4D5F2 (dec: 1302648306)
 {
 	int state; // size=0, offset=0
 	struct _MonsterState functions; // size=8, offset=4
 };
 
-struct REAVER_114fake // hashcode: 0xB051AA65 (dec: -1336825243)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: reaver.o, reaver.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: reaver.o, reaver.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: reaver.o, reaver.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: reaver.o, reaver.o
-};
-
-struct GLYPH_114fake // hashcode: 0x8563DD2E (dec: -2057052882)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: glyph.o, glyph.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: glyph.o, glyph.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: glyph.o, glyph.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: glyph.o, glyph.o
-};
-
-struct __GlyphData // hashcode: 0x54A12564 (dec: 1419847012)
-{
-	void (*process)(); // size=0, offset=0
-	struct __MessageQueue messages; // size=136, offset=4
-	long selectedGlyph; // size=0, offset=140
-	short glyph_time; // size=0, offset=144
-	short glyph_radius; // size=0, offset=146
-	short glyph_scale; // size=0, offset=148
-	short glyph_rotation; // size=0, offset=150
-	short target_glyph_rotation; // size=0, offset=152
-	short glyph_movement; // size=0, offset=154
-};
-
-struct __GlyphHudSaveData // hashcode: 0xAFAF1CC5 (dec: -1347478331)
-{
-	short MANNA_Count; // size=0, offset=0
-	short HUD_Count; // size=0, offset=2
-};
-
-struct HUMAN_114fake // hashcode: 0xB0B780DE (dec: -1330151202)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: human.o, human.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: human.o, human.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: human.o, human.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: human.o, human.o
-};
-
-struct _MonsterAttributes // hashcode: 0xAFA2C05F (dec: -1348288417)
-{
-	unsigned long magicnum; // size=0, offset=0
-	void *tunData; // size=0, offset=4
-	char *auxAnimList; // size=0, offset=8
-	char *ambientAnimList; // size=0, offset=12
-	long whatAmI; // size=0, offset=16
-	char numAuxAnims; // size=0, offset=20
-	char numAmbientAnims; // size=0, offset=21
-	unsigned char defaultAge; // size=0, offset=22
-	char pupateObject; // size=0, offset=23
-	unsigned char damageFXSegment; // size=0, offset=24
-	unsigned char headSegment; // size=0, offset=25
-	unsigned char neckSegment; // size=0, offset=26
-	unsigned char leftShoulderSegment; // size=0, offset=27
-	unsigned char rightShoulderSegment; // size=0, offset=28
-	unsigned char waistSegment; // size=0, offset=29
-	unsigned char leftKneeSegment; // size=0, offset=30
-	unsigned char rightKneeSegment; // size=0, offset=31
-	unsigned char leftFootSegment; // size=0, offset=32
-	unsigned char rightFootSegment; // size=0, offset=33
-	unsigned char spineSegment; // size=0, offset=34
-	unsigned char leftWeaponSegment; // size=0, offset=35
-	unsigned char rightWeaponSegment; // size=0, offset=36
-	unsigned char grabSegment; // size=0, offset=37
-	unsigned char bloodImpaleFrame; // size=0, offset=38
-	unsigned char bloodConeFrame; // size=0, offset=39
-	unsigned char bruiseRed; // size=0, offset=40
-	unsigned char bruiseGreen; // size=0, offset=41
-	unsigned char bruiseBlue; // size=0, offset=42
-	char numSubAttributes; // size=0, offset=43
-	char numCombatAttributes; // size=0, offset=44
-	char numAttackAttributes; // size=0, offset=45
-	char numMissiles; // size=0, offset=46
-	char numAnims; // size=0, offset=47
-	char numIdles; // size=0, offset=48
-	char numBehaviors; // size=0, offset=49
-	char numShatters; // size=0, offset=50
-	struct _MonsterSubAttributes **subAttributesList; // size=80, offset=52
-	struct _MonsterCombatAttributes **combatAttributesList; // size=40, offset=56
-	struct _MonsterAttackAttributes *attackAttributesList; // size=32, offset=60
-	struct _MonsterMissile *missileList; // size=16, offset=64
-	struct _MonsterAnim *animList; // size=16, offset=68
-	struct _MonsterIdle *idleList; // size=4, offset=72
-	struct _MonsterBehavior *behaviorList; // size=8, offset=76
-	void *shatterList; // size=0, offset=80
-};
-
-struct _MonsterFunctionTable // hashcode: 0x6ADF1C02 (dec: 1793006594)
+struct _MonsterFunctionTable // hashcode: 0xA7CE8FD0 (dec: -1479634992)
 {
 	void (*initFunc)(); // size=0, offset=0
 	void (*cleanUpFunc)(); // size=0, offset=4
@@ -6323,47 +6182,21 @@ struct _MonsterFunctionTable // hashcode: 0x6ADF1C02 (dec: 1793006594)
 	char *localVersionID; // size=0, offset=28
 };
 
-struct HUNTER_114fake // hashcode: 0x26220B6D (dec: 639765357)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: hunter.o, hunter.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: hunter.o, hunter.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: hunter.o, hunter.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: hunter.o, hunter.o
-};
-
-struct _HunterVars // hashcode: 0x2703CB78 (dec: 654560120)
+struct _HunterVars // hashcode: 0x432C354E (dec: 1126970702)
 {
 	short startIdx; // size=0, offset=0
 	short endIdx; // size=0, offset=2
 	int rem_time; // size=0, offset=4
-	short angles[16]; // size=32, offset=8
+	int timer; // size=0, offset=8
+	short angles[16]; // size=32, offset=12
 };
 
-struct MISSILE_114fake // hashcode: 0x9E93F839 (dec: -1634469831)
+struct _HunterAttributes // hashcode: 0x46CBFAC6 (dec: 1187773126)
+{
+	int timeToFire; // size=0, offset=0
+};
+
+struct MISSILE_114fake // hashcode: 0xEFEC1245 (dec: -269741499)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -6395,13 +6228,13 @@ struct MISSILE_114fake // hashcode: 0x9E93F839 (dec: -1634469831)
 	} Follow; // size=20, offset=76, found in object files: missile.o, missile.o
 };
 
-struct MissileGraphics // hashcode: 0xA133FA7D (dec: -1590429059)
+struct MissileGraphics // hashcode: 0x89A590FC (dec: -1985638148)
 {
 	unsigned char object; // size=0, offset=0
 	unsigned char model; // size=0, offset=1
 };
 
-struct MONAPI_114fake // hashcode: 0xD6D7DFD3 (dec: -690495533)
+struct MONAPI_114fake // hashcode: 0x2D4C9F6F (dec: 759996271)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -6433,19 +6266,26 @@ struct MONAPI_114fake // hashcode: 0xD6D7DFD3 (dec: -690495533)
 	} Follow; // size=20, offset=76, found in object files: monapi.o, monapi.o
 };
 
-struct evMonsterHitTerrainData // hashcode: 0x0035BA96 (dec: 3521174)
+struct evMonsterHitTerrainData // hashcode: 0xC63DE155 (dec: -969023147)
 {
-	struct _Normal normal; // size=8, offset=0
-	short faceFlags; // size=0, offset=8
+	struct _TFace *tface; // size=12, offset=0
+	struct _Normal normal; // size=8, offset=4
+	short faceFlags; // size=0, offset=12
 };
 
-struct evMonsterHitObjectData // hashcode: 0x2EC15C0C (dec: 784423948)
+struct evMonsterHitObjectData // hashcode: 0xD0782913 (dec: -797431533)
 {
 	struct _Instance *instance; // size=664, offset=0
 	int hitType; // size=0, offset=4
 };
 
-struct _MonsterSaveInfo // hashcode: 0x5130240C (dec: 1362109452)
+struct evShadowSegmentData // hashcode: 0xB914F0A8 (dec: -1189810008)
+{
+	unsigned long totalShadowSegments; // size=0, offset=0
+	unsigned short shadowSegments[4]; // size=8, offset=4
+};
+
+struct _MonsterSaveInfo // hashcode: 0x4394F64B (dec: 1133835851)
 {
 	long mvFlags; // size=0, offset=0
 	long auxFlags; // size=0, offset=4
@@ -6456,10 +6296,9 @@ struct _MonsterSaveInfo // hashcode: 0x5130240C (dec: 1362109452)
 	unsigned int behaviorState; // size=5, offset=105
 	unsigned int anim; // size=6, offset=110
 	unsigned int causeOfDeath; // size=3, offset=116
-	char versionNumber; // size=0, offset=15
 };
 
-struct MONLIB_114fake // hashcode: 0x7334BE32 (dec: 1932836402)
+struct RAZCNTRL_109fake // hashcode: 0xB11AF26C (dec: -1323634068)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -6469,38 +6308,29 @@ struct MONLIB_114fake // hashcode: 0x7334BE32 (dec: 1932836402)
 		short cinema_done; // size=0, offset=18
 		int splinecam_currkey; // size=0, offset=20
 		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: monlib.o, monlib.o
+	} Cinematic; // size=28, offset=0, found in object files: razcntrl.o, razcntrl.o
 	struct {
 		struct _Position offset; // size=6, offset=0
 		struct _Rotation rotation; // size=8, offset=6
 		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: monlib.o, monlib.o
+	} Idle; // size=20, offset=28, found in object files: razcntrl.o, razcntrl.o
 	struct {
 		struct _TFace *tface; // size=12, offset=0
 		struct _TFace *oldTFace; // size=12, offset=4
 		struct _SVector oldTargetRot; // size=8, offset=8
 		long timer; // size=0, offset=16
 		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: monlib.o, monlib.o
+	} Behind; // size=28, offset=48, found in object files: razcntrl.o, razcntrl.o
 	struct {
 		long stopTimer; // size=0, offset=0
 		long stopHit; // size=0, offset=4
 		struct _TFace *tface; // size=12, offset=8
 		struct _TFace *oldTFace; // size=12, offset=12
 		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: monlib.o, monlib.o
+	} Follow; // size=20, offset=76, found in object files: razcntrl.o, razcntrl.o
 };
 
-struct evPhysicsLOSData // hashcode: 0xAFB4D364 (dec: -1347103900)
-{
-	struct _Position destination; // size=6, offset=0
-	short arc; // size=0, offset=6
-	struct _Position origin; // size=6, offset=8
-	short flags; // size=0, offset=14
-	short result; // size=0, offset=16
-};
-
-struct MONTABLE_109fake // hashcode: 0x77231B26 (dec: 1998789414)
+struct STATE_109fake // hashcode: 0x501F7359 (dec: 1344238425)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -6510,35 +6340,147 @@ struct MONTABLE_109fake // hashcode: 0x77231B26 (dec: 1998789414)
 		short cinema_done; // size=0, offset=18
 		int splinecam_currkey; // size=0, offset=20
 		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: montable.o, montable.o
+	} Cinematic; // size=28, offset=0, found in object files: state.o, state.o
 	struct {
 		struct _Position offset; // size=6, offset=0
 		struct _Rotation rotation; // size=8, offset=6
 		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: montable.o, montable.o
+	} Idle; // size=20, offset=28, found in object files: state.o, state.o
 	struct {
 		struct _TFace *tface; // size=12, offset=0
 		struct _TFace *oldTFace; // size=12, offset=4
 		struct _SVector oldTargetRot; // size=8, offset=8
 		long timer; // size=0, offset=16
 		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: montable.o, montable.o
+	} Behind; // size=28, offset=48, found in object files: state.o, state.o
 	struct {
 		long stopTimer; // size=0, offset=0
 		long stopHit; // size=0, offset=4
 		struct _TFace *tface; // size=12, offset=8
 		struct _TFace *oldTFace; // size=12, offset=12
 		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: montable.o, montable.o
+	} Follow; // size=20, offset=76, found in object files: state.o, state.o
 };
 
-struct MONTABLE_202fake // hashcode: 0x526787ED (dec: 1382516717)
+struct __CharacterState // hashcode: 0x2A1FEF6F (dec: 706735983)
 {
-	long whatAmI; // size=0, offset=0
-	struct _MonsterFunctionTable *table; // size=32, offset=4
+	struct _Instance *CharacterInstance; // size=664, offset=0
+	int TotalSections; // size=0, offset=4
+	struct __State SectionList[3]; // size=852, offset=8
 };
 
-struct MORLOCK_114fake // hashcode: 0xCD447DAB (dec: -851149397)
+struct evMonsterHitData // hashcode: 0x092F9EE8 (dec: 154115816)
+{
+	struct _Instance *sender; // size=664, offset=0
+	struct _Instance *lastHit; // size=664, offset=4
+	short knockBackDistance; // size=0, offset=8
+	short knockBackDuration; // size=0, offset=10
+	long power; // size=0, offset=12
+};
+
+struct evMonsterThrownData // hashcode: 0x1D16312B (dec: 487993643)
+{
+	struct _Instance *sender; // size=664, offset=0
+	struct _Rotation direction; // size=8, offset=4
+	short power; // size=0, offset=12
+};
+
+struct evMonsterAlarmData // hashcode: 0x9929796C (dec: -1725335188)
+{
+	struct _Instance *sender; // size=664, offset=0
+	struct _Position position; // size=6, offset=4
+	short type; // size=0, offset=10
+};
+
+struct evMonsterSoulSuckData // hashcode: 0x2C84DFED (dec: 746905581)
+{
+	struct _Instance *sender; // size=664, offset=0
+	struct _Position Destination; // size=6, offset=4
+};
+
+struct evFXHitData // hashcode: 0x20928078 (dec: 546472056)
+{
+	struct _SVector location; // size=8, offset=0
+	struct _SVector velocity; // size=8, offset=8
+	short amount; // size=0, offset=16
+	short type; // size=0, offset=18
+};
+
+struct evAnimationControllerDoneData // hashcode: 0x57184154 (dec: 1461207380)
+{
+	struct _Instance *instance; // size=664, offset=0
+	long segment; // size=0, offset=4
+	long type; // size=0, offset=8
+	int data; // size=0, offset=12
+};
+
+struct evMonsterImpaleData // hashcode: 0x7630398D (dec: 1982871949)
+{
+	struct _Instance *weapon; // size=664, offset=0
+	struct _Rotation direction; // size=8, offset=4
+	struct _Position position; // size=6, offset=12
+	short distance; // size=0, offset=18
+};
+
+struct evObjectBreakOffData // hashcode: 0xA485323A (dec: -1534774726)
+{
+	struct _Instance *force; // size=664, offset=0
+	unsigned short node; // size=0, offset=4
+	short distance; // size=0, offset=6
+	unsigned short animation; // size=0, offset=8
+	unsigned short frame; // size=0, offset=10
+	unsigned short type; // size=0, offset=12
+	unsigned short action; // size=0, offset=14
+};
+
+struct evObjectAbsorbData // hashcode: 0x91CFEDF3 (dec: -1848644109)
+{
+	struct _Instance *force; // size=664, offset=0
+	unsigned short node; // size=0, offset=4
+	unsigned short steps; // size=0, offset=6
+};
+
+struct evObjectIdleData // hashcode: 0xC1DDB451 (dec: -1042434991)
+{
+	long mode; // size=0, offset=0
+	struct _Instance *instance; // size=664, offset=4
+};
+
+struct evControlInitHangData // hashcode: 0xF53D826A (dec: -180518294)
+{
+	struct _Instance *instance; // size=664, offset=0
+	int frame; // size=0, offset=4
+	int frames; // size=0, offset=8
+};
+
+struct evControlInitIdleData // hashcode: 0x606D83FB (dec: 1617789947)
+{
+	int mode; // size=0, offset=0
+	int frame; // size=0, offset=4
+	int frames; // size=0, offset=8
+};
+
+struct evActionLookAroundData // hashcode: 0xF3338905 (dec: -214726395)
+{
+	short *rotx; // size=0, offset=0
+	short *rotz; // size=0, offset=4
+	short minx; // size=0, offset=8
+	short maxx; // size=0, offset=10
+	short minz; // size=0, offset=12
+	short maxz; // size=0, offset=14
+};
+
+struct evActionPlayHostAnimationData // hashcode: 0xD2499380 (dec: -766930048)
+{
+	struct _Instance *instance; // size=664, offset=0
+	struct _Instance *host; // size=664, offset=4
+	int newAnim; // size=0, offset=8
+	int newFrame; // size=0, offset=12
+	int frames; // size=0, offset=16
+	int mode; // size=0, offset=20
+};
+
+struct VRAM_114fake // hashcode: 0x27F2E795 (dec: 670230421)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -6548,29 +6490,29 @@ struct MORLOCK_114fake // hashcode: 0xCD447DAB (dec: -851149397)
 		short cinema_done; // size=0, offset=18
 		int splinecam_currkey; // size=0, offset=20
 		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: morlock.o, morlock.o
+	} Cinematic; // size=28, offset=0, found in object files: vram.o, vram.o
 	struct {
 		struct _Position offset; // size=6, offset=0
 		struct _Rotation rotation; // size=8, offset=6
 		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: morlock.o, morlock.o
+	} Idle; // size=20, offset=28, found in object files: vram.o, vram.o
 	struct {
 		struct _TFace *tface; // size=12, offset=0
 		struct _TFace *oldTFace; // size=12, offset=4
 		struct _SVector oldTargetRot; // size=8, offset=8
 		long timer; // size=0, offset=16
 		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: morlock.o, morlock.o
+	} Behind; // size=28, offset=48, found in object files: vram.o, vram.o
 	struct {
 		long stopTimer; // size=0, offset=0
 		long stopHit; // size=0, offset=4
 		struct _TFace *tface; // size=12, offset=8
 		struct _TFace *oldTFace; // size=12, offset=12
 		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: morlock.o, morlock.o
+	} Follow; // size=20, offset=76, found in object files: vram.o, vram.o
 };
 
-struct SKINNER_114fake // hashcode: 0x26820941 (dec: 646056257)
+struct GLYPH_114fake // hashcode: 0x056239F4 (dec: 90323444)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -6580,29 +6522,43 @@ struct SKINNER_114fake // hashcode: 0x26820941 (dec: 646056257)
 		short cinema_done; // size=0, offset=18
 		int splinecam_currkey; // size=0, offset=20
 		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: skinner.o, skinner.o
+	} Cinematic; // size=28, offset=0, found in object files: glyph.o, glyph.o
 	struct {
 		struct _Position offset; // size=6, offset=0
 		struct _Rotation rotation; // size=8, offset=6
 		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: skinner.o, skinner.o
+	} Idle; // size=20, offset=28, found in object files: glyph.o, glyph.o
 	struct {
 		struct _TFace *tface; // size=12, offset=0
 		struct _TFace *oldTFace; // size=12, offset=4
 		struct _SVector oldTargetRot; // size=8, offset=8
 		long timer; // size=0, offset=16
 		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: skinner.o, skinner.o
+	} Behind; // size=28, offset=48, found in object files: glyph.o, glyph.o
 	struct {
 		long stopTimer; // size=0, offset=0
 		long stopHit; // size=0, offset=4
 		struct _TFace *tface; // size=12, offset=8
 		struct _TFace *oldTFace; // size=12, offset=12
 		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: skinner.o, skinner.o
+	} Follow; // size=20, offset=76, found in object files: glyph.o, glyph.o
 };
 
-struct SLUAGH_114fake // hashcode: 0xAA0587E2 (dec: -1442478110)
+struct __GlyphData // hashcode: 0x4ADB7C10 (dec: 1255898128)
+{
+	void (*process)(); // size=0, offset=0
+	struct __MessageQueue messages; // size=136, offset=4
+	short selectedGlyph; // size=0, offset=140
+	short glyph_open; // size=0, offset=142
+	short glyph_time; // size=0, offset=144
+	short glyph_radius; // size=0, offset=146
+	short glyph_scale; // size=0, offset=148
+	short glyph_rotation; // size=0, offset=150
+	short target_glyph_rotation; // size=0, offset=152
+	short glyph_movement; // size=0, offset=154
+};
+
+struct HUMAN_114fake // hashcode: 0x97ACFB2B (dec: -1750271189)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -6612,29 +6568,61 @@ struct SLUAGH_114fake // hashcode: 0xAA0587E2 (dec: -1442478110)
 		short cinema_done; // size=0, offset=18
 		int splinecam_currkey; // size=0, offset=20
 		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: sluagh.o, sluagh.o
+	} Cinematic; // size=28, offset=0, found in object files: human.o, human.o
 	struct {
 		struct _Position offset; // size=6, offset=0
 		struct _Rotation rotation; // size=8, offset=6
 		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: sluagh.o, sluagh.o
+	} Idle; // size=20, offset=28, found in object files: human.o, human.o
 	struct {
 		struct _TFace *tface; // size=12, offset=0
 		struct _TFace *oldTFace; // size=12, offset=4
 		struct _SVector oldTargetRot; // size=8, offset=8
 		long timer; // size=0, offset=16
 		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: sluagh.o, sluagh.o
+	} Behind; // size=28, offset=48, found in object files: human.o, human.o
 	struct {
 		long stopTimer; // size=0, offset=0
 		long stopHit; // size=0, offset=4
 		struct _TFace *tface; // size=12, offset=8
 		struct _TFace *oldTFace; // size=12, offset=12
 		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: sluagh.o, sluagh.o
+	} Follow; // size=20, offset=76, found in object files: human.o, human.o
 };
 
-struct MONSENSE_114fake // hashcode: 0xB20692BF (dec: -1308192065)
+struct MONMSG_114fake // hashcode: 0xE4C8644A (dec: -456629174)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: monmsg.o, monmsg.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: monmsg.o, monmsg.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: monmsg.o, monmsg.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: monmsg.o, monmsg.o
+};
+
+struct MONSENSE_114fake // hashcode: 0xA89B14AF (dec: -1466231633)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -6666,14 +6654,23 @@ struct MONSENSE_114fake // hashcode: 0xB20692BF (dec: -1308192065)
 	} Follow; // size=20, offset=76, found in object files: monsense.o, monsense.o
 };
 
-struct RadarInfo // hashcode: 0x061DFEEE (dec: 102629102)
+struct evPhysicsLOSData // hashcode: 0x7EDD9F1E (dec: 2128453406)
+{
+	struct _Position destination; // size=6, offset=0
+	short arc; // size=0, offset=6
+	struct _Position origin; // size=6, offset=8
+	short flags; // size=0, offset=14
+	short result; // size=0, offset=16
+};
+
+struct RadarInfo // hashcode: 0x408EAC8A (dec: 1083092106)
 {
 	short angle; // size=0, offset=0
 	short x; // size=0, offset=2
 	short y; // size=0, offset=4
 };
 
-struct MONSTER_114fake // hashcode: 0x3DAE1517 (dec: 1034818839)
+struct MONSTER_114fake // hashcode: 0x06BB6B91 (dec: 112946065)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -6705,7 +6702,7 @@ struct MONSTER_114fake // hashcode: 0x3DAE1517 (dec: 1034818839)
 	} Follow; // size=20, offset=76, found in object files: monster.o, monster.o
 };
 
-struct burntMessType // hashcode: 0xA7801ACB (dec: -1484776757)
+struct burntMessType // hashcode: 0x46AC8451 (dec: 1185711185)
 {
 	int closestvert; // size=0, offset=0
 	int closestdist; // size=0, offset=4
@@ -6713,7 +6710,7 @@ struct burntMessType // hashcode: 0xA7801ACB (dec: -1484776757)
 	struct burntTuneType *burntTune; // size=8, offset=12
 };
 
-struct bloodyMessType // hashcode: 0xE0FCE556 (dec: -520297130)
+struct bloodyMessType // hashcode: 0x1A47EDAE (dec: 440921518)
 {
 	int closestvert; // size=0, offset=0
 	int closestdist; // size=0, offset=4
@@ -6722,7 +6719,7 @@ struct bloodyMessType // hashcode: 0xE0FCE556 (dec: -520297130)
 	int bloodIntensity; // size=0, offset=16
 };
 
-struct INSTNCG2_109fake // hashcode: 0xC756EEE5 (dec: -950604059)
+struct MONLIB_114fake // hashcode: 0x2D11AA47 (dec: 756132423)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -6732,102 +6729,29 @@ struct INSTNCG2_109fake // hashcode: 0xC756EEE5 (dec: -950604059)
 		short cinema_done; // size=0, offset=18
 		int splinecam_currkey; // size=0, offset=20
 		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: InstncG2.o, InstncG2.o
+	} Cinematic; // size=28, offset=0, found in object files: monlib.o, monlib.o
 	struct {
 		struct _Position offset; // size=6, offset=0
 		struct _Rotation rotation; // size=8, offset=6
 		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: InstncG2.o, InstncG2.o
+	} Idle; // size=20, offset=28, found in object files: monlib.o, monlib.o
 	struct {
 		struct _TFace *tface; // size=12, offset=0
 		struct _TFace *oldTFace; // size=12, offset=4
 		struct _SVector oldTargetRot; // size=8, offset=8
 		long timer; // size=0, offset=16
 		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: InstncG2.o, InstncG2.o
+	} Behind; // size=28, offset=48, found in object files: monlib.o, monlib.o
 	struct {
 		long stopTimer; // size=0, offset=0
 		long stopHit; // size=0, offset=4
 		struct _TFace *tface; // size=12, offset=8
 		struct _TFace *oldTFace; // size=12, offset=12
 		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: InstncG2.o, InstncG2.o
+	} Follow; // size=20, offset=76, found in object files: monlib.o, monlib.o
 };
 
-struct MATRIXG2_109fake // hashcode: 0x79F9E45F (dec: 2046420063)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: MatrixG2.o, MatrixG2.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: MatrixG2.o, MatrixG2.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: MatrixG2.o, MatrixG2.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: MatrixG2.o, MatrixG2.o
-};
-
-struct _G2PoolMemPool_Type // hashcode: 0x72EED9F3 (dec: 1928255987)
-{
-	unsigned short blockSize; // size=0, offset=0
-	unsigned short stackTop; // size=0, offset=2
-	unsigned short stackSize; // size=0, offset=4
-	unsigned short *stack; // size=0, offset=8
-	struct _G2PoolMem_Type *blockPool; // size=0, offset=12
-};
-
-struct SOUL_114fake // hashcode: 0xACFAAB70 (dec: -1392858256)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: soul.o, soul.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: soul.o, soul.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: soul.o, soul.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: soul.o, soul.o
-};
-
-struct VWRAITH_114fake // hashcode: 0xBF80376B (dec: -1082116245)
+struct VWRAITH_114fake // hashcode: 0xE9D3C0E5 (dec: -371998491)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -6859,7 +6783,7 @@ struct VWRAITH_114fake // hashcode: 0xBF80376B (dec: -1082116245)
 	} Follow; // size=20, offset=76, found in object files: vwraith.o, vwraith.o
 };
 
-struct WORSHIP_114fake // hashcode: 0x3514D2A0 (dec: 890557088)
+struct SKINNER_114fake // hashcode: 0xF45A574D (dec: -195406003)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -6869,29 +6793,29 @@ struct WORSHIP_114fake // hashcode: 0x3514D2A0 (dec: 890557088)
 		short cinema_done; // size=0, offset=18
 		int splinecam_currkey; // size=0, offset=20
 		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: worship.o, worship.o
+	} Cinematic; // size=28, offset=0, found in object files: skinner.o, skinner.o
 	struct {
 		struct _Position offset; // size=6, offset=0
 		struct _Rotation rotation; // size=8, offset=6
 		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: worship.o, worship.o
+	} Idle; // size=20, offset=28, found in object files: skinner.o, skinner.o
 	struct {
 		struct _TFace *tface; // size=12, offset=0
 		struct _TFace *oldTFace; // size=12, offset=4
 		struct _SVector oldTargetRot; // size=8, offset=8
 		long timer; // size=0, offset=16
 		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: worship.o, worship.o
+	} Behind; // size=28, offset=48, found in object files: skinner.o, skinner.o
 	struct {
 		long stopTimer; // size=0, offset=0
 		long stopHit; // size=0, offset=4
 		struct _TFace *tface; // size=12, offset=8
 		struct _TFace *oldTFace; // size=12, offset=12
 		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: worship.o, worship.o
+	} Follow; // size=20, offset=76, found in object files: skinner.o, skinner.o
 };
 
-struct MBMISS_114fake // hashcode: 0x8CAF429E (dec: -1934671202)
+struct SLUAGH_114fake // hashcode: 0xA6FEDE4C (dec: -1493246388)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -6901,76 +6825,29 @@ struct MBMISS_114fake // hashcode: 0x8CAF429E (dec: -1934671202)
 		short cinema_done; // size=0, offset=18
 		int splinecam_currkey; // size=0, offset=20
 		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: mbmiss.o, mbmiss.o
+	} Cinematic; // size=28, offset=0, found in object files: sluagh.o, sluagh.o
 	struct {
 		struct _Position offset; // size=6, offset=0
 		struct _Rotation rotation; // size=8, offset=6
 		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: mbmiss.o, mbmiss.o
+	} Idle; // size=20, offset=28, found in object files: sluagh.o, sluagh.o
 	struct {
 		struct _TFace *tface; // size=12, offset=0
 		struct _TFace *oldTFace; // size=12, offset=4
 		struct _SVector oldTargetRot; // size=8, offset=8
 		long timer; // size=0, offset=16
 		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: mbmiss.o, mbmiss.o
+	} Behind; // size=28, offset=48, found in object files: sluagh.o, sluagh.o
 	struct {
 		long stopTimer; // size=0, offset=0
 		long stopHit; // size=0, offset=4
 		struct _TFace *tface; // size=12, offset=8
 		struct _TFace *oldTFace; // size=12, offset=12
 		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: mbmiss.o, mbmiss.o
+	} Follow; // size=20, offset=76, found in object files: sluagh.o, sluagh.o
 };
 
-struct _walbossAttributes // hashcode: 0x77E820E3 (dec: 2011701475)
-{
-	unsigned char segmentToAttach; // size=0, offset=0
-	unsigned char frameToBirth; // size=0, offset=1
-	unsigned char frameToExpel; // size=0, offset=2
-	unsigned char maxEggHits; // size=0, offset=3
-	short maxAngle; // size=0, offset=4
-	short timeForHitAgony; // size=0, offset=6
-	short segmentForBodyTwist; // size=0, offset=8
-	short timeToThornPrep; // size=0, offset=10
-	short timeToThornPoke; // size=0, offset=12
-	short timeToEggThrob; // size=0, offset=14
-	short timeToEggExplode; // size=0, offset=16
-	short razielStunTime; // size=0, offset=18
-	struct {
-		short plusDelta; // size=0, offset=0
-		short minusDelta; // size=0, offset=2
-		short validAtHitPoint; // size=0, offset=4
-	} attackDeltas; // size=0, offset=20, found in object files: mbmiss.o, mbmiss.o
-};
-
-struct _G2AnimController_Type // hashcode: 0xED8DD7EF (dec: -309471249)
-{
-	unsigned short next; // size=0, offset=0
-	unsigned char type; // size=0, offset=2
-	unsigned char segNumber; // size=0, offset=3
-	void *callbackData; // size=0, offset=4
-	unsigned short flags; // size=0, offset=8
-	short duration; // size=0, offset=10
-	short elapsedTime; // size=0, offset=12
-	struct _G2AnimAlphaTable_Type *alphaTable; // size=4, offset=16
-	union {
-		struct {
-			unsigned long (*function)(); // size=0, offset=0
-			void *fnData; // size=0, offset=4
-		} callback; // size=8, offset=0, found in object files: AnimG2.o, AnimG2.o
-		struct {
-			struct _G2SVector3_Type base; // size=6, offset=0
-			struct _G2SVector3_Type offset; // size=6, offset=6
-		} vector; // size=12, offset=0, found in object files: AnimG2.o, AnimG2.o
-		struct {
-			struct _G2Quat_Type src; // size=8, offset=0
-			struct _G2Quat_Type dest; // size=8, offset=8
-		} quat; // size=16, offset=0, found in object files: AnimG2.o, AnimG2.o
-	} data; // size=16, offset=20, found in object files: AnimG2.o, AnimG2.o
-};
-
-struct ANIMG2_109fake // hashcode: 0x1D789B70 (dec: 494443376)
+struct SOUL_114fake // hashcode: 0x6FDC36FD (dec: 1876702973)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -6980,249 +6857,172 @@ struct ANIMG2_109fake // hashcode: 0x1D789B70 (dec: 494443376)
 		short cinema_done; // size=0, offset=18
 		int splinecam_currkey; // size=0, offset=20
 		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: AnimG2.o, AnimG2.o
+	} Cinematic; // size=28, offset=0, found in object files: soul.o, soul.o
 	struct {
 		struct _Position offset; // size=6, offset=0
 		struct _Rotation rotation; // size=8, offset=6
 		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: AnimG2.o, AnimG2.o
+	} Idle; // size=20, offset=28, found in object files: soul.o, soul.o
 	struct {
 		struct _TFace *tface; // size=12, offset=0
 		struct _TFace *oldTFace; // size=12, offset=4
 		struct _SVector oldTargetRot; // size=8, offset=8
 		long timer; // size=0, offset=16
 		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: AnimG2.o, AnimG2.o
+	} Behind; // size=28, offset=48, found in object files: soul.o, soul.o
 	struct {
 		long stopTimer; // size=0, offset=0
 		long stopHit; // size=0, offset=4
 		struct _TFace *tface; // size=12, offset=8
 		struct _TFace *oldTFace; // size=12, offset=12
 		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: AnimG2.o, AnimG2.o
+	} Follow; // size=20, offset=76, found in object files: soul.o, soul.o
 };
 
-struct _G2AnimSegKeyflagInfo_Type // hashcode: 0x639C0AF3 (dec: 1671170803)
+struct MONTABLE_109fake // hashcode: 0x31ACF2E9 (dec: 833417961)
 {
-	unsigned long *stream; // size=0, offset=0
-	unsigned long flags; // size=0, offset=4
-	int bitCount; // size=0, offset=8
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: montable.o, montable.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: montable.o, montable.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: montable.o, montable.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: montable.o, montable.o
 };
 
-struct _G2AnimDecompressChannelInfo_Type // hashcode: 0x261A7343 (dec: 639267651)
+struct MONTABLE_202fake // hashcode: 0xA824099F (dec: -1474033249)
 {
-	struct _G2AnimKeylist_Type *keylist; // size=20, offset=0
-	unsigned short *chanData; // size=0, offset=4
-	int storedKey; // size=0, offset=8
-	int targetKey; // size=0, offset=12
+	long whatAmI; // size=0, offset=0
+	struct _MonsterFunctionTable *table; // size=32, offset=4
 };
 
-struct _G2AnimSegValue_Type // hashcode: 0x627C0711 (dec: 1652295441)
+struct MORLOCK_114fake // hashcode: 0x306A5CFF (dec: 812276991)
 {
-	union {
-		struct _G2SVector3_Type rot; // size=6, offset=0
-		struct _G2Quat_Type quat; // size=8, offset=0
-	} rotQuat; // size=8, offset=0, found in object files: AnimG2.o, AnimG2.o
-	struct _G2SVector3_Type scale; // size=6, offset=8
-	unsigned short pad; // size=0, offset=14
-	struct _G2SVector3_Type trans; // size=6, offset=16
-	unsigned short bIsQuat; // size=0, offset=22
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: morlock.o, morlock.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: morlock.o, morlock.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: morlock.o, morlock.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: morlock.o, morlock.o
 };
 
-struct _G2AnimChanStatusBlockPool_Type // hashcode: 0x471CDEDE (dec: 1193074398)
+struct INSTNCG2_109fake // hashcode: 0xE028B20F (dec: -534203889)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: InstncG2.o, InstncG2.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: InstncG2.o, InstncG2.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: InstncG2.o, InstncG2.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: InstncG2.o, InstncG2.o
+};
+
+struct MATRIXG2_109fake // hashcode: 0x7BD4E676 (dec: 2077550198)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: MatrixG2.o, MatrixG2.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: MatrixG2.o, MatrixG2.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: MatrixG2.o, MatrixG2.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: MatrixG2.o, MatrixG2.o
+};
+
+struct _G2PoolMemPool_Type // hashcode: 0xAAA369CB (dec: -1432131125)
 {
 	unsigned short blockSize; // size=0, offset=0
 	unsigned short stackTop; // size=0, offset=2
 	unsigned short stackSize; // size=0, offset=4
 	unsigned short *stack; // size=0, offset=8
-	struct _G2AnimChanStatusBlock_Type *blockPool; // size=36, offset=12
+	struct _G2PoolMem_Type *blockPool; // size=0, offset=12
 };
 
-struct _G2AnimControllerPool_Type // hashcode: 0x97F99D91 (dec: -1745248879)
-{
-	unsigned short blockSize; // size=0, offset=0
-	unsigned short stackTop; // size=0, offset=2
-	unsigned short stackSize; // size=0, offset=4
-	unsigned short *stack; // size=0, offset=8
-	struct _G2AnimController_Type *blockPool; // size=36, offset=12
-};
-
-struct _G2AnimInterpStateBlockPool_Type // hashcode: 0x0C45A027 (dec: 205889575)
-{
-	unsigned short blockSize; // size=0, offset=0
-	unsigned short stackTop; // size=0, offset=2
-	unsigned short stackSize; // size=0, offset=4
-	unsigned short *stack; // size=0, offset=8
-	struct _G2AnimInterpStateBlock_Type *blockPool; // size=164, offset=12
-};
-
-struct PLAN_114fake // hashcode: 0x87BFCF7E (dec: -2017472642)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: plan.o, plan.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: plan.o, plan.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: plan.o, plan.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: plan.o, plan.o
-};
-
-struct _PlanCollideInfo // hashcode: 0x440F4D04 (dec: 1141853444)
-{
-	long StreamUnitID; // size=0, offset=0
-	struct _TFace *tFace; // size=12, offset=4
-	struct _Position collidePos; // size=6, offset=8
-};
-
-struct PLANAPI_150fake // hashcode: 0x9937E4D7 (dec: -1724390185)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: planapi.o, planapi.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: planapi.o, planapi.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: planapi.o, planapi.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: planapi.o, planapi.o
-};
-
-struct PoolManagementData // hashcode: 0xAFD71D6F (dec: -1344856721)
-{
-	char state; // size=0, offset=0
-	unsigned char numNodesInPool; // size=0, offset=1
-	struct _Position playerPosAtLastPlanMkrUpdate; // size=6, offset=2
-	struct PlanningNode *expansionNode1; // size=28, offset=8
-	struct PlanningNode *expansionNode2; // size=28, offset=12
-	unsigned short (*distanceMatrix)[32]; // size=4, offset=16
-	unsigned short pairType; // size=0, offset=20
-	struct _Position peakPos; // size=6, offset=22
-	unsigned char currentNode; // size=0, offset=28
-	unsigned char currentBit; // size=0, offset=29
-};
-
-struct EnemyPlanData // hashcode: 0xC3D6AA44 (dec: -1009341884)
-{
-	unsigned char nodeSkipArray[8]; // size=8, offset=0
-	unsigned char nodeTypeArray[8]; // size=8, offset=8
-	struct _Position wayPointArray[8]; // size=48, offset=16
-	short goalUnitID; // size=0, offset=64
-	unsigned char numWayPoints; // size=0, offset=66
-};
-
-struct PLANCOLL_114fake // hashcode: 0xD7BEA986 (dec: -675370618)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: plancoll.o, plancoll.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: plancoll.o, plancoll.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: plancoll.o, plancoll.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: plancoll.o, plancoll.o
-};
-
-struct _fth // hashcode: 0xDF22FD5E (dec: -551355042)
-{
-	char x; // size=0, offset=0
-	char y; // size=0, offset=1
-	char z; // size=0, offset=2
-	char nodeType; // size=0, offset=3
-};
-
-struct PLANDRAW_114fake // hashcode: 0xAD1348FA (dec: -1391245062)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: plandraw.o, plandraw.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: plandraw.o, plandraw.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: plandraw.o, plandraw.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: plandraw.o, plandraw.o
-};
-
-struct TIMERG2_109fake // hashcode: 0xA22EB04C (dec: -1573998516)
+struct TIMERG2_109fake // hashcode: 0xDE8B092D (dec: -561313491)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -7254,13 +7054,212 @@ struct TIMERG2_109fake // hashcode: 0xA22EB04C (dec: -1573998516)
 	} Follow; // size=20, offset=76, found in object files: TimerG2.o, TimerG2.o
 };
 
-struct _G2AppDataVM_Type // hashcode: 0x6CC3DAF0 (dec: 1824774896)
+struct _G2AppDataVM_Type // hashcode: 0x20DE3C90 (dec: 551435408)
 {
 	int argc; // size=0, offset=0
 	int *argv; // size=0, offset=4
 };
 
-struct ENMYPLAN_114fake // hashcode: 0x7472D781 (dec: 1953683329)
+struct WORSHIP_114fake // hashcode: 0xF64E4032 (dec: -162643918)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: worship.o, worship.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: worship.o, worship.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: worship.o, worship.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: worship.o, worship.o
+};
+
+struct MBMISS_114fake // hashcode: 0x8312595A (dec: -2095949478)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: mbmiss.o, mbmiss.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: mbmiss.o, mbmiss.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: mbmiss.o, mbmiss.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: mbmiss.o, mbmiss.o
+};
+
+struct _walbossAttributes // hashcode: 0x4D86CADC (dec: 1300679388)
+{
+	unsigned char segmentToAttach; // size=0, offset=0
+	unsigned char frameToBirth; // size=0, offset=1
+	unsigned char frameToExpel; // size=0, offset=2
+	unsigned char maxEggHits; // size=0, offset=3
+	short maxAngle; // size=0, offset=4
+	short timeForHitAgony; // size=0, offset=6
+	short segmentForBodyTwist; // size=0, offset=8
+	short timeToThornPrep; // size=0, offset=10
+	short timeToThornPoke; // size=0, offset=12
+	short timeToEggThrob; // size=0, offset=14
+	short timeToEggExplode; // size=0, offset=16
+	short razielStunTime; // size=0, offset=18
+	short eggIgniteDist; // size=0, offset=20
+	short junk; // size=0, offset=22
+	struct {
+		short plusDelta; // size=0, offset=0
+		short minusDelta; // size=0, offset=2
+		short validAtHitPoint; // size=0, offset=4
+	} attackDeltas; // size=0, offset=24, found in object files: mbmiss.o, mbmiss.o
+};
+
+struct _G2AnimController_Type // hashcode: 0x1C5BE24C (dec: 475783756)
+{
+	unsigned short next; // size=0, offset=0
+	unsigned char type; // size=0, offset=2
+	unsigned char segNumber; // size=0, offset=3
+	void *callbackData; // size=0, offset=4
+	unsigned short flags; // size=0, offset=8
+	short duration; // size=0, offset=10
+	short elapsedTime; // size=0, offset=12
+	struct _G2AnimAlphaTable_Type *alphaTable; // size=4, offset=16
+	union {
+		struct {
+			unsigned long (*function)(); // size=0, offset=0
+			void *fnData; // size=0, offset=4
+		} callback; // size=8, offset=0, found in object files: AnimG2.o, AnimG2.o
+		struct {
+			struct _G2SVector3_Type base; // size=6, offset=0
+			struct _G2SVector3_Type offset; // size=6, offset=6
+		} vector; // size=12, offset=0, found in object files: AnimG2.o, AnimG2.o
+		struct {
+			struct _G2Quat_Type src; // size=8, offset=0
+			struct _G2Quat_Type dest; // size=8, offset=8
+		} quat; // size=16, offset=0, found in object files: AnimG2.o, AnimG2.o
+	} data; // size=16, offset=20, found in object files: AnimG2.o, AnimG2.o
+};
+
+struct ANIMG2_109fake // hashcode: 0x059750A0 (dec: 93802656)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: AnimG2.o, AnimG2.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: AnimG2.o, AnimG2.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: AnimG2.o, AnimG2.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: AnimG2.o, AnimG2.o
+};
+
+struct _G2AnimSegKeyflagInfo_Type // hashcode: 0x41B98667 (dec: 1102677607)
+{
+	unsigned long *stream; // size=0, offset=0
+	unsigned long flags; // size=0, offset=4
+	int bitCount; // size=0, offset=8
+};
+
+struct _G2AnimDecompressChannelInfo_Type // hashcode: 0x830C5BAF (dec: -2096342097)
+{
+	struct _G2AnimKeylist_Type *keylist; // size=20, offset=0
+	unsigned short *chanData; // size=0, offset=4
+	int storedKey; // size=0, offset=8
+	int targetKey; // size=0, offset=12
+};
+
+struct _G2AnimSegValue_Type // hashcode: 0x84C635B4 (dec: -2067384908)
+{
+	union {
+		struct _G2SVector3_Type rot; // size=6, offset=0
+		struct _G2Quat_Type quat; // size=8, offset=0
+	} rotQuat; // size=8, offset=0, found in object files: AnimG2.o, AnimG2.o
+	struct _G2SVector3_Type scale; // size=6, offset=8
+	unsigned short pad; // size=0, offset=14
+	struct _G2SVector3_Type trans; // size=6, offset=16
+	unsigned short bIsQuat; // size=0, offset=22
+};
+
+struct _G2AnimChanStatusBlockPool_Type // hashcode: 0x471734BC (dec: 1192703164)
+{
+	unsigned short blockSize; // size=0, offset=0
+	unsigned short stackTop; // size=0, offset=2
+	unsigned short stackSize; // size=0, offset=4
+	unsigned short *stack; // size=0, offset=8
+	struct _G2AnimChanStatusBlock_Type *blockPool; // size=36, offset=12
+};
+
+struct _G2AnimControllerPool_Type // hashcode: 0xA792BA9C (dec: -1483556196)
+{
+	unsigned short blockSize; // size=0, offset=0
+	unsigned short stackTop; // size=0, offset=2
+	unsigned short stackSize; // size=0, offset=4
+	unsigned short *stack; // size=0, offset=8
+	struct _G2AnimController_Type *blockPool; // size=36, offset=12
+};
+
+struct _G2AnimInterpStateBlockPool_Type // hashcode: 0x2EA58E03 (dec: 782601731)
+{
+	unsigned short blockSize; // size=0, offset=0
+	unsigned short stackTop; // size=0, offset=2
+	unsigned short stackSize; // size=0, offset=4
+	unsigned short *stack; // size=0, offset=8
+	struct _G2AnimInterpStateBlock_Type *blockPool; // size=164, offset=12
+};
+
+struct ENMYPLAN_114fake // hashcode: 0x88AD0E88 (dec: -2001924472)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -7292,7 +7291,16 @@ struct ENMYPLAN_114fake // hashcode: 0x7472D781 (dec: 1953683329)
 	} Follow; // size=20, offset=76, found in object files: enmyplan.o, enmyplan.o
 };
 
-struct EnemyPlanSlotData // hashcode: 0x825BCDA8 (dec: -2107912792)
+struct EnemyPlanData // hashcode: 0xC8B9DD68 (dec: -927343256)
+{
+	unsigned char nodeSkipArray[8]; // size=8, offset=0
+	unsigned char nodeTypeArray[8]; // size=8, offset=8
+	struct _Position wayPointArray[8]; // size=48, offset=16
+	short goalUnitID; // size=0, offset=64
+	unsigned char numWayPoints; // size=0, offset=66
+};
+
+struct EnemyPlanSlotData // hashcode: 0x9890B30F (dec: -1735347441)
 {
 	char slotInUse; // size=0, offset=0
 	char state; // size=0, offset=1
@@ -7305,7 +7313,7 @@ struct EnemyPlanSlotData // hashcode: 0x825BCDA8 (dec: -2107912792)
 	short timer; // size=0, offset=92
 };
 
-struct RAZIEL_109fake // hashcode: 0xA8796B46 (dec: -1468437690)
+struct PLAN_114fake // hashcode: 0x53FAB65F (dec: 1408939615)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -7315,42 +7323,289 @@ struct RAZIEL_109fake // hashcode: 0xA8796B46 (dec: -1468437690)
 		short cinema_done; // size=0, offset=18
 		int splinecam_currkey; // size=0, offset=20
 		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: raziel.o, raziel.o
+	} Cinematic; // size=28, offset=0, found in object files: plan.o, plan.o
 	struct {
 		struct _Position offset; // size=6, offset=0
 		struct _Rotation rotation; // size=8, offset=6
 		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: raziel.o, raziel.o
+	} Idle; // size=20, offset=28, found in object files: plan.o, plan.o
 	struct {
 		struct _TFace *tface; // size=12, offset=0
 		struct _TFace *oldTFace; // size=12, offset=4
 		struct _SVector oldTargetRot; // size=8, offset=8
 		long timer; // size=0, offset=16
 		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: raziel.o, raziel.o
+	} Behind; // size=28, offset=48, found in object files: plan.o, plan.o
 	struct {
 		long stopTimer; // size=0, offset=0
 		long stopHit; // size=0, offset=4
 		struct _TFace *tface; // size=12, offset=8
 		struct _TFace *oldTFace; // size=12, offset=12
 		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: raziel.o, raziel.o
+	} Follow; // size=20, offset=76, found in object files: plan.o, plan.o
 };
 
-struct __Force // hashcode: 0xE77B83F4 (dec: -411335692)
+struct _PlanCollideInfo // hashcode: 0xE5C119C1 (dec: -440329791)
+{
+	long StreamUnitID; // size=0, offset=0
+	struct _TFace *tFace; // size=12, offset=4
+	struct _Position collidePos; // size=6, offset=8
+};
+
+struct PLANAPI_150fake // hashcode: 0x36C47FB3 (dec: 918847411)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: planapi.o, planapi.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: planapi.o, planapi.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: planapi.o, planapi.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: planapi.o, planapi.o
+};
+
+struct PoolManagementData // hashcode: 0x706DC5B2 (dec: 1886242226)
+{
+	char state; // size=0, offset=0
+	unsigned char numNodesInPool; // size=0, offset=1
+	struct _Position playerPosAtLastPlanMkrUpdate; // size=6, offset=2
+	struct PlanningNode *expansionNode1; // size=28, offset=8
+	struct PlanningNode *expansionNode2; // size=28, offset=12
+	unsigned short (*distanceMatrix)[32]; // size=4, offset=16
+	unsigned short pairType; // size=0, offset=20
+	struct _Position peakPos; // size=6, offset=22
+	unsigned char currentNode; // size=0, offset=28
+	unsigned char currentBit; // size=0, offset=29
+};
+
+struct PLANCOLL_114fake // hashcode: 0x7F92AE04 (dec: 2140319236)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: plancoll.o, plancoll.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: plancoll.o, plancoll.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: plancoll.o, plancoll.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: plancoll.o, plancoll.o
+};
+
+struct _fth // hashcode: 0xE9A0D0CA (dec: -375336758)
+{
+	char x; // size=0, offset=0
+	char y; // size=0, offset=1
+	char z; // size=0, offset=2
+	char nodeType; // size=0, offset=3
+};
+
+struct PLANDRAW_114fake // hashcode: 0x7B6CCFA7 (dec: 2070728615)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: plandraw.o, plandraw.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: plandraw.o, plandraw.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: plandraw.o, plandraw.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: plandraw.o, plandraw.o
+};
+
+struct PLANOPT_150fake // hashcode: 0xA60CA98A (dec: -1509119606)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: planopt.o, planopt.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: planopt.o, planopt.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: planopt.o, planopt.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: planopt.o, planopt.o
+};
+
+struct PLANPOOL_150fake // hashcode: 0xED428F91 (dec: -314404975)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: planpool.o, planpool.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: planpool.o, planpool.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: planpool.o, planpool.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: planpool.o, planpool.o
+};
+
+struct PLANSRCH_150fake // hashcode: 0x98CB17ED (dec: -1731520531)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: plansrch.o, plansrch.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: plansrch.o, plansrch.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: plansrch.o, plansrch.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: plansrch.o, plansrch.o
+};
+
+struct CONTROL_109fake // hashcode: 0x05A1BAF2 (dec: 94485234)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: control.o, control.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: control.o, control.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: control.o, control.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: control.o, control.o
+};
+
+struct __Force // hashcode: 0xE41B2D58 (dec: -467980968)
 {
 	int Type; // size=0, offset=0
 	struct _Vector LinearForce; // size=12, offset=4
 	short Friction; // size=0, offset=16
 };
 
-struct __AlarmData // hashcode: 0x750BC99A (dec: 1963706778)
-{
-	short command; // size=0, offset=0
-	short data; // size=0, offset=2
-};
-
-struct __Idle // hashcode: 0xA491A70B (dec: -1533958389)
+struct __Idle // hashcode: 0x691BBAF7 (dec: 1763425015)
 {
 	unsigned char anim; // size=0, offset=0
 	unsigned char frame; // size=0, offset=1
@@ -7358,7 +7613,7 @@ struct __Idle // hashcode: 0xA491A70B (dec: -1533958389)
 	unsigned char type; // size=0, offset=3
 };
 
-struct __VAnim // hashcode: 0x3A259E9B (dec: 975543963)
+struct __VAnim // hashcode: 0x89F3A8AD (dec: -1980520275)
 {
 	unsigned char anim0; // size=0, offset=0
 	unsigned char anim1; // size=0, offset=1
@@ -7369,7 +7624,7 @@ struct __VAnim // hashcode: 0x3A259E9B (dec: 975543963)
 	unsigned short frame; // size=0, offset=6
 };
 
-struct __SAnim // hashcode: 0x79E7F93A (dec: 2045245754)
+struct __SAnim // hashcode: 0x1C892C52 (dec: 478751826)
 {
 	struct __VAnim *anim; // size=8, offset=0
 	struct __SAnim *nextAnim; // size=16, offset=4
@@ -7379,7 +7634,7 @@ struct __SAnim // hashcode: 0x79E7F93A (dec: 2045245754)
 	short pad; // size=0, offset=14
 };
 
-struct __AttackItem // hashcode: 0x9DC393B6 (dec: -1648127050)
+struct __AttackItem // hashcode: 0x825A3E01 (dec: -2108015103)
 {
 	unsigned char anim; // size=0, offset=0
 	unsigned char framesIn; // size=0, offset=1
@@ -7407,7 +7662,7 @@ struct __AttackItem // hashcode: 0x9DC393B6 (dec: -1648127050)
 	unsigned short hitPowerScale; // size=0, offset=34
 };
 
-struct __ThrowItem // hashcode: 0xE8539A6B (dec: -397174165)
+struct __ThrowItem // hashcode: 0x5817A03E (dec: 1477943358)
 {
 	unsigned char prepAnim; // size=0, offset=0
 	unsigned char prepAnimFramesIn; // size=0, offset=1
@@ -7432,19 +7687,19 @@ struct __ThrowItem // hashcode: 0xE8539A6B (dec: -397174165)
 	short pad; // size=0, offset=30
 };
 
-struct __EngagedInstance // hashcode: 0x2C1C3442 (dec: 740045890)
+struct __EngagedInstance // hashcode: 0x2380F480 (dec: 595653760)
 {
 	struct _Instance *instance; // size=664, offset=0
 	unsigned long distance; // size=0, offset=4
 };
 
-struct __FitPoint // hashcode: 0x351A2C67 (dec: 890907751)
+struct __FitPoint // hashcode: 0x739C60BA (dec: 1939628218)
 {
 	short x; // size=0, offset=0
 	short y; // size=0, offset=2
 };
 
-struct __SensoryData // hashcode: 0xDC5B7A71 (dec: -597984655)
+struct __SensoryData // hashcode: 0xD9EBC207 (dec: -638860793)
 {
 	int Flags; // size=0, offset=0
 	struct _SVector ForwardNormal; // size=8, offset=4
@@ -7461,7 +7716,7 @@ struct __SensoryData // hashcode: 0xDC5B7A71 (dec: -597984655)
 	unsigned long heldClass; // size=0, offset=76
 };
 
-struct __Player // hashcode: 0x97A9F0B8 (dec: -1750470472)
+struct __Player // hashcode: 0x2DA7D2F5 (dec: 765973237)
 {
 	int footPrint; // size=0, offset=0
 	struct __CharacterState State; // size=860, offset=4
@@ -7512,50 +7767,100 @@ struct __Player // hashcode: 0x97A9F0B8 (dec: -1750470472)
 	struct _Instance *idleInstance; // size=664, offset=1088
 	struct __AttackItem *attack; // size=36, offset=1092
 	int attackFlags; // size=0, offset=1096
-	struct _Instance *attackCurrentHit; // size=664, offset=1100
-	struct _Instance *attackLastHit; // size=664, offset=1104
-	struct _FXGlowEffect *glowEffect; // size=44, offset=1108
-	struct _Instance *attackedBy; // size=664, offset=1112
-	struct __ThrowItem *throwData; // size=32, offset=1116
-	int throwMode; // size=0, offset=1120
-	struct _Position throwTarget; // size=6, offset=1124
-	struct _Instance *throwInstance; // size=664, offset=1132
-	short throwXRot; // size=0, offset=1136
-	short throwZRot; // size=0, offset=1138
-	void (*returnState)(); // size=0, offset=1140
-	unsigned long passedMask; // size=0, offset=1144
-	struct _G2SVector3_Type extraRot; // size=6, offset=1148
-	int effectsFlags; // size=0, offset=1156
-	short effectsFadeSource; // size=0, offset=1160
-	short effectsFadeDest; // size=0, offset=1162
-	int effectsFadeStep; // size=0, offset=1164
-	int effectsFadeSteps; // size=0, offset=1168
-	short autoFaceZone; // size=0, offset=1172
-	short autoFaceAngle; // size=0, offset=1174
-	int autoFaceLastRootAngle; // size=0, offset=1176
-	int autoFaceRootAngle; // size=0, offset=1180
-	int autoFaceTrueAngle; // size=0, offset=1184
-	int autoFaceAnim; // size=0, offset=1188
-	int autoFaceLastAnim; // size=0, offset=1192
-	int nothingCounter; // size=0, offset=1196
-	int timeAccumulator; // size=0, offset=1200
-	struct _Position puppetMoveToPoint; // size=6, offset=1204
-	struct _Position puppetRotToPoint; // size=6, offset=1210
-	int soundModifier; // size=0, offset=1216
-	short alarmTable; // size=0, offset=1220
-	short terminator; // size=0, offset=1222
-	short swimSpeedAdjustment; // size=0, offset=1224
-	short swimTargetSpeed; // size=0, offset=1226
-	unsigned long soundHandle; // size=0, offset=1228
-	unsigned long soundTimer; // size=0, offset=1232
-	unsigned long forcedGlideSpeed; // size=0, offset=1236
-	struct _SVector collisionEdgeOffset; // size=8, offset=1240
-	struct __SAnim *currentSAnim; // size=16, offset=1248
-	unsigned long playerEvent; // size=0, offset=1252
-	unsigned long playerEventHistory; // size=0, offset=1256
+	int currentAttack; // size=0, offset=1100
+	struct _Instance *attackCurrentHit; // size=664, offset=1104
+	struct _Instance *attackLastHit; // size=664, offset=1108
+	struct _FXGlowEffect *glowEffect; // size=44, offset=1112
+	struct _Instance *attackedBy; // size=664, offset=1116
+	struct __ThrowItem *throwData; // size=32, offset=1120
+	int throwMode; // size=0, offset=1124
+	struct _Position throwTarget; // size=6, offset=1128
+	struct _Instance *throwInstance; // size=664, offset=1136
+	short throwXRot; // size=0, offset=1140
+	short throwZRot; // size=0, offset=1142
+	int throwReturnRot; // size=0, offset=1144
+	struct __MessageQueue padCommands; // size=136, offset=1148
+	void (*returnState)(); // size=0, offset=1284
+	unsigned long passedMask; // size=0, offset=1288
+	struct _G2SVector3_Type extraRot; // size=6, offset=1292
+	int effectsFlags; // size=0, offset=1300
+	short effectsFadeSource; // size=0, offset=1304
+	short effectsFadeDest; // size=0, offset=1306
+	int effectsFadeStep; // size=0, offset=1308
+	int effectsFadeSteps; // size=0, offset=1312
+	short autoFaceZone; // size=0, offset=1316
+	short autoFaceAngle; // size=0, offset=1318
+	int autoFaceLastRootAngle; // size=0, offset=1320
+	int autoFaceRootAngle; // size=0, offset=1324
+	int autoFaceTrueAngle; // size=0, offset=1328
+	int autoFaceAnim; // size=0, offset=1332
+	int autoFaceLastAnim; // size=0, offset=1336
+	int nothingCounter; // size=0, offset=1340
+	int timeAccumulator; // size=0, offset=1344
+	struct _Position puppetMoveToPoint; // size=6, offset=1348
+	struct _Position puppetRotToPoint; // size=6, offset=1354
+	int soundModifier; // size=0, offset=1360
+	short alarmTable; // size=0, offset=1364
+	short terminator; // size=0, offset=1366
+	short swimSpeedAdjustment; // size=0, offset=1368
+	short swimTargetSpeed; // size=0, offset=1370
+	unsigned long soundHandle; // size=0, offset=1372
+	long soundTimer; // size=0, offset=1376
+	long soundTotalTime; // size=0, offset=1380
+	unsigned long soundDistance; // size=0, offset=1384
+	short soundStartPitch; // size=0, offset=1388
+	short soundEndPitch; // size=0, offset=1390
+	short soundStartVolume; // size=0, offset=1392
+	short soundEndVolume; // size=0, offset=1394
+	unsigned long soundHandle2; // size=0, offset=1396
+	long soundTimer2; // size=0, offset=1400
+	long soundTotalTime2; // size=0, offset=1404
+	unsigned long soundDistance2; // size=0, offset=1408
+	short soundStartPitch2; // size=0, offset=1412
+	short soundEndPitch2; // size=0, offset=1414
+	short soundStartVolume2; // size=0, offset=1416
+	short soundEndVolume2; // size=0, offset=1418
+	long soundTimerNext; // size=0, offset=1420
+	unsigned long soundTimerData; // size=0, offset=1424
+	unsigned long forcedGlideSpeed; // size=0, offset=1428
+	struct _SVector collisionEdgeOffset; // size=8, offset=1432
+	struct __SAnim *currentSAnim; // size=16, offset=1440
+	unsigned long playerEvent; // size=0, offset=1444
+	unsigned long playerEventHistory; // size=0, offset=1448
+	int currentHint; // size=0, offset=1452
 };
 
-struct PlayerSaveData // hashcode: 0xA056606D (dec: -1604951955)
+struct __CannedSound // hashcode: 0x7A66CF99 (dec: 2053558169)
+{
+	short bank; // size=0, offset=0
+	short sound; // size=0, offset=2
+	short startPitch; // size=0, offset=4
+	short endPitch; // size=0, offset=6
+	short startVolume; // size=0, offset=8
+	short endVolume; // size=0, offset=10
+	long time; // size=0, offset=12
+	long distance; // size=0, offset=16
+};
+
+struct __AlarmData // hashcode: 0x4506D6F6 (dec: 1158076150)
+{
+	short command; // size=0, offset=0
+	short data; // size=0, offset=2
+};
+
+struct _SoundRamp // hashcode: 0xBD60B5A0 (dec: -1117735520)
+{
+	unsigned long soundHandle; // size=0, offset=0
+	long soundTimer; // size=0, offset=4
+	long soundTotalTime; // size=0, offset=8
+	unsigned long soundDistance; // size=0, offset=12
+	short soundStartPitch; // size=0, offset=16
+	short soundEndPitch; // size=0, offset=18
+	short soundStartVolume; // size=0, offset=20
+	short soundEndVolume; // size=0, offset=22
+};
+
+struct PlayerSaveData // hashcode: 0xCBCB79F5 (dec: -875857419)
 {
 	unsigned long abilities; // size=0, offset=0
 	unsigned long currentPlane; // size=0, offset=4
@@ -7566,7 +7871,7 @@ struct PlayerSaveData // hashcode: 0xA056606D (dec: -1604951955)
 	unsigned long playerEventHistory; // size=0, offset=20
 };
 
-struct RazielData // hashcode: 0xDE95DD4C (dec: -560603828)
+struct RazielData // hashcode: 0x59F1ED4D (dec: 1509027149)
 {
 	unsigned long version; // size=0, offset=0
 	unsigned long nonBurningRibbonStartColor; // size=0, offset=4
@@ -7615,147 +7920,19 @@ struct RazielData // hashcode: 0xDE95DD4C (dec: -560603828)
 	int SwimPhysicsSurfKickDecel; // size=0, offset=156
 };
 
-struct __razController // hashcode: 0x5BBC2C78 (dec: 1539058808)
+struct __razController // hashcode: 0xEA82ECBD (dec: -360518467)
 {
 	unsigned short segment; // size=0, offset=0
 	unsigned short type; // size=0, offset=2
 };
 
-struct PLANOPT_150fake // hashcode: 0x099573EC (dec: 160789484)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: planopt.o, planopt.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: planopt.o, planopt.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: planopt.o, planopt.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: planopt.o, planopt.o
-};
-
-struct PLANPOOL_150fake // hashcode: 0x57F61968 (dec: 1475746152)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: planpool.o, planpool.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: planpool.o, planpool.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: planpool.o, planpool.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: planpool.o, planpool.o
-};
-
-struct PLANSRCH_150fake // hashcode: 0xC9DE00BB (dec: -908197701)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: plansrch.o, plansrch.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: plansrch.o, plansrch.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: plansrch.o, plansrch.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: plansrch.o, plansrch.o
-};
-
-struct CONTROL_109fake // hashcode: 0x9D2339BC (dec: -1658635844)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: control.o, control.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: control.o, control.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: control.o, control.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: control.o, control.o
-};
-
-struct DR_STP // hashcode: 0x0D49853A (dec: 222922042)
+struct DR_STP // hashcode: 0x368DFF73 (dec: 915275635)
 {
 	unsigned long tag; // size=0, offset=0
 	unsigned long code[2]; // size=8, offset=4
 };
 
-struct UNDRWRLD_114fake // hashcode: 0xD8EA38BC (dec: -655738692)
+struct UNDRWRLD_114fake // hashcode: 0xE7FD0578 (dec: -402848392)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -7787,7 +7964,7 @@ struct UNDRWRLD_114fake // hashcode: 0xD8EA38BC (dec: -655738692)
 	} Follow; // size=20, offset=76, found in object files: undrwrld.o, undrwrld.o
 };
 
-struct UW_ScreenXY // hashcode: 0x17355DB4 (dec: 389373364)
+struct UW_ScreenXY // hashcode: 0x0F0F4643 (dec: 252659267)
 {
 	short sx; // size=0, offset=0
 	short sy; // size=0, offset=2
@@ -7795,147 +7972,13 @@ struct UW_ScreenXY // hashcode: 0x17355DB4 (dec: 389373364)
 	short dy; // size=0, offset=6
 };
 
-struct SavedInfoTracker // hashcode: 0x4F7BECD7 (dec: 1333521623)
-{
-	char *MemoryCardBuffer; // size=0, offset=0
-	char *InfoStart; // size=0, offset=4
-	char *InfoEnd; // size=0, offset=8
-	char *EndOfMemory; // size=0, offset=12
-};
-
-struct SavedBasic // hashcode: 0x9B6EDD8F (dec: -1687233137)
-{
-	short savedID; // size=0, offset=0
-	short saveSize; // size=0, offset=2
-};
-
-struct SavedLevel // hashcode: 0x6D9B66CD (dec: 1838900941)
-{
-	short savedID; // size=0, offset=0
-	short saveSize; // size=0, offset=2
-	long areaID; // size=0, offset=4
-	short waterZ; // size=0, offset=8
-	short numberBSPTrees; // size=0, offset=10
-};
-
-struct SavedDeadDeadBits // hashcode: 0x15716A06 (dec: 359754246)
-{
-	short savedID; // size=0, offset=0
-	short saveSize; // size=0, offset=2
-	char deadDeadBits[1024]; // size=1024, offset=4
-};
-
-struct ActualSavedLevel // hashcode: 0x75BAD6F5 (dec: 1975178997)
-{
-	short savedID; // size=0, offset=0
-	short saveSize; // size=0, offset=2
-	long areaID; // size=0, offset=4
-	short waterZ; // size=0, offset=8
-	short numberBSPTrees; // size=0, offset=10
-	struct SavedBspTree bspTreeArray[1]; // size=8, offset=12
-};
-
-struct _GlobalSaveTracker // hashcode: 0x4AA6E48F (dec: 1252451471)
-{
-	short savedID; // size=0, offset=0
-	short saveSize; // size=0, offset=2
-	short flags; // size=0, offset=4
-	unsigned long currentTime; // size=0, offset=8
-	short humanOpinionOfRaziel; // size=0, offset=12
-	char numRegens; // size=0, offset=14
-	struct _MONAPI_Regenerator regenEntries[10]; // size=80, offset=16
-	struct gSoundData sound; // size=20, offset=96
-	long sizeUsedInBlock; // size=0, offset=116
-};
-
-struct CdlFILTER // hashcode: 0x7735ACA5 (dec: 2000006309)
-{
-	unsigned char file; // size=0, offset=0
-	unsigned char chan; // size=0, offset=1
-	unsigned short pad; // size=0, offset=2
-};
-
-struct SpuCommonAttr // hashcode: 0x01966CA3 (dec: 26635427)
-{
-	unsigned long mask; // size=0, offset=0
-	struct SpuVolume mvol; // size=4, offset=4
-	struct SpuVolume mvolmode; // size=4, offset=8
-	struct SpuVolume mvolx; // size=4, offset=12
-	struct SpuExtAttr cd; // size=12, offset=16
-	struct SpuExtAttr ext; // size=12, offset=28
-};
-
-struct VOICEXA_169fake // hashcode: 0x98E9B1B8 (dec: -1729515080)
-{
-	struct {
-		struct MultiSpline *posSpline; // size=0, offset=0
-		struct MultiSpline *targetSpline; // size=0, offset=4
-		struct _SVector lastSplinePos; // size=8, offset=8
-		short splinePointAhead; // size=0, offset=16
-		short cinema_done; // size=0, offset=18
-		int splinecam_currkey; // size=0, offset=20
-		int splinecam_helpkey; // size=0, offset=24
-	} Cinematic; // size=28, offset=0, found in object files: voicexa.o, voicexa.o
-	struct {
-		struct _Position offset; // size=6, offset=0
-		struct _Rotation rotation; // size=8, offset=6
-		long focusDistance; // size=0, offset=16
-	} Idle; // size=20, offset=28, found in object files: voicexa.o, voicexa.o
-	struct {
-		struct _TFace *tface; // size=12, offset=0
-		struct _TFace *oldTFace; // size=12, offset=4
-		struct _SVector oldTargetRot; // size=8, offset=8
-		long timer; // size=0, offset=16
-		struct _SVector oldFocusInstancePos; // size=8, offset=20
-	} Behind; // size=28, offset=48, found in object files: voicexa.o, voicexa.o
-	struct {
-		long stopTimer; // size=0, offset=0
-		long stopHit; // size=0, offset=4
-		struct _TFace *tface; // size=12, offset=8
-		struct _TFace *oldTFace; // size=12, offset=12
-		long hit; // size=0, offset=16
-	} Follow; // size=20, offset=76, found in object files: voicexa.o, voicexa.o
-};
-
-struct XAVoiceListEntry // hashcode: 0x212FB95C (dec: 556775772)
-{
-	unsigned short length; // size=0, offset=0
-};
-
-struct XAVoiceTracker // hashcode: 0xB0A69E83 (dec: -1331257725)
-{
-	struct CdlLOC currentPos; // size=4, offset=0
-	int currentSector; // size=0, offset=4
-	int endSector; // size=0, offset=8
-	void (*prevCallback)(); // size=0, offset=12
-	unsigned char cdResult[8]; // size=8, offset=16
-	struct CdCommand cdCmdQueue[8]; // size=64, offset=24
-	unsigned short requestQueue[4]; // size=8, offset=88
-	struct VoiceCommand voiceCmdQueue[16]; // size=64, offset=96
-	unsigned char cdCmdIn; // size=0, offset=160
-	unsigned char cdCmdOut; // size=0, offset=161
-	unsigned char cdCmdsQueued; // size=0, offset=162
-	unsigned char reqIn; // size=0, offset=163
-	unsigned char reqOut; // size=0, offset=164
-	unsigned char reqsQueued; // size=0, offset=165
-	unsigned char voiceCmdIn; // size=0, offset=166
-	unsigned char voiceCmdOut; // size=0, offset=167
-	unsigned char voiceCmdsQueued; // size=0, offset=168
-	unsigned char unused1; // size=0, offset=169
-	unsigned char voiceStatus; // size=0, offset=170
-	unsigned char cdStatus; // size=0, offset=171
-	short fileNum; // size=0, offset=172
-	short unused2; // size=0, offset=174
-	struct XAFileInfo xaFileInfo[30]; // size=120, offset=176
-};
-
-struct cinema_fn_table_t // hashcode: 0x2963A004 (dec: 694394884)
+struct cinema_fn_table_t // hashcode: 0x788A7C81 (dec: 2022341761)
 {
 	int (*play)(); // size=0, offset=0
 	char *versionID; // size=0, offset=4
 };
 
-struct CINEPSX_109fake // hashcode: 0xB4189C9E (dec: -1273455458)
+struct CINEPSX_109fake // hashcode: 0x25D35CD7 (dec: 634608855)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -7967,7 +8010,12 @@ struct CINEPSX_109fake // hashcode: 0xB4189C9E (dec: -1273455458)
 	} Follow; // size=20, offset=76, found in object files: cinepsx.o, cinepsx.o
 };
 
-struct LocalizationHeader // hashcode: 0x86C8750F (dec: -2033683185)
+struct XAVoiceListEntry // hashcode: 0x59BCDF7A (dec: 1505550202)
+{
+	unsigned short length; // size=0, offset=0
+};
+
+struct LocalizationHeader // hashcode: 0x57A8366D (dec: 1470641773)
 {
 	enum language_t language; // size=4, offset=0
 	int numXAfiles; // size=0, offset=4
@@ -7975,7 +8023,7 @@ struct LocalizationHeader // hashcode: 0x86C8750F (dec: -2033683185)
 	int numStrings; // size=0, offset=12
 };
 
-struct menu_t // hashcode: 0x3290E656 (dec: 848356950)
+struct menu_t // hashcode: 0xD6F54FB8 (dec: -688566344)
 {
 	int nmenus; // size=0, offset=0
 	int nitems; // size=0, offset=4
@@ -7987,7 +8035,7 @@ struct menu_t // hashcode: 0x3290E656 (dec: 848356950)
 	void *opaque; // size=0, offset=900
 };
 
-struct MENU_109fake // hashcode: 0x80B304BB (dec: -2135751493)
+struct MENU_109fake // hashcode: 0x5D7FAB9E (dec: 1568648094)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -8019,7 +8067,7 @@ struct MENU_109fake // hashcode: 0x80B304BB (dec: -2135751493)
 	} Follow; // size=20, offset=76, found in object files: menu.o, menu.o
 };
 
-struct menu_format_t // hashcode: 0x40A387C4 (dec: 1084458948)
+struct menu_format_t // hashcode: 0x8BC6DE3A (dec: -1949901254)
 {
 	int xpos; // size=0, offset=0
 	int ypos; // size=0, offset=4
@@ -8030,14 +8078,14 @@ struct menu_format_t // hashcode: 0x40A387C4 (dec: 1084458948)
 	int border; // size=0, offset=24
 };
 
-struct menu_stack_t // hashcode: 0x9B2B9505 (dec: -1691642619)
+struct menu_stack_t // hashcode: 0x21B48443 (dec: 565478467)
 {
 	int (*fn)(); // size=0, offset=0
 	int index; // size=0, offset=4
 	struct menu_format_t format; // size=28, offset=8
 };
 
-struct menu_item_t // hashcode: 0xAE3D258D (dec: -1371724403)
+struct menu_item_t // hashcode: 0x29989F6E (dec: 697868142)
 {
 	char *text; // size=0, offset=0
 	int (*fn)(); // size=0, offset=4
@@ -8045,7 +8093,7 @@ struct menu_item_t // hashcode: 0xAE3D258D (dec: -1371724403)
 	long flags; // size=0, offset=12
 };
 
-struct Extents2d // hashcode: 0xC91243F6 (dec: -921549834)
+struct Extents2d // hashcode: 0xDAD8D47E (dec: -623324034)
 {
 	int xmin; // size=0, offset=0
 	int xmax; // size=0, offset=4
@@ -8053,7 +8101,7 @@ struct Extents2d // hashcode: 0xC91243F6 (dec: -921549834)
 	int ymax; // size=0, offset=12
 };
 
-struct MENUUTIL_109fake // hashcode: 0xC7CB553C (dec: -942975684)
+struct MENUUTIL_109fake // hashcode: 0xC7E72EBB (dec: -941150533)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -8085,13 +8133,13 @@ struct MENUUTIL_109fake // hashcode: 0xC7CB553C (dec: -942975684)
 	} Follow; // size=20, offset=76, found in object files: menuutil.o, menuutil.o
 };
 
-struct menu_sound_entry_t // hashcode: 0xDBE287CC (dec: -605911092)
+struct menu_sound_entry_t // hashcode: 0xC45DB178 (dec: -1000492680)
 {
 	enum menu_sound_t sound; // size=4, offset=0
 	int sfx; // size=0, offset=4
 };
 
-struct MENUDEFS_109fake // hashcode: 0xAD9C997A (dec: -1382246022)
+struct MENUDEFS_109fake // hashcode: 0x88179D20 (dec: -2011718368)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -8123,7 +8171,132 @@ struct MENUDEFS_109fake // hashcode: 0xAD9C997A (dec: -1382246022)
 	} Follow; // size=20, offset=76, found in object files: menudefs.o, menudefs.o
 };
 
-struct MENUFACE_109fake // hashcode: 0x4BDC7F6B (dec: 1272741739)
+struct SavedInfoTracker // hashcode: 0x976D60AF (dec: -1754439505)
+{
+	char *MemoryCardBuffer; // size=0, offset=0
+	char *InfoStart; // size=0, offset=4
+	char *InfoEnd; // size=0, offset=8
+	char *EndOfMemory; // size=0, offset=12
+};
+
+struct SavedLevel // hashcode: 0x2A96B47A (dec: 714519674)
+{
+	unsigned char savedID; // size=0, offset=0
+	unsigned char shiftedSaveSize; // size=0, offset=1
+	short areaID; // size=0, offset=2
+	short waterZ; // size=0, offset=4
+	short numberBSPTreesSaved; // size=0, offset=6
+};
+
+struct ActualSavedLevel // hashcode: 0x0AA7BA88 (dec: 178764424)
+{
+	unsigned char savedID; // size=0, offset=0
+	unsigned char shiftedSaveSize; // size=0, offset=1
+	short areaID; // size=0, offset=2
+	short waterZ; // size=0, offset=4
+	short numberBSPTreesSaved; // size=0, offset=6
+	struct SavedBspTree bspTreeArray[1]; // size=8, offset=8
+};
+
+struct SavedDeadDeadBits // hashcode: 0xED4F62E0 (dec: -313564448)
+{
+	unsigned char savedID; // size=0, offset=0
+	unsigned char shiftedSaveSize; // size=0, offset=1
+	char deadDeadBits[832]; // size=832, offset=2
+};
+
+struct _GlobalSaveTracker // hashcode: 0x5CB03AB7 (dec: 1555053239)
+{
+	short savedID; // size=0, offset=0
+	short saveSize; // size=0, offset=2
+	short flags; // size=0, offset=4
+	short saveVersion; // size=0, offset=6
+	unsigned long currentTime; // size=0, offset=8
+	short humanOpinionOfRaziel; // size=0, offset=12
+	char numRegens; // size=0, offset=14
+	struct _MONAPI_Regenerator regenEntries[10]; // size=80, offset=16
+	struct gSoundData sound; // size=20, offset=96
+	short sizeUsedInBlock; // size=0, offset=116
+	short CurrentBirthID; // size=0, offset=118
+};
+
+struct CdlFILTER // hashcode: 0x4EE0EF08 (dec: 1323364104)
+{
+	unsigned char file; // size=0, offset=0
+	unsigned char chan; // size=0, offset=1
+	unsigned short pad; // size=0, offset=2
+};
+
+struct SpuCommonAttr // hashcode: 0xDDA59288 (dec: -576351608)
+{
+	unsigned long mask; // size=0, offset=0
+	struct SpuVolume mvol; // size=4, offset=4
+	struct SpuVolume mvolmode; // size=4, offset=8
+	struct SpuVolume mvolx; // size=4, offset=12
+	struct SpuExtAttr cd; // size=12, offset=16
+	struct SpuExtAttr ext; // size=12, offset=28
+};
+
+struct VOICEXA_169fake // hashcode: 0x0FA4A0E7 (dec: 262447335)
+{
+	struct {
+		struct MultiSpline *posSpline; // size=0, offset=0
+		struct MultiSpline *targetSpline; // size=0, offset=4
+		struct _SVector lastSplinePos; // size=8, offset=8
+		short splinePointAhead; // size=0, offset=16
+		short cinema_done; // size=0, offset=18
+		int splinecam_currkey; // size=0, offset=20
+		int splinecam_helpkey; // size=0, offset=24
+	} Cinematic; // size=28, offset=0, found in object files: voicexa.o, voicexa.o
+	struct {
+		struct _Position offset; // size=6, offset=0
+		struct _Rotation rotation; // size=8, offset=6
+		long focusDistance; // size=0, offset=16
+	} Idle; // size=20, offset=28, found in object files: voicexa.o, voicexa.o
+	struct {
+		struct _TFace *tface; // size=12, offset=0
+		struct _TFace *oldTFace; // size=12, offset=4
+		struct _SVector oldTargetRot; // size=8, offset=8
+		long timer; // size=0, offset=16
+		struct _SVector oldFocusInstancePos; // size=8, offset=20
+	} Behind; // size=28, offset=48, found in object files: voicexa.o, voicexa.o
+	struct {
+		long stopTimer; // size=0, offset=0
+		long stopHit; // size=0, offset=4
+		struct _TFace *tface; // size=12, offset=8
+		struct _TFace *oldTFace; // size=12, offset=12
+		long hit; // size=0, offset=16
+	} Follow; // size=20, offset=76, found in object files: voicexa.o, voicexa.o
+};
+
+struct XAVoiceTracker // hashcode: 0x4B01AB69 (dec: 1258400617)
+{
+	struct CdlLOC currentPos; // size=4, offset=0
+	int currentSector; // size=0, offset=4
+	int endSector; // size=0, offset=8
+	void (*prevCallback)(); // size=0, offset=12
+	unsigned char cdResult[8]; // size=8, offset=16
+	struct CdCommand cdCmdQueue[8]; // size=64, offset=24
+	unsigned short requestQueue[4]; // size=8, offset=88
+	struct VoiceCommand voiceCmdQueue[16]; // size=64, offset=96
+	unsigned char cdCmdIn; // size=0, offset=160
+	unsigned char cdCmdOut; // size=0, offset=161
+	unsigned char cdCmdsQueued; // size=0, offset=162
+	unsigned char reqIn; // size=0, offset=163
+	unsigned char reqOut; // size=0, offset=164
+	unsigned char reqsQueued; // size=0, offset=165
+	unsigned char voiceCmdIn; // size=0, offset=166
+	unsigned char voiceCmdOut; // size=0, offset=167
+	unsigned char voiceCmdsQueued; // size=0, offset=168
+	unsigned char unused1; // size=0, offset=169
+	unsigned char voiceStatus; // size=0, offset=170
+	unsigned char cdStatus; // size=0, offset=171
+	short fileNum; // size=0, offset=172
+	short unused2; // size=0, offset=174
+	struct XAFileInfo xaFileInfo[30]; // size=120, offset=176
+};
+
+struct MENUFACE_109fake // hashcode: 0x6856F9CD (dec: 1750530509)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -8155,16 +8328,90 @@ struct MENUFACE_109fake // hashcode: 0x4BDC7F6B (dec: 1272741739)
 	} Follow; // size=20, offset=76, found in object files: menuface.o, menuface.o
 };
 
-struct menuface_t // hashcode: 0xD09068C2 (dec: -795842366)
+struct menuface_t // hashcode: 0x747C4D13 (dec: 1954303251)
 {
-	int x; // size=0, offset=0
-	int y; // size=0, offset=4
-	int w; // size=0, offset=8
-	int h; // size=0, offset=12
-	int loaded; // size=0, offset=16
+	short x; // size=0, offset=0
+	short y; // size=0, offset=2
+	char w; // size=0, offset=4
+	char h; // size=0, offset=5
+	char frames; // size=0, offset=6
+	char curFrame; // size=0, offset=7
+	char transitionDir; // size=0, offset=8
+	unsigned char delay; // size=0, offset=9
+	unsigned char loaded; // size=0, offset=10
+	char pad; // size=0, offset=11
 };
 
-struct mcmenu_table_t // hashcode: 0x01EECDC1 (dec: 32427457)
+struct mcpsx_t // hashcode: 0x439C11F6 (dec: 1134301686)
+{
+	struct {
+		enum mcpsx_mode_t mode; // size=4, offset=0
+		enum mcpsx_func_t func; // size=4, offset=4
+		enum mcpsx_sync_t sync; // size=4, offset=8
+		enum mcpsx_err_t err; // size=4, offset=12
+		int observed; // size=0, offset=16
+	} state; // size=20, offset=0, found in object files: memcard.o, memcard.o
+	struct {
+		long channel; // size=0, offset=0
+		char *filename; // size=0, offset=4
+		void *buffer; // size=0, offset=8
+		long offset; // size=0, offset=12
+		long nbytes; // size=0, offset=16
+		long nblocks; // size=0, offset=20
+		struct mcpsx_directory_t *directory; // size=24, offset=24
+		long *nfilesptr; // size=0, offset=28
+	} params; // size=32, offset=20, found in object files: memcard.o, memcard.o
+	void *opaque; // size=0, offset=52
+};
+
+struct mcpsx_directory_t // hashcode: 0x6E4A1DFB (dec: 1850351099)
+{
+	char name[20]; // size=20, offset=0
+	int nbytes; // size=0, offset=20
+};
+
+struct mcard_t // hashcode: 0xDC887748 (dec: -595036344)
+{
+	struct {
+		enum mcpsx_err_t err; // size=4, offset=0
+		enum state_t fsm; // size=4, offset=4
+		enum mcard_status_t status; // size=4, offset=8
+		int not_exists; // size=0, offset=12
+	} state; // size=16, offset=0, found in object files: memcard.o, memcard.o
+	struct {
+		long parameter; // size=0, offset=0
+		long *nfilesptr; // size=0, offset=4
+		struct mcpsx_directory_t *directory; // size=24, offset=8
+		char *filename; // size=0, offset=12
+		void *buffer; // size=0, offset=16
+		int nbytes; // size=0, offset=20
+		int nblocks; // size=0, offset=24
+	} params; // size=28, offset=16, found in object files: memcard.o, memcard.o
+	struct mcpsx_t *mcpsx; // size=56, offset=44
+	void *opaque; // size=0, offset=48
+};
+
+struct mcmenu_t // hashcode: 0x33A96220 (dec: 866738720)
+{
+	struct {
+		enum fsm_t fsm; // size=4, offset=0
+		enum fsm_t fsm_prev; // size=4, offset=4
+		enum mcard_status_t status; // size=4, offset=8
+		int running; // size=0, offset=12
+		int slot; // size=0, offset=16
+	} state; // size=20, offset=0, found in object files: memcard.o, memcard.o
+	struct {
+		int nblocks; // size=0, offset=0
+		int nbytes; // size=0, offset=4
+		void *buffer; // size=0, offset=8
+		struct mcpsx_directory_t directory[15]; // size=360, offset=12
+		long nfiles; // size=0, offset=372
+	} params; // size=376, offset=20, found in object files: memcard.o, memcard.o
+	struct mcard_t *mcard; // size=52, offset=396
+	void *opaque; // size=0, offset=400
+};
+
+struct mcmenu_table_t // hashcode: 0x13150B73 (dec: 320146291)
 {
 	int (*data_size)(); // size=0, offset=0
 	void (*initialize)(); // size=0, offset=4
@@ -8177,7 +8424,7 @@ struct mcmenu_table_t // hashcode: 0x01EECDC1 (dec: 32427457)
 	char *versionID; // size=0, offset=32
 };
 
-struct MEMCARD_110fake // hashcode: 0x004E88F3 (dec: 5146867)
+struct MEMCARD_117fake // hashcode: 0x12F3FE32 (dec: 317980210)
 {
 	struct {
 		struct MultiSpline *posSpline; // size=0, offset=0
@@ -8209,14 +8456,20 @@ struct MEMCARD_110fake // hashcode: 0x004E88F3 (dec: 5146867)
 	} Follow; // size=20, offset=76, found in object files: memcard.o, memcard.o
 };
 
-struct memcard_t // hashcode: 0x0AD83860 (dec: 181942368)
+struct memcard_t // hashcode: 0x818A1A39 (dec: -2121655751)
 {
 	struct Object *object; // size=76, offset=0
 	struct mcmenu_table_t *table; // size=36, offset=4
-	struct mcmenu_t *mcmenu; // size=0, offset=8
+	struct mcmenu_t *mcmenu; // size=404, offset=8
 	short running; // size=0, offset=12
 	short wrongVerison; // size=0, offset=14
-	struct GameTracker *gt; // size=648, offset=16
+};
+
+struct MEMCARD_211fake // hashcode: 0xBCEEF4B0 (dec: -1125190480)
+{
+	struct mcmenu_t dummy1; // size=404, offset=0
+	struct mcard_t dummy2; // size=52, offset=404
+	struct mcpsx_t dummy3; // size=56, offset=456
 };
 /* End structs */
 
@@ -8244,7 +8497,7 @@ union PLAYER_77fake // Hashcode: 0xBB3AB3AC (dec: -1153780820)
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union PLAYER_203fake // Hashcode: 0xD9D68A52 (dec: -640251310)
+union PLAYER_203fake // Hashcode: 0xD17F7AC6 (dec: -780174650)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -8252,7 +8505,7 @@ union PLAYER_203fake // Hashcode: 0xD9D68A52 (dec: -640251310)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union DEBUG_117fake // Hashcode: 0x841D75EE (dec: -2078444050)
+union DEBUG_117fake // Hashcode: 0x8FDB6CEB (dec: -1881445141)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -8268,13 +8521,13 @@ union DEBUG_117fake // Hashcode: 0x841D75EE (dec: -2078444050)
 	} quat; // size=16, offset=0, found in object files: debug.o, debug.o
 };
 
-union DEBUG_118fake // Hashcode: 0x47B0A530 (dec: 1202758960)
+union DEBUG_118fake // Hashcode: 0x9FC77C2D (dec: -1614316499)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union DEBUG_232fake // Hashcode: 0xB8D12125 (dec: -1194254043)
+union DEBUG_219fake // Hashcode: 0x34481CBB (dec: 877141179)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -8282,13 +8535,13 @@ union DEBUG_232fake // Hashcode: 0xB8D12125 (dec: -1194254043)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union DEBUG_254fake // Hashcode: 0x60BE10A9 (dec: 1623068841)
+union DEBUG_255fake // Hashcode: 0xF8D3063B (dec: -120388037)
 {
 	struct Intro *intro; // size=76, offset=0
 	struct _SFXMkr *sfxMarker; // size=36, offset=0
 };
 
-union DRAW_71fake // Hashcode: 0x84D5D42F (dec: -2066361297)
+union DRAW_71fake // Hashcode: 0xCB8F2557 (dec: -879811241)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -8304,13 +8557,21 @@ union DRAW_71fake // Hashcode: 0x84D5D42F (dec: -2066361297)
 	} quat; // size=16, offset=0, found in object files: draw.o, draw.o
 };
 
-union DRAW_72fake // Hashcode: 0x0B7EC0ED (dec: 192856301)
+union DRAW_72fake // Hashcode: 0xC5F4FD70 (dec: -973800080)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union FONT_76fake // Hashcode: 0x5CBA53B5 (dec: 1555714997)
+union DRAW_207fake // Hashcode: 0x73CDE2F1 (dec: 1942872817)
+{
+	struct _Instance *target; // size=664, offset=0
+	struct _Position position; // size=6, offset=0
+	struct _Rotation direction; // size=8, offset=0
+	struct _Position throwVector; // size=6, offset=0
+};
+
+union FONT_76fake // Hashcode: 0x437DBE1C (dec: 1132314140)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -8326,13 +8587,21 @@ union FONT_76fake // Hashcode: 0x5CBA53B5 (dec: 1555714997)
 	} quat; // size=16, offset=0, found in object files: font.o, font.o
 };
 
-union FONT_77fake // Hashcode: 0x3A35F4F6 (dec: 976614646)
+union FONT_77fake // Hashcode: 0x41C6BBBD (dec: 1103543229)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union GAMEPAD_76fake // Hashcode: 0xE68CFCAC (dec: -426967892)
+union FONT_208fake // Hashcode: 0xF48145CB (dec: -192854581)
+{
+	struct _Instance *target; // size=664, offset=0
+	struct _Position position; // size=6, offset=0
+	struct _Rotation direction; // size=8, offset=0
+	struct _Position throwVector; // size=6, offset=0
+};
+
+union GAMEPAD_76fake // Hashcode: 0xD0BD8DB9 (dec: -792883783)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -8348,13 +8617,13 @@ union GAMEPAD_76fake // Hashcode: 0xE68CFCAC (dec: -426967892)
 	} quat; // size=16, offset=0, found in object files: gamepad.o, gamepad.o
 };
 
-union GAMEPAD_77fake // Hashcode: 0xE491B901 (dec: -460211967)
+union GAMEPAD_77fake // Hashcode: 0x98D30877 (dec: -1731000201)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union GAMEPAD_194fake // Hashcode: 0xA89F75F6 (dec: -1465944586)
+union GAMEPAD_194fake // Hashcode: 0x580DA0F4 (dec: 1477288180)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -8362,7 +8631,7 @@ union GAMEPAD_194fake // Hashcode: 0xA89F75F6 (dec: -1465944586)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union INSTANCE_76fake // Hashcode: 0x4082B530 (dec: 1082307888)
+union INSTANCE_76fake // Hashcode: 0xD107B689 (dec: -788023671)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -8378,13 +8647,13 @@ union INSTANCE_76fake // Hashcode: 0x4082B530 (dec: 1082307888)
 	} quat; // size=16, offset=0, found in object files: instance.o, instance.o
 };
 
-union INSTANCE_77fake // Hashcode: 0xCEEC7BCA (dec: -823362614)
+union INSTANCE_77fake // Hashcode: 0xFD9D30CA (dec: -40030006)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union INSTANCE_219fake // Hashcode: 0xF3528BAA (dec: -212694102)
+union INSTANCE_200fake // Hashcode: 0x7AC29D26 (dec: 2059574566)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -8392,13 +8661,13 @@ union INSTANCE_219fake // Hashcode: 0xF3528BAA (dec: -212694102)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union INSTANCE_265fake // Hashcode: 0x06F11160 (dec: 116461920)
+union INSTANCE_265fake // Hashcode: 0xF7C09306 (dec: -138374394)
 {
 	struct Intro *intro; // size=76, offset=0
 	struct _SFXMkr *sfxMarker; // size=36, offset=0
 };
 
-union CAMERA_71fake // Hashcode: 0x87FAE04B (dec: -2013601717)
+union CAMERA_71fake // Hashcode: 0xE21A8E88 (dec: -501576056)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -8414,13 +8683,13 @@ union CAMERA_71fake // Hashcode: 0x87FAE04B (dec: -2013601717)
 	} quat; // size=16, offset=0, found in object files: camera.o, camera.o
 };
 
-union CAMERA_72fake // Hashcode: 0x67A99979 (dec: 1739168121)
+union CAMERA_72fake // Hashcode: 0xFAC61D0E (dec: -87679730)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union CAMERA_200fake // Hashcode: 0x07BCF479 (dec: 129823865)
+union CAMERA_200fake // Hashcode: 0x0030A4BF (dec: 3187903)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -8428,7 +8697,7 @@ union CAMERA_200fake // Hashcode: 0x07BCF479 (dec: 129823865)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union LIGHT3D_71fake // Hashcode: 0x61885C11 (dec: 1636326417)
+union LIGHT3D_71fake // Hashcode: 0xD87B7ACC (dec: -662996276)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -8444,13 +8713,13 @@ union LIGHT3D_71fake // Hashcode: 0x61885C11 (dec: 1636326417)
 	} quat; // size=16, offset=0, found in object files: light3d.o, light3d.o
 };
 
-union LIGHT3D_72fake // Hashcode: 0xBDAA1016 (dec: -1112928234)
+union LIGHT3D_72fake // Hashcode: 0xDA6329A5 (dec: -631035483)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union LIGHT3D_204fake // Hashcode: 0x19FFDDE0 (dec: 436198880)
+union LIGHT3D_204fake // Hashcode: 0x5C281C1C (dec: 1546132508)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -8458,7 +8727,7 @@ union LIGHT3D_204fake // Hashcode: 0x19FFDDE0 (dec: 436198880)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union LOAD3D_76fake // Hashcode: 0x4B3EBA8B (dec: 1262402187)
+union LOAD3D_76fake // Hashcode: 0x57B5CC77 (dec: 1471532151)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -8474,13 +8743,13 @@ union LOAD3D_76fake // Hashcode: 0x4B3EBA8B (dec: 1262402187)
 	} quat; // size=16, offset=0, found in object files: load3d.o, load3d.o
 };
 
-union LOAD3D_77fake // Hashcode: 0xA0DF87EE (dec: -1595963410)
+union LOAD3D_77fake // Hashcode: 0xC3F8B662 (dec: -1007110558)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union MAIN_76fake // Hashcode: 0x41DA11A7 (dec: 1104810407)
+union MAIN_76fake // Hashcode: 0x1BF568CD (dec: 469067981)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -8496,13 +8765,21 @@ union MAIN_76fake // Hashcode: 0x41DA11A7 (dec: 1104810407)
 	} quat; // size=16, offset=0, found in object files: main.o, main.o
 };
 
-union MAIN_77fake // Hashcode: 0x72C9141F (dec: 1925780511)
+union MAIN_77fake // Hashcode: 0xD53C177F (dec: -717482113)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union MAIN_198fake // Hashcode: 0x204E9087 (dec: 542019719)
+union MAIN_208fake // Hashcode: 0x9EDD1752 (dec: -1629677742)
+{
+	struct _Instance *target; // size=664, offset=0
+	struct _Position position; // size=6, offset=0
+	struct _Rotation direction; // size=8, offset=0
+	struct _Position throwVector; // size=6, offset=0
+};
+
+union MAIN_238fake // Hashcode: 0x04937F30 (dec: 76775216)
 {
 	unsigned short pad; // size=0, offset=0
 	unsigned short multitap[16]; // size=32, offset=0
@@ -8511,15 +8788,7 @@ union MAIN_198fake // Hashcode: 0x204E9087 (dec: 542019719)
 	struct AnalogueData analogue; // size=6, offset=0
 };
 
-union MAIN_236fake // Hashcode: 0x4EE029EC (dec: 1323313644)
-{
-	struct _Instance *target; // size=664, offset=0
-	struct _Position position; // size=6, offset=0
-	struct _Rotation direction; // size=8, offset=0
-	struct _Position throwVector; // size=6, offset=0
-};
-
-union GAMELOOP_76fake // Hashcode: 0xE58B499C (dec: -443856484)
+union GAMELOOP_76fake // Hashcode: 0x0A1D5C09 (dec: 169696265)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -8535,19 +8804,19 @@ union GAMELOOP_76fake // Hashcode: 0xE58B499C (dec: -443856484)
 	} quat; // size=16, offset=0, found in object files: gameloop.o, gameloop.o
 };
 
-union GAMELOOP_77fake // Hashcode: 0x3FA41784 (dec: 1067718532)
+union GAMELOOP_77fake // Hashcode: 0xF9E4B09E (dec: -102453090)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union GAMELOOP_187fake // Hashcode: 0x469F0A75 (dec: 1184828021)
+union GAMELOOP_187fake // Hashcode: 0x10E97F95 (dec: 283738005)
 {
 	struct Intro *intro; // size=76, offset=0
 	struct _SFXMkr *sfxMarker; // size=36, offset=0
 };
 
-union GAMELOOP_230fake // Hashcode: 0x342B6FC3 (dec: 875261891)
+union GAMELOOP_231fake // Hashcode: 0x20DD8088 (dec: 551387272)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -8555,7 +8824,7 @@ union GAMELOOP_230fake // Hashcode: 0x342B6FC3 (dec: 875261891)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union SIGNAL_71fake // Hashcode: 0xEA0A4DF9 (dec: -368423431)
+union SIGNAL_71fake // Hashcode: 0x9F61980E (dec: -1620994034)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -8571,13 +8840,13 @@ union SIGNAL_71fake // Hashcode: 0xEA0A4DF9 (dec: -368423431)
 	} quat; // size=16, offset=0, found in object files: signal.o, signal.o
 };
 
-union SIGNAL_72fake // Hashcode: 0x846FFEC0 (dec: -2073035072)
+union SIGNAL_72fake // Hashcode: 0x338DBC7B (dec: 864926843)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union SIGNAL_200fake // Hashcode: 0x1BF60E5E (dec: 469110366)
+union SIGNAL_200fake // Hashcode: 0x3880D70E (dec: 947967758)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -8585,7 +8854,7 @@ union SIGNAL_200fake // Hashcode: 0x1BF60E5E (dec: 469110366)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union COLLIDE_76fake // Hashcode: 0x9C424E0A (dec: -1673376246)
+union COLLIDE_76fake // Hashcode: 0x002C2863 (dec: 2893923)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -8601,13 +8870,13 @@ union COLLIDE_76fake // Hashcode: 0x9C424E0A (dec: -1673376246)
 	} quat; // size=16, offset=0, found in object files: collide.o, collide.o
 };
 
-union COLLIDE_77fake // Hashcode: 0xB964C5D4 (dec: -1184578092)
+union COLLIDE_77fake // Hashcode: 0xB047A37C (dec: -1337482372)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union COLLIDE_216fake // Hashcode: 0xC5459EA9 (dec: -985293143)
+union COLLIDE_214fake // Hashcode: 0x2948D328 (dec: 692638504)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -8615,357 +8884,13 @@ union COLLIDE_216fake // Hashcode: 0xC5459EA9 (dec: -985293143)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union TIMER_71fake // Hashcode: 0xEC9D7CBD (dec: -325223235)
+union COLLIDE_241fake // Hashcode: 0x5247E607 (dec: 1380443655)
 {
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: timer.o, timer.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: timer.o, timer.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: timer.o, timer.o
+	struct Intro *intro; // size=76, offset=0
+	struct _SFXMkr *sfxMarker; // size=36, offset=0
 };
 
-union TIMER_72fake // Hashcode: 0x484CB7D1 (dec: 1212987345)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union BSP_71fake // Hashcode: 0x0DEDCD90 (dec: 233688464)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: bsp.o, bsp.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: bsp.o, bsp.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: bsp.o, bsp.o
-};
-
-union BSP_72fake // Hashcode: 0x04FFC095 (dec: 83869845)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union BSP_204fake // Hashcode: 0xF94FDEB8 (dec: -112206152)
-{
-	struct _Instance *target; // size=664, offset=0
-	struct _Position position; // size=6, offset=0
-	struct _Rotation direction; // size=8, offset=0
-	struct _Position throwVector; // size=6, offset=0
-};
-
-union OBTABLE_76fake // Hashcode: 0x54966F09 (dec: 1419144969)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: obtable.o, obtable.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: obtable.o, obtable.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: obtable.o, obtable.o
-};
-
-union OBTABLE_77fake // Hashcode: 0xA27C1FFE (dec: -1568923650)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union OBTABLE_191fake // Hashcode: 0x3F249253 (dec: 1059361363)
-{
-	struct _Instance *target; // size=664, offset=0
-	struct _Position position; // size=6, offset=0
-	struct _Rotation direction; // size=8, offset=0
-	struct _Position throwVector; // size=6, offset=0
-};
-
-union PIPE3D_71fake // Hashcode: 0x75AF626A (dec: 1974428266)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: pipe3d.o, pipe3d.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: pipe3d.o, pipe3d.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: pipe3d.o, pipe3d.o
-};
-
-union PIPE3D_72fake // Hashcode: 0xD623A6AE (dec: -702306642)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union PIPE3D_214fake // Hashcode: 0x4F1430CB (dec: 1326723275)
-{
-	struct _Instance *target; // size=664, offset=0
-	struct _Position position; // size=6, offset=0
-	struct _Rotation direction; // size=8, offset=0
-	struct _Position throwVector; // size=6, offset=0
-};
-
-union SCRIPT_76fake // Hashcode: 0x8B52F04F (dec: -1957498801)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: script.o, script.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: script.o, script.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: script.o, script.o
-};
-
-union SCRIPT_77fake // Hashcode: 0x12F87ABB (dec: 318274235)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union SCRIPT_196fake // Hashcode: 0x2E5369C7 (dec: 777218503)
-{
-	struct _Instance *target; // size=664, offset=0
-	struct _Position position; // size=6, offset=0
-	struct _Rotation direction; // size=8, offset=0
-	struct _Position throwVector; // size=6, offset=0
-};
-
-union MATH3D_76fake // Hashcode: 0x1E884C68 (dec: 512248936)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: math3d.o, math3d.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: math3d.o, math3d.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: math3d.o, math3d.o
-};
-
-union MATH3D_77fake // Hashcode: 0xF3BD4CE6 (dec: -205697818)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union SPLINE_71fake // Hashcode: 0x026BF980 (dec: 40630656)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: spline.o, spline.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: spline.o, spline.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: spline.o, spline.o
-};
-
-union SPLINE_72fake // Hashcode: 0x15012A95 (dec: 352397973)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union FX_71fake // Hashcode: 0x5CFDA5A1 (dec: 1560126881)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: fx.o, fx.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: fx.o, fx.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: fx.o, fx.o
-};
-
-union FX_72fake // Hashcode: 0x0E72D00D (dec: 242405389)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union FX_200fake // Hashcode: 0xDBE294D8 (dec: -605907752)
-{
-	struct _Instance *target; // size=664, offset=0
-	struct _Position position; // size=6, offset=0
-	struct _Rotation direction; // size=8, offset=0
-	struct _Position throwVector; // size=6, offset=0
-};
-
-union OBTABLE2_76fake // Hashcode: 0x4D642E63 (dec: 1298411107)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: obtable2.o, obtable2.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: obtable2.o, obtable2.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: obtable2.o, obtable2.o
-};
-
-union OBTABLE2_77fake // Hashcode: 0x61F15595 (dec: 1643206037)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union OBTABLE2_204fake // Hashcode: 0x345A5DAC (dec: 878337452)
-{
-	struct _Instance *target; // size=664, offset=0
-	struct _Position position; // size=6, offset=0
-	struct _Rotation direction; // size=8, offset=0
-	struct _Position throwVector; // size=6, offset=0
-};
-
-union GENERIC_76fake // Hashcode: 0xA12E1DE7 (dec: -1590813209)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: generic.o, generic.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: generic.o, generic.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: generic.o, generic.o
-};
-
-union GENERIC_77fake // Hashcode: 0x1629F67D (dec: 371848829)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union GENERIC_196fake // Hashcode: 0x4764A1AA (dec: 1197777322)
-{
-	struct _Instance *target; // size=664, offset=0
-	struct _Position position; // size=6, offset=0
-	struct _Rotation direction; // size=8, offset=0
-	struct _Position throwVector; // size=6, offset=0
-};
-
-union SOUND_76fake // Hashcode: 0xB6D1F6DB (dec: -1227753765)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: sound.o, sound.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: sound.o, sound.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: sound.o, sound.o
-};
-
-union SOUND_77fake // Hashcode: 0x1FAF3D20 (dec: 531578144)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union SOUND_196fake // Hashcode: 0xF2E8043D (dec: -219675587)
-{
-	struct _Instance *target; // size=664, offset=0
-	struct _Position position; // size=6, offset=0
-	struct _Rotation direction; // size=8, offset=0
-	struct _Position throwVector; // size=6, offset=0
-};
-
-union GXASSERT_76fake // Hashcode: 0x8B5B331F (dec: -1956957409)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: gxassert.o, gxassert.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: gxassert.o, gxassert.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: gxassert.o, gxassert.o
-};
-
-union GXASSERT_77fake // Hashcode: 0x3248AAC4 (dec: 843623108)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union AADASSRT_117fake // Hashcode: 0x37D1422D (dec: 936460845)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: aadassrt.o, aadassrt.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: aadassrt.o, aadassrt.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: aadassrt.o, aadassrt.o
-};
-
-union AADASSRT_118fake // Hashcode: 0x513C7E9E (dec: 1362919070)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union TABLES_71fake // Hashcode: 0x351174B3 (dec: 890336435)
+union TABLES_71fake // Hashcode: 0xA6898F50 (dec: -1500934320)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -8981,13 +8906,13 @@ union TABLES_71fake // Hashcode: 0x351174B3 (dec: 890336435)
 	} quat; // size=16, offset=0, found in object files: tables.o, tables.o
 };
 
-union TABLES_72fake // Hashcode: 0x90F10426 (dec: -1863252954)
+union TABLES_72fake // Hashcode: 0xD97A777C (dec: -646285444)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union VM_71fake // Hashcode: 0x36796B2E (dec: 913926958)
+union VM_71fake // Hashcode: 0x16A0D850 (dec: 379639888)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -9003,13 +8928,13 @@ union VM_71fake // Hashcode: 0x36796B2E (dec: 913926958)
 	} quat; // size=16, offset=0, found in object files: vm.o, vm.o
 };
 
-union VM_72fake // Hashcode: 0x56241E94 (dec: 1445207700)
+union VM_72fake // Hashcode: 0x36AD9EA6 (dec: 917348006)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union VM_194fake // Hashcode: 0x7FC9D97F (dec: 2143934847)
+union VM_194fake // Hashcode: 0x2872D23F (dec: 678613567)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -9017,7 +8942,313 @@ union VM_194fake // Hashcode: 0x7FC9D97F (dec: 2143934847)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union MEMPACK_71fake // Hashcode: 0x29689957 (dec: 694720855)
+union MATH3D_76fake // Hashcode: 0x24E11B2B (dec: 618732331)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: math3d.o, math3d.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: math3d.o, math3d.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: math3d.o, math3d.o
+};
+
+union MATH3D_77fake // Hashcode: 0xA7F8464B (dec: -1476901301)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union PIPE3D_71fake // Hashcode: 0x0E8B451A (dec: 244008218)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: pipe3d.o, pipe3d.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: pipe3d.o, pipe3d.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: pipe3d.o, pipe3d.o
+};
+
+union PIPE3D_72fake // Hashcode: 0x4398960A (dec: 1134073354)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union PIPE3D_195fake // Hashcode: 0xE288BAF0 (dec: -494355728)
+{
+	struct _Instance *target; // size=664, offset=0
+	struct _Position position; // size=6, offset=0
+	struct _Rotation direction; // size=8, offset=0
+	struct _Position throwVector; // size=6, offset=0
+};
+
+union SCRIPT_76fake // Hashcode: 0x29949EC3 (dec: 697605827)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: script.o, script.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: script.o, script.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: script.o, script.o
+};
+
+union SCRIPT_77fake // Hashcode: 0xFA1FDBDC (dec: -98575396)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union SCRIPT_196fake // Hashcode: 0xA4B68EB7 (dec: -1531539785)
+{
+	struct _Instance *target; // size=664, offset=0
+	struct _Position position; // size=6, offset=0
+	struct _Rotation direction; // size=8, offset=0
+	struct _Position throwVector; // size=6, offset=0
+};
+
+union TIMER_71fake // Hashcode: 0xE149738D (dec: -515279987)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: timer.o, timer.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: timer.o, timer.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: timer.o, timer.o
+};
+
+union TIMER_72fake // Hashcode: 0xC10FCF1A (dec: -1055928550)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union BSP_71fake // Hashcode: 0xE095D78C (dec: -527050868)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: bsp.o, bsp.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: bsp.o, bsp.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: bsp.o, bsp.o
+};
+
+union BSP_72fake // Hashcode: 0xEA3310F9 (dec: -365752071)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union BSP_204fake // Hashcode: 0xD663D9EA (dec: -698099222)
+{
+	struct _Instance *target; // size=664, offset=0
+	struct _Position position; // size=6, offset=0
+	struct _Rotation direction; // size=8, offset=0
+	struct _Position throwVector; // size=6, offset=0
+};
+
+union OBTABLE_76fake // Hashcode: 0xEF276AB0 (dec: -282629456)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: obtable.o, obtable.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: obtable.o, obtable.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: obtable.o, obtable.o
+};
+
+union OBTABLE_77fake // Hashcode: 0xF86BA2DA (dec: -127163686)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union OBTABLE_191fake // Hashcode: 0x176DC2D3 (dec: 393069267)
+{
+	struct _Instance *target; // size=664, offset=0
+	struct _Position position; // size=6, offset=0
+	struct _Rotation direction; // size=8, offset=0
+	struct _Position throwVector; // size=6, offset=0
+};
+
+union OBTABLE2_76fake // Hashcode: 0xD26DD707 (dec: -764553465)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: obtable2.o, obtable2.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: obtable2.o, obtable2.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: obtable2.o, obtable2.o
+};
+
+union OBTABLE2_77fake // Hashcode: 0x0279D52B (dec: 41538859)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union OBTABLE2_204fake // Hashcode: 0x4504A907 (dec: 1157933319)
+{
+	struct _Instance *target; // size=664, offset=0
+	struct _Position position; // size=6, offset=0
+	struct _Rotation direction; // size=8, offset=0
+	struct _Position throwVector; // size=6, offset=0
+};
+
+union GENERIC_76fake // Hashcode: 0xD3D6CEF0 (dec: -740897040)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: generic.o, generic.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: generic.o, generic.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: generic.o, generic.o
+};
+
+union GENERIC_77fake // Hashcode: 0x223DADFF (dec: 574467583)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union GENERIC_196fake // Hashcode: 0xDCE8D0BC (dec: -588721988)
+{
+	struct _Instance *target; // size=664, offset=0
+	struct _Position position; // size=6, offset=0
+	struct _Rotation direction; // size=8, offset=0
+	struct _Position throwVector; // size=6, offset=0
+};
+
+union SOUND_76fake // Hashcode: 0xE29068DE (dec: -493852450)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: sound.o, sound.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: sound.o, sound.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: sound.o, sound.o
+};
+
+union SOUND_77fake // Hashcode: 0xA246A4AA (dec: -1572428630)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union SOUND_199fake // Hashcode: 0xDFDA0FF7 (dec: -539357193)
+{
+	struct _Instance *target; // size=664, offset=0
+	struct _Position position; // size=6, offset=0
+	struct _Rotation direction; // size=8, offset=0
+	struct _Position throwVector; // size=6, offset=0
+};
+
+union SPLINE_71fake // Hashcode: 0xF82DB594 (dec: -131222124)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: spline.o, spline.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: spline.o, spline.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: spline.o, spline.o
+};
+
+union SPLINE_72fake // Hashcode: 0x0E8A2D70 (dec: 243936624)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union FX_71fake // Hashcode: 0x405FB133 (dec: 1080013107)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: fx.o, fx.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: fx.o, fx.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: fx.o, fx.o
+};
+
+union FX_72fake // Hashcode: 0xCBBB5AFB (dec: -876913925)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union FX_200fake // Hashcode: 0x0A4F1DCD (dec: 172957133)
+{
+	struct _Instance *target; // size=664, offset=0
+	struct _Position position; // size=6, offset=0
+	struct _Rotation direction; // size=8, offset=0
+	struct _Position throwVector; // size=6, offset=0
+};
+
+union MEMPACK_71fake // Hashcode: 0xA3DA3C1A (dec: -1545978854)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -9033,13 +9264,13 @@ union MEMPACK_71fake // Hashcode: 0x29689957 (dec: 694720855)
 	} quat; // size=16, offset=0, found in object files: mempack.o, mempack.o
 };
 
-union MEMPACK_72fake // Hashcode: 0x22AE332E (dec: 581841710)
+union MEMPACK_72fake // Hashcode: 0xC58A436B (dec: -980794517)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union MEMPACK_183fake // Hashcode: 0x62744547 (dec: 1651787079)
+union MEMPACK_183fake // Hashcode: 0xE01EE4E6 (dec: -534846234)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -9047,13 +9278,87 @@ union MEMPACK_183fake // Hashcode: 0x62744547 (dec: 1651787079)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union MEMPACK_239fake // Hashcode: 0x0B864EA1 (dec: 193351329)
+union MEMPACK_239fake // Hashcode: 0x5C027ADF (dec: 1543666399)
 {
 	struct Intro *intro; // size=76, offset=0
 	struct _SFXMkr *sfxMarker; // size=36, offset=0
 };
 
-union STREAM_76fake // Hashcode: 0xB702DE8E (dec: -1224548722)
+union GXASSERT_76fake // Hashcode: 0xCEC89670 (dec: -825715088)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: gxassert.o, gxassert.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: gxassert.o, gxassert.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: gxassert.o, gxassert.o
+};
+
+union GXASSERT_77fake // Hashcode: 0x151F5D82 (dec: 354377090)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union AADASSRT_117fake // Hashcode: 0x2609FF4E (dec: 638189390)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: aadassrt.o, aadassrt.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: aadassrt.o, aadassrt.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: aadassrt.o, aadassrt.o
+};
+
+union AADASSRT_118fake // Hashcode: 0xA111B324 (dec: -1592675548)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union AADLIB_114fake // Hashcode: 0x040DBAB5 (dec: 68008629)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: aadlib.o, aadlib.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: aadlib.o, aadlib.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: aadlib.o, aadlib.o
+};
+
+union AADLIB_115fake // Hashcode: 0xAF321E85 (dec: -1355669883)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union AADLIB_185fake // Hashcode: 0x174B93D7 (dec: 390829015)
+{
+	struct _Instance *target; // size=664, offset=0
+	struct _Position position; // size=6, offset=0
+	struct _Rotation direction; // size=8, offset=0
+	struct _Position throwVector; // size=6, offset=0
+};
+
+union STREAM_76fake // Hashcode: 0xBF63C681 (dec: -1083980159)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -9069,13 +9374,13 @@ union STREAM_76fake // Hashcode: 0xB702DE8E (dec: -1224548722)
 	} quat; // size=16, offset=0, found in object files: stream.o, stream.o
 };
 
-union STREAM_77fake // Hashcode: 0x2D6B78C8 (dec: 762017992)
+union STREAM_77fake // Hashcode: 0x60D533B3 (dec: 1624585139)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union STREAM_221fake // Hashcode: 0x22956C57 (dec: 580217943)
+union STREAM_205fake // Hashcode: 0x52E2CF92 (dec: 1390595986)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -9083,13 +9388,13 @@ union STREAM_221fake // Hashcode: 0x22956C57 (dec: 580217943)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union STREAM_256fake // Hashcode: 0xDF67A27D (dec: -546856323)
+union STREAM_256fake // Hashcode: 0x98F29EDE (dec: -1728930082)
 {
 	struct Intro *intro; // size=76, offset=0
 	struct _SFXMkr *sfxMarker; // size=36, offset=0
 };
 
-union PHYSOBS_71fake // Hashcode: 0x26E4FB7A (dec: 652540794)
+union PHYSOBS_71fake // Hashcode: 0x08084D10 (dec: 134761744)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -9105,65 +9410,13 @@ union PHYSOBS_71fake // Hashcode: 0x26E4FB7A (dec: 652540794)
 	} quat; // size=16, offset=0, found in object files: PhysObs.o, PhysObs.o
 };
 
-union PHYSOBS_72fake // Hashcode: 0x25E00833 (dec: 635439155)
+union PHYSOBS_72fake // Hashcode: 0x80B804C9 (dec: -2135423799)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union EVENT_76fake // Hashcode: 0xB053DF44 (dec: -1336680636)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: event.o, event.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: event.o, event.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: event.o, event.o
-};
-
-union EVENT_77fake // Hashcode: 0xE5DBF00B (dec: -438570997)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union EVENT_212fake // Hashcode: 0x92F57DD9 (dec: -1829405223)
-{
-	struct _Instance *target; // size=664, offset=0
-	struct _Position position; // size=6, offset=0
-	struct _Rotation direction; // size=8, offset=0
-	struct _Position throwVector; // size=6, offset=0
-};
-
-union STRMLOAD_76fake // Hashcode: 0x13BBDD6D (dec: 331079021)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: strmload.o, strmload.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: strmload.o, strmload.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: strmload.o, strmload.o
-};
-
-union STRMLOAD_77fake // Hashcode: 0xF5325EE9 (dec: -181248279)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union SCRIPT2_71fake // Hashcode: 0x2642ED76 (dec: 641920374)
+union SCRIPT2_71fake // Hashcode: 0xA85C31A4 (dec: -1470352988)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -9179,13 +9432,13 @@ union SCRIPT2_71fake // Hashcode: 0x2642ED76 (dec: 641920374)
 	} quat; // size=16, offset=0, found in object files: script2.o, script2.o
 };
 
-union SCRIPT2_72fake // Hashcode: 0x3F4B8BC6 (dec: 1061915590)
+union SCRIPT2_72fake // Hashcode: 0x81F9B940 (dec: -2114340544)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union SCRIPT2_198fake // Hashcode: 0xDAF43D61 (dec: -621527711)
+union SCRIPT2_198fake // Hashcode: 0x2360918D (dec: 593531277)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -9193,7 +9446,59 @@ union SCRIPT2_198fake // Hashcode: 0xDAF43D61 (dec: -621527711)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union PHYSICS_71fake // Hashcode: 0xCF90567A (dec: -812624262)
+union EVENT_76fake // Hashcode: 0x758FC869 (dec: 1972357225)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: event.o, event.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: event.o, event.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: event.o, event.o
+};
+
+union EVENT_77fake // Hashcode: 0x761A5212 (dec: 1981436434)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union EVENT_213fake // Hashcode: 0xA01E8D12 (dec: -1608610542)
+{
+	struct _Instance *target; // size=664, offset=0
+	struct _Position position; // size=6, offset=0
+	struct _Rotation direction; // size=8, offset=0
+	struct _Position throwVector; // size=6, offset=0
+};
+
+union STRMLOAD_76fake // Hashcode: 0x3E20E8B6 (dec: 1042344118)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: strmload.o, strmload.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: strmload.o, strmload.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: strmload.o, strmload.o
+};
+
+union STRMLOAD_77fake // Hashcode: 0x2458C570 (dec: 609797488)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union PHYSICS_71fake // Hashcode: 0xF46D7093 (dec: -194154349)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -9209,13 +9514,13 @@ union PHYSICS_71fake // Hashcode: 0xCF90567A (dec: -812624262)
 	} quat; // size=16, offset=0, found in object files: physics.o, physics.o
 };
 
-union PHYSICS_72fake // Hashcode: 0x7825FF45 (dec: 2015756101)
+union PHYSICS_72fake // Hashcode: 0x467E1F5A (dec: 1182670682)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union PHYSICS_198fake // Hashcode: 0xA42560D1 (dec: -1541054255)
+union PHYSICS_198fake // Hashcode: 0x4E411290 (dec: 1312887440)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -9223,111 +9528,7 @@ union PHYSICS_198fake // Hashcode: 0xA42560D1 (dec: -1541054255)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union RAZCNTRL_71fake // Hashcode: 0xE6DC196F (dec: -421783185)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: razcntrl.o, razcntrl.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: razcntrl.o, razcntrl.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: razcntrl.o, razcntrl.o
-};
-
-union RAZCNTRL_72fake // Hashcode: 0x4C8A59A2 (dec: 1284135330)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union STATE_71fake // Hashcode: 0xF000B97C (dec: -268387972)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: state.o, state.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: state.o, state.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: state.o, state.o
-};
-
-union STATE_72fake // Hashcode: 0x08AB5737 (dec: 145446711)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union VRAM_76fake // Hashcode: 0xE489D06B (dec: -460730261)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: vram.o, vram.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: vram.o, vram.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: vram.o, vram.o
-};
-
-union VRAM_77fake // Hashcode: 0xFBFBBE2E (dec: -67387858)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union VRAM_221fake // Hashcode: 0xEEB06D44 (dec: -290427580)
-{
-	struct _Instance *target; // size=664, offset=0
-	struct _Position position; // size=6, offset=0
-	struct _Rotation direction; // size=8, offset=0
-	struct _Position throwVector; // size=6, offset=0
-};
-
-union MONMSG_76fake // Hashcode: 0x8637AC3E (dec: -2043171778)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: monmsg.o, monmsg.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: monmsg.o, monmsg.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: monmsg.o, monmsg.o
-};
-
-union MONMSG_77fake // Hashcode: 0x757C35DB (dec: 1971074523)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union MONMSG_191fake // Hashcode: 0xD3DC89E2 (dec: -740521502)
-{
-	struct _Instance *target; // size=664, offset=0
-	struct _Position position; // size=6, offset=0
-	struct _Rotation direction; // size=8, offset=0
-	struct _Position throwVector; // size=6, offset=0
-};
-
-union REAVER_76fake // Hashcode: 0xFA310C8A (dec: -97448822)
+union REAVER_76fake // Hashcode: 0xD49683F7 (dec: -728333321)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -9343,13 +9544,13 @@ union REAVER_76fake // Hashcode: 0xFA310C8A (dec: -97448822)
 	} quat; // size=16, offset=0, found in object files: reaver.o, reaver.o
 };
 
-union REAVER_77fake // Hashcode: 0xEE38D1A7 (dec: -298266201)
+union REAVER_77fake // Hashcode: 0x7003C6FE (dec: 1879295742)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union REAVER_212fake // Hashcode: 0xC845B58D (dec: -934955635)
+union REAVER_209fake // Hashcode: 0x1BCC68A0 (dec: 466380960)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -9357,67 +9558,7 @@ union REAVER_212fake // Hashcode: 0xC845B58D (dec: -934955635)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union GLYPH_76fake // Hashcode: 0xEA39A91C (dec: -365319908)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: glyph.o, glyph.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: glyph.o, glyph.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: glyph.o, glyph.o
-};
-
-union GLYPH_77fake // Hashcode: 0x0EE2E853 (dec: 249751635)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union GLYPH_212fake // Hashcode: 0xD88B8723 (dec: -661944541)
-{
-	struct _Instance *target; // size=664, offset=0
-	struct _Position position; // size=6, offset=0
-	struct _Rotation direction; // size=8, offset=0
-	struct _Position throwVector; // size=6, offset=0
-};
-
-union HUMAN_76fake // Hashcode: 0x40C37265 (dec: 1086550629)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: human.o, human.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: human.o, human.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: human.o, human.o
-};
-
-union HUMAN_77fake // Hashcode: 0x77688036 (dec: 2003337270)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union HUMAN_188fake // Hashcode: 0xA0EC6F3A (dec: -1595117766)
-{
-	struct _Instance *target; // size=664, offset=0
-	struct _Position position; // size=6, offset=0
-	struct _Rotation direction; // size=8, offset=0
-	struct _Position throwVector; // size=6, offset=0
-};
-
-union HUNTER_76fake // Hashcode: 0x8B2F9E92 (dec: -1959813486)
+union HUNTER_76fake // Hashcode: 0x55755889 (dec: 1433753737)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -9433,13 +9574,13 @@ union HUNTER_76fake // Hashcode: 0x8B2F9E92 (dec: -1959813486)
 	} quat; // size=16, offset=0, found in object files: hunter.o, hunter.o
 };
 
-union HUNTER_77fake // Hashcode: 0xEB123B3C (dec: -351126724)
+union HUNTER_77fake // Hashcode: 0x7DD42307 (dec: 2111054599)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union HUNTER_188fake // Hashcode: 0xA6C5F937 (dec: -1496975049)
+union HUNTER_188fake // Hashcode: 0xCAD1A6D9 (dec: -892229927)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -9447,7 +9588,7 @@ union HUNTER_188fake // Hashcode: 0xA6C5F937 (dec: -1496975049)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union MISSILE_76fake // Hashcode: 0x903F369C (dec: -1874905444)
+union MISSILE_76fake // Hashcode: 0xCA3EAB64 (dec: -901862556)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -9463,13 +9604,13 @@ union MISSILE_76fake // Hashcode: 0x903F369C (dec: -1874905444)
 	} quat; // size=16, offset=0, found in object files: missile.o, missile.o
 };
 
-union MISSILE_77fake // Hashcode: 0x1941FB53 (dec: 423754579)
+union MISSILE_77fake // Hashcode: 0xEB0ED212 (dec: -351350254)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union MISSILE_191fake // Hashcode: 0x8A59B574 (dec: -1973832332)
+union MISSILE_191fake // Hashcode: 0xB9D15879 (dec: -1177462663)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -9477,7 +9618,7 @@ union MISSILE_191fake // Hashcode: 0x8A59B574 (dec: -1973832332)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union MONAPI_76fake // Hashcode: 0x34730FFD (dec: 879955965)
+union MONAPI_76fake // Hashcode: 0xC0E76B03 (dec: -1058575613)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -9493,13 +9634,13 @@ union MONAPI_76fake // Hashcode: 0x34730FFD (dec: 879955965)
 	} quat; // size=16, offset=0, found in object files: monapi.o, monapi.o
 };
 
-union MONAPI_77fake // Hashcode: 0x929BD08B (dec: -1835282293)
+union MONAPI_77fake // Hashcode: 0x88C9805B (dec: -2000060325)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union MONAPI_196fake // Hashcode: 0x84876DDA (dec: -2071499302)
+union MONAPI_196fake // Hashcode: 0x080A899C (dec: 134908316)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -9507,89 +9648,73 @@ union MONAPI_196fake // Hashcode: 0x84876DDA (dec: -2071499302)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union MONLIB_76fake // Hashcode: 0x1BA14368 (dec: 463553384)
+union RAZCNTRL_71fake // Hashcode: 0xD922792C (dec: -652052180)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
 		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: monlib.o, monlib.o
+	} callback; // size=8, offset=0, found in object files: razcntrl.o, razcntrl.o
 	struct {
 		struct _G2SVector3_Type base; // size=6, offset=0
 		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: monlib.o, monlib.o
+	} vector; // size=12, offset=0, found in object files: razcntrl.o, razcntrl.o
 	struct {
 		struct _G2Quat_Type src; // size=8, offset=0
 		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: monlib.o, monlib.o
+	} quat; // size=16, offset=0, found in object files: razcntrl.o, razcntrl.o
 };
 
-union MONLIB_77fake // Hashcode: 0x3D5FBB71 (dec: 1029684081)
+union RAZCNTRL_72fake // Hashcode: 0x691BBC51 (dec: 1763425361)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union MONLIB_202fake // Hashcode: 0x77EE2943 (dec: 2012096835)
-{
-	struct _Instance *target; // size=664, offset=0
-	struct _Position position; // size=6, offset=0
-	struct _Rotation direction; // size=8, offset=0
-	struct _Position throwVector; // size=6, offset=0
-};
-
-union MONTABLE_71fake // Hashcode: 0xF2B7BF79 (dec: -222838919)
+union STATE_71fake // Hashcode: 0x6A2E7759 (dec: 1781430105)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
 		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: montable.o, montable.o
+	} callback; // size=8, offset=0, found in object files: state.o, state.o
 	struct {
 		struct _G2SVector3_Type base; // size=6, offset=0
 		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: montable.o, montable.o
+	} vector; // size=12, offset=0, found in object files: state.o, state.o
 	struct {
 		struct _G2Quat_Type src; // size=8, offset=0
 		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: montable.o, montable.o
+	} quat; // size=16, offset=0, found in object files: state.o, state.o
 };
 
-union MONTABLE_72fake // Hashcode: 0x3115DCBB (dec: 823516347)
+union STATE_72fake // Hashcode: 0x34A2E4FC (dec: 883090684)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union MONTABLE_183fake // Hashcode: 0xC31585D6 (dec: -1021999658)
-{
-	struct _Instance *target; // size=664, offset=0
-	struct _Position position; // size=6, offset=0
-	struct _Rotation direction; // size=8, offset=0
-	struct _Position throwVector; // size=6, offset=0
-};
-
-union MORLOCK_76fake // Hashcode: 0x7F6AAB7F (dec: 2137697151)
+union VRAM_76fake // Hashcode: 0xC9CD2FC8 (dec: -909299768)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
 		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: morlock.o, morlock.o
+	} callback; // size=8, offset=0, found in object files: vram.o, vram.o
 	struct {
 		struct _G2SVector3_Type base; // size=6, offset=0
 		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: morlock.o, morlock.o
+	} vector; // size=12, offset=0, found in object files: vram.o, vram.o
 	struct {
 		struct _G2Quat_Type src; // size=8, offset=0
 		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: morlock.o, morlock.o
+	} quat; // size=16, offset=0, found in object files: vram.o, vram.o
 };
 
-union MORLOCK_77fake // Hashcode: 0xC13B96D4 (dec: -1053059372)
+union VRAM_77fake // Hashcode: 0xD9EF5FC5 (dec: -638623803)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union MORLOCK_188fake // Hashcode: 0x645912AF (dec: 1683559087)
+union VRAM_205fake // Hashcode: 0x34E0E051 (dec: 887152721)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -9597,29 +9722,29 @@ union MORLOCK_188fake // Hashcode: 0x645912AF (dec: 1683559087)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union SKINNER_76fake // Hashcode: 0xDD29EE77 (dec: -584454537)
+union GLYPH_76fake // Hashcode: 0xC6ED8007 (dec: -957513721)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
 		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: skinner.o, skinner.o
+	} callback; // size=8, offset=0, found in object files: glyph.o, glyph.o
 	struct {
 		struct _G2SVector3_Type base; // size=6, offset=0
 		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: skinner.o, skinner.o
+	} vector; // size=12, offset=0, found in object files: glyph.o, glyph.o
 	struct {
 		struct _G2Quat_Type src; // size=8, offset=0
 		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: skinner.o, skinner.o
+	} quat; // size=16, offset=0, found in object files: glyph.o, glyph.o
 };
 
-union SKINNER_77fake // Hashcode: 0x9A4CFC90 (dec: -1706230640)
+union GLYPH_77fake // Hashcode: 0x8768FC78 (dec: -2023162760)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union SKINNER_208fake // Hashcode: 0xB9B9D017 (dec: -1179004905)
+union GLYPH_209fake // Hashcode: 0x362EEEBA (dec: 909045434)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -9627,29 +9752,29 @@ union SKINNER_208fake // Hashcode: 0xB9B9D017 (dec: -1179004905)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union SLUAGH_76fake // Hashcode: 0xF30AD16A (dec: -217394838)
+union HUMAN_76fake // Hashcode: 0xBE51ECF8 (dec: -1101927176)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
 		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: sluagh.o, sluagh.o
+	} callback; // size=8, offset=0, found in object files: human.o, human.o
 	struct {
 		struct _G2SVector3_Type base; // size=6, offset=0
 		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: sluagh.o, sluagh.o
+	} vector; // size=12, offset=0, found in object files: human.o, human.o
 	struct {
 		struct _G2Quat_Type src; // size=8, offset=0
 		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: sluagh.o, sluagh.o
+	} quat; // size=16, offset=0, found in object files: human.o, human.o
 };
 
-union SLUAGH_77fake // Hashcode: 0x3F4416B8 (dec: 1061426872)
+union HUMAN_77fake // Hashcode: 0x26E3C7DE (dec: 652462046)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union SLUAGH_188fake // Hashcode: 0xC5A70FC4 (dec: -978907196)
+union HUMAN_188fake // Hashcode: 0x38475FF8 (dec: 944201720)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -9657,7 +9782,37 @@ union SLUAGH_188fake // Hashcode: 0xC5A70FC4 (dec: -978907196)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union MONSENSE_76fake // Hashcode: 0x64C38F9E (dec: 1690537886)
+union MONMSG_76fake // Hashcode: 0x00A45121 (dec: 10768673)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: monmsg.o, monmsg.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: monmsg.o, monmsg.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: monmsg.o, monmsg.o
+};
+
+union MONMSG_77fake // Hashcode: 0x97BD3215 (dec: -1749208555)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union MONMSG_191fake // Hashcode: 0xAF98D580 (dec: -1348938368)
+{
+	struct _Instance *target; // size=664, offset=0
+	struct _Position position; // size=6, offset=0
+	struct _Rotation direction; // size=8, offset=0
+	struct _Position throwVector; // size=6, offset=0
+};
+
+union MONSENSE_76fake // Hashcode: 0xE39EF92E (dec: -476120786)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -9673,13 +9828,13 @@ union MONSENSE_76fake // Hashcode: 0x64C38F9E (dec: 1690537886)
 	} quat; // size=16, offset=0, found in object files: monsense.o, monsense.o
 };
 
-union MONSENSE_77fake // Hashcode: 0x0CBD975E (dec: 213751646)
+union MONSENSE_77fake // Hashcode: 0x9DA55BB1 (dec: -1650107471)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union MONSENSE_191fake // Hashcode: 0xFF34478D (dec: -13351027)
+union MONSENSE_191fake // Hashcode: 0x2DBBA69C (dec: 767272604)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -9687,7 +9842,7 @@ union MONSENSE_191fake // Hashcode: 0xFF34478D (dec: -13351027)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union MONSTER_76fake // Hashcode: 0x0FEE007D (dec: 267255933)
+union MONSTER_76fake // Hashcode: 0xB86A05B3 (dec: -1201011277)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -9703,13 +9858,13 @@ union MONSTER_76fake // Hashcode: 0x0FEE007D (dec: 267255933)
 	} quat; // size=16, offset=0, found in object files: monster.o, monster.o
 };
 
-union MONSTER_77fake // Hashcode: 0x88404073 (dec: -2009055117)
+union MONSTER_77fake // Hashcode: 0xD6D0D774 (dec: -690956428)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union MONSTER_208fake // Hashcode: 0xB25E2301 (dec: -1302453503)
+union MONSTER_208fake // Hashcode: 0xF98F7226 (dec: -108039642)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -9717,117 +9872,29 @@ union MONSTER_208fake // Hashcode: 0xB25E2301 (dec: -1302453503)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union INSTNCG2_23fake // Hashcode: 0x687DD2D0 (dec: 1753076432)
+union MONLIB_76fake // Hashcode: 0xB892514A (dec: -1198370486)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
 		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: InstncG2.o, InstncG2.o
+	} callback; // size=8, offset=0, found in object files: monlib.o, monlib.o
 	struct {
 		struct _G2SVector3_Type base; // size=6, offset=0
 		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: InstncG2.o, InstncG2.o
+	} vector; // size=12, offset=0, found in object files: monlib.o, monlib.o
 	struct {
 		struct _G2Quat_Type src; // size=8, offset=0
 		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: InstncG2.o, InstncG2.o
+	} quat; // size=16, offset=0, found in object files: monlib.o, monlib.o
 };
 
-union INSTNCG2_72fake // Hashcode: 0xA04B6616 (dec: -1605671402)
+union MONLIB_77fake // Hashcode: 0xBE5ABAAD (dec: -1101350227)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union MAING2_71fake // Hashcode: 0x78373087 (dec: 2016882823)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: MainG2.o, MainG2.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: MainG2.o, MainG2.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: MainG2.o, MainG2.o
-};
-
-union MAING2_72fake // Hashcode: 0xA1388DAF (dec: -1590129233)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union MATRIXG2_71fake // Hashcode: 0xB98B6128 (dec: -1182047960)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: MatrixG2.o, MatrixG2.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: MatrixG2.o, MatrixG2.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: MatrixG2.o, MatrixG2.o
-};
-
-union MATRIXG2_72fake // Hashcode: 0xFCD7C665 (dec: -52967835)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union QUATG2_71fake // Hashcode: 0x047F948C (dec: 75469964)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: QuatG2.o, QuatG2.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: QuatG2.o, QuatG2.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: QuatG2.o, QuatG2.o
-};
-
-union QUATG2_72fake // Hashcode: 0xCB06D631 (dec: -888744399)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union SOUL_76fake // Hashcode: 0xF74A8D15 (dec: -146109163)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: soul.o, soul.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: soul.o, soul.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: soul.o, soul.o
-};
-
-union SOUL_77fake // Hashcode: 0x3587F274 (dec: 898101876)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union SOUL_188fake // Hashcode: 0x80E7DFFE (dec: -2132287490)
+union MONLIB_202fake // Hashcode: 0xCBF5D75B (dec: -873080997)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -9835,7 +9902,7 @@ union SOUL_188fake // Hashcode: 0x80E7DFFE (dec: -2132287490)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union VWRAITH_76fake // Hashcode: 0x88B03CE3 (dec: -2001715997)
+union VWRAITH_76fake // Hashcode: 0xEFE90EB5 (dec: -269939019)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -9851,13 +9918,13 @@ union VWRAITH_76fake // Hashcode: 0x88B03CE3 (dec: -2001715997)
 	} quat; // size=16, offset=0, found in object files: vwraith.o, vwraith.o
 };
 
-union VWRAITH_77fake // Hashcode: 0x927B2535 (dec: -1837423307)
+union VWRAITH_77fake // Hashcode: 0x4E0523C5 (dec: 1308959685)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union VWRAITH_188fake // Hashcode: 0x162AA617 (dec: 371893783)
+union VWRAITH_188fake // Hashcode: 0xEFE9F5D3 (dec: -269879853)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -9865,29 +9932,29 @@ union VWRAITH_188fake // Hashcode: 0x162AA617 (dec: 371893783)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union WORSHIP_76fake // Hashcode: 0x9C87D41D (dec: -1668819939)
+union SKINNER_76fake // Hashcode: 0x6EBE70FD (dec: 1857974525)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
 		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: worship.o, worship.o
+	} callback; // size=8, offset=0, found in object files: skinner.o, skinner.o
 	struct {
 		struct _G2SVector3_Type base; // size=6, offset=0
 		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: worship.o, worship.o
+	} vector; // size=12, offset=0, found in object files: skinner.o, skinner.o
 	struct {
 		struct _G2Quat_Type src; // size=8, offset=0
 		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: worship.o, worship.o
+	} quat; // size=16, offset=0, found in object files: skinner.o, skinner.o
 };
 
-union WORSHIP_77fake // Hashcode: 0x0FD5B694 (dec: 265664148)
+union SKINNER_77fake // Hashcode: 0xCC387448 (dec: -868715448)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union WORSHIP_188fake // Hashcode: 0x10ACD8AB (dec: 279763115)
+union SKINNER_208fake // Hashcode: 0x49C4E21E (dec: 1237639710)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -9895,29 +9962,29 @@ union WORSHIP_188fake // Hashcode: 0x10ACD8AB (dec: 279763115)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union MBMISS_76fake // Hashcode: 0x684B0470 (dec: 1749746800)
+union SLUAGH_76fake // Hashcode: 0x6107358D (dec: 1627862413)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
 		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: mbmiss.o, mbmiss.o
+	} callback; // size=8, offset=0, found in object files: sluagh.o, sluagh.o
 	struct {
 		struct _G2SVector3_Type base; // size=6, offset=0
 		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: mbmiss.o, mbmiss.o
+	} vector; // size=12, offset=0, found in object files: sluagh.o, sluagh.o
 	struct {
 		struct _G2Quat_Type src; // size=8, offset=0
 		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: mbmiss.o, mbmiss.o
+	} quat; // size=16, offset=0, found in object files: sluagh.o, sluagh.o
 };
 
-union MBMISS_77fake // Hashcode: 0xCC2DCA9C (dec: -869414244)
+union SLUAGH_77fake // Hashcode: 0xCC767117 (dec: -864653033)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union MBMISS_208fake // Hashcode: 0x21B3C728 (dec: 565430056)
+union SLUAGH_188fake // Hashcode: 0x1482A725 (dec: 344106789)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -9925,35 +9992,29 @@ union MBMISS_208fake // Hashcode: 0x21B3C728 (dec: 565430056)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union ANIMG2_72fake // Hashcode: 0xC8333D29 (dec: -936166103)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union PLAN_76fake // Hashcode: 0xA8B6EFA5 (dec: -1464406107)
+union SOUL_76fake // Hashcode: 0xDCA1648B (dec: -593402741)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
 		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: plan.o, plan.o
+	} callback; // size=8, offset=0, found in object files: soul.o, soul.o
 	struct {
 		struct _G2SVector3_Type base; // size=6, offset=0
 		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: plan.o, plan.o
+	} vector; // size=12, offset=0, found in object files: soul.o, soul.o
 	struct {
 		struct _G2Quat_Type src; // size=8, offset=0
 		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: plan.o, plan.o
+	} quat; // size=16, offset=0, found in object files: soul.o, soul.o
 };
 
-union PLAN_77fake // Hashcode: 0xD38C3208 (dec: -745786872)
+union SOUL_77fake // Hashcode: 0xFBE7C1C7 (dec: -68697657)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union PLAN_211fake // Hashcode: 0x1FAF9740 (dec: 531601216)
+union SOUL_188fake // Hashcode: 0xBE4DF780 (dec: -1102186624)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -9961,29 +10022,29 @@ union PLAN_211fake // Hashcode: 0x1FAF9740 (dec: 531601216)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union PLANAPI_112fake // Hashcode: 0xD4496305 (dec: -733388027)
+union MONTABLE_71fake // Hashcode: 0x68B06C49 (dec: 1756392521)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
 		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: planapi.o, planapi.o
+	} callback; // size=8, offset=0, found in object files: montable.o, montable.o
 	struct {
 		struct _G2SVector3_Type base; // size=6, offset=0
 		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: planapi.o, planapi.o
+	} vector; // size=12, offset=0, found in object files: montable.o, montable.o
 	struct {
 		struct _G2Quat_Type src; // size=8, offset=0
 		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: planapi.o, planapi.o
+	} quat; // size=16, offset=0, found in object files: montable.o, montable.o
 };
 
-union PLANAPI_113fake // Hashcode: 0xF6EB893E (dec: -152336066)
+union MONTABLE_72fake // Hashcode: 0x025D1F15 (dec: 39657237)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union PLANAPI_206fake // Hashcode: 0x9BA82680 (dec: -1683478912)
+union MONTABLE_183fake // Hashcode: 0xAC387AA3 (dec: -1405584733)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -9991,29 +10052,29 @@ union PLANAPI_206fake // Hashcode: 0x9BA82680 (dec: -1683478912)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union PLANCOLL_76fake // Hashcode: 0xE13058DD (dec: -516925219)
+union MORLOCK_76fake // Hashcode: 0x71C6C229 (dec: 1908851241)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
 		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: plancoll.o, plancoll.o
+	} callback; // size=8, offset=0, found in object files: morlock.o, morlock.o
 	struct {
 		struct _G2SVector3_Type base; // size=6, offset=0
 		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: plancoll.o, plancoll.o
+	} vector; // size=12, offset=0, found in object files: morlock.o, morlock.o
 	struct {
 		struct _G2Quat_Type src; // size=8, offset=0
 		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: plancoll.o, plancoll.o
+	} quat; // size=16, offset=0, found in object files: morlock.o, morlock.o
 };
 
-union PLANCOLL_77fake // Hashcode: 0x43B37F69 (dec: 1135837033)
+union MORLOCK_77fake // Hashcode: 0xEA4FEF4B (dec: -363860149)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union PLANCOLL_211fake // Hashcode: 0x54CB5BFA (dec: 1422613498)
+union MORLOCK_188fake // Hashcode: 0xE7E3581A (dec: -404531174)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -10021,29 +10082,73 @@ union PLANCOLL_211fake // Hashcode: 0x54CB5BFA (dec: 1422613498)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union PLANDRAW_76fake // Hashcode: 0xD8EC0781 (dec: -655620223)
+union INSTNCG2_23fake // Hashcode: 0xB8E10A8F (dec: -1193211249)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
 		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: plandraw.o, plandraw.o
+	} callback; // size=8, offset=0, found in object files: InstncG2.o, InstncG2.o
 	struct {
 		struct _G2SVector3_Type base; // size=6, offset=0
 		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: plandraw.o, plandraw.o
+	} vector; // size=12, offset=0, found in object files: InstncG2.o, InstncG2.o
 	struct {
 		struct _G2Quat_Type src; // size=8, offset=0
 		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: plandraw.o, plandraw.o
+	} quat; // size=16, offset=0, found in object files: InstncG2.o, InstncG2.o
 };
 
-union PLANDRAW_77fake // Hashcode: 0x52638305 (dec: 1382253317)
+union INSTNCG2_72fake // Hashcode: 0x7A9509BE (dec: 2056587710)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union PLANDRAW_205fake // Hashcode: 0x22FBE687 (dec: 586933895)
+union MAING2_71fake // Hashcode: 0xE7F90A35 (dec: -403109323)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: MainG2.o, MainG2.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: MainG2.o, MainG2.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: MainG2.o, MainG2.o
+};
+
+union MAING2_72fake // Hashcode: 0x0103104A (dec: 16977994)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union MATRIXG2_71fake // Hashcode: 0xF22258C6 (dec: -232630074)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: MatrixG2.o, MatrixG2.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: MatrixG2.o, MatrixG2.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: MatrixG2.o, MatrixG2.o
+};
+
+union MATRIXG2_72fake // Hashcode: 0xD9CB7EF6 (dec: -640975114)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union MATRIXG2_195fake // Hashcode: 0xD0DBC9EB (dec: -790902293)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -10051,7 +10156,29 @@ union PLANDRAW_205fake // Hashcode: 0x22FBE687 (dec: 586933895)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union TIMERG2_71fake // Hashcode: 0x0924C782 (dec: 153405314)
+union QUATG2_71fake // Hashcode: 0xA360506F (dec: -1553969041)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: QuatG2.o, QuatG2.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: QuatG2.o, QuatG2.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: QuatG2.o, QuatG2.o
+};
+
+union QUATG2_72fake // Hashcode: 0xA575B6A7 (dec: -1519012185)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union TIMERG2_71fake // Hashcode: 0x776F5EAA (dec: 2003787434)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -10067,13 +10194,87 @@ union TIMERG2_71fake // Hashcode: 0x0924C782 (dec: 153405314)
 	} quat; // size=16, offset=0, found in object files: TimerG2.o, TimerG2.o
 };
 
-union TIMERG2_72fake // Hashcode: 0xD0D3A43D (dec: -791436227)
+union TIMERG2_72fake // Hashcode: 0xFC120985 (dec: -65926779)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union QUATVM_71fake // Hashcode: 0x14E72EB7 (dec: 350695095)
+union WORSHIP_76fake // Hashcode: 0xF27C5FD9 (dec: -226730023)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: worship.o, worship.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: worship.o, worship.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: worship.o, worship.o
+};
+
+union WORSHIP_77fake // Hashcode: 0x462A0122 (dec: 1177157922)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union WORSHIP_188fake // Hashcode: 0x18E92E88 (dec: 417934984)
+{
+	struct _Instance *target; // size=664, offset=0
+	struct _Position position; // size=6, offset=0
+	struct _Rotation direction; // size=8, offset=0
+	struct _Position throwVector; // size=6, offset=0
+};
+
+union MBMISS_76fake // Hashcode: 0x53946B95 (dec: 1402235797)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: mbmiss.o, mbmiss.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: mbmiss.o, mbmiss.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: mbmiss.o, mbmiss.o
+};
+
+union MBMISS_77fake // Hashcode: 0xCA2D3391 (dec: -903007343)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union MBMISS_208fake // Hashcode: 0xFD5BE4B0 (dec: -44309328)
+{
+	struct _Instance *target; // size=664, offset=0
+	struct _Position position; // size=6, offset=0
+	struct _Rotation direction; // size=8, offset=0
+	struct _Position throwVector; // size=6, offset=0
+};
+
+union ANIMG2_72fake // Hashcode: 0x7B7C592B (dec: 2071746859)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union ANIMG2_195fake // Hashcode: 0xEA8F6845 (dec: -359700411)
+{
+	struct _Instance *target; // size=664, offset=0
+	struct _Position position; // size=6, offset=0
+	struct _Rotation direction; // size=8, offset=0
+	struct _Position throwVector; // size=6, offset=0
+};
+
+union QUATVM_71fake // Hashcode: 0x17262097 (dec: 388374679)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -10089,13 +10290,13 @@ union QUATVM_71fake // Hashcode: 0x14E72EB7 (dec: 350695095)
 	} quat; // size=16, offset=0, found in object files: QuatVM.o, QuatVM.o
 };
 
-union QUATVM_72fake // Hashcode: 0x1D28694F (dec: 489187663)
+union QUATVM_72fake // Hashcode: 0x34C261C9 (dec: 885154249)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union ENMYPLAN_76fake // Hashcode: 0xF14E3C4C (dec: -246530996)
+union ENMYPLAN_76fake // Hashcode: 0xE9A668C7 (dec: -374970169)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -10111,13 +10312,13 @@ union ENMYPLAN_76fake // Hashcode: 0xF14E3C4C (dec: -246530996)
 	} quat; // size=16, offset=0, found in object files: enmyplan.o, enmyplan.o
 };
 
-union ENMYPLAN_77fake // Hashcode: 0x2BAB784E (dec: 732657742)
+union ENMYPLAN_77fake // Hashcode: 0x551D4A3C (dec: 1427982908)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union ENMYPLAN_211fake // Hashcode: 0xF07A0EC5 (dec: -260436283)
+union ENMYPLAN_211fake // Hashcode: 0xE417BCB1 (dec: -468206415)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -10125,29 +10326,29 @@ union ENMYPLAN_211fake // Hashcode: 0xF07A0EC5 (dec: -260436283)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union RAZIEL_71fake // Hashcode: 0x0DB7372E (dec: 230111022)
+union PLAN_76fake // Hashcode: 0xCE9883AB (dec: -828865621)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
 		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: raziel.o, raziel.o
+	} callback; // size=8, offset=0, found in object files: plan.o, plan.o
 	struct {
 		struct _G2SVector3_Type base; // size=6, offset=0
 		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: raziel.o, raziel.o
+	} vector; // size=12, offset=0, found in object files: plan.o, plan.o
 	struct {
 		struct _G2Quat_Type src; // size=8, offset=0
 		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: raziel.o, raziel.o
+	} quat; // size=16, offset=0, found in object files: plan.o, plan.o
 };
 
-union RAZIEL_72fake // Hashcode: 0xABB3835A (dec: -1414298790)
+union PLAN_77fake // Hashcode: 0x0C4334C0 (dec: 205731008)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union RAZIEL_198fake // Hashcode: 0x07BB3AC0 (dec: 129710784)
+union PLAN_211fake // Hashcode: 0x82DB1A5B (dec: -2099570085)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -10155,7 +10356,97 @@ union RAZIEL_198fake // Hashcode: 0x07BB3AC0 (dec: 129710784)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union PLANOPT_112fake // Hashcode: 0xA099040F (dec: -1600584689)
+union PLANAPI_112fake // Hashcode: 0xD2907F83 (dec: -762282109)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: planapi.o, planapi.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: planapi.o, planapi.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: planapi.o, planapi.o
+};
+
+union PLANAPI_113fake // Hashcode: 0x86893426 (dec: -2037828570)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union PLANAPI_206fake // Hashcode: 0xB39046FE (dec: -1282390274)
+{
+	struct _Instance *target; // size=664, offset=0
+	struct _Position position; // size=6, offset=0
+	struct _Rotation direction; // size=8, offset=0
+	struct _Position throwVector; // size=6, offset=0
+};
+
+union PLANCOLL_76fake // Hashcode: 0xAB708E3C (dec: -1418686916)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: plancoll.o, plancoll.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: plancoll.o, plancoll.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: plancoll.o, plancoll.o
+};
+
+union PLANCOLL_77fake // Hashcode: 0x78B21617 (dec: 2024936983)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union PLANCOLL_211fake // Hashcode: 0xD5325C83 (dec: -718119805)
+{
+	struct _Instance *target; // size=664, offset=0
+	struct _Position position; // size=6, offset=0
+	struct _Rotation direction; // size=8, offset=0
+	struct _Position throwVector; // size=6, offset=0
+};
+
+union PLANDRAW_76fake // Hashcode: 0xD7D91343 (dec: -673639613)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: plandraw.o, plandraw.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: plandraw.o, plandraw.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: plandraw.o, plandraw.o
+};
+
+union PLANDRAW_77fake // Hashcode: 0x85A25521 (dec: -2052958943)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union PLANDRAW_205fake // Hashcode: 0x2338D5AB (dec: 590927275)
+{
+	struct _Instance *target; // size=664, offset=0
+	struct _Position position; // size=6, offset=0
+	struct _Rotation direction; // size=8, offset=0
+	struct _Position throwVector; // size=6, offset=0
+};
+
+union PLANOPT_112fake // Hashcode: 0x17562226 (dec: 391520806)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -10171,13 +10462,13 @@ union PLANOPT_112fake // Hashcode: 0xA099040F (dec: -1600584689)
 	} quat; // size=16, offset=0, found in object files: planopt.o, planopt.o
 };
 
-union PLANOPT_113fake // Hashcode: 0x063C74E2 (dec: 104625378)
+union PLANOPT_113fake // Hashcode: 0x9BEF6ACB (dec: -1678808373)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union PLANOPT_206fake // Hashcode: 0xD9E5FD2C (dec: -639238868)
+union PLANOPT_206fake // Hashcode: 0xA4C98B93 (dec: -1530295405)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -10185,7 +10476,7 @@ union PLANOPT_206fake // Hashcode: 0xD9E5FD2C (dec: -639238868)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union PLANPOOL_112fake // Hashcode: 0xD2C9AD99 (dec: -758534759)
+union PLANPOOL_112fake // Hashcode: 0x8C0850F0 (dec: -1945612048)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -10201,13 +10492,13 @@ union PLANPOOL_112fake // Hashcode: 0xD2C9AD99 (dec: -758534759)
 	} quat; // size=16, offset=0, found in object files: planpool.o, planpool.o
 };
 
-union PLANPOOL_113fake // Hashcode: 0xF941FB28 (dec: -113116376)
+union PLANPOOL_113fake // Hashcode: 0x5D8C523A (dec: 1569477178)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union PLANPOOL_206fake // Hashcode: 0x41B5DC13 (dec: 1102437395)
+union PLANPOOL_206fake // Hashcode: 0x72218182 (dec: 1914798466)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -10215,7 +10506,7 @@ union PLANPOOL_206fake // Hashcode: 0x41B5DC13 (dec: 1102437395)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union PLANSRCH_112fake // Hashcode: 0x6ED1F8B4 (dec: 1859254452)
+union PLANSRCH_112fake // Hashcode: 0x085DA94F (dec: 140355919)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -10231,13 +10522,13 @@ union PLANSRCH_112fake // Hashcode: 0x6ED1F8B4 (dec: 1859254452)
 	} quat; // size=16, offset=0, found in object files: plansrch.o, plansrch.o
 };
 
-union PLANSRCH_113fake // Hashcode: 0x754D1B66 (dec: 1967987558)
+union PLANSRCH_113fake // Hashcode: 0xCF677740 (dec: -815302848)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union PLANSRCH_206fake // Hashcode: 0x7C9ED748 (dec: 2090784584)
+union PLANSRCH_206fake // Hashcode: 0x9F895A4A (dec: -1618388406)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -10245,7 +10536,7 @@ union PLANSRCH_206fake // Hashcode: 0x7C9ED748 (dec: 2090784584)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union CONTROL_71fake // Hashcode: 0x52AEF142 (dec: 1387196738)
+union CONTROL_71fake // Hashcode: 0xBAC0CC97 (dec: -1161769833)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -10261,13 +10552,13 @@ union CONTROL_71fake // Hashcode: 0x52AEF142 (dec: 1387196738)
 	} quat; // size=16, offset=0, found in object files: control.o, control.o
 };
 
-union CONTROL_72fake // Hashcode: 0xD7A62127 (dec: -676978393)
+union CONTROL_72fake // Hashcode: 0x8151FBD6 (dec: -2125333546)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union CONTROL_198fake // Hashcode: 0x90DD126E (dec: -1864560018)
+union CONTROL_198fake // Hashcode: 0xD0561BFB (dec: -799663109)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -10275,7 +10566,43 @@ union CONTROL_198fake // Hashcode: 0x90DD126E (dec: -1864560018)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union UNDRWRLD_76fake // Hashcode: 0x242C6890 (dec: 606890128)
+union RAZIEL_71fake // Hashcode: 0xF5DC7DCF (dec: -170099249)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: raziel.o, raziel.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: raziel.o, raziel.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: raziel.o, raziel.o
+};
+
+union RAZIEL_72fake // Hashcode: 0x146DD7CF (dec: 342742991)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union RAZIEL_198fake // Hashcode: 0x028E261B (dec: 42870299)
+{
+	struct _Instance *target; // size=664, offset=0
+	struct _Position position; // size=6, offset=0
+	struct _Rotation direction; // size=8, offset=0
+	struct _Position throwVector; // size=6, offset=0
+};
+
+union RAZIEL_252fake // Hashcode: 0x5E06F769 (dec: 1577514857)
+{
+	struct Intro *intro; // size=76, offset=0
+	struct _SFXMkr *sfxMarker; // size=36, offset=0
+};
+
+union UNDRWRLD_76fake // Hashcode: 0xF6DD58D9 (dec: -153265959)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -10291,13 +10618,13 @@ union UNDRWRLD_76fake // Hashcode: 0x242C6890 (dec: 606890128)
 	} quat; // size=16, offset=0, found in object files: undrwrld.o, undrwrld.o
 };
 
-union UNDRWRLD_77fake // Hashcode: 0xC68F32F4 (dec: -963693836)
+union UNDRWRLD_77fake // Hashcode: 0x946A3881 (dec: -1804978047)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union UNDRWRLD_190fake // Hashcode: 0xDC642D09 (dec: -597414647)
+union UNDRWRLD_190fake // Hashcode: 0x731C1FA8 (dec: 1931222952)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -10305,65 +10632,7 @@ union UNDRWRLD_190fake // Hashcode: 0xDC642D09 (dec: -597414647)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union SAVEINFO_71fake // Hashcode: 0xD00637F3 (dec: -804898829)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: saveinfo.o, saveinfo.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: saveinfo.o, saveinfo.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: saveinfo.o, saveinfo.o
-};
-
-union SAVEINFO_72fake // Hashcode: 0xF72E4DF5 (dec: -147960331)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union SAVEINFO_189fake // Hashcode: 0x7AD24D41 (dec: 2060602689)
-{
-	struct _Instance *target; // size=664, offset=0
-	struct _Position position; // size=6, offset=0
-	struct _Rotation direction; // size=8, offset=0
-	struct _Position throwVector; // size=6, offset=0
-};
-
-union SAVEINFO_216fake // Hashcode: 0xCCEC7C0B (dec: -856916981)
-{
-	struct Intro *intro; // size=76, offset=0
-	struct _SFXMkr *sfxMarker; // size=36, offset=0
-};
-
-union VOICEXA_85fake // Hashcode: 0x7F5675DE (dec: 2136372702)
-{
-	struct {
-		unsigned long (*function)(); // size=0, offset=0
-		void *fnData; // size=0, offset=4
-	} callback; // size=8, offset=0, found in object files: voicexa.o, voicexa.o
-	struct {
-		struct _G2SVector3_Type base; // size=6, offset=0
-		struct _G2SVector3_Type offset; // size=6, offset=6
-	} vector; // size=12, offset=0, found in object files: voicexa.o, voicexa.o
-	struct {
-		struct _G2Quat_Type src; // size=8, offset=0
-		struct _G2Quat_Type dest; // size=8, offset=8
-	} quat; // size=16, offset=0, found in object files: voicexa.o, voicexa.o
-};
-
-union VOICEXA_86fake // Hashcode: 0x8076132D (dec: -2139745491)
-{
-	long color; // size=0, offset=0
-	struct _RGBAColor rgba; // size=4, offset=0
-};
-
-union CINEPSX_71fake // Hashcode: 0x25ED3A6A (dec: 636303978)
+union CINEPSX_71fake // Hashcode: 0x5AF21F11 (dec: 1525817105)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -10379,13 +10648,13 @@ union CINEPSX_71fake // Hashcode: 0x25ED3A6A (dec: 636303978)
 	} quat; // size=16, offset=0, found in object files: cinepsx.o, cinepsx.o
 };
 
-union CINEPSX_72fake // Hashcode: 0xCE3741D3 (dec: -835239469)
+union CINEPSX_72fake // Hashcode: 0x96706202 (dec: -1771019774)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union CINEPSX_183fake // Hashcode: 0xDFEDC6CE (dec: -538065202)
+union CINEPSX_183fake // Hashcode: 0x346C0127 (dec: 879493415)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -10393,7 +10662,7 @@ union CINEPSX_183fake // Hashcode: 0xDFEDC6CE (dec: -538065202)
 	struct _Position throwVector; // size=6, offset=0
 };
 
-union CINEPSX_207fake // Hashcode: 0x8E885B9A (dec: -1903666278)
+union CINEPSX_206fake // Hashcode: 0x5F57E47D (dec: 1599595645)
 {
 	unsigned short pad; // size=0, offset=0
 	unsigned short multitap[16]; // size=32, offset=0
@@ -10402,7 +10671,7 @@ union CINEPSX_207fake // Hashcode: 0x8E885B9A (dec: -1903666278)
 	struct AnalogueData analogue; // size=6, offset=0
 };
 
-union MENU_71fake // Hashcode: 0xAC5B6C8A (dec: -1403294582)
+union MENU_71fake // Hashcode: 0x58F056C0 (dec: 1492145856)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -10418,13 +10687,13 @@ union MENU_71fake // Hashcode: 0xAC5B6C8A (dec: -1403294582)
 	} quat; // size=16, offset=0, found in object files: menu.o, menu.o
 };
 
-union MENU_72fake // Hashcode: 0x09480D5D (dec: 155716957)
+union MENU_72fake // Hashcode: 0x59F6497E (dec: 1509312894)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union MENUUTIL_71fake // Hashcode: 0xED43B2B1 (dec: -314330447)
+union MENUUTIL_71fake // Hashcode: 0x693A731F (dec: 1765438239)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -10440,13 +10709,13 @@ union MENUUTIL_71fake // Hashcode: 0xED43B2B1 (dec: -314330447)
 	} quat; // size=16, offset=0, found in object files: menuutil.o, menuutil.o
 };
 
-union MENUUTIL_72fake // Hashcode: 0x7FEC4CA1 (dec: 2146192545)
+union MENUUTIL_72fake // Hashcode: 0x30B19C0F (dec: 816946191)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union MENUDEFS_71fake // Hashcode: 0xFC92848F (dec: -57506673)
+union MENUDEFS_71fake // Hashcode: 0xDAEFD513 (dec: -621816557)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -10462,13 +10731,71 @@ union MENUDEFS_71fake // Hashcode: 0xFC92848F (dec: -57506673)
 	} quat; // size=16, offset=0, found in object files: menudefs.o, menudefs.o
 };
 
-union MENUDEFS_72fake // Hashcode: 0x19577F96 (dec: 425164694)
+union MENUDEFS_72fake // Hashcode: 0x5108CB0D (dec: 1359530765)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union MENUFACE_71fake // Hashcode: 0x7504B00A (dec: 1963241482)
+union SAVEINFO_76fake // Hashcode: 0x23A2E82A (dec: 597878826)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: saveinfo.o, saveinfo.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: saveinfo.o, saveinfo.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: saveinfo.o, saveinfo.o
+};
+
+union SAVEINFO_77fake // Hashcode: 0x09F94700 (dec: 167331584)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union SAVEINFO_191fake // Hashcode: 0x175CF64C (dec: 391968332)
+{
+	struct _Instance *target; // size=664, offset=0
+	struct _Position position; // size=6, offset=0
+	struct _Rotation direction; // size=8, offset=0
+	struct _Position throwVector; // size=6, offset=0
+};
+
+union SAVEINFO_218fake // Hashcode: 0xC5BA13DF (dec: -977660961)
+{
+	struct Intro *intro; // size=76, offset=0
+	struct _SFXMkr *sfxMarker; // size=36, offset=0
+};
+
+union VOICEXA_85fake // Hashcode: 0x54044FF2 (dec: 1409568754)
+{
+	struct {
+		unsigned long (*function)(); // size=0, offset=0
+		void *fnData; // size=0, offset=4
+	} callback; // size=8, offset=0, found in object files: voicexa.o, voicexa.o
+	struct {
+		struct _G2SVector3_Type base; // size=6, offset=0
+		struct _G2SVector3_Type offset; // size=6, offset=6
+	} vector; // size=12, offset=0, found in object files: voicexa.o, voicexa.o
+	struct {
+		struct _G2Quat_Type src; // size=8, offset=0
+		struct _G2Quat_Type dest; // size=8, offset=8
+	} quat; // size=16, offset=0, found in object files: voicexa.o, voicexa.o
+};
+
+union VOICEXA_86fake // Hashcode: 0x49A14AA8 (dec: 1235307176)
+{
+	long color; // size=0, offset=0
+	struct _RGBAColor rgba; // size=4, offset=0
+};
+
+union MENUFACE_71fake // Hashcode: 0x57020DEF (dec: 1459752431)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -10484,13 +10811,13 @@ union MENUFACE_71fake // Hashcode: 0x7504B00A (dec: 1963241482)
 	} quat; // size=16, offset=0, found in object files: menuface.o, menuface.o
 };
 
-union MENUFACE_72fake // Hashcode: 0x17657042 (dec: 392523842)
+union MENUFACE_72fake // Hashcode: 0xE5B1B023 (dec: -441339869)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union MEMCARD_72fake // Hashcode: 0x7247A912 (dec: 1917298962)
+union MEMCARD_79fake // Hashcode: 0x8C9E31C4 (dec: -1935789628)
 {
 	struct {
 		unsigned long (*function)(); // size=0, offset=0
@@ -10506,13 +10833,13 @@ union MEMCARD_72fake // Hashcode: 0x7247A912 (dec: 1917298962)
 	} quat; // size=16, offset=0, found in object files: memcard.o, memcard.o
 };
 
-union MEMCARD_73fake // Hashcode: 0x816CBE1F (dec: -2123579873)
+union MEMCARD_80fake // Hashcode: 0xD46E70DB (dec: -730959653)
 {
 	long color; // size=0, offset=0
 	struct _RGBAColor rgba; // size=4, offset=0
 };
 
-union MEMCARD_184fake // Hashcode: 0x1063ABE6 (dec: 274967526)
+union MEMCARD_191fake // Hashcode: 0x28D76F3F (dec: 685207359)
 {
 	struct _Instance *target; // size=664, offset=0
 	struct _Position position; // size=6, offset=0
@@ -10701,8 +11028,6 @@ typedef struct _BSPNode SBSPNode;
 
 typedef struct _BSPLeaf BSPLeaf;
 
-typedef struct _SBSPLeaf SBSPLeaf;
-
 typedef struct _MorphVertex MorphVertex;
 
 typedef struct _MorphColor MorphColor;
@@ -10789,7 +11114,7 @@ typedef struct AadLoadedSfxToneAttr AadLoadedSfxToneAttr;
 
 typedef struct AadLoadedSfxWaveAttr AadLoadedSfxWaveAttr;
 
-typedef struct AadMasterVolFader AadMasterVolFader;
+typedef struct AadSramDefragInfo AadSramDefragInfo;
 
 typedef struct AadVolFader AadVolFader;
 
@@ -10979,13 +11304,11 @@ typedef void (*SpuTransferCallbackProc)();
 
 typedef void (*SpuStCallbackProc)();
 
-typedef unsigned short MidiParam;
+typedef int AADRESULT;
 
-typedef unsigned short AADRESULT;
+typedef int AadFileHandle;
 
 typedef unsigned long AadChannelList;
-
-typedef unsigned short AadFileHandle;
 
 typedef void (*AadFadeCompleteCallbackProc)();
 
@@ -11039,6 +11362,8 @@ typedef void (*StateHandler)();
 
 typedef struct POLY_F4 POLY_F4;
 
+typedef struct _SmallRotation SmallRotation;
+
 typedef struct Camera Camera;
 
 typedef struct DebugMenuLine DebugMenuLine;
@@ -11083,17 +11408,19 @@ typedef struct _GenericBlastringParams GenericBlastringParams;
 
 typedef struct _GenericFlashParams GenericFlashParams;
 
+typedef struct _StreamUnit StreamUnit;
+
 typedef struct XAFileInfo XAFileInfo;
 
 typedef struct CdCommand CdCommand;
 
 typedef struct VoiceCommand VoiceCommand;
 
-typedef struct _StreamUnit StreamUnit;
-
 typedef struct _LoadQueueEntry LoadQueueEntry;
 
 typedef struct _BlockVramEntry BlockVramEntry;
+
+typedef struct SavedBasic SavedBasic;
 
 typedef struct _SavedIntro SavedIntro;
 
@@ -11237,17 +11564,23 @@ typedef struct PhysObWeaponAttributes PhysObWeaponAttributes;
 
 typedef struct __PhysObProjectileData PhysObProjData;
 
+typedef struct SwitchData SwitchData;
+
 typedef struct LightTableEntry LightTableEntry;
 
 typedef struct _PhysObLight PhysObLight;
 
 typedef struct SavedIntroSmall SavedIntroSmall;
 
+typedef struct SavedIntroSpline SavedIntroSpline;
+
+typedef struct _SavedIntroWithIntro SavedIntroWithIntro;
+
+typedef struct _PCollideInfo PCollideInfo;
+
 typedef struct CameraCollisionInfo CameraCollisionInfo;
 
 typedef struct _LCollideInfo LCollideInfo;
-
-typedef struct _PCollideInfo PCollideInfo;
 
 typedef long LightFunc();
 
@@ -11267,7 +11600,7 @@ typedef struct MainTracker MainTracker;
 
 typedef struct POLY_F4_SEMITRANS POLY_F4_SEMITRANS;
 
-typedef struct FullScreenItem FullScreenItem;
+typedef struct InterfaceItem InterfaceItem;
 
 typedef struct _FXTracker FXTracker;
 
@@ -11297,6 +11630,22 @@ typedef struct SCollideInfo SCollideInfo;
 
 typedef long CollideBoundFunc();
 
+typedef struct POLY_FT3 POLY_FT3;
+
+typedef struct _Mirror Mirror;
+
+typedef struct _FXHalvePlane FXHalvePlane;
+
+typedef struct _FXGlowEffect FXGlowEffect;
+
+typedef struct TransformAnimatedInstanceVerticesWork_t TransformAnimatedInstanceVerticesWork_t;
+
+typedef struct GenericTune GenericTune;
+
+typedef struct FXSplinter FXSplinter;
+
+typedef struct _SBSPLeaf SBSPLeaf;
+
 typedef void asm_fn();
 
 typedef long hook_fn_1();
@@ -11319,25 +11668,25 @@ typedef struct _ObjectOwnerInfo ObjectOwnerInfo;
 
 typedef struct ObjectAccess ObjectAccess;
 
-typedef struct POLY_FT3 POLY_FT3;
+typedef struct ObjectFunc ObjectFunc;
 
-typedef struct _Mirror Mirror;
+typedef struct evAnimationInstanceSwitchData evAnimationInstanceSwitchData;
 
-typedef struct _FXHalvePlane FXHalvePlane;
+typedef struct evControlSaveDataData evControlSaveDataData;
 
-typedef struct _FXGlowEffect FXGlowEffect;
+typedef struct AadInitAttr AadInitAttr;
 
-typedef struct TransformAnimatedInstanceVerticesWork_t TransformAnimatedInstanceVerticesWork_t;
+typedef struct ObjectPeriodicSound ObjectPeriodicSound;
 
-typedef struct GenericTune GenericTune;
+typedef struct ObjectEventSound ObjectEventSound;
 
-typedef struct FXSplinter FXSplinter;
+typedef struct ObjectOneShotSound ObjectOneShotSound;
+
+typedef struct SoundEffectChannel SoundEffectChannel;
 
 typedef struct DR_TPAGE DR_TPAGE;
 
 typedef struct _POLY_SG4 POLY_SG4;
-
-typedef struct __GenericBubbleParams GenericBubbleParams;
 
 typedef struct _FXGeneralEffect FXGeneralEffect;
 
@@ -11371,33 +11720,17 @@ typedef struct _POLY_2G4 POLY_2G4;
 
 typedef struct _POLY_2G4T POLY_2G4T;
 
-typedef struct ObjectFunc ObjectFunc;
-
-typedef struct evAnimationInstanceSwitchData evAnimationInstanceSwitchData;
-
-typedef struct evControlSaveDataData evControlSaveDataData;
-
-typedef struct AadInitAttr AadInitAttr;
-
-typedef struct ObjectPeriodicSound ObjectPeriodicSound;
-
-typedef struct ObjectEventSound ObjectEventSound;
-
-typedef struct ObjectOneShotSound ObjectOneShotSound;
-
-typedef struct SoundEffectChannel SoundEffectChannel;
-
 typedef struct AadVolume AadVolume;
+
+typedef struct NewMemTracker NewMemTracker;
 
 typedef struct AadSequenceHdr AadSequenceHdr;
 
-typedef struct AadTempo AadTempo;
-
 typedef struct AadMemoryStruct AadMemoryStruct;
 
-typedef struct AadSlotAttributes AadSlotAttributes;
+typedef struct AadTempo AadTempo;
 
-typedef struct NewMemTracker NewMemTracker;
+typedef struct AadSlotAttributes AadSlotAttributes;
 
 typedef struct SpuVoiceAttr SpuVoiceAttr;
 
@@ -11418,6 +11751,8 @@ typedef struct PlanningNode PlanningNode;
 typedef struct VramBuffer VramBuffer;
 
 typedef struct evObjectData evObjectData;
+
+typedef struct evPhysicsGravityData evPhysicsGravityData;
 
 typedef struct evPhysicsSlideData evPhysicsSlideData;
 
@@ -11441,11 +11776,15 @@ typedef struct PhysObAnimatedProperties PhysObAnimatedProperties;
 
 typedef struct PhysObData PhysObData;
 
-typedef struct SwitchData SwitchData;
-
 typedef struct BreakOffData BreakOffData;
 
 typedef struct ProjectileData ProjectileData;
+
+typedef struct _PhysObSaveData PhysObSaveData;
+
+typedef struct LitShaftProperties LitShaftProperties;
+
+typedef struct SavedEventSmallVars SavedEventSmallVars;
 
 typedef struct WaterLevelProcess WaterLevelProcess;
 
@@ -11459,11 +11798,9 @@ typedef struct _PCodeStack PCodeStack;
 
 typedef struct EventTimer EventTimer;
 
+typedef struct SignalResetStruct SignalResetStruct;
+
 typedef struct HintSystemStruct HintSystemStruct;
-
-typedef struct LitShaftProperties LitShaftProperties;
-
-typedef struct evPhysicsGravityData evPhysicsGravityData;
 
 typedef struct evPhysicsDropOffData evPhysicsDropOffData;
 
@@ -11476,6 +11813,58 @@ typedef struct evPhysicsSwimData evPhysicsSwimData;
 typedef struct evPhysicsDropHeightData evPhysicsDropHeightData;
 
 typedef struct evPhysicsLinkedMoveData evPhysicsLinkedMoveData;
+
+typedef struct _MonsterAnim MonsterAnim;
+
+typedef struct _MonsterIdle MonsterIdle;
+
+typedef struct _MonsterBehavior MonsterBehavior;
+
+typedef struct _MonsterSenses MonsterSenses;
+
+typedef struct _MonsterAllegiances MonsterAllegiances;
+
+typedef struct _MonsterAttackAttributes MonsterAttackAttributes;
+
+typedef struct _MonsterMissile MonsterMissile;
+
+typedef struct _MonsterCombatAttributes MonsterCombatAttributes;
+
+typedef struct _MonsterSubAttributes MonsterSubAttributes;
+
+typedef struct _MonsterAttributes MonsterAttributes;
+
+typedef struct _MonsterVars MonsterVars;
+
+typedef struct _MonsterIR MonsterIR;
+
+typedef struct burntTuneType burntTuneType;
+
+typedef struct _MonsterState MonsterState;
+
+typedef struct _MonsterStateChoice MonsterStateChoice;
+
+typedef struct _MonsterFunctionTable MonsterFunctionTable;
+
+typedef struct _HunterVars HunterVars;
+
+typedef struct _HunterAttributes HunterAttributes;
+
+typedef void (*processVert_t)();
+
+typedef void (*MonsterFunc)();
+
+typedef void (*MonsterDamageFunc)();
+
+typedef struct MissileGraphics MissileGraphics;
+
+typedef struct evMonsterHitTerrainData evMonsterHitTerrainData;
+
+typedef struct evMonsterHitObjectData evMonsterHitObjectData;
+
+typedef struct evShadowSegmentData evShadowSegmentData;
+
+typedef struct _MonsterSaveInfo MonsterSaveInfo;
 
 typedef struct __CharacterState CharacterState;
 
@@ -11507,59 +11896,7 @@ typedef struct evActionLookAroundData evActionLookAroundData;
 
 typedef struct evActionPlayHostAnimationData evActionPlayHostAnimationData;
 
-typedef struct evShadowSegmentData evShadowSegmentData;
-
-typedef struct _MonsterAnim MonsterAnim;
-
-typedef struct _MonsterIdle MonsterIdle;
-
-typedef struct _MonsterBehavior MonsterBehavior;
-
-typedef struct _MonsterSenses MonsterSenses;
-
-typedef struct _MonsterAllegiances MonsterAllegiances;
-
-typedef struct _MonsterAttackAttributes MonsterAttackAttributes;
-
-typedef struct _MonsterMissile MonsterMissile;
-
-typedef struct _MonsterCombatAttributes MonsterCombatAttributes;
-
-typedef struct _MonsterSubAttributes MonsterSubAttributes;
-
-typedef struct _MonsterVars MonsterVars;
-
-typedef struct _MonsterIR MonsterIR;
-
-typedef struct burntTuneType burntTuneType;
-
-typedef struct _MonsterState MonsterState;
-
-typedef struct _MonsterStateChoice MonsterStateChoice;
-
-typedef void (*processVert_t)();
-
-typedef void (*MonsterFunc)();
-
-typedef void (*MonsterDamageFunc)();
-
 typedef struct __GlyphData GlyphData;
-
-typedef struct __GlyphHudSaveData GlyphHudSaveData;
-
-typedef struct _MonsterAttributes MonsterAttributes;
-
-typedef struct _MonsterFunctionTable MonsterFunctionTable;
-
-typedef struct _HunterVars HunterVars;
-
-typedef struct MissileGraphics MissileGraphics;
-
-typedef struct evMonsterHitTerrainData evMonsterHitTerrainData;
-
-typedef struct evMonsterHitObjectData evMonsterHitObjectData;
-
-typedef struct _MonsterSaveInfo MonsterSaveInfo;
 
 typedef struct evPhysicsLOSData evPhysicsLOSData;
 
@@ -11572,6 +11909,8 @@ typedef struct bloodyMessType bloodyMessType;
 typedef struct _G2PoolMemPool_Type G2PoolMemPool;
 
 typedef void G2PoolMem;
+
+typedef struct _G2AppDataVM_Type G2AppDataVM;
 
 typedef struct _walbossAttributes WalbossAttributes;
 
@@ -11591,21 +11930,17 @@ typedef struct _G2AnimInterpStateBlockPool_Type G2AnimInterpStateBlockPool;
 
 typedef void (*G2AnimApplyControllerFn)();
 
+typedef struct EnemyPlanData EnemyPlanData;
+
+typedef struct EnemyPlanSlotData EnemyPlanSlotData;
+
 typedef struct _PlanCollideInfo PlanCollideInfo;
 
 typedef struct PoolManagementData PoolManagementData;
 
-typedef struct EnemyPlanData EnemyPlanData;
-
 typedef struct _fth FindTerrainHit;
 
-typedef struct _G2AppDataVM_Type G2AppDataVM;
-
-typedef struct EnemyPlanSlotData EnemyPlanSlotData;
-
 typedef struct __Force Force;
-
-typedef struct __AlarmData AlarmData;
 
 typedef struct __Idle Idle;
 
@@ -11625,6 +11960,12 @@ typedef struct __SensoryData SensoryData;
 
 typedef struct __Player Player;
 
+typedef struct __CannedSound CannedSound;
+
+typedef struct __AlarmData AlarmData;
+
+typedef struct _SoundRamp SoundRamp;
+
 typedef struct PlayerSaveData PlayerSaveData;
 
 typedef struct RazielData RazielData;
@@ -11635,28 +11976,6 @@ typedef struct DR_STP DR_STP;
 
 typedef struct UW_ScreenXY UW_ScreenXY;
 
-typedef struct SavedInfoTracker SavedInfoTracker;
-
-typedef struct SavedBasic SavedBasic;
-
-typedef struct SavedLevel SavedLevel;
-
-typedef struct SavedDeadDeadBits SavedDeadDeadBits;
-
-typedef struct ActualSavedLevel ActualSavedLevel;
-
-typedef struct _GlobalSaveTracker GlobalSaveTracker;
-
-typedef struct CdlFILTER CdlFILTER;
-
-typedef struct SpuCommonAttr SpuCommonAttr;
-
-typedef struct XAVoiceListEntry XAVoiceListEntry;
-
-typedef struct XAVoiceTracker XAVoiceTracker;
-
-typedef void (*VoiceCmdProc)();
-
 typedef struct cinema_fn_table_t cinema_fn_table_t;
 
 typedef int PlayCinematic_t();
@@ -11664,6 +11983,8 @@ typedef int PlayCinematic_t();
 typedef enum language_t language_t;
 
 typedef enum localstr_t localstr_t;
+
+typedef struct XAVoiceListEntry XAVoiceListEntry;
 
 typedef struct LocalizationHeader LocalizationHeader;
 
@@ -11689,15 +12010,59 @@ typedef struct menu_sound_entry_t menu_sound_entry_t;
 
 typedef enum sfx_t sfx_t;
 
+typedef struct SavedInfoTracker SavedInfoTracker;
+
+typedef struct SavedLevel SavedLevel;
+
+typedef struct ActualSavedLevel ActualSavedLevel;
+
+typedef struct SavedDeadDeadBits SavedDeadDeadBits;
+
+typedef struct _GlobalSaveTracker GlobalSaveTracker;
+
+typedef struct CdlFILTER CdlFILTER;
+
+typedef struct SpuCommonAttr SpuCommonAttr;
+
+typedef struct XAVoiceTracker XAVoiceTracker;
+
+typedef void (*VoiceCmdProc)();
+
 typedef struct menuface_t menuface_t;
+
+typedef struct mcpsx_t mcpsx_t;
+
+typedef struct mcpsx_directory_t mcpsx_directory_t;
+
+typedef enum mcpsx_err_t mcpsx_err_t;
+
+typedef enum mcpsx_func_t mcpsx_func_t;
+
+typedef enum mcpsx_sync_t mcpsx_sync_t;
+
+typedef enum mcpsx_mode_t mcpsx_mode_t;
+
+typedef struct mcard_t mcard_t;
+
+typedef enum state_t fsmcard_t;
+
+typedef enum mcard_status_t mcard_status_t;
+
+typedef enum fsm_t fsm_t;
+
+typedef struct mcmenu_t mcmenu_t;
 
 typedef struct mcmenu_table_t mcmenu_table_t;
 
 typedef struct memcard_t memcard_t;
 
+typedef int mcard_filename_fn_t();
+
 /* Begin typedefs which were autogenerated by TDR */
 
 typedef int (*TDRFuncPtr_memcard_item1fn)();
+
+typedef int (*TDRFuncPtr_menu_item_flags1fn)();
 
 typedef int (*TDRFuncPtr_menu_item1fn)();
 
@@ -11737,8 +12102,6 @@ typedef void (*TDRFuncPtr_aadInstallEndSequenceCallback)();
 
 typedef void (*TDRFuncPtr_aadInstallEndSequenceCallback0callbackProc)();
 
-typedef void (*TDRFuncPtr_aadLoadDynamicSfx2userReturnProc)();
-
 typedef void (*TDRFuncPtr_aadLoadDynamicSoundBank4retProc)();
 
 typedef void (*TDRFuncPtr_aadStartMasterVolumeFade2fadeCompleteCallback)();
@@ -11765,7 +12128,11 @@ typedef void (*TDRFuncPtr_MONTABLE_GetInitFunc)();
 
 typedef void (*TDRFuncPtr_StateSwitchStateCharacterData1NewProcess)();
 
+typedef void (*TDRFuncPtr_StateSwitchStateCharacterDataDefault1NewProcess)();
+
 typedef void (*TDRFuncPtr_StateSwitchStateData2NewProcess)();
+
+typedef void (*TDRFuncPtr_StateSwitchStateDataDefault2NewProcess)();
 
 /* End typedefs which were autogenerated by TDR */
 
@@ -11773,1354 +12140,1420 @@ typedef void (*TDRFuncPtr_StateSwitchStateData2NewProcess)();
 
 /* Begin external declarations */
 
-extern struct DebugMenuLine mainMenu[8]; // offset 0x800C3320
+extern struct DebugMenuLine mainMenu[8]; // offset 0x800C73FC
 
 
-extern struct DebugMenuLine standardMenu[15]; // offset 0x800C2468
+extern struct DebugMenuLine standardMenu[12]; // offset 0x800C670C
 
 
-extern struct DebugMenuLine pauseMenu[7]; // offset 0x800C4C40
+extern struct DebugMenuLine pauseMenu[7]; // offset 0x800C8B6C
 
 
-extern struct DebugMenuLine goodiesMenu[17]; // offset 0x800C27E0
+extern struct DebugMenuLine goodiesMenu[17]; // offset 0x800C6A3C
 
 
-extern struct DebugMenuLine debugSoundMenu[14]; // offset 0x800C2978
+extern struct DebugMenuLine debugImbueSoulReaverMenu[7]; // offset 0x800C6FAC
 
 
-extern struct DebugMenuLine debugImbueSoulReaverMenu[7]; // offset 0x800C2ED0
+extern struct DebugMenuLine debugGlyphAbilitiesMenu[11]; // offset 0x800C6EA4
 
 
-extern struct DebugMenuLine debugGlyphAbilitiesMenu[11]; // offset 0x800C2DC8
+extern struct DebugMenuLine debugForgedAbilitiesMenu[7]; // offset 0x800C6DFC
 
 
-extern struct DebugMenuLine debugForgedAbilitiesMenu[7]; // offset 0x800C2D20
+extern struct DebugMenuLine debugSpecialAbilitiesMenu[10]; // offset 0x800C6D0C
 
 
-extern struct DebugMenuLine debugSpecialAbilitiesMenu[10]; // offset 0x800C2C30
+extern struct DebugMenuLine debugHealthSystemMenu[5]; // offset 0x800C6C94
 
 
-extern struct DebugMenuLine debugHealthSystemMenu[7]; // offset 0x800C2B88
+extern struct DebugMenuLine debugRazielMenu[8]; // offset 0x800C6BD4
 
 
-extern struct DebugMenuLine debugRazielMenu[8]; // offset 0x800C2AC8
+extern struct DebugMenuLine level2SelectMenu[14]; // offset 0x800C86BC
 
 
-extern struct DebugMenuLine level2SelectMenu[13]; // offset 0x800C45C8
+extern struct DebugMenuLine levelSelectMenu[15]; // offset 0x800C880C
 
 
-extern struct DebugMenuLine levelSelectMenu[15]; // offset 0x800C4700
+extern struct DebugMenuLine eventMenu[10]; // offset 0x800C688C
 
 
-extern struct DebugMenuLine musicSelectMenu[20]; // offset 0x800C4868
+extern struct DebugMenuLine BossAreasMenu[9]; // offset 0x800C8434
 
 
-extern struct DebugMenuLine eventMenu[10]; // offset 0x800C2630
+extern struct DebugMenuLine saveMenu[4]; // offset 0x800C682C
 
 
-extern struct DebugMenuLine BossAreasMenu[9]; // offset 0x800C4400
+extern struct DebugMenuLine mcardMenu[8]; // offset 0x800C8974
 
 
-extern struct DebugMenuLine saveMenu[4]; // offset 0x800C25D0
+extern struct DebugMenuLine fogMenu[8]; // offset 0x800C697C
 
 
-extern struct DebugMenuLine mcardMenu[8]; // offset 0x800C4A48
+extern struct DebugMenuLine AIMenu[6]; // offset 0x800C751C
 
 
-extern struct DebugMenuLine AIMenu[6]; // offset 0x800C34B8
+extern struct DebugMenuLine cameraMenu[4]; // offset 0x800C74BC
 
 
-extern struct DebugMenuLine cameraMenu[9]; // offset 0x800C33E0
+extern struct DebugMenuLine cheatsMenu[8]; // offset 0x800C7054
 
 
-extern struct DebugMenuLine fogMenu[8]; // offset 0x800C2720
+extern struct DebugMenuLine optsMenu[15]; // offset 0x800C7114
 
 
-extern struct DebugMenuLine cheatsMenu[8]; // offset 0x800C2F78
+extern struct DebugMenuLine gpadConfigMenu[4]; // offset 0x800C727C
 
 
-extern struct DebugMenuLine optsMenu[15]; // offset 0x800C3038
+extern struct DebugMenuLine keybConfigMenu[4]; // offset 0x800C72DC
 
 
-extern struct DebugMenuLine gpadConfigMenu[4]; // offset 0x800C31A0
+extern struct DebugMenuLine demoMenu[8]; // offset 0x800C733C
 
 
-extern struct DebugMenuLine keybConfigMenu[4]; // offset 0x800C3200
+extern struct DebugMenuLine AlukaMenu[10]; // offset 0x800C75AC
 
 
-extern struct DebugMenuLine demoMenu[8]; // offset 0x800C3260
+extern struct DebugMenuLine AshVillageMenu[7]; // offset 0x800C769C
 
 
-extern struct DebugMenuLine AlukaMenu[10]; // offset 0x800C3548
+extern struct DebugMenuLine OracleMenu[10]; // offset 0x800C7744
 
 
-extern struct DebugMenuLine AshVillageMenu[7]; // offset 0x800C3638
+extern struct DebugMenuLine PillarsMenu[6]; // offset 0x800C7834
 
 
-extern struct DebugMenuLine OracleMenu[10]; // offset 0x800C36E0
+extern struct DebugMenuLine SilencedCathedralMenu[11]; // offset 0x800C78C4
 
 
-extern struct DebugMenuLine PillarsMenu[6]; // offset 0x800C37D0
+extern struct DebugMenuLine SkinnerMenu[7]; // offset 0x800C79CC
 
 
-extern struct DebugMenuLine SilencedCathedralMenu[11]; // offset 0x800C3860
+extern struct DebugMenuLine StoneMenu[5]; // offset 0x800C7A74
 
 
-extern struct DebugMenuLine SkinnerMenu[7]; // offset 0x800C3968
+extern struct DebugMenuLine SunLightMenu[7]; // offset 0x800C7AEC
 
 
-extern struct DebugMenuLine StoneMenu[5]; // offset 0x800C3A10
+extern struct DebugMenuLine TombMenu[6]; // offset 0x800C7B94
 
 
-extern struct DebugMenuLine SunLightMenu[7]; // offset 0x800C3A88
+extern struct DebugMenuLine WaterMenu[4]; // offset 0x800C7C24
 
 
-extern struct DebugMenuLine TombMenu[6]; // offset 0x800C3B30
+extern struct DebugMenuLine PushMenu[10]; // offset 0x800C7C84
 
 
-extern struct DebugMenuLine WaterMenu[4]; // offset 0x800C3BC0
+extern struct DebugMenuLine CityMenu[5]; // offset 0x800C7D74
 
 
-extern struct DebugMenuLine PushMenu[11]; // offset 0x800C3C20
+extern struct DebugMenuLine CliffMenu[3]; // offset 0x800C7DEC
 
 
-extern struct DebugMenuLine CityMenu[6]; // offset 0x800C3D28
+extern struct DebugMenuLine UnderMenu[3]; // offset 0x800C7E34
 
 
-extern struct DebugMenuLine CliffMenu[3]; // offset 0x800C3DB8
+extern struct DebugMenuLine MorlockMenu[3]; // offset 0x800C7E7C
 
 
-extern struct DebugMenuLine UnderMenu[3]; // offset 0x800C3E00
+extern struct DebugMenuLine HubAMenu[5]; // offset 0x800C7EC4
 
 
-extern struct DebugMenuLine MorlockMenu[3]; // offset 0x800C3E48
+extern struct DebugMenuLine HubBMenu[3]; // offset 0x800C7F3C
 
 
-extern struct DebugMenuLine HubAMenu[5]; // offset 0x800C3E90
+extern struct DebugMenuLine TrainingMenu[5]; // offset 0x800C7F84
 
 
-extern struct DebugMenuLine HubBMenu[3]; // offset 0x800C3F08
+extern struct DebugMenuLine TestMenu2[16]; // offset 0x800C7FFC
 
 
-extern struct DebugMenuLine TrainingMenu[5]; // offset 0x800C3F50
+extern struct DebugMenuLine TestMenu[18]; // offset 0x800C817C
 
 
-extern struct DebugMenuLine TestMenu2[16]; // offset 0x800C3FC8
+extern struct DebugMenuLine DarkEdenMenu[3]; // offset 0x800C832C
 
 
-extern struct DebugMenuLine TestMenu[18]; // offset 0x800C4148
+extern struct DebugMenuLine AnteRoomsMenu[8]; // offset 0x800C8374
 
 
-extern struct DebugMenuLine DarkEdenMenu[3]; // offset 0x800C42F8
+extern struct DebugMenuLine DemoAreaMenu[10]; // offset 0x800C850C
 
 
-extern struct DebugMenuLine AnteRoomsMenu[8]; // offset 0x800C4340
+extern struct DebugMenuLine MovieAreaMenu[8]; // offset 0x800C85FC
 
 
-extern struct DebugMenuLine DemoAreaMenu[10]; // offset 0x800C44D8
+extern struct DebugMenuLine mcardSaveMenu[8]; // offset 0x800C8A34
 
 
-extern struct DebugMenuLine mcardSaveMenu[8]; // offset 0x800C4B08
+extern struct DebugMenuLine pauseSaveMenu[5]; // offset 0x800C8AF4
 
 
-extern struct DebugMenuLine pauseSaveMenu[5]; // offset 0x800C4BC8
+static struct debug_dispatch_t debug_dispatch_table[5]; // offset 0x800C8C14
 
 
-static struct debug_dispatch_t debug_dispatch_table[5]; // offset 0x800C4CE8
+extern struct DebugMenuLine *currentMenu; // offset 0x800CEE98
 
 
-extern struct DebugMenuLine *currentMenu; // offset 0x800CD930
+static char pauseFormatString[20]; // offset 0x800CE2C0
 
 
-static char pauseFormatString[20]; // offset 0x800CCB58
+static char mainFormatString[20]; // offset 0x800CE2D4
 
 
-static char mainFormatString[20]; // offset 0x800CCB6C
+static char *the_format_string; // offset 0x800CE2E8
 
 
-static char *the_format_string; // offset 0x800CCB80
+extern long menuPauseSel; // offset 0x800CE2EC
 
 
-extern long menuPauseSel; // offset 0x800CCB84
+extern long debug_cameraMode; // offset 0x800CE2F0
 
 
-extern long debug_cameraMode; // offset 0x800CCB88
+extern long debugVoiceIndex; // offset 0x800CE2F4
 
 
-extern long debugVoiceIndex; // offset 0x800CCB8C
+extern unsigned long debugTimeMult; // offset 0x800CE2F8
 
 
-extern unsigned long debugTimeMult; // offset 0x800CCB90
+extern long debugFogFar; // offset 0x800CE2FC
 
 
-extern long debugFogFar; // offset 0x800CCB94
+extern long debugFogNear; // offset 0x800CE300
 
 
-extern long debugFogNear; // offset 0x800CCB98
+extern long debugGameTime; // offset 0x800CE304
 
 
-extern long debugGameTime; // offset 0x800CCB9C
+extern long debugFogRed; // offset 0x800CE308
 
 
-extern long debugFogRed; // offset 0x800CCBA0
+extern long debugFogGrn; // offset 0x800CE30C
 
 
-extern long debugFogGrn; // offset 0x800CCBA4
+extern long debugFogBlu; // offset 0x800CE310
 
 
-extern long debugFogBlu; // offset 0x800CCBA8
+extern long debugHealthLevel; // offset 0x800CE314
 
 
-extern long debugHealthLevel; // offset 0x800CCBAC
+static long debugMenuChoice; // offset 0x800CEE9C
 
 
-static long debugMenuChoice; // offset 0x800CD934
+static long cheatCodeStage; // offset 0x800CEEA0
 
 
-static long cheatCodeStage; // offset 0x800CD938
+static long cheatCodeLastCommand; // offset 0x800CEEA4
 
 
-static long cheatCodeLastCommand; // offset 0x800CD93C
+static long cheatCombo[4]; // offset 0x800CEEA8
 
 
-static long cheatCombo[6]; // offset 0x800CD940
+extern struct DebugMenuLine *the_previous_menu; // offset 0x800CEEB8
 
 
-extern struct DebugMenuLine *the_previous_menu; // offset 0x800CD958
+static int cem_x_base; // offset 0x800CEEBC
 
 
-static int cem_x_base; // offset 0x800CD95C
+static int cem_y_base; // offset 0x800CEEC0
 
 
-static int cem_y_base; // offset 0x800CD960
+static int cem_cursor_width; // offset 0x800CEEC4
 
 
-static int cem_cursor_width; // offset 0x800CD964
+static int cem_line_width; // offset 0x800CEEC8
 
 
-static int cem_line_width; // offset 0x800CD968
+static int cem_line_leading; // offset 0x800CEECC
 
 
-static int cem_line_leading; // offset 0x800CD96C
+static int cem_item_leading; // offset 0x800CEED0
 
 
-static int cem_item_leading; // offset 0x800CD970
+extern short AXIS_LENGTH; // offset 0x800CF034
 
 
-extern short AXIS_LENGTH; // offset 0x800CDCA4
+extern unsigned long debugRazielFlags1; // offset 0x800D0E68
 
 
-extern unsigned long debugRazielFlags1; // offset 0x800D0DCC
+extern unsigned long debugRazielFlags2; // offset 0x800D0E6C
 
 
-extern unsigned long debugRazielFlags2; // offset 0x800D0DD0
+extern short debugOrgFogFar; // offset 0x800D0E4C
 
 
-extern short debugOrgFogFar; // offset 0x800D0DB0
+extern short debugOrgFogNear; // offset 0x800D0E3C
 
 
-extern short debugOrgFogNear; // offset 0x800D0DA0
+extern unsigned char debugOrgFogRed; // offset 0x800D0E40
 
 
-extern unsigned char debugOrgFogRed; // offset 0x800D0DA4
+extern unsigned char debugOrgFogGrn; // offset 0x800D0E44
 
 
-extern unsigned char debugOrgFogGrn; // offset 0x800D0DA8
+extern unsigned char debugOrgFogBlu; // offset 0x800D0E48
 
 
-extern unsigned char debugOrgFogBlu; // offset 0x800D0DAC
+extern struct DebugMenuLine debugSoundMenu[1]; // offset 0x800D0E24
 
 
-extern struct DebugMenuLine statsMenu[1]; // offset 0x800D0DB4
+extern struct DebugMenuLine statsMenu[1]; // offset 0x800D0E50
 
 
-extern long draw_belowSplit; // offset 0x800CE3D4
+extern long draw_belowSplit; // offset 0x800CF378
 
 
-extern short forceDrawInFront; // offset 0x800CE3D0
+extern short forceDrawInFront; // offset 0x800CF374
 
 
-extern struct SVECTOR *face_v0; // offset 0x800CE3D8
+extern struct SVECTOR *face_v0; // offset 0x800CF37C
 
 
-extern struct SVECTOR *face_v1; // offset 0x800CE3DC
+extern struct SVECTOR *face_v1; // offset 0x800CF380
 
 
-extern struct SVECTOR *face_v2; // offset 0x800CE3E0
+extern struct SVECTOR *face_v2; // offset 0x800CF384
 
 
-extern struct SVECTOR *face_v01; // offset 0x800CE3E4
+extern struct SVECTOR *face_v01; // offset 0x800CF388
 
 
-extern struct SVECTOR *face_v12; // offset 0x800CE3E8
+extern struct SVECTOR *face_v12; // offset 0x800CF38C
 
 
-extern struct SVECTOR *face_v20; // offset 0x800CE3EC
+extern struct SVECTOR *face_v20; // offset 0x800CF390
 
 
-extern struct UVTYPE *face_uv0; // offset 0x800CE3F0
+extern struct UVTYPE *face_uv0; // offset 0x800CF394
 
 
-extern struct UVTYPE *face_uv1; // offset 0x800CE3F4
+extern struct UVTYPE *face_uv1; // offset 0x800CF398
 
 
-extern struct UVTYPE *face_uv2; // offset 0x800CE3F8
+extern struct UVTYPE *face_uv2; // offset 0x800CF39C
 
 
-extern struct UVTYPE *face_uv01; // offset 0x800CE3FC
+extern struct UVTYPE *face_uv01; // offset 0x800CF3A0
 
 
-extern struct UVTYPE *face_uv12; // offset 0x800CE400
+extern struct UVTYPE *face_uv12; // offset 0x800CF3A4
 
 
-extern struct UVTYPE *face_uv20; // offset 0x800CE404
+extern struct UVTYPE *face_uv20; // offset 0x800CF3A8
 
 
-extern long modelDQP; // offset 0x800D13E8
+extern long modelDQP; // offset 0x800D1494
 
 
-extern unsigned char *draw_stack; // offset 0x800D13E4
+extern unsigned char *draw_stack; // offset 0x800D1490
 
 
-extern struct SVECTOR shadow_vertices[11]; // offset 0x800D13EC
+extern struct SVECTOR shadow_vertices[11]; // offset 0x800D1498
 
 
-static struct font_color_t the_font_color_table[2]; // offset 0x800C4D10
+static struct font_color_t the_font_color_table[3]; // offset 0x800C8C3C
 
 
-extern struct FontPos fontPos[72]; // offset 0x800C4D28
+extern struct FontPos fontPos[72]; // offset 0x800C8C60
 
 
-extern char charMap[92][3]; // offset 0x800C4E48
+extern char charMap[92][3]; // offset 0x800C8D80
 
 
-extern unsigned char fontTransTable[128]; // offset 0x800CE420
+extern unsigned char fontTransTable[128]; // offset 0x800CF3C4
 
 
-extern struct FontTracker fontTracker; // offset 0x800D164C
+extern struct FontTracker fontTracker; // offset 0x800D16F8
 
 
-extern struct _BlockVramEntry *FONT_vramBlock; // offset 0x800D1644
+extern struct _BlockVramEntry *FONT_vramBlock; // offset 0x800D16F0
 
 
-extern unsigned short SpecialFogClut; // offset 0x800D1648
+extern unsigned short SpecialFogClut; // offset 0x800D16F4
 
 
-static char fp_str[512]; // offset 0x800D1444
+static char fp_str[512]; // offset 0x800D14F0
 
 
-extern unsigned char dualshock_motors[2]; // offset 0x800C4F5C
+extern unsigned char dualshock_motors[2]; // offset 0x800C8EBC
 
 
-extern unsigned char dualshock_align[6]; // offset 0x800C4F60
+extern unsigned char dualshock_align[6]; // offset 0x800C8EC0
 
 
-static unsigned short __currentData; // offset 0x800CE59C
+static unsigned short __currentData; // offset 0x800CF4F8
 
 
-static unsigned short __dataCount; // offset 0x800CE59E
+static unsigned short __dataCount; // offset 0x800CF4FA
 
 
-static unsigned short *__demoBufferStart; // offset 0x800CE5A0
+static unsigned short *__demoBufferStart; // offset 0x800CF4FC
 
 
-static unsigned short *__demoBuffer; // offset 0x800CE5A4
+static unsigned short *__demoBuffer; // offset 0x800CF500
 
 
-static short align_flag; // offset 0x800CE5A8
+static short align_flag; // offset 0x800CF504
 
 
-static short dualshock_onflag; // offset 0x800CE5AA
+static short dualshock_onflag; // offset 0x800CF506
 
 
-extern unsigned short lastData[2]; // offset 0x800CE614
+static int dualShock; // offset 0x800CF508
 
 
-extern long gDummyCommand[2][2]; // offset 0x800D1D58
+extern unsigned short lastData[2]; // offset 0x800CF574
 
 
-extern int gamePadControllerOut; // offset 0x800D1D68
+static int gpSaved; // offset 0x800CF584
 
 
-extern unsigned char controllerType[2]; // offset 0x800D1CC0
+extern int gamePadControllerOut; // offset 0x800D1E74
 
 
-extern struct ControllerPacket gpbuffer1; // offset 0x800D1CC8
+extern long gDummyCommand[2][2]; // offset 0x800D1E64
 
 
-extern struct ControllerPacket gpbuffer2; // offset 0x800D1D10
+extern unsigned char controllerType[2]; // offset 0x800D1DCC
 
 
-extern struct ControllerPacket readGPBuffer1; // offset 0x800D1CEC
+extern struct ControllerPacket gpbuffer1; // offset 0x800D1DD4
 
 
-extern struct ControllerPacket readGPBuffer2; // offset 0x800D1D34
+extern struct ControllerPacket gpbuffer2; // offset 0x800D1E1C
 
 
-static long dualshock0_time; // offset 0x800D1CB8
+extern struct ControllerPacket readGPBuffer1; // offset 0x800D1DF8
 
 
-static long dualshock1_time; // offset 0x800D1CBC
+extern struct ControllerPacket readGPBuffer2; // offset 0x800D1E40
 
 
-extern unsigned short psxData[2]; // offset 0x800D1CC4
+static long dualshock0_time; // offset 0x800D1D68
 
 
-extern unsigned long CurrentBirthID; // offset 0x800CE7C4
+static long dualshock1_time; // offset 0x800D1D6C
 
 
-extern long camera_modeToIndex[15]; // offset 0x800CDD50
+extern unsigned short psxData[2]; // offset 0x800D1DD0
 
 
-static short combat_cam_distance; // offset 0x800CDD8C
+static long overrideData[2][5]; // offset 0x800D1D74
 
 
-static short combat_cam_angle; // offset 0x800CDD8E
+static long overrideCommand[2][5]; // offset 0x800D1DA4
 
 
-static short combat_cam_weight; // offset 0x800CDD90
+extern long camera_modeToIndex[15]; // offset 0x800CF110
 
 
-static short shorten_count; // offset 0x800CDD92
+static short shorten_count; // offset 0x800CF14C
 
 
-static short shorten_flag; // offset 0x800CDD94
+static short shorten_flag; // offset 0x800CF14E
 
 
-static short camera_still; // offset 0x800CDD96
+static short camera_still; // offset 0x800CF150
 
 
-static long roll_target; // offset 0x800CDD98
+static long roll_target; // offset 0x800CF154
 
 
-static long current_roll_amount; // offset 0x800CDD9C
+static long current_roll_amount; // offset 0x800CF158
 
 
-static int roll_inc; // offset 0x800CDDA0
+static int roll_inc; // offset 0x800CF15C
 
 
-static short CenterFlag; // offset 0x800CDDB2
+static short CenterFlag; // offset 0x800CF16E
 
 
-static short CameraLookStickyFlag; // offset 0x800CDDB4
+static short CameraLookStickyFlag; // offset 0x800CF170
 
 
-static short panic_count; // offset 0x800CDDB8
+static short panic_count; // offset 0x800CF174
 
 
-extern struct Camera theCamera; // offset 0x800D0EF0
+extern struct Camera theCamera; // offset 0x800D0F9C
 
 
-static struct MATRIX wcTransformX; // offset 0x800D0DE4
+static struct MATRIX wcTransformX; // offset 0x800D0E80
 
 
-static struct MATRIX wcTransform2X; // offset 0x800D0E04
+static struct MATRIX wcTransform2X; // offset 0x800D0EA0
 
 
-static struct MATRIX cwTransform2X; // offset 0x800D0E24
+static struct MATRIX cwTransform2X; // offset 0x800D0EC0
 
 
-extern int CameraCenterDelay; // offset 0x800D13BC
+static short combat_cam_distance; // offset 0x800D0EE0
 
 
-static struct _SVector camera_shakeOffset[16]; // offset 0x800D0E44
+static short combat_cam_angle; // offset 0x800D0EE2
 
 
-static struct _SVector camera_plane; // offset 0x800D0EC4
+static short combat_cam_weight; // offset 0x800D0EE4
 
 
-static struct _SVector left_point; // offset 0x800D0ECC
+static short combat_cam_debounce; // offset 0x800D0EE6
 
 
-static struct _SVector right_point; // offset 0x800D0ED4
+extern int CameraCenterDelay; // offset 0x800D1468
 
 
-static short hitline_rot; // offset 0x800D0EDC
+static struct _SVector camera_shakeOffset[16]; // offset 0x800D0EF0
 
 
-static long ACE_amount; // offset 0x800D0EE0
+static struct _SVector camera_plane; // offset 0x800D0F70
 
 
-static struct _Rotation splinecam_helprot; // offset 0x800D0EE4
+static struct _SVector left_point; // offset 0x800D0F78
 
 
-static short Camera_lookHeight; // offset 0x800D0EEC
+static struct _SVector right_point; // offset 0x800D0F80
 
 
-static short Camera_lookDist; // offset 0x800D0EEE
+static short hitline_rot; // offset 0x800D0F88
 
 
-extern long campoint_hw; // offset 0x800D13B4
+static long ACE_amount; // offset 0x800D0F8C
 
 
-extern long campoint_hh; // offset 0x800D13B8
+static struct _Rotation splinecam_helprot; // offset 0x800D0F90
 
 
-static struct LightGroup default_lightgroup; // offset 0x800CE7C8
+static short Camera_lookHeight; // offset 0x800D0F98
 
 
-extern void *light_light; // offset 0x800D1D70
+static short Camera_lookDist; // offset 0x800D0F9A
 
 
-extern struct LightInfo *light_lightInfo; // offset 0x800D1D78
+extern long campoint_hw; // offset 0x800D1460
 
 
-extern struct _Terrain *light_terrain; // offset 0x800D1D74
+extern long campoint_hh; // offset 0x800D1464
 
 
-extern char HashExtensions[7][4]; // offset 0x800CEA6C
+static struct LightGroup default_lightgroup; // offset 0x800CF640
 
 
-static struct _LoadStatus loadStatus; // offset 0x800D1D8C
+extern void *light_light; // offset 0x800D1E7C
 
 
-extern long crap1; // offset 0x800D1E2C
+extern struct LightInfo *light_lightInfo; // offset 0x800D1E84
 
 
-extern int _ramsize; // offset 0x800CEAD0
+extern struct _Terrain *light_terrain; // offset 0x800D1E80
 
 
-extern int _stacksize; // offset 0x800CEAD4
+extern char HashExtensions[7][4]; // offset 0x800CF6F8
 
 
-extern char mainOptionsInit; // offset 0x800CEAD8
+static struct _LoadStatus loadStatus; // offset 0x800D1E98
 
 
-extern short gEndGameNow; // offset 0x800CEADA
+extern long crap1; // offset 0x800D1F38
 
 
-extern int pcverify; // offset 0x800CEADC
+extern int _ramsize; // offset 0x800CF75C
 
 
-extern int nosound; // offset 0x800CEAE0
+extern int _stacksize; // offset 0x800CF760
 
 
-extern int nomusic; // offset 0x800CEAE4
+extern char mainOptionsInit; // offset 0x800CF764
 
 
-extern struct FullScreenItem FullScreenItems[1]; // offset 0x800CEAF8
+extern short gEndGameNow; // offset 0x800CF766
 
 
-extern long DoMainMenu; // offset 0x800CEB64
+extern int pcverify; // offset 0x800CF768
 
 
-extern long mainMenuMode; // offset 0x800CEB68
+extern int nosound; // offset 0x800CF76C
 
 
-extern long *mainMenuScreen; // offset 0x800CEB6C
+extern int nomusic; // offset 0x800CF770
 
 
-extern long *controlsScreen; // offset 0x800CEB70
+extern struct InterfaceItem InterfaceItems[5]; // offset 0x800CF774
 
 
-extern short mainMenuFadeInTime; // offset 0x800CEB74
+extern long DoMainMenu; // offset 0x800CF88C
 
 
-extern struct GameTracker gameTrackerX; // offset 0x800D1FBC
+extern long mainMenuMode; // offset 0x800CF890
 
 
-extern struct DRAWENV draw[2]; // offset 0x800D1E7C
+extern long *mainMenuScreen; // offset 0x800CF894
 
 
-extern struct DISPENV disp[2]; // offset 0x800D1E50
+extern long *controlsScreen; // offset 0x800CF898
 
 
-extern struct BLK_FILL clearRect[2]; // offset 0x800D1F98
+extern short mainMenuFadeInTime; // offset 0x800CF89C
 
 
-extern int devstation; // offset 0x800D1E78
+extern short mainMenuFading; // offset 0x800CF89E
 
 
-extern unsigned long __timerEvent; // offset 0x800D1F94
+extern struct GameTracker gameTrackerX; // offset 0x800D20CC
 
 
-extern struct MainTracker mainTrackerX; // offset 0x800D2244
+extern struct DRAWENV draw[2]; // offset 0x800D1F8C
 
 
-extern short mainMenuTimeOut; // offset 0x800D1FB8
+extern struct DISPENV disp[2]; // offset 0x800D1F60
 
 
-extern struct _ButtonTexture PauseButtons[4][2]; // offset 0x800D2254
+extern struct BLK_FILL clearRect[2]; // offset 0x800D20A8
 
 
-extern struct _ButtonTexture BmenuLines[3][2]; // offset 0x800D1F34
+extern int devstation; // offset 0x800D1F88
 
 
-extern struct _ButtonTexture BexitLine[2]; // offset 0x800D1E30
+extern unsigned long __timerEvent; // offset 0x800D20A4
 
 
-extern long cameraMode; // offset 0x800CE4A0
+extern struct MainTracker mainTrackerX; // offset 0x800D2344
 
 
-extern long playerCameraMode; // offset 0x800CE4A4
+extern short mainMenuTimeOut; // offset 0x800D20C8
 
 
-extern struct Object *fontsObject; // offset 0x800CE4A8
+static int mainMenuSfx; // offset 0x800D1F3C
 
 
-extern struct _FXTracker *gFXT; // offset 0x800D1C9C
+extern struct _ButtonTexture PauseButtons[4][2]; // offset 0x800D2354
 
 
-extern unsigned long StackSave; // offset 0x800D1CA8
+extern struct _ButtonTexture BmenuLines[3][2]; // offset 0x800D2044
 
 
-static unsigned long (**gOt[2]); // offset 0x800D1C6C
+extern struct _ButtonTexture BexitLine[2]; // offset 0x800D1F40
 
 
-extern char *primBase; // offset 0x800D1CB0
+extern long cameraMode; // offset 0x800CF444
 
 
-static struct _PrimPool (*primPool[2]); // offset 0x800D1C74
+extern long playerCameraMode; // offset 0x800CF448
 
 
-static struct _PolytopeList *polytopeList; // offset 0x800D1C7C
+extern struct Object *fontsObject; // offset 0x800CF44C
 
 
-static struct _InstanceList *instanceList; // offset 0x800D1C80
+extern struct _FXTracker *gFXT; // offset 0x800D1D48
 
 
-static struct _InstancePool *instancePool; // offset 0x800D1C84
+extern unsigned long StackSave; // offset 0x800D1D58
 
 
-static struct _VertexPool *vertexPool; // offset 0x800D1C88
+static unsigned long (**gOt[2]); // offset 0x800D1D18
 
 
-static struct LightInfo *gLightInfo; // offset 0x800D1C8C
+extern char *primBase; // offset 0x800D1D60
 
 
-extern struct _FXTracker *fxTracker; // offset 0x800D1CAC
+static struct _PrimPool (*primPool[2]); // offset 0x800D1D20
 
 
-static void *enemyPlanPool; // offset 0x800D1C90
+static struct _PolytopeList *gPolytopeList; // offset 0x800D1D28
 
 
-static void *planningPool; // offset 0x800D1C94
+static struct _InstanceList *instanceList; // offset 0x800D1D2C
 
 
-static struct _ObjectTracker *GlobalObjects; // offset 0x800D1C98
+static struct _InstancePool *instancePool; // offset 0x800D1D30
 
 
-extern short RENDER_currentStreamUnitID; // offset 0x800D1CA4
+static struct _VertexPool *gVertexPool; // offset 0x800D1D34
 
 
-extern int InStreamUnit; // offset 0x800D1CA0
+static struct LightInfo *gLightInfo; // offset 0x800D1D38
 
 
-extern long SignalEndGame; // offset 0x800CDDDC
+extern struct _FXTracker *fxTracker; // offset 0x800D1D5C
 
 
-extern struct SignalInfo signalInfoList[111]; // offset 0x800CDE08
+static void *enemyPlanPool; // offset 0x800D1D3C
 
 
-extern long dyna_clddyna[8]; // offset 0x800CE33C
+static void *planningPool; // offset 0x800D1D40
 
 
-extern long stat_clddyna[8]; // offset 0x800CE35C
+static struct _ObjectTracker *GlobalObjects; // offset 0x800D1D44
 
 
-extern long dyna_cldstat[8]; // offset 0x800CE37C
+extern short RENDER_currentStreamUnitID; // offset 0x800D1D50
 
 
-extern long collide_ignoreAttr; // offset 0x800CE39C
+extern int InStreamUnit; // offset 0x800D1D4C
 
 
-extern long collide_acceptAttr; // offset 0x800CE3A0
+extern unsigned long **hackOT; // offset 0x800D1D54
 
 
-extern struct _SVector collide_localPoint; // offset 0x800D13D0
+extern long SignalEndGame; // offset 0x800CF198
 
 
-extern struct MATRIX *collide_lwTransform; // offset 0x800D13D8
+extern struct SignalInfo signalInfoList[27]; // offset 0x800CF19C
 
 
-extern struct _SVector *collide_point0; // offset 0x800D13C0
+extern long dyna_clddyna[8]; // offset 0x800CF2E0
 
 
-extern struct _SVector *collide_point1; // offset 0x800D13C4
+extern long stat_clddyna[8]; // offset 0x800CF300
 
 
-extern struct _SVector *collide_normal0; // offset 0x800D13DC
+extern long dyna_cldstat[8]; // offset 0x800CF320
 
 
-extern struct _SVector *collide_normal1; // offset 0x800D13E0
+extern long collide_ignoreAttr; // offset 0x800CF340
 
 
-extern long collide_t0; // offset 0x800D13C8
+extern long collide_acceptAttr; // offset 0x800CF344
 
 
-extern long collide_t1; // offset 0x800D13CC
+extern struct _SVector collide_localPoint; // offset 0x800D147C
 
 
-extern long gTimerEnabled; // offset 0x800CEE24
+extern struct MATRIX *collide_lwTransform; // offset 0x800D1484
 
 
-extern struct LightInfo *sbsp_lightInfo; // offset 0x800D22D4
+extern struct _SVector *collide_point0; // offset 0x800D146C
 
 
-extern struct ObjectAccess objectAccess[31]; // offset 0x800C4F7C
+extern struct _SVector *collide_point1; // offset 0x800D1470
 
 
-extern char (*selectMenuText[5]); // offset 0x800C4F68
+extern struct _SVector *collide_normal0; // offset 0x800D1488
 
 
-extern short identityMatrix[3][3]; // offset 0x800CEDC0
+extern struct _SVector *collide_normal1; // offset 0x800D148C
 
 
-extern long FRAC_BITS; // offset 0x800CF0E8
+extern long collide_t0; // offset 0x800D1474
 
 
-static struct _FXGeneralEffect *FX_GeneralEffectTracker; // offset 0x800CF110
+extern long collide_t1; // offset 0x800D1478
 
 
-static struct _FXRibbon *FX_ConstrictRibbon; // offset 0x800CF114
+extern struct _Normal gNormalList[244]; // offset 0x800C90F4
 
 
-static short FX_ConstrictStage; // offset 0x800CF118
+extern short ecostable[3072]; // offset 0x800C9894
 
 
-static struct _Instance *FX_ConstrictInstance; // offset 0x800CF11C
+static long vmRealClock; // offset 0x800CFDE0
 
 
-static short snow_amount; // offset 0x800CF120
+static long vmClock; // offset 0x800CFDE4
 
 
-static short rain_amount; // offset 0x800CF122
+extern short identityMatrix[3][3]; // offset 0x800CFA60
 
 
-static struct _Instance *FX_reaver_instance; // offset 0x800CF124
+extern char (*selectMenuText[5]); // offset 0x800C8EC8
 
 
-static short windx; // offset 0x800CF14C
+extern long gTimerEnabled; // offset 0x800CFAC4
 
 
-static short windy; // offset 0x800CF14E
+extern struct LightInfo *sbsp_lightInfo; // offset 0x800D23D4
 
 
-static short wind_deg; // offset 0x800CF150
+extern struct ObjectAccess objectAccess[28]; // offset 0x800C8EDC
 
 
-static short wind_speed; // offset 0x800CF152
+extern struct ObjectFunc objectFunc[8]; // offset 0x800C8FBC
 
 
-extern long FX_ColorArray[6]; // offset 0x800CF154
+extern int gSramFullAlarm; // offset 0x800CFC84
 
 
-static short Spiral_Number; // offset 0x800CF16C
+extern int musicLoadInProgress; // offset 0x800CFC88
 
 
-static short Spiral_Degrees; // offset 0x800CF16E
+static int gSramFullMsgCnt; // offset 0x800CFC8C
 
 
-static long Spiral_Current; // offset 0x800CF170
+static int checkMusicDelay; // offset 0x800CFC90
 
 
-static long Spiral_Max; // offset 0x800CF174
+static int currentMusicPlane; // offset 0x800CFC94
 
 
-static struct _Position FX_ConstrictPosition; // offset 0x800D25EC
+static int reqMusicNewPlane; // offset 0x800CFC98
 
 
-static struct _Position *FX_ConstrictPositionPtr; // offset 0x800D25F4
+static int reqMusicStartPlaneShift; // offset 0x800CFC9C
 
 
-static struct _FX_PRIM *FX_LastUsedPrim; // offset 0x800D25F8
+static long objectOneShotTriggerTbl[3]; // offset 0x800CFCA0
 
 
-static short FX_Frames; // offset 0x800D25FC
+extern int gSramTotalUsed; // offset 0x800D2640
 
 
-static short FX_TimeCount; // offset 0x800D25FE
+extern int gSramUsedBlocks; // offset 0x800D263C
 
 
-static struct DVECTOR Spiral_Array[65]; // offset 0x800D260C
+extern int gSramTotalFree; // offset 0x800D2644
 
 
-static struct DVECTOR Spiral_OffsetP[64]; // offset 0x800D271C
+extern int gSramLargestFree; // offset 0x800D23F4
 
 
-static struct DVECTOR Spiral_OffsetM[64]; // offset 0x800D281C
+extern int gSramFreeBlocks; // offset 0x800D2638
 
 
-extern struct ObjectFunc objectFunc[8]; // offset 0x800C5074
+static char currentDynamicSoundName[16]; // offset 0x800D23E4
 
 
-static int musicLoadInProgress; // offset 0x800CF008
+extern struct SoundEffectChannel soundEffectChannelTbl[16]; // offset 0x800D23F8
 
 
-static int checkMusicDelay; // offset 0x800CF00C
+extern char soundBuffer[13256]; // offset 0x800D6138
 
 
-static long objectOneShotTriggerTbl[3]; // offset 0x800CF010
+extern long FRAC_BITS; // offset 0x800CFD4C
 
 
-static char currentDynamicSoundName[16]; // offset 0x800D22E4
+static struct _FXGeneralEffect *FX_GeneralEffectTracker; // offset 0x800CFD74
 
 
-static char sndFileName[64]; // offset 0x800D22F4
+static struct _FXRibbon *FX_ConstrictRibbon; // offset 0x800CFD78
 
 
-static char smpFileName[64]; // offset 0x800D2334
+static short FX_ConstrictStage; // offset 0x800CFD7C
 
 
-extern struct SoundEffectChannel soundEffectChannelTbl[16]; // offset 0x800D2374
+static struct _Instance *FX_ConstrictInstance; // offset 0x800CFD80
 
 
-extern char soundBuffer[13116]; // offset 0x800D5F84
+static short snow_amount; // offset 0x800CFD84
 
 
-static char midiDataByteCount[8]; // offset 0x800CF5CC
+static short rain_amount; // offset 0x800CFD86
 
 
-extern unsigned long aadGp; // offset 0x800C594C
+static struct _Instance *FX_reaver_instance; // offset 0x800CFD88
 
 
-static unsigned short aadHblanksPerUpdate[4]; // offset 0x800CF580
+static short windx; // offset 0x800CFDB0
 
 
-static unsigned long aadUpdateRate[4]; // offset 0x800CF588
+static short windy; // offset 0x800CFDB2
 
 
-extern struct AadMemoryStruct *aadMem; // offset 0x800CF598
+static short wind_deg; // offset 0x800CFDB4
 
 
-static unsigned long aadReverbModeSize[10]; // offset 0x800CF5A4
+static short wind_speed; // offset 0x800CFDB6
 
 
-static unsigned long __hblankEvent; // offset 0x800D2A30
+extern long FX_ColorArray[6]; // offset 0x800CFDB8
 
 
-static unsigned char *smfDataPtr; // offset 0x800D2A34
+static short Spiral_Number; // offset 0x800CFDD0
 
 
-static unsigned long smfBytesLeft; // offset 0x800D2A38
+static short Spiral_Degrees; // offset 0x800CFDD2
 
 
-static struct AadDynamicSfxLoadInfo *smfInfo; // offset 0x800D2A3C
+static long Spiral_Current; // offset 0x800CFDD4
 
 
-extern struct _Normal gNormalList[244]; // offset 0x800C51AC
+static long Spiral_Max; // offset 0x800CFDD8
 
 
-static long vmRealClock; // offset 0x800CF17C
+static struct _Position FX_ConstrictPosition; // offset 0x800D2680
 
 
-static long vmClock; // offset 0x800CF180
+static struct _Position *FX_ConstrictPositionPtr; // offset 0x800D2688
 
 
-static struct NewMemTracker newMemTracker; // offset 0x800D291C
+static struct _FX_PRIM *FX_LastUsedPrim; // offset 0x800D268C
 
 
-static struct AadProgramAtr aadDummySfxProgram; // offset 0x800CF788
+static short FX_Frames; // offset 0x800D2690
 
 
-extern unsigned short aadPitchTable[85]; // offset 0x800CF790
+static short FX_TimeCount; // offset 0x800D2692
 
 
-extern unsigned long aadStepsPerCent[85]; // offset 0x800CF83C
+static struct DVECTOR Spiral_Array[65]; // offset 0x800D26A0
 
 
-extern short aadStepsPerSemitone[85]; // offset 0x800CF990
+static struct DVECTOR Spiral_OffsetP[64]; // offset 0x800D27B0
 
 
-extern long CurrentWarpNumber; // offset 0x800CFA4C
+static struct DVECTOR Spiral_OffsetM[64]; // offset 0x800D28B0
 
 
-extern struct WarpRoom WarpRoomArray[14]; // offset 0x800CFA50
+static int Spiral_Glow_X; // offset 0x800D29B0
 
 
-extern struct STREAM_288fake WarpGateLoadInfo; // offset 0x800CFA3C
+static int Spiral_Glow_Y; // offset 0x800D29B4
 
 
-extern struct STracker StreamTracker; // offset 0x800D2A58
+static int Spiral_Glow_Size; // offset 0x800D29B8
 
 
-extern struct _TFace *MORPH_SavedFace; // offset 0x800D2E58
+static int Spiral_Mod; // offset 0x800D29BC
 
 
-extern long MORPH_A_Component; // offset 0x800D2A44
+static char midiDataByteCount[8]; // offset 0x800CFF94
 
 
-extern long MORPH_B_Component; // offset 0x800D2A48
+static struct NewMemTracker newMemTracker; // offset 0x800D29C0
 
 
-extern struct _Vector MORPH_BasePoint; // offset 0x800D2A4C
+extern unsigned long aadGp; // offset 0x800CB094
 
 
-static int s_zval; // offset 0x800D2A40
+static unsigned short aadHblanksPerUpdate[4]; // offset 0x800CFECC
 
 
-static short EventAbortLine; // offset 0x800CFF70
+static unsigned long aadUpdateRate[4]; // offset 0x800CFED4
 
 
-static short EventJustRecievedTimer; // offset 0x800CFF72
+extern struct AadMemoryStruct *aadMem; // offset 0x800CFEE4
 
 
-static long MoveCodeStreamExtra; // offset 0x800CFF74
+extern int gSramCheckRequest; // offset 0x800CFEE8
 
 
-static long CurrentEventLine; // offset 0x800CFF78
+static int gDfragRequest; // offset 0x800CFEEC
 
 
-static long EventCurrentEventIndex; // offset 0x800CFF7C
+static unsigned long aadReverbModeSize[10]; // offset 0x800CFF6C
 
 
-extern long WaterInUse; // offset 0x800CFF80
+static unsigned long __hblankEvent; // offset 0x800D29D4
 
 
-extern long NumSignalsToReset; // offset 0x800CFF84
+static unsigned char *smfDataPtr; // offset 0x800D29D8
 
 
-extern struct HintSystemStruct gHintSystem; // offset 0x800CFF88
+static unsigned long smfBytesLeft; // offset 0x800D29DC
 
 
-static struct Event *currentEventInstance; // offset 0x800D2E6C
+static struct AadDynamicSfxLoadInfo *smfInfo; // offset 0x800D29E0
 
 
-static struct ScriptPCode *currentActionScript; // offset 0x800D2E70
+static struct AadProgramAtr aadDummySfxProgram; // offset 0x800D0158
 
 
-static short *EventAbortedPosition; // offset 0x800D2E74
+extern unsigned short aadPitchTable[85]; // offset 0x800D0160
 
 
-extern long eventListNumInstances[20]; // offset 0x800D3090
+extern unsigned long aadStepsPerCent[85]; // offset 0x800D020C
 
 
-extern struct _Instance (*eventListArray[20][10]); // offset 0x800D3120
+extern short aadStepsPerSemitone[85]; // offset 0x800D0360
 
 
-static struct WaterLevelProcess WaterLevelArray[5]; // offset 0x800D2E7C
+extern long CurrentWarpNumber; // offset 0x800D040C
 
 
-static struct Level *CurrentPuzzleLevel; // offset 0x800D2F08
+extern struct WarpRoom WarpRoomArray[14]; // offset 0x800D0410
 
 
-static struct EventTimer eventTimerArray[16]; // offset 0x800D2F0C
+extern struct STracker StreamTracker; // offset 0x800D2A0C
 
 
-static long numActiveEventTimers; // offset 0x800D308C
+extern struct STREAM_289fake WarpGateLoadInfo; // offset 0x800D29E8
 
 
-extern struct _MultiSignal (*ResetSignalArray[16]); // offset 0x800D30E0
+extern struct _TFace *MORPH_SavedFace; // offset 0x800D2E0C
 
 
-static int loadBufferedFromHead; // offset 0x800CFE64
+extern struct Level *MORPH_SavedLevel; // offset 0x800D29FC
 
 
-static struct _LoadQueueEntry *loadFree; // offset 0x800D2E5C
+extern short MORPH_Component[3]; // offset 0x800D2A00
 
 
-static struct _LoadQueueEntry *loadHead; // offset 0x800D2E60
+extern short MORPH_Track[2]; // offset 0x800D2A08
 
 
-static struct _LoadQueueEntry *loadTail; // offset 0x800D2E64
+static int s_zval; // offset 0x800D29E4
 
 
-static int numLoads; // offset 0x800D2E68
+extern long WaitingForVoiceNumber; // offset 0x800D0774
 
 
-static struct _LoadQueueEntry LoadQueue[64]; // offset 0x800D92C0
+extern long WaitingToLoadSound; // offset 0x800D0778
 
 
-extern long RazielCommands[10]; // offset 0x800D0128
+static short EventAbortLine; // offset 0x800D077C
 
 
-static int Pending; // offset 0x800D0150
+static short EventJustRecievedTimer; // offset 0x800D077E
 
 
-static int Up; // offset 0x800D0154
+static long MoveCodeStreamExtra; // offset 0x800D0780
 
 
-static int Down; // offset 0x800D0158
+static long CurrentEventLine; // offset 0x800D0784
 
 
-static struct _G2AnimAlphaTable_Type (*G2AlphaTables[7]); // offset 0x800D015C
+static long EventCurrentEventIndex; // offset 0x800D0788
 
 
-static void *circWhere; // offset 0x800D0178
+extern long WaterInUse; // offset 0x800D078C
 
 
-static char circBuf[4096]; // offset 0x800D3440
+extern long NumSignalsToReset; // offset 0x800D0790
 
 
-extern long VRAM_NeedToUpdateMorph; // offset 0x800D017C
+static struct Event *currentEventInstance; // offset 0x800D2E20
 
 
-extern short M_TrackClutUpdate; // offset 0x800D4C74
+static struct ScriptPCode *currentActionScript; // offset 0x800D2E24
 
 
-extern struct _BlockVramEntry *openVramBlocks; // offset 0x800D4C9C
+static short *EventAbortedPosition; // offset 0x800D2E28
 
 
-extern struct _BlockVramEntry *usedVramBlocks; // offset 0x800D4C98
+extern long eventListNumInstances[20]; // offset 0x800D3104
 
 
-extern struct _BlockVramEntry vramBlockList[75]; // offset 0x800D4440
+extern struct _Instance (*eventListArray[20][10]); // offset 0x800D31E4
 
 
-extern long numOfBlocksUsed; // offset 0x800D4C78
+static struct WaterLevelProcess WaterLevelArray[5]; // offset 0x800D2E30
 
 
-extern struct _BlockVramEntry TerrainVramBlock; // offset 0x800D4C7C
+static struct Level *CurrentPuzzleLevel; // offset 0x800D2EBC
 
 
-static short fx_going; // offset 0x800D03BC
+static struct EventTimer eventTimerArray[24]; // offset 0x800D2EC0
 
 
-extern struct _FXBlastringEffect *fx_blastring; // offset 0x800D03C0
+static long numActiveEventTimers; // offset 0x800D3100
 
 
-static short HUD_Captured; // offset 0x800D03C4
+extern struct SignalResetStruct ResetSignalArray[16]; // offset 0x800D3154
 
 
-static short MANNA_Position; // offset 0x800D4D80
+extern struct HintSystemStruct gHintSystem; // offset 0x800D31D4
 
 
-static short MANNA_Pos_vel; // offset 0x800D4D82
+static int loadBufferedFromHead; // offset 0x800D0720
 
 
-static short glyph_time; // offset 0x800D4D84
+static int gCurDir; // offset 0x800D0724
 
 
-static short glyph_trigger; // offset 0x800D4D86
+static struct _LoadQueueEntry *loadFree; // offset 0x800D2E10
 
 
-static short glyph_cost; // offset 0x800D4D88
+static struct _LoadQueueEntry *loadHead; // offset 0x800D2E14
 
 
-static struct __GlyphHudSaveData HudSave; // offset 0x800D4D8C
+static struct _LoadQueueEntry *loadTail; // offset 0x800D2E18
 
 
-static int blast_range; // offset 0x800D4D90
+static int numLoads; // offset 0x800D2E1C
 
 
-static int fx_radius_old; // offset 0x800D4D94
+static struct _LoadQueueEntry LoadQueue[40]; // offset 0x800D9500
 
 
-static short HUD_Rotation; // offset 0x800D4D98
+extern struct _MonsterStateChoice HUNTER_StateChoiceTable[6]; // offset 0x800CB144
 
 
-static short HUD_Rot_vel; // offset 0x800D4D9A
+extern struct _MonsterFunctionTable HUNTER_FunctionTable; // offset 0x800D0854
 
 
-static short HUD_Position; // offset 0x800D4D9C
+static struct MissileGraphics MISSILE_objectTable[4]; // offset 0x800CB18C
 
 
-static short HUD_Pos_vel; // offset 0x800D4D9E
+extern long RazielCommands[10]; // offset 0x800D07A8
 
 
-static short HUD_State; // offset 0x800D4DA0
+static int Pending; // offset 0x800D07D0
 
 
-static short HUD_Wait; // offset 0x800D4DA2
+static int Up; // offset 0x800D07D4
 
 
-static struct _SVector HUD_Cap_Pos; // offset 0x800D4DA8
+static int Down; // offset 0x800D07D8
 
 
-static struct _SVector HUD_Cap_Vel; // offset 0x800D4DB0
+static struct _G2AnimAlphaTable_Type (*G2AlphaTables[7]); // offset 0x800D07DC
 
 
-static int warpDraw; // offset 0x800D4DB8
+static void *circWhere; // offset 0x800D07F8
 
 
-static int glowdeg; // offset 0x800D4DBC
+static char circBuf[4096]; // offset 0x800D3504
 
 
-extern int hud_warp_arrow_flash; // offset 0x800D4DC0
+extern long VRAM_NeedToUpdateMorph; // offset 0x800D07FC
 
 
-extern struct _MonsterStateChoice HUMAN_StateChoiceTable[6]; // offset 0x800C59B4
+extern short M_TrackClutUpdate; // offset 0x800D4D38
 
 
-extern struct _MonsterFunctionTable HUMAN_FunctionTable; // offset 0x800D03C8
+extern struct _BlockVramEntry *openVramBlocks; // offset 0x800D4D60
 
 
-extern struct _MonsterStateChoice HUNTER_StateChoiceTable[6]; // offset 0x800C59FC
+extern struct _BlockVramEntry *usedVramBlocks; // offset 0x800D4D5C
 
 
-extern struct _MonsterFunctionTable HUNTER_FunctionTable; // offset 0x800D03F4
+extern struct _BlockVramEntry vramBlockList[75]; // offset 0x800D4504
 
 
-static struct MissileGraphics MISSILE_objectTable[4]; // offset 0x800C5A44
+extern long numOfBlocksUsed; // offset 0x800D4D3C
 
 
-static struct MONTABLE_202fake functionChoiceTable[8]; // offset 0x800C5A74
+extern struct _BlockVramEntry TerrainVramBlock; // offset 0x800D4D40
 
 
-static struct _MonsterState DefaultStateTable[30]; // offset 0x800C5AB4
+static short fx_going; // offset 0x800D0814
 
 
-static struct _MonsterFunctionTable DefaultFunctionTable; // offset 0x800D055C
+extern struct _FXBlastringEffect *fx_blastring; // offset 0x800D0818
 
 
-extern struct _MonsterStateChoice SKINNER_StateChoiceTable[4]; // offset 0x800C5BA4
+static short HUD_Captured; // offset 0x800D081C
 
 
-extern struct _MonsterFunctionTable SKINNER_FunctionTable; // offset 0x800D057C
+static short MANNA_Position; // offset 0x800D4DEC
 
 
-extern struct _MonsterStateChoice SLUAGH_StateChoiceTable[4]; // offset 0x800C5BD4
+static short MANNA_Pos_vel; // offset 0x800D4DEE
 
 
-extern struct _MonsterFunctionTable SLUAGH_FunctionTable; // offset 0x800D059C
+static short glyph_time; // offset 0x800D4DF0
 
 
-static int gNumMonsters; // offset 0x800D04D0
+static short glyph_trigger; // offset 0x800D4DF2
 
 
-static struct RadarInfo radarDir[16]; // offset 0x800D04D4
+static short glyph_cost; // offset 0x800D4DF4
 
 
-static unsigned char radarDirIndex[16]; // offset 0x800D0534
+static int HUD_Count; // offset 0x800D4DF8
 
 
-static struct _MonsterVars (*monsterSenseArray[20]); // offset 0x800D4DC4
+static int blast_range; // offset 0x800D4DFC
 
 
-static struct burntTuneType burntTest; // offset 0x800D0544
+static int fx_radius_old; // offset 0x800D4E00
 
 
-extern struct _MonsterStateChoice SOUL_StateChoiceTable[7]; // offset 0x800C5C04
+static int MANNA_Pickup_Time; // offset 0x800D4E04
 
 
-extern struct _MonsterFunctionTable SOUL_FunctionTable; // offset 0x800D05C4
+static short HUD_Rotation; // offset 0x800D4E08
 
 
-extern struct _MonsterStateChoice VWRAITH_StateChoiceTable[6]; // offset 0x800C5C58
+static short HUD_Rot_vel; // offset 0x800D4E0A
 
 
-extern struct _MonsterFunctionTable VWRAITH_FunctionTable; // offset 0x800D05E4
+static short HUD_Position; // offset 0x800D4E0C
 
 
-extern struct _MonsterStateChoice WORSHIP_StateChoiceTable[5]; // offset 0x800C5CA0
+static short HUD_Pos_vel; // offset 0x800D4E0E
 
 
-extern struct _MonsterFunctionTable WORSHIP_FunctionTable; // offset 0x800D0604
+static short HUD_State; // offset 0x800D4E10
 
 
-static int _indexTable[16]; // offset 0x800C5CDC
+static short HUD_Wait; // offset 0x800D4E12
 
 
-static int _stepSizeTable[64]; // offset 0x800C5D1C
+static struct _SVector HUD_Cap_Pos; // offset 0x800D4E14
 
 
-static struct _G2AnimChanStatusBlockPool_Type _chanStatusBlockPool; // offset 0x800D4E14
+static struct _SVector HUD_Cap_Vel; // offset 0x800D4E1C
 
 
-static struct _G2AnimSegValue_Type _segValues[80]; // offset 0x800D4E24
+static int warpDraw; // offset 0x800D4E24
 
 
-static struct _G2AnimControllerPool_Type _controllerPool; // offset 0x800D55A4
+static int glowdeg; // offset 0x800D4E28
 
 
-static struct _G2AnimInterpStateBlockPool_Type _interpStateBlockPool; // offset 0x800D55B4
+extern int hud_warp_arrow_flash; // offset 0x800D4E2C
 
 
-extern struct PoolManagementData *poolManagementData; // offset 0x800D5618
+extern struct _MonsterStateChoice HUMAN_StateChoiceTable[6]; // offset 0x800CB0FC
 
 
-static struct PoolManagementData poolManagementDataStorage; // offset 0x800D55CC
+extern struct _MonsterFunctionTable HUMAN_FunctionTable; // offset 0x800D0828
 
 
-static long timerArray[10]; // offset 0x800D55EC
+static int gNumMonsters; // offset 0x800D0894
 
 
-static long timerIndex; // offset 0x800D5614
+static struct RadarInfo radarDir[8]; // offset 0x800D0898
 
 
-static struct _fth directionList[6]; // offset 0x800D0640
+static unsigned char radarDirIndex[8]; // offset 0x800D08C8
 
 
-static struct _G2AppDataVM_Type _appDataVM; // offset 0x800D55C4
+static struct _MonsterVars (*monsterSenseArray[40]); // offset 0x800D4E30
 
 
-extern int LoopCounter; // offset 0x800D0658
+static char monsterSensed[40]; // offset 0x800D4ED0
 
 
-static int WaterStatus; // offset 0x800D065C
+static int lastSenseFrame; // offset 0x800D4EF8
 
 
-static unsigned char PickupList[4]; // offset 0x800D0660
+static struct burntTuneType burntTest; // offset 0x800D08D4
 
 
-static unsigned short cowlList[19]; // offset 0x800D0664
+extern struct _MonsterStateChoice VWRAITH_StateChoiceTable[7]; // offset 0x800CB3B4
 
 
-extern struct __razController controllerList[24]; // offset 0x800D068C
+extern struct _MonsterFunctionTable VWRAITH_FunctionTable; // offset 0x800D0974
 
 
-static int AlgoControlFlag; // offset 0x800D06EC
+extern struct _MonsterStateChoice SKINNER_StateChoiceTable[5]; // offset 0x800CB2F4
 
 
-static int ZoneDelta; // offset 0x800D06F0
+extern struct _MonsterFunctionTable SKINNER_FunctionTable; // offset 0x800D090C
 
 
-extern struct __Idle **currentIdleList; // offset 0x800D07B8
+extern struct _MonsterStateChoice SLUAGH_StateChoiceTable[4]; // offset 0x800CB330
 
 
-extern int currentIdleListCount; // offset 0x800D07BC
+extern struct _MonsterFunctionTable SLUAGH_FunctionTable; // offset 0x800D092C
 
 
-extern int currentIdleCount; // offset 0x800D07C0
+extern struct _MonsterStateChoice SOUL_StateChoiceTable[7]; // offset 0x800CB360
 
 
-static int BlockCount; // offset 0x800D07C4
+extern struct _MonsterFunctionTable SOUL_FunctionTable; // offset 0x800D0954
 
 
-static int LastBlock; // offset 0x800D07C8
+static struct MONTABLE_202fake functionChoiceTable[8]; // offset 0x800CB1BC
 
 
-static struct __Player Raziel; // offset 0x800D565C
+static struct _MonsterState DefaultStateTable[31]; // offset 0x800CB1FC
 
 
-static struct RazielData *PlayerData; // offset 0x800D5B48
+static struct _MonsterFunctionTable DefaultFunctionTable; // offset 0x800D08EC
 
 
-static struct _G2AnimInterpInfo_Type razInterpInfo[3]; // offset 0x800D5B4C
+static struct _G2AppDataVM_Type _appDataVM; // offset 0x800D56AC
 
 
-static struct __FitPoint constrictData[32]; // offset 0x800D5B7C
+extern struct _MonsterStateChoice WORSHIP_StateChoiceTable[5]; // offset 0x800CB408
 
 
-static struct MATRIX TempMat; // offset 0x800D5BFC
+extern struct _MonsterFunctionTable WORSHIP_FunctionTable; // offset 0x800D0994
 
 
-static struct GameTracker *gameTracker; // offset 0x800D5C1C
+static int _indexTable[16]; // offset 0x800CB444
 
 
-static long *PadData; // offset 0x800D5C20
+static int _stepSizeTable[64]; // offset 0x800CB484
 
 
-static struct _G2SVector3_Type ExtraRotData; // offset 0x800D5C24
+static struct _G2AnimChanStatusBlockPool_Type _chanStatusBlockPool; // offset 0x800D4EFC
 
 
-static struct _G2SVector3_Type *ExtraRot; // offset 0x800D5C2C
+static struct _G2AnimSegValue_Type _segValues[80]; // offset 0x800D4F0C
 
 
-extern int ControlFlag; // offset 0x800D5D24
+static struct _G2AnimControllerPool_Type _controllerPool; // offset 0x800D568C
 
 
-static struct __Force ExternalForces[4]; // offset 0x800D5C3C
+static struct _G2AnimInterpStateBlockPool_Type _interpStateBlockPool; // offset 0x800D569C
 
 
-static int PhysicsMode; // offset 0x800D5C8C
+extern struct PoolManagementData *poolManagementData; // offset 0x800D5700
 
 
-static struct __EngagedInstance EngagedList[15]; // offset 0x800D5C9C
+static struct PoolManagementData poolManagementDataStorage; // offset 0x800D56B4
 
 
-static struct _Normal Norm; // offset 0x800D5D14
+static long timerArray[10]; // offset 0x800D56D4
 
 
-extern int AutoFaceAngle; // offset 0x800D5D20
+static long timerIndex; // offset 0x800D56FC
 
 
-static int LastRC; // offset 0x800D5D1C
+static struct _fth directionList[6]; // offset 0x800D09DC
 
 
-static struct __Force *ExternalForces; // offset 0x800D561C
+static struct __Force *ExternalForces; // offset 0x800D5704
 
 
-static struct MATRIX TempMat; // offset 0x800D562C
+static struct MATRIX TempMat; // offset 0x800D5714
 
 
-static struct UW_ScreenXY *ScreenMorphArray; // offset 0x800D0838
+extern int LoopCounter; // offset 0x800D09F4
 
 
-static long UW_angle; // offset 0x800D5D28
+static int WaterStatus; // offset 0x800D09F8
 
 
-static long UW_scalex; // offset 0x800D5D2C
+static unsigned char PickupList[4]; // offset 0x800D09FC
 
 
-static long UW_scalexInc; // offset 0x800D5D30
+static unsigned short cowlList[19]; // offset 0x800D0A00
 
 
-static long UW_angleInc; // offset 0x800D5D34
+extern struct __razController controllerList[24]; // offset 0x800D0A28
 
 
-extern struct _GlobalSaveTracker *GlobalSave; // offset 0x800D084C
+extern struct __CannedSound cannedSound[4]; // offset 0x800D0A88
 
 
-static long numbufferedIntros; // offset 0x800D0850
+static int AlgoControlFlag; // offset 0x800D0AD8
 
 
-static int the_header_size; // offset 0x800D0854
+static int ZoneDelta; // offset 0x800D0ADC
 
 
-extern long SaveArraySize[7]; // offset 0x800D0858
+extern struct __Idle **currentIdleList; // offset 0x800D0B68
 
 
-static struct SavedInfoTracker savedInfoTracker; // offset 0x800D5D38
+extern int currentIdleListCount; // offset 0x800D0B6C
 
 
-static struct _SavedIntro (*bufferSavedIntroArray[64]); // offset 0x800D5D48
+extern int currentIdleCount; // offset 0x800D0B70
 
 
-extern char monVersion[12]; // offset 0x800D0A9C
+static int BlockCount; // offset 0x800D0B74
 
 
-extern struct XAVoiceTracker voiceTracker; // offset 0x800D5E4C
+static int LastBlock; // offset 0x800D0B78
 
 
-static struct cinema_fn_table_t *the_cine_table; // offset 0x800C5E40
+static struct __Player Raziel; // offset 0x800D5744
 
 
-static struct _ObjectTracker *the_cine_tracker; // offset 0x800C5E44
+static struct RazielData *PlayerData; // offset 0x800D5CF4
 
 
-extern int StCdIntrFlag; // offset 0x800DB2C0
+static struct _G2AnimInterpInfo_Type razInterpInfo[3]; // offset 0x800D5D04
 
 
-static struct LocalizationHeader *LocalizationTable; // offset 0x800D0AD4
+static struct __FitPoint constrictData[32]; // offset 0x800D5D34
 
 
-static char **LocalStrings; // offset 0x800D0AD8
+static struct MATRIX TempMat; // offset 0x800D5DB4
 
 
-extern struct XAVoiceListEntry *voiceList; // offset 0x800D0ADC
+static struct GameTracker *gameTracker; // offset 0x800D5DD4
 
 
-static enum language_t the_language; // offset 0x800D5F74
+static long *PadData; // offset 0x800D5DD8
 
 
-static struct menu_sound_entry_t the_menu_sounds[6]; // offset 0x800C5E48
+static struct _G2SVector3_Type ExtraRotData; // offset 0x800D5DDC
 
 
-static char (*the_attract_movies[4]); // offset 0x800C5E78
+static struct _G2SVector3_Type *ExtraRot; // offset 0x800D5DE4
 
 
-static int MAIN_XPOS; // offset 0x800D0B88
+extern int ControlFlag; // offset 0x800D5EDC
 
 
-static int MAIN_YPOS; // offset 0x800D0B8C
+static struct __Force ExternalForces[4]; // offset 0x800D5DF4
 
 
-static int MAIN_WIDTH; // offset 0x800D0B90
+static int PhysicsMode; // offset 0x800D5E44
 
 
-static int PAUSE_XPOS; // offset 0x800D0B94
+static struct __EngagedInstance EngagedList[15]; // offset 0x800D5E54
 
 
-static int PAUSE_YPOS; // offset 0x800D0B98
+static struct _Normal Norm; // offset 0x800D5ECC
 
 
-static int PAUSE_WIDTH; // offset 0x800D0B9C
+extern int AutoFaceAngle; // offset 0x800D5ED8
 
 
-static int LINESKIP; // offset 0x800D0BA0
+static int LastRC; // offset 0x800D5ED4
 
 
-static int ITEMSKIP; // offset 0x800D0BA4
+static struct UW_ScreenXY *ScreenMorphArray; // offset 0x800D0B88
 
 
-static int hack_attract; // offset 0x800D0BA8
+static long UW_angle; // offset 0x800D5EE0
 
 
-static int hack_attract_movie; // offset 0x800D0BAC
+static long UW_scalex; // offset 0x800D5EE4
 
 
-static int hack_reset_attract; // offset 0x800D0C70
+static long UW_scalexInc; // offset 0x800D5EE8
+
+
+static long UW_angleInc; // offset 0x800D5EEC
+
+
+static struct cinema_fn_table_t *the_cine_table; // offset 0x800CB5A8
+
+
+static struct _ObjectTracker *the_cine_tracker; // offset 0x800CB5AC
+
+
+extern int StCdIntrFlag; // offset 0x800DA680
+
+
+static struct LocalizationHeader *LocalizationTable; // offset 0x800D0C50
+
+
+static char **LocalStrings; // offset 0x800D0C54
+
+
+extern struct XAVoiceListEntry *voiceList; // offset 0x800D0C58
+
+
+static enum language_t the_language; // offset 0x800D612C
+
+
+static struct menu_sound_entry_t the_menu_sounds[6]; // offset 0x800CB5B0
+
+
+static char (*the_attract_movies[4]); // offset 0x800CB5E0
+
+
+static int MAIN_XPOS; // offset 0x800D0D04
+
+
+static int MAIN_YPOS; // offset 0x800D0D08
+
+
+static int MAIN_WIDTH; // offset 0x800D0D0C
+
+
+static int PAUSE_XPOS; // offset 0x800D0D10
+
+
+static int PAUSE_YPOS; // offset 0x800D0D14
+
+
+static int PAUSE_WIDTH; // offset 0x800D0D18
+
+
+static int LINESKIP; // offset 0x800D0D1C
+
+
+static int ITEMSKIP; // offset 0x800D0D20
+
+
+static int hack_reset_attract; // offset 0x800D0D24
+
+
+static int StartGameFading; // offset 0x800D0D28
+
+
+static int hack_attract; // offset 0x800D0D2C
+
+
+static int hack_attract_movie; // offset 0x800D0D30
 
 
 extern struct DebugMenuLine mcardMenu[1]; // offset 0x18
@@ -13132,22 +13565,46 @@ extern struct DebugMenuLine mcardSaveMenu[1]; // offset 0x18
 extern long *mainMenuScreen; // offset 0x4
 
 
-static struct menuface_t the_faces[8]; // offset 0x800D0C9C
+extern struct _GlobalSaveTracker *GlobalSave; // offset 0x800D0B9C
 
 
-static int hack_initialized; // offset 0x800D0D3C
+static long numbufferedIntros; // offset 0x800D0BA0
 
 
-static char *FaceState; // offset 0x800D5F78
+static int the_header_size; // offset 0x800D0BA4
 
 
-static char *FaceStateDir; // offset 0x800D5F7C
+extern long SaveArraySize[10]; // offset 0x800D0BA8
 
 
-static struct _ButtonTexture *FaceButtons; // offset 0x800D5F80
+static struct SavedInfoTracker savedInfoTracker; // offset 0x800D5EF0
+
+
+static struct SavedBasic (*bufferSavedIntroArray[64]); // offset 0x800D5F00
+
+
+extern char monVersion[12]; // offset 0x800D0C18
+
+
+extern struct XAVoiceTracker voiceTracker; // offset 0x800D6004
+
+
+static struct menuface_t MenuFaces[8]; // offset 0x800D0D64
+
+
+static int hack_initialized; // offset 0x800D0DC4
+
+
+static struct _ButtonTexture *FaceButtons; // offset 0x800D6134
 
 
 extern struct mcmenu_table_t the_mcmenu_table; // offset 0x24
+
+
+static struct MEMCARD_211fake gMcmenu; // offset 0x800DA684
+
+
+extern struct memcard_t gMemcard; // offset 0x800DA884
 
 /* End external declarations */
 

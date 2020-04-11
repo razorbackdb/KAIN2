@@ -5,14 +5,14 @@
 // decompiled code
 // original method signature: 
 // short /*$ra*/ G2Timer_GetFrameTime()
- // line 10, offset 0x800940c0
+ // line 10, offset 0x80095cc0
 	/* begin block 1 */
 		// Start line: 12
-		// Start offset: 0x800940C0
+		// Start offset: 0x80095CC0
 		// Variables:
 	// 		short atime; // $v1
 	/* end block 1 */
-	// End offset: 0x800940F4
+	// End offset: 0x80095CF4
 	// End Line: 20
 
 	/* begin block 2 */
@@ -30,7 +30,7 @@
 	/* end block 4 */
 	// End Line: 23
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\G2\TIMERG2.C */
 
 short G2Timer_GetFrameTime(void)
 
@@ -38,11 +38,11 @@ short G2Timer_GetFrameTime(void)
   short sVar1;
   uint uVar2;
   
-  if (gameTrackerX.idleTime == 0) {
+  if (DAT_800d2314 == 0) {
     uVar2 = 100;
   }
   else {
-    uVar2 = gameTrackerX.idleTime * 0x19 >> 10;
+    uVar2 = (uint)(DAT_800d2314 * 0x19) >> 10;
   }
   sVar1 = (short)uVar2;
   if ((int)(uVar2 << 0x10) < 1) {

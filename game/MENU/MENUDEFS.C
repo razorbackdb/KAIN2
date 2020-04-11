@@ -4,19 +4,47 @@
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ do_push_menu(void *gt /*$a0*/, long menuparam /*$a1*/, enum menu_ctrl_t ctrl /*$a2*/)
- // line 143, offset 0x800b2980
+// void /*$ra*/ do_check_controller(void *gt /*$a0*/)
+ // line 147, offset 0x800b7274
 	/* begin block 1 */
-		// Start line: 144
-		// Start offset: 0x800B2980
+		// Start line: 294
 	/* end block 1 */
-	// End offset: 0x800B29A8
-	// End Line: 157
+	// End Line: 295
+
+/* File: C:\kain2\game\MENU\MENUDEFS.C */
+
+void do_check_controller(void *gt)
+
+{
+  int msgY;
+  
+  msgY = 200;
+  if (*(short *)((int)gt + 0x172) == 6) {
+    msgY = 0xaa;
+  }
+  GAMEPAD_DisplayControllerStatus(msgY);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ do_push_menu(void *gt /*$a0*/, long menuparam /*$a1*/, enum menu_ctrl_t ctrl /*$a2*/)
+ // line 163, offset 0x800b72a8
+	/* begin block 1 */
+		// Start line: 164
+		// Start offset: 0x800B72A8
+	/* end block 1 */
+	// End offset: 0x800B72D0
+	// End Line: 177
 
 	/* begin block 2 */
-		// Start line: 286
+		// Start line: 326
 	/* end block 2 */
-	// End Line: 287
+	// End Line: 327
+
+/* File: C:\kain2\game\MENU\MENUDEFS.C */
 
 int do_push_menu(void *gt,long menuparam,menu_ctrl_t ctrl)
 
@@ -32,11 +60,13 @@ int do_push_menu(void *gt,long menuparam,menu_ctrl_t ctrl)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ do_pop_menu(void *gt /*$a0*/, long param /*$a1*/, enum menu_ctrl_t ctrl /*$a2*/)
- // line 159, offset 0x800b29b8
+ // line 179, offset 0x800b72e0
 	/* begin block 1 */
-		// Start line: 327
+		// Start line: 367
 	/* end block 1 */
-	// End Line: 328
+	// End Line: 368
+
+/* File: C:\kain2\game\MENU\MENUDEFS.C */
 
 int do_pop_menu(void *gt,long param,menu_ctrl_t ctrl)
 
@@ -52,16 +82,18 @@ int do_pop_menu(void *gt,long param,menu_ctrl_t ctrl)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ do_function(void *gt /*$a0*/, long fnparam /*$a1*/, enum menu_ctrl_t ctrl /*$a2*/)
- // line 170, offset 0x800b29f0
+ // line 190, offset 0x800b7318
 	/* begin block 1 */
-		// Start line: 346
+		// Start line: 386
 	/* end block 1 */
-	// End Line: 347
+	// End Line: 387
 
 	/* begin block 2 */
-		// Start line: 352
+		// Start line: 392
 	/* end block 2 */
-	// End Line: 353
+	// End Line: 393
+
+/* File: C:\kain2\game\MENU\MENUDEFS.C */
 
 int do_function(void *gt,long fnparam,menu_ctrl_t ctrl)
 
@@ -77,16 +109,18 @@ int do_function(void *gt,long fnparam,menu_ctrl_t ctrl)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ do_start_game(void *gt /*$s0*/, long parameter /*$a1*/, enum menu_ctrl_t ctrl /*$a2*/)
- // line 184, offset 0x800b2a24
+ // line 204, offset 0x800b734c
 	/* begin block 1 */
-		// Start line: 374
+		// Start line: 414
 	/* end block 1 */
-	// End Line: 375
+	// End Line: 415
 
 	/* begin block 2 */
-		// Start line: 383
+		// Start line: 423
 	/* end block 2 */
-	// End Line: 384
+	// End Line: 424
+
+/* File: C:\kain2\game\MENU\MENUDEFS.C */
 
 int do_start_game(void *gt,long parameter,menu_ctrl_t ctrl)
 
@@ -115,11 +149,13 @@ int do_start_game(void *gt,long parameter,menu_ctrl_t ctrl)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ do_save_menu(void *gt /*$a0*/, long parameter /*$a1*/, enum menu_ctrl_t ctrl /*$a2*/)
- // line 210, offset 0x800b2a88
+ // line 230, offset 0x800b73b0
 	/* begin block 1 */
-		// Start line: 435
+		// Start line: 475
 	/* end block 1 */
-	// End Line: 436
+	// End Line: 476
+
+/* File: C:\kain2\game\MENU\MENUDEFS.C */
 
 int do_save_menu(void *gt,long parameter,menu_ctrl_t ctrl)
 
@@ -135,16 +171,18 @@ int do_save_menu(void *gt,long parameter,menu_ctrl_t ctrl)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ womp_background(char *tim_path /*$s0*/)
- // line 237, offset 0x800b2ac4
+ // line 257, offset 0x800b73ec
 	/* begin block 1 */
-		// Start line: 473
+		// Start line: 513
 	/* end block 1 */
-	// End Line: 474
+	// End Line: 514
 
 	/* begin block 2 */
-		// Start line: 493
+		// Start line: 533
 	/* end block 2 */
-	// End Line: 494
+	// End Line: 534
+
+/* File: C:\kain2\game\MENU\MENUDEFS.C */
 
 void womp_background(char *tim_path)
 
@@ -159,18 +197,20 @@ void womp_background(char *tim_path)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ play_movie(char *name /*$s0*/)
- // line 245, offset 0x800b2afc
+ // line 271, offset 0x800b7424
 	/* begin block 1 */
-		// Start line: 246
-		// Start offset: 0x800B2AFC
+		// Start line: 272
+		// Start offset: 0x800B7424
 	/* end block 1 */
-	// End offset: 0x800B2B2C
-	// End Line: 264
+	// End offset: 0x800B745C
+	// End Line: 291
 
 	/* begin block 2 */
-		// Start line: 510
+		// Start line: 568
 	/* end block 2 */
-	// End Line: 511
+	// End Line: 569
+
+/* File: C:\kain2\game\MENU\MENUDEFS.C */
 
 void play_movie(char *name)
 
@@ -179,8 +219,9 @@ void play_movie(char *name)
   
   iVar1 = CINE_Load();
   if (iVar1 != 0) {
-    CINE_Play(name,0x4001,2);
+    CINE_Play(name,0xffff,2);
     CINE_Unload();
+    MAIN_InitVolume();
   }
   return;
 }
@@ -190,24 +231,24 @@ void play_movie(char *name)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ menudefs_reset_hack_attract_mode()
- // line 284, offset 0x800b2b3c
+ // line 311, offset 0x800b746c
 	/* begin block 1 */
-		// Start line: 588
+		// Start line: 648
 	/* end block 1 */
-	// End Line: 589
+	// End Line: 649
 
 	/* begin block 2 */
-		// Start line: 589
+		// Start line: 649
 	/* end block 2 */
-	// End Line: 590
+	// End Line: 650
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\MENU\MENUDEFS.C */
 
 void menudefs_reset_hack_attract_mode(void)
 
 {
   if (0 < hack_attract) {
-    hack_attract = gameTrackerX.vblCount;
+    hack_attract = DAT_800d2204;
   }
   return;
 }
@@ -217,18 +258,18 @@ void menudefs_reset_hack_attract_mode(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ check_hack_attract()
- // line 289, offset 0x800b2b60
+ // line 316, offset 0x800b7490
 	/* begin block 1 */
-		// Start line: 598
+		// Start line: 658
 	/* end block 1 */
-	// End Line: 599
+	// End Line: 659
 
 	/* begin block 2 */
-		// Start line: 600
+		// Start line: 660
 	/* end block 2 */
-	// End Line: 601
+	// End Line: 661
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\MENU\MENUDEFS.C */
 
 void check_hack_attract(void)
 
@@ -236,16 +277,16 @@ void check_hack_attract(void)
   int iVar1;
   int iVar2;
   
-  if ((0 < hack_attract) && (hack_attract + 2000U < gameTrackerX.vblCount)) {
+  if ((0 < hack_attract) && (hack_attract + 2000U < DAT_800d2204)) {
     hack_attract = 1;
-    play_movie((&the_attract_movies4)[hack_attract_movie]);
+    play_movie(the_attract_movies[hack_attract_movie]);
     iVar2 = hack_attract_movie + 1;
     iVar1 = iVar2;
     if (iVar2 < 0) {
       iVar1 = hack_attract_movie + 4;
     }
     hack_attract_movie = iVar2 + (iVar1 >> 2) * -4;
-    hack_attract = gameTrackerX.vblCount;
+    hack_attract = DAT_800d2204;
   }
   return;
 }
@@ -255,30 +296,32 @@ void check_hack_attract(void)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ get_volume(void *gt /*$a0*/, enum sfx_t sfx /*$a1*/)
- // line 314, offset 0x800b2be8
+ // line 341, offset 0x800b7518
 	/* begin block 1 */
-		// Start line: 316
-		// Start offset: 0x800B2BE8
+		// Start line: 343
+		// Start offset: 0x800B7518
 		// Variables:
 	// 		int raw; // $a2
 	/* end block 1 */
-	// End offset: 0x800B2C24
-	// End Line: 322
+	// End offset: 0x800B7554
+	// End Line: 349
 
 	/* begin block 2 */
-		// Start line: 652
+		// Start line: 712
 	/* end block 2 */
-	// End Line: 653
+	// End Line: 713
 
 	/* begin block 3 */
-		// Start line: 653
+		// Start line: 713
 	/* end block 3 */
-	// End Line: 654
+	// End Line: 714
 
 	/* begin block 4 */
-		// Start line: 654
+		// Start line: 714
 	/* end block 4 */
-	// End Line: 655
+	// End Line: 715
+
+/* File: C:\kain2\game\MENU\MENUDEFS.C */
 
 int get_volume(void *gt,sfx_t sfx)
 
@@ -307,25 +350,27 @@ int get_volume(void *gt,sfx_t sfx)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ set_volume(enum sfx_t sfx /*$a2*/, int cooked /*$a1*/)
- // line 325, offset 0x800b2c54
+ // line 352, offset 0x800b7584
 	/* begin block 1 */
-		// Start line: 326
-		// Start offset: 0x800B2C54
+		// Start line: 353
+		// Start offset: 0x800B7584
 		// Variables:
 	// 		int raw; // $a0
 	/* end block 1 */
-	// End offset: 0x800B2CD0
-	// End Line: 334
+	// End offset: 0x800B7600
+	// End Line: 361
 
 	/* begin block 2 */
-		// Start line: 674
+		// Start line: 734
 	/* end block 2 */
-	// End Line: 675
+	// End Line: 735
 
 	/* begin block 3 */
-		// Start line: 675
+		// Start line: 735
 	/* end block 3 */
-	// End Line: 676
+	// End Line: 736
+
+/* File: C:\kain2\game\MENU\MENUDEFS.C */
 
 void set_volume(sfx_t sfx,int cooked)
 
@@ -354,20 +399,22 @@ void set_volume(sfx_t sfx,int cooked)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ do_sound_adjust(void *gt /*$a0*/, long sfxparam /*$s0*/, enum menu_ctrl_t ctrl /*$s1*/)
- // line 336, offset 0x800b2ce0
+ // line 363, offset 0x800b7610
 	/* begin block 1 */
-		// Start line: 337
-		// Start offset: 0x800B2CE0
+		// Start line: 364
+		// Start offset: 0x800B7610
 		// Variables:
 	// 		int volume; // $a1
 	/* end block 1 */
-	// End offset: 0x800B2D48
-	// End Line: 357
+	// End offset: 0x800B7678
+	// End Line: 384
 
 	/* begin block 2 */
-		// Start line: 697
+		// Start line: 757
 	/* end block 2 */
-	// End Line: 698
+	// End Line: 758
+
+/* File: C:\kain2\game\MENU\MENUDEFS.C */
 
 int do_sound_adjust(void *gt,long sfxparam,menu_ctrl_t ctrl)
 
@@ -399,24 +446,26 @@ int do_sound_adjust(void *gt,long sfxparam,menu_ctrl_t ctrl)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ sound_item(void *gt /*$s0*/, char *text /*$s2*/, enum sfx_t sfx /*$s1*/)
- // line 359, offset 0x800b2d5c
+ // line 386, offset 0x800b768c
 	/* begin block 1 */
-		// Start line: 360
-		// Start offset: 0x800B2D5C
+		// Start line: 387
+		// Start offset: 0x800B768C
 	/* end block 1 */
-	// End offset: 0x800B2D5C
-	// End Line: 360
+	// End offset: 0x800B768C
+	// End Line: 387
 
 	/* begin block 2 */
-		// Start line: 743
+		// Start line: 803
 	/* end block 2 */
-	// End Line: 744
+	// End Line: 804
+
+/* File: C:\kain2\game\MENU\MENUDEFS.C */
 
 void sound_item(void *gt,char *text,sfx_t sfx)
 
 {
   get_volume(gt,sfx);
-  menu_item(*(menu_t **)((int)gt + 0x20),do_sound_adjust,sfx,"%s %d");
+  menu_item(*(menu_t **)((int)gt + 0x20),do_sound_adjust,sfx,s__s__d_800d0d34);
   return;
 }
 
@@ -424,240 +473,102 @@ void sound_item(void *gt,char *text,sfx_t sfx)
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ maybe_update_flags(long *flagsptr /*$a3*/, long mask /*$a1*/, enum menu_ctrl_t ctrl /*$a2*/)
- // line 369, offset 0x800b2dc0
+// int /*$ra*/ menudefs_toggle_dualshock(void *gt /*$s0*/, long param /*$a1*/, enum menu_ctrl_t ctrl /*$a2*/)
+ // line 989, offset 0x800b76f0
 	/* begin block 1 */
-		// Start line: 763
+		// Start line: 2009
 	/* end block 1 */
-	// End Line: 764
+	// End Line: 2010
 
-	/* begin block 2 */
-		// Start line: 764
-	/* end block 2 */
-	// End Line: 765
+/* File: C:\kain2\game\MENU\MENUDEFS.C */
 
-int maybe_update_flags(long *flagsptr,long mask,menu_ctrl_t ctrl)
+int menudefs_toggle_dualshock(void *gt,long param,menu_ctrl_t ctrl)
 
 {
-  if ((ctrl == menu_ctrl_engage) && (ctrl = menu_ctrl_right, (*flagsptr & mask) == mask)) {
-    ctrl = menu_ctrl_left;
-  }
-  if (ctrl != menu_ctrl_left) {
-    if (ctrl != menu_ctrl_right) {
-      return 0;
+  int iVar1;
+  
+  if (ctrl + ~menu_ctrl_down < 2) {
+    iVar1 = GAMEPAD_DualShockEnabled();
+    if (iVar1 == 0) {
+      GAMEPAD_EnableDualShock();
+      if (*(int *)((int)gt + 0x248) == 0) {
+        *(undefined4 *)((int)gt + 0x248) = 1;
+      }
+      GAMEPAD_Shock1(0x80,*(int *)((int)gt + 0x248) << 3);
+      iVar1 = 1;
     }
-    *flagsptr = *flagsptr | mask;
-    return 1;
-  }
-  *flagsptr = *flagsptr & ~mask;
-  return 1;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// int /*$ra*/ do_flags(void *gt /*$a0*/, long mask /*$a1*/, enum menu_ctrl_t ctrl /*$a2*/)
- // line 404, offset 0x800b2e34
-	/* begin block 1 */
-		// Start line: 833
-	/* end block 1 */
-	// End Line: 834
-
-int do_flags(void *gt,long mask,menu_ctrl_t ctrl)
-
-{
-  int iVar1;
-  
-  iVar1 = maybe_update_flags((long *)((int)gt + 0x144),mask,ctrl);
-  return iVar1;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// int /*$ra*/ do_debug(void *gt /*$a0*/, long mask /*$a1*/, enum menu_ctrl_t ctrl /*$a2*/)
- // line 409, offset 0x800b2e54
-	/* begin block 1 */
-		// Start line: 843
-	/* end block 1 */
-	// End Line: 844
-
-int do_debug(void *gt,long mask,menu_ctrl_t ctrl)
-
-{
-  int iVar1;
-  
-  iVar1 = maybe_update_flags((long *)((int)gt + 0xc4),mask,ctrl);
-  return iVar1;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// void /*$ra*/ flags_item(void *gt /*$a0*/, char *text /*$a1*/, long mask /*$a2*/)
- // line 414, offset 0x800b2e74
-	/* begin block 1 */
-		// Start line: 415
-		// Start offset: 0x800B2E74
-		// Variables:
-	// 		long flags; // $v0
-	/* end block 1 */
-	// End offset: 0x800B2EB4
-	// End Line: 417
-
-	/* begin block 2 */
-		// Start line: 853
-	/* end block 2 */
-	// End Line: 854
-
-void flags_item(void *gt,char *text,long mask)
-
-{
-  menu_item(*(menu_t **)((int)gt + 0x20),do_flags,mask,"%s %s");
-  return;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// void /*$ra*/ debug_item(void *gt /*$a0*/, char *text /*$a1*/, long mask /*$a2*/)
- // line 421, offset 0x800b2ed0
-	/* begin block 1 */
-		// Start line: 422
-		// Start offset: 0x800B2ED0
-		// Variables:
-	// 		long flags; // $v0
-	/* end block 1 */
-	// End offset: 0x800B2F10
-	// End Line: 424
-
-	/* begin block 2 */
-		// Start line: 867
-	/* end block 2 */
-	// End Line: 868
-
-void debug_item(void *gt,char *text,long mask)
-
-{
-  menu_item(*(menu_t **)((int)gt + 0x20),do_debug,mask,"%s %s");
-  return;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// int /*$ra*/ cheats_menu(void *gt /*$s0*/, int index /*$s1*/)
- // line 428, offset 0x800b2f2c
-	/* begin block 1 */
-		// Start line: 429
-		// Start offset: 0x800B2F2C
-		// Variables:
-	// 		int width; // $v0
-	/* end block 1 */
-	// End offset: 0x800B3034
-	// End Line: 444
-
-	/* begin block 2 */
-		// Start line: 881
-	/* end block 2 */
-	// End Line: 882
-
-int cheats_menu(void *gt,int index)
-
-{
-  menu_format(*(menu_t **)((int)gt + 0x20),0,0x15,0x1e,0x1eb,0xe,2,0);
-  MENUFACE_ChangeStateRandomly(index);
-  menu_item(*(menu_t **)((int)gt + 0x20),(TDRFuncPtr_menu_item1fn)0x0,0,"cheats");
-  flags_item(gt,"activate all warpgates   ",0x400000);
-  debug_item(gt,"disable monsters loading ",0x8000);
-  flags_item(gt,"skip first puppet show   ",0x800000);
-  debug_item(gt,"skip all puppet shows    ",0x800000);
-  debug_item(gt,"show warp gate info      ",0x1000000);
-  menu_item(*(menu_t **)((int)gt + 0x20),do_pop_menu,0,"return to main menu");
-  if (index < 0) {
-    index = 1;
-  }
-  return index;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// int /*$ra*/ menudefs_toggle_dualshock(void *gt /*$s0*/, int index /*$s1*/)
- // line 903, offset 0x800b3048
-	/* begin block 1 */
-		// Start line: 1834
-	/* end block 1 */
-	// End Line: 1835
-
-int menudefs_toggle_dualshock(void *gt,int index)
-
-{
-  int iVar1;
-  
-  iVar1 = GAMEPAD_DualShockEnabled();
-  if (iVar1 == 0) {
-    GAMEPAD_EnableDualShock();
-    if (*(int *)((int)gt + 600) == 0) {
-      *(undefined4 *)((int)gt + 600) = 1;
+    else {
+      GAMEPAD_DisableDualShock();
+      iVar1 = 1;
     }
-    GAMEPAD_Shock1(0x80,*(int *)((int)gt + 600) << 3);
   }
   else {
-    GAMEPAD_DisableDualShock();
+    iVar1 = 0;
   }
-  if (index < 0) {
-    index = 1;
-  }
-  return index;
+  return iVar1;
 }
 
 
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ options_menu(void *gt /*$s0*/, int index /*$s1*/)
- // line 919, offset 0x800b30cc
+// int /*$ra*/ options_menu(void *gt /*$s1*/, int index /*$s2*/)
+ // line 1009, offset 0x800b7774
 	/* begin block 1 */
-		// Start line: 1866
+		// Start line: 1010
+		// Start offset: 0x800B7774
+		// Variables:
+	// 		static int wasDualShock; // offset 0x0
+	// 		int dualShock; // $s0
 	/* end block 1 */
-	// End Line: 1867
+	// End offset: 0x800B78A4
+	// End Line: 1068
+
+	/* begin block 2 */
+		// Start line: 2049
+	/* end block 2 */
+	// End Line: 2050
+
+/* File: C:\kain2\game\MENU\MENUDEFS.C */
 
 int options_menu(void *gt,int index)
 
 {
   char *format;
   int iVar1;
+  int iVar2;
   localstr_t id;
   
   hack_attract = 0;
   MENUFACE_ChangeStateRandomly(index);
+  do_check_controller(gt);
   format = localstr_get(LOCALSTR_options);
-  menu_item(*(menu_t **)((int)gt + 0x20),(TDRFuncPtr_menu_item1fn)0x0,0,format);
+  menu_item_flags(*(menu_t **)((int)gt + 0x20),(TDRFuncPtr_menu_item_flags1fn)0x0,0,4,format);
   format = localstr_get(LOCALSTR_sound);
   sound_item(gt,format,sfx_sound);
   format = localstr_get(LOCALSTR_music);
   sound_item(gt,format,sfx_music);
   format = localstr_get(LOCALSTR_voice);
   sound_item(gt,format,sfx_voice);
-  iVar1 = GAMEPAD_DualShockEnabled();
-  id = LOCALSTR_vibration_off;
+  iVar1 = GAMEPAD_ControllerIsDualShock();
   if (iVar1 != 0) {
-    id = LOCALSTR_vibration_on;
+    iVar2 = GAMEPAD_DualShockEnabled();
+    id = LOCALSTR_vibration_off;
+    if (iVar2 != 0) {
+      id = LOCALSTR_vibration_on;
+    }
+    format = localstr_get(id);
+    menu_item(*(menu_t **)((int)gt + 0x20),menudefs_toggle_dualshock,0,format);
   }
-  format = localstr_get(id);
-  menu_item(*(menu_t **)((int)gt + 0x20),do_function,(long)menudefs_toggle_dualshock,format);
   format = localstr_get(LOCALSTR_done);
   menu_item(*(menu_t **)((int)gt + 0x20),do_pop_menu,0,format);
+  if ((iVar1 != wasDualShock_54) && (3 < index)) {
+    index = iVar1 + 4;
+  }
   if (index < 0) {
     index = 1;
   }
+  wasDualShock_54 = iVar1;
   return index;
 }
 
@@ -665,12 +576,14 @@ int options_menu(void *gt,int index)
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ main_menu(void *gt /*$s1*/, int index /*$s2*/)
- // line 976, offset 0x800b31d0
+// int /*$ra*/ main_menu(void *gt /*$s0*/, int index /*$s1*/)
+ // line 1085, offset 0x800b78bc
 	/* begin block 1 */
-		// Start line: 1980
+		// Start line: 2201
 	/* end block 1 */
-	// End Line: 1981
+	// End Line: 2202
+
+/* File: C:\kain2\game\MENU\MENUDEFS.C */
 
 int main_menu(void *gt,int index)
 
@@ -678,13 +591,13 @@ int main_menu(void *gt,int index)
   char *format;
   
   hack_attract = 0;
-  menu_format(*(menu_t **)((int)gt + 0x20),1,0x74,0x1e,0xbe,0xe,2,0);
+  menu_format(*(menu_t **)((int)gt + 0x20),1,MAIN_XPOS,MAIN_YPOS,MAIN_WIDTH,LINESKIP,ITEMSKIP,0);
   MENUFACE_ChangeStateRandomly(index);
+  do_check_controller(gt);
   format = localstr_get(LOCALSTR_start_game);
   menu_item(*(menu_t **)((int)gt + 0x20),do_start_game,0,format);
   format = localstr_get(LOCALSTR_options);
   menu_item(*(menu_t **)((int)gt + 0x20),do_push_menu,(long)options_menu,format);
-  menu_item(*(menu_t **)((int)gt + 0x20),do_push_menu,(long)cheats_menu,"cheats");
   if (index < 0) {
     index = 0;
   }
@@ -695,26 +608,31 @@ int main_menu(void *gt,int index)
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ do_main_menu(void *gt /*$s0*/, long param /*$a1*/, enum menu_ctrl_t ctrl /*$a2*/)
- // line 1006, offset 0x800b32b4
+// int /*$ra*/ do_main_menu(void *gt /*$a0*/, long param /*$a1*/, enum menu_ctrl_t ctrl /*$a2*/)
+ // line 1114, offset 0x800b7980
 	/* begin block 1 */
-		// Start line: 2044
+		// Start line: 2263
 	/* end block 1 */
-	// End Line: 2045
+	// End Line: 2264
+
+	/* begin block 2 */
+		// Start line: 2264
+	/* end block 2 */
+	// End Line: 2265
+
+/* File: C:\kain2\game\MENU\MENUDEFS.C */
 
 int do_main_menu(void *gt,long param,menu_ctrl_t ctrl)
 
 {
-  int iVar1;
-  
-  if ((ctrl == menu_ctrl_start) || (iVar1 = 0, ctrl == menu_ctrl_engage)) {
-    womp_background("\\kain2\\game\\psx\\bkgdmenu.tim");
-    menu_pop(*(menu_t **)((int)gt + 0x20));
-    menu_push(*(menu_t **)((int)gt + 0x20),main_menu);
-    iVar1 = 1;
-    hack_reset_attract = 1;
+  if ((StartGameFading == 0) && ((ctrl == menu_ctrl_start || (ctrl == menu_ctrl_engage)))) {
+    *(undefined2 *)((int)gt + 0xd0) = 10;
+    *(undefined2 *)((int)gt + 0xcc) = 0xffec;
+    *(undefined2 *)((int)gt + 0xce) = 0x14;
+    StartGameFading = 1;
+    return 1;
   }
-  return iVar1;
+  return 0;
 }
 
 
@@ -722,47 +640,58 @@ int do_main_menu(void *gt,long param,menu_ctrl_t ctrl)
 // decompiled code
 // original method signature: 
 // char * /*$ra*/ flashStart()
- // line 1020, offset 0x800b331c
+ // line 1130, offset 0x800b79d4
 	/* begin block 1 */
-		// Start line: 1021
-		// Start offset: 0x800B331C
+		// Start line: 1131
+		// Start offset: 0x800B79D4
 		// Variables:
-	// 		static int flashTimer; // offset 0x14c
-	// 		static int flashOn; // offset 0x150
+	// 		static int flashTimer; // offset 0x78
+	// 		static int flashOn; // offset 0x7c
 	/* end block 1 */
-	// End offset: 0x800B3384
-	// End Line: 1043
+	// End offset: 0x800B7AB0
+	// End Line: 1167
 
 	/* begin block 2 */
-		// Start line: 2073
+		// Start line: 2299
 	/* end block 2 */
-	// End Line: 2074
+	// End Line: 2300
 
-	/* begin block 3 */
-		// Start line: 2079
-	/* end block 3 */
-	// End Line: 2080
-
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\MENU\MENUDEFS.C */
 
 char * flashStart(void)
 
 {
   char *pcVar1;
   
-  DAT_800d0c94 = DAT_800d0c94 + 1;
-  if (0xf < DAT_800d0c94) {
-    if (DAT_800d0c98 == 0) {
-      DAT_800d0c94 = 0;
+  DAT_800d2334 = 1;
+  if (StartGameFading == 1) {
+    hack_reset_attract = StartGameFading;
+    if (DAT_800d2198 == -1) {
+      womp_background(s__kain2_game_psx_bkgdmenu_tim_800d0d44);
+      LAB_800d219c = 10;
+      DAT_800d2198 = 0x14;
+      DAT_800d219a = 0x14;
+      StartGameFading = 0;
+      menu_pop(DAT_800d20ec);
+      menu_push(DAT_800d20ec,main_menu);
     }
-    else {
-      DAT_800d0c94 = 10;
+    DAT_800d0d40 = 0;
+  }
+  else {
+    DAT_800d0d3c = DAT_800d0d3c + 1;
+    if (0xf < DAT_800d0d3c) {
+      if (DAT_800d0d40 == 0) {
+        DAT_800d0d3c = 0;
+      }
+      else {
+        DAT_800d0d3c = 10;
+      }
+      DAT_800d0d40 = DAT_800d0d40 ^ 1;
     }
-    DAT_800d0c98 = DAT_800d0c98 ^ 1;
   }
   pcVar1 = (char *)0x0;
-  if (DAT_800d0c98 != 0) {
-    pcVar1 = localstr_get(LOCALSTR_start_game);
+  if (DAT_800d0d40 != 0) {
+    pcVar1 = localstr_get(LOCALSTR_press_start);
   }
   return pcVar1;
 }
@@ -772,16 +701,18 @@ char * flashStart(void)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ menudefs_main_menu(void *gt /*$s0*/, int index /*$s1*/)
- // line 1045, offset 0x800b3394
+ // line 1169, offset 0x800b7ac0
 	/* begin block 1 */
-		// Start line: 2129
+		// Start line: 2389
 	/* end block 1 */
-	// End Line: 2130
+	// End Line: 2390
 
 	/* begin block 2 */
-		// Start line: 2130
+		// Start line: 2390
 	/* end block 2 */
-	// End Line: 2131
+	// End Line: 2391
+
+/* File: C:\kain2\game\MENU\MENUDEFS.C */
 
 int menudefs_main_menu(void *gt,int index)
 
@@ -790,10 +721,10 @@ int menudefs_main_menu(void *gt,int index)
   
   if (hack_reset_attract != 0) {
     hack_reset_attract = 0;
-    hack_attract = gameTrackerX.vblCount;
+    hack_attract = DAT_800d2204;
   }
   check_hack_attract();
-  menu_format(*(menu_t **)((int)gt + 0x20),1,0x80,100,100,0xe,2,0);
+  menu_format(*(menu_t **)((int)gt + 0x20),1,0x80,100,100,LINESKIP,ITEMSKIP,0);
   format = flashStart();
   menu_item(*(menu_t **)((int)gt + 0x20),do_main_menu,0,format);
   if (index < 0) {
@@ -807,11 +738,13 @@ int menudefs_main_menu(void *gt,int index)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ menudefs_confirmexit_menu(void *gt /*$s0*/, int index /*$s1*/)
- // line 1069, offset 0x800b343c
+ // line 1193, offset 0x800b7b68
 	/* begin block 1 */
-		// Start line: 2180
+		// Start line: 2440
 	/* end block 1 */
-	// End Line: 2181
+	// End Line: 2441
+
+/* File: C:\kain2\game\MENU\MENUDEFS.C */
 
 int menudefs_confirmexit_menu(void *gt,int index)
 
@@ -819,8 +752,9 @@ int menudefs_confirmexit_menu(void *gt,int index)
   char *format;
   
   hack_attract = 0;
+  do_check_controller(gt);
   format = localstr_get(LOCALSTR_query_quit);
-  menu_item(*(menu_t **)((int)gt + 0x20),(TDRFuncPtr_menu_item1fn)0x0,0,format);
+  menu_item_flags(*(menu_t **)((int)gt + 0x20),(TDRFuncPtr_menu_item_flags1fn)0x0,0,4,format);
   format = localstr_get(LOCALSTR_no);
   menu_item(*(menu_t **)((int)gt + 0x20),do_pop_menu,0,format);
   format = localstr_get(LOCALSTR_yes);
@@ -836,21 +770,24 @@ int menudefs_confirmexit_menu(void *gt,int index)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ menudefs_pause_menu(void *gt /*$s1*/, int index /*$s2*/)
- // line 1078, offset 0x800b34dc
+ // line 1204, offset 0x800b7c10
 	/* begin block 1 */
-		// Start line: 2198
+		// Start line: 2462
 	/* end block 1 */
-	// End Line: 2199
+	// End Line: 2463
+
+/* File: C:\kain2\game\MENU\MENUDEFS.C */
 
 int menudefs_pause_menu(void *gt,int index)
 
 {
   char *format;
   
+  do_check_controller(gt);
   hack_attract = 0;
-  menu_format(*(menu_t **)((int)gt + 0x20),1,0x100,0x3c,0x100,0xe,2,1);
+  menu_format(*(menu_t **)((int)gt + 0x20),1,PAUSE_XPOS,PAUSE_YPOS,PAUSE_WIDTH,LINESKIP,ITEMSKIP,1);
   format = localstr_get(LOCALSTR_paused);
-  menu_item(*(menu_t **)((int)gt + 0x20),(TDRFuncPtr_menu_item1fn)0x0,0,format);
+  menu_item_flags(*(menu_t **)((int)gt + 0x20),(TDRFuncPtr_menu_item_flags1fn)0x0,0,4,format);
   format = localstr_get(LOCALSTR_resume_game);
   menu_item(*(menu_t **)((int)gt + 0x20),do_function,(long)DEBUG_ContinueGame,format);
   format = localstr_get(LOCALSTR_save_game);

@@ -5,15 +5,15 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_DisableSegment(struct _G2Anim_Type *anim /*$a0*/, int segmentID /*$a1*/)
- // line 57, offset 0x8008d80c
+ // line 57, offset 0x8008f308
 	/* begin block 1 */
 		// Start line: 60
-		// Start offset: 0x8008D80C
+		// Start offset: 0x8008F308
 		// Variables:
 	// 		unsigned long segmentIndex; // $v0
 	// 		unsigned long segmentMask; // $v1
 	/* end block 1 */
-	// End offset: 0x8008D80C
+	// End offset: 0x8008F308
 	// End Line: 64
 
 	/* begin block 2 */
@@ -36,6 +36,8 @@
 	/* end block 5 */
 	// End Line: 71
 
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
+
 void G2Anim_DisableSegment(_G2Anim_Type *anim,int segmentID)
 
 {
@@ -49,15 +51,15 @@ void G2Anim_DisableSegment(_G2Anim_Type *anim,int segmentID)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_EnableSegment(struct _G2Anim_Type *anim /*$a0*/, int segmentID /*$a1*/)
- // line 82, offset 0x8008d834
+ // line 82, offset 0x8008f330
 	/* begin block 1 */
 		// Start line: 85
-		// Start offset: 0x8008D834
+		// Start offset: 0x8008F330
 		// Variables:
 	// 		unsigned long segmentIndex; // $v0
 	// 		unsigned long segmentMask; // $v1
 	/* end block 1 */
-	// End offset: 0x8008D834
+	// End offset: 0x8008F330
 	// End Line: 89
 
 	/* begin block 2 */
@@ -75,6 +77,8 @@ void G2Anim_DisableSegment(_G2Anim_Type *anim,int segmentID)
 	/* end block 4 */
 	// End Line: 108
 
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
+
 void G2Anim_EnableSegment(_G2Anim_Type *anim,int segmentID)
 
 {
@@ -88,14 +92,14 @@ void G2Anim_EnableSegment(_G2Anim_Type *anim,int segmentID)
 // decompiled code
 // original method signature: 
 // short /*$ra*/ G2Anim_GetElapsedTime(struct _G2Anim_Type *anim /*$a0*/)
- // line 97, offset 0x8008d860
+ // line 97, offset 0x8008f35c
 	/* begin block 1 */
 		// Start line: 100
-		// Start offset: 0x8008D860
+		// Start offset: 0x8008F35C
 		// Variables:
 	// 		struct _G2AnimSection_Type *section; // $v0
 	/* end block 1 */
-	// End offset: 0x8008D860
+	// End offset: 0x8008F35C
 	// End Line: 104
 
 	/* begin block 2 */
@@ -113,6 +117,8 @@ void G2Anim_EnableSegment(_G2Anim_Type *anim,int segmentID)
 	/* end block 4 */
 	// End Line: 138
 
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
+
 short G2Anim_GetElapsedTime(_G2Anim_Type *anim)
 
 {
@@ -124,14 +130,14 @@ short G2Anim_GetElapsedTime(_G2Anim_Type *anim)
 // decompiled code
 // original method signature: 
 // struct _G2AnimKeylist_Type * /*$ra*/ G2Anim_GetKeylist(struct _G2Anim_Type *anim /*$a0*/)
- // line 136, offset 0x8008d884
+ // line 136, offset 0x8008f380
 	/* begin block 1 */
 		// Start line: 139
-		// Start offset: 0x8008D884
+		// Start offset: 0x8008F380
 		// Variables:
 	// 		struct _G2AnimSection_Type *section; // $v0
 	/* end block 1 */
-	// End offset: 0x8008D884
+	// End offset: 0x8008F380
 	// End Line: 143
 
 	/* begin block 2 */
@@ -149,6 +155,8 @@ short G2Anim_GetElapsedTime(_G2Anim_Type *anim)
 	/* end block 4 */
 	// End Line: 185
 
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
+
 _G2AnimKeylist_Type * G2Anim_GetKeylist(_G2Anim_Type *anim)
 
 {
@@ -160,18 +168,20 @@ _G2AnimKeylist_Type * G2Anim_GetKeylist(_G2Anim_Type *anim)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_GetRootMotionOverInterval(struct _G2Anim_Type *anim /*$a0*/, short intervalStart /*$a1*/, short intervalEnd /*$a2*/, struct _G2SVector3_Type *motionVector /*$a3*/)
- // line 165, offset 0x8008d8a8
+ // line 165, offset 0x8008f3a4
 	/* begin block 1 */
 		// Start line: 166
-		// Start offset: 0x8008D8A8
+		// Start offset: 0x8008F3A4
 	/* end block 1 */
-	// End offset: 0x8008D8A8
+	// End offset: 0x8008F3A4
 	// End Line: 166
 
 	/* begin block 2 */
 		// Start line: 310
 	/* end block 2 */
 	// End Line: 311
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 void G2Anim_GetRootMotionOverInterval
                (_G2Anim_Type *anim,short intervalStart,short intervalEnd,
@@ -190,20 +200,22 @@ void G2Anim_GetRootMotionOverInterval
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_InterpToKeylistFrame(struct _G2Anim_Type *anim /*$s2*/, struct _G2AnimKeylist_Type *keylist /*$s4*/, int keylistID /*$s5*/, int targetFrame /*$s6*/, int duration /*stack 16*/)
- // line 292, offset 0x8008d8d8
+ // line 292, offset 0x8008f3d4
 	/* begin block 1 */
 		// Start line: 293
-		// Start offset: 0x8008D8D8
+		// Start offset: 0x8008F3D4
 		// Variables:
 	// 		int i; // $s0
 	/* end block 1 */
-	// End offset: 0x8008D954
+	// End offset: 0x8008F450
 	// End Line: 307
 
 	/* begin block 2 */
 		// Start line: 575
 	/* end block 2 */
 	// End Line: 576
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 void G2Anim_InterpToKeylistFrame
                (_G2Anim_Type *anim,_G2AnimKeylist_Type *keylist,int keylistID,int targetFrame,
@@ -232,36 +244,50 @@ void G2Anim_InterpToKeylistFrame
 // decompiled code
 // original method signature: 
 // enum _G2Bool_Enum /*$ra*/ G2Anim_IsSegmentEnabled(struct _G2Anim_Type *anim /*$a0*/, int segmentID /*$a1*/)
- // line 353, offset 0x8008d97c
+ // line 350, offset 0x8008f478
 	/* begin block 1 */
-		// Start line: 356
-		// Start offset: 0x8008D97C
+		// Start line: 352
+		// Start offset: 0x8008F478
 		// Variables:
 	// 		unsigned long segmentIndex; // $v0
 	// 		unsigned long segmentMask; // $v1
 	/* end block 1 */
-	// End offset: 0x8008D97C
-	// End Line: 360
+	// End offset: 0x8008F4D8
+	// End Line: 366
 
 	/* begin block 2 */
-		// Start line: 699
+		// Start line: 696
 	/* end block 2 */
-	// End Line: 700
+	// End Line: 697
 
 	/* begin block 3 */
-		// Start line: 457
+		// Start line: 453
 	/* end block 3 */
-	// End Line: 458
+	// End Line: 454
 
 	/* begin block 4 */
-		// Start line: 461
+		// Start line: 455
 	/* end block 4 */
-	// End Line: 462
+	// End Line: 456
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 _G2Bool_Enum G2Anim_IsSegmentEnabled(_G2Anim_Type *anim,int segmentID)
 
 {
-  return (uint)((anim->disabledBits[segmentID >> 5] & 1 << (segmentID & 0x1fU)) == 0);
+  int iVar1;
+  
+  if (segmentID != -1) {
+    iVar1 = segmentID >> 5;
+    do {
+      if ((anim->disabledBits[iVar1] & 1 << (segmentID & 0x1fU)) != 0) {
+        return G2FALSE;
+      }
+      segmentID = (int)anim->modelData->segmentList[segmentID].parent;
+      iVar1 = segmentID >> 5;
+    } while (segmentID != 0xffffffff);
+  }
+  return 1;
 }
 
 
@@ -269,20 +295,22 @@ _G2Bool_Enum G2Anim_IsSegmentEnabled(_G2Anim_Type *anim,int segmentID)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_SetAlphaTable(struct _G2Anim_Type *anim /*$s2*/, struct _G2AnimAlphaTable_Type *table /*$s3*/)
- // line 410, offset 0x8008d9a4
+ // line 412, offset 0x8008f4e0
 	/* begin block 1 */
-		// Start line: 411
-		// Start offset: 0x8008D9A4
+		// Start line: 413
+		// Start offset: 0x8008F4E0
 		// Variables:
 	// 		int i; // $s0
 	/* end block 1 */
-	// End offset: 0x8008D9F8
-	// End Line: 420
+	// End offset: 0x8008F534
+	// End Line: 422
 
 	/* begin block 2 */
-		// Start line: 814
+		// Start line: 818
 	/* end block 2 */
-	// End Line: 815
+	// End Line: 819
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 void G2Anim_SetAlphaTable(_G2Anim_Type *anim,_G2AnimAlphaTable_Type *table)
 
@@ -307,30 +335,32 @@ void G2Anim_SetAlphaTable(_G2Anim_Type *anim,_G2AnimAlphaTable_Type *table)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_SetCallback(struct _G2Anim_Type *anim /*$a0*/, TDRFuncPtr_G2Anim_SetCallback1callback callback /*$a1*/, void *data /*$a2*/)
- // line 426, offset 0x8008da14
+ // line 428, offset 0x8008f550
 	/* begin block 1 */
-		// Start line: 429
-		// Start offset: 0x8008DA14
+		// Start line: 431
+		// Start offset: 0x8008F550
 		// Variables:
 	// 		int i; // $v1
 	/* end block 1 */
-	// End offset: 0x8008DA48
-	// End Line: 437
+	// End offset: 0x8008F584
+	// End Line: 439
 
 	/* begin block 2 */
-		// Start line: 557
+		// Start line: 565
 	/* end block 2 */
-	// End Line: 558
+	// End Line: 566
 
 	/* begin block 3 */
-		// Start line: 559
+		// Start line: 567
 	/* end block 3 */
-	// End Line: 560
+	// End Line: 568
 
 	/* begin block 4 */
-		// Start line: 564
+		// Start line: 572
 	/* end block 4 */
-	// End Line: 565
+	// End Line: 573
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 void G2Anim_SetCallback(_G2Anim_Type *anim,TDRFuncPtr_G2Anim_SetCallback1callback callback,
                        void *data)
@@ -357,20 +387,22 @@ void G2Anim_SetCallback(_G2Anim_Type *anim,TDRFuncPtr_G2Anim_SetCallback1callbac
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_SetLooping(struct _G2Anim_Type *anim /*$s2*/)
- // line 516, offset 0x8008da50
+ // line 518, offset 0x8008f58c
 	/* begin block 1 */
-		// Start line: 517
-		// Start offset: 0x8008DA50
+		// Start line: 519
+		// Start offset: 0x8008F58C
 		// Variables:
 	// 		int i; // $s0
 	/* end block 1 */
-	// End offset: 0x8008DA98
-	// End Line: 525
+	// End offset: 0x8008F5D4
+	// End Line: 527
 
 	/* begin block 2 */
-		// Start line: 1027
+		// Start line: 1031
 	/* end block 2 */
-	// End Line: 1028
+	// End Line: 1032
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 void G2Anim_SetLooping(_G2Anim_Type *anim)
 
@@ -395,20 +427,22 @@ void G2Anim_SetLooping(_G2Anim_Type *anim)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_SetNoLooping(struct _G2Anim_Type *anim /*$s2*/)
- // line 563, offset 0x8008dab0
+ // line 565, offset 0x8008f5ec
 	/* begin block 1 */
-		// Start line: 564
-		// Start offset: 0x8008DAB0
+		// Start line: 566
+		// Start offset: 0x8008F5EC
 		// Variables:
 	// 		int i; // $s0
 	/* end block 1 */
-	// End offset: 0x8008DAF8
-	// End Line: 572
+	// End offset: 0x8008F634
+	// End Line: 574
 
 	/* begin block 2 */
-		// Start line: 1121
+		// Start line: 1125
 	/* end block 2 */
-	// End Line: 1122
+	// End Line: 1126
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 void G2Anim_SetNoLooping(_G2Anim_Type *anim)
 
@@ -433,20 +467,22 @@ void G2Anim_SetNoLooping(_G2Anim_Type *anim)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_SetPaused(struct _G2Anim_Type *anim /*$s2*/)
- // line 589, offset 0x8008db10
+ // line 591, offset 0x8008f64c
 	/* begin block 1 */
-		// Start line: 590
-		// Start offset: 0x8008DB10
+		// Start line: 592
+		// Start offset: 0x8008F64C
 		// Variables:
 	// 		int i; // $s0
 	/* end block 1 */
-	// End offset: 0x8008DB58
-	// End Line: 598
+	// End offset: 0x8008F694
+	// End Line: 600
 
 	/* begin block 2 */
-		// Start line: 1173
+		// Start line: 1177
 	/* end block 2 */
-	// End Line: 1174
+	// End Line: 1178
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 void G2Anim_SetPaused(_G2Anim_Type *anim)
 
@@ -471,30 +507,32 @@ void G2Anim_SetPaused(_G2Anim_Type *anim)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_SetSpeedAdjustment(struct _G2Anim_Type *anim /*$a0*/, long adjustment /*$a1*/)
- // line 616, offset 0x8008db70
+ // line 618, offset 0x8008f6ac
 	/* begin block 1 */
-		// Start line: 619
-		// Start offset: 0x8008DB70
+		// Start line: 621
+		// Start offset: 0x8008F6AC
 		// Variables:
 	// 		int i; // $v1
 	/* end block 1 */
-	// End offset: 0x8008DB9C
-	// End Line: 627
+	// End offset: 0x8008F6D8
+	// End Line: 629
 
 	/* begin block 2 */
-		// Start line: 1226
+		// Start line: 1230
 	/* end block 2 */
-	// End Line: 1227
+	// End Line: 1231
 
 	/* begin block 3 */
-		// Start line: 787
+		// Start line: 795
 	/* end block 3 */
-	// End Line: 788
+	// End Line: 796
 
 	/* begin block 4 */
-		// Start line: 792
+		// Start line: 800
 	/* end block 4 */
-	// End Line: 793
+	// End Line: 801
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 void G2Anim_SetSpeedAdjustment(_G2Anim_Type *anim,long adjustment)
 
@@ -519,20 +557,22 @@ void G2Anim_SetSpeedAdjustment(_G2Anim_Type *anim,long adjustment)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_SetUnpaused(struct _G2Anim_Type *anim /*$s2*/)
- // line 647, offset 0x8008dba4
+ // line 649, offset 0x8008f6e0
 	/* begin block 1 */
-		// Start line: 648
-		// Start offset: 0x8008DBA4
+		// Start line: 650
+		// Start offset: 0x8008F6E0
 		// Variables:
 	// 		int i; // $s0
 	/* end block 1 */
-	// End offset: 0x8008DBEC
-	// End Line: 656
+	// End offset: 0x8008F728
+	// End Line: 658
 
 	/* begin block 2 */
-		// Start line: 1288
+		// Start line: 1292
 	/* end block 2 */
-	// End Line: 1289
+	// End Line: 1293
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 void G2Anim_SetUnpaused(_G2Anim_Type *anim)
 
@@ -557,20 +597,22 @@ void G2Anim_SetUnpaused(_G2Anim_Type *anim)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2Anim_SwitchToKeylist(struct _G2Anim_Type *anim /*$s2*/, struct _G2AnimKeylist_Type *keylist /*$s3*/, int keylistID /*$s4*/)
- // line 676, offset 0x8008dc04
+ // line 678, offset 0x8008f740
 	/* begin block 1 */
-		// Start line: 677
-		// Start offset: 0x8008DC04
+		// Start line: 679
+		// Start offset: 0x8008F740
 		// Variables:
 	// 		int i; // $s0
 	/* end block 1 */
-	// End offset: 0x8008DC64
-	// End Line: 687
+	// End offset: 0x8008F7A0
+	// End Line: 689
 
 	/* begin block 2 */
-		// Start line: 1344
+		// Start line: 1348
 	/* end block 2 */
-	// End Line: 1345
+	// End Line: 1349
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 void G2Anim_SwitchToKeylist(_G2Anim_Type *anim,_G2AnimKeylist_Type *keylist,int keylistID)
 
@@ -596,16 +638,18 @@ void G2Anim_SwitchToKeylist(_G2Anim_Type *anim,_G2AnimKeylist_Type *keylist,int 
 // decompiled code
 // original method signature: 
 // short /*$ra*/ G2AnimKeylist_GetDuration(struct _G2AnimKeylist_Type *keylist /*$a0*/)
- // line 795, offset 0x8008dc84
+ // line 797, offset 0x8008f7c0
 	/* begin block 1 */
-		// Start line: 1581
+		// Start line: 1585
 	/* end block 1 */
-	// End Line: 1582
+	// End Line: 1586
 
 	/* begin block 2 */
-		// Start line: 999
+		// Start line: 1007
 	/* end block 2 */
-	// End Line: 1000
+	// End Line: 1008
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 short G2AnimKeylist_GetDuration(_G2AnimKeylist_Type *keylist)
 
@@ -619,16 +663,18 @@ short G2AnimKeylist_GetDuration(_G2AnimKeylist_Type *keylist)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ G2AnimKeylist_GetKeyframeCount(struct _G2AnimKeylist_Type *keylist /*$a0*/)
- // line 809, offset 0x8008dcac
+ // line 811, offset 0x8008f7e8
 	/* begin block 1 */
-		// Start line: 1023
+		// Start line: 1031
 	/* end block 1 */
-	// End Line: 1024
+	// End Line: 1032
 
 	/* begin block 2 */
-		// Start line: 1026
+		// Start line: 1034
 	/* end block 2 */
-	// End Line: 1027
+	// End Line: 1035
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 int G2AnimKeylist_GetKeyframeCount(_G2AnimKeylist_Type *keylist)
 
@@ -642,16 +688,18 @@ int G2AnimKeylist_GetKeyframeCount(_G2AnimKeylist_Type *keylist)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2AnimSection_ClearAlarm(struct _G2AnimSection_Type *section /*$a0*/, unsigned long flag /*$a1*/)
- // line 838, offset 0x8008dce4
+ // line 840, offset 0x8008f820
 	/* begin block 1 */
-		// Start line: 1081
+		// Start line: 1089
 	/* end block 1 */
-	// End Line: 1082
+	// End Line: 1090
 
 	/* begin block 2 */
-		// Start line: 1086
+		// Start line: 1094
 	/* end block 2 */
-	// End Line: 1087
+	// End Line: 1095
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 void G2AnimSection_ClearAlarm(_G2AnimSection_Type *section,ulong flag)
 
@@ -665,11 +713,13 @@ void G2AnimSection_ClearAlarm(_G2AnimSection_Type *section,ulong flag)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ G2AnimSection_GetKeyframeNumber(struct _G2AnimSection_Type *section /*$s0*/)
- // line 868, offset 0x8008dcf8
+ // line 870, offset 0x8008f834
 	/* begin block 1 */
-		// Start line: 1711
+		// Start line: 1715
 	/* end block 1 */
-	// End Line: 1712
+	// End Line: 1716
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 int G2AnimSection_GetKeyframeNumber(_G2AnimSection_Type *section)
 
@@ -695,21 +745,23 @@ int G2AnimSection_GetKeyframeNumber(_G2AnimSection_Type *section)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ G2AnimSection_GetStoredKeyframeNumber(struct _G2AnimSection_Type *section /*$a0*/)
- // line 972, offset 0x8008dd54
+ // line 974, offset 0x8008f890
 	/* begin block 1 */
-		// Start line: 1238
+		// Start line: 1246
 	/* end block 1 */
-	// End Line: 1239
+	// End Line: 1247
 
 	/* begin block 2 */
-		// Start line: 1329
+		// Start line: 1337
 	/* end block 2 */
-	// End Line: 1330
+	// End Line: 1338
 
 	/* begin block 3 */
-		// Start line: 1334
+		// Start line: 1342
 	/* end block 3 */
-	// End Line: 1335
+	// End Line: 1343
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 int G2AnimSection_GetStoredKeyframeNumber(_G2AnimSection_Type *section)
 
@@ -722,18 +774,20 @@ int G2AnimSection_GetStoredKeyframeNumber(_G2AnimSection_Type *section)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2AnimSection_InterpToKeylistFrame(struct _G2AnimSection_Type *section /*$a0*/, struct _G2AnimKeylist_Type *keylist /*$a1*/, int keylistID /*$a2*/, int targetFrame /*$a3*/, int duration /*stack 16*/)
- // line 1003, offset 0x8008dd74
+ // line 1005, offset 0x8008f8b0
 	/* begin block 1 */
-		// Start line: 1004
-		// Start offset: 0x8008DD74
+		// Start line: 1006
+		// Start offset: 0x8008F8B0
 	/* end block 1 */
-	// End offset: 0x8008DD74
-	// End Line: 1004
+	// End offset: 0x8008F8B0
+	// End Line: 1006
 
 	/* begin block 2 */
-		// Start line: 1995
+		// Start line: 1999
 	/* end block 2 */
-	// End Line: 1996
+	// End Line: 2000
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 void G2AnimSection_InterpToKeylistFrame
                (_G2AnimSection_Type *section,_G2AnimKeylist_Type *keylist,int keylistID,
@@ -751,30 +805,32 @@ void G2AnimSection_InterpToKeylistFrame
 // decompiled code
 // original method signature: 
 // enum _G2Bool_Enum /*$ra*/ G2AnimSection_IsInInterpolation(struct _G2AnimSection_Type *section /*$a0*/)
- // line 1021, offset 0x8008ddb4
+ // line 1023, offset 0x8008f8f0
 	/* begin block 1 */
-		// Start line: 1024
-		// Start offset: 0x8008DDB4
+		// Start line: 1026
+		// Start offset: 0x8008F8F0
 		// Variables:
 	// 		struct _G2AnimInterpInfo_Type *interpInfo; // $v0
 	/* end block 1 */
-	// End offset: 0x8008DDDC
-	// End Line: 1033
+	// End offset: 0x8008F918
+	// End Line: 1035
 
 	/* begin block 2 */
-		// Start line: 1401
+		// Start line: 1409
 	/* end block 2 */
-	// End Line: 1402
+	// End Line: 1410
 
 	/* begin block 3 */
-		// Start line: 1403
+		// Start line: 1411
 	/* end block 3 */
-	// End Line: 1404
+	// End Line: 1412
 
 	/* begin block 4 */
-		// Start line: 1407
+		// Start line: 1415
 	/* end block 4 */
-	// End Line: 1408
+	// End Line: 1416
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 _G2Bool_Enum G2AnimSection_IsInInterpolation(_G2AnimSection_Type *section)
 
@@ -791,11 +847,13 @@ _G2Bool_Enum G2AnimSection_IsInInterpolation(_G2AnimSection_Type *section)
 // decompiled code
 // original method signature: 
 // short /*$ra*/ G2AnimSection_NextKeyframe(struct _G2AnimSection_Type *section /*$s0*/)
- // line 1079, offset 0x8008dde4
+ // line 1081, offset 0x8008f920
 	/* begin block 1 */
-		// Start line: 1517
+		// Start line: 1525
 	/* end block 1 */
-	// End Line: 1518
+	// End Line: 1526
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 short G2AnimSection_NextKeyframe(_G2AnimSection_Type *section)
 
@@ -816,16 +874,18 @@ short G2AnimSection_NextKeyframe(_G2AnimSection_Type *section)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2AnimSection_SetAlphaTable(struct _G2AnimSection_Type *section /*$a0*/, struct _G2AnimAlphaTable_Type *table /*$a1*/)
- // line 1110, offset 0x8008de40
+ // line 1112, offset 0x8008f97c
 	/* begin block 1 */
-		// Start line: 2199
+		// Start line: 2203
 	/* end block 1 */
-	// End Line: 2200
+	// End Line: 2204
 
 	/* begin block 2 */
-		// Start line: 1558
+		// Start line: 1566
 	/* end block 2 */
-	// End Line: 1559
+	// End Line: 1567
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 void G2AnimSection_SetAlphaTable(_G2AnimSection_Type *section,_G2AnimAlphaTable_Type *table)
 
@@ -841,18 +901,20 @@ void G2AnimSection_SetAlphaTable(_G2AnimSection_Type *section,_G2AnimAlphaTable_
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2AnimSection_SetInterpInfo(struct _G2AnimSection_Type *section /*$a0*/, struct _G2AnimInterpInfo_Type *newInfoPtr /*$a1*/)
- // line 1160, offset 0x8008de5c
+ // line 1162, offset 0x8008f998
 	/* begin block 1 */
-		// Start line: 1654
+		// Start line: 1662
 	/* end block 1 */
-	// End Line: 1655
+	// End Line: 1663
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 void G2AnimSection_SetInterpInfo(_G2AnimSection_Type *section,_G2AnimInterpInfo_Type *newInfoPtr)
 
 {
   section->interpInfo = newInfoPtr;
   if (newInfoPtr != (_G2AnimInterpInfo_Type *)0x0) {
-    memset(newInfoPtr,0,0xc);
+    memset();
   }
   return;
 }
@@ -862,11 +924,13 @@ void G2AnimSection_SetInterpInfo(_G2AnimSection_Type *section,_G2AnimInterpInfo_
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2AnimSection_SetLooping(struct _G2AnimSection_Type *section /*$s0*/)
- // line 1206, offset 0x8008de8c
+ // line 1208, offset 0x8008f9c8
 	/* begin block 1 */
-		// Start line: 2383
+		// Start line: 2387
 	/* end block 1 */
-	// End Line: 2384
+	// End Line: 2388
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 void G2AnimSection_SetLooping(_G2AnimSection_Type *section)
 
@@ -882,11 +946,13 @@ void G2AnimSection_SetLooping(_G2AnimSection_Type *section)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2AnimSection_SetLoopRangeAll(struct _G2AnimSection_Type *section /*$s0*/)
- // line 1218, offset 0x8008decc
+ // line 1220, offset 0x8008fa08
 	/* begin block 1 */
-		// Start line: 1732
+		// Start line: 1740
 	/* end block 1 */
-	// End Line: 1733
+	// End Line: 1741
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 void G2AnimSection_SetLoopRangeAll(_G2AnimSection_Type *section)
 
@@ -904,16 +970,18 @@ void G2AnimSection_SetLoopRangeAll(_G2AnimSection_Type *section)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2AnimSection_SetNoLooping(struct _G2AnimSection_Type *section /*$a0*/)
- // line 1259, offset 0x8008defc
+ // line 1261, offset 0x8008fa38
 	/* begin block 1 */
-		// Start line: 2499
+		// Start line: 2503
 	/* end block 1 */
-	// End Line: 2500
+	// End Line: 2504
 
 	/* begin block 2 */
-		// Start line: 1781
+		// Start line: 1789
 	/* end block 2 */
-	// End Line: 1782
+	// End Line: 1790
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 void G2AnimSection_SetNoLooping(_G2AnimSection_Type *section)
 
@@ -927,16 +995,18 @@ void G2AnimSection_SetNoLooping(_G2AnimSection_Type *section)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2AnimSection_SetNotRewinding(struct _G2AnimSection_Type *section /*$a0*/)
- // line 1268, offset 0x8008df10
+ // line 1270, offset 0x8008fa4c
 	/* begin block 1 */
-		// Start line: 1796
+		// Start line: 1804
 	/* end block 1 */
-	// End Line: 1797
+	// End Line: 1805
 
 	/* begin block 2 */
-		// Start line: 1799
+		// Start line: 1807
 	/* end block 2 */
-	// End Line: 1800
+	// End Line: 1808
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 void G2AnimSection_SetNotRewinding(_G2AnimSection_Type *section)
 
@@ -950,16 +1020,18 @@ void G2AnimSection_SetNotRewinding(_G2AnimSection_Type *section)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2AnimSection_SetPaused(struct _G2AnimSection_Type *section /*$a0*/)
- // line 1277, offset 0x8008df24
+ // line 1279, offset 0x8008fa60
 	/* begin block 1 */
-		// Start line: 1814
+		// Start line: 1822
 	/* end block 1 */
-	// End Line: 1815
+	// End Line: 1823
 
 	/* begin block 2 */
-		// Start line: 1817
+		// Start line: 1825
 	/* end block 2 */
-	// End Line: 1818
+	// End Line: 1826
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 void G2AnimSection_SetPaused(_G2AnimSection_Type *section)
 
@@ -973,16 +1045,18 @@ void G2AnimSection_SetPaused(_G2AnimSection_Type *section)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2AnimSection_SetUnpaused(struct _G2AnimSection_Type *section /*$a0*/)
- // line 1331, offset 0x8008df38
+ // line 1333, offset 0x8008fa74
 	/* begin block 1 */
-		// Start line: 2601
+		// Start line: 2605
 	/* end block 1 */
-	// End Line: 2602
+	// End Line: 2606
 
 	/* begin block 2 */
-		// Start line: 1874
+		// Start line: 1882
 	/* end block 2 */
-	// End Line: 1875
+	// End Line: 1883
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 void G2AnimSection_SetUnpaused(_G2AnimSection_Type *section)
 
@@ -996,11 +1070,13 @@ void G2AnimSection_SetUnpaused(_G2AnimSection_Type *section)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ G2AnimSection_SwitchToKeylist(struct _G2AnimSection_Type *section /*$a0*/, struct _G2AnimKeylist_Type *keylist /*$a1*/, int keylistID /*$a2*/)
- // line 1342, offset 0x8008df4c
+ // line 1344, offset 0x8008fa88
 	/* begin block 1 */
-		// Start line: 1893
+		// Start line: 1901
 	/* end block 1 */
-	// End Line: 1894
+	// End Line: 1902
+
+/* File: C:\kain2\game\G2\ANMG2ILF.C */
 
 void G2AnimSection_SwitchToKeylist
                (_G2AnimSection_Type *section,_G2AnimKeylist_Type *keylist,int keylistID)

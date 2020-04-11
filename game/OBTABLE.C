@@ -5,20 +5,22 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ OBTABLE_InstanceInit(struct _Instance *instance /*$s0*/)
- // line 88, offset 0x8003ef8c
+ // line 88, offset 0x8003e510
 	/* begin block 1 */
 		// Start line: 89
-		// Start offset: 0x8003EF8C
+		// Start offset: 0x8003E510
 		// Variables:
 	// 		long id; // $a0
 	/* end block 1 */
-	// End offset: 0x8003F02C
-	// End Line: 115
+	// End offset: 0x8003E5EC
+	// End Line: 126
 
 	/* begin block 2 */
 		// Start line: 176
 	/* end block 2 */
 	// End Line: 177
+
+/* File: C:\kain2\game\OBTABLE.C */
 
 void OBTABLE_InstanceInit(_Instance *instance)
 
@@ -27,16 +29,19 @@ void OBTABLE_InstanceInit(_Instance *instance)
   
   iVar1 = (int)instance->object->id;
   if (iVar1 < 0) {
-    GenericInit(instance,&gameTrackerX);
+    GenericInit(instance,(GameTracker *)&gameTrackerX);
   }
   else {
-    if ((&objectFunc)[iVar1].initFunc != (_func_4494 *)0x0) {
-      (*(&objectFunc)[iVar1].initFunc)(instance,&gameTrackerX);
+    if ((code *)objectFunc[iVar1].initFunc != (code *)0x0) {
+      (*(code *)objectFunc[iVar1].initFunc)(instance,&gameTrackerX);
     }
   }
   instance->flags2 = instance->flags2 | 0x200000;
   if ((instance->flags & 0x100000U) == 0) {
     SCRIPT_InstanceSplineInit(instance);
+  }
+  if ((instance->intro != (Intro *)0x0) && ((instance->intro->flags & 0x20U) != 0)) {
+    instance->flags2 = instance->flags2 & 0xfffdfffb;
   }
   return;
 }
@@ -46,25 +51,27 @@ void OBTABLE_InstanceInit(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ OBTABLE_GetInstanceCollideFunc(struct _Instance *instance /*$a0*/)
- // line 133, offset 0x8003f03c
+ // line 144, offset 0x8003e5fc
 	/* begin block 1 */
-		// Start line: 135
-		// Start offset: 0x8003F03C
+		// Start line: 146
+		// Start offset: 0x8003E5FC
 		// Variables:
 	// 		long id; // $a1
 	/* end block 1 */
-	// End offset: 0x8003F07C
-	// End Line: 148
+	// End offset: 0x8003E63C
+	// End Line: 159
 
 	/* begin block 2 */
-		// Start line: 266
+		// Start line: 289
 	/* end block 2 */
-	// End Line: 267
+	// End Line: 290
 
 	/* begin block 3 */
-		// Start line: 267
+		// Start line: 290
 	/* end block 3 */
-	// End Line: 268
+	// End Line: 291
+
+/* File: C:\kain2\game\OBTABLE.C */
 
 void OBTABLE_GetInstanceCollideFunc(_Instance *instance)
 
@@ -73,7 +80,7 @@ void OBTABLE_GetInstanceCollideFunc(_Instance *instance)
   
   iVar1 = (int)instance->object->id;
   if (-1 < iVar1) {
-    *(_func_4496 **)&instance->collideFunc = (&objectFunc)[iVar1].collideFunc;
+    instance->collideFunc = objectFunc[iVar1].collideFunc;
     return;
   }
   instance->collideFunc = GenericCollide;
@@ -85,25 +92,27 @@ void OBTABLE_GetInstanceCollideFunc(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ OBTABLE_GetInstanceAdditionalCollideFunc(struct _Instance *instance /*$a0*/)
- // line 165, offset 0x8003f084
+ // line 176, offset 0x8003e644
 	/* begin block 1 */
-		// Start line: 167
-		// Start offset: 0x8003F084
+		// Start line: 178
+		// Start offset: 0x8003E644
 		// Variables:
 	// 		long id; // $a1
 	/* end block 1 */
-	// End offset: 0x8003F0BC
-	// End Line: 179
+	// End offset: 0x8003E67C
+	// End Line: 190
 
 	/* begin block 2 */
-		// Start line: 330
+		// Start line: 353
 	/* end block 2 */
-	// End Line: 331
+	// End Line: 354
 
 	/* begin block 3 */
-		// Start line: 331
+		// Start line: 354
 	/* end block 3 */
-	// End Line: 332
+	// End Line: 355
+
+/* File: C:\kain2\game\OBTABLE.C */
 
 void OBTABLE_GetInstanceAdditionalCollideFunc(_Instance *instance)
 
@@ -112,10 +121,10 @@ void OBTABLE_GetInstanceAdditionalCollideFunc(_Instance *instance)
   
   iVar1 = (int)instance->object->id;
   if (-1 < iVar1) {
-    *(_func_4499 **)&instance->additionalCollideFunc = (&objectFunc)[iVar1].additionalCollideFunc;
+    instance->additionalCollideFunc = objectFunc[iVar1].additionalCollideFunc;
     return;
   }
-  instance->additionalCollideFunc = (_func_4391 *)0x0;
+  instance->additionalCollideFunc = (_func_3 *)0x0;
   return;
 }
 
@@ -124,25 +133,27 @@ void OBTABLE_GetInstanceAdditionalCollideFunc(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ OBTABLE_GetInstanceProcessFunc(struct _Instance *instance /*$a0*/)
- // line 195, offset 0x8003f0c4
+ // line 206, offset 0x8003e684
 	/* begin block 1 */
-		// Start line: 197
-		// Start offset: 0x8003F0C4
+		// Start line: 208
+		// Start offset: 0x8003E684
 		// Variables:
 	// 		long id; // $a1
 	/* end block 1 */
-	// End offset: 0x8003F104
-	// End Line: 209
+	// End offset: 0x8003E6C4
+	// End Line: 220
 
 	/* begin block 2 */
-		// Start line: 390
+		// Start line: 413
 	/* end block 2 */
-	// End Line: 391
+	// End Line: 414
 
 	/* begin block 3 */
-		// Start line: 391
+		// Start line: 414
 	/* end block 3 */
-	// End Line: 392
+	// End Line: 415
+
+/* File: C:\kain2\game\OBTABLE.C */
 
 void OBTABLE_GetInstanceProcessFunc(_Instance *instance)
 
@@ -151,7 +162,7 @@ void OBTABLE_GetInstanceProcessFunc(_Instance *instance)
   
   iVar1 = (int)instance->object->id;
   if (-1 < iVar1) {
-    *(_func_4495 **)&instance->processFunc = (&objectFunc)[iVar1].processFunc;
+    instance->processFunc = objectFunc[iVar1].processFunc;
     return;
   }
   instance->processFunc = GenericProcess;
@@ -163,25 +174,27 @@ void OBTABLE_GetInstanceProcessFunc(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ OBTABLE_GetInstanceQueryFunc(struct _Instance *instance /*$a0*/)
- // line 225, offset 0x8003f10c
+ // line 236, offset 0x8003e6cc
 	/* begin block 1 */
-		// Start line: 227
-		// Start offset: 0x8003F10C
+		// Start line: 238
+		// Start offset: 0x8003E6CC
 		// Variables:
 	// 		long id; // $a1
 	/* end block 1 */
-	// End offset: 0x8003F14C
-	// End Line: 239
+	// End offset: 0x8003E70C
+	// End Line: 250
 
 	/* begin block 2 */
-		// Start line: 450
+		// Start line: 473
 	/* end block 2 */
-	// End Line: 451
+	// End Line: 474
 
 	/* begin block 3 */
-		// Start line: 451
+		// Start line: 474
 	/* end block 3 */
-	// End Line: 452
+	// End Line: 475
+
+/* File: C:\kain2\game\OBTABLE.C */
 
 void OBTABLE_GetInstanceQueryFunc(_Instance *instance)
 
@@ -190,7 +203,7 @@ void OBTABLE_GetInstanceQueryFunc(_Instance *instance)
   
   iVar1 = (int)instance->object->id;
   if (-1 < iVar1) {
-    *(_func_4497 **)&instance->queryFunc = (&objectFunc)[iVar1].queryFunc;
+    *(ulong **)&instance->queryFunc = objectFunc[iVar1].queryFunc;
     return;
   }
   instance->queryFunc = GenericQuery;
@@ -202,25 +215,27 @@ void OBTABLE_GetInstanceQueryFunc(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ OBTABLE_GetInstanceMessageFunc(struct _Instance *instance /*$a0*/)
- // line 255, offset 0x8003f154
+ // line 266, offset 0x8003e714
 	/* begin block 1 */
-		// Start line: 257
-		// Start offset: 0x8003F154
+		// Start line: 268
+		// Start offset: 0x8003E714
 		// Variables:
 	// 		long id; // $a1
 	/* end block 1 */
-	// End offset: 0x8003F194
-	// End Line: 269
+	// End offset: 0x8003E754
+	// End Line: 280
 
 	/* begin block 2 */
-		// Start line: 510
+		// Start line: 533
 	/* end block 2 */
-	// End Line: 511
+	// End Line: 534
 
 	/* begin block 3 */
-		// Start line: 511
+		// Start line: 534
 	/* end block 3 */
-	// End Line: 512
+	// End Line: 535
+
+/* File: C:\kain2\game\OBTABLE.C */
 
 void OBTABLE_GetInstanceMessageFunc(_Instance *instance)
 
@@ -229,7 +244,7 @@ void OBTABLE_GetInstanceMessageFunc(_Instance *instance)
   
   iVar1 = (int)instance->object->id;
   if (-1 < iVar1) {
-    *(_func_4498 **)&instance->messageFunc = (&objectFunc)[iVar1].messageFunc;
+    instance->messageFunc = objectFunc[iVar1].messageFunc;
     return;
   }
   instance->messageFunc = GenericMessage;
@@ -241,29 +256,31 @@ void OBTABLE_GetInstanceMessageFunc(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ OBTABLE_InitObjectWithID(struct Object *object /*$s2*/)
- // line 272, offset 0x8003f19c
+ // line 283, offset 0x8003e75c
 	/* begin block 1 */
-		// Start line: 273
-		// Start offset: 0x8003F19C
+		// Start line: 284
+		// Start offset: 0x8003E75C
 		// Variables:
 	// 		long id; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 278
-			// Start offset: 0x8003F1BC
+			// Start line: 289
+			// Start offset: 0x8003E77C
 			// Variables:
 		// 		struct ObjectAccess *oa; // $a0
 		/* end block 1.1 */
-		// End offset: 0x8003F358
-		// End Line: 338
+		// End offset: 0x8003E918
+		// End Line: 349
 	/* end block 1 */
-	// End offset: 0x8003F358
-	// End Line: 339
+	// End offset: 0x8003E918
+	// End Line: 350
 
 	/* begin block 2 */
-		// Start line: 544
+		// Start line: 567
 	/* end block 2 */
-	// End Line: 545
+	// End Line: 568
+
+/* File: C:\kain2\game\OBTABLE.C */
 
 void OBTABLE_InitObjectWithID(Object *object)
 
@@ -279,51 +296,59 @@ void OBTABLE_InitObjectWithID(Object *object)
   if ((object->oflags2 & 0x40000U) == 0) {
     if ((object->oflags2 & 0x80000U) == 0) {
       iVar4 = 0;
-      pOVar3 = &objectFunc;
-      do {
-        iVar1 = strcmp(pOVar3->scriptName,object->script);
-        if (iVar1 == 0) break;
-        pOVar3 = pOVar3 + 1;
-        iVar4 = iVar4 + 1;
-      } while (pOVar3->scriptName != (char *)0x0);
-LAB_8003f2bc:
-      if ((&objectFunc)[iVar4].scriptName != (char *)0x0) {
-        object->id = (short)iVar4;
-        goto LAB_8003f2f8;
+      if (objectFunc[0].scriptName != (char *)0x0) {
+        pOVar3 = objectFunc;
+        do {
+          iVar1 = strcmp();
+          if (iVar1 == 0) break;
+          pOVar3 = pOVar3 + 1;
+          iVar4 = iVar4 + 1;
+        } while (pOVar3->scriptName != (char *)0x0);
+LAB_8003e87c:
+        if (objectFunc[iVar4].scriptName != (char *)0x0) {
+          object->id = (short)iVar4;
+          goto LAB_8003e8b8;
+        }
       }
     }
     else {
       iVar4 = 0;
-      pOVar3 = &objectFunc;
+      if (objectFunc[0].scriptName != (char *)0x0) {
+        pOVar3 = objectFunc;
+        do {
+          iVar1 = strcmp();
+          if (iVar1 == 0) goto LAB_8003e87c;
+          pOVar3 = pOVar3 + 1;
+          iVar4 = iVar4 + 1;
+        } while (pOVar3->scriptName != (char *)0x0);
+      }
+    }
+  }
+  else {
+    iVar4 = 0;
+    if (objectFunc[0].scriptName != (char *)0x0) {
+      pOVar3 = objectFunc;
       do {
-        iVar1 = strcmp(pOVar3->scriptName,"monster_");
-        if (iVar1 == 0) goto LAB_8003f2bc;
+        iVar1 = strcmp();
+        if (iVar1 == 0) goto LAB_8003e87c;
         pOVar3 = pOVar3 + 1;
         iVar4 = iVar4 + 1;
       } while (pOVar3->scriptName != (char *)0x0);
     }
   }
-  else {
-    iVar4 = 0;
-    pOVar3 = &objectFunc;
-    do {
-      iVar1 = strcmp(pOVar3->scriptName,"physical");
-      if (iVar1 == 0) goto LAB_8003f2bc;
-      pOVar3 = pOVar3 + 1;
-      iVar4 = iVar4 + 1;
-    } while (pOVar3->scriptName != (char *)0x0);
-  }
   object->id = -1;
-LAB_8003f2f8:
-  pOVar2 = &objectAccess;
-  while ((*(int *)pOVar2->objectName != *(int *)object->name ||
-         (*(int *)(pOVar2->objectName + 1) != *(int *)(object->name + 1)))) {
-    pOVar2 = pOVar2 + 1;
-    if (pOVar2->objectName == (char *)0x0) {
-      return;
-    }
+LAB_8003e8b8:
+  pOVar2 = objectAccess;
+  if (objectAccess[0].objectName != (char *)0x0) {
+    do {
+      if ((*(int *)pOVar2->objectName == *(int *)object->name) &&
+         (*(int *)(pOVar2->objectName + 1) == *(int *)(object->name + 1))) {
+        *(Object **)&pOVar2->object = object;
+        return;
+      }
+      pOVar2 = pOVar2 + 1;
+    } while (pOVar2->objectName != (char *)0x0);
   }
-  *(Object **)&pOVar2->object = object;
   return;
 }
 
@@ -332,43 +357,45 @@ LAB_8003f2f8:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ OBTABLE_ClearObjectReferences()
- // line 361, offset 0x8003f374
+ // line 372, offset 0x8003e934
 	/* begin block 1 */
-		// Start line: 363
-		// Start offset: 0x8003F374
+		// Start line: 374
+		// Start offset: 0x8003E934
 		// Variables:
 	// 		struct ObjectAccess *oa; // $a0
 	/* end block 1 */
-	// End offset: 0x8003F3A0
-	// End Line: 367
+	// End offset: 0x8003E960
+	// End Line: 378
 
 	/* begin block 2 */
-		// Start line: 739
+		// Start line: 762
 	/* end block 2 */
-	// End Line: 740
+	// End Line: 763
 
 	/* begin block 3 */
-		// Start line: 740
+		// Start line: 763
 	/* end block 3 */
-	// End Line: 741
+	// End Line: 764
 
 	/* begin block 4 */
-		// Start line: 742
+		// Start line: 765
 	/* end block 4 */
-	// End Line: 743
+	// End Line: 766
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\OBTABLE.C */
 
 void OBTABLE_ClearObjectReferences(void)
 
 {
   ObjectAccess *pOVar1;
   
-  pOVar1 = &objectAccess;
-  do {
-    pOVar1->object = (void *)0x0;
-    pOVar1 = pOVar1 + 1;
-  } while (pOVar1->objectName != (char *)0x0);
+  pOVar1 = objectAccess;
+  if (objectAccess[0].objectName != (char *)0x0) {
+    do {
+      pOVar1->object = (void *)0x0;
+      pOVar1 = pOVar1 + 1;
+    } while (pOVar1->objectName != (char *)0x0);
+  }
   return;
 }
 
@@ -377,30 +404,32 @@ void OBTABLE_ClearObjectReferences(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ OBTABLE_RemoveObjectEntry(struct Object *object /*$a0*/)
- // line 369, offset 0x8003f3a8
+ // line 380, offset 0x8003e968
 	/* begin block 1 */
-		// Start line: 371
-		// Start offset: 0x8003F3A8
+		// Start line: 382
+		// Start offset: 0x8003E968
 		// Variables:
 	// 		struct ObjectAccess *oa; // $a1
 	/* end block 1 */
-	// End offset: 0x8003F3E8
-	// End Line: 381
+	// End offset: 0x8003E9A8
+	// End Line: 392
 
 	/* begin block 2 */
-		// Start line: 756
+		// Start line: 779
 	/* end block 2 */
-	// End Line: 757
+	// End Line: 780
 
 	/* begin block 3 */
-		// Start line: 757
+		// Start line: 780
 	/* end block 3 */
-	// End Line: 758
+	// End Line: 781
 
 	/* begin block 4 */
-		// Start line: 759
+		// Start line: 782
 	/* end block 4 */
-	// End Line: 760
+	// End Line: 783
+
+/* File: C:\kain2\game\OBTABLE.C */
 
 void OBTABLE_RemoveObjectEntry(Object *object)
 
@@ -408,16 +437,18 @@ void OBTABLE_RemoveObjectEntry(Object *object)
   Object **ppOVar1;
   ObjectAccess *pOVar2;
   
-  pOVar2 = &objectAccess;
-  ppOVar1 = (Object **)&objectAccess.object;
-  do {
-    pOVar2 = pOVar2 + 1;
-    if (*ppOVar1 == object) {
-      *ppOVar1 = (Object *)0x0;
-      return;
-    }
-    ppOVar1 = ppOVar1 + 2;
-  } while (pOVar2->objectName != (char *)0x0);
+  pOVar2 = objectAccess;
+  if (objectAccess[0].objectName != (char *)0x0) {
+    ppOVar1 = (Object **)&objectAccess[0].object;
+    do {
+      pOVar2 = pOVar2 + 1;
+      if (*ppOVar1 == object) {
+        *ppOVar1 = (Object *)0x0;
+        return;
+      }
+      ppOVar1 = ppOVar1 + 2;
+    } while (pOVar2->objectName != (char *)0x0);
+  }
   return;
 }
 
@@ -426,27 +457,29 @@ void OBTABLE_RemoveObjectEntry(Object *object)
 // decompiled code
 // original method signature: 
 // struct Object * /*$ra*/ OBTABLE_FindObject(char *objectName /*$s3*/)
- // line 383, offset 0x8003f3f0
+ // line 394, offset 0x8003e9b0
 	/* begin block 1 */
-		// Start line: 384
-		// Start offset: 0x8003F3F0
+		// Start line: 395
+		// Start offset: 0x8003E9B0
 		// Variables:
 	// 		struct Object *object; // $s0
 	// 		struct _ObjectTracker *otr; // $v0
 	// 		int i; // $s2
 	/* end block 1 */
-	// End offset: 0x8003F480
-	// End Line: 401
+	// End offset: 0x8003EA40
+	// End Line: 412
 
 	/* begin block 2 */
-		// Start line: 789
+		// Start line: 812
 	/* end block 2 */
-	// End Line: 790
+	// End Line: 813
 
 	/* begin block 3 */
-		// Start line: 794
+		// Start line: 817
 	/* end block 3 */
-	// End Line: 795
+	// End Line: 818
+
+/* File: C:\kain2\game\OBTABLE.C */
 
 Object * OBTABLE_FindObject(char *objectName)
 
@@ -457,7 +490,7 @@ Object * OBTABLE_FindObject(char *objectName)
   int iVar3;
   
   iVar3 = 0x30;
-  ppOVar2 = &(gameTrackerX.GlobalObjects)->object;
+  ppOVar2 = (Object **)(DAT_800d2110 + 0x10);
   do {
     if (*(short *)(ppOVar2 + 1) != 0) {
       address = *ppOVar2;
@@ -480,30 +513,32 @@ Object * OBTABLE_FindObject(char *objectName)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ OBTABLE_ChangeObjectAccessPointers(struct Object *oldObject /*$a0*/, struct Object *newObject /*$a1*/)
- // line 403, offset 0x8003f49c
+ // line 414, offset 0x8003ea5c
 	/* begin block 1 */
-		// Start line: 405
-		// Start offset: 0x8003F49C
+		// Start line: 416
+		// Start offset: 0x8003EA5C
 		// Variables:
 	// 		struct ObjectAccess *oa; // $a2
 	/* end block 1 */
-	// End offset: 0x8003F4DC
-	// End Line: 415
+	// End offset: 0x8003EA9C
+	// End Line: 426
 
 	/* begin block 2 */
-		// Start line: 846
+		// Start line: 869
 	/* end block 2 */
-	// End Line: 847
+	// End Line: 870
 
 	/* begin block 3 */
-		// Start line: 847
+		// Start line: 870
 	/* end block 3 */
-	// End Line: 848
+	// End Line: 871
 
 	/* begin block 4 */
-		// Start line: 849
+		// Start line: 872
 	/* end block 4 */
-	// End Line: 850
+	// End Line: 873
+
+/* File: C:\kain2\game\OBTABLE.C */
 
 void OBTABLE_ChangeObjectAccessPointers(Object *oldObject,Object *newObject)
 
@@ -511,16 +546,18 @@ void OBTABLE_ChangeObjectAccessPointers(Object *oldObject,Object *newObject)
   Object **ppOVar1;
   ObjectAccess *pOVar2;
   
-  pOVar2 = &objectAccess;
-  ppOVar1 = (Object **)&objectAccess.object;
-  do {
-    pOVar2 = pOVar2 + 1;
-    if (*ppOVar1 == oldObject) {
-      *ppOVar1 = newObject;
-      return;
-    }
-    ppOVar1 = ppOVar1 + 2;
-  } while (pOVar2->objectName != (char *)0x0);
+  pOVar2 = objectAccess;
+  if (objectAccess[0].objectName != (char *)0x0) {
+    ppOVar1 = (Object **)&objectAccess[0].object;
+    do {
+      pOVar2 = pOVar2 + 1;
+      if (*ppOVar1 == oldObject) {
+        *ppOVar1 = newObject;
+        return;
+      }
+      ppOVar1 = ppOVar1 + 2;
+    } while (pOVar2->objectName != (char *)0x0);
+  }
   return;
 }
 
@@ -529,27 +566,40 @@ void OBTABLE_ChangeObjectAccessPointers(Object *oldObject,Object *newObject)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ OBTABLE_RelocateObjectTune(struct Object *object /*$a0*/, long offset /*$a1*/)
- // line 417, offset 0x8003f4e4
+ // line 428, offset 0x8003eaa4
 	/* begin block 1 */
-		// Start line: 418
-		// Start offset: 0x8003F4E4
+		// Start line: 429
+		// Start offset: 0x8003EAA4
 		// Variables:
 	// 		long id; // $a2
+
+		/* begin block 1.1 */
+			// Start line: 442
+			// Start offset: 0x8003EAF0
+		/* end block 1.1 */
+		// End offset: 0x8003EAF8
+		// End Line: 444
 	/* end block 1 */
-	// End offset: 0x8003F528
-	// End Line: 429
+	// End offset: 0x8003EAF8
+	// End Line: 445
 
 	/* begin block 2 */
-		// Start line: 879
+		// Start line: 902
 	/* end block 2 */
-	// End Line: 880
+	// End Line: 903
+
+/* File: C:\kain2\game\OBTABLE.C */
 
 void OBTABLE_RelocateObjectTune(Object *object,long offset)
 
 {
-  if ((-1 < (int)object->id) &&
-     ((&objectFunc)[(int)object->id].relocateTuneFunc != (_func_4500 *)0x0)) {
-    (*(&objectFunc)[(int)object->id].relocateTuneFunc)();
+  if ((int)object->id < 0) {
+    GenericRelocateTune(object,offset);
+  }
+  else {
+    if ((code *)objectFunc[(int)object->id].relocateTuneFunc != (code *)0x0) {
+      (*(code *)objectFunc[(int)object->id].relocateTuneFunc)();
+    }
   }
   return;
 }
@@ -559,20 +609,22 @@ void OBTABLE_RelocateObjectTune(Object *object,long offset)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ OBTABLE_RelocateInstanceObject(struct _Instance *instance /*$a0*/, long offset /*$a1*/)
- // line 431, offset 0x8003f538
+ // line 447, offset 0x8003eb08
 	/* begin block 1 */
-		// Start line: 432
-		// Start offset: 0x8003F538
+		// Start line: 448
+		// Start offset: 0x8003EB08
 		// Variables:
 	// 		long id; // $a2
 	/* end block 1 */
-	// End offset: 0x8003F584
-	// End Line: 443
+	// End offset: 0x8003EB54
+	// End Line: 459
 
 	/* begin block 2 */
-		// Start line: 907
+		// Start line: 940
 	/* end block 2 */
-	// End Line: 908
+	// End Line: 941
+
+/* File: C:\kain2\game\OBTABLE.C */
 
 void OBTABLE_RelocateInstanceObject(_Instance *instance,long offset)
 
@@ -580,8 +632,8 @@ void OBTABLE_RelocateInstanceObject(_Instance *instance,long offset)
   int iVar1;
   
   iVar1 = (int)instance->object->id;
-  if ((-1 < iVar1) && ((&objectFunc)[iVar1].relocateInstObFunc != (_func_4501 *)0x0)) {
-    (*(&objectFunc)[iVar1].relocateInstObFunc)();
+  if ((-1 < iVar1) && ((code *)objectFunc[iVar1].relocateInstObFunc != (code *)0x0)) {
+    (*(code *)objectFunc[iVar1].relocateInstObFunc)();
   }
   return;
 }
@@ -591,52 +643,54 @@ void OBTABLE_RelocateInstanceObject(_Instance *instance,long offset)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ OBTABLE_InitAnimPointers(struct _ObjectTracker *objectTracker /*$s5*/)
- // line 445, offset 0x8003f594
+ // line 461, offset 0x8003eb64
 	/* begin block 1 */
-		// Start line: 446
-		// Start offset: 0x8003F594
+		// Start line: 462
+		// Start offset: 0x8003EB64
 		// Variables:
 	// 		struct Object *object; // $s3
 
 		/* begin block 1.1 */
-			// Start line: 451
-			// Start offset: 0x8003F5D4
+			// Start line: 467
+			// Start offset: 0x8003EBA4
 			// Variables:
 		// 		int i; // $s2
 		// 		char *earlyOut; // $s4
 		// 		struct _G2AnimKeylist_Type **keyPtr; // $s1
 
 			/* begin block 1.1.1 */
-				// Start line: 457
-				// Start offset: 0x8003F5E4
+				// Start line: 473
+				// Start offset: 0x8003EBB4
 				// Variables:
 			// 		struct _ObjectOwnerInfo *oi; // $s0
 
 				/* begin block 1.1.1.1 */
-					// Start line: 461
-					// Start offset: 0x8003F5FC
+					// Start line: 477
+					// Start offset: 0x8003EBCC
 					// Variables:
 				// 		struct _ObjectTracker *otr; // $a2
 				// 		struct Object *ownerOb; // $a3
 				// 		int j; // $a1
 				// 		int objectIndex; // $a0
 				/* end block 1.1.1.1 */
-				// End offset: 0x8003F6CC
-				// End Line: 488
+				// End offset: 0x8003EC9C
+				// End Line: 504
 			/* end block 1.1.1 */
-			// End offset: 0x8003F6CC
-			// End Line: 489
+			// End offset: 0x8003EC9C
+			// End Line: 505
 		/* end block 1.1 */
-		// End offset: 0x8003F6F0
-		// End Line: 498
+		// End offset: 0x8003ECC0
+		// End Line: 514
 	/* end block 1 */
-	// End offset: 0x8003F70C
-	// End Line: 505
+	// End offset: 0x8003ECDC
+	// End Line: 521
 
 	/* begin block 2 */
-		// Start line: 935
+		// Start line: 968
 	/* end block 2 */
-	// End Line: 936
+	// End Line: 969
+
+/* File: C:\kain2\game\OBTABLE.C */
 
 void OBTABLE_InitAnimPointers(_ObjectTracker *objectTracker)
 
@@ -663,7 +717,7 @@ void OBTABLE_InitAnimPointers(_ObjectTracker *objectTracker)
       if ((*(int *)p_Var7 == 0xface0ff) &&
          (p_Var1 = STREAM_GetObjectTracker((char *)&p_Var7->timePerKey),
          p_Var1 != (_ObjectTracker *)0x0)) {
-        iVar4 = (int)((int)objectTracker - (int)gameTrackerX.GlobalObjects) * 0x38e38e39 >> 2;
+        iVar4 = (int)((int)objectTracker - DAT_800d2110) * 0x38e38e39 >> 2;
         iVar2 = (int)p_Var1->numObjectsUsing;
         pOVar6 = p_Var1->object;
         iVar5 = 0;

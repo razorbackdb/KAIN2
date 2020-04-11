@@ -5,20 +5,22 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SetNoPtCollideInFamily(struct _Instance *instance /*$a0*/)
- // line 57, offset 0x80073e14
+ // line 57, offset 0x80074100
 	/* begin block 1 */
 		// Start line: 58
-		// Start offset: 0x80073E14
+		// Start offset: 0x80074100
 		// Variables:
 	// 		struct _Instance *child; // $s0
 	/* end block 1 */
-	// End offset: 0x80073E4C
+	// End offset: 0x80074138
 	// End Line: 65
 
 	/* begin block 2 */
 		// Start line: 114
 	/* end block 2 */
 	// End Line: 115
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 void SetNoPtCollideInFamily(_Instance *instance)
 
@@ -39,20 +41,22 @@ void SetNoPtCollideInFamily(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ ResetNoPtCollideInFamily(struct _Instance *instance /*$a0*/)
- // line 67, offset 0x80073e5c
+ // line 67, offset 0x80074148
 	/* begin block 1 */
 		// Start line: 68
-		// Start offset: 0x80073E5C
+		// Start offset: 0x80074148
 		// Variables:
 	// 		struct _Instance *child; // $s0
 	/* end block 1 */
-	// End offset: 0x80073E98
+	// End offset: 0x80074184
 	// End Line: 75
 
 	/* begin block 2 */
 		// Start line: 137
 	/* end block 2 */
 	// End Line: 138
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 void ResetNoPtCollideInFamily(_Instance *instance)
 
@@ -73,11 +77,13 @@ void ResetNoPtCollideInFamily(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PHYSICS_CheckLineInWorld(struct _Instance *instance /*$a0*/, struct _PCollideInfo *pcollideInfo /*$a1*/)
- // line 79, offset 0x80073ea8
+ // line 79, offset 0x80074194
 	/* begin block 1 */
 		// Start line: 167
 	/* end block 1 */
 	// End Line: 168
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 void PHYSICS_CheckLineInWorld(_Instance *instance,_PCollideInfo *pcollideInfo)
 
@@ -91,21 +97,23 @@ void PHYSICS_CheckLineInWorld(_Instance *instance,_PCollideInfo *pcollideInfo)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ PHYSICS_CheckLineInWorldMask(struct _Instance *instance /*$s2*/, struct _PCollideInfo *pcollideInfo /*$s0*/)
- // line 85, offset 0x80073ecc
+// void /*$ra*/ PHYSICS_CheckLineInWorldMask(struct _Instance *instance /*$s2*/, struct _PCollideInfo *pcollideInfo /*$s1*/)
+ // line 85, offset 0x800741b8
 	/* begin block 1 */
 		// Start line: 86
-		// Start offset: 0x80073ECC
+		// Start offset: 0x800741B8
 		// Variables:
-	// 		struct Level *level; // $s1
+	// 		struct Level *level; // $s0
 	/* end block 1 */
-	// End offset: 0x80073F28
+	// End offset: 0x8007420C
 	// End Line: 113
 
 	/* begin block 2 */
 		// Start line: 180
 	/* end block 2 */
 	// End Line: 181
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 void PHYSICS_CheckLineInWorldMask(_Instance *instance,_PCollideInfo *pcollideInfo)
 
@@ -120,7 +128,7 @@ void PHYSICS_CheckLineInWorldMask(_Instance *instance,_PCollideInfo *pcollideInf
     pcollideInfo->type = 0;
   }
   else {
-    COLLIDE_PointAndWorld(pcollideInfo,&gameTrackerX,level);
+    COLLIDE_PointAndWorld(pcollideInfo,level);
   }
   ResetNoPtCollideInFamily(instance);
   return;
@@ -130,48 +138,57 @@ void PHYSICS_CheckLineInWorldMask(_Instance *instance,_PCollideInfo *pcollideInf
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ PhysicsCheckLinkedMove(struct _Instance *instance /*$s2*/, int Data /*$s6*/, short Mode /*stack -72*/)
- // line 124, offset 0x80073f48
+// int /*$ra*/ PhysicsCheckLinkedMove(struct _Instance *instance /*$s2*/, int Data /*stack 4*/, short Mode /*stack -72*/)
+ // line 124, offset 0x8007422c
 	/* begin block 1 */
 		// Start line: 125
-		// Start offset: 0x80073F48
+		// Start offset: 0x8007422C
 
 		/* begin block 1.1 */
 			// Start line: 128
-			// Start offset: 0x80073F88
+			// Start offset: 0x80074270
 			// Variables:
-		// 		struct evPhysicsLinkedMoveData *ptr; // $s4
-		// 		struct _Instance *on; // $a0
+		// 		struct evPhysicsLinkedMoveData *ptr; // $s3
+		// 		struct _Instance *on; // $s0
 		// 		struct MATRIX work; // stack offset -144
-		// 		struct MATRIX *current; // $s3
+		// 		struct MATRIX *current; // $s4
 		// 		struct VECTOR delta; // stack offset -112
 		// 		long onx; // stack offset -64
 		// 		long ony; // stack offset -60
 		// 		long onz; // stack offset -56
 		// 		long ix; // $s5
-		// 		long iy; // $s7
-		// 		long iz; // $fp
+		// 		long iy; // stack offset -52
+		// 		long iz; // stack offset -48
 
 			/* begin block 1.1.1 */
-				// Start line: 166
-				// Start offset: 0x800740C0
+				// Start line: 146
+				// Start offset: 0x800742E8
+				// Variables:
+			// 		struct _Instance *oldOn; // $a0
+			/* end block 1.1.1 */
+			// End offset: 0x8007430C
+			// End Line: 153
+
+			/* begin block 1.1.2 */
+				// Start line: 182
+				// Start offset: 0x800743F8
 				// Variables:
 			// 		struct _G2EulerAngles_Type newRot; // stack offset -96
 			// 		struct VECTOR newRelPos; // stack offset -88
-			// 		long oldPosX; // stack offset -52
-			// 		long oldPosY; // stack offset -48
-			// 		long oldPosZ; // stack offset -44
+			// 		long oldPosX; // $s6
+			// 		long oldPosY; // $fp
+			// 		long oldPosZ; // $s7
 			// 		int moved; // $s1
 			// 		int rotated; // $s0
-			/* end block 1.1.1 */
-			// End offset: 0x80074294
-			// End Line: 229
+			/* end block 1.1.2 */
+			// End offset: 0x800745A8
+			// End Line: 245
 		/* end block 1.1 */
-		// End offset: 0x800742EC
-		// End Line: 239
+		// End offset: 0x80074650
+		// End Line: 260
 	/* end block 1 */
-	// End offset: 0x800742F4
-	// End Line: 245
+	// End offset: 0x80074658
+	// End Line: 266
 
 	/* begin block 2 */
 		// Start line: 263
@@ -179,24 +196,24 @@ void PHYSICS_CheckLineInWorldMask(_Instance *instance,_PCollideInfo *pcollideInf
 	// End Line: 264
 
 /* WARNING: Could not reconcile some variable overlaps */
+/* File: C:\kain2\game\PHYSICS.C */
 
 int PhysicsCheckLinkedMove(_Instance *instance,int Data,short Mode)
 
 {
   short sVar1;
-  short sVar2;
-  short sVar3;
-  bool bVar4;
-  bool bVar5;
-  long lVar6;
+  bool bVar2;
+  bool bVar3;
+  _Instance *p_Var4;
+  long lVar5;
+  int introUniqueID;
+  int iVar6;
+  VECTOR *v1;
+  MATRIX *m0;
   int iVar7;
-  uint *puVar8;
-  undefined4 *puVar9;
-  int iVar10;
-  int iVar11;
-  int iVar12;
+  int iVar8;
   _G2Matrix_Type _Stack144;
-  uint local_70;
+  int local_70;
   int local_6c;
   int local_68;
   _G2EulerAngles_Type local_60;
@@ -204,90 +221,91 @@ int PhysicsCheckLinkedMove(_Instance *instance,int Data,short Mode)
   short local_54;
   short local_50;
   ushort local_48;
-  int local_40;
-  int local_3c;
-  int local_38;
+  long local_40;
+  long local_3c;
+  long local_38;
   int local_34;
   int local_30;
-  int local_2c;
   
   if (instance->matrix == (MATRIX *)0x0) {
     instance->attachedID = 0;
-    iVar7 = 0;
+    introUniqueID = 0;
   }
   else {
-    puVar9 = (undefined4 *)(*(int *)(*(int *)Data + 0x40) + *(int *)(Data + 4) * 0x20);
-    local_40 = puVar9[5];
-    local_3c = puVar9[6];
-    local_38 = puVar9[7];
+    iVar6 = *(int *)Data;
+    m0 = (MATRIX *)(*(int *)(iVar6 + 0x40) + *(int *)(Data + 4) * 0x20);
+    local_40 = m0->t[0];
+    local_3c = m0->t[1];
+    local_38 = m0->t[2];
+    local_34 = (int)(instance->position).y;
     sVar1 = (instance->position).x;
-    iVar10 = (int)sVar1;
-    sVar2 = (instance->position).y;
-    iVar11 = (int)sVar2;
-    iVar7 = *(int *)(*(int *)Data + 0x3c);
-    sVar3 = (instance->position).z;
-    iVar12 = (int)sVar3;
+    iVar7 = (int)sVar1;
+    local_30 = (int)(instance->position).z;
+    introUniqueID = instance->attachedID;
     local_48 = Mode;
-    if ((iVar7 == instance->attachedID) &&
-       (bVar4 = false, *(int *)(Data + 4) == instance->attachedSegment)) {
-      local_34 = (int)(instance->oldPos).x;
-      local_30 = (int)(instance->oldPos).y;
-      local_2c = (int)(instance->oldPos).z;
-      bVar5 = false;
+    if ((*(int *)(iVar6 + 0x3c) == introUniqueID) &&
+       (bVar2 = false, *(int *)(Data + 4) == instance->attachedSegment)) {
+      introUniqueID = (int)(instance->oldPos).x;
+      iVar8 = (int)(instance->oldPos).y;
+      iVar6 = (int)(instance->oldPos).z;
+      bVar3 = false;
       if ((*(int *)&instance->rotation != *(int *)&instance->oldRotation) ||
          ((instance->rotation).z != (instance->oldRotation).z)) {
-        bVar5 = true;
+        bVar3 = true;
       }
-      if (((iVar10 != local_34) || (iVar11 != local_30)) || (iVar12 != local_2c)) {
-        bVar4 = true;
+      if (((iVar7 != introUniqueID) || (local_34 != iVar8)) || (local_30 != iVar6)) {
+        bVar2 = true;
       }
-      if ((bVar4) || (bVar5)) {
-        TransposeMatrix(puVar9,(undefined4 *)&_Stack144);
-        if (bVar5) {
-          MulMatrix0((undefined4 *)&_Stack144,(ushort *)instance->matrix,
-                     (uint *)&instance->relativeMatrix);
+      if ((bVar2) || (bVar3)) {
+        TransposeMatrix(m0,(MATRIX *)&_Stack144);
+        if (bVar3) {
+          MulMatrix0((MATRIX *)&_Stack144,instance->matrix,&instance->relativeMatrix);
         }
-        if (bVar4) {
-          local_70 = iVar10 - local_34;
-          local_6c = iVar11 - local_30;
-          local_68 = iVar12 - local_2c;
-          ApplyMatrixLV((undefined4 *)&_Stack144,&local_70,(int *)&local_70);
+        if (bVar2) {
+          local_70 = iVar7 - introUniqueID;
+          local_6c = local_34 - iVar8;
+          local_68 = local_30 - iVar6;
+          ApplyMatrixLV((MATRIX *)&_Stack144,(VECTOR *)&local_70,(VECTOR *)&local_70);
           (instance->relativeMatrix).t[0] = (instance->relativeMatrix).t[0] + local_70;
           (instance->relativeMatrix).t[1] = (instance->relativeMatrix).t[1] + local_6c;
           (instance->relativeMatrix).t[2] = (instance->relativeMatrix).t[2] + local_68;
         }
       }
-      ApplyMatrixLV(puVar9,(uint *)(instance->relativeMatrix).t,(int *)local_58);
-      MulMatrix0(puVar9,(ushort *)&instance->relativeMatrix,(uint *)&_Stack144);
+      ApplyMatrixLV(m0,(VECTOR *)(instance->relativeMatrix).t,(VECTOR *)local_58);
+      MulMatrix0(m0,&instance->relativeMatrix,(MATRIX *)&_Stack144);
       G2EulerAngles_FromMatrix(&local_60,&_Stack144,0x15);
       *(short *)(Data + 8) = (local_58[0] + (short)local_40) - sVar1;
-      *(short *)(Data + 10) = (local_54 + (short)local_3c) - sVar2;
-      *(short *)(Data + 0xc) = (local_50 + (short)local_38) - sVar3;
+      *(short *)(Data + 10) = (local_54 + (short)local_3c) - (short)local_34;
+      *(short *)(Data + 0xc) = (local_50 + (short)local_38) - (short)local_30;
       *(short *)(Data + 0x10) = local_60.x - (instance->oldRotation).x;
       *(short *)(Data + 0x12) = local_60.y - (instance->oldRotation).y;
       *(short *)(Data + 0x14) = local_60.z - (instance->oldRotation).z;
     }
     else {
-      instance->attachedID = iVar7;
-      lVar6 = *(long *)(Data + 4);
+      if ((introUniqueID != *(int *)(iVar6 + 0x3c)) &&
+         (p_Var4 = INSTANCE_Find(introUniqueID), p_Var4 != (_Instance *)0x0)) {
+        p_Var4->flags2 = p_Var4->flags2 & 0xffffff7f;
+      }
+      *(uint *)(iVar6 + 0x18) = *(uint *)(iVar6 + 0x18) | 0x80;
+      instance->attachedID = *(long *)(iVar6 + 0x3c);
+      lVar5 = *(long *)(Data + 4);
       instance->zAccl = 0;
       instance->zVel = 0;
-      instance->attachedSegment = lVar6;
-      TransposeMatrix(puVar9,(undefined4 *)&_Stack144);
-      local_70 = iVar10 - local_40;
-      puVar8 = (uint *)(instance->relativeMatrix).t;
-      local_6c = iVar11 - local_3c;
-      local_68 = iVar12 - local_38;
-      ApplyMatrixLV((undefined4 *)&_Stack144,&local_70,(int *)puVar8);
-      MulMatrix0((undefined4 *)&_Stack144,(ushort *)instance->matrix,
-                 (uint *)&instance->relativeMatrix);
-      ApplyMatrixLV(puVar9,puVar8,(int *)&local_70);
+      instance->attachedSegment = lVar5;
+      TransposeMatrix(m0,(MATRIX *)&_Stack144);
+      local_70 = iVar7 - local_40;
+      v1 = (VECTOR *)(instance->relativeMatrix).t;
+      local_6c = local_34 - local_3c;
+      local_68 = local_30 - local_38;
+      ApplyMatrixLV((MATRIX *)&_Stack144,(VECTOR *)&local_70,v1);
+      MulMatrix0((MATRIX *)&_Stack144,instance->matrix,&instance->relativeMatrix);
+      ApplyMatrixLV(m0,v1,(VECTOR *)&local_70);
       *(undefined2 *)(Data + 0x14) = 0;
       *(undefined2 *)(Data + 0x12) = 0;
       *(undefined2 *)(Data + 0x10) = 0;
       *(short *)(Data + 8) = sVar1 - ((short)local_70 + (short)local_40);
-      *(short *)(Data + 10) = sVar2 - ((short)local_6c + (short)local_3c);
-      *(short *)(Data + 0xc) = sVar3 - ((short)local_68 + (short)local_38);
+      *(short *)(Data + 10) = (short)local_34 - ((short)local_6c + (short)local_3c);
+      *(short *)(Data + 0xc) = (short)local_30 - ((short)local_68 + (short)local_38);
     }
     if ((local_48 & 4) != 0) {
       PhysicsDefaultLinkedMoveResponse
@@ -296,9 +314,13 @@ int PhysicsCheckLinkedMove(_Instance *instance,int Data,short Mode)
     if ((local_48 & 2) != 0) {
       INSTANCE_Post(instance,0x4010008,Data);
     }
-    iVar7 = 0x10000;
+    if (((*(int *)(Data + 8) != 0) || (*(short *)(Data + 0xc) != 0)) ||
+       ((*(int *)(Data + 0x10) != 0 || (*(short *)(Data + 0x14) != 0)))) {
+      instance->flags2 = instance->flags2 | 8;
+    }
+    introUniqueID = 0x10000;
   }
-  return iVar7;
+  return introUniqueID;
 }
 
 
@@ -306,11 +328,13 @@ int PhysicsCheckLinkedMove(_Instance *instance,int Data,short Mode)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PhysicsDefaultLinkedMoveResponse(struct _Instance *instance /*$s0*/, struct evPhysicsLinkedMoveData *Data /*$s1*/, int updateTransforms /*$a2*/)
- // line 251, offset 0x80074324
+ // line 272, offset 0x80074688
 	/* begin block 1 */
-		// Start line: 564
+		// Start line: 596
 	/* end block 1 */
-	// End Line: 565
+	// End Line: 597
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 void PhysicsDefaultLinkedMoveResponse
                (_Instance *instance,evPhysicsLinkedMoveData *Data,int updateTransforms)
@@ -320,7 +344,7 @@ void PhysicsDefaultLinkedMoveResponse
   (instance->position).y = (instance->position).y + (Data->posDelta).y;
   (instance->position).z = (instance->position).z + (Data->posDelta).z;
   if (updateTransforms != 0) {
-    COLLIDE_UpdateAllTransforms(instance,(SVECTOR *)&Data->posDelta);
+    COLLIDE_UpdateAllTransforms(instance,(char)Data + '\b');
   }
   (instance->rotation).z = (instance->rotation).z + (Data->rotDelta).z;
   return;
@@ -331,10 +355,10 @@ void PhysicsDefaultLinkedMoveResponse
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PhysicsCheckGravity(struct _Instance *instance /*$s1*/, int Data /*$s7*/, short Mode /*$s5*/)
- // line 275, offset 0x800743ac
+ // line 296, offset 0x80074710
 	/* begin block 1 */
-		// Start line: 276
-		// Start offset: 0x800743AC
+		// Start line: 297
+		// Start offset: 0x80074710
 		// Variables:
 	// 		struct evPhysicsGravityData *Ptr; // $s3
 	// 		struct SVECTOR D; // stack offset -120
@@ -347,123 +371,138 @@ void PhysicsDefaultLinkedMoveResponse
 	// 		int slide; // $s6
 
 		/* begin block 1.1 */
-			// Start line: 305
-			// Start offset: 0x8007448C
+			// Start line: 326
+			// Start offset: 0x800747F0
 			// Variables:
 		// 		struct Level *level; // $s2
 		// 		struct _TFace *tface; // $s0
 		/* end block 1.1 */
-		// End offset: 0x8007453C
-		// End Line: 328
+		// End offset: 0x800748A0
+		// End Line: 349
+
+		/* begin block 1.2 */
+			// Start line: 490
+			// Start offset: 0x80074D30
+			// Variables:
+		// 		struct _Instance *oldOn; // $a0
+		/* end block 1.2 */
+		// End offset: 0x80074D54
+		// End Line: 497
 	/* end block 1 */
-	// End offset: 0x80074AA4
-	// End Line: 510
+	// End offset: 0x80074E60
+	// End Line: 550
 
 	/* begin block 2 */
-		// Start line: 612
+		// Start line: 644
 	/* end block 2 */
-	// End Line: 613
+	// End Line: 645
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 int PhysicsCheckGravity(_Instance *instance,int Data,short Mode)
 
 {
   bool bVar1;
-  short sVar2;
+  undefined *puVar2;
+  short sVar3;
   int Data_00;
-  _Instance *p_Var3;
   int iVar4;
-  uint uVar5;
-  int iVar6;
-  NodeType *pNVar7;
-  int iVar8;
+  _Instance *p_Var5;
+  uint uVar6;
+  int iVar7;
+  NodeType *pNVar8;
+  int iVar9;
   _TFace *tface;
-  uint uVar9;
+  uint uVar10;
+  short local_74;
   _PCollideInfo local_68;
   SVECTOR local_38;
   SVECTOR local_30;
   
+  puVar2 = PTR_DAT_800d0808;
   local_38.vx = (instance->position).x;
-  uVar9 = 0;
+  uVar10 = 0;
   local_38.vy = (instance->position).y;
   bVar1 = false;
-  uVar5 = (uint)(ushort)(instance->position).z;
-  Data_00 = uVar5 + *(ushort *)Data;
+  uVar6 = (uint)(ushort)(instance->position).z;
+  Data_00 = uVar6 + *(ushort *)Data;
   local_38.vz = (short)Data_00;
-  iVar6 = uVar5 - *(ushort *)(Data + 2);
-  local_30.vz = (short)iVar6;
+  iVar7 = uVar6 - *(ushort *)(Data + 2);
+  local_30.vz = (short)iVar7;
   local_68.newPoint = &local_30;
   local_68.oldPoint = &local_38;
   local_30.vx = local_38.vx;
   local_30.vy = local_38.vy;
-  if (Data_00 * 0x10000 < iVar6 * 0x10000) {
+  if (Data_00 * 0x10000 < iVar7 * 0x10000) {
     local_68.type = 0;
-    goto LAB_80074574;
+    goto LAB_800748d8;
   }
   if (instance->cachedTFace == -1) {
     instance->waterFace = (_TFace *)0x0;
-    gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x8000;
-LAB_80074558:
+    DAT_800d220c = DAT_800d220c | 0x8000;
+LAB_800748bc:
     PHYSICS_CheckLineInWorld(instance,&local_68);
   }
   else {
-    p_Var3 = (_Instance *)STREAM_GetLevelWithID(instance->currentStreamUnitID);
-    pNVar7 = (p_Var3->node).prev;
-    gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x8000;
-    tface = (_TFace *)((int)pNVar7[4].prev + (int)instance->cachedTFace * 0xc);
+    p_Var5 = (_Instance *)STREAM_GetLevelWithID(instance->currentStreamUnitID);
+    pNVar8 = (p_Var5->node).prev;
+    DAT_800d220c = DAT_800d220c | 0x8000;
+    tface = (_TFace *)((int)pNVar8[4].prev + (int)instance->cachedTFace * 0xc);
     Data_00 = COLLIDE_PointAndTfaceFunc
-                        ((_Terrain *)(p_Var3->node).prev,
-                         (BSPTree *)((int)pNVar7[10].prev + (int)instance->cachedBSPTree * 0x24),
+                        ((_Terrain *)(p_Var5->node).prev,
+                         (BSPTree *)((int)pNVar8[9].prev + (int)instance->cachedBSPTree * 0x24),
                          (_SVector *)&local_30,(_SVector *)&local_38,tface,0,0);
     if (Data_00 == 0) {
       instance->waterFace = (_TFace *)0x0;
-      goto LAB_80074558;
+      goto LAB_800748bc;
     }
     local_68.type = 3;
     local_68.segment = instance->cachedBSPTree;
     local_68.prim = tface;
-    local_68.inst = p_Var3;
-    COLLIDE_GetNormal(tface->normal,(short *)(p_Var3->node).prev[4].next,
+    local_68.inst = p_Var5;
+    COLLIDE_GetNormal(tface->normal,(short *)(p_Var5->node).prev[4].next,
                       (_SVector *)&local_68.wNormal);
   }
-  gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xffff7fff;
-LAB_80074574:
+  DAT_800d220c = DAT_800d220c & 0xffff7fff;
+LAB_800748d8:
   if (((((uint)local_68.type - 2 < 2) || (local_68.type == 5)) &&
       (Data_00 = (int)local_68.wNormal.vz, Data_00 < *(short *)(Data + 10))) && (0 < Data_00)) {
-    iVar8 = (int)-local_68.wNormal.vz;
-    iVar6 = -(local_68.wNormal.vx * iVar8);
-    if (0 < local_68.wNormal.vx * iVar8) {
-      iVar6 = iVar6 + 0xfff;
+    iVar9 = (int)-local_68.wNormal.vz;
+    iVar7 = -(local_68.wNormal.vx * iVar9);
+    if (0 < local_68.wNormal.vx * iVar9) {
+      iVar7 = iVar7 + 0xfff;
     }
-    iVar4 = -(local_68.wNormal.vy * iVar8);
-    Data_00 = Data_00 * iVar8;
-    if (0 < local_68.wNormal.vy * iVar8) {
+    iVar4 = -(local_68.wNormal.vy * iVar9);
+    Data_00 = Data_00 * iVar9;
+    if (0 < local_68.wNormal.vy * iVar9) {
       iVar4 = iVar4 + 0xfff;
     }
     if (Data_00 < 0) {
       Data_00 = Data_00 + 0xfff;
     }
+    local_74 = (short)puVar2;
     if (instance->zVel < -0x30) {
-      sVar2 = -*(short *)&instance->zVel;
+      sVar3 = -*(short *)&instance->zVel;
     }
     else {
-      sVar2 = 0x30;
+      sVar3 = 0x30;
     }
-    iVar8 = (int)sVar2;
-    iVar6 = (short)(iVar6 >> 0xc) * iVar8;
-    if (iVar6 < 0) {
-      iVar6 = iVar6 + 0xfff;
+    iVar9 = (int)sVar3;
+    iVar7 = (short)(iVar7 >> 0xc) * iVar9;
+    if (iVar7 < 0) {
+      iVar7 = iVar7 + 0xfff;
     }
-    iVar4 = (short)(iVar4 >> 0xc) * iVar8;
-    local_38.vx = (local_68.newPoint)->vx + (short)(iVar6 >> 0xc);
+    iVar4 = (short)(iVar4 >> 0xc) * iVar9;
+    local_38.vx = (local_68.newPoint)->vx + (short)(iVar7 >> 0xc);
     if (iVar4 < 0) {
       iVar4 = iVar4 + 0xfff;
     }
-    iVar8 = (short)(-0x1000 - (short)(Data_00 >> 0xc)) * iVar8;
+    iVar9 = (short)(local_74 - (short)(Data_00 >> 0xc)) * iVar9;
     local_38.vy = (local_68.newPoint)->vy + (short)(iVar4 >> 0xc);
-    if (iVar8 < 0) {
-      iVar8 = iVar8 + 0xfff;
+    if (iVar9 < 0) {
+      iVar9 = iVar9 + 0xfff;
     }
-    local_30.vz = (local_68.newPoint)->vz + (short)(iVar8 >> 0xc);
+    local_30.vz = (local_68.newPoint)->vz + (short)(iVar9 >> 0xc);
     local_38.vz = local_30.vz + *(short *)Data;
     local_30.vz = local_30.vz - *(short *)(Data + 2);
     local_30.vx = local_38.vx;
@@ -481,13 +520,13 @@ LAB_80074574:
   }
   if (local_68.type == 3) {
     instance->cachedBSPTree = local_68.segment;
-    sVar2 = (short)((int)((int)local_68.prim - (int)((local_68.inst)->node).prev[4].prev) *
+    sVar3 = (short)((int)((int)local_68.prim - (int)((local_68.inst)->node).prev[4].prev) *
                     -0x55555555 >> 2);
   }
   else {
-    sVar2 = -1;
+    sVar3 = -1;
   }
-  instance->cachedTFace = sVar2;
+  instance->cachedTFace = sVar3;
   if (((uint)local_68.type - 2 < 2) || (local_68.type == 5)) {
     if ((Mode & 7U) != 0) {
       if (bVar1) {
@@ -507,7 +546,7 @@ LAB_80074574:
       if ((Mode & 2U) != 0) {
         INSTANCE_Post(instance,0x4010200,Data);
       }
-      uVar9 = 0x100000;
+      uVar10 = 0x100000;
     }
     if (((Mode & 4U) != 0) &&
        (((Data_00 = CheckPhysOb(instance), Data_00 == 0 ||
@@ -527,30 +566,44 @@ LAB_80074574:
     }
     if (((local_68.type == 3) || (local_68.inst == (_Instance *)0x0)) ||
        (((local_68.inst)->object->oflags & 0x400U) == 0)) {
+      if ((instance->attachedID != 0) &&
+         (p_Var5 = INSTANCE_Find(instance->attachedID), p_Var5 != (_Instance *)0x0)) {
+        p_Var5->flags2 = p_Var5->flags2 & 0xffffff7f;
+      }
       instance->attachedID = 0;
     }
     else {
       Data_00 = SetPhysicsLinkedMoveData
                           (local_68.inst,(int)local_68.segment,(_SVector *)0x0,(_SVector *)0x0);
-      uVar5 = PhysicsCheckLinkedMove(instance,Data_00,Mode);
-      uVar9 = uVar9 | uVar5;
+      uVar6 = PhysicsCheckLinkedMove(instance,Data_00,Mode);
+      uVar10 = uVar10 | uVar6;
     }
     if ((instance->flags2 & 0x40U) != 0) {
-      sVar2 = (instance->position).z;
+      sVar3 = (instance->position).z;
       *(undefined4 *)&instance->shadowPosition = *(undefined4 *)&instance->position;
-      (instance->shadowPosition).z = sVar2;
+      (instance->shadowPosition).z = sVar3;
       instance->flags = instance->flags | 0x8000000;
     }
-    if ((local_68.type == 3) && (instance->tface != local_68.prim)) {
-      instance->oldTFace = instance->tface;
-      instance->tface = local_68.prim;
-      *(_Instance **)&instance->tfaceLevel = local_68.inst;
-      instance->bspTree = (int)local_68.segment;
-      if (local_68.segment == 0) {
-        uVar9 = uVar9 | 0x80000;
+    if (local_68.type == 3) {
+      if (instance->tface != local_68.prim) {
+        instance->oldTFace = instance->tface;
+        instance->tface = local_68.prim;
+        *(_Instance **)&instance->tfaceLevel = local_68.inst;
+        instance->bspTree = (int)local_68.segment;
+        if (local_68.segment == 0) {
+          uVar10 = uVar10 | 0x80000;
+        }
       }
     }
-    uVar9 = uVar9 | 1;
+    else {
+      if (instance->tface != (_TFace *)0x0) {
+        instance->oldTFace = instance->tface;
+        instance->tface = (_TFace *)0x0;
+        instance->tfaceLevel = (void *)0x0;
+        instance->bspTree = 0;
+      }
+    }
+    uVar10 = uVar10 | 1;
   }
   else {
     if (instance->tface != (_TFace *)0x0) {
@@ -564,7 +617,7 @@ LAB_80074574:
       INSTANCE_Post(instance,0x4000001,Data);
     }
   }
-  return uVar9;
+  return uVar10;
 }
 
 
@@ -572,23 +625,25 @@ LAB_80074574:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PhysicsDefaultGravityResponse(struct _Instance *instance /*$a0*/, struct evPhysicsGravityData *Data /*$a1*/)
- // line 516, offset 0x80074ad4
+ // line 556, offset 0x80074e90
 	/* begin block 1 */
-		// Start line: 1209
+		// Start line: 1279
 	/* end block 1 */
-	// End Line: 1210
+	// End Line: 1280
 
 	/* begin block 2 */
-		// Start line: 1210
+		// Start line: 1280
 	/* end block 2 */
-	// End Line: 1211
+	// End Line: 1281
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 void PhysicsDefaultGravityResponse(_Instance *instance,evPhysicsGravityData *Data)
 
 {
   (instance->position).x = (instance->position).x + Data->x;
   (instance->position).y = (instance->position).y + Data->y;
-  if ((instance == gameTrackerX.playerInstance) && (0x80 < Data->z)) {
+  if ((instance == DAT_800d20f8) && (0x80 < Data->z)) {
     (instance->position).z = (instance->position).z + 0x80;
     return;
   }
@@ -601,10 +656,10 @@ void PhysicsDefaultGravityResponse(_Instance *instance,evPhysicsGravityData *Dat
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PhysicsCheckEdgeGrabbing(struct _Instance *instance /*$s2*/, struct GameTracker *gameTracker /*$a1*/, int Data /*stack 8*/, short Mode /*$s7*/)
- // line 535, offset 0x80074b4c
+ // line 575, offset 0x80074f08
 	/* begin block 1 */
-		// Start line: 536
-		// Start offset: 0x80074B4C
+		// Start line: 576
+		// Start offset: 0x80074F08
 		// Variables:
 	// 		struct evPhysicsEdgeData *Ptr; // $s1
 	// 		int rc; // $s6
@@ -618,13 +673,15 @@ void PhysicsDefaultGravityResponse(_Instance *instance,evPhysicsGravityData *Dat
 	// 		int wallCrawl; // $fp
 	// 		int freeSpot; // $s3
 	/* end block 1 */
-	// End offset: 0x800751AC
-	// End Line: 812
+	// End offset: 0x80075568
+	// End Line: 852
 
 	/* begin block 2 */
-		// Start line: 1247
+		// Start line: 1317
 	/* end block 2 */
-	// End Line: 1248
+	// End Line: 1318
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 int PhysicsCheckEdgeGrabbing(_Instance *instance,GameTracker *gameTracker,int Data,short Mode)
 
@@ -637,10 +694,10 @@ int PhysicsCheckEdgeGrabbing(_Instance *instance,GameTracker *gameTracker,int Da
   undefined4 in_zero;
   undefined4 in_at;
   ushort uVar6;
-  short *psVar7;
+  SVECTOR *r;
+  int iVar7;
   int iVar8;
-  int iVar9;
-  bool bVar10;
+  bool bVar9;
   short local_78;
   short local_74;
   short local_70;
@@ -650,42 +707,41 @@ int PhysicsCheckEdgeGrabbing(_Instance *instance,GameTracker *gameTracker,int Da
   int local_30;
   uint local_2c;
   
-  iVar9 = 0;
+  iVar8 = 0;
   bVar4 = true;
   if ((Mode & 1U) != 0) {
     *(undefined4 *)(Data + 0x18) = 0;
   }
   local_68.oldPoint = (SVECTOR *)&local_38;
   local_68.newPoint = (SVECTOR *)&local_30;
-  psVar7 = (short *)INSTANCE_Query(instance,7);
-  if (psVar7 == (short *)0x0) {
-    pTempMat_41 = (MATRIX *)instance->matrix;
+  r = (SVECTOR *)INSTANCE_Query(instance,7);
+  if (r == (SVECTOR *)0x0) {
+    pTempMat_41 = instance->matrix;
   }
   else {
     pTempMat_41 = (MATRIX *)&TempMat_40;
-    RotMatrix(psVar7,&TempMat_40);
+    RotMatrix(r,(MATRIX *)&TempMat_40);
   }
   PHYSICS_GenericLineCheckSetup
             (0,0,(short)(((uint)*(ushort *)Data + (uint)*(ushort *)(Data + 4)) * 0x10000 >> 0x10),
-             (SVECTOR *)&local_38);
+             200);
   PHYSICS_GenericLineCheckSetup
             (0,*(short *)(Data + 2),
-             (short)(((uint)*(ushort *)Data + (uint)*(ushort *)(Data + 4)) * 0x10000 >> 0x10),
-             (SVECTOR *)&local_30);
-  PHYSICS_GenericLineCheck(instance,(MATRIX *)instance->matrix,pTempMat_41,&local_68);
-  iVar8 = PHYSICS_CheckFaceStick(&local_68);
-  bVar10 = iVar8 != 0;
+             (short)(((uint)*(ushort *)Data + (uint)*(ushort *)(Data + 4)) * 0x10000 >> 0x10),0xd0);
+  PHYSICS_GenericLineCheck(instance,(char)instance->matrix,(char)pTempMat_41,&local_68);
+  iVar7 = PHYSICS_CheckFaceStick(&local_68);
+  bVar9 = iVar7 != 0;
   if (local_68.type == 0) {
-    PHYSICS_GenericLineCheckSetup(0,0,*(short *)(Data + 4),(SVECTOR *)&local_38);
+    PHYSICS_GenericLineCheckSetup(0,0,*(short *)(Data + 4),200);
     PHYSICS_GenericLineCheckSetup
               (0,0,(short)(((uint)*(ushort *)Data + (uint)*(ushort *)(Data + 4) + 0x80) * 0x10000 >>
-                          0x10),(SVECTOR *)&local_30);
-    PHYSICS_GenericLineCheck(instance,(MATRIX *)instance->matrix,pTempMat_41,&local_68);
-    if (local_68.type == 0) goto LAB_80074cd8;
+                          0x10),0xd0);
+    PHYSICS_GenericLineCheck(instance,(char)instance->matrix,(char)pTempMat_41,&local_68);
+    if (local_68.type == 0) goto LAB_80075094;
   }
   bVar4 = false;
-LAB_80074cd8:
-  if ((bVar4) || (bVar10)) {
+LAB_80075094:
+  if ((bVar4) || (bVar9)) {
     uVar5 = local_2c & 0xffff0000;
     local_2c = uVar5 | *(ushort *)Data;
     setCopControlWord(2,0,*(undefined4 *)pTempMat_41->m);
@@ -723,12 +779,12 @@ LAB_80074cd8:
     local_70 = (short)uVar3;
     local_2c = uVar5 | (ushort)((instance->position).z + local_70);
     PHYSICS_CheckLineInWorld(instance,&local_68);
-    iVar8 = PHYSICS_CheckDontGrabEdge(&local_68);
-    if ((iVar8 == 0) && (((local_68.type == 3 || (local_68.type == 5)) || (local_68.type == 2)))) {
-      iVar9 = PHYSICS_CheckFaceStick(&local_68);
+    iVar7 = PHYSICS_CheckDontGrabEdge(&local_68);
+    if ((iVar7 == 0) && (((local_68.type == 3 || (local_68.type == 5)) || (local_68.type == 2)))) {
+      iVar8 = PHYSICS_CheckFaceStick(&local_68);
       uVar5 = local_34;
-      if (iVar9 != 0) {
-        bVar10 = (bool)(bVar10 + '\x01');
+      if (iVar8 != 0) {
+        bVar9 = (bool)(bVar9 + '\x01');
       }
       if ((Mode & 1U) != 0) {
         **(short **)(Data + 0xc) = local_68.wNormal.vx;
@@ -740,7 +796,7 @@ LAB_80074cd8:
           *(_Instance **)(Data + 0x18) = local_68.inst;
         }
       }
-      iVar9 = 2;
+      iVar8 = 2;
       local_34 = local_34 & 0xffff0000;
       setCopControlWord(2,0,*(undefined4 *)pTempMat_41->m);
       setCopControlWord(2,0x800,*(undefined4 *)(pTempMat_41->m + 2));
@@ -764,8 +820,8 @@ LAB_80074cd8:
       local_2c = local_2c & 0xffff0000 | (uint)uVar6;
       local_34 = uVar5 & 0xffff0000 | (uint)(ushort)(uVar6 + *(short *)(Data + 4));
       PHYSICS_CheckLineInWorld(instance,&local_68);
-      iVar8 = PHYSICS_CheckDontGrabEdge(&local_68);
-      if ((iVar8 == 0) && (((local_68.type == 3 || (local_68.type == 5)) || (local_68.type == 2))))
+      iVar7 = PHYSICS_CheckDontGrabEdge(&local_68);
+      if ((iVar7 == 0) && (((local_68.type == 3 || (local_68.type == 5)) || (local_68.type == 2))))
       {
         if ((Mode & 1U) != 0) {
           **(short **)(Data + 0x10) = local_68.wNormal.vx;
@@ -777,7 +833,7 @@ LAB_80074cd8:
           }
         }
         if (0xb50 < local_68.wNormal.vz) {
-          iVar9 = 6;
+          iVar8 = 6;
           if ((Mode & 2U) != 0) {
             INSTANCE_Post(instance,0x4010010,Data);
           }
@@ -801,49 +857,50 @@ LAB_80074cd8:
           *(_Instance **)(Data + 0x18) = local_68.inst;
         }
       }
-      iVar9 = 2;
+      iVar8 = 2;
     }
   }
-  if (((Mode & 2U) != 0) && (bVar10 == true)) {
+  if (((Mode & 2U) != 0) && (bVar9 == true)) {
     INSTANCE_Post(instance,0x4000011,Data);
   }
-  return iVar9;
+  return iVar8;
 }
 
 
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ PhysicsDefaultEdgeGrabResponse(struct _Instance *instance /*$s1*/, struct evPhysicsEdgeData *Data /*$s0*/, int blockFlag /*$a2*/)
- // line 825, offset 0x800751e0
+// void /*$ra*/ PhysicsDefaultEdgeGrabResponse(struct _Instance *instance /*$s2*/, struct evPhysicsEdgeData *Data /*$s1*/, int blockFlag /*$a2*/)
+ // line 865, offset 0x8007559c
 	/* begin block 1 */
-		// Start line: 826
-		// Start offset: 0x800751E0
+		// Start line: 866
+		// Start offset: 0x8007559C
 		// Variables:
-	// 		struct _SVector normal; // stack offset -56
-	// 		struct _G2EulerAngles_Type ea1; // stack offset -48
-	// 		struct VECTOR OutTrans; // stack offset -40
-	// 		static struct MATRIX TempMat; // offset 0x30
+	// 		struct _SVector normal; // stack offset -88
+	// 		struct _G2EulerAngles_Type ea1; // stack offset -80
+	// 		struct VECTOR OutTrans; // stack offset -72
+	// 		struct MATRIX TempMat; // stack offset -56
 	// 		struct SVECTOR New; // stack offset -24
 
 		/* begin block 1.1 */
-			// Start line: 904
-			// Start offset: 0x80075300
+			// Start line: 915
+			// Start offset: 0x800756B8
 			// Variables:
 		// 		long dp; // $v0
 		/* end block 1.1 */
-		// End offset: 0x80075300
-		// End Line: 904
+		// End offset: 0x800756B8
+		// End Line: 915
 	/* end block 1 */
-	// End offset: 0x80075300
-	// End Line: 904
+	// End offset: 0x800756B8
+	// End Line: 915
 
 	/* begin block 2 */
-		// Start line: 1919
+		// Start line: 1989
 	/* end block 2 */
-	// End Line: 1920
+	// End Line: 1990
 
 /* WARNING: Could not reconcile some variable overlaps */
+/* File: C:\kain2\game\PHYSICS.C */
 
 void PhysicsDefaultEdgeGrabResponse(_Instance *instance,evPhysicsEdgeData *Data,int blockFlag)
 
@@ -856,80 +913,89 @@ void PhysicsDefaultEdgeGrabResponse(_Instance *instance,evPhysicsEdgeData *Data,
   undefined4 in_at;
   int iVar5;
   _SVector *p_Var6;
-  _SVector local_38;
-  _G2EulerAngles_Type local_30;
-  short local_28;
-  short local_24;
-  short local_20;
+  _SVector local_58;
+  _G2EulerAngles_Type local_50;
+  short local_48;
+  short local_44;
+  short local_40;
+  undefined4 local_38;
+  undefined4 local_34;
+  undefined4 local_30;
+  undefined4 local_2c;
+  undefined4 local_28;
+  undefined4 local_18;
   undefined4 local_14;
   
   if (blockFlag == 0) {
-    local_38.x = Data->Normal1->x;
-    local_38.y = Data->Normal1->y;
-    local_38.z = 0;
-    MATH3D_RotateAxisToVector((MATRIX *)&TempMat_44,(MATRIX *)instance->matrix,&local_38,AXIS_Y);
-    G2EulerAngles_FromMatrix(&local_30,(_G2Matrix_Type *)&TempMat_44,0);
+    local_58.x = Data->Normal1->x;
+    local_58.y = Data->Normal1->y;
+    local_58.z = 0;
+    MATH3D_RotateAxisToVector
+              ((char)(_G2Matrix_Type *)&local_38,(char)instance->matrix + ' ',&local_58,AXIS_Y);
+    G2EulerAngles_FromMatrix(&local_50,(_G2Matrix_Type *)&local_38,0);
     (instance->rotation).x = 0;
   }
   else {
-    local_38.z = 0;
-    local_38.y = 0;
-    local_38.x = 0;
+    local_58.z = 0;
+    local_58.y = 0;
+    local_58.x = 0;
     sVar1 = Data->Normal1->y;
     if (sVar1 < 0x201) {
       if (sVar1 < -0x200) {
-        local_38.y = -0x1000;
-        local_30.z = -0x800;
+        local_58.y = -0x1000;
+        local_50.z = -0x800;
       }
     }
     else {
-      local_38.y = 0x1000;
-      local_30.z = 0;
+      local_58.y = 0x1000;
+      local_50.z = 0;
     }
     sVar1 = Data->Normal1->x;
     if (sVar1 < 0x201) {
       if (sVar1 < -0x200) {
-        local_38.x = -0x1000;
-        local_30.z = 0x400;
+        local_58.x = -0x1000;
+        local_50.z = 0x400;
       }
     }
     else {
-      local_38.x = 0x1000;
-      local_30.z = -0x400;
+      local_58.x = 0x1000;
+      local_50.z = -0x400;
     }
-    local_30.y = 0;
-    local_30.x = 0;
-    MATH3D_RotateAxisToVector((MATRIX *)&TempMat_44,(MATRIX *)instance->matrix,&local_38,AXIS_Y);
+    local_50.y = 0;
+    local_50.x = 0;
+    MATH3D_RotateAxisToVector(200,(char)instance->matrix,&local_58,AXIS_Y);
     (instance->rotation).x = 0;
   }
   (instance->rotation).y = 0;
-  (instance->rotation).z = local_30.z;
-  Data->zRot = (int)local_30.z;
+  (instance->rotation).z = local_50.z;
+  Data->zRot = (int)local_50.z;
   local_14 = CONCAT22(local_14._2_2_,Data->ZDistance);
-  setCopControlWord(2,0,TempMat_44);
-  setCopControlWord(2,0x800,DAT_800d4cd4);
-  setCopControlWord(2,0x1000,DAT_800d4cd8);
-  setCopControlWord(2,0x1800,DAT_800d4cdc);
-  setCopControlWord(2,0x2000,DAT_800d4ce0);
-  setCopReg(2,in_zero,*(undefined4 *)&Data->XDistance);
+  local_18 = *(undefined4 *)&Data->XDistance;
+  RotMatrix((SVECTOR *)&instance->rotation,(MATRIX *)&local_38);
+  setCopControlWord(2,0,local_38);
+  setCopControlWord(2,0x800,local_34);
+  setCopControlWord(2,0x1000,local_30);
+  setCopControlWord(2,0x1800,local_2c);
+  setCopControlWord(2,0x2000,local_28);
+  setCopReg(2,in_zero,local_18);
   setCopReg(2,in_at,local_14);
   copFunction(2,0x486012);
   uVar2 = getCopReg(2,0x19);
   uVar3 = getCopReg(2,0x1a);
   uVar4 = getCopReg(2,0x1b);
   p_Var6 = Data->Delta;
-  iVar5 = (int)p_Var6->x * (int)local_38.x + (int)p_Var6->y * (int)local_38.y +
-          (int)p_Var6->z * (int)local_38.z >> 0xc;
-  p_Var6->x = (short)(iVar5 * (int)local_38.x >> 0xc);
-  Data->Delta->y = (short)(iVar5 * local_38.y >> 0xc);
-  local_20 = (short)uVar4;
+  iVar5 = (int)p_Var6->x * (int)local_58.x + (int)p_Var6->y * (int)local_58.y +
+          (int)p_Var6->z * (int)local_58.z >> 0xc;
+  p_Var6->x = (short)(iVar5 * (int)local_58.x >> 0xc);
+  Data->Delta->y = (short)(iVar5 * local_58.y >> 0xc);
+  local_40 = (short)uVar4;
   (instance->position).z =
        (instance->position).z -
-       (local_20 - (Data->Delta->z + Data->UpperOffset + Data->AboveOffset));
-  local_28 = (short)uVar2;
-  (instance->position).x = (instance->position).x + (Data->Delta->x - local_28);
-  local_24 = (short)uVar3;
-  (instance->position).y = (instance->position).y - (local_24 - Data->Delta->y);
+       (local_40 - (Data->Delta->z + Data->UpperOffset + Data->AboveOffset));
+  local_48 = (short)uVar2;
+  (instance->position).x = (instance->position).x + (Data->Delta->x - local_48);
+  local_44 = (short)uVar3;
+  (instance->position).y = (instance->position).y - (local_44 - Data->Delta->y);
   return;
 }
 
@@ -938,10 +1004,10 @@ void PhysicsDefaultEdgeGrabResponse(_Instance *instance,evPhysicsEdgeData *Data,
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PhysicsCheckSliding(struct _Instance *instance /*$s3*/, int Data /*$a1*/, short Mode /*$s6*/)
- // line 955, offset 0x80075480
+ // line 962, offset 0x80075840
 	/* begin block 1 */
-		// Start line: 956
-		// Start offset: 0x80075480
+		// Start line: 963
+		// Start offset: 0x80075840
 		// Variables:
 	// 		struct evPhysicsSlideData *Ptr; // $s0
 	// 		int rc; // $s1
@@ -950,31 +1016,33 @@ void PhysicsDefaultEdgeGrabResponse(_Instance *instance,evPhysicsEdgeData *Data,
 	// 		struct _PCollideInfo CInfo; // stack offset -96
 	// 		struct SVECTOR Old; // stack offset -48
 	// 		struct SVECTOR New; // stack offset -40
-	// 		static struct MATRIX *pTempMat; // offset 0x50
+	// 		static struct MATRIX *pTempMat; // offset 0x24
 
 		/* begin block 1.1 */
-			// Start line: 987
-			// Start offset: 0x80075508
+			// Start line: 994
+			// Start offset: 0x800758C8
 		/* end block 1.1 */
-		// End offset: 0x80075508
-		// End Line: 989
+		// End offset: 0x800758C8
+		// End Line: 996
 
 		/* begin block 1.2 */
-			// Start line: 996
-			// Start offset: 0x80075544
+			// Start line: 1003
+			// Start offset: 0x80075904
 			// Variables:
 		// 		int Temp; // $a3
 		/* end block 1.2 */
-		// End offset: 0x80075618
-		// End Line: 1004
+		// End offset: 0x800759D8
+		// End Line: 1011
 	/* end block 1 */
-	// End offset: 0x80075900
-	// End Line: 1138
+	// End offset: 0x80075CC0
+	// End Line: 1145
 
 	/* begin block 2 */
-		// Start line: 2192
+		// Start line: 2203
 	/* end block 2 */
-	// End Line: 2193
+	// End Line: 2204
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 int PhysicsCheckSliding(_Instance *instance,int Data,short Mode)
 
@@ -992,11 +1060,11 @@ int PhysicsCheckSliding(_Instance *instance,int Data,short Mode)
   
   local_60.oldPoint = &local_30;
   local_60.newPoint = &local_28;
-  pTempMat_47 = instance->matrix + *(short *)(Data + 0x18);
-  local_30.vx = *(short *)pTempMat_47->t;
-  local_30.vy = *(short *)(pTempMat_47->t + 1);
+  pTempMat_46 = instance->matrix + *(short *)(Data + 0x18);
+  local_30.vx = *(short *)pTempMat_46->t;
+  local_30.vy = *(short *)(pTempMat_46->t + 1);
   uVar3 = 0;
-  local_30.vz = *(short *)(pTempMat_47->t + 2) + *(short *)(Data + 0x1e);
+  local_30.vz = *(short *)(pTempMat_46->t + 2) + *(short *)(Data + 0x1e);
   if (instance->tface == (_TFace *)0x0) {
     local_68.x = 0;
     local_68.y = 0;
@@ -1041,9 +1109,9 @@ int PhysicsCheckSliding(_Instance *instance,int Data,short Mode)
       *(short *)(Data + 2) = local_30.vy - local_28.vy;
       *(short *)(Data + 4) = local_30.vz - local_28.vz;
     }
-    local_30.vx = *(short *)pTempMat_47->t + local_78;
-    local_30.vy = *(short *)(pTempMat_47->t + 1) + local_74;
-    local_28.vz = local_70 + *(short *)(pTempMat_47->t + 2) + *(short *)(Data + 0x1e);
+    local_30.vx = *(short *)pTempMat_46->t + local_78;
+    local_30.vy = *(short *)(pTempMat_46->t + 1) + local_74;
+    local_28.vz = local_70 + *(short *)(pTempMat_46->t + 2) + *(short *)(Data + 0x1e);
     local_30.vz = local_28.vz + *(short *)(Data + 0x1c);
     local_28.vx = local_30.vx;
     local_28.vy = local_30.vy;
@@ -1062,9 +1130,9 @@ int PhysicsCheckSliding(_Instance *instance,int Data,short Mode)
   }
   else {
     if (local_60.type == 0) {
-      local_30.vx = *(short *)pTempMat_47->t + local_78;
-      local_30.vy = *(short *)(pTempMat_47->t + 1) + local_74;
-      local_30.vz = local_70 + *(short *)(pTempMat_47->t + 2) + *(short *)(Data + 0x1e);
+      local_30.vx = *(short *)pTempMat_46->t + local_78;
+      local_30.vy = *(short *)(pTempMat_46->t + 1) + local_74;
+      local_30.vz = local_70 + *(short *)(pTempMat_46->t + 2) + *(short *)(Data + 0x1e);
       local_28.vz = local_30.vz - *(short *)(Data + 0x1a);
       local_28.vx = local_30.vx;
       local_28.vy = local_30.vy;
@@ -1080,9 +1148,9 @@ int PhysicsCheckSliding(_Instance *instance,int Data,short Mode)
       }
     }
   }
-  local_30.vx = *(short *)pTempMat_47->t;
-  local_30.vy = *(short *)(pTempMat_47->t + 1);
-  local_30.vz = *(short *)(pTempMat_47->t + 2);
+  local_30.vx = *(short *)pTempMat_46->t;
+  local_30.vy = *(short *)(pTempMat_46->t + 1);
+  local_30.vz = *(short *)(pTempMat_46->t + 2);
   local_28.vz = local_30.vz + *(short *)(Data + 0x1c);
   local_28.vx = local_30.vx;
   local_28.vy = local_30.vy;
@@ -1106,22 +1174,24 @@ int PhysicsCheckSliding(_Instance *instance,int Data,short Mode)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PhysicsUpdateTface(struct _Instance *instance /*$s0*/, int Data /*$a1*/)
- // line 1149, offset 0x8007592c
+ // line 1156, offset 0x80075cec
 	/* begin block 1 */
-		// Start line: 1150
-		// Start offset: 0x8007592C
+		// Start line: 1157
+		// Start offset: 0x80075CEC
 		// Variables:
 	// 		struct _PCollideInfo CInfo; // stack offset -72
 	// 		struct SVECTOR Old; // stack offset -24
 	// 		struct SVECTOR New; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x80075A18
-	// End Line: 1191
+	// End offset: 0x80075DD8
+	// End Line: 1198
 
 	/* begin block 2 */
-		// Start line: 2733
+		// Start line: 2744
 	/* end block 2 */
-	// End Line: 2734
+	// End Line: 2745
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 int PhysicsUpdateTface(_Instance *instance,int Data)
 
@@ -1167,103 +1237,105 @@ int PhysicsUpdateTface(_Instance *instance,int Data)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PhysicsCheckBlockers(struct _Instance *instance /*$s3*/, struct GameTracker *gameTracker /*$a1*/, int Data /*$s4*/, short Mode /*$s2*/)
- // line 1204, offset 0x80075a28
+ // line 1211, offset 0x80075de8
 	/* begin block 1 */
-		// Start line: 1205
-		// Start offset: 0x80075A28
+		// Start line: 1212
+		// Start offset: 0x80075DE8
 		// Variables:
 	// 		struct evPhysicsEdgeData *Ptr; // $s1
 	// 		struct VECTOR OutTrans; // stack offset -120
 	// 		struct _PCollideInfo CInfo; // stack offset -104
 	// 		struct SVECTOR Old; // stack offset -56
 	// 		struct SVECTOR New; // stack offset -48
-	// 		static struct MATRIX *pTempMat; // offset 0x54
+	// 		static struct MATRIX *pTempMat; // offset 0x28
 
 		/* begin block 1.1 */
-			// Start line: 1248
-			// Start offset: 0x80075AD4
+			// Start line: 1255
+			// Start offset: 0x80075E94
 			// Variables:
 		// 		struct _TFace *tface; // $s0
 
 			/* begin block 1.1.1 */
-				// Start line: 1250
-				// Start offset: 0x80075AD4
+				// Start line: 1257
+				// Start offset: 0x80075E94
 				// Variables:
 			// 		int Dot; // $a0
 			// 		struct SVECTOR Force; // stack offset -40
 			/* end block 1.1.1 */
-			// End offset: 0x80075BB8
-			// End Line: 1295
+			// End offset: 0x80075F78
+			// End Line: 1302
 
 			/* begin block 1.1.2 */
-				// Start line: 1318
-				// Start offset: 0x80075C88
+				// Start line: 1330
+				// Start offset: 0x8007604C
 				// Variables:
 			// 		struct _HFace *hface; // stack offset -32
 			/* end block 1.1.2 */
-			// End offset: 0x80075C88
-			// End Line: 1324
+			// End offset: 0x8007604C
+			// End Line: 1336
 		/* end block 1.1 */
-		// End offset: 0x80075DBC
-		// End Line: 1368
+		// End offset: 0x80076164
+		// End Line: 1380
 	/* end block 1 */
-	// End offset: 0x80075DC0
-	// End Line: 1371
+	// End offset: 0x80076168
+	// End Line: 1383
 
 	/* begin block 2 */
-		// Start line: 2856
+		// Start line: 2867
 	/* end block 2 */
-	// End Line: 2857
+	// End Line: 2868
 
 /* WARNING: Could not reconcile some variable overlaps */
+/* File: C:\kain2\game\PHYSICS.C */
 
 int PhysicsCheckBlockers(_Instance *instance,GameTracker *gameTracker,int Data,short Mode)
 
 {
-  MATRIX *pMVar1;
-  int iVar2;
+  char rotMat;
+  MATRIX *m;
+  int iVar1;
   int local_78;
   int local_74;
   int local_70;
   _PCollideInfo local_68;
   SVECTOR local_38;
   SVECTOR local_30;
-  undefined2 local_28;
-  undefined2 local_26;
+  SVECTOR local_28 [2];
   
   local_68.oldPoint = &local_38;
   *(undefined4 *)(Data + 0x20) = 0;
   *(undefined4 *)(Data + 0x18) = 0;
   local_68.newPoint = &local_30;
-  PHYSICS_GenericLineCheckSetup(0,0,0,local_68.oldPoint);
-  PHYSICS_GenericLineCheckSetup(0,*(short *)(Data + 2),0,&local_30);
-  PHYSICS_GenericLineCheck
-            (instance,(MATRIX *)instance->matrix + 1,(MATRIX *)instance->matrix,&local_68);
-  pTempMat_52 = instance->matrix;
+  PHYSICS_GenericLineCheckSetup(0,0,0,(char)local_68.oldPoint);
+  PHYSICS_GenericLineCheckSetup(0,*(short *)(Data + 2),0,(char)&local_30);
+  rotMat = (char)instance->matrix;
+  PHYSICS_GenericLineCheck(instance,rotMat + ' ',rotMat,&local_68);
+  pTempMat_51 = instance->matrix;
   if (((local_68.type == 3) || (local_68.type == 5)) || (local_68.type == 2)) {
-    local_28 = 0;
-    local_26 = 0xf000;
-    ApplyMatrix(pTempMat_52,&local_28,&local_78);
-    iVar2 = local_68.wNormal.vx * local_78 + local_68.wNormal.vy * local_74 +
+    local_28[0].vx = 0;
+    local_28[0].vy = -0x1000;
+    ApplyMatrix(pTempMat_51,local_28,(VECTOR *)&local_78);
+    iVar1 = local_68.wNormal.vx * local_78 + local_68.wNormal.vy * local_74 +
             local_68.wNormal.vz * local_70;
-    if (iVar2 < 0) {
-      iVar2 = iVar2 + 0xfff;
+    if (iVar1 < 0) {
+      iVar1 = iVar1 + 0xfff;
     }
     if (((local_68.type == 3) && (*(ushort *)((int)local_68.prim + 10) != 0xffff)) &&
        ((*(ushort *)
           ((int)&((local_68.inst)->node).prev[6].next[1].prev +
           (uint)*(ushort *)((int)local_68.prim + 10) + 2) & 0x1000) != 0)) {
-      if (-0xec8 < iVar2 >> 0xc) goto LAB_80075dbc;
+      if (-0xec8 < iVar1 >> 0xc) goto LAB_80076164;
     }
     else {
-      if (-0xfc1 < iVar2 >> 0xc) goto LAB_80075dbc;
+      if (-0xfc1 < iVar1 >> 0xc) goto LAB_80076164;
     }
     if ((Mode & 1U) != 0) {
       **(short **)(Data + 0xc) = local_68.wNormal.vx;
       *(short *)(*(int *)(Data + 0xc) + 2) = local_68.wNormal.vy;
       *(short *)(*(int *)(Data + 0xc) + 4) = local_68.wNormal.vz;
-      *(short *)(*(int *)(Data + 0x14) + 2) = (local_68.newPoint)->vy - (local_68.oldPoint)->vy;
-      **(short **)(Data + 0x14) = (local_68.newPoint)->vx - (local_68.oldPoint)->vx;
+      *(short *)(*(int *)(Data + 0x14) + 2) = (local_68.newPoint)->vy;
+      **(short **)(Data + 0x14) = (local_68.newPoint)->vx;
+      *(short *)(*(int *)(Data + 0x14) + 4) = (local_68.newPoint)->vz;
     }
     if (((local_68.type == 3) && (*(ushort *)((int)local_68.prim + 10) != 0xffff)) &&
        ((*(ushort *)
@@ -1271,12 +1343,12 @@ int PhysicsCheckBlockers(_Instance *instance,GameTracker *gameTracker,int Data,s
           (uint)*(ushort *)((int)local_68.prim + 10) + 2) & 0x1000) != 0)) {
       *(uint *)(Data + 0x20) = *(uint *)(Data + 0x20) | 0x20000;
     }
-    pMVar1 = pTempMat_52;
+    m = pTempMat_51;
     *(uint *)(Data + 0x20) = *(uint *)(Data + 0x20) | 2;
     local_38.vx = 0;
     local_38.vy = -0x10;
     local_38.vz = 0;
-    ApplyMatrix(pMVar1,&local_38,&local_78);
+    ApplyMatrix(m,&local_38,(VECTOR *)&local_78);
     local_38.vx = (local_68.newPoint)->vx + (short)local_78;
     local_38.vy = (local_68.newPoint)->vy + (short)local_74;
     local_30.vz = (local_68.newPoint)->vz + (short)local_70;
@@ -1289,7 +1361,6 @@ int PhysicsCheckBlockers(_Instance *instance,GameTracker *gameTracker,int Data,s
         **(short **)(Data + 0x10) = local_68.wNormal.vx;
         *(short *)(*(int *)(Data + 0x10) + 2) = local_68.wNormal.vy;
         *(short *)(*(int *)(Data + 0x10) + 4) = local_68.wNormal.vz;
-        *(short *)(*(int *)(Data + 0x14) + 4) = (local_68.newPoint)->vz - (local_68.oldPoint)->vz;
       }
       if (0xb50 < local_68.wNormal.vz) {
         *(uint *)(Data + 0x20) = *(uint *)(Data + 0x20) | 4;
@@ -1299,7 +1370,7 @@ int PhysicsCheckBlockers(_Instance *instance,GameTracker *gameTracker,int Data,s
       INSTANCE_Post(instance,0x4010400,Data);
     }
   }
-LAB_80075dbc:
+LAB_80076164:
   return *(int *)(Data + 0x20);
 }
 
@@ -1308,10 +1379,10 @@ LAB_80075dbc:
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PhysicsCheckSwim(struct _Instance *instance /*$s1*/, int Data /*$s3*/, short Mode /*$s5*/)
- // line 1453, offset 0x80075de0
+ // line 1465, offset 0x80076188
 	/* begin block 1 */
-		// Start line: 1454
-		// Start offset: 0x80075DE0
+		// Start line: 1466
+		// Start offset: 0x80076188
 		// Variables:
 	// 		struct evPhysicsSwimData *Ptr; // $s4
 	// 		int rc; // $s0
@@ -1322,13 +1393,15 @@ LAB_80075dbc:
 	// 		struct SVECTOR New; // stack offset -40
 	// 		long waterZLevel; // $s2
 	/* end block 1 */
-	// End offset: 0x80075FA0
-	// End Line: 1543
+	// End offset: 0x80076348
+	// End Line: 1555
 
 	/* begin block 2 */
-		// Start line: 3467
+		// Start line: 3488
 	/* end block 2 */
-	// End Line: 3468
+	// End Line: 3489
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 int PhysicsCheckSwim(_Instance *instance,int Data,short Mode)
 
@@ -1366,14 +1439,14 @@ int PhysicsCheckSwim(_Instance *instance,int Data,short Mode)
         local_30.vy = *(short *)(instance->matrix[1].t + 1);
         local_30.vz = *(short *)(instance->matrix[1].t + 2);
         local_28.vz = local_30.vz + *(short *)(Data + 4) * -4;
-        gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x8000;
+        DAT_800d220c = DAT_800d220c | 0x8000;
         local_30.vz = local_30.vz + *(short *)(Data + 6);
         instance->waterFace = (_TFace *)0x0;
         local_60.oldPoint = &local_30;
         local_28.vx = local_30.vx;
         local_28.vy = local_30.vy;
         PHYSICS_CheckLineInWorld(instance,&local_60);
-        gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xffff7fff;
+        DAT_800d220c = DAT_800d220c & 0xffff7fff;
         if (local_60.type == 0) {
           sVar3 = sVar4 + *(short *)(Data + 4) * -4;
         }
@@ -1402,21 +1475,23 @@ int PhysicsCheckSwim(_Instance *instance,int Data,short Mode)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PhysicsDefaultCheckSwimResponse(struct _Instance *instance /*$s2*/, struct evPhysicsSwimData *Data /*$s3*/)
- // line 1551, offset 0x80075fd0
+ // line 1563, offset 0x80076378
 	/* begin block 1 */
-		// Start line: 1552
-		// Start offset: 0x80075FD0
+		// Start line: 1564
+		// Start offset: 0x80076378
 		// Variables:
 	// 		int rc; // $s0
 	// 		long waterZLevel; // $s1
 	/* end block 1 */
-	// End offset: 0x800761A8
-	// End Line: 1605
+	// End offset: 0x80076550
+	// End Line: 1617
 
 	/* begin block 2 */
-		// Start line: 3692
+		// Start line: 3713
 	/* end block 2 */
-	// End Line: 3693
+	// End Line: 3714
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 int PhysicsDefaultCheckSwimResponse(_Instance *instance,evPhysicsSwimData *Data)
 
@@ -1462,188 +1537,23 @@ int PhysicsDefaultCheckSwimResponse(_Instance *instance,evPhysicsSwimData *Data)
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ PhysicsCheckPullOutOfWater(struct _Instance *instance /*$s2*/, struct GameTracker *gameTracker /*$a1*/, int Data /*$s6*/, short Mode /*$s5*/)
- // line 1615, offset 0x800761c8
-	/* begin block 1 */
-		// Start line: 1616
-		// Start offset: 0x800761C8
-		// Variables:
-	// 		struct evPhysicsEdgeData *Ptr; // $s1
-	// 		int rc; // $s4
-	// 		struct _PCollideInfo CInfo; // stack offset -96
-	// 		struct SVECTOR Old; // stack offset -48
-	// 		struct SVECTOR New; // stack offset -40
-	// 		static struct MATRIX *pTempMat; // offset 0x58
-	/* end block 1 */
-	// End offset: 0x80076454
-	// End Line: 1734
-
-	/* begin block 2 */
-		// Start line: 3822
-	/* end block 2 */
-	// End Line: 3823
-
-int PhysicsCheckPullOutOfWater(_Instance *instance,GameTracker *gameTracker,int Data,short Mode)
-
-{
-  int iVar1;
-  _PCollideInfo local_60;
-  SVECTOR SStack48;
-  SVECTOR SStack40;
-  
-  if ((Mode & 1U) != 0) {
-    *(undefined4 *)(Data + 0x18) = 0;
-  }
-  local_60.oldPoint = &SStack48;
-  pTempMat_59 = (MATRIX *)instance->matrix;
-  local_60.newPoint = &SStack40;
-  PHYSICS_GenericLineCheckSetup(0,0,*(short *)Data,local_60.oldPoint);
-  PHYSICS_GenericLineCheckSetup(0,*(short *)(Data + 2),*(short *)Data,&SStack40);
-  PHYSICS_GenericLineCheck(instance,(MATRIX *)(instance->matrix + 1),pTempMat_59,&local_60);
-  if ((local_60.type == 3) || (iVar1 = 0, local_60.type == 5)) {
-    if ((Mode & 1U) != 0) {
-      **(short **)(Data + 0xc) = local_60.wNormal.vx;
-      *(short *)(*(int *)(Data + 0xc) + 2) = local_60.wNormal.vy;
-      *(short *)(*(int *)(Data + 0xc) + 4) = local_60.wNormal.vz;
-      *(short *)(*(int *)(Data + 0x14) + 2) = (local_60.newPoint)->vy - (local_60.oldPoint)->vy;
-      **(short **)(Data + 0x14) = (local_60.newPoint)->vx - (local_60.oldPoint)->vx;
-      if ((local_60.type == 5) || (local_60.type == 2)) {
-        *(_Instance **)(Data + 0x18) = local_60.inst;
-      }
-    }
-    PHYSICS_GenericLineCheckSetup
-              (0,*(short *)(Data + 2),
-               (short)(((uint)*(ushort *)Data + (uint)*(ushort *)(Data + 4)) * 0x10000 >> 0x10),
-               &SStack48);
-    PHYSICS_GenericLineCheckSetup(0,*(short *)(Data + 2),*(short *)Data,&SStack40);
-    PHYSICS_GenericLineCheck(instance,(MATRIX *)(instance->matrix + 1),pTempMat_59,&local_60);
-    if ((local_60.type == 3) || (iVar1 = 2, local_60.type == 5)) {
-      if ((Mode & 1U) != 0) {
-        **(short **)(Data + 0x10) = local_60.wNormal.vx;
-        *(short *)(*(int *)(Data + 0x10) + 2) = local_60.wNormal.vy;
-        *(short *)(*(int *)(Data + 0x10) + 4) = local_60.wNormal.vz;
-        *(short *)(*(int *)(Data + 0x14) + 4) =
-             ((local_60.newPoint)->vz - (local_60.oldPoint)->vz) +
-             (*(short *)(pTempMat_59[1].t + 2) - (instance->position).z);
-        if ((local_60.type == 5) || (local_60.type == 2)) {
-          *(_Instance **)(Data + 0x18) = local_60.inst;
-        }
-      }
-      iVar1 = 2;
-      if (0xb50 < local_60.wNormal.vz) {
-        iVar1 = 6;
-        if ((Mode & 2U) != 0) {
-          INSTANCE_Post(instance,0x4010010,Data);
-        }
-        if ((Mode & 4U) != 0) {
-          PhysicsDefaultPullOutResponse(instance,(evPhysicsEdgeData *)Data);
-        }
-      }
-    }
-  }
-  return iVar1;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// void /*$ra*/ PhysicsDefaultPullOutResponse(struct _Instance *instance /*$s1*/, struct evPhysicsEdgeData *Data /*$s2*/)
- // line 1740, offset 0x80076480
-	/* begin block 1 */
-		// Start line: 1741
-		// Start offset: 0x80076480
-		// Variables:
-	// 		short angle; // $s0
-	// 		struct _SVector xprod; // stack offset -72
-	// 		struct _SVector normal; // stack offset -64
-	// 		struct _SVector oldNormal; // stack offset -56
-	// 		struct _G2EulerAngles_Type ea1; // stack offset -48
-	// 		struct VECTOR OutTrans; // stack offset -40
-	// 		struct SVECTOR *ExtraRot; // $v1
-	// 		struct SVECTOR New; // stack offset -24
-	// 		static struct MATRIX TempMat; // offset 0x60
-	/* end block 1 */
-	// End offset: 0x800764EC
-	// End Line: 1781
-
-	/* begin block 2 */
-		// Start line: 4103
-	/* end block 2 */
-	// End Line: 4104
-
-/* WARNING: Could not reconcile some variable overlaps */
-
-void PhysicsDefaultPullOutResponse(_Instance *instance,evPhysicsEdgeData *Data)
-
-{
-  short angle;
-  ulong uVar1;
-  _SVector local_48;
-  _SVector local_40;
-  undefined4 local_38;
-  undefined4 local_34;
-  _G2EulerAngles_Type local_30;
-  short local_28 [2];
-  short local_24;
-  short local_20;
-  short local_18;
-  short local_16;
-  short local_14;
-  
-  local_38 = 0x10000000;
-  local_34 = 0;
-  uVar1 = INSTANCE_Query(instance,8);
-  if (uVar1 != 0) {
-    (instance->rotation).z = (instance->rotation).z + *(short *)(uVar1 + 4);
-  }
-  local_40.x = Data->Normal1->x;
-  local_40.y = Data->Normal1->y;
-  local_40.z = 0;
-  angle = MATH3D_AngleBetweenVectors(&local_40,(_SVector *)&local_38);
-  local_48.x = -(short)((int)local_40.y * (int)(short)local_34 -
-                        (int)local_40.z * (int)local_38._2_2_ >> 0xc);
-  local_48.y = (short)((int)local_40.x * (int)(short)local_34 -
-                       (int)local_40.z * (int)(short)local_38 >> 0xc);
-  local_48.z = -(short)((int)local_40.x * (int)local_38._2_2_ -
-                        (int)local_40.y * (int)(short)local_38 >> 0xc);
-  MATH3D_SetUnityMatrix((MATRIX *)&TempMat_62);
-  MATH3D_RotMatAboutVec(&local_48,(MATRIX *)&TempMat_62,angle);
-  G2EulerAngles_FromMatrix(&local_30,(_G2Matrix_Type *)&TempMat_62,0x15);
-  (instance->rotation).x = local_30.x;
-  (instance->rotation).y = local_30.y;
-  (instance->rotation).z = local_30.z;
-  local_14 = Data->ZDistance;
-  local_18 = Data->XDistance;
-  local_16 = Data->YDistance;
-  ApplyMatrix(instance->matrix,&local_18,local_28);
-  (instance->position).z =
-       (instance->position).z -
-       (local_20 - (Data->Delta->z + Data->UpperOffset + Data->AboveOffset));
-  (instance->position).x = (instance->position).x + (Data->Delta->x - local_28[0]);
-  (instance->position).y = (instance->position).y - (local_24 - Data->Delta->y);
-  return;
-}
-
-
-
-// decompiled code
-// original method signature: 
 // void /*$ra*/ PhysicsForceSetWater(struct _Instance *instance /*$s1*/, int *Time /*$t0*/, int Depth /*$a2*/, int rate /*$a3*/, int maxAmplitude /*stack 16*/)
- // line 1822, offset 0x800766bc
+ // line 1835, offset 0x80076570
 	/* begin block 1 */
-		// Start line: 1823
-		// Start offset: 0x800766BC
+		// Start line: 1836
+		// Start offset: 0x80076570
 		// Variables:
 	// 		int Amplitude; // $s0
 	/* end block 1 */
-	// End offset: 0x80076780
-	// End Line: 1840
+	// End offset: 0x80076634
+	// End Line: 1853
 
 	/* begin block 2 */
-		// Start line: 4286
+		// Start line: 4259
 	/* end block 2 */
-	// End Line: 4287
+	// End Line: 4260
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 void PhysicsForceSetWater(_Instance *instance,int *Time,int Depth,int rate,int maxAmplitude)
 
@@ -1660,7 +1570,7 @@ void PhysicsForceSetWater(_Instance *instance,int *Time,int Depth,int rate,int m
     iVar3 = 0;
   }
   iVar1 = iVar3 * maxAmplitude >> 0x1f;
-  iVar2 = *Time + (uint)(rate << 0xc) / gameTrackerX.idleTime;
+  iVar2 = *Time + (uint)(rate << 0xc) / DAT_800d2314;
   *Time = iVar2;
   if (0x1000 < iVar2) {
     *Time = iVar2 + -0x1000;
@@ -1681,20 +1591,22 @@ void PhysicsForceSetWater(_Instance *instance,int *Time,int Depth,int rate,int m
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PhysicsCheckLOS(struct _Instance *instance /*$a0*/, int Data /*$a1*/, int Mode /*$a2*/)
- // line 1853, offset 0x80076794
+ // line 1866, offset 0x80076648
 	/* begin block 1 */
-		// Start line: 1854
-		// Start offset: 0x80076794
+		// Start line: 1867
+		// Start offset: 0x80076648
 		// Variables:
 	// 		struct _PCollideInfo CInfo; // stack offset -56
 	/* end block 1 */
-	// End offset: 0x80076794
-	// End Line: 1854
+	// End offset: 0x80076648
+	// End Line: 1867
 
 	/* begin block 2 */
-		// Start line: 4357
+		// Start line: 4330
 	/* end block 2 */
-	// End Line: 4358
+	// End Line: 4331
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 int PhysicsCheckLOS(_Instance *instance,int Data,int Mode)
 
@@ -1712,10 +1624,10 @@ int PhysicsCheckLOS(_Instance *instance,int Data,int Mode)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PhysicsCheckDropHeight(struct _Instance *instance /*$s2*/, int Data /*$a1*/, int Mode /*$s3*/)
- // line 1881, offset 0x800767c4
+ // line 1894, offset 0x80076678
 	/* begin block 1 */
-		// Start line: 1882
-		// Start offset: 0x800767C4
+		// Start line: 1895
+		// Start offset: 0x80076678
 		// Variables:
 	// 		struct evPhysicsDropHeightData *data; // $s0
 	// 		struct Level *level; // $v0
@@ -1724,44 +1636,46 @@ int PhysicsCheckLOS(_Instance *instance,int Data,int Mode)
 	// 		int rc; // $s1
 	// 		int lowZ; // $v1
 	// 		struct _PCollideInfo CInfo; // stack offset -88
-	// 		static struct MATRIX TempMat; // offset 0x80
-	// 		static struct MATRIX *pTempMat; // offset 0xa0
+	// 		static struct MATRIX TempMat; // offset 0x30
+	// 		static struct MATRIX *pTempMat; // offset 0x50
 
 		/* begin block 1.1 */
-			// Start line: 1895
-			// Start offset: 0x800767F8
+			// Start line: 1908
+			// Start offset: 0x800766AC
 			// Variables:
 		// 		struct VECTOR outTrans; // stack offset -40
 		// 		struct SVECTOR *ExtraRot; // $v0
 		/* end block 1.1 */
-		// End offset: 0x80076840
-		// End Line: 1924
+		// End offset: 0x800766F4
+		// End Line: 1937
 
 		/* begin block 1.2 */
-			// Start line: 1948
-			// Start offset: 0x8007690C
+			// Start line: 1961
+			// Start offset: 0x800767C0
 			// Variables:
 		// 		long waterZLevel; // $a0
 		/* end block 1.2 */
-		// End offset: 0x80076948
-		// End Line: 1966
+		// End offset: 0x800767FC
+		// End Line: 1979
 	/* end block 1 */
-	// End offset: 0x80076A38
-	// End Line: 2013
+	// End offset: 0x800768EC
+	// End Line: 2026
 
 	/* begin block 2 */
-		// Start line: 4423
+		// Start line: 4396
 	/* end block 2 */
-	// End Line: 4424
+	// End Line: 4397
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 int PhysicsCheckDropHeight(_Instance *instance,int Data,int Mode)
 
 {
-  short *psVar1;
+  SVECTOR *r;
   Level *level;
+  int iVar1;
   int iVar2;
   int iVar3;
-  int iVar4;
   SVECTOR local_68;
   SVECTOR local_60;
   _PCollideInfo local_58;
@@ -1782,46 +1696,45 @@ int PhysicsCheckDropHeight(_Instance *instance,int Data,int Mode)
     }
   }
   else {
-    psVar1 = (short *)INSTANCE_Query(instance,8);
-    if (psVar1 == (short *)0x0) {
-      pTempMat_70 = instance->matrix;
+    r = (SVECTOR *)INSTANCE_Query(instance,8);
+    if (r == (SVECTOR *)0x0) {
+      pTempMat_63 = instance->matrix;
     }
     else {
-      pTempMat_70 = (MATRIX *)&TempMat_69;
-      RotMatrix(psVar1,(uint *)&TempMat_69);
-      MulMatrix2((undefined4 *)instance->matrix,(uint *)pTempMat_70);
+      pTempMat_63 = (MATRIX *)&TempMat_62;
+      RotMatrix(r,(MATRIX *)&TempMat_62);
+      MulMatrix2(instance->matrix,pTempMat_63);
     }
-    ApplyMatrix(pTempMat_70,Data,local_28);
+    ApplyMatrix(pTempMat_63,(SVECTOR *)Data,(VECTOR *)local_28);
     local_60.vx = (instance->position).x + local_28[0];
     local_60.vy = (instance->position).y + local_24;
     local_60.vz = (instance->position).z + local_20;
   }
   level = STREAM_GetLevelWithID(instance->currentStreamUnitID);
   if (((*(ushort *)(Data + 6) & 0x40) == 0) ||
-     (iVar2 = STREAM_GetWaterZLevel(level,instance), iVar2 == -0x7fff)) {
-    iVar4 = 0;
-    iVar2 = (int)local_60.vz - (int)*(short *)(Data + 8);
+     (iVar1 = STREAM_GetWaterZLevel(level,instance), iVar1 == -0x7fff)) {
+    iVar3 = 0;
+    iVar1 = (int)local_60.vz - (int)*(short *)(Data + 8);
   }
   else {
-    iVar3 = (int)local_60.vz - (int)*(short *)(Data + 8);
-    iVar4 = 0x10;
-    if (iVar2 <= iVar3) {
-      iVar4 = 0;
-      iVar2 = iVar3;
+    iVar2 = (int)local_60.vz - (int)*(short *)(Data + 8);
+    iVar3 = 0x10;
+    if (iVar1 <= iVar2) {
+      iVar3 = 0;
+      iVar1 = iVar2;
     }
   }
-  if (iVar2 < local_60.vz) {
-    local_68.vz = (short)iVar2;
+  if (iVar1 < local_60.vz) {
+    local_68.vz = (short)iVar1;
     local_58.oldPoint = &local_60;
     local_58.newPoint = &local_68;
     local_68.vx = local_60.vx;
     local_68.vy = local_60.vy;
     PHYSICS_CheckLineInWorld(instance,&local_58);
-    if (((local_58.type != 0) && (0xb50 < local_58.wNormal.vz)) && (iVar4 = 1, Mode == 1)) {
+    if (((local_58.type != 0) && (0xb50 < local_58.wNormal.vz)) && (iVar3 = 1, Mode == 1)) {
       if (local_58.type == 3) {
         *(NodeType **)(Data + 0xc) =
-             (NodeType *)((int)((local_58.inst)->node).prev[10].prev + (int)local_58.segment * 0x24)
-        ;
+             (NodeType *)((int)((local_58.inst)->node).prev[9].prev + (int)local_58.segment * 0x24);
         *(void **)(Data + 0x10) = local_58.prim;
       }
       else {
@@ -1830,45 +1743,47 @@ int PhysicsCheckDropHeight(_Instance *instance,int Data,int Mode)
       }
       *(short *)(Data + 10) = local_60.vz - local_68.vz;
       *(short *)(Data + 4) = local_68.vz;
-      iVar4 = 1;
+      iVar3 = 1;
     }
   }
-  return iVar4;
+  return iVar3;
 }
 
 
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ PhysicsCheckDropOff(struct _Instance *instance /*$s0*/, int Data /*$a1*/, short Mode /*$s2*/)
- // line 2025, offset 0x80076a58
+// int /*$ra*/ PhysicsCheckDropOff(struct _Instance *instance /*$s0*/, int Data /*$a1*/, short Mode /*$s3*/)
+ // line 2038, offset 0x8007690c
 	/* begin block 1 */
-		// Start line: 2026
-		// Start offset: 0x80076A58
+		// Start line: 2039
+		// Start offset: 0x8007690C
 		// Variables:
 	// 		struct evPhysicsDropOffData *Ptr; // $s1
-	// 		int rc; // $s3
+	// 		int rc; // $s2
 	// 		struct VECTOR OutTrans; // stack offset -104
 	// 		struct SVECTOR *ExtraRot; // $v0
 	// 		struct _PCollideInfo CInfo; // stack offset -88
 	// 		struct SVECTOR New; // stack offset -40
 	// 		struct SVECTOR Old; // stack offset -32
-	// 		static struct MATRIX TempMat; // offset 0xb0
-	// 		static struct MATRIX *pTempMat; // offset 0xd0
+	// 		static struct MATRIX TempMat; // offset 0x60
+	// 		static struct MATRIX *pTempMat; // offset 0x80
 	/* end block 1 */
-	// End offset: 0x80076C30
-	// End Line: 2121
+	// End offset: 0x80076B14
+	// End Line: 2133
 
 	/* begin block 2 */
-		// Start line: 4736
+		// Start line: 4709
 	/* end block 2 */
-	// End Line: 4737
+	// End Line: 4710
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 int PhysicsCheckDropOff(_Instance *instance,int Data,short Mode)
 
 {
-  short *psVar1;
-  int iVar2;
+  SVECTOR *r;
+  int iVar1;
   short local_68 [2];
   short local_64;
   short local_60;
@@ -1878,189 +1793,194 @@ int PhysicsCheckDropOff(_Instance *instance,int Data,short Mode)
   
   local_58.oldPoint = &local_20;
   local_58.newPoint = &local_28;
-  psVar1 = (short *)INSTANCE_Query(instance,8);
-  iVar2 = 0;
+  r = (SVECTOR *)INSTANCE_Query(instance,8);
+  iVar1 = 0;
   if (instance->matrix != (MATRIX *)0x0) {
-    pTempMat_74 = instance->matrix;
-    if (psVar1 != (short *)0x0) {
-      pTempMat_74 = (MATRIX *)&TempMat_73;
-      RotMatrix(psVar1,(uint *)&TempMat_73);
-      MulMatrix2((undefined4 *)instance->matrix,(uint *)pTempMat_74);
+    pTempMat_67 = instance->matrix;
+    if (r != (SVECTOR *)0x0) {
+      pTempMat_67 = (MATRIX *)&TempMat_66;
+      RotMatrix(r,(MATRIX *)&TempMat_66);
+      MulMatrix2(instance->matrix,pTempMat_67);
     }
     local_28.vx = *(short *)Data;
     local_28.vy = *(short *)(Data + 2);
     local_28.vz = 0;
-    ApplyMatrix(pTempMat_74,&local_28,local_68);
+    ApplyMatrix(pTempMat_67,&local_28,(VECTOR *)local_68);
     local_28.vx = (instance->position).x + local_68[0];
     local_28.vy = (instance->position).y + local_64;
-    local_20.vz = (instance->position).z + local_60;
-    local_28.vz = local_20.vz - *(short *)(Data + 4);
-    local_20.vz = local_20.vz + *(short *)(Data + 4) * 2;
+    local_60 = (instance->position).z + local_60;
+    local_28.vz = local_60 - *(short *)(Data + 4);
+    local_20.vz = local_60 + *(short *)(Data + 8);
     local_20.vx = local_28.vx;
     local_20.vy = local_28.vy;
     PHYSICS_CheckLineInWorld(instance,&local_58);
     if (((uint)local_58.type - 2 < 2) || (local_58.type == 5)) {
       if ((Mode & 2U) != 0) {
-        INSTANCE_Post(instance,0x4010080,1);
+        if (*(short *)(Data + 6) < local_58.wNormal.vz) {
+          INSTANCE_Post(instance,0x4010080,1);
+        }
+        else {
+          INSTANCE_Post(instance,0x4010080,0);
+          iVar1 = 8;
+        }
       }
-      iVar2 = 0;
       if (((local_58.wNormal.vz < *(short *)(Data + 6)) && (0 < local_58.wNormal.vz)) &&
-         (iVar2 = 0, (instance->position).z < (local_58.newPoint)->vz)) {
+         ((instance->position).z < (local_58.newPoint)->vz)) {
         INSTANCE_Post(instance,0x4010401,0);
-        iVar2 = 0;
       }
     }
     else {
-      iVar2 = 0;
+      iVar1 = 0;
       if (local_58.type == 0) {
         if ((Mode & 2U) != 0) {
           INSTANCE_Post(instance,0x4010080,0);
         }
-        iVar2 = 8;
+        iVar1 = 8;
       }
     }
   }
-  return iVar2;
+  return iVar1;
 }
 
 
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ PhysicsFollowWall(struct _Instance *instance /*$s1*/, struct GameTracker *gameTracker /*$a1*/, int Data /*$s6*/, short Mode /*$s4*/)
- // line 2175, offset 0x80076c4c
+// int /*$ra*/ PhysicsFollowWall(struct _Instance *instance /*$s2*/, struct GameTracker *gameTracker /*$a1*/, int Data /*$s6*/, short Mode /*$s4*/)
+ // line 2187, offset 0x80076b30
 	/* begin block 1 */
-		// Start line: 2176
-		// Start offset: 0x80076C4C
+		// Start line: 2188
+		// Start offset: 0x80076B30
 		// Variables:
-	// 		struct VECTOR OutTrans; // stack offset -128
-	// 		struct evPhysicsWallCrawlData *Ptr; // $s0
-	// 		struct _PCollideInfo CInfo; // stack offset -112
-	// 		struct SVECTOR New; // stack offset -64
-	// 		struct SVECTOR Old; // stack offset -56
-	// 		static struct MATRIX *pTempMat; // offset 0xd4
+	// 		struct VECTOR OutTrans; // stack offset -160
+	// 		struct evPhysicsWallCrawlData *Ptr; // $s1
+	// 		struct _PCollideInfo CInfo; // stack offset -144
+	// 		struct SVECTOR New; // stack offset -96
+	// 		struct SVECTOR Old; // stack offset -88
+	// 		static struct MATRIX *pTempMat; // offset 0x84
 
 		/* begin block 1.1 */
-			// Start line: 2238
-			// Start offset: 0x80076D48
+			// Start line: 2250
+			// Start offset: 0x80076C2C
 			// Variables:
-		// 		struct _Position A; // stack offset -48
-		// 		struct _Position B; // stack offset -40
+		// 		struct _Position A; // stack offset -80
+		// 		struct _Position B; // stack offset -72
+		// 		struct MATRIX mat; // stack offset -64
 		/* end block 1.1 */
-		// End offset: 0x80076E34
-		// End Line: 2270
+		// End offset: 0x80076D28
+		// End Line: 2310
 	/* end block 1 */
-	// End offset: 0x8007708C
-	// End Line: 2408
+	// End offset: 0x80076F78
+	// End Line: 2452
 
 	/* begin block 2 */
-		// Start line: 4334
+		// Start line: 4358
 	/* end block 2 */
-	// End Line: 4335
+	// End Line: 4359
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 int PhysicsFollowWall(_Instance *instance,GameTracker *gameTracker,int Data,short Mode)
 
 {
-  MATRIX *pMVar1;
-  short sVar2;
-  uint uVar3;
-  int iVar4;
-  short local_80 [2];
-  short local_7c;
-  short local_78;
-  _PCollideInfo local_70;
-  SVECTOR local_40;
-  SVECTOR local_38;
-  _Position local_30;
-  _Position local_28;
+  short sVar1;
+  uint uVar2;
+  int iVar3;
+  short local_a0 [2];
+  short local_9c;
+  short local_98;
+  _PCollideInfo local_90;
+  SVECTOR local_60;
+  SVECTOR local_58;
+  _Position local_50;
+  _Position local_48;
+  MATRIX MStack64;
   
-  local_70.oldPoint = &local_38;
+  local_90.oldPoint = &local_58;
   *(undefined4 *)(Data + 0x28) = 0;
-  pTempMat_79 = (MATRIX *)(instance->matrix + *(short *)Data);
-  local_70.newPoint = &local_40;
-  PHYSICS_GenericLineCheckSetup(0,0x40,0,local_70.oldPoint);
-  PHYSICS_GenericLineCheckSetup(0,*(short *)(Data + 2),0,&local_40);
-  PHYSICS_GenericLineCheck(instance,pTempMat_79,pTempMat_79,&local_70);
-  if ((local_70.type == 3) || (local_70.type == 5)) {
+  pTempMat_72 = instance->matrix + *(short *)Data;
+  local_90.newPoint = &local_60;
+  PHYSICS_GenericLineCheckSetup(0,0x40,0,(char)local_90.oldPoint);
+  PHYSICS_GenericLineCheckSetup(0,*(short *)(Data + 2),0,(char)&local_60);
+  PHYSICS_GenericLineCheck(instance,(char)pTempMat_72,(char)pTempMat_72,&local_90);
+  if ((local_90.type == 3) || (local_90.type == 5)) {
     *(uint *)(Data + 0x28) = *(uint *)(Data + 0x28) | 8;
     if ((Mode & 7U) != 0) {
-      *(short *)(Data + 8) = local_70.wNormal.vx;
-      *(short *)(Data + 10) = local_70.wNormal.vy;
-      *(short *)(Data + 0xc) = local_70.wNormal.vz;
+      *(short *)(Data + 8) = local_90.wNormal.vx;
+      *(short *)(Data + 10) = local_90.wNormal.vy;
+      *(short *)(Data + 0xc) = local_90.wNormal.vz;
     }
-    pMVar1 = pTempMat_79;
     if ((Mode & 4U) != 0) {
-      *(short *)(Data + 0x18) = local_40.vx;
-      *(short *)(Data + 0x1a) = local_40.vy;
-      *(short *)(Data + 0x1c) = local_40.vz;
-      local_40.vx = 0;
-      local_40.vz = 0;
-      local_40.vy = -*(short *)(Data + 6);
-      ApplyMatrix(pMVar1,&local_40,local_80);
-      *(short *)(Data + 0x18) = *(short *)(Data + 0x18) + local_80[0];
-      *(short *)(Data + 0x1a) = *(short *)(Data + 0x1a) + local_7c;
-      *(short *)(Data + 0x1c) = *(short *)(Data + 0x1c) + local_78;
+      local_48.z = 0;
+      local_48.y = 0;
+      local_48.x = 0;
+      local_50.x = *(short *)(Data + 8);
+      local_50.y = *(short *)(Data + 10);
+      local_50.z = *(short *)(Data + 0xc);
+      MATH3D_RotationFromPosToPos(&local_50,&local_48,(_Rotation *)(SVECTOR *)(Data + 0x1e));
+      RotMatrix((SVECTOR *)(Data + 0x1e),&MStack64);
+      *(short *)(Data + 0x18) = local_60.vx;
+      *(short *)(Data + 0x1a) = local_60.vy;
+      *(short *)(Data + 0x1c) = local_60.vz;
+      local_60.vx = 0;
+      local_60.vz = 0;
+      local_60.vy = -*(short *)(Data + 6);
+      ApplyMatrix(&MStack64,&local_60,(VECTOR *)local_a0);
+      *(short *)(Data + 0x18) = *(short *)(Data + 0x18) + local_a0[0];
+      *(short *)(Data + 0x1a) = *(short *)(Data + 0x1a) + local_9c;
+      *(short *)(Data + 0x1c) = *(short *)(Data + 0x1c) + local_98;
       *(short *)(Data + 0x18) = (instance->position).x - *(short *)(Data + 0x18);
       *(short *)(Data + 0x1a) = (instance->position).y - *(short *)(Data + 0x1a);
       *(short *)(Data + 0x1c) = (instance->position).z - *(short *)(Data + 0x1c);
-      local_28.z = 0;
-      local_28.y = 0;
-      local_28.x = 0;
-      local_30.x = *(short *)(Data + 8);
-      local_30.y = *(short *)(Data + 10);
-      local_30.z = *(short *)(Data + 0xc);
-      MATH3D_RotationFromPosToPos(&local_30,&local_28,(_Rotation *)(Data + 0x1e));
     }
-    (instance->wNormal).x = local_70.wNormal.vx;
-    (instance->wNormal).y = local_70.wNormal.vy;
-    uVar3 = instance->flags2;
-    (instance->wNormal).z = local_70.wNormal.vz;
-    if ((uVar3 & 0x40) != 0) {
-      (instance->shadowPosition).x = local_40.vx;
-      (instance->shadowPosition).y = local_40.vy;
+    (instance->wNormal).x = local_90.wNormal.vx;
+    (instance->wNormal).y = local_90.wNormal.vy;
+    uVar2 = instance->flags2;
+    (instance->wNormal).z = local_90.wNormal.vz;
+    if ((uVar2 & 0x40) != 0) {
+      (instance->shadowPosition).x = local_60.vx;
+      (instance->shadowPosition).y = local_60.vy;
       instance->flags = instance->flags | 0x8000000;
-      (instance->shadowPosition).z = local_40.vz;
+      (instance->shadowPosition).z = local_60.vz;
     }
-    if (instance->tface != local_70.prim) {
-      instance->oldTFace = instance->tface;
-      instance->tface = local_70.prim;
-      *(_Instance **)&instance->tfaceLevel = local_70.inst;
-      instance->bspTree = (int)local_70.segment;
-    }
+    instance->oldTFace = instance->tface;
+    instance->tface = local_90.prim;
+    *(_Instance **)&instance->tfaceLevel = local_90.inst;
+    instance->bspTree = (int)local_90.segment;
   }
-  PHYSICS_GenericLineCheckSetup(0,0x40,*(short *)(Data + 4),&local_38);
-  iVar4 = (uint)*(ushort *)(Data + 6) << 0x10;
+  PHYSICS_GenericLineCheckSetup(0,0x40,*(short *)(Data + 4),(char)&local_58);
+  iVar3 = (uint)*(ushort *)(Data + 6) << 0x10;
   PHYSICS_GenericLineCheckSetup
-            (0,(short)(((uint)*(ushort *)(Data + 2) + ((iVar4 >> 0x10) - (iVar4 >> 0x1f) >> 1)) *
-                       0x10000 >> 0x10),*(short *)(Data + 4),&local_40);
-  PHYSICS_GenericLineCheck(instance,pTempMat_79,pTempMat_79,&local_70);
-  if ((local_70.type == 3) || (local_70.type == 5)) {
+            (0,(short)(((uint)*(ushort *)(Data + 2) + ((iVar3 >> 0x10) - (iVar3 >> 0x1f) >> 1)) *
+                       0x10000 >> 0x10),*(short *)(Data + 4),0xa0);
+  PHYSICS_GenericLineCheck(instance,(char)pTempMat_72,(char)pTempMat_72,&local_90);
+  if ((local_90.type == 3) || (local_90.type == 5)) {
     *(uint *)(Data + 0x28) = *(uint *)(Data + 0x28) | 2;
     if ((Mode & 7U) != 0) {
-      *(short *)(Data + 0x10) = local_70.wNormal.vx;
-      *(short *)(Data + 0x12) = local_70.wNormal.vy;
-      *(short *)(Data + 0x14) = local_70.wNormal.vz;
+      *(short *)(Data + 0x10) = local_90.wNormal.vx;
+      *(short *)(Data + 0x12) = local_90.wNormal.vy;
+      *(short *)(Data + 0x14) = local_90.wNormal.vz;
     }
     if ((Mode & 4U) != 0) {
-      sVar2 = MATH3D_AngleBetweenVectors((_SVector *)(Data + 8),(_SVector *)(Data + 0x10));
-      *(short *)(Data + 0x26) = sVar2;
+      sVar1 = MATH3D_AngleBetweenVectors((_SVector *)(Data + 8),(_SVector *)(Data + 0x10));
+      *(short *)(Data + 0x26) = sVar1;
     }
-    local_38.vx = 0;
-    local_38.vy = -0x20;
-    local_38.vz = 0;
-    ApplyMatrix(pTempMat_79,&local_38,local_80);
-    local_38.vz = 0x40;
-    local_40.vx = local_40.vx + local_80[0];
-    local_38.vx = 0;
-    local_38.vy = 0;
-    local_40.vy = local_40.vy + local_7c;
-    local_40.vz = local_40.vz + local_78;
-    ApplyMatrix(pTempMat_79,&local_38,local_80);
-    local_38.vx = local_40.vx + local_80[0];
-    local_38.vy = local_40.vy + local_7c;
-    local_38.vz = local_40.vz + local_78;
-    PHYSICS_CheckLineInWorld(instance,&local_70);
-    if ((local_70.type == 3) || (local_70.type == 5)) {
+    local_58.vx = 0;
+    local_58.vy = -0x20;
+    local_58.vz = 0;
+    ApplyMatrix(pTempMat_72,&local_58,(VECTOR *)local_a0);
+    local_58.vz = 0x40;
+    local_60.vx = local_60.vx + local_a0[0];
+    local_58.vx = 0;
+    local_58.vy = 0;
+    local_60.vy = local_60.vy + local_9c;
+    local_60.vz = local_60.vz + local_98;
+    ApplyMatrix(pTempMat_72,&local_58,(VECTOR *)local_a0);
+    local_58.vx = local_60.vx + local_a0[0];
+    local_58.vy = local_60.vy + local_9c;
+    local_58.vz = local_60.vz + local_98;
+    PHYSICS_CheckLineInWorld(instance,&local_90);
+    if ((local_90.type == 3) || (local_90.type == 5)) {
       *(uint *)(Data + 0x28) = *(uint *)(Data + 0x28) | 4;
     }
   }
@@ -2075,44 +1995,42 @@ int PhysicsFollowWall(_Instance *instance,GameTracker *gameTracker,int Data,shor
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PhysicsMoveLocalZClamp(struct _Instance *instance /*$s3*/, long segment /*$s0*/, long time /*$s1*/, long clamp /*$s2*/)
- // line 2556, offset 0x800770b8
+ // line 2600, offset 0x80076fa4
 	/* begin block 1 */
-		// Start line: 2557
-		// Start offset: 0x800770B8
+		// Start line: 2601
+		// Start offset: 0x80076FA4
 		// Variables:
 	// 		struct _Position pos; // stack offset -48
 	// 		struct SVECTOR v; // stack offset -40
 	// 		struct SVECTOR dv; // stack offset -32
 	/* end block 1 */
-	// End offset: 0x80077174
-	// End Line: 2576
+	// End offset: 0x80077060
+	// End Line: 2620
 
 	/* begin block 2 */
-		// Start line: 4994
+		// Start line: 5082
 	/* end block 2 */
-	// End Line: 4995
+	// End Line: 5083
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 void PhysicsMoveLocalZClamp(_Instance *instance,long segment,long time,long clamp)
 
 {
   _Position local_30;
-  short local_28;
-  short local_26;
-  short local_24;
-  short local_20;
-  short local_1e;
-  short local_1c;
+  SVECTOR local_28;
+  SVECTOR local_20;
   
-  memset(&local_30,0,6);
+  memset();
   PhysicsMove(instance,&local_30,time);
-  local_28 = local_30.x;
-  local_24 = local_30.z;
-  local_26 = -local_30.y;
+  local_28.vx = local_30.x;
+  local_28.vz = local_30.z;
+  local_28.vy = -local_30.y;
   ApplyMatrixSV(instance->matrix + segment,&local_28,&local_20);
-  (instance->position).x = (instance->position).x + local_20;
-  (instance->position).y = (instance->position).y + local_1e;
+  (instance->position).x = (instance->position).x + local_20.vx;
+  (instance->position).y = (instance->position).y + local_20.vy;
   if (clamp == 0) {
-    (instance->position).z = (instance->position).z + local_1c;
+    (instance->position).z = (instance->position).z + local_20.vz;
   }
   return;
 }
@@ -2122,10 +2040,10 @@ void PhysicsMoveLocalZClamp(_Instance *instance,long segment,long time,long clam
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PhysicsMove(struct _Instance *instance /*$a0*/, struct _Position *position /*$a1*/, long time /*$a2*/)
- // line 2582, offset 0x80077190
+ // line 2626, offset 0x8007707c
 	/* begin block 1 */
-		// Start line: 2584
-		// Start offset: 0x80077190
+		// Start line: 2628
+		// Start offset: 0x8007707C
 		// Variables:
 	// 		long xVel; // $t0
 	// 		long yVel; // $t1
@@ -2134,23 +2052,25 @@ void PhysicsMoveLocalZClamp(_Instance *instance,long segment,long time,long clam
 	// 		long yat; // $t4
 	// 		long zat; // $t5
 	/* end block 1 */
-	// End offset: 0x8007731C
-	// End Line: 2620
+	// End offset: 0x80077208
+	// End Line: 2664
 
 	/* begin block 2 */
-		// Start line: 5856
+		// Start line: 5896
 	/* end block 2 */
-	// End Line: 5857
+	// End Line: 5897
 
 	/* begin block 3 */
-		// Start line: 5857
+		// Start line: 5897
 	/* end block 3 */
-	// End Line: 5858
+	// End Line: 5898
 
 	/* begin block 4 */
-		// Start line: 5866
+		// Start line: 5906
 	/* end block 4 */
-	// End Line: 5867
+	// End Line: 5907
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 void PhysicsMove(_Instance *instance,_Position *position,long time)
 
@@ -2233,20 +2153,22 @@ void PhysicsMove(_Instance *instance,_Position *position,long time)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PhysicsSetVelFromZRot(struct _Instance *instance /*$s2*/, short angle /*$a1*/, long magnitude /*$s1*/)
- // line 2654, offset 0x8007732c
+ // line 2698, offset 0x80077218
 	/* begin block 1 */
-		// Start line: 6009
+		// Start line: 6049
 	/* end block 1 */
-	// End Line: 6010
+	// End Line: 6050
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 void PhysicsSetVelFromZRot(_Instance *instance,short angle,long magnitude)
 
 {
   int iVar1;
   
-  iVar1 = rcos((int)angle - 0x400U);
+  iVar1 = rcos((int)angle + -0x400);
   instance->xVel = iVar1 * magnitude >> 0xc;
-  iVar1 = rsin((int)angle - 0x400U);
+  iVar1 = rsin((int)angle + -0x400);
   instance->yVel = iVar1 * magnitude >> 0xc;
   return;
 }
@@ -2256,42 +2178,40 @@ void PhysicsSetVelFromZRot(_Instance *instance,short angle,long magnitude)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PhysicsSetVelFromRot(struct _Instance *instance /*$s0*/, struct _Rotation *rot /*$a1*/, long magnitude /*$a2*/)
- // line 2665, offset 0x8007739c
+ // line 2709, offset 0x80077288
 	/* begin block 1 */
-		// Start line: 2666
-		// Start offset: 0x8007739C
+		// Start line: 2710
+		// Start offset: 0x80077288
 		// Variables:
 	// 		struct MATRIX mat; // stack offset -56
 	// 		struct SVECTOR flatPt; // stack offset -24
 	// 		struct SVECTOR newPt; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x8007739C
-	// End Line: 2666
+	// End offset: 0x80077288
+	// End Line: 2710
 
 	/* begin block 2 */
-		// Start line: 6035
+		// Start line: 6075
 	/* end block 2 */
-	// End Line: 6036
+	// End Line: 6076
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 void PhysicsSetVelFromRot(_Instance *instance,_Rotation *rot,long magnitude)
 
 {
-  uint auStack56 [8];
-  undefined2 local_18;
-  short local_16;
-  undefined2 local_14;
-  short local_10;
-  short local_e;
-  short local_c;
+  MATRIX MStack56;
+  SVECTOR local_18;
+  SVECTOR local_10;
   
-  local_16 = -(short)magnitude;
-  local_18 = 0;
-  local_14 = 0;
-  RotMatrix((short *)&instance->rotation,auStack56);
-  ApplyMatrixSV(auStack56,&local_18,&local_10);
-  instance->xVel = (int)local_10;
-  instance->yVel = (int)local_e;
-  instance->zVel = (int)local_c;
+  local_18.vy = -(short)magnitude;
+  local_18.vx = 0;
+  local_18.vz = 0;
+  RotMatrix((SVECTOR *)&instance->rotation,&MStack56);
+  ApplyMatrixSV(&MStack56,&local_18,&local_10);
+  instance->xVel = (int)local_10.vx;
+  instance->yVel = (int)local_10.vy;
+  instance->zVel = (int)local_10.vz;
   return;
 }
 
@@ -2300,58 +2220,54 @@ void PhysicsSetVelFromRot(_Instance *instance,_Rotation *rot,long magnitude)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PHYSICS_SetVAndAFromRot(struct _Instance *instance /*$s0*/, struct _Rotation *rot /*$a1*/, long v /*$s1*/, long a /*$s2*/)
- // line 2685, offset 0x8007740c
+ // line 2729, offset 0x800772f8
 	/* begin block 1 */
-		// Start line: 2686
-		// Start offset: 0x8007740C
+		// Start line: 2730
+		// Start offset: 0x800772F8
 		// Variables:
 	// 		struct SVECTOR flatPt; // stack offset -72
 	// 		struct MATRIX mat; // stack offset -64
 
 		/* begin block 1.1 */
-			// Start line: 2700
-			// Start offset: 0x80077454
+			// Start line: 2744
+			// Start offset: 0x80077340
 			// Variables:
 		// 		struct SVECTOR newPt; // stack offset -32
 		/* end block 1.1 */
-		// End offset: 0x80077454
-		// End Line: 2702
+		// End offset: 0x80077340
+		// End Line: 2746
 
 		/* begin block 1.2 */
-			// Start line: 2719
-			// Start offset: 0x800774A0
+			// Start line: 2763
+			// Start offset: 0x8007738C
 			// Variables:
 		// 		struct SVECTOR newPt; // stack offset -24
 		/* end block 1.2 */
-		// End offset: 0x800774A0
-		// End Line: 2721
+		// End offset: 0x8007738C
+		// End Line: 2765
 	/* end block 1 */
-	// End offset: 0x800774E4
-	// End Line: 2735
+	// End offset: 0x800773D0
+	// End Line: 2779
 
 	/* begin block 2 */
-		// Start line: 6085
+		// Start line: 6125
 	/* end block 2 */
-	// End Line: 6086
+	// End Line: 6126
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 void PHYSICS_SetVAndAFromRot(_Instance *instance,_Rotation *rot,long v,long a)
 
 {
-  undefined2 local_48;
-  short local_46;
-  undefined2 local_44;
-  uint auStack64 [8];
-  short local_20;
-  short local_1e;
-  short local_1c;
-  short local_18;
-  short local_16;
-  short local_14;
+  SVECTOR local_48;
+  MATRIX MStack64;
+  SVECTOR local_20;
+  SVECTOR local_18;
   
   if ((v != 0) || (a != 0)) {
-    RotMatrix((short *)&instance->rotation,auStack64);
-    local_48 = 0;
-    local_44 = 0;
+    RotMatrix((SVECTOR *)&instance->rotation,&MStack64);
+    local_48.vx = 0;
+    local_48.vz = 0;
   }
   if (v == 0) {
     instance->xVel = 0;
@@ -2359,11 +2275,11 @@ void PHYSICS_SetVAndAFromRot(_Instance *instance,_Rotation *rot,long v,long a)
     instance->zVel = 0;
   }
   else {
-    local_46 = -(short)v;
-    ApplyMatrixSV(auStack64,&local_48,&local_20);
-    instance->xVel = (int)local_20;
-    instance->yVel = (int)local_1e;
-    instance->zVel = (int)local_1c;
+    local_48.vy = -(short)v;
+    ApplyMatrixSV(&MStack64,&local_48,&local_20);
+    instance->xVel = (int)local_20.vx;
+    instance->yVel = (int)local_20.vy;
+    instance->zVel = (int)local_20.vz;
   }
   if (a == 0) {
     instance->xAccl = 0;
@@ -2371,11 +2287,11 @@ void PHYSICS_SetVAndAFromRot(_Instance *instance,_Rotation *rot,long v,long a)
     instance->zAccl = 0;
   }
   else {
-    local_46 = -(short)a;
-    ApplyMatrixSV(auStack64,&local_48,&local_18);
-    instance->xAccl = (int)local_18;
-    instance->yAccl = (int)local_16;
-    instance->zAccl = (int)local_14;
+    local_48.vy = -(short)a;
+    ApplyMatrixSV(&MStack64,&local_48,&local_18);
+    instance->xAccl = (int)local_18.vx;
+    instance->yAccl = (int)local_18.vy;
+    instance->zAccl = (int)local_18.vz;
   }
   return;
 }
@@ -2385,16 +2301,18 @@ void PHYSICS_SetVAndAFromRot(_Instance *instance,_Rotation *rot,long v,long a)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ PHYSICS_FindAFromDAndT(long d /*$a0*/, long t /*$a1*/)
- // line 2742, offset 0x800774fc
+ // line 2786, offset 0x800773e8
 	/* begin block 1 */
-		// Start line: 6203
+		// Start line: 6243
 	/* end block 1 */
-	// End Line: 6204
+	// End Line: 6244
 
 	/* begin block 2 */
-		// Start line: 6204
+		// Start line: 6244
 	/* end block 2 */
-	// End Line: 6205
+	// End Line: 6245
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 long PHYSICS_FindAFromDAndT(long d,long t)
 
@@ -2416,25 +2334,27 @@ long PHYSICS_FindAFromDAndT(long d,long t)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ PHYSICS_FindVFromAAndD(long a /*$a0*/, long d /*$a1*/)
- // line 2755, offset 0x80077538
+ // line 2799, offset 0x80077424
 	/* begin block 1 */
-		// Start line: 2756
-		// Start offset: 0x80077538
+		// Start line: 2800
+		// Start offset: 0x80077424
 		// Variables:
 	// 		long vsq; // $a0
 	/* end block 1 */
-	// End offset: 0x80077560
-	// End Line: 2762
+	// End offset: 0x8007744C
+	// End Line: 2806
 
 	/* begin block 2 */
-		// Start line: 6229
+		// Start line: 6269
 	/* end block 2 */
-	// End Line: 6230
+	// End Line: 6270
 
 	/* begin block 3 */
-		// Start line: 6230
+		// Start line: 6270
 	/* end block 3 */
-	// End Line: 6231
+	// End Line: 6271
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 long PHYSICS_FindVFromAAndD(long a,long d)
 
@@ -2457,16 +2377,18 @@ long PHYSICS_FindVFromAAndD(long a,long d)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PHYSICS_StopIfCloseToTarget(struct _Instance *instance /*$a0*/, int x /*$a1*/, int y /*$a2*/, int z /*$a3*/)
- // line 2796, offset 0x80077570
+ // line 2840, offset 0x8007745c
 	/* begin block 1 */
-		// Start line: 6314
+		// Start line: 6354
 	/* end block 1 */
-	// End Line: 6315
+	// End Line: 6355
 
 	/* begin block 2 */
-		// Start line: 6316
+		// Start line: 6356
 	/* end block 2 */
-	// End Line: 6317
+	// End Line: 6357
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 void PHYSICS_StopIfCloseToTarget(_Instance *instance,int x,int y,int z)
 
@@ -2494,33 +2416,38 @@ void PHYSICS_StopIfCloseToTarget(_Instance *instance,int x,int y,int z)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PHYSICS_CheckForTerrainCollide(struct _Instance *instance /*$a0*/, struct SVECTOR *startVec /*$a1*/, struct SVECTOR *endVec /*$a2*/, int segment /*$a3*/)
- // line 2818, offset 0x80077650
+ // line 2862, offset 0x8007753c
 	/* begin block 1 */
-		// Start line: 2819
-		// Start offset: 0x80077650
+		// Start line: 2863
+		// Start offset: 0x8007753C
 		// Variables:
 	// 		struct _PCollideInfo CInfo; // stack offset -56
-	// 		static struct MATRIX *pTempMat; // offset 0xd8
+	// 		struct MATRIX *pTempMat; // $a1
 	/* end block 1 */
-	// End offset: 0x80077650
-	// End Line: 2819
+	// End offset: 0x8007753C
+	// End Line: 2863
 
 	/* begin block 2 */
-		// Start line: 6358
+		// Start line: 6398
 	/* end block 2 */
-	// End Line: 6359
+	// End Line: 6399
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 int PHYSICS_CheckForTerrainCollide
-              (_Instance *instance,SVECTOR *startVec,SVECTOR *endVec,int segment)
+              (_Instance *instance,undefined startVec,undefined endVec,int segment)
 
 {
+  char transMat;
+  undefined3 in_register_00000015;
+  undefined3 in_register_00000019;
   _PCollideInfo local_38;
   
+  local_38.newPoint = (SVECTOR *)CONCAT31(in_register_00000019,endVec);
+  local_38.oldPoint = (SVECTOR *)CONCAT31(in_register_00000015,startVec);
   local_38.collideType = 1;
-  pTempMat_100 = (MATRIX *)(instance->matrix + segment);
-  local_38.newPoint = endVec;
-  local_38.oldPoint = startVec;
-  PHYSICS_GenericLineCheckMask(instance,pTempMat_100,pTempMat_100,&local_38);
+  transMat = (char)instance->matrix + (char)segment * ' ';
+  PHYSICS_GenericLineCheckMask(instance,transMat,transMat,&local_38);
   return (uint)(local_38.type == 3);
 }
 
@@ -2528,35 +2455,80 @@ int PHYSICS_CheckForTerrainCollide
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ PHYSICS_CheckForValidMove(struct _Instance *instance /*$a0*/, struct SVECTOR *startVec /*$a1*/, struct SVECTOR *endVec /*$a2*/, int segment /*$a3*/)
- // line 2839, offset 0x8007769c
+// int /*$ra*/ PHYSICS_CheckForObjectCollide(struct _Instance *instance /*$a0*/, struct SVECTOR *startVec /*$a1*/, struct SVECTOR *endVec /*$a2*/, int segment /*$a3*/)
+ // line 2881, offset 0x80077584
 	/* begin block 1 */
-		// Start line: 2840
-		// Start offset: 0x8007769C
+		// Start line: 2882
+		// Start offset: 0x80077584
 		// Variables:
 	// 		struct _PCollideInfo CInfo; // stack offset -56
-	// 		static struct MATRIX *pTempMat; // offset 0xdc
-	// 		int rc; // $a0
+	// 		struct MATRIX *pTempMat; // $a1
 	/* end block 1 */
-	// End offset: 0x800776FC
-	// End Line: 2863
+	// End offset: 0x80077584
+	// End Line: 2882
 
 	/* begin block 2 */
-		// Start line: 6419
+		// Start line: 6451
 	/* end block 2 */
-	// End Line: 6420
+	// End Line: 6452
 
-int PHYSICS_CheckForValidMove(_Instance *instance,SVECTOR *startVec,SVECTOR *endVec,int segment)
+/* File: C:\kain2\game\PHYSICS.C */
+
+int PHYSICS_CheckForObjectCollide
+              (_Instance *instance,undefined startVec,undefined endVec,int segment)
+
+{
+  char transMat;
+  undefined3 in_register_00000015;
+  undefined3 in_register_00000019;
+  _PCollideInfo local_38;
+  
+  local_38.newPoint = (SVECTOR *)CONCAT31(in_register_00000019,endVec);
+  local_38.oldPoint = (SVECTOR *)CONCAT31(in_register_00000015,startVec);
+  local_38.collideType = 0x3e;
+  transMat = (char)instance->matrix + (char)segment * ' ';
+  PHYSICS_GenericLineCheckMask(instance,transMat,transMat,&local_38);
+  return (uint)(local_38.type != 0);
+}
+
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ PHYSICS_CheckForValidMove(struct _Instance *instance /*$a0*/, struct SVECTOR *startVec /*$a1*/, struct SVECTOR *endVec /*$a2*/, int segment /*$a3*/)
+ // line 2902, offset 0x800775c8
+	/* begin block 1 */
+		// Start line: 2903
+		// Start offset: 0x800775C8
+		// Variables:
+	// 		struct _PCollideInfo CInfo; // stack offset -56
+	// 		struct MATRIX *pTempMat; // $a1
+	// 		int rc; // $a0
+	/* end block 1 */
+	// End offset: 0x80077624
+	// End Line: 2926
+
+	/* begin block 2 */
+		// Start line: 6508
+	/* end block 2 */
+	// End Line: 6509
+
+/* File: C:\kain2\game\PHYSICS.C */
+
+int PHYSICS_CheckForValidMove(_Instance *instance,undefined startVec,undefined endVec,int segment)
 
 {
   int iVar1;
   uint uVar2;
+  char transMat;
+  undefined3 in_register_00000015;
+  undefined3 in_register_00000019;
   _PCollideInfo local_38;
   
-  pTempMat_103 = (MATRIX *)(instance->matrix + segment);
-  local_38.newPoint = endVec;
-  local_38.oldPoint = startVec;
-  PHYSICS_GenericLineCheck(instance,pTempMat_103,pTempMat_103,&local_38);
+  local_38.newPoint = (SVECTOR *)CONCAT31(in_register_00000019,endVec);
+  local_38.oldPoint = (SVECTOR *)CONCAT31(in_register_00000015,startVec);
+  transMat = (char)instance->matrix + (char)segment * ' ';
+  PHYSICS_GenericLineCheck(instance,transMat,transMat,&local_38);
   iVar1 = PHYSICS_CheckFaceStick(&local_38);
   uVar2 = (uint)(iVar1 != 0);
   if (((uint)local_38.type - 2 < 2) || (local_38.type == 5)) {
@@ -2570,38 +2542,40 @@ int PHYSICS_CheckForValidMove(_Instance *instance,SVECTOR *startVec,SVECTOR *end
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PHYSICS_CheckFaceStick(struct _PCollideInfo *CInfo /*$a0*/)
- // line 2867, offset 0x8007770c
+ // line 2930, offset 0x80077634
 	/* begin block 1 */
-		// Start line: 2868
-		// Start offset: 0x8007770C
+		// Start line: 2931
+		// Start offset: 0x80077634
 		// Variables:
 	// 		int rc; // $a1
 
 		/* begin block 1.1 */
-			// Start line: 2874
-			// Start offset: 0x80077720
+			// Start line: 2937
+			// Start offset: 0x80077648
 			// Variables:
 		// 		struct _TFace *tface; // $a2
 		/* end block 1.1 */
-		// End offset: 0x80077738
-		// End Line: 2876
+		// End offset: 0x80077660
+		// End Line: 2939
 
 		/* begin block 1.2 */
-			// Start line: 2880
-			// Start offset: 0x80077764
+			// Start line: 2943
+			// Start offset: 0x8007768C
 			// Variables:
 		// 		struct _HFace *hface; // stack offset -8
 		/* end block 1.2 */
-		// End offset: 0x80077764
-		// End Line: 2888
+		// End offset: 0x8007768C
+		// End Line: 2951
 	/* end block 1 */
-	// End offset: 0x80077764
-	// End Line: 2889
+	// End offset: 0x8007768C
+	// End Line: 2952
 
 	/* begin block 2 */
-		// Start line: 6481
+		// Start line: 6567
 	/* end block 2 */
-	// End Line: 6482
+	// End Line: 6568
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 int PHYSICS_CheckFaceStick(_PCollideInfo *CInfo)
 
@@ -2625,70 +2599,92 @@ int PHYSICS_CheckFaceStick(_PCollideInfo *CInfo)
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ PHYSICS_CheckDontGrabEdge(struct _PCollideInfo *CInfo /*$a0*/)
- // line 2893, offset 0x80077770
+// int /*$ra*/ PHYSICS_CheckDontGrabEdge(struct _PCollideInfo *CInfo /*$s0*/)
+ // line 2956, offset 0x80077698
 	/* begin block 1 */
-		// Start line: 2895
-		// Start offset: 0x80077770
+		// Start line: 2957
+		// Start offset: 0x80077698
 		// Variables:
-	// 		int rc; // $a1
+	// 		int rc; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 2899
-			// Start offset: 0x80077780
+			// Start line: 2962
+			// Start offset: 0x800776BC
 			// Variables:
-		// 		struct _TFace *tface; // $a2
+		// 		struct _TFace *tface; // $a0
+		// 		struct BSPTree *bsp; // $v0
 		/* end block 1.1 */
-		// End offset: 0x80077798
-		// End Line: 2901
+		// End offset: 0x80077734
+		// End Line: 2971
 
 		/* begin block 1.2 */
-			// Start line: 2907
-			// Start offset: 0x800777D4
+			// Start line: 2976
+			// Start offset: 0x80077748
 			// Variables:
 		// 		struct _HFace *hface; // $v0
 		/* end block 1.2 */
-		// End offset: 0x800777F4
-		// End Line: 2913
+		// End offset: 0x80077764
+		// End Line: 2980
+
+		/* begin block 1.3 */
+			// Start line: 2985
+			// Start offset: 0x80077774
+		/* end block 1.3 */
+		// End offset: 0x800777A8
+		// End Line: 2993
 	/* end block 1 */
-	// End offset: 0x800777F4
-	// End Line: 2914
+	// End offset: 0x800777A8
+	// End Line: 2994
 
 	/* begin block 2 */
-		// Start line: 6533
+		// Start line: 6619
 	/* end block 2 */
-	// End Line: 6534
+	// End Line: 6620
 
-	/* begin block 3 */
-		// Start line: 6534
-	/* end block 3 */
-	// End Line: 6535
-
-	/* begin block 4 */
-		// Start line: 6536
-	/* end block 4 */
-	// End Line: 6537
+/* File: C:\kain2\game\PHYSICS.C */
 
 int PHYSICS_CheckDontGrabEdge(_PCollideInfo *CInfo)
 
 {
-  ushort uVar1;
-  uint uVar2;
+  short sVar1;
+  ushort uVar2;
+  ulong uVar3;
+  uint uVar4;
   
-  uVar2 = 0;
-  if (CInfo->type == 3) {
-    uVar1 = *(ushort *)((int)CInfo->prim + 10);
-    if (uVar1 != 0xffff) {
-      uVar2 = (uint)((*(ushort *)((int)&(CInfo->inst->node).prev[6].next[1].prev + (uint)uVar1 + 2)
+  sVar1 = CInfo->type;
+  uVar4 = 0;
+  if (sVar1 == 3) {
+    uVar2 = *(ushort *)((int)CInfo->prim + 10);
+    if (uVar2 != 0xffff) {
+      uVar4 = (uint)((*(ushort *)((int)&(CInfo->inst->node).prev[6].next[1].prev + (uint)uVar2 + 2)
                      & 0x80) != 0);
+    }
+    if (((int)*(short *)((int)(CInfo->inst->node).prev[9].prev + (int)CInfo->segment * 0x24 + 0x12)
+        & 0x8000U) == 0) {
+      return uVar4;
     }
   }
   else {
-    if ((CInfo->type == 2) && ((*(byte *)((int)CInfo->prim + 6) & 0x80) != 0)) {
-      uVar2 = 1;
+    if (sVar1 == 2) {
+      if ((*(byte *)((int)CInfo->prim + 6) & 0x80) == 0) {
+        return 0;
+      }
+    }
+    else {
+      if (sVar1 != 5) {
+        return 0;
+      }
+      uVar3 = INSTANCE_Query(CInfo->inst,1);
+      if ((uVar3 & 0x20) == 0) {
+        return 0;
+      }
+      uVar3 = INSTANCE_Query(CInfo->inst,3);
+      if ((uVar3 & 1) != 0) {
+        return 0;
+      }
     }
   }
-  return uVar2;
+  return 1;
 }
 
 
@@ -2696,23 +2692,29 @@ int PHYSICS_CheckDontGrabEdge(_PCollideInfo *CInfo)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PHYSICS_GenericLineCheckSetup(short x /*$a0*/, short y /*$a1*/, short z /*$a2*/, struct SVECTOR *inVec /*$a3*/)
- // line 2919, offset 0x800777fc
+ // line 2999, offset 0x800777c0
 	/* begin block 1 */
-		// Start line: 6585
+		// Start line: 6705
 	/* end block 1 */
-	// End Line: 6586
+	// End Line: 6706
 
 	/* begin block 2 */
-		// Start line: 6589
+		// Start line: 6709
 	/* end block 2 */
-	// End Line: 6590
+	// End Line: 6710
 
-void PHYSICS_GenericLineCheckSetup(short x,short y,short z,SVECTOR *inVec)
+/* File: C:\kain2\game\PHYSICS.C */
+
+void PHYSICS_GenericLineCheckSetup(short x,short y,short z,undefined inVec)
 
 {
-  inVec->vx = x;
-  inVec->vy = y;
-  inVec->vz = z;
+  undefined3 in_register_0000001d;
+  short *psVar1;
+  
+  psVar1 = (short *)CONCAT31(in_register_0000001d,inVec);
+  *psVar1 = x;
+  psVar1[1] = y;
+  psVar1[2] = z;
   return;
 }
 
@@ -2721,14 +2723,16 @@ void PHYSICS_GenericLineCheckSetup(short x,short y,short z,SVECTOR *inVec)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PHYSICS_GenericLineCheck(struct _Instance *instance /*$a0*/, struct MATRIX *transMat /*$a1*/, struct MATRIX *rotMat /*$a2*/, struct _PCollideInfo *cInfo /*$a3*/)
- // line 2937, offset 0x8007780c
+ // line 3017, offset 0x800777d0
 	/* begin block 1 */
-		// Start line: 6621
+		// Start line: 6741
 	/* end block 1 */
-	// End Line: 6622
+	// End Line: 6742
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 void PHYSICS_GenericLineCheck
-               (_Instance *instance,MATRIX *transMat,MATRIX *rotMat,_PCollideInfo *cInfo)
+               (_Instance *instance,undefined1 transMat,undefined1 rotMat,_PCollideInfo *cInfo)
 
 {
   cInfo->collideType = 0x3f;
@@ -2741,25 +2745,27 @@ void PHYSICS_GenericLineCheck
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PHYSICS_GenericLineCheckMask(struct _Instance *instance /*$a0*/, struct MATRIX *transMat /*$a1*/, struct MATRIX *rotMat /*$a2*/, struct _PCollideInfo *cInfo /*$a3*/)
- // line 2941, offset 0x80077830
+ // line 3021, offset 0x800777f4
 	/* begin block 1 */
-		// Start line: 2942
-		// Start offset: 0x80077830
+		// Start line: 3022
+		// Start offset: 0x800777F4
 		// Variables:
 	// 		struct SVECTOR *startVec; // $t0
 	// 		struct SVECTOR *endVec; // $t1
 	// 		struct VECTOR outVec; // stack offset -24
 	/* end block 1 */
-	// End offset: 0x80077830
-	// End Line: 2942
+	// End offset: 0x800777F4
+	// End Line: 3022
 
 	/* begin block 2 */
-		// Start line: 6630
+		// Start line: 6750
 	/* end block 2 */
-	// End Line: 6631
+	// End Line: 6751
+
+/* File: C:\kain2\game\PHYSICS.C */
 
 void PHYSICS_GenericLineCheckMask
-               (_Instance *instance,MATRIX *transMat,MATRIX *rotMat,_PCollideInfo *cInfo)
+               (_Instance *instance,undefined transMat,undefined rotMat,_PCollideInfo *cInfo)
 
 {
   undefined4 uVar1;
@@ -2767,48 +2773,54 @@ void PHYSICS_GenericLineCheckMask
   undefined4 uVar3;
   undefined4 in_zero;
   undefined4 in_at;
-  SVECTOR *pSVar4;
-  SVECTOR *pSVar5;
+  undefined3 in_register_00000015;
+  int iVar4;
+  undefined3 in_register_00000019;
+  undefined4 *puVar5;
+  SVECTOR *pSVar6;
+  SVECTOR *pSVar7;
   short local_18;
   short local_14;
   short local_10;
   
-  pSVar4 = cInfo->oldPoint;
-  pSVar5 = cInfo->newPoint;
-  setCopControlWord(2,0,*(undefined4 *)rotMat->m);
-  setCopControlWord(2,0x800,*(undefined4 *)(rotMat->m + 2));
-  setCopControlWord(2,0x1000,*(undefined4 *)(rotMat->m + 4));
-  setCopControlWord(2,0x1800,*(undefined4 *)(rotMat->m + 6));
-  setCopControlWord(2,0x2000,*(undefined4 *)(rotMat->m + 8));
-  setCopReg(2,in_zero,*(undefined4 *)pSVar4);
-  setCopReg(2,in_at,*(undefined4 *)&pSVar4->vz);
+  puVar5 = (undefined4 *)CONCAT31(in_register_00000019,rotMat);
+  iVar4 = CONCAT31(in_register_00000015,transMat);
+  pSVar6 = cInfo->oldPoint;
+  pSVar7 = cInfo->newPoint;
+  setCopControlWord(2,0,*puVar5);
+  setCopControlWord(2,0x800,puVar5[1]);
+  setCopControlWord(2,0x1000,puVar5[2]);
+  setCopControlWord(2,0x1800,puVar5[3]);
+  setCopControlWord(2,0x2000,puVar5[4]);
+  setCopReg(2,in_zero,*(undefined4 *)pSVar6);
+  setCopReg(2,in_at,*(undefined4 *)&pSVar6->vz);
   copFunction(2,0x486012);
   uVar1 = getCopReg(2,0x19);
   uVar2 = getCopReg(2,0x1a);
   uVar3 = getCopReg(2,0x1b);
   local_18 = (short)uVar1;
-  pSVar4->vx = *(short *)transMat->t + local_18;
+  pSVar6->vx = *(short *)(iVar4 + 0x14) + local_18;
   local_14 = (short)uVar2;
-  pSVar4->vy = *(short *)(transMat->t + 1) + local_14;
+  pSVar6->vy = *(short *)(iVar4 + 0x18) + local_14;
   local_10 = (short)uVar3;
-  pSVar4->vz = *(short *)(transMat->t + 2) + local_10;
-  setCopControlWord(2,0,*(undefined4 *)rotMat->m);
-  setCopControlWord(2,0x800,*(undefined4 *)(rotMat->m + 2));
-  setCopControlWord(2,0x1000,*(undefined4 *)(rotMat->m + 4));
-  setCopControlWord(2,0x1800,*(undefined4 *)(rotMat->m + 6));
-  setCopControlWord(2,0x2000,*(undefined4 *)(rotMat->m + 8));
-  setCopReg(2,in_zero,*(undefined4 *)pSVar5);
-  setCopReg(2,in_at,*(undefined4 *)&pSVar5->vz);
+  pSVar6->vz = *(short *)(iVar4 + 0x1c) + local_10;
+  setCopControlWord(2,0,*puVar5);
+  setCopControlWord(2,0x800,puVar5[1]);
+  setCopControlWord(2,0x1000,puVar5[2]);
+  setCopControlWord(2,0x1800,puVar5[3]);
+  setCopControlWord(2,0x2000,puVar5[4]);
+  setCopReg(2,in_zero,*(undefined4 *)pSVar7);
+  setCopReg(2,in_at,*(undefined4 *)&pSVar7->vz);
   copFunction(2,0x486012);
   uVar1 = getCopReg(2,0x19);
   uVar2 = getCopReg(2,0x1a);
   uVar3 = getCopReg(2,0x1b);
   local_18 = (short)uVar1;
-  pSVar5->vx = *(short *)transMat->t + local_18;
+  pSVar7->vx = *(short *)(iVar4 + 0x14) + local_18;
   local_14 = (short)uVar2;
-  pSVar5->vy = *(short *)(transMat->t + 1) + local_14;
+  pSVar7->vy = *(short *)(iVar4 + 0x18) + local_14;
   local_10 = (short)uVar3;
-  pSVar5->vz = *(short *)(transMat->t + 2) + local_10;
+  pSVar7->vz = *(short *)(iVar4 + 0x1c) + local_10;
   PHYSICS_CheckLineInWorldMask(instance,cInfo);
   return;
 }

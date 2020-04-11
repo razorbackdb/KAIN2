@@ -2,7 +2,7 @@
 #define TIMERG2_H
 
 
-extern short G2Timer_GetFrameTime(); // 0x800940C0
+extern short G2Timer_GetFrameTime(); // 0x80095CC0
 
 
 #endif

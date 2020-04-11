@@ -5,10 +5,10 @@
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANCOLL_DoesLOSExistFinal(struct _Position *startPos /*$a0*/, struct _Position *endPos /*$a1*/, int collideType /*$a2*/, int passThroughHit /*$s0*/, int zoffset /*stack 16*/)
- // line 75, offset 0x800964e0
+ // line 75, offset 0x800981f0
 	/* begin block 1 */
 		// Start line: 76
-		// Start offset: 0x800964E0
+		// Start offset: 0x800981F0
 		// Variables:
 	// 		struct _PCollideInfo pcollideinfo; // stack offset -72
 	// 		struct SVECTOR startPt; // stack offset -24
@@ -16,35 +16,37 @@
 
 		/* begin block 1.1 */
 			// Start line: 76
-			// Start offset: 0x800964E0
+			// Start offset: 0x800981F0
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $a2
 		// 		short _z1; // $a0
 		// 		struct _Position *_v0; // $v1
 		/* end block 1.1 */
-		// End offset: 0x800964E0
+		// End offset: 0x800981F0
 		// End Line: 76
 
 		/* begin block 1.2 */
 			// Start line: 76
-			// Start offset: 0x800964E0
+			// Start offset: 0x800981F0
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $a0
 		// 		short _z1; // $a1
 		// 		struct _Position *_v0; // $v0
 		/* end block 1.2 */
-		// End offset: 0x800964E0
+		// End offset: 0x800981F0
 		// End Line: 76
 	/* end block 1 */
-	// End offset: 0x800965DC
+	// End offset: 0x800982E4
 	// End Line: 98
 
 	/* begin block 2 */
 		// Start line: 150
 	/* end block 2 */
 	// End Line: 151
+
+/* File: C:\kain2\game\PLAN\PLANCOLL.C */
 
 int PLANCOLL_DoesLOSExistFinal
               (_Position *startPos,_Position *endPos,int collideType,int passThroughHit,int zoffset)
@@ -61,12 +63,12 @@ int PLANCOLL_DoesLOSExistFinal
   local_10.vx = endPos->x;
   local_10.vy = endPos->y;
   local_48.newPoint = &local_10;
-  local_48.collideType = 0x27;
+  local_48.collideType = 0x127;
   local_48.inst = (_Instance *)0x0;
   local_48.instance = (_Instance *)0x0;
   local_18.vz = startPos->z + (short)zoffset;
   local_10.vz = endPos->z + (short)zoffset;
-  COLLIDE_PointAndWorld(&local_48,&gameTrackerX,(Level *)0x0);
+  COLLIDE_PointAndWorld(&local_48,(Level *)0x0);
   if ((((passThroughHit == 0) || (local_48.type != 3)) ||
       (*(ushort *)((int)local_48.prim + 10) == 0xffff)) ||
      (uVar1 = 1,
@@ -83,10 +85,10 @@ int PLANCOLL_DoesLOSExistFinal
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANCOLL_CheckUnderwaterPoint(struct _Position *position /*$s5*/)
- // line 108, offset 0x800965ec
+ // line 108, offset 0x800982f4
 	/* begin block 1 */
 		// Start line: 109
-		// Start offset: 0x800965EC
+		// Start offset: 0x800982F4
 		// Variables:
 	// 		struct _StreamUnit *streamUnit; // $s4
 	// 		struct Level *level; // $s2
@@ -98,60 +100,58 @@ int PLANCOLL_DoesLOSExistFinal
 
 		/* begin block 1.1 */
 			// Start line: 124
-			// Start offset: 0x80096650
+			// Start offset: 0x80098358
 			// Variables:
 		// 		short _x1; // $v1
 		// 		short _y1; // $v0
 		// 		short _z1; // $a0
 		// 		struct _Position *_v0; // $s6
 		/* end block 1.1 */
-		// End offset: 0x80096650
+		// End offset: 0x80098358
 		// End Line: 124
 	/* end block 1 */
-	// End offset: 0x80096738
+	// End offset: 0x80098440
 	// End Line: 146
 
 	/* begin block 2 */
-		// Start line: 249
+		// Start line: 241
 	/* end block 2 */
-	// End Line: 250
+	// End Line: 242
 
-/* WARNING: Type propagation algorithm not settling */
+/* File: C:\kain2\game\PLAN\PLANCOLL.C */
 
 int PLANCOLL_CheckUnderwaterPoint(_Position *position)
 
 {
   long lVar1;
-  _MultiSignal *p_Var2;
+  short **ppsVar2;
   short *psVar3;
-  Level **ppLVar4;
-  Level *pLVar5;
+  int **ppiVar4;
+  int *piVar5;
   int iVar6;
-  STracker *pSVar7;
+  int *piVar7;
   
-  pSVar7 = &StreamTracker;
+  piVar7 = &StreamTracker;
   iVar6 = 0x10;
-  ppLVar4 = &StreamTracker.StreamList[0].level;
+  ppiVar4 = (int **)&DAT_800d2a14;
   do {
-    if ((*(short *)(ppLVar4 + -1) == 2) &&
-       (lVar1 = MEMPACK_MemoryValidFunc((char *)*ppLVar4), lVar1 != 0)) {
-      pLVar5 = *ppLVar4;
-      p_Var2 = pLVar5->terrain->signals;
-      psVar3 = (short *)p_Var2->numSignals;
-      lVar1 = MATH3D_LengthXYZ((int)position->x -
-                               (int)(short)(*psVar3 + *(short *)p_Var2->signalList[0].data),
+    if ((*(short *)(ppiVar4 + -1) == 2) &&
+       (lVar1 = MEMPACK_MemoryValidFunc((char *)*ppiVar4), lVar1 != 0)) {
+      piVar5 = *ppiVar4;
+      ppsVar2 = *(short ***)(*piVar5 + 0x48);
+      psVar3 = *ppsVar2;
+      lVar1 = MATH3D_LengthXYZ((int)position->x - (int)(short)(*psVar3 + *(short *)(ppsVar2 + 3)),
                                (int)position->y -
-                               (int)(short)(psVar3[1] + *(short *)(p_Var2->signalList[0].data + 2)),
-                               (int)position->z -
-                               (int)(short)(psVar3[2] + *(short *)(p_Var2->signalList[0].data + 4)))
+                               (int)(short)(psVar3[1] + *(short *)((int)ppsVar2 + 0xe)),
+                               (int)position->z - (int)(short)(psVar3[2] + *(short *)(ppsVar2 + 4)))
       ;
-      if ((lVar1 < (int)(uint)(ushort)psVar3[3]) && ((int)position->z < pLVar5->waterZLevel)) {
-        return pSVar7->StreamList[0].StreamUnitID;
+      if ((lVar1 < (int)(uint)(ushort)psVar3[3]) && ((int)position->z < piVar5[0xe])) {
+        return *piVar7;
       }
     }
     iVar6 = iVar6 + -1;
-    ppLVar4 = ppLVar4 + 0x10;
-    pSVar7 = (STracker *)(pSVar7->StreamList + 1);
+    ppiVar4 = ppiVar4 + 0x10;
+    piVar7 = piVar7 + 0x10;
     if (iVar6 == 0) {
       return -1;
     }
@@ -163,10 +163,10 @@ int PLANCOLL_CheckUnderwaterPoint(_Position *position)
 // autogenerated function stub: 
 // int /*$ra*/ PLANCOLL_FindTerrainHitFinal(struct _PlanCollideInfo *pci /*$s5*/, int *placement /*$t0*/, int distBefore /*$s7*/, int distAfter /*$fp*/, int start /*stack 16*/, int end /*stack 20*/)
 int PLANCOLL_FindTerrainHitFinal(struct _PlanCollideInfo *pci, int *placement, int distBefore, int distAfter, int start, int end)
-{ // line 162, offset 0x80096760
+{ // line 162, offset 0x80098468
 	/* begin block 1 */
 		// Start line: 163
-		// Start offset: 0x80096760
+		// Start offset: 0x80098468
 		// Variables:
 			struct _PCollideInfo pcollideinfo; // stack offset -120
 			struct _fth *current; // $s1
@@ -177,7 +177,7 @@ int PLANCOLL_FindTerrainHitFinal(struct _PlanCollideInfo *pci, int *placement, i
 
 		/* begin block 1.1 */
 			// Start line: 180
-			// Start offset: 0x800967FC
+			// Start offset: 0x80098504
 			// Variables:
 				short _x1; // $a0
 				short _y1; // $v0
@@ -185,38 +185,38 @@ int PLANCOLL_FindTerrainHitFinal(struct _PlanCollideInfo *pci, int *placement, i
 				struct _Position *_v0; // $s4
 				struct _Position *_v1; // $s2
 		/* end block 1.1 */
-		// End offset: 0x800967FC
+		// End offset: 0x80098504
 		// End Line: 180
 
 		/* begin block 1.2 */
 			// Start line: 180
-			// Start offset: 0x800967FC
+			// Start offset: 0x80098504
 			// Variables:
 				short _x1; // $a1
 				short _y1; // $v0
 				short _z1; // $v1
 				struct _Position *_v0; // $s3
 		/* end block 1.2 */
-		// End offset: 0x800967FC
+		// End offset: 0x80098504
 		// End Line: 180
 
 		/* begin block 1.3 */
 			// Start line: 201
-			// Start offset: 0x800969C0
+			// Start offset: 0x800986C0
 			// Variables:
 				short _y1; // $v1
 				short _z1; // $a0
 		/* end block 1.3 */
-		// End offset: 0x800969C0
+		// End offset: 0x800986C0
 		// End Line: 201
 	/* end block 1 */
-	// End offset: 0x80096A00
+	// End offset: 0x80098700
 	// End Line: 208
 
 	/* begin block 2 */
-		// Start line: 434
+		// Start line: 426
 	/* end block 2 */
-	// End Line: 435
+	// End Line: 427
 
 	return 0;
 }
@@ -224,26 +224,37 @@ int PLANCOLL_FindTerrainHitFinal(struct _PlanCollideInfo *pci, int *placement, i
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ PLANCOLL_DoesStraightLinePathExist(struct _Position *startPos /*$s1*/, struct _Position *endPos /*$s2*/, int collideType /*$s3*/)
- // line 214, offset 0x80096a30
+// int /*$ra*/ PLANCOLL_DoesStraightLinePathExist(struct _Position *startPos /*$s2*/, struct _Position *endPos /*$s3*/, int collideType /*$s4*/)
+ // line 214, offset 0x80098730
 	/* begin block 1 */
-		// Start line: 589
+		// Start line: 215
+		// Start offset: 0x80098730
 	/* end block 1 */
-	// End Line: 590
+	// End offset: 0x80098798
+	// End Line: 221
+
+	/* begin block 2 */
+		// Start line: 581
+	/* end block 2 */
+	// End Line: 582
+
+/* File: C:\kain2\game\PLAN\PLANCOLL.C */
 
 int PLANCOLL_DoesStraightLinePathExist(_Position *startPos,_Position *endPos,int collideType)
 
 {
-  int iVar1;
-  uint uVar2;
+  bool bVar1;
+  int iVar2;
+  uint uVar3;
   
-  uVar2 = 0;
-  iVar1 = PLANCOLL_DoesLOSExistFinal(startPos,endPos,collideType,1,0x100);
-  if (iVar1 != 0) {
-    iVar1 = PLANCOLL_DoesLOSExistFinal(startPos,endPos,collideType,1,0x3c0);
-    uVar2 = (uint)(iVar1 != 0);
+  uVar3 = 0;
+  bVar1 = DAT_800d220c < 0;
+  iVar2 = PLANCOLL_DoesLOSExistFinal(startPos,endPos,collideType,(uint)bVar1,0x100);
+  if (iVar2 != 0) {
+    iVar2 = PLANCOLL_DoesLOSExistFinal(startPos,endPos,collideType,(uint)bVar1,0x3c0);
+    uVar3 = (uint)(iVar2 != 0);
   }
-  return uVar2;
+  return uVar3;
 }
 
 
@@ -251,23 +262,25 @@ int PLANCOLL_DoesStraightLinePathExist(_Position *startPos,_Position *endPos,int
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANCOLL_DoesWaterPathUpExist(struct _Position *startPos /*$s2*/, struct _Position *endPos /*$s1*/, int collideType /*$s4*/, struct _Position *peakPos /*$s3*/, int passThroughHit /*stack 16*/)
- // line 223, offset 0x80096aac
+ // line 227, offset 0x800987bc
 	/* begin block 1 */
-		// Start line: 224
-		// Start offset: 0x80096AAC
+		// Start line: 228
+		// Start offset: 0x800987BC
 		// Variables:
 	// 		long time_ftop; // $s0
 	// 		long time_ptow; // $a0
 	// 		long time_tot; // $a1
 	// 		struct _Position diff; // stack offset -32
 	/* end block 1 */
-	// End offset: 0x80096B28
-	// End Line: 242
+	// End offset: 0x80098838
+	// End Line: 246
 
 	/* begin block 2 */
-		// Start line: 609
+		// Start line: 619
 	/* end block 2 */
-	// End Line: 610
+	// End Line: 620
+
+/* File: C:\kain2\game\PLAN\PLANCOLL.C */
 
 int PLANCOLL_DoesWaterPathUpExist
               (_Position *startPos,_Position *endPos,int collideType,_Position *peakPos,

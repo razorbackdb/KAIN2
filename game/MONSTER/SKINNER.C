@@ -5,31 +5,33 @@
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SKINNER_BurrowInEntry(struct _Instance *instance /*$s1*/)
- // line 51, offset 0x8008b040
+ // line 52, offset 0x8008c6f4
 	/* begin block 1 */
-		// Start line: 52
-		// Start offset: 0x8008B040
+		// Start line: 53
+		// Start offset: 0x8008C6F4
 		// Variables:
-	// 		struct _MonsterVars *mv; // $s0
-	// 		struct _MonsterAttributes *ma; // $s2
+	// 		struct _MonsterVars *mv; // $s2
+	// 		struct _MonsterAttributes *ma; // $s3
 	// 		int rv; // $a1
 
 		/* begin block 1.1 */
-			// Start line: 59
-			// Start offset: 0x8008B0AC
+			// Start line: 60
+			// Start offset: 0x8008C764
 			// Variables:
 		// 		struct Level *level; // $s0
 		/* end block 1.1 */
-		// End offset: 0x8008B0F8
-		// End Line: 67
+		// End offset: 0x8008C7BC
+		// End Line: 69
 	/* end block 1 */
-	// End offset: 0x8008B0F8
-	// End Line: 69
+	// End offset: 0x8008C7BC
+	// End Line: 71
 
 	/* begin block 2 */
-		// Start line: 102
+		// Start line: 104
 	/* end block 2 */
-	// End Line: 103
+	// End Line: 105
+
+/* File: C:\kain2\game\MONSTER\SKINNER.C */
 
 int SKINNER_BurrowInEntry(_Instance *instance)
 
@@ -52,6 +54,7 @@ int SKINNER_BurrowInEntry(_Instance *instance)
     MON_PlayAnimFromList(instance,*(char **)((int)pvVar4 + 8),0,1);
     FX_StartInstanceBurrow(instance,level,instance->tface);
     iVar2 = 1;
+    *(ushort *)((int)pvVar3 + 0x14e) = *(ushort *)((int)pvVar3 + 0x14e) & 0xffef;
   }
   return iVar2;
 }
@@ -61,27 +64,28 @@ int SKINNER_BurrowInEntry(_Instance *instance)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SKINNER_BurrowIn(struct _Instance *instance /*$s0*/)
- // line 72, offset 0x8008b114
+ // line 74, offset 0x8008c7dc
 	/* begin block 1 */
-		// Start line: 73
-		// Start offset: 0x8008B114
+		// Start line: 75
+		// Start offset: 0x8008C7DC
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s1
 	// 		int rv; // $v1
 	/* end block 1 */
-	// End offset: 0x8008B18C
-	// End Line: 90
+	// End offset: 0x8008C838
+	// End Line: 92
 
 	/* begin block 2 */
-		// Start line: 151
+		// Start line: 157
 	/* end block 2 */
-	// End Line: 152
+	// End Line: 158
+
+/* File: C:\kain2\game\MONSTER\SKINNER.C */
 
 int SKINNER_BurrowIn(_Instance *instance)
 
 {
   bool bVar1;
-  Level *level;
   void *pvVar2;
   
   pvVar2 = instance->extraData;
@@ -91,8 +95,6 @@ int SKINNER_BurrowIn(_Instance *instance)
     *(uint *)((int)pvVar2 + 4) = *(uint *)((int)pvVar2 + 4) & 0xfffffffe | 4;
     instance->flags = instance->flags | 0x800;
     MON_TurnOffWeaponSpheres(instance);
-    level = STREAM_GetLevelWithID(instance->currentStreamUnitID);
-    FX_StartInstanceBurrow(instance,level,instance->tface);
   }
   return (uint)bVar1;
 }
@@ -102,10 +104,10 @@ int SKINNER_BurrowIn(_Instance *instance)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ SKINNER_GetBurrowDest(struct _Instance *instance /*$s0*/, struct _Position *enemyPos /*$a2*/)
- // line 93, offset 0x8008b1a4
+ // line 95, offset 0x8008c850
 	/* begin block 1 */
-		// Start line: 94
-		// Start offset: 0x8008B1A4
+		// Start line: 96
+		// Start offset: 0x8008C850
 		// Variables:
 	// 		struct _TFace *oldTFace; // $s2
 	// 		int oldbspTree; // $s3
@@ -113,30 +115,32 @@ int SKINNER_BurrowIn(_Instance *instance)
 	// 		struct _Position target; // stack offset -32
 
 		/* begin block 1.1 */
-			// Start line: 104
-			// Start offset: 0x8008B248
+			// Start line: 106
+			// Start offset: 0x8008C8F4
 			// Variables:
 		// 		int Depth; // $v1
 
 			/* begin block 1.1.1 */
-				// Start line: 110
-				// Start offset: 0x8008B274
+				// Start line: 112
+				// Start offset: 0x8008C920
 				// Variables:
 			// 		struct _MonsterVars *mv; // $v0
 			/* end block 1.1.1 */
-			// End offset: 0x8008B294
-			// End Line: 113
+			// End offset: 0x8008C940
+			// End Line: 115
 		/* end block 1.1 */
-		// End offset: 0x8008B294
-		// End Line: 114
+		// End offset: 0x8008C940
+		// End Line: 116
 	/* end block 1 */
-	// End offset: 0x8008B294
-	// End Line: 118
+	// End offset: 0x8008C940
+	// End Line: 120
 
 	/* begin block 2 */
-		// Start line: 198
+		// Start line: 204
 	/* end block 2 */
-	// End Line: 199
+	// End Line: 205
+
+/* File: C:\kain2\game\MONSTER\SKINNER.C */
 
 int SKINNER_GetBurrowDest(_Instance *instance,_Position *enemyPos)
 
@@ -185,21 +189,23 @@ int SKINNER_GetBurrowDest(_Instance *instance,_Position *enemyPos)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SKINNER_CalcBurrowingMove(struct _Instance *instance /*$s0*/, struct _Position *enemyPos /*$s2*/)
- // line 121, offset 0x8008b2bc
+ // line 123, offset 0x8008c968
 	/* begin block 1 */
-		// Start line: 122
-		// Start offset: 0x8008B2BC
+		// Start line: 124
+		// Start offset: 0x8008C968
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s1
 	// 		struct _Position *destination; // $a1
 	/* end block 1 */
-	// End offset: 0x8008B2BC
-	// End Line: 122
+	// End offset: 0x8008C968
+	// End Line: 124
 
 	/* begin block 2 */
-		// Start line: 263
+		// Start line: 269
 	/* end block 2 */
-	// End Line: 264
+	// End Line: 270
+
+/* File: C:\kain2\game\MONSTER\SKINNER.C */
 
 void SKINNER_CalcBurrowingMove(_Instance *instance,_Position *enemyPos)
 
@@ -232,12 +238,75 @@ void SKINNER_CalcBurrowingMove(_Instance *instance,_Position *enemyPos)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ SKINNER_PursueEntry(struct _Instance *instance /*$a0*/)
- // line 138, offset 0x8008b390
+// void /*$ra*/ SKINNER_PupateEntry(struct _Instance *instance /*$s0*/)
+ // line 140, offset 0x8008ca3c
 	/* begin block 1 */
-		// Start line: 310
+		// Start line: 141
+		// Start offset: 0x8008CA3C
+		// Variables:
+	// 		struct _MonsterVars *mv; // $s1
 	/* end block 1 */
-	// End Line: 311
+	// End offset: 0x8008CA3C
+	// End Line: 141
+
+	/* begin block 2 */
+		// Start line: 316
+	/* end block 2 */
+	// End Line: 317
+
+/* File: C:\kain2\game\MONSTER\SKINNER.C */
+
+void SKINNER_PupateEntry(_Instance *instance)
+
+{
+  void *pvVar1;
+  
+  pvVar1 = instance->extraData;
+  MON_PupateEntry(instance);
+  MON_TurnOffBodySpheres(instance);
+  *(uint *)((int)pvVar1 + 4) = *(uint *)((int)pvVar1 + 4) | 4;
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ SKINNER_Pupate(struct _Instance *instance /*$s0*/)
+ // line 149, offset 0x8008ca88
+	/* begin block 1 */
+		// Start line: 334
+	/* end block 1 */
+	// End Line: 335
+
+/* File: C:\kain2\game\MONSTER\SKINNER.C */
+
+void SKINNER_Pupate(_Instance *instance)
+
+{
+  undefined4 local_8;
+  undefined4 local_4;
+  
+  MON_Pupate(instance);
+  if ((instance->flags & 0x800U) == 0) {
+    MON_OnGround(instance);
+    MON_SwitchState(instance,(MonsterState)CONCAT44(local_4,local_8));
+  }
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ SKINNER_PursueEntry(struct _Instance *instance /*$a0*/)
+ // line 162, offset 0x8008cad4
+	/* begin block 1 */
+		// Start line: 360
+	/* end block 1 */
+	// End Line: 361
+
+/* File: C:\kain2\game\MONSTER\SKINNER.C */
 
 void SKINNER_PursueEntry(_Instance *instance)
 
@@ -251,46 +320,48 @@ void SKINNER_PursueEntry(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SKINNER_Pursue(struct _Instance *instance /*$s1*/)
- // line 143, offset 0x8008b3b0
+ // line 168, offset 0x8008caf4
 	/* begin block 1 */
-		// Start line: 144
-		// Start offset: 0x8008B3B0
+		// Start line: 169
+		// Start offset: 0x8008CAF4
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s3
 	// 		struct _MonsterIR *enemy; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 157
-			// Start offset: 0x8008B408
+			// Start line: 182
+			// Start offset: 0x8008CB4C
 			// Variables:
 		// 		int burrow; // $s2
 		/* end block 1.1 */
-		// End offset: 0x8008B45C
-		// End Line: 165
+		// End offset: 0x8008CBA0
+		// End Line: 190
 
 		/* begin block 1.2 */
-			// Start line: 178
-			// Start offset: 0x8008B4A0
+			// Start line: 203
+			// Start offset: 0x8008CBE4
 
 			/* begin block 1.2.1 */
-				// Start line: 187
-				// Start offset: 0x8008B4BC
+				// Start line: 212
+				// Start offset: 0x8008CC00
 				// Variables:
 			// 		int burrow; // $s2
 			/* end block 1.2.1 */
-			// End offset: 0x8008B50C
-			// End Line: 202
+			// End offset: 0x8008CC50
+			// End Line: 226
 		/* end block 1.2 */
-		// End offset: 0x8008B50C
-		// End Line: 203
+		// End offset: 0x8008CC50
+		// End Line: 227
 	/* end block 1 */
-	// End offset: 0x8008B51C
-	// End Line: 208
+	// End offset: 0x8008CC60
+	// End Line: 232
 
 	/* begin block 2 */
-		// Start line: 320
+		// Start line: 372
 	/* end block 2 */
-	// End Line: 321
+	// End Line: 373
+
+/* File: C:\kain2\game\MONSTER\SKINNER.C */
 
 void SKINNER_Pursue(_Instance *instance)
 
@@ -329,7 +400,7 @@ void SKINNER_Pursue(_Instance *instance)
         if (((uVar4 & 4) != 0) &&
            (uVar2 = MON_GetTime(instance), *(uint *)((int)pvVar7 + 0x114) < uVar2)) {
           bVar1 = false;
-          if (((uint)*(ushort *)(iVar5 + 0x14) - 0xcd < 0x2733) &&
+          if (((undefined *)((uint)*(ushort *)(iVar5 + 0x14) - 0xcd) < &DAT_00002733) &&
              (iVar6 = SKINNER_GetBurrowDest(instance,(_Position *)(*(int *)(iVar5 + 4) + 0x5c)),
              iVar6 != 0)) {
             bVar1 = true;
@@ -359,20 +430,22 @@ void SKINNER_Pursue(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SKINNER_HideEntry(struct _Instance *instance /*$a0*/)
- // line 213, offset 0x8008b538
+ // line 237, offset 0x8008cc7c
 	/* begin block 1 */
-		// Start line: 214
-		// Start offset: 0x8008B538
+		// Start line: 238
+		// Start offset: 0x8008CC7C
 		// Variables:
 	// 		struct _MonsterVars *mv; // $v0
 	/* end block 1 */
-	// End offset: 0x8008B570
-	// End Line: 224
+	// End offset: 0x8008CCB4
+	// End Line: 248
 
 	/* begin block 2 */
-		// Start line: 461
+		// Start line: 511
 	/* end block 2 */
-	// End Line: 462
+	// End Line: 512
+
+/* File: C:\kain2\game\MONSTER\SKINNER.C */
 
 void SKINNER_HideEntry(_Instance *instance)
 
@@ -391,29 +464,31 @@ void SKINNER_HideEntry(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SKINNER_Hide(struct _Instance *instance /*$s2*/)
- // line 226, offset 0x8008b580
+ // line 250, offset 0x8008ccc4
 	/* begin block 1 */
-		// Start line: 227
-		// Start offset: 0x8008B580
+		// Start line: 251
+		// Start offset: 0x8008CCC4
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 244
-			// Start offset: 0x8008B628
+			// Start line: 268
+			// Start offset: 0x8008CD6C
 			// Variables:
 		// 		struct _MonsterIR *enemy; // $s0
 		/* end block 1.1 */
-		// End offset: 0x8008B658
-		// End Line: 252
+		// End offset: 0x8008CD9C
+		// End Line: 275
 	/* end block 1 */
-	// End offset: 0x8008B674
-	// End Line: 262
+	// End offset: 0x8008CDB8
+	// End Line: 285
 
 	/* begin block 2 */
-		// Start line: 487
+		// Start line: 537
 	/* end block 2 */
-	// End Line: 488
+	// End Line: 538
+
+/* File: C:\kain2\game\MONSTER\SKINNER.C */
 
 void SKINNER_Hide(_Instance *instance)
 
@@ -430,23 +505,23 @@ void SKINNER_Hide(_Instance *instance)
   }
   if ((*(uint *)((int)pvVar2 + 4) & 1) != 0) {
     SKINNER_BurrowIn(instance);
-    goto LAB_8008b66c;
+    goto LAB_8008cdb0;
   }
   if ((*(uint *)((int)pvVar2 + 4) & 4) != 0) {
     iVar1 = MONSENSE_DetectPlayer(instance);
-    if (iVar1 == 0) goto LAB_8008b66c;
+    if (iVar1 == 0) goto LAB_8008cdb0;
     if (*(char *)((int)pvVar2 + 0x156) == '\x04') {
       MON_ChangeBehavior(instance,(uint)*(byte *)((int)pvVar2 + 0x158));
-      goto LAB_8008b66c;
+      goto LAB_8008cdb0;
     }
     if ((*(char *)((int)pvVar2 + 0x156) != '\b') ||
        (iVar1 = *(int *)((int)pvVar2 + 0xc4),
        MON_TurnToPosition(instance,(_Position *)(*(int *)(iVar1 + 4) + 0x5c),
                           *(short *)(*(int *)((int)pvVar2 + 0x164) + 0x1c)),
-       *(short *)((int)pvVar2 + 0x13a) <= *(short *)(iVar1 + 0x14))) goto LAB_8008b66c;
+       *(short *)((int)pvVar2 + 0x13a) <= *(short *)(iVar1 + 0x14))) goto LAB_8008cdb0;
   }
   MON_SwitchState(instance,(MonsterState)CONCAT44(local_c,local_10));
-LAB_8008b66c:
+LAB_8008cdb0:
   MON_DefaultQueueHandler(instance);
   return;
 }
@@ -456,20 +531,22 @@ LAB_8008b66c:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SKINNER_SurpriseAttackEntry(struct _Instance *instance /*$s0*/)
- // line 267, offset 0x8008b68c
+ // line 290, offset 0x8008cdd0
 	/* begin block 1 */
-		// Start line: 268
-		// Start offset: 0x8008B68C
+		// Start line: 291
+		// Start offset: 0x8008CDD0
 		// Variables:
 	// 		struct _MonsterVars *mv; // $a0
 	/* end block 1 */
-	// End offset: 0x8008B6FC
-	// End Line: 283
+	// End offset: 0x8008CE4C
+	// End Line: 307
 
 	/* begin block 2 */
-		// Start line: 569
+		// Start line: 617
 	/* end block 2 */
-	// End Line: 570
+	// End Line: 618
+
+/* File: C:\kain2\game\MONSTER\SKINNER.C */
 
 void SKINNER_SurpriseAttackEntry(_Instance *instance)
 
@@ -481,8 +558,10 @@ void SKINNER_SurpriseAttackEntry(_Instance *instance)
   if ((uVar1 & 7) != 0) {
     *(uint *)((int)instance->extraData + 4) = uVar1 & 0xfffffffb | 2;
     instance->flags = instance->flags & 0xfffff7ff;
-    level = STREAM_GetLevelWithID(instance->currentStreamUnitID);
-    FX_StartInstanceBurrow(instance,level,instance->tface);
+    if (instance->tface != (_TFace *)0x0) {
+      level = STREAM_GetLevelWithID(instance->currentStreamUnitID);
+      FX_StartInstanceBurrow(instance,level,instance->tface);
+    }
     GAMEPAD_Shock1(0x40,0x1e000);
   }
   MON_SurpriseAttackEntry(instance);
@@ -493,21 +572,23 @@ void SKINNER_SurpriseAttackEntry(_Instance *instance)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ SKINNER_SurpriseAttack(struct _Instance *instance /*$s0*/)
- // line 286, offset 0x8008b714
+// void /*$ra*/ SKINNER_SurpriseAttack(struct _Instance *instance /*$s1*/)
+ // line 310, offset 0x8008ce64
 	/* begin block 1 */
-		// Start line: 287
-		// Start offset: 0x8008B714
+		// Start line: 311
+		// Start offset: 0x8008CE64
 		// Variables:
-	// 		struct _MonsterVars *mv; // $s1
+	// 		struct _MonsterVars *mv; // $s0
 	/* end block 1 */
-	// End offset: 0x8008B76C
-	// End Line: 299
+	// End offset: 0x8008CECC
+	// End Line: 325
 
 	/* begin block 2 */
-		// Start line: 610
+		// Start line: 659
 	/* end block 2 */
-	// End Line: 611
+	// End Line: 660
+
+/* File: C:\kain2\game\MONSTER\SKINNER.C */
 
 void SKINNER_SurpriseAttack(_Instance *instance)
 
@@ -520,6 +601,7 @@ void SKINNER_SurpriseAttack(_Instance *instance)
     *(uint *)((int)pvVar1 + 4) = *(uint *)((int)pvVar1 + 4) & 0xfffffff8;
     FX_StopInstanceBurrow(instance);
     MON_TurnOnBodySpheres(instance);
+    *(ushort *)((int)pvVar1 + 0x14e) = *(ushort *)((int)pvVar1 + 0x14e) | 0x10;
   }
   return;
 }

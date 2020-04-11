@@ -4,27 +4,125 @@
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ WCBEGG_Process(struct _Instance *instance /*$s1*/, struct GameTracker *gameTracker /*$s5*/)
- // line 114, offset 0x8008d370
+// void /*$ra*/ WCBEGG_Message(struct _Instance *instance /*$s1*/, unsigned long message /*$s2*/, unsigned long data /*$s3*/)
+ // line 116, offset 0x8008ebfc
 	/* begin block 1 */
-		// Start line: 115
-		// Start offset: 0x8008D370
+		// Start line: 117
+		// Start offset: 0x8008EBFC
+
+		/* begin block 1.1 */
+			// Start line: 120
+			// Start offset: 0x8008EC2C
+			// Variables:
+		// 		struct PhysObData *pod; // $s0
+		/* end block 1.1 */
+		// End offset: 0x8008EC60
+		// End Line: 125
+	/* end block 1 */
+	// End offset: 0x8008EC60
+	// End Line: 127
+
+	/* begin block 2 */
+		// Start line: 232
+	/* end block 2 */
+	// End Line: 233
+
+/* File: C:\kain2\game\MONSTER\MBMISS.C */
+
+void WCBEGG_Message(_Instance *instance,ulong message,ulong data)
+
+{
+  ulong uVar1;
+  void *pvVar2;
+  
+  if (message == 0x800002) {
+    pvVar2 = instance->extraData;
+    uVar1 = MON_GetTime(instance);
+    *(ulong *)((int)pvVar2 + 0x28) = uVar1;
+    G2EmulationInstanceSwitchAnimationAlpha(instance,0,1,0,0,2,0);
+  }
+  PhysicalObjectPost(instance,message,data);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ WCBEGG_ShouldIgniteEgg(struct _Instance *egg /*$s1*/, struct _walbossAttributes *wa /*$s2*/)
+ // line 130, offset 0x8008ec8c
+	/* begin block 1 */
+		// Start line: 131
+		// Start offset: 0x8008EC8C
+		// Variables:
+	// 		struct _InstanceList *instanceList; // $s0
+	// 		struct _Instance *instance; // $s0
+	/* end block 1 */
+	// End offset: 0x8008ED54
+	// End Line: 157
+
+	/* begin block 2 */
+		// Start line: 262
+	/* end block 2 */
+	// End Line: 263
+
+/* File: C:\kain2\game\MONSTER\MBMISS.C */
+
+int WCBEGG_ShouldIgniteEgg(_Instance *egg,_walbossAttributes *wa)
+
+{
+  ulong uVar1;
+  long lVar2;
+  int iVar3;
+  _Instance *Inst;
+  
+  iVar3 = DAT_800d2100;
+  uVar1 = INSTANCE_Query(egg,3);
+  if ((uVar1 & 0x10000) == 0) {
+    Inst = *(_Instance **)(iVar3 + 4);
+    while (Inst != (_Instance *)0x0) {
+      uVar1 = INSTANCE_Query(Inst,1);
+      if ((((uVar1 & 0x20) != 0) &&
+          (lVar2 = MATH3D_LengthXYZ((int)(Inst->position).x - (int)(egg->position).x,
+                                    (int)(Inst->position).y - (int)(egg->position).y,
+                                    (int)(Inst->position).z - (int)(egg->position).z),
+          lVar2 < wa->eggIgniteDist)) &&
+         (iVar3 = strcmpi(Inst->object->name,s_walfire__800d09b4), iVar3 == 0)) {
+        return 1;
+      }
+      Inst = Inst->next;
+    }
+  }
+  return 0;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ WCBEGG_Process(struct _Instance *instance /*$s1*/, struct GameTracker *gameTracker /*$s5*/)
+ // line 159, offset 0x8008ed6c
+	/* begin block 1 */
+		// Start line: 160
+		// Start offset: 0x8008ED6C
 		// Variables:
 	// 		struct PhysObData *data; // $s0
-	// 		int time; // $s2
-	// 		int lastTime; // $s4
+	// 		int time; // $s3
+	// 		int lastTime; // $s2
 	// 		int timeBetween; // $s0
 	// 		int birthTime; // $a0
 	// 		struct Object *walboss; // $v0
-	// 		struct _walbossAttributes *wa; // $s3
+	// 		struct _walbossAttributes *wa; // $s4
 	/* end block 1 */
-	// End offset: 0x8008D4C0
-	// End Line: 168
+	// End offset: 0x8008EF0C
+	// End Line: 226
 
 	/* begin block 2 */
-		// Start line: 228
+		// Start line: 328
 	/* end block 2 */
-	// End Line: 229
+	// End Line: 329
+
+/* File: C:\kain2\game\MONSTER\MBMISS.C */
 
 void WCBEGG_Process(_Instance *instance,GameTracker *gameTracker)
 
@@ -34,35 +132,38 @@ void WCBEGG_Process(_Instance *instance,GameTracker *gameTracker)
   void *pvVar3;
   int iVar4;
   int iVar5;
-  int iVar6;
+  _walbossAttributes *wa;
   
   pvVar3 = instance->extraData;
   uVar1 = MON_GetTime(instance);
-  iVar6 = uVar1 - gameTrackerX.totalTime;
-  pOVar2 = OBTABLE_FindObject("walboss_");
-  if (pOVar2 == (Object *)0x0) {
-    INSTANCE_KillInstance(instance);
-  }
-  else {
-    iVar5 = *(int *)((int)pOVar2->data + 4);
-    iVar4 = *(int *)((int)pvVar3 + 0x28) + (int)*(short *)(iVar5 + 0xe) * 0x21;
-    if ((iVar6 < iVar4) && (iVar4 <= (int)uVar1)) {
+  iVar5 = uVar1 - DAT_800d2310;
+  pOVar2 = OBTABLE_FindObject(s_walboss__800d09c0);
+  if (pOVar2 != (Object *)0x0) {
+    wa = *(_walbossAttributes **)((int)pOVar2->data + 4);
+    iVar4 = *(int *)((int)pvVar3 + 0x28) + (int)wa->timeToEggThrob * 0x21;
+    if ((iVar5 < iVar4) && (iVar4 <= (int)uVar1)) {
       G2EmulationInstanceSwitchAnimationAlpha(instance,0,2,0,0,2,0);
     }
-    iVar4 = iVar4 + (int)*(short *)(iVar5 + 0x10) * 0x21;
-    if ((iVar6 < iVar4) && (iVar4 <= (int)uVar1)) {
+    iVar4 = iVar4 + (int)wa->timeToEggExplode * 0x21;
+    if ((iVar5 < iVar4) && (iVar4 <= (int)uVar1)) {
       G2EmulationInstanceSwitchAnimationAlpha(instance,0,3,0,0,1,0);
     }
-    if ((int)uVar1 < iVar4 + 0x339) {
-      ProcessPhysicalObject(instance,gameTracker);
-    }
-    else {
-      INSTANCE_KillInstance(instance);
-      if (gameTrackerX.playerInstance == instance->LinkParent) {
-        INSTANCE_Post(gameTrackerX.playerInstance,0x40005,(int)*(short *)(iVar5 + 0x12) * 0x21);
+    if ((iVar5 < iVar4 + 0x35a) && (iVar4 + 0x35a <= (int)uVar1)) {
+      if (DAT_800d20f8 == instance->LinkParent) {
+        INSTANCE_Post(DAT_800d20f8,0x40005,(int)wa->razielStunTime * 0x21);
       }
+      G2EmulationInstanceSwitchAnimationAlpha(instance,0,5,0,0,1,0);
+    }
+    if ((int)uVar1 < iVar4 + 0xef4) {
+      iVar5 = WCBEGG_ShouldIgniteEgg(instance,wa);
+      if (iVar5 != 0) {
+        INSTANCE_Post(instance,0x800029,1);
+      }
+      ProcessPhysicalObject(instance,gameTracker);
+      return;
     }
   }
+  INSTANCE_KillInstance(instance);
   return;
 }
 
@@ -70,31 +171,44 @@ void WCBEGG_Process(_Instance *instance,GameTracker *gameTracker)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ WCBEGG_ExplodeProcess(struct _Instance *instance /*$s1*/, struct GameTracker *gameTracker /*$a1*/)
- // line 170, offset 0x8008d4e4
+// void /*$ra*/ WCBEGG_ExplodeProcess(struct _Instance *instance /*$s2*/, struct GameTracker *gameTracker /*$a1*/)
+ // line 228, offset 0x8008ef30
 	/* begin block 1 */
-		// Start line: 171
-		// Start offset: 0x8008D4E4
+		// Start line: 229
+		// Start offset: 0x8008EF30
 		// Variables:
 	// 		struct PhysObData *data; // $s0
+	// 		int time; // $s1
+	// 		int lastTime; // $v1
+	// 		int birthTime; // $v1
+	// 		int timeBetween; // $s0
 	/* end block 1 */
-	// End offset: 0x8008D530
-	// End Line: 184
+	// End offset: 0x8008EFC8
+	// End Line: 254
 
 	/* begin block 2 */
-		// Start line: 348
+		// Start line: 474
 	/* end block 2 */
-	// End Line: 349
+	// End Line: 475
+
+/* File: C:\kain2\game\MONSTER\MBMISS.C */
 
 void WCBEGG_ExplodeProcess(_Instance *instance,GameTracker *gameTracker)
 
 {
   ulong uVar1;
-  void *pvVar2;
+  int iVar2;
+  void *pvVar3;
+  int iVar4;
   
-  pvVar2 = instance->extraData;
+  pvVar3 = instance->extraData;
   uVar1 = MON_GetTime(instance);
-  if (uVar1 < *(uint *)((int)pvVar2 + 0x44)) {
+  iVar2 = *(int *)((int)pvVar3 + 0x28);
+  iVar4 = iVar2 + 0x14a;
+  if (((int)(uVar1 - DAT_800d2310) < iVar4) && (iVar4 <= (int)uVar1)) {
+    G2EmulationInstanceSwitchAnimationAlpha(instance,0,5,0,0,1,0);
+  }
+  if ((int)uVar1 < iVar2 + 0xce4) {
     G2EmulationInstancePlayAnimation(instance);
   }
   else {
@@ -107,26 +221,28 @@ void WCBEGG_ExplodeProcess(_Instance *instance,GameTracker *gameTracker)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ WCBEGG_Collide(struct _Instance *instance /*$s2*/, struct GameTracker *gameTracker /*$s4*/)
- // line 186, offset 0x8008d544
+// void /*$ra*/ WCBEGG_ExplodeCollide(struct _Instance *instance /*$s2*/, struct GameTracker *gameTracker /*$s4*/)
+ // line 256, offset 0x8008efe0
 	/* begin block 1 */
-		// Start line: 187
-		// Start offset: 0x8008D544
+		// Start line: 257
+		// Start offset: 0x8008EFE0
 		// Variables:
 	// 		struct _CollideInfo *collideInfo; // $a0
 	// 		struct _HSphere *s1; // $v1
 	// 		struct _Instance *inst1; // $s0
 	// 		struct PhysObData *data; // $s1
 	/* end block 1 */
-	// End offset: 0x8008D65C
-	// End Line: 233
+	// End offset: 0x8008F0F8
+	// End Line: 298
 
 	/* begin block 2 */
-		// Start line: 380
+		// Start line: 533
 	/* end block 2 */
-	// End Line: 381
+	// End Line: 534
 
-void WCBEGG_Collide(_Instance *instance,GameTracker *gameTracker)
+/* File: C:\kain2\game\MONSTER\MBMISS.C */
+
+void WCBEGG_ExplodeCollide(_Instance *instance,GameTracker *gameTracker)
 
 {
   byte bVar1;
@@ -141,15 +257,12 @@ void WCBEGG_Collide(_Instance *instance,GameTracker *gameTracker)
   if ((((bVar1 == 1) && (*(char *)(*(int *)((int)pvVar3 + 0xc) + 4) == '\b')) &&
       (Inst = *(_Instance **)((int)pvVar3 + 0x14), Inst != (_Instance *)0x0)) &&
      (uVar2 = INSTANCE_Query(Inst,1), uVar2 == 0x10102)) {
-    if ((*puVar4 & 0x10000) == 0) {
-      INSTANCE_KillInstance(instance);
-    }
-    else {
+    if (((*puVar4 & 0x10000) != 0) && (instance->LinkParent == (_Instance *)0x0)) {
       INSTANCE_Post(Inst,0x1000017,2);
       G2EmulationInstanceSwitchAnimationAlpha(instance,0,4,0,0,(uint)bVar1,0);
       instance->processFunc = WCBEGG_ExplodeProcess;
       uVar2 = MON_GetTime(instance);
-      puVar4[0x11] = uVar2 + 0x14a;
+      puVar4[10] = uVar2;
     }
     TurnOffCollisionPhysOb(instance,7);
   }
@@ -167,12 +280,47 @@ void WCBEGG_Collide(_Instance *instance,GameTracker *gameTracker)
 
 // decompiled code
 // original method signature: 
-// long /*$ra*/ WALBOSC_AnimCallback(struct _G2Anim_Type *anim /*$a0*/, int sectionID /*$a1*/, enum _G2AnimCallbackMsg_Enum message /*$a2*/, long messageDataA /*$s1*/, long messageDataB /*stack 16*/, struct _Instance *instance /*stack 20*/)
- // line 238, offset 0x8008d67c
+// void /*$ra*/ WCBEGG_Collide(struct _Instance *instance /*$s0*/, struct GameTracker *gameTracker /*$s1*/)
+ // line 300, offset 0x8008f118
 	/* begin block 1 */
-		// Start line: 499
+		// Start line: 301
+		// Start offset: 0x8008F118
+		// Variables:
+	// 		struct _CollideInfo *collideInfo; // $v0
 	/* end block 1 */
-	// End Line: 500
+	// End offset: 0x8008F158
+	// End Line: 313
+
+	/* begin block 2 */
+		// Start line: 636
+	/* end block 2 */
+	// End Line: 637
+
+/* File: C:\kain2\game\MONSTER\MBMISS.C */
+
+void WCBEGG_Collide(_Instance *instance,GameTracker *gameTracker)
+
+{
+  if (*(char *)((int)instance->collideInfo + 7) == '\x03') {
+    TurnOffCollisionPhysOb(instance,7);
+    instance->collideFunc = WCBEGG_ExplodeCollide;
+  }
+  CollidePhysicalObject(instance,gameTracker);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// long /*$ra*/ WALBOSC_AnimCallback(struct _G2Anim_Type *anim /*$a0*/, int sectionID /*$a1*/, enum _G2AnimCallbackMsg_Enum message /*$a2*/, long messageDataA /*$s1*/, long messageDataB /*stack 16*/, struct _Instance *instance /*stack 20*/)
+ // line 319, offset 0x8008f178
+	/* begin block 1 */
+		// Start line: 675
+	/* end block 1 */
+	// End Line: 676
+
+/* File: C:\kain2\game\MONSTER\MBMISS.C */
 
 long WALBOSC_AnimCallback
                (_G2Anim_Type *anim,int sectionID,_G2AnimCallbackMsg_Enum message,long messageDataA,
@@ -196,31 +344,33 @@ long WALBOSC_AnimCallback
 // decompiled code
 // original method signature: 
 // void /*$ra*/ WALBOSC_Collide(struct _Instance *instance /*$s2*/, struct GameTracker *gameTracker /*$a1*/)
- // line 259, offset 0x8008d700
+ // line 340, offset 0x8008f1fc
 	/* begin block 1 */
-		// Start line: 260
-		// Start offset: 0x8008D700
+		// Start line: 341
+		// Start offset: 0x8008F1FC
 		// Variables:
 	// 		struct _CollideInfo *collideInfo; // $s0
 	// 		struct _HSphere *s1; // $v0
 	// 		struct _Instance *inst1; // $s3
 
 		/* begin block 1.1 */
-			// Start line: 268
-			// Start offset: 0x8008D73C
+			// Start line: 349
+			// Start offset: 0x8008F238
 			// Variables:
 		// 		struct PhysObWeaponProperties *Prop; // $s1
 		/* end block 1.1 */
-		// End offset: 0x8008D7A4
-		// End Line: 283
+		// End offset: 0x8008F2A0
+		// End Line: 364
 	/* end block 1 */
-	// End offset: 0x8008D7A4
-	// End Line: 284
+	// End offset: 0x8008F2A0
+	// End Line: 365
 
 	/* begin block 2 */
-		// Start line: 541
+		// Start line: 717
 	/* end block 2 */
-	// End Line: 542
+	// End Line: 718
+
+/* File: C:\kain2\game\MONSTER\MBMISS.C */
 
 void WALBOSC_Collide(_Instance *instance,GameTracker *gameTracker)
 
@@ -254,11 +404,13 @@ void WALBOSC_Collide(_Instance *instance,GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ WALBOSC_Message(struct _Instance *instance /*$s0*/, unsigned long message /*$a1*/, unsigned long data /*$a2*/)
- // line 286, offset 0x8008d7c0
+ // line 367, offset 0x8008f2bc
 	/* begin block 1 */
-		// Start line: 597
+		// Start line: 773
 	/* end block 1 */
-	// End Line: 598
+	// End Line: 774
+
+/* File: C:\kain2\game\MONSTER\MBMISS.C */
 
 void WALBOSC_Message(_Instance *instance,ulong message,ulong data)
 

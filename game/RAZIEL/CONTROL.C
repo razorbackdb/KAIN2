@@ -5,11 +5,13 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SetPhysics(struct _Instance *instance /*$s0*/, short gravity /*$a1*/, long x /*$s1*/, long y /*$s2*/, long z /*stack 16*/)
- // line 27, offset 0x80097bf0
+ // line 27, offset 0x80099900
 	/* begin block 1 */
 		// Start line: 54
 	/* end block 1 */
 	// End Line: 55
+
+/* File: C:\kain2\game\RAZIEL\CONTROL.C */
 
 void SetPhysics(_Instance *instance,short gravity,long x,long y,long z)
 
@@ -26,20 +28,22 @@ void SetPhysics(_Instance *instance,short gravity,long x,long y,long z)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ ResetPhysics(struct _Instance *instance /*$s2*/, short gravity /*$s3*/)
- // line 36, offset 0x80097c64
+ // line 36, offset 0x80099974
 	/* begin block 1 */
 		// Start line: 37
-		// Start offset: 0x80097C64
+		// Start offset: 0x80099974
 		// Variables:
 	// 		int i; // $s1
 	/* end block 1 */
-	// End offset: 0x80097CE4
+	// End offset: 0x800999F4
 	// End Line: 45
 
 	/* begin block 2 */
 		// Start line: 75
 	/* end block 2 */
 	// End Line: 76
+
+/* File: C:\kain2\game\RAZIEL\CONTROL.C */
 
 void ResetPhysics(_Instance *instance,short gravity)
 
@@ -69,11 +73,13 @@ void ResetPhysics(_Instance *instance,short gravity)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SetDampingPhysics(struct _Instance *instance /*$a0*/, int damping /*$a1*/)
- // line 55, offset 0x80097d20
+ // line 55, offset 0x80099a30
 	/* begin block 1 */
 		// Start line: 134
 	/* end block 1 */
 	// End Line: 135
+
+/* File: C:\kain2\game\RAZIEL\CONTROL.C */
 
 void SetDampingPhysics(_Instance *instance,int damping)
 
@@ -106,23 +112,23 @@ void SetDampingPhysics(_Instance *instance,int damping)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SetImpulsePhysics(struct _Instance *instance /*$t1*/, struct __Player *player /*$a1*/)
- // line 67, offset 0x80097dc8
+ // line 67, offset 0x80099ad8
 	/* begin block 1 */
 		// Start line: 68
-		// Start offset: 0x80097DC8
+		// Start offset: 0x80099AD8
 
 		/* begin block 1.1 */
 			// Start line: 70
-			// Start offset: 0x80097DD8
+			// Start offset: 0x80099AEC
 			// Variables:
 		// 		int Dot; // $a3
 		// 		int vLength; // $a2
 		/* end block 1.1 */
-		// End offset: 0x80097EEC
-		// End Line: 86
+		// End offset: 0x80099C00
+		// End Line: 87
 	/* end block 1 */
-	// End offset: 0x80097EEC
-	// End Line: 90
+	// End offset: 0x80099C00
+	// End Line: 91
 
 	/* begin block 2 */
 		// Start line: 161
@@ -134,6 +140,8 @@ void SetDampingPhysics(_Instance *instance,int damping)
 	/* end block 3 */
 	// End Line: 164
 
+/* File: C:\kain2\game\RAZIEL\CONTROL.C */
+
 void SetImpulsePhysics(_Instance *instance,__Player *player)
 
 {
@@ -142,7 +150,7 @@ void SetImpulsePhysics(_Instance *instance,__Player *player)
   int iVar3;
   int iVar4;
   
-  if (player->Mode != 0x40000) {
+  if ((player->Mode & 0x40000U) == 0) {
     iVar4 = (int)(player->iVelocity).x;
     iVar2 = (int)(player->iVelocity).y;
     iVar1 = (int)(player->iVelocity).z;
@@ -168,11 +176,13 @@ void SetImpulsePhysics(_Instance *instance,__Player *player)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SetDropPhysics(struct _Instance *instance /*$a0*/, struct __Player *player /*$a1*/)
- // line 109, offset 0x80097ef4
+ // line 110, offset 0x80099c08
 	/* begin block 1 */
-		// Start line: 255
+		// Start line: 257
 	/* end block 1 */
-	// End Line: 256
+	// End Line: 258
+
+/* File: C:\kain2\game\RAZIEL\CONTROL.C */
 
 void SetDropPhysics(_Instance *instance,__Player *player)
 
@@ -186,30 +196,32 @@ void SetDropPhysics(_Instance *instance,__Player *player)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ InitExternalForces(struct __Force *Forces /*$a0*/, int MaxForces /*$a1*/)
- // line 146, offset 0x80097f2c
+ // line 147, offset 0x80099c40
 	/* begin block 1 */
-		// Start line: 148
-		// Start offset: 0x80097F2C
+		// Start line: 149
+		// Start offset: 0x80099C40
 		// Variables:
 	// 		int i; // $a1
 	/* end block 1 */
-	// End offset: 0x80097F60
-	// End Line: 156
+	// End offset: 0x80099C74
+	// End Line: 157
 
 	/* begin block 2 */
-		// Start line: 285
+		// Start line: 287
 	/* end block 2 */
-	// End Line: 286
+	// End Line: 288
 
 	/* begin block 3 */
-		// Start line: 301
+		// Start line: 303
 	/* end block 3 */
-	// End Line: 302
+	// End Line: 304
 
 	/* begin block 4 */
-		// Start line: 303
+		// Start line: 305
 	/* end block 4 */
-	// End Line: 304
+	// End Line: 306
+
+/* File: C:\kain2\game\RAZIEL\CONTROL.C */
 
 void InitExternalForces(__Force *Forces,int MaxForces)
 
@@ -237,16 +249,18 @@ void InitExternalForces(__Force *Forces,int MaxForces)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SetExternalForce(struct __Force *In /*$a0*/, short x /*$a1*/, short y /*$a2*/, short z /*$a3*/, int Space /*stack 16*/, int Friction /*stack 20*/)
- // line 161, offset 0x80097f6c
+ // line 162, offset 0x80099c80
 	/* begin block 1 */
-		// Start line: 334
+		// Start line: 336
 	/* end block 1 */
-	// End Line: 335
+	// End Line: 337
 
 	/* begin block 2 */
-		// Start line: 336
+		// Start line: 338
 	/* end block 2 */
-	// End Line: 337
+	// End Line: 339
+
+/* File: C:\kain2\game\RAZIEL\CONTROL.C */
 
 void SetExternalForce(__Force *In,short x,short y,short z,int Space,int Friction)
 
@@ -264,16 +278,18 @@ void SetExternalForce(__Force *In,short x,short y,short z,int Space,int Friction
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SetExternalTransitionForce(struct __Force *in /*$a0*/, struct _Instance *instance /*$a1*/, int time /*$a2*/, int x /*$a3*/, int y /*stack 16*/, int z /*stack 20*/)
- // line 172, offset 0x80097fac
+ // line 173, offset 0x80099cc0
 	/* begin block 1 */
-		// Start line: 362
+		// Start line: 364
 	/* end block 1 */
-	// End Line: 363
+	// End Line: 365
 
 	/* begin block 2 */
-		// Start line: 364
+		// Start line: 366
 	/* end block 2 */
-	// End Line: 365
+	// End Line: 367
+
+/* File: C:\kain2\game\RAZIEL\CONTROL.C */
 
 void SetExternalTransitionForce(__Force *in,_Instance *instance,int time,int x,int y,int z)
 
@@ -294,39 +310,41 @@ void SetExternalTransitionForce(__Force *in,_Instance *instance,int time,int x,i
 // decompiled code
 // original method signature: 
 // void /*$ra*/ ProcessPhysics(struct __Player *player /*$s3*/, struct __CharacterState *In /*$s2*/, int CurrentSection /*$a2*/, int Mode /*$a3*/)
- // line 187, offset 0x80098014
+ // line 188, offset 0x80099d28
 	/* begin block 1 */
-		// Start line: 188
-		// Start offset: 0x80098014
+		// Start line: 189
+		// Start offset: 0x80099D28
 		// Variables:
 	// 		int time; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 232
-			// Start offset: 0x80098174
+			// Start line: 233
+			// Start offset: 0x80099E88
 		/* end block 1.1 */
-		// End offset: 0x80098188
-		// End Line: 243
+		// End offset: 0x80099E9C
+		// End Line: 244
 
 		/* begin block 1.2 */
-			// Start line: 245
-			// Start offset: 0x80098188
+			// Start line: 246
+			// Start offset: 0x80099E9C
 		/* end block 1.2 */
-		// End offset: 0x800981F0
-		// End Line: 257
+		// End offset: 0x80099F04
+		// End Line: 258
 	/* end block 1 */
-	// End offset: 0x800981F0
-	// End Line: 288
+	// End offset: 0x80099F04
+	// End Line: 289
 
 	/* begin block 2 */
-		// Start line: 393
+		// Start line: 395
 	/* end block 2 */
-	// End Line: 394
+	// End Line: 396
 
 	/* begin block 3 */
-		// Start line: 401
+		// Start line: 403
 	/* end block 3 */
-	// End Line: 402
+	// End Line: 404
+
+/* File: C:\kain2\game\RAZIEL\CONTROL.C */
 
 void ProcessPhysics(__Player *player,__CharacterState *In,int CurrentSection,int Mode)
 
@@ -338,7 +356,7 @@ void ProcessPhysics(__Player *player,__CharacterState *In,int CurrentSection,int
   
   instance = In->CharacterInstance;
   if (instance->matrix != (MATRIX *)0x0) {
-    time = (instance->anim).section[0].speedAdjustment * gameTrackerX.idleTime >> 0xc;
+    time = (uint)((instance->anim).section[0].speedAdjustment * DAT_800d2314) >> 0xc;
     if (Mode == 4) {
       ApplyExternalLocalForces
                 (player,In->CharacterInstance,ExternalForces,4,(_Vector *)&instance->xAccl);
@@ -370,11 +388,9 @@ void ProcessPhysics(__Player *player,__CharacterState *In,int CurrentSection,int
           clamp = 1;
         }
         PhysicsMoveLocalZClamp(instance,segment,time,clamp);
-        PHYSICS_StopIfCloseToTarget
-                  (instance,0,0,(int)*(short *)((int)&(player->padCommands).Queue[8].Data + 2));
+        PHYSICS_StopIfCloseToTarget(instance,0,0,(int)player->swimTargetSpeed);
         if (((instance->xAccl == 0) && (instance->yAccl == 0)) && (instance->zAccl == 0)) {
-          INSTANCE_Post(instance,0x100011,
-                        (int)*(short *)((int)&(player->padCommands).Queue[8].Data + 2));
+          INSTANCE_Post(instance,(int)&DAT_00100011,(int)player->swimTargetSpeed);
         }
       }
     }
@@ -387,29 +403,31 @@ void ProcessPhysics(__Player *player,__CharacterState *In,int CurrentSection,int
 // decompiled code
 // original method signature: 
 // void /*$ra*/ ApplyExternalLocalForces(struct __Player *player /*$a0*/, struct _Instance *instance /*$a1*/, struct __Force *Forces /*$a2*/, int MaxForces /*$a3*/, struct _Vector *Out /*stack 16*/)
- // line 346, offset 0x8009820c
+ // line 347, offset 0x80099f20
 	/* begin block 1 */
-		// Start line: 347
-		// Start offset: 0x8009820C
+		// Start line: 348
+		// Start offset: 0x80099F20
 		// Variables:
 	// 		int i; // $t1
 
 		/* begin block 1.1 */
-			// Start line: 384
-			// Start offset: 0x80098310
+			// Start line: 385
+			// Start offset: 0x8009A024
 			// Variables:
 		// 		int friction; // $a1
 		/* end block 1.1 */
-		// End offset: 0x8009839C
-		// End Line: 393
+		// End offset: 0x8009A0B0
+		// End Line: 394
 	/* end block 1 */
-	// End offset: 0x800983AC
-	// End Line: 396
+	// End offset: 0x8009A0C0
+	// End Line: 397
 
 	/* begin block 2 */
-		// Start line: 722
+		// Start line: 724
 	/* end block 2 */
-	// End Line: 723
+	// End Line: 725
+
+/* File: C:\kain2\game\RAZIEL\CONTROL.C */
 
 void ApplyExternalLocalForces
                (__Player *player,_Instance *instance,__Force *Forces,int MaxForces,_Vector *Out)
@@ -430,7 +448,7 @@ void ApplyExternalLocalForces
         if (Forces->Type == 0) {
           Out->x = Out->x + (Forces->LinearForce).x;
           iVar1 = Out->y - (Forces->LinearForce).y;
-LAB_80098298:
+LAB_80099fac:
           Out->y = iVar1;
           Out->z = Out->z + (Forces->LinearForce).z;
         }
@@ -438,7 +456,7 @@ LAB_80098298:
           if (Forces->Type == 1) {
             Out->x = Out->x + (Forces->LinearForce).x;
             iVar1 = Out->y + (Forces->LinearForce).y;
-            goto LAB_80098298;
+            goto LAB_80099fac;
           }
         }
         if (Forces->Type == 2) {

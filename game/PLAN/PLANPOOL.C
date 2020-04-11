@@ -5,15 +5,15 @@
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANPOOL_NumNodesInPlan(struct PlanningNode *goalNode /*$a0*/, struct PlanningNode *planningPool /*$a1*/)
- // line 122, offset 0x80096be4
+ // line 122, offset 0x800988f4
 	/* begin block 1 */
 		// Start line: 124
-		// Start offset: 0x80096BE4
+		// Start offset: 0x800988F4
 		// Variables:
 	// 		struct PlanningNode *currentNode; // $a0
 	// 		int i; // $a2
 	/* end block 1 */
-	// End offset: 0x80096C28
+	// End offset: 0x80098938
 	// End Line: 132
 
 	/* begin block 2 */
@@ -30,6 +30,8 @@
 		// Start line: 248
 	/* end block 4 */
 	// End Line: 249
+
+/* File: C:\kain2\game\PLAN\PLANPOOL.C */
 
 int PLANPOOL_NumNodesInPlan(PlanningNode *goalNode,PlanningNode *planningPool)
 
@@ -52,14 +54,14 @@ int PLANPOOL_NumNodesInPlan(PlanningNode *goalNode,PlanningNode *planningPool)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANPOOL_CountBitsSetInLong(long mylong /*$a0*/)
- // line 137, offset 0x80096c30
+ // line 137, offset 0x80098940
 	/* begin block 1 */
 		// Start line: 139
-		// Start offset: 0x80096C30
+		// Start offset: 0x80098940
 		// Variables:
 	// 		int numBitsSet; // $v1
 	/* end block 1 */
-	// End offset: 0x80096C48
+	// End offset: 0x80098958
 	// End Line: 146
 
 	/* begin block 2 */
@@ -76,6 +78,8 @@ int PLANPOOL_NumNodesInPlan(PlanningNode *goalNode,PlanningNode *planningPool)
 		// Start line: 279
 	/* end block 4 */
 	// End Line: 280
+
+/* File: C:\kain2\game\PLAN\PLANPOOL.C */
 
 int PLANPOOL_CountBitsSetInLong(long mylong)
 
@@ -97,11 +101,13 @@ int PLANPOOL_CountBitsSetInLong(long mylong)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANPOOL_NumConnectionsExaminedForNode(struct PlanningNode *node /*$a0*/)
- // line 150, offset 0x80096c50
+ // line 150, offset 0x80098960
 	/* begin block 1 */
 		// Start line: 302
 	/* end block 1 */
 	// End Line: 303
+
+/* File: C:\kain2\game\PLAN\PLANPOOL.C */
 
 int PLANPOOL_NumConnectionsExaminedForNode(PlanningNode *node)
 
@@ -117,11 +123,13 @@ int PLANPOOL_NumConnectionsExaminedForNode(PlanningNode *node)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANPOOL_NumConnectionsForNode(struct PlanningNode *node /*$a0*/)
- // line 158, offset 0x80096c74
+ // line 158, offset 0x80098984
 	/* begin block 1 */
 		// Start line: 318
 	/* end block 1 */
 	// End Line: 319
+
+/* File: C:\kain2\game\PLAN\PLANPOOL.C */
 
 int PLANPOOL_NumConnectionsForNode(PlanningNode *node)
 
@@ -137,14 +145,14 @@ int PLANPOOL_NumConnectionsForNode(PlanningNode *node)
 // decompiled code
 // original method signature: 
 // struct PlanningNode * /*$ra*/ PLANPOOL_GetFirstNodeOfSource(struct PlanningNode *planningPool /*$a0*/, char nodeSource /*$a1*/)
- // line 177, offset 0x80096c98
+ // line 177, offset 0x800989a8
 	/* begin block 1 */
 		// Start line: 178
-		// Start offset: 0x80096C98
+		// Start offset: 0x800989A8
 		// Variables:
 	// 		int i; // $v1
 	/* end block 1 */
-	// End offset: 0x80096CE0
+	// End offset: 0x800989F0
 	// End Line: 186
 
 	/* begin block 2 */
@@ -157,20 +165,22 @@ int PLANPOOL_NumConnectionsForNode(PlanningNode *node)
 	/* end block 3 */
 	// End Line: 343
 
+/* File: C:\kain2\game\PLAN\PLANPOOL.C */
+
 PlanningNode * PLANPOOL_GetFirstNodeOfSource(PlanningNode *planningPool,char nodeSource)
 
 {
   int iVar1;
   
   iVar1 = 0;
-  if (*(byte *)(poolManagementData + 1) != 0) {
+  if (poolManagementData->numNodesInPool != 0) {
     do {
       iVar1 = iVar1 + 1;
       if (((uint)planningPool->nodeType & 7) == (uint)(byte)nodeSource) {
         return planningPool;
       }
       planningPool = planningPool + 1;
-    } while (iVar1 < (int)(uint)*(byte *)(poolManagementData + 1));
+    } while (iVar1 < (int)(uint)poolManagementData->numNodesInPool);
   }
   return (PlanningNode *)0x0;
 }
@@ -180,15 +190,15 @@ PlanningNode * PLANPOOL_GetFirstNodeOfSource(PlanningNode *planningPool,char nod
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANPOOL_NumberOfNodesOfType(struct PlanningNode *planningPool /*$a0*/, char nodeType /*$a1*/)
- // line 189, offset 0x80096ce8
+ // line 189, offset 0x800989f8
 	/* begin block 1 */
 		// Start line: 190
-		// Start offset: 0x80096CE8
+		// Start offset: 0x800989F8
 		// Variables:
 	// 		int i; // $a2
 	// 		int numNodesOfType; // $v1
 	/* end block 1 */
-	// End offset: 0x80096D2C
+	// End offset: 0x80098A3C
 	// End Line: 197
 
 	/* begin block 2 */
@@ -201,6 +211,8 @@ PlanningNode * PLANPOOL_GetFirstNodeOfSource(PlanningNode *planningPool,char nod
 	/* end block 3 */
 	// End Line: 368
 
+/* File: C:\kain2\game\PLAN\PLANPOOL.C */
+
 int PLANPOOL_NumberOfNodesOfType(PlanningNode *planningPool,char nodeType)
 
 {
@@ -209,14 +221,14 @@ int PLANPOOL_NumberOfNodesOfType(PlanningNode *planningPool,char nodeType)
   
   iVar2 = 0;
   iVar1 = 0;
-  if (*(byte *)(poolManagementData + 1) != 0) {
+  if (poolManagementData->numNodesInPool != 0) {
     do {
       if ((uint)planningPool->nodeType == (uint)(byte)nodeType) {
         iVar1 = iVar1 + 1;
       }
       iVar2 = iVar2 + 1;
       planningPool = planningPool + 1;
-    } while (iVar2 < (int)(uint)*(byte *)(poolManagementData + 1));
+    } while (iVar2 < (int)(uint)poolManagementData->numNodesInPool);
   }
   return iVar1;
 }
@@ -226,15 +238,15 @@ int PLANPOOL_NumberOfNodesOfType(PlanningNode *planningPool,char nodeType)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANPOOL_NumberOfNodesOfSource(struct PlanningNode *planningPool /*$a0*/, char nodeSource /*$a1*/)
- // line 201, offset 0x80096d34
+ // line 201, offset 0x80098a44
 	/* begin block 1 */
 		// Start line: 202
-		// Start offset: 0x80096D34
+		// Start offset: 0x80098A44
 		// Variables:
 	// 		int i; // $a2
 	// 		int numNodesOfSource; // $v1
 	/* end block 1 */
-	// End offset: 0x80096D7C
+	// End offset: 0x80098A8C
 	// End Line: 209
 
 	/* begin block 2 */
@@ -247,6 +259,8 @@ int PLANPOOL_NumberOfNodesOfType(PlanningNode *planningPool,char nodeType)
 	/* end block 3 */
 	// End Line: 393
 
+/* File: C:\kain2\game\PLAN\PLANPOOL.C */
+
 int PLANPOOL_NumberOfNodesOfSource(PlanningNode *planningPool,char nodeSource)
 
 {
@@ -255,14 +269,14 @@ int PLANPOOL_NumberOfNodesOfSource(PlanningNode *planningPool,char nodeSource)
   
   iVar2 = 0;
   iVar1 = 0;
-  if (*(byte *)(poolManagementData + 1) != 0) {
+  if (poolManagementData->numNodesInPool != 0) {
     do {
       if (((uint)planningPool->nodeType & 7) == (uint)(byte)nodeSource) {
         iVar1 = iVar1 + 1;
       }
       iVar2 = iVar2 + 1;
       planningPool = planningPool + 1;
-    } while (iVar2 < (int)(uint)*(byte *)(poolManagementData + 1));
+    } while (iVar2 < (int)(uint)poolManagementData->numNodesInPool);
   }
   return iVar1;
 }
@@ -272,14 +286,14 @@ int PLANPOOL_NumberOfNodesOfSource(PlanningNode *planningPool,char nodeSource)
 // decompiled code
 // original method signature: 
 // struct PlanningNode * /*$ra*/ PLANPOOL_GetNodeWithID(struct PlanningNode *planningPool /*$a0*/, short type /*$a1*/, short id /*$a2*/)
- // line 213, offset 0x80096d84
+ // line 213, offset 0x80098a94
 	/* begin block 1 */
 		// Start line: 215
-		// Start offset: 0x80096D84
+		// Start offset: 0x80098A94
 		// Variables:
 	// 		int i; // $v1
 	/* end block 1 */
-	// End offset: 0x80096DE8
+	// End offset: 0x80098AF8
 	// End Line: 223
 
 	/* begin block 2 */
@@ -297,20 +311,22 @@ int PLANPOOL_NumberOfNodesOfSource(PlanningNode *planningPool,char nodeSource)
 	/* end block 4 */
 	// End Line: 418
 
+/* File: C:\kain2\game\PLAN\PLANPOOL.C */
+
 PlanningNode * PLANPOOL_GetNodeWithID(PlanningNode *planningPool,short type,short id)
 
 {
   int iVar1;
   
   iVar1 = 0;
-  if (*(byte *)(poolManagementData + 1) != 0) {
+  if (poolManagementData->numNodesInPool != 0) {
     do {
       if (((uint)planningPool->nodeType == (int)type) && ((uint)planningPool->id == (int)id)) {
         return planningPool;
       }
       iVar1 = iVar1 + 1;
       planningPool = planningPool + 1;
-    } while (iVar1 < (int)(uint)*(byte *)(poolManagementData + 1));
+    } while (iVar1 < (int)(uint)poolManagementData->numNodesInPool);
   }
   return (PlanningNode *)0x0;
 }
@@ -320,17 +336,17 @@ PlanningNode * PLANPOOL_GetNodeWithID(PlanningNode *planningPool,short type,shor
 // decompiled code
 // original method signature: 
 // struct PlanningNode * /*$ra*/ PLANPOOL_GetNodeByPosition(struct _Position *currentPos /*$s3*/, struct PlanningNode *planningPool /*$a1*/)
- // line 229, offset 0x80096df0
+ // line 229, offset 0x80098b00
 	/* begin block 1 */
 		// Start line: 230
-		// Start offset: 0x80096DF0
+		// Start offset: 0x80098B00
 		// Variables:
 	// 		int i; // $s1
 	// 		unsigned long zDiff; // $v0
 	// 		unsigned long minZDiff; // $s4
 	// 		struct PlanningNode *returnNode; // $s2
 	/* end block 1 */
-	// End offset: 0x80096EA0
+	// End offset: 0x80098BB0
 	// End Line: 246
 
 	/* begin block 2 */
@@ -343,6 +359,8 @@ PlanningNode * PLANPOOL_GetNodeWithID(PlanningNode *planningPool,short type,shor
 	/* end block 3 */
 	// End Line: 454
 
+/* File: C:\kain2\game\PLAN\PLANPOOL.C */
+
 PlanningNode * PLANPOOL_GetNodeByPosition(_Position *currentPos,PlanningNode *planningPool)
 
 {
@@ -353,7 +371,7 @@ PlanningNode * PLANPOOL_GetNodeByPosition(_Position *currentPos,PlanningNode *pl
   
   iVar3 = 0;
   pPVar4 = (PlanningNode *)0x0;
-  if (*(char *)(poolManagementData + 1) != '\0') {
+  if (poolManagementData->numNodesInPool != '\0') {
     do {
       lVar1 = MATH3D_LengthXY((int)currentPos->x - (int)(planningPool->pos).x,
                               (int)currentPos->y - (int)(planningPool->pos).y);
@@ -368,7 +386,7 @@ PlanningNode * PLANPOOL_GetNodeByPosition(_Position *currentPos,PlanningNode *pl
       }
       iVar3 = iVar3 + 1;
       planningPool = planningPool + 1;
-    } while (iVar3 < (int)(uint)*(byte *)(poolManagementData + 1));
+    } while (iVar3 < (int)(uint)poolManagementData->numNodesInPool);
   }
   return pPVar4;
 }
@@ -378,23 +396,25 @@ PlanningNode * PLANPOOL_GetNodeByPosition(_Position *currentPos,PlanningNode *pl
 // decompiled code
 // original method signature: 
 // struct PlanningNode * /*$ra*/ PLANPOOL_GetClosestNode(struct _Position *pos /*$s1*/, struct PlanningNode *planningPool /*$a1*/, char distanceType /*$s5*/)
- // line 250, offset 0x80096ec4
+ // line 250, offset 0x80098bd4
 	/* begin block 1 */
 		// Start line: 251
-		// Start offset: 0x80096EC4
+		// Start offset: 0x80098BD4
 		// Variables:
 	// 		int i; // $s2
 	// 		long dist; // $v1
 	// 		long minDist; // $s4
 	// 		struct PlanningNode *closestNode; // $s3
 	/* end block 1 */
-	// End offset: 0x80096F9C
+	// End offset: 0x80098CAC
 	// End Line: 269
 
 	/* begin block 2 */
 		// Start line: 511
 	/* end block 2 */
 	// End Line: 512
+
+/* File: C:\kain2\game\PLAN\PLANPOOL.C */
 
 PlanningNode * PLANPOOL_GetClosestNode(_Position *pos,PlanningNode *planningPool,char distanceType)
 
@@ -407,7 +427,7 @@ PlanningNode * PLANPOOL_GetClosestNode(_Position *pos,PlanningNode *planningPool
   iVar4 = 0x7fffffff;
   iVar2 = 0;
   pPVar3 = (PlanningNode *)0x0;
-  if (*(char *)(poolManagementData + 1) != '\0') {
+  if (poolManagementData->numNodesInPool != '\0') {
     do {
       if (distanceType == '\0') {
         lVar1 = MATH3D_LengthXY((int)pos->x - (int)(planningPool->pos).x,
@@ -424,7 +444,7 @@ PlanningNode * PLANPOOL_GetClosestNode(_Position *pos,PlanningNode *planningPool
       }
       iVar2 = iVar2 + 1;
       planningPool = planningPool + 1;
-    } while (iVar2 < (int)(uint)*(byte *)(poolManagementData + 1));
+    } while (iVar2 < (int)(uint)poolManagementData->numNodesInPool);
   }
   return pPVar3;
 }
@@ -434,10 +454,10 @@ PlanningNode * PLANPOOL_GetClosestNode(_Position *pos,PlanningNode *planningPool
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANPOOL_AppropriatePair(struct PlanningNode *node1 /*$t1*/, struct PlanningNode *node2 /*$a1*/)
- // line 276, offset 0x80096fc4
+ // line 276, offset 0x80098cd4
 	/* begin block 1 */
 		// Start line: 277
-		// Start offset: 0x80096FC4
+		// Start offset: 0x80098CD4
 		// Variables:
 	// 		struct PlanningNode *temp; // $v0
 	// 		int res; // $s0
@@ -450,13 +470,15 @@ PlanningNode * PLANPOOL_GetClosestNode(_Position *pos,PlanningNode *planningPool
 	// 		short source1; // $t2
 	// 		short source2; // $t3
 	/* end block 1 */
-	// End offset: 0x80097124
+	// End offset: 0x80098E34
 	// End Line: 344
 
 	/* begin block 2 */
 		// Start line: 592
 	/* end block 2 */
 	// End Line: 593
+
+/* File: C:\kain2\game\PLAN\PLANPOOL.C */
 
 int PLANPOOL_AppropriatePair(PlanningNode *node1,PlanningNode *node2)
 
@@ -535,20 +557,22 @@ int PLANPOOL_AppropriatePair(PlanningNode *node1,PlanningNode *node2)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANPOOL_AreTwoNodesConnected(struct PlanningNode *node1 /*$a3*/, struct PlanningNode *node2 /*$a1*/, struct PlanningNode *planningPool /*$a2*/)
- // line 349, offset 0x80097138
+ // line 349, offset 0x80098e48
 	/* begin block 1 */
 		// Start line: 350
-		// Start offset: 0x80097138
+		// Start offset: 0x80098E48
 		// Variables:
 	// 		long node2Mask; // $a0
 	/* end block 1 */
-	// End offset: 0x800971A0
+	// End offset: 0x80098EB0
 	// End Line: 360
 
 	/* begin block 2 */
 		// Start line: 738
 	/* end block 2 */
 	// End Line: 739
+
+/* File: C:\kain2\game\PLAN\PLANPOOL.C */
 
 int PLANPOOL_AreTwoNodesConnected
               (PlanningNode *node1,PlanningNode *node2,PlanningNode *planningPool)
@@ -570,15 +594,15 @@ int PLANPOOL_AreTwoNodesConnected
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLANPOOL_MarkTwoNodesAsConnected(struct PlanningNode *node1 /*$s2*/, struct PlanningNode *node2 /*$s3*/, struct PlanningNode *planningPool /*$a2*/)
- // line 364, offset 0x800971a8
+ // line 364, offset 0x80098eb8
 	/* begin block 1 */
 		// Start line: 365
-		// Start offset: 0x800971A8
+		// Start offset: 0x80098EB8
 		// Variables:
 	// 		int node1Index; // $s1
 	// 		int node2Index; // $s0
 	/* end block 1 */
-	// End offset: 0x80097258
+	// End offset: 0x80098F68
 	// End Line: 376
 
 	/* begin block 2 */
@@ -586,30 +610,32 @@ int PLANPOOL_AreTwoNodesConnected
 	/* end block 2 */
 	// End Line: 771
 
+/* File: C:\kain2\game\PLAN\PLANPOOL.C */
+
 void PLANPOOL_MarkTwoNodesAsConnected
                (PlanningNode *node1,PlanningNode *node2,PlanningNode *planningPool)
 
 {
-  int iVar1;
+  PoolManagementData *pPVar1;
   long lVar2;
   uint uVar3;
-  undefined2 uVar4;
+  short sVar4;
   uint uVar5;
   uint uVar6;
   
   uVar6 = (int)((int)node1 - (int)planningPool) * -0x49249249 >> 2;
   uVar5 = (int)((int)node2 - (int)planningPool) * -0x49249249 >> 2;
   lVar2 = MATH3D_DistanceBetweenPositions((_Position *)node1,(_Position *)node2);
-  iVar1 = poolManagementData;
+  pPVar1 = poolManagementData;
   if (lVar2 < 0) {
     lVar2 = 0;
   }
-  uVar4 = (undefined2)lVar2;
+  sVar4 = (short)lVar2;
   if (0x10000 < lVar2) {
-    uVar4 = 0;
+    sVar4 = 0;
   }
-  *(undefined2 *)(uVar5 * 2 + uVar6 * 0x40 + *(int *)(poolManagementData + 0x10)) = uVar4;
-  *(undefined2 *)(uVar6 * 2 + uVar5 * 0x40 + *(int *)(iVar1 + 0x10)) = uVar4;
+  (&poolManagementData->expansionNode2[uVar6 * 2].pos.x)[uVar5] = sVar4;
+  (&pPVar1->expansionNode2[uVar5 * 2].pos.x)[uVar6] = sVar4;
   uVar3 = 1 << (uVar5 & 0x1f);
   node1->connectionStatus = node1->connectionStatus | uVar3;
   uVar5 = 1 << (uVar6 & 0x1f);
@@ -624,12 +650,12 @@ void PLANPOOL_MarkTwoNodesAsConnected
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLANPOOL_MarkTwoNodesAsNotConnected(struct PlanningNode *node1 /*$a0*/, struct PlanningNode *node2 /*$a1*/, struct PlanningNode *planningPool /*$a2*/)
- // line 392, offset 0x800972ec
+ // line 392, offset 0x80098ffc
 	/* begin block 1 */
 		// Start line: 394
-		// Start offset: 0x800972EC
+		// Start offset: 0x80098FFC
 	/* end block 1 */
-	// End offset: 0x800972EC
+	// End offset: 0x80098FFC
 	// End Line: 395
 
 	/* begin block 2 */
@@ -646,6 +672,8 @@ void PLANPOOL_MarkTwoNodesAsConnected
 		// Start line: 842
 	/* end block 4 */
 	// End Line: 843
+
+/* File: C:\kain2\game\PLAN\PLANPOOL.C */
 
 void PLANPOOL_MarkTwoNodesAsNotConnected
                (PlanningNode *node1,PlanningNode *node2,PlanningNode *planningPool)
@@ -668,10 +696,10 @@ void PLANPOOL_MarkTwoNodesAsNotConnected
 // decompiled code
 // original method signature: 
 // struct PlanningNode * /*$ra*/ PLANPOOL_GetClosestUnexploredValidNeighbor(struct PlanningNode *startNode /*$s1*/, struct PlanningNode *planningPool /*$s6*/)
- // line 414, offset 0x8009739c
+ // line 414, offset 0x800990ac
 	/* begin block 1 */
 		// Start line: 415
-		// Start offset: 0x8009739C
+		// Start offset: 0x800990AC
 		// Variables:
 	// 		int i; // $s3
 	// 		unsigned long connectionStatus; // $s2
@@ -679,13 +707,15 @@ void PLANPOOL_MarkTwoNodesAsNotConnected
 	// 		unsigned long minDist; // $s5
 	// 		struct PlanningNode *returnNode; // $s4
 	/* end block 1 */
-	// End offset: 0x80097484
+	// End offset: 0x80099194
 	// End Line: 443
 
 	/* begin block 2 */
 		// Start line: 894
 	/* end block 2 */
 	// End Line: 895
+
+/* File: C:\kain2\game\PLAN\PLANPOOL.C */
 
 PlanningNode *
 PLANPOOL_GetClosestUnexploredValidNeighbor(PlanningNode *startNode,PlanningNode *planningPool)
@@ -705,7 +735,7 @@ PLANPOOL_GetClosestUnexploredValidNeighbor(PlanningNode *startNode,PlanningNode 
     uVar3 = startNode->connectionStatus;
     iVar4 = 0;
     node2 = planningPool;
-    if (*(char *)(poolManagementData + 1) != '\0') {
+    if (poolManagementData->numNodesInPool != '\0') {
       do {
         if ((uVar3 & 1) == 0) {
           iVar1 = PLANPOOL_AppropriatePair(startNode,node2);
@@ -725,7 +755,7 @@ PLANPOOL_GetClosestUnexploredValidNeighbor(PlanningNode *startNode,PlanningNode 
         uVar3 = uVar3 >> 1;
         iVar4 = iVar4 + 1;
         node2 = node2 + 1;
-      } while (iVar4 < (int)(uint)*(byte *)(poolManagementData + 1));
+      } while (iVar4 < (int)(uint)poolManagementData->numNodesInPool);
     }
   }
   return pPVar5;
@@ -736,15 +766,15 @@ PLANPOOL_GetClosestUnexploredValidNeighbor(PlanningNode *startNode,PlanningNode 
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLANPOOL_ChangeNodePosition(struct _Position *newPos /*$t0*/, struct PlanningNode *nodeToChange /*$a1*/, struct PlanningNode *planningPool /*$a2*/)
- // line 450, offset 0x800974ac
+ // line 450, offset 0x800991bc
 	/* begin block 1 */
 		// Start line: 451
-		// Start offset: 0x800974AC
+		// Start offset: 0x800991BC
 		// Variables:
 	// 		int i; // $a0
 	// 		unsigned char nodeToChangeMask; // $v1
 	/* end block 1 */
-	// End offset: 0x8009755C
+	// End offset: 0x8009926C
 	// End Line: 468
 
 	/* begin block 2 */
@@ -752,16 +782,18 @@ PLANPOOL_GetClosestUnexploredValidNeighbor(PlanningNode *startNode,PlanningNode 
 	/* end block 2 */
 	// End Line: 989
 
+/* File: C:\kain2\game\PLAN\PLANPOOL.C */
+
 void PLANPOOL_ChangeNodePosition
                (_Position *newPos,PlanningNode *nodeToChange,PlanningNode *planningPool)
 
 {
   short sVar1;
-  int iVar2;
+  PoolManagementData *pPVar2;
   int iVar3;
   uint uVar4;
   
-  iVar2 = poolManagementData;
+  pPVar2 = poolManagementData;
   if (nodeToChange != (PlanningNode *)0x0) {
     sVar1 = newPos->z;
     *(undefined4 *)&nodeToChange->pos = *(undefined4 *)newPos;
@@ -769,7 +801,7 @@ void PLANPOOL_ChangeNodePosition
     nodeToChange->connectionStatus = 0;
     nodeToChange->connections = 0;
     iVar3 = 0;
-    if (*(char *)(iVar2 + 1) != '\0') {
+    if (pPVar2->numNodesInPool != '\0') {
       uVar4 = ~(1 << ((int)((int)nodeToChange - (int)planningPool) * -0x49249249 >> 2 & 0x1fU) &
                0xffU);
       do {
@@ -777,7 +809,7 @@ void PLANPOOL_ChangeNodePosition
         planningPool->connectionStatus = planningPool->connectionStatus & uVar4;
         planningPool->connections = planningPool->connections & uVar4;
         planningPool = planningPool + 1;
-      } while (iVar3 < (int)(uint)*(byte *)(iVar2 + 1));
+      } while (iVar3 < (int)(uint)pPVar2->numNodesInPool);
     }
   }
   return;
@@ -788,32 +820,34 @@ void PLANPOOL_ChangeNodePosition
 // decompiled code
 // original method signature: 
 // struct PlanningNode * /*$ra*/ PLANPOOL_AddNodeToPool(struct _Position *pos /*$t2*/, struct PlanningNode *planningPool /*$t3*/, short nodeType /*$a2*/, short nodeID /*$a3*/, long streamUnitID /*stack 16*/)
- // line 471, offset 0x80097564
+ // line 471, offset 0x80099274
 	/* begin block 1 */
 		// Start line: 472
-		// Start offset: 0x80097564
+		// Start offset: 0x80099274
 		// Variables:
 	// 		struct PlanningNode *nextAvailableNode; // $t0
 	// 		int i; // $a1
 
 		/* begin block 1.1 */
 			// Start line: 478
-			// Start offset: 0x80097584
+			// Start offset: 0x80099294
 			// Variables:
 		// 		short _x1; // $v1
 		// 		short _y1; // $a0
 		// 		short _z1; // $a1
 		/* end block 1.1 */
-		// End offset: 0x80097584
+		// End offset: 0x80099294
 		// End Line: 478
 	/* end block 1 */
-	// End offset: 0x80097650
+	// End offset: 0x80099360
 	// End Line: 498
 
 	/* begin block 2 */
 		// Start line: 1040
 	/* end block 2 */
 	// End Line: 1041
+
+/* File: C:\kain2\game\PLAN\PLANPOOL.C */
 
 PlanningNode *
 PLANPOOL_AddNodeToPool
@@ -823,40 +857,41 @@ PLANPOOL_AddNodeToPool
   byte bVar1;
   short sVar2;
   short sVar3;
-  int iVar4;
+  PoolManagementData *pPVar4;
   int iVar5;
   int iVar6;
   PlanningNode *pPVar7;
   
-  iVar4 = poolManagementData;
+  pPVar4 = poolManagementData;
   pPVar7 = (PlanningNode *)0x0;
-  if (*(byte *)(poolManagementData + 1) < 0x20) {
+  if (poolManagementData->numNodesInPool < 0x20) {
     sVar2 = pos->z;
     sVar3 = pos->x;
-    pPVar7 = planningPool + *(byte *)(poolManagementData + 1);
+    pPVar7 = planningPool + poolManagementData->numNodesInPool;
     (pPVar7->pos).y = pos->y;
     (pPVar7->pos).z = sVar2;
     (pPVar7->pos).x = sVar3;
-    bVar1 = *(byte *)(iVar4 + 1);
+    bVar1 = pPVar4->numNodesInPool;
     pPVar7->connections = 0;
     pPVar7->flags = 0;
     pPVar7->nodeType = nodeType;
     pPVar7->id = nodeID;
     pPVar7->streamUnitID = streamUnitID;
     pPVar7->connectionStatus = 1 << ((uint)bVar1 & 0x1f);
-    *(char *)(iVar4 + 1) = *(char *)(iVar4 + 1) + '\x01';
-    iVar4 = poolManagementData;
+    pPVar4->numNodesInPool = pPVar4->numNodesInPool + '\x01';
+    pPVar4 = poolManagementData;
     iVar6 = 0;
-    if (*(char *)(poolManagementData + 1) != '\0') {
+    if (poolManagementData->numNodesInPool != '\0') {
       iVar5 = 0;
       do {
-        *(undefined2 *)(iVar5 + (uint)*(byte *)(iVar4 + 1) * 0x40 + *(int *)(iVar4 + 0x10) + -0x40)
-             = 0;
-        *(undefined2 *)((uint)*(byte *)(iVar4 + 1) * 2 + iVar6 * 0x40 + *(int *)(iVar4 + 0x10) + -2)
-             = 0;
+        *(undefined2 *)
+         ((int)&pPVar4->expansionNode2[(uint)pPVar4->numNodesInPool * 2 + -2].pos.x + iVar5) = 0;
+        *(undefined2 *)
+         ((int)&pPVar4->expansionNode2[iVar6 * 2 + -1].streamUnitID +
+         (uint)pPVar4->numNodesInPool * 2 + 2) = 0;
         iVar6 = iVar6 + 1;
         iVar5 = iVar6 * 2;
-      } while (iVar6 < (int)(uint)*(byte *)(iVar4 + 1));
+      } while (iVar6 < (int)(uint)pPVar4->numNodesInPool);
     }
   }
   return pPVar7;
@@ -867,10 +902,10 @@ PLANPOOL_AddNodeToPool
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLANPOOL_DeleteNodeFromPool(struct PlanningNode *nodeToDelete /*$a0*/, struct PlanningNode *planningPool /*$a1*/)
- // line 509, offset 0x80097658
+ // line 509, offset 0x80099368
 	/* begin block 1 */
 		// Start line: 511
-		// Start offset: 0x80097658
+		// Start offset: 0x80099368
 		// Variables:
 	// 		int indexOfNodeToDelete; // $t3
 	// 		int lastNodeIndex; // $t2
@@ -879,7 +914,7 @@ PLANPOOL_AddNodeToPool
 	// 		int i; // $a2
 	// 		struct PlanningNode *lastNode; // $v0
 	/* end block 1 */
-	// End offset: 0x8009781C
+	// End offset: 0x8009952C
 	// End Line: 555
 
 	/* begin block 2 */
@@ -897,76 +932,77 @@ PLANPOOL_AddNodeToPool
 	/* end block 4 */
 	// End Line: 1139
 
+/* File: C:\kain2\game\PLAN\PLANPOOL.C */
+
 void PLANPOOL_DeleteNodeFromPool(PlanningNode *nodeToDelete,PlanningNode *planningPool)
 
 {
-  PlanningNode *pPVar1;
-  uint uVar2;
-  int iVar3;
+  PoolManagementData *pPVar1;
+  PlanningNode *pPVar2;
+  uint uVar3;
   uint uVar4;
   uint uVar5;
   int iVar6;
-  int iVar7;
+  uint uVar7;
   uint uVar8;
   uint uVar9;
-  uint uVar10;
-  undefined4 uVar11;
-  ulong uVar12;
-  long lVar13;
-  ulong uVar14;
+  undefined4 uVar10;
+  ulong uVar11;
+  long lVar12;
+  ulong uVar13;
   
   iVar6 = 0;
   if (nodeToDelete != (PlanningNode *)0x0) {
-    uVar9 = (uint)*(byte *)(poolManagementData + 1) - 1;
-    pPVar1 = planningPool + uVar9;
-    uVar11 = *(undefined4 *)&(pPVar1->pos).z;
-    uVar12 = pPVar1->connectionStatus;
-    uVar14 = pPVar1->connections;
-    *(undefined4 *)&nodeToDelete->pos = *(undefined4 *)&pPVar1->pos;
-    *(undefined4 *)&(nodeToDelete->pos).z = uVar11;
-    nodeToDelete->connectionStatus = uVar12;
-    nodeToDelete->connections = uVar14;
-    uVar11 = *(undefined4 *)&pPVar1->nodeType;
-    lVar13 = pPVar1->streamUnitID;
-    *(undefined4 *)&nodeToDelete->cost = *(undefined4 *)&pPVar1->cost;
-    *(undefined4 *)&nodeToDelete->nodeType = uVar11;
-    nodeToDelete->streamUnitID = lVar13;
-    iVar7 = poolManagementData;
-    uVar10 = (int)((int)nodeToDelete - (int)planningPool) * -0x49249249 >> 2;
-    uVar8 = 1 << (uVar10 & 0x1f);
-    uVar4 = 1 << (uVar9 & 0x1f);
-    if (0 < (int)((uint)*(byte *)(poolManagementData + 1) - 1)) {
+    uVar8 = (uint)poolManagementData->numNodesInPool - 1;
+    pPVar2 = planningPool + uVar8;
+    uVar10 = *(undefined4 *)&(pPVar2->pos).z;
+    uVar11 = pPVar2->connectionStatus;
+    uVar13 = pPVar2->connections;
+    *(undefined4 *)&nodeToDelete->pos = *(undefined4 *)&pPVar2->pos;
+    *(undefined4 *)&(nodeToDelete->pos).z = uVar10;
+    nodeToDelete->connectionStatus = uVar11;
+    nodeToDelete->connections = uVar13;
+    uVar10 = *(undefined4 *)&pPVar2->nodeType;
+    lVar12 = pPVar2->streamUnitID;
+    *(undefined4 *)&nodeToDelete->cost = *(undefined4 *)&pPVar2->cost;
+    *(undefined4 *)&nodeToDelete->nodeType = uVar10;
+    nodeToDelete->streamUnitID = lVar12;
+    pPVar1 = poolManagementData;
+    uVar9 = (int)((int)nodeToDelete - (int)planningPool) * -0x49249249 >> 2;
+    uVar7 = 1 << (uVar9 & 0x1f);
+    uVar4 = 1 << (uVar8 & 0x1f);
+    if (0 < (int)((uint)poolManagementData->numNodesInPool - 1)) {
       do {
         uVar5 = planningPool->connectionStatus;
-        uVar2 = uVar5 | uVar8;
+        uVar3 = uVar5 | uVar7;
         if ((uVar5 & uVar4) == 0) {
-          uVar2 = uVar5 & ~uVar8;
+          uVar3 = uVar5 & ~uVar7;
         }
-        planningPool->connectionStatus = uVar2;
+        planningPool->connectionStatus = uVar3;
         uVar5 = planningPool->connections;
         planningPool->connectionStatus = planningPool->connectionStatus & ~uVar4;
-        uVar2 = uVar5 | uVar8;
+        uVar3 = uVar5 | uVar7;
         if ((uVar5 & uVar4) == 0) {
-          uVar2 = uVar5 & ~uVar8;
+          uVar3 = uVar5 & ~uVar7;
         }
-        planningPool->connections = uVar2;
+        planningPool->connections = uVar3;
         iVar6 = iVar6 + 1;
         planningPool->connections = planningPool->connections & ~uVar4;
         planningPool = planningPool + 1;
-      } while (iVar6 < (int)((uint)*(byte *)(iVar7 + 1) - 1));
+      } while (iVar6 < (int)((uint)pPVar1->numNodesInPool - 1));
     }
-    iVar6 = poolManagementData;
-    iVar7 = 0;
-    if (0 < (int)((uint)*(byte *)(poolManagementData + 1) - 1)) {
+    pPVar1 = poolManagementData;
+    iVar6 = 0;
+    if (0 < (int)((uint)poolManagementData->numNodesInPool - 1)) {
       do {
-        *(undefined2 *)(iVar7 * 2 + uVar10 * 0x40 + *(int *)(iVar6 + 0x10)) =
-             *(undefined2 *)(iVar7 * 2 + uVar9 * 0x40 + *(int *)(iVar6 + 0x10));
-        iVar3 = iVar7 * 0x40 + *(int *)(iVar6 + 0x10);
-        *(undefined2 *)(uVar10 * 2 + iVar3) = *(undefined2 *)(uVar9 * 2 + iVar3);
-        iVar7 = iVar7 + 1;
-      } while (iVar7 < (int)((uint)*(byte *)(iVar6 + 1) - 1));
+        (&pPVar1->expansionNode2[uVar9 * 2].pos.x)[iVar6] =
+             (&pPVar1->expansionNode2[uVar8 * 2].pos.x)[iVar6];
+        (&pPVar1->expansionNode2[iVar6 * 2].pos.x)[uVar9] =
+             (&pPVar1->expansionNode2[iVar6 * 2].pos.x)[uVar8];
+        iVar6 = iVar6 + 1;
+      } while (iVar6 < (int)((uint)pPVar1->numNodesInPool - 1));
     }
-    *(char *)(poolManagementData + 1) = *(char *)(poolManagementData + 1) + -1;
+    poolManagementData->numNodesInPool = poolManagementData->numNodesInPool + -1;
   }
   return;
 }

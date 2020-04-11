@@ -5,7 +5,7 @@
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleLightGroup(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 76, offset 0x8001dc68
+ // line 76, offset 0x8001d824
 	/* begin block 1 */
 		// Start line: 152
 	/* end block 1 */
@@ -15,6 +15,8 @@
 		// Start line: 153
 	/* end block 2 */
 	// End Line: 154
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 long SIGNAL_HandleLightGroup(_Instance *instance,Signal *signal)
 
@@ -30,16 +32,18 @@ long SIGNAL_HandleLightGroup(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCameraAdjust(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 85, offset 0x8001dc84
+ // line 85, offset 0x8001d840
 	/* begin block 1 */
 		// Start line: 170
 	/* end block 1 */
 	// End Line: 171
 
+/* File: C:\kain2\game\SIGNAL.C */
+
 long SIGNAL_HandleCameraAdjust(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_Adjust(&theCamera,*(long *)signal->data);
+  CAMERA_Adjust((Camera *)&theCamera,*(long *)signal->data);
   return 1;
 }
 
@@ -48,16 +52,18 @@ long SIGNAL_HandleCameraAdjust(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCamera(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 91, offset 0x8001dcb0
+ // line 91, offset 0x8001d86c
 	/* begin block 1 */
 		// Start line: 182
 	/* end block 1 */
 	// End Line: 183
 
+/* File: C:\kain2\game\SIGNAL.C */
+
 long SIGNAL_HandleCamera(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_ChangeTo(&theCamera,*(_CameraKey **)signal->data);
+  CAMERA_ChangeTo((Camera *)&theCamera,*(_CameraKey **)signal->data);
   return 1;
 }
 
@@ -66,7 +72,7 @@ long SIGNAL_HandleCamera(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SIGNAL_RelocateCamera(struct Signal *signal /*$a0*/, long offset /*$a1*/)
- // line 97, offset 0x8001dcdc
+ // line 97, offset 0x8001d898
 	/* begin block 1 */
 		// Start line: 194
 	/* end block 1 */
@@ -76,6 +82,8 @@ long SIGNAL_HandleCamera(_Instance *instance,Signal *signal)
 		// Start line: 195
 	/* end block 2 */
 	// End Line: 196
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 void SIGNAL_RelocateCamera(Signal *signal,long offset)
 
@@ -95,16 +103,18 @@ void SIGNAL_RelocateCamera(Signal *signal,long offset)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCameraMode(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 102, offset 0x8001dcf8
+ // line 102, offset 0x8001d8b4
 	/* begin block 1 */
 		// Start line: 204
 	/* end block 1 */
 	// End Line: 205
 
+/* File: C:\kain2\game\SIGNAL.C */
+
 long SIGNAL_HandleCameraMode(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_SetMode(&theCamera,*(long *)signal->data);
+  CAMERA_SetMode((Camera *)&theCamera,*(long *)signal->data);
   return 1;
 }
 
@@ -113,16 +123,18 @@ long SIGNAL_HandleCameraMode(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCameraLock(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 110, offset 0x8001dd24
+ // line 110, offset 0x8001d8e0
 	/* begin block 1 */
 		// Start line: 220
 	/* end block 1 */
 	// End Line: 221
 
+/* File: C:\kain2\game\SIGNAL.C */
+
 long SIGNAL_HandleCameraLock(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_Lock(&theCamera,*(long *)signal->data);
+  CAMERA_Lock((Camera *)&theCamera,*(long *)signal->data);
   return 1;
 }
 
@@ -131,16 +143,18 @@ long SIGNAL_HandleCameraLock(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCameraUnlock(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 116, offset 0x8001dd50
+ // line 116, offset 0x8001d90c
 	/* begin block 1 */
 		// Start line: 232
 	/* end block 1 */
 	// End Line: 233
 
+/* File: C:\kain2\game\SIGNAL.C */
+
 long SIGNAL_HandleCameraUnlock(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_Unlock(&theCamera,*(long *)signal->data);
+  CAMERA_Unlock((Camera *)&theCamera,*(long *)signal->data);
   return 1;
 }
 
@@ -149,16 +163,18 @@ long SIGNAL_HandleCameraUnlock(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCameraSmooth(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 122, offset 0x8001dd7c
+ // line 122, offset 0x8001d938
 	/* begin block 1 */
 		// Start line: 244
 	/* end block 1 */
 	// End Line: 245
 
+/* File: C:\kain2\game\SIGNAL.C */
+
 long SIGNAL_HandleCameraSmooth(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_SetSmoothValue(&theCamera,*(long *)signal->data);
+  CAMERA_SetSmoothValue((Camera *)&theCamera,*(long *)signal->data);
   return 1;
 }
 
@@ -167,16 +183,18 @@ long SIGNAL_HandleCameraSmooth(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCameraTimer(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 128, offset 0x8001dda8
+ // line 128, offset 0x8001d964
 	/* begin block 1 */
 		// Start line: 256
 	/* end block 1 */
 	// End Line: 257
 
+/* File: C:\kain2\game\SIGNAL.C */
+
 long SIGNAL_HandleCameraTimer(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_SetTimer(&theCamera,*(long *)signal->data);
+  CAMERA_SetTimer((Camera *)&theCamera,*(long *)signal->data);
   return 1;
 }
 
@@ -185,16 +203,18 @@ long SIGNAL_HandleCameraTimer(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCameraSave(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 134, offset 0x8001ddd4
+ // line 134, offset 0x8001d990
 	/* begin block 1 */
 		// Start line: 268
 	/* end block 1 */
 	// End Line: 269
 
+/* File: C:\kain2\game\SIGNAL.C */
+
 long SIGNAL_HandleCameraSave(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_Save(&theCamera,*(long *)signal->data);
+  CAMERA_Save((Camera *)&theCamera,*(long *)signal->data);
   return 1;
 }
 
@@ -203,16 +223,18 @@ long SIGNAL_HandleCameraSave(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCameraRestore(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 140, offset 0x8001de00
+ // line 140, offset 0x8001d9bc
 	/* begin block 1 */
 		// Start line: 280
 	/* end block 1 */
 	// End Line: 281
 
+/* File: C:\kain2\game\SIGNAL.C */
+
 long SIGNAL_HandleCameraRestore(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_Restore(&theCamera,*(long *)signal->data);
+  CAMERA_Restore((Camera *)&theCamera,*(long *)signal->data);
   return 1;
 }
 
@@ -221,16 +243,18 @@ long SIGNAL_HandleCameraRestore(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCameraValue(struct _Instance *instance /*$a0*/, struct Signal *signal /*$v0*/)
- // line 146, offset 0x8001de2c
+ // line 146, offset 0x8001d9e8
 	/* begin block 1 */
 		// Start line: 292
 	/* end block 1 */
 	// End Line: 293
 
+/* File: C:\kain2\game\SIGNAL.C */
+
 long SIGNAL_HandleCameraValue(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_SetValue(&theCamera,*(long *)signal->data,*(long *)(signal->data + 4));
+  CAMERA_SetValue((Camera *)&theCamera,*(long *)signal->data,*(long *)(signal->data + 4));
   return 1;
 }
 
@@ -239,10 +263,10 @@ long SIGNAL_HandleCameraValue(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleStreamLevel(struct _Instance *instance /*$s2*/, struct Signal *signal /*$s4*/)
- // line 157, offset 0x8001de60
+ // line 157, offset 0x8001da1c
 	/* begin block 1 */
 		// Start line: 158
-		// Start offset: 0x8001DE60
+		// Start offset: 0x8001DA1C
 		// Variables:
 	// 		char areaName[16]; // stack offset -48
 	// 		int signalnum; // $s5
@@ -253,27 +277,29 @@ long SIGNAL_HandleCameraValue(_Instance *instance,Signal *signal)
 
 		/* begin block 1.1 */
 			// Start line: 177
-			// Start offset: 0x8001DEDC
+			// Start offset: 0x8001DA98
 			// Variables:
 		// 		struct _StreamUnit *curStreamUnit; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8001DF84
+		// End offset: 0x8001DB48
 		// End Line: 199
 
 		/* begin block 1.2 */
 			// Start line: 246
-			// Start offset: 0x8001E038
+			// Start offset: 0x8001DC0C
 		/* end block 1.2 */
-		// End offset: 0x8001E080
+		// End offset: 0x8001DC54
 		// End Line: 259
 	/* end block 1 */
-	// End offset: 0x8001E084
+	// End offset: 0x8001DC58
 	// End Line: 262
 
 	/* begin block 2 */
 		// Start line: 314
 	/* end block 2 */
 	// End Line: 315
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 long SIGNAL_HandleStreamLevel(_Instance *instance,Signal *signal)
 
@@ -284,31 +310,34 @@ long SIGNAL_HandleStreamLevel(_Instance *instance,Signal *signal)
   _StreamUnit *p_Var3;
   long lVar4;
   Level *level;
-  short sVar5;
+  undefined2 uVar5;
   char acStack48 [16];
   
-  sVar5 = -1;
+  uVar5 = 0xffff;
   bVar1 = false;
-  strcpy(acStack48,(char *)(signal->data + 8));
-  pcVar2 = strchr(acStack48,0x2c);
+  strcpy();
+  pcVar2 = strchr(acStack48,',');
   if (pcVar2 != (char *)0x0) {
     id = atoi(pcVar2 + 1);
-    sVar5 = (short)id;
+    uVar5 = (undefined2)id;
     *pcVar2 = '\0';
   }
-  id = strcmpi(acStack48,"warpgate");
+  id = strcmpi(acStack48,s_warpgate_800cf184);
   if (id == 0) {
     p_Var3 = STREAM_GetStreamUnitWithID(instance->currentStreamUnitID);
-    if (gameTrackerX.globalTimeMult - DAT_800cddc4 < 0x65) {
+    if ((uint)(DAT_800d2300 - DAT_800cf180) < 0x65) {
       return 1;
     }
     if ((p_Var3->flags & 8U) == 0) {
       return 1;
     }
-    id = ((&WarpRoomArray)[CurrentWarpNumber].streamUnit)->StreamUnitID;
-    strcpy(acStack48,(char *)(&WarpRoomArray + CurrentWarpNumber));
+    id = **(int **)(&LAB_800d0420 + CurrentWarpNumber * 0x14);
+    strcpy();
     bVar1 = true;
-    if ((((&WarpRoomArray)[CurrentWarpNumber].streamUnit)->flags & 8U) == 0) {
+    if (*(int *)(&LAB_800d0420 + CurrentWarpNumber * 0x14) == 0) {
+      return 1;
+    }
+    if ((*(ushort *)(*(int *)(&LAB_800d0420 + CurrentWarpNumber * 0x14) + 6) & 8) == 0) {
       return 1;
     }
   }
@@ -316,35 +345,36 @@ long SIGNAL_HandleStreamLevel(_Instance *instance,Signal *signal)
     id = *(int *)(signal->data + 4);
   }
   if (instance->currentStreamUnitID != id) {
-    if (instance == gameTrackerX.playerInstance) {
-      gameTrackerX.SwitchToNewStreamUnit = 1;
-      DAT_800cddc4 = gameTrackerX.globalTimeMult;
-      strcpy(gameTrackerX.S_baseAreaName,acStack48);
-      gameTrackerX.fromSignal = *(short *)signal->data;
-      gameTrackerX.toSignal = sVar5;
-      gameTrackerX.moveRazielToStreamID = id;
+    if (instance == DAT_800d20f8) {
+      DAT_800d2248 = 1;
+      DAT_800cf180 = DAT_800d2300;
+      strcpy();
+      DAT_800d225e = *(undefined2 *)signal->data;
+      DAT_800d225c = uVar5;
+      DAT_800d226c = id;
       if (bVar1) {
-        if ((gameTrackerX.gameData.asmData.MorphType == 0) &&
-           (id = strcmpi(acStack48,"under3"), id == 0)) {
-          INSTANCE_Post(gameTrackerX.playerInstance,0x10002001,0);
+        if ((DAT_800d20d6 == 0) && (id = strcmpi(acStack48,s_under3_800cf190), id == 0)) {
+          INSTANCE_Post(DAT_800d20f8,0x10002001,0);
         }
-        lVar4 = WARPGATE_GetWarpRoomIndex(gameTrackerX.baseAreaName);
-        gameTrackerX.SwitchToNewWarpIndex = (short)lVar4;
+        lVar4 = WARPGATE_GetWarpRoomIndex(&DAT_800d2228);
+        DAT_800d224a = (undefined2)lVar4;
       }
       else {
-        gameTrackerX.SwitchToNewWarpIndex = -1;
+        DAT_800d224a = 0xffff;
       }
     }
     else {
-      level = STREAM_GetLevelWithID(id);
-      if (level == (Level *)0x0) {
-        level = STREAM_GetLevelWithID(instance->currentStreamUnitID);
-        SAVE_Instance(instance,level);
-        instance->flags = instance->flags | 0x20;
-      }
-      else {
-        instance->currentStreamUnitID = id;
-        INSTANCE_UpdateFamilyStreamUnitID(instance);
+      if (instance->LinkParent == (_Instance *)0x0) {
+        level = STREAM_GetLevelWithID(id);
+        if (level == (Level *)0x0) {
+          level = STREAM_GetLevelWithID(instance->currentStreamUnitID);
+          SAVE_Instance(instance,level);
+          instance->flags = instance->flags | 0x20;
+        }
+        else {
+          instance->currentStreamUnitID = id;
+          INSTANCE_UpdateFamilyStreamUnitID(instance);
+        }
       }
     }
   }
@@ -356,25 +386,27 @@ long SIGNAL_HandleStreamLevel(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleFogNear(struct _Instance *instance /*$a0*/, struct Signal *signal /*$s0*/)
- // line 265, offset 0x8001e0a8
+ // line 265, offset 0x8001dc7c
 	/* begin block 1 */
 		// Start line: 266
-		// Start offset: 0x8001E0A8
+		// Start offset: 0x8001DC7C
 		// Variables:
 	// 		struct Level *level; // $s0
 	/* end block 1 */
-	// End offset: 0x8001E0A8
+	// End offset: 0x8001DC7C
 	// End Line: 266
 
 	/* begin block 2 */
-		// Start line: 555
+		// Start line: 553
 	/* end block 2 */
-	// End Line: 556
+	// End Line: 554
 
 	/* begin block 3 */
-		// Start line: 560
+		// Start line: 558
 	/* end block 3 */
-	// End Line: 561
+	// End Line: 559
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 long SIGNAL_HandleFogNear(_Instance *instance,Signal *signal)
 
@@ -382,10 +414,10 @@ long SIGNAL_HandleFogNear(_Instance *instance,Signal *signal)
   ushort uVar1;
   Level *level;
   
-  level = STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID);
+  level = STREAM_GetLevelWithID(*(long *)(DAT_800d20f8 + 0x38));
   uVar1 = *(ushort *)signal->data;
   level->fogNear = uVar1;
-  SetFogNearFar((uint)uVar1,(uint)level->fogFar,theCamera.core.projDistance);
+  SetFogNearFar((uint)uVar1,(uint)level->fogFar,DAT_800d1004);
   LIGHT_CalcDQPTable(level);
   return 1;
 }
@@ -395,25 +427,27 @@ long SIGNAL_HandleFogNear(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleFogFar(struct _Instance *instance /*$a0*/, struct Signal *signal /*$s1*/)
- // line 287, offset 0x8001e0fc
+ // line 287, offset 0x8001dcd0
 	/* begin block 1 */
 		// Start line: 288
-		// Start offset: 0x8001E0FC
+		// Start offset: 0x8001DCD0
 		// Variables:
 	// 		struct Level *level; // $s0
 	/* end block 1 */
-	// End offset: 0x8001E0FC
+	// End offset: 0x8001DCD0
 	// End Line: 288
 
 	/* begin block 2 */
-		// Start line: 615
+		// Start line: 613
 	/* end block 2 */
-	// End Line: 616
+	// End Line: 614
 
 	/* begin block 3 */
-		// Start line: 620
+		// Start line: 618
 	/* end block 3 */
-	// End Line: 621
+	// End Line: 619
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 long SIGNAL_HandleFogFar(_Instance *instance,Signal *signal)
 
@@ -421,10 +455,10 @@ long SIGNAL_HandleFogFar(_Instance *instance,Signal *signal)
   ushort uVar1;
   Level *level;
   
-  level = STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID);
+  level = STREAM_GetLevelWithID(*(long *)(DAT_800d20f8 + 0x38));
   uVar1 = *(ushort *)signal->data;
   level->fogFar = uVar1;
-  SetFogNearFar((uint)level->fogNear,(uint)uVar1,theCamera.core.projDistance);
+  SetFogNearFar((uint)level->fogNear,(uint)uVar1,DAT_800d1004);
   LIGHT_CalcDQPTable(level);
   return 1;
 }
@@ -434,16 +468,18 @@ long SIGNAL_HandleFogFar(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCameraShake(struct _Instance *instance /*$a0*/, struct Signal *signal /*$v0*/)
- // line 314, offset 0x8001e158
+ // line 314, offset 0x8001dd2c
 	/* begin block 1 */
 		// Start line: 623
 	/* end block 1 */
 	// End Line: 624
 
+/* File: C:\kain2\game\SIGNAL.C */
+
 long SIGNAL_HandleCameraShake(_Instance *instance,Signal *signal)
 
 {
-  CAMERA_SetShake(&theCamera,*(long *)signal->data,*(long *)(signal->data + 4));
+  CAMERA_SetShake((Camera *)&theCamera,*(long *)signal->data,*(long *)(signal->data + 4));
   return 1;
 }
 
@@ -452,11 +488,13 @@ long SIGNAL_HandleCameraShake(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCallSignal(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 320, offset 0x8001e18c
+ // line 320, offset 0x8001dd60
 	/* begin block 1 */
-		// Start line: 685
+		// Start line: 683
 	/* end block 1 */
-	// End Line: 686
+	// End Line: 684
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 long SIGNAL_HandleCallSignal(_Instance *instance,Signal *signal)
 
@@ -470,21 +508,23 @@ long SIGNAL_HandleCallSignal(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleStopPlayerControl(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 326, offset 0x8001e1b4
+ // line 326, offset 0x8001dd88
 	/* begin block 1 */
-		// Start line: 697
+		// Start line: 695
 	/* end block 1 */
-	// End Line: 698
+	// End Line: 696
 
 	/* begin block 2 */
-		// Start line: 698
+		// Start line: 696
 	/* end block 2 */
-	// End Line: 699
+	// End Line: 697
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 long SIGNAL_HandleStopPlayerControl(_Instance *instance,Signal *signal)
 
 {
-  gameTrackerX.gameFlags = gameTrackerX.gameFlags | 0x90;
+  DAT_800d220c = DAT_800d220c | 0x90;
   return 1;
 }
 
@@ -493,21 +533,23 @@ long SIGNAL_HandleStopPlayerControl(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleStartPlayerControl(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 333, offset 0x8001e1cc
+ // line 333, offset 0x8001dda0
 	/* begin block 1 */
-		// Start line: 711
+		// Start line: 709
 	/* end block 1 */
-	// End Line: 712
+	// End Line: 710
 
 	/* begin block 2 */
-		// Start line: 712
+		// Start line: 710
 	/* end block 2 */
-	// End Line: 713
+	// End Line: 711
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 long SIGNAL_HandleStartPlayerControl(_Instance *instance,Signal *signal)
 
 {
-  gameTrackerX.gameFlags = gameTrackerX.gameFlags & 0xffffff6f;
+  DAT_800d220c = DAT_800d220c & 0xffffff6f;
   return 1;
 }
 
@@ -516,16 +558,18 @@ long SIGNAL_HandleStartPlayerControl(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SIGNAL_RelocateCameraSpline(struct Signal *signal /*$a0*/, long offset /*$a1*/)
- // line 500, offset 0x8001e1ec
+ // line 500, offset 0x8001ddc0
 	/* begin block 1 */
 		// Start line: 996
 	/* end block 1 */
 	// End Line: 997
 
 	/* begin block 2 */
-		// Start line: 882
+		// Start line: 880
 	/* end block 2 */
-	// End Line: 883
+	// End Line: 881
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 void SIGNAL_RelocateCameraSpline(Signal *signal,long offset)
 
@@ -545,34 +589,36 @@ void SIGNAL_RelocateCameraSpline(Signal *signal,long offset)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleCameraSpline(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 505, offset 0x8001e208
+ // line 505, offset 0x8001dddc
 	/* begin block 1 */
-		// Start line: 891
+		// Start line: 889
 	/* end block 1 */
-	// End Line: 892
+	// End Line: 890
 
 	/* begin block 2 */
-		// Start line: 892
+		// Start line: 890
 	/* end block 2 */
-	// End Line: 893
+	// End Line: 891
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 long SIGNAL_HandleCameraSpline(_Instance *instance,Signal *signal)
 
 {
   if (*(int *)signal->data == 0) {
     if (*(int *)(signal->data + 4) == 0) {
-      theCamera.Spline00 = (MultiSpline *)0x0;
+      DAT_800d13b8 = 0;
       return 1;
     }
-    theCamera.Spline00 = *(MultiSpline **)(*(int *)(signal->data + 4) + 0x38);
+    DAT_800d13b8 = *(undefined4 *)(*(int *)(signal->data + 4) + 0x38);
     return 1;
   }
   if (*(int *)signal->data == 1) {
     if (*(int *)(signal->data + 4) != 0) {
-      theCamera.Spline01 = *(MultiSpline **)(*(int *)(signal->data + 4) + 0x38);
+      DAT_800d13bc = *(undefined4 *)(*(int *)(signal->data + 4) + 0x38);
       return 1;
     }
-    theCamera.Spline01 = (MultiSpline *)0x0;
+    DAT_800d13bc = 0;
   }
   return 1;
 }
@@ -582,26 +628,28 @@ long SIGNAL_HandleCameraSpline(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleScreenWipe(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 537, offset 0x8001e288
+ // line 537, offset 0x8001de5c
 	/* begin block 1 */
-		// Start line: 955
+		// Start line: 953
 	/* end block 1 */
-	// End Line: 956
+	// End Line: 954
 
 	/* begin block 2 */
-		// Start line: 956
+		// Start line: 954
 	/* end block 2 */
-	// End Line: 957
+	// End Line: 955
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 long SIGNAL_HandleScreenWipe(_Instance *instance,Signal *signal)
 
 {
-  gameTrackerX.maxWipeTime = *(short *)(signal->data + 2);
-  if (gameTrackerX.maxWipeTime < 0) {
-    gameTrackerX.maxWipeTime = -gameTrackerX.maxWipeTime;
+  DAT_800d219a = *(short *)(signal->data + 2);
+  if (DAT_800d219a < 0) {
+    DAT_800d219a = -DAT_800d219a;
   }
-  gameTrackerX.wipeTime = *(short *)(signal->data + 2);
-  gameTrackerX.wipeType = *(short *)signal->data;
+  DAT_800d2198 = *(undefined2 *)(signal->data + 2);
+  LAB_800d219c = *(undefined2 *)signal->data;
   return 1;
 }
 
@@ -610,16 +658,18 @@ long SIGNAL_HandleScreenWipe(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleBlendStart(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 545, offset 0x8001e2c0
+ // line 545, offset 0x8001de94
 	/* begin block 1 */
-		// Start line: 971
+		// Start line: 969
 	/* end block 1 */
-	// End Line: 972
+	// End Line: 970
 
 	/* begin block 2 */
-		// Start line: 981
+		// Start line: 979
 	/* end block 2 */
-	// End Line: 982
+	// End Line: 980
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 long SIGNAL_HandleBlendStart(_Instance *instance,Signal *signal)
 
@@ -632,23 +682,25 @@ long SIGNAL_HandleBlendStart(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleScreenWipeColor(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 559, offset 0x8001e2c8
+ // line 559, offset 0x8001de9c
 	/* begin block 1 */
-		// Start line: 999
+		// Start line: 997
 	/* end block 1 */
-	// End Line: 1000
+	// End Line: 998
 
 	/* begin block 2 */
-		// Start line: 1000
+		// Start line: 998
 	/* end block 2 */
-	// End Line: 1001
+	// End Line: 999
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 long SIGNAL_HandleScreenWipeColor(_Instance *instance,Signal *signal)
 
 {
-  gameTrackerX.wipeColor.r = signal->data[0];
-  gameTrackerX.wipeColor.g = signal->data[1];
-  gameTrackerX.wipeColor.b = signal->data[2];
+  DAT_800d2194 = signal->data[0];
+  DAT_800d2195 = signal->data[1];
+  DAT_800d2196 = signal->data[2];
   return 1;
 }
 
@@ -657,20 +709,22 @@ long SIGNAL_HandleScreenWipeColor(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleSetSlideAngle(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 567, offset 0x8001e2f4
+ // line 567, offset 0x8001dec8
 	/* begin block 1 */
 		// Start line: 568
-		// Start offset: 0x8001E2F4
+		// Start offset: 0x8001DEC8
 		// Variables:
 	// 		long slideAngle; // $a2
 	/* end block 1 */
-	// End offset: 0x8001E314
+	// End offset: 0x8001DEE8
 	// End Line: 578
 
 	/* begin block 2 */
-		// Start line: 1015
+		// Start line: 1013
 	/* end block 2 */
-	// End Line: 1016
+	// End Line: 1014
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 long SIGNAL_HandleSetSlideAngle(_Instance *instance,Signal *signal)
 
@@ -686,11 +740,13 @@ long SIGNAL_HandleSetSlideAngle(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleResetSlideAngle(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 581, offset 0x8001e324
+ // line 581, offset 0x8001def8
 	/* begin block 1 */
-		// Start line: 1044
+		// Start line: 1042
 	/* end block 1 */
-	// End Line: 1045
+	// End Line: 1043
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 long SIGNAL_HandleResetSlideAngle(_Instance *instance,Signal *signal)
 
@@ -706,20 +762,22 @@ long SIGNAL_HandleResetSlideAngle(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleSetCameraTilt(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 593, offset 0x8001e350
+ // line 593, offset 0x8001df24
 	/* begin block 1 */
 		// Start line: 594
-		// Start offset: 0x8001E350
+		// Start offset: 0x8001DF24
 		// Variables:
 	// 		long tilt; // $v0
 	/* end block 1 */
-	// End offset: 0x8001E3D0
+	// End offset: 0x8001DFA4
 	// End Line: 608
 
 	/* begin block 2 */
-		// Start line: 1068
+		// Start line: 1066
 	/* end block 2 */
-	// End Line: 1069
+	// End Line: 1067
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 long SIGNAL_HandleSetCameraTilt(_Instance *instance,Signal *signal)
 
@@ -731,7 +789,7 @@ long SIGNAL_HandleSetCameraTilt(_Instance *instance,Signal *signal)
     if (iVar1 < 0) {
       iVar1 = iVar1 + 0x168;
     }
-    CAMERA_Adjust_tilt(&theCamera,(iVar1 * 0x1000) / 0x168);
+    CAMERA_Adjust_tilt((Camera *)&theCamera,(iVar1 * 0x1000) / 0x168);
   }
   return 1;
 }
@@ -741,26 +799,28 @@ long SIGNAL_HandleSetCameraTilt(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_HandleSetCameraDistance(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 611, offset 0x8001e3e0
+ // line 611, offset 0x8001dfb4
 	/* begin block 1 */
 		// Start line: 612
-		// Start offset: 0x8001E3E0
+		// Start offset: 0x8001DFB4
 		// Variables:
 	// 		long distance; // $a1
 	/* end block 1 */
-	// End offset: 0x8001E404
+	// End offset: 0x8001DFD8
 	// End Line: 622
 
 	/* begin block 2 */
-		// Start line: 1105
+		// Start line: 1103
 	/* end block 2 */
-	// End Line: 1106
+	// End Line: 1104
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 long SIGNAL_HandleSetCameraDistance(_Instance *instance,Signal *signal)
 
 {
   if (instance != (_Instance *)0x0) {
-    CAMERA_Adjust_distance(&theCamera,*(long *)signal->data);
+    CAMERA_Adjust_distance((Camera *)&theCamera,*(long *)signal->data);
   }
   return 1;
 }
@@ -769,35 +829,19 @@ long SIGNAL_HandleSetCameraDistance(_Instance *instance,Signal *signal)
 
 // decompiled code
 // original method signature: 
-// long /*$ra*/ SIGNAL_ErrorNoFunction(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 741, offset 0x8001e414
+// long /*$ra*/ SIGNAL_HandleEnd(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
+ // line 742, offset 0x8001dfe8
 	/* begin block 1 */
 		// Start line: 1366
 	/* end block 1 */
 	// End Line: 1367
 
-long SIGNAL_ErrorNoFunction(_Instance *instance,Signal *signal)
-
-{
-  GXFilePrint("Signal command %d has been taken out.\n");
-  return 1;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// long /*$ra*/ SIGNAL_HandleEnd(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/)
- // line 752, offset 0x8001e448
-	/* begin block 1 */
-		// Start line: 1392
-	/* end block 1 */
-	// End Line: 1393
-
 	/* begin block 2 */
-		// Start line: 1393
+		// Start line: 1367
 	/* end block 2 */
-	// End Line: 1394
+	// End Line: 1368
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 long SIGNAL_HandleEnd(_Instance *instance,Signal *signal)
 
@@ -810,32 +854,38 @@ long SIGNAL_HandleEnd(_Instance *instance,Signal *signal)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ COLLIDE_HandleSignal(struct _Instance *instance /*$s3*/, struct Signal *signal /*$s0*/, long numSignals /*$a2*/, int dontForceDoSignal /*$a3*/)
- // line 934, offset 0x8001e450
+ // line 842, offset 0x8001dff0
 	/* begin block 1 */
-		// Start line: 935
-		// Start offset: 0x8001E450
+		// Start line: 843
+		// Start offset: 0x8001DFF0
+		// Variables:
+	// 		long signalNumber; // $v1
 	/* end block 1 */
-	// End offset: 0x8001E528
-	// End Line: 965
+	// End offset: 0x8001E0DC
+	// End Line: 898
 
 	/* begin block 2 */
-		// Start line: 1756
+		// Start line: 1566
 	/* end block 2 */
-	// End Line: 1757
+	// End Line: 1567
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 void COLLIDE_HandleSignal(_Instance *instance,Signal *signal,long numSignals,int dontForceDoSignal)
 
 {
-  uint uVar1;
-  long lVar2;
+  int iVar1;
+  uint uVar2;
   
   if (numSignals != 0) {
     while( true ) {
-      uVar1 = signal->id & 0x7fffffff;
-      if (((((&signalInfoList)[uVar1].onlyPlayer == 0) || (instance == gameTrackerX.playerInstance))
-          && (((gameTrackerX.gameFlags & 0x40U) == 0 || (-1 < signal->id)))) &&
-         (lVar2 = (*(&signalInfoList)[uVar1].signalHandleFunc)(instance,signal), lVar2 == 0)) break;
-      signal = (Signal *)(&signal->id + (int)(&signalInfoList)[signal->id & 0x7fffffff].length + 1);
+      uVar2 = signal->id & 0x7fffffff;
+      if ((((signalInfoList[uVar2].onlyPlayer == 0) || (instance == DAT_800d20f8)) &&
+          (((DAT_800d220c & 0x40) == 0 || (-1 < signal->id)))) &&
+         ((0x1a < uVar2 ||
+          (iVar1 = (*(code *)signalInfoList[uVar2].signalHandleFunc)(instance,signal), iVar1 == 0)))
+         ) break;
+      signal = (Signal *)(&signal->id + (int)signalInfoList[signal->id & 0x7fffffff].length + 1);
     }
   }
   return;
@@ -846,22 +896,24 @@ void COLLIDE_HandleSignal(_Instance *instance,Signal *signal,long numSignals,int
 // decompiled code
 // original method signature: 
 // long /*$ra*/ SIGNAL_IsThisStreamAWarpGate(struct Signal *signal /*$a0*/)
- // line 967, offset 0x8001e544
+ // line 900, offset 0x8001e0f8
 	/* begin block 1 */
-		// Start line: 968
-		// Start offset: 0x8001E544
+		// Start line: 901
+		// Start offset: 0x8001E0F8
 		// Variables:
 	// 		long result; // $s0
 	// 		char areaName[32]; // stack offset -40
 	// 		char *commapos; // $v0
 	/* end block 1 */
-	// End offset: 0x8001E590
-	// End Line: 985
+	// End offset: 0x8001E144
+	// End Line: 918
 
 	/* begin block 2 */
-		// Start line: 1822
+		// Start line: 1682
 	/* end block 2 */
-	// End Line: 1823
+	// End Line: 1683
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 long SIGNAL_IsThisStreamAWarpGate(Signal *signal)
 
@@ -870,12 +922,12 @@ long SIGNAL_IsThisStreamAWarpGate(Signal *signal)
   int iVar2;
   char acStack40 [32];
   
-  strcpy(acStack40,(char *)(signal->data + 8));
-  pcVar1 = strchr(acStack40,0x2c);
+  strcpy();
+  pcVar1 = strchr(acStack40,',');
   if (pcVar1 != (char *)0x0) {
     *pcVar1 = '\0';
   }
-  iVar2 = strcmpi(acStack40,"warpgate");
+  iVar2 = strcmpi(acStack40,s_warpgate_800cf184);
   return (uint)(iVar2 == 0);
 }
 
@@ -883,22 +935,25 @@ long SIGNAL_IsThisStreamAWarpGate(Signal *signal)
 
 // decompiled code
 // original method signature: 
-// long /*$ra*/ SIGNAL_IsStreamSignal(struct Signal *signal /*$s0*/, long *isWarpGate /*$s4*/)
- // line 988, offset 0x8001e5a4
+// long /*$ra*/ SIGNAL_IsStreamSignal(struct Signal *signal /*$s1*/, long *isWarpGate /*$s4*/)
+ // line 921, offset 0x8001e158
 	/* begin block 1 */
-		// Start line: 989
-		// Start offset: 0x8001E5A4
+		// Start line: 922
+		// Start offset: 0x8001E158
 		// Variables:
-	// 		long result; // $s2
-	// 		long done; // $s1
+	// 		long result; // $s3
+	// 		long done; // $s2
+	// 		long signalNumber; // $s0
 	/* end block 1 */
-	// End offset: 0x8001E664
-	// End Line: 1020
+	// End offset: 0x8001E210
+	// End Line: 964
 
 	/* begin block 2 */
-		// Start line: 1868
+		// Start line: 1728
 	/* end block 2 */
-	// End Line: 1869
+	// End Line: 1729
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 long SIGNAL_IsStreamSignal(Signal *signal,long *isWarpGate)
 
@@ -913,11 +968,11 @@ long SIGNAL_IsStreamSignal(Signal *signal,long *isWarpGate)
   *isWarpGate = 0;
   while( true ) {
     uVar3 = signal->id & 0x7fffffff;
-    if (uVar3 == 0x3c) {
+    if (uVar3 == 0xf) {
       bVar1 = true;
     }
     else {
-      if (uVar3 == 0x4e) {
+      if (uVar3 == 0x12) {
         bVar1 = true;
         lVar4 = 1;
         lVar2 = SIGNAL_IsThisStreamAWarpGate(signal);
@@ -927,7 +982,7 @@ long SIGNAL_IsStreamSignal(Signal *signal,long *isWarpGate)
       }
     }
     if (bVar1) break;
-    signal = (Signal *)(&signal->id + (int)(&signalInfoList)[signal->id & 0x7fffffff].length + 1);
+    signal = (Signal *)(&signal->id + (int)signalInfoList[uVar3].length + 1);
   }
   return lVar4;
 }
@@ -937,11 +992,13 @@ long SIGNAL_IsStreamSignal(Signal *signal,long *isWarpGate)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SIGNAL_HandleSignal(struct _Instance *instance /*$a0*/, struct Signal *signal /*$a1*/, int dontForceDoSignal /*$a3*/)
- // line 1023, offset 0x8001e684
+ // line 967, offset 0x8001e234
 	/* begin block 1 */
-		// Start line: 1944
+		// Start line: 1827
 	/* end block 1 */
-	// End Line: 1945
+	// End Line: 1828
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 void SIGNAL_HandleSignal(_Instance *instance,Signal *signal,int dontForceDoSignal)
 
@@ -955,21 +1012,23 @@ void SIGNAL_HandleSignal(_Instance *instance,Signal *signal,int dontForceDoSigna
 // decompiled code
 // original method signature: 
 // struct _MultiSignal * /*$ra*/ SIGNAL_RelocateSignal(struct _MultiSignal *multiSignal /*$s4*/, long offset /*$s5*/)
- // line 1030, offset 0x8001e6a8
+ // line 974, offset 0x8001e258
 	/* begin block 1 */
-		// Start line: 1031
-		// Start offset: 0x8001E6A8
+		// Start line: 975
+		// Start offset: 0x8001E258
 		// Variables:
 	// 		int i; // $s1
 	// 		struct Signal *signal; // $s0
 	/* end block 1 */
-	// End offset: 0x8001E760
-	// End Line: 1053
+	// End offset: 0x8001E310
+	// End Line: 997
 
 	/* begin block 2 */
-		// Start line: 1958
+		// Start line: 1841
 	/* end block 2 */
-	// End Line: 1959
+	// End Line: 1842
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 _MultiSignal * SIGNAL_RelocateSignal(_MultiSignal *multiSignal,long offset)
 
@@ -981,11 +1040,11 @@ _MultiSignal * SIGNAL_RelocateSignal(_MultiSignal *multiSignal,long offset)
   iVar2 = 0;
   if (0 < multiSignal->numSignals) {
     do {
-      if ((&signalInfoList)[pSVar1->id & 0x7fffffff].signalRelocateFunc != (_func_4467 *)0x0) {
-        (*(&signalInfoList)[pSVar1->id & 0x7fffffff].signalRelocateFunc)(pSVar1,offset);
+      if ((code *)signalInfoList[pSVar1->id & 0x7fffffff].signalRelocateFunc != (code *)0x0) {
+        (*(code *)signalInfoList[pSVar1->id & 0x7fffffff].signalRelocateFunc)(pSVar1,offset);
       }
       iVar2 = iVar2 + 1;
-      pSVar1 = (Signal *)(&pSVar1->id + (int)(&signalInfoList)[pSVar1->id & 0x7fffffff].length + 1);
+      pSVar1 = (Signal *)(&pSVar1->id + (int)signalInfoList[pSVar1->id & 0x7fffffff].length + 1);
     } while (iVar2 < multiSignal->numSignals);
   }
   return (_MultiSignal *)pSVar1->data;
@@ -996,32 +1055,35 @@ _MultiSignal * SIGNAL_RelocateSignal(_MultiSignal *multiSignal,long offset)
 // decompiled code
 // original method signature: 
 // struct _MultiSignal * /*$ra*/ SIGNAL_FindSignal(struct Level *level /*$a0*/, long id /*$a1*/)
- // line 1056, offset 0x8001e788
+ // line 1000, offset 0x8001e338
 	/* begin block 1 */
-		// Start line: 1058
-		// Start offset: 0x8001E788
+		// Start line: 1002
+		// Start offset: 0x8001E338
 		// Variables:
 	// 		int i; // $a2
 	// 		struct Signal *signal; // $a3
 	// 		struct _MultiSignal *msignal; // $v1
+	// 		long signalNumber; // $v1
 	/* end block 1 */
-	// End offset: 0x8001E834
-	// End Line: 1088
+	// End offset: 0x8001E3E4
+	// End Line: 1043
 
 	/* begin block 2 */
-		// Start line: 2035
+		// Start line: 1918
 	/* end block 2 */
-	// End Line: 2036
+	// End Line: 1919
 
 	/* begin block 3 */
-		// Start line: 2036
+		// Start line: 1919
 	/* end block 3 */
-	// End Line: 2037
+	// End Line: 1920
 
 	/* begin block 4 */
-		// Start line: 2041
+		// Start line: 1925
 	/* end block 4 */
-	// End Line: 2042
+	// End Line: 1926
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 _MultiSignal * SIGNAL_FindSignal(Level *level,long id)
 
@@ -1039,8 +1101,8 @@ _MultiSignal * SIGNAL_FindSignal(Level *level,long id)
       if (0 < p_Var1->numSignals) {
         do {
           iVar2 = iVar2 + 1;
-          pSVar3 = (Signal *)
-                   (&pSVar3->id + (int)(&signalInfoList)[pSVar3->id & 0x7fffffff].length + 1);
+          pSVar3 = (Signal *)(&pSVar3->id + (int)signalInfoList[pSVar3->id & 0x7fffffff].length + 1)
+          ;
         } while (iVar2 < p_Var1->numSignals);
       }
       p_Var1 = (_MultiSignal *)pSVar3->data;
@@ -1057,20 +1119,22 @@ _MultiSignal * SIGNAL_FindSignal(Level *level,long id)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SIGNAL_OutOfWater(struct _Instance *instance /*$s0*/)
- // line 1092, offset 0x8001e83c
+ // line 1047, offset 0x8001e3ec
 	/* begin block 1 */
-		// Start line: 1093
-		// Start offset: 0x8001E83C
+		// Start line: 1048
+		// Start offset: 0x8001E3EC
 		// Variables:
 	// 		struct Level *level; // $v0
 	/* end block 1 */
-	// End offset: 0x8001E87C
-	// End Line: 1103
+	// End offset: 0x8001E42C
+	// End Line: 1058
 
 	/* begin block 2 */
-		// Start line: 2113
+		// Start line: 2038
 	/* end block 2 */
-	// End Line: 2114
+	// End Line: 2039
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 void SIGNAL_OutOfWater(_Instance *instance)
 
@@ -1089,20 +1153,22 @@ void SIGNAL_OutOfWater(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ SIGNAL_InWater(struct _Instance *instance /*$s0*/)
- // line 1105, offset 0x8001e88c
+ // line 1060, offset 0x8001e43c
 	/* begin block 1 */
-		// Start line: 1106
-		// Start offset: 0x8001E88C
+		// Start line: 1061
+		// Start offset: 0x8001E43C
 		// Variables:
 	// 		struct Level *level; // $v0
 	/* end block 1 */
-	// End offset: 0x8001E8CC
-	// End Line: 1115
+	// End offset: 0x8001E47C
+	// End Line: 1070
 
 	/* begin block 2 */
-		// Start line: 2139
+		// Start line: 2064
 	/* end block 2 */
-	// End Line: 2140
+	// End Line: 2065
+
+/* File: C:\kain2\game\SIGNAL.C */
 
 void SIGNAL_InWater(_Instance *instance)
 

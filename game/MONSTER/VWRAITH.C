@@ -5,16 +5,18 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VWRAITH_MoveVertical(struct _Instance *instance /*$a0*/, long targetZ /*$a1*/, int velocity /*$a2*/)
- // line 88, offset 0x8008cd60
+ // line 89, offset 0x8008e568
 	/* begin block 1 */
-		// Start line: 176
+		// Start line: 178
 	/* end block 1 */
-	// End Line: 177
+	// End Line: 179
 
 	/* begin block 2 */
-		// Start line: 177
+		// Start line: 179
 	/* end block 2 */
-	// End Line: 178
+	// End Line: 180
+
+/* File: C:\kain2\game\MONSTER\VWRAITH.C */
 
 void VWRAITH_MoveVertical(_Instance *instance,long targetZ,int velocity)
 
@@ -49,23 +51,24 @@ void VWRAITH_MoveVertical(_Instance *instance,long targetZ,int velocity)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ VWRAITH_Init(struct _Instance *instance /*$s2*/)
- // line 107, offset 0x8008cdb8
+// void /*$ra*/ VWRAITH_Init(struct _Instance *instance /*$s1*/)
+ // line 108, offset 0x8008e5c0
 	/* begin block 1 */
-		// Start line: 108
-		// Start offset: 0x8008CDB8
+		// Start line: 109
+		// Start offset: 0x8008E5C0
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
-	// 		struct _MonsterAttributes *ma; // $s1
 	// 		long color; // stack offset -24
 	/* end block 1 */
-	// End offset: 0x8008CDEC
+	// End offset: 0x8008E5F0
 	// End Line: 111
 
 	/* begin block 2 */
-		// Start line: 214
+		// Start line: 216
 	/* end block 2 */
-	// End Line: 215
+	// End Line: 217
+
+/* File: C:\kain2\game\MONSTER\VWRAITH.C */
 
 void VWRAITH_Init(_Instance *instance)
 
@@ -73,19 +76,15 @@ void VWRAITH_Init(_Instance *instance)
   _FXGlowEffect *p_Var1;
   int iVar2;
   uint *puVar3;
-  void *pvVar4;
   long local_18 [2];
   
   puVar3 = (uint *)instance->extraData;
   iVar2 = (int)*(short *)(puVar3 + 0x50);
-  pvVar4 = instance->data;
   if (iVar2 < 0) {
     iVar2 = iVar2 + 0xfff;
   }
   local_18[0] = FX_GetHealthColor(iVar2 >> 0xc);
-  p_Var1 = FX_DoInstanceOneSegmentGlow
-                     (instance,(uint)*(byte *)((int)pvVar4 + 0x19),local_18,1,0x4b0,
-                      (int)**(short **)((int)pvVar4 + 4),(int)**(short **)((int)pvVar4 + 4));
+  p_Var1 = FX_DoInstanceTwoSegmentGlow(instance,0x15,0x17,local_18,1,0x4b0,0x9c);
   *(_FXGlowEffect **)(puVar3 + 0x37) = p_Var1;
   MON_DefaultInit(instance);
   *(undefined2 *)(puVar3 + 0x51) = 0x3000;
@@ -99,31 +98,33 @@ void VWRAITH_Init(_Instance *instance)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ VWRAITH_ShouldISwoop(struct _Instance *instance /*$a0*/)
- // line 127, offset 0x8008ce80
+ // line 131, offset 0x8008e674
 	/* begin block 1 */
-		// Start line: 129
-		// Start offset: 0x8008CE80
+		// Start line: 133
+		// Start offset: 0x8008E674
 		// Variables:
 	// 		struct _MonsterAttributes *ma; // $a3
 	// 		struct _MonsterVars *mv; // $v1
 	/* end block 1 */
-	// End offset: 0x8008CEDC
-	// End Line: 132
+	// End offset: 0x8008E6D0
+	// End Line: 136
 
 	/* begin block 2 */
-		// Start line: 269
+		// Start line: 281
 	/* end block 2 */
-	// End Line: 270
+	// End Line: 282
 
 	/* begin block 3 */
-		// Start line: 270
+		// Start line: 282
 	/* end block 3 */
-	// End Line: 271
+	// End Line: 283
 
 	/* begin block 4 */
-		// Start line: 271
+		// Start line: 283
 	/* end block 4 */
-	// End Line: 272
+	// End Line: 284
+
+/* File: C:\kain2\game\MONSTER\VWRAITH.C */
 
 int VWRAITH_ShouldISwoop(_Instance *instance)
 
@@ -145,29 +146,31 @@ int VWRAITH_ShouldISwoop(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VWRAITH_PursueEntry(struct _Instance *instance /*$s1*/)
- // line 140, offset 0x8008cee4
+ // line 144, offset 0x8008e6d8
 	/* begin block 1 */
-		// Start line: 141
-		// Start offset: 0x8008CEE4
+		// Start line: 145
+		// Start offset: 0x8008E6D8
 		// Variables:
 	// 		struct _MonsterVars *mv; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 155
-			// Start offset: 0x8008CF40
+			// Start line: 159
+			// Start offset: 0x8008E734
 			// Variables:
 		// 		struct _MonsterAttributes *ma; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8008CF68
-		// End Line: 160
+		// End offset: 0x8008E75C
+		// End Line: 164
 	/* end block 1 */
-	// End offset: 0x8008CF68
-	// End Line: 161
+	// End offset: 0x8008E75C
+	// End Line: 165
 
 	/* begin block 2 */
-		// Start line: 298
+		// Start line: 310
 	/* end block 2 */
-	// End Line: 299
+	// End Line: 311
+
+/* File: C:\kain2\game\MONSTER\VWRAITH.C */
 
 void VWRAITH_PursueEntry(_Instance *instance)
 
@@ -198,31 +201,33 @@ void VWRAITH_PursueEntry(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VWRAITH_Pursue(struct _Instance *instance /*$s2*/)
- // line 163, offset 0x8008cf7c
+ // line 167, offset 0x8008e770
 	/* begin block 1 */
-		// Start line: 164
-		// Start offset: 0x8008CF7C
+		// Start line: 168
+		// Start offset: 0x8008E770
 		// Variables:
 	// 		struct _MonsterAttributes *ma; // $s1
 	// 		struct _MonsterVars *mv; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 184
-			// Start offset: 0x8008D01C
+			// Start line: 188
+			// Start offset: 0x8008E810
 			// Variables:
 		// 		struct _MonsterAttributes *ma; // $s1
 		// 		struct _MonsterAttackAttributes *attack; // $s3
 		/* end block 1.1 */
-		// End offset: 0x8008D10C
-		// End Line: 207
+		// End offset: 0x8008E900
+		// End Line: 211
 	/* end block 1 */
-	// End offset: 0x8008D130
-	// End Line: 214
+	// End offset: 0x8008E924
+	// End Line: 218
 
 	/* begin block 2 */
-		// Start line: 344
+		// Start line: 356
 	/* end block 2 */
-	// End Line: 345
+	// End Line: 357
+
+/* File: C:\kain2\game\MONSTER\VWRAITH.C */
 
 void VWRAITH_Pursue(_Instance *instance)
 
@@ -257,7 +262,7 @@ void VWRAITH_Pursue(_Instance *instance)
     }
     else {
       cVar1 = *(char *)(*(int *)((int)pvVar5 + 4) + 0x10);
-      iVar2 = *(int *)((int)pvVar5 + 0x3c);
+      iVar2 = *(int *)((int)pvVar5 + 0x38);
       MON_TurnToPosition(instance,(_Position *)(*(int *)(*(int *)((int)pvVar4 + 0xc4) + 4) + 0x5c),
                          *(short *)(*(int *)((int)pvVar4 + 0x164) + 0x20));
       if (*(short *)(*(int *)((int)pvVar4 + 0xc4) + 0x14) <
@@ -295,12 +300,64 @@ void VWRAITH_Pursue(_Instance *instance)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ VWRAITH_CombatEntry(struct _Instance *instance /*$a0*/)
- // line 219, offset 0x8008d14c
+// void /*$ra*/ VWRAITH_VerticalMove(struct _Instance *instance /*$s0*/)
+ // line 223, offset 0x8008e940
 	/* begin block 1 */
-		// Start line: 468
+		// Start line: 224
+		// Start offset: 0x8008E940
+		// Variables:
+	// 		struct _MonsterVars *mv; // $v0
+
+		/* begin block 1.1 */
+			// Start line: 229
+			// Start offset: 0x8008E96C
+			// Variables:
+		// 		struct _MonsterAttributes *ma; // $v0
+		// 		long targetZ; // $s1
+		/* end block 1.1 */
+		// End offset: 0x8008E9B0
+		// End Line: 235
 	/* end block 1 */
-	// End Line: 469
+	// End offset: 0x8008E9B0
+	// End Line: 236
+
+	/* begin block 2 */
+		// Start line: 480
+	/* end block 2 */
+	// End Line: 481
+
+/* File: C:\kain2\game\MONSTER\VWRAITH.C */
+
+void VWRAITH_VerticalMove(_Instance *instance)
+
+{
+  int targetZ;
+  undefined4 local_10;
+  undefined4 local_c;
+  
+  targetZ = *(int *)((int)instance->extraData + 0xc4);
+  if (targetZ != 0) {
+    targetZ = (int)*(short *)(*(int *)(targetZ + 4) + 0x60);
+    VWRAITH_MoveVertical(instance,targetZ,(int)*(short *)(*(int *)((int)instance->data + 4) + 8));
+    if ((instance->currentMainState == 6) && ((int)(instance->position).z != targetZ)) {
+      MON_SwitchState(instance,(MonsterState)CONCAT44(local_c,local_10));
+    }
+  }
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ VWRAITH_CombatEntry(struct _Instance *instance /*$a0*/)
+ // line 241, offset 0x8008e9c4
+	/* begin block 1 */
+		// Start line: 517
+	/* end block 1 */
+	// End Line: 518
+
+/* File: C:\kain2\game\MONSTER\VWRAITH.C */
 
 void VWRAITH_CombatEntry(_Instance *instance)
 
@@ -313,50 +370,61 @@ void VWRAITH_CombatEntry(_Instance *instance)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ VWRAITH_Combat(struct _Instance *instance /*$s1*/)
- // line 224, offset 0x8008d16c
+// void /*$ra*/ VWRAITH_Combat(struct _Instance *instance /*$s0*/)
+ // line 246, offset 0x8008e9e4
 	/* begin block 1 */
-		// Start line: 225
-		// Start offset: 0x8008D16C
-		// Variables:
-	// 		struct _MonsterVars *mv; // $s0
-
-		/* begin block 1.1 */
-			// Start line: 232
-			// Start offset: 0x8008D19C
-			// Variables:
-		// 		struct _MonsterAttributes *ma; // $v0
-		// 		long targetZ; // $s0
-		/* end block 1.1 */
-		// End offset: 0x8008D1E0
-		// End Line: 238
+		// Start line: 527
 	/* end block 1 */
-	// End offset: 0x8008D1E0
-	// End Line: 239
+	// End Line: 528
 
-	/* begin block 2 */
-		// Start line: 478
-	/* end block 2 */
-	// End Line: 479
+/* File: C:\kain2\game\MONSTER\VWRAITH.C */
 
 void VWRAITH_Combat(_Instance *instance)
 
 {
-  int targetZ;
-  undefined4 local_10;
-  void *pvVar1;
-  undefined4 local_c;
-  
-  pvVar1 = instance->extraData;
   MON_Combat(instance);
-  targetZ = *(int *)((int)pvVar1 + 0xc4);
-  if (targetZ != 0) {
-    targetZ = (int)*(short *)(*(int *)(targetZ + 4) + 0x60);
-    VWRAITH_MoveVertical(instance,targetZ,(int)*(short *)(*(int *)((int)instance->data + 4) + 8));
-    if ((instance->currentMainState == 6) && ((int)(instance->position).z != targetZ)) {
-      MON_SwitchState(instance,(MonsterState)CONCAT44(local_c,local_10));
-    }
-  }
+  VWRAITH_VerticalMove(instance);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ VWRAITH_EmbraceEntry(struct _Instance *instance /*$a0*/)
+ // line 256, offset 0x8008ea10
+	/* begin block 1 */
+		// Start line: 547
+	/* end block 1 */
+	// End Line: 548
+
+/* File: C:\kain2\game\MONSTER\VWRAITH.C */
+
+void VWRAITH_EmbraceEntry(_Instance *instance)
+
+{
+  MON_EmbraceEntry(instance);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ VWRAITH_Embrace(struct _Instance *instance /*$s0*/)
+ // line 261, offset 0x8008ea30
+	/* begin block 1 */
+		// Start line: 557
+	/* end block 1 */
+	// End Line: 558
+
+/* File: C:\kain2\game\MONSTER\VWRAITH.C */
+
+void VWRAITH_Embrace(_Instance *instance)
+
+{
+  MON_Embrace(instance);
+  VWRAITH_VerticalMove(instance);
   return;
 }
 

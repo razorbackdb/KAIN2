@@ -5,24 +5,24 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ RESOLVE_Pointers(struct RedirectList *redirectList /*$a0*/, long *data /*$a1*/, long *baseAddr /*$a2*/)
- // line 55, offset 0x8003d904
+ // line 55, offset 0x8003d1dc
 	/* begin block 1 */
 		// Start line: 60
-		// Start offset: 0x8003D904
+		// Start offset: 0x8003D1DC
 		// Variables:
 	// 		long *rdList; // $a0
 	// 		int i; // $a3
 
 		/* begin block 1.1 */
 			// Start line: 64
-			// Start offset: 0x8003D914
+			// Start offset: 0x8003D1EC
 			// Variables:
 		// 		long *handle; // $v1
 		/* end block 1.1 */
-		// End offset: 0x8003D914
+		// End offset: 0x8003D1EC
 		// End Line: 65
 	/* end block 1 */
-	// End offset: 0x8003D934
+	// End offset: 0x8003D20C
 	// End Line: 77
 
 	/* begin block 2 */
@@ -39,6 +39,8 @@
 		// Start line: 116
 	/* end block 4 */
 	// End Line: 117
+
+/* File: C:\kain2\game\RESOLVE.C */
 
 void RESOLVE_Pointers(RedirectList *redirectList,long *data,long *baseAddr)
 

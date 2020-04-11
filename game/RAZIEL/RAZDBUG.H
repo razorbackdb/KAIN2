@@ -2,7 +2,7 @@
 #define RAZDBUG_H
 
 
-extern void DebugProcess(struct _Instance *instance, struct __Player *player); // 0x8009FED8
+extern void DebugProcess(struct _Instance *instance, struct __Player *player); // 0x800A2630
 
 
 #endif

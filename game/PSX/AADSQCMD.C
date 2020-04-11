@@ -5,14 +5,14 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ aadSubstituteVariables(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 23, offset 0x80057008
+ // line 23, offset 0x80056074
 	/* begin block 1 */
 		// Start line: 25
-		// Start offset: 0x80057008
+		// Start offset: 0x80056074
 		// Variables:
 	// 		unsigned char trackFlags; // $a2
 	/* end block 1 */
-	// End offset: 0x800570B8
+	// End offset: 0x80056124
 	// End Line: 53
 
 	/* begin block 2 */
@@ -30,6 +30,8 @@
 	/* end block 4 */
 	// End Line: 51
 
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
+
 void aadSubstituteVariables(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
@@ -44,16 +46,16 @@ void aadSubstituteVariables(AadSeqEvent *event,_AadSequenceSlot *slot)
     bVar3 = bVar1;
     if ((bVar1 & 1) != 0) {
       bVar3 = bVar1 & 0xfe;
-      event->dataByte[0] = *(char *)((uint)(byte)event->dataByte[0] + 0x1b6c);
+      event->dataByte[0] = (&DAT_00001c08)[aadMem + (uint)(byte)event->dataByte[0]];
     }
     bVar4 = bVar3;
     if ((bVar1 & 2) != 0) {
       bVar4 = bVar3 & 0xfd;
-      event->dataByte[1] = *(char *)((uint)(byte)event->dataByte[1] + 0x1b6c);
+      event->dataByte[1] = (&DAT_00001c08)[aadMem + (uint)(byte)event->dataByte[1]];
     }
     if ((bVar3 & 4) != 0) {
       bVar4 = bVar4 & 0xfb;
-      event->dataByte[2] = *(char *)((uint)(byte)event->dataByte[2] + 0x1b6c);
+      event->dataByte[2] = (&DAT_00001c08)[aadMem + (uint)(byte)event->dataByte[2]];
     }
     *(byte *)(iVar2 + 0x3d8) = bVar4;
   }
@@ -65,14 +67,14 @@ void aadSubstituteVariables(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdSelectChannel(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 58, offset 0x800570c0
+ // line 58, offset 0x8005612c
 	/* begin block 1 */
 		// Start line: 60
-		// Start offset: 0x800570C0
+		// Start offset: 0x8005612C
 		// Variables:
 	// 		int channelNumber; // $v1
 	/* end block 1 */
-	// End offset: 0x800570D8
+	// End offset: 0x80056144
 	// End Line: 65
 
 	/* begin block 2 */
@@ -90,6 +92,8 @@ void aadSubstituteVariables(AadSeqEvent *event,_AadSequenceSlot *slot)
 	/* end block 4 */
 	// End Line: 122
 
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
+
 void metaCmdSelectChannel(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
@@ -104,14 +108,14 @@ void metaCmdSelectChannel(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdSelectSlot(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 68, offset 0x800570e0
+ // line 68, offset 0x8005614c
 	/* begin block 1 */
 		// Start line: 70
-		// Start offset: 0x800570E0
+		// Start offset: 0x8005614C
 		// Variables:
 	// 		int slotNumber; // $v1
 	/* end block 1 */
-	// End offset: 0x80057128
+	// End offset: 0x80056194
 	// End Line: 85
 
 	/* begin block 2 */
@@ -129,6 +133,8 @@ void metaCmdSelectChannel(AadSeqEvent *event,_AadSequenceSlot *slot)
 	/* end block 4 */
 	// End Line: 144
 
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
+
 void metaCmdSelectSlot(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
@@ -136,8 +142,8 @@ void metaCmdSelectSlot(AadSeqEvent *event,_AadSequenceSlot *slot)
   _AadSequenceSlot *p_Var2;
   
   bVar1 = event->dataByte[0];
-  if ((uint)bVar1 < (uint)mainMenuScreen) {
-    p_Var2 = *(_AadSequenceSlot **)((uint)bVar1 * 4 + 0x1c);
+  if ((int)(uint)bVar1 < *(int *)(aadMem + 4)) {
+    p_Var2 = *(_AadSequenceSlot **)(aadMem + (uint)bVar1 * 4 + 0x34);
     slot->selectedSlotNum = bVar1;
     slot->selectedSlotPtr = p_Var2;
     return;
@@ -154,21 +160,23 @@ void metaCmdSelectSlot(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdAssignSequence(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$s2*/)
- // line 88, offset 0x80057130
+ // line 88, offset 0x8005619c
 	/* begin block 1 */
 		// Start line: 89
-		// Start offset: 0x80057130
+		// Start offset: 0x8005619C
 		// Variables:
 	// 		int sequenceNumber; // $s1
 
 		/* begin block 1.1 */
 			// Start line: 89
-			// Start offset: 0x80057130
+			// Start offset: 0x8005619C
+			// Variables:
+		// 		int bank; // $s0
 		/* end block 1.1 */
-		// End offset: 0x80057188
+		// End offset: 0x800561F8
 		// End Line: 101
 	/* end block 1 */
-	// End offset: 0x80057188
+	// End offset: 0x800561F8
 	// End Line: 107
 
 	/* begin block 2 */
@@ -176,21 +184,18 @@ void metaCmdSelectSlot(AadSeqEvent *event,_AadSequenceSlot *slot)
 	/* end block 2 */
 	// End Line: 183
 
-	/* begin block 3 */
-		// Start line: 190
-	/* end block 3 */
-	// End Line: 191
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdAssignSequence(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
   byte bVar1;
   int iVar2;
-  uint bank;
+  int bank;
   
-  bank = (uint)slot->slotFlags;
+  bank = slot->selectedDynamicBank;
   bVar1 = event->dataByte[0];
-  if ((*(char *)(bank + 0x4e8) == '\x02') &&
+  if ((*(int *)(aadMem + bank * 4 + 0x500) == 2) &&
      (iVar2 = aadGetNumDynamicSequences(bank), (int)(uint)bVar1 < iVar2)) {
     aadAssignDynamicSequence(bank,(uint)bVar1,(uint)slot->selectedSlotNum);
   }
@@ -202,16 +207,18 @@ void metaCmdAssignSequence(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdUsePrimaryTempo(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 110, offset 0x800571a0
+ // line 110, offset 0x80056210
 	/* begin block 1 */
-		// Start line: 239
+		// Start line: 231
 	/* end block 1 */
-	// End Line: 240
+	// End Line: 232
 
 	/* begin block 2 */
-		// Start line: 242
+		// Start line: 234
 	/* end block 2 */
-	// End Line: 243
+	// End Line: 235
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdUsePrimaryTempo(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -224,16 +231,18 @@ void metaCmdUsePrimaryTempo(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdUseSecondaryTempo(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 117, offset 0x800571a8
+ // line 117, offset 0x80056218
 	/* begin block 1 */
-		// Start line: 253
+		// Start line: 245
 	/* end block 1 */
-	// End Line: 254
+	// End Line: 246
 
 	/* begin block 2 */
-		// Start line: 256
+		// Start line: 248
 	/* end block 2 */
-	// End Line: 257
+	// End Line: 249
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdUseSecondaryTempo(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -246,31 +255,33 @@ void metaCmdUseSecondaryTempo(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdSetTempo(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 124, offset 0x800571b0
+ // line 124, offset 0x80056220
 	/* begin block 1 */
 		// Start line: 125
-		// Start offset: 0x800571B0
+		// Start offset: 0x80056220
 		// Variables:
 	// 		struct AadTempo tempo; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x800571B0
+	// End offset: 0x80056220
 	// End Line: 125
 
 	/* begin block 2 */
-		// Start line: 267
+		// Start line: 259
 	/* end block 2 */
-	// End Line: 268
+	// End Line: 260
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdSetTempo(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  uint local_10;
-  ushort local_c;
+  AadTempo local_10;
   
-  local_10 = (uint)(byte)event->dataByte[0] << 0x10 | (uint)(byte)event->dataByte[1] << 8 |
-             (uint)(byte)event->dataByte[2];
-  local_c = (slot->selectedSlotPtr->tempo).ppqn;
-  aadSetSlotTempo((uint)slot->selectedSlotNum,(AadTempo *)&local_10);
+  local_10.quarterNoteTime =
+       (uint)(byte)event->dataByte[0] << 0x10 | (uint)(byte)event->dataByte[1] << 8 |
+       (uint)(byte)event->dataByte[2];
+  local_10.ppqn = (uint)(slot->selectedSlotPtr->tempo).ppqn;
+  aadSetSlotTempo((uint)slot->selectedSlotNum,&local_10);
   return;
 }
 
@@ -279,32 +290,33 @@ void metaCmdSetTempo(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdChangeTempo(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 137, offset 0x8005721c
+ // line 137, offset 0x8005628c
 	/* begin block 1 */
 		// Start line: 138
-		// Start offset: 0x8005721C
+		// Start offset: 0x8005628C
 		// Variables:
 	// 		struct AadTempo tempo; // stack offset -16
 	// 		struct _AadSequenceSlot *selectedSlot; // $a2
 	/* end block 1 */
-	// End offset: 0x8005721C
+	// End offset: 0x8005628C
 	// End Line: 138
 
 	/* begin block 2 */
-		// Start line: 293
+		// Start line: 285
 	/* end block 2 */
-	// End Line: 294
+	// End Line: 286
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdChangeTempo(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  uint local_10;
-  ushort local_c;
+  AadTempo local_10;
   
-  local_10 = ((slot->selectedSlotPtr->tempo).quarterNoteTime * 100) / (uint)(byte)event->dataByte[0]
-  ;
-  local_c = (slot->selectedSlotPtr->tempo).ppqn;
-  aadSetSlotTempo((uint)slot->selectedSlotNum,(AadTempo *)&local_10);
+  local_10.quarterNoteTime =
+       ((slot->selectedSlotPtr->tempo).quarterNoteTime * 100) / (uint)(byte)event->dataByte[0];
+  local_10.ppqn = (uint)(slot->selectedSlotPtr->tempo).ppqn;
+  aadSetSlotTempo((uint)slot->selectedSlotNum,&local_10);
   return;
 }
 
@@ -313,42 +325,44 @@ void metaCmdChangeTempo(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdSetTempoFromSequence(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$s2*/)
- // line 152, offset 0x8005728c
+ // line 152, offset 0x800562fc
 	/* begin block 1 */
 		// Start line: 153
-		// Start offset: 0x8005728C
+		// Start offset: 0x800562FC
 		// Variables:
 	// 		int sequenceNumber; // $s1
 	// 		struct AadTempo tempo; // stack offset -24
 
 		/* begin block 1.1 */
 			// Start line: 153
-			// Start offset: 0x8005728C
+			// Start offset: 0x800562FC
 			// Variables:
 		// 		int bank; // $s0
 		/* end block 1.1 */
-		// End offset: 0x800572F0
+		// End offset: 0x80056364
 		// End Line: 170
 	/* end block 1 */
-	// End offset: 0x800572F0
+	// End offset: 0x80056364
 	// End Line: 179
 
 	/* begin block 2 */
-		// Start line: 323
+		// Start line: 315
 	/* end block 2 */
-	// End Line: 324
+	// End Line: 316
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdSetTempoFromSequence(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
   byte bVar1;
   int iVar2;
-  uint bank;
+  int bank;
   AadTempo AStack24;
   
-  bank = (uint)slot->slotFlags;
+  bank = slot->selectedDynamicBank;
   bVar1 = event->dataByte[0];
-  if ((*(char *)(bank + 0x4e8) == '\x02') &&
+  if ((*(int *)(aadMem + bank * 4 + 0x500) == 2) &&
      (iVar2 = aadGetNumDynamicSequences(bank), (int)(uint)bVar1 < iVar2)) {
     aadGetTempoFromDynamicSequence(bank,(uint)bVar1,&AStack24);
     aadSetSlotTempo((uint)slot->selectedSlotNum,&AStack24);
@@ -361,11 +375,13 @@ void metaCmdSetTempoFromSequence(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdStartSlot(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 182, offset 0x80057308
+ // line 182, offset 0x8005637c
 	/* begin block 1 */
-		// Start line: 388
+		// Start line: 380
 	/* end block 1 */
-	// End Line: 389
+	// End Line: 381
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdStartSlot(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -379,11 +395,13 @@ void metaCmdStartSlot(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdStopSlot(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 189, offset 0x8005732c
+ // line 189, offset 0x800563a0
 	/* begin block 1 */
-		// Start line: 402
+		// Start line: 394
 	/* end block 1 */
-	// End Line: 403
+	// End Line: 395
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdStopSlot(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -397,11 +415,13 @@ void metaCmdStopSlot(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdPauseSlot(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 196, offset 0x80057350
+ // line 196, offset 0x800563c4
 	/* begin block 1 */
-		// Start line: 416
+		// Start line: 408
 	/* end block 1 */
-	// End Line: 417
+	// End Line: 409
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdPauseSlot(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -415,11 +435,13 @@ void metaCmdPauseSlot(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdResumeSlot(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 203, offset 0x80057374
+ // line 203, offset 0x800563e8
 	/* begin block 1 */
-		// Start line: 430
+		// Start line: 422
 	/* end block 1 */
-	// End Line: 431
+	// End Line: 423
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdResumeSlot(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -433,16 +455,18 @@ void metaCmdResumeSlot(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdSetSlotBendRange(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 210, offset 0x80057398
+ // line 210, offset 0x8005640c
 	/* begin block 1 */
-		// Start line: 444
+		// Start line: 436
 	/* end block 1 */
-	// End Line: 445
+	// End Line: 437
 
 	/* begin block 2 */
-		// Start line: 453
+		// Start line: 445
 	/* end block 2 */
-	// End Line: 454
+	// End Line: 446
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdSetSlotBendRange(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -455,16 +479,18 @@ void metaCmdSetSlotBendRange(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdSetChannelBendRange(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 223, offset 0x800573a0
+ // line 223, offset 0x80056414
 	/* begin block 1 */
-		// Start line: 470
+		// Start line: 462
 	/* end block 1 */
-	// End Line: 471
+	// End Line: 463
 
 	/* begin block 2 */
-		// Start line: 472
+		// Start line: 464
 	/* end block 2 */
-	// End Line: 473
+	// End Line: 465
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdSetChannelBendRange(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -477,25 +503,27 @@ void metaCmdSetChannelBendRange(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdSetSlotVolume(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 229, offset 0x800573a8
+ // line 229, offset 0x8005641c
 	/* begin block 1 */
 		// Start line: 230
-		// Start offset: 0x800573A8
+		// Start offset: 0x8005641C
 		// Variables:
 	// 		int volume; // $v1
 	/* end block 1 */
-	// End offset: 0x800573A8
+	// End offset: 0x8005641C
 	// End Line: 230
 
 	/* begin block 2 */
-		// Start line: 482
+		// Start line: 474
 	/* end block 2 */
-	// End Line: 483
+	// End Line: 475
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdSetSlotVolume(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  *(char *)&slot->selectedSlotPtr->unused = event->dataByte[0];
+  slot->selectedSlotPtr->slotVolume = event->dataByte[0];
   aadUpdateSlotVolPan(slot->selectedSlotPtr);
   return;
 }
@@ -505,25 +533,27 @@ void metaCmdSetSlotVolume(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdSetSlotPan(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 241, offset 0x800573dc
+ // line 241, offset 0x80056450
 	/* begin block 1 */
 		// Start line: 242
-		// Start offset: 0x800573DC
+		// Start offset: 0x80056450
 		// Variables:
 	// 		int pan; // $v1
 	/* end block 1 */
-	// End offset: 0x800573DC
+	// End offset: 0x80056450
 	// End Line: 242
 
 	/* begin block 2 */
-		// Start line: 506
+		// Start line: 498
 	/* end block 2 */
-	// End Line: 507
+	// End Line: 499
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdSetSlotPan(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  *(char *)((int)&slot->selectedSlotPtr->unused + 1) = event->dataByte[0];
+  slot->selectedSlotPtr->slotPan = event->dataByte[0];
   aadUpdateSlotVolPan(slot->selectedSlotPtr);
   return;
 }
@@ -533,25 +563,27 @@ void metaCmdSetSlotPan(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdSetChannelVolume(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 253, offset 0x80057410
+ // line 253, offset 0x80056484
 	/* begin block 1 */
 		// Start line: 254
-		// Start offset: 0x80057410
+		// Start offset: 0x80056484
 		// Variables:
 	// 		int volume; // $a0
 	/* end block 1 */
-	// End offset: 0x80057410
+	// End offset: 0x80056484
 	// End Line: 254
 
 	/* begin block 2 */
-		// Start line: 530
+		// Start line: 522
 	/* end block 2 */
-	// End Line: 531
+	// End Line: 523
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdSetChannelVolume(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  slot->selectedSlotPtr->volume[(uint)slot->selectedChannel + 4] = event->dataByte[0];
+  slot->selectedSlotPtr->volume[slot->selectedChannel] = event->dataByte[0];
   aadUpdateChannelVolPan(slot->selectedSlotPtr,(uint)slot->selectedChannel);
   return;
 }
@@ -561,25 +593,27 @@ void metaCmdSetChannelVolume(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdSetChannelPan(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 265, offset 0x8005744c
+ // line 265, offset 0x800564c0
 	/* begin block 1 */
 		// Start line: 266
-		// Start offset: 0x8005744C
+		// Start offset: 0x800564C0
 		// Variables:
 	// 		int pan; // $a0
 	/* end block 1 */
-	// End offset: 0x8005744C
+	// End offset: 0x800564C0
 	// End Line: 266
 
 	/* begin block 2 */
-		// Start line: 555
+		// Start line: 547
 	/* end block 2 */
-	// End Line: 556
+	// End Line: 548
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdSetChannelPan(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  slot->selectedSlotPtr->panPosition[(uint)slot->selectedChannel + 4] = event->dataByte[0];
+  slot->selectedSlotPtr->panPosition[slot->selectedChannel] = event->dataByte[0];
   aadUpdateChannelVolPan(slot->selectedSlotPtr,(uint)slot->selectedChannel);
   return;
 }
@@ -589,36 +623,39 @@ void metaCmdSetChannelPan(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdEnableSustainUpdate(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 277, offset 0x80057488
+ // line 277, offset 0x800564fc
 	/* begin block 1 */
 		// Start line: 279
-		// Start offset: 0x80057488
+		// Start offset: 0x800564FC
 		// Variables:
 	// 		int channel; // $a0
 	/* end block 1 */
-	// End offset: 0x80057488
+	// End offset: 0x800564FC
 	// End Line: 282
 
 	/* begin block 2 */
-		// Start line: 580
+		// Start line: 572
 	/* end block 2 */
-	// End Line: 581
+	// End Line: 573
 
 	/* begin block 3 */
-		// Start line: 581
+		// Start line: 573
 	/* end block 3 */
-	// End Line: 582
+	// End Line: 574
 
 	/* begin block 4 */
-		// Start line: 584
+		// Start line: 576
 	/* end block 4 */
-	// End Line: 585
+	// End Line: 577
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdEnableSustainUpdate(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  slot->selectedSlotPtr->delayedMuteMode =
-       slot->selectedSlotPtr->delayedMuteMode | (ushort)(1 << ((uint)slot->selectedChannel & 0x1f));
+  slot->selectedSlotPtr->enableSustainUpdate =
+       slot->selectedSlotPtr->enableSustainUpdate |
+       (ushort)(1 << ((uint)slot->selectedChannel & 0x1f));
   return;
 }
 
@@ -627,37 +664,39 @@ void metaCmdEnableSustainUpdate(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdDisableSustainUpdate(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 287, offset 0x800574a8
+ // line 287, offset 0x8005651c
 	/* begin block 1 */
 		// Start line: 289
-		// Start offset: 0x800574A8
+		// Start offset: 0x8005651C
 		// Variables:
 	// 		int channel; // $v0
 	/* end block 1 */
-	// End offset: 0x800574A8
+	// End offset: 0x8005651C
 	// End Line: 292
 
 	/* begin block 2 */
-		// Start line: 601
+		// Start line: 593
 	/* end block 2 */
-	// End Line: 602
+	// End Line: 594
 
 	/* begin block 3 */
-		// Start line: 602
+		// Start line: 594
 	/* end block 3 */
-	// End Line: 603
+	// End Line: 595
 
 	/* begin block 4 */
-		// Start line: 605
+		// Start line: 597
 	/* end block 4 */
-	// End Line: 606
+	// End Line: 598
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdDisableSustainUpdate(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  slot->selectedSlotPtr->delayedMuteMode =
-       slot->selectedSlotPtr->delayedMuteMode & ~(ushort)(1 << ((uint)slot->selectedChannel & 0x1f))
-  ;
+  slot->selectedSlotPtr->enableSustainUpdate =
+       slot->selectedSlotPtr->enableSustainUpdate &
+       ~(ushort)(1 << ((uint)slot->selectedChannel & 0x1f));
   return;
 }
 
@@ -666,25 +705,25 @@ void metaCmdDisableSustainUpdate(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdMuteChannel(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 297, offset 0x800574cc
+ // line 297, offset 0x80056540
 	/* begin block 1 */
 		// Start line: 298
-		// Start offset: 0x800574CC
-		// Variables:
-	// 		unsigned short channelMask; // $v0
+		// Start offset: 0x80056540
 	/* end block 1 */
-	// End offset: 0x800574CC
+	// End offset: 0x80056540
 	// End Line: 298
 
 	/* begin block 2 */
-		// Start line: 622
+		// Start line: 614
 	/* end block 2 */
-	// End Line: 623
+	// End Line: 615
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdMuteChannel(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  aadMuteChannels((uint)slot->selectedSlotNum,1 << ((uint)slot->selectedChannel & 0x1f) & 0xffff);
+  aadMuteChannels(slot->selectedSlotPtr,1 << ((uint)slot->selectedChannel & 0x1f));
   return;
 }
 
@@ -693,25 +732,25 @@ void metaCmdMuteChannel(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdUnMuteChannel(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 307, offset 0x800574fc
+ // line 307, offset 0x8005656c
 	/* begin block 1 */
 		// Start line: 308
-		// Start offset: 0x800574FC
-		// Variables:
-	// 		unsigned short channelMask; // $v0
+		// Start offset: 0x8005656C
 	/* end block 1 */
-	// End offset: 0x800574FC
+	// End offset: 0x8005656C
 	// End Line: 308
 
 	/* begin block 2 */
-		// Start line: 646
+		// Start line: 637
 	/* end block 2 */
-	// End Line: 647
+	// End Line: 638
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdUnMuteChannel(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  aadUnMuteChannels((uint)slot->selectedSlotNum,1 << ((uint)slot->selectedChannel & 0x1f) & 0xffff);
+  aadUnMuteChannels(slot->selectedSlotPtr,1 << ((uint)slot->selectedChannel & 0x1f));
   return;
 }
 
@@ -720,58 +759,25 @@ void metaCmdUnMuteChannel(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdMuteChannelList(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 317, offset 0x8005752c
+ // line 317, offset 0x80056598
 	/* begin block 1 */
 		// Start line: 318
-		// Start offset: 0x8005752C
+		// Start offset: 0x80056598
 	/* end block 1 */
-	// End offset: 0x8005752C
+	// End offset: 0x80056598
 	// End Line: 318
 
 	/* begin block 2 */
-		// Start line: 670
+		// Start line: 660
 	/* end block 2 */
-	// End Line: 671
+	// End Line: 661
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdMuteChannelList(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  aadMuteChannels((uint)slot->selectedSlotNum,(uint)*(ushort *)event->dataByte);
-  return;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// void /*$ra*/ metaCmdSetChannelMute(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$s1*/)
- // line 327, offset 0x8005755c
-	/* begin block 1 */
-		// Start line: 328
-		// Start offset: 0x8005755C
-		// Variables:
-	// 		int variableNum1; // $a2
-	// 		int variableNum2; // $a1
-	/* end block 1 */
-	// End offset: 0x800575C0
-	// End Line: 341
-
-	/* begin block 2 */
-		// Start line: 691
-	/* end block 2 */
-	// End Line: 692
-
-void metaCmdSetChannelMute(AadSeqEvent *event,_AadSequenceSlot *slot)
-
-{
-  uint channelList;
-  
-  if (((byte)event->dataByte[0] < 0x80) && ((byte)event->dataByte[1] < 0x80)) {
-    channelList = (uint)CONCAT11(*(undefined *)((uint)(byte)event->dataByte[1] + 0x1b6c),
-                                 *(undefined *)((uint)(byte)event->dataByte[0] + 0x1b6c));
-    aadUnMuteChannels((uint)slot->selectedSlotNum,~channelList);
-    aadMuteChannels((uint)slot->selectedSlotNum,channelList);
-  }
+  aadMuteChannels(slot->selectedSlotPtr,(uint)*(ushort *)event->dataByte);
   return;
 }
 
@@ -780,23 +786,143 @@ void metaCmdSetChannelMute(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdUnMuteChannelList(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 344, offset 0x800575d4
+ // line 327, offset 0x800565c8
 	/* begin block 1 */
-		// Start line: 345
-		// Start offset: 0x800575D4
+		// Start line: 328
+		// Start offset: 0x800565C8
 	/* end block 1 */
-	// End offset: 0x800575D4
-	// End Line: 345
+	// End offset: 0x800565C8
+	// End Line: 328
 
 	/* begin block 2 */
-		// Start line: 726
+		// Start line: 681
 	/* end block 2 */
-	// End Line: 727
+	// End Line: 682
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdUnMuteChannelList(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  aadUnMuteChannels((uint)slot->selectedSlotNum,(uint)*(ushort *)event->dataByte);
+  aadUnMuteChannels(slot->selectedSlotPtr,(uint)*(ushort *)event->dataByte);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ metaCmdSetChannelMute(struct AadSeqEvent *event /*$v0*/, struct _AadSequenceSlot *slot /*$s1*/)
+ // line 337, offset 0x800565f8
+	/* begin block 1 */
+		// Start line: 338
+		// Start offset: 0x800565F8
+		// Variables:
+	// 		unsigned long muteChannelMask; // $s0
+	/* end block 1 */
+	// End offset: 0x800565F8
+	// End Line: 338
+
+	/* begin block 2 */
+		// Start line: 702
+	/* end block 2 */
+	// End Line: 703
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
+
+void metaCmdSetChannelMute(AadSeqEvent *event,_AadSequenceSlot *slot)
+
+{
+  ushort uVar1;
+  
+  uVar1 = *(ushort *)event->dataByte;
+  aadUnMuteChannels(slot->selectedSlotPtr,~(uint)uVar1);
+  aadMuteChannels(slot->selectedSlotPtr,(uint)uVar1);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ metaCmdDelayMute(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
+ // line 349, offset 0x8005664c
+	/* begin block 1 */
+		// Start line: 351
+		// Start offset: 0x8005664C
+		// Variables:
+	// 		unsigned long channelMask; // $v1
+	/* end block 1 */
+	// End offset: 0x8005664C
+	// End Line: 353
+
+	/* begin block 2 */
+		// Start line: 727
+	/* end block 2 */
+	// End Line: 728
+
+	/* begin block 3 */
+		// Start line: 728
+	/* end block 3 */
+	// End Line: 729
+
+	/* begin block 4 */
+		// Start line: 730
+	/* end block 4 */
+	// End Line: 731
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
+
+void metaCmdDelayMute(AadSeqEvent *event,_AadSequenceSlot *slot)
+
+{
+  slot->selectedSlotPtr->delayedMuteMode =
+       slot->selectedSlotPtr->delayedMuteMode | *(ushort *)event->dataByte;
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ metaCmdUpdateMute(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$s1*/)
+ // line 362, offset 0x80056670
+	/* begin block 1 */
+		// Start line: 363
+		// Start offset: 0x80056670
+		// Variables:
+	// 		unsigned long channelMask; // $s0
+	// 		unsigned long mask; // $a1
+	/* end block 1 */
+	// End offset: 0x800566F0
+	// End Line: 376
+
+	/* begin block 2 */
+		// Start line: 757
+	/* end block 2 */
+	// End Line: 758
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
+
+void metaCmdUpdateMute(AadSeqEvent *event,_AadSequenceSlot *slot)
+
+{
+  ushort uVar1;
+  ushort uVar2;
+  _AadSequenceSlot *slot_00;
+  
+  uVar1 = *(ushort *)event->dataByte;
+  slot->selectedSlotPtr->delayedMuteMode = slot->selectedSlotPtr->delayedMuteMode & ~uVar1;
+  slot_00 = slot->selectedSlotPtr;
+  uVar2 = slot_00->delayedMuteCmds & uVar1;
+  if (uVar2 != 0) {
+    aadMuteChannels(slot_00,(uint)uVar2);
+    slot_00 = slot->selectedSlotPtr;
+  }
+  uVar1 = slot_00->delayedUnMuteCmds & uVar1;
+  if (uVar1 != 0) {
+    aadUnMuteChannels(slot_00,(uint)uVar1);
+  }
   return;
 }
 
@@ -805,16 +931,18 @@ void metaCmdUnMuteChannelList(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdChannelVolumeFade(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 354, offset 0x80057604
+ // line 379, offset 0x80056704
 	/* begin block 1 */
-		// Start line: 747
+		// Start line: 793
 	/* end block 1 */
-	// End Line: 748
+	// End Line: 794
 
 	/* begin block 2 */
-		// Start line: 757
+		// Start line: 803
 	/* end block 2 */
-	// End Line: 758
+	// End Line: 804
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdChannelVolumeFade(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -827,16 +955,18 @@ void metaCmdChannelVolumeFade(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdChannelPanFade(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 368, offset 0x8005760c
+ // line 393, offset 0x8005670c
 	/* begin block 1 */
-		// Start line: 775
+		// Start line: 821
 	/* end block 1 */
-	// End Line: 776
+	// End Line: 822
 
 	/* begin block 2 */
-		// Start line: 785
+		// Start line: 831
 	/* end block 2 */
-	// End Line: 786
+	// End Line: 832
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdChannelPanFade(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -849,16 +979,18 @@ void metaCmdChannelPanFade(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdSlotVolumeFade(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 382, offset 0x80057614
+ // line 407, offset 0x80056714
 	/* begin block 1 */
-		// Start line: 803
+		// Start line: 849
 	/* end block 1 */
-	// End Line: 804
+	// End Line: 850
 
 	/* begin block 2 */
-		// Start line: 812
+		// Start line: 858
 	/* end block 2 */
-	// End Line: 813
+	// End Line: 859
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdSlotVolumeFade(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -871,16 +1003,18 @@ void metaCmdSlotVolumeFade(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdSlotPanFade(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 395, offset 0x8005761c
+ // line 420, offset 0x8005671c
 	/* begin block 1 */
-		// Start line: 829
+		// Start line: 875
 	/* end block 1 */
-	// End Line: 830
+	// End Line: 876
 
 	/* begin block 2 */
-		// Start line: 838
+		// Start line: 884
 	/* end block 2 */
-	// End Line: 839
+	// End Line: 885
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdSlotPanFade(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -893,36 +1027,37 @@ void metaCmdSlotPanFade(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdSetChannelProgram(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 408, offset 0x80057624
+ // line 433, offset 0x80056724
 	/* begin block 1 */
-		// Start line: 410
-		// Start offset: 0x80057624
+		// Start line: 435
+		// Start offset: 0x80056724
 		// Variables:
 	// 		int program; // $a0
 	/* end block 1 */
-	// End offset: 0x80057624
-	// End Line: 413
+	// End offset: 0x80056724
+	// End Line: 438
 
 	/* begin block 2 */
-		// Start line: 855
+		// Start line: 901
 	/* end block 2 */
-	// End Line: 856
+	// End Line: 902
 
 	/* begin block 3 */
-		// Start line: 856
+		// Start line: 902
 	/* end block 3 */
-	// End Line: 857
+	// End Line: 903
 
 	/* begin block 4 */
-		// Start line: 859
+		// Start line: 905
 	/* end block 4 */
-	// End Line: 860
+	// End Line: 906
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdSetChannelProgram(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  *(char *)((int)slot->selectedSlotPtr->pitchWheel + (uint)slot->selectedChannel + 0x14) =
-       event->dataByte[0];
+  slot->selectedSlotPtr->currentProgram[slot->selectedChannel] = event->dataByte[0];
   return;
 }
 
@@ -931,16 +1066,18 @@ void metaCmdSetChannelProgram(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdSetChannelBasePriority(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 418, offset 0x8005763c
+ // line 443, offset 0x8005673c
 	/* begin block 1 */
-		// Start line: 876
+		// Start line: 922
 	/* end block 1 */
-	// End Line: 877
+	// End Line: 923
 
 	/* begin block 2 */
-		// Start line: 896
+		// Start line: 942
 	/* end block 2 */
-	// End Line: 897
+	// End Line: 943
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdSetChannelBasePriority(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -953,36 +1090,38 @@ void metaCmdSetChannelBasePriority(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdSetChannelTranspose(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 442, offset 0x80057644
+ // line 467, offset 0x80056744
 	/* begin block 1 */
-		// Start line: 444
-		// Start offset: 0x80057644
+		// Start line: 469
+		// Start offset: 0x80056744
 		// Variables:
 	// 		int channel; // $a2
 	// 		int transpose; // $v1
 	/* end block 1 */
-	// End offset: 0x80057644
-	// End Line: 446
+	// End offset: 0x80056744
+	// End Line: 471
 
 	/* begin block 2 */
-		// Start line: 924
+		// Start line: 970
 	/* end block 2 */
-	// End Line: 925
+	// End Line: 971
 
 	/* begin block 3 */
-		// Start line: 925
+		// Start line: 971
 	/* end block 3 */
-	// End Line: 926
+	// End Line: 972
 
 	/* begin block 4 */
-		// Start line: 927
+		// Start line: 973
 	/* end block 4 */
-	// End Line: 928
+	// End Line: 974
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdSetChannelTranspose(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  slot->selectedSlotPtr->transpose[(uint)slot->selectedChannel + 4] = event->dataByte[0];
+  slot->selectedSlotPtr->transpose[slot->selectedChannel] = event->dataByte[0];
   return;
 }
 
@@ -991,36 +1130,38 @@ void metaCmdSetChannelTranspose(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdIgnoreChannelTranspose(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 453, offset 0x8005765c
+ // line 478, offset 0x8005675c
 	/* begin block 1 */
-		// Start line: 455
-		// Start offset: 0x8005765C
+		// Start line: 480
+		// Start offset: 0x8005675C
 		// Variables:
 	// 		int channel; // $a0
 	/* end block 1 */
-	// End offset: 0x8005765C
-	// End Line: 458
+	// End offset: 0x8005675C
+	// End Line: 483
 
 	/* begin block 2 */
-		// Start line: 947
+		// Start line: 993
 	/* end block 2 */
-	// End Line: 948
+	// End Line: 994
 
 	/* begin block 3 */
-		// Start line: 948
+		// Start line: 994
 	/* end block 3 */
-	// End Line: 949
+	// End Line: 995
 
 	/* begin block 4 */
-		// Start line: 951
+		// Start line: 997
 	/* end block 4 */
-	// End Line: 952
+	// End Line: 998
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdIgnoreChannelTranspose(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  slot->selectedSlotPtr->delayedMuteCmds =
-       slot->selectedSlotPtr->delayedMuteCmds | (ushort)(1 << ((uint)slot->selectedChannel & 0x1f));
+  slot->selectedSlotPtr->ignoreTranspose =
+       slot->selectedSlotPtr->ignoreTranspose | (ushort)(1 << ((uint)slot->selectedChannel & 0x1f));
   return;
 }
 
@@ -1029,36 +1170,38 @@ void metaCmdIgnoreChannelTranspose(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdRespectChannelTranspose(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 463, offset 0x8005767c
+ // line 488, offset 0x8005677c
 	/* begin block 1 */
-		// Start line: 465
-		// Start offset: 0x8005767C
+		// Start line: 490
+		// Start offset: 0x8005677C
 		// Variables:
 	// 		int channel; // $v0
 	/* end block 1 */
-	// End offset: 0x8005767C
-	// End Line: 468
+	// End offset: 0x8005677C
+	// End Line: 493
 
 	/* begin block 2 */
-		// Start line: 968
+		// Start line: 1014
 	/* end block 2 */
-	// End Line: 969
+	// End Line: 1015
 
 	/* begin block 3 */
-		// Start line: 969
+		// Start line: 1015
 	/* end block 3 */
-	// End Line: 970
+	// End Line: 1016
 
 	/* begin block 4 */
-		// Start line: 972
+		// Start line: 1018
 	/* end block 4 */
-	// End Line: 973
+	// End Line: 1019
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdRespectChannelTranspose(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  slot->selectedSlotPtr->delayedMuteCmds =
-       slot->selectedSlotPtr->delayedMuteCmds & ~(ushort)(1 << ((uint)slot->selectedChannel & 0x1f))
+  slot->selectedSlotPtr->ignoreTranspose =
+       slot->selectedSlotPtr->ignoreTranspose & ~(ushort)(1 << ((uint)slot->selectedChannel & 0x1f))
   ;
   return;
 }
@@ -1068,16 +1211,18 @@ void metaCmdRespectChannelTranspose(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdSetChannelPitchMap(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 473, offset 0x800576a0
+ // line 498, offset 0x800567a0
 	/* begin block 1 */
-		// Start line: 989
+		// Start line: 1035
 	/* end block 1 */
-	// End Line: 990
+	// End Line: 1036
 
 	/* begin block 2 */
-		// Start line: 1000
+		// Start line: 1046
 	/* end block 2 */
-	// End Line: 1001
+	// End Line: 1047
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdSetChannelPitchMap(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -1090,16 +1235,18 @@ void metaCmdSetChannelPitchMap(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdIgnoreChannelPitchMap(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 488, offset 0x800576a8
+ // line 513, offset 0x800567a8
 	/* begin block 1 */
-		// Start line: 1019
+		// Start line: 1065
 	/* end block 1 */
-	// End Line: 1020
+	// End Line: 1066
 
 	/* begin block 2 */
-		// Start line: 1027
+		// Start line: 1073
 	/* end block 2 */
-	// End Line: 1028
+	// End Line: 1074
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdIgnoreChannelPitchMap(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -1112,16 +1259,18 @@ void metaCmdIgnoreChannelPitchMap(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdRespectChannelPitchMap(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 500, offset 0x800576b0
+ // line 525, offset 0x800567b0
 	/* begin block 1 */
-		// Start line: 1043
+		// Start line: 1089
 	/* end block 1 */
-	// End Line: 1044
+	// End Line: 1090
 
 	/* begin block 2 */
-		// Start line: 1051
+		// Start line: 1097
 	/* end block 2 */
-	// End Line: 1052
+	// End Line: 1098
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdRespectChannelPitchMap(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -1134,36 +1283,38 @@ void metaCmdRespectChannelPitchMap(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdGetSequenceAssigned(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 512, offset 0x800576b8
+ // line 537, offset 0x800567b8
 	/* begin block 1 */
-		// Start line: 514
-		// Start offset: 0x800576B8
+		// Start line: 539
+		// Start offset: 0x800567B8
 		// Variables:
 	// 		int variableNum; // $a0
 	/* end block 1 */
-	// End offset: 0x800576E0
-	// End Line: 521
+	// End offset: 0x800567E0
+	// End Line: 546
 
 	/* begin block 2 */
-		// Start line: 1067
+		// Start line: 1113
 	/* end block 2 */
-	// End Line: 1068
+	// End Line: 1114
 
 	/* begin block 3 */
-		// Start line: 1068
+		// Start line: 1114
 	/* end block 3 */
-	// End Line: 1069
+	// End Line: 1115
 
 	/* begin block 4 */
-		// Start line: 1070
+		// Start line: 1116
 	/* end block 4 */
-	// End Line: 1071
+	// End Line: 1117
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdGetSequenceAssigned(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
   if ((byte)event->dataByte[0] < 0x80) {
-    *(uchar *)((uint)(byte)event->dataByte[0] + 0x1b6c) =
+    (&DAT_00001c08)[aadMem + (uint)(byte)event->dataByte[0]] =
          slot->selectedSlotPtr->sequenceNumberAssigned;
   }
   return;
@@ -1174,33 +1325,35 @@ void metaCmdGetSequenceAssigned(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdGetTempo(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 524, offset 0x800576e8
+ // line 549, offset 0x800567e8
 	/* begin block 1 */
-		// Start line: 526
-		// Start offset: 0x800576E8
+		// Start line: 551
+		// Start offset: 0x800567E8
 		// Variables:
 	// 		int variableNum1; // $a2
 	// 		int variableNum2; // $a3
 	// 		int variableNum3; // $t0
 	// 		unsigned long quarterNoteTime; // $a0
 	/* end block 1 */
-	// End offset: 0x80057744
-	// End Line: 542
+	// End offset: 0x80056844
+	// End Line: 567
 
 	/* begin block 2 */
-		// Start line: 1091
+		// Start line: 1137
 	/* end block 2 */
-	// End Line: 1092
+	// End Line: 1138
 
 	/* begin block 3 */
-		// Start line: 1092
+		// Start line: 1138
 	/* end block 3 */
-	// End Line: 1093
+	// End Line: 1139
 
 	/* begin block 4 */
-		// Start line: 1095
+		// Start line: 1141
 	/* end block 4 */
-	// End Line: 1096
+	// End Line: 1142
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdGetTempo(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -1213,9 +1366,9 @@ void metaCmdGetTempo(AadSeqEvent *event,_AadSequenceSlot *slot)
   bVar2 = event->dataByte[2];
   if ((((byte)event->dataByte[0] < 0x80) && (bVar1 < 0x80)) && (bVar2 < 0x80)) {
     uVar3 = (slot->selectedSlotPtr->tempo).quarterNoteTime;
-    *(undefined *)((uint)(byte)event->dataByte[0] + 0x1b6c) = (char)uVar3;
-    *(undefined *)((uint)bVar1 + 0x1b6c) = (char)(uVar3 >> 8);
-    *(undefined *)((uint)bVar2 + 0x1b6c) = (char)(uVar3 >> 0x10);
+    (&DAT_00001c08)[aadMem + (uint)(byte)event->dataByte[0]] = (char)uVar3;
+    (&DAT_00001c08)[aadMem + (uint)bVar1] = (char)(uVar3 >> 8);
+    (&DAT_00001c08)[aadMem + (uint)bVar2] = (char)(uVar3 >> 0x10);
   }
   return;
 }
@@ -1225,36 +1378,38 @@ void metaCmdGetTempo(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdGetSlotStatus(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 545, offset 0x8005774c
+ // line 570, offset 0x8005684c
 	/* begin block 1 */
-		// Start line: 547
-		// Start offset: 0x8005774C
+		// Start line: 572
+		// Start offset: 0x8005684C
 		// Variables:
 	// 		int variableNum; // $a0
 	/* end block 1 */
-	// End offset: 0x80057774
-	// End Line: 554
+	// End offset: 0x80056874
+	// End Line: 579
 
 	/* begin block 2 */
-		// Start line: 1134
+		// Start line: 1180
 	/* end block 2 */
-	// End Line: 1135
+	// End Line: 1181
 
 	/* begin block 3 */
-		// Start line: 1135
+		// Start line: 1181
 	/* end block 3 */
-	// End Line: 1136
+	// End Line: 1182
 
 	/* begin block 4 */
-		// Start line: 1137
+		// Start line: 1183
 	/* end block 4 */
-	// End Line: 1138
+	// End Line: 1184
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdGetSlotStatus(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
   if ((byte)event->dataByte[0] < 0x80) {
-    *(undefined *)((uint)(byte)event->dataByte[0] + 0x1b6c) =
+    (&DAT_00001c08)[aadMem + (uint)(byte)event->dataByte[0]] =
          *(undefined *)&slot->selectedSlotPtr->status;
   }
   return;
@@ -1265,31 +1420,33 @@ void metaCmdGetSlotStatus(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdGetChannelMute(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 557, offset 0x8005777c
+ // line 582, offset 0x8005687c
 	/* begin block 1 */
-		// Start line: 559
-		// Start offset: 0x8005777C
+		// Start line: 584
+		// Start offset: 0x8005687C
 		// Variables:
 	// 		int variableNum1; // $a2
 	// 		int variableNum2; // $a0
 	/* end block 1 */
-	// End offset: 0x800577C4
-	// End Line: 570
+	// End offset: 0x800568C4
+	// End Line: 595
 
 	/* begin block 2 */
-		// Start line: 1158
+		// Start line: 1204
 	/* end block 2 */
-	// End Line: 1159
+	// End Line: 1205
 
 	/* begin block 3 */
-		// Start line: 1159
+		// Start line: 1205
 	/* end block 3 */
-	// End Line: 1160
+	// End Line: 1206
 
 	/* begin block 4 */
-		// Start line: 1161
+		// Start line: 1207
 	/* end block 4 */
-	// End Line: 1162
+	// End Line: 1208
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdGetChannelMute(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -1298,9 +1455,9 @@ void metaCmdGetChannelMute(AadSeqEvent *event,_AadSequenceSlot *slot)
   
   bVar1 = event->dataByte[1];
   if (((byte)event->dataByte[0] < 0x80) && (bVar1 < 0x80)) {
-    *(undefined *)((uint)(byte)event->dataByte[0] + 0x1b6c) =
+    (&DAT_00001c08)[aadMem + (uint)(byte)event->dataByte[0]] =
          *(undefined *)&slot->selectedSlotPtr->channelMute;
-    *(undefined *)((uint)bVar1 + 0x1b6c) = (char)(slot->selectedSlotPtr->channelMute >> 8);
+    (&DAT_00001c08)[aadMem + (uint)bVar1] = (char)(slot->selectedSlotPtr->channelMute >> 8);
   }
   return;
 }
@@ -1310,38 +1467,40 @@ void metaCmdGetChannelMute(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdGetChannelVolume(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 573, offset 0x800577cc
+ // line 598, offset 0x800568cc
 	/* begin block 1 */
-		// Start line: 575
-		// Start offset: 0x800577CC
+		// Start line: 600
+		// Start offset: 0x800568CC
 		// Variables:
 	// 		int variableNum; // $a0
 	// 		int channel; // $v1
 	/* end block 1 */
-	// End offset: 0x800577FC
-	// End Line: 583
+	// End offset: 0x800568FC
+	// End Line: 608
 
 	/* begin block 2 */
-		// Start line: 1190
+		// Start line: 1236
 	/* end block 2 */
-	// End Line: 1191
+	// End Line: 1237
 
 	/* begin block 3 */
-		// Start line: 1191
+		// Start line: 1237
 	/* end block 3 */
-	// End Line: 1192
+	// End Line: 1238
 
 	/* begin block 4 */
-		// Start line: 1193
+		// Start line: 1239
 	/* end block 4 */
-	// End Line: 1194
+	// End Line: 1240
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdGetChannelVolume(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
   if ((byte)event->dataByte[0] < 0x80) {
-    *(uchar *)((uint)(byte)event->dataByte[0] + 0x1b6c) =
-         slot->selectedSlotPtr->volume[(uint)slot->selectedChannel + 4];
+    (&DAT_00001c08)[aadMem + (uint)(byte)event->dataByte[0]] =
+         slot->selectedSlotPtr->volume[slot->selectedChannel];
   }
   return;
 }
@@ -1351,38 +1510,40 @@ void metaCmdGetChannelVolume(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdGetChannelPan(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 586, offset 0x80057804
+ // line 611, offset 0x80056904
 	/* begin block 1 */
-		// Start line: 588
-		// Start offset: 0x80057804
+		// Start line: 613
+		// Start offset: 0x80056904
 		// Variables:
 	// 		int variableNum; // $a0
 	// 		int channel; // $v1
 	/* end block 1 */
-	// End offset: 0x80057834
-	// End Line: 595
+	// End offset: 0x80056934
+	// End Line: 620
 
 	/* begin block 2 */
-		// Start line: 1216
+		// Start line: 1262
 	/* end block 2 */
-	// End Line: 1217
+	// End Line: 1263
 
 	/* begin block 3 */
-		// Start line: 1217
+		// Start line: 1263
 	/* end block 3 */
-	// End Line: 1218
+	// End Line: 1264
 
 	/* begin block 4 */
-		// Start line: 1219
+		// Start line: 1265
 	/* end block 4 */
-	// End Line: 1220
+	// End Line: 1266
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdGetChannelPan(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
   if ((byte)event->dataByte[0] < 0x80) {
-    *(uchar *)((uint)(byte)event->dataByte[0] + 0x1b6c) =
-         slot->selectedSlotPtr->panPosition[(uint)slot->selectedChannel + 4];
+    (&DAT_00001c08)[aadMem + (uint)(byte)event->dataByte[0]] =
+         slot->selectedSlotPtr->panPosition[slot->selectedChannel];
   }
   return;
 }
@@ -1392,16 +1553,18 @@ void metaCmdGetChannelPan(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdGetChannelTranspose(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 598, offset 0x8005783c
+ // line 623, offset 0x8005693c
 	/* begin block 1 */
-		// Start line: 1240
+		// Start line: 1286
 	/* end block 1 */
-	// End Line: 1241
+	// End Line: 1287
 
 	/* begin block 2 */
-		// Start line: 1250
+		// Start line: 1296
 	/* end block 2 */
-	// End Line: 1251
+	// End Line: 1297
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdGetChannelTranspose(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -1414,39 +1577,40 @@ void metaCmdGetChannelTranspose(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdGetChannelProgram(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 612, offset 0x80057844
+ // line 637, offset 0x80056944
 	/* begin block 1 */
-		// Start line: 614
-		// Start offset: 0x80057844
+		// Start line: 639
+		// Start offset: 0x80056944
 		// Variables:
 	// 		int variableNum; // $a0
 	// 		int channel; // $v1
 	/* end block 1 */
-	// End offset: 0x80057874
-	// End Line: 621
+	// End offset: 0x80056974
+	// End Line: 646
 
 	/* begin block 2 */
-		// Start line: 1268
+		// Start line: 1314
 	/* end block 2 */
-	// End Line: 1269
+	// End Line: 1315
 
 	/* begin block 3 */
-		// Start line: 1269
+		// Start line: 1315
 	/* end block 3 */
-	// End Line: 1270
+	// End Line: 1316
 
 	/* begin block 4 */
-		// Start line: 1271
+		// Start line: 1317
 	/* end block 4 */
-	// End Line: 1272
+	// End Line: 1318
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdGetChannelProgram(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
   if ((byte)event->dataByte[0] < 0x80) {
-    *(undefined *)((uint)(byte)event->dataByte[0] + 0x1b6c) =
-         *(undefined *)((int)slot->selectedSlotPtr->pitchWheel + (uint)slot->selectedChannel + 0x14)
-    ;
+    (&DAT_00001c08)[aadMem + (uint)(byte)event->dataByte[0]] =
+         slot->selectedSlotPtr->currentProgram[slot->selectedChannel];
   }
   return;
 }
@@ -1456,16 +1620,18 @@ void metaCmdGetChannelProgram(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdGetChannelBasePriority(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 624, offset 0x8005787c
+ // line 649, offset 0x8005697c
 	/* begin block 1 */
-		// Start line: 1292
+		// Start line: 1338
 	/* end block 1 */
-	// End Line: 1293
+	// End Line: 1339
 
 	/* begin block 2 */
-		// Start line: 1309
+		// Start line: 1355
 	/* end block 2 */
-	// End Line: 1310
+	// End Line: 1356
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdGetChannelBasePriority(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -1478,16 +1644,18 @@ void metaCmdGetChannelBasePriority(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdGetChannelBendRange(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 645, offset 0x80057884
+ // line 670, offset 0x80056984
 	/* begin block 1 */
-		// Start line: 1334
+		// Start line: 1380
 	/* end block 1 */
-	// End Line: 1335
+	// End Line: 1381
 
 	/* begin block 2 */
-		// Start line: 1343
+		// Start line: 1389
 	/* end block 2 */
-	// End Line: 1344
+	// End Line: 1390
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdGetChannelBendRange(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -1500,96 +1668,15 @@ void metaCmdGetChannelBendRange(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdGetSlotVolume(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 658, offset 0x8005788c
+ // line 683, offset 0x8005698c
 	/* begin block 1 */
-		// Start line: 660
-		// Start offset: 0x8005788C
+		// Start line: 685
+		// Start offset: 0x8005698C
 		// Variables:
 	// 		int variableNum; // $a0
 	/* end block 1 */
-	// End offset: 0x800578B4
-	// End Line: 667
-
-	/* begin block 2 */
-		// Start line: 1360
-	/* end block 2 */
-	// End Line: 1361
-
-	/* begin block 3 */
-		// Start line: 1361
-	/* end block 3 */
-	// End Line: 1362
-
-	/* begin block 4 */
-		// Start line: 1363
-	/* end block 4 */
-	// End Line: 1364
-
-void metaCmdGetSlotVolume(AadSeqEvent *event,_AadSequenceSlot *slot)
-
-{
-  if ((byte)event->dataByte[0] < 0x80) {
-    *(undefined *)((uint)(byte)event->dataByte[0] + 0x1b6c) =
-         *(undefined *)&slot->selectedSlotPtr->unused;
-  }
-  return;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// void /*$ra*/ metaCmdGetSlotPan(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 670, offset 0x800578bc
-	/* begin block 1 */
-		// Start line: 672
-		// Start offset: 0x800578BC
-		// Variables:
-	// 		int variableNum; // $a0
-	/* end block 1 */
-	// End offset: 0x800578E4
-	// End Line: 678
-
-	/* begin block 2 */
-		// Start line: 1384
-	/* end block 2 */
-	// End Line: 1385
-
-	/* begin block 3 */
-		// Start line: 1385
-	/* end block 3 */
-	// End Line: 1386
-
-	/* begin block 4 */
-		// Start line: 1387
-	/* end block 4 */
-	// End Line: 1388
-
-void metaCmdGetSlotPan(AadSeqEvent *event,_AadSequenceSlot *slot)
-
-{
-  if ((byte)event->dataByte[0] < 0x80) {
-    *(undefined *)((uint)(byte)event->dataByte[0] + 0x1b6c) =
-         *(undefined *)((int)&slot->selectedSlotPtr->unused + 1);
-  }
-  return;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// void /*$ra*/ metaCmdSetVariable(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 681, offset 0x800578ec
-	/* begin block 1 */
-		// Start line: 683
-		// Start offset: 0x800578EC
-		// Variables:
-	// 		int value; // $a0
-	// 		int destVariable; // $v1
-	/* end block 1 */
-	// End offset: 0x80057910
-	// End Line: 690
+	// End offset: 0x800569B4
+	// End Line: 692
 
 	/* begin block 2 */
 		// Start line: 1406
@@ -1602,15 +1689,100 @@ void metaCmdGetSlotPan(AadSeqEvent *event,_AadSequenceSlot *slot)
 	// End Line: 1408
 
 	/* begin block 4 */
-		// Start line: 1410
+		// Start line: 1409
 	/* end block 4 */
-	// End Line: 1411
+	// End Line: 1410
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
+
+void metaCmdGetSlotVolume(AadSeqEvent *event,_AadSequenceSlot *slot)
+
+{
+  if ((byte)event->dataByte[0] < 0x80) {
+    (&DAT_00001c08)[aadMem + (uint)(byte)event->dataByte[0]] = slot->selectedSlotPtr->slotVolume;
+  }
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ metaCmdGetSlotPan(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
+ // line 695, offset 0x800569bc
+	/* begin block 1 */
+		// Start line: 697
+		// Start offset: 0x800569BC
+		// Variables:
+	// 		int variableNum; // $a0
+	/* end block 1 */
+	// End offset: 0x800569E4
+	// End Line: 703
+
+	/* begin block 2 */
+		// Start line: 1430
+	/* end block 2 */
+	// End Line: 1431
+
+	/* begin block 3 */
+		// Start line: 1431
+	/* end block 3 */
+	// End Line: 1432
+
+	/* begin block 4 */
+		// Start line: 1433
+	/* end block 4 */
+	// End Line: 1434
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
+
+void metaCmdGetSlotPan(AadSeqEvent *event,_AadSequenceSlot *slot)
+
+{
+  if ((byte)event->dataByte[0] < 0x80) {
+    (&DAT_00001c08)[aadMem + (uint)(byte)event->dataByte[0]] = slot->selectedSlotPtr->slotPan;
+  }
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ metaCmdSetVariable(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
+ // line 706, offset 0x800569ec
+	/* begin block 1 */
+		// Start line: 708
+		// Start offset: 0x800569EC
+		// Variables:
+	// 		int value; // $a0
+	// 		int destVariable; // $v1
+	/* end block 1 */
+	// End offset: 0x80056A10
+	// End Line: 715
+
+	/* begin block 2 */
+		// Start line: 1452
+	/* end block 2 */
+	// End Line: 1453
+
+	/* begin block 3 */
+		// Start line: 1453
+	/* end block 3 */
+	// End Line: 1454
+
+	/* begin block 4 */
+		// Start line: 1456
+	/* end block 4 */
+	// End Line: 1457
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdSetVariable(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
   if ((byte)event->dataByte[1] < 0x80) {
-    *(char *)((uint)(byte)event->dataByte[1] + 0x1b6c) = event->dataByte[0];
+    (&DAT_00001c08)[aadMem + (uint)(byte)event->dataByte[1]] = event->dataByte[0];
   }
   return;
 }
@@ -1620,38 +1792,40 @@ void metaCmdSetVariable(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdCopyVariable(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 693, offset 0x80057918
+ // line 718, offset 0x80056a18
 	/* begin block 1 */
-		// Start line: 695
-		// Start offset: 0x80057918
+		// Start line: 720
+		// Start offset: 0x80056A18
 		// Variables:
 	// 		int srcVariable; // $v1
 	// 		int destVariable; // $a0
 	/* end block 1 */
-	// End offset: 0x8005794C
-	// End Line: 703
+	// End offset: 0x80056A4C
+	// End Line: 728
 
 	/* begin block 2 */
-		// Start line: 1431
+		// Start line: 1477
 	/* end block 2 */
-	// End Line: 1432
+	// End Line: 1478
 
 	/* begin block 3 */
-		// Start line: 1432
+		// Start line: 1478
 	/* end block 3 */
-	// End Line: 1433
+	// End Line: 1479
 
 	/* begin block 4 */
-		// Start line: 1434
+		// Start line: 1480
 	/* end block 4 */
-	// End Line: 1435
+	// End Line: 1481
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdCopyVariable(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
   if (((byte)event->dataByte[0] < 0x80) && ((byte)event->dataByte[1] < 0x80)) {
-    *(undefined *)((uint)(byte)event->dataByte[1] + 0x1b6c) =
-         *(undefined *)((uint)(byte)event->dataByte[0] + 0x1b6c);
+    (&DAT_00001c08)[aadMem + (uint)(byte)event->dataByte[1]] =
+         (&DAT_00001c08)[aadMem + (uint)(byte)event->dataByte[0]];
   }
   return;
 }
@@ -1661,40 +1835,42 @@ void metaCmdCopyVariable(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdAddVariable(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 706, offset 0x80057954
+ // line 731, offset 0x80056a54
 	/* begin block 1 */
-		// Start line: 708
-		// Start offset: 0x80057954
+		// Start line: 733
+		// Start offset: 0x80056A54
 		// Variables:
 	// 		int value; // $a0
 	// 		int destVariable; // $a1
 	/* end block 1 */
-	// End offset: 0x80057984
-	// End Line: 715
+	// End offset: 0x80056A84
+	// End Line: 740
 
 	/* begin block 2 */
-		// Start line: 1457
+		// Start line: 1503
 	/* end block 2 */
-	// End Line: 1458
+	// End Line: 1504
 
 	/* begin block 3 */
-		// Start line: 1458
+		// Start line: 1504
 	/* end block 3 */
-	// End Line: 1459
+	// End Line: 1505
 
 	/* begin block 4 */
-		// Start line: 1461
+		// Start line: 1507
 	/* end block 4 */
-	// End Line: 1462
+	// End Line: 1508
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdAddVariable(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  byte bVar1;
+  int iVar1;
   
-  bVar1 = event->dataByte[1];
-  if (bVar1 < 0x80) {
-    *(char *)((uint)bVar1 + 0x1b6c) = *(char *)((uint)bVar1 + 0x1b6c) + event->dataByte[0];
+  if ((byte)event->dataByte[1] < 0x80) {
+    iVar1 = aadMem + (uint)(byte)event->dataByte[1];
+    (&DAT_00001c08)[iVar1] = (&DAT_00001c08)[iVar1] + event->dataByte[0];
   }
   return;
 }
@@ -1704,40 +1880,42 @@ void metaCmdAddVariable(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdSubtractVariable(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 718, offset 0x8005798c
+ // line 743, offset 0x80056a8c
 	/* begin block 1 */
-		// Start line: 720
-		// Start offset: 0x8005798C
+		// Start line: 745
+		// Start offset: 0x80056A8C
 		// Variables:
 	// 		int value; // $a0
 	// 		int destVariable; // $a1
 	/* end block 1 */
-	// End offset: 0x800579BC
-	// End Line: 727
+	// End offset: 0x80056ABC
+	// End Line: 752
 
 	/* begin block 2 */
-		// Start line: 1482
+		// Start line: 1528
 	/* end block 2 */
-	// End Line: 1483
+	// End Line: 1529
 
 	/* begin block 3 */
-		// Start line: 1483
+		// Start line: 1529
 	/* end block 3 */
-	// End Line: 1484
+	// End Line: 1530
 
 	/* begin block 4 */
-		// Start line: 1486
+		// Start line: 1532
 	/* end block 4 */
-	// End Line: 1487
+	// End Line: 1533
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdSubtractVariable(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  byte bVar1;
+  int iVar1;
   
-  bVar1 = event->dataByte[1];
-  if (bVar1 < 0x80) {
-    *(char *)((uint)bVar1 + 0x1b6c) = *(char *)((uint)bVar1 + 0x1b6c) - event->dataByte[0];
+  if ((byte)event->dataByte[1] < 0x80) {
+    iVar1 = aadMem + (uint)(byte)event->dataByte[1];
+    (&DAT_00001c08)[iVar1] = (&DAT_00001c08)[iVar1] - event->dataByte[0];
   }
   return;
 }
@@ -1747,40 +1925,42 @@ void metaCmdSubtractVariable(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdSetVariableBits(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 730, offset 0x800579c4
+ // line 755, offset 0x80056ac4
 	/* begin block 1 */
-		// Start line: 732
-		// Start offset: 0x800579C4
+		// Start line: 757
+		// Start offset: 0x80056AC4
 		// Variables:
 	// 		int value; // $a0
 	// 		int destVariable; // $a1
 	/* end block 1 */
-	// End offset: 0x800579F4
-	// End Line: 739
+	// End offset: 0x80056AF4
+	// End Line: 764
 
 	/* begin block 2 */
-		// Start line: 1507
+		// Start line: 1553
 	/* end block 2 */
-	// End Line: 1508
+	// End Line: 1554
 
 	/* begin block 3 */
-		// Start line: 1508
+		// Start line: 1554
 	/* end block 3 */
-	// End Line: 1509
+	// End Line: 1555
 
 	/* begin block 4 */
-		// Start line: 1511
+		// Start line: 1557
 	/* end block 4 */
-	// End Line: 1512
+	// End Line: 1558
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdSetVariableBits(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  byte bVar1;
+  int iVar1;
   
-  bVar1 = event->dataByte[1];
-  if (bVar1 < 0x80) {
-    *(byte *)((uint)bVar1 + 0x1b6c) = *(byte *)((uint)bVar1 + 0x1b6c) | event->dataByte[0];
+  if ((byte)event->dataByte[1] < 0x80) {
+    iVar1 = aadMem + (uint)(byte)event->dataByte[1];
+    (&DAT_00001c08)[iVar1] = (&DAT_00001c08)[iVar1] | event->dataByte[0];
   }
   return;
 }
@@ -1790,40 +1970,42 @@ void metaCmdSetVariableBits(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdClearVariableBits(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 742, offset 0x800579fc
+ // line 767, offset 0x80056afc
 	/* begin block 1 */
-		// Start line: 744
-		// Start offset: 0x800579FC
+		// Start line: 769
+		// Start offset: 0x80056AFC
 		// Variables:
 	// 		int value; // $a0
 	// 		int destVariable; // $v1
 	/* end block 1 */
-	// End offset: 0x80057A2C
-	// End Line: 751
+	// End offset: 0x80056B2C
+	// End Line: 776
 
 	/* begin block 2 */
-		// Start line: 1532
+		// Start line: 1578
 	/* end block 2 */
-	// End Line: 1533
+	// End Line: 1579
 
 	/* begin block 3 */
-		// Start line: 1533
+		// Start line: 1579
 	/* end block 3 */
-	// End Line: 1534
+	// End Line: 1580
 
 	/* begin block 4 */
-		// Start line: 1536
+		// Start line: 1582
 	/* end block 4 */
-	// End Line: 1537
+	// End Line: 1583
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdClearVariableBits(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  byte bVar1;
+  int iVar1;
   
-  bVar1 = event->dataByte[1];
-  if (bVar1 < 0x80) {
-    *(byte *)((uint)bVar1 + 0x1b6c) = *(byte *)((uint)bVar1 + 0x1b6c) & ~event->dataByte[0];
+  if ((byte)event->dataByte[1] < 0x80) {
+    iVar1 = aadMem + (uint)(byte)event->dataByte[1];
+    (&DAT_00001c08)[iVar1] = (&DAT_00001c08)[iVar1] & ~event->dataByte[0];
   }
   return;
 }
@@ -1833,16 +2015,18 @@ void metaCmdClearVariableBits(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ aadGotoSequencePosition(struct _AadSequenceSlot *slot /*$a0*/, int track /*$a1*/, unsigned char *newPosition /*$a2*/)
- // line 754, offset 0x80057a34
+ // line 779, offset 0x80056b34
 	/* begin block 1 */
-		// Start line: 1557
+		// Start line: 1603
 	/* end block 1 */
-	// End Line: 1558
+	// End Line: 1604
 
 	/* begin block 2 */
-		// Start line: 1559
+		// Start line: 1605
 	/* end block 2 */
-	// End Line: 1560
+	// End Line: 1606
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void aadGotoSequencePosition(_AadSequenceSlot *slot,int track,uchar *newPosition)
 
@@ -1872,45 +2056,48 @@ void aadGotoSequencePosition(_AadSequenceSlot *slot,int track,uchar *newPosition
 // decompiled code
 // original method signature: 
 // void /*$ra*/ aadGotoSequenceLabel(struct _AadSequenceSlot *slot /*$a3*/, int track /*$t0*/, int labelNumber /*$a2*/)
- // line 775, offset 0x80057aa0
+ // line 800, offset 0x80056ba0
 	/* begin block 1 */
-		// Start line: 776
-		// Start offset: 0x80057AA0
+		// Start line: 801
+		// Start offset: 0x80056BA0
 		// Variables:
 	// 		struct AadSequenceHdr *seqHdr; // $v0
 	// 		unsigned long trackOffset; // $a0
+	// 		int bank; // $v0
 	/* end block 1 */
-	// End offset: 0x80057B44
-	// End Line: 810
+	// End offset: 0x80056C44
+	// End Line: 835
 
 	/* begin block 2 */
-		// Start line: 1604
+		// Start line: 1650
 	/* end block 2 */
-	// End Line: 1605
+	// End Line: 1651
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void aadGotoSequenceLabel(_AadSequenceSlot *slot,int track,int labelNumber)
 
 {
   int iVar1;
-  int iVar2;
-  char cVar3;
+  char cVar2;
+  int iVar3;
   
-  iVar1 = (uint)slot->slotID * 4;
-  iVar2 = *(int *)((uint)slot->sequenceNumberAssigned * 4 + *(int *)(iVar1 + 0x4d8));
+  iVar3 = aadMem + slot->sequenceAssignedDynamicBank * 4;
+  iVar1 = *(int *)((uint)slot->sequenceNumberAssigned * 4 + *(int *)(iVar3 + 0x4f0));
   slot->sequencePosition[track] =
-       (_func_4397 *)
-       (iVar2 + *(int *)(track * 4 + iVar2 + 0x10) +
-       *(int *)(labelNumber * 4 + *(int *)(iVar1 + 0x4e0)));
+       (_func_9 *)
+       (iVar1 + *(int *)(track * 4 + iVar1 + 0x10) +
+       *(int *)(labelNumber * 4 + *(int *)(iVar3 + 0x4f8)));
   iVar1 = (int)&(slot->tempo).currentTick + track;
-  cVar3 = *(char *)(iVar1 + 0x338);
-  while (cVar3 != '\0') {
-    cVar3 = *(char *)(iVar1 + 0x328) + '\x01';
-    *(char *)(iVar1 + 0x328) = cVar3;
+  cVar2 = *(char *)(iVar1 + 0x338);
+  while (cVar2 != '\0') {
+    cVar2 = *(char *)(iVar1 + 0x328) + '\x01';
+    *(char *)(iVar1 + 0x328) = cVar2;
     *(char *)(iVar1 + 0x338) = *(char *)(iVar1 + 0x338) + -1;
-    if (cVar3 == '\x04') {
+    if (cVar2 == '\x04') {
       *(undefined *)(iVar1 + 0x328) = 0;
     }
-    cVar3 = *(char *)(iVar1 + 0x338);
+    cVar2 = *(char *)(iVar1 + 0x338);
   }
   track = (int)&(slot->tempo).currentTick + track;
   *(byte *)(track + 0x3d8) = *(byte *)(track + 0x3d8) & 0xe7;
@@ -1922,31 +2109,33 @@ void aadGotoSequenceLabel(_AadSequenceSlot *slot,int track,int labelNumber)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdLoopStart(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 817, offset 0x80057b58
+ // line 842, offset 0x80056c58
 	/* begin block 1 */
-		// Start line: 819
-		// Start offset: 0x80057B58
+		// Start line: 844
+		// Start offset: 0x80056C58
 		// Variables:
 	// 		int nestLevel; // $a2
 	// 		int track; // $a3
 	/* end block 1 */
-	// End offset: 0x80057BB4
-	// End Line: 834
+	// End offset: 0x80056CB4
+	// End Line: 859
 
 	/* begin block 2 */
-		// Start line: 1700
+		// Start line: 1750
 	/* end block 2 */
-	// End Line: 1701
+	// End Line: 1751
 
 	/* begin block 3 */
-		// Start line: 1701
+		// Start line: 1751
 	/* end block 3 */
-	// End Line: 1702
+	// End Line: 1752
 
 	/* begin block 4 */
-		// Start line: 1702
+		// Start line: 1752
 	/* end block 4 */
-	// End Line: 1703
+	// End Line: 1753
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdLoopStart(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -1959,7 +2148,7 @@ void metaCmdLoopStart(AadSeqEvent *event,_AadSequenceSlot *slot)
   iVar3 = (int)&(slot->tempo).currentTick + uVar2;
   bVar1 = *(byte *)(iVar3 + 0x4e8);
   if (bVar1 < 4) {
-    *(_func_4397 **)(slot->loopSequencePosition + (uint)bVar1 * 0x10 + uVar2) =
+    *(_func_9 **)(slot->loopSequencePosition + (uint)bVar1 * 0x10 + uVar2) =
          slot->sequencePosition[uVar2];
     slot->loopCounter[uVar2 + (uint)bVar1 * 0x10] = event->dataByte[0];
     *(char *)(iVar3 + 0x4e8) = *(char *)(iVar3 + 0x4e8) + '\x01';
@@ -1973,21 +2162,23 @@ void metaCmdLoopStart(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdLoopEnd(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a3*/)
- // line 838, offset 0x80057bc8
+ // line 863, offset 0x80056cc8
 	/* begin block 1 */
-		// Start line: 839
-		// Start offset: 0x80057BC8
+		// Start line: 864
+		// Start offset: 0x80056CC8
 		// Variables:
 	// 		int prevNestLevel; // $v1
 	// 		int track; // $a1
 	/* end block 1 */
-	// End offset: 0x80057C48
-	// End Line: 863
+	// End offset: 0x80056D48
+	// End Line: 888
 
 	/* begin block 2 */
-		// Start line: 1742
+		// Start line: 1792
 	/* end block 2 */
-	// End Line: 1743
+	// End Line: 1793
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdLoopEnd(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -2021,16 +2212,18 @@ void metaCmdLoopEnd(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdLoopBreak(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 866, offset 0x80057c58
+ // line 891, offset 0x80056d58
 	/* begin block 1 */
-		// Start line: 1798
+		// Start line: 1848
 	/* end block 1 */
-	// End Line: 1799
+	// End Line: 1849
 
 	/* begin block 2 */
-		// Start line: 1801
+		// Start line: 1851
 	/* end block 2 */
-	// End Line: 1802
+	// End Line: 1852
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdLoopBreak(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -2043,16 +2236,18 @@ void metaCmdLoopBreak(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdDefineLabel(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 873, offset 0x80057c60
+ // line 898, offset 0x80056d60
 	/* begin block 1 */
-		// Start line: 1812
+		// Start line: 1862
 	/* end block 1 */
-	// End Line: 1813
+	// End Line: 1863
 
 	/* begin block 2 */
-		// Start line: 1819
+		// Start line: 1869
 	/* end block 2 */
-	// End Line: 1820
+	// End Line: 1870
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdDefineLabel(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -2065,18 +2260,20 @@ void metaCmdDefineLabel(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdGotoLabel(struct AadSeqEvent *event /*$v0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 884, offset 0x80057c68
+ // line 909, offset 0x80056d68
 	/* begin block 1 */
-		// Start line: 885
-		// Start offset: 0x80057C68
+		// Start line: 910
+		// Start offset: 0x80056D68
 	/* end block 1 */
-	// End offset: 0x80057C68
-	// End Line: 885
+	// End offset: 0x80056D68
+	// End Line: 910
 
 	/* begin block 2 */
-		// Start line: 1834
+		// Start line: 1884
 	/* end block 2 */
-	// End Line: 1835
+	// End Line: 1885
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdGotoLabel(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -2090,18 +2287,20 @@ void metaCmdGotoLabel(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdSetSequencePosition(struct AadSeqEvent *event /*$v0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 894, offset 0x80057c98
+ // line 919, offset 0x80056d98
 	/* begin block 1 */
-		// Start line: 895
-		// Start offset: 0x80057C98
+		// Start line: 920
+		// Start offset: 0x80056D98
 	/* end block 1 */
-	// End offset: 0x80057C98
-	// End Line: 895
+	// End offset: 0x80056D98
+	// End Line: 920
 
 	/* begin block 2 */
-		// Start line: 1858
+		// Start line: 1908
 	/* end block 2 */
-	// End Line: 1859
+	// End Line: 1909
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdSetSequencePosition(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -2115,27 +2314,29 @@ void metaCmdSetSequencePosition(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdBranchIfVarEqual(struct AadSeqEvent *event /*$a3*/, struct _AadSequenceSlot *slot /*$a0*/)
- // line 904, offset 0x80057cc8
+ // line 929, offset 0x80056dc8
 	/* begin block 1 */
-		// Start line: 905
-		// Start offset: 0x80057CC8
+		// Start line: 930
+		// Start offset: 0x80056DC8
 		// Variables:
 	// 		int variableNum; // $v1
 	// 		int value; // $v1
 	// 		int labelNum; // $a2
 	/* end block 1 */
-	// End offset: 0x80057D04
-	// End Line: 915
+	// End offset: 0x80056E04
+	// End Line: 940
 
 	/* begin block 2 */
-		// Start line: 1878
+		// Start line: 1928
 	/* end block 2 */
-	// End Line: 1879
+	// End Line: 1929
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdBranchIfVarEqual(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  if (*(char *)((uint)(byte)event->dataByte[0] + 0x1b6c) == event->dataByte[1]) {
+  if ((&DAT_00001c08)[aadMem + (uint)(byte)event->dataByte[0]] == event->dataByte[1]) {
     aadGotoSequenceLabel(slot,(uint)event->track,(uint)(byte)event->dataByte[2]);
   }
   return;
@@ -2146,27 +2347,29 @@ void metaCmdBranchIfVarEqual(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdBranchIfVarNotEqual(struct AadSeqEvent *event /*$a3*/, struct _AadSequenceSlot *slot /*$a0*/)
- // line 918, offset 0x80057d14
+ // line 943, offset 0x80056e14
 	/* begin block 1 */
-		// Start line: 919
-		// Start offset: 0x80057D14
+		// Start line: 944
+		// Start offset: 0x80056E14
 		// Variables:
 	// 		int variableNum; // $v1
 	// 		int value; // $v1
 	// 		int labelNum; // $a2
 	/* end block 1 */
-	// End offset: 0x80057D50
-	// End Line: 929
+	// End offset: 0x80056E50
+	// End Line: 954
 
 	/* begin block 2 */
-		// Start line: 1918
+		// Start line: 1968
 	/* end block 2 */
-	// End Line: 1919
+	// End Line: 1969
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdBranchIfVarNotEqual(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  if (*(char *)((uint)(byte)event->dataByte[0] + 0x1b6c) != event->dataByte[1]) {
+  if ((&DAT_00001c08)[aadMem + (uint)(byte)event->dataByte[0]] != event->dataByte[1]) {
     aadGotoSequenceLabel(slot,(uint)event->track,(uint)(byte)event->dataByte[2]);
   }
   return;
@@ -2177,27 +2380,29 @@ void metaCmdBranchIfVarNotEqual(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdBranchIfVarLess(struct AadSeqEvent *event /*$a3*/, struct _AadSequenceSlot *slot /*$a0*/)
- // line 932, offset 0x80057d60
+ // line 957, offset 0x80056e60
 	/* begin block 1 */
-		// Start line: 933
-		// Start offset: 0x80057D60
+		// Start line: 958
+		// Start offset: 0x80056E60
 		// Variables:
 	// 		int variableNum; // $v1
 	// 		int value; // $v1
 	// 		int labelNum; // $a2
 	/* end block 1 */
-	// End offset: 0x80057DA0
-	// End Line: 943
+	// End offset: 0x80056EA0
+	// End Line: 968
 
 	/* begin block 2 */
-		// Start line: 1958
+		// Start line: 2008
 	/* end block 2 */
-	// End Line: 1959
+	// End Line: 2009
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdBranchIfVarLess(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  if (*(byte *)((uint)(byte)event->dataByte[0] + 0x1b6c) < (byte)event->dataByte[1]) {
+  if ((byte)(&DAT_00001c08)[aadMem + (uint)(byte)event->dataByte[0]] < (byte)event->dataByte[1]) {
     aadGotoSequenceLabel(slot,(uint)event->track,(uint)(byte)event->dataByte[2]);
   }
   return;
@@ -2208,27 +2413,29 @@ void metaCmdBranchIfVarLess(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdBranchIfVarGreater(struct AadSeqEvent *event /*$a3*/, struct _AadSequenceSlot *slot /*$a0*/)
- // line 946, offset 0x80057db0
+ // line 971, offset 0x80056eb0
 	/* begin block 1 */
-		// Start line: 947
-		// Start offset: 0x80057DB0
+		// Start line: 972
+		// Start offset: 0x80056EB0
 		// Variables:
 	// 		int variableNum; // $v1
 	// 		int value; // $v1
 	// 		int labelNum; // $a2
 	/* end block 1 */
-	// End offset: 0x80057DF0
-	// End Line: 957
+	// End offset: 0x80056EF0
+	// End Line: 982
 
 	/* begin block 2 */
-		// Start line: 1998
+		// Start line: 2048
 	/* end block 2 */
-	// End Line: 1999
+	// End Line: 2049
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdBranchIfVarGreater(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  if ((byte)event->dataByte[1] < *(byte *)((uint)(byte)event->dataByte[0] + 0x1b6c)) {
+  if ((byte)event->dataByte[1] < (byte)(&DAT_00001c08)[aadMem + (uint)(byte)event->dataByte[0]]) {
     aadGotoSequenceLabel(slot,(uint)event->track,(uint)(byte)event->dataByte[2]);
   }
   return;
@@ -2239,27 +2446,29 @@ void metaCmdBranchIfVarGreater(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdBranchIfVarLessOrEqual(struct AadSeqEvent *event /*$a3*/, struct _AadSequenceSlot *slot /*$a0*/)
- // line 960, offset 0x80057e00
+ // line 985, offset 0x80056f00
 	/* begin block 1 */
-		// Start line: 961
-		// Start offset: 0x80057E00
+		// Start line: 986
+		// Start offset: 0x80056F00
 		// Variables:
 	// 		int variableNum; // $v1
 	// 		int value; // $v1
 	// 		int labelNum; // $a2
 	/* end block 1 */
-	// End offset: 0x80057E40
-	// End Line: 971
+	// End offset: 0x80056F40
+	// End Line: 996
 
 	/* begin block 2 */
-		// Start line: 2038
+		// Start line: 2088
 	/* end block 2 */
-	// End Line: 2039
+	// End Line: 2089
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdBranchIfVarLessOrEqual(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  if (*(byte *)((uint)(byte)event->dataByte[0] + 0x1b6c) <= (byte)event->dataByte[1]) {
+  if ((byte)(&DAT_00001c08)[aadMem + (uint)(byte)event->dataByte[0]] <= (byte)event->dataByte[1]) {
     aadGotoSequenceLabel(slot,(uint)event->track,(uint)(byte)event->dataByte[2]);
   }
   return;
@@ -2270,27 +2479,29 @@ void metaCmdBranchIfVarLessOrEqual(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdBranchIfVarGreaterOrEqual(struct AadSeqEvent *event /*$a3*/, struct _AadSequenceSlot *slot /*$a0*/)
- // line 974, offset 0x80057e50
+ // line 999, offset 0x80056f50
 	/* begin block 1 */
-		// Start line: 975
-		// Start offset: 0x80057E50
+		// Start line: 1000
+		// Start offset: 0x80056F50
 		// Variables:
 	// 		int variableNum; // $v1
 	// 		int value; // $v1
 	// 		int labelNum; // $a2
 	/* end block 1 */
-	// End offset: 0x80057E90
-	// End Line: 985
+	// End offset: 0x80056F90
+	// End Line: 1010
 
 	/* begin block 2 */
-		// Start line: 2078
+		// Start line: 2128
 	/* end block 2 */
-	// End Line: 2079
+	// End Line: 2129
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdBranchIfVarGreaterOrEqual(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  if ((byte)event->dataByte[1] <= *(byte *)((uint)(byte)event->dataByte[0] + 0x1b6c)) {
+  if ((byte)event->dataByte[1] <= (byte)(&DAT_00001c08)[aadMem + (uint)(byte)event->dataByte[0]]) {
     aadGotoSequenceLabel(slot,(uint)event->track,(uint)(byte)event->dataByte[2]);
   }
   return;
@@ -2301,27 +2512,29 @@ void metaCmdBranchIfVarGreaterOrEqual(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdBranchIfVarBitsSet(struct AadSeqEvent *event /*$a3*/, struct _AadSequenceSlot *slot /*$a0*/)
- // line 988, offset 0x80057ea0
+ // line 1013, offset 0x80056fa0
 	/* begin block 1 */
-		// Start line: 989
-		// Start offset: 0x80057EA0
+		// Start line: 1014
+		// Start offset: 0x80056FA0
 		// Variables:
 	// 		int variableNum; // $v1
 	// 		int mask; // $v1
 	// 		int labelNum; // $a2
 	/* end block 1 */
-	// End offset: 0x80057EE0
-	// End Line: 998
+	// End offset: 0x80056FE0
+	// End Line: 1023
 
 	/* begin block 2 */
-		// Start line: 2118
+		// Start line: 2168
 	/* end block 2 */
-	// End Line: 2119
+	// End Line: 2169
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdBranchIfVarBitsSet(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  if ((*(byte *)((uint)(byte)event->dataByte[0] + 0x1b6c) & event->dataByte[1]) != 0) {
+  if (((&DAT_00001c08)[aadMem + (uint)(byte)event->dataByte[0]] & event->dataByte[1]) != 0) {
     aadGotoSequenceLabel(slot,(uint)event->track,(uint)(byte)event->dataByte[2]);
   }
   return;
@@ -2332,27 +2545,29 @@ void metaCmdBranchIfVarBitsSet(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdBranchIfVarBitsClear(struct AadSeqEvent *event /*$a3*/, struct _AadSequenceSlot *slot /*$a0*/)
- // line 1001, offset 0x80057ef0
+ // line 1026, offset 0x80056ff0
 	/* begin block 1 */
-		// Start line: 1002
-		// Start offset: 0x80057EF0
+		// Start line: 1027
+		// Start offset: 0x80056FF0
 		// Variables:
 	// 		int variableNum; // $v1
 	// 		int mask; // $v1
 	// 		int labelNum; // $a2
 	/* end block 1 */
-	// End offset: 0x80057F30
-	// End Line: 1011
+	// End offset: 0x80057030
+	// End Line: 1036
 
 	/* begin block 2 */
-		// Start line: 2153
+		// Start line: 2203
 	/* end block 2 */
-	// End Line: 2154
+	// End Line: 2204
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdBranchIfVarBitsClear(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
-  if ((*(byte *)((uint)(byte)event->dataByte[0] + 0x1b6c) & event->dataByte[1]) == 0) {
+  if (((&DAT_00001c08)[aadMem + (uint)(byte)event->dataByte[0]] & event->dataByte[1]) == 0) {
     aadGotoSequenceLabel(slot,(uint)event->track,(uint)(byte)event->dataByte[2]);
   }
   return;
@@ -2363,16 +2578,18 @@ void metaCmdBranchIfVarBitsClear(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdSubstituteVariableParam1(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 1014, offset 0x80057f40
+ // line 1039, offset 0x80057040
 	/* begin block 1 */
-		// Start line: 2188
+		// Start line: 2238
 	/* end block 1 */
-	// End Line: 2189
+	// End Line: 2239
 
 	/* begin block 2 */
-		// Start line: 2189
+		// Start line: 2239
 	/* end block 2 */
-	// End Line: 2190
+	// End Line: 2240
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdSubstituteVariableParam1(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -2389,16 +2606,18 @@ void metaCmdSubstituteVariableParam1(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdSubstituteVariableParam2(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 1021, offset 0x80057f60
+ // line 1046, offset 0x80057060
 	/* begin block 1 */
-		// Start line: 2202
+		// Start line: 2252
 	/* end block 1 */
-	// End Line: 2203
+	// End Line: 2253
 
 	/* begin block 2 */
-		// Start line: 2203
+		// Start line: 2253
 	/* end block 2 */
-	// End Line: 2204
+	// End Line: 2254
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdSubstituteVariableParam2(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -2415,16 +2634,18 @@ void metaCmdSubstituteVariableParam2(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdSubstituteVariableParam3(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 1028, offset 0x80057f80
+ // line 1053, offset 0x80057080
 	/* begin block 1 */
-		// Start line: 2216
+		// Start line: 2266
 	/* end block 1 */
-	// End Line: 2217
+	// End Line: 2267
 
 	/* begin block 2 */
-		// Start line: 2217
+		// Start line: 2267
 	/* end block 2 */
-	// End Line: 2218
+	// End Line: 2268
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdSubstituteVariableParam3(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -2441,19 +2662,22 @@ void metaCmdSubstituteVariableParam3(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdEndSequence(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$s0*/)
- // line 1034, offset 0x80057fa0
+ // line 1059, offset 0x800570a0
 	/* begin block 1 */
-		// Start line: 2228
+		// Start line: 2278
 	/* end block 1 */
-	// End Line: 2229
+	// End Line: 2279
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdEndSequence(AadSeqEvent *event,_AadSequenceSlot *slot)
 
 {
   aadInitSequenceSlot(slot);
   aadAllNotesOff((uint)slot->thisSlotNumber);
-  if (pcRam00001b60 != (code *)0x0) {
-    (*pcRam00001b60)(uRam00001b68,(uint)slot->thisSlotNumber,0);
+  if (*(code **)(&DAT_00001bfc + aadMem) != (code *)0x0) {
+    (**(code **)(&DAT_00001bfc + aadMem))
+              (*(undefined4 *)(&DAT_00001c04 + aadMem),(uint)slot->thisSlotNumber,0);
   }
   return;
 }
@@ -2463,16 +2687,18 @@ void metaCmdEndSequence(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdPlaySoundEffect(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 1152, offset 0x80057ffc
+ // line 1177, offset 0x800570fc
 	/* begin block 1 */
-		// Start line: 2464
+		// Start line: 2514
 	/* end block 1 */
-	// End Line: 2465
+	// End Line: 2515
 
 	/* begin block 2 */
-		// Start line: 2465
+		// Start line: 2515
 	/* end block 2 */
-	// End Line: 2466
+	// End Line: 2516
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdPlaySoundEffect(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -2485,16 +2711,18 @@ void metaCmdPlaySoundEffect(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdStopSoundEffect(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 1155, offset 0x80058004
+ // line 1180, offset 0x80057104
 	/* begin block 1 */
-		// Start line: 2470
+		// Start line: 2520
 	/* end block 1 */
-	// End Line: 2471
+	// End Line: 2521
 
 	/* begin block 2 */
-		// Start line: 2471
+		// Start line: 2521
 	/* end block 2 */
-	// End Line: 2472
+	// End Line: 2522
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdStopSoundEffect(AadSeqEvent *event,_AadSequenceSlot *slot)
 
@@ -2507,16 +2735,18 @@ void metaCmdStopSoundEffect(AadSeqEvent *event,_AadSequenceSlot *slot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ metaCmdSetSoundEffectVolumePan(struct AadSeqEvent *event /*$a0*/, struct _AadSequenceSlot *slot /*$a1*/)
- // line 1158, offset 0x8005800c
+ // line 1183, offset 0x8005710c
 	/* begin block 1 */
-		// Start line: 2476
+		// Start line: 2526
 	/* end block 1 */
-	// End Line: 2477
+	// End Line: 2527
 
 	/* begin block 2 */
-		// Start line: 2477
+		// Start line: 2527
 	/* end block 2 */
-	// End Line: 2478
+	// End Line: 2528
+
+/* File: C:\kain2\game\PSX\AADSQCMD.C */
 
 void metaCmdSetSoundEffectVolumePan(AadSeqEvent *event,_AadSequenceSlot *slot)
 

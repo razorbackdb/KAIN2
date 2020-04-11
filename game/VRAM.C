@@ -4,30 +4,18 @@
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ VRAM_PrintVramBlock(struct _BlockVramEntry *vblock /*$v1*/)
- // line 75, offset 0x800720d0
+// void /*$ra*/ VRAM_PrintVramBlock(struct _BlockVramEntry *vblock /*$a0*/)
+ // line 75, offset 0x800726d4
 	/* begin block 1 */
 		// Start line: 150
 	/* end block 1 */
 	// End Line: 151
 
+/* File: C:\kain2\game\VRAM.C */
+
 void VRAM_PrintVramBlock(_BlockVramEntry *vblock)
 
 {
-  char *fmt;
-  
-  if (vblock->type == '\x02') {
-    fmt = "xywh (%d,%d,%d,%d) Object=%s\n";
-  }
-  else {
-    if (vblock->type == '\x01') {
-      fmt = "xywh (%d,%d,%d,%d) Level\n";
-    }
-    else {
-      fmt = "xywh (%d,%d,%d,%d)\n";
-    }
-  }
-  GXFilePrint(fmt);
   return;
 }
 
@@ -36,14 +24,14 @@ void VRAM_PrintVramBlock(_BlockVramEntry *vblock)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VRAM_PrintInfo()
- // line 110, offset 0x80072174
+ // line 110, offset 0x800726dc
 	/* begin block 1 */
-		// Start line: 111
-		// Start offset: 0x80072174
+		// Start line: 112
+		// Start offset: 0x800726DC
 		// Variables:
-	// 		struct _BlockVramEntry *vblock; // $s0
+	// 		struct _BlockVramEntry *vblock; // $v0
 	/* end block 1 */
-	// End offset: 0x800722AC
+	// End offset: 0x8007271C
 	// End Line: 148
 
 	/* begin block 2 */
@@ -51,35 +39,34 @@ void VRAM_PrintVramBlock(_BlockVramEntry *vblock)
 	/* end block 2 */
 	// End Line: 218
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+	/* begin block 3 */
+		// Start line: 186
+	/* end block 3 */
+	// End Line: 187
+
+	/* begin block 4 */
+		// Start line: 189
+	/* end block 4 */
+	// End Line: 190
+
+/* File: C:\kain2\game\VRAM.C */
 
 void VRAM_PrintInfo(void)
 
 {
-  _BlockVramEntry *p_Var1;
+  int *piVar1;
   
-  GXFilePrint("Used Vram Blocks\n--------------\n");
-  p_Var1 = usedVramBlocks;
-  while (p_Var1 != (_BlockVramEntry *)0x0) {
-    GXFilePrint("xywh (%4d,%4d,%4d,%4d) %6d bytes");
-    if (p_Var1->type == '\x02') {
-      GXFilePrint(" Object=%s\n");
-    }
-    else {
-      if (p_Var1->type == '\x01') {
-        GXFilePrint(" Level = %s\n");
-      }
-      else {
-        GXFilePrint("\n");
-      }
-    }
-    p_Var1 = p_Var1->next;
+  piVar1 = usedVramBlocks;
+  if (usedVramBlocks != (int *)0x0) {
+    do {
+      piVar1 = (int *)*piVar1;
+    } while (piVar1 != (int *)0x0);
   }
-  GXFilePrint("\nOpen Vram Blocks\n--------------\n");
-  p_Var1 = openVramBlocks;
-  while (p_Var1 != (_BlockVramEntry *)0x0) {
-    GXFilePrint("xywh (%4d,%4d,%4d,%4d) %6d bytes\n");
-    p_Var1 = p_Var1->next;
+  piVar1 = openVramBlocks;
+  if (openVramBlocks != (int *)0x0) {
+    do {
+      piVar1 = (int *)*piVar1;
+    } while (piVar1 != (int *)0x0);
   }
   return;
 }
@@ -89,38 +76,38 @@ void VRAM_PrintInfo(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VRAM_InitVramBlockCache()
- // line 153, offset 0x800722bc
+ // line 153, offset 0x80072724
 	/* begin block 1 */
 		// Start line: 154
-		// Start offset: 0x800722BC
+		// Start offset: 0x80072724
 		// Variables:
 	// 		int i; // $v1
 	/* end block 1 */
-	// End offset: 0x800722EC
+	// End offset: 0x80072754
 	// End Line: 179
 
 	/* begin block 2 */
-		// Start line: 289
+		// Start line: 271
 	/* end block 2 */
-	// End Line: 290
+	// End Line: 272
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\VRAM.C */
 
 void VRAM_InitVramBlockCache(void)
 
 {
-  _BlockVramEntry *p_Var1;
+  int iVar1;
   int iVar2;
   
   iVar2 = 0x4a;
-  p_Var1 = &_BlockVramEntry_800d4c58;
-  openVramBlocks = (_BlockVramEntry *)0x0;
-  usedVramBlocks = (_BlockVramEntry *)0x0;
+  iVar1 = -0x7ff2b2e4;
+  openVramBlocks = 0;
+  usedVramBlocks = 0;
   numOfBlocksUsed = 0;
   do {
-    p_Var1->flags = '\0';
+    *(undefined *)(iVar1 + 5) = 0;
     iVar2 = iVar2 + -1;
-    p_Var1 = p_Var1 + -1;
+    iVar1 = iVar1 + -0x1c;
   } while (-1 < iVar2);
   VRAM_InsertFreeVram(0x200,0x100,0x200,0x100,1);
   VRAM_InitMorphPalettes();
@@ -131,21 +118,63 @@ void VRAM_InitVramBlockCache(void)
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ VRAM_ConcatanateMemory(struct _BlockVramEntry *curBlock /*$s1*/)
- // line 185, offset 0x80072320
+// void /*$ra*/ VRAM_EnableTerrainArea()
+ // line 184, offset 0x80072788
 	/* begin block 1 */
-		// Start line: 186
-		// Start offset: 0x80072320
+		// Start line: 343
+	/* end block 1 */
+	// End Line: 344
+
+/* File: C:\kain2\game\VRAM.C */
+
+void VRAM_EnableTerrainArea(void)
+
+{
+  VRAM_InsertFreeVram(0x200,0,0x200,0x100,0);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ VRAM_DisableTerrainArea()
+ // line 189, offset 0x800727b8
+	/* begin block 1 */
+		// Start line: 354
+	/* end block 1 */
+	// End Line: 355
+
+/* File: C:\kain2\game\VRAM.C */
+
+void VRAM_DisableTerrainArea(void)
+
+{
+  VRAM_DeleteFreeVram(0x200,0,0x200,0x100);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ VRAM_ConcatanateMemory(struct _BlockVramEntry *curBlock /*$s1*/)
+ // line 195, offset 0x800727e4
+	/* begin block 1 */
+		// Start line: 196
+		// Start offset: 0x800727E4
 		// Variables:
 	// 		struct _BlockVramEntry *nextBlock; // $s0
 	/* end block 1 */
-	// End offset: 0x800724F4
-	// End Line: 251
+	// End offset: 0x800729B8
+	// End Line: 261
 
 	/* begin block 2 */
-		// Start line: 363
+		// Start line: 367
 	/* end block 2 */
-	// End Line: 364
+	// End Line: 368
+
+/* File: C:\kain2\game\VRAM.C */
 
 int VRAM_ConcatanateMemory(_BlockVramEntry *curBlock)
 
@@ -168,11 +197,11 @@ int VRAM_ConcatanateMemory(_BlockVramEntry *curBlock)
           if (iVar2 >> 0x18 == iVar1 >> 0x18) {
             if (iVar4 + curBlock->h == iVar3) {
               curBlock->h = curBlock->h + block->h;
-              goto LAB_80072458;
+              goto LAB_8007291c;
             }
             if (iVar3 + block->h == iVar4) {
               block->h = block->h + curBlock->h;
-              goto LAB_800724bc;
+              goto LAB_80072980;
             }
           }
         }
@@ -180,7 +209,7 @@ int VRAM_ConcatanateMemory(_BlockVramEntry *curBlock)
           if (((int)curBlock->x + (int)curBlock->w == (int)block->x) &&
              (((curBlock->x & 0x3fU) == 0 || ((int)curBlock->w + (int)block->w < 0x41)))) {
             curBlock->w = curBlock->w + block->w;
-LAB_80072458:
+LAB_8007291c:
             VRAM_DeleteFreeBlock(block);
             block->flags = '\0';
             return 1;
@@ -188,7 +217,7 @@ LAB_80072458:
           if (((int)block->x + (int)block->w == (int)curBlock->x) &&
              (((block->x & 0x3fU) == 0 || ((int)curBlock->w + (int)block->w < 0x41)))) {
             block->w = block->w + curBlock->w;
-LAB_800724bc:
+LAB_80072980:
             VRAM_DeleteFreeBlock(curBlock);
             curBlock->flags = '\0';
             return 1;
@@ -207,13 +236,13 @@ LAB_800724bc:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VRAM_GarbageCollect()
- // line 253, offset 0x80072508
+ // line 263, offset 0x800729cc
 	/* begin block 1 */
-		// Start line: 502
+		// Start line: 506
 	/* end block 1 */
-	// End Line: 503
+	// End Line: 507
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\VRAM.C */
 
 void VRAM_GarbageCollect(void)
 
@@ -231,21 +260,23 @@ void VRAM_GarbageCollect(void)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ VRAM_InsertFreeBlock(struct _BlockVramEntry *block /*$a0*/)
- // line 260, offset 0x8007253c
+ // line 270, offset 0x80072a00
 	/* begin block 1 */
-		// Start line: 261
-		// Start offset: 0x8007253C
+		// Start line: 271
+		// Start offset: 0x80072A00
 		// Variables:
 	// 		struct _BlockVramEntry *next; // $v1
 	// 		struct _BlockVramEntry *prev; // $a1
 	/* end block 1 */
-	// End offset: 0x800725BC
-	// End Line: 291
+	// End offset: 0x80072A80
+	// End Line: 301
 
 	/* begin block 2 */
-		// Start line: 517
+		// Start line: 521
 	/* end block 2 */
-	// End Line: 518
+	// End Line: 522
+
+/* File: C:\kain2\game\VRAM.C */
 
 int VRAM_InsertFreeBlock(_BlockVramEntry *block)
 
@@ -290,31 +321,33 @@ int VRAM_InsertFreeBlock(_BlockVramEntry *block)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VRAM_DeleteFreeBlock(struct _BlockVramEntry *block /*$a0*/)
- // line 294, offset 0x800725cc
+ // line 304, offset 0x80072a90
 	/* begin block 1 */
-		// Start line: 296
-		// Start offset: 0x800725CC
+		// Start line: 306
+		// Start offset: 0x80072A90
 		// Variables:
 	// 		struct _BlockVramEntry *next; // $v1
 	// 		struct _BlockVramEntry *prev; // $a1
 	/* end block 1 */
-	// End offset: 0x8007262C
-	// End Line: 320
+	// End offset: 0x80072AF0
+	// End Line: 330
 
 	/* begin block 2 */
-		// Start line: 586
+		// Start line: 590
 	/* end block 2 */
-	// End Line: 587
+	// End Line: 591
 
 	/* begin block 3 */
-		// Start line: 587
+		// Start line: 591
 	/* end block 3 */
-	// End Line: 588
+	// End Line: 592
 
 	/* begin block 4 */
-		// Start line: 588
+		// Start line: 592
 	/* end block 4 */
-	// End Line: 589
+	// End Line: 593
+
+/* File: C:\kain2\game\VRAM.C */
 
 void VRAM_DeleteFreeBlock(_BlockVramEntry *block)
 
@@ -352,16 +385,18 @@ void VRAM_DeleteFreeBlock(_BlockVramEntry *block)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VRAM_InsertUsedBlock(struct _BlockVramEntry *block /*$a0*/)
- // line 323, offset 0x80072634
+ // line 333, offset 0x80072af8
 	/* begin block 1 */
-		// Start line: 644
+		// Start line: 648
 	/* end block 1 */
-	// End Line: 645
+	// End Line: 649
 
 	/* begin block 2 */
-		// Start line: 645
+		// Start line: 649
 	/* end block 2 */
-	// End Line: 646
+	// End Line: 650
+
+/* File: C:\kain2\game\VRAM.C */
 
 void VRAM_InsertUsedBlock(_BlockVramEntry *block)
 
@@ -382,31 +417,33 @@ void VRAM_InsertUsedBlock(_BlockVramEntry *block)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VRAM_DeleteUsedBlock(struct _BlockVramEntry *block /*$a0*/)
- // line 339, offset 0x80072668
+ // line 349, offset 0x80072b2c
 	/* begin block 1 */
-		// Start line: 341
-		// Start offset: 0x80072668
+		// Start line: 351
+		// Start offset: 0x80072B2C
 		// Variables:
 	// 		struct _BlockVramEntry *next; // $v1
 	// 		struct _BlockVramEntry *prev; // $a1
 	/* end block 1 */
-	// End offset: 0x800726C4
-	// End Line: 362
+	// End offset: 0x80072B88
+	// End Line: 372
 
 	/* begin block 2 */
-		// Start line: 676
+		// Start line: 680
 	/* end block 2 */
-	// End Line: 677
+	// End Line: 681
 
 	/* begin block 3 */
-		// Start line: 677
+		// Start line: 681
 	/* end block 3 */
-	// End Line: 678
+	// End Line: 682
 
 	/* begin block 4 */
-		// Start line: 679
+		// Start line: 683
 	/* end block 4 */
-	// End Line: 680
+	// End Line: 684
+
+/* File: C:\kain2\game\VRAM.C */
 
 void VRAM_DeleteUsedBlock(_BlockVramEntry *block)
 
@@ -442,22 +479,32 @@ void VRAM_DeleteUsedBlock(_BlockVramEntry *block)
 // decompiled code
 // original method signature: 
 // struct _BlockVramEntry * /*$ra*/ VRAM_GetOpenBlock()
- // line 364, offset 0x800726cc
+ // line 374, offset 0x80072b90
 	/* begin block 1 */
-		// Start line: 365
-		// Start offset: 0x800726CC
+		// Start line: 376
+		// Start offset: 0x80072B90
 		// Variables:
 	// 		int i; // $a0
 	/* end block 1 */
-	// End offset: 0x80072718
-	// End Line: 379
+	// End offset: 0x80072BC0
+	// End Line: 389
 
 	/* begin block 2 */
-		// Start line: 728
+		// Start line: 732
 	/* end block 2 */
-	// End Line: 729
+	// End Line: 733
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+	/* begin block 3 */
+		// Start line: 733
+	/* end block 3 */
+	// End Line: 734
+
+	/* begin block 4 */
+		// Start line: 735
+	/* end block 4 */
+	// End Line: 736
+
+/* File: C:\kain2\game\VRAM.C */
 
 _BlockVramEntry * VRAM_GetOpenBlock(void)
 
@@ -466,7 +513,7 @@ _BlockVramEntry * VRAM_GetOpenBlock(void)
   int iVar2;
   
   iVar2 = 0;
-  p_Var1 = &vramBlockList;
+  p_Var1 = (_BlockVramEntry *)&vramBlockList;
   do {
     iVar2 = iVar2 + 1;
     if (p_Var1->flags == '\0') {
@@ -474,7 +521,6 @@ _BlockVramEntry * VRAM_GetOpenBlock(void)
     }
     p_Var1 = p_Var1 + 1;
   } while (iVar2 < 0x4b);
-  GXFilePrint("Ran out of vram blocks. Need to increase MAX_VRAM_BLOCKS=%d\n");
   return (_BlockVramEntry *)0x0;
 }
 
@@ -482,21 +528,108 @@ _BlockVramEntry * VRAM_GetOpenBlock(void)
 
 // decompiled code
 // original method signature: 
-// int /*$ra*/ VRAM_InsertFreeVram(short x /*stack -48*/, short y /*stack -46*/, short w /*$s7*/, short h /*$fp*/, int flags /*stack 16*/)
- // line 381, offset 0x80072728
+// int /*$ra*/ VRAM_DeleteFreeVram(short x /*$a0*/, short y /*$a1*/, short w /*$a2*/, short h /*$a3*/)
+ // line 391, offset 0x80072bc8
 	/* begin block 1 */
-		// Start line: 382
-		// Start offset: 0x80072728
+		// Start line: 392
+		// Start offset: 0x80072BC8
+		// Variables:
+	// 		struct _BlockVramEntry *prev; // $t1
+	// 		struct _BlockVramEntry *vblock; // $a2
+	// 		struct _BlockVramEntry *nextVBlock; // $t0
+	// 		struct _BlockVramEntry (*blockLists[2]); // stack offset -24
+	// 		int i; // $t2
+	// 		int delCount; // $t3
+	/* end block 1 */
+	// End offset: 0x80072CE4
+	// End Line: 427
+
+	/* begin block 2 */
+		// Start line: 770
+	/* end block 2 */
+	// End Line: 771
+
+/* File: C:\kain2\game\VRAM.C */
+
+int VRAM_DeleteFreeVram(short x,short y,short w,short h)
+
+{
+  int **ppiVar1;
+  int **ppiVar2;
+  int **ppiVar3;
+  int **ppiVar4;
+  int iVar5;
+  int iVar6;
+  int **ppiVar7;
+  int *local_18 [4];
+  
+  ppiVar7 = local_18;
+  iVar6 = 0;
+  iVar5 = 0;
+  local_18[2] = (int *)openVramBlocks;
+  local_18[3] = (int *)usedVramBlocks;
+  local_18[0] = (int *)openVramBlocks;
+  local_18[1] = (int *)usedVramBlocks;
+  do {
+    if ((int **)*ppiVar7 != (int **)0x0) {
+      ppiVar1 = (int **)*ppiVar7;
+      ppiVar3 = (int **)0x0;
+      do {
+        ppiVar2 = (int **)*ppiVar1;
+        ppiVar4 = ppiVar1;
+        if (((((int)x <= (int)*(short *)(ppiVar1 + 3)) &&
+             ((int)*(short *)(ppiVar1 + 3) + (int)*(short *)(ppiVar1 + 4) <= (int)x + (int)w)) &&
+            ((int)y <= (int)*(short *)((int)ppiVar1 + 0xe))) &&
+           ((int)*(short *)((int)ppiVar1 + 0xe) + (int)*(short *)((int)ppiVar1 + 0x12) <=
+            (int)y + (int)h)) {
+          *(undefined *)((int)ppiVar1 + 5) = 0;
+          ppiVar4 = ppiVar3;
+          if (ppiVar3 == (int **)0x0) {
+            if (iVar5 == 0) {
+              iVar6 = iVar6 + 1;
+              openVramBlocks = ppiVar2;
+            }
+            else {
+              iVar6 = iVar6 + 1;
+              usedVramBlocks = ppiVar2;
+            }
+          }
+          else {
+            *(int ***)ppiVar3 = ppiVar2;
+            iVar6 = iVar6 + 1;
+          }
+        }
+        ppiVar1 = ppiVar2;
+        ppiVar3 = ppiVar4;
+      } while (ppiVar2 != (int **)0x0);
+    }
+    iVar5 = iVar5 + 1;
+    ppiVar7 = ppiVar7 + 1;
+  } while (iVar5 < 2);
+  return iVar6;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// int /*$ra*/ VRAM_InsertFreeVram(short x /*stack -48*/, short y /*stack -46*/, short w /*$s7*/, short h /*$fp*/, int flags /*stack 16*/)
+ // line 430, offset 0x80072cf8
+	/* begin block 1 */
+		// Start line: 431
+		// Start offset: 0x80072CF8
 		// Variables:
 	// 		struct _BlockVramEntry *useBlock; // $a0
 	/* end block 1 */
-	// End offset: 0x80072894
-	// End Line: 430
+	// End offset: 0x80072E64
+	// End Line: 479
 
 	/* begin block 2 */
-		// Start line: 766
+		// Start line: 884
 	/* end block 2 */
-	// End Line: 767
+	// End Line: 885
+
+/* File: C:\kain2\game\VRAM.C */
 
 int VRAM_InsertFreeVram(short x,short y,short w,short h,int flags)
 
@@ -552,40 +685,59 @@ int VRAM_InsertFreeVram(short x,short y,short w,short h,int flags)
 
 // decompiled code
 // original method signature: 
-// struct _BlockVramEntry * /*$ra*/ VRAM_CheckVramSlot(short *x /*$fp*/, short *y /*stack 4*/, short w /*$s3*/, short h /*$s4*/, int type /*stack 16*/, int startY /*stack 20*/)
- // line 440, offset 0x800728c8
+// struct _BlockVramEntry * /*$ra*/ VRAM_CheckVramSlot(short *x /*stack 0*/, short *y /*stack 4*/, short w /*$s6*/, short h /*$s7*/, int type /*stack 16*/, int startY /*stack 20*/)
+ // line 489, offset 0x80072e98
 	/* begin block 1 */
-		// Start line: 441
-		// Start offset: 0x800728C8
+		// Start line: 490
+		// Start offset: 0x80072E98
 		// Variables:
-	// 		struct _BlockVramEntry *vblock; // $s2
-	// 		short hldx; // $s1
-	// 		short hldy; // $s7
-	// 		short hldw; // $s5
-	// 		short hldh; // stack offset -48
-	// 		long fits; // $s1
+	// 		struct _BlockVramEntry *vblock; // $s1
+	// 		short hldx; // $s4
+	// 		short hldy; // $s5
+	// 		short hldw; // $s0
+	// 		short hldh; // $fp
+	// 		long fits; // $t1
 	// 		long offset; // $s0
-	// 		struct _BlockVramEntry *vblockright; // $s6
-	// 		long offsetright; // $s5
+	// 		struct _BlockVramEntry *vblockright; // $s3
+	// 		long offsetright; // $s2
+
+		/* begin block 1.1 */
+			// Start line: 525
+			// Start offset: 0x80072F8C
+			// Variables:
+		// 		int newx; // $v0
+		/* end block 1.1 */
+		// End offset: 0x80072FF4
+		// End Line: 539
+
+		/* begin block 1.2 */
+			// Start line: 544
+			// Start offset: 0x80072FF4
+			// Variables:
+		// 		int xval; // $v0
+		/* end block 1.2 */
+		// End offset: 0x8007302C
+		// End Line: 560
 	/* end block 1 */
-	// End offset: 0x80072E94
-	// End Line: 643
+	// End offset: 0x800732A0
+	// End Line: 706
 
 	/* begin block 2 */
-		// Start line: 929
+		// Start line: 1047
 	/* end block 2 */
-	// End Line: 930
+	// End Line: 1048
+
+/* File: C:\kain2\game\VRAM.C */
 
 _BlockVramEntry * VRAM_CheckVramSlot(short *x,short *y,short w,short h,int type,int startY)
 
 {
-  short sVar1;
+  ushort uVar1;
   bool bVar2;
-  uint uVar3;
   ushort x_00;
-  ushort x_01;
-  int iVar4;
-  ushort w_00;
+  ushort y_00;
+  int iVar3;
+  uint uVar4;
   int iVar5;
   ushort h_00;
   uint uVar6;
@@ -593,188 +745,127 @@ _BlockVramEntry * VRAM_CheckVramSlot(short *x,short *y,short w,short h,int type,
   int iVar8;
   uint uVar9;
   _BlockVramEntry *block;
-  short w_01;
-  uint uVar10;
-  _BlockVramEntry *p_Var11;
-  uint uVar12;
-  uchar local_38;
+  short w_00;
+  _BlockVramEntry *p_Var10;
+  uint uVar11;
+  uchar local_30;
   
   uVar6 = (uint)(ushort)h;
-  uVar9 = (uint)(ushort)w;
+  uVar4 = (uint)(ushort)w;
   bVar2 = false;
-  p_Var11 = (_BlockVramEntry *)0x0;
-  _w_01 = 0;
-  w_01 = 0;
+  p_Var10 = (_BlockVramEntry *)0x0;
+  _w_00 = 0;
+  w_00 = 0;
   block = openVramBlocks;
-  if (openVramBlocks == (_BlockVramEntry *)0x0) {
-LAB_80072a48:
-    if ((p_Var11 != (_BlockVramEntry *)0x0) && (bVar2)) {
-      VRAM_InsertFreeVram(p_Var11->x,p_Var11->y,w_01,p_Var11->h,(uint)p_Var11->flags);
-      p_Var11->x = p_Var11->x + w_01;
-      p_Var11->w = p_Var11->w - w_01;
-      block = p_Var11;
-    }
-    if (block == (_BlockVramEntry *)0x0) {
-      return (_BlockVramEntry *)0x0;
-    }
-  }
-  else {
-    iVar7 = (int)w;
+  if (openVramBlocks != (_BlockVramEntry *)0x0) {
+    iVar3 = (int)w;
     iVar8 = (int)(short)startY;
     do {
-      w_01 = (short)_w_01;
-      iVar4 = (int)block->w;
-      if (((iVar7 <= iVar4) && (h <= block->h)) &&
+      w_00 = (short)_w_00;
+      iVar7 = (int)block->w;
+      if (((iVar3 <= iVar7) && (h <= block->h)) &&
          ((iVar8 == -1 || ((iVar8 <= (int)block->y && ((int)block->y < iVar8 + 0x100)))))) {
-        x_01 = block->x;
-        uVar3 = (uint)x_01 & 0x3f;
-        if ((x_01 & 0x3f) == 0) {
-LAB_80072b44:
+        x_00 = block->x;
+        iVar5 = 0x40 - ((uint)x_00 & 0x3f);
+        if ((x_00 & 0x3f) == 0) {
+LAB_80073150:
           bVar2 = false;
           break;
         }
-        iVar5 = 0x40 - uVar3;
-        if (iVar5 < iVar7) {
-          if ((iVar7 <= (int)uVar3) && (iVar7 <= iVar4 - iVar5)) {
+        if (iVar5 < iVar3) {
+          if ((iVar3 <= (int)(0x40 - ((short)x_00 + iVar5 & 0x3fU))) && (iVar3 <= iVar7 - iVar5)) {
             bVar2 = true;
-            _w_01 = iVar5;
-            p_Var11 = block;
+            _w_00 = iVar5;
+            p_Var10 = block;
           }
         }
         else {
-          if ((x_01 & 0xf) == 0) goto LAB_80072b44;
-          iVar5 = 0x10 - ((uint)x_01 & 0xf);
-          if (iVar7 <= iVar4 - iVar5) {
-            bVar2 = false;
-            VRAM_InsertFreeVram(x_01,block->y,(short)((uint)(iVar5 * 0x10000) >> 0x10),block->h,
+          if ((x_00 & 0xf) == 0) goto LAB_80073150;
+          iVar5 = 0x10 - ((uint)x_00 & 0xf);
+          if ((iVar3 <= (int)(0x40 - ((short)x_00 + iVar5 & 0x3fU))) && (iVar3 <= iVar7 - iVar5)) {
+            VRAM_InsertFreeVram(x_00,block->y,(short)((uint)(iVar5 * 0x10000) >> 0x10),block->h,
                                 (uint)block->flags);
+            bVar2 = false;
             block->x = block->x + (short)iVar5;
             block->w = block->w - (short)iVar5;
             break;
           }
         }
       }
-      w_01 = (short)_w_01;
+      w_00 = (short)_w_00;
       block = block->next;
     } while (block != (_BlockVramEntry *)0x0);
-    if (block == (_BlockVramEntry *)0x0) goto LAB_80072a48;
+    if (block != (_BlockVramEntry *)0x0) goto LAB_80073098;
   }
-  local_38 = (uchar)type;
-  if (bVar2) {
+  if ((p_Var10 != (_BlockVramEntry *)0x0) && (bVar2)) {
+    VRAM_InsertFreeVram(p_Var10->x,p_Var10->y,w_00,p_Var10->h,(uint)p_Var10->flags);
+    bVar2 = false;
+    p_Var10->x = p_Var10->x + w_00;
+    p_Var10->w = p_Var10->w - w_00;
+    block = p_Var10;
+  }
+  if (block == (_BlockVramEntry *)0x0) {
+    return (_BlockVramEntry *)0x0;
+  }
+LAB_80073098:
+  if (!bVar2) {
     x_00 = block->x;
-    x_01 = block->y;
-    uVar12 = (uint)x_01;
-    w_00 = block->w;
-    uVar3 = (uint)w_00;
+    y_00 = block->y;
+    uVar1 = block->w;
+    uVar9 = (uint)uVar1;
     h_00 = block->h;
+    uVar11 = (uint)h_00;
     VRAM_DeleteFreeBlock(block);
     block->next = (_BlockVramEntry *)0x0;
     block->flags = '\x01';
-    w_01 = block->w;
-    block->type = local_38;
-    sVar1 = *x;
+    local_30 = (uchar)type;
     block->w = w;
     block->h = h;
-    block->x = (sVar1 + w_01) - w;
+    block->type = local_30;
     VRAM_InsertUsedBlock(block);
     *x = block->x;
     *y = block->y;
-    _w_01 = (int)(short)w_00;
-    iVar7 = (int)w;
-    if (_w_01 == iVar7) {
-      uVar9 = (uint)h_00;
-      if (uVar9 << 0x10 == uVar6 << 0x10) {
+    _w_00 = (int)(short)uVar1;
+    iVar3 = (int)w;
+    if (_w_00 == iVar3) {
+      if (uVar11 << 0x10 == uVar6 << 0x10) {
         return block;
       }
-      x_01 = (ushort)((uVar12 + uVar6) * 0x10000 >> 0x10);
-      w_00 = w;
+      y_00 = (ushort)((y_00 + uVar6) * 0x10000 >> 0x10);
+      h_00 = (ushort)((uVar11 - uVar6) * 0x10000 >> 0x10);
     }
     else {
-      iVar4 = (int)(short)h_00;
+      iVar7 = (int)(short)h_00;
       iVar8 = (int)h;
-      if (iVar4 == iVar8) {
-        w_00 = (ushort)((uVar3 - uVar9) * 0x10000 >> 0x10);
-        goto LAB_80072e8c;
-      }
-      iVar5 = (_w_01 - iVar7) * iVar8 - _w_01 * (iVar4 - iVar8);
-      if (iVar5 < 0) {
-        iVar5 = -iVar5;
-      }
-      _w_01 = (_w_01 - iVar7) * iVar4 - iVar7 * (iVar4 - iVar8);
-      if (_w_01 < 0) {
-        _w_01 = -_w_01;
-      }
-      if (iVar5 <= _w_01) {
-        VRAM_InsertFreeVram(x_00,x_01,(short)((uVar3 - uVar9) * 0x10000 >> 0x10),h_00,1);
-        x_00 = (ushort)(((x_00 + uVar3) - uVar9) * 0x10000 >> 0x10);
-        goto LAB_80072e7c;
-      }
-      VRAM_InsertFreeVram(x_00,x_01,(short)((uVar3 - uVar9) * 0x10000 >> 0x10),h,1);
-      x_01 = (ushort)((uVar12 + uVar6) * 0x10000 >> 0x10);
-      uVar9 = (uint)h_00;
-    }
-  }
-  else {
-    x_00 = block->x;
-    uVar3 = (uint)x_00;
-    x_01 = block->y;
-    uVar12 = (uint)x_01;
-    w_00 = block->w;
-    uVar10 = (uint)w_00;
-    h_00 = block->h;
-    VRAM_DeleteFreeBlock(block);
-    block->next = (_BlockVramEntry *)0x0;
-    block->flags = '\x01';
-    block->w = w;
-    block->h = h;
-    block->type = local_38;
-    VRAM_InsertUsedBlock(block);
-    *x = block->x;
-    *y = block->y;
-    _w_01 = (int)(short)w_00;
-    iVar7 = (int)w;
-    if (_w_01 == iVar7) {
-      uVar9 = (uint)h_00;
-      if (uVar9 << 0x10 == uVar6 << 0x10) {
-        return block;
-      }
-      x_01 = (ushort)((uVar12 + uVar6) * 0x10000 >> 0x10);
-      w_00 = w;
-    }
-    else {
-      iVar4 = (int)(short)h_00;
-      iVar8 = (int)h;
-      if (iVar4 == iVar8) {
-        x_00 = (ushort)((uVar3 + uVar9) * 0x10000 >> 0x10);
-        w_00 = (ushort)((uVar10 - uVar9) * 0x10000 >> 0x10);
-        goto LAB_80072e8c;
-      }
-      iVar5 = (_w_01 - iVar7) * iVar8 - _w_01 * (iVar4 - iVar8);
-      if (iVar5 < 0) {
-        iVar5 = -iVar5;
-      }
-      _w_01 = (_w_01 - iVar7) * iVar4 - iVar7 * (iVar4 - iVar8);
-      if (_w_01 < 0) {
-        _w_01 = -_w_01;
-      }
-      if (_w_01 < iVar5) {
-        VRAM_InsertFreeVram((short)((uVar3 + uVar9) * 0x10000 >> 0x10),x_01,
-                            (short)((uVar10 - uVar9) * 0x10000 >> 0x10),h,1);
-        w = w_00;
+      if (iVar7 == iVar8) {
+        x_00 = (ushort)((x_00 + uVar4) * 0x10000 >> 0x10);
+        w = (short)((uVar9 - uVar4) * 0x10000 >> 0x10);
       }
       else {
-        VRAM_InsertFreeVram((short)((uVar3 + uVar9) * 0x10000 >> 0x10),x_01,
-                            (short)((uVar10 - uVar9) * 0x10000 >> 0x10),h_00,1);
+        iVar5 = (_w_00 - iVar3) * iVar8 - _w_00 * (iVar7 - iVar8);
+        if (iVar5 < 0) {
+          iVar5 = -iVar5;
+        }
+        _w_00 = (_w_00 - iVar3) * iVar7 - iVar3 * (iVar7 - iVar8);
+        if (_w_00 < 0) {
+          _w_00 = -_w_00;
+        }
+        iVar3 = x_00 + uVar4;
+        if (_w_00 < iVar5) {
+          VRAM_InsertFreeVram((short)((uint)(iVar3 * 0x10000) >> 0x10),y_00,
+                              (short)((uVar9 - uVar4) * 0x10000 >> 0x10),h,1);
+          w = uVar1;
+        }
+        else {
+          VRAM_InsertFreeVram((short)((uint)(iVar3 * 0x10000) >> 0x10),y_00,
+                              (short)((uVar9 - uVar4) * 0x10000 >> 0x10),h_00,1);
+        }
+        y_00 = (ushort)((y_00 + uVar6) * 0x10000 >> 0x10);
+        h_00 = (ushort)((uVar11 - uVar6) * 0x10000 >> 0x10);
       }
-LAB_80072e7c:
-      uVar9 = (uint)h_00;
-      x_01 = (ushort)((uVar12 + uVar6) * 0x10000 >> 0x10);
-      w_00 = w;
     }
+    VRAM_InsertFreeVram(x_00,y_00,w,h_00,1);
   }
-  h_00 = (ushort)((uVar9 - uVar6) * 0x10000 >> 0x10);
-LAB_80072e8c:
-  VRAM_InsertFreeVram(x_00,x_01,w_00,h_00,1);
   return block;
 }
 
@@ -783,47 +874,18 @@ LAB_80072e8c:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VRAM_ClearVramBlock(struct _BlockVramEntry *block /*$s0*/)
- // line 647, offset 0x80072ec8
+ // line 710, offset 0x800732d4
 	/* begin block 1 */
-		// Start line: 648
-		// Start offset: 0x80072EC8
-		// Variables:
-	// 		struct BLK_FILL clear; // stack offset -24
+		// Start line: 1638
 	/* end block 1 */
-	// End offset: 0x80072F44
-	// End Line: 673
+	// End Line: 1639
 
-	/* begin block 2 */
-		// Start line: 1486
-	/* end block 2 */
-	// End Line: 1487
+/* File: C:\kain2\game\VRAM.C */
 
 void VRAM_ClearVramBlock(_BlockVramEntry *block)
 
 {
-  undefined auStack24 [3];
-  undefined local_15;
-  undefined local_14;
-  undefined local_13;
-  undefined local_12;
-  undefined local_11;
-  short local_10;
-  short local_e;
-  short local_c;
-  short local_a;
-  
   if (block != (_BlockVramEntry *)0x0) {
-    local_15 = 3;
-    local_11 = 2;
-    local_10 = block->x;
-    local_e = block->y;
-    local_c = block->w;
-    local_a = block->h;
-    local_14 = 0;
-    local_13 = 0;
-    local_12 = 0;
-    DrawPrim((int)auStack24);
-    DrawSync(0);
     VRAM_DeleteUsedBlock(block);
     VRAM_InsertFreeBlock(block);
   }
@@ -835,10 +897,10 @@ void VRAM_ClearVramBlock(_BlockVramEntry *block)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ AdjustVramCoordsObject(int oldx /*$s3*/, int oldy /*$s1*/, int newx /*$a2*/, int newy /*$t7*/, struct Object *object /*stack 16*/)
- // line 727, offset 0x80072f54
+ // line 790, offset 0x80073308
 	/* begin block 1 */
-		// Start line: 728
-		// Start offset: 0x80072F54
+		// Start line: 791
+		// Start offset: 0x80073308
 		// Variables:
 	// 		struct TextureMT3 *texture; // $t1
 	// 		int oldclutxoffset; // $v0
@@ -852,13 +914,15 @@ void VRAM_ClearVramBlock(_BlockVramEntry *block)
 	// 		short diffy; // $s5
 	// 		short diffx; // $s6
 	/* end block 1 */
-	// End offset: 0x8007311C
-	// End Line: 786
+	// End offset: 0x800734D0
+	// End Line: 849
 
 	/* begin block 2 */
-		// Start line: 1650
+		// Start line: 1798
 	/* end block 2 */
-	// End Line: 1651
+	// End Line: 1799
+
+/* File: C:\kain2\game\VRAM.C */
 
 void AdjustVramCoordsObject(int oldx,int oldy,int newx,int newy,Object *object)
 
@@ -917,31 +981,33 @@ void AdjustVramCoordsObject(int oldx,int oldy,int newx,int newy,Object *object)
 // decompiled code
 // original method signature: 
 // struct _BlockVramEntry * /*$ra*/ VRAM_InsertionSort(struct _BlockVramEntry *rootNode /*$a0*/, struct _BlockVramEntry *newBlock /*$a1*/)
- // line 824, offset 0x80073140
+ // line 887, offset 0x800734f4
 	/* begin block 1 */
-		// Start line: 827
-		// Start offset: 0x80073140
+		// Start line: 890
+		// Start offset: 0x800734F4
 		// Variables:
 	// 		struct _BlockVramEntry *next; // $v1
 	// 		struct _BlockVramEntry *prev; // $a2
 	/* end block 1 */
-	// End offset: 0x80073194
-	// End Line: 855
+	// End offset: 0x80073548
+	// End Line: 918
 
 	/* begin block 2 */
-		// Start line: 2024
+		// Start line: 2172
 	/* end block 2 */
-	// End Line: 2025
+	// End Line: 2173
 
 	/* begin block 3 */
-		// Start line: 2026
+		// Start line: 2174
 	/* end block 3 */
-	// End Line: 2027
+	// End Line: 2175
 
 	/* begin block 4 */
-		// Start line: 2028
+		// Start line: 2176
 	/* end block 4 */
-	// End Line: 2029
+	// End Line: 2177
+
+/* File: C:\kain2\game\VRAM.C */
 
 _BlockVramEntry * VRAM_InsertionSort(_BlockVramEntry *rootNode,_BlockVramEntry *newBlock)
 
@@ -976,67 +1042,74 @@ _BlockVramEntry * VRAM_InsertionSort(_BlockVramEntry *rootNode,_BlockVramEntry *
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ VRAM_RearrangeVramsLayer(long whichLayer /*$s6*/)
- // line 868, offset 0x8007319c
+// void /*$ra*/ VRAM_RearrangeVramsLayer(long whichLayer /*$s7*/)
+ // line 931, offset 0x80073550
 	/* begin block 1 */
-		// Start line: 869
-		// Start offset: 0x8007319C
+		// Start line: 932
+		// Start offset: 0x80073550
 		// Variables:
 	// 		struct _BlockVramEntry *vblock; // $s0
 	// 		struct _BlockVramEntry *sortedBlocks; // $s2
 	// 		struct _BlockVramEntry *curBlock; // $s1
-	// 		struct _BlockVramEntry (*savedVramBlocksPTR[48]); // stack offset -1584
-	// 		struct _BlockVramEntry savedVramBlocks[48]; // stack offset -1392
-	// 		struct RECT vramLoc; // stack offset -48
+	// 		struct _BlockVramEntry (*savedVramBlocksPTR[48]); // stack offset -1592
+	// 		struct _BlockVramEntry savedVramBlocks[48]; // stack offset -1400
+	// 		struct RECT vramLoc; // stack offset -56
 	// 		long numBlocks; // $s3
 	// 		long d; // $s4
-	// 		short x; // stack offset -40
-	// 		short y; // stack offset -38
+	// 		short x; // stack offset -48
+	// 		short y; // stack offset -46
 	// 		short dispYPos; // $s5
+
+		/* begin block 1.1 */
+			// Start line: 980
+			// Start offset: 0x80073628
+			// Variables:
+		// 		int startY; // $s6
+		/* end block 1.1 */
+		// End offset: 0x800738B4
+		// End Line: 1088
 	/* end block 1 */
-	// End offset: 0x8007358C
-	// End Line: 1023
+	// End offset: 0x800738B4
+	// End Line: 1091
 
 	/* begin block 2 */
-		// Start line: 2112
+		// Start line: 2260
 	/* end block 2 */
-	// End Line: 2113
+	// End Line: 2261
+
+/* File: C:\kain2\game\VRAM.C */
 
 void VRAM_RearrangeVramsLayer(long whichLayer)
 
 {
   byte bVar1;
-  bool bVar2;
-  short sVar3;
-  int iVar4;
+  short sVar2;
+  int iVar3;
   _BlockVramEntry *newBlock;
+  _BlockVramEntry **pp_Var4;
   _BlockVramEntry *block;
   undefined4 uVar5;
   long lVar6;
   undefined4 uVar7;
   _BlockVramEntry *rootNode;
-  _BlockVramEntry **pp_Var8;
-  int iVar9;
-  _BlockVramEntry *local_630 [48];
-  _BlockVramEntry local_570 [48];
-  short local_30;
-  short local_2e;
-  short local_2c;
-  short local_2a;
-  ushort local_28;
-  ushort local_26 [3];
+  int iVar8;
+  short sVar9;
+  _BlockVramEntry *local_638 [48];
+  _BlockVramEntry local_578 [48];
+  RECT local_38;
+  ushort local_30;
+  ushort local_2e [3];
   
-  iVar9 = 0;
+  iVar8 = 0;
   if (usedVramBlocks != (_BlockVramEntry *)0x0) {
-    newBlock = local_570;
-    pp_Var8 = local_630;
+    newBlock = local_578;
+    pp_Var4 = local_638;
     rootNode = usedVramBlocks;
     do {
       if (whichLayer == 0) {
-        bVar2 = iVar9 < 0x31;
         if (rootNode->y < 0x100) {
-          *pp_Var8 = rootNode;
-LAB_80073214:
+          *pp_Var4 = rootNode;
+LAB_800735cc:
           uVar5 = *(undefined4 *)&rootNode->type;
           lVar6 = rootNode->ID;
           uVar7 = *(undefined4 *)&rootNode->x;
@@ -1050,110 +1123,94 @@ LAB_80073214:
           newBlock->area = lVar6;
           newBlock->udata = uVar5;
           newBlock = newBlock + 1;
-          pp_Var8 = pp_Var8 + 1;
-          iVar9 = iVar9 + 1;
-          bVar2 = iVar9 < 0x31;
+          pp_Var4 = pp_Var4 + 1;
+          iVar8 = iVar8 + 1;
         }
       }
       else {
-        bVar2 = iVar9 < 0x31;
         if (0xff < rootNode->y) {
-          *pp_Var8 = rootNode;
-          goto LAB_80073214;
+          *pp_Var4 = rootNode;
+          goto LAB_800735cc;
         }
-      }
-      if (!bVar2) {
-        GXFilePrint("Ran out of vram blocks\n");
       }
       rootNode = rootNode->next;
     } while (rootNode != (_BlockVramEntry *)0x0);
   }
-  if (0 < iVar9) {
+  if (0 < iVar8) {
+    sVar9 = 0x100;
     if (whichLayer == 0) {
-      local_2e = 0;
+      sVar9 = 0;
+      local_38.y = 0;
     }
     else {
-      local_2e = 0x100;
+      local_38.y = 0x100;
     }
-    local_2c = 0x200;
-    local_30 = 0x200;
-    local_2a = 0x100;
+    local_38.w = 0x200;
+    local_38.x = 0x200;
+    local_38.h = 0x100;
     do {
       do {
-        iVar4 = CheckVolatile(gameTrackerX.drawTimerReturn);
-      } while (iVar4 != 0);
-      iVar4 = CheckVolatile(gameTrackerX.reqDisp);
-    } while (iVar4 != 0);
-    iVar4 = 0;
+        iVar3 = CheckVolatile(DAT_800d21e8);
+      } while (iVar3 != 0);
+      iVar3 = CheckVolatile(DAT_800d21e4);
+    } while (iVar3 != 0);
+    iVar3 = 0;
     rootNode = (_BlockVramEntry *)0x0;
-    sVar3 = (short)(gameTrackerX.gameData.asmData.dispPage ^ 1U) * 0x100;
-    MoveImage((undefined4 *)&local_30,0,
-              (int)((gameTrackerX.gameData.asmData.dispPage ^ 1U) << 0x18) >> 0x10);
+    sVar2 = (short)(DAT_800d20d0 ^ 1) * 0x100;
+    MoveImage(&local_38,0,(int)((DAT_800d20d0 ^ 1) << 0x18) >> 0x10);
     DrawSync(0);
-    pp_Var8 = local_630;
-    if (0 < iVar9) {
-      newBlock = local_570;
+    pp_Var4 = local_638;
+    if (0 < iVar8) {
+      newBlock = local_578;
       do {
-        block = *pp_Var8;
-        pp_Var8 = pp_Var8 + 1;
+        block = *pp_Var4;
+        pp_Var4 = pp_Var4 + 1;
         VRAM_ClearVramBlock(block);
-        iVar4 = iVar4 + 1;
+        iVar3 = iVar3 + 1;
         newBlock->next = (_BlockVramEntry *)0x0;
         newBlock->area = (int)newBlock->w * (int)newBlock->h;
         rootNode = VRAM_InsertionSort(rootNode,newBlock);
         newBlock = newBlock + 1;
-      } while (iVar4 < iVar9);
+      } while (iVar3 < iVar8);
     }
     while (rootNode != (_BlockVramEntry *)0x0) {
-      local_2c = rootNode->w;
-      local_2a = rootNode->h;
-      local_30 = rootNode->x + -0x200;
-      local_2e = sVar3;
+      local_38.w = rootNode->w;
+      local_38.h = rootNode->h;
+      local_38.x = rootNode->x + -0x200;
+      local_38.y = sVar2;
       if (whichLayer != 0) {
-        local_2e = sVar3 + -0x100;
+        local_38.y = sVar2 + -0x100;
       }
-      local_2e = rootNode->y + local_2e;
-      local_28 = rootNode->x;
-      local_26[0] = rootNode->y;
-      newBlock = VRAM_CheckVramSlot((short *)&local_28,(short *)local_26,local_2c,local_2a,
-                                    (uint)rootNode->type,-1);
+      local_38.y = rootNode->y + local_38.y;
+      local_30 = rootNode->x;
+      local_2e[0] = rootNode->y;
+      newBlock = VRAM_CheckVramSlot((short *)&local_30,(short *)local_2e,local_38.w,local_38.h,
+                                    (uint)rootNode->type,(int)sVar9);
       if (newBlock == (_BlockVramEntry *)0x0) {
         VRAM_PrintInfo();
-        GXFilePrint("Vram didn\'t fit on object relocation. Old info x,y(%d,%d) w,h(%d,%d)\n");
         VRAM_PrintVramBlock(rootNode);
       }
-      MoveImage((undefined4 *)&local_30,(int)(short)local_28,(int)(short)local_26[0]);
+      MoveImage(&local_38,(int)(short)local_30,(int)(short)local_2e[0]);
       DrawSync(0);
       bVar1 = rootNode->type;
       if (bVar1 == 2) {
         AdjustVramCoordsObject
-                  ((int)rootNode->x,(int)rootNode->y,(int)(short)local_28,(int)(short)local_26[0],
+                  ((int)rootNode->x,(int)rootNode->y,(int)(short)local_30,(int)(short)local_2e[0],
                    *(Object **)(rootNode->udata + 0x10));
         *(_BlockVramEntry **)(rootNode->udata + 0x18) = newBlock;
-LAB_80073570:
         newBlock->udata = rootNode->udata;
       }
       else {
-        if (2 < bVar1) {
-          if (bVar1 == 3) {
-            GXFilePrint("font was at (%d,%d) now is at (%d,%d) ,new offset (%d,%d) w,h(%d,%d)\n");
-            fontTracker.font_tpage =
-                 (short)(local_26[0] & 0x100) >> 4 | (ushort)(((uint)local_28 & 0x3ff) >> 6) |
-                 (ushort)(((uint)local_26[0] & 0x200) << 2);
-            fontTracker.font_vramU = (short)(((uint)local_28 & 0x3f) << 2);
-            fontTracker.font_vramV = local_26[0] & 0xff;
-            fontTracker.font_vramX = local_28;
-            SpecialFogClut = local_28 >> 4 & 0x3f;
-            fontTracker.font_clut = (local_26[0] + 0x7e) * 0x40 | SpecialFogClut;
-            fontTracker.font_vramY = local_26[0];
-            SpecialFogClut = (local_26[0] + 0x7f) * 0x40 | SpecialFogClut;
-          }
-          else {
-            if (bVar1 == 4) {
-              DRAW_RelocateButtonInVram((_ButtonTexture *)rootNode->udata,newBlock);
-              goto LAB_80073570;
-            }
-          }
+        if ((2 < bVar1) && (bVar1 == 3)) {
+          DAT_800d1d04 = (short)(local_2e[0] & 0x100) >> 4 | (ushort)(((uint)local_30 & 0x3ff) >> 6)
+                         | (ushort)(((uint)local_2e[0] & 0x200) << 2);
+          DAT_800d1d08 = (undefined2)(((uint)local_30 & 0x3f) << 2);
+          DAT_800d1d0a = local_2e[0] & 0xff;
+          DAT_800d1d10 = local_30;
+          SpecialFogClut = local_30 >> 4 & 0x3f;
+          DAT_800d1d06 = (local_2e[0] + 0x7e) * 0x40 | SpecialFogClut;
+          DAT_800d1d12 = local_2e[0];
+          SpecialFogClut = (local_2e[0] + 0x7f) * 0x40 | SpecialFogClut;
         }
       }
       rootNode = rootNode->next;
@@ -1167,114 +1224,106 @@ LAB_80073570:
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ VRAM_TransferBufferToVram(void *dataPtr /*$s3*/, long dataSize /*$s2*/, short status /*$s6*/, void *data1 /*$s0*/, void *data2 /*stack 16*/)
- // line 1054, offset 0x800735bc
+// void /*$ra*/ VRAM_TransferBufferToVram(void *dataPtr /*$s3*/, long dataSize /*$s2*/, short status /*$a2*/, void *data1 /*$s0*/, void *data2 /*stack 16*/)
+ // line 1122, offset 0x800738e8
 	/* begin block 1 */
-		// Start line: 1055
-		// Start offset: 0x800735BC
+		// Start line: 1123
+		// Start offset: 0x800738E8
 		// Variables:
 	// 		struct VramBuffer *vramControl; // $s1
-	// 		struct RECT rect; // stack offset -48
+	// 		struct RECT rect; // stack offset -40
 	// 		long *nextOTag; // $s5
-	// 		long *drawTimerReturn; // $s7
+	// 		long *drawTimerReturn; // $s6
 
 		/* begin block 1.1 */
-			// Start line: 1084
-			// Start offset: 0x80073648
+			// Start line: 1152
+			// Start offset: 0x8007396C
 		/* end block 1.1 */
-		// End offset: 0x800736FC
-		// End Line: 1113
+		// End offset: 0x80073A20
+		// End Line: 1181
 
 		/* begin block 1.2 */
-			// Start line: 1118
-			// Start offset: 0x80073704
+			// Start line: 1186
+			// Start offset: 0x80073A28
 		/* end block 1.2 */
-		// End offset: 0x800737A8
-		// End Line: 1138
+		// End offset: 0x80073ACC
+		// End Line: 1206
 	/* end block 1 */
-	// End offset: 0x800737E8
-	// End Line: 1176
+	// End offset: 0x80073AF0
+	// End Line: 1244
 
 	/* begin block 2 */
-		// Start line: 2103
+		// Start line: 2239
 	/* end block 2 */
-	// End Line: 2104
+	// End Line: 2240
+
+/* File: C:\kain2\game\VRAM.C */
 
 void VRAM_TransferBufferToVram(void *dataPtr,long dataSize,short status,void *data1,void *data2)
 
 {
   short sVar1;
-  long *plVar2;
-  undefined4 *puVar3;
+  undefined4 uVar2;
+  u_long *p;
+  short sVar3;
   int iVar4;
-  short sVar5;
-  size_t __n;
-  int iVar6;
-  undefined2 local_30;
-  short local_2e;
-  undefined2 local_2c;
-  short local_2a;
+  int iVar5;
+  RECT local_28;
   
-  puVar3 = (undefined4 *)BreakDraw();
+  p = BreakDraw();
   DrawSync(0);
-  plVar2 = gameTrackerX.drawTimerReturn;
-  gameTrackerX.drawTimerReturn = (long *)0x0;
+  uVar2 = DAT_800d21e8;
+  DAT_800d21e8 = 0;
   if (data1 != (void *)0x0) {
     if ((*(uint *)data1 & 1) == 0) {
       *(uint *)data1 = *(uint *)data1 | 1;
       dataPtr = (void *)((int)dataPtr + 0x24);
-      dataSize = dataSize - 0x24;
+      dataSize = dataSize + -0x24;
     }
-    iVar4 = (int)*(short *)((int)data1 + 0xe);
-    if (iVar4 != 0) {
-      iVar6 = (int)*(short *)((int)data1 + 8) * 2 - (uint)*(ushort *)((int)data1 + 0xe);
-      __n = iVar6 * 0x10000 >> 0x10;
-      if (dataSize < (int)__n) {
-        memcpy((void *)(*(int *)((int)data1 + 0x10) + iVar4),dataPtr,dataSize);
+    if (*(short *)((int)data1 + 0xe) != 0) {
+      iVar5 = (int)*(short *)((int)data1 + 8) * 2 - (uint)*(ushort *)((int)data1 + 0xe);
+      iVar4 = iVar5 * 0x10000 >> 0x10;
+      if (dataSize < iVar4) {
+        memcpy();
         sVar1 = (short)dataSize;
         dataSize = 0;
         *(short *)((int)data1 + 0xe) = *(short *)((int)data1 + 0xe) + sVar1;
       }
       else {
-        memcpy((void *)(*(int *)((int)data1 + 0x10) + iVar4),dataPtr,__n);
-        dataPtr = (void *)((int)dataPtr + __n);
-        dataSize = dataSize - __n;
-        local_30 = *(undefined2 *)((int)data1 + 4);
-        *(short *)((int)data1 + 0xe) = *(short *)((int)data1 + 0xe) + (short)iVar6;
-        local_2e = *(short *)((int)data1 + 6) + *(short *)((int)data1 + 0xc);
-        local_2c = *(undefined2 *)((int)data1 + 8);
-        local_2a = 1;
+        memcpy();
+        dataPtr = (void *)((int)dataPtr + iVar4);
+        dataSize = dataSize - iVar4;
+        local_28.x = *(short *)((int)data1 + 4);
+        *(short *)((int)data1 + 0xe) = *(short *)((int)data1 + 0xe) + (short)iVar5;
+        local_28.y = *(short *)((int)data1 + 6) + *(short *)((int)data1 + 0xc);
+        local_28.w = *(short *)((int)data1 + 8);
+        local_28.h = 1;
         *(short *)((int)data1 + 0xc) = *(short *)((int)data1 + 0xc) + 1;
-        LoadImage((undefined4 *)&local_30,*(undefined4 *)((int)data1 + 0x10));
+        LoadImage(&local_28,*(u_long **)((int)data1 + 0x10));
         *(undefined2 *)((int)data1 + 0xe) = 0;
       }
     }
     if (0 < dataSize) {
       sVar1 = *(short *)((int)data1 + 8);
       iVar4 = dataSize / ((int)sVar1 << 1);
-      local_30 = *(undefined2 *)((int)data1 + 4);
-      local_2e = *(short *)((int)data1 + 6) + *(short *)((int)data1 + 0xc);
-      local_2c = *(undefined2 *)((int)data1 + 8);
-      sVar5 = (short)iVar4;
-      local_2a = sVar5;
-      LoadImage((undefined4 *)&local_30,dataPtr);
-      *(short *)((int)data1 + 0xc) = *(short *)((int)data1 + 0xc) + sVar5;
-      iVar4 = (int)(short)(sVar1 * (short)((iVar4 << 0x10) >> 0xf));
-      __n = dataSize - iVar4;
-      if (0 < (int)__n) {
-        memcpy((void *)(*(int *)((int)data1 + 0x10) + (int)*(short *)((int)data1 + 0xe)),
-               (void *)((int)dataPtr + iVar4),__n);
-        *(short *)((int)data1 + 0xe) = *(short *)((int)data1 + 0xe) + (short)__n;
+      local_28.x = *(short *)((int)data1 + 4);
+      local_28.y = *(short *)((int)data1 + 6) + *(short *)((int)data1 + 0xc);
+      local_28.w = *(short *)((int)data1 + 8);
+      sVar3 = (short)iVar4;
+      local_28.h = sVar3;
+      LoadImage(&local_28,(u_long *)dataPtr);
+      *(short *)((int)data1 + 0xc) = *(short *)((int)data1 + 0xc) + sVar3;
+      iVar4 = dataSize - (short)(sVar1 * (short)((iVar4 << 0x10) >> 0xf));
+      if (0 < iVar4) {
+        memcpy();
+        *(short *)((int)data1 + 0xe) = *(short *)((int)data1 + 0xe) + (short)iVar4;
       }
-    }
-    if (status == 1) {
-      MEMPACK_Free((char *)data1);
     }
   }
   DrawSync(0);
-  gameTrackerX.drawTimerReturn = plVar2;
-  if ((puVar3 != (undefined4 *)0x0) && (puVar3 != (undefined4 *)0xffffffff)) {
-    DrawOTag(puVar3);
+  DAT_800d21e8 = uVar2;
+  if ((p != (u_long *)0x0) && (p != (u_long *)0xffffffff)) {
+    DrawOTag(p);
   }
   return;
 }
@@ -1283,21 +1332,23 @@ void VRAM_TransferBufferToVram(void *dataPtr,long dataSize,short status,void *da
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ VRAM_AbortLoad(void *dataPtr /*$a0*/, void *data1 /*$a1*/, void *data2 /*$a2*/)
- // line 1181, offset 0x80073814
+// void /*$ra*/ VRAM_LoadReturn(void *dataPtr /*$a0*/, void *data1 /*$a1*/, void *data2 /*$a2*/)
+ // line 1249, offset 0x80073b18
 	/* begin block 1 */
-		// Start line: 1182
-		// Start offset: 0x80073814
+		// Start line: 1250
+		// Start offset: 0x80073B18
 	/* end block 1 */
-	// End offset: 0x80073814
-	// End Line: 1182
+	// End offset: 0x80073B18
+	// End Line: 1250
 
 	/* begin block 2 */
-		// Start line: 2801
+		// Start line: 2962
 	/* end block 2 */
-	// End Line: 2802
+	// End Line: 2963
 
-void VRAM_AbortLoad(void *dataPtr,void *data1,void *data2)
+/* File: C:\kain2\game\VRAM.C */
+
+void VRAM_LoadReturn(void *dataPtr,void *data1,void *data2)
 
 {
   MEMPACK_Free((char *)data1);
@@ -1308,23 +1359,25 @@ void VRAM_AbortLoad(void *dataPtr,void *data1,void *data2)
 
 // decompiled code
 // original method signature: 
-// long /*$ra*/ VRAM_GetObjectVramSpace(struct VramSize *vramSize /*$v1*/, struct _ObjectTracker *objectTracker /*$s4*/)
- // line 1187, offset 0x80073834
+// long /*$ra*/ VRAM_GetObjectVramSpace(struct VramSize *vramSize /*$v1*/, struct _ObjectTracker *objectTracker /*$s5*/)
+ // line 1255, offset 0x80073b38
 	/* begin block 1 */
-		// Start line: 1188
-		// Start offset: 0x80073834
+		// Start line: 1256
+		// Start offset: 0x80073B38
 		// Variables:
 	// 		struct RECT rect; // stack offset -40
-	// 		long result; // $s5
+	// 		long result; // $s4
 	// 		struct _BlockVramEntry *lastVramBlockUsed; // $s0
 	/* end block 1 */
-	// End offset: 0x8007391C
-	// End Line: 1225
+	// End offset: 0x80073C08
+	// End Line: 1293
 
 	/* begin block 2 */
-		// Start line: 2813
+		// Start line: 2974
 	/* end block 2 */
-	// End Line: 2814
+	// End Line: 2975
+
+/* File: C:\kain2\game\VRAM.C */
 
 long VRAM_GetObjectVramSpace(VramSize *vramSize,_ObjectTracker *objectTracker)
 
@@ -1341,14 +1394,13 @@ long VRAM_GetObjectVramSpace(VramSize *vramSize,_ObjectTracker *objectTracker)
   local_26 = vramSize->y;
   local_24 = vramSize->w;
   local_22 = vramSize->h;
-  p_Var1 = VRAM_CheckVramSlot(&local_28,&local_26,local_24,local_22,2,-1);
+  p_Var1 = VRAM_CheckVramSlot(&local_28,&local_26,local_24,local_22,2,0x100);
   if (p_Var1 == (_BlockVramEntry *)0x0) {
     VRAM_RearrangeVramsLayer(1);
-    p_Var1 = VRAM_CheckVramSlot(&local_28,&local_26,local_24,local_22,2,-1);
+    p_Var1 = VRAM_CheckVramSlot(&local_28,&local_26,local_24,local_22,2,0x100);
     if (p_Var1 == (_BlockVramEntry *)0x0) {
       lVar2 = 0;
       VRAM_PrintInfo();
-      GXFilePrint("couldn\'t fit the object %s in the vram, size (%d,%d)\n");
     }
   }
   *(_BlockVramEntry **)&objectTracker->vramBlock = p_Var1;
@@ -1363,18 +1415,18 @@ long VRAM_GetObjectVramSpace(VramSize *vramSize,_ObjectTracker *objectTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VRAM_InitMorphPalettes()
- // line 1231, offset 0x80073944
+ // line 1299, offset 0x80073c30
 	/* begin block 1 */
-		// Start line: 2952
+		// Start line: 3113
 	/* end block 1 */
-	// End Line: 2953
+	// End Line: 3114
 
 	/* begin block 2 */
-		// Start line: 2959
+		// Start line: 3120
 	/* end block 2 */
-	// End Line: 2960
+	// End Line: 3121
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\VRAM.C */
 
 void VRAM_InitMorphPalettes(void)
 
@@ -1387,18 +1439,18 @@ void VRAM_InitMorphPalettes(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ VRAM_UpdateMorphPalettes()
- // line 1265, offset 0x8007394c
+ // line 1333, offset 0x80073c38
 	/* begin block 1 */
-		// Start line: 3020
+		// Start line: 3181
 	/* end block 1 */
-	// End Line: 3021
+	// End Line: 3182
 
 	/* begin block 2 */
-		// Start line: 3121
+		// Start line: 3282
 	/* end block 2 */
-	// End Line: 3122
+	// End Line: 3283
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\VRAM.C */
 
 void VRAM_UpdateMorphPalettes(void)
 
@@ -1411,16 +1463,18 @@ void VRAM_UpdateMorphPalettes(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ MORPH_ChangeAreaPalettes(long time /*$a0*/)
- // line 1423, offset 0x80073954
+ // line 1491, offset 0x80073c40
 	/* begin block 1 */
-		// Start line: 3336
+		// Start line: 3497
 	/* end block 1 */
-	// End Line: 3337
+	// End Line: 3498
 
 	/* begin block 2 */
-		// Start line: 3362
+		// Start line: 3523
 	/* end block 2 */
-	// End Line: 3363
+	// End Line: 3524
+
+/* File: C:\kain2\game\VRAM.C */
 
 void MORPH_ChangeAreaPalettes(long time)
 

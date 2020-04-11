@@ -5,15 +5,15 @@
 // decompiled code
 // original method signature: 
 // int /*$ra*/ printf(char *fmt /*stack 0*/)
- // line 57, offset 0x8007395c
+ // line 57, offset 0x80073c48
 	/* begin block 1 */
 		// Start line: 58
-		// Start offset: 0x8007395C
+		// Start offset: 0x80073C48
 		// Variables:
 	// 		int len; // $s0
 	// 		char string[256]; // stack offset -264
 	/* end block 1 */
-	// End offset: 0x8007395C
+	// End offset: 0x80073C48
 	// End Line: 58
 
 	/* begin block 2 */
@@ -21,14 +21,24 @@
 	/* end block 2 */
 	// End Line: 115
 
-int printf(char *fmt)
+/* File: C:\kain2\game\PSX\SUPPORT.C */
+
+int printf(char *fmt,...)
 
 {
   int iVar1;
-  undefined local_res4 [12];
+  undefined4 in_a1;
+  undefined4 in_a2;
+  undefined4 in_a3;
+  undefined4 local_res4;
+  undefined4 local_res8;
+  undefined4 local_resc;
   char acStack264 [256];
   
-  iVar1 = vsprintf(acStack264,fmt,local_res4);
+  local_res4 = in_a1;
+  local_res8 = in_a2;
+  local_resc = in_a3;
+  iVar1 = vsprintf(acStack264,fmt,&local_res4);
   puts(acStack264);
   return iVar1;
 }
@@ -38,12 +48,12 @@ int printf(char *fmt)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ sprintf(char *string /*$a0*/, char *fmt /*stack 4*/)
- // line 79, offset 0x800739ac
+ // line 79, offset 0x80073c98
 	/* begin block 1 */
 		// Start line: 80
-		// Start offset: 0x800739AC
+		// Start offset: 0x80073C98
 	/* end block 1 */
-	// End offset: 0x800739AC
+	// End offset: 0x80073C98
 	// End Line: 80
 
 	/* begin block 2 */
@@ -51,13 +61,20 @@ int printf(char *fmt)
 	/* end block 2 */
 	// End Line: 173
 
-int sprintf(char *string,char *fmt)
+/* File: C:\kain2\game\PSX\SUPPORT.C */
+
+int sprintf(char *buffer,char *fmt,...)
 
 {
   int iVar1;
-  undefined local_res8 [8];
+  undefined4 in_a2;
+  undefined4 in_a3;
+  undefined4 local_res8;
+  undefined4 local_resc;
   
-  iVar1 = vsprintf(string,fmt,local_res8);
+  local_res8 = in_a2;
+  local_resc = in_a3;
+  iVar1 = vsprintf(buffer,fmt,&local_res8);
   return iVar1;
 }
 
@@ -66,17 +83,17 @@ int sprintf(char *string,char *fmt)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ vsprintf(char *str /*$s7*/, char *fmtstr /*$a1*/, void *argptr /*$s5*/)
- // line 110, offset 0x800739dc
+ // line 110, offset 0x80073cc8
 	/* begin block 1 */
 		// Start line: 111
-		// Start offset: 0x800739DC
+		// Start offset: 0x80073CC8
 		// Variables:
 	// 		int scopy; // $s4
 	// 		char *fmt; // $s3
 
 		/* begin block 1.1 */
 			// Start line: 121
-			// Start offset: 0x80073A44
+			// Start offset: 0x80073D30
 			// Variables:
 		// 		int fsize; // $s0
 		// 		int pad; // $s6
@@ -85,10 +102,10 @@ int sprintf(char *string,char *fmt)
 		// 		char *temp_str; // $s1
 		// 		char buf[16]; // stack offset -56
 		/* end block 1.1 */
-		// End offset: 0x80073C0C
+		// End offset: 0x80073EF8
 		// End Line: 221
 	/* end block 1 */
-	// End offset: 0x80073C1C
+	// End offset: 0x80073F08
 	// End Line: 223
 
 	/* begin block 2 */
@@ -96,118 +113,103 @@ int sprintf(char *string,char *fmt)
 	/* end block 2 */
 	// End Line: 214
 
+/* File: C:\kain2\game\PSX\SUPPORT.C */
+
 int vsprintf(char *str,char *fmtstr,void *argptr)
 
 {
   byte bVar1;
   byte bVar2;
   byte bVar3;
-  size_t sVar4;
-  char *__dest;
   int radix;
-  int iVar5;
-  char *__s;
+  ulong value;
+  int iVar4;
+  byte *pbVar5;
   byte *pbVar6;
-  byte *pbVar7;
-  int iVar8;
-  int __c;
+  int iVar7;
   char local_38;
   undefined local_37;
   
   bVar1 = *fmtstr;
-  iVar8 = 0;
+  iVar7 = 0;
   do {
     if (bVar1 == 0) {
-      str[iVar8] = '\0';
-      return iVar8;
+      str[iVar7] = '\0';
+      return iVar7;
     }
     if (bVar1 == 0x25) {
-      pbVar6 = (byte *)fmtstr + 1;
-      bVar1 = *pbVar6;
+      pbVar5 = (byte *)fmtstr + 1;
+      bVar1 = *pbVar5;
       if (bVar1 == 0x25) {
-        str[iVar8] = '%';
-        iVar8 = iVar8 + 1;
+        str[iVar7] = '%';
+        iVar7 = iVar7 + 1;
         fmtstr = (char *)((byte *)fmtstr + 2);
       }
       else {
         if (bVar1 == 0x2d) {
-          pbVar6 = (byte *)fmtstr + 2;
+          pbVar5 = (byte *)fmtstr + 2;
         }
-        __c = 0x20;
-        if (*pbVar6 == 0x30) {
-          __c = 0x30;
-          pbVar6 = pbVar6 + 1;
+        if (*pbVar5 == 0x30) {
+          pbVar5 = pbVar5 + 1;
         }
-        bVar2 = *pbVar6;
-        iVar5 = 0;
+        bVar2 = *pbVar5;
+        iVar4 = 0;
         while ((uint)bVar2 - 0x30 < 10) {
-          bVar3 = *pbVar6;
-          pbVar6 = pbVar6 + 1;
-          bVar2 = *pbVar6;
-          iVar5 = iVar5 * 10 + (uint)bVar3 + -0x30;
+          bVar3 = *pbVar5;
+          pbVar5 = pbVar5 + 1;
+          bVar2 = *pbVar5;
+          iVar4 = iVar4 * 10 + (uint)bVar3 + -0x30;
         }
         do {
           do {
-            pbVar7 = pbVar6;
-            bVar2 = *pbVar7;
-            pbVar6 = pbVar7 + 1;
+            pbVar6 = pbVar5;
+            bVar2 = *pbVar6;
+            pbVar5 = pbVar6 + 1;
           } while (bVar2 == 0x4e);
-          pbVar6 = pbVar7 + 1;
-        } while ((((bVar2 == 0x46) || (pbVar6 = pbVar7 + 1, bVar2 == 0x68)) ||
-                 (pbVar6 = pbVar7 + 1, bVar2 == 0x6c)) || (pbVar6 = pbVar7 + 1, bVar2 == 0x4c));
-        bVar2 = *pbVar7;
+          pbVar5 = pbVar6 + 1;
+        } while ((((bVar2 == 0x46) || (pbVar5 = pbVar6 + 1, bVar2 == 0x68)) ||
+                 (pbVar5 = pbVar6 + 1, bVar2 == 0x6c)) || (pbVar5 = pbVar6 + 1, bVar2 == 0x4c));
+        bVar2 = *pbVar6;
         if (bVar2 == 99) {
           local_38 = *(char *)argptr;
-          __s = &local_38;
           local_37 = 0;
         }
         else {
-          if (bVar2 == 0x73) {
-            __s = *(char **)argptr;
-          }
-          else {
+          if (bVar2 != 0x73) {
             if ((bVar2 == 0x78) || (bVar2 == 0x58)) {
-              __s = *(char **)argptr;
+              value = *(ulong *)argptr;
               radix = 0x10;
             }
             else {
-              __s = *(char **)argptr;
+              value = *(ulong *)argptr;
               radix = 10;
             }
-            __s = my_itoa((ulong)__s,&local_38,radix);
+            my_itoa(value,&local_38,radix);
           }
         }
-        argptr = (char **)argptr + 1;
-        fmtstr = (char *)(pbVar7 + 1);
-        sVar4 = strlen(__s);
-        if (iVar5 == 0) {
-LAB_80073bfc:
-          __dest = str + iVar8;
-        }
-        else {
-          __dest = str + iVar8;
-          if ((int)sVar4 < iVar5) {
-            if (bVar1 == 0x2d) {
-              strcpy(__dest,__s);
-              memset(str + iVar8 + sVar4,__c,iVar5 - sVar4);
-              iVar8 = iVar8 + sVar4 + (iVar5 - sVar4);
-              goto LAB_80073c0c;
-            }
-            memset(__dest,__c,iVar5 - sVar4);
-            iVar8 = iVar8 + (iVar5 - sVar4);
-            goto LAB_80073bfc;
+        argptr = (ulong *)argptr + 1;
+        fmtstr = (char *)(pbVar6 + 1);
+        radix = strlen();
+        if ((iVar4 != 0) && (radix < iVar4)) {
+          if (bVar1 == 0x2d) {
+            strcpy();
+            memset();
+            iVar7 = iVar7 + iVar4;
+            goto LAB_80073ef8;
           }
+          memset();
+          iVar7 = iVar7 + (iVar4 - radix);
         }
-        strcpy(__dest,__s);
-        iVar8 = iVar8 + sVar4;
+        strcpy();
+        iVar7 = iVar7 + radix;
       }
     }
     else {
-      str[iVar8] = bVar1;
+      str[iVar7] = bVar1;
       fmtstr = (char *)((byte *)fmtstr + 1);
-      iVar8 = iVar8 + 1;
+      iVar7 = iVar7 + 1;
     }
-LAB_80073c0c:
+LAB_80073ef8:
     bVar1 = *fmtstr;
   } while( true );
 }
@@ -217,22 +219,24 @@ LAB_80073c0c:
 // decompiled code
 // original method signature: 
 // char * /*$ra*/ my_itoa(unsigned long value /*$v1*/, char *str /*$a1*/, int radix /*$a2*/)
- // line 231, offset 0x80073c58
+ // line 231, offset 0x80073f44
 	/* begin block 1 */
 		// Start line: 232
-		// Start offset: 0x80073C58
+		// Start offset: 0x80073F44
 		// Variables:
 	// 		char *p; // $a0
 	// 		char *q; // $a3
 	// 		char digits[31]; // stack offset -32
 	/* end block 1 */
-	// End offset: 0x80073D20
+	// End offset: 0x8007400C
 	// End Line: 272
 
 	/* begin block 2 */
 		// Start line: 466
 	/* end block 2 */
 	// End Line: 467
+
+/* File: C:\kain2\game\PSX\SUPPORT.C */
 
 char * my_itoa(ulong value,char *str,int radix)
 
@@ -242,9 +246,10 @@ char * my_itoa(ulong value,char *str,int radix)
   char *pcVar3;
   byte local_20 [32];
   
+  cVar1 = DAT_800d0801;
   if (value == 0) {
-    *str = '0';
-    str[1] = '\0';
+    *str = DAT_800d0800;
+    str[1] = cVar1;
   }
   else {
     if (0x22 < radix - 2U) {
@@ -285,15 +290,15 @@ char * my_itoa(ulong value,char *str,int radix)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ atoi(char *str /*$a1*/)
- // line 295, offset 0x80073d28
+ // line 295, offset 0x80074014
 	/* begin block 1 */
 		// Start line: 296
-		// Start offset: 0x80073D28
+		// Start offset: 0x80074014
 		// Variables:
 	// 		int val; // $a2
 	// 		int neg; // $a3
 	/* end block 1 */
-	// End offset: 0x80073D88
+	// End offset: 0x80074074
 	// End Line: 316
 
 	/* begin block 2 */
@@ -301,7 +306,9 @@ char * my_itoa(ulong value,char *str,int radix)
 	/* end block 2 */
 	// End Line: 585
 
-int atoi(char *str)
+/* File: C:\kain2\game\PSX\SUPPORT.C */
+
+int atoi(char *param_1)
 
 {
   char cVar1;
@@ -310,15 +317,15 @@ int atoi(char *str)
   int iVar4;
   
   iVar4 = 0;
-  cVar1 = *str;
+  cVar1 = *param_1;
   if (cVar1 == '-') {
-    str = str + 1;
+    param_1 = param_1 + 1;
   }
-  bVar2 = *str;
+  bVar2 = *param_1;
   while (bVar2 != 0) {
-    bVar3 = *str;
-    str = (char *)((byte *)str + 1);
-    bVar2 = *str;
+    bVar3 = *param_1;
+    param_1 = (char *)((byte *)param_1 + 1);
+    bVar2 = *param_1;
     iVar4 = iVar4 * 10 + -0x30 + (uint)bVar3;
   }
   if (cVar1 != '-') {
@@ -332,7 +339,7 @@ int atoi(char *str)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ mytolower(int c /*$a0*/)
- // line 319, offset 0x80073d98
+ // line 319, offset 0x80074084
 	/* begin block 1 */
 		// Start line: 618
 	/* end block 1 */
@@ -342,6 +349,8 @@ int atoi(char *str)
 		// Start line: 619
 	/* end block 2 */
 	// End Line: 620
+
+/* File: C:\kain2\game\PSX\SUPPORT.C */
 
 int mytolower(int c)
 
@@ -357,21 +366,23 @@ int mytolower(int c)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ strcmpi(char *s1 /*$s1*/, char *s2 /*$s2*/)
- // line 325, offset 0x80073db4
+ // line 325, offset 0x800740a0
 	/* begin block 1 */
 		// Start line: 327
-		// Start offset: 0x80073DD0
+		// Start offset: 0x800740BC
 		// Variables:
 	// 		int c1; // $s0
 	// 		int c2; // $v0
 	/* end block 1 */
-	// End offset: 0x80073DFC
+	// End offset: 0x800740E8
 	// End Line: 338
 
 	/* begin block 2 */
 		// Start line: 630
 	/* end block 2 */
 	// End Line: 631
+
+/* File: C:\kain2\game\PSX\SUPPORT.C */
 
 int strcmpi(char *s1,char *s2)
 

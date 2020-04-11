@@ -5,21 +5,23 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLANAPI_ConvertPlanIntoEnmyPlanDataFormat(struct PlanningNode *goalNode /*$a0*/, struct EnemyPlanData *planData /*$s1*/, struct PlanningNode *planningPool /*$s2*/)
- // line 131, offset 0x800957fc
+ // line 131, offset 0x800974ec
 	/* begin block 1 */
 		// Start line: 132
-		// Start offset: 0x800957FC
+		// Start offset: 0x800974EC
 		// Variables:
 	// 		struct PlanningNode *currentNode; // $s0
 	// 		int i; // $a0
 	/* end block 1 */
-	// End offset: 0x80095898
+	// End offset: 0x80097588
 	// End Line: 151
 
 	/* begin block 2 */
 		// Start line: 262
 	/* end block 2 */
 	// End Line: 263
+
+/* File: C:\kain2\game\PLAN\PLANAPI.C */
 
 void PLANAPI_ConvertPlanIntoEnmyPlanDataFormat
                (PlanningNode *goalNode,EnemyPlanData *planData,PlanningNode *planningPool)
@@ -58,15 +60,15 @@ void PLANAPI_ConvertPlanIntoEnmyPlanDataFormat
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANAPI_FindPathBetweenNodes(struct PlanningNode *startNode /*$v0*/, struct PlanningNode *goalNode /*$v1*/, struct EnemyPlanData *planData /*$s3*/, int validNodeTypes /*$a3*/)
- // line 157, offset 0x800958b0
+ // line 157, offset 0x800975a0
 	/* begin block 1 */
 		// Start line: 158
-		// Start offset: 0x800958B0
+		// Start offset: 0x800975A0
 		// Variables:
 	// 		struct PlanningNode *planningPool; // $s1
 	// 		int successFlag; // $s2
 	/* end block 1 */
-	// End offset: 0x80095918
+	// End offset: 0x80097608
 	// End Line: 172
 
 	/* begin block 2 */
@@ -74,22 +76,23 @@ void PLANAPI_ConvertPlanIntoEnmyPlanDataFormat
 	/* end block 2 */
 	// End Line: 318
 
+/* File: C:\kain2\game\PLAN\PLANAPI.C */
+
 int PLANAPI_FindPathBetweenNodes
               (PlanningNode *startNode,PlanningNode *goalNode,EnemyPlanData *planData,
               int validNodeTypes)
 
 {
-  ulong planningPool;
+  PlanningNode *planningPool;
   PlanningNode *goalNode_00;
   int iVar1;
   
-  planningPool = gameTrackerX.drawTime;
+  planningPool = DAT_800d22e4;
   iVar1 = 0;
   if (((startNode != (PlanningNode *)0x0) && (goalNode != (PlanningNode *)0x0)) &&
-     (goalNode_00 = PLANSRCH_FindPathInGraph
-                              ((PlanningNode *)gameTrackerX.drawTime,startNode,goalNode,
-                               validNodeTypes), goalNode_00 != (PlanningNode *)0x0)) {
-    PLANAPI_ConvertPlanIntoEnmyPlanDataFormat(goalNode_00,planData,(PlanningNode *)planningPool);
+     (goalNode_00 = PLANSRCH_FindPathInGraph(DAT_800d22e4,startNode,goalNode,validNodeTypes),
+     goalNode_00 != (PlanningNode *)0x0)) {
+    PLANAPI_ConvertPlanIntoEnmyPlanDataFormat(goalNode_00,planData,planningPool);
     iVar1 = 1;
     planData->goalUnitID = *(short *)&goalNode_00->streamUnitID;
   }
@@ -101,10 +104,10 @@ int PLANAPI_FindPathBetweenNodes
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLANAPI_DoTimingCalcsAndDrawing(long startTime /*$a0*/, struct PlanningNode *planningPool /*$s2*/)
- // line 177, offset 0x80095938
+ // line 177, offset 0x80097628
 	/* begin block 1 */
 		// Start line: 178
-		// Start offset: 0x80095938
+		// Start offset: 0x80097628
 		// Variables:
 	// 		int i; // $a1
 	// 		long minTime; // $s1
@@ -112,12 +115,12 @@ int PLANAPI_FindPathBetweenNodes
 
 		/* begin block 1.1 */
 			// Start line: 199
-			// Start offset: 0x800959E4
+			// Start offset: 0x800976D4
 		/* end block 1.1 */
-		// End offset: 0x80095A40
+		// End offset: 0x80097730
 		// End Line: 221
 	/* end block 1 */
-	// End offset: 0x80095A40
+	// End offset: 0x80097730
 	// End Line: 222
 
 	/* begin block 2 */
@@ -125,12 +128,14 @@ int PLANAPI_FindPathBetweenNodes
 	/* end block 2 */
 	// End Line: 362
 
+/* File: C:\kain2\game\PLAN\PLANAPI.C */
+
 void PLANAPI_DoTimingCalcsAndDrawing(long startTime,PlanningNode *planningPool)
 
 {
   ulong uVar1;
   int iVar2;
-  long *plVar3;
+  int *piVar3;
   int iVar4;
   int iVar5;
   int iVar6;
@@ -139,10 +144,10 @@ void PLANAPI_DoTimingCalcsAndDrawing(long startTime,PlanningNode *planningPool)
   iVar5 = 0;
   uVar1 = TIMER_TimeDiff(startTime);
   iVar4 = 0;
-  plVar3 = &timerArray;
-  (&timerArray)[timerIndex] = uVar1;
+  piVar3 = (int *)&poolManagementDataStorage.peakPos.z;
+  *(ulong *)(&poolManagementDataStorage.peakPos.z + timerIndex * 2) = uVar1;
   do {
-    iVar2 = *plVar3;
+    iVar2 = *piVar3;
     if (iVar2 < iVar6) {
       iVar6 = iVar2;
     }
@@ -150,13 +155,13 @@ void PLANAPI_DoTimingCalcsAndDrawing(long startTime,PlanningNode *planningPool)
       iVar5 = iVar2;
     }
     iVar4 = iVar4 + 1;
-    plVar3 = plVar3 + 1;
+    piVar3 = piVar3 + 1;
   } while (iVar4 < 10);
   timerIndex = timerIndex + 1;
   if (9 < timerIndex) {
     timerIndex = 0;
   }
-  if ((gameTrackerX.debugFlags2 & 0x10U) != 0) {
+  if ((DAT_800d2190 & 0x10) != 0) {
     PLANPOOL_NumberOfNodesOfType(planningPool,'\x04');
     PLANPOOL_NumberOfNodesOfType(planningPool,'\f');
     PLANPOOL_NumberOfNodesOfType(planningPool,'\x14');
@@ -174,10 +179,10 @@ void PLANAPI_DoTimingCalcsAndDrawing(long startTime,PlanningNode *planningPool)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANAPI_AddNodeOfTypeToPool(struct _Position *pos /*$s0*/, int type /*$s2*/)
- // line 269, offset 0x80095a58
+ // line 269, offset 0x80097748
 	/* begin block 1 */
 		// Start line: 270
-		// Start offset: 0x80095A58
+		// Start offset: 0x80097748
 		// Variables:
 	// 		struct PlanningNode *planningPool; // $s1
 	// 		int foundHit; // $v1
@@ -186,17 +191,17 @@ void PLANAPI_DoTimingCalcsAndDrawing(long startTime,PlanningNode *planningPool)
 
 		/* begin block 1.1 */
 			// Start line: 284
-			// Start offset: 0x80095AA4
+			// Start offset: 0x80097794
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $t0
 		// 		struct _Position *_v0; // $s0
 		/* end block 1.1 */
-		// End offset: 0x80095AA4
+		// End offset: 0x80097794
 		// End Line: 284
 	/* end block 1 */
-	// End offset: 0x80095B20
+	// End offset: 0x80097810
 	// End Line: 294
 
 	/* begin block 2 */
@@ -204,16 +209,18 @@ void PLANAPI_DoTimingCalcsAndDrawing(long startTime,PlanningNode *planningPool)
 	/* end block 2 */
 	// End Line: 553
 
+/* File: C:\kain2\game\PLAN\PLANAPI.C */
+
 int PLANAPI_AddNodeOfTypeToPool(_Position *pos,int type)
 
 {
-  ulong planningPool;
+  PlanningNode *planningPool;
   int iVar1;
   ushort nodeType;
   _PlanCollideInfo local_28;
   ushort local_18 [4];
   
-  planningPool = gameTrackerX.drawTime;
+  planningPool = DAT_800d22e4;
   iVar1 = PLANCOLL_CheckUnderwaterPoint(pos);
   if (iVar1 == -1) {
     local_28.collidePos.x = pos->x;
@@ -230,7 +237,7 @@ int PLANAPI_AddNodeOfTypeToPool(_Position *pos,int type)
     nodeType = (ushort)type & 7 | 0x18;
     local_28.StreamUnitID = iVar1;
   }
-  PLANPOOL_AddNodeToPool(pos,(PlanningNode *)planningPool,nodeType,0,local_28.StreamUnitID);
+  PLANPOOL_AddNodeToPool(pos,planningPool,nodeType,0,local_28.StreamUnitID);
   return 1;
 }
 
@@ -239,16 +246,16 @@ int PLANAPI_AddNodeOfTypeToPool(_Position *pos,int type)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLANAPI_DeleteNodesFromPoolByType(int nodeSource /*$s3*/)
- // line 306, offset 0x80095b38
+ // line 306, offset 0x80097828
 	/* begin block 1 */
 		// Start line: 307
-		// Start offset: 0x80095B38
+		// Start offset: 0x80097828
 		// Variables:
 	// 		struct PlanningNode *planningPool; // $s2
 	// 		struct PlanningNode *nodeToDelete; // $s0
 	// 		int i; // $s1
 	/* end block 1 */
-	// End offset: 0x80095BB8
+	// End offset: 0x800978A8
 	// End Line: 324
 
 	/* begin block 2 */
@@ -261,26 +268,28 @@ int PLANAPI_AddNodeOfTypeToPool(_Position *pos,int type)
 	/* end block 3 */
 	// End Line: 627
 
+/* File: C:\kain2\game\PLAN\PLANAPI.C */
+
 void PLANAPI_DeleteNodesFromPoolByType(int nodeSource)
 
 {
-  ulong planningPool;
+  PlanningNode *planningPool;
   PlanningNode *nodeToDelete;
   int iVar1;
   
-  planningPool = gameTrackerX.drawTime;
+  planningPool = DAT_800d22e4;
   iVar1 = 0;
-  nodeToDelete = (PlanningNode *)gameTrackerX.drawTime;
-  if (*(char *)(poolManagementData + 1) != '\0') {
+  nodeToDelete = DAT_800d22e4;
+  if (poolManagementData->numNodesInPool != '\0') {
     do {
       if (((uint)nodeToDelete->nodeType & 7) == nodeSource) {
-        PLANPOOL_DeleteNodeFromPool(nodeToDelete,(PlanningNode *)planningPool);
+        PLANPOOL_DeleteNodeFromPool(nodeToDelete,planningPool);
       }
       else {
         iVar1 = iVar1 + 1;
         nodeToDelete = nodeToDelete + 1;
       }
-    } while (iVar1 < (int)(uint)*(byte *)(poolManagementData + 1));
+    } while (iVar1 < (int)(uint)poolManagementData->numNodesInPool);
   }
   return;
 }
@@ -290,16 +299,16 @@ void PLANAPI_DeleteNodesFromPoolByType(int nodeSource)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLANAPI_DeleteNodeFromPoolByUnit(long streamUnitID /*$s3*/)
- // line 327, offset 0x80095bd4
+ // line 327, offset 0x800978c4
 	/* begin block 1 */
 		// Start line: 328
-		// Start offset: 0x80095BD4
+		// Start offset: 0x800978C4
 		// Variables:
 	// 		struct PlanningNode *planningPool; // $s2
 	// 		struct PlanningNode *nodeToDelete; // $s0
 	// 		int i; // $s1
 	/* end block 1 */
-	// End offset: 0x80095C50
+	// End offset: 0x80097940
 	// End Line: 347
 
 	/* begin block 2 */
@@ -312,26 +321,28 @@ void PLANAPI_DeleteNodesFromPoolByType(int nodeSource)
 	/* end block 3 */
 	// End Line: 689
 
+/* File: C:\kain2\game\PLAN\PLANAPI.C */
+
 void PLANAPI_DeleteNodeFromPoolByUnit(long streamUnitID)
 
 {
-  ulong planningPool;
+  PlanningNode *planningPool;
   PlanningNode *nodeToDelete;
   int iVar1;
   
-  planningPool = gameTrackerX.drawTime;
+  planningPool = DAT_800d22e4;
   iVar1 = 0;
-  nodeToDelete = (PlanningNode *)gameTrackerX.drawTime;
-  if (*(char *)(poolManagementData + 1) != '\0') {
+  nodeToDelete = DAT_800d22e4;
+  if (poolManagementData->numNodesInPool != '\0') {
     do {
       if (nodeToDelete->streamUnitID == streamUnitID) {
-        PLANPOOL_DeleteNodeFromPool(nodeToDelete,(PlanningNode *)planningPool);
+        PLANPOOL_DeleteNodeFromPool(nodeToDelete,planningPool);
       }
       else {
         iVar1 = iVar1 + 1;
         nodeToDelete = nodeToDelete + 1;
       }
-    } while (iVar1 < (int)(uint)*(byte *)(poolManagementData + 1));
+    } while (iVar1 < (int)(uint)poolManagementData->numNodesInPool);
   }
   return;
 }
@@ -341,15 +352,15 @@ void PLANAPI_DeleteNodeFromPoolByUnit(long streamUnitID)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANAPI_FindPathInGraphToTarget(struct _Position *startPos /*$a0*/, struct EnemyPlanData *planData /*$s1*/, int validNodeTypes /*$s2*/)
- // line 388, offset 0x80095c6c
+ // line 388, offset 0x8009795c
 	/* begin block 1 */
 		// Start line: 389
-		// Start offset: 0x80095C6C
+		// Start offset: 0x8009795C
 		// Variables:
 	// 		struct PlanningNode *planningPool; // $s0
 	// 		struct PlanningNode *startNode; // $s0
 	/* end block 1 */
-	// End offset: 0x80095C6C
+	// End offset: 0x8009795C
 	// End Line: 389
 
 	/* begin block 2 */
@@ -357,18 +368,19 @@ void PLANAPI_DeleteNodeFromPoolByUnit(long streamUnitID)
 	/* end block 2 */
 	// End Line: 828
 
+/* File: C:\kain2\game\PLAN\PLANAPI.C */
+
 int PLANAPI_FindPathInGraphToTarget(_Position *startPos,EnemyPlanData *planData,int validNodeTypes)
 
 {
-  ulong planningPool;
   PlanningNode *startNode;
-  PlanningNode *goalNode;
+  PlanningNode *planningPool;
   int iVar1;
   
-  planningPool = gameTrackerX.drawTime;
-  startNode = PLANPOOL_GetNodeByPosition(startPos,(PlanningNode *)gameTrackerX.drawTime);
-  goalNode = PLANPOOL_GetFirstNodeOfSource((PlanningNode *)planningPool,'\x03');
-  iVar1 = PLANAPI_FindPathBetweenNodes(startNode,goalNode,planData,validNodeTypes);
+  planningPool = DAT_800d22e4;
+  startNode = PLANPOOL_GetNodeByPosition(startPos,DAT_800d22e4);
+  planningPool = PLANPOOL_GetFirstNodeOfSource(planningPool,'\x03');
+  iVar1 = PLANAPI_FindPathBetweenNodes(startNode,planningPool,planData,validNodeTypes);
   return iVar1;
 }
 
@@ -377,15 +389,15 @@ int PLANAPI_FindPathInGraphToTarget(_Position *startPos,EnemyPlanData *planData,
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLANAPI_InitPlanning(void *planningPool /*$a0*/)
- // line 405, offset 0x80095cd0
+ // line 405, offset 0x800979c0
 	/* begin block 1 */
 		// Start line: 407
-		// Start offset: 0x80095CD0
+		// Start offset: 0x800979C0
 		// Variables:
 	// 		int i; // $a1
 	// 		int j; // $a0
 	/* end block 1 */
-	// End offset: 0x80095D4C
+	// End offset: 0x80097A3C
 	// End Line: 439
 
 	/* begin block 2 */
@@ -403,35 +415,37 @@ int PLANAPI_FindPathInGraphToTarget(_Position *startPos,EnemyPlanData *planData,
 	/* end block 4 */
 	// End Line: 886
 
+/* File: C:\kain2\game\PLAN\PLANAPI.C */
+
 void PLANAPI_InitPlanning(void *planningPool)
 
 {
   int iVar1;
-  long *plVar2;
+  undefined4 *puVar2;
   int iVar3;
   int iVar4;
   
   iVar4 = 0;
-  DAT_800d55dc = (int)planningPool + 0x380;
+  poolManagementDataStorage.expansionNode2 = (PlanningNode *)((int)planningPool + 0x380);
   poolManagementData = &poolManagementDataStorage;
-  poolManagementDataStorage = 0;
-  DAT_800d55cd = 0;
+  poolManagementDataStorage.state = '\0';
+  poolManagementDataStorage.numNodesInPool = '\0';
   do {
     iVar3 = 0;
     iVar1 = 0;
     do {
       iVar3 = iVar3 + 1;
-      *(undefined2 *)(iVar1 + iVar4 * 0x40 + DAT_800d55dc) = 0;
+      *(undefined2 *)((int)&poolManagementDataStorage.expansionNode2[iVar4 * 2].pos.x + iVar1) = 0;
       iVar1 = iVar3 * 2;
     } while (iVar3 < 0x20);
     iVar4 = iVar4 + 1;
   } while (iVar4 < 0x20);
   iVar4 = 9;
-  plVar2 = &LONG_800d5610;
+  puVar2 = &DAT_800d56f8;
   do {
-    *plVar2 = 0;
+    *puVar2 = 0;
     iVar4 = iVar4 + -1;
-    plVar2 = plVar2 + -1;
+    puVar2 = puVar2 + -1;
   } while (-1 < iVar4);
   timerIndex = 0;
   return;
@@ -442,15 +456,15 @@ void PLANAPI_InitPlanning(void *planningPool)
 // decompiled code
 // original method signature: 
 // short /*$ra*/ PLANAPI_PairType(struct PlanningNode *node1 /*$a0*/, struct PlanningNode *node2 /*$a1*/)
- // line 446, offset 0x80095d58
+ // line 446, offset 0x80097a48
 	/* begin block 1 */
 		// Start line: 448
-		// Start offset: 0x80095D58
+		// Start offset: 0x80097A48
 		// Variables:
 	// 		short placement1; // $a2
 	// 		short placement2; // $a1
 	/* end block 1 */
-	// End offset: 0x80095D94
+	// End offset: 0x80097A84
 	// End Line: 457
 
 	/* begin block 2 */
@@ -467,6 +481,8 @@ void PLANAPI_InitPlanning(void *planningPool)
 		// Start line: 969
 	/* end block 4 */
 	// End Line: 970
+
+/* File: C:\kain2\game\PLAN\PLANAPI.C */
 
 short PLANAPI_PairType(PlanningNode *node1,PlanningNode *node2)
 
@@ -491,17 +507,17 @@ short PLANAPI_PairType(PlanningNode *node1,PlanningNode *node2)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANAPI_PassThroughHit(struct PlanningNode *node1 /*$a0*/, struct PlanningNode *node2 /*$a1*/)
- // line 462, offset 0x80095da0
+ // line 462, offset 0x80097a90
 	/* begin block 1 */
 		// Start line: 464
-		// Start offset: 0x80095DA0
+		// Start offset: 0x80097A90
 		// Variables:
 	// 		int src1; // $a0
 	// 		int src2; // $v1
 	// 		int res; // $v1
 	/* end block 1 */
-	// End offset: 0x80095DF4
-	// End Line: 483
+	// End offset: 0x80097AF4
+	// End Line: 485
 
 	/* begin block 2 */
 		// Start line: 997
@@ -518,24 +534,28 @@ short PLANAPI_PairType(PlanningNode *node1,PlanningNode *node2)
 	/* end block 4 */
 	// End Line: 1003
 
+/* File: C:\kain2\game\PLAN\PLANAPI.C */
+
 int PLANAPI_PassThroughHit(PlanningNode *node1,PlanningNode *node2)
 
 {
   uint uVar1;
   uint uVar2;
   
-  uVar2 = (uint)node1->nodeType & 7;
-  uVar1 = (uint)node2->nodeType & 7;
-  if (uVar1 < uVar2) {
-    uVar2 = uVar2 ^ uVar1;
-    uVar1 = uVar1 ^ uVar2;
-    uVar2 = uVar2 ^ uVar1;
+  if (DAT_800d220c < 0) {
+    uVar2 = (uint)node1->nodeType & 7;
+    uVar1 = (uint)node2->nodeType & 7;
+    if (uVar1 < uVar2) {
+      uVar2 = uVar2 ^ uVar1;
+      uVar1 = uVar1 ^ uVar2;
+      uVar2 = uVar2 ^ uVar1;
+    }
+    uVar1 = uVar2 << 8 | uVar1;
+    if (((uVar1 == 0x104) || (uVar1 == 0x304)) || (uVar1 == 0x204)) {
+      return 1;
+    }
   }
-  uVar1 = uVar2 << 8 | uVar1;
-  if (((uVar1 != 0x104) && (uVar1 != 0x304)) && (uVar1 != 0x204)) {
-    return 0;
-  }
-  return 1;
+  return 0;
 }
 
 
@@ -543,10 +563,10 @@ int PLANAPI_PassThroughHit(PlanningNode *node1,PlanningNode *node2)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLANAPI_UpdatePlanningDatabase(struct GameTracker *gameTracker /*$a0*/, struct _Instance *player /*$s0*/)
- // line 489, offset 0x80095dfc
+ // line 491, offset 0x80097afc
 	/* begin block 1 */
-		// Start line: 490
-		// Start offset: 0x80095DFC
+		// Start line: 492
+		// Start offset: 0x80097AFC
 		// Variables:
 	// 		struct PlanningNode *planningPool; // $s3
 	// 		struct PlanningNode *node1; // $s0
@@ -556,150 +576,162 @@ int PLANAPI_PassThroughHit(PlanningNode *node1,PlanningNode *node2)
 	// 		int pathExistsBelow; // $v0
 
 		/* begin block 1.1 */
-			// Start line: 529
-			// Start offset: 0x80095F84
+			// Start line: 534
+			// Start offset: 0x80097C8C
 			// Variables:
 		// 		struct PlanningNode *temp; // $v0
 		/* end block 1.1 */
-		// End offset: 0x80095F90
-		// End Line: 533
+		// End offset: 0x80097C98
+		// End Line: 538
 	/* end block 1 */
-	// End offset: 0x800960F0
-	// End Line: 631
+	// End offset: 0x80097DF8
+	// End Line: 636
 
 	/* begin block 2 */
-		// Start line: 1052
+		// Start line: 1056
 	/* end block 2 */
-	// End Line: 1053
+	// End Line: 1057
+
+/* File: C:\kain2\game\PLAN\PLANAPI.C */
 
 void PLANAPI_UpdatePlanningDatabase(GameTracker *gameTracker,_Instance *player)
 
 {
-  byte *pbVar1;
-  byte bVar2;
-  ushort uVar3;
-  uint uVar4;
-  long lVar5;
-  int passThroughHit;
-  uint uVar6;
-  PlanningNode *node1;
-  PlanningNode *node2;
+  byte bVar1;
+  PoolManagementData *pPVar2;
+  char cVar3;
+  ushort uVar4;
+  uint uVar5;
   PlanningNode *startNode;
+  long lVar6;
+  int passThroughHit;
+  uint uVar7;
+  PlanningNode *node1;
+  PlanningNode *node1_00;
+  PlanningNode *node2;
   PlanningNode *planningPool;
   int local_20;
   
-  planningPool = (PlanningNode *)gameTracker->drawTime;
-  uVar4 = GetRCnt(0xf2000000);
-  uVar6 = gameTimer << 0x10;
-  bVar2 = *poolManagementData;
-  if (bVar2 == 1) {
+  planningPool = (PlanningNode *)gameTracker->planningPool;
+  uVar5 = GetRCnt(0xf2000000);
+  DAT_800d2296 = 1;
+  uVar7 = gameTimer << 0x10;
+  bVar1 = poolManagementData->state;
+  if (bVar1 == 1) {
     PLAN_AddOrRemoveNodes(planningPool,player);
-    bVar2 = 2;
+    cVar3 = '\x02';
   }
   else {
-    if (bVar2 < 2) {
-      if (bVar2 == 0) {
+    if (bVar1 < 2) {
+      if (bVar1 == 0) {
         PLAN_AddInitialNodes(planningPool,player);
-        *poolManagementData = 1;
-        goto LAB_800960f4;
+        poolManagementData->state = '\x01';
+        goto LAB_80097dfc;
       }
     }
     else {
-      if (bVar2 == 2) {
-        startNode = PLAN_FindNodeMostInNeedOfConnectivityExpansion(planningPool);
-        node2 = PLANPOOL_GetClosestUnexploredValidNeighbor(startNode,planningPool);
-        *poolManagementData = 1;
-        if ((startNode == (PlanningNode *)0x0) || (node2 == (PlanningNode *)0x0)) goto LAB_800960f4;
-        lVar5 = MATH3D_LengthXYZ((int)(startNode->pos).x - (int)(node2->pos).x,
+      if (bVar1 == 2) {
+        startNode = (PlanningNode *)PLAN_FindNodeMostInNeedOfConnectivityExpansion(planningPool);
+        node2 = (PlanningNode *)
+                PLANPOOL_GetClosestUnexploredValidNeighbor((PlanningNode *)startNode,planningPool);
+        poolManagementData->state = '\x01';
+        if ((startNode == (PlanningNode *)0x0) || (node2 == (PlanningNode *)0x0)) goto LAB_80097dfc;
+        lVar6 = MATH3D_LengthXYZ((int)(startNode->pos).x - (int)(node2->pos).x,
                                  (int)(startNode->pos).y - (int)(node2->pos).y,
                                  (int)(startNode->pos).z - (int)(node2->pos).z);
         node1 = startNode;
-        if (lVar5 < 6000) {
-          uVar3 = PLANAPI_PairType(startNode,node2);
-          *(ushort *)(poolManagementData + 0x14) = uVar3;
-          if (uVar3 == 3) {
-            if ((startNode->nodeType >> 3 & 3) == 3) {
+        if (lVar6 < 6000) {
+          uVar4 = PLANAPI_PairType((PlanningNode *)startNode,(PlanningNode *)node2);
+          *(ushort *)&poolManagementData->distanceMatrix = uVar4;
+          if (uVar4 == 3) {
+            if ((startNode->cost >> 3 & 3) == 3) {
               node1 = node2;
               node2 = startNode;
             }
-            passThroughHit = PLANAPI_PassThroughHit(node1,node2);
+            passThroughHit = PLANAPI_PassThroughHit((PlanningNode *)node1,(PlanningNode *)node2);
             passThroughHit =
                  PLANCOLL_DoesWaterPathUpExist
                            ((_Position *)node1,(_Position *)node2,0,
-                            (_Position *)(poolManagementData + 0x16),passThroughHit);
+                            (_Position *)((int)&poolManagementData->distanceMatrix + 2),
+                            passThroughHit);
           }
           else {
-            if (uVar3 < 4) {
-              if (uVar3 == 0) goto LAB_80095f54;
-LAB_80095fc0:
-              passThroughHit = PLANAPI_PassThroughHit(startNode,node2);
+            if (uVar4 < 4) {
+              if (uVar4 == 0) goto LAB_80097c5c;
+LAB_80097cc8:
+              passThroughHit =
+                   PLANAPI_PassThroughHit((PlanningNode *)startNode,(PlanningNode *)node2);
               local_20 = 0;
             }
             else {
-              if (uVar3 != 0x202) goto LAB_80095fc0;
-LAB_80095f54:
-              passThroughHit = PLANAPI_PassThroughHit(startNode,node2);
+              if (uVar4 != 0x202) goto LAB_80097cc8;
+LAB_80097c5c:
+              passThroughHit =
+                   PLANAPI_PassThroughHit((PlanningNode *)startNode,(PlanningNode *)node2);
               local_20 = 0x100;
             }
             passThroughHit =
                  PLANCOLL_DoesLOSExistFinal
                            ((_Position *)startNode,(_Position *)node2,0,passThroughHit,local_20);
           }
-          pbVar1 = poolManagementData;
+          pPVar2 = poolManagementData;
           if (passThroughHit != 0) {
-            *(PlanningNode **)(poolManagementData + 8) = node1;
-            *(PlanningNode **)(pbVar1 + 0xc) = node2;
-            *pbVar1 = 3;
-            goto LAB_800960f4;
+            *(PlanningNode **)&(poolManagementData->playerPosAtLastPlanMkrUpdate).z = node1;
+            pPVar2->expansionNode1 = node2;
+            pPVar2->state = '\x03';
+            goto LAB_80097dfc;
           }
         }
-        PLANPOOL_MarkTwoNodesAsNotConnected(node1,node2,planningPool);
-        goto LAB_800960f4;
+        PLANPOOL_MarkTwoNodesAsNotConnected
+                  ((PlanningNode *)node1,(PlanningNode *)node2,planningPool);
+        goto LAB_80097dfc;
       }
-      if (bVar2 == 3) {
-        node2 = *(PlanningNode **)(poolManagementData + 8);
-        uVar3 = *(ushort *)(poolManagementData + 0x14);
-        startNode = *(PlanningNode **)(poolManagementData + 0xc);
-        if ((uint)uVar3 == (uint)bVar2) {
-          passThroughHit = PLANAPI_PassThroughHit(node2,startNode);
+      if (bVar1 == 3) {
+        node1_00 = *(PlanningNode **)&(poolManagementData->playerPosAtLastPlanMkrUpdate).z;
+        uVar4 = *(ushort *)&poolManagementData->distanceMatrix;
+        node2 = poolManagementData->expansionNode1;
+        if ((uint)uVar4 == (uint)bVar1) {
+          passThroughHit = PLANAPI_PassThroughHit(node1_00,(PlanningNode *)node2);
           passThroughHit =
                PLANCOLL_DoesLOSExistFinal
-                         ((_Position *)startNode,(_Position *)(poolManagementData + 0x16),0,
+                         ((_Position *)node2,
+                          (_Position *)((int)&poolManagementData->distanceMatrix + 2),0,
                           passThroughHit,0);
         }
         else {
-          if (uVar3 < 4) {
+          if (uVar4 < 4) {
             passThroughHit = 1;
-            if (uVar3 == 0) {
-LAB_8009604c:
-              passThroughHit = PLANAPI_PassThroughHit(node2,startNode);
+            if (uVar4 == 0) {
+LAB_80097d54:
+              passThroughHit = PLANAPI_PassThroughHit(node1_00,(PlanningNode *)node2);
               passThroughHit =
                    PLANCOLL_DoesLOSExistFinal
-                             ((_Position *)node2,(_Position *)startNode,0,passThroughHit,0x3c0);
+                             ((_Position *)node1_00,(_Position *)node2,0,passThroughHit,0x3c0);
             }
           }
           else {
             passThroughHit = 1;
-            if (uVar3 == 0x202) goto LAB_8009604c;
+            if (uVar4 == 0x202) goto LAB_80097d54;
           }
         }
         if (passThroughHit == 0) {
           PLANPOOL_MarkTwoNodesAsNotConnected
-                    (*(PlanningNode **)(poolManagementData + 8),
-                     *(PlanningNode **)(poolManagementData + 0xc),planningPool);
+                    (*(PlanningNode **)&(poolManagementData->playerPosAtLastPlanMkrUpdate).z,
+                     (PlanningNode *)poolManagementData->expansionNode1,planningPool);
         }
         else {
           PLANPOOL_MarkTwoNodesAsConnected
-                    (*(PlanningNode **)(poolManagementData + 8),
-                     *(PlanningNode **)(poolManagementData + 0xc),planningPool);
+                    (*(PlanningNode **)&(poolManagementData->playerPosAtLastPlanMkrUpdate).z,
+                     (PlanningNode *)poolManagementData->expansionNode1,planningPool);
         }
       }
     }
-    bVar2 = 1;
+    cVar3 = '\x01';
   }
-  *poolManagementData = bVar2;
-LAB_800960f4:
-  PLANAPI_DoTimingCalcsAndDrawing(uVar4 & 0xffff | uVar6,planningPool);
+  poolManagementData->state = cVar3;
+LAB_80097dfc:
+  PLANAPI_DoTimingCalcsAndDrawing(uVar5 & 0xffff | uVar7,planningPool);
+  DAT_800d2296 = 0;
   return;
 }
 
@@ -708,21 +740,23 @@ LAB_800960f4:
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANAPI_NumNodesInPool(void *planningPool /*$a0*/)
- // line 636, offset 0x8009611c
+ // line 644, offset 0x80097e28
 	/* begin block 1 */
-		// Start line: 1356
+		// Start line: 1391
 	/* end block 1 */
-	// End Line: 1357
+	// End Line: 1392
 
 	/* begin block 2 */
-		// Start line: 1357
+		// Start line: 1392
 	/* end block 2 */
-	// End Line: 1358
+	// End Line: 1393
+
+/* File: C:\kain2\game\PLAN\PLANAPI.C */
 
 int PLANAPI_NumNodesInPool(void *planningPool)
 
 {
-  return (uint)*(byte *)(poolManagementData + 1);
+  return (uint)poolManagementData->numNodesInPool;
 }
 
 
@@ -730,10 +764,10 @@ int PLANAPI_NumNodesInPool(void *planningPool)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ PLANAPI_InitPlanMkrList(struct _StreamUnit *streamUnit /*$a0*/)
- // line 644, offset 0x80096130
+ // line 652, offset 0x80097e3c
 	/* begin block 1 */
-		// Start line: 645
-		// Start offset: 0x80096130
+		// Start line: 653
+		// Start offset: 0x80097E3C
 		// Variables:
 	// 		int i; // $s2
 	// 		int terrainFoundFlag; // $v0
@@ -742,44 +776,46 @@ int PLANAPI_NumNodesInPool(void *planningPool)
 	// 		struct _PlanMkr *planMkrList; // $v1
 
 		/* begin block 1.1 */
-			// Start line: 659
-			// Start offset: 0x80096170
+			// Start line: 667
+			// Start offset: 0x80097E7C
 			// Variables:
 		// 		struct _PlanCollideInfo pci; // stack offset -40
 
 			/* begin block 1.1.1 */
-				// Start line: 660
-				// Start offset: 0x80096170
+				// Start line: 668
+				// Start offset: 0x80097E7C
 				// Variables:
 			// 		short _x1; // $v0
 			// 		short _y1; // $v1
 			// 		short _z1; // $a0
 			// 		struct _Position *_v0; // $s1
 			/* end block 1.1.1 */
-			// End offset: 0x80096170
-			// End Line: 660
+			// End offset: 0x80097E7C
+			// End Line: 668
 
 			/* begin block 1.1.2 */
-				// Start line: 685
-				// Start offset: 0x8009620C
+				// Start line: 693
+				// Start offset: 0x80097F18
 				// Variables:
 			// 		short _x1; // $v0
 			// 		short _y1; // $v1
 			// 		short _z1; // $a0
 			/* end block 1.1.2 */
-			// End offset: 0x80096224
-			// End Line: 685
+			// End offset: 0x80097F30
+			// End Line: 693
 		/* end block 1.1 */
-		// End offset: 0x80096224
-		// End Line: 688
+		// End offset: 0x80097F30
+		// End Line: 696
 	/* end block 1 */
-	// End offset: 0x80096238
-	// End Line: 689
+	// End offset: 0x80097F44
+	// End Line: 697
 
 	/* begin block 2 */
-		// Start line: 1372
+		// Start line: 1407
 	/* end block 2 */
-	// End Line: 1373
+	// End Line: 1408
+
+/* File: C:\kain2\game\PLAN\PLANAPI.C */
 
 void PLANAPI_InitPlanMkrList(_StreamUnit *streamUnit)
 
@@ -843,30 +879,32 @@ void PLANAPI_InitPlanMkrList(_StreamUnit *streamUnit)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANAPI_GetFlags(int type /*$a0*/)
- // line 702, offset 0x80096254
+ // line 710, offset 0x80097f60
 	/* begin block 1 */
-		// Start line: 704
-		// Start offset: 0x80096254
+		// Start line: 712
+		// Start offset: 0x80097F60
 		// Variables:
 	// 		int chk; // $v0
 	/* end block 1 */
-	// End offset: 0x800962B4
-	// End Line: 726
+	// End offset: 0x80097FC0
+	// End Line: 734
 
 	/* begin block 2 */
-		// Start line: 1401
+		// Start line: 1417
 	/* end block 2 */
-	// End Line: 1402
+	// End Line: 1418
 
 	/* begin block 3 */
-		// Start line: 1506
+		// Start line: 1541
 	/* end block 3 */
-	// End Line: 1507
+	// End Line: 1542
 
 	/* begin block 4 */
-		// Start line: 1508
+		// Start line: 1543
 	/* end block 4 */
-	// End Line: 1509
+	// End Line: 1544
+
+/* File: C:\kain2\game\PLAN\PLANAPI.C */
 
 int PLANAPI_GetFlags(int type)
 
@@ -895,34 +933,43 @@ int PLANAPI_GetFlags(int type)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANAPI_FindNodePositionInUnit(struct _StreamUnit *streamUnit /*$a0*/, struct _Position *pos /*$s3*/, int id /*$s2*/, int type /*$a3*/)
- // line 728, offset 0x800962bc
+ // line 736, offset 0x80097fc8
 	/* begin block 1 */
-		// Start line: 729
-		// Start offset: 0x800962BC
-		// Variables:
-	// 		struct Level *level; // $v0
-	// 		int numPlanMkrs; // $s0
-	// 		struct _PlanMkr *planMkr; // $s1
-	// 		int i; // $s0
+		// Start line: 737
+		// Start offset: 0x80097FC8
 
 		/* begin block 1.1 */
 			// Start line: 740
-			// Start offset: 0x80096310
+			// Start offset: 0x80097FEC
 			// Variables:
-		// 		short _x1; // $v1
-		// 		short _y1; // $a0
-		// 		short _z1; // $a1
+		// 		struct Level *level; // $v0
+		// 		int numPlanMkrs; // $s0
+		// 		struct _PlanMkr *planMkr; // $s1
+		// 		int i; // $s0
+
+			/* begin block 1.1.1 */
+				// Start line: 750
+				// Start offset: 0x80098020
+				// Variables:
+			// 		short _x1; // $v1
+			// 		short _y1; // $a0
+			// 		short _z1; // $a1
+			/* end block 1.1.1 */
+			// End offset: 0x80098020
+			// End Line: 750
 		/* end block 1.1 */
-		// End offset: 0x80096310
-		// End Line: 740
+		// End offset: 0x8009804C
+		// End Line: 754
 	/* end block 1 */
-	// End offset: 0x80096340
-	// End Line: 746
+	// End offset: 0x80098050
+	// End Line: 756
 
 	/* begin block 2 */
-		// Start line: 1557
+		// Start line: 1592
 	/* end block 2 */
-	// End Line: 1558
+	// End Line: 1593
+
+/* File: C:\kain2\game\PLAN\PLANAPI.C */
 
 int PLANAPI_FindNodePositionInUnit(_StreamUnit *streamUnit,_Position *pos,int id,int type)
 
@@ -934,24 +981,26 @@ int PLANAPI_FindNodePositionInUnit(_StreamUnit *streamUnit,_Position *pos,int id
   int iVar5;
   _PlanMkr *p_Var6;
   
-  p_Var6 = streamUnit->level->PlanMarkerList;
-  iVar5 = streamUnit->level->NumberOfPlanMarkers;
-  uVar3 = PLANAPI_GetFlags(type);
-  if (iVar5 != 0) {
-    psVar4 = &(p_Var6->pos).z;
-    do {
-      iVar5 = iVar5 + -1;
-      if ((int)psVar4[1] == (id | uVar3)) {
-        sVar1 = psVar4[-1];
-        sVar2 = *psVar4;
-        pos->x = (p_Var6->pos).x;
-        pos->y = sVar1;
-        pos->z = sVar2;
-        return 1;
-      }
-      psVar4 = psVar4 + 4;
-      p_Var6 = p_Var6 + 1;
-    } while (iVar5 != 0);
+  if (streamUnit != (_StreamUnit *)0x0) {
+    p_Var6 = streamUnit->level->PlanMarkerList;
+    iVar5 = streamUnit->level->NumberOfPlanMarkers;
+    uVar3 = PLANAPI_GetFlags(type);
+    if (iVar5 != 0) {
+      psVar4 = &(p_Var6->pos).z;
+      do {
+        iVar5 = iVar5 + -1;
+        if ((int)psVar4[1] == (id | uVar3)) {
+          sVar1 = psVar4[-1];
+          sVar2 = *psVar4;
+          pos->x = (p_Var6->pos).x;
+          pos->y = sVar1;
+          pos->z = sVar2;
+          return 1;
+        }
+        psVar4 = psVar4 + 4;
+        p_Var6 = p_Var6 + 1;
+      } while (iVar5 != 0);
+    }
   }
   return 0;
 }
@@ -961,10 +1010,10 @@ int PLANAPI_FindNodePositionInUnit(_StreamUnit *streamUnit,_Position *pos,int id
 // decompiled code
 // original method signature: 
 // int /*$ra*/ PLANAPI_FindClosestNodePositionInUnit(struct _StreamUnit *streamUnit /*$a0*/, struct _Position *target /*$s3*/, struct _Position *pos /*$fp*/, int offset /*stack 12*/, int max /*stack 16*/, int type /*stack 20*/, int distanceCheck /*stack 24*/)
- // line 751, offset 0x8009635c
+ // line 761, offset 0x8009806c
 	/* begin block 1 */
-		// Start line: 752
-		// Start offset: 0x8009635C
+		// Start line: 762
+		// Start offset: 0x8009806C
 		// Variables:
 	// 		struct Level *level; // $v0
 	// 		int numPlanMkrs; // $s0
@@ -977,23 +1026,25 @@ int PLANAPI_FindNodePositionInUnit(_StreamUnit *streamUnit,_Position *pos,int id
 	// 		int i; // $s2
 
 		/* begin block 1.1 */
-			// Start line: 791
-			// Start offset: 0x80096494
+			// Start line: 801
+			// Start offset: 0x800981A4
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a0
 		/* end block 1.1 */
-		// End offset: 0x800964AC
-		// End Line: 791
+		// End offset: 0x800981BC
+		// End Line: 801
 	/* end block 1 */
-	// End offset: 0x800964AC
-	// End Line: 794
+	// End offset: 0x800981BC
+	// End Line: 804
 
 	/* begin block 2 */
-		// Start line: 1610
+		// Start line: 1649
 	/* end block 2 */
-	// End Line: 1611
+	// End Line: 1650
+
+/* File: C:\kain2\game\PLAN\PLANAPI.C */
 
 int PLANAPI_FindClosestNodePositionInUnit
               (_StreamUnit *streamUnit,_Position *target,_Position *pos,int offset,int max,int type,

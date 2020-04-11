@@ -4,11 +4,11 @@
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ G2AnimSection_InterpToKeylistAtTime(struct _G2AnimSection_Type *section /*$s1*/, struct _G2AnimKeylist_Type *keylist /*$s7*/, int keylistID /*stack 8*/, short targetTime /*$fp*/, int duration /*stack 16*/)
- // line 49, offset 0x8008ff60
+// void /*$ra*/ G2AnimSection_InterpToKeylistAtTime(struct _G2AnimSection_Type *section /*$s1*/, struct _G2AnimKeylist_Type *keylist /*$s7*/, int keylistID /*$fp*/, short targetTime /*stack -48*/, int duration /*stack 16*/)
+ // line 49, offset 0x80091aa4
 	/* begin block 1 */
 		// Start line: 50
-		// Start offset: 0x8008FF60
+		// Start offset: 0x80091AA4
 		// Variables:
 	// 		struct _G2Anim_Type *anim; // $s5
 	// 		struct _G2AnimInterpInfo_Type *interpInfo; // $s3
@@ -19,13 +19,15 @@
 	// 		int quatInfoChunkCount; // $a3
 	// 		int segCount; // $s2
 	/* end block 1 */
-	// End offset: 0x800901FC
-	// End Line: 180
+	// End offset: 0x80091D58
+	// End Line: 183
 
 	/* begin block 2 */
 		// Start line: 98
 	/* end block 2 */
 	// End Line: 99
+
+/* File: C:\kain2\game\G2\ANMINTRP.C */
 
 void G2AnimSection_InterpToKeylistAtTime
                (_G2AnimSection_Type *section,_G2AnimKeylist_Type *keylist,int keylistID,
@@ -44,9 +46,9 @@ void G2AnimSection_InterpToKeylistAtTime
   _G2AnimInterpInfo_Type *p_Var9;
   short sVar10;
   short sVar11;
-  ushort local_res8;
   
   if ((duration & 0xffffU) == 0) {
+LAB_80091b3c:
     G2AnimSection_SwitchToKeylistAtTime(section,keylist,keylistID,targetTime);
   }
   else {
@@ -55,7 +57,8 @@ void G2AnimSection_InterpToKeylistAtTime
     bVar1 = section->segCount;
     uVar8 = (uint)bVar1;
     if (p_Var9->stateBlockList == (_G2AnimInterpStateBlock_Type *)0x0) {
-      _G2Anim_AllocateInterpStateBlockList(section);
+      p_Var6 = _G2Anim_AllocateInterpStateBlockList(section);
+      if (p_Var6 == (_G2AnimInterpStateBlock_Type *)0x0) goto LAB_80091b3c;
       section->interpInfo = (_G2AnimInterpInfo_Type *)0x0;
       _G2AnimSection_UpdateStoredFrameFromData(section,anim);
       section->interpInfo = p_Var9;
@@ -121,8 +124,7 @@ void G2AnimSection_InterpToKeylistAtTime
       section->elapsedTime = 0;
     }
     section->keylist = keylist;
-    local_res8 = (ushort)keylistID;
-    section->keylistID = local_res8;
+    section->keylistID = (ushort)keylistID;
     section->storedTime = -keylist->timePerKey;
     if ((section->flags & 2) != 0) {
       G2AnimSection_SetLoopRangeAll(section);
@@ -142,10 +144,10 @@ void G2AnimSection_InterpToKeylistAtTime
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2AnimSection_UpdateStoredFrameFromQuat(struct _G2AnimSection_Type *section /*$s7*/)
- // line 190, offset 0x8009022c
+ // line 193, offset 0x80091d88
 	/* begin block 1 */
-		// Start line: 191
-		// Start offset: 0x8009022C
+		// Start line: 194
+		// Start offset: 0x80091D88
 		// Variables:
 	// 		struct _G2AnimSegValue_Type *segValue; // $s1
 	// 		struct _G2AnimInterpInfo_Type *interpInfo; // $s0
@@ -157,90 +159,94 @@ void G2AnimSection_InterpToKeylistAtTime
 	// 		int segCount; // $s6
 
 		/* begin block 1.1 */
-			// Start line: 220
-			// Start offset: 0x800902BC
+			// Start line: 223
+			// Start offset: 0x80091E18
 			// Variables:
 		// 		struct _G2Quat_Type *source; // $fp
 		// 		struct _G2Quat_Type *dest; // $s1
 
 			/* begin block 1.1.1 */
-				// Start line: 220
-				// Start offset: 0x800902BC
+				// Start line: 223
+				// Start offset: 0x80091E18
 				// Variables:
 			// 		unsigned long zw; // $v1
 			// 		unsigned long xy; // $v0
 			/* end block 1.1.1 */
-			// End offset: 0x800902BC
-			// End Line: 220
+			// End offset: 0x80091E18
+			// End Line: 223
 		/* end block 1.1 */
-		// End offset: 0x800902BC
-		// End Line: 220
+		// End offset: 0x80091E18
+		// End Line: 223
 
 		/* begin block 1.2 */
-			// Start line: 220
-			// Start offset: 0x800902BC
+			// Start line: 223
+			// Start offset: 0x80091E18
 			// Variables:
 		// 		struct _G2SVector3_Type *dest; // $a0
 		// 		struct _G2SVector3_Type *base; // $v0
 		// 		struct _G2SVector3_Type *offset; // $v1
 		// 		long alpha; // $s5
 		/* end block 1.2 */
-		// End offset: 0x800902BC
-		// End Line: 220
+		// End offset: 0x80091E18
+		// End Line: 223
 
 		/* begin block 1.3 */
-			// Start line: 220
-			// Start offset: 0x800902BC
+			// Start line: 223
+			// Start offset: 0x80091E18
 			// Variables:
 		// 		struct _G2SVector3_Type *dest; // $a0
 		// 		struct _G2SVector3_Type *base; // $v0
 		// 		struct _G2SVector3_Type *offset; // $v1
 		// 		long alpha; // $s5
 		/* end block 1.3 */
-		// End offset: 0x800902BC
-		// End Line: 220
+		// End offset: 0x80091E18
+		// End Line: 223
 	/* end block 1 */
-	// End offset: 0x800903DC
-	// End Line: 249
+	// End offset: 0x80091F38
+	// End Line: 252
 
 	/* begin block 2 */
-		// Start line: 433
+		// Start line: 434
 	/* end block 2 */
-	// End Line: 434
+	// End Line: 435
+
+/* File: C:\kain2\game\G2\ANMINTRP.C */
 
 void _G2AnimSection_UpdateStoredFrameFromQuat(_G2AnimSection_Type *section)
 
 {
   byte bVar1;
   long ratio;
-  undefined4 uVar2;
+  int iVar2;
   undefined4 uVar3;
   undefined4 uVar4;
-  _G2AnimInterpInfo_Type *p_Var5;
+  undefined4 uVar5;
+  _G2AnimInterpInfo_Type *p_Var6;
   _G2AnimQuatInfo_Type *quatA;
-  _G2AnimSegValue_Type *p_Var6;
-  ushort *puVar7;
-  _G2AnimInterpStateBlock_Type *p_Var8;
-  int iVar9;
-  uint uVar10;
+  undefined4 *puVar7;
+  undefined2 *puVar8;
+  _G2AnimInterpStateBlock_Type *p_Var9;
+  int iVar10;
+  uint uVar11;
   undefined4 local_30;
   undefined4 local_2c;
   
-  p_Var5 = section->interpInfo;
-  iVar9 = 4;
+  p_Var6 = section->interpInfo;
+  iVar10 = 4;
   bVar1 = section->segCount;
-  uVar10 = (uint)bVar1;
+  uVar11 = (uint)bVar1;
   ratio = _G2AnimAlphaTable_GetValue
-                    (p_Var5->alphaTable,((int)section->elapsedTime << 0xc) / (int)p_Var5->duration);
-  p_Var8 = p_Var5->stateBlockList;
-  p_Var6 = &_segValues + section->firstSeg;
-  quatA = p_Var8->quatInfo;
+                    (p_Var6->alphaTable,((int)section->elapsedTime << 0xc) / (int)p_Var6->duration);
+  p_Var9 = p_Var6->stateBlockList;
+  iVar2 = (uint)section->firstSeg * 0x18;
+  puVar7 = (undefined4 *)(&_segValues + iVar2);
+  quatA = p_Var9->quatInfo;
   if (bVar1 != 0) {
-    puVar7 = &(&_segValues)[section->firstSeg].bIsQuat;
+    puVar8 = (undefined2 *)(&DAT_800d4f22 + iVar2);
     do {
       G2Quat_Slerp_VM(ratio,(_G2Quat_Type *)quatA,&quatA->destQuat,(_G2Quat_Type *)&local_30,0);
-      *(undefined4 *)&p_Var6->rotQuat = local_30;
-      *(undefined4 *)(puVar7 + -9) = local_2c;
+      *puVar7 = local_30;
+      *(undefined4 *)(puVar8 + -9) = local_2c;
       setCopReg(2,0xc800,(uint)(ushort)(quatA->srcScale).x);
       setCopReg(2,0xd000,(uint)(ushort)(quatA->srcScale).y);
       setCopReg(2,0xd800,(uint)(ushort)(quatA->srcScale).z);
@@ -249,12 +255,12 @@ void _G2AnimSection_UpdateStoredFrameFromQuat(_G2AnimSection_Type *section)
       setCopReg(2,0x5800,(uint)(ushort)(quatA->destScale).z);
       setCopReg(2,0x4000,ratio);
       copFunction(2,0x1a8003e);
-      uVar2 = getCopReg(2,0xc800);
-      uVar3 = getCopReg(2,0xd000);
-      uVar4 = getCopReg(2,0xd800);
-      (p_Var6->scale).x = (short)uVar2;
-      (p_Var6->scale).y = (short)uVar3;
-      (p_Var6->scale).z = (short)uVar4;
+      uVar3 = getCopReg(2,0xc800);
+      uVar4 = getCopReg(2,0xd000);
+      uVar5 = getCopReg(2,0xd800);
+      *(short *)(puVar7 + 2) = (short)uVar3;
+      *(undefined2 *)((int)puVar7 + 10) = (short)uVar4;
+      *(short *)(puVar7 + 3) = (short)uVar5;
       setCopReg(2,0xc800,(uint)(ushort)(quatA->srcTrans).x);
       setCopReg(2,0xd000,(uint)(ushort)(quatA->srcTrans).y);
       setCopReg(2,0xd800,(uint)(ushort)(quatA->srcTrans).z);
@@ -263,24 +269,24 @@ void _G2AnimSection_UpdateStoredFrameFromQuat(_G2AnimSection_Type *section)
       setCopReg(2,0x5800,(uint)(ushort)(quatA->destTrans).z);
       setCopReg(2,0x4000,ratio);
       copFunction(2,0x1a8003e);
-      uVar2 = getCopReg(2,0xc800);
-      uVar3 = getCopReg(2,0xd000);
-      uVar4 = getCopReg(2,0xd800);
-      (p_Var6->trans).x = (short)uVar2;
-      (p_Var6->trans).y = (short)uVar3;
-      (p_Var6->trans).z = (short)uVar4;
-      uVar10 = uVar10 - 1;
-      iVar9 = iVar9 + -1;
+      uVar3 = getCopReg(2,0xc800);
+      uVar4 = getCopReg(2,0xd000);
+      uVar5 = getCopReg(2,0xd800);
+      *(short *)(puVar7 + 4) = (short)uVar3;
+      *(undefined2 *)((int)puVar7 + 0x12) = (short)uVar4;
+      *(short *)(puVar7 + 5) = (short)uVar5;
+      uVar11 = uVar11 - 1;
+      iVar10 = iVar10 + -1;
       quatA = quatA + 1;
-      if (iVar9 == 0) {
-        p_Var8 = p_Var8->next;
-        iVar9 = 4;
-        quatA = p_Var8->quatInfo;
+      if (iVar10 == 0) {
+        p_Var9 = p_Var9->next;
+        iVar10 = 4;
+        quatA = p_Var9->quatInfo;
       }
-      *puVar7 = 1;
-      puVar7 = puVar7 + 0xc;
-      p_Var6 = p_Var6 + 1;
-    } while (0 < (int)uVar10);
+      *puVar8 = 1;
+      puVar8 = puVar8 + 0xc;
+      puVar7 = puVar7 + 6;
+    } while (0 < (int)uVar11);
   }
   section->storedTime = section->elapsedTime;
   section->flags = section->flags | 0x80;
@@ -292,10 +298,10 @@ void _G2AnimSection_UpdateStoredFrameFromQuat(_G2AnimSection_Type *section)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2AnimSection_InterpStateToQuat(struct _G2AnimSection_Type *section /*$a0*/)
- // line 255, offset 0x80090420
+ // line 258, offset 0x80091f7c
 	/* begin block 1 */
-		// Start line: 256
-		// Start offset: 0x80090420
+		// Start line: 259
+		// Start offset: 0x80091F7C
 		// Variables:
 	// 		struct _G2AnimInterpInfo_Type *interpInfo; // $s0
 	// 		struct _G2AnimInterpStateBlock_Type *stateBlockList; // $s3
@@ -306,54 +312,56 @@ void _G2AnimSection_UpdateStoredFrameFromQuat(_G2AnimSection_Type *section)
 	// 		int segCount; // $s4
 
 		/* begin block 1.1 */
-			// Start line: 285
-			// Start offset: 0x80090480
+			// Start line: 288
+			// Start offset: 0x80091FDC
 			// Variables:
 		// 		struct _G2Quat_Type *source; // $s5
 		// 		struct _G2Quat_Type *dest; // $s0
 
 			/* begin block 1.1.1 */
-				// Start line: 285
-				// Start offset: 0x80090480
+				// Start line: 288
+				// Start offset: 0x80091FDC
 				// Variables:
 			// 		unsigned long zw; // $v1
 			// 		unsigned long xy; // $v0
 			/* end block 1.1.1 */
-			// End offset: 0x80090480
-			// End Line: 285
+			// End offset: 0x80091FDC
+			// End Line: 288
 		/* end block 1.1 */
-		// End offset: 0x80090480
-		// End Line: 285
+		// End offset: 0x80091FDC
+		// End Line: 288
 
 		/* begin block 1.2 */
-			// Start line: 285
-			// Start offset: 0x80090480
+			// Start line: 288
+			// Start offset: 0x80091FDC
 			// Variables:
 		// 		struct _G2SVector3_Type *dest; // $v1
 		// 		struct _G2SVector3_Type *offset; // $v0
 		// 		long alpha; // $s1
 		/* end block 1.2 */
-		// End offset: 0x80090480
-		// End Line: 285
+		// End offset: 0x80091FDC
+		// End Line: 288
 
 		/* begin block 1.3 */
-			// Start line: 285
-			// Start offset: 0x80090480
+			// Start line: 288
+			// Start offset: 0x80091FDC
 			// Variables:
 		// 		struct _G2SVector3_Type *dest; // $v1
 		// 		struct _G2SVector3_Type *offset; // $v0
 		// 		long alpha; // $s1
 		/* end block 1.3 */
-		// End offset: 0x80090480
-		// End Line: 285
+		// End offset: 0x80091FDC
+		// End Line: 288
 	/* end block 1 */
-	// End offset: 0x8009058C
-	// End Line: 310
+	// End offset: 0x800920E8
+	// End Line: 313
 
 	/* begin block 2 */
-		// Start line: 581
+		// Start line: 582
 	/* end block 2 */
-	// End Line: 582
+	// End Line: 583
+
+/* File: C:\kain2\game\G2\ANMINTRP.C */
 
 void _G2AnimSection_InterpStateToQuat(_G2AnimSection_Type *section)
 
@@ -430,10 +438,10 @@ void _G2AnimSection_InterpStateToQuat(_G2AnimSection_Type *section)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2AnimSection_SegValueToQuat(struct _G2AnimSection_Type *section /*$a0*/, int zeroOne /*$s6*/)
- // line 315, offset 0x800905b0
+ // line 318, offset 0x8009210c
 	/* begin block 1 */
-		// Start line: 316
-		// Start offset: 0x800905B0
+		// Start line: 319
+		// Start offset: 0x8009210C
 		// Variables:
 	// 		struct _G2AnimSegValue_Type *segValue; // $s2
 	// 		struct _G2AnimInterpInfo_Type *interpInfo; // $v0
@@ -443,20 +451,22 @@ void _G2AnimSection_InterpStateToQuat(_G2AnimSection_Type *section)
 	// 		int quatInfoChunkCount; // $s3
 	// 		int segCount; // $s5
 	/* end block 1 */
-	// End offset: 0x80090718
-	// End Line: 381
+	// End offset: 0x80092274
+	// End Line: 384
 
 	/* begin block 2 */
-		// Start line: 715
+		// Start line: 716
 	/* end block 2 */
-	// End Line: 716
+	// End Line: 717
+
+/* File: C:\kain2\game\G2\ANMINTRP.C */
 
 void _G2AnimSection_SegValueToQuat(_G2AnimSection_Type *section,int zeroOne)
 
 {
   _G2AnimQuatInfo_Type *p_Var1;
   short *psVar2;
-  _G2AnimSegValue_Type *p_Var3;
+  ushort *puVar3;
   int iVar4;
   _G2AnimInterpStateBlock_Type *p_Var5;
   uint uVar6;
@@ -468,12 +478,12 @@ void _G2AnimSection_SegValueToQuat(_G2AnimSection_Type *section,int zeroOne)
   iVar4 = 4;
   uVar6 = (uint)section->segCount;
   p_Var5 = section->interpInfo->stateBlockList;
-  p_Var3 = &_segValues + section->firstSeg;
+  puVar3 = (ushort *)(&_segValues + (uint)section->firstSeg * 0x18);
   p_Var1 = p_Var5->quatInfo;
   if (section->segCount != 0) {
-    psVar2 = &(&_segValues)[section->firstSeg].trans.z;
+    psVar2 = &DAT_800d4f20 + (uint)section->firstSeg * 0xc;
     do {
-      local_28 = *(ushort *)&p_Var3->rotQuat & 0xfff;
+      local_28 = *puVar3 & 0xfff;
       local_26 = psVar2[-9] & 0xfff;
       local_22 = 0;
       local_24 = psVar2[-8] & 0xfff;
@@ -496,7 +506,7 @@ void _G2AnimSection_SegValueToQuat(_G2AnimSection_Type *section,int zeroOne)
         (p_Var1->destTrans).z = *psVar2;
       }
       psVar2 = psVar2 + 0xc;
-      p_Var3 = p_Var3 + 1;
+      puVar3 = puVar3 + 0xc;
       uVar6 = uVar6 - 1;
       iVar4 = iVar4 + -1;
       p_Var1 = p_Var1 + 1;
@@ -514,43 +524,58 @@ void _G2AnimSection_SegValueToQuat(_G2AnimSection_Type *section,int zeroOne)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ _G2Anim_AllocateInterpStateBlockList(struct _G2AnimSection_Type *section /*$v0*/)
- // line 385, offset 0x80090740
+// struct _G2AnimInterpStateBlock_Type * /*$ra*/ _G2Anim_AllocateInterpStateBlockList(struct _G2AnimSection_Type *section /*$v0*/)
+ // line 388, offset 0x8009229c
 	/* begin block 1 */
-		// Start line: 386
-		// Start offset: 0x80090740
+		// Start line: 389
+		// Start offset: 0x8009229C
 		// Variables:
-	// 		struct _G2AnimInterpInfo_Type *interpInfo; // $s0
-	// 		struct _G2AnimInterpStateBlock_Type *newBlock; // $s2
-	// 		int segCount; // $s1
+	// 		struct _G2AnimInterpInfo_Type *interpInfo; // $s2
+	// 		struct _G2AnimInterpStateBlock_Type *newBlock; // $s1
+	// 		int segCount; // $s0
 	/* end block 1 */
-	// End offset: 0x80090798
-	// End Line: 410
+	// End offset: 0x80092324
+	// End Line: 425
 
 	/* begin block 2 */
-		// Start line: 890
+		// Start line: 891
 	/* end block 2 */
-	// End Line: 891
+	// End Line: 892
 
-void _G2Anim_AllocateInterpStateBlockList(_G2AnimSection_Type *section)
+/* File: C:\kain2\game\G2\ANMINTRP.C */
+
+_G2AnimInterpStateBlock_Type * _G2Anim_AllocateInterpStateBlockList(_G2AnimSection_Type *section)
 
 {
   _G2AnimInterpStateBlock_Type *p_Var1;
   _G2AnimInterpStateBlock_Type *p_Var2;
-  _G2AnimInterpInfo_Type *p_Var3;
-  uint uVar4;
+  uint uVar3;
+  _G2AnimInterpInfo_Type *p_Var4;
   
-  uVar4 = (uint)section->segCount;
-  p_Var3 = section->interpInfo;
-  p_Var1 = (_G2AnimInterpStateBlock_Type *)G2PoolMem_Allocate(&_interpStateBlockPool);
-  p_Var3->stateBlockList = p_Var1;
-  while (uVar4 = uVar4 - 4, 0 < (int)uVar4) {
-    p_Var2 = (_G2AnimInterpStateBlock_Type *)G2PoolMem_Allocate(&_interpStateBlockPool);
-    p_Var1->next = p_Var2;
-    p_Var1 = p_Var2;
+  uVar3 = (uint)section->segCount;
+  p_Var4 = section->interpInfo;
+  p_Var2 = (_G2AnimInterpStateBlock_Type *)G2PoolMem_Allocate(&_interpStateBlockPool);
+  p_Var4->stateBlockList = p_Var2;
+  if (p_Var2 == (_G2AnimInterpStateBlock_Type *)0x0) {
+LAB_80092320:
+    p_Var2 = p_Var4->stateBlockList;
   }
-  p_Var1->next = (_G2AnimInterpStateBlock_Type *)0x0;
-  return;
+  else {
+    do {
+      uVar3 = uVar3 - 4;
+      if ((int)uVar3 < 1) {
+        p_Var2->next = (_G2AnimInterpStateBlock_Type *)0x0;
+        goto LAB_80092320;
+      }
+      p_Var1 = (_G2AnimInterpStateBlock_Type *)G2PoolMem_Allocate(&_interpStateBlockPool);
+      p_Var2->next = p_Var1;
+      p_Var2 = p_Var1;
+    } while (p_Var1 != (_G2AnimInterpStateBlock_Type *)0x0);
+    _G2Anim_FreeInterpStateBlockList(p_Var4->stateBlockList);
+    p_Var2 = (_G2AnimInterpStateBlock_Type *)0x0;
+    p_Var4->stateBlockList = (_G2AnimInterpStateBlock_Type *)0x0;
+  }
+  return p_Var2;
 }
 
 
@@ -558,20 +583,22 @@ void _G2Anim_AllocateInterpStateBlockList(_G2AnimSection_Type *section)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _G2Anim_FreeInterpStateBlockList(struct _G2AnimInterpStateBlock_Type *block /*$a1*/)
- // line 415, offset 0x800907b4
+ // line 429, offset 0x8009233c
 	/* begin block 1 */
-		// Start line: 416
-		// Start offset: 0x800907B4
+		// Start line: 430
+		// Start offset: 0x8009233C
 		// Variables:
 	// 		struct _G2AnimInterpStateBlock_Type *nextBlock; // $s0
 	/* end block 1 */
-	// End offset: 0x800907E8
-	// End Line: 427
+	// End offset: 0x80092370
+	// End Line: 441
 
 	/* begin block 2 */
-		// Start line: 964
+		// Start line: 985
 	/* end block 2 */
-	// End Line: 965
+	// End Line: 986
+
+/* File: C:\kain2\game\G2\ANMINTRP.C */
 
 void _G2Anim_FreeInterpStateBlockList(_G2AnimInterpStateBlock_Type *block)
 

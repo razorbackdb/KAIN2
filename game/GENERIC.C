@@ -5,37 +5,39 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GenericInit(struct _Instance *instance /*$s0*/, struct GameTracker *gameTracker /*$a1*/)
- // line 28, offset 0x8003f730
+ // line 28, offset 0x8003ed00
 	/* begin block 1 */
 		// Start line: 29
-		// Start offset: 0x8003F730
+		// Start offset: 0x8003ED00
 		// Variables:
 	// 		struct Spline *spline; // $v1
 	// 		struct Object *object; // $s1
 
 		/* begin block 1.1 */
 			// Start line: 56
-			// Start offset: 0x8003F7B4
+			// Start offset: 0x8003ED84
 
 			/* begin block 1.1.1 */
 				// Start line: 66
-				// Start offset: 0x8003F84C
+				// Start offset: 0x8003EE1C
 				// Variables:
 			// 		static struct _G2AnimInterpInfo_Type crap; // offset 0x0
 			/* end block 1.1.1 */
-			// End offset: 0x8003F85C
+			// End offset: 0x8003EE2C
 			// End Line: 68
 		/* end block 1.1 */
-		// End offset: 0x8003F85C
+		// End offset: 0x8003EE2C
 		// End Line: 69
 	/* end block 1 */
-	// End offset: 0x8003F85C
+	// End offset: 0x8003EE2C
 	// End Line: 72
 
 	/* begin block 2 */
 		// Start line: 56
 	/* end block 2 */
 	// End Line: 57
+
+/* File: C:\kain2\game\GENERIC.C */
 
 void GenericInit(_Instance *instance,GameTracker *gameTracker)
 
@@ -65,7 +67,7 @@ void GenericInit(_Instance *instance,GameTracker *gameTracker)
                        ) * 0x10000 >> 0x10));
     G2EmulationInstanceSetAnimation(instance,0,0,0,0);
     G2EmulationInstanceSetMode(instance,0,0);
-    if ((*(int *)pOVar3->name == 0x65697261) && (*(int *)(pOVar3->name + 1) == 0x5f5f5f6c)) {
+    if ((*(int *)pOVar3->name == DAT_800cfc78) && (*(int *)(pOVar3->name + 1) == DAT_800cfc7c)) {
       G2AnimSection_SetInterpInfo((instance->anim).section,(_G2AnimInterpInfo_Type *)&crap_24);
     }
   }
@@ -77,7 +79,7 @@ void GenericInit(_Instance *instance,GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GenericCollide(struct _Instance *instance /*$a0*/, struct GameTracker *gameTracker /*$a1*/)
- // line 74, offset 0x8003f870
+ // line 74, offset 0x8003ee40
 	/* begin block 1 */
 		// Start line: 151
 	/* end block 1 */
@@ -87,6 +89,8 @@ void GenericInit(_Instance *instance,GameTracker *gameTracker)
 		// Start line: 205
 	/* end block 2 */
 	// End Line: 206
+
+/* File: C:\kain2\game\GENERIC.C */
 
 void GenericCollide(_Instance *instance,GameTracker *gameTracker)
 
@@ -99,20 +103,22 @@ void GenericCollide(_Instance *instance,GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GenericProcess(struct _Instance *instance /*$a0*/, struct GameTracker *gameTracker /*$a1*/)
- // line 134, offset 0x8003f878
+ // line 134, offset 0x8003ee48
 	/* begin block 1 */
 		// Start line: 135
-		// Start offset: 0x8003F878
+		// Start offset: 0x8003EE48
 		// Variables:
 	// 		struct Object *object; // $v1
 	/* end block 1 */
-	// End offset: 0x8003F8BC
+	// End offset: 0x8003EE8C
 	// End Line: 144
 
 	/* begin block 2 */
 		// Start line: 271
 	/* end block 2 */
 	// End Line: 272
+
+/* File: C:\kain2\game\GENERIC.C */
 
 void GenericProcess(_Instance *instance,GameTracker *gameTracker)
 
@@ -132,38 +138,40 @@ void GenericProcess(_Instance *instance,GameTracker *gameTracker)
 // decompiled code
 // original method signature: 
 // unsigned long /*$ra*/ GenericQuery(struct _Instance *instance /*$s0*/, unsigned long query /*$a1*/)
- // line 149, offset 0x8003f8cc
+ // line 149, offset 0x8003ee9c
 	/* begin block 1 */
 		// Start line: 150
-		// Start offset: 0x8003F8CC
+		// Start offset: 0x8003EE9C
 		// Variables:
 	// 		long ret; // $a2
 
 		/* begin block 1.1 */
 			// Start line: 181
-			// Start offset: 0x8003F9A0
+			// Start offset: 0x8003EF70
 			// Variables:
 		// 		struct evControlSaveDataData *pdata; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8003F9E0
+		// End offset: 0x8003EFB0
 		// End Line: 191
 
 		/* begin block 1.2 */
 			// Start line: 195
-			// Start offset: 0x8003F9E0
+			// Start offset: 0x8003EFB0
 			// Variables:
 		// 		struct Object *object; // $a0
 		/* end block 1.2 */
-		// End offset: 0x8003FA28
+		// End offset: 0x8003EFF8
 		// End Line: 203
 	/* end block 1 */
-	// End offset: 0x8003FA34
+	// End offset: 0x8003F004
 	// End Line: 212
 
 	/* begin block 2 */
 		// Start line: 301
 	/* end block 2 */
 	// End Line: 302
+
+/* File: C:\kain2\game\GENERIC.C */
 
 ulong GenericQuery(_Instance *instance,ulong query)
 
@@ -183,11 +191,11 @@ ulong GenericQuery(_Instance *instance,ulong query)
     if ((uVar5 & 0x4000000) == 0) {
       if ((instance->object->oflags & 0x100000U) == 0) {
         if ((uVar5 & 0x20) != 0) {
-          pMVar6 = (MATRIX *)0x200000;
+          pMVar6 = (MATRIX *)&DAT_00200000;
         }
       }
       else {
-        pMVar6 = (MATRIX *)0x100000;
+        pMVar6 = (MATRIX *)&DAT_00100000;
       }
     }
     else {
@@ -216,12 +224,12 @@ ulong GenericQuery(_Instance *instance,ulong query)
     sVar1 = (instance->position).x;
     sVar2 = (instance->position).y;
     sVar3 = (instance->position).z;
-    goto LAB_8003f92c;
+    goto LAB_8003eefc;
   case 7:
     sVar1 = (instance->rotation).x;
     sVar2 = (instance->rotation).y;
     sVar3 = (instance->rotation).z;
-LAB_8003f92c:
+LAB_8003eefc:
     pMVar6 = (MATRIX *)SetPositionData((int)sVar1,(int)sVar2,(int)sVar3);
     break;
   case 0xb:
@@ -260,41 +268,43 @@ LAB_8003f92c:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ GenericMessage(struct _Instance *instance /*$s0*/, unsigned long message /*$a1*/, unsigned long data /*$v1*/)
- // line 218, offset 0x8003fa48
+ // line 218, offset 0x8003f018
 	/* begin block 1 */
 		// Start line: 219
-		// Start offset: 0x8003FA48
+		// Start offset: 0x8003F018
 
 		/* begin block 1.1 */
 			// Start line: 224
-			// Start offset: 0x8003FADC
+			// Start offset: 0x8003F0AC
 			// Variables:
 		// 		struct evAnimationInstanceSwitchData *Ptr; // $s1
 		/* end block 1.1 */
-		// End offset: 0x8003FB2C
+		// End offset: 0x8003F0FC
 		// End Line: 235
 
 		/* begin block 1.2 */
 			// Start line: 241
-			// Start offset: 0x8003FB44
+			// Start offset: 0x8003F114
 		/* end block 1.2 */
-		// End offset: 0x8003FB44
+		// End offset: 0x8003F114
 		// End Line: 242
 
 		/* begin block 1.3 */
 			// Start line: 256
-			// Start offset: 0x8003FB90
+			// Start offset: 0x8003F160
 		/* end block 1.3 */
-		// End offset: 0x8003FBB8
+		// End offset: 0x8003F188
 		// End Line: 264
 	/* end block 1 */
-	// End offset: 0x8003FBB8
+	// End offset: 0x8003F188
 	// End Line: 271
 
 	/* begin block 2 */
 		// Start line: 445
 	/* end block 2 */
 	// End Line: 446
+
+/* File: C:\kain2\game\GENERIC.C */
 
 void GenericMessage(_Instance *instance,ulong message,ulong data)
 
@@ -313,7 +323,7 @@ void GenericMessage(_Instance *instance,ulong message,ulong data)
       }
       else {
         if (message == 0x4000a) {
-          STREAM_SetInstancePosition(&gameTrackerX,instance,(evPositionData *)data);
+          STREAM_SetInstancePosition((GameTracker *)&gameTrackerX,instance,(evPositionData *)data);
         }
       }
     }
@@ -330,7 +340,7 @@ void GenericMessage(_Instance *instance,ulong message,ulong data)
       }
       else {
         if (message < 0x8000009) {
-          if (message == 0x100007) {
+          if ((undefined *)message == &DAT_00100007) {
             instance->flags = **(long **)(data + 4);
             instance->flags2 = *(long *)(*(int *)(data + 4) + 4);
           }
@@ -342,6 +352,45 @@ void GenericMessage(_Instance *instance,ulong message,ulong data)
         }
       }
     }
+  }
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ GenericRelocateTune(struct Object *object /*$a0*/, long offset /*$a1*/)
+ // line 273, offset 0x8003f19c
+	/* begin block 1 */
+		// Start line: 275
+		// Start offset: 0x8003F19C
+		// Variables:
+	// 		struct GenericTune *tune; // $v1
+	/* end block 1 */
+	// End offset: 0x8003F1C0
+	// End Line: 281
+
+	/* begin block 2 */
+		// Start line: 557
+	/* end block 2 */
+	// End Line: 558
+
+	/* begin block 3 */
+		// Start line: 558
+	/* end block 3 */
+	// End Line: 559
+
+/* File: C:\kain2\game\GENERIC.C */
+
+void GenericRelocateTune(Object *object,long offset)
+
+{
+  void *pvVar1;
+  
+  pvVar1 = object->data;
+  if ((pvVar1 != (void *)0x0) && (*(int *)((int)pvVar1 + 4) != 0)) {
+    *(int *)((int)pvVar1 + 4) = *(int *)((int)pvVar1 + 4) + offset;
   }
   return;
 }

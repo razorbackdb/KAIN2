@@ -5,23 +5,25 @@
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_Init(struct _FXTracker *fxTracker /*$s1*/)
- // line 111, offset 0x800434e0
+ // line 120, offset 0x80042950
 	/* begin block 1 */
-		// Start line: 112
-		// Start offset: 0x800434E0
+		// Start line: 121
+		// Start offset: 0x80042950
 		// Variables:
 	// 		struct _FX_MATRIX *fxMatrix; // $s0
 	// 		struct _FX_MATRIX *endFXMatrix; // $s2
 	// 		struct _FX_PRIM *fxPrim; // $s0
 	// 		struct _FX_PRIM *endFXPrim; // $s2
 	/* end block 1 */
-	// End offset: 0x80043578
-	// End Line: 138
+	// End offset: 0x800429E8
+	// End Line: 147
 
 	/* begin block 2 */
-		// Start line: 222
+		// Start line: 240
 	/* end block 2 */
-	// End Line: 223
+	// End Line: 241
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_Init(_FXTracker *fxTracker)
 
@@ -53,12 +55,12 @@ void FX_Init(_FXTracker *fxTracker)
     LIST_InsertFunc(&fxTracker->freePrimList,(NodeType *)node_00);
     node_00 = node_00 + 1;
   }
-  FX_LastUsedPrim = (_FX_PRIM *)0x0;
+  FX_LastUsedPrim = 0;
   FX_ConstrictPositionPtr = &FX_ConstrictPosition;
   FX_Spiral_Init();
   snow_amount = 0;
   rain_amount = 0;
-  FX_reaver_instance = (_Instance *)0x0;
+  FX_reaver_instance = 0;
   FX_Frames = 1;
   FX_TimeCount = 0;
   return;
@@ -69,16 +71,18 @@ void FX_Init(_FXTracker *fxTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_Die(struct _FX_PRIM *fxPrim /*$s0*/, struct _FXTracker *fxTracker /*$s1*/)
- // line 163, offset 0x800435c0
+ // line 186, offset 0x80042a30
 	/* begin block 1 */
-		// Start line: 321
+		// Start line: 367
 	/* end block 1 */
-	// End Line: 322
+	// End Line: 368
 
 	/* begin block 2 */
-		// Start line: 356
+		// Start line: 416
 	/* end block 2 */
-	// End Line: 357
+	// End Line: 417
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_Die(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 
@@ -99,20 +103,22 @@ void FX_Die(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 // decompiled code
 // original method signature: 
 // struct _FX_MATRIX * /*$ra*/ FX_GetMatrix(struct _FXTracker *fxTracker /*$s1*/)
- // line 180, offset 0x80043630
+ // line 203, offset 0x80042aa0
 	/* begin block 1 */
-		// Start line: 181
-		// Start offset: 0x80043630
+		// Start line: 204
+		// Start offset: 0x80042AA0
 		// Variables:
 	// 		struct _FX_MATRIX *fxMatrix; // $s0
 	/* end block 1 */
-	// End offset: 0x80043668
-	// End Line: 190
+	// End offset: 0x80042AD8
+	// End Line: 213
 
 	/* begin block 2 */
-		// Start line: 392
+		// Start line: 452
 	/* end block 2 */
-	// End Line: 393
+	// End Line: 453
+
+/* File: C:\kain2\game\FX.C */
 
 _FX_MATRIX * FX_GetMatrix(_FXTracker *fxTracker)
 
@@ -132,20 +138,22 @@ _FX_MATRIX * FX_GetMatrix(_FXTracker *fxTracker)
 // decompiled code
 // original method signature: 
 // struct _FX_PRIM * /*$ra*/ FX_GetPrim(struct _FXTracker *fxTracker /*$a0*/)
- // line 194, offset 0x80043680
+ // line 217, offset 0x80042af0
 	/* begin block 1 */
-		// Start line: 195
-		// Start offset: 0x80043680
+		// Start line: 218
+		// Start offset: 0x80042AF0
 		// Variables:
 	// 		struct _FX_PRIM *fxPrim; // $a0
 	/* end block 1 */
-	// End offset: 0x800436E0
-	// End Line: 216
+	// End offset: 0x80042B50
+	// End Line: 239
 
 	/* begin block 2 */
-		// Start line: 421
+		// Start line: 481
 	/* end block 2 */
-	// End Line: 422
+	// End Line: 482
+
+/* File: C:\kain2\game\FX.C */
 
 _FX_PRIM * FX_GetPrim(_FXTracker *fxTracker)
 
@@ -170,8 +178,8 @@ _FX_PRIM * FX_GetPrim(_FXTracker *fxTracker)
       return (_FX_PRIM *)0x0;
     }
   }
-  p_Var3->process = (void *)0x0;
-  p_Var3->flags = 0;
+  *(NodeType **)&p_Var3->process = (NodeType *)0x0;
+  *(NodeType **)&p_Var3->flags = (NodeType *)0x0;
   p_Var3->matrix = (_FX_MATRIX *)0x0;
   return p_Var3;
 }
@@ -181,20 +189,22 @@ _FX_PRIM * FX_GetPrim(_FXTracker *fxTracker)
 // decompiled code
 // original method signature: 
 // struct _FXParticle * /*$ra*/ FX_GetParticle(struct _Instance *instance /*$s1*/, short startSegment /*$s0*/)
- // line 219, offset 0x800436f0
+ // line 242, offset 0x80042b60
 	/* begin block 1 */
-		// Start line: 220
-		// Start offset: 0x800436F0
+		// Start line: 243
+		// Start offset: 0x80042B60
 		// Variables:
 	// 		struct _FXParticle *particle; // $v1
 	/* end block 1 */
-	// End offset: 0x80043774
-	// End Line: 240
+	// End offset: 0x80042BE4
+	// End Line: 263
 
 	/* begin block 2 */
-		// Start line: 474
+		// Start line: 534
 	/* end block 2 */
-	// End Line: 475
+	// End Line: 535
+
+/* File: C:\kain2\game\FX.C */
 
 _FXParticle * FX_GetParticle(_Instance *instance,short startSegment)
 
@@ -230,16 +240,18 @@ _FXParticle * FX_GetParticle(_Instance *instance,short startSegment)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_AniTexSetup(struct _FX_PRIM *fxPrim /*$a3*/, struct _MFace *mface /*$a1*/, struct _Model *model /*$a2*/, struct _FXTracker *fxTracker /*$a3*/)
- // line 243, offset 0x8004378c
+ // line 266, offset 0x80042bfc
 	/* begin block 1 */
-		// Start line: 531
+		// Start line: 591
 	/* end block 1 */
-	// End Line: 532
+	// End Line: 592
 
 	/* begin block 2 */
-		// Start line: 532
+		// Start line: 592
 	/* end block 2 */
-	// End Line: 533
+	// End Line: 593
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_AniTexSetup(_FX_PRIM *fxPrim,_MFace *mface,_Model *model,_FXTracker *fxTracker)
 
@@ -274,129 +286,14 @@ void FX_AniTexSetup(_FX_PRIM *fxPrim,_MFace *mface,_Model *model,_FXTracker *fxT
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ FX_NoAutoAniTexSetup(struct _FX_PRIM *fxPrim /*$a3*/, struct _MFace *mface /*$a1*/, struct _Model *model /*$a2*/, struct _FXTracker *fxTracker /*$a3*/, struct _Instance *instance /*stack 16*/)
- // line 267, offset 0x80043840
-	/* begin block 1 */
-		// Start line: 268
-		// Start offset: 0x80043840
-
-		/* begin block 1.1 */
-			// Start line: 274
-			// Start offset: 0x80043874
-			// Variables:
-		// 		struct AniTexInfo *aniTexInfo; // $a0
-		/* end block 1.1 */
-		// End offset: 0x80043874
-		// End Line: 276
-	/* end block 1 */
-	// End offset: 0x80043908
-	// End Line: 292
-
-	/* begin block 2 */
-		// Start line: 585
-	/* end block 2 */
-	// End Line: 586
-
-	/* begin block 3 */
-		// Start line: 586
-	/* end block 3 */
-	// End Line: 587
-
-void FX_NoAutoAniTexSetup
-               (_FX_PRIM *fxPrim,_MFace *mface,_Model *model,_FXTracker *fxTracker,
-               _Instance *instance)
-
-{
-  TextureMT3 *pTVar1;
-  uint uVar2;
-  uint uVar3;
-  AniTex *pAVar4;
-  
-  if ((mface->flags & 2) == 0) {
-    fxPrim->flags = fxPrim->flags & 0xfffffffa;
-    uVar2 = mface->color;
-    uVar3 = 0x20000000;
-  }
-  else {
-    fxPrim->flags = fxPrim->flags | 1;
-    pAVar4 = model->aniTextures;
-    if (pAVar4 == (AniTex *)0x0) {
-      pTVar1 = (TextureMT3 *)mface->color;
-    }
-    else {
-      pTVar1 = (TextureMT3 *)
-               (mface->color +
-                (((uint)(int)instance->currentTextureAnimFrame / (uint)(pAVar4->aniTexInfo).speed) %
-                (pAVar4->aniTexInfo).numFrames) * 0x10 + 0x10);
-    }
-    fxPrim->texture = pTVar1;
-    uVar2 = fxPrim->texture->color;
-    uVar3 = 0x24000000;
-  }
-  fxPrim->color = uVar2 & 0x3ffffff | uVar3;
-  return;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// void /*$ra*/ FX_AniTexProcess(struct _FX_PRIM *fxPrim /*$a3*/, struct _FXTracker *fxTracker /*$t1*/)
- // line 294, offset 0x80043910
-	/* begin block 1 */
-		// Start line: 295
-		// Start offset: 0x80043910
-		// Variables:
-	// 		struct AniTexInfo *aniTexInfo; // $v1
-	// 		struct TextureMT3 *baseTex; // $t0
-	// 		struct TextureMT3 *src; // $v0
-	// 		unsigned long frame; // $a1
-	// 		unsigned long lastFrame; // $v0
-	/* end block 1 */
-	// End offset: 0x800439C0
-	// End Line: 324
-
-	/* begin block 2 */
-		// Start line: 643
-	/* end block 2 */
-	// End Line: 644
-
-void FX_AniTexProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
-
-{
-  AniTex *pAVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  
-  if (gameTrackerX.gameMode != 6) {
-    pAVar1 = (fxPrim->ani).aniTextures;
-    uVar4 = SEXT24((fxPrim->ani).curFrame);
-    uVar3 = (pAVar1->aniTexInfo).speed;
-    uVar2 = (pAVar1->aniTexInfo).numFrames;
-    uVar5 = (uVar4 / uVar3) % uVar2;
-    if (((uVar5 == 0) && (uVar3 * uVar2 <= uVar4)) && (fxPrim->timeToLive == -1)) {
-      FX_Die(fxPrim,fxTracker);
-    }
-    else {
-      (fxPrim->ani).texMem = fxPrim->texture + uVar5 + 1;
-      (fxPrim->ani).curFrame = (fxPrim->ani).curFrame + 1;
-    }
-  }
-  return;
-}
-
-
-
-// decompiled code
-// original method signature: 
 // void /*$ra*/ FX_StandardProcess(struct _FX_PRIM *fxPrim /*$a0*/, struct _FXTracker *fxTracker /*$a1*/)
- // line 326, offset 0x800439d0
+ // line 353, offset 0x80042cb0
 	/* begin block 1 */
-		// Start line: 715
+		// Start line: 771
 	/* end block 1 */
-	// End Line: 716
+	// End Line: 772
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_StandardProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 
@@ -410,22 +307,24 @@ void FX_StandardProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_ShatterProcess(struct _FX_PRIM *fxPrim /*$s0*/, struct _FXTracker *fxTracker /*$s1*/)
- // line 362, offset 0x800439f0
+ // line 389, offset 0x80042cd0
 	/* begin block 1 */
-		// Start line: 363
-		// Start offset: 0x800439F0
+		// Start line: 390
+		// Start offset: 0x80042CD0
 		// Variables:
 	// 		struct MATRIX matrix; // stack offset -64
 	// 		struct _Rotation rotation; // stack offset -32
 	// 		struct _Rotation rot_temp; // stack offset -24
 	/* end block 1 */
-	// End offset: 0x80043CA0
-	// End Line: 409
+	// End offset: 0x80042F64
+	// End Line: 438
 
 	/* begin block 2 */
-		// Start line: 787
+		// Start line: 843
 	/* end block 2 */
-	// End Line: 788
+	// End Line: 844
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_ShatterProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 
@@ -437,15 +336,13 @@ void FX_ShatterProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
   int iVar5;
   int iVar6;
   int iVar7;
-  uint auStack64 [8];
+  MATRIX MStack64;
   short local_20;
   short local_1e;
   short local_1c;
-  short local_18;
-  short local_16;
-  short local_14;
+  SVECTOR local_18;
   
-  memset(&local_20,0,8);
+  memset();
   if (0 < fxPrim->timeToLive) {
     fxPrim->timeToLive = fxPrim->timeToLive + -1;
   }
@@ -454,7 +351,7 @@ void FX_ShatterProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
   }
   else {
     if ((fxPrim->flags & 2U) == 0) {
-      iVar5 = (int)(short)gameTrackerX.idleTime;
+      iVar5 = (int)(short)DAT_800d2314;
       sVar1 = *(short *)((int)&fxPrim->duo + 8);
       sVar2 = *(short *)((int)&fxPrim->duo + 10);
       *(short *)&fxPrim->duo =
@@ -481,23 +378,20 @@ void FX_ShatterProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
         p_Var4 = fxPrim->matrix;
         iVar7 = (int)local_1e;
         iVar6 = (int)local_1c;
-        local_18 = (short)(iVar5 * (p_Var4->lwTransform).m[0] >> 0xc) +
-                   (short)(iVar7 * (p_Var4->lwTransform).m[1] >> 0xc) +
-                   (short)(iVar6 * (p_Var4->lwTransform).m[2] >> 0xc);
+        local_18.vx = (short)(iVar5 * (p_Var4->lwTransform).m[0] >> 0xc) +
+                      (short)(iVar7 * (p_Var4->lwTransform).m[1] >> 0xc) +
+                      (short)(iVar6 * (p_Var4->lwTransform).m[2] >> 0xc);
         p_Var4 = fxPrim->matrix;
-        local_16 = (short)(iVar5 * (p_Var4->lwTransform).m[3] >> 0xc) +
-                   (short)(iVar7 * (p_Var4->lwTransform).m[4] >> 0xc) +
-                   (short)(iVar6 * (p_Var4->lwTransform).m[5] >> 0xc);
+        local_18.vy = (short)(iVar5 * (p_Var4->lwTransform).m[3] >> 0xc) +
+                      (short)(iVar7 * (p_Var4->lwTransform).m[4] >> 0xc) +
+                      (short)(iVar6 * (p_Var4->lwTransform).m[5] >> 0xc);
         p_Var4 = fxPrim->matrix;
-        local_14 = (short)(iVar5 * (p_Var4->lwTransform).m[6] >> 0xc) +
-                   (short)(iVar7 * (p_Var4->lwTransform).m[7] >> 0xc) +
-                   (short)(iVar6 * (p_Var4->lwTransform).m[8] >> 0xc);
-        RotMatrix(&local_18,auStack64);
-        MulMatrix2(auStack64,(uint *)&fxPrim->matrix->lwTransform);
+        local_18.vz = (short)(iVar5 * (p_Var4->lwTransform).m[6] >> 0xc) +
+                      (short)(iVar7 * (p_Var4->lwTransform).m[7] >> 0xc) +
+                      (short)(iVar6 * (p_Var4->lwTransform).m[8] >> 0xc);
+        RotMatrix(&local_18,&MStack64);
+        MulMatrix2(&MStack64,&fxPrim->matrix->lwTransform);
       }
-    }
-    if ((fxPrim->flags & 4U) != 0) {
-      FX_AniTexProcess(fxPrim,fxTracker);
     }
   }
   return;
@@ -507,37 +401,39 @@ void FX_ShatterProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ FX_DFacadeProcess(struct _FX_PRIM *fxPrim /*$s0*/, struct _FXTracker *fxTracker /*$a2*/)
- // line 547, offset 0x80043cb4
+// void /*$ra*/ FX_DFacadeProcess(struct _FX_PRIM *fxPrim /*$s0*/, struct _FXTracker *fxTracker /*$a1*/)
+ // line 576, offset 0x80042f78
 	/* begin block 1 */
-		// Start line: 548
-		// Start offset: 0x80043CB4
+		// Start line: 577
+		// Start offset: 0x80042F78
 
 		/* begin block 1.1 */
-			// Start line: 560
-			// Start offset: 0x80043D10
+			// Start line: 589
+			// Start offset: 0x80042FD0
 			// Variables:
 		// 		struct MATRIX *swTransform; // $v1
 		/* end block 1.1 */
-		// End offset: 0x80043D10
-		// End Line: 561
+		// End offset: 0x80042FD0
+		// End Line: 590
 
 		/* begin block 1.2 */
-			// Start line: 718
-			// Start offset: 0x80043E38
+			// Start line: 749
+			// Start offset: 0x800430DC
 			// Variables:
 		// 		struct _Rotation rot; // stack offset -16
 		/* end block 1.2 */
-		// End offset: 0x80043E98
-		// End Line: 726
+		// End offset: 0x8004313C
+		// End Line: 757
 	/* end block 1 */
-	// End offset: 0x80043E98
-	// End Line: 735
+	// End offset: 0x8004313C
+	// End Line: 766
 
 	/* begin block 2 */
-		// Start line: 1056
+		// Start line: 1114
 	/* end block 2 */
-	// End Line: 1057
+	// End Line: 1115
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_DFacadeProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 
@@ -550,12 +446,10 @@ void FX_DFacadeProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
   uint uVar6;
   short sVar7;
   
-  iVar5 = fxPrim->timeToLive;
-  if (0 < iVar5) {
-    fxPrim->timeToLive = iVar5 + -1;
-    iVar5 = fxPrim->timeToLive;
+  if (0 < fxPrim->timeToLive) {
+    fxPrim->timeToLive = fxPrim->timeToLive + -1;
   }
-  if (iVar5 == 0) {
+  if (fxPrim->timeToLive == 0) {
     FX_Die(fxPrim,fxTracker);
   }
   else {
@@ -587,16 +481,13 @@ void FX_DFacadeProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
       (fxPrim->position).y = *(short *)(iVar5 + 0x18);
       (fxPrim->position).z = *(short *)(iVar5 + 0x1c);
     }
-    if ((fxPrim->flags & 4U) != 0) {
-      FX_AniTexProcess(fxPrim,fxTracker);
-    }
     uVar6 = fxPrim->matrix->flags;
     if (((uVar6 & 2) == 0) && (fxPrim->matrix->flags = uVar6 | 2, (fxPrim->flags & 0x80U) != 0)) {
       cVar1 = *(char *)&fxPrim->work3;
       cVar2 = *(char *)((int)&fxPrim->work3 + 1);
-      RotMatrixX((int)*(char *)((int)&fxPrim->work2 + 1) << 2,(int)&fxPrim->matrix->lwTransform);
-      RotMatrixY((int)(short)((int)cVar1 << 2),(short *)&fxPrim->matrix->lwTransform);
-      RotMatrixZ((int)(short)((int)cVar2 << 2),(short *)&fxPrim->matrix->lwTransform);
+      RotMatrixX((int)*(char *)((int)&fxPrim->work2 + 1) << 2,&fxPrim->matrix->lwTransform);
+      RotMatrixY((int)(short)((int)cVar1 << 2),&fxPrim->matrix->lwTransform);
+      RotMatrixZ((int)(short)((int)cVar2 << 2),&fxPrim->matrix->lwTransform);
     }
   }
   return;
@@ -607,31 +498,35 @@ void FX_DFacadeProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 // decompiled code
 // original method signature: 
 // struct _FX_PRIM * /*$ra*/ _FX_BuildSingleFaceWithModel(struct _Model *model /*$a0*/, struct _MFace *mface /*$s6*/, struct SVECTOR *center /*$s7*/, struct SVECTOR *vel /*$fp*/, struct SVECTOR *accl /*stack 16*/, struct _FXTracker *fxTracker /*stack 20*/, TDRFuncPtr__FX_BuildSingleFaceWithModel6fxSetup fxSetup /*stack 24*/, TDRFuncPtr__FX_BuildSingleFaceWithModel7fxProcess fxProcess /*stack 28*/, struct _FX_MATRIX *fxMatrix /*stack 32*/, int timeToLive /*stack 36*/)
- // line 818, offset 0x80043ea8
+ // line 849, offset 0x8004314c
 	/* begin block 1 */
-		// Start line: 819
-		// Start offset: 0x80043EA8
+		// Start line: 850
+		// Start offset: 0x8004314C
 		// Variables:
 	// 		struct _FX_PRIM *fxPrim; // $s1
 	// 		struct _MVertex *vertexList; // $s3
 	/* end block 1 */
-	// End offset: 0x80043F70
-	// End Line: 847
+	// End offset: 0x80043214
+	// End Line: 878
 
 	/* begin block 2 */
-		// Start line: 1586
+		// Start line: 1650
 	/* end block 2 */
-	// End Line: 1587
+	// End Line: 1651
+
+/* File: C:\kain2\game\FX.C */
 
 _FX_PRIM *
 _FX_BuildSingleFaceWithModel
-          (_Model *model,_MFace *mface,SVECTOR *center,SVECTOR *vel,SVECTOR *accl,
+          (_Model *model,_MFace *mface,undefined center,undefined vel,undefined1 accl,
           _FXTracker *fxTracker,TDRFuncPtr__FX_BuildSingleFaceWithModel6fxSetup fxSetup,
           TDRFuncPtr__FX_BuildSingleFaceWithModel7fxProcess fxProcess,_FX_MATRIX *fxMatrix,
           int timeToLive)
 
 {
   _FX_PRIM *node;
+  undefined3 in_register_00000019;
+  undefined3 in_register_0000001d;
   _MVertex *p_Var1;
   
   p_Var1 = model->vertexList;
@@ -642,8 +537,8 @@ _FX_BuildSingleFaceWithModel
   node = FX_GetPrim(fxTracker);
   if (node != (_FX_PRIM *)0x0) {
     if (fxSetup != (TDRFuncPtr__FX_BuildSingleFaceWithModel6fxSetup)0x0) {
-      (*fxSetup)(node,fxProcess,fxMatrix,0,mface,p_Var1,center,vel,accl,fxTracker,
-                 (int)(short)timeToLive);
+      (*fxSetup)(node,fxProcess,fxMatrix,0,mface,p_Var1,CONCAT31(in_register_00000019,center),
+                 CONCAT31(in_register_0000001d,vel),_accl,fxTracker,(int)(short)timeToLive);
     }
     LIST_InsertFunc(&fxTracker->usedPrimList,(NodeType *)node);
   }
@@ -655,15 +550,17 @@ _FX_BuildSingleFaceWithModel
 // decompiled code
 // original method signature: 
 // struct _FX_PRIM * /*$ra*/ FX_BuildSingleFaceWithModel(struct _Model *model /*$a0*/, struct _MFace *mface /*$a1*/, struct SVECTOR *center /*$a2*/, struct SVECTOR *vel /*$a3*/, struct SVECTOR *accl /*stack 16*/, struct _FXTracker *fxTracker /*stack 20*/, TDRFuncPtr_FX_BuildSingleFaceWithModel6fxSetup fxSetup /*stack 24*/, TDRFuncPtr_FX_BuildSingleFaceWithModel7fxProcess fxProcess /*stack 28*/, int timeToLive /*stack 32*/)
- // line 852, offset 0x80043fa4
+ // line 883, offset 0x80043248
 	/* begin block 1 */
-		// Start line: 1654
+		// Start line: 1718
 	/* end block 1 */
-	// End Line: 1655
+	// End Line: 1719
+
+/* File: C:\kain2\game\FX.C */
 
 _FX_PRIM *
 FX_BuildSingleFaceWithModel
-          (_Model *model,_MFace *mface,SVECTOR *center,SVECTOR *vel,SVECTOR *accl,
+          (_Model *model,_MFace *mface,undefined1 center,undefined1 vel,undefined1 accl,
           _FXTracker *fxTracker,TDRFuncPtr_FX_BuildSingleFaceWithModel6fxSetup fxSetup,
           TDRFuncPtr_FX_BuildSingleFaceWithModel7fxProcess fxProcess,int timeToLive)
 
@@ -683,30 +580,31 @@ FX_BuildSingleFaceWithModel
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _FX_SetupLighting(struct _Instance *instance /*$s0*/)
- // line 879, offset 0x80043ff4
+ // line 910, offset 0x80043298
 	/* begin block 1 */
-		// Start line: 880
-		// Start offset: 0x80043FF4
+		// Start line: 911
+		// Start offset: 0x80043298
 		// Variables:
 	// 		struct MATRIX lm; // stack offset -40
 	/* end block 1 */
-	// End offset: 0x80043FF4
-	// End Line: 880
+	// End offset: 0x80043298
+	// End Line: 911
 
 	/* begin block 2 */
-		// Start line: 1752
+		// Start line: 1814
 	/* end block 2 */
-	// End Line: 1753
+	// End Line: 1815
+
+/* File: C:\kain2\game\FX.C */
 
 void _FX_SetupLighting(_Instance *instance)
 
 {
   MATRIX MStack40;
   
-  LIGHT_PresetInstanceLight(instance,0x800,&MStack40);
-  MulMatrix0((undefined4 *)&MStack40,(ushort *)(instance->matrix + instance->lightMatrix),
-             (uint *)&MStack40);
-  SetLightMatrix((undefined4 *)&MStack40);
+  LIGHT_PresetInstanceLight(instance,0x800,0xd8);
+  MulMatrix0(&MStack40,instance->matrix + instance->lightMatrix,&MStack40);
+  SetLightMatrix(&MStack40);
   return;
 }
 
@@ -715,22 +613,24 @@ void _FX_SetupLighting(_Instance *instance)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ _FX_DoLighting(struct _MFace *mface /*$a0*/)
- // line 890, offset 0x80044044
+ // line 921, offset 0x800432e8
 	/* begin block 1 */
-		// Start line: 891
-		// Start offset: 0x80044044
+		// Start line: 922
+		// Start offset: 0x800432E8
 		// Variables:
 	// 		long modelDQP; // $a2
 	// 		long color; // stack offset -8
 	// 		struct TextureMT3 *texture; // $a1
 	/* end block 1 */
-	// End offset: 0x80044150
-	// End Line: 923
+	// End offset: 0x800433F4
+	// End Line: 954
 
 	/* begin block 2 */
-		// Start line: 1706
+		// Start line: 1770
 	/* end block 2 */
-	// End Line: 1707
+	// End Line: 1771
+
+/* File: C:\kain2\game\FX.C */
 
 long _FX_DoLighting(_MFace *mface)
 
@@ -746,8 +646,8 @@ long _FX_DoLighting(_MFace *mface)
   bVar1 = mface->flags;
   if ((bVar1 & 2) == 0) {
     if ((bVar1 & 8) == 0) {
-      setCopReg(2,in_zero,*(undefined4 *)(&gNormalList + mface->normal));
-      setCopReg(2,in_at,*(undefined4 *)&(&gNormalList)[mface->normal].z);
+      setCopReg(2,in_zero,*(undefined4 *)(gNormalList + mface->normal));
+      setCopReg(2,in_at,*(undefined4 *)&gNormalList[mface->normal].z);
       setCopReg(2,0,mface->color);
       setCopReg(2,0x4000,0);
       copFunction(2,0xe80413);
@@ -762,8 +662,8 @@ long _FX_DoLighting(_MFace *mface)
   else {
     iVar4 = mface->color;
     if ((bVar1 & 8) == 0) {
-      setCopReg(2,in_zero,*(undefined4 *)(&gNormalList + mface->normal));
-      setCopReg(2,in_at,*(undefined4 *)&(&gNormalList)[mface->normal].z);
+      setCopReg(2,in_zero,*(undefined4 *)(gNormalList + mface->normal));
+      setCopReg(2,in_at,*(undefined4 *)&gNormalList[mface->normal].z);
       setCopReg(2,0,*(undefined4 *)(iVar4 + 0xc));
       setCopReg(2,0x4000,0);
       copFunction(2,0xe80413);
@@ -783,16 +683,16 @@ long _FX_DoLighting(_MFace *mface)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _FX_BuildSegmentedSplinters(struct _Instance *instance /*stack 0*/, struct SVECTOR *center /*stack 4*/, struct SVECTOR *vel /*stack 8*/, struct SVECTOR *accl /*stack 12*/, struct FXSplinter *splintDef /*stack 16*/, struct _FXTracker *fxTracker /*stack 20*/, TDRFuncPtr__FX_BuildSegmentedSplinters6fxSetup fxSetup /*stack 24*/, TDRFuncPtr__FX_BuildSegmentedSplinters7fxProcess fxProcess /*stack 28*/, int shardFlags /*stack 32*/)
- // line 938, offset 0x8004415c
+ // line 969, offset 0x80043400
 	/* begin block 1 */
-		// Start line: 939
-		// Start offset: 0x8004415C
+		// Start line: 970
+		// Start offset: 0x80043400
 		// Variables:
 	// 		long j; // $s4
 	// 		long maxTimeToLive; // stack offset -80
 	// 		long faceSkip; // stack offset -76
 	// 		long numFaces; // $v0
-	// 		struct _MFace *mface; // $s7
+	// 		struct _MFace *mface; // $s5
 	// 		struct _MFace *endMFace; // stack offset -72
 	// 		struct _Model *model; // stack offset -68
 	// 		struct _MVertex *vertexList; // stack offset -64
@@ -800,7 +700,7 @@ long _FX_DoLighting(_MFace *mface)
 	// 		struct _FX_MATRIX *fxMatrix; // $s3
 	// 		struct _FX_MATRIX (*fxMatList[60]); // stack offset -960
 	// 		struct _SVector veloc[60]; // stack offset -720
-	// 		struct _SVector *curVel; // $s6
+	// 		struct _SVector *curVel; // $s7
 	// 		int lastFxMat; // $fp
 	// 		unsigned char matIdx[128]; // stack offset -240
 	// 		struct _FX_PRIM *fxPrim; // $s2
@@ -810,13 +710,13 @@ long _FX_DoLighting(_MFace *mface)
 	// 		struct _SVector *poolOfVertices; // stack offset -60
 	// 		long *vtxSegment; // stack offset -56
 	// 		struct _Vector Center; // stack offset -112
-	// 		int seg0; // $s5
+	// 		int seg0; // $s6
 	// 		int seg1; // $a0
 	// 		struct _SVector offset; // stack offset -96
 
 		/* begin block 1.1 */
-			// Start line: 1021
-			// Start offset: 0x8004434C
+			// Start line: 1052
+			// Start offset: 0x800435F0
 			// Variables:
 		// 		short _y0; // $v0
 		// 		short _z0; // $v1
@@ -826,19 +726,19 @@ long _FX_DoLighting(_MFace *mface)
 		// 		struct _SVector *_v; // stack offset -48
 		// 		struct _Vector *_v1; // $a2
 		/* end block 1.1 */
-		// End offset: 0x8004434C
-		// End Line: 1021
+		// End offset: 0x800435F0
+		// End Line: 1052
 
 		/* begin block 1.2 */
-			// Start line: 1034
-			// Start offset: 0x800443E0
+			// Start line: 1065
+			// Start offset: 0x80043684
 		/* end block 1.2 */
-		// End offset: 0x800444A0
-		// End Line: 1045
+		// End offset: 0x80043744
+		// End Line: 1076
 
 		/* begin block 1.3 */
-			// Start line: 1098
-			// Start offset: 0x80044798
+			// Start line: 1129
+			// Start offset: 0x80043A3C
 			// Variables:
 		// 		short _x0; // $a1
 		// 		short _y0; // $v1
@@ -849,39 +749,51 @@ long _FX_DoLighting(_MFace *mface)
 		// 		struct _Position *_v0; // $v0
 		// 		struct _Vector *_v1; // $a2
 		/* end block 1.3 */
-		// End offset: 0x80044798
-		// End Line: 1098
+		// End offset: 0x80043A3C
+		// End Line: 1129
 
 		/* begin block 1.4 */
-			// Start line: 1141
-			// Start offset: 0x8004495C
+			// Start line: 1158
+			// Start offset: 0x80043B78
+			// Variables:
+		// 		struct TextureMT3 *texture; // $v1
 		/* end block 1.4 */
-		// End offset: 0x800449BC
-		// End Line: 1146
+		// End offset: 0x80043B78
+		// End Line: 1158
 
 		/* begin block 1.5 */
-			// Start line: 1163
-			// Start offset: 0x80044A30
+			// Start line: 1188
+			// Start offset: 0x80043C44
 		/* end block 1.5 */
-		// End offset: 0x80044A78
-		// End Line: 1169
+		// End offset: 0x80043CA4
+		// End Line: 1193
+
+		/* begin block 1.6 */
+			// Start line: 1210
+			// Start offset: 0x80043D18
+		/* end block 1.6 */
+		// End offset: 0x80043D60
+		// End Line: 1216
 	/* end block 1 */
-	// End offset: 0x80044B6C
-	// End Line: 1189
+	// End offset: 0x80043E54
+	// End Line: 1236
 
 	/* begin block 2 */
-		// Start line: 1804
+		// Start line: 1868
 	/* end block 2 */
-	// End Line: 1805
+	// End Line: 1869
 
 	/* begin block 3 */
-		// Start line: 1834
+		// Start line: 1898
 	/* end block 3 */
-	// End Line: 1835
+	// End Line: 1899
+
+/* File: C:\kain2\game\FX.C */
 
 void _FX_BuildSegmentedSplinters
-               (_Instance *instance,SVECTOR *center,SVECTOR *vel,SVECTOR *accl,FXSplinter *splintDef
-               ,_FXTracker *fxTracker,TDRFuncPtr__FX_BuildSegmentedSplinters6fxSetup fxSetup,
+               (_Instance *instance,undefined center,undefined vel,undefined accl,
+               FXSplinter *splintDef,_FXTracker *fxTracker,
+               TDRFuncPtr__FX_BuildSegmentedSplinters6fxSetup fxSetup,
                TDRFuncPtr__FX_BuildSegmentedSplinters7fxProcess fxProcess,int shardFlags)
 
 {
@@ -892,21 +804,26 @@ void _FX_BuildSegmentedSplinters
   _FX_MATRIX *p_Var5;
   int iVar6;
   int iVar7;
-  uint uVar8;
   _FX_PRIM *fxPrim;
+  uint uVar8;
   long lVar9;
   short sVar10;
-  CVECTOR CVar11;
+  int iVar11;
+  uint uVar12;
+  undefined3 in_register_00000015;
+  undefined3 in_register_00000019;
+  short *psVar13;
+  undefined3 in_register_0000001d;
   _MFace *mface;
-  int iVar12;
-  _PVertex *p_Var13;
   int iVar14;
-  _PVertex *p_Var15;
-  _PVertex *p_Var16;
-  undefined2 *puVar17;
-  _MFace *p_Var18;
-  int iVar19;
-  byte bVar20;
+  _SVector *p_Var15;
+  _SVector *p_Var16;
+  int iVar17;
+  _SVector *p_Var18;
+  _MFace *p_Var19;
+  undefined2 *puVar20;
+  int iVar21;
+  byte bVar22;
   _FX_MATRIX *local_3c0 [60];
   undefined auStack720 [480];
   byte abStack240 [128];
@@ -920,26 +837,26 @@ void _FX_BuildSegmentedSplinters
   _MFace *local_48;
   _Model *local_44;
   _MVertex *local_40;
-  _VertexPool *local_3c;
-  CVECTOR *local_38;
+  _SVector *local_3c;
+  _SVector *local_38;
   undefined *local_34;
   _Normal *local_30;
   
-  local_3c = gameTrackerX.vertexPool;
-  local_38 = (gameTrackerX.vertexPool)->color;
+  psVar13 = (short *)CONCAT31(in_register_00000019,vel);
+  local_3c = DAT_800d2108;
+  local_38 = DAT_800d2108 + 0x210;
   local_44 = instance->object->modelList[instance->currentModel];
   local_58 = (ushort)shardFlags;
   local_40 = local_44->vertexList;
   mface = local_44->faceList;
-  PIPE3D_TransformVerticesToWorld
-            (instance,(_SVector *)gameTrackerX.vertexPool,(long *)local_38,(_Vector *)local_70);
+  PIPE3D_TransformVerticesToWorld(instance,DAT_800d2108,(long *)local_38,(_Vector *)local_70);
   if (splintDef == (FXSplinter *)0x0) {
     local_50 = 0x20;
   }
   else {
     local_50 = (int)splintDef->lifetime;
   }
-  memset(abStack240,0xff,0x80);
+  memset();
   _FX_SetupLighting(instance);
   if (splintDef == (FXSplinter *)0x0) {
     local_4c = 1;
@@ -947,120 +864,121 @@ void _FX_BuildSegmentedSplinters
   else {
     local_4c = local_44->numFaces / (int)splintDef->faceLimit + 1;
   }
-  iVar19 = 0;
+  iVar21 = 0;
   local_48 = mface + local_44->numFaces;
   if (mface < mface + local_44->numFaces) {
     local_34 = auStack720;
     local_30 = &local_60;
     do {
-      CVar11 = local_38[(mface->face).v2];
-      if ((int)local_38[(mface->face)._3] < (int)local_38[(mface->face).v2]) {
-        CVar11 = local_38[(mface->face)._3];
+      iVar11 = *(int *)(&local_38->x + (uint)(mface->face).v2 * 2);
+      if (*(int *)(&local_38->x + (uint)(mface->face).v1 * 2) <
+          *(int *)(&local_38->x + (uint)(mface->face).v2 * 2)) {
+        iVar11 = *(int *)(&local_38->x + (uint)(mface->face).v1 * 2);
       }
-      if ((int)local_38[(mface->face)._2] < (int)CVar11) {
-        CVar11 = local_38[(mface->face)._2];
+      if (*(int *)(&local_38->x + (uint)(mface->face).v0 * 2) < iVar11) {
+        iVar11 = *(int *)(&local_38->x + (uint)(mface->face).v0 * 2);
       }
-      if (abStack240[(int)CVar11] == 0xff) {
-        if (iVar19 < 0x3c) {
+      if (abStack240[iVar11] == 0xff) {
+        if (iVar21 < 0x3c) {
           p_Var5 = FX_GetMatrix(fxTracker);
           if (p_Var5 == (_FX_MATRIX *)0x0) {
-            if (iVar19 == 0) {
+            if (iVar21 == 0) {
               return;
             }
-            goto LAB_800445e4;
+            goto LAB_80043888;
           }
-          local_3c0[iVar19] = p_Var5;
-          bVar20 = (byte)iVar19;
-          local_60.y = *(short *)(instance->matrix[(int)CVar11].t + 1);
-          local_60.z = *(short *)(instance->matrix[(int)CVar11].t + 2);
-          local_60.x = *(short *)instance->matrix[(int)CVar11].t - local_70[0];
+          local_3c0[iVar21] = p_Var5;
+          bVar22 = (byte)iVar21;
+          local_60.y = *(short *)(instance->matrix[iVar11].t + 1);
+          local_60.z = *(short *)(instance->matrix[iVar11].t + 2);
+          local_60.x = *(short *)instance->matrix[iVar11].t - local_70[0];
           local_30->y = local_30->y - local_6c;
           local_30->z = local_30->z - local_68;
           MATH3D_Normalize(local_30);
           if (splintDef == (FXSplinter *)0x0) {
-            iVar14 = rand();
-            puVar17 = (undefined2 *)(local_34 + iVar19 * 8);
-            iVar7 = iVar14;
-            if (iVar14 < 0) {
-              iVar7 = iVar14 + 7;
+            iVar17 = rand();
+            puVar20 = (undefined2 *)(local_34 + iVar21 * 8);
+            iVar7 = iVar17;
+            if (iVar17 < 0) {
+              iVar7 = iVar17 + 7;
             }
-            *puVar17 = (short)((int)local_60.x * (iVar14 + (iVar7 >> 3) * -8 + 0x1a) >> 0xc);
-            iVar14 = rand();
-            iVar7 = iVar14;
-            if (iVar14 < 0) {
-              iVar7 = iVar14 + 7;
+            *puVar20 = (short)((int)local_60.x * (iVar17 + (iVar7 >> 3) * -8 + 0x1a) >> 0xc);
+            iVar17 = rand();
+            iVar7 = iVar17;
+            if (iVar17 < 0) {
+              iVar7 = iVar17 + 7;
             }
-            puVar17[1] = (short)((int)local_60.y * (iVar14 + (iVar7 >> 3) * -8 + 0x1a) >> 0xc);
-            iVar14 = rand();
-            iVar7 = iVar14;
-            if (iVar14 < 0) {
-              iVar7 = iVar14 + 7;
+            puVar20[1] = (short)((int)local_60.y * (iVar17 + (iVar7 >> 3) * -8 + 0x1a) >> 0xc);
+            iVar17 = rand();
+            iVar7 = iVar17;
+            if (iVar17 < 0) {
+              iVar7 = iVar17 + 7;
             }
-            puVar17[2] = (short)((int)local_60.z * (iVar14 + (iVar7 >> 3) * -8 + 0x2e) >> 0xc);
+            puVar20[2] = (short)((int)local_60.z * (iVar17 + (iVar7 >> 3) * -8 + 0x2e) >> 0xc);
           }
           else {
             iVar7 = (uint)(ushort)splintDef->chunkVelXY - (uint)(ushort)splintDef->chunkVelRng;
-            iVar14 = (int)((uint)(ushort)splintDef->chunkVelRng << 0x11) >> 0x10;
-            if (iVar14 == 0) {
+            iVar17 = (int)((uint)(ushort)splintDef->chunkVelRng << 0x11) >> 0x10;
+            if (iVar17 == 0) {
               iVar7 = iVar7 * 0x10000 >> 0x10;
-              puVar17 = (undefined2 *)(local_34 + iVar19 * 8);
-              *puVar17 = (short)(local_60.x * iVar7 >> 0xc);
-              puVar17[1] = (short)(local_60.y * iVar7 >> 0xc);
-              puVar17[2] = (short)((int)local_60.z * (int)splintDef->chunkVelZ >> 0xc);
+              puVar20 = (undefined2 *)(local_34 + iVar21 * 8);
+              *puVar20 = (short)(local_60.x * iVar7 >> 0xc);
+              puVar20[1] = (short)(local_60.y * iVar7 >> 0xc);
+              puVar20[2] = (short)((int)local_60.z * (int)splintDef->chunkVelZ >> 0xc);
             }
             else {
               iVar6 = rand();
-              iVar12 = iVar7 * 0x10000 >> 0x10;
-              puVar17 = (undefined2 *)(local_34 + iVar19 * 8);
-              *puVar17 = (short)((int)local_60.x * (iVar12 + iVar6 % iVar14) >> 0xc);
+              iVar14 = iVar7 * 0x10000 >> 0x10;
+              puVar20 = (undefined2 *)(local_34 + iVar21 * 8);
+              *puVar20 = (short)((int)local_60.x * (iVar14 + iVar6 % iVar17) >> 0xc);
               iVar7 = rand();
-              puVar17[1] = (short)((int)local_60.y * (iVar12 + iVar7 % iVar14) >> 0xc);
+              puVar20[1] = (short)((int)local_60.y * (iVar14 + iVar7 % iVar17) >> 0xc);
               uVar1 = splintDef->chunkVelZ;
               uVar2 = splintDef->chunkVelRng;
               iVar7 = rand();
-              puVar17[2] = (short)((int)local_60.z *
+              puVar20[2] = (short)((int)local_60.z *
                                    (((int)(((uint)uVar1 - (uint)uVar2) * 0x10000) >> 0x10) +
-                                   iVar7 % iVar14) >> 0xc);
+                                   iVar7 % iVar17) >> 0xc);
             }
           }
-          puVar17 = (undefined2 *)(local_34 + iVar19 * 8);
-          if ((int)((uint)(ushort)puVar17[2] << 0x10) < 0) {
-            puVar17[2] = 0;
+          puVar20 = (undefined2 *)(local_34 + iVar21 * 8);
+          if ((int)((uint)(ushort)puVar20[2] << 0x10) < 0) {
+            puVar20[2] = 0;
           }
-          iVar19 = iVar19 + 1;
+          iVar21 = iVar21 + 1;
         }
         else {
-LAB_800445e4:
+LAB_80043888:
           iVar7 = rand();
-          iVar7 = iVar7 % iVar19;
-          bVar20 = (byte)iVar7;
+          iVar7 = iVar7 % iVar21;
+          bVar22 = (byte)iVar7;
           p_Var5 = local_3c0[iVar7];
-          puVar17 = (undefined2 *)(local_34 + iVar7 * 8);
+          puVar20 = (undefined2 *)(local_34 + iVar7 * 8);
         }
-        abStack240[(int)CVar11] = bVar20;
+        abStack240[iVar11] = bVar22;
       }
       else {
-        uVar8 = (uint)abStack240[(int)CVar11];
-        puVar17 = (undefined2 *)(local_34 + uVar8 * 8);
+        uVar8 = (uint)abStack240[iVar11];
+        puVar20 = (undefined2 *)(local_34 + uVar8 * 8);
         p_Var5 = local_3c0[uVar8];
       }
-      (p_Var5->lwTransform).m[0] = 0x1000;
-      (p_Var5->lwTransform).m[1] = 0;
-      (p_Var5->lwTransform).m[2] = 0;
-      (p_Var5->lwTransform).m[3] = 0;
-      (p_Var5->lwTransform).m[4] = 0x1000;
-      (p_Var5->lwTransform).m[5] = 0;
-      (p_Var5->lwTransform).m[6] = 0;
-      (p_Var5->lwTransform).m[7] = 0;
-      (p_Var5->lwTransform).m[8] = 0x1000;
-      (p_Var5->lwTransform).t[0] = instance->matrix[(int)CVar11].t[0];
-      (p_Var5->lwTransform).t[1] = instance->matrix[(int)CVar11].t[1];
-      (p_Var5->lwTransform).t[2] = instance->matrix[(int)CVar11].t[2];
-      p_Var13 = local_3c->vertex + (mface->face)._2;
-      p_Var15 = local_3c->vertex + (mface->face)._3;
-      p_Var16 = local_3c->vertex + (mface->face).v2;
+      (p_Var5->lwTransform).m[0] = identityMatrix[0][0];
+      (p_Var5->lwTransform).m[1] = identityMatrix[0][1];
+      (p_Var5->lwTransform).m[2] = identityMatrix[0][2];
+      (p_Var5->lwTransform).m[3] = identityMatrix[1][0];
+      (p_Var5->lwTransform).m[4] = identityMatrix[1][1];
+      (p_Var5->lwTransform).m[5] = identityMatrix[1][2];
+      (p_Var5->lwTransform).m[6] = identityMatrix[2][0];
+      (p_Var5->lwTransform).m[7] = identityMatrix[2][1];
+      (p_Var5->lwTransform).m[8] = identityMatrix[2][2];
+      (p_Var5->lwTransform).t[0] = instance->matrix[iVar11].t[0];
+      (p_Var5->lwTransform).t[1] = instance->matrix[iVar11].t[1];
+      (p_Var5->lwTransform).t[2] = instance->matrix[iVar11].t[2];
+      p_Var15 = local_3c + (mface->face).v0;
+      p_Var16 = local_3c + (mface->face).v1;
+      p_Var18 = local_3c + (mface->face).v2;
       fxPrim = FX_GetPrim(fxTracker);
-      p_Var18 = local_48;
+      p_Var19 = local_48;
       if (fxPrim != (_FX_PRIM *)0x0) {
         if (fxSetup == (TDRFuncPtr__FX_BuildSegmentedSplinters6fxSetup)0x0) {
           (fxPrim->position).x = *(short *)(p_Var5->lwTransform).t;
@@ -1070,53 +988,66 @@ LAB_800445e4:
           local_60.x = (fxPrim->position).x - local_70[0];
           local_30->y = (fxPrim->position).y - local_6c;
           local_30->z = sVar4 - local_68;
-          (fxPrim->_2).x = p_Var13->x - local_60.x;
-          (fxPrim->_2).y = (&p_Var13->x)[1] - local_60.y;
-          (fxPrim->_2).z = (&p_Var13->x)[2] - local_60.z;
-          (fxPrim->_3).x = p_Var15->x - local_60.x;
-          (fxPrim->_3).y = (&p_Var15->x)[1] - local_60.y;
-          (fxPrim->_3).z = (&p_Var15->x)[2] - local_60.z;
-          (fxPrim->v2).x = p_Var16->x - local_60.x;
-          (fxPrim->v2).y = (&p_Var16->x)[1] - local_60.y;
-          sVar4 = (&p_Var16->x)[2];
+          (fxPrim->v0).x = p_Var15->x - local_60.x;
+          (fxPrim->v0).y = p_Var15->y - local_60.y;
+          (fxPrim->v0).z = p_Var15->z - local_60.z;
+          (fxPrim->v1).x = p_Var16->x - local_60.x;
+          (fxPrim->v1).y = p_Var16->y - local_60.y;
+          (fxPrim->v1).z = p_Var16->z - local_60.z;
+          (fxPrim->v2).x = p_Var18->x - local_60.x;
+          (fxPrim->v2).y = p_Var18->y - local_60.y;
+          sVar4 = p_Var18->z;
           fxPrim->matrix = p_Var5;
           (fxPrim->v2).z = sVar4 - local_60.z;
-          if ((instance->flags & 0x80U) == 0) {
-            FX_AniTexSetup(fxPrim,mface,local_44,fxTracker);
+          FX_AniTexSetup(fxPrim,mface,local_44,fxTracker);
+          if ((local_58 & 0x40) == 0) {
+            lVar9 = _FX_DoLighting(mface);
+            fxPrim->color = lVar9;
           }
           else {
-            FX_NoAutoAniTexSetup(fxPrim,mface,local_44,fxTracker,instance);
+            if ((mface->flags & 2) == 0) {
+              uVar12 = mface->color & 0xffffff;
+              fxPrim->color = uVar12;
+              uVar12 = uVar12 | 0x20000000;
+              uVar8 = mface->color;
+            }
+            else {
+              iVar11 = mface->color;
+              uVar12 = *(uint *)(iVar11 + 0xc) & 0xffffff;
+              fxPrim->color = uVar12;
+              uVar12 = uVar12 | 0x24000000;
+              uVar8 = *(uint *)(iVar11 + 0xc);
+            }
+            fxPrim->color = uVar12 | uVar8 & 0x3000000;
           }
-          lVar9 = _FX_DoLighting(mface);
-          fxPrim->color = lVar9;
           if (fxProcess == (TDRFuncPtr__FX_BuildSegmentedSplinters7fxProcess)0x0) {
             *(code **)&fxPrim->process = FX_ShatterProcess;
           }
           else {
             *(TDRFuncPtr__FX_BuildSegmentedSplinters7fxProcess *)&fxPrim->process = fxProcess;
           }
-          *(undefined2 *)&fxPrim->duo = *puVar17;
-          *(undefined2 *)((int)&fxPrim->duo + 2) = puVar17[1];
-          *(undefined2 *)((int)&fxPrim->duo + 4) = puVar17[2];
+          *(undefined2 *)&fxPrim->duo = *puVar20;
+          *(undefined2 *)((int)&fxPrim->duo + 2) = puVar20[1];
+          *(undefined2 *)((int)&fxPrim->duo + 4) = puVar20[2];
           if (splintDef != (FXSplinter *)0x0) {
             sVar4 = splintDef->triVelRng;
             if ((int)sVar4 != 0) {
               sVar10 = -splintDef->triVelRng;
-              iVar7 = rand();
-              iVar14 = ((int)sVar4 << 0x11) >> 0x10;
-              *(short *)&fxPrim->duo = *(short *)&fxPrim->duo + sVar10 + (short)(iVar7 % iVar14);
-              iVar7 = rand();
+              iVar11 = rand();
+              iVar7 = ((int)sVar4 << 0x11) >> 0x10;
+              *(short *)&fxPrim->duo = *(short *)&fxPrim->duo + sVar10 + (short)(iVar11 % iVar7);
+              iVar11 = rand();
               *(short *)((int)&fxPrim->duo + 2) =
-                   *(short *)((int)&fxPrim->duo + 2) + sVar10 + (short)(iVar7 % iVar14);
-              iVar7 = rand();
+                   *(short *)((int)&fxPrim->duo + 2) + sVar10 + (short)(iVar11 % iVar7);
+              iVar11 = rand();
               *(short *)((int)&fxPrim->duo + 4) =
-                   *(short *)((int)&fxPrim->duo + 4) + sVar10 + (short)(iVar7 % iVar14);
+                   *(short *)((int)&fxPrim->duo + 4) + sVar10 + (short)(iVar11 % iVar7);
             }
           }
-          if (vel != (SVECTOR *)0x0) {
-            *(short *)&fxPrim->duo = *(short *)&fxPrim->duo + vel->vx;
-            *(short *)((int)&fxPrim->duo + 2) = *(short *)((int)&fxPrim->duo + 2) + vel->vy;
-            *(short *)((int)&fxPrim->duo + 4) = *(short *)((int)&fxPrim->duo + 4) + vel->vz;
+          if (psVar13 != (short *)0x0) {
+            *(short *)&fxPrim->duo = *(short *)&fxPrim->duo + *psVar13;
+            *(short *)((int)&fxPrim->duo + 2) = *(short *)((int)&fxPrim->duo + 2) + psVar13[1];
+            *(short *)((int)&fxPrim->duo + 4) = *(short *)((int)&fxPrim->duo + 4) + psVar13[2];
           }
           *(undefined2 *)((int)&fxPrim->duo + 6) = 0;
           *(undefined2 *)((int)&fxPrim->duo + 8) = 0;
@@ -1124,12 +1055,12 @@ LAB_800445e4:
           fxPrim->timeToLive = local_50;
           if (splintDef == (FXSplinter *)0x0) {
             *(undefined2 *)((int)&fxPrim->duo + 10) = 0xfff8;
-            iVar14 = rand();
-            iVar7 = iVar14;
-            if (iVar14 < 0) {
-              iVar7 = iVar14 + 7;
+            iVar7 = rand();
+            iVar11 = iVar7;
+            if (iVar7 < 0) {
+              iVar11 = iVar7 + 7;
             }
-            fxPrim->work3 = (short)iVar14 + (short)(iVar7 >> 3) * -8 + -4;
+            fxPrim->work3 = (short)iVar7 + (short)(iVar11 >> 3) * -8 + -4;
           }
           else {
             sVar4 = splintDef->rotRateRng;
@@ -1137,8 +1068,8 @@ LAB_800445e4:
               fxPrim->work3 = 0;
             }
             else {
-              iVar7 = rand();
-              fxPrim->work3 = (short)(iVar7 % (((int)sVar4 << 0x11) >> 0x10)) - sVar4;
+              iVar11 = rand();
+              fxPrim->work3 = (short)(iVar11 % (((int)sVar4 << 0x11) >> 0x10)) - sVar4;
             }
             *(short *)((int)&fxPrim->duo + 10) = splintDef->gravityZ;
           }
@@ -1149,19 +1080,20 @@ LAB_800445e4:
             sVar3 = (fxPrim->position).z;
             sVar4 = sVar3 + -0x32;
             if ((sVar10 <= (fxPrim->position).z) &&
-               (sVar4 = sVar3 + -0x32, (instance->object->oflags & 0x200U) != 0)) goto LAB_80044b28;
+               (sVar4 = sVar3 + -0x32, (instance->object->oflags & 0x200U) != 0)) goto LAB_80043e10;
           }
           fxPrim->work0 = sVar4;
         }
         else {
-          (*fxSetup)(fxPrim,fxProcess,p_Var5,instance,mface,local_40,center,vel,accl,fxTracker,0x1e)
-          ;
+          (*fxSetup)(fxPrim,fxProcess,p_Var5,instance,mface,local_40,
+                     CONCAT31(in_register_00000015,center),psVar13,
+                     CONCAT31(in_register_0000001d,accl),fxTracker,0x1e);
         }
-LAB_80044b28:
+LAB_80043e10:
         LIST_InsertFunc(&fxTracker->usedPrimList,(NodeType *)fxPrim);
-        p_Var18 = mface;
+        p_Var19 = mface;
       }
-      mface = p_Var18 + local_4c;
+      mface = p_Var19 + local_4c;
     } while (mface < local_48);
   }
   return;
@@ -1171,11 +1103,11 @@ LAB_80044b28:
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ _FX_BuildNonSegmentedSplinters(struct _Instance *instance /*$fp*/, struct SVECTOR *center /*stack 4*/, struct SVECTOR *vel /*stack 8*/, struct SVECTOR *accl /*stack 12*/, struct FXSplinter *splintDef /*stack 16*/, struct _FXTracker *fxTracker /*stack 20*/, TDRFuncPtr__FX_BuildNonSegmentedSplinters6fxSetup fxSetup /*stack 24*/, TDRFuncPtr__FX_BuildNonSegmentedSplinters7fxProcess fxProcess /*stack 28*/, int shardFlags /*stack 32*/)
- // line 1200, offset 0x80044b9c
+// void /*$ra*/ _FX_BuildNonSegmentedSplinters(struct _Instance *instance /*stack 0*/, struct SVECTOR *center /*stack 4*/, struct SVECTOR *vel /*stack 8*/, struct SVECTOR *accl /*stack 12*/, struct FXSplinter *splintDef /*stack 16*/, struct _FXTracker *fxTracker /*stack 20*/, TDRFuncPtr__FX_BuildNonSegmentedSplinters6fxSetup fxSetup /*stack 24*/, TDRFuncPtr__FX_BuildNonSegmentedSplinters7fxProcess fxProcess /*stack 28*/, int shardFlags /*stack 32*/)
+ // line 1247, offset 0x80043e84
 	/* begin block 1 */
-		// Start line: 1201
-		// Start offset: 0x80044B9C
+		// Start line: 1248
+		// Start offset: 0x80043E84
 		// Variables:
 	// 		long j; // $s2
 	// 		long maxTimeToLive; // stack offset -72
@@ -1194,7 +1126,7 @@ LAB_80044b28:
 	// 		struct _SVector *vertex0; // $s1
 	// 		struct _SVector *vertex1; // $s3
 	// 		struct _SVector *vertex2; // $s4
-	// 		struct _SVector *poolOfVertices; // stack offset -52
+	// 		struct _SVector *poolOfVertices; // $fp
 	// 		struct MATRIX *swTransform; // $s1
 	// 		struct MATRIX ourM; // stack offset -184
 	// 		struct _Vector Center; // stack offset -152
@@ -1204,17 +1136,17 @@ LAB_80044b28:
 	// 		struct _SVector sv_vels[4]; // stack offset -112
 
 		/* begin block 1.1 */
-			// Start line: 1242
-			// Start offset: 0x80044CB4
+			// Start line: 1289
+			// Start offset: 0x80043F98
 			// Variables:
 		// 		short start; // $v0
 		/* end block 1.1 */
-		// End offset: 0x80044DDC
-		// End Line: 1268
+		// End offset: 0x800440C0
+		// End Line: 1315
 
 		/* begin block 1.2 */
-			// Start line: 1303
-			// Start offset: 0x80044F98
+			// Start line: 1350
+			// Start offset: 0x8004427C
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
@@ -1222,12 +1154,12 @@ LAB_80044b28:
 		// 		struct _SVector *_v0; // $s3
 		// 		struct _SVector *_v1; // $a1
 		/* end block 1.2 */
-		// End offset: 0x80044F98
-		// End Line: 1303
+		// End offset: 0x8004427C
+		// End Line: 1350
 
 		/* begin block 1.3 */
-			// Start line: 1363
-			// Start offset: 0x80045304
+			// Start line: 1410
+			// Start offset: 0x800445E4
 			// Variables:
 		// 		short _x0; // $a1
 		// 		short _y0; // $v1
@@ -1235,60 +1167,78 @@ LAB_80044b28:
 		// 		short _x1; // $a0
 		// 		short _y1; // $a3
 		// 		short _z1; // $a2
-		// 		struct _SVector *_v; // stack offset -44
+		// 		struct _SVector *_v; // stack offset -48
 		// 		struct _Position *_v0; // $v0
 		// 		struct _Vector *_v1; // $a2
 		/* end block 1.3 */
-		// End offset: 0x80045304
-		// End Line: 1363
+		// End offset: 0x800445E4
+		// End Line: 1410
 
 		/* begin block 1.4 */
-			// Start line: 1406
-			// Start offset: 0x800454B0
+			// Start line: 1439
+			// Start offset: 0x80044720
+			// Variables:
+		// 		struct TextureMT3 *texture; // $v1
 		/* end block 1.4 */
-		// End offset: 0x800454B0
-		// End Line: 1406
+		// End offset: 0x80044720
+		// End Line: 1439
 
 		/* begin block 1.5 */
-			// Start line: 1432
-			// Start offset: 0x800455FC
+			// Start line: 1469
+			// Start offset: 0x800447DC
 		/* end block 1.5 */
-		// End offset: 0x80045644
-		// End Line: 1438
+		// End offset: 0x800447DC
+		// End Line: 1469
+
+		/* begin block 1.6 */
+			// Start line: 1495
+			// Start offset: 0x80044928
+		/* end block 1.6 */
+		// End offset: 0x80044970
+		// End Line: 1501
 	/* end block 1 */
-	// End offset: 0x80045710
-	// End Line: 1463
+	// End offset: 0x80044A44
+	// End Line: 1526
 
 	/* begin block 2 */
-		// Start line: 2627
+		// Start line: 2770
 	/* end block 2 */
-	// End Line: 2628
+	// End Line: 2771
 
 /* WARNING: Could not reconcile some variable overlaps */
+/* File: C:\kain2\game\FX.C */
 
 void _FX_BuildNonSegmentedSplinters
-               (_Instance *instance,SVECTOR *center,SVECTOR *vel,SVECTOR *accl,FXSplinter *splintDef
-               ,_FXTracker *fxTracker,TDRFuncPtr__FX_BuildNonSegmentedSplinters6fxSetup fxSetup,
+               (_Instance *instance,undefined center,undefined vel,undefined accl,
+               FXSplinter *splintDef,_FXTracker *fxTracker,
+               TDRFuncPtr__FX_BuildNonSegmentedSplinters6fxSetup fxSetup,
                TDRFuncPtr__FX_BuildNonSegmentedSplinters7fxProcess fxProcess,int shardFlags)
 
 {
   short sVar1;
-  short sVar2;
-  int iVar3;
-  _FX_MATRIX *p_Var4;
-  uint uVar5;
+  _SVector *p_Var2;
+  short sVar3;
+  int iVar4;
+  _FX_MATRIX *p_Var5;
+  uint uVar6;
   _FX_PRIM *fxPrim;
-  long lVar6;
-  int iVar7;
-  undefined4 *puVar8;
+  uint uVar7;
+  long lVar8;
   int iVar9;
-  ushort uVar10;
-  _PVertex *p_Var11;
-  int iVar12;
-  _PVertex *p_Var13;
+  uint uVar10;
+  undefined3 in_register_00000015;
+  undefined4 *puVar11;
+  undefined3 in_register_00000019;
+  short *psVar12;
+  undefined3 in_register_0000001d;
+  int iVar13;
+  ushort uVar14;
+  _SVector *p_Var15;
+  int iVar16;
+  _SVector *p_Var17;
   _MFace *mface;
-  _PVertex *p_Var14;
-  _MFace *p_Var15;
+  _SVector *p_Var18;
+  _MFace *p_Var19;
   _FX_MATRIX *local_c8 [4];
   undefined4 local_b8;
   undefined4 local_b4;
@@ -1311,105 +1261,113 @@ void _FX_BuildNonSegmentedSplinters
   short local_76;
   short local_74;
   undefined4 local_70;
-  uint local_6c;
-  uint local_68;
-  uint local_64;
+  undefined *local_6c;
+  undefined *local_68;
+  undefined *local_64;
   undefined4 local_60;
-  uint local_5c;
+  undefined *local_5c;
   undefined4 local_58;
-  uint local_54;
+  undefined *local_54;
   ushort local_50;
   int local_48;
   int local_44;
   _MFace *local_40;
   _Model *local_3c;
   _MVertex *local_38;
-  _VertexPool *local_34;
-  int local_30;
-  short *local_2c;
+  int local_34;
+  short *local_30;
   
-  local_34 = gameTrackerX.vertexPool;
+  p_Var2 = DAT_800d2108;
+  psVar12 = (short *)CONCAT31(in_register_00000019,vel);
   local_3c = instance->object->modelList[instance->currentModel];
   local_38 = local_3c->vertexList;
   mface = local_3c->faceList;
-  local_70 = 0xf;
-  local_6c = 0x60064;
-  local_68 = 0xfff1;
-  local_64 = 0x60064;
-  local_60 = 0xf0000;
-  local_5c = 0x60064;
-  local_58 = 0xfff10000;
-  local_54 = 0x60064;
+  local_70 = DAT_800cfd8c;
+  local_6c = PTR_LAB_800cfd90;
+  local_68 = PTR_DAT_800cfd94;
+  local_64 = PTR_LAB_800cfd98;
+  local_60 = PTR_DAT_800cfd9c;
+  local_5c = PTR_LAB_800cfda0;
+  local_58 = DAT_800cfda4;
+  local_54 = PTR_LAB_800cfda8;
   local_50 = (ushort)shardFlags;
   PIPE3D_TransformVerticesToWorld
-            (instance,(_SVector *)gameTrackerX.vertexPool,(long *)(gameTrackerX.vertexPool)->color,
-             (_Vector *)&local_98);
+            (instance,DAT_800d2108,(long *)(DAT_800d2108 + 0x210),(_Vector *)&local_98);
   if (splintDef == (FXSplinter *)0x0) {
-    iVar9 = rand();
-    iVar3 = iVar9;
-    if (iVar9 < 0) {
-      iVar3 = iVar9 + 7;
+    iVar13 = rand();
+    iVar4 = iVar13;
+    if (iVar13 < 0) {
+      iVar4 = iVar13 + 7;
     }
     local_70 = local_70 & 0xffff0000 |
-               (uint)(ushort)((short)local_70 + -4 + (short)iVar9 + (short)(iVar3 >> 3) * -8);
-    iVar9 = rand();
-    iVar3 = iVar9;
-    if (iVar9 < 0) {
-      iVar3 = iVar9 + 7;
+               (uint)(ushort)((short)local_70 + -4 + (short)iVar13 + (short)(iVar4 >> 3) * -8);
+    iVar13 = rand();
+    iVar4 = iVar13;
+    if (iVar13 < 0) {
+      iVar4 = iVar13 + 7;
     }
-    local_68 = local_68 & 0xffff0000 |
-               (uint)(ushort)((short)local_68 + -4 + (short)iVar9 + (short)(iVar3 >> 3) * -8);
-    iVar9 = rand();
-    iVar3 = iVar9;
-    if (iVar9 < 0) {
-      iVar3 = iVar9 + 7;
+    local_68 = (undefined *)
+               ((uint)local_68 & 0xffff0000 |
+               (uint)(ushort)((short)local_68 + -4 + (short)iVar13 + (short)(iVar4 >> 3) * -8));
+    iVar13 = rand();
+    iVar4 = iVar13;
+    if (iVar13 < 0) {
+      iVar4 = iVar13 + 7;
     }
-    local_60 = local_60 & 0xffff |
-               (uint)(ushort)(local_60._2_2_ + -4 + (short)iVar9 + (short)(iVar3 >> 3) * -8) << 0x10
-    ;
-    iVar9 = rand();
-    iVar3 = iVar9;
-    if (iVar9 < 0) {
-      iVar3 = iVar9 + 7;
+    local_60 = (undefined *)
+               ((uint)local_60 & 0xffff |
+               (uint)(ushort)(local_60._2_2_ + -4 + (short)iVar13 + (short)(iVar4 >> 3) * -8) <<
+               0x10);
+    iVar13 = rand();
+    iVar4 = iVar13;
+    if (iVar13 < 0) {
+      iVar4 = iVar13 + 7;
     }
     local_58 = local_58 & 0xffff |
-               (uint)(ushort)(local_58._2_2_ + -4 + (short)iVar9 + (short)(iVar3 >> 3) * -8) << 0x10
-    ;
+               (uint)(ushort)(local_58._2_2_ + -4 + (short)iVar13 + (short)(iVar4 >> 3) * -8) <<
+               0x10;
     local_48 = 0x20;
   }
   else {
-    sVar2 = splintDef->chunkVelRng;
-    uVar10 = splintDef->chunkVelXY - sVar2;
-    if ((int)sVar2 == 0) {
-      local_70 = local_70 & 0xffff0000 | (uint)uVar10;
-      local_68 = local_68 & 0xffff0000 | (uint)(ushort)-uVar10;
-      local_60 = local_60 & 0xffff | (uint)uVar10 << 0x10;
-      local_58 = local_58 & 0xffff | (uint)(ushort)-uVar10 << 0x10;
-      uVar10 = splintDef->chunkVelZ;
-      local_6c = local_6c & 0xffff0000 | (uint)uVar10;
-      local_64 = local_64 & 0xffff0000 | (uint)uVar10;
-      local_5c = local_5c & 0xffff0000 | (uint)uVar10;
-      local_54 = local_54 & 0xffff0000 | (uint)uVar10;
+    sVar3 = splintDef->chunkVelRng;
+    uVar14 = splintDef->chunkVelXY - sVar3;
+    if ((int)sVar3 == 0) {
+      local_70 = local_70 & 0xffff0000 | (uint)uVar14;
+      local_68 = (undefined *)((uint)local_68 & 0xffff0000 | (uint)(ushort)-uVar14);
+      local_60 = (undefined *)((uint)local_60 & 0xffff | (uint)uVar14 << 0x10);
+      local_58 = local_58 & 0xffff | (uint)(ushort)-uVar14 << 0x10;
+      uVar14 = splintDef->chunkVelZ;
+      local_6c = (undefined *)((uint)local_6c & 0xffff0000 | (uint)uVar14);
+      local_64 = (undefined *)((uint)local_64 & 0xffff0000 | (uint)uVar14);
+      local_5c = (undefined *)((uint)local_5c & 0xffff0000 | (uint)uVar14);
+      local_54 = (undefined *)((uint)local_54 & 0xffff0000 | (uint)uVar14);
     }
     else {
-      iVar3 = rand();
-      iVar9 = ((int)sVar2 << 0x11) >> 0x10;
-      local_70 = local_70 & 0xffff0000 | (uint)(ushort)(uVar10 + (short)(iVar3 % iVar9));
-      iVar3 = rand();
-      local_68 = local_68 & 0xffff0000 | (uint)(ushort)-(uVar10 + (short)(iVar3 % iVar9));
-      iVar3 = rand();
-      local_60 = local_60 & 0xffff | (uint)(ushort)(uVar10 + (short)(iVar3 % iVar9)) << 0x10;
-      iVar3 = rand();
-      local_58 = local_58 & 0xffff | (uint)(ushort)-(uVar10 + (short)(iVar3 % iVar9)) << 0x10;
-      sVar2 = splintDef->chunkVelZ - splintDef->chunkVelRng;
-      iVar3 = rand();
-      local_6c = local_6c & 0xffff0000 | (uint)(ushort)(sVar2 + (short)(iVar3 % iVar9));
-      iVar3 = rand();
-      local_64 = local_64 & 0xffff0000 | (uint)(ushort)(sVar2 + (short)(iVar3 % iVar9));
-      iVar3 = rand();
-      local_5c = local_5c & 0xffff0000 | (uint)(ushort)(sVar2 + (short)(iVar3 % iVar9));
-      iVar3 = rand();
-      local_54 = local_54 & 0xffff0000 | (uint)(ushort)(sVar2 + (short)(iVar3 % iVar9));
+      iVar4 = rand();
+      iVar13 = ((int)sVar3 << 0x11) >> 0x10;
+      local_70 = local_70 & 0xffff0000 | (uint)(ushort)(uVar14 + (short)(iVar4 % iVar13));
+      iVar4 = rand();
+      local_68 = (undefined *)
+                 ((uint)local_68 & 0xffff0000 | (uint)(ushort)-(uVar14 + (short)(iVar4 % iVar13)));
+      iVar4 = rand();
+      local_60 = (undefined *)
+                 ((uint)local_60 & 0xffff | (uint)(ushort)(uVar14 + (short)(iVar4 % iVar13)) << 0x10
+                 );
+      iVar4 = rand();
+      local_58 = local_58 & 0xffff | (uint)(ushort)-(uVar14 + (short)(iVar4 % iVar13)) << 0x10;
+      sVar3 = splintDef->chunkVelZ - splintDef->chunkVelRng;
+      iVar4 = rand();
+      local_6c = (undefined *)
+                 ((uint)local_6c & 0xffff0000 | (uint)(ushort)(sVar3 + (short)(iVar4 % iVar13)));
+      iVar4 = rand();
+      local_64 = (undefined *)
+                 ((uint)local_64 & 0xffff0000 | (uint)(ushort)(sVar3 + (short)(iVar4 % iVar13)));
+      iVar4 = rand();
+      local_5c = (undefined *)
+                 ((uint)local_5c & 0xffff0000 | (uint)(ushort)(sVar3 + (short)(iVar4 % iVar13)));
+      iVar4 = rand();
+      local_54 = (undefined *)
+                 ((uint)local_54 & 0xffff0000 | (uint)(ushort)(sVar3 + (short)(iVar4 % iVar13)));
     }
     local_48 = (int)splintDef->lifetime;
   }
@@ -1422,51 +1380,51 @@ void _FX_BuildNonSegmentedSplinters
   local_a4 = local_98;
   local_a0 = local_94;
   local_9c = local_90;
-  iVar3 = 0;
+  iVar4 = 0;
   do {
-    p_Var4 = FX_GetMatrix(fxTracker);
-    if (p_Var4 == (_FX_MATRIX *)0x0) {
-      if (iVar3 == 0) {
+    p_Var5 = FX_GetMatrix(fxTracker);
+    if (p_Var5 == (_FX_MATRIX *)0x0) {
+      if (iVar4 == 0) {
         return;
       }
-      iVar9 = rand();
-      p_Var4 = local_c8[iVar9 % iVar3];
+      iVar13 = rand();
+      p_Var5 = local_c8[iVar13 % iVar4];
     }
     else {
-      local_c8[iVar3] = p_Var4;
-      *(undefined4 *)(p_Var4->lwTransform).m = local_b8;
-      *(undefined4 *)((p_Var4->lwTransform).m + 2) = local_b4;
-      *(undefined4 *)((p_Var4->lwTransform).m + 4) = local_b0;
-      *(undefined4 *)((p_Var4->lwTransform).m + 6) = local_ac;
-      *(undefined4 *)((p_Var4->lwTransform).m + 8) = local_a8;
-      (p_Var4->lwTransform).t[0] = local_a4;
-      (p_Var4->lwTransform).t[1] = local_a0;
-      (p_Var4->lwTransform).t[2] = local_9c;
+      local_c8[iVar4] = p_Var5;
+      *(undefined4 *)(p_Var5->lwTransform).m = local_b8;
+      *(undefined4 *)((p_Var5->lwTransform).m + 2) = local_b4;
+      *(undefined4 *)((p_Var5->lwTransform).m + 4) = local_b0;
+      *(undefined4 *)((p_Var5->lwTransform).m + 6) = local_ac;
+      *(undefined4 *)((p_Var5->lwTransform).m + 8) = local_a8;
+      (p_Var5->lwTransform).t[0] = local_a4;
+      (p_Var5->lwTransform).t[1] = local_a0;
+      (p_Var5->lwTransform).t[2] = local_9c;
     }
-    iVar9 = iVar3 * 8;
-    puVar8 = &local_70 + iVar3 * 2;
-    local_78 = *(short *)puVar8;
-    local_76 = *(short *)((int)&local_70 + iVar9 + 2);
-    local_74 = *(short *)(&local_6c + iVar3 * 2);
-    *(short *)puVar8 =
+    iVar13 = iVar4 * 8;
+    puVar11 = &local_70 + iVar4 * 2;
+    local_78 = *(short *)puVar11;
+    local_76 = *(short *)((int)&local_70 + iVar13 + 2);
+    local_74 = *(short *)(&local_6c + iVar4 * 2);
+    *(short *)puVar11 =
          (short)((int)local_78 * (int)(short)local_b8 >> 0xc) +
          (short)((int)local_76 * (int)local_b8._2_2_ >> 0xc) +
          (short)((int)local_74 * (int)(short)local_b4 >> 0xc);
-    *(short *)((int)&local_70 + iVar9 + 2) =
+    *(short *)((int)&local_70 + iVar13 + 2) =
          (short)((int)local_78 * (int)local_b4._2_2_ >> 0xc) +
          (short)((int)local_76 * (int)(short)local_b0 >> 0xc) +
          (short)((int)local_74 * (int)local_b0._2_2_ >> 0xc);
-    iVar12 = iVar3 + 1;
-    *(short *)(&local_6c + iVar3 * 2) =
+    iVar16 = iVar4 + 1;
+    *(short *)(&local_6c + iVar4 * 2) =
          (short)((int)local_78 * (int)(short)local_ac >> 0xc) +
          (short)((int)local_76 * (int)local_ac._2_2_ >> 0xc) +
          (short)((int)local_74 * (int)(short)local_a8 >> 0xc);
-    (p_Var4->lwTransform).t[0] = (p_Var4->lwTransform).t[0] + (int)*(short *)puVar8 * 4;
-    (p_Var4->lwTransform).t[1] =
-         (p_Var4->lwTransform).t[1] +
-         ((int)((uint)*(ushort *)((int)&local_70 + iVar9 + 2) << 0x10) >> 0xe);
-    iVar3 = iVar12;
-  } while (iVar12 < 4);
+    (p_Var5->lwTransform).t[0] = (p_Var5->lwTransform).t[0] + (int)*(short *)puVar11 * 4;
+    (p_Var5->lwTransform).t[1] =
+         (p_Var5->lwTransform).t[1] +
+         ((int)((uint)*(ushort *)((int)&local_70 + iVar13 + 2) << 0x10) >> 0xe);
+    iVar4 = iVar16;
+  } while (iVar16 < 4);
   if (splintDef == (FXSplinter *)0x0) {
     local_44 = 1;
   }
@@ -1480,159 +1438,173 @@ void _FX_BuildNonSegmentedSplinters
   }
   local_40 = mface + local_3c->numFaces;
   if (mface < mface + local_3c->numFaces) {
-    local_30 = 0x55555556;
-    local_2c = &local_88;
+    local_34 = 0x55555556;
+    local_30 = &local_88;
     do {
-      p_Var11 = local_34->vertex + (mface->face)._2;
-      p_Var13 = local_34->vertex + (mface->face)._3;
-      p_Var14 = local_34->vertex + (mface->face).v2;
-      iVar3 = (int)p_Var11->x + (int)p_Var13->x + (int)p_Var14->x;
-      iVar7 = (int)((ulonglong)((longlong)iVar3 * (longlong)local_30) >> 0x20) - (iVar3 >> 0x1f);
-      local_80 = (short)iVar7;
-      iVar3 = (int)(&p_Var11->x)[1] + (int)(&p_Var13->x)[1] + (int)(&p_Var14->x)[1];
-      iVar3 = (int)((ulonglong)((longlong)iVar3 * (longlong)local_30) >> 0x20) - (iVar3 >> 0x1f);
-      local_7e = (short)iVar3;
-      iVar9 = (int)(&p_Var11->x)[2] + (int)(&p_Var13->x)[2] + (int)(&p_Var14->x)[2];
-      iVar12 = iVar3 * 0x10000 >> 0x10;
-      iVar7 = iVar7 * 0x10000 >> 0x10;
-      iVar3 = iVar7;
-      if (iVar7 < 0) {
-        iVar3 = -iVar7;
+      p_Var15 = p_Var2 + (mface->face).v0;
+      p_Var17 = p_Var2 + (mface->face).v1;
+      p_Var18 = p_Var2 + (mface->face).v2;
+      iVar4 = (int)p_Var15->x + (int)p_Var17->x + (int)p_Var18->x;
+      iVar9 = (int)((ulonglong)((longlong)iVar4 * (longlong)local_34) >> 0x20) - (iVar4 >> 0x1f);
+      local_80 = (short)iVar9;
+      iVar4 = (int)p_Var15->y + (int)p_Var17->y + (int)p_Var18->y;
+      iVar4 = (int)((ulonglong)((longlong)iVar4 * (longlong)local_34) >> 0x20) - (iVar4 >> 0x1f);
+      local_7e = (short)iVar4;
+      iVar13 = (int)p_Var15->z + (int)p_Var17->z + (int)p_Var18->z;
+      iVar16 = iVar4 * 0x10000 >> 0x10;
+      iVar9 = iVar9 * 0x10000 >> 0x10;
+      iVar4 = iVar9;
+      if (iVar9 < 0) {
+        iVar4 = -iVar9;
       }
-      local_7c = (short)((ulonglong)((longlong)iVar9 * (longlong)local_30) >> 0x20) -
-                 (short)(iVar9 >> 0x1f);
-      iVar9 = iVar12;
-      if (iVar12 < 0) {
-        iVar9 = -iVar12;
+      local_7c = (short)((ulonglong)((longlong)iVar13 * (longlong)local_34) >> 0x20) -
+                 (short)(iVar13 >> 0x1f);
+      iVar13 = iVar16;
+      if (iVar16 < 0) {
+        iVar13 = -iVar16;
       }
-      uVar5 = (uint)(iVar7 < 1);
-      if ((iVar3 <= iVar9) && (uVar5 = 3, 0 < iVar12)) {
-        uVar5 = 2;
+      uVar6 = (uint)(iVar9 < 1);
+      if ((iVar4 <= iVar13) && (uVar6 = 3, 0 < iVar16)) {
+        uVar6 = 2;
       }
-      p_Var4 = local_c8[uVar5];
+      p_Var5 = local_c8[uVar6];
       fxPrim = FX_GetPrim(fxTracker);
-      p_Var15 = local_40;
+      p_Var19 = local_40;
       if (fxPrim != (_FX_PRIM *)0x0) {
         if (fxSetup == (TDRFuncPtr__FX_BuildNonSegmentedSplinters6fxSetup)0x0) {
-          (fxPrim->position).x = *(short *)(p_Var4->lwTransform).t;
-          (fxPrim->position).y = *(short *)((p_Var4->lwTransform).t + 1);
-          (fxPrim->position).z = *(short *)((p_Var4->lwTransform).t + 2);
-          sVar2 = (fxPrim->position).z;
+          (fxPrim->position).x = *(short *)(p_Var5->lwTransform).t;
+          (fxPrim->position).y = *(short *)((p_Var5->lwTransform).t + 1);
+          (fxPrim->position).z = *(short *)((p_Var5->lwTransform).t + 2);
+          sVar3 = (fxPrim->position).z;
           local_88 = (fxPrim->position).x - (short)local_98;
-          local_2c[1] = (fxPrim->position).y - (short)local_94;
-          local_2c[2] = sVar2 - (short)local_90;
-          (fxPrim->_2).x = p_Var11->x - local_88;
-          (fxPrim->_2).y = (&p_Var11->x)[1] - local_86;
-          (fxPrim->_2).z = (&p_Var11->x)[2] - local_84;
-          (fxPrim->_3).x = p_Var13->x - local_88;
-          (fxPrim->_3).y = (&p_Var13->x)[1] - local_86;
-          (fxPrim->_3).z = (&p_Var13->x)[2] - local_84;
-          (fxPrim->v2).x = p_Var14->x - local_88;
-          (fxPrim->v2).y = (&p_Var14->x)[1] - local_86;
-          sVar2 = (&p_Var14->x)[2];
-          fxPrim->matrix = p_Var4;
-          (fxPrim->v2).z = sVar2 - local_84;
-          if ((instance->flags & 0x80U) == 0) {
-            FX_AniTexSetup(fxPrim,mface,local_3c,fxTracker);
+          local_30[1] = (fxPrim->position).y - (short)local_94;
+          local_30[2] = sVar3 - (short)local_90;
+          (fxPrim->v0).x = p_Var15->x - local_88;
+          (fxPrim->v0).y = p_Var15->y - local_86;
+          (fxPrim->v0).z = p_Var15->z - local_84;
+          (fxPrim->v1).x = p_Var17->x - local_88;
+          (fxPrim->v1).y = p_Var17->y - local_86;
+          (fxPrim->v1).z = p_Var17->z - local_84;
+          (fxPrim->v2).x = p_Var18->x - local_88;
+          (fxPrim->v2).y = p_Var18->y - local_86;
+          sVar3 = p_Var18->z;
+          fxPrim->matrix = p_Var5;
+          (fxPrim->v2).z = sVar3 - local_84;
+          FX_AniTexSetup(fxPrim,mface,local_3c,fxTracker);
+          if ((local_50 & 0x40) == 0) {
+            lVar8 = _FX_DoLighting(mface);
+            fxPrim->color = lVar8;
           }
           else {
-            FX_NoAutoAniTexSetup(fxPrim,mface,local_3c,fxTracker,instance);
+            if ((mface->flags & 2) == 0) {
+              uVar10 = mface->color & 0xffffff;
+              fxPrim->color = uVar10;
+              uVar10 = uVar10 | 0x20000000;
+              uVar7 = mface->color;
+            }
+            else {
+              iVar4 = mface->color;
+              uVar10 = *(uint *)(iVar4 + 0xc) & 0xffffff;
+              fxPrim->color = uVar10;
+              uVar10 = uVar10 | 0x24000000;
+              uVar7 = *(uint *)(iVar4 + 0xc);
+            }
+            fxPrim->color = uVar10 | uVar7 & 0x3000000;
           }
-          lVar6 = _FX_DoLighting(mface);
-          fxPrim->color = lVar6;
           if (fxProcess == (TDRFuncPtr__FX_BuildNonSegmentedSplinters7fxProcess)0x0) {
             *(code **)&fxPrim->process = FX_ShatterProcess;
           }
           else {
             *(TDRFuncPtr__FX_BuildNonSegmentedSplinters7fxProcess *)&fxPrim->process = fxProcess;
           }
-          *(undefined2 *)&fxPrim->duo = *(undefined2 *)(&local_70 + uVar5 * 2);
-          *(undefined2 *)((int)&fxPrim->duo + 2) = *(undefined2 *)((int)&local_70 + uVar5 * 8 + 2);
-          *(undefined2 *)((int)&fxPrim->duo + 4) = *(undefined2 *)(&local_6c + uVar5 * 2);
+          *(undefined2 *)&fxPrim->duo = *(undefined2 *)(&local_70 + uVar6 * 2);
+          *(undefined2 *)((int)&fxPrim->duo + 2) = *(undefined2 *)((int)&local_70 + uVar6 * 8 + 2);
+          *(undefined2 *)((int)&fxPrim->duo + 4) = *(undefined2 *)(&local_6c + uVar6 * 2);
           if (splintDef == (FXSplinter *)0x0) {
-            iVar9 = rand();
-            iVar3 = iVar9;
-            if (iVar9 < 0) {
-              iVar3 = iVar9 + 7;
+            iVar13 = rand();
+            iVar4 = iVar13;
+            if (iVar13 < 0) {
+              iVar4 = iVar13 + 7;
             }
             *(short *)&fxPrim->duo =
-                 *(short *)&fxPrim->duo + -4 + (short)iVar9 + (short)(iVar3 >> 3) * -8;
-            iVar9 = rand();
-            iVar3 = iVar9;
-            if (iVar9 < 0) {
-              iVar3 = iVar9 + 7;
+                 *(short *)&fxPrim->duo + -4 + (short)iVar13 + (short)(iVar4 >> 3) * -8;
+            iVar13 = rand();
+            iVar4 = iVar13;
+            if (iVar13 < 0) {
+              iVar4 = iVar13 + 7;
             }
             *(short *)((int)&fxPrim->duo + 2) =
-                 *(short *)((int)&fxPrim->duo + 2) + -4 + (short)iVar9 + (short)(iVar3 >> 3) * -8;
-            iVar9 = rand();
-            iVar3 = iVar9;
-            if (iVar9 < 0) {
-              iVar3 = iVar9 + 7;
+                 *(short *)((int)&fxPrim->duo + 2) + -4 + (short)iVar13 + (short)(iVar4 >> 3) * -8;
+            iVar13 = rand();
+            iVar4 = iVar13;
+            if (iVar13 < 0) {
+              iVar4 = iVar13 + 7;
             }
-            sVar2 = *(short *)((int)&fxPrim->duo + 4) + -4 + (short)iVar9 + (short)(iVar3 >> 3) * -8
-            ;
-LAB_800455a0:
-            *(short *)((int)&fxPrim->duo + 4) = sVar2;
+            sVar3 = *(short *)((int)&fxPrim->duo + 4) + -4 +
+                    (short)iVar13 + (short)(iVar4 >> 3) * -8;
+LAB_800448cc:
+            *(short *)((int)&fxPrim->duo + 4) = sVar3;
           }
           else {
-            sVar2 = splintDef->triVelRng;
-            if ((int)sVar2 != 0) {
+            sVar3 = splintDef->triVelRng;
+            if ((int)sVar3 != 0) {
               sVar1 = -splintDef->triVelRng;
-              iVar3 = rand();
-              iVar9 = ((int)sVar2 << 0x11) >> 0x10;
-              *(short *)&fxPrim->duo = *(short *)&fxPrim->duo + sVar1 + (short)(iVar3 % iVar9);
-              iVar3 = rand();
+              iVar4 = rand();
+              iVar13 = ((int)sVar3 << 0x11) >> 0x10;
+              *(short *)&fxPrim->duo = *(short *)&fxPrim->duo + sVar1 + (short)(iVar4 % iVar13);
+              iVar4 = rand();
               *(short *)((int)&fxPrim->duo + 2) =
-                   *(short *)((int)&fxPrim->duo + 2) + sVar1 + (short)(iVar3 % iVar9);
-              iVar3 = rand();
-              sVar2 = *(short *)((int)&fxPrim->duo + 4) + sVar1 + (short)(iVar3 % iVar9);
-              goto LAB_800455a0;
+                   *(short *)((int)&fxPrim->duo + 2) + sVar1 + (short)(iVar4 % iVar13);
+              iVar4 = rand();
+              sVar3 = *(short *)((int)&fxPrim->duo + 4) + sVar1 + (short)(iVar4 % iVar13);
+              goto LAB_800448cc;
             }
           }
-          if (vel != (SVECTOR *)0x0) {
-            *(short *)&fxPrim->duo = *(short *)&fxPrim->duo + vel->vx;
-            *(short *)((int)&fxPrim->duo + 2) = *(short *)((int)&fxPrim->duo + 2) + vel->vy;
-            *(short *)((int)&fxPrim->duo + 4) = *(short *)((int)&fxPrim->duo + 4) + vel->vz;
+          if (psVar12 != (short *)0x0) {
+            *(short *)&fxPrim->duo = *(short *)&fxPrim->duo + *psVar12;
+            *(short *)((int)&fxPrim->duo + 2) = *(short *)((int)&fxPrim->duo + 2) + psVar12[1];
+            *(short *)((int)&fxPrim->duo + 4) = *(short *)((int)&fxPrim->duo + 4) + psVar12[2];
           }
           *(undefined2 *)((int)&fxPrim->duo + 6) = 0;
           *(undefined2 *)((int)&fxPrim->duo + 8) = 0;
           if (splintDef == (FXSplinter *)0x0) {
             *(undefined2 *)((int)&fxPrim->duo + 10) = 0xfff8;
-            iVar9 = rand();
-            iVar3 = iVar9;
-            if (iVar9 < 0) {
-              iVar3 = iVar9 + 7;
+            iVar13 = rand();
+            iVar4 = iVar13;
+            if (iVar13 < 0) {
+              iVar4 = iVar13 + 7;
             }
-            fxPrim->work3 = (short)iVar9 + (short)(iVar3 >> 3) * -8 + -4;
+            fxPrim->work3 = (short)iVar13 + (short)(iVar4 >> 3) * -8 + -4;
           }
           else {
-            sVar2 = splintDef->rotRateRng;
-            if ((int)sVar2 == 0) {
+            sVar3 = splintDef->rotRateRng;
+            if ((int)sVar3 == 0) {
               fxPrim->work3 = 0;
             }
             else {
-              iVar3 = rand();
-              fxPrim->work3 = (short)(iVar3 % (((int)sVar2 << 0x11) >> 0x10)) - sVar2;
+              iVar4 = rand();
+              fxPrim->work3 = (short)(iVar4 % (((int)sVar3 << 0x11) >> 0x10)) - sVar3;
             }
             *(short *)((int)&fxPrim->duo + 10) = splintDef->gravityZ;
           }
           fxPrim->work1 = 0x1000;
           fxPrim->timeToLive = local_48;
-          sVar2 = -0x7fff;
+          sVar3 = -0x7fff;
           if ((local_50 & 0x10) == 0) {
-            sVar2 = (instance->position).z -
+            sVar3 = (instance->position).z -
                     instance->object->modelList[instance->currentModel]->maxRad;
           }
-          fxPrim->work0 = sVar2;
+          fxPrim->work0 = sVar3;
         }
         else {
-          (*fxSetup)(fxPrim,fxProcess,p_Var4,instance,mface,local_38,center,vel,accl,fxTracker,0x1e)
-          ;
+          (*fxSetup)(fxPrim,fxProcess,p_Var5,instance,mface,local_38,
+                     CONCAT31(in_register_00000015,center),psVar12,
+                     CONCAT31(in_register_0000001d,accl),fxTracker,0x1e);
         }
         LIST_InsertFunc(&fxTracker->usedPrimList,(NodeType *)fxPrim);
-        p_Var15 = mface;
+        p_Var19 = mface;
       }
-      mface = p_Var15 + local_44;
+      mface = p_Var19 + local_44;
     } while (mface < local_40);
   }
   return;
@@ -1643,13 +1615,15 @@ LAB_800455a0:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _FX_BuildSplinters(struct _Instance *instance /*$s2*/, struct SVECTOR *center /*$s4*/, struct SVECTOR *vel /*$s5*/, struct SVECTOR *accl /*$s6*/, struct FXSplinter *splintDef /*stack 16*/, struct _FXTracker *fxTracker /*stack 20*/, TDRFuncPtr__FX_BuildSplinters6fxSetup fxSetup /*stack 24*/, TDRFuncPtr__FX_BuildSplinters7fxProcess fxProcess /*stack 28*/, int shardFlags /*stack 32*/)
- // line 1474, offset 0x80045740
+ // line 1537, offset 0x80044a74
 	/* begin block 1 */
-		// Start line: 3558
+		// Start line: 3749
 	/* end block 1 */
-	// End Line: 3559
+	// End Line: 3750
 
-void _FX_BuildSplinters(_Instance *instance,SVECTOR *center,SVECTOR *vel,SVECTOR *accl,
+/* File: C:\kain2\game\FX.C */
+
+void _FX_BuildSplinters(_Instance *instance,undefined1 center,undefined1 vel,undefined1 accl,
                        FXSplinter *splintDef,_FXTracker *fxTracker,
                        TDRFuncPtr__FX_BuildSplinters6fxSetup fxSetup,
                        TDRFuncPtr__FX_BuildSplinters7fxProcess fxProcess,int shardFlags)
@@ -1689,15 +1663,17 @@ void _FX_BuildSplinters(_Instance *instance,SVECTOR *center,SVECTOR *vel,SVECTOR
 // decompiled code
 // original method signature: 
 // void /*$ra*/ _FX_Build(struct _Instance *instance /*$s0*/, struct SVECTOR *center /*$s2*/, struct SVECTOR *vel /*$s3*/, struct SVECTOR *accl /*$s4*/, struct _FXTracker *fxTracker /*stack 16*/, TDRFuncPtr__FX_Build5fxSetup fxSetup /*stack 20*/, TDRFuncPtr__FX_Build6fxProcess fxProcess /*stack 24*/, int shardFlags /*stack 28*/)
- // line 1499, offset 0x80045894
+ // line 1562, offset 0x80044bc8
 	/* begin block 1 */
-		// Start line: 3609
+		// Start line: 3800
 	/* end block 1 */
-	// End Line: 3610
+	// End Line: 3801
 
-void _FX_Build(_Instance *instance,SVECTOR *center,SVECTOR *vel,SVECTOR *accl,_FXTracker *fxTracker,
-              TDRFuncPtr__FX_Build5fxSetup fxSetup,TDRFuncPtr__FX_Build6fxProcess fxProcess,
-              int shardFlags)
+/* File: C:\kain2\game\FX.C */
+
+void _FX_Build(_Instance *instance,undefined1 center,undefined1 vel,undefined1 accl,
+              _FXTracker *fxTracker,TDRFuncPtr__FX_Build5fxSetup fxSetup,
+              TDRFuncPtr__FX_Build6fxProcess fxProcess,int shardFlags)
 
 {
   long lVar1;
@@ -1727,14 +1703,17 @@ void _FX_Build(_Instance *instance,SVECTOR *center,SVECTOR *vel,SVECTOR *accl,_F
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_Build(struct _Instance *instance /*$a0*/, struct SVECTOR *center /*$a1*/, struct SVECTOR *vel /*$a2*/, struct SVECTOR *accl /*$a3*/, struct _FXTracker *fxTracker /*stack 16*/, TDRFuncPtr_FX_Build5fxSetup fxSetup /*stack 20*/, TDRFuncPtr_FX_Build6fxProcess fxProcess /*stack 24*/)
- // line 1674, offset 0x800459a8
+ // line 1737, offset 0x80044cdc
 	/* begin block 1 */
-		// Start line: 3963
+		// Start line: 4154
 	/* end block 1 */
-	// End Line: 3964
+	// End Line: 4155
 
-void FX_Build(_Instance *instance,SVECTOR *center,SVECTOR *vel,SVECTOR *accl,_FXTracker *fxTracker,
-             TDRFuncPtr_FX_Build5fxSetup fxSetup,TDRFuncPtr_FX_Build6fxProcess fxProcess)
+/* File: C:\kain2\game\FX.C */
+
+void FX_Build(_Instance *instance,undefined1 center,undefined1 vel,undefined1 accl,
+             _FXTracker *fxTracker,TDRFuncPtr_FX_Build5fxSetup fxSetup,
+             TDRFuncPtr_FX_Build6fxProcess fxProcess)
 
 {
   _FX_Build(instance,center,vel,accl,fxTracker,(TDRFuncPtr__FX_Build5fxSetup)fxSetup,
@@ -1747,14 +1726,14 @@ void FX_Build(_Instance *instance,SVECTOR *center,SVECTOR *vel,SVECTOR *accl,_FX
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_UpdatePos(struct _FX_PRIM *fxPrim /*$t2*/, struct _SVector *offset /*$t3*/, int spriteflag /*$a2*/)
- // line 1680, offset 0x800459e0
+ // line 1743, offset 0x80044d14
 	/* begin block 1 */
-		// Start line: 1681
-		// Start offset: 0x800459E0
+		// Start line: 1744
+		// Start offset: 0x80044D14
 
 		/* begin block 1.1 */
-			// Start line: 1681
-			// Start offset: 0x800459E0
+			// Start line: 1744
+			// Start offset: 0x80044D14
 			// Variables:
 		// 		short _x0; // $v0
 		// 		short _y0; // $v1
@@ -1764,16 +1743,18 @@ void FX_Build(_Instance *instance,SVECTOR *center,SVECTOR *vel,SVECTOR *accl,_FX
 		// 		short _z1; // $t1
 		// 		struct _Position *_v; // $a1
 		/* end block 1.1 */
-		// End offset: 0x800459E0
-		// End Line: 1681
+		// End offset: 0x80044D14
+		// End Line: 1744
 	/* end block 1 */
-	// End offset: 0x80045B2C
-	// End Line: 1697
+	// End offset: 0x80044E60
+	// End Line: 1760
 
 	/* begin block 2 */
-		// Start line: 3975
+		// Start line: 4166
 	/* end block 2 */
-	// End Line: 3976
+	// End Line: 4167
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_UpdatePos(_FX_PRIM *fxPrim,_SVector *offset,int spriteflag)
 
@@ -1788,12 +1769,12 @@ void FX_UpdatePos(_FX_PRIM *fxPrim,_SVector *offset,int spriteflag)
   (fxPrim->position).y = (fxPrim->position).y + sVar1;
   (fxPrim->position).z = (fxPrim->position).z + sVar2;
   if ((spriteflag == 0) && ((fxPrim->flags & 0x10000U) != 0)) {
-    (fxPrim->_2).x = (fxPrim->_2).x + offset->x;
-    (fxPrim->_2).y = (fxPrim->_2).y + offset->y;
-    (fxPrim->_2).z = (fxPrim->_2).z + offset->z;
-    (fxPrim->_3).x = (fxPrim->_3).x + offset->x;
-    (fxPrim->_3).y = (fxPrim->_3).y + offset->y;
-    (fxPrim->_3).z = (fxPrim->_3).z + offset->z;
+    (fxPrim->v0).x = (fxPrim->v0).x + offset->x;
+    (fxPrim->v0).y = (fxPrim->v0).y + offset->y;
+    (fxPrim->v0).z = (fxPrim->v0).z + offset->z;
+    (fxPrim->v1).x = (fxPrim->v1).x + offset->x;
+    (fxPrim->v1).y = (fxPrim->v1).y + offset->y;
+    (fxPrim->v1).z = (fxPrim->v1).z + offset->z;
     (fxPrim->v2).x = (fxPrim->v2).x + offset->x;
     (fxPrim->v2).y = (fxPrim->v2).y + offset->y;
     uVar3 = fxPrim->flags;
@@ -1812,79 +1793,91 @@ void FX_UpdatePos(_FX_PRIM *fxPrim,_SVector *offset,int spriteflag)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_Relocate(struct _SVector *offset /*$s1*/)
- // line 1700, offset 0x80045b34
+ // line 1763, offset 0x80044e68
 	/* begin block 1 */
-		// Start line: 1701
-		// Start offset: 0x80045B34
+		// Start line: 1764
+		// Start offset: 0x80044E68
 		// Variables:
 	// 		struct _FX_PRIM *fxPrim; // $s0
 	// 		struct _FXTracker *fxTracker; // $s2
-	// 		struct _FXGeneralEffect *currentEffect; // $t0
+	// 		struct _FXGeneralEffect *currentEffect; // $a2
 
 		/* begin block 1.1 */
-			// Start line: 1727
-			// Start offset: 0x80045BF4
+			// Start line: 1792
+			// Start offset: 0x80044F2C
 			// Variables:
-		// 		int i; // $a2
+		// 		int i; // $a3
 		// 		int end; // $t1
-		// 		struct _FXRibbon *currentRibbon; // $a3
+		// 		struct _FXRibbon *currentRibbon; // $t0
 		/* end block 1.1 */
-		// End offset: 0x80045C6C
-		// End Line: 1739
+		// End offset: 0x80044FA4
+		// End Line: 1802
+
+		/* begin block 1.2 */
+			// Start line: 1805
+			// Start offset: 0x80044FB4
+		/* end block 1.2 */
+		// End offset: 0x80044FF0
+		// End Line: 1809
 	/* end block 1 */
-	// End offset: 0x80045C7C
-	// End Line: 1742
+	// End offset: 0x80045000
+	// End Line: 1813
 
 	/* begin block 2 */
-		// Start line: 4016
+		// Start line: 4207
 	/* end block 2 */
-	// End Line: 4017
+	// End Line: 4208
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_Relocate(_SVector *offset)
 
 {
-  short sVar1;
-  _FXGeneralEffect *p_Var2;
-  _FXTracker *p_Var3;
-  short *psVar4;
+  byte bVar1;
+  short sVar2;
+  int *piVar3;
+  int iVar4;
   int iVar5;
-  int iVar6;
-  int iVar7;
   _FX_PRIM *fxPrim;
   
-  p_Var3 = gFXT;
-  fxPrim = (_FX_PRIM *)(gFXT->usedPrimList).next;
+  iVar5 = gFXT;
+  fxPrim = *(_FX_PRIM **)(&DAT_00007994 + gFXT);
   while (fxPrim != (_FX_PRIM *)0x0) {
     FX_UpdatePos(fxPrim,offset,0);
     fxPrim = (_FX_PRIM *)(fxPrim->node).next;
   }
-  fxPrim = (_FX_PRIM *)(p_Var3->usedPrimListSprite).next;
-  while (p_Var2 = FX_GeneralEffectTracker, fxPrim != (_FX_PRIM *)0x0) {
+  fxPrim = *(_FX_PRIM **)(&DAT_0000799c + iVar5);
+  while (piVar3 = FX_GeneralEffectTracker, fxPrim != (_FX_PRIM *)0x0) {
     FX_UpdatePos(fxPrim,offset,1);
     if ((code *)fxPrim->process == FX_WaterBubbleProcess) {
       fxPrim->timeToLive = fxPrim->timeToLive + (int)offset->z;
     }
     fxPrim = (_FX_PRIM *)(fxPrim->node).next;
   }
-  while (p_Var2 != (_FXGeneralEffect *)0x0) {
-    if (p_Var2->effectType == '\0') {
-      iVar7 = 0;
-      sVar1 = *(short *)&p_Var2[1].next;
-      if (0 < (int)sVar1) {
-        iVar6 = 0;
+  while (piVar3 != (int *)0x0) {
+    bVar1 = *(byte *)(piVar3 + 3);
+    iVar5 = 0;
+    if (bVar1 == 0) {
+      sVar2 = *(short *)(piVar3 + 4);
+      if ((int)(uint)bVar1 < (int)sVar2) {
+        iVar4 = 0;
         do {
-          psVar4 = (short *)(iVar6 + (int)p_Var2[1].continue_process);
-          *psVar4 = *psVar4 + offset->x;
-          iVar5 = iVar6 + (int)p_Var2[1].continue_process;
-          *(short *)(iVar5 + 2) = *(short *)(iVar5 + 2) + offset->y;
-          iVar6 = iVar6 + (int)p_Var2[1].continue_process;
-          iVar7 = iVar7 + 1;
-          *(short *)(iVar6 + 4) = *(short *)(iVar6 + 4) + offset->z;
-          iVar6 = iVar7 * 8;
-        } while (iVar7 < (int)sVar1);
+          *(short *)(iVar4 + piVar3[5]) = *(short *)(iVar4 + piVar3[5]) + offset->x;
+          *(short *)(iVar4 + piVar3[5] + 2) = *(short *)(iVar4 + piVar3[5] + 2) + offset->y;
+          iVar5 = iVar5 + 1;
+          *(short *)(iVar4 + piVar3[5] + 4) = *(short *)(iVar4 + piVar3[5] + 4) + offset->z;
+          iVar4 = iVar5 * 8;
+        } while (iVar5 < (int)sVar2);
       }
     }
-    p_Var2 = (_FXGeneralEffect *)p_Var2->next;
+    else {
+      if (bVar1 == 0x84) {
+        *(short *)(piVar3 + 4) = *(short *)(piVar3 + 4) + offset->x;
+        *(short *)((int)piVar3 + 0x12) = *(short *)((int)piVar3 + 0x12) + offset->y;
+        *(short *)(piVar3 + 5) = *(short *)(piVar3 + 5) + offset->z;
+      }
+    }
+    piVar3 = (int *)*piVar3;
   }
   return;
 }
@@ -1894,16 +1887,18 @@ void FX_Relocate(_SVector *offset)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_UpdateTexturePointers(struct _FX_PRIM *fxPrim /*$a0*/, struct Object *oldObject /*$a1*/, long sizeOfObject /*$a2*/, long offset /*$a3*/)
- // line 1747, offset 0x80045c94
+ // line 1818, offset 0x80045018
 	/* begin block 1 */
-		// Start line: 4128
+		// Start line: 4334
 	/* end block 1 */
-	// End Line: 4129
+	// End Line: 4335
 
 	/* begin block 2 */
-		// Start line: 4129
+		// Start line: 4335
 	/* end block 2 */
-	// End Line: 4130
+	// End Line: 4336
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_UpdateTexturePointers(_FX_PRIM *fxPrim,Object *oldObject,long sizeOfObject,long offset)
 
@@ -1952,60 +1947,61 @@ void FX_UpdateTexturePointers(_FX_PRIM *fxPrim,Object *oldObject,long sizeOfObje
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_RelocateFXPointers(struct Object *oldObject /*$s3*/, struct Object *newObject /*$a1*/, long sizeOfObject /*$s2*/)
- // line 1765, offset 0x80045d30
+ // line 1836, offset 0x800450b4
 	/* begin block 1 */
-		// Start line: 1766
-		// Start offset: 0x80045D30
+		// Start line: 1837
+		// Start offset: 0x800450B4
 		// Variables:
 	// 		struct _FXTracker *fxTracker; // $s0
 	// 		struct _FXGeneralEffect *currentEffect; // $a0
 	// 		long offset; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 1785
-			// Start offset: 0x80045DA4
+			// Start line: 1856
+			// Start offset: 0x80045128
 		/* end block 1.1 */
-		// End offset: 0x80045DD4
-		// End Line: 1788
+		// End offset: 0x80045158
+		// End Line: 1859
 	/* end block 1 */
-	// End offset: 0x80045DE4
-	// End Line: 1791
+	// End offset: 0x80045168
+	// End Line: 1862
 
 	/* begin block 2 */
-		// Start line: 4164
+		// Start line: 4370
 	/* end block 2 */
-	// End Line: 4165
+	// End Line: 4371
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_RelocateFXPointers(Object *oldObject,Object *newObject,long sizeOfObject)
 
 {
-  _FXTracker *p_Var1;
-  void *pvVar2;
-  Object *pOVar3;
-  _FXGeneralEffect *p_Var4;
+  int iVar1;
+  Object *pOVar2;
+  int *piVar3;
   
-  p_Var1 = gFXT;
+  iVar1 = gFXT;
   newObject = (Object *)((int)newObject - (int)oldObject);
   FX_UpdateTexturePointers
-            ((_FX_PRIM *)(gFXT->usedPrimList).next,oldObject,sizeOfObject,(long)newObject);
+            (*(_FX_PRIM **)(&DAT_00007994 + gFXT),oldObject,sizeOfObject,(long)newObject);
   FX_UpdateTexturePointers
-            ((_FX_PRIM *)(p_Var1->usedPrimListSprite).next,oldObject,sizeOfObject,(long)newObject);
-  if (FX_GeneralEffectTracker != (_FXGeneralEffect *)0x0) {
-    p_Var4 = FX_GeneralEffectTracker;
+            (*(_FX_PRIM **)(&DAT_0000799c + iVar1),oldObject,sizeOfObject,(long)newObject);
+  if (FX_GeneralEffectTracker != (int *)0x0) {
+    piVar3 = FX_GeneralEffectTracker;
     do {
-      if (p_Var4->effectType == '\x01') {
-        pOVar3 = (Object *)p_Var4[1].next;
-        if (((pOVar3 != (Object *)0x0) && (oldObject <= pOVar3)) &&
-           (pOVar3 <= (Object *)((int)&oldObject->oflags + sizeOfObject))) {
-          pvVar2 = (void *)0x0;
-          if (pOVar3 != (Object *)0x0) {
-            pvVar2 = (void *)((int)pOVar3 + (int)newObject);
+      if (*(char *)(piVar3 + 3) == '\x01') {
+        pOVar2 = (Object *)piVar3[4];
+        if (((pOVar2 != (Object *)0x0) && (oldObject <= pOVar2)) &&
+           (pOVar2 <= (Object *)((int)&oldObject->oflags + sizeOfObject))) {
+          iVar1 = 0;
+          if (pOVar2 != (Object *)0x0) {
+            iVar1 = (int)pOVar2 + (int)newObject;
           }
-          p_Var4[1].next = pvVar2;
+          piVar3[4] = iVar1;
         }
       }
-      p_Var4 = (_FXGeneralEffect *)p_Var4->next;
-    } while (p_Var4 != (_FXGeneralEffect *)0x0);
+      piVar3 = (int *)*piVar3;
+    } while (piVar3 != (int *)0x0);
   }
   return;
 }
@@ -2015,10 +2011,10 @@ void FX_RelocateFXPointers(Object *oldObject,Object *newObject,long sizeOfObject
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_ProcessList(struct _FXTracker *fxTracker /*$s2*/)
- // line 1795, offset 0x80045e00
+ // line 1866, offset 0x80045184
 	/* begin block 1 */
-		// Start line: 1796
-		// Start offset: 0x80045E00
+		// Start line: 1867
+		// Start offset: 0x80045184
 		// Variables:
 	// 		struct _FX_PRIM *fxPrim; // $a0
 	// 		struct _FX_PRIM *nextFXPrim; // $s0
@@ -2026,46 +2022,47 @@ void FX_RelocateFXPointers(Object *oldObject,Object *newObject,long sizeOfObject
 	// 		struct _FX_MATRIX *nextFXMatrix; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 1866
-			// Start offset: 0x80045F74
+			// Start line: 1937
+			// Start offset: 0x800452F8
 			// Variables:
 		// 		struct _FXGeneralEffect *currentEffect; // $a0
 		// 		struct _FXGeneralEffect *nextEffect; // $s0
 		/* end block 1.1 */
-		// End offset: 0x80045F98
-		// End Line: 1876
+		// End offset: 0x8004531C
+		// End Line: 1947
 	/* end block 1 */
-	// End offset: 0x80045FDC
-	// End Line: 1883
+	// End offset: 0x80045360
+	// End Line: 1954
 
 	/* begin block 2 */
-		// Start line: 4235
+		// Start line: 4441
 	/* end block 2 */
-	// End Line: 4236
+	// End Line: 4442
 
 	/* begin block 3 */
-		// Start line: 4248
+		// Start line: 4454
 	/* end block 3 */
-	// End Line: 4249
+	// End Line: 4455
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_ProcessList(_FXTracker *fxTracker)
 
 {
-  _FXGeneralEffect *p_Var1;
+  int **ppiVar1;
   int iVar2;
   NodeType *node;
   NodeType *pNVar3;
   NodeType *pNVar4;
-  _FXGeneralEffect *p_Var5;
+  int **ppiVar5;
   
-  iVar2 = (int)(((uint)(ushort)FX_TimeCount + (uint)(ushort)gameTrackerX.idleTime) * 0x10000) >>
-          0x10;
+  iVar2 = (int)(((uint)(ushort)FX_TimeCount + (uint)(ushort)DAT_800d2314) * 0x10000) >> 0x10;
   if (iVar2 < 0) {
     iVar2 = iVar2 + 0xfff;
   }
   FX_Frames = (short)(iVar2 >> 0xc);
   pNVar4 = (fxTracker->usedMatrixList).next;
-  FX_TimeCount = (short)((uint)(ushort)FX_TimeCount + (uint)(ushort)gameTrackerX.idleTime) +
+  FX_TimeCount = (short)((uint)(ushort)FX_TimeCount + (uint)(ushort)DAT_800d2314) +
                  FX_Frames * -0x1000;
   while (pNVar4 != (NodeType *)0x0) {
     pNVar3 = pNVar4[1].prev;
@@ -2096,17 +2093,17 @@ void FX_ProcessList(_FXTracker *fxTracker)
     }
   }
   pNVar4 = (fxTracker->usedMatrixList).next;
-  while (node = pNVar4, p_Var5 = FX_GeneralEffectTracker, node != (NodeType *)0x0) {
+  while (node = pNVar4, ppiVar5 = (int **)FX_GeneralEffectTracker, node != (NodeType *)0x0) {
     pNVar4 = node->next;
     if (((uint)node[1].prev & 1) == 0) {
       LIST_DeleteFunc(node);
       LIST_InsertFunc(&fxTracker->freeMatrixList,node);
     }
   }
-  while (p_Var1 = p_Var5, p_Var1 != (_FXGeneralEffect *)0x0) {
-    p_Var5 = (_FXGeneralEffect *)p_Var1->next;
-    if ((code *)p_Var1->continue_process != (code *)0x0) {
-      (*(code *)p_Var1->continue_process)(p_Var1,fxTracker);
+  while (ppiVar1 = ppiVar5, ppiVar1 != (int **)0x0) {
+    ppiVar5 = (int **)*ppiVar1;
+    if (ppiVar1[1] != (int *)0x0) {
+      (*(code *)ppiVar1[1])(ppiVar1,fxTracker);
     }
   }
   if (FX_ConstrictStage == 1) {
@@ -2126,17 +2123,41 @@ void FX_ProcessList(_FXTracker *fxTracker)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ FX_DrawList(struct _FXTracker *fxTracker /*stack 0*/, struct GameTracker *gameTracker /*$a1*/, unsigned long **ot /*$s5*/, struct MATRIX *wcTransform /*$fp*/)
- // line 1900, offset 0x80045ffc
+// void /*$ra*/ FX_DrawReaver(struct _PrimPool *primPool /*$v0*/, unsigned long **ot /*$s0*/, struct MATRIX *wcTransform /*$a3*/)
+ // line 1957, offset 0x80045380
 	/* begin block 1 */
-		// Start line: 1901
-		// Start offset: 0x80045FFC
+		// Start line: 4646
+	/* end block 1 */
+	// End Line: 4647
+
+/* File: C:\kain2\game\FX.C */
+
+void FX_DrawReaver(_PrimPool *primPool,ulong **ot,undefined1 wcTransform)
+
+{
+  if (FX_reaver_instance != (_Instance *)0x0) {
+    FX_SoulReaverWinding(FX_reaver_instance,primPool,ot,wcTransform);
+    FX_SoulReaverBlade(FX_reaver_instance,ot);
+  }
+  FX_reaver_instance = (_Instance *)0x0;
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ FX_DrawList(struct _FXTracker *fxTracker /*stack 0*/, struct GameTracker *gameTracker /*$a1*/, unsigned long **ot /*$s5*/, struct MATRIX *wcTransform /*$s7*/)
+ // line 1979, offset 0x800453cc
+	/* begin block 1 */
+		// Start line: 1980
+		// Start offset: 0x800453CC
 		// Variables:
 	// 		struct TextureMT3 *texture; // $a1
-	// 		struct _PrimPool *primPool; // $s6
+	// 		struct _PrimPool *primPool; // $fp
 	// 		long *prim; // $s1
 	// 		struct _FX_PRIM *fxPrim; // $s0
-	// 		struct _FX_PRIM *nextFXPrim; // $s7
+	// 		struct _FX_PRIM *nextFXPrim; // $s6
 	// 		struct SVECTOR sv0; // stack offset -104
 	// 		struct SVECTOR sv1; // stack offset -96
 	// 		struct SVECTOR sv2; // stack offset -88
@@ -2150,40 +2171,40 @@ void FX_ProcessList(_FXTracker *fxTracker)
 	// 		int matrix_wc; // $t2
 
 		/* begin block 1.1 */
-			// Start line: 1922
-			// Start offset: 0x80046080
+			// Start line: 2001
+			// Start offset: 0x80045450
 			// Variables:
 		// 		long flags; // $s2
 
 			/* begin block 1.1.1 */
-				// Start line: 2010
-				// Start offset: 0x80046370
+				// Start line: 2089
+				// Start offset: 0x80045740
 				// Variables:
 			// 		struct _POLY_NG4 *ng4; // $a2
 
 				/* begin block 1.1.1.1 */
-					// Start line: 2012
-					// Start offset: 0x80046370
+					// Start line: 2091
+					// Start offset: 0x80045740
 					// Variables:
 				// 		int n; // $a0
 				// 		long *ptr; // $a1
 				/* end block 1.1.1.1 */
-				// End offset: 0x80046430
-				// End Line: 2037
+				// End offset: 0x80045800
+				// End Line: 2116
 			/* end block 1.1.1 */
-			// End offset: 0x80046430
-			// End Line: 2059
+			// End offset: 0x80045800
+			// End Line: 2138
 
 			/* begin block 1.1.2 */
-				// Start line: 2076
-				// Start offset: 0x80046468
+				// Start line: 2155
+				// Start offset: 0x80045838
 			/* end block 1.1.2 */
-			// End offset: 0x80046468
-			// End Line: 2078
+			// End offset: 0x80045838
+			// End Line: 2157
 
 			/* begin block 1.1.3 */
-				// Start line: 2166
-				// Start offset: 0x800465FC
+				// Start line: 2245
+				// Start offset: 0x800459CC
 				// Variables:
 			// 		struct POLY_FT4 *ft4; // $a2
 			// 		unsigned short uMin; // $t1
@@ -2191,69 +2212,69 @@ void FX_ProcessList(_FXTracker *fxTracker)
 			// 		unsigned short vMin; // $a3
 			// 		unsigned short vMax; // $v1
 			/* end block 1.1.3 */
-			// End offset: 0x80046848
-			// End Line: 2197
+			// End offset: 0x80045C18
+			// End Line: 2276
 
 			/* begin block 1.1.4 */
-				// Start line: 2204
-				// Start offset: 0x80046884
+				// Start line: 2283
+				// Start offset: 0x80045C54
 				// Variables:
 			// 		struct POLY_FT3 *ft3; // $t0
 
 				/* begin block 1.1.4.1 */
-					// Start line: 2217
-					// Start offset: 0x800468D0
+					// Start line: 2296
+					// Start offset: 0x80045CA0
 					// Variables:
 				// 		short uMin; // $a3
 				// 		short uMax; // $a2
 				/* end block 1.1.4.1 */
-				// End offset: 0x800469D4
-				// End Line: 2225
+				// End offset: 0x80045DA4
+				// End Line: 2304
 			/* end block 1.1.4 */
-			// End offset: 0x80046A10
-			// End Line: 2231
+			// End offset: 0x80045DE0
+			// End Line: 2310
 		/* end block 1.1 */
-		// End offset: 0x80046A10
-		// End Line: 2235
+		// End offset: 0x80045DE0
+		// End Line: 2314
 
 		/* begin block 1.2 */
-			// Start line: 2246
-			// Start offset: 0x80046A50
+			// Start line: 2325
+			// Start offset: 0x80045E20
 			// Variables:
 		// 		struct DVECTOR xy_pos; // stack offset -72
 		// 		long flags; // $t1
 
 			/* begin block 1.2.1 */
-				// Start line: 2311
-				// Start offset: 0x80046C8C
+				// Start line: 2390
+				// Start offset: 0x8004605C
 				// Variables:
 			// 		struct _POLY_SG4 *sg4; // $a1
 
 				/* begin block 1.2.1.1 */
-					// Start line: 2313
-					// Start offset: 0x80046C8C
+					// Start line: 2392
+					// Start offset: 0x8004605C
 					// Variables:
 				// 		int n; // $a3
 				// 		long *src; // $t2
 				// 		long *dst; // $t1
 				// 		long *ptr; // $t3
 				/* end block 1.2.1.1 */
-				// End offset: 0x80046D84
-				// End Line: 2344
+				// End offset: 0x80046154
+				// End Line: 2423
 			/* end block 1.2.1 */
-			// End offset: 0x80046D84
-			// End Line: 2366
+			// End offset: 0x80046154
+			// End Line: 2445
 
 			/* begin block 1.2.2 */
-				// Start line: 2378
-				// Start offset: 0x80046E18
+				// Start line: 2457
+				// Start offset: 0x800461E8
 			/* end block 1.2.2 */
-			// End offset: 0x80046E18
-			// End Line: 2382
+			// End offset: 0x800461E8
+			// End Line: 2461
 
 			/* begin block 1.2.3 */
-				// Start line: 2410
-				// Start offset: 0x80046F04
+				// Start line: 2489
+				// Start offset: 0x800462D4
 				// Variables:
 			// 		unsigned short uMin; // $t3
 			// 		unsigned short uMax; // $t2
@@ -2261,24 +2282,25 @@ void FX_ProcessList(_FXTracker *fxTracker)
 			// 		unsigned short vMax; // $v1
 			// 		struct POLY_FT4 *ft4; // $a2
 			/* end block 1.2.3 */
-			// End offset: 0x80047170
-			// End Line: 2448
+			// End offset: 0x80046540
+			// End Line: 2527
 		/* end block 1.2 */
-		// End offset: 0x800471DC
-		// End Line: 2467
+		// End offset: 0x800465AC
+		// End Line: 2546
 	/* end block 1 */
-	// End offset: 0x80047234
-	// End Line: 2477
+	// End offset: 0x800465B8
+	// End Line: 2550
 
 	/* begin block 2 */
-		// Start line: 4468
+		// Start line: 4691
 	/* end block 2 */
-	// End Line: 4469
+	// End Line: 4692
 
 /* WARNING: Type propagation algorithm not settling */
 /* WARNING: Could not reconcile some variable overlaps */
+/* File: C:\kain2\game\FX.C */
 
-void FX_DrawList(_FXTracker *fxTracker,GameTracker *gameTracker,ulong **ot,MATRIX *wcTransform)
+void FX_DrawList(_FXTracker *fxTracker,GameTracker *gameTracker,ulong **ot,undefined wcTransform)
 
 {
   byte bVar1;
@@ -2302,6 +2324,8 @@ void FX_DrawList(_FXTracker *fxTracker,GameTracker *gameTracker,ulong **ot,MATRI
   int iVar17;
   NodeType *pNVar18;
   char cVar19;
+  undefined3 in_register_0000001d;
+  MATRIX *m0;
   ushort uVar20;
   uint *puVar21;
   uint *puVar22;
@@ -2314,8 +2338,8 @@ void FX_DrawList(_FXTracker *fxTracker,GameTracker *gameTracker,ulong **ot,MATRI
   uint *puVar29;
   NodeType *pNVar30;
   NodeType **ppNVar31;
-  _PrimPool *primPool;
   NodeType *pNVar32;
+  _PrimPool *primPool;
   uint local_68;
   uint local_64;
   uint local_60;
@@ -2332,6 +2356,7 @@ void FX_DrawList(_FXTracker *fxTracker,GameTracker *gameTracker,ulong **ot,MATRI
   int local_34;
   int local_30;
   
+  m0 = (MATRIX *)CONCAT31(in_register_0000001d,wcTransform);
   bVar4 = false;
   primPool = gameTracker->primPool;
   puVar28 = primPool->nextPrim;
@@ -2351,21 +2376,21 @@ void FX_DrawList(_FXTracker *fxTracker,GameTracker *gameTracker,ulong **ot,MATRI
           pNVar27[3].prev[4].next = (NodeType *)(int)*(short *)((int)&pNVar27[5].next + 2);
           pNVar27[3].prev[5].prev = (NodeType *)(int)*(short *)&pNVar27[6].prev;
           gameTracker = (GameTracker *)&pNVar27[3].prev[1].next;
-          CompMatrix((undefined4 *)wcTransform,(ushort *)gameTracker,(uint *)&DAT_1f800000);
-          SetRotMatrix((undefined4 *)&DAT_1f800000);
-          SetTransMatrix(0x1f800000);
+          CompMatrix(m0,(MATRIX *)gameTracker,(MATRIX *)&DAT_1f800000);
+          SetRotMatrix((MATRIX *)&DAT_1f800000);
+          SetTransMatrix((MATRIX *)&DAT_1f800000);
           bVar4 = false;
         }
         else {
           if (!bVar4) {
-            setCopControlWord(2,0,*(undefined4 *)wcTransform->m);
-            setCopControlWord(2,0x800,*(undefined4 *)(wcTransform->m + 2));
-            setCopControlWord(2,0x1000,*(undefined4 *)(wcTransform->m + 4));
-            setCopControlWord(2,0x1800,*(undefined4 *)(wcTransform->m + 6));
-            setCopControlWord(2,0x2000,*(undefined4 *)(wcTransform->m + 8));
-            setCopControlWord(2,0x2800,wcTransform->t[0]);
-            setCopControlWord(2,0x3000,wcTransform->t[1]);
-            setCopControlWord(2,0x3800,wcTransform->t[2]);
+            setCopControlWord(2,0,*(undefined4 *)m0->m);
+            setCopControlWord(2,0x800,*(undefined4 *)(m0->m + 2));
+            setCopControlWord(2,0x1000,*(undefined4 *)(m0->m + 4));
+            setCopControlWord(2,0x1800,*(undefined4 *)(m0->m + 6));
+            setCopControlWord(2,0x2000,*(undefined4 *)(m0->m + 8));
+            setCopControlWord(2,0x2800,m0->t[0]);
+            setCopControlWord(2,0x3000,m0->t[1]);
+            setCopControlWord(2,0x3800,m0->t[2]);
             bVar4 = true;
           }
         }
@@ -2446,7 +2471,7 @@ void FX_DrawList(_FXTracker *fxTracker,GameTracker *gameTracker,ulong **ot,MATRI
                 puVar29 = puVar28 + 5;
               }
               else {
-                if (((uint)pNVar30 & 0x80000) == 0) goto LAB_80046a10;
+                if (((uint)pNVar30 & 0x80000) == 0) goto LAB_80045de0;
                 ppNVar31[1] = pNVar27[3].next;
                 pNVar27 = pNVar27[4].next;
                 *ppNVar31 = (NodeType *)0xe1000620;
@@ -2501,7 +2526,7 @@ void FX_DrawList(_FXTracker *fxTracker,GameTracker *gameTracker,ulong **ot,MATRI
                 *(undefined *)((int)puVar28 + 0xb) = 0x3a;
                 puVar28 = puVar28 + 10;
                 ppNVar31 = ppNVar31 + 10;
-                goto LAB_80046a10;
+                goto LAB_80045de0;
               }
               uVar9 = getCopReg(2,0xc);
               puVar28[2] = uVar9;
@@ -2549,17 +2574,17 @@ void FX_DrawList(_FXTracker *fxTracker,GameTracker *gameTracker,ulong **ot,MATRI
                 if (bVar15 < bVar14) {
                   bVar3 = bVar14 < bVar15;
                   if (*(byte *)&(gameTracker->gameData).asmData.MorphTime <= bVar15) {
-LAB_80046928:
+LAB_80045cf8:
                     cVar12 = *(char *)&(gameTracker->gameData).asmData.MorphTime;
-                    goto LAB_8004692c;
+                    goto LAB_80045cfc;
                   }
                   cVar12 = *(char *)&(gameTracker->gameData).asmData.drawBackFaces;
                 }
                 else {
                   if (*(byte *)&(gameTracker->gameData).asmData.MorphTime <= bVar14)
-                  goto LAB_80046928;
+                  goto LAB_80045cf8;
                   cVar12 = *(char *)&(gameTracker->gameData).asmData.dispPage;
-LAB_8004692c:
+LAB_80045cfc:
                   bVar15 = *(byte *)&(gameTracker->gameData).asmData.drawBackFaces;
                   bVar14 = *(byte *)&(gameTracker->gameData).asmData.dispPage;
                   bVar3 = bVar14 < bVar15;
@@ -2569,13 +2594,13 @@ LAB_8004692c:
                     cVar19 = *(char *)&(gameTracker->gameData).asmData.drawBackFaces;
                   }
                   else {
-LAB_80046984:
+LAB_80045d54:
                     cVar19 = *(char *)&(gameTracker->gameData).asmData.MorphTime;
                   }
                 }
                 else {
                   if (bVar14 <= *(byte *)&(gameTracker->gameData).asmData.MorphTime)
-                  goto LAB_80046984;
+                  goto LAB_80045d54;
                   cVar19 = *(char *)&(gameTracker->gameData).asmData.dispPage;
                 }
                 cVar11 = cVar12;
@@ -2613,17 +2638,17 @@ LAB_80046984:
               if (bVar15 < bVar14) {
                 bVar3 = bVar14 < bVar15;
                 if (*(byte *)&(gameTracker->gameData).asmData.MorphTime <= bVar15) {
-LAB_80046684:
+LAB_80045a54:
                   bVar1 = *(byte *)&(gameTracker->gameData).asmData.MorphTime;
-                  goto LAB_80046688;
+                  goto LAB_80045a58;
                 }
                 bVar1 = *(byte *)&(gameTracker->gameData).asmData.drawBackFaces;
               }
               else {
                 if (*(byte *)&(gameTracker->gameData).asmData.MorphTime <= bVar14)
-                goto LAB_80046684;
+                goto LAB_80045a54;
                 bVar1 = *(byte *)&(gameTracker->gameData).asmData.dispPage;
-LAB_80046688:
+LAB_80045a58:
                 bVar15 = *(byte *)&(gameTracker->gameData).asmData.drawBackFaces;
                 bVar14 = *(byte *)&(gameTracker->gameData).asmData.dispPage;
                 bVar3 = bVar14 < bVar15;
@@ -2633,30 +2658,30 @@ LAB_80046688:
                   uVar20 = (ushort)*(byte *)&(gameTracker->gameData).asmData.drawBackFaces;
                 }
                 else {
-LAB_800466e0:
+LAB_80045ab0:
                   uVar20 = (ushort)*(byte *)&(gameTracker->gameData).asmData.MorphTime;
                 }
               }
               else {
                 if (bVar14 <= *(byte *)&(gameTracker->gameData).asmData.MorphTime)
-                goto LAB_800466e0;
+                goto LAB_80045ab0;
                 uVar20 = (ushort)*(byte *)&(gameTracker->gameData).asmData.dispPage;
               }
               bVar15 = *(byte *)((int)&(gameTracker->gameData).asmData.drawBackFaces + 1);
               bVar14 = *(byte *)((int)&(gameTracker->gameData).asmData.dispPage + 1);
               if (bVar15 < bVar14) {
                 if (*(byte *)((int)&(gameTracker->gameData).asmData.MorphTime + 1) <= bVar15) {
-LAB_8004673c:
+LAB_80045b0c:
                   bVar2 = *(byte *)((int)&(gameTracker->gameData).asmData.MorphTime + 1);
-                  goto LAB_80046748;
+                  goto LAB_80045b18;
                 }
                 bVar2 = *(byte *)((int)&(gameTracker->gameData).asmData.drawBackFaces + 1);
               }
               else {
                 if (*(byte *)((int)&(gameTracker->gameData).asmData.MorphTime + 1) <= bVar14)
-                goto LAB_8004673c;
+                goto LAB_80045b0c;
                 bVar2 = *(byte *)((int)&(gameTracker->gameData).asmData.dispPage + 1);
-LAB_80046748:
+LAB_80045b18:
                 bVar15 = *(byte *)((int)&(gameTracker->gameData).asmData.drawBackFaces + 1);
                 bVar14 = *(byte *)((int)&(gameTracker->gameData).asmData.dispPage + 1);
               }
@@ -2666,14 +2691,14 @@ LAB_80046748:
                                             ) << 8;
                 }
                 else {
-LAB_800467a0:
+LAB_80045b70:
                   uVar13 = (ushort)*(byte *)((int)&(gameTracker->gameData).asmData.MorphTime + 1) <<
                            8;
                 }
               }
               else {
                 if (bVar14 <= *(byte *)((int)&(gameTracker->gameData).asmData.MorphTime + 1))
-                goto LAB_800467a0;
+                goto LAB_80045b70;
                 uVar13 = (ushort)*(byte *)((int)&(gameTracker->gameData).asmData.dispPage + 1) << 8;
               }
               *(ushort *)(puVar28 + 3) = CONCAT11(bVar2,bVar1);
@@ -2709,28 +2734,22 @@ LAB_800467a0:
           puVar28 = puVar29;
         }
       }
-LAB_80046a10:
+LAB_80045de0:
       pNVar27 = pNVar32;
     } while (pNVar32 != (NodeType *)0x0);
   }
-  SetRotMatrix((undefined4 *)wcTransform);
-  SetTransMatrix((int)wcTransform);
+  SetRotMatrix(m0);
+  SetTransMatrix(m0);
   pNVar27 = (fxTracker->usedPrimListSprite).next;
   puVar29 = puVar28;
-joined_r0x80046a3c:
+joined_r0x80045e0c:
   do {
     do {
       pNVar30 = pNVar27;
       if (pNVar30 == (NodeType *)0x0) {
-LAB_800471e8:
+LAB_800465b8:
         primPool->nextPrim = puVar28;
-        FX_DrawAllGeneralEffects(wcTransform,gameTrackerX.vertexPool,primPool,ot);
-        if ((FX_reaver_instance != (_Instance *)0x0) &&
-           (FX_SoulReaverWinding(FX_reaver_instance,primPool,ot,wcTransform),
-           FX_reaver_instance != (_Instance *)0x0)) {
-          FX_SoulReaverBlade(FX_reaver_instance,ot);
-        }
-        FX_reaver_instance = (_Instance *)0x0;
+        FX_DrawAllGeneralEffects(wcTransform,DAT_800d2108,primPool,ot);
         return;
       }
       local_30 = (int)*(short *)&pNVar30[7].next << 1;
@@ -2741,7 +2760,7 @@ LAB_800471e8:
       copFunction(2,0x180001);
       pNVar27 = pNVar30->next;
       pNVar32 = pNVar30[1].next;
-      if (primPool->lastPrim <= puVar28 + 10) goto LAB_800471e8;
+      if (primPool->lastPrim <= puVar28 + 10) goto LAB_800465b8;
     } while (((uint)pNVar32 & 0x10) != 0);
     local_48 = getCopReg(2,0xe);
     local_30 = getCopReg(2,0x18);
@@ -2878,16 +2897,16 @@ LAB_800471e8:
             if (bVar15 < bVar14) {
               bVar4 = bVar14 < bVar15;
               if (*(byte *)&pNVar18[1].prev <= bVar15) {
-LAB_80046f5c:
+LAB_8004632c:
                 bVar1 = *(byte *)&pNVar18[1].prev;
-                goto LAB_80046f60;
+                goto LAB_80046330;
               }
               bVar1 = *(byte *)&pNVar18->prev;
             }
             else {
-              if (*(byte *)&pNVar18[1].prev <= bVar14) goto LAB_80046f5c;
+              if (*(byte *)&pNVar18[1].prev <= bVar14) goto LAB_8004632c;
               bVar1 = *(byte *)&pNVar18->next;
-LAB_80046f60:
+LAB_80046330:
               bVar15 = *(byte *)&pNVar18->prev;
               bVar14 = *(byte *)&pNVar18->next;
               bVar4 = bVar14 < bVar15;
@@ -2897,28 +2916,28 @@ LAB_80046f60:
                 uVar20 = (ushort)*(byte *)&pNVar18->prev;
               }
               else {
-LAB_80046fb8:
+LAB_80046388:
                 uVar20 = (ushort)*(byte *)&pNVar18[1].prev;
               }
             }
             else {
-              if (bVar14 <= *(byte *)&pNVar18[1].prev) goto LAB_80046fb8;
+              if (bVar14 <= *(byte *)&pNVar18[1].prev) goto LAB_80046388;
               uVar20 = (ushort)*(byte *)&pNVar18->next;
             }
             bVar15 = *(byte *)((int)&pNVar18->prev + 1);
             bVar14 = *(byte *)((int)&pNVar18->next + 1);
             if (bVar15 < bVar14) {
               if (*(byte *)((int)&pNVar18[1].prev + 1) <= bVar15) {
-LAB_80047014:
+LAB_800463e4:
                 bVar2 = *(byte *)((int)&pNVar18[1].prev + 1);
-                goto LAB_80047020;
+                goto LAB_800463f0;
               }
               bVar2 = *(byte *)((int)&pNVar18->prev + 1);
             }
             else {
-              if (*(byte *)((int)&pNVar18[1].prev + 1) <= bVar14) goto LAB_80047014;
+              if (*(byte *)((int)&pNVar18[1].prev + 1) <= bVar14) goto LAB_800463e4;
               bVar2 = *(byte *)((int)&pNVar18->next + 1);
-LAB_80047020:
+LAB_800463f0:
               bVar15 = *(byte *)((int)&pNVar18->prev + 1);
               bVar14 = *(byte *)((int)&pNVar18->next + 1);
             }
@@ -2927,12 +2946,12 @@ LAB_80047020:
                 uVar13 = (ushort)*(byte *)((int)&pNVar18->prev + 1) << 8;
               }
               else {
-LAB_80047078:
+LAB_80046448:
                 uVar13 = (ushort)*(byte *)((int)&pNVar18[1].prev + 1) << 8;
               }
             }
             else {
-              if (bVar14 <= *(byte *)((int)&pNVar18[1].prev + 1)) goto LAB_80047078;
+              if (bVar14 <= *(byte *)((int)&pNVar18[1].prev + 1)) goto LAB_80046448;
               uVar13 = (ushort)*(byte *)((int)&pNVar18->next + 1) << 8;
             }
             *(ushort *)(puVar29 + 3) = CONCAT11(bVar2,bVar1);
@@ -2971,7 +2990,7 @@ LAB_80047078:
             ot[local_34] = puVar10;
           }
         }
-        goto joined_r0x80046a3c;
+        goto joined_r0x80045e0c;
       }
     }
     if (((uint)pNVar32 & 0x400000) == 0) {
@@ -2990,86 +3009,88 @@ LAB_80047078:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_SimpleQuadSetup(struct _FX_PRIM *fxPrim /*$s5*/, TDRFuncPtr_FX_SimpleQuadSetup1fxProcess fxProcess /*stack 4*/, struct _FX_MATRIX *fxMatrix /*stack 8*/, struct _Instance *instance /*$a3*/, struct _MFace *mface /*stack 16*/, struct _MVertex *vertexList /*stack 20*/, struct SVECTOR *center /*stack 24*/, struct SVECTOR *vel /*stack 28*/, struct SVECTOR *accl /*stack 32*/, struct _FXTracker *fxTracker /*stack 36*/, int timeToLive /*stack 40*/)
- // line 2642, offset 0x80047268
+ // line 2717, offset 0x80046600
 	/* begin block 1 */
-		// Start line: 2643
-		// Start offset: 0x80047268
+		// Start line: 2718
+		// Start offset: 0x80046600
 		// Variables:
 	// 		struct _MVertex *vertex1; // $s2
 	// 		struct _MVertex *vertex2; // $s3
 	// 		struct _MVertex *vertex3; // $s4
 
 		/* begin block 1.1 */
-			// Start line: 2643
-			// Start offset: 0x80047268
+			// Start line: 2718
+			// Start offset: 0x80046600
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a0
 		// 		struct _Position *_v0; // $v0
 		/* end block 1.1 */
-		// End offset: 0x80047268
-		// End Line: 2643
+		// End offset: 0x80046600
+		// End Line: 2718
 
 		/* begin block 1.2 */
-			// Start line: 2643
-			// Start offset: 0x80047268
+			// Start line: 2718
+			// Start offset: 0x80046600
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a0
 		// 		struct _SVector *_v0; // $v0
 		/* end block 1.2 */
-		// End offset: 0x80047268
-		// End Line: 2643
+		// End offset: 0x80046600
+		// End Line: 2718
 
 		/* begin block 1.3 */
-			// Start line: 2643
-			// Start offset: 0x80047268
+			// Start line: 2718
+			// Start offset: 0x80046600
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a0
 		// 		struct _SVector *_v0; // $v0
 		/* end block 1.3 */
-		// End offset: 0x80047268
-		// End Line: 2643
+		// End offset: 0x80046600
+		// End Line: 2718
 
 		/* begin block 1.4 */
-			// Start line: 2643
-			// Start offset: 0x80047268
+			// Start line: 2718
+			// Start offset: 0x80046600
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a0
 		// 		struct _SVector *_v0; // $v0
 		/* end block 1.4 */
-		// End offset: 0x80047268
-		// End Line: 2643
+		// End offset: 0x80046600
+		// End Line: 2718
 
 		/* begin block 1.5 */
-			// Start line: 2643
-			// Start offset: 0x80047268
+			// Start line: 2718
+			// Start offset: 0x80046600
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a0
 		// 		struct _SVector *_v0; // $v0
 		/* end block 1.5 */
-		// End offset: 0x80047268
-		// End Line: 2643
+		// End offset: 0x80046600
+		// End Line: 2718
 	/* end block 1 */
-	// End offset: 0x80047460
-	// End Line: 2708
+	// End offset: 0x800467F8
+	// End Line: 2783
 
 	/* begin block 2 */
-		// Start line: 5266
+		// Start line: 5416
 	/* end block 2 */
-	// End Line: 5267
+	// End Line: 5417
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_SimpleQuadSetup(_FX_PRIM *fxPrim,TDRFuncPtr_FX_SimpleQuadSetup1fxProcess fxProcess,
                        _FX_MATRIX *fxMatrix,_Instance *instance,_MFace *mface,_MVertex *vertexList,
-                       SVECTOR *center,SVECTOR *vel,SVECTOR *accl,_FXTracker *fxTracker,
+                       undefined1 center,undefined1 vel,undefined1 accl,_FXTracker *fxTracker,
                        int timeToLive)
 
 {
@@ -3079,22 +3100,22 @@ void FX_SimpleQuadSetup(_FX_PRIM *fxPrim,TDRFuncPtr_FX_SimpleQuadSetup1fxProcess
   uint uVar4;
   uint uVar5;
   
-  MATH3D_SetUnityMatrix((MATRIX *)&fxMatrix->lwTransform);
-  sVar1 = center->vy;
-  sVar2 = center->vz;
-  (fxPrim->position).x = center->vx;
+  MATH3D_SetUnityMatrix((char)fxMatrix + '\f');
+  sVar1 = _center[1];
+  sVar2 = _center[2];
+  (fxPrim->position).x = *_center;
   (fxPrim->position).y = sVar1;
   (fxPrim->position).z = sVar2;
   sVar1 = (vertexList->vertex).y;
   sVar2 = (vertexList->vertex).z;
-  (fxPrim->_2).x = (vertexList->vertex).x;
-  (fxPrim->_2).y = sVar1;
-  (fxPrim->_2).z = sVar2;
+  (fxPrim->v0).x = (vertexList->vertex).x;
+  (fxPrim->v0).y = sVar1;
+  (fxPrim->v0).z = sVar2;
   sVar1 = vertexList[1].vertex.y;
   sVar2 = vertexList[1].vertex.z;
-  (fxPrim->_3).x = vertexList[1].vertex.x;
-  (fxPrim->_3).y = sVar1;
-  (fxPrim->_3).z = sVar2;
+  (fxPrim->v1).x = vertexList[1].vertex.x;
+  (fxPrim->v1).y = sVar1;
+  (fxPrim->v1).z = sVar2;
   sVar1 = vertexList[3].vertex.y;
   sVar2 = vertexList[3].vertex.z;
   (fxPrim->v2).x = vertexList[3].vertex.x;
@@ -3127,25 +3148,25 @@ void FX_SimpleQuadSetup(_FX_PRIM *fxPrim,TDRFuncPtr_FX_SimpleQuadSetup1fxProcess
     *(TDRFuncPtr_FX_SimpleQuadSetup1fxProcess *)&fxPrim->process = fxProcess;
   }
   fxPrim->matrix = fxMatrix;
-  if (vel == (SVECTOR *)0x0) {
+  if (_vel == (undefined2 *)0x0) {
     *(undefined2 *)&fxPrim->duo = 0;
     *(undefined2 *)((int)&fxPrim->duo + 2) = 0;
     *(undefined2 *)((int)&fxPrim->duo + 4) = 0;
   }
   else {
-    *(short *)&fxPrim->duo = vel->vx;
-    *(short *)((int)&fxPrim->duo + 2) = vel->vy;
-    *(short *)((int)&fxPrim->duo + 4) = vel->vz;
+    *(undefined2 *)&fxPrim->duo = *_vel;
+    *(undefined2 *)((int)&fxPrim->duo + 2) = _vel[1];
+    *(undefined2 *)((int)&fxPrim->duo + 4) = _vel[2];
   }
-  if (accl == (SVECTOR *)0x0) {
+  if (_accl == (undefined2 *)0x0) {
     *(undefined2 *)((int)&fxPrim->duo + 6) = 0;
     *(undefined2 *)((int)&fxPrim->duo + 8) = 0;
     *(undefined2 *)((int)&fxPrim->duo + 10) = 0;
   }
   else {
-    *(short *)((int)&fxPrim->duo + 6) = accl->vx;
-    *(short *)((int)&fxPrim->duo + 8) = accl->vy;
-    *(short *)((int)&fxPrim->duo + 10) = accl->vz;
+    *(undefined2 *)((int)&fxPrim->duo + 6) = *_accl;
+    *(undefined2 *)((int)&fxPrim->duo + 8) = _accl[1];
+    *(undefined2 *)((int)&fxPrim->duo + 10) = _accl[2];
   }
   fxPrim->timeToLive = (int)(short)timeToLive;
   fxPrim->flags = fxPrim->flags | 0x4000;
@@ -3157,23 +3178,25 @@ void FX_SimpleQuadSetup(_FX_PRIM *fxPrim,TDRFuncPtr_FX_SimpleQuadSetup1fxProcess
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_WaterRingProcess(struct _FX_PRIM *fxPrim /*$a0*/, struct _FXTracker *fxTracker /*$a1*/)
- // line 2711, offset 0x800474ac
+ // line 2786, offset 0x80046844
 	/* begin block 1 */
-		// Start line: 6682
+		// Start line: 6896
 	/* end block 1 */
-	// End Line: 6683
+	// End Line: 6897
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_WaterRingProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 
 {
   short sVar1;
   
-  (fxPrim->_2).x = (fxPrim->_2).x + -8;
-  sVar1 = (fxPrim->_3).x;
-  (fxPrim->_2).y = (fxPrim->_2).y + -8;
-  (fxPrim->_3).x = sVar1 + 8;
+  (fxPrim->v0).x = (fxPrim->v0).x + -8;
+  sVar1 = (fxPrim->v1).x;
+  (fxPrim->v0).y = (fxPrim->v0).y + -8;
+  (fxPrim->v1).x = sVar1 + 8;
   sVar1 = (fxPrim->v2).x;
-  (fxPrim->_3).y = (fxPrim->_3).y + -8;
+  (fxPrim->v1).y = (fxPrim->v1).y + -8;
   (fxPrim->v2).x = sVar1 + -8;
   sVar1 = (fxPrim->v3).x;
   (fxPrim->v2).y = (fxPrim->v2).y + 8;
@@ -3188,66 +3211,106 @@ void FX_WaterRingProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_WaterBubbleProcess(struct _FX_PRIM *fxPrim /*$s0*/, struct _FXTracker *fxTracker /*$s1*/)
- // line 2721, offset 0x80047528
+ // line 2796, offset 0x800468c0
 	/* begin block 1 */
-		// Start line: 2722
-		// Start offset: 0x80047528
+		// Start line: 2797
+		// Start offset: 0x800468C0
 		// Variables:
 	// 		struct _FX_PRIM *temp; // $a2
 
 		/* begin block 1.1 */
-			// Start line: 2748
-			// Start offset: 0x80047608
+			// Start line: 2823
+			// Start offset: 0x800469A0
 			// Variables:
 		// 		struct Object *waterfx; // $v1
 		// 		struct _Model *wxring; // $a0
 		/* end block 1.1 */
-		// End offset: 0x8004771C
-		// End Line: 2787
+		// End offset: 0x80046AB4
+		// End Line: 2862
 	/* end block 1 */
-	// End offset: 0x8004771C
-	// End Line: 2788
+	// End offset: 0x80046AB4
+	// End Line: 2863
 
 	/* begin block 2 */
-		// Start line: 6705
+		// Start line: 6919
 	/* end block 2 */
-	// End Line: 6706
+	// End Line: 6920
 
-/* WARNING: Removing unreachable block (ram,0x80047618) */
-/* WARNING: Removing unreachable block (ram,0x8004762c) */
-/* WARNING: Removing unreachable block (ram,0x8004767c) */
+/* WARNING: Type propagation algorithm not settling */
+/* File: C:\kain2\game\FX.C */
 
 void FX_WaterBubbleProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 
 {
-  short sVar1;
+  ushort uVar1;
   ushort uVar2;
-  ushort uVar3;
+  short sVar3;
   short sVar4;
-  int iVar5;
+  _FX_PRIM *p_Var5;
+  uint uVar6;
+  int iVar7;
+  _Model *model;
   
   if (*(short *)((int)&fxPrim->duo + 4) < fxPrim->work1) {
     *(short *)((int)&fxPrim->duo + 4) =
          *(short *)((int)&fxPrim->duo + 4) + *(short *)((int)&fxPrim->duo + 10);
   }
   if (fxPrim->work0 < *(short *)((int)&fxPrim->duo + 6)) {
-    sVar1 = *(short *)((int)&fxPrim->duo + 2);
+    sVar4 = *(short *)((int)&fxPrim->duo + 2);
     (fxPrim->position).x = (fxPrim->position).x + *(short *)&fxPrim->duo;
-    (fxPrim->position).y = (fxPrim->position).y + sVar1;
+    (fxPrim->position).y = (fxPrim->position).y + sVar4;
   }
-  uVar2 = fxPrim->work2;
-  iVar5 = (uint)(ushort)fxPrim->work0 + 1;
-  uVar3 = fxPrim->work3;
+  uVar1 = fxPrim->work2;
+  iVar7 = (uint)(ushort)fxPrim->work0 + 1;
+  uVar2 = fxPrim->work3;
   (fxPrim->position).z = (fxPrim->position).z + *(short *)((int)&fxPrim->duo + 4);
-  sVar1 = *(short *)((int)&fxPrim->duo + 8);
-  fxPrim->work0 = (short)iVar5;
-  iVar5 = (uint)uVar3 - iVar5 * (uint)uVar2;
-  sVar4 = (short)iVar5;
-  (fxPrim->v2).y = sVar4;
-  (fxPrim->_2).y = sVar4;
-  if ((iVar5 * 0x10000 >> 0x10 < (int)sVar1) || (fxPrim->timeToLive < (int)(fxPrim->position).z)) {
-    FX_Die(fxPrim,fxTracker);
+  sVar4 = *(short *)((int)&fxPrim->duo + 8);
+  fxPrim->work0 = (short)iVar7;
+  iVar7 = (uint)uVar2 - iVar7 * (uint)uVar1;
+  sVar3 = (short)iVar7;
+  (fxPrim->v2).y = sVar3;
+  (fxPrim->v0).y = sVar3;
+  iVar7 = iVar7 * 0x10000 >> 0x10;
+  if (sVar4 <= iVar7) {
+    if ((int)(fxPrim->position).z <= fxPrim->timeToLive) {
+      return;
+    }
+    if (((objectAccess[3].object != (void *)0x0) && ((fxPrim->v1).y < iVar7)) &&
+       (model = (_Model *)(*(_Model **)((int)objectAccess[3].object + 0xc))->numVertices,
+       p_Var5 = FX_BuildSingleFaceWithModel
+                          (model,model->faceList,(char)fxPrim + ',',0,0,gFXT,FX_SimpleQuadSetup,
+                           FX_WaterRingProcess,0x10), p_Var5 != (_FX_PRIM *)0x0)) {
+      sVar4 = (p_Var5->position).x;
+      p_Var5->fadeStep = 0x100;
+      sVar3 = (p_Var5->position).y;
+      sVar4 = sVar4 + -8;
+      (p_Var5->v2).x = sVar4;
+      (p_Var5->v0).x = sVar4;
+      sVar4 = (p_Var5->position).x;
+      sVar3 = sVar3 + -8;
+      (p_Var5->v1).y = sVar3;
+      (p_Var5->v0).y = sVar3;
+      sVar3 = (p_Var5->position).z;
+      sVar4 = sVar4 + 8;
+      (p_Var5->v3).x = sVar4;
+      (p_Var5->v1).x = sVar4;
+      sVar4 = (p_Var5->position).y;
+      p_Var5->endColor = 0;
+      p_Var5->fadeValue[0] = 0;
+      (p_Var5->v3).z = sVar3;
+      (p_Var5->v2).z = sVar3;
+      (p_Var5->v1).z = sVar3;
+      (p_Var5->v0).z = sVar3;
+      uVar6 = p_Var5->flags;
+      sVar4 = sVar4 + 8;
+      (p_Var5->v3).y = sVar4;
+      (p_Var5->v2).y = sVar4;
+      p_Var5->flags = uVar6 | 0x50000;
+      p_Var5->color = p_Var5->color | 0xffffff;
+      p_Var5->startColor = 0xffffff;
+    }
   }
+  FX_Die(fxPrim,fxTracker);
   return;
 }
 
@@ -3256,11 +3319,13 @@ void FX_WaterBubbleProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_Sprite_Insert(struct NodeType *list /*$a0*/, struct _FX_PRIM *fxPrim /*$s0*/)
- // line 2791, offset 0x80047730
+ // line 2866, offset 0x80046ac8
 	/* begin block 1 */
-		// Start line: 6907
+		// Start line: 7121
 	/* end block 1 */
-	// End Line: 6908
+	// End Line: 7122
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_Sprite_Insert(NodeType *list,_FX_PRIM *fxPrim)
 
@@ -3277,31 +3342,33 @@ void FX_Sprite_Insert(NodeType *list,_FX_PRIM *fxPrim)
 // decompiled code
 // original method signature: 
 // struct TextureMT3 * /*$ra*/ FX_GetTextureObject(struct Object *object /*$a0*/, int modelnum /*$a1*/, int texnum /*$a2*/)
- // line 2797, offset 0x80047768
+ // line 2872, offset 0x80046b00
 	/* begin block 1 */
-		// Start line: 2799
-		// Start offset: 0x80047768
+		// Start line: 2874
+		// Start offset: 0x80046B00
 		// Variables:
 	// 		struct _Model *model; // $v0
 	// 		struct TextureMT3 *texture; // $v0
 	/* end block 1 */
-	// End offset: 0x80047768
-	// End Line: 2803
+	// End offset: 0x80046B00
+	// End Line: 2878
 
 	/* begin block 2 */
-		// Start line: 6919
+		// Start line: 7133
 	/* end block 2 */
-	// End Line: 6920
+	// End Line: 7134
 
 	/* begin block 3 */
-		// Start line: 6920
+		// Start line: 7134
 	/* end block 3 */
-	// End Line: 6921
+	// End Line: 7135
 
 	/* begin block 4 */
-		// Start line: 6924
+		// Start line: 7138
 	/* end block 4 */
-	// End Line: 6925
+	// End Line: 7139
+
+/* File: C:\kain2\game\FX.C */
 
 TextureMT3 * FX_GetTextureObject(Object *object,int modelnum,int texnum)
 
@@ -3315,144 +3382,60 @@ TextureMT3 * FX_GetTextureObject(Object *object,int modelnum,int texnum)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_MakeWaterBubble(struct _SVector *position /*$s0*/, struct _SVector *vel /*$s4*/, struct _SVector *accl /*$s5*/, long splashZ /*$s6*/, struct __BubbleParams *BP /*stack 16*/)
- // line 2811, offset 0x800477a4
+ // line 2886, offset 0x80046b3c
 	/* begin block 1 */
-		// Start line: 2812
-		// Start offset: 0x800477A4
+		// Start line: 2887
+		// Start offset: 0x80046B3C
 		// Variables:
 	// 		struct Object *waterfx; // $s3
 	// 		struct _FX_PRIM *fxPrim; // $s1
 	/* end block 1 */
-	// End offset: 0x8004792C
-	// End Line: 2843
+	// End offset: 0x80046CC4
+	// End Line: 2918
 
 	/* begin block 2 */
-		// Start line: 6948
+		// Start line: 7162
 	/* end block 2 */
-	// End Line: 6949
+	// End Line: 7163
 
-/* WARNING: Removing unreachable block (ram,0x800477e8) */
-/* WARNING: Removing unreachable block (ram,0x80047800) */
+/* File: C:\kain2\game\FX.C */
 
 void FX_MakeWaterBubble(_SVector *position,_SVector *vel,_SVector *accl,long splashZ,
                        __BubbleParams *BP)
 
 {
-  return;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// void /*$ra*/ FX_GenericBubbleProcess(struct _FXParticle *currentParticle /*$s5*/, struct _FXTracker *fxTracker /*$a1*/)
- // line 2845, offset 0x80047954
-	/* begin block 1 */
-		// Start line: 2846
-		// Start offset: 0x80047954
-		// Variables:
-	// 		struct _SVector position; // stack offset -56
-	// 		struct _SVector accl; // stack offset -48
-	// 		struct _SVector vel; // stack offset -40
-	// 		struct __GenericBubbleParams *GBP; // $s2
-	// 		struct __GenericBubbleParams *GBP_array; // $v1
-	// 		struct Object *waterfx; // $v1
-	// 		int num; // $s4
-	// 		int n; // $s3
-	// 		int birthradius; // $s1
-	// 		int waterZ; // $s6
-	/* end block 1 */
-	// End offset: 0x80047CAC
-	// End Line: 2890
-
-	/* begin block 2 */
-		// Start line: 7041
-	/* end block 2 */
-	// End Line: 7042
-
-void FX_GenericBubbleProcess(_FXParticle *currentParticle,_FXTracker *fxTracker)
-
-{
-  short sVar1;
+  void *object;
+  _FXTracker *p_Var1;
+  _FX_PRIM *fxPrim;
   int iVar2;
-  Level *pLVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  __BubbleParams *BP;
-  uint uVar7;
-  long splashZ;
-  _SVector local_38;
-  _SVector local_30;
-  _SVector local_28;
+  TextureMT3 *pTVar3;
+  uint uVar4;
   
-  BP = (__BubbleParams *)(iRam0000001c + (int)currentParticle->startSegment * 0x30);
-  uVar7 = SEXT24(BP[1].DisperseFrames);
-  if ((int)uVar7 < 0) {
+  object = objectAccess[3].object;
+  if ((objectAccess[3].object != (void *)0x0) &&
+     (fxPrim = FX_GetPrim(gFXT), fxPrim != (_FX_PRIM *)0x0)) {
+    FX_DFacadeParticleSetup
+              (fxPrim,(char)position,0xc,0xc,0x2c000000,(char)vel,(char)accl,gFXT,
+               (int)(short)splashZ);
     iVar2 = rand();
-    uVar7 = (uint)(iVar2 % -uVar7 == 0);
-  }
-  iVar2 = 0;
-  pLVar3 = STREAM_GetLevelWithID(currentParticle->instance->currentStreamUnitID);
-  splashZ = pLVar3->waterZLevel;
-  if (0 < (int)uVar7) {
-    do {
-      local_28.x = BP[1].MinSplashSize;
-      local_28.y = BP[1].MaxSpeed;
-      local_28.z = BP[1].MaxSpeedRange;
-      local_30.x = BP[1].StartScaleRange;
-      local_30.y = BP[1].UniqueBubbles;
-      local_30.z = BP[2].DisperseFrames;
-      if (BP[1].ScaleRate != 0) {
-        iVar4 = rand();
-        iVar6 = (uint)(ushort)BP[1].ScaleRate << 0x10;
-        iVar5 = iVar6 >> 0x10;
-        local_28.x = local_28.x + ((short)(iVar5 - (iVar6 >> 0x1f) >> 1) - (short)(iVar4 % iVar5));
-      }
-      if (BP[1].ScaleRateRange != 0) {
-        iVar4 = rand();
-        iVar6 = (uint)(ushort)BP[1].ScaleRateRange << 0x10;
-        iVar5 = iVar6 >> 0x10;
-        local_28.y = local_28.y + ((short)(iVar5 - (iVar6 >> 0x1f) >> 1) - (short)(iVar4 % iVar5));
-      }
-      if (BP[1].StartScale != 0) {
-        iVar4 = rand();
-        iVar6 = (uint)(ushort)BP[1].StartScale << 0x10;
-        iVar5 = iVar6 >> 0x10;
-        local_28.z = local_28.z + ((short)(iVar5 - (iVar6 >> 0x1f) >> 1) - (short)(iVar4 % iVar5));
-      }
-      if (BP[2].KillScale != 0) {
-        iVar4 = rand();
-        iVar6 = (uint)(ushort)BP[2].KillScale << 0x10;
-        iVar5 = iVar6 >> 0x10;
-        local_30.x = local_30.x + ((short)(iVar5 - (iVar6 >> 0x1f) >> 1) - (short)(iVar4 % iVar5));
-      }
-      if (BP[2].MinSplashSize != 0) {
-        iVar4 = rand();
-        iVar6 = (uint)(ushort)BP[2].MinSplashSize << 0x10;
-        iVar5 = iVar6 >> 0x10;
-        local_30.y = local_30.y + ((short)(iVar5 - (iVar6 >> 0x1f) >> 1) - (short)(iVar4 % iVar5));
-      }
-      if (BP[2].MaxSpeed != 0) {
-        iVar4 = rand();
-        iVar6 = (uint)(ushort)BP[2].MaxSpeed << 0x10;
-        iVar5 = iVar6 >> 0x10;
-        local_30.z = local_30.z + ((short)(iVar5 - (iVar6 >> 0x1f) >> 1) - (short)(iVar4 % iVar5));
-      }
-      iVar4 = (uint)(ushort)BP[1].KillScale << 0x10;
-      iVar5 = iVar4 >> 0x10;
-      if (iVar5 != 0) {
-        iVar6 = rand();
-        sVar1 = (short)(iVar5 - (iVar4 >> 0x1f) >> 1);
-        local_38.x = (currentParticle->instance->position).x + (sVar1 - (short)(iVar6 % iVar5));
-        iVar4 = rand();
-        local_38.y = (currentParticle->instance->position).y + (sVar1 - (short)(iVar4 % iVar5));
-        iVar4 = rand();
-        local_38.z = (currentParticle->instance->position).z + (sVar1 - (short)(iVar4 % iVar5));
-      }
-      FX_MakeWaterBubble(&local_38,&local_28,&local_30,splashZ,BP);
-      iVar2 = iVar2 + 1;
-    } while (iVar2 < (int)uVar7);
+    pTVar3 = FX_GetTextureObject((Object *)object,2,iVar2 % ((int)BP->UniqueBubbles + -1));
+    fxPrim->texture = pTVar3;
+    fxPrim->flags = fxPrim->flags | 1;
+    uVar4 = pTVar3->color;
+    *(code **)&fxPrim->process = FX_WaterBubbleProcess;
+    fxPrim->work0 = 0;
+    fxPrim->color = uVar4 & 0x3ffffff | 0x2c000000;
+    iVar2 = rand();
+    fxPrim->work1 = BP->MaxSpeed + (short)(iVar2 % (int)BP->MaxSpeedRange);
+    iVar2 = rand();
+    fxPrim->work2 = BP->ScaleRate + (short)(iVar2 % (int)BP->ScaleRateRange);
+    iVar2 = rand();
+    p_Var1 = gFXT;
+    fxPrim->work3 = BP->StartScale + (short)(iVar2 % (int)BP->StartScaleRange);
+    *(short *)((int)&fxPrim->duo + 6) = BP->DisperseFrames;
+    *(short *)((int)&fxPrim->duo + 8) = BP->KillScale;
+    (fxPrim->v1).y = BP->MinSplashSize;
+    FX_Sprite_Insert(&p_Var1->usedPrimListSprite,fxPrim);
   }
   return;
 }
@@ -3462,36 +3445,38 @@ void FX_GenericBubbleProcess(_FXParticle *currentParticle,_FXTracker *fxTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_DrawScreenPoly(int transtype /*$t3*/, unsigned long color /*$t2*/, int zdepth /*$a2*/)
- // line 2899, offset 0x80047cd4
+ // line 2976, offset 0x80046cec
 	/* begin block 1 */
-		// Start line: 2900
-		// Start offset: 0x80047CD4
+		// Start line: 2977
+		// Start offset: 0x80046CEC
 		// Variables:
 	// 		unsigned long **drawot; // $t0
 	// 		struct _POLY_TF4 *poly; // $a3
 	/* end block 1 */
-	// End offset: 0x80047D78
-	// End Line: 2916
+	// End offset: 0x80046D90
+	// End Line: 2993
 
 	/* begin block 2 */
-		// Start line: 7181
+		// Start line: 7367
 	/* end block 2 */
-	// End Line: 7182
+	// End Line: 7368
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_DrawScreenPoly(int transtype,ulong color,int zdepth)
 
 {
-  long lVar1;
+  int iVar1;
   uint *puVar2;
-  ulong *puVar3;
+  uint *puVar3;
   
-  lVar1 = gameTrackerX.defVVRemoveDist;
-  puVar3 = (gameTrackerX.primPool)->nextPrim;
-  if (puVar3 + 7 < (gameTrackerX.primPool)->lastPrim) {
+  iVar1 = DAT_800d22a4;
+  puVar3 = *(uint **)(DAT_800d210c + 4);
+  if (puVar3 + 7 < *(uint **)(DAT_800d210c + 8)) {
     *(undefined2 *)((int)puVar3 + 0x16) = 0xf0;
     *(undefined2 *)((int)puVar3 + 0x1a) = 0xf0;
     puVar3[1] = transtype << 5 | 0xe1000600;
-    puVar2 = (uint *)(zdepth * 4 + lVar1);
+    puVar2 = (uint *)(zdepth * 4 + iVar1);
     *(undefined2 *)(puVar3 + 3) = 0;
     *(undefined2 *)((int)puVar3 + 0xe) = 0;
     *(undefined2 *)(puVar3 + 4) = 0x200;
@@ -3502,7 +3487,7 @@ void FX_DrawScreenPoly(int transtype,ulong color,int zdepth)
     *(undefined *)((int)puVar3 + 0xb) = 0x2a;
     *puVar3 = *puVar2 & 0xffffff | 0x6000000;
     *puVar2 = (uint)puVar3 & 0xffffff;
-    (gameTrackerX.primPool)->nextPrim = puVar3 + 7;
+    *(uint **)(DAT_800d210c + 4) = puVar3 + 7;
   }
   return;
 }
@@ -3512,26 +3497,28 @@ void FX_DrawScreenPoly(int transtype,ulong color,int zdepth)
 // decompiled code
 // original method signature: 
 // struct POLY_GT4 * /*$ra*/ FX_SetupPolyGT4(int x1 /*$a0*/, int y1 /*$a1*/, int x2 /*$a2*/, int y2 /*$a3*/, int otz /*stack 16*/, struct TextureMT3 *texture /*stack 20*/, long color0 /*stack 24*/, long color1 /*stack 28*/, long color2 /*stack 32*/, long color3 /*stack 36*/)
- // line 2924, offset 0x80047d80
+ // line 2996, offset 0x80046d98
 	/* begin block 1 */
-		// Start line: 2925
-		// Start offset: 0x80047D80
+		// Start line: 2997
+		// Start offset: 0x80046D98
 		// Variables:
 	// 		struct POLY_GT4 *poly; // $t0
 	// 		unsigned long **drawot; // $t3
 	/* end block 1 */
-	// End offset: 0x80047E7C
-	// End Line: 2956
+	// End offset: 0x80046E94
+	// End Line: 3028
 
 	/* begin block 2 */
-		// Start line: 7247
+		// Start line: 7423
 	/* end block 2 */
-	// End Line: 7248
+	// End Line: 7424
 
 	/* begin block 3 */
-		// Start line: 7251
+		// Start line: 7427
 	/* end block 3 */
-	// End Line: 7252
+	// End Line: 7428
+
+/* File: C:\kain2\game\FX.C */
 
 POLY_GT4 *
 FX_SetupPolyGT4(int x1,int y1,int x2,int y2,int otz,TextureMT3 *texture,long color0,long color1,
@@ -3539,13 +3526,13 @@ FX_SetupPolyGT4(int x1,int y1,int x2,int y2,int otz,TextureMT3 *texture,long col
 
 {
   undefined2 uVar1;
-  long lVar2;
+  int iVar2;
   uint *puVar3;
   POLY_GT4 *pPVar4;
   
-  lVar2 = gameTrackerX.defVVRemoveDist;
-  pPVar4 = (POLY_GT4 *)(gameTrackerX.primPool)->nextPrim;
-  if ((POLY_GT4 *)(gameTrackerX.primPool)->lastPrim <= pPVar4 + 1) {
+  iVar2 = DAT_800d22a4;
+  pPVar4 = *(POLY_GT4 **)(DAT_800d210c + 4);
+  if (*(POLY_GT4 **)(DAT_800d210c + 8) <= pPVar4 + 1) {
     return (POLY_GT4 *)0x0;
   }
   *(undefined2 *)&pPVar4->u0 = *(undefined2 *)&texture->u2;
@@ -3571,10 +3558,10 @@ FX_SetupPolyGT4(int x1,int y1,int x2,int y2,int otz,TextureMT3 *texture,long col
   if (otz < 1) {
     otz = 1;
   }
-  puVar3 = (uint *)(otz * 4 + lVar2);
+  puVar3 = (uint *)(otz * 4 + iVar2);
   pPVar4->tag = *puVar3 & 0xffffff | 0xc000000;
   *puVar3 = (uint)pPVar4 & 0xffffff;
-  *(POLY_GT4 **)&(gameTrackerX.primPool)->nextPrim = pPVar4 + 1;
+  *(POLY_GT4 **)(DAT_800d210c + 4) = pPVar4 + 1;
   return pPVar4;
 }
 
@@ -3583,32 +3570,45 @@ FX_SetupPolyGT4(int x1,int y1,int x2,int y2,int otz,TextureMT3 *texture,long col
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_MakeWarpArrow(int x /*$s1*/, int y /*$s3*/, int xsize /*$s2*/, int ysize /*$s4*/, int fade /*stack 16*/)
- // line 2985, offset 0x80047e84
+ // line 3057, offset 0x80046e9c
 	/* begin block 1 */
-		// Start line: 2986
-		// Start offset: 0x80047E84
+		// Start line: 3058
+		// Start offset: 0x80046E9C
 		// Variables:
 	// 		struct Object *particle; // $a0
 	// 		long color; // $s0
 	// 		struct POLY_GT4 *poly; // $v1
 	/* end block 1 */
-	// End offset: 0x80047F44
-	// End Line: 3002
+	// End offset: 0x80046F5C
+	// End Line: 3074
 
 	/* begin block 2 */
-		// Start line: 5967
+		// Start line: 6111
 	/* end block 2 */
-	// End Line: 5968
+	// End Line: 6112
 
-/* WARNING: Removing unreachable block (ram,0x80047ed4) */
-/* WARNING: Removing unreachable block (ram,0x80047ec0) */
-/* WARNING: Removing unreachable block (ram,0x80047ec8) */
-/* WARNING: Removing unreachable block (ram,0x80047edc) */
-/* WARNING: Removing unreachable block (ram,0x80047f34) */
+/* WARNING: Removing unreachable block (ram,0x80046eec) */
+/* File: C:\kain2\game\FX.C */
 
 void FX_MakeWarpArrow(int x,int y,int xsize,int ysize,int fade)
 
 {
+  TextureMT3 *texture;
+  POLY_GT4 *pPVar1;
+  uint color0;
+  
+  if (objectAccess[10].object != (void *)0x0) {
+    color0 = fade >> 5;
+    if (fade < 0) {
+      color0 = 0;
+    }
+    color0 = color0 | color0 << 8 | color0 << 0x10;
+    texture = FX_GetTextureObject((Object *)objectAccess[10].object,0,9);
+    pPVar1 = FX_SetupPolyGT4(x + xsize,y,x,y + ysize,3,texture,color0,color0,color0,color0);
+    if (pPVar1 != (POLY_GT4 *)0x0) {
+      pPVar1->code = pPVar1->code | 2;
+    }
+  }
   return;
 }
 
@@ -3617,61 +3617,32 @@ void FX_MakeWarpArrow(int x,int y,int xsize,int ysize,int fade)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_MakeMannaIcon(int x /*$s0*/, int y /*$s2*/, int xsize /*$s1*/, int ysize /*$s3*/)
- // line 3005, offset 0x80047f64
+ // line 3077, offset 0x80046f7c
 	/* begin block 1 */
-		// Start line: 3006
-		// Start offset: 0x80047F64
+		// Start line: 3078
+		// Start offset: 0x80046F7C
 		// Variables:
 	// 		struct Object *manna; // $a0
 	/* end block 1 */
-	// End offset: 0x80047FDC
-	// End Line: 3016
+	// End offset: 0x80046FF4
+	// End Line: 3088
 
 	/* begin block 2 */
-		// Start line: 7418
+		// Start line: 7594
 	/* end block 2 */
-	// End Line: 7419
+	// End Line: 7595
 
-/* WARNING: Removing unreachable block (ram,0x80047f98) */
+/* File: C:\kain2\game\FX.C */
 
 void FX_MakeMannaIcon(int x,int y,int xsize,int ysize)
 
 {
-  return;
-}
-
-
-
-// decompiled code
-// original method signature: 
-// void /*$ra*/ FX_DrawNumber(int x /*$a0*/, int y /*$a1*/, int number /*$s2*/, long color /*$a3*/)
- // line 3049, offset 0x80047ff8
-	/* begin block 1 */
-		// Start line: 3050
-		// Start offset: 0x80047FF8
-		// Variables:
-	// 		int oldx; // $s0
-	// 		int oldy; // $s1
-	/* end block 1 */
-	// End offset: 0x80047FF8
-	// End Line: 3050
-
-	/* begin block 2 */
-		// Start line: 7510
-	/* end block 2 */
-	// End Line: 7511
-
-void FX_DrawNumber(int x,int y,int number,long color)
-
-{
-  long lVar1;
-  long lVar2;
+  TextureMT3 *texture;
   
-  lVar2 = fontTracker.font_ypos;
-  lVar1 = fontTracker.font_xpos;
-  FONT_SetCursor((short)x,(short)y);
-  FONT_Print("%d");
-  FONT_SetCursor((short)lVar1,(short)lVar2);
+  if (objectAccess[20].object != (void *)0x0) {
+    texture = FX_GetTextureObject((Object *)objectAccess[20].object,0,7);
+    FX_SetupPolyGT4(x,y,x + xsize,y + ysize,3,texture,0x808080,0x808080,0x808080,0x808080);
+  }
   return;
 }
 
@@ -3680,10 +3651,10 @@ void FX_DrawNumber(int x,int y,int number,long color)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_MakeGlyphIcon(struct _Position *position /*$s4*/, struct Object *glyphObject /*$s3*/, int size /*$s0*/, int glyphnum /*$s1*/, int enabled /*stack 16*/)
- // line 3085, offset 0x80048068
+ // line 3161, offset 0x80047010
 	/* begin block 1 */
-		// Start line: 3086
-		// Start offset: 0x80048068
+		// Start line: 3162
+		// Start offset: 0x80047010
 		// Variables:
 	// 		int sizex; // $t0
 	// 		struct POLY_GT4 *poly; // $v1
@@ -3694,23 +3665,23 @@ void FX_DrawNumber(int x,int y,int number,long color)
 	// 		struct _GlyphTuneData *glyphtunedata; // $v1
 
 		/* begin block 1.1 */
-			// Start line: 3099
-			// Start offset: 0x800480AC
+			// Start line: 3175
+			// Start offset: 0x80047054
 			// Variables:
 		// 		struct Object *object; // $a0
 		/* end block 1.1 */
-		// End offset: 0x800480C0
-		// End Line: 3102
+		// End offset: 0x80047068
+		// End Line: 3178
 	/* end block 1 */
-	// End offset: 0x80048208
-	// End Line: 3138
+	// End offset: 0x800471B0
+	// End Line: 3214
 
 	/* begin block 2 */
-		// Start line: 7592
+		// Start line: 6293
 	/* end block 2 */
-	// End Line: 7593
+	// End Line: 6294
 
-/* WARNING: Removing unreachable block (ram,0x800480c0) */
+/* File: C:\kain2\game\FX.C */
 
 void FX_MakeGlyphIcon(_Position *position,Object *glyphObject,int size,int glyphnum,int enabled)
 
@@ -3719,18 +3690,27 @@ void FX_MakeGlyphIcon(_Position *position,Object *glyphObject,int size,int glyph
   short sVar2;
   int iVar3;
   TextureMT3 *texture;
-  long local_38;
-  long local_34;
-  long local_30;
-  long color3;
+  undefined *color3;
   POLY_GT4 *pPVar4;
-  long *plVar5;
+  undefined4 *puVar5;
   int iVar6;
   int x1;
   int y1;
+  undefined *local_38;
+  undefined *local_34;
+  undefined *local_30;
   
-  if ((glyphObject != (Object *)0x0) && (glyphnum != 7)) {
-    texture = FX_GetTextureObject(glyphObject,0,glyphnum);
+  if (glyphObject != (Object *)0x0) {
+    if (glyphnum == 7) {
+      if (objectAccess[10].object == (void *)0x0) {
+        return;
+      }
+      texture = FX_GetTextureObject((Object *)objectAccess[10].object,0,0);
+      size = size / 2;
+    }
+    else {
+      texture = FX_GetTextureObject(glyphObject,0,glyphnum);
+    }
     sVar1 = position->x;
     iVar6 = -size + 0x18;
     sVar2 = position->y;
@@ -3739,24 +3719,24 @@ void FX_MakeGlyphIcon(_Position *position,Object *glyphObject,int size,int glyph
       iVar6 = -size + 0x1b;
     }
     if (enabled == 0) {
-      color3 = 0x202020;
+      color3 = &LAB_00202020;
       x1 = sVar1 - iVar3;
       y1 = sVar2 - size;
-      local_38 = 0x202020;
-      local_34 = 0x202020;
-      local_30 = 0x202020;
+      local_38 = &LAB_00202020;
+      local_34 = &LAB_00202020;
+      local_30 = &LAB_00202020;
     }
     else {
-      plVar5 = (long *)((int)glyphObject->data + glyphnum * 0x10 + 0x1c);
+      puVar5 = (undefined4 *)((int)glyphObject->data + glyphnum * 0x10 + 0x1c);
       x1 = sVar1 - iVar3;
       y1 = sVar2 - size;
-      local_38 = *plVar5;
-      local_34 = plVar5[1];
-      local_30 = plVar5[2];
-      color3 = plVar5[3];
+      local_38 = (undefined *)*puVar5;
+      local_34 = (undefined *)puVar5[1];
+      local_30 = (undefined *)puVar5[2];
+      color3 = (undefined *)puVar5[3];
     }
     pPVar4 = FX_SetupPolyGT4(x1,y1,sVar1 + iVar3 + 1,sVar2 + size + 1,(iVar6 >> 2) + 1,texture,
-                             local_38,local_34,local_30,color3);
+                             (long)local_38,(long)local_34,(long)local_30,(long)color3);
     if (pPVar4 != (POLY_GT4 *)0x0) {
       pPVar4->code = *(byte *)((int)&texture->color + 3) & 3 | 0x3c;
     }
@@ -3769,10 +3749,10 @@ void FX_MakeGlyphIcon(_Position *position,Object *glyphObject,int size,int glyph
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_SoulDustProcess(struct _FX_PRIM *fxPrim /*$s0*/, struct _FXTracker *fxTracker /*$a1*/)
- // line 3141, offset 0x8004822c
+ // line 3217, offset 0x800471d4
 	/* begin block 1 */
-		// Start line: 3142
-		// Start offset: 0x8004822C
+		// Start line: 3218
+		// Start offset: 0x800471D4
 		// Variables:
 	// 		struct MATRIX *swTransform; // $v1
 	// 		struct _Position position; // stack offset -24
@@ -3780,13 +3760,15 @@ void FX_MakeGlyphIcon(_Position *position,Object *glyphObject,int size,int glyph
 	// 		long black; // stack offset -12
 	// 		int fade; // $a3
 	/* end block 1 */
-	// End offset: 0x800483D0
-	// End Line: 3179
+	// End offset: 0x80047378
+	// End Line: 3255
 
 	/* begin block 2 */
-		// Start line: 7731
+		// Start line: 7831
 	/* end block 2 */
-	// End Line: 7732
+	// End Line: 7832
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_SoulDustProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 
@@ -3794,8 +3776,8 @@ void FX_SoulDustProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
   short sVar1;
   short sVar2;
   int iVar3;
-  int iVar4;
-  undefined4 local_10;
+  long p1;
+  undefined *local_10;
   undefined4 local_c;
   
   if (fxPrim->work1 < 0x20) {
@@ -3805,10 +3787,10 @@ void FX_SoulDustProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
     sVar2 = fxPrim->work2;
     iVar3 = *(int *)(*(int *)&fxPrim->duo + 0x40) + *(int *)((int)&fxPrim->duo + 4) * 0x20;
     (fxPrim->position).x = *(short *)(iVar3 + 0x14);
-    sVar2 = (fxPrim->_3).x + sVar2;
+    sVar2 = (fxPrim->v1).x + sVar2;
     (fxPrim->position).y = *(short *)(iVar3 + 0x18);
     sVar1 = *(short *)(iVar3 + 0x1c);
-    (fxPrim->_3).x = sVar2;
+    (fxPrim->v1).x = sVar2;
     (fxPrim->position).z = sVar1;
     iVar3 = rcos((int)sVar2);
     iVar3 = iVar3 * fxPrim->work1;
@@ -3816,31 +3798,30 @@ void FX_SoulDustProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
       iVar3 = iVar3 + 0xfff;
     }
     (fxPrim->position).x = (fxPrim->position).x + (short)(iVar3 >> 0xc);
-    iVar3 = rsin((int)(fxPrim->_3).x);
+    iVar3 = rsin((int)(fxPrim->v1).x);
     iVar3 = iVar3 * fxPrim->work1;
     if (iVar3 < 0) {
       iVar3 = iVar3 + 0xfff;
     }
     (fxPrim->position).y = (fxPrim->position).y + (short)(iVar3 >> 0xc);
-    iVar3 = rcos((int)(fxPrim->_3).y);
+    iVar3 = rcos((int)(fxPrim->v1).y);
     iVar3 = iVar3 * fxPrim->work0;
     if (iVar3 < 0) {
       iVar3 = iVar3 + 0xfff;
     }
-    local_10 = 0x60ff60;
+    local_10 = &DAT_0060ff60;
     local_c = 0;
     sVar2 = (fxPrim->v2).x;
-    (fxPrim->_2).y = (fxPrim->_2).y + -0x90;
-    iVar4 = (int)(fxPrim->_2).y;
+    (fxPrim->v0).y = (fxPrim->v0).y + -0x90;
+    p1 = (long)(fxPrim->v0).y;
     (fxPrim->position).z = (fxPrim->position).z + (short)(iVar3 >> 0xc);
-    sVar1 = (fxPrim->_3).y;
+    sVar1 = (fxPrim->v1).y;
     fxPrim->work1 = fxPrim->work1 - sVar2;
-    (fxPrim->_3).y = sVar1 + 0x40;
-    if (iVar4 < 0) {
-      iVar4 = 0;
+    (fxPrim->v1).y = sVar1 + 0x40;
+    if (p1 < 0) {
+      p1 = 0;
     }
-    LoadAverageCol((byte *)&local_10,(byte *)&local_c,0x1000 - iVar4,iVar4,
-                   (undefined *)&fxPrim->color);
+    LoadAverageCol((u_char *)&local_10,(u_char *)&local_c,0x1000 - p1,p1,(u_char *)&fxPrim->color);
     fxPrim->color = fxPrim->color & 0xffffffU | 0x2e000000;
   }
   return;
@@ -3851,38 +3832,80 @@ void FX_SoulDustProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_MakeSoulDust(struct _Instance *instance /*$s4*/, short segment /*$a1*/)
- // line 3180, offset 0x800483e0
+ // line 3256, offset 0x80047388
 	/* begin block 1 */
-		// Start line: 3181
-		// Start offset: 0x800483E0
+		// Start line: 3257
+		// Start offset: 0x80047388
 		// Variables:
 	// 		struct _FX_PRIM *fxPrim; // $s1
 	// 		struct SVECTOR location; // stack offset -32
 	// 		struct Object *particle; // $s2
 	/* end block 1 */
-	// End offset: 0x80048600
-	// End Line: 3232
+	// End offset: 0x800475A8
+	// End Line: 3308
 
 	/* begin block 2 */
-		// Start line: 7859
+		// Start line: 7959
 	/* end block 2 */
-	// End Line: 7860
+	// End Line: 7960
 
-/* WARNING: Removing unreachable block (ram,0x80048428) */
-/* WARNING: Removing unreachable block (ram,0x80048440) */
-/* WARNING: Removing unreachable block (ram,0x8004845c) */
-/* WARNING: Removing unreachable block (ram,0x80048460) */
-/* WARNING: Removing unreachable block (ram,0x80048588) */
-/* WARNING: Removing unreachable block (ram,0x8004858c) */
-/* WARNING: Removing unreachable block (ram,0x8004859c) */
-/* WARNING: Removing unreachable block (ram,0x800485a0) */
-/* WARNING: Removing unreachable block (ram,0x800485b8) */
-/* WARNING: Removing unreachable block (ram,0x800485d0) */
+/* File: C:\kain2\game\FX.C */
 
 void FX_MakeSoulDust(_Instance *instance,short segment)
 
 {
-  rand();
+  short sVar1;
+  void *object;
+  _FXTracker *fxTracker;
+  uint uVar2;
+  _FX_PRIM *fxPrim;
+  TextureMT3 *pTVar3;
+  int iVar4;
+  int iVar5;
+  
+  uVar2 = rand();
+  object = objectAccess[10].object;
+  if ((((uVar2 & 0xff) < 0x41) && (objectAccess[10].object != (void *)0x0)) &&
+     (fxPrim = FX_GetPrim(gFXT), fxPrim != (_FX_PRIM *)0x0)) {
+    rand();
+    FX_DFacadeParticleSetup(fxPrim,0xe0,0x19,0x19,0x2e000000,0,0,gFXT,8);
+    fxPrim->flags = fxPrim->flags | 0x2001;
+    pTVar3 = FX_GetTextureObject((Object *)object,0,0);
+    fxPrim->texture = pTVar3;
+    (fxPrim->v0).y = 0x1000;
+    *(code **)&fxPrim->process = FX_SoulDustProcess;
+    fxPrim->color = 0x2e000000;
+    (fxPrim->v1).y = 0;
+    *(_Instance **)&fxPrim->duo = instance;
+    *(int *)((int)&fxPrim->duo + 4) = (int)segment;
+    iVar4 = rand();
+    fxPrim->work0 = (short)iVar4 + (short)(iVar4 / 0x140) * -0x140 + -0xa0;
+    iVar4 = rand();
+    fxPrim->work1 = ((ushort)iVar4 & 0x3f) + 0x140;
+    iVar4 = rand();
+    iVar4 = iVar4 % 0x380 + 0x80;
+    iVar5 = iVar4 * 0x10000 >> 0x10;
+    (fxPrim->v1).x = (short)iVar4;
+    if (iVar5 < 0) {
+      iVar5 = iVar5 + 0xf;
+    }
+    iVar4 = (int)fxPrim->work1;
+    fxPrim->work2 = (short)(iVar5 >> 4);
+    if (iVar4 < 0) {
+      iVar4 = iVar4 + 0xf;
+    }
+    (fxPrim->v2).x = (short)(iVar4 >> 4);
+    uVar2 = rand();
+    if ((uVar2 & 1) != 0) {
+      sVar1 = fxPrim->work2;
+      (fxPrim->v1).x = -(fxPrim->v1).x;
+      fxPrim->work2 = -sVar1;
+    }
+    fxTracker = gFXT;
+    (fxPrim->v1).x = (instance->rotation).z - ((fxPrim->v1).x + 0x400);
+    FX_SoulDustProcess(fxPrim,fxTracker);
+    FX_Sprite_Insert(&gFXT->usedPrimListSprite,fxPrim);
+  }
   return;
 }
 
@@ -3891,11 +3914,13 @@ void FX_MakeSoulDust(_Instance *instance,short segment)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_WaterTrailProcess(struct _FX_PRIM *fxPrim /*$s0*/, struct _FXTracker *fxTracker /*$a1*/)
- // line 3255, offset 0x80048620
+ // line 3331, offset 0x800475c8
 	/* begin block 1 */
-		// Start line: 6504
+		// Start line: 6656
 	/* end block 1 */
-	// End Line: 6505
+	// End Line: 6657
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_WaterTrailProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 
@@ -3903,14 +3928,14 @@ void FX_WaterTrailProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
   short sVar1;
   
   FX_StandardProcess(fxPrim,fxTracker);
-  (fxPrim->_2).x = (short)((int)(fxPrim->_2).x * 7 >> 3);
-  (fxPrim->_2).y = (short)((int)(fxPrim->_2).y * 7 >> 3);
-  sVar1 = (fxPrim->_3).x;
-  (fxPrim->_2).z = (short)((int)(fxPrim->_2).z * 7 >> 3);
-  (fxPrim->_3).x = (short)((int)sVar1 * 7 >> 3);
-  (fxPrim->_3).y = (short)((int)(fxPrim->_3).y * 7 >> 3);
+  (fxPrim->v0).x = (short)((int)(fxPrim->v0).x * 7 >> 3);
+  (fxPrim->v0).y = (short)((int)(fxPrim->v0).y * 7 >> 3);
+  sVar1 = (fxPrim->v1).x;
+  (fxPrim->v0).z = (short)((int)(fxPrim->v0).z * 7 >> 3);
+  (fxPrim->v1).x = (short)((int)sVar1 * 7 >> 3);
+  (fxPrim->v1).y = (short)((int)(fxPrim->v1).y * 7 >> 3);
   sVar1 = (fxPrim->v2).x;
-  (fxPrim->_3).z = (short)((int)(fxPrim->_3).z * 7 >> 3);
+  (fxPrim->v1).z = (short)((int)(fxPrim->v1).z * 7 >> 3);
   (fxPrim->v2).x = (short)((int)sVar1 * 7 >> 3);
   (fxPrim->v2).y = (short)((int)(fxPrim->v2).y * 7 >> 3);
   sVar1 = (fxPrim->v3).x;
@@ -3926,10 +3951,10 @@ void FX_WaterTrailProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_MakeWaterTrail(struct _Instance *instance /*$a0*/, int depth /*$a1*/)
- // line 3274, offset 0x80048738
+ // line 3350, offset 0x800476e0
 	/* begin block 1 */
-		// Start line: 3275
-		// Start offset: 0x80048738
+		// Start line: 3351
+		// Start offset: 0x800476E0
 		// Variables:
 	// 		struct Object *waterfx; // $a1
 	// 		struct _Model *wxtrail; // $a0
@@ -3937,8 +3962,8 @@ void FX_WaterTrailProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 	// 		int zvel; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 3311
-			// Start offset: 0x80048844
+			// Start line: 3387
+			// Start offset: 0x800477EC
 			// Variables:
 		// 		int n; // $s2
 		// 		int deg; // $s0
@@ -3947,88 +3972,97 @@ void FX_WaterTrailProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 		// 		struct _SVector startpos; // stack offset -24
 
 			/* begin block 1.1.1 */
-				// Start line: 3319
-				// Start offset: 0x8004885C
+				// Start line: 3395
+				// Start offset: 0x80047804
 				// Variables:
 			// 		int sinVal; // $s1
 			// 		int cosVal; // $s0
 			// 		int spd; // $v1
 			/* end block 1.1.1 */
-			// End offset: 0x800488F0
-			// End Line: 3327
+			// End offset: 0x80047898
+			// End Line: 3403
 		/* end block 1.1 */
-		// End offset: 0x80048954
-		// End Line: 3332
+		// End offset: 0x800478FC
+		// End Line: 3408
 	/* end block 1 */
-	// End offset: 0x80048954
-	// End Line: 3333
+	// End offset: 0x800478FC
+	// End Line: 3409
 
 	/* begin block 2 */
-		// Start line: 8052
+		// Start line: 8152
 	/* end block 2 */
-	// End Line: 8053
+	// End Line: 8153
 
-/* WARNING: Removing unreachable block (ram,0x800487d8) */
+/* File: C:\kain2\game\FX.C */
 
 void FX_MakeWaterTrail(_Instance *instance,int depth)
 
 {
-  short sVar1;
+  int *piVar1;
   short sVar2;
-  uint uVar3;
-  int iVar4;
+  short sVar3;
+  uint uVar4;
   int iVar5;
   int iVar6;
+  _Model *model;
   int iVar7;
   int iVar8;
+  int iVar9;
   _SVector local_28;
   _SVector local_20;
   _SVector local_18;
   
   if ((((instance->matrix != (MATRIX *)0x0) && (instance->oldMatrix != (MATRIX *)0x0)) &&
-      (gameTrackerX.gameData.asmData.MorphType != 1)) &&
-     (gameTrackerX.gameData.asmData.MorphTime == 1000)) {
-    sVar1 = *(short *)instance->matrix[1].t;
-    sVar2 = *(short *)(instance->matrix[1].t + 1);
+      (DAT_800d20d6 != 1)) && (DAT_800d20d4 == 1000)) {
+    sVar2 = *(short *)instance->matrix[1].t;
+    sVar3 = *(short *)(instance->matrix[1].t + 1);
     local_18.z = (instance->splitPoint).z;
-    iVar6 = instance->matrix[1].t[2] - instance->oldMatrix[1].t[2];
-    if (iVar6 < 0) {
-      iVar6 = -iVar6;
+    iVar7 = instance->matrix[1].t[2] - instance->oldMatrix[1].t[2];
+    if (objectAccess[3].object != (void *)0x0) {
+      piVar1 = (int *)((int)objectAccess[3].object + 0xc);
+      *(uint *)((int)objectAccess[3].object + 0x2c) =
+           *(uint *)((int)objectAccess[3].object + 0x2c) | 0x20000000;
+      model = *(_Model **)(*piVar1 + 4);
+      FX_BuildSingleFaceWithModel
+                (model,model->faceList,0xd0,0,0,gFXT,FX_SimpleQuadSetup,FX_WaterTrailProcess,8);
     }
-    iVar7 = 0;
-    if (0x14 < iVar6) {
+    if (iVar7 < 0) {
+      iVar7 = -iVar7;
+    }
+    iVar8 = 0;
+    if (0x14 < iVar7) {
       local_20.y = 0;
       local_20.x = 0;
       local_20.z = -2;
       do {
-        uVar3 = rand();
-        iVar6 = rcos(uVar3 & 0xfff);
-        iVar4 = rsin(uVar3 & 0xfff);
-        uVar3 = rand();
-        iVar5 = (uVar3 & 3) + 0xb;
-        iVar8 = iVar6 * iVar5;
-        iVar5 = iVar4 * iVar5;
-        if (iVar8 < 0) {
-          iVar8 = iVar8 + 0xfff;
+        uVar4 = rand();
+        iVar7 = rcos(uVar4 & 0xfff);
+        iVar5 = rsin(uVar4 & 0xfff);
+        uVar4 = rand();
+        iVar6 = (uVar4 & 3) + 0xb;
+        iVar9 = iVar7 * iVar6;
+        iVar6 = iVar5 * iVar6;
+        if (iVar9 < 0) {
+          iVar9 = iVar9 + 0xfff;
         }
-        local_28.x = (short)(iVar8 >> 0xc);
-        if (iVar5 < 0) {
-          iVar5 = iVar5 + 0xfff;
-        }
-        local_28.y = (short)(iVar5 >> 0xc);
-        local_28.z = 0x12;
+        local_28.x = (short)(iVar9 >> 0xc);
         if (iVar6 < 0) {
-          iVar6 = iVar6 + 0x7f;
+          iVar6 = iVar6 + 0xfff;
         }
-        local_18.x = sVar1 + (short)(iVar6 >> 7);
-        if (iVar4 < 0) {
-          iVar4 = iVar4 + 0x7f;
+        local_28.y = (short)(iVar6 >> 0xc);
+        local_28.z = 0x12;
+        if (iVar7 < 0) {
+          iVar7 = iVar7 + 0x7f;
         }
-        iVar7 = iVar7 + 1;
-        local_18.y = sVar2 + (short)(iVar4 >> 7);
-        FX_Dot(&local_18,&local_28,&local_20,0,0x404040,0x18,0x14,0);
-      } while (iVar7 < 8);
-      INSTANCE_Post(gameTrackerX.playerInstance,0x40024,0);
+        local_18.x = sVar2 + (short)(iVar7 >> 7);
+        if (iVar5 < 0) {
+          iVar5 = iVar5 + 0x7f;
+        }
+        iVar8 = iVar8 + 1;
+        local_18.y = sVar3 + (short)(iVar5 >> 7);
+        FX_Dot(&local_18,&local_28,&local_20,0,(long)&DAT_00404040,0x18,0x14,0);
+      } while (iVar8 < 8);
+      INSTANCE_Post(DAT_800d20f8,0x40024,0);
     }
   }
   return;
@@ -4039,23 +4073,25 @@ void FX_MakeWaterTrail(_Instance *instance,int depth)
 // decompiled code
 // original method signature: 
 // struct _FXRibbon * /*$ra*/ FX_StartRibbon(struct _Instance *instance /*$s7*/, short startSegment /*$s3*/, short endSegment /*stack -48*/, short type /*$fp*/, int ribbonLifeTime /*stack 16*/, int faceLifeTime /*stack 20*/, int startFadeValue /*stack 24*/, long startColor /*stack 28*/, long endColor /*stack 32*/)
- // line 3368, offset 0x8004896c
+ // line 3444, offset 0x80047914
 	/* begin block 1 */
-		// Start line: 3369
-		// Start offset: 0x8004896C
+		// Start line: 3445
+		// Start offset: 0x80047914
 		// Variables:
 	// 		struct MATRIX *swTransform; // $a0
 	// 		struct _FXRibbon *ribbon; // $s0
 	// 		int i; // $a2
 	// 		int number; // $s1
 	/* end block 1 */
-	// End offset: 0x80048C0C
-	// End Line: 3451
+	// End offset: 0x80047BB4
+	// End Line: 3527
 
 	/* begin block 2 */
-		// Start line: 6714
+		// Start line: 6866
 	/* end block 2 */
-	// End Line: 6715
+	// End Line: 6867
+
+/* File: C:\kain2\game\FX.C */
 
 _FXRibbon *
 FX_StartRibbon(_Instance *instance,short startSegment,short endSegment,short type,int ribbonLifeTime
@@ -4130,7 +4166,7 @@ FX_StartRibbon(_Instance *instance,short startSegment,short endSegment,short typ
           iVar3 = iVar6;
         } while (iVar6 < iVar7);
       }
-      goto LAB_80048c00;
+      goto LAB_80047ba8;
     }
     iVar3 = (int)pMVar4->m + iVar3;
     ptr->vertexPool->vx = *(short *)(iVar3 + 0x14);
@@ -4143,7 +4179,7 @@ FX_StartRibbon(_Instance *instance,short startSegment,short endSegment,short typ
     sVar1 = 2;
   }
   ptr->endIndex = sVar1;
-LAB_80048c00:
+LAB_80047ba8:
   FX_InsertGeneralEffect(ptr);
   return ptr;
 }
@@ -4153,21 +4189,23 @@ LAB_80048c00:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_RibbonProcess(struct _FX_PRIM *fxPrim /*$a2*/, struct _FXTracker *fxTracker /*$a1*/)
- // line 3472, offset 0x80048c3c
+ // line 3548, offset 0x80047be4
 	/* begin block 1 */
-		// Start line: 3473
-		// Start offset: 0x80048C3C
+		// Start line: 3549
+		// Start offset: 0x80047BE4
 		// Variables:
 	// 		int d; // $a1
 	// 		long fade; // $a3
 	/* end block 1 */
-	// End offset: 0x80048D20
-	// End Line: 3512
+	// End offset: 0x80047CC8
+	// End Line: 3588
 
 	/* begin block 2 */
-		// Start line: 6939
+		// Start line: 7091
 	/* end block 2 */
-	// End Line: 6940
+	// End Line: 7092
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_RibbonProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 
@@ -4200,9 +4238,9 @@ void FX_RibbonProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
       if (0x1000 < sVar1) {
         fxPrim->colorFadeValue = 0x1000;
       }
-      LoadAverageCol((byte *)&fxPrim->startColor,(byte *)&fxPrim->endColor,
+      LoadAverageCol((u_char *)&fxPrim->startColor,(u_char *)&fxPrim->endColor,
                      0x1000 - (int)fxPrim->colorFadeValue,(int)fxPrim->colorFadeValue,
-                     (undefined *)&fxPrim->color);
+                     (u_char *)&fxPrim->color);
     }
   }
   return;
@@ -4213,11 +4251,13 @@ void FX_RibbonProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_ConstrictProcess(struct _FX_PRIM *fxPrim /*$s1*/, struct _FXTracker *fxTracker /*$s2*/)
- // line 3515, offset 0x80048d30
+ // line 3591, offset 0x80047cd8
 	/* begin block 1 */
-		// Start line: 8580
+		// Start line: 8680
 	/* end block 1 */
-	// End Line: 8581
+	// End Line: 8681
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_ConstrictProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 
@@ -4225,7 +4265,8 @@ void FX_ConstrictProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
   short sVar1;
   short sVar2;
   short sVar3;
-  int iVar4;
+  long lVar4;
+  int iVar5;
   
   if (FX_ConstrictStage == 1) {
     fxPrim->startColor = 0xffffff;
@@ -4240,27 +4281,27 @@ void FX_ConstrictProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
     fxPrim->work0 = 0x380;
     fxPrim->work1 = 0;
     if (sVar3 == 0) {
-      sVar3 = (fxPrim->_2).y;
+      sVar3 = (fxPrim->v0).y;
       fxPrim->fadeValue[1] = 0;
       fxPrim->fadeValue[0] = 0;
       fxPrim->fadeValue[3] = 0x1000;
       fxPrim->fadeValue[2] = 0x1000;
-      iVar4 = ratan2((int)sVar3 - (int)FX_ConstrictPosition.y,
-                     (int)(fxPrim->_2).x - (int)FX_ConstrictPosition.x);
-      sVar3 = (fxPrim->_3).y;
-      fxPrim->work2 = (short)iVar4;
-      iVar4 = ratan2((int)sVar3 - (int)FX_ConstrictPosition.y,
-                     (int)(fxPrim->_3).x - (int)FX_ConstrictPosition.x);
+      lVar4 = ratan2((int)sVar3 - (int)FX_ConstrictPosition.y,
+                     (int)(fxPrim->v0).x - (int)FX_ConstrictPosition.x);
+      sVar3 = (fxPrim->v1).y;
+      fxPrim->work2 = (short)lVar4;
+      lVar4 = ratan2((int)sVar3 - (int)FX_ConstrictPosition.y,
+                     (int)(fxPrim->v1).x - (int)FX_ConstrictPosition.x);
       sVar3 = (fxPrim->v2).z;
-      sVar2 = (fxPrim->_2).z;
-      sVar1 = (fxPrim->_2).z;
-      fxPrim->work3 = (short)iVar4;
-      iVar4 = (int)sVar3 - (int)sVar2;
-      if (iVar4 < 0) {
-        iVar4 = iVar4 + 3;
+      sVar2 = (fxPrim->v0).z;
+      sVar1 = (fxPrim->v0).z;
+      fxPrim->work3 = (short)lVar4;
+      iVar5 = (int)sVar3 - (int)sVar2;
+      if (iVar5 < 0) {
+        iVar5 = iVar5 + 3;
       }
-      (fxPrim->v2).z = sVar1 + (short)(iVar4 >> 2);
-      (fxPrim->v3).z = (fxPrim->_3).z + ((fxPrim->v3).z - (fxPrim->_3).z) * 3;
+      (fxPrim->v2).z = sVar1 + (short)(iVar5 >> 2);
+      (fxPrim->v3).z = (fxPrim->v1).z + ((fxPrim->v3).z - (fxPrim->v1).z) * 3;
     }
     else {
       sVar3 = (fxPrim->v2).y;
@@ -4268,28 +4309,28 @@ void FX_ConstrictProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
       fxPrim->fadeValue[0] = 0x1000;
       fxPrim->fadeValue[3] = 0;
       fxPrim->fadeValue[2] = 0;
-      iVar4 = ratan2((int)sVar3 - (int)FX_ConstrictPosition.y,
+      lVar4 = ratan2((int)sVar3 - (int)FX_ConstrictPosition.y,
                      (int)(fxPrim->v2).x - (int)FX_ConstrictPosition.x);
       sVar3 = (fxPrim->v3).y;
-      fxPrim->work2 = (short)iVar4;
-      iVar4 = ratan2((int)sVar3 - (int)FX_ConstrictPosition.y,
+      fxPrim->work2 = (short)lVar4;
+      lVar4 = ratan2((int)sVar3 - (int)FX_ConstrictPosition.y,
                      (int)(fxPrim->v3).x - (int)FX_ConstrictPosition.x);
-      sVar3 = (fxPrim->_2).z;
+      sVar3 = (fxPrim->v0).z;
       sVar2 = (fxPrim->v2).z;
       sVar1 = (fxPrim->v2).z;
-      fxPrim->work3 = (short)iVar4;
-      iVar4 = (int)sVar3 - (int)sVar2;
-      if (iVar4 < 0) {
-        iVar4 = iVar4 + 3;
+      fxPrim->work3 = (short)lVar4;
+      iVar5 = (int)sVar3 - (int)sVar2;
+      if (iVar5 < 0) {
+        iVar5 = iVar5 + 3;
       }
-      (fxPrim->_2).z = sVar1 + (short)(iVar4 >> 2);
-      (fxPrim->_3).z = (fxPrim->v3).z + ((fxPrim->_3).z - (fxPrim->v3).z) * 3;
+      (fxPrim->v0).z = sVar1 + (short)(iVar5 >> 2);
+      (fxPrim->v1).z = (fxPrim->v3).z + ((fxPrim->v1).z - (fxPrim->v3).z) * 3;
     }
     sVar3 = FX_ConstrictPosition.x;
-    (fxPrim->_3).x = FX_ConstrictPosition.x;
+    (fxPrim->v1).x = FX_ConstrictPosition.x;
     (fxPrim->v3).x = sVar3;
     sVar3 = FX_ConstrictPosition.y;
-    (fxPrim->_3).y = FX_ConstrictPosition.y;
+    (fxPrim->v1).y = FX_ConstrictPosition.y;
     (fxPrim->v3).y = sVar3;
   }
   else {
@@ -4297,14 +4338,14 @@ void FX_ConstrictProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
       fxPrim->work0 = fxPrim->work0 + -0x28;
       sVar3 = fxPrim->work2 + -0x40;
       fxPrim->work2 = sVar3;
-      iVar4 = rcos((int)sVar3);
+      iVar5 = rcos((int)sVar3);
       sVar3 = fxPrim->work2;
-      sVar2 = FX_ConstrictPosition.x + (short)(fxPrim->work0 * iVar4 >> 0xc);
-      (fxPrim->_2).x = sVar2;
+      sVar2 = FX_ConstrictPosition.x + (short)(fxPrim->work0 * iVar5 >> 0xc);
+      (fxPrim->v0).x = sVar2;
       (fxPrim->v2).x = sVar2;
-      iVar4 = rsin((int)sVar3);
-      sVar3 = FX_ConstrictPosition.y + (short)(fxPrim->work0 * iVar4 >> 0xc);
-      (fxPrim->_2).y = sVar3;
+      iVar5 = rsin((int)sVar3);
+      sVar3 = FX_ConstrictPosition.y + (short)(fxPrim->work0 * iVar5 >> 0xc);
+      (fxPrim->v0).y = sVar3;
       (fxPrim->v2).y = sVar3;
     }
   }
@@ -4317,16 +4358,18 @@ void FX_ConstrictProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_StartConstrict(struct _Instance *instance /*$a0*/, struct _SVector *constrict_point /*$a1*/, short startSegment /*$a2*/, short endSegment /*$a3*/)
- // line 3581, offset 0x80048fc0
+ // line 3657, offset 0x80047f68
 	/* begin block 1 */
-		// Start line: 8747
+		// Start line: 8847
 	/* end block 1 */
-	// End Line: 8748
+	// End Line: 8848
 
 	/* begin block 2 */
-		// Start line: 8748
+		// Start line: 8848
 	/* end block 2 */
-	// End Line: 8749
+	// End Line: 8849
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_StartConstrict(_Instance *instance,_SVector *constrict_point,short startSegment,
                       short endSegment)
@@ -4351,14 +4394,14 @@ void FX_StartConstrict(_Instance *instance,_SVector *constrict_point,short start
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_EndConstrict(int ConstrictEnemyFlag /*$a0*/, struct _Instance *instance /*$a1*/)
- // line 3598, offset 0x80049050
+ // line 3674, offset 0x80047ff8
 	/* begin block 1 */
-		// Start line: 3599
-		// Start offset: 0x80049050
+		// Start line: 3675
+		// Start offset: 0x80047FF8
 
 		/* begin block 1.1 */
-			// Start line: 3606
-			// Start offset: 0x80049070
+			// Start line: 3682
+			// Start offset: 0x80048018
 			// Variables:
 		// 		short _x1; // $v1
 		// 		short _y1; // $a0
@@ -4366,12 +4409,12 @@ void FX_StartConstrict(_Instance *instance,_SVector *constrict_point,short start
 		// 		struct _Position *_v0; // $v0
 		// 		struct _Position *_v1; // $v0
 		/* end block 1.1 */
-		// End offset: 0x80049070
-		// End Line: 3606
+		// End offset: 0x80048018
+		// End Line: 3682
 
 		/* begin block 1.2 */
-			// Start line: 3610
-			// Start offset: 0x8004907C
+			// Start line: 3686
+			// Start offset: 0x80048024
 			// Variables:
 		// 		short _x1; // $v1
 		// 		short _y1; // $a0
@@ -4379,16 +4422,18 @@ void FX_StartConstrict(_Instance *instance,_SVector *constrict_point,short start
 		// 		struct _Position *_v0; // $v0
 		// 		struct _Position *_v1; // $v0
 		/* end block 1.2 */
-		// End offset: 0x800490A4
-		// End Line: 3610
+		// End offset: 0x8004804C
+		// End Line: 3686
 	/* end block 1 */
-	// End offset: 0x800490A4
-	// End Line: 3614
+	// End offset: 0x8004804C
+	// End Line: 3690
 
 	/* begin block 2 */
-		// Start line: 8785
+		// Start line: 8885
 	/* end block 2 */
-	// End Line: 8786
+	// End Line: 8886
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_EndConstrict(int ConstrictEnemyFlag,_Instance *instance)
 
@@ -4403,14 +4448,14 @@ void FX_EndConstrict(int ConstrictEnemyFlag,_Instance *instance)
     }
     else {
       FX_ConstrictPosition.x = (instance->position).x;
-      p_Var1 = &instance->position;
+      p_Var1 = (_Position *)&instance->position;
     }
     FX_ConstrictPosition.y = p_Var1->y;
     FX_ConstrictPosition.z = p_Var1->z;
     FX_ConstrictInstance = instance;
   }
-  FX_DeleteGeneralEffect((_FXGeneralEffect *)FX_ConstrictRibbon);
-  FX_ConstrictRibbon = (_FXRibbon *)0x0;
+  FX_DeleteGeneralEffect(FX_ConstrictRibbon);
+  FX_ConstrictRibbon = (_FXGeneralEffect *)0x0;
   return;
 }
 
@@ -4419,40 +4464,44 @@ void FX_EndConstrict(int ConstrictEnemyFlag,_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_SubDividePrim(struct _FX_PRIM *fxPrim1 /*$s0*/, struct _FX_PRIM *fxPrim2 /*$s1*/)
- // line 3618, offset 0x800490c0
+ // line 3694, offset 0x80048068
 	/* begin block 1 */
-		// Start line: 3619
-		// Start offset: 0x800490C0
+		// Start line: 3695
+		// Start offset: 0x80048068
 		// Variables:
 	// 		struct SVECTOR mp0; // stack offset -32
 	// 		struct SVECTOR mp1; // stack offset -24
 	/* end block 1 */
-	// End offset: 0x800490C0
-	// End Line: 3619
+	// End offset: 0x80048068
+	// End Line: 3695
 
 	/* begin block 2 */
-		// Start line: 8826
+		// Start line: 8926
 	/* end block 2 */
-	// End Line: 8827
+	// End Line: 8927
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_SubDividePrim(_FX_PRIM *fxPrim1,_FX_PRIM *fxPrim2)
 
 {
-  uint local_20;
+  undefined4 local_20;
   short local_1c;
-  uint local_18;
+  undefined4 local_18;
   short local_14;
   
-  LoadAverageShort12((uint *)&fxPrim1->_2,(uint *)&fxPrim2->v2,0x800,0x800,&local_20);
-  LoadAverageShort12((uint *)&fxPrim1->_3,(uint *)&fxPrim2->v3,0x800,0x800,&local_18);
-  *(uint *)&fxPrim1->v2 = local_20;
+  LoadAverageShort12((SVECTOR *)&fxPrim1->v0,(SVECTOR *)&fxPrim2->v2,0x800,0x800,
+                     (SVECTOR *)&local_20);
+  LoadAverageShort12((SVECTOR *)&fxPrim1->v1,(SVECTOR *)&fxPrim2->v3,0x800,0x800,
+                     (SVECTOR *)&local_18);
+  *(undefined4 *)&fxPrim1->v2 = local_20;
   (fxPrim1->v2).z = local_1c;
-  *(uint *)&fxPrim1->v3 = local_18;
+  *(undefined4 *)&fxPrim1->v3 = local_18;
   (fxPrim1->v3).z = local_14;
-  *(uint *)&fxPrim2->_2 = local_20;
-  (fxPrim2->_2).z = local_1c;
-  *(uint *)&fxPrim2->_3 = local_18;
-  (fxPrim2->_3).z = local_14;
+  *(undefined4 *)&fxPrim2->v0 = local_20;
+  (fxPrim2->v0).z = local_1c;
+  *(undefined4 *)&fxPrim2->v1 = local_18;
+  (fxPrim2->v1).z = local_14;
   return;
 }
 
@@ -4461,10 +4510,10 @@ void FX_SubDividePrim(_FX_PRIM *fxPrim1,_FX_PRIM *fxPrim2)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_ContinueRibbon(struct _FXRibbon *ribbon /*$s2*/, struct _FXTracker *fxTracker /*$fp*/)
- // line 3666, offset 0x80049184
+ // line 3742, offset 0x8004812c
 	/* begin block 1 */
-		// Start line: 3667
-		// Start offset: 0x80049184
+		// Start line: 3743
+		// Start offset: 0x8004812C
 		// Variables:
 	// 		struct MATRIX *swTransform; // $a1
 	// 		int i; // $s3
@@ -4478,23 +4527,24 @@ void FX_SubDividePrim(_FX_PRIM *fxPrim1,_FX_PRIM *fxPrim2)
 	// 		struct SVECTOR Quad[4]; // stack offset -80
 
 		/* begin block 1.1 */
-			// Start line: 3794
-			// Start offset: 0x80049600
+			// Start line: 3870
+			// Start offset: 0x800485A8
 			// Variables:
 		// 		int fade; // $v1
 		/* end block 1.1 */
-		// End offset: 0x80049694
-		// End Line: 3818
+		// End offset: 0x8004863C
+		// End Line: 3894
 	/* end block 1 */
-	// End offset: 0x8004971C
-	// End Line: 3833
+	// End offset: 0x800486C4
+	// End Line: 3909
 
 	/* begin block 2 */
-		// Start line: 8925
+		// Start line: 9025
 	/* end block 2 */
-	// End Line: 8926
+	// End Line: 9026
 
 /* WARNING: Could not reconcile some variable overlaps */
+/* File: C:\kain2\game\FX.C */
 
 void FX_ContinueRibbon(_FXRibbon *ribbon,_FXTracker *fxTracker)
 
@@ -4594,11 +4644,11 @@ void FX_ContinueRibbon(_FXRibbon *ribbon,_FXTracker *fxTracker)
             (fxPrim1->position).x = *(short *)((int)&ribbon->vertexPool->vx + iVar19);
             (fxPrim1->position).y = *(short *)((int)&ribbon->vertexPool->vy + iVar19);
             (fxPrim1->position).z = *(short *)((int)&ribbon->vertexPool->vz + iVar19);
-            *(undefined4 *)&fxPrim1->_2 = local_50;
-            (fxPrim1->_2).z = (short)local_4c;
+            *(undefined4 *)&fxPrim1->v0 = local_50;
+            (fxPrim1->v0).z = (short)local_4c;
             local_44 = (short)uVar16;
-            *(undefined4 *)&fxPrim1->_3 = uVar14;
-            (fxPrim1->_3).z = local_44;
+            *(undefined4 *)&fxPrim1->v1 = uVar14;
+            (fxPrim1->v1).z = local_44;
             local_3c = (short)uVar17;
             *(undefined4 *)&fxPrim1->v3 = uVar15;
             (fxPrim1->v3).z = local_3c;
@@ -4682,58 +4732,60 @@ void FX_ContinueRibbon(_FXRibbon *ribbon,_FXTracker *fxTracker)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ FX_StandardFXPrimProcess(struct _FX_PRIM *fxPrim /*$s0*/, struct _FXTracker *fxTracker /*$a2*/)
- // line 3838, offset 0x8004974c
+// void /*$ra*/ FX_StandardFXPrimProcess(struct _FX_PRIM *fxPrim /*$s0*/, struct _FXTracker *fxTracker /*$a3*/)
+ // line 3914, offset 0x800486f4
 	/* begin block 1 */
-		// Start line: 3839
-		// Start offset: 0x8004974C
+		// Start line: 3915
+		// Start offset: 0x800486F4
 		// Variables:
-	// 		long flags; // $s1
+	// 		long flags; // $a2
 
 		/* begin block 1.1 */
-			// Start line: 3854
-			// Start offset: 0x8004979C
+			// Start line: 3930
+			// Start offset: 0x80048740
 			// Variables:
-		// 		long start; // stack offset -24
-		// 		long end; // stack offset -20
+		// 		long start; // stack offset -16
+		// 		long end; // stack offset -12
 		/* end block 1.1 */
-		// End offset: 0x80049880
-		// End Line: 3869
+		// End offset: 0x80048824
+		// End Line: 3945
 
 		/* begin block 1.2 */
-			// Start line: 3873
-			// Start offset: 0x8004988C
+			// Start line: 3949
+			// Start offset: 0x80048830
 			// Variables:
 		// 		int current_scale; // $v1
 		/* end block 1.2 */
-		// End offset: 0x800498BC
-		// End Line: 3883
+		// End offset: 0x80048860
+		// End Line: 3959
 
 		/* begin block 1.3 */
-			// Start line: 3888
-			// Start offset: 0x800498C4
+			// Start line: 3964
+			// Start offset: 0x80048868
 			// Variables:
 		// 		struct MATRIX *swTransform; // $v1
 		/* end block 1.3 */
-		// End offset: 0x800498C4
-		// End Line: 3889
+		// End offset: 0x80048868
+		// End Line: 3965
 
 		/* begin block 1.4 */
-			// Start line: 4056
-			// Start offset: 0x80049A64
+			// Start line: 4134
+			// Start offset: 0x800489F4
 			// Variables:
-		// 		struct _Rotation rot; // stack offset -32
+		// 		struct _Rotation rot; // stack offset -24
 		/* end block 1.4 */
-		// End offset: 0x80049AC4
-		// End Line: 4064
+		// End offset: 0x80048A54
+		// End Line: 4142
 	/* end block 1 */
-	// End offset: 0x80049AC4
-	// End Line: 4073
+	// End offset: 0x80048A54
+	// End Line: 4151
 
 	/* begin block 2 */
-		// Start line: 9504
+		// Start line: 9604
 	/* end block 2 */
-	// End Line: 9505
+	// End Line: 9605
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_StandardFXPrimProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 
@@ -4747,10 +4799,10 @@ void FX_StandardFXPrimProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
   _FX_MATRIX *p_Var7;
   uint uVar8;
   uint uVar9;
-  undefined4 uVar10;
+  uint uVar10;
   undefined4 uVar11;
   undefined4 uVar12;
-  uint uVar13;
+  undefined4 uVar13;
   
   iVar6 = fxPrim->timeToLive;
   if (0 < iVar6) {
@@ -4758,12 +4810,12 @@ void FX_StandardFXPrimProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
     iVar6 = fxPrim->timeToLive;
   }
   if (iVar6 == 0) {
-LAB_800498a4:
+LAB_80048848:
     FX_Die(fxPrim,fxTracker);
   }
   else {
-    uVar13 = fxPrim->flags;
-    if ((uVar13 & 0x40000) != 0) {
+    uVar10 = fxPrim->flags;
+    if ((uVar10 & 0x40000) != 0) {
       uVar8 = fxPrim->startColor;
       uVar9 = fxPrim->endColor;
       sVar5 = fxPrim->fadeValue[0] + fxPrim->fadeStep;
@@ -4781,29 +4833,29 @@ LAB_800498a4:
       setCopReg(2,0x5000,uVar9 >> 8 & 0xff);
       setCopReg(2,0x5800,uVar9 >> 0x10 & 0xff);
       copFunction(2,0x1a8003e);
-      uVar10 = getCopReg(2,0x4800);
-      uVar11 = getCopReg(2,0x5000);
-      uVar12 = getCopReg(2,0x5800);
-      *(char *)&fxPrim->color = (char)uVar10;
-      *(undefined *)((int)&fxPrim->color + 1) = (char)uVar11;
-      *(undefined *)((int)&fxPrim->color + 2) = (char)uVar12;
-      if ((uVar13 & 1) != 0) {
+      uVar11 = getCopReg(2,0x4800);
+      uVar12 = getCopReg(2,0x5000);
+      uVar13 = getCopReg(2,0x5800);
+      *(char *)&fxPrim->color = (char)uVar11;
+      *(undefined *)((int)&fxPrim->color + 1) = (char)uVar12;
+      *(undefined *)((int)&fxPrim->color + 2) = (char)uVar13;
+      if ((uVar10 & 1) != 0) {
         fxPrim->color = fxPrim->color & 0x3ffffffU | 0x2c000000;
       }
     }
-    if ((uVar13 & 0x2000) != 0) {
-      iVar6 = (int)(fxPrim->_2).y - (int)fxPrim->work3;
-      if (iVar6 < 1) goto LAB_800498a4;
-      (fxPrim->_2).y = (short)iVar6;
+    if ((uVar10 & 0x2000) != 0) {
+      iVar6 = (int)(fxPrim->v0).y - (int)fxPrim->work3;
+      if (iVar6 < 1) goto LAB_80048848;
+      (fxPrim->v0).y = (short)iVar6;
     }
-    if ((uVar13 & 0x20) == 0) {
-      if ((uVar13 & 2) == 0) {
+    if ((uVar10 & 0x20) == 0) {
+      if ((uVar10 & 2) == 0) {
         sVar5 = *(short *)((int)&fxPrim->duo + 8);
         sVar3 = *(short *)((int)&fxPrim->duo + 10);
         *(short *)&fxPrim->duo = *(short *)&fxPrim->duo + *(short *)((int)&fxPrim->duo + 6);
         *(short *)((int)&fxPrim->duo + 2) = *(short *)((int)&fxPrim->duo + 2) + sVar5;
         *(short *)((int)&fxPrim->duo + 4) = *(short *)((int)&fxPrim->duo + 4) + sVar3;
-        if ((uVar13 & 0x1000000) == 0) {
+        if ((uVar10 & 0x1000000) == 0) {
           sVar5 = *(short *)((int)&fxPrim->duo + 2);
           sVar3 = *(short *)((int)&fxPrim->duo + 4);
           (fxPrim->position).x = (fxPrim->position).x + *(short *)&fxPrim->duo;
@@ -4812,18 +4864,18 @@ LAB_800498a4:
         }
         else {
           sVar5 = *(short *)&fxPrim->duo;
-          (fxPrim->_2).x = (fxPrim->_2).x + sVar5;
-          sVar3 = (fxPrim->_2).y;
+          (fxPrim->v0).x = (fxPrim->v0).x + sVar5;
+          sVar3 = (fxPrim->v0).y;
           sVar4 = *(short *)((int)&fxPrim->duo + 2);
-          (fxPrim->_3).x = (fxPrim->_3).x + sVar5;
-          (fxPrim->_2).y = sVar3 + sVar4;
-          sVar5 = (fxPrim->_2).z;
+          (fxPrim->v1).x = (fxPrim->v1).x + sVar5;
+          (fxPrim->v0).y = sVar3 + sVar4;
+          sVar5 = (fxPrim->v0).z;
           sVar3 = *(short *)((int)&fxPrim->duo + 4);
-          (fxPrim->_3).y = (fxPrim->_3).y + sVar4;
-          (fxPrim->_2).z = sVar5 + sVar3;
-          (fxPrim->_3).z = (fxPrim->_3).z + sVar3;
+          (fxPrim->v1).y = (fxPrim->v1).y + sVar4;
+          (fxPrim->v0).z = sVar5 + sVar3;
+          (fxPrim->v1).z = (fxPrim->v1).z + sVar3;
         }
-        if (((uVar13 & 0x100) != 0) && ((fxPrim->position).z <= fxPrim->work0)) {
+        if (((uVar10 & 0x100) != 0) && ((fxPrim->position).z <= fxPrim->work0)) {
           uVar8 = fxPrim->flags;
           (fxPrim->position).z = fxPrim->work0;
           fxPrim->flags = uVar8 | 2;
@@ -4836,16 +4888,13 @@ LAB_800498a4:
       (fxPrim->position).y = *(short *)(iVar6 + 0x18);
       (fxPrim->position).z = *(short *)(iVar6 + 0x1c);
     }
-    if ((uVar13 & 4) != 0) {
-      FX_AniTexProcess(fxPrim,fxTracker);
-    }
-    if (((((uVar13 & 0x8000000) == 0) && (p_Var7 = fxPrim->matrix, p_Var7 != (_FX_MATRIX *)0x0)) &&
-        ((p_Var7->flags & 2U) == 0)) && (p_Var7->flags = p_Var7->flags | 2, (uVar13 & 0x80) != 0)) {
+    if (((((uVar10 & 0x8000000) == 0) && (p_Var7 = fxPrim->matrix, p_Var7 != (_FX_MATRIX *)0x0)) &&
+        ((p_Var7->flags & 2U) == 0)) && (p_Var7->flags = p_Var7->flags | 2, (uVar10 & 0x80) != 0)) {
       cVar1 = *(char *)&fxPrim->work3;
       cVar2 = *(char *)((int)&fxPrim->work3 + 1);
-      RotMatrixX((int)*(char *)((int)&fxPrim->work2 + 1) << 2,(int)&fxPrim->matrix->lwTransform);
-      RotMatrixY((int)(short)((int)cVar1 << 2),(short *)&fxPrim->matrix->lwTransform);
-      RotMatrixZ((int)(short)((int)cVar2 << 2),(short *)&fxPrim->matrix->lwTransform);
+      RotMatrixX((int)*(char *)((int)&fxPrim->work2 + 1) << 2,&fxPrim->matrix->lwTransform);
+      RotMatrixY((int)(short)((int)cVar1 << 2),&fxPrim->matrix->lwTransform);
+      RotMatrixZ((int)(short)((int)cVar2 << 2),&fxPrim->matrix->lwTransform);
     }
   }
   return;
@@ -4856,22 +4905,24 @@ LAB_800498a4:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_AttachedParticlePrimProcess(struct _FX_PRIM *fxPrim /*$a2*/, struct _FXTracker *fxTracker /*$a1*/)
- // line 4075, offset 0x80049ad8
+ // line 4153, offset 0x80048a64
 	/* begin block 1 */
-		// Start line: 4076
-		// Start offset: 0x80049AD8
+		// Start line: 4154
+		// Start offset: 0x80048A64
 		// Variables:
 	// 		struct MATRIX *swTransform; // $a3
 	// 		struct MATRIX *swTransformOld; // $t0
 	// 		struct _Instance *instance; // $v1
 	/* end block 1 */
-	// End offset: 0x80049B54
-	// End Line: 4090
+	// End offset: 0x80048AE0
+	// End Line: 4168
 
 	/* begin block 2 */
-		// Start line: 9998
+		// Start line: 10102
 	/* end block 2 */
-	// End Line: 9999
+	// End Line: 10103
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_AttachedParticlePrimProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 
@@ -4903,10 +4954,10 @@ void FX_AttachedParticlePrimProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_FlamePrimProcess(struct _FX_PRIM *fxPrim /*$a3*/, struct _FXTracker *fxTracker /*$a1*/)
- // line 4093, offset 0x80049b6c
+ // line 4171, offset 0x80048af8
 	/* begin block 1 */
-		// Start line: 4094
-		// Start offset: 0x80049B6C
+		// Start line: 4172
+		// Start offset: 0x80048AF8
 		// Variables:
 	// 		struct MATRIX *swTransform; // $a0
 	// 		struct MATRIX *swTransformOld; // $a2
@@ -4914,13 +4965,15 @@ void FX_AttachedParticlePrimProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 	// 		struct _SVector movement; // stack offset -16
 	// 		int total; // $a0
 	/* end block 1 */
-	// End offset: 0x80049D30
-	// End Line: 4127
+	// End offset: 0x80048CBC
+	// End Line: 4205
 
 	/* begin block 2 */
-		// Start line: 10037
+		// Start line: 10141
 	/* end block 2 */
-	// End Line: 10038
+	// End Line: 10142
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_FlamePrimProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 
@@ -4975,12 +5028,12 @@ void FX_FlamePrimProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
       *(undefined2 *)((int)&fxPrim->duo + 10) = 1;
     }
     else {
-      uVar1 = (fxPrim->_2).y;
+      uVar1 = (fxPrim->v0).y;
       *(undefined2 *)((int)&fxPrim->duo + 10) = 0;
       iVar5 = (uint)uVar1 - (iVar2 * 3) / 2;
-      (fxPrim->_2).y = (short)iVar5;
+      (fxPrim->v0).y = (short)iVar5;
       if (iVar5 * 0x10000 < 0) {
-        (fxPrim->_2).y = 0;
+        (fxPrim->v0).y = 0;
       }
     }
     FX_StandardFXPrimProcess(fxPrim,fxTracker);
@@ -4993,69 +5046,74 @@ void FX_FlamePrimProcess(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_DFacadeParticleSetup(struct _FX_PRIM *fxPrim /*$t1*/, struct SVECTOR *center /*$a1*/, short halveWidth /*$a2*/, short halveHeight /*$a3*/, long color /*stack 16*/, struct SVECTOR *vel /*stack 20*/, struct SVECTOR *accl /*stack 24*/, struct _FXTracker *fxTracker /*stack 28*/, int timeToLive /*stack 32*/)
- // line 4139, offset 0x80049d40
+ // line 4217, offset 0x80048ccc
 	/* begin block 1 */
-		// Start line: 4140
-		// Start offset: 0x80049D40
+		// Start line: 4218
+		// Start offset: 0x80048CCC
 
 		/* begin block 1.1 */
-			// Start line: 4140
-			// Start offset: 0x80049D40
+			// Start line: 4218
+			// Start offset: 0x80048CCC
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a0
 		// 		struct _Position *_v0; // $v0
 		/* end block 1.1 */
-		// End offset: 0x80049D40
-		// End Line: 4140
+		// End offset: 0x80048CCC
+		// End Line: 4218
 	/* end block 1 */
-	// End offset: 0x80049E20
-	// End Line: 4181
+	// End offset: 0x80048DAC
+	// End Line: 4259
 
 	/* begin block 2 */
-		// Start line: 10130
+		// Start line: 10234
 	/* end block 2 */
-	// End Line: 10131
+	// End Line: 10235
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_DFacadeParticleSetup
-               (_FX_PRIM *fxPrim,SVECTOR *center,short halveWidth,short halveHeight,long color,
-               SVECTOR *vel,SVECTOR *accl,_FXTracker *fxTracker,int timeToLive)
+               (_FX_PRIM *fxPrim,undefined center,short halveWidth,short halveHeight,long color,
+               undefined1 vel,undefined1 accl,_FXTracker *fxTracker,int timeToLive)
 
 {
   short sVar1;
   short sVar2;
+  undefined3 in_register_00000015;
+  short *psVar3;
   
-  sVar1 = center->vy;
-  sVar2 = center->vz;
-  (fxPrim->position).x = center->vx;
+  psVar3 = (short *)CONCAT31(in_register_00000015,center);
+  sVar1 = psVar3[1];
+  sVar2 = psVar3[2];
+  (fxPrim->position).x = *psVar3;
   (fxPrim->position).y = sVar1;
   (fxPrim->position).z = sVar2;
-  (fxPrim->_2).x = halveWidth;
-  (fxPrim->_2).y = 0x1000;
-  (fxPrim->_2).z = halveHeight;
+  (fxPrim->v0).x = halveWidth;
+  (fxPrim->v0).y = 0x1000;
+  (fxPrim->v0).z = halveHeight;
   fxPrim->color = color & 0x3ffffffU | 0x20000000;
   *(code **)&fxPrim->process = FX_StandardFXPrimProcess;
   fxPrim->flags = fxPrim->flags | 8;
-  if (vel == (SVECTOR *)0x0) {
+  if (_vel == (undefined2 *)0x0) {
     *(undefined2 *)&fxPrim->duo = 0;
     *(undefined2 *)((int)&fxPrim->duo + 2) = 0;
     *(undefined2 *)((int)&fxPrim->duo + 4) = 0;
   }
   else {
-    *(short *)&fxPrim->duo = vel->vx;
-    *(short *)((int)&fxPrim->duo + 2) = vel->vy;
-    *(short *)((int)&fxPrim->duo + 4) = vel->vz;
+    *(undefined2 *)&fxPrim->duo = *_vel;
+    *(undefined2 *)((int)&fxPrim->duo + 2) = _vel[1];
+    *(undefined2 *)((int)&fxPrim->duo + 4) = _vel[2];
   }
-  if (accl == (SVECTOR *)0x0) {
+  if (_accl == (undefined2 *)0x0) {
     *(undefined2 *)((int)&fxPrim->duo + 6) = 0;
     *(undefined2 *)((int)&fxPrim->duo + 8) = 0;
     *(undefined2 *)((int)&fxPrim->duo + 10) = 0;
   }
   else {
-    *(short *)((int)&fxPrim->duo + 6) = accl->vx;
-    *(short *)((int)&fxPrim->duo + 8) = accl->vy;
-    *(short *)((int)&fxPrim->duo + 10) = accl->vz;
+    *(undefined2 *)((int)&fxPrim->duo + 6) = *_accl;
+    *(undefined2 *)((int)&fxPrim->duo + 8) = _accl[1];
+    *(undefined2 *)((int)&fxPrim->duo + 10) = _accl[2];
   }
   fxPrim->timeToLive = (int)(short)timeToLive;
   return;
@@ -5066,20 +5124,22 @@ void FX_DFacadeParticleSetup
 // decompiled code
 // original method signature: 
 // struct _FX_PRIM * /*$ra*/ FX_Dot(struct _SVector *location /*$s4*/, struct _SVector *vel /*$s6*/, struct _SVector *accel /*$s7*/, int scale_speed /*$fp*/, long color /*stack 16*/, long size /*stack 20*/, int lifetime /*stack 24*/, int texture_num /*stack 28*/)
- // line 4187, offset 0x80049e30
+ // line 4263, offset 0x80048dbc
 	/* begin block 1 */
-		// Start line: 4188
-		// Start offset: 0x80049E30
+		// Start line: 4264
+		// Start offset: 0x80048DBC
 		// Variables:
 	// 		struct _FX_PRIM *fxPrim; // $s0
 	/* end block 1 */
-	// End offset: 0x80049F68
-	// End Line: 4218
+	// End offset: 0x80048EF4
+	// End Line: 4294
 
 	/* begin block 2 */
-		// Start line: 10273
+		// Start line: 10373
 	/* end block 2 */
-	// End Line: 10274
+	// End Line: 10374
+
+/* File: C:\kain2\game\FX.C */
 
 _FX_PRIM *
 FX_Dot(_SVector *location,_SVector *vel,_SVector *accel,int scale_speed,long color,long size,
@@ -5093,8 +5153,8 @@ FX_Dot(_SVector *location,_SVector *vel,_SVector *accel,int scale_speed,long col
   if (fxPrim != (_FX_PRIM *)0x0) {
     if (texture_num < 0) {
       FX_DFacadeParticleSetup
-                (fxPrim,(SVECTOR *)location,(short)size,(short)size,color,(SVECTOR *)vel,
-                 (SVECTOR *)accel,gFXT,(int)(short)lifetime);
+                (fxPrim,(char)location,(short)size,(short)size,color,(char)vel,(char)accel,gFXT,
+                 (int)(short)lifetime);
       if (color != 0) {
         fxPrim->flags = fxPrim->flags | 0xc0000;
       }
@@ -5112,7 +5172,7 @@ FX_Dot(_SVector *location,_SVector *vel,_SVector *accel,int scale_speed,long col
     }
     if (scale_speed != 0) {
       uVar1 = fxPrim->flags;
-      (fxPrim->_2).y = 0x1000;
+      (fxPrim->v0).y = 0x1000;
       fxPrim->work3 = (short)scale_speed;
       fxPrim->flags = uVar1 | 0x2000;
     }
@@ -5126,29 +5186,31 @@ FX_Dot(_SVector *location,_SVector *vel,_SVector *accel,int scale_speed,long col
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_Blood(struct _SVector *location /*$s4*/, struct _SVector *input_vel /*$s1*/, struct _SVector *accel /*$s5*/, int amount /*$a3*/, long color /*stack 16*/, long size /*stack 20*/)
- // line 4221, offset 0x80049f9c
+ // line 4297, offset 0x80048f28
 	/* begin block 1 */
-		// Start line: 4222
-		// Start offset: 0x80049F9C
+		// Start line: 4298
+		// Start offset: 0x80048F28
 		// Variables:
 	// 		int i; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 4227
-			// Start offset: 0x80049FD8
+			// Start line: 4303
+			// Start offset: 0x80048F64
 			// Variables:
 		// 		struct _SVector vel; // stack offset -40
 		/* end block 1.1 */
-		// End offset: 0x8004A064
-		// End Line: 4231
+		// End offset: 0x80048FF0
+		// End Line: 4307
 	/* end block 1 */
-	// End offset: 0x8004A0B0
-	// End Line: 4234
+	// End offset: 0x8004903C
+	// End Line: 4310
 
 	/* begin block 2 */
-		// Start line: 10347
+		// Start line: 10447
 	/* end block 2 */
-	// End Line: 10348
+	// End Line: 10448
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_Blood(_SVector *location,_SVector *input_vel,_SVector *accel,int amount,long color,long size
              )
@@ -5190,11 +5252,13 @@ void FX_Blood(_SVector *location,_SVector *input_vel,_SVector *accel,int amount,
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_Blood2(struct _SVector *location /*$a0*/, struct _SVector *input_vel /*$a1*/, struct _SVector *accel /*$a2*/, int amount /*$a3*/, long color /*stack 16*/, long dummyCrapShouldRemove /*stack 20*/)
- // line 4236, offset 0x8004a0d4
+ // line 4312, offset 0x80049060
 	/* begin block 1 */
-		// Start line: 10384
+		// Start line: 10484
 	/* end block 1 */
-	// End Line: 10385
+	// End Line: 10485
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_Blood2(_SVector *location,_SVector *input_vel,_SVector *accel,int amount,long color,
               long dummyCrapShouldRemove)
@@ -5209,10 +5273,10 @@ void FX_Blood2(_SVector *location,_SVector *input_vel,_SVector *accel,int amount
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_Blood_Impale(struct _Instance *locinst /*$a0*/, short locseg /*$a1*/, struct _Instance *instance /*$a2*/, short segment /*$a3*/)
- // line 4268, offset 0x8004a100
+ // line 4344, offset 0x8004908c
 	/* begin block 1 */
-		// Start line: 4269
-		// Start offset: 0x8004A100
+		// Start line: 4345
+		// Start offset: 0x8004908C
 		// Variables:
 	// 		struct _FX_PRIM *fxPrim; // $s0
 	// 		struct SVECTOR location; // stack offset -48
@@ -5221,13 +5285,15 @@ void FX_Blood2(_SVector *location,_SVector *input_vel,_SVector *accel,int amount
 	// 		struct SVECTOR input_vel; // stack offset -24
 	// 		int i; // $s1
 	/* end block 1 */
-	// End offset: 0x8004A31C
-	// End Line: 4309
+	// End offset: 0x800492A8
+	// End Line: 4385
 
 	/* begin block 2 */
-		// Start line: 8528
+		// Start line: 8680
 	/* end block 2 */
-	// End Line: 8529
+	// End Line: 8681
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_Blood_Impale(_Instance *locinst,short locseg,_Instance *instance,short segment)
 
@@ -5236,52 +5302,15 @@ void FX_Blood_Impale(_Instance *locinst,short locseg,_Instance *instance,short s
   _FX_PRIM *fxPrim;
   uint uVar2;
   int iVar3;
-  int iVar4;
-  int iVar5;
-  SVECTOR local_30;
-  SVECTOR local_28;
-  SVECTOR local_20;
-  short local_18;
-  short local_16;
-  short local_14;
   
-  iVar3 = (int)((uint)(ushort)segment << 0x10) >> 0xb;
-  local_18 = *(short *)((int)instance->matrix->t + iVar3) -
-             *(short *)((int)instance->oldMatrix->t + iVar3);
-  local_16 = *(short *)((int)instance->matrix->t + iVar3 + 4) -
-             *(short *)((int)instance->oldMatrix->t + iVar3 + 4);
-  local_14 = *(short *)((int)instance->matrix->t + iVar3 + 8) -
-             *(short *)((int)instance->oldMatrix->t + iVar3 + 8);
-  iVar3 = (int)((uint)(ushort)locseg << 0x10) >> 0xb;
-  local_30.vx = *(short *)((int)locinst->matrix->t + iVar3);
-  iVar4 = 1;
-  local_30.vy = *(short *)((int)locinst->matrix->t + iVar3 + 4);
-  local_30.vz = *(short *)((int)locinst->matrix->t + iVar3 + 8);
-  local_28.vx = 0;
-  local_28.vy = 0;
-  local_28.vz = -2;
+  iVar3 = 1;
   do {
     fxPrim = FX_GetPrim(gFXT);
     if (fxPrim != (_FX_PRIM *)0x0) {
-      iVar3 = rand();
-      iVar5 = local_18 * iVar4;
-      if (iVar5 < 0) {
-        iVar5 = iVar5 + 0x3f;
-      }
-      local_20.vx = (short)(iVar5 >> 6) + ((ushort)iVar3 & 0xf) + -7;
-      iVar3 = rand();
-      iVar5 = local_16 * iVar4;
-      if (iVar5 < 0) {
-        iVar5 = iVar5 + 0x3f;
-      }
-      local_20.vy = (short)(iVar5 >> 6) + ((ushort)iVar3 & 0xf) + -7;
-      iVar3 = rand();
-      iVar5 = local_14 * iVar4;
-      if (iVar5 < 0) {
-        iVar5 = iVar5 + 0x3f;
-      }
-      local_20.vz = (short)(iVar5 >> 6) + ((ushort)iVar3 & 0xf) + -7;
-      FX_DFacadeParticleSetup(fxPrim,&local_30,8,8,0x1800a0,&local_20,&local_28,gFXT,0x16);
+      rand();
+      rand();
+      rand();
+      FX_DFacadeParticleSetup(fxPrim,0xd0,8,8,(long)&DAT_001800a0,0xe0,0xd8,gFXT,0x16);
       p_Var1 = gFXT;
       fxPrim->fadeStep = 0xba;
       uVar2 = fxPrim->flags;
@@ -5294,8 +5323,8 @@ void FX_Blood_Impale(_Instance *locinst,short locseg,_Instance *instance,short s
       fxPrim->flags = uVar2 | 0xc0000;
       FX_Sprite_Insert(&p_Var1->usedPrimListSprite,fxPrim);
     }
-    iVar4 = iVar4 + 1;
-  } while (iVar4 < 0x40);
+    iVar3 = iVar3 + 1;
+  } while (iVar3 < 0x40);
   return;
 }
 
@@ -5304,20 +5333,22 @@ void FX_Blood_Impale(_Instance *locinst,short locseg,_Instance *instance,short s
 // decompiled code
 // original method signature: 
 // struct _FXParticle * /*$ra*/ FX_BloodCone(struct _Instance *instance /*$a0*/, short startSegment /*$a1*/, long time /*$s1*/)
- // line 4319, offset 0x8004a334
+ // line 4391, offset 0x800492c0
 	/* begin block 1 */
-		// Start line: 4320
-		// Start offset: 0x8004A334
+		// Start line: 4392
+		// Start offset: 0x800492C0
 		// Variables:
 	// 		struct _FXParticle *currentParticle; // $s0
 	/* end block 1 */
-	// End offset: 0x8004A3B8
-	// End Line: 4342
+	// End offset: 0x80049344
+	// End Line: 4414
 
 	/* begin block 2 */
-		// Start line: 10576
+		// Start line: 10668
 	/* end block 2 */
-	// End Line: 10577
+	// End Line: 10669
+
+/* File: C:\kain2\game\FX.C */
 
 _FXParticle * FX_BloodCone(_Instance *instance,short startSegment,long time)
 
@@ -5349,20 +5380,22 @@ _FXParticle * FX_BloodCone(_Instance *instance,short startSegment,long time)
 // decompiled code
 // original method signature: 
 // struct _FXParticle * /*$ra*/ FX_GetTorchParticle(struct _Instance *instance /*$s1*/, short startSegment /*$a1*/, int tex /*$s2*/, int birthRadius /*$s3*/, int num /*stack 16*/)
- // line 4347, offset 0x8004a3d0
+ // line 4419, offset 0x8004935c
 	/* begin block 1 */
-		// Start line: 4348
-		// Start offset: 0x8004A3D0
+		// Start line: 4420
+		// Start offset: 0x8004935C
 		// Variables:
 	// 		struct _FXParticle *currentParticle; // $s0
 	/* end block 1 */
-	// End offset: 0x8004A494
-	// End Line: 4372
+	// End offset: 0x80049420
+	// End Line: 4444
 
 	/* begin block 2 */
-		// Start line: 10655
+		// Start line: 10747
 	/* end block 2 */
-	// End Line: 10656
+	// End Line: 10748
+
+/* File: C:\kain2\game\FX.C */
 
 _FXParticle *
 FX_GetTorchParticle(_Instance *instance,short startSegment,int tex,int birthRadius,int num)
@@ -5401,20 +5434,22 @@ FX_GetTorchParticle(_Instance *instance,short startSegment,int tex,int birthRadi
 // decompiled code
 // original method signature: 
 // struct _FXParticle * /*$ra*/ FX_TorchFlame(struct _Instance *instance /*$s2*/, short startSegment /*$a1*/)
- // line 4375, offset 0x8004a4b4
+ // line 4447, offset 0x80049440
 	/* begin block 1 */
-		// Start line: 4376
-		// Start offset: 0x8004A4B4
+		// Start line: 4448
+		// Start offset: 0x80049440
 		// Variables:
 	// 		struct _FXParticle *currentParticle; // $s0
 	/* end block 1 */
-	// End offset: 0x8004A5BC
-	// End Line: 4418
+	// End offset: 0x80049548
+	// End Line: 4490
 
 	/* begin block 2 */
-		// Start line: 10734
+		// Start line: 10826
 	/* end block 2 */
-	// End Line: 10735
+	// End Line: 10827
+
+/* File: C:\kain2\game\FX.C */
 
 _FXParticle * FX_TorchFlame(_Instance *instance,short startSegment)
 
@@ -5461,35 +5496,35 @@ _FXParticle * FX_TorchFlame(_Instance *instance,short startSegment)
 // decompiled code
 // original method signature: 
 // int /*$ra*/ FX_GetMorphFadeVal()
- // line 4421, offset 0x8004a5dc
+ // line 4493, offset 0x80049568
 	/* begin block 1 */
-		// Start line: 4423
-		// Start offset: 0x8004A5DC
+		// Start line: 4495
+		// Start offset: 0x80049568
 		// Variables:
 	// 		int fade; // $a0
 	/* end block 1 */
-	// End offset: 0x8004A614
-	// End Line: 4426
+	// End offset: 0x800495A0
+	// End Line: 4498
 
 	/* begin block 2 */
-		// Start line: 10847
+		// Start line: 10939
 	/* end block 2 */
-	// End Line: 10848
+	// End Line: 10940
 
 	/* begin block 3 */
-		// Start line: 10848
+		// Start line: 10940
 	/* end block 3 */
-	// End Line: 10849
+	// End Line: 10941
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\FX.C */
 
 int FX_GetMorphFadeVal(void)
 
 {
   int iVar1;
   
-  iVar1 = ((int)gameTrackerX.gameData.asmData.MorphTime << 0xc) / 1000;
-  if (gameTrackerX.gameData.asmData.MorphType == 1) {
+  iVar1 = ((int)DAT_800d20d4 << 0xc) / 1000;
+  if (DAT_800d20d6 == 1) {
     iVar1 = 0x1000 - iVar1;
   }
   return iVar1;
@@ -5500,44 +5535,51 @@ int FX_GetMorphFadeVal(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_ConvertCamPersToWorld(struct SVECTOR *campos /*$s0*/, struct SVECTOR *worldpos /*$s1*/)
- // line 4445, offset 0x8004a61c
+ // line 4517, offset 0x800495a8
 	/* begin block 1 */
-		// Start line: 10895
+		// Start line: 10987
 	/* end block 1 */
-	// End Line: 10896
+	// End Line: 10988
 
-void FX_ConvertCamPersToWorld(SVECTOR *campos,SVECTOR *worldpos)
+/* File: C:\kain2\game\FX.C */
+
+void FX_ConvertCamPersToWorld(undefined campos,undefined worldpos)
 
 {
   undefined4 in_zero;
   undefined4 in_at;
   int iVar1;
-  short sVar2;
-  undefined4 uVar3;
+  undefined3 in_register_00000011;
+  undefined4 *puVar2;
+  undefined3 in_register_00000015;
+  undefined2 *puVar3;
   undefined4 uVar4;
   undefined4 uVar5;
+  undefined4 uVar6;
   
-  SetRotMatrix((undefined4 *)theCamera.core.cwTransform2);
-  SetTransMatrix((int)theCamera.core.cwTransform2);
-  sVar2 = campos->vx + -0x100;
-  iVar1 = (int)sVar2 * 0x140;
-  campos->vx = sVar2;
+  puVar3 = (undefined2 *)CONCAT31(in_register_00000015,worldpos);
+  puVar2 = (undefined4 *)CONCAT31(in_register_00000011,campos);
+  SetRotMatrix(DAT_800d1010);
+  SetTransMatrix(DAT_800d1010);
+  iVar1 = (int)(short)(*(short *)puVar2 + -0x100) * 0x140;
+  *(short *)puVar2 = *(short *)puVar2 + -0x100;
   if (iVar1 < 0) {
     iVar1 = iVar1 + 0x1ff;
   }
-  campos->vx = (short)(iVar1 >> 9);
-  campos->vy = campos->vy + -0x78;
-  campos->vx = (short)(((int)campos->vx * (int)campos->vz) / 0x140);
-  campos->vy = (short)(((int)campos->vy * (int)campos->vz) / 0x140);
-  setCopReg(2,in_zero,*(undefined4 *)campos);
-  setCopReg(2,in_at,*(undefined4 *)&campos->vz);
+  *(short *)puVar2 = (short)(iVar1 >> 9);
+  *(short *)((int)puVar2 + 2) = *(short *)((int)puVar2 + 2) + -0x78;
+  *(short *)puVar2 = (short)(((int)*(short *)puVar2 * (int)*(short *)(puVar2 + 1)) / 0x140);
+  *(short *)((int)puVar2 + 2) =
+       (short)(((int)*(short *)((int)puVar2 + 2) * (int)*(short *)(puVar2 + 1)) / 0x140);
+  setCopReg(2,in_zero,*puVar2);
+  setCopReg(2,in_at,puVar2[1]);
   copFunction(2,0x480012);
-  uVar3 = getCopReg(2,0x4800);
-  uVar4 = getCopReg(2,0x5000);
-  uVar5 = getCopReg(2,0x5800);
-  worldpos->vx = (short)uVar3;
-  worldpos->vy = (short)uVar4;
-  worldpos->vz = (short)uVar5;
+  uVar4 = getCopReg(2,0x4800);
+  uVar5 = getCopReg(2,0x5000);
+  uVar6 = getCopReg(2,0x5800);
+  *puVar3 = (short)uVar4;
+  puVar3[1] = (short)uVar5;
+  puVar3[2] = (short)uVar6;
   return;
 }
 
@@ -5546,28 +5588,33 @@ void FX_ConvertCamPersToWorld(SVECTOR *campos,SVECTOR *worldpos)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_GetRandomScreenPt(struct SVECTOR *point /*$s0*/)
- // line 4465, offset 0x8004a734
+ // line 4537, offset 0x800496c0
 	/* begin block 1 */
-		// Start line: 10945
+		// Start line: 11037
 	/* end block 1 */
-	// End Line: 10946
+	// End Line: 11038
 
-void FX_GetRandomScreenPt(SVECTOR *point)
+/* File: C:\kain2\game\FX.C */
+
+void FX_GetRandomScreenPt(undefined point)
 
 {
   int iVar1;
   int iVar2;
+  undefined3 in_register_00000011;
+  short *psVar3;
   
+  psVar3 = (short *)CONCAT31(in_register_00000011,point);
   iVar1 = rand();
   iVar2 = iVar1;
   if (iVar1 < 0) {
     iVar2 = iVar1 + 0x1ff;
   }
-  point->vx = (short)iVar1 + (short)(iVar2 >> 9) * -0x200;
+  *psVar3 = (short)iVar1 + (short)(iVar2 >> 9) * -0x200;
   iVar2 = rand();
-  point->vy = (short)iVar2 + (short)(iVar2 / 0xf0) * -0xf0;
+  psVar3[1] = (short)iVar2 + (short)(iVar2 / 0xf0) * -0xf0;
   iVar2 = rand();
-  point->vz = ((ushort)iVar2 & 0xfff) + 0x180;
+  psVar3[2] = ((ushort)iVar2 & 0xfff) + 0x180;
   return;
 }
 
@@ -5576,27 +5623,29 @@ void FX_GetRandomScreenPt(SVECTOR *point)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_ProcessSnow(struct _FX_PRIM *fxPrim /*$s0*/, struct _FXTracker *fxTracker /*$s1*/)
- // line 4472, offset 0x8004a7c0
+ // line 4544, offset 0x8004974c
 	/* begin block 1 */
-		// Start line: 4473
-		// Start offset: 0x8004A7C0
+		// Start line: 4545
+		// Start offset: 0x8004974C
 
 		/* begin block 1.1 */
-			// Start line: 4476
-			// Start offset: 0x8004A7E4
+			// Start line: 4548
+			// Start offset: 0x80049770
 			// Variables:
 		// 		struct SVECTOR position; // stack offset -24
 		/* end block 1.1 */
-		// End offset: 0x8004A81C
-		// End Line: 4491
+		// End offset: 0x800497A8
+		// End Line: 4563
 	/* end block 1 */
-	// End offset: 0x8004A8D0
-	// End Line: 4505
+	// End offset: 0x8004985C
+	// End Line: 4577
 
 	/* begin block 2 */
-		// Start line: 10959
+		// Start line: 11051
 	/* end block 2 */
-	// End Line: 10960
+	// End Line: 11052
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_ProcessSnow(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 
@@ -5604,14 +5653,12 @@ void FX_ProcessSnow(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
   short sVar1;
   uint uVar2;
   int iVar3;
-  SVECTOR SStack24;
   
   if (fxPrim->work0 == 9999) {
-    if ((gameTrackerX.gameData.asmData.MorphType == 1) ||
-       (gameTrackerX.gameData.asmData.MorphTime != 1000)) goto LAB_8004a844;
+    if ((DAT_800d20d6 == 1) || (DAT_800d20d4 != 1000)) goto LAB_800497d0;
     fxPrim->work0 = 0;
-    FX_GetRandomScreenPt(&SStack24);
-    FX_ConvertCamPersToWorld(&SStack24,(SVECTOR *)&fxPrim->position);
+    FX_GetRandomScreenPt(0xe8);
+    FX_ConvertCamPersToWorld(0xe8,(char)fxPrim + ',');
   }
   if (0 < fxPrim->timeToLive) {
     fxPrim->timeToLive = fxPrim->timeToLive + -1;
@@ -5633,7 +5680,7 @@ void FX_ProcessSnow(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
     (fxPrim->position).z = (fxPrim->position).z + sVar1;
     return;
   }
-LAB_8004a844:
+LAB_800497d0:
   FX_Die(fxPrim,fxTracker);
   return;
 }
@@ -5643,71 +5690,58 @@ LAB_8004a844:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_ContinueSnow(struct _FXTracker *fxTracker /*$s1*/)
- // line 4507, offset 0x8004a8e4
+ // line 4579, offset 0x80049870
 	/* begin block 1 */
-		// Start line: 4508
-		// Start offset: 0x8004A8E4
+		// Start line: 4580
+		// Start offset: 0x80049870
 		// Variables:
 	// 		struct _FX_PRIM *fxPrim; // $s0
 	// 		struct SVECTOR position; // stack offset -40
 	// 		struct SVECTOR vel; // stack offset -32
 
 		/* begin block 1.1 */
-			// Start line: 4525
-			// Start offset: 0x8004A960
+			// Start line: 4597
+			// Start offset: 0x800498EC
 			// Variables:
 		// 		struct SVECTOR campos; // stack offset -24
 		/* end block 1.1 */
-		// End offset: 0x8004AA28
-		// End Line: 4547
+		// End offset: 0x800499B4
+		// End Line: 4619
 	/* end block 1 */
-	// End offset: 0x8004AA28
-	// End Line: 4549
+	// End offset: 0x800499B4
+	// End Line: 4621
 
 	/* begin block 2 */
-		// Start line: 11031
+		// Start line: 11123
 	/* end block 2 */
-	// End Line: 11032
+	// End Line: 11124
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_ContinueSnow(_FXTracker *fxTracker)
 
 {
   uint uVar1;
   _FX_PRIM *fxPrim;
-  int iVar2;
-  int iVar3;
-  SVECTOR SStack40;
-  SVECTOR local_20;
-  SVECTOR local_18;
   
-  if (gameTrackerX.gameData.asmData.MorphTime == 1000) {
-    if (gameTrackerX.gameData.asmData.MorphType == 1) {
+  if (DAT_800d20d4 == 1000) {
+    if (DAT_800d20d6 == 1) {
       return;
     }
   }
   else {
-    if (gameTrackerX.gameData.asmData.MorphType == 0) {
+    if (DAT_800d20d6 == 0) {
       return;
     }
   }
   uVar1 = rand();
   if (((int)(uVar1 & 0x3ff) <= (int)snow_amount) &&
      (fxPrim = FX_GetPrim(gFXT), fxPrim != (_FX_PRIM *)0x0)) {
-    local_20.vx = 0;
-    local_20.vy = 0;
-    iVar2 = rand();
-    local_20.vz = -0xd - ((ushort)iVar2 & 3);
-    iVar3 = rand();
-    iVar2 = iVar3;
-    if (iVar3 < 0) {
-      iVar2 = iVar3 + 0x1ff;
-    }
-    local_18.vx = (short)iVar3 + (short)(iVar2 >> 9) * -0x200;
-    local_18.vy = 5;
-    iVar2 = rand();
-    local_18.vz = ((ushort)iVar2 & 0xfff) + 0x180;
-    FX_ConvertCamPersToWorld(&local_18,&SStack40);
-    FX_DFacadeParticleSetup(fxPrim,&SStack40,1,1,0xffffff,&local_20,(SVECTOR *)0x0,fxTracker,0x96);
+    rand();
+    rand();
+    rand();
+    FX_ConvertCamPersToWorld(0xe8,0xd8);
+    FX_DFacadeParticleSetup(fxPrim,0xd8,1,1,0xffffff,0xe0,0,fxTracker,0x96);
     *(code **)&fxPrim->process = FX_ProcessSnow;
     fxPrim->work0 = 0;
     fxPrim->flags = fxPrim->flags | 0x800000;
@@ -5721,20 +5755,22 @@ void FX_ContinueSnow(_FXTracker *fxTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_UpdateWind(struct _FXTracker *fxTracker /*$a0*/)
- // line 4551, offset 0x8004aa3c
+ // line 4623, offset 0x800499c8
 	/* begin block 1 */
-		// Start line: 4552
-		// Start offset: 0x8004AA3C
+		// Start line: 4624
+		// Start offset: 0x800499C8
 		// Variables:
 	// 		short change; // $s0
 	/* end block 1 */
-	// End offset: 0x8004AB98
-	// End Line: 4569
+	// End offset: 0x80049B24
+	// End Line: 4641
 
 	/* begin block 2 */
-		// Start line: 11130
+		// Start line: 11222
 	/* end block 2 */
-	// End Line: 11131
+	// End Line: 11223
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_UpdateWind(_FXTracker *fxTracker)
 
@@ -5799,11 +5835,13 @@ void FX_UpdateWind(_FXTracker *fxTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_ProcessRain(struct _FX_PRIM *fxPrim /*$a2*/, struct _FXTracker *fxTracker /*$a1*/)
- // line 4576, offset 0x8004abb4
+ // line 4648, offset 0x80049b40
 	/* begin block 1 */
-		// Start line: 11184
+		// Start line: 11276
 	/* end block 1 */
-	// End Line: 11185
+	// End Line: 11277
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_ProcessRain(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 
@@ -5815,19 +5853,19 @@ void FX_ProcessRain(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
   if (0 < fxPrim->timeToLive) {
     fxPrim->timeToLive = fxPrim->timeToLive + -1;
   }
-  sVar3 = (fxPrim->_3).z + *(short *)((int)&fxPrim->duo + 4);
-  (fxPrim->_3).z = sVar3;
+  sVar3 = (fxPrim->v1).z + *(short *)((int)&fxPrim->duo + 4);
+  (fxPrim->v1).z = sVar3;
   if ((fxPrim->work0 < sVar3) && (fxPrim->timeToLive != 0)) {
     sVar3 = *(short *)&fxPrim->duo;
     sVar1 = *(short *)((int)&fxPrim->duo + 2);
-    (fxPrim->_2).x = (fxPrim->_2).x + sVar3;
-    sVar2 = (fxPrim->_2).y;
-    (fxPrim->_3).x = (fxPrim->_3).x + sVar3;
-    (fxPrim->_2).y = sVar2 + sVar1;
-    sVar3 = (fxPrim->_2).z;
+    (fxPrim->v0).x = (fxPrim->v0).x + sVar3;
+    sVar2 = (fxPrim->v0).y;
+    (fxPrim->v1).x = (fxPrim->v1).x + sVar3;
+    (fxPrim->v0).y = sVar2 + sVar1;
+    sVar3 = (fxPrim->v0).z;
     sVar2 = *(short *)((int)&fxPrim->duo + 4);
-    (fxPrim->_3).y = (fxPrim->_3).y + sVar1;
-    (fxPrim->_2).z = sVar3 + sVar2;
+    (fxPrim->v1).y = (fxPrim->v1).y + sVar1;
+    (fxPrim->v0).z = sVar3 + sVar2;
   }
   else {
     FX_Die(fxPrim,fxTracker);
@@ -5840,10 +5878,10 @@ void FX_ProcessRain(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_ContinueRain(struct _FXTracker *fxTracker /*$s6*/)
- // line 4600, offset 0x8004ac80
+ // line 4672, offset 0x80049c0c
 	/* begin block 1 */
-		// Start line: 4601
-		// Start offset: 0x8004AC80
+		// Start line: 4673
+		// Start offset: 0x80049C0C
 		// Variables:
 	// 		struct _FX_PRIM *fxPrim; // $s0
 	// 		struct SVECTOR campos; // stack offset -48
@@ -5852,31 +5890,34 @@ void FX_ProcessRain(_FX_PRIM *fxPrim,_FXTracker *fxTracker)
 	// 		long waterZLevel; // $s2
 
 		/* begin block 1.1 */
-			// Start line: 4614
-			// Start offset: 0x8004ACCC
+			// Start line: 4686
+			// Start offset: 0x80049C58
 			// Variables:
 		// 		int fade; // $v1
 		/* end block 1.1 */
-		// End offset: 0x8004ACF4
-		// End Line: 4616
+		// End offset: 0x80049C80
+		// End Line: 4688
 
 		/* begin block 1.2 */
-			// Start line: 4625
-			// Start offset: 0x8004AD24
+			// Start line: 4697
+			// Start offset: 0x80049CB0
 			// Variables:
 		// 		struct _SVector worldpos; // stack offset -40
 		// 		int zvel; // $s1
 		/* end block 1.2 */
-		// End offset: 0x8004AED8
-		// End Line: 4671
+		// End offset: 0x80049E64
+		// End Line: 4743
 	/* end block 1 */
-	// End offset: 0x8004AEE8
-	// End Line: 4673
+	// End offset: 0x80049E74
+	// End Line: 4745
 
 	/* begin block 2 */
-		// Start line: 11240
+		// Start line: 11332
 	/* end block 2 */
-	// End Line: 11241
+	// End Line: 11333
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* File: C:\kain2\game\FX.C */
 
 void FX_ContinueRain(_FXTracker *fxTracker)
 
@@ -5888,86 +5929,79 @@ void FX_ContinueRain(_FXTracker *fxTracker)
   int iVar5;
   Level *pLVar6;
   uint uVar7;
+  _FX_PRIM *node;
   int iVar8;
   int iVar9;
-  _FX_PRIM *node;
   int iVar10;
   int iVar11;
-  SVECTOR local_30;
-  SVECTOR local_28;
+  short local_28;
+  short local_26;
+  short local_24;
   
-  if (gameTrackerX.gameData.asmData._8_4_ != 0x103e8) {
-    iVar11 = (int)rain_amount;
-    if (gameTrackerX.gameData.asmData.MorphTime != 1000) {
+  if (_DAT_800d20d4 != &PTR_000103e8) {
+    iVar10 = (int)rain_amount;
+    if (DAT_800d20d4 != 1000) {
       iVar5 = FX_GetMorphFadeVal();
-      iVar5 = iVar11 * (0x1000 - iVar5);
-      iVar11 = iVar5 >> 0xc;
+      iVar5 = iVar10 * (0x1000 - iVar5);
+      iVar10 = iVar5 >> 0xc;
       if (iVar5 < 0) {
-        iVar11 = iVar5 + 0xfff >> 0xc;
+        iVar10 = iVar5 + 0xfff >> 0xc;
       }
     }
-    iVar10 = 0;
-    pLVar6 = STREAM_GetLevelWithID((gameTrackerX.playerInstance)->currentStreamUnitID);
+    iVar9 = 0;
+    pLVar6 = STREAM_GetLevelWithID(*(long *)(DAT_800d20f8 + 0x38));
     iVar5 = pLVar6->waterZLevel;
     do {
       uVar7 = rand();
-      if ((int)(uVar7 & 0x3ff) <= iVar11) {
-        iVar8 = rand();
-        iVar9 = iVar8;
-        if (iVar8 < 0) {
-          iVar9 = iVar8 + 0x1ff;
-        }
-        local_30.vx = (short)iVar8 + (short)(iVar9 >> 9) * -0x200;
-        local_30.vy = 5;
-        iVar9 = rand();
-        local_30.vz = ((ushort)iVar9 & 0x7ff) + 0x180;
-        FX_ConvertCamPersToWorld(&local_30,&local_28);
+      if ((int)(uVar7 & 0x3ff) <= iVar10) {
+        rand();
+        rand();
+        FX_ConvertCamPersToWorld(0xd0,0xd8);
         uVar7 = rand();
-        iVar9 = (-0xe - (uVar7 & 3)) * 8;
-        if (local_28.vz + iVar9 < iVar5) {
-          FX_GetRandomScreenPt(&local_30);
-          local_30.vz = local_30.vz + ((short)iVar5 - local_28.vz);
-          FX_ConvertCamPersToWorld(&local_30,&local_28);
-          if (local_28.vz + iVar9 < iVar5) goto LAB_8004aed8;
+        iVar8 = (-0xe - (uVar7 & 3)) * 8;
+        if (local_24 + iVar8 < iVar5) {
+          FX_GetRandomScreenPt(0xd0);
+          FX_ConvertCamPersToWorld(0xd0,0xd8);
+          if (local_24 + iVar8 < iVar5) goto LAB_80049e64;
         }
         node = FX_GetPrim(gFXT);
         if (node != (_FX_PRIM *)0x0) {
-          (node->_2).x = local_28.vx;
-          (node->_2).y = local_28.vy;
-          (node->_2).z = local_28.vz;
+          (node->v0).x = local_28;
+          (node->v0).y = local_26;
+          (node->v0).z = local_24;
           uVar7 = rand();
-          iVar8 = (int)windx * ((uVar7 & 0x3ff) + 0xc00);
-          if (iVar8 < 0) {
-            iVar8 = iVar8 + 0xfff;
+          iVar11 = (int)windx * ((uVar7 & 0x3ff) + 0xc00);
+          if (iVar11 < 0) {
+            iVar11 = iVar11 + 0xfff;
           }
-          *(short *)&node->duo = (short)(iVar8 >> 0xc);
+          *(short *)&node->duo = (short)(iVar11 >> 0xc);
           uVar7 = rand();
-          iVar8 = (int)windy * ((uVar7 & 0x3ff) + 0xc00);
-          if (iVar8 < 0) {
-            iVar8 = iVar8 + 0xfff;
+          iVar11 = (int)windy * ((uVar7 & 0x3ff) + 0xc00);
+          if (iVar11 < 0) {
+            iVar11 = iVar11 + 0xfff;
           }
-          *(undefined2 *)((int)&node->duo + 2) = (short)(iVar8 >> 0xc);
+          *(undefined2 *)((int)&node->duo + 2) = (short)(iVar11 >> 0xc);
           node->timeToLive = 0x14;
           node->flags = 0x1090000;
           node->color = 0x52404040;
-          sVar1 = (node->_2).x;
+          sVar1 = (node->v0).x;
           sVar2 = *(short *)&node->duo;
           *(code **)&node->process = FX_ProcessRain;
-          sVar3 = (node->_2).y;
-          *(short *)((int)&node->duo + 4) = (short)iVar9;
+          sVar3 = (node->v0).y;
+          *(short *)((int)&node->duo + 4) = (short)iVar8;
           sVar4 = *(short *)((int)&node->duo + 2);
           node->work0 = (short)iVar5;
           node->endColor = 0;
-          (node->_3).x = sVar1 + sVar2;
-          sVar1 = (node->_2).z;
-          (node->_3).y = sVar3 + sVar4;
-          (node->_3).z = sVar1 + (short)iVar9;
+          (node->v1).x = sVar1 + sVar2;
+          sVar1 = (node->v0).z;
+          (node->v1).y = sVar3 + sVar4;
+          (node->v1).z = sVar1 + (short)iVar8;
           LIST_InsertFunc(&fxTracker->usedPrimList,(NodeType *)node);
         }
       }
-LAB_8004aed8:
-      iVar10 = iVar10 + 1;
-    } while (iVar10 < 3);
+LAB_80049e64:
+      iVar9 = iVar9 + 1;
+    } while (iVar9 < 3);
   }
   return;
 }
@@ -5977,28 +6011,51 @@ LAB_8004aed8:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_MakeSpark(struct _Instance *instance /*$a0*/, struct _Model *model /*$a1*/, int segment /*$a2*/)
- // line 4678, offset 0x8004af10
+ // line 4750, offset 0x80049e9c
 	/* begin block 1 */
-		// Start line: 4679
-		// Start offset: 0x8004AF10
+		// Start line: 4751
+		// Start offset: 0x80049E9C
 		// Variables:
 	// 		struct _FXParticle *currentParticle; // $s0
 	// 		struct Object *particle; // $s1
 	/* end block 1 */
-	// End offset: 0x8004AFB8
-	// End Line: 4708
+	// End offset: 0x80049F44
+	// End Line: 4780
 
 	/* begin block 2 */
-		// Start line: 11521
+		// Start line: 11613
 	/* end block 2 */
-	// End Line: 11522
+	// End Line: 11614
 
-/* WARNING: Removing unreachable block (ram,0x8004af2c) */
-/* WARNING: Removing unreachable block (ram,0x8004af44) */
+/* File: C:\kain2\game\FX.C */
 
 void FX_MakeSpark(_Instance *instance,_Model *model,int segment)
 
 {
+  void *object;
+  _FXParticle *ptr;
+  TextureMT3 *pTVar1;
+  
+  object = objectAccess[10].object;
+  if ((objectAccess[10].object != (void *)0x0) &&
+     (ptr = FX_GetParticle(instance,(short)segment), ptr != (_FXParticle *)0x0)) {
+    ptr->size = 0x30;
+    ptr->birthRadius = 0x32;
+    (ptr->direction).x = 0x80;
+    (ptr->direction).y = 0x80;
+    (ptr->direction).z = 0xa0;
+    (ptr->acceleration).x = 0;
+    (ptr->acceleration).y = 0;
+    (ptr->acceleration).z = 1;
+    pTVar1 = FX_GetTextureObject((Object *)object,0,0);
+    ptr->texture = pTVar1;
+    ptr->numberBirthParticles = '\x02';
+    ptr->lifeTime = 2;
+    ptr->startColor = 0x2004960;
+    ptr->endColor = 0;
+    ptr->primLifeTime = 4;
+    FX_InsertGeneralEffect(ptr);
+  }
   return;
 }
 
@@ -6007,10 +6064,10 @@ void FX_MakeSpark(_Instance *instance,_Model *model,int segment)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_ContinueParticle(struct _FXParticle *currentParticle /*$s2*/, struct _FXTracker *fxTracker /*stack 4*/)
- // line 4710, offset 0x8004afcc
+ // line 4782, offset 0x80049f58
 	/* begin block 1 */
-		// Start line: 4711
-		// Start offset: 0x8004AFCC
+		// Start line: 4783
+		// Start offset: 0x80049F58
 		// Variables:
 	// 		struct _FX_PRIM *fxPrim; // $s1
 	// 		struct VECTOR movement; // stack offset -64
@@ -6024,31 +6081,33 @@ void FX_MakeSpark(_Instance *instance,_Model *model,int segment)
 	// 		unsigned long black; // stack offset -48
 
 		/* begin block 1.1 */
-			// Start line: 4831
-			// Start offset: 0x8004B548
+			// Start line: 4903
+			// Start offset: 0x8004A4D4
 			// Variables:
 		// 		int tmp_blue; // $v1
 		// 		struct CVECTOR *ptr; // $s0
 
 			/* begin block 1.1.1 */
-				// Start line: 4838
-				// Start offset: 0x8004B56C
+				// Start line: 4910
+				// Start offset: 0x8004A4F8
 				// Variables:
 			// 		int fade; // $v0
 			/* end block 1.1.1 */
-			// End offset: 0x8004B590
-			// End Line: 4844
+			// End offset: 0x8004A51C
+			// End Line: 4916
 		/* end block 1.1 */
-		// End offset: 0x8004B590
-		// End Line: 4845
+		// End offset: 0x8004A51C
+		// End Line: 4917
 	/* end block 1 */
-	// End offset: 0x8004B7DC
-	// End Line: 4910
+	// End offset: 0x8004A768
+	// End Line: 4982
 
 	/* begin block 2 */
-		// Start line: 11617
+		// Start line: 11709
 	/* end block 2 */
-	// End Line: 11618
+	// End Line: 11710
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_ContinueParticle(_FXParticle *currentParticle,_FXTracker *fxTracker)
 
@@ -6061,19 +6120,19 @@ void FX_ContinueParticle(_FXParticle *currentParticle,_FXTracker *fxTracker)
   short sVar6;
   short sVar7;
   short sVar8;
-  int iVar9;
+  int p1;
   _FX_PRIM *fxPrim;
-  uint uVar10;
-  int iVar11;
-  long lVar12;
-  code *pcVar13;
+  uint uVar9;
+  int p1_00;
+  long lVar10;
+  code *pcVar11;
+  MATRIX *pMVar12;
+  TextureMT3 *pTVar13;
   MATRIX *pMVar14;
-  TextureMT3 *pTVar15;
-  MATRIX *pMVar16;
-  MATRIX *pMVar17;
+  MATRIX *pMVar15;
   _Instance *instance;
-  int iVar18;
-  int iVar19;
+  int p0;
+  int iVar16;
   int local_40;
   int local_3c;
   int local_38;
@@ -6083,144 +6142,144 @@ void FX_ContinueParticle(_FXParticle *currentParticle,_FXTracker *fxTracker)
   local_30 = 0;
   local_2c = SEXT14(currentParticle->numberBirthParticles);
   if ((int)local_2c < 0) {
-    iVar9 = rand();
-    local_2c = (uint)(iVar9 % -local_2c == 0);
+    p1 = rand();
+    local_2c = (uint)(p1 % -local_2c == 0);
   }
   instance = currentParticle->instance;
   if ((((((instance->flags & 0x800U) == 0) && ((instance->flags2 & 0x4000000U) == 0)) &&
        ((instance->flags & 0x200U) != 0)) &&
-      ((pMVar14 = instance->matrix, pMVar14 != (MATRIX *)0x0 &&
+      ((pMVar12 = instance->matrix, pMVar12 != (MATRIX *)0x0 &&
        (instance->oldMatrix != (MATRIX *)0x0)))) && (0 < (int)local_2c)) {
     sVar2 = currentParticle->birthRadius;
-    iVar9 = (int)sVar2;
-    pMVar16 = instance->oldMatrix + currentParticle->startSegment;
-    pMVar17 = pMVar14 + currentParticle->startSegment;
+    p1 = (int)sVar2;
+    pMVar14 = instance->oldMatrix + currentParticle->startSegment;
+    pMVar15 = pMVar12 + currentParticle->startSegment;
     if (currentParticle->type == '\x01') {
-      iVar9 = iVar9 * 0x1000;
-      if (iVar9 < 0) {
-        iVar9 = iVar9 + 0x7f;
+      p1 = p1 * 0x1000;
+      if (p1 < 0) {
+        p1 = p1 + 0x7f;
       }
-      local_40 = iVar9 >> 7;
+      local_40 = p1 >> 7;
       local_3c = local_40;
       local_38 = local_40;
     }
     else {
       if ((byte)(currentParticle->type - 2) < 2) {
-        pMVar16 = pMVar14 + currentParticle->endSegment;
+        pMVar14 = pMVar12 + currentParticle->endSegment;
       }
-      local_40 = ((pMVar16->t[0] - pMVar17->t[0]) + iVar9) * 0x1000;
+      local_40 = ((pMVar14->t[0] - pMVar15->t[0]) + p1) * 0x1000;
       if (local_40 < 0) {
         local_40 = local_40 + 0x7f;
       }
       local_40 = local_40 >> 7;
-      local_3c = ((pMVar16->t[1] - pMVar17->t[1]) + iVar9) * 0x1000;
+      local_3c = ((pMVar14->t[1] - pMVar15->t[1]) + p1) * 0x1000;
       if (local_3c < 0) {
         local_3c = local_3c + 0x7f;
       }
       local_3c = local_3c >> 7;
-      local_38 = ((pMVar16->t[2] - pMVar17->t[2]) + iVar9) * 0x1000;
+      local_38 = ((pMVar14->t[2] - pMVar15->t[2]) + p1) * 0x1000;
       if (local_38 < 0) {
         local_38 = local_38 + 0x7f;
       }
       local_38 = local_38 >> 7;
     }
-    if (instance == gameTrackerX.playerInstance) {
-      iVar9 = 0;
+    if (instance == DAT_800d20f8) {
+      p1 = 0;
     }
     else {
-      if (gameTrackerX.gameData.asmData.MorphTime == 1000) {
-        iVar9 = (int)instance->fadeValue;
+      if (DAT_800d20d4 == 1000) {
+        p1 = (int)instance->fadeValue;
       }
       else {
-        iVar9 = INSTANCE_GetFadeValue(instance);
+        p1 = INSTANCE_GetFadeValue(instance);
       }
     }
     sVar2 = sVar2 / 2;
-    iVar19 = 0;
+    iVar16 = 0;
     if (0 < (int)local_2c) {
-      iVar18 = 0x1000 - iVar9;
+      p0 = 0x1000 - p1;
       do {
         fxPrim = FX_GetPrim(gFXT);
         if (fxPrim != (_FX_PRIM *)0x0) {
-          uVar10 = rand();
+          uVar9 = rand();
           (fxPrim->position).x =
-               ((currentParticle->offset).x + *(short *)pMVar17->t +
-               (short)((int)(local_40 * (uVar10 & 0x7f)) >> 0xc)) - sVar2;
-          uVar10 = rand();
+               ((currentParticle->offset).x + *(short *)pMVar15->t +
+               (short)((int)(local_40 * (uVar9 & 0x7f)) >> 0xc)) - sVar2;
+          uVar9 = rand();
           (fxPrim->position).y =
-               ((currentParticle->offset).y + *(short *)(pMVar17->t + 1) +
-               (short)((int)(local_3c * (uVar10 & 0x7f)) >> 0xc)) - sVar2;
-          uVar10 = rand();
+               ((currentParticle->offset).y + *(short *)(pMVar15->t + 1) +
+               (short)((int)(local_3c * (uVar9 & 0x7f)) >> 0xc)) - sVar2;
+          uVar9 = rand();
           (fxPrim->position).z =
-               ((currentParticle->offset).z + *(short *)(pMVar17->t + 2) +
-               (short)((int)(local_38 * (uVar10 & 0x7f)) >> 0xc)) - sVar2;
+               ((currentParticle->offset).z + *(short *)(pMVar15->t + 2) +
+               (short)((int)(local_38 * (uVar9 & 0x7f)) >> 0xc)) - sVar2;
           switch(currentParticle->z_undulate) {
           default:
-            goto switchD_8004b2d0_caseD_0;
+            goto switchD_8004a25c_caseD_0;
           case '\x01':
-            iVar11 = rcos(gameTrackerX.frameCount << 7);
-            iVar11 = iVar11 * 0x28;
-            if (iVar11 < 0) {
-              iVar11 = iVar11 + 0xfff;
+            p1_00 = rcos(DAT_800d21f8 << 7);
+            p1_00 = p1_00 * 0x28;
+            if (p1_00 < 0) {
+              p1_00 = p1_00 + 0xfff;
             }
-            sVar8 = (fxPrim->position).z + 0x14 + (short)(iVar11 >> 0xc);
+            sVar8 = (fxPrim->position).z + 0x14 + (short)(p1_00 >> 0xc);
             break;
           case '\x02':
-            iVar11 = rcos(gameTrackerX.frameCount << 8);
-            iVar11 = iVar11 * 0x14;
-            if (iVar11 < 0) {
-              iVar11 = iVar11 + 0xfff;
+            p1_00 = rcos(DAT_800d21f8 << 8);
+            p1_00 = p1_00 * 0x14;
+            if (p1_00 < 0) {
+              p1_00 = p1_00 + 0xfff;
             }
-            sVar8 = (fxPrim->position).z + 10 + (short)(iVar11 >> 0xc);
+            sVar8 = (fxPrim->position).z + 10 + (short)(p1_00 >> 0xc);
             break;
           case '\x03':
-            iVar11 = rcos(gameTrackerX.frameCount << 8);
-            iVar11 = iVar11 * 0xf;
-            if (iVar11 < 0) {
-              iVar11 = iVar11 + 0xfff;
+            p1_00 = rcos(DAT_800d21f8 << 8);
+            p1_00 = p1_00 * 0xf;
+            if (p1_00 < 0) {
+              p1_00 = p1_00 + 0xfff;
             }
-            sVar8 = (fxPrim->position).z + 8 + (short)(iVar11 >> 0xc);
+            sVar8 = (fxPrim->position).z + 8 + (short)(p1_00 >> 0xc);
             break;
           case '\x04':
-            iVar11 = rcos(gameTrackerX.frameCount << 8);
-            if (iVar11 < 0) {
-              iVar11 = iVar11 + 0x1ff;
+            p1_00 = rcos(DAT_800d21f8 << 8);
+            if (p1_00 < 0) {
+              p1_00 = p1_00 + 0x1ff;
             }
-            sVar8 = (fxPrim->position).z + 4 + (short)(iVar11 >> 9);
+            sVar8 = (fxPrim->position).z + 4 + (short)(p1_00 >> 9);
           }
           (fxPrim->position).z = sVar8;
-switchD_8004b2d0_caseD_0:
+switchD_8004a25c_caseD_0:
           if (currentParticle->type == '\x03') {
             sVar8 = (fxPrim->position).y;
             *(short *)&fxPrim->duo =
-                 (short)((pMVar17->t[0] - (int)(fxPrim->position).x) /
+                 (short)((pMVar15->t[0] - (int)(fxPrim->position).x) /
                         (int)currentParticle->primLifeTime);
             sVar3 = (fxPrim->position).z;
             *(undefined2 *)((int)&fxPrim->duo + 2) =
-                 (short)((pMVar17->t[1] - (int)sVar8) / (int)currentParticle->primLifeTime);
+                 (short)((pMVar15->t[1] - (int)sVar8) / (int)currentParticle->primLifeTime);
             *(undefined2 *)((int)&fxPrim->duo + 4) =
-                 (short)((pMVar17->t[2] - (int)sVar3) / (int)currentParticle->primLifeTime);
+                 (short)((pMVar15->t[2] - (int)sVar3) / (int)currentParticle->primLifeTime);
           }
           else {
             if ((currentParticle->flag_bits & 2) == 0) {
-              uVar10 = rand();
-              iVar11 = ((uVar10 & 0x1ff) - 0xff) * (int)(currentParticle->direction).x;
-              if (iVar11 < 0) {
-                iVar11 = iVar11 + 0xfff;
+              uVar9 = rand();
+              p1_00 = ((uVar9 & 0x1ff) - 0xff) * (int)(currentParticle->direction).x;
+              if (p1_00 < 0) {
+                p1_00 = p1_00 + 0xfff;
               }
-              *(short *)&fxPrim->duo = (short)(iVar11 >> 0xc);
-              uVar10 = rand();
-              iVar11 = ((uVar10 & 0x1ff) - 0xff) * (int)(currentParticle->direction).y;
-              if (iVar11 < 0) {
-                iVar11 = iVar11 + 0xfff;
+              *(short *)&fxPrim->duo = (short)(p1_00 >> 0xc);
+              uVar9 = rand();
+              p1_00 = ((uVar9 & 0x1ff) - 0xff) * (int)(currentParticle->direction).y;
+              if (p1_00 < 0) {
+                p1_00 = p1_00 + 0xfff;
               }
-              *(undefined2 *)((int)&fxPrim->duo + 2) = (short)(iVar11 >> 0xc);
-              uVar10 = rand();
-              iVar11 = ((uVar10 & 0x1ff) - 0xff) * (int)(currentParticle->direction).z;
-              if (iVar11 < 0) {
-                iVar11 = iVar11 + 0xfff;
+              *(undefined2 *)((int)&fxPrim->duo + 2) = (short)(p1_00 >> 0xc);
+              uVar9 = rand();
+              p1_00 = ((uVar9 & 0x1ff) - 0xff) * (int)(currentParticle->direction).z;
+              if (p1_00 < 0) {
+                p1_00 = p1_00 + 0xfff;
               }
-              *(undefined2 *)((int)&fxPrim->duo + 4) = (short)(iVar11 >> 0xc);
+              *(undefined2 *)((int)&fxPrim->duo + 4) = (short)(p1_00 >> 0xc);
             }
             else {
               *(short *)&fxPrim->duo = (currentParticle->direction).x;
@@ -6232,54 +6291,53 @@ switchD_8004b2d0_caseD_0:
           *(short *)((int)&fxPrim->duo + 8) = (currentParticle->acceleration).y;
           *(short *)((int)&fxPrim->duo + 10) = (currentParticle->acceleration).z;
           sVar8 = currentParticle->size;
-          (fxPrim->_2).y = 0x1000;
-          (fxPrim->_2).z = sVar8;
-          (fxPrim->_2).x = sVar8;
+          (fxPrim->v0).y = 0x1000;
+          (fxPrim->v0).z = sVar8;
+          (fxPrim->v0).x = sVar8;
           sVar8 = currentParticle->primLifeTime;
           fxPrim->flags = 0xc0008;
           fxPrim->timeToLive = (int)sVar8;
           fxPrim->startColor = currentParticle->startColor;
           if (((currentParticle->flag_bits & 1) != 0) &&
-             ((gameTrackerX.gameData.asmData.MorphType == 1 ||
-              (gameTrackerX.gameData.asmData.MorphTime != 1000)))) {
+             ((DAT_800d20d6 == 1 || (DAT_800d20d4 != 1000)))) {
             uVar1 = *(undefined *)((int)&fxPrim->startColor + 2);
             *(undefined *)((int)&fxPrim->startColor + 2) = *(undefined *)&fxPrim->startColor;
             *(undefined *)&fxPrim->startColor = uVar1;
-            if (gameTrackerX.gameData.asmData.MorphTime != 1000) {
-              iVar11 = FX_GetMorphFadeVal();
-              LoadAverageCol((byte *)&currentParticle->startColor,(byte *)&fxPrim->startColor,
-                             0x1000 - iVar11,iVar11,(undefined *)&fxPrim->startColor);
+            if (DAT_800d20d4 != 1000) {
+              p1_00 = FX_GetMorphFadeVal();
+              LoadAverageCol((u_char *)&currentParticle->startColor,(u_char *)&fxPrim->startColor,
+                             0x1000 - p1_00,p1_00,(u_char *)&fxPrim->startColor);
             }
           }
-          lVar12 = currentParticle->endColor;
-          sVar8 = (short)iVar9;
+          lVar10 = currentParticle->endColor;
+          sVar8 = (short)p1;
           fxPrim->fadeValue[3] = sVar8;
           fxPrim->fadeValue[2] = sVar8;
           fxPrim->fadeValue[1] = sVar8;
           fxPrim->fadeValue[0] = sVar8;
-          fxPrim->endColor = lVar12;
-          if (iVar9 == 0) {
+          fxPrim->endColor = lVar10;
+          if (p1 == 0) {
             fxPrim->fadeStep = (short)(0x1000 / (int)currentParticle->primLifeTime);
           }
           else {
-            fxPrim->fadeStep = (short)(iVar18 / (int)currentParticle->primLifeTime);
-            LoadAverageCol((byte *)&fxPrim->startColor,(byte *)&local_30,iVar18,iVar9,
-                           (undefined *)&fxPrim->startColor);
-            LoadAverageCol((byte *)&fxPrim->endColor,(byte *)&local_30,iVar18,iVar9,
-                           (undefined *)&fxPrim->endColor);
+            fxPrim->fadeStep = (short)(p0 / (int)currentParticle->primLifeTime);
+            LoadAverageCol((u_char *)&fxPrim->startColor,(u_char *)&local_30,p0,p1,
+                           (u_char *)&fxPrim->startColor);
+            LoadAverageCol((u_char *)&fxPrim->endColor,(u_char *)&local_30,p0,p1,
+                           (u_char *)&fxPrim->endColor);
           }
           if (currentParticle->texture == (TextureMT3 *)0x0) {
             fxPrim->color = fxPrim->startColor & 0x3ffffffU | 0x20000000;
           }
           else {
             fxPrim->flags = fxPrim->flags | 1;
-            pTVar15 = currentParticle->texture;
+            pTVar13 = currentParticle->texture;
             fxPrim->color = fxPrim->startColor & 0x3ffffffU | 0x2c000000;
-            fxPrim->texture = pTVar15;
+            fxPrim->texture = pTVar13;
           }
           if (currentParticle->scaleSpeed != 0) {
             fxPrim->flags = fxPrim->flags | 0x2000;
-            (fxPrim->_2).y = currentParticle->startScale;
+            (fxPrim->v0).y = currentParticle->startScale;
             fxPrim->work3 = currentParticle->scaleSpeed;
           }
           if (currentParticle->type == '\x01') {
@@ -6287,11 +6345,11 @@ switchD_8004b2d0_caseD_0:
             fxPrim->work0 = (short)currentParticle->startSegment;
             fxPrim->flags = fxPrim->flags | 0x8000000;
           }
-          pcVar13 = (code *)currentParticle->fxprim_process;
-          if (pcVar13 == (code *)0x0) {
-            pcVar13 = FX_StandardFXPrimProcess;
+          pcVar11 = (code *)currentParticle->fxprim_process;
+          if (pcVar11 == (code *)0x0) {
+            pcVar11 = FX_StandardFXPrimProcess;
           }
-          *(code **)&fxPrim->process = pcVar13;
+          *(code **)&fxPrim->process = pcVar11;
           if ((code *)currentParticle->fxprim_modify_process != (code *)0x0) {
             (*(code *)currentParticle->fxprim_modify_process)
                       (fxPrim,instance,currentParticle,fxTracker);
@@ -6303,26 +6361,26 @@ switchD_8004b2d0_caseD_0:
             sVar5 = *(short *)&fxPrim->duo;
             fxPrim->flags = 0x1090000;
             sVar6 = *(short *)((int)&fxPrim->duo + 2);
-            (fxPrim->_2).x = sVar8;
+            (fxPrim->v0).x = sVar8;
             sVar7 = *(short *)((int)&fxPrim->duo + 4);
-            (fxPrim->_3).x = sVar8 + sVar5;
-            (fxPrim->_2).y = sVar3;
-            (fxPrim->_2).z = sVar4;
-            (fxPrim->_3).y = sVar3 + sVar6;
-            (fxPrim->_3).z = sVar4 + sVar7;
+            (fxPrim->v1).x = sVar8 + sVar5;
+            (fxPrim->v0).y = sVar3;
+            (fxPrim->v0).z = sVar4;
+            (fxPrim->v1).y = sVar3 + sVar6;
+            (fxPrim->v1).z = sVar4 + sVar7;
             LIST_InsertFunc(&fxTracker->usedPrimList,(NodeType *)fxPrim);
           }
           else {
             FX_Sprite_Insert(&fxTracker->usedPrimListSprite,fxPrim);
           }
         }
-        iVar19 = iVar19 + 1;
-      } while (iVar19 < (int)local_2c);
+        iVar16 = iVar16 + 1;
+      } while (iVar16 < (int)local_2c);
     }
   }
   if ((0 < currentParticle->lifeTime) &&
-     (iVar9 = (uint)(ushort)currentParticle->lifeTime - (uint)(ushort)FX_Frames,
-     currentParticle->lifeTime = (short)iVar9, iVar9 * 0x10000 < 1)) {
+     (p1 = (uint)(ushort)currentParticle->lifeTime - (uint)(ushort)FX_Frames,
+     currentParticle->lifeTime = (short)p1, p1 * 0x10000 < 1)) {
     FX_DeleteGeneralEffect((_FXGeneralEffect *)currentParticle);
   }
   return;
@@ -6333,20 +6391,22 @@ switchD_8004b2d0_caseD_0:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_UpdraftPrimModify(struct _FX_PRIM *fxPrim /*$s3*/, struct _Instance *instance /*$a1*/, struct _FXParticle *particle /*$s1*/, struct _FXTracker *fxTracker /*$a3*/)
- // line 4912, offset 0x8004b80c
+ // line 4984, offset 0x8004a798
 	/* begin block 1 */
-		// Start line: 4913
-		// Start offset: 0x8004B80C
+		// Start line: 4985
+		// Start offset: 0x8004A798
 		// Variables:
 	// 		int deg; // $s2
 	/* end block 1 */
-	// End offset: 0x8004B920
-	// End Line: 4919
+	// End offset: 0x8004A8AC
+	// End Line: 4991
 
 	/* begin block 2 */
-		// Start line: 12196
+		// Start line: 12288
 	/* end block 2 */
-	// End Line: 12197
+	// End Line: 12289
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_UpdraftPrimModify
                (_FX_PRIM *fxPrim,_Instance *instance,_FXParticle *particle,_FXTracker *fxTracker)
@@ -6397,11 +6457,13 @@ void FX_UpdraftPrimModify
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_MakeParticleTexFX(struct _FX_PRIM *fxPrim /*$s0*/, struct _SVector *position /*$a1*/, struct Object *object /*$s1*/, int modelnum /*$s4*/, int texnum /*stack 16*/, struct _SVector *vel /*stack 20*/, struct _SVector *accl /*stack 24*/, long color /*stack 28*/, int size /*stack 32*/, int life /*stack 36*/)
- // line 4922, offset 0x8004b950
+ // line 4994, offset 0x8004a8dc
 	/* begin block 1 */
-		// Start line: 12216
+		// Start line: 12308
 	/* end block 1 */
-	// End Line: 12217
+	// End Line: 12309
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_MakeParticleTexFX
                (_FX_PRIM *fxPrim,_SVector *position,Object *object,int modelnum,int texnum,
@@ -6411,10 +6473,12 @@ void FX_MakeParticleTexFX
   TextureMT3 *pTVar1;
   uint uVar2;
   
-  if ((object != (Object *)0x0) && (fxPrim != (_FX_PRIM *)0x0)) {
+  if (((object != (Object *)0x0) ||
+      (object = (Object *)objectAccess[10].object, objectAccess[10].object != (void *)0x0)) &&
+     (fxPrim != (_FX_PRIM *)0x0)) {
     FX_DFacadeParticleSetup
-              (fxPrim,(SVECTOR *)position,(short)size,(short)size,color,(SVECTOR *)vel,
-               (SVECTOR *)accl,gFXT,(int)(short)life);
+              (fxPrim,(char)position,(short)size,(short)size,color,(char)vel,(char)accl,gFXT,
+               (int)(short)life);
     pTVar1 = FX_GetTextureObject(object,modelnum,texnum);
     fxPrim->texture = pTVar1;
     uVar2 = fxPrim->flags;
@@ -6436,20 +6500,22 @@ void FX_MakeParticleTexFX
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_MakeHitFX(struct _SVector *position /*$s1*/)
- // line 4945, offset 0x8004ba58
+ // line 5017, offset 0x8004a9e4
 	/* begin block 1 */
-		// Start line: 4946
-		// Start offset: 0x8004BA58
+		// Start line: 5018
+		// Start offset: 0x8004A9E4
 		// Variables:
 	// 		struct _FX_PRIM *fxPrim; // $s0
 	/* end block 1 */
-	// End offset: 0x8004BAD8
-	// End Line: 4957
+	// End offset: 0x8004AA64
+	// End Line: 5029
 
 	/* begin block 2 */
-		// Start line: 12282
+		// Start line: 12374
 	/* end block 2 */
-	// End Line: 12283
+	// End Line: 12375
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_MakeHitFX(_SVector *position)
 
@@ -6471,11 +6537,13 @@ void FX_MakeHitFX(_SVector *position)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_ContinueLightning(struct _FXLightning *zap /*$a0*/, struct _FXTracker *fxTracker /*$a1*/)
- // line 4983, offset 0x8004baec
+ // line 5055, offset 0x8004aa78
 	/* begin block 1 */
-		// Start line: 12361
+		// Start line: 12453
 	/* end block 1 */
-	// End Line: 12362
+	// End Line: 12454
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_ContinueLightning(_FXLightning *zap,_FXTracker *fxTracker)
 
@@ -6496,21 +6564,23 @@ void FX_ContinueLightning(_FXLightning *zap,_FXTracker *fxTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_MakeHitFlame(struct _SVector *startpos /*$s3*/, int zpos /*$s5*/, int angle /*$s0*/, int dist /*$s4*/, int size /*stack 16*/)
- // line 4995, offset 0x8004bb4c
+ // line 5067, offset 0x8004aad8
 	/* begin block 1 */
-		// Start line: 4996
-		// Start offset: 0x8004BB4C
+		// Start line: 5068
+		// Start offset: 0x8004AAD8
 		// Variables:
 	// 		struct _FX_PRIM *fxPrim; // $s2
 	// 		struct _SVector position; // stack offset -40
 	/* end block 1 */
-	// End offset: 0x8004BC68
-	// End Line: 5010
+	// End offset: 0x8004ABF4
+	// End Line: 5082
 
 	/* begin block 2 */
-		// Start line: 12385
+		// Start line: 12477
 	/* end block 2 */
-	// End Line: 12386
+	// End Line: 12478
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_MakeHitFlame(_SVector *startpos,int zpos,int angle,int dist,int size)
 
@@ -6522,14 +6592,14 @@ void FX_MakeHitFlame(_SVector *startpos,int zpos,int angle,int dist,int size)
   
   fxPrim = FX_GetPrim(gFXT);
   if (fxPrim != (_FX_PRIM *)0x0) {
-    iVar1 = rcos(angle - 0x400U);
+    iVar1 = rcos(angle + -0x400);
     iVar2 = rand();
     iVar1 = iVar1 * dist;
     if (iVar1 < 0) {
       iVar1 = iVar1 + 0xfff;
     }
     local_28.x = startpos->x + (short)(iVar1 >> 0xc) + ((ushort)iVar2 & 0xf);
-    iVar1 = rsin(angle - 0x400U);
+    iVar1 = rsin(angle + -0x400);
     iVar2 = rand();
     iVar1 = iVar1 * dist;
     if (iVar1 < 0) {
@@ -6539,7 +6609,8 @@ void FX_MakeHitFlame(_SVector *startpos,int zpos,int angle,int dist,int size)
     iVar1 = rand();
     local_28.z = startpos->z + (short)zpos + ((ushort)iVar1 & 0xf);
     FX_MakeParticleTexFX
-              (fxPrim,&local_28,(Object *)0x0,0,0,(_SVector *)0x0,(_SVector *)0x0,0x93e4,size,2);
+              (fxPrim,&local_28,(Object *)0x0,0,0,(_SVector *)0x0,(_SVector *)0x0,
+               (long)&DAT_000093e4,size,2);
     FX_Sprite_Insert(&gFXT->usedPrimListSprite,fxPrim);
   }
   return;
@@ -6550,16 +6621,18 @@ void FX_MakeHitFlame(_SVector *startpos,int zpos,int angle,int dist,int size)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_SetReaverInstance(struct _Instance *instance /*$a0*/)
- // line 5012, offset 0x8004bc8c
+ // line 5084, offset 0x8004ac18
 	/* begin block 1 */
-		// Start line: 12430
+		// Start line: 12522
 	/* end block 1 */
-	// End Line: 12431
+	// End Line: 12523
 
 	/* begin block 2 */
-		// Start line: 12431
+		// Start line: 12523
 	/* end block 2 */
-	// End Line: 12432
+	// End Line: 12524
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_SetReaverInstance(_Instance *instance)
 
@@ -6573,10 +6646,10 @@ void FX_SetReaverInstance(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_SoulReaverBlade(struct _Instance *instance /*$a0*/, unsigned long **drawot /*stack 4*/)
- // line 5020, offset 0x8004bc98
+ // line 5092, offset 0x8004ac24
 	/* begin block 1 */
-		// Start line: 5021
-		// Start offset: 0x8004BC98
+		// Start line: 5093
+		// Start offset: 0x8004AC24
 		// Variables:
 	// 		struct SVECTOR location; // stack offset -136
 	// 		int i; // $s3
@@ -6596,53 +6669,158 @@ void FX_SetReaverInstance(_Instance *instance)
 	// 		struct POLY_FT4 poly2; // stack offset -88
 
 		/* begin block 1.1 */
-			// Start line: 5078
-			// Start offset: 0x8004BE00
+			// Start line: 5150
+			// Start offset: 0x8004AD8C
 			// Variables:
 		// 		int scale1; // $s0
 		/* end block 1.1 */
-		// End offset: 0x8004C02C
-		// End Line: 5144
+		// End offset: 0x8004AFB8
+		// End Line: 5216
 	/* end block 1 */
-	// End offset: 0x8004C058
-	// End Line: 5148
+	// End offset: 0x8004AFE4
+	// End Line: 5220
 
 	/* begin block 2 */
-		// Start line: 12446
+		// Start line: 12538
 	/* end block 2 */
-	// End Line: 12447
+	// End Line: 12539
 
-/* WARNING: Removing unreachable block (ram,0x8004bd08) */
-/* WARNING: Removing unreachable block (ram,0x8004bd1c) */
-/* WARNING: Removing unreachable block (ram,0x8004bd24) */
-/* WARNING: Removing unreachable block (ram,0x8004bd34) */
-/* WARNING: Removing unreachable block (ram,0x8004bd44) */
-/* WARNING: Removing unreachable block (ram,0x8004bd88) */
-/* WARNING: Removing unreachable block (ram,0x8004bd8c) */
-/* WARNING: Removing unreachable block (ram,0x8004be00) */
-/* WARNING: Removing unreachable block (ram,0x8004be38) */
-/* WARNING: Removing unreachable block (ram,0x8004be44) */
-/* WARNING: Removing unreachable block (ram,0x8004be4c) */
-/* WARNING: Removing unreachable block (ram,0x8004be58) */
-/* WARNING: Removing unreachable block (ram,0x8004be68) */
-/* WARNING: Removing unreachable block (ram,0x8004be70) */
-/* WARNING: Removing unreachable block (ram,0x8004be80) */
-/* WARNING: Removing unreachable block (ram,0x8004be84) */
-/* WARNING: Removing unreachable block (ram,0x8004be98) */
-/* WARNING: Removing unreachable block (ram,0x8004be9c) */
-/* WARNING: Removing unreachable block (ram,0x8004beb4) */
-/* WARNING: Removing unreachable block (ram,0x8004beb8) */
-/* WARNING: Removing unreachable block (ram,0x8004becc) */
-/* WARNING: Removing unreachable block (ram,0x8004bed0) */
-/* WARNING: Removing unreachable block (ram,0x8004bff0) */
-/* WARNING: Removing unreachable block (ram,0x8004c01c) */
-/* WARNING: Removing unreachable block (ram,0x8004c028) */
-/* WARNING: Removing unreachable block (ram,0x8004c02c) */
-/* WARNING: Removing unreachable block (ram,0x8004c04c) */
+/* WARNING: Could not reconcile some variable overlaps */
+/* File: C:\kain2\game\FX.C */
 
 void FX_SoulReaverBlade(_Instance *instance,ulong **drawot)
 
 {
+  void *object;
+  undefined4 in_zero;
+  undefined4 in_at;
+  short sVar1;
+  TextureMT3 *pTVar2;
+  int iVar3;
+  ulong *puVar4;
+  int a;
+  int iVar5;
+  void *pvVar6;
+  short *psVar7;
+  int iVar8;
+  int iVar9;
+  uint *puVar10;
+  uint uVar11;
+  int iVar12;
+  int iVar13;
+  uint local_84;
+  MATRIX MStack128;
+  undefined4 local_60;
+  undefined4 local_4c;
+  undefined4 local_44;
+  undefined4 local_3c;
+  uint local_34;
+  int local_30;
+  int local_2c;
+  
+  object = objectAccess[10].object;
+  pvVar6 = instance->extraData;
+  puVar10 = *(uint **)(DAT_800d210c + 4);
+  if ((*(short *)((int)pvVar6 + 2) != 0) && (puVar10 + 400 < *(uint **)(DAT_800d210c + 8))) {
+    uVar11 = *(uint *)((int)pvVar6 + 0x10);
+    sVar1 = *(short *)((int)pvVar6 + 6);
+    if (((objectAccess[10].object != (void *)0x0) &&
+        ((((instance->flags & 0x200U) != 0 && ((instance->flags & 0x800U) == 0)) &&
+         (instance->matrix != (MATRIX *)0x0)))) && (instance->oldMatrix != (MATRIX *)0x0)) {
+      local_84 = local_84 & 0xffff0000;
+      CompMatrix(DAT_800d0ffc,instance->matrix + 1,&MStack128);
+      SetRotMatrix(&MStack128);
+      SetTransMatrix(&MStack128);
+      iVar12 = (int)*(short *)((int)pvVar6 + 2) * (int)*(short *)((int)pvVar6 + 0x1c);
+      if (iVar12 < 0) {
+        iVar12 = iVar12 + 0xfff;
+      }
+      pTVar2 = FX_GetTextureObject((Object *)object,0,0);
+      setCopControlWord(2,0xe000,0);
+      iVar9 = 1;
+      local_3c = CONCAT22(local_3c._2_2_,*(ushort *)pTVar2);
+      psVar7 = (short *)((int)puVar10 + 0x22);
+      local_34._0_2_ = *(ushort *)pTVar2 & 0xff00 | *(ushort *)&pTVar2->u1 & 0xff;
+      local_34 = local_34 & 0xffff0000 | (uint)(ushort)local_34;
+      local_44 = *(undefined4 *)&pTVar2->u1;
+      a = (int)sVar1;
+      local_4c = CONCAT22(pTVar2->clut,*(undefined2 *)&pTVar2->u2);
+      do {
+        a = a + 0x100;
+        iVar8 = (0x28 - iVar9) * 2;
+        iVar5 = ((0x28 - iVar9) * 0x1000) / 0x28;
+        iVar13 = iVar8 * (iVar12 >> 0xc);
+        if ((iVar12 >> 0xc != 0x1000) && (iVar8 = iVar13 >> 0xc, iVar13 < 0)) {
+          iVar8 = iVar13 + 0xfff >> 0xc;
+        }
+        if (iVar9 < 8) {
+          iVar13 = iVar5 * 0x200 * iVar9;
+          iVar5 = iVar13 >> 0xc;
+          if (iVar13 < 0) {
+            iVar5 = iVar13 + 0xfff >> 0xc;
+          }
+        }
+        iVar13 = rcos(a);
+        if (iVar13 < 0) {
+          iVar13 = iVar13 + 0x7f;
+        }
+        iVar13 = (iVar13 >> 7) * iVar5;
+        if (iVar13 < 0) {
+          iVar13 = iVar13 + 0xfff;
+        }
+        iVar3 = rsin(a);
+        if (iVar3 < 0) {
+          iVar3 = iVar3 + 0x7f;
+        }
+        iVar5 = (iVar3 >> 7) * iVar5;
+        if (iVar5 < 0) {
+          iVar5 = iVar5 + 0xfff;
+        }
+        setCopReg(2,in_zero,iVar13 >> 0xc & 0xffffU | (iVar5 >> 0xc) << 0x10);
+        setCopReg(2,in_at,local_84);
+        setCopControlWord(2,0xd800,iVar8);
+        copFunction(2,0x180001);
+        *(undefined4 *)(psVar7 + -0xb) = local_4c;
+        *(undefined4 *)(psVar7 + -7) = local_44;
+        *(undefined4 *)(psVar7 + -3) = local_3c;
+        *(uint *)(psVar7 + -0xf) = uVar11 | 0x2e000000;
+        *(uint *)(psVar7 + 1) = local_34;
+        local_60 = getCopReg(2,0xe);
+        iVar5 = getCopReg(2,0x18);
+        local_2c = getCopReg(2,0x13);
+        iVar13 = (iVar5 / 0x140) * 0x200 + 0xffff;
+        local_30 = iVar13 >> 0x10;
+        iVar5 = iVar5 + 0xffff;
+        local_30._0_2_ = (short)((uint)iVar13 >> 0x10);
+        psVar7[-9] = (short)local_60 + (short)local_30;
+        psVar7[-1] = (short)local_60 + (short)local_30;
+        local_60._0_2_ = (short)local_60 - (short)(local_30 - (iVar13 >> 0x1f) >> 1);
+        psVar7[-5] = (short)local_60;
+        psVar7[-0xd] = (short)local_60;
+        local_60._2_2_ = (short)((uint)local_60 >> 0x10);
+        sVar1 = local_60._2_2_ - (short)((iVar5 >> 0x10) - (iVar5 >> 0x1f) >> 1);
+        psVar7[-8] = sVar1;
+        psVar7[-0xc] = sVar1;
+        local_2c = local_2c >> 2;
+        local_60._2_2_ = local_60._2_2_ + (short)((uint)iVar5 >> 0x10);
+        psVar7[-4] = local_60._2_2_;
+        *psVar7 = local_60._2_2_;
+        if (local_2c - 1U < 0xbff) {
+          psVar7 = psVar7 + 0x14;
+          puVar4 = (ulong *)((uint)puVar10 & 0xffffff);
+          *puVar10 = (uint)drawot[local_2c] & 0xffffff | 0x9000000;
+          puVar10 = puVar10 + 10;
+          drawot[local_2c] = puVar4;
+        }
+        if (iVar8 < 0) {
+          iVar8 = iVar8 + 3;
+        }
+        iVar9 = iVar9 + 1;
+        local_84 = local_84 & 0xffff0000 | (uint)(ushort)((short)local_84 - (short)(iVar8 >> 2));
+      } while (iVar9 < 0x28);
+      *(uint **)(DAT_800d210c + 4) = puVar10;
+    }
+  }
   return;
 }
 
@@ -6651,18 +6829,18 @@ void FX_SoulReaverBlade(_Instance *instance,ulong **drawot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_ReaverBladeInit()
- // line 5160, offset 0x8004c088
+ // line 5232, offset 0x8004b014
 	/* begin block 1 */
-		// Start line: 12997
+		// Start line: 13089
 	/* end block 1 */
-	// End Line: 12998
+	// End Line: 13090
 
 	/* begin block 2 */
-		// Start line: 12998
+		// Start line: 13090
 	/* end block 2 */
-	// End Line: 12999
+	// End Line: 13091
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\FX.C */
 
 void FX_ReaverBladeInit(void)
 
@@ -6675,30 +6853,34 @@ void FX_ReaverBladeInit(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_SoulReaverWinding(struct _Instance *instance /*stack 0*/, struct _PrimPool *primPool /*$a1*/, unsigned long **ot /*stack 8*/, struct MATRIX *wcTransform /*stack 12*/)
- // line 5167, offset 0x8004c090
+ // line 5239, offset 0x8004b01c
 	/* begin block 1 */
-		// Start line: 5168
-		// Start offset: 0x8004C090
+		// Start line: 5240
+		// Start offset: 0x8004B01C
 		// Variables:
 	// 		struct MATRIX mat; // stack offset -96
 	// 		struct MATRIX *swTransform; // $a1
 	// 		struct _SVector start; // stack offset -64
 	// 		struct _SVector end; // stack offset -56
 	// 		struct __ReaverData *data; // $s4
-	// 		long color; // $fp
+	// 		long color; // $s5
 	// 		long glow_color; // stack offset -48
 	/* end block 1 */
-	// End offset: 0x8004C294
-	// End Line: 5241
+	// End offset: 0x8004B23C
+	// End Line: 5314
 
 	/* begin block 2 */
-		// Start line: 13011
+		// Start line: 13103
 	/* end block 2 */
-	// End Line: 13012
+	// End Line: 13104
 
-void FX_SoulReaverWinding(_Instance *instance,_PrimPool *primPool,ulong **ot,MATRIX *wcTransform)
+/* File: C:\kain2\game\FX.C */
+
+void FX_SoulReaverWinding(_Instance *instance,_PrimPool *primPool,ulong **ot,undefined wcTransform)
 
 {
+  undefined3 in_register_0000001d;
+  MATRIX *m0;
   short deg;
   char *pcVar1;
   long color;
@@ -6708,27 +6890,24 @@ void FX_SoulReaverWinding(_Instance *instance,_PrimPool *primPool,ulong **ot,MAT
   _SVector local_38;
   long local_30;
   
+  m0 = (MATRIX *)CONCAT31(in_register_0000001d,wcTransform);
   pcVar1 = (char *)instance->extraData;
   if ((*pcVar1 != '\0') && (pcVar1[1] != '\0')) {
     deg = -*(short *)(pcVar1 + 6);
-    CompMatrix((undefined4 *)wcTransform,(ushort *)((gameTrackerX.playerInstance)->matrix + 0x28),
-               (uint *)&MStack96);
+    CompMatrix(m0,(MATRIX *)(*(int *)(DAT_800d20f8 + 0x40) + 0x500),&MStack96);
     local_40.z = 0;
     local_40.y = 0;
     local_40.x = 0;
     local_38.y = 0;
     local_38.x = 0;
     local_38.z = -0x80;
-    color = *(long *)(pcVar1 + 0x10);
-    local_30 = *(long *)(pcVar1 + 0x14);
-    FX_Lightning(wcTransform,ot,&MStack96,deg,&local_40,&local_38,0x1e,10,0x10,0x20,0,color,local_30
-                );
-    CompMatrix((undefined4 *)wcTransform,(ushort *)((gameTrackerX.playerInstance)->matrix + 0x27),
-               (uint *)&MStack96);
+    color = *(long *)(pcVar1 + 0x14);
+    local_30 = *(long *)(pcVar1 + 0x18);
+    FX_Lightning(wcTransform,ot,0xa0,deg,&local_40,&local_38,0x1e,10,0x10,0x20,0,color,local_30);
+    CompMatrix(m0,(MATRIX *)(*(int *)(DAT_800d20f8 + 0x40) + 0x4e0),&MStack96);
     local_38.z = -0x60;
-    FX_Lightning(wcTransform,ot,&MStack96,deg,&local_40,&local_38,0x1e,10,0x10,0x20,0,color,local_30
-                );
-    iVar2 = (int)*(short *)(pcVar1 + 2) * (int)*(short *)(pcVar1 + 0x18);
+    FX_Lightning(wcTransform,ot,0xa0,deg,&local_40,&local_38,0x1e,10,0x10,0x20,0,color,local_30);
+    iVar2 = (int)*(short *)(pcVar1 + 2) * (int)*(short *)(pcVar1 + 0x1c);
     if (iVar2 < 0) {
       iVar2 = iVar2 + 0xfff;
     }
@@ -6737,8 +6916,11 @@ void FX_SoulReaverWinding(_Instance *instance,_PrimPool *primPool,ulong **ot,MAT
       iVar2 = iVar2 + 0xfff;
     }
     local_38.z = (short)(iVar2 >> 0xc);
-    CompMatrix((undefined4 *)wcTransform,(ushort *)(instance->matrix + 1),(uint *)&MStack96);
-    FX_Lightning(wcTransform,ot,&MStack96,deg,&local_40,&local_38,0,0x19,4,8,0,color,local_30);
+    if (*(short *)(pcVar1 + 4) == 1) {
+      color = 0xfcffd3;
+    }
+    CompMatrix(m0,instance->matrix + 1,&MStack96);
+    FX_Lightning(wcTransform,ot,0xa0,deg,&local_40,&local_38,0,0x19,4,8,0,color,local_30);
   }
   return;
 }
@@ -6748,23 +6930,25 @@ void FX_SoulReaverWinding(_Instance *instance,_PrimPool *primPool,ulong **ot,MAT
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_StartInstanceBurrow(struct _Instance *instance /*$s0*/, struct Level *level /*$s2*/, struct _TFace *tface /*$s1*/)
- // line 5246, offset 0x8004c2c4
+ // line 5319, offset 0x8004b26c
 	/* begin block 1 */
-		// Start line: 5247
-		// Start offset: 0x8004C2C4
+		// Start line: 5320
+		// Start offset: 0x8004B26C
 		// Variables:
 	// 		struct _SVector normal; // stack offset -32
 	// 		struct _SVector *poPlane; // $a1
 	// 		struct _SVector point; // stack offset -24
 	// 		struct _Position *globalOffset; // $v1
 	/* end block 1 */
-	// End offset: 0x8004C2C4
-	// End Line: 5247
+	// End offset: 0x8004B26C
+	// End Line: 5320
 
 	/* begin block 2 */
-		// Start line: 13230
+		// Start line: 13295
 	/* end block 2 */
-	// End Line: 13231
+	// End Line: 13296
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_StartInstanceBurrow(_Instance *instance,Level *level,_TFace *tface)
 
@@ -6775,7 +6959,7 @@ void FX_StartInstanceBurrow(_Instance *instance,Level *level,_TFace *tface)
   short sVar4;
   short sVar5;
   short sVar6;
-  long *plVar7;
+  BSPTree *pBVar7;
   _TVertex *p_Var8;
   _SVector local_20 [2];
   
@@ -6783,14 +6967,14 @@ void FX_StartInstanceBurrow(_Instance *instance,Level *level,_TFace *tface)
   (instance->halvePlane).a = local_20[0].x;
   (instance->halvePlane).b = local_20[0].y;
   (instance->halvePlane).c = local_20[0].z;
-  p_Var8 = level->terrain->vertexList + (tface->face)._2;
+  p_Var8 = level->terrain->vertexList + (tface->face).v0;
   sVar1 = (p_Var8->vertex).x;
-  plVar7 = &level->terrain->signals->numSignals + instance->bspTree * 9;
-  sVar2 = *(short *)(plVar7 + 3);
+  pBVar7 = level->terrain->BSPTreeArray + instance->bspTree;
+  sVar2 = (pBVar7->globalOffset).x;
   sVar3 = (p_Var8->vertex).y;
-  sVar4 = *(short *)((int)plVar7 + 0xe);
+  sVar4 = (pBVar7->globalOffset).y;
   sVar5 = (p_Var8->vertex).z;
-  sVar6 = *(short *)(plVar7 + 4);
+  sVar6 = (pBVar7->globalOffset).z;
   (instance->halvePlane).flags = 1;
   (instance->halvePlane).d =
        -((int)(instance->halvePlane).a * (int)(short)(sVar1 + sVar2) +
@@ -6804,16 +6988,18 @@ void FX_StartInstanceBurrow(_Instance *instance,Level *level,_TFace *tface)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_StopInstanceBurrow(struct _Instance *instance /*$a0*/)
- // line 5271, offset 0x8004c3f8
+ // line 5344, offset 0x8004b3a0
 	/* begin block 1 */
-		// Start line: 13289
+		// Start line: 13354
 	/* end block 1 */
-	// End Line: 13290
+	// End Line: 13355
 
 	/* begin block 2 */
-		// Start line: 13290
+		// Start line: 13355
 	/* end block 2 */
-	// End Line: 13291
+	// End Line: 13356
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_StopInstanceBurrow(_Instance *instance)
 
@@ -6827,20 +7013,22 @@ void FX_StopInstanceBurrow(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_UpdateInstanceWaterSplit(struct _Instance *instance /*$s0*/)
- // line 5277, offset 0x8004c400
+ // line 5350, offset 0x8004b3a8
 	/* begin block 1 */
-		// Start line: 5278
-		// Start offset: 0x8004C400
+		// Start line: 5351
+		// Start offset: 0x8004B3A8
 		// Variables:
 	// 		struct _SVector normal; // stack offset -16
 	/* end block 1 */
-	// End offset: 0x8004C47C
-	// End Line: 5303
+	// End offset: 0x8004B438
+	// End Line: 5378
 
 	/* begin block 2 */
-		// Start line: 13301
+		// Start line: 13366
 	/* end block 2 */
-	// End Line: 13302
+	// End Line: 13367
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_UpdateInstanceWaterSplit(_Instance *instance)
 
@@ -6851,10 +7039,12 @@ void FX_UpdateInstanceWaterSplit(_Instance *instance)
     (instance->halvePlane).flags = (instance->halvePlane).flags & 0xfffd;
   }
   else {
-    COLLIDE_GetNormal(instance->waterFace->normal,(short *)instance->waterFaceTerrain->normalList,
-                      &_Stack16);
-    (instance->halvePlane).flags = 2;
-    FX_GetPlaneEquation(&_Stack16,&instance->splitPoint,&instance->halvePlane);
+    if (((instance->halvePlane).flags & 8U) == 0) {
+      COLLIDE_GetNormal(instance->waterFace->normal,(short *)instance->waterFaceTerrain->normalList,
+                        &_Stack16);
+      (instance->halvePlane).flags = 2;
+      FX_GetPlaneEquation(&_Stack16,&instance->splitPoint,&instance->halvePlane);
+    }
     FX_MakeWaterTrail(instance,(int)(instance->splitPoint).z);
   }
   instance->oldWaterFace = instance->waterFace;
@@ -6866,16 +7056,18 @@ void FX_UpdateInstanceWaterSplit(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_GetPlaneEquation(struct _SVector *normal /*$a0*/, struct _SVector *poPlane /*$a1*/, struct _PlaneConstants *plane /*$a2*/)
- // line 5306, offset 0x8004c498
+ // line 5381, offset 0x8004b454
 	/* begin block 1 */
-		// Start line: 13362
+		// Start line: 13431
 	/* end block 1 */
-	// End Line: 13363
+	// End Line: 13432
 
 	/* begin block 2 */
-		// Start line: 13364
+		// Start line: 13433
 	/* end block 2 */
-	// End Line: 13365
+	// End Line: 13434
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_GetPlaneEquation(_SVector *normal,_SVector *poPlane,_PlaneConstants *plane)
 
@@ -6896,23 +7088,25 @@ void FX_GetPlaneEquation(_SVector *normal,_SVector *poPlane,_PlaneConstants *pla
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_DoInstancePowerRing(struct _Instance *instance /*$s4*/, long atuTime /*$s1*/, long *color /*$s3*/, long numColors /*$s2*/, int follow_halveplane /*stack 16*/)
- // line 5349, offset 0x8004c50c
+ // line 5424, offset 0x8004b4c8
 	/* begin block 1 */
-		// Start line: 5350
-		// Start offset: 0x8004C50C
+		// Start line: 5425
+		// Start offset: 0x8004B4C8
 		// Variables:
 	// 		struct _FXHalvePlane *ring; // $s0
 	// 		struct _SVector normal; // stack offset -40
 	// 		struct _SVector point; // stack offset -32
 	// 		long i; // $a1
 	/* end block 1 */
-	// End offset: 0x8004C67C
-	// End Line: 5397
+	// End offset: 0x8004B628
+	// End Line: 5472
 
 	/* begin block 2 */
-		// Start line: 10692
+		// Start line: 10842
 	/* end block 2 */
-	// End Line: 10693
+	// End Line: 10843
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_DoInstancePowerRing
                (_Instance *instance,long atuTime,long *color,long numColors,int follow_halveplane)
@@ -6931,7 +7125,7 @@ void FX_DoInstancePowerRing
     return;
   }
   ptr[0xc] = -0x7e;
-  *(undefined4 *)(ptr + 4) = 0x8004c920;
+  *(undefined4 *)(ptr + 4) = 0x8004b8cc;
   *(undefined4 *)(ptr + 0x10) = 0;
   *(_Instance **)(ptr + 8) = instance;
   *(undefined4 *)(ptr + 0x24) = 0;
@@ -6942,7 +7136,7 @@ void FX_DoInstancePowerRing
   if (numColors < 2) {
     if (color == (long *)0x0) {
       lVar1 = 0xff8010;
-      goto code_r0x8004c628;
+      goto code_r0x8004b5e4;
     }
   }
   else {
@@ -6960,7 +7154,7 @@ void FX_DoInstancePowerRing
     *(short *)(ptr + 0x2a) = (short)((int)*(short *)(ptr + 0xe) / (numColors + -1));
   }
   lVar1 = *color;
-code_r0x8004c628:
+code_r0x8004b5e4:
   *(long *)(ptr + 0x20) = lVar1;
   local_28.y = 0;
   local_28.x = 0;
@@ -6969,7 +7163,6 @@ code_r0x8004c628:
   local_20.y = (instance->position).y;
   local_20.z = (instance->position).z;
   FX_GetPlaneEquation(&local_28,&local_20,(_PlaneConstants *)(ptr + 0x14));
-  instance->flags2 = instance->flags2 | 0x1000000;
   FX_InsertGeneralEffect(ptr);
   return;
 }
@@ -6979,10 +7172,10 @@ code_r0x8004c628:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_UpdatePowerRing(struct _FXHalvePlane *ring /*$s2*/)
- // line 5401, offset 0x8004c69c
+ // line 5476, offset 0x8004b648
 	/* begin block 1 */
-		// Start line: 5402
-		// Start offset: 0x8004C69C
+		// Start line: 5477
+		// Start offset: 0x8004B648
 		// Variables:
 	// 		struct _Instance *instance; // $v1
 	// 		struct _PlaneConstants *cPlane; // $s1
@@ -6994,13 +7187,15 @@ code_r0x8004c628:
 	// 		long colorIndex; // $a2
 	// 		long percent; // $a1
 	/* end block 1 */
-	// End offset: 0x8004C8E0
-	// End Line: 5461
+	// End offset: 0x8004B88C
+	// End Line: 5536
 
 	/* begin block 2 */
-		// Start line: 13543
+		// Start line: 13610
 	/* end block 2 */
-	// End Line: 13544
+	// End Line: 13611
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_UpdatePowerRing(_FXHalvePlane *ring)
 
@@ -7015,50 +7210,50 @@ void FX_UpdatePowerRing(_FXHalvePlane *ring)
   undefined4 uVar8;
   undefined4 uVar9;
   undefined4 uVar10;
-  uint uVar11;
-  int iVar12;
+  uint a;
+  int iVar11;
   
   iVar7 = (int)ring->lifeTime;
   p_Var6 = ring->instance;
   sVar1 = (p_Var6->position).z;
   sVar2 = (p_Var6->position).x;
   sVar3 = (p_Var6->position).y;
-  uVar11 = ((gameTrackerX.globalTimeMult % 1000) * 0x1000) / 1000;
-  iVar12 = 0x200 - (ring->diffTime << 9) / iVar7;
+  a = ((DAT_800d2300 % 1000) * 0x1000) / 1000;
+  iVar11 = 0x200 - (ring->diffTime << 9) / iVar7;
   if (iVar7 <= ring->diffTime) {
-    iVar12 = 0x200;
+    iVar11 = 0x200;
     ring->diffTime = iVar7;
     ring->lifeTime = 0;
   }
   (ring->ringPlane).flags = 0;
   iVar7 = rsin(200);
-  iVar4 = rsin(uVar11);
+  iVar4 = rsin(a);
   (ring->ringPlane).a = (short)(iVar7 * iVar4 >> 0xc);
   iVar7 = rsin(200);
-  iVar4 = rcos(uVar11);
+  iVar4 = rcos(a);
   (ring->ringPlane).b = (short)(-iVar7 * iVar4 >> 0xc);
   iVar7 = rcos(200);
   (ring->ringPlane).c = (short)iVar7;
   (ring->ringPlane).d =
        -((int)(ring->ringPlane).a * (int)sVar2 + (int)(ring->ringPlane).b * (int)sVar3 +
-         (int)(short)iVar7 * (sVar1 + iVar12) >> 0xc);
+         (int)(short)iVar7 * (sVar1 + iVar11) >> 0xc);
   if (ring->colorArray != (long *)0x0) {
     iVar7 = 0;
     if (ring->diffTime != 0) {
       iVar7 = ring->diffTime / (int)ring->colorBlendLife;
     }
-    iVar12 = (ring->diffTime % ((int)ring->colorBlendLife + 1) << 0xc) / (int)ring->colorBlendLife;
+    iVar11 = (ring->diffTime % ((int)ring->colorBlendLife + 1) << 0xc) / (int)ring->colorBlendLife;
     if ((int)ring->numColors + -1 <= iVar7) {
       iVar7 = (int)ring->numColors + -2;
-      iVar12 = 0x1000;
+      iVar11 = 0x1000;
     }
-    setCopReg(2,0x4000,0x1000 - iVar12);
+    setCopReg(2,0x4000,0x1000 - iVar11);
     plVar5 = ring->colorArray + iVar7;
     setCopReg(2,0x4800,(uint)*(byte *)plVar5);
     setCopReg(2,0x5000,(uint)*(byte *)((int)plVar5 + 1));
     setCopReg(2,0x5800,(uint)*(byte *)((int)plVar5 + 2));
     copFunction(2,0x198003d);
-    setCopReg(2,0x4000,iVar12);
+    setCopReg(2,0x4000,iVar11);
     plVar5 = ring->colorArray + iVar7 + 1;
     setCopReg(2,0x4800,(uint)*(byte *)plVar5);
     setCopReg(2,0x5000,(uint)*(byte *)((int)plVar5 + 1));
@@ -7071,7 +7266,7 @@ void FX_UpdatePowerRing(_FXHalvePlane *ring)
     *(undefined *)((int)&ring->currentColor + 1) = (char)uVar9;
     *(undefined *)((int)&ring->currentColor + 2) = (char)uVar10;
   }
-  ring->diffTime = ring->diffTime + gameTrackerX.totalTime;
+  ring->diffTime = ring->diffTime + DAT_800d2310;
   return;
 }
 
@@ -7080,18 +7275,30 @@ void FX_UpdatePowerRing(_FXHalvePlane *ring)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_UpdateInstanceSplitRing(struct _FXHalvePlane *ring /*$s0*/, struct _FXTracker *fxTracker /*$a1*/)
- // line 5546, offset 0x8004c920
+ // line 5621, offset 0x8004b8cc
 	/* begin block 1 */
-		// Start line: 13856
+		// Start line: 13923
 	/* end block 1 */
-	// End Line: 13857
+	// End Line: 13924
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_UpdateInstanceSplitRing(_FXHalvePlane *ring,_FXTracker *fxTracker)
 
 {
+  int iVar1;
+  
   if (ring->lifeTime != 0) {
     if (ring->type == '\0') {
       FX_UpdatePowerRing(ring);
+    }
+    else {
+      iVar1 = ring->diffTime + DAT_800d2310;
+      ring->diffTime = iVar1;
+      if ((int)ring->lifeTime <= iVar1) {
+        ring->diffTime = (int)ring->lifeTime;
+        ring->lifeTime = 0;
+      }
     }
     if (ring->lifeTime != 0) {
       return;
@@ -7106,11 +7313,13 @@ void FX_UpdateInstanceSplitRing(_FXHalvePlane *ring,_FXTracker *fxTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_UpdateGlowEffect(struct _FXGlowEffect *effect /*$a0*/, struct _FXTracker *fxTracker /*$a1*/)
- // line 5569, offset 0x8004c980
+ // line 5644, offset 0x8004b95c
 	/* begin block 1 */
-		// Start line: 13902
+		// Start line: 13970
 	/* end block 1 */
-	// End Line: 13903
+	// End Line: 13971
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_UpdateGlowEffect(_FXGlowEffect *effect,_FXTracker *fxTracker)
 
@@ -7126,37 +7335,39 @@ void FX_UpdateGlowEffect(_FXGlowEffect *effect,_FXTracker *fxTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_InsertGeneralEffect(void *ptr /*$a0*/)
- // line 5577, offset 0x8004c9b0
+ // line 5652, offset 0x8004b98c
 	/* begin block 1 */
-		// Start line: 5579
-		// Start offset: 0x8004C9B0
+		// Start line: 5654
+		// Start offset: 0x8004B98C
 	/* end block 1 */
-	// End offset: 0x8004C9B0
-	// End Line: 5580
+	// End offset: 0x8004B98C
+	// End Line: 5655
 
 	/* begin block 2 */
-		// Start line: 13918
+		// Start line: 13986
 	/* end block 2 */
-	// End Line: 13919
+	// End Line: 13987
 
 	/* begin block 3 */
-		// Start line: 13919
+		// Start line: 13987
 	/* end block 3 */
-	// End Line: 13920
+	// End Line: 13988
 
 	/* begin block 4 */
-		// Start line: 13920
+		// Start line: 13988
 	/* end block 4 */
-	// End Line: 13921
+	// End Line: 13989
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_InsertGeneralEffect(void *ptr)
 
 {
-  _FXGeneralEffect *p_Var1;
+  void *pvVar1;
   
-  p_Var1 = (_FXGeneralEffect *)ptr;
-  *(_FXGeneralEffect **)ptr = FX_GeneralEffectTracker;
-  FX_GeneralEffectTracker = p_Var1;
+  pvVar1 = ptr;
+  *(void **)ptr = FX_GeneralEffectTracker;
+  FX_GeneralEffectTracker = pvVar1;
   return;
 }
 
@@ -7165,21 +7376,23 @@ void FX_InsertGeneralEffect(void *ptr)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_DeleteGeneralEffect(struct _FXGeneralEffect *effect /*$s0*/)
- // line 5585, offset 0x8004c9c0
+ // line 5660, offset 0x8004b99c
 	/* begin block 1 */
-		// Start line: 5586
-		// Start offset: 0x8004C9C0
+		// Start line: 5661
+		// Start offset: 0x8004B99C
 		// Variables:
 	// 		struct _FXGeneralEffect *currentEffect; // $v0
 	// 		struct _FXGeneralEffect *previousEffect; // $v1
 	/* end block 1 */
-	// End offset: 0x8004CA4C
-	// End Line: 5618
+	// End offset: 0x8004BA28
+	// End Line: 5693
 
 	/* begin block 2 */
-		// Start line: 13935
+		// Start line: 14003
 	/* end block 2 */
-	// End Line: 13936
+	// End Line: 14004
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_DeleteGeneralEffect(_FXGeneralEffect *effect)
 
@@ -7220,29 +7433,31 @@ void FX_DeleteGeneralEffect(_FXGeneralEffect *effect)
 // decompiled code
 // original method signature: 
 // struct _FXGlowEffect * /*$ra*/ FX_DoInstanceOneSegmentGlow(struct _Instance *instance /*$s3*/, long segment /*$s4*/, long *color /*$s2*/, long numColors /*$s1*/, long atuColorCycleRate /*stack 16*/, long width /*stack 20*/, long height /*stack 24*/)
- // line 5623, offset 0x8004ca5c
+ // line 5698, offset 0x8004ba38
 	/* begin block 1 */
-		// Start line: 5624
-		// Start offset: 0x8004CA5C
+		// Start line: 5699
+		// Start offset: 0x8004BA38
 		// Variables:
 	// 		struct _FXGlowEffect *glowEffect; // $a2
 
 		/* begin block 1.1 */
-			// Start line: 5656
-			// Start offset: 0x8004CB24
+			// Start line: 5731
+			// Start offset: 0x8004BB00
 			// Variables:
 		// 		int i; // $a1
 		/* end block 1.1 */
-		// End offset: 0x8004CB7C
-		// End Line: 5669
+		// End offset: 0x8004BB58
+		// End Line: 5744
 	/* end block 1 */
-	// End offset: 0x8004CB88
-	// End Line: 5675
+	// End offset: 0x8004BB64
+	// End Line: 5750
 
 	/* begin block 2 */
-		// Start line: 14011
+		// Start line: 14079
 	/* end block 2 */
-	// End Line: 14012
+	// End Line: 14080
+
+/* File: C:\kain2\game\FX.C */
 
 _FXGlowEffect *
 FX_DoInstanceOneSegmentGlow
@@ -7252,13 +7467,13 @@ FX_DoInstanceOneSegmentGlow
 {
   _FXGlowEffect *p_Var1;
   _FXGlowEffect *p_Var2;
-  _Instance *p_Var3;
+  long lVar3;
   int iVar4;
   int iVar5;
   long *plVar6;
   
   p_Var2 = (_FXGlowEffect *)MEMPACK_Malloc(numColors * 4 + 0x2c,'\r');
-  if (p_Var2 == (_FXGlowEffect *)0x0) goto LAB_8004cb88;
+  if (p_Var2 == (_FXGlowEffect *)0x0) goto LAB_8004bb64;
   p_Var2->effectType = -0x7d;
   *(code **)&p_Var2->continue_process = FX_UpdateGlowEffect;
   p_Var2->colorArray = (long *)0x0;
@@ -7267,16 +7482,16 @@ FX_DoInstanceOneSegmentGlow
   p_Var2->width = (short)width;
   p_Var2->instance = instance;
   p_Var2->segment = (short)segment;
-  *(void **)&p_Var2->diffTime = (void *)0x0;
+  p_Var2->diffTime = 0;
   p_Var2->fadein_time = 0;
   p_Var2->fadeout_time = 0;
   p_Var2->height = (short)height;
   p_Var2->lifeTime = -1;
   p_Var2->SegmentInc = '\x01';
-  p_Var2->numSegments = 1;
+  p_Var2->numSegments = '\x01';
   if (numColors < 2) {
-    if (color != (long *)0x0) goto LAB_8004cb70;
-    p_Var3 = (_Instance *)0xff8010;
+    if (color != (long *)0x0) goto LAB_8004bb4c;
+    lVar3 = 0xff8010;
   }
   else {
     *(_FXGlowEffect **)&p_Var2->colorArray = p_Var2 + 1;
@@ -7291,14 +7506,14 @@ FX_DoInstanceOneSegmentGlow
       } while (iVar5 < numColors);
     }
     p_Var2->colorBlendCycle = (short)((atuColorCycleRate * 0x21) / (numColors + -1));
-LAB_8004cb70:
-    p_Var3 = (_Instance *)*color;
+LAB_8004bb4c:
+    lVar3 = *color;
   }
-  *(_Instance **)&p_Var2->currentColor = p_Var3;
+  p_Var2->currentColor = lVar3;
   p_Var1 = p_Var2;
-  *(_FXGeneralEffect **)&p_Var2->next = FX_GeneralEffectTracker;
-  FX_GeneralEffectTracker = (_FXGeneralEffect *)p_Var1;
-LAB_8004cb88:
+  *(_FXGlowEffect **)&p_Var2->next = FX_GeneralEffectTracker;
+  FX_GeneralEffectTracker = p_Var1;
+LAB_8004bb64:
   instance->flags2 = instance->flags2 | 0x200;
   return p_Var2;
 }
@@ -7308,16 +7523,18 @@ LAB_8004cb88:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_SetGlowFades(struct _FXGlowEffect *glowEffect /*$a0*/, int fadein /*$a1*/, int fadeout /*$a2*/)
- // line 5680, offset 0x8004cbbc
+ // line 5755, offset 0x8004bb98
 	/* begin block 1 */
-		// Start line: 14147
+		// Start line: 14215
 	/* end block 1 */
-	// End Line: 14148
+	// End Line: 14216
 
 	/* begin block 2 */
-		// Start line: 14148
+		// Start line: 14216
 	/* end block 2 */
-	// End Line: 14149
+	// End Line: 14217
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_SetGlowFades(_FXGlowEffect *glowEffect,int fadein,int fadeout)
 
@@ -7332,21 +7549,23 @@ void FX_SetGlowFades(_FXGlowEffect *glowEffect,int fadein,int fadeout)
 // decompiled code
 // original method signature: 
 // struct _FXGlowEffect * /*$ra*/ FX_DoInstanceTwoSegmentGlow(struct _Instance *instance /*$a0*/, long segment /*$a1*/, long segmentEnd /*$a2*/, long *color /*$a3*/, long numColors /*stack 16*/, long atuColorCycleRate /*stack 20*/, long height /*stack 24*/)
- // line 5686, offset 0x8004cbd8
+ // line 5761, offset 0x8004bbb4
 	/* begin block 1 */
-		// Start line: 5687
-		// Start offset: 0x8004CBD8
+		// Start line: 5762
+		// Start offset: 0x8004BBB4
 		// Variables:
 	// 		struct _FXGlowEffect *glowEffect; // $v0
 	// 		int inc; // $s0
 	/* end block 1 */
-	// End offset: 0x8004CBF8
-	// End Line: 5695
+	// End offset: 0x8004BBD4
+	// End Line: 5770
 
 	/* begin block 2 */
-		// Start line: 14159
+		// Start line: 14227
 	/* end block 2 */
-	// End Line: 14160
+	// End Line: 14228
+
+/* File: C:\kain2\game\FX.C */
 
 _FXGlowEffect *
 FX_DoInstanceTwoSegmentGlow
@@ -7374,20 +7593,22 @@ FX_DoInstanceTwoSegmentGlow
 // decompiled code
 // original method signature: 
 // struct _FXGlowEffect * /*$ra*/ FX_DoInstanceManySegmentGlow(struct _Instance *instance /*$a0*/, long segment /*$a1*/, long numSegments /*$s0*/, long *color /*$a3*/, long numColors /*stack 16*/, long atuColorCycleRate /*stack 20*/, long height /*stack 24*/)
- // line 5702, offset 0x8004cc30
+ // line 5777, offset 0x8004bc0c
 	/* begin block 1 */
-		// Start line: 5703
-		// Start offset: 0x8004CC30
+		// Start line: 5778
+		// Start offset: 0x8004BC0C
 		// Variables:
 	// 		struct _FXGlowEffect *glowEffect; // $v0
 	/* end block 1 */
-	// End offset: 0x8004CC30
-	// End Line: 5703
+	// End offset: 0x8004BC0C
+	// End Line: 5778
 
 	/* begin block 2 */
-		// Start line: 14195
+		// Start line: 14263
 	/* end block 2 */
-	// End Line: 14196
+	// End Line: 14264
+
+/* File: C:\kain2\game\FX.C */
 
 _FXGlowEffect *
 FX_DoInstanceManySegmentGlow
@@ -7408,20 +7629,22 @@ FX_DoInstanceManySegmentGlow
 // decompiled code
 // original method signature: 
 // struct _FXGlowEffect * /*$ra*/ FX_DoInstanceOneSegmentGlowWithTime(struct _Instance *instance /*$a0*/, long segment /*$a1*/, long *color /*$a2*/, long numColors /*$a3*/, long atuColorCycleRate /*stack 16*/, long width /*stack 20*/, long height /*stack 24*/, long ATULifeTime /*stack 28*/)
- // line 5713, offset 0x8004cc78
+ // line 5788, offset 0x8004bc54
 	/* begin block 1 */
-		// Start line: 5714
-		// Start offset: 0x8004CC78
+		// Start line: 5789
+		// Start offset: 0x8004BC54
 		// Variables:
 	// 		struct _FXGlowEffect *glowEffect; // $v0
 	/* end block 1 */
-	// End offset: 0x8004CC78
-	// End Line: 5714
+	// End offset: 0x8004BC54
+	// End Line: 5789
 
 	/* begin block 2 */
-		// Start line: 14220
+		// Start line: 14288
 	/* end block 2 */
-	// End Line: 14221
+	// End Line: 14289
+
+/* File: C:\kain2\game\FX.C */
 
 _FXGlowEffect *
 FX_DoInstanceOneSegmentGlowWithTime
@@ -7442,28 +7665,30 @@ FX_DoInstanceOneSegmentGlowWithTime
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_StopAllGlowEffects(struct _Instance *instance /*$s3*/, int fadeout_time /*$s0*/)
- // line 5725, offset 0x8004ccc0
+ // line 5800, offset 0x8004bc9c
 	/* begin block 1 */
-		// Start line: 5726
-		// Start offset: 0x8004CCC0
+		// Start line: 5801
+		// Start offset: 0x8004BC9C
 		// Variables:
 	// 		struct _FXGlowEffect *currentEffect; // $a0
 	// 		struct _FXGlowEffect *previousEffect; // $s1
 
 		/* begin block 1.1 */
-			// Start line: 5741
-			// Start offset: 0x8004CD18
+			// Start line: 5816
+			// Start offset: 0x8004BCF4
 		/* end block 1.1 */
-		// End offset: 0x8004CD18
-		// End Line: 5742
+		// End offset: 0x8004BCF4
+		// End Line: 5817
 	/* end block 1 */
-	// End offset: 0x8004CD38
-	// End Line: 5750
+	// End offset: 0x8004BD14
+	// End Line: 5825
 
 	/* begin block 2 */
-		// Start line: 14244
+		// Start line: 14312
 	/* end block 2 */
-	// End Line: 14245
+	// End Line: 14313
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_StopAllGlowEffects(_Instance *instance,int fadeout_time)
 
@@ -7497,28 +7722,30 @@ void FX_StopAllGlowEffects(_Instance *instance,int fadeout_time)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_StopGlowEffect(struct _FXGlowEffect *glowEffect /*$s1*/, int fadeout_time /*$a1*/)
- // line 5752, offset 0x8004cd54
+ // line 5827, offset 0x8004bd30
 	/* begin block 1 */
-		// Start line: 5753
-		// Start offset: 0x8004CD54
+		// Start line: 5828
+		// Start offset: 0x8004BD30
 
 		/* begin block 1.1 */
-			// Start line: 5762
-			// Start offset: 0x8004CD98
+			// Start line: 5837
+			// Start offset: 0x8004BD74
 			// Variables:
 		// 		struct _FXGeneralEffect *currentEffect; // $a0
 		// 		struct _FXGeneralEffect *previousEffect; // $s0
 		/* end block 1.1 */
-		// End offset: 0x8004CDC4
-		// End Line: 5775
+		// End offset: 0x8004BDA0
+		// End Line: 5850
 	/* end block 1 */
-	// End offset: 0x8004CDC4
-	// End Line: 5776
+	// End offset: 0x8004BDA0
+	// End Line: 5851
 
 	/* begin block 2 */
-		// Start line: 14310
+		// Start line: 14378
 	/* end block 2 */
-	// End Line: 14311
+	// End Line: 14379
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_StopGlowEffect(_FXGlowEffect *glowEffect,int fadeout_time)
 
@@ -7529,8 +7756,8 @@ void FX_StopGlowEffect(_FXGlowEffect *glowEffect,int fadeout_time)
   
   if (glowEffect != (_FXGlowEffect *)0x0) {
     if (fadeout_time == 0) {
-      effect = (_FXGlowEffect *)FX_GeneralEffectTracker;
-      if (FX_GeneralEffectTracker != (_FXGeneralEffect *)0x0) {
+      effect = FX_GeneralEffectTracker;
+      if (FX_GeneralEffectTracker != (_FXGlowEffect *)0x0) {
         do {
           p_Var2 = (_FXGlowEffect *)effect->next;
           if ((effect->effectType == -0x7d) && (effect == glowEffect)) {
@@ -7554,34 +7781,34 @@ void FX_StopGlowEffect(_FXGlowEffect *glowEffect,int fadeout_time)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_DrawLightning(struct _FXLightning *zap /*$s1*/, struct MATRIX *wcTransform /*$s2*/, unsigned long **ot /*$s3*/)
- // line 5778, offset 0x8004cddc
+ // line 5853, offset 0x8004bdb8
 	/* begin block 1 */
-		// Start line: 5779
-		// Start offset: 0x8004CDDC
+		// Start line: 5854
+		// Start offset: 0x8004BDB8
 		// Variables:
 	// 		struct _SVector start; // stack offset -48
 	// 		struct _SVector end; // stack offset -40
 	// 		struct _SVector offset; // stack offset -32
 	// 		struct MATRIX *swtransform; // $s0
 	/* end block 1 */
-	// End offset: 0x8004CF4C
-	// End Line: 5817
+	// End offset: 0x8004BFB4
+	// End Line: 5910
 
 	/* begin block 2 */
-		// Start line: 14364
+		// Start line: 14432
 	/* end block 2 */
-	// End Line: 14365
+	// End Line: 14433
 
-void FX_DrawLightning(_FXLightning *zap,MATRIX *wcTransform,ulong **ot)
+/* File: C:\kain2\game\FX.C */
+
+void FX_DrawLightning(_FXLightning *zap,undefined1 wcTransform,ulong **ot)
 
 {
-  MATRIX *pMVar1;
-  MATRIX *mat;
+  MATRIX *m;
+  char mat;
   _SVector local_30;
   _SVector local_28;
-  short local_20;
-  short local_1e;
-  short local_1c;
+  SVECTOR local_20;
   
   if (zap->type == '\x02') {
     local_30.x = (zap->start_offset).x;
@@ -7589,11 +7816,19 @@ void FX_DrawLightning(_FXLightning *zap,MATRIX *wcTransform,ulong **ot)
     local_30.z = (zap->start_offset).z;
   }
   else {
-    pMVar1 = zap->instance->matrix + zap->startSeg;
-    ApplyMatrixSV(pMVar1,&zap->start_offset,&local_20);
-    local_30.x = *(short *)pMVar1->t + local_20;
-    local_30.y = *(short *)(pMVar1->t + 1) + local_1e;
-    local_30.z = *(short *)(pMVar1->t + 2) + local_1c;
+    m = zap->instance->matrix;
+    if (m == (MATRIX *)0x0) {
+      local_30.x = (zap->instance->position).x;
+      local_30.y = (zap->instance->position).y;
+      local_30.z = (zap->instance->position).z;
+    }
+    else {
+      m = m + zap->startSeg;
+      ApplyMatrixSV(m,(SVECTOR *)&zap->start_offset,&local_20);
+      local_30.x = *(short *)m->t + local_20.vx;
+      local_30.y = *(short *)(m->t + 1) + local_20.vy;
+      local_30.z = *(short *)(m->t + 2) + local_20.vz;
+    }
   }
   if ((uint)zap->type - 1 < 2) {
     local_28.x = (zap->end_offset).x;
@@ -7601,15 +7836,26 @@ void FX_DrawLightning(_FXLightning *zap,MATRIX *wcTransform,ulong **ot)
     local_28.z = (zap->end_offset).z;
   }
   else {
-    pMVar1 = zap->end_instance->matrix + zap->endSeg;
-    ApplyMatrixSV(pMVar1,&zap->end_offset,&local_20);
-    local_28.x = *(short *)pMVar1->t + local_20;
-    local_28.y = *(short *)(pMVar1->t + 1) + local_1e;
-    local_28.z = *(short *)(pMVar1->t + 2) + local_1c;
+    m = zap->end_instance->matrix;
+    if (m == (MATRIX *)0x0) {
+      local_28.x = (zap->instance->position).x;
+      local_28.y = (zap->instance->position).y;
+      local_28.z = (zap->instance->position).z;
+    }
+    else {
+      m = m + zap->endSeg;
+      ApplyMatrixSV(m,(SVECTOR *)&zap->end_offset,&local_20);
+      local_28.x = *(short *)m->t + local_20.vx;
+      local_28.y = *(short *)(m->t + 1) + local_20.vy;
+      local_28.z = *(short *)(m->t + 2) + local_20.vz;
+    }
   }
-  mat = (MATRIX *)0x0;
-  if ((int)zap->matrixSeg != -1) {
-    mat = (MATRIX *)(zap->instance->matrix + (int)zap->matrixSeg);
+  mat = '\0';
+  if (zap->matrixSeg != -1) {
+    m = zap->instance->matrix;
+    if (m != (MATRIX *)0x0) {
+      mat = (char)m + (char)zap->matrixSeg * ' ';
+    }
   }
   FX_Lightning(wcTransform,ot,mat,zap->deg,&local_30,&local_28,(int)zap->width,(int)zap->small_width
                ,(int)zap->segs,(int)zap->sine_size,(int)zap->variation,zap->color,zap->glow_color);
@@ -7621,54 +7867,56 @@ void FX_DrawLightning(_FXLightning *zap,MATRIX *wcTransform,ulong **ot)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_DrawAllGeneralEffects(struct MATRIX *wcTransform /*$s1*/, struct _VertexPool *vertexPool /*$s3*/, struct _PrimPool *primPool /*$s4*/, unsigned long **ot /*$s2*/)
- // line 5824, offset 0x8004cfd4
+ // line 5917, offset 0x8004c03c
 	/* begin block 1 */
-		// Start line: 5825
-		// Start offset: 0x8004CFD4
+		// Start line: 5918
+		// Start offset: 0x8004C03C
 		// Variables:
 	// 		struct _Instance *instance; // $a0
 	// 		struct _FXGeneralEffect *currentEffect; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 5838
-			// Start offset: 0x8004D060
+			// Start line: 5931
+			// Start offset: 0x8004C0C8
 			// Variables:
 		// 		struct _FXGlowEffect *currentGlow; // $t0
 		/* end block 1.1 */
-		// End offset: 0x8004D090
-		// End Line: 5846
+		// End offset: 0x8004C0F8
+		// End Line: 5939
 
 		/* begin block 1.2 */
-			// Start line: 5850
-			// Start offset: 0x8004D0B8
+			// Start line: 5943
+			// Start offset: 0x8004C120
 		/* end block 1.2 */
-		// End offset: 0x8004D0B8
-		// End Line: 5851
+		// End offset: 0x8004C120
+		// End Line: 5944
 
 		/* begin block 1.3 */
-			// Start line: 5860
-			// Start offset: 0x8004D0FC
+			// Start line: 5953
+			// Start offset: 0x8004C164
 		/* end block 1.3 */
-		// End offset: 0x8004D0FC
-		// End Line: 5862
+		// End offset: 0x8004C164
+		// End Line: 5955
 
 		/* begin block 1.4 */
-			// Start line: 5870
-			// Start offset: 0x8004D154
+			// Start line: 5963
+			// Start offset: 0x8004C1BC
 		/* end block 1.4 */
-		// End offset: 0x8004D154
-		// End Line: 5872
+		// End offset: 0x8004C1BC
+		// End Line: 5965
 	/* end block 1 */
-	// End offset: 0x8004D18C
-	// End Line: 5882
+	// End offset: 0x8004C1F4
+	// End Line: 5975
 
 	/* begin block 2 */
-		// Start line: 14458
+		// Start line: 14562
 	/* end block 2 */
-	// End Line: 14459
+	// End Line: 14563
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_DrawAllGeneralEffects
-               (MATRIX *wcTransform,_VertexPool *vertexPool,_PrimPool *primPool,ulong **ot)
+               (undefined1 wcTransform,_VertexPool *vertexPool,_PrimPool *primPool,ulong **ot)
 
 {
   byte bVar1;
@@ -7676,8 +7924,8 @@ void FX_DrawAllGeneralEffects
   _Instance *instance;
   _FXBlastringEffect *blast;
   
-  blast = (_FXBlastringEffect *)FX_GeneralEffectTracker;
-  if (FX_GeneralEffectTracker != (_FXGeneralEffect *)0x0) {
+  blast = FX_GeneralEffectTracker;
+  if (FX_GeneralEffectTracker != (_FXBlastringEffect *)0x0) {
     do {
       bVar1 = blast->effectType;
       if (((bVar1 & 0x80) != 0) &&
@@ -7685,7 +7933,7 @@ void FX_DrawAllGeneralEffects
           (((instance->flags & 0x800U) == 0 && ((instance->flags2 & 0x4000000U) == 0)))))) {
         if (bVar1 == 0x83) {
           if ((0 < blast->lifeTime) &&
-             (iVar2 = (uint)(ushort)blast->lifeTime - (uint)(ushort)gameTrackerX.totalTime,
+             (iVar2 = (uint)(ushort)blast->lifeTime - (uint)(ushort)DAT_800d2310,
              blast->lifeTime = (short)iVar2, iVar2 * 0x10000 < 0)) {
             blast->lifeTime = 0;
           }
@@ -7735,29 +7983,39 @@ void FX_DrawAllGeneralEffects
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_ContinueBlastRing(struct _FXBlastringEffect *blast /*$s0*/, struct _FXTracker *fxTracker /*$a1*/)
- // line 5892, offset 0x8004d1ac
+ // line 5985, offset 0x8004c214
 	/* begin block 1 */
-		// Start line: 5893
-		// Start offset: 0x8004D1AC
+		// Start line: 5986
+		// Start offset: 0x8004C214
+		// Variables:
+	// 		int fade; // $a2
+	// 		int tm; // $v0
 
 		/* begin block 1.1 */
-			// Start line: 5901
-			// Start offset: 0x8004D1F0
+			// Start line: 5997
+			// Start offset: 0x8004C284
 			// Variables:
 		// 		int rad; // $v0
 		// 		int crad; // $a0
 		// 		int endrad; // $v1
 		/* end block 1.1 */
-		// End offset: 0x8004D284
-		// End Line: 5919
+		// End offset: 0x8004C340
+		// End Line: 6018
 	/* end block 1 */
-	// End offset: 0x8004D304
-	// End Line: 5938
+	// End offset: 0x8004C3C0
+	// End Line: 6037
 
 	/* begin block 2 */
-		// Start line: 14599
+		// Start line: 14703
 	/* end block 2 */
-	// End Line: 14600
+	// End Line: 14704
+
+	/* begin block 3 */
+		// Start line: 14708
+	/* end block 3 */
+	// End Line: 14709
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_ContinueBlastRing(_FXBlastringEffect *blast,_FXTracker *fxTracker)
 
@@ -7766,40 +8024,53 @@ void FX_ContinueBlastRing(_FXBlastringEffect *blast,_FXTracker *fxTracker)
   int iVar2;
   int iVar3;
   int iVar4;
+  int iVar5;
+  long p0;
   
-  iVar4 = blast->endRadius;
-  blast->radius = blast->radius + blast->colorchange_radius;
-  iVar3 = blast->radius;
-  blast->colorchange_radius = blast->colorchange_radius + blast->vel;
-  if (iVar4 < iVar3) {
-    if (iVar3 < 0) {
-      iVar3 = iVar3 + 0xfff;
+  iVar5 = blast->vel * (DAT_800d2314 >> 4);
+  if (iVar5 < 0) {
+    iVar5 = iVar5 + 0xff;
+  }
+  iVar2 = (int)FX_Frames;
+  iVar4 = blast->colorchange_radius;
+  blast->radius = blast->radius + (iVar5 >> 8);
+  iVar5 = blast->radius;
+  iVar2 = blast->vel + blast->accl * iVar2;
+  blast->vel = iVar2;
+  if (iVar4 < iVar5) {
+    if (iVar5 < 0) {
+      iVar5 = iVar5 + 0xfff;
     }
     if (iVar4 < 0) {
       iVar4 = iVar4 + 0xfff;
     }
-    iVar2 = blast->startRadius;
+    iVar3 = blast->endRadius;
     iVar4 = iVar4 >> 0xc;
+    if (iVar3 < 0) {
+      iVar3 = iVar3 + 0xfff;
+    }
     if (iVar2 < 0) {
-      iVar2 = iVar2 + 0xfff;
-    }
-    iVar2 = iVar2 >> 0xc;
-    if (iVar2 == 0) {
-      iVar2 = iVar4 + 0x1000;
-    }
-    iVar3 = (((iVar3 >> 0xc) - iVar4) * 0x1000) / (iVar2 - iVar4);
-    if (iVar3 < 0x1001) {
-      LoadAverageCol((byte *)&blast->startColor,(byte *)&blast->color,iVar3,0x1000 - iVar3,
-                     (undefined *)&blast->predator_offset);
-      *(uint *)&blast->predator_offset = *(uint *)&blast->predator_offset & 0xffffff;
+      iVar2 = blast->startRadius;
+      if (iVar2 < 0) {
+        iVar2 = iVar2 + 0xfff;
+      }
+      p0 = (((iVar5 >> 0xc) - iVar4) * 0x1000) / ((iVar2 >> 0xc) - iVar4);
     }
     else {
-      *(undefined4 *)&blast->predator_offset = 0;
+      p0 = (((iVar5 >> 0xc) - iVar4) * 0x1000) / ((iVar3 >> 0xc) - iVar4);
+    }
+    if (p0 < 0x1001) {
+      LoadAverageCol((u_char *)&blast->endColor,(u_char *)&blast->startColor,p0,0x1000 - p0,
+                     (u_char *)&blast->color);
+      blast->color = blast->color & 0xffffff;
+    }
+    else {
+      blast->color = 0;
     }
   }
   if (((blast->lifeTime != -99) &&
-      (((0 < blast->colorchange_radius && (blast->startRadius < blast->radius)) ||
-       ((blast->colorchange_radius < 0 && (blast->radius < blast->startRadius)))))) ||
+      (((0 < blast->vel && (blast->endRadius < blast->radius)) ||
+       ((blast->vel < 0 && (blast->radius < blast->endRadius)))))) ||
      ((uVar1 = blast->lifeTime - 1, -1 < blast->lifeTime &&
       (blast->lifeTime = uVar1, (int)((uint)uVar1 << 0x10) < 1)))) {
     FX_DeleteGeneralEffect((_FXGeneralEffect *)blast);
@@ -7812,37 +8083,42 @@ void FX_ContinueBlastRing(_FXBlastringEffect *blast,_FXTracker *fxTracker)
 // decompiled code
 // original method signature: 
 // struct _FXBlastringEffect * /*$ra*/ FX_DoBlastRing(struct _Instance *instance /*$s2*/, struct _SVector *position /*$s5*/, struct MATRIX *mat /*$s3*/, int segment /*$s6*/, int radius /*stack 16*/, int endRadius /*stack 20*/, int colorChangeRadius /*stack 24*/, int size1 /*stack 28*/, int size2 /*stack 32*/, int vel /*stack 36*/, int accl /*stack 40*/, int height1 /*stack 44*/, int height2 /*stack 48*/, int height3 /*stack 52*/, long startColor /*stack 56*/, long endColor /*stack 60*/, int pred_offset /*stack 64*/, int lifeTime /*stack 68*/, int sortInWorld /*stack 72*/)
- // line 5968, offset 0x8004d314
+ // line 6067, offset 0x8004c3d0
 	/* begin block 1 */
-		// Start line: 5969
-		// Start offset: 0x8004D314
+		// Start line: 6068
+		// Start offset: 0x8004C3D0
 		// Variables:
 	// 		struct _FXBlastringEffect *blast; // $s0
 	/* end block 1 */
-	// End offset: 0x8004D4B0
-	// End Line: 6007
+	// End offset: 0x8004C570
+	// End Line: 6106
 
 	/* begin block 2 */
-		// Start line: 14756
+		// Start line: 14879
 	/* end block 2 */
-	// End Line: 14757
+	// End Line: 14880
+
+/* File: C:\kain2\game\FX.C */
 
 _FXBlastringEffect *
-FX_DoBlastRing(_Instance *instance,_SVector *position,MATRIX *mat,int segment,int radius,
+FX_DoBlastRing(_Instance *instance,_SVector *position,undefined mat,int segment,int radius,
               int endRadius,int colorChangeRadius,int size1,int size2,int vel,int accl,int height1,
               int height2,int height3,long startColor,long endColor,int pred_offset,int lifeTime,
               int sortInWorld)
 
 {
   _FXBlastringEffect *ptr;
-  undefined4 uVar1;
-  long lVar2;
-  undefined4 uVar3;
-  long lVar4;
-  undefined4 uVar5;
-  long lVar6;
+  undefined3 in_register_00000019;
+  undefined4 *puVar1;
+  undefined4 uVar2;
+  long lVar3;
+  undefined4 uVar4;
+  long lVar5;
+  undefined4 uVar6;
+  long lVar7;
   
-  ptr = (_FXBlastringEffect *)MEMPACK_Malloc(0x74,'\r');
+  puVar1 = (undefined4 *)CONCAT31(in_register_00000019,mat);
+  ptr = (_FXBlastringEffect *)MEMPACK_Malloc(0x78,'\r');
   if (ptr != (_FXBlastringEffect *)0x0) {
     *(code **)&ptr->continue_process = FX_ContinueBlastRing;
     ptr->instance = instance;
@@ -7853,42 +8129,43 @@ FX_DoBlastRing(_Instance *instance,_SVector *position,MATRIX *mat,int segment,in
     else {
       ptr->type = '\x01';
     }
-    *(short *)&ptr->height3 = (short)pred_offset;
+    ptr->predator_offset = (short)pred_offset;
     ptr->lifeTime = (short)lifeTime;
-    uVar1 = *(undefined4 *)&position->z;
+    uVar2 = *(undefined4 *)&position->z;
     *(undefined4 *)&ptr->position = *(undefined4 *)position;
-    *(undefined4 *)&(ptr->position).z = uVar1;
-    if (mat != (MATRIX *)0x0) {
-      uVar1 = *(undefined4 *)(mat->m + 2);
-      uVar3 = *(undefined4 *)(mat->m + 4);
-      uVar5 = *(undefined4 *)(mat->m + 6);
-      *(undefined4 *)(ptr->matrix).m = *(undefined4 *)mat->m;
-      *(undefined4 *)((ptr->matrix).m + 2) = uVar1;
-      *(undefined4 *)((ptr->matrix).m + 4) = uVar3;
-      *(undefined4 *)((ptr->matrix).m + 6) = uVar5;
-      lVar2 = mat->t[0];
-      lVar4 = mat->t[1];
-      lVar6 = mat->t[2];
-      *(undefined4 *)((ptr->matrix).m + 8) = *(undefined4 *)(mat->m + 8);
-      (ptr->matrix).t[0] = lVar2;
-      (ptr->matrix).t[1] = lVar4;
-      (ptr->matrix).t[2] = lVar6;
+    *(undefined4 *)&(ptr->position).z = uVar2;
+    if (puVar1 != (undefined4 *)0x0) {
+      uVar2 = puVar1[1];
+      uVar4 = puVar1[2];
+      uVar6 = puVar1[3];
+      *(undefined4 *)(ptr->matrix).m = *puVar1;
+      *(undefined4 *)((ptr->matrix).m + 2) = uVar2;
+      *(undefined4 *)((ptr->matrix).m + 4) = uVar4;
+      *(undefined4 *)((ptr->matrix).m + 6) = uVar6;
+      lVar3 = puVar1[5];
+      lVar5 = puVar1[6];
+      lVar7 = puVar1[7];
+      *(undefined4 *)((ptr->matrix).m + 8) = puVar1[4];
+      (ptr->matrix).t[0] = lVar3;
+      (ptr->matrix).t[1] = lVar5;
+      (ptr->matrix).t[2] = lVar7;
     }
     ptr->segment = (short)segment;
     ptr->radius = radius << 0xc;
+    ptr->startRadius = radius << 0xc;
     ptr->size1 = size1;
     ptr->size2 = size2;
-    ptr->startRadius = endRadius << 0xc;
-    ptr->endRadius = colorChangeRadius << 0xc;
-    ptr->colorchange_radius = vel;
-    ptr->vel = accl;
-    ptr->accl = height1;
-    ptr->height1 = height2;
-    *(long *)&ptr->predator_offset = startColor;
+    ptr->endRadius = endRadius << 0xc;
+    ptr->colorchange_radius = colorChangeRadius << 0xc;
+    ptr->vel = vel;
+    ptr->accl = accl;
+    ptr->height1 = height1;
+    ptr->height2 = height2;
     ptr->color = startColor;
-    ptr->height2 = height3;
-    ptr->startColor = endColor;
-    *(undefined2 *)((int)&ptr->height3 + 2) = (short)sortInWorld;
+    ptr->startColor = startColor;
+    ptr->height3 = height3;
+    ptr->endColor = endColor;
+    ptr->sortInWorld = (short)sortInWorld;
     FX_InsertGeneralEffect(ptr);
   }
   return ptr;
@@ -7899,39 +8176,41 @@ FX_DoBlastRing(_Instance *instance,_SVector *position,MATRIX *mat,int segment,in
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_DrawBlastring(struct MATRIX *wcTransform /*$s3*/, struct _FXBlastringEffect *blast /*$s1*/)
- // line 6010, offset 0x8004d4dc
+ // line 6109, offset 0x8004c59c
 	/* begin block 1 */
-		// Start line: 6011
-		// Start offset: 0x8004D4DC
+		// Start line: 6110
+		// Start offset: 0x8004C59C
 		// Variables:
 	// 		int radius; // $s2
 	// 		struct _SVector position; // stack offset -64
 	// 		struct MATRIX mat; // stack offset -56
 
 		/* begin block 1.1 */
-			// Start line: 6018
-			// Start offset: 0x8004D51C
+			// Start line: 6117
+			// Start offset: 0x8004C5DC
 			// Variables:
 		// 		struct MATRIX *swtransform; // $s0
 		/* end block 1.1 */
-		// End offset: 0x8004D51C
-		// End Line: 6019
+		// End offset: 0x8004C5F4
+		// End Line: 6121
 	/* end block 1 */
-	// End offset: 0x8004D670
-	// End Line: 6042
+	// End offset: 0x8004C73C
+	// End Line: 6144
 
 	/* begin block 2 */
-		// Start line: 14849
+		// Start line: 14972
 	/* end block 2 */
-	// End Line: 14850
+	// End Line: 14973
 
 /* WARNING: Could not reconcile some variable overlaps */
+/* File: C:\kain2\game\FX.C */
 
-void FX_DrawBlastring(MATRIX *wcTransform,_FXBlastringEffect *blast)
+void FX_DrawBlastring(undefined wcTransform,_FXBlastringEffect *blast)
 
 {
   int radius;
-  MATRIX *pMVar1;
+  MATRIX *m1;
+  undefined3 in_register_00000011;
   undefined4 local_40;
   undefined4 local_3c;
   MATRIX MStack56;
@@ -7942,26 +8221,30 @@ void FX_DrawBlastring(MATRIX *wcTransform,_FXBlastringEffect *blast)
   }
   radius = radius >> 0xc;
   if ((int)blast->segment < 0) {
-    CompMatrix((undefined4 *)wcTransform,(ushort *)&blast->matrix,(uint *)&MStack56);
+    CompMatrix((MATRIX *)CONCAT31(in_register_00000011,wcTransform),&blast->matrix,&MStack56);
     local_40 = *(undefined4 *)&blast->position;
     local_3c = *(undefined4 *)&(blast->position).z;
   }
   else {
-    pMVar1 = blast->instance->matrix + (int)blast->segment;
-    CompMatrix((undefined4 *)wcTransform,(ushort *)pMVar1,(uint *)&MStack56);
-    local_40 = CONCAT22(*(undefined2 *)(pMVar1->t + 1),*(undefined2 *)pMVar1->t);
-    local_3c = CONCAT22(local_3c._2_2_,*(undefined2 *)(pMVar1->t + 2));
+    m1 = blast->instance->matrix;
+    if (m1 == (MATRIX *)0x0) {
+      return;
+    }
+    m1 = m1 + (int)blast->segment;
+    CompMatrix((MATRIX *)CONCAT31(in_register_00000011,wcTransform),m1,&MStack56);
+    local_40 = CONCAT22(*(undefined2 *)(m1->t + 1),*(undefined2 *)m1->t);
+    local_3c = CONCAT22(local_3c._2_2_,*(undefined2 *)(m1->t + 2));
   }
   if (blast->type == '\0') {
-    FX_DrawRing(wcTransform,(_SVector *)&local_40,&MStack56,radius,radius + blast->size1,
-                radius + blast->size2,blast->accl,blast->height1,blast->height2,
-                *(long *)&blast->predator_offset,(int)*(short *)((int)&blast->height3 + 2));
+    FX_DrawRing(wcTransform,(_SVector *)&local_40,200,radius,radius + blast->size1,
+                radius + blast->size2,blast->height1,blast->height2,blast->height3,blast->color,
+                (int)blast->sortInWorld);
   }
   else {
     if (blast->type == '\x01') {
-      FX_DrawRing2(wcTransform,&blast->position,&MStack56,radius,radius + blast->size1,
-                   radius + blast->size2,blast->accl,blast->height1,blast->height2,
-                   (int)*(short *)&blast->height3,(int)*(short *)((int)&blast->height3 + 2));
+      FX_DrawRing2(wcTransform,&blast->position,200,radius,radius + blast->size1,
+                   radius + blast->size2,blast->height1,blast->height2,blast->height3,
+                   (int)blast->predator_offset,(int)blast->sortInWorld);
     }
   }
   return;
@@ -7972,18 +8255,20 @@ void FX_DrawBlastring(MATRIX *wcTransform,_FXBlastringEffect *blast)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_ContinueFlash(struct _FXFlash *flash /*$a0*/, struct _FXTracker *fxTracker /*$a1*/)
- // line 6045, offset 0x8004d68c
+ // line 6147, offset 0x8004c758
 	/* begin block 1 */
-		// Start line: 14921
+		// Start line: 15048
 	/* end block 1 */
-	// End Line: 14922
+	// End Line: 15049
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_ContinueFlash(_FXFlash *flash,_FXTracker *fxTracker)
 
 {
   int iVar1;
   
-  iVar1 = flash->currentTime + gameTrackerX.idleTime;
+  iVar1 = flash->currentTime + DAT_800d2314;
   flash->currentTime = iVar1;
   if (iVar1 < 0) {
     iVar1 = iVar1 + 0xf;
@@ -7999,10 +8284,10 @@ void FX_ContinueFlash(_FXFlash *flash,_FXTracker *fxTracker)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_DrawFlash(struct _FXFlash *flash /*$a0*/)
- // line 6055, offset 0x8004d6dc
+ // line 6157, offset 0x8004c7a8
 	/* begin block 1 */
-		// Start line: 6056
-		// Start offset: 0x8004D6DC
+		// Start line: 6158
+		// Start offset: 0x8004C7A8
 		// Variables:
 	// 		int time; // $a1
 	// 		int div; // $a2
@@ -8011,13 +8296,15 @@ void FX_ContinueFlash(_FXFlash *flash,_FXTracker *fxTracker)
 	// 		unsigned long color; // stack offset -16
 	// 		unsigned long black; // stack offset -12
 	/* end block 1 */
-	// End offset: 0x8004D7D0
-	// End Line: 6086
+	// End offset: 0x8004C89C
+	// End Line: 6188
 
 	/* begin block 2 */
-		// Start line: 14941
+		// Start line: 15068
 	/* end block 2 */
-	// End Line: 14942
+	// End Line: 15069
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_DrawFlash(_FXFlash *flash)
 
@@ -8026,7 +8313,9 @@ void FX_DrawFlash(_FXFlash *flash)
   int iVar2;
   int iVar3;
   int iVar4;
+  long p1;
   int transtype;
+  long p0;
   ulong local_10;
   undefined4 local_c;
   
@@ -8042,31 +8331,31 @@ void FX_DrawFlash(_FXFlash *flash)
     transtype = 2;
   }
   if (iVar2 < flash->timeToColor) {
-    iVar2 = (iVar2 << 0xc) / flash->timeToColor;
-    if (0x1000 < iVar2) {
-      iVar2 = 0x1000;
+    p0 = (iVar2 << 0xc) / flash->timeToColor;
+    if (0x1000 < p0) {
+      p0 = 0x1000;
     }
-    iVar4 = 0x1000 - iVar2;
+    p1 = 0x1000 - p0;
   }
   else {
     iVar3 = flash->timeAtColor;
-    if (iVar2 <= iVar3) goto LAB_8004d7d0;
+    if (iVar2 <= iVar3) goto LAB_8004c89c;
     iVar4 = flash->timeFromColor - iVar3;
     if (iVar4 == 0) {
-      iVar4 = 0x1000;
+      p1 = 0x1000;
       bVar1 = true;
     }
     else {
-      iVar4 = ((iVar2 - iVar3) * 0x1000) / iVar4;
-      bVar1 = iVar4 < 0x1001;
+      p1 = ((iVar2 - iVar3) * 0x1000) / iVar4;
+      bVar1 = p1 < 0x1001;
     }
     if (!bVar1) {
-      iVar4 = 0x1000;
+      p1 = 0x1000;
     }
-    iVar2 = 0x1000 - iVar4;
+    p0 = 0x1000 - p1;
   }
-  LoadAverageCol((byte *)&local_10,(byte *)&local_c,iVar2,iVar4,(undefined *)&local_10);
-LAB_8004d7d0:
+  LoadAverageCol((u_char *)&local_10,(u_char *)&local_c,p0,p1,(u_char *)&local_10);
+LAB_8004c89c:
   FX_DrawScreenPoly(transtype,local_10,5);
   return;
 }
@@ -8076,30 +8365,32 @@ LAB_8004d7d0:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_RelocateGeneric(struct Object *object /*$a0*/, long offset /*$a1*/)
- // line 6089, offset 0x8004d7f0
+ // line 6191, offset 0x8004c8bc
 	/* begin block 1 */
-		// Start line: 6091
-		// Start offset: 0x8004D7F0
+		// Start line: 6193
+		// Start offset: 0x8004C8BC
 		// Variables:
 	// 		struct GenericFXObject *GFXO; // $v0
 	/* end block 1 */
-	// End offset: 0x8004D884
-	// End Line: 6100
+	// End offset: 0x8004C950
+	// End Line: 6202
 
 	/* begin block 2 */
-		// Start line: 15012
+		// Start line: 15139
 	/* end block 2 */
-	// End Line: 15013
+	// End Line: 15140
 
 	/* begin block 3 */
-		// Start line: 15013
+		// Start line: 15140
 	/* end block 3 */
-	// End Line: 15014
+	// End Line: 15141
 
 	/* begin block 4 */
-		// Start line: 15015
+		// Start line: 15142
 	/* end block 4 */
-	// End Line: 15016
+	// End Line: 15143
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_RelocateGeneric(Object *object,long offset)
 
@@ -8152,10 +8443,10 @@ void FX_RelocateGeneric(Object *object,long offset)
 // decompiled code
 // original method signature: 
 // struct _FXParticle * /*$ra*/ FX_StartGenericParticle(struct _Instance *instance /*$a0*/, int num /*$a1*/, int segOverride /*$s3*/, int lifeOverride /*$s4*/, int InitFlag /*stack 16*/)
- // line 6103, offset 0x8004d88c
+ // line 6205, offset 0x8004c958
 	/* begin block 1 */
-		// Start line: 6104
-		// Start offset: 0x8004D88C
+		// Start line: 6206
+		// Start offset: 0x8004C958
 		// Variables:
 	// 		struct _FXParticle *currentParticle; // $s0
 	// 		struct GenericFXObject *GFXO; // $v1
@@ -8164,54 +8455,115 @@ void FX_RelocateGeneric(Object *object,long offset)
 	// 		struct Object *particle; // $a2
 
 		/* begin block 1.1 */
-			// Start line: 6163
-			// Start offset: 0x8004DAA8
+			// Start line: 6271
+			// Start offset: 0x8004CBB8
 			// Variables:
 		// 		struct TextureMT3 *texture; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8004DAD0
-		// End Line: 6167
+		// End offset: 0x8004CBE0
+		// End Line: 6275
 	/* end block 1 */
-	// End offset: 0x8004DB34
-	// End Line: 6178
+	// End offset: 0x8004CC44
+	// End Line: 6286
 
 	/* begin block 2 */
-		// Start line: 15040
+		// Start line: 15167
 	/* end block 2 */
-	// End Line: 15041
+	// End Line: 15168
 
-/* WARNING: Removing unreachable block (ram,0x8004d8c4) */
-/* WARNING: Removing unreachable block (ram,0x8004d8e0) */
-/* WARNING: Removing unreachable block (ram,0x8004d8f0) */
-/* WARNING: Removing unreachable block (ram,0x8004d900) */
-/* WARNING: Removing unreachable block (ram,0x8004d910) */
-/* WARNING: Removing unreachable block (ram,0x8004d918) */
-/* WARNING: Removing unreachable block (ram,0x8004d928) */
-/* WARNING: Removing unreachable block (ram,0x8004d93c) */
-/* WARNING: Removing unreachable block (ram,0x8004d978) */
-/* WARNING: Removing unreachable block (ram,0x8004d96c) */
-/* WARNING: Removing unreachable block (ram,0x8004d97c) */
-/* WARNING: Removing unreachable block (ram,0x8004d9e4) */
-/* WARNING: Removing unreachable block (ram,0x8004d9dc) */
-/* WARNING: Removing unreachable block (ram,0x8004d9f0) */
-/* WARNING: Removing unreachable block (ram,0x8004da60) */
-/* WARNING: Removing unreachable block (ram,0x8004da8c) */
-/* WARNING: Removing unreachable block (ram,0x8004da70) */
-/* WARNING: Removing unreachable block (ram,0x8004da98) */
-/* WARNING: Removing unreachable block (ram,0x8004daa8) */
-/* WARNING: Removing unreachable block (ram,0x8004dad0) */
-/* WARNING: Removing unreachable block (ram,0x8004dae0) */
-/* WARNING: Removing unreachable block (ram,0x8004dae8) */
-/* WARNING: Removing unreachable block (ram,0x8004daf8) */
-/* WARNING: Removing unreachable block (ram,0x8004db08) */
-/* WARNING: Removing unreachable block (ram,0x8004db18) */
-/* WARNING: Removing unreachable block (ram,0x8004db28) */
+/* File: C:\kain2\game\FX.C */
 
 _FXParticle *
 FX_StartGenericParticle(_Instance *instance,int num,int segOverride,int lifeOverride,int InitFlag)
 
 {
-  return (_FXParticle *)0x0;
+  short sVar1;
+  _FXParticle *ptr;
+  TextureMT3 *pTVar2;
+  short *psVar3;
+  Object *object;
+  
+  object = (Object *)0x0;
+  if ((objectAccess[10].object == (void *)0x0) ||
+     ((psVar3 = (short *)(**(int **)((int)objectAccess[10].object + 0x1c) + num * 0x30),
+      InitFlag != 0 && (*(char *)(psVar3 + 1) == '\0')))) {
+    ptr = (_FXParticle *)0x0;
+  }
+  else {
+    if ((*(char *)((int)psVar3 + 0x1f) != '\0') &&
+       (instance = instance->LinkChild, instance == (_Instance *)0x0)) {
+      return (_FXParticle *)0x0;
+    }
+    if (*(char *)((int)psVar3 + 0x1b) != -1) {
+      object = (Object *)objectAccess[10].object;
+      if (*(char *)((int)psVar3 + 0x13) != '\0') {
+        object = instance->object;
+      }
+      if (object == (Object *)0x0) {
+        return (_FXParticle *)0x0;
+      }
+    }
+    ptr = FX_GetParticle(instance,0);
+    if (ptr != (_FXParticle *)0x0) {
+      ptr->numberBirthParticles = *(char *)(psVar3 + 0x12);
+      ptr->size = *psVar3;
+      ptr->type = *(uchar *)((int)psVar3 + 3);
+      ptr->birthRadius = psVar3[2];
+      if (segOverride == 0) {
+        ptr->startSegment = *(char *)(psVar3 + 3);
+      }
+      else {
+        ptr->startSegment = (char)segOverride;
+      }
+      ptr->endSegment = *(char *)((int)psVar3 + 7);
+      sVar1 = psVar3[6];
+      *(undefined4 *)&ptr->direction = *(undefined4 *)(psVar3 + 4);
+      (ptr->direction).z = sVar1;
+      (ptr->acceleration).x = (short)*(char *)(psVar3 + 8);
+      (ptr->acceleration).y = (short)*(char *)((int)psVar3 + 0x11);
+      (ptr->acceleration).z = (short)*(char *)(psVar3 + 9);
+      ptr->startColor = *(uint *)(psVar3 + 10) & 0xffffff;
+      ptr->endColor = *(uint *)(psVar3 + 0xc) & 0xffffff;
+      if (lifeOverride == 0) {
+        ptr->lifeTime = psVar3[0xe];
+      }
+      else {
+        ptr->lifeTime = (short)lifeOverride;
+      }
+      ptr->primLifeTime = (ushort)*(byte *)(psVar3 + 0xf);
+      ptr->startFadeValue = psVar3[0x10];
+      ptr->startScale = psVar3[0x17];
+      ptr->scaleSpeed = psVar3[0x13];
+      (ptr->offset).x = psVar3[0x14];
+      (ptr->offset).y = psVar3[0x15];
+      (ptr->offset).z = psVar3[0x16];
+      ptr->z_undulate = *(char *)((int)psVar3 + 0x25);
+      if ((psVar3[0x11] == -1) && (*(char *)(psVar3 + 0xf) != '\0')) {
+        ptr->fadeStep =
+             (short)((0x1000 - (int)ptr->startFadeValue) / (int)(uint)*(byte *)(psVar3 + 0xf));
+      }
+      else {
+        ptr->fadeStep = psVar3[0x11];
+      }
+      if ((int)*(char *)((int)psVar3 + 0x1b) != -1) {
+        pTVar2 = FX_GetTextureObject(object,(int)*(char *)((int)psVar3 + 0x17),
+                                     (int)*(char *)((int)psVar3 + 0x1b));
+        ptr->texture = pTVar2;
+        ptr->startColor = ptr->startColor | pTVar2->color & 0x3000000U;
+      }
+      if (*(char *)((int)psVar3 + 3) == '\x01') {
+        *(code **)&ptr->fxprim_process = FX_AttachedParticlePrimProcess;
+      }
+      if (*(char *)(psVar3 + 7) != '\0') {
+        ptr->flag_bits = ptr->flag_bits | 1;
+      }
+      if (*(char *)((int)psVar3 + 0xf) != '\0') {
+        ptr->flag_bits = ptr->flag_bits | 2;
+      }
+      FX_InsertGeneralEffect(ptr);
+    }
+  }
+  return ptr;
 }
 
 
@@ -8219,30 +8571,39 @@ FX_StartGenericParticle(_Instance *instance,int num,int segOverride,int lifeOver
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_StartGenericRibbon(struct _Instance *instance /*$a0*/, int num /*$a1*/, int segOverride /*$a2*/, int endOverride /*$a3*/, int InitFlag /*stack 16*/)
- // line 6180, offset 0x8004db54
+ // line 6288, offset 0x8004cc64
 	/* begin block 1 */
-		// Start line: 6181
-		// Start offset: 0x8004DB54
+		// Start line: 6289
+		// Start offset: 0x8004CC64
 		// Variables:
 	// 		struct Object *particle; // $v1
 	// 		struct GenericFXObject *GFXO; // $v1
 	// 		struct _GenericRibbonParams *GRP; // $v1
 	/* end block 1 */
-	// End offset: 0x8004DBDC
-	// End Line: 6210
+	// End offset: 0x8004CD10
+	// End Line: 6324
 
 	/* begin block 2 */
-		// Start line: 15207
+		// Start line: 15347
 	/* end block 2 */
-	// End Line: 15208
+	// End Line: 15348
 
-/* WARNING: Removing unreachable block (ram,0x8004db6c) */
-/* WARNING: Removing unreachable block (ram,0x8004db88) */
-/* WARNING: Removing unreachable block (ram,0x8004db98) */
+/* File: C:\kain2\game\FX.C */
 
 void FX_StartGenericRibbon(_Instance *instance,int num,int segOverride,int endOverride,int InitFlag)
 
 {
+  int iVar1;
+  
+  if (((objectAccess[10].object != (void *)0x0) &&
+      ((iVar1 = *(int *)(*(int *)((int)objectAccess[10].object + 0x1c) + 4) + num * 0x14,
+       *(char *)(iVar1 + 5) == '\0' ||
+       (instance = instance->LinkChild, instance != (_Instance *)0x0)))) &&
+     ((InitFlag == 0 || (*(char *)(iVar1 + 1) != '\0')))) {
+    FX_StartRibbon(instance,(short)*(char *)(iVar1 + 2),(short)*(char *)(iVar1 + 3),
+                   (short)*(char *)(iVar1 + 4),(int)*(short *)(iVar1 + 6),(int)*(short *)(iVar1 + 8)
+                   ,(int)*(short *)(iVar1 + 10),*(long *)(iVar1 + 0xc),*(long *)(iVar1 + 0x10));
+  }
   return;
 }
 
@@ -8250,79 +8611,107 @@ void FX_StartGenericRibbon(_Instance *instance,int num,int segOverride,int endOv
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ FX_StartGenericGlow(struct _Instance *instance /*$a0*/, int num /*$a1*/, int segOverride /*$t1*/, int seg2Override /*$a3*/, int InitFlag /*stack 16*/)
- // line 6212, offset 0x8004dbec
+// void /*$ra*/ FX_StartGenericGlow(struct _Instance *instance /*$a0*/, int num /*$a1*/, int segOverride /*$t0*/, int seg2Override /*$a3*/, int InitFlag /*stack 16*/)
+ // line 6326, offset 0x8004cd20
 	/* begin block 1 */
-		// Start line: 6213
-		// Start offset: 0x8004DBEC
+		// Start line: 6327
+		// Start offset: 0x8004CD20
 		// Variables:
 	// 		struct Object *particle; // $v1
-	// 		struct GenericFXObject *GFXO; // $t0
+	// 		struct GenericFXObject *GFXO; // $t1
 	// 		struct _GenericGlowParams *GGP; // $s0
 	// 		struct _FXGlowEffect *glowEffect; // $a0
 	// 		long *color; // $v1
 
 		/* begin block 1.1 */
-			// Start line: 6234
-			// Start offset: 0x8004DC58
+			// Start line: 6354
+			// Start offset: 0x8004CDAC
 			// Variables:
 		// 		int seg; // $a1
 		/* end block 1.1 */
-		// End offset: 0x8004DC64
-		// End Line: 6236
+		// End offset: 0x8004CDB8
+		// End Line: 6356
 
 		/* begin block 1.2 */
-			// Start line: 6240
-			// Start offset: 0x8004DC9C
+			// Start line: 6360
+			// Start offset: 0x8004CDF0
 			// Variables:
 		// 		int seg; // $a1
 		// 		int segEnd; // $a2
 		/* end block 1.2 */
-		// End offset: 0x8004DCBC
-		// End Line: 6251
+		// End offset: 0x8004CE10
+		// End Line: 6371
 
 		/* begin block 1.3 */
-			// Start line: 6255
-			// Start offset: 0x8004DCEC
+			// Start line: 6375
+			// Start offset: 0x8004CE40
 			// Variables:
 		// 		int seg; // $a1
 		// 		int numSeg; // $a2
 		/* end block 1.3 */
-		// End offset: 0x8004DD34
-		// End Line: 6274
+		// End offset: 0x8004CE88
+		// End Line: 6394
 	/* end block 1 */
-	// End offset: 0x8004DD64
-	// End Line: 6281
+	// End offset: 0x8004CEB8
+	// End Line: 6401
 
 	/* begin block 2 */
-		// Start line: 15278
+		// Start line: 15430
 	/* end block 2 */
-	// End Line: 15279
+	// End Line: 15431
 
-/* WARNING: Removing unreachable block (ram,0x8004dc0c) */
-/* WARNING: Removing unreachable block (ram,0x8004dc28) */
-/* WARNING: Removing unreachable block (ram,0x8004dc38) */
-/* WARNING: Removing unreachable block (ram,0x8004dc94) */
-/* WARNING: Removing unreachable block (ram,0x8004dcec) */
-/* WARNING: Removing unreachable block (ram,0x8004dcf4) */
-/* WARNING: Removing unreachable block (ram,0x8004dcfc) */
-/* WARNING: Removing unreachable block (ram,0x8004dd04) */
-/* WARNING: Removing unreachable block (ram,0x8004dd08) */
-/* WARNING: Removing unreachable block (ram,0x8004dc9c) */
-/* WARNING: Removing unreachable block (ram,0x8004dca4) */
-/* WARNING: Removing unreachable block (ram,0x8004dcac) */
-/* WARNING: Removing unreachable block (ram,0x8004dcb4) */
-/* WARNING: Removing unreachable block (ram,0x8004dcbc) */
-/* WARNING: Removing unreachable block (ram,0x8004dc58) */
-/* WARNING: Removing unreachable block (ram,0x8004dc60) */
-/* WARNING: Removing unreachable block (ram,0x8004dc64) */
-/* WARNING: Removing unreachable block (ram,0x8004dd34) */
-/* WARNING: Removing unreachable block (ram,0x8004dd3c) */
-/* WARNING: Removing unreachable block (ram,0x8004dd4c) */
+/* File: C:\kain2\game\FX.C */
 
 void FX_StartGenericGlow(_Instance *instance,int num,int segOverride,int seg2Override,int InitFlag)
 
 {
+  _FXGlowEffect *glowEffect;
+  long *color;
+  int iVar1;
+  char *pcVar2;
+  
+  if (objectAccess[10].object != (void *)0x0) {
+    pcVar2 = (char *)(*(int *)(*(int *)((int)objectAccess[10].object + 0x1c) + 8) + num * 0x18);
+    if (((InitFlag == 0) || (*pcVar2 != '\0')) &&
+       ((pcVar2[5] == '\0' || (instance = instance->LinkChild, instance != (_Instance *)0x0)))) {
+      iVar1 = (int)pcVar2[3];
+      color = (long *)(*(int *)(*(int *)((int)objectAccess[10].object + 0x1c) + 0x18) +
+                      (uint)(byte)pcVar2[4] * 4);
+      if (iVar1 < 2) {
+        if (segOverride == 0) {
+          segOverride = ZEXT14((byte)pcVar2[1]);
+        }
+        glowEffect = FX_DoInstanceOneSegmentGlow
+                               (instance,segOverride,color,(uint)(byte)pcVar2[6],
+                                *(long *)(pcVar2 + 8),(int)*(short *)(pcVar2 + 0xc),
+                                (int)*(short *)(pcVar2 + 0xe));
+      }
+      else {
+        if (iVar1 == 2) {
+          if ((segOverride == 0) && (seg2Override == 0)) {
+            segOverride = ZEXT14((byte)pcVar2[1]);
+            seg2Override = ZEXT14((byte)pcVar2[2]);
+          }
+          glowEffect = FX_DoInstanceTwoSegmentGlow
+                                 (instance,segOverride,seg2Override,color,(uint)(byte)pcVar2[6],
+                                  *(long *)(pcVar2 + 8),(int)*(short *)(pcVar2 + 0xc));
+        }
+        else {
+          if ((segOverride == 0) && (seg2Override == 0)) {
+            segOverride = ZEXT14((byte)pcVar2[1]);
+            seg2Override = iVar1;
+          }
+          glowEffect = FX_DoInstanceManySegmentGlow
+                                 (instance,segOverride,seg2Override,color,(uint)(byte)pcVar2[6],
+                                  *(long *)(pcVar2 + 8),(int)*(short *)(pcVar2 + 0xc));
+        }
+      }
+      if ((glowEffect != (_FXGlowEffect *)0x0) && (0 < *(int *)(pcVar2 + 0x10))) {
+        glowEffect->lifeTime = (short)*(int *)(pcVar2 + 0x10) * 0x21;
+        FX_SetGlowFades(glowEffect,(int)*(short *)(pcVar2 + 0x14),(int)*(short *)(pcVar2 + 0x16));
+      }
+    }
+  }
   return;
 }
 
@@ -8331,20 +8720,22 @@ void FX_StartGenericGlow(_Instance *instance,int num,int segOverride,int seg2Ove
 // decompiled code
 // original method signature: 
 // struct _FXLightning * /*$ra*/ FX_CreateLightning(struct _Instance *instance /*$s1*/, int lifeTime /*$s2*/, int deg /*$s3*/, int deg_inc /*$s4*/, int width /*stack 16*/, int small_width /*stack 20*/, int segs /*stack 24*/, int sine_size /*stack 28*/, int variation /*stack 32*/, unsigned long color /*stack 36*/, unsigned long glow_color /*stack 40*/)
- // line 6301, offset 0x8004dd74
+ // line 6421, offset 0x8004cec8
 	/* begin block 1 */
-		// Start line: 6302
-		// Start offset: 0x8004DD74
+		// Start line: 6422
+		// Start offset: 0x8004CEC8
 		// Variables:
 	// 		struct _FXLightning *zap; // $s0
 	/* end block 1 */
-	// End offset: 0x8004DE58
-	// End Line: 6337
+	// End offset: 0x8004CFAC
+	// End Line: 6457
 
 	/* begin block 2 */
-		// Start line: 15466
+		// Start line: 15630
 	/* end block 2 */
-	// End Line: 15467
+	// End Line: 15631
+
+/* File: C:\kain2\game\FX.C */
 
 _FXLightning *
 FX_CreateLightning(_Instance *instance,int lifeTime,int deg,int deg_inc,int width,int small_width,
@@ -8387,11 +8778,13 @@ FX_CreateLightning(_Instance *instance,int lifeTime,int deg,int deg_inc,int widt
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_SetLightingPos(struct _FXLightning *zap /*$a0*/, struct _Instance *startInstance /*$a1*/, int startSeg /*$a2*/, struct _Position *startOffset /*$a3*/, struct _Instance *endInstance /*stack 16*/, int endSeg /*stack 20*/, struct _Position *endOffset /*stack 24*/, int matrixSeg /*stack 28*/)
- // line 6358, offset 0x8004de7c
+ // line 6478, offset 0x8004cfd0
 	/* begin block 1 */
-		// Start line: 15592
+		// Start line: 15756
 	/* end block 1 */
-	// End Line: 15593
+	// End Line: 15757
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_SetLightingPos(_FXLightning *zap,_Instance *startInstance,int startSeg,
                       _Position *startOffset,_Instance *endInstance,int endSeg,_Position *endOffset,
@@ -8413,12 +8806,12 @@ void FX_SetLightingPos(_FXLightning *zap,_Instance *startInstance,int startSeg,
       zap->instance = startInstance;
       zap->end_instance = endInstance;
     }
-    if (startInstance != (_Instance *)0x0) goto LAB_8004dec8;
+    if (startInstance != (_Instance *)0x0) goto LAB_8004d01c;
   }
   if (endInstance == (_Instance *)0x0) {
     zap->type = '\x02';
   }
-LAB_8004dec8:
+LAB_8004d01c:
   if (startOffset != (_Position *)0x0) {
     sVar1 = startOffset->z;
     *(undefined4 *)&zap->start_offset = *(undefined4 *)startOffset;
@@ -8439,11 +8832,11 @@ LAB_8004dec8:
 
 // decompiled code
 // original method signature: 
-// struct _FXLightning * /*$ra*/ FX_StartGenericLightning(struct _Instance *instance /*$s4*/, int num /*$a1*/, int segOverride /*$s2*/, int endSegOverride /*$s3*/)
- // line 6387, offset 0x8004df2c
+// struct _FXLightning * /*$ra*/ FX_StartGenericLightning(struct _Instance *instance /*$s2*/, int num /*$a1*/, int segOverride /*$s3*/, int endSegOverride /*$s4*/)
+ // line 6507, offset 0x8004d080
 	/* begin block 1 */
-		// Start line: 6388
-		// Start offset: 0x8004DF2C
+		// Start line: 6508
+		// Start offset: 0x8004D080
 		// Variables:
 	// 		struct _FXLightning *zap; // $s1
 	// 		struct GenericFXObject *GFXO; // $v1
@@ -8451,88 +8844,136 @@ LAB_8004dec8:
 	// 		struct Object *particle; // $v1
 
 		/* begin block 1.1 */
-			// Start line: 6406
-			// Start offset: 0x8004DFF0
+			// Start line: 6534
+			// Start offset: 0x8004D174
 			// Variables:
 		// 		int startSeg; // $a2
 		// 		int endSeg; // $a3
 		/* end block 1.1 */
-		// End offset: 0x8004E038
-		// End Line: 6429
+		// End offset: 0x8004D1BC
+		// End Line: 6557
 	/* end block 1 */
-	// End offset: 0x8004E03C
-	// End Line: 6432
+	// End offset: 0x8004D1C0
+	// End Line: 6560
 
 	/* begin block 2 */
-		// Start line: 15650
+		// Start line: 15814
 	/* end block 2 */
-	// End Line: 15651
+	// End Line: 15815
 
 	/* begin block 3 */
-		// Start line: 15656
+		// Start line: 15820
 	/* end block 3 */
-	// End Line: 15657
+	// End Line: 15821
 
-/* WARNING: Removing unreachable block (ram,0x8004df64) */
-/* WARNING: Removing unreachable block (ram,0x8004dff0) */
-/* WARNING: Removing unreachable block (ram,0x8004dff8) */
-/* WARNING: Removing unreachable block (ram,0x8004dffc) */
-/* WARNING: Removing unreachable block (ram,0x8004e010) */
-/* WARNING: Removing unreachable block (ram,0x8004e004) */
-/* WARNING: Removing unreachable block (ram,0x8004e014) */
-/* WARNING: Removing unreachable block (ram,0x8004e038) */
+/* File: C:\kain2\game\FX.C */
 
 _FXLightning *
 FX_StartGenericLightning(_Instance *instance,int num,int segOverride,int endSegOverride)
 
 {
-  return (_FXLightning *)0x0;
+  _FXLightning *zap;
+  int iVar1;
+  
+  zap = (_FXLightning *)0x0;
+  if (objectAccess[10].object != (void *)0x0) {
+    iVar1 = *(int *)(*(int *)((int)objectAccess[10].object + 0x1c) + 0xc) + num * 0x28;
+    if ((*(short *)(iVar1 + 2) == 0) ||
+       ((*(char *)(iVar1 + 1) != '\0' &&
+        (instance = instance->LinkChild, instance == (_Instance *)0x0)))) {
+      zap = (_FXLightning *)0x0;
+    }
+    else {
+      zap = FX_CreateLightning(instance,(int)*(short *)(iVar1 + 2),(int)*(short *)(iVar1 + 4),
+                               (int)*(short *)(iVar1 + 6),(int)*(short *)(iVar1 + 0x18),
+                               (int)*(short *)(iVar1 + 0x1a),(uint)*(byte *)(iVar1 + 0x17),
+                               (int)*(short *)(iVar1 + 0x1c),(int)*(short *)(iVar1 + 0x1e),
+                               *(ulong *)(iVar1 + 0x20),*(ulong *)(iVar1 + 0x24));
+      if (zap != (_FXLightning *)0x0) {
+        if (segOverride == 0) {
+          segOverride = (int)*(char *)(iVar1 + 0xe);
+        }
+        if (endSegOverride == 0) {
+          endSegOverride = (int)*(char *)(iVar1 + 0xf);
+        }
+        FX_SetLightingPos(zap,instance,segOverride,(_Position *)(iVar1 + 8),instance,endSegOverride,
+                          (_Position *)(iVar1 + 0x10),(int)*(char *)(iVar1 + 0x16));
+      }
+    }
+  }
+  return zap;
 }
 
 
 
 // decompiled code
 // original method signature: 
-// struct _FXBlastringEffect * /*$ra*/ FX_StartGenericBlastring(struct _Instance *instance /*$s4*/, int num /*$a1*/, int segOverride /*$a2*/, int matrixSegOverride /*$a3*/)
- // line 6435, offset 0x8004e05c
+// struct _FXBlastringEffect * /*$ra*/ FX_StartGenericBlastring(struct _Instance *instance /*$s2*/, int num /*$a1*/, int segOverride /*$a2*/, int matrixSegOverride /*$a3*/)
+ // line 6563, offset 0x8004d1e0
 	/* begin block 1 */
-		// Start line: 6436
-		// Start offset: 0x8004E05C
+		// Start line: 6564
+		// Start offset: 0x8004D1E0
 		// Variables:
 	// 		struct GenericFXObject *GFXO; // $v1
-	// 		struct _GenericBlastringParams *GBP; // $s1
+	// 		struct _GenericBlastringParams *GBP; // $s0
 	// 		struct Object *particle; // $v1
 	// 		struct _SVector position; // stack offset -64
-	// 		int segment; // $s2
-	// 		int matrix_segment; // $s3
+	// 		int segment; // $s1
+	// 		int matrix_segment; // $s4
 	// 		struct MATRIX mat; // stack offset -56
 	// 		struct MATRIX *swTransform; // $a0
 	/* end block 1 */
-	// End offset: 0x8004E1E4
-	// End Line: 6485
+	// End offset: 0x8004D38C
+	// End Line: 6618
 
 	/* begin block 2 */
-		// Start line: 15753
+		// Start line: 15933
 	/* end block 2 */
-	// End Line: 15754
+	// End Line: 15934
 
 	/* begin block 3 */
-		// Start line: 15764
+		// Start line: 15944
 	/* end block 3 */
-	// End Line: 15765
+	// End Line: 15945
 
-/* WARNING: Removing unreachable block (ram,0x8004e08c) */
-/* WARNING: Removing unreachable block (ram,0x8004e0bc) */
-/* WARNING: Removing unreachable block (ram,0x8004e0b0) */
-/* WARNING: Removing unreachable block (ram,0x8004e0c0) */
-/* WARNING: Removing unreachable block (ram,0x8004e0d4) */
-/* WARNING: Removing unreachable block (ram,0x8004e0c8) */
-/* WARNING: Removing unreachable block (ram,0x8004e0d8) */
+/* File: C:\kain2\game\FX.C */
 
 _FXBlastringEffect *
 FX_StartGenericBlastring(_Instance *instance,int num,int segOverride,int matrixSegOverride)
 
 {
+  _FXBlastringEffect *p_Var1;
+  MATRIX *pMVar2;
+  int iVar3;
+  _SVector local_40 [5];
+  
+  if ((objectAccess[10].object != (void *)0x0) &&
+     ((iVar3 = *(int *)(*(int *)((int)objectAccess[10].object + 0x1c) + 0x10) + num * 0x30,
+      *(char *)(iVar3 + 1) == '\0' || (instance = instance->LinkChild, instance != (_Instance *)0x0)
+      ))) {
+    if (segOverride == 0) {
+      segOverride = (int)*(char *)(iVar3 + 0xc);
+    }
+    if (matrixSegOverride == 0) {
+      matrixSegOverride = (int)*(short *)(iVar3 + 10);
+    }
+    MATH3D_SetUnityMatrix(200);
+    if (instance->matrix != (MATRIX *)0x0) {
+      pMVar2 = instance->matrix + segOverride;
+      local_40[0].x = *(short *)pMVar2->t + *(short *)(iVar3 + 4);
+      local_40[0].y = *(short *)(pMVar2->t + 1) + *(short *)(iVar3 + 6);
+      local_40[0].z = *(short *)(pMVar2->t + 2) + *(short *)(iVar3 + 8);
+      p_Var1 = FX_DoBlastRing(instance,local_40,200,matrixSegOverride,(int)*(short *)(iVar3 + 0xe),
+                              (int)*(short *)(iVar3 + 0x14),(int)*(short *)(iVar3 + 0x16),
+                              (int)*(short *)(iVar3 + 0x10),(int)*(short *)(iVar3 + 0x12),
+                              *(int *)(iVar3 + 0x18) << 0xc,*(int *)(iVar3 + 0x1c),
+                              (int)*(short *)(iVar3 + 0x20),(int)*(short *)(iVar3 + 0x22),
+                              (int)*(short *)(iVar3 + 0x24),*(long *)(iVar3 + 0x28),
+                              *(long *)(iVar3 + 0x2c),(int)*(short *)(iVar3 + 0x26),
+                              (int)*(short *)(iVar3 + 2),(int)*(char *)(iVar3 + 0xd));
+      return p_Var1;
+    }
+  }
   return (_FXBlastringEffect *)0x0;
 }
 
@@ -8541,37 +8982,63 @@ FX_StartGenericBlastring(_Instance *instance,int num,int segOverride,int matrixS
 // decompiled code
 // original method signature: 
 // struct _FXFlash * /*$ra*/ FX_StartGenericFlash(struct _Instance *instance /*$s2*/, int num /*$a1*/)
- // line 6487, offset 0x8004e204
+ // line 6620, offset 0x8004d3ac
 	/* begin block 1 */
-		// Start line: 6488
-		// Start offset: 0x8004E204
+		// Start line: 6621
+		// Start offset: 0x8004D3AC
 		// Variables:
 	// 		struct GenericFXObject *GFXO; // $v1
 	// 		struct _GenericFlashParams *GFP; // $s1
 	// 		struct Object *particle; // $v1
 	// 		struct _FXFlash *flash; // $s0
 	/* end block 1 */
-	// End offset: 0x8004E2CC
-	// End Line: 6519
+	// End offset: 0x8004D474
+	// End Line: 6652
 
 	/* begin block 2 */
-		// Start line: 15870
+		// Start line: 16077
 	/* end block 2 */
-	// End Line: 15871
+	// End Line: 16078
 
 	/* begin block 3 */
-		// Start line: 15876
+		// Start line: 16083
 	/* end block 3 */
-	// End Line: 15877
+	// End Line: 16084
 
-/* WARNING: Removing unreachable block (ram,0x8004e230) */
-/* WARNING: Removing unreachable block (ram,0x8004e260) */
-/* WARNING: Removing unreachable block (ram,0x8004e2c8) */
+/* File: C:\kain2\game\FX.C */
 
 _FXFlash * FX_StartGenericFlash(_Instance *instance,int num)
 
 {
-  return (_FXFlash *)0x0;
+  _FXFlash *ptr;
+  long lVar1;
+  int iVar2;
+  int iVar3;
+  
+  if (objectAccess[10].object == (void *)0x0) {
+    ptr = (_FXFlash *)0x0;
+  }
+  else {
+    iVar3 = *(int *)(*(int *)((int)objectAccess[10].object + 0x1c) + 0x14) + num * 0xc;
+    ptr = (_FXFlash *)MEMPACK_Malloc(0x24,'\r');
+    if (ptr != (_FXFlash *)0x0) {
+      *(code **)&ptr->continue_process = FX_ContinueFlash;
+      ptr->effectType = -0x78;
+      ptr->instance = instance;
+      ptr->type = '\0';
+      ptr->lifeTime = -1;
+      lVar1 = *(long *)(iVar3 + 4);
+      ptr->currentTime = 0;
+      ptr->color = lVar1;
+      iVar2 = (int)*(short *)(iVar3 + 2) * 0x100;
+      ptr->timeToColor = iVar2;
+      iVar2 = iVar2 + (int)*(short *)(iVar3 + 8) * 0x100;
+      ptr->timeAtColor = iVar2;
+      ptr->timeFromColor = iVar2 + (int)*(short *)(iVar3 + 10) * 0x100;
+      FX_InsertGeneralEffect(ptr);
+    }
+  }
+  return ptr;
 }
 
 
@@ -8579,49 +9046,44 @@ _FXFlash * FX_StartGenericFlash(_Instance *instance,int num)
 // decompiled code
 // original method signature: 
 // long /*$ra*/ FX_GetHealthColor(int currentHealth /*$a0*/)
- // line 6521, offset 0x8004e2e4
+ // line 6654, offset 0x8004d48c
 	/* begin block 1 */
-		// Start line: 6542
-		// Start offset: 0x8004E2E4
+		// Start line: 6675
+		// Start offset: 0x8004D48C
 		// Variables:
 	// 		static long HealthColors[6]; // offset 0x0
 	// 		long color; // $v1
 	/* end block 1 */
-	// End offset: 0x8004E328
-	// End Line: 6559
+	// End offset: 0x8004D4D0
+	// End Line: 6692
 
 	/* begin block 2 */
-		// Start line: 15953
+		// Start line: 16160
 	/* end block 2 */
-	// End Line: 15954
+	// End Line: 16161
 
 	/* begin block 3 */
-		// Start line: 15973
+		// Start line: 16180
 	/* end block 3 */
-	// End Line: 15974
+	// End Line: 16181
 
 	/* begin block 4 */
-		// Start line: 15984
+		// Start line: 16191
 	/* end block 4 */
-	// End Line: 15985
+	// End Line: 16192
+
+/* File: C:\kain2\game\FX.C */
 
 long FX_GetHealthColor(int currentHealth)
 
 {
-  uint uVar1;
+  undefined *puVar1;
   
-  if (currentHealth < 1) {
-    uVar1 = 0x7f;
+  puVar1 = DAT_800c90dc;
+  if ((0 < currentHealth) && (puVar1 = PTR_DAT_800c90f0, (uint)currentHealth < 6)) {
+    puVar1 = (undefined *)(&DAT_800c90dc)[currentHealth + -1];
   }
-  else {
-    if ((uint)currentHealth < 6) {
-      uVar1 = (&DAT_800c5194)[currentHealth + -1];
-    }
-    else {
-      uVar1 = 0x7f0000;
-    }
-  }
-  return uVar1 & 0xfffcfcfc;
+  return (uint)puVar1 & 0xfffcfcfc;
 }
 
 
@@ -8629,16 +9091,18 @@ long FX_GetHealthColor(int currentHealth)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_Start_Snow(int percent /*$a0*/)
- // line 6563, offset 0x8004e338
+ // line 6696, offset 0x8004d4e0
 	/* begin block 1 */
-		// Start line: 16037
+		// Start line: 16244
 	/* end block 1 */
-	// End Line: 16038
+	// End Line: 16245
 
 	/* begin block 2 */
-		// Start line: 16038
+		// Start line: 16245
 	/* end block 2 */
-	// End Line: 16039
+	// End Line: 16246
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_Start_Snow(int percent)
 
@@ -8652,16 +9116,18 @@ void FX_Start_Snow(int percent)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_Start_Rain(int percent /*$a0*/)
- // line 6568, offset 0x8004e36c
+ // line 6701, offset 0x8004d514
 	/* begin block 1 */
-		// Start line: 16047
+		// Start line: 16254
 	/* end block 1 */
-	// End Line: 16048
+	// End Line: 16255
 
 	/* begin block 2 */
-		// Start line: 16048
+		// Start line: 16255
 	/* end block 2 */
-	// End Line: 16049
+	// End Line: 16256
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_Start_Rain(int percent)
 
@@ -8675,35 +9141,53 @@ void FX_Start_Rain(int percent)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_StartLightbeam(struct _Instance *instance /*$s1*/, int startSeg /*$s2*/, int endSeg /*$s3*/, int color_num /*$a3*/)
- // line 6574, offset 0x8004e398
+ // line 6707, offset 0x8004d540
 	/* begin block 1 */
-		// Start line: 6575
-		// Start offset: 0x8004E398
+		// Start line: 6708
+		// Start offset: 0x8004D540
 		// Variables:
 	// 		struct Object *particle; // $v0
 	// 		struct _FXLightBeam *beam; // $v0
 	// 		struct GenericFXObject *GFXO; // $v0
 	// 		long color; // $s0
 	/* end block 1 */
-	// End offset: 0x8004E420
-	// End Line: 6599
+	// End offset: 0x8004D5C8
+	// End Line: 6732
 
 	/* begin block 2 */
-		// Start line: 16059
+		// Start line: 16266
 	/* end block 2 */
-	// End Line: 16060
+	// End Line: 16267
 
 	/* begin block 3 */
-		// Start line: 16065
+		// Start line: 16272
 	/* end block 3 */
-	// End Line: 16066
+	// End Line: 16273
 
-/* WARNING: Removing unreachable block (ram,0x8004e3c8) */
-/* WARNING: Removing unreachable block (ram,0x8004e3f4) */
+/* File: C:\kain2\game\FX.C */
 
 void FX_StartLightbeam(_Instance *instance,int startSeg,int endSeg,int color_num)
 
 {
+  char *ptr;
+  undefined4 uVar1;
+  
+  if (objectAccess[10].object != (void *)0x0) {
+    uVar1 = *(undefined4 *)
+             (color_num * 4 + *(int *)(*(int *)((int)objectAccess[10].object + 0x1c) + 0x18));
+    ptr = MEMPACK_Malloc(0x18,'\r');
+    if (ptr != (char *)0x0) {
+      ptr[0xc] = -0x7b;
+      *(_Instance **)(ptr + 8) = instance;
+      *(undefined4 *)(ptr + 4) = 0;
+      ptr[0xd] = '\0';
+      *(undefined2 *)(ptr + 0xe) = 0xffff;
+      *(short *)(ptr + 0x10) = (short)startSeg;
+      *(short *)(ptr + 0x12) = (short)endSeg;
+      *(undefined4 *)(ptr + 0x14) = uVar1;
+      FX_InsertGeneralEffect(ptr);
+    }
+  }
   return;
 }
 
@@ -8711,60 +9195,53 @@ void FX_StartLightbeam(_Instance *instance,int startSeg,int endSeg,int color_num
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ FX_StartInstanceEffect(struct _Instance *instance /*$s2*/, struct ObjectEffect *effect /*$s0*/, int InitFlag /*$s3*/)
- // line 6611, offset 0x8004e43c
+// void /*$ra*/ FX_StartInstanceEffect(struct _Instance *instance /*$s3*/, struct ObjectEffect *effect /*$s0*/, int InitFlag /*$s2*/)
+ // line 6744, offset 0x8004d5e4
 	/* begin block 1 */
-		// Start line: 6612
-		// Start offset: 0x8004E43C
+		// Start line: 6745
+		// Start offset: 0x8004D5E4
 		// Variables:
 	// 		long color; // stack offset -32
 
 		/* begin block 1.1 */
-			// Start line: 6645
-			// Start offset: 0x8004E514
+			// Start line: 6778
+			// Start offset: 0x8004D6BC
 			// Variables:
 		// 		long numberOfSegments; // $a2
 		/* end block 1.1 */
-		// End offset: 0x8004E560
-		// End Line: 6665
+		// End offset: 0x8004D708
+		// End Line: 6798
 
 		/* begin block 1.2 */
-			// Start line: 6676
-			// Start offset: 0x8004E58C
-			// Variables:
-		// 		struct _FXParticle *currentParticle; // $a0
-		/* end block 1.2 */
-		// End offset: 0x8004E5A4
-		// End Line: 6683
-
-		/* begin block 1.3 */
-			// Start line: 6726
-			// Start offset: 0x8004E660
+			// Start line: 6863
+			// Start offset: 0x8004D7CC
 			// Variables:
 		// 		struct _FXParticle *currentParticle; // $a0
 		// 		struct evObjectDraftData *draft; // $s1
-		/* end block 1.3 */
-		// End offset: 0x8004E698
-		// End Line: 6735
+		/* end block 1.2 */
+		// End offset: 0x8004D804
+		// End Line: 6872
 
-		/* begin block 1.4 */
-			// Start line: 6762
-			// Start offset: 0x8004E75C
+		/* begin block 1.3 */
+			// Start line: 6899
+			// Start offset: 0x8004D8C8
 			// Variables:
 		// 		struct FXSplinter *splinterData; // $t0
 		// 		struct GenericTune *tune; // $v1
 		// 		short shardFlags; // $v0
-		/* end block 1.4 */
-		// End offset: 0x8004E7B8
-		// End Line: 6775
+		/* end block 1.3 */
+		// End offset: 0x8004D924
+		// End Line: 6912
 	/* end block 1 */
-	// End offset: 0x8004E7B8
-	// End Line: 6781
+	// End offset: 0x8004D924
+	// End Line: 6918
 
 	/* begin block 2 */
-		// Start line: 16146
+		// Start line: 16353
 	/* end block 2 */
-	// End Line: 16147
+	// End Line: 16354
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_StartInstanceEffect(_Instance *instance,ObjectEffect *effect,int InitFlag)
 
@@ -8772,22 +9249,23 @@ void FX_StartInstanceEffect(_Instance *instance,ObjectEffect *effect,int InitFla
   ushort uVar1;
   short sVar2;
   ulong uVar3;
-  _FXParticle *ptr;
-  uint *puVar4;
+  _FXParticle *p_Var4;
+  uint *puVar5;
   uint numSegments;
   FXSplinter *splintDef;
-  long local_20 [2];
+  undefined *local_20 [2];
   
-  local_20[0] = 0x4080;
+  local_20[0] = &DAT_00004080;
   switch(effect->effectNumber) {
   case '\x01':
     FX_TorchFlame(instance,(ushort)effect->modifierList[0]);
     break;
   case '\x02':
     if ((uint)effect->modifierList[1] - 1 < 5) {
-      local_20[0] = (&FX_ColorArray)[effect->modifierList[1]];
+      local_20[0] = (undefined *)FX_ColorArray[effect->modifierList[1]];
     }
-    FX_DoInstanceOneSegmentGlow(instance,(uint)effect->modifierList[0],local_20,1,0x400,0x32,100);
+    FX_DoInstanceOneSegmentGlow
+              (instance,(uint)effect->modifierList[0],(long *)local_20,1,0x400,0x32,100);
     break;
   case '\x03':
     numSegments = (uint)effect->modifierList[1];
@@ -8795,19 +9273,10 @@ void FX_StartInstanceEffect(_Instance *instance,ObjectEffect *effect,int InitFla
       numSegments = 1;
     }
     if ((uint)effect->modifierList[2] - 1 < 5) {
-      local_20[0] = (&FX_ColorArray)[effect->modifierList[2]];
+      local_20[0] = (undefined *)FX_ColorArray[effect->modifierList[2]];
     }
     FX_DoInstanceManySegmentGlow
-              (instance,(uint)effect->modifierList[0],numSegments,local_20,1,0x400,0x41);
-    break;
-  case '\x04':
-    ptr = FX_GetParticle(instance,0);
-    if (ptr != (_FXParticle *)0x0) {
-      *(code **)&ptr->continue_process = FX_GenericBubbleProcess;
-      ptr->lifeTime = -1;
-      ptr->startSegment = effect->modifierList[0];
-      FX_InsertGeneralEffect(ptr);
-    }
+              (instance,(uint)effect->modifierList[0],numSegments,(long *)local_20,1,0x400,0x41);
     break;
   case '\x05':
     FX_StartGenericParticle
@@ -8835,16 +9304,17 @@ void FX_StartInstanceEffect(_Instance *instance,ObjectEffect *effect,int InitFla
   case '\f':
     uVar3 = INSTANCE_Query(instance,0x16);
     if ((uVar3 != 0) &&
-       (ptr = FX_StartGenericParticle
-                        (instance,(uint)effect->modifierList[0],(uint)effect->modifierList[1],
-                         (uint)effect->modifierList[2],InitFlag), ptr != (_FXParticle *)0x0)) {
-      (ptr->direction).x = *(short *)(uVar3 + 2);
-      (ptr->direction).y = *(short *)(uVar3 + 4);
-      (ptr->direction).z = *(short *)(uVar3 + 6);
+       (p_Var4 = FX_StartGenericParticle
+                           (instance,(uint)effect->modifierList[0],(uint)effect->modifierList[1],
+                            (uint)effect->modifierList[2],InitFlag), p_Var4 != (_FXParticle *)0x0))
+    {
+      (p_Var4->direction).x = *(short *)(uVar3 + 2);
+      (p_Var4->direction).y = *(short *)(uVar3 + 4);
+      (p_Var4->direction).z = *(short *)(uVar3 + 6);
       uVar1 = *(ushort *)(uVar3 + 8);
-      ptr->birthRadius = 0;
-      *(code **)&ptr->fxprim_modify_process = FX_UpdraftPrimModify;
-      ptr->primLifeTime = uVar1 >> 3;
+      p_Var4->birthRadius = 0;
+      *(code **)&p_Var4->fxprim_modify_process = FX_UpdraftPrimModify;
+      p_Var4->primLifeTime = uVar1 >> 3;
     }
     break;
   case '\r':
@@ -8871,14 +9341,13 @@ void FX_StartInstanceEffect(_Instance *instance,ObjectEffect *effect,int InitFla
   case '\x11':
     splintDef = (FXSplinter *)0x0;
     if (InitFlag == 0) {
-      puVar4 = (uint *)instance->object->data;
+      puVar5 = (uint *)instance->object->data;
       sVar2 = 0;
-      if (puVar4 != (uint *)0x0) {
-        splintDef = (FXSplinter *)puVar4[1];
-        sVar2 = (short)((*puVar4 & 2) << 3);
+      if (puVar5 != (uint *)0x0) {
+        splintDef = (FXSplinter *)puVar5[1];
+        sVar2 = (short)((*puVar5 & 2) << 3);
       }
-      _FX_BuildSplinters(instance,(SVECTOR *)0x0,(SVECTOR *)0x0,(SVECTOR *)0x0,splintDef,gFXT,
-                         (TDRFuncPtr__FX_BuildSplinters6fxSetup)0x0,
+      _FX_BuildSplinters(instance,0,0,0,splintDef,gFXT,(TDRFuncPtr__FX_BuildSplinters6fxSetup)0x0,
                          (TDRFuncPtr__FX_BuildSplinters7fxProcess)0x0,(int)sVar2);
     }
   }
@@ -8890,21 +9359,23 @@ void FX_StartInstanceEffect(_Instance *instance,ObjectEffect *effect,int InitFla
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_EndInstanceEffects(struct _Instance *instance /*$s1*/)
- // line 6785, offset 0x8004e7d4
+ // line 6922, offset 0x8004d940
 	/* begin block 1 */
-		// Start line: 6786
-		// Start offset: 0x8004E7D4
+		// Start line: 6923
+		// Start offset: 0x8004D940
 		// Variables:
 	// 		struct _FXGeneralEffect *currentEffect; // $a0
 	// 		struct _FXGeneralEffect *nextEffect; // $s0
 	/* end block 1 */
-	// End offset: 0x8004E814
-	// End Line: 6799
+	// End offset: 0x8004D980
+	// End Line: 6936
 
 	/* begin block 2 */
-		// Start line: 16514
+		// Start line: 16729
 	/* end block 2 */
-	// End Line: 16515
+	// End Line: 16730
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_EndInstanceEffects(_Instance *instance)
 
@@ -8930,21 +9401,23 @@ void FX_EndInstanceEffects(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_GetSpiralPoint(int radius /*$s1*/, int deg /*$s0*/, int *x /*$s2*/, int *y /*$s3*/)
- // line 6808, offset 0x8004e828
+ // line 6946, offset 0x8004d994
 	/* begin block 1 */
-		// Start line: 6809
-		// Start offset: 0x8004E828
+		// Start line: 6947
+		// Start offset: 0x8004D994
 		// Variables:
 	// 		int prevx; // $a0
 	// 		int prevy; // $v0
 	/* end block 1 */
-	// End offset: 0x8004E8D4
-	// End Line: 6823
+	// End offset: 0x8004DA40
+	// End Line: 6961
 
 	/* begin block 2 */
-		// Start line: 16564
+		// Start line: 16781
 	/* end block 2 */
-	// End Line: 16565
+	// End Line: 16782
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_GetSpiralPoint(int radius,int deg,int *x,int *y)
 
@@ -8968,7 +9441,7 @@ void FX_GetSpiralPoint(int radius,int deg,int *x,int *y)
   else {
     iVar1 = iVar1 + 0x800;
   }
-  *y = (iVar1 >> 0xc) + 0xcb;
+  *y = (iVar1 >> 0xc) + 0xc9;
   return;
 }
 
@@ -8976,83 +9449,182 @@ void FX_GetSpiralPoint(int radius,int deg,int *x,int *y)
 
 // decompiled code
 // original method signature: 
-// void /*$ra*/ FX_CalcSpiral(int degchange /*$s4*/)
- // line 6850, offset 0x8004e8fc
+// void /*$ra*/ FX_GetLinePoint(int radius /*$a0*/, int next_radius /*$s1*/, int deg /*$a2*/, int next_deg /*$s0*/, int *pntx /*stack 16*/, int *pnty /*stack 20*/, int part /*stack 24*/)
+ // line 6990, offset 0x8004da68
 	/* begin block 1 */
-		// Start line: 6851
-		// Start offset: 0x8004E8FC
+		// Start line: 6991
+		// Start offset: 0x8004DA68
 		// Variables:
-	// 		int radius; // $s1
-	// 		int deg; // $s0
-	// 		int n; // $s3
-	// 		int pntx; // stack offset -48
-	// 		int pnty; // stack offset -44
-	// 		int px; // stack offset -40
-	// 		int py; // stack offset -36
-	// 		int mx; // stack offset -32
-	// 		int my; // stack offset -28
+	// 		int x1; // stack offset -32
+	// 		int y1; // stack offset -28
+	// 		int x2; // stack offset -24
+	// 		int y2; // stack offset -20
 	/* end block 1 */
-	// End offset: 0x8004EA44
-	// End Line: 6906
+	// End offset: 0x8004DB08
+	// End Line: 6998
 
 	/* begin block 2 */
-		// Start line: 16652
+		// Start line: 16873
 	/* end block 2 */
-	// End Line: 16653
+	// End Line: 16874
+
+/* File: C:\kain2\game\FX.C */
+
+void FX_GetLinePoint(int radius,int next_radius,int deg,int next_deg,int *pntx,int *pnty,int part)
+
+{
+  int iVar1;
+  int local_20;
+  int local_1c;
+  int local_18;
+  int local_14;
+  
+  FX_GetSpiralPoint(radius,deg,&local_20,&local_1c);
+  FX_GetSpiralPoint(next_radius,next_deg,&local_18,&local_14);
+  iVar1 = (local_18 - local_20) * part;
+  if (iVar1 < 0) {
+    iVar1 = iVar1 + 0xfff;
+  }
+  *pntx = local_20 + (iVar1 >> 0xc);
+  part = (local_14 - local_1c) * part;
+  if (part < 0) {
+    part = part + 0xfff;
+  }
+  *pnty = local_1c + (part >> 0xc);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ FX_CalcSpiral(int degchange /*stack 0*/)
+ // line 7002, offset 0x8004db34
+	/* begin block 1 */
+		// Start line: 7003
+		// Start offset: 0x8004DB34
+		// Variables:
+	// 		int radius; // $s2
+	// 		int deg; // $s1
+	// 		int n; // $s3
+	// 		int pntx; // stack offset -72
+	// 		int pnty; // stack offset -68
+	// 		int px; // stack offset -64
+	// 		int py; // stack offset -60
+	// 		int mx; // stack offset -56
+	// 		int my; // stack offset -52
+	// 		int mod; // $s0
+	// 		int next_deg; // $s4
+	// 		int next_radius; // $s5
+	// 		int minx; // $s7
+	// 		int maxx; // $s6
+	// 		int miny; // stack offset -48
+	// 		int maxy; // $fp
+	/* end block 1 */
+	// End offset: 0x8004DDD0
+	// End Line: 7065
+
+	/* begin block 2 */
+		// Start line: 16900
+	/* end block 2 */
+	// End Line: 16901
 
 /* WARNING: Could not reconcile some variable overlaps */
+/* File: C:\kain2\game\FX.C */
 
 void FX_CalcSpiral(int degchange)
 
 {
-  uint deg;
+  int deg;
   int radius;
   int iVar1;
-  uint uVar2;
+  int part;
+  int next_deg;
+  int iVar2;
+  int next_radius;
+  int iVar3;
+  int iVar4;
+  int iVar5;
+  int local_48;
+  int local_44;
+  int local_40;
+  int local_3c;
+  int local_38;
+  int local_34;
   int local_30;
-  int local_2c;
-  int local_28;
-  int local_24;
-  int local_20;
-  int local_1c;
   
-  radius = 0x2000;
+  iVar4 = 0x7fff;
+  iVar3 = -0x7fff;
+  iVar5 = -0x7fff;
+  iVar2 = 0x2000;
   deg = 0;
-  FX_GetSpiralPoint(0x2000,0,&local_30,&local_2c);
-  uVar2 = 0;
-  DVECTOR_800d270c.vx = (short)local_30;
-  DVECTOR_800d270c.vy = (short)local_2c;
+  part = 0;
+  local_30 = 0x7fff;
+  FX_GetSpiralPoint(0x2000,0,&local_48,&local_44);
+  Spiral_Array[64].vx = (short)local_48;
+  Spiral_Array[64].vy = (short)local_44;
+  next_deg = 0x2000;
   iVar1 = 0;
   do {
     if (Spiral_Number == 0) {
-      if ((uVar2 & 7) == 0) {
-        radius = radius + 0x2200;
+      radius = next_deg;
+      next_deg = part;
+      next_radius = iVar2;
+      if (iVar1 % Spiral_Mod == 0) {
+        next_radius = iVar2 + Spiral_Mod * 0x440;
+        next_deg = part + degchange * Spiral_Mod;
+        deg = part;
+        radius = iVar2;
       }
+      part = (iVar1 % Spiral_Mod << 0xc) / Spiral_Mod;
+      FX_GetLinePoint(radius,next_radius,deg,next_deg,&local_48,&local_44,part);
+      FX_GetLinePoint(radius + 0x1c00,next_radius + 0x1c00,deg,next_deg,&local_40,&local_3c,part);
+      FX_GetLinePoint(radius + -0x1c00,next_radius + -0x1c00,deg,next_deg,&local_38,&local_34,part);
+      part = next_deg;
+      iVar2 = next_radius;
     }
     else {
-      radius = radius + 0x440;
+      radius = next_deg + 0x440;
+      deg = deg + degchange;
+      FX_GetSpiralPoint(radius,deg,&local_48,&local_44);
+      FX_GetSpiralPoint(next_deg + 0x2040,deg,&local_40,&local_3c);
+      FX_GetSpiralPoint(next_deg + -0x17c0,deg,&local_38,&local_34);
     }
-    deg = deg + degchange & 0xfff;
-    FX_GetSpiralPoint(radius,deg,&local_30,&local_2c);
-    *(undefined2 *)((int)&Spiral_Array.vx + iVar1) = (short)local_30;
-    *(undefined2 *)((int)&Spiral_Array.vy + iVar1) = (short)local_2c;
-    if ((int)uVar2 < 0x3f) {
-      FX_GetSpiralPoint(radius + 0x1c00,deg,&local_28,&local_24);
-      FX_GetSpiralPoint(radius + -0x1c00,deg,&local_20,&local_1c);
+    Spiral_Array[iVar1].vx = (short)local_48;
+    Spiral_Array[iVar1].vy = (short)local_44;
+    if (iVar1 == 0x3f) {
+      local_40 = local_48;
+      local_3c = local_44;
+      local_38 = local_48;
+      local_34 = local_44;
     }
-    else {
-      local_28 = local_30;
-      local_24 = local_2c;
-      local_20 = local_30;
-      local_1c = local_2c;
+    Spiral_OffsetP[iVar1].vx = (short)local_40;
+    Spiral_OffsetP[iVar1].vy = (short)local_3c;
+    if (local_40 < iVar4) {
+      iVar4 = local_40;
     }
-    uVar2 = uVar2 + 1;
-    *(undefined2 *)((int)&Spiral_OffsetP.vx + iVar1) = (undefined2)local_28;
-    *(undefined2 *)((int)&Spiral_OffsetP.vy + iVar1) = (undefined2)local_24;
-    *(undefined2 *)((int)&Spiral_OffsetM.vx + iVar1) = (undefined2)local_20;
-    *(undefined2 *)((int)&Spiral_OffsetM.vy + iVar1) = (undefined2)local_1c;
-    iVar1 = iVar1 + 4;
-  } while ((int)uVar2 < 0x40);
+    if (iVar3 < local_40) {
+      iVar3 = local_40;
+    }
+    if (local_3c < local_30) {
+      local_30 = local_3c;
+    }
+    if (iVar5 < local_3c) {
+      iVar5 = local_3c;
+    }
+    next_radius = iVar1 + 1;
+    Spiral_OffsetM[iVar1].vx = (short)local_38;
+    Spiral_OffsetM[iVar1].vy = (short)local_34;
+    next_deg = radius;
+    iVar1 = next_radius;
+  } while (next_radius < 0x40);
+  deg = ((iVar3 - iVar4) / 2) * 0x140;
+  if (deg < 0) {
+    deg = deg + 0x1ff;
+  }
+  Spiral_Glow_X = (iVar4 + iVar3) / 2;
+  Spiral_Glow_Y = (local_30 + iVar5) / 2;
+  Spiral_Glow_Size = (deg >> 9) + 2;
   return;
 }
 
@@ -9061,70 +9633,59 @@ void FX_CalcSpiral(int degchange)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_Spiral(struct _PrimPool *primPool /*stack 0*/, unsigned long **ot /*stack 4*/)
- // line 6923, offset 0x8004ea64
+ // line 7085, offset 0x8004de38
 	/* begin block 1 */
-		// Start line: 6924
-		// Start offset: 0x8004EA64
+		// Start line: 7086
+		// Start offset: 0x8004DE38
 		// Variables:
 	// 		struct _POLY_2G4 *poly; // $s2
 	// 		long prev; // $s3
 	// 		long offp; // $s7
-	// 		long offm; // $s5
+	// 		long offm; // $s4
 	// 		int n; // $s1
 	// 		struct DR_TPAGE *drtpage; // $v0
-	// 		int health; // $s4
-	// 		int health_mod; // $t0
-	// 		long no_color; // stack offset -56
-	// 		long color; // stack offset -60
+	// 		int health; // $fp
+	// 		int health_mod; // $t1
+	// 		long no_color; // stack offset -76
+	// 		long color; // stack offset -80
 	// 		static short cnt; // offset 0x68
-	// 		int current_cnt; // stack offset -52
+	// 		int current_cnt; // stack offset -72
 	// 		int max64; // $a0
-	// 		long SPIRAL_COLOR; // stack offset -80
-	// 		long SPIRAL_COLOR2; // stack offset -72
+	// 		long SPIRAL_COLOR; // $t3
+	// 		long SPIRAL_COLOR2; // $t2
 	// 		long SPIRAL_COLOR3; // stack offset -68
-	// 		long SPIRAL_COLOR_END; // stack offset -64
-	// 		long SPIRAL_NOCOLOR; // $a3
+	// 		long SPIRAL_COLOR_END; // $s5
+	// 		long SPIRAL_NOCOLOR; // $a2
 
 		/* begin block 1.1 */
-			// Start line: 6973
-			// Start offset: 0x8004EAD8
-			// Variables:
-		// 		int num; // $s0
-		// 		long Spiral_Glow_Color; // stack offset -88
-		// 		long Spiral_Glow_Color2; // stack offset -84
-		// 		long black; // stack offset -76
-		/* end block 1.1 */
-		// End offset: 0x8004EBE0
-		// End Line: 7003
-
-		/* begin block 1.2 */
-			// Start line: 7085
-			// Start offset: 0x8004ED60
+			// Start line: 7222
+			// Start offset: 0x8004E034
 			// Variables:
 		// 		int tmp; // $v1
-		/* end block 1.2 */
-		// End offset: 0x8004EDC8
-		// End Line: 7099
+		/* end block 1.1 */
+		// End offset: 0x8004E090
+		// End Line: 7236
 
-		/* begin block 1.3 */
-			// Start line: 7182
-			// Start offset: 0x8004EF14
+		/* begin block 1.2 */
+			// Start line: 7319
+			// Start offset: 0x8004E1E0
 			// Variables:
 		// 		static short deg; // offset 0x6a
-		// 		struct _Vector f1; // stack offset -104
-		/* end block 1.3 */
-		// End offset: 0x8004EF68
-		// End Line: 7197
+		// 		struct _Vector f1; // stack offset -96
+		/* end block 1.2 */
+		// End offset: 0x8004E234
+		// End Line: 7334
 	/* end block 1 */
-	// End offset: 0x8004EF68
-	// End Line: 7203
+	// End offset: 0x8004E234
+	// End Line: 7340
 
 	/* begin block 2 */
-		// Start line: 16973
+		// Start line: 17232
 	/* end block 2 */
-	// End Line: 16974
+	// End Line: 17233
 
-/* WARNING: Removing unreachable block (ram,0x8004ed78) */
+/* WARNING: Removing unreachable block (ram,0x8004e04c) */
+/* File: C:\kain2\game\FX.C */
 
 void FX_Spiral(_PrimPool *primPool,ulong **ot)
 
@@ -9132,153 +9693,149 @@ void FX_Spiral(_PrimPool *primPool,ulong **ot)
   short sVar1;
   uint angle;
   long lVar2;
-  int currentHealth;
-  DVECTOR *pDVar3;
-  int iVar4;
-  uint *puVar5;
-  uint *puVar6;
-  DVECTOR DVar7;
-  int iVar8;
+  int p0;
+  DVECTOR *v0;
+  DVECTOR DVar3;
+  DVECTOR DVar4;
+  DVECTOR *pDVar5;
+  int iVar6;
+  uint *puVar7;
+  uint *puVar8;
   DVECTOR DVar9;
   DVECTOR DVar10;
-  _Vector local_68;
-  int local_58;
-  long local_54;
+  DVECTOR DVar11;
+  DVECTOR DVar12;
+  int iVar13;
+  _Vector local_60;
   DVECTOR local_50;
-  undefined4 local_4c;
-  DVECTOR local_48;
+  DVECTOR local_4c;
+  int local_48;
   DVECTOR local_44;
-  DVECTOR local_40;
-  DVECTOR local_3c;
-  DVECTOR local_38;
+  uint local_40;
+  DVECTOR *local_38;
   int local_34;
-  int local_30;
+  DVECTOR local_30;
+  DVECTOR local_2c;
   
-  local_3c = (DVECTOR)0x3a002a15;
-  local_50 = (DVECTOR)0x3afffcd3;
-  local_48 = (DVECTOR)0x3ae0dcba;
-  local_44 = (DVECTOR)0x3ac0bb9d;
-  local_40 = (DVECTOR)0x3a483017;
+  if (((DAT_800d20d4 != 1000) && (DAT_800d20d6 == 0)) && (Spiral_Number != 0)) {
+    FX_Health_Spiral(1,Spiral_Current,Spiral_Max);
+  }
+  DVar4 = (DVECTOR)0x3afcffd3;
+  DVar3 = (DVECTOR)0x3adce0ba;
+  DVar11 = (DVECTOR)0x3a483017;
+  local_50 = (DVECTOR)0x3a002a15;
+  local_44 = (DVECTOR)0x3abbc09d;
   if (Spiral_Number == 0) {
-    local_4c = 0;
-    currentHealth = Spiral_Current / 0x411a;
-    local_58 = FX_GetHealthColor(currentHealth);
-    if (currentHealth < 6) {
-      iVar8 = ((Spiral_Current + currentHealth * -0x411a) * 0x1000) / 0x411a;
-      if (0x1000 < iVar8) {
-        iVar8 = 0x1000;
-      }
-      local_54 = FX_GetHealthColor(currentHealth + 1);
-      LoadAverageCol((byte *)&local_58,(byte *)&local_54,0x1000 - iVar8,iVar8,(undefined *)&local_58
-                    );
-    }
     if (Spiral_Current == Spiral_Max) {
-      DAT_800cf178 = DAT_800cf178 + 1;
-      if (0x50 < DAT_800cf178) {
-        DAT_800cf178 = 0;
+      DAT_800cfddc = DAT_800cfddc + 1;
+      if (0x50 < DAT_800cfddc) {
+        DAT_800cfddc = 0;
       }
-      local_50 = (DVECTOR)0x3afffcd3;
     }
     else {
-      local_50 = (DVECTOR)(local_58 << 1 | 0x3a000000);
+      DVar4 = (DVECTOR)0x3a00ff00;
+      DVar3 = (DVECTOR)0x3a00e000;
+      local_44 = (DVECTOR)0x3a00bf00;
+      DVar11 = (DVECTOR)0x3a004500;
     }
-    LoadAverageCol((byte *)&local_50,(byte *)&local_4c,0xe18,0x1e8,(undefined *)&local_48);
-    local_48 = (DVECTOR)((uint)local_48 & 0xffffff | 0x3a000000);
-    LoadAverageCol((byte *)&local_50,(byte *)&local_4c,0xc00,0x400,(undefined *)&local_44);
-    local_44 = (DVECTOR)((uint)local_44 & 0xffffff | 0x3a000000);
-    LoadAverageCol((byte *)&local_50,(byte *)&local_4c,0x461,0xb9f,(undefined *)&local_40);
-    local_3c = (DVECTOR)0x3a00150b;
-    local_40 = (DVECTOR)((uint)local_40 & 0xffffff | 0x3a000000);
+    local_50 = (DVECTOR)0x3a00150b;
   }
   else {
-    DAT_800cf178 = DAT_800cf178 + 1;
-    if (0x50 < DAT_800cf178) {
-      DAT_800cf178 = 0;
+    DAT_800cfddc = DAT_800cfddc + 1;
+    if (0x50 < DAT_800cfddc) {
+      DAT_800cfddc = 0;
     }
   }
   lVar2 = Spiral_Max;
   if (Spiral_Max < 0) {
     lVar2 = Spiral_Max + 0x3f;
   }
-  currentHealth = lVar2 >> 6;
-  iVar8 = Spiral_Current / currentHealth;
-  puVar5 = primPool->nextPrim;
-  currentHealth = ((Spiral_Current - iVar8 * currentHealth) * 0x1000) / currentHealth;
-  if (puVar5 + 0x451 < primPool->lastPrim) {
-    iVar4 = 0;
-    local_34 = (int)DAT_800cf178;
-    pDVar3 = (DVECTOR *)(puVar5 + 0x10);
-    DVar7 = DVECTOR_800d270c;
-    DVar9 = DVECTOR_800d270c;
-    DVar10 = DVECTOR_800d270c;
-    local_38 = local_3c;
+  p0 = lVar2 >> 6;
+  iVar13 = Spiral_Current / p0;
+  puVar7 = primPool->nextPrim;
+  p0 = ((Spiral_Current - iVar13 * p0) * 0x1000) / p0;
+  if (puVar7 + 0x451 < primPool->lastPrim) {
+    iVar6 = 0;
+    v0 = &local_50;
+    local_40 = (uint)DVar4 & 0xff000000;
+    local_48 = (int)DAT_800cfddc;
+    pDVar5 = (DVECTOR *)(puVar7 + 0x10);
+    DVar9 = Spiral_Array[64];
+    DVar10 = Spiral_Array[64];
+    DVar12 = Spiral_Array[64];
+    local_4c = local_50;
     do {
-      puVar6 = puVar5;
-      pDVar3[-0xb] = local_3c;
-      pDVar3[-7] = local_3c;
-      if (iVar8 < iVar4) {
-        local_3c = local_38;
+      puVar8 = puVar7;
+      pDVar5[-0xb] = local_50;
+      pDVar5[-7] = local_50;
+      if (iVar13 < iVar6) {
+        local_50 = local_4c;
       }
       else {
-        angle = (int)(iVar4 + local_34 & 0xfU) >> 2;
-        if (angle == 1) {
-LAB_8004edbc:
-          local_3c = local_48;
-        }
-        else {
-          if (1 < angle) {
-            if (angle == 2) {
-              local_3c = local_44;
-              goto LAB_8004edc8;
-            }
-            if (angle == 3) goto LAB_8004edbc;
+        angle = (int)(iVar6 + local_48 & 0xfU) >> 2;
+        local_50 = DVar3;
+        if (angle != 1) {
+          if (angle < 2) {
+LAB_8004e078:
+            local_50 = DVar4;
           }
-          local_3c = local_50;
+          else {
+            if (angle == 2) {
+              local_50 = local_44;
+            }
+            else {
+              if (angle != 3) goto LAB_8004e078;
+            }
+          }
         }
       }
-LAB_8004edc8:
-      if (iVar4 == iVar8) {
-        local_30 = currentHealth;
-        LoadAverageCol((byte *)&local_3c,(byte *)&local_38,currentHealth,0x1000 - currentHealth,
-                       (undefined *)&local_3c);
-        local_3c = (DVECTOR)((uint)local_3c & 0xffffff | (uint)local_50 & 0xff000000);
-        currentHealth = local_30;
+      if (iVar6 == iVar13) {
+        local_38 = v0;
+        local_34 = p0;
+        local_30 = DVar3;
+        local_2c = DVar4;
+        LoadAverageCol((u_char *)v0,(u_char *)&local_4c,p0,0x1000 - p0,(u_char *)v0);
+        local_50 = (DVECTOR)((uint)local_50 & 0xffffff | local_40);
+        v0 = local_38;
+        p0 = local_34;
+        DVar3 = local_30;
+        DVar4 = local_2c;
       }
-      pDVar3[-0xf] = local_40;
-      pDVar3[-0xd] = local_40;
-      pDVar3[-3] = local_40;
-      pDVar3[-1] = local_40;
-      pDVar3[-6] = DVar7;
-      pDVar3[-10] = DVar7;
-      pDVar3[-0xe] = DVar10;
-      pDVar3[-2] = DVar9;
-      pDVar3[-9] = local_3c;
-      pDVar3[-5] = local_3c;
-      DVar7 = (&Spiral_Array)[iVar4];
-      DVar10 = (&Spiral_OffsetP)[iVar4];
-      DVar9 = (&Spiral_OffsetM)[iVar4];
-      iVar4 = iVar4 + 1;
-      pDVar3[-4] = DVar7;
-      pDVar3[-8] = DVar7;
-      pDVar3[-0xc] = DVar10;
-      *pDVar3 = DVar9;
-      pDVar3 = pDVar3 + 0x11;
-      *puVar6 = (uint)ot[1] & 0xffffff | 0x10000000;
-      ot[1] = (ulong *)((uint)puVar6 & 0xffffff);
-      puVar5 = puVar6 + 0x11;
-    } while (iVar4 < 0x40);
-    puVar6[0x12] = 0xe1000620;
+      pDVar5[-0xf] = DVar11;
+      pDVar5[-0xd] = DVar11;
+      pDVar5[-3] = DVar11;
+      pDVar5[-1] = DVar11;
+      pDVar5[-6] = DVar9;
+      pDVar5[-10] = DVar9;
+      pDVar5[-0xe] = DVar12;
+      pDVar5[-2] = DVar10;
+      pDVar5[-9] = local_50;
+      pDVar5[-5] = local_50;
+      DVar9 = Spiral_Array[iVar6];
+      DVar12 = Spiral_OffsetP[iVar6];
+      DVar10 = Spiral_OffsetM[iVar6];
+      iVar6 = iVar6 + 1;
+      pDVar5[-4] = DVar9;
+      pDVar5[-8] = DVar9;
+      pDVar5[-0xc] = DVar12;
+      *pDVar5 = DVar10;
+      pDVar5 = pDVar5 + 0x11;
+      *puVar8 = (uint)ot[1] & 0xffffff | 0x10000000;
+      ot[1] = (ulong *)((uint)puVar8 & 0xffffff);
+      puVar7 = puVar8 + 0x11;
+    } while (iVar6 < 0x40);
+    puVar8[0x12] = 0xe1000620;
     sVar1 = Spiral_Number;
-    *puVar5 = (uint)ot[1] & 0xffffff | 0x1000000;
-    ot[1] = (ulong *)((uint)puVar5 & 0xffffff);
-    primPool->nextPrim = puVar6 + 0x13;
+    *puVar7 = (uint)ot[1] & 0xffffff | 0x1000000;
+    ot[1] = (ulong *)((uint)puVar7 & 0xffffff);
+    primPool->nextPrim = puVar8 + 0x13;
     if ((sVar1 != 0) || (Spiral_Current == Spiral_Max)) {
-      local_68.x = 0x1b6;
-      local_68.y = 0xcb;
-      angle = (uint)DAT_800cf17a - 0x40 & 0xfff;
-      DAT_800cf17a = (ushort)angle;
-      DRAW_CreateAGlowingCircle(&local_68,0x140,gameTrackerX.primPool,ot,5,0xa00000,0x20,0x20,angle)
-      ;
+      local_60.y = Spiral_Glow_Y;
+      angle = (uint)DAT_800cfdde - 0x20 & 0xfff;
+      local_60.x = Spiral_Glow_X;
+      DAT_800cfdde = (ushort)angle;
+      DRAW_CreateAGlowingCircle
+                (&local_60,0x140,DAT_800d210c,ot,5,0x8000,Spiral_Glow_Size,Spiral_Glow_Size,angle);
     }
   }
   return;
@@ -9289,20 +9846,22 @@ LAB_8004edc8:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_Health_Spiral(int number /*$a0*/, int current_health /*$s0*/, int max_health /*$s1*/)
- // line 7205, offset 0x8004ef98
+ // line 7342, offset 0x8004e264
 	/* begin block 1 */
-		// Start line: 7206
-		// Start offset: 0x8004EF98
+		// Start line: 7343
+		// Start offset: 0x8004E264
 		// Variables:
 	// 		int degchange; // $v1
 	/* end block 1 */
-	// End offset: 0x8004F06C
-	// End Line: 7237
+	// End offset: 0x8004E39C
+	// End Line: 7390
 
 	/* begin block 2 */
-		// Start line: 17841
+		// Start line: 17969
 	/* end block 2 */
-	// End Line: 17842
+	// End Line: 17970
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_Health_Spiral(int number,int current_health,int max_health)
 
@@ -9310,6 +9869,21 @@ void FX_Health_Spiral(int number,int current_health,int max_health)
   bool bVar1;
   short sVar2;
   
+  if (number == 0) {
+    if (Spiral_Mod < 6) {
+      Spiral_Number = 0;
+      Spiral_Mod = Spiral_Mod + 1;
+      FX_CalcSpiral(0x80);
+      return;
+    }
+  }
+  else {
+    if (1 < Spiral_Mod) {
+      Spiral_Mod = Spiral_Mod + -1;
+      FX_CalcSpiral(0x80);
+      return;
+    }
+  }
   switch(number) {
   default:
     sVar2 = 0x80;
@@ -9334,14 +9908,14 @@ void FX_Health_Spiral(int number,int current_health,int max_health)
     Spiral_Degrees = Spiral_Degrees + 4;
   }
   else {
-    if (Spiral_Degrees <= sVar2) goto LAB_8004f060;
+    if (Spiral_Degrees <= sVar2) goto LAB_8004e388;
     bVar1 = (short)(Spiral_Degrees + -4) < sVar2;
     Spiral_Degrees = Spiral_Degrees + -4;
   }
   if (bVar1) {
     Spiral_Degrees = sVar2;
   }
-LAB_8004f060:
+LAB_8004e388:
   FX_CalcSpiral((int)Spiral_Degrees);
   Spiral_Current = current_health;
   Spiral_Max = max_health;
@@ -9353,22 +9927,22 @@ LAB_8004f060:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_Spiral_Init()
- // line 7241, offset 0x8004f088
+ // line 7392, offset 0x8004e3b0
 	/* begin block 1 */
-		// Start line: 17916
+		// Start line: 18069
 	/* end block 1 */
-	// End Line: 17917
+	// End Line: 18070
 
-/* WARNING: Unknown calling convention yet parameter storage is locked */
+/* File: C:\kain2\game\FX.C */
 
 void FX_Spiral_Init(void)
 
 {
   Spiral_Max = 100000;
   Spiral_Current = 100000;
-  Spiral_Number = 3;
-  Spiral_Degrees = 0xe0;
-  FX_CalcSpiral(0xe0);
+  Spiral_Number = 1;
+  Spiral_Degrees = 0x80;
+  FX_CalcSpiral(0x80);
   return;
 }
 
@@ -9377,140 +9951,137 @@ void FX_Spiral_Init(void)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_DrawModel(struct Object *object /*$s6*/, int model_num /*$s7*/, struct _SVector *rotation /*$s0*/, struct _SVector *position /*$s1*/, struct _SVector *offset /*stack 16*/, int transflag /*stack 20*/)
- // line 7269, offset 0x8004f0c8
+ // line 7421, offset 0x8004e3f0
 	/* begin block 1 */
-		// Start line: 7270
-		// Start offset: 0x8004F0C8
+		// Start line: 7422
+		// Start offset: 0x8004E3F0
 		// Variables:
 	// 		struct _Model *model; // $v0
-	// 		struct _MFace *mface; // $t1
+	// 		struct _MFace *mface; // $t0
 	// 		struct _MVertex *vertexList; // $t3
 	// 		struct TextureMT3 *texture; // $a1
 	// 		struct MATRIX matrix; // stack offset -88
-	// 		int i; // $t0
+	// 		int i; // $a3
 	// 		struct POLY_GT3 *poly; // $s4
 	// 		unsigned long **drawot; // $s5
 	// 		struct _SVector output; // stack offset -56
-	// 		long color; // $t2
+	// 		long color; // $t1
 
 		/* begin block 1.1 */
-			// Start line: 7314
-			// Start offset: 0x8004F220
+			// Start line: 7465
+			// Start offset: 0x8004E51C
 			// Variables:
 		// 		long clip; // stack offset -48
 		/* end block 1.1 */
-		// End offset: 0x8004F2EC
-		// End Line: 7335
+		// End offset: 0x8004E614
+		// End Line: 7493
 	/* end block 1 */
-	// End offset: 0x8004F308
-	// End Line: 7342
+	// End offset: 0x8004E63C
+	// End Line: 7500
 
 	/* begin block 2 */
-		// Start line: 17978
+		// Start line: 18130
 	/* end block 2 */
-	// End Line: 17979
+	// End Line: 18131
 
 	/* begin block 3 */
-		// Start line: 17990
+		// Start line: 18142
 	/* end block 3 */
-	// End Line: 17991
+	// End Line: 18143
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_DrawModel(Object *object,int model_num,_SVector *rotation,_SVector *position,
                  _SVector *offset,int transflag)
 
 {
-  ulong uVar1;
-  long lVar2;
+  uint uVar1;
+  int iVar2;
   undefined4 in_zero;
   undefined4 in_at;
   _Model *p_Var3;
   _MVertex *p_Var4;
-  uint uVar5;
+  _MVertex *p_Var5;
   _MVertex *p_Var6;
-  _MVertex *p_Var7;
-  ulong *puVar8;
-  ulong *puVar9;
-  ushort *puVar10;
-  int iVar11;
-  _MFace *p_Var12;
-  ulong uVar13;
-  _MVertex *p_Var14;
-  ulong *puVar15;
+  uint *puVar7;
+  ushort *puVar8;
+  int iVar9;
+  _MFace *p_Var10;
+  uint uVar11;
+  _MVertex *p_Var12;
+  uint *puVar13;
   MATRIX MStack88;
-  short local_38;
-  short local_36;
-  short local_34;
+  SVECTOR local_38;
   int local_30;
   
-  lVar2 = gameTrackerX.defVVRemoveDist;
-  puVar15 = (gameTrackerX.primPool)->nextPrim;
+  iVar2 = DAT_800d22a4;
+  puVar13 = *(uint **)(DAT_800d210c + 4);
   PushMatrix();
-  MATH3D_SetUnityMatrix(&MStack88);
-  RotMatrixX((int)rotation->x,(int)&MStack88);
-  RotMatrixY((int)rotation->y,(short *)&MStack88);
-  RotMatrixZ((int)rotation->z,(short *)&MStack88);
-  PIPE3D_AspectAdjustMatrix(&MStack88);
-  ApplyMatrixSV(&MStack88,offset,&local_38);
-  MStack88.t[0] = (int)position->x + (int)local_38;
-  MStack88.t[1] = (int)position->y + (int)local_36;
-  MStack88.t[2] = (int)position->z + (int)local_34;
-  SetRotMatrix((undefined4 *)&MStack88);
-  SetTransMatrix((int)&MStack88);
-  uVar13 = 0x34808080;
+  MATH3D_SetUnityMatrix(0xa8);
+  RotMatrixX((int)rotation->x,&MStack88);
+  RotMatrixY((int)rotation->y,&MStack88);
+  RotMatrixZ((int)rotation->z,&MStack88);
+  PIPE3D_AspectAdjustMatrix(0xa8);
+  ApplyMatrixSV(&MStack88,(SVECTOR *)offset,&local_38);
+  MStack88.t[0] = (int)position->x + (int)local_38.vx;
+  MStack88.t[1] = (int)position->y + (int)local_38.vy;
+  MStack88.t[2] = (int)position->z + (int)local_38.vz;
+  SetRotMatrix(&MStack88);
+  SetTransMatrix(&MStack88);
+  uVar11 = 0x34808080;
   if (transflag != 0) {
-    uVar13 = 0x36404040;
+    uVar11 = 0x36404040;
   }
   if (object != (Object *)0x0) {
-    if ((gameTrackerX.primPool)->lastPrim <= puVar15 + 10) {
-      return;
-    }
     p_Var3 = object->modelList[model_num];
-    p_Var12 = p_Var3->faceList;
-    p_Var14 = p_Var3->vertexList;
-    iVar11 = p_Var3->numFaces + -1;
-    if (iVar11 != -1) {
-      puVar10 = &(p_Var12->face).v2;
-      puVar9 = puVar15 + 8;
+    p_Var10 = p_Var3->faceList;
+    p_Var12 = p_Var3->vertexList;
+    iVar9 = p_Var3->numFaces + -1;
+    if (iVar9 != -1) {
+      puVar8 = &(p_Var10->face).v2;
       do {
-        puVar8 = *(ulong **)(puVar10 + 2);
-        p_Var7 = p_Var14 + (p_Var12->face)._2;
-        p_Var6 = p_Var14 + puVar10[-1];
-        p_Var4 = p_Var14 + *puVar10;
-        setCopReg(2,in_zero,*(undefined4 *)&p_Var7->vertex);
-        setCopReg(2,in_at,*(undefined4 *)&(p_Var7->vertex).z);
-        setCopReg(2,p_Var4,*(undefined4 *)&p_Var6->vertex);
-        setCopReg(2,p_Var6,*(undefined4 *)&(p_Var6->vertex).z);
-        setCopReg(2,p_Var7,*(undefined4 *)&p_Var4->vertex);
-        setCopReg(2,puVar8,*(undefined4 *)&(p_Var4->vertex).z);
+        if (*(uint **)(DAT_800d210c + 8) <= puVar13 + 10) {
+          *(uint **)(DAT_800d210c + 4) = puVar13;
+          goto LAB_8004e634;
+        }
+        puVar7 = *(uint **)(puVar8 + 2);
+        p_Var6 = p_Var12 + (p_Var10->face).v0;
+        p_Var5 = p_Var12 + puVar8[-1];
+        p_Var4 = p_Var12 + *puVar8;
+        setCopReg(2,in_zero,*(undefined4 *)&p_Var6->vertex);
+        setCopReg(2,in_at,*(undefined4 *)&(p_Var6->vertex).z);
+        setCopReg(2,p_Var4,*(undefined4 *)&p_Var5->vertex);
+        setCopReg(2,p_Var5,*(undefined4 *)&(p_Var5->vertex).z);
+        setCopReg(2,p_Var6,*(undefined4 *)&p_Var4->vertex);
+        setCopReg(2,puVar7,*(undefined4 *)&(p_Var4->vertex).z);
         copFunction(2,0x280030);
-        puVar9[-5] = *puVar8;
-        puVar9[-2] = puVar8[1];
-        puVar9[1] = puVar8[2];
+        puVar13[3] = *puVar7;
+        puVar13[6] = puVar7[1];
+        puVar13[9] = puVar7[2];
         copFunction(2,0x1400006);
-        puVar9[-1] = uVar13;
-        puVar9[-4] = uVar13;
-        puVar9[-7] = uVar13;
+        puVar13[7] = uVar11;
+        puVar13[4] = uVar11;
+        puVar13[1] = uVar11;
         local_30 = getCopReg(2,0x18);
         if (local_30 < 0) {
           uVar1 = getCopReg(2,0xc);
-          puVar15[2] = uVar1;
+          puVar13[2] = uVar1;
           uVar1 = getCopReg(2,0xd);
-          puVar15[5] = uVar1;
+          puVar13[5] = uVar1;
           uVar1 = getCopReg(2,0xe);
-          *puVar9 = uVar1;
-          puVar9 = puVar9 + 10;
-          *puVar15 = *(uint *)(lVar2 + 4) & 0xffffff | 0x9000000;
-          uVar5 = (uint)puVar15 & 0xffffff;
-          puVar15 = puVar15 + 10;
-          *(uint *)(lVar2 + 4) = uVar5;
+          puVar13[8] = uVar1;
+          *puVar13 = *(uint *)(iVar2 + 4) & 0xffffff | 0x9000000;
+          *(uint *)(iVar2 + 4) = (uint)puVar13 & 0xffffff;
+          puVar13 = puVar13 + 10;
         }
-        puVar10 = puVar10 + 6;
-        iVar11 = iVar11 + -1;
-        p_Var12 = p_Var12 + 1;
-      } while (iVar11 != -1);
+        puVar8 = puVar8 + 6;
+        iVar9 = iVar9 + -1;
+        p_Var10 = p_Var10 + 1;
+      } while (iVar9 != -1);
     }
   }
-  (gameTrackerX.primPool)->nextPrim = puVar15;
+  *(uint **)(DAT_800d210c + 4) = puVar13;
+LAB_8004e634:
   PopMatrix();
   return;
 }
@@ -9520,21 +10091,23 @@ void FX_DrawModel(Object *object,int model_num,_SVector *rotation,_SVector *posi
 // decompiled code
 // original method signature: 
 // void /*$ra*/ fx_calc_points(struct _SVector *points /*$s1*/, int degrees /*$s0*/, int radius /*$s3*/, int radius2 /*$s4*/, int radius3 /*stack 16*/)
- // line 7356, offset 0x8004f334
+ // line 7514, offset 0x8004e668
 	/* begin block 1 */
-		// Start line: 7357
-		// Start offset: 0x8004F334
+		// Start line: 7515
+		// Start offset: 0x8004E668
 		// Variables:
 	// 		int cosval; // $s0
 	// 		int sinval; // $v0
 	/* end block 1 */
-	// End offset: 0x8004F334
-	// End Line: 7357
+	// End offset: 0x8004E668
+	// End Line: 7515
 
 	/* begin block 2 */
-		// Start line: 18182
+		// Start line: 18346
 	/* end block 2 */
-	// End Line: 18183
+	// End Line: 18347
+
+/* File: C:\kain2\game\FX.C */
 
 void fx_calc_points(_SVector *points,int degrees,int radius,int radius2,int radius3)
 
@@ -9569,42 +10142,41 @@ void fx_calc_points(_SVector *points,int degrees,int radius,int radius2,int radi
 // decompiled code
 // original method signature: 
 // long /*$ra*/ fx_get_startz(struct _SVector *position /*$a0*/)
- // line 7374, offset 0x8004f444
+ // line 7532, offset 0x8004e778
 	/* begin block 1 */
-		// Start line: 7375
-		// Start offset: 0x8004F444
+		// Start line: 7533
+		// Start offset: 0x8004E778
 		// Variables:
 	// 		struct MATRIX tmpmat; // stack offset -40
 	/* end block 1 */
-	// End offset: 0x8004F48C
-	// End Line: 7383
+	// End offset: 0x8004E7C0
+	// End Line: 7541
 
 	/* begin block 2 */
-		// Start line: 18225
+		// Start line: 18389
 	/* end block 2 */
-	// End Line: 18226
+	// End Line: 18390
+
+/* File: C:\kain2\game\FX.C */
 
 long fx_get_startz(_SVector *position)
 
 {
   undefined4 in_zero;
   undefined4 in_at;
-  undefined auStack40 [20];
-  undefined4 local_14;
-  undefined4 local_10;
-  int local_c;
+  MATRIX MStack40;
   
   setCopReg(2,in_zero,*(undefined4 *)position);
   setCopReg(2,in_at,*(undefined4 *)&position->z);
   copFunction(2,0x480012);
-  local_14 = getCopReg(2,0x19);
-  local_10 = getCopReg(2,0x1a);
-  local_c = getCopReg(2,0x1b);
-  SetTransMatrix((int)auStack40);
-  if (local_c < 0) {
-    local_c = local_c + 3;
+  MStack40.t[0] = getCopReg(2,0x19);
+  MStack40.t[1] = getCopReg(2,0x1a);
+  MStack40.t[2] = getCopReg(2,0x1b);
+  SetTransMatrix(&MStack40);
+  if (MStack40.t[2] < 0) {
+    MStack40.t[2] = MStack40.t[2] + 3;
   }
-  return local_c >> 2;
+  return MStack40.t[2] >> 2;
 }
 
 
@@ -9612,10 +10184,10 @@ long fx_get_startz(_SVector *position)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_DrawRing(struct MATRIX *wcTransform /*$s0*/, struct _SVector *position /*$s3*/, struct MATRIX *matrix /*$s4*/, int radius /*stack 12*/, int radius2 /*stack 16*/, int radius3 /*stack 20*/, int z1 /*stack 24*/, int z2 /*stack 28*/, int z3 /*stack 32*/, long color /*stack 36*/, int sortInWorld /*stack 40*/)
- // line 7386, offset 0x8004f49c
+ // line 7544, offset 0x8004e7d0
 	/* begin block 1 */
-		// Start line: 7387
-		// Start offset: 0x8004F49C
+		// Start line: 7545
+		// Start offset: 0x8004E7D0
 		// Variables:
 	// 		int n; // $s3
 	// 		struct _POLY_2G4T *poly; // $s1
@@ -9629,51 +10201,55 @@ long fx_get_startz(_SVector *position)
 	// 		long sz2; // stack offset -48
 	// 		long startz; // $s7
 	/* end block 1 */
-	// End offset: 0x8004F718
-	// End Line: 7463
+	// End offset: 0x8004EA4C
+	// End Line: 7621
 
 	/* begin block 2 */
-		// Start line: 18250
+		// Start line: 18414
 	/* end block 2 */
-	// End Line: 18251
+	// End Line: 18415
 
 	/* begin block 3 */
-		// Start line: 18260
+		// Start line: 18424
 	/* end block 3 */
-	// End Line: 18261
+	// End Line: 18425
 
-void FX_DrawRing(MATRIX *wcTransform,_SVector *position,MATRIX *matrix,int radius,int radius2,
+/* File: C:\kain2\game\FX.C */
+
+void FX_DrawRing(undefined wcTransform,_SVector *position,undefined matrix,int radius,int radius2,
                 int radius3,int z1,int z2,int z3,long color,int sortInWorld)
 
 {
   long lVar1;
   int iVar2;
   uint uVar3;
+  undefined3 in_register_00000011;
   uint *puVar4;
-  ulong *puVar5;
-  ulong *puVar6;
+  undefined3 in_register_00000019;
+  uint *puVar5;
+  uint *puVar6;
   uint uVar7;
   int iVar8;
   int degrees;
   _SVector _Stack96;
   undefined2 local_54;
   undefined2 local_4c;
-  ulong local_48;
-  ulong local_44;
-  ulong local_40;
+  uint local_48;
+  uint local_44;
+  uint local_40;
   int local_38;
   undefined4 local_34;
   int local_30;
-  long local_2c;
+  int local_2c;
   
-  puVar6 = (gameTrackerX.primPool)->nextPrim;
-  local_2c = gameTrackerX.defVVRemoveDist;
-  if (puVar6 + 0x240 < (gameTrackerX.primPool)->lastPrim) {
+  puVar6 = *(uint **)(DAT_800d210c + 4);
+  local_2c = DAT_800d22a4;
+  if (puVar6 + 0x240 < *(uint **)(DAT_800d210c + 8)) {
     PushMatrix();
-    SetRotMatrix((undefined4 *)wcTransform);
-    SetTransMatrix((int)wcTransform);
+    SetRotMatrix((MATRIX *)CONCAT31(in_register_00000011,wcTransform));
+    SetTransMatrix((MATRIX *)CONCAT31(in_register_00000011,wcTransform));
     lVar1 = fx_get_startz(position);
-    SetRotMatrix((undefined4 *)matrix);
+    SetRotMatrix((MATRIX *)CONCAT31(in_register_00000019,matrix));
     _Stack96.z = (short)z1;
     local_54 = (undefined2)z2;
     local_4c = (undefined2)z3;
@@ -9731,7 +10307,7 @@ void FX_DrawRing(MATRIX *wcTransform,_SVector *position,MATRIX *matrix,int radiu
       iVar8 = iVar8 + 1;
       degrees = degrees + 0x80;
     } while (iVar8 < 0x20);
-    (gameTrackerX.primPool)->nextPrim = puVar6;
+    *(uint **)(DAT_800d210c + 4) = puVar6;
     PopMatrix();
   }
   return;
@@ -9742,29 +10318,34 @@ void FX_DrawRing(MATRIX *wcTransform,_SVector *position,MATRIX *matrix,int radiu
 // decompiled code
 // original method signature: 
 // void /*$ra*/ fx_setTex(struct DVECTOR *x /*$a0*/, unsigned char *uv /*$a1*/, int tx /*$a2*/, int offset /*$a3*/)
- // line 7465, offset 0x8004f748
+ // line 7623, offset 0x8004ea7c
 	/* begin block 1 */
-		// Start line: 18477
+		// Start line: 18641
 	/* end block 1 */
-	// End Line: 18478
+	// End Line: 18642
 
 	/* begin block 2 */
-		// Start line: 18478
+		// Start line: 18642
 	/* end block 2 */
-	// End Line: 18479
+	// End Line: 18643
 
-void fx_setTex(DVECTOR *x,uchar *uv,int tx,int offset)
+/* File: C:\kain2\game\FX.C */
+
+void fx_setTex(undefined x,uchar *uv,int tx,int offset)
 
 {
   uchar uVar1;
+  undefined3 in_register_00000011;
+  char *pcVar2;
   
-  *uv = *(char *)&x->vx - (char)tx;
+  pcVar2 = (char *)CONCAT31(in_register_00000011,x);
+  *uv = *pcVar2 - (char)tx;
   uVar1 = -1;
-  if (x->vy < 0x100) {
-    uVar1 = *(uchar *)&x->vy;
+  if (*(short *)(pcVar2 + 2) < 0x100) {
+    uVar1 = pcVar2[2];
   }
   uv[1] = uVar1;
-  x->vy = x->vy + (short)offset;
+  *(short *)(pcVar2 + 2) = *(short *)(pcVar2 + 2) + (short)offset;
   return;
 }
 
@@ -9773,10 +10354,10 @@ void fx_setTex(DVECTOR *x,uchar *uv,int tx,int offset)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_DrawRing2(struct MATRIX *wcTransform /*$s0*/, struct _SVector *position /*$s1*/, struct MATRIX *matrix /*$s3*/, int radius /*stack 12*/, int radius2 /*stack 16*/, int radius3 /*stack 20*/, int z1 /*stack 24*/, int z2 /*stack 28*/, int z3 /*stack 32*/, long offset /*stack 36*/, int sortInWorld /*stack 40*/)
- // line 7474, offset 0x8004f78c
+ // line 7632, offset 0x8004eac0
 	/* begin block 1 */
-		// Start line: 7475
-		// Start offset: 0x8004F78C
+		// Start line: 7633
+		// Start offset: 0x8004EAC0
 		// Variables:
 	// 		int n; // $s3
 	// 		struct POLY_FT4 *poly; // $s2
@@ -9791,71 +10372,75 @@ void fx_setTex(DVECTOR *x,uchar *uv,int tx,int offset)
 	// 		short tx; // $s0
 	// 		long dispYPos; // $s0
 	/* end block 1 */
-	// End offset: 0x8004FAF0
-	// End Line: 7561
+	// End offset: 0x8004EE24
+	// End Line: 7719
 
 	/* begin block 2 */
-		// Start line: 18495
+		// Start line: 18659
 	/* end block 2 */
-	// End Line: 18496
+	// End Line: 18660
 
 	/* begin block 3 */
-		// Start line: 18506
+		// Start line: 18670
 	/* end block 3 */
-	// End Line: 18507
+	// End Line: 18671
 
 /* WARNING: Could not reconcile some variable overlaps */
+/* File: C:\kain2\game\FX.C */
 
-void FX_DrawRing2(MATRIX *wcTransform,_SVector *position,MATRIX *matrix,int radius,int radius2,
+void FX_DrawRing2(undefined wcTransform,_SVector *position,undefined matrix,int radius,int radius2,
                  int radius3,int z1,int z2,int z3,long offset,int sortInWorld)
 
 {
   ushort uVar1;
   bool bVar2;
-  ushort uVar3;
-  long lVar4;
+  char cVar3;
+  ushort uVar4;
+  long lVar5;
   int tx;
-  uint *puVar5;
-  uint uVar6;
+  undefined3 in_register_00000011;
+  uint *puVar6;
   uint uVar7;
-  ulong *uv;
-  ulong *puVar8;
-  int iVar9;
-  uint uVar10;
+  undefined3 in_register_00000019;
+  uint uVar8;
+  uint *uv;
+  uint *puVar9;
+  int iVar10;
+  uint uVar11;
   int degrees;
   _SVector _Stack104;
   undefined2 local_5c;
   undefined2 local_54;
-  ulong local_50;
+  uint local_50;
   undefined4 local_4c;
-  ulong local_48;
+  uint local_48;
   int local_40;
   undefined4 local_3c;
   int local_38;
-  long local_34;
+  int local_34;
   uint local_30;
   
-  puVar8 = (gameTrackerX.primPool)->nextPrim;
-  local_34 = gameTrackerX.defVVRemoveDist;
-  if (puVar8 + 0x140 < (gameTrackerX.primPool)->lastPrim) {
+  puVar9 = *(uint **)(DAT_800d210c + 4);
+  local_34 = DAT_800d22a4;
+  if (puVar9 + 0x140 < *(uint **)(DAT_800d210c + 8)) {
     PushMatrix();
-    SetRotMatrix((undefined4 *)wcTransform);
-    SetTransMatrix((int)wcTransform);
-    lVar4 = fx_get_startz(position);
-    SetRotMatrix((undefined4 *)matrix);
+    SetRotMatrix((MATRIX *)CONCAT31(in_register_00000011,wcTransform));
+    SetTransMatrix((MATRIX *)CONCAT31(in_register_00000011,wcTransform));
+    lVar5 = fx_get_startz(position);
+    SetRotMatrix((MATRIX *)CONCAT31(in_register_00000019,matrix));
     _Stack104.z = (short)z1;
     local_5c = (undefined2)z2;
-    uVar7 = (gameTrackerX.gameData.asmData.dispPage ^ 1U) << 8;
+    uVar8 = (DAT_800d20d0 ^ 1) << 8;
     local_54 = (undefined2)z3;
     fx_calc_points(&_Stack104,0,radius,radius2,radius3);
     local_50 = getCopReg(2,0xc);
     local_4c = getCopReg(2,0xd);
     local_48 = getCopReg(2,0xe);
-    iVar9 = 0;
-    uVar10 = (int)(uVar7 & 0x100) >> 4;
-    uVar7 = (uVar7 & 0x200) << 2;
-    local_30 = uVar10 | 0x100 | uVar7;
-    uv = puVar8 + 9;
+    iVar10 = 0;
+    uVar11 = (int)(uVar8 & 0x100) >> 4;
+    uVar8 = (uVar8 & 0x200) << 2;
+    local_30 = uVar11 | 0x100 | uVar8;
+    uv = puVar9 + 9;
     degrees = 0x80;
     do {
       fx_calc_points(&_Stack104,degrees,radius,radius2,radius3);
@@ -9886,18 +10471,19 @@ void FX_DrawRing2(MATRIX *wcTransform,_SVector *position,MATRIX *matrix,int radi
       }
       else {
         if (tx < 0) {
-          uVar3 = (ushort)((int)(tx + 0x400U & 0x3ff) >> 6);
+          uVar4 = (ushort)((int)(tx + 0x400U & 0x3ff) >> 6);
         }
         else {
-          uVar3 = (ushort)(((uint)uVar1 & 0x3c0) >> 6);
+          uVar4 = (ushort)(((uint)uVar1 & 0x3c0) >> 6);
         }
-        *(ushort *)((int)uv + -0xe) = (ushort)uVar10 | uVar3 | 0x100 | (ushort)uVar7;
+        *(ushort *)((int)uv + -0xe) = (ushort)uVar11 | uVar4 | 0x100 | (ushort)uVar8;
       }
+      cVar3 = (char)puVar9;
       tx = (int)(short)(uVar1 & 0xffc0);
-      fx_setTex((DVECTOR *)(puVar8 + 2),(uchar *)(puVar8 + 3),tx,offset);
-      fx_setTex((DVECTOR *)(puVar8 + 4),(uchar *)(puVar8 + 5),tx,offset);
-      fx_setTex((DVECTOR *)(puVar8 + 6),(uchar *)(puVar8 + 7),tx,offset);
-      fx_setTex((DVECTOR *)(puVar8 + 8),(uchar *)uv,tx,offset);
+      fx_setTex(cVar3 + '\b',(uchar *)(puVar9 + 3),tx,offset);
+      fx_setTex(cVar3 + '\x10',(uchar *)(puVar9 + 5),tx,offset);
+      fx_setTex(cVar3 + '\x18',(uchar *)(puVar9 + 7),tx,offset);
+      fx_setTex(cVar3 + ' ',(uchar *)uv,tx,offset);
       if (local_38 < local_40) {
         local_40 = local_38;
       }
@@ -9906,23 +10492,23 @@ void FX_DrawRing2(MATRIX *wcTransform,_SVector *position,MATRIX *matrix,int radi
       }
       local_40 = local_40 >> 2;
       if (0 < local_40) {
-        bVar2 = local_40 <= lVar4;
-        if ((sortInWorld == 0) && (local_40 = lVar4 + 0x10, bVar2)) {
+        bVar2 = local_40 <= lVar5;
+        if ((sortInWorld == 0) && (local_40 = lVar5 + 0x10, bVar2)) {
           local_40 = 1;
         }
         if (local_40 - 1U < 0xbff) {
           uv = uv + 10;
-          puVar5 = (uint *)(local_40 * 4 + local_34);
-          uVar6 = (uint)puVar8 & 0xffffff;
-          *puVar8 = *puVar5 & 0xffffff | 0x9000000;
-          puVar8 = puVar8 + 10;
-          *puVar5 = uVar6;
+          puVar6 = (uint *)(local_40 * 4 + local_34);
+          uVar7 = (uint)puVar9 & 0xffffff;
+          *puVar9 = *puVar6 & 0xffffff | 0x9000000;
+          puVar9 = puVar9 + 10;
+          *puVar6 = uVar7;
         }
       }
-      iVar9 = iVar9 + 1;
+      iVar10 = iVar10 + 1;
       degrees = degrees + 0x80;
-    } while (iVar9 < 0x20);
-    (gameTrackerX.primPool)->nextPrim = puVar8;
+    } while (iVar10 < 0x20);
+    *(uint **)(DAT_800d210c + 4) = puVar9;
     PopMatrix();
   }
   return;
@@ -9933,10 +10519,10 @@ void FX_DrawRing2(MATRIX *wcTransform,_SVector *position,MATRIX *matrix,int radi
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_DrawFField(struct MATRIX *wcTransform /*$s2*/, struct _FXForceFieldEffect *field /*$s0*/)
- // line 7585, offset 0x8004fb20
+ // line 7743, offset 0x8004ee54
 	/* begin block 1 */
-		// Start line: 7586
-		// Start offset: 0x8004FB20
+		// Start line: 7744
+		// Start offset: 0x8004EE54
 		// Variables:
 	// 		struct _Instance *instance; // $a0
 	// 		struct MATRIX tmpmat; // stack offset -64
@@ -9946,22 +10532,24 @@ void FX_DrawRing2(MATRIX *wcTransform,_SVector *position,MATRIX *matrix,int radi
 	// 		long color; // stack offset -20
 	// 		long black; // stack offset -24
 	/* end block 1 */
-	// End offset: 0x8004FCD8
-	// End Line: 7632
+	// End offset: 0x8004F00C
+	// End Line: 7790
 
 	/* begin block 2 */
-		// Start line: 18802
+		// Start line: 18966
 	/* end block 2 */
-	// End Line: 18803
+	// End Line: 18967
 
-void FX_DrawFField(MATRIX *wcTransform,_FXForceFieldEffect *field)
+/* File: C:\kain2\game\FX.C */
+
+void FX_DrawFField(undefined1 wcTransform,_FXForceFieldEffect *field)
 
 {
   ushort uVar1;
   short sVar2;
   int iVar3;
   _Instance *p_Var4;
-  int iVar5;
+  int p1;
   MATRIX MStack64;
   _SVector local_20;
   undefined4 local_18;
@@ -9977,14 +10565,14 @@ void FX_DrawFField(MATRIX *wcTransform,_FXForceFieldEffect *field)
   iVar3 = (int)field->size_diff + (iVar3 * field->size_change >> 0xc);
   uVar1 = field->start_fade - 0x80;
   if (field->start_fade == 0) {
-    iVar5 = (uint)(ushort)field->end_fade - 0x80;
+    p1 = (uint)(ushort)field->end_fade - 0x80;
     if (field->end_fade == 0) {
       sVar2 = 0;
     }
     else {
-      sVar2 = (short)iVar5;
+      sVar2 = (short)p1;
       field->end_fade = sVar2;
-      if (iVar5 * 0x10000 < 1) {
+      if (p1 * 0x10000 < 1) {
         FX_DeleteGeneralEffect((_FXGeneralEffect *)field);
         return;
       }
@@ -9998,19 +10586,18 @@ void FX_DrawFField(MATRIX *wcTransform,_FXForceFieldEffect *field)
     }
     sVar2 = field->start_fade;
   }
-  iVar5 = (int)sVar2;
-  if (iVar5 == 0) {
+  p1 = (int)sVar2;
+  if (p1 == 0) {
     local_14 = field->color;
   }
   else {
-    LoadAverageCol((byte *)&field->color,(byte *)&local_18,0x1000 - iVar5,iVar5,
-                   (undefined *)&local_14);
+    LoadAverageCol((u_char *)&field->color,(u_char *)&local_18,0x1000 - p1,p1,(u_char *)&local_14);
   }
   local_14 = local_14 & 0xffffff;
-  MATH3D_SetUnityMatrix(&MStack64);
-  RotMatrixZ(0x400,(short *)&MStack64);
-  RotMatrixX((int)theCamera.core.rotation.x,(int)&MStack64);
-  FX_DrawRing(wcTransform,&local_20,&MStack64,(int)field->size - iVar3,(int)field->size,
+  MATH3D_SetUnityMatrix(0xc0);
+  RotMatrixZ(0x400,&MStack64);
+  RotMatrixX((int)DAT_800d104c,&MStack64);
+  FX_DrawRing(wcTransform,&local_20,0xc0,(int)field->size - iVar3,(int)field->size,
               field->size - iVar3,0,0,0,local_14,0);
   return;
 }
@@ -10020,32 +10607,34 @@ void FX_DrawFField(MATRIX *wcTransform,_FXForceFieldEffect *field)
 // decompiled code
 // original method signature: 
 // struct _FXForceFieldEffect * /*$ra*/ FX_StartFField(struct _Instance *instance /*$s2*/, int size /*$s3*/, struct _Position *offset /*$s1*/, int size_diff /*$s4*/, int size_change /*stack 16*/, int deg_change /*stack 20*/, long color /*stack 24*/)
- // line 7634, offset 0x8004fcf0
+ // line 7792, offset 0x8004f024
 	/* begin block 1 */
-		// Start line: 7635
-		// Start offset: 0x8004FCF0
+		// Start line: 7793
+		// Start offset: 0x8004F024
 		// Variables:
 	// 		struct _FXForceFieldEffect *field; // $s0
 
 		/* begin block 1.1 */
-			// Start line: 7640
-			// Start offset: 0x8004FD34
+			// Start line: 7798
+			// Start offset: 0x8004F068
 			// Variables:
 		// 		short _x1; // $v0
 		// 		short _y1; // $v1
 		// 		short _z1; // $a1
 		// 		struct _SVector *_v0; // $v0
 		/* end block 1.1 */
-		// End offset: 0x8004FD34
-		// End Line: 7640
+		// End offset: 0x8004F068
+		// End Line: 7798
 	/* end block 1 */
-	// End offset: 0x8004FDA0
-	// End Line: 7658
+	// End offset: 0x8004F0D4
+	// End Line: 7816
 
 	/* begin block 2 */
-		// Start line: 18911
+		// Start line: 19075
 	/* end block 2 */
-	// End Line: 18912
+	// End Line: 19076
+
+/* File: C:\kain2\game\FX.C */
 
 _FXForceFieldEffect *
 FX_StartFField(_Instance *instance,int size,_Position *offset,int size_diff,int size_change,
@@ -10086,41 +10675,41 @@ FX_StartFField(_Instance *instance,int size,_Position *offset,int size_diff,int 
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_EndFField(struct _Instance *instance /*$a0*/)
- // line 7661, offset 0x8004fdc4
+ // line 7819, offset 0x8004f0f8
 	/* begin block 1 */
-		// Start line: 7663
-		// Start offset: 0x8004FDC4
+		// Start line: 7821
+		// Start offset: 0x8004F0F8
 		// Variables:
 	// 		struct _FXGeneralEffect *currentEffect; // $v1
 	/* end block 1 */
-	// End offset: 0x8004FE0C
-	// End Line: 7674
+	// End offset: 0x8004F140
+	// End Line: 7832
 
 	/* begin block 2 */
-		// Start line: 18972
+		// Start line: 19136
 	/* end block 2 */
-	// End Line: 18973
+	// End Line: 19137
 
 	/* begin block 3 */
-		// Start line: 18973
+		// Start line: 19137
 	/* end block 3 */
-	// End Line: 18974
+	// End Line: 19138
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_EndFField(_Instance *instance)
 
 {
-  _FXGeneralEffect **pp_Var1;
-  _FXGeneralEffect *p_Var2;
+  int *piVar1;
   
-  p_Var2 = FX_GeneralEffectTracker;
-  if (FX_GeneralEffectTracker != (_FXGeneralEffect *)0x0) {
+  piVar1 = FX_GeneralEffectTracker;
+  if (FX_GeneralEffectTracker != (int *)0x0) {
     do {
-      if ((p_Var2->instance == instance) && (p_Var2->effectType == -0x7a)) {
-        *(undefined2 *)&p_Var2[2].continue_process = 0x1000;
+      if (((_Instance *)piVar1[2] == instance) && (*(char *)(piVar1 + 3) == -0x7a)) {
+        *(undefined2 *)(piVar1 + 9) = 0x1000;
       }
-      pp_Var1 = (_FXGeneralEffect **)&p_Var2->next;
-      p_Var2 = *pp_Var1;
-    } while (*pp_Var1 != (_FXGeneralEffect *)0x0);
+      piVar1 = (int *)*piVar1;
+    } while (piVar1 != (int *)0x0);
   }
   return;
 }
@@ -10130,74 +10719,80 @@ void FX_EndFField(_Instance *instance)
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_Draw_Glowing_Line(unsigned long **ot /*$t6*/, long otz /*$a0*/, struct DVECTOR *sxy0 /*$a2*/, struct DVECTOR *sxy1 /*$a3*/, struct DVECTOR *xy0 /*stack 16*/, struct DVECTOR *xy1 /*stack 20*/, long color /*stack 24*/, long color2 /*stack 28*/)
- // line 7676, offset 0x8004fe14
+ // line 7834, offset 0x8004f148
 	/* begin block 1 */
-		// Start line: 7677
-		// Start offset: 0x8004FE14
+		// Start line: 7835
+		// Start offset: 0x8004F148
 		// Variables:
 	// 		struct _POLY_2G4T *poly; // $t0
 	// 		struct _PrimPool *primPool; // $t2
 	// 		int negflag; // $t5
 	/* end block 1 */
-	// End offset: 0x8004FFA8
-	// End Line: 7721
+	// End offset: 0x8004F2DC
+	// End Line: 7879
 
 	/* begin block 2 */
-		// Start line: 19002
+		// Start line: 19166
 	/* end block 2 */
-	// End Line: 19003
+	// End Line: 19167
+
+/* File: C:\kain2\game\FX.C */
 
 void FX_Draw_Glowing_Line
-               (ulong **ot,long otz,DVECTOR *sxy0,DVECTOR *sxy1,DVECTOR *xy0,DVECTOR *xy1,long color
-               ,long color2)
+               (ulong **ot,long otz,undefined sxy0,undefined sxy1,undefined1 xy0,undefined1 xy1,
+               long color,long color2)
 
 {
   bool bVar1;
-  _PrimPool *p_Var2;
-  DVECTOR DVar3;
-  ulong uVar4;
-  ulong *puVar5;
+  int iVar2;
+  uint uVar3;
+  undefined3 in_register_00000019;
+  uint *puVar4;
+  undefined3 in_register_0000001d;
+  uint *puVar5;
+  uint *puVar6;
   
-  p_Var2 = gameTrackerX.primPool;
+  iVar2 = DAT_800d210c;
+  puVar5 = (uint *)CONCAT31(in_register_0000001d,sxy1);
+  puVar4 = (uint *)CONCAT31(in_register_00000019,sxy0);
   if ((otz - 1U < 0xbff) &&
-     (puVar5 = (gameTrackerX.primPool)->nextPrim, puVar5 + 0x12 < (gameTrackerX.primPool)->lastPrim)
-     ) {
+     (puVar6 = *(uint **)(DAT_800d210c + 4), puVar6 + 0x12 < *(uint **)(DAT_800d210c + 8))) {
     bVar1 = (color & 0x1000000U) == 0;
     if (!bVar1) {
       color = color & 0xffffff;
     }
-    puVar5[6] = color | 0x3a000000U;
-    puVar5[10] = color | 0x3a000000U;
-    puVar5[2] = 0x3a000000;
-    puVar5[4] = 0;
-    puVar5[8] = color2;
-    puVar5[0xc] = color2;
-    puVar5[0xe] = 0;
-    puVar5[0x10] = 0;
-    DVar3 = *sxy0;
-    *(DVECTOR *)(puVar5 + 0xb) = DVar3;
-    *(DVECTOR *)(puVar5 + 7) = DVar3;
-    *(short *)(puVar5 + 3) = sxy0->vx + xy0->vx;
-    *(short *)((int)puVar5 + 0xe) = sxy0->vy - xy0->vy;
-    *(short *)(puVar5 + 0xf) = sxy0->vx - xy0->vx;
-    *(short *)((int)puVar5 + 0x3e) = sxy0->vy + xy0->vy;
-    DVar3 = *sxy1;
-    *(DVECTOR *)(puVar5 + 0xd) = DVar3;
-    *(DVECTOR *)(puVar5 + 9) = DVar3;
-    *(short *)(puVar5 + 5) = sxy1->vx + xy1->vx;
-    *(short *)((int)puVar5 + 0x16) = sxy1->vy - xy1->vy;
-    *(short *)(puVar5 + 0x11) = sxy1->vx - xy1->vx;
-    *(short *)((int)puVar5 + 0x46) = sxy1->vy + xy1->vy;
+    puVar6[6] = color | 0x3a000000U;
+    puVar6[10] = color | 0x3a000000U;
+    puVar6[2] = 0x3a000000;
+    puVar6[4] = 0;
+    puVar6[8] = color2;
+    puVar6[0xc] = color2;
+    puVar6[0xe] = 0;
+    puVar6[0x10] = 0;
+    uVar3 = *puVar4;
+    puVar6[0xb] = uVar3;
+    puVar6[7] = uVar3;
+    *(short *)(puVar6 + 3) = *(short *)puVar4 + *_xy0;
+    *(short *)((int)puVar6 + 0xe) = *(short *)((int)puVar4 + 2) - _xy0[1];
+    *(short *)(puVar6 + 0xf) = *(short *)puVar4 - *_xy0;
+    *(short *)((int)puVar6 + 0x3e) = *(short *)((int)puVar4 + 2) + _xy0[1];
+    uVar3 = *puVar5;
+    puVar6[0xd] = uVar3;
+    puVar6[9] = uVar3;
+    *(short *)(puVar6 + 5) = *(short *)puVar5 + *_xy1;
+    *(short *)((int)puVar6 + 0x16) = *(short *)((int)puVar5 + 2) - _xy1[1];
+    *(short *)(puVar6 + 0x11) = *(short *)puVar5 - *_xy1;
+    *(short *)((int)puVar6 + 0x46) = *(short *)((int)puVar5 + 2) + _xy1[1];
     if (bVar1) {
-      uVar4 = 0xe1000620;
+      uVar3 = 0xe1000620;
     }
     else {
-      uVar4 = 0xe1000640;
+      uVar3 = 0xe1000640;
     }
-    puVar5[1] = uVar4;
-    *puVar5 = (uint)ot[otz] & 0xffffff | 0x11000000;
-    ot[otz] = (ulong *)((uint)puVar5 & 0xffffff);
-    p_Var2->nextPrim = puVar5 + 0x12;
+    puVar6[1] = uVar3;
+    *puVar6 = (uint)ot[otz] & 0xffffff | 0x11000000;
+    ot[otz] = (ulong *)((uint)puVar6 & 0xffffff);
+    *(uint **)(iVar2 + 4) = puVar6 + 0x12;
   }
   return;
 }
@@ -10207,10 +10802,10 @@ void FX_Draw_Glowing_Line
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_Lightning(struct MATRIX *wcTransform /*$s0*/, unsigned long **ot /*stack 4*/, struct MATRIX *mat /*stack 8*/, short deg /*$s1*/, struct _SVector *start /*stack 16*/, struct _SVector *end /*stack 20*/, int width /*stack 24*/, int small_width /*stack 28*/, int segs /*stack 32*/, int sine_size /*stack 36*/, int variation /*stack 40*/, long color /*stack 44*/, long glow_color /*stack 48*/)
- // line 7724, offset 0x8004ffb0
+ // line 7882, offset 0x8004f2e4
 	/* begin block 1 */
-		// Start line: 7725
-		// Start offset: 0x8004FFB0
+		// Start line: 7883
+		// Start offset: 0x8004F2E4
 		// Variables:
 	// 		int sz0; // $s5
 	// 		int sz1; // stack offset -56
@@ -10227,166 +10822,166 @@ void FX_Draw_Glowing_Line
 	// 		int rsin_nd2; // $s2
 
 		/* begin block 1.1 */
-			// Start line: 7759
-			// Start offset: 0x80050064
+			// Start line: 7917
+			// Start offset: 0x8004F398
 			// Variables:
 		// 		struct SVECTOR point; // stack offset -64
 
 			/* begin block 1.1.1 */
-				// Start line: 7767
-				// Start offset: 0x800500B4
+				// Start line: 7925
+				// Start offset: 0x8004F3E8
 				// Variables:
 			// 		int rsin_n4; // $s0
 			/* end block 1.1.1 */
-			// End offset: 0x800501A0
-			// End Line: 7771
+			// End offset: 0x8004F4D4
+			// End Line: 7929
 
 			/* begin block 1.1.2 */
-				// Start line: 7775
-				// Start offset: 0x800501B0
+				// Start line: 7933
+				// Start offset: 0x8004F4E4
 				// Variables:
 			// 		int tmpdeg; // $s1
 			/* end block 1.1.2 */
-			// End offset: 0x80050278
-			// End Line: 7779
+			// End offset: 0x8004F5AC
+			// End Line: 7937
 
 			/* begin block 1.1.3 */
-				// Start line: 7793
-				// Start offset: 0x800502E0
+				// Start line: 7951
+				// Start offset: 0x8004F614
 				// Variables:
 			// 		int fx; // $s2
 			// 		int fy; // $s0
 			/* end block 1.1.3 */
-			// End offset: 0x80050328
-			// End Line: 7801
+			// End offset: 0x8004F65C
+			// End Line: 7959
 		/* end block 1.1 */
-		// End offset: 0x80050444
-		// End Line: 7823
+		// End offset: 0x8004F778
+		// End Line: 7981
 	/* end block 1 */
-	// End offset: 0x80050470
-	// End Line: 7832
+	// End offset: 0x8004F7A4
+	// End Line: 7990
 
 	/* begin block 2 */
-		// Start line: 19105
+		// Start line: 19269
 	/* end block 2 */
-	// End Line: 19106
+	// End Line: 19270
 
 /* WARNING: Could not reconcile some variable overlaps */
+/* File: C:\kain2\game\FX.C */
 
-void FX_Lightning(MATRIX *wcTransform,ulong **ot,MATRIX *mat,short deg,_SVector *start,_SVector *end
-                 ,int width,int small_width,int segs,int sine_size,int variation,long color,
-                 long glow_color)
+void FX_Lightning(undefined wcTransform,ulong **ot,undefined mat,short deg,_SVector *start,
+                 _SVector *end,int width,int small_width,int segs,int sine_size,int variation,
+                 long color,long glow_color)
 
 {
+  undefined4 uVar1;
   undefined4 in_zero;
   undefined4 in_at;
-  int iVar1;
-  int iy;
-  int ix;
-  uint uVar2;
+  int iVar2;
   int iVar3;
+  int a;
   uint uVar4;
+  undefined3 in_register_00000011;
+  MATRIX *m;
+  undefined3 in_register_00000019;
+  MATRIX *m_00;
   int iVar5;
+  int p1;
   int otz;
-  DVECTOR local_70 [2];
-  DVECTOR local_68 [2];
-  DVECTOR local_60 [2];
-  DVECTOR local_58 [2];
-  DVECTOR local_50 [2];
-  DVECTOR local_48 [2];
+  undefined4 local_70;
+  short local_68;
+  short sStack102;
   undefined4 local_40;
   uint local_3c;
   int local_38;
   int local_34;
   uint local_30;
   
+  m_00 = (MATRIX *)CONCAT31(in_register_00000019,mat);
+  m = (MATRIX *)CONCAT31(in_register_00000011,wcTransform);
   local_30 = (uint)(ushort)deg & 0xfff;
-  if (mat == (MATRIX *)0x0) {
-    SetRotMatrix((undefined4 *)wcTransform);
+  if (m_00 == (MATRIX *)0x0) {
+    SetRotMatrix(m);
   }
   else {
-    SetRotMatrix((undefined4 *)mat);
-    wcTransform = mat;
+    SetRotMatrix(m_00);
+    m = m_00;
   }
   otz = 0x7fff;
-  SetTransMatrix((int)wcTransform);
-  width = width * 0x140;
-  small_width = small_width * 0x140;
+  SetTransMatrix(m);
   local_34 = 0x1000 / segs;
-  iVar5 = 0;
-  local_60[0] = (DVECTOR)0x0;
-  local_50[0] = (DVECTOR)0x0;
+  p1 = 0;
   if (-1 < segs) {
     do {
-      LoadAverageShort12((uint *)start,(uint *)end,0x1000 - iVar5,iVar5,&local_40);
-      iVar1 = rsin(iVar5 / 2);
+      LoadAverageShort12((SVECTOR *)start,(SVECTOR *)end,0x1000 - p1,p1,(SVECTOR *)&local_40);
+      iVar2 = rsin(p1 / 2);
       if ((variation == 0) || (segs == 0)) {
-LAB_800501a0:
-        if (mat != (MATRIX *)0x0) goto LAB_800501b0;
+LAB_8004f4d4:
+        if (m_00 != (MATRIX *)0x0) goto LAB_8004f4e4;
       }
       else {
-        if (mat == (MATRIX *)0x0) {
-          iy = rsin(iVar5 << 2);
-          ix = rand();
-          iVar3 = variation / 2;
-          ix = (ix % variation - iVar3) * iy;
-          if (ix < 0) {
-            ix = ix + 0xfff;
+        if (m_00 == (MATRIX *)0x0) {
+          iVar3 = rsin(p1 << 2);
+          a = rand();
+          iVar5 = variation / 2;
+          a = (a % variation - iVar5) * iVar3;
+          if (a < 0) {
+            a = a + 0xfff;
           }
-          local_40 = local_40 & 0xffff0000 | (uint)(ushort)((short)local_40 + (short)(ix >> 0xc));
-          ix = rand();
-          iy = (ix % variation - iVar3) * iy;
-          if (iy < 0) {
-            iy = iy + 0xfff;
+          local_40 = local_40 & 0xffff0000 | (uint)(ushort)((short)local_40 + (short)(a >> 0xc));
+          a = rand();
+          iVar3 = (a % variation - iVar5) * iVar3;
+          if (iVar3 < 0) {
+            iVar3 = iVar3 + 0xfff;
           }
-          local_40 = local_40 & 0xffff | (uint)(ushort)(local_40._2_2_ + (short)(iy >> 0xc)) << 0x10
-          ;
-          iy = rsin(iVar5 + local_30);
-          ix = rand();
-          iy = iy * sine_size;
-          if (iy < 0) {
-            iy = iy + 0xfff;
+          local_40 = local_40 & 0xffff |
+                     (uint)(ushort)(local_40._2_2_ + (short)(iVar3 >> 0xc)) << 0x10;
+          iVar3 = rsin(p1 + local_30);
+          a = rand();
+          iVar3 = iVar3 * sine_size;
+          if (iVar3 < 0) {
+            iVar3 = iVar3 + 0xfff;
           }
-          iy = (iy >> 0xc) * iVar1;
-          if (iy < 0) {
-            iy = iy + 0xfff;
+          iVar3 = (iVar3 >> 0xc) * iVar2;
+          if (iVar3 < 0) {
+            iVar3 = iVar3 + 0xfff;
           }
           local_3c = local_3c & 0xffff0000 |
                      (uint)(ushort)((short)local_3c +
-                                   (short)(iy >> 0xc) + ((short)(ix % variation) - (short)iVar3));
-          goto LAB_800501a0;
+                                   (short)(iVar3 >> 0xc) + ((short)(a % variation) - (short)iVar5));
+          goto LAB_8004f4d4;
         }
-LAB_800501b0:
-        uVar4 = local_30 + segs * 0x200;
-        iy = rcos(uVar4);
-        uVar2 = rand();
-        iy = iy * sine_size;
-        if (iy < 0) {
-          iy = iy + 0xfff;
+LAB_8004f4e4:
+        a = local_30 + segs * 0x200;
+        iVar3 = rcos(a);
+        uVar4 = rand();
+        iVar3 = iVar3 * sine_size;
+        if (iVar3 < 0) {
+          iVar3 = iVar3 + 0xfff;
         }
-        iy = ((iy >> 0xc) + (uVar2 & 7)) * iVar1;
-        if (iy < 0) {
-          iy = iy + 0xfff;
+        iVar3 = ((iVar3 >> 0xc) + (uVar4 & 7)) * iVar2;
+        if (iVar3 < 0) {
+          iVar3 = iVar3 + 0xfff;
         }
-        local_40 = local_40 & 0xffff0000 | iy >> 0xc & 0xffffU;
-        iy = rsin(uVar4);
-        uVar2 = rand();
-        iy = iy * sine_size;
-        if (iy < 0) {
-          iy = iy + 0xfff;
+        local_40 = local_40 & 0xffff0000 | iVar3 >> 0xc & 0xffffU;
+        iVar3 = rsin(a);
+        uVar4 = rand();
+        iVar3 = iVar3 * sine_size;
+        if (iVar3 < 0) {
+          iVar3 = iVar3 + 0xfff;
         }
-        iVar1 = ((iy >> 0xc) + (uVar2 & 7)) * iVar1;
-        if (iVar1 < 0) {
-          iVar1 = iVar1 + 0xfff;
+        iVar2 = ((iVar3 >> 0xc) + (uVar4 & 7)) * iVar2;
+        if (iVar2 < 0) {
+          iVar2 = iVar2 + 0xfff;
         }
-        local_40 = local_40 & 0xffff | (iVar1 >> 0xc) << 0x10;
-        iVar1 = rand();
-        local_3c = local_3c & 0xffff0000 | (uint)(ushort)((short)local_3c + ((ushort)iVar1 & 7));
+        local_40 = local_40 & 0xffff | (iVar2 >> 0xc) << 0x10;
+        iVar2 = rand();
+        local_3c = local_3c & 0xffff0000 | (uint)(ushort)((short)local_3c + ((ushort)iVar2 & 7));
       }
       setCopReg(2,in_zero,local_40);
       setCopReg(2,in_at,local_3c);
       copFunction(2,0x180001);
-      local_68[0] = getCopReg(2,0xe);
+      uVar1 = getCopReg(2,0xe);
       local_38 = getCopReg(2,0x13);
       if (otz < local_38) {
         if (otz < 0) {
@@ -10400,37 +10995,23 @@ LAB_800501b0:
         }
       }
       otz = otz >> 2;
-      if ((segs == 0) || (iVar5 == 0)) {
-        local_58[0] = (DVECTOR)0x0;
-        local_48[0] = (DVECTOR)0x0;
+      if ((segs != 0) && (p1 != 0)) {
+        local_68 = (short)uVar1;
+        sStack102 = (short)((uint)uVar1 >> 0x10);
+        MATH3D_veclen2((int)local_68 - (int)(short)local_70,(int)sStack102 - (int)local_70._2_2_);
       }
-      else {
-        ix = (int)local_68[0].vx - (int)local_70[0].vx;
-        local_68[0].vy = (short)((uint)local_68[0] >> 0x10);
-        iy = (int)local_68[0].vy - (int)local_70[0].vy;
-        iVar1 = MATH3D_veclen2(ix,iy);
-        iVar1 = iVar1 * local_38;
-        if (iVar1 < 1) {
-          iVar1 = 1;
+      if (((p1 != 0) && (0 < otz)) && (otz < 0xc00)) {
+        if (width * 0x140 != 0) {
+          FX_Draw_Glowing_Line(ot,otz,0x90,0x98,0xa0,0xa8,glow_color,glow_color);
         }
-        local_58[0] = (DVECTOR)((iy * width) / iVar1 & 0xffffU | (ix * width) / iVar1 << 0x10);
-        local_48[0] = (DVECTOR)((iy * small_width) / iVar1 & 0xffffU |
-                               (ix * small_width) / iVar1 << 0x10);
-      }
-      if (((iVar5 != 0) && (0 < otz)) && (otz < 0xc00)) {
-        if (width != 0) {
-          FX_Draw_Glowing_Line(ot,otz,local_70,local_68,local_60,local_58,glow_color,glow_color);
-        }
-        if ((0 < otz + -5) && (small_width != 0)) {
-          FX_Draw_Glowing_Line(ot,otz + -5,local_70,local_68,local_50,local_48,color,color);
+        if ((0 < otz + -5) && (small_width * 0x140 != 0)) {
+          FX_Draw_Glowing_Line(ot,otz + -5,0x90,0x98,0xb0,0xb8,color,color);
         }
       }
       segs = segs + -1;
-      local_70[0] = local_68[0];
-      local_60[0] = local_58[0];
-      local_50[0] = local_48[0];
-      iVar5 = iVar5 + local_34;
+      p1 = p1 + local_34;
       otz = local_38;
+      local_70 = uVar1;
     } while (-1 < segs);
   }
   return;
@@ -10441,10 +11022,10 @@ LAB_800501b0:
 // decompiled code
 // original method signature: 
 // void /*$ra*/ FX_LightHouse(struct MATRIX *wcTransform /*$s0*/, unsigned long **ot /*stack 4*/, struct _Instance *instance /*$a2*/, int startSeg /*$a3*/, int endSeg /*stack 16*/, int segs /*stack 20*/, long beam_color /*stack 24*/)
- // line 7837, offset 0x800504a0
+ // line 7995, offset 0x8004f7d4
 	/* begin block 1 */
-		// Start line: 7838
-		// Start offset: 0x800504A0
+		// Start line: 7996
+		// Start offset: 0x8004F7D4
 		// Variables:
 	// 		int sz0; // $s4
 	// 		int sz1; // stack offset -72
@@ -10472,76 +11053,79 @@ LAB_800501b0:
 	// 		struct MATRIX *swTransform; // $v1
 
 		/* begin block 1.1 */
-			// Start line: 7897
-			// Start offset: 0x800505E8
+			// Start line: 8055
+			// Start offset: 0x8004F91C
 			// Variables:
 		// 		struct SVECTOR point; // stack offset -88
 
 			/* begin block 1.1.1 */
-				// Start line: 7908
-				// Start offset: 0x80050660
+				// Start line: 8066
+				// Start offset: 0x8004F994
 				// Variables:
 			// 		int newlength; // $v1
 			// 		int newfx; // $s1
 			// 		int newfy; // $s0
 			/* end block 1.1.1 */
-			// End offset: 0x800506A4
-			// End Line: 7922
+			// End offset: 0x8004F9D8
+			// End Line: 8080
 		/* end block 1.1 */
-		// End offset: 0x800506C4
-		// End Line: 7929
+		// End offset: 0x8004F9F8
+		// End Line: 8087
 
 		/* begin block 1.2 */
-			// Start line: 7940
-			// Start offset: 0x800506F8
+			// Start line: 8098
+			// Start offset: 0x8004FA2C
 			// Variables:
 		// 		struct SVECTOR point; // stack offset -80
 
 			/* begin block 1.2.1 */
-				// Start line: 7962
-				// Start offset: 0x800507E0
+				// Start line: 8120
+				// Start offset: 0x8004FB14
 				// Variables:
 			// 		int x; // $v0
 			/* end block 1.2.1 */
-			// End offset: 0x8005086C
-			// End Line: 7974
+			// End offset: 0x8004FBA0
+			// End Line: 8132
 		/* end block 1.2 */
-		// End offset: 0x800508BC
-		// End Line: 7983
+		// End offset: 0x8004FBF0
+		// End Line: 8141
 	/* end block 1 */
-	// End offset: 0x800508EC
-	// End Line: 7993
+	// End offset: 0x8004FC20
+	// End Line: 8151
 
 	/* begin block 2 */
-		// Start line: 19374
+		// Start line: 19538
 	/* end block 2 */
-	// End Line: 19375
+	// End Line: 19539
 
-void FX_LightHouse(MATRIX *wcTransform,ulong **ot,_Instance *instance,int startSeg,int endSeg,
+/* WARNING: Could not reconcile some variable overlaps */
+/* File: C:\kain2\game\FX.C */
+
+void FX_LightHouse(undefined wcTransform,ulong **ot,_Instance *instance,int startSeg,int endSeg,
                   int segs,long beam_color)
 
 {
   bool bVar1;
   undefined4 in_zero;
   undefined4 in_at;
-  long lVar2;
-  int iVar3;
+  long p1;
+  int p1_00;
+  int iVar2;
+  MATRIX *pMVar3;
+  undefined3 in_register_00000011;
   int iVar4;
-  MATRIX *pMVar5;
+  int p1_01;
+  int iVar5;
   int iVar6;
-  int iVar7;
-  int iVar8;
-  int iVar9;
-  int iVar10;
-  _Position local_88;
-  _Position local_80;
-  DVECTOR local_78 [2];
-  DVECTOR local_70 [2];
-  DVECTOR local_68 [2];
-  DVECTOR local_60 [2];
-  uint local_58;
+  SVECTOR local_88;
+  SVECTOR local_80;
+  undefined4 local_78;
+  undefined4 local_70;
+  uint local_68;
+  uint local_60;
+  undefined4 local_58;
   undefined4 local_54;
-  uint local_50;
+  undefined4 local_50;
   undefined4 local_4c;
   int local_48;
   long local_44;
@@ -10555,133 +11139,191 @@ void FX_LightHouse(MATRIX *wcTransform,ulong **ot,_Instance *instance,int startS
   bVar1 = false;
   if ((instance->flags & 0x800U) == 0) {
     if (instance->matrix != (MATRIX *)0x0) {
-      pMVar5 = instance->matrix + startSeg;
-      local_88.x = *(short *)pMVar5->t;
-      local_88.y = *(short *)(pMVar5->t + 1);
-      local_88.z = *(short *)(pMVar5->t + 2);
-      pMVar5 = instance->matrix + endSeg;
-      local_80.x = *(short *)pMVar5->t;
-      local_80.y = *(short *)(pMVar5->t + 1);
-      local_80.z = *(short *)(pMVar5->t + 2);
-      SetRotMatrix((undefined4 *)wcTransform);
-      SetTransMatrix((int)wcTransform);
+      pMVar3 = instance->matrix + startSeg;
+      local_88.vx = *(short *)pMVar3->t;
+      local_88.vy = *(short *)(pMVar3->t + 1);
+      local_88.vz = *(short *)(pMVar3->t + 2);
+      pMVar3 = instance->matrix + endSeg;
+      local_80.vx = *(short *)pMVar3->t;
+      local_80.vy = *(short *)(pMVar3->t + 1);
+      local_80.vz = *(short *)(pMVar3->t + 2);
+      SetRotMatrix((MATRIX *)CONCAT31(in_register_00000011,wcTransform));
+      SetTransMatrix((MATRIX *)CONCAT31(in_register_00000011,wcTransform));
       local_38 = beam_color;
-      local_68[0] = (DVECTOR)0x0;
+      local_68 = 0;
       local_3c = beam_color;
       local_44 = beam_color;
       local_40 = 0;
-      lVar2 = MATH3D_DistanceBetweenPositions(&local_88,&local_80);
-      iVar3 = (lVar2 / 2) * 0x420;
-      iVar9 = 0;
-      if (iVar3 < 0) {
-        iVar3 = iVar3 + 0xfff;
+      p1 = MATH3D_DistanceBetweenPositions((_Position *)&local_88,(_Position *)&local_80);
+      p1_00 = (p1 / 2) * 0x420;
+      iVar5 = 0;
+      if (p1_00 < 0) {
+        p1_00 = p1_00 + 0xfff;
       }
-      iVar8 = 0;
-      local_2c = (iVar3 >> 0xc) + 0x60;
+      p1_01 = 0;
+      local_2c = (p1_00 >> 0xc) + 0x60;
       local_30 = 0;
       local_34 = 0;
-      iVar3 = segs;
+      p1_00 = segs;
       if (segs < 0) {
-        iVar3 = segs + 3;
+        p1_00 = segs + 3;
       }
-      iVar3 = iVar3 >> 2;
-      iVar10 = 0x1000 / iVar3;
-      if (-1 < iVar3) {
+      p1_00 = p1_00 >> 2;
+      iVar6 = 0x1000 / p1_00;
+      if (-1 < p1_00) {
         do {
-          LoadAverageShort12((uint *)&local_88,(uint *)&local_80,0x1000 - iVar8,iVar8,&local_58);
+          LoadAverageShort12(&local_88,&local_80,0x1000 - p1_01,p1_01,(SVECTOR *)&local_58);
           setCopReg(2,in_zero,local_58);
           setCopReg(2,in_at,local_54);
           copFunction(2,0x180001);
-          local_70[0] = getCopReg(2,0xe);
+          local_70 = getCopReg(2,0xe);
           local_48 = getCopReg(2,0x13);
           if (bVar1) {
             if (0xf0 < local_48) {
-              iVar6 = (int)local_70[0].vx;
-              if ((-0x200 < iVar6) && (iVar6 < 0x200)) {
-                local_70[0].vy = (short)((uint)local_70[0] >> 0x10);
-                iVar4 = MATH3D_veclen2(iVar6 - local_78[0].vx,
-                                       (int)local_70[0].vy - (int)local_78[0].vy);
-                if ((iVar9 < iVar4) && (iVar4 < 0x100)) {
-                  iVar9 = iVar4;
-                  local_34 = iVar6 - local_78[0].vx;
-                  local_30 = (int)local_70[0].vy - (int)local_78[0].vy;
+              iVar4 = (int)(short)local_70;
+              if ((-0x200 < iVar4) && (iVar4 < 0x200)) {
+                local_70._2_2_ = (short)((uint)local_70 >> 0x10);
+                iVar2 = MATH3D_veclen2(iVar4 - (short)local_78,
+                                       (int)local_70._2_2_ - (int)local_78._2_2_);
+                if ((iVar5 < iVar2) && (iVar2 < 0x100)) {
+                  iVar5 = iVar2;
+                  local_34 = iVar4 - (short)local_78;
+                  local_30 = (int)local_70._2_2_ - (int)local_78._2_2_;
                 }
               }
-              goto LAB_800506a4;
+              goto LAB_8004f9d8;
             }
           }
           else {
-LAB_800506a4:
+LAB_8004f9d8:
             if (0xf0 < local_48) {
               bVar1 = true;
-              local_78[0] = local_70[0];
+              local_78 = local_70;
             }
           }
-          iVar3 = iVar3 + -1;
-          iVar8 = iVar8 + iVar10;
-        } while (-1 < iVar3);
+          p1_00 = p1_00 + -1;
+          p1_01 = p1_01 + iVar6;
+        } while (-1 < p1_00);
       }
-      if (iVar9 != 0) {
-        iVar8 = 0x1000 / segs;
-        iVar3 = 0;
+      if (iVar5 != 0) {
+        p1_01 = 0x1000 / segs;
+        p1_00 = 0;
         if (-1 < segs) {
-          iVar6 = 0;
-          iVar10 = 0x7fff;
+          iVar4 = 0;
+          iVar6 = 0x7fff;
           do {
-            LoadAverageShort12((uint *)&local_88,(uint *)&local_80,0x1000 - iVar3,iVar3,&local_50);
-            iVar4 = (local_2c + -0x60) * iVar3;
-            if (iVar4 < 0) {
-              iVar4 = iVar4 + 0xfff;
+            LoadAverageShort12(&local_88,&local_80,0x1000 - p1_00,p1_00,(SVECTOR *)&local_50);
+            iVar2 = (local_2c + -0x60) * p1_00;
+            if (iVar2 < 0) {
+              iVar2 = iVar2 + 0xfff;
             }
-            iVar7 = ((iVar4 >> 0xc) + 0x60) * 0x140;
-            iVar4 = 0x1000 - iVar6;
-            if ((0x7ff < iVar3) && (iVar4 = 0, 0x800 < iVar3)) {
-              iVar4 = iVar6 + -0x1000;
+            iVar2 = ((iVar2 >> 0xc) + 0x60) * 0x140;
+            p1 = 0x1000 - iVar4;
+            if ((0x7ff < p1_00) && (p1 = 0, 0x800 < p1_00)) {
+              p1 = iVar4 + -0x1000;
             }
-            LoadAverageCol((byte *)&local_44,(byte *)&local_40,0x1000 - iVar4,iVar4,
-                           (undefined *)&local_3c);
+            LoadAverageCol((u_char *)&local_44,(u_char *)&local_40,0x1000 - p1,p1,
+                           (u_char *)&local_3c);
             setCopReg(2,in_zero,local_50);
             setCopReg(2,in_at,local_4c);
             copFunction(2,0x180001);
-            local_70[0] = getCopReg(2,0xe);
+            local_70 = getCopReg(2,0xe);
             local_48 = getCopReg(2,0x13);
-            if (iVar10 < local_48) {
-              if (iVar10 < 0) {
-                iVar10 = iVar10 + 3;
+            if (iVar6 < local_48) {
+              if (iVar6 < 0) {
+                iVar6 = iVar6 + 3;
               }
             }
             else {
-              iVar10 = local_48;
+              iVar6 = local_48;
               if (local_48 < 0) {
-                iVar10 = local_48 + 3;
+                iVar6 = local_48 + 3;
               }
             }
-            if (iVar3 != 0) {
+            if (p1_00 != 0) {
               if (local_48 < 1) {
                 local_48 = 1;
               }
-              local_60[0] = (DVECTOR)(((local_30 * iVar7) / (iVar9 * local_48) << 9) / 0x140 &
-                                      0xffffU | (local_34 * iVar7) / (iVar9 * local_48) << 0x10);
+              local_60 = ((local_30 * iVar2) / (iVar5 * local_48) << 9) / 0x140 & 0xffffU |
+                         (local_34 * iVar2) / (iVar5 * local_48) << 0x10;
             }
-            if (iVar3 == iVar8) {
-              local_68[0] = local_60[0];
+            if (p1_00 == p1_01) {
+              local_68 = local_60;
             }
-            if ((iVar3 != 0) && (0 < iVar10 >> 2)) {
-              FX_Draw_Glowing_Line
-                        (ot,iVar10 >> 2,local_78,local_70,local_68,local_60,local_38,local_3c);
+            if ((p1_00 != 0) && (0 < iVar6 >> 2)) {
+              FX_Draw_Glowing_Line(ot,iVar6 >> 2,0x88,0x90,0x98,0xa0,local_38,local_3c);
             }
-            iVar6 = iVar6 + iVar8 * 2;
-            iVar3 = iVar3 + iVar8;
+            iVar4 = iVar4 + p1_01 * 2;
+            p1_00 = p1_00 + p1_01;
             local_38 = local_3c;
-            local_78[0] = local_70[0];
-            local_68[0] = local_60[0];
+            local_78 = local_70;
+            local_68 = local_60;
             segs = segs + -1;
-            iVar10 = local_48;
+            iVar6 = local_48;
           } while (-1 < segs);
         }
       }
     }
   }
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ FX_StartPassthruFX(struct _Instance *instance /*$s0*/, struct _SVector *normal /*$a1*/, struct _SVector *point /*$a2*/)
+ // line 8154, offset 0x8004fc50
+	/* begin block 1 */
+		// Start line: 8155
+		// Start offset: 0x8004FC50
+		// Variables:
+	// 		long color; // stack offset -24
+	/* end block 1 */
+	// End offset: 0x8004FC50
+	// End Line: 8155
+
+	/* begin block 2 */
+		// Start line: 19933
+	/* end block 2 */
+	// End Line: 19934
+
+/* File: C:\kain2\game\FX.C */
+
+void FX_StartPassthruFX(_Instance *instance,_SVector *normal,_SVector *point)
+
+{
+  undefined *local_18 [2];
+  
+  (instance->halvePlane).a = normal->x;
+  (instance->halvePlane).b = normal->y;
+  (instance->halvePlane).c = normal->z;
+  local_18[0] = &DAT_0020ff40;
+  (instance->halvePlane).d =
+       -((int)normal->x * (int)point->x + (int)normal->y * (int)point->y +
+         (int)normal->z * (int)point->z >> 0xc);
+  FX_DoInstancePowerRing(instance,(long)&DAT_000020d0,(long *)local_18,0,2);
+  FX_DoInstancePowerRing(instance,(long)&DAT_000020d0,(long *)local_18,0,1);
+  return;
+}
+
+
+
+// decompiled code
+// original method signature: 
+// void /*$ra*/ FX_EndPassthruFX(struct _Instance *instance /*$a0*/)
+ // line 8172, offset 0x8004fd2c
+	/* begin block 1 */
+		// Start line: 19985
+	/* end block 1 */
+	// End Line: 19986
+
+/* File: C:\kain2\game\FX.C */
+
+void FX_EndPassthruFX(_Instance *instance)
+
+{
+  FX_EndInstanceEffects(instance);
   return;
 }
 
